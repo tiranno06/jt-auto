@@ -1,68 +1,126 @@
 {
- "titre": "3000 PROFS EXPRESS",
- "sujet": "3000 PROFS EXPRESS",
- "ecran": "3000 PROFS",
- "invite_nom": "Hubert Rustine",
- "invite_role": "Porte-parole (fictif) du ministère",
+ "titre": "BUDGET RECALÉ",
+ "sujet": "BUDGET RECALÉ",
+ "ecran": "BUDGET RÉCHAUF",
+ "invite_nom": "Aymeric Ponction",
+ "invite_role": "Porte-parole (fictif) de Bercy",
  "invite_look": "chauve",
- "lieu_direct": "Rayon surgelés",
- "titre_accroche": "3000 profs en 24 h, mon plombier : 3 semaines",
- "question": "Votre prof remplaçant, il était encore congelé ? 👇",
+ "lieu_direct": "Commission des finances",
+ "titre_accroche": "Budget renvoyé en cuisine, resservi mardi",
+ "question": "",
  "running_gag": "",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "Le ministère a trouvé 3 000 profs en 24 heures. Moi, j'ai mis trois semaines à trouver un plombier.",
-   "d": "Le ministère a trouvé trois mille profs en vingt-quatre heures. Moi, j'ai mis trois semaines à trouver un plombier.",
+   "t": "31 députés ont renvoyé le budget en cuisine. Mardi, on leur ressert la même assiette.",
+   "d": "Trente et un députés ont renvoyé le budget en cuisine. Mardi, on leur ressert la même assiette.",
    "chute": true
   },
   {
    "p": "presentateur",
-   "t": "Martine, ils sortent d'où, ces profs ?"
+   "t": "Martine, ambiance en commission ?"
   },
   {
    "p": "envoyee",
-   "t": "J'ai mené l'enquête. Soit c'est un miracle, soit ils ont recruté au rayon surgelés.",
-   "chute": true
-  },
-  {
-   "p": "invite",
-   "t": "N'importe quoi. Nos profs sont frais. Ils ont été décongelés ce matin.",
+   "t": "Unanime. L'opposition a refusé le plat du chef. Le chef a refusé le plat salé par l'opposition. Tout le monde est d'accord : c'est immangeable.",
    "chute": true
   },
   {
    "p": "presentateur",
-   "t": "Et ils enseignent quoi ?"
+   "t": "Et les 3 qui ont voté pour ?",
+   "d": "Et les trois qui ont voté pour ?"
+  },
+  {
+   "p": "envoyee",
+   "t": "Soit ils ont un estomac blindé, soit c'est le chef et ses deux commis.",
+   "chute": true
   },
   {
    "p": "invite",
-   "t": "Ce qui reste. Le prof de sport fait les maths. Il compte les tours de terrain.",
+   "t": "Je conteste. Les 3 oui ont tout lu. Les 31 non ont juste goûté.",
+   "d": "Je conteste. Les trois oui ont tout lu. Les trente et un non ont juste goûté.",
+   "chute": true
+  },
+  {
+   "p": "presentateur",
+   "t": "Pourquoi faire payer les retraités et les collectivités ?"
+  },
+  {
+   "p": "invite",
+   "t": "Ce sont les seuls qui ne partent pas. Un retraité ne délocalise pas. Une mairie ne s'exile pas en Belgique.",
    "chute": true
   },
   {
    "p": "envoyee",
-   "t": "Bonne nouvelle, Jean-Michel : votre plombier est arrivé. Il vient d'être nommé prof de physique.",
+   "t": "Je confirme. Une mairie a essayé ce matin. Elle est coincée au rond-point.",
+   "chute": true
+  },
+  {
+   "p": "presentateur",
+   "t": "Et tous les amendements de la commission ?"
+  },
+  {
+   "p": "envoyee",
+   "t": "À la poubelle. Mardi, on repart de la copie initiale. Des heures de débat pour un Ctrl+Z.",
+   "d": "À la poubelle. Mardi, on repart de la copie initiale. Des heures de débat pour un contrôle Z.",
+   "chute": true
+  },
+  {
+   "p": "invite",
+   "t": "C'est de l'anti-gaspi. Zéro idée nouvelle, zéro déchet.",
+   "chute": true
+  },
+  {
+   "p": "presentateur",
+   "t": "Et l'addition, qui la paie ?"
+  },
+  {
+   "p": "invite",
+   "t": "Mamie. Elle n'a rien commandé, mais elle était à la table d'à côté.",
    "chute": true,
-   "attente": 0.5
+   "attente": 0.7
+  },
+  {
+   "p": "presentateur",
+   "t": "Mardi, même assiette, même addition. Bon appétit, mamie.",
+   "chute": true
   }
  ],
- "bandeau": [
-  "UN PROF RETROUVÉ ENTRE LES PETITS POIS ET LES FRITES",
-  "LE PLOMBIER DE JEAN-MICHEL NOMMÉ PROF DE PHYSIQUE",
-  "RECRUTEMENT EXPRESS : DES PROFS LIVRÉS EN DRIVE"
- ],
- "gag": {
-  "replique": 2,
-  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. In a supermarket frozen food aisle, a confused teacher with a briefcase and glasses steps out of a chest freezer covered in frost, holding a piece of chalk, shoppers stare, comedic, deadpan."
- },
- "legende": "3000 profs trouvés en 24 h. Le secret ? Le rayon surgelés. Satire, personnages fictifs.",
+ "bandeau": [],
+ "gag": null,
+ "legende": "L'actu du jour, en dessin animé. Satire, personnages fictifs.",
  "hashtags": [
-  "humour",
-  "education",
-  "prof",
-  "actualite",
   "satire",
-  "drole"
+  "humour",
+  "actualite",
+  "politique"
  ],
- "sources": []
+ "sources": [],
+ "decoupage": [],
+ "fiche": {
+  "concept": "« Le budget réchauffé ». La partie « recettes » du budget 2027 est renvoyée en cuisine par 31 députés sur 36. L'opposition refuse le plat du chef. Le camp du chef refuse le plat une fois salé par l'opposition. Mardi, on ressert quand même l'assiette de départ, et l'addition part à la table d'à côté, celle des retraités. Note qualité interne après réécriture : 84/100 (originalité 17, punchlines 21, rythme 13, pertinence satirique 13, dialogues 8, visuel 8, chute 4). C'est une estimation, pas une mesure objective. Décision : prêt pour production.",
+  "format": "Faux JT : direct depuis la commission des finances, porte-parole fictif de Bercy en duplex. Tout le sketch file la métaphore du restaurant.",
+  "angle": "Tout le monde est d'accord pour dire non, mais chacun pour la raison inverse. Rien ne change : on ressert le plat refusé et ceux qui n'ont rien commandé paient l'addition. L'invité rebaptise l'échec « anti-gaspi » et explique qu'on vise les retraités et les mairies parce qu'ils ne peuvent pas partir.",
+  "resume_factuel": "Le vendredi 9 octobre 2026, la commission des finances de l'Assemblée nationale a très largement rejeté la partie « recettes » du projet de budget de l'État pour 2027 : 31 voix contre, 3 pour et 2 abstentions. Les oppositions critiquaient la copie du gouvernement. L'essentiel du camp gouvernemental regrettait les amendements ajoutés par les oppositions. La contribution demandée aux retraités et aux collectivités a été au cœur des tensions. Dans l'Hémicycle, à partir du mardi 13 octobre, les députés repartiront de la copie initiale.",
+  "faits_reels": [
+   "Le 9 octobre 2026, la commission des finances a rejeté la partie « recettes » du budget 2027 par 31 voix contre, 3 pour et 2 abstentions (Le Figaro, Le Monde, BFMTV).",
+   "Les oppositions critiquaient la copie du gouvernement, et l'essentiel du camp gouvernemental regrettait les amendements des oppositions (Le Figaro).",
+   "La contribution demandée aux retraités et aux collectivités a cristallisé les tensions (Le Monde).",
+   "Les députés repartent de la copie initiale dans l'Hémicycle à partir du mardi 13 octobre (Le Monde).",
+   "Faits tirés uniquement des articles fournis par le robot : aucune vérification web supplémentaire n'a été faite."
+  ],
+  "inventions": [
+   "Jean-Michel Plateau, Martine Couloir et Aymeric Ponction, porte-parole de Bercy, sont des personnages fictifs.",
+   "La métaphore du restaurant (chef, commis, plat salé, addition) est une invention satirique.",
+   "L'hypothèse selon laquelle les trois votes pour viendraient du « chef et de ses commis » est inventée.",
+   "L'idée qu'on vise les retraités et les mairies « parce qu'ils ne partent pas » est une invention satirique attribuée à un personnage fictif.",
+   "La mairie coincée au rond-point en tentant de s'exiler en Belgique est inventée.",
+   "La formule « anti-gaspi, zéro idée nouvelle » est inventée.",
+   "Toutes les dépêches du bandeau sont fictives."
+  ],
+  "decoupage": null,
+  "note": 67.0,
+  "critique": "",
+  "decision": "à retravailler"
+ }
 }

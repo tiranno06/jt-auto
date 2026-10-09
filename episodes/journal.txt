@@ -1,17 +1,69 @@
 Casting déjà fait.
 Candidat 0 (12 articles, 6 médias) : « L’Europe accélère sur les véhicules électriques, les États-Unis freinent, la Chine reste leader »
 Candidat 1 (9 articles, 5 médias) : « Entre Bruxelles et Pékin, un compromis fragile sur l’automobile pour éviter l’escalade commerciale »
-Candidat 2 (12 articles, 3 médias) : « Raphaël Glucksmann »
-Candidat 3 (7 articles, 4 médias) : « Les deux Renoir volés au musée de Cagnes-sur-Mer ont été retrouvés par la police »
-Candidat 4 (5 articles, 5 médias) : « Bruno Retailleau et l'interdiction de LFI : de Paris à Strasbourg, histoire secrète d’un coup d’épée dans l’ea »
-Candidat 5 (5 articles, 4 médias) : « Rassemblement national: Franck Allisio se sépare d'un assistant mis en cause pour des posts Facebook »
-Traceback (most recent call last):
-  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 114, in <module>
-    main()
-  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 71, in main
-    sk = ecrire.ecrire_sketch([c[0] for c in candidats], gags=gags, special=dimanche, recents=recents)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/jt-auto/jt-auto/moteur/ecrire.py", line 290, in ecrire_sketch
-    essais = int(os.environ.get("MAX_REECRITURES", "3")) if essais is None else essais
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-ValueError: invalid literal for int() with base 10: ''
+Candidat 2 (6 articles, 5 médias) : « Edouard Louis sur la Prix Nobel de littérature 2026 : «Anne Carson écrit autant sur Sophocle que sur Rosalía» »
+Candidat 3 (5 articles, 5 médias) : « Bruno Retailleau et l'interdiction de LFI : de Paris à Strasbourg, histoire secrète d’un coup d’épée dans l’ea »
+Candidat 4 (7 articles, 4 médias) : « Budget 2027 : la commission des finances de l’Assemblée nationale rejette largement la partie «recettes» »
+Candidat 5 (5 articles, 5 médias) : « Lens - OL : Portés par Thauvin, les Lensois gagnent en souffrant, Lyon a réagi trop tard... Revivez le match a »
+Candidats : 5.5/10 L’Europe accélère sur les véhicules électriques, les États-U | 8.5/10 Entre Bruxelles et Pékin, un compromis fragile sur l’automob | 3.0/10 Edouard Louis sur la Prix Nobel de littérature 2026 : «Anne  | 6.0/10 Bruno Retailleau et l'interdiction de LFI : de Paris à Stras | 7.0/10 Budget 2027 : la commission des finances de l’Assemblée nati | 3.0/10 Lens - OL : Portés par Thauvin, les Lensois gagnent en souff
+Sujet choisi : « Entre Bruxelles et Pékin, un compromis fragile sur l’automobile pour éviter l’escalade commerciale » — angle : LE FREIN EST CHINOIS. L'Europe n'arrive pas à freiner les voitures chinoises, alors elle va à Pékin demander poliment à la Chine de freiner elle-même. Et ça mar
+  version 1 : 63/100, 13 répliques, 190 mots
+  version 2 : 63/100, 15 répliques, 188 mots
+  version 3 refusée : sketch trop court (0 répliques)
+  version 4 : 61/100, 15 répliques, 175 mots
+  sujet trop faible après réécritures : on essaie un autre sujet
+  version 1 : 66/100, 13 répliques, 176 mots
+  version 2 : 67/100, 15 répliques, 188 mots
+  sujet trop faible après réécritures
+  meilleure version retenue : 67/100 (à retravailler)
+Moteur humoristique : 12 appels Claude, 117844 jetons lus, 48378 jetons écrits
+Sketch : « BUDGET RECALÉ », 15 répliques
+Casting des voix (sources : kyutai,chatterbox)…
+  kyutai     cml-tts/fr/10087_11650_000028-0002_enh genre f f0   225 {'sim': 1.0, 'blanc': 0.12, 'debit': 0.99, 'expr': 3.0} OK score 5.25
+  kyutai     cml-tts/fr/10177_10625_000134-0003_enh genre f f0   188 {'sim': 1.0, 'blanc': 0.06, 'debit': 0.67, 'expr': 3.6} OK score 5.05
+  kyutai     cml-tts/fr/10179_11051_000005-0001_enh genre f f0   302 {'sim': 1.0, 'blanc': 0.0, 'debit': 1.01, 'expr': 2.1} OK score 4.93
+  kyutai     cml-tts/fr/12080_11650_000047-0001_enh genre f f0   259 {'sim': 1.0, 'blanc': 0.06, 'debit': 0.8, 'expr': 3.2} OK score 5.10
+  kyutai     cml-tts/fr/12205_11650_000004-0002_enh genre f f0   196 {'sim': 1.0, 'blanc': 0.04, 'debit': 0.8, 'expr': 3.9} OK score 5.33
+  kyutai     cml-tts/fr/12977_10625_000037-0001_enh genre f f0   237 {'sim': 1.0, 'blanc': 0.06, 'debit': 0.77, 'expr': 4.2} OK score 5.34
+  kyutai     cml-tts/fr/1406_1028_000009-0003_enhan genre h f0    95 {'sim': 1.0, 'blanc': 0.0, 'debit': 0.79, 'expr': 2.2} OK score 4.73
+  kyutai     cml-tts/fr/1591_1028_000108-0004_enhan genre f f0   208 {'sim': 1.0, 'blanc': 0.08, 'debit': 0.7, 'expr': 2.7} OK score 4.78
+  kyutai     cml-tts/fr/1770_1028_000036-0002_enhan genre h f0   130 {'sim': 1.0, 'blanc': 0.04, 'debit': 0.89, 'expr': 4.6} OK score 5.48
+  kyutai     cml-tts/fr/2114_1656_000053-0001_enhan genre h f0   154 {'sim': 1.0, 'blanc': 0.14, 'debit': 0.81, 'expr': 4.6} OK score 5.39
+  kyutai     cml-tts/fr/2154_2576_000020-0003_enhan genre f f0   199 {'sim': 1.0, 'blanc': 0.34, 'debit': 0.92, 'expr': 3.0} OK score 5.18
+  kyutai     cml-tts/fr/2216_1745_000007-0001_enhan genre h f0   110 {'sim': 1.0, 'blanc': 0.0, 'debit': 0.88, 'expr': 2.6} OK score 4.99
+  kyutai     cml-tts/fr/2223_1745_000009-0002_enhan genre h f0   129 {'sim': 1.0, 'blanc': 0.02, 'debit': 0.84, 'expr': 3.5} OK score 5.26
+  kyutai     cml-tts/fr/2465_1943_000152-0002_enhan genre f f0   212 {'sim': 1.0, 'blanc': 0.12, 'debit': 0.76, 'expr': 2.3} OK score 4.72
+  kyutai     cml-tts/fr/296_1028_000022-0001_enhanc genre h f0   135 {'sim': 1.0, 'blanc': 0.1, 'debit': 0.86, 'expr': 4.1} OK score 5.45
+  kyutai     cml-tts/fr/3267_1902_000075-0001_enhan genre f f0   227 {'sim': 1.0, 'blanc': 0.1, 'debit': 0.83, 'expr': 3.1} OK score 5.11
+  chatterbox presentateur                           genre h f0   140 {'sim': 1.0, 'blanc': 0.04, 'debit': 0.76, 'expr': 4.7} OK score 4.63
+  chatterbox invite                                 genre h f0    96 {'sim': 1.0, 'blanc': 0.0, 'debit': 0.71, 'expr': 8.5} OK score 4.56
+  chatterbox envoyee                                genre f f0   214 {'sim': 1.0, 'blanc': 0.16, 'debit': 0.8, 'expr': 3.5} OK score 4.51
+  -> presentateur : kyutai:cml-tts/fr/1770_1028_000036-0002_enhanced.wav, kyutai:cml-tts/fr/296_1028_000022-0001_enhanced.wav, kyutai:cml-tts/fr/2114_1656_000053-0001_enhanced.wav
+  -> invite : kyutai:cml-tts/fr/2114_1656_000053-0001_enhanced.wav, kyutai:cml-tts/fr/296_1028_000022-0001_enhanced.wav, kyutai:cml-tts/fr/2223_1745_000009-0002_enhanced.wav
+  -> envoyee : kyutai:cml-tts/fr/12977_10625_000037-0001_enhanced.wav, kyutai:cml-tts/fr/12205_11650_000004-0002_enhanced.wav, kyutai:cml-tts/fr/10087_11650_000028-0002_enhanced.wav
+  voix 2 (envoyee, kyutai:cml-tts/fr/12977_10625_000037-, prise 1) {'sim': 1.0, 'blanc': 0.1, 'debit': 0.73} OK
+  voix 4 (envoyee, kyutai:cml-tts/fr/12977_10625_000037-, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.86} OK
+  voix 8 (envoyee, kyutai:cml-tts/fr/12977_10625_000037-, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.73} OK
+  voix 10 (envoyee, kyutai:cml-tts/fr/12977_10625_000037-, prise 1) {'sim': 0.94, 'blanc': 0.16, 'debit': 0.8} OK
+  voix 5 (invite, kyutai:cml-tts/fr/2114_1656_000053-00, prise 1) {'sim': 1.0, 'blanc': 0.06, 'debit': 0.73} OK
+  voix 7 (invite, kyutai:cml-tts/fr/2114_1656_000053-00, prise 1) {'sim': 1.0, 'blanc': 0.1, 'debit': 0.84} OK
+  voix 11 (invite, kyutai:cml-tts/fr/2114_1656_000053-00, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.95} OK
+  voix 13 (invite, kyutai:cml-tts/fr/2114_1656_000053-00, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.09} OK
+  voix 0 (presentateur, kyutai:cml-tts/fr/1770_1028_000036-00, prise 1) {'sim': 0.85, 'blanc': 0.18, 'debit': 0.89} OK
+  voix 1 (presentateur, kyutai:cml-tts/fr/1770_1028_000036-00, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.82} OK
+  voix 3 (presentateur, kyutai:cml-tts/fr/1770_1028_000036-00, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.73} OK
+  voix 6 (presentateur, kyutai:cml-tts/fr/1770_1028_000036-00, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.62} OK
+  voix 9 (presentateur, kyutai:cml-tts/fr/1770_1028_000036-00, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.69} OK
+  voix 12 (presentateur, kyutai:cml-tts/fr/1770_1028_000036-00, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.65} OK
+  voix 14 (presentateur, kyutai:cml-tts/fr/1770_1028_000036-00, prise 1) {'sim': 1.0, 'blanc': 0.02, 'debit': 0.87} OK
+Voix : Kyutai TTS (CC BY 4.0), voix CML-TTS (CC BY 4.0)
+durée 62.0 s, 15 répliques, duplex=1, gag=None
+  image 0/1860
+  image 300/1860
+  image 600/1860
+  image 900/1860
+  image 1200/1860
+  image 1500/1860
+  image 1800/1860
+Qualité : 67/100 — à retravailler
+OK : sortie/2026-10-09_emission16.mp4 (62 s)
