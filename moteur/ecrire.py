@@ -144,7 +144,7 @@ OUTIL = {"name": "rendre_sketch", "description": "Rendre le sketch au format dem
 def _appel(client, systeme, messages):
     """Renvoie le sketch sous forme de dictionnaire. L'outil force un JSON toujours valide (fini les guillemets mal échappés)."""
     r = client.messages.create(model=MODELE, max_tokens=4000, system=systeme, messages=messages,
-                               tools=[OUTIL], tool_choice={"type": "tool", "name": "rendre_sketch"})
+                               tools=[OUTIL], tool_choice={"type": "auto"})
     for b in r.content:
         if getattr(b, "type", "") == "tool_use": return b.input
     return _json("".join(getattr(b, "text", "") for b in r.content))
