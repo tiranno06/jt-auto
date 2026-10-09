@@ -68,7 +68,9 @@ jobs:
 
       - name: Fabriquer l'émission
         id: run
-        run: python moteur/principal.py
+        run: |
+          set -o pipefail
+          python moteur/principal.py 2>&1 | tee episodes/journal.txt
 
       - name: Archiver la vidéo dans les Releases du mois
         if: steps.run.outputs.video != ''
