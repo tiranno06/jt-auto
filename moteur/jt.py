@@ -95,7 +95,25 @@ def minutage(texte, a, t0):
     return [(g, t0 + deb[k], t0 + max(fin[k], deb[k] + 0.12)) for k, g in enumerate(gs)]
 
 # ------------------------------------------------------------------ sons (orchestre réel, CC0) et générique
-SONS = os.path.join(ICI, "..", "sons"); SRM = 44100; INTRO = 5.0
+SONS = os.path.join(ICI, "..", "sons"); SRM = 44100; INTRO = 5.0; GEN_DUREE = 1.6
+
+def accroche(txt):
+    """Grand titre-accroche affiché pendant la première réplique (style « POV » TikTok)."""
+    if not txt: return None
+    txt = re.sub(r"[^\w\s'’«»:!?,.%€-]", "", str(txt)).strip().upper()[:46]
+    f = ImageFont.truetype(FB, 56); d0 = ImageDraw.Draw(Image.new("RGB", (1, 1)))
+    mots, lignes, cur = txt.split(), [], ""
+    for m in mots:
+        if d0.textlength((cur + " " + m).strip(), font=f) > 900: lignes.append(cur); cur = m
+        else: cur = (cur + " " + m).strip()
+    lignes.append(cur); lignes = lignes[:3]
+    hl = 72; img = Image.new("RGBA", (W, hl * len(lignes) + 50), (0, 0, 0, 0)); d = ImageDraw.Draw(img)
+    for k, l in enumerate(lignes):
+        w = d.textlength(l, font=f); x = (W - w) / 2
+        d.rounded_rectangle((x - 22, 18 + k * hl, x + w + 22, 18 + k * hl + hl - 6), 14, fill=(255, 214, 40, 255))
+        d.text((x, 22 + k * hl), l, font=f, fill=(20, 20, 30))
+    img = img.rotate(-2, resample=Image.BICUBIC, expand=False)
+    return np.array(img).astype(np.float32)
 def son(nom):
     p = os.path.join(SONS, nom + ".wav")
     if not os.path.exists(p): return np.zeros((1, 2))
@@ -244,7 +262,7 @@ def _fft_conv(a, ir):
     n = len(a) + len(ir); m = 1 << (n - 1).bit_length()
     return np.fft.irfft(np.fft.rfft(a, m) * np.fft.rfft(ir, m), m)[:len(a)]
 
-def salle(a, duree=0.7, mix=0.16, graine=3):
+def salle(a, duree=0.5, mix=0.06, graine=3):
     """Réverbération d'une grande salle (le direct de l'envoyée) + léger filtrage « micro de reportage »."""
     t = np.arange(int(duree * SR)) / SR; ir = np.random.default_rng(graine).normal(0, 1, len(t)) * np.exp(-t * 6.5)
     ir[:int(0.012 * SR)] = 0; ir /= np.sqrt(np.sum(ir ** 2))
@@ -266,24 +284,27 @@ def rendre(sk, sortie, audios, gag=None, apercu=False):
             dv = c["devant"].astype(np.float32); y = np.where(dv[..., 3].max(1) > 0)[0].min(); c["dv"] = (dv[y:], y)
         c["band"] = bandeau_nom(c)
     # ---- chronologie
-    t = INTRO + 0.15; ph = []; prev = None
+    t = 0.12; ph = []; prev = None; GEN0 = GEN1 = None
     for i, (r, a) in enumerate(zip(reps, audios)):
         niv, lv = enveloppe(a); dur = len(a) / SR
+        if i == 1:                                                          # après l'accroche : mini-générique de 1,6 s
+            GEN0 = t; GEN1 = t + GEN_DUREE; t = GEN1 + 0.12; prev = None
         t0 = t; att = float(r.get("attente", 0)); t += att
         q = dict(i=i, p=r["p"], deb=t, att=att, fin=t + dur, audio=a, niv=niv, lv=lv, chute=bool(r.get("chute")),
                  groupes=minutage(r["t"], a, t))
         # début du plan : coupe vers celui qui parle ; après une vanne, on coupe tôt sur la réaction (visage impassible)
         if r["p"] != prev:
-            q["plan"] = (ph[-1]["fin"] + 0.22) if (ph and ph[-1]["chute"]) else max(INTRO, t0 - 0.12)
-            q["reaction"] = bool(ph and ph[-1]["chute"])
+            q["plan"] = (ph[-1]["fin"] + 0.22) if (ph and ph[-1]["chute"] and i != 1) else max(GEN1 or 0, t0 - 0.12)
+            q["reaction"] = bool(ph and ph[-1]["chute"] and i != 1)
         else:
             q["plan"] = None
         gg = q["groupes"]; dz = gg[0][1]
         for k2 in range(len(gg) - 1):
             if re.search(r"[.!?…]$", gg[k2][0]): dz = gg[k2 + 1][1]
         q["dz"] = dz; ph.append(q); prev = r["p"]
-        t += dur + (0.45 if r.get("chute") else 0.06)
-    total = t + 0.7
+        t += dur + (0.45 if r.get("chute") and i != 0 else 0.06 if i else 0.2)
+    if GEN0 is None: GEN0 = t; GEN1 = t + GEN_DUREE; t = GEN1
+    total = t + 0.35                                                        # fin sèche : la vidéo reboucle sur l'accroche
     FIN = None
     if os.environ.get("LONGUEUR") == "monetisable" and total < 62.0:     # format long : carton de fin pour dépasser 1 minute
         FIN = t + 0.5; total = 62.0
@@ -320,15 +341,15 @@ def rendre(sk, sortie, audios, gag=None, apercu=False):
         a = vers_mix(salle(q["audio"]) if q["p"] == "envoyee" else q["audio"]); s0 = int(q["deb"] * SRM); voixm[s0:s0 + len(a)] += a[:n - s0]
     m1 = np.abs(voixm[:, 0]); k = int(0.2 * SRM)
     env = np.convolve(m1, np.ones(k) / k, "same"); env = np.clip(env / (np.percentile(env[env > 1e-4], 90) + 1e-6) if (env > 1e-4).any() else env, 0, 1)
-    duck = (1 - 0.8 * env)[:, None]                                         # musique et bruitages s'effacent sous la voix
+    duck = (1 - 0.9 * env)[:, None]                                         # musique et bruitages s'effacent sous la voix
     fond = np.zeros((n, 2)); nap = son("nappe")
     if len(nap) > 10:
-        for s0 in range(int(INTRO * SRM) - int(0.3 * SRM), n, len(nap) - int(0.4 * SRM)):
-            e = min(n, s0 + len(nap)); fond[s0:e] += nap[:e - s0] * 0.16
+        for s0 in range(int((GEN1 - 0.2) * SRM), n, len(nap) - int(0.4 * SRM)):
+            e = min(n, s0 + len(nap)); fond[s0:e] += nap[:e - s0] * 0.11
     def ajoute(nom, t, g):
         x = son(nom); s0 = int(t * SRM); e = min(n, s0 + len(x))
         if e > s0: fond[s0:e] += x[:e - s0] * g
-    chutes = [q for q in ph if q["chute"]]; cycle = ["xylo_descente", "rimshot", "trombone_triste"]
+    chutes = [q for q in ph if q["chute"] and q["i"] > 0]; cycle = ["xylo_descente", "rimshot", "trombone_triste"]
     for j, q in enumerate(chutes):
         if q is ph[-1]: ajoute("rimshot", q["fin"] + 0.02, 0.9)
         else: ajoute(cycle[j % len(cycle)], q["fin"] + 0.02, 0.7 if cycle[j % len(cycle)] != "trombone_triste" else 0.5)
@@ -336,7 +357,7 @@ def rendre(sk, sortie, audios, gag=None, apercu=False):
         if q["plan"] is not None and q["i"] > 0 and (q["p"] == "envoyee" or q["i"] == gag_i): ajoute("woosh", q["debplan"] - 0.12, 0.6)
         if q["i"] == gag_i: ajoute("reconstitution", q["debplan"], 0.6)
     mix = voixm + fond * duck
-    ig = son("intro"); mix[:min(n, len(ig))] += ig[:n] * 0.95
+    ig = son("intro_courte"); s0 = int(GEN0 * SRM); e = min(n, s0 + len(ig)); mix[s0:e] += ig[:e - s0] * 0.95
     mix = np.clip(mix / max(1.0, np.abs(mix).max() / 0.95), -0.99, 0.99)
     brut = f"{tmp}/mix.wav"; wav = f"{tmp}/mix_norm.wav"
     with wave.open(brut, "wb") as w:
@@ -377,10 +398,11 @@ def rendre(sk, sortie, audios, gag=None, apercu=False):
         M = np.float32([[z, 0, cx - z * cx + dx], [0, z, cy - z * cy + dy]])
         return cv2.warpAffine(fr, M, (W, H), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REPLICATE)
 
-    GEN = generique_images()
+    GEN = generique_images(); ACC = accroche(sk.get("titre_accroche"))
     def image(fi):
         tm = fi / FPS
-        if tm < INTRO: return np.clip(image_generique(tm, GEN), 0, 255).astype(np.uint8)
+        if GEN0 <= tm < GEN1:                                               # mini-générique accéléré (impact, titre, date, plongée)
+            return np.clip(image_generique(1.2 + (tm - GEN0) / GEN_DUREE * (INTRO - 1.2), GEN), 0, 255).astype(np.uint8)
         if FIN and tm >= FIN: return np.clip(image_fin(tm - FIN, GEN), 0, 255).astype(np.uint8)
         q = next((x for x in reversed(ph) if x["debplan"] <= tm), ph[0])
         # zoom : petit punch-in à l'ouverture du plan, lent zoom pendant un silence, zoom sec sur la vanne
@@ -418,8 +440,9 @@ def rendre(sk, sortie, audios, gag=None, apercu=False):
         # étalonnage : vignettage + léger contraste + grain
         fr = (fr * 1.05 - 6) * VIG + GRAIN[fi % 4]
         # habillage
-        e = ENT if tm > INTRO + 0.35 else ENT[int(150 * (1 - (tm - INTRO) / 0.35) ** 2):]
-        poser(fr, e, 0, HEAD_Y)
+        poser(fr, ENT, 0, HEAD_Y)
+        if q["i"] == 0 and ACC is not None:                                 # titre-accroche (sert aussi de couverture)
+            u = min(1, tm / 0.25); a2 = pop(ACC, u); poser(fr, a2, (W - a2.shape[1]) / 2, 425 - a2.shape[0] / 2)
         if q["i"] != gag_i:
             ox = int(tm * 150) % TICK.shape[1]
             poser(fr, TICK, 190 - ox, TICK_Y); poser(fr, TICK, 190 - ox + TICK.shape[1], TICK_Y); poser(fr, TLAB, 0, TICK_Y)

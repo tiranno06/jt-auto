@@ -93,6 +93,19 @@ def intro():
     mix = salle(mix * f[:, None], 2.0, 0.3)
     return normal(mix[:int(5.2 * SR)])
 
+def intro_courte():
+    """Mini-générique de 1,6 s (après l'accroche) : impact timbale + accord de cuivres + crash, puis queue courte."""
+    mix = np.zeros((int(2.2 * SR), 2)); t0 = 0.03
+    poser(mix, lire(un("Percussion/Timpani/Timpani1_Hit_v3*")), t0, 1.0); poser(mix, lire(un("Percussion/BDrumNewhit_v6*")), t0, 0.8)
+    poser(mix, lire(un("Percussion/cymbal-crash1_ff*")), t0, 0.5)
+    for bq, n in ((TPT_ST, 74), (TPT_ST, 78), (TPT_ST, 81), (TBN_ST, 62), (TBN_ST, 57), (COR, 66)): poser(mix, note(bq, n, 0.4), t0, 0.35)
+    for t1, n, d in ((0.5, 81, 0.12), (0.64, 81, 0.12), (0.78, 86, 0.75)):
+        poser(mix, note(TPT_ST if d < 0.5 else TPT_S, n, d), t1, 0.5)
+    for bq, n in ((TPT_S, 78), (TBN_S, 62), (TBN_S, 50), (COR, 66)): poser(mix, note(bq, n, 0.8), 0.78, 0.3)
+    poser(mix, lire(un("Percussion/Timpani/Timpani1_Hit_v3*")), 0.78, 0.7)
+    f = np.ones(len(mix)); a, b = int(1.25 * SR), int(1.9 * SR); f[a:b] = np.linspace(1, 0, b - a); f[b:] = 0
+    return normal(salle(mix * f[:, None], 1.2, 0.25)[:int(1.9 * SR)])
+
 # ------------------------------------------------------------------ bruitages de comédie
 def rimshot():
     m = np.zeros((int(1.6 * SR), 2)); sn = lire(un("Percussion/Snare2-HitNS_v3*")); sn2 = lire(un("Percussion/Snare2-HitNS_v6*"))
@@ -144,6 +157,6 @@ def nappe():
     return normal(salle(m * f[:, None], 2.0, 0.35), 0.5)
 
 if __name__ == "__main__":
-    for nom, f in (("intro", intro), ("rimshot", rimshot), ("xylo_descente", xylo_descente), ("trombone_triste", trombone_triste),
+    for nom, f in (("intro", intro), ("intro_courte", intro_courte), ("rimshot", rimshot), ("xylo_descente", xylo_descente), ("trombone_triste", trombone_triste),
                    ("dun_dun", dun_dun), ("woosh", woosh), ("reconstitution", reconstitution), ("nappe", nappe)):
         ecrire(nom, f())

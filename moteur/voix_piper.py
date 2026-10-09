@@ -60,8 +60,8 @@ def phrase(texte, fin, v, tmp, graine):
 def studio(a, tmp, grave=False):
     _ecrire(f"{tmp}.sec.wav", a)
     chaine = ["highpass=f=75", f"equalizer=f={170 if grave else 220}:t=q:w=1:g=2.5", "equalizer=f=3200:t=q:w=1.2:g=2.5",
-              "equalizer=f=7000:t=q:w=1:g=-2", "deesser=i=0.4",
-              "acompressor=threshold=-20dB:ratio=3:attack=5:release=90:makeup=2", "aecho=0.85:0.5:19|37:0.07|0.04"]
+              "equalizer=f=280:t=q:w=1.2:g=-2.5", "equalizer=f=7000:t=q:w=1:g=-1", "deesser=i=0.3",
+              "acompressor=threshold=-20dB:ratio=3:attack=5:release=90:makeup=2", "aecho=0.9:0.4:15:0.025"]
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", f"{tmp}.sec.wav", "-af", ",".join(chaine), f"{tmp}.studio.wav"], check=True)
     b, _ = _lire(f"{tmp}.studio.wav")
     rms = np.sqrt(np.mean(b[np.abs(b) > 0.01] ** 2)) if (np.abs(b) > 0.01).any() else 0.1

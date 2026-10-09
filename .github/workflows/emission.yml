@@ -52,6 +52,7 @@ jobs:
       PLAN_GAG: ${{ vars.PLAN_GAG }}
       LONGUEUR: ${{ vars.LONGUEUR }}
       TON: ${{ vars.TON }}
+      INFOS_DEMAIN: ${{ vars.INFOS_DEMAIN }}
       GH_TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@v4

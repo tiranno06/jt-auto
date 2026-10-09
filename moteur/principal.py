@@ -20,7 +20,7 @@ def resserrer(audios, sk, cible=None):
     cible = cible or {"courte": 25.0, "normale": 35.0, "longue": 50.0}.get(ecrire.LONGUEUR, 29.0)
     total = sum(len(a) for a in audios) / SR + sum(0.45 if r.get("chute") else 0.06 for r in sk["repliques"]) + sum(r.get("attente", 0) for r in sk["repliques"]) + 1.0
     if total <= cible: return audios
-    f = min(1.18, total / cible); print(f"Durée estimée {total:.1f} s : débit accéléré ×{f:.2f}", flush=True)
+    f = min(1.06, total / cible)                                          # au-delà, les voix deviennent difficiles à comprendre; print(f"Durée estimée {total:.1f} s : débit accéléré ×{f:.2f}", flush=True)
     sortie, tmp = [], tempfile.mkdtemp()
     for i, a in enumerate(audios):
         with wave.open(f"{tmp}/{i}.wav", "wb") as w:
@@ -51,7 +51,10 @@ def main():
         titres = actu.titres_recents(deja_vus=deja)
     if len(titres) < 1:
         print("Pas assez d'actualité exploitable aujourd'hui : pas d'émission."); return
-    sk = ecrire.ecrire_sketch(titres)
+    from zoneinfo import ZoneInfo
+    dimanche = datetime.datetime.now(ZoneInfo("Europe/Paris")).weekday() == 6 and os.environ.get("INFOS_DEMAIN", "1") != "0"
+    gags = [h.get("running_gag") for h in historique[-15:] if h.get("running_gag")]
+    sk = ecrire.ecrire_sketch(titres, gags=gags, special=dimanche)
     print(f"Sketch : « {sk['sujet']} », {len(sk['repliques'])} répliques", flush=True)
     audios, moteur = voix.generer(sk["repliques"], jt.VOIX)
     print(f"Voix : {moteur}", flush=True)
@@ -70,11 +73,11 @@ def main():
     credit = ("Voix : Multilingual LibriSpeech (CC BY 4.0), transformées, synthèse Chatterbox."
               if moteur == "chatterbox" else "Voix : Piper / SIWIS (CC BY 4.0).")
     if gag: credit += " Plan « reconstitution » généré avec Wan 2.2."
-    legende = f"{sk['legende']}\n\n" + " ".join("#" + h for h in sk["hashtags"]) + f"\n\nContenu généré par IA. {credit}"
+    legende = f"{sk['legende']}" + (f"\n\n{sk['question']}" if sk.get("question") else "") + "\n\n" + " ".join("#" + h for h in sk["hashtags"]) + f"\n\nContenu généré par IA. {credit}"
     open(base + ".txt", "w", encoding="utf-8").write(legende + "\n\nSources :\n" + "\n".join(sk["sources"]) + "\n")
     os.makedirs("episodes", exist_ok=True)
     json.dump(sk, open(f"episodes/{jour}.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
-    historique.append(dict(date=jour, titre=sk["sujet"], sources=sk["sources"], mots=sorted(actu._mots(" ".join(t["titre"] for t in titres)))[:40], voix=moteur, gag=bool(gag), duree=round(duree, 1),
+    historique.append(dict(date=jour, titre=sk["sujet"], sources=sk["sources"], mots=sorted(actu._mots(" ".join(t["titre"] for t in titres)))[:40], voix=moteur, gag=bool(gag), running_gag=sk.get("running_gag", ""), duree=round(duree, 1),
                            fichier=os.path.basename(base) + ".mp4", tag=f"emissions-{jour[:7]}", legende=legende, publie=None))
     json.dump(historique[-200:], open("episodes/historique.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     sortie = os.environ.get("GITHUB_OUTPUT")

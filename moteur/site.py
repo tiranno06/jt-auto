@@ -184,9 +184,9 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
   </section>
   <p class="note" id="cfgEtat"></p>
   <section class="panneau"><h2>📅 Planning</h2>
-    <label>Rythme des émissions<select data-var="FREQUENCE" data-def="1"><option value="1">Une par jour</option><option value="2">Un jour sur deux</option><option value="3">Un jour sur trois</option><option value="0">⏸ Pause (le robot ne produit plus)</option></select></label>
-    <label>Heure de fabrication (heure de Paris)<select data-var="HEURE" data-def="7" id="selHeure"></select></label>
-    <p class="note">La vidéo est prête environ 20 à 40 minutes après cette heure.</p>
+    <label>Rythme des émissions<select data-var="FREQUENCE" data-def="1"><option value="2x">Deux par jour (12 h + heure choisie)</option><option value="1">Une par jour</option><option value="2">Un jour sur deux</option><option value="3">Un jour sur trois</option><option value="0">⏸ Pause (le robot ne produit plus)</option></select></label>
+    <label>Heure de fabrication (heure de Paris)<select data-var="HEURE" data-def="17" id="selHeure"></select></label>
+    <p class="note">La vidéo est prête environ 20 à 40 minutes après cette heure. 17 h (recommandé) = publiée pour le pic d'audience de 18 h à 21 h.</p>
   </section>
   <section class="panneau"><h2>✍️ Sketch</h2>
     <label>Durée<select data-var="LONGUEUR" data-def="courte"><option value="courte">Courte (30 s max, recommandé)</option><option value="normale">Normale (30-40 s)</option><option value="longue">Longue (40-55 s)</option><option value="monetisable">💰 Format long +1 min (rémunération TikTok)</option></select></label>
@@ -196,6 +196,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <label>Nom de l'émission<div class="jeton"><input data-var="NOM_EMISSION" data-def="L'info en caoutchouc" data-texte="1" maxlength="30"><button class="second" data-enr="NOM_EMISSION" style="flex:none;padding:10px 14px">OK</button></div></label>
   </section>
   <section class="panneau"><h2>🎥 Vidéo</h2>
+    <div class="auto" style="margin-bottom:12px"><div class="txt"><b>« Les infos de demain » le dimanche</b><small>Épisode spécial hebdomadaire : fausses brèves du futur sur le sujet de la semaine (le format qui a fait 586 000 vues).</small></div><button class="inter" data-var="INFOS_DEMAIN" data-def="1" data-bascule="1"></button></div>
     <div class="auto"><div class="txt"><b>Plan gag généré par IA</b><small>Un plan « reconstitution » Wan 2.2 par vidéo. À couper si les crédits Modal fondent.</small></div><button class="inter" data-var="PLAN_GAG" data-def="1" data-bascule="1"></button></div>
   </section>
   <section class="panneau"><h2>🚀 Actions</h2>

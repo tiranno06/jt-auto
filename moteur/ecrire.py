@@ -24,20 +24,18 @@ LOOKS = ("chauve", "moustache")
 
 EXEMPLE = {
     "sujet": "BUDGET 2027", "ecran": "BUDGET 2027", "invite_nom": "Hubert Rustine", "invite_role": "Conseiller (fictif) à Bercy", "invite_look": "chauve",
-    "lieu_direct": "Assemblée",
+    "lieu_direct": "Sous le canapé de Bercy", "titre_accroche": "4 milliards perdus en 6 heures",
+    "question": "Qui a vraiment volé les économies ? 👇", "running_gag": "Le Tic Tac rejeté en commission",
     "repliques": [
-        {"p": "presentateur", "t": "Les députés devaient trouver quatre milliards d'économies. Ils ont tout supprimé en six heures. Martine, sur place ?"},
-        {"p": "envoyee", "t": "Jean-Michel, c'est historique. Pour une fois, l'Assemblée a vraiment bossé."},
-        {"p": "envoyee", "t": "Dans le mauvais sens, mais elle a bossé.", "chute": True},
-        {"p": "presentateur", "t": "Et à Bercy ?"},
-        {"p": "envoyee", "t": "Le ministère est en PLS. Des fonctionnaires cherchent des économies sous les coussins du canapé.", "d": "Le ministère est en pé-elle-esse. Des fonctionnaires cherchent des économies sous les coussins du canapé."},
-        {"p": "envoyee", "t": "Ils ont trouvé deux euros et un Tic Tac.", "chute": True},
-        {"p": "envoyee", "t": "Le Tic Tac a été rejeté en commission.", "attente": 0.5, "chute": True},
-        {"p": "presentateur", "t": "Et mardi ?"},
-        {"p": "envoyee", "t": "Mardi, tout repart du texte d'origine. Bonne nouvelle : le Tic Tac est de retour.", "chute": True},
+        {"p": "presentateur", "t": "Les députés devaient trouver quatre milliards. Ils ont trouvé un Tic Tac.", "chute": True},
+        {"p": "presentateur", "t": "Martine, vous êtes sur place ?"},
+        {"p": "envoyee", "t": "Jean-Michel, c'est la panique. Des fonctionnaires fouillent sous les coussins du canapé."},
+        {"p": "envoyee", "t": "Ils ont trouvé deux euros.", "chute": True},
+        {"p": "presentateur", "t": "Et le Tic Tac ?"},
+        {"p": "envoyee", "t": "Il a été rejeté en commission.", "attente": 0.5, "chute": True},
     ],
     "bandeau": ["BERCY : LE CANAPÉ PLACÉ EN GARDE À VUE", "LE TIC TAC DEMANDE L'ASILE FISCAL", "LES ÉCONOMIES AURAIENT ÉTÉ APERÇUES EN SUISSE"],
-    "gag": {"replique": 4, "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. Three tired office workers in grey suits dig frantically under the cushions of a big orange sofa in a fancy ministry office, coins and papers flying, comedic, deadpan."},
+    "gag": {"replique": 2, "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. Three tired office workers in grey suits dig frantically under the cushions of a big orange sofa in a fancy ministry office, coins and papers flying, comedic, deadpan."},
 }
 
 SYSTEME = """Tu es une équipe d'auteurs comiques professionnels de la télévision française (le niveau des meilleures émissions satiriques). Tu écris « L'info en caoutchouc », un faux JT satirique quotidien de {secondes} secondes pour TikTok, joué par des personnages 100 % FICTIFS dessinés en cartoon.
@@ -45,7 +43,18 @@ SYSTEME = """Tu es une équipe d'auteurs comiques professionnels de la télévis
 PERSONNAGES (clés autorisées pour "p") :
 {cast}
 
-LE FORMAT : UN SEUL sujet d'actualité, celui qui est fourni, sans jamais s'en écarter. Le présentateur lance, puis direct avec l'envoyée sur place et/ou l'invité. {nb} répliques, courtes (une ou deux phrases).
+LE FORMAT : UN SEUL sujet d'actualité, celui qui est fourni, sans jamais s'en écarter. {nb} répliques, courtes (une ou deux phrases).
+- Réplique 0 = L'ACCROCHE (ouverture à froid, AVANT le générique) : le présentateur résume le sujet en UNE phrase drôle de 3 secondes maximum, qui donne envie de rester. C'est la vanne la plus forte du début.
+- Ensuite : direct avec l'envoyée sur place et/ou l'invité.
+- BOUCLE : la dernière réplique doit faire écho à l'accroche, pour que la vidéo s'enchaîne naturellement sur son début quand elle repasse en boucle.
+{special}
+
+RITUELS (ce qui fidélise le public) :
+- L'envoyée Martine est toujours en direct d'un endroit absurde mais lié au sujet (« caché sous le bureau du ministre », « dans la photocopieuse de Bercy »…) : c'est le champ "lieu_direct".
+- Le présentateur reste de marbre quoi qu'il arrive.
+- Tu peux faire UN clin d'œil discret à un running gag récent de l'émission s'il colle au sujet (sinon, n'en fais pas) : {gags}
+
+ARTICULATION (les voix sont synthétiques) : phrases courtes et simples, mots faciles à prononcer, pas d'enchaînement de sons compliqués, pas d'abréviations, une seule idée par phrase. Le spectateur doit tout comprendre du premier coup.
 
 COMMENT FAIRE RIRE (méthode obligatoire) :
 - Trouve UNE idée comique forte (le « jeu ») et pousse-la jusqu'au bout : chaque réplique monte d'un cran dans l'absurde.
@@ -53,7 +62,7 @@ COMMENT FAIRE RIRE (méthode obligatoire) :
 - La chute est TOUJOURS le dernier mot de la réplique. Phrases courtes. Jamais d'explication de la blague, jamais de jeu de mots facile.
 - Une blague du début revient en chute finale (rappel), de préférence retournée.
 - Ton : {ton}. Pince-sans-rire, jamais méchant envers les gens.
-- Accroche dans la PREMIÈRE phrase : le spectateur doit comprendre le sujet et sourire en 3 secondes.
+- L'accroche (réplique 0) : le spectateur doit comprendre le sujet et sourire en 3 secondes.
 
 RÈGLES ABSOLUES :
 1. Faits : n'utilise QUE les faits présents dans les titres fournis. Aucun chiffre, date ou événement réel inventé. Les exagérations doivent être évidemment absurdes (personne ne doit les croire vraies).
@@ -66,7 +75,10 @@ FORMAT : rends le sketch avec l'outil rendre_sketch, avec exactement ces champs 
  "ecran": "texte de l'écran du plateau, max 14 caractères, MAJUSCULES",
  "invite_nom": "nom fictif et drôle de l'invité (prénom + nom évocateur)", "invite_role": "fonction de l'invité, avec « (fictif) », max 34 caractères",
  "invite_look": "{looks}",
- "lieu_direct": "lieu du direct de l'envoyée, 1 à 2 mots (ex. Assemblée, Bercy, Élysée, Sénat)",
+ "lieu_direct": "lieu absurde du direct de l'envoyée, lié au sujet, max 26 caractères",
+ "titre_accroche": "titre affiché en gros sur la première image (style « POV »), max 40 caractères, SANS emoji, qui donne envie de regarder",
+ "question": "question courte et piquante pour faire réagir en commentaire (max 80 caractères), avec un emoji à la fin",
+ "running_gag": "si tu crées un nouveau gag réutilisable dans de futurs épisodes, décris-le en une phrase (sinon chaîne vide)",
  "repliques": [{{"p": "presentateur|envoyee|invite", "t": "réplique affichée (max 150 caractères)", "d": "même texte avec nombres, sigles et pourcentages écrits en toutes lettres pour la voix (si différent)", "chute": true si la réplique se termine par une vanne, "attente": secondes de silence gênant avant la réplique (0.4 à 1.2, une seule fois max, juste avant la vanne finale ou une grosse vanne)}}],
  "bandeau": ["3 ou 4 fausses dépêches absurdes pour le bandeau défilant, MAJUSCULES, max 55 caractères, liées au sujet"],
  "gag": {{"replique": index (à partir de 0) d'une réplique de l'envoyée ou de l'invité qui décrit une scène visuelle drôle, "prompt": "description EN ANGLAIS de cette scène pour un générateur vidéo : commence par « Flat 2D cartoon, thick black outlines, simple shapes. », décris l'action en 1 à 2 phrases, sans texte écrit à l'écran, sans personne réelle"}},
@@ -82,8 +94,9 @@ DOCTEUR = """Tu es maintenant « script doctor » pour une émission comique. Vo
 
 1. Pour chaque réplique, note mentalement sa force comique de 1 à 10.
 2. Réécris les 3 répliques les plus faibles pour qu'elles soient franchement plus drôles (image plus concrète, chute plus courte et plus inattendue, escalade, rappel).
-3. Vérifie que la toute dernière réplique est la meilleure vanne du sketch, sinon améliore-la.
-4. Coupe tout ce qui ralentit : le sketch doit tenir en {secondes} secondes ({nb} répliques).
+3. Vérifie que l'accroche (réplique 0) fait sourire en 3 secondes, et que la dernière réplique est la meilleure vanne ET fait écho à l'accroche (boucle).
+4. Vérifie l'articulation : phrases courtes, mots simples, faciles à dire à voix haute.
+5. Coupe tout ce qui ralentit : le sketch doit tenir en {secondes} secondes ({nb} répliques).
 Garde exactement les mêmes faits et toutes les règles (aucune personne réelle, aucun fait inventé). Rends le sketch complet corrigé avec l'outil rendre_sketch, même format."""
 
 def construire_prompt(titres):
@@ -130,7 +143,9 @@ def valider(sk, liens):
             "ecran": _court(sk.get("ecran") or sk.get("sujet"), 14).upper(),
             "invite_nom": _court(sk.get("invite_nom"), 26) or "Hubert Rustine",
             "invite_role": _court(sk.get("invite_role"), 36) or "Expert (fictif)", "invite_look": look,
-            "lieu_direct": _court(sk.get("lieu_direct"), 16) or "Assemblée",
+            "lieu_direct": _court(sk.get("lieu_direct"), 28) or "Assemblée",
+            "titre_accroche": _court(sk.get("titre_accroche"), 46), "question": _court(sk.get("question"), 90),
+            "running_gag": _court(sk.get("running_gag"), 160),
             "repliques": reps, "bandeau": [_court(b, 60).upper() for b in sk.get("bandeau", []) if str(b).strip()][:4],
             "gag": gag,
             "legende": _court(sk.get("legende"), 160) or "L'actu du jour, en dessin animé. Satire, personnages fictifs.",
@@ -141,6 +156,7 @@ OUTIL = {"name": "rendre_sketch", "description": "Rendre le sketch au format dem
          "input_schema": {"type": "object", "properties": {
              "sujet": {"type": "string"}, "ecran": {"type": "string"}, "invite_nom": {"type": "string"}, "invite_role": {"type": "string"},
              "invite_look": {"type": "string"}, "lieu_direct": {"type": "string"},
+             "titre_accroche": {"type": "string"}, "question": {"type": "string"}, "running_gag": {"type": "string"},
              "repliques": {"type": "array", "items": {"type": "object", "properties": {
                  "p": {"type": "string"}, "t": {"type": "string"}, "d": {"type": "string"}, "chute": {"type": "boolean"}, "attente": {"type": "number"}},
                  "required": ["p", "t"]}},
@@ -158,10 +174,13 @@ def _appel(client, systeme, messages):
         if getattr(b, "type", "") == "tool_use": return b.input
     return _json("".join(getattr(b, "text", "") for b in r.content))
 
-def ecrire_sketch(titres, essais=3):
+SPECIAL_DEMAIN = """- ÉPISODE SPÉCIAL DU DIMANCHE « LES INFOS DE DEMAIN » : après l'accroche, le présentateur annonce 3 ou 4 fausses brèves du futur (« Dans un an… », « En 2030… »), toutes sur CE sujet, chacune poussant la situation un cran plus loin dans l'absurde, avec une chute par brève ; l'envoyée ou l'invité peuvent réagir. L'écran du plateau affiche « EN 2030 »."""
+
+def ecrire_sketch(titres, essais=3, gags=(), special=False):
     import anthropic
     client = anthropic.Anthropic()
-    systeme = SYSTEME.format(secondes=SECONDES, nb=NB, ton=TON, cast="\n".join(f"- {k} : {v}" for k, v in CAST.items()), looks="|".join(LOOKS),
+    gtxt = " ; ".join(g for g in gags if g)[:600] or "(aucun pour l'instant)"
+    systeme = SYSTEME.format(special=SPECIAL_DEMAIN if special else "", gags=gtxt, secondes=SECONDES, nb=NB, ton=TON, cast="\n".join(f"- {k} : {v}" for k, v in CAST.items()), looks="|".join(LOOKS),
                              exemple=json.dumps(EXEMPLE, ensure_ascii=False, indent=0))
     message = construire_prompt(titres); liens = {t["lien"] for t in titres}; derniere = None
     for _ in range(essais):
@@ -174,7 +193,8 @@ def ecrire_sketch(titres, essais=3):
     if sk is None: raise RuntimeError(f"Sketch invalide après {essais} essais : {derniere}")
     # deuxième passe : réécriture des blagues faibles (si elle échoue, on garde la première version)
     try:
-        brut = {k: sk[k] for k in ("sujet", "ecran", "invite_nom", "invite_role", "invite_look", "lieu_direct", "repliques", "bandeau", "gag", "legende", "hashtags", "sources")}
+        brut = {k: sk[k] for k in ("sujet", "ecran", "invite_nom", "invite_role", "invite_look", "lieu_direct", "titre_accroche", "question",
+                                   "running_gag", "repliques", "bandeau", "gag", "legende", "hashtags", "sources")}
         sk2 = _appel(client, systeme, [{"role": "user", "content": message}, {"role": "assistant", "content": json.dumps(brut, ensure_ascii=False)},
                                          {"role": "user", "content": DOCTEUR.format(sketch=json.dumps(brut, ensure_ascii=False, indent=0), secondes=SECONDES, nb=NB)}])
         sk2 = valider(sk2, liens)
