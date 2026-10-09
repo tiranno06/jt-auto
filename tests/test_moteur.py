@@ -80,6 +80,14 @@ class TestEcriture(unittest.TestCase):
         self.assertEqual(sk["decoupage"][1], {"scene": "direct", "repliques": [2], "lieu": "", "son": "", "duree": 0})
         self.assertEqual(sk["gag"]["replique"], 2)
 
+    def test_roles_et_repliques_tolerants(self):
+        sk = json.loads(json.dumps(SKETCH)); sk["invite_nom"] = "Aymeric Ponction"
+        sk["repliques"] = json.dumps([{"p": "Présentateur", "t": "Bonsoir."}, {"p": "Envoyée spéciale", "t": "Ici."},
+                                      {"p": "Aymeric Ponction", "t": "Je conteste."}, {"p": "INVITÉ", "t": "Encore."}])
+        v = ecrire.valider(sk, set())
+        self.assertEqual([r["p"] for r in v["repliques"]], ["presentateur", "envoyee", "invite", "invite"])
+        with self.assertRaisesRegex(ValueError, "champs reçus"): ecrire.valider({"sujet": "x"}, set())   # diagnostic dans le journal
+
     def test_sources_jamais_inventees(self):
         liens = {"https://www.lemonde.fr/politique/article/budget.html", "https://www.bfmtv.com/x/"}
         self.assertEqual(ecrire._sources(["http://lemonde.fr/politique/article/budget.html?utm=1", "https://invente.fr/faux", "Le Monde"], liens),
@@ -151,6 +159,20 @@ class TestMoteurHumour(unittest.TestCase):
             cands = [[article("Budget 2027 : les économies rejetées", "a", "L1"), article("Budget : les députés et les économies", "b", "L2")]] * 2
             self.assertEqual(ecrire.ecrire_sketch(cands)["fiche"]["note"], 86)    # variable vide : 3 réécritures par défaut, pas de plantage
         finally: os.environ.pop("MAX_REECRITURES")
+
+    def test_credit_epuise_arret_net(self):
+        faux = FauxClaude(); faux.notes = [60]
+        vrai = faux.create; n = {"ecritures": 0}
+        def create(**kw):
+            if kw.get("tools", [{}])[0].get("name") == "rendre_sketch":
+                n["ecritures"] += 1
+                if n["ecritures"] > 1: raise RuntimeError("Error code: 400 - Your credit balance is too low to access the Anthropic API.")
+            return vrai(**kw)
+        faux.create = create
+        sk = self._lancer(faux)
+        self.assertEqual(n["ecritures"], 2)                                   # pas d'acharnement : on s'arrête net
+        self.assertEqual(sk["fiche"]["note"], 60)                             # meilleure version gardée, marquée à retravailler
+        self.assertEqual(sk["fiche"]["decision"], "à retravailler")
 
     def test_recherche_web_indisponible(self):
         faux = FauxClaude(web_en_panne=True); sk = self._lancer(faux)

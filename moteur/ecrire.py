@@ -164,9 +164,10 @@ OUTIL_CHOIX = {"name": "choisir_sujet", "description": "Notes des candidats, suj
                                         "choix": {"type": "integer"}, "angle": {"type": "string"},
                                         "faits_verifies": {"type": "array", "items": {"type": "string"}}}, ["choix", "angle"])}
 OUTIL_NOTE = {"name": "noter_sketch", "description": "Note qualité sur 100 et critique.",
-              "input_schema": _schema({"originalite": {"type": "number"}, "punchlines": {"type": "number"}, "rythme": {"type": "number"},
+              "input_schema": _schema({"critique": {"type": "string", "minLength": 40, "description": "À écrire EN PREMIER : répliques faibles (numéro + pourquoi) et corrections précises."},
+                                       "originalite": {"type": "number"}, "punchlines": {"type": "number"}, "rythme": {"type": "number"},
                                        "pertinence": {"type": "number"}, "dialogues": {"type": "number"}, "visuel": {"type": "number"},
-                                       "chute": {"type": "number"}, "total": {"type": "number"}, "critique": {"type": "string"}}, ["total", "critique"])}
+                                       "chute": {"type": "number"}, "total": {"type": "number"}}, ["critique", "total"])}
 RECHERCHE_WEB = {"type": "web_search_20250305", "name": "web_search", "max_uses": 4}
 
 def _json(texte):
@@ -176,10 +177,27 @@ def _json(texte):
 
 def _court(s, n): return str(s or "").strip()[:n]
 
+def _role(p, sk):
+    """Rôle normalisé : accepte « Présentateur », « envoyée spéciale », le nom fictif de l'invité…"""
+    x = unicodedata.normalize("NFKD", str(p or "").lower()).encode("ascii", "ignore").decode()
+    for cle, motif in (("presentateur", "present"), ("envoyee", "envoy"), ("invite", "invit")):
+        if motif in x: return cle
+    nom = unicodedata.normalize("NFKD", str(sk.get("invite_nom") or "").lower()).encode("ascii", "ignore").decode()
+    return "invite" if nom and x and (x in nom or nom in x) else x
+
+def _liste(v):
+    if isinstance(v, str):                                                # tableau renvoyé sous forme de texte JSON
+        try: v = json.loads(v)
+        except Exception: return []
+    return v if isinstance(v, list) else []
+
 def valider(sk, liens):
     reps, attente = [], False
-    for r in sk.get("repliques", [])[:16]:
-        p = r.get("p"); t = _court(r.get("t"), 170)
+    if not isinstance(sk, dict): raise ValueError("réponse sans sketch")
+    brutes = _liste(sk.get("repliques") or sk.get("script") or sk.get("dialogues"))
+    for r in brutes[:16]:
+        if not isinstance(r, dict): continue
+        p = _role(r.get("p") or r.get("personnage") or r.get("role"), sk); t = _court(r.get("t") or r.get("texte") or r.get("replique"), 170)
         if p not in CAST or not t: continue
         x = {"p": p, "t": t}
         if r.get("d"): x["d"] = _court(r["d"], 260)
@@ -190,7 +208,9 @@ def valider(sk, liens):
         reps.append(x)
     if len(reps) > NB_MAX:                                   # trop long : on garde le début et la chute finale
         reps = reps[:NB_MAX - 1] + [reps[-1]]
-    if len(reps) < 4: raise ValueError(f"sketch trop court ({len(reps)} répliques)")
+    if len(reps) < 4:
+        vus = sorted({str((r or {}).get("p", "?"))[:20] for r in brutes if isinstance(r, dict)})[:5]
+        raise ValueError(f"sketch trop court ({len(reps)} répliques ; champs reçus : {', '.join(sorted(sk))[:120]} ; rôles : {vus})")
     if reps[0]["p"] != "presentateur": raise ValueError("le présentateur doit ouvrir")
     tags = [re.sub(r"[^a-z0-9]", "", unicodedata.normalize("NFKD", str(h).lower()).encode("ascii", "ignore").decode()) for h in sk.get("hashtags", [])]
     gag = None
@@ -302,6 +322,11 @@ def longueur(sk):
 def _bloc_candidat(k, titres):
     return f"[{k}] " + "\n    ".join(f"- [{t['source']}] {t['titre']} — {t['resume'][:220]} ({t['lien']})" for t in titres[:5])
 
+def _bloquant(e):
+    """Erreurs qui ne se règlent pas en réessayant : crédit épuisé, clé invalide, accès refusé."""
+    t = str(e).lower()
+    return any(m in t for m in ("credit balance", "authentication", "invalid x-api-key", "permission_error", "billing"))
+
 def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=()):
     """candidats : liste de sujets (chaque sujet = liste d'articles, le titre principal en premier) — ou une simple liste d'articles.
     Renvoie le sketch validé, avec "fiche" (livrables A-F, note qualité, décision)."""
@@ -342,7 +367,11 @@ def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=()):
                 brut = _appel(client, systeme, conv)
                 sk = valider(brut, liens); hors_sujet(sk, titres); n_mots = longueur(sk)
             except Exception as e:
-                derniere = e; print(f"  version {tour + 1} refusée : {str(e)[:150]}", flush=True)
+                derniere = e
+                if _bloquant(e):
+                    print(f"  ARRÊT : accès à l'API Claude impossible ({str(e)[:160]}). Action requise : recharger le crédit ou vérifier la clé ANTHROPIC_API_KEY.", flush=True)
+                    break
+                print(f"  version {tour + 1} refusée : {str(e)[:150]}", flush=True)
                 conv = conv + [{"role": "assistant", "content": json.dumps(brut if isinstance(brut, dict) else {}, ensure_ascii=False)[:6000] or "…"},
                                {"role": "user", "content": f"Version invalide ({e}). Corrige et rends le sketch complet avec l'outil rendre_sketch."}]
                 continue
@@ -370,6 +399,7 @@ def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=()):
             if note >= 80: return sk
             conv = conv + [{"role": "assistant", "content": json.dumps(brut, ensure_ascii=False)[:8000]},
                            {"role": "user", "content": REECRITURE.format(note=round(note), critique=critique[:2000])}]
+        if derniere is not None and _bloquant(derniere): break
         print(f"  sujet trop faible après réécritures{' : on essaie un autre sujet' if rang == 0 and len(ordre) > 1 else ''}", flush=True)
     if meilleur is None: raise RuntimeError(f"aucun sketch exploitable : {derniere}")
     print(f"  meilleure version retenue : {meilleur['fiche']['note']:.0f}/100 (à retravailler)", flush=True)
