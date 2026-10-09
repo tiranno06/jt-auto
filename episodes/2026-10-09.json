@@ -1,66 +1,67 @@
 {
- "titre": "PRIMAIRE BUGUÉE",
- "sujet": "PRIMAIRE BUGUÉE",
- "ecran": "PRIMAIRE 404",
- "invite_nom": "Gérard Pare-Feu",
- "invite_role": "Expert (fictif) en cyber-optimisme",
+ "titre": "COLÈRE LYCÉENNE",
+ "sujet": "COLÈRE LYCÉENNE",
+ "ecran": "LYCÉES",
+ "invite_nom": "Gérard Ralenti",
+ "invite_role": "Porte-parole (fictif) du ministère",
  "invite_look": "moustache",
- "lieu_direct": "QG primaire",
+ "lieu_direct": "Salle des profs, vide",
+ "titre_accroche": "3000 profs promis en urgence",
+ "question": "Selon vous, ils sont où, les trois mille remplaçants ? 👇",
+ "running_gag": "Les remplaçants promis laissent un post-it « Je suis en route » et n'arrivent jamais.",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "La primaire de la gauche a enfin trouvé ses sympathisants les plus motivés : des connexions factices. Martine, sur place ?"
-  },
-  {
-   "p": "envoyee",
-   "t": "Jean-Michel, c'est historique. Pour une fois, il y a la queue pour la gauche."
-  },
-  {
-   "p": "envoyee",
-   "t": "Seul problème : personne dans la queue n'existe.",
+   "t": "Le gouvernement promet 3000 profs remplaçants en urgence. Le premier cherche encore la salle.",
+   "d": "Le gouvernement promet trois mille profs remplaçants en urgence. Le premier cherche encore la salle.",
    "chute": true
   },
   {
    "p": "presentateur",
-   "t": "Gérard Pare-Feu, c'est grave ?"
+   "t": "Martine, vous êtes sur place ?"
+  },
+  {
+   "p": "envoyee",
+   "t": "Jean-Michel, trois mille casiers sont prêts. Dans chacun, un post-it : « Je suis en route. »",
+   "chute": true
+  },
+  {
+   "p": "presentateur",
+   "t": "Monsieur Ralenti, l'exécutif parle d'une nette décélération du mouvement ?"
   },
   {
    "p": "invite",
-   "t": "Au contraire. Des sympathisants qui reviennent chaque seconde sans jamais claquer la porte : on n'avait pas vu ça depuis longtemps.",
+   "t": "Absolument. Le mouvement ralentit. Les remplaçants aussi. Par solidarité.",
    "chute": true
   },
   {
-   "p": "envoyee",
-   "t": "Ça évolue, Jean-Michel. Les connexions factices viennent de se diviser en trois courants et réclament un congrès.",
-   "chute": true
-  },
-  {
-   "p": "presentateur",
-   "t": "Donc personne dans la queue n'existe… mais elle est déjà de gauche.",
+   "p": "invite",
+   "t": "Bonne nouvelle : le premier remplaçant a trouvé la salle. Elle est bloquée.",
    "chute": true,
    "attente": 0.7
   }
  ],
  "bandeau": [
-  "LES CONNEXIONS FACTICES RÉCLAMENT UN DÉBAT TÉLÉVISÉ",
-  "UN QUATRIÈME COURANT DE ROBOTS DÉPOSE UNE MOTION",
-  "UN ROBOT DEMANDE SA CARTE DE SYMPATHISANT",
-  "LA TOUCHE F5 ENTENDUE COMME TÉMOIN"
+  "LES REMPLAÇANTS DEMANDENT EUX-MÊMES UN REMPLAÇANT",
+  "LE GPS DU MINISTÈRE NE TROUVE PAS LA SALLE B12",
+  "PÉNURIE DE POST-IT DANS LES LYCÉES",
+  "L'EXÉCUTIF MESURE LA COLÈRE AVEC UN RADAR"
  ],
  "gag": {
-  "replique": 5,
-  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. A long queue of identical little grey robots waiting in front of a giant overheating computer screen suddenly splits into three angry groups, each robot crossing its arms and turning its back on the others, comedic, deadpan."
+  "replique": 2,
+  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. An empty school staff room with an endless wall of identical grey lockers, each one with the same small yellow sticky note on its door, a single dusty clock ticking on the wall, comedic, deadpan, no readable text."
  },
- "legende": "La primaire de la gauche a enfin la queue… mais personne dedans n'existe 🤖 Satire, personnages fictifs.",
+ "legende": "3000 profs remplaçants promis en urgence… le premier a enfin trouvé la salle. Ou presque. Satire, personnages fictifs.",
  "hashtags": [
-  "infoencaoutchouc",
-  "primaire",
-  "cyberattaque",
+  "lycee",
+  "education",
+  "profs",
   "satire",
   "humour",
-  "politique"
+  "actu",
+  "infoencaoutchouc"
  ],
  "sources": [
-  "https://www.lefigaro.fr/elections/presidentielles/primaires-gauche/primaire-de-la-gauche-la-plateforme-de-vote-subit-une-cyberattaque-a-son-ouverture-20261009"
+  "https://www.lefigaro.fr/actualite-france/en-direct-mobilisation-des-lyceens-retour-en-classe-ou-poursuite-des-blocages-l-incertitude-plane-sur-la-suite-du-mouvement-ce-vendredi-20261009"
  ]
 }
