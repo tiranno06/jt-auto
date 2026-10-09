@@ -2,28 +2,15 @@
 ✓ Created objects.
 ├── ✓ Uploaded /home/runner/work/jt-auto/jt-auto/moteur/voix_modal.py
 └── ✓ Created Function Voix.*.
-✓ Deployment skipped: no changes detected! ⏭️
+✓ App deployed in 5.201s! 🎉
 
 View Deployment: https://modal.com/apps/tubbiolo-francois/main/deployed/jt-voix
 code: 0
 === plan gag (Wan 2.2) ===
-Building image im-KR1rtl5iReWLu3QqbrNEro
-
-=> Step 0: FROM base
-
-=> Step 1: ENV HF_HOME=/cache/hf
-
-=> Step 2: ENV PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
-Saving image...
-Image saved, took 540.59ms
-
-Built image im-KR1rtl5iReWLu3QqbrNEro in 1.11s
-
-
 ✓ Created objects.
 ├── ✓ Uploaded /home/runner/work/jt-auto/jt-auto/moteur/video_modal.py
 └── ✓ Created Function Video.*.
-✓ App deployed in 3.123s! 🎉
+✓ Deployment skipped: no changes detected! ⏭️
 
 View Deployment: https://modal.com/apps/tubbiolo-francois/main/deployed/jt-video
 code: 0
