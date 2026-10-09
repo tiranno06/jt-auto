@@ -1,26 +1,45 @@
 Casting déjà fait.
-Sujet du jour (13 articles, 6 médias) : « 3000 professeurs sortis du chapeau : la troublante mobilisation express de remplaçants pour calmer la colère lycéenne »
+Sujet du jour (16 articles, 7 médias) : « Édouard Philippe, Gabriel Attal, Bruno Retailleau : quelles convergences et différences entre leurs projets ? »
+Atelier d'angles ignoré (pas de JSON)
 Script doctor : sketch amélioré
-Sketch : « 3000 REMPLAÇANTS », 6 répliques
+Sketch : « TROIS PROJETS », 6 répliques
 Casting des voix (sources : kyutai,zonos,chatterbox)…
-    moteur kyutai indisponible : Could not deserialize remote exception due to local error:
-Deserialization failed because the 'requests' module is not available in the local environment.
-This 
-    moteur kyutai indisponible : Could not deserialize remote exception due to local error:
-Deserialization failed because the 'requests' module is not available in the local environment.
-This 
-    moteur kyutai indisponible : Could not deserialize remote exception due to local error:
-Deserialization failed because the 'requests' module is not available in the local environment.
-This 
-    moteur kyutai indisponible : Could not deserialize remote exception due to local error:
-Deserialization failed because the 'requests' module is not available in the local environment.
-This 
-    moteur kyutai indisponible : Could not deserialize remote exception due to local error:
-Deserialization failed because the 'requests' module is not available in the local environment.
-This 
-    moteur kyutai indisponible : Could not deserialize remote exception due to local error:
-Deserialization failed because the 'requests' module is not available in the local environment.
-This 
-    moteur kyutai indisponible : Could not deserialize remote exception due to local error:
-Deserialization failed because the 'requests' module is not available in the local environment.
-This 
+    moteur zonos indisponible : Zonos : TimeoutError 
+    moteur zonos indisponible : Zonos en panne
+    moteur zonos indisponible : Zonos en panne
+  kyutai     cml-tts/fr/10087_11650_000028-0002.wav genre f f0   225 {'sim': 1.0, 'blanc': 0.14, 'debit': 0.83} OK score 4.01
+  kyutai     cml-tts/fr/10087_11650_000028-0002_enh genre f f0   208 {'sim': 1.0, 'blanc': 0.16, 'debit': 0.89} OK score 4.08
+  kyutai     cml-tts/fr/10177_10625_000134-0003.wav genre f f0   184 {'sim': 1.0, 'blanc': 0.14, 'debit': 0.74} OK score 3.90
+  kyutai     cml-tts/fr/10177_10625_000134-0003_enh genre f f0   184 {'sim': 1.0, 'blanc': 0.1, 'debit': 0.76} OK score 3.93
+  kyutai     cml-tts/fr/10179_11051_000005-0001.wav genre f f0   272 {'sim': 1.0, 'blanc': 0.08, 'debit': 0.77} OK score 3.94
+  kyutai     cml-tts/fr/10179_11051_000005-0001_enh genre f f0   269 {'sim': 1.0, 'blanc': 0.16, 'debit': 0.81} OK score 3.99
+  kyutai     cml-tts/fr/12080_11650_000047-0001.wav genre f f0   240 {'sim': 1.0, 'blanc': 0.12, 'debit': 0.78} OK score 3.95
+  kyutai     cml-tts/fr/12080_11650_000047-0001_enh genre f f0   226 {'sim': 1.0, 'blanc': 0.12, 'debit': 0.71} OK score 3.86
+  kyutai     cml-tts/fr/12205_11650_000004-0002.wav genre ? f0   168 {'sim': 1.0, 'blanc': 0.22, 'debit': 0.77} OK score 3.94
+  kyutai     cml-tts/fr/12205_11650_000004-0002_enh genre ? f0   170 {'sim': 1.0, 'blanc': 0.0, 'debit': 0.82} OK score 4.00
+  chatterbox presentateur                           genre h f0   130 {'sim': 1.0, 'blanc': 0.12, 'debit': 0.74} OK score 3.20
+  chatterbox invite                                 genre h f0    89 {'sim': 1.0, 'blanc': 0.12, 'debit': 0.72} OK score 3.17
+  chatterbox envoyee                                genre f f0   206 {'sim': 1.0, 'blanc': 0.16, 'debit': 0.66} OK score 3.08
+  -> presentateur : chatterbox:presentateur
+  -> invite : chatterbox:invite
+  -> envoyee : kyutai:cml-tts/fr/10087_11650_000028-0002_enhanced.wav, kyutai:cml-tts/fr/10087_11650_000028-0002.wav, kyutai:cml-tts/fr/10179_11051_000005-0001_enhanced.wav
+  voix 2 (envoyee, kyutai:cml-tts/fr/10087_11650_000028-, prise 1) {'sim': 0.62, 'blanc': 0.32, 'debit': 0.87} refaite
+  voix 5 (envoyee, kyutai:cml-tts/fr/10087_11650_000028-, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.9} OK
+  voix 2 (envoyee, kyutai:cml-tts/fr/10087_11650_000028-, prise 2) {'sim': 0.62, 'blanc': 0.0, 'debit': 0.87} refaite
+  voix 2 (envoyee, kyutai:cml-tts/fr/10087_11650_000028-, prise 3) {'sim': 0.67, 'blanc': 0.3, 'debit': 0.88} refaite
+  envoyee : la voix kyutai:cml-tts/fr/10087_11650_000028-0002_enhanced.wav échoue, passage à la voix de remplacement
+  voix 2 (envoyee, kyutai:cml-tts/fr/10087_11650_000028-, prise 1) {'sim': 0.77, 'blanc': 0.14, 'debit': 0.86} refaite
+  voix 5 (envoyee, kyutai:cml-tts/fr/10087_11650_000028-, prise 1) {'sim': 0.77, 'blanc': 0.0, 'debit': 0.73} refaite
+  voix 2 (envoyee, kyutai:cml-tts/fr/10087_11650_000028-, prise 2) {'sim': 0.8, 'blanc': 0.24, 'debit': 0.82} OK
+  voix 5 (envoyee, kyutai:cml-tts/fr/10087_11650_000028-, prise 2) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.76} OK
+  voix 3 (invite, chatterbox:invite, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.91} OK
+  voix 0 (presentateur, chatterbox:presentateur, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.75} OK
+  voix 1 (presentateur, chatterbox:presentateur, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.79} OK
+  voix 4 (presentateur, chatterbox:presentateur, prise 1) {'sim': 0.67, 'blanc': 0.0, 'debit': 1.67} refaite
+  voix 4 (presentateur, chatterbox:presentateur, prise 2) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.75} OK
+Voix : Chatterbox (MIT), voix Multilingual LibriSpeech (CC BY 4.0) + Kyutai TTS (CC BY 4.0), voix CML-TTS (CC BY 4.0)
+Plan gag IA : oui
+durée 20.0 s, 6 répliques, duplex=1, gag=2
+  image 0/599
+  image 300/599
+OK : sortie/2026-10-09_emission11.mp4 (20 s)

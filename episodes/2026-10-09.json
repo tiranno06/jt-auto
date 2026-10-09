@@ -1,67 +1,65 @@
 {
- "titre": "COMPTE FANTÔME",
- "sujet": "COMPTE FANTÔME",
- "ecran": "COMPTE FANTÔME",
- "invite_nom": "Gérard Démenti",
- "invite_role": "Expert (fictif) en comptes fantômes",
+ "titre": "TROIS PROJETS",
+ "sujet": "TROIS PROJETS",
+ "ecran": "7 DIFFÉRENCES",
+ "invite_nom": "Gérard Agrafeau",
+ "invite_role": "Expert (fictif) en programmes",
  "invite_look": "moustache",
- "lieu_direct": "Dans la corbeille Facebook",
- "titre_accroche": "Il fait tes fautes, mais ce n'est pas toi",
- "question": "Pur hasard ou jumeau numérique très doué en fautes ? 👇",
- "running_gag": "L'Inconnu qui fait exactement les mêmes fautes d'orthographe que les politiques, jusque dans leurs plaintes.",
+ "lieu_direct": "Dans la photocopieuse",
+ "titre_accroche": "Trouvez la différence entre 3 projets",
+ "question": "Vous trouvez la différence, vous ? 👇",
+ "running_gag": "La photocopieuse du QG se déclare candidate à chaque élection qu'elle a photocopiée.",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "Un compte Facebook fait les mêmes fautes qu'un chef de parti. Pur hasard, selon le chef de parti.",
+   "t": "Trois candidats. Trois projets. Un seul original.",
    "chute": true
   },
   {
    "p": "presentateur",
-   "t": "Martine ?"
+   "t": "Martine, vous êtes sur place ?"
   },
   {
    "p": "envoyee",
-   "t": "Jean-Michel, mêmes messages à quelques minutes d'écart. Mêmes fautes. Et son adresse mail.",
+   "t": "Jean-Michel, j'ai tout comparé. Retraites : pareil. Europe : pareil. L'agrafe : différente.",
    "chute": true
   },
   {
    "p": "invite",
-   "t": "Pur hasard. Et si tout a été effacé, c'est par politesse.",
+   "t": "Attention. L'agrafe bleue, c'est une vraie rupture.",
    "chute": true
   },
   {
    "p": "presentateur",
-   "t": "Et la plainte en diffamation ?"
+   "t": "Et qui a l'original ?"
   },
   {
-   "p": "invite",
-   "t": "Elle est prête. Avec les mêmes fautes.",
+   "p": "envoyee",
+   "t": "La photocopieuse. Elle se présente aussi.",
    "chute": true,
    "attente": 0.7
   }
  ],
  "bandeau": [
-  "UN INCONNU RECHERCHÉ POUR FAUTES D'ORTHOGRAPHE",
-  "LE BESCHERELLE CONVOQUÉ COMME TÉMOIN",
-  "FACEBOOK : LE MOT DE PASSE NIE TOUT LUI AUSSI",
-  "LES ACCENTS MANQUANTS TOUJOURS INTROUVABLES"
+  "UNE AGRAFE BLEUE CRÉE LA SURPRISE",
+  "LES TROIS PROJETS RÉCLAMENT UN TEST DE PATERNITÉ",
+  "LA TOUCHE COPIER EXIGE DES DROITS D'AUTEUR",
+  "LE BAC À PAPIER SE DIT ENCORE INDÉCIS"
  ],
  "gag": {
   "replique": 2,
-  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. A bored reporter stands inside a giant computer trash bin full of crumpled paper, holding up two identical glowing phone screens side by side, both covered with the same red squiggly underlines, comedic, deadpan."
+  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. A deadpan female reporter holds a magnifying glass over three identical thick documents lying side by side on a desk, each fastened with a different colored staple, red, blue and green, while a big office photocopier behind her spits out more identical copies."
  },
- "legende": "Mêmes messages, mêmes fautes, même adresse mail… mais pas le même compte. Le mystère s'épaissit. Satire, personnages fictifs.",
+ "legende": "Trois projets passés au crible. On a enfin trouvé la différence : l'agrafe. Satire, personnages fictifs.",
  "hashtags": [
+  "infoencaoutchouc",
   "satire",
   "humour",
-  "actu",
   "politique",
-  "facebook",
-  "infoencaoutchouc"
+  "fauxjt",
+  "actu"
  ],
  "sources": [
-  "https://www.liberation.fr/politique/jordan-bardella-accuse-dantisemitisme-mediapart-prouve-encore-que-le-compte-facebook-etait-bien-celui-du-president-du-rn-20261009_SZY3OXT2LBFMJFG5H3XNGXBO4M/",
-  "https://www.liberation.fr/checknews/ecrits-antisemites-contrairement-a-ce-quaffirme-jordan-bardella-un-compte-facebook-associe-a-un-de-ses-mails-personnels-existe-toujours-20261009_VRU6HCTBXNDTBIYGFG2LNWFR2Y/",
-  "https://www.bfmtv.com/politique/front-national/propos-antisemites-attribues-a-jordan-bardella-le-president-du-rn-va-porter-plainte-en-diffamation-apres-de-nouvelles-revelations-du-canard-enchaine_AD-202610090541.html"
+  "https://www.lefigaro.fr/elections/presidentielles/programmes/edouard-philippe-gabriel-attal-bruno-retailleau-quelles-convergences-et-quelles-differences-entre-leurs-projets-20261009"
  ]
 }

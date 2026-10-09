@@ -1,0 +1,49 @@
+{
+ "date": "2026-10-09",
+ "sources": "kyutai,zonos,chatterbox",
+ "roles": {
+  "presentateur": [
+   {
+    "moteur": "chatterbox",
+    "voix": "presentateur",
+    "genre": "h",
+    "role": "presentateur",
+    "f0": 130,
+    "score": 3.2
+   }
+  ],
+  "invite": [
+   {
+    "moteur": "chatterbox",
+    "voix": "invite",
+    "genre": "h",
+    "role": "invite",
+    "f0": 89,
+    "score": 3.17
+   }
+  ],
+  "envoyee": [
+   {
+    "moteur": "kyutai",
+    "voix": "cml-tts/fr/10087_11650_000028-0002_enhanced.wav",
+    "genre": "f",
+    "f0": 208,
+    "score": 4.08
+   },
+   {
+    "moteur": "kyutai",
+    "voix": "cml-tts/fr/10087_11650_000028-0002.wav",
+    "genre": "f",
+    "f0": 225,
+    "score": 4.01
+   },
+   {
+    "moteur": "kyutai",
+    "voix": "cml-tts/fr/10179_11051_000005-0001_enhanced.wav",
+    "genre": "f",
+    "f0": 269,
+    "score": 3.99
+   }
+  ]
+ }
+}
