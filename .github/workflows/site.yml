@@ -1,0 +1,43 @@
+name: Mettre à jour le site
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["moteur/site.py"]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: emission
+  cancel-in-progress: false
+
+jobs:
+  site:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment:
+      name: github-pages
+      url: ${{ steps.pages.outputs.page_url }}
+    env:
+      NOM_EMISSION: ${{ vars.NOM_EMISSION }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Installer ffmpeg et Pillow
+        run: sudo apt-get update -q && sudo apt-get install -y -q ffmpeg && pip install pillow
+      - name: Construire le site
+        run: python moteur/site.py
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - name: Mettre en ligne le site
+        id: pages
+        uses: actions/deploy-pages@v4
