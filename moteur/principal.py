@@ -41,9 +41,14 @@ def main():
         except Exception as e:
             print(f"Casting impossible ({e}) : on continuera avec la voix de secours.", flush=True)
     deja = {l for h in historique for l in h.get("sources", [])}
-    titres = actu.titres_recents(deja_vus=deja)
-    print(f"{len(titres)} titres politiques récents", flush=True)
-    if len(titres) < 3:
+    mots_recents = {m for h in historique[-3:] for m in h.get("mots", [])}
+    titres, info = actu.sujet_du_jour(deja_vus=deja, mots_recents=mots_recents)
+    if titres:
+        print(f"Sujet du jour ({info}) : « {titres[0]['titre']} »", flush=True)
+    else:
+        print(f"Pas de sujet dominant ({info}) : titres politiques récents", flush=True)
+        titres = actu.titres_recents(deja_vus=deja)
+    if len(titres) < 1:
         print("Pas assez d'actualité exploitable aujourd'hui : pas d'émission."); return
     sk = ecrire.ecrire_sketch(titres)
     print(f"Sketch : « {sk['sujet']} », {len(sk['repliques'])} répliques", flush=True)
@@ -68,7 +73,7 @@ def main():
     open(base + ".txt", "w", encoding="utf-8").write(legende + "\n\nSources :\n" + "\n".join(sk["sources"]) + "\n")
     os.makedirs("episodes", exist_ok=True)
     json.dump(sk, open(f"episodes/{jour}.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
-    historique.append(dict(date=jour, titre=sk["sujet"], sources=sk["sources"], voix=moteur, gag=bool(gag), duree=round(duree, 1),
+    historique.append(dict(date=jour, titre=sk["sujet"], sources=sk["sources"], mots=sorted(actu._mots(" ".join(t["titre"] for t in titres)))[:40], voix=moteur, gag=bool(gag), duree=round(duree, 1),
                            fichier=os.path.basename(base) + ".mp4", tag=f"emissions-{jour[:7]}", legende=legende, publie=None))
     json.dump(historique[-200:], open("episodes/historique.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     sortie = os.environ.get("GITHUB_OUTPUT")

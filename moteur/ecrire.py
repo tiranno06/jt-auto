@@ -39,12 +39,12 @@ EXEMPLE = {
     "gag": {"replique": 4, "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. Three tired office workers in grey suits dig frantically under the cushions of a big orange sofa in a fancy ministry office, coins and papers flying, comedic, deadpan."},
 }
 
-SYSTEME = """Tu es le meilleur auteur comique de France. Tu écris « L'info en caoutchouc », un faux JT satirique quotidien de {secondes} secondes pour TikTok, joué par des personnages 100 % FICTIFS dessinés en cartoon.
+SYSTEME = """Tu es une équipe d'auteurs comiques professionnels de la télévision française (le niveau des meilleures émissions satiriques). Tu écris « L'info en caoutchouc », un faux JT satirique quotidien de {secondes} secondes pour TikTok, joué par des personnages 100 % FICTIFS dessinés en cartoon.
 
 PERSONNAGES (clés autorisées pour "p") :
 {cast}
 
-LE FORMAT : UN SEUL sujet d'actualité, le plus drôle à traiter parmi les titres fournis. Le présentateur lance, puis direct avec l'envoyée sur place et/ou l'invité. {nb} répliques, courtes (une ou deux phrases).
+LE FORMAT : UN SEUL sujet d'actualité, celui qui est fourni, sans jamais s'en écarter. Le présentateur lance, puis direct avec l'envoyée sur place et/ou l'invité. {nb} répliques, courtes (une ou deux phrases).
 
 COMMENT FAIRE RIRE (méthode obligatoire) :
 - Trouve UNE idée comique forte (le « jeu ») et pousse-la jusqu'au bout : chaque réplique monte d'un cran dans l'absurde.
@@ -57,7 +57,7 @@ COMMENT FAIRE RIRE (méthode obligatoire) :
 RÈGLES ABSOLUES :
 1. Faits : n'utilise QUE les faits présents dans les titres fournis. Aucun chiffre, date ou événement réel inventé. Les exagérations doivent être évidemment absurdes (personne ne doit les croire vraies).
 2. Ne nomme AUCUNE personne réelle et n'attribue aucune citation à une personne réelle. Parle des institutions (« le gouvernement », « les députés », « un ministre », « Bercy »). Les noms de marques sont permis s'ils ne sont pas dénigrés.
-3. Aucune moquerie liée à l'origine, la religion, le genre, l'orientation, le handicap, l'âge ou l'apparence. Pas d'insulte, rien de sexuel, pas de violence.
+3. On ne rit jamais des victimes ni des drames. Aucune moquerie liée à l'origine, la religion, le genre, l'orientation, le handicap, l'âge ou l'apparence. Pas d'insulte, rien de sexuel, pas de violence.
 4. Aucune information pratique sur des élections et aucun appel à voter.
 
 FORMAT : rends le sketch avec l'outil rendre_sketch, avec exactement ces champs :
@@ -86,8 +86,11 @@ DOCTEUR = """Tu es maintenant « script doctor » pour une émission comique. Vo
 Garde exactement les mêmes faits et toutes les règles (aucune personne réelle, aucun fait inventé). Rends le sketch complet corrigé avec l'outil rendre_sketch, même format."""
 
 def construire_prompt(titres):
-    liste = "\n".join(f"- [{t['source']}] {t['titre']} — {t['resume'][:250]} ({t['lien']})" for t in titres)
-    return "TITRES POLITIQUES DES DERNIÈRES 36 HEURES :\n" + liste + "\n\nChoisis LE sujet le plus drôle à traiter et écris le sketch du jour."
+    liste = "\n".join(f"- [{t['source']}] {t['titre']} — {t['resume'][:300]} ({t['lien']})" for t in titres)
+    return ("LE SUJET DU JOUR — il fait en ce moment les gros titres de plusieurs médias. Voici tout ce qu'on sait :\n" + liste +
+            "\n\nÉcris le sketch UNIQUEMENT sur ce sujet précis : chaque réplique, chaque gag, chaque dépêche du bandeau et le plan gag doivent "
+            "s'y rapporter directement. Aucun autre sujet, aucune digression. Trouve l'angle le plus ironique et le plus absurde, "
+            "comme une équipe d'auteurs professionnels de la télévision.")
 
 def _json(texte):
     m = re.search(r"\{.*\}", texte, re.S)

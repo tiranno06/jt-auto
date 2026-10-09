@@ -94,7 +94,7 @@ En cas d'échec, GitHub t'envoie un e-mail ; le détail est dans l'onglet Action
 ## À savoir
 - **Satire et personnages fictifs** : la mention est incrustée dans chaque vidéo et dans la légende. Le robot ne nomme aucune personne réelle et s'interdit toute consigne de vote.
 - **Contenu IA** : la légende indique « Contenu généré par IA ». Si Buffer n'active pas automatiquement l'étiquette IA de TikTok, active une fois pour toutes l'option correspondante dans les réglages de ton compte TikTok si elle existe, ou passe par Upload-Post qui envoie l'étiquette officielle.
-- **Crédits** : voix issues de *Multilingual LibriSpeech* (CC BY 4.0), transformées ; synthèse Chatterbox (MIT) ; voix de secours Piper/SIWIS (CC BY 4.0) ; polices Poppins (SIL OFL). Les crédits sont ajoutés automatiquement à la légende.
+- **Crédits** : voix issues de *Multilingual LibriSpeech* (CC BY 4.0), transformées ; synthèse Chatterbox (MIT) ; voix de secours Piper/SIWIS (CC BY 4.0) ; polices Poppins (SIL OFL) ; générique et bruitages fabriqués à partir des échantillons d'orchestre VSCO 2 Community Edition (Versilian Studios, CC0) — voir `outils_sons/`. Les crédits sont ajoutés automatiquement à la légende.
 - **Coûts estimés** : GitHub gratuit ; Buffer gratuit ; Modal (voix + plan gag) normalement couvert par les 30 $ de crédits gratuits mensuels — surveille la page *Usage* de Modal les premiers jours, et mets `PLAN_GAG` à `0` si besoin ; Claude quelques euros par mois.
 
 ## Organisation

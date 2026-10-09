@@ -1,5 +1,6 @@
-"""Récupère les titres politiques récents dans des flux RSS de médias français."""
-import html, re, datetime, urllib.request
+"""Récupère l'actualité dans des flux RSS de médias français et repère LE sujet qui fait les gros titres
+(celui que le plus de médias différents traitent en ce moment)."""
+import html, re, datetime, unicodedata, urllib.request
 import xml.etree.ElementTree as ET
 from email.utils import parsedate_to_datetime
 
@@ -11,6 +12,24 @@ FLUX = [
     "https://www.lexpress.fr/arc/outboundfeeds/rss/politique.xml",
     "https://www.bfmtv.com/rss/politique/",
 ]
+# flux « à la une » : servent à mesurer ce qui fait les gros titres
+UNES = [
+    "https://www.franceinfo.fr/titres.rss",
+    "https://www.lemonde.fr/rss/une.xml",
+    "https://www.lefigaro.fr/rss/figaro_actualites.xml",
+    "https://www.20minutes.fr/feeds/rss-une.xml",
+    "https://www.bfmtv.com/rss/news-24-7/",
+    "https://www.lexpress.fr/arc/outboundfeeds/rss/alaune.xml",
+    "https://www.liberation.fr/arc/outboundfeeds/rss-all/?outputType=xml",
+]
+# sujets dont on ne rit pas (drames, victimes)
+DRAMES = re.compile(r"\b(mort|morts|morte|décès|décédé|tué|tués|tuée|meurtre|assassin|attentat|terroris|viol|victime|victimes|"
+                    r"otage|massacre|bombard|guerre|blessé|blessés|noyé|incendie|crash|deuil|obsèques|pédo|agression|féminicide|suicide)", re.I)
+VIDES = set("""le la les un une des du de d l au aux et ou en dans sur sous pour par avec sans ce cet cette ces son sa ses leur leurs qui que quoi
+dont est sont a ont été être avoir fait faire plus moins très tout tous toute toutes après avant contre entre chez comme mais donc or ni car
+il elle ils elles on nous vous je tu se s y ne pas n quand comment pourquoi selon face depuis vers lors ainsi aussi encore déjà va vont peut
+doit veut dit annonce annoncé nouveau nouvelle nouveaux nouvelles premier première deux trois ans an jour jours semaine mois heure heures
+france français française françaises français paris live direct vidéo video info infos actu actualité ce qu il faut savoir""".split())
 
 def _texte(x):
     x = html.unescape(re.sub(r"<[^>]+>", " ", x or ""))
@@ -53,3 +72,40 @@ def titres_recents(heures=36, deja_vus=(), maxi=30):
         if cle in vus or it["lien"] in deja_vus: continue
         vus.add(cle); recents.append(it)
     return recents[:maxi]
+
+
+def _mots(t):
+    t = unicodedata.normalize("NFKD", t.lower()).encode("ascii", "ignore").decode()
+    return {m for m in re.findall(r"[a-z0-9]{4,}", t) if m not in VIDES and not m.isdigit()}
+
+def sujet_du_jour(heures=24, deja_vus=(), mots_recents=()):
+    """Regroupe les titres par sujet (mots-clés communs) et renvoie le sujet traité par le plus de médias différents.
+    Renvoie (titres du sujet, description) ou (None, raison)."""
+    maintenant = datetime.datetime.now(datetime.timezone.utc); tous = []
+    for url in FLUX + UNES:
+        try: tous += lire_flux(url)
+        except Exception as e: print(f"  flux ignoré {url} : {e}", flush=True)
+    items, vus = [], set()
+    for it in tous:
+        if it["date"] and (maintenant - it["date"]).total_seconds() > heures * 3600: continue
+        cle = re.sub(r"\W+", "", it["titre"].lower())[:60]
+        if cle in vus or it["lien"] in deja_vus or DRAMES.search(it["titre"] + " " + it["resume"][:200]): continue
+        vus.add(cle); it["mots"] = _mots(it["titre"] + " " + it["resume"][:160]); items.append(it)
+    if len(items) < 3: return None, "pas assez de titres"
+    groupes = []                                                          # regroupement simple : au moins 2 mots-clés en commun
+    for it in items:
+        meilleur = max(groupes, key=lambda g: len(g["mots"] & it["mots"]), default=None)
+        if meilleur and len(meilleur["mots"] & it["mots"]) >= 2:
+            meilleur["items"].append(it); meilleur["mots"] |= it["mots"]
+        else:
+            groupes.append({"items": [it], "mots": set(it["mots"])})
+    recents = set(mots_recents)
+    def score(g):
+        sources = {i["source"] for i in g["items"]}
+        frais = sum(1 for i in g["items"] if i["date"] and (maintenant - i["date"]).total_seconds() < 12 * 3600)
+        deja = len(g["mots"] & recents) >= 4                                 # sujet déjà traité ces derniers jours
+        return (len(sources) * 3 + len(g["items"]) + frais) * (0.3 if deja else 1)
+    groupes.sort(key=score, reverse=True)
+    g = groupes[0]; sel = sorted(g["items"], key=lambda i: i["date"] or maintenant, reverse=True)[:8]
+    nb = len({i["source"] for i in g["items"]})
+    return sel, f"{len(g['items'])} articles, {nb} médias"

@@ -61,6 +61,132 @@ def pop(a, k):
 
 def rgba(img): return np.array(img).astype(np.float32)
 
+# ------------------------------------------------------------------ sous-titres calés sur la voix
+def _syll(m):
+    return max(1, len(re.findall(r"[aeiouyàâäéèêëîïôöùûüœæ]+", m.lower())) + 1.5 * len(re.findall(r"\d", m)))
+
+def minutage(texte, a, t0):
+    """Horaires des groupes de mots, calés sur la voix réelle : les silences ne reçoivent aucun mot,
+    et chaque fin de phrase (ponctuation) est accrochée à la pause correspondante dans l'audio."""
+    gs = groupes(texte); poids = np.array([sum(_syll(m) for m in g.split()) for g in gs], float)
+    hop = int(0.01 * SR); nfr = max(1, len(a) // hop)
+    e = np.array([np.sqrt(np.mean(a[k * hop:(k + 1) * hop] ** 2)) for k in range(nfr)])
+    seuil = 0.1 * (np.percentile(e, 95) + 1e-9); v = e > seuil
+    if v.sum() < 5: v[:] = True
+    cv = np.cumsum(v); V = cv[-1]
+    def temps(frac, debut):
+        k = int(np.searchsorted(cv, frac * V + (1 if debut else 0))); return min(k, nfr - 1) * 0.01
+    pauses, k = [], 0                                                       # silences d'au moins 0,12 s à l'intérieur de la réplique
+    premier, dernier = int(np.argmax(v)), nfr - int(np.argmax(v[::-1]))
+    while k < nfr:
+        if not v[k] and premier < k < dernier:
+            j = k
+            while j < nfr and not v[j]: j += 1
+            if j - k >= 12: pauses.append((k * 0.01, j * 0.01))
+            k = j
+        else: k += 1
+    c = np.concatenate([[0], np.cumsum(poids) / poids.sum()])
+    deb = [temps(c[k], True) for k in range(len(gs))]; fin = [temps(c[k + 1], False) for k in range(len(gs))]
+    for k in range(len(gs) - 1):
+        if re.search(r"[.,:;!?…]$", gs[k]) and pauses:
+            p = min(pauses, key=lambda x: abs((x[0] + x[1]) / 2 - fin[k]))
+            if abs((p[0] + p[1]) / 2 - fin[k]) < 0.45: fin[k], deb[k + 1] = p[0], p[1]
+    for k in range(1, len(gs)): deb[k] = max(deb[k], deb[k - 1] + 0.05)
+    return [(g, t0 + deb[k], t0 + max(fin[k], deb[k] + 0.12)) for k, g in enumerate(gs)]
+
+# ------------------------------------------------------------------ sons (orchestre réel, CC0) et générique
+SONS = os.path.join(ICI, "..", "sons"); SRM = 44100; INTRO = 5.0
+def son(nom):
+    p = os.path.join(SONS, nom + ".wav")
+    if not os.path.exists(p): return np.zeros((1, 2))
+    with wave.open(p) as w:
+        x = np.frombuffer(w.readframes(w.getnframes()), np.int16).astype(np.float32) / 32768
+        return x.reshape(-1, w.getnchannels()) if w.getnchannels() == 2 else np.repeat(x[:, None], 2, 1)
+
+def vers_mix(a):
+    """Voix 22 050 Hz mono → 44 100 Hz stéréo."""
+    from scipy.signal import resample_poly
+    b = resample_poly(a, 2, 1).astype(np.float32); return np.stack([b, b], 1)
+
+def generique_images():
+    """Prépare les calques du générique (globe, titre, date)."""
+    import datetime
+    from zoneinfo import ZoneInfo
+    J = ["LUNDI", "MARDI", "MERCREDI", "JEUDI", "VENDREDI", "SAMEDI", "DIMANCHE"]
+    M = ["JANVIER", "FÉVRIER", "MARS", "AVRIL", "MAI", "JUIN", "JUILLET", "AOÛT", "SEPTEMBRE", "OCTOBRE", "NOVEMBRE", "DÉCEMBRE"]
+    d = datetime.datetime.now(ZoneInfo("Europe/Paris")).date(); date = f"{J[d.weekday()]} {d.day} {M[d.month - 1]} {d.year}"
+    yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
+    fond = np.zeros((H, W, 3), np.float32); k = (yy / H)[..., None]
+    fond[:] = (8, 14, 46) * (1 - k) + np.array((2, 4, 16)) * k
+    halo = np.exp(-(((xx - W / 2) / 520) ** 2 + ((yy - 860) / 520) ** 2))[..., None] * np.array((40, 80, 200), np.float32)
+    fond += halo
+    img = Image.new("RGBA", (W, 520), (0, 0, 0, 0)); dr = ImageDraw.Draw(img)
+    f1, f2 = ImageFont.truetype(FB, 96), ImageFont.truetype(FB, 120)
+    l1, l2 = "L'INFO EN", "CAOUTCHOUC"
+    if NOM.upper() != "L'INFO EN CAOUTCHOUC":
+        mots = NOM.upper().split(); l1, l2 = " ".join(mots[:len(mots) // 2]), " ".join(mots[len(mots) // 2:])
+    while dr.textlength(l2, font=f2) > W - 120 and f2.size > 60: f2 = ImageFont.truetype(FB, f2.size - 6)
+    dr.rounded_rectangle((60, 120, W - 60, 440), 30, fill=(12, 20, 60, 235), outline=(255, 214, 40, 255), width=6)
+    dr.text(((W - dr.textlength(l1, font=f1)) / 2, 140), l1, font=f1, fill=(255, 255, 255))
+    dr.text(((W - dr.textlength(l2, font=f2)) / 2, 260), l2, font=f2, fill=(255, 214, 40), stroke_width=4, stroke_fill=(140, 20, 30))
+    dr.rounded_rectangle((W / 2 - 80, 20, W / 2 + 80, 110), 22, fill=(220, 35, 45, 255)); fj = ImageFont.truetype(FB, 70)
+    dr.text(((W - dr.textlength("JT", font=fj)) / 2, 22), "JT", font=fj, fill=(255, 255, 255))
+    titre = np.array(img).astype(np.float32)
+    im2 = Image.new("RGBA", (W, 130), (0, 0, 0, 0)); d2 = ImageDraw.Draw(im2); f3, f4 = ImageFont.truetype(FB, 44), ImageFont.truetype(FM, 30)
+    d2.text(((W - d2.textlength(date, font=f3)) / 2, 0), date, font=f3, fill=(255, 255, 255))
+    t4 = "ÉDITION SATIRIQUE · PERSONNAGES FICTIFS"; d2.text(((W - d2.textlength(t4, font=f4)) / 2, 70), t4, font=f4, fill=(160, 180, 230))
+    return fond, titre, np.array(im2).astype(np.float32)
+
+def globe(fr, tm, cx, cy, R, alpha):
+    """Globe terrestre en fil de fer qui tourne (méridiens et parallèles)."""
+    calque = np.zeros_like(fr); rot = tm * 0.9; inc = 0.38
+    for lon in np.linspace(0, np.pi, 12, endpoint=False):
+        th = np.linspace(-np.pi / 2, np.pi / 2, 60); x = np.cos(th) * np.cos(lon + rot); z = np.cos(th) * np.sin(lon + rot); y = np.sin(th)
+        for sgn in (1, -1):
+            X, Z = sgn * x, sgn * z; Y2 = y * np.cos(inc) - Z * np.sin(inc); Z2 = y * np.sin(inc) + Z * np.cos(inc)
+            pts = np.stack([cx + R * X, cy - R * Y2], 1).astype(np.int32); avant = Z2.mean() > 0
+            cv2.polylines(calque, [pts], False, (90, 170, 255) if avant else (35, 60, 120), 3 if avant else 2, cv2.LINE_AA)
+    for lat in np.linspace(-1.2, 1.2, 7):
+        ph_ = np.linspace(0, 2 * np.pi, 90); x = np.cos(lat) * np.cos(ph_); z = np.cos(lat) * np.sin(ph_); y = np.full_like(ph_, np.sin(lat))
+        Y2 = y * np.cos(inc) - z * np.sin(inc); Z2 = y * np.sin(inc) + z * np.cos(inc)
+        pts = np.stack([cx + R * x, cy - R * Y2], 1).astype(np.int32)
+        cv2.polylines(calque, [pts], True, (60, 120, 210), 2, cv2.LINE_AA)
+    cv2.circle(calque, (int(cx), int(cy)), int(R), (120, 200, 255), 4, cv2.LINE_AA)
+    flou = cv2.resize(cv2.GaussianBlur(cv2.resize(calque, (W // 4, H // 4), interpolation=cv2.INTER_AREA), (0, 0), 2.5), (W, H))
+    fr += (calque + flou * 1.2) * alpha
+
+def image_generique(tm, G):
+    """Générique de 5 s : globe et faisceaux, impact du titre (1,25 s), date (2,4 s), plongée vers le plateau."""
+    fond, titre, date = G
+    fr = fond.copy(); zoom = 1 + 0.05 * tm / INTRO
+    cal = np.zeros((H // 8, W // 8, 3), np.float32)                        # faisceaux lumineux qui balaient (calculés en petit)
+    for k in range(5):
+        ang = -1.2 + k * 0.55 + 0.25 * np.sin(tm * 1.3 + k)
+        p0 = (W // 16, (H + 100) // 8); p1 = (int((W / 2 + 2600 * np.sin(ang)) / 8), int((H + 100 - 2600 * np.cos(ang)) / 8))
+        cv2.line(cal, p0, p1, (60, 110, 255), 11, cv2.LINE_AA)
+    fr += cv2.resize(cv2.GaussianBlur(cal, (0, 0), 5), (W, H), interpolation=cv2.INTER_LINEAR) * 0.25
+    globe(fr, tm, W / 2, 900, 330 * zoom, min(1, tm / 0.6))
+    for k in range(14):                                                     # traînées horizontales
+        y = (k * 137 + tm * (600 + 50 * k)) % H; x = (k * 311 + tm * 900) % (W + 600) - 300
+        cv2.line(fr, (int(x), int(y)), (int(x + 260), int(y)), (120, 170, 255), 2, cv2.LINE_AA)
+    if tm >= 1.25:
+        u = (tm - 1.25) / 0.35; s = 1.0 if u >= 1 else 1 + 0.9 * (1 - u) ** 2 - 0.12 * np.sin(u * np.pi)
+        t2 = cv2.resize(titre, (int(W * s), int(titre.shape[0] * s)))
+        t2[..., 3] *= min(1, u * 3) if u < 1 else 1
+        poser(fr, t2, (W - t2.shape[1]) / 2, 330 - (t2.shape[0] - titre.shape[0]) / 2)
+        if 0.3 < tm - 1.25 < 1.6:                                           # reflet qui traverse le titre
+            x = int(-200 + (tm - 1.55) / 1.3 * (W + 400)); cal = np.zeros((H // 4, W // 4, 3), np.float32)
+            cv2.line(cal, (x // 4, 105), ((x + 160) // 4, 200), (255, 255, 255), 12, cv2.LINE_AA)
+            fr += cv2.resize(cv2.GaussianBlur(cal, (0, 0), 3.5), (W, H)) * 0.35
+    if tm >= 2.41:
+        u = min(1, (tm - 2.41) / 0.4); d = date.copy(); d[..., 3] *= u; poser(fr, d, 0, 900 + 260 + 40 * (1 - u))
+    flash = max(0.0, 1 - abs(tm - 1.25) / 0.12) * 0.8 + max(0.0, (tm - (INTRO - 0.25)) / 0.25) * 1.0
+    if tm > INTRO - 0.6:                                                    # plongée finale
+        z = 1 + ((tm - (INTRO - 0.6)) / 0.6) ** 2 * 0.6; M = np.float32([[z, 0, W / 2 - z * W / 2], [0, z, 700 - z * 700]])
+        fr = cv2.warpAffine(fr, M, (W, H), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REPLICATE)
+    if flash > 0: fr = fr * (1 - min(1, flash)) + 255 * min(1, flash)
+    return fr
+
 # ------------------------------------------------------------------ habillage
 def entete(sujet):
     img = Image.new("RGBA", (W, 150), (0, 0, 0, 0)); d = ImageDraw.Draw(img); f = ImageFont.truetype(FB, 48)
@@ -109,32 +235,6 @@ def salle(a, duree=0.7, mix=0.16, graine=3):
     wet = _fft_conv(a, ir); b = np.convolve(a, [0.25, 0.5, 0.25], "same")
     return (b + wet * mix * np.sqrt(np.sum(a ** 2) / max(np.sum(wet ** 2), 1e-9))).astype(np.float32)
 
-def jingle():
-    """Générique de JT : accord de cuivres synthétiques + timbale + cloche."""
-    t = np.arange(int(2.2 * SR)) / SR; out = np.zeros_like(t)
-    def cuivre(f, deb, dur, g):
-        m = (t >= deb) & (t < deb + dur); u = t[m] - deb
-        env = np.minimum(1, u / 0.03) * np.exp(-u * 1.6)
-        s = sum(np.sin(2 * np.pi * f * k * u) / k ** 1.3 for k in range(1, 9))
-        out[m] += s * env * g
-    for deb, acc in ((0.0, (392, 494, 587)), (0.16, (392, 494, 587)), (0.32, (523, 659, 784))):
-        for f in acc: cuivre(f, deb, 1.6 if deb > 0.3 else 0.14, 0.035)
-    tim = np.sin(2 * np.pi * (70 + 40 * np.exp(-t * 20)) * t) * np.exp(-t * 3.5) * 0.25
-    clo = np.sin(2 * np.pi * 1568 * t) * np.exp(-t * 3) * 0.04 * (t > 0.32)
-    return out + tim + clo
-
-def lit_musical(n):
-    """Nappe discrète de fond de JT (tic-tac + accord tenu)."""
-    t = np.arange(n) / SR; tic = np.zeros(n); per = SR // 2
-    clic = np.random.default_rng(5).normal(0, 1, 400) * np.exp(-np.arange(400) / 60)
-    for s in range(0, n - 400, per): tic[s:s + 400] += clic * (0.03 if (s // per) % 2 else 0.018)
-    nappe = sum(np.sin(2 * np.pi * f * t) for f in (110, 164.8, 220)) * 0.012 * (0.8 + 0.2 * np.sin(2 * np.pi * 0.1 * t))
-    return tic + nappe
-
-def bruit_woosh(graine=4):
-    n = int(0.28 * SR); w = np.random.default_rng(graine).normal(0, 1, n); w = np.convolve(w, np.ones(24) / 24, "same")
-    return w * np.sin(np.linspace(0, np.pi, n)) ** 2 * 0.12
-
 # ------------------------------------------------------------------ rendu
 def rendre(sk, sortie, audios, gag=None, apercu=False):
     tmp = tempfile.mkdtemp(); rng = np.random.default_rng(5)
@@ -150,16 +250,15 @@ def rendre(sk, sortie, audios, gag=None, apercu=False):
             dv = c["devant"].astype(np.float32); y = np.where(dv[..., 3].max(1) > 0)[0].min(); c["dv"] = (dv[y:], y)
         c["band"] = bandeau_nom(c)
     # ---- chronologie
-    t = 0.2; ph = []; prev = None
+    t = INTRO + 0.15; ph = []; prev = None
     for i, (r, a) in enumerate(zip(reps, audios)):
         niv, lv = enveloppe(a); dur = len(a) / SR
-        gs = groupes(r["t"]); poids = np.array([len(g) + 3 for g in gs], float); bo = np.concatenate([[0], np.cumsum(poids) / poids.sum()])
         t0 = t; att = float(r.get("attente", 0)); t += att
         q = dict(i=i, p=r["p"], deb=t, att=att, fin=t + dur, audio=a, niv=niv, lv=lv, chute=bool(r.get("chute")),
-                 groupes=[(g, t + bo[k] * dur, t + bo[k + 1] * dur) for k, g in enumerate(gs)])
+                 groupes=minutage(r["t"], a, t))
         # début du plan : coupe vers celui qui parle ; après une vanne, on coupe tôt sur la réaction (visage impassible)
         if r["p"] != prev:
-            q["plan"] = (ph[-1]["fin"] + 0.22) if (ph and ph[-1]["chute"]) else max(0, t0 - 0.12)
+            q["plan"] = (ph[-1]["fin"] + 0.22) if (ph and ph[-1]["chute"]) else max(INTRO, t0 - 0.12)
             q["reaction"] = bool(ph and ph[-1]["chute"])
         else:
             q["plan"] = None
@@ -195,25 +294,34 @@ def rendre(sk, sortie, audios, gag=None, apercu=False):
         gag_i = None
     print(f"durée {total:.1f} s, {len(ph)} répliques, duplex={duplex}, gag={gag_i}", flush=True)
 
-    # ---- son
-    n = int(SR * (total + 1)); voixm = np.zeros(n)
+    # ---- son (44,1 kHz stéréo) : voix, générique, nappe, bruitages d'orchestre réels
+    n = int(SRM * (total + 1)); voixm = np.zeros((n, 2))
     for q in ph:
-        a = salle(q["audio"]) if q["p"] == "envoyee" else q["audio"]; s = int(q["deb"] * SR); voixm[s:s + len(a)] += a[:n - s]
-    env = np.convolve(np.abs(voixm), np.ones(int(0.15 * SR)) / int(0.15 * SR), "same"); env = np.clip(env / (np.percentile(env, 95) + 1e-6), 0, 1)
-    mix = voixm + lit_musical(n) * (1 - 0.65 * env)
-    jg = jingle(); mix[:len(jg)] += jg * 0.8
+        a = vers_mix(salle(q["audio"]) if q["p"] == "envoyee" else q["audio"]); s0 = int(q["deb"] * SRM); voixm[s0:s0 + len(a)] += a[:n - s0]
+    m1 = np.abs(voixm[:, 0]); k = int(0.2 * SRM)
+    env = np.convolve(m1, np.ones(k) / k, "same"); env = np.clip(env / (np.percentile(env[env > 1e-4], 90) + 1e-6) if (env > 1e-4).any() else env, 0, 1)
+    duck = (1 - 0.8 * env)[:, None]                                         # musique et bruitages s'effacent sous la voix
+    fond = np.zeros((n, 2)); nap = son("nappe")
+    if len(nap) > 10:
+        for s0 in range(int(INTRO * SRM) - int(0.3 * SRM), n, len(nap) - int(0.4 * SRM)):
+            e = min(n, s0 + len(nap)); fond[s0:e] += nap[:e - s0] * 0.16
+    def ajoute(nom, t, g):
+        x = son(nom); s0 = int(t * SRM); e = min(n, s0 + len(x))
+        if e > s0: fond[s0:e] += x[:e - s0] * g
+    chutes = [q for q in ph if q["chute"]]; cycle = ["xylo_descente", "rimshot", "trombone_triste"]
+    for j, q in enumerate(chutes):
+        if q is ph[-1]: ajoute("rimshot", q["fin"] + 0.02, 0.9)
+        else: ajoute(cycle[j % len(cycle)], q["fin"] + 0.02, 0.7 if cycle[j % len(cycle)] != "trombone_triste" else 0.5)
     for q in ph:
-        if q["plan"] is not None and q["i"] > 0 and (q["p"] == "envoyee" or q["i"] == gag_i):
-            w = bruit_woosh(q["i"]); s = int(q["debplan"] * SR); mix[s:s + len(w)] += w
-    th = np.arange(int(0.5 * SR)) / SR
-    hit = np.sin(2 * np.pi * 62 * th) * np.exp(-th * 8) * 0.2 + np.random.default_rng(2).normal(0, 1, len(th)) * np.exp(-th * 45) * 0.04
-    for q in ph:
-        if q["chute"]: s = int((q["fin"] + 0.03) * SR); mix[s:s + len(hit)] += hit[:n - s]
+        if q["plan"] is not None and q["i"] > 0 and (q["p"] == "envoyee" or q["i"] == gag_i): ajoute("woosh", q["debplan"] - 0.12, 0.6)
+        if q["i"] == gag_i: ajoute("reconstitution", q["debplan"], 0.6)
+    mix = voixm + fond * duck
+    ig = son("intro"); mix[:min(n, len(ig))] += ig[:n] * 0.95
     mix = np.clip(mix / max(1.0, np.abs(mix).max() / 0.95), -0.99, 0.99)
     brut = f"{tmp}/mix.wav"; wav = f"{tmp}/mix_norm.wav"
     with wave.open(brut, "wb") as w:
-        w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes((mix * 32767).astype(np.int16).tobytes())
-    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", brut, "-af", "loudnorm=I=-14:TP=-1.5:LRA=11", "-ar", "48000", wav], check=True)
+        w.setnchannels(2); w.setsampwidth(2); w.setframerate(SRM); w.writeframes((mix * 32767).astype(np.int16).tobytes())
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", brut, "-af", "loudnorm=I=-14:TP=-1.5:LRA=11", "-ar", "48000", "-ac", "2", wav], check=True)
 
     # ---- calques
     ENT = entete(sk.get("sujet", "L'ACTU")); DIRECT = etiquette("DIRECT", (220, 35, 45, 240), point=True)
@@ -249,8 +357,10 @@ def rendre(sk, sortie, audios, gag=None, apercu=False):
         M = np.float32([[z, 0, cx - z * cx + dx], [0, z, cy - z * cy + dy]])
         return cv2.warpAffine(fr, M, (W, H), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REPLICATE)
 
+    GEN = generique_images()
     def image(fi):
         tm = fi / FPS
+        if tm < INTRO: return np.clip(image_generique(tm, GEN), 0, 255).astype(np.uint8)
         q = next((x for x in reversed(ph) if x["debplan"] <= tm), ph[0])
         # zoom : petit punch-in à l'ouverture du plan, lent zoom pendant un silence, zoom sec sur la vanne
         u0 = min(1, (tm - q["debplan"]) / 0.25); z = 0.05 * (1 - u0) ** 2 + 0.01 * (tm - q["debplan"]) / 6
@@ -287,7 +397,7 @@ def rendre(sk, sortie, audios, gag=None, apercu=False):
         # étalonnage : vignettage + léger contraste + grain
         fr = (fr * 1.05 - 6) * VIG + GRAIN[fi % 4]
         # habillage
-        e = ENT if tm > 0.35 else ENT[int(150 * (1 - tm / 0.35) ** 2):]
+        e = ENT if tm > INTRO + 0.35 else ENT[int(150 * (1 - (tm - INTRO) / 0.35) ** 2):]
         poser(fr, e, 0, HEAD_Y)
         if q["i"] != gag_i:
             ox = int(tm * 150) % TICK.shape[1]
