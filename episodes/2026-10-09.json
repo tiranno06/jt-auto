@@ -1,87 +1,83 @@
 {
- "titre": "PROFS REMPLAÇANTS",
- "sujet": "PROFS REMPLAÇANTS",
- "ecran": "3000 PROFS",
- "invite_nom": "Gérard Tiroir",
- "invite_role": "Conseiller (fictif) Éducation",
+ "titre": "PRIMAIRE PIRATÉE",
+ "sujet": "PRIMAIRE PIRATÉE",
+ "ecran": "CYBERATTAQUE",
+ "invite_nom": "Gérard Ralenti",
+ "invite_role": "Porte-parole (fictif) de la primaire",
  "invite_look": "moustache",
- "lieu_direct": "Ministère",
+ "lieu_direct": "Siège",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "Le ministre a retrouvé 3 000 professeurs sans aucun élève. Il promet de les affecter en 12 à 24 heures. Martine ?",
-   "d": "Le ministre a retrouvé trois mille professeurs sans aucun élève. Il promet de les affecter en douze à vingt-quatre heures. Martine ?"
+   "t": "La primaire de la gauche a été cyberattaquée dès l'ouverture du vote. Martine, quel est le bilan ?"
   },
   {
    "p": "envoyee",
-   "t": "Jean-Michel, ils sont là, en rang dans un couloir du ministère. Certains ont encore l'étiquette du prix sur leur cartable."
-  },
-  {
-   "p": "presentateur",
-   "t": "Depuis quand attendent-ils ?"
+   "t": "Aucune coupure, Jean-Michel. Juste un « ralentissement »."
   },
   {
    "p": "envoyee",
-   "t": "Depuis le concours. L'un d'eux m'a demandé si la rentrée avait eu lieu. Je n'ai pas osé répondre.",
-   "chute": true
-  },
-  {
-   "p": "presentateur",
-   "t": "Avec nous, un conseiller du ministère. Comment perd-on trois mille professeurs ?"
-  },
-  {
-   "p": "invite",
-   "t": "On ne les a pas perdus. On les a rangés. C'est de l'anticipation pédagogique."
-  },
-  {
-   "p": "presentateur",
-   "t": "Rangés où ?"
-  },
-  {
-   "p": "invite",
-   "t": "Dans un endroit tellement sûr que personne ne le retrouve. Surtout nous.",
+   "t": "À gauche, on appelle ça le fonctionnement normal.",
    "chute": true
   },
   {
    "p": "envoyee",
-   "t": "Le ministère assure qu'ils sont en train d'être contactés. Un stagiaire les appelle un par un, avec un téléphone à cadran. Il en est à Alain.",
+   "t": "La plateforme tient grâce à un technicien, un vieil ordinateur beige et un post-it « 1234 » collé à l'écran. Les pirates ont cru à un piège.",
+   "d": "La plateforme tient grâce à un technicien, un vieil ordinateur beige et un post-it « un, deux, trois, quatre » collé à l'écran. Les pirates ont cru à un piège.",
    "chute": true
   },
   {
    "p": "presentateur",
-   "t": "Donc 12 à 24 heures, c'est tenable ?",
-   "d": "Donc douze à vingt-quatre heures, c'est tenable ?"
+   "t": "Monsieur Ralenti, vous contestez le mot « attaque » ?"
   },
   {
    "p": "invite",
-   "t": "Absolument. Dites au monsieur au cartable que la rentrée, c'est dans 12 à 24. On n'a pas précisé quoi.",
-   "d": "Absolument. Dites au monsieur au cartable que la rentrée, c'est dans douze à vingt-quatre. On n'a pas précisé quoi.",
-   "chute": true,
+   "t": "Évidemment. 140 000 électeurs, plus une foule de connexions en renfort : c'est une participation record.",
+   "d": "Évidemment. Cent quarante mille électeurs, plus une foule de connexions en renfort : c'est une participation record."
+  },
+  {
+   "p": "presentateur",
+   "t": "Ces connexions sont fictives."
+  },
+  {
+   "p": "invite",
+   "t": "Fictives, mais disciplinées. Aucune n'a encore réclamé un congrès extraordinaire.",
+   "chute": true
+  },
+  {
+   "p": "presentateur",
+   "t": "Et les pirates, ils sont toujours là ?",
    "attente": 0.8
+  },
+  {
+   "p": "invite",
+   "t": "Non. Ils ont voulu choisir un chef et se sont divisés en cinq. Désaccord sur la ligne.",
+   "chute": true
   }
  ],
  "bandeau": [
-  "UN STAGIAIRE EN EST À ALAIN, RÉCLAME UNE CHAISE",
-  "LE TIROIR DU MINISTÈRE REFUSE DE COMMENTER",
-  "UN CARTABLE ENCORE ÉTIQUETÉ RETROUVÉ INTACT",
-  "ANTICIPATION PÉDAGOGIQUE : RANGER TRÈS LOIN"
+  "LE MOT DE PASSE ÉTAIT SUR UN POST-IT, SELON UN POST-IT",
+  "LES PIRATES SE SONT DIVISÉS EN CINQ COURANTS",
+  "UN RALENTISSEMENT PASSE INAPERÇU : « ON EST HABITUÉS »",
+  "L'ANSSI DEMANDE SI ON A ESSAYÉ DE RALLUMER LA GAUCHE"
  ],
  "gag": {
-  "replique": 1,
-  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. A long line of patient teachers standing in a ministry corridor, each wearing a brand new backpack with a big price tag still attached, one of them looking at his watch and looking confused, comedic, deadpan."
+  "replique": 3,
+  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. A sweaty technician in a rumpled shirt stares at an ancient beige computer with a yellow sticky note on the screen, while a few tiny cartoon pirates in eye patches tiptoe suspiciously around the keyboard, scratching their heads, comedic, deadpan."
  },
- "legende": "3 000 profs retrouvés, rentrée dans 12 à 24... on n'a pas précisé quoi. Satire, personnages fictifs.",
+ "legende": "Cyberattaque sur la primaire : « un simple ralentissement ». À gauche, c'est le fonctionnement normal. Satire, personnages fictifs.",
  "hashtags": [
-  "satire",
-  "actu",
+  "actualite",
   "politique",
+  "satire",
+  "primaire",
+  "cyberattaque",
   "humour",
-  "education",
-  "professeurs",
   "jt"
  ],
  "sources": [
-  "https://www.bfmtv.com/politique/video-je-ne-vais-pas-cacher-le-fait-qu-il-y-avait-3-000-personnes-qui-n-etaient-pas-actuellement-affectees-explique-edouard-geffray-ministre-de-l-education-nationale_VN-202610090398.html",
-  "https://www.bfmtv.com/politique/video-arrivee-de-3-000-professeurs-remplacants-ce-sont-des-personnes-qui-ont-passe-les-concours-indique-le-ministre-de-l-education-nationale_VN-202610090375.html"
+  "https://www.bfmtv.com/politique/parti-socialiste/video-primaire-sociale-democrate-cyberattaquee-l-anssi-a-ete-saisie-par-matignon_VN-202610090489.html",
+  "https://www.20minutes.fr/politique/4252810-20261009-primaire-gauche-plateforme-vote-victime-cyberattaque?at_medium=display&at_campaign=149",
+  "https://www.franceinfo.fr/elections/presidentielle/la-plateforme-de-vote-pour-la-primaire-socialiste-victime-d-une-cyberattaque-depuis-son-ouverture-annonce-la-commission-d-organisation_8229811.html#xtor=RSS-3-%5Bgeneral%5D"
  ]
 }

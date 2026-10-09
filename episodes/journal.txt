@@ -1,12 +1,16 @@
 Casting déjà fait.
 30 titres politiques récents
-Traceback (most recent call last):
-  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 65, in <module>
-    main()
-  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 33, in main
-    sk = ecrire.ecrire_sketch(titres)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/jt-auto/jt-auto/moteur/ecrire.py", line 165, in ecrire_sketch
-    if sk is None: raise RuntimeError(f"Sketch invalide après {essais} essais : {derniere}")
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-RuntimeError: Sketch invalide après 3 essais : Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'tool_choice: type "tool" and "any" are not supported for this model.'}, 'request_id': 'req_011CfrdWkt2eWW7cjxKT53z5'}
+Script doctor : sketch amélioré
+Sketch : « PRIMAIRE PIRATÉE », 10 répliques
+Chatterbox indisponible (Lookup failed for Cls 'Voix' from the 'jt-voix' app: App 'jt-voix' not found in environment 'main'.) : voix de secours Piper.
+Voix : piper
+Plan gag IA indisponible (Lookup failed for Cls 'Video' from the 'jt-video' app: App 'jt-video' not found in environment 'main'.) : la vidéo sortira sans.
+Plan gag IA : non
+durée 51.6 s, 10 répliques, duplex=0, gag=None
+  image 0/1549
+  image 300/1549
+  image 600/1549
+  image 900/1549
+  image 1200/1549
+  image 1500/1549
+OK : sortie/2026-10-09_emission2.mp4 (52 s)
