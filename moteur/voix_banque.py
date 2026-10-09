@@ -72,25 +72,39 @@ def azure(voix, textes):
             journal(f"    azure {voix} : {str(e)[:120]}"); out.append(b"")
     return out
 
+EN_PANNE = set()                                                          # moteurs qui ont échoué pendant cette exécution
+
+def _distant(app, cls, methode, *args, delai=600):
+    """Appel Modal avec délai maximal : un moteur qui ne démarre pas ne bloque plus le robot."""
+    import modal
+    if cls in EN_PANNE: raise RuntimeError(f"{cls} en panne")
+    try:
+        f = getattr(modal.Cls.from_name(app, cls)(), methode).spawn(*args)
+        return f.get(timeout=delai)
+    except Exception as e:
+        EN_PANNE.add(cls)
+        try: f.cancel()
+        except Exception: pass
+        raise RuntimeError(f"{cls} : {type(e).__name__} {str(e)[:120]}")
+
 def _ref(role):
     p = os.path.join(RACINE, "voix", f"{role}.wav")
     return open(p, "rb").read() if os.path.exists(p) else None
 
 def kyutai(voix, textes):
-    import modal
-    return modal.Cls.from_name("jt-banque", "Kyutai")().synthese.remote(textes, voix)
+    return _distant("jt-banque", "Kyutai", "synthese", textes, voix, delai=900)
 
 def zonos(role, textes):
     import modal
     ref = _ref(role)
     if not ref: return [b""] * len(textes)
-    return modal.Cls.from_name("jt-banque", "Zonos")().synthese.remote(textes, ref, "vif" if role != "presentateur" else "neutre")
+    return _distant("jt-banque", "Zonos", "synthese", textes, ref, "vif" if role != "presentateur" else "neutre", delai=900)
 
 def chatterbox(role, textes):
     import modal
     ref = _ref(role); refs = {role: ref} if ref else {}
     jeu = {"presentateur": (0.4, 0.6), "envoyee": (0.5, 0.55), "invite": (0.55, 0.55)}.get(role, (0.5, 0.55))
-    res = modal.Cls.from_name("jt-voix", "Voix")().synthese.remote([dict(texte=t, role=role, exag=jeu[0], cfg=jeu[1]) for t in textes], refs)
+    res = _distant("jt-voix", "Voix", "synthese", [dict(texte=t, role=role, exag=jeu[0], cfg=jeu[1]) for t in textes], refs, delai=900)
     return [(r.get("wav", b"") if isinstance(r, dict) else r) for r in res]
 
 def synthese(choix, textes):
@@ -103,8 +117,7 @@ def synthese(choix, textes):
 def ecouter(clips):
     """Réécoute par Whisper : [{"texte", "mots"}] (ou None si Whisper est indisponible)."""
     try:
-        import modal
-        return modal.Cls.from_name("jt-banque", "Whisper")().ecouter.remote([_vers_octets(a) for a in clips])
+        return _distant("jt-banque", "Whisper", "ecouter", [_vers_octets(a) for a in clips], delai=600)
     except Exception as e:
         journal(f"  Whisper indisponible ({str(e)[:120]}) : contrôle simplifié"); return None
 
@@ -196,8 +209,7 @@ def candidats():
         if "azure" in src: c += [{"moteur": "azure", "voix": v, "genre": g} for v in AZURE[g]]
     if "kyutai" in src:
         try:
-            import modal
-            kv = modal.Cls.from_name("jt-banque", "Kyutai")().voix.remote()[:14]
+            kv = _distant("jt-banque", "Kyutai", "voix", delai=900)[:10]
             c += [{"moteur": "kyutai", "voix": v, "genre": "?"} for v in kv]
         except Exception as e:
             journal(f"  Kyutai indisponible pour le casting : {str(e)[:120]}")
