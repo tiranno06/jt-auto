@@ -92,13 +92,10 @@ def sujet_du_jour(heures=24, deja_vus=(), mots_recents=()):
         if cle in vus or it["lien"] in deja_vus or DRAMES.search(it["titre"] + " " + it["resume"][:200]): continue
         vus.add(cle); it["mots"] = _mots(it["titre"] + " " + it["resume"][:160]); items.append(it)
     if len(items) < 3: return None, "pas assez de titres"
-    groupes = []                                                          # regroupement simple : au moins 2 mots-clés en commun
+    groupes = []                                                          # pour chaque titre : les titres qui partagent au moins 2 mots-clés avec lui
     for it in items:
-        meilleur = max(groupes, key=lambda g: len(g["mots"] & it["mots"]), default=None)
-        if meilleur and len(meilleur["mots"] & it["mots"]) >= 2:
-            meilleur["items"].append(it); meilleur["mots"] |= it["mots"]
-        else:
-            groupes.append({"items": [it], "mots": set(it["mots"])})
+        membres = [x for x in items if len(x["mots"] & it["mots"]) >= 2]
+        groupes.append({"items": membres, "mots": set(it["mots"])})
     recents = set(mots_recents)
     def score(g):
         sources = {i["source"] for i in g["items"]}
