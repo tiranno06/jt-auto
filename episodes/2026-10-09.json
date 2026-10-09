@@ -1,68 +1,69 @@
 {
- "titre": "PROFS REMPLAÇANTS",
- "sujet": "PROFS REMPLAÇANTS",
- "ecran": "REMPLAÇANTS",
- "invite_nom": "Gérard Bouchetrou",
- "invite_role": "Porte-parole (fictif) Éducation",
+ "titre": "NOBEL DE LA PAIX",
+ "sujet": "NOBEL DE LA PAIX",
+ "ecran": "NOBEL DE PAIX",
+ "invite_nom": "Gérard Tampon",
+ "invite_role": "Porte-parole (fictif) de la Cour",
  "invite_look": "moustache",
- "lieu_direct": "Dans un casier du lycée",
- "titre_accroche": "3000 profs promis, 3000 post-it reçus",
- "question": "Le post-it ferait-il un meilleur prof principal ? 👇",
- "running_gag": "Le post-it « Je suis en route » finit toujours promu au poste qu'il remplace.",
+ "lieu_direct": "Dans la machine à café",
+ "titre_accroche": "Un prix Nobel, mais interdit de gâteau",
+ "question": "Qui va couper le gâteau, d'après vous ? 👇",
+ "running_gag": "Le gâteau de la fête, bloqué à l'accueil parce qu'il est sous sanctions.",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "Le ministre promet 3 000 profs remplaçants. Pour l'instant, les lycées ont reçu 3 000 post-it.",
-   "d": "Le ministre promet trois mille profs remplaçants. Pour l'instant, les lycées ont reçu trois mille post-it.",
+   "t": "Une ancienne juge de la Cour pénale internationale a le Nobel de la paix. La Cour, elle, est privée de gâteau.",
    "chute": true
   },
   {
    "p": "presentateur",
-   "t": "Martine, les remplaçants sont là ?"
+   "t": "Martine, vous êtes dans la machine à café ?"
   },
   {
    "p": "envoyee",
-   "t": "Jean-Michel, sur chaque bureau, un post-it jaune dit : « Je suis en route ». Les élèves lui ont rendu leurs copies.",
+   "t": "Oui. Washington interdit toute transaction avec la Cour. La machine recrache même les pièces de vingt centimes.",
    "chute": true
-  },
-  {
-   "p": "envoyee",
-   "t": "C'est le seul qui n'a jamais été absent. Il vient d'être nommé professeur principal.",
-   "chute": true
-  },
-  {
-   "p": "presentateur",
-   "t": "Monsieur Bouchetrou, où sont les vrais profs ?"
   },
   {
    "p": "invite",
-   "t": "Ils arrivent dans les heures qui viennent. C'est écrit sur 3 000 post-it.",
-   "d": "Ils arrivent dans les heures qui viennent. C'est écrit sur trois mille post-it.",
+   "t": "C'est une victoire. Pour fêter le prix, on a planté une bougie dans un dossier. Il fait mille pages. Il tient mieux qu'un gâteau.",
+   "chute": true
+  },
+  {
+   "p": "presentateur",
+   "t": "Et les 125 États membres ? La Cour leur demande du soutien.",
+   "d": "Et les cent vingt-cinq États membres ? La Cour leur demande du soutien."
+  },
+  {
+   "p": "envoyee",
+   "t": "Ils ont envoyé cent vingt-cinq gâteaux. Tous bloqués à l'accueil. Sous sanctions.",
    "chute": true,
    "attente": 0.7
   }
  ],
  "bandeau": [
-  "UN POST-IT ÉLU DÉLÉGUÉ DES PROFESSEURS",
-  "LE CONSEIL DE CLASSE SE TIENDRA SUR UN FRIGO",
-  "PÉNURIE DE COLLE : LES REMPLAÇANTS SE DÉCOLLENT",
-  "LE MINISTÈRE COMMANDE DES POST-IT REMPLAÇANTS"
+  "LA MACHINE À CAFÉ DE LA COUR SE DÉCLARE NEUTRE",
+  "UN JUGE TENTE DE PAYER SON CROISSANT EN JURISPRUDENCE",
+  "LA BOUGIE DU DOSSIER DEMANDE UN AVOCAT",
+  "LA MÉDAILLE DU NOBEL ATTEND SON TOUR À LA DOUANE"
  ],
  "gag": {
   "replique": 2,
-  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. A line of serious teenagers solemnly hands their homework papers to a single small yellow sticky note stuck on an empty teacher's desk, a growing pile of papers burying it, comedic, deadpan."
+  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. A serious judge in a black robe feeds a coin into an office coffee vending machine, which spits the coin back at his forehead again and again while he stays perfectly still, comedic, deadpan."
  },
- "legende": "3 000 profs remplaçants promis… les post-it sont arrivés avant eux. Satire, personnages fictifs.",
+ "legende": "Un Nobel de la paix, des sanctions, et cent vingt-cinq gâteaux bloqués à l'accueil. Satire, personnages fictifs.",
  "hashtags": [
-  "infoencaoutchouc",
-  "lyceens",
-  "profremplacant",
-  "education",
+  "nobeldelapaix",
+  "cpi",
+  "justiceinternationale",
   "satire",
-  "humour"
+  "humour",
+  "infoencaoutchouc"
  ],
  "sources": [
-  "https://www.franceinfo.fr/societe/education/blocage-des-lycees/direct-mobilisation-des-lyceens-3-000-professeurs-remplacants-vont-etre-affectes-dans-les-heures-qui-viennent-l-association-les-lyceens-salue-une-premiere-annonce-concrete_8229388.html#xtor=RSS-3-%5Bgeneral%5D",
-  "https://www.bfmtv.com/societe/education/video-3-000-professeurs-remplacants-on-a-besoin-de-davantage-de-recrutement-on-a-besoin-d-ouvrir-des-postes-assure-delphine-girard-professeure-de-lettres-classiques-dans-un-college-du-val-de-marne_VN-202610090659.html"
+  "https://www.lefigaro.fr/international/prix-nobel-de-la-paix-attribue-a-navi-pillay-ursula-von-der-leyen-salue-une-defenseure-des-persecutes-20261009",
+  "https://www.lefigaro.fr/international/la-cour-penale-internationale-visee-par-des-sanctions-americaines-20261009",
+  "https://www.lemonde.fr/international/article/2026/10/09/les-etats-unis-imposent-des-sanctions-contre-la-cpi-qui-reagit-en-critiquant-une-attaque-contre-l-etat-de-droit_6790614_3210.html",
+  "https://www.franceinfo.fr/monde/prix-nobel/le-prix-nobel-de-la-paix-est-decerne-a-la-sud-africaine-navanethem-navi-pillay-pour-ses-efforts-en-faveur-de-la-promotion-de-la-paix-et-du-droit-international_8229787.html#xtor=RSS-3-[lestitres]"
  ]
 }
