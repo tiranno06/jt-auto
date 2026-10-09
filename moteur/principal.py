@@ -69,7 +69,7 @@ def main():
         print(f"Sketch d'essai : {test}", flush=True)
     else:
         sk = ecrire.ecrire_sketch([c[0] for c in candidats], gags=gags, special=dimanche, recents=recents)
-        print(f"Moteur humoristique : {ecrire.USAGE['appels']} appels Claude, {ecrire.USAGE['entree']} jetons lus, {ecrire.USAGE['sortie']} jetons écrits", flush=True)
+        print(f"Moteur humoristique : {ecrire.USAGE['appels']} appels Claude, {ecrire.USAGE['entree']} jetons lus, {ecrire.USAGE['sortie']} jetons écrits, {ecrire.USAGE['recherches_web']} recherche(s) web", flush=True)
         titres = next((c[0] for c in candidats if c[0][0]["lien"] in sk.get("sources", [])), titres)
     print(f"Sketch : « {sk['sujet']} », {len(sk['repliques'])} répliques", flush=True)
     audios, credits_voix, mots = voix.generer(sk["repliques"], jt.VOIX)

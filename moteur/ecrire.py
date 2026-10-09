@@ -117,7 +117,8 @@ LIVRABLES : rends tout avec l'outil rendre_sketch, dans ce format JSON strict (A
  "gag": {{"replique": index d'une réplique de l'envoyée ou de l'invité décrivant une scène visuelle drôle, "prompt": "scène EN ANGLAIS pour un générateur vidéo, commence par « Flat 2D cartoon, thick black outlines, simple shapes. », sans texte, sans personne réelle"}},
  "question": "question pour les commentaires, avec emoji", "running_gag": "nouveau gag réutilisable (ou vide)",
  "legende": "légende TikTok (max 140 caractères) finissant par « Satire, personnages fictifs. »", "hashtags": ["5 à 7, sans #, minuscules, sans accents"],
- "sources": ["liens réellement utilisés"]}}
+ "sources": ["2 ou 3 URL complètes copiées parmi les liens des articles fournis"]}}
+Ne mets AUCUNE note ni décision (« prêt pour production ») dans tes livrables : la note F est donnée par un relecteur indépendant.
 
 EXEMPLE DE STYLE ET DE FORMAT (court, sujet d'une autre semaine, ne réutilise pas ses blagues) :
 {exemple}"""
@@ -131,9 +132,9 @@ Rends ton choix avec l'outil choisir_sujet."""
 
 CRITIQUE = """Étape 8 du cahier des charges : relis ce sketch comme un auteur exigeant et note-le sur 100, honnêtement (ne gonfle jamais la note) :
 originalité du concept /20, punchlines /25, rythme /15, pertinence satirique /15, dialogues /10, potentiel visuel /10, chute /5.
-Sketch :
+Fiche et script (format vidéo animée {secondes} s, voix synthétiques ; les actions visuelles et le découpage comptent pour le potentiel visuel) :
 {sketch}
-Rends la note avec l'outil noter_sketch, avec une critique précise des répliques faibles et de ce qu'il faut changer."""
+Rends la note avec l'outil noter_sketch. Le champ "critique" est OBLIGATOIRE et non vide : cite les répliques faibles (numéro + pourquoi) et propose ce qu'il faut changer."""
 
 REECRITURE = """Ton sketch a obtenu {note}/100 (seuil : 80). Critique du relecteur :
 {critique}
@@ -212,8 +213,19 @@ def valider(sk, liens):
             "gag": gag,
             "legende": _court(sk.get("legende"), 160) or "L'actu du jour, en dessin animé. Satire, personnages fictifs.",
             "hashtags": [t for t in tags if t][:7] or ["satire", "humour", "actualite", "politique"],
-            "sources": [s for s in sk.get("sources", []) if s in liens][:6],
+            "sources": _sources(sk.get("sources"), liens),
             "decoupage": _decoupage(sk.get("decoupage"), len(reps))}
+
+def _norm_lien(u): return re.sub(r"^https?://(www\.)?|[?#].*$|/$", "", str(u or "").strip().lower())
+
+def _sources(proposees, liens):
+    """Liens cités par le sketch, uniquement parmi les articles réellement fournis (aucun lien inventé)."""
+    par_cle = {_norm_lien(l): l for l in liens if l}
+    out = []
+    for s in proposees or []:
+        l = par_cle.get(_norm_lien(s))
+        if l and l not in out: out.append(l)
+    return out[:6]
 
 SONS_DISPONIBLES = ("rimshot", "xylo_descente", "trombone_triste", "dun_dun", "woosh", "reconstitution")
 def _decoupage(dec, n):
@@ -231,7 +243,7 @@ def _decoupage(dec, n):
         out.append({"scene": _court(s.get("scene") or s.get("description"), 300), "repliques": idx, "lieu": lieu, "son": son, "duree": duree})
     return out
 
-USAGE = {"appels": 0, "entree": 0, "sortie": 0}                          # suivi du budget (jetons consommés)
+USAGE = {"appels": 0, "entree": 0, "sortie": 0, "recherches_web": 0}                          # suivi du budget (jetons consommés)
 
 def _appel(client, systeme, messages, outil=OUTIL, web=False, max_tokens=6000):
     """Appel Claude ; renvoie l'entrée de l'outil demandé (ou un JSON trouvé dans le texte). Recherche web si possible."""
@@ -242,13 +254,24 @@ def _appel(client, systeme, messages, outil=OUTIL, web=False, max_tokens=6000):
         r = client.messages.create(**kw)
         u = getattr(r, "usage", None)
         if u: USAGE["entree"] += getattr(u, "input_tokens", 0) or 0; USAGE["sortie"] += getattr(u, "output_tokens", 0) or 0; USAGE["appels"] += 1
+        if web:
+            n_web = getattr(getattr(u, "server_tool_use", None), "web_search_requests", None)
+            if n_web is None: n_web = sum(1 for b in r.content if getattr(b, "type", "") == "server_tool_use")
+            erreurs = [getattr(getattr(b, "content", None), "error_code", None) for b in r.content if getattr(b, "type", "") == "web_search_tool_result"]
+            erreurs = [x for x in erreurs if x]
+            USAGE["recherches_web"] += int(n_web or 0)
+            print(f"Recherche web : {int(n_web or 0)} requête(s)" + (f", erreurs : {', '.join(map(str, erreurs))}" if erreurs else "") +
+                  ("" if n_web else " — le modèle n'a pas consulté le web, vérification sur les articles RSS uniquement"), flush=True)
     except Exception as e:
         if not web: raise
         print(f"Recherche web indisponible ({str(e)[:120]}) : vérification sur les seuls articles fournis.", flush=True)
         return _appel(client, systeme, messages, outil, False, max_tokens)
+    brut = "".join(getattr(b, "text", "") or "" for b in r.content if getattr(b, "type", "") == "text")
     for b in r.content:
-        if getattr(b, "type", "") == "tool_use" and getattr(b, "name", "") == outil["name"]: return b.input
-    brut = "".join(getattr(b, "text", "") for b in r.content if getattr(b, "type", "") == "text")
+        if getattr(b, "type", "") == "tool_use" and getattr(b, "name", "") == outil["name"]:
+            out = dict(b.input) if isinstance(b.input, dict) else {}
+            if brut.strip(): out["_texte"] = brut.strip()[:3000]            # texte d'accompagnement (ex. critique écrite hors de l'outil)
+            return out
     try: return _json(brut)
     except Exception:
         r2 = client.messages.create(**dict(kw, tools=[outil], messages=messages + [{"role": "assistant", "content": brut or "…"},
@@ -323,15 +346,26 @@ def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=()):
                 conv = conv + [{"role": "assistant", "content": json.dumps(brut if isinstance(brut, dict) else {}, ensure_ascii=False)[:6000] or "…"},
                                {"role": "user", "content": f"Version invalide ({e}). Corrige et rends le sketch complet avec l'outil rendre_sketch."}]
                 continue
-            texte = "\n".join(f"{r['p']} : {r['t']}" for r in sk["repliques"])
+            if not sk["sources"]:                                            # le modèle n'a pas recopié d'URL exacte : on cite les articles RSS fournis
+                sk["sources"] = [t["lien"] for t in titres if t.get("lien")][:3]
+            texte = (f"Concept : {_court(brut.get('concept'), 600)}\nFormat : {_court(brut.get('format'), 300)}\n"
+                     "Découpage : " + " | ".join(f"[{d['lieu'] or '?'}] {d['scene']}" for d in sk["decoupage"])[:1500] + "\n" +
+                     (f"Plan gag (réplique {sk['gag']['replique']}) : {sk['gag']['prompt'][:300]}\n" if sk.get("gag") else "") +
+                     "Répliques :\n" + "\n".join(f"{i}. {r['p']} : {r['t']}" for i, r in enumerate(sk["repliques"])))
             try:
-                nq = _appel(client, None, [{"role": "user", "content": CRITIQUE.format(sketch=texte)}], OUTIL_NOTE, max_tokens=2000)
-                note = float(nq.get("total", 0)); critique = str(nq.get("critique", ""))
+                nq = _appel(client, None, [{"role": "user", "content": CRITIQUE.format(sketch=texte, secondes=SECONDES)}], OUTIL_NOTE, max_tokens=2500)
+                note = float(nq.get("total", 0))
+                critique = str(nq.get("critique") or "").strip() or nq.get("_texte", "") or \
+                    " ; ".join(f"{k} {nq[k]}" for k in ("originalite", "punchlines", "rythme", "pertinence", "dialogues", "visuel", "chute") if k in nq)
             except Exception as e:
                 note, critique = 0.0, f"notation impossible ({e})"
             print(f"  version {tour + 1} : {note:.0f}/100, {len(sk['repliques'])} répliques, {n_mots} mots", flush=True)
-            sk["fiche"] = {k2: brut.get(k2) for k2 in ("concept", "format", "angle", "resume_factuel", "faits_reels", "inventions", "decoupage") if isinstance(brut, dict)}
-            sk["fiche"].update(note=note, critique=critique[:1500], decision="prêt pour production" if note >= 80 else "à retravailler")
+            sk["fiche"] = {k2: brut.get(k2) for k2 in ("concept", "format", "angle", "resume_factuel", "faits_reels", "inventions") if isinstance(brut, dict)}
+            sk["fiche"]["decoupage"] = sk["decoupage"]
+            for k2 in ("concept", "format", "angle"):                       # la note F vient du relecteur, jamais de l'auteur
+                if isinstance(sk["fiche"].get(k2), str):
+                    sk["fiche"][k2] = re.sub(r"\s*(Note qualit[ée]|Décision|Decision)\b.*$", "", sk["fiche"][k2], flags=re.S | re.I).strip()
+            sk["fiche"].update(verification_web=USAGE["recherches_web"] > 0, note=note, critique=critique[:1500], decision="prêt pour production" if note >= 80 else "à retravailler")
             if meilleur is None or note > meilleur["fiche"]["note"]: meilleur = sk
             if note >= 80: return sk
             conv = conv + [{"role": "assistant", "content": json.dumps(brut, ensure_ascii=False)[:8000]},

@@ -80,6 +80,11 @@ class TestEcriture(unittest.TestCase):
         self.assertEqual(sk["decoupage"][1], {"scene": "direct", "repliques": [2], "lieu": "", "son": "", "duree": 0})
         self.assertEqual(sk["gag"]["replique"], 2)
 
+    def test_sources_jamais_inventees(self):
+        liens = {"https://www.lemonde.fr/politique/article/budget.html", "https://www.bfmtv.com/x/"}
+        self.assertEqual(ecrire._sources(["http://lemonde.fr/politique/article/budget.html?utm=1", "https://invente.fr/faux", "Le Monde"], liens),
+                         ["https://www.lemonde.fr/politique/article/budget.html"])    # variante d'URL reconnue, lien inventé écarté
+
     def test_longueur_et_hors_sujet(self):
         sk = ecrire.valider(json.loads(json.dumps(SKETCH)), set())
         self.assertGreater(ecrire.longueur(sk), 0)
@@ -91,8 +96,9 @@ class TestEcriture(unittest.TestCase):
 
 class FauxClaude:
     """Simule l'API : choix du candidat 1, puis sketch noté 60 (réécriture demandée) puis 86."""
-    def __init__(self, web_en_panne=False):
+    def __init__(self, web_en_panne=False, critique_vide=False, sources=("L1",)):
         self.notes = [60, 86]; self.appels = []; self.web_en_panne = web_en_panne
+        self.critique_vide = critique_vide; self.sources = list(sources); self.reecritures = []
         self.messages = self
 
     def create(self, **kw):
@@ -100,9 +106,16 @@ class FauxClaude:
         self.appels.append(noms)
         if self.web_en_panne and "web_search" in noms: raise RuntimeError("outil web non autorisé")
         if "choisir_sujet" in noms: out = {"notes": [{"index": 0, "note": 4}, {"index": 1, "note": 9}], "choix": 1, "angle": "angle test", "faits_verifies": ["fait"]}
-        elif "noter_sketch" in noms: out = {"total": self.notes.pop(0), "critique": "chute trop faible"}
+        elif "noter_sketch" in noms:
+            out = {"total": self.notes.pop(0), "critique": "" if self.critique_vide else "chute trop faible"}
+            if self.critique_vide:                                            # critique écrite hors de l'outil
+                return types.SimpleNamespace(content=[types.SimpleNamespace(type="text", text="Réplique 3 trop plate."),
+                                                      types.SimpleNamespace(type="tool_use", name="noter_sketch", input=out)],
+                                             usage=types.SimpleNamespace(input_tokens=10, output_tokens=5))
         else:
-            out = json.loads(json.dumps(SKETCH)); out["sources"] = ["L1"]
+            out = json.loads(json.dumps(SKETCH)); out["sources"] = self.sources
+            out["concept"] = "Le budget au restaurant. Note qualité interne : 84/100. Décision : prêt pour production."
+        self.reecritures.append(kw["messages"][-1]["content"]) if "rendre_sketch" in noms else None
         bloc = types.SimpleNamespace(type="tool_use", name=noms[0], input=out)
         return types.SimpleNamespace(content=[bloc], usage=types.SimpleNamespace(input_tokens=100, output_tokens=50))
 
@@ -122,6 +135,14 @@ class TestMoteurHumour(unittest.TestCase):
         ecritures = [a for a in faux.appels if a and a[0] == "rendre_sketch"]
         self.assertEqual(len(ecritures), 2)                                   # une réécriture après la note de 60
         self.assertIn("web_search", faux.appels[0])                           # vérification web demandée à la sélection
+
+    def test_fiche_honnete(self):
+        faux = FauxClaude(critique_vide=True, sources=[]); sk = self._lancer(faux)
+        self.assertNotIn("84", sk["fiche"]["concept"])                        # l'auteur ne s'attribue pas de note
+        self.assertEqual(sk["fiche"]["concept"], "Le budget au restaurant.")
+        self.assertIn("Réplique 3 trop plate", faux.reecritures[-1])          # la critique hors outil arrive bien dans la réécriture
+        self.assertEqual(sk["sources"], ["L1", "L2"])                         # aucun lien recopié : liens RSS réels du sujet choisi
+        self.assertIn("decoupage", sk["fiche"])
 
     def test_variable_reecritures_vide(self):
         os.environ["MAX_REECRITURES"] = ""
