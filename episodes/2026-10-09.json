@@ -1,83 +1,83 @@
 {
- "titre": "PRIMAIRE PIRATÉE",
- "sujet": "PRIMAIRE PIRATÉE",
- "ecran": "CYBERATTAQUE",
- "invite_nom": "Gérard Ralenti",
- "invite_role": "Porte-parole (fictif) de la primaire",
+ "titre": "REMPLAÇANTS",
+ "sujet": "REMPLAÇANTS",
+ "ecran": "3000 PROFS",
+ "invite_nom": "Gérard Surveillant-Général",
+ "invite_role": "Conseiller (fictif) à l'Éducation",
  "invite_look": "moustache",
- "lieu_direct": "Siège",
+ "lieu_direct": "Ministère",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "La primaire de la gauche a été cyberattaquée dès l'ouverture du vote. Martine, quel est le bilan ?"
+   "t": "Le ministre de l'Éducation admet que 3 000 personnes n'étaient affectées devant aucun élève. Martine, vous les avez retrouvées ?",
+   "d": "Le ministre de l'Éducation admet que trois mille personnes n'étaient affectées devant aucun élève. Martine, vous les avez retrouvées ?"
   },
   {
    "p": "envoyee",
-   "t": "Aucune coupure, Jean-Michel. Juste un « ralentissement »."
+   "t": "Oui, Jean-Michel. Derrière cette porte du ministère, il y a une pancarte : « Remplaçants, ne pas déranger »."
+  },
+  {
+   "p": "presentateur",
+   "t": "Ils font quoi, là-dedans ?"
   },
   {
    "p": "envoyee",
-   "t": "À gauche, on appelle ça le fonctionnement normal.",
-   "chute": true
-  },
-  {
-   "p": "envoyee",
-   "t": "La plateforme tient grâce à un technicien, un vieil ordinateur beige et un post-it « 1234 » collé à l'écran. Les pirates ont cru à un piège.",
-   "d": "La plateforme tient grâce à un technicien, un vieil ordinateur beige et un post-it « un, deux, trois, quatre » collé à l'écran. Les pirates ont cru à un piège.",
+   "t": "Ils attendent qu'on les appelle. Trois mille, debout, avec leurs trousses. L'un d'eux corrige la même copie depuis septembre.",
+   "d": "Ils attendent qu'on les appelle. Trois mille, debout, avec leurs trousses. L'un d'eux corrige la même copie depuis septembre.",
    "chute": true
   },
   {
    "p": "presentateur",
-   "t": "Monsieur Ralenti, vous contestez le mot « attaque » ?"
+   "t": "Monsieur le conseiller, trois mille professeurs dans un placard, c'est embarrassant, non ?",
+   "d": "Monsieur le conseiller, trois mille professeurs dans un placard, c'est embarrassant, non ?"
   },
   {
    "p": "invite",
-   "t": "Évidemment. 140 000 électeurs, plus une foule de connexions en renfort : c'est une participation record.",
-   "d": "Évidemment. Cent quarante mille électeurs, plus une foule de connexions en renfort : c'est une participation record."
-  },
-  {
-   "p": "presentateur",
-   "t": "Ces connexions sont fictives."
-  },
-  {
-   "p": "invite",
-   "t": "Fictives, mais disciplinées. Aucune n'a encore réclamé un congrès extraordinaire.",
+   "t": "Ce n'est pas un placard, c'est une réserve stratégique. Comme la roue de secours : on vérifie qu'elle existe, surtout on ne roule pas dessus.",
    "chute": true
   },
   {
    "p": "presentateur",
-   "t": "Et les pirates, ils sont toujours là ?",
+   "t": "Pendant ce temps, des classes n'avaient pas de professeur."
+  },
+  {
+   "p": "invite",
+   "t": "Et trois mille professeurs n'avaient pas de classe. Vous voyez : tout était parfaitement équilibré.",
+   "d": "Et trois mille professeurs n'avaient pas de classe. Vous voyez : tout était parfaitement équilibré.",
+   "chute": true
+  },
+  {
+   "p": "presentateur",
+   "t": "Ils sont tous affectés depuis ce matin. Et le placard, Martine ?"
+  },
+  {
+   "p": "envoyee",
+   "t": "Vide. Mais la pancarte a été accrochée à la porte d'une classe. Personne n'ose entrer.",
+   "chute": true,
    "attente": 0.8
-  },
-  {
-   "p": "invite",
-   "t": "Non. Ils ont voulu choisir un chef et se sont divisés en cinq. Désaccord sur la ligne.",
-   "chute": true
   }
  ],
  "bandeau": [
-  "LE MOT DE PASSE ÉTAIT SUR UN POST-IT, SELON UN POST-IT",
-  "LES PIRATES SE SONT DIVISÉS EN CINQ COURANTS",
-  "UN RALENTISSEMENT PASSE INAPERÇU : « ON EST HABITUÉS »",
-  "L'ANSSI DEMANDE SI ON A ESSAYÉ DE RALLUMER LA GAUCHE"
+  "3 000 REMPLAÇANTS RETROUVÉS DERRIÈRE LES BALAIS",
+  "LA PANCARTE « NE PAS DÉRANGER » AFFECTÉE EN CLASSE",
+  "UNE COPIE CORRIGÉE DEPUIS SEPTEMBRE : 12/20",
+  "LA ROUE DE SECOURS RÉCLAME UN CONTRAT"
  ],
  "gag": {
   "replique": 3,
-  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. A sweaty technician in a rumpled shirt stares at an ancient beige computer with a yellow sticky note on the screen, while a few tiny cartoon pirates in eye patches tiptoe suspiciously around the keyboard, scratching their heads, comedic, deadpan."
+  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. A huge crowd of tired teachers squeezed standing inside a tiny ministry closet, each holding a pencil case, one of them marking the same paper with a red pen, the closet door wide open, comedic, deadpan."
  },
- "legende": "Cyberattaque sur la primaire : « un simple ralentissement ». À gauche, c'est le fonctionnement normal. Satire, personnages fictifs.",
+ "legende": "3 000 remplaçants retrouvés dans un placard du ministère, en « réserve stratégique ». Comme une roue de secours. Satire, personnages fictifs.",
  "hashtags": [
-  "actualite",
-  "politique",
   "satire",
-  "primaire",
-  "cyberattaque",
   "humour",
-  "jt"
+  "education",
+  "actualite",
+  "jt",
+  "lyceens",
+  "politique"
  ],
  "sources": [
-  "https://www.bfmtv.com/politique/parti-socialiste/video-primaire-sociale-democrate-cyberattaquee-l-anssi-a-ete-saisie-par-matignon_VN-202610090489.html",
-  "https://www.20minutes.fr/politique/4252810-20261009-primaire-gauche-plateforme-vote-victime-cyberattaque?at_medium=display&at_campaign=149",
-  "https://www.franceinfo.fr/elections/presidentielle/la-plateforme-de-vote-pour-la-primaire-socialiste-victime-d-une-cyberattaque-depuis-son-ouverture-annonce-la-commission-d-organisation_8229811.html#xtor=RSS-3-%5Bgeneral%5D"
+  "https://www.bfmtv.com/politique/video-edouard-geffray-ministre-de-l-education-nationale-je-ne-vais-pas-cacher-le-fait-qu-il-y-avait-3-000-personnes-qui-n-etaient-pas-actuellement-affectees-devant-des-eleves_VN-202610090376.html"
  ]
 }
