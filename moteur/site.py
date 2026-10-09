@@ -139,7 +139,7 @@ function afficherAuto(){
 async function lireAuto(){
   if(!lireJeton()||!CONF.depot){auto=null;afficherAuto();return}
   try{const r=await gh("/actions/variables/PUBLICATION_AUTO");
-    if(r.status===404){auto=true}else{const v=await r.json();auto=(String(v.value).trim()!=="0")}
+    if(r.status===404){auto=false}else{const v=await r.json();auto=(String(v.value).trim()==="1")}
     $("#resume").textContent="Régie connectée ✓";
   }catch(e){auto=null;$("#autoAide").textContent="Erreur : "+e.message}
   afficherAuto();

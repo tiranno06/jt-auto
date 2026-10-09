@@ -19,8 +19,7 @@ Si un service est en panne, le robot ne s'arrête pas : sans Modal, il utilise l
 1. Sur ton compte **github.com** (un compte existant convient très bien), **New repository** → nom `jt-auto` → **Public** → *Create*.
    Public est recommandé : les minutes du robot deviennent illimitées et gratuites, et Buffer a besoin d'une adresse publique pour récupérer la vidéo. Tes clés restent secrètes (les « Secrets » ne sont jamais visibles, même dans un dépôt public).
 2. Envoie tout le contenu de ce dossier dans le dépôt (*uploading an existing file*, glisser-déposer). Vérifie que le dossier caché **`.github`** est bien envoyé.
-3. **Settings → Actions → General** → tout en bas : **Read and write permissions** → *Save*.
-4. **Settings → Pages** → *Source* : **GitHub Actions** (pour le site de régie).
+3. **Settings → Pages** → *Source* : **GitHub Actions** (pour le site de régie).
 
 ### 2. Claude (écriture des sketchs, quelques euros par mois)
 1. **console.anthropic.com** → crée un compte → **Billing** : ajoute 5 à 10 $ de crédit.
@@ -61,7 +60,7 @@ C'est tout : ensuite, une émission sort **chaque jour automatiquement**.
 (l'adresse exacte s'affiche dans *Settings → Pages*). Ajoute-le à l'écran d'accueil de ton téléphone.
 
 On y trouve :
-- l'interrupteur **Publication automatique** : activé, chaque vidéo part seule sur TikTok ; coupé, les nouvelles vidéos attendent ton feu vert (badge **⏸ En attente de validation**) ;
+- l'interrupteur **Publication automatique** (coupé au départ) : activé, chaque vidéo part seule sur TikTok ; coupé, les nouvelles vidéos attendent ton feu vert (badge **⏸ En attente de validation**) ;
 - la liste des vidéos, de la plus récente à la plus ancienne, avec un aperçu pour les regarder ;
 - le bouton **Publier sur TikTok** : deux touches (la deuxième confirme) et le robot envoie la vidéo tout seul via Buffer, en 1 à 3 minutes, avec le suivi affiché en direct ;
 - en secours, **Partage manuel** (menu de partage du téléphone → TikTok) si Buffer coince.

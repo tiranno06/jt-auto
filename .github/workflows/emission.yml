@@ -77,8 +77,8 @@ jobs:
           gh release view "$TAG" >/dev/null 2>&1 || gh release create "$TAG" --title "Émissions ${{ steps.run.outputs.mois }}" --notes "Vidéos fabriquées par le robot."
           gh release upload "$TAG" "${{ steps.run.outputs.video }}" "${{ steps.run.outputs.legende }}" --clobber
 
-      - name: Publier sur TikTok (sauf si la publication automatique est coupée depuis le site)
-        if: steps.run.outputs.video != '' && vars.PUBLICATION_AUTO != '0'
+      - name: Publier sur TikTok (seulement si la publication automatique est activée sur le site)
+        if: steps.run.outputs.video != '' && vars.PUBLICATION_AUTO == '1'
         continue-on-error: true
         run: |
           URL="${{ github.server_url }}/${{ github.repository }}/releases/download/emissions-${{ steps.run.outputs.mois }}/${{ steps.run.outputs.nom }}"
