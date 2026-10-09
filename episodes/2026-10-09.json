@@ -1,126 +1,270 @@
 {
- "titre": "BUDGET RECALÉ",
- "sujet": "BUDGET RECALÉ",
- "ecran": "BUDGET RÉCHAUF",
- "invite_nom": "Aymeric Ponction",
- "invite_role": "Porte-parole (fictif) de Bercy",
- "invite_look": "chauve",
- "lieu_direct": "Commission des finances",
- "titre_accroche": "Budget renvoyé en cuisine, resservi mardi",
- "question": "",
- "running_gag": "",
+ "titre": "DEMI-VOITURE",
+ "sujet": "DEMI-VOITURE",
+ "ecran": "DEMI-VOITURE",
+ "invite_nom": "Gaspard Moitié",
+ "invite_role": "Porte-parole (fictif) Commission",
+ "invite_look": "moustache",
+ "lieu_direct": "Parking concession, Bruxelle",
+ "titre_accroche": "Deux jours à Pékin pour moitié moins",
+ "question": "Vous préférez une voiture entière pas chère ou une moitié souveraine ? 👇",
+ "running_gag": "Chaque accord européen finit par toucher le boulanger de Jean-Michel, qui coupe ses viennoiseries en conséquence.",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "31 députés ont renvoyé le budget en cuisine. Mardi, on leur ressert la même assiette.",
-   "d": "Trente et un députés ont renvoyé le budget en cuisine. Mardi, on leur ressert la même assiette.",
+   "t": "L'Europe a négocié deux jours à Pékin pour avoir moins de voitures pas chères. Moi, je demande moins de croissants au boulanger : il dit oui tout de suite.",
    "chute": true
   },
   {
    "p": "presentateur",
-   "t": "Martine, ambiance en commission ?"
+   "t": "Martine, vous êtes à Bruxelles. L'ambiance ?"
   },
   {
    "p": "envoyee",
-   "t": "Unanime. L'opposition a refusé le plat du chef. Le chef a refusé le plat salé par l'opposition. Tout le monde est d'accord : c'est immangeable.",
-   "chute": true
-  },
-  {
-   "p": "presentateur",
-   "t": "Et les 3 qui ont voté pour ?",
-   "d": "Et les trois qui ont voté pour ?"
-  },
-  {
-   "p": "envoyee",
-   "t": "Soit ils ont un estomac blindé, soit c'est le chef et ses deux commis.",
+   "t": "Ambiance finale gagnée. Sur ce parking, une hybride chinoise sur deux a été coupée en deux. À la scie.",
    "chute": true
   },
   {
    "p": "invite",
-   "t": "Je conteste. Les 3 oui ont tout lu. Les 31 non ont juste goûté.",
-   "d": "Je conteste. Les trois oui ont tout lu. Les trente et un non ont juste goûté.",
+   "t": "Par respect de l'accord. On avait dit la moitié.",
    "chute": true
   },
   {
    "p": "presentateur",
-   "t": "Pourquoi faire payer les retraités et les collectivités ?"
+   "t": "Mais le but, c'était quoi ?"
   },
   {
    "p": "invite",
-   "t": "Ce sont les seuls qui ne partent pas. Un retraité ne délocalise pas. Une mairie ne s'exile pas en Belgique.",
+   "t": "Moins de voitures, c'est moins de bouchons. C'est donc une politique climatique.",
    "chute": true
   },
   {
    "p": "envoyee",
-   "t": "Je confirme. Une mairie a essayé ce matin. Elle est coincée au rond-point.",
+   "t": "Soit c'est de la diplomatie, soit on a négocié contre nous-mêmes. Et on a gagné.",
+   "chute": true
+  },
+  {
+   "p": "invite",
+   "t": "Le consommateur européen garde tout son pouvoir d'achat. Il n'achète rien.",
    "chute": true
   },
   {
    "p": "presentateur",
-   "t": "Et tous les amendements de la commission ?"
+   "t": "Une électrique coûte 20 000 dollars à produire en Chine. Chez nous, 31 000. Vous baissez vos prix ?",
+   "d": "Une électrique coûte vingt mille dollars à produire en Chine. Chez nous, trente et un mille. Vous baissez vos prix ?"
+  },
+  {
+   "p": "invite",
+   "t": "Jamais. On a demandé aux autres de monter les leurs. C'est ça, la souveraineté.",
+   "chute": true
+  },
+  {
+   "p": "presentateur",
+   "t": "Et les 46 projets sur les métaux critiques ?",
+   "d": "Et les quarante-six projets sur les métaux critiques ?"
+  },
+  {
+   "p": "invite",
+   "t": "Nous, on a 46 projets. Eux, ils ont les métaux. Chacun son métier.",
+   "d": "Nous, on a quarante-six projets. Eux, ils ont les métaux. Chacun son métier.",
+   "chute": true
+  },
+  {
+   "p": "presentateur",
+   "t": "Et le client, il a gagné quoi ?"
+  },
+  {
+   "p": "invite",
+   "t": "Une demi-voiture. Hybride. Moitié essence, moitié rien.",
+   "chute": true
   },
   {
    "p": "envoyee",
-   "t": "À la poubelle. Mardi, on repart de la copie initiale. Des heures de débat pour un Ctrl+Z.",
-   "d": "À la poubelle. Mardi, on repart de la copie initiale. Des heures de débat pour un contrôle Z.",
-   "chute": true
-  },
-  {
-   "p": "invite",
-   "t": "C'est de l'anti-gaspi. Zéro idée nouvelle, zéro déchet.",
-   "chute": true
-  },
-  {
-   "p": "presentateur",
-   "t": "Et l'addition, qui la paie ?"
-  },
-  {
-   "p": "invite",
-   "t": "Mamie. Elle n'a rien commandé, mais elle était à la table d'à côté.",
+   "t": "Jean-Michel, votre boulanger a signé avec Bruxelles. Demi-croissants pour tout le monde. Victoire.",
    "chute": true,
-   "attente": 0.7
-  },
-  {
-   "p": "presentateur",
-   "t": "Mardi, même assiette, même addition. Bon appétit, mamie.",
-   "chute": true
+   "attente": 0.6
   }
  ],
- "bandeau": [],
- "gag": null,
- "legende": "L'actu du jour, en dessin animé. Satire, personnages fictifs.",
+ "bandeau": [
+  "BRUXELLES : UNE VOITURE SUR DEUX LIVRÉE SANS SA MOITIÉ",
+  "LE VOLANT RESTE EN CHINE, LE COFFRE ARRIVE EN EUROPE",
+  "46 PROJETS STRATÉGIQUES, ZÉRO CAILLOU",
+  "LE BOULANGER DE JEAN-MICHEL SIGNE UNE DÉCLARATION COMMUNE"
+ ],
+ "gag": {
+  "replique": 2,
+  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. On a car dealership parking lot with confetti and blue flags with yellow stars, a worker in overalls saws a small hybrid car exactly in half with a giant handsaw, the two halves fall apart, a deadpan reporter with a microphone stands in front, a balloon arch above, comedic, absurd."
+ },
+ "legende": "L'Europe a négocié deux jours à Pékin pour avoir moitié moins d'hybrides pas chères. Victoire ! Satire, personnages fictifs.",
  "hashtags": [
   "satire",
+  "chine",
+  "voiturehybride",
+  "unioneuropeenne",
+  "pouvoirdachat",
   "humour",
-  "actualite",
-  "politique"
+  "actu"
  ],
- "sources": [],
- "decoupage": [],
+ "sources": [
+  "https://www.bfmtv.com/international/asie/chine/video-chine-les-exportations-de-voitures-hybrides-en-europe-pourraient-etre-reduite-de-moitie_VN-202610090856.html",
+  "https://www.lemonde.fr/economie/article/2026/10/09/entre-bruxelles-et-pekin-un-compromis-fragile-sur-l-automobile-pour-eviter-l-escalade-commerciale_6790634_3234.html",
+  "https://www.lefigaro.fr/societes/20-000-contre-31-000-dollars-l-enorme-ecart-de-cout-de-production-d-une-voiture-electrique-entre-la-chine-et-l-europe-20261009"
+ ],
+ "decoupage": [
+  {
+   "scene": "Plateau, plan serré sur Jean-Michel impassible. Une incrustation montre un croissant coupé en deux. Woosh vers le direct.",
+   "repliques": [
+    0,
+    1
+   ],
+   "lieu": "plateau",
+   "son": "woosh",
+   "duree": 10.0
+  },
+  {
+   "scene": "Direct sur un parking de concession à Bruxelles, avec des confettis et des drapeaux européens. Derrière Martine, un ouvrier scie une voiture hybride pile au milieu. L'invité apparaît en duplex et hoche la tête, satisfait.",
+   "repliques": [
+    2,
+    3
+   ],
+   "lieu": "direct",
+   "son": "rimshot",
+   "duree": 13.0
+  },
+  {
+   "scene": "Plateau et duplex. L'invité affiche un graphique « Bouchons : moins cinquante pour cent ». Martine, en direct, montre une demi-voiture d'un air blasé.",
+   "repliques": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "lieu": "duplex",
+   "son": "xylo_descente",
+   "duree": 20.0
+  },
+  {
+   "scene": "Plateau. Un graphique des coûts (20 000 contre 31 000 dollars) s'affiche. L'invité tire une étiquette de prix vers le haut. Puis un écran montre « 46 projets » à côté d'une montagne de métaux avec un drapeau chinois dessus.",
+   "repliques": [
+    8,
+    9,
+    10,
+    11
+   ],
+   "lieu": "plateau",
+   "son": "dun_dun",
+   "duree": 20.0
+  },
+  {
+   "scene": "Plateau. Jean-Michel pose la question sans bouger un sourcil. L'invité tend fièrement une clé de voiture coupée en deux.",
+   "repliques": [
+    12,
+    13
+   ],
+   "lieu": "plateau",
+   "son": "trombone_triste",
+   "duree": 9.0
+  },
+  {
+   "scene": "Direct. Martine tient un demi-croissant sous cellophane, avec un tampon de l'UE. Silence, puis chute. Retour en boucle sur l'accroche.",
+   "repliques": [
+    14
+   ],
+   "lieu": "direct",
+   "son": "rimshot",
+   "duree": 7.0
+  }
+ ],
  "fiche": {
-  "concept": "« Le budget réchauffé ». La partie « recettes » du budget 2027 est renvoyée en cuisine par 31 députés sur 36. L'opposition refuse le plat du chef. Le camp du chef refuse le plat une fois salé par l'opposition. Mardi, on ressert quand même l'assiette de départ, et l'addition part à la table d'à côté, celle des retraités. Note qualité interne après réécriture : 84/100 (originalité 17, punchlines 21, rythme 13, pertinence satirique 13, dialogues 8, visuel 8, chute 4). C'est une estimation, pas une mesure objective. Décision : prêt pour production.",
-  "format": "Faux JT : direct depuis la commission des finances, porte-parole fictif de Bercy en duplex. Tout le sketch file la métaphore du restaurant.",
-  "angle": "Tout le monde est d'accord pour dire non, mais chacun pour la raison inverse. Rien ne change : on ressert le plat refusé et ceux qui n'ont rien commandé paient l'addition. L'invité rebaptise l'échec « anti-gaspi » et explique qu'on vise les retraités et les mairies parce qu'ils ne peuvent pas partir.",
-  "resume_factuel": "Le vendredi 9 octobre 2026, la commission des finances de l'Assemblée nationale a très largement rejeté la partie « recettes » du projet de budget de l'État pour 2027 : 31 voix contre, 3 pour et 2 abstentions. Les oppositions critiquaient la copie du gouvernement. L'essentiel du camp gouvernemental regrettait les amendements ajoutés par les oppositions. La contribution demandée aux retraités et aux collectivités a été au cœur des tensions. Dans l'Hémicycle, à partir du mardi 13 octobre, les députés repartiront de la copie initiale.",
+  "concept": "« La Demi-Victoire » : l'Europe rentre de Pékin avec moitié moins de voitures hybrides pas chères et le fête comme une finale gagnée. Un porte-parole fictif de la Commission présente chaque recul comme un triomphe. Sur un parking de concession, on coupe les voitures en deux pour respecter l'accord.",
+  "format": "Faux JT avec un direct sur un parking de concession à Bruxelles et un invité sur le plateau (interview qui chambre)",
+  "angle": "Une victoire à l'envers. Deux jours de négociation sous la menace pour obtenir MOINS d'une chose que les consommateurs achètent parce qu'elle est moins chère. Le fil rouge, c'est le boulanger : obtenir moins, c'est facile, tout le monde dit oui. L'escalade passe par des « soit… soit… », puis par le coût de production (20 000 contre 31 000 dollars) : au lieu de baisser ses prix, on demande aux autres de monter les leurs. À la fin, la question logique du présentateur fait tout tomber.",
+  "resume_factuel": "Vendredi 9 octobre 2026, à Pékin, après deux jours de visite (8 et 9 octobre) et des entretiens avec le ministre chinois du Commerce, Wang Wentao, le commissaire européen au Commerce, Maroš Šefčovič, a annoncé que la Chine acceptait de « modérer » ses exportations de voitures hybrides et hybrides rechargeables vers l'UE. Il évoque une réduction de plus de la moitié, sur environ quatre ans selon certaines sources, et parle d'un « premier pas crucial ». L'UE menaçait de prendre des mesures faute de résultats. Le même jour, Bruxelles a lancé 46 projets stratégiques sur les métaux critiques, dont cinq en France. Selon Le Figaro, une voiture électrique coûte environ 20 000 dollars à produire en Chine, contre 31 000 en Europe.",
   "faits_reels": [
-   "Le 9 octobre 2026, la commission des finances a rejeté la partie « recettes » du budget 2027 par 31 voix contre, 3 pour et 2 abstentions (Le Figaro, Le Monde, BFMTV).",
-   "Les oppositions critiquaient la copie du gouvernement, et l'essentiel du camp gouvernemental regrettait les amendements des oppositions (Le Figaro).",
-   "La contribution demandée aux retraités et aux collectivités a cristallisé les tensions (Le Monde).",
-   "Les députés repartent de la copie initiale dans l'Hémicycle à partir du mardi 13 octobre (Le Monde).",
-   "Faits tirés uniquement des articles fournis par le robot : aucune vérification web supplémentaire n'a été faite."
+   "Le 9 octobre 2026, à Pékin, Maroš Šefčovič a annoncé que la Chine acceptait de « modérer » ses exportations d'hybrides et d'hybrides rechargeables vers l'UE.",
+   "La perspective annoncée est une réduction de plus de la moitié de ces exportations, sur environ quatre ans selon certaines sources.",
+   "La visite a duré deux jours (8 et 9 octobre) et s'est conclue par une déclaration commune, sur fond de menace européenne de mesures commerciales.",
+   "Šefčovič a qualifié l'accord de « premier pas crucial ».",
+   "Selon Le Figaro, une voiture électrique coûte environ 20 000 dollars à produire en Chine, contre 31 000 en Europe.",
+   "Bruxelles a lancé 46 projets stratégiques sur les métaux critiques, dont cinq en France (Le Figaro).",
+   "Je n'ai pas fait de recherche web : je me suis appuyé uniquement sur les articles et les faits vérifiés fournis par le robot."
   ],
   "inventions": [
-   "Jean-Michel Plateau, Martine Couloir et Aymeric Ponction, porte-parole de Bercy, sont des personnages fictifs.",
-   "La métaphore du restaurant (chef, commis, plat salé, addition) est une invention satirique.",
-   "L'hypothèse selon laquelle les trois votes pour viendraient du « chef et de ses commis » est inventée.",
-   "L'idée qu'on vise les retraités et les mairies « parce qu'ils ne partent pas » est une invention satirique attribuée à un personnage fictif.",
-   "La mairie coincée au rond-point en tentant de s'exiler en Belgique est inventée.",
-   "La formule « anti-gaspi, zéro idée nouvelle » est inventée.",
-   "Toutes les dépêches du bandeau sont fictives."
+   "Jean-Michel Plateau, Martine Couloir et le porte-parole Gaspard Moitié sont des personnages fictifs.",
+   "Les voitures coupées en deux à la scie sur un parking de Bruxelles.",
+   "L'« ambiance finale gagnée » à Bruxelles.",
+   "Toutes les déclarations du porte-parole (bouchons, pouvoir d'achat, souveraineté, métaux) sont inventées. Elles ne sont attribuées à aucune personne réelle.",
+   "Le boulanger qui signe avec Bruxelles et ne vend plus que des demi-croissants.",
+   "Toutes les dépêches du bandeau."
   ],
-  "decoupage": null,
+  "decoupage": [
+   {
+    "scene": "Plateau, plan serré sur Jean-Michel impassible. Une incrustation montre un croissant coupé en deux. Woosh vers le direct.",
+    "repliques": [
+     0,
+     1
+    ],
+    "lieu": "plateau",
+    "son": "woosh",
+    "duree": 10.0
+   },
+   {
+    "scene": "Direct sur un parking de concession à Bruxelles, avec des confettis et des drapeaux européens. Derrière Martine, un ouvrier scie une voiture hybride pile au milieu. L'invité apparaît en duplex et hoche la tête, satisfait.",
+    "repliques": [
+     2,
+     3
+    ],
+    "lieu": "direct",
+    "son": "rimshot",
+    "duree": 13.0
+   },
+   {
+    "scene": "Plateau et duplex. L'invité affiche un graphique « Bouchons : moins cinquante pour cent ». Martine, en direct, montre une demi-voiture d'un air blasé.",
+    "repliques": [
+     4,
+     5,
+     6,
+     7
+    ],
+    "lieu": "duplex",
+    "son": "xylo_descente",
+    "duree": 20.0
+   },
+   {
+    "scene": "Plateau. Un graphique des coûts (20 000 contre 31 000 dollars) s'affiche. L'invité tire une étiquette de prix vers le haut. Puis un écran montre « 46 projets » à côté d'une montagne de métaux avec un drapeau chinois dessus.",
+    "repliques": [
+     8,
+     9,
+     10,
+     11
+    ],
+    "lieu": "plateau",
+    "son": "dun_dun",
+    "duree": 20.0
+   },
+   {
+    "scene": "Plateau. Jean-Michel pose la question sans bouger un sourcil. L'invité tend fièrement une clé de voiture coupée en deux.",
+    "repliques": [
+     12,
+     13
+    ],
+    "lieu": "plateau",
+    "son": "trombone_triste",
+    "duree": 9.0
+   },
+   {
+    "scene": "Direct. Martine tient un demi-croissant sous cellophane, avec un tampon de l'UE. Silence, puis chute. Retour en boucle sur l'accroche.",
+    "repliques": [
+     14
+    ],
+    "lieu": "direct",
+    "son": "rimshot",
+    "duree": 7.0
+   }
+  ],
+  "verification_web": true,
   "note": 67.0,
-  "critique": "",
+  "critique": "originalite 13 ; punchlines 16 ; rythme 10 ; pertinence 10 ; dialogues 7 ; visuel 8 ; chute 3",
   "decision": "à retravailler"
  }
 }
