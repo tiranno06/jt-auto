@@ -72,7 +72,7 @@ def application(nom):
 
 # Service worker : l'appli s'ouvre même hors connexion (dernière version de la page), sans jamais mettre en cache
 # les vidéos (trop lourdes) ni les appels à GitHub.
-SW = r"""const CACHE = "regie-v1";
+SW = r"""const CACHE = "regie-v2";
 const COQUILLE = ["./", "manifest.webmanifest", "icone-192.png", "icone-512.png"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(COQUILLE))); self.skipWaiting(); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(k => Promise.all(k.filter(x => x !== CACHE).map(x => caches.delete(x))))); self.clients.claim(); });
@@ -130,11 +130,24 @@ button{font:inherit;border:0;border-radius:14px;cursor:pointer}
 .second:disabled{opacity:.4}
 #suivi{font-size:13px;margin-top:8px;min-height:18px;color:var(--doux)}
 #toast{position:fixed;top:16px;left:50%;transform:translateX(-50%);background:var(--jaune);color:#111;font-weight:700;padding:10px 16px;border-radius:12px;display:none;z-index:9;max-width:90vw;text-align:center}
+.onglets{position:sticky;top:0;z-index:5;display:flex;gap:8px;max-width:560px;margin:0 auto;padding:8px 16px;background:var(--bg)}
+.onglet{flex:1;padding:10px;font-size:15px;font-weight:700;background:var(--carte);color:var(--doux);border:1px solid var(--ligne)}
+.onglet.actif{background:var(--jaune);color:#111;border-color:var(--jaune)}
+h2{margin:0 0 10px;font-size:16px}
+label{display:block;font-size:13px;color:var(--doux);margin:10px 0}
+select{display:block;width:100%;margin-top:6px;font:inherit;font-size:15px;padding:10px;border-radius:10px;border:1px solid var(--ligne);background:#0e0f17;color:var(--texte)}
+label .jeton{margin-top:6px}
+.note{font-size:12px;color:var(--doux);line-height:1.45}
+.action{display:block;width:100%;margin:8px 0;padding:13px;font-size:15px;font-weight:700;background:var(--carte);color:var(--texte);border:1px solid var(--ligne)}
+.action:disabled{opacity:.45}
+.lien{display:block;padding:11px 0;color:var(--bleu);text-decoration:none;border-bottom:1px solid var(--ligne);font-size:14px}.lien:last-child{border:0}
 video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#000;display:none}
 </style></head><body>
 <header><h1>__NOM__</h1><div class="sous">Régie du robot · vidéos de la plus récente à la plus ancienne</div>
 <button id="installer" style="display:none;margin-top:10px;padding:9px 16px;font-size:14px;font-weight:700;background:var(--jaune);color:#111">📲 Installer l'application</button></header>
+<nav class="onglets"><button class="onglet actif" data-o="videos">🎬 Vidéos</button><button class="onglet" data-o="config">⚙️ Réglages</button></nav>
 <main>
+ <div id="o-videos">
   <section class="panneau">
     <div class="auto">
       <div class="txt"><b id="autoTitre">Publication automatique</b><small id="autoAide">Connectez la régie (ci-dessous) pour utiliser les boutons.</small></div>
@@ -147,6 +160,36 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     </details>
   </section>
   <div id="liste"></div>
+ </div>
+ <div id="o-config" style="display:none">
+  <p class="note" id="cfgEtat">Connectez la régie (onglet Vidéos) pour modifier les réglages.</p>
+  <section class="panneau"><h2>📅 Planning</h2>
+    <label>Rythme des émissions<select data-var="FREQUENCE" data-def="1"><option value="1">Une par jour</option><option value="2">Un jour sur deux</option><option value="3">Un jour sur trois</option><option value="0">⏸ Pause (le robot ne produit plus)</option></select></label>
+    <label>Heure de fabrication (heure de Paris)<select data-var="HEURE" data-def="7" id="selHeure"></select></label>
+    <p class="note">La vidéo est prête environ 20 à 40 minutes après cette heure.</p>
+  </section>
+  <section class="panneau"><h2>✍️ Sketch</h2>
+    <label>Durée<select data-var="LONGUEUR" data-def="normale"><option value="courte">Courte (20-30 s)</option><option value="normale">Normale (30-45 s)</option><option value="longue">Longue (45-60 s)</option></select></label>
+    <label>Ton de l'humour<select data-var="TON" data-def="bon_enfant"><option value="bon_enfant">Foutage de gueule bon enfant</option><option value="piquant">Satire piquante</option><option value="absurde">Absurde total</option></select></label>
+    <label>Auteur (modèle Claude)<select data-var="MODELE_CLAUDE" data-def="claude-sonnet-5-5"><option value="claude-sonnet-5-5">Sonnet (économique, recommandé)</option><option value="claude-opus-5-5">Opus (plus fin, environ 5× plus cher)</option></select></label>
+    <label>Nom de l'émission<div class="jeton"><input data-var="NOM_EMISSION" data-def="L'info en caoutchouc" data-texte="1" maxlength="30"><button class="second" data-enr="NOM_EMISSION" style="flex:none;padding:10px 14px">OK</button></div></label>
+  </section>
+  <section class="panneau"><h2>🎥 Vidéo</h2>
+    <div class="auto"><div class="txt"><b>Plan gag généré par IA</b><small>Un plan « reconstitution » Wan 2.2 par vidéo. À couper si les crédits Modal fondent.</small></div><button class="inter" data-var="PLAN_GAG" data-def="1" data-bascule="1"></button></div>
+  </section>
+  <section class="panneau"><h2>🚀 Actions</h2>
+    <button class="action" id="lancer">▶️ Fabriquer une émission maintenant</button>
+    <button class="action" id="majsite">🔄 Mettre à jour l'application</button>
+    <div id="suiviCfg" class="note"></div>
+  </section>
+  <section class="panneau"><h2>🔗 Raccourcis</h2>
+    <a class="lien" id="lienActions" target="_blank" rel="noopener">Activité du robot (GitHub)</a>
+    <a class="lien" href="https://modal.com/settings/usage" target="_blank" rel="noopener">Crédits Modal (voix + plan gag)</a>
+    <a class="lien" href="https://console.anthropic.com/settings/billing" target="_blank" rel="noopener">Crédit Claude (écriture)</a>
+    <a class="lien" href="https://publish.buffer.com" target="_blank" rel="noopener">Buffer (file de publication)</a>
+    <a class="lien" href="https://www.tiktok.com/tiktokstudio" target="_blank" rel="noopener">TikTok Studio (statistiques)</a>
+  </section>
+ </div>
 </main>
 <div id="barre"><div class="int">
   <div id="choix">Touchez une vidéo pour la vérifier</div>
@@ -275,6 +318,68 @@ $("#manuel").onclick=async()=>{
   catch(e){if(e.name!=="AbortError")toast("Partage impossible : "+e.message)}
   b.textContent="Partage manuel";
 };
+// ------------------------------------------------ onglets
+document.querySelectorAll(".onglet").forEach(b=>b.onclick=()=>{
+  document.querySelectorAll(".onglet").forEach(x=>x.classList.toggle("actif",x===b));
+  $("#o-videos").style.display=b.dataset.o==="videos"?"":"none"; $("#o-config").style.display=b.dataset.o==="config"?"":"none";
+  $("#barre").style.display=b.dataset.o==="videos"?"":"none"; if(b.dataset.o==="config") chargerReglages();
+});
+// ------------------------------------------------ réglages (variables du dépôt GitHub)
+for(let h=5;h<=22;h++){const o=document.createElement("option");o.value=h;o.textContent=h+" h";$("#selHeure").appendChild(o)}
+$("#lienActions").href="https://github.com/"+CONF.depot+"/actions";
+async function ecrireVar(nom,valeur){
+  const corps=JSON.stringify({name:nom,value:String(valeur)});
+  let r=await gh("/actions/variables/"+nom,{method:"PATCH",body:corps});
+  if(r.status===404) r=await gh("/actions/variables",{method:"POST",body:corps});
+  if(!r.ok) throw new Error("GitHub a répondu "+r.status);
+}
+const champs=()=>document.querySelectorAll("#o-config [data-var]");
+function activer(on){champs().forEach(c=>c.disabled=!on);document.querySelectorAll("#o-config .action,[data-enr]").forEach(b=>b.disabled=!on)}
+async function chargerReglages(){
+  if(!lireJeton()){activer(false);$("#cfgEtat").style.display="";return}
+  $("#cfgEtat").textContent="Lecture des réglages…";
+  try{
+    const r=await gh("/actions/variables?per_page=50"); const d=await r.json(); const v={};
+    (d.variables||[]).forEach(x=>v[x.name]=x.value);
+    champs().forEach(c=>{const val=(c.dataset.var in v)?v[c.dataset.var]:c.dataset.def;
+      if(c.dataset.bascule) c.classList.toggle("on",String(val)!=="0"); else c.value=val;});
+    activer(true); $("#cfgEtat").style.display="none";
+  }catch(e){$("#cfgEtat").textContent="Erreur : "+e.message;activer(false)}
+}
+champs().forEach(c=>{
+  if(c.dataset.texte) return;
+  const ev=c.dataset.bascule?"click":"change";
+  c.addEventListener(ev,async()=>{
+    const val=c.dataset.bascule?(c.classList.contains("on")?"0":"1"):c.value; c.disabled=true;
+    try{await ecrireVar(c.dataset.var,val); if(c.dataset.bascule) c.classList.toggle("on",val==="1"); toast("Réglage enregistré ✓")}
+    catch(e){toast("Impossible : "+e.message); chargerReglages()}
+    c.disabled=false;
+  });
+});
+document.querySelectorAll("[data-enr]").forEach(b=>b.onclick=async()=>{
+  const c=document.querySelector(`[data-var="${b.dataset.enr}"]`); const val=c.value.trim(); if(!val)return;
+  try{await ecrireVar(b.dataset.enr,val);toast("Enregistré ✓ (visible dès la prochaine émission)")}catch(e){toast("Impossible : "+e.message)}
+});
+async function lancerFlux(fichier,bouton,texte){
+  bouton.disabled=true; const s=$("#suiviCfg"); const depart=new Date(Date.now()-5000);
+  try{
+    const r=await gh(`/actions/workflows/${fichier}/dispatches`,{method:"POST",body:JSON.stringify({ref:CONF.branche})});
+    if(r.status!==204) throw new Error("GitHub a répondu "+r.status);
+    s.textContent=texte;
+    for(let k=0;k<200;k++){
+      await new Promise(r=>setTimeout(r,15000));
+      const d=await (await gh(`/actions/workflows/${fichier}/runs?event=workflow_dispatch&per_page=3`)).json();
+      const run=(d.workflow_runs||[]).find(x=>new Date(x.created_at)>=depart); if(!run) continue;
+      if(run.status!=="completed"){s.textContent=texte+" ("+(run.status==="queued"?"en file d'attente":"en cours")+")";continue}
+      s.innerHTML=run.conclusion==="success"?"✅ Terminé. Rouvrez l'application dans une minute pour voir le résultat.":`❌ Échec. <a style="color:var(--bleu)" href="${run.html_url}" target="_blank" rel="noopener">Voir le détail</a>`;
+      break;
+    }
+  }catch(e){s.textContent="Impossible : "+e.message}
+  bouton.disabled=false;
+}
+$("#lancer").onclick=()=>lancerFlux("emission.yml",$("#lancer"),"🎬 Le robot fabrique une émission (20 à 40 min)…");
+$("#majsite").onclick=()=>lancerFlux("site.yml",$("#majsite"),"🔄 Mise à jour de l'application (2 à 3 min)…");
+activer(false);
 // ------------------------------------------------ application installable
 if("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(()=>{});
 let invite=null;

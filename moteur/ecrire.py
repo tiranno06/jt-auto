@@ -4,6 +4,13 @@ Deux passes : 1) l'auteur écrit ; 2) un « script doctor » réécrit les blagu
 import json, os, re, unicodedata
 
 MODELE = os.environ.get("MODELE_CLAUDE") or "claude-sonnet-5-5"
+# réglages de la régie (variables du dépôt)
+LONGUEURS = {"courte": ("6 à 8", "20 à 30"), "normale": ("8 à 11", "30 à 45"), "longue": ("11 à 14", "45 à 60")}
+TONS = {"bon_enfant": "foutage de gueule bon enfant envers les institutions, la langue de bois et les travers du pouvoir",
+        "piquant": "satire mordante et sans pitié envers les institutions, les décisions et la langue de bois (jamais envers les gens pour ce qu'ils sont)",
+        "absurde": "absurde total façon sketch surréaliste : situations délirantes poussées très loin, logique folle mais implacable"}
+NB, SECONDES = LONGUEURS.get(os.environ.get("LONGUEUR") or "normale", LONGUEURS["normale"])
+TON = TONS.get(os.environ.get("TON") or "bon_enfant", TONS["bon_enfant"])
 CAST = {
     "presentateur": "Jean-Michel Plateau, présentateur. Calme olympien, pince-sans-rire, pose les questions simples qui font tout s'écrouler. C'est souvent lui qui lance la chute finale.",
     "envoyee": "Martine Couloir, envoyée spéciale (fictive) en direct sur le terrain (Assemblée, ministère, salon, sommet…). Blasée, a tout vu, décrit des scènes absurdes avec un sérieux total. Reine du détail concret ridicule.",
@@ -29,19 +36,19 @@ EXEMPLE = {
     "gag": {"replique": 4, "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. Three tired office workers in grey suits dig frantically under the cushions of a big orange sofa in a fancy ministry office, coins and papers flying, comedic, deadpan."},
 }
 
-SYSTEME = """Tu es le meilleur auteur comique de France. Tu écris « L'info en caoutchouc », un faux JT satirique quotidien de 30 à 45 secondes pour TikTok, joué par des personnages 100 % FICTIFS dessinés en cartoon.
+SYSTEME = """Tu es le meilleur auteur comique de France. Tu écris « L'info en caoutchouc », un faux JT satirique quotidien de {secondes} secondes pour TikTok, joué par des personnages 100 % FICTIFS dessinés en cartoon.
 
 PERSONNAGES (clés autorisées pour "p") :
 {cast}
 
-LE FORMAT : UN SEUL sujet d'actualité, le plus drôle à traiter parmi les titres fournis. Le présentateur lance, puis direct avec l'envoyée sur place et/ou l'invité. 8 à 12 répliques, courtes (une ou deux phrases).
+LE FORMAT : UN SEUL sujet d'actualité, le plus drôle à traiter parmi les titres fournis. Le présentateur lance, puis direct avec l'envoyée sur place et/ou l'invité. {nb} répliques, courtes (une ou deux phrases).
 
 COMMENT FAIRE RIRE (méthode obligatoire) :
 - Trouve UNE idée comique forte (le « jeu ») et pousse-la jusqu'au bout : chaque réplique monte d'un cran dans l'absurde.
 - Des images concrètes, précises et ridicules (« deux euros et un Tic Tac », « sous les coussins du canapé ») plutôt que des concepts.
 - La chute est TOUJOURS le dernier mot de la réplique. Phrases courtes. Jamais d'explication de la blague, jamais de jeu de mots facile.
 - Une blague du début revient en chute finale (rappel), de préférence retournée.
-- Ton : foutage de gueule bon enfant envers les institutions, la langue de bois et les travers du pouvoir. Pince-sans-rire, jamais méchant envers les gens.
+- Ton : {ton}. Pince-sans-rire, jamais méchant envers les gens.
 - Accroche dans la PREMIÈRE phrase : le spectateur doit comprendre le sujet et sourire en 3 secondes.
 
 RÈGLES ABSOLUES :
@@ -72,7 +79,7 @@ DOCTEUR = """Tu es maintenant « script doctor » pour une émission comique. Vo
 1. Pour chaque réplique, note mentalement sa force comique de 1 à 10.
 2. Réécris les 3 répliques les plus faibles pour qu'elles soient franchement plus drôles (image plus concrète, chute plus courte et plus inattendue, escalade, rappel).
 3. Vérifie que la toute dernière réplique est la meilleure vanne du sketch, sinon améliore-la.
-4. Coupe tout ce qui ralentit : le sketch doit tenir en 30 à 45 secondes (8 à 12 répliques).
+4. Coupe tout ce qui ralentit : le sketch doit tenir en {secondes} secondes ({nb} répliques).
 Garde exactement les mêmes faits et toutes les règles (aucune personne réelle, aucun fait inventé). Réponds UNIQUEMENT avec le JSON complet corrigé, même format."""
 
 def construire_prompt(titres):
@@ -128,7 +135,7 @@ def _appel(client, systeme, messages):
 def ecrire_sketch(titres, essais=3):
     import anthropic
     client = anthropic.Anthropic()
-    systeme = SYSTEME.format(cast="\n".join(f"- {k} : {v}" for k, v in CAST.items()), looks="|".join(LOOKS),
+    systeme = SYSTEME.format(secondes=SECONDES, nb=NB, ton=TON, cast="\n".join(f"- {k} : {v}" for k, v in CAST.items()), looks="|".join(LOOKS),
                              exemple=json.dumps(EXEMPLE, ensure_ascii=False, indent=0))
     message = construire_prompt(titres); liens = {t["lien"] for t in titres}; derniere = None
     for _ in range(essais):
@@ -144,7 +151,7 @@ def ecrire_sketch(titres, essais=3):
     try:
         brut = {k: sk[k] for k in ("sujet", "ecran", "invite_nom", "invite_role", "invite_look", "lieu_direct", "repliques", "bandeau", "gag", "legende", "hashtags", "sources")}
         texte = _appel(client, systeme, [{"role": "user", "content": message}, {"role": "assistant", "content": json.dumps(brut, ensure_ascii=False)},
-                                         {"role": "user", "content": DOCTEUR.format(sketch=json.dumps(brut, ensure_ascii=False, indent=0))}])
+                                         {"role": "user", "content": DOCTEUR.format(sketch=json.dumps(brut, ensure_ascii=False, indent=0), secondes=SECONDES, nb=NB)}])
         sk2 = valider(_json(texte), liens)
         sk2["sources"] = sk2["sources"] or sk["sources"]
         print("Script doctor : sketch amélioré", flush=True)

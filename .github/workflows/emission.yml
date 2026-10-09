@@ -2,7 +2,7 @@ name: Émission du jour
 
 on:
   schedule:
-    - cron: "43 5 * * *"        # tous les jours vers 7h43 (heure de Paris, été) ; heure UTC
+    - cron: "7 * * * *"         # réveil toutes les heures ; moteur/planning.py décide (heure et rythme réglables dans l'appli)
   workflow_dispatch:             # bouton « Run workflow » pour lancer à la main
 
 permissions:
@@ -10,12 +10,31 @@ permissions:
   pages: write
   id-token: write
 
-concurrency:
-  group: emission
-  cancel-in-progress: false
-
 jobs:
+  planning:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      go: ${{ steps.p.outputs.go }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            moteur/planning.py
+            episodes
+      - id: p
+        env:
+          EVENEMENT: ${{ github.event_name }}
+          FREQUENCE: ${{ vars.FREQUENCE }}
+          HEURE: ${{ vars.HEURE }}
+        run: python3 moteur/planning.py
+
   emission:
+    needs: planning
+    if: needs.planning.outputs.go == 'true'
+    concurrency:
+      group: emission
+      cancel-in-progress: false
     runs-on: ubuntu-latest
     timeout-minutes: 120
     environment:
@@ -31,6 +50,8 @@ jobs:
       MODELE_CLAUDE: ${{ vars.MODELE_CLAUDE }}
       NOM_EMISSION: ${{ vars.NOM_EMISSION }}
       PLAN_GAG: ${{ vars.PLAN_GAG }}
+      LONGUEUR: ${{ vars.LONGUEUR }}
+      TON: ${{ vars.TON }}
       GH_TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@v4
@@ -41,7 +62,14 @@ jobs:
           cache: pip
 
       - name: Installer ffmpeg
-        run: sudo apt-get update -q && sudo apt-get install -y -q ffmpeg
+        timeout-minutes: 10
+        run: |
+          if ! (timeout 240 sudo apt-get update -q && timeout 240 sudo apt-get install -y -q ffmpeg); then
+            echo "apt indisponible : ffmpeg statique"
+            curl -sSL https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-linux64-gpl.tar.xz | tar xJ -C /tmp
+            sudo cp /tmp/ffmpeg-master-latest-linux64-gpl/bin/ff* /usr/local/bin/
+          fi
+          ffmpeg -version | head -1
 
       - name: Voix de secours (Piper) en cache
         id: cache-piper
@@ -93,6 +121,7 @@ jobs:
           git config user.email "robot-jt@users.noreply.github.com"
           git add episodes voix
           git commit -m "Émission : ${{ steps.run.outputs.titre }}" || echo "rien à enregistrer"
+          git pull --rebase -q || true
           git push
 
       - name: Construire le site de secours

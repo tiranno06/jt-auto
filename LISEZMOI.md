@@ -76,10 +76,12 @@ Les boutons ont besoin d'une clé limitée à ce seul dépôt :
 
 La clé reste uniquement dans le navigateur de ton téléphone (elle n'est jamais mise sur le site) et ne peut agir que sur ce dépôt. Si tu perds ton téléphone : supprime la clé sur la même page GitHub.
 
-## Réglages (facultatifs)
+## Réglages depuis l'application (onglet ⚙️ Réglages)
+Rythme (chaque jour, un jour sur deux, un jour sur trois, pause), heure de fabrication, durée et ton des sketchs, modèle Claude, nom de l'émission, plan gag IA, bouton « Fabriquer une émission maintenant » et raccourcis vers les crédits Modal / Claude, Buffer et TikTok Studio. Chaque réglage s'applique dès la prochaine émission.
+
+## Réglages avancés (facultatifs)
 | Je veux… | Où |
 |---|---|
-| changer l'heure ou le rythme (ex. tous les 2 jours) | `.github/workflows/emission.yml`, ligne `cron` (heure UTC). Tous les 2 jours : `43 5 */2 * *` |
 | changer le nom de l'émission | *Settings → Secrets and variables → Actions → Variables* → `NOM_EMISSION` |
 | un modèle Claude plus drôle (un peu plus cher) | variable `MODELE_CLAUDE`, par ex. `claude-opus-5-5` |
 | publier en privé pour tester | ajouter la variable d'environnement `TIKTOK_VISIBILITE=SELF_ONLY` dans le workflow |
