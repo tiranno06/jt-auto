@@ -11,7 +11,7 @@ image = (modal.Image.debian_slim(python_version="3.11")
          .apt_install("ffmpeg")
          .pip_install("torch==2.5.1", "diffusers>=0.35.1", "transformers>=4.49,<5", "accelerate", "ftfy",
                       "sentencepiece", "imageio", "imageio-ffmpeg", "numpy")
-         .env({"HF_HOME": "/cache/hf"}))
+         .env({"HF_HOME": "/cache/hf", "PYTORCH_CUDA_ALLOC_CONF": "expandable_segments:True"}))
 MODELE = "Wan-AI/Wan2.2-TI2V-5B-Diffusers"
 NEGATIF = ("photorealistic, 3d render, realistic skin, text, subtitles, letters, watermark, logo, blurry, low quality, "
            "jpeg artifacts, deformed, extra limbs, extra fingers, bad hands, bad face, static, frozen, cluttered background")
@@ -24,6 +24,9 @@ class Video:
         from diffusers import WanPipeline, AutoencoderKLWan
         vae = AutoencoderKLWan.from_pretrained(MODELE, subfolder="vae", torch_dtype=torch.float32)
         self.pipe = WanPipeline.from_pretrained(MODELE, vae=vae, torch_dtype=torch.bfloat16).to("cuda")
+        for f in ("enable_tiling", "enable_slicing"):                         # décodage par morceaux : évite le manque de mémoire
+            try: getattr(self.pipe.vae, f)()
+            except Exception: pass
         cache.commit()
 
     @modal.method()
@@ -33,6 +36,7 @@ class Video:
         from diffusers.utils import export_to_video
         n = int(max(2.0, min(5.0, secondes)) * 24); n = (n - 1) // 4 * 4 + 1          # le modèle attend 4k+1 images
         g = torch.Generator("cuda").manual_seed(int(graine))
+        torch.cuda.empty_cache()
         images = self.pipe(prompt=prompt + " Vibrant flat colors, clean cel animation, smooth comedic motion, vertical framing.",
                            negative_prompt=NEGATIF, height=1280, width=704, num_frames=n,
                            guidance_scale=5.0, num_inference_steps=40, generator=g).frames[0]
