@@ -368,7 +368,8 @@ def rendre(sk, sortie, audios, gag=None, apercu=False):
     ENT = entete(sk.get("sujet", "L'ACTU")); DIRECT = etiquette("DIRECT", (220, 35, 45, 240), point=True)
     TICK, TLAB = bandeau_defilant(sk.get("bandeau")); RECO = etiquette("RECONSTITUTION", (220, 35, 45, 240), taille=38)
     IA = etiquette("image générée par IA", (0, 0, 0, 150), taille=24)
-    L_PLAT = etiquette("PLATEAU", (16, 20, 36, 230), taille=30); L_DIR = etiquette(f"EN DIRECT · {sk.get('lieu_direct', '').upper()}", (220, 35, 45, 240), taille=30)
+    L_PLAT = etiquette("PLATEAU", (16, 20, 36, 230), taille=30); lieu = sk.get('lieu_direct', '').upper(); lieu = lieu if len(lieu) <= 16 else lieu[:15].rstrip() + "…"
+    L_DIR = etiquette(f"DIRECT · {lieu}", (220, 35, 45, 240), taille=28)
     yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
     VIG = (1 - 0.28 * np.clip(((xx - W / 2) / (W * 0.75)) ** 2 + ((yy - H * 0.45) / (H * 0.7)) ** 2, 0, 1))[..., None]
     GRAIN = [np.random.default_rng(k).normal(0, 1.8, (H, W, 1)).astype(np.float32) for k in range(4)]
@@ -442,7 +443,7 @@ def rendre(sk, sortie, audios, gag=None, apercu=False):
         # habillage
         poser(fr, ENT, 0, HEAD_Y)
         if q["i"] == 0 and ACC is not None:                                 # titre-accroche (sert aussi de couverture)
-            u = min(1, tm / 0.25); a2 = pop(ACC, u); poser(fr, a2, (W - a2.shape[1]) / 2, 425 - a2.shape[0] / 2)
+            u = min(1, tm / 0.25); a2 = pop(ACC, u); poser(fr, a2, (W - a2.shape[1]) / 2, 470 - a2.shape[0] / 2)
         if q["i"] != gag_i:
             ox = int(tm * 150) % TICK.shape[1]
             poser(fr, TICK, 190 - ox, TICK_Y); poser(fr, TICK, 190 - ox + TICK.shape[1], TICK_Y); poser(fr, TLAB, 0, TICK_Y)
