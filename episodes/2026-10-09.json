@@ -1,68 +1,68 @@
 {
- "titre": "PRIMAIRE PIRATÉE",
- "sujet": "PRIMAIRE PIRATÉE",
- "ecran": "CYBERATTAQUE",
- "invite_nom": "Gaston Pare-Feu",
- "invite_role": "Porte-parole (fictif) du scrutin",
- "invite_look": "moustache",
- "lieu_direct": "Dans le serveur du parti",
- "titre_accroche": "Primaire piratée : les hackers en tête",
- "question": "Les pirates doivent-ils avoir un débat télévisé ? 👇",
- "running_gag": "Le virus informatique lève la main pour demander la parole à chaque scrutin qu'il attaque.",
+ "titre": "3000 PROFS EXPRESS",
+ "sujet": "3000 PROFS EXPRESS",
+ "ecran": "3000 PROFS",
+ "invite_nom": "Hubert Rustine",
+ "invite_role": "Porte-parole (fictif) du ministère",
+ "invite_look": "chauve",
+ "lieu_direct": "Rayon surgelés",
+ "titre_accroche": "3000 profs en 24 h, mon plombier : 3 semaines",
+ "question": "Votre prof remplaçant, il était encore congelé ? 👇",
+ "running_gag": "",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "Cyberattaque contre la primaire sociale-démocrate. Les pirates sont les seuls à être d'accord.",
+   "t": "Le ministère a trouvé 3 000 profs en 24 heures. Moi, j'ai mis trois semaines à trouver un plombier.",
+   "d": "Le ministère a trouvé trois mille profs en vingt-quatre heures. Moi, j'ai mis trois semaines à trouver un plombier.",
    "chute": true
   },
   {
    "p": "presentateur",
-   "t": "Martine, vous êtes dans le serveur ?"
+   "t": "Martine, ils sortent d'où, ces profs ?"
   },
   {
    "p": "envoyee",
-   "t": "Oui. Il y a l'impôt sur la fortune, la Sécu intégrale, et un virus qui demande la parole.",
-   "d": "Oui. Il y a l'impôt sur la fortune, la Sécurité sociale intégrale, et un virus qui demande la parole.",
+   "t": "J'ai mené l'enquête. Soit c'est un miracle, soit ils ont recruté au rayon surgelés.",
    "chute": true
   },
   {
    "p": "invite",
-   "t": "Le vote est prolongé. C'est un succès : même les pirates participent.",
+   "t": "N'importe quoi. Nos profs sont frais. Ils ont été décongelés ce matin.",
    "chute": true
   },
   {
    "p": "presentateur",
-   "t": "Et qui gagne ?"
+   "t": "Et ils enseignent quoi ?"
   },
   {
    "p": "invite",
-   "t": "Les pirates. Eux, au moins, ont un programme commun.",
+   "t": "Ce qui reste. Le prof de sport fait les maths. Il compte les tours de terrain.",
+   "chute": true
+  },
+  {
+   "p": "envoyee",
+   "t": "Bonne nouvelle, Jean-Michel : votre plombier est arrivé. Il vient d'être nommé prof de physique.",
    "chute": true,
-   "attente": 0.7
+   "attente": 0.5
   }
  ],
  "bandeau": [
-  "LE VOTE PROLONGÉ : LE VIRUS DEMANDE UN TEMPS DE PAROLE",
-  "UN CANDIDAT PROPOSE L'ISF POUR LES HACKERS",
-  "LE SERVEUR RÉCLAME UNE SÉCU INTÉGRALE",
-  "LES PIRATES SIGNENT UN PROGRAMME COMMUN EN DIX MINUTES"
+  "UN PROF RETROUVÉ ENTRE LES PETITS POIS ET LES FRITES",
+  "LE PLOMBIER DE JEAN-MICHEL NOMMÉ PROF DE PHYSIQUE",
+  "RECRUTEMENT EXPRESS : DES PROFS LIVRÉS EN DRIVE"
  ],
  "gag": {
   "replique": 2,
-  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. Inside a glowing computer server room, politicians in suits argue around a table while a small green cartoon virus with a tiny tie politely raises its hand to speak; a deadpan reporter with a microphone stands calmly beside them."
+  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. In a supermarket frozen food aisle, a confused teacher with a briefcase and glasses steps out of a chest freezer covered in frost, holding a piece of chalk, shoppers stare, comedic, deadpan."
  },
- "legende": "Primaire piratée, vote prolongé : les seuls d'accord sur le programme, ce sont les hackers. Satire, personnages fictifs.",
+ "legende": "3000 profs trouvés en 24 h. Le secret ? Le rayon surgelés. Satire, personnages fictifs.",
  "hashtags": [
-  "infoencaoutchouc",
-  "primaire",
-  "cyberattaque",
-  "satire",
   "humour",
-  "actu"
+  "education",
+  "prof",
+  "actualite",
+  "satire",
+  "drole"
  ],
- "sources": [
-  "https://www.bfmtv.com/politique/parti-socialiste/le-vote-de-la-primaire-sociale-democrate-prolonge-jusqu-a-dimanche-18h-apres-une-cyberattaque_AD-202610090797.html",
-  "https://www.lefigaro.fr/conjoncture/retour-de-l-isf-taxe-zucman-secu-integrale-ce-que-comporte-le-programme-economique-des-candidats-a-la-primaire-sociale-democrate-20261009",
-  "https://www.liberation.fr/international/europe/mobilisation-des-lyceens-premier-tour-de-la-primaire-sociale-democrate-le-nobel-de-la-paix-a-la-sud-africaine-navi-pillay-lactu-de-ce-vendredi-9-octobre-20261009_YIIZ2JALAFGUPC7ELRYWPTY52A/"
- ]
+ "sources": []
 }
