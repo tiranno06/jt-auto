@@ -1,26 +1,16 @@
 Casting déjà fait.
 30 titres politiques récents
-Traceback (most recent call last):
-  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 63, in <module>
-    main()
-  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 33, in main
-    sk = ecrire.ecrire_sketch(titres)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/jt-auto/jt-auto/moteur/ecrire.py", line 135, in ecrire_sketch
-    texte = _appel(client, systeme, [{"role": "user", "content": message}])
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/jt-auto/jt-auto/moteur/ecrire.py", line 125, in _appel
-    r = client.messages.create(model=MODELE, max_tokens=4000, system=systeme, messages=messages)
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/anthropic/_utils/_utils.py", line 294, in wrapper
-    return func(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/anthropic/resources/messages/messages.py", line 1029, in create
-    return self._post(
-           ^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/anthropic/_base_client.py", line 1557, in post
-    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
-                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/anthropic/_base_client.py", line 1222, in request
-    raise self._make_status_error_from_response(response) from None
-anthropic.BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CfrY5MoRx8RCHK53Cr7ZA'}
+Script doctor : sketch amélioré
+Sketch : « PROFS REMPLAÇANTS », 11 répliques
+Chatterbox indisponible (Token ID is malformed) : voix de secours Piper.
+Voix : piper
+Plan gag IA indisponible (Token ID is malformed) : la vidéo sortira sans.
+Plan gag IA : non
+durée 57.4 s, 11 répliques, duplex=0, gag=None
+  image 0/1721
+  image 300/1721
+  image 600/1721
+  image 900/1721
+  image 1200/1721
+  image 1500/1721
+OK : sortie/2026-10-09_emission.mp4 (57 s)

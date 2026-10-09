@@ -1,0 +1,87 @@
+{
+ "titre": "PROFS REMPLAÇANTS",
+ "sujet": "PROFS REMPLAÇANTS",
+ "ecran": "3000 PROFS",
+ "invite_nom": "Gérard Tiroir",
+ "invite_role": "Conseiller (fictif) Éducation",
+ "invite_look": "moustache",
+ "lieu_direct": "Ministère",
+ "repliques": [
+  {
+   "p": "presentateur",
+   "t": "Le ministre a retrouvé 3 000 professeurs sans aucun élève. Il promet de les affecter en 12 à 24 heures. Martine ?",
+   "d": "Le ministre a retrouvé trois mille professeurs sans aucun élève. Il promet de les affecter en douze à vingt-quatre heures. Martine ?"
+  },
+  {
+   "p": "envoyee",
+   "t": "Jean-Michel, ils sont là, en rang dans un couloir du ministère. Certains ont encore l'étiquette du prix sur leur cartable."
+  },
+  {
+   "p": "presentateur",
+   "t": "Depuis quand attendent-ils ?"
+  },
+  {
+   "p": "envoyee",
+   "t": "Depuis le concours. L'un d'eux m'a demandé si la rentrée avait eu lieu. Je n'ai pas osé répondre.",
+   "chute": true
+  },
+  {
+   "p": "presentateur",
+   "t": "Avec nous, un conseiller du ministère. Comment perd-on trois mille professeurs ?"
+  },
+  {
+   "p": "invite",
+   "t": "On ne les a pas perdus. On les a rangés. C'est de l'anticipation pédagogique."
+  },
+  {
+   "p": "presentateur",
+   "t": "Rangés où ?"
+  },
+  {
+   "p": "invite",
+   "t": "Dans un endroit tellement sûr que personne ne le retrouve. Surtout nous.",
+   "chute": true
+  },
+  {
+   "p": "envoyee",
+   "t": "Le ministère assure qu'ils sont en train d'être contactés. Un stagiaire les appelle un par un, avec un téléphone à cadran. Il en est à Alain.",
+   "chute": true
+  },
+  {
+   "p": "presentateur",
+   "t": "Donc 12 à 24 heures, c'est tenable ?",
+   "d": "Donc douze à vingt-quatre heures, c'est tenable ?"
+  },
+  {
+   "p": "invite",
+   "t": "Absolument. Dites au monsieur au cartable que la rentrée, c'est dans 12 à 24. On n'a pas précisé quoi.",
+   "d": "Absolument. Dites au monsieur au cartable que la rentrée, c'est dans douze à vingt-quatre. On n'a pas précisé quoi.",
+   "chute": true,
+   "attente": 0.8
+  }
+ ],
+ "bandeau": [
+  "UN STAGIAIRE EN EST À ALAIN, RÉCLAME UNE CHAISE",
+  "LE TIROIR DU MINISTÈRE REFUSE DE COMMENTER",
+  "UN CARTABLE ENCORE ÉTIQUETÉ RETROUVÉ INTACT",
+  "ANTICIPATION PÉDAGOGIQUE : RANGER TRÈS LOIN"
+ ],
+ "gag": {
+  "replique": 1,
+  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. A long line of patient teachers standing in a ministry corridor, each wearing a brand new backpack with a big price tag still attached, one of them looking at his watch and looking confused, comedic, deadpan."
+ },
+ "legende": "3 000 profs retrouvés, rentrée dans 12 à 24... on n'a pas précisé quoi. Satire, personnages fictifs.",
+ "hashtags": [
+  "satire",
+  "actu",
+  "politique",
+  "humour",
+  "education",
+  "professeurs",
+  "jt"
+ ],
+ "sources": [
+  "https://www.bfmtv.com/politique/video-je-ne-vais-pas-cacher-le-fait-qu-il-y-avait-3-000-personnes-qui-n-etaient-pas-actuellement-affectees-explique-edouard-geffray-ministre-de-l-education-nationale_VN-202610090398.html",
+  "https://www.bfmtv.com/politique/video-arrivee-de-3-000-professeurs-remplacants-ce-sont-des-personnes-qui-ont-passe-les-concours-indique-le-ministre-de-l-education-nationale_VN-202610090375.html"
+ ]
+}
