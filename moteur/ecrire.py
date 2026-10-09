@@ -287,7 +287,9 @@ def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=()):
     if candidats and isinstance(candidats[0], dict): candidats = [candidats]
     gtxt = " ; ".join(g for g in gags if g)[:600] or "(aucun pour l'instant)"
     rtxt = " ; ".join(r for r in recents if r)[:1500] or "(aucun)"
-    essais = int(os.environ.get("MAX_REECRITURES", "3")) if essais is None else essais
+    if essais is None:
+        try: essais = max(0, min(5, int(os.environ.get("MAX_REECRITURES") or 3)))   # variable vide ou invalide : 3
+        except ValueError: essais = 3
     systeme = MOTEUR_HUMOUR + ADAPTATION.format(cast="\n".join(f"- {k} : {v}" for k, v in CAST.items()), ton=TON, secondes=SECONDES, nb=NB,
                                                  mots=MOTS, mots_min=MOTS_MIN or 40, special=SPECIAL_DEMAIN if special else "", gags=gtxt, recents=rtxt,
                                                  looks="|".join(LOOKS), exemple=json.dumps(EXEMPLE, ensure_ascii=False, indent=0))

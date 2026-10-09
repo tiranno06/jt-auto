@@ -42,7 +42,8 @@ def sources():
     s = []
     if os.environ.get("GOOGLE_TTS_API_KEY"): s.append("google")
     if os.environ.get("AZURE_SPEECH_KEY") and os.environ.get("AZURE_SPEECH_REGION"): s.append("azure")
-    if os.environ.get("MODAL_TOKEN_ID") and os.environ.get("MODAL_TOKEN_SECRET"): s += ["kyutai", "zonos", "chatterbox"]
+    if os.environ.get("MODAL_TOKEN_ID") and os.environ.get("MODAL_TOKEN_SECRET"):
+        s += ["kyutai"] + (["zonos"] if os.environ.get("ZONOS") == "1" else []) + ["chatterbox"]   # Zonos : dépasse le délai sur Modal, désactivé par défaut
     return s
 
 def _post(url, data, headers, timeout=60):

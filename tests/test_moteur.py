@@ -123,6 +123,14 @@ class TestMoteurHumour(unittest.TestCase):
         self.assertEqual(len(ecritures), 2)                                   # une réécriture après la note de 60
         self.assertIn("web_search", faux.appels[0])                           # vérification web demandée à la sélection
 
+    def test_variable_reecritures_vide(self):
+        os.environ["MAX_REECRITURES"] = ""
+        try:
+            sys.modules["anthropic"] = types.SimpleNamespace(Anthropic=lambda: FauxClaude())
+            cands = [[article("Budget 2027 : les économies rejetées", "a", "L1"), article("Budget : les députés et les économies", "b", "L2")]] * 2
+            self.assertEqual(ecrire.ecrire_sketch(cands)["fiche"]["note"], 86)    # variable vide : 3 réécritures par défaut, pas de plantage
+        finally: os.environ.pop("MAX_REECRITURES")
+
     def test_recherche_web_indisponible(self):
         faux = FauxClaude(web_en_panne=True); sk = self._lancer(faux)
         self.assertEqual(sk["fiche"]["note"], 86)                             # repli sans recherche web, sans planter
