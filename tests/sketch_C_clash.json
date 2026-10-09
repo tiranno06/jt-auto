@@ -1,0 +1,18 @@
+{
+ "sujet": "3000 PROFS EXPRESS", "ecran": "3000 PROFS", "titre_accroche": "3000 profs en 24 h, mon plombier : 3 semaines",
+ "invite_nom": "Hubert Rustine", "invite_role": "Porte-parole (fictif) du ministère", "invite_look": "chauve",
+ "lieu_direct": "Rayon surgelés", "question": "Votre prof remplaçant, il était encore congelé ? 👇",
+ "repliques": [
+  {"p": "presentateur", "t": "Le ministère a trouvé 3 000 profs en 24 heures. Moi, j'ai mis trois semaines à trouver un plombier.", "d": "Le ministère a trouvé trois mille profs en vingt-quatre heures. Moi, j'ai mis trois semaines à trouver un plombier.", "chute": true},
+  {"p": "presentateur", "t": "Martine, ils sortent d'où, ces profs ?"},
+  {"p": "envoyee", "t": "J'ai mené l'enquête. Soit c'est un miracle, soit ils ont recruté au rayon surgelés.", "chute": true},
+  {"p": "invite", "t": "N'importe quoi. Nos profs sont frais. Ils ont été décongelés ce matin.", "chute": true},
+  {"p": "presentateur", "t": "Et ils enseignent quoi ?"},
+  {"p": "invite", "t": "Ce qui reste. Le prof de sport fait les maths. Il compte les tours de terrain.", "chute": true},
+  {"p": "envoyee", "t": "Bonne nouvelle, Jean-Michel : votre plombier est arrivé. Il vient d'être nommé prof de physique.", "attente": 0.5, "chute": true}
+ ],
+ "bandeau": ["UN PROF RETROUVÉ ENTRE LES PETITS POIS ET LES FRITES", "LE PLOMBIER DE JEAN-MICHEL NOMMÉ PROF DE PHYSIQUE", "RECRUTEMENT EXPRESS : DES PROFS LIVRÉS EN DRIVE"],
+ "gag": {"replique": 2, "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. In a supermarket frozen food aisle, a confused teacher with a briefcase and glasses steps out of a chest freezer covered in frost, holding a piece of chalk, shoppers stare, comedic, deadpan."},
+ "legende": "3000 profs trouvés en 24 h. Le secret ? Le rayon surgelés. Satire, personnages fictifs.",
+ "hashtags": ["humour", "education", "prof", "actualite", "satire", "drole"], "sources": []
+}

@@ -1,0 +1,18 @@
+{
+ "sujet": "3000 PROFS AVANT MIDI", "ecran": "11 H 55", "titre_accroche": "Le ministre doit trouver 3000 profs avant midi",
+ "invite_nom": "Gérard Panique", "invite_role": "Ministre (fictif) de l'Éducation", "invite_look": "moustache",
+ "lieu_direct": "Couloir du ministère", "question": "Et vous, vous êtes prof de quoi depuis ce matin ? 👇",
+ "repliques": [
+  {"p": "presentateur", "t": "Le ministre devait trouver 3 000 profs avant midi. Il est onze heures cinquante-cinq.", "d": "Le ministre devait trouver trois mille profs avant midi. Il est onze heures cinquante-cinq.", "chute": true},
+  {"p": "presentateur", "t": "Monsieur le ministre, vous êtes avec nous ?"},
+  {"p": "invite", "t": "Prenez n'importe qui ! Le gardien ? Il sait compter ? Parfait, il fait maths !", "chute": true},
+  {"p": "envoyee", "t": "Jean-Michel, c'est la folie. La cantinière vient d'être nommée prof de chimie. Ses expériences sont au menu demain.", "chute": true},
+  {"p": "invite", "t": "Il en manque deux ! Martine ! Vous savez lire ? Vous êtes prof de français !", "chute": true},
+  {"p": "envoyee", "t": "Jean-Michel… je commence lundi.", "attente": 0.6, "chute": true},
+  {"p": "presentateur", "t": "Il est midi. Le ministre vient de se nommer lui-même… prof de calme.", "chute": true}
+ ],
+ "bandeau": ["LE GARDIEN NOMMÉ PROF DE MATHS : IL COMPTE LES CLÉS", "LA CANTINIÈRE PROF DE CHIMIE : LA PURÉE EXPLOSE", "MARTINE COULOIR ATTENDUE LUNDI EN 5e B"],
+ "gag": {"replique": 3, "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. A school cafeteria lady in an apron and hairnet stands at a classroom blackboard wearing safety goggles, stirring a giant bubbling pot of green mashed potatoes that explodes in a puff of smoke, students duck under desks, comedic."},
+ "legende": "Il fallait 3000 profs avant midi. Le ministre a improvisé. Satire, personnages fictifs.",
+ "hashtags": ["humour", "education", "prof", "ministre", "satire", "drole"], "sources": []
+}

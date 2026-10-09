@@ -54,7 +54,13 @@ def main():
     from zoneinfo import ZoneInfo
     dimanche = datetime.datetime.now(ZoneInfo("Europe/Paris")).weekday() == 6 and os.environ.get("INFOS_DEMAIN", "1") != "0"
     gags = [h.get("running_gag") for h in historique[-15:] if h.get("running_gag")]
-    sk = ecrire.ecrire_sketch(titres, gags=gags, special=dimanche)
+    test = os.environ.get("SKETCH_TEST", "").strip()
+    if test:                                                               # sketch écrit à la main (essai d'un style)
+        ecrire.NB_MAX = 20
+        sk = ecrire.valider(json.load(open(test, encoding="utf-8")), set())
+        print(f"Sketch d'essai : {test}", flush=True)
+    else:
+        sk = ecrire.ecrire_sketch(titres, gags=gags, special=dimanche)
     print(f"Sketch : « {sk['sujet']} », {len(sk['repliques'])} répliques", flush=True)
     audios, credits_voix, mots = voix.generer(sk["repliques"], jt.VOIX)
     moteur = " + ".join(credits_voix)

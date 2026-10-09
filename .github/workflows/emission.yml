@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: "7 * * * *"         # réveil toutes les heures ; moteur/planning.py décide (heure et rythme réglables dans l'appli)
   workflow_dispatch:             # bouton « Run workflow » pour lancer à la main
+    inputs:
+      sketch:
+        description: "Facultatif : sketch d'essai (ex. tests/sketch_C_clash.json)"
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -54,6 +59,7 @@ jobs:
       NOM_EMISSION: ${{ vars.NOM_EMISSION }}
       PLAN_GAG: ${{ vars.PLAN_GAG }}
       LONGUEUR: ${{ vars.LONGUEUR }}
+      SKETCH_TEST: ${{ inputs.sketch }}
       TON: ${{ vars.TON }}
       INFOS_DEMAIN: ${{ vars.INFOS_DEMAIN }}
       GH_TOKEN: ${{ github.token }}
