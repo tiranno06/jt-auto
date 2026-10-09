@@ -65,10 +65,21 @@ def rgba(img): return np.array(img).astype(np.float32)
 def _syll(m):
     return max(1, len(re.findall(r"[aeiouyàâäéèêëîïôöùûüœæ]+", m.lower())) + 1.5 * len(re.findall(r"\d", m)))
 
-def minutage(texte, a, t0):
+def minutage(texte, a, t0, mots=None):
     """Horaires des groupes de mots, calés sur la voix réelle : les silences ne reçoivent aucun mot,
     et chaque fin de phrase (ponctuation) est accrochée à la pause correspondante dans l'audio."""
     gs = groupes(texte); poids = np.array([sum(_syll(m) for m in g.split()) for g in gs], float)
+    if mots and len(mots) >= 2:                                            # instants exacts donnés par Whisper
+        cs = np.cumsum([_syll(m) for m, _, _ in mots]); cs = cs / cs[-1]
+        c = np.concatenate([[0], np.cumsum(poids) / poids.sum()]); res = []
+        def instant(frac, debut):
+            k = int(np.searchsorted(cs, frac - 1e-6)); k = min(k, len(mots) - 1)
+            return mots[k][1] if debut else mots[k][2]
+        for k, g in enumerate(gs):
+            d0 = instant(c[k] + 1e-3, True) if k else mots[0][1]; d1 = instant(c[k + 1], False)
+            res.append((g, t0 + d0, t0 + max(d1, d0 + 0.12)))
+        for k in range(1, len(res)): res[k] = (res[k][0], max(res[k][1], res[k - 1][1] + 0.05), res[k][2])
+        return res
     hop = int(0.01 * SR); nfr = max(1, len(a) // hop)
     e = np.array([np.sqrt(np.mean(a[k * hop:(k + 1) * hop] ** 2)) for k in range(nfr)])
     seuil = 0.1 * (np.percentile(e, 95) + 1e-9); v = e > seuil
@@ -270,7 +281,7 @@ def salle(a, duree=0.5, mix=0.06, graine=3):
     return (b + wet * mix * np.sqrt(np.sum(a ** 2) / max(np.sum(wet ** 2), 1e-9))).astype(np.float32)
 
 # ------------------------------------------------------------------ rendu
-def rendre(sk, sortie, audios, gag=None, apercu=False):
+def rendre(sk, sortie, audios, gag=None, apercu=False, mots=None):
     tmp = tempfile.mkdtemp(); rng = np.random.default_rng(5)
     cast = D.casting(sk); reps = sk["repliques"]
     for k, c in cast.items():
@@ -291,7 +302,7 @@ def rendre(sk, sortie, audios, gag=None, apercu=False):
             GEN0 = t; GEN1 = t + GEN_DUREE; t = GEN1 + 0.12; prev = None
         t0 = t; att = float(r.get("attente", 0)); t += att
         q = dict(i=i, p=r["p"], deb=t, att=att, fin=t + dur, audio=a, niv=niv, lv=lv, chute=bool(r.get("chute")),
-                 groupes=minutage(r["t"], a, t))
+                 groupes=minutage(r["t"], a, t, (mots or [None] * len(reps))[i]))
         # début du plan : coupe vers celui qui parle ; après une vanne, on coupe tôt sur la réaction (visage impassible)
         if r["p"] != prev:
             q["plan"] = (ph[-1]["fin"] + 0.22) if (ph and ph[-1]["chute"] and i != 1) else max(GEN1 or 0, t0 - 0.12)

@@ -62,11 +62,20 @@ def piper(repliques, tmp, secours):
     return [voix_piper.parler(x.get("d") or x["t"], secours[x["p"]], f"{tmp}/p{i}") for i, x in enumerate(repliques)]
 
 def generer(repliques, secours):
-    """repliques : [{"p", "t", "d"}] ; secours : réglages Piper par rôle. Renvoie (liste d'audios, nom du moteur utilisé)."""
+    """repliques : [{"p", "t", "d"}] ; secours : réglages Piper par rôle.
+    Renvoie (audios, crédits, mots) : la banque de voix d'abord (meilleure voix vérifiée par Whisper),
+    puis Chatterbox seul, puis Piper pour que la vidéo sorte quoi qu'il arrive."""
     tmp = tempfile.mkdtemp()
+    try:
+        import voix_banque
+        r = voix_banque.generer(repliques)
+        if r: return r[0], r[2], r[1]
+        print("Banque de voix indisponible ou insuffisante : chaîne de secours.", flush=True)
+    except Exception as e:
+        print(f"Banque de voix en erreur ({str(e)[:200]}) : chaîne de secours.", flush=True)
     if os.environ.get("MODAL_TOKEN_ID") and os.environ.get("MODAL_TOKEN_SECRET"):
         try:
-            return chatterbox(repliques, tmp), "chatterbox"
+            return chatterbox(repliques, tmp), ["Chatterbox (MIT), voix Multilingual LibriSpeech (CC BY 4.0)"], None
         except Exception as e:
             print(f"Chatterbox indisponible ({e}) : voix de secours Piper.", flush=True)
-    return piper(repliques, tmp, secours), "piper"
+    return piper(repliques, tmp, secours), ["Piper / SIWIS (CC BY 4.0)"], None

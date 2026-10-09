@@ -56,9 +56,14 @@ def main():
     gags = [h.get("running_gag") for h in historique[-15:] if h.get("running_gag")]
     sk = ecrire.ecrire_sketch(titres, gags=gags, special=dimanche)
     print(f"Sketch : « {sk['sujet']} », {len(sk['repliques'])} répliques", flush=True)
-    audios, moteur = voix.generer(sk["repliques"], jt.VOIX)
+    audios, credits_voix, mots = voix.generer(sk["repliques"], jt.VOIX)
+    moteur = " + ".join(credits_voix)
     print(f"Voix : {moteur}", flush=True)
+    avant = sum(len(a) for a in audios)
     audios = resserrer(audios, sk)
+    if mots and sum(len(a) for a in audios) != avant:                         # débit accéléré : on recale les instants des mots
+        f = avant / max(1, sum(len(a) for a in audios))
+        mots = [[(m, d / f, e / f) for m, d, e in (x or [])] or None for x in mots]
     jour = datetime.date.today().isoformat()
     pris = {h.get("fichier") for h in historique}; n = 1; base = f"sortie/{jour}_emission"
     while os.path.basename(base) + ".mp4" in pris: n += 1; base = f"sortie/{jour}_emission{n}"   # plusieurs émissions le même jour
@@ -69,9 +74,8 @@ def main():
         i = sk["gag"]["replique"]
         gag = video_modal.generer(sk["gag"]["prompt"], len(audios[i]) / SR + 0.6, base + "_gag.mp4", graine=len(historique))
         print(f"Plan gag IA : {'oui' if gag else 'non'}", flush=True)
-    duree = jt.rendre(sk, base + ".mp4", audios, gag=gag)
-    credit = ("Voix : Multilingual LibriSpeech (CC BY 4.0), transformées, synthèse Chatterbox."
-              if moteur == "chatterbox" else "Voix : Piper / SIWIS (CC BY 4.0).")
+    duree = jt.rendre(sk, base + ".mp4", audios, gag=gag, mots=mots)
+    credit = "Voix : " + " ; ".join(credits_voix) + "."
     if gag: credit += " Plan « reconstitution » généré avec Wan 2.2."
     legende = f"{sk['legende']}" + (f"\n\n{sk['question']}" if sk.get("question") else "") + "\n\n" + " ".join("#" + h for h in sk["hashtags"]) + f"\n\nContenu généré par IA. {credit}"
     open(base + ".txt", "w", encoding="utf-8").write(legende + "\n\nSources :\n" + "\n".join(sk["sources"]) + "\n")

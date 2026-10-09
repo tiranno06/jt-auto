@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ["moteur/voix_modal.py", "moteur/video_modal.py"]
+    paths: ["moteur/voix_modal.py", "moteur/video_modal.py", "moteur/banque_modal.py"]
 
 permissions:
   contents: write
@@ -29,6 +29,7 @@ jobs:
           {
             echo "=== voix (Chatterbox) ==="; modal deploy moteur/voix_modal.py 2>&1 | tail -40; echo "code: ${PIPESTATUS[0]}"
             echo "=== plan gag (Wan 2.2) ==="; modal deploy moteur/video_modal.py 2>&1 | tail -40; echo "code: ${PIPESTATUS[0]}"
+            echo "=== banque de voix (Kyutai, Zonos, Whisper) ==="; modal deploy moteur/banque_modal.py 2>&1 | tail -60; echo "code: ${PIPESTATUS[0]}"
           } > episodes/deploiement.txt
           cat episodes/deploiement.txt
       - name: Enregistrer le compte rendu

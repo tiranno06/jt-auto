@@ -44,6 +44,9 @@ jobs:
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       MODAL_TOKEN_ID: ${{ secrets.MODAL_TOKEN_ID }}
       MODAL_TOKEN_SECRET: ${{ secrets.MODAL_TOKEN_SECRET }}
+      GOOGLE_TTS_API_KEY: ${{ secrets.GOOGLE_TTS_API_KEY }}
+      AZURE_SPEECH_KEY: ${{ secrets.AZURE_SPEECH_KEY }}
+      AZURE_SPEECH_REGION: ${{ secrets.AZURE_SPEECH_REGION }}
       BUFFER_API_KEY: ${{ secrets.BUFFER_API_KEY }}
       UPLOAD_POST_API_KEY: ${{ secrets.UPLOAD_POST_API_KEY }}
       UPLOAD_POST_USER: ${{ secrets.UPLOAD_POST_USER }}
@@ -94,6 +97,7 @@ jobs:
         run: |
           modal deploy moteur/voix_modal.py || echo "Deploiement voix echoue, voix de secours"
           modal deploy moteur/video_modal.py || echo "Deploiement Wan echoue, pas de plan gag"
+          modal deploy moteur/banque_modal.py || echo "Deploiement banque de voix echoue, chaine de secours"
 
       - name: Fabriquer l'émission
         id: run
