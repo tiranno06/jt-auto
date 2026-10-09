@@ -38,13 +38,13 @@ class Kyutai:
         from huggingface_hub import HfApi
         from moshi.models.tts import DEFAULT_DSM_TTS_VOICE_REPO
         f = HfApi().list_repo_files(DEFAULT_DSM_TTS_VOICE_REPO)
-        return sorted({x[:-len(".safetensors")] if x.endswith(".safetensors") else x for x in f
-                       if x.startswith("cml-tts/fr/") and (x.endswith(".wav") or x.endswith(".safetensors"))})
+        return sorted({x.split(".wav")[0] + ".wav" for x in f if x.startswith("cml-tts/fr/") and ".wav" in x})
 
     @modal.method()
     def synthese(self, textes: list, voix: str) -> list:
         import numpy as np, torch
-        chemin = voix if voix.endswith(".safetensors") else self.m.get_voice_path(voix)
+        try: chemin = voix if voix.endswith(".safetensors") else self.m.get_voice_path(voix)
+        except Exception as e: raise RuntimeError(f"voix introuvable {voix} : {type(e).__name__} {str(e)[:200]}")
         attr = self.m.make_condition_attributes([chemin], cfg_coef=2.0); out = []
         for t in textes:
             try:
