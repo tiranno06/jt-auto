@@ -5,12 +5,15 @@ import json, os, re, unicodedata
 
 MODELE = os.environ.get("MODELE_CLAUDE") or "claude-sonnet-5-5"
 # réglages de la régie (variables du dépôt)
-LONGUEURS = {"courte": ("6 à 8", "20 à 30"), "normale": ("8 à 11", "30 à 45"), "longue": ("11 à 14", "45 à 60")}
-TONS = {"bon_enfant": "foutage de gueule bon enfant envers les institutions, la langue de bois et les travers du pouvoir",
+LONGUEURS = {"courte": ("5 à 7", "20 à 30"), "normale": ("7 à 9", "30 à 40"), "longue": ("9 à 12", "40 à 55")}
+TONS = {"farfelu": "gags farfelus et ironie pince-sans-rire : situations délirantes, images absurdes et très concrètes, ironie froide envers les institutions et la langue de bois",
+        "bon_enfant": "foutage de gueule bon enfant envers les institutions, la langue de bois et les travers du pouvoir",
         "piquant": "satire mordante et sans pitié envers les institutions, les décisions et la langue de bois (jamais envers les gens pour ce qu'ils sont)",
         "absurde": "absurde total façon sketch surréaliste : situations délirantes poussées très loin, logique folle mais implacable"}
-NB, SECONDES = LONGUEURS.get(os.environ.get("LONGUEUR") or "normale", LONGUEURS["normale"])
-TON = TONS.get(os.environ.get("TON") or "bon_enfant", TONS["bon_enfant"])
+LONGUEUR = os.environ.get("LONGUEUR") or "courte"
+NB, SECONDES = LONGUEURS.get(LONGUEUR, LONGUEURS["courte"])
+NB_MAX = int(NB.split()[-1])
+TON = TONS.get(os.environ.get("TON") or "farfelu", TONS["farfelu"])
 CAST = {
     "presentateur": "Jean-Michel Plateau, présentateur. Calme olympien, pince-sans-rire, pose les questions simples qui font tout s'écrouler. C'est souvent lui qui lance la chute finale.",
     "envoyee": "Martine Couloir, envoyée spéciale (fictive) en direct sur le terrain (Assemblée, ministère, salon, sommet…). Blasée, a tout vu, décrit des scènes absurdes avec un sérieux total. Reine du détail concret ridicule.",
@@ -95,7 +98,7 @@ def _court(s, n): return str(s or "").strip()[:n]
 
 def valider(sk, liens):
     reps, attente = [], False
-    for r in sk.get("repliques", [])[:14]:
+    for r in sk.get("repliques", [])[:16]:
         p = r.get("p"); t = _court(r.get("t"), 170)
         if p not in CAST or not t: continue
         x = {"p": p, "t": t}
@@ -105,7 +108,9 @@ def valider(sk, liens):
         except (TypeError, ValueError): a = 0
         if a > 0 and not attente: x["attente"] = min(1.2, max(0.3, a)); attente = True
         reps.append(x)
-    if len(reps) < 5: raise ValueError(f"sketch trop court ({len(reps)} répliques)")
+    if len(reps) > NB_MAX:                                   # trop long : on garde le début et la chute finale
+        reps = reps[:NB_MAX - 1] + [reps[-1]]
+    if len(reps) < 4: raise ValueError(f"sketch trop court ({len(reps)} répliques)")
     if reps[0]["p"] != "presentateur": raise ValueError("le présentateur doit ouvrir")
     tags = [re.sub(r"[^a-z0-9]", "", unicodedata.normalize("NFKD", str(h).lower()).encode("ascii", "ignore").decode()) for h in sk.get("hashtags", [])]
     gag = None

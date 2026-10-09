@@ -189,8 +189,8 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <p class="note">La vidéo est prête environ 20 à 40 minutes après cette heure.</p>
   </section>
   <section class="panneau"><h2>✍️ Sketch</h2>
-    <label>Durée<select data-var="LONGUEUR" data-def="normale"><option value="courte">Courte (20-30 s)</option><option value="normale">Normale (30-45 s)</option><option value="longue">Longue (45-60 s)</option></select></label>
-    <label>Ton de l'humour<select data-var="TON" data-def="bon_enfant"><option value="bon_enfant">Foutage de gueule bon enfant</option><option value="piquant">Satire piquante</option><option value="absurde">Absurde total</option></select></label>
+    <label>Durée<select data-var="LONGUEUR" data-def="courte"><option value="courte">Courte (30 s max, recommandé)</option><option value="normale">Normale (30-40 s)</option><option value="longue">Longue (40-55 s)</option></select></label>
+    <label>Ton de l'humour<select data-var="TON" data-def="farfelu"><option value="farfelu">Farfelu et ironique (recommandé)</option><option value="bon_enfant">Foutage de gueule bon enfant</option><option value="piquant">Satire piquante</option><option value="absurde">Absurde total</option></select></label>
     <label>Auteur (modèle Claude)<select data-var="MODELE_CLAUDE" data-def="claude-sonnet-5-5"><option value="claude-sonnet-5-5">Sonnet (économique, recommandé)</option><option value="claude-opus-5-5">Opus (plus fin, environ 5× plus cher)</option></select></label>
     <label>Nom de l'émission<div class="jeton"><input data-var="NOM_EMISSION" data-def="L'info en caoutchouc" data-texte="1" maxlength="30"><button class="second" data-enr="NOM_EMISSION" style="flex:none;padding:10px 14px">OK</button></div></label>
   </section>

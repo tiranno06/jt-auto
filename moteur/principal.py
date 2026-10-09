@@ -13,6 +13,21 @@ import actu, ecrire, voix, jt
 
 SR = 22050
 
+def resserrer(audios, sk, cible=None):
+    """Durée maximale (réglage « courte » : 30 s) : si les voix dépassent, on accélère légèrement le débit (jusqu'à +18 %)."""
+    import subprocess, tempfile, wave, numpy as np
+    cible = cible or {"courte": 29.0, "normale": 40.0, "longue": 55.0}.get(ecrire.LONGUEUR, 29.0)
+    total = sum(len(a) for a in audios) / SR + sum(0.45 if r.get("chute") else 0.06 for r in sk["repliques"]) + sum(r.get("attente", 0) for r in sk["repliques"]) + 1.0
+    if total <= cible: return audios
+    f = min(1.18, total / cible); print(f"Durée estimée {total:.1f} s : débit accéléré ×{f:.2f}", flush=True)
+    sortie, tmp = [], tempfile.mkdtemp()
+    for i, a in enumerate(audios):
+        with wave.open(f"{tmp}/{i}.wav", "wb") as w:
+            w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes((np.clip(a, -1, 1) * 32767).astype(np.int16).tobytes())
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", f"{tmp}/{i}.wav", "-af", f"atempo={f:.3f}", f"{tmp}/{i}b.wav"], check=True)
+        with wave.open(f"{tmp}/{i}b.wav") as w: sortie.append(np.frombuffer(w.readframes(w.getnframes()), np.int16).astype(np.float32) / 32768)
+    return sortie
+
 def lire(p, d):
     return json.load(open(p, encoding="utf-8")) if os.path.exists(p) else d
 
@@ -34,6 +49,7 @@ def main():
     print(f"Sketch : « {sk['sujet']} », {len(sk['repliques'])} répliques", flush=True)
     audios, moteur = voix.generer(sk["repliques"], jt.VOIX)
     print(f"Voix : {moteur}", flush=True)
+    audios = resserrer(audios, sk)
     jour = datetime.date.today().isoformat()
     pris = {h.get("fichier") for h in historique}; n = 1; base = f"sortie/{jour}_emission"
     while os.path.basename(base) + ".mp4" in pris: n += 1; base = f"sortie/{jour}_emission{n}"   # plusieurs émissions le même jour

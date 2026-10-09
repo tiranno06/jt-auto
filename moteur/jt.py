@@ -167,7 +167,7 @@ def rendre(sk, sortie, audios, gag=None, apercu=False):
         for k2 in range(len(gg) - 1):
             if re.search(r"[.!?…]$", gg[k2][0]): dz = gg[k2 + 1][1]
         q["dz"] = dz; ph.append(q); prev = r["p"]
-        t += dur + (0.62 if r.get("chute") else 0.08)
+        t += dur + (0.45 if r.get("chute") else 0.06)
     total = t + 0.7; nf = int(total * FPS)
     # cadrage : large au début de chaque plan, serré à la réplique suivante du même personnage (coupe caméra)
     vu, cadre = set(), "large"
