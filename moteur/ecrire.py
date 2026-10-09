@@ -14,6 +14,7 @@ TONS = {"farfelu": "gags farfelus et ironie pince-sans-rire : situations délira
 LONGUEUR = os.environ.get("LONGUEUR") or "courte"
 NB, SECONDES = LONGUEURS.get(LONGUEUR, LONGUEURS["courte"])
 NB_MAX = int(NB.split()[-1])
+MOTS = {"courte": 60, "normale": 90, "longue": 130, "monetisable": 200}.get(LONGUEUR, 60)   # budget de mots (≈ 2,5 mots/s)
 TON = TONS.get(os.environ.get("TON") or "farfelu", TONS["farfelu"])
 CAST = {
     "presentateur": "Jean-Michel Plateau, présentateur. Calme olympien, pince-sans-rire, pose les questions simples qui font tout s'écrouler. C'est souvent lui qui lance la chute finale.",
@@ -43,7 +44,7 @@ SYSTEME = """Tu es une équipe d'auteurs comiques professionnels de la télévis
 PERSONNAGES (clés autorisées pour "p") :
 {cast}
 
-LE FORMAT : UN SEUL sujet d'actualité, celui qui est fourni, sans jamais s'en écarter. {nb} répliques, courtes (une ou deux phrases).
+LE FORMAT : UN SEUL sujet d'actualité, celui qui est fourni, sans jamais s'en écarter. {nb} répliques, courtes (une ou deux phrases courtes). BUDGET STRICT : {mots} mots AU TOTAL pour tout le sketch (le temps de parole est limité).
 - Réplique 0 = L'ACCROCHE (ouverture à froid, AVANT le générique) : le présentateur résume le sujet en UNE phrase drôle de 3 secondes maximum, qui donne envie de rester. C'est la vanne la plus forte du début.
 - Ensuite : direct avec l'envoyée sur place et/ou l'invité.
 - BOUCLE : la dernière réplique doit faire écho à l'accroche, pour que la vidéo s'enchaîne naturellement sur son début quand elle repasse en boucle.
@@ -181,6 +182,10 @@ def _mots(t):
     t = unicodedata.normalize("NFKD", t.lower()).encode("ascii", "ignore").decode()
     return {m for m in re.findall(r"[a-z]{5,}", t)}
 
+def trop_long(sk):
+    n = sum(len(r["t"].split()) for r in sk["repliques"])
+    if LONGUEUR != "monetisable" and n > MOTS * 1.2: raise ValueError(f"trop long : {n} mots, maximum {MOTS}. Raccourcis chaque réplique")
+
 def hors_sujet(sk, titres):
     """Refuse un sketch qui ne reprend aucun mot important du sujet imposé (le robot s'est éparpillé)."""
     sujet = _mots(titres[0]["titre"]) - {"direct", "selon", "apres", "contre", "entre", "leurs", "cette", "quand", "comment", "pourquoi"}
@@ -192,13 +197,13 @@ def ecrire_sketch(titres, essais=3, gags=(), special=False):
     import anthropic
     client = anthropic.Anthropic()
     gtxt = " ; ".join(g for g in gags if g)[:600] or "(aucun pour l'instant)"
-    systeme = SYSTEME.format(special=SPECIAL_DEMAIN if special else "", gags=gtxt, secondes=SECONDES, nb=NB, ton=TON, cast="\n".join(f"- {k} : {v}" for k, v in CAST.items()), looks="|".join(LOOKS),
+    systeme = SYSTEME.format(mots=MOTS, special=SPECIAL_DEMAIN if special else "", gags=gtxt, secondes=SECONDES, nb=NB, ton=TON, cast="\n".join(f"- {k} : {v}" for k, v in CAST.items()), looks="|".join(LOOKS),
                              exemple=json.dumps(EXEMPLE, ensure_ascii=False, indent=0))
     message = construire_prompt(titres); liens = {t["lien"] for t in titres}; derniere = None
     for _ in range(essais):
         try:
             sk = valider(_appel(client, systeme, [{"role": "user", "content": message}]), liens)
-            hors_sujet(sk, titres)
+            hors_sujet(sk, titres); trop_long(sk)
             break
         except Exception as e:
             derniere = e; sk = None
@@ -209,8 +214,8 @@ def ecrire_sketch(titres, essais=3, gags=(), special=False):
         brut = {k: sk[k] for k in ("sujet", "ecran", "invite_nom", "invite_role", "invite_look", "lieu_direct", "titre_accroche", "question",
                                    "running_gag", "repliques", "bandeau", "gag", "legende", "hashtags", "sources")}
         sk2 = _appel(client, systeme, [{"role": "user", "content": message}, {"role": "assistant", "content": json.dumps(brut, ensure_ascii=False)},
-                                         {"role": "user", "content": DOCTEUR.format(sketch=json.dumps(brut, ensure_ascii=False, indent=0), secondes=SECONDES, nb=NB)}])
-        sk2 = valider(sk2, liens); hors_sujet(sk2, titres)
+                                         {"role": "user", "content": DOCTEUR.format(sketch=json.dumps(brut, ensure_ascii=False, indent=0), secondes=SECONDES, nb=NB, mots=MOTS)}])
+        sk2 = valider(sk2, liens); hors_sujet(sk2, titres); trop_long(sk2)
         sk2["sources"] = sk2["sources"] or sk["sources"]
         print("Script doctor : sketch amélioré", flush=True)
         return sk2

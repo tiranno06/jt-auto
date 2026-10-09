@@ -24,7 +24,7 @@ UNES = [
 ]
 # sujets dont on ne rit pas (drames, victimes)
 DRAMES = re.compile(r"\b(mort|morts|morte|décès|décédé|tué|tués|tuée|meurtre|assassin|attentat|terroris|viol|victime|victimes|"
-                    r"otage|massacre|bombard|guerre|blessé|blessés|noyé|incendie|crash|deuil|obsèques|pédo|agression|féminicide|suicide)", re.I)
+                    r"otage|massacre|bombard|guerre|israël|israel|gaza|hamas|palestin|hezbollah|ukrain|russie|iran|cisjordanie|blessé|blessés|noyé|incendie|crash|deuil|obsèques|pédo|agression|féminicide|suicide)", re.I)
 # rubriques récurrentes (bourse, météo, jeux, horoscope…) : jamais un « sujet du jour »
 RUBRIQUES = re.compile(r"(\d{2}/\d{2}|bourse|cac 40|marchés|valeurs|météo|horoscope|loto|euromillions|programme tv|résultats du|en direct|live|replay|podcast|quiz)", re.I)
 VIDES = set("""le la les un une des du de d l au aux et ou en dans sur sous pour par avec sans ce cet cette ces son sa ses leur leurs qui que quoi
@@ -85,7 +85,7 @@ def sujet_du_jour(heures=24, deja_vus=(), mots_recents=()):
     Renvoie (titres du sujet, description) ou (None, raison)."""
     maintenant = datetime.datetime.now(datetime.timezone.utc); tous = []
     for url in FLUX + UNES:
-        try: tous += lire_flux(url)
+        try: tous += [dict(i, flux=url) for i in lire_flux(url)]
         except Exception as e: print(f"  flux ignoré {url} : {e}", flush=True)
     items, vus = [], set()
     for it in tous:
@@ -108,7 +108,9 @@ def sujet_du_jour(heures=24, deja_vus=(), mots_recents=()):
         frais = sum(1 for i in g["items"] if i["date"] and (maintenant - i["date"]).total_seconds() < 12 * 3600)
         deja = len(g["mots"] & recents) >= 4                                 # sujet déjà traité ces derniers jours
         return (len(sources) * 3 + len(g["items"]) + frais) * (0.3 if deja else 1)
-    groupes.sort(key=score, reverse=True)
+    for g in groupes:                                                    # on veut un sujet de politique française : au moins un article des rubriques politique
+        g["politique"] = any(i.get("flux") in FLUX for i in g["items"])
+    groupes.sort(key=lambda g: (g["politique"], score(g)), reverse=True)
     g = groupes[0]; graine = g["graine"]
     sel = [graine] + [i for i in sorted(g["items"], key=lambda i: i["date"] or maintenant, reverse=True) if i is not graine][:7]
     nb = len({i["source"] for i in g["items"]})
