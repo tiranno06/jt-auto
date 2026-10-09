@@ -1,68 +1,67 @@
 {
- "titre": "PROFS REMPLAÇANTS",
- "sujet": "PROFS REMPLAÇANTS",
- "ecran": "REMPLAÇANTS",
- "invite_nom": "Bernard Craie",
- "invite_role": "Porte-parole (fictif) du rectorat",
+ "titre": "COMPTE FANTÔME",
+ "sujet": "COMPTE FANTÔME",
+ "ecran": "COMPTE FANTÔME",
+ "invite_nom": "Gérard Démenti",
+ "invite_role": "Expert (fictif) en comptes fantômes",
  "invite_look": "moustache",
- "lieu_direct": "Casier vide du remplaçant",
- "titre_accroche": "5000 heures de cours par prof",
- "question": "Votre prof remplaçant est-il arrivé, ou juste son post-it ? 👇",
- "running_gag": "",
+ "lieu_direct": "Dans la corbeille Facebook",
+ "titre_accroche": "Il fait tes fautes, mais ce n'est pas toi",
+ "question": "Pur hasard ou jumeau numérique très doué en fautes ? 👇",
+ "running_gag": "L'Inconnu qui fait exactement les mêmes fautes d'orthographe que les politiques, jusque dans leurs plaintes.",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "3 000 remplaçants pour 15 millions d'heures. Chacun fera sept mois de cours sans dormir.",
-   "d": "Trois mille remplaçants pour quinze millions d'heures. Chacun fera sept mois de cours sans dormir.",
+   "t": "Un compte Facebook fait les mêmes fautes qu'un chef de parti. Pur hasard, selon le chef de parti.",
    "chute": true
   },
   {
    "p": "presentateur",
-   "t": "Martine, vous voyez un remplaçant ?"
+   "t": "Martine ?"
   },
   {
    "p": "envoyee",
-   "t": "Non. Dans son casier, il y a juste un post-it."
-  },
-  {
-   "p": "envoyee",
-   "t": "« Je suis en route. » Il a déjà corrigé quarante copies.",
+   "t": "Jean-Michel, mêmes messages à quelques minutes d'écart. Mêmes fautes. Et son adresse mail.",
    "chute": true
-  },
-  {
-   "p": "presentateur",
-   "t": "Monsieur Craie, c'est un échec ?"
   },
   {
    "p": "invite",
-   "t": "Au contraire. Le post-it ne dort jamais. On en a commandé 3 000.",
-   "d": "Au contraire. Le post-it ne dort jamais. On en a commandé trois mille.",
+   "t": "Pur hasard. Et si tout a été effacé, c'est par politesse.",
+   "chute": true
+  },
+  {
+   "p": "presentateur",
+   "t": "Et la plainte en diffamation ?"
+  },
+  {
+   "p": "invite",
+   "t": "Elle est prête. Avec les mêmes fautes.",
    "chute": true,
    "attente": 0.7
   }
  ],
  "bandeau": [
-  "UN REMPLAÇANT APERÇU DANS UN LYCÉE : LES ÉLÈVES INCRÉDULES",
-  "LE POST-IT « JE SUIS EN ROUTE » NOMMÉ PROF PRINCIPAL",
-  "LES ACADÉMIES APPELLENT LES PROFS. ÇA SONNE OCCUPÉ",
-  "15 MILLIONS D'HEURES DE COURS SIGNALÉES DISPARUES"
+  "UN INCONNU RECHERCHÉ POUR FAUTES D'ORTHOGRAPHE",
+  "LE BESCHERELLE CONVOQUÉ COMME TÉMOIN",
+  "FACEBOOK : LE MOT DE PASSE NIE TOUT LUI AUSSI",
+  "LES ACCENTS MANQUANTS TOUJOURS INTROUVABLES"
  ],
  "gag": {
   "replique": 2,
-  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. A deadpan female reporter with a microphone squeezed inside a narrow empty school locker, holding up a single small yellow sticky note while dust floats around her, comedic, deadpan."
+  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. A bored reporter stands inside a giant computer trash bin full of crumpled paper, holding up two identical glowing phone screens side by side, both covered with the same red squiggly underlines, comedic, deadpan."
  },
- "legende": "3 000 profs pour 15 millions d'heures. Le rectorat a trouvé la solution : elle colle et ne dort jamais. Satire, personnages fictifs.",
+ "legende": "Mêmes messages, mêmes fautes, même adresse mail… mais pas le même compte. Le mystère s'épaissit. Satire, personnages fictifs.",
  "hashtags": [
-  "infoencaoutchouc",
-  "education",
-  "profs",
-  "lycee",
   "satire",
-  "humour"
+  "humour",
+  "actu",
+  "politique",
+  "facebook",
+  "infoencaoutchouc"
  ],
  "sources": [
-  "https://www.bfmtv.com/politique/video-s-il-y-a-3-000-professeurs-en-plus-tant-mieux-mais-on-est-loin-du-compte-par-rapport-aux-15-millions-d-heures-qui-ne-sont-pas-remplacees-declare-francois-kalfon-depute-europeen-ps-place-publique-soutien-de-raphael-glucksmann_VN-202610081013.html",
-  "https://www.franceinfo.fr/societe/education/blocage-des-lycees/cinq-questions-sur-les-3-000-professeurs-mobilises-en-urgence-dans-les-lycees_8229574.html#xtor=RSS-3-[lestitres]",
-  "https://www.bfmtv.com/societe/manifestations/video-colere-lyceenne-le-cout-des-degats-en-marge-du-mouvement-evalue-a-au-moins-30-millions-d-euros_VN-202610090656.html"
+  "https://www.liberation.fr/politique/jordan-bardella-accuse-dantisemitisme-mediapart-prouve-encore-que-le-compte-facebook-etait-bien-celui-du-president-du-rn-20261009_SZY3OXT2LBFMJFG5H3XNGXBO4M/",
+  "https://www.liberation.fr/checknews/ecrits-antisemites-contrairement-a-ce-quaffirme-jordan-bardella-un-compte-facebook-associe-a-un-de-ses-mails-personnels-existe-toujours-20261009_VRU6HCTBXNDTBIYGFG2LNWFR2Y/",
+  "https://www.bfmtv.com/politique/front-national/propos-antisemites-attribues-a-jordan-bardella-le-president-du-rn-va-porter-plainte-en-diffamation-apres-de-nouvelles-revelations-du-canard-enchaine_AD-202610090541.html"
  ]
 }
