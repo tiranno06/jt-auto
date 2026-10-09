@@ -187,6 +187,22 @@ def image_generique(tm, G):
     if flash > 0: fr = fr * (1 - min(1, flash)) + 255 * min(1, flash)
     return fr
 
+def image_fin(u, G):
+    """Carton de fin (format long) : globe, titre et appel à s'abonner."""
+    fond, titre, date = G; fr = fond.copy(); globe(fr, u + 3, W / 2, 1150, 300, 1.0)
+    poser(fr, titre, 0, 260)
+    if not hasattr(image_fin, "abo"):
+        im = Image.new("RGBA", (W, 260), (0, 0, 0, 0)); d = ImageDraw.Draw(im); f1, f2 = ImageFont.truetype(FB, 64), ImageFont.truetype(FM, 36)
+        t1, t2 = "ABONNE-TOI", "pour le JT de demain"
+        d.rounded_rectangle(((W - d.textlength(t1, font=f1)) / 2 - 40, 20, (W + d.textlength(t1, font=f1)) / 2 + 40, 120), 30, fill=(220, 35, 45, 255))
+        d.text(((W - d.textlength(t1, font=f1)) / 2, 26), t1, font=f1, fill=(255, 255, 255))
+        d.text(((W - d.textlength(t2, font=f2)) / 2, 150), t2, font=f2, fill=(230, 235, 255))
+        image_fin.abo = np.array(im).astype(np.float32)
+    s = 1 + 0.04 * np.sin(u * 4); a = cv2.resize(image_fin.abo, (int(W * s), int(260 * s)))
+    poser(fr, a, (W - a.shape[1]) / 2, 1500)
+    if u < 0.25: fr = fr * (u / 0.25) + 255 * (1 - u / 0.25) * 0.6
+    return fr
+
 # ------------------------------------------------------------------ habillage
 def entete(sujet):
     img = Image.new("RGBA", (W, 150), (0, 0, 0, 0)); d = ImageDraw.Draw(img); f = ImageFont.truetype(FB, 48)
@@ -267,7 +283,11 @@ def rendre(sk, sortie, audios, gag=None, apercu=False):
             if re.search(r"[.!?…]$", gg[k2][0]): dz = gg[k2 + 1][1]
         q["dz"] = dz; ph.append(q); prev = r["p"]
         t += dur + (0.45 if r.get("chute") else 0.06)
-    total = t + 0.7; nf = int(total * FPS)
+    total = t + 0.7
+    FIN = None
+    if os.environ.get("LONGUEUR") == "monetisable" and total < 62.0:     # format long : carton de fin pour dépasser 1 minute
+        FIN = t + 0.5; total = 62.0
+    nf = int(total * FPS)
     # cadrage : large au début de chaque plan, serré à la réplique suivante du même personnage (coupe caméra)
     vu, cadre = set(), "large"
     for q in ph:
@@ -361,6 +381,7 @@ def rendre(sk, sortie, audios, gag=None, apercu=False):
     def image(fi):
         tm = fi / FPS
         if tm < INTRO: return np.clip(image_generique(tm, GEN), 0, 255).astype(np.uint8)
+        if FIN and tm >= FIN: return np.clip(image_fin(tm - FIN, GEN), 0, 255).astype(np.uint8)
         q = next((x for x in reversed(ph) if x["debplan"] <= tm), ph[0])
         # zoom : petit punch-in à l'ouverture du plan, lent zoom pendant un silence, zoom sec sur la vanne
         u0 = min(1, (tm - q["debplan"]) / 0.25); z = 0.05 * (1 - u0) ** 2 + 0.01 * (tm - q["debplan"]) / 6

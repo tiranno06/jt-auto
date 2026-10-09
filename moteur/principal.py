@@ -16,6 +16,7 @@ SR = 22050
 def resserrer(audios, sk, cible=None):
     """Durée maximale (réglage « courte » : 30 s) : si les voix dépassent, on accélère légèrement le débit (jusqu'à +18 %)."""
     import subprocess, tempfile, wave, numpy as np
+    if ecrire.LONGUEUR == "monetisable": return audios                    # format long : jamais accéléré
     cible = cible or {"courte": 25.0, "normale": 35.0, "longue": 50.0}.get(ecrire.LONGUEUR, 29.0)
     total = sum(len(a) for a in audios) / SR + sum(0.45 if r.get("chute") else 0.06 for r in sk["repliques"]) + sum(r.get("attente", 0) for r in sk["repliques"]) + 1.0
     if total <= cible: return audios
