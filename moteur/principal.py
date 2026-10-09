@@ -35,7 +35,9 @@ def main():
     audios, moteur = voix.generer(sk["repliques"], jt.VOIX)
     print(f"Voix : {moteur}", flush=True)
     jour = datetime.date.today().isoformat()
-    base = f"sortie/{jour}_emission"; os.makedirs("sortie", exist_ok=True)
+    pris = {h.get("fichier") for h in historique}; n = 1; base = f"sortie/{jour}_emission"
+    while os.path.basename(base) + ".mp4" in pris: n += 1; base = f"sortie/{jour}_emission{n}"   # plusieurs émissions le même jour
+    os.makedirs("sortie", exist_ok=True)
     gag = None
     if modal_ok and sk.get("gag") and os.environ.get("PLAN_GAG", "1") != "0":
         import video_modal
