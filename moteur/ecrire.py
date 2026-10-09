@@ -101,7 +101,8 @@ Garde exactement les mêmes faits et toutes les règles (aucune personne réelle
 
 def construire_prompt(titres):
     liste = "\n".join(f"- [{t['source']}] {t['titre']} — {t['resume'][:300]} ({t['lien']})" for t in titres)
-    return ("LE SUJET DU JOUR — il fait en ce moment les gros titres de plusieurs médias. Voici tout ce qu'on sait :\n" + liste +
+    return (f"SUJET IMPOSÉ : « {titres[0]['titre']} »\n"
+            "Ce sujet fait en ce moment les gros titres de plusieurs médias. Voici les articles qui en parlent :\n" + liste +
             "\n\nÉcris le sketch UNIQUEMENT sur ce sujet précis : chaque réplique, chaque gag, chaque dépêche du bandeau et le plan gag doivent "
             "s'y rapporter directement. Aucun autre sujet, aucune digression. Trouve l'angle le plus ironique et le plus absurde, "
             "comme une équipe d'auteurs professionnels de la télévision.")
@@ -176,6 +177,17 @@ def _appel(client, systeme, messages):
 
 SPECIAL_DEMAIN = """- ÉPISODE SPÉCIAL DU DIMANCHE « LES INFOS DE DEMAIN » : après l'accroche, le présentateur annonce 3 ou 4 fausses brèves du futur (« Dans un an… », « En 2030… »), toutes sur CE sujet, chacune poussant la situation un cran plus loin dans l'absurde, avec une chute par brève ; l'envoyée ou l'invité peuvent réagir. L'écran du plateau affiche « EN 2030 »."""
 
+def _mots(t):
+    t = unicodedata.normalize("NFKD", t.lower()).encode("ascii", "ignore").decode()
+    return {m for m in re.findall(r"[a-z]{5,}", t)}
+
+def hors_sujet(sk, titres):
+    """Refuse un sketch qui ne reprend aucun mot important du sujet imposé (le robot s'est éparpillé)."""
+    sujet = _mots(titres[0]["titre"]) - {"direct", "selon", "apres", "contre", "entre", "leurs", "cette", "quand", "comment", "pourquoi"}
+    texte = _mots(" ".join([sk["sujet"]] + [r["t"] for r in sk["repliques"]]))
+    if sujet and len(sujet & texte) < 1:
+        raise ValueError(f"hors sujet : le sketch doit parler de « {titres[0]['titre']} »")
+
 def ecrire_sketch(titres, essais=3, gags=(), special=False):
     import anthropic
     client = anthropic.Anthropic()
@@ -186,6 +198,7 @@ def ecrire_sketch(titres, essais=3, gags=(), special=False):
     for _ in range(essais):
         try:
             sk = valider(_appel(client, systeme, [{"role": "user", "content": message}]), liens)
+            hors_sujet(sk, titres)
             break
         except Exception as e:
             derniere = e; sk = None
@@ -197,7 +210,7 @@ def ecrire_sketch(titres, essais=3, gags=(), special=False):
                                    "running_gag", "repliques", "bandeau", "gag", "legende", "hashtags", "sources")}
         sk2 = _appel(client, systeme, [{"role": "user", "content": message}, {"role": "assistant", "content": json.dumps(brut, ensure_ascii=False)},
                                          {"role": "user", "content": DOCTEUR.format(sketch=json.dumps(brut, ensure_ascii=False, indent=0), secondes=SECONDES, nb=NB)}])
-        sk2 = valider(sk2, liens)
+        sk2 = valider(sk2, liens); hors_sujet(sk2, titres)
         sk2["sources"] = sk2["sources"] or sk["sources"]
         print("Script doctor : sketch amélioré", flush=True)
         return sk2

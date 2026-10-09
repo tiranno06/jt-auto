@@ -101,7 +101,7 @@ def sujet_du_jour(heures=24, deja_vus=(), mots_recents=()):
     groupes = []                                                          # pour chaque titre : les titres qui partagent au moins 2 mots-clés distinctifs
     for it in items:
         membres = [x for x in items if len(x["cles"] & it["cles"]) >= 2]
-        groupes.append({"items": membres, "mots": set(it["mots"])})
+        groupes.append({"items": membres, "mots": set(it["mots"]), "graine": it})
     recents = set(mots_recents)
     def score(g):
         sources = {i["source"] for i in g["items"]}
@@ -109,6 +109,7 @@ def sujet_du_jour(heures=24, deja_vus=(), mots_recents=()):
         deja = len(g["mots"] & recents) >= 4                                 # sujet déjà traité ces derniers jours
         return (len(sources) * 3 + len(g["items"]) + frais) * (0.3 if deja else 1)
     groupes.sort(key=score, reverse=True)
-    g = groupes[0]; sel = sorted(g["items"], key=lambda i: i["date"] or maintenant, reverse=True)[:8]
+    g = groupes[0]; graine = g["graine"]
+    sel = [graine] + [i for i in sorted(g["items"], key=lambda i: i["date"] or maintenant, reverse=True) if i is not graine][:7]
     nb = len({i["source"] for i in g["items"]})
     return sel, f"{len(g['items'])} articles, {nb} médias"
