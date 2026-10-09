@@ -1,65 +1,68 @@
 {
- "titre": "TROIS PROJETS",
- "sujet": "TROIS PROJETS",
- "ecran": "7 DIFFÉRENCES",
- "invite_nom": "Gérard Agrafeau",
- "invite_role": "Expert (fictif) en programmes",
+ "titre": "PRIMAIRE PIRATÉE",
+ "sujet": "PRIMAIRE PIRATÉE",
+ "ecran": "CYBERATTAQUE",
+ "invite_nom": "Gaston Pare-Feu",
+ "invite_role": "Porte-parole (fictif) du scrutin",
  "invite_look": "moustache",
- "lieu_direct": "Dans la photocopieuse",
- "titre_accroche": "Trouvez la différence entre 3 projets",
- "question": "Vous trouvez la différence, vous ? 👇",
- "running_gag": "La photocopieuse du QG se déclare candidate à chaque élection qu'elle a photocopiée.",
+ "lieu_direct": "Dans le serveur du parti",
+ "titre_accroche": "Primaire piratée : les hackers en tête",
+ "question": "Les pirates doivent-ils avoir un débat télévisé ? 👇",
+ "running_gag": "Le virus informatique lève la main pour demander la parole à chaque scrutin qu'il attaque.",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "Trois candidats. Trois projets. Un seul original.",
+   "t": "Cyberattaque contre la primaire sociale-démocrate. Les pirates sont les seuls à être d'accord.",
    "chute": true
   },
   {
    "p": "presentateur",
-   "t": "Martine, vous êtes sur place ?"
+   "t": "Martine, vous êtes dans le serveur ?"
   },
   {
    "p": "envoyee",
-   "t": "Jean-Michel, j'ai tout comparé. Retraites : pareil. Europe : pareil. L'agrafe : différente.",
+   "t": "Oui. Il y a l'impôt sur la fortune, la Sécu intégrale, et un virus qui demande la parole.",
+   "d": "Oui. Il y a l'impôt sur la fortune, la Sécurité sociale intégrale, et un virus qui demande la parole.",
    "chute": true
   },
   {
    "p": "invite",
-   "t": "Attention. L'agrafe bleue, c'est une vraie rupture.",
+   "t": "Le vote est prolongé. C'est un succès : même les pirates participent.",
    "chute": true
   },
   {
    "p": "presentateur",
-   "t": "Et qui a l'original ?"
+   "t": "Et qui gagne ?"
   },
   {
-   "p": "envoyee",
-   "t": "La photocopieuse. Elle se présente aussi.",
+   "p": "invite",
+   "t": "Les pirates. Eux, au moins, ont un programme commun.",
    "chute": true,
    "attente": 0.7
   }
  ],
  "bandeau": [
-  "UNE AGRAFE BLEUE CRÉE LA SURPRISE",
-  "LES TROIS PROJETS RÉCLAMENT UN TEST DE PATERNITÉ",
-  "LA TOUCHE COPIER EXIGE DES DROITS D'AUTEUR",
-  "LE BAC À PAPIER SE DIT ENCORE INDÉCIS"
+  "LE VOTE PROLONGÉ : LE VIRUS DEMANDE UN TEMPS DE PAROLE",
+  "UN CANDIDAT PROPOSE L'ISF POUR LES HACKERS",
+  "LE SERVEUR RÉCLAME UNE SÉCU INTÉGRALE",
+  "LES PIRATES SIGNENT UN PROGRAMME COMMUN EN DIX MINUTES"
  ],
  "gag": {
   "replique": 2,
-  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. A deadpan female reporter holds a magnifying glass over three identical thick documents lying side by side on a desk, each fastened with a different colored staple, red, blue and green, while a big office photocopier behind her spits out more identical copies."
+  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. Inside a glowing computer server room, politicians in suits argue around a table while a small green cartoon virus with a tiny tie politely raises its hand to speak; a deadpan reporter with a microphone stands calmly beside them."
  },
- "legende": "Trois projets passés au crible. On a enfin trouvé la différence : l'agrafe. Satire, personnages fictifs.",
+ "legende": "Primaire piratée, vote prolongé : les seuls d'accord sur le programme, ce sont les hackers. Satire, personnages fictifs.",
  "hashtags": [
   "infoencaoutchouc",
+  "primaire",
+  "cyberattaque",
   "satire",
   "humour",
-  "politique",
-  "fauxjt",
   "actu"
  ],
  "sources": [
-  "https://www.lefigaro.fr/elections/presidentielles/programmes/edouard-philippe-gabriel-attal-bruno-retailleau-quelles-convergences-et-quelles-differences-entre-leurs-projets-20261009"
+  "https://www.bfmtv.com/politique/parti-socialiste/le-vote-de-la-primaire-sociale-democrate-prolonge-jusqu-a-dimanche-18h-apres-une-cyberattaque_AD-202610090797.html",
+  "https://www.lefigaro.fr/conjoncture/retour-de-l-isf-taxe-zucman-secu-integrale-ce-que-comporte-le-programme-economique-des-candidats-a-la-primaire-sociale-democrate-20261009",
+  "https://www.liberation.fr/international/europe/mobilisation-des-lyceens-premier-tour-de-la-primaire-sociale-democrate-le-nobel-de-la-paix-a-la-sud-africaine-navi-pillay-lactu-de-ce-vendredi-9-octobre-20261009_YIIZ2JALAFGUPC7ELRYWPTY52A/"
  ]
 }
