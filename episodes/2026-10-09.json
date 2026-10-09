@@ -1,67 +1,66 @@
 {
- "titre": "3000 PROFS AVANT MIDI",
- "sujet": "3000 PROFS AVANT MIDI",
- "ecran": "11 H 55",
- "invite_nom": "Gérard Panique",
- "invite_role": "Ministre (fictif) de l'Éducation",
- "invite_look": "moustache",
- "lieu_direct": "Couloir du ministère",
- "titre_accroche": "Le ministre doit trouver 3000 profs avant midi",
- "question": "Et vous, vous êtes prof de quoi depuis ce matin ? 👇",
+ "titre": "3000 PROFS EXPRESS",
+ "sujet": "3000 PROFS EXPRESS",
+ "ecran": "3000 PROFS",
+ "invite_nom": "Hubert Rustine",
+ "invite_role": "Porte-parole (fictif) du ministère",
+ "invite_look": "chauve",
+ "lieu_direct": "Rayon surgelés",
+ "titre_accroche": "3000 profs en 24 h, mon plombier : 3 semaines",
+ "question": "Votre prof remplaçant, il était encore congelé ? 👇",
  "running_gag": "",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "Le ministre devait trouver 3 000 profs avant midi. Il est onze heures cinquante-cinq.",
-   "d": "Le ministre devait trouver trois mille profs avant midi. Il est onze heures cinquante-cinq.",
+   "t": "Le ministère a trouvé 3 000 profs en 24 heures. Moi, j'ai mis trois semaines à trouver un plombier.",
+   "d": "Le ministère a trouvé trois mille profs en vingt-quatre heures. Moi, j'ai mis trois semaines à trouver un plombier.",
    "chute": true
   },
   {
    "p": "presentateur",
-   "t": "Monsieur le ministre, vous êtes avec nous ?"
-  },
-  {
-   "p": "invite",
-   "t": "Prenez n'importe qui ! Le gardien ? Il sait compter ? Parfait, il fait maths !",
-   "chute": true
+   "t": "Martine, ils sortent d'où, ces profs ?"
   },
   {
    "p": "envoyee",
-   "t": "Jean-Michel, c'est la folie. La cantinière vient d'être nommée prof de chimie. Ses expériences sont au menu demain.",
+   "t": "J'ai mené l'enquête. Soit c'est un miracle, soit ils ont recruté au rayon surgelés.",
    "chute": true
   },
   {
    "p": "invite",
-   "t": "Il en manque deux ! Martine ! Vous savez lire ? Vous êtes prof de français !",
+   "t": "N'importe quoi. Nos profs sont frais. Ils ont été décongelés ce matin.",
+   "chute": true
+  },
+  {
+   "p": "presentateur",
+   "t": "Et ils enseignent quoi ?"
+  },
+  {
+   "p": "invite",
+   "t": "Ce qui reste. Le prof de sport fait les maths. Il compte les tours de terrain.",
    "chute": true
   },
   {
    "p": "envoyee",
-   "t": "Jean-Michel… je commence lundi.",
+   "t": "Bonne nouvelle, Jean-Michel : votre plombier est arrivé. Il vient d'être nommé prof de physique.",
    "chute": true,
-   "attente": 0.6
-  },
-  {
-   "p": "presentateur",
-   "t": "Il est midi. Le ministre vient de se nommer lui-même… prof de calme.",
-   "chute": true
+   "attente": 0.5
   }
  ],
  "bandeau": [
-  "LE GARDIEN NOMMÉ PROF DE MATHS : IL COMPTE LES CLÉS",
-  "LA CANTINIÈRE PROF DE CHIMIE : LA PURÉE EXPLOSE",
-  "MARTINE COULOIR ATTENDUE LUNDI EN 5E B"
+  "UN PROF RETROUVÉ ENTRE LES PETITS POIS ET LES FRITES",
+  "LE PLOMBIER DE JEAN-MICHEL NOMMÉ PROF DE PHYSIQUE",
+  "RECRUTEMENT EXPRESS : DES PROFS LIVRÉS EN DRIVE"
  ],
  "gag": {
-  "replique": 3,
-  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. A school cafeteria lady in an apron and hairnet stands at a classroom blackboard wearing safety goggles, stirring a giant bubbling pot of green mashed potatoes that explodes in a puff of smoke, students duck under desks, comedic."
+  "replique": 2,
+  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. In a supermarket frozen food aisle, a confused teacher with a briefcase and glasses steps out of a chest freezer covered in frost, holding a piece of chalk, shoppers stare, comedic, deadpan."
  },
- "legende": "Il fallait 3000 profs avant midi. Le ministre a improvisé. Satire, personnages fictifs.",
+ "legende": "3000 profs trouvés en 24 h. Le secret ? Le rayon surgelés. Satire, personnages fictifs.",
  "hashtags": [
   "humour",
   "education",
   "prof",
-  "ministre",
+  "actualite",
   "satire",
   "drole"
  ],
