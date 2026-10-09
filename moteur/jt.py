@@ -317,7 +317,7 @@ def rendre(sk, sortie, audios, gag=None, apercu=False, mots=None):
     if GEN0 is None: GEN0 = t; GEN1 = t + GEN_DUREE; t = GEN1
     total = t + 0.35                                                        # fin sèche : la vidéo reboucle sur l'accroche
     FIN = None
-    if os.environ.get("LONGUEUR") == "monetisable" and total < 62.0:     # format long : carton de fin pour dépasser 1 minute
+    if (os.environ.get("LONGUEUR") or "pro") in ("monetisable", "pro") and total < 61.5:   # format long : carton de fin pour dépasser 1 minute
         FIN = t + 0.5; total = 62.0
     nf = int(total * FPS)
     # cadrage : large au début de chaque plan, serré à la réplique suivante du même personnage (coupe caméra)
@@ -360,10 +360,14 @@ def rendre(sk, sortie, audios, gag=None, apercu=False, mots=None):
     def ajoute(nom, t, g):
         x = son(nom); s0 = int(t * SRM); e = min(n, s0 + len(x))
         if e > s0: fond[s0:e] += x[:e - s0] * g
-    chutes = [q for q in ph if q["chute"] and q["i"] > 0]; cycle = ["xylo_descente", "rimshot", "trombone_triste"]
+    # bruitages : ceux prévus par le découpage scène par scène (fin de scène), sinon alternance automatique sur les chutes
+    sons_scene = {}
+    for sc in sk.get("decoupage") or []:
+        if sc.get("son") and sc.get("repliques"): sons_scene[max(sc["repliques"])] = sc["son"]
+    chutes = [q for q in ph if (q["chute"] or q["i"] in sons_scene) and q["i"] > 0]; cycle = ["xylo_descente", "rimshot", "trombone_triste"]
     for j, q in enumerate(chutes):
-        if q is ph[-1]: ajoute("rimshot", q["fin"] + 0.02, 0.9)
-        else: ajoute(cycle[j % len(cycle)], q["fin"] + 0.02, 0.7 if cycle[j % len(cycle)] != "trombone_triste" else 0.5)
+        nom = sons_scene.get(q["i"]) or ("rimshot" if q is ph[-1] else cycle[j % len(cycle)])
+        ajoute(nom, q["fin"] + 0.02, 0.9 if q is ph[-1] else 0.7 if nom != "trombone_triste" else 0.5)
     for q in ph:
         if q["plan"] is not None and q["i"] > 0 and (q["p"] == "envoyee" or q["i"] == gag_i): ajoute("woosh", q["debplan"] - 0.12, 0.6)
         if q["i"] == gag_i: ajoute("reconstitution", q["debplan"], 0.6)

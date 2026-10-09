@@ -81,8 +81,12 @@ def _mots(t):
     return {m for m in re.findall(r"[a-z0-9]{4,}", t) if m not in VIDES and not m.isdigit()}
 
 def sujet_du_jour(heures=24, deja_vus=(), mots_recents=()):
-    """Regroupe les titres par sujet (mots-clés communs) et renvoie le sujet traité par le plus de médias différents.
-    Renvoie (titres du sujet, description) ou (None, raison)."""
+    c = candidats_du_jour(heures, deja_vus, mots_recents, n=1)
+    return (c[0][0], c[0][1]) if c else (None, "pas assez de titres")
+
+def candidats_du_jour(heures=24, deja_vus=(), mots_recents=(), n=6):
+    """Les n sujets distincts les plus repris par les médias (politique, économie, société, tech, médias…).
+    Renvoie [(titres du sujet, description), …], le titre principal en premier dans chaque sujet."""
     maintenant = datetime.datetime.now(datetime.timezone.utc); tous = []
     for url in FLUX + UNES:
         try: tous += [dict(i, flux=url) for i in lire_flux(url)]
@@ -93,7 +97,7 @@ def sujet_du_jour(heures=24, deja_vus=(), mots_recents=()):
         cle = re.sub(r"\W+", "", it["titre"].lower())[:60]
         if cle in vus or it["lien"] in deja_vus or DRAMES.search(it["titre"] + " " + it["resume"][:200]) or RUBRIQUES.search(it["titre"]): continue
         vus.add(cle); it["mots"] = _mots(it["titre"] + " " + it["resume"][:160]); items.append(it)
-    if len(items) < 3: return None, "pas assez de titres"
+    if len(items) < 3: return []
     # mots trop courants (présents dans plus de 6 % des titres) : ils ne caractérisent pas un sujet
     from collections import Counter
     freq = Counter(m for it in items for m in it["mots"]); lim = max(3, 0.06 * len(items))
@@ -108,10 +112,13 @@ def sujet_du_jour(heures=24, deja_vus=(), mots_recents=()):
         frais = sum(1 for i in g["items"] if i["date"] and (maintenant - i["date"]).total_seconds() < 12 * 3600)
         deja = len(g["mots"] & recents) >= 4                                 # sujet déjà traité ces derniers jours
         return (len(sources) * 3 + len(g["items"]) + frais) * (0.3 if deja else 1)
-    for g in groupes:                                                    # on veut un sujet de politique française : au moins un article des rubriques politique
-        g["politique"] = any(i.get("flux") in FLUX for i in g["items"])
-    groupes.sort(key=lambda g: (g["politique"], score(g)), reverse=True)
-    g = groupes[0]; graine = g["graine"]
-    sel = [graine] + [i for i in sorted(g["items"], key=lambda i: i["date"] or maintenant, reverse=True) if i is not graine][:7]
-    nb = len({i["source"] for i in g["items"]})
-    return sel, f"{len(g['items'])} articles, {nb} médias"
+    groupes.sort(key=score, reverse=True)
+    out, graines = [], []
+    for g in groupes:
+        gr = g["graine"]
+        if any(len(gr["cles"] & x["cles"]) >= 2 for x in graines) or len(g["items"]) < 2: continue   # sujets distincts, repris au moins deux fois
+        graines.append(gr)
+        sel = [gr] + [i for i in sorted(g["items"], key=lambda i: i["date"] or maintenant, reverse=True) if i is not gr][:5]
+        out.append((sel, f"{len(g['items'])} articles, {len({i['source'] for i in g['items']})} médias"))
+        if len(out) >= n: break
+    return out

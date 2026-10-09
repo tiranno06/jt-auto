@@ -17,7 +17,7 @@ def resserrer(audios, sk, cible=None):
     """Durée maximale (réglage « courte » : 30 s) : si les voix dépassent, on accélère légèrement le débit (jusqu'à +18 %)."""
     import subprocess, tempfile, wave, numpy as np
     if ecrire.LONGUEUR == "monetisable": return audios                    # format long : jamais accéléré
-    cible = cible or {"courte": 25.0, "normale": 35.0, "longue": 50.0}.get(ecrire.LONGUEUR, 29.0)
+    cible = cible or {"pro": 86.0, "courte": 25.0, "normale": 35.0, "longue": 50.0}.get(ecrire.LONGUEUR, 86.0)
     total = sum(len(a) for a in audios) / SR + sum(0.45 if r.get("chute") else 0.06 for r in sk["repliques"]) + sum(r.get("attente", 0) for r in sk["repliques"]) + 1.0
     if total <= cible: return audios
     f = min(1.06, total / cible)                                          # au-delà, les voix deviennent difficiles à comprendre; print(f"Durée estimée {total:.1f} s : débit accéléré ×{f:.2f}", flush=True)
@@ -42,15 +42,23 @@ def main():
         except Exception as e:
             print(f"Casting impossible ({e}) : on continuera avec la voix de secours.", flush=True)
     deja = {l for h in historique for l in h.get("sources", [])}
-    mots_recents = {m for h in historique[-3:] for m in h.get("mots", [])}
-    titres, info = actu.sujet_du_jour(deja_vus=deja, mots_recents=mots_recents)
-    if titres:
-        print(f"Sujet du jour ({info}) : « {titres[0]['titre']} »", flush=True)
-    else:
-        print(f"Pas de sujet dominant ({info}) : titres politiques récents", flush=True)
-        titres = actu.titres_recents(deja_vus=deja)
-    if len(titres) < 1:
-        print("Pas assez d'actualité exploitable aujourd'hui : pas d'émission."); return
+    mots_recents = {m for h in historique[-5:] for m in h.get("mots", [])}
+    # 1. recherche : sujets candidats (articles des dernières 24 h, regroupés par sujet et classés par reprise médiatique)
+    try:
+        candidats = actu.candidats_du_jour(deja_vus=deja, mots_recents=mots_recents, n=6)
+    except Exception as e:
+        print(f"Recherche d'actualité en erreur : {e}", flush=True); candidats = []
+    for k, (sel, info) in enumerate(candidats):
+        print(f"Candidat {k} ({info}) : « {sel[0]['titre'][:110]} »", flush=True)
+    if not candidats:
+        print("Aucun sujet repris par plusieurs médias : repli sur les titres politiques récents.", flush=True)
+        try: t = actu.titres_recents(deja_vus=deja)
+        except Exception as e: print(f"Repli impossible : {e}", flush=True); t = []
+        candidats = [(t, "titres récents")] if t else []
+    if not candidats:
+        print("Recherche d'actualité impossible (flux indisponibles ou vides) : pas d'émission aujourd'hui."); return
+    titres = candidats[0][0]
+    recents = [f"{h.get('titre', '')} : {h.get('accroche', '')}" for h in historique[-10:]]
     from zoneinfo import ZoneInfo
     dimanche = datetime.datetime.now(ZoneInfo("Europe/Paris")).weekday() == 6 and os.environ.get("INFOS_DEMAIN", "1") != "0"
     gags = [h.get("running_gag") for h in historique[-15:] if h.get("running_gag")]
@@ -60,7 +68,9 @@ def main():
         sk = ecrire.valider(json.load(open(test, encoding="utf-8")), set())
         print(f"Sketch d'essai : {test}", flush=True)
     else:
-        sk = ecrire.ecrire_sketch(titres, gags=gags, special=dimanche)
+        sk = ecrire.ecrire_sketch([c[0] for c in candidats], gags=gags, special=dimanche, recents=recents)
+        print(f"Moteur humoristique : {ecrire.USAGE['appels']} appels Claude, {ecrire.USAGE['entree']} jetons lus, {ecrire.USAGE['sortie']} jetons écrits", flush=True)
+        titres = next((c[0] for c in candidats if c[0][0]["lien"] in sk.get("sources", [])), titres)
     print(f"Sketch : « {sk['sujet']} », {len(sk['repliques'])} répliques", flush=True)
     audios, credits_voix, mots = voix.generer(sk["repliques"], jt.VOIX)
     moteur = " + ".join(credits_voix)
@@ -87,13 +97,17 @@ def main():
     open(base + ".txt", "w", encoding="utf-8").write(legende + "\n\nSources :\n" + "\n".join(sk["sources"]) + "\n")
     os.makedirs("episodes", exist_ok=True)
     json.dump(sk, open(f"episodes/{jour}.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
-    historique.append(dict(date=jour, titre=sk["sujet"], sources=sk["sources"], mots=sorted(actu._mots(" ".join(t["titre"] for t in titres)))[:40], voix=moteur, gag=bool(gag), running_gag=sk.get("running_gag", ""), duree=round(duree, 1),
+    fiche = sk.get("fiche", {})
+    if fiche: print(f"Qualité : {fiche.get('note', 0):.0f}/100 — {fiche.get('decision')}", flush=True)
+    historique.append(dict(date=jour, titre=sk["sujet"], sources=sk["sources"], note=fiche.get("note"), decision=fiche.get("decision"),
+                           accroche=sk["repliques"][0]["t"] if sk.get("repliques") else "", mots=sorted(actu._mots(" ".join(t["titre"] for t in titres)))[:40], voix=moteur, gag=bool(gag), running_gag=sk.get("running_gag", ""), duree=round(duree, 1),
                            fichier=os.path.basename(base) + ".mp4", tag=f"emissions-{jour[:7]}", legende=legende, publie=None))
     json.dump(historique[-200:], open("episodes/historique.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     sortie = os.environ.get("GITHUB_OUTPUT")
     if sortie:
         with open(sortie, "a") as f:
-            f.write(f"video={base}.mp4\nlegende={base}.txt\nnom={os.path.basename(base)}.mp4\nmois={jour[:7]}\ntitre={sk['sujet']}\n")
+            f.write(f"video={base}.mp4\nlegende={base}.txt\nnom={os.path.basename(base)}.mp4\nmois={jour[:7]}\ntitre={sk['sujet']}\n"
+                    f"qualite={'ok' if not fiche or fiche.get('note', 0) >= 80 else 'faible'}\n")
     print(f"OK : {base}.mp4 ({duree:.0f} s)")
 
 if __name__ == "__main__":

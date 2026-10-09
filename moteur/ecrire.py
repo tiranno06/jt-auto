@@ -1,21 +1,25 @@
-"""Écriture du sketch du jour par Claude (API Anthropic), à partir des vrais titres de l'actualité.
-Format : un JT satirique sur UN seul sujet, avec trois personnages fictifs (présentateur, envoyée spéciale en direct, invité).
-Deux passes : 1) l'auteur écrit ; 2) un « script doctor » réécrit les blagues les plus faibles."""
+"""Moteur humoristique : écriture du sketch du jour par Claude (API Anthropic).
+Les consignes d'auteur sont dans moteur/prompts/moteur_humour.md (moteur de satire professionnel fourni par l'utilisateur).
+Étapes : 1) sélection du sujet parmi plusieurs candidats notés sur 10 (avec vérification web si disponible) et choix de l'angle ;
+2) écriture ; 3) contrôle qualité noté sur 100, jusqu'à 3 réécritures si < 80, puis changement de sujet si le sketch reste faible."""
 import json, os, re, unicodedata
+ICI = os.path.dirname(os.path.abspath(__file__))
+MOTEUR_HUMOUR = open(os.path.join(ICI, "prompts", "moteur_humour.md"), encoding="utf-8").read()
 
 MODELE = os.environ.get("MODELE_CLAUDE") or "claude-opus-5-5"          # Opus : humour plus fin (réglable dans l'appli)
 # réglages de la régie (variables du dépôt)
-LONGUEURS = {"courte": ("5 à 6", "20 à 25"), "normale": ("7 à 9", "30 à 40"), "longue": ("9 à 12", "40 à 55"),
+LONGUEURS = {"pro": ("10 à 16", "60 à 90"), "courte": ("5 à 6", "20 à 25"), "normale": ("7 à 9", "30 à 40"), "longue": ("9 à 12", "40 à 55"),
              "monetisable": ("13 à 16", "60 à 75")}   # format long : plus d'une minute (rémunération TikTok)
 TONS = {"clash": "CLASH, foutage de gueule direct (le style préféré du public) : on compare l'actu à la vie de tous les jours avec une mauvaise foi assumée (« Ils ont trouvé 3 000 profs en 24 h. Moi, j'ai mis trois semaines à trouver un plombier. »), on balance des hypothèses absurdes en « soit… soit… » (« soit c'est un miracle, soit ils ont recruté au rayon surgelés »), l'invité répond du tac au tac en aggravant son cas (« ils ont été décongelés ce matin »), et une image du quotidien revient en rappel à la fin (le plombier). Phrases courtes, punchlines sèches, comme entre potes qui chambrent",
         "farfelu": "gags farfelus et ironie pince-sans-rire : situations délirantes, images absurdes et très concrètes, ironie froide envers les institutions et la langue de bois",
         "bon_enfant": "foutage de gueule bon enfant envers les institutions, la langue de bois et les travers du pouvoir",
         "piquant": "satire mordante et sans pitié envers les institutions, les décisions et la langue de bois (jamais envers les gens pour ce qu'ils sont)",
         "absurde": "absurde total façon sketch surréaliste : situations délirantes poussées très loin, logique folle mais implacable"}
-LONGUEUR = os.environ.get("LONGUEUR") or "courte"
-NB, SECONDES = LONGUEURS.get(LONGUEUR, LONGUEURS["courte"])
+LONGUEUR = os.environ.get("LONGUEUR") or "pro"
+NB, SECONDES = LONGUEURS.get(LONGUEUR, LONGUEURS["pro"])
 NB_MAX = int(NB.split()[-1])
-MOTS = {"courte": 60, "normale": 90, "longue": 130, "monetisable": 200}.get(LONGUEUR, 60)   # budget de mots (≈ 2,5 mots/s)
+MOTS = {"pro": 190, "courte": 60, "normale": 90, "longue": 130, "monetisable": 200}.get(LONGUEUR, 190)
+MOTS_MIN = {"pro": 130, "monetisable": 150}.get(LONGUEUR, 0)   # budget de mots (≈ 2,5 mots/s)
 TON = TONS.get(os.environ.get("TON") or "clash", TONS["clash"])
 CAST = {
     "presentateur": "Jean-Michel Plateau, présentateur. DÉFAUT FIXE : ne réagit JAMAIS, même au pire ; calme olympien ; pose la question simple et logique qui fait tout s'écrouler. C'est souvent lui qui lance la chute finale.",
@@ -81,79 +85,88 @@ EXEMPLE = {
  }
 }
 
-SYSTEME = """Tu es une équipe d'auteurs comiques professionnels de la télévision française (le niveau des meilleures émissions satiriques). Tu écris « L'info en caoutchouc », un faux JT satirique quotidien de {secondes} secondes pour TikTok, joué par des personnages 100 % FICTIFS dessinés en cartoon.
+ADAPTATION = """
+═══════════════════════════════════════════
+ADAPTATION AU ROBOT « L'INFO EN CAOUTCHOUC » (prioritaire en cas de conflit avec ce qui précède)
+═══════════════════════════════════════════
+RECHERCHE : le robot a déjà collecté l'actualité des dernières 24 à 36 heures dans les flux RSS de plusieurs médias français ; tu reçois les sujets candidats avec leurs articles. Si l'outil de recherche web est disponible, utilise-le pour vérifier les faits du sujet choisi (dates, chiffres) ; sinon, appuie-toi uniquement sur les articles fournis et dis-le dans "faits_reels".
 
-PERSONNAGES (clés autorisées pour "p") :
+PERSONNAGES (fictifs, animés en dessin, clés autorisées pour "p") :
 {cast}
+Les dialogues sont joués UNIQUEMENT par ces trois personnages. Le format choisi (faux JT, conférence de presse, réunion de crise, interview absurde, parodie publicitaire, débat…) se joue à l'intérieur de notre JT : le présentateur ouvre et ferme, l'envoyée est en direct sur le lieu de l'action, l'invité incarne le camp moqué (porte-parole, ministre, PDG, expert… toujours FICTIF, avec un nom inventé).
 
-LE FORMAT : UN SEUL sujet d'actualité, celui qui est fourni, sans jamais s'en écarter. {nb} répliques, courtes (une ou deux phrases courtes). BUDGET STRICT : {mots} mots AU TOTAL pour tout le sketch (le temps de parole est limité).
-- Réplique 0 = L'ACCROCHE (ouverture à froid, AVANT le générique) : le présentateur résume le sujet en UNE phrase drôle de 3 secondes maximum, qui donne envie de rester. C'est la vanne la plus forte du début.
-- Ensuite : direct avec l'envoyée sur place et/ou l'invité.
-- BOUCLE : la dernière réplique doit faire écho à l'accroche, pour que la vidéo s'enchaîne naturellement sur son début quand elle repasse en boucle.
+PERSONNES RÉELLES : tu peux citer une personnalité publique uniquement pour un fait vérifié présent dans les sources (ce qu'elle a réellement dit ou fait). Tu ne lui fais JAMAIS dire ou faire quoi que ce soit d'inventé, même pour rire : la caricature passe par nos personnages fictifs. Jamais de moquerie liée à l'origine, la religion, le genre, l'orientation, le handicap ; on ne rit pas des victimes ; aucune consigne de vote.
+
+STYLE MAISON (validé par le public) : {ton}
+
+DURÉE : {secondes} secondes, {nb} répliques, entre {mots_min} et {mots} mots prononcés au total. Réplique 0 = l'accroche du présentateur (2 secondes, la punchline la plus forte du début). La dernière réplique doit faire écho à l'accroche (la vidéo tourne en boucle sur TikTok).
+Voix synthétiques : phrases courtes, faciles à dire, une idée par phrase. Nombres, sigles et pourcentages en toutes lettres dans le champ "d".
 {special}
+Running gags récents de l'émission (un clin d'œil possible s'il colle au sujet) : {gags}
+ANTI-RÉPÉTITION — sujets et vannes des derniers épisodes, à NE PAS refaire : {recents}
 
-RITUELS (ce qui fidélise le public) :
-- L'envoyée Martine est toujours en direct d'un endroit absurde mais lié au sujet (« caché sous le bureau du ministre », « dans la photocopieuse de Bercy »…) : c'est le champ "lieu_direct".
-- Le présentateur reste de marbre quoi qu'il arrive.
-- Tu peux faire UN clin d'œil discret à un running gag récent de l'émission s'il colle au sujet (sinon, n'en fais pas) : {gags}
+LIVRABLES : rends tout avec l'outil rendre_sketch, dans ce format JSON strict (A→F du cahier des charges inclus) :
+{{"sujet": "1 à 3 mots, MAJUSCULES", "ecran": "max 14 caractères, MAJUSCULES", "titre_accroche": "max 40 caractères, sans emoji",
+ "concept": "B. concept et titre", "format": "B. format choisi", "angle": "B. angle comique",
+ "resume_factuel": "A. résumé factuel daté", "faits_reels": ["E. faits réels vérifiés"], "inventions": ["E. inventions satiriques"],
+ "decoupage": [{{"scene": "D. description : lieu, actions visuelles, transition", "repliques": [indices des répliques de la scène], "lieu": "plateau|direct|duplex|reconstitution", "son": "bruitage à la fin de la scène parmi : rimshot, xylo_descente, trombone_triste, dun_dun, woosh, reconstitution (ou vide)", "duree": secondes estimées}}],
+ "invite_nom": "nom fictif", "invite_role": "fonction avec « (fictif) », max 34 caractères", "invite_look": "{looks}",
+ "lieu_direct": "lieu du direct de l'envoyée, max 26 caractères",
+ "repliques": [{{"p": "presentateur|envoyee|invite", "t": "réplique affichée (max 160 caractères)", "d": "version à prononcer si différente", "chute": true si vanne, "attente": silence avant la réplique (0.4 à 1.2, une seule fois)}}],
+ "bandeau": ["3 ou 4 fausses dépêches absurdes, MAJUSCULES, max 55 caractères"],
+ "gag": {{"replique": index d'une réplique de l'envoyée ou de l'invité décrivant une scène visuelle drôle, "prompt": "scène EN ANGLAIS pour un générateur vidéo, commence par « Flat 2D cartoon, thick black outlines, simple shapes. », sans texte, sans personne réelle"}},
+ "question": "question pour les commentaires, avec emoji", "running_gag": "nouveau gag réutilisable (ou vide)",
+ "legende": "légende TikTok (max 140 caractères) finissant par « Satire, personnages fictifs. »", "hashtags": ["5 à 7, sans #, minuscules, sans accents"],
+ "sources": ["liens réellement utilisés"]}}
 
-ARTICULATION (les voix sont synthétiques) : phrases courtes et simples, mots faciles à prononcer, pas d'enchaînement de sons compliqués, pas d'abréviations, une seule idée par phrase. Le spectateur doit tout comprendre du premier coup.
-
-COMMENT FAIRE RIRE (méthode des auteurs professionnels, obligatoire) :
-- L'ANGLE : pars de la contradiction ou de l'hypocrisie du sujet (ce que tout le monde pense sans le dire), puis exagère-la jusqu'à l'absurde, ou traduis-la en équivalent ridicule de la vie quotidienne. L'angle retenu t'est donné : tout le sketch le sert.
-- ESCALADE : chaque réplique va un cran plus loin que la précédente, jamais de redescente.
-- RÈGLE DE TROIS : au moins une fois, deux éléments normaux puis un troisième qui déraille.
-- ÉCONOMIE : le mot drôle est le DERNIER mot ; zéro mot inutile après la chute ; si on peut couper un mot, coupe-le.
-- LE CHOC DES DÉFAUTS : le comique naît des défauts fixes des personnages qui s'entrechoquent (présentateur impassible, envoyée au premier degré, invité de mauvaise foi).
-- VISUEL : au moins une image drôle à voir (le plan gag), et chaque vanne doit rester drôle LUE en sous-titres, sans le son.
-- Des images concrètes, précises et ridicules (« deux euros et un Tic Tac », « sous les coussins du canapé ») plutôt que des concepts.
-- La chute est TOUJOURS le dernier mot de la réplique. Phrases courtes. Jamais d'explication de la blague, jamais de jeu de mots facile.
-- Une blague du début revient en chute finale (rappel), de préférence retournée.
-- Ton : {ton}. Pince-sans-rire, jamais méchant envers les gens.
-- L'accroche (réplique 0) : le spectateur doit comprendre le sujet et sourire en 3 secondes.
-
-RÈGLES ABSOLUES :
-1. Faits : n'utilise QUE les faits présents dans les titres fournis. Aucun chiffre, date ou événement réel inventé. Les exagérations doivent être évidemment absurdes (personne ne doit les croire vraies).
-2. Ne nomme AUCUNE personne réelle et n'attribue aucune citation à une personne réelle. Parle des institutions (« le gouvernement », « les députés », « un ministre », « Bercy »). Les noms de marques sont permis s'ils ne sont pas dénigrés.
-3. On ne rit jamais des victimes ni des drames. Si le sujet concerne une personne réelle identifiable, la satire vise la situation, l'institution ou la communication, jamais la personne elle-même, et sans ajouter d'accusation. Aucune moquerie liée à l'origine, la religion, le genre, l'orientation, le handicap, l'âge ou l'apparence. Pas d'insulte, rien de sexuel, pas de violence.
-4. Aucune information pratique sur des élections et aucun appel à voter.
-
-FORMAT : rends le sketch avec l'outil rendre_sketch, avec exactement ces champs :
-{{"sujet": "sujet en 1 à 3 mots, MAJUSCULES (affiché dans l'habillage)",
- "ecran": "texte de l'écran du plateau, max 14 caractères, MAJUSCULES",
- "invite_nom": "nom fictif et drôle de l'invité (prénom + nom évocateur)", "invite_role": "fonction de l'invité, avec « (fictif) », max 34 caractères",
- "invite_look": "{looks}",
- "lieu_direct": "lieu absurde du direct de l'envoyée, lié au sujet, max 26 caractères",
- "titre_accroche": "titre affiché en gros sur la première image (style « POV »), max 40 caractères, SANS emoji, qui donne envie de regarder",
- "question": "question courte et piquante pour faire réagir en commentaire (max 80 caractères), avec un emoji à la fin",
- "running_gag": "si tu crées un nouveau gag réutilisable dans de futurs épisodes, décris-le en une phrase (sinon chaîne vide)",
- "repliques": [{{"p": "presentateur|envoyee|invite", "t": "réplique affichée (max 150 caractères)", "d": "même texte avec nombres, sigles et pourcentages écrits en toutes lettres pour la voix (si différent)", "chute": true si la réplique se termine par une vanne, "attente": secondes de silence gênant avant la réplique (0.4 à 1.2, une seule fois max, juste avant la vanne finale ou une grosse vanne)}}],
- "bandeau": ["3 ou 4 fausses dépêches absurdes pour le bandeau défilant, MAJUSCULES, max 55 caractères, liées au sujet"],
- "gag": {{"replique": index (à partir de 0) d'une réplique de l'envoyée ou de l'invité qui décrit une scène visuelle drôle, "prompt": "description EN ANGLAIS de cette scène pour un générateur vidéo : commence par « Flat 2D cartoon, thick black outlines, simple shapes. », décris l'action en 1 à 2 phrases, sans texte écrit à l'écran, sans personne réelle"}},
- "legende": "légende TikTok accrocheuse (max 140 caractères), se termine par « Satire, personnages fictifs. »",
- "hashtags": ["5 à 7 hashtags sans #, minuscules, sans accents"],
- "sources": ["liens des titres réellement utilisés"]}}
-
-EXEMPLE DE TON ET DE FORMAT (sujet d'une autre semaine, ne réutilise pas ses blagues) :
+EXEMPLE DE STYLE ET DE FORMAT (court, sujet d'une autre semaine, ne réutilise pas ses blagues) :
 {exemple}"""
 
-DOCTEUR = """Tu es maintenant « script doctor » pour une émission comique. Voici le sketch :
+SELECTION = """Étapes 1 à 3 du cahier des charges. Voici les sujets candidats du jour (les plus repris par les médias) :
+{candidats}
+
+Note chaque candidat sur 10 (potentiel comique, absurdité, potentiel satirique, originalité, reconnaissance par le public, potentiel visuel, fraîcheur ; plus de poids à l'originalité et au potentiel comique). Écarte les drames et les sujets où l'on rirait de victimes.
+Choisis celui qui permet le MEILLEUR sketch, puis trouve son angle comique (contradiction discours/actes, mauvaise foi, absurdité administrative, double standard, conséquence grotesque). Si tu disposes de la recherche web, vérifie rapidement les faits clés du sujet choisi.
+Rends ton choix avec l'outil choisir_sujet."""
+
+CRITIQUE = """Étape 8 du cahier des charges : relis ce sketch comme un auteur exigeant et note-le sur 100, honnêtement (ne gonfle jamais la note) :
+originalité du concept /20, punchlines /25, rythme /15, pertinence satirique /15, dialogues /10, potentiel visuel /10, chute /5.
+Sketch :
 {sketch}
+Rends la note avec l'outil noter_sketch, avec une critique précise des répliques faibles et de ce qu'il faut changer."""
 
-1. Pour chaque réplique, note mentalement sa force comique de 1 à 10.
-2. Réécris les 3 répliques les plus faibles pour qu'elles soient franchement plus drôles (image plus concrète, chute plus courte et plus inattendue, escalade, règle de trois, rappel). Coupe chaque mot inutile après une chute.
-3. Vérifie que l'accroche (réplique 0) fait sourire en 3 secondes, et que la dernière réplique est la meilleure vanne ET fait écho à l'accroche (boucle).
-4. Vérifie l'articulation : phrases courtes, mots simples, faciles à dire à voix haute.
-5. Coupe tout ce qui ralentit : le sketch doit tenir en {secondes} secondes ({nb} répliques).
-Garde exactement les mêmes faits et toutes les règles (aucune personne réelle, aucun fait inventé). Rends le sketch complet corrigé avec l'outil rendre_sketch, même format."""
+REECRITURE = """Ton sketch a obtenu {note}/100 (seuil : 80). Critique du relecteur :
+{critique}
+Réécris-le en profondeur (pas de retouches cosmétiques) pour dépasser 80 : punchlines plus surprenantes, escalade plus forte, chute plus mémorable. Mêmes faits, mêmes règles. Rends le sketch complet avec l'outil rendre_sketch."""
 
-def construire_prompt(titres):
-    liste = "\n".join(f"- [{t['source']}] {t['titre']} — {t['resume'][:300]} ({t['lien']})" for t in titres)
-    return (f"SUJET IMPOSÉ : « {titres[0]['titre']} »\n"
-            "Ce sujet fait en ce moment les gros titres de plusieurs médias. Voici les articles qui en parlent :\n" + liste +
-            "\n\nÉcris le sketch UNIQUEMENT sur ce sujet précis : chaque réplique, chaque gag, chaque dépêche du bandeau et le plan gag doivent "
-            "s'y rapporter directement. Aucun autre sujet, aucune digression. Trouve l'angle le plus ironique et le plus absurde, "
-            "comme une équipe d'auteurs professionnels de la télévision.")
+def _schema(props, requis):
+    return {"type": "object", "properties": props, "required": requis}
+
+OUTIL = {"name": "rendre_sketch", "description": "Rendre le sketch complet (livrables A à F).",
+         "input_schema": _schema({
+             "sujet": {"type": "string"}, "ecran": {"type": "string"}, "titre_accroche": {"type": "string"},
+             "concept": {"type": "string"}, "format": {"type": "string"}, "angle": {"type": "string"}, "resume_factuel": {"type": "string"},
+             "faits_reels": {"type": "array", "items": {"type": "string"}}, "inventions": {"type": "array", "items": {"type": "string"}},
+             "decoupage": {"type": "array", "items": _schema({"scene": {"type": "string"}, "repliques": {"type": "array", "items": {"type": "integer"}},
+                                                              "lieu": {"type": "string"}, "son": {"type": "string"}, "duree": {"type": "number"}}, ["scene"])},
+             "invite_nom": {"type": "string"}, "invite_role": {"type": "string"}, "invite_look": {"type": "string"}, "lieu_direct": {"type": "string"},
+             "question": {"type": "string"}, "running_gag": {"type": "string"},
+             "repliques": {"type": "array", "items": _schema({"p": {"type": "string"}, "t": {"type": "string"}, "d": {"type": "string"},
+                                                              "chute": {"type": "boolean"}, "attente": {"type": "number"}}, ["p", "t"])},
+             "bandeau": {"type": "array", "items": {"type": "string"}},
+             "gag": _schema({"replique": {"type": "integer"}, "prompt": {"type": "string"}}, []),
+             "legende": {"type": "string"}, "hashtags": {"type": "array", "items": {"type": "string"}}, "sources": {"type": "array", "items": {"type": "string"}}},
+             ["sujet", "repliques", "legende"])}
+OUTIL_CHOIX = {"name": "choisir_sujet", "description": "Notes des candidats, sujet choisi et angle.",
+               "input_schema": _schema({"notes": {"type": "array", "items": _schema({"index": {"type": "integer"}, "note": {"type": "number"},
+                                                                                      "raison": {"type": "string"}}, ["index", "note"])},
+                                        "choix": {"type": "integer"}, "angle": {"type": "string"},
+                                        "faits_verifies": {"type": "array", "items": {"type": "string"}}}, ["choix", "angle"])}
+OUTIL_NOTE = {"name": "noter_sketch", "description": "Note qualité sur 100 et critique.",
+              "input_schema": _schema({"originalite": {"type": "number"}, "punchlines": {"type": "number"}, "rythme": {"type": "number"},
+                                       "pertinence": {"type": "number"}, "dialogues": {"type": "number"}, "visuel": {"type": "number"},
+                                       "chute": {"type": "number"}, "total": {"type": "number"}, "critique": {"type": "string"}}, ["total", "critique"])}
+RECHERCHE_WEB = {"type": "web_search_20250305", "name": "web_search", "max_uses": 4}
 
 def _json(texte):
     m = re.search(r"\{.*\}", texte, re.S)
@@ -199,39 +212,56 @@ def valider(sk, liens):
             "gag": gag,
             "legende": _court(sk.get("legende"), 160) or "L'actu du jour, en dessin animé. Satire, personnages fictifs.",
             "hashtags": [t for t in tags if t][:7] or ["satire", "humour", "actualite", "politique"],
-            "sources": [s for s in sk.get("sources", []) if s in liens][:6]}
+            "sources": [s for s in sk.get("sources", []) if s in liens][:6],
+            "decoupage": _decoupage(sk.get("decoupage"), len(reps))}
 
-OUTIL = {"name": "rendre_sketch", "description": "Rendre le sketch au format demandé.",
-         "input_schema": {"type": "object", "properties": {
-             "sujet": {"type": "string"}, "ecran": {"type": "string"}, "invite_nom": {"type": "string"}, "invite_role": {"type": "string"},
-             "invite_look": {"type": "string"}, "lieu_direct": {"type": "string"},
-             "titre_accroche": {"type": "string"}, "question": {"type": "string"}, "running_gag": {"type": "string"},
-             "repliques": {"type": "array", "items": {"type": "object", "properties": {
-                 "p": {"type": "string"}, "t": {"type": "string"}, "d": {"type": "string"}, "chute": {"type": "boolean"}, "attente": {"type": "number"}},
-                 "required": ["p", "t"]}},
-             "bandeau": {"type": "array", "items": {"type": "string"}},
-             "gag": {"type": "object", "properties": {"replique": {"type": "integer"}, "prompt": {"type": "string"}}},
-             "legende": {"type": "string"}, "hashtags": {"type": "array", "items": {"type": "string"}},
-             "sources": {"type": "array", "items": {"type": "string"}}},
-             "required": ["sujet", "repliques", "legende"]}}
+SONS_DISPONIBLES = ("rimshot", "xylo_descente", "trombone_triste", "dun_dun", "woosh", "reconstitution")
+def _decoupage(dec, n):
+    """Découpage scène par scène, normalisé pour le moteur vidéo :
+    [{"scene", "repliques": [indices], "lieu": plateau|direct|duplex|reconstitution, "son": bruitage de notre banque ou "", "duree": s}]."""
+    out = []
+    for s in (dec or [])[:12]:
+        if not isinstance(s, dict): continue
+        try: idx = [int(i) for i in s.get("repliques", []) if 0 <= int(i) < n]
+        except (TypeError, ValueError): idx = []
+        lieu = str(s.get("lieu", "")).lower(); lieu = lieu if lieu in ("plateau", "direct", "duplex", "reconstitution") else ""
+        son = str(s.get("son", "")).lower(); son = son if son in SONS_DISPONIBLES else ""
+        try: duree = round(float(s.get("duree", 0)), 1)
+        except (TypeError, ValueError): duree = 0
+        out.append({"scene": _court(s.get("scene") or s.get("description"), 300), "repliques": idx, "lieu": lieu, "son": son, "duree": duree})
+    return out
 
-def _appel(client, systeme, messages):
-    """Renvoie le sketch sous forme de dictionnaire. L'outil force un JSON toujours valide (fini les guillemets mal échappés)."""
-    r = client.messages.create(model=MODELE, max_tokens=4000, system=systeme, messages=messages,
-                               tools=[OUTIL], tool_choice={"type": "auto"})
+USAGE = {"appels": 0, "entree": 0, "sortie": 0}                          # suivi du budget (jetons consommés)
+
+def _appel(client, systeme, messages, outil=OUTIL, web=False, max_tokens=6000):
+    """Appel Claude ; renvoie l'entrée de l'outil demandé (ou un JSON trouvé dans le texte). Recherche web si possible."""
+    outils = [outil] + ([RECHERCHE_WEB] if web else [])
+    kw = dict(model=MODELE, max_tokens=max_tokens, messages=messages, tools=outils, tool_choice={"type": "auto"})
+    if systeme: kw["system"] = systeme
+    try:
+        r = client.messages.create(**kw)
+        u = getattr(r, "usage", None)
+        if u: USAGE["entree"] += getattr(u, "input_tokens", 0) or 0; USAGE["sortie"] += getattr(u, "output_tokens", 0) or 0; USAGE["appels"] += 1
+    except Exception as e:
+        if not web: raise
+        print(f"Recherche web indisponible ({str(e)[:120]}) : vérification sur les seuls articles fournis.", flush=True)
+        return _appel(client, systeme, messages, outil, False, max_tokens)
     for b in r.content:
-        if getattr(b, "type", "") == "tool_use": return b.input
-    return _json("".join(getattr(b, "text", "") for b in r.content))
+        if getattr(b, "type", "") == "tool_use" and getattr(b, "name", "") == outil["name"]: return b.input
+    brut = "".join(getattr(b, "text", "") for b in r.content if getattr(b, "type", "") == "text")
+    try: return _json(brut)
+    except Exception:
+        r2 = client.messages.create(**dict(kw, tools=[outil], messages=messages + [{"role": "assistant", "content": brut or "…"},
+                                    {"role": "user", "content": f"Rends maintenant ta réponse avec l'outil {outil['name']}."}]))
+        for b in r2.content:
+            if getattr(b, "type", "") == "tool_use": return b.input
+        raise ValueError("réponse inexploitable")
 
 SPECIAL_DEMAIN = """- ÉPISODE SPÉCIAL DU DIMANCHE « LES INFOS DE DEMAIN » : après l'accroche, le présentateur annonce 3 ou 4 fausses brèves du futur (« Dans un an… », « En 2030… »), toutes sur CE sujet, chacune poussant la situation un cran plus loin dans l'absurde, avec une chute par brève ; l'envoyée ou l'invité peuvent réagir. L'écran du plateau affiche « EN 2030 »."""
 
 def _mots(t):
     t = unicodedata.normalize("NFKD", t.lower()).encode("ascii", "ignore").decode()
     return {m for m in re.findall(r"[a-z]{5,}", t)}
-
-def trop_long(sk):
-    n = sum(len(r["t"].split()) for r in sk["repliques"])
-    if LONGUEUR != "monetisable" and n > MOTS * 1.2: raise ValueError(f"trop long : {n} mots, maximum {MOTS}. Raccourcis chaque réplique")
 
 def hors_sujet(sk, titres):
     """Refuse un sketch qui ne reprend aucun mot important du sujet imposé (le robot s'est éparpillé)."""
@@ -240,83 +270,71 @@ def hors_sujet(sk, titres):
     if sujet and len(sujet & texte) < 1:
         raise ValueError(f"hors sujet : le sketch doit parler de « {titres[0]['titre']} »")
 
-ATELIER = """Tu es dans la salle des auteurs d'une émission satirique professionnelle. Sujet imposé et articles :
-{sujet}
+def longueur(sk):
+    n = sum(len((r.get("d") or r["t"]).split()) for r in sk["repliques"])
+    if n > MOTS * 1.2: raise ValueError(f"trop long : {n} mots prononcés, maximum {MOTS}. Coupe")
+    if MOTS_MIN and n < MOTS_MIN * 0.85: raise ValueError(f"trop court : {n} mots prononcés, minimum {MOTS_MIN}. Développe l'escalade")
+    return n
 
-Propose 10 ANGLES COMIQUES différents sur CE sujet (et rien d'autre). Pour chacun : l'angle en une phrase (la contradiction ou l'hypocrisie exagérée, ou l'équivalent absurde de la vie quotidienne) et LA vanne la plus forte qu'il permet (courte, mot drôle à la fin).
-Règles : aucune personne réelle visée, aucun fait inventé, pas de jeu de mots facile, pas de cliché. Rends-les avec l'outil proposer_angles."""
+def _bloc_candidat(k, titres):
+    return f"[{k}] " + "\n    ".join(f"- [{t['source']}] {t['titre']} — {t['resume'][:220]} ({t['lien']})" for t in titres[:5])
 
-PRODUCTEUR = """Tu es le producteur impitoyable de l'émission : tu ne gardes que ce qui fait rire aux éclats un public TikTok français.
-Voici 10 angles avec leur meilleure vanne :
-{angles}
-Note chaque angle de 1 à 10 (originalité, surprise, potentiel d'escalade sur 6 répliques, compréhensible en 3 secondes, drôle même lu sans le son). Rends les notes avec l'outil noter_angles."""
-
-OUTIL_ANGLES = {"name": "proposer_angles", "description": "Proposer les angles comiques.",
-                "input_schema": {"type": "object", "properties": {"angles": {"type": "array", "items": {"type": "object", "properties": {
-                    "angle": {"type": "string"}, "vanne": {"type": "string"}}, "required": ["angle", "vanne"]}}}, "required": ["angles"]}}
-OUTIL_NOTES = {"name": "noter_angles", "description": "Noter les angles.",
-               "input_schema": {"type": "object", "properties": {"notes": {"type": "array", "items": {"type": "integer"}}}, "required": ["notes"]}}
-
-def _outil(client, outil, texte):
-    """Appel avec sortie structurée ; si le modèle répond en texte, on lui redemande du JSON pur."""
-    msgs = [{"role": "user", "content": texte}]
-    for essai in range(2):
-        r = client.messages.create(model=MODELE, max_tokens=3000, messages=msgs, tools=[outil], tool_choice={"type": "auto"})
-        for b in r.content:
-            if getattr(b, "type", "") == "tool_use": return b.input
-        brut = "".join(getattr(b, "text", "") for b in r.content)
-        try: return _json(brut)
-        except Exception:
-            msgs = msgs + [{"role": "assistant", "content": brut or "…"},
-                           {"role": "user", "content": f"Utilise l'outil {outil['name']} pour rendre ta réponse."}]
-    raise ValueError("réponse inexploitable")
-
-def meilleur_angle(client, titres):
-    """Écrire 10 angles, les faire noter par un « producteur », garder le meilleur (et le second en réserve)."""
-    try:
-        sujet = "\n".join(f"- {t['titre']} — {t['resume'][:200]}" for t in titres[:6])
-        r = _outil(client, OUTIL_ANGLES, ATELIER.format(sujet=sujet))
-        liste_brute = r if isinstance(r, list) else r.get("angles") or next((v for v in r.values() if isinstance(v, list)), [])
-        angles = [a for a in liste_brute if isinstance(a, dict) and a.get("angle")][:10]
-        if not angles: print(f"Atelier d'angles : réponse inattendue ({str(r)[:150]})", flush=True); return ""
-        liste = "\n".join(f"{k}. {a['angle']} → « {a['vanne']} »" for k, a in enumerate(angles))
-        rn = _outil(client, OUTIL_NOTES, PRODUCTEUR.format(angles=liste))
-        notes = rn if isinstance(rn, list) else rn.get("notes") or next((v for v in rn.values() if isinstance(v, list)), [])
-        notes = [int(x) if str(x).lstrip("-").isdigit() else 0 for x in notes]
-        ordre = sorted(range(len(angles)), key=lambda k: -(notes[k] if k < len(notes) else 0))
-        a, b = angles[ordre[0]], angles[ordre[1]] if len(ordre) > 1 else None
-        print(f"Angle retenu ({notes[ordre[0]] if notes else '?'}/10) : {a['angle']}", flush=True)
-        return (f"\n\nANGLE COMIQUE RETENU par la salle des auteurs (construis tout le sketch dessus) : {a['angle']}\n"
-                f"Vanne de départ possible : « {a['vanne']} »" + (f"\nAngle de réserve pour une vanne secondaire : {b['angle']}" if b else ""))
-    except Exception as e:
-        print(f"Atelier d'angles ignoré ({e})", flush=True); return ""
-
-def ecrire_sketch(titres, essais=3, gags=(), special=False):
+def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=()):
+    """candidats : liste de sujets (chaque sujet = liste d'articles, le titre principal en premier) — ou une simple liste d'articles.
+    Renvoie le sketch validé, avec "fiche" (livrables A-F, note qualité, décision)."""
     import anthropic
     client = anthropic.Anthropic()
+    if candidats and isinstance(candidats[0], dict): candidats = [candidats]
     gtxt = " ; ".join(g for g in gags if g)[:600] or "(aucun pour l'instant)"
-    systeme = SYSTEME.format(mots=MOTS, special=SPECIAL_DEMAIN if special else "", gags=gtxt, secondes=SECONDES, nb=NB, ton=TON, cast="\n".join(f"- {k} : {v}" for k, v in CAST.items()), looks="|".join(LOOKS),
-                             exemple=json.dumps(EXEMPLE, ensure_ascii=False, indent=0))
-    message = construire_prompt(titres) + meilleur_angle(client, titres); liens = {t["lien"] for t in titres}; derniere = None
-    for _ in range(essais):
-        try:
-            sk = valider(_appel(client, systeme, [{"role": "user", "content": message}]), liens)
-            hors_sujet(sk, titres); trop_long(sk)
-            break
-        except Exception as e:
-            derniere = e; sk = None
-            message += f"\n\nTa réponse précédente était invalide ({e}). Rends-le avec l'outil rendre_sketch."
-    if sk is None: raise RuntimeError(f"Sketch invalide après {essais} essais : {derniere}")
-    # deuxième passe : réécriture des blagues faibles (si elle échoue, on garde la première version)
+    rtxt = " ; ".join(r for r in recents if r)[:1500] or "(aucun)"
+    essais = int(os.environ.get("MAX_REECRITURES", "3")) if essais is None else essais
+    systeme = MOTEUR_HUMOUR + ADAPTATION.format(cast="\n".join(f"- {k} : {v}" for k, v in CAST.items()), ton=TON, secondes=SECONDES, nb=NB,
+                                                 mots=MOTS, mots_min=MOTS_MIN or 40, special=SPECIAL_DEMAIN if special else "", gags=gtxt, recents=rtxt,
+                                                 looks="|".join(LOOKS), exemple=json.dumps(EXEMPLE, ensure_ascii=False, indent=0))
+    # 1) sélection du sujet et de l'angle
+    ordre, angle, verifs = list(range(len(candidats))), "", []
     try:
-        brut = {k: sk[k] for k in ("sujet", "ecran", "invite_nom", "invite_role", "invite_look", "lieu_direct", "titre_accroche", "question",
-                                   "running_gag", "repliques", "bandeau", "gag", "legende", "hashtags", "sources")}
-        sk2 = _appel(client, systeme, [{"role": "user", "content": message}, {"role": "assistant", "content": json.dumps(brut, ensure_ascii=False)},
-                                         {"role": "user", "content": DOCTEUR.format(sketch=json.dumps(brut, ensure_ascii=False, indent=0), secondes=SECONDES, nb=NB, mots=MOTS)}])
-        sk2 = valider(sk2, liens); hors_sujet(sk2, titres); trop_long(sk2)
-        sk2["sources"] = sk2["sources"] or sk["sources"]
-        print("Script doctor : sketch amélioré", flush=True)
-        return sk2
+        ch = _appel(client, systeme, [{"role": "user", "content": SELECTION.format(candidats="\n\n".join(_bloc_candidat(k, c) for k, c in enumerate(candidats)))}],
+                    OUTIL_CHOIX, web=True, max_tokens=4000)
+        notes = {int(n.get("index", -1)): float(n.get("note", 0)) for n in ch.get("notes", []) if isinstance(n, dict)}
+        choix = int(ch.get("choix", 0)) if 0 <= int(ch.get("choix", 0)) < len(candidats) else 0
+        ordre = [choix] + sorted([k for k in ordre if k != choix], key=lambda k: -notes.get(k, 0))
+        angle, verifs = str(ch.get("angle", "")), [str(x) for x in ch.get("faits_verifies", [])][:8]
+        print("Candidats : " + " | ".join(f"{notes.get(k, '?')}/10 {c[0]['titre'][:60]}" for k, c in enumerate(candidats)), flush=True)
+        print(f"Sujet choisi : « {candidats[choix][0]['titre'][:100]} » — angle : {angle[:160]}", flush=True)
     except Exception as e:
-        print(f"Script doctor ignoré ({e})", flush=True)
-        return sk
+        print(f"Sélection automatique impossible ({str(e)[:150]}) : premier candidat.", flush=True)
+    meilleur = None
+    for rang, k in enumerate(ordre[:2]):                                  # au plus deux sujets essayés
+        titres = candidats[k]; liens = {t["lien"] for t in titres}
+        msg = (f"SUJET CHOISI : « {titres[0]['titre']} »\nArticles :\n" + _bloc_candidat(0, titres) +
+               (f"\nAngle retenu : {angle}" if rang == 0 and angle else "") +
+               (f"\nFaits vérifiés : " + " ; ".join(verifs) if rang == 0 and verifs else "") +
+               "\n\nÉcris le sketch sur CE sujet uniquement (étapes 4 à 9).")
+        conv = [{"role": "user", "content": msg}]; sk = None; derniere = None; brut = {}
+        for tour in range(1 + (essais if rang == 0 else min(1, essais))):   # écriture puis jusqu'à 3 réécritures (1 pour le sujet de secours)
+            try:
+                brut = _appel(client, systeme, conv)
+                sk = valider(brut, liens); hors_sujet(sk, titres); n_mots = longueur(sk)
+            except Exception as e:
+                derniere = e; print(f"  version {tour + 1} refusée : {str(e)[:150]}", flush=True)
+                conv = conv + [{"role": "assistant", "content": json.dumps(brut if isinstance(brut, dict) else {}, ensure_ascii=False)[:6000] or "…"},
+                               {"role": "user", "content": f"Version invalide ({e}). Corrige et rends le sketch complet avec l'outil rendre_sketch."}]
+                continue
+            texte = "\n".join(f"{r['p']} : {r['t']}" for r in sk["repliques"])
+            try:
+                nq = _appel(client, None, [{"role": "user", "content": CRITIQUE.format(sketch=texte)}], OUTIL_NOTE, max_tokens=2000)
+                note = float(nq.get("total", 0)); critique = str(nq.get("critique", ""))
+            except Exception as e:
+                note, critique = 0.0, f"notation impossible ({e})"
+            print(f"  version {tour + 1} : {note:.0f}/100, {len(sk['repliques'])} répliques, {n_mots} mots", flush=True)
+            sk["fiche"] = {k2: brut.get(k2) for k2 in ("concept", "format", "angle", "resume_factuel", "faits_reels", "inventions", "decoupage") if isinstance(brut, dict)}
+            sk["fiche"].update(note=note, critique=critique[:1500], decision="prêt pour production" if note >= 80 else "à retravailler")
+            if meilleur is None or note > meilleur["fiche"]["note"]: meilleur = sk
+            if note >= 80: return sk
+            conv = conv + [{"role": "assistant", "content": json.dumps(brut, ensure_ascii=False)[:8000]},
+                           {"role": "user", "content": REECRITURE.format(note=round(note), critique=critique[:2000])}]
+        print(f"  sujet trop faible après réécritures{' : on essaie un autre sujet' if rang == 0 and len(ordre) > 1 else ''}", flush=True)
+    if meilleur is None: raise RuntimeError(f"aucun sketch exploitable : {derniere}")
+    print(f"  meilleure version retenue : {meilleur['fiche']['note']:.0f}/100 (à retravailler)", flush=True)
+    return meilleur

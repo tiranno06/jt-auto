@@ -76,6 +76,14 @@ Les boutons ont besoin d'une clé limitée à ce seul dépôt :
 
 La clé reste uniquement dans le navigateur de ton téléphone (elle n'est jamais mise sur le site) et ne peut agir que sur ce dépôt. Si tu perds ton téléphone : supprime la clé sur la même page GitHub.
 
+## Moteur humoristique
+Les consignes d'auteur sont dans `moteur/prompts/moteur_humour.md` (modifiable sans toucher au code). À chaque émission :
+1. le robot réunit les sujets des dernières 24 h repris par plusieurs médias (RSS de 13 médias ; drames, conflits armés et rubriques récurrentes exclus ; sujets et liens déjà traités évités) ;
+2. Claude note chaque sujet candidat sur 10, choisit le meilleur et son angle, et vérifie les faits avec la recherche web de l'API si elle est disponible (sinon il s'en tient aux articles, et le journal le signale) ;
+3. il écrit un sketch de 60 à 90 s (130 à 190 mots) avec les livrables A à F (résumé factuel, concept, découpage scène par scène avec bruitages, faits réels / inventions) ;
+4. un relecteur le note sur 100 ; sous 80, jusqu'à 3 réécritures, puis un second sujet ; la meilleure version est gardée mais **n'est jamais publiée automatiquement si elle reste sous 80** ;
+5. les jetons consommés et toutes les décisions sont écrits dans `episodes/journal.txt` ; la fiche complète de l'épisode est dans `episodes/<date>.json` (champ `fiche`).
+
 ## Réglages depuis l'application (onglet ⚙️ Réglages)
 Rythme (chaque jour, un jour sur deux, un jour sur trois, pause), heure de fabrication, durée et ton des sketchs, modèle Claude, nom de l'émission, plan gag IA, bouton « Fabriquer une émission maintenant » et raccourcis vers les crédits Modal / Claude, Buffer et TikTok Studio. Chaque réglage s'applique dès la prochaine émission.
 

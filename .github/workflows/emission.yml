@@ -60,6 +60,7 @@ jobs:
       PLAN_GAG: ${{ vars.PLAN_GAG }}
       LONGUEUR: ${{ vars.LONGUEUR }}
       SKETCH_TEST: ${{ inputs.sketch }}
+      MAX_REECRITURES: ${{ vars.MAX_REECRITURES }}
       TON: ${{ vars.TON }}
       INFOS_DEMAIN: ${{ vars.INFOS_DEMAIN }}
       GH_TOKEN: ${{ github.token }}
@@ -119,7 +120,7 @@ jobs:
           gh release upload "$TAG" "${{ steps.run.outputs.video }}" "${{ steps.run.outputs.legende }}" --clobber
 
       - name: Publier sur TikTok (seulement si la publication automatique est activée sur le site)
-        if: steps.run.outputs.video != '' && vars.PUBLICATION_AUTO == '1'
+        if: steps.run.outputs.video != '' && vars.PUBLICATION_AUTO == '1' && steps.run.outputs.qualite != 'faible'
         continue-on-error: true
         run: |
           URL="${{ github.server_url }}/${{ github.repository }}/releases/download/emissions-${{ steps.run.outputs.mois }}/${{ steps.run.outputs.nom }}"
