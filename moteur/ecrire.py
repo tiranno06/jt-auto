@@ -3,7 +3,7 @@ Format : un JT satirique sur UN seul sujet, avec trois personnages fictifs (pré
 Deux passes : 1) l'auteur écrit ; 2) un « script doctor » réécrit les blagues les plus faibles."""
 import json, os, re, unicodedata
 
-MODELE = os.environ.get("MODELE_CLAUDE") or "claude-sonnet-5-5"
+MODELE = os.environ.get("MODELE_CLAUDE") or "claude-opus-5-5"          # Opus : humour plus fin (réglable dans l'appli)
 # réglages de la régie (variables du dépôt)
 LONGUEURS = {"courte": ("5 à 6", "20 à 25"), "normale": ("7 à 9", "30 à 40"), "longue": ("9 à 12", "40 à 55"),
              "monetisable": ("13 à 16", "60 à 75")}   # format long : plus d'une minute (rémunération TikTok)
@@ -17,9 +17,9 @@ NB_MAX = int(NB.split()[-1])
 MOTS = {"courte": 60, "normale": 90, "longue": 130, "monetisable": 200}.get(LONGUEUR, 60)   # budget de mots (≈ 2,5 mots/s)
 TON = TONS.get(os.environ.get("TON") or "farfelu", TONS["farfelu"])
 CAST = {
-    "presentateur": "Jean-Michel Plateau, présentateur. Calme olympien, pince-sans-rire, pose les questions simples qui font tout s'écrouler. C'est souvent lui qui lance la chute finale.",
-    "envoyee": "Martine Couloir, envoyée spéciale (fictive) en direct sur le terrain (Assemblée, ministère, salon, sommet…). Blasée, a tout vu, décrit des scènes absurdes avec un sérieux total. Reine du détail concret ridicule.",
-    "invite": "L'invité (fictif) du jour : un « expert », conseiller ou porte-parole d'une institution (jamais une personne réelle). Langue de bois, mauvaise foi, transforme chaque échec en victoire avec une logique absurde.",
+    "presentateur": "Jean-Michel Plateau, présentateur. DÉFAUT FIXE : ne réagit JAMAIS, même au pire ; calme olympien ; pose la question simple et logique qui fait tout s'écrouler. C'est souvent lui qui lance la chute finale.",
+    "envoyee": "Martine Couloir, envoyée spéciale (fictive) en direct sur le terrain (Assemblée, ministère, salon, sommet…). DÉFAUT FIXE : prend tout au premier degré ; blasée, décrit les scènes les plus absurdes avec un sérieux total. Reine du détail concret ridicule.",
+    "invite": "L'invité (fictif) du jour : un « expert », conseiller ou porte-parole d'une institution (jamais une personne réelle). DÉFAUT FIXE : justifie l'injustifiable avec une logique imparable ; langue de bois, mauvaise foi, transforme chaque échec en victoire.",
 }
 LOOKS = ("chauve", "moustache")
 
@@ -57,8 +57,13 @@ RITUELS (ce qui fidélise le public) :
 
 ARTICULATION (les voix sont synthétiques) : phrases courtes et simples, mots faciles à prononcer, pas d'enchaînement de sons compliqués, pas d'abréviations, une seule idée par phrase. Le spectateur doit tout comprendre du premier coup.
 
-COMMENT FAIRE RIRE (méthode obligatoire) :
-- Trouve UNE idée comique forte (le « jeu ») et pousse-la jusqu'au bout : chaque réplique monte d'un cran dans l'absurde.
+COMMENT FAIRE RIRE (méthode des auteurs professionnels, obligatoire) :
+- L'ANGLE : pars de la contradiction ou de l'hypocrisie du sujet (ce que tout le monde pense sans le dire), puis exagère-la jusqu'à l'absurde, ou traduis-la en équivalent ridicule de la vie quotidienne. L'angle retenu t'est donné : tout le sketch le sert.
+- ESCALADE : chaque réplique va un cran plus loin que la précédente, jamais de redescente.
+- RÈGLE DE TROIS : au moins une fois, deux éléments normaux puis un troisième qui déraille.
+- ÉCONOMIE : le mot drôle est le DERNIER mot ; zéro mot inutile après la chute ; si on peut couper un mot, coupe-le.
+- LE CHOC DES DÉFAUTS : le comique naît des défauts fixes des personnages qui s'entrechoquent (présentateur impassible, envoyée au premier degré, invité de mauvaise foi).
+- VISUEL : au moins une image drôle à voir (le plan gag), et chaque vanne doit rester drôle LUE en sous-titres, sans le son.
 - Des images concrètes, précises et ridicules (« deux euros et un Tic Tac », « sous les coussins du canapé ») plutôt que des concepts.
 - La chute est TOUJOURS le dernier mot de la réplique. Phrases courtes. Jamais d'explication de la blague, jamais de jeu de mots facile.
 - Une blague du début revient en chute finale (rappel), de préférence retournée.
@@ -68,7 +73,7 @@ COMMENT FAIRE RIRE (méthode obligatoire) :
 RÈGLES ABSOLUES :
 1. Faits : n'utilise QUE les faits présents dans les titres fournis. Aucun chiffre, date ou événement réel inventé. Les exagérations doivent être évidemment absurdes (personne ne doit les croire vraies).
 2. Ne nomme AUCUNE personne réelle et n'attribue aucune citation à une personne réelle. Parle des institutions (« le gouvernement », « les députés », « un ministre », « Bercy »). Les noms de marques sont permis s'ils ne sont pas dénigrés.
-3. On ne rit jamais des victimes ni des drames. Aucune moquerie liée à l'origine, la religion, le genre, l'orientation, le handicap, l'âge ou l'apparence. Pas d'insulte, rien de sexuel, pas de violence.
+3. On ne rit jamais des victimes ni des drames. Si le sujet concerne une personne réelle identifiable, la satire vise la situation, l'institution ou la communication, jamais la personne elle-même, et sans ajouter d'accusation. Aucune moquerie liée à l'origine, la religion, le genre, l'orientation, le handicap, l'âge ou l'apparence. Pas d'insulte, rien de sexuel, pas de violence.
 4. Aucune information pratique sur des élections et aucun appel à voter.
 
 FORMAT : rends le sketch avec l'outil rendre_sketch, avec exactement ces champs :
@@ -94,7 +99,7 @@ DOCTEUR = """Tu es maintenant « script doctor » pour une émission comique. Vo
 {sketch}
 
 1. Pour chaque réplique, note mentalement sa force comique de 1 à 10.
-2. Réécris les 3 répliques les plus faibles pour qu'elles soient franchement plus drôles (image plus concrète, chute plus courte et plus inattendue, escalade, rappel).
+2. Réécris les 3 répliques les plus faibles pour qu'elles soient franchement plus drôles (image plus concrète, chute plus courte et plus inattendue, escalade, règle de trois, rappel). Coupe chaque mot inutile après une chute.
 3. Vérifie que l'accroche (réplique 0) fait sourire en 3 secondes, et que la dernière réplique est la meilleure vanne ET fait écho à l'accroche (boucle).
 4. Vérifie l'articulation : phrases courtes, mots simples, faciles à dire à voix haute.
 5. Coupe tout ce qui ralentit : le sketch doit tenir en {secondes} secondes ({nb} répliques).
@@ -193,13 +198,52 @@ def hors_sujet(sk, titres):
     if sujet and len(sujet & texte) < 1:
         raise ValueError(f"hors sujet : le sketch doit parler de « {titres[0]['titre']} »")
 
+ATELIER = """Tu es dans la salle des auteurs d'une émission satirique professionnelle. Sujet imposé et articles :
+{sujet}
+
+Propose 10 ANGLES COMIQUES différents sur CE sujet (et rien d'autre). Pour chacun : l'angle en une phrase (la contradiction ou l'hypocrisie exagérée, ou l'équivalent absurde de la vie quotidienne) et LA vanne la plus forte qu'il permet (courte, mot drôle à la fin).
+Règles : aucune personne réelle visée, aucun fait inventé, pas de jeu de mots facile, pas de cliché. Rends-les avec l'outil proposer_angles."""
+
+PRODUCTEUR = """Tu es le producteur impitoyable de l'émission : tu ne gardes que ce qui fait rire aux éclats un public TikTok français.
+Voici 10 angles avec leur meilleure vanne :
+{angles}
+Note chaque angle de 1 à 10 (originalité, surprise, potentiel d'escalade sur 6 répliques, compréhensible en 3 secondes, drôle même lu sans le son). Rends les notes avec l'outil noter_angles."""
+
+OUTIL_ANGLES = {"name": "proposer_angles", "description": "Proposer les angles comiques.",
+                "input_schema": {"type": "object", "properties": {"angles": {"type": "array", "items": {"type": "object", "properties": {
+                    "angle": {"type": "string"}, "vanne": {"type": "string"}}, "required": ["angle", "vanne"]}}}, "required": ["angles"]}}
+OUTIL_NOTES = {"name": "noter_angles", "description": "Noter les angles.",
+               "input_schema": {"type": "object", "properties": {"notes": {"type": "array", "items": {"type": "integer"}}}, "required": ["notes"]}}
+
+def _outil(client, outil, texte):
+    r = client.messages.create(model=MODELE, max_tokens=3000, messages=[{"role": "user", "content": texte}], tools=[outil], tool_choice={"type": "auto"})
+    for b in r.content:
+        if getattr(b, "type", "") == "tool_use": return b.input
+    return _json("".join(getattr(b, "text", "") for b in r.content))
+
+def meilleur_angle(client, titres):
+    """Écrire 10 angles, les faire noter par un « producteur », garder le meilleur (et le second en réserve)."""
+    try:
+        sujet = "\n".join(f"- {t['titre']} — {t['resume'][:200]}" for t in titres[:6])
+        angles = [a for a in _outil(client, OUTIL_ANGLES, ATELIER.format(sujet=sujet)).get("angles", []) if a.get("angle")][:10]
+        if not angles: return ""
+        liste = "\n".join(f"{k}. {a['angle']} → « {a['vanne']} »" for k, a in enumerate(angles))
+        notes = _outil(client, OUTIL_NOTES, PRODUCTEUR.format(angles=liste)).get("notes", [])
+        ordre = sorted(range(len(angles)), key=lambda k: -(notes[k] if k < len(notes) else 0))
+        a, b = angles[ordre[0]], angles[ordre[1]] if len(ordre) > 1 else None
+        print(f"Angle retenu ({notes[ordre[0]] if notes else '?'}/10) : {a['angle']}", flush=True)
+        return (f"\n\nANGLE COMIQUE RETENU par la salle des auteurs (construis tout le sketch dessus) : {a['angle']}\n"
+                f"Vanne de départ possible : « {a['vanne']} »" + (f"\nAngle de réserve pour une vanne secondaire : {b['angle']}" if b else ""))
+    except Exception as e:
+        print(f"Atelier d'angles ignoré ({e})", flush=True); return ""
+
 def ecrire_sketch(titres, essais=3, gags=(), special=False):
     import anthropic
     client = anthropic.Anthropic()
     gtxt = " ; ".join(g for g in gags if g)[:600] or "(aucun pour l'instant)"
     systeme = SYSTEME.format(mots=MOTS, special=SPECIAL_DEMAIN if special else "", gags=gtxt, secondes=SECONDES, nb=NB, ton=TON, cast="\n".join(f"- {k} : {v}" for k, v in CAST.items()), looks="|".join(LOOKS),
                              exemple=json.dumps(EXEMPLE, ensure_ascii=False, indent=0))
-    message = construire_prompt(titres); liens = {t["lien"] for t in titres}; derniere = None
+    message = construire_prompt(titres) + meilleur_angle(client, titres); liens = {t["lien"] for t in titres}; derniere = None
     for _ in range(essais):
         try:
             sk = valider(_appel(client, systeme, [{"role": "user", "content": message}]), liens)

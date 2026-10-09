@@ -302,7 +302,7 @@ def rendre(sk, sortie, audios, gag=None, apercu=False):
         for k2 in range(len(gg) - 1):
             if re.search(r"[.!?…]$", gg[k2][0]): dz = gg[k2 + 1][1]
         q["dz"] = dz; ph.append(q); prev = r["p"]
-        t += dur + (0.45 if r.get("chute") and i != 0 else 0.06 if i else 0.2)
+        t += dur + (0.45 if r.get("chute") and i != 0 else 0.06 if i else 0.08)
     if GEN0 is None: GEN0 = t; GEN1 = t + GEN_DUREE; t = GEN1
     total = t + 0.35                                                        # fin sèche : la vidéo reboucle sur l'accroche
     FIN = None
@@ -357,7 +357,7 @@ def rendre(sk, sortie, audios, gag=None, apercu=False):
         if q["plan"] is not None and q["i"] > 0 and (q["p"] == "envoyee" or q["i"] == gag_i): ajoute("woosh", q["debplan"] - 0.12, 0.6)
         if q["i"] == gag_i: ajoute("reconstitution", q["debplan"], 0.6)
     mix = voixm + fond * duck
-    ig = son("intro_courte"); s0 = int(GEN0 * SRM); e = min(n, s0 + len(ig)); mix[s0:e] += ig[:e - s0] * 0.95
+    ig = son("intro_courte"); s0 = int(max(0, GEN0 - 0.06) * SRM); e = min(n, s0 + len(ig)); mix[s0:e] += ig[:e - s0] * 0.95
     mix = np.clip(mix / max(1.0, np.abs(mix).max() / 0.95), -0.99, 0.99)
     brut = f"{tmp}/mix.wav"; wav = f"{tmp}/mix_norm.wav"
     with wave.open(brut, "wb") as w:

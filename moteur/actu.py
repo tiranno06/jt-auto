@@ -24,7 +24,7 @@ UNES = [
 ]
 # sujets dont on ne rit pas (drames, victimes)
 DRAMES = re.compile(r"\b(mort|morts|morte|décès|décédé|tué|tués|tuée|meurtre|assassin|attentat|terroris|viol|victime|victimes|"
-                    r"otage|massacre|bombard|guerre|israël|israel|gaza|hamas|palestin|hezbollah|ukrain|russie|iran|cisjordanie|blessé|blessés|noyé|incendie|crash|deuil|obsèques|pédo|agression|féminicide|suicide)", re.I)
+                    r"otage|massacre|bombard|guerre|antisémit|racis|haine|discrimin|homophob|islamophob|harcèle|israël|israel|gaza|hamas|palestin|hezbollah|ukrain|russie|iran|cisjordanie|blessé|blessés|noyé|incendie|crash|deuil|obsèques|pédo|agression|féminicide|suicide)", re.I)
 # rubriques récurrentes (bourse, météo, jeux, horoscope…) : jamais un « sujet du jour »
 RUBRIQUES = re.compile(r"(\d{2}/\d{2}|bourse|cac 40|marchés|valeurs|météo|horoscope|loto|euromillions|programme tv|résultats du|en direct|live|replay|podcast|quiz)", re.I)
 VIDES = set("""le la les un une des du de d l au aux et ou en dans sur sous pour par avec sans ce cet cette ces son sa ses leur leurs qui que quoi
