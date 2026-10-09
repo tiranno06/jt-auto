@@ -15,63 +15,12 @@ code: 0
 View Deployment: https://modal.com/apps/tubbiolo-francois/main/deployed/jt-video
 code: 0
 === banque de voix (Kyutai, Zonos, Whisper) ===
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.8/1.8 MB 423.6 MB/s  0:00:00
-Downloading http://pypi-mirror.modal.local:5555/simple/transformers/transformers-5.19.0-py3-none-any.whl (12.6 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.6/12.6 MB 436.2 MB/s  0:00:00
-Downloading http://pypi-mirror.modal.local:5555/simple/tokenizers/tokenizers-0.23.3-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.4 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.4/3.4 MB 97.4 MB/s  0:00:00
-Downloading http://pypi-mirror.modal.local:5555/simple/regex/regex-2026.9.29-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (804 kB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 805.0/805.0 kB 224.1 MB/s  0:00:00
-Downloading http://pypi-mirror.modal.local:5555/simple/safetensors/safetensors-0.8.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (516 kB)
-Downloading http://pypi-mirror.modal.local:5555/simple/typeguard/typeguard-4.6.0-py3-none-any.whl (36 kB)
-Downloading http://pypi-mirror.modal.local:5555/simple/typing-inspection/typing_inspection-0.4.4-py3-none-any.whl (14 kB)
-Downloading http://pypi-mirror.modal.local:5555/simple/uvicorn/uvicorn-0.54.0-py3-none-any.whl (87 kB)
-Downloading http://pypi-mirror.modal.local:5555/simple/certifi/certifi-2026.7.22-py3-none-any.whl (136 kB)
-Downloading http://pypi-mirror.modal.local:5555/simple/dlinfo/dlinfo-2.0.0-py3-none-any.whl (3.7 kB)
-Downloading http://pypi-mirror.modal.local:5555/simple/joblib/joblib-1.6.0-py3-none-any.whl (306 kB)
-Downloading http://pypi-mirror.modal.local:5555/simple/cloudpickle/cloudpickle-3.1.2-py3-none-any.whl (22 kB)
-Building wheels for collected packages: zonos, sudachidict-full
-  Building wheel for zonos (pyproject.toml): started
-  Building wheel for zonos (pyproject.toml): finished with status 'done'
-  Created wheel for zonos: filename=zonos-0.1.0-py3-none-any.whl size=25366 sha256=6b2b914ae1397fe8b6245280e597b63db2c3d14eb2b4d27686813ba84a37836c
-  Stored in directory: /tmp/pip-ephem-wheel-cache-25tf7zt_/wheels/9e/64/83/880685ced944eb5ba92fd79fd93aebdfd3a6c1294060f546ec
-  DEPRECATION: Building 'sudachidict-full' using the legacy setup.py bdist_wheel mechanism, which will be removed in a future version. pip 25.3 will enforce this behaviour change. A possible replacement is to use the standardized build interface by setting the `--use-pep517` option, (possibly combined with `--no-build-isolation`), or adding a `pyproject.toml` file to the source tree of 'sudachidict-full'. Discussion can be found at https://github.com/pypa/pip/issues/6334
-  Building wheel for sudachidict-full (setup.py): started
-  Building wheel for sudachidict-full (setup.py): finished with status 'done'
-  Created wheel for sudachidict-full: filename=SudachiDict_full-20260723.1-py3-none-any.whl size=137478419 sha256=085fd174778a7bf04baed89f6570b84a7e8ad1314aa7fc69072967cd1e8aecdc
-  Stored in directory: /tmp/pip-ephem-wheel-cache-25tf7zt_/wheels/7c/c3/67/8ba1cdfe7764915f2afe9c72db0ee39d8eda632bb4602e8dab
-Successfully built zonos sudachidict-full
-Installing collected packages: pytz, pydub, brotli, uvicorn, typing-inspection, typeguard, tomlkit, sudachipy, six, shellingham, semantic-version, safetensors, regex, python-multipart, pygments, pydantic-core, pillow, orjson, opentelemetry-api, more_itertools, mdurl, kanjize, groovy, dlinfo, cloudpickle, certifi, attrs, annotated-types, annotated-doc, sudachidict-full, starlette, python-dateutil, pydantic, markdown-it-py, joblib, inflect, httpcore, rich, phonemizer, pandas, httpx, fastapi, typer, tokenizers, safehttpx, gradio-client, transformers, hf-gradio, gradio, zonos
-
-Successfully installed annotated-doc-0.0.5 annotated-types-0.8.0 attrs-26.1.0 brotli-1.2.0 certifi-2026.7.22 cloudpickle-3.1.2 dlinfo-2.0.0 fastapi-0.143.0 gradio-6.30.0 gradio-client-2.7.2 groovy-0.1.2 hf-gradio-0.4.1 httpcore-1.0.9 httpx-0.28.1 inflect-7.5.0 joblib-1.6.0 kanjize-1.6.1 markdown-it-py-4.2.0 mdurl-0.1.2 more_itertools-11.1.0 opentelemetry-api-1.45.1 orjson-3.13.0 pandas-3.0.6 phonemizer-3.4.0 pillow-12.3.0 pydantic-2.14.0 pydantic-core-2.50.0 pydub-0.25.1 pygments-2.21.0 python-dateutil-2.9.0.post0 python-multipart-0.0.32 pytz-2026.5 regex-2026.9.29 rich-15.0.0 safehttpx-0.1.7 safetensors-0.8.0 semantic-version-2.10.0 shellingham-1.5.4 six-1.17.0 starlette-1.7.0 sudachidict-full-20260723.1 sudachipy-0.7.0 tokenizers-0.23.3 tomlkit-0.14.0 transformers-5.19.0 typeguard-4.6.0 typer-0.27.3 typing-inspection-0.4.4 uvicorn-0.54.0 zonos-0.1.0
-
-[notice] A new release of pip is available: 25.2 -> 26.2.1
-[notice] To update, run: pip install --upgrade pip
-Saving image...
-Image saved, took 1.57s
-
-Built image im-EMhhE6ZViqIXcwbo6owyOF in 48.92s
-
-
-Building image im-jTFu3jNjWzJFpyZDcUFMLE
-
-=> Step 0: FROM base
-
-=> Step 1: ENV HF_HOME=/cache/hf
-
-=> Step 2: ENV TORCH_HOME=/cache/torch
-Saving image...
-Image saved, took 577.48ms
-
-Built image im-jTFu3jNjWzJFpyZDcUFMLE in 1.38s
-
-
 ✓ Created objects.
 ├── ✓ Uploaded /home/runner/work/jt-auto/jt-auto/moteur/banque_modal.py
-├── ✓ Created Function Whisper.*.
+├── ✓ Created Function Zonos.*.
 ├── ✓ Created Function Kyutai.*.
-└── ✓ Created Function Zonos.*.
-✓ App deployed in 174.118s! 🎉
+└── ✓ Created Function Whisper.*.
+✓ App deployed in 2.220s! 🎉
 
 View Deployment: 
 https://modal.com/apps/tubbiolo-francois/main/deployed/jt-banque
