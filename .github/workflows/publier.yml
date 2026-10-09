@@ -1,0 +1,87 @@
+name: Publier une vidéo
+
+# Lancé par le bouton « Publier sur TikTok » du site (ou à la main : Actions → Publier une vidéo → Run workflow).
+on:
+  workflow_dispatch:
+    inputs:
+      fichier:
+        description: "Nom de la vidéo (ex. 2026-10-09_emission.mp4)"
+        required: true
+      forcer:
+        description: "Republier même si elle est déjà publiée"
+        required: false
+        default: "non"
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: emission
+  cancel-in-progress: false
+
+jobs:
+  publier:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment:
+      name: github-pages
+      url: ${{ steps.pages.outputs.page_url }}
+    env:
+      BUFFER_API_KEY: ${{ secrets.BUFFER_API_KEY }}
+      UPLOAD_POST_API_KEY: ${{ secrets.UPLOAD_POST_API_KEY }}
+      UPLOAD_POST_USER: ${{ secrets.UPLOAD_POST_USER }}
+      NOM_EMISSION: ${{ vars.NOM_EMISSION }}
+      GH_TOKEN: ${{ github.token }}
+      FICHIER: ${{ inputs.fichier }}
+      FORCER: ${{ inputs.forcer }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Installer ffmpeg
+        run: sudo apt-get update -q && sudo apt-get install -y -q ffmpeg
+
+      - name: Retrouver la vidéo
+        id: video
+        run: python moteur/publier.py --preparer
+
+      - name: Publier sur TikTok
+        if: steps.video.outputs.video != ''
+        run: python moteur/publier.py "${{ steps.video.outputs.video }}" "${{ steps.video.outputs.legende }}" "${{ steps.video.outputs.url }}"
+
+      - name: Enregistrer l'historique
+        if: always()
+        run: |
+          git config user.name "robot-jt"
+          git config user.email "robot-jt@users.noreply.github.com"
+          git add episodes
+          git commit -m "Publication : $FICHIER" || echo "rien à enregistrer"
+          git pull --rebase -q || true
+          git push
+
+      - name: Reconstruire le site
+        if: always()
+        run: python moteur/site.py
+
+      - name: Préparer GitHub Pages
+        if: always()
+        continue-on-error: true
+        uses: actions/configure-pages@v5
+
+      - name: Envoyer le site
+        if: always()
+        continue-on-error: true
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - name: Mettre en ligne le site
+        id: pages
+        if: always()
+        continue-on-error: true
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,116 @@
+name: Émission du jour
+
+on:
+  schedule:
+    - cron: "43 5 * * *"        # tous les jours vers 7h43 (heure de Paris, été) ; heure UTC
+  workflow_dispatch:             # bouton « Run workflow » pour lancer à la main
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: emission
+  cancel-in-progress: false
+
+jobs:
+  emission:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    environment:
+      name: github-pages
+      url: ${{ steps.pages.outputs.page_url }}
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      MODAL_TOKEN_ID: ${{ secrets.MODAL_TOKEN_ID }}
+      MODAL_TOKEN_SECRET: ${{ secrets.MODAL_TOKEN_SECRET }}
+      BUFFER_API_KEY: ${{ secrets.BUFFER_API_KEY }}
+      UPLOAD_POST_API_KEY: ${{ secrets.UPLOAD_POST_API_KEY }}
+      UPLOAD_POST_USER: ${{ secrets.UPLOAD_POST_USER }}
+      MODELE_CLAUDE: ${{ vars.MODELE_CLAUDE }}
+      NOM_EMISSION: ${{ vars.NOM_EMISSION }}
+      PLAN_GAG: ${{ vars.PLAN_GAG }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Installer ffmpeg
+        run: sudo apt-get update -q && sudo apt-get install -y -q ffmpeg
+
+      - name: Voix de secours (Piper) en cache
+        id: cache-piper
+        uses: actions/cache@v4
+        with:
+          path: outils
+          key: piper-fr-siwis-v1
+
+      - name: Télécharger Piper
+        if: steps.cache-piper.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p outils/voix
+          curl -sSL https://github.com/rhasspy/piper/releases/download/2023.11.14-2/piper_linux_x86_64.tar.gz | tar xz -C outils
+          curl -sSL https://github.com/rhasspy/piper/releases/download/v0.0.2/voice-fr-siwis-medium.tar.gz | tar xz -C outils/voix
+
+      - name: Bibliothèques Python
+        run: pip install -r requirements.txt
+
+      - name: Déployer les voix (Chatterbox) et le plan gag (Wan 2.2) sur Modal
+        if: env.MODAL_TOKEN_ID != ''
+        run: |
+          modal deploy moteur/voix_modal.py || echo "Deploiement voix echoue, voix de secours"
+          modal deploy moteur/video_modal.py || echo "Deploiement Wan echoue, pas de plan gag"
+
+      - name: Fabriquer l'émission
+        id: run
+        run: python moteur/principal.py
+
+      - name: Archiver la vidéo dans les Releases du mois
+        if: steps.run.outputs.video != ''
+        run: |
+          TAG="emissions-${{ steps.run.outputs.mois }}"
+          gh release view "$TAG" >/dev/null 2>&1 || gh release create "$TAG" --title "Émissions ${{ steps.run.outputs.mois }}" --notes "Vidéos fabriquées par le robot."
+          gh release upload "$TAG" "${{ steps.run.outputs.video }}" "${{ steps.run.outputs.legende }}" --clobber
+
+      - name: Publier sur TikTok (sauf si la publication automatique est coupée depuis le site)
+        if: steps.run.outputs.video != '' && vars.PUBLICATION_AUTO != '0'
+        continue-on-error: true
+        run: |
+          URL="${{ github.server_url }}/${{ github.repository }}/releases/download/emissions-${{ steps.run.outputs.mois }}/${{ steps.run.outputs.nom }}"
+          python moteur/publier.py "${{ steps.run.outputs.video }}" "${{ steps.run.outputs.legende }}" "$URL"
+
+      - name: Enregistrer l'historique et le casting
+        if: always()
+        run: |
+          git config user.name "robot-jt"
+          git config user.email "robot-jt@users.noreply.github.com"
+          git add episodes voix
+          git commit -m "Émission : ${{ steps.run.outputs.titre }}" || echo "rien à enregistrer"
+          git push
+
+      - name: Construire le site de secours
+        if: always()
+        run: python moteur/site.py
+
+      - name: Préparer GitHub Pages
+        if: always()
+        continue-on-error: true
+        uses: actions/configure-pages@v5
+
+      - name: Envoyer le site
+        if: always()
+        continue-on-error: true
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - name: Mettre en ligne le site
+        id: pages
+        if: always()
+        continue-on-error: true
+        uses: actions/deploy-pages@v4
