@@ -57,7 +57,7 @@ RÈGLES ABSOLUES :
 3. Aucune moquerie liée à l'origine, la religion, le genre, l'orientation, le handicap, l'âge ou l'apparence. Pas d'insulte, rien de sexuel, pas de violence.
 4. Aucune information pratique sur des élections et aucun appel à voter.
 
-FORMAT : réponds UNIQUEMENT avec un objet JSON valide :
+FORMAT : rends le sketch avec l'outil rendre_sketch, avec exactement ces champs :
 {{"sujet": "sujet en 1 à 3 mots, MAJUSCULES (affiché dans l'habillage)",
  "ecran": "texte de l'écran du plateau, max 14 caractères, MAJUSCULES",
  "invite_nom": "nom fictif et drôle de l'invité (prénom + nom évocateur)", "invite_role": "fonction de l'invité, avec « (fictif) », max 34 caractères",
@@ -80,7 +80,7 @@ DOCTEUR = """Tu es maintenant « script doctor » pour une émission comique. Vo
 2. Réécris les 3 répliques les plus faibles pour qu'elles soient franchement plus drôles (image plus concrète, chute plus courte et plus inattendue, escalade, rappel).
 3. Vérifie que la toute dernière réplique est la meilleure vanne du sketch, sinon améliore-la.
 4. Coupe tout ce qui ralentit : le sketch doit tenir en {secondes} secondes ({nb} répliques).
-Garde exactement les mêmes faits et toutes les règles (aucune personne réelle, aucun fait inventé). Réponds UNIQUEMENT avec le JSON complet corrigé, même format."""
+Garde exactement les mêmes faits et toutes les règles (aucune personne réelle, aucun fait inventé). Rends le sketch complet corrigé avec l'outil rendre_sketch, même format."""
 
 def construire_prompt(titres):
     liste = "\n".join(f"- [{t['source']}] {t['titre']} — {t['resume'][:250]} ({t['lien']})" for t in titres)
@@ -128,9 +128,26 @@ def valider(sk, liens):
             "hashtags": [t for t in tags if t][:7] or ["satire", "humour", "actualite", "politique"],
             "sources": [s for s in sk.get("sources", []) if s in liens][:6]}
 
+OUTIL = {"name": "rendre_sketch", "description": "Rendre le sketch au format demandé.",
+         "input_schema": {"type": "object", "properties": {
+             "sujet": {"type": "string"}, "ecran": {"type": "string"}, "invite_nom": {"type": "string"}, "invite_role": {"type": "string"},
+             "invite_look": {"type": "string"}, "lieu_direct": {"type": "string"},
+             "repliques": {"type": "array", "items": {"type": "object", "properties": {
+                 "p": {"type": "string"}, "t": {"type": "string"}, "d": {"type": "string"}, "chute": {"type": "boolean"}, "attente": {"type": "number"}},
+                 "required": ["p", "t"]}},
+             "bandeau": {"type": "array", "items": {"type": "string"}},
+             "gag": {"type": "object", "properties": {"replique": {"type": "integer"}, "prompt": {"type": "string"}}},
+             "legende": {"type": "string"}, "hashtags": {"type": "array", "items": {"type": "string"}},
+             "sources": {"type": "array", "items": {"type": "string"}}},
+             "required": ["sujet", "repliques", "legende"]}}
+
 def _appel(client, systeme, messages):
-    r = client.messages.create(model=MODELE, max_tokens=4000, system=systeme, messages=messages)
-    return "".join(b.text for b in r.content if getattr(b, "type", "") == "text")
+    """Renvoie le sketch sous forme de dictionnaire. L'outil force un JSON toujours valide (fini les guillemets mal échappés)."""
+    r = client.messages.create(model=MODELE, max_tokens=4000, system=systeme, messages=messages,
+                               tools=[OUTIL], tool_choice={"type": "tool", "name": "rendre_sketch"})
+    for b in r.content:
+        if getattr(b, "type", "") == "tool_use": return b.input
+    return _json("".join(getattr(b, "text", "") for b in r.content))
 
 def ecrire_sketch(titres, essais=3):
     import anthropic
@@ -139,20 +156,19 @@ def ecrire_sketch(titres, essais=3):
                              exemple=json.dumps(EXEMPLE, ensure_ascii=False, indent=0))
     message = construire_prompt(titres); liens = {t["lien"] for t in titres}; derniere = None
     for _ in range(essais):
-        texte = _appel(client, systeme, [{"role": "user", "content": message}])
         try:
-            sk = valider(_json(texte), liens)
+            sk = valider(_appel(client, systeme, [{"role": "user", "content": message}]), liens)
             break
         except Exception as e:
             derniere = e; sk = None
-            message += f"\n\nTa réponse précédente était invalide ({e}). Réponds uniquement avec le JSON demandé."
+            message += f"\n\nTa réponse précédente était invalide ({e}). Rends-le avec l'outil rendre_sketch."
     if sk is None: raise RuntimeError(f"Sketch invalide après {essais} essais : {derniere}")
     # deuxième passe : réécriture des blagues faibles (si elle échoue, on garde la première version)
     try:
         brut = {k: sk[k] for k in ("sujet", "ecran", "invite_nom", "invite_role", "invite_look", "lieu_direct", "repliques", "bandeau", "gag", "legende", "hashtags", "sources")}
-        texte = _appel(client, systeme, [{"role": "user", "content": message}, {"role": "assistant", "content": json.dumps(brut, ensure_ascii=False)},
+        sk2 = _appel(client, systeme, [{"role": "user", "content": message}, {"role": "assistant", "content": json.dumps(brut, ensure_ascii=False)},
                                          {"role": "user", "content": DOCTEUR.format(sketch=json.dumps(brut, ensure_ascii=False, indent=0), secondes=SECONDES, nb=NB)}])
-        sk2 = valider(_json(texte), liens)
+        sk2 = valider(sk2, liens)
         sk2["sources"] = sk2["sources"] or sk["sources"]
         print("Script doctor : sketch amélioré", flush=True)
         return sk2
