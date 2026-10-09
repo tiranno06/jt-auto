@@ -1,87 +1,66 @@
 {
- "titre": "PRIMAIRE PIRATÉE",
- "sujet": "PRIMAIRE PIRATÉE",
- "ecran": "PRIMAIRE",
- "invite_nom": "Armand Pare-Feu",
- "invite_role": "Responsable (fictif) du scrutin",
+ "titre": "PRIMAIRE BUGUÉE",
+ "sujet": "PRIMAIRE BUGUÉE",
+ "ecran": "PRIMAIRE 404",
+ "invite_nom": "Gérard Pare-Feu",
+ "invite_role": "Expert (fictif) en cyber-optimisme",
  "invite_look": "moustache",
  "lieu_direct": "QG primaire",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "Cyberattaque sur le site de la primaire sociale-démocrate. Les organisateurs assurent que la sécurité du scrutin est préservée. Martine ?"
+   "t": "La primaire de la gauche a enfin trouvé ses sympathisants les plus motivés : des connexions factices. Martine, sur place ?"
   },
   {
    "p": "envoyee",
-   "t": "Jean-Michel, le service informatique, c'est un stagiaire, une multiprise et un post-it « ne pas débrancher ». Il vient de débrancher.",
+   "t": "Jean-Michel, c'est historique. Pour une fois, il y a la queue pour la gauche."
+  },
+  {
+   "p": "envoyee",
+   "t": "Seul problème : personne dans la queue n'existe.",
    "chute": true
   },
   {
    "p": "presentateur",
-   "t": "Et le site, il fonctionne ?"
-  },
-  {
-   "p": "envoyee",
-   "t": "Non. Il est tellement sécurisé que même les électeurs n'arrivent pas à entrer.",
-   "chute": true
-  },
-  {
-   "p": "presentateur",
-   "t": "Monsieur Pare-Feu, la sécurité est vraiment préservée ?"
+   "t": "Gérard Pare-Feu, c'est grave ?"
   },
   {
    "p": "invite",
-   "t": "Absolument. Zéro intrusion. Le site a repoussé les pirates, les électeurs et, ce matin, nous-mêmes."
-  },
-  {
-   "p": "presentateur",
-   "t": "Cent quarante mille inscrits, et personne ne peut entrer ?",
-   "d": "Cent quarante mille inscrits, et personne ne peut entrer ?"
-  },
-  {
-   "p": "invite",
-   "t": "C'est la beauté du système : un scrutin inaccessible est un scrutin inviolable. Le coffre est parfait. On a juste perdu la clé.",
+   "t": "Au contraire. Des sympathisants qui reviennent chaque seconde sans jamais claquer la porte : on n'avait pas vu ça depuis longtemps.",
    "chute": true
   },
   {
    "p": "envoyee",
-   "t": "Jean-Michel, les pirates ont abandonné. Ils ont laissé un avis : « Trop compliqué. Une étoile. »",
+   "t": "Ça évolue, Jean-Michel. Les connexions factices viennent de se diviser en trois courants et réclament un congrès.",
    "chute": true
   },
   {
    "p": "presentateur",
-   "t": "Et pour le second tour ?"
-  },
-  {
-   "p": "invite",
-   "t": "Sécurité renforcée : personne n'aura l'adresse du site. On l'a notée sur un post-it. Le stagiaire vient de le jeter.",
+   "t": "Donc personne dans la queue n'existe… mais elle est déjà de gauche.",
    "chute": true,
-   "attente": 0.8
+   "attente": 0.7
   }
  ],
  "bandeau": [
-  "LE STAGIAIRE DÉBRANCHE, LE POST-IT PLEURE",
-  "LES PIRATES LAISSENT UN AVIS : UNE ÉTOILE",
-  "LE COFFRE EST PARFAIT, LA CLÉ A DISPARU",
-  "LE SITE REFUSE L'ACCÈS À SES PROPRES ORGANISATEURS"
+  "LES CONNEXIONS FACTICES RÉCLAMENT UN DÉBAT TÉLÉVISÉ",
+  "UN QUATRIÈME COURANT DE ROBOTS DÉPOSE UNE MOTION",
+  "UN ROBOT DEMANDE SA CARTE DE SYMPATHISANT",
+  "LA TOUCHE F5 ENTENDUE COMME TÉMOIN"
  ],
  "gag": {
-  "replique": 1,
-  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. A nervous young intern in a cramped office unplugs a tangled power strip overflowing with cables, a yellow sticky note falls to the floor, sparks fly and a computer screen goes black, comedic, deadpan."
+  "replique": 5,
+  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. A long queue of identical little grey robots waiting in front of a giant overheating computer screen suddenly splits into three angry groups, each robot crossing its arms and turning its back on the others, comedic, deadpan."
  },
- "legende": "Cyberattaque sur la primaire : la sécurité est préservée, personne n'a pu entrer. Même pas les électeurs. Satire, personnages fictifs.",
+ "legende": "La primaire de la gauche a enfin la queue… mais personne dedans n'existe 🤖 Satire, personnages fictifs.",
  "hashtags": [
-  "satire",
+  "infoencaoutchouc",
   "primaire",
   "cyberattaque",
-  "jt",
+  "satire",
   "humour",
-  "politique",
-  "infoencaoutchouc"
+  "politique"
  ],
  "sources": [
-  "https://www.bfmtv.com/politique/elections/presidentielle/cyberattaque-sur-le-site-de-la-primaire-sociale-democrate-les-organisateurs-assurent-que-la-securite-du-scrutin-est-preservee_AN-202610090515.html",
-  "https://www.lemonde.fr/politique/article/2026/10/09/primaire-de-la-gauche-sociale-democrate-la-plateforme-de-vote-victime-d-une-cyberattaque_6790554_823448.html",
-  "https://www.bfmtv.com/politique/elections/presidentielle/video-la-plateforme-de-vote-en-ligne-pour-la-primaire-sociale-democrate-ciblee-par-une-cyberattaque_VN-202610090416.html"
+  "https://www.lefigaro.fr/elections/presidentielles/primaires-gauche/primaire-de-la-gauche-la-plateforme-de-vote-subit-une-cyberattaque-a-son-ouverture-20261009"
  ]
 }
