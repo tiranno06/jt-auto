@@ -29,7 +29,7 @@ class Kyutai:
     def charger(self):
         from moshi.models.loaders import CheckpointInfo
         from moshi.models.tts import DEFAULT_DSM_TTS_REPO, TTSModel
-        self.m = TTSModel.from_checkpoint_info(CheckpointInfo.from_hf_repo(DEFAULT_DSM_TTS_REPO), n_q=32, temp=0.6, device="cuda")
+        self.m = TTSModel.from_checkpoint_info(CheckpointInfo.from_hf_repo(DEFAULT_DSM_TTS_REPO), n_q=32, temp=0.72, device="cuda")   # un peu plus de variation : intonation plus vivante
         cache.commit()
 
     @modal.method()

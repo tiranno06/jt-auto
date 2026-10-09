@@ -28,6 +28,9 @@ PRIORITE = {"google": 3.0, "azure": 2.8, "kyutai": 2.2, "zonos": 1.6, "chatterbo
 GOOGLE = {"h": ["Charon", "Orus", "Fenrir", "Iapetus", "Algieba"], "f": ["Aoede", "Kore", "Leda", "Despina", "Erinome"]}
 AZURE = {"h": ["fr-FR-HenriNeural", "fr-FR-RemyMultilingualNeural", "fr-FR-AlainNeural", "fr-FR-JeromeNeural"],
          "f": ["fr-FR-DeniseNeural", "fr-FR-VivienneMultilingualNeural", "fr-FR-BrigitteNeural", "fr-FR-CelesteNeural"]}
+# débit par rôle : les voix de livres audio lisent trop lentement pour un sketch (accéléré sans changer la hauteur)
+ENERGIE = {"presentateur": 1.12, "envoyee": 1.16, "invite": 1.14}
+
 CREDITS = {"google": "Google Cloud Text-to-Speech", "azure": "Microsoft Azure Speech",
            "kyutai": "Kyutai TTS (CC BY 4.0), voix CML-TTS (CC BY 4.0)", "zonos": "Zonos (Apache 2.0), voix Multilingual LibriSpeech (CC BY 4.0)",
            "chatterbox": "Chatterbox (MIT), voix Multilingual LibriSpeech (CC BY 4.0)", "piper": "Piper / SIWIS (CC BY 4.0)"}
@@ -103,7 +106,7 @@ def zonos(role, textes):
 def chatterbox(role, textes):
     import modal
     ref = _ref(role); refs = {role: ref} if ref else {}
-    jeu = {"presentateur": (0.4, 0.6), "envoyee": (0.5, 0.55), "invite": (0.55, 0.55)}.get(role, (0.5, 0.55))
+    jeu = {"presentateur": (0.6, 0.4), "envoyee": (0.75, 0.35), "invite": (0.85, 0.35)}.get(role, (0.7, 0.4))   # plus expressif
     res = _distant("jt-voix", "Voix", "synthese", [dict(texte=t, role=role, exag=jeu[0], cfg=jeu[1]) for t in textes], refs, delai=900)
     return [(r.get("wav", b"") if isinstance(r, dict) else r) for r in res]
 
@@ -127,6 +130,25 @@ def _vers_octets(a, sr=SR):
     with wave.open(buf, "wb") as w:
         w.setnchannels(1); w.setsampwidth(2); w.setframerate(sr); w.writeframes((np.clip(a, -1, 1) * 32767).astype(np.int16).tobytes())
     return buf.getvalue()
+
+def vif(a, facteur, tmp):
+    """Débit accéléré (hauteur conservée) + légère compression : une voix plus énergique, moins « endormie »."""
+    if facteur <= 1.001: return a
+    with wave.open(f"{tmp}.v.wav", "wb") as w:
+        w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes((np.clip(a, -1, 1) * 32767).astype(np.int16).tobytes())
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", f"{tmp}.v.wav", "-af",
+                    f"atempo={facteur:.3f},acompressor=threshold=-18dB:ratio=2.5:attack=5:release=60:makeup=1.5", f"{tmp}.v2.wav"], check=True)
+    with wave.open(f"{tmp}.v2.wav") as w: return np.frombuffer(w.readframes(w.getnframes()), np.int16).astype(np.float32) / 32768
+
+def expressivite(a):
+    """Variation de l'intonation (écart-type de la hauteur, en demi-tons) : une voix monotone sonne fatiguée."""
+    fr, n = [], 1024
+    for i in range(0, len(a) - n, n // 2):
+        x = a[i:i + n] - a[i:i + n].mean()
+        if np.abs(x).max() < 0.05: continue
+        c = np.correlate(x, x, "full")[n - 1:]; lo, hi = SR // 400, SR // 60; k = lo + int(np.argmax(c[lo:hi]))
+        if c[k] > 0.45 * c[0]: fr.append(12 * np.log2(SR / k / 100))
+    return float(np.std(fr)) if len(fr) > 8 else 0.0
 
 def nettoyer(octets, tmp, propre=False):
     """Décode, coupe les silences de début/fin, raccourcit les blancs internes, égalise le volume."""
@@ -192,7 +214,7 @@ def _norm(t):
 
 def note(texte, a, ecoute):
     """Score de qualité : ressemblance du texte entendu, blanc le plus long, débit plausible. Renvoie (ok, détails)."""
-    dur = len(a) / SR; attendu = max(0.6, len(texte) * 0.068); debit = dur / attendu
+    dur = len(a) / SR; attendu = max(0.6, len(texte) * 0.06); debit = dur / attendu
     if ecoute is None:
         return 0.5 < debit < 1.9, {"debit": round(debit, 2)}
     sim = difflib.SequenceMatcher(None, _norm(texte), _norm(ecoute.get("texte", ""))).ratio()
@@ -231,7 +253,9 @@ def casting(forcer=False):
         texte = TEST[roles[0]] if len(roles) == 1 else TEST["presentateur"]
         o = synthese(c, [texte])[0]
         if not o: continue
-        try: a = nettoyer(o, f"{tmp}/c{k}", propre=c["moteur"] in ("google", "azure"))
+        try:
+            a = nettoyer(o, f"{tmp}/c{k}", propre=c["moteur"] in ("google", "azure"))
+            if c["moteur"] not in ("google", "azure"): a = vif(a, ENERGIE.get(roles[0], 1.12), f"{tmp}/c{k}")
         except Exception: continue
         essais.append((c, texte, a))
     ecoutes = ecouter([a for _, _, a in essais]) or [None] * len(essais)
@@ -239,7 +263,10 @@ def casting(forcer=False):
     for (c, texte, a), e in zip(essais, ecoutes):
         ok, d = note(texte, a, e); hz = f0(a)
         genre = c["genre"] if c["genre"] != "?" else ("h" if 0 < hz < 165 else "f" if hz > 175 else "?")
-        score = PRIORITE[c["moteur"]] + (2 * d.get("sim", 0.8)) - max(0, d.get("blanc", 0) - 0.4) - abs(np.log(max(d.get("debit", 1), 1e-3)))
+        expr = expressivite(a)
+        score = (PRIORITE[c["moteur"]] + (2 * d.get("sim", 0.8)) - max(0, d.get("blanc", 0) - 0.4)
+                 - abs(np.log(max(d.get("debit", 1), 1e-3))) + 0.35 * min(expr, 4.0))         # bonus aux voix qui « jouent »
+        d["expr"] = round(expr, 1)
         journal(f"  {c['moteur']:10s} {c['voix'][:38]:38s} genre {genre} f0 {hz:5.0f} {d} {'OK' if ok else 'refusée'} score {score:.2f}")
         if ok: fiches.append(dict(c, genre=genre, f0=round(hz), score=round(score, 2)))
     roles, pris = {}, set()
@@ -272,7 +299,9 @@ def generer(repliques):
                 textes = [repliques[i].get("d") or repliques[i]["t"] for i in restant]
                 brut = synthese(choix, textes); clips = []
                 for i, o in zip(restant, brut):
-                    try: clips.append(nettoyer(o, f"{tmp}/{i}_{tour}", propre) if o else None)
+                    try:
+                        c = nettoyer(o, f"{tmp}/{i}_{tour}", propre) if o else None
+                        clips.append(vif(c, ENERGIE.get(role, 1.12), f"{tmp}/{i}_{tour}") if c is not None and not propre else c)
                     except Exception: clips.append(None)
                 valides = [c for c in clips if c is not None]
                 ecoutes = ecouter(valides) if valides else []

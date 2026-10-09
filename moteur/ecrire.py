@@ -7,7 +7,8 @@ MODELE = os.environ.get("MODELE_CLAUDE") or "claude-opus-5-5"          # Opus : 
 # réglages de la régie (variables du dépôt)
 LONGUEURS = {"courte": ("5 à 6", "20 à 25"), "normale": ("7 à 9", "30 à 40"), "longue": ("9 à 12", "40 à 55"),
              "monetisable": ("13 à 16", "60 à 75")}   # format long : plus d'une minute (rémunération TikTok)
-TONS = {"farfelu": "gags farfelus et ironie pince-sans-rire : situations délirantes, images absurdes et très concrètes, ironie froide envers les institutions et la langue de bois",
+TONS = {"clash": "CLASH, foutage de gueule direct (le style préféré du public) : on compare l'actu à la vie de tous les jours avec une mauvaise foi assumée (« Ils ont trouvé 3 000 profs en 24 h. Moi, j'ai mis trois semaines à trouver un plombier. »), on balance des hypothèses absurdes en « soit… soit… » (« soit c'est un miracle, soit ils ont recruté au rayon surgelés »), l'invité répond du tac au tac en aggravant son cas (« ils ont été décongelés ce matin »), et une image du quotidien revient en rappel à la fin (le plombier). Phrases courtes, punchlines sèches, comme entre potes qui chambrent",
+        "farfelu": "gags farfelus et ironie pince-sans-rire : situations délirantes, images absurdes et très concrètes, ironie froide envers les institutions et la langue de bois",
         "bon_enfant": "foutage de gueule bon enfant envers les institutions, la langue de bois et les travers du pouvoir",
         "piquant": "satire mordante et sans pitié envers les institutions, les décisions et la langue de bois (jamais envers les gens pour ce qu'ils sont)",
         "absurde": "absurde total façon sketch surréaliste : situations délirantes poussées très loin, logique folle mais implacable"}
@@ -15,7 +16,7 @@ LONGUEUR = os.environ.get("LONGUEUR") or "courte"
 NB, SECONDES = LONGUEURS.get(LONGUEUR, LONGUEURS["courte"])
 NB_MAX = int(NB.split()[-1])
 MOTS = {"courte": 60, "normale": 90, "longue": 130, "monetisable": 200}.get(LONGUEUR, 60)   # budget de mots (≈ 2,5 mots/s)
-TON = TONS.get(os.environ.get("TON") or "farfelu", TONS["farfelu"])
+TON = TONS.get(os.environ.get("TON") or "clash", TONS["clash"])
 CAST = {
     "presentateur": "Jean-Michel Plateau, présentateur. DÉFAUT FIXE : ne réagit JAMAIS, même au pire ; calme olympien ; pose la question simple et logique qui fait tout s'écrouler. C'est souvent lui qui lance la chute finale.",
     "envoyee": "Martine Couloir, envoyée spéciale (fictive) en direct sur le terrain (Assemblée, ministère, salon, sommet…). DÉFAUT FIXE : prend tout au premier degré ; blasée, décrit les scènes les plus absurdes avec un sérieux total. Reine du détail concret ridicule.",
@@ -24,19 +25,60 @@ CAST = {
 LOOKS = ("chauve", "moustache")
 
 EXEMPLE = {
-    "sujet": "BUDGET 2027", "ecran": "BUDGET 2027", "invite_nom": "Hubert Rustine", "invite_role": "Conseiller (fictif) à Bercy", "invite_look": "chauve",
-    "lieu_direct": "Sous le canapé de Bercy", "titre_accroche": "4 milliards perdus en 6 heures",
-    "question": "Qui a vraiment volé les économies ? 👇", "running_gag": "Le Tic Tac rejeté en commission",
-    "repliques": [
-        {"p": "presentateur", "t": "Les députés devaient trouver quatre milliards. Ils ont trouvé un Tic Tac.", "chute": True},
-        {"p": "presentateur", "t": "Martine, vous êtes sur place ?"},
-        {"p": "envoyee", "t": "Jean-Michel, c'est la panique. Des fonctionnaires fouillent sous les coussins du canapé."},
-        {"p": "envoyee", "t": "Ils ont trouvé deux euros.", "chute": True},
-        {"p": "presentateur", "t": "Et le Tic Tac ?"},
-        {"p": "envoyee", "t": "Il a été rejeté en commission.", "attente": 0.5, "chute": True},
-    ],
-    "bandeau": ["BERCY : LE CANAPÉ PLACÉ EN GARDE À VUE", "LE TIC TAC DEMANDE L'ASILE FISCAL", "LES ÉCONOMIES AURAIENT ÉTÉ APERÇUES EN SUISSE"],
-    "gag": {"replique": 2, "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. Three tired office workers in grey suits dig frantically under the cushions of a big orange sofa in a fancy ministry office, coins and papers flying, comedic, deadpan."},
+ "sujet": "3000 PROFS EXPRESS",
+ "ecran": "3000 PROFS",
+ "titre_accroche": "3000 profs en 24 h, mon plombier : 3 semaines",
+ "invite_nom": "Hubert Rustine",
+ "invite_role": "Porte-parole (fictif) du ministère",
+ "invite_look": "chauve",
+ "lieu_direct": "Rayon surgelés",
+ "question": "Votre prof remplaçant, il était encore congelé ? 👇",
+ "repliques": [
+  {
+   "p": "presentateur",
+   "t": "Le ministère a trouvé 3 000 profs en 24 heures. Moi, j'ai mis trois semaines à trouver un plombier.",
+   "d": "Le ministère a trouvé trois mille profs en vingt-quatre heures. Moi, j'ai mis trois semaines à trouver un plombier.",
+   "chute": True
+  },
+  {
+   "p": "presentateur",
+   "t": "Martine, ils sortent d'où, ces profs ?"
+  },
+  {
+   "p": "envoyee",
+   "t": "J'ai mené l'enquête. Soit c'est un miracle, soit ils ont recruté au rayon surgelés.",
+   "chute": True
+  },
+  {
+   "p": "invite",
+   "t": "N'importe quoi. Nos profs sont frais. Ils ont été décongelés ce matin.",
+   "chute": True
+  },
+  {
+   "p": "presentateur",
+   "t": "Et ils enseignent quoi ?"
+  },
+  {
+   "p": "invite",
+   "t": "Ce qui reste. Le prof de sport fait les maths. Il compte les tours de terrain.",
+   "chute": True
+  },
+  {
+   "p": "envoyee",
+   "t": "Bonne nouvelle, Jean-Michel : votre plombier est arrivé. Il vient d'être nommé prof de physique.",
+   "attente": 0.5,
+   "chute": True
+  }
+ ],
+ "bandeau": [
+  "UN PROF RETROUVÉ ENTRE LES PETITS POIS ET LES FRITES",
+  "LE PLOMBIER DE JEAN-MICHEL NOMMÉ PROF DE PHYSIQUE",
+  "RECRUTEMENT EXPRESS : DES PROFS LIVRÉS EN DRIVE"
+ ],
+ "gag": {
+  "replique": 2,
+  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. In a supermarket frozen food aisle, a confused teacher with a briefcase and glasses steps out of a chest freezer covered in frost, holding a piece of chalk, shoppers stare, comedic, deadpan."
+ }
 }
 
 SYSTEME = """Tu es une équipe d'auteurs comiques professionnels de la télévision française (le niveau des meilleures émissions satiriques). Tu écris « L'info en caoutchouc », un faux JT satirique quotidien de {secondes} secondes pour TikTok, joué par des personnages 100 % FICTIFS dessinés en cartoon.
