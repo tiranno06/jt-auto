@@ -6,7 +6,7 @@ Traceback (most recent call last):
   File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 33, in main
     sk = ecrire.ecrire_sketch(titres)
          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/jt-auto/jt-auto/moteur/ecrire.py", line 149, in ecrire_sketch
+  File "/home/runner/work/jt-auto/jt-auto/moteur/ecrire.py", line 165, in ecrire_sketch
     if sk is None: raise RuntimeError(f"Sketch invalide après {essais} essais : {derniere}")
                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-RuntimeError: Sketch invalide après 3 essais : Expecting ',' delimiter: line 1 column 1754 (char 1753)
+RuntimeError: Sketch invalide après 3 essais : Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'tool_choice: type "tool" and "any" are not supported for this model.'}, 'request_id': 'req_011CfrdWkt2eWW7cjxKT53z5'}
