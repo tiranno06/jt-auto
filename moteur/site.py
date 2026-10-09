@@ -72,7 +72,7 @@ def application(nom):
 
 # Service worker : l'appli s'ouvre même hors connexion (dernière version de la page), sans jamais mettre en cache
 # les vidéos (trop lourdes) ni les appels à GitHub.
-SW = r"""const CACHE = "regie-v2";
+SW = r"""const CACHE = "regie-v3";
 const COQUILLE = ["./", "manifest.webmanifest", "icone-192.png", "icone-512.png"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(COQUILLE))); self.skipWaiting(); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(k => Promise.all(k.filter(x => x !== CACHE).map(x => caches.delete(x))))); self.clients.claim(); });
@@ -202,6 +202,13 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <button class="action" id="majsite">🔄 Mettre à jour l'application</button>
     <div id="suiviCfg" class="note"></div>
   </section>
+  <section class="panneau" id="appairage" style="display:none"><h2>📱 Connecter un autre appareil</h2>
+    <p class="note">Scannez ce code avec l'appareil photo de l'autre appareil (téléphone ↔ PC) : la régie s'y connecte toute seule, sans rien recopier.
+    La clé ne passe par aucun serveur. <b>Ne montrez ce code à personne d'autre.</b></p>
+    <button class="action" id="montrerQR">Afficher le code de connexion</button>
+    <div id="qr" style="display:none;text-align:center"><div id="qrImg" style="background:#fff;display:inline-block;padding:12px;border-radius:12px;margin:8px 0"></div>
+      <button class="action" id="copierLien">Copier le lien de connexion</button><button class="action" id="cacherQR">Masquer</button></div>
+  </section>
   <section class="panneau"><h2>🔗 Raccourcis</h2>
     <a class="lien" id="lienActions" target="_blank" rel="noopener">Activité du robot (GitHub)</a>
     <a class="lien" href="https://modal.com/settings/usage" target="_blank" rel="noopener">Crédits Modal (voix + plan gag)</a>
@@ -219,6 +226,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
   <div id="suivi"></div>
 </div></div>
 <div id="toast"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
 <script>
 const DATA = __DATA__, CONF = __CONF__;
 const API = "https://api.github.com/repos/" + CONF.depot;
@@ -338,6 +346,19 @@ $("#manuel").onclick=async()=>{
   catch(e){if(e.name!=="AbortError")toast("Partage impossible : "+e.message)}
   b.textContent="Partage manuel";
 };
+// ------------------------------------------------ connexion d'un autre appareil par QR code (la clé voyage dans le « # » du lien, jamais envoyé au serveur)
+(function(){const m=location.hash.match(/^#cle=(.+)$/); if(!m) return;
+  try{ecrireJeton(decodeURIComponent(m[1]));}catch(e){}
+  history.replaceState(null,"",location.pathname+location.search); setTimeout(()=>toast("Régie connectée sur cet appareil ✓"),300);})();
+function lienConnexion(){return location.origin+location.pathname+"#cle="+encodeURIComponent(lireJeton())}
+$("#montrerQR").onclick=()=>{
+  if(typeof qrcode==="undefined"){toast("Générateur de code indisponible : utilisez « Copier le lien »");$("#qr").style.display="block";return}
+  const q=qrcode(0,"M"); q.addData(lienConnexion()); q.make(); $("#qrImg").innerHTML=q.createSvgTag({cellSize:6,margin:2,scalable:true});
+  $("#qrImg").querySelector("svg").style.width="240px"; $("#qr").style.display="block"; $("#montrerQR").style.display="none";
+  clearTimeout(window._qrT); window._qrT=setTimeout(()=>$("#cacherQR").click(),120000);
+};
+$("#cacherQR").onclick=()=>{$("#qr").style.display="none";$("#qrImg").innerHTML="";$("#montrerQR").style.display=""};
+$("#copierLien").onclick=async()=>{try{await navigator.clipboard.writeText(lienConnexion());toast("Lien copié : ouvrez-le sur l'autre appareil")}catch(e){prompt("Lien de connexion :",lienConnexion())}};
 // ------------------------------------------------ onglets
 document.querySelectorAll(".onglet").forEach(b=>b.onclick=()=>{
   document.querySelectorAll(".onglet").forEach(x=>x.classList.toggle("actif",x===b));
@@ -357,7 +378,7 @@ const champs=()=>document.querySelectorAll("#o-config [data-var]");
 function activer(on){champs().forEach(c=>c.disabled=!on);document.querySelectorAll("#o-config .action,[data-enr]").forEach(b=>b.disabled=!on)}
 $("#garder2").onclick=()=>{const v=$("#jeton2").value.trim(); if(!v)return; ecrireJeton(v); $("#jeton2").value=""; lireAuto(); majBoutons(); chargerReglages()};
 async function chargerReglages(){
-  $("#cfgConnexion").style.display=lireJeton()?"none":"";
+  $("#cfgConnexion").style.display=lireJeton()?"none":""; $("#appairage").style.display=lireJeton()?"":"none";
   if(!lireJeton()){activer(false);$("#cfgEtat").textContent="";return}
   $("#cfgEtat").textContent="Lecture des réglages…";
   try{
