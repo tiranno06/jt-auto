@@ -98,7 +98,7 @@ def zonos(role, textes):
     import modal
     ref = _ref(role)
     if not ref: return [b""] * len(textes)
-    return _distant("jt-banque", "Zonos", "synthese", textes, ref, "vif" if role != "presentateur" else "neutre", delai=900)
+    return _distant("jt-banque", "Zonos", "synthese", textes, ref, "vif" if role != "presentateur" else "neutre", delai=420)
 
 def chatterbox(role, textes):
     import modal
@@ -209,7 +209,7 @@ def candidats():
         if "azure" in src: c += [{"moteur": "azure", "voix": v, "genre": g} for v in AZURE[g]]
     if "kyutai" in src:
         try:
-            kv = _distant("jt-banque", "Kyutai", "voix", delai=900)[:10]
+            kv = _distant("jt-banque", "Kyutai", "voix", delai=900)[:16]
             c += [{"moteur": "kyutai", "voix": v, "genre": "?"} for v in kv]
         except Exception as e:
             journal(f"  Kyutai indisponible pour le casting : {str(e)[:120]}")

@@ -38,7 +38,12 @@ class Kyutai:
         from huggingface_hub import HfApi
         from moshi.models.tts import DEFAULT_DSM_TTS_VOICE_REPO
         f = HfApi().list_repo_files(DEFAULT_DSM_TTS_VOICE_REPO)
-        return sorted({x.split(".wav")[0] + ".wav" for x in f if x.startswith("cml-tts/fr/") and ".wav" in x})
+        noms = {x.split(".wav")[0] + ".wav" for x in f if x.startswith("cml-tts/fr/") and ".wav" in x}
+        par_lecteur = {}                                                    # une seule version par lecteur (la version nettoyée si elle existe)
+        for n in sorted(noms):
+            cle = n.split("/")[-1].split("_")[0]
+            if cle not in par_lecteur or "_enh" in n: par_lecteur[cle] = n
+        return sorted(par_lecteur.values())
 
     @modal.method()
     def synthese(self, textes: list, voix: str) -> list:
@@ -78,7 +83,7 @@ class Zonos:
                 kw = dict(text=t, speaker=spk, language="fr-fr", speaking_rate=14.0)
                 if emo: kw["emotion"] = emo
                 cond = self.m.prepare_conditioning(make_cond_dict(**kw))
-                codes = self.m.generate(cond)
+                codes = self.m.generate(cond, disable_torch_compile=True)          # sans compilation : évite plusieurs minutes d'attente
                 a = self.m.autoencoder.decode(codes).cpu().numpy()[0, 0].astype("float32")
                 out.append(_wav(a, self.m.autoencoder.sampling_rate))
             except Exception as e:

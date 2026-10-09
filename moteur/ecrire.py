@@ -216,10 +216,18 @@ OUTIL_NOTES = {"name": "noter_angles", "description": "Noter les angles.",
                "input_schema": {"type": "object", "properties": {"notes": {"type": "array", "items": {"type": "integer"}}}, "required": ["notes"]}}
 
 def _outil(client, outil, texte):
-    r = client.messages.create(model=MODELE, max_tokens=3000, messages=[{"role": "user", "content": texte}], tools=[outil], tool_choice={"type": "auto"})
-    for b in r.content:
-        if getattr(b, "type", "") == "tool_use": return b.input
-    return _json("".join(getattr(b, "text", "") for b in r.content))
+    """Appel avec sortie structurée ; si le modèle répond en texte, on lui redemande du JSON pur."""
+    msgs = [{"role": "user", "content": texte}]
+    for essai in range(2):
+        r = client.messages.create(model=MODELE, max_tokens=3000, messages=msgs, tools=[outil], tool_choice={"type": "auto"})
+        for b in r.content:
+            if getattr(b, "type", "") == "tool_use": return b.input
+        brut = "".join(getattr(b, "text", "") for b in r.content)
+        try: return _json(brut)
+        except Exception:
+            msgs = msgs + [{"role": "assistant", "content": brut or "…"},
+                           {"role": "user", "content": f"Utilise l'outil {outil['name']} pour rendre ta réponse."}]
+    raise ValueError("réponse inexploitable")
 
 def meilleur_angle(client, titres):
     """Écrire 10 angles, les faire noter par un « producteur », garder le meilleur (et le second en réserve)."""
