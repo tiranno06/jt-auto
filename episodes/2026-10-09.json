@@ -1,67 +1,68 @@
 {
- "titre": "COLÈRE LYCÉENNE",
- "sujet": "COLÈRE LYCÉENNE",
- "ecran": "LYCÉES",
- "invite_nom": "Gérard Ralenti",
- "invite_role": "Porte-parole (fictif) du ministère",
+ "titre": "PROFS REMPLAÇANTS",
+ "sujet": "PROFS REMPLAÇANTS",
+ "ecran": "REMPLAÇANTS",
+ "invite_nom": "Gérard Bouchetrou",
+ "invite_role": "Porte-parole (fictif) Éducation",
  "invite_look": "moustache",
- "lieu_direct": "Salle des profs, vide",
- "titre_accroche": "3000 profs promis en urgence",
- "question": "Selon vous, ils sont où, les trois mille remplaçants ? 👇",
- "running_gag": "Les remplaçants promis laissent un post-it « Je suis en route » et n'arrivent jamais.",
+ "lieu_direct": "Dans un casier du lycée",
+ "titre_accroche": "3000 profs promis, 3000 post-it reçus",
+ "question": "Le post-it ferait-il un meilleur prof principal ? 👇",
+ "running_gag": "Le post-it « Je suis en route » finit toujours promu au poste qu'il remplace.",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "Le gouvernement promet 3000 profs remplaçants en urgence. Le premier cherche encore la salle.",
-   "d": "Le gouvernement promet trois mille profs remplaçants en urgence. Le premier cherche encore la salle.",
+   "t": "Le ministre promet 3 000 profs remplaçants. Pour l'instant, les lycées ont reçu 3 000 post-it.",
+   "d": "Le ministre promet trois mille profs remplaçants. Pour l'instant, les lycées ont reçu trois mille post-it.",
    "chute": true
   },
   {
    "p": "presentateur",
-   "t": "Martine, vous êtes sur place ?"
+   "t": "Martine, les remplaçants sont là ?"
   },
   {
    "p": "envoyee",
-   "t": "Jean-Michel, trois mille casiers sont prêts. Dans chacun, un post-it : « Je suis en route. »",
+   "t": "Jean-Michel, sur chaque bureau, un post-it jaune dit : « Je suis en route ». Les élèves lui ont rendu leurs copies.",
+   "chute": true
+  },
+  {
+   "p": "envoyee",
+   "t": "C'est le seul qui n'a jamais été absent. Il vient d'être nommé professeur principal.",
    "chute": true
   },
   {
    "p": "presentateur",
-   "t": "Monsieur Ralenti, l'exécutif parle d'une nette décélération du mouvement ?"
+   "t": "Monsieur Bouchetrou, où sont les vrais profs ?"
   },
   {
    "p": "invite",
-   "t": "Absolument. Le mouvement ralentit. Les remplaçants aussi. Par solidarité.",
-   "chute": true
-  },
-  {
-   "p": "invite",
-   "t": "Bonne nouvelle : le premier remplaçant a trouvé la salle. Elle est bloquée.",
+   "t": "Ils arrivent dans les heures qui viennent. C'est écrit sur 3 000 post-it.",
+   "d": "Ils arrivent dans les heures qui viennent. C'est écrit sur trois mille post-it.",
    "chute": true,
    "attente": 0.7
   }
  ],
  "bandeau": [
-  "LES REMPLAÇANTS DEMANDENT EUX-MÊMES UN REMPLAÇANT",
-  "LE GPS DU MINISTÈRE NE TROUVE PAS LA SALLE B12",
-  "PÉNURIE DE POST-IT DANS LES LYCÉES",
-  "L'EXÉCUTIF MESURE LA COLÈRE AVEC UN RADAR"
+  "UN POST-IT ÉLU DÉLÉGUÉ DES PROFESSEURS",
+  "LE CONSEIL DE CLASSE SE TIENDRA SUR UN FRIGO",
+  "PÉNURIE DE COLLE : LES REMPLAÇANTS SE DÉCOLLENT",
+  "LE MINISTÈRE COMMANDE DES POST-IT REMPLAÇANTS"
  ],
  "gag": {
   "replique": 2,
-  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. An empty school staff room with an endless wall of identical grey lockers, each one with the same small yellow sticky note on its door, a single dusty clock ticking on the wall, comedic, deadpan, no readable text."
+  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. A line of serious teenagers solemnly hands their homework papers to a single small yellow sticky note stuck on an empty teacher's desk, a growing pile of papers burying it, comedic, deadpan."
  },
- "legende": "3000 profs remplaçants promis en urgence… le premier a enfin trouvé la salle. Ou presque. Satire, personnages fictifs.",
+ "legende": "3 000 profs remplaçants promis… les post-it sont arrivés avant eux. Satire, personnages fictifs.",
  "hashtags": [
-  "lycee",
+  "infoencaoutchouc",
+  "lyceens",
+  "profremplacant",
   "education",
-  "profs",
   "satire",
-  "humour",
-  "actu",
-  "infoencaoutchouc"
+  "humour"
  ],
  "sources": [
-  "https://www.lefigaro.fr/actualite-france/en-direct-mobilisation-des-lyceens-retour-en-classe-ou-poursuite-des-blocages-l-incertitude-plane-sur-la-suite-du-mouvement-ce-vendredi-20261009"
+  "https://www.franceinfo.fr/societe/education/blocage-des-lycees/direct-mobilisation-des-lyceens-3-000-professeurs-remplacants-vont-etre-affectes-dans-les-heures-qui-viennent-l-association-les-lyceens-salue-une-premiere-annonce-concrete_8229388.html#xtor=RSS-3-%5Bgeneral%5D",
+  "https://www.bfmtv.com/societe/education/video-3-000-professeurs-remplacants-on-a-besoin-de-davantage-de-recrutement-on-a-besoin-d-ouvrir-des-postes-assure-delphine-girard-professeure-de-lettres-classiques-dans-un-college-du-val-de-marne_VN-202610090659.html"
  ]
 }
