@@ -1,84 +1,16 @@
 Casting déjà fait.
 30 titres politiques récents
 Script doctor : sketch amélioré
-Sketch : « REMPLAÇANTS », 10 répliques
+Sketch : « PRIMAIRE PIRATÉE », 11 répliques
 Voix : chatterbox
-Plan gag IA indisponible (Could not deserialize remote exception due to local error:
-Deserialization failed because the 'torch' module is not available in the local environment.
-This can happen if your local environment does not have the remote exception definitions.
-Here is the remote traceback:
-Traceback (most recent call last):
-  File "/pkg/modal/_runtime/container_io_manager.py", line 987, in handle_input_exception
-    yield
-  File "/pkg/modal/_container_entrypoint.py", line 189, in run_input_sync
-    values = io_context.call_function_sync()
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/pkg/modal/_runtime/container_io_manager.py", line 266, in call_function_sync
-    expected_value_or_values = self.finalized_function.callable(*args, **kwargs)
-                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/root/video_modal.py", line 36, in plan
-    images = self.pipe(prompt=prompt + " Vibrant flat colors, clean cel animation, smooth comedic motion, vertical framing.",
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
-    return func(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/diffusers/pipelines/wan/pipeline_wan.py", line 667, in __call__
-    video = self.vae.decode(latents, return_dict=False)[0]
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/diffusers/utils/accelerate_utils.py", line 46, in wrapper
-    return method(self, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/diffusers/models/autoencoders/autoencoder_kl_wan.py", line 1237, in decode
-    decoded = self._decode(z).sample
-              ^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/diffusers/models/autoencoders/autoencoder_kl_wan.py", line 1204, in _decode
-    out_ = self.decoder(x[:, :, i : i + 1, :, :], feat_cache=self._feat_map, feat_idx=self._conv_idx)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/diffusers/models/autoencoders/autoencoder_kl_wan.py", line 898, in forward
-    x = up_block(x, feat_cache=feat_cache, feat_idx=feat_idx, first_chunk=first_chunk)
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/diffusers/models/autoencoders/autoencoder_kl_wan.py", line 703, in forward
-    x = resnet(x, feat_cache=feat_cache, feat_idx=feat_idx)
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/diffusers/models/autoencoders/autoencoder_kl_wan.py", line 351, in forward
-    x = self.norm1(x)
-        ^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/diffusers/models/autoencoders/autoencoder_kl_wan.py", line 206, in forward
-    return normalized * self.scale * self.gamma + self.bias
-           ~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~
-torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 1.72 GiB. GPU 0 has a total capacity of 44.42 GiB of which 1.32 GiB is free. Process 1 has 43.09 GiB memory in use. Of the allocated memory 36.52 GiB is allocated by PyTorch, and 6.02 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-) : la vidéo sortira sans.
-Plan gag IA : non
-durée 64.9 s, 10 répliques, duplex=0, gag=None
-  image 0/1947
-  image 300/1947
-  image 600/1947
-  image 900/1947
-  image 1200/1947
-  image 1500/1947
-  image 1800/1947
-OK : sortie/2026-10-09_emission3.mp4 (65 s)
+Plan gag IA : oui
+durée 72.8 s, 11 répliques, duplex=0, gag=1
+  image 0/2184
+  image 300/2184
+  image 600/2184
+  image 900/2184
+  image 1200/2184
+  image 1500/2184
+  image 1800/2184
+  image 2100/2184
+OK : sortie/2026-10-09_emission4.mp4 (73 s)

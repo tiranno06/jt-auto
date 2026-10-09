@@ -1,83 +1,87 @@
 {
- "titre": "REMPLAÇANTS",
- "sujet": "REMPLAÇANTS",
- "ecran": "3000 PROFS",
- "invite_nom": "Gérard Surveillant-Général",
- "invite_role": "Conseiller (fictif) à l'Éducation",
+ "titre": "PRIMAIRE PIRATÉE",
+ "sujet": "PRIMAIRE PIRATÉE",
+ "ecran": "PRIMAIRE",
+ "invite_nom": "Armand Pare-Feu",
+ "invite_role": "Responsable (fictif) du scrutin",
  "invite_look": "moustache",
- "lieu_direct": "Ministère",
+ "lieu_direct": "QG primaire",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "Le ministre de l'Éducation admet que 3 000 personnes n'étaient affectées devant aucun élève. Martine, vous les avez retrouvées ?",
-   "d": "Le ministre de l'Éducation admet que trois mille personnes n'étaient affectées devant aucun élève. Martine, vous les avez retrouvées ?"
+   "t": "Cyberattaque sur le site de la primaire sociale-démocrate. Les organisateurs assurent que la sécurité du scrutin est préservée. Martine ?"
   },
   {
    "p": "envoyee",
-   "t": "Oui, Jean-Michel. Derrière cette porte du ministère, il y a une pancarte : « Remplaçants, ne pas déranger »."
-  },
-  {
-   "p": "presentateur",
-   "t": "Ils font quoi, là-dedans ?"
-  },
-  {
-   "p": "envoyee",
-   "t": "Ils attendent qu'on les appelle. Trois mille, debout, avec leurs trousses. L'un d'eux corrige la même copie depuis septembre.",
-   "d": "Ils attendent qu'on les appelle. Trois mille, debout, avec leurs trousses. L'un d'eux corrige la même copie depuis septembre.",
+   "t": "Jean-Michel, le service informatique, c'est un stagiaire, une multiprise et un post-it « ne pas débrancher ». Il vient de débrancher.",
    "chute": true
   },
   {
    "p": "presentateur",
-   "t": "Monsieur le conseiller, trois mille professeurs dans un placard, c'est embarrassant, non ?",
-   "d": "Monsieur le conseiller, trois mille professeurs dans un placard, c'est embarrassant, non ?"
+   "t": "Et le site, il fonctionne ?"
+  },
+  {
+   "p": "envoyee",
+   "t": "Non. Il est tellement sécurisé que même les électeurs n'arrivent pas à entrer.",
+   "chute": true
+  },
+  {
+   "p": "presentateur",
+   "t": "Monsieur Pare-Feu, la sécurité est vraiment préservée ?"
   },
   {
    "p": "invite",
-   "t": "Ce n'est pas un placard, c'est une réserve stratégique. Comme la roue de secours : on vérifie qu'elle existe, surtout on ne roule pas dessus.",
-   "chute": true
+   "t": "Absolument. Zéro intrusion. Le site a repoussé les pirates, les électeurs et, ce matin, nous-mêmes."
   },
   {
    "p": "presentateur",
-   "t": "Pendant ce temps, des classes n'avaient pas de professeur."
+   "t": "Cent quarante mille inscrits, et personne ne peut entrer ?",
+   "d": "Cent quarante mille inscrits, et personne ne peut entrer ?"
   },
   {
    "p": "invite",
-   "t": "Et trois mille professeurs n'avaient pas de classe. Vous voyez : tout était parfaitement équilibré.",
-   "d": "Et trois mille professeurs n'avaient pas de classe. Vous voyez : tout était parfaitement équilibré.",
+   "t": "C'est la beauté du système : un scrutin inaccessible est un scrutin inviolable. Le coffre est parfait. On a juste perdu la clé.",
+   "chute": true
+  },
+  {
+   "p": "envoyee",
+   "t": "Jean-Michel, les pirates ont abandonné. Ils ont laissé un avis : « Trop compliqué. Une étoile. »",
    "chute": true
   },
   {
    "p": "presentateur",
-   "t": "Ils sont tous affectés depuis ce matin. Et le placard, Martine ?"
+   "t": "Et pour le second tour ?"
   },
   {
-   "p": "envoyee",
-   "t": "Vide. Mais la pancarte a été accrochée à la porte d'une classe. Personne n'ose entrer.",
+   "p": "invite",
+   "t": "Sécurité renforcée : personne n'aura l'adresse du site. On l'a notée sur un post-it. Le stagiaire vient de le jeter.",
    "chute": true,
    "attente": 0.8
   }
  ],
  "bandeau": [
-  "3 000 REMPLAÇANTS RETROUVÉS DERRIÈRE LES BALAIS",
-  "LA PANCARTE « NE PAS DÉRANGER » AFFECTÉE EN CLASSE",
-  "UNE COPIE CORRIGÉE DEPUIS SEPTEMBRE : 12/20",
-  "LA ROUE DE SECOURS RÉCLAME UN CONTRAT"
+  "LE STAGIAIRE DÉBRANCHE, LE POST-IT PLEURE",
+  "LES PIRATES LAISSENT UN AVIS : UNE ÉTOILE",
+  "LE COFFRE EST PARFAIT, LA CLÉ A DISPARU",
+  "LE SITE REFUSE L'ACCÈS À SES PROPRES ORGANISATEURS"
  ],
  "gag": {
-  "replique": 3,
-  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. A huge crowd of tired teachers squeezed standing inside a tiny ministry closet, each holding a pencil case, one of them marking the same paper with a red pen, the closet door wide open, comedic, deadpan."
+  "replique": 1,
+  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. A nervous young intern in a cramped office unplugs a tangled power strip overflowing with cables, a yellow sticky note falls to the floor, sparks fly and a computer screen goes black, comedic, deadpan."
  },
- "legende": "3 000 remplaçants retrouvés dans un placard du ministère, en « réserve stratégique ». Comme une roue de secours. Satire, personnages fictifs.",
+ "legende": "Cyberattaque sur la primaire : la sécurité est préservée, personne n'a pu entrer. Même pas les électeurs. Satire, personnages fictifs.",
  "hashtags": [
   "satire",
-  "humour",
-  "education",
-  "actualite",
+  "primaire",
+  "cyberattaque",
   "jt",
-  "lyceens",
-  "politique"
+  "humour",
+  "politique",
+  "infoencaoutchouc"
  ],
  "sources": [
-  "https://www.bfmtv.com/politique/video-edouard-geffray-ministre-de-l-education-nationale-je-ne-vais-pas-cacher-le-fait-qu-il-y-avait-3-000-personnes-qui-n-etaient-pas-actuellement-affectees-devant-des-eleves_VN-202610090376.html"
+  "https://www.bfmtv.com/politique/elections/presidentielle/cyberattaque-sur-le-site-de-la-primaire-sociale-democrate-les-organisateurs-assurent-que-la-securite-du-scrutin-est-preservee_AN-202610090515.html",
+  "https://www.lemonde.fr/politique/article/2026/10/09/primaire-de-la-gauche-sociale-democrate-la-plateforme-de-vote-victime-d-une-cyberattaque_6790554_823448.html",
+  "https://www.bfmtv.com/politique/elections/presidentielle/video-la-plateforme-de-vote-en-ligne-pour-la-primaire-sociale-democrate-ciblee-par-une-cyberattaque_VN-202610090416.html"
  ]
 }
