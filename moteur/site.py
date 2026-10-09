@@ -141,8 +141,23 @@ label .jeton{margin-top:6px}
 .action{display:block;width:100%;margin:8px 0;padding:13px;font-size:15px;font-weight:700;background:var(--carte);color:var(--texte);border:1px solid var(--ligne)}
 .action:disabled{opacity:.45}
 .lien{display:block;padding:11px 0;color:var(--bleu);text-decoration:none;border-bottom:1px solid var(--ligne);font-size:14px}.lien:last-child{border:0}
+@media (min-width:900px){
+  body[data-onglet="videos"] header, body[data-onglet="videos"] .onglets, body[data-onglet="videos"] main{margin-right:420px}
+  header,.onglets{max-width:none}
+  .onglets{max-width:560px;margin-left:auto;margin-right:auto}
+  body[data-onglet="videos"] .onglets{margin-left:24px;margin-right:444px;max-width:none}
+  main{max-width:1000px;padding:8px 24px 40px !important}
+  body[data-onglet="videos"] main{max-width:none}
+  #liste{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:0 14px}
+  #o-config{display:grid;grid-template-columns:1fr 1fr;gap:0 16px;align-items:start}
+  #o-config[style*="none"]{display:none !important}
+  #o-config>.note,#cfgConnexion{grid-column:1/-1}
+  #barre{left:auto;right:0;top:0;bottom:0;width:420px;border-top:0;border-left:1px solid var(--ligne);overflow:auto;padding:24px;display:flex;align-items:flex-start}
+  #barre .int{width:100%}
+  #barre video{max-height:62vh}
+}
 video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#000;display:none}
-</style></head><body>
+</style></head><body data-onglet="videos">
 <header><h1>__NOM__</h1><div class="sous">Régie du robot · vidéos de la plus récente à la plus ancienne</div>
 <button id="installer" style="display:none;margin-top:10px;padding:9px 16px;font-size:14px;font-weight:700;background:var(--jaune);color:#111">📲 Installer l'application</button></header>
 <nav class="onglets"><button class="onglet actif" data-o="videos">🎬 Vidéos</button><button class="onglet" data-o="config">⚙️ Réglages</button></nav>
@@ -162,7 +177,12 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
   <div id="liste"></div>
  </div>
  <div id="o-config" style="display:none">
-  <p class="note" id="cfgEtat">Connectez la régie (onglet Vidéos) pour modifier les réglages.</p>
+  <section class="panneau" id="cfgConnexion"><h2>🔑 Connecter la régie</h2>
+    <p class="note">Pour modifier les réglages depuis cet appareil (téléphone ou PC), collez une fois votre clé GitHub de régie. Elle reste uniquement dans ce navigateur.
+    Pas encore de clé ? <a style="color:var(--bleu)" href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">Créer la clé</a> : dépôt <b>jt-auto</b> uniquement, droits <b>Actions</b> et <b>Variables</b> en « Read and write ».</p>
+    <div class="jeton"><input id="jeton2" type="password" placeholder="github_pat_…" autocomplete="off"><button class="second" id="garder2" style="flex:none;padding:10px 14px">Connecter</button></div>
+  </section>
+  <p class="note" id="cfgEtat"></p>
   <section class="panneau"><h2>📅 Planning</h2>
     <label>Rythme des émissions<select data-var="FREQUENCE" data-def="1"><option value="1">Une par jour</option><option value="2">Un jour sur deux</option><option value="3">Un jour sur trois</option><option value="0">⏸ Pause (le robot ne produit plus)</option></select></label>
     <label>Heure de fabrication (heure de Paris)<select data-var="HEURE" data-def="7" id="selHeure"></select></label>
@@ -192,7 +212,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
  </div>
 </main>
 <div id="barre"><div class="int">
-  <div id="choix">Touchez une vidéo pour la vérifier</div>
+  <div id="choix">Sélectionnez une vidéo pour la vérifier</div>
   <video id="apercu" controls playsinline preload="metadata"></video>
   <button id="publier" disabled>Publier sur TikTok</button>
   <div class="ligne2"><button class="second" id="voir" disabled>Aperçu</button><button class="second" id="copier" disabled>Copier la légende</button><button class="second" id="manuel" disabled>Partage manuel</button></div>
@@ -322,7 +342,7 @@ $("#manuel").onclick=async()=>{
 document.querySelectorAll(".onglet").forEach(b=>b.onclick=()=>{
   document.querySelectorAll(".onglet").forEach(x=>x.classList.toggle("actif",x===b));
   $("#o-videos").style.display=b.dataset.o==="videos"?"":"none"; $("#o-config").style.display=b.dataset.o==="config"?"":"none";
-  $("#barre").style.display=b.dataset.o==="videos"?"":"none"; if(b.dataset.o==="config") chargerReglages();
+  $("#barre").style.display=b.dataset.o==="videos"?"":"none"; document.body.dataset.onglet=b.dataset.o; if(b.dataset.o==="config") chargerReglages();
 });
 // ------------------------------------------------ réglages (variables du dépôt GitHub)
 for(let h=5;h<=22;h++){const o=document.createElement("option");o.value=h;o.textContent=h+" h";$("#selHeure").appendChild(o)}
@@ -335,16 +355,19 @@ async function ecrireVar(nom,valeur){
 }
 const champs=()=>document.querySelectorAll("#o-config [data-var]");
 function activer(on){champs().forEach(c=>c.disabled=!on);document.querySelectorAll("#o-config .action,[data-enr]").forEach(b=>b.disabled=!on)}
+$("#garder2").onclick=()=>{const v=$("#jeton2").value.trim(); if(!v)return; ecrireJeton(v); $("#jeton2").value=""; lireAuto(); majBoutons(); chargerReglages()};
 async function chargerReglages(){
-  if(!lireJeton()){activer(false);$("#cfgEtat").style.display="";return}
+  $("#cfgConnexion").style.display=lireJeton()?"none":"";
+  if(!lireJeton()){activer(false);$("#cfgEtat").textContent="";return}
   $("#cfgEtat").textContent="Lecture des réglages…";
   try{
     const r=await gh("/actions/variables?per_page=50"); const d=await r.json(); const v={};
     (d.variables||[]).forEach(x=>v[x.name]=x.value);
     champs().forEach(c=>{const val=(c.dataset.var in v)?v[c.dataset.var]:c.dataset.def;
       if(c.dataset.bascule) c.classList.toggle("on",String(val)!=="0"); else c.value=val;});
-    activer(true); $("#cfgEtat").style.display="none";
-  }catch(e){$("#cfgEtat").textContent="Erreur : "+e.message;activer(false)}
+    activer(true); $("#cfgEtat").textContent="Régie connectée ✓ — chaque changement est enregistré immédiatement.";
+  }catch(e){$("#cfgEtat").textContent="Erreur : "+e.message+" — vérifiez la clé (droits Actions et Variables).";activer(false);
+    if(/jeton refusé/.test(e.message)) $("#cfgConnexion").style.display=""}
 }
 champs().forEach(c=>{
   if(c.dataset.texte) return;
