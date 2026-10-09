@@ -41,12 +41,55 @@ def construire():
             .replace("__DATA__", json.dumps(liste, ensure_ascii=False).replace("</", "<\\/")))
     open(os.path.join(SITE, "index.html"), "w", encoding="utf-8").write(page)
     open(os.path.join(SITE, ".nojekyll"), "w").close()
+    application(nom)
     print(f"Site : {len(liste)} vidéos")
+
+# ------------------------------------------------------------------ application installable (PWA)
+def icone(taille, marge=0.0):
+    """Icône de l'appli : fond rouge JT, « JT » blanc et petit point « direct » jaune."""
+    from PIL import Image, ImageDraw, ImageFont
+    S = 4; T = taille * S; img = Image.new("RGB", (T, T), (227, 32, 58) if marge else (14, 15, 23)); d = ImageDraw.Draw(img)
+    m = int(T * marge); r = int((T - 2 * m) * 0.22)
+    d.rounded_rectangle((m, m, T - m, T - m), r, fill=(227, 32, 58))
+    f = ImageFont.truetype(os.path.join(RACINE, "polices", "Poppins-Bold.ttf"), int((T - 2 * m) * 0.46))
+    w = d.textlength("JT", font=f); d.text(((T - w) / 2, T * 0.5 - (T - 2 * m) * 0.36), "JT", font=f, fill=(255, 255, 255))
+    c = int((T - 2 * m) * 0.075); cx, cy = T - m - int((T - 2 * m) * 0.2), m + int((T - 2 * m) * 0.2)
+    d.ellipse((cx - c, cy - c, cx + c, cy + c), fill=(255, 214, 40))
+    return img.resize((taille, taille), Image.LANCZOS)
+
+def application(nom):
+    for t in (192, 512):
+        icone(t).save(os.path.join(SITE, f"icone-{t}.png"))
+        icone(t, marge=0.1).save(os.path.join(SITE, f"icone-{t}-maskable.png"))
+    icone(180).save(os.path.join(SITE, "apple-touch-icon.png"))
+    manifeste = {"name": f"{nom} — régie", "short_name": "Régie JT", "lang": "fr", "start_url": "./", "scope": "./", "id": "./",
+                 "display": "standalone", "orientation": "portrait", "background_color": "#0e0f17", "theme_color": "#0e0f17",
+                 "description": "Vérifier et publier les émissions du robot sur TikTok.",
+                 "icons": [{"src": f"icone-{t}.png", "sizes": f"{t}x{t}", "type": "image/png", "purpose": "any"} for t in (192, 512)] +
+                          [{"src": f"icone-{t}-maskable.png", "sizes": f"{t}x{t}", "type": "image/png", "purpose": "maskable"} for t in (192, 512)]}
+    json.dump(manifeste, open(os.path.join(SITE, "manifest.webmanifest"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    open(os.path.join(SITE, "sw.js"), "w").write(SW)
+
+# Service worker : l'appli s'ouvre même hors connexion (dernière version de la page), sans jamais mettre en cache
+# les vidéos (trop lourdes) ni les appels à GitHub.
+SW = r"""const CACHE = "regie-v1";
+const COQUILLE = ["./", "manifest.webmanifest", "icone-192.png", "icone-512.png"];
+self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(COQUILLE))); self.skipWaiting(); });
+self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(k => Promise.all(k.filter(x => x !== CACHE).map(x => caches.delete(x))))); self.clients.claim(); });
+self.addEventListener("fetch", e => {
+  const u = new URL(e.request.url);
+  if (e.request.method !== "GET" || u.origin !== location.origin || u.pathname.endsWith(".mp4")) return;
+  e.respondWith(fetch(e.request).then(r => { if (r.ok) { const c = r.clone(); caches.open(CACHE).then(x => x.put(e.request, c)); } return r; })
+    .catch(() => caches.match(e.request).then(r => r || caches.match("./"))));
+});
+"""
 
 PAGE = r"""<!doctype html>
 <html lang="fr"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex">
+<meta name="theme-color" content="#0e0f17"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icone-192.png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
 <title>__NOM__ — régie</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
@@ -89,7 +132,8 @@ button{font:inherit;border:0;border-radius:14px;cursor:pointer}
 #toast{position:fixed;top:16px;left:50%;transform:translateX(-50%);background:var(--jaune);color:#111;font-weight:700;padding:10px 16px;border-radius:12px;display:none;z-index:9;max-width:90vw;text-align:center}
 video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#000;display:none}
 </style></head><body>
-<header><h1>__NOM__</h1><div class="sous">Régie du robot · vidéos de la plus récente à la plus ancienne</div></header>
+<header><h1>__NOM__</h1><div class="sous">Régie du robot · vidéos de la plus récente à la plus ancienne</div>
+<button id="installer" style="display:none;margin-top:10px;padding:9px 16px;font-size:14px;font-weight:700;background:var(--jaune);color:#111">📲 Installer l'application</button></header>
 <main>
   <section class="panneau">
     <div class="auto">
@@ -231,6 +275,12 @@ $("#manuel").onclick=async()=>{
   catch(e){if(e.name!=="AbortError")toast("Partage impossible : "+e.message)}
   b.textContent="Partage manuel";
 };
+// ------------------------------------------------ application installable
+if("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(()=>{});
+let invite=null;
+window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();invite=e;$("#installer").style.display="inline-block"});
+$("#installer").onclick=async()=>{if(!invite)return;invite.prompt();await invite.userChoice.catch(()=>{});invite=null;$("#installer").style.display="none"};
+window.addEventListener("appinstalled",()=>{$("#installer").style.display="none";toast("Application installée ✓")});
 rendre(); afficherAuto(); lireAuto(); majBoutons();
 if(!CONF.depot) $("#autoAide").textContent="Site de test : boutons du robot inactifs.";
 </script></body></html>

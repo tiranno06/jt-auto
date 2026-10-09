@@ -57,7 +57,9 @@ C'est tout : ensuite, une émission sort **chaque jour automatiquement**.
 
 ## Régie : vérifier les vidéos avant publication (facultatif)
 À chaque émission, le robot met à jour un petit site : **https://<ton-compte>.github.io/jt-auto/**
-(l'adresse exacte s'affiche dans *Settings → Pages*). Ajoute-le à l'écran d'accueil de ton téléphone.
+(l'adresse exacte s'affiche dans *Settings → Pages*).
+
+**L'installer comme une application (Android, ex. Galaxy S23 Ultra)** : ouvre l'adresse dans **Chrome** et touche **📲 Installer l'application** en haut de la page (ou menu ⋮ → *Installer l'application*). Avec **Samsung Internet** : menu ☰ → *Ajouter la page à* → *Écran d'accueil*. L'icône « JT » rouge apparaît avec tes autres applis et s'ouvre en plein écran.
 
 On y trouve :
 - l'interrupteur **Publication automatique** (coupé au départ) : activé, chaque vidéo part seule sur TikTok ; coupé, les nouvelles vidéos attendent ton feu vert (badge **⏸ En attente de validation**) ;
