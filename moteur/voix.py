@@ -31,14 +31,18 @@ def chatterbox(repliques, tmp):
     morceaux = []
     for i, x in enumerate(repliques):
         phr = [p.strip() for p in re.split(r"(?<=[.!?…])\s+", (x.get("dit") or x["texte"]).strip()) if p.strip()] or [x["texte"]]
-        for p in phr: morceaux.append((i, p))
+        fus = []                                                            # les bouts trop courts (« Ah. ») sont recollés au voisin
+        for p in phr:
+            if fus and (len(p) < 14 or len(fus[-1]) < 14): fus[-1] += " " + p
+            else: fus.append(p)
+        for p in fus: morceaux.append((i, p))
     lignes = [dict(texte=p, role=repliques[i]["perso"], exag=JEU.get(repliques[i]["perso"], (0.5, 0.55))[0],
                    cfg=JEU.get(repliques[i]["perso"], (0.5, 0.55))[1]) for i, p in morceaux]
     Voix = modal.Cls.from_name("jt-voix", "Voix")
     octets = Voix().synthese.remote(lignes, refs)
     par_rep = {}
     for k, ((i, _), o) in enumerate(zip(morceaux, octets)):
-        par_rep.setdefault(i, []).append(_depuis_octets(o, f"{tmp}/cb{k}"))
+        if o: par_rep.setdefault(i, []).append(_depuis_octets(o, f"{tmp}/cb{k}"))
     sortie = []
     for i, x in enumerate(repliques):
         pause = np.zeros(int(0.16 * SR), np.float32); bouts = par_rep.get(i, [np.zeros(SR // 2, np.float32)])

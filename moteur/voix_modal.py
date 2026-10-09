@@ -34,7 +34,11 @@ class Voix:
         for l in lignes:
             kw = dict(language_id="fr", exaggeration=float(l.get("exag", 0.5)), cfg_weight=float(l.get("cfg", 0.5)))
             if l.get("role") in refs: kw["audio_prompt_path"] = refs[l["role"]]
-            wav = self.m.generate(l["texte"], **kw)
+            try:
+                wav = self.m.generate(l["texte"], **kw)
+            except Exception:
+                try: wav = self.m.generate(l["texte"].rstrip(".!?… ") + ", voilà.", **kw)      # texte trop court ou atypique
+                except Exception: sorties.append(b""); continue
             a = wav.squeeze().detach().cpu().numpy().astype("float32")
             buf = io.BytesIO(); sf.write(buf, a, self.m.sr, format="WAV", subtype="PCM_16")
             sorties.append(buf.getvalue())

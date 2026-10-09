@@ -25,6 +25,8 @@ UNES = [
 # sujets dont on ne rit pas (drames, victimes)
 DRAMES = re.compile(r"\b(mort|morts|morte|décès|décédé|tué|tués|tuée|meurtre|assassin|attentat|terroris|viol|victime|victimes|"
                     r"otage|massacre|bombard|guerre|blessé|blessés|noyé|incendie|crash|deuil|obsèques|pédo|agression|féminicide|suicide)", re.I)
+# rubriques récurrentes (bourse, météo, jeux, horoscope…) : jamais un « sujet du jour »
+RUBRIQUES = re.compile(r"(\d{2}/\d{2}|bourse|cac 40|marchés|valeurs|météo|horoscope|loto|euromillions|programme tv|résultats du|en direct|live|replay|podcast|quiz)", re.I)
 VIDES = set("""le la les un une des du de d l au aux et ou en dans sur sous pour par avec sans ce cet cette ces son sa ses leur leurs qui que quoi
 dont est sont a ont été être avoir fait faire plus moins très tout tous toute toutes après avant contre entre chez comme mais donc or ni car
 il elle ils elles on nous vous je tu se s y ne pas n quand comment pourquoi selon face depuis vers lors ainsi aussi encore déjà va vont peut
@@ -89,12 +91,16 @@ def sujet_du_jour(heures=24, deja_vus=(), mots_recents=()):
     for it in tous:
         if it["date"] and (maintenant - it["date"]).total_seconds() > heures * 3600: continue
         cle = re.sub(r"\W+", "", it["titre"].lower())[:60]
-        if cle in vus or it["lien"] in deja_vus or DRAMES.search(it["titre"] + " " + it["resume"][:200]): continue
+        if cle in vus or it["lien"] in deja_vus or DRAMES.search(it["titre"] + " " + it["resume"][:200]) or RUBRIQUES.search(it["titre"]): continue
         vus.add(cle); it["mots"] = _mots(it["titre"] + " " + it["resume"][:160]); items.append(it)
     if len(items) < 3: return None, "pas assez de titres"
-    groupes = []                                                          # pour chaque titre : les titres qui partagent au moins 2 mots-clés avec lui
+    # mots trop courants (présents dans plus de 6 % des titres) : ils ne caractérisent pas un sujet
+    from collections import Counter
+    freq = Counter(m for it in items for m in it["mots"]); lim = max(3, 0.06 * len(items))
+    for it in items: it["cles"] = {m for m in it["mots"] if freq[m] <= lim}
+    groupes = []                                                          # pour chaque titre : les titres qui partagent au moins 2 mots-clés distinctifs
     for it in items:
-        membres = [x for x in items if len(x["mots"] & it["mots"]) >= 2]
+        membres = [x for x in items if len(x["cles"] & it["cles"]) >= 2]
         groupes.append({"items": membres, "mots": set(it["mots"])})
     recents = set(mots_recents)
     def score(g):
