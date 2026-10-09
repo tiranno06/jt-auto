@@ -233,10 +233,14 @@ def meilleur_angle(client, titres):
     """Écrire 10 angles, les faire noter par un « producteur », garder le meilleur (et le second en réserve)."""
     try:
         sujet = "\n".join(f"- {t['titre']} — {t['resume'][:200]}" for t in titres[:6])
-        angles = [a for a in _outil(client, OUTIL_ANGLES, ATELIER.format(sujet=sujet)).get("angles", []) if a.get("angle")][:10]
-        if not angles: return ""
+        r = _outil(client, OUTIL_ANGLES, ATELIER.format(sujet=sujet))
+        liste_brute = r if isinstance(r, list) else r.get("angles") or next((v for v in r.values() if isinstance(v, list)), [])
+        angles = [a for a in liste_brute if isinstance(a, dict) and a.get("angle")][:10]
+        if not angles: print(f"Atelier d'angles : réponse inattendue ({str(r)[:150]})", flush=True); return ""
         liste = "\n".join(f"{k}. {a['angle']} → « {a['vanne']} »" for k, a in enumerate(angles))
-        notes = _outil(client, OUTIL_NOTES, PRODUCTEUR.format(angles=liste)).get("notes", [])
+        rn = _outil(client, OUTIL_NOTES, PRODUCTEUR.format(angles=liste))
+        notes = rn if isinstance(rn, list) else rn.get("notes") or next((v for v in rn.values() if isinstance(v, list)), [])
+        notes = [int(x) if str(x).lstrip("-").isdigit() else 0 for x in notes]
         ordre = sorted(range(len(angles)), key=lambda k: -(notes[k] if k < len(notes) else 0))
         a, b = angles[ordre[0]], angles[ordre[1]] if len(ordre) > 1 else None
         print(f"Angle retenu ({notes[ordre[0]] if notes else '?'}/10) : {a['angle']}", flush=True)

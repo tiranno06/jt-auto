@@ -26,7 +26,7 @@ UNES = [
 DRAMES = re.compile(r"\b(mort|morts|morte|décès|décédé|tué|tués|tuée|meurtre|assassin|attentat|terroris|viol|victime|victimes|"
                     r"otage|massacre|bombard|guerre|antisémit|racis|haine|discrimin|homophob|islamophob|harcèle|israël|israel|gaza|hamas|palestin|hezbollah|ukrain|russie|iran|cisjordanie|blessé|blessés|noyé|incendie|crash|deuil|obsèques|pédo|agression|féminicide|suicide)", re.I)
 # rubriques récurrentes (bourse, météo, jeux, horoscope…) : jamais un « sujet du jour »
-RUBRIQUES = re.compile(r"(\d{2}/\d{2}|bourse|cac 40|marchés|valeurs|météo|horoscope|loto|euromillions|programme tv|résultats du|en direct|live|replay|podcast|quiz)", re.I)
+RUBRIQUES = re.compile(r"(l[’']actu de|ce qu[’']il faut retenir|les infos du|récap|en bref|revue de presse|\d{2}/\d{2}|bourse|cac 40|marchés|valeurs|météo|horoscope|loto|euromillions|programme tv|résultats du|en direct|live|replay|podcast|quiz)", re.I)
 VIDES = set("""le la les un une des du de d l au aux et ou en dans sur sous pour par avec sans ce cet cette ces son sa ses leur leurs qui que quoi
 dont est sont a ont été être avoir fait faire plus moins très tout tous toute toutes après avant contre entre chez comme mais donc or ni car
 il elle ils elles on nous vous je tu se s y ne pas n quand comment pourquoi selon face depuis vers lors ainsi aussi encore déjà va vont peut
