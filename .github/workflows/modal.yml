@@ -1,0 +1,42 @@
+name: Installer les modèles sur Modal
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["moteur/voix_modal.py", "moteur/video_modal.py"]
+
+permissions:
+  contents: write
+
+jobs:
+  deployer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      MODAL_TOKEN_ID: ${{ secrets.MODAL_TOKEN_ID }}
+      MODAL_TOKEN_SECRET: ${{ secrets.MODAL_TOKEN_SECRET }}
+      PYTHONIOENCODING: utf-8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Déployer et tester
+        run: |
+          pip install -q "modal>=0.73"
+          set +e
+          {
+            echo "=== voix (Chatterbox) ==="; modal deploy moteur/voix_modal.py 2>&1 | tail -40; echo "code: ${PIPESTATUS[0]}"
+            echo "=== plan gag (Wan 2.2) ==="; modal deploy moteur/video_modal.py 2>&1 | tail -40; echo "code: ${PIPESTATUS[0]}"
+          } > episodes/deploiement.txt
+          cat episodes/deploiement.txt
+      - name: Enregistrer le compte rendu
+        if: always()
+        run: |
+          git config user.name "robot-jt"
+          git config user.email "robot-jt@users.noreply.github.com"
+          git add episodes/deploiement.txt
+          git commit -m "Compte rendu du déploiement Modal" || true
+          git pull --rebase -q || true
+          git push
