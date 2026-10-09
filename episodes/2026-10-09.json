@@ -1,69 +1,68 @@
 {
- "titre": "NOBEL DE LA PAIX",
- "sujet": "NOBEL DE LA PAIX",
- "ecran": "NOBEL DE PAIX",
- "invite_nom": "Gérard Tampon",
- "invite_role": "Porte-parole (fictif) de la Cour",
+ "titre": "PROFS REMPLAÇANTS",
+ "sujet": "PROFS REMPLAÇANTS",
+ "ecran": "REMPLAÇANTS",
+ "invite_nom": "Bernard Craie",
+ "invite_role": "Porte-parole (fictif) du rectorat",
  "invite_look": "moustache",
- "lieu_direct": "Dans la machine à café",
- "titre_accroche": "Un prix Nobel, mais interdit de gâteau",
- "question": "Qui va couper le gâteau, d'après vous ? 👇",
- "running_gag": "Le gâteau de la fête, bloqué à l'accueil parce qu'il est sous sanctions.",
+ "lieu_direct": "Casier vide du remplaçant",
+ "titre_accroche": "5000 heures de cours par prof",
+ "question": "Votre prof remplaçant est-il arrivé, ou juste son post-it ? 👇",
+ "running_gag": "",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "Une ancienne juge de la Cour pénale internationale a le Nobel de la paix. La Cour, elle, est privée de gâteau.",
+   "t": "3 000 remplaçants pour 15 millions d'heures. Chacun fera sept mois de cours sans dormir.",
+   "d": "Trois mille remplaçants pour quinze millions d'heures. Chacun fera sept mois de cours sans dormir.",
    "chute": true
   },
   {
    "p": "presentateur",
-   "t": "Martine, vous êtes dans la machine à café ?"
+   "t": "Martine, vous voyez un remplaçant ?"
   },
   {
    "p": "envoyee",
-   "t": "Oui. Washington interdit toute transaction avec la Cour. La machine recrache même les pièces de vingt centimes.",
+   "t": "Non. Dans son casier, il y a juste un post-it."
+  },
+  {
+   "p": "envoyee",
+   "t": "« Je suis en route. » Il a déjà corrigé quarante copies.",
    "chute": true
+  },
+  {
+   "p": "presentateur",
+   "t": "Monsieur Craie, c'est un échec ?"
   },
   {
    "p": "invite",
-   "t": "C'est une victoire. Pour fêter le prix, on a planté une bougie dans un dossier. Il fait mille pages. Il tient mieux qu'un gâteau.",
-   "chute": true
-  },
-  {
-   "p": "presentateur",
-   "t": "Et les 125 États membres ? La Cour leur demande du soutien.",
-   "d": "Et les cent vingt-cinq États membres ? La Cour leur demande du soutien."
-  },
-  {
-   "p": "envoyee",
-   "t": "Ils ont envoyé cent vingt-cinq gâteaux. Tous bloqués à l'accueil. Sous sanctions.",
+   "t": "Au contraire. Le post-it ne dort jamais. On en a commandé 3 000.",
+   "d": "Au contraire. Le post-it ne dort jamais. On en a commandé trois mille.",
    "chute": true,
    "attente": 0.7
   }
  ],
  "bandeau": [
-  "LA MACHINE À CAFÉ DE LA COUR SE DÉCLARE NEUTRE",
-  "UN JUGE TENTE DE PAYER SON CROISSANT EN JURISPRUDENCE",
-  "LA BOUGIE DU DOSSIER DEMANDE UN AVOCAT",
-  "LA MÉDAILLE DU NOBEL ATTEND SON TOUR À LA DOUANE"
+  "UN REMPLAÇANT APERÇU DANS UN LYCÉE : LES ÉLÈVES INCRÉDULES",
+  "LE POST-IT « JE SUIS EN ROUTE » NOMMÉ PROF PRINCIPAL",
+  "LES ACADÉMIES APPELLENT LES PROFS. ÇA SONNE OCCUPÉ",
+  "15 MILLIONS D'HEURES DE COURS SIGNALÉES DISPARUES"
  ],
  "gag": {
   "replique": 2,
-  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. A serious judge in a black robe feeds a coin into an office coffee vending machine, which spits the coin back at his forehead again and again while he stays perfectly still, comedic, deadpan."
+  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. A deadpan female reporter with a microphone squeezed inside a narrow empty school locker, holding up a single small yellow sticky note while dust floats around her, comedic, deadpan."
  },
- "legende": "Un Nobel de la paix, des sanctions, et cent vingt-cinq gâteaux bloqués à l'accueil. Satire, personnages fictifs.",
+ "legende": "3 000 profs pour 15 millions d'heures. Le rectorat a trouvé la solution : elle colle et ne dort jamais. Satire, personnages fictifs.",
  "hashtags": [
-  "nobeldelapaix",
-  "cpi",
-  "justiceinternationale",
+  "infoencaoutchouc",
+  "education",
+  "profs",
+  "lycee",
   "satire",
-  "humour",
-  "infoencaoutchouc"
+  "humour"
  ],
  "sources": [
-  "https://www.lefigaro.fr/international/prix-nobel-de-la-paix-attribue-a-navi-pillay-ursula-von-der-leyen-salue-une-defenseure-des-persecutes-20261009",
-  "https://www.lefigaro.fr/international/la-cour-penale-internationale-visee-par-des-sanctions-americaines-20261009",
-  "https://www.lemonde.fr/international/article/2026/10/09/les-etats-unis-imposent-des-sanctions-contre-la-cpi-qui-reagit-en-critiquant-une-attaque-contre-l-etat-de-droit_6790614_3210.html",
-  "https://www.franceinfo.fr/monde/prix-nobel/le-prix-nobel-de-la-paix-est-decerne-a-la-sud-africaine-navanethem-navi-pillay-pour-ses-efforts-en-faveur-de-la-promotion-de-la-paix-et-du-droit-international_8229787.html#xtor=RSS-3-[lestitres]"
+  "https://www.bfmtv.com/politique/video-s-il-y-a-3-000-professeurs-en-plus-tant-mieux-mais-on-est-loin-du-compte-par-rapport-aux-15-millions-d-heures-qui-ne-sont-pas-remplacees-declare-francois-kalfon-depute-europeen-ps-place-publique-soutien-de-raphael-glucksmann_VN-202610081013.html",
+  "https://www.franceinfo.fr/societe/education/blocage-des-lycees/cinq-questions-sur-les-3-000-professeurs-mobilises-en-urgence-dans-les-lycees_8229574.html#xtor=RSS-3-[lestitres]",
+  "https://www.bfmtv.com/societe/manifestations/video-colere-lyceenne-le-cout-des-degats-en-marge-du-mouvement-evalue-a-au-moins-30-millions-d-euros_VN-202610090656.html"
  ]
 }
