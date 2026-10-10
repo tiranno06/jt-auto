@@ -1,0 +1,60 @@
+name: Supprimer une vidéo
+
+# Lancé par la croix ✕ d'une vidéo dans la régie (après confirmation).
+on:
+  workflow_dispatch:
+    inputs:
+      fichier:
+        description: "Nom de la vidéo à supprimer (ex. 2026-10-10_11h59_emission.mp4)"
+        required: true
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: emission
+  cancel-in-progress: false
+
+jobs:
+  supprimer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: github-pages
+      url: ${{ steps.pages.outputs.page_url }}
+    env:
+      GH_TOKEN: ${{ github.token }}
+      FICHIER: ${{ inputs.fichier }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Installer ffmpeg
+        run: sudo apt-get install -y -q ffmpeg || true
+      - name: Supprimer
+        run: python moteur/supprimer.py
+      - name: Enregistrer l'historique
+        run: |
+          git config user.name "robot-jt"
+          git config user.email "robot-jt@users.noreply.github.com"
+          git add episodes
+          git commit -m "Suppression : $FICHIER" || echo "rien à enregistrer"
+          git pull --rebase -q || true
+          git push
+      - name: Reconstruire le site
+        run: pip install -q pillow && python moteur/site.py
+      - name: Préparer GitHub Pages
+        continue-on-error: true
+        uses: actions/configure-pages@v5
+      - name: Envoyer le site
+        continue-on-error: true
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - name: Mettre en ligne le site
+        id: pages
+        continue-on-error: true
+        uses: actions/deploy-pages@v4

@@ -72,7 +72,7 @@ def application(nom):
 
 # Service worker : l'appli s'ouvre même hors connexion (dernière version de la page), sans jamais mettre en cache
 # les vidéos (trop lourdes) ni les appels à GitHub.
-SW = r"""const CACHE = "regie-v3";
+SW = r"""const CACHE = "regie-v4";
 const COQUILLE = ["./", "manifest.webmanifest", "icone-192.png", "icone-512.png"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(COQUILLE))); self.skipWaiting(); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(k => Promise.all(k.filter(x => x !== CACHE).map(x => caches.delete(x))))); self.clients.claim(); });
@@ -111,6 +111,8 @@ details{margin-top:10px;font-size:13px;color:var(--doux)}summary{cursor:pointer;
 input{flex:1;min-width:0;font:inherit;font-size:14px;padding:10px;border-radius:10px;border:1px solid var(--ligne);background:#0e0f17;color:var(--texte)}
 .carte{display:flex;gap:12px;background:var(--carte);border:2px solid var(--ligne);border-radius:16px;padding:10px;margin:10px 0;cursor:pointer;transition:border-color .15s,transform .1s}
 .carte:active{transform:scale(.99)}.carte.choisie{border-color:var(--jaune)}
+.carte{position:relative}.croix{position:absolute;top:8px;right:8px;width:34px;height:34px;border-radius:50%;border:none;background:rgba(0,0,0,.35);color:#fff;font-size:18px;line-height:34px;cursor:pointer;padding:0}
+.croix:hover{background:#d33}.carte.supprimee{opacity:.35;pointer-events:none}
 .carte img{width:84px;height:150px;object-fit:cover;border-radius:10px;flex:none;background:#000}
 .infos{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
 .titre{font-weight:700;font-size:16px;line-height:1.25}.date{color:var(--doux);font-size:13px}
@@ -301,9 +303,23 @@ function rendre(){
   if(!DATA.length){L.innerHTML='<p class="vide">Aucune vidéo pour l\'instant.</p>';return}
   DATA.forEach((v,i)=>{
     const c=document.createElement("div");c.className="carte";c.dataset.i=i;
-    c.innerHTML=`<img loading="lazy" src="videos/${v.poster}" alt=""><div class="infos"><div class="titre"></div><div class="date">${dateFr(v.date)}</div>${badge(v)}<div class="etat"></div></div>`;
-    c.querySelector(".titre").textContent=v.titre; c.onclick=()=>choisir(i); L.appendChild(c);
+    c.innerHTML=`<img loading="lazy" src="videos/${v.poster}" alt=""><div class="infos"><div class="titre"></div><div class="date">${dateFr(v.date)}</div>${badge(v)}<div class="etat"></div></div><button class="croix" title="Supprimer cette vidéo" aria-label="Supprimer">✕</button>`;
+    c.querySelector(".titre").textContent=v.titre; c.onclick=()=>choisir(i);
+    c.querySelector(".croix").onclick=(ev)=>{ev.stopPropagation(); supprimer(i,c)}; L.appendChild(c);
   });
+}
+async function supprimer(i,c){
+  const v=DATA[i];
+  if(!lireJeton()){toast("Connectez la régie (onglet Réglages) pour supprimer");return}
+  if(!confirm(`Supprimer définitivement « ${v.titre} » (${dateFr(v.date)}) ?\n\nLa vidéo sera effacée de l'application et des archives. Cette action est irréversible.`)) return;
+  c.classList.add("supprimee"); c.querySelector(".etat").textContent="Suppression en cours…";
+  try{
+    const r=await gh("/actions/workflows/supprimer.yml/dispatches",{method:"POST",body:JSON.stringify({ref:CONF.branche,inputs:{fichier:v.fichier}})});
+    if(r.status!==204) throw new Error("GitHub a répondu "+r.status);
+    toast("Vidéo supprimée. L'application se met à jour dans une ou deux minutes.");
+    c.querySelector(".etat").textContent="Supprimée";
+    if(choisie===i){choisie=null; $("#apercu").style.display="none"; $("#choix").textContent=""; majBoutons()}
+  }catch(e){c.classList.remove("supprimee"); c.querySelector(".etat").textContent=""; toast("Impossible : "+e.message)}
 }
 function majBoutons(){
   const p=$("#publier"); armer=null; p.classList.remove("confirmer");
