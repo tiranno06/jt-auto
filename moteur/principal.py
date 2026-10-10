@@ -207,7 +207,7 @@ def main():
     if sortie:
         with open(sortie, "a") as f:
             f.write(f"video={base}.mp4\nlegende={base}.txt\nnom={os.path.basename(base)}.mp4\nmois={jour[:7]}\ntitre={sk['sujet']}\n"
-                    f"qualite={'ok' if video_ok and (not fiche or fiche.get('note', 0) >= 80) else 'faible'}\n")
+                    f"qualite={'ok' if video_ok and (not fiche or fiche.get('note', 0) >= 80) else 'faible'}\nnote={round(fiche.get('note') or 0)}\n")
     print(f"OK : {base}.mp4 ({duree:.0f} s)")
 
 if __name__ == "__main__":

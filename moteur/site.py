@@ -76,11 +76,19 @@ def application(nom):
 
 # Service worker : l'appli s'ouvre même hors connexion (dernière version de la page), sans jamais mettre en cache
 # les vidéos (trop lourdes) ni les appels à GitHub.
-SW = r"""const CACHE = "regie-v10";
+SW = r"""const CACHE = "regie-v11";
 const COQUILLE = ["./", "manifest.webmanifest", "logo-192.png", "logo-512.png", "poppins-500.ttf", "poppins-700.ttf"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(COQUILLE))); self.skipWaiting(); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(k => Promise.all(k.filter(x => x !== CACHE).map(x => caches.delete(x))))); self.clients.claim(); });
 const garder = (req, r) => { if (r && r.ok) { const c = r.clone(); caches.open(CACHE).then(x => x.put(req, c)); } return r; };
+self.addEventListener("push", e => {
+  let d = {}; try { d = e.data.json(); } catch (_) { d = { titre: "Petits.Dramas", texte: e.data ? e.data.text() : "" }; }
+  e.waitUntil(self.registration.showNotification(d.titre || "Petits.Dramas", { body: d.texte || "", icon: "logo-192.png", badge: "logo-192.png", data: { lien: d.lien || "./" } }));
+});
+self.addEventListener("notificationclick", e => {
+  e.notification.close();
+  e.waitUntil(self.clients.matchAll({ type: "window" }).then(l => l.length ? l[0].focus() : self.clients.openWindow(e.notification.data.lien || "./")));
+});
 self.addEventListener("fetch", e => {
   const u = new URL(e.request.url);
   if (e.request.method !== "GET" || u.origin !== location.origin || u.pathname.endsWith(".mp4")) return;
@@ -257,6 +265,12 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <div class="auto" style="margin-bottom:12px"><div class="txt"><b>Contrôle de la vidéo finie</b><small>Une IA regarde des images de la vidéo (sous-titres, cadrage, décors, texte coupé) avant publication. En cas de défaut grave, pas de publication automatique.</small></div><button class="inter" data-var="CONTROLE_VIDEO" data-def="1" data-bascule="1"></button></div>
     <div class="auto"><div class="txt"><b>Accroche choc en ouverture</b><small>La réplique la plus intrigante est rejouée dès la première seconde, avant le titre.</small></div><button class="inter" data-var="ACCROCHE" data-def="0" data-bascule="1"></button></div>
   </section>
+  <section class="panneau"><h2>🔔 Notifications</h2>
+    <p class="note">Une notification sur cet appareil quand une vidéo est prête, publiée, ou si quelque chose a échoué — même appli fermée. Sur iPhone : l'appli doit d'abord être installée sur l'écran d'accueil. À activer sur chaque appareil.</p>
+    <button class="action" id="activerNotifs">🔔 Activer les notifications sur cet appareil</button>
+    <button class="action" id="testNotif">Envoyer une notification de test</button>
+    <div id="suiviNotif" class="note"></div>
+  </section>
   <section class="panneau"><h2>📊 Statistiques TikTok</h2>
     <label>Compte TikTok de la chaîne<div class="jeton"><input data-var="TIKTOK_COMPTE" data-def="" data-texte="1" maxlength="40" placeholder="votre pseudo, sans @"><button class="second" data-enr="TIKTOK_COMPTE" style="flex:none;padding:10px 14px">OK</button></div></label>
     <p class="note">Chaque matin, le robot lit tout seul les vues, j'aime, commentaires et partages de vos vidéos (page publique du compte), apprend ce qui marche et s'en sert pour les sketchs, les hashtags et l'heure de publication.</p>
@@ -309,6 +323,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
 </div></div>
 <div id="toast"></div>
 <script>
+var VARS={};
 const DATA = __DATA__, CONF = __CONF__;
 const API = "https://api.github.com/repos/" + CONF.depot;
 const $ = s => document.querySelector(s);
@@ -494,7 +509,7 @@ async function chargerReglages(){
   if(!lireJeton()){activer(false);$("#cfgEtat").textContent="";return}
   $("#cfgEtat").textContent="Lecture des réglages…";
   try{
-    const r=await gh("/actions/variables?per_page=50"); const d=await r.json(); const v={};
+    const r=await gh("/actions/variables?per_page=100"); const d=await r.json(); const v={}; VARS=v;
     (d.variables||[]).forEach(x=>v[x.name]=x.value);
     champs().forEach(c=>{const val=(c.dataset.var in v)?v[c.dataset.var]:c.dataset.def;
       if(c.dataset.bascule) c.classList.toggle("on",String(val)!=="0"); else c.value=val;});
@@ -551,6 +566,32 @@ $("#mCreer").onclick=()=>{
   const f=$("#mFormat").value;
   lancerFlux("emission.yml",$("#mCreer"),(f==="mini"?"⚡ Gag éclair":"🎭 Sketch long")+" manuel en fabrication (15 à 40 min). Il apparaîtra dans cet onglet.",{format:f,theme},$("#mSuivi"));
 };
+const b64u=b=>btoa(String.fromCharCode(...new Uint8Array(b))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
+const deB64u=s=>Uint8Array.from(atob(s.replace(/-/g,"+").replace(/_/g,"/")+"===".slice((s.length+3)%4)),c=>c.charCodeAt(0));
+$("#activerNotifs").onclick=async()=>{
+  const z=$("#suiviNotif");
+  try{
+    if(!lireJeton()) throw new Error("connectez d'abord la régie");
+    if(!("serviceWorker" in navigator)||!("PushManager" in window)) throw new Error("cet appareil ne gère pas les notifications (sur iPhone : installez d'abord l'appli sur l'écran d'accueil)");
+    if(await Notification.requestPermission()!=="granted") throw new Error("autorisation refusée : réactivez-la dans les réglages du navigateur");
+    z.textContent="Activation…";
+    if(!Object.keys(VARS).length){const r=await gh("/actions/variables?per_page=100"); (await r.json()).variables.forEach(x=>VARS[x.name]=x.value)}
+    let pub=VARS.VAPID_PUBLIQUE;
+    if(!pub||!VARS.VAPID_PRIVEE){                                   // clés du robot, créées une seule fois
+      const k=await crypto.subtle.generateKey({name:"ECDSA",namedCurve:"P-256"},true,["sign","verify"]);
+      pub=b64u(await crypto.subtle.exportKey("raw",k.publicKey)); const pr=b64u(await crypto.subtle.exportKey("pkcs8",k.privateKey));
+      await ecrireVar("VAPID_PRIVEE",pr); await ecrireVar("VAPID_PUBLIQUE",pub); VARS.VAPID_PRIVEE=pr; VARS.VAPID_PUBLIQUE=pub;
+    }
+    const reg=await navigator.serviceWorker.ready; let ab=await reg.pushManager.getSubscription();
+    if(ab&&b64u(ab.options.applicationServerKey)!==pub){await ab.unsubscribe(); ab=null}
+    if(!ab) ab=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:deB64u(pub)});
+    let l=[]; try{l=JSON.parse(VARS.PUSH_ABONNEMENTS||"[]")}catch(_){}
+    l=l.filter(x=>x.endpoint!==ab.endpoint); l.push(ab.toJSON()); l=l.slice(-6);
+    await ecrireVar("PUSH_ABONNEMENTS",JSON.stringify(l)); VARS.PUSH_ABONNEMENTS=JSON.stringify(l);
+    z.textContent="✅ Notifications activées sur cet appareil ("+l.length+" appareil(s) au total). Touchez « Envoyer une notification de test »."
+  }catch(e){z.textContent="Impossible : "+e.message}
+};
+$("#testNotif").onclick=()=>lancerFlux("notifier.yml",$("#testNotif"),"🔔 Envoi d'une notification de test (environ 30 s)…",{titre:"Petits.Dramas",texte:"Les notifications marchent 🎉"},$("#suiviNotif"));
 $("#lancerStats").onclick=()=>{if(!lireJeton()){toast("Connectez la régie pour lancer la lecture");return}
   lancerFlux("stats.yml",$("#lancerStats"),"📊 Lecture des statistiques TikTok (1 à 3 min)…",null,$("#suiviStats"))};
 {const S=__STATS__, e=$("#statsEtat");

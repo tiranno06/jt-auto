@@ -1,0 +1,42 @@
+name: Réveil de secours
+
+# GitHub saute parfois les réveils planifiés d'un workflow. Ce garde, sur d'autres minutes, vérifie le planning :
+# si une vidéo automatique est due et qu'aucune fabrication n'est en cours, il lance lui-même le robot.
+on:
+  schedule:
+    - cron: "22,52 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  garde:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          sparse-checkout: |
+            moteur/planning.py
+            moteur/stats.py
+            episodes
+      - id: p
+        env:
+          EVENEMENT: schedule
+          FREQUENCE: ${{ vars.FREQUENCE }}
+          HEURE: ${{ vars.HEURE }}
+          BUDGET_MOIS: ${{ vars.BUDGET_MOIS }}
+        run: python3 moteur/planning.py
+      - name: Lancer le robot si le réveil normal a été sauté
+        if: steps.p.outputs.go == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          EN_COURS=$(gh run list -R "$GITHUB_REPOSITORY" -w emission.yml --json status -q '[.[]|select(.status=="in_progress" or .status=="queued" or .status=="pending" or .status=="waiting")]|length')
+          if [ "$EN_COURS" = "0" ]; then
+            gh workflow run emission.yml -R "$GITHUB_REPOSITORY" -f auto=1 && echo "Réveil sauté : robot relancé par le garde."
+          else
+            echo "Une fabrication est déjà en cours : rien à faire."
+          fi

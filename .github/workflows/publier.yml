@@ -11,6 +11,10 @@ on:
         description: "Republier même si elle est déjà publiée"
         required: false
         default: "non"
+      quand:
+        description: "Facultatif : date et heure de publication, heure de Paris (ex. 2026-10-12T18:30). Vide = tout de suite."
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -33,6 +37,12 @@ jobs:
       GH_TOKEN: ${{ github.token }}
       FICHIER: ${{ inputs.fichier }}
       FORCER: ${{ inputs.forcer }}
+      QUAND: ${{ inputs.quand }}
+      PUBLIER_YOUTUBE: ${{ vars.PUBLIER_YOUTUBE }}
+      PUBLIER_INSTAGRAM: ${{ vars.PUBLIER_INSTAGRAM }}
+      VAPID_PRIVEE: ${{ vars.VAPID_PRIVEE }}
+      VAPID_PUBLIQUE: ${{ vars.VAPID_PUBLIQUE }}
+      PUSH_ABONNEMENTS: ${{ vars.PUSH_ABONNEMENTS }}
     steps:
       - uses: actions/checkout@v7
 
@@ -57,6 +67,18 @@ jobs:
       - name: Publier sur TikTok
         if: steps.video.outputs.video != ''
         run: python moteur/publier.py "${{ steps.video.outputs.video }}" "${{ steps.video.outputs.legende }}" "${{ steps.video.outputs.url }}"
+
+      - name: Prévenir le téléphone
+        if: always() && steps.video.outputs.video != ''
+        continue-on-error: true
+        run: |
+          pip install -q cryptography
+          if [ "${{ job.status }}" = "success" ]; then
+            if [ -n "$QUAND" ]; then M="programmée pour le $QUAND"; else M="envoyée à TikTok"; fi
+            python moteur/alerte.py "✅ Vidéo $M" "$FICHIER"
+          else
+            python moteur/alerte.py "❌ Publication échouée" "$FICHIER : voir la régie (Partage manuel possible)."
+          fi
 
       - name: Enregistrer l'historique
         if: always()

@@ -1,0 +1,29 @@
+name: Notification
+
+on:
+  workflow_dispatch:
+    inputs:
+      titre:
+        default: "Petits.Dramas"
+      texte:
+        default: "Test"
+
+permissions:
+  contents: write
+
+jobs:
+  notifier:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    env:
+      VAPID_PRIVEE: ${{ vars.VAPID_PRIVEE }}
+      VAPID_PUBLIQUE: ${{ vars.VAPID_PUBLIQUE }}
+      PUSH_ABONNEMENTS: ${{ vars.PUSH_ABONNEMENTS }}
+      TITRE: ${{ inputs.titre }}
+      TEXTE: ${{ inputs.texte }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - run: pip install -q cryptography && python moteur/alerte.py "$TITRE" "$TEXTE"

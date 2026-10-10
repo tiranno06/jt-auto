@@ -13,6 +13,10 @@ on:
         description: "Type de vidéo : mini (gag éclair), libre (sketch long), actu (JT) ou cycle (3 + 1). Vide = réglage de la régie."
         required: false
         default: ""
+      auto:
+        description: "1 = lancement du réveil de secours (compte comme une vidéo automatique)"
+        required: false
+        default: ""
       theme:
         description: "Vidéo manuelle (onglet Manuel de la régie) : idée ou script (préfixe SCRIPT::). Hors cycle, jamais publiée automatiquement."
         required: false
@@ -38,9 +42,10 @@ jobs:
             episodes
       - id: p
         env:
-          EVENEMENT: ${{ github.event_name }}
+          EVENEMENT: ${{ inputs.auto == '1' && 'schedule' || github.event_name }}
           FREQUENCE: ${{ vars.FREQUENCE }}
           HEURE: ${{ vars.HEURE }}
+          BUDGET_MOIS: ${{ vars.BUDGET_MOIS }}
         run: python3 moteur/planning.py
 
   emission:
@@ -90,9 +95,14 @@ jobs:
       CONTROLE_VIDEO: ${{ vars.CONTROLE_VIDEO }}
       TIKTOK_COMPTE: ${{ vars.TIKTOK_COMPTE }}
       GH_TOKEN: ${{ github.token }}
-      EVENEMENT: ${{ github.event_name }}
+      EVENEMENT: ${{ inputs.auto == '1' && 'schedule' || github.event_name }}
       FREQUENCE: ${{ vars.FREQUENCE }}
       HEURE: ${{ vars.HEURE }}
+      BUDGET_MOIS: ${{ vars.BUDGET_MOIS }}
+      ETAPES_ECO: ${{ vars.ETAPES_ECO }}
+      VAPID_PRIVEE: ${{ vars.VAPID_PRIVEE }}
+      VAPID_PUBLIQUE: ${{ vars.VAPID_PUBLIQUE }}
+      PUSH_ABONNEMENTS: ${{ vars.PUSH_ABONNEMENTS }}
     steps:
       - uses: actions/checkout@v7
 
@@ -148,6 +158,19 @@ jobs:
           TAG="emissions-${{ steps.run.outputs.mois }}"
           gh release view "$TAG" >/dev/null 2>&1 || gh release create "$TAG" --title "Émissions ${{ steps.run.outputs.mois }}" --notes "Vidéos fabriquées par le robot."
           gh release upload "$TAG" "${{ steps.run.outputs.video }}" "${{ steps.run.outputs.legende }}" --clobber
+
+      - name: Prévenir le téléphone (vidéo prête)
+        if: steps.run.outputs.video != ''
+        continue-on-error: true
+        env:
+          TITRE_VIDEO: ${{ steps.run.outputs.titre }}
+          NOTE: ${{ steps.run.outputs.note }}
+        run: python moteur/alerte.py "🎬 Nouvelle vidéo prête" "« $TITRE_VIDEO » — note $NOTE/100. À vérifier dans l'appli."
+
+      - name: Prévenir le téléphone (échec)
+        if: failure()
+        continue-on-error: true
+        run: python moteur/alerte.py "⚠️ Échec de fabrication" "$(grep -v '^  image' episodes/journal.txt 2>/dev/null | tail -n 3 | cut -c1-250)"
 
       - name: Publier sur TikTok (seulement si la publication automatique est activée sur le site)
         if: steps.run.outputs.video != '' && vars.PUBLICATION_AUTO == '1' && steps.run.outputs.qualite != 'faible' && inputs.theme == ''
