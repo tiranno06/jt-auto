@@ -165,6 +165,10 @@ jobs:
       - name: Bibliothèques Python
         run: pip install -r requirements.txt
 
+      - name: Lecteur TikTok (vidéo depuis une bande son)
+        if: startsWith(inputs.theme, 'TIKTOK::')
+        run: pip install -q -U yt-dlp
+
       - name: Déployer les voix (Chatterbox) et le plan gag (Wan 2.2) sur Modal
         if: env.MODAL_TOKEN_ID != ''
         run: |

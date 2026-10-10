@@ -176,8 +176,20 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         if r["p"] == "narrateur" and i not in scene_de:
             scene_de[i] = next((scene_de[j] for j in range(i + 1, len(reps)) if j in scene_de), 0)
     t = 0.15; ph = []; transitions = []                                 # (début, fin, type, scène d'arrivée, texte du carton)
+    DOUB = sk.get("doublage") or None                                      # vidéo construite sur la bande son d'une autre vidéo : minutage imposé
     for i, (r, a) in enumerate(zip(reps, audios)):
         niv, lv = enveloppe(a); dur = len(a) / SR; att = float(r.get("attente", 0))
+        if DOUB:                                                           # chaque réplique démarre à l'instant exact où elle est dite
+            t = float(r["_deb"]); lv = np.convolve(np.pad(lv, 2, mode="edge"), [0.1, 0.2, 0.4, 0.2, 0.1], "valid")
+            sc = scene_de.get(i, ph[-1]["scene"] if ph else 0)
+            if ph and sc != ph[-1]["scene"]:                               # changement de scène : panoramique dans le blanc entre deux répliques
+                d0 = max(ph[-1]["fin"] + 0.05, t - 0.45)
+                if t - d0 >= 0.2: transitions.append((d0, t - 0.02, "panoramique", sc, ""))
+            emo_q = emotion(r.get("d"))
+            ph.append(dict(i=i, p=r["p"], deb=t, fin=t + dur, lv=lv, emo=emo_q, chute=bool(r.get("chute")) or i == len(reps) - 1,
+                           scene=sc, objet=r.get("objet"), teaser=False, texte=r["t"], geste=geste_texte(r["t"], emo_q),
+                           groupes=minutage(r["t"], a, t, (mots or [None] * len(reps))[i])))
+            continue
         if i == len(reps) - 1 and not att and i: att = 0.45                # un temps avant la chute finale
         t += att
         lv = np.convolve(np.pad(lv, 2, mode="edge"), [0.1, 0.2, 0.4, 0.2, 0.1], "valid")         # bouche lissée : pas de clignotement
@@ -200,9 +212,12 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         t += dur + (0.5 if q["chute"] and i < len(reps) - 1 else 0.05 if (vif or r["p"] == "narrateur") else 0.16)
     FIN = ph[-1]["fin"]
     GEL = FIN + 1.15                                                       # arrêt sur image après la réaction finale
+    if DOUB: GEL = max(GEL, min(float(DOUB.get("duree") or 0), FIN + 4.0))   # la bande son continue (musique) : on la laisse finir
     total = GEL + 1.1
     FIN_CARTE = None
-    if not mini and total < 61.5:                                          # vidéo longue : plus d'une minute (rémunération TikTok)
+    if DOUB:                                                               # pas d'allongement artificiel : signature puis fin
+        FIN_CARTE = total; total += 1.3
+    elif not mini and total < 61.5:                                          # vidéo longue : plus d'une minute (rémunération TikTok)
         FIN_CARTE = total; total = 61.5
     elif mini:                                                             # gag éclair : signature de la chaîne (1,3 s)
         FIN_CARTE = total; total += 1.3
@@ -357,7 +372,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             if u < 0.08: g = g + (255 - g) * (0.3 * (1 - u / 0.08))            # petit flash au moment du gel
             return np.clip(g, 0, 255).astype(np.uint8)
         fr = vue(tm)
-        if tm > FIN:                                                       # impact final : secousse qui s'amortit
+        if tm > FIN and not DOUB:                                          # impact final : secousse qui s'amortit
             v = math.exp(-(tm - FIN) * 5) * 22
             fr = np.roll(fr, (int(v * math.sin(tm * 61)), int(v * math.cos(tm * 53))), (0, 1))
         return fr
@@ -452,27 +467,36 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
 
     # ---- son : voix, bruitages (woosh à chaque scène, rimshot à la chute finale)
     n = int(SRM * (total + 1)); mix = np.zeros((n, 2))
-    for q, a in zip(ph, audios):
-        b = vers_mix(a); s0 = int(q["deb"] * SRM); mix[s0:s0 + len(b)] += b[:n - s0]
+    if DOUB:                                                               # la bande son d'origine telle quelle (voix + musique)
+        with wave.open(DOUB["piste"]) as w_:
+            assert w_.getframerate() == SRM and w_.getnchannels() == 2, "piste de doublage : 2 canaux au bon échantillonnage attendus"
+            b = np.frombuffer(w_.readframes(w_.getnframes()), np.int16).reshape(-1, 2).astype(np.float64) / 32768
+        b = b[:int(SRM * (GEL + 1.1))]; f_ = int(0.6 * SRM)                 # fondu sur la fin (arrêt sur image puis signature)
+        if len(b) > f_: b[-f_:] *= np.linspace(1, 0, f_)[:, None]
+        mix[:len(b)] += b[:n]
+    else:
+        for q, a in zip(ph, audios):
+            b = vers_mix(a); s0 = int(q["deb"] * SRM); mix[s0:s0 + len(b)] += b[:n - s0]
     fx = np.zeros((n, 2)); public = np.zeros((n, 2))
     def ajoute(nom, t_, g, piste=None):
         x = SM.son(nom); s0 = int(max(0, t_) * SRM); e = min(n, s0 + len(x)); p_ = fx if piste is None else piste
         if e > s0: p_[s0:e] += x[:e - s0] * g
-    for tr in transitions:                                                 # changements de scène / de gag bien marqués
+    for tr in (() if DOUB else transitions):                              # changements de scène / de gag bien marqués
         ajoute("transition", tr[0] - 0.25, 0.8)
         if tr[2] == "carton": ajoute("pop", tr[0] + 0.05, 0.7)
     if mini:
         for k in TITRES: ajoute("pop", min(z2["deb"] for z2 in ph if z2["scene"] == k) - 0.2, 0.6)
-    for j, q in enumerate(ph[:-1]):
+    for j, q in enumerate([] if DOUB else ph[:-1]):                       # doublage : la bande son d'origine a déjà ses effets
         if q["chute"]:                                                     # vanne en route : impact léger + rires du public
             ajoute("boom_leger", q["fin"] + 0.05, 0.4); ajoute("foule_rire", q["fin"] + 0.12, 0.55, public)
         elif q["emo"] in ("choc", "panique") and j:                        # moment de choc : « oooh » du public
             ajoute("gasp", q["fin"] + 0.05, 0.45, public)
-    d_m = len(SM.son("montee")) / SRM
-    ajoute("montee", ph[-1]["deb"] - d_m, 0.5)                            # tension juste avant la chute finale
-    ajoute("boom_fin", ph[-1]["fin"] + 0.02, 1.0)                         # gros impact sur la chute finale
-    ajoute("foule_rire", ph[-1]["fin"] + 0.25, 0.8, public)               # gros rire du public
-    if len(places[ph[-1]["scene"]]) > 1: ajoute("boom_leger", ph[-1]["fin"] + 0.57, 0.5)   # celui qui encaisse tombe à la renverse
+    if not DOUB:
+        d_m = len(SM.son("montee")) / SRM
+        ajoute("montee", ph[-1]["deb"] - d_m, 0.5)                        # tension juste avant la chute finale
+        ajoute("boom_fin", ph[-1]["fin"] + 0.02, 1.0)                     # gros impact sur la chute finale
+        ajoute("foule_rire", ph[-1]["fin"] + 0.25, 0.8, public)           # gros rire du public
+        if len(places[ph[-1]["scene"]]) > 1: ajoute("boom_leger", ph[-1]["fin"] + 0.57, 0.5)   # celui qui encaisse tombe à la renverse
     ajoute("pop", GEL, 0.5)                                                # arrêt sur image
     if FIN_CARTE is not None: ajoute("pop", FIN_CARTE, 0.6)
     voix_env = np.convolve(np.abs(mix[:, 0]), np.ones(int(0.15 * SRM)) / int(0.15 * SRM), "same")

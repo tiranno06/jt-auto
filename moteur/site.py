@@ -82,7 +82,7 @@ def application(nom):
 
 # Service worker : l'appli s'ouvre même hors connexion (dernière version de la page), sans jamais mettre en cache
 # les vidéos (trop lourdes) ni les appels à GitHub.
-SW = r"""const CACHE = "regie-v20";
+SW = r"""const CACHE = "regie-v22";
 const COQUILLE = ["./", "manifest.webmanifest", "logo-192.png", "logo-512.png", "poppins-500.ttf", "poppins-700.ttf"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(COQUILLE))); self.skipWaiting(); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(k => Promise.all(k.filter(x => x !== CACHE).map(x => caches.delete(x))))); self.clients.claim(); });
@@ -229,14 +229,18 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
       <p><button class="second" id="oublier" style="padding:8px 12px">Déconnecter ce navigateur</button></p>
     </details>
   </section>
-  <section class="panneau" id="manuel" style="display:none"><h2>✍️ Créer une vidéo à partir de mon texte</h2>
+  <section class="panneau" id="manuelSec" style="display:none"><h2>✍️ Créer une vidéo à partir de mon texte</h2>
     <p class="note">À part du robot automatique : la vidéo n'entre pas dans le cycle et n'est jamais publiée toute seule. Elle apparaît ici quand elle est prête (15 à 40 min).</p>
     <label>Ce que je tape<select id="mMode">
       <option value="idee">💡 Une idée ou un thème : le robot écrit le sketch</option>
-      <option value="script">📝 Mon script : les répliques sont jouées mot pour mot</option></select></label>
-    <label><span id="mAide">Idée / thème de la vidéo</span><textarea id="mTexte" rows="6" maxlength="1800" placeholder="Ex. : Jojo essaie de résilier son abonnement de salle de sport, mais le conseiller ne le laisse jamais partir."></textarea></label>
-    <label>Format<select id="mFormat"><option value="mini">⚡ Gag éclair (15-25 s)</option><option value="libre">🎭 Sketch long (+1 min)</option></select></label>
-    <label>Rendu<select id="mRendu"><option value="">🎨 Dessin animé (Jojo, Kévin, Lila)</option><option value="realiste">🎬 Réaliste, filmé par l'IA (coûte des crédits ElevenLabs)</option></select></label>
+      <option value="script">📝 Mon script : les répliques sont jouées mot pour mot</option>
+      <option value="tiktok">🔗 Le son d'une vidéo TikTok : nos personnages la rejouent</option></select></label>
+    <div id="mTiktok" style="display:none"><label>Lien de la vidéo TikTok<input id="mLien" type="url" inputmode="url" placeholder="https://www.tiktok.com/@compte/video/…"></label>
+      <p class="note">Le robot récupère le son (voix et musique), repère qui parle et quand, puis reconstitue la scène, les décors et le jeu de Jojo, Kévin et Lila en play-back exact. Le compte d'origine est crédité dans la description. 3 min au plus.<br>
+      ⚠️ Le crédit ne remplace pas l'autorisation : sans accord du créateur, TikTok peut couper le son ou retirer la vidéo. Privilégiez vos propres vidéos, des créateurs qui vous ont dit oui, ou les sons proposés à la réutilisation.</p></div>
+    <label id="mTexteL"><span id="mAide">Idée / thème de la vidéo</span><textarea id="mTexte" rows="6" maxlength="1800" placeholder="Ex. : Jojo essaie de résilier son abonnement de salle de sport, mais le conseiller ne le laisse jamais partir."></textarea></label>
+    <label id="mFormatL">Format<select id="mFormat"><option value="mini">⚡ Gag éclair (15-25 s)</option><option value="libre">🎭 Sketch long (+1 min)</option></select></label>
+    <label id="mRenduL">Rendu<select id="mRendu"><option value="">🎨 Dessin animé (Jojo, Kévin, Lila)</option><option value="realiste">🎬 Réaliste, filmé par l'IA (coûte des crédits ElevenLabs)</option></select></label>
     <label id="mStyleL">Ton<select id="mStyle"><option value="">Comme d'habitude (humour noir)</option><option value="Ton encore plus absurde et délirant.">Plus absurde</option><option value="Ton plus méchant et plus cash.">Plus méchant</option><option value="Ton plus tendre, humour bienveillant.">Plus tendre</option></select></label>
     <button class="action" id="mCreer">🎬 Créer la vidéo</button>
     <div id="mSuivi" class="note"></div>
@@ -643,7 +647,7 @@ $("#copierLien").onclick=async()=>{try{await navigator.clipboard.writeText(lienC
 document.querySelectorAll(".onglet").forEach(b=>b.onclick=()=>{
   document.querySelectorAll(".onglet").forEach(x=>x.classList.toggle("actif",x===b));
   if(b.dataset.f){FILTRE=b.dataset.f; if(choisie!==null&&categorie(DATA[choisie])!==FILTRE) fermerVideo(); rendre();
-    $("#manuel").style.display=FILTRE==="manuel"?"":"none"; document.querySelector("#o-videos .panneau:not(#manuel)").style.display=FILTRE==="manuel"?"none":""}
+    $("#manuelSec").style.display=FILTRE==="manuel"?"":"none"; document.querySelector("#o-videos .panneau:not(#manuelSec)").style.display=FILTRE==="manuel"?"none":""}
   $("#o-videos").style.display=b.dataset.o==="videos"?"":"none"; $("#o-config").style.display=b.dataset.o==="config"?"":"none";
   $("#o-stats").style.display=b.dataset.o==="stats"?"":"none"; if(b.dataset.o==="stats") rendreStats();
   $("#barre").style.display=b.dataset.o==="videos"?"":"none"; document.body.dataset.onglet=b.dataset.o; if(b.dataset.o==="config") chargerReglages();
@@ -759,12 +763,19 @@ async function lancerFlux(fichier,bouton,texte,inputs,zone,fini){
 $("#lancer").onclick=()=>lancerFlux("emission.yml",$("#lancer"),"📰 Le robot fabrique un JT d'actualité (20 à 40 min)…",{format:"actu"});
 $("#lancerMini").onclick=()=>lancerFlux("emission.yml",$("#lancerMini"),"⚡ Le robot fabrique un gag éclair (15 à 30 min)…",{format:"mini"});
 $("#lancerLibre").onclick=()=>lancerFlux("emission.yml",$("#lancerLibre"),"🎭 Le robot fabrique un sketch long (20 à 40 min)…",{format:"libre"});
-$("#mMode").onchange=()=>{const s=$("#mMode").value==="script";
+$("#mMode").onchange=()=>{const s=$("#mMode").value==="script", tk=$("#mMode").value==="tiktok";
+  $("#mTiktok").style.display=tk?"":"none"; ["#mTexteL","#mFormatL","#mRenduL"].forEach(x=>$(x).style.display=tk?"none":"");
   $("#mAide").textContent=s?"Mon script (une réplique par ligne : « Jojo : … », « Kévin : … », « Lila : … »)":"Idée / thème de la vidéo";
   $("#mTexte").placeholder=s?"Jojo : Je vais résilier ma salle de sport.\nKévin : T'y es allé combien de fois ?\nJojo : Une. Pour m'inscrire.\nLila : Donc tu payes 30 € par mois pour un souvenir.":"Ex. : Jojo essaie de résilier son abonnement de salle de sport, mais le conseiller ne le laisse jamais partir.";
-  $("#mStyleL").style.display=s?"none":""};
+  $("#mStyleL").style.display=(s||tk)?"none":""};
 $("#mCreer").onclick=()=>{
   if(!lireJeton()){toast("Connectez la régie (onglet Réglages) pour créer une vidéo");return}
+  if($("#mMode").value==="tiktok"){
+    const u=$("#mLien").value.trim();
+    if(!/^https?:\/\/([a-z0-9-]+\.)*tiktok\.com\/\S+$/i.test(u)){toast("Collez un lien de vidéo TikTok (https://www.tiktok.com/… ou https://vm.tiktok.com/…)");return}
+    lancerFlux("emission.yml",$("#mCreer"),"🔗 Vidéo sur le son TikTok en fabrication (15 à 40 min). Elle apparaîtra dans cet onglet.",{format:"mini",theme:"TIKTOK::"+u},$("#mSuivi"));
+    return;
+  }
   const t=$("#mTexte").value.trim(); if(t.length<8){toast("Tapez d'abord votre idée ou votre script");return}
   const script=$("#mMode").value==="script";
   if(script&&!/^\s*[^:\n]{1,25}:/m.test(t)){toast("Format du script : une réplique par ligne, « Jojo : … »");return}

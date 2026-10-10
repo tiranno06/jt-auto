@@ -428,8 +428,6 @@ class TestRendu(unittest.TestCase):
         self.assertAlmostEqual(g[-1][2], 11.8)
 
 
-if __name__ == "__main__":
-    unittest.main()
 
 
 class TestSousTitres(unittest.TestCase):
@@ -499,3 +497,20 @@ class TestQualiteMinimale(unittest.TestCase):
         try:
             with self.assertRaises(ecrire.QualiteInsuffisante): ecrire.ecrire_sketch(cands, essais=1)
         finally: os.environ["FORCER_FABRICATION"] = "1"
+
+
+class TestDoublage(unittest.TestCase):
+    def test_liens_et_repliques(self):
+        import doublage
+        self.assertTrue(doublage.lien_valide("https://www.tiktok.com/@compte/video/123"))
+        self.assertTrue(doublage.lien_valide("https://vm.tiktok.com/ZMabc/"))
+        self.assertFalse(doublage.lien_valide("https://youtube.com/watch?v=1"))
+        mots = [{"w": w, "s": i * 0.4, "e": i * 0.4 + 0.3, "voix": "speaker_0" if i < 4 else "speaker_1"} for i, w in enumerate("Salut ça va ? Bof , et toi".split())]
+        segs = doublage.segments(mots)
+        self.assertEqual([s["voix"] for s in segs], ["speaker_0", "speaker_1"])
+        self.assertEqual(segs[0]["t"], "Salut ça va?")
+        self.assertAlmostEqual(segs[1]["deb"], 1.6)
+
+
+if __name__ == "__main__":
+    unittest.main()

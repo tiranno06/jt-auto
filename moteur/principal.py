@@ -110,8 +110,11 @@ def main():
     print(f"Type de vidéo : {'gag éclair (~15 s)' if fmt == 'mini' else 'sketch long (+1 min)' if libre else 'JT actu du jour'}", flush=True)
     recents = [f"{h.get('titre', '')} : {h.get('accroche', '')}" for h in historique[-10:]]
     # 1. recherche : sujets candidats (articles des dernières 24 h, regroupés par sujet et classés par reprise médiatique)
-    script = None
-    if THEME:                                                              # vidéo manuelle : le thème (ou le script) tapé dans la régie
+    script = None; tiktok = None; DOUB = None
+    if THEME.startswith("TIKTOK::"):                                       # vidéo construite sur la bande son d'une vidéo TikTok
+        tiktok = THEME.split("::", 1)[1].strip()
+        candidats = [([{"titre": "Bande son TikTok", "resume": tiktok, "lien": tiktok, "date": None, "source": "tiktok"}], "tiktok")]
+    elif THEME:                                                              # vidéo manuelle : le thème (ou le script) tapé dans la régie
         mode_script = THEME.startswith("SCRIPT::"); texte = THEME.split("::", 1)[1].strip() if "::" in THEME[:12] else THEME
         print(f"Vidéo manuelle ({'script' if mode_script else 'idée'}) : « {texte[:200]} »", flush=True)
         if mode_script: script = texte
@@ -151,6 +154,10 @@ def main():
     if REFAIRE_MODE in ("voix", "decors"):                                 # mêmes répliques : on refait seulement les voix / les décors
         sk = SK_ANCIEN; sk["_monte"] = True
         print(f"Refaire ({REFAIRE_MODE}) : « {sk.get('sujet')} », mêmes répliques", flush=True)
+    elif tiktok:
+        import doublage
+        sk, *DOUB = doublage.preparer(tiktok)
+        fmt = "libre" if sk["doublage"]["duree"] >= 60 else "mini"         # rangée en vidéo longue au-delà d'une minute
     elif script:                                                           # script tapé : les répliques restent mot pour mot
         sk = ecrire.mettre_en_scene(script)
     elif test:                                                             # sketch écrit à la main (essai d'un style)
@@ -217,8 +224,10 @@ def main():
             mots = [[(m, d / f, e / f) for m, d, e in (x or [])] or None for x in mots]
         return audios, credits_voix, mots, moteur
 
-    REALISTE = libre and ((os.environ.get("RENDU") or "") == "realiste" or (AUTO and (os.environ.get("REALISTE_AUTO") or "0") == "1"))
-    if REALISTE: audios, credits_voix, mots, moteur = [], ["Veo 3.1 via ElevenLabs"], None, "Veo 3.1"   # le son vient de la vidéo réaliste
+    REALISTE = libre and not DOUB and ((os.environ.get("RENDU") or "") == "realiste" or (AUTO and (os.environ.get("REALISTE_AUTO") or "0") == "1"))
+    if DOUB:                                                               # bande son d'origine : pas de voix à fabriquer
+        audios, mots = DOUB; credits_voix = [f"bande son d'origine (@{sk['doublage']['auteur']})"]; moteur = "bande son TikTok"
+    elif REALISTE: audios, credits_voix, mots, moteur = [], ["Veo 3.1 via ElevenLabs"], None, "Veo 3.1"   # le son vient de la vidéo réaliste
     else: audios, credits_voix, mots, moteur = voix_et_minutage()
     jour = datetime.date.today().isoformat()
     heure = datetime.datetime.now(ZoneInfo("Europe/Paris")).strftime("%Hh%M")      # nom unique même si l'historique a été remis à zéro
@@ -259,7 +268,7 @@ def main():
     if libre:                                                              # signature de la chaîne dans les hashtags
         sk["hashtags"] = list(dict.fromkeys(["petitsdramas"] + [h for h in sk["hashtags"] if h != "petitsdramas"]))[:7]
     if num: sk["legende"] = f"Épisode {num} · {sk['serie_titre']} — {sk['legende']}"
-    legende = f"{sk['legende']}" + (f"\n\n{sk['question']}" if sk.get("question") else "") + "\n\n" + " ".join("#" + h for h in sk["hashtags"]) + "\n\nContenu généré par IA."     # outils et crédits : seulement dans l'historique, jamais dans la légende
+    legende = f"{sk['legende']}" + (f"\n\n{sk['question']}" if sk.get("question") else "") + (f"\n\n{doublage.credit(sk)}" if DOUB else "")   # crédit du son d'origine + "\n\n" + " ".join("#" + h for h in sk["hashtags"]) + "\n\nContenu généré par IA."     # outils et crédits : seulement dans l'historique, jamais dans la légende
     open(base + ".txt", "w", encoding="utf-8").write(legende + "\n\nSources :\n" + "\n".join(sk["sources"]) + "\n")
     os.makedirs("episodes", exist_ok=True)
     json.dump(sk, open(f"episodes/{jour}.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
@@ -275,6 +284,7 @@ def main():
         historique[-1]["refait_de"] = REFAIRE.split("|")[0]
         if ANCIEN and ANCIEN.get("manuel"): historique[-1]["manuel"] = True
     if AUTO: historique[-1]["auto"] = True
+    if DOUB: historique[-1]["source_audio"] = sk["doublage"]["source"]; historique[-1]["theme"] = "Bande son : " + sk["doublage"]["source"]
     historique[-1]["couts"] = couts(); print(f"Dépenses : {historique[-1]['couts']}", flush=True)
     if libre and duree:
         try:
