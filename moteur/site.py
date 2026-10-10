@@ -81,7 +81,7 @@ def application(nom):
 
 # Service worker : l'appli s'ouvre même hors connexion (dernière version de la page), sans jamais mettre en cache
 # les vidéos (trop lourdes) ni les appels à GitHub.
-SW = r"""const CACHE = "regie-v12";
+SW = r"""const CACHE = "regie-v13";
 const COQUILLE = ["./", "manifest.webmanifest", "logo-192.png", "logo-512.png", "poppins-500.ttf", "poppins-700.ttf"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(COQUILLE))); self.skipWaiting(); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(k => Promise.all(k.filter(x => x !== CACHE).map(x => caches.delete(x))))); self.clients.claim(); });
@@ -197,6 +197,12 @@ label .jeton{margin-top:6px}
   #barre video{max-height:62vh}
 }
 textarea{resize:vertical}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 10px}
+.chip{padding:7px 11px;border-radius:999px;font-size:13px;background:var(--carte);color:var(--texte);border:1px solid var(--ligne)}
+#jours .chip{width:40px;padding:8px 0;color:var(--doux)} #jours .chip.on{background:var(--jaune);color:#111;border-color:var(--jaune)}
+.creneau{display:flex;gap:6px;align-items:center;margin:6px 0}
+.creneau input[type=time]{flex:0 0 108px} .creneau select{flex:1;margin:0} .creneau .second{flex:0 0 42px;padding:9px 0}
+.auto-h{flex:0 0 108px;font-weight:700;color:var(--jaune);text-align:center}
 label>textarea{display:block;width:100%;margin-top:6px;box-sizing:border-box}
 .onglet.reg{flex:0 0 42px;padding:10px 0}
 @media (max-width:420px){.onglet{font-size:12.5px}.onglets{gap:6px;padding:8px 10px}}
@@ -244,17 +250,29 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
   </section>
   <p class="note" id="cfgEtat"></p>
   <section class="panneau"><h2>🎬 Programme</h2>
-    <label>Type de vidéos (émissions automatiques)<select data-var="FORMAT" data-def="cycle">
-      <option value="cycle">⭐ Cycle croissance : 3 gags éclair de 15 s puis 1 sketch long de +1 min (recommandé)</option>
-      <option value="mini">⚡ Gags éclair uniquement (15 s)</option>
-      <option value="libre">🎭 Sketchs longs uniquement (+1 min, rémunérables)</option>
-      <option value="actu">📰 JT d'actualité (ancien format)</option></select></label>
-    <p class="note">Le cycle enchaîne 3 vidéos courtes, qui font monter les abonnés, puis 1 vidéo de plus d'une minute, la seule durée payée par TikTok (programme « Creator Rewards » : 10 000 abonnés et 100 000 vues sur 30 jours). Avec deux émissions par jour, un cycle complet dure deux jours.</p>
+    <label>Type des vidéos automatiques<select id="selFormat" class="perso">
+      <option value="cycle">⭐ Cycle croissance : 3 gags éclair puis 1 sketch long</option>
+      <option value="seq">🧩 Ma séquence personnalisée (je compose l'ordre)</option>
+      <option value="mini">⚡ Gags éclair uniquement</option>
+      <option value="libre">🎭 Sketchs longs uniquement</option>
+      <option value="actu">📰 JT d'actualité uniquement</option></select></label>
+    <div id="seqBloc" style="display:none">
+      <p class="note">Composez l'ordre des vidéos automatiques ; il se répète en boucle. Touchez une étiquette pour la retirer.</p>
+      <div id="seqChips" class="chips"></div>
+      <div class="ligne2"><button class="second perso" data-ajout="mini">+ ⚡ Gag</button><button class="second perso" data-ajout="libre">+ 🎭 Long</button><button class="second perso" data-ajout="actu">+ 📰 JT</button></div>
+      <button class="action perso" id="seqEnr">Enregistrer la séquence</button>
+    </div>
+    <p class="note">Les vidéos de plus d'une minute sont les seules payées par TikTok (10 000 abonnés et 100 000 vues sur 30 jours) ; les courtes font monter les abonnés. Un créneau du planning peut aussi imposer son propre type.</p>
   </section>
   <section class="panneau"><h2>📅 Planning</h2>
-    <label>Rythme des émissions<select data-var="FREQUENCE" data-def="1"><option value="2x">Deux par jour (12 h + heure choisie, conseillé avec le cycle)</option><option value="1">Une par jour</option><option value="2">Un jour sur deux</option><option value="3">Un jour sur trois</option><option value="0">⏸ Pause (le robot ne produit plus)</option></select></label>
-    <label>Heure de fabrication (heure de Paris)<select data-var="HEURE" data-def="17" id="selHeure"></select></label>
-    <p class="note">La vidéo est prête environ 20 à 40 minutes après cette heure. 17 h = publiée pour le pic d'audience de 18 h à 21 h. « Automatique » : le robot choisit l'heure d'après les vues de vos vidéos (17 h tant qu'il y a moins de 8 vidéos).</p>
+    <label>Rythme<select data-var="FREQUENCE" data-def="1"><option value="1">Tous les jours cochés</option><option value="2">Un jour sur deux</option><option value="3">Un jour sur trois</option><option value="0">⏸ Pause (le robot ne produit plus)</option><option value="2x" hidden>Deux par jour (ancien réglage)</option></select></label>
+    <p class="note" style="margin-bottom:4px">Jours de fabrication</p>
+    <div id="jours" class="chips"></div>
+    <p class="note" style="margin-bottom:4px">Créneaux (heure de Paris) et type de vidéo pour chacun</p>
+    <div id="creneaux"></div>
+    <div class="ligne2"><button class="second perso" id="ajCreneau">+ Ajouter un créneau</button><button class="second perso" id="ajAuto">+ Créneau 📊 automatique</button></div>
+    <button class="action perso" id="planEnr">Enregistrer le planning</button>
+    <p class="note">La vidéo est prête 20 à 40 minutes après l'heure du créneau (le robot se réveille toutes les 30 minutes et rattrape un créneau manqué). « 📊 automatique » : l'heure qui fait le plus de vues sur vos statistiques (17 h tant qu'il y a moins de 8 vidéos).</p>
   </section>
   <section class="panneau"><h2>✍️ Écriture</h2>
     <label>Note minimale pour la publication automatique<select data-var="SEUIL_PUBLICATION" data-def="80"><option value="90">90/100</option><option value="85">85/100</option><option value="80">80/100 (recommandé)</option><option value="75">75/100</option><option value="70">70/100</option></select></label>
@@ -414,8 +432,26 @@ function badge(v){
 }
 // ------------------------------------------------ onglet Statistiques (vues, dépenses, alertes)
 const ALERTES = __ALERTES__;
+let STATS_LIVE=__STATS__, DERNIERE_MAJ=0;
+// actualisation automatique des statistiques : au lancement, puis toutes les heures (et au retour sur l'appli après plus d'une heure)
+async function actualiserStats(){
+  if(!CONF.depot) return; const base=`https://raw.githubusercontent.com/${CONF.depot}/${CONF.branche}/episodes/`;
+  try{
+    const [h,st]=await Promise.all([fetch(base+"historique.json",{cache:"no-store"}).then(r=>r.ok?r.json():null),
+                                   fetch(base+"stats.json",{cache:"no-store"}).then(r=>r.ok?r.json():null)]);
+    if(Array.isArray(h)){const par={}; h.forEach(e=>{if(e.fichier)par[e.fichier]=e});
+      DATA.forEach(v=>{const e=par[v.fichier]; if(!e)return; ["vues","likes","commentaires","partages","publie","couts"].forEach(k=>{if(e[k]!==undefined)v[k]=e[k]})})}
+    if(st&&st.compte){const vids=st.videos||[]; STATS_LIVE={compte:st.compte,maj:st.maj||"",videos:vids.length,
+      vues:vids.reduce((a,x)=>a+(x.vues||0),0),liees:vids.filter(x=>x.fichier).length}}
+    DERNIERE_MAJ=Date.now();
+    if(document.body.dataset.onglet==="stats") rendreStats();
+    else if(document.body.dataset.onglet==="videos"){rendre(); if(choisie!==null) document.querySelectorAll(".carte").forEach(c=>c.classList.toggle("choisie",+c.dataset.i===choisie))}
+  }catch(e){}
+}
+setTimeout(actualiserStats,1500); setInterval(actualiserStats,3600*1000);
+document.addEventListener("visibilitychange",()=>{if(!document.hidden&&Date.now()-DERNIERE_MAJ>3600*1000) actualiserStats()});
 function rendreStats(){
-  const S=__STATS__, Z=$("#o-stats"), fr=n=>Number(n||0).toLocaleString("fr-FR");
+  const S=STATS_LIVE, Z=$("#o-stats"), fr=n=>Number(n||0).toLocaleString("fr-FR");
   const pub=DATA.filter(v=>v.publie===true), vues=pub.reduce((a,v)=>a+(v.vues||0),0);
   const mois=new Date().toISOString().slice(0,7), duMois=DATA.filter(v=>(v.date||"").startsWith(mois));
   const usd=duMois.reduce((a,v)=>a+((v.couts||{}).claude_usd||0),0), car=duMois.reduce((a,v)=>a+((v.couts||{}).eleven_caracteres||0),0), gpu=duMois.reduce((a,v)=>a+((v.couts||{}).gpu_s||0),0);
@@ -568,8 +604,45 @@ document.querySelectorAll(".onglet").forEach(b=>b.onclick=()=>{
   $("#barre").style.display=b.dataset.o==="videos"?"":"none"; document.body.dataset.onglet=b.dataset.o; if(b.dataset.o==="config") chargerReglages();
 });
 // ------------------------------------------------ réglages (variables du dépôt GitHub)
-{const o=document.createElement("option");o.value="auto";o.textContent="📊 Automatique (heure qui fait le plus de vues)";$("#selHeure").appendChild(o)}
-for(let h=5;h<=22;h++){const o=document.createElement("option");o.value=h;o.textContent=h+" h";$("#selHeure").appendChild(o)}
+// ------------------------------------------------ programme et planning personnalisés
+const NOMS_F={mini:"⚡ Gag",libre:"🎭 Long",actu:"📰 JT"}; let SEQ=["mini","mini","mini","libre"], CREN=[], JOURS=new Set([1,2,3,4,5,6,7]);
+function dessinerSeq(){const z=$("#seqChips"); z.innerHTML="";
+  SEQ.forEach((f,i)=>{const b=document.createElement("button");b.className="chip perso";b.textContent=(i+1)+". "+NOMS_F[f]+" ✕";b.onclick=()=>{SEQ.splice(i,1);dessinerSeq()};z.appendChild(b)});
+  if(!SEQ.length) z.innerHTML='<span class="note">Séquence vide : ajoutez au moins une vidéo.</span>'}
+document.querySelectorAll("[data-ajout]").forEach(b=>b.onclick=()=>{if(SEQ.length<30){SEQ.push(b.dataset.ajout);dessinerSeq()}});
+$("#selFormat").onchange=async()=>{const v=$("#selFormat").value; $("#seqBloc").style.display=v==="seq"?"":"none"; if(v==="seq"){dessinerSeq();return}
+  try{await ecrireVar("FORMAT",v);toast("Réglage enregistré ✓")}catch(e){toast("Impossible : "+e.message)}};
+$("#seqEnr").onclick=async()=>{if(!SEQ.length){toast("Ajoutez au moins une vidéo");return}
+  try{await ecrireVar("FORMAT","seq:"+SEQ.join(","));toast("Séquence enregistrée ✓")}catch(e){toast("Impossible : "+e.message)}};
+function lireHoraires(brut){CREN=[];JOURS=new Set([1,2,3,4,5,6,7]); brut=String(brut||"17").toLowerCase();
+  if(brut.includes("|jours=")){const [a,j]=brut.split("|jours=");brut=a;const s=new Set([...j].filter(c=>"1234567".includes(c)).map(Number));if(s.size)JOURS=s}
+  brut.split(";").map(x=>x.trim()).filter(Boolean).forEach(m=>{let [h,f]=m.split("=");h=h.trim();f=(f||"programme").trim();
+    if(h==="auto"){CREN.push({h:"auto",f});return} let [hh,mm]=h.replace("h",":").split(":");hh=+hh;mm=+(mm||0);
+    if(!isNaN(hh)&&hh>=0&&hh<24) CREN.push({h:String(hh).padStart(2,"0")+":"+String(mm).padStart(2,"0"),f})});
+  if(!CREN.length) CREN=[{h:"17:00",f:"programme"}]}
+function dessinerPlanning(){const z=$("#creneaux"); z.innerHTML="";
+  CREN.forEach((c,i)=>{const l=document.createElement("div");l.className="creneau";
+    l.innerHTML=(c.h==="auto"?'<span class="auto-h">📊 Auto</span>':`<input type="time" class="perso" value="${c.h}">`)+
+      `<select class="perso"><option value="programme">Selon le programme</option><option value="mini">⚡ Gag éclair</option><option value="libre">🎭 Sketch long</option><option value="actu">📰 JT</option></select><button class="second perso" title="Retirer">✕</button>`;
+    const t=l.querySelector("input"); if(t) t.onchange=()=>{c.h=t.value||c.h};
+    const s=l.querySelector("select"); s.value=c.f; s.onchange=()=>{c.f=s.value};
+    l.querySelector("button").onclick=()=>{CREN.splice(i,1);dessinerPlanning()}; z.appendChild(l)});
+  const j=$("#jours"); j.innerHTML="";
+  ["L","M","M","J","V","S","D"].forEach((n,k)=>{const b=document.createElement("button");b.className="chip perso"+(JOURS.has(k+1)?" on":"");b.textContent=n;
+    b.title=["lundi","mardi","mercredi","jeudi","vendredi","samedi","dimanche"][k];
+    b.onclick=()=>{JOURS.has(k+1)?JOURS.delete(k+1):JOURS.add(k+1);b.classList.toggle("on")};j.appendChild(b)})}
+$("#ajCreneau").onclick=()=>{if(CREN.length<12){CREN.push({h:"18:00",f:"programme"});dessinerPlanning()}};
+$("#ajAuto").onclick=()=>{if(!CREN.some(c=>c.h==="auto")){CREN.push({h:"auto",f:"programme"});dessinerPlanning()}};
+$("#planEnr").onclick=async()=>{
+  if(!CREN.length){toast("Ajoutez au moins un créneau");return} if(!JOURS.size){toast("Cochez au moins un jour");return}
+  const tri=[...CREN].sort((a,b)=>a.h==="auto"?1:b.h==="auto"?-1:a.h.localeCompare(b.h));
+  let v=tri.map(c=>c.h+(c.f&&c.f!=="programme"?"="+c.f:"")).join(";"); if(JOURS.size<7) v+="|jours="+[...JOURS].sort().join("");
+  try{await ecrireVar("HEURE",v);toast("Planning enregistré ✓ ("+tri.length+" créneau"+(tri.length>1?"x":"")+")")}catch(e){toast("Impossible : "+e.message)}};
+function chargerPerso(v){const f=String(v.FORMAT||"cycle");
+  if(f.startsWith("seq:")){SEQ=f.slice(4).split(",").filter(x=>NOMS_F[x]);$("#selFormat").value="seq";$("#seqBloc").style.display=""}
+  else{$("#selFormat").value=["cycle","mini","libre","actu"].includes(f)?f:"cycle";$("#seqBloc").style.display="none"}
+  dessinerSeq(); lireHoraires(v.HEURE); dessinerPlanning()}
+lireHoraires("17"); dessinerPlanning(); dessinerSeq();
 $("#lienActions").href="https://github.com/"+CONF.depot+"/actions";
 async function ecrireVar(nom,valeur){
   const corps=JSON.stringify({name:nom,value:String(valeur)});
@@ -578,7 +651,7 @@ async function ecrireVar(nom,valeur){
   if(!r.ok) throw new Error("GitHub a répondu "+r.status);
 }
 const champs=()=>document.querySelectorAll("#o-config [data-var]");
-function activer(on){champs().forEach(c=>c.disabled=!on);document.querySelectorAll("#o-config .action,[data-enr]").forEach(b=>b.disabled=!on)}
+function activer(on){champs().forEach(c=>c.disabled=!on);document.querySelectorAll("#o-config .action,[data-enr],#o-config .perso").forEach(b=>b.disabled=!on)}
 $("#garder2").onclick=()=>{const v=$("#jeton2").value.trim(); if(!v)return; ecrireJeton(v); $("#jeton2").value=""; lireAuto(); majBoutons(); chargerReglages()};
 async function chargerReglages(){
   $("#cfgConnexion").style.display=lireJeton()?"none":""; $("#appairage").style.display=lireJeton()?"":"none";
@@ -589,7 +662,7 @@ async function chargerReglages(){
     (d.variables||[]).forEach(x=>v[x.name]=x.value);
     champs().forEach(c=>{const val=(c.dataset.var in v)?v[c.dataset.var]:c.dataset.def;
       if(c.dataset.bascule) c.classList.toggle("on",String(val)!=="0"); else c.value=val;});
-    activer(true); $("#cfgEtat").textContent="Régie connectée ✓ — chaque changement est enregistré immédiatement.";
+    chargerPerso(v); activer(true); $("#cfgEtat").textContent="Régie connectée ✓ — chaque changement est enregistré immédiatement.";
   }catch(e){$("#cfgEtat").textContent="Erreur : "+e.message+" — vérifiez la clé (droits Actions et Variables).";activer(false);
     if(/jeton refusé/.test(e.message)) $("#cfgConnexion").style.display=""}
 }

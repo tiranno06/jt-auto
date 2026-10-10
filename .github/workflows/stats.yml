@@ -2,7 +2,7 @@ name: Statistiques TikTok
 
 on:
   schedule:
-    - cron: "23 5 * * *"        # chaque matin : vues, j'aime, commentaires, partages de la chaîne
+    - cron: "23 * * * *"        # toutes les heures : vues, j'aime, commentaires, partages de la chaîne (l'appli se met à jour seule)
   workflow_dispatch:
     inputs:
       pseudos:
