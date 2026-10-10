@@ -166,6 +166,9 @@ def main():
     accroche_hist = sk["repliques"][0]["t"] if sk.get("repliques") else ""
     if LOT and serie.etat().get("titre"): sk["serie_titre"] = serie.etat()["titre"]   # l'épisode compte toujours dans la saison
     num = serie.prochain()[0] if (libre and serie.actif() and sk.get("serie_titre") and not REFAIRE) else None
+    if num:                                                                # fin d'épisode : rendez-vous pour la suite (série)
+        total_ep = len(serie.etat().get("plan") or []) or serie.taille()
+        sk["suite"] = f"Épisode {num + 1} bientôt : abonne-toi !" if num < total_ep else "Fin de la saison : abonne-toi !"
     if libre and sk.get("titre_accroche") and os.environ.get("VOIX_OFF", "1") != "0" and not sk.get("_monte"):
         titre_lu = sk["titre_accroche"].strip()                             # voix off d'ouverture : elle lit le titre « POV : … »
         if num: titre_lu = f"Épisode {num}. {titre_lu}"

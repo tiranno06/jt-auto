@@ -59,6 +59,9 @@ def signature(W, H, sous_titre="Abonne-toi pour la suite !"):
     d = ImageDraw.Draw(img); f = ImageFont.truetype(POLICE, 118); f2 = ImageFont.truetype(POLICE, 64)
     w = d.textlength(NOM, font=f); _texte_contour(d, ((W - w) / 2, H * 0.56), NOM, f, ep=13)
     if sous_titre:
+        taille = 64
+        while d.textlength(sous_titre, font=f2) > W - 140 and taille > 34:     # texte long (« Épisode 3 bientôt… ») : il rapetisse pour tenir
+            taille -= 2; f2 = ImageFont.truetype(POLICE, taille)
         w2 = d.textlength(sous_titre, font=f2)
         d.rounded_rectangle(((W - w2) / 2 - 40, H * 0.69 - 18, (W + w2) / 2 + 40, H * 0.69 + 92), 50, fill=ENCRE)
         d.text(((W - w2) / 2, H * 0.69), sous_titre, font=f2, fill=JAUNE)
