@@ -43,6 +43,16 @@ def resserrer(audios, sk, cible=None):
         with wave.open(f"{tmp}/{i}b.wav") as w: sortie.append(np.frombuffer(w.readframes(w.getnframes()), np.int16).astype(np.float32) / 32768)
     return sortie
 
+GPU = {"s": 0.0}                                                          # secondes de GPU Modal (décors)
+
+def couts():
+    """Dépenses de cette vidéo : Claude (dollars, calculés sur les jetons), ElevenLabs (caractères = crédits), GPU Modal (secondes)."""
+    try:
+        import voix_banque; car = voix_banque.CARACTERES["elevenlabs"]
+    except Exception: car = 0
+    return {"claude_usd": round(ecrire.USAGE.get("cout", 0.0), 3), "claude_jetons": ecrire.USAGE["entree"] + ecrire.USAGE["sortie"],
+            "cache_lu": ecrire.USAGE.get("cache_lu", 0), "eleven_caracteres": car, "gpu_s": round(GPU["s"])}
+
 def decaler(sk, pos):
     """Une réplique a été insérée en `pos` : on décale les indices du découpage et du plan gag."""
     for sc in sk.get("decoupage") or []: sc["repliques"] = [i + 1 if i >= pos else i for i in sc.get("repliques", [])]
@@ -151,7 +161,9 @@ def main():
     if libre:                                                              # sketch libre / gag éclair : moteur cartoon animé
         try:
             import cartoon, decors as decors_mod
-            if modal_ok and os.environ.get("DECORS", "1") != "0": decors = decors_mod.generer(sk.get("decoupage"), graine=len(historique) + 7)
+            if modal_ok and os.environ.get("DECORS", "1") != "0":
+                t_gpu = datetime.datetime.now(); decors = decors_mod.generer(sk.get("decoupage"), graine=len(historique) + 7)
+                GPU["s"] += (datetime.datetime.now() - t_gpu).total_seconds()
             duree = cartoon.rendre(sk, base + ".mp4", audios, mots=mots, decors=decors, mini=fmt == "mini")
             if not test and cartoon.MINUTAGE:                              # piste 13 : une IA regarde la vidéo finie
                 import controle
@@ -184,6 +196,9 @@ def main():
     json.dump(historique[-200:], open("episodes/historique.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     if THEME: historique[-1]["manuel"] = True; historique[-1]["theme"] = THEME[:300]
     if AUTO: historique[-1]["auto"] = True
+    historique[-1]["couts"] = couts(); print(f"Dépenses : {historique[-1]['couts']}", flush=True)
+    os.makedirs("episodes/sketchs", exist_ok=True)                         # le sketch de chaque vidéo : « Refaire », exemples 👍
+    json.dump(sk, open(f"episodes/sketchs/{os.path.basename(base)}.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     json.dump(historique[-200:], open("episodes/historique.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     if libre and not test and not THEME:
         n_ep = serie.enregistrer(sk, os.path.basename(base) + ".mp4")

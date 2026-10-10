@@ -185,7 +185,7 @@ class FauxClaude:
             out = json.loads(json.dumps(SKETCH)); out["sources"] = self.sources
             out["concept"] = "Le budget au restaurant. Note qualité interne : 84/100. Décision : prêt pour production."
         self.reecritures.append(kw["messages"][-1]["content"]) if "rendre_sketch" in noms else None
-        self.systemes.append(kw.get("system", ""))
+        s_ = kw.get("system", ""); self.systemes.append("".join(b.get("text", "") for b in s_) if isinstance(s_, list) else s_)
         bloc = types.SimpleNamespace(type="tool_use", name=noms[0], input=out)
         return types.SimpleNamespace(content=[bloc], usage=types.SimpleNamespace(input_tokens=100, output_tokens=50))
 

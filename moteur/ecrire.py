@@ -106,8 +106,8 @@ Les dialogues sont joués UNIQUEMENT par ces trois personnages. Le format choisi
 
 PERSONNES RÉELLES : tu peux citer une personnalité publique uniquement pour un fait vérifié présent dans les sources (ce qu'elle a réellement dit ou fait). Tu ne lui fais JAMAIS dire ou faire quoi que ce soit d'inventé, même pour rire : la caricature passe par nos personnages fictifs. Aucune consigne de vote.
 
-HUMOUR NOIR ASSUMÉ, SANS FILTRE (règle du propriétaire) : aucune autocensure. Va au bout de chaque vanne, ne l'adoucis jamais, ne t'excuse jamais, aucune morale. Autorisés et encouragés : l'humour noir (mort, maladie, vieillesse, misère, déprime, échec), le cynisme total, la méchanceté envers les puissants, l'auto-dérision violente, les grossièretés et les insultes entre personnages, les vannes crues et les sous-entendus sexuels entre adultes, les sujets tabous du quotidien. Une vanne qui choque mais fait rire vaut mieux qu'une vanne sage.
-SEULES LIMITES (non négociables) : on rit des comportements, jamais de ce que les gens sont — aucune vanne contre une origine, une religion, une couleur de peau, une orientation sexuelle, un genre ou un handicap ; rien de sexuel impliquant des mineurs ; aucune fausse citation ni fausse action attribuée à une personne réelle comme si elle était vraie ; on ne se moque pas des vraies victimes d'un vrai drame (on peut en revanche massacrer les responsables).
+HUMOUR NOIR ASSUMÉ, SANS FILTRE (règle du propriétaire) : aucune autocensure. Va au bout de chaque vanne, ne l'adoucis jamais, ne t'excuse jamais, aucune morale. Autorisés et encouragés : l'humour noir (mort, maladie, vieillesse, misère, déprime, échec), le cynisme total, la méchanceté envers les puissants, l'auto-dérision violente, l'humour lourd et beauf assumé, les grossièretés, les gros mots et les insultes bien salées entre personnages, l'humour sur le sexe et les sous-entendus bien gras entre adultes (sans description explicite), la guerre des sexes et les clichés de couple, les vannes sur les masculinistes, les féministes, les « mâles alpha » et les donneurs de leçons de tous bords, la satire des religions comme institutions (rituels absurdes, hypocrisie, interdits, business de la foi, gourous), les sujets tabous du quotidien. Une vanne qui choque mais fait rire vaut mieux qu'une vanne sage.
+SEULES LIMITES (non négociables) : on rit des comportements, des idées et des institutions, jamais de ce que les gens sont — aucune vanne qui rabaisse des personnes pour leur origine, leur couleur de peau, leur orientation sexuelle, leur handicap, ni les croyants ou les femmes / les hommes en tant que groupe inférieur (on se moque du masculiniste, pas des hommes ; du dogme, pas des fidèles) ; rien de sexuel impliquant des mineurs ; aucune fausse citation ni fausse action attribuée à une personne réelle comme si elle était vraie ; on ne se moque pas des vraies victimes d'un vrai drame (on peut en revanche massacrer les responsables).
 
 STYLE MAISON (validé par le public) : {ton}
 
@@ -151,7 +151,7 @@ SUJET PRINCIPAL : {sujet}
 Fiche et script (format vidéo animée {secondes} s, voix synthétiques ; les actions visuelles et le découpage comptent pour le potentiel visuel) :
 {sketch}
 {exigences}
-Humour noir, cru et sans filtre voulu par le propriétaire : ne retire JAMAIS de points parce qu'une vanne est noire, vulgaire ou choquante ; retire-en si une vanne est sage, prudente ou édulcorée. (Seule exception : une vanne contre une origine, une religion, une couleur de peau, une orientation, un genre ou un handicap, ou contre de vraies victimes, est à supprimer.)
+Humour noir, cru et sans filtre voulu par le propriétaire : ne retire JAMAIS de points parce qu'une vanne est noire, vulgaire ou choquante ; retire-en si une vanne est sage, prudente ou édulcorée. Lourd, beauf, salace, insultant entre personnages, satire des religions et des masculinistes / féministes : tout est permis. (Seule exception : une vanne qui rabaisse des gens pour leur origine, leur couleur de peau, leur orientation, leur handicap, ou les croyants / un sexe en tant que groupe, ou qui vise de vraies victimes, est à supprimer.)
 Rends la note avec l'outil noter_sketch. Le champ "critique" est OBLIGATOIRE et non vide : cite les répliques faibles (numéro + pourquoi) et propose ce qu'il faut changer."""
 
 REECRITURE = """Ton sketch a obtenu {note}/100 (objectif : au moins {seuil}). Critique du relecteur :
@@ -189,7 +189,7 @@ Articles :
 2. Écris 15 CHUTES en {type_chute} sur ce sujet, toutes différentes dans leur mécanique (aveu, chiffre, retournement, langue de bois, conséquence absurde mais logique).
 Rends le tout avec l'outil atelier_vannes."""
 
-JURY = """Tu es le jury d'une émission satirique française : un public TikTok de 18-35 ans, impitoyable, fan d'humour noir, qui ne rit que si c'est vraiment drôle, surprenant, méchant et osé. Une vanne sage, prudente ou consensuelle ne dépasse pas 4. (Une vanne qui s'en prend à une origine, une religion, une couleur de peau, une orientation, un genre ou un handicap, ou qui se moque de vraies victimes, vaut 0.)
+JURY = """Tu es le jury d'une émission satirique française : un public TikTok de 18-35 ans, impitoyable, fan d'humour noir, qui ne rit que si c'est vraiment drôle, surprenant, méchant et osé. Une vanne sage, prudente ou consensuelle ne dépasse pas 4. Le lourd, le beauf, le salace, les insultes et la satire des religions ou des masculinistes / féministes sont bienvenus. (Une vanne qui rabaisse des gens pour leur origine, leur couleur de peau, leur orientation, leur handicap, ou les croyants / un sexe en tant que groupe, ou qui se moque de vraies victimes, vaut 0.)
 Sujet : « {sujet} »
 VANNES :
 {vannes}
@@ -418,17 +418,27 @@ def _decoupage(dec, n):
         out.append(x)
     return out
 
-USAGE = {"appels": 0, "entree": 0, "sortie": 0, "recherches_web": 0}                          # suivi du budget (jetons consommés)
+USAGE = {"appels": 0, "entree": 0, "sortie": 0, "recherches_web": 0, "cache_lu": 0, "cache_ecrit": 0, "cout": 0.0}
+# prix en dollars par million de jetons (entrée, sortie) — page « Pricing » de la plateforme Claude, octobre 2026
+PRIX = {"claude-opus-5-5": (4.0, 20.0), "claude-sonnet-5-5": (2.0, 10.0), "claude-haiku-4-5": (1.0, 5.0)}
+ECO = (os.environ.get("ETAPES_ECO") or "0") == "1"                         # réglage : étapes simples sur un modèle moins cher
+MODELE_ECO = "claude-sonnet-5-5"                          # suivi du budget (jetons consommés)
 
 def _appel(client, systeme, messages, outil=OUTIL, web=False, max_tokens=12000, modele=None):
     """Appel Claude ; renvoie l'entrée de l'outil demandé (ou un JSON trouvé dans le texte). Recherche web si possible."""
     outils = [outil] + ([RECHERCHE_WEB] if web else [])
     kw = dict(model=modele or MODELE, max_tokens=max_tokens, messages=messages, tools=outils, tool_choice={"type": "auto"})
-    if systeme: kw["system"] = systeme
+    if systeme:                                                            # longues consignes mises en cache : relues à 5 % du prix
+        kw["system"] = [{"type": "text", "text": systeme, "cache_control": {"type": "ephemeral"}}]
     try:
         r = client.messages.create(**kw)
         u = getattr(r, "usage", None)
-        if u: USAGE["entree"] += getattr(u, "input_tokens", 0) or 0; USAGE["sortie"] += getattr(u, "output_tokens", 0) or 0; USAGE["appels"] += 1
+        if u:
+            e_, s_ = getattr(u, "input_tokens", 0) or 0, getattr(u, "output_tokens", 0) or 0
+            cl, ce = getattr(u, "cache_read_input_tokens", 0) or 0, getattr(u, "cache_creation_input_tokens", 0) or 0
+            USAGE["entree"] += e_; USAGE["sortie"] += s_; USAGE["appels"] += 1; USAGE["cache_lu"] += cl; USAGE["cache_ecrit"] += ce
+            pe, ps = PRIX.get(kw["model"], PRIX["claude-opus-5-5"])
+            USAGE["cout"] += (e_ * pe + s_ * ps + cl * pe * 0.05 + ce * pe * 1.25) / 1e6
         if web:
             n_web = getattr(getattr(u, "server_tool_use", None), "web_search_requests", None)
             if n_web is None: n_web = sum(1 for b in r.content if getattr(b, "type", "") == "server_tool_use")
@@ -506,13 +516,13 @@ def atelier(client, systeme, titres, contexte="", type_chute="fausse vérité ir
     try:
         at = _appel(client, systeme, [{"role": "user", "content": ATELIER.format(sujet=titres[0]["titre"], articles=_bloc_candidat(0, titres),
                                                                           contexte=contexte, technique=TECHNIQUE_PUNCHLINE, type_chute=type_chute)}],
-                    OUTIL_ATELIER, max_tokens=6000)
+                    OUTIL_ATELIER, max_tokens=6000, modele=MODELE_ECO if ECO else None)
         vannes = [str(v).strip() for v in at.get("vannes", []) if str(v).strip()][:20]
         chutes = [str(c).strip() for c in at.get("chutes", []) if str(c).strip()][:20]
         if not chutes: raise ValueError("aucune chute proposée")
         j = _appel(client, None, [{"role": "user", "content": JURY.format(sujet=titres[0]["titre"],
                    vannes="\n".join(f"{i}. {v}" for i, v in enumerate(vannes)), chutes="\n".join(f"{i}. {c}" for i, c in enumerate(chutes)))}],
-                   OUTIL_JURY, max_tokens=4000)
+                   OUTIL_JURY, max_tokens=4000, modele=MODELE_ECO if ECO else None)
         nc = [float(x) if isinstance(x, (int, float)) else 0.0 for x in j.get("notes_chutes", [])]
         i = int(j.get("meilleure_chute", max(range(len(nc)), key=nc.__getitem__) if nc else 0))
         i = i if 0 <= i < len(chutes) else 0
@@ -541,7 +551,7 @@ def idees_libres(recents=(), n=6, consignes=""):
         try:
             import serie as _serie
             r = _appel(client, None, [{"role": "user", "content": IDEES.format(secondes=SECONDES, recents=rtxt, style=STYLE_LIBRE) + _serie.idees() + (("\n" + consignes) if consignes else "")}],
-                       OUTIL_IDEES, max_tokens=6000)
+                       OUTIL_IDEES, max_tokens=6000, modele=MODELE_ECO if ECO else None)
         except Exception as e:
             if _bloquant(e):
                 print(f"  ARRÊT : accès à l'API Claude impossible ({str(e)[:400]}). Action requise : console.anthropic.com > Settings > Limits (plafond de dépenses) ou Billing (crédit).", flush=True)
@@ -694,7 +704,7 @@ def relire(client, sk):
     textes = [lire(c) for c in cibles]
     try:
         r = _appel(client, None, [{"role": "user", "content": RELECTURE.format(textes="\n".join(f"{i + 1}. {t}" for i, t in enumerate(textes)))}],
-                   OUTIL_RELECTURE, max_tokens=3000)
+                   OUTIL_RELECTURE, max_tokens=3000, modele=MODELE_ECO if ECO else None)
         corr = [re.sub(r"^\s*\d+\.\s*", "", str(x)).strip() for x in _liste(r.get("textes"))]
     except Exception as e:
         print(f"  relecture impossible ({str(e)[:100]}) : textes gardés tels quels", flush=True); return sk

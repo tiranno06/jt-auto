@@ -33,6 +33,13 @@ def decision():
     faites = 0
     if os.path.exists(h):                                                  # seules les vidéos AUTOMATIQUES du jour comptent
         faites = sum(1 for e in json.load(open(h, encoding="utf-8")) if e.get("date") == jour.isoformat() and e.get("auto"))
+    budget = (os.environ.get("BUDGET_MOIS") or "").strip().replace(",", ".")
+    if budget and os.path.exists(h):                                       # plafond de dépenses Claude du mois (réglage de la régie)
+        mois = jour.isoformat()[:7]
+        depense = sum((e.get("couts") or {}).get("claude_usd", 0) for e in json.load(open(h, encoding="utf-8")) if str(e.get("date", "")).startswith(mois))
+        try:
+            if depense >= float(budget): return False, f"budget du mois atteint ({depense:.2f} $ sur {float(budget):.2f} $)"
+        except ValueError: pass
     if faites >= dus: return False, f"vidéo(s) automatique(s) du jour déjà faite(s) ({faites}/{len(creneaux)})"
     return True, f"créneau de {creneaux[dus - 1]} h ({faites + 1}/{len(creneaux)} aujourd'hui)"
 

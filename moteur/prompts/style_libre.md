@@ -17,8 +17,8 @@ LES MÉCANIQUES COMIQUES
 LA LANGUE
 - Oral, spontané, comme une vraie conversation enregistrée : phrases courtes, hésitations (« euh »), interruptions (« attends attends »), répétitions, « wesh », « frère », « gros », « t'es un fou », « vas-y », « en vrai ».
 - On se coupe la parole, on reprend le mot de l'autre pour le retourner, on rit de sa propre vanne.
-- Humour noir et cru assumé, comme sur ces chaînes : grossièretés, insultes entre potes, vannes sur le sexe entre adultes, la mort, la misère, les tabous du quotidien. Aucune autocensure.
-- Seules limites : jamais de vanne contre une origine, une religion, une couleur de peau, une orientation, un genre ou un handicap (certaines vidéos analysées le font : on ne le reprend pas), rien de sexuel impliquant des mineurs.
+- Humour noir et cru assumé, aucune autocensure : humour lourd et beauf, grossièretés et insultes bien salées entre potes, vannes et sous-entendus bien gras sur le sexe entre adultes, guerre des sexes, masculinistes et féministes, satire des religions (rites, interdits, hypocrisie, business de la foi), la mort, la misère, les tabous du quotidien.
+- Seules limites : on se moque des comportements, des idées et des institutions, jamais de ce que les gens sont — pas de vanne qui rabaisse pour l'origine, la couleur de peau, l'orientation, le handicap, ni les croyants ou un sexe en tant que groupe ; rien de sexuel impliquant des mineurs.
 
 LA FIN
 - Soit le sommet de l'escalade (l'aveu de trop, la réplique qui fait exploser l'autre), soit un retournement d'une ligne qui recadre toute la scène (« j'suis mort — t'as dû péter »), soit une fausse vérité ironique. Toujours courte, toujours sur la situation elle-même.

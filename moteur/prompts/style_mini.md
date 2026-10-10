@@ -37,3 +37,5 @@ POURQUOI ÇA MARCHE : une situation que tout le monde connaît, posée dès la 1
 des aveux qui montent d'un cran à chaque réplique ; des phrases courtes (moins de 12 mots) au langage de tous les jours, sans jargon ni référence obscure ;
 un seul lieu, trois personnages qui jouent chacun leur rôle (celui qui se ment, celui qui appuie, celle qui tranche) ; une coupure de parole ;
 la chute est une fausse vérité ironique sur le sujet même, qu'on comprend sans réfléchir. Aucune explication, aucune réplique de trop.
+
+TON (règle du propriétaire) : aucune autocensure. Humour lourd et beauf assumé, gros mots et insultes salées entre personnages, sous-entendus bien gras sur le sexe entre adultes, guerre des sexes, masculinistes et féministes, satire des religions (rites, interdits, hypocrisie). On se moque des comportements, des idées et des institutions, jamais de ce que les gens sont (origine, couleur de peau, orientation, handicap, croyants ou un sexe en tant que groupe) ; rien de sexuel impliquant des mineurs.

@@ -92,6 +92,7 @@ def elevenlabs(voix, textes):
     for t in textes:
         if "elevenlabs" in EN_PANNE: out.append(b""); continue
         corps = {"text": t, "model_id": ELEVEN_MODELE}
+        CARACTERES["elevenlabs"] += len(t)
         avant, apres = CONTEXTE.get(t, ("", ""))
         if avant: corps["previous_text"] = sans_tags(avant)[:500]
         if apres: corps["next_text"] = sans_tags(apres)[:500]
@@ -126,6 +127,7 @@ def dialogue(lignes, tmp):
     if cur: paquets.append(cur)
     for j, pq in enumerate(paquets):
         corps = {"inputs": [{"text": lignes[k][1], "voice_id": lignes[k][0]} for k in pq], "model_id": ELEVEN_MODELE}
+        CARACTERES["elevenlabs"] += sum(len(lignes[k][1]) for k in pq)
         if j: corps["previous_text"] = " ".join(sans_tags(lignes[k][1]) for k in paquets[j - 1])[-800:]
         if j + 1 < len(paquets): corps["future_text"] = " ".join(sans_tags(lignes[k][1]) for k in paquets[j + 1])[:800]
         try:
@@ -185,6 +187,7 @@ def azure(voix, textes):
     return out
 
 EN_PANNE = set()                                                          # moteurs qui ont échoué pendant cette exécution
+CARACTERES = {"elevenlabs": 0}                                             # caractères envoyés à ElevenLabs (= crédits consommés)
 
 def _distant(app, cls, methode, *args, delai=600):
     """Appel Modal avec délai maximal : un moteur qui ne démarre pas ne bloque plus le robot."""
