@@ -24,3 +24,16 @@ LA DIRECTION ARTISTIQUE (pour le moteur vidéo)
 - Accessoires dessinés au trait simple et peu nombreux : portefeuille, téléphone, distributeur de billets, scooter, stand de rue, micro, billets.
 - Titre en gros caractères noirs gras, centré au-dessus du personnage, qui change à chaque temps de la blague.
 - Animation légère : rebond, tremblement, pluie d'objets, zoom sur le visage au moment du cri.
+
+EXEMPLE DE RÉFÉRENCE VALIDÉ PAR LE PROPRIÉTAIRE (« clair, limpide, facile à comprendre, clean ») — le niveau à viser :
+Jojo : [determined] Bon. Aujourd'hui, je résilie ma salle de sport.
+Kévin : [laughs] T'y es allé combien de fois, cette année ?
+Jojo : [proudly] Une fois. Pour m'inscrire.
+Lila : [sarcastic] Donc tu payes trente euros par mois… pour un souvenir.
+Jojo : [annoyed] C'est pas un souvenir, c'est une motivation —
+Kévin : [laughing] Une motivation à quoi ? À payer ?
+Lila : [deadpan] Rassure-toi, Jojo : tu fais du sport tous les mois. Ton compte en banque maigrit.
+POURQUOI ÇA MARCHE : une situation que tout le monde connaît, posée dès la 1re phrase ; une question simple qui fait craquer le personnage ;
+des aveux qui montent d'un cran à chaque réplique ; des phrases courtes (moins de 12 mots) au langage de tous les jours, sans jargon ni référence obscure ;
+un seul lieu, trois personnages qui jouent chacun leur rôle (celui qui se ment, celui qui appuie, celle qui tranche) ; une coupure de parole ;
+la chute est une fausse vérité ironique sur le sujet même, qu'on comprend sans réfléchir. Aucune explication, aucune réplique de trop.

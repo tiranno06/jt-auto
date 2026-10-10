@@ -28,3 +28,10 @@ LA DIRECTION ARTISTIQUE (pour le moteur vidéo)
 - Plan fixe face caméra, le personnage qui parle à l'écran, alternance des deux personnages au rythme du dialogue.
 - Titre en haut de l'écran, dans un cadre blanc arrondi, visible pendant toute la vidéo.
 - Sous-titres mot par mot en grosses majuscules blanches cerclées de noir.
+
+NIVEAU DE CLARTÉ EXIGÉ (exemple validé par le propriétaire : « clair, limpide, facile à comprendre, clean ») :
+Jojo : [determined] Bon. Aujourd'hui, je résilie ma salle de sport. / Kévin : [laughs] T'y es allé combien de fois, cette année ? / Jojo : [proudly] Une fois. Pour m'inscrire. /
+Lila : [sarcastic] Donc tu payes trente euros par mois… pour un souvenir. / Jojo : [annoyed] C'est pas un souvenir, c'est une motivation — / Kévin : [laughing] Une motivation à quoi ? À payer ? /
+Lila : [deadpan] Rassure-toi, Jojo : tu fais du sport tous les mois. Ton compte en banque maigrit.
+Chaque gag du sketch long doit avoir cette limpidité : situation connue posée en une phrase, question simple, aveux qui montent, phrases courtes du quotidien,
+rôles nets, chute en fausse vérité ironique comprise sans réfléchir. Si une réplique demande un effort pour être comprise, réécris-la plus simplement.
