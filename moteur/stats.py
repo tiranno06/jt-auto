@@ -35,7 +35,7 @@ def _videos_ytdlp(nom, limite=60):
     """Liste des vidéos de la chaîne (la page du profil donne souvent déjà les compteurs) ; sinon, vidéo par vidéo."""
     base = [sys.executable, "-m", "yt_dlp", "--ignore-errors", "--no-warnings", "--playlist-end", str(limite)]
     r = subprocess.run(base + ["--flat-playlist", "-J", f"https://www.tiktok.com/@{nom}"], capture_output=True, text=True, timeout=600)
-    try: entrees = json.loads(r.stdout or "{}").get("entries") or []
+    try: entrees = (json.loads(r.stdout or "{}") or {}).get("entries") or []
     except ValueError: entrees = []
     if entrees: print(f"Stats : {len(entrees)} vidéos listées ; champs : {sorted(entrees[0])[:25]}", flush=True)
     out = [_info(e) for e in entrees]
@@ -44,14 +44,21 @@ def _videos_ytdlp(nom, limite=60):
         r2 = subprocess.run(base + ["--dump-json", "--skip-download", v["url"]], capture_output=True, text=True, timeout=120)
         try: v.update({k: x for k, x in _info(json.loads(r2.stdout.splitlines()[0])).items() if x})
         except (ValueError, IndexError): pass
-    if not out: print(f"Stats : aucune vidéo lue sur @{nom} ({(r.stderr or '').strip()[-300:]})", flush=True)
+    if not out:
+        vide = "any videos" in (r.stderr or "") or not (r.stderr or "").strip() or r.stdout.strip() == "null"
+        print(f"Stats @{nom} : " + ("aucune vidéo publiée pour l'instant (normal pour un compte neuf)." if vide
+                                    else f"lecture impossible ({(r.stderr or '').strip()[-300:]})"), flush=True)
     return out
 
 def collecter():
     nom = compte()
     if not nom: print("Stats : compte TikTok non réglé (régie > Réglages > Statistiques TikTok).", flush=True); return False
     videos = _videos_ytdlp(nom)
-    if not videos: return False
+    if not videos:
+        os.makedirs(os.path.dirname(FICHIER), exist_ok=True)
+        json.dump({"maj": datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="minutes"), "compte": nom, "videos": []},
+                  open(FICHIER, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+        return False
     hist = json.load(open(HIST, encoding="utf-8")) if os.path.exists(HIST) else []
     par_cle = {}
     for h in hist:

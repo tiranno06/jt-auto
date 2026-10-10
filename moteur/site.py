@@ -42,7 +42,11 @@ def construire():
     import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import marque
     nom = marque.NOM                                                       # nom de la chaîne (le JT garde son propre nom)
     conf = {"depot": os.environ.get("GITHUB_REPOSITORY", ""), "branche": os.environ.get("GITHUB_REF_NAME") or "main"}
-    page = (PAGE.replace("__NOM__", html.escape(nom)).replace("__CONF__", json.dumps(conf))
+    try: st = json.load(open(os.path.join(RACINE, "episodes", "stats.json"), encoding="utf-8"))
+    except (OSError, ValueError): st = {}
+    resume = {"compte": st.get("compte", ""), "maj": st.get("maj", ""), "videos": len(st.get("videos", [])),
+              "vues": sum(v.get("vues", 0) for v in st.get("videos", [])), "liees": sum(1 for v in st.get("videos", []) if v.get("fichier"))}
+    page = (PAGE.replace("__NOM__", html.escape(nom)).replace("__CONF__", json.dumps(conf)).replace("__STATS__", json.dumps(resume, ensure_ascii=False))
             .replace("__DATA__", json.dumps(liste, ensure_ascii=False).replace("</", "<\\/")))
     open(os.path.join(SITE, "index.html"), "w", encoding="utf-8").write(page)
     open(os.path.join(SITE, ".nojekyll"), "w").close()
@@ -70,7 +74,7 @@ def application(nom):
 
 # Service worker : l'appli s'ouvre même hors connexion (dernière version de la page), sans jamais mettre en cache
 # les vidéos (trop lourdes) ni les appels à GitHub.
-SW = r"""const CACHE = "regie-v7";
+SW = r"""const CACHE = "regie-v8";
 const COQUILLE = ["./", "manifest.webmanifest", "icone-192.png", "icone-512.png"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(COQUILLE))); self.skipWaiting(); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(k => Promise.all(k.filter(x => x !== CACHE).map(x => caches.delete(x))))); self.clients.claim(); });
@@ -242,7 +246,9 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
   <section class="panneau"><h2>📊 Statistiques TikTok</h2>
     <label>Compte TikTok de la chaîne<div class="jeton"><input data-var="TIKTOK_COMPTE" data-def="" data-texte="1" maxlength="40" placeholder="votre pseudo, sans @"><button class="second" data-enr="TIKTOK_COMPTE" style="flex:none;padding:10px 14px">OK</button></div></label>
     <p class="note">Chaque matin, le robot lit tout seul les vues, j'aime, commentaires et partages de vos vidéos (page publique du compte), apprend ce qui marche et s'en sert pour les sketchs, les hashtags et l'heure de publication.</p>
+    <p class="note" id="statsEtat"></p>
     <button class="action" id="lancerStats">📊 Lire les statistiques maintenant</button>
+    <div id="suiviStats" class="note"></div>
   </section>
   <section class="panneau"><h2>🎥 Vidéo animée</h2>
     <div class="auto" style="margin-bottom:12px"><div class="txt"><b>Voix ElevenLabs</b><small>Voix réalistes avec rires et coups de colère (abonnement ElevenLabs). Coupé : voix gratuites.</small></div><button class="inter" data-var="ELEVENLABS" data-def="1" data-bascule="1"></button></div>
@@ -528,7 +534,13 @@ $("#mCreer").onclick=()=>{
   const f=$("#mFormat").value;
   lancerFlux("emission.yml",$("#mCreer"),(f==="mini"?"⚡ Gag éclair":"🎭 Sketch long")+" manuel en fabrication (15 à 40 min). Il apparaîtra dans cet onglet.",{format:f,theme},$("#mSuivi"));
 };
-$("#lancerStats").onclick=()=>lancerFlux("stats.yml",$("#lancerStats"),"📊 Lecture des statistiques TikTok (1 à 3 min)…");
+$("#lancerStats").onclick=()=>{if(!lireJeton()){toast("Connectez la régie pour lancer la lecture");return}
+  lancerFlux("stats.yml",$("#lancerStats"),"📊 Lecture des statistiques TikTok (1 à 3 min)…",null,$("#suiviStats"))};
+{const S=__STATS__, e=$("#statsEtat");
+ e.textContent=!S.compte?"Aucune lecture pour l'instant : enregistrez le compte (bouton OK) puis lancez la lecture."
+  :"Dernière lecture de @"+S.compte+(S.maj?" le "+new Date(S.maj).toLocaleString("fr-FR",{dateStyle:"short",timeStyle:"short"}):"")+" : "
+   +(S.videos?S.videos+" vidéo(s), "+S.vues.toLocaleString("fr-FR")+" vues au total, "+S.liees+" reliée(s) aux vidéos du robot."
+   :"aucune vidéo publiée pour l'instant (normal pour un compte neuf).")}
 $("#majsite").onclick=()=>lancerFlux("site.yml",$("#majsite"),"🔄 Mise à jour de l'application (2 à 3 min)…");
 activer(false);
 // ------------------------------------------------ application installable
