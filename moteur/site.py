@@ -240,7 +240,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <div class="auto"><div class="txt"><b>Accroche choc en ouverture</b><small>La réplique la plus intrigante est rejouée dès la première seconde, avant le titre.</small></div><button class="inter" data-var="ACCROCHE" data-def="0" data-bascule="1"></button></div>
   </section>
   <section class="panneau"><h2>📊 Statistiques TikTok</h2>
-    <label>Compte TikTok de la chaîne<div class="jeton"><input data-var="TIKTOK_COMPTE" data-def="petits.dramas" data-texte="1" maxlength="40"><button class="second" data-enr="TIKTOK_COMPTE" style="flex:none;padding:10px 14px">OK</button></div></label>
+    <label>Compte TikTok de la chaîne<div class="jeton"><input data-var="TIKTOK_COMPTE" data-def="" data-texte="1" maxlength="40" placeholder="votre pseudo, sans @"><button class="second" data-enr="TIKTOK_COMPTE" style="flex:none;padding:10px 14px">OK</button></div></label>
     <p class="note">Chaque matin, le robot lit tout seul les vues, j'aime, commentaires et partages de vos vidéos (page publique du compte), apprend ce qui marche et s'en sert pour les sketchs, les hashtags et l'heure de publication.</p>
     <button class="action" id="lancerStats">📊 Lire les statistiques maintenant</button>
   </section>

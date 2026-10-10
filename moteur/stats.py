@@ -16,7 +16,7 @@ FICHIER = os.path.join(RACINE, "episodes", "stats.json")
 HIST = os.path.join(RACINE, "episodes", "historique.json")
 
 def compte():
-    return (os.environ.get("TIKTOK_COMPTE") or "petits.dramas").strip().lstrip("@") or "petits.dramas"
+    return (os.environ.get("TIKTOK_COMPTE") or "").strip().lstrip("@")     # vide tant que le compte n'est pas réglé dans la régie
 
 def _cle(t):
     t = unicodedata.normalize("NFKD", str(t or "").lower()).encode("ascii", "ignore").decode()
@@ -48,7 +48,9 @@ def _videos_ytdlp(nom, limite=60):
     return out
 
 def collecter():
-    nom = compte(); videos = _videos_ytdlp(nom)
+    nom = compte()
+    if not nom: print("Stats : compte TikTok non réglé (régie > Réglages > Statistiques TikTok).", flush=True); return False
+    videos = _videos_ytdlp(nom)
     if not videos: return False
     hist = json.load(open(HIST, encoding="utf-8")) if os.path.exists(HIST) else []
     par_cle = {}
@@ -104,13 +106,14 @@ def pour_idees():
 def hashtags_gagnants(n=6):
     poids = {}
     for v in lire().get("videos", []):
+        if not v.get("fichier"): continue                                  # seulement NOS vidéos (reliées à l'historique)
         for t in re.findall(r"#(\w+)", v.get("description", "")): poids[t.lower()] = poids.get(t.lower(), 0) + v.get("vues", 0)
     return [t for t, p in sorted(poids.items(), key=lambda x: -x[1]) if p > 0][:n]
 
 def meilleure_heure(defaut=17):
     """Heure de fabrication (Paris) qui fait sortir la vidéo à l'heure la plus regardée ; défaut tant qu'il y a moins de 8 vidéos."""
     from zoneinfo import ZoneInfo
-    vids = [v for v in lire().get("videos", []) if v.get("date")]
+    vids = [v for v in lire().get("videos", []) if v.get("date") and v.get("fichier")]
     if len(vids) < 8: return defaut
     par_h = {}
     for v in vids:
@@ -119,7 +122,22 @@ def meilleure_heure(defaut=17):
     if not bonnes: return defaut
     return (max(bonnes, key=bonnes.get) - 1) % 24                         # la fabrication prend environ 30 min
 
+def pseudos_libres(noms):
+    """Vérifie si des pseudos TikTok sont déjà pris (une chaîne publique existe à cette adresse)."""
+    for n in noms:
+        n = n.strip().lstrip("@")
+        if not n: continue
+        r = subprocess.run([sys.executable, "-m", "yt_dlp", "--flat-playlist", "-J", "--playlist-end", "3", "--no-warnings", f"https://www.tiktok.com/@{n}"],
+                           capture_output=True, text=True, timeout=180)
+        try: d = json.loads(r.stdout or "{}")
+        except ValueError: d = {}
+        if d.get("entries"): print(f"Pseudo @{n} : PRIS ({len(d['entries'])}+ vidéos publiques, ex. « {(d['entries'][0].get('description') or '')[:60]} »)")
+        elif "doesn't exist" in (r.stderr or "").lower() or "not exist" in (r.stderr or "").lower() or "404" in (r.stderr or ""):
+            print(f"Pseudo @{n} : probablement LIBRE (aucune chaîne à cette adresse)")
+        else: print(f"Pseudo @{n} : aucune vidéo publique (libre, ou compte sans vidéo) — {(r.stderr or '').strip()[-120:]}")
+
 if __name__ == "__main__":
+    if os.environ.get("PSEUDOS"): pseudos_libres(os.environ["PSEUDOS"].split(",")); sys.exit(0)
     ok = collecter()
     print(pour_auteur() or "Pas encore assez de vidéos reliées pour en tirer des leçons.")
     print(f"Meilleure heure de fabrication : {meilleure_heure()} h")

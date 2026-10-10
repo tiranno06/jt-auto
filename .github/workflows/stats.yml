@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: "23 5 * * *"        # chaque matin : vues, j'aime, commentaires, partages de la chaîne
   workflow_dispatch:
+    inputs:
+      pseudos:
+        description: "Facultatif : pseudos à tester, séparés par des virgules (sont-ils déjà pris ?)"
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -18,6 +23,7 @@ jobs:
     timeout-minutes: 20
     env:
       TIKTOK_COMPTE: ${{ vars.TIKTOK_COMPTE }}
+      PSEUDOS: ${{ inputs.pseudos }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
