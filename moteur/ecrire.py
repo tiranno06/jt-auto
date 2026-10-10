@@ -320,6 +320,12 @@ def longueur(sk):
     if MOTS_MIN and n < MOTS_MIN * 0.85: raise ValueError(f"trop court : {n} mots prononcés, minimum {MOTS_MIN}. Développe l'escalade")
     return n
 
+def pertinents(titres):
+    """Garde le titre principal et les articles qui parlent vraiment du même sujet (au moins 2 mots-clés communs)."""
+    if not titres: return titres
+    ref = _mots(titres[0]["titre"] + " " + titres[0].get("resume", "")[:200])
+    return [titres[0]] + [t for t in titres[1:] if len(ref & _mots(t["titre"] + " " + t.get("resume", "")[:200])) >= 2]
+
 def _bloc_candidat(k, titres):
     return f"[{k}] " + "\n    ".join(f"- [{t['source']}] {t['titre']} — {t['resume'][:220]} ({t['lien']})" for t in titres[:5])
 
@@ -361,7 +367,7 @@ def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=()):
         print(f"Sélection automatique impossible ({str(e)[:150]}) : premier candidat.", flush=True)
     meilleur = None
     for rang, k in enumerate(ordre[:2]):                                  # au plus deux sujets essayés
-        titres = candidats[k]; liens = {t["lien"] for t in titres}
+        titres = pertinents(candidats[k]); liens = {t["lien"] for t in titres}
         msg = (f"SUJET CHOISI : « {titres[0]['titre']} »\nArticles :\n" + _bloc_candidat(0, titres) +
                (f"\nAngle retenu : {angle}" if rang == 0 and angle else "") +
                (f"\nFaits vérifiés : " + " ; ".join(verifs) if rang == 0 and verifs else "") +
@@ -387,8 +393,14 @@ def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=()):
                      (f"Plan gag (réplique {sk['gag']['replique']}) : {sk['gag']['prompt'][:300]}\n" if sk.get("gag") else "") +
                      "Répliques :\n" + "\n".join(f"{i}. {r['p']} : {r['t']}" for i, r in enumerate(sk["repliques"])))
             try:
-                nq = _appel(client, None, [{"role": "user", "content": CRITIQUE.format(sketch=texte, secondes=SECONDES)}], OUTIL_NOTE, max_tokens=2500)
-                note = float(nq.get("total", 0))
+                for essai_note in range(2):                                   # relecteur réinterrogé une fois si la note manque
+                    nq = _appel(client, None, [{"role": "user", "content": CRITIQUE.format(sketch=texte, secondes=SECONDES)}], OUTIL_NOTE, max_tokens=5000)
+                    try: note = float(nq["total"]); break
+                    except (KeyError, TypeError, ValueError):
+                        parts = [nq.get(k) for k in ("originalite", "punchlines", "rythme", "pertinence", "dialogues", "visuel", "chute")]
+                        if all(isinstance(x, (int, float)) for x in parts): note = float(sum(parts)); break
+                        print("  note totale absente : on redemande au relecteur", flush=True)
+                else: raise ValueError("note totale absente deux fois")
                 critique = str(nq.get("critique") or "").strip() or nq.get("_texte", "") or \
                     " ; ".join(f"{k} {nq[k]}" for k in ("originalite", "punchlines", "rythme", "pertinence", "dialogues", "visuel", "chute") if k in nq)
             except Exception as e:

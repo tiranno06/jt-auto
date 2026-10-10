@@ -125,6 +125,12 @@ class TestEcriture(unittest.TestCase):
         self.assertEqual(ecrire._sources(["http://lemonde.fr/politique/article/budget.html?utm=1", "https://invente.fr/faux", "Le Monde"], liens),
                          ["https://www.lemonde.fr/politique/article/budget.html"])    # variante d'URL reconnue, lien inventé écarté
 
+    def test_articles_hors_sujet_retires(self):
+        t = [article("Pesticides autorisés à vie : mobilisations contre le projet européen", "a", "P1"),
+             article("Projet européen sur les pesticides : les agriculteurs divisés", "b", "P2"),
+             article("Livret A, retraites : les députés modifient le budget en commission", "c", "B1")]
+        self.assertEqual([x["lien"] for x in ecrire.pertinents(t)], ["P1", "P2"])
+
     def test_longueur_et_hors_sujet(self):
         sk = ecrire.valider(json.loads(json.dumps(SKETCH)), set())
         self.assertGreater(ecrire.longueur(sk), 0)
@@ -138,7 +144,7 @@ class FauxClaude:
     """Simule l'API : choix du candidat 1, puis sketch noté 60 (réécriture demandée) puis 86."""
     def __init__(self, web_en_panne=False, critique_vide=False, sources=("L1",)):
         self.notes = [60, 86]; self.appels = []; self.web_en_panne = web_en_panne; self.choix = 1; self.prompts = []
-        self.critique_vide = critique_vide; self.sources = list(sources); self.reecritures = []
+        self.critique_vide = critique_vide; self.sources = list(sources); self.reecritures = []; self.sans_total = False
         self.messages = self
 
     def create(self, **kw):
@@ -147,8 +153,11 @@ class FauxClaude:
         if self.web_en_panne and "web_search" in noms: raise RuntimeError("outil web non autorisé")
         if "choisir_sujet" in noms: self.prompts.append(kw["messages"][0]["content"]); out = {"notes": [{"index": 0, "note": 4}, {"index": 1, "note": 9}], "choix": self.choix, "angle": "angle test", "faits_verifies": ["fait"]}
         elif "noter_sketch" in noms:
-            out = {"total": self.notes.pop(0), "critique": "" if self.critique_vide else "chute trop faible"}
-            if self.critique_vide:                                            # critique écrite hors de l'outil
+            n = self.notes.pop(0)
+            if self.sans_total:                                              # 1re fois : total oublié et sous-notes incomplètes
+                self.sans_total = False; self.notes.insert(0, n); out = {"critique": "x" * 50, "originalite": 15}
+            else: out = {"total": n, "critique": "" if self.critique_vide else "chute trop faible"}
+            if self.critique_vide and not self.sans_total:                                            # critique écrite hors de l'outil
                 return types.SimpleNamespace(content=[types.SimpleNamespace(type="text", text="Réplique 3 trop plate."),
                                                       types.SimpleNamespace(type="tool_use", name="noter_sketch", input=out)],
                                              usage=types.SimpleNamespace(input_tokens=10, output_tokens=5))
@@ -183,6 +192,13 @@ class TestMoteurHumour(unittest.TestCase):
         self.assertIn("Réplique 3 trop plate", faux.reecritures[-1])          # la critique hors outil arrive bien dans la réécriture
         self.assertEqual(sk["sources"], ["L1", "L2"])                         # aucun lien recopié : liens RSS réels du sujet choisi
         self.assertIn("decoupage", sk["fiche"])
+
+    def test_note_sans_total(self):
+        faux = FauxClaude(); faux.sans_total = True
+        sys.modules["anthropic"] = types.SimpleNamespace(Anthropic=lambda: faux)
+        cands = [[article("Budget 2027 : les économies rejetées", "a", "L1"), article("Budget : les députés et les économies", "b", "L2")]]
+        sk = ecrire.ecrire_sketch(cands, essais=3)
+        self.assertEqual(sk["fiche"]["note"], 86)                             # sous-notes incomplètes : pas de 0/100 arbitraire
 
     def test_variable_reecritures_vide(self):
         os.environ["MAX_REECRITURES"] = ""
