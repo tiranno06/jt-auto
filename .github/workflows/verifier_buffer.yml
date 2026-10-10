@@ -1,0 +1,25 @@
+name: Vérifier Buffer
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  verifier:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      BUFFER_API_KEY: ${{ secrets.BUFFER_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Comptes connectés à Buffer (rien n'est publié)
+        run: python moteur/publier.py --canaux 2>&1 | tee episodes/buffer.txt
+      - name: Enregistrer
+        run: |
+          git config user.name "robot-jt"
+          git config user.email "robot-jt@users.noreply.github.com"
+          git add episodes/buffer.txt
+          git commit -m "Vérification Buffer" || echo "rien à enregistrer"
+          python moteur/fusion.py

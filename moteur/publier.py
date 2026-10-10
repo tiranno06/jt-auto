@@ -123,6 +123,15 @@ if __name__ == "__main__":
         preparer(); sys.exit(0)
     if sys.argv[1:] == ["--marquer"]:
         marquer(); sys.exit(0)
+    if sys.argv[1:] == ["--canaux"]:                                       # vérification : comptes connectés à Buffer (sans rien publier)
+        cle = os.environ.get("BUFFER_API_KEY")
+        if not cle: print("BUFFER_API_KEY absente des secrets GitHub."); sys.exit(0)
+        try:
+            for o in _gql("query { account { organizations { id name } } }", cle)["account"]["organizations"]:
+                for c in _gql('query { channels(input: { organizationId: %s }) { id name service } }' % json.dumps(o["id"]), cle)["channels"]:
+                    print(f"Buffer : compte {c.get('service')} « {c.get('name')} »" + ("  ← utilisé pour TikTok" if str(c.get("service", "")).lower() == "tiktok" else ""))
+        except Exception as e: print(f"Buffer inaccessible : {str(e)[:300]}")
+        sys.exit(0)
     video, legende_txt, url = sys.argv[1:4]
     legende = open(legende_txt, encoding="utf-8").read().split("\n\nSources :")[0].strip()
     ok, erreur = False, None
