@@ -341,6 +341,8 @@ def en_lettres(n):
 def _norm(t):
     t = re.sub(r"(\d)[\s\u202f\u00a0.](?=\d{3}\b)", r"\1", t.lower())               # 3 000 / 3.000 -> 3000
     t = t.replace("%", " pour cent ").replace("€", " euros ")
+    t = re.sub(r"\b1(er|re|ère)\b", " premier ", t)                          # ordinaux : « 1er » se dit « premier »
+    t = re.sub(r"\b(\d+)(e|ème|eme)\b", lambda m: " " + en_lettres(int(m.group(1))) + "ième ", t)
     t = re.sub(r"\d+", lambda m: " " + en_lettres(int(m.group())) + " ", t)
     t = unicodedata.normalize("NFKD", t).encode("ascii", "ignore").decode()
     mots = re.sub(r"[^a-z ]+", " ", t).split()
@@ -497,7 +499,7 @@ def generer(repliques):
             journal(f"  {role} : la voix {choix['moteur']}:{choix['voix']} échoue, passage à la voix de remplacement")
             for i in restant: audios[i] = None; mots[i] = None
         for i in idx:                                                      # une réplique ratée ne fait plus tomber toute la banque :
-            if audios[i] is None and meilleures.get(i, (0,))[0] >= 0.6:    # on garde sa meilleure prise si elle reste compréhensible
+            if audios[i] is None and meilleures.get(i, (0,))[0] >= 0.35:   # on garde sa meilleure prise : jamais tout le casting perdu pour une phrase
                 _, audios[i], mots[i], m = meilleures[i]; utilises.add(m)
                 journal(f"  voix {i} ({role}) : meilleure prise gardée (ressemblance {meilleures[i][0]})")
         if any(audios[i] is None for i in idx):
