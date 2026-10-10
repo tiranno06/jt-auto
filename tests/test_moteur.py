@@ -156,7 +156,7 @@ class FauxClaude:
     """Simule l'API : choix du candidat 1, puis sketch noté 60 (réécriture demandée) puis 92."""
     def __init__(self, web_en_panne=False, critique_vide=False, sources=("L1",)):
         self.notes = [60, 92]; self.appels = []; self.web_en_panne = web_en_panne; self.choix = 1; self.prompts = []
-        self.critique_vide = critique_vide; self.sources = list(sources); self.reecritures = []; self.sans_total = False; self.chute_fausse = False; self.metaphore = False
+        self.critique_vide = critique_vide; self.sources = list(sources); self.reecritures = []; self.sans_total = False; self.chute_fausse = False; self.metaphore = False; self.systemes = []
         self.messages = self
 
     def create(self, **kw):
@@ -164,6 +164,9 @@ class FauxClaude:
         self.appels.append(noms)
         if self.web_en_panne and "web_search" in noms: raise RuntimeError("outil web non autorisé")
         if "choisir_sujet" in noms: self.prompts.append(kw["messages"][0]["content"]); out = {"notes": [{"index": 0, "note": 4}, {"index": 1, "note": 9}], "choix": self.choix, "angle": "angle test", "faits_verifies": ["fait"]}
+        elif "proposer_idees" in noms:
+            out = {"idees": [{"titre": "Les réunions qui auraient pu être un mail", "description": "Une heure pour rien."},
+                             {"titre": "Le budget du mois : les économies disparaissent le 5", "description": "Toujours le 5."}]}
         elif "atelier_vannes" in noms:
             out = {"vannes": [f"vanne {i}" for i in range(15)], "chutes": [f"Rassurez-vous : chute {i}." for i in range(15)]}
         elif "jury" in noms:
@@ -182,6 +185,7 @@ class FauxClaude:
             out = json.loads(json.dumps(SKETCH)); out["sources"] = self.sources
             out["concept"] = "Le budget au restaurant. Note qualité interne : 84/100. Décision : prêt pour production."
         self.reecritures.append(kw["messages"][-1]["content"]) if "rendre_sketch" in noms else None
+        self.systemes.append(kw.get("system", ""))
         bloc = types.SimpleNamespace(type="tool_use", name=noms[0], input=out)
         return types.SimpleNamespace(content=[bloc], usage=types.SimpleNamespace(input_tokens=100, output_tokens=50))
 
@@ -254,6 +258,18 @@ class TestMoteurHumour(unittest.TestCase):
         self.assertIn("Il suffit de ne plus le voter", ecriture)              # chute affûtée par le jury
         self.assertIn("vanne 2", ecriture); self.assertNotIn("vanne 3", ecriture)   # seules les vannes retenues
         self.assertIn("RETOUCHE CIBLÉE", faux.reecritures[1])                # réécriture = punch-up, pas tout jeter
+
+    def test_sketch_libre(self):
+        faux = FauxClaude(); faux.choix = 1
+        sys.modules["anthropic"] = types.SimpleNamespace(Anthropic=lambda: faux)
+        idees = ecrire.idees_libres(recents=["MÉTRO BONDÉ : ..."])
+        self.assertEqual(len(idees), 2)
+        self.assertIn("économies", idees[1][0]["titre"])
+        sk = ecrire.ecrire_sketch(idees, essais=3, libre=True)
+        self.assertFalse(any("web_search" in a for a in faux.appels))          # pas de recherche web en sketch libre
+        self.assertTrue(any("MODE « SKETCH LIBRE »" in (x or "") for x in faux.systemes))
+        self.assertEqual(sk["sources"], [])                                    # aucune source inventée
+        self.assertEqual(sk["fiche"]["note"], 92)
 
     def test_choix_hors_gros_titres_refuse(self):
         faux = FauxClaude(); faux.choix = 4

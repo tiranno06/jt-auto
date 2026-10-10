@@ -48,14 +48,25 @@ def main():
     sujets_recents = [h["empreinte"] if h.get("empreinte") else
                       sorted(actu.empreinte(" ".join([h.get("titre", ""), h.get("accroche", "")])))
                       for h in historique if h.get("date", "") >= depuis]
+    fmt = (os.environ.get("FORMAT") or "actu").strip().lower()
+    if fmt == "alterne": fmt = "libre" if datetime.date.today().toordinal() % 2 else "actu"
+    libre = fmt == "libre"
+    print(f"Type de vidéo : {'sketch libre (situation du quotidien)' if libre else 'actu du jour'}", flush=True)
+    recents = [f"{h.get('titre', '')} : {h.get('accroche', '')}" for h in historique[-10:]]
     # 1. recherche : sujets candidats (articles des dernières 24 h, regroupés par sujet et classés par reprise médiatique)
-    try:
+    if libre and not os.environ.get("SKETCH_TEST", "").strip():
+        try: candidats = [(c, "idée") for c in ecrire.idees_libres(recents=[f"{h.get('titre', '')} : {h.get('accroche', '')}" for h in historique[-30:]])]
+        except Exception as e:
+            print(f"Idées de sketch impossibles : {e}", flush=True); raise
+        for k, (sel, _) in enumerate(candidats): print(f"Idée {k} : « {sel[0]['titre'][:110]} »", flush=True)
+    else:
+      try:
         candidats = actu.candidats_du_jour(deja_vus=deja, mots_recents=mots_recents, n=6, sujets_recents=sujets_recents)
-    except Exception as e:
+      except Exception as e:
         print(f"Recherche d'actualité en erreur : {e}", flush=True); candidats = []
-    for k, (sel, info) in enumerate(candidats):
+      for k, (sel, info) in enumerate(candidats):
         print(f"Candidat {k} ({info}) : « {sel[0]['titre'][:110]} »", flush=True)
-    if not candidats:
+    if not candidats and not libre:
         print("Aucun sujet repris par plusieurs médias : repli sur les titres politiques récents.", flush=True)
         try: t = actu.titres_recents(deja_vus=deja)
         except Exception as e: print(f"Repli impossible : {e}", flush=True); t = []
@@ -73,9 +84,9 @@ def main():
         sk = ecrire.valider(json.load(open(test, encoding="utf-8")), set())
         print(f"Sketch d'essai : {test}", flush=True)
     else:
-        sk = ecrire.ecrire_sketch([c[0] for c in candidats], gags=gags, special=dimanche, recents=recents)
+        sk = ecrire.ecrire_sketch([c[0] for c in candidats], gags=gags, special=dimanche and not libre, recents=recents, libre=libre)
         print(f"Moteur humoristique : {ecrire.USAGE['appels']} appels Claude, {ecrire.USAGE['entree']} jetons lus, {ecrire.USAGE['sortie']} jetons écrits, {ecrire.USAGE['recherches_web']} recherche(s) web", flush=True)
-        titres = next((c[0] for c in candidats if c[0][0]["lien"] in sk.get("sources", [])), titres)
+        titres = next((c[0] for c in candidats if c[0][0]["lien"] and c[0][0]["lien"] in sk.get("sources", [])), titres)
     print(f"Sketch : « {sk['sujet']} », {len(sk['repliques'])} répliques", flush=True)
     audios, credits_voix, mots = voix.generer(sk["repliques"], jt.VOIX)
     moteur = " + ".join(credits_voix)
@@ -105,7 +116,7 @@ def main():
     json.dump(sk, open(f"episodes/{jour}.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     fiche = sk.get("fiche", {})
     if fiche: print(f"Qualité : {fiche.get('note', 0):.0f}/100 — {fiche.get('decision')}", flush=True)
-    historique.append(dict(date=jour, titre=sk["sujet"], sources=sk["sources"], note=fiche.get("note"), decision=fiche.get("decision"),
+    historique.append(dict(date=jour, format=fmt, titre=sk["sujet"], sources=sk["sources"], note=fiche.get("note"), decision=fiche.get("decision"),
                            accroche=sk["repliques"][0]["t"] if sk.get("repliques") else "", mots=sorted(actu._mots(" ".join(fiche.get("titres_sujet") or [t["titre"] for t in titres])))[:40],
                            empreinte=sorted(actu.empreinte(" ".join((fiche.get("titres_sujet") or []) + [sk["sujet"]] + [r["t"] for r in sk.get("repliques", [])]))), voix=moteur, gag=bool(gag), running_gag=sk.get("running_gag", ""), duree=round(duree, 1),
                            fichier=os.path.basename(base) + ".mp4", tag=f"emissions-{jour[:7]}", legende=legende, publie=None))

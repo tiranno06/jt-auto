@@ -144,15 +144,22 @@ originalité du concept /20, punchlines /25, rythme /15, pertinence satirique /1
 SUJET PRINCIPAL : {sujet}
 Fiche et script (format vidéo animée {secondes} s, voix synthétiques ; les actions visuelles et le découpage comptent pour le potentiel visuel) :
 {sketch}
-EXIGENCES DU PROPRIÉTAIRE :
-1. La chute (dernière réplique) est une FAUSSE VÉRITÉ IRONIQUE sur CE sujet principal : affirmation rassurante au ton officiel, démentie dans la même phrase par la réalité. Une chute qui est un gag annexe, un rappel d'une blague du sketch, une métaphore ou une simple constatation (« chute_vraie » = false) plafonne la note à 70.
-2. Aucune métaphore filée : le sketch parle du sujet lui-même. S'il transpose l'actualité dans un autre univers (jeu, restaurant, sport…) ou file une image sur plusieurs répliques (« metaphore_filee » = true), la note est plafonnée à 70.
+{exigences}
 Rends la note avec l'outil noter_sketch. Le champ "critique" est OBLIGATOIRE et non vide : cite les répliques faibles (numéro + pourquoi) et propose ce qu'il faut changer."""
 
 REECRITURE = """Ton sketch a obtenu {note}/100 (objectif : au moins {seuil}). Critique du relecteur :
 {critique}
 {reserve}
 RETOUCHE CIBLÉE, comme un punch-up de salle d'auteurs : GARDE telles quelles les répliques qui fonctionnent et la chute si elle n'est pas critiquée. Remplace chaque réplique critiquée par une meilleure vanne (pioche dans les munitions du jury si elles conviennent), supprime les répliques de remplissage. Chute en fausse vérité ironique sur le sujet principal, aucune métaphore filée. Mêmes faits, mêmes règles. Rends le sketch complet avec l'outil rendre_sketch."""
+
+EXIGENCES_ACTU = """EXIGENCES DU PROPRIÉTAIRE :
+1. La chute (dernière réplique) est une FAUSSE VÉRITÉ IRONIQUE sur CE sujet principal : affirmation rassurante au ton officiel, démentie dans la même phrase par la réalité. Une chute qui est un gag annexe, un rappel d'une blague du sketch, une métaphore ou une simple constatation (« chute_vraie » = false) plafonne la note à 70.
+2. Aucune métaphore filée : le sketch parle du sujet lui-même. S'il transpose l'actualité dans un autre univers (jeu, restaurant, sport…) ou file une image sur plusieurs répliques (« metaphore_filee » = true), la note est plafonnée à 70."""
+
+EXIGENCES_LIBRE = """EXIGENCES DU PROPRIÉTAIRE (sketch libre, sans actualité) :
+1. La chute (dernière réplique) est une punchline qui retourne toute la situation, sur CE sujet (fausse vérité ironique, aveu, retournement) ; un gag annexe ou un simple rappel d'une blague du sketch (« chute_vraie » = false) plafonne la note à 70.
+2. Aucune métaphore filée : le sketch reste dans la situation elle-même (« metaphore_filee » = true : note plafonnée à 70).
+3. La situation doit être immédiatement reconnaissable par n'importe qui (« c'est trop moi / c'est trop ma mère »). Ici, « pertinence satirique » = justesse de l'observation du quotidien."""
 
 TECHNIQUE_PUNCHLINE = """TECHNIQUE D'UNE PUNCHLINE QUI FAIT HURLER DE RIRE :
 - le mot qui tue est le DERNIER mot de la phrase (rien après lui) ;
@@ -169,7 +176,7 @@ Articles :
 {technique}
 
 1. Écris 15 vannes d'une ligne sur CE sujet (faits réels poussés à l'absurde, mauvaise foi d'un porte-parole, comparaison express avec la vie quotidienne, chiffre retourné). Aucune métaphore filée, aucune vanne qui pourrait s'appliquer à un autre sujet.
-2. Écris 15 CHUTES en fausse vérité ironique sur ce sujet, toutes différentes dans leur mécanique (aveu, chiffre, retournement, langue de bois, conséquence absurde mais logique).
+2. Écris 15 CHUTES en {type_chute} sur ce sujet, toutes différentes dans leur mécanique (aveu, chiffre, retournement, langue de bois, conséquence absurde mais logique).
 Rends le tout avec l'outil atelier_vannes."""
 
 JURY = """Tu es le jury d'une émission satirique française : un public TikTok de 18-35 ans, impitoyable, qui ne rit que si c'est vraiment drôle, surprenant et méchant envers les puissants.
@@ -180,6 +187,26 @@ CHUTES (fausses vérités ironiques) :
 {chutes}
 Donne à chaque vanne et à chaque chute une note de rire sur 10 (10 = on se plie en deux, 5 = sourire poli, 3 = rien). Sois dur : une chute prévisible, longue, expliquée ou hors sujet ne dépasse pas 4.
 Puis désigne les 6 meilleures vannes et LA meilleure chute ; si tu vois comment rendre la meilleure chute encore plus percutante (plus courte, mot qui tue à la fin), donne-en la version affûtée. Rends le tout avec l'outil jury."""
+
+LIBRE = """
+═══════════════════════════════════════════
+MODE « SKETCH LIBRE » (prioritaire sur TOUT ce qui précède)
+═══════════════════════════════════════════
+Aujourd'hui, PAS D'ACTUALITÉ : ignore les étapes de recherche, de vérification et de sélection d'actualité, la règle des gros titres, les faits réels et les sources. Le sujet est une SITUATION DU QUOTIDIEN que tout le monde a vécue (couple, famille, boulot, école, voisins, courses, transports, téléphone, réseaux sociaux, administration, sport, vacances…), observée avec une méchanceté tendre et poussée jusqu'à l'absurde.
+- Personnages : toujours nos trois personnages (clés "p" inchangées), mais ils peuvent jouer d'autres rôles : le présentateur introduit la situation comme un « dossier spécial » du JT, l'envoyée la vit en direct, l'invité est l'« expert » de mauvaise foi ou le personnage qui incarne le problème (nom fictif).
+- Aucune personne réelle, aucune marque, aucune actualité.
+- "faits_reels" : liste vide ; "inventions" : tout ; "sources" : liste vide ; "resume_factuel" : une phrase qui résume la situation.
+- La chute : une punchline qui retourne toute la situation (fausse vérité ironique, aveu involontaire, retournement) ; même exigence de mot qui tue à la fin.
+- Anti-répétition : ne reprends aucune situation de la liste des épisodes récents."""
+
+IDEES = """Propose 8 situations du quotidien pour un sketch animé de {secondes} secondes : chacune vécue par presque tout le monde, avec un vrai potentiel de vanne (frustration universelle, hypocrisie sociale, petite humiliation, absurdité d'une règle). Variées (pas deux fois le même thème).
+Déjà traitées récemment, à NE PAS reprendre : {recents}
+Pour chacune : un titre court et une description de 2 phrases qui dit ce qui est drôle. Rends-les avec l'outil proposer_idees."""
+
+SELECTION_LIBRE = """Voici les situations proposées pour le sketch libre du jour :
+{candidats}
+
+Note chacune sur 10 (potentiel comique, reconnaissance immédiate, originalité de l'angle, potentiel visuel). Choisis celle qui permet le MEILLEUR sketch (indices [0] à [{dernier}]), trouve son angle comique, écris la VÉRITÉ que tout le monde pense sur cette situation, puis la CHUTE. Rends ton choix avec l'outil choisir_sujet."""
 
 def _schema(props, requis):
     return {"type": "object", "properties": props, "required": requis}
@@ -215,6 +242,9 @@ OUTIL_JURY = {"name": "jury", "description": "Notes de rire et sélection.",
                                        "meilleures_vannes": {"type": "array", "items": {"type": "integer"}},
                                        "meilleure_chute": {"type": "integer"}, "chute_affutee": {"type": "string"}},
                                       ["notes_chutes", "meilleures_vannes", "meilleure_chute"])}
+OUTIL_IDEES = {"name": "proposer_idees", "description": "Situations du quotidien pour un sketch.",
+               "input_schema": _schema({"idees": {"type": "array", "items": _schema({"titre": {"type": "string"}, "description": {"type": "string"}},
+                                                                                    ["titre", "description"])}}, ["idees"])}
 OUTIL_NOTE = {"name": "noter_sketch", "description": "Note qualité sur 100 et critique.",
               "input_schema": _schema({"chute_vraie": {"type": "boolean", "description": "La dernière réplique est-elle une fausse vérité ironique sur le sujet principal ?"},
                                        "metaphore_filee": {"type": "boolean", "description": "Le sketch transpose-t-il le sujet dans un autre univers ou file-t-il une métaphore ?"},
@@ -399,12 +429,12 @@ try: SEUIL = max(50, min(98, int(os.environ.get("SEUIL_QUALITE") or 90)))   # no
 except ValueError: SEUIL = 90
 TOP = 3                                                                  # le sujet est pris parmi les 3 plus gros titres du jour
 
-def atelier(client, systeme, titres, contexte=""):
+def atelier(client, systeme, titres, contexte="", type_chute="fausse vérité ironique"):
     """Salle d'auteurs : 15 vannes + 15 chutes, puis un jury séparé garde les 6 meilleures vannes et la meilleure chute.
     Renvoie (munitions, chute, note_chute) ; ("", "", 0) si l'atelier échoue (le sketch s'écrit alors sans)."""
     try:
         at = _appel(client, systeme, [{"role": "user", "content": ATELIER.format(sujet=titres[0]["titre"], articles=_bloc_candidat(0, titres),
-                                                                          contexte=contexte, technique=TECHNIQUE_PUNCHLINE)}],
+                                                                          contexte=contexte, technique=TECHNIQUE_PUNCHLINE, type_chute=type_chute)}],
                     OUTIL_ATELIER, max_tokens=6000)
         vannes = [str(v).strip() for v in at.get("vannes", []) if str(v).strip()][:20]
         chutes = [str(c).strip() for c in at.get("chutes", []) if str(c).strip()][:20]
@@ -430,12 +460,24 @@ def atelier(client, systeme, titres, contexte=""):
         print(f"  atelier de vannes impossible ({str(e)[:120]}) : écriture directe.", flush=True)
         return "", "", 0.0, ""
 
+def idees_libres(recents=(), n=6):
+    """Mode sketch libre : Claude propose des situations du quotidien ; renvoie des sujets au format des candidats d'actualité."""
+    import anthropic
+    client = anthropic.Anthropic()
+    rtxt = " ; ".join(r for r in recents if r)[:1500] or "(aucune)"
+    r = _appel(client, None, [{"role": "user", "content": IDEES.format(secondes=SECONDES, recents=rtxt)}], OUTIL_IDEES, max_tokens=3000)
+    out = []
+    for i in r.get("idees", []):
+        if isinstance(i, dict) and str(i.get("titre", "")).strip():
+            out.append([{"titre": _court(i["titre"], 120), "resume": _court(i.get("description"), 400), "lien": "", "date": None, "source": "idée"}])
+    return out[:n]
+
 def _bloquant(e):
     """Erreurs qui ne se règlent pas en réessayant : crédit épuisé, clé invalide, accès refusé."""
     t = str(e).lower()
     return any(m in t for m in ("credit balance", "authentication", "invalid x-api-key", "permission_error", "billing"))
 
-def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=()):
+def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=(), libre=False):
     """candidats : liste de sujets (chaque sujet = liste d'articles, le titre principal en premier) — ou une simple liste d'articles.
     Renvoie le sketch validé, avec "fiche" (livrables A-F, note qualité, décision)."""
     import anthropic
@@ -449,22 +491,24 @@ def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=()):
     systeme = MOTEUR_HUMOUR + ADAPTATION.format(cast="\n".join(f"- {k} : {v}" for k, v in CAST.items()), ton=TON, secondes=SECONDES, nb=NB,
                                                  mots=MOTS, mots_min=MOTS_MIN or 40, special=SPECIAL_DEMAIN if special else "", gags=gtxt, recents=rtxt,
                                                  looks="|".join(LOOKS), top=TOP, exemple=json.dumps(EXEMPLE, ensure_ascii=False, indent=0))
+    if libre: systeme += LIBRE
+    top = len(candidats) if libre else TOP                                # sketch libre : toutes les idées sont éligibles
     # 1) sélection du sujet et de l'angle
     ordre, angle, verifs, verite = list(range(len(candidats))), "", [], ""
     try:
-        ch = _appel(client, systeme, [{"role": "user", "content": SELECTION.format(dernier=min(TOP, len(candidats)) - 1, candidats="\n\n".join(_bloc_candidat(k, c) for k, c in enumerate(candidats[:TOP])))}],
-                    OUTIL_CHOIX, web=True, max_tokens=4000)
+        ch = _appel(client, systeme, [{"role": "user", "content": (SELECTION_LIBRE if libre else SELECTION).format(dernier=min(top, len(candidats)) - 1, candidats="\n\n".join(_bloc_candidat(k, c) for k, c in enumerate(candidats[:top])))}],
+                    OUTIL_CHOIX, web=not libre, max_tokens=4000)
         notes = {int(n.get("index", -1)): float(n.get("note", 0)) for n in ch.get("notes", []) if isinstance(n, dict)}
         choix = int(ch.get("choix", 0))
-        if not 0 <= choix < min(TOP, len(candidats)):
-            print(f"Choix {choix} refusé : hors des {TOP} plus gros titres, on prend le n°0.", flush=True); choix = 0
-        ordre = [choix] + sorted([k for k in ordre[:TOP] if k != choix], key=lambda k: (-notes.get(k, 0), k))   # secours : autre gros titre
+        if not 0 <= choix < min(top, len(candidats)):
+            print(f"Choix {choix} refusé : hors des {top} premiers candidats, on prend le n°0.", flush=True); choix = 0
+        ordre = [choix] + sorted([k for k in ordre[:top] if k != choix], key=lambda k: (-notes.get(k, 0), k))   # secours : autre gros titre
         angle, verifs = str(ch.get("angle", "")), [str(x) for x in ch.get("faits_verifies", [])][:8]
         verite = str(ch.get("verite", "")).strip()
         chute = str(ch.get("chute", "")).strip()
         if verite: print(f"Vérité du sujet : {verite[:200]}", flush=True)
         if chute: print(f"Chute proposée : {chute[:200]}", flush=True); verite = f"{verite} → chute proposée (à affûter) : « {chute} »"
-        print("Gros titres soumis : " + " | ".join(f"{notes.get(k, '?')}/10 {c[0]['titre'][:60]}" for k, c in enumerate(candidats[:TOP])), flush=True)
+        print("Gros titres soumis : " + " | ".join(f"{notes.get(k, '?')}/10 {c[0]['titre'][:60]}" for k, c in enumerate(candidats[:top])), flush=True)
         print(f"Sujet choisi : « {candidats[choix][0]['titre'][:100]} » — angle : {angle[:160]}", flush=True)
     except Exception as e:
         print(f"Sélection automatique impossible ({str(e)[:150]}) : premier candidat.", flush=True)
@@ -474,7 +518,8 @@ def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=()):
         contexte = ((f"Angle retenu : {angle}\n" if rang == 0 and angle else "") +
                     (f"Vérité du sujet : {verite}\n" if rang == 0 and verite else "") +
                     (f"Faits vérifiés : " + " ; ".join(verifs) if rang == 0 and verifs else ""))
-        munitions, chute_jury, _, reserve = atelier(client, systeme, titres, contexte)
+        munitions, chute_jury, _, reserve = atelier(client, systeme, titres, contexte,
+                                                    "punchline qui retourne la situation (fausse vérité ironique, aveu, retournement)" if libre else "fausse vérité ironique")
         msg = (f"SUJET CHOISI : « {titres[0]['titre']} »\nArticles :\n" + _bloc_candidat(0, titres) + "\n" + contexte +
                (f"\nMUNITIONS — les vannes qui ont le plus fait rire le jury (place-les, presque telles quelles, aux bons endroits) :\n{munitions}" if munitions else "") +
                (f"\nCHUTE IMPOSÉE — dernière réplique, mot pour mot (tu peux seulement l'adapter au personnage qui la dit) : « {chute_jury} »" if chute_jury
@@ -504,7 +549,7 @@ def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=()):
                      "Répliques :\n" + "\n".join(f"{i}. {r['p']} : {r['t']}" for i, r in enumerate(sk["repliques"])))
             try:
                 for essai_note in range(2):                                   # relecteur réinterrogé une fois si la note manque
-                    nq = _appel(client, None, [{"role": "user", "content": CRITIQUE.format(sketch=texte, secondes=SECONDES, sujet=titres[0]["titre"])}], OUTIL_NOTE, max_tokens=5000)
+                    nq = _appel(client, None, [{"role": "user", "content": CRITIQUE.format(sketch=texte, secondes=SECONDES, sujet=titres[0]["titre"], exigences=EXIGENCES_LIBRE if libre else EXIGENCES_ACTU)}], OUTIL_NOTE, max_tokens=5000)
                     try: note = float(nq["total"]); break
                     except (KeyError, TypeError, ValueError):
                         parts = [nq.get(k) for k in ("originalite", "punchlines", "rythme", "pertinence", "dialogues", "visuel", "chute")]

@@ -9,6 +9,10 @@ on:
         description: "Facultatif : sketch d'essai (ex. tests/sketch_C_clash.json)"
         required: false
         default: ""
+      format:
+        description: "Type de vidéo : actu (gros titre du jour) ou libre (situation du quotidien). Vide = réglage de la régie."
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -62,6 +66,7 @@ jobs:
       SKETCH_TEST: ${{ inputs.sketch }}
       MAX_REECRITURES: ${{ vars.MAX_REECRITURES }}
       SEUIL_QUALITE: ${{ vars.SEUIL_QUALITE }}
+      FORMAT: ${{ inputs.format || vars.FORMAT }}
       TON: ${{ vars.TON }}
       INFOS_DEMAIN: ${{ vars.INFOS_DEMAIN }}
       GH_TOKEN: ${{ github.token }}
