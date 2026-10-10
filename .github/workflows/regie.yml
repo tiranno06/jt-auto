@@ -1,0 +1,57 @@
+name: Action de la régie
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "avis | legende"
+        required: true
+      fichier:
+        required: true
+      valeur:
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  action:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    environment:
+      name: github-pages
+      url: ${{ steps.pages.outputs.page_url }}
+    env:
+      ACTION: ${{ inputs.action }}
+      FICHIER: ${{ inputs.fichier }}
+      VALEUR: ${{ inputs.valeur }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Appliquer
+        run: python moteur/regie_action.py
+      - name: Enregistrer l'historique
+        run: |
+          git config user.name "robot-jt"
+          git config user.email "robot-jt@users.noreply.github.com"
+          git add episodes
+          git commit -m "Régie : $ACTION sur $FICHIER" || echo "rien à enregistrer"
+          REJOUER="python moteur/regie_action.py" MESSAGE="Régie : $ACTION" python moteur/fusion.py
+      - name: Reconstruire le site
+        run: |
+          sudo apt-get install -y -q ffmpeg || true
+          pip install -q pillow numpy opencv-python-headless && python moteur/site.py
+      - uses: actions/configure-pages@v6
+        continue-on-error: true
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: site
+      - id: pages
+        uses: actions/deploy-pages@v5
+        continue-on-error: true

@@ -38,15 +38,20 @@ def construire():
         poster = e["fichier"].replace(".mp4", ".jpg"); affiche(dest, os.path.join(SITE, "videos", poster))
         liste.append(dict(titre=e.get("titre", ""), date=e.get("date", ""), fichier=e["fichier"], poster=poster,
                           legende=e.get("legende", ""), publie=e.get("publie"), vues=e.get("vues"),
-                          format=e.get("format", ""), manuel=bool(e.get("manuel"))))
+                          format=e.get("format", ""), manuel=bool(e.get("manuel")), avis=e.get("avis", 0), note=e.get("note"),
+                          programmee=e.get("programmee"), couts=e.get("couts") or {}, duree=e.get("duree"),
+                          likes=e.get("likes"), commentaires=e.get("commentaires"), partages=e.get("partages")))
     import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import marque
     nom = marque.NOM                                                       # nom de la chaîne (le JT garde son propre nom)
     conf = {"depot": os.environ.get("GITHUB_REPOSITORY", ""), "branche": os.environ.get("GITHUB_REF_NAME") or "main"}
     try: st = json.load(open(os.path.join(RACINE, "episodes", "stats.json"), encoding="utf-8"))
     except (OSError, ValueError): st = {}
+    try: alertes = json.load(open(os.path.join(RACINE, "episodes", "alertes.json"), encoding="utf-8"))[-15:]
+    except (OSError, ValueError): alertes = []
     resume = {"compte": st.get("compte", ""), "maj": st.get("maj", ""), "videos": len(st.get("videos", [])),
               "vues": sum(v.get("vues", 0) for v in st.get("videos", [])), "liees": sum(1 for v in st.get("videos", []) if v.get("fichier"))}
     page = (PAGE.replace("__NOM__", html.escape(nom)).replace("__CONF__", json.dumps(conf)).replace("__STATS__", json.dumps(resume, ensure_ascii=False))
+            .replace("__ALERTES__", json.dumps(alertes, ensure_ascii=False).replace("</", "<\\/"))
             .replace("__DATA__", json.dumps(liste, ensure_ascii=False).replace("</", "<\\/")))
     open(os.path.join(SITE, "index.html"), "w", encoding="utf-8").write(page)
     open(os.path.join(SITE, ".nojekyll"), "w").close()
@@ -76,7 +81,7 @@ def application(nom):
 
 # Service worker : l'appli s'ouvre même hors connexion (dernière version de la page), sans jamais mettre en cache
 # les vidéos (trop lourdes) ni les appels à GitHub.
-SW = r"""const CACHE = "regie-v11";
+SW = r"""const CACHE = "regie-v12";
 const COQUILLE = ["./", "manifest.webmanifest", "logo-192.png", "logo-512.png", "poppins-500.ttf", "poppins-700.ttf"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(COQUILLE))); self.skipWaiting(); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(k => Promise.all(k.filter(x => x !== CACHE).map(x => caches.delete(x))))); self.clients.claim(); });
@@ -152,6 +157,15 @@ button{font:inherit;border:0;border-radius:14px;cursor:pointer}
 #publier:disabled{opacity:.4;cursor:not-allowed}
 #publier.confirmer{background:var(--jaune);color:#111}
 .ligne2{display:flex;gap:8px;margin-top:8px}
+#plus{margin-top:8px;font-size:14px}#plus summary{cursor:pointer;color:var(--bleu);padding:6px 0}
+#plus input{width:100%;margin-top:6px}
+.alerte{background:#3a1d22;border:1px solid var(--rouge);border-radius:12px;padding:10px 12px;margin:0 0 12px;font-size:13px}
+.alerte.ok{background:#16301f;border-color:var(--vert)}
+.barres{display:flex;flex-direction:column;gap:6px}.barres div{display:flex;align-items:center;gap:8px;font-size:12px}
+.barres span.b{height:12px;background:var(--jaune);border-radius:6px;min-width:2px}
+.chiffres{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.chiffres div{background:var(--carte);border:1px solid var(--ligne);border-radius:12px;padding:10px}
+.chiffres b{display:block;font-size:20px;color:var(--jaune)}
+.second.actif{border-color:var(--jaune);color:var(--jaune)}
 .second{flex:1;padding:11px 6px;font-size:13px;background:var(--carte);color:var(--texte);border:1px solid var(--ligne)}
 .second:disabled{opacity:.4}
 #suivi{font-size:13px;margin-top:8px;min-height:18px;color:var(--doux)}
@@ -184,7 +198,9 @@ label .jeton{margin-top:6px}
 }
 textarea{resize:vertical}
 label>textarea{display:block;width:100%;margin-top:6px;box-sizing:border-box}
-.onglet.reg{flex:0 0 52px}
+.onglet.reg{flex:0 0 42px;padding:10px 0}
+@media (max-width:420px){.onglet{font-size:12.5px}.onglets{gap:6px;padding:8px 10px}}
+#barre{z-index:10;max-height:88vh;overflow-y:auto}
 video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#000;display:none}
 #cadreVideo{position:relative}
 #fermer{display:none;position:absolute;top:8px;right:8px;width:40px;height:40px;padding:0;border-radius:50%;font-size:20px;font-weight:700;line-height:40px;background:rgba(0,0,0,.65);color:#fff;border:1px solid rgba(255,255,255,.35);z-index:2}
@@ -192,7 +208,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
 </style></head><body data-onglet="videos">
 <header><h1><img src="logo-192.png" alt="" style="width:44px;height:44px;border-radius:12px;vertical-align:-10px;margin-right:10px">__NOM__</h1><div class="sous">Régie de la chaîne · vidéos de la plus récente à la plus ancienne</div>
 <button id="installer" style="display:none;margin-top:10px;padding:9px 16px;font-size:14px;font-weight:700;background:var(--jaune);color:#111">📲 Installer l'application</button></header>
-<nav class="onglets"><button class="onglet actif" data-o="videos" data-f="court">📱 Courtes</button><button class="onglet" data-o="videos" data-f="long">🎬 Longues</button><button class="onglet" data-o="videos" data-f="manuel">✍️ Manuel</button><button class="onglet reg" data-o="config" aria-label="Réglages" title="Réglages">⚙️</button></nav>
+<nav class="onglets"><button class="onglet actif" data-o="videos" data-f="court">📱 Courtes</button><button class="onglet" data-o="videos" data-f="long">🎬 Longues</button><button class="onglet" data-o="videos" data-f="manuel">✍️ Manuel</button><button class="onglet reg" data-o="stats" aria-label="Statistiques" title="Statistiques">📊</button><button class="onglet reg" data-o="config" aria-label="Réglages" title="Réglages">⚙️</button></nav>
 <main>
  <div id="o-videos">
   <section class="panneau">
@@ -219,6 +235,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
   </section>
   <div id="liste"></div>
  </div>
+ <div id="o-stats" style="display:none"></div>
  <div id="o-config" style="display:none">
   <section class="panneau" id="cfgConnexion"><h2>🔑 Connecter la régie</h2>
     <p class="note">Pour modifier les réglages depuis cet appareil (téléphone ou PC), collez une fois votre clé GitHub de régie. Elle reste uniquement dans ce navigateur.
@@ -240,8 +257,13 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <p class="note">La vidéo est prête environ 20 à 40 minutes après cette heure. 17 h = publiée pour le pic d'audience de 18 h à 21 h. « Automatique » : le robot choisit l'heure d'après les vues de vos vidéos (17 h tant qu'il y a moins de 8 vidéos).</p>
   </section>
   <section class="panneau"><h2>✍️ Écriture</h2>
-    <label>Exigence (note minimale pour publier automatiquement)<select data-var="SEUIL_QUALITE" data-def="90"><option value="95">95/100 (très rare)</option><option value="90">90/100 (recommandé)</option><option value="85">85/100</option><option value="80">80/100</option><option value="75">75/100</option></select></label>
+    <label>Note minimale pour la publication automatique<select data-var="SEUIL_PUBLICATION" data-def="80"><option value="90">90/100</option><option value="85">85/100</option><option value="80">80/100 (recommandé)</option><option value="75">75/100</option><option value="70">70/100</option></select></label>
+    <label>Objectif d'écriture (le robot réécrit jusqu'à cette note)<select data-var="SEUIL_QUALITE" data-def="90"><option value="95">95/100 (très rare)</option><option value="90">90/100 (recommandé)</option><option value="85">85/100</option><option value="80">80/100</option><option value="75">75/100</option></select></label>
     <label>Auteur (modèle Claude)<select data-var="MODELE_CLAUDE" data-def="claude-opus-5-5"><option value="claude-opus-5-5">Opus (le plus drôle, recommandé)</option><option value="claude-sonnet-5-5">Sonnet (économique)</option></select></label>
+    <div class="auto" style="margin-bottom:12px"><div class="txt"><b>Étapes simples en économique</b><small>Atelier de vannes, jury, idées et relecture sur un modèle moins cher (l'écriture et la critique restent sur l'auteur choisi). Coupé : tout sur l'auteur.</small></div><button class="inter" data-var="ETAPES_ECO" data-def="0" data-bascule="1"></button></div>
+    <div class="auto" style="margin-bottom:12px"><div class="txt"><b>S'inspirer des tendances</b><small>Pour trouver les idées, le robot regarde les sujets qui buzzent en France cette semaine (recherche web, quelques centimes).</small></div><button class="inter" data-var="TENDANCES" data-def="1" data-bascule="1"></button></div>
+    <label>Plafond de dépenses Claude par mois, en dollars (vide = pas de plafond)<div class="jeton"><input data-var="BUDGET_MOIS" data-def="" data-texte="1" maxlength="8" inputmode="decimal" placeholder="ex. 30"><button class="second" data-enr="BUDGET_MOIS" style="flex:none;padding:10px 14px">OK</button></div></label>
+    <p class="note">Plafond atteint : les vidéos automatiques s'arrêtent jusqu'au mois suivant (les boutons restent utilisables).</p>
     <label>Nombre de retouches maximum<select data-var="MAX_REECRITURES" data-def="4"><option value="4">4 (recommandé)</option><option value="2">2 (économique)</option><option value="6">6 (le plus exigeant)</option></select></label>
   </section>
   <section class="panneau"><h2>👥 Personnages</h2>
@@ -264,6 +286,11 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <div class="auto" style="margin-bottom:12px"><div class="txt"><b>Public test</b><small>Trois spectateurs virtuels découvrent le sketch sans contexte : ont-ils compris, ri, décroché ? Leurs critiques servent à améliorer le texte (un peu plus de crédit Claude).</small></div><button class="inter" data-var="PUBLIC_TEST" data-def="1" data-bascule="1"></button></div>
     <div class="auto" style="margin-bottom:12px"><div class="txt"><b>Contrôle de la vidéo finie</b><small>Une IA regarde des images de la vidéo (sous-titres, cadrage, décors, texte coupé) avant publication. En cas de défaut grave, pas de publication automatique.</small></div><button class="inter" data-var="CONTROLE_VIDEO" data-def="1" data-bascule="1"></button></div>
     <div class="auto"><div class="txt"><b>Accroche choc en ouverture</b><small>La réplique la plus intrigante est rejouée dès la première seconde, avant le titre.</small></div><button class="inter" data-var="ACCROCHE" data-def="0" data-bascule="1"></button></div>
+  </section>
+  <section class="panneau"><h2>📤 Autres plateformes</h2>
+    <p class="note">Mêmes vidéos publiées aussi ailleurs, en même temps que TikTok. À activer quand vous voulez : il suffit d'abord de connecter le compte dans Buffer (Connect channel).</p>
+    <div class="auto" style="margin-bottom:12px"><div class="txt"><b>YouTube Shorts</b><small>YouTube rémunère aussi les Shorts (programme partenaire).</small></div><button class="inter" data-var="PUBLIER_YOUTUBE" data-def="0" data-bascule="1"></button></div>
+    <div class="auto"><div class="txt"><b>Instagram Reels</b><small>Compte Instagram professionnel requis par Instagram.</small></div><button class="inter" data-var="PUBLIER_INSTAGRAM" data-def="0" data-bascule="1"></button></div>
   </section>
   <section class="panneau"><h2>🔔 Notifications</h2>
     <p class="note">Une notification sur cet appareil quand une vidéo est prête, publiée, ou si quelque chose a échoué — même appli fermée. Sur iPhone : l'appli doit d'abord être installée sur l'écran d'accueil. À activer sur chaque appareil.</p>
@@ -319,6 +346,15 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <button id="fermer" aria-label="Fermer la vidéo" title="Fermer">✕</button></div>
   <button id="publier" disabled>Publier sur TikTok</button>
   <div class="ligne2"><button class="second" id="voir" disabled>Aperçu</button><button class="second" id="copier" disabled>Copier la légende</button><button class="second" id="manuel" disabled>Partage manuel</button></div>
+  <details id="plus"><summary>⋯ Plus d'actions sur cette vidéo</summary>
+    <div class="ligne2"><button class="second" id="pouce" disabled>👍 J'aime</button><button class="second" id="bof" disabled>👎 Bof</button></div>
+    <label>Légende<textarea id="legEdit" rows="4" maxlength="2200"></textarea></label>
+    <button class="second" id="legOk" disabled style="width:100%;margin-top:6px">✏️ Enregistrer la légende</button>
+    <label>Programmer la publication (heure de Paris)<input type="datetime-local" id="quand"></label>
+    <button class="second" id="programmer" disabled style="width:100%;margin-top:6px">🗓️ Programmer sur TikTok</button>
+    <label>Refaire cette vidéo<select id="refaireQuoi"><option value="texte">Nouvelle version du sketch (même sujet)</option><option value="voix">Mêmes répliques, nouvelles voix</option><option value="decors">Mêmes répliques, nouveaux décors</option></select></label>
+    <button class="second" id="refaire" disabled style="width:100%;margin-top:6px">🔁 Refaire (15 à 40 min)</button>
+  </details>
   <div id="suivi"></div>
 </div></div>
 <div id="toast"></div>
@@ -370,9 +406,29 @@ $("#garder").onclick=()=>{const v=$("#jeton").value.trim(); if(!v)return; ecrire
 $("#oublier").onclick=()=>{ecrireJeton(""); auto=null; $("#resume").textContent="Connecter la régie (une seule fois)"; afficherAuto(); majBoutons(); toast("Régie déconnectée")};
 // ------------------------------------------------ liste des vidéos
 function badge(v){
-  if(v.publie===true) return '<span class="badge ok">✓ Publiée sur TikTok</span>';
+  if(v.publie===true&&v.programmee&&new Date(v.programmee)>new Date()) return '<span class="badge att">🗓️ Programmée le '+new Date(v.programmee).toLocaleString("fr-FR",{dateStyle:"short",timeStyle:"short"})+'</span>';
+  if(v.publie===true) return '<span class="badge ok">✓ Publiée sur TikTok</span>'+(v.avis===1?' 👍':v.avis===-1?' 👎':'');
   if(v.publie===false) return '<span class="badge ko">⚠ Échec de publication</span>';
   return '<span class="badge att">⏸ En attente de validation</span>';
+}
+// ------------------------------------------------ onglet Statistiques (vues, dépenses, alertes)
+const ALERTES = __ALERTES__;
+function rendreStats(){
+  const S=__STATS__, Z=$("#o-stats"), fr=n=>Number(n||0).toLocaleString("fr-FR");
+  const pub=DATA.filter(v=>v.publie===true), vues=pub.reduce((a,v)=>a+(v.vues||0),0);
+  const mois=new Date().toISOString().slice(0,7), duMois=DATA.filter(v=>(v.date||"").startsWith(mois));
+  const usd=duMois.reduce((a,v)=>a+((v.couts||{}).claude_usd||0),0), car=duMois.reduce((a,v)=>a+((v.couts||{}).eleven_caracteres||0),0), gpu=duMois.reduce((a,v)=>a+((v.couts||{}).gpu_s||0),0);
+  const top=[...pub].filter(v=>v.vues!=null).sort((a,b)=>b.vues-a.vues).slice(0,10), max=Math.max(1,...top.map(v=>v.vues));
+  Z.innerHTML=`<section class="panneau"><h2>📊 La chaîne</h2><div class="chiffres">
+    <div><b>${fr(vues)}</b>vues au total</div><div><b>${pub.length}</b>vidéos publiées</div>
+    <div><b>${fr(pub.reduce((a,v)=>a+(v.likes||0),0))}</b>j'aime</div><div><b>${fr(pub.reduce((a,v)=>a+(v.commentaires||0),0))}</b>commentaires</div></div>
+    <p class="note">${S.compte?"Compte @"+S.compte+(S.maj?", lu le "+new Date(S.maj).toLocaleString("fr-FR",{dateStyle:"short",timeStyle:"short"}):""):"Compte TikTok pas encore réglé (⚙️ → Statistiques TikTok)."}</p></section>
+    <section class="panneau"><h2>🏆 Vidéos les plus vues</h2><div class="barres">${top.length?top.map(v=>`<div><span style="flex:0 0 42%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${v.titre.replace(/</g,"&lt;")}</span><span class="b" style="width:${Math.round(50*v.vues/max)}%"></span>${fr(v.vues)}</div>`).join(""):'<p class="note">Les vues arrivent chaque matin après les premières publications.</p>'}</div></section>
+    <section class="panneau"><h2>💶 Dépenses du mois</h2><div class="chiffres">
+    <div><b>${usd.toFixed(2)} $</b>Claude (écriture)</div><div><b>${fr(car)}</b>crédits ElevenLabs (voix)</div>
+    <div><b>${Math.round(gpu/60)} min</b>GPU Modal (décors)</div><div><b>${duMois.length?(usd/duMois.length).toFixed(2):"0.00"} $</b>Claude par vidéo</div></div>
+    <p class="note">Compté par le robot vidéo par vidéo (les vidéos fabriquées avant cette version n'ont pas de compte). Comparez avec vos tableaux de bord Anthropic, ElevenLabs et Modal.</p></section>
+    <section class="panneau"><h2>🔔 Dernières alertes</h2>${ALERTES.length?[...ALERTES].reverse().slice(0,8).map(a=>`<div class="alerte ${/✅|🎬/.test(a.titre)?"ok":""}"><b>${a.titre.replace(/</g,"&lt;")}</b><br>${(a.texte||"").replace(/</g,"&lt;")}<br><small>${new Date(a.quand).toLocaleString("fr-FR",{dateStyle:"short",timeStyle:"short"})}</small></div>`).join(""):'<p class="note">Aucune alerte.</p>'}</section>`;
 }
 let FILTRE="court";
 const categorie=v=>v.manuel?"manuel":(v.format==="mini"?"court":"long");
@@ -408,6 +464,8 @@ function majBoutons(){
 }
 function choisir(i){
   choisie=i; fichier=null; const v=DATA[i];
+  ["#pouce","#bof","#legOk","#programmer","#refaire"].forEach(s=>$(s).disabled=!lireJeton()); $("#legEdit").value=v.legende||"";
+  $("#pouce").classList.toggle("actif",v.avis===1); $("#bof").classList.toggle("actif",v.avis===-1);
   document.querySelectorAll(".carte").forEach(c=>c.classList.toggle("choisie",+c.dataset.i===i));
   $("#choix").textContent="Sélection : "+v.titre; ["#copier","#voir","#manuel"].forEach(s=>$(s).disabled=false);
   const a=$("#apercu"); a.src="videos/"+v.fichier; a.style.display="block"; $("#suivi").textContent=""; majBoutons();
@@ -450,6 +508,22 @@ function fermerVideo(){
   setTimeout(()=>{document.querySelector("main").style.paddingBottom=($("#barre").offsetHeight+24)+"px"},50);
 }
 $("#fermer").onclick=fermerVideo;
+// ------------------------------------------------ actions sur la vidéo choisie
+function action(a,valeur,msg){
+  if(choisie===null)return; const v=DATA[choisie];
+  lancerFlux("regie.yml",$("#legOk"),msg,{action:a,fichier:v.fichier,valeur:String(valeur)},$("#suivi"));
+}
+$("#pouce").onclick=()=>{const v=DATA[choisie];v.avis=v.avis===1?0:1;$("#pouce").classList.toggle("actif",v.avis===1);$("#bof").classList.remove("actif");action("avis",v.avis,"👍 Noté : le robot s'en servira comme exemple.")};
+$("#bof").onclick=()=>{const v=DATA[choisie];v.avis=v.avis===-1?0:-1;$("#bof").classList.toggle("actif",v.avis===-1);$("#pouce").classList.remove("actif");action("avis",v.avis,"👎 Noté : le robot évitera ce genre de sketch.")};
+$("#legOk").onclick=()=>{const t=$("#legEdit").value.trim(); if(!t){toast("Légende vide");return} DATA[choisie].legende=t; action("legende",t,"✏️ Légende enregistrée (le site se met à jour dans 2 à 3 min).")};
+$("#programmer").onclick=()=>{
+  const q=$("#quand").value; if(!q){toast("Choisissez la date et l'heure");return}
+  if(new Date(q)<new Date(Date.now()+10*60000)){toast("Choisissez une heure dans au moins 10 minutes");return}
+  const v=DATA[choisie];
+  lancerFlux("publier.yml",$("#programmer"),"🗓️ Publication programmée le "+new Date(q).toLocaleString("fr-FR",{dateStyle:"short",timeStyle:"short"})+" : Buffer s'en charge, même appli fermée.",{fichier:v.fichier,forcer:v.publie===true?"oui":"non",quand:q},$("#suivi"));
+};
+$("#refaire").onclick=()=>{const v=DATA[choisie], q=$("#refaireQuoi").value;
+  lancerFlux("emission.yml",$("#refaire"),"🔁 Nouvelle version en fabrication. Elle apparaîtra à côté de l'ancienne (supprimez celle que vous ne gardez pas).",{refaire:v.fichier+"|"+q},$("#suivi"))};
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&choisie!==null)fermerVideo()});
 $("#voir").onclick=()=>{const a=$("#apercu");a.style.display="block";a.play()};
 $("#copier").onclick=async()=>{const t=DATA[choisie].legende||"";try{await navigator.clipboard.writeText(t);toast("Légende copiée")}catch(e){prompt("Copiez la légende :",t)}};
@@ -489,6 +563,7 @@ document.querySelectorAll(".onglet").forEach(b=>b.onclick=()=>{
   if(b.dataset.f){FILTRE=b.dataset.f; if(choisie!==null&&categorie(DATA[choisie])!==FILTRE) fermerVideo(); rendre();
     $("#manuel").style.display=FILTRE==="manuel"?"":"none"; document.querySelector("#o-videos .panneau:not(#manuel)").style.display=FILTRE==="manuel"?"none":""}
   $("#o-videos").style.display=b.dataset.o==="videos"?"":"none"; $("#o-config").style.display=b.dataset.o==="config"?"":"none";
+  $("#o-stats").style.display=b.dataset.o==="stats"?"":"none"; if(b.dataset.o==="stats") rendreStats();
   $("#barre").style.display=b.dataset.o==="videos"?"":"none"; document.body.dataset.onglet=b.dataset.o; if(b.dataset.o==="config") chargerReglages();
 });
 // ------------------------------------------------ réglages (variables du dépôt GitHub)
