@@ -32,7 +32,7 @@ jobs:
       - name: Lire les statistiques publiques de la chaîne
         run: |
           pip install -q -U yt-dlp
-          python moteur/stats.py | tee episodes/stats.txt
+          python -u moteur/stats.py 2>&1 | tee episodes/stats.txt
       - name: Enregistrer
         run: |
           git config user.name "robot-jt"
