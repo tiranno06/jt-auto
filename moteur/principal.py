@@ -123,7 +123,7 @@ def main():
     if duree is None: duree = jt.rendre(sk, base + ".mp4", audios, gag=gag, mots=mots)
     credit = "Voix : " + " ; ".join(credits_voix) + "."
     if gag: credit += " Plan « reconstitution » généré avec Wan 2.2."
-    if decors: credit += " Décors générés avec FLUX.1-schnell (Apache 2.0)."
+    if decors: credit += " Décors générés avec Stable Diffusion XL (CreativeML Open RAIL++-M)."
     legende = f"{sk['legende']}" + (f"\n\n{sk['question']}" if sk.get("question") else "") + "\n\n" + " ".join("#" + h for h in sk["hashtags"]) + f"\n\nContenu généré par IA. {credit}"
     open(base + ".txt", "w", encoding="utf-8").write(legende + "\n\nSources :\n" + "\n".join(sk["sources"]) + "\n")
     os.makedirs("episodes", exist_ok=True)

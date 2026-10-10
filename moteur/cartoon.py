@@ -6,7 +6,7 @@ Mise en scène façon TikTok : décor du quotidien, plans serrés qui alternent 
 titre « POV » en haut dans un cadre blanc, sous-titres mot par mot, bruitages.
 
 rendre(sk, sortie, audios, mots=None, decors=None, mini=False) -> durée (s)
-  decors : {indice de scène: image RGB 1080x1920} (générées par FLUX) ; sinon décor uni pastel."""
+  decors : {indice de scène: image RGB 1080x1920} (générées par Stable Diffusion XL) ; sinon décor uni pastel."""
 import math, os, re, subprocess, sys, tempfile, wave
 import numpy as np, cv2
 from PIL import Image, ImageDraw, ImageFont
