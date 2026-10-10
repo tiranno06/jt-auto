@@ -5,7 +5,8 @@ Le workflow se réveille toutes les heures ; on ne produit que si :
   si GitHub a sauté un réveil ;
 - le nombre de vidéos AUTOMATIQUES du jour n'est pas atteint (les vidéos lancées à la main ne comptent pas).
 Un lancement manuel (bouton « Lancer une émission ») passe toujours."""
-import datetime, json, os, sys
+import datetime, json, os, re, sys
+FENETRE = 120                                                              # minutes après l'heure d'un créneau pendant lesquelles il peut encore partir
 from zoneinfo import ZoneInfo
 
 FORMATS = ("mini", "libre", "actu", "programme")
@@ -55,16 +56,25 @@ def decision_complete():
     creneaux, jours = horaires()
     if maintenant.isoweekday() not in jours: return False, "jour sans émission (réglage des jours)", None
     if jour.toordinal() % freq: return False, f"jour de repos (une émission tous les {freq} jours)", None
-    # créneaux du jour déjà passés : on rattrape si GitHub a sauté un réveil (ses tâches planifiées sont souvent en retard ou omises)
+    # seul le DERNIER créneau passé compte, et seulement dans les 2 h qui suivent son heure (retard des réveils) :
+    # un créneau manqué plus tôt dans la journée n'est jamais rattrapé (pas de rafale de vidéos ni d'essais en boucle)
     m_now = maintenant.hour * 60 + maintenant.minute
-    dus = sum(1 for m, _ in creneaux if m_now >= m)
     lib = ", ".join(f"{m // 60}:{m % 60:02d}" for m, _ in creneaux)
-    if not dus: return False, f"pas encore l'heure ({maintenant:%H:%M}, créneaux {lib})", None
+    passes = [(m, f) for m, f in creneaux if m <= m_now]
+    if not passes: return False, f"pas encore l'heure ({maintenant:%H:%M}, créneaux {lib})", None
+    m, fmt = passes[-1]
+    if m_now - m > FENETRE: return False, f"aucun créneau en cours ({maintenant:%H:%M}, créneaux {lib})", None
     hist = _hist()
-    faites = sum(1 for e in hist if e.get("date") == jour.isoformat() and e.get("auto"))   # seules les vidéos AUTOMATIQUES comptent
-    try:                                                                   # un essai abandonné (note trop basse) compte aussi : pas de nouvel essai en boucle
+    # déjà fait pour CE créneau : une vidéo automatique ou un essai abandonné depuis l'heure du créneau
+    def apres(date, hhmm):
+        try: return date == jour.isoformat() and int(hhmm[:2]) * 60 + int(hhmm[3:5]) >= m
+        except (TypeError, ValueError): return False
+    def heure_fichier(e):
+        r_ = re.search(r"_(\d{2})h(\d{2})_", e.get("fichier", "")); return f"{r_.group(1)}:{r_.group(2)}" if r_ else None
+    faites = sum(1 for e in hist if e.get("auto") and apres(e.get("date"), heure_fichier(e)))
+    try:
         tent = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "episodes", "tentatives.json"), encoding="utf-8"))
-        faites += sum(1 for e in tent if e.get("date") == jour.isoformat() and e.get("auto"))
+        faites += sum(1 for e in tent if e.get("auto") and apres(e.get("date"), e.get("heure") or "00:00"))
     except (OSError, ValueError): pass
     budget = (os.environ.get("BUDGET_MOIS") or "").strip().replace(",", ".")
     if budget:                                                             # plafond de dépenses Claude du mois (réglage de la régie)
@@ -73,9 +83,8 @@ def decision_complete():
         try:
             if depense >= float(budget): return False, f"budget du mois atteint ({depense:.2f} $ sur {float(budget):.2f} $)", None
         except ValueError: pass
-    if faites >= dus: return False, f"vidéo(s) automatique(s) du jour déjà faite(s) ({faites}/{len(creneaux)})", None
-    m, fmt = creneaux[faites]
-    return True, f"créneau de {m // 60}:{m % 60:02d} ({faites + 1}/{len(creneaux)} aujourd'hui)", fmt
+    if faites: return False, f"créneau de {m // 60}:{m % 60:02d} déjà traité", None
+    return True, f"créneau de {m // 60}:{m % 60:02d}", fmt
 
 if __name__ == "__main__":
     go, raison, _ = decision_complete(); print(f"Planning : {'GO' if go else 'rien'} ({raison})")

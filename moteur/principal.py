@@ -166,7 +166,8 @@ def main():
             print(f"Pas de vidéo : {q} (réglage ⚙️ Écriture → note minimale).", flush=True)
             print(f"Moteur humoristique : {ecrire.USAGE['appels']} appels Claude, {ecrire.USAGE['entree']} jetons lus, {ecrire.USAGE['sortie']} jetons écrits, coût {ecrire.USAGE.get('cout', 0):.2f} $", flush=True)
             t_ = "episodes/tentatives.json"; tent = lire(t_, [])
-            tent.append({"date": datetime.date.today().isoformat(), "auto": AUTO, "note": round(q.note, 1), "titre": q.sk.get("sujet", ""),
+            tent.append({"date": datetime.datetime.now(ZoneInfo("Europe/Paris")).date().isoformat(), "heure": datetime.datetime.now(ZoneInfo("Europe/Paris")).strftime("%H:%M"),
+                         "auto": AUTO, "note": round(q.note, 1), "titre": q.sk.get("sujet", ""),
                          "cout_usd": round(ecrire.USAGE.get("cout", 0), 3)})
             json.dump(tent[-100:], open(t_, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
             try:
