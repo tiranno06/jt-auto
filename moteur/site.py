@@ -49,7 +49,8 @@ def construire():
     try: alertes = json.load(open(os.path.join(RACINE, "episodes", "alertes.json"), encoding="utf-8"))[-15:]
     except (OSError, ValueError): alertes = []
     resume = {"compte": st.get("compte", ""), "maj": st.get("maj", ""), "videos": len(st.get("videos", [])),
-              "vues": sum(v.get("vues", 0) for v in st.get("videos", [])), "liees": sum(1 for v in st.get("videos", []) if v.get("fichier"))}
+              "vues": sum(v.get("vues", 0) for v in st.get("videos", [])), "liees": sum(1 for v in st.get("videos", []) if v.get("fichier")),
+              "abonnes": st.get("abonnes"), "abonnes_hist": (st.get("abonnes_hist") or [])[-24 * 8:]}
     page = (PAGE.replace("__NOM__", html.escape(nom)).replace("__CONF__", json.dumps(conf)).replace("__STATS__", json.dumps(resume, ensure_ascii=False))
             .replace("__ALERTES__", json.dumps(alertes, ensure_ascii=False).replace("</", "<\\/"))
             .replace("__DATA__", json.dumps(liste, ensure_ascii=False).replace("</", "<\\/")))
@@ -81,7 +82,7 @@ def application(nom):
 
 # Service worker : l'appli s'ouvre même hors connexion (dernière version de la page), sans jamais mettre en cache
 # les vidéos (trop lourdes) ni les appels à GitHub.
-SW = r"""const CACHE = "regie-v18";
+SW = r"""const CACHE = "regie-v19";
 const COQUILLE = ["./", "manifest.webmanifest", "logo-192.png", "logo-512.png", "poppins-500.ttf", "poppins-700.ttf"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(COQUILLE))); self.skipWaiting(); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(k => Promise.all(k.filter(x => x !== CACHE).map(x => caches.delete(x))))); self.clients.claim(); });
@@ -410,7 +411,7 @@ function lireJeton(){try{return localStorage.getItem("jt_jeton")||""}catch(e){re
 function ecrireJeton(v){try{v?localStorage.setItem("jt_jeton",v):localStorage.removeItem("jt_jeton")}catch(e){window._jeton=v}}
 async function gh(chemin, opts={}){
   const j=lireJeton(); if(!j) throw new Error("régie non connectée");
-  const r=await fetch(API+chemin,{...opts,headers:{"Authorization":"Bearer "+j,"Accept":"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28",...(opts.body?{"Content-Type":"application/json"}:{})}});
+  const r=await fetch(API+chemin,{...opts,headers:{"Authorization":"Bearer "+j,"Accept":"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28",...(opts.body?{"Content-Type":"application/json"}:{}),...(opts.headers||{})}});
   if(r.status===401) throw new Error("jeton refusé (expiré ou incorrect)");
   if(r.status===403) throw new Error("droits du jeton insuffisants");
   return r;
@@ -455,15 +456,21 @@ function badge(v){
 const ALERTES = __ALERTES__;
 let STATS_LIVE=__STATS__, DERNIERE_MAJ=0;
 // actualisation automatique des statistiques : au lancement, puis toutes les heures (et au retour sur l'appli après plus d'une heure)
+// régie connectée : lecture directe par l'API GitHub (données fraîches) ; sinon fichiers publics (cache de quelques minutes)
+async function lireEpisode(nom){
+  if(lireJeton()){try{const r=await gh(`/contents/episodes/${nom}?ref=${CONF.branche}&t=${Date.now()}`,{headers:{"Accept":"application/vnd.github.raw+json"}});
+    if(r.ok) return await r.json()}catch(e){}}
+  const r=await fetch(`https://raw.githubusercontent.com/${CONF.depot}/${CONF.branche}/episodes/${nom}?t=${Date.now()}`,{cache:"no-store"});
+  return r.ok?r.json():null;
+}
 async function actualiserStats(){
-  if(!CONF.depot) return; const base=`https://raw.githubusercontent.com/${CONF.depot}/${CONF.branche}/episodes/`;
+  if(!CONF.depot) return;
   try{
-    const [h,st]=await Promise.all([fetch(base+"historique.json",{cache:"no-store"}).then(r=>r.ok?r.json():null),
-                                   fetch(base+"stats.json",{cache:"no-store"}).then(r=>r.ok?r.json():null)]);
+    const [h,st]=await Promise.all([lireEpisode("historique.json").catch(()=>null),lireEpisode("stats.json").catch(()=>null)]);
     if(Array.isArray(h)){const par={}; h.forEach(e=>{if(e.fichier)par[e.fichier]=e});
       DATA.forEach(v=>{const e=par[v.fichier]; if(!e)return; ["vues","likes","commentaires","partages","publie","couts"].forEach(k=>{if(e[k]!==undefined)v[k]=e[k]})})}
     if(st&&st.compte){const vids=st.videos||[]; STATS_LIVE={compte:st.compte,maj:st.maj||"",videos:vids.length,
-      vues:vids.reduce((a,x)=>a+(x.vues||0),0),liees:vids.filter(x=>x.fichier).length}}
+      vues:vids.reduce((a,x)=>a+(x.vues||0),0),liees:vids.filter(x=>x.fichier).length,abonnes:st.abonnes,abonnes_hist:st.abonnes_hist||[]}}
     DERNIERE_MAJ=Date.now();
     if(document.body.dataset.onglet==="stats") rendreStats();
     else if(document.body.dataset.onglet==="videos"){rendre(); if(choisie!==null) document.querySelectorAll(".carte").forEach(c=>c.classList.toggle("choisie",+c.dataset.i===choisie))}
@@ -471,22 +478,38 @@ async function actualiserStats(){
 }
 setTimeout(actualiserStats,1500); setInterval(actualiserStats,3600*1000);
 document.addEventListener("visibilitychange",()=>{if(!document.hidden&&Date.now()-DERNIERE_MAJ>3600*1000) actualiserStats()});
+// nouveaux abonnés depuis une date : total actuel moins le dernier relevé d'avant cette date (ou le plus ancien connu)
+function gainAbonnes(hist,depuis){
+  if(!hist||!hist.length) return null; const n=hist[hist.length-1].n;
+  const avant=hist.filter(x=>new Date(x.t)<=depuis); const ref=avant.length?avant[avant.length-1]:hist[0];
+  return n-ref.n;
+}
 function rendreStats(){
   const S=STATS_LIVE, Z=$("#o-stats"), fr=n=>Number(n||0).toLocaleString("fr-FR");
+  const H=S.abonnes_hist||[], minuit=new Date(); minuit.setHours(0,0,0,0);
+  const gJour=gainAbonnes(H,minuit), g7=gainAbonnes(H,new Date(Date.now()-7*864e5)), sg=g=>g==null?"–":(g>0?"+":"")+fr(g);
   const pub=DATA.filter(v=>v.publie===true), vues=pub.reduce((a,v)=>a+(v.vues||0),0);
   const mois=new Date().toISOString().slice(0,7), duMois=DATA.filter(v=>(v.date||"").startsWith(mois));
   const usd=duMois.reduce((a,v)=>a+((v.couts||{}).claude_usd||0),0), car=duMois.reduce((a,v)=>a+((v.couts||{}).eleven_caracteres||0),0), gpu=duMois.reduce((a,v)=>a+((v.couts||{}).gpu_s||0),0);
   const top=[...pub].filter(v=>v.vues!=null).sort((a,b)=>b.vues-a.vues).slice(0,10), max=Math.max(1,...top.map(v=>v.vues));
   Z.innerHTML=`<section class="panneau"><h2>📊 La chaîne</h2><div class="chiffres">
     <div><b>${fr(vues)}</b>vues au total</div><div><b>${pub.length}</b>vidéos publiées</div>
-    <div><b>${fr(pub.reduce((a,v)=>a+(v.likes||0),0))}</b>j'aime</div><div><b>${fr(pub.reduce((a,v)=>a+(v.commentaires||0),0))}</b>commentaires</div></div>
+    <div><b>${fr(pub.reduce((a,v)=>a+(v.likes||0),0))}</b>j'aime</div><div><b>${fr(pub.reduce((a,v)=>a+(v.commentaires||0),0))}</b>commentaires</div>
+    <div><b>${S.abonnes!=null?fr(S.abonnes):"–"}</b>abonnés</div><div><b>${sg(gJour)}</b>nouveaux abonnés aujourd'hui</div>
+    <div><b>${sg(g7)}</b>nouveaux abonnés sur 7 jours</div><div><b>${S.compte?"@"+S.compte:"–"}</b>compte suivi</div></div>
+    <button class="action" id="majStats" style="margin-top:10px">🔄 Actualiser maintenant</button><p class="note" id="suiviMajStats"></p>
     <p class="note">${S.compte?"Compte @"+S.compte+(S.maj?", lu le "+new Date(S.maj).toLocaleString("fr-FR",{dateStyle:"short",timeStyle:"short"}):""):"Compte TikTok pas encore réglé (⚙️ → Statistiques TikTok)."}</p></section>
-    <section class="panneau"><h2>🏆 Vidéos les plus vues</h2><div class="barres">${top.length?top.map(v=>`<div><span style="flex:0 0 42%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${v.titre.replace(/</g,"&lt;")}</span><span class="b" style="width:${Math.round(50*v.vues/max)}%"></span>${fr(v.vues)}</div>`).join(""):'<p class="note">Les vues arrivent chaque matin après les premières publications.</p>'}</div></section>
+    <section class="panneau"><h2>🏆 Vidéos les plus vues</h2><div class="barres">${top.length?top.map(v=>`<div><span style="flex:0 0 42%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${v.titre.replace(/</g,"&lt;")}</span><span class="b" style="width:${Math.round(50*v.vues/max)}%"></span>${fr(v.vues)}</div>`).join(""):'<p class="note">Les vues arrivent dans l’heure qui suit les premières publications.</p>'}</div></section>
     <section class="panneau"><h2>💶 Dépenses du mois</h2><div class="chiffres">
     <div><b>${usd.toFixed(2)} $</b>Claude (écriture)</div><div><b>${fr(car)}</b>crédits ElevenLabs (voix)</div>
     <div><b>${Math.round(gpu/60)} min</b>GPU Modal (décors)</div><div><b>${duMois.length?(usd/duMois.length).toFixed(2):"0.00"} $</b>Claude par vidéo</div></div>
     <p class="note">Compté par le robot vidéo par vidéo (les vidéos fabriquées avant cette version n'ont pas de compte). Comparez avec vos tableaux de bord Anthropic, ElevenLabs et Modal.</p></section>
     <section class="panneau"><h2>🔔 Dernières alertes</h2>${ALERTES.length?[...ALERTES].reverse().slice(0,8).map(a=>`<div class="alerte ${/✅|🎬/.test(a.titre)?"ok":""}"><b>${a.titre.replace(/</g,"&lt;")}</b><br>${(a.texte||"").replace(/</g,"&lt;")}<br><small>${new Date(a.quand).toLocaleString("fr-FR",{dateStyle:"short",timeStyle:"short"})}</small></div>`).join(""):'<p class="note">Aucune alerte.</p>'}</section>`;
+  $("#majStats").onclick=()=>{
+    if(!lireJeton()){$("#majStats").disabled=true; $("#suiviMajStats").textContent="Relecture des données publiées…"; actualiserStats().then(()=>toast("Données rechargées ✓ (connectez la régie pour relire TikTok tout de suite)")); return}
+    lancerFlux("stats.yml",$("#majStats"),"📊 Lecture des vues et abonnés sur TikTok (1 à 3 min)…",null,$("#suiviMajStats"),
+      async ok=>{ if(ok){await actualiserStats(); toast("Statistiques à jour ✓")} });
+  };
 }
 let FILTRE="court";
 const categorie=v=>v.manuel?"manuel":(v.format==="mini"?"court":"long");
@@ -712,7 +735,7 @@ document.querySelectorAll("[data-enr]").forEach(b=>b.onclick=async()=>{
   const c=document.querySelector(`[data-var="${b.dataset.enr}"]`); const val=c.value.trim(); if(!val)return;
   try{await ecrireVar(b.dataset.enr,val);toast("Enregistré ✓ (visible dès la prochaine émission)")}catch(e){toast("Impossible : "+e.message)}
 });
-async function lancerFlux(fichier,bouton,texte,inputs,zone){
+async function lancerFlux(fichier,bouton,texte,inputs,zone,fini){
   bouton.disabled=true; const s=zone||$("#suiviCfg"); const depart=new Date(Date.now()-5000);
   try{
     const r=await gh(`/actions/workflows/${fichier}/dispatches`,{method:"POST",body:JSON.stringify(inputs?{ref:CONF.branche,inputs}:{ref:CONF.branche})});
@@ -725,7 +748,8 @@ async function lancerFlux(fichier,bouton,texte,inputs,zone){
       catch(e){ if(++echecs>=4){s.textContent="✓ Lancé. Suivi interrompu (connexion) : le résultat apparaîtra dans l'appli quand ce sera fini.";break} continue }
       const run=(d.workflow_runs||[]).find(x=>new Date(x.created_at)>=depart); if(!run) continue;
       if(run.status!=="completed"){s.textContent=texte+" ("+(run.status==="queued"?"en file d'attente":"en cours")+")";continue}
-      s.innerHTML=run.conclusion==="success"?"✅ Terminé. Rouvrez l'application dans une minute pour voir le résultat.":`❌ Échec. <a style="color:var(--bleu)" href="${run.html_url}" target="_blank" rel="noopener">Voir le détail</a>`;
+      s.innerHTML=run.conclusion==="success"?(fini?"✅ Terminé.":"✅ Terminé. Rouvrez l'application dans une minute pour voir le résultat."):`❌ Échec. <a style="color:var(--bleu)" href="${run.html_url}" target="_blank" rel="noopener">Voir le détail</a>`;
+      if(fini){try{await fini(run.conclusion==="success")}catch(e){}}
       break;
     }
   }catch(e){s.textContent="Impossible : "+(/failed to fetch|load failed|network/i.test(e.message)?"pas de connexion internet (réessayez)":e.message)}
