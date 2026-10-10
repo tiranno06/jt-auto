@@ -2,7 +2,7 @@ name: Émission du jour
 
 on:
   schedule:
-    - cron: "7 * * * *"         # réveil toutes les heures ; moteur/planning.py décide (heure et rythme réglables dans l'appli)
+    - cron: "7,37 * * * *"      # réveil toutes les 30 min ; moteur/planning.py décide (heure et rythme réglables dans l'appli, rattrapage si GitHub saute un réveil)
   workflow_dispatch:             # bouton « Run workflow » pour lancer à la main
     inputs:
       sketch:
@@ -90,6 +90,9 @@ jobs:
       CONTROLE_VIDEO: ${{ vars.CONTROLE_VIDEO }}
       TIKTOK_COMPTE: ${{ vars.TIKTOK_COMPTE }}
       GH_TOKEN: ${{ github.token }}
+      EVENEMENT: ${{ github.event_name }}
+      FREQUENCE: ${{ vars.FREQUENCE }}
+      HEURE: ${{ vars.HEURE }}
     steps:
       - uses: actions/checkout@v4
 

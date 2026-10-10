@@ -13,6 +13,11 @@ os.chdir(RACINE)
 from programme import format_du_jour
 
 _hist = json.load(open("episodes/historique.json", encoding="utf-8")) if os.path.exists("episodes/historique.json") else []
+AUTO = os.environ.get("EVENEMENT") == "schedule"                         # fabrication déclenchée par le planning (pas un bouton)
+if AUTO:                                                                  # nouvelle vérification au démarrage : évite un doublon si deux réveils se suivent
+    import planning
+    _go, _raison = planning.decision()
+    if not _go: print(f"Planning : rien à faire ({_raison})"); sys.exit(0)
 THEME = (os.environ.get("THEME") or "").strip()[:2000]                 # création manuelle depuis l'onglet « Manuel » de la régie
 if THEME and (os.environ.get("FORMAT") or "") not in ("mini", "libre"): os.environ["FORMAT"] = "mini"
 os.environ["FORMAT"] = FORMAT = format_du_jour(os.environ.get("FORMAT"), _hist)
@@ -178,6 +183,7 @@ def main():
                            fichier=os.path.basename(base) + ".mp4", tag=f"emissions-{jour[:7]}", legende=legende, publie=None))
     json.dump(historique[-200:], open("episodes/historique.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     if THEME: historique[-1]["manuel"] = True; historique[-1]["theme"] = THEME[:300]
+    if AUTO: historique[-1]["auto"] = True
     json.dump(historique[-200:], open("episodes/historique.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     if libre and not test and not THEME:
         n_ep = serie.enregistrer(sk, os.path.basename(base) + ".mp4")

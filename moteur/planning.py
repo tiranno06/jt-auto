@@ -1,8 +1,9 @@
 """Décide si le robot doit fabriquer une émission maintenant (réglages de la régie).
 Le workflow se réveille toutes les heures ; on ne produit que si :
 - le rythme (variable FREQUENCE : 2x = deux par jour (12 h + HEURE), 1 = chaque jour, 2 = un jour sur deux, 3 = un jour sur trois, 0 = pause) le permet ;
-- l'heure de Paris correspond à HEURE (0 à 23, 17 par défaut : vidéo prête pour le pic d'audience de 18-21 h) ;
-- aucune émission n'a déjà été fabriquée aujourd'hui.
+- l'heure de Paris a atteint HEURE (0 à 23, 17 par défaut : vidéo prête pour le pic d'audience de 18-21 h), avec rattrapage
+  si GitHub a sauté un réveil ;
+- le nombre de vidéos AUTOMATIQUES du jour n'est pas atteint (les vidéos lancées à la main ne comptent pas).
 Un lancement manuel (bouton « Lancer une émission ») passe toujours."""
 import datetime, json, os
 from zoneinfo import ZoneInfo
@@ -23,14 +24,17 @@ def decision():
         except ValueError: heure = 17
     if freq <= 0: return False, "robot en pause"
     maintenant = datetime.datetime.now(ZoneInfo("Europe/Paris")); jour = maintenant.date()
-    heures = {heure, 12} if deux else {heure}
-    if maintenant.hour not in heures: return False, f"pas l'heure ({maintenant.hour} h, réglé sur {sorted(heures)})"
     if jour.toordinal() % freq: return False, f"jour de repos (une émission tous les {freq} jours)"
+    # créneaux du jour déjà passés : on rattrape si GitHub a sauté un réveil (ses tâches planifiées sont souvent en retard ou omises)
+    creneaux = sorted({12, heure}) if deux else [heure]
+    dus = sum(1 for c in creneaux if maintenant.hour >= c)
+    if not dus: return False, f"pas encore l'heure ({maintenant.hour} h, réglé sur {creneaux})"
     h = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "episodes", "historique.json")
-    if os.path.exists(h):
-        faites = sum(1 for e in json.load(open(h, encoding="utf-8")) if e.get("date") == jour.isoformat())
-        if faites >= (2 if deux else 1): return False, "émission(s) du jour déjà faite(s)"
-    return True, "c'est l'heure"
+    faites = 0
+    if os.path.exists(h):                                                  # seules les vidéos AUTOMATIQUES du jour comptent
+        faites = sum(1 for e in json.load(open(h, encoding="utf-8")) if e.get("date") == jour.isoformat() and e.get("auto"))
+    if faites >= dus: return False, f"vidéo(s) automatique(s) du jour déjà faite(s) ({faites}/{len(creneaux)})"
+    return True, f"créneau de {creneaux[dus - 1]} h ({faites + 1}/{len(creneaux)} aujourd'hui)"
 
 if __name__ == "__main__":
     go, raison = decision(); print(f"Planning : {'GO' if go else 'rien'} ({raison})")
