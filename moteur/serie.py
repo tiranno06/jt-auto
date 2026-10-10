@@ -21,12 +21,55 @@ def etat():
 def prochain():
     """(numéro de l'épisode à écrire, état de la série en cours ou {} si on en commence une nouvelle)."""
     e = etat()
-    if not e.get("titre") or len(e.get("episodes", [])) >= taille(): return 1, {}
+    if e.get("plan") and len(e.get("episodes", [])) < len(e["plan"]): return len(e["episodes"]) + 1, e
+    if not e.get("titre") or len(e.get("episodes", [])) >= max(taille(), len(e.get("plan") or [])): return 1, {}
     return len(e["episodes"]) + 1, e
+
+PLAN = """Tu prépares une SAISON COMPLÈTE de {n} épisodes d'une série de sketchs animés TikTok avec Jojo, Kévin et Lila.
+{persos}
+Format de chaque épisode : {format}.
+Choisis une situation du quotidien qui peut dégénérer d'épisode en épisode (un projet, une galère, une relation), donne un titre de série court et accrocheur,
+puis écris le plan : pour chaque épisode, un titre (« POV : … » ou « Quand … », 40 caractères max) et un résumé de 2 phrases (ce qui se passe, la vanne principale, la chute).
+Une vraie histoire continue : chaque épisode découle du précédent, la tension monte, chaque épisode finit sur une porte ouverte vers la suite, le dernier conclut en beauté.
+Déjà traité récemment (à ne pas reprendre) : {recents}
+Rends le plan avec l'outil plan_saison."""
+OUTIL_PLAN = {"name": "plan_saison", "description": "Titre de la série et plan des épisodes.",
+              "input_schema": {"type": "object", "properties": {"titre": {"type": "string"},
+                               "episodes": {"type": "array", "items": {"type": "object", "properties": {"titre": {"type": "string"}, "resume": {"type": "string"}},
+                                                                       "required": ["titre", "resume"]}}}, "required": ["titre", "episodes"]}}
+
+def planifier(format_="mini", recents=()):
+    """Série d'un seul jet (bouton de la régie) : la saison entière est planifiée d'avance pour que les épisodes s'enchaînent."""
+    import anthropic, ecrire
+    r = ecrire._appel(anthropic.Anthropic(), None, [{"role": "user", "content": PLAN.format(
+        n=taille(), persos=ecrire.personnalites(), recents=" ; ".join(recents)[:1200] or "(rien)",
+        format="gag éclair de 15 à 22 s, une seule scène" if format_ == "mini" else "sketch long de plus d'une minute, 2 à 4 scènes")}],
+        OUTIL_PLAN, max_tokens=4000)
+    eps = [x for x in ecrire._liste(r.get("episodes")) if isinstance(x, dict) and x.get("titre")][:taille()]
+    if not r.get("titre") or len(eps) < 2: raise RuntimeError("plan de saison inexploitable")
+    e = {"titre": str(r["titre"])[:50], "episodes": [], "plan": [{"titre": str(x["titre"])[:60], "resume": str(x.get("resume", ""))[:500]} for x in eps]}
+    os.makedirs(os.path.dirname(FICHIER), exist_ok=True)
+    json.dump(e, open(FICHIER, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    print(f"Saison planifiée : « {e['titre']} », {len(eps)} épisodes", flush=True)
+    for k, x in enumerate(e["plan"]): print(f"  Épisode {k + 1} : {x['titre']} — {x['resume'][:120]}", flush=True)
+    return e
+
+def a_faire():
+    """Épisode planifié suivant ({titre, resume} et numéro), ou (None, 0) s'il n'y a plus rien à fabriquer dans le lot."""
+    e = etat(); plan = e.get("plan") or []; n = len(e.get("episodes", []))
+    return (plan[n], n + 1) if n < len(plan) else (None, 0)
 
 def contexte():
     """Consigne donnée à l'auteur (vide si le mode série est coupé)."""
     if not actif(): return ""
+    prevu, k = a_faire()
+    if prevu:                                                              # saison planifiée d'avance (série d'un seul jet)
+        e = etat()
+        passes = "\n".join(f"    Épisode {j + 1} : {x.get('resume', '')}" for j, x in enumerate(e.get("episodes", []))) or "    (aucun : c'est le premier)"
+        plan = "\n".join(f"    {j + 1}. {x['titre']} — {x['resume']}" for j, x in enumerate(e["plan"]))
+        return (f"épisode {k} sur {len(e['plan'])} de la série « {e['titre']} » (serie_titre = ce titre exactement). Plan de la saison :\n{plan}\n"
+                f"  Épisodes déjà fabriqués :\n{passes}\n  ÉCRIS L'ÉPISODE {k} : « {prevu['titre']} » — {prevu['resume']}"
+                + (" C'est le DERNIER épisode : il conclut l'histoire en beauté." if k >= len(e["plan"]) else " Termine sur une porte ouverte vers l'épisode suivant."))
     n, e = prochain()
     if n == 1:
         return (f"épisode 1 d'une NOUVELLE série de {taille()} épisodes. Choisis une situation de départ qui peut tenir une saison "
@@ -47,8 +90,11 @@ def idees():
 def enregistrer(sk, fichier=""):
     """Après fabrication : ajoute l'épisode à la série (ou démarre la nouvelle). Renvoie le numéro de l'épisode."""
     if not actif() or not sk.get("serie_titre"): return None
-    n, e = prochain()
-    if n == 1: e = {"titre": sk["serie_titre"], "episodes": []}
+    if a_faire()[0]:                                                       # série planifiée : on remplit le plan
+        e = etat(); n = len(e["episodes"]) + 1
+    else:
+        n, e = prochain()
+        if n == 1: e = {"titre": sk["serie_titre"], "episodes": []}
     e["episodes"].append({"resume": sk.get("resume_episode") or sk.get("sujet", ""), "fichier": fichier, "titre": sk.get("titre_accroche", "")})
     os.makedirs(os.path.dirname(FICHIER), exist_ok=True)
     json.dump(e, open(FICHIER, "w", encoding="utf-8"), ensure_ascii=False, indent=1)

@@ -470,3 +470,20 @@ class TestPetitsDramas(unittest.TestCase):
         os.environ["PERSO_JOJO"] = "un radin absolu"
         try: self.assertIn("un radin absolu", ecrire.personnalites())
         finally: os.environ.pop("PERSO_JOJO")
+
+
+class TestSerieLot(unittest.TestCase):
+    def test_plan_puis_episodes(self):
+        import serie
+        os.environ["EPISODES"] = "serie"; vrai = serie.FICHIER
+        serie.FICHIER = os.path.join(os.path.dirname(__file__), "_serie_lot.json")
+        try:
+            json.dump({"titre": "Jojo déménage", "episodes": [], "plan": [{"titre": f"Ép {k}", "resume": f"r{k}"} for k in range(1, 4)]},
+                      open(serie.FICHIER, "w", encoding="utf-8"))
+            for k in range(1, 4):
+                prevu, n = serie.a_faire(); self.assertEqual((prevu["titre"], n), (f"Ép {k}", k))
+                self.assertIn(f"ÉCRIS L'ÉPISODE {k}", serie.contexte())
+                self.assertEqual(serie.enregistrer({"serie_titre": "Jojo déménage", "resume_episode": f"fait {k}"}), k)
+            self.assertEqual(serie.a_faire(), (None, 0))
+        finally:
+            os.environ.pop("EPISODES"); os.path.exists(serie.FICHIER) and os.remove(serie.FICHIER); serie.FICHIER = vrai

@@ -18,6 +18,8 @@ if AUTO:                                                                  # nouv
     import planning
     _go, _raison = planning.decision()
     if not _go: print(f"Planning : rien à faire ({_raison})"); sys.exit(0)
+LOT = (os.environ.get("SERIE_LOT") or "").strip() == "1"                 # série d'un seul jet : tous les épisodes à la suite
+if LOT: os.environ["EPISODES"] = "serie"
 THEME = (os.environ.get("THEME") or "").strip()[:2000]                 # création manuelle depuis l'onglet « Manuel » de la régie
 REFAIRE = (os.environ.get("REFAIRE") or "").strip()                      # « fichier.mp4|texte|voix|decors » : bouton Refaire de la régie
 ANCIEN, SK_ANCIEN = None, None
@@ -114,6 +116,11 @@ def main():
         print(f"Vidéo manuelle ({'script' if mode_script else 'idée'}) : « {texte[:200]} »", flush=True)
         if mode_script: script = texte
         candidats = [([{"titre": texte.splitlines()[0][:120], "resume": texte[:1500], "lien": "", "date": None, "source": "manuel"}], "manuel")]
+    elif LOT and libre:                                                    # série d'un seul jet : la saison est planifiée, on fabrique l'épisode suivant
+        if not serie.a_faire()[0]: serie.planifier(fmt, recents=[h.get("titre", "") for h in historique[-30:]])
+        prevu, k_ep = serie.a_faire()
+        candidats = [([{"titre": prevu["titre"], "resume": prevu["resume"], "lien": "", "date": None, "source": "série"}], "série")]
+        print(f"Série d'un seul jet : épisode {k_ep} « {prevu['titre']} »", flush=True)
     elif libre and not os.environ.get("SKETCH_TEST", "").strip():
         try: candidats = [(c, "idée") for c in ecrire.idees_libres(recents=[f"{h.get('titre', '')} : {h.get('accroche', '')}" for h in historique[-30:]],
                                                                     consignes=stats.pour_idees())]
@@ -157,6 +164,7 @@ def main():
         titres = next((c[0] for c in candidats if c[0][0]["lien"] and c[0][0]["lien"] in sk.get("sources", [])), titres)
     print(f"Sketch : « {sk['sujet']} », {len(sk['repliques'])} répliques", flush=True)
     accroche_hist = sk["repliques"][0]["t"] if sk.get("repliques") else ""
+    if LOT and serie.etat().get("titre"): sk["serie_titre"] = serie.etat()["titre"]   # l'épisode compte toujours dans la saison
     num = serie.prochain()[0] if (libre and serie.actif() and sk.get("serie_titre") and not REFAIRE) else None
     if libre and sk.get("titre_accroche") and os.environ.get("VOIX_OFF", "1") != "0" and not sk.get("_monte"):
         titre_lu = sk["titre_accroche"].strip()                             # voix off d'ouverture : elle lit le titre « POV : … »
@@ -245,6 +253,13 @@ def main():
     if libre and not test and not THEME:
         n_ep = serie.enregistrer(sk, os.path.basename(base) + ".mp4")
         if n_ep: print(f"Série « {sk['serie_titre']} » : épisode {n_ep} enregistré", flush=True)
+        if LOT and serie.a_faire()[0]:                                     # épisode suivant : le robot se relance tout seul
+            import subprocess
+            r_ = subprocess.run(["gh", "api", "-X", "POST", f"repos/{os.environ.get('GITHUB_REPOSITORY', '')}/actions/workflows/emission.yml/dispatches",
+                                 "-f", "ref=main", "-f", f"inputs[format]={fmt}", "-f", "inputs[serie]=1"], capture_output=True, text=True)
+            print(f"Épisode suivant {'lancé' if r_.returncode == 0 else 'impossible à lancer : ' + r_.stderr[:200]}", flush=True)
+        elif LOT:
+            print("Série complète : tous les épisodes sont fabriqués.", flush=True)
     sortie = os.environ.get("GITHUB_OUTPUT")
     if sortie:
         with open(sortie, "a") as f:

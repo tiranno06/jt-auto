@@ -81,7 +81,7 @@ def application(nom):
 
 # Service worker : l'appli s'ouvre même hors connexion (dernière version de la page), sans jamais mettre en cache
 # les vidéos (trop lourdes) ni les appels à GitHub.
-SW = r"""const CACHE = "regie-v13";
+SW = r"""const CACHE = "regie-v14";
 const COQUILLE = ["./", "manifest.webmanifest", "logo-192.png", "logo-512.png", "poppins-500.ttf", "poppins-700.ttf"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(COQUILLE))); self.skipWaiting(); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(k => Promise.all(k.filter(x => x !== CACHE).map(x => caches.delete(x))))); self.clients.claim(); });
@@ -299,6 +299,10 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
       <option value="serie">En série : la suite de la même histoire d'une vidéo à l'autre (« Épisode 3 »)</option></select></label>
     <label>Épisodes par série<select data-var="EPISODES_PAR_SERIE" data-def="5"><option value="3">3</option><option value="5">5 (recommandé)</option><option value="8">8</option><option value="10">10</option></select></label>
     <p class="note">En série, le robot se souvient des épisodes précédents, fait des rappels, et démarre une nouvelle série quand la saison est finie.</p>
+    <label>Format des épisodes<select id="serieFormat" class="perso"><option value="mini">⚡ Gags éclair</option><option value="libre">🎭 Sketchs longs (+1 min)</option></select></label>
+    <button class="action perso" id="serieLot">🎬 Fabriquer toute la série maintenant</button>
+    <div id="suiviSerie" class="note"></div>
+    <p class="note">D'un seul jet : le robot écrit le plan de toute la saison, puis fabrique les épisodes à la suite (15 à 40 min chacun). Ils arrivent dans Courtes ou Longues, avec « Épisode 1, 2, 3… », et ne sont jamais publiés tout seuls : vous les publiez ou les programmez quand vous voulez.</p>
   </section>
   <section class="panneau"><h2>🧪 Contrôle qualité</h2>
     <div class="auto" style="margin-bottom:12px"><div class="txt"><b>Public test</b><small>Trois spectateurs virtuels découvrent le sketch sans contexte : ont-ils compris, ri, décroché ? Leurs critiques servent à améliorer le texte (un peu plus de crédit Claude).</small></div><button class="inter" data-var="PUBLIC_TEST" data-def="1" data-bascule="1"></button></div>
@@ -604,6 +608,13 @@ document.querySelectorAll(".onglet").forEach(b=>b.onclick=()=>{
   $("#barre").style.display=b.dataset.o==="videos"?"":"none"; document.body.dataset.onglet=b.dataset.o; if(b.dataset.o==="config") chargerReglages();
 });
 // ------------------------------------------------ réglages (variables du dépôt GitHub)
+// ------------------------------------------------ série d'un seul jet
+function lancerSerie(){
+  const n=document.querySelector('[data-var="EPISODES_PAR_SERIE"]').value||"5", f=$("#serieFormat").value;
+  lancerFlux("emission.yml",$("#serieLot"),`🎬 Série de ${n} ${f==="mini"?"gags éclair":"sketchs longs"} en fabrication : plan de la saison, puis les épisodes à la suite (environ ${f==="mini"?20*n:35*n} min au total).`,{format:f,serie:"1"},$("#suiviSerie"))}
+$("#serieLot").onclick=()=>{if(!lireJeton()){toast("Connectez la régie pour lancer la série");return} lancerSerie()};
+document.querySelector('[data-var="EPISODES"]').addEventListener("change",e=>{
+  if(e.target.value==="serie"&&lireJeton()&&confirm("Fabriquer maintenant tous les épisodes de la série, d'un seul jet ?")) setTimeout(lancerSerie,600)});
 // ------------------------------------------------ programme et planning personnalisés
 const NOMS_F={mini:"⚡ Gag",libre:"🎭 Long",actu:"📰 JT"}; let SEQ=["mini","mini","mini","libre"], CREN=[], JOURS=new Set([1,2,3,4,5,6,7]);
 function dessinerSeq(){const z=$("#seqChips"); z.innerHTML="";

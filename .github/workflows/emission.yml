@@ -21,6 +21,10 @@ on:
         description: "1 = lancement du réveil de secours (compte comme une vidéo automatique)"
         required: false
         default: ""
+      serie:
+        description: "1 = série d'un seul jet (régie) : la saison est planifiée puis tous les épisodes s'enchaînent"
+        required: false
+        default: ""
       theme:
         description: "Vidéo manuelle (onglet Manuel de la régie) : idée ou script (préfixe SCRIPT::). Hors cycle, jamais publiée automatiquement."
         required: false
@@ -30,6 +34,7 @@ permissions:
   contents: write
   pages: write
   id-token: write
+  actions: write
 
 jobs:
   planning:
@@ -56,7 +61,7 @@ jobs:
     needs: planning
     if: needs.planning.outputs.go == 'true'
     concurrency:                 # les vidéos manuelles ont leur propre file : elles n'annulent jamais une émission en attente
-      group: ${{ (inputs.theme != '' || inputs.refaire != '') && format('manuel-{0}', github.run_id) || 'emission' }}
+      group: ${{ (inputs.theme != '' || inputs.refaire != '') && format('manuel-{0}', github.run_id) || (inputs.serie != '' && 'serie') || 'emission' }}
       cancel-in-progress: false
     runs-on: ubuntu-24.04
     timeout-minutes: 120
@@ -85,6 +90,7 @@ jobs:
       SEUIL_QUALITE: ${{ vars.SEUIL_QUALITE }}
       FORMAT: ${{ inputs.format || vars.FORMAT }}
       THEME: ${{ inputs.theme }}
+      SERIE_LOT: ${{ inputs.serie }}
       REFAIRE: ${{ inputs.refaire }}
       SEUIL_PUBLICATION: ${{ vars.SEUIL_PUBLICATION }}
       TENDANCES: ${{ vars.TENDANCES }}
@@ -180,7 +186,7 @@ jobs:
         run: python moteur/alerte.py "⚠️ Échec de fabrication" "$(grep -v '^  image' episodes/journal.txt 2>/dev/null | tail -n 3 | cut -c1-250)"
 
       - name: Publier sur TikTok (seulement si la publication automatique est activée sur le site)
-        if: steps.run.outputs.video != '' && vars.PUBLICATION_AUTO == '1' && steps.run.outputs.qualite != 'faible' && inputs.theme == '' && inputs.refaire == ''
+        if: steps.run.outputs.video != '' && vars.PUBLICATION_AUTO == '1' && steps.run.outputs.qualite != 'faible' && inputs.theme == '' && inputs.refaire == '' && inputs.serie == ''
         continue-on-error: true
         run: |
           URL="${{ github.server_url }}/${{ github.repository }}/releases/download/emissions-${{ steps.run.outputs.mois }}/${{ steps.run.outputs.nom }}"
