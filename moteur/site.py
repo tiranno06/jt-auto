@@ -81,7 +81,7 @@ def application(nom):
 
 # Service worker : l'appli s'ouvre même hors connexion (dernière version de la page), sans jamais mettre en cache
 # les vidéos (trop lourdes) ni les appels à GitHub.
-SW = r"""const CACHE = "regie-v15";
+SW = r"""const CACHE = "regie-v16";
 const COQUILLE = ["./", "manifest.webmanifest", "logo-192.png", "logo-512.png", "poppins-500.ttf", "poppins-700.ttf"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(COQUILLE))); self.skipWaiting(); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(k => Promise.all(k.filter(x => x !== CACHE).map(x => caches.delete(x))))); self.clients.claim(); });
@@ -201,8 +201,8 @@ textarea{resize:vertical}
 .chip{padding:7px 11px;border-radius:999px;font-size:13px;background:var(--carte);color:var(--texte);border:1px solid var(--ligne)}
 #jours .chip{width:40px;padding:8px 0;color:var(--doux)} #jours .chip.on{background:var(--jaune);color:#111;border-color:var(--jaune)}
 .creneau{display:flex;gap:6px;align-items:center;margin:6px 0}
-.creneau input[type=time]{flex:0 0 108px} .creneau select{flex:1;margin:0} .creneau .second{flex:0 0 42px;padding:9px 0}
-.auto-h{flex:0 0 108px;font-weight:700;color:var(--jaune);text-align:center}
+.creneau .heure{display:flex;gap:4px;flex:0 0 140px} .creneau .heure select{flex:1;padding:10px 4px;margin:0} .creneau select{flex:1;margin:0} .creneau .second{flex:0 0 42px;padding:9px 0}
+.auto-h{flex:0 0 140px;font-weight:700;color:var(--jaune);text-align:center}
 label>textarea{display:block;width:100%;margin-top:6px;box-sizing:border-box}
 .onglet.reg{flex:0 0 42px;padding:10px 0}
 @media (max-width:420px){.onglet{font-size:12.5px}.onglets{gap:6px;padding:8px 10px}}
@@ -637,10 +637,14 @@ function lireHoraires(brut){CREN=[];JOURS=new Set([1,2,3,4,5,6,7]); brut=String(
   if(!CREN.length) CREN=[{h:"17:00",f:"programme"}]}
 function dessinerPlanning(){const z=$("#creneaux"); z.innerHTML="";
   CREN.forEach((c,i)=>{const l=document.createElement("div");l.className="creneau";
-    l.innerHTML=(c.h==="auto"?'<span class="auto-h">📊 Auto</span>':`<input type="time" class="perso" value="${c.h}">`)+
+    const [hh,mm]=(c.h==="auto"?"17:00":c.h).split(":");
+    const optH=[...Array(24).keys()].map(x=>`<option value="${String(x).padStart(2,"0")}">${x} h</option>`).join("");
+    const optM=[...Array(12).keys()].map(x=>`<option value="${String(x*5).padStart(2,"0")}">${String(x*5).padStart(2,"0")}</option>`).join("");
+    l.innerHTML=(c.h==="auto"?'<span class="auto-h">📊 Auto</span>':`<span class="heure"><select class="perso hh">${optH}</select><select class="perso mm">${optM}</select></span>`)+
       `<select class="perso"><option value="programme">Selon le programme</option><option value="mini">⚡ Gag éclair</option><option value="libre">🎭 Sketch long</option><option value="actu">📰 JT</option></select><button class="second perso" title="Retirer">✕</button>`;
-    const t=l.querySelector("input"); if(t) t.onchange=()=>{c.h=t.value||c.h};
-    const s=l.querySelector("select"); s.value=c.f; s.onchange=()=>{c.f=s.value};
+    const sh=l.querySelector(".hh"), sm=l.querySelector(".mm");             // listes heure / minutes : faciles au doigt sur téléphone
+    if(sh){sh.value=hh; sm.value=String(Math.round((+mm||0)/5)*5%60).padStart(2,"0"); const maj=()=>{c.h=sh.value+":"+sm.value}; sh.onchange=maj; sm.onchange=maj; maj()}
+    const s=l.querySelector("select:not(.hh):not(.mm)"); s.value=c.f; s.onchange=()=>{c.f=s.value};
     l.querySelector("button").onclick=()=>{CREN.splice(i,1);dessinerPlanning()}; z.appendChild(l)});
   const j=$("#jours"); j.innerHTML="";
   ["L","M","M","J","V","S","D"].forEach((n,k)=>{const b=document.createElement("button");b.className="chip perso"+(JOURS.has(k+1)?" on":"");b.textContent=n;
