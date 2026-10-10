@@ -26,7 +26,7 @@ UNES = [
 DRAMES = re.compile(r"\b(mort|morts|morte|décès|décédé|tué|tués|tuée|meurtre|assassin|attentat|terroris|viol|victime|victimes|"
                     r"otage|massacre|bombard|guerre|antisémit|racis|haine|discrimin|homophob|islamophob|harcèle|israël|israel|gaza|hamas|palestin|hezbollah|ukrain|russie|iran|cisjordanie|blessé|blessés|noyé|incendie|crash|deuil|obsèques|pédo|agression|féminicide|suicide)", re.I)
 # rubriques récurrentes (bourse, météo, jeux, horoscope…) : jamais un « sujet du jour »
-RUBRIQUES = re.compile(r"(l[’']actu de|ce qu[’']il faut retenir|les infos du|récap|en bref|revue de presse|\d{2}/\d{2}|bourse|cac 40|marchés|valeurs|météo|horoscope|loto|euromillions|programme tv|résultats du|en direct|live|replay|podcast|quiz)", re.I)
+RUBRIQUES = re.compile(r"(l[’']actu de|ce qu[’']il faut retenir|les infos du|récap|en bref|revue de presse|\d{2}/\d{2}|bourse|cac 40|marchés|valeurs|météo|horoscope|loto|euromillions|programme tv|résultats du|en direct|live|replay|podcast|quiz|revivez|minute par minute|à quelle heure|sur quelle chaîne)", re.I)
 VIDES = set("""le la les un une des du de d l au aux et ou en dans sur sous pour par avec sans ce cet cette ces son sa ses leur leurs qui que quoi
 dont est sont a ont été être avoir fait faire plus moins très tout tous toute toutes après avant contre entre chez comme mais donc or ni car
 il elle ils elles on nous vous je tu se s y ne pas n quand comment pourquoi selon face depuis vers lors ainsi aussi encore déjà va vont peut
@@ -89,7 +89,7 @@ def candidats_du_jour(heures=24, deja_vus=(), mots_recents=(), n=6):
     Renvoie [(titres du sujet, description), …], le titre principal en premier dans chaque sujet."""
     maintenant = datetime.datetime.now(datetime.timezone.utc); tous = []
     for url in FLUX + UNES:
-        try: tous += [dict(i, flux=url) for i in lire_flux(url)]
+        try: tous += [dict(i, flux=url, une=url in UNES) for i in lire_flux(url)]
         except Exception as e: print(f"  flux ignoré {url} : {e}", flush=True)
     items, vus = [], set()
     for it in tous:
@@ -108,17 +108,28 @@ def candidats_du_jour(heures=24, deja_vus=(), mots_recents=(), n=6):
         groupes.append({"items": membres, "mots": set(it["mots"]), "graine": it})
     recents = set(mots_recents)
     def score(g):
+        """Importance dans l'actualité française du jour : nombre de médias qui le mettent À LA UNE, puis nombre de médias qui en parlent."""
         sources = {i["source"] for i in g["items"]}
+        unes = {i["source"] for i in g["items"] if i.get("une")}
         frais = sum(1 for i in g["items"] if i["date"] and (maintenant - i["date"]).total_seconds() < 12 * 3600)
         deja = len(g["mots"] & recents) >= 4                                 # sujet déjà traité ces derniers jours
-        return (len(sources) * 3 + len(g["items"]) + frais) * (0.3 if deja else 1)
+        return (len(unes) * 5 + len(sources) * 3 + len(g["items"]) + frais) * (0.3 if deja else 1)
     groupes.sort(key=score, reverse=True)
-    out, graines = [], []
+    out, graines, secondaires = [], [], []
     for g in groupes:
         gr = g["graine"]
         if any(len(gr["cles"] & x["cles"]) >= 2 for x in graines) or len(g["items"]) < 2: continue   # sujets distincts, repris au moins deux fois
+        if len(gr["titre"].split()) < 4:                                    # titre réduit à un nom (page thème) : on prend un vrai titre du groupe
+            pleins = [i for i in g["items"] if len(i["titre"].split()) >= 4]
+            if not pleins: continue
+            gr = max(pleins, key=lambda i: (i.get("une", False), len(i["cles"])))
         graines.append(gr)
         sel = [gr] + [i for i in sorted(g["items"], key=lambda i: i["date"] or maintenant, reverse=True) if i is not gr][:5]
-        out.append((sel, f"{len(g['items'])} articles, {len({i['source'] for i in g['items']})} médias"))
+        medias = {i["source"] for i in g["items"]}; unes = {i["source"] for i in g["items"] if i.get("une")}
+        info = f"à la une chez {len(unes)} média(s), {len(medias)} médias, {len(g['items'])} articles"
+        # gros titre du jour : à la une d'au moins un média ET traité par au moins 3 médias différents
+        (out if unes and len(medias) >= 3 else secondaires).append((sel, info))
         if len(out) >= n: break
+    if len(out) < 2:                                                       # journée creuse ou flux « à la une » en panne : on complète, signalé
+        out += [(sel, info + " (sujet secondaire)") for sel, info in secondaires[:max(0, min(n, 3) - len(out))]]
     return out

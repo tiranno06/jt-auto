@@ -89,6 +89,7 @@ ADAPTATION = """
 ═══════════════════════════════════════════
 ADAPTATION AU ROBOT « L'INFO EN CAOUTCHOUC » (prioritaire en cas de conflit avec ce qui précède)
 ═══════════════════════════════════════════
+SUJET — RÈGLE DU PROPRIÉTAIRE (remplace la section 2 « pas nécessairement le titre le plus important ») : le sujet DOIT être un des gros titres de l'actualité française du jour. Les candidats te sont donnés classés par importance (nombre de médias français qui les mettent à la une). Tu choisis parmi les {top} premiers uniquement ; le potentiel comique départage, il ne justifie jamais de prendre un sujet secondaire.
 RECHERCHE : le robot a déjà collecté l'actualité des dernières 24 à 36 heures dans les flux RSS de plusieurs médias français ; tu reçois les sujets candidats avec leurs articles. Si l'outil de recherche web est disponible, utilise-le pour vérifier les faits du sujet choisi (dates, chiffres) ; sinon, appuie-toi uniquement sur les articles fournis et dis-le dans "faits_reels".
 
 PERSONNAGES (fictifs, animés en dessin, clés autorisées pour "p") :
@@ -123,11 +124,11 @@ Ne mets AUCUNE note ni décision (« prêt pour production ») dans tes livrable
 EXEMPLE DE STYLE ET DE FORMAT (court, sujet d'une autre semaine, ne réutilise pas ses blagues) :
 {exemple}"""
 
-SELECTION = """Étapes 1 à 3 du cahier des charges. Voici les sujets candidats du jour (les plus repris par les médias) :
+SELECTION = """Étapes 1 à 3 du cahier des charges. Voici les gros titres de l'actualité française du jour, classés par importance (le [0] est le plus à la une) :
 {candidats}
 
 Note chaque candidat sur 10 (potentiel comique, absurdité, potentiel satirique, originalité, reconnaissance par le public, potentiel visuel, fraîcheur ; plus de poids à l'originalité et au potentiel comique). Écarte les drames et les sujets où l'on rirait de victimes.
-Choisis celui qui permet le MEILLEUR sketch, puis trouve son angle comique (contradiction discours/actes, mauvaise foi, absurdité administrative, double standard, conséquence grotesque). Si tu disposes de la recherche web, vérifie rapidement les faits clés du sujet choisi.
+Choisis OBLIGATOIREMENT parmi les candidats [0] à [{dernier}] celui qui permet le MEILLEUR sketch, puis trouve son angle comique (contradiction discours/actes, mauvaise foi, absurdité administrative, double standard, conséquence grotesque). Si tu disposes de la recherche web, vérifie rapidement les faits clés du sujet choisi.
 Rends ton choix avec l'outil choisir_sujet."""
 
 CRITIQUE = """Étape 8 du cahier des charges : relis ce sketch comme un auteur exigeant et note-le sur 100, honnêtement (ne gonfle jamais la note) :
@@ -322,6 +323,8 @@ def longueur(sk):
 def _bloc_candidat(k, titres):
     return f"[{k}] " + "\n    ".join(f"- [{t['source']}] {t['titre']} — {t['resume'][:220]} ({t['lien']})" for t in titres[:5])
 
+TOP = 3                                                                  # le sujet est pris parmi les 3 plus gros titres du jour
+
 def _bloquant(e):
     """Erreurs qui ne se règlent pas en réessayant : crédit épuisé, clé invalide, accès refusé."""
     t = str(e).lower()
@@ -340,17 +343,19 @@ def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=()):
         except ValueError: essais = 3
     systeme = MOTEUR_HUMOUR + ADAPTATION.format(cast="\n".join(f"- {k} : {v}" for k, v in CAST.items()), ton=TON, secondes=SECONDES, nb=NB,
                                                  mots=MOTS, mots_min=MOTS_MIN or 40, special=SPECIAL_DEMAIN if special else "", gags=gtxt, recents=rtxt,
-                                                 looks="|".join(LOOKS), exemple=json.dumps(EXEMPLE, ensure_ascii=False, indent=0))
+                                                 looks="|".join(LOOKS), top=TOP, exemple=json.dumps(EXEMPLE, ensure_ascii=False, indent=0))
     # 1) sélection du sujet et de l'angle
     ordre, angle, verifs = list(range(len(candidats))), "", []
     try:
-        ch = _appel(client, systeme, [{"role": "user", "content": SELECTION.format(candidats="\n\n".join(_bloc_candidat(k, c) for k, c in enumerate(candidats)))}],
+        ch = _appel(client, systeme, [{"role": "user", "content": SELECTION.format(dernier=min(TOP, len(candidats)) - 1, candidats="\n\n".join(_bloc_candidat(k, c) for k, c in enumerate(candidats[:TOP])))}],
                     OUTIL_CHOIX, web=True, max_tokens=4000)
         notes = {int(n.get("index", -1)): float(n.get("note", 0)) for n in ch.get("notes", []) if isinstance(n, dict)}
-        choix = int(ch.get("choix", 0)) if 0 <= int(ch.get("choix", 0)) < len(candidats) else 0
-        ordre = [choix] + sorted([k for k in ordre if k != choix], key=lambda k: -notes.get(k, 0))
+        choix = int(ch.get("choix", 0))
+        if not 0 <= choix < min(TOP, len(candidats)):
+            print(f"Choix {choix} refusé : hors des {TOP} plus gros titres, on prend le n°0.", flush=True); choix = 0
+        ordre = [choix] + sorted([k for k in ordre[:TOP] if k != choix], key=lambda k: (-notes.get(k, 0), k))   # secours : autre gros titre
         angle, verifs = str(ch.get("angle", "")), [str(x) for x in ch.get("faits_verifies", [])][:8]
-        print("Candidats : " + " | ".join(f"{notes.get(k, '?')}/10 {c[0]['titre'][:60]}" for k, c in enumerate(candidats)), flush=True)
+        print("Gros titres soumis : " + " | ".join(f"{notes.get(k, '?')}/10 {c[0]['titre'][:60]}" for k, c in enumerate(candidats[:TOP])), flush=True)
         print(f"Sujet choisi : « {candidats[choix][0]['titre'][:100]} » — angle : {angle[:160]}", flush=True)
     except Exception as e:
         print(f"Sélection automatique impossible ({str(e)[:150]}) : premier candidat.", flush=True)

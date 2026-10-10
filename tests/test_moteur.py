@@ -42,6 +42,27 @@ class TestRecherche(unittest.TestCase):
         self.assertFalse(any("Accident" in t for t in tous))                  # drames exclus
         self.assertFalse(any("chat" in t for t in tous))                      # sujet repris une seule fois : écarté
 
+    def test_gros_titres_a_la_une_en_premier(self):
+        politique = [article(f"Réforme des retraites : le Sénat examine le texte ({m})", m) for m in "abcd"]
+        une = [article(f"Carburant : le prix de l'essence bat un record ({m})", m) for m in ("lemonde", "figaro", "bfm", "franceinfo")]
+        sport = [article(f"Lens - OL : revivez le match ({m})", m) for m in ("lequipe", "bfm", "rmc")]
+        bruit = [article(f"Brève {chr(97 + i % 26)}{i} isolée numéro{i} motunique{i}", f"s{i}") for i in range(60)]   # volume réaliste de flux
+        actu.lire_flux = lambda u: politique + bruit if u == actu.FLUX[0] else une + sport if u == actu.UNES[0] else []
+        c = actu.candidats_du_jour()
+        self.assertIn("essence", c[0][0][0]["titre"])                           # le sujet à la une passe devant
+        self.assertIn("à la une chez 4", c[0][1])
+        self.assertIn("secondaire", c[1][1])                                     # pas à la une : signalé comme secondaire
+        self.assertFalse(any("Lens" in a["titre"] for sel, _ in c for a in sel)) # direct sportif écarté
+
+    def test_titre_reduit_a_un_nom(self):
+        items = [article("Gabriel Attal", "a"), article("Gabriel Attal ", "b", resume="gabriel attal"),
+                 article("Gabriel Attal annonce sa candidature à la présidentielle", "c"),
+                 article("Présidentielle : Gabriel Attal candidat, annonce surprise", "d")]
+        actu.lire_flux = lambda u: items if u == actu.UNES[0] else []
+        c = actu.candidats_du_jour()
+        self.assertGreaterEqual(len(c[0][0][0]["titre"].split()), 4)            # on présente un vrai titre, pas un simple nom
+        self.assertIn("Attal", c[0][0][0]["titre"])
+
     def test_deja_vus_et_flux_en_panne(self):
         items = [article("Budget 2027 : les députés rejettent les économies", "a", "L1"),
                  article("Les économies du budget rejetées par les députés", "b", "L2"),
@@ -105,7 +126,7 @@ class TestEcriture(unittest.TestCase):
 class FauxClaude:
     """Simule l'API : choix du candidat 1, puis sketch noté 60 (réécriture demandée) puis 86."""
     def __init__(self, web_en_panne=False, critique_vide=False, sources=("L1",)):
-        self.notes = [60, 86]; self.appels = []; self.web_en_panne = web_en_panne
+        self.notes = [60, 86]; self.appels = []; self.web_en_panne = web_en_panne; self.choix = 1; self.prompts = []
         self.critique_vide = critique_vide; self.sources = list(sources); self.reecritures = []
         self.messages = self
 
@@ -113,7 +134,7 @@ class FauxClaude:
         noms = [t.get("name") for t in kw.get("tools", [])]
         self.appels.append(noms)
         if self.web_en_panne and "web_search" in noms: raise RuntimeError("outil web non autorisé")
-        if "choisir_sujet" in noms: out = {"notes": [{"index": 0, "note": 4}, {"index": 1, "note": 9}], "choix": 1, "angle": "angle test", "faits_verifies": ["fait"]}
+        if "choisir_sujet" in noms: self.prompts.append(kw["messages"][0]["content"]); out = {"notes": [{"index": 0, "note": 4}, {"index": 1, "note": 9}], "choix": self.choix, "angle": "angle test", "faits_verifies": ["fait"]}
         elif "noter_sketch" in noms:
             out = {"total": self.notes.pop(0), "critique": "" if self.critique_vide else "chute trop faible"}
             if self.critique_vide:                                            # critique écrite hors de l'outil
@@ -159,6 +180,16 @@ class TestMoteurHumour(unittest.TestCase):
             cands = [[article("Budget 2027 : les économies rejetées", "a", "L1"), article("Budget : les députés et les économies", "b", "L2")]] * 2
             self.assertEqual(ecrire.ecrire_sketch(cands)["fiche"]["note"], 86)    # variable vide : 3 réécritures par défaut, pas de plantage
         finally: os.environ.pop("MAX_REECRITURES")
+
+    def test_choix_hors_gros_titres_refuse(self):
+        faux = FauxClaude(); faux.choix = 4
+        sys.modules["anthropic"] = types.SimpleNamespace(Anthropic=lambda: faux)
+        budget = [article("Budget 2027 : les économies rejetées", "a", "L1"), article("Budget : les députés et les économies", "b", "L2")]
+        autres = [[article(f"Sujet secondaire numéro {i} sans rapport", "z", f"Z{i}")] for i in range(4)]
+        sk = ecrire.ecrire_sketch([budget] + autres, essais=3)
+        self.assertEqual(sk["sources"], ["L1"])                               # choix n°4 refusé : on garde le plus gros titre (n°0)
+        self.assertNotIn("numéro 3", faux.prompts[0])                         # seuls les 3 plus gros titres sont soumis
+        self.assertIn("numéro 1", faux.prompts[0])
 
     def test_credit_epuise_arret_net(self):
         faux = FauxClaude(); faux.notes = [60]

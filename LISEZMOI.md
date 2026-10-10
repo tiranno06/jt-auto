@@ -78,8 +78,8 @@ La clé reste uniquement dans le navigateur de ton téléphone (elle n'est jamai
 
 ## Moteur humoristique
 Les consignes d'auteur sont dans `moteur/prompts/moteur_humour.md` (modifiable sans toucher au code). À chaque émission :
-1. le robot réunit les sujets des dernières 24 h repris par plusieurs médias (RSS de 13 médias ; drames, conflits armés et rubriques récurrentes exclus ; sujets et liens déjà traités évités) ;
-2. Claude note chaque sujet candidat sur 10, choisit le meilleur et son angle, et vérifie les faits avec la recherche web de l'API si elle est disponible (sinon il s'en tient aux articles, et le journal le signale) ;
+1. le robot réunit les **gros titres français du jour** : sujets des dernières 24 h mis à la une par au moins un grand média et traités par au moins 3 médias, classés par nombre de unes (RSS de 13 médias ; drames, conflits armés, directs sportifs et rubriques récurrentes exclus ; sujets et liens déjà traités évités). Un sujet qui n'est pas à la une n'est pris que si la journée est creuse, et il est marqué « sujet secondaire » dans le journal ;
+2. Claude reçoit seulement les 3 plus gros titres, les note sur 10 et choisit parmi eux celui qui donne le meilleur sketch (un choix en dehors est refusé par le code), puis son angle, et vérifie les faits avec la recherche web de l'API si elle est disponible (sinon il s'en tient aux articles, et le journal le signale) ;
 3. il écrit un sketch de 60 à 90 s (130 à 190 mots) avec les livrables A à F (résumé factuel, concept, découpage scène par scène avec bruitages, faits réels / inventions) ;
 4. un relecteur le note sur 100 ; sous 80, jusqu'à 3 réécritures, puis un second sujet ; la meilleure version est gardée mais **n'est jamais publiée automatiquement si elle reste sous 80** ;
 5. les jetons consommés et toutes les décisions sont écrits dans `episodes/journal.txt` ; la fiche complète de l'épisode est dans `episodes/<date>.json` (champ `fiche`).
