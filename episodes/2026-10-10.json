@@ -1,236 +1,143 @@
 {
- "titre": "LIVREUR FANTÔME",
- "sujet": "LIVREUR FANTÔME",
- "ecran": "COLIS ABSENT",
+ "titre": "FAUCHÉ",
+ "sujet": "FAUCHÉ",
+ "ecran": "FAUCHÉ",
  "invite_nom": "Kévin",
- "invite_role": "Livreur (fictif)",
+ "invite_role": "Le pote mytho (fictif)",
  "invite_look": "chauve",
- "lieu_direct": "Pas de la porte",
- "titre_accroche": "POV : le livreur dit qu'il est passé",
- "question": "Votre colis, il est sur le canapé de quel livreur ? 👇",
- "running_gag": "Le voisin Kévin : quand un colis est « confié à un voisin », c'est toujours chez Kévin.",
- "verite": "Le livreur ne monte jamais : il coche « destinataire absent » sans bouger, et c'est le client, resté chez lui toute la journée, qui traverse la ville pour aller chercher son colis. Quand il le retrouve.",
+ "lieu_direct": "Chambre de Kévin",
+ "titre_accroche": "Quand tu te demandes pourquoi t'es fauché",
+ "question": "Combien d'abonnements vous payez sans jamais vous en servir ? Soyez honnêtes 👇",
+ "running_gag": "L'abonnement de Kévin : quel que soit son problème, il le règle en prenant un abonnement de plus.",
+ "verite": "On n'est pas fauchés à cause des grosses dépenses mais à cause de dizaines de petits abonnements oubliés, qu'on paie sans s'en servir et qu'on ne résilie jamais, parce que tout est fait pour qu'on n'y arrive pas.",
  "repliques": [
   {
-   "p": "invite",
-   "t": "Madame, je suis passé. Vous étiez absente.",
-   "d": "[deadpan] Madame, je suis passé. Vous étiez absente.",
-   "objet": "telephone"
+   "p": "envoyee",
+   "t": "47 prélèvements ! La salle de sport ?",
+   "d": "Quarante-sept prélèvements! La salle de sport?"
   },
   {
-   "p": "envoyee",
-   "t": "Kévin, c'est la troisième fois ce mois-ci ! Quatre heures l'œil collé au judas. J'ai la pupille en forme de serrure !",
-   "d": "[angry] Kévin, c'est la troisième fois ce mois-ci ! Quatre heures l'œil collé au judas. [shouting] J'ai la pupille en forme de serrure !",
+   "p": "invite",
+   "t": "Du mécénat. J'y suis allé pour signer.",
+   "d": "[deadpan] Du mécénat. J'y suis allé pour signer.",
+   "chute": true
+  },
+  {
+   "p": "presentateur",
+   "t": "Le streaming ? Sans télé ?",
+   "d": "Le streaming? Sans télé?"
+  },
+  {
+   "p": "invite",
+   "t": "Mon ex regarde, je paie. Comme avant.",
+   "d": "[sighs] Mon ex regarde, je paie. Comme avant.",
    "chute": true
   },
   {
    "p": "invite",
-   "t": "J'ai sonné trois fois.",
-   "d": "[deadpan] J'ai sonné trois fois."
-  },
-  {
-   "p": "envoyee",
-   "t": "Y a pas de sonnette.",
-   "d": "[annoyed] Y a pas de sonnette."
-  },
-  {
-   "p": "invite",
-   "t": "Voilà. C'est pour ça que vous avez rien entendu.",
-   "d": "Voilà. [sarcastic] C'est pour ça que vous avez rien entendu.",
-   "chute": true
-  },
-  {
-   "p": "envoyee",
-   "t": "J'ai même pas pris de douche. Je pue l'attente. Je sens le « entre 8 h et 18 h ».",
-   "d": "[sighs] J'ai même pas pris de douche. Je pue l'attente. Je sens le « entre huit heures et dix-huit heures ».",
-   "chute": true
-  },
-  {
-   "p": "invite",
-   "t": "Ensuite, j'ai crié. J'ai chanté. J'ai escaladé la façade jusqu'au sixième.",
-   "d": "[excited] Ensuite, j'ai crié. J'ai chanté. J'ai escaladé la façade jusqu'au sixième."
-  },
-  {
-   "p": "envoyee",
-   "t": "J'habite au rez-de-chaussée.",
-   "d": "[deadpan] J'habite au rez-de-chaussée.",
-   "attente": 0.6
-  },
-  {
-   "p": "invite",
-   "t": "Je trouvais pas, j'ai continué.",
-   "d": "[nervous laugh] Je trouvais pas, j'ai continué.",
-   "chute": true
-  },
-  {
-   "p": "envoyee",
-   "t": "Après, j'ai traversé la ville jusqu'au tabac. Entre les jeux à gratter et un mec qui pleure.",
-   "d": "[shouting] Après, j'ai traversé la ville jusqu'au tabac. [sighs] Entre les jeux à gratter et un mec qui pleure.",
-   "chute": true
-  },
-  {
-   "p": "invite",
-   "t": "Normal. Je l'ai confié à un voisin.",
-   "d": "[deadpan] Normal. Je l'ai confié à un voisin."
-  },
-  {
-   "p": "envoyee",
-   "t": "Lequel ?",
-   "d": "[annoyed] Lequel ?"
-  },
-  {
-   "p": "invite",
-   "t": "Un grand, très gentil. Il s'appelle Kévin. Tenez, preuve photo.",
-   "d": "Un grand, très gentil. Il s'appelle Kévin. [excited] Tenez, preuve photo.",
+   "t": "Bonne nouvelle : j'ai tout résilié. Avec une appli. 4,99 € par mois.",
+   "d": "[excited] Bonne nouvelle: j'ai tout résilié. Avec une appli. Quatre quatre-vingt-dix-neuf par mois.",
    "chute": true,
-   "objet": "telephone"
-  },
-  {
-   "p": "envoyee",
-   "t": "C'est ton canapé. Tes chaussettes. Ta télé. Et mon colis ouvert.",
-   "d": "[gasps] C'est ton canapé. Tes chaussettes. Ta télé. [angry] Et mon colis ouvert.",
-   "chute": true
-  },
-  {
-   "p": "invite",
-   "t": "Rassurez-vous, madame : votre colis a bien été livré. Vous étiez juste absente de chez moi.",
-   "d": "[deadpan] Rassurez-vous, madame : votre colis a bien été livré. Vous étiez juste absente de chez moi.",
-   "chute": true
+   "objet": "telephone",
+   "attente": 0.6
   }
  ],
  "bandeau": [
-  "UN LIVREUR ESCALADE SIX ÉTAGES POUR UN REZ-DE-CHAUSSÉE",
-  "UNE CLIENTE SENT OFFICIELLEMENT LE « ENTRE 8 H ET 18 H »",
-  "UNE SONNETTE INEXISTANTE SONNE TROIS FOIS",
-  "LE VOISIN LE PLUS SERVIABLE DE FRANCE S'APPELLE KÉVIN"
+  "KÉVIN ENSEVELI SOUS 4,99 € PAR MOIS",
+  "SON EX REGARDE SA SÉRIE, KÉVIN PAIE",
+  "LA SALLE DE SPORT REMERCIE SON MÉCÈNE",
+  "RÉSILIATION : FAX, RECOMMANDÉ ET PRIÈRE"
  ],
  "gag": {
-  "replique": 6,
-  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. A delivery man with a backwards cap and a parcel strapped to his back climbs the facade of a tall apartment building up to the sixth floor, sweating heroically, while far below at the ground floor an exhausted woman with a pink bow presses her eye against the door peephole, comedic, deadpan."
+  "replique": 1,
+  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. A small all-white round-headed character in a backwards cap stands calmly in a messy bedroom while dozens of small paper price tags rain down from the ceiling and pile up to his shoulders, a laptop on the desk glows with a red bank statement, deadpan, comedic, pastel cream background, no text."
  },
- "legende": "Il a sonné, crié, escaladé la façade… et ton colis est sur son canapé 📦 Satire, personnages fictifs.",
+ "legende": "47 prélèvements, zéro utilisation. Mon salaire part en 4,99 €. Satire, personnages fictifs.",
  "hashtags": [
-  "livreur",
-  "colis",
-  "pov",
+  "fauche",
+  "abonnements",
+  "findemois",
   "humour",
-  "sketch",
-  "dessinanime"
+  "argent",
+  "animation"
  ],
  "sources": [],
  "decoupage": [
   {
-   "scene": "Pas de la porte d'un appartement au rez-de-chaussée. Lila, cernée, décoiffée, un œil rougi en forme de serrure, face à Kévin, tout calme, son terminal à la main. Plan fixe, on passe de l'un à l'autre face caméra.",
+   "scene": "Chambre en désordre. Lila brandit le relevé de compte, Jojo est à côté d'elle. À chaque excuse de Kévin, une averse d'étiquettes « 4,99 €/mois » lui tombe dessus : elles montent jusqu'aux genoux, puis jusqu'aux épaules. Kévin reste impassible. Woosh vers le carton.",
    "repliques": [
     0,
     1,
     2,
-    3,
-    4
+    3
    ],
    "lieu": "reconstitution",
-   "son": "rimshot",
-   "duree": 20.0,
-   "decor": "a ground floor apartment doorway in a shabby building hallway, with a peephole door",
-   "titre": "Il jure qu'il a sonné"
-  },
-  {
-   "scene": "Même décor. Kévin mime ses exploits, Lila s'énerve de plus en plus. L'écran tremble quand elle hurle l'histoire du tabac.",
-   "repliques": [
-    5,
-    6,
-    7,
-    8,
-    9
-   ],
-   "lieu": "reconstitution",
-   "son": "trombone_triste",
-   "duree": 28.0,
-   "decor": "a ground floor apartment doorway in a shabby building hallway, with a peephole door",
-   "titre": "Le héros de la livraison",
+   "son": "woosh",
+   "duree": 9.0,
+   "decor": "a messy bedroom, a laptop on the desk showing a long bank statement in red, a pile of unopened letters on the floor",
+   "titre": "Où passe mon salaire ?",
    "effet": "tremblement"
   },
   {
-   "scene": "Kévin dégaine son téléphone comme une arme et montre sa preuve photo. Lila se fige en regardant l'écran. Kévin sourit et récite la chute avec une politesse de service client.",
+   "scene": "Même chambre. Kévin, enseveli jusqu'au cou, sort fièrement son téléphone. Une dernière étiquette « 4,99 €/mois » lui tombe pile sur la tête. Zoom sur Lila et Jojo, effondrés.",
    "repliques": [
-    10,
-    11,
-    12,
-    13,
-    14
+    4
    ],
    "lieu": "reconstitution",
-   "son": "dun_dun",
-   "duree": 24.0,
-   "decor": "a ground floor apartment doorway in a shabby building hallway, with a peephole door",
-   "titre": "La preuve de Kévin"
+   "son": "trombone_triste",
+   "duree": 5.0,
+   "decor": "a messy bedroom, a laptop on the desk showing a long bank statement in red, a pile of unopened letters on the floor",
+   "titre": "Le lendemain…"
   }
  ],
  "fiche": {
-  "concept": "« Livré chez moi » : Lila a attendu quatre heures, l'œil collé au judas. Kévin, son livreur attitré (troisième fois ce mois-ci), jure qu'il est passé. Ses excuses deviennent de plus en plus héroïques, et sa preuve photo finit par l'accuser.",
-  "format": "Scène de dessin animé en face-à-face sur le pas de la porte : une cliente à bout face à un livreur qui ne lâche rien et la vouvoie poliment comme un service client.",
-  "angle": "Kévin vouvoie Lila avec une politesse glaciale de service client, pendant qu'elle explose en le tutoyant. Chaque détail concret qu'elle sort, il le transforme en preuve qu'il a raison. Le voisin « très gentil » à qui il a confié le colis, c'est lui-même, et sa preuve photo (la preuve de Kévin) montre le colis sur son propre canapé.",
-  "resume_factuel": "Une cliente qui a attendu son colis toute la journée affronte le livreur qui jure être passé, alors que le colis a fini chez lui.",
+  "concept": "« Où passe mon salaire ? » Lila lit le relevé de Kévin : 47 prélèvements. Kévin a une excuse de mytho pour chaque ligne, pendant que les étiquettes « 4,99 €/mois » l'ensevelissent. Le lendemain, il a « tout résilié »… avec un abonnement de plus.",
+  "format": "Gag éclair en dessin animé, en deux temps : la lecture du relevé sous la pluie d'étiquettes, puis le carton « Le lendemain… » et le retournement final.",
+  "angle": "Lila lit les lignes, Jojo enfonce le clou et Kévin aggrave son cas à chaque réponse : la salle de sport, c'est du mécénat, et il paie le streaming de son ex. La chute est un aveu involontaire : pour résilier, il s'abonne encore. Le prix ramène l'étiquette qui lui tombe sur la tête.",
+  "resume_factuel": "Kévin est à découvert et jure qu'il ne gaspille rien, alors que son relevé de compte aligne quarante-sept prélèvements qu'il n'utilise pas.",
   "faits_reels": [],
   "inventions": [
-   "Situation du quotidien entièrement fictive",
-   "Personnages fictifs : Kévin le livreur, Lila la cliente",
-   "La sonnette inexistante, l'escalade de la façade, le voisin Kévin, la photo du canapé : pure fiction satirique"
+   "Les 47 prélèvements sur le compte de Kévin",
+   "La salle de sport où Kévin n'est allé que pour signer, et qu'il appelle « du mécénat »",
+   "Le streaming que Kévin paie pour son ex alors qu'il n'a pas de télé",
+   "La pluie d'étiquettes « 4,99 €/mois » qui l'ensevelit",
+   "L'appli de résiliation vendue sur abonnement",
+   "Tous les personnages et toutes les situations sont fictifs"
   ],
   "decoupage": [
    {
-    "scene": "Pas de la porte d'un appartement au rez-de-chaussée. Lila, cernée, décoiffée, un œil rougi en forme de serrure, face à Kévin, tout calme, son terminal à la main. Plan fixe, on passe de l'un à l'autre face caméra.",
+    "scene": "Chambre en désordre. Lila brandit le relevé de compte, Jojo est à côté d'elle. À chaque excuse de Kévin, une averse d'étiquettes « 4,99 €/mois » lui tombe dessus : elles montent jusqu'aux genoux, puis jusqu'aux épaules. Kévin reste impassible. Woosh vers le carton.",
     "repliques": [
      0,
      1,
      2,
-     3,
-     4
+     3
     ],
     "lieu": "reconstitution",
-    "son": "rimshot",
-    "duree": 20.0,
-    "decor": "a ground floor apartment doorway in a shabby building hallway, with a peephole door",
-    "titre": "Il jure qu'il a sonné"
-   },
-   {
-    "scene": "Même décor. Kévin mime ses exploits, Lila s'énerve de plus en plus. L'écran tremble quand elle hurle l'histoire du tabac.",
-    "repliques": [
-     5,
-     6,
-     7,
-     8,
-     9
-    ],
-    "lieu": "reconstitution",
-    "son": "trombone_triste",
-    "duree": 28.0,
-    "decor": "a ground floor apartment doorway in a shabby building hallway, with a peephole door",
-    "titre": "Le héros de la livraison",
+    "son": "woosh",
+    "duree": 9.0,
+    "decor": "a messy bedroom, a laptop on the desk showing a long bank statement in red, a pile of unopened letters on the floor",
+    "titre": "Où passe mon salaire ?",
     "effet": "tremblement"
    },
    {
-    "scene": "Kévin dégaine son téléphone comme une arme et montre sa preuve photo. Lila se fige en regardant l'écran. Kévin sourit et récite la chute avec une politesse de service client.",
+    "scene": "Même chambre. Kévin, enseveli jusqu'au cou, sort fièrement son téléphone. Une dernière étiquette « 4,99 €/mois » lui tombe pile sur la tête. Zoom sur Lila et Jojo, effondrés.",
     "repliques": [
-     10,
-     11,
-     12,
-     13,
-     14
+     4
     ],
     "lieu": "reconstitution",
-    "son": "dun_dun",
-    "duree": 24.0,
-    "decor": "a ground floor apartment doorway in a shabby building hallway, with a peephole door",
-    "titre": "La preuve de Kévin"
+    "son": "trombone_triste",
+    "duree": 5.0,
+    "decor": "a messy bedroom, a laptop on the desk showing a long bank statement in red, a pile of unopened letters on the floor",
+    "titre": "Le lendemain…"
    }
   ],
   "titres_sujet": [
-   "POV : le livreur dit qu'il est passé"
+   "Quand tu te demandes pourquoi t'es fauché"
   ],
   "verification_web": false,
-  "note": 76.0,
-  "critique": "Points forts : la logique absurde et calme de Kévin (4, « Voilà. C'est pour ça que vous avez rien entendu ») et la réplique 5 (« Je sens le \"entre 8 h et 18 h\" ») sont très justes. La chute (14) retourne vraiment la situation, sur le sujet lui-même : le colis a bien été « livré »… chez lui. Pas de métaphore filée : l'escalade de la façade reste une exagération à l'intérieur de la situation.\n\nRépliques faibles :\n- 8 (« Je trouvais pas, j'ai continué ») : c'est une simple suite de la 6, sans deuxième rire. Proposition : « Au septième y avait de la lumière, j'ai cru que c'était vous. J'ai laissé un avis de passage sur la fenêtre. »\n- 9 : la logique se brouille. « Après » est ambigu, et on ne comprend pas que le colis n'était PAS au tabac, alors que c'est ce qui permet la réplique 10. Le détail « un mec qui pleure » est bon, à garder. Proposition : « J'ai traversé la ville jusqu'au tabac-relais. Entre les jeux à gratter et un mec qui pleure. Mon colis y était pas. »\n- 12 : « Il s'appelle Kévin » révèle trop tôt ce que montre la photo. Le même gag tombe deux fois (le prénom, puis la photo), et ça affaiblit les répliques 13 et 14. Proposition : « Un grand, très gentil, il me ressemble beaucoup. Tenez, preuve photo. » La photo fait alors seule la révélation.\n- 13 : c'est trop sage pour le ton cru voulu. « Mon colis ouvert » est gentil. Proposition : « C'est ton canapé. Tes chaussettes. Et toi qui portes ma guêpière en mangeant mes protéines. »\n- Il manque l'élément qu'on reconnaît l",
+  "note": 72.0,
+  "critique": "Réplique 2 (« Le streaming ? Sans télé ? ») : c'est la plus faible. Le point de départ ne tient pas, puisque tout le monde regarde le streaming sur son téléphone ou son ordi. Ne pas avoir de télé n'a donc rien d'absurde, et l'objection tombe à plat. À remplacer par une objection vraiment reconnaissable : « Quatre plateformes de streaming ? » ou « Netflix, t'as pas regardé depuis 2021 ? ». Ça prépare mieux le « Mon ex regarde, je paie », qui marche bien : c'est noir, c'est vrai (le compte partagé avec l'ex que personne n'ose couper) et c'est cruel.\n\nRéplique 1 (« Du mécénat. J'y suis allé pour signer. ») : bonne vanne, mais c'est le cliché le plus usé du genre (la salle de sport payée pour rien). Elle tient grâce au mot « mécénat ». On peut la rendre plus méchante : « Du mécénat. Je finance les abdos des autres. »\n\nCe qui manque au fond : la fiche dit « une excuse pour chaque ligne » et « tout est fait pour qu'on n'y arrive pas », mais aucune réplique ne touche ce deuxième point (la résiliation impossible, qui oblige à passer en personne, par courrier recommandé, ou par un lien caché). Il faudrait une excuse là-dessus, par exemple pour la salle : « Pour résilier, faut venir en personne. J'y vais pas, c'est le principe. » On garderait le même temps de réplique avec une vérité plus dure.\n\nRéplique 4 (la chute) : c'est bien un retournement sur le sujet (l'appli pour résilier qui est elle-même un abonnement), donc chute_vraie = true. Elle est un peu prévisible, parce que l'étiquet",
   "decision": "à retravailler"
  }
 }
