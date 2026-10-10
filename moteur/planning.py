@@ -62,6 +62,10 @@ def decision_complete():
     if not dus: return False, f"pas encore l'heure ({maintenant:%H:%M}, créneaux {lib})", None
     hist = _hist()
     faites = sum(1 for e in hist if e.get("date") == jour.isoformat() and e.get("auto"))   # seules les vidéos AUTOMATIQUES comptent
+    try:                                                                   # un essai abandonné (note trop basse) compte aussi : pas de nouvel essai en boucle
+        tent = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "episodes", "tentatives.json"), encoding="utf-8"))
+        faites += sum(1 for e in tent if e.get("date") == jour.isoformat() and e.get("auto"))
+    except (OSError, ValueError): pass
     budget = (os.environ.get("BUDGET_MOIS") or "").strip().replace(",", ".")
     if budget:                                                             # plafond de dépenses Claude du mois (réglage de la régie)
         mois = jour.isoformat()[:7]

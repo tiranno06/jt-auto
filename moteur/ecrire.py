@@ -511,6 +511,14 @@ def _bloc_candidat(k, titres):
 
 try: SEUIL = max(50, min(98, int(os.environ.get("SEUIL_QUALITE") or 90)))   # note minimale pour « prêt pour production »
 except ValueError: SEUIL = 90
+try: QUALITE_MIN = int(os.environ.get("QUALITE_MIN") or 85)              # en dessous : pas de vidéo (réglage de la régie, 0 = toujours)
+except ValueError: QUALITE_MIN = 85
+try: SUJETS_MAX = max(1, min(5, int(os.environ.get("SUJETS_MAX") or 3)))  # sujets essayés au plus avant d'abandonner
+except ValueError: SUJETS_MAX = 3
+
+class QualiteInsuffisante(Exception):
+    """Aucun sketch n'atteint la note minimale réglée : on ne fabrique pas une vidéo moyenne."""
+    def __init__(self, note, sk): super().__init__(f"meilleur sketch {note:.0f}/100, sous le minimum de {QUALITE_MIN}"); self.note = note; self.sk = sk
 TOP = 3                                                                  # le sujet est pris parmi les 3 plus gros titres du jour
 
 def atelier(client, systeme, titres, contexte="", type_chute="fausse vérité ironique"):
@@ -837,7 +845,7 @@ def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=(), li
     except Exception as e:
         print(f"Sélection automatique impossible ({str(e)[:150]}) : premier candidat.", flush=True)
     meilleur = None
-    for rang, k in enumerate(ordre[:2]):                                  # au plus deux sujets essayés
+    for rang, k in enumerate(ordre[:SUJETS_MAX]):                         # au plus SUJETS_MAX sujets essayés (réglage)
         titres = pertinents(candidats[k]); liens = {t["lien"] for t in titres}
         contexte = ((f"Angle retenu : {angle}\n" if rang == 0 and angle else "") +
                     (f"Vérité du sujet : {verite}\n" if rang == 0 and verite else "") +
@@ -852,7 +860,7 @@ def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=(), li
                "\nDENSITÉ : chaque réplique est une vanne ou une relance de moins de 8 mots qui prépare une vanne ; aucune réplique de remplissage." +
                "\n\nÉcris le sketch sur CE sujet uniquement (étapes 4 à 9).")
         conv = [{"role": "user", "content": msg}]; sk = None; derniere = None; brut = {}; record = None   # record : meilleure version de CE sujet
-        for tour in range(1 + (essais if rang == 0 else min(1, essais))):   # écriture puis jusqu'à 3 réécritures (1 pour le sujet de secours)
+        for tour in range(1 + (essais if rang == 0 else min(2, essais))):   # écriture puis réécritures (2 pour les sujets de secours)
             try:
                 brut = _premier_jet(client, systeme, conv, titres) if (tour == 0 and libre) else _appel(client, systeme, conv)
                 sk = valider(brut, liens, libre); hors_sujet(sk, titres); n_mots = longueur(sk); chute_sur_sujet(sk, titres)
@@ -927,4 +935,6 @@ def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=(), li
         print(f"  sujet trop faible après réécritures{' : on essaie un autre sujet' if rang == 0 and len(ordre) > 1 else ''}", flush=True)
     if meilleur is None: raise RuntimeError(f"aucun sketch exploitable : {derniere}")
     print(f"  meilleure version retenue : {meilleur['fiche']['note']:.0f}/100 (sous l'objectif de {SEUIL} : à retravailler, pas de publication automatique)", flush=True)
+    if QUALITE_MIN and meilleur["fiche"]["note"] < QUALITE_MIN and os.environ.get("FORCER_FABRICATION") != "1":
+        raise QualiteInsuffisante(meilleur["fiche"]["note"], meilleur)
     return relire(client, meilleur)

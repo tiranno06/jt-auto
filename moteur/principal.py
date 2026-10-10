@@ -158,8 +158,23 @@ def main():
         sk = ecrire.valider(json.load(open(test, encoding="utf-8")), set(), libre)
         print(f"Sketch d'essai : {test}", flush=True)
     else:
-        sk = ecrire.ecrire_sketch([c[0] for c in candidats], gags=gags, special=dimanche and not libre, recents=recents, libre=libre,
-                                  serie=serie.contexte() if (libre and not THEME) else "", stats=stats.pour_auteur() if libre else "")
+        if THEME or LOT or REFAIRE: os.environ["FORCER_FABRICATION"] = "1"   # vidéo demandée explicitement : elle est fabriquée quoi qu'il arrive
+        try:
+            sk = ecrire.ecrire_sketch([c[0] for c in candidats], gags=gags, special=dimanche and not libre, recents=recents, libre=libre,
+                                      serie=serie.contexte() if (libre and not THEME) else "", stats=stats.pour_auteur() if libre else "")
+        except ecrire.QualiteInsuffisante as q:                             # sous la note minimale : pas de vidéo moyenne (voix et décors économisés)
+            print(f"Pas de vidéo : {q} (réglage ⚙️ Écriture → note minimale).", flush=True)
+            print(f"Moteur humoristique : {ecrire.USAGE['appels']} appels Claude, {ecrire.USAGE['entree']} jetons lus, {ecrire.USAGE['sortie']} jetons écrits, coût {ecrire.USAGE.get('cout', 0):.2f} $", flush=True)
+            t_ = "episodes/tentatives.json"; tent = lire(t_, [])
+            tent.append({"date": datetime.date.today().isoformat(), "auto": AUTO, "note": round(q.note, 1), "titre": q.sk.get("sujet", ""),
+                         "cout_usd": round(ecrire.USAGE.get("cout", 0), 3)})
+            json.dump(tent[-100:], open(t_, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+            try:
+                import alerte
+                alerte.alerter("Pas de vidéo cette fois", f"Meilleur sketch : {q.note:.0f}/100 (« {q.sk.get('sujet', '')} »), sous votre minimum de {ecrire.QUALITE_MIN}. "
+                               "Rien n'a été fabriqué : crédits voix et décors économisés.")
+            except Exception: pass
+            return
         print(f"Moteur humoristique : {ecrire.USAGE['appels']} appels Claude, {ecrire.USAGE['entree']} jetons lus, {ecrire.USAGE['sortie']} jetons écrits, {ecrire.USAGE['recherches_web']} recherche(s) web", flush=True)
         titres = next((c[0] for c in candidats if c[0][0]["lien"] and c[0][0]["lien"] in sk.get("sources", [])), titres)
     print(f"Sketch : « {sk['sujet']} », {len(sk['repliques'])} répliques", flush=True)

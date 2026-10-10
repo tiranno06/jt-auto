@@ -7,6 +7,7 @@ ICI = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(ICI, "..", "moteur"))
 os.environ.setdefault("LONGUEUR", "pro")
 import actu, ecrire, voix_banque, planning  # noqa: E402
+os.environ.setdefault("FORCER_FABRICATION", "1")   # les anciens tests vérifient l'écriture, pas le seuil de fabrication
 
 
 def article(titre, source, lien=None, resume=""):
@@ -487,3 +488,14 @@ class TestSerieLot(unittest.TestCase):
             self.assertEqual(serie.a_faire(), (None, 0))
         finally:
             os.environ.pop("EPISODES"); os.path.exists(serie.FICHIER) and os.remove(serie.FICHIER); serie.FICHIER = vrai
+
+
+class TestQualiteMinimale(unittest.TestCase):
+    def test_pas_de_video_sous_le_minimum(self):
+        faux = FauxClaude(); faux.chute_fausse = True
+        sys.modules["anthropic"] = types.SimpleNamespace(Anthropic=lambda: faux)
+        cands = [[article("Budget 2027 : les économies rejetées", "a", "L1"), article("Budget : les députés et les économies", "b", "L2")]] * 2
+        os.environ["FORCER_FABRICATION"] = "0"
+        try:
+            with self.assertRaises(ecrire.QualiteInsuffisante): ecrire.ecrire_sketch(cands, essais=1)
+        finally: os.environ["FORCER_FABRICATION"] = "1"

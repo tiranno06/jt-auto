@@ -96,6 +96,8 @@ jobs:
       THEME: ${{ inputs.theme }}
       SERIE_LOT: ${{ inputs.serie }}
       RENDU: ${{ inputs.rendu }}
+      QUALITE_MIN: ${{ vars.QUALITE_MIN }}
+      SUJETS_MAX: ${{ vars.SUJETS_MAX }}
       REALISTE_AUTO: ${{ vars.REALISTE_AUTO }}
       REALISTE_MODELE: ${{ vars.REALISTE_MODELE }}
       REALISTE_RESOLUTION: ${{ vars.REALISTE_RESOLUTION }}

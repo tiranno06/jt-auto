@@ -111,7 +111,7 @@ def elevenlabs(voix, textes):
     out = []
     for t in textes:
         if "elevenlabs" in EN_PANNE: out.append(b""); continue
-        corps = {"text": t, "model_id": ELEVEN_MODELE}
+        corps = {"text": t, "model_id": ELEVEN_MODELE, "language_code": "fr"}       # français imposé : jamais d'accent anglais
         CARACTERES["elevenlabs"] += len(t)
         avant, apres = CONTEXTE.get(t, ("", ""))
         if avant: corps["previous_text"] = sans_tags(avant)[:500]
@@ -121,10 +121,10 @@ def elevenlabs(voix, textes):
             try:
                 out.append(_eleven(f"/v1/text-to-speech/{voix}?output_format=mp3_44100_128", corps, binaire=True))
             except urllib.error.HTTPError as e:
-                if e.code != 400 or ("voice_settings" not in corps and "previous_text" not in corps): raise
+                if e.code != 400 or ("voice_settings" not in corps and "previous_text" not in corps and "language_code" not in corps): raise
                 journal(f"    elevenlabs : réglages refusés ({e.read().decode('utf-8', 'replace')[:120]}), nouvel essai sans")
                 _SANS_REGLAGES.add(ELEVEN_MODELE)
-                for k in ("voice_settings", "previous_text", "next_text"): corps.pop(k, None)
+                for k in ("voice_settings", "previous_text", "next_text", "language_code"): corps.pop(k, None)
                 out.append(_eleven(f"/v1/text-to-speech/{voix}?output_format=mp3_44100_128", corps, binaire=True))
         except urllib.error.HTTPError as e:
             msg = e.read().decode("utf-8", "replace")[:200]
@@ -146,12 +146,18 @@ def dialogue(lignes, tmp):
         cur.append(k); n += len(t)
     if cur: paquets.append(cur)
     for j, pq in enumerate(paquets):
-        corps = {"inputs": [{"text": lignes[k][1], "voice_id": lignes[k][0]} for k in pq], "model_id": ELEVEN_MODELE}
+        corps = {"inputs": [{"text": lignes[k][1], "voice_id": lignes[k][0]} for k in pq], "model_id": ELEVEN_MODELE, "language_code": "fr"}
         CARACTERES["elevenlabs"] += sum(len(lignes[k][1]) for k in pq)
         if j: corps["previous_text"] = " ".join(sans_tags(lignes[k][1]) for k in paquets[j - 1])[-800:]
         if j + 1 < len(paquets): corps["future_text"] = " ".join(sans_tags(lignes[k][1]) for k in paquets[j + 1])[:800]
         try:
-            r = _eleven("/v1/text-to-dialogue/with-timestamps?output_format=mp3_44100_128", corps, timeout=300)
+            try:
+                r = _eleven("/v1/text-to-dialogue/with-timestamps?output_format=mp3_44100_128", corps, timeout=300)
+            except urllib.error.HTTPError as e:
+                if e.code != 400: raise
+                journal(f"  dialogue : réglage de langue refusé ({e.read().decode('utf-8', 'replace')[:120]}), nouvel essai sans")
+                corps.pop("language_code", None)
+                r = _eleven("/v1/text-to-dialogue/with-timestamps?output_format=mp3_44100_128", corps, timeout=300)
         except urllib.error.HTTPError as e:
             msg = e.read().decode("utf-8", "replace")[:200]; journal(f"  dialogue ElevenLabs : HTTP {e.code} {msg}")
             if e.code in (401, 402, 403, 429) or "quota" in msg.lower(): EN_PANNE.add("elevenlabs")
@@ -502,6 +508,15 @@ def generer(repliques):
             if audios[i] is None and meilleures.get(i, (0,))[0] >= 0.35:   # on garde sa meilleure prise : jamais tout le casting perdu pour une phrase
                 _, audios[i], mots[i], m = meilleures[i]; utilises.add(m)
                 journal(f"  voix {i} ({role}) : meilleure prise gardée (ressemblance {meilleures[i][0]})")
+        manque = [i for i in idx if audios[i] is None]
+        if manque and "elevenlabs" not in EN_PANNE:                        # dernier recours : même voix ElevenLabs, sans contrôle,
+            choix = next((c for c in voix_de(role) if c["moteur"] == "elevenlabs"), None)   # plutôt que des voix de secours à l'accent étranger
+            if choix:
+                for i, o in zip(manque, synthese(choix, [dits[i] for i in manque])):
+                    try:
+                        if o: audios[i] = nettoyer(o, f"{tmp}/{i}_ultime", True); utilises.add("elevenlabs")
+                    except Exception: pass
+                if all(audios[i] is not None for i in manque): journal(f"  {role} : répliques gardées en ElevenLabs malgré le contrôle (français garanti)")
         if any(audios[i] is None for i in idx):
             return None                                                    # le robot basculera sur la chaîne de secours
     return audios, mots, sorted(CREDITS[m] for m in utilises)
