@@ -183,28 +183,39 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <div class="jeton"><input id="jeton2" type="password" placeholder="github_pat_…" autocomplete="off"><button class="second" id="garder2" style="flex:none;padding:10px 14px">Connecter</button></div>
   </section>
   <p class="note" id="cfgEtat"></p>
+  <section class="panneau"><h2>🎬 Programme</h2>
+    <label>Type de vidéos (émissions automatiques)<select data-var="FORMAT" data-def="cycle">
+      <option value="cycle">⭐ Cycle croissance : 3 gags éclair de 15 s puis 1 sketch long de +1 min (recommandé)</option>
+      <option value="mini">⚡ Gags éclair uniquement (15 s)</option>
+      <option value="libre">🎭 Sketchs longs uniquement (+1 min, rémunérables)</option>
+      <option value="actu">📰 JT d'actualité (ancien format)</option></select></label>
+    <p class="note">Le cycle enchaîne 3 vidéos courtes, qui font monter les abonnés, puis 1 vidéo de plus d'une minute, la seule durée payée par TikTok (programme « Creator Rewards » : 10 000 abonnés et 100 000 vues sur 30 jours). Avec deux émissions par jour, un cycle complet dure deux jours.</p>
+  </section>
   <section class="panneau"><h2>📅 Planning</h2>
-    <label>Rythme des émissions<select data-var="FREQUENCE" data-def="1"><option value="2x">Deux par jour (12 h + heure choisie)</option><option value="1">Une par jour</option><option value="2">Un jour sur deux</option><option value="3">Un jour sur trois</option><option value="0">⏸ Pause (le robot ne produit plus)</option></select></label>
+    <label>Rythme des émissions<select data-var="FREQUENCE" data-def="1"><option value="2x">Deux par jour (12 h + heure choisie, conseillé avec le cycle)</option><option value="1">Une par jour</option><option value="2">Un jour sur deux</option><option value="3">Un jour sur trois</option><option value="0">⏸ Pause (le robot ne produit plus)</option></select></label>
     <label>Heure de fabrication (heure de Paris)<select data-var="HEURE" data-def="17" id="selHeure"></select></label>
     <p class="note">La vidéo est prête environ 20 à 40 minutes après cette heure. 17 h (recommandé) = publiée pour le pic d'audience de 18 h à 21 h.</p>
   </section>
-  <section class="panneau"><h2>✍️ Sketch</h2>
-    <label>Durée<select data-var="LONGUEUR" data-def="pro"><option value="pro">Sketch pro 60-90 s (recommandé, rémunérable)</option><option value="courte">Courte (30 s max)</option><option value="normale">Normale (30-40 s)</option><option value="longue">Longue (40-55 s)</option><option value="monetisable">💰 Format long +1 min (rémunération TikTok)</option></select></label>
-    <p class="note">💰 Le format long (plus d'une minute) est obligatoire pour être payé par TikTok (programme « Creator Rewards » : 10 000 abonnés et 100 000 vues sur 30 jours). Activez-le quand vous approchez des 10 000 abonnés ; d'ici là, le format court fait grandir le compte plus vite.</p>
-    <label>Ton de l'humour<select data-var="TON" data-def="clash"><option value="clash">Clash, foutage de gueule direct (recommandé)</option><option value="farfelu">Farfelu et ironique</option><option value="bon_enfant">Foutage de gueule bon enfant</option><option value="piquant">Satire piquante</option><option value="absurde">Absurde total</option></select></label>
-    <label>Exigence (note minimale pour publier)<select data-var="SEUIL_QUALITE" data-def="90"><option value="95">95/100 (très rare)</option><option value="90">90/100 (recommandé)</option><option value="85">85/100</option><option value="80">80/100</option></select></label>
+  <section class="panneau"><h2>✍️ Écriture</h2>
+    <label>Exigence (note minimale pour publier automatiquement)<select data-var="SEUIL_QUALITE" data-def="90"><option value="95">95/100 (très rare)</option><option value="90">90/100 (recommandé)</option><option value="85">85/100</option><option value="80">80/100</option><option value="75">75/100</option></select></label>
     <label>Auteur (modèle Claude)<select data-var="MODELE_CLAUDE" data-def="claude-opus-5-5"><option value="claude-opus-5-5">Opus (le plus drôle, recommandé)</option><option value="claude-sonnet-5-5">Sonnet (économique)</option></select></label>
-    <label>Nom de l'émission<div class="jeton"><input data-var="NOM_EMISSION" data-def="L'info en caoutchouc" data-texte="1" maxlength="30"><button class="second" data-enr="NOM_EMISSION" style="flex:none;padding:10px 14px">OK</button></div></label>
+    <label>Nombre de retouches maximum<select data-var="MAX_REECRITURES" data-def="4"><option value="4">4 (recommandé)</option><option value="2">2 (économique)</option><option value="6">6 (le plus exigeant)</option></select></label>
   </section>
-  <section class="panneau"><h2>🎥 Vidéo</h2>
-    <label>Type de vidéo (émissions automatiques)<select data-var="FORMAT" data-def="libre"><option value="actu">📰 Actu du jour (sketch sur un gros titre)</option><option value="libre">🎭 Sketch libre (situation du quotidien, sans actualité)</option><option value="mini">⚡ Gag éclair (8 à 20 s, style mini)</option><option value="alterne">🔁 Alterner : un jour actu, un jour libre</option></select></label>
-    <div class="auto" style="margin-bottom:12px"><div class="txt"><b>« Les infos de demain » le dimanche</b><small>Épisode spécial hebdomadaire : fausses brèves du futur sur le sujet de la semaine (le format qui a fait 586 000 vues).</small></div><button class="inter" data-var="INFOS_DEMAIN" data-def="1" data-bascule="1"></button></div>
-    <div class="auto"><div class="txt"><b>Plan gag généré par IA</b><small>Un plan « reconstitution » Wan 2.2 par vidéo. À couper si les crédits Modal fondent.</small></div><button class="inter" data-var="PLAN_GAG" data-def="1" data-bascule="1"></button></div>
+  <section class="panneau"><h2>🎥 Vidéo animée</h2>
+    <div class="auto" style="margin-bottom:12px"><div class="txt"><b>Voix ElevenLabs</b><small>Voix réalistes avec rires et coups de colère (abonnement ElevenLabs). Coupé : voix gratuites.</small></div><button class="inter" data-var="ELEVENLABS" data-def="1" data-bascule="1"></button></div>
+    <div class="auto"><div class="txt"><b>Décors générés par IA</b><small>Un décor du quotidien par scène (FLUX, crédits Modal). Coupé : fonds unis pastel.</small></div><button class="inter" data-var="DECORS" data-def="1" data-bascule="1"></button></div>
+  </section>
+  <section class="panneau"><h2>📰 Mode JT (ancien format)</h2>
+    <label>Durée du JT<select data-var="LONGUEUR" data-def="pro"><option value="pro">60-90 s (rémunérable)</option><option value="courte">Courte (30 s max)</option><option value="monetisable">Long +1 min</option></select></label>
+    <label>Ton de l'humour<select data-var="TON" data-def="clash"><option value="clash">Clash, foutage de gueule direct (recommandé)</option><option value="farfelu">Farfelu et ironique</option><option value="piquant">Satire piquante</option><option value="absurde">Absurde total</option></select></label>
+    <label>Nom de l'émission<div class="jeton"><input data-var="NOM_EMISSION" data-def="L'info en caoutchouc" data-texte="1" maxlength="30"><button class="second" data-enr="NOM_EMISSION" style="flex:none;padding:10px 14px">OK</button></div></label>
+    <div class="auto" style="margin-bottom:12px"><div class="txt"><b>« Les infos de demain » le dimanche</b><small>Épisode spécial du JT : fausses brèves du futur.</small></div><button class="inter" data-var="INFOS_DEMAIN" data-def="1" data-bascule="1"></button></div>
+    <div class="auto"><div class="txt"><b>Plan gag généré par IA (JT)</b><small>Un plan « reconstitution » Wan 2.2 par JT.</small></div><button class="inter" data-var="PLAN_GAG" data-def="1" data-bascule="1"></button></div>
   </section>
   <section class="panneau"><h2>🚀 Actions</h2>
-    <button class="action" id="lancer">📰 Fabriquer une émission actu maintenant</button>
-    <button class="action" id="lancerLibre">🎭 Fabriquer un sketch libre maintenant</button>
     <button class="action" id="lancerMini">⚡ Fabriquer un gag éclair maintenant</button>
+    <button class="action" id="lancerLibre">🎭 Fabriquer un sketch long maintenant</button>
+    <button class="action" id="lancer">📰 Fabriquer un JT d'actualité maintenant</button>
     <button class="action" id="majsite">🔄 Mettre à jour l'application</button>
     <div id="suiviCfg" class="note"></div>
   </section>
@@ -217,7 +228,8 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
   </section>
   <section class="panneau"><h2>🔗 Raccourcis</h2>
     <a class="lien" id="lienActions" target="_blank" rel="noopener">Activité du robot (GitHub)</a>
-    <a class="lien" href="https://modal.com/settings/usage" target="_blank" rel="noopener">Crédits Modal (voix + plan gag)</a>
+    <a class="lien" href="https://modal.com/settings/usage" target="_blank" rel="noopener">Crédits Modal (décors, contrôle des voix)</a>
+    <a class="lien" href="https://elevenlabs.io/app/subscription" target="_blank" rel="noopener">Crédit ElevenLabs (voix)</a>
     <a class="lien" href="https://console.anthropic.com/settings/billing" target="_blank" rel="noopener">Crédit Claude (écriture)</a>
     <a class="lien" href="https://publish.buffer.com" target="_blank" rel="noopener">Buffer (file de publication)</a>
     <a class="lien" href="https://www.tiktok.com/tiktokstudio" target="_blank" rel="noopener">TikTok Studio (statistiques)</a>
@@ -427,9 +439,9 @@ async function lancerFlux(fichier,bouton,texte,inputs){
   }catch(e){s.textContent="Impossible : "+e.message}
   bouton.disabled=false;
 }
-$("#lancer").onclick=()=>lancerFlux("emission.yml",$("#lancer"),"🎬 Le robot fabrique une émission actu (20 à 40 min)…",{format:"actu"});
+$("#lancer").onclick=()=>lancerFlux("emission.yml",$("#lancer"),"📰 Le robot fabrique un JT d'actualité (20 à 40 min)…",{format:"actu"});
 $("#lancerMini").onclick=()=>lancerFlux("emission.yml",$("#lancerMini"),"⚡ Le robot fabrique un gag éclair (15 à 30 min)…",{format:"mini"});
-$("#lancerLibre").onclick=()=>lancerFlux("emission.yml",$("#lancerLibre"),"🎭 Le robot fabrique un sketch libre (20 à 40 min)…",{format:"libre"});
+$("#lancerLibre").onclick=()=>lancerFlux("emission.yml",$("#lancerLibre"),"🎭 Le robot fabrique un sketch long (20 à 40 min)…",{format:"libre"});
 $("#majsite").onclick=()=>lancerFlux("site.yml",$("#majsite"),"🔄 Mise à jour de l'application (2 à 3 min)…");
 activer(false);
 // ------------------------------------------------ application installable

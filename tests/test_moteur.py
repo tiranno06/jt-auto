@@ -309,7 +309,7 @@ class TestGagEclair(unittest.TestCase):
                 "print(len(sk['repliques']))")
         r = subprocess.run([sys.executable, "-c", code], capture_output=True, text=True, env=dict(os.environ, FORMAT="mini"),
                            cwd=os.path.join(ICI, ".."))
-        self.assertEqual(r.stdout.split(), ["True", "8", "à", "20", "45", "True", "3"], r.stderr[-500:])
+        self.assertEqual(r.stdout.split(), ["True", "12", "à", "18", "40", "True", "3"], r.stderr[-500:])
 
 
 class TestCartoon(unittest.TestCase):
@@ -341,6 +341,15 @@ class TestCartoon(unittest.TestCase):
         self.assertEqual(sk["repliques"][0]["objet"], "telephone"); self.assertNotIn("objet", sk["repliques"][3])
         self.assertEqual(sk["decoupage"][0]["decor"], "a cozy bar script"); self.assertEqual(sk["decoupage"][0]["effet"], "pluie_billets")
         self.assertNotIn("effet", sk["decoupage"][1])
+
+
+class TestCycle(unittest.TestCase):
+    def test_trois_courts_puis_un_long(self):
+        import programme
+        f = programme.format_du_jour; H = lambda *fs: [{"format": x} for x in fs]
+        self.assertEqual([f("cycle", []), f("cycle", H("mini")), f("cycle", H("mini", "mini", "mini")), f("cycle", H("mini", "mini", "mini", "libre")),
+                          f("cycle", H("libre", "mini", "actu", "mini")), f("", []), f("actu", []), f("n_importe", [])],
+                         ["mini", "mini", "libre", "mini", "mini", "mini", "actu", "libre"])
 
 
 class TestVoix(unittest.TestCase):

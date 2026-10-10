@@ -10,7 +10,7 @@ on:
         required: false
         default: ""
       format:
-        description: "Type de vidéo : actu (gros titre du jour), libre (situation du quotidien) ou mini (gag éclair). Vide = réglage de la régie."
+        description: "Type de vidéo : mini (gag éclair), libre (sketch long), actu (JT) ou cycle (3 + 1). Vide = réglage de la régie."
         required: false
         default: ""
 
@@ -58,6 +58,7 @@ jobs:
       AZURE_SPEECH_REGION: ${{ secrets.AZURE_SPEECH_REGION }}
       ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
       ELEVENLABS_MODELE: ${{ vars.ELEVENLABS_MODELE }}
+      ELEVENLABS: ${{ vars.ELEVENLABS }}
       BUFFER_API_KEY: ${{ secrets.BUFFER_API_KEY }}
       UPLOAD_POST_API_KEY: ${{ secrets.UPLOAD_POST_API_KEY }}
       UPLOAD_POST_USER: ${{ secrets.UPLOAD_POST_USER }}

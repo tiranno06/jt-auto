@@ -121,6 +121,9 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
                  scene=sc, objet=r.get("objet"), groupes=minutage(r["t"], a, t, (mots or [None] * len(reps))[i]))
         ph.append(q); t += dur + (0.5 if q["chute"] and i < len(reps) - 1 else 0.1)
     total = t + 1.4                                                        # place pour l'impact final
+    FIN_CARTE = None
+    if not mini and total < 61.5:                                          # vidéo longue : plus d'une minute (rémunération TikTok)
+        FIN_CARTE = total; total = 61.5
     nf = int(total * FPS)
     # placement : qui est dans chaque scène, à quelle place
     places = {}
@@ -211,6 +214,11 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             avant = vue(tr[0] - 0.01); apres = vue(tr[1] + 0.01); dx = int(u * W)
             fr = np.concatenate([avant[:, dx:], apres[:, :dx]], 1) if 0 < dx < W else (apres if dx >= W else avant)
             k = int(9 + 140 * math.sin(math.pi * u)); return cv2.blur(fr, (k | 1, 1))
+        if FIN_CARTE is not None and tm >= FIN_CARTE:                       # carton de fin : abonne-toi
+            if "fin" not in CARTES: CARTES["fin"] = carte("Abonne-toi pour la suite 🔔".replace(" 🔔", " !"))
+            u = (tm - FIN_CARTE) / 0.25; z = 1 + 0.2 * (1 - _ease(u)) if u < 1 else 1 + 0.01 * (tm - FIN_CARTE)
+            M_ = np.float32([[z, 0, W / 2 - z * W / 2], [0, z, H / 2 - z * H / 2]])
+            return cv2.warpAffine(CARTES["fin"], M_, (W, H), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REPLICATE)
         fr = vue(tm)
         if tm > FIN:                                                       # impact final : secousse qui s'amortit
             v = math.exp(-(tm - FIN) * 5) * 22
@@ -275,6 +283,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
     d_m = len(SM.son("montee")) / SRM
     ajoute("montee", ph[-1]["deb"] - d_m, 0.5)                            # tension juste avant la chute finale
     ajoute("boom_fin", ph[-1]["fin"] + 0.02, 1.0)                         # gros impact sur la chute finale
+    if FIN_CARTE is not None: ajoute("pop", FIN_CARTE, 0.6)
     mix = np.clip(mix / max(1.0, np.abs(mix).max() / 0.95), -0.99, 0.99)
     brut, wav = f"{tmp}/mix.wav", f"{tmp}/mix_norm.wav"
     with wave.open(brut, "wb") as w:

@@ -52,7 +52,7 @@ USAGES = ("conversational", "characters_animation", "social_media", "entertainme
 # ------------------------------------------------------------------ moteurs
 def sources():
     s = []
-    if os.environ.get("ELEVENLABS_API_KEY"): s.append("elevenlabs")
+    if os.environ.get("ELEVENLABS_API_KEY") and os.environ.get("ELEVENLABS", "1") != "0": s.append("elevenlabs")   # interrupteur de la régie
     if os.environ.get("GOOGLE_TTS_API_KEY"): s.append("google")
     if os.environ.get("AZURE_SPEECH_KEY") and os.environ.get("AZURE_SPEECH_REGION"): s.append("azure")
     if os.environ.get("MODAL_TOKEN_ID") and os.environ.get("MODAL_TOKEN_SECRET"):

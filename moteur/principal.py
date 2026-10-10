@@ -10,8 +10,12 @@ from zoneinfo import ZoneInfo
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 RACINE = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 os.chdir(RACINE)
-if (os.environ.get("FORMAT") or "").strip().lower() == "mini":
-    os.environ["LONGUEUR"] = "eclair"                                     # gag éclair : 8 à 20 s, avant le chargement des modules
+from programme import format_du_jour
+
+_hist = json.load(open("episodes/historique.json", encoding="utf-8")) if os.path.exists("episodes/historique.json") else []
+os.environ["FORMAT"] = FORMAT = format_du_jour(os.environ.get("FORMAT"), _hist)
+if FORMAT == "mini": os.environ["LONGUEUR"] = "eclair"                    # gag éclair : ~15 s
+elif FORMAT == "libre": os.environ["LONGUEUR"] = "pro"                    # sketch long : 60 à 90 s (plus d'une minute garantie au montage)
 import actu, ecrire, voix, jt
 
 SR = 22050
@@ -20,7 +24,7 @@ def resserrer(audios, sk, cible=None):
     """Durée maximale (réglage « courte » : 30 s) : si les voix dépassent, on accélère légèrement le débit (jusqu'à +18 %)."""
     import subprocess, tempfile, wave, numpy as np
     if ecrire.LONGUEUR == "monetisable": return audios                    # format long : jamais accéléré
-    cible = cible or {"eclair": 20.0, "pro": 86.0, "courte": 25.0, "normale": 35.0, "longue": 50.0}.get(ecrire.LONGUEUR, 86.0)
+    cible = cible or {"eclair": 18.0, "pro": 86.0, "courte": 25.0, "normale": 35.0, "longue": 50.0}.get(ecrire.LONGUEUR, 86.0)
     total = sum(len(a) for a in audios) / SR + sum(0.45 if r.get("chute") else 0.06 for r in sk["repliques"]) + sum(r.get("attente", 0) for r in sk["repliques"]) + 1.0
     if total <= cible: return audios
     f = min(1.06, total / cible)                                          # au-delà, les voix deviennent difficiles à comprendre; print(f"Durée estimée {total:.1f} s : débit accéléré ×{f:.2f}", flush=True)
@@ -50,10 +54,9 @@ def main():
     sujets_recents = [h["empreinte"] if h.get("empreinte") else
                       sorted(actu.empreinte(" ".join([h.get("titre", ""), h.get("accroche", "")])))
                       for h in historique if h.get("date", "") >= depuis]
-    fmt = (os.environ.get("FORMAT") or "libre").strip().lower()                # par défaut : sketch libre (bouton JT dans la régie)
-    if fmt == "alterne": fmt = "libre" if datetime.date.today().toordinal() % 2 else "actu"
+    fmt = FORMAT                                                           # résolu au démarrage (cycle 3 + 1 par défaut)
     libre = fmt in ("libre", "mini")
-    print(f"Type de vidéo : {'gag éclair' if fmt == 'mini' else 'sketch libre (situation du quotidien)' if libre else 'actu du jour'}", flush=True)
+    print(f"Type de vidéo : {'gag éclair (~15 s)' if fmt == 'mini' else 'sketch long (+1 min)' if libre else 'JT actu du jour'}", flush=True)
     recents = [f"{h.get('titre', '')} : {h.get('accroche', '')}" for h in historique[-10:]]
     # 1. recherche : sujets candidats (articles des dernières 24 h, regroupés par sujet et classés par reprise médiatique)
     if libre and not os.environ.get("SKETCH_TEST", "").strip():
