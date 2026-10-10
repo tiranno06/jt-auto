@@ -26,16 +26,24 @@ def lire():
     try: return json.load(open(FICHIER, encoding="utf-8"))
     except (OSError, ValueError): return {}
 
+def _info(v):
+    return {"id": str(v.get("id", "")), "url": v.get("webpage_url") or v.get("url") or "", "description": v.get("description") or v.get("title") or "",
+            "date": v.get("timestamp"), "vues": v.get("view_count") or 0, "likes": v.get("like_count") or 0,
+            "commentaires": v.get("comment_count") or 0, "partages": v.get("repost_count") or 0, "duree": v.get("duration")}
+
 def _videos_ytdlp(nom, limite=60):
-    r = subprocess.run([sys.executable, "-m", "yt_dlp", "--dump-json", "--skip-download", "--ignore-errors", "--no-warnings",
-                        "--playlist-end", str(limite), f"https://www.tiktok.com/@{nom}"], capture_output=True, text=True, timeout=900)
-    out = []
-    for ligne in r.stdout.splitlines():
-        try: v = json.loads(ligne)
-        except ValueError: continue
-        out.append({"id": str(v.get("id", "")), "url": v.get("webpage_url") or "", "description": v.get("description") or v.get("title") or "",
-                    "date": v.get("timestamp"), "vues": v.get("view_count") or 0, "likes": v.get("like_count") or 0,
-                    "commentaires": v.get("comment_count") or 0, "partages": v.get("repost_count") or 0, "duree": v.get("duration")})
+    """Liste des vidéos de la chaîne (la page du profil donne souvent déjà les compteurs) ; sinon, vidéo par vidéo."""
+    base = [sys.executable, "-m", "yt_dlp", "--ignore-errors", "--no-warnings", "--playlist-end", str(limite)]
+    r = subprocess.run(base + ["--flat-playlist", "-J", f"https://www.tiktok.com/@{nom}"], capture_output=True, text=True, timeout=600)
+    try: entrees = json.loads(r.stdout or "{}").get("entries") or []
+    except ValueError: entrees = []
+    if entrees: print(f"Stats : {len(entrees)} vidéos listées ; champs : {sorted(entrees[0])[:25]}", flush=True)
+    out = [_info(e) for e in entrees]
+    manque = [v for v in out if not v["vues"] and v["url"]]
+    for v in manque[:limite]:                                              # compteurs absents de la liste : page de la vidéo
+        r2 = subprocess.run(base + ["--dump-json", "--skip-download", v["url"]], capture_output=True, text=True, timeout=120)
+        try: v.update({k: x for k, x in _info(json.loads(r2.stdout.splitlines()[0])).items() if x})
+        except (ValueError, IndexError): pass
     if not out: print(f"Stats : aucune vidéo lue sur @{nom} ({(r.stderr or '').strip()[-300:]})", flush=True)
     return out
 

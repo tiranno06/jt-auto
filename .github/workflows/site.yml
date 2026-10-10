@@ -39,7 +39,7 @@ jobs:
             sudo cp /tmp/ffmpeg-master-latest-linux64-gpl/bin/ff* /usr/local/bin/
           fi
           ffmpeg -version | head -1
-          pip install pillow
+          pip install pillow numpy opencv-python-headless
       - name: Construire le site
         run: python moteur/site.py
       - uses: actions/configure-pages@v5
