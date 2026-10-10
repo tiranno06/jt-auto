@@ -343,7 +343,7 @@ class TestCartoon(unittest.TestCase):
               "decoupage": [{"scene": "bar", "repliques": [0, 1]}, {"scene": "rue", "repliques": [2], "effet": "pluie_billets", "titre": "Plus tard"}]}
         auds = [np.random.default_rng(k).normal(0, 0.2, 22050).astype(np.float32) for k in range(3)]
         d = tempfile.mkdtemp(); total = cartoon.rendre(sk, d, auds, apercu=True)
-        self.assertGreater(total, 3); self.assertEqual(len(glob.glob(d + "/*.png")), 6)
+        self.assertGreater(total, 3); self.assertEqual(len(glob.glob(d + "/*.png")), 8)   # + réaction finale et arrêt sur image
 
     def test_decoupage_dessin(self):
         sk = ecrire.valider({"sujet": "x", "repliques": [{"p": "invite", "t": "Salut.", "objet": "telephone"}, {"p": "envoyee", "t": "Non."},
