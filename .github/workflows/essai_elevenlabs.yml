@@ -1,0 +1,24 @@
+name: Essai ElevenLabs
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  essai:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Tester la clé ElevenLabs
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: python outils/essai_elevenlabs.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: essai-elevenlabs
+          path: essai_elevenlabs/
+          if-no-files-found: ignore
