@@ -9,7 +9,7 @@ DOSSIER = os.path.join(RACINE, "sons_eleven")
 BANQUE = {
     "transition":  ("fast modern whoosh transition for a TikTok video edit, clean and punchy, air swoosh passing by", 1.0),
     "swipe":       ("quick short swipe swoosh sound for a video cut, crisp and modern", 0.5),
-    "pop":         ("short clean satisfying pop sound for text appearing on screen, modern UI", 0.4),
+    "pop":         ("short clean satisfying pop sound for text appearing on screen, modern UI", 0.5),
     "boom_leger":  ("short punchy cinematic bass hit, modern, tight, no reverb tail", 0.8),
     "boom_fin":    ("huge deep cinematic boom impact with sub bass drop and short reverb tail, dramatic meme punchline hit", 2.2),
     "montee":      ("short suspense tension riser building up quickly, modern cinematic, stops abruptly at the end", 1.6),
