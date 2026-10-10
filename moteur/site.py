@@ -72,7 +72,7 @@ def application(nom):
 
 # Service worker : l'appli s'ouvre même hors connexion (dernière version de la page), sans jamais mettre en cache
 # les vidéos (trop lourdes) ni les appels à GitHub.
-SW = r"""const CACHE = "regie-v4";
+SW = r"""const CACHE = "regie-v5";
 const COQUILLE = ["./", "manifest.webmanifest", "icone-192.png", "icone-512.png"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(COQUILLE))); self.skipWaiting(); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(k => Promise.all(k.filter(x => x !== CACHE).map(x => caches.delete(x))))); self.clients.claim(); });
@@ -159,6 +159,9 @@ label .jeton{margin-top:6px}
   #barre video{max-height:62vh}
 }
 video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#000;display:none}
+#cadreVideo{position:relative}
+#fermer{display:none;position:absolute;top:8px;right:8px;width:40px;height:40px;padding:0;border-radius:50%;font-size:20px;font-weight:700;line-height:40px;background:rgba(0,0,0,.65);color:#fff;border:1px solid rgba(255,255,255,.35);z-index:2}
+#apercu[style*="block"]+#fermer{display:block}
 </style></head><body data-onglet="videos">
 <header><h1>__NOM__</h1><div class="sous">Régie du robot · vidéos de la plus récente à la plus ancienne</div>
 <button id="installer" style="display:none;margin-top:10px;padding:9px 16px;font-size:14px;font-weight:700;background:var(--jaune);color:#111">📲 Installer l'application</button></header>
@@ -240,7 +243,8 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
 </main>
 <div id="barre"><div class="int">
   <div id="choix">Sélectionnez une vidéo pour la vérifier</div>
-  <video id="apercu" controls playsinline preload="metadata"></video>
+  <div id="cadreVideo"><video id="apercu" controls playsinline preload="metadata"></video>
+    <button id="fermer" aria-label="Fermer la vidéo" title="Fermer">✕</button></div>
   <button id="publier" disabled>Publier sur TikTok</button>
   <div class="ligne2"><button class="second" id="voir" disabled>Aperçu</button><button class="second" id="copier" disabled>Copier la légende</button><button class="second" id="manuel" disabled>Partage manuel</button></div>
   <div id="suivi"></div>
@@ -363,6 +367,15 @@ async function suivre(depart, v){
 }
 // ------------------------------------------------ secours : partage manuel
 const peutPartager = !!(navigator.canShare && navigator.canShare({files:[new File([""],"t.mp4",{type:"video/mp4"})]}));
+function fermerVideo(){
+  const a=$("#apercu"); a.pause(); a.removeAttribute("src"); a.load(); a.style.display="none";
+  choisie=null; fichier=null; document.querySelectorAll(".carte").forEach(c=>c.classList.remove("choisie"));
+  $("#choix").textContent="Sélectionnez une vidéo pour la vérifier"; ["#copier","#voir","#manuel"].forEach(s=>$(s).disabled=true);
+  $("#suivi").textContent=""; majBoutons();
+  setTimeout(()=>{document.querySelector("main").style.paddingBottom=($("#barre").offsetHeight+24)+"px"},50);
+}
+$("#fermer").onclick=fermerVideo;
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&choisie!==null)fermerVideo()});
 $("#voir").onclick=()=>{const a=$("#apercu");a.style.display="block";a.play()};
 $("#copier").onclick=async()=>{const t=DATA[choisie].legende||"";try{await navigator.clipboard.writeText(t);toast("Légende copiée")}catch(e){prompt("Copiez la légende :",t)}};
 $("#manuel").onclick=async()=>{
