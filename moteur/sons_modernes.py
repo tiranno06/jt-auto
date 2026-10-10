@@ -1,6 +1,7 @@
 """Bruitages modernes du moteur cartoon, fabriqués par synthèse sonore (aucun échantillon externe, donc libres de droits) :
 whoosh de transition, impact grave (« boom ») de chute, pop de titre, montée de tension avant la dernière réplique, swipe.
 Tous renvoient un signal stéréo float32 à 44 100 Hz."""
+import os
 import numpy as np
 from scipy.signal import butter, sosfilt, fftconvolve
 
@@ -82,8 +83,23 @@ def transition(graine=6):
     out[:len(w)] += w; s0 = int(0.3 * SR); out[s0:s0 + len(b)] += b
     return out / max(1, np.abs(out).max() / 0.95)
 
-BANQUE = {"whoosh": whoosh, "swipe": swipe, "boom": boom, "pop": pop, "montee": montee, "transition": transition}
+BANQUE = {"whoosh": whoosh, "swipe": swipe, "boom": boom, "pop": pop, "montee": montee, "transition": transition,
+          "boom_leger": lambda: boom(0.9, 0.6), "boom_fin": boom}
+ELEVEN = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "sons_eleven")
 _cache = {}
+
+def _lire(chemin):
+    """Décode un mp3 (bruitage ElevenLabs) en stéréo float32 à 44 100 Hz."""
+    import subprocess
+    brut = subprocess.run(["ffmpeg", "-loglevel", "error", "-i", chemin, "-f", "s16le", "-ac", "2", "-ar", str(SR), "-"],
+                          capture_output=True, check=True).stdout
+    return (np.frombuffer(brut, np.int16).astype(np.float32) / 32768).reshape(-1, 2)
+
 def son(nom):
-    if nom not in _cache: _cache[nom] = BANQUE[nom]()
+    """Bruitage ElevenLabs s'il a été fabriqué (sons_eleven/), sinon version synthétisée."""
+    if nom not in _cache:
+        p = os.path.join(ELEVEN, nom + ".mp3")
+        try: _cache[nom] = _lire(p) if os.path.exists(p) else None
+        except Exception: _cache[nom] = None
+        if _cache[nom] is None: _cache[nom] = BANQUE[nom]() if nom in BANQUE else np.zeros((1, 2), np.float32)
     return _cache[nom]

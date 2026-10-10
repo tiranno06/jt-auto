@@ -271,10 +271,10 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
     if mini:
         for k in TITRES: ajoute("pop", min(z2["deb"] for z2 in ph if z2["scene"] == k) - 0.2, 0.6)
     for j, q in enumerate(ph[:-1]):
-        if q["chute"]: ajoute("boom", q["fin"] + 0.05, 0.35)                # petites vannes en route : impact léger
+        if q["chute"]: ajoute("boom_leger", q["fin"] + 0.05, 0.45)          # petites vannes en route : impact léger
     d_m = len(SM.son("montee")) / SRM
     ajoute("montee", ph[-1]["deb"] - d_m, 0.5)                            # tension juste avant la chute finale
-    ajoute("boom", ph[-1]["fin"] + 0.02, 1.0)                             # gros impact sur la chute finale
+    ajoute("boom_fin", ph[-1]["fin"] + 0.02, 1.0)                         # gros impact sur la chute finale
     mix = np.clip(mix / max(1.0, np.abs(mix).max() / 0.95), -0.99, 0.99)
     brut, wav = f"{tmp}/mix.wav", f"{tmp}/mix_norm.wav"
     with wave.open(brut, "wb") as w:

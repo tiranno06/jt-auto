@@ -1,0 +1,35 @@
+name: Fabriquer les bruitages (ElevenLabs)
+on:
+  workflow_dispatch:
+    inputs:
+      refaire:
+        description: "Refaire tous les bruitages (oui/non)"
+        required: false
+        default: "non"
+permissions:
+  contents: write
+jobs:
+  bruitages:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Générer les bruitages
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: |
+          mkdir -p episodes
+          python moteur/bruitages_eleven.py ${{ inputs.refaire == 'oui' && '--refaire' || '' }} 2>&1 | tee episodes/bruitages.txt
+      - name: Enregistrer et publier
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view essais >/dev/null 2>&1 || gh release create essais --title "Essais" --notes "Extraits de test."
+          ls sons_eleven/*.mp3 >/dev/null 2>&1 && gh release upload essais sons_eleven/*.mp3 --clobber || true
+          git config user.name robot-jt; git config user.email robot-jt@users.noreply.github.com
+          git add sons_eleven episodes/bruitages.txt 2>/dev/null; git commit -m "Bruitages ElevenLabs" || true
+          git pull --rebase -q || true; git push || true
