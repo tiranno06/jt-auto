@@ -1,5 +1,11 @@
-Pseudo @petitsdramas : aucune vidéo publique (libre, ou compte sans vidéo) — o posted by this user, try using "tiktokuser:channel_id" as the input URL (replacing `channel_id` with its actual value)
-Pseudo @lespetitsdramas : aucune vidéo publique (libre, ou compte sans vidéo) — ERROR: [tiktok:user] lespetitsdramas: This account does not have any videos posted
-Pseudo @petits.dramas.fr : aucune vidéo publique (libre, ou compte sans vidéo) — o posted by this user, try using "tiktokuser:channel_id" as the input URL (replacing `channel_id` with its actual value)
-Pseudo @petitsdramas.fr : aucune vidéo publique (libre, ou compte sans vidéo) — o posted by this user, try using "tiktokuser:channel_id" as the input URL (replacing `channel_id` with its actual value)
-Pseudo @petits_dramas : aucune vidéo publique (libre, ou compte sans vidéo) — o posted by this user, try using "tiktokuser:channel_id" as the input URL (replacing `channel_id` with its actual value)
+Traceback (most recent call last):
+  File "/home/runner/work/jt-auto/jt-auto/moteur/stats.py", line 144, in <module>
+    ok = collecter()
+         ^^^^^^^^^^^
+  File "/home/runner/work/jt-auto/jt-auto/moteur/stats.py", line 53, in collecter
+    videos = _videos_ytdlp(nom)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/jt-auto/jt-auto/moteur/stats.py", line 38, in _videos_ytdlp
+    try: entrees = json.loads(r.stdout or "{}").get("entries") or []
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'get'
