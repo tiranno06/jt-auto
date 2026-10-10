@@ -2,7 +2,7 @@ name: Essai ElevenLabs
 on:
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
 jobs:
   essai:
     runs-on: ubuntu-latest
@@ -15,10 +15,15 @@ jobs:
       - name: Tester la clé ElevenLabs
         env:
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
-        run: python outils/essai_elevenlabs.py
-      - uses: actions/upload-artifact@v4
+        run: |
+          mkdir -p essai_elevenlabs episodes
+          python moteur/essai_elevenlabs.py 2>&1 | tee episodes/essai_elevenlabs.txt
+      - name: Publier les extraits audio et le rapport
         if: always()
-        with:
-          name: essai-elevenlabs
-          path: essai_elevenlabs/
-          if-no-files-found: ignore
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view essais >/dev/null 2>&1 || gh release create essais --title "Essais" --notes "Extraits de test."
+          ls essai_elevenlabs/*.mp3 >/dev/null 2>&1 && gh release upload essais essai_elevenlabs/*.mp3 --clobber || true
+          git config user.name robot-jt; git config user.email robot-jt@users.noreply.github.com
+          git add episodes/essai_elevenlabs.txt && git commit -m "Essai ElevenLabs : rapport" && git pull --rebase -q && git push || true

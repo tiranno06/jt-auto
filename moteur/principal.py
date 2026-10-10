@@ -48,7 +48,7 @@ def main():
     sujets_recents = [h["empreinte"] if h.get("empreinte") else
                       sorted(actu.empreinte(" ".join([h.get("titre", ""), h.get("accroche", "")])))
                       for h in historique if h.get("date", "") >= depuis]
-    fmt = (os.environ.get("FORMAT") or "actu").strip().lower()
+    fmt = (os.environ.get("FORMAT") or "libre").strip().lower()                # par défaut : sketch libre (bouton JT dans la régie)
     if fmt == "alterne": fmt = "libre" if datetime.date.today().toordinal() % 2 else "actu"
     libre = fmt == "libre"
     print(f"Type de vidéo : {'sketch libre (situation du quotidien)' if libre else 'actu du jour'}", flush=True)
