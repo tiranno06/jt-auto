@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ["moteur/voix_modal.py", "moteur/video_modal.py", "moteur/banque_modal.py"]
+    paths: ["moteur/voix_modal.py", "moteur/video_modal.py", "moteur/banque_modal.py", "moteur/decor_modal.py"]
 
 permissions:
   contents: write
@@ -12,7 +12,7 @@ permissions:
 jobs:
   deployer:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 90
     env:
       MODAL_TOKEN_ID: ${{ secrets.MODAL_TOKEN_ID }}
       MODAL_TOKEN_SECRET: ${{ secrets.MODAL_TOKEN_SECRET }}
@@ -31,8 +31,16 @@ jobs:
             echo "=== plan gag (Wan 2.2) ==="; modal deploy moteur/video_modal.py 2>&1 | tail -40; echo "code: ${PIPESTATUS[0]}"
             echo "=== banque de voix (Kyutai, Zonos, Whisper) ==="; modal deploy moteur/banque_modal.py 2>&1 | tail -60; echo "code: ${PIPESTATUS[0]}"
             echo "=== decors (FLUX.1-schnell) ==="; modal deploy moteur/decor_modal.py 2>&1 | tail -40; echo "code: ${PIPESTATUS[0]}"
+            echo "=== essai des decors (premier lancement : telechargement du modele) ==="; timeout 3400 python moteur/essai_decor.py 2>&1 | tail -20
           } > episodes/deploiement.txt
           cat episodes/deploiement.txt
+      - name: Publier les décors d'essai
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view essais >/dev/null 2>&1 || gh release create essais --title "Essais" --notes "Extraits de test."
+          ls essai_decor/*.png >/dev/null 2>&1 && gh release upload essais essai_decor/*.png --clobber || true
       - name: Enregistrer le compte rendu
         if: always()
         run: |

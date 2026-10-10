@@ -106,6 +106,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
     for q in ph: places.setdefault(q["scene"], [])
     for q in ph:
         if q["p"] not in places[q["scene"]]: places[q["scene"]].append(q["p"])
+    for k in places: places[k].sort(key=roles.index)                     # chacun garde son côté d'une scène à l'autre
     def position(scene, role):
         ps = places[scene]; n = len(ps); k = ps.index(role) if role in ps else 0
         if n == 1: return (540, 1500, 1.35)
