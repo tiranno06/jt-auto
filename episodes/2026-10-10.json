@@ -1,143 +1,224 @@
 {
- "titre": "FAUCHÉ",
- "sujet": "FAUCHÉ",
- "ecran": "FAUCHÉ",
+ "titre": "DEUX-TROIS VERRES",
+ "sujet": "DEUX-TROIS VERRES",
+ "ecran": "DEUX-TROIS",
  "invite_nom": "Kévin",
- "invite_role": "Le pote mytho (fictif)",
+ "invite_role": "Patient (fictif) de bonne foi",
  "invite_look": "chauve",
- "lieu_direct": "Chambre de Kévin",
- "titre_accroche": "Quand tu te demandes pourquoi t'es fauché",
- "question": "Combien d'abonnements vous payez sans jamais vous en servir ? Soyez honnêtes 👇",
- "running_gag": "L'abonnement de Kévin : quel que soit son problème, il le règle en prenant un abonnement de plus.",
- "verite": "On n'est pas fauchés à cause des grosses dépenses mais à cause de dizaines de petits abonnements oubliés, qu'on paie sans s'en servir et qu'on ne résilie jamais, parce que tout est fait pour qu'on n'y arrive pas.",
+ "lieu_direct": "Cabinet médical",
+ "titre_accroche": "Quand le médecin te demande tes verres",
+ "question": "Et vous, vous divisez par combien chez le médecin ? 🍷👇",
+ "running_gag": "Le témoin Jojo : chaque fois qu'il vient défendre Kévin, son alibi est un aveu.",
+ "verite": "Chez le médecin, tout le monde divise sa conso d'alcool par trois. Le médecin le sait et la multiplie par trois. Au final, c'est toujours la prise de sang qui parle à notre place.",
  "repliques": [
   {
    "p": "envoyee",
-   "t": "47 prélèvements ! La salle de sport ?",
-   "d": "Quarante-sept prélèvements! La salle de sport?"
+   "t": "Kévin, combien de verres par semaine ?",
+   "d": "[deadpan] Kévin, combien de verres par semaine ?"
   },
   {
    "p": "invite",
-   "t": "Du mécénat. J'y suis allé pour signer.",
-   "d": "[deadpan] Du mécénat. J'y suis allé pour signer.",
+   "t": "Deux-trois verres, docteure. Enfin, des verres de 50 cl. Enfin, des pichets.",
+   "d": "[nervous laugh] Deux-trois verres, docteure. Enfin, des verres de cinquante centilitres. Euh… enfin, des pichets.",
+   "chute": true
+  },
+  {
+   "p": "envoyee",
+   "t": "Par semaine ?",
+   "d": "[sighs] Par semaine ?"
+  },
+  {
+   "p": "invite",
+   "t": "Par week-end. Mais chez moi, le week-end commence le mercredi.",
+   "d": "Par week-end. [whispers] Mais chez moi, le week-end commence le mercredi.",
+   "chute": true
+  },
+  {
+   "p": "envoyee",
+   "t": "Et l'apéro ?",
+   "d": "[annoyed] Et l'apéro ?"
+  },
+  {
+   "p": "invite",
+   "t": "L'apéro, ça compte pas. On est debout, l'alcool part direct dans les jambes.",
+   "d": "[laughs] L'apéro, ça compte pas. On est debout, l'alcool part direct dans les jambes.",
    "chute": true
   },
   {
    "p": "presentateur",
-   "t": "Le streaming ? Sans télé ?",
-   "d": "Le streaming? Sans télé?"
-  },
-  {
-   "p": "invite",
-   "t": "Mon ex regarde, je paie. Comme avant.",
-   "d": "[sighs] Mon ex regarde, je paie. Comme avant.",
+   "t": "Je confirme, docteure, il boit jamais seul. Il boit avec moi. Tous les soirs.",
+   "d": "[excited] Je confirme, docteure, il boit jamais seul ! Il boit avec moi. [deadpan] Tous les soirs.",
    "chute": true
   },
   {
    "p": "invite",
-   "t": "Bonne nouvelle : j'ai tout résilié. Avec une appli. 4,99 € par mois.",
-   "d": "[excited] Bonne nouvelle: j'ai tout résilié. Avec une appli. Quatre quatre-vingt-dix-neuf par mois.",
+   "t": "Et les fonds de verre de Jojo, c'est du recyclage. Ça compte dans l'écologie, pas dans l'alcool.",
+   "d": "[sarcastic] Et les fonds de verre de Jojo, c'est du recyclage. Ça compte dans l'écologie, pas dans l'alcool.",
+   "chute": true
+  },
+  {
+   "p": "presentateur",
+   "t": "Et il boit de l'eau tous les jours, docteure ! Les glaçons, c'est de l'eau.",
+   "d": "[nervous laugh] Et il boit de l'eau tous les jours, docteure ! Les glaçons, c'est de l'eau.",
    "chute": true,
-   "objet": "telephone",
-   "attente": 0.6
+   "objet": "verre"
+  },
+  {
+   "p": "invite",
+   "t": "Je sais que vous multipliez par trois. Donc je vous dis un verre et on tombe juste.",
+   "d": "[sarcastic] Je sais que vous multipliez par trois. Donc je vous dis un verre, et on tombe juste.",
+   "chute": true
+  },
+  {
+   "p": "envoyee",
+   "t": "Moi, je multiplie par trois. Votre foie, lui, a arrêté de compter.",
+   "d": "[deadpan] Moi, je multiplie par trois. Votre foie, lui… a arrêté de compter.",
+   "chute": true
+  },
+  {
+   "p": "envoyee",
+   "t": "Votre prise de sang, le labo me l'a renvoyée avec une rondelle de citron.",
+   "d": "[sighs] Votre prise de sang… le labo me l'a renvoyée avec une rondelle de citron.",
+   "chute": true
+  },
+  {
+   "p": "invite",
+   "t": "Le citron, c'est pour la vitamine C, docteure. Je fais attention.",
+   "d": "[excited] Le citron, c'est pour la vitamine C, docteure. Je fais attention !",
+   "chute": true
+  },
+  {
+   "p": "envoyee",
+   "t": "Le labo a rappelé. L'automate qui a analysé votre sang vient de perdre son permis.",
+   "d": "[annoyed] Le labo a rappelé. L'automate qui a analysé votre sang… vient de perdre son permis.",
+   "chute": true,
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Donc c'est grave, docteure ?",
+   "d": "[nervous] Donc c'est grave, docteure ?"
+  },
+  {
+   "p": "envoyee",
+   "t": "Bonne nouvelle, Kévin : même multiplié par trois, pas d'alcool dans votre sang. Pas de sang non plus.",
+   "d": "[deadpan] Bonne nouvelle, Kévin : même multiplié par trois, pas d'alcool dans votre sang. Pas de sang non plus.",
+   "chute": true,
+   "attente": 0.8
   }
  ],
  "bandeau": [
-  "KÉVIN ENSEVELI SOUS 4,99 € PAR MOIS",
-  "SON EX REGARDE SA SÉRIE, KÉVIN PAIE",
-  "LA SALLE DE SPORT REMERCIE SON MÉCÈNE",
-  "RÉSILIATION : FAX, RECOMMANDÉ ET PRIÈRE"
+  "LE WEEK-END COMMENCE DÉSORMAIS LE MERCREDI",
+  "LES FONDS DE VERRE RECONNUS GESTE ÉCOLOGIQUE",
+  "UN AUTOMATE DE LABO PERD SON PERMIS",
+  "LES GLAÇONS COMPTÉS DANS L'HYDRATATION"
  ],
  "gag": {
-  "replique": 1,
-  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. A small all-white round-headed character in a backwards cap stands calmly in a messy bedroom while dozens of small paper price tags rain down from the ceiling and pile up to his shoulders, a laptop on the desk glows with a red bank statement, deadpan, comedic, pastel cream background, no text."
+  "replique": 11,
+  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. In a small doctor's office, a blood test tube on the desk is served like a cocktail, with a lemon slice on its rim, a tiny paper umbrella and a straw, a cartoon liver on the wall poster looks horrified, comedic, deadpan."
  },
- "legende": "47 prélèvements, zéro utilisation. Mon salaire part en 4,99 €. Satire, personnages fictifs.",
+ "legende": "« Deux-trois verres, docteure. » Enfin, des pichets. Enfin, le week-end commence le mercredi. 🍻 Satire, personnages fictifs.",
  "hashtags": [
-  "fauche",
-  "abonnements",
-  "findemois",
   "humour",
-  "argent",
-  "animation"
+  "medecin",
+  "apero",
+  "sketch",
+  "dessinanime",
+  "kevin"
  ],
  "sources": [],
  "decoupage": [
   {
-   "scene": "Chambre en désordre. Lila brandit le relevé de compte, Jojo est à côté d'elle. À chaque excuse de Kévin, une averse d'étiquettes « 4,99 €/mois » lui tombe dessus : elles montent jusqu'aux genoux, puis jusqu'aux épaules. Kévin reste impassible. Woosh vers le carton.",
+   "scene": "Gag 1 : la consultation. Lila derrière son bureau, Kévin assis en face, de plus en plus avachi. Jojo entre depuis la salle d'attente à la réplique 6, tout fier de témoigner. Le gag finit sur le regard noir de Lila. Transition par un woosh.",
    "repliques": [
     0,
     1,
     2,
-    3
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
    ],
    "lieu": "reconstitution",
-   "son": "woosh",
-   "duree": 9.0,
-   "decor": "a messy bedroom, a laptop on the desk showing a long bank statement in red, a pile of unopened letters on the floor",
-   "titre": "Où passe mon salaire ?",
-   "effet": "tremblement"
+   "son": "rimshot",
+   "duree": 44.0,
+   "decor": "a small doctor's office, a wooden desk with a blood pressure cuff and a prescription pad, an anatomy poster of a liver on the wall, an examination table with pa",
+   "titre": "Chez la docteure…"
   },
   {
-   "scene": "Même chambre. Kévin, enseveli jusqu'au cou, sort fièrement son téléphone. Une dernière étiquette « 4,99 €/mois » lui tombe pile sur la tête. Zoom sur Lila et Jojo, effondrés.",
+   "scene": "Gag 2 : le résultat de la prise de sang. Lila brandit un tube de sang avec une rondelle de citron et une petite ombrelle. Kévin fait le fier, Jojo est inquiet. Silence avant la chute, puis trombone triste.",
    "repliques": [
-    4
+    11,
+    12,
+    13,
+    14,
+    15
    ],
    "lieu": "reconstitution",
    "son": "trombone_triste",
-   "duree": 5.0,
-   "decor": "a messy bedroom, a laptop on the desk showing a long bank statement in red, a pile of unopened letters on the floor",
-   "titre": "Le lendemain…"
+   "duree": 26.0,
+   "decor": "a small doctor's office, a wooden desk with a blood pressure cuff and a prescription pad, an anatomy poster of a liver on the wall, an examination table with pa",
+   "titre": "Trois jours plus tard…"
   }
  ],
  "fiche": {
-  "concept": "« Où passe mon salaire ? » Lila lit le relevé de Kévin : 47 prélèvements. Kévin a une excuse de mytho pour chaque ligne, pendant que les étiquettes « 4,99 €/mois » l'ensevelissent. Le lendemain, il a « tout résilié »… avec un abonnement de plus.",
-  "format": "Gag éclair en dessin animé, en deux temps : la lecture du relevé sous la pluie d'étiquettes, puis le carton « Le lendemain… » et le retournement final.",
-  "angle": "Lila lit les lignes, Jojo enfonce le clou et Kévin aggrave son cas à chaque réponse : la salle de sport, c'est du mécénat, et il paie le streaming de son ex. La chute est un aveu involontaire : pour résilier, il s'abonne encore. Le prix ramène l'étiquette qui lui tombe sur la tête.",
-  "resume_factuel": "Kévin est à découvert et jure qu'il ne gaspille rien, alors que son relevé de compte aligne quarante-sept prélèvements qu'il n'utilise pas.",
+  "concept": "« Deux-trois verres » : chez la docteure Lila, Kévin change le sens de chaque mot (verre, semaine, boire) avec une mauvaise foi d'avocat. Son pote Jojo veut le couvrir et l'enfonce à chaque phrase. Ensuite, la prise de sang balance tout.",
+  "format": "Dessin animé en deux gags : la consultation, puis le résultat de la prise de sang trois jours plus tard.",
+  "angle": "L'escalade d'une seule idée : chaque fois qu'il « précise », Kévin aggrave son cas, jusqu'à vouloir contrer le calcul du médecin, qui multiplie tout par trois. Jojo est un faux témoin de la défense : chaque alibi qu'il donne est un aveu. Lila, médecin qui en a vu d'autres, finit par répondre avec le même calcul.",
+  "resume_factuel": "Au cabinet de la docteure Lila, Kévin minimise sa consommation d'alcool en changeant le sens de chaque mot, son pote Jojo l'enfonce en voulant l'aider, et la prise de sang finit par le trahir.",
   "faits_reels": [],
   "inventions": [
-   "Les 47 prélèvements sur le compte de Kévin",
-   "La salle de sport où Kévin n'est allé que pour signer, et qu'il appelle « du mécénat »",
-   "Le streaming que Kévin paie pour son ex alors qu'il n'a pas de télé",
-   "La pluie d'étiquettes « 4,99 €/mois » qui l'ensevelit",
-   "L'appli de résiliation vendue sur abonnement",
-   "Tous les personnages et toutes les situations sont fictifs"
+   "Toute la situation, les personnages (Jojo, Kévin, Lila) et les dialogues sont fictifs.",
+   "Le week-end qui commence le mercredi, les fonds de verre comptés comme du recyclage, le labo qui renvoie la prise de sang avec une rondelle de citron, l'automate qui perd son permis : invention satirique."
   ],
   "decoupage": [
    {
-    "scene": "Chambre en désordre. Lila brandit le relevé de compte, Jojo est à côté d'elle. À chaque excuse de Kévin, une averse d'étiquettes « 4,99 €/mois » lui tombe dessus : elles montent jusqu'aux genoux, puis jusqu'aux épaules. Kévin reste impassible. Woosh vers le carton.",
+    "scene": "Gag 1 : la consultation. Lila derrière son bureau, Kévin assis en face, de plus en plus avachi. Jojo entre depuis la salle d'attente à la réplique 6, tout fier de témoigner. Le gag finit sur le regard noir de Lila. Transition par un woosh.",
     "repliques": [
      0,
      1,
      2,
-     3
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10
     ],
     "lieu": "reconstitution",
-    "son": "woosh",
-    "duree": 9.0,
-    "decor": "a messy bedroom, a laptop on the desk showing a long bank statement in red, a pile of unopened letters on the floor",
-    "titre": "Où passe mon salaire ?",
-    "effet": "tremblement"
+    "son": "rimshot",
+    "duree": 44.0,
+    "decor": "a small doctor's office, a wooden desk with a blood pressure cuff and a prescription pad, an anatomy poster of a liver on the wall, an examination table with pa",
+    "titre": "Chez la docteure…"
    },
    {
-    "scene": "Même chambre. Kévin, enseveli jusqu'au cou, sort fièrement son téléphone. Une dernière étiquette « 4,99 €/mois » lui tombe pile sur la tête. Zoom sur Lila et Jojo, effondrés.",
+    "scene": "Gag 2 : le résultat de la prise de sang. Lila brandit un tube de sang avec une rondelle de citron et une petite ombrelle. Kévin fait le fier, Jojo est inquiet. Silence avant la chute, puis trombone triste.",
     "repliques": [
-     4
+     11,
+     12,
+     13,
+     14,
+     15
     ],
     "lieu": "reconstitution",
     "son": "trombone_triste",
-    "duree": 5.0,
-    "decor": "a messy bedroom, a laptop on the desk showing a long bank statement in red, a pile of unopened letters on the floor",
-    "titre": "Le lendemain…"
+    "duree": 26.0,
+    "decor": "a small doctor's office, a wooden desk with a blood pressure cuff and a prescription pad, an anatomy poster of a liver on the wall, an examination table with pa",
+    "titre": "Trois jours plus tard…"
    }
   ],
   "titres_sujet": [
-   "Quand tu te demandes pourquoi t'es fauché"
+   "Quand le médecin te demande combien de verres tu bois par semaine"
   ],
   "verification_web": false,
   "note": 72.0,
-  "critique": "Réplique 2 (« Le streaming ? Sans télé ? ») : c'est la plus faible. Le point de départ ne tient pas, puisque tout le monde regarde le streaming sur son téléphone ou son ordi. Ne pas avoir de télé n'a donc rien d'absurde, et l'objection tombe à plat. À remplacer par une objection vraiment reconnaissable : « Quatre plateformes de streaming ? » ou « Netflix, t'as pas regardé depuis 2021 ? ». Ça prépare mieux le « Mon ex regarde, je paie », qui marche bien : c'est noir, c'est vrai (le compte partagé avec l'ex que personne n'ose couper) et c'est cruel.\n\nRéplique 1 (« Du mécénat. J'y suis allé pour signer. ») : bonne vanne, mais c'est le cliché le plus usé du genre (la salle de sport payée pour rien). Elle tient grâce au mot « mécénat ». On peut la rendre plus méchante : « Du mécénat. Je finance les abdos des autres. »\n\nCe qui manque au fond : la fiche dit « une excuse pour chaque ligne » et « tout est fait pour qu'on n'y arrive pas », mais aucune réplique ne touche ce deuxième point (la résiliation impossible, qui oblige à passer en personne, par courrier recommandé, ou par un lien caché). Il faudrait une excuse là-dessus, par exemple pour la salle : « Pour résilier, faut venir en personne. J'y vais pas, c'est le principe. » On garderait le même temps de réplique avec une vérité plus dure.\n\nRéplique 4 (la chute) : c'est bien un retournement sur le sujet (l'appli pour résilier qui est elle-même un abonnement), donc chute_vraie = true. Elle est un peu prévisible, parce que l'étiquet",
+  "critique": "Points forts : les répliques 1 et 3 marchent bien. La surenchère « verres > 50 cl > pichets » et « le week-end commence le mercredi » donnent une vraie mauvaise foi d'avocat. La réplique 9 colle exactement à la vérité visée (« je vous dis un verre et on tombe juste »). La 11 avec le tube servi avec une rondelle de citron est une excellente image. La situation se reconnaît tout de suite.\n\nRépliques faibles :\n- R5 : « l'alcool part direct dans les jambes » reste mou et peu imagé. Proposition : « L'apéro, ça compte pas, docteure, c'est avant le repas. Et je mange jamais. »\n- R7 : c'est Kévin qui s'enfonce tout seul, alors que le concept veut que Jojo l'enfonce. Il faut garder « recyclage » mais le confier à Jojo : « Et il finit même mes verres, docteure, il est très écolo. »\n- R8 : « les glaçons, c'est de l'eau » est une vanne sage et déjà vue. Jojo doit aller plus loin : « Et il boit de l'eau tous les matins, docteure ! Pour faire passer le Doliprane. »\n- Concept pas tenu : Kévin devait détourner « verre, semaine, boire ». Le mot « boire » n'est jamais détourné. À ajouter, par exemple : « Boire, c'est quand on avale. Moi, je sirote. »\n- R10 : « votre foie a arrêté de compter » est correcte mais attendue. Plus cru : « Moi, je multiplie par trois. Votre foie, lui, a demandé l'asile chez un donneur. »\n- R13 : l'automate qui perd son permis est un gag annexe, bancal (une machine n'a pas de permis), et il casse la montée avant la chute. À couper ou à remplacer : « Le labo a rappelé ",
   "decision": "à retravailler"
  }
 }
