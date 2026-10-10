@@ -630,7 +630,8 @@ def lire_script(texte):
         if not p:
             pris = set(vus.values()) | {r["p"] for r in reps}
             p = next((x for x in libres if x not in pris), "presentateur"); vus[nom] = p
-        reps.append({"p": p, "t": m.group(2).strip()})
+        brut_t = m.group(2).strip(); propre = re.sub(r"\s+", " ", re.sub(r"\[[^\]]{1,40}\]", " ", brut_t)).strip()
+        reps.append({"p": p, "t": propre, **({"d": brut_t} if propre != brut_t else {})})   # [émotions] écrites par l'auteur gardées pour la voix
     return reps
 
 def mettre_en_scene(texte):
@@ -649,7 +650,7 @@ def mettre_en_scene(texte):
             script="\n".join(f"{i}. {NOMS_LIBRES[r['p']]} : {r['t']}" for i, r in enumerate(reps)))}], OUTIL_MES, max_tokens=4000, modele=MODELE_PUBLIC)
         d = [str(x) for x in _liste(m.get("d"))]
         for r, x in zip(brut["repliques"], d):
-            if _mots_bruts(re.sub(r"\[[^\]]*\]", " ", x)) == _mots_bruts(r["t"]): r["d"] = x   # mots identiques : jeu accepté
+            if not r.get("d") and _mots_bruts(re.sub(r"\[[^\]]*\]", " ", x)) == _mots_bruts(r["t"]): r["d"] = x   # jeu accepté (sauf si l'auteur l'a écrit)
         if _liste(m.get("decoupage")): brut["decoupage"] = [dict(sc, scene=str(k + 1)) for k, sc in enumerate(_liste(m["decoupage"])) if isinstance(sc, dict)]
         for k in ("titre_accroche", "legende", "question"):
             if m.get(k): brut[k] = m[k]
