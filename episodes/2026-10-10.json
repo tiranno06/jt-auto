@@ -1,224 +1,146 @@
 {
- "titre": "DEUX-TROIS VERRES",
- "sujet": "DEUX-TROIS VERRES",
- "ecran": "DEUX-TROIS",
+ "titre": "CAISSE AUTOMATIQUE",
+ "sujet": "CAISSE AUTOMATIQUE",
+ "ecran": "CAISSE AUTO",
  "invite_nom": "Kévin",
- "invite_role": "Patient (fictif) de bonne foi",
+ "invite_role": "Client honnête (fictif)",
  "invite_look": "chauve",
- "lieu_direct": "Cabinet médical",
- "titre_accroche": "Quand le médecin te demande tes verres",
- "question": "Et vous, vous divisez par combien chez le médecin ? 🍷👇",
- "running_gag": "Le témoin Jojo : chaque fois qu'il vient défendre Kévin, son alibi est un aveu.",
- "verite": "Chez le médecin, tout le monde divise sa conso d'alcool par trois. Le médecin le sait et la multiplie par trois. Au final, c'est toujours la prise de sang qui parle à notre place.",
+ "lieu_direct": "Caisse automatique",
+ "titre_accroche": "POV : la caisse dit « article inattendu »",
+ "question": "La caisse automatique vous a déjà traité de voleur pour une baguette ? 👇",
+ "running_gag": "La caisse de Kévin : chaque fois qu'il veut payer, la machine l'accuse, et le vrai voleur passe derrière lui.",
+ "verite": "La caisse automatique ne fait gagner du temps qu'au magasin : le client fait gratuitement le travail du caissier, on le surveille comme un suspect, et les vrais voleurs passent sans problème.",
  "repliques": [
   {
-   "p": "envoyee",
-   "t": "Kévin, combien de verres par semaine ?",
-   "d": "[deadpan] Kévin, combien de verres par semaine ?"
+   "p": "narrateur",
+   "t": "POV : la caisse dit « article inattendu »",
+   "d": "[excited] Pi-o-vi : la caisse dit « article inattendu »"
   },
   {
    "p": "invite",
-   "t": "Deux-trois verres, docteure. Enfin, des verres de 50 cl. Enfin, des pichets.",
-   "d": "[nervous laugh] Deux-trois verres, docteure. Enfin, des verres de cinquante centilitres. Euh… enfin, des pichets.",
-   "chute": true
-  },
-  {
-   "p": "envoyee",
-   "t": "Par semaine ?",
-   "d": "[sighs] Par semaine ?"
-  },
-  {
-   "p": "invite",
-   "t": "Par week-end. Mais chez moi, le week-end commence le mercredi.",
-   "d": "Par week-end. [whispers] Mais chez moi, le week-end commence le mercredi.",
-   "chute": true
-  },
-  {
-   "p": "envoyee",
-   "t": "Et l'apéro ?",
-   "d": "[annoyed] Et l'apéro ?"
-  },
-  {
-   "p": "invite",
-   "t": "L'apéro, ça compte pas. On est debout, l'alcool part direct dans les jambes.",
-   "d": "[laughs] L'apéro, ça compte pas. On est debout, l'alcool part direct dans les jambes.",
+   "t": "« Article inattendu » ? Moi aussi, demande à mes parents.",
+   "d": "[shouting] Article inattendu ? Moi aussi, demande à mes parents.",
    "chute": true
   },
   {
    "p": "presentateur",
-   "t": "Je confirme, docteure, il boit jamais seul. Il boit avec moi. Tous les soirs.",
-   "d": "[excited] Je confirme, docteure, il boit jamais seul ! Il boit avec moi. [deadpan] Tous les soirs.",
+   "t": "Elle accuse pas. Elle recrute.",
+   "d": "Elle accuse pas. Elle recrute.",
    "chute": true
   },
   {
    "p": "invite",
-   "t": "Et les fonds de verre de Jojo, c'est du recyclage. Ça compte dans l'écologie, pas dans l'alcool.",
-   "d": "[sarcastic] Et les fonds de verre de Jojo, c'est du recyclage. Ça compte dans l'écologie, pas dans l'alcool.",
+   "t": "Je scanne, j'emballe, je me fouille. Sans mutuelle !",
+   "d": "[angry] Je scanne, j'emballe, je me fouille. Sans mutuelle !",
+   "chute": true
+  },
+  {
+   "p": "envoyee",
+   "t": "Kévin ! Le mec sort avec une télé.",
+   "d": "[gasps] Kévin ! Le mec sort avec une télé.",
    "chute": true
   },
   {
    "p": "presentateur",
-   "t": "Et il boit de l'eau tous les jours, docteure ! Les glaçons, c'est de l'eau.",
-   "d": "[nervous laugh] Et il boit de l'eau tous les jours, docteure ! Les glaçons, c'est de l'eau.",
+   "t": "Rassure-toi : la machine ne soupçonne jamais les voleurs. Que les clients.",
+   "d": "[deadpan] Rassure-toi : la machine ne soupçonne jamais les voleurs. Que les clients.",
    "chute": true,
-   "objet": "verre"
-  },
-  {
-   "p": "invite",
-   "t": "Je sais que vous multipliez par trois. Donc je vous dis un verre et on tombe juste.",
-   "d": "[sarcastic] Je sais que vous multipliez par trois. Donc je vous dis un verre, et on tombe juste.",
-   "chute": true
-  },
-  {
-   "p": "envoyee",
-   "t": "Moi, je multiplie par trois. Votre foie, lui, a arrêté de compter.",
-   "d": "[deadpan] Moi, je multiplie par trois. Votre foie, lui… a arrêté de compter.",
-   "chute": true
-  },
-  {
-   "p": "envoyee",
-   "t": "Votre prise de sang, le labo me l'a renvoyée avec une rondelle de citron.",
-   "d": "[sighs] Votre prise de sang… le labo me l'a renvoyée avec une rondelle de citron.",
-   "chute": true
-  },
-  {
-   "p": "invite",
-   "t": "Le citron, c'est pour la vitamine C, docteure. Je fais attention.",
-   "d": "[excited] Le citron, c'est pour la vitamine C, docteure. Je fais attention !",
-   "chute": true
-  },
-  {
-   "p": "envoyee",
-   "t": "Le labo a rappelé. L'automate qui a analysé votre sang vient de perdre son permis.",
-   "d": "[annoyed] Le labo a rappelé. L'automate qui a analysé votre sang… vient de perdre son permis.",
-   "chute": true,
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Donc c'est grave, docteure ?",
-   "d": "[nervous] Donc c'est grave, docteure ?"
-  },
-  {
-   "p": "envoyee",
-   "t": "Bonne nouvelle, Kévin : même multiplié par trois, pas d'alcool dans votre sang. Pas de sang non plus.",
-   "d": "[deadpan] Bonne nouvelle, Kévin : même multiplié par trois, pas d'alcool dans votre sang. Pas de sang non plus.",
-   "chute": true,
-   "attente": 0.8
+   "attente": 0.6
   }
  ],
  "bandeau": [
-  "LE WEEK-END COMMENCE DÉSORMAIS LE MERCREDI",
-  "LES FONDS DE VERRE RECONNUS GESTE ÉCOLOGIQUE",
-  "UN AUTOMATE DE LABO PERD SON PERMIS",
-  "LES GLAÇONS COMPTÉS DANS L'HYDRATATION"
+  "UNE BAGUETTE PLACÉE EN GARDE À VUE",
+  "KÉVIN EMBAUCHÉ SANS SALAIRE PAR UNE CAISSE AUTO",
+  "UN VOLEUR SORT AVEC UNE TÉLÉ : AUCUN ARTICLE INATTENDU",
+  "LES CLÉS DE KÉVIN PESÉES : ARTICLE INATTENDU"
  ],
  "gag": {
-  "replique": 11,
-  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. In a small doctor's office, a blood test tube on the desk is served like a cocktail, with a lemon slice on its rim, a tiny paper umbrella and a straw, a cartoon liver on the wall poster looks horrified, comedic, deadpan."
+  "replique": 4,
+  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. Supermarket self-checkout with a flashing red light: a small round-headed white character stands with arms raised, pockets turned inside out, keys and tissues on the scale next to a baguette. Behind him, another character calmly walks out through the exit gate carrying a big flat TV under his arm, no bag, no alarm. Comedic, deadpan."
  },
- "legende": "« Deux-trois verres, docteure. » Enfin, des pichets. Enfin, le week-end commence le mercredi. 🍻 Satire, personnages fictifs.",
+ "legende": "Je voulais gagner du temps avec une baguette. J'ai fini les poches vides devant la caméra. Satire, personnages fictifs.",
  "hashtags": [
+  "caisseautomatique",
   "humour",
-  "medecin",
-  "apero",
-  "sketch",
-  "dessinanime",
-  "kevin"
+  "supermarche",
+  "galere",
+  "animation",
+  "sketch"
  ],
  "sources": [],
  "decoupage": [
   {
-   "scene": "Gag 1 : la consultation. Lila derrière son bureau, Kévin assis en face, de plus en plus avachi. Jojo entre depuis la salle d'attente à la réplique 6, tout fier de témoigner. Le gag finit sur le regard noir de Lila. Transition par un woosh.",
+   "scene": "Gag 1 : devant la caisse automatique, Kévin pose sa baguette et l'écran passe au rouge. Gros plan sur Kévin qui hurle en tremblant. Jojo lui tapote l'épaule comme un chef d'équipe. Kévin explose en mimant les gestes : scanner, emballer, se fouiller. Transition : woosh.",
    "repliques": [
-    0,
     1,
     2,
-    3,
+    3
+   ],
+   "lieu": "reconstitution",
+   "son": "woosh",
+   "duree": 7.0,
+   "decor": "a supermarket self-checkout machine with a flashing red error light, a single baguette on the bagging scale, a small security camera dome above",
+   "titre": "Article inattendu",
+   "effet": "tremblement"
+  },
+  {
+   "scene": "Gag 2 : même caisse. Kévin a vidé ses poches sur la balance (clés, mouchoirs) et lève les bras face à la caméra. Lila, bouche bée, montre derrière lui un type qui passe tranquillement le portique avec une grande télé sous le bras. Aucune alarme. Jojo, imperturbable, lâche la chute. Rimshot.",
+   "repliques": [
     4,
-    5,
-    6,
-    7,
-    8,
-    9,
-    10
+    5
    ],
    "lieu": "reconstitution",
    "son": "rimshot",
-   "duree": 44.0,
-   "decor": "a small doctor's office, a wooden desk with a blood pressure cuff and a prescription pad, an anatomy poster of a liver on the wall, an examination table with pa",
-   "titre": "Chez la docteure…"
-  },
-  {
-   "scene": "Gag 2 : le résultat de la prise de sang. Lila brandit un tube de sang avec une rondelle de citron et une petite ombrelle. Kévin fait le fier, Jojo est inquiet. Silence avant la chute, puis trombone triste.",
-   "repliques": [
-    11,
-    12,
-    13,
-    14,
-    15
-   ],
-   "lieu": "reconstitution",
-   "son": "trombone_triste",
-   "duree": 26.0,
-   "decor": "a small doctor's office, a wooden desk with a blood pressure cuff and a prescription pad, an anatomy poster of a liver on the wall, an examination table with pa",
-   "titre": "Trois jours plus tard…"
+   "duree": 7.0,
+   "decor": "a supermarket self-checkout machine with a flashing red error light, a single baguette on the bagging scale, a small security camera dome above",
+   "titre": "Dix minutes plus tard…"
   }
  ],
  "fiche": {
-  "concept": "« Deux-trois verres » : chez la docteure Lila, Kévin change le sens de chaque mot (verre, semaine, boire) avec une mauvaise foi d'avocat. Son pote Jojo veut le couvrir et l'enfonce à chaque phrase. Ensuite, la prise de sang balance tout.",
-  "format": "Dessin animé en deux gags : la consultation, puis le résultat de la prise de sang trois jours plus tard.",
-  "angle": "L'escalade d'une seule idée : chaque fois qu'il « précise », Kévin aggrave son cas, jusqu'à vouloir contrer le calcul du médecin, qui multiplie tout par trois. Jojo est un faux témoin de la défense : chaque alibi qu'il donne est un aveu. Lila, médecin qui en a vu d'autres, finit par répondre avec le même calcul.",
-  "resume_factuel": "Au cabinet de la docteure Lila, Kévin minimise sa consommation d'alcool en changeant le sens de chaque mot, son pote Jojo l'enfonce en voulant l'aider, et la prise de sang finit par le trahir.",
+  "fil": "Pitch : Kévin veut payer vite sa baguette à la caisse automatique, mais la machine le prend pour un voleur. 1. Kévin pose sa baguette, l'écran passe au rouge : « article inattendu ». Il craque. Jojo défend la machine : elle ne l'accuse pas, elle le recrute. Kévin explose : il fait tout le boulot, sans mutuelle. 2. Dix minutes plus tard, Kévin a vidé ses poches et lève les bras devant la caméra. Lila voit un type sortir avec une télé, sans alarme. Jojo conclut avec la logique du magasin : la machine ne soupçonne jamais les voleurs, seulement les clients.",
+  "concept": "« Article inattendu » : Kévin voulait gagner du temps avec une seule baguette. Il finit les poches vides, les bras levés devant la caméra, pendant qu'un vrai voleur sort avec une télé.",
+  "format": "Scène de dessin animé en deux gags (cri intérieur, puis retournement) avec Kévin, Jojo et Lila.",
+  "angle": "Plus le client honnête coopère, plus la machine le soupçonne, alors que le seul vrai voleur passe sans que personne le remarque. Jojo défend la machine avec une mauvaise foi totale.",
+  "resume_factuel": "Kévin passe à la caisse automatique avec une baguette, la machine l'accuse d'« article inattendu », et il finit par vider ses poches pendant qu'un vrai voleur s'en va tranquillement.",
   "faits_reels": [],
   "inventions": [
-   "Toute la situation, les personnages (Jojo, Kévin, Lila) et les dialogues sont fictifs.",
-   "Le week-end qui commence le mercredi, les fonds de verre comptés comme du recyclage, le labo qui renvoie la prise de sang avec une rondelle de citron, l'automate qui perd son permis : invention satirique."
+   "Tout est fictif : Kévin, Jojo, Lila, la caisse automatique, le magasin et le voleur à la télé.",
+   "Situation du quotidien poussée jusqu'à l'absurde, sans marque ni personne réelle."
   ],
   "decoupage": [
    {
-    "scene": "Gag 1 : la consultation. Lila derrière son bureau, Kévin assis en face, de plus en plus avachi. Jojo entre depuis la salle d'attente à la réplique 6, tout fier de témoigner. Le gag finit sur le regard noir de Lila. Transition par un woosh.",
+    "scene": "Gag 1 : devant la caisse automatique, Kévin pose sa baguette et l'écran passe au rouge. Gros plan sur Kévin qui hurle en tremblant. Jojo lui tapote l'épaule comme un chef d'équipe. Kévin explose en mimant les gestes : scanner, emballer, se fouiller. Transition : woosh.",
     "repliques": [
-     0,
      1,
      2,
-     3,
+     3
+    ],
+    "lieu": "reconstitution",
+    "son": "woosh",
+    "duree": 7.0,
+    "decor": "a supermarket self-checkout machine with a flashing red error light, a single baguette on the bagging scale, a small security camera dome above",
+    "titre": "Article inattendu",
+    "effet": "tremblement"
+   },
+   {
+    "scene": "Gag 2 : même caisse. Kévin a vidé ses poches sur la balance (clés, mouchoirs) et lève les bras face à la caméra. Lila, bouche bée, montre derrière lui un type qui passe tranquillement le portique avec une grande télé sous le bras. Aucune alarme. Jojo, imperturbable, lâche la chute. Rimshot.",
+    "repliques": [
      4,
-     5,
-     6,
-     7,
-     8,
-     9,
-     10
+     5
     ],
     "lieu": "reconstitution",
     "son": "rimshot",
-    "duree": 44.0,
-    "decor": "a small doctor's office, a wooden desk with a blood pressure cuff and a prescription pad, an anatomy poster of a liver on the wall, an examination table with pa",
-    "titre": "Chez la docteure…"
-   },
-   {
-    "scene": "Gag 2 : le résultat de la prise de sang. Lila brandit un tube de sang avec une rondelle de citron et une petite ombrelle. Kévin fait le fier, Jojo est inquiet. Silence avant la chute, puis trombone triste.",
-    "repliques": [
-     11,
-     12,
-     13,
-     14,
-     15
-    ],
-    "lieu": "reconstitution",
-    "son": "trombone_triste",
-    "duree": 26.0,
-    "decor": "a small doctor's office, a wooden desk with a blood pressure cuff and a prescription pad, an anatomy poster of a liver on the wall, an examination table with pa",
-    "titre": "Trois jours plus tard…"
+    "duree": 7.0,
+    "decor": "a supermarket self-checkout machine with a flashing red error light, a single baguette on the bagging scale, a small security camera dome above",
+    "titre": "Dix minutes plus tard…"
    }
   ],
   "titres_sujet": [
-   "Quand le médecin te demande combien de verres tu bois par semaine"
+   "Quand la caisse automatique dit « article inattendu »"
   ],
   "verification_web": false,
-  "note": 72.0,
-  "critique": "Points forts : les répliques 1 et 3 marchent bien. La surenchère « verres > 50 cl > pichets » et « le week-end commence le mercredi » donnent une vraie mauvaise foi d'avocat. La réplique 9 colle exactement à la vérité visée (« je vous dis un verre et on tombe juste »). La 11 avec le tube servi avec une rondelle de citron est une excellente image. La situation se reconnaît tout de suite.\n\nRépliques faibles :\n- R5 : « l'alcool part direct dans les jambes » reste mou et peu imagé. Proposition : « L'apéro, ça compte pas, docteure, c'est avant le repas. Et je mange jamais. »\n- R7 : c'est Kévin qui s'enfonce tout seul, alors que le concept veut que Jojo l'enfonce. Il faut garder « recyclage » mais le confier à Jojo : « Et il finit même mes verres, docteure, il est très écolo. »\n- R8 : « les glaçons, c'est de l'eau » est une vanne sage et déjà vue. Jojo doit aller plus loin : « Et il boit de l'eau tous les matins, docteure ! Pour faire passer le Doliprane. »\n- Concept pas tenu : Kévin devait détourner « verre, semaine, boire ». Le mot « boire » n'est jamais détourné. À ajouter, par exemple : « Boire, c'est quand on avale. Moi, je sirote. »\n- R10 : « votre foie a arrêté de compter » est correcte mais attendue. Plus cru : « Moi, je multiplie par trois. Votre foie, lui, a demandé l'asile chez un donneur. »\n- R13 : l'automate qui perd son permis est un gag annexe, bancal (une machine n'a pas de permis), et il casse la montée avant la chute. À couper ou à remplacer : « Le labo a rappelé ",
+  "note": 69.0,
+  "critique": "Réplique 0 (Kévin) : c'est la meilleure. Elle est noire et inattendue, et elle détourne le message de la caisse en blessure d'enfance. On garde. Réplique 1 (Jojo) : « Elle recrute » est efficace et touche le cœur de la vérité visée (le travail gratuit), mais elle reste un peu sage. On peut la durcir : « Elle accuse pas. Elle t'embauche. Période d'essai : à vie. » Réplique 2 : la liste en trois temps « je scanne, j'emballe, je me fouille » marche bien, mais « Sans mutuelle ! » tombe à plat, c'est une chute administrative molle. À remplacer par « Et c'est moi qui paie ! » ou « Et je me facture ! », qui pousse l'absurde du client qui paie pour travailler. Réplique 3 (Lila) : purement fonctionnelle, sans aucun gag. Il faudrait au moins une touche : « Kévin ! Le mec sort avec une télé… et il dit même pas merci à la machine. » Réplique 4 (chute) : elle porte bien sur le sujet et le « Rassure-toi » donne un ton ironique, mais elle énonce la vérité presque mot pour mot, c'est de l'explication plus qu'un retournement. Elle ne reprend pas non plus le titre. Proposition plus percutante : « Normal : lui, il a rien scanné. Pas d'article, rien d'inattendu. » Cette version retourne la logique de la machine (on n'est suspect que si on paie) et boucle sur « article inattendu ». Visuel : le prompt du plan gag est coupé (« walks out through… »), alors que la télé et le portique sans alarme sont l'image clé du gag. Il faut le terminer : « …the security gate carrying a huge TV, no alarm, while a ",
   "decision": "à retravailler"
  }
 }
