@@ -50,13 +50,35 @@ def _videos_ytdlp(nom, limite=60):
                                     else f"lecture impossible ({(r.stderr or '').strip()[-300:]})"), flush=True)
     return out
 
+def abonnes(nom):
+    """Nombre d'abonnés lu sur la page publique du compte (données intégrées à la page), ou None."""
+    import urllib.request
+    try:
+        req = urllib.request.Request(f"https://www.tiktok.com/@{nom}", headers={
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36",
+            "Accept-Language": "fr-FR,fr;q=0.9"})
+        page = urllib.request.urlopen(req, timeout=30).read().decode("utf-8", "replace")
+        m = re.search(r'"followerCount"\s*:\s*(\d+)', page)
+        return int(m.group(1)) if m else None
+    except Exception as e:
+        print(f"Stats : abonnés illisibles ({str(e)[:120]})", flush=True); return None
+
+def _suivi_abonnes(nom, ancien):
+    """Historique des abonnés (un relevé par lecture) : sert au compteur de nouveaux abonnés de l'appli."""
+    serie_ = [x for x in (ancien.get("abonnes_hist") or []) if isinstance(x, dict)]
+    n = abonnes(nom)
+    if n is not None:
+        serie_.append({"t": datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="minutes"), "n": n})
+        print(f"Stats @{nom} : {n} abonnés", flush=True)
+    return {"abonnes": n if n is not None else ancien.get("abonnes"), "abonnes_hist": serie_[-24 * 45:]}   # ~45 jours de relevés horaires
+
 def collecter():
     nom = compte()
     if not nom: print("Stats : compte TikTok non réglé (régie > Réglages > Statistiques TikTok).", flush=True); return False
     videos = _videos_ytdlp(nom)
     if not videos:
         os.makedirs(os.path.dirname(FICHIER), exist_ok=True)
-        json.dump({"maj": datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="minutes"), "compte": nom, "videos": []},
+        json.dump({"maj": datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="minutes"), "compte": nom, "videos": [], **_suivi_abonnes(nom, lire())},
                   open(FICHIER, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
         return False
     hist = json.load(open(HIST, encoding="utf-8")) if os.path.exists(HIST) else []
@@ -76,7 +98,7 @@ def collecter():
             h["vues"], h["likes"], h["commentaires"], h["partages"] = v["vues"], v["likes"], v["commentaires"], v["partages"]
             h["url_tiktok"] = v["url"]; h["publie"] = True
     os.makedirs(os.path.dirname(FICHIER), exist_ok=True)
-    json.dump({"maj": datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="minutes"), "compte": nom, "videos": videos},
+    json.dump({"maj": datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="minutes"), "compte": nom, "videos": videos, **_suivi_abonnes(nom, lire())},
               open(FICHIER, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     if hist: json.dump(hist, open(HIST, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     total = sum(v["vues"] for v in videos)
