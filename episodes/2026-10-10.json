@@ -1,150 +1,247 @@
 {
- "titre": "MOT DE PASSE OUBLIÉ",
- "sujet": "MOT DE PASSE OUBLIÉ",
- "ecran": "MOT DE PASSE",
+ "titre": "ÇA TREMPE",
+ "sujet": "ÇA TREMPE",
+ "ecran": "ÇA TREMPE",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "Quand tu cliques « Mot de passe oublié »",
- "question": "Ton mot de passe, c'est aussi « ton prénom + 123 » ? Tag le Kévin de ta bande 👇",
- "running_gag": "Le mot de passe de Kévin : Kevin123, que tout le monde connaît sauf lui.",
- "verite": "Les sites connaissent ton mot de passe mieux que toi, mais ne te le rendent pas : la « sécurité » sert surtout à te laisser dehors de ton propre compte, sans même te laisser partir.",
+ "titre_accroche": "Quand ton coloc dit que la vaisselle trempe",
+ "question": "Team Jojo ou team Lila ? Tag le coloc qui fait « tremper » depuis 2019 👇🍳",
+ "running_gag": "La technique de Jojo : chaque fois qu'il a la flemme, il appelle ça une méthode de pro.",
+ "verite": "« Ça trempe », c'est juste une façon polie de dire « j'ai pas envie de la faire, j'attends que quelqu'un d'autre s'en occupe ».",
  "repliques": [
   {
    "p": "narrateur",
-   "t": "Quand tu cliques « Mot de passe oublié »",
-   "d": "[excited] Quand tu cliques « Mot de passe oublié »"
-  },
-  {
-   "p": "invite",
-   "t": "Nouveau mot de passe… Kevin123.",
-   "d": "[proudly] Nouveau mot de passe… Kevin un deux trois."
+   "t": "Quand ton coloc dit que la vaisselle trempe",
+   "d": "[excited] Quand ton coloc dit que la vaisselle trempe"
   },
   {
    "p": "envoyee",
-   "t": "« Ne peut pas être identique à l'ancien. »",
-   "d": "[deadpan] « Ne peut pas être identique à l'ancien. »",
-   "attente": 0.5
+   "t": "Neuf jours dans l'eau, Jojo. Ta poêle s'est plus lavée que toi ce mois-ci.",
+   "d": "[disgusted] Neuf jours dans l'eau, Jojo. [sarcastic] Ta poêle s'est plus lavée que toi ce mois-ci.",
+   "chute": true
   },
   {
-   "p": "invite",
-   "t": "Tu le connais ?! Donne-le !",
-   "d": "[shouting] Tu le CONNAIS ?! [angry] Donne-le !",
-   "chute": true,
-   "chevauche": true
+   "p": "presentateur",
+   "t": "Elle trempe, Lila. Elle a besoin de temps.",
+   "d": "[deadpan] Elle trempe, Lila. Elle a besoin de temps."
   },
   {
-   "p": "invite",
-   "t": "Bloqué 24 heures. Mon ex m'a bloqué moins longtemps.",
-   "d": "[crying] Bloqué vingt-quatre heures. [sighs] Mon ex m'a bloqué moins longtemps.",
+   "p": "presentateur",
+   "t": "Je la fais pas tremper. Je la laisse réfléchir à ce qu'elle a fait.",
+   "d": "[proudly] Je la fais pas tremper. Je la laisse… réfléchir à ce qu'elle a fait.",
    "chute": true
   },
   {
    "p": "invite",
-   "t": "Je supprime ce compte !",
-   "d": "[angry] Je supprime ce compte !"
+   "t": "Trop fort. J'ai mis mon téléphone à tremper aussi. Il buggait, ça va le décrasser.",
+   "d": "[excited] Trop fort, frère ! J'ai mis mon téléphone à tremper aussi. Il buggait, ça va le décrasser.",
+   "chute": true,
+   "objet": "telephone"
   },
   {
    "p": "envoyee",
-   "t": "Rassure-toi : supprimer ton compte prend un clic. Après connexion.",
-   "d": "[deadpan] Rassure-toi : supprimer ton compte prend un clic. … Après connexion.",
+   "t": "Jojo, le truc vert dans ta poêle vient de me parler. Il veut le code wifi.",
+   "d": "[panicked] Jojo, le truc vert dans ta poêle vient de me parler. [deadpan] Il veut le code wifi.",
+   "chute": true
+  },
+  {
+   "p": "presentateur",
+   "t": "C'est pas un reste d'omelette, ça. C'est une archive. L'odeur, c'est que ça travaille.",
+   "d": "[calm] C'est pas un reste d'omelette, ça. C'est une archive. L'odeur, c'est que ça travaille.",
+   "chute": true
+  },
+  {
+   "p": "envoyee",
+   "t": "Elle travaille plus que toi. Et les mouches, Jojo ? Elles font la queue.",
+   "d": "[sarcastic] Elle travaille plus que toi. [deadpan] Et les mouches, Jojo ? Elles font la queue.",
+   "chute": true,
+   "chevauche": true
+  },
+  {
+   "p": "presentateur",
+   "t": "C'est pas des mouches. C'est mon équipe de nettoyage. Je les déclare pas.",
+   "d": "[annoyed] C'est pas des mouches. C'est mon équipe de nettoyage. [whispers] Je les déclare pas.",
+   "chute": true
+  },
+  {
+   "p": "envoyee",
+   "t": "Bon. Je la lave. Maintenant.",
+   "d": "[annoyed] Bon. Je la lave. Maintenant —"
+  },
+  {
+   "p": "presentateur",
+   "t": "Non ! Tu brusques la vaisselle ! Tu fous en l'air douze jours de boulot !",
+   "d": "[panicked] Non non non ! Tu brusques la vaisselle ! Tu fous en l'air douze jours de boulot !",
+   "chute": true,
+   "chevauche": true
+  },
+  {
+   "p": "envoyee",
+   "t": "Ta poêle est tellement vivante qu'elle va finir par payer un loyer. Contrairement à toi.",
+   "d": "[deadpan] Ta poêle est tellement vivante qu'elle va finir par payer un loyer. [sarcastic] Contrairement à toi.",
+   "chute": true,
+   "attente": 0.5
+  },
+  {
+   "p": "presentateur",
+   "t": "Elle a besoin de temps, c'est tout.",
+   "d": "[proudly] Elle a besoin de temps, c'est tout."
+  },
+  {
+   "p": "envoyee",
+   "t": "D'accord. Kévin, fais tremper toutes les affaires de Jojo. Elles ont besoin de temps.",
+   "d": "[sighs] D'accord. [sarcastic] Kévin, fais tremper toutes les affaires de Jojo. Elles ont besoin de temps."
+  },
+  {
+   "p": "invite",
+   "t": "Même celles de la salle de bain ?",
+   "d": "[excited] Même celles de la salle de bain ?",
+   "chevauche": true
+  },
+  {
+   "p": "presentateur",
+   "t": "Euh… pourquoi ma brosse à dents a un goût d'omelette ?",
+   "d": "[disgusted] Euh… pourquoi ma brosse à dents a un goût d'omelette ?"
+  },
+  {
+   "p": "envoyee",
+   "t": "Ta poêle trempe toujours, Jojo. Ta brosse à dents aussi.",
+   "d": "[deadpan] Ta poêle trempe toujours, Jojo. [sarcastic] Ta brosse à dents aussi.",
    "chute": true,
    "attente": 0.7
   }
  ],
- "bandeau": [
-  "LE SITE CONNAÎT LE MOT DE PASSE, IL NE DIT RIEN",
-  "KEVIN123 : CINQ ANS DE FIDÉLITÉ, ZÉRO MERCI",
-  "COMPTE BLOQUÉ : KÉVIN SUSPECTÉ D'ÊTRE KÉVIN"
- ],
+ "bandeau": [],
  "gag": {
-  "replique": 3,
-  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. A small white round-headed character in a backwards cap grabs an open laptop with a big red error box and screams at it, the laptop shakes, a coffee cup spills, a second white character with a pink bow sits beside him looking bored, plain pastel peach background, comedic, no text."
+  "replique": 5,
+  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. A kitchen sink full of green murky water with a greasy frying pan, a small green slimy blob creature pops out of the pan and waves hello holding a tiny smartphone, a few cartoon flies circle above, comedic, deadpan."
  },
- "legende": "Le site connaît ton mot de passe mais ne te le rendra jamais. Attends la fin. Satire, personnages fictifs.",
+ "legende": "Sa poêle « trempe » depuis douze jours… attends de voir la vengeance de Lila 🪥 Satire, personnages fictifs.",
  "hashtags": [
   "petitsdramas",
   "humour",
-  "animation",
-  "motdepasse",
-  "motdepasseoublie",
-  "galere"
+  "sketch",
+  "colocation",
+  "vaisselle",
+  "coloc"
  ],
  "sources": [],
  "decoupage": [
   {
-   "scene": "Gag 1 : Kévin, devant son ordinateur portable, tape fièrement dans le champ « Nouveau mot de passe ». Un gros message d'erreur rouge apparaît. Lila, assise à côté de lui, pointe l'écran du doigt et le lit, blasée. Kévin attrape l'ordinateur et hurle dessus, zoom sur sa bouche grande ouverte.",
+   "scene": "Gag 1 : cuisine de coloc. Gros plan sur l'évier d'eau grise d'où dépasse la poêle grasse. Lila se bouche le nez, Jojo bras croisés, fier. Kévin plonge son téléphone dans l'eau, ravi. Le prénom de chacun s'affiche en couleur à sa première réplique.",
    "repliques": [
     1,
     2,
-    3
+    3,
+    4
+   ],
+   "lieu": "reconstitution",
+   "son": "rimshot",
+   "duree": 16.0,
+   "decor": "a cramped shared apartment kitchen, a sink full of grey water with a greasy frying pan sticking out, a stack of dirty plates on the counter"
+  },
+  {
+   "scene": "Gag 2 : même cuisine. Insert sur l'évier : l'eau est devenue verte, une petite bestiole verte sort de la poêle et fait coucou, des mouches tournent au-dessus. Lila attrape l'éponge, Jojo se jette devant l'évier les bras en croix. Lila pose l'éponge, sourire froid, et se tourne vers Kévin.",
+   "repliques": [
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14
    ],
    "lieu": "reconstitution",
    "son": "dun_dun",
-   "duree": 7.0,
-   "decor": "a cluttered bedroom desk, an open laptop showing a 'new password' form with a big red error box, a cold cup of coffee",
+   "duree": 40.0,
+   "decor": "a cramped shared apartment kitchen, a sink full of grey water with a greasy frying pan sticking out, a stack of dirty plates on the counter",
+   "titre": "Trois jours plus tard…",
    "effet": "tremblement"
   },
   {
-   "scene": "Gag 2 : même bureau, la nuit tombée. L'écran affiche un énorme cadenas rouge, « Trop de tentatives » et un compte à rebours de 24 heures. Kévin pleure, puis s'énerve et veut tout supprimer. Lila, impassible, tranche. Kévin se fige, bouche ouverte.",
+   "scene": "Gag 3 : petite salle de bain. Jojo, la brosse à dents dans la bouche, grimace devant le miroir. Derrière lui, Kévin lève le pouce, fier. Lila, adossée à la porte, impassible.",
    "repliques": [
-    4,
-    5,
-    6
+    15,
+    16
    ],
    "lieu": "reconstitution",
    "son": "trombone_triste",
-   "duree": 9.0,
-   "decor": "a cluttered bedroom desk, an open laptop showing a big red padlock and a 24-hour countdown, a cold cup of coffee",
-   "titre": "Vingt essais plus tard…"
+   "duree": 10.0,
+   "decor": "a tiny shared bathroom, a sink with an empty toothbrush cup, a foggy mirror and a tube of toothpaste",
+   "titre": "Le lendemain matin…"
   }
  ],
+ "serie_titre": "Jojo, Kévin et Lila",
+ "resume_episode": "Jojo laisse sa poêle « tremper » pendant douze jours. Lila retourne son excuse contre lui et, avec l'aide de Kévin, fait tremper sa brosse à dents.",
  "fiche": {
-  "fil": "Pitch : Kévin veut récupérer son compte, mais le site connaît son mot de passe mieux que lui et refuse de le laisser entrer. 1. Kévin clique sur « Mot de passe oublié » et tape fièrement son NOUVEAU mot de passe, Kevin123. Lila, assise à côté de lui, lit le message rouge : « Ne peut pas être identique à l'ancien ». Le site le connaît donc. Kévin hurle sur l'ordinateur pour qu'il le lui rende. 2. Vingt essais plus tard, l'écran affiche « Trop de tentatives : compte bloqué 24 h ». Kévin craque et veut supprimer son compte. Lila tranche : supprimer son compte prend un clic… après connexion. Il ne peut ni entrer ni partir.",
-  "concept": "« Mot de passe oublié » : Kévin se bat contre un site qui connaît son mot de passe, refuse de le lui rendre, le bloque, puis l'empêche même de partir.",
-  "format": "Sketch animé court, deux gags dans un seul lieu (le bureau de Kévin), deux personnages : Kévin et Lila.",
-  "angle": "La sécurité informatique comme une prison dont tu es le seul à ne pas avoir la clé : le site sait tout, Kévin ne sait rien, et même pour partir il faut d'abord entrer.",
-  "resume_factuel": "Kévin a oublié son mot de passe : le site refuse le nouveau parce que c'est l'ancien, le bloque après trop d'essais, et l'empêche même de supprimer son compte.",
+  "fil": "Lila veut que Jojo lave enfin sa poêle sale. Jojo refuse : elle « trempe », elle « a besoin de temps ». 1. Dans la cuisine de la coloc, la poêle est dans l'évier depuis neuf jours. Jojo appelle ça une technique. Kévin y croit et met son téléphone à tremper. 2. Trois jours plus tard, l'eau est verte, un truc bouge et des mouches tournent au-dessus. Jojo dit que « ça travaille ». Lila attrape l'éponge, Jojo l'en empêche au nom de « douze jours de boulot ». Alors Lila retourne sa phrase contre lui : elle demande à Kévin de faire tremper toutes les affaires de Jojo, puisqu'« elles ont besoin de temps ». Kévin, ravi, demande si ça vaut aussi pour la salle de bain. 3. Le lendemain matin, la brosse à dents de Jojo a un goût d'omelette. Lila conclut.",
+  "concept": "« Ça trempe » : un coloc fait passer une poêle oubliée douze jours dans l'évier pour une technique de pro, jusqu'à ce que sa coloc lui applique la même technique.",
+  "format": "Sketch long animé en 3 gags dans la même coloc (cuisine, puis salle de bain). Duo exaspérée / inébranlable, et Kévin, le naïf qui devient l'arme de Lila.",
+  "angle": "Jojo répond à chaque preuve (le truc vert, l'odeur, les mouches) par une théorie encore plus folle. Lila arrête de se battre et retourne sa propre excuse contre lui, avec l'aide de Kévin qui croit tout.",
+  "resume_factuel": "Dans une coloc, la poêle de Jojo trempe dans l'évier depuis neuf jours, et il refuse de la laver au nom d'une prétendue technique.",
   "faits_reels": [],
   "inventions": [
-   "Toute la situation, les personnages et les répliques sont fictifs.",
-   "Le mot de passe Kevin123 est inventé."
+   "Tout est fictif : la situation, les personnages et les répliques. La poêle qui trempe douze jours, le truc vert qui veut le wifi, les mouches non déclarées, le téléphone de Kévin mis à tremper, la brosse à dents trempée sur ordre de Lila."
   ],
   "decoupage": [
    {
-    "scene": "Gag 1 : Kévin, devant son ordinateur portable, tape fièrement dans le champ « Nouveau mot de passe ». Un gros message d'erreur rouge apparaît. Lila, assise à côté de lui, pointe l'écran du doigt et le lit, blasée. Kévin attrape l'ordinateur et hurle dessus, zoom sur sa bouche grande ouverte.",
+    "scene": "Gag 1 : cuisine de coloc. Gros plan sur l'évier d'eau grise d'où dépasse la poêle grasse. Lila se bouche le nez, Jojo bras croisés, fier. Kévin plonge son téléphone dans l'eau, ravi. Le prénom de chacun s'affiche en couleur à sa première réplique.",
     "repliques": [
      1,
      2,
-     3
+     3,
+     4
+    ],
+    "lieu": "reconstitution",
+    "son": "rimshot",
+    "duree": 16.0,
+    "decor": "a cramped shared apartment kitchen, a sink full of grey water with a greasy frying pan sticking out, a stack of dirty plates on the counter"
+   },
+   {
+    "scene": "Gag 2 : même cuisine. Insert sur l'évier : l'eau est devenue verte, une petite bestiole verte sort de la poêle et fait coucou, des mouches tournent au-dessus. Lila attrape l'éponge, Jojo se jette devant l'évier les bras en croix. Lila pose l'éponge, sourire froid, et se tourne vers Kévin.",
+    "repliques": [
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     14
     ],
     "lieu": "reconstitution",
     "son": "dun_dun",
-    "duree": 7.0,
-    "decor": "a cluttered bedroom desk, an open laptop showing a 'new password' form with a big red error box, a cold cup of coffee",
+    "duree": 40.0,
+    "decor": "a cramped shared apartment kitchen, a sink full of grey water with a greasy frying pan sticking out, a stack of dirty plates on the counter",
+    "titre": "Trois jours plus tard…",
     "effet": "tremblement"
    },
    {
-    "scene": "Gag 2 : même bureau, la nuit tombée. L'écran affiche un énorme cadenas rouge, « Trop de tentatives » et un compte à rebours de 24 heures. Kévin pleure, puis s'énerve et veut tout supprimer. Lila, impassible, tranche. Kévin se fige, bouche ouverte.",
+    "scene": "Gag 3 : petite salle de bain. Jojo, la brosse à dents dans la bouche, grimace devant le miroir. Derrière lui, Kévin lève le pouce, fier. Lila, adossée à la porte, impassible.",
     "repliques": [
-     4,
-     5,
-     6
+     15,
+     16
     ],
     "lieu": "reconstitution",
     "son": "trombone_triste",
-    "duree": 9.0,
-    "decor": "a cluttered bedroom desk, an open laptop showing a big red padlock and a 24-hour countdown, a cold cup of coffee",
-    "titre": "Vingt essais plus tard…"
+    "duree": 10.0,
+    "decor": "a tiny shared bathroom, a sink with an empty toothbrush cup, a foggy mirror and a tube of toothpaste",
+    "titre": "Le lendemain matin…"
    }
   ],
   "titres_sujet": [
-   "Quand je clique sur « Mot de passe oublié »"
+   "Quand ton coloc dit que la vaisselle « trempe »"
   ],
   "verification_web": false,
-  "note": 79.0,
-  "critique": "AVIS DU PUBLIC TEST (spectateurs sans contexte) :\n- Inès : a compris, rire 5.5/10, perdu par : Je suis restée, mais j'ai failli partir à la 2. Le « mot de passe identique à l'ancien », on l'a vu cent fois et on a déjà compris. La chute sur la suppression du compte est correcte. Elle est attendue et un peu trop expliquée (« Rassure-toi »). Je voulais quelque chose de plus noir ou de plus absurde. Kévin crie beaucoup, ça fatigue.\n- Karim : a compris, rire 6/10, perdu par : Sans le son, je ne vois pas les tons (deadpan, shouting). Le carton « Vingt essais plus tard… » est clair. Mais la réplique 1 est entre guillemets et je ne sais pas si Lila est une personne ou le système. Au début, j'ai hésité. Kévin et Lila ne sont pas bien distingués si on lit vite les sous-titres. Le « Kevin123 » passe vite et je n'ai pas le temps de bien le lire.\n- Sandrine : a compris, rire 4.5/10, perdu par : Je n'ai pas compris tout de suite qui était Lila. Est-ce une amie, ou la voix du site ? Il m'a fallu la dernière réplique pour comprendre. La réplique 2 (« Tu le connais ?! Donne-le ! ») est confuse : il parle à qui, à l'ordinateur ? Sinon, le titre m'a aidée. La chute m'a fait sourire. Je n'ai pas saisi pourquoi on doit se connecter pour supprimer. Ça ne m'a pas paru logique tout de suite.\nCritiques constructives du public :\n- Réplique 1 : on ne sait pas qui est Lila. Montrez-la tout de suite comme la voix du site, avec une icône de cadenas ou un habillage de pop-up. On ne doit pas hésiter une sec",
+  "note": 67.5,
+  "critique": "AVIS DU PUBLIC TEST (spectateurs sans contexte) :\n- Inès : a compris, rire 5.5/10, aurait scrollé à la réplique 11, perdu par : Ça tourne en rond après la 7. Jojo répète « elle a besoin de temps » trois fois, Lila renvoie des vannes du même genre (« plus que toi », « contrairement à toi »), et ça ne monte pas en intensité. J'ai scrollé à la 11 parce que je voyais la chute venir. La vanne du téléphone de Kévin ne mène à rien.\n- Karim : a compris, rire 6/10, perdu par : Sans le son, je ne sais pas qui parle ni sur quel ton. Les (sarcastic) et (deadpan) ne se lisent pas, donc plusieurs vannes de Lila tombent à plat. Le début (0 à 3) est trop dense à lire. Le téléphone de Kévin passe vite et on ne comprend pas pourquoi il revient. La salle de bain en 13 est comprise à moitié. Je suis resté jusqu'au bout, mais je me suis un peu ennuyé au milieu.\n- Sandrine : a compris, rire 5/10, perdu par : Je ne comprends pas tout de suite pourquoi Kévin met son téléphone à tremper. Est-ce que c'est une blague ou est-ce qu'il est bête ? Après, ça ne sert à rien. Dans la chute, je ne vois pas comment la brosse à dents a un goût d'omelette. Elle a trempé dans la poêle ? Il faut me le montrer ou me le dire. La vidéo est aussi un peu dégoûtante (le truc vert, les mouches) sans qu'on rie assez pour compenser.\nCritiques constructives du public :\n- Réplique n° 3 : supprimer la vanne du téléphone de Kévin, ou la faire revenir dans la chute. Là, elle est lâchée puis oubliée. Ça fait perdre 5 secondes au ",
   "decision": "à retravailler"
  }
 }
