@@ -10,7 +10,7 @@ MODELE = os.environ.get("MODELE_CLAUDE") or "claude-opus-5-5"          # Opus : 
 # réglages de la régie (variables du dépôt)
 LONGUEURS = {"pro": ("10 à 16", "60 à 90"), "courte": ("5 à 6", "20 à 25"), "normale": ("7 à 9", "30 à 40"), "longue": ("9 à 12", "40 à 55"),
              "monetisable": ("13 à 16", "60 à 75")}   # format long : plus d'une minute (rémunération TikTok)
-TONS = {"clash": "CLASH, foutage de gueule direct (le style préféré du public) : on compare l'actu à la vie de tous les jours avec une mauvaise foi assumée (« Ils ont trouvé 3 000 profs en 24 h. Moi, j'ai mis trois semaines à trouver un plombier. »), on balance des hypothèses absurdes en « soit… soit… » (« soit c'est un miracle, soit ils ont recruté au rayon surgelés »), l'invité répond du tac au tac en aggravant son cas (« ils ont été décongelés ce matin »), et une image du quotidien revient en rappel à la fin (le plombier). Phrases courtes, punchlines sèches, comme entre potes qui chambrent",
+TONS = {"clash": "CLASH, foutage de gueule direct (le style préféré du public) : on compare l'actu à la vie de tous les jours avec une mauvaise foi assumée (« Ils ont trouvé 3 000 profs en 24 h. Moi, j'ai mis trois semaines à trouver un plombier. »), on balance des hypothèses absurdes en « soit… soit… » (« soit c'est un miracle, soit ils ont recruté au rayon surgelés »), l'invité répond du tac au tac en aggravant son cas (« ils ont été décongelés ce matin »), et la CHUTE finale balance la vérité crue du sujet, cash, comme un clash : ce qui se passe vraiment, qui y gagne, qui paie (« En clair : il manque des profs, on recrute à la va-vite, et vos enfants servent de période d'essai. »). Phrases courtes, punchlines sèches, comme entre potes qui chambrent",
         "farfelu": "gags farfelus et ironie pince-sans-rire : situations délirantes, images absurdes et très concrètes, ironie froide envers les institutions et la langue de bois",
         "bon_enfant": "foutage de gueule bon enfant envers les institutions, la langue de bois et les travers du pouvoir",
         "piquant": "satire mordante et sans pitié envers les institutions, les décisions et la langue de bois (jamais envers les gens pour ce qu'ils sont)",
@@ -30,6 +30,7 @@ LOOKS = ("chauve", "moustache")
 
 EXEMPLE = {
  "sujet": "3000 PROFS EXPRESS",
+ "verite": "Il manque des profs depuis des années ; pour le cacher, on recrute à la va-vite, et ce sont les élèves qui paient.",
  "ecran": "3000 PROFS",
  "titre_accroche": "3000 profs en 24 h, mon plombier : 3 semaines",
  "invite_nom": "Hubert Rustine",
@@ -72,6 +73,11 @@ EXEMPLE = {
    "t": "Bonne nouvelle, Jean-Michel : votre plombier est arrivé. Il vient d'être nommé prof de physique.",
    "attente": 0.5,
    "chute": True
+  },
+  {
+   "p": "presentateur",
+   "t": "En clair : il manque des profs depuis des années, on recrute à la va-vite, et vos enfants servent de période d'essai.",
+   "chute": True
   }
  ],
  "bandeau": [
@@ -100,7 +106,7 @@ PERSONNES RÉELLES : tu peux citer une personnalité publique uniquement pour un
 
 STYLE MAISON (validé par le public) : {ton}
 
-DURÉE : {secondes} secondes, {nb} répliques, entre {mots_min} et {mots} mots prononcés au total. Réplique 0 = l'accroche du présentateur (2 secondes, la punchline la plus forte du début). La dernière réplique doit faire écho à l'accroche (la vidéo tourne en boucle sur TikTok).
+DURÉE : {secondes} secondes, {nb} répliques, entre {mots_min} et {mots} mots prononcés au total. Réplique 0 = l'accroche du présentateur (2 secondes, la punchline la plus forte du début). CHUTE VÉRITÉ (règle n°1 du propriétaire) : la dernière réplique dit tout haut la vérité du SUJET PRINCIPAL que tout le monde pense tout bas — le vrai mécanisme, la vraie hypocrisie, qui gagne et qui paie — en une phrase sèche de clash, fondée sur les faits réels. Elle nomme le sujet (ses acteurs, son enjeu) ; jamais une blague annexe, jamais un simple rappel d'un gag du sketch (le yaourt, le plombier…). Tout le sketch est construit pour y mener : chaque réplique monte vers cette vérité. Un clin d'œil à l'accroche n'est permis que s'il sert cette vérité.
 Voix synthétiques : phrases courtes, faciles à dire, une idée par phrase. Nombres, sigles et pourcentages en toutes lettres dans le champ "d".
 {special}
 Running gags récents de l'émission (un clin d'œil possible s'il colle au sujet) : {gags}
@@ -108,7 +114,7 @@ ANTI-RÉPÉTITION — sujets et vannes des derniers épisodes, à NE PAS refaire
 
 LIVRABLES : rends tout avec l'outil rendre_sketch, dans ce format JSON strict (A→F du cahier des charges inclus) :
 {{"sujet": "1 à 3 mots, MAJUSCULES", "ecran": "max 14 caractères, MAJUSCULES", "titre_accroche": "max 40 caractères, sans emoji",
- "concept": "B. concept et titre", "format": "B. format choisi", "angle": "B. angle comique",
+ "verite": "la vérité crue du sujet principal, dite par la dernière réplique", "concept": "B. concept et titre", "format": "B. format choisi", "angle": "B. angle comique",
  "resume_factuel": "A. résumé factuel daté", "faits_reels": ["E. faits réels vérifiés"], "inventions": ["E. inventions satiriques"],
  "decoupage": [{{"scene": "D. description : lieu, actions visuelles, transition", "repliques": [indices des répliques de la scène], "lieu": "plateau|direct|duplex|reconstitution", "son": "bruitage à la fin de la scène parmi : rimshot, xylo_descente, trombone_triste, dun_dun, woosh, reconstitution (ou vide)", "duree": secondes estimées}}],
  "invite_nom": "nom fictif", "invite_role": "fonction avec « (fictif) », max 34 caractères", "invite_look": "{looks}",
@@ -129,17 +135,20 @@ SELECTION = """Étapes 1 à 3 du cahier des charges. Voici les gros titres de l'
 
 Note chaque candidat sur 10 (potentiel comique, absurdité, potentiel satirique, originalité, reconnaissance par le public, potentiel visuel, fraîcheur ; plus de poids à l'originalité et au potentiel comique). Écarte les drames et les sujets où l'on rirait de victimes.
 Choisis OBLIGATOIREMENT parmi les candidats [0] à [{dernier}] celui qui permet le MEILLEUR sketch, puis trouve son angle comique (contradiction discours/actes, mauvaise foi, absurdité administrative, double standard, conséquence grotesque). Si tu disposes de la recherche web, vérifie rapidement les faits clés du sujet choisi.
+Écris ensuite, AVANT tout le reste, la VÉRITÉ du sujet : une phrase brute qui dit ce qui se passe vraiment derrière l'annonce (qui y gagne, qui paie, quelle hypocrisie), fondée sur les faits. Ce sera la chute du sketch.
 Rends ton choix avec l'outil choisir_sujet."""
 
 CRITIQUE = """Étape 8 du cahier des charges : relis ce sketch comme un auteur exigeant et note-le sur 100, honnêtement (ne gonfle jamais la note) :
 originalité du concept /20, punchlines /25, rythme /15, pertinence satirique /15, dialogues /10, potentiel visuel /10, chute /5.
+SUJET PRINCIPAL : {sujet}
 Fiche et script (format vidéo animée {secondes} s, voix synthétiques ; les actions visuelles et le découpage comptent pour le potentiel visuel) :
 {sketch}
+EXIGENCE N°1 DU PROPRIÉTAIRE : la chute (dernière réplique) doit dire la vérité crue de CE sujet principal, comme un clash (ce qui se passe vraiment, qui gagne, qui paie). Une chute qui n'est qu'un gag annexe ou un rappel d'une blague du sketch (« chute_vraie » = false) plafonne la note à 70, quelle que soit la qualité du reste.
 Rends la note avec l'outil noter_sketch. Le champ "critique" est OBLIGATOIRE et non vide : cite les répliques faibles (numéro + pourquoi) et propose ce qu'il faut changer."""
 
 REECRITURE = """Ton sketch a obtenu {note}/100 (seuil : 80). Critique du relecteur :
 {critique}
-Réécris-le en profondeur (pas de retouches cosmétiques) pour dépasser 80 : punchlines plus surprenantes, escalade plus forte, chute plus mémorable. Mêmes faits, mêmes règles. Rends le sketch complet avec l'outil rendre_sketch."""
+Réécris-le en profondeur (pas de retouches cosmétiques) pour dépasser 80 : punchlines plus surprenantes, escalade plus forte, chute qui balance la vérité crue du sujet principal (pas un gag annexe). Mêmes faits, mêmes règles. Rends le sketch complet avec l'outil rendre_sketch."""
 
 def _schema(props, requis):
     return {"type": "object", "properties": props, "required": requis}
@@ -147,7 +156,7 @@ def _schema(props, requis):
 OUTIL = {"name": "rendre_sketch", "description": "Rendre le sketch complet (livrables A à F).",
          "input_schema": _schema({
              "sujet": {"type": "string"}, "ecran": {"type": "string"}, "titre_accroche": {"type": "string"},
-             "concept": {"type": "string"}, "format": {"type": "string"}, "angle": {"type": "string"}, "resume_factuel": {"type": "string"},
+             "verite": {"type": "string"}, "concept": {"type": "string"}, "format": {"type": "string"}, "angle": {"type": "string"}, "resume_factuel": {"type": "string"},
              "faits_reels": {"type": "array", "items": {"type": "string"}}, "inventions": {"type": "array", "items": {"type": "string"}},
              "decoupage": {"type": "array", "items": _schema({"scene": {"type": "string"}, "repliques": {"type": "array", "items": {"type": "integer"}},
                                                               "lieu": {"type": "string"}, "son": {"type": "string"}, "duree": {"type": "number"}}, ["scene"])},
@@ -163,12 +172,14 @@ OUTIL_CHOIX = {"name": "choisir_sujet", "description": "Notes des candidats, suj
                "input_schema": _schema({"notes": {"type": "array", "items": _schema({"index": {"type": "integer"}, "note": {"type": "number"},
                                                                                       "raison": {"type": "string"}}, ["index", "note"])},
                                         "choix": {"type": "integer"}, "angle": {"type": "string"},
-                                        "faits_verifies": {"type": "array", "items": {"type": "string"}}}, ["choix", "angle"])}
+                                        "verite": {"type": "string", "description": "La vérité crue du sujet en une phrase : ce sera la chute."},
+                                        "faits_verifies": {"type": "array", "items": {"type": "string"}}}, ["choix", "angle", "verite"])}
 OUTIL_NOTE = {"name": "noter_sketch", "description": "Note qualité sur 100 et critique.",
-              "input_schema": _schema({"critique": {"type": "string", "minLength": 40, "description": "À écrire EN PREMIER : répliques faibles (numéro + pourquoi) et corrections précises."},
+              "input_schema": _schema({"chute_vraie": {"type": "boolean", "description": "La dernière réplique dit-elle la vérité crue du sujet principal ?"},
+                                       "critique": {"type": "string", "minLength": 40, "description": "À écrire EN PREMIER : répliques faibles (numéro + pourquoi) et corrections précises."},
                                        "originalite": {"type": "number"}, "punchlines": {"type": "number"}, "rythme": {"type": "number"},
                                        "pertinence": {"type": "number"}, "dialogues": {"type": "number"}, "visuel": {"type": "number"},
-                                       "chute": {"type": "number"}, "total": {"type": "number"}}, ["critique", "total"])}
+                                       "chute": {"type": "number"}, "total": {"type": "number"}}, ["chute_vraie", "critique", "total"])}
 RECHERCHE_WEB = {"type": "web_search_20250305", "name": "web_search", "max_uses": 4}
 
 def _json(texte):
@@ -229,7 +240,7 @@ def valider(sk, liens):
             "invite_role": _court(sk.get("invite_role"), 36) or "Expert (fictif)", "invite_look": look,
             "lieu_direct": _court(sk.get("lieu_direct"), 28) or "Assemblée",
             "titre_accroche": _court(sk.get("titre_accroche"), 46), "question": _court(sk.get("question"), 90),
-            "running_gag": _court(sk.get("running_gag"), 160),
+            "running_gag": _court(sk.get("running_gag"), 160), "verite": _court(sk.get("verite"), 300),
             "repliques": reps, "bandeau": [_court(b, 60).upper() for b in sk.get("bandeau", []) if str(b).strip()][:4],
             "gag": gag,
             "legende": _court(sk.get("legende"), 160) or "L'actu du jour, en dessin animé. Satire, personnages fictifs.",
@@ -314,6 +325,17 @@ def hors_sujet(sk, titres):
     if sujet and len(sujet & texte) < 1:
         raise ValueError(f"hors sujet : le sketch doit parler de « {titres[0]['titre']} »")
 
+def _prefixes(t): return {m[:5] for m in _mots(t)}
+
+def chute_sur_sujet(sk, titres):
+    """La chute (dernière réplique) doit parler du sujet principal : au moins un mot-clé du titre, des articles ou de la vérité déclarée."""
+    fin = sk["repliques"][-1]; texte = fin.get("d") or fin["t"]
+    ref = _prefixes(" ".join([titres[0]["titre"], titres[0].get("resume", "")[:300], sk.get("verite", ""), sk.get("sujet", "")] +
+                             [t["titre"] for t in titres[1:4]])) - {"cette", "alors", "comme", "toujours", "encore", "votre", "notre"}
+    if not (_prefixes(texte) & ref):
+        raise ValueError(f"chute hors sujet : la dernière réplique (« {fin['t'][:80]} ») ne parle pas du sujet principal. "
+                         "Elle doit balancer la vérité crue du sujet lui-même, pas un gag annexe ni un simple rappel")
+
 def longueur(sk):
     n = sum(len((r.get("d") or r["t"]).split()) for r in sk["repliques"])
     if n > MOTS * 1.2: raise ValueError(f"trop long : {n} mots prononcés, maximum {MOTS}. Coupe")
@@ -351,7 +373,7 @@ def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=()):
                                                  mots=MOTS, mots_min=MOTS_MIN or 40, special=SPECIAL_DEMAIN if special else "", gags=gtxt, recents=rtxt,
                                                  looks="|".join(LOOKS), top=TOP, exemple=json.dumps(EXEMPLE, ensure_ascii=False, indent=0))
     # 1) sélection du sujet et de l'angle
-    ordre, angle, verifs = list(range(len(candidats))), "", []
+    ordre, angle, verifs, verite = list(range(len(candidats))), "", [], ""
     try:
         ch = _appel(client, systeme, [{"role": "user", "content": SELECTION.format(dernier=min(TOP, len(candidats)) - 1, candidats="\n\n".join(_bloc_candidat(k, c) for k, c in enumerate(candidats[:TOP])))}],
                     OUTIL_CHOIX, web=True, max_tokens=4000)
@@ -361,6 +383,8 @@ def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=()):
             print(f"Choix {choix} refusé : hors des {TOP} plus gros titres, on prend le n°0.", flush=True); choix = 0
         ordre = [choix] + sorted([k for k in ordre[:TOP] if k != choix], key=lambda k: (-notes.get(k, 0), k))   # secours : autre gros titre
         angle, verifs = str(ch.get("angle", "")), [str(x) for x in ch.get("faits_verifies", [])][:8]
+        verite = str(ch.get("verite", "")).strip()
+        if verite: print(f"Vérité visée pour la chute : {verite[:200]}", flush=True)
         print("Gros titres soumis : " + " | ".join(f"{notes.get(k, '?')}/10 {c[0]['titre'][:60]}" for k, c in enumerate(candidats[:TOP])), flush=True)
         print(f"Sujet choisi : « {candidats[choix][0]['titre'][:100]} » — angle : {angle[:160]}", flush=True)
     except Exception as e:
@@ -370,13 +394,14 @@ def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=()):
         titres = pertinents(candidats[k]); liens = {t["lien"] for t in titres}
         msg = (f"SUJET CHOISI : « {titres[0]['titre']} »\nArticles :\n" + _bloc_candidat(0, titres) +
                (f"\nAngle retenu : {angle}" if rang == 0 and angle else "") +
+               (f"\nVÉRITÉ À BALANCER EN CHUTE (dernière réplique) : {verite}" if rang == 0 and verite else "\nCommence par trouver la vérité crue de ce sujet : ce sera la chute.") +
                (f"\nFaits vérifiés : " + " ; ".join(verifs) if rang == 0 and verifs else "") +
                "\n\nÉcris le sketch sur CE sujet uniquement (étapes 4 à 9).")
         conv = [{"role": "user", "content": msg}]; sk = None; derniere = None; brut = {}
         for tour in range(1 + (essais if rang == 0 else min(1, essais))):   # écriture puis jusqu'à 3 réécritures (1 pour le sujet de secours)
             try:
                 brut = _appel(client, systeme, conv)
-                sk = valider(brut, liens); hors_sujet(sk, titres); n_mots = longueur(sk)
+                sk = valider(brut, liens); hors_sujet(sk, titres); n_mots = longueur(sk); chute_sur_sujet(sk, titres)
             except Exception as e:
                 derniere = e
                 if _bloquant(e):
@@ -388,19 +413,21 @@ def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=()):
                 continue
             if not sk["sources"]:                                            # le modèle n'a pas recopié d'URL exacte : on cite les articles RSS fournis
                 sk["sources"] = [t["lien"] for t in titres if t.get("lien")][:3]
-            texte = (f"Concept : {_court(brut.get('concept'), 600)}\nFormat : {_court(brut.get('format'), 300)}\n"
+            texte = (f"Vérité visée : {sk.get('verite', '')}\nConcept : {_court(brut.get('concept'), 600)}\nFormat : {_court(brut.get('format'), 300)}\n"
                      "Découpage : " + " | ".join(f"[{d['lieu'] or '?'}] {d['scene']}" for d in sk["decoupage"])[:1500] + "\n" +
                      (f"Plan gag (réplique {sk['gag']['replique']}) : {sk['gag']['prompt'][:300]}\n" if sk.get("gag") else "") +
                      "Répliques :\n" + "\n".join(f"{i}. {r['p']} : {r['t']}" for i, r in enumerate(sk["repliques"])))
             try:
                 for essai_note in range(2):                                   # relecteur réinterrogé une fois si la note manque
-                    nq = _appel(client, None, [{"role": "user", "content": CRITIQUE.format(sketch=texte, secondes=SECONDES)}], OUTIL_NOTE, max_tokens=5000)
+                    nq = _appel(client, None, [{"role": "user", "content": CRITIQUE.format(sketch=texte, secondes=SECONDES, sujet=titres[0]["titre"])}], OUTIL_NOTE, max_tokens=5000)
                     try: note = float(nq["total"]); break
                     except (KeyError, TypeError, ValueError):
                         parts = [nq.get(k) for k in ("originalite", "punchlines", "rythme", "pertinence", "dialogues", "visuel", "chute")]
                         if all(isinstance(x, (int, float)) for x in parts): note = float(sum(parts)); break
                         print("  note totale absente : on redemande au relecteur", flush=True)
                 else: raise ValueError("note totale absente deux fois")
+                if nq.get("chute_vraie") is False and note > 70:
+                    print(f"  chute jugée hors sujet par le relecteur : note plafonnée à 70 (au lieu de {note:.0f})", flush=True); note = 70.0
                 critique = str(nq.get("critique") or "").strip() or nq.get("_texte", "") or \
                     " ; ".join(f"{k} {nq[k]}" for k in ("originalite", "punchlines", "rythme", "pertinence", "dialogues", "visuel", "chute") if k in nq)
             except Exception as e:

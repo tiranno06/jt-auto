@@ -6,6 +6,7 @@
 5. plan gag IA (Wan 2.2 sur Modal, facultatif)
 6. rendu studio (moteur/jt.py) ; la publication TikTok est faite ensuite par moteur/publier.py (étape du workflow)"""
 import json, os, sys, datetime
+from zoneinfo import ZoneInfo
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 RACINE = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 os.chdir(RACINE)
@@ -85,8 +86,9 @@ def main():
         f = avant / max(1, sum(len(a) for a in audios))
         mots = [[(m, d / f, e / f) for m, d, e in (x or [])] or None for x in mots]
     jour = datetime.date.today().isoformat()
-    pris = {h.get("fichier") for h in historique}; n = 1; base = f"sortie/{jour}_emission"
-    while os.path.basename(base) + ".mp4" in pris: n += 1; base = f"sortie/{jour}_emission{n}"   # plusieurs émissions le même jour
+    heure = datetime.datetime.now(ZoneInfo("Europe/Paris")).strftime("%Hh%M")      # nom unique même si l'historique a été remis à zéro
+    pris = {h.get("fichier") for h in historique}; n = 1; base = f"sortie/{jour}_{heure}_emission"
+    while os.path.basename(base) + ".mp4" in pris: n += 1; base = f"sortie/{jour}_{heure}_emission{n}"   # plusieurs émissions le même jour
     os.makedirs("sortie", exist_ok=True)
     gag = None
     if modal_ok and sk.get("gag") and os.environ.get("PLAN_GAG", "1") != "0":

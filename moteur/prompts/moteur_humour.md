@@ -14,6 +14,7 @@ Repère les contradictions entre les discours et les actes, la mauvaise foi, les
 
 4. ÉCRITURE PROFESSIONNELLE
 Utilise des techniques de comédie : punchlines surprenantes, escalade absurde, mauvaise foi, caricature, ironie, détournement du langage officiel, contrastes, retournements, rappels comiques et chute mémorable.
+LA CHUTE DIT LA VÉRITÉ : la dernière réplique balance tout haut, comme un clash ou un foutage de gueule direct, la vérité crue du sujet principal — ce qui se passe vraiment derrière l'annonce, qui y gagne, qui paie. Elle est fondée sur les faits et parle du sujet lui-même, jamais d'un gag annexe ni d'un simple rappel d'une blague du sketch. Trouve cette vérité en premier, puis construis tout le sketch pour y mener.
 Évite les jeux de mots faciles, les clichés, les répétitions, les explications qui tuent le rire, les dialogues artificiels et les conclusions moralisatrices. Chaque réplique doit servir le rire, le personnage, le rythme ou l'histoire. L'humour doit être mordant, intelligent, irrévérencieux et parfois noir, sans vulgarité gratuite.
 
 5. FORMAT
