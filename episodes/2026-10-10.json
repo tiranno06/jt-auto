@@ -1,0 +1,285 @@
+{
+ "titre": "PESTICIDES À VIE",
+ "sujet": "PESTICIDES À VIE",
+ "ecran": "PESTICIDE CDI",
+ "invite_nom": "Bernard Reconduit",
+ "invite_role": "Porte-parole (fictif) Simplif. UE",
+ "invite_look": "moustache",
+ "lieu_direct": "Champ de betteraves",
+ "titre_accroche": "Pesticide : 25 ans. Mon yaourt : jeudi",
+ "question": "",
+ "running_gag": "",
+ "repliques": [
+  {
+   "p": "presentateur",
+   "t": "Bruxelles veut autoriser des pesticides pendant 25 ans. Mon yaourt, lui, périme jeudi.",
+   "d": "Bruxelles veut autoriser des pesticides pendant vingt-cinq ans. Mon yaourt, lui, périme jeudi.",
+   "chute": true
+  },
+  {
+   "p": "presentateur",
+   "t": "Martine, vous êtes dans les betteraves. Elles sont réévaluées, elles ?"
+  },
+  {
+   "p": "envoyee",
+   "t": "Tous les ans. Le pesticide, plus jamais. Soit il est devenu inoffensif, soit il a un très bon syndicat.",
+   "chute": true
+  },
+  {
+   "p": "presentateur",
+   "t": "Bernard Reconduit, porte-parole de la Simplification. Un syndicat ?"
+  },
+  {
+   "p": "invite",
+   "t": "Pas du tout. Il est titulaire. On ne vire pas un titulaire.",
+   "chute": true
+  },
+  {
+   "p": "presentateur",
+   "t": "Et s'il est toxique ?"
+  },
+  {
+   "p": "invite",
+   "t": "Trop cher à vérifier. 50 experts, 15 millions. Supprimer l'examen, c'est gratuit.",
+   "d": "Trop cher à vérifier. Cinquante experts, quinze millions. Supprimer l'examen, c'est gratuit.",
+   "chute": true
+  },
+  {
+   "p": "envoyee",
+   "t": "Ici, le glyphosate fête sa titularisation. Il a apporté un gâteau. Personne n'ose le goûter.",
+   "chute": true
+  },
+  {
+   "p": "presentateur",
+   "t": "Ma voiture a 8 ans. Elle repasse le contrôle tous les deux ans.",
+   "d": "Ma voiture a huit ans. Elle repasse le contrôle tous les deux ans."
+  },
+  {
+   "p": "invite",
+   "t": "Votre voiture n'a pas de lobbyiste à Bruxelles. C'est un défaut de conception.",
+   "chute": true
+  },
+  {
+   "p": "invite",
+   "t": "Et on généralise : permis à vie… pour les tracteurs. Vous, visite médicale à 70 ans.",
+   "d": "Et on généralise : permis à vie… pour les tracteurs. Vous, visite médicale à soixante-dix ans.",
+   "chute": true
+  },
+  {
+   "p": "invite",
+   "t": "Rassurez-vous : l'illimité, c'est pour le faible risque. Les autres, juste 25 ans.",
+   "d": "Rassurez-vous : l'illimité, c'est pour le faible risque. Les autres, juste vingt-cinq ans.",
+   "chute": true
+  },
+  {
+   "p": "presentateur",
+   "t": "Donc pour durer 25 ans, mon yaourt doit devenir toxique ?",
+   "d": "Donc pour durer vingt-cinq ans, mon yaourt doit devenir toxique ?",
+   "attente": 0.7
+  },
+  {
+   "p": "envoyee",
+   "t": "Trop tard. Votre yaourt vient d'embaucher un lobbyiste. Il périme en 2051.",
+   "d": "Trop tard. Votre yaourt vient d'embaucher un lobbyiste. Il périme en deux mille cinquante et un.",
+   "chute": true
+  }
+ ],
+ "bandeau": [
+  "LE GLYPHOSATE TITULARISÉ, PERSONNE NE TOUCHE AU GÂTEAU",
+  "UNE BETTERAVE RECALÉE À SA RÉÉVALUATION ANNUELLE",
+  "BRUXELLES SUPPRIME L'EXAMEN POUR GAGNER DU TEMPS",
+  "UN TRACTEUR OBTIENT SON PERMIS À VIE"
+ ],
+ "gag": null,
+ "legende": "L'actu du jour, en dessin animé. Satire, personnages fictifs.",
+ "hashtags": [
+  "satire",
+  "humour",
+  "actualite",
+  "politique"
+ ],
+ "sources": [
+  "https://www.lemonde.fr/planete/article/2026/10/10/pesticides-a-vie-non-merci-partout-en-france-des-mobilisations-contre-un-projet-europeen-de-deregulation-devastateur_6790949_3244.html",
+  "https://www.liberation.fr/environnement/lun-des-pires-reculs-jamais-connus-comment-des-pesticides-pourraient-etre-autorises-a-vie-dans-lue-20261009_GU4IFAUN5JEOHA6J3MMQZZL72U/",
+  "https://www.franceinfo.fr/economie/budget/livret-a-retraites-geants-du-numerique-comment-les-deputes-ont-modifie-en-commission-le-volet-recettes-du-projet-de-budget-pour-2027_8229916.html#xtor=RSS-3-[lestitres]"
+ ],
+ "decoupage": [
+  {
+   "scene": "Plateau, plan serré sur Jean-Michel, impassible, un pot de yaourt sur le bureau. Accroche sèche, puis il se tourne vers l'écran. Woosh vers le direct.",
+   "repliques": [
+    0,
+    1
+   ],
+   "lieu": "plateau",
+   "son": "woosh",
+   "duree": 8.0
+  },
+  {
+   "scene": "Direct : Martine en bottes dans un champ de betteraves, au milieu d'un rassemblement avec des pancartes « Pesticides à vie ? Non merci ! ». Un inspecteur à lunettes contrôle une betterave à la loupe. Derrière lui, un bidon de pesticide passe tranquillement.",
+   "repliques": [
+    2
+   ],
+   "lieu": "direct",
+   "son": "rimshot",
+   "duree": 8.0
+  },
+  {
+   "scene": "Duplex : Jean-Michel présente l'invité. Le bandeau « Bernard Reconduit, porte-parole (fictif) Simplification UE » s'affiche. Bernard, moustache impeccable, glisse une liasse « Réévaluation » dans un broyeur sans la regarder.",
+   "repliques": [
+    3,
+    4,
+    5,
+    6
+   ],
+   "lieu": "duplex",
+   "son": "dun_dun",
+   "duree": 15.0
+  },
+  {
+   "scene": "Reconstitution : bureau beige, un bidon de glyphosate en cravate découpe un gâteau « TITULAIRE ». Les collègues, en masque, reculent avec leurs assiettes vides.",
+   "repliques": [
+    7
+   ],
+   "lieu": "reconstitution",
+   "son": "reconstitution",
+   "duree": 7.0
+  },
+  {
+   "scene": "Duplex : Jean-Michel brandit une vignette de contrôle technique. Bernard hausse les épaules, puis montre une carte de permis rose épinglée sur un tracteur souriant, et un vieux monsieur dans une file de visite médicale.",
+   "repliques": [
+    8,
+    9,
+    10
+   ],
+   "lieu": "duplex",
+   "son": "xylo_descente",
+   "duree": 15.0
+  },
+  {
+   "scene": "Duplex : Bernard rassure, tout sourire, et tapote un tampon « 25 ANS ». Silence. Jean-Michel regarde son yaourt sans aucune expression et pose sa question.",
+   "repliques": [
+    11,
+    12
+   ],
+   "lieu": "duplex",
+   "son": "trombone_triste",
+   "duree": 10.0
+  },
+  {
+   "scene": "Direct : Martine tend le micro vers un pot de yaourt en costume-cravate, attaché-case à la main, qui serre la main d'un bidon. Coupe sèche, la vidéo boucle sur l'accroche.",
+   "repliques": [
+    13
+   ],
+   "lieu": "direct",
+   "son": "rimshot",
+   "duree": 6.0
+  }
+ ],
+ "fiche": {
+  "concept": "« Le pesticide titulaire » : au nom de la simplification, Bruxelles titularise les pesticides pendant que les citoyens, leurs voitures et leurs yaourts restent des précaires du renouvellement. À la fin, le yaourt de Jean-Michel comprend la règle : pour durer, il faut un lobbyiste.",
+  "format": "Faux JT : accroche sur le plateau, direct depuis un champ de betteraves pendant un rassemblement, porte-parole européen fictif en duplex.",
+  "angle": "Deux poids, deux mesures. Tout le reste est réévalué : les betteraves, la voiture de huit ans, les conducteurs de soixante-dix ans. Le pesticide, lui, est titulaire. Réévaluer coûte quinze millions, supprimer l'examen est gratuit. L'escalade va du privilège du pesticide au permis à vie réservé aux tracteurs. Jean-Michel pose la question logique : pour durer vingt-cinq ans, faut-il être toxique ? Chute : son yaourt embauche un lobbyiste.",
+  "resume_factuel": "Le 16 décembre 2025, la Commission européenne a présenté le texte « Omnibus X ». Il prévoit des approbations de pesticides allant jusqu'à 25 ans, contre 10 à 15 ans aujourd'hui, et des approbations illimitées pour les biocides. Il prolonge aussi les périodes de grâce des substances interdites. La proposition initiale supprimait le réexamen systématique de la plupart des pesticides, au nom de la simplification administrative et de la compétitivité. Le 30 septembre 2026, le Conseil de l'UE a validé un compromis qui réserve les autorisations illimitées aux substances à faible risque. Selon l'EFSA, 50 experts de plus, pour 15 millions d'euros, lui permettraient de rattraper son retard en trois ans. Le 16 septembre, plus de 570 scientifiques et médecins ont demandé la suspension des négociations. Une coalition de plus de 100 organisations appelle à des rassemblements « Pesticides à vie ? Non merci ! » partout en France les 10 et 11 octobre 2026.",
+  "faits_reels": [
+   "Le texte « Omnibus X » a été présenté par la Commission européenne le 16 décembre 2025 (Basta!).",
+   "Les approbations de pesticides pourraient aller jusqu'à 25 ans, contre 10 à 15 ans aujourd'hui. Les biocides auraient des approbations illimitées (Basta!).",
+   "La proposition initiale supprimait le réexamen systématique de la plupart des pesticides, au nom de la simplification administrative et de la compétitivité agricole.",
+   "Le 30 septembre 2026, le Conseil de l'UE a validé un compromis qui réserve les autorisations illimitées aux substances à faible risque (Basta!).",
+   "D'après un courrier cité par Basta!, l'EFSA estime que 50 experts de plus, pour 15 millions d'euros, lui permettraient de rattraper son retard en trois ans.",
+   "Le 16 septembre, plus de 570 scientifiques et médecins ont demandé la suspension des négociations. Une pétition européenne a dépassé 170 000 signatures.",
+   "Plus de 100 organisations appellent à des rassemblements « Pesticides à vie ? Non merci ! » les 10 et 11 octobre 2026 en France (Le Monde).",
+   "Ces faits viennent des articles fournis et des éléments vérifiés transmis par le robot. Aucune nouvelle recherche web n'a été faite."
+  ],
+  "inventions": [
+   "Jean-Michel Plateau, Martine Couloir et Bernard Reconduit sont des personnages fictifs.",
+   "La « Direction européenne de la Simplification » n'existe pas.",
+   "Les betteraves réévaluées tous les ans, le glyphosate qui fête sa titularisation avec un gâteau et le « syndicat » des pesticides sont inventés.",
+   "Le permis à vie réservé aux tracteurs et la visite médicale à soixante-dix ans présentée comme une mesure européenne sont des inventions satiriques.",
+   "Le yaourt qui embauche un lobbyiste et la voiture sans lobbyiste sont des éléments comiques fictifs."
+  ],
+  "decoupage": [
+   {
+    "scene": "Plateau, plan serré sur Jean-Michel, impassible, un pot de yaourt sur le bureau. Accroche sèche, puis il se tourne vers l'écran. Woosh vers le direct.",
+    "repliques": [
+     0,
+     1
+    ],
+    "lieu": "plateau",
+    "son": "woosh",
+    "duree": 8.0
+   },
+   {
+    "scene": "Direct : Martine en bottes dans un champ de betteraves, au milieu d'un rassemblement avec des pancartes « Pesticides à vie ? Non merci ! ». Un inspecteur à lunettes contrôle une betterave à la loupe. Derrière lui, un bidon de pesticide passe tranquillement.",
+    "repliques": [
+     2
+    ],
+    "lieu": "direct",
+    "son": "rimshot",
+    "duree": 8.0
+   },
+   {
+    "scene": "Duplex : Jean-Michel présente l'invité. Le bandeau « Bernard Reconduit, porte-parole (fictif) Simplification UE » s'affiche. Bernard, moustache impeccable, glisse une liasse « Réévaluation » dans un broyeur sans la regarder.",
+    "repliques": [
+     3,
+     4,
+     5,
+     6
+    ],
+    "lieu": "duplex",
+    "son": "dun_dun",
+    "duree": 15.0
+   },
+   {
+    "scene": "Reconstitution : bureau beige, un bidon de glyphosate en cravate découpe un gâteau « TITULAIRE ». Les collègues, en masque, reculent avec leurs assiettes vides.",
+    "repliques": [
+     7
+    ],
+    "lieu": "reconstitution",
+    "son": "reconstitution",
+    "duree": 7.0
+   },
+   {
+    "scene": "Duplex : Jean-Michel brandit une vignette de contrôle technique. Bernard hausse les épaules, puis montre une carte de permis rose épinglée sur un tracteur souriant, et un vieux monsieur dans une file de visite médicale.",
+    "repliques": [
+     8,
+     9,
+     10
+    ],
+    "lieu": "duplex",
+    "son": "xylo_descente",
+    "duree": 15.0
+   },
+   {
+    "scene": "Duplex : Bernard rassure, tout sourire, et tapote un tampon « 25 ANS ». Silence. Jean-Michel regarde son yaourt sans aucune expression et pose sa question.",
+    "repliques": [
+     11,
+     12
+    ],
+    "lieu": "duplex",
+    "son": "trombone_triste",
+    "duree": 10.0
+   },
+   {
+    "scene": "Direct : Martine tend le micro vers un pot de yaourt en costume-cravate, attaché-case à la main, qui serre la main d'un bidon. Coupe sèche, la vidéo boucle sur l'accroche.",
+    "repliques": [
+     13
+    ],
+    "lieu": "direct",
+    "son": "rimshot",
+    "duree": 6.0
+   }
+  ],
+  "titres_sujet": [
+   "« Pesticides à vie ? Non merci ! » : partout en France, des mobilisations contre un projet européen de dérégulation « dévastateur »",
+   "«L’un des pires reculs jamais connus» : comment des pesticides pourraient être autorisés à vie dans l’UE",
+   "Livret A, retraites, géants du numérique... Comment les députés ont modifié en commission le volet \"recettes\" du projet de budget pour 2027",
+   "\"C'est une loi Duplomb puissance 10\" : des ONG appellent à manifester contre un texte européen sur les pesticides",
+   "A69: trois jours de rassemblements prévus avant la fin des travaux attendue la semaine prochaine",
+   "Le vote de la primaire à gauche prolongé jusqu'à dimanche 18h après une cyberattaque"
+  ],
+  "verification_web": true,
+  "note": 72.0,
+  "critique": "Bon squelette : l'accroche (0) frappe tout de suite, le décalage « titulaire / précaire » se lit en une seconde et le chiffre 2051 (2026 + 25) donne une chute précise. Plusieurs répliques restent pourtant des répliques de liaison, et la chute réutilise une idée déjà donnée.\n\nRépliques faibles :\n- 3 : « Un syndicat ? » répète simplement la blague de Martine. C'est une relance sans contenu et elle affaiblit la punchline 2. Proposition : « Bernard Reconduit, porte-parole de la Simplification. Le pesticide est syndiqué ? » Ou mieux, laisser Bernard enchaîner directement : « Syndiqué ? Non, mieux : titulaire. »\n- 4 : « On ne vire pas un titulaire » est attendu, c'est le cliché sur la fonction publique. Proposition : « Il est titulaire. Pour le virer, il faudrait d'abord le réévaluer. Et on a supprimé la réévaluation. » Ça referme la boucle avec la 6.\n- 7 : problème de cohérence. Martine dit « Ici » depuis un champ de betteraves alors que l'image montre un bureau beige. Le texte ne fait aussi que décrire le gag visuel. Proposition : « Pendant ce temps, à Bruxelles, le glyphosate fête sa titularisation. Il a apporté un gâteau. Les collègues ont apporté leurs masques. » Ou couper la réplique et laisser l'image parler.\n- 8 : setup trop plat (« Ma voiture a 8 ans… »). Proposition : « Ma Clio repasse au contrôle tous les deux ans. On lui cherche des fuites, à elle. »\n- 10 : la plus confuse. « On généralise » contredit l'idée que le privilège est réservé aux pesticides, et « permis à vie",
+  "decision": "à retravailler"
+ }
+}
