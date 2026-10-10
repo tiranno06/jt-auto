@@ -1,66 +1,55 @@
 Casting déjà fait.
 Type de vidéo : sketch libre (situation du quotidien)
-  écarté (déjà traité) : « Mobilisation lycéenne: "L'école, c'est la priorité du projet présidentiel" de Gabriel Atta »
-  écarté (déjà traité) : « L'ÉDITO POLITIQUE - Présidentielle 2027: la voix des lycéens va-t-elle se reporter dans le »
-  écarté (déjà traité) : « Retour sur Terre de Sophie Adenot : "J'ai traversé tout le spectre des émotions humaines", »
-Candidat 0 (à la une chez 2 média(s), 3 médias, 4 articles) : « «Pour moi, ça ferait 13.000 euros d’impôts en plus par an !» : les loueurs en meublé vent debout contre le cou »
-Candidat 1 (à la une chez 2 média(s), 3 médias, 3 articles) : « La nuit n’est pas un jour comme les autres, un marché à conquérir »
-Sketch d'essai : tests/sketch_libre_5min.json
-Sketch : « J'ARRIVE DANS 5 MIN », 15 répliques
-Casting des voix (sources : elevenlabs,kyutai,chatterbox)…
-  elevenlabs Maxime - Young and Casual              genre h f0   166 {'sim': 1.0, 'blanc': 0.16, 'debit': 0.91, 'expr': 6.2} OK score 7.31
-  elevenlabs Theo - Warm and Young                  genre h f0   124 {'sim': 1.0, 'blanc': 0.14, 'debit': 0.9, 'expr': 6.0} OK score 7.29
-  elevenlabs Alexandre Boutin - Professional        genre h f0   149 {'sim': 1.0, 'blanc': 0.0, 'debit': 1.04, 'expr': 6.0} OK score 7.36
-  elevenlabs Adam - warm and friendly               genre h f0   141 {'sim': 1.0, 'blanc': 0.1, 'debit': 0.87, 'expr': 7.6} OK score 7.26
-  elevenlabs Lucie - Support Agent                  genre f f0   226 {'sim': 1.0, 'blanc': 0.08, 'debit': 0.88, 'expr': 5.2} OK score 7.27
-  elevenlabs Emilie - Podcast Host                  genre f f0   197 {'sim': 1.0, 'blanc': 0.1, 'debit': 0.9, 'expr': 5.0} OK score 7.29
-  elevenlabs Koraly - Expressive and Engaging       genre f f0   217 {'sim': 1.0, 'blanc': 0.1, 'debit': 0.98, 'expr': 4.5} OK score 7.38
-  elevenlabs Adina - Young, Welcoming and Joyful    genre f f0   248 {'sim': 1.0, 'blanc': 0.06, 'debit': 0.93, 'expr': 4.4} OK score 7.33
-  kyutai     cml-tts/fr/10087_11650_000028-0002_enh genre f f0   242 {'sim': 1.0, 'blanc': 0.1, 'debit': 0.86, 'expr': 3.7} OK score 5.35
-  kyutai     cml-tts/fr/10177_10625_000134-0003_enh genre f f0   179 {'sim': 1.0, 'blanc': 0.1, 'debit': 0.71, 'expr': 3.2} OK score 4.99
-  kyutai     cml-tts/fr/10179_11051_000005-0001_enh genre f f0   258 {'sim': 1.0, 'blanc': 0.14, 'debit': 0.9, 'expr': 2.2} OK score 4.85
-  kyutai     cml-tts/fr/12080_11650_000047-0001_enh genre f f0   222 {'sim': 1.0, 'blanc': 0.1, 'debit': 0.83, 'expr': 3.4} OK score 5.20
-  kyutai     cml-tts/fr/12205_11650_000004-0002_enh genre ? f0   172 {'sim': 1.0, 'blanc': 0.08, 'debit': 0.72, 'expr': 2.6} OK score 4.80
-  kyutai     cml-tts/fr/12977_10625_000037-0001_enh genre f f0   237 {'sim': 1.0, 'blanc': 0.18, 'debit': 0.91, 'expr': 3.8} OK score 5.43
-  kyutai     cml-tts/fr/1406_1028_000009-0003_enhan genre h f0    93 {'sim': 1.0, 'blanc': 0.0, 'debit': 0.89, 'expr': 2.9} OK score 5.08
-  kyutai     cml-tts/fr/1591_1028_000108-0004_enhan genre f f0   230 {'sim': 1.0, 'blanc': 0.1, 'debit': 0.67, 'expr': 2.8} OK score 4.78
-  kyutai     cml-tts/fr/1770_1028_000036-0002_enhan genre h f0   139 {'sim': 1.0, 'blanc': 0.14, 'debit': 0.77, 'expr': 4.3} OK score 5.34
-  kyutai     cml-tts/fr/2114_1656_000053-0001_enhan genre h f0   127 {'sim': 1.0, 'blanc': 0.08, 'debit': 0.78, 'expr': 4.1} OK score 5.35
-  kyutai     cml-tts/fr/2154_2576_000020-0003_enhan genre f f0   176 {'sim': 1.0, 'blanc': 0.08, 'debit': 0.88, 'expr': 3.1} OK score 5.15
-  kyutai     cml-tts/fr/2216_1745_000007-0001_enhan genre h f0   116 {'sim': 1.0, 'blanc': 0.0, 'debit': 0.86, 'expr': 4.4} OK score 5.45
-  kyutai     cml-tts/fr/2223_1745_000009-0002_enhan genre h f0   123 {'sim': 1.0, 'blanc': 0.16, 'debit': 0.84, 'expr': 3.9} OK score 5.38
-  kyutai     cml-tts/fr/2465_1943_000152-0002_enhan genre f f0   195 {'sim': 1.0, 'blanc': 0.1, 'debit': 0.79, 'expr': 2.6} OK score 4.86
-  kyutai     cml-tts/fr/296_1028_000022-0001_enhanc genre h f0   137 {'sim': 1.0, 'blanc': 0.0, 'debit': 0.86, 'expr': 3.1} OK score 5.12
-  kyutai     cml-tts/fr/3267_1902_000075-0001_enhan genre f f0   248 {'sim': 1.0, 'blanc': 0.14, 'debit': 0.78, 'expr': 3.3} OK score 5.09
-  chatterbox presentateur                           genre h f0   138 {'sim': 1.0, 'blanc': 0.06, 'debit': 0.94, 'expr': 5.0} OK score 4.84
-  chatterbox invite                                 genre h f0    91 {'sim': 1.0, 'blanc': 0.06, 'debit': 0.72, 'expr': 10.3} OK score 4.57
-  chatterbox envoyee                                genre f f0   218 {'sim': 1.0, 'blanc': 0.14, 'debit': 0.63, 'expr': 3.7} OK score 4.32
-  -> presentateur : elevenlabs:IPgYtHTNLjC7Bq7IPHrm, elevenlabs:5Qfm4RqcAer0xoyWtoHC, elevenlabs:NyxenPOqNyllHIzSoPbJ
-  -> invite : elevenlabs:NyxenPOqNyllHIzSoPbJ, elevenlabs:5Qfm4RqcAer0xoyWtoHC, elevenlabs:93nuHbke4dTER9x2pDwE
-  -> envoyee : elevenlabs:F1toM6PcP54s45kOOAyV, elevenlabs:FvmvwvObRqIHojkEGh5N, elevenlabs:d3AXX0BlgJHYFCuH9X88
-  voix 1 (envoyee, elevenlabs:F1toM6PcP54s45kOOAyV, prise 1) {'sim': 0.94, 'blanc': 0.0, 'debit': 1.06} OK
-  voix 2 (envoyee, elevenlabs:F1toM6PcP54s45kOOAyV, prise 1) {'sim': 1.0, 'blanc': 0.12, 'debit': 0.92} OK
-  voix 4 (envoyee, elevenlabs:F1toM6PcP54s45kOOAyV, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.03} OK
-  voix 6 (envoyee, elevenlabs:F1toM6PcP54s45kOOAyV, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.87} OK
-  voix 8 (envoyee, elevenlabs:F1toM6PcP54s45kOOAyV, prise 1) {'sim': 1.0, 'blanc': 0.06, 'debit': 1.29} OK
-  voix 10 (envoyee, elevenlabs:F1toM6PcP54s45kOOAyV, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.17} OK
-  voix 12 (envoyee, elevenlabs:F1toM6PcP54s45kOOAyV, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.97} OK
-  voix 3 (invite, elevenlabs:NyxenPOqNyllHIzSoPbJ, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.79} OK
-  voix 5 (invite, elevenlabs:NyxenPOqNyllHIzSoPbJ, prise 1) {'sim': 1.0, 'blanc': 0.22, 'debit': 1.11} OK
-  voix 7 (invite, elevenlabs:NyxenPOqNyllHIzSoPbJ, prise 1) {'sim': 0.92, 'blanc': 0.0, 'debit': 0.89} OK
-  voix 9 (invite, elevenlabs:NyxenPOqNyllHIzSoPbJ, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.82} OK
-  voix 11 (invite, elevenlabs:NyxenPOqNyllHIzSoPbJ, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.91} OK
-  voix 13 (invite, elevenlabs:NyxenPOqNyllHIzSoPbJ, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.17} OK
-  voix 0 (presentateur, elevenlabs:IPgYtHTNLjC7Bq7IPHrm, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.94} OK
-  voix 14 (presentateur, elevenlabs:IPgYtHTNLjC7Bq7IPHrm, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.9} OK
+Idée 0 : « Quand tu croises une vieille connaissance dans la rue »
+Idée 1 : « POV : le livreur dit qu'il est passé »
+Idée 2 : « POV : tu crées ton mot de passe »
+Idée 3 : « Quand ton gosse est dans sa phase « pourquoi » »
+Idée 4 : « POV : le discours du pot de départ »
+Idée 5 : « Quand ton pote s'est mis au running »
+Vérité du sujet : Le livreur ne monte jamais : il coche « destinataire absent » depuis sa camionnette, et c'est toi, qui l'attendais à la maison, qui traverses la ville pour aller chercher ton colis.
+Chute proposée : Rassurez-vous, madame : votre colis a bien été livré. Vous étiez juste absente de chez moi.
+Gros titres soumis : 7.0/10 Quand tu croises une vieille connaissance dans la rue | 9.0/10 POV : le livreur dit qu'il est passé | 7.0/10 POV : tu crées ton mot de passe | 8.0/10 Quand ton gosse est dans sa phase « pourquoi » | 8.0/10 POV : le discours du pot de départ | 7.0/10 Quand ton pote s'est mis au running
+Sujet choisi : « POV : le livreur dit qu'il est passé » — angle : Duo exaspérée / inébranlable avec un clin d'œil au running gag « la preuve de Kévin ». Lila est restée quatre heures collée à l'interphone, sans pipi ni douche,
+  atelier : 15 vannes, 15 chutes ; chute retenue par le jury (8/10) : KÉVIN : Aucun client n'est absent par hasard. On coche la case au dépôt.
+  version 1 : 71/100, 16 répliques, 175 mots
+  version 2 : 76/100, 15 répliques, 168 mots
+  version 3 : 73/100, 15 répliques, 209 mots
+  pas de progrès : on repart de la meilleure version (76/100)
+  version 4 : 74/100, 16 répliques, 208 mots
+  pas de progrès : on repart de la meilleure version (76/100)
+  version 5 : 74/100, 16 répliques, 202 mots
+  pas de progrès : on repart de la meilleure version (76/100)
+  sujet trop faible après réécritures : on essaie un autre sujet
+  atelier : 15 vannes, 15 chutes ; chute retenue par le jury (7/10) : Bonne nouvelle : mon fils ne demande plus pourquoi. Il m'a regardé dans les yeux.
+  version 1 : 68/100, 16 répliques, 164 mots
+  version 2 : 70/100, 16 répliques, 160 mots
+  sujet trop faible après réécritures
+  meilleure version retenue : 76/100 (sous l'objectif de 90 : à retravailler, pas de publication automatique)
+Moteur humoristique : 20 appels Claude, 175577 jetons lus, 66467 jetons écrits, 0 recherche(s) web
+Sketch : « LIVREUR FANTÔME », 15 répliques
+  voix 1 (envoyee, elevenlabs:F1toM6PcP54s45kOOAyV, prise 1) {'sim': 1.0, 'blanc': 0.12, 'debit': 0.88} OK
+  voix 3 (envoyee, elevenlabs:F1toM6PcP54s45kOOAyV, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.03} OK
+  voix 5 (envoyee, elevenlabs:F1toM6PcP54s45kOOAyV, prise 1) {'sim': 0.81, 'blanc': 0.1, 'debit': 1.13} OK
+  voix 7 (envoyee, elevenlabs:F1toM6PcP54s45kOOAyV, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.71} OK
+  voix 9 (envoyee, elevenlabs:F1toM6PcP54s45kOOAyV, prise 1) {'sim': 1.0, 'blanc': 0.54, 'debit': 1.05} OK
+  voix 11 (envoyee, elevenlabs:F1toM6PcP54s45kOOAyV, prise 1) {'sim': 1.0, 'blanc': 0, 'debit': 1.41} OK
+  voix 13 (envoyee, elevenlabs:F1toM6PcP54s45kOOAyV, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.2} OK
+  voix 0 (invite, elevenlabs:NyxenPOqNyllHIzSoPbJ, prise 1) {'sim': 0.86, 'blanc': 0.0, 'debit': 1.01} OK
+  voix 2 (invite, elevenlabs:NyxenPOqNyllHIzSoPbJ, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.93} OK
+  voix 4 (invite, elevenlabs:NyxenPOqNyllHIzSoPbJ, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.96} OK
+  voix 6 (invite, elevenlabs:NyxenPOqNyllHIzSoPbJ, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.18} OK
+  voix 8 (invite, elevenlabs:NyxenPOqNyllHIzSoPbJ, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.46} OK
+  voix 10 (invite, elevenlabs:NyxenPOqNyllHIzSoPbJ, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.95} OK
+  voix 12 (invite, elevenlabs:NyxenPOqNyllHIzSoPbJ, prise 1) {'sim': 1.0, 'blanc': 0.1, 'debit': 1.01} OK
+  voix 14 (invite, elevenlabs:NyxenPOqNyllHIzSoPbJ, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.81} OK
 Voix : ElevenLabs (Eleven v4)
-Plan gag IA : oui
-durée 65.6 s, 15 répliques, duplex=0, gag=5
-  image 0/1969
-  image 300/1969
-  image 600/1969
-  image 900/1969
-  image 1200/1969
-  image 1500/1969
-  image 1800/1969
-OK : sortie/2026-10-10_11h17_emission.mp4 (66 s)
+Décors indisponibles (TimeoutError ) : fonds unis.
+cartoon : durée 57.0 s, 15 répliques, 3 scène(s), personnages ['invite', 'envoyee']
+  image 0/1710
+  image 300/1710
+  image 600/1710
+  image 900/1710
+  image 1200/1710
+  image 1500/1710
+Qualité : 76/100 — à retravailler
+OK : sortie/2026-10-10_11h59_emission.mp4 (57 s)

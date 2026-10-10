@@ -1,188 +1,236 @@
 {
- "titre": "J'ARRIVE DANS 5 MIN",
- "sujet": "J'ARRIVE DANS 5 MIN",
- "ecran": "5 MINUTES",
- "invite_nom": "Kévin Tardieu",
- "invite_role": "Pote en retard (fictif)",
- "invite_look": "moustache",
- "lieu_direct": "Terrasse du bar",
- "titre_accroche": "Quand ton pote dit « j'arrive dans 5 min »",
- "question": "C'est quoi le pire « j'arrive » qu'on vous ait sorti ? 👇",
- "running_gag": "La preuve de Kévin : chaque fois qu'il veut prouver quelque chose, la preuve l'accuse.",
- "verite": "Le pote qui dit « j'arrive dans cinq minutes » n'est pas parti. Il n'est même pas sorti de la douche. Et parfois, c'est sa propre fête qu'il fait attendre.",
+ "titre": "LIVREUR FANTÔME",
+ "sujet": "LIVREUR FANTÔME",
+ "ecran": "COLIS ABSENT",
+ "invite_nom": "Kévin",
+ "invite_role": "Livreur (fictif)",
+ "invite_look": "chauve",
+ "lieu_direct": "Pas de la porte",
+ "titre_accroche": "POV : le livreur dit qu'il est passé",
+ "question": "Votre colis, il est sur le canapé de quel livreur ? 👇",
+ "running_gag": "Le voisin Kévin : quand un colis est « confié à un voisin », c'est toujours chez Kévin.",
+ "verite": "Le livreur ne monte jamais : il coche « destinataire absent » sans bouger, et c'est le client, resté chez lui toute la journée, qui traverse la ville pour aller chercher son colis. Quand il le retrouve.",
  "repliques": [
   {
-   "p": "presentateur",
-   "t": "Dossier spécial : votre pote arrive dans cinq minutes. Ça fait deux heures.",
-   "d": "[deadpan] Dossier spécial : votre pote arrive dans cinq minutes. Ça fait deux heures.",
-   "chute": true
+   "p": "invite",
+   "t": "Madame, je suis passé. Vous étiez absente.",
+   "d": "[deadpan] Madame, je suis passé. Vous étiez absente.",
+   "objet": "telephone"
   },
   {
    "p": "envoyee",
-   "t": "Ses cinq minutes, j'ai eu le temps de manger, payer, divorcer et récupérer la garde.",
-   "d": "[exasperated] Ses cinq minutes, j'ai eu le temps de manger, payer, divorcer et récupérer la garde.",
-   "chute": true
-  },
-  {
-   "p": "envoyee",
-   "t": "Je lui ai demandé où il était. Il m'a dit « bientôt ». C'est pas une adresse, ça. C'est un horoscope.",
-   "d": "[sarcastic] Je lui ai demandé où il était. Il m'a dit « bientôt ». C'est pas une adresse, ça. C'est un horoscope.",
+   "t": "Kévin, c'est la troisième fois ce mois-ci ! Quatre heures l'œil collé au judas. J'ai la pupille en forme de serrure !",
+   "d": "[angry] Kévin, c'est la troisième fois ce mois-ci ! Quatre heures l'œil collé au judas. [shouting] J'ai la pupille en forme de serrure !",
    "chute": true
   },
   {
    "p": "invite",
-   "t": "Wesh, je suis au coin de la rue. Je vois le bar d'ici.",
-   "d": "[casual] Wesh, je suis au coin de la rue. Je vois le bar d'ici."
+   "t": "J'ai sonné trois fois.",
+   "d": "[deadpan] J'ai sonné trois fois."
   },
   {
    "p": "envoyee",
-   "t": "Kévin. Ton coin de rue, il a un pommeau ?",
-   "d": "[suspicious] Kévin. Ton coin de rue, il a un pommeau ?",
-   "chute": true
+   "t": "Y a pas de sonnette.",
+   "d": "[annoyed] Y a pas de sonnette."
   },
   {
    "p": "invite",
-   "t": "C'est la pluie, frère. Et j'ai mis du shampoing anti-pluie.",
-   "d": "[nervous laugh] C'est la pluie, frère. Et j'ai mis du shampoing anti-pluie.",
-   "chute": true
-  },
-  {
-   "p": "envoyee",
-   "t": "Et depuis quand ta rue fait « ding » comme un micro-ondes ?",
-   "d": "[annoyed] Et depuis quand ta rue fait « ding » comme un micro-ondes ?",
-   "chute": true
-  },
-  {
-   "p": "invite",
-   "t": "C'est le GPS. Il me dit que mes lasagnes sont prêtes.",
-   "d": "[confident] C'est le GPS. Il me dit que mes lasagnes sont prêtes.",
+   "t": "Voilà. C'est pour ça que vous avez rien entendu.",
+   "d": "Voilà. [sarcastic] C'est pour ça que vous avez rien entendu.",
    "chute": true
   },
   {
    "p": "envoyee",
-   "t": "Il partage sa position en direct. Ça affiche : « Domicile, salle de bain ».",
-   "d": "[laughs] Il partage sa position en direct. Ça affiche : « Domicile, salle de bain ».",
+   "t": "J'ai même pas pris de douche. Je pue l'attente. Je sens le « entre 8 h et 18 h ».",
+   "d": "[sighs] J'ai même pas pris de douche. Je pue l'attente. Je sens le « entre huit heures et dix-huit heures ».",
    "chute": true
   },
   {
    "p": "invite",
-   "t": "Attends attends. Je t'envoie une photo de la rue. Preuve.",
-   "d": "[panicked] Attends attends. Je t'envoie une photo de la rue. Preuve."
+   "t": "Ensuite, j'ai crié. J'ai chanté. J'ai escaladé la façade jusqu'au sixième.",
+   "d": "[excited] Ensuite, j'ai crié. J'ai chanté. J'ai escaladé la façade jusqu'au sixième."
   },
   {
    "p": "envoyee",
-   "t": "Ta photo, c'est une vue satellite. On voit mon vélo. Volé en 2014.",
-   "d": "[laughing] Ta photo, c'est une vue satellite. On voit mon vélo. Volé en deux mille quatorze.",
-   "chute": true
+   "t": "J'habite au rez-de-chaussée.",
+   "d": "[deadpan] J'habite au rez-de-chaussée.",
+   "attente": 0.6
   },
   {
    "p": "invite",
-   "t": "Bon, là, je suis en bas de chez toi.",
-   "d": "[confident] Bon, là, je suis en bas de chez toi."
+   "t": "Je trouvais pas, j'ai continué.",
+   "d": "[nervous laugh] Je trouvais pas, j'ai continué.",
+   "chute": true
   },
   {
    "p": "envoyee",
-   "t": "Kévin. J'ai déménagé il y a deux ans.",
-   "d": "[deadpan] Kévin. J'ai déménagé il y a deux ans.",
+   "t": "Après, j'ai traversé la ville jusqu'au tabac. Entre les jeux à gratter et un mec qui pleure.",
+   "d": "[shouting] Après, j'ai traversé la ville jusqu'au tabac. [sighs] Entre les jeux à gratter et un mec qui pleure.",
    "chute": true
   },
   {
    "p": "invite",
-   "t": "Ok, je mets mes chaussures et j'arrive. Enfin… je les achète et j'arrive.",
-   "d": "[sighs] Ok, je mets mes chaussures et j'arrive. Enfin… je les achète et j'arrive.",
-   "chute": true
+   "t": "Normal. Je l'ai confié à un voisin.",
+   "d": "[deadpan] Normal. Je l'ai confié à un voisin."
   },
   {
-   "p": "presentateur",
-   "t": "Rassurez-vous : Kévin arrive dans cinq minutes. C'est son anniversaire.",
-   "d": "[deadpan] Rassurez-vous : Kévin arrive dans cinq minutes. C'est son anniversaire.",
+   "p": "envoyee",
+   "t": "Lequel ?",
+   "d": "[annoyed] Lequel ?"
+  },
+  {
+   "p": "invite",
+   "t": "Un grand, très gentil. Il s'appelle Kévin. Tenez, preuve photo.",
+   "d": "Un grand, très gentil. Il s'appelle Kévin. [excited] Tenez, preuve photo.",
    "chute": true,
-   "attente": 0.8
+   "objet": "telephone"
+  },
+  {
+   "p": "envoyee",
+   "t": "C'est ton canapé. Tes chaussettes. Ta télé. Et mon colis ouvert.",
+   "d": "[gasps] C'est ton canapé. Tes chaussettes. Ta télé. [angry] Et mon colis ouvert.",
+   "chute": true
+  },
+  {
+   "p": "invite",
+   "t": "Rassurez-vous, madame : votre colis a bien été livré. Vous étiez juste absente de chez moi.",
+   "d": "[deadpan] Rassurez-vous, madame : votre colis a bien été livré. Vous étiez juste absente de chez moi.",
+   "chute": true
   }
  ],
  "bandeau": [
-  "CINQ MINUTES : DURÉE MOYENNE CONSTATÉE, TROIS HEURES",
-  "ALERTE MÉTÉO : AVERSES DE SHAMPOING AU COIN DE LA RUE",
-  "UN VÉLO VOLÉ EN 2014 RETROUVÉ SUR UNE PREUVE DE KÉVIN",
-  "« JE SUIS EN BAS » : 98 % DES BAS SONT IMAGINAIRES"
+  "UN LIVREUR ESCALADE SIX ÉTAGES POUR UN REZ-DE-CHAUSSÉE",
+  "UNE CLIENTE SENT OFFICIELLEMENT LE « ENTRE 8 H ET 18 H »",
+  "UNE SONNETTE INEXISTANTE SONNE TROIS FOIS",
+  "LE VOISIN LE PLUS SERVIABLE DE FRANCE S'APPELLE KÉVIN"
  ],
  "gag": {
-  "replique": 5,
-  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. A man with a moustache stands in his shower covered in shampoo foam, holding a phone to his ear with a confident smile, pointing at a tiny fake street sign stuck on the tiled wall, water pouring over him, a microwave glowing in the background through the bathroom door, comedic, deadpan."
+  "replique": 6,
+  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. A delivery man with a backwards cap and a parcel strapped to his back climbs the facade of a tall apartment building up to the sixth floor, sweating heroically, while far below at the ground floor an exhausted woman with a pink bow presses her eye against the door peephole, comedic, deadpan."
  },
- "legende": "« J'arrive dans 5 minutes. » Il était sous la douche. Taguez le pote qui vous fait ça. Satire, personnages fictifs.",
+ "legende": "Il a sonné, crié, escaladé la façade… et ton colis est sur son canapé 📦 Satire, personnages fictifs.",
  "hashtags": [
+  "livreur",
+  "colis",
+  "pov",
   "humour",
   "sketch",
-  "retard",
-  "potes",
-  "pov",
-  "animation"
+  "dessinanime"
  ],
  "sources": [],
  "decoupage": [
   {
-   "scene": "Plateau du JT. Jean-Michel est impassible. Derrière lui, une horloge tourne à toute vitesse. Woosh vers le direct.",
+   "scene": "Pas de la porte d'un appartement au rez-de-chaussée. Lila, cernée, décoiffée, un œil rougi en forme de serrure, face à Kévin, tout calme, son terminal à la main. Plan fixe, on passe de l'un à l'autre face caméra.",
    "repliques": [
-    0
-   ],
-   "lieu": "plateau",
-   "son": "woosh",
-   "duree": 4.0
-  },
-  {
-   "scene": "Terrasse du bar, la nuit. Martine est seule à une table couverte d'assiettes vides et d'additions payées, avec un gâteau aux bougies éteintes et des papiers de divorce signés. Elle parle face caméra, blasée.",
-   "repliques": [
+    0,
     1,
-    2
+    2,
+    3,
+    4
    ],
-   "lieu": "direct",
+   "lieu": "reconstitution",
    "son": "rimshot",
-   "duree": 11.0
+   "duree": 20.0,
+   "decor": "a ground floor apartment doorway in a shabby building hallway, with a peephole door",
+   "titre": "Il jure qu'il a sonné"
   },
   {
-   "scene": "Écran partagé. Kévin au téléphone, cadré serré, assuré. Le plan s'élargit : il est sous sa douche, avec de la mousse sur la tête. Un « ding » de micro-ondes retentit.",
+   "scene": "Même décor. Kévin mime ses exploits, Lila s'énerve de plus en plus. L'écran tremble quand elle hurle l'histoire du tabac.",
    "repliques": [
-    3,
-    4,
     5,
     6,
-    7
-   ],
-   "lieu": "duplex",
-   "son": "dun_dun",
-   "duree": 20.0
-  },
-  {
-   "scene": "Martine tourne son téléphone vers la caméra : la carte affiche « Domicile, salle de bain ». Puis la photo envoyée apparaît : une vieille vue satellite pixelisée, avec un vélo entouré en rouge.",
-   "repliques": [
+    7,
     8,
-    9,
-    10
+    9
    ],
-   "lieu": "duplex",
+   "lieu": "reconstitution",
    "son": "trombone_triste",
-   "duree": 14.0
+   "duree": 28.0,
+   "decor": "a ground floor apartment doorway in a shabby building hallway, with a peephole door",
+   "titre": "Le héros de la livraison",
+   "effet": "tremblement"
   },
   {
-   "scene": "Kévin, en serviette et pieds nus, cherche ses chaussures en panique, puis se fige en apprenant qu'elle a déménagé. Il finit par ouvrir un site de vente sur son téléphone.",
+   "scene": "Kévin dégaine son téléphone comme une arme et montre sa preuve photo. Lila se fige en regardant l'écran. Kévin sourit et récite la chute avec une politesse de service client.",
    "repliques": [
+    10,
     11,
     12,
-    13
-   ],
-   "lieu": "duplex",
-   "son": "xylo_descente",
-   "duree": 13.0
-  },
-  {
-   "scene": "Retour plateau. Silence, puis Jean-Michel lâche la chute sans un battement de cil. Plan final : en terrasse, Martine souffle elle-même les bougies du gâteau. Noir.",
-   "repliques": [
+    13,
     14
    ],
-   "lieu": "plateau",
-   "son": "rimshot",
-   "duree": 6.0
+   "lieu": "reconstitution",
+   "son": "dun_dun",
+   "duree": 24.0,
+   "decor": "a ground floor apartment doorway in a shabby building hallway, with a peephole door",
+   "titre": "La preuve de Kévin"
   }
- ]
+ ],
+ "fiche": {
+  "concept": "« Livré chez moi » : Lila a attendu quatre heures, l'œil collé au judas. Kévin, son livreur attitré (troisième fois ce mois-ci), jure qu'il est passé. Ses excuses deviennent de plus en plus héroïques, et sa preuve photo finit par l'accuser.",
+  "format": "Scène de dessin animé en face-à-face sur le pas de la porte : une cliente à bout face à un livreur qui ne lâche rien et la vouvoie poliment comme un service client.",
+  "angle": "Kévin vouvoie Lila avec une politesse glaciale de service client, pendant qu'elle explose en le tutoyant. Chaque détail concret qu'elle sort, il le transforme en preuve qu'il a raison. Le voisin « très gentil » à qui il a confié le colis, c'est lui-même, et sa preuve photo (la preuve de Kévin) montre le colis sur son propre canapé.",
+  "resume_factuel": "Une cliente qui a attendu son colis toute la journée affronte le livreur qui jure être passé, alors que le colis a fini chez lui.",
+  "faits_reels": [],
+  "inventions": [
+   "Situation du quotidien entièrement fictive",
+   "Personnages fictifs : Kévin le livreur, Lila la cliente",
+   "La sonnette inexistante, l'escalade de la façade, le voisin Kévin, la photo du canapé : pure fiction satirique"
+  ],
+  "decoupage": [
+   {
+    "scene": "Pas de la porte d'un appartement au rez-de-chaussée. Lila, cernée, décoiffée, un œil rougi en forme de serrure, face à Kévin, tout calme, son terminal à la main. Plan fixe, on passe de l'un à l'autre face caméra.",
+    "repliques": [
+     0,
+     1,
+     2,
+     3,
+     4
+    ],
+    "lieu": "reconstitution",
+    "son": "rimshot",
+    "duree": 20.0,
+    "decor": "a ground floor apartment doorway in a shabby building hallway, with a peephole door",
+    "titre": "Il jure qu'il a sonné"
+   },
+   {
+    "scene": "Même décor. Kévin mime ses exploits, Lila s'énerve de plus en plus. L'écran tremble quand elle hurle l'histoire du tabac.",
+    "repliques": [
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "lieu": "reconstitution",
+    "son": "trombone_triste",
+    "duree": 28.0,
+    "decor": "a ground floor apartment doorway in a shabby building hallway, with a peephole door",
+    "titre": "Le héros de la livraison",
+    "effet": "tremblement"
+   },
+   {
+    "scene": "Kévin dégaine son téléphone comme une arme et montre sa preuve photo. Lila se fige en regardant l'écran. Kévin sourit et récite la chute avec une politesse de service client.",
+    "repliques": [
+     10,
+     11,
+     12,
+     13,
+     14
+    ],
+    "lieu": "reconstitution",
+    "son": "dun_dun",
+    "duree": 24.0,
+    "decor": "a ground floor apartment doorway in a shabby building hallway, with a peephole door",
+    "titre": "La preuve de Kévin"
+   }
+  ],
+  "titres_sujet": [
+   "POV : le livreur dit qu'il est passé"
+  ],
+  "verification_web": false,
+  "note": 76.0,
+  "critique": "Points forts : la logique absurde et calme de Kévin (4, « Voilà. C'est pour ça que vous avez rien entendu ») et la réplique 5 (« Je sens le \"entre 8 h et 18 h\" ») sont très justes. La chute (14) retourne vraiment la situation, sur le sujet lui-même : le colis a bien été « livré »… chez lui. Pas de métaphore filée : l'escalade de la façade reste une exagération à l'intérieur de la situation.\n\nRépliques faibles :\n- 8 (« Je trouvais pas, j'ai continué ») : c'est une simple suite de la 6, sans deuxième rire. Proposition : « Au septième y avait de la lumière, j'ai cru que c'était vous. J'ai laissé un avis de passage sur la fenêtre. »\n- 9 : la logique se brouille. « Après » est ambigu, et on ne comprend pas que le colis n'était PAS au tabac, alors que c'est ce qui permet la réplique 10. Le détail « un mec qui pleure » est bon, à garder. Proposition : « J'ai traversé la ville jusqu'au tabac-relais. Entre les jeux à gratter et un mec qui pleure. Mon colis y était pas. »\n- 12 : « Il s'appelle Kévin » révèle trop tôt ce que montre la photo. Le même gag tombe deux fois (le prénom, puis la photo), et ça affaiblit les répliques 13 et 14. Proposition : « Un grand, très gentil, il me ressemble beaucoup. Tenez, preuve photo. » La photo fait alors seule la révélation.\n- 13 : c'est trop sage pour le ton cru voulu. « Mon colis ouvert » est gentil. Proposition : « C'est ton canapé. Tes chaussettes. Et toi qui portes ma guêpière en mangeant mes protéines. »\n- Il manque l'élément qu'on reconnaît l",
+  "decision": "à retravailler"
+ }
 }
