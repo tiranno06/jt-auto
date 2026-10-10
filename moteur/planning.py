@@ -65,16 +65,17 @@ def decision_complete():
     m, fmt = passes[-1]
     if m_now - m > FENETRE: return False, f"aucun créneau en cours ({maintenant:%H:%M}, créneaux {lib})", None
     hist = _hist()
-    # déjà fait pour CE créneau : une vidéo automatique ou un essai abandonné depuis l'heure du créneau
+    # déjà fait pour CE créneau = une vidéo automatique fabriquée depuis l'heure du créneau. Un essai abandonné (note trop basse)
+    # ne compte PAS : le robot réessaie au réveil suivant, tant qu'on est dans la fenêtre et sous ESSAIS_MAX essais
     def apres(date, hhmm):
         try: return date == jour.isoformat() and int(hhmm[:2]) * 60 + int(hhmm[3:5]) >= m
         except (TypeError, ValueError): return False
     def heure_fichier(e):
         r_ = re.search(r"_(\d{2})h(\d{2})_", e.get("fichier", "")); return f"{r_.group(1)}:{r_.group(2)}" if r_ else None
-    faites = sum(1 for e in hist if e.get("auto") and apres(e.get("date"), heure_fichier(e)))
+    faites = sum(1 for e in hist if e.get("auto") and apres(e.get("date"), heure_fichier(e))); rates = 0
     try:
         tent = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "episodes", "tentatives.json"), encoding="utf-8"))
-        faites += sum(1 for e in tent if e.get("auto") and apres(e.get("date"), e.get("heure") or "00:00"))
+        rates = sum(1 for e in tent if e.get("auto") and apres(e.get("date"), e.get("heure") or "00:00"))
     except (OSError, ValueError): pass
     budget = (os.environ.get("BUDGET_MOIS") or "").strip().replace(",", ".")
     if budget:                                                             # plafond de dépenses Claude du mois (réglage de la régie)
@@ -84,7 +85,11 @@ def decision_complete():
             if depense >= float(budget): return False, f"budget du mois atteint ({depense:.2f} $ sur {float(budget):.2f} $)", None
         except ValueError: pass
     if faites: return False, f"créneau de {m // 60}:{m % 60:02d} déjà traité", None
-    return True, f"créneau de {m // 60}:{m % 60:02d}", fmt
+    try: essais_max = max(1, int(os.environ.get("ESSAIS_MAX") or 3))
+    except ValueError: essais_max = 3
+    if rates >= essais_max:
+        return False, f"créneau de {m // 60}:{m % 60:02d} : {rates} essai(s) sans sketch assez bon, limite atteinte (réglage ⚙️ Écriture)", None
+    return True, f"créneau de {m // 60}:{m % 60:02d}" + (f", nouvel essai ({rates + 1}/{essais_max})" if rates else ""), fmt
 
 if __name__ == "__main__":
     go, raison, _ = decision_complete(); print(f"Planning : {'GO' if go else 'rien'} ({raison})")

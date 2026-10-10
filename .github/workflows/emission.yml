@@ -59,6 +59,7 @@ jobs:
           FREQUENCE: ${{ vars.FREQUENCE }}
           HEURE: ${{ vars.HEURE }}
           BUDGET_MOIS: ${{ vars.BUDGET_MOIS }}
+          ESSAIS_MAX: ${{ vars.ESSAIS_MAX }}
         run: python3 moteur/planning.py
 
   emission:
@@ -124,6 +125,7 @@ jobs:
       FREQUENCE: ${{ vars.FREQUENCE }}
       HEURE: ${{ vars.HEURE }}
       BUDGET_MOIS: ${{ vars.BUDGET_MOIS }}
+      ESSAIS_MAX: ${{ vars.ESSAIS_MAX }}
       ETAPES_ECO: ${{ vars.ETAPES_ECO }}
       VAPID_PRIVEE: ${{ vars.VAPID_PRIVEE }}
       VAPID_PUBLIQUE: ${{ vars.VAPID_PUBLIQUE }}

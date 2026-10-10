@@ -82,7 +82,7 @@ def application(nom):
 
 # Service worker : l'appli s'ouvre même hors connexion (dernière version de la page), sans jamais mettre en cache
 # les vidéos (trop lourdes) ni les appels à GitHub.
-SW = r"""const CACHE = "regie-v19";
+SW = r"""const CACHE = "regie-v20";
 const COQUILLE = ["./", "manifest.webmanifest", "logo-192.png", "logo-512.png", "poppins-500.ttf", "poppins-700.ttf"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(COQUILLE))); self.skipWaiting(); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(k => Promise.all(k.filter(x => x !== CACHE).map(x => caches.delete(x))))); self.clients.claim(); });
@@ -279,7 +279,8 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
   <section class="panneau"><h2>✍️ Écriture</h2>
     <label>Note minimale pour fabriquer une vidéo<select data-var="QUALITE_MIN" data-def="85"><option value="90">90/100</option><option value="85">85/100 (recommandé)</option><option value="80">80/100</option><option value="75">75/100</option><option value="70">70/100</option><option value="0">Toujours fabriquer (pas de minimum)</option></select></label>
     <label>Sujets essayés au plus pour l'atteindre<select data-var="SUJETS_MAX" data-def="3"><option value="2">2 (économique)</option><option value="3">3 (recommandé)</option><option value="4">4</option><option value="5">5 (le plus exigeant)</option></select></label>
-    <p class="note">Si aucun sketch n'atteint la note minimale, le robot ne fabrique rien (voix et décors économisés) et vous prévient ; il réessaiera au prochain créneau. Les vidéos que vous lancez vous-même (Manuel, Refaire, série d'un seul jet) sont toujours fabriquées.</p>
+    <label>Essais par créneau si la note n'est pas atteinte<select data-var="ESSAIS_MAX" data-def="3"><option value="1">1 (pas de nouvel essai)</option><option value="2">2</option><option value="3">3 (recommandé)</option><option value="4">4</option></select></label>
+    <p class="note">Si aucun sketch n'atteint la note minimale, le robot ne fabrique rien (voix et décors économisés), vous prévient, et réessaie au réveil suivant (toutes les 30 min environ) tant que le créneau a moins de 2 h et que la limite d'essais n'est pas atteinte. Chaque essai coûte environ 2 à 3 $ de Claude. Les vidéos que vous lancez vous-même (Manuel, Refaire, série d'un seul jet) sont toujours fabriquées.</p>
     <label>Note minimale pour la publication automatique<select data-var="SEUIL_PUBLICATION" data-def="80"><option value="90">90/100</option><option value="85">85/100</option><option value="80">80/100 (recommandé)</option><option value="75">75/100</option><option value="70">70/100</option></select></label>
     <label>Objectif d'écriture (le robot réécrit jusqu'à cette note)<select data-var="SEUIL_QUALITE" data-def="90"><option value="95">95/100 (très rare)</option><option value="90">90/100 (recommandé)</option><option value="85">85/100</option><option value="80">80/100</option><option value="75">75/100</option></select></label>
     <label>Auteur (modèle Claude)<select data-var="MODELE_CLAUDE" data-def="claude-opus-5-5"><option value="claude-opus-5-5">Opus (le plus drôle, recommandé)</option><option value="claude-sonnet-5-5">Sonnet (économique)</option></select></label>

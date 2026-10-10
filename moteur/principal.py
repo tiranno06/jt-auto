@@ -173,7 +173,7 @@ def main():
             try:
                 import alerte
                 alerte.alerter("Pas de vidéo cette fois", f"Meilleur sketch : {q.note:.0f}/100 (« {q.sk.get('sujet', '')} »), sous votre minimum de {ecrire.QUALITE_MIN}. "
-                               "Rien n'a été fabriqué : crédits voix et décors économisés.")
+                               "Rien n'a été fabriqué : crédits voix et décors économisés. Nouvel essai au prochain réveil (si la limite d'essais du créneau n'est pas atteinte).")
             except Exception: pass
             return
         print(f"Moteur humoristique : {ecrire.USAGE['appels']} appels Claude, {ecrire.USAGE['entree']} jetons lus, {ecrire.USAGE['sortie']} jetons écrits, {ecrire.USAGE['recherches_web']} recherche(s) web", flush=True)

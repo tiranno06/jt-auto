@@ -28,6 +28,7 @@ jobs:
           FREQUENCE: ${{ vars.FREQUENCE }}
           HEURE: ${{ vars.HEURE }}
           BUDGET_MOIS: ${{ vars.BUDGET_MOIS }}
+          ESSAIS_MAX: ${{ vars.ESSAIS_MAX }}
         run: python3 moteur/planning.py
       - name: Lancer le robot si le réveil normal a été sauté
         if: steps.p.outputs.go == 'true'
