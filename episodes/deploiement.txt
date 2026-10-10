@@ -17,11 +17,20 @@ code: 0
 === banque de voix (Kyutai, Zonos, Whisper) ===
 ✓ Created objects.
 ├── ✓ Uploaded /home/runner/work/jt-auto/jt-auto/moteur/banque_modal.py
-├── ✓ Created Function Kyutai.*.
 ├── ✓ Created Function Whisper.*.
+├── ✓ Created Function Kyutai.*.
 └── ✓ Created Function Zonos.*.
-✓ App deployed in 2.443s! 🎉
+✓ Deployment skipped: no changes detected! ⏭️
 
 View Deployment: 
 https://modal.com/apps/tubbiolo-francois/main/deployed/jt-banque
 code: 0
+=== decors (FLUX.1-schnell) ===
+✓ Created objects.
+├── ✓ Uploaded /home/runner/work/jt-auto/jt-auto/moteur/decor_modal.py
+└── ✓ Created Function Decor.*.
+✓ Deployment skipped: no changes detected! ⏭️
+
+View Deployment: https://modal.com/apps/tubbiolo-francois/main/deployed/jt-decor
+code: 0
+=== essai des decors (premier lancement : telechargement du modele) ===
