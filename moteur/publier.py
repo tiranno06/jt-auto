@@ -125,6 +125,16 @@ if __name__ == "__main__":
         preparer(); sys.exit(0)
     if sys.argv[1:] == ["--marquer"]:
         marquer(); sys.exit(0)
+    if sys.argv[1:] == ["--schema"]:                                       # repère le champ « contenu IA » de l'API Buffer
+        cle = os.environ.get("BUFFER_API_KEY")
+        q = "query { __schema { types { name kind inputFields { name type { name kind ofType { name kind } } } } } }"
+        try:
+            for t in _gql(q, cle)["__schema"]["types"]:
+                champs = t.get("inputFields") or []
+                if any(k in t["name"].lower() for k in ("tiktok", "metadata", "createpost", "postinput")) or any("ai" in (c["name"] or "").lower() for c in champs):
+                    print(t["name"], ":", ", ".join(f"{c['name']}<{(c['type'].get('name') or (c['type'].get('ofType') or {}).get('name'))}>" for c in champs))
+        except Exception as e: print(f"Schéma Buffer illisible : {str(e)[:300]}")
+        sys.exit(0)
     if sys.argv[1:] == ["--canaux"]:                                       # vérification : comptes connectés à Buffer (sans rien publier)
         cle = os.environ.get("BUFFER_API_KEY")
         if not cle: print("BUFFER_API_KEY absente des secrets GitHub."); sys.exit(0)

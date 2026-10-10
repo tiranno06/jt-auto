@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Comptes connectés à Buffer (rien n'est publié)
-        run: python moteur/publier.py --canaux 2>&1 | tee episodes/buffer.txt
+        run: (python moteur/publier.py --canaux; python moteur/publier.py --schema) 2>&1 | tee episodes/buffer.txt
       - name: Enregistrer
         run: |
           git config user.name "robot-jt"
