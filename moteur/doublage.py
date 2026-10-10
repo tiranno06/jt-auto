@@ -77,12 +77,23 @@ def telecharger(url, tmp):
     if np.abs(mono).max() < 0.01: raise RuntimeError("la vidéo n'a pas de son")
     return info, piste, mono
 
+class _Rep:
+    def __init__(self, contenu): self.content = contenu
+    def json(self): return json.loads(self.content or b"{}")
+
 def _multipart(chemin, fichiers, champs, timeout=600):
-    import httpx
-    r = httpx.post("https://api.elevenlabs.io" + chemin, headers={"xi-api-key": os.environ["ELEVENLABS_API_KEY"]},
-                   files=fichiers, data=champs, timeout=timeout)
-    if r.status_code >= 400: raise RuntimeError(f"ElevenLabs {r.status_code} : {r.text[:300]}")
-    return r
+    """Envoi de fichier à ElevenLabs (multipart/form-data, bibliothèque standard uniquement)."""
+    import urllib.error, urllib.request, uuid
+    bord = uuid.uuid4().hex; corps = b""
+    for k, v in champs.items():
+        corps += f'--{bord}\r\nContent-Disposition: form-data; name="{k}"\r\n\r\n{v}\r\n'.encode()
+    for k, (nom, f, typ) in fichiers.items():
+        corps += f'--{bord}\r\nContent-Disposition: form-data; name="{k}"; filename="{nom}"\r\nContent-Type: {typ}\r\n\r\n'.encode() + f.read() + b"\r\n"
+    corps += f"--{bord}--\r\n".encode()
+    req = urllib.request.Request("https://api.elevenlabs.io" + chemin, data=corps, method="POST",
+                                 headers={"xi-api-key": os.environ["ELEVENLABS_API_KEY"], "Content-Type": f"multipart/form-data; boundary={bord}"})
+    try: return _Rep(urllib.request.urlopen(req, timeout=timeout).read())
+    except urllib.error.HTTPError as e: raise RuntimeError(f"ElevenLabs {e.code} : {e.read()[:300]!r}")
 
 def isoler(tmp):
     """Voix seules (sans musique ni bruits) : sert au mouvement des bouches et à la transcription. Repli : le son complet."""
