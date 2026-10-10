@@ -321,7 +321,7 @@ class TestGagEclair(unittest.TestCase):
                 "print(len(sk['repliques']))")
         r = subprocess.run([sys.executable, "-c", code], capture_output=True, text=True, env=dict(os.environ, FORMAT="mini"),
                            cwd=os.path.join(ICI, ".."))
-        self.assertEqual(r.stdout.split(), ["True", "12", "à", "18", "46", "True", "3"], r.stderr[-500:])
+        self.assertEqual(r.stdout.split(), ["True", "15", "à", "22", "60", "True", "3"], r.stderr[-500:])
 
 
 class TestCartoon(unittest.TestCase):

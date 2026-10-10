@@ -52,7 +52,7 @@ def verifier(video, sk, minutage):
         contenu = [{"type": "image", "source": {"type": "base64", "media_type": "image/jpeg", "data": base64.b64encode(p).decode()}}
                    for p in planches(video, instants[:24])]
         contenu.append({"type": "text", "text": PROMPT.format(attendu="\n".join(attendu[:24]))})
-        r = anthropic.Anthropic().messages.create(model=MODELE, max_tokens=2500, tools=[OUTIL], tool_choice={"type": "tool", "name": "controle"},
+        r = anthropic.Anthropic().messages.create(model=MODELE, max_tokens=2500, tools=[OUTIL], tool_choice={"type": "auto"},
                                                   messages=[{"role": "user", "content": contenu}])
         res = next((b.input for b in r.content if getattr(b, "type", "") == "tool_use"), {})
     except Exception as e:

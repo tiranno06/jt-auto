@@ -10,7 +10,7 @@ MOTEUR_HUMOUR = open(os.path.join(ICI, "prompts", "moteur_humour.md"), encoding=
 
 MODELE = os.environ.get("MODELE_CLAUDE") or "claude-opus-5-5"          # Opus : humour plus fin (réglable dans l'appli)
 # réglages de la régie (variables du dépôt)
-LONGUEURS = {"eclair": ("3 à 6", "12 à 18"), "pro": ("10 à 16", "60 à 90"), "courte": ("5 à 6", "20 à 25"), "normale": ("7 à 9", "30 à 40"), "longue": ("9 à 12", "40 à 55"),
+LONGUEURS = {"eclair": ("4 à 8", "15 à 22"), "pro": ("10 à 16", "60 à 90"), "courte": ("5 à 6", "20 à 25"), "normale": ("7 à 9", "30 à 40"), "longue": ("9 à 12", "40 à 55"),
              "monetisable": ("13 à 16", "60 à 75")}   # format long : plus d'une minute (rémunération TikTok)
 TONS = {"clash": "CLASH, foutage de gueule direct (le style préféré du public) : on compare l'actu à la vie de tous les jours avec une mauvaise foi assumée (« Ils ont trouvé 3 000 profs en 24 h. Moi, j'ai mis trois semaines à trouver un plombier. »), on balance des hypothèses absurdes en « soit… soit… » (« soit c'est un miracle, soit ils ont recruté au rayon surgelés »), l'invité répond du tac au tac en aggravant son cas (« ils ont été décongelés ce matin »), et la CHUTE finale est une FAUSSE VÉRITÉ IRONIQUE sur le sujet : une phrase rassurante, au ton officiel, affirmée avec aplomb, que la fin de la phrase contredit aussitôt en révélant la réalité (« Rassurez-vous : il n'y a aucune pénurie de profs. Il suffit de ne plus demander de diplôme. »). Phrases courtes, punchlines sèches, comme entre potes qui chambrent",
         "farfelu": "gags farfelus et ironie pince-sans-rire : situations délirantes, images absurdes et très concrètes, ironie froide envers les institutions et la langue de bois",
@@ -20,7 +20,7 @@ TONS = {"clash": "CLASH, foutage de gueule direct (le style préféré du public
 LONGUEUR = os.environ.get("LONGUEUR") or "pro"
 NB, SECONDES = LONGUEURS.get(LONGUEUR, LONGUEURS["pro"])
 NB_MAX = int(NB.split()[-1])
-MOTS = {"eclair": 46, "pro": 190, "courte": 60, "normale": 90, "longue": 130, "monetisable": 200}.get(LONGUEUR, 190)
+MOTS = {"eclair": 60, "pro": 190, "courte": 60, "normale": 90, "longue": 130, "monetisable": 200}.get(LONGUEUR, 190)
 MOTS_MIN = {"pro": 130, "monetisable": 150}.get(LONGUEUR, 0)   # budget de mots (≈ 2,5 mots/s)
 TON = TONS.get(os.environ.get("TON") or "clash", TONS["clash"])
 CAST = {
@@ -584,7 +584,7 @@ def public_test(client, sk):
         sc0 = k; ton = ", ".join(re.findall(r"\[([^\]]{1,30})\]", r.get("d") or ""))[:60]
         lignes.append(f"{i}. {NOMS_LIBRES.get(r['p'], r['p'])}{f' ({ton})' if ton else ''} : {r['t']}")
     try:
-        a = _appel(client, None, [{"role": "user", "content": PUBLIC.format(video="\n".join(lignes))}], OUTIL_PUBLIC, max_tokens=3000, modele=MODELE_PUBLIC)
+        a = _appel(client, None, [{"role": "user", "content": PUBLIC.format(video="\n".join(lignes))}], OUTIL_PUBLIC, max_tokens=8000, modele=MODELE_PUBLIC)
     except Exception as e:
         if _bloquant(e): raise
         print(f"  public test indisponible ({str(e)[:100]})", flush=True); return "", True
