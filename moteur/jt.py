@@ -15,7 +15,8 @@ HEAD_Y, LOWER_Y, CAP_Y, TICK_Y = 232, 1075, 1335, 1438
 # voix de secours (Piper) : hauteur / timbre / débit par rôle
 VOIX = {"presentateur": dict(pitch=0.86, formant=0.92, vitesse=1.1, expr=0.5),
         "envoyee":      dict(pitch=1.04, formant=1.03, vitesse=1.13, expr=0.65),
-        "invite":       dict(pitch=0.80, formant=0.89, vitesse=1.06, expr=0.55)}
+        "invite":       dict(pitch=0.80, formant=0.89, vitesse=1.06, expr=0.55),
+        "narrateur":    dict(pitch=0.95, formant=0.98, vitesse=1.08, expr=0.6)}          # voix off des sketchs animés
 
 # ------------------------------------------------------------------ outils
 def poser(base, rgba, x, y):
@@ -32,13 +33,40 @@ def enveloppe(a):
     lv = np.clip(e / ref, 0, 1.2); lv = np.where(lv < 0.12, 0, lv)
     return np.round(lv * 5).clip(0, 5).astype(int), lv
 
+PETITS = set("""le la les l' un une des du de d' à au aux en et ou mais donc car ni je j' tu il elle on nous vous ils elles me m' te t' se s' lui
+leur leurs mon ton son ma ta sa mes tes ses notre votre nos vos ce cet cette ces c' qui que qu' ne n' y pour par sur sous dans avec sans chez
+très plus moins si pas ai as a avons avez ont est es suis sont va vais vas""".split())
+UNITES = {"h", "min", "s", "€", "%", "km", "kg", "g", "m", "cm", "ans", "euros", "°"}
+
 def groupes(texte):
-    out, cur = [], []
-    for m in texte.split():
+    """Découpe une réplique en groupes de sous-titres lisibles : 4 mots ou ~18 caractères au plus, coupe après la ponctuation,
+    jamais de ponctuation seule, nombre et unité ensemble (« 8 h », « 4,99 € »), jamais de groupe qui finit sur un petit mot."""
+    jetons = []
+    for m in texte.replace("\u00a0", " ").replace("\u202f", " ").split():
+        if jetons and (re.fullmatch(r"[!?:;»…,.]+", m) or (m.lower() in UNITES and re.search(r"\d$", jetons[-1]))):
+            jetons[-1] += " " + m                                      # « ! » ou « h » collés au mot d'avant
+        elif jetons and jetons[-1] == "«":
+            jetons[-1] += " " + m
+        else:
+            jetons.append(m)
+    return [" ".join(g) for g in _regrouper(jetons)]
+
+def _regrouper(jetons):
+    res, cur = [], []
+    for k, m in enumerate(jetons):
         cur.append(m)
-        if len(cur) == 3 or re.search(r"[.,:;!?…]$", m) or len(" ".join(cur)) > 16: out.append(cur); cur = []
-    if cur: out.append(cur)
-    return [" ".join(g) for g in out]
+        fin_phrase = bool(re.search(r"[.,:;!?…»]$", m))
+        plein = len(cur) >= 4 or len(" ".join(cur)) > 17
+        if k == len(jetons) - 1: break
+        if fin_phrase: res.append(cur); cur = []; continue
+        if plein:
+            report = []
+            while len(cur) > 1 and re.sub(r"[^\w']", "", cur[-1].lower()) in PETITS: report.insert(0, cur.pop())
+            res.append(cur); cur = report
+    if cur:
+        if res and len(cur) == 1 and len(cur[0]) <= 4 and not re.search(r"[.,:;!?…»]$", res[-1][-1]): res[-1] += cur
+        else: res.append(cur)
+    return res
 
 F_CAP = ImageFont.truetype(FB, 100); _cache = {}
 def carton(txt):

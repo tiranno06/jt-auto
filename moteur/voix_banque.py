@@ -83,12 +83,28 @@ def _eleven(chemin, corps=None, binaire=False, timeout=120):
     d = urllib.request.urlopen(req, timeout=timeout).read()
     return d if binaire else json.loads(d or b"{}")
 
+CONTEXTE = {}                                                             # texte -> (réplique d'avant, réplique d'après) : intonation enchaînée
+REGLAGES = {"stability": 0.5, "similarity_boost": 0.85, "use_speaker_boost": True}   # voix stable et bien articulée
+_SANS_REGLAGES = set()                                                    # modèles qui refusent ces réglages
+
 def elevenlabs(voix, textes):
     out = []
     for t in textes:
         if "elevenlabs" in EN_PANNE: out.append(b""); continue
+        corps = {"text": t, "model_id": ELEVEN_MODELE}
+        avant, apres = CONTEXTE.get(t, ("", ""))
+        if avant: corps["previous_text"] = sans_tags(avant)[:500]
+        if apres: corps["next_text"] = sans_tags(apres)[:500]
+        if ELEVEN_MODELE not in _SANS_REGLAGES: corps["voice_settings"] = REGLAGES
         try:
-            out.append(_eleven(f"/v1/text-to-speech/{voix}?output_format=mp3_44100_128", {"text": t, "model_id": ELEVEN_MODELE}, binaire=True))
+            try:
+                out.append(_eleven(f"/v1/text-to-speech/{voix}?output_format=mp3_44100_128", corps, binaire=True))
+            except urllib.error.HTTPError as e:
+                if e.code != 400 or ("voice_settings" not in corps and "previous_text" not in corps): raise
+                journal(f"    elevenlabs : réglages refusés ({e.read().decode('utf-8', 'replace')[:120]}), nouvel essai sans")
+                _SANS_REGLAGES.add(ELEVEN_MODELE)
+                for k in ("voice_settings", "previous_text", "next_text"): corps.pop(k, None)
+                out.append(_eleven(f"/v1/text-to-speech/{voix}?output_format=mp3_44100_128", corps, binaire=True))
         except urllib.error.HTTPError as e:
             msg = e.read().decode("utf-8", "replace")[:200]
             journal(f"    elevenlabs {voix} : HTTP {e.code} {msg}")
@@ -320,7 +336,7 @@ def casting(forcer=False):
         ok, d = note(texte, a, e); hz = f0(a)
         genre = c["genre"] if c["genre"] != "?" else ("h" if 0 < hz < 165 else "f" if hz > 175 else "?")
         expr = expressivite(a)
-        score = (PRIORITE[c["moteur"]] + (2 * d.get("sim", 0.8)) - max(0, d.get("blanc", 0) - 0.4)
+        score = (PRIORITE[c["moteur"]] + (4 * d.get("sim", 0.8)) - max(0, d.get("blanc", 0) - 0.4)       # articulation : voix bien comprise par Whisper
                  - abs(np.log(max(d.get("debit", 1), 1e-3))) + 0.35 * min(expr, 4.0))         # bonus aux voix qui « jouent »
         d["expr"] = round(expr, 1)
         journal(f"  {c['moteur']:10s} {(c.get('nom') or c['voix'])[:38]:38s} genre {genre} f0 {hz:5.0f} {d} {'OK' if ok else 'refusée'} score {score:.2f}")
@@ -347,9 +363,20 @@ def generer(repliques):
     if not fiche.get("roles") or not any(fiche["roles"].values()): return None
     tmp = tempfile.mkdtemp(); n = len(repliques)
     audios, mots, utilises = [None] * n, [None] * n, set()
+    dits = [r.get("d") or r["t"] for r in repliques]
+    CONTEXTE.clear()
+    for i, d in enumerate(dits):                                           # chaque réplique connaît la phrase d'avant et d'après
+        CONTEXTE[d] = (dits[i - 1] if i else "", dits[i + 1] if i + 1 < n else "")
+    pris = {(c["moteur"], c["voix"]) for r in {x["p"] for x in repliques} for c in fiche["roles"].get(r, [])[:1]}
+    def voix_de(role):
+        if fiche["roles"].get(role): return fiche["roles"][role]
+        # voix off (« narrateur ») : une voix de la banque que n'utilise aucun personnage du sketch
+        autres = [c for r in ("envoyee", "presentateur", "invite") for c in fiche["roles"].get(r, [])[1:]]
+        libres = [c for c in autres if (c["moteur"], c["voix"]) not in pris]
+        return (libres or autres or fiche["roles"].get("presentateur", []))[:3]
     for role in sorted({r["p"] for r in repliques}):
         idx = [i for i, r in enumerate(repliques) if r["p"] == role]
-        for choix in fiche["roles"].get(role, []):
+        for choix in voix_de(role):
             propre = choix["moteur"] in PROPRES; restant = list(idx); ok_role = True
             for tour in range(3):                                          # 1 prise + 2 reprises pour les répliques ratées
                 textes = [repliques[i].get("d") or repliques[i]["t"] for i in restant]

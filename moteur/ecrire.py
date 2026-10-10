@@ -2,7 +2,7 @@
 Les consignes d'auteur sont dans moteur/prompts/moteur_humour.md (moteur de satire professionnel fourni par l'utilisateur).
 Étapes : 1) sélection du sujet parmi plusieurs candidats notés sur 10 (avec vérification web si disponible) et choix de l'angle ;
 2) écriture ; 3) contrôle qualité noté sur 100, jusqu'à 4 retouches si la note est sous le seuil (90 par défaut), puis changement de sujet si le sketch reste faible."""
-import json, os, re, unicodedata
+import difflib, json, os, re, unicodedata
 ICI = os.path.dirname(os.path.abspath(__file__))
 MINI = (os.environ.get("FORMAT") or "").strip().lower() == "mini"         # gag éclair de 8 à 20 s
 STYLE_LIBRE = open(os.path.join(ICI, "prompts", "style_mini.md" if MINI else "style_libre.md"), encoding="utf-8").read()
@@ -121,7 +121,7 @@ ANTI-RÉPÉTITION — sujets et vannes des derniers épisodes, à NE PAS refaire
 
 LIVRABLES : rends tout avec l'outil rendre_sketch, dans ce format JSON strict (A→F du cahier des charges inclus) :
 {{"sujet": "1 à 3 mots, MAJUSCULES", "ecran": "max 14 caractères, MAJUSCULES", "titre_accroche": "max 40 caractères, sans emoji",
- "verite": "la vérité crue du sujet principal, que la chute révèle par une fausse vérité ironique", "concept": "B. concept et titre", "format": "B. format choisi", "angle": "B. angle comique",
+ "fil": "pitch en une phrase + étapes numérotées de l'histoire (sketch long)", "verite": "la vérité crue du sujet principal, que la chute révèle par une fausse vérité ironique", "concept": "B. concept et titre", "format": "B. format choisi", "angle": "B. angle comique",
  "resume_factuel": "A. résumé factuel daté", "faits_reels": ["E. faits réels vérifiés"], "inventions": ["E. inventions satiriques"],
  "decoupage": [{{"scene": "D. description : lieu, actions visuelles, transition", "repliques": [indices des répliques de la scène], "lieu": "plateau|direct|duplex|reconstitution", "son": "bruitage à la fin de la scène parmi : rimshot, xylo_descente, trombone_triste, dun_dun, woosh, reconstitution (ou vide)", "duree": secondes estimées}}],
  "invite_nom": "nom fictif", "invite_role": "fonction avec « (fictif) », max 34 caractères", "invite_look": "{looks}",
@@ -157,7 +157,7 @@ Rends la note avec l'outil noter_sketch. Le champ "critique" est OBLIGATOIRE et 
 REECRITURE = """Ton sketch a obtenu {note}/100 (objectif : au moins {seuil}). Critique du relecteur :
 {critique}
 {reserve}
-RETOUCHE CIBLÉE, comme un punch-up de salle d'auteurs : GARDE telles quelles les répliques qui fonctionnent et la chute si elle n'est pas critiquée. Remplace chaque réplique critiquée par une meilleure vanne (pioche dans les munitions du jury si elles conviennent), supprime les répliques de remplissage. Chute en fausse vérité ironique sur le sujet principal, aucune métaphore filée. Mêmes faits, mêmes règles. Rends le sketch complet avec l'outil rendre_sketch."""
+RETOUCHE CIBLÉE, comme un punch-up de salle d'auteurs : GARDE telles quelles les répliques qui fonctionnent et la chute si elle n'est pas critiquée. Remplace chaque réplique critiquée par une meilleure vanne (pioche dans les munitions du jury si elles conviennent), supprime les répliques de remplissage. Chute en fausse vérité ironique sur le sujet principal, aucune métaphore filée ; en sketch long, garde UNE histoire continue et répare toute scène qui casse le fil. Mêmes faits, mêmes règles. Rends le sketch complet avec l'outil rendre_sketch."""
 
 EXIGENCES_ACTU = """EXIGENCES DU PROPRIÉTAIRE :
 1. La chute (dernière réplique) est une FAUSSE VÉRITÉ IRONIQUE sur CE sujet principal : affirmation rassurante au ton officiel, démentie dans la même phrase par la réalité. Une chute qui est un gag annexe, un rappel d'une blague du sketch, une métaphore ou une simple constatation (« chute_vraie » = false) plafonne la note à 70.
@@ -166,7 +166,10 @@ EXIGENCES_ACTU = """EXIGENCES DU PROPRIÉTAIRE :
 EXIGENCES_LIBRE = """EXIGENCES DU PROPRIÉTAIRE (sketch libre, sans actualité) :
 1. La chute (dernière réplique) est une punchline qui retourne toute la situation, sur CE sujet (fausse vérité ironique, aveu, retournement) ; un gag annexe ou un simple rappel d'une blague du sketch (« chute_vraie » = false) plafonne la note à 70.
 2. Aucune métaphore filée : le sketch reste dans la situation elle-même (« metaphore_filee » = true : note plafonnée à 70).
-3. La situation doit être immédiatement reconnaissable par n'importe qui (« c'est trop moi / c'est trop ma mère »). Ici, « pertinence satirique » = justesse de l'observation du quotidien."""
+3. La situation doit être immédiatement reconnaissable par n'importe qui (« c'est trop moi / c'est trop ma mère »). Ici, « pertinence satirique » = justesse de l'observation du quotidien.
+4. FIL CONDUCTEUR ET CONTINUITÉ (sketch long) : une seule histoire continue. Vérifie CHAQUE scène par rapport à la précédente et à la suivante :
+   l'enchaînement est-il cohérent (conséquence logique, rien de contradictoire, mêmes personnages et même enjeu), fluide (on passe naturellement de l'une à l'autre, le carton annonce bien le saut), juste (faits internes, personnages qui se souviennent) et limpide (compris en une seconde par quelqu'un qui découvre la vidéo) ?
+   Note chaque passage dans « continuite » (un élément par passage : « scène 1 → 2 : OK » ou le problème précis et sa correction). Si un seul passage pose problème, ou si le sketch enchaîne des vannes sans histoire, « fil_continu » = false et la note est plafonnée à 70."""
 
 TECHNIQUE_PUNCHLINE = """TECHNIQUE D'UNE PUNCHLINE QUI FAIT HURLER DE RIRE :
 - le mot qui tue est le DERNIER mot de la phrase (rien après lui) ;
@@ -211,6 +214,15 @@ Aujourd'hui, PAS D'ACTUALITÉ : ignore les étapes de recherche, de vérificatio
 - "faits_reels" : liste vide ; "inventions" : tout ; "sources" : liste vide ; "resume_factuel" : une phrase qui résume la situation.
 - La chute : une punchline qui retourne toute la situation (fausse vérité ironique, aveu involontaire, retournement) ; même exigence de mot qui tue à la fin.
 - Anti-répétition : ne reprends aucune situation de la liste des épisodes récents.
+- FIL CONDUCTEUR (sketch long, règle n°1 du propriétaire) : UNE SEULE histoire continue, du début à la fin. Écris d'abord le champ "fil" :
+  le pitch en une phrase (qui veut quoi, quel est l'obstacle), puis les étapes numérotées de l'histoire.
+  · Mêmes personnages, même situation, même enjeu dans toutes les scènes ; aucun sujet nouveau en route.
+  · Chaque scène est la CONSÉQUENCE directe de la précédente (« à cause de ça… donc… ») et fait monter le même problème d'un cran.
+  · Pas de liste de vannes indépendantes : les blagues servent l'histoire, chaque réplique fait avancer l'action ou la relation.
+  · Un détail planté au début (objet, phrase, mensonge) revient à la fin ; la chute finale RÉSOUT ou retourne l'enjeu de départ.
+  · Logique interne juste : les personnages se souviennent de ce qui a été dit, rien ne contredit une scène précédente, les lieux et les moments s'enchaînent logiquement (le carton annonce clairement le saut de temps ou de lieu).
+  · Limpide : quelqu'un qui découvre la vidéo comprend en une seconde qui parle, où on est et ce qui se passe, à chaque scène.
+- DICTION : phrases simples et bien articulables, pas de mots collés ni d'abréviations illisibles à l'oral dans "d" (« je sais pas » ou « j'sais pas », jamais « chais pas »), au plus 2 indications de jeu par réplique.
 - "titre_accroche" : le titre affiché en haut de l'écran, au format « POV : … » ou « Quand … » (40 caractères max).
 
 {style}"""
@@ -232,7 +244,7 @@ def _schema(props, requis):
 OUTIL = {"name": "rendre_sketch", "description": "Rendre le sketch complet (livrables A à F).",
          "input_schema": _schema({
              "sujet": {"type": "string"}, "ecran": {"type": "string"}, "titre_accroche": {"type": "string"},
-             "verite": {"type": "string"}, "concept": {"type": "string"}, "format": {"type": "string"}, "angle": {"type": "string"}, "resume_factuel": {"type": "string"},
+             "fil": {"type": "string"}, "verite": {"type": "string"}, "concept": {"type": "string"}, "format": {"type": "string"}, "angle": {"type": "string"}, "resume_factuel": {"type": "string"},
              "faits_reels": {"type": "array", "items": {"type": "string"}}, "inventions": {"type": "array", "items": {"type": "string"}},
              "decoupage": {"type": "array", "items": _schema({"scene": {"type": "string"}, "repliques": {"type": "array", "items": {"type": "integer"}},
                                                               "decor": {"type": "string"}, "titre": {"type": "string"}, "effet": {"type": "string"},
@@ -267,6 +279,8 @@ OUTIL_IDEES = {"name": "proposer_idees", "description": "Situations du quotidien
 OUTIL_NOTE = {"name": "noter_sketch", "description": "Note qualité sur 100 et critique.",
               "input_schema": _schema({"chute_vraie": {"type": "boolean", "description": "La dernière réplique est-elle une fausse vérité ironique sur le sujet principal ?"},
                                        "metaphore_filee": {"type": "boolean", "description": "Le sketch transpose-t-il le sujet dans un autre univers ou file-t-il une métaphore ?"},
+                                       "continuite": {"type": "array", "items": {"type": "string"}, "description": "Un avis par passage de scène (sketch long) : « scène 1 → 2 : OK » ou le problème et sa correction."},
+                                       "fil_continu": {"type": "boolean", "description": "Une seule histoire continue, cohérente, fluide et limpide, scène après scène ?"},
                                        "critique": {"type": "string", "minLength": 40, "description": "À écrire EN PREMIER : répliques faibles (numéro + pourquoi) et corrections précises."},
                                        "originalite": {"type": "number"}, "punchlines": {"type": "number"}, "rythme": {"type": "number"},
                                        "pertinence": {"type": "number"}, "dialogues": {"type": "number"}, "visuel": {"type": "number"},
@@ -509,6 +523,47 @@ def idees_libres(recents=(), n=6):
         print(f"  idées : réponse inexploitable (champs reçus : {', '.join(sorted(r))[:120]}), nouvelle tentative", flush=True)
     return out[:n]
 
+RELECTURE = """Tu es correcteur professionnel. Voici les textes qui s'afficheront à l'écran (sous-titres d'un dessin animé, titres, cartons).
+Corrige UNIQUEMENT : orthographe, accords, conjugaison, accents (y compris sur les majuscules), ponctuation et typographie françaises
+(espace avant « ! ? : ; », guillemets « », points de suspension …). Ne change AUCUN mot, n'en ajoute pas, n'en retire pas, ne reformule rien :
+le langage oral est voulu (« t'es », « y a », « j'sais pas », « il boit jamais ») et doit rester tel quel. S'il n'y a rien à corriger, recopie à l'identique.
+Textes (un par ligne, numérotés) :
+{textes}
+Rends exactement le même nombre de textes, dans le même ordre, avec l'outil corriger."""
+OUTIL_RELECTURE = {"name": "corriger", "description": "Textes corrigés, même ordre.",
+                   "input_schema": {"type": "object", "properties": {"textes": {"type": "array", "items": {"type": "string"}}}, "required": ["textes"]}}
+
+def _mots_bruts(t): return re.findall(r"\w+", unicodedata.normalize("NFKD", t.lower()).encode("ascii", "ignore").decode())
+
+def relire(client, sk):
+    """Dernière étape : relecture orthographique de tout ce qui s'affiche. Une correction qui change les mots (et ne collerait
+    plus à la voix) est refusée."""
+    if not sk: return sk
+    cibles = [("r", i) for i in range(len(sk["repliques"]))]
+    if sk.get("titre_accroche"): cibles.append(("titre", None))
+    cibles += [("scene", k) for k, sc in enumerate(sk.get("decoupage") or []) if sc.get("titre")]
+    def lire(c):
+        return sk["repliques"][c[1]]["t"] if c[0] == "r" else sk["titre_accroche"] if c[0] == "titre" else sk["decoupage"][c[1]]["titre"]
+    textes = [lire(c) for c in cibles]
+    try:
+        r = _appel(client, None, [{"role": "user", "content": RELECTURE.format(textes="\n".join(f"{i + 1}. {t}" for i, t in enumerate(textes)))}],
+                   OUTIL_RELECTURE, max_tokens=3000)
+        corr = [re.sub(r"^\s*\d+\.\s*", "", str(x)).strip() for x in _liste(r.get("textes"))]
+    except Exception as e:
+        print(f"  relecture impossible ({str(e)[:100]}) : textes gardés tels quels", flush=True); return sk
+    if len(corr) != len(textes): print("  relecture : réponse incomplète, ignorée", flush=True); return sk
+    n = 0
+    for c, avant, apres in zip(cibles, textes, corr):
+        if not apres or apres == avant: continue
+        a, b = _mots_bruts(avant), _mots_bruts(apres)
+        if abs(len(a) - len(b)) > 1 or difflib.SequenceMatcher(None, a, b).ratio() < 0.8: continue   # trop différent : refusé
+        if c[0] == "r": sk["repliques"][c[1]]["t"] = apres
+        elif c[0] == "titre": sk["titre_accroche"] = apres
+        else: sk["decoupage"][c[1]]["titre"] = apres
+        n += 1
+    print(f"  relecture des sous-titres : {n} correction(s)", flush=True)
+    return sk
+
 def _bloquant(e):
     """Erreurs qui ne se règlent pas en réessayant : crédit épuisé, clé invalide, accès refusé."""
     t = str(e).lower()
@@ -580,7 +635,7 @@ def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=(), li
                 continue
             if not sk["sources"]:                                            # le modèle n'a pas recopié d'URL exacte : on cite les articles RSS fournis
                 sk["sources"] = [t["lien"] for t in titres if t.get("lien")][:3]
-            texte = (f"Vérité visée : {sk.get('verite', '')}\nConcept : {_court(brut.get('concept'), 600)}\nFormat : {_court(brut.get('format'), 300)}\n"
+            texte = ((f"Fil conducteur annoncé : {_court(brut.get('fil'), 800)}\n" if libre and not MINI else "") + f"Vérité visée : {sk.get('verite', '')}\nConcept : {_court(brut.get('concept'), 600)}\nFormat : {_court(brut.get('format'), 300)}\n"
                      "Découpage : " + " | ".join(f"[{d['lieu'] or '?'}] {d['scene']}" for d in sk["decoupage"])[:1500] + "\n" +
                      (f"Plan gag (réplique {sk['gag']['replique']}) : {sk['gag']['prompt'][:300]}\n" if sk.get("gag") else "") +
                      "Répliques :\n" + "\n".join(f"{i}. {r['p']} : {r['t']}" for i, r in enumerate(sk["repliques"])))
@@ -594,15 +649,20 @@ def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=(), li
                         print("  note totale absente : on redemande au relecteur", flush=True)
                 else: raise ValueError("note totale absente deux fois")
                 for cle, val, quoi in (("chute_vraie", False, "chute qui n'est pas une fausse vérité ironique sur le sujet"),
-                                       ("metaphore_filee", True, "métaphore filée")):
-                    if nq.get(cle) is val and note > 70:
+                                       ("metaphore_filee", True, "métaphore filée"),
+                                       ("fil_continu", False if (libre and not MINI) else None, "histoire sans fil conducteur ou passage de scène incohérent")):
+                    if val is not None and nq.get(cle) is val and note > 70:
                         print(f"  {quoi} : note plafonnée à 70 (au lieu de {note:.0f})", flush=True); note = 70.0
-                critique = str(nq.get("critique") or "").strip() or nq.get("_texte", "") or \
+                suivi = [str(x) for x in _liste(nq.get("continuite")) if str(x).strip()]
+                if libre and not MINI and suivi:
+                    print("  continuité : " + " | ".join(x[:90] for x in suivi), flush=True)
+                critique = (("CONTINUITÉ ENTRE LES SCÈNES :\n" + "\n".join("- " + x for x in suivi) + "\n\n") if (libre and not MINI and suivi) else "") + \
+                    (str(nq.get("critique") or "").strip() or nq.get("_texte", "")) or \
                     " ; ".join(f"{k} {nq[k]}" for k in ("originalite", "punchlines", "rythme", "pertinence", "dialogues", "visuel", "chute") if k in nq)
             except Exception as e:
                 note, critique = 0.0, f"notation impossible ({e})"
             print(f"  version {tour + 1} : {note:.0f}/100, {len(sk['repliques'])} répliques, {n_mots} mots", flush=True)
-            sk["fiche"] = {k2: brut.get(k2) for k2 in ("concept", "format", "angle", "resume_factuel", "faits_reels", "inventions") if isinstance(brut, dict)}
+            sk["fiche"] = {k2: brut.get(k2) for k2 in ("fil", "concept", "format", "angle", "resume_factuel", "faits_reels", "inventions") if isinstance(brut, dict)}
             sk["fiche"]["decoupage"] = sk["decoupage"]
             sk["fiche"]["titres_sujet"] = [t["titre"] for t in titres[:6]]          # articles du sujet réellement choisi (anti-répétition)
             for k2 in ("concept", "format", "angle"):                       # la note F vient du relecteur, jamais de l'auteur
@@ -610,7 +670,7 @@ def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=(), li
                     sk["fiche"][k2] = re.sub(r"\s*(Note qualit[ée]|Décision|Decision)\b.*$", "", sk["fiche"][k2], flags=re.S | re.I).strip()
             sk["fiche"].update(verification_web=USAGE["recherches_web"] > 0, note=note, critique=critique[:1500], decision="prêt pour production" if note >= SEUIL else "à retravailler")
             if meilleur is None or note > meilleur["fiche"]["note"]: meilleur = sk
-            if note >= SEUIL: return sk
+            if note >= SEUIL: return relire(client, sk)
             if record is None or note > record[1]: record = (brut, note, critique)
             elif tour: print(f"  pas de progrès : on repart de la meilleure version ({record[1]:.0f}/100)", flush=True)
             b_brut, b_note, b_crit = record                                 # on retouche toujours la meilleure version, jamais une moins bonne
@@ -621,4 +681,4 @@ def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=(), li
         print(f"  sujet trop faible après réécritures{' : on essaie un autre sujet' if rang == 0 and len(ordre) > 1 else ''}", flush=True)
     if meilleur is None: raise RuntimeError(f"aucun sketch exploitable : {derniere}")
     print(f"  meilleure version retenue : {meilleur['fiche']['note']:.0f}/100 (sous l'objectif de {SEUIL} : à retravailler, pas de publication automatique)", flush=True)
-    return meilleur
+    return relire(client, meilleur)

@@ -86,6 +86,21 @@ def carte(txt):
         d.text(((W - w) / 2, y0 + k * hl), l, font=F_CARTE, fill=(255, 255, 255), stroke_width=12, stroke_fill=(20, 20, 24))
     return np.array(img)
 
+F_VO = ImageFont.truetype(FB, 84)
+def carte_titre(txt):
+    """Titre lu par la voix off au début : gros texte noir dans un cadre blanc, au centre de l'écran."""
+    d0 = ImageDraw.Draw(Image.new("RGB", (1, 1))); mots, lignes, cur = str(txt).split(), [], ""
+    for m in mots:
+        if d0.textlength((cur + " " + m).strip(), font=F_VO) > 860: lignes.append(cur); cur = m
+        else: cur = (cur + " " + m).strip()
+    lignes.append(cur); lignes = lignes[:4]; hl = 104
+    larg = int(max(d0.textlength(l, font=F_VO) for l in lignes)) + 90
+    img = Image.new("RGBA", (larg, hl * len(lignes) + 60), (0, 0, 0, 0)); d = ImageDraw.Draw(img)
+    d.rounded_rectangle((0, 0, larg - 1, img.height - 1), 34, fill=(255, 255, 255, 250), outline=(20, 20, 24, 255), width=6)
+    for k, l in enumerate(lignes):
+        w = d.textlength(l, font=F_VO); d.text(((larg - w) / 2, 26 + k * hl), l, font=F_VO, fill=(20, 20, 24))
+    return np.array(img).astype(np.float32)
+
 def decor_uni(k):
     img = np.zeros((H, W, 3), np.uint8); img[:] = PASTELS[k % len(PASTELS)]; return img
 
@@ -102,7 +117,7 @@ def _pluie(img, tm, t0, graine):
 # ------------------------------------------------------------------ rendu
 def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False):
     tmp = tempfile.mkdtemp(); reps = sk["repliques"]; decors = decors or {}; rng = np.random.default_rng(11)
-    roles = sorted({r["p"] for r in reps}, key=lambda r: [x["p"] for x in reps].index(r))
+    roles = sorted({r["p"] for r in reps if r["p"] != "narrateur"}, key=lambda r: [x["p"] for x in reps].index(r))   # la voix off n'est pas dessinée
     # scènes : découpage de l'auteur (sinon une seule scène)
     dec = [sc for sc in (sk.get("decoupage") or []) if sc.get("repliques")]
     scene_de = {}
@@ -112,6 +127,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
     t = 0.15; ph = []; transitions = []                                 # (début, fin, type, scène d'arrivée)
     for i, (r, a) in enumerate(zip(reps, audios)):
         niv, lv = enveloppe(a); dur = len(a) / SR; att = float(r.get("attente", 0)); t += att
+        lv = np.convolve(np.pad(lv, 2, mode="edge"), [0.1, 0.2, 0.4, 0.2, 0.1], "valid")         # bouche lissée : pas de clignotement
         sc = scene_de.get(i, ph[-1]["scene"] if ph else 0)
         if ph and sc != ph[-1]["scene"]:                                   # changement de scène : carton ou panoramique rapide
             # vidéo longue : chaque nouveau gag est TOUJOURS annoncé par un carton plein écran (« Plus tard… » par défaut)
@@ -129,7 +145,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
     places = {}
     for q in ph: places.setdefault(q["scene"], [])
     for q in ph:
-        if q["p"] not in places[q["scene"]]: places[q["scene"]].append(q["p"])
+        if q["p"] != "narrateur" and q["p"] not in places[q["scene"]]: places[q["scene"]].append(q["p"])
     for k in places: places[k].sort(key=roles.index)                     # chacun garde son côté d'une scène à l'autre
     def position(scene, role):
         ps = places[scene]; n = len(ps); k = ps.index(role) if role in ps else 0
@@ -139,11 +155,13 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
     # caméra : plan large au début de chaque scène, puis plans serrés alternés sur celui qui parle (comme sur TikTok)
     for j, q in enumerate(ph):
         nouvelle = j == 0 or ph[j - 1]["scene"] != q["scene"]
-        q["cam"] = "large" if (nouvelle or len(places[q["scene"]]) == 1 or q["chute"] and j == len(ph) - 1) else "serre"
+        q["cam"] = "large" if (nouvelle or q["p"] == "narrateur" or len(places[q["scene"]]) <= 1 or q["chute"] and j == len(ph) - 1
+                               or (j and ph[j - 1]["p"] == "narrateur")) else "serre"
     # animation des personnages : état par rôle
     clign = {r: sorted(rng.uniform(0.5, total, int(total / 2.6))) for r in roles}
     TITRE_FIXE = titre(sk.get("titre_accroche")) if not mini else None
     TITRES = {k: titre(sc.get("titre")) for k, sc in enumerate(dec) if sc.get("titre")}
+    VOIX_OFF = {q["i"]: carte_titre(reps[q["i"]]["t"]) for q in ph if q["p"] == "narrateur"}
     objets = {}
     print(f"cartoon : durée {total:.1f} s, {len(ph)} répliques, {len(places)} scène(s), personnages {roles}", flush=True)
 
@@ -155,6 +173,8 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         parle = q["p"] == role and q["deb"] <= tm <= q["fin"]
         mien = next((z for z in reversed(ph) if z["p"] == role and z["deb"] - 0.25 <= tm and z["scene"] == scene), None)
         emo = mien["emo"] if (mien and tm <= mien["fin"] + 0.6) else "neutre"
+        # entrée et sortie en douceur de l'émotion (bras) : pas de saut d'une pose à l'autre
+        u_emo = min(_ease((tm - mien["deb"] + 0.15) / 0.35), 1 - _ease((tm - mien["fin"] - 0.25) / 0.4)) if mien else 0.0
         # réaction de celui qui écoute après une chute de l'autre
         prev = next((z for z in reversed(ph) if z["fin"] <= tm and z["p"] != role), None)
         if not parle and prev and prev["chute"] and tm - prev["fin"] < 1.0 and (not mien or mien["fin"] < prev["deb"]):
@@ -166,25 +186,29 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             k = int((tm - q["deb"]) * FPS); lv = float(q["lv"][k]) if 0 <= k < len(q["lv"]) else 0.0
             p["bouche"] = min(1.0, lv * 0.9) if emo != "cri" else 0.55 + 0.45 * min(1, lv)
             if emo == "rire": p["bouche"] = 0.4 + 0.4 * abs(math.sin(tm * 14))
-            p["sq"] = 0.035 * lv + 0.012 * math.sin(tm * 9)
-            p["tilt"] = 6 * math.sin(tm * 2.3 + len(role)) + (8 * math.sin(tm * 15) if emo == "rire" else 0)
+            p["sq"] = 0.03 * lv + 0.008 * math.sin(tm * 7)
+            p["tilt"] = 5 * math.sin(tm * 1.9 + len(role)) + 3 * lv + (8 * math.sin(tm * 15) if emo == "rire" else 0)
+            u_d = (tm - q["deb"]) / 0.3
+            if 0 <= u_d < 1: p["y"] -= 16 * s * math.sin(math.pi * u_d)            # petit élan quand il prend la parole
         else:
             p["bouche"] = 0.0 if emo not in ("choc", "panique") else 0.25
             p["sq"] = 0.012 * math.sin(tm * 2.4 + len(role))                  # respiration
             p["tilt"] = 3 * math.sin(tm * 0.9 + len(role))
+        p["x"] += 7 * s * math.sin(tm * 1.1 + len(role) * 1.7)                # balancement continu : le personnage vit
         if emo == "rire": p["y"] -= abs(math.sin(tm * 12)) * 18 * s
         if emo == "joie": p["y"] -= abs(math.sin(tm * 8)) * 40 * s
         if emo == "soupir": p["sq"] -= 0.05
         # gestes : ceux de l'émotion, sinon gestes de conversation qui changent toutes les ~1,2 s
         if bg is None:
             if parle:
-                g = GESTES[int((tm - q["deb"]) / 1.2 + q["i"]) % len(GESTES)]; u = _ease(((tm - q["deb"]) % 1.2) / 0.25)
-                g0 = GESTES[(int((tm - q["deb"]) / 1.2 + q["i"]) - 1) % len(GESTES)]
+                per = 1.6; k_ = int((tm - q["deb"]) / per + q["i"]); u = _ease(((tm - q["deb"]) % per) / 0.45)
+                g = GESTES[k_ % len(GESTES)]; g0 = GESTES[(k_ - 1) % len(GESTES)] if tm - q["deb"] >= per else ((-18, 8), (18, -8))
                 bg, bd = _mel(g0[0], g[0], u), _mel(g0[1], g[1], u)
+                fin_u = _ease((tm - q["fin"] + 0.3) / 0.3)                     # retour au repos en douceur à la fin de la phrase
+                bg, bd = _mel(bg, (-18, 8), fin_u), _mel(bd, (18, -8), fin_u)
             else: bg, bd = (-18, 8), (18, -8)
         else:
-            dt_ = tm - (mien["deb"] if mien else 0); u = _ease(dt_ / 0.25)
-            bg, bd = _mel((-18, 8), bg, u), _mel((18, -8), bd, u)
+            bg, bd = _mel((-18, 8), bg, u_emo), _mel((18, -8), bd, u_emo)
             if emo == "colere": bg, bd = (bg[0] + 10 * math.sin(tm * 18), bg[1]), (bd[0] - 10 * math.sin(tm * 18), bd[1])
         p["bras_g"], p["bras_d"] = bg, bd
         # regard vers celui qui parle, clignements
@@ -225,15 +249,20 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             fr = np.roll(fr, (int(v * math.sin(tm * 61)), int(v * math.cos(tm * 53))), (0, 1))
         return fr
 
+    def cadre(q):
+        if q["cam"] == "serre" and q["p"] in places[q["scene"]]: return 1.5, position(q["scene"], q["p"])[0], 1130.0
+        return 1.0, W / 2, H / 2
+
     def vue(tm):
         q = actif(tm); sc = q["scene"]
         fond = decors.get(sc)
         if fond is None: fond = decors[sc] = decor_uni(sc)
-        # caméra
-        if q["cam"] == "serre":
-            xh = position(sc, q["p"])[0]; z = 1.5; cx, cy = xh, 1130
-        else:
-            z, cx, cy = 1.0, W / 2, H / 2
+        # caméra : glisse en douceur d'un plan au suivant dans la même scène (pas de coupe sèche)
+        z, cx, cy = cadre(q)
+        j = ph.index(q)
+        if j and ph[j - 1]["scene"] == sc:
+            z0, cx0, cy0 = cadre(ph[j - 1]); u = _ease((tm - (q["deb"] - 0.3)) / 0.45)
+            z, cx, cy = z0 + (z - z0) * u, cx0 + (cx - cx0) * u, cy0 + (cy - cy0) * u
         u0 = min(1, (tm - max(q["deb"] - 0.25, 0)) / 0.3); z *= 1 + 0.04 * (1 - u0) ** 2 + 0.006 * (tm - q["deb"])   # punch-in puis lente dérive
         if q["chute"] and tm > q["fin"] - 0.6: z *= 1 + 0.12 * _ease((tm - q["fin"] + 0.6) / 0.2)
         if q is ph[-1] and tm > q["fin"]: z *= 1 + 0.1 * _ease((tm - q["fin"]) / 0.12)                # punch final
@@ -250,6 +279,10 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         if sce.get("effet") == "pluie_billets":
             t0 = min(z2["deb"] for z2 in ph if z2["scene"] == sc); _pluie(img, tm, t0, sc)
         fr = img.astype(np.float32)
+        if q["p"] == "narrateur" and tm <= q["fin"] + 0.3:                 # voix off d'ouverture : le titre en grand au centre
+            V = VOIX_OFF[q["i"]]; a2 = pop(V, (tm - q["deb"] + 0.2) / 0.3)
+            poser(fr, a2, (W - a2.shape[1]) / 2, H * 0.36 - a2.shape[0] / 2)
+            return np.clip(fr, 0, 255).astype(np.uint8)
         T = TITRES.get(sc) if mini else TITRE_FIXE
         if T is not None:
             t0 = min(z2["deb"] for z2 in ph if z2["scene"] == sc) if mini else 0

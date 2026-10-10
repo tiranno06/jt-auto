@@ -5,7 +5,7 @@
 4. voix (Chatterbox sur Modal, sinon Piper)
 5. plan gag IA (Wan 2.2 sur Modal, facultatif)
 6. rendu studio (moteur/jt.py) ; la publication TikTok est faite ensuite par moteur/publier.py (étape du workflow)"""
-import json, os, sys, datetime
+import json, os, re, sys, datetime
 from zoneinfo import ZoneInfo
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 RACINE = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -94,6 +94,12 @@ def main():
         print(f"Moteur humoristique : {ecrire.USAGE['appels']} appels Claude, {ecrire.USAGE['entree']} jetons lus, {ecrire.USAGE['sortie']} jetons écrits, {ecrire.USAGE['recherches_web']} recherche(s) web", flush=True)
         titres = next((c[0] for c in candidats if c[0][0]["lien"] and c[0][0]["lien"] in sk.get("sources", [])), titres)
     print(f"Sketch : « {sk['sujet']} », {len(sk['repliques'])} répliques", flush=True)
+    accroche_hist = sk["repliques"][0]["t"] if sk.get("repliques") else ""
+    if libre and sk.get("titre_accroche") and os.environ.get("VOIX_OFF", "1") != "0":
+        titre_lu = sk["titre_accroche"].strip()                             # voix off d'ouverture : elle lit le titre « POV : … »
+        sk["repliques"].insert(0, {"p": "narrateur", "t": titre_lu, "d": "[excited] " + re.sub(r"\bPOV\b", "Pi-o-vi", titre_lu)})
+        for sc in sk.get("decoupage") or []: sc["repliques"] = [i + 1 for i in sc.get("repliques", [])]
+        if sk.get("gag"): sk["gag"]["replique"] += 1
     audios, credits_voix, mots = voix.generer(sk["repliques"], jt.VOIX)
     moteur = " + ".join(credits_voix)
     print(f"Voix : {moteur}", flush=True)
@@ -132,7 +138,7 @@ def main():
     fiche = sk.get("fiche", {})
     if fiche: print(f"Qualité : {fiche.get('note', 0):.0f}/100 — {fiche.get('decision')}", flush=True)
     historique.append(dict(date=jour, format=fmt, titre=sk["sujet"], sources=sk["sources"], note=fiche.get("note"), decision=fiche.get("decision"),
-                           accroche=sk["repliques"][0]["t"] if sk.get("repliques") else "", mots=sorted(actu._mots(" ".join(fiche.get("titres_sujet") or [t["titre"] for t in titres])))[:40],
+                           accroche=accroche_hist, mots=sorted(actu._mots(" ".join(fiche.get("titres_sujet") or [t["titre"] for t in titres])))[:40],
                            empreinte=sorted(actu.empreinte(" ".join((fiche.get("titres_sujet") or []) + [sk["sujet"]] + [r["t"] for r in sk.get("repliques", [])]))), voix=moteur, gag=bool(gag), running_gag=sk.get("running_gag", ""), duree=round(duree, 1),
                            fichier=os.path.basename(base) + ".mp4", tag=f"emissions-{jour[:7]}", legende=legende, publie=None))
     json.dump(historique[-200:], open("episodes/historique.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)

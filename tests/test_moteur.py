@@ -427,3 +427,12 @@ class TestRendu(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestSousTitres(unittest.TestCase):
+    def test_groupes_naturels(self):
+        import jt
+        g = jt.groupes("Je sens le « entre 8 h et 18 h ».")
+        self.assertTrue(all(len(x.split()) <= 5 for x in g))
+        self.assertFalse(any(x.split()[-1].lower() in jt.PETITS for x in g[:-1]))
+        self.assertIn("8 h", " ".join(g))
