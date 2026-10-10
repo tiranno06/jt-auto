@@ -16,6 +16,7 @@ from jt import minutage, carton, son, vers_mix, enveloppe, poser, pop, W, H, FPS
 
 CAP_Y = 1700
 MINUTAGE = []                                                              # (début, fin, texte, qui) de la dernière vidéo : contrôle qualité
+COUVERTURE_MS = [2500]                                                     # instant de l'image de couverture (millisecondes)
 PASTELS = [(246, 228, 214), (226, 236, 246), (236, 246, 226), (248, 232, 240), (250, 242, 214)]
 
 # ------------------------------------------------------------------ émotions lues dans les indications de jeu
@@ -68,6 +69,29 @@ def geste_texte(texte, emo):
     return None
 
 def _ease(u): u = min(1, max(0, u)); return u * u * (3 - 2 * u)
+
+def viseme(c):
+    """Forme de bouche d'une lettre (français simplifié)."""
+    c = c.lower()
+    if c in "aàâ": return "A"
+    if c in "eéèêëœ": return "E"
+    if c in "iîïyj": return "I"
+    if c in "oôö": return "O"
+    if c in "uùûüwq": return "U"
+    if c in "mbp": return "M"
+    if c in "fv": return "F"
+    return None
+
+def viseme_a(groupes, tm):
+    """Lettre en cours de prononciation : position dans le groupe de mots affiché à cet instant."""
+    g = next((x for x in groupes if x[1] <= tm < x[2]), None)
+    if not g: return None
+    lettres = [c for c in g[0] if c.isalpha()]
+    if not lettres: return None
+    k = min(len(lettres) - 1, int((tm - g[1]) / max(0.05, g[2] - g[1]) * len(lettres)))
+    for j in (k, k + 1, k - 1):                                            # consonne neutre : la voyelle voisine donne la forme
+        if 0 <= j < len(lettres) and viseme(lettres[j]): return viseme(lettres[j])
+    return None
 
 def _mel(a, b, u):
     if a is None or b is None: return b if u > 0.5 else a
@@ -173,7 +197,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
                  groupes=minutage(r["t"], a, t, (mots or [None] * len(reps))[i]))
         ph.append(q)
         vif = emo_q in ("cri", "colere", "panique")                         # dispute : les répliques s'enchaînent sans blanc
-        t += dur + (0.5 if q["chute"] and i < len(reps) - 1 else 0.05 if vif else 0.16)
+        t += dur + (0.5 if q["chute"] and i < len(reps) - 1 else 0.05 if (vif or r["p"] == "narrateur") else 0.16)
     FIN = ph[-1]["fin"]
     GEL = FIN + 1.15                                                       # arrêt sur image après la réaction finale
     total = GEL + 1.1
@@ -203,6 +227,10 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
                                or (j and ph[j - 1]["p"] == "narrateur")) else "serre"
     # animation des personnages : état par rôle
     clign = {r: sorted(rng.uniform(0.5, total, int(total / 2.6))) for r in roles}
+    DEBUT_SCENE = {}
+    for q in ph: DEBUT_SCENE.setdefault(q["scene"], q["deb"] - 0.1)
+    COUVERTURE_MS[0] = int(max(0.5, ph[-1]["deb"] + 0.4) * 1000)           # image de couverture TikTok : la chute finale
+    SANS_ENTREE = {ph[0]["scene"]}                                         # 1re scène : déjà là dès la première image (l'accroche compte)
     TITRE_FIXE = titre(sk.get("titre_accroche")) if not mini else None
     FILIGRANE = marque.filigrane(52)
     TITRES = {k: titre(sc.get("titre")) for k, sc in enumerate(dec) if sc.get("titre")}
@@ -242,6 +270,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             k = int((tm - q["deb"]) * FPS); lv = float(q["lv"][k]) if 0 <= k < len(q["lv"]) else 0.0
             p["bouche"] = min(1.0, lv * 0.9) if emo != "cri" else 0.55 + 0.45 * min(1, lv)
             if emo == "rire": p["bouche"] = 0.4 + 0.4 * abs(math.sin(tm * 14))
+            elif emo != "cri": p["viseme"] = viseme_a(q["groupes"], tm)
             p["sq"] = 0.03 * lv + 0.008 * math.sin(tm * 7)
             if emo == "neutre" and lv > 0.72: p["sourcils"] = "hausses"         # sourcils qui appuient les mots forts
             p["tilt"] = 5 * math.sin(tm * 1.9 + len(role)) + 3 * lv + (8 * math.sin(tm * 15) if emo == "rire" else 0)
@@ -252,6 +281,13 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             p["sq"] = 0.012 * math.sin(tm * 2.4 + len(role))                  # respiration
             p["tilt"] = 3 * math.sin(tm * 0.9 + len(role))
         p["x"] += 7 * s * math.sin(tm * 1.1 + len(role) * 1.7)                # balancement continu : le personnage vit
+        t_sc = DEBUT_SCENE.get(scene)                                      # entrée en scène : il arrive du bord en trottinant
+        if t_sc is not None and scene not in SANS_ENTREE and tm < t_sc + 0.75:
+            u_e = _ease((tm - t_sc + 0.05) / 0.7); bord = -260 if x < W / 2 else W + 260
+            p["x"] = bord + (p["x"] - bord) * u_e; p["y"] -= abs(math.sin(tm * 16)) * 22 * s * (1 - u_e)
+        if parle and q["emo"] in ("colere", "cri"):                         # il s'avance vers celui qu'il engueule
+            cible = next((r2 for r2 in places[scene] if r2 != role), None)
+            if cible: p["x"] += (1 if position(scene, cible)[0] > x else -1) * 30 * s * _ease((tm - q["deb"]) / 0.3)
         if emo == "rire": p["y"] -= abs(math.sin(tm * 12)) * 18 * s
         if emo == "joie": p["y"] -= abs(math.sin(tm * 8)) * 40 * s
         if emo == "soupir": p["sq"] -= 0.05

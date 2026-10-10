@@ -809,6 +809,11 @@ def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=(), li
                     .replace("{serie}", SERIE_BLOC.replace("{serie_txt}", serie) + "\n" if serie else "")
                     .replace("{accroche}", ACCROCHE_BLOC if os.environ.get("ACCROCHE", "0") == "1" else ""))
         if stats: systeme += "\n" + stats
+        try:
+            import decors as _dec; lieux = _dec.lieux_connus()
+        except Exception: lieux = []
+        if lieux: systeme += ("\nLIEUX RÉCURRENTS DE LA CHAÎNE (décors déjà dessinés) : si l'histoire se passe dans un de ces lieux, recopie EXACTEMENT son texte dans \"decor\" "
+                              "(le public reconnaît l'appart de Jojo, la cuisine de la coloc…) :\n" + "\n".join("- " + l for l in lieux) + "\n")
         ex_ = exemples_avis()
         if ex_: systeme += "\n" + ex_
     top = len(candidats) if libre else TOP                                # sketch libre : toutes les idées sont éligibles

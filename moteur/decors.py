@@ -1,10 +1,25 @@
 """Client des décors du moteur cartoon : demande à Modal (Stable Diffusion XL) un décor par scène et le met au format 1080x1920.
 En cas de souci (Modal indisponible, modèle inaccessible), renvoie {} : le moteur cartoon utilise alors des fonds unis pastel."""
-import io
+import hashlib, io, os, re
 import numpy as np, cv2
 from PIL import Image
 
 W, H = 1080, 1920
+BANQUE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "decors")   # lieux déjà dessinés, réutilisés tels quels
+
+def _cle(d):
+    return hashlib.sha1(re.sub(r"[^a-z0-9]+", " ", d.lower()).strip().encode()).hexdigest()[:16]
+
+def lieux_connus(n=12):
+    """Décors déjà dans la banque (pour que l'auteur réutilise exactement les mêmes lieux)."""
+    try: idx = [l.rstrip("\n").split("\t", 1) for l in open(os.path.join(BANQUE, "index.tsv"), encoding="utf-8")]
+    except OSError: return []
+    return [d for _, d in idx[-n:]]
+
+def _ranger(d, im):
+    os.makedirs(BANQUE, exist_ok=True); k = _cle(d)
+    cv2.imwrite(os.path.join(BANQUE, k + ".jpg"), cv2.cvtColor(im, cv2.COLOR_RGB2BGR), [cv2.IMWRITE_JPEG_QUALITY, 88])
+    with open(os.path.join(BANQUE, "index.tsv"), "a", encoding="utf-8") as f: f.write(f"{k}\t{d}\n")
 
 def _format(png):
     im = np.array(Image.open(io.BytesIO(png)).convert("RGB"))
@@ -26,16 +41,28 @@ def generer(decoupage, graine=7, delai=1200):              # 1re fois : téléch
                 if sc.get("decor") and sc["decor"].strip().lower() not in ("plain", "uni", "")]
     if not demandes: return {}
     uniques = list(dict.fromkeys(d for _, d in demandes))                 # même lieu = même décor, généré une seule fois
+    out, deja = {}, {}
+    if os.environ.get("REFAIRE", "").endswith("|decors"): pass              # bouton « nouveaux décors » : on ne reprend pas la banque
+    else:
+        for d in uniques:
+            f_ = os.path.join(BANQUE, _cle(d) + ".jpg")
+            if os.path.exists(f_): deja[d] = cv2.cvtColor(cv2.imread(f_), cv2.COLOR_BGR2RGB)
+    for k, d in demandes:
+        if d in deja: out[k] = deja[d]; print(f"  décor {k} (lieu déjà connu) : {d[:70]}", flush=True)
+    uniques = [d for d in uniques if d not in deja]
+    if not uniques: return out
     try:
         import modal
         f = modal.Cls.from_name("jt-decor", "Decor")().generer.spawn(uniques, graine)
         pngs = dict(zip(uniques, f.get(timeout=delai)))
     except Exception as e:
-        print(f"Décors indisponibles ({type(e).__name__} {str(e)[:150]}) : fonds unis.", flush=True); return {}
-    out = {}
+        print(f"Décors indisponibles ({type(e).__name__} {str(e)[:150]}) : fonds unis.", flush=True); return out
+    faits = set()
     for k, d in demandes:
         png = pngs.get(d)
         if png:
-            try: out[k] = _format(png); print(f"  décor {k} : {d[:70]}", flush=True)
+            try:
+                out[k] = _format(png); print(f"  décor {k} : {d[:70]}", flush=True)
+                if d not in faits: _ranger(d, out[k]); faits.add(d)
             except Exception as e: print(f"  décor {k} illisible : {e}", flush=True)
     return out

@@ -42,6 +42,16 @@ import actu, ecrire, voix, jt, serie, stats
 
 SR = 22050
 
+def accelerer(a, f):
+    """Débit accéléré (même hauteur de voix)."""
+    import subprocess, tempfile, wave, numpy as np
+    tmp = tempfile.mkdtemp()
+    with wave.open(f"{tmp}/a.wav", "wb") as w:
+        w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes((np.clip(a, -1, 1) * 32767).astype(np.int16).tobytes())
+    r = subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", f"{tmp}/a.wav", "-af", f"atempo={f:.3f}", f"{tmp}/b.wav"])
+    if r.returncode: return a
+    with wave.open(f"{tmp}/b.wav") as w: return np.frombuffer(w.readframes(w.getnframes()), np.int16).astype(np.float32) / 32768
+
 def resserrer(audios, sk, cible=None):
     """Durée maximale (réglage « courte » : 30 s) : si les voix dépassent, on accélère légèrement le débit (jusqu'à +18 %)."""
     import subprocess, tempfile, wave, numpy as np
@@ -169,6 +179,10 @@ def main():
     print(f"Voix : {moteur}", flush=True)
     avant = sum(len(a) for a in audios)
     audios = resserrer(audios, sk)
+    for i_, r_ in enumerate(sk["repliques"][:2]):                         # voix off du titre plus enlevée : on entre vite dans l'action
+        if r_["p"] == "narrateur" and audios[i_] is not None:
+            audios[i_] = accelerer(audios[i_], 1.15)
+            if mots and mots[i_]: mots[i_] = [(m, d / 1.15, e / 1.15) for m, d, e in mots[i_]]
     if mots and sum(len(a) for a in audios) != avant:                         # débit accéléré : on recale les instants des mots
         f = avant / max(1, sum(len(a) for a in audios))
         mots = [[(m, d / f, e / f) for m, d, e in (x or [])] or None for x in mots]
@@ -220,6 +234,11 @@ def main():
         if ANCIEN and ANCIEN.get("manuel"): historique[-1]["manuel"] = True
     if AUTO: historique[-1]["auto"] = True
     historique[-1]["couts"] = couts(); print(f"Dépenses : {historique[-1]['couts']}", flush=True)
+    if libre and duree:
+        try:
+            import cartoon as _c; historique[-1]["couverture_ms"] = _c.COUVERTURE_MS[0]
+        except Exception: pass
+    if sk.get("titre_accroche"): historique[-1]["titre_affiche"] = sk["titre_accroche"]
     os.makedirs("episodes/sketchs", exist_ok=True)                         # le sketch de chaque vidéo : « Refaire », exemples 👍
     json.dump(sk, open(f"episodes/sketchs/{os.path.basename(base)}.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     json.dump(historique[-200:], open("episodes/historique.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)

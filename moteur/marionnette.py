@@ -153,6 +153,18 @@ def _visage(img, t, rx, ry, s, p, P):
         for sg in (-1, 1): _ellipse(img, R(cx + sg * 88 * s, cy + 46 * s), (20 * s, 11 * s), 0, (245, 170, 170))
     # bouche
     mx, my = R(cx, cy + 64 * s); o = float(np.clip(p["bouche"], 0, 1)); f = p["forme"]
+    v = p.get("viseme")
+    if v and f not in ("cri", "sourire") and o > 0.06:                   # bouche calée sur le son prononcé (syllabe par syllabe)
+        if v == "M":                                                       # m, b, p : lèvres fermées
+            _ligne(img, (mx - 18 * s, my + 2 * s), (mx + 18 * s, my + 2 * s), TRAIT, 7 * s); return
+        if v == "F":                                                       # f, v : lèvre sur les dents
+            _ellipse(img, (mx, my + 6 * s), (24 * s, 9 * s), 0, TRAIT)
+            _poly(img, [(mx - 15 * s, my), (mx + 15 * s, my), (mx + 15 * s, my + 6 * s), (mx - 15 * s, my + 6 * s)], BLANC); return
+        w, h = {"A": (30, 30), "E": (38, 14), "I": (34, 9), "O": (19, 24), "U": (12, 14)}.get(v, (28, 22))
+        w, h = w * s * (0.75 + 0.35 * o), h * s * (0.45 + 0.75 * o)
+        _ellipse(img, (mx, my + h * 0.45), (w, h), 0, TRAIT)
+        if h > 13 * s: _ellipse(img, (mx, my + h * 0.95), (w * 0.55, h * 0.35), 0, (220, 80, 90))
+        return
     if f == "cri" or (o > 0.75 and f != "sourire"):
         w, h = 34 * s * (0.8 + 0.5 * o), 30 * s * (0.6 + 1.0 * o)
         _ellipse(img, (mx, my + h * 0.3), (w, h), 0, TRAIT); _ellipse(img, (mx, my + h * 0.75), (w * 0.6, h * 0.4), 0, (220, 80, 90))
