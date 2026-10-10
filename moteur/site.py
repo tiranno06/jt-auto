@@ -34,8 +34,9 @@ def construire():
         if not recuperer(e, dest): continue
         poster = e["fichier"].replace(".mp4", ".jpg"); affiche(dest, os.path.join(SITE, "videos", poster))
         liste.append(dict(titre=e.get("titre", ""), date=e.get("date", ""), fichier=e["fichier"], poster=poster,
-                          legende=e.get("legende", ""), publie=e.get("publie")))
-    nom = os.environ.get("NOM_EMISSION") or "L'info en caoutchouc"
+                          legende=e.get("legende", ""), publie=e.get("publie"), vues=e.get("vues")))
+    import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import marque
+    nom = marque.NOM                                                       # nom de la chaîne (le JT garde son propre nom)
     conf = {"depot": os.environ.get("GITHUB_REPOSITORY", ""), "branche": os.environ.get("GITHUB_REF_NAME") or "main"}
     page = (PAGE.replace("__NOM__", html.escape(nom)).replace("__CONF__", json.dumps(conf))
             .replace("__DATA__", json.dumps(liste, ensure_ascii=False).replace("</", "<\\/")))
@@ -46,25 +47,18 @@ def construire():
 
 # ------------------------------------------------------------------ application installable (PWA)
 def icone(taille, marge=0.0):
-    """Icône de l'appli : fond rouge JT, « JT » blanc et petit point « direct » jaune."""
-    from PIL import Image, ImageDraw, ImageFont
-    S = 4; T = taille * S; img = Image.new("RGB", (T, T), (227, 32, 58) if marge else (14, 15, 23)); d = ImageDraw.Draw(img)
-    m = int(T * marge); r = int((T - 2 * m) * 0.22)
-    d.rounded_rectangle((m, m, T - m, T - m), r, fill=(227, 32, 58))
-    f = ImageFont.truetype(os.path.join(RACINE, "polices", "Poppins-Bold.ttf"), int((T - 2 * m) * 0.46))
-    w = d.textlength("JT", font=f); d.text(((T - w) / 2, T * 0.5 - (T - 2 * m) * 0.36), "JT", font=f, fill=(255, 255, 255))
-    c = int((T - 2 * m) * 0.075); cx, cy = T - m - int((T - 2 * m) * 0.2), m + int((T - 2 * m) * 0.2)
-    d.ellipse((cx - c, cy - c, cx + c, cy + c), fill=(255, 214, 40))
-    return img.resize((taille, taille), Image.LANCZOS)
+    """Icône de l'appli = logo de la chaîne (tête de Jojo en plein petit drame, fond jaune à rayons)."""
+    import marque
+    return marque.logo(taille, marge=marge)
 
 def application(nom):
     for t in (192, 512):
         icone(t).save(os.path.join(SITE, f"icone-{t}.png"))
         icone(t, marge=0.1).save(os.path.join(SITE, f"icone-{t}-maskable.png"))
     icone(180).save(os.path.join(SITE, "apple-touch-icon.png"))
-    manifeste = {"name": f"{nom} — régie", "short_name": "Régie JT", "lang": "fr", "start_url": "./", "scope": "./", "id": "./",
-                 "display": "standalone", "orientation": "portrait", "background_color": "#0e0f17", "theme_color": "#0e0f17",
-                 "description": "Vérifier et publier les émissions du robot sur TikTok.",
+    manifeste = {"name": f"{nom} — régie", "short_name": nom, "lang": "fr", "start_url": "./", "scope": "./", "id": "./",
+                 "display": "standalone", "orientation": "portrait", "background_color": "#0e0f17", "theme_color": "#ffd028",
+                 "description": "Vérifier et publier les vidéos Petits.Dramas sur TikTok.",
                  "icons": [{"src": f"icone-{t}.png", "sizes": f"{t}x{t}", "type": "image/png", "purpose": "any"} for t in (192, 512)] +
                           [{"src": f"icone-{t}-maskable.png", "sizes": f"{t}x{t}", "type": "image/png", "purpose": "maskable"} for t in (192, 512)]}
     json.dump(manifeste, open(os.path.join(SITE, "manifest.webmanifest"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
@@ -72,7 +66,7 @@ def application(nom):
 
 # Service worker : l'appli s'ouvre même hors connexion (dernière version de la page), sans jamais mettre en cache
 # les vidéos (trop lourdes) ni les appels à GitHub.
-SW = r"""const CACHE = "regie-v5";
+SW = r"""const CACHE = "regie-v6";
 const COQUILLE = ["./", "manifest.webmanifest", "icone-192.png", "icone-512.png"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(COQUILLE))); self.skipWaiting(); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(k => Promise.all(k.filter(x => x !== CACHE).map(x => caches.delete(x))))); self.clients.claim(); });
@@ -90,7 +84,7 @@ PAGE = r"""<!doctype html>
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#0e0f17"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes">
 <link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icone-192.png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
-<title>__NOM__ — régie</title>
+<title>__NOM__ — régie</title><meta name="apple-mobile-web-app-title" content="__NOM__">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
 <style>
@@ -108,7 +102,7 @@ main{max-width:560px;margin:0 auto;padding:8px 16px 260px}
 .inter.on{background:var(--vert)}.inter.on::after{left:32px}.inter:disabled{opacity:.45;cursor:wait}
 details{margin-top:10px;font-size:13px;color:var(--doux)}summary{cursor:pointer;color:var(--bleu)}
 .jeton{display:flex;gap:8px;margin-top:8px}
-input{flex:1;min-width:0;font:inherit;font-size:14px;padding:10px;border-radius:10px;border:1px solid var(--ligne);background:#0e0f17;color:var(--texte)}
+input,textarea{flex:1;min-width:0;font:inherit;font-size:14px;padding:10px;border-radius:10px;border:1px solid var(--ligne);background:#0e0f17;color:var(--texte)}
 .carte{display:flex;gap:12px;background:var(--carte);border:2px solid var(--ligne);border-radius:16px;padding:10px;margin:10px 0;cursor:pointer;transition:border-color .15s,transform .1s}
 .carte:active{transform:scale(.99)}.carte.choisie{border-color:var(--jaune)}
 .carte{position:relative}.croix{position:absolute;top:8px;right:8px;width:34px;height:34px;border-radius:50%;border:none;background:rgba(0,0,0,.35);color:#fff;font-size:18px;line-height:34px;cursor:pointer;padding:0}
@@ -158,12 +152,13 @@ label .jeton{margin-top:6px}
   #barre .int{width:100%}
   #barre video{max-height:62vh}
 }
+textarea{resize:vertical}
 video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#000;display:none}
 #cadreVideo{position:relative}
 #fermer{display:none;position:absolute;top:8px;right:8px;width:40px;height:40px;padding:0;border-radius:50%;font-size:20px;font-weight:700;line-height:40px;background:rgba(0,0,0,.65);color:#fff;border:1px solid rgba(255,255,255,.35);z-index:2}
 #apercu[style*="block"]+#fermer{display:block}
 </style></head><body data-onglet="videos">
-<header><h1>__NOM__</h1><div class="sous">Régie du robot · vidéos de la plus récente à la plus ancienne</div>
+<header><h1><img src="icone-192.png" alt="" style="width:44px;height:44px;border-radius:12px;vertical-align:-10px;margin-right:10px">__NOM__</h1><div class="sous">Régie de la chaîne · vidéos de la plus récente à la plus ancienne</div>
 <button id="installer" style="display:none;margin-top:10px;padding:9px 16px;font-size:14px;font-weight:700;background:var(--jaune);color:#111">📲 Installer l'application</button></header>
 <nav class="onglets"><button class="onglet actif" data-o="videos">🎬 Vidéos</button><button class="onglet" data-o="config">⚙️ Réglages</button></nav>
 <main>
@@ -199,12 +194,38 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
   <section class="panneau"><h2>📅 Planning</h2>
     <label>Rythme des émissions<select data-var="FREQUENCE" data-def="1"><option value="2x">Deux par jour (12 h + heure choisie, conseillé avec le cycle)</option><option value="1">Une par jour</option><option value="2">Un jour sur deux</option><option value="3">Un jour sur trois</option><option value="0">⏸ Pause (le robot ne produit plus)</option></select></label>
     <label>Heure de fabrication (heure de Paris)<select data-var="HEURE" data-def="17" id="selHeure"></select></label>
-    <p class="note">La vidéo est prête environ 20 à 40 minutes après cette heure. 17 h (recommandé) = publiée pour le pic d'audience de 18 h à 21 h.</p>
+    <p class="note">La vidéo est prête environ 20 à 40 minutes après cette heure. 17 h = publiée pour le pic d'audience de 18 h à 21 h. « Automatique » : le robot choisit l'heure d'après les vues de vos vidéos (17 h tant qu'il y a moins de 8 vidéos).</p>
   </section>
   <section class="panneau"><h2>✍️ Écriture</h2>
     <label>Exigence (note minimale pour publier automatiquement)<select data-var="SEUIL_QUALITE" data-def="90"><option value="95">95/100 (très rare)</option><option value="90">90/100 (recommandé)</option><option value="85">85/100</option><option value="80">80/100</option><option value="75">75/100</option></select></label>
     <label>Auteur (modèle Claude)<select data-var="MODELE_CLAUDE" data-def="claude-opus-5-5"><option value="claude-opus-5-5">Opus (le plus drôle, recommandé)</option><option value="claude-sonnet-5-5">Sonnet (économique)</option></select></label>
     <label>Nombre de retouches maximum<select data-var="MAX_REECRITURES" data-def="4"><option value="4">4 (recommandé)</option><option value="2">2 (économique)</option><option value="6">6 (le plus exigeant)</option></select></label>
+  </section>
+  <section class="panneau"><h2>👥 Personnages</h2>
+    <label>Personnalités<select data-var="PERSONNALITES" data-def="fixes">
+      <option value="fixes">Fixes : chacun garde son caractère d'une vidéo à l'autre (recommandé)</option>
+      <option value="libres">Libres : caractère adapté à chaque histoire</option></select></label>
+    <label>Jojo (bonnet orange)<div class="jeton"><textarea data-var="PERSO_JOJO" data-def="le pote radin et de mauvaise foi, qui ne lâche jamais rien et a toujours une excuse prête" data-texte="1" maxlength="300" rows="2"></textarea><button class="second" data-enr="PERSO_JOJO" style="flex:none;padding:10px 14px">OK</button></div></label>
+    <label>Kévin (casquette)<div class="jeton"><textarea data-var="PERSO_KEVIN" data-def="le naïf un peu mytho, roi des plans foireux, qui croit tout ce qu'on lui dit et s'enfonce à chaque réplique" data-texte="1" maxlength="300" rows="2"></textarea><button class="second" data-enr="PERSO_KEVIN" style="flex:none;padding:10px 14px">OK</button></div></label>
+    <label>Lila (nœud rose)<div class="jeton"><textarea data-var="PERSO_LILA" data-def="la lucide cash, qui s'énerve vite et balance tout haut les vérités que personne n'ose dire" data-texte="1" maxlength="300" rows="2"></textarea><button class="second" data-enr="PERSO_LILA" style="flex:none;padding:10px 14px">OK</button></div></label>
+    <p class="note">Utilisé quand les personnalités sont « fixes ». Décrivez le caractère en une phrase ; chaque personnage garde aussi toujours la même voix.</p>
+  </section>
+  <section class="panneau"><h2>📺 Épisodes</h2>
+    <label>Enchaînement des vidéos<select data-var="EPISODES" data-def="aleatoire">
+      <option value="aleatoire">Aléatoires : une histoire différente à chaque vidéo</option>
+      <option value="serie">En série : la suite de la même histoire d'une vidéo à l'autre (« Épisode 3 »)</option></select></label>
+    <label>Épisodes par série<select data-var="EPISODES_PAR_SERIE" data-def="5"><option value="3">3</option><option value="5">5 (recommandé)</option><option value="8">8</option><option value="10">10</option></select></label>
+    <p class="note">En série, le robot se souvient des épisodes précédents, fait des rappels, et démarre une nouvelle série quand la saison est finie.</p>
+  </section>
+  <section class="panneau"><h2>🧪 Contrôle qualité</h2>
+    <div class="auto" style="margin-bottom:12px"><div class="txt"><b>Public test</b><small>Trois spectateurs virtuels découvrent le sketch sans contexte : ont-ils compris, ri, décroché ? Leurs critiques servent à améliorer le texte (un peu plus de crédit Claude).</small></div><button class="inter" data-var="PUBLIC_TEST" data-def="1" data-bascule="1"></button></div>
+    <div class="auto" style="margin-bottom:12px"><div class="txt"><b>Contrôle de la vidéo finie</b><small>Une IA regarde des images de la vidéo (sous-titres, cadrage, décors, texte coupé) avant publication. En cas de défaut grave, pas de publication automatique.</small></div><button class="inter" data-var="CONTROLE_VIDEO" data-def="1" data-bascule="1"></button></div>
+    <div class="auto"><div class="txt"><b>Accroche choc en ouverture</b><small>La réplique la plus intrigante est rejouée dès la première seconde, avant le titre.</small></div><button class="inter" data-var="ACCROCHE" data-def="0" data-bascule="1"></button></div>
+  </section>
+  <section class="panneau"><h2>📊 Statistiques TikTok</h2>
+    <label>Compte TikTok de la chaîne<div class="jeton"><input data-var="TIKTOK_COMPTE" data-def="petits.dramas" data-texte="1" maxlength="40"><button class="second" data-enr="TIKTOK_COMPTE" style="flex:none;padding:10px 14px">OK</button></div></label>
+    <p class="note">Chaque matin, le robot lit tout seul les vues, j'aime, commentaires et partages de vos vidéos (page publique du compte), apprend ce qui marche et s'en sert pour les sketchs, les hashtags et l'heure de publication.</p>
+    <button class="action" id="lancerStats">📊 Lire les statistiques maintenant</button>
   </section>
   <section class="panneau"><h2>🎥 Vidéo animée</h2>
     <div class="auto" style="margin-bottom:12px"><div class="txt"><b>Voix ElevenLabs</b><small>Voix réalistes avec rires et coups de colère (abonnement ElevenLabs). Coupé : voix gratuites.</small></div><button class="inter" data-var="ELEVENLABS" data-def="1" data-bascule="1"></button></div>
@@ -307,7 +328,7 @@ function rendre(){
   if(!DATA.length){L.innerHTML='<p class="vide">Aucune vidéo pour l\'instant.</p>';return}
   DATA.forEach((v,i)=>{
     const c=document.createElement("div");c.className="carte";c.dataset.i=i;
-    c.innerHTML=`<img loading="lazy" src="videos/${v.poster}" alt=""><div class="infos"><div class="titre"></div><div class="date">${dateFr(v.date)}</div>${badge(v)}<div class="etat"></div></div><button class="croix" title="Supprimer cette vidéo" aria-label="Supprimer">✕</button>`;
+    c.innerHTML=`<img loading="lazy" src="videos/${v.poster}" alt=""><div class="infos"><div class="titre"></div><div class="date">${dateFr(v.date)}${v.vues!=null?` · 👁 ${Number(v.vues).toLocaleString("fr-FR")} vues`:""}</div>${badge(v)}<div class="etat"></div></div><button class="croix" title="Supprimer cette vidéo" aria-label="Supprimer">✕</button>`;
     c.querySelector(".titre").textContent=v.titre; c.onclick=()=>choisir(i);
     c.querySelector(".croix").onclick=(ev)=>{ev.stopPropagation(); supprimer(i,c)}; L.appendChild(c);
   });
@@ -413,6 +434,7 @@ document.querySelectorAll(".onglet").forEach(b=>b.onclick=()=>{
   $("#barre").style.display=b.dataset.o==="videos"?"":"none"; document.body.dataset.onglet=b.dataset.o; if(b.dataset.o==="config") chargerReglages();
 });
 // ------------------------------------------------ réglages (variables du dépôt GitHub)
+{const o=document.createElement("option");o.value="auto";o.textContent="📊 Automatique (heure qui fait le plus de vues)";$("#selHeure").appendChild(o)}
 for(let h=5;h<=22;h++){const o=document.createElement("option");o.value=h;o.textContent=h+" h";$("#selHeure").appendChild(o)}
 $("#lienActions").href="https://github.com/"+CONF.depot+"/actions";
 async function ecrireVar(nom,valeur){
@@ -471,6 +493,7 @@ async function lancerFlux(fichier,bouton,texte,inputs){
 $("#lancer").onclick=()=>lancerFlux("emission.yml",$("#lancer"),"📰 Le robot fabrique un JT d'actualité (20 à 40 min)…",{format:"actu"});
 $("#lancerMini").onclick=()=>lancerFlux("emission.yml",$("#lancerMini"),"⚡ Le robot fabrique un gag éclair (15 à 30 min)…",{format:"mini"});
 $("#lancerLibre").onclick=()=>lancerFlux("emission.yml",$("#lancerLibre"),"🎭 Le robot fabrique un sketch long (20 à 40 min)…",{format:"libre"});
+$("#lancerStats").onclick=()=>lancerFlux("stats.yml",$("#lancerStats"),"📊 Lecture des statistiques TikTok (1 à 3 min)…");
 $("#majsite").onclick=()=>lancerFlux("site.yml",$("#majsite"),"🔄 Mise à jour de l'application (2 à 3 min)…");
 activer(false);
 // ------------------------------------------------ application installable

@@ -16,7 +16,7 @@ _hist = json.load(open("episodes/historique.json", encoding="utf-8")) if os.path
 os.environ["FORMAT"] = FORMAT = format_du_jour(os.environ.get("FORMAT"), _hist)
 if FORMAT == "mini": os.environ["LONGUEUR"] = "eclair"                    # gag éclair : ~15 s
 elif FORMAT == "libre": os.environ["LONGUEUR"] = "pro"                    # sketch long : 60 à 90 s (plus d'une minute garantie au montage)
-import actu, ecrire, voix, jt
+import actu, ecrire, voix, jt, serie, stats
 
 SR = 22050
 
@@ -35,6 +35,11 @@ def resserrer(audios, sk, cible=None):
         subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", f"{tmp}/{i}.wav", "-af", f"atempo={f:.3f}", f"{tmp}/{i}b.wav"], check=True)
         with wave.open(f"{tmp}/{i}b.wav") as w: sortie.append(np.frombuffer(w.readframes(w.getnframes()), np.int16).astype(np.float32) / 32768)
     return sortie
+
+def decaler(sk, pos):
+    """Une réplique a été insérée en `pos` : on décale les indices du découpage et du plan gag."""
+    for sc in sk.get("decoupage") or []: sc["repliques"] = [i + 1 if i >= pos else i for i in sc.get("repliques", [])]
+    if sk.get("gag") and sk["gag"]["replique"] >= pos: sk["gag"]["replique"] += 1
 
 def lire(p, d):
     return json.load(open(p, encoding="utf-8")) if os.path.exists(p) else d
@@ -60,7 +65,8 @@ def main():
     recents = [f"{h.get('titre', '')} : {h.get('accroche', '')}" for h in historique[-10:]]
     # 1. recherche : sujets candidats (articles des dernières 24 h, regroupés par sujet et classés par reprise médiatique)
     if libre and not os.environ.get("SKETCH_TEST", "").strip():
-        try: candidats = [(c, "idée") for c in ecrire.idees_libres(recents=[f"{h.get('titre', '')} : {h.get('accroche', '')}" for h in historique[-30:]])]
+        try: candidats = [(c, "idée") for c in ecrire.idees_libres(recents=[f"{h.get('titre', '')} : {h.get('accroche', '')}" for h in historique[-30:]],
+                                                                    consignes=stats.pour_idees())]
         except Exception as e:
             print(f"Idées de sketch impossibles : {e}", flush=True); raise
         for k, (sel, _) in enumerate(candidats): print(f"Idée {k} : « {sel[0]['titre'][:110]} »", flush=True)
@@ -90,17 +96,30 @@ def main():
         sk = ecrire.valider(json.load(open(test, encoding="utf-8")), set(), libre)
         print(f"Sketch d'essai : {test}", flush=True)
     else:
-        sk = ecrire.ecrire_sketch([c[0] for c in candidats], gags=gags, special=dimanche and not libre, recents=recents, libre=libre)
+        sk = ecrire.ecrire_sketch([c[0] for c in candidats], gags=gags, special=dimanche and not libre, recents=recents, libre=libre,
+                                  serie=serie.contexte() if libre else "", stats=stats.pour_auteur() if libre else "")
         print(f"Moteur humoristique : {ecrire.USAGE['appels']} appels Claude, {ecrire.USAGE['entree']} jetons lus, {ecrire.USAGE['sortie']} jetons écrits, {ecrire.USAGE['recherches_web']} recherche(s) web", flush=True)
         titres = next((c[0] for c in candidats if c[0][0]["lien"] and c[0][0]["lien"] in sk.get("sources", [])), titres)
     print(f"Sketch : « {sk['sujet']} », {len(sk['repliques'])} répliques", flush=True)
     accroche_hist = sk["repliques"][0]["t"] if sk.get("repliques") else ""
+    num = serie.prochain()[0] if (libre and serie.actif() and sk.get("serie_titre")) else None
     if libre and sk.get("titre_accroche") and os.environ.get("VOIX_OFF", "1") != "0":
         titre_lu = sk["titre_accroche"].strip()                             # voix off d'ouverture : elle lit le titre « POV : … »
+        if num: titre_lu = f"Épisode {num}. {titre_lu}"
         sk["repliques"].insert(0, {"p": "narrateur", "t": titre_lu, "d": "[excited] " + re.sub(r"\bPOV\b", "Pi-o-vi", titre_lu)})
-        for sc in sk.get("decoupage") or []: sc["repliques"] = [i + 1 for i in sc.get("repliques", [])]
-        if sk.get("gag"): sk["gag"]["replique"] += 1
-    audios, credits_voix, mots = voix.generer(sk["repliques"], jt.VOIX)
+        decaler(sk, 0)
+    if libre and "teaser" in sk and os.environ.get("ACCROCHE", "0") == "1":
+        k = sk["teaser"] + (1 if sk["repliques"][0]["p"] == "narrateur" else 0)   # accroche choc : la réplique est rejouée en ouverture
+        copie = dict(sk["repliques"][k]); copie.pop("chute", None); copie.pop("attente", None); copie.pop("chevauche", None)
+        copie["teaser"] = k + 1                                           # indice de l'original une fois la copie insérée
+        sk["repliques"].insert(0, copie); decaler(sk, 0)
+    teaser = sk["repliques"][0].get("teaser") if sk.get("repliques") else None
+    if teaser is not None:                                                # la réplique rejouée n'est enregistrée qu'une fois
+        reste = sk["repliques"][1:]
+        audios, credits_voix, mots = voix.generer(reste, jt.VOIX)
+        audios = [audios[teaser - 1]] + list(audios); mots = [mots[teaser - 1]] + list(mots) if mots else mots
+    else:
+        audios, credits_voix, mots = voix.generer(sk["repliques"], jt.VOIX)
     moteur = " + ".join(credits_voix)
     print(f"Voix : {moteur}", flush=True)
     avant = sum(len(a) for a in audios)
@@ -113,12 +132,15 @@ def main():
     pris = {h.get("fichier") for h in historique}; n = 1; base = f"sortie/{jour}_{heure}_emission"
     while os.path.basename(base) + ".mp4" in pris: n += 1; base = f"sortie/{jour}_{heure}_emission{n}"   # plusieurs émissions le même jour
     os.makedirs("sortie", exist_ok=True)
-    gag = None; duree = None; decors = {}
+    gag = None; duree = None; decors = {}; video_ok, rapport_video = True, ""
     if libre:                                                              # sketch libre / gag éclair : moteur cartoon animé
         try:
             import cartoon, decors as decors_mod
             if modal_ok and os.environ.get("DECORS", "1") != "0": decors = decors_mod.generer(sk.get("decoupage"), graine=len(historique) + 7)
             duree = cartoon.rendre(sk, base + ".mp4", audios, mots=mots, decors=decors, mini=fmt == "mini")
+            if not test and cartoon.MINUTAGE:                              # piste 13 : une IA regarde la vidéo finie
+                import controle
+                video_ok, rapport_video = controle.verifier(base + ".mp4", sk, cartoon.MINUTAGE)
         except Exception as e:
             import traceback; traceback.print_exc()
             print(f"Moteur cartoon en échec ({e}) : rendu de secours avec le moteur JT.", flush=True); duree = None
@@ -131,6 +153,9 @@ def main():
     credit = "Voix : " + " ; ".join(credits_voix) + "."
     if gag: credit += " Plan « reconstitution » généré avec Wan 2.2."
     if decors: credit += " Décors générés avec Stable Diffusion XL (CreativeML Open RAIL++-M)."
+    if libre:                                                              # signature de la chaîne dans les hashtags
+        sk["hashtags"] = list(dict.fromkeys(["petitsdramas"] + [h for h in sk["hashtags"] if h != "petitsdramas"]))[:7]
+    if num: sk["legende"] = f"Épisode {num} · {sk['serie_titre']} — {sk['legende']}"
     legende = f"{sk['legende']}" + (f"\n\n{sk['question']}" if sk.get("question") else "") + "\n\n" + " ".join("#" + h for h in sk["hashtags"]) + f"\n\nContenu généré par IA. {credit}"
     open(base + ".txt", "w", encoding="utf-8").write(legende + "\n\nSources :\n" + "\n".join(sk["sources"]) + "\n")
     os.makedirs("episodes", exist_ok=True)
@@ -139,14 +164,17 @@ def main():
     if fiche: print(f"Qualité : {fiche.get('note', 0):.0f}/100 — {fiche.get('decision')}", flush=True)
     historique.append(dict(date=jour, format=fmt, titre=sk["sujet"], sources=sk["sources"], note=fiche.get("note"), decision=fiche.get("decision"),
                            accroche=accroche_hist, mots=sorted(actu._mots(" ".join(fiche.get("titres_sujet") or [t["titre"] for t in titres])))[:40],
-                           empreinte=sorted(actu.empreinte(" ".join((fiche.get("titres_sujet") or []) + [sk["sujet"]] + [r["t"] for r in sk.get("repliques", [])]))), voix=moteur, gag=bool(gag), running_gag=sk.get("running_gag", ""), duree=round(duree, 1),
+                           empreinte=sorted(actu.empreinte(" ".join((fiche.get("titres_sujet") or []) + [sk["sujet"]] + [r["t"] for r in sk.get("repliques", [])]))), voix=moteur, gag=bool(gag), controle_video=rapport_video[:500] or ("ok" if video_ok else ""), running_gag=sk.get("running_gag", ""), duree=round(duree, 1),
                            fichier=os.path.basename(base) + ".mp4", tag=f"emissions-{jour[:7]}", legende=legende, publie=None))
     json.dump(historique[-200:], open("episodes/historique.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    if libre and not test:
+        n_ep = serie.enregistrer(sk, os.path.basename(base) + ".mp4")
+        if n_ep: print(f"Série « {sk['serie_titre']} » : épisode {n_ep} enregistré", flush=True)
     sortie = os.environ.get("GITHUB_OUTPUT")
     if sortie:
         with open(sortie, "a") as f:
             f.write(f"video={base}.mp4\nlegende={base}.txt\nnom={os.path.basename(base)}.mp4\nmois={jour[:7]}\ntitre={sk['sujet']}\n"
-                    f"qualite={'ok' if not fiche or fiche.get('note', 0) >= 80 else 'faible'}\n")
+                    f"qualite={'ok' if video_ok and (not fiche or fiche.get('note', 0) >= 80) else 'faible'}\n")
     print(f"OK : {base}.mp4 ({duree:.0f} s)")
 
 if __name__ == "__main__":

@@ -84,7 +84,7 @@ def _eleven(chemin, corps=None, binaire=False, timeout=120):
     return d if binaire else json.loads(d or b"{}")
 
 CONTEXTE = {}                                                             # texte -> (réplique d'avant, réplique d'après) : intonation enchaînée
-REGLAGES = {"stability": 0.5, "similarity_boost": 0.85, "use_speaker_boost": True}   # voix stable et bien articulée
+REGLAGES = {"stability": 0.4, "similarity_boost": 0.85, "use_speaker_boost": True}   # voix stable et bien articulée
 _SANS_REGLAGES = set()                                                    # modèles qui refusent ces réglages
 
 def elevenlabs(voix, textes):
@@ -113,6 +113,44 @@ def elevenlabs(voix, textes):
             out.append(b"")
         except Exception as e:
             journal(f"    elevenlabs {voix} : {str(e)[:120]}"); out.append(b"")
+    return out
+
+def dialogue(lignes, tmp):
+    """Text to Dialogue (ElevenLabs, avec minutage) : [(voice_id, texte avec indications)] -> un clip par réplique (ou None).
+    Toute la scène est jouée d'un seul tenant (par paquets de 2 000 caractères), puis découpée réplique par réplique."""
+    import base64
+    out = [None] * len(lignes); paquets, cur, n = [], [], 0
+    for k, (v, t) in enumerate(lignes):
+        if cur and n + len(t) > 1900: paquets.append(cur); cur, n = [], 0
+        cur.append(k); n += len(t)
+    if cur: paquets.append(cur)
+    for j, pq in enumerate(paquets):
+        corps = {"inputs": [{"text": lignes[k][1], "voice_id": lignes[k][0]} for k in pq], "model_id": ELEVEN_MODELE}
+        if j: corps["previous_text"] = " ".join(sans_tags(lignes[k][1]) for k in paquets[j - 1])[-800:]
+        if j + 1 < len(paquets): corps["future_text"] = " ".join(sans_tags(lignes[k][1]) for k in paquets[j + 1])[:800]
+        try:
+            r = _eleven("/v1/text-to-dialogue/with-timestamps?output_format=mp3_44100_128", corps, timeout=300)
+        except urllib.error.HTTPError as e:
+            msg = e.read().decode("utf-8", "replace")[:200]; journal(f"  dialogue ElevenLabs : HTTP {e.code} {msg}")
+            if e.code in (401, 402, 403, 429) or "quota" in msg.lower(): EN_PANNE.add("elevenlabs")
+            return out
+        except Exception as e:
+            journal(f"  dialogue ElevenLabs indisponible : {str(e)[:120]}"); return out
+        with open(f"{tmp}/dlg{j}.mp3", "wb") as f: f.write(base64.b64decode(r.get("audio_base64") or ""))
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", f"{tmp}/dlg{j}.mp3", "-ac", "1", "-ar", str(SR), f"{tmp}/dlg{j}.wav"], check=True)
+        with wave.open(f"{tmp}/dlg{j}.wav") as w: a = np.frombuffer(w.readframes(w.getnframes()), np.int16).astype(np.float32) / 32768
+        bornes = {}
+        for sg in r.get("voice_segments") or []:
+            k = sg.get("dialogue_input_index")
+            if k is None or not 0 <= k < len(pq): continue
+            d0, d1 = float(sg.get("start_time_seconds", 0)), float(sg.get("end_time_seconds", 0))
+            b = bornes.get(k); bornes[k] = (min(b[0], d0), max(b[1], d1)) if b else (d0, d1)
+        for k, (d0, d1) in bornes.items():
+            morceau = a[max(0, int((d0 - 0.03) * SR)):int((d1 + 0.08) * SR)]
+            if len(morceau) < int(0.25 * SR): continue
+            try: out[pq[k]] = nettoyer(_vers_octets(morceau), f"{tmp}/dlg{j}_{k}", propre=True)
+            except Exception as e: journal(f"  dialogue : découpe {pq[k]} impossible ({str(e)[:80]})")
+        journal(f"  dialogue ElevenLabs : paquet {j + 1}/{len(paquets)}, {len(bornes)}/{len(pq)} répliques découpées")
     return out
 
 def voix_eleven(n=4):
@@ -370,16 +408,33 @@ def generer(repliques):
     for i, d in enumerate(dits):                                           # chaque réplique connaît la phrase d'avant et d'après
         CONTEXTE[d] = (dits[i - 1] if i else "", dits[i + 1] if i + 1 < n else "")
     pris = {(c["moteur"], c["voix"]) for r in {x["p"] for x in repliques} for c in fiche["roles"].get(r, [])[:1]}
+    principales = {r: (v[0]["moteur"], v[0]["voix"]) for r, v in fiche["roles"].items() if v}
     def voix_de(role):
-        if fiche["roles"].get(role): return fiche["roles"][role]
+        if fiche["roles"].get(role):                                       # une voix fixe par personnage : jamais celle d'un autre
+            autres = {v for r, v in principales.items() if r != role}
+            return [c for c in fiche["roles"][role] if (c["moteur"], c["voix"]) not in autres] or fiche["roles"][role][:1]
         # voix off (« narrateur ») : une voix de la banque que n'utilise aucun personnage du sketch
         autres = [c for r in ("envoyee", "presentateur", "invite") for c in fiche["roles"].get(r, [])[1:]]
         libres = [c for c in autres if (c["moteur"], c["voix"]) not in pris]
         return (libres or autres or fiche["roles"].get("presentateur", []))[:3]
+    # 1) toute la scène d'un seul tenant (Text to Dialogue d'ElevenLabs) : intonations enchaînées comme une vraie conversation
+    casting_scene = {r: voix_de(r)[0] for r in {x["p"] for x in repliques} if voix_de(r)}
+    if all(c["moteur"] == "elevenlabs" for c in casting_scene.values()) and os.environ.get("DIALOGUE", "1") != "0" and "elevenlabs" not in EN_PANNE:
+        clips = dialogue([(casting_scene[r["p"]]["voix"], dits[i]) for i, r in enumerate(repliques)], tmp)
+        valides = [(i, c) for i, c in enumerate(clips) if c is not None]
+        ecoutes = ecouter([c for _, c in valides]) if valides else []
+        for (i, c), e in zip(valides, ecoutes or [None] * len(valides)):
+            ok, d = note(dits[i], c, e)
+            journal(f"  voix {i} ({repliques[i]['p']}, dialogue) {d} {'OK' if ok else 'refaite seule'}")
+            if ok: audios[i] = c; mots[i] = (e or {}).get("mots")
+            elif d.get("blanc", 0) < 0.75 and 0.5 < d.get("debit", 1) < 1.9: meilleures[i] = (d.get("sim", 0), c, (e or {}).get("mots"), "elevenlabs")
+        if any(a is not None for a in audios): utilises.add("elevenlabs")
+    # 2) réplique par réplique pour ce qui reste (ou si le dialogue est indisponible)
     for role in sorted({r["p"] for r in repliques}):
         idx = [i for i, r in enumerate(repliques) if r["p"] == role]
+        if all(audios[i] is not None for i in idx): continue
         for choix in voix_de(role):
-            propre = choix["moteur"] in PROPRES; restant = list(idx); ok_role = True
+            propre = choix["moteur"] in PROPRES; restant = [i for i in idx if audios[i] is None]; ok_role = True
             for tour in range(3):                                          # 1 prise + 2 reprises pour les répliques ratées
                 textes = [repliques[i].get("d") or repliques[i]["t"] for i in restant]
                 brut = synthese(choix, textes); clips = []
@@ -404,8 +459,14 @@ def generer(repliques):
                 if not restant: break
             if all(audios[i] is not None for i in idx):
                 utilises.add(choix["moteur"]); break
+            if all(audios[i] is not None or meilleures.get(i, (0,))[0] >= 0.6 for i in idx):   # garder SA voix plutôt que d'en changer
+                for i in idx:
+                    if audios[i] is None:
+                        _, audios[i], mots[i], m = meilleures[i]; utilises.add(m)
+                        journal(f"  voix {i} ({role}) : meilleure prise gardée pour ne pas changer la voix du personnage")
+                utilises.add(choix["moteur"]); break
             journal(f"  {role} : la voix {choix['moteur']}:{choix['voix']} échoue, passage à la voix de remplacement")
-            for i in idx: audios[i] = None; mots[i] = None
+            for i in restant: audios[i] = None; mots[i] = None
         for i in idx:                                                      # une réplique ratée ne fait plus tomber toute la banque :
             if audios[i] is None and meilleures.get(i, (0,))[0] >= 0.6:    # on garde sa meilleure prise si elle reste compréhensible
                 _, audios[i], mots[i], m = meilleures[i]; utilises.add(m)

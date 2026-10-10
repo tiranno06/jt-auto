@@ -30,6 +30,7 @@ jobs:
         with:
           sparse-checkout: |
             moteur/planning.py
+            moteur/stats.py
             episodes
       - id: p
         env:
@@ -73,6 +74,16 @@ jobs:
       DECORS: ${{ vars.DECORS }}
       TON: ${{ vars.TON }}
       INFOS_DEMAIN: ${{ vars.INFOS_DEMAIN }}
+      PERSONNALITES: ${{ vars.PERSONNALITES }}
+      PERSO_JOJO: ${{ vars.PERSO_JOJO }}
+      PERSO_KEVIN: ${{ vars.PERSO_KEVIN }}
+      PERSO_LILA: ${{ vars.PERSO_LILA }}
+      EPISODES: ${{ vars.EPISODES }}
+      EPISODES_PAR_SERIE: ${{ vars.EPISODES_PAR_SERIE }}
+      ACCROCHE: ${{ vars.ACCROCHE }}
+      PUBLIC_TEST: ${{ vars.PUBLIC_TEST }}
+      CONTROLE_VIDEO: ${{ vars.CONTROLE_VIDEO }}
+      TIKTOK_COMPTE: ${{ vars.TIKTOK_COMPTE }}
       GH_TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@v4

@@ -12,8 +12,15 @@ def decision():
     deux = (os.environ.get("FREQUENCE") or "").strip() == "2x"
     try: freq = 1 if deux else int(os.environ.get("FREQUENCE") or 1)
     except ValueError: freq = 1
-    try: heure = int(os.environ.get("HEURE") or 17)
-    except ValueError: heure = 17
+    h_ = (os.environ.get("HEURE") or "17").strip().lower()
+    if h_ == "auto":                                                       # heure apprise sur les statistiques de la chaîne
+        import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        try:
+            import stats; heure = stats.meilleure_heure()
+        except Exception: heure = 17
+    else:
+        try: heure = int(h_)
+        except ValueError: heure = 17
     if freq <= 0: return False, "robot en pause"
     maintenant = datetime.datetime.now(ZoneInfo("Europe/Paris")); jour = maintenant.date()
     heures = {heure, 12} if deux else {heure}

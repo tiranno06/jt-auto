@@ -198,15 +198,39 @@ CHUTES (fausses vérités ironiques) :
 Donne à chaque vanne et à chaque chute une note de rire sur 10 (10 = on se plie en deux, 5 = sourire poli, 3 = rien). Sois dur : une chute prévisible, longue, expliquée ou hors sujet ne dépasse pas 4.
 Puis désigne les 6 meilleures vannes et LA meilleure chute ; si tu vois comment rendre la meilleure chute encore plus percutante (plus courte, mot qui tue à la fin), donne-en la version affûtée. Rends le tout avec l'outil jury."""
 
+PERSOS_DEFAUT = {
+    "PERSO_JOJO": "le pote radin et de mauvaise foi, qui ne lâche jamais rien et a toujours une excuse prête",
+    "PERSO_KEVIN": "le naïf un peu mytho, roi des plans foireux, qui croit tout ce qu'on lui dit et s'enfonce à chaque réplique",
+    "PERSO_LILA": "la lucide cash, qui s'énerve vite et balance tout haut les vérités que personne n'ose dire",
+}
+def personnalites():
+    """Bloc « personnages » du mode libre (réglage PERSONNALITES de la régie : fixes = caractère constant d'une vidéo à l'autre)."""
+    fixes = (os.environ.get("PERSONNALITES") or "fixes").strip().lower() != "libres"
+    def p(cle): return (os.environ.get(cle) or "").strip()[:300] or PERSOS_DEFAUT[cle]
+    if fixes:
+        return (f'  · "presentateur" = JOJO (bonnet orange) : {p("PERSO_JOJO")} ;\n'
+                f'  · "invite" = KÉVIN (casquette à l\'envers) : {p("PERSO_KEVIN")} ;\n'
+                f'  · "envoyee" = LILA (nœud rose) : {p("PERSO_LILA")}.\n'
+                "  PERSONNALITÉS FIXES (réglage du propriétaire) : chacun garde EXACTEMENT ce caractère, ses tics et sa façon de parler, "
+                "d'une vidéo à l'autre ; le public doit les reconnaître et anticiper leurs réactions. Fais jouer ces personnalités dans les vannes.")
+    return ('  · "presentateur" = JOJO (bonnet orange) ; "invite" = KÉVIN (casquette à l\'envers) ; "envoyee" = LILA (nœud rose).\n'
+            "  PERSONNALITÉS LIBRES (réglage du propriétaire) : donne à chacun le caractère qui sert le mieux l'histoire du jour.")
+
+JEU = """- JEU D'ACTEUR RÉALISTE (règle du propriétaire : une vraie scène, jamais une lecture de texte) :
+  · Dans "d", CHAQUE réplique commence par l'émotion vraie du moment en indication anglaise entre crochets ([annoyed], [laughing], [sarcastic], [crying], [shouting], [whispers], [nervous laugh], [sighs], [disgusted], [excited], [panicked], [deadpan]…), et peut en avoir une 2e au milieu (rire qui monte, soupir avant la vanne).
+  · Écris l'oral vivant : hésitations (« euh… », « attends… »), reprises (« non mais — non. »), respiration (« … »), mots appuyés, phrases qui se coupent.
+  · INTERRUPTIONS ET CHEVAUCHEMENTS : quand un personnage en coupe un autre, la réplique coupée finit par « — » et la suivante a "chevauche": true (elle démarre par-dessus la fin de la précédente). Utilise aussi de courtes réactions par-dessus (« Quoi ?! », « Hein ? », un rire, « Pff… ») avec "chevauche": true. 2 à 4 fois par sketch long, 1 fois dans un gag éclair.
+  · RYTHME : "attente" (en secondes, 0 à 1,2) = silence AVANT la réplique : un blanc gênant avant une réponse qui tue, un temps avant la chute finale (0,5 à 0,8). Les échanges qui s'énervent s'enchaînent sans blanc.
+  · Toute la palette : rire, colère, joie, peine, gêne, panique, mépris, fierté ; l'émotion change en cours de scène quand la situation bascule.
+"""
+
 LIBRE = """
 ═══════════════════════════════════════════
 MODE « SKETCH LIBRE » (prioritaire sur TOUT ce qui précède)
 ═══════════════════════════════════════════
 Aujourd'hui, PAS D'ACTUALITÉ : ignore les étapes de recherche, de vérification et de sélection d'actualité, la règle des gros titres, les faits réels et les sources. Le sujet est une SITUATION DU QUOTIDIEN que tout le monde a vécue (couple, famille, boulot, école, voisins, courses, transports, téléphone, réseaux sociaux, administration, sport, vacances…), observée avec une méchanceté tendre et poussée jusqu'à l'absurde.
 - PAS DE JT : oublie le présentateur, l'envoyée, l'invité, le plateau et le direct. Le sketch est une scène de dessin animé jouée par nos trois personnages (petits bonshommes blancs à grosse tête ronde), avec les clés "p" habituelles :
-  · "presentateur" = JOJO (bonnet orange) : le pote relou, de mauvaise foi, qui ne lâche jamais ;
-  · "invite" = KÉVIN (casquette à l'envers) : le mytho, le roi des excuses, toujours en retard d'une galère ;
-  · "envoyee" = LILA (nœud rose) : celle qui craque, s'énerve et balance les vérités.
+{persos}
   Utilise leurs prénoms. 1 à 3 personnages selon la scène (souvent 2 face à face). Le premier à parler peut être n'importe lequel.
 - DÉCOUPAGE POUR L'ANIMATION (obligatoire) : "decoupage" = 1 à 5 scènes ; pour chacune : "repliques" (indices), "decor" = le décor EN ANGLAIS, sans aucun personnage : le lieu PRÉCIS de l'histoire + 2 ou 3 objets visibles qui servent le gag (« a narrow apartment building hallway, a closed front door with a peephole, a torn delivery notice on the floor », « a supermarket self-checkout machine with a red error light, a shopping basket full of groceries »). Si l'histoire reste au même endroit, recopie EXACTEMENT le même texte de décor d'une scène à l'autre. « plain » = fond uni (gags éclair surtout), "titre" = pour un SKETCH LONG : construis-le en 2 à 4 GAGS successifs sur la même situation (un gag = une scène, avec sa propre montée et sa propre vanne de fin, le dernier gag porte la chute finale) ; chaque gag à partir du 2e est annoncé par un carton plein écran : écris son texte, court et clair (« Le lendemain… », « Deux heures plus tard… », « Pendant ce temps, chez Kévin… », « Au boulot… ») ; pour un GAG ÉCLAIR, les 2 à 6 mots affichés en haut pendant ce temps de la blague. "effet" = "pluie_billets", "tremblement" ou vide.
 - Une réplique peut faire tenir un objet au personnage : "objet" = telephone, billet, portefeuille, micro, verre ou cafe.
@@ -222,7 +246,8 @@ Aujourd'hui, PAS D'ACTUALITÉ : ignore les étapes de recherche, de vérificatio
   · Un détail planté au début (objet, phrase, mensonge) revient à la fin ; la chute finale RÉSOUT ou retourne l'enjeu de départ.
   · Logique interne juste : les personnages se souviennent de ce qui a été dit, rien ne contredit une scène précédente, les lieux et les moments s'enchaînent logiquement (le carton annonce clairement le saut de temps ou de lieu).
   · Limpide : quelqu'un qui découvre la vidéo comprend en une seconde qui parle, où on est et ce qui se passe, à chaque scène.
-- DICTION : phrases simples et bien articulables, pas de mots collés ni d'abréviations illisibles à l'oral dans "d" (« je sais pas » ou « j'sais pas », jamais « chais pas »), au plus 2 indications de jeu par réplique.
+{jeu}{serie}{accroche}- DICTION : phrases simples et bien articulables, pas de mots collés ni d'abréviations illisibles à l'oral dans "d" (« je sais pas » ou « j'sais pas », jamais « chais pas »), au plus 2 indications de jeu par réplique.
+- LÉGENDE TIKTOK (référencement) : "legende" = 1 phrase courte qui donne envie de regarder jusqu'au bout + "question" = une question qui pousse à commenter ou à identifier un ami (« Tag le Kévin de ta bande », « Team Jojo ou team Lila ? ») ; "hashtags" = 4 à 6 mots-clés sans # : 2 larges (humour, pov, sketch, animation), 2 ou 3 précis du sujet (ceux que le public tape dans la recherche), jamais de hashtag trompeur.
 - "titre_accroche" : le titre affiché en haut de l'écran, au format « POV : … » ou « Quand … » (40 caractères max).
 
 {style}"""
@@ -252,7 +277,9 @@ OUTIL = {"name": "rendre_sketch", "description": "Rendre le sketch complet (livr
              "invite_nom": {"type": "string"}, "invite_role": {"type": "string"}, "invite_look": {"type": "string"}, "lieu_direct": {"type": "string"},
              "question": {"type": "string"}, "running_gag": {"type": "string"},
              "repliques": {"type": "array", "items": _schema({"p": {"type": "string"}, "t": {"type": "string"}, "d": {"type": "string"},
-                                                              "chute": {"type": "boolean"}, "attente": {"type": "number"}, "objet": {"type": "string"}}, ["p", "t"])},
+                                                              "chute": {"type": "boolean"}, "attente": {"type": "number"}, "objet": {"type": "string"},
+                                                              "chevauche": {"type": "boolean"}}, ["p", "t"])},
+             "serie_titre": {"type": "string"}, "resume_episode": {"type": "string"}, "teaser": {"type": "integer"},
              "bandeau": {"type": "array", "items": {"type": "string"}},
              "gag": _schema({"replique": {"type": "integer"}, "prompt": {"type": "string"}}, []),
              "legende": {"type": "string"}, "hashtags": {"type": "array", "items": {"type": "string"}}, "sources": {"type": "array", "items": {"type": "string"}}},
@@ -309,7 +336,7 @@ def _liste(v):
     return v if isinstance(v, list) else []
 
 def valider(sk, liens, libre=False):
-    reps, attente = [], False
+    reps, attente = [], 0
     if not isinstance(sk, dict): raise ValueError("réponse sans sketch")
     brutes = _liste(sk.get("repliques") or sk.get("script") or sk.get("dialogues"))
     for r in brutes[:16]:
@@ -323,7 +350,8 @@ def valider(sk, liens, libre=False):
         if str(r.get("objet", "")).lower() in OBJETS: x["objet"] = str(r["objet"]).lower()
         try: a = float(r.get("attente") or 0)
         except (TypeError, ValueError): a = 0
-        if a > 0 and not attente: x["attente"] = min(1.2, max(0.3, a)); attente = True
+        if a > 0 and attente < (3 if libre else 1): x["attente"] = min(1.2, max(0.2, a)); attente += 1   # silences de jeu
+        if libre and r.get("chevauche") and reps: x["chevauche"] = True                     # coupe la parole / réaction par-dessus
         reps.append(x)
     if len(reps) > NB_MAX:                                   # trop long : on garde le début et la chute finale
         reps = reps[:NB_MAX - 1] + [reps[-1]]
@@ -353,7 +381,9 @@ def valider(sk, liens, libre=False):
             "legende": _court(sk.get("legende"), 160) or "L'actu du jour, en dessin animé. Satire, personnages fictifs.",
             "hashtags": [t for t in tags if t][:7] or ["satire", "humour", "actualite", "politique"],
             "sources": _sources(sk.get("sources"), liens),
-            "decoupage": _decoupage(sk.get("decoupage"), len(reps))}
+            "decoupage": _decoupage(sk.get("decoupage"), len(reps)),
+            **({"serie_titre": _court(sk.get("serie_titre"), 50), "resume_episode": _court(sk.get("resume_episode"), 400)} if sk.get("serie_titre") else {}),
+            **({"teaser": int(sk["teaser"])} if isinstance(sk.get("teaser"), (int, float)) and 0 <= int(sk["teaser"]) < len(reps) - 1 else {})}
 
 def _norm_lien(u): return re.sub(r"^https?://(www\.)?|[?#].*$|/$", "", str(u or "").strip().lower())
 
@@ -390,10 +420,10 @@ def _decoupage(dec, n):
 
 USAGE = {"appels": 0, "entree": 0, "sortie": 0, "recherches_web": 0}                          # suivi du budget (jetons consommés)
 
-def _appel(client, systeme, messages, outil=OUTIL, web=False, max_tokens=12000):
+def _appel(client, systeme, messages, outil=OUTIL, web=False, max_tokens=12000, modele=None):
     """Appel Claude ; renvoie l'entrée de l'outil demandé (ou un JSON trouvé dans le texte). Recherche web si possible."""
     outils = [outil] + ([RECHERCHE_WEB] if web else [])
-    kw = dict(model=MODELE, max_tokens=max_tokens, messages=messages, tools=outils, tool_choice={"type": "auto"})
+    kw = dict(model=modele or MODELE, max_tokens=max_tokens, messages=messages, tools=outils, tool_choice={"type": "auto"})
     if systeme: kw["system"] = systeme
     try:
         r = client.messages.create(**kw)
@@ -410,7 +440,7 @@ def _appel(client, systeme, messages, outil=OUTIL, web=False, max_tokens=12000):
     except Exception as e:
         if not web: raise
         print(f"Recherche web indisponible ({str(e)[:120]}) : vérification sur les seuls articles fournis.", flush=True)
-        return _appel(client, systeme, messages, outil, False, max_tokens)
+        return _appel(client, systeme, messages, outil, False, max_tokens, modele)
     if getattr(r, "stop_reason", "") == "max_tokens":
         print(f"  réponse coupée (limite de {max_tokens} jetons atteinte) pour {outil['name']}", flush=True)
     brut = "".join(getattr(b, "text", "") or "" for b in r.content if getattr(b, "type", "") == "text")
@@ -501,7 +531,7 @@ def atelier(client, systeme, titres, contexte="", type_chute="fausse vérité ir
         print(f"  atelier de vannes impossible ({str(e)[:120]}) : écriture directe.", flush=True)
         return "", "", 0.0, ""
 
-def idees_libres(recents=(), n=6):
+def idees_libres(recents=(), n=6, consignes=""):
     """Mode sketch libre : Claude propose des situations du quotidien ; renvoie des sujets au format des candidats d'actualité."""
     import anthropic
     client = anthropic.Anthropic()
@@ -509,7 +539,8 @@ def idees_libres(recents=(), n=6):
     out = []
     for essai in range(2):                                                 # une seconde tentative si la réponse est inexploitable
         try:
-            r = _appel(client, None, [{"role": "user", "content": IDEES.format(secondes=SECONDES, recents=rtxt, style=STYLE_LIBRE)}],
+            import serie as _serie
+            r = _appel(client, None, [{"role": "user", "content": IDEES.format(secondes=SECONDES, recents=rtxt, style=STYLE_LIBRE) + _serie.idees() + (("\n" + consignes) if consignes else "")}],
                        OUTIL_IDEES, max_tokens=6000)
         except Exception as e:
             if _bloquant(e): raise
@@ -522,6 +553,54 @@ def idees_libres(recents=(), n=6):
         if out: break
         print(f"  idées : réponse inexploitable (champs reçus : {', '.join(sorted(r))[:120]}), nouvelle tentative", flush=True)
     return out[:n]
+
+PUBLIC = """Vous êtes 3 spectateurs TikTok français qui tombent sur cette vidéo animée en scrollant, sans aucun contexte :
+- Inès, 19 ans, étudiante, fan d'humour noir, scrolle très vite ;
+- Karim, 31 ans, dans le métro, regarde sans le son une fois sur deux (il lit les sous-titres) ;
+- Sandrine, 44 ans, maman, ne connaît pas les codes TikTok.
+Vous ne voyez QUE ce qui s'entend et s'affiche (titre, cartons, répliques avec qui parle et le ton) :
+{video}
+Pour chacun : a-t-il compris l'histoire et la chute (vrai/faux), à quelle réplique il aurait scrollé (numéro, ou -1 s'il est resté jusqu'au bout), note de rire sur 10, réplique préférée, ce qui l'a perdu ou ennuyé.
+Puis, ensemble, 3 à 5 critiques CONSTRUCTIVES et concrètes pour améliorer cette vidéo (réplique n° X : faire ceci), du point de vue du public, pas d'un auteur. Soyez honnêtes, pas polis.
+Rends le tout avec l'outil avis_public."""
+OUTIL_PUBLIC = {"name": "avis_public", "description": "Réactions des 3 spectateurs et critiques constructives.",
+                "input_schema": _schema({"spectateurs": {"type": "array", "items": _schema({"nom": {"type": "string"}, "compris": {"type": "boolean"},
+                                                                                              "scrolle_a": {"type": "integer"}, "rire": {"type": "number"},
+                                                                                              "preferee": {"type": "string"}, "perdu_par": {"type": "string"}},
+                                                                                             ["nom", "compris", "rire"])},
+                                         "critiques": {"type": "array", "items": {"type": "string"}}}, ["spectateurs", "critiques"])}
+MODELE_PUBLIC = os.environ.get("MODELE_PUBLIC") or "claude-sonnet-5-5"     # spectateurs : modèle économique
+
+def public_test(client, sk):
+    """Piste 5 : trois spectateurs virtuels découvrent le sketch sans contexte. Renvoie (résumé pour la réécriture, tous ont compris)."""
+    if os.environ.get("PUBLIC_TEST", "1") == "0": return "", True
+    dec = sk.get("decoupage") or []; scene_de = {i: k for k, sc in enumerate(dec) for i in sc.get("repliques", [])}
+    lignes = [f"[Titre en haut de l'écran : {sk.get('titre_accroche', '')}]"]; sc0 = None
+    for i, r in enumerate(sk["repliques"]):
+        k = scene_de.get(i, sc0)
+        if k != sc0 and k is not None and k < len(dec) and dec[k].get("titre") and i: lignes.append(f"[Carton : {dec[k]['titre']}]")
+        sc0 = k; ton = ", ".join(re.findall(r"\[([^\]]{1,30})\]", r.get("d") or ""))[:60]
+        lignes.append(f"{i}. {NOMS_LIBRES.get(r['p'], r['p'])}{f' ({ton})' if ton else ''} : {r['t']}")
+    try:
+        a = _appel(client, None, [{"role": "user", "content": PUBLIC.format(video="\n".join(lignes))}], OUTIL_PUBLIC, max_tokens=3000, modele=MODELE_PUBLIC)
+    except Exception as e:
+        if _bloquant(e): raise
+        print(f"  public test indisponible ({str(e)[:100]})", flush=True); return "", True
+    sp = [x for x in _liste(a.get("spectateurs")) if isinstance(x, dict)]
+    crit = [str(x) for x in _liste(a.get("critiques")) if str(x).strip()][:5]
+    compris = all(x.get("compris", True) for x in sp) if sp else True
+    rires = [float(x.get("rire", 0) or 0) for x in sp]
+    print(f"  public test : compris {sum(1 for x in sp if x.get('compris'))}/{len(sp)}, rire moyen {sum(rires) / max(1, len(rires)):.1f}/10, "
+          f"scrolls : {[x.get('scrolle_a') for x in sp]}", flush=True)
+    for c in crit[:3]: print(f"    → {c[:140]}", flush=True)
+    txt = "AVIS DU PUBLIC TEST (spectateurs sans contexte) :\n" + "\n".join(
+        f"- {x.get('nom', '?')} : {'a compris' if x.get('compris') else 'N A PAS COMPRIS'}, rire {x.get('rire', '?')}/10"
+        + (f", aurait scrollé à la réplique {x['scrolle_a']}" if isinstance(x.get('scrolle_a'), int) and x['scrolle_a'] >= 0 else "")
+        + (f", perdu par : {x.get('perdu_par')}" if x.get("perdu_par") else "") for x in sp) + \
+        ("\nCritiques constructives du public :\n" + "\n".join("- " + c for c in crit) if crit else "")
+    return txt, compris
+
+NOMS_LIBRES = {"presentateur": "Jojo", "invite": "Kévin", "envoyee": "Lila", "narrateur": "Voix off"}
 
 RELECTURE = """Tu es correcteur professionnel. Voici les textes qui s'afficheront à l'écran (sous-titres d'un dessin animé, titres, cartons).
 Corrige UNIQUEMENT : orthographe, accords, conjugaison, accents (y compris sur les majuscules), ponctuation et typographie françaises
@@ -569,7 +648,14 @@ def _bloquant(e):
     t = str(e).lower()
     return any(m in t for m in ("credit balance", "authentication", "invalid x-api-key", "permission_error", "billing"))
 
-def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=(), libre=False):
+SERIE_BLOC = """- ÉPISODE DE SÉRIE (réglage du propriétaire) : {serie_txt}
+  Écris "serie_titre" (le nom de la série, court, identique d'un épisode à l'autre) et "resume_episode" (2 phrases : ce qui s'est passé dans CET épisode, pour écrire la suite).
+  Fais des rappels aux épisodes précédents (un détail, une phrase culte, une conséquence) sans qu'il faille les avoir vus pour comprendre.
+  Termine sur la chute ET une petite porte ouverte vers la suite."""
+ACCROCHE_BLOC = """- ACCROCHE CHOC (réglage du propriétaire) : "teaser" = l'indice de la réplique la plus intrigante ou la plus choquante du sketch (PAS la chute finale) ; elle est rejouée en ouverture, avant le titre, pour accrocher le spectateur dès la première seconde.
+"""
+
+def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=(), libre=False, serie="", stats=""):
     """candidats : liste de sujets (chaque sujet = liste d'articles, le titre principal en premier) — ou une simple liste d'articles.
     Renvoie le sketch validé, avec "fiche" (livrables A-F, note qualité, décision)."""
     import anthropic
@@ -583,7 +669,11 @@ def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=(), li
     systeme = MOTEUR_HUMOUR + ADAPTATION.format(cast="\n".join(f"- {k} : {v}" for k, v in CAST.items()), ton=TON, secondes=SECONDES, nb=NB,
                                                  mots=MOTS, mots_min=MOTS_MIN or 40, special=SPECIAL_DEMAIN if special else "", gags=gtxt, recents=rtxt,
                                                  looks="|".join(LOOKS), top=TOP, exemple=json.dumps(EXEMPLE, ensure_ascii=False, indent=0))
-    if libre: systeme += LIBRE.replace("{style}", STYLE_LIBRE)
+    if libre:
+        systeme += (LIBRE.replace("{style}", STYLE_LIBRE).replace("{persos}", personnalites()).replace("{jeu}", JEU)
+                    .replace("{serie}", SERIE_BLOC.replace("{serie_txt}", serie) + "\n" if serie else "")
+                    .replace("{accroche}", ACCROCHE_BLOC if os.environ.get("ACCROCHE", "0") == "1" else ""))
+        if stats: systeme += "\n" + stats
     top = len(candidats) if libre else TOP                                # sketch libre : toutes les idées sont éligibles
     # 1) sélection du sujet et de l'angle
     ordre, angle, verifs, verite = list(range(len(candidats))), "", [], ""
@@ -661,6 +751,11 @@ def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=(), li
                     " ; ".join(f"{k} {nq[k]}" for k in ("originalite", "punchlines", "rythme", "pertinence", "dialogues", "visuel", "chute") if k in nq)
             except Exception as e:
                 note, critique = 0.0, f"notation impossible ({e})"
+            if libre and note >= 60:                                         # piste 5 : le public test donne son avis
+                avis, compris = public_test(client, sk)
+                if avis: critique = avis + "\n\n" + critique
+                if not compris and note > 80:
+                    print(f"  un spectateur n'a pas compris : note plafonnée à 80 (au lieu de {note:.0f})", flush=True); note = 80.0
             print(f"  version {tour + 1} : {note:.0f}/100, {len(sk['repliques'])} répliques, {n_mots} mots", flush=True)
             sk["fiche"] = {k2: brut.get(k2) for k2 in ("fil", "concept", "format", "angle", "resume_factuel", "faits_reels", "inventions") if isinstance(brut, dict)}
             sk["fiche"]["decoupage"] = sk["decoupage"]
@@ -675,7 +770,7 @@ def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=(), li
             elif tour: print(f"  pas de progrès : on repart de la meilleure version ({record[1]:.0f}/100)", flush=True)
             b_brut, b_note, b_crit = record                                 # on retouche toujours la meilleure version, jamais une moins bonne
             conv = [{"role": "user", "content": msg}, {"role": "assistant", "content": json.dumps(b_brut, ensure_ascii=False)[:8000]},
-                    {"role": "user", "content": REECRITURE.format(note=round(b_note), seuil=SEUIL, critique=b_crit[:2000],
+                    {"role": "user", "content": REECRITURE.format(note=round(b_note), seuil=SEUIL, critique=b_crit[:3500],
                                                                   reserve=f"Réserve de vannes et de chutes validées par le jury :\n{reserve}" if reserve else "")}]
         if derniere is not None and _bloquant(derniere): break
         print(f"  sujet trop faible après réécritures{' : on essaie un autre sujet' if rang == 0 and len(ordre) > 1 else ''}", flush=True)

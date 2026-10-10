@@ -143,8 +143,9 @@ def _visage(img, t, rx, ry, s, p, P):
             _ellipse(img, (ox, oy), (er, er * 1.15 * (1 - pa)), 0, TRAIT)
         # sourcils
         so = p["sourcils"]; by = oy - 34 * s
-        if so == "colere": a, b = (ox - sg * 22 * s, by - 10 * s), (ox + sg * 20 * s, by + 10 * s)
-        elif so == "triste": a, b = (ox - sg * 22 * s, by + 8 * s), (ox + sg * 20 * s, by - 10 * s)
+        # côté intérieur (vers le nez) = ox - sg * … : colère = intérieur bas (en V), tristesse = intérieur haut
+        if so == "colere": a, b = (ox - sg * 22 * s, by + 10 * s), (ox + sg * 20 * s, by - 10 * s)
+        elif so == "triste": a, b = (ox - sg * 22 * s, by - 10 * s), (ox + sg * 20 * s, by + 8 * s)
         elif so == "hausses": a, b = (ox - 22 * s, by - 16 * s), (ox + 22 * s, by - 16 * s)
         else: a, b = None, None
         if a: _ligne(img, R(*a), R(*b), TRAIT, 7 * s)
