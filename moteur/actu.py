@@ -24,14 +24,15 @@ UNES = [
 ]
 # sujets dont on ne rit pas (drames, victimes)
 DRAMES = re.compile(r"\b(mort|morts|morte|décès|décédé|tué|tués|tuée|meurtre|assassin|attentat|terroris|viol|victime|victimes|"
-                    r"otage|massacre|bombard|guerre|antisémit|racis|haine|discrimin|homophob|islamophob|harcèle|israël|israel|gaza|hamas|palestin|hezbollah|ukrain|russie|iran|cisjordanie|blessé|blessés|noyé|incendie|crash|deuil|obsèques|pédo|agression|féminicide|suicide)", re.I)
+                    r"otage|massacre|bombard|guerre|séisme|seisme|tremblement de terre|ouragan|cyclone|typhon|tsunami|inondation|catastrophe|éruption|disparu|disparition|antisémit|racis|haine|discrimin|homophob|islamophob|harcèle|israël|israel|gaza|hamas|palestin|hezbollah|ukrain|russie|iran|cisjordanie|blessé|blessés|noyé|incendie|crash|deuil|obsèques|pédo|agression|féminicide|suicide)", re.I)
 # rubriques récurrentes (bourse, météo, jeux, horoscope…) : jamais un « sujet du jour »
 RUBRIQUES = re.compile(r"(l[’']actu de|ce qu[’']il faut retenir|les infos du|récap|en bref|revue de presse|\d{2}/\d{2}|bourse|cac 40|marchés|valeurs|météo|horoscope|loto|euromillions|programme tv|résultats du|en direct|live|replay|podcast|quiz|revivez|minute par minute|à quelle heure|sur quelle chaîne)", re.I)
 VIDES = set("""le la les un une des du de d l au aux et ou en dans sur sous pour par avec sans ce cet cette ces son sa ses leur leurs qui que quoi
 dont est sont a ont été être avoir fait faire plus moins très tout tous toute toutes après avant contre entre chez comme mais donc or ni car
 il elle ils elles on nous vous je tu se s y ne pas n quand comment pourquoi selon face depuis vers lors ainsi aussi encore déjà va vont peut
 doit veut dit annonce annoncé nouveau nouvelle nouveaux nouvelles premier première deux trois ans an jour jours semaine mois heure heures
-france français française françaises français paris live direct vidéo video info infos actu actualité ce qu il faut savoir""".split())
+france français française françaises français paris live direct vidéo video info infos actu actualité ce qu il faut savoir
+demande demandé demander demandent explique expliquer explications réagit réagir estime affirme assure déclare""".split())
 
 def _texte(x):
     x = html.unescape(re.sub(r"<[^>]+>", " ", x or ""))
@@ -80,11 +81,27 @@ def _mots(t):
     t = unicodedata.normalize("NFKD", t.lower()).encode("ascii", "ignore").decode()
     return {m for m in re.findall(r"[a-z0-9]{4,}", t) if m not in VIDES and not m.isdigit()}
 
+ABREV = {"prof": "professeur", "profs": "professeur", "manif": "manifestation", "gouv": "gouvernement", "depute": "deputes",
+         "presidentiel": "presidentielle", "senateur": "senat", "retraite": "retraites", "ministere": "ministre", "smic": "salaire"}
+
+def _racine(m):
+    m = ABREV.get(m, m)
+    if len(m) > 5 and m[-1] in "sx": m = m[:-1]
+    return ABREV.get(m, m)[:7]
+
+def empreinte(texte):
+    """Mots-clés normalisés d'un sujet (pluriels, abréviations) : sert à reconnaître un sujet déjà traité."""
+    return {_racine(m) for m in _mots(texte)}
+
+def deja_traite(textes, sujets_recents, seuil=3):
+    e = empreinte(" ".join(textes))
+    return any(len(e & set(s)) >= seuil for s in sujets_recents)
+
 def sujet_du_jour(heures=24, deja_vus=(), mots_recents=()):
     c = candidats_du_jour(heures, deja_vus, mots_recents, n=1)
     return (c[0][0], c[0][1]) if c else (None, "pas assez de titres")
 
-def candidats_du_jour(heures=24, deja_vus=(), mots_recents=(), n=6):
+def candidats_du_jour(heures=24, deja_vus=(), mots_recents=(), n=6, sujets_recents=()):
     """Les n sujets distincts les plus repris par les médias (politique, économie, société, tech, médias…).
     Renvoie [(titres du sujet, description), …], le titre principal en premier dans chaque sujet."""
     maintenant = datetime.datetime.now(datetime.timezone.utc); tous = []
@@ -115,7 +132,7 @@ def candidats_du_jour(heures=24, deja_vus=(), mots_recents=(), n=6):
         deja = len(g["mots"] & recents) >= 4                                 # sujet déjà traité ces derniers jours
         return (len(unes) * 5 + len(sources) * 3 + len(g["items"]) + frais) * (0.3 if deja else 1)
     groupes.sort(key=score, reverse=True)
-    out, graines, secondaires = [], [], []
+    out, graines, secondaires, repris = [], [], [], []
     for g in groupes:
         gr = g["graine"]
         if any(len(gr["cles"] & x["cles"]) >= 2 for x in graines) or len(g["items"]) < 2: continue   # sujets distincts, repris au moins deux fois
@@ -128,8 +145,12 @@ def candidats_du_jour(heures=24, deja_vus=(), mots_recents=(), n=6):
         medias = {i["source"] for i in g["items"]}; unes = {i["source"] for i in g["items"] if i.get("une")}
         info = f"à la une chez {len(unes)} média(s), {len(medias)} médias, {len(g['items'])} articles"
         # gros titre du jour : à la une d'au moins un média ET traité par au moins 3 médias différents
+        if sujets_recents and deja_traite([i["titre"] + " " + i["resume"][:160] for i in sel], sujets_recents):
+            repris.append((sel, info + " (déjà traité récemment)")); continue      # sujet des 3 derniers jours : écarté
         (out if unes and len(medias) >= 3 else secondaires).append((sel, info))
         if len(out) >= n: break
     if len(out) < 2:                                                       # journée creuse ou flux « à la une » en panne : on complète, signalé
         out += [(sel, info + " (sujet secondaire)") for sel, info in secondaires[:max(0, min(n, 3) - len(out))]]
+    if not out and repris: out = repris[:1]                                # rien d'autre : mieux vaut un nouvel angle qu'aucune émission
+    for sel, info in repris[:3]: print(f"  écarté (déjà traité) : « {sel[0]['titre'][:90]} »", flush=True)
     return out

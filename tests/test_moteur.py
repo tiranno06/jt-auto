@@ -63,6 +63,17 @@ class TestRecherche(unittest.TestCase):
         self.assertGreaterEqual(len(c[0][0][0]["titre"].split()), 4)            # on présente un vrai titre, pas un simple nom
         self.assertIn("Attal", c[0][0][0]["titre"])
 
+    def test_sujet_deja_traite_ecarte(self):
+        recents = [sorted(actu.empreinte("3000 PROFS EXPRESS Le ministère a trouvé 3 000 profs en 24 heures, des remplaçants recrutés en vitesse."))]
+        profs = [article(f"Les 3024 professeurs remplaçants recrutés en un jour : le ministre interrogé ({m})", m) for m in ("lemonde", "figaro", "bfm")]
+        budget = [article(f"Budget 2027 : la commission des finances rejette les recettes ({m})", m) for m in ("lemonde", "figaro", "libe")]
+        bruit = [article(f"Brève {i} isolée motunique{i}", f"s{i}") for i in range(60)]
+        actu.lire_flux = lambda u: profs + budget + bruit if u == actu.UNES[0] else []
+        c = actu.candidats_du_jour(sujets_recents=recents)
+        self.assertIn("Budget", c[0][0][0]["titre"])                            # le sujet d'hier n'est pas repris
+        self.assertFalse(any("professeurs" in sel[0]["titre"] for sel, _ in c))
+        self.assertTrue(actu.DRAMES.search("Un séisme de magnitude 7,7 a secoué le Panama"))   # catastrophes exclues
+
     def test_deja_vus_et_flux_en_panne(self):
         items = [article("Budget 2027 : les députés rejettent les économies", "a", "L1"),
                  article("Les économies du budget rejetées par les députés", "b", "L2"),

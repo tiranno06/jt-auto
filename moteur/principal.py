@@ -43,9 +43,13 @@ def main():
             print(f"Casting impossible ({e}) : on continuera avec la voix de secours.", flush=True)
     deja = {l for h in historique for l in h.get("sources", [])}
     mots_recents = {m for h in historique[-5:] for m in h.get("mots", [])}
+    depuis = (datetime.date.today() - datetime.timedelta(days=3)).isoformat()
+    sujets_recents = [h["empreinte"] if h.get("empreinte") else
+                      sorted(actu.empreinte(" ".join([h.get("titre", ""), h.get("accroche", "")])))
+                      for h in historique if h.get("date", "") >= depuis]
     # 1. recherche : sujets candidats (articles des dernières 24 h, regroupés par sujet et classés par reprise médiatique)
     try:
-        candidats = actu.candidats_du_jour(deja_vus=deja, mots_recents=mots_recents, n=6)
+        candidats = actu.candidats_du_jour(deja_vus=deja, mots_recents=mots_recents, n=6, sujets_recents=sujets_recents)
     except Exception as e:
         print(f"Recherche d'actualité en erreur : {e}", flush=True); candidats = []
     for k, (sel, info) in enumerate(candidats):
@@ -100,7 +104,8 @@ def main():
     fiche = sk.get("fiche", {})
     if fiche: print(f"Qualité : {fiche.get('note', 0):.0f}/100 — {fiche.get('decision')}", flush=True)
     historique.append(dict(date=jour, titre=sk["sujet"], sources=sk["sources"], note=fiche.get("note"), decision=fiche.get("decision"),
-                           accroche=sk["repliques"][0]["t"] if sk.get("repliques") else "", mots=sorted(actu._mots(" ".join(t["titre"] for t in titres)))[:40], voix=moteur, gag=bool(gag), running_gag=sk.get("running_gag", ""), duree=round(duree, 1),
+                           accroche=sk["repliques"][0]["t"] if sk.get("repliques") else "", mots=sorted(actu._mots(" ".join(fiche.get("titres_sujet") or [t["titre"] for t in titres])))[:40],
+                           empreinte=sorted(actu.empreinte(" ".join((fiche.get("titres_sujet") or []) + [sk["sujet"]] + [r["t"] for r in sk.get("repliques", [])]))), voix=moteur, gag=bool(gag), running_gag=sk.get("running_gag", ""), duree=round(duree, 1),
                            fichier=os.path.basename(base) + ".mp4", tag=f"emissions-{jour[:7]}", legende=legende, publie=None))
     json.dump(historique[-200:], open("episodes/historique.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     sortie = os.environ.get("GITHUB_OUTPUT")

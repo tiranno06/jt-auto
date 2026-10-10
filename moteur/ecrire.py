@@ -396,6 +396,7 @@ def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=()):
             print(f"  version {tour + 1} : {note:.0f}/100, {len(sk['repliques'])} répliques, {n_mots} mots", flush=True)
             sk["fiche"] = {k2: brut.get(k2) for k2 in ("concept", "format", "angle", "resume_factuel", "faits_reels", "inventions") if isinstance(brut, dict)}
             sk["fiche"]["decoupage"] = sk["decoupage"]
+            sk["fiche"]["titres_sujet"] = [t["titre"] for t in titres[:6]]          # articles du sujet réellement choisi (anti-répétition)
             for k2 in ("concept", "format", "angle"):                       # la note F vient du relecteur, jamais de l'auteur
                 if isinstance(sk["fiche"].get(k2), str):
                     sk["fiche"][k2] = re.sub(r"\s*(Note qualit[ée]|Décision|Decision)\b.*$", "", sk["fiche"][k2], flags=re.S | re.I).strip()
