@@ -28,13 +28,17 @@ def construire():
         if os.path.exists(os.path.join(RACINE, "episodes", "historique.json")) else []
     shutil.rmtree(SITE, ignore_errors=True); os.makedirs(os.path.join(SITE, "videos"))
     liste = []
+    comptes = {}
     for e in reversed([h for h in hist if h.get("fichier")]):
-        if len(liste) >= NB: break
+        cat = "manuel" if e.get("manuel") else "court" if e.get("format") == "mini" else "long"
+        if comptes.get(cat, 0) >= NB: continue                             # jusqu'à NB vidéos par onglet
+        comptes[cat] = comptes.get(cat, 0) + 1
         dest = os.path.join(SITE, "videos", e["fichier"])
         if not recuperer(e, dest): continue
         poster = e["fichier"].replace(".mp4", ".jpg"); affiche(dest, os.path.join(SITE, "videos", poster))
         liste.append(dict(titre=e.get("titre", ""), date=e.get("date", ""), fichier=e["fichier"], poster=poster,
-                          legende=e.get("legende", ""), publie=e.get("publie"), vues=e.get("vues")))
+                          legende=e.get("legende", ""), publie=e.get("publie"), vues=e.get("vues"),
+                          format=e.get("format", ""), manuel=bool(e.get("manuel"))))
     import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import marque
     nom = marque.NOM                                                       # nom de la chaîne (le JT garde son propre nom)
     conf = {"depot": os.environ.get("GITHUB_REPOSITORY", ""), "branche": os.environ.get("GITHUB_REF_NAME") or "main"}
@@ -66,7 +70,7 @@ def application(nom):
 
 # Service worker : l'appli s'ouvre même hors connexion (dernière version de la page), sans jamais mettre en cache
 # les vidéos (trop lourdes) ni les appels à GitHub.
-SW = r"""const CACHE = "regie-v6";
+SW = r"""const CACHE = "regie-v7";
 const COQUILLE = ["./", "manifest.webmanifest", "icone-192.png", "icone-512.png"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(COQUILLE))); self.skipWaiting(); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(k => Promise.all(k.filter(x => x !== CACHE).map(x => caches.delete(x))))); self.clients.claim(); });
@@ -127,7 +131,7 @@ button{font:inherit;border:0;border-radius:14px;cursor:pointer}
 #suivi{font-size:13px;margin-top:8px;min-height:18px;color:var(--doux)}
 #toast{position:fixed;top:16px;left:50%;transform:translateX(-50%);background:var(--jaune);color:#111;font-weight:700;padding:10px 16px;border-radius:12px;display:none;z-index:9;max-width:90vw;text-align:center}
 .onglets{position:sticky;top:0;z-index:5;display:flex;gap:8px;max-width:560px;margin:0 auto;padding:8px 16px;background:var(--bg)}
-.onglet{flex:1;padding:10px;font-size:15px;font-weight:700;background:var(--carte);color:var(--doux);border:1px solid var(--ligne)}
+.onglet{flex:1;padding:10px 4px;font-size:14px;white-space:nowrap;font-weight:700;background:var(--carte);color:var(--doux);border:1px solid var(--ligne)}
 .onglet.actif{background:var(--jaune);color:#111;border-color:var(--jaune)}
 h2{margin:0 0 10px;font-size:16px}
 label{display:block;font-size:13px;color:var(--doux);margin:10px 0}
@@ -153,6 +157,8 @@ label .jeton{margin-top:6px}
   #barre video{max-height:62vh}
 }
 textarea{resize:vertical}
+label>textarea{display:block;width:100%;margin-top:6px;box-sizing:border-box}
+.onglet.reg{flex:0 0 52px}
 video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#000;display:none}
 #cadreVideo{position:relative}
 #fermer{display:none;position:absolute;top:8px;right:8px;width:40px;height:40px;padding:0;border-radius:50%;font-size:20px;font-weight:700;line-height:40px;background:rgba(0,0,0,.65);color:#fff;border:1px solid rgba(255,255,255,.35);z-index:2}
@@ -160,7 +166,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
 </style></head><body data-onglet="videos">
 <header><h1><img src="icone-192.png" alt="" style="width:44px;height:44px;border-radius:12px;vertical-align:-10px;margin-right:10px">__NOM__</h1><div class="sous">Régie de la chaîne · vidéos de la plus récente à la plus ancienne</div>
 <button id="installer" style="display:none;margin-top:10px;padding:9px 16px;font-size:14px;font-weight:700;background:var(--jaune);color:#111">📲 Installer l'application</button></header>
-<nav class="onglets"><button class="onglet actif" data-o="videos">🎬 Vidéos</button><button class="onglet" data-o="config">⚙️ Réglages</button></nav>
+<nav class="onglets"><button class="onglet actif" data-o="videos" data-f="court">📱 Courtes</button><button class="onglet" data-o="videos" data-f="long">🎬 Longues</button><button class="onglet" data-o="videos" data-f="manuel">✍️ Manuel</button><button class="onglet reg" data-o="config" aria-label="Réglages" title="Réglages">⚙️</button></nav>
 <main>
  <div id="o-videos">
   <section class="panneau">
@@ -173,6 +179,17 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
       <div class="jeton"><input id="jeton" type="password" placeholder="github_pat_…" autocomplete="off"><button class="second" id="garder" style="flex:none;padding:10px 14px">Enregistrer</button></div>
       <p><button class="second" id="oublier" style="padding:8px 12px">Déconnecter ce navigateur</button></p>
     </details>
+  </section>
+  <section class="panneau" id="manuel" style="display:none"><h2>✍️ Créer une vidéo à partir de mon texte</h2>
+    <p class="note">À part du robot automatique : la vidéo n'entre pas dans le cycle et n'est jamais publiée toute seule. Elle apparaît ici quand elle est prête (15 à 40 min).</p>
+    <label>Ce que je tape<select id="mMode">
+      <option value="idee">💡 Une idée ou un thème : le robot écrit le sketch</option>
+      <option value="script">📝 Mon script : les répliques sont jouées mot pour mot</option></select></label>
+    <label><span id="mAide">Idée / thème de la vidéo</span><textarea id="mTexte" rows="6" maxlength="1800" placeholder="Ex. : Jojo essaie de résilier son abonnement de salle de sport, mais le conseiller ne le laisse jamais partir."></textarea></label>
+    <label>Format<select id="mFormat"><option value="mini">⚡ Gag éclair (15-25 s)</option><option value="libre">🎭 Sketch long (+1 min)</option></select></label>
+    <label id="mStyleL">Ton<select id="mStyle"><option value="">Comme d'habitude (humour noir)</option><option value="Ton encore plus absurde et délirant.">Plus absurde</option><option value="Ton plus méchant et plus cash.">Plus méchant</option><option value="Ton plus tendre, humour bienveillant.">Plus tendre</option></select></label>
+    <button class="action" id="mCreer">🎬 Créer la vidéo</button>
+    <div id="mSuivi" class="note"></div>
   </section>
   <div id="liste"></div>
  </div>
@@ -323,10 +340,13 @@ function badge(v){
   if(v.publie===false) return '<span class="badge ko">⚠ Échec de publication</span>';
   return '<span class="badge att">⏸ En attente de validation</span>';
 }
+let FILTRE="court";
+const categorie=v=>v.manuel?"manuel":(v.format==="mini"?"court":"long");
 function rendre(){
-  const L=$("#liste");
-  if(!DATA.length){L.innerHTML='<p class="vide">Aucune vidéo pour l\'instant.</p>';return}
-  DATA.forEach((v,i)=>{
+  const L=$("#liste"); L.innerHTML="";
+  const vis=DATA.map((v,i)=>[v,i]).filter(([v])=>categorie(v)===FILTRE);
+  if(!vis.length){L.innerHTML='<p class="vide">'+({court:"Aucune vidéo courte pour l'instant.",long:"Aucune vidéo longue pour l'instant.",manuel:"Aucune vidéo manuelle pour l'instant : tapez votre texte ci-dessus."})[FILTRE]+'</p>';return}
+  vis.forEach(([v,i])=>{
     const c=document.createElement("div");c.className="carte";c.dataset.i=i;
     c.innerHTML=`<img loading="lazy" src="videos/${v.poster}" alt=""><div class="infos"><div class="titre"></div><div class="date">${dateFr(v.date)}${v.vues!=null?` · 👁 ${Number(v.vues).toLocaleString("fr-FR")} vues`:""}</div>${badge(v)}<div class="etat"></div></div><button class="croix" title="Supprimer cette vidéo" aria-label="Supprimer">✕</button>`;
     c.querySelector(".titre").textContent=v.titre; c.onclick=()=>choisir(i);
@@ -430,6 +450,8 @@ $("#copierLien").onclick=async()=>{try{await navigator.clipboard.writeText(lienC
 // ------------------------------------------------ onglets
 document.querySelectorAll(".onglet").forEach(b=>b.onclick=()=>{
   document.querySelectorAll(".onglet").forEach(x=>x.classList.toggle("actif",x===b));
+  if(b.dataset.f){FILTRE=b.dataset.f; if(choisie!==null&&categorie(DATA[choisie])!==FILTRE) fermerVideo(); rendre();
+    $("#manuel").style.display=FILTRE==="manuel"?"":"none"; document.querySelector("#o-videos .panneau:not(#manuel)").style.display=FILTRE==="manuel"?"none":""}
   $("#o-videos").style.display=b.dataset.o==="videos"?"":"none"; $("#o-config").style.display=b.dataset.o==="config"?"":"none";
   $("#barre").style.display=b.dataset.o==="videos"?"":"none"; document.body.dataset.onglet=b.dataset.o; if(b.dataset.o==="config") chargerReglages();
 });
@@ -473,8 +495,8 @@ document.querySelectorAll("[data-enr]").forEach(b=>b.onclick=async()=>{
   const c=document.querySelector(`[data-var="${b.dataset.enr}"]`); const val=c.value.trim(); if(!val)return;
   try{await ecrireVar(b.dataset.enr,val);toast("Enregistré ✓ (visible dès la prochaine émission)")}catch(e){toast("Impossible : "+e.message)}
 });
-async function lancerFlux(fichier,bouton,texte,inputs){
-  bouton.disabled=true; const s=$("#suiviCfg"); const depart=new Date(Date.now()-5000);
+async function lancerFlux(fichier,bouton,texte,inputs,zone){
+  bouton.disabled=true; const s=zone||$("#suiviCfg"); const depart=new Date(Date.now()-5000);
   try{
     const r=await gh(`/actions/workflows/${fichier}/dispatches`,{method:"POST",body:JSON.stringify(inputs?{ref:CONF.branche,inputs}:{ref:CONF.branche})});
     if(r.status!==204) throw new Error("GitHub a répondu "+r.status);
@@ -493,6 +515,19 @@ async function lancerFlux(fichier,bouton,texte,inputs){
 $("#lancer").onclick=()=>lancerFlux("emission.yml",$("#lancer"),"📰 Le robot fabrique un JT d'actualité (20 à 40 min)…",{format:"actu"});
 $("#lancerMini").onclick=()=>lancerFlux("emission.yml",$("#lancerMini"),"⚡ Le robot fabrique un gag éclair (15 à 30 min)…",{format:"mini"});
 $("#lancerLibre").onclick=()=>lancerFlux("emission.yml",$("#lancerLibre"),"🎭 Le robot fabrique un sketch long (20 à 40 min)…",{format:"libre"});
+$("#mMode").onchange=()=>{const s=$("#mMode").value==="script";
+  $("#mAide").textContent=s?"Mon script (une réplique par ligne : « Jojo : … », « Kévin : … », « Lila : … »)":"Idée / thème de la vidéo";
+  $("#mTexte").placeholder=s?"Jojo : Je vais résilier ma salle de sport.\nKévin : T'y es allé combien de fois ?\nJojo : Une. Pour m'inscrire.\nLila : Donc tu payes 30 € par mois pour un souvenir.":"Ex. : Jojo essaie de résilier son abonnement de salle de sport, mais le conseiller ne le laisse jamais partir.";
+  $("#mStyleL").style.display=s?"none":""};
+$("#mCreer").onclick=()=>{
+  if(!lireJeton()){toast("Connectez la régie (onglet Réglages) pour créer une vidéo");return}
+  const t=$("#mTexte").value.trim(); if(t.length<8){toast("Tapez d'abord votre idée ou votre script");return}
+  const script=$("#mMode").value==="script";
+  if(script&&!/^\s*[^:\n]{1,25}:/m.test(t)){toast("Format du script : une réplique par ligne, « Jojo : … »");return}
+  const theme=script?"SCRIPT::"+t:(t+($("#mStyle").value?"\n"+$("#mStyle").value:""));
+  const f=$("#mFormat").value;
+  lancerFlux("emission.yml",$("#mCreer"),(f==="mini"?"⚡ Gag éclair":"🎭 Sketch long")+" manuel en fabrication (15 à 40 min). Il apparaîtra dans cet onglet.",{format:f,theme},$("#mSuivi"));
+};
 $("#lancerStats").onclick=()=>lancerFlux("stats.yml",$("#lancerStats"),"📊 Lecture des statistiques TikTok (1 à 3 min)…");
 $("#majsite").onclick=()=>lancerFlux("site.yml",$("#majsite"),"🔄 Mise à jour de l'application (2 à 3 min)…");
 activer(false);

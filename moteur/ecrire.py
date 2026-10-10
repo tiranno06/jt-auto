@@ -335,7 +335,7 @@ def _liste(v):
         except Exception: return []
     return v if isinstance(v, list) else []
 
-def valider(sk, liens, libre=False):
+def valider(sk, liens, libre=False, minimum=None):
     reps, attente = [], 0
     if not isinstance(sk, dict): raise ValueError("réponse sans sketch")
     brutes = _liste(sk.get("repliques") or sk.get("script") or sk.get("dialogues"))
@@ -355,7 +355,7 @@ def valider(sk, liens, libre=False):
         reps.append(x)
     if len(reps) > NB_MAX:                                   # trop long : on garde le début et la chute finale
         reps = reps[:NB_MAX - 1] + [reps[-1]]
-    if len(reps) < (3 if MINI else 4):
+    if len(reps) < (minimum or (3 if MINI else 4)):
         vus = sorted({str((r or {}).get("p", "?"))[:20] for r in brutes if isinstance(r, dict)})[:5]
         raise ValueError(f"sketch trop court ({len(reps)} répliques ; champs reçus : {', '.join(sorted(sk))[:120]} ; rôles : {vus})")
     if reps[0]["p"] != "presentateur" and not (MINI or libre): raise ValueError("le présentateur doit ouvrir")
@@ -601,6 +601,64 @@ def public_test(client, sk):
     return txt, compris
 
 NOMS_LIBRES = {"presentateur": "Jojo", "invite": "Kévin", "envoyee": "Lila", "narrateur": "Voix off"}
+
+MISE_EN_SCENE = """Voici le script d'un sketch animé écrit par le propriétaire de la chaîne. Ne change AUCUN mot des répliques.
+Personnages : Jojo (bonnet orange), Kévin (casquette), Lila (nœud rose), voix off.
+{script}
+Ajoute seulement la mise en scène, avec l'outil mise_en_scene :
+- "d" : pour chaque réplique (même ordre), le même texte précédé de l'émotion juste en indication anglaise entre crochets ([annoyed], [laughing], [crying], [shouting], [sarcastic], [whispers]…) ;
+- "decoupage" : 1 à 4 scènes (indices des répliques, "decor" EN ANGLAIS sans personnage : lieu précis + 2 ou 3 objets, "titre" = carton court si la scène change de moment ou de lieu) ;
+- "titre_accroche" (« POV : … » ou « Quand … », 40 caractères max), "legende" (1 phrase), "question" (pour les commentaires), "hashtags" (4 à 6, sans #)."""
+OUTIL_MES = {"name": "mise_en_scene", "description": "Mise en scène d'un script imposé.",
+             "input_schema": _schema({"d": {"type": "array", "items": {"type": "string"}},
+                                      "decoupage": {"type": "array", "items": _schema({"repliques": {"type": "array", "items": {"type": "integer"}},
+                                                                                       "decor": {"type": "string"}, "titre": {"type": "string"}}, ["repliques"])},
+                                      "titre_accroche": {"type": "string"}, "legende": {"type": "string"}, "question": {"type": "string"},
+                                      "hashtags": {"type": "array", "items": {"type": "string"}}}, ["d", "decoupage"])}
+ALIAS = {"jojo": "presentateur", "kevin": "invite", "lila": "envoyee", "voix off": "narrateur", "narrateur": "narrateur"}
+
+def lire_script(texte):
+    """« Jojo : … » ligne par ligne -> répliques. Un nom inconnu reçoit le premier personnage libre."""
+    reps, libres, vus = [], ["presentateur", "invite", "envoyee"], {}
+    for ligne in str(texte).splitlines():
+        m = re.match(r"\s*([^:]{1,25})\s*:\s*(.+)", ligne)
+        if not m:
+            if reps and ligne.strip(): reps[-1]["t"] += " " + ligne.strip()
+            continue
+        nom = unicodedata.normalize("NFKD", m.group(1).strip().lower()).encode("ascii", "ignore").decode()
+        p = ALIAS.get(nom) or vus.get(nom)
+        if not p:
+            pris = set(vus.values()) | {r["p"] for r in reps}
+            p = next((x for x in libres if x not in pris), "presentateur"); vus[nom] = p
+        reps.append({"p": p, "t": m.group(2).strip()})
+    return reps
+
+def mettre_en_scene(texte):
+    """Script tapé dans la régie : répliques gardées mot pour mot, Claude ajoute seulement le jeu, les scènes et les décors."""
+    reps = lire_script(texte)
+    if len(reps) < 2: raise RuntimeError("script trop court : écrivez au moins 2 répliques au format « Jojo : … »")
+    brut = {"sujet": reps[0]["t"][:30], "repliques": [dict(r) for r in reps], "legende": reps[0]["t"][:120], "hashtags": ["humour", "pov", "sketch"],
+            "decoupage": [{"scene": "1", "repliques": list(range(len(reps))), "decor": "plain"}], "titre_accroche": ""}
+    try:
+        import anthropic
+        m = _appel(anthropic.Anthropic(), None, [{"role": "user", "content": MISE_EN_SCENE.format(
+            script="\n".join(f"{i}. {NOMS_LIBRES[r['p']]} : {r['t']}" for i, r in enumerate(reps)))}], OUTIL_MES, max_tokens=4000, modele=MODELE_PUBLIC)
+        d = [str(x) for x in _liste(m.get("d"))]
+        for r, x in zip(brut["repliques"], d):
+            if _mots_bruts(re.sub(r"\[[^\]]*\]", " ", x)) == _mots_bruts(r["t"]): r["d"] = x   # mots identiques : jeu accepté
+        if _liste(m.get("decoupage")): brut["decoupage"] = [dict(sc, scene=str(k + 1)) for k, sc in enumerate(_liste(m["decoupage"])) if isinstance(sc, dict)]
+        for k in ("titre_accroche", "legende", "question"):
+            if m.get(k): brut[k] = m[k]
+        if _liste(m.get("hashtags")): brut["hashtags"] = _liste(m["hashtags"])
+    except Exception as e:
+        print(f"  mise en scène automatique impossible ({str(e)[:120]}) : script joué tel quel, une seule scène", flush=True)
+    brut["repliques"][-1]["chute"] = True
+    narr = [r for r in brut["repliques"] if r["p"] == "narrateur"]
+    for r in narr: r["p"] = "presentateur"                                 # la voix off n'est ajoutée que par le robot (titre)
+    sk = valider(brut, set(), libre=True, minimum=2)
+    sk["fiche"] = {"note": 0, "decision": "vidéo manuelle (script imposé)", "decoupage": sk["decoupage"]}
+    print(f"  script mis en scène : {len(sk['repliques'])} répliques, {len(sk['decoupage'])} scène(s)", flush=True)
+    return sk
 
 RELECTURE = """Tu es correcteur professionnel. Voici les textes qui s'afficheront à l'écran (sous-titres d'un dessin animé, titres, cartons).
 Corrige UNIQUEMENT : orthographe, accords, conjugaison, accents (y compris sur les majuscules), ponctuation et typographie françaises

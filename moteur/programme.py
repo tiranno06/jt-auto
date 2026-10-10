@@ -8,6 +8,7 @@ def format_du_jour(demande, historique):
     if f == "cycle":
         courts = 0
         for h in reversed(historique):                                    # gags éclair depuis le dernier sketch long
+            if h.get("manuel"): continue                                  # les vidéos manuelles ne comptent pas dans le cycle
             if h.get("format") == "libre": break
             if h.get("format") == "mini": courts += 1
         return "libre" if courts >= 3 else "mini"

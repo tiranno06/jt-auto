@@ -436,3 +436,35 @@ class TestSousTitres(unittest.TestCase):
         self.assertTrue(all(len(x) <= 22 for x in g))
         self.assertFalse(any(x.split()[-1].lower() in jt.PETITS for x in g[:-1]))
         self.assertIn("8 h", " ".join(g))
+
+
+class TestPetitsDramas(unittest.TestCase):
+    def test_script_manuel(self):
+        r = ecrire.lire_script("Jojo : Salut !\nKévin: T'as vu ?\nMaman : Rends-la !")
+        self.assertEqual([x["p"] for x in r], ["presentateur", "invite", "envoyee"])
+
+    def test_cycle_ignore_manuel(self):
+        import programme
+        h = [{"format": "libre"}, {"format": "mini"}, {"format": "mini"}, {"format": "mini", "manuel": True}]
+        self.assertEqual(programme.format_du_jour("cycle", h), "mini")
+
+    def test_fusion_historique(self):
+        import fusion
+        m = fusion.fusion_historique([{"fichier": "a"}, {"fichier": "b"}], [{"fichier": "a", "vues": 3}, {"fichier": "c"}])
+        self.assertEqual([x["fichier"] for x in m], ["a", "c", "b"]); self.assertEqual(m[0]["vues"], 3)
+
+    def test_serie(self):
+        import serie
+        os.environ["EPISODES"] = "serie"
+        try:
+            vrai = serie.FICHIER; serie.FICHIER = os.path.join(os.path.dirname(__file__), "_serie_test.json")
+            self.assertIn("NOUVELLE série", serie.contexte())
+            self.assertEqual(serie.enregistrer({"serie_titre": "Jojo déménage", "resume_episode": "Il cherche un appart."}), 1)
+            self.assertIn("épisode 2", serie.contexte()); self.assertIn("Il cherche un appart", serie.contexte())
+        finally:
+            os.environ.pop("EPISODES"); os.path.exists(serie.FICHIER) and os.remove(serie.FICHIER); serie.FICHIER = vrai
+
+    def test_personnalites_reglables(self):
+        os.environ["PERSO_JOJO"] = "un radin absolu"
+        try: self.assertIn("un radin absolu", ecrire.personnalites())
+        finally: os.environ.pop("PERSO_JOJO")

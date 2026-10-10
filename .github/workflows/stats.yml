@@ -33,5 +33,4 @@ jobs:
           git config user.email "robot-jt@users.noreply.github.com"
           git add episodes
           git commit -m "Statistiques TikTok" || echo "rien à enregistrer"
-          git pull --rebase -q || true
-          git push
+          python moteur/fusion.py

@@ -13,6 +13,8 @@ os.chdir(RACINE)
 from programme import format_du_jour
 
 _hist = json.load(open("episodes/historique.json", encoding="utf-8")) if os.path.exists("episodes/historique.json") else []
+THEME = (os.environ.get("THEME") or "").strip()[:2000]                 # création manuelle depuis l'onglet « Manuel » de la régie
+if THEME and (os.environ.get("FORMAT") or "") not in ("mini", "libre"): os.environ["FORMAT"] = "mini"
 os.environ["FORMAT"] = FORMAT = format_du_jour(os.environ.get("FORMAT"), _hist)
 if FORMAT == "mini": os.environ["LONGUEUR"] = "eclair"                    # gag éclair : ~15 s
 elif FORMAT == "libre": os.environ["LONGUEUR"] = "pro"                    # sketch long : 60 à 90 s (plus d'une minute garantie au montage)
@@ -64,7 +66,13 @@ def main():
     print(f"Type de vidéo : {'gag éclair (~15 s)' if fmt == 'mini' else 'sketch long (+1 min)' if libre else 'JT actu du jour'}", flush=True)
     recents = [f"{h.get('titre', '')} : {h.get('accroche', '')}" for h in historique[-10:]]
     # 1. recherche : sujets candidats (articles des dernières 24 h, regroupés par sujet et classés par reprise médiatique)
-    if libre and not os.environ.get("SKETCH_TEST", "").strip():
+    script = None
+    if THEME:                                                              # vidéo manuelle : le thème (ou le script) tapé dans la régie
+        mode_script = THEME.startswith("SCRIPT::"); texte = THEME.split("::", 1)[1].strip() if "::" in THEME[:12] else THEME
+        print(f"Vidéo manuelle ({'script' if mode_script else 'idée'}) : « {texte[:200]} »", flush=True)
+        if mode_script: script = texte
+        candidats = [([{"titre": texte.splitlines()[0][:120], "resume": texte[:1500], "lien": "", "date": None, "source": "manuel"}], "manuel")]
+    elif libre and not os.environ.get("SKETCH_TEST", "").strip():
         try: candidats = [(c, "idée") for c in ecrire.idees_libres(recents=[f"{h.get('titre', '')} : {h.get('accroche', '')}" for h in historique[-30:]],
                                                                     consignes=stats.pour_idees())]
         except Exception as e:
@@ -91,13 +99,15 @@ def main():
     dimanche = datetime.datetime.now(ZoneInfo("Europe/Paris")).weekday() == 6 and os.environ.get("INFOS_DEMAIN", "1") != "0"
     gags = [h.get("running_gag") for h in historique[-15:] if h.get("running_gag")]
     test = os.environ.get("SKETCH_TEST", "").strip()
-    if test:                                                               # sketch écrit à la main (essai d'un style)
+    if script:                                                             # script tapé : les répliques restent mot pour mot
+        sk = ecrire.mettre_en_scene(script)
+    elif test:                                                             # sketch écrit à la main (essai d'un style)
         ecrire.NB_MAX = 20
         sk = ecrire.valider(json.load(open(test, encoding="utf-8")), set(), libre)
         print(f"Sketch d'essai : {test}", flush=True)
     else:
         sk = ecrire.ecrire_sketch([c[0] for c in candidats], gags=gags, special=dimanche and not libre, recents=recents, libre=libre,
-                                  serie=serie.contexte() if libre else "", stats=stats.pour_auteur() if libre else "")
+                                  serie=serie.contexte() if (libre and not THEME) else "", stats=stats.pour_auteur() if libre else "")
         print(f"Moteur humoristique : {ecrire.USAGE['appels']} appels Claude, {ecrire.USAGE['entree']} jetons lus, {ecrire.USAGE['sortie']} jetons écrits, {ecrire.USAGE['recherches_web']} recherche(s) web", flush=True)
         titres = next((c[0] for c in candidats if c[0][0]["lien"] and c[0][0]["lien"] in sk.get("sources", [])), titres)
     print(f"Sketch : « {sk['sujet']} », {len(sk['repliques'])} répliques", flush=True)
@@ -167,7 +177,9 @@ def main():
                            empreinte=sorted(actu.empreinte(" ".join((fiche.get("titres_sujet") or []) + [sk["sujet"]] + [r["t"] for r in sk.get("repliques", [])]))), voix=moteur, gag=bool(gag), controle_video=rapport_video[:500] or ("ok" if video_ok else ""), running_gag=sk.get("running_gag", ""), duree=round(duree, 1),
                            fichier=os.path.basename(base) + ".mp4", tag=f"emissions-{jour[:7]}", legende=legende, publie=None))
     json.dump(historique[-200:], open("episodes/historique.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
-    if libre and not test:
+    if THEME: historique[-1]["manuel"] = True; historique[-1]["theme"] = THEME[:300]
+    json.dump(historique[-200:], open("episodes/historique.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    if libre and not test and not THEME:
         n_ep = serie.enregistrer(sk, os.path.basename(base) + ".mp4")
         if n_ep: print(f"Série « {sk['serie_titre']} » : épisode {n_ep} enregistré", flush=True)
     sortie = os.environ.get("GITHUB_OUTPUT")
