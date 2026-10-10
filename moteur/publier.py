@@ -94,7 +94,7 @@ def preparer():
     txt = nom.replace(".mp4", ".txt")
     r = subprocess.run(["gh", "release", "download", e["tag"], "-p", nom, "-p", txt, "-D", "sortie", "--clobber"], capture_output=True, text=True)
     if not os.path.exists(os.path.join("sortie", nom)): sys.exit(f"Vidéo introuvable dans la Release {e['tag']} : {r.stderr[:300]}")
-    if not os.path.exists(os.path.join("sortie", txt)):
+    if e.get("legende") or not os.path.exists(os.path.join("sortie", txt)):   # la légende de l'historique fait foi (modifiable)
         open(os.path.join("sortie", txt), "w", encoding="utf-8").write(e.get("legende", ""))
     depot = os.environ.get("GITHUB_REPOSITORY"); serveur = os.environ.get("GITHUB_SERVER_URL", "https://github.com")
     url = f"{serveur}/{depot}/releases/download/{e['tag']}/{nom}"
@@ -104,18 +104,20 @@ def preparer():
 
 STATUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "sortie", "statut_publication.json")
 
-def marquer(fichier=None, ok=None, erreur=None):
+def marquer(fichier=None, ok=None, erreur=None, legende=None):
     """Note dans l'historique si la vidéo est publiée (rejoué tel quel si l'historique a changé entre-temps)."""
     if fichier is None:
         if not os.path.exists(STATUT): return
-        d = json.load(open(STATUT, encoding="utf-8")); fichier, ok, erreur = d["fichier"], d["publie"], d["erreur"]
+        d = json.load(open(STATUT, encoding="utf-8")); fichier, ok, erreur, legende = d["fichier"], d["publie"], d["erreur"], d.get("legende")
     else:
         os.makedirs(os.path.dirname(STATUT), exist_ok=True)
-        json.dump({"fichier": fichier, "publie": ok, "erreur": erreur}, open(STATUT, "w", encoding="utf-8"))
+        json.dump({"fichier": fichier, "publie": ok, "erreur": erreur, "legende": legende}, open(STATUT, "w", encoding="utf-8"))
     if os.path.exists(HIST):
         hist = json.load(open(HIST, encoding="utf-8"))
         for e in hist:
-            if e.get("fichier") == fichier: e["publie"] = ok; e["erreur"] = erreur
+            if e.get("fichier") == fichier:
+                e["publie"] = ok; e["erreur"] = erreur
+                if ok and legende: e["legende_publiee"] = legende[:300]               # texte réellement envoyé (sert aux statistiques)
         json.dump(hist, open(HIST, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 
 if __name__ == "__main__":
@@ -139,7 +141,7 @@ if __name__ == "__main__":
         ok = publier(video, legende, url) is not None
     except Exception as e:
         erreur = str(e)[:300]; print(f"Publication automatique échouée : {erreur}")
-    marquer(os.path.basename(video), ok, erreur)
+    marquer(os.path.basename(video), ok, erreur, legende)
     if not ok:
         print("➡ Vidéo disponible sur le site pour publication en un clic.")
         sys.exit(1)

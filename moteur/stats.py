@@ -62,8 +62,9 @@ def collecter():
     hist = json.load(open(HIST, encoding="utf-8")) if os.path.exists(HIST) else []
     par_cle = {}
     for h in hist:
-        k = _cle((h.get("legende") or "").split("\n")[0])
-        if k: par_cle[k[:40]] = h
+        for src in (h.get("legende_publiee"), h.get("legende")):              # texte réellement publié d'abord
+            k = _cle((src or "").split("\n")[0])
+            if k: par_cle.setdefault(k[:40], h)
     lies = 0
     for v in videos:
         h = par_cle.get(_cle(v["description"])[:40])
