@@ -1,1 +1,79 @@
 Buffer : compte tiktok « petitsdramas »  ← utilisé pour TikTok
+ImageMetadata : 
+VideoMetadata : 
+DocumentMetadata : 
+LinkAssetInput : description<String>, thumbnailUrl<String>, title<String>, url<String>
+ImageMetadataInput : altText<String>, animatedThumbnail<String>, userTags<None>
+ImageAssetInput : metadata<ImageMetadataInput>, thumbnailUrl<String>, url<String>
+VideoMetadataInput : thumbnailOffset<Int>, title<String>
+VideoAssetInput : metadata<VideoMetadataInput>, thumbnailUrl<String>, url<String>
+DocumentAssetInput : thumbnailUrl<String>, title<String>, url<String>
+ChannelMetadata : 
+TwitterMetadata : 
+LinkedInMetadata : 
+PinterestMetadata : 
+MastodonMetadata : 
+BlueskyMetadata : 
+GoogleBusinessMetadata : 
+FacebookMetadata : 
+InstagramMetadata : 
+YoutubeMetadata : 
+TiktokMetadata : 
+WhatsAppMetadata : 
+DeletePostInput : id<PostId>
+CreatePostInput : aiAssisted<Boolean>, assets<None>, channelId<ChannelId>, draftId<DraftId>, dueAt<DateTime>, ideaId<IdeaId>, metadata<PostInputMetaData>, mode<ShareMode>, needsApproval<Boolean>, saveToDraft<Boolean>, schedulingType<SchedulingType>, source<String>, tagIds<None>, text<String>
+EditPostInput : id<PostId>, aiAssisted<Boolean>, approvalChange<PostApprovalChange>, assets<None>, draftId<DraftId>, dueAt<DateTime>, ideaId<IdeaId>, metadata<PostInputMetaData>, mode<ShareMode>, saveToDraft<Boolean>, schedulingType<SchedulingType>, source<String>, tagIds<None>, text<String>
+ThreadItemBlueskyMetadata : 
+ThreadItemThreadsMetadata : 
+ThreadItemMetadata : 
+ThreadedPostMetadata : 
+CommonPostMetadata : 
+GoogleBusinessWhatsNewMetaData : 
+GoogleBusinessOfferMetaData : 
+GoogleBusinessEventMetaData : 
+InstagramPostMetadata : 
+FacebookPostMetadata : 
+LinkedInPostMetadata : 
+RetweetUserMetadata : 
+RetweetMetadata : 
+TwitterPostMetadata : 
+PinterestPostMetadata : 
+GoogleBusinessPostMetadata : 
+YoutubePostMetadata : 
+MastodonPostMetadata : 
+TiktokPostMetadata : 
+ThreadsPostMetadata : 
+BlueskyPostMetadata : 
+SubstackPostMetadata : 
+PostMetadata : 
+ThreadedPostInput : assets<None>, metadata<ThreadItemMetadataInput>, text<String>
+ThreadItemBlueskyMetadataInput : linkAttachment<LinkAttachmentInput>
+ThreadItemThreadsMetadataInput : linkAttachment<LinkAttachmentInput>
+ThreadItemMetadataInput : bluesky<ThreadItemBlueskyMetadataInput>, threads<ThreadItemThreadsMetadataInput>
+GoogleBusinessWhatsNewMetaDataInput : button<GoogleBusinessPostActionType>, link<String>
+GoogleBusinessOfferMetaDataInput : code<String>, endDate<DateTime>, link<String>, startDate<DateTime>, terms<String>, title<String>
+GoogleBusinessEventMetaDataInput : button<GoogleBusinessPostActionType>, endDate<DateTime>, isFullDayEvent<Boolean>, link<String>, startDate<DateTime>, title<String>
+InstagramPostMetadataInput : firstComment<String>, geolocation<InstagramGeolocationInput>, isAiGenerated<Boolean>, link<String>, shouldShareToFeed<Boolean>, stickerFields<InstagramStickerFieldsInput>, type<PostType>
+FacebookPostMetadataInput : annotations<None>, firstComment<String>, linkAttachment<LinkAttachmentInput>, type<PostTypeFacebook>
+LinkedInPostMetadataInput : annotations<None>, firstComment<String>, linkAttachment<LinkAttachmentInput>
+LinkAttachmentInput : description<String>, thumbnail<LinkAttachmentThumbnailInput>, title<String>, url<String>
+RetweetMetadataInput : id<String>, comment<String>
+TwitterPostMetadataInput : isAiGenerated<Boolean>, retweet<RetweetMetadataInput>, thread<None>
+PinterestPostMetadataInput : boardServiceId<String>, title<String>, url<String>
+GoogleBusinessPostMetadataInput : detailsEvent<GoogleBusinessEventMetaDataInput>, detailsOffer<GoogleBusinessOfferMetaDataInput>, detailsWhatsNew<GoogleBusinessWhatsNewMetaDataInput>, title<String>, type<PostTypeGoogleBusiness>
+YoutubePostMetadataInput : categoryId<String>, embeddable<Boolean>, isAiGenerated<Boolean>, license<YoutubeLicense>, madeForKids<Boolean>, notifySubscribers<Boolean>, privacy<YoutubePrivacy>, title<String>
+MastodonPostMetadataInput : spoilerText<String>, thread<None>
+ThreadsPostMetadataInput : linkAttachment<LinkAttachmentInput>, locationId<String>, locationName<String>, thread<None>, topic<String>, type<PostType>
+BlueskyPostMetadataInput : linkAttachment<LinkAttachmentInput>, thread<None>
+SubstackPostMetadataInput : linkAttachment<LinkAttachmentInput>
+TikTokPostMetadataInput : isAiGenerated<Boolean>, title<String>
+PostInputMetaData : bluesky<BlueskyPostMetadataInput>, facebook<FacebookPostMetadataInput>, google<GoogleBusinessPostMetadataInput>, instagram<InstagramPostMetadataInput>, linkedin<LinkedInPostMetadataInput>, mastodon<MastodonPostMetadataInput>, pinterest<PinterestPostMetadataInput>, substack<SubstackPostMetadataInput>, threads<ThreadsPostMetadataInput>, tiktok<TikTokPostMetadataInput>, twitter<TwitterPostMetadataInput>, youtube<YoutubePostMetadataInput>
+PostInput : id<PostId>
+DraftContentInput : aiAssisted<Boolean>, assets<None>, text<String>
+EngagementMetadata : 
+GoogleBusinessEngagementMetadata : 
+CreatePostTemplateInput : body<String>, description<String>, emoji<String>, organizationId<OrganizationId>, title<String>, visibility<PostTemplateVisibility>
+CreatePostTemplateSuccess : 
+CreatePostTemplatePayload : 
+IdeaMediaInput : url<String>, alt<String>, thumbnailUrl<String>, type<MediaType>, size<Int>, source<IdeaMediaSourceInput>
+IdeaContentInput : aiAssisted<Boolean>, date<DateTime>, media<None>, services<None>, tags<None>, text<String>, title<String>
