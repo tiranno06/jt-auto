@@ -637,7 +637,11 @@ def mettre_en_scene(texte):
     """Script tapé dans la régie : répliques gardées mot pour mot, Claude ajoute seulement le jeu, les scènes et les décors."""
     reps = lire_script(texte)
     if len(reps) < 2: raise RuntimeError("script trop court : écrivez au moins 2 répliques au format « Jojo : … »")
-    brut = {"sujet": reps[0]["t"][:30], "repliques": [dict(r) for r in reps], "legende": reps[0]["t"][:120], "hashtags": ["humour", "pov", "sketch"],
+    mots, sujet = reps[0]["t"].rstrip(" .!?…").split(), ""
+    for m_ in mots:
+        if len(sujet) + len(m_) + 1 > 30: break
+        sujet = (sujet + " " + m_).strip()
+    brut = {"sujet": sujet or reps[0]["t"][:30], "repliques": [dict(r) for r in reps], "legende": reps[0]["t"][:120], "hashtags": ["humour", "pov", "sketch"],
             "decoupage": [{"scene": "1", "repliques": list(range(len(reps))), "decor": "plain"}], "titre_accroche": ""}
     try:
         import anthropic
