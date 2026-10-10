@@ -1,138 +1,274 @@
 {
- "titre": "SANCTIONS CPI",
- "sujet": "SANCTIONS CPI",
- "ecran": "MONOPOLY CPI",
- "invite_nom": "Brent Coudé",
- "invite_role": "Porte-parole (fictif) justice US",
+ "titre": "PRIMAIRE PIRATÉE",
+ "sujet": "PRIMAIRE PIRATÉE",
+ "ecran": "PRIMAIRE BOTS",
+ "invite_nom": "Gérard Débit",
+ "invite_role": "Porte-parole (fictif) du scrutin",
  "invite_look": "moustache",
- "lieu_direct": "Devant la CPI, La Haye",
- "titre_accroche": "Washington garde la banque de La Haye",
- "question": "",
- "running_gag": "",
- "verite": "Washington veut bien d'une justice internationale, à condition qu'elle juge tout le monde sauf lui et ses amis. Il sanctionne la Cour et laisse six mois aux Européens pour céder. Ce sont les victimes de crimes de guerre qui paieront.",
+ "lieu_direct": "Salle des serveurs",
+ "titre_accroche": "Primaire de la gauche : enfin la foule",
+ "question": "Cinq candidats, des bots en renfort : il vous faut combien d'électeurs pour une primaire ?",
+ "running_gag": "Les bots, plus militants que les militants",
+ "verite": "La gauche sociale-démocrate est si divisée qu'elle organise une primaire à cinq candidats pour environ 140 000 inscrits. Le seul « afflux massif » qu'elle ait connu venait de bots, et les organisateurs l'ont eux-mêmes qualifié de « fictif ».",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "Washington sanctionne le tribunal des crimes de guerre. Une première : c'est le tribunal qui va en prison.",
+   "t": "Ce week-end, la primaire de la gauche a connu une affluence historique. Les serveurs n'ont pas tenu.",
    "chute": true
   },
   {
    "p": "presentateur",
-   "t": "Martine, vous êtes à La Haye ?"
-  },
-  {
-   "p": "envoyee",
-   "t": "Oui, devant la Cour. Dans six mois, plus aucune transaction. Juges, personnel, fonds pour les victimes : retour à la case départ. Sans toucher la prime.",
-   "chute": true
-  },
-  {
-   "p": "presentateur",
-   "t": "Monsieur Coudé, dans cette partie, vous êtes le banquier ou un joueur ?"
-  },
-  {
-   "p": "invite",
-   "t": "Le banquier, c'est le joueur qui gagne.",
-   "chute": true
-  },
-  {
-   "p": "presentateur",
-   "t": "Et la Cour, qu'a-t-elle fait de mal ?"
-  },
-  {
-   "p": "invite",
-   "t": "Elle a regardé notre côté du plateau. Un tribunal qui nous regarde, c'est un tribunal voyou.",
+   "t": "Martine, ça sent le brûlé ou la gauche ?",
    "chute": true
   },
   {
    "p": "envoyee",
-   "t": "Les Européens ripostent : ils « regrettent vivement ». Puis ils ont sorti la règle du jeu. Personne ne l'avait jamais lue.",
-   "d": "Les Européens ripostent : ils regrettent vivement. Puis ils ont sorti la règle du jeu. Personne ne l'avait jamais lue.",
+   "t": "Les deux. Des milliers de connexions par seconde. Les militants pleurent. Ils n'avaient jamais vu autant de monde.",
    "chute": true
   },
   {
    "p": "invite",
-   "t": "Aucun souci, on a la nouvelle règle. Six mois pour accorder l'immunité aux pays non membres. Sinon, on ferme la banque.",
+   "t": "C'est un triomphe. Jamais autant de monde n'a voulu voter à gauche. Bon, c'étaient des bots. Mais ils sont venus.",
    "chute": true
   },
   {
-   "p": "presentateur",
-   "t": "Et la carte « Libéré de prison » ?",
-   "d": "Et la carte Libéré de prison ?"
-  },
-  {
-   "p": "invite",
-   "t": "Réservée à nous et à nos amis. Les autres piochent « Allez en prison ». Ne passez pas par Washington.",
-   "d": "Réservée à nous et à nos amis. Les autres piochent Allez en prison. Ne passez pas par Washington.",
+   "p": "envoyee",
+   "t": "Vendredi soir : 20 000 humains sur 140 000 inscrits. Les bots, eux, étaient là dès 8 h.",
+   "d": "Vendredi soir : vingt mille humains sur cent quarante mille inscrits. Les bots, eux, étaient là dès huit heures.",
    "chute": true
   },
   {
    "p": "presentateur",
-   "t": "Et si la Cour cède, elle juge qui ?"
+   "t": "Une plainte est déposée. Contre qui ?"
+  },
+  {
+   "p": "envoyee",
+   "t": "La commission est formelle : l'attaque est très organisée. Ça ne peut donc pas venir de la gauche.",
+   "chute": true
   },
   {
    "p": "invite",
-   "t": "Ceux qui n'ont pas d'armée.",
+   "t": "Et les bots ont respecté l'esprit du scrutin. Ils se sont divisés en cinq files.",
+   "chute": true
+  },
+  {
+   "p": "presentateur",
+   "t": "Cinq candidats, vraiment ?"
+  },
+  {
+   "p": "invite",
+   "t": "Avec un seul candidat, on ne saurait pas contre qui se fâcher.",
+   "chute": true
+  },
+  {
+   "p": "presentateur",
+   "t": "Et vous prolongez jusqu'à dimanche ?"
+  },
+  {
+   "p": "invite",
+   "t": "Pour voter sereinement. À cinq, chaque candidat espère encore trouver un électeur humain.",
+   "chute": true
+  },
+  {
+   "p": "envoyee",
+   "t": "L'Anssi serait mobilisée. Pour une fois, l'État protège la gauche contre un excès de monde.",
+   "d": "L'Anssi serait mobilisée. Pour une fois, l'État protège la gauche contre un excès de monde.",
+   "chute": true
+  },
+  {
+   "p": "presentateur",
+   "t": "Rassurez-vous : la primaire de la gauche a enfin connu un afflux massif. Les organisateurs le confirment : il était fictif.",
    "chute": true,
    "attente": 0.8
-  },
-  {
-   "p": "presentateur",
-   "t": "En clair : Washington garde la banque et la carte « Libéré de prison » pour ses amis. L'Europe a six mois pour plier. Les victimes de guerre ne jouent plus.",
-   "d": "En clair : Washington garde la banque et la carte Libéré de prison pour ses amis. L'Europe a six mois pour plier. Et les victimes de crimes de guerre, elles, n'ont même plus le droit de jouer.",
-   "chute": true
   }
  ],
- "bandeau": [],
- "gag": null,
- "legende": "L'actu du jour, en dessin animé. Satire, personnages fictifs.",
+ "bandeau": [
+  "LES BOTS DE LA PRIMAIRE SE DIVISENT EN CINQ COURANTS",
+  "VOTE PROLONGÉ : UN ÉLECTEUR HUMAIN APERÇU À LILLE",
+  "UN SERVEUR RÉCLAME SA CARTE D'ADHÉRENT",
+  "RECORD : PLUS DE CONNEXIONS QUE DE MILITANTS"
+ ],
+ "gag": {
+  "replique": 7,
+  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. Inside a glowing red server room, hundreds of small identical robots split into five separate queues in front of five voting screens, each queue turning its back to the others and frowning, smoke rising from overheated servers, comedic, deadpan."
+ },
+ "legende": "La primaire de la gauche enfin prise d'assaut… par des bots, divisés en cinq files. Satire, personnages fictifs.",
  "hashtags": [
+  "primaire",
+  "gauche",
+  "cyberattaque",
   "satire",
-  "humour",
-  "actualite",
-  "politique"
+  "politique",
+  "humour"
  ],
  "sources": [
-  "https://www.lefigaro.fr/international/le-moment-est-grave-pourquoi-donald-trump-sanctionne-la-cour-penale-internationale-20261009",
-  "https://www.lemonde.fr/international/article/2026/10/10/sanctions-des-etats-unis-contre-la-cpi-washington-lance-un-ultimatum-aux-etats-membres_6790870_3210.html",
-  "https://www.20minutes.fr/monde/etats-unis/4253028-20261010-etats-unis-commentatrice-maga-katie-zacharia-designee-porte-parole-trump?at_medium=display&at_campaign=149"
+  "https://www.franceinfo.fr/politique/ps/primaire-a-gauche/une-plainte-deposee-apres-la-cyberattaque-visant-la-plateforme-de-vote-de-la-primaire-de-la-gauche_8230606.html#xtor=RSS-3-%5Bgeneral%5D",
+  "https://www.bfmtv.com/politique/video-le-vote-de-la-primaire-a-gauche-prolonge-jusqu-a-dimanche-18h-apres-une-cyberattaque_VN-202610100057.html",
+  "https://www.20minutes.fr/politique/4252996-20261009-primaire-gauche-perturbe-cyberattaque-vote-prolonge-jusqu-dimanche-soir?at_medium=display&at_campaign=149"
  ],
- "decoupage": [],
+ "decoupage": [
+  {
+   "scene": "Plateau du JT. Jean-Michel, impassible, annonce l'affluence historique. Derrière lui, une jauge de connexions explose puis l'écran grésille. Il enchaîne sans réagir. Woosh vers le direct.",
+   "repliques": [
+    0,
+    1
+   ],
+   "lieu": "plateau",
+   "son": "woosh",
+   "duree": 7.0
+  },
+  {
+   "scene": "Salle des serveurs, lumière rouge et fumée. Martine, blasée, se tient devant une baie de serveurs brûlante. Derrière elle, des militants en larmes photographient un compteur de connexions. Coupe sur Gérard en duplex, ravi, qui lâche le mot « bots » en haussant les épaules.",
+   "repliques": [
+    2,
+    3
+   ],
+   "lieu": "direct",
+   "son": "dun_dun",
+   "duree": 14.0
+  },
+  {
+   "scene": "Martine montre un écran : un minuscule bonhomme humain face à une marée de petits robots alignés depuis 8 h. Jean-Michel, en plateau, pose sa question. Martine répond sans ciller.",
+   "repliques": [
+    4,
+    5,
+    6
+   ],
+   "lieu": "direct",
+   "son": "rimshot",
+   "duree": 17.0
+  },
+  {
+   "scene": "Duplex. Gérard présente fièrement une animation : les robots se séparent en cinq files qui se tournent le dos. Jean-Michel pose ses questions simples, Gérard aggrave son cas.",
+   "repliques": [
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "lieu": "duplex",
+   "son": "trombone_triste",
+   "duree": 22.0
+  },
+  {
+   "scene": "Retour au direct : des techniciens en combinaison filtrent l'entrée d'une salle de vote vide. Martine commente sans émotion.",
+   "repliques": [
+    12
+   ],
+   "lieu": "direct",
+   "son": "xylo_descente",
+   "duree": 7.0
+  },
+  {
+   "scene": "Plateau. Un silence, puis Jean-Michel lance la chute face caméra, impassible. Le bandeau défile, l'image se fige sur la jauge revenue à zéro.",
+   "repliques": [
+    13
+   ],
+   "lieu": "plateau",
+   "son": "rimshot",
+   "duree": 8.0
+  }
+ ],
  "fiche": {
-  "concept": "« Le Monopoly de La Haye ». La justice internationale devient un Monopoly truqué. Washington se déclare banquier et joueur à la fois. Il renvoie la Cour à la case départ, réécrit la règle du jeu et garde pour lui et ses amis la carte « Libéré de prison ». Les autres piochent « Allez en prison ». La métaphore tient du début à la fin, chute comprise.",
-  "format": "Faux JT. Accroche en plateau, puis direct de l'envoyée devant un plateau de Monopoly géant posé devant la CPI à La Haye. Ensuite, duplex avec un porte-parole américain fictif. Le présentateur lance la chute.",
-  "angle": "Le cœur du sujet, c'est le chantage : six mois pour accorder l'immunité aux ressortissants des pays non membres, sinon plus de banque. On ne s'appuie plus sur le Nobel, trop périphérique : tout passe par la mécanique du jeu truqué. Le banquier est aussi joueur. Une Cour qui regarde le mauvais côté du plateau devient « voyou ». Les Européens brandissent une règle que personne n'a lue. La question naïve du présentateur, « elle juge qui ? », fait tout tomber.",
-  "resume_factuel": "Vendredi 9 octobre 2026, l'administration Trump annonce des sanctions contre la Cour pénale internationale en tant qu'institution. Toute transaction financière avec la Cour sera interdite. Les sanctions entrent en vigueur dans 180 jours, sauf accord. Selon Le Monde, il s'agit d'un ultimatum aux États membres, sommés notamment d'accorder l'immunité devant la Cour aux ressortissants des États non membres. Marco Rubio qualifie la CPI de « tribunal voyou » ; il avait promis de la démanteler « brique par brique ». La CPI, soutenue par 125 États, dénonce « une attaque contre l'État de droit ». La France, le Royaume-Uni, l'Allemagne, l'Italie, le Canada, le Danemark, le Japon et les Pays-Bas réaffirment un soutien « indéfectible » et disent « regretter vivement » ces sanctions. Contexte : selon les sources fournies, l'annonce tombe le jour où le Nobel de la paix 2026 est attribué à Navi Pillay, ancienne juge de la CPI. Ce point n'est pas utilisé dans le sketch.",
+  "concept": "« Affluence historique » : le JT annonce que la primaire de la gauche a fait sauter les serveurs à force de monde. On découvre ensuite que la foule était composée de bots. Le porte-parole fictif du scrutin défend ce triomphe de participation, alors que même les robots ont respecté la tradition maison en se divisant en cinq files.",
+  "format": "Faux JT : accroche en plateau, direct de l'envoyée dans la salle des serveurs, invité en duplex qui défend la commission d'organisation.",
+  "angle": "L'accroche cache les robots : on croit à un vrai succès populaire, puis l'invité avoue que la foule était faite de bots. L'escalade avance en trois temps : les bots étaient plus nombreux que les électeurs, ils étaient mieux organisés que la gauche, et ils se sont divisés comme elle. La prolongation du vote sert à viser la division : avec cinq candidats, chacun espère encore trouver un électeur humain. La chute reprend le mot officiel « fictif » des organisateurs.",
+  "resume_factuel": "Le vendredi 9 octobre 2026 à 8 h a commencé le premier tour de la primaire de la gauche sociale-démocrate. Le vote était uniquement électronique, avec cinq candidats (Olivier Faure, Raphaël Glucksmann, Ségolène Royal, Jérôme Guedj et Emmanuel Maurel) et environ 140 000 inscrits. Le vote a aussitôt été perturbé par une cyberattaque contre la plateforme du prestataire e-votez : des bots ont poussé au maximum le nombre de connexions simultanées. La commission a parlé d'un « afflux massif et fictif de connexions ». Le vendredi à 19 h, seulement 20 000 personnes avaient voté. Le scrutin, qui devait se terminer le samedi à 20 h, est prolongé jusqu'au dimanche 11 octobre à 18 h, avec l'accord de tous les candidats, pour « voter sereinement ». Une plainte a été déposée. Patrick Mennucci, président de la commission, parle d'une attaque « scandaleuse » et « beaucoup plus organisée » qu'un étudiant dans sa chambre. Selon une source proche de Sébastien Lecornu, le Premier ministre a mobilisé l'Anssi. Un éventuel second tour aurait lieu les 16 et 17 octobre.",
   "faits_reels": [
-   "Aucun outil de recherche web n'était disponible. Les faits viennent uniquement des articles et des faits vérifiés fournis par le robot (Le Figaro, Le Monde, AFP, CNN, Le Devoir).",
-   "Le 9 octobre 2026, les États-Unis annoncent des sanctions contre la CPI en tant qu'institution, avec l'interdiction de toute transaction.",
-   "Les sanctions entrent en vigueur dans 180 jours (six mois), sauf accord.",
-   "C'est un ultimatum aux États membres : ils doivent notamment accorder l'immunité devant la Cour aux ressortissants des États non membres, dont les États-Unis.",
-   "Marco Rubio parle d'un « tribunal voyou » et avait promis de démanteler la Cour « brique par brique ».",
-   "La CPI, soutenue par 125 États, dénonce une attaque contre l'État de droit.",
-   "La France et plusieurs alliés disent « regretter vivement » ces sanctions.",
-   "Le Nobel de la paix 2026 attribué à Navi Pillay, ancienne juge de la CPI (selon les sources fournies), est volontairement absent des dialogues : je n'ai pas pu le revérifier en ligne, et le relecteur rappelle que le Nobel 2025 était María Corina Machado."
+   "Le vote du premier tour, uniquement électronique, a commencé le vendredi 9 octobre 2026 à 8 h. Il a été perturbé par une cyberattaque contre la plateforme du prestataire e-votez.",
+   "Selon la commission d'organisation, des bots ont porté au maximum le nombre de connexions simultanées. Elle a parlé d'un « afflux massif et fictif de connexions ».",
+   "Le vendredi à 19 h, environ 20 000 personnes avaient voté, sur environ 140 000 inscrits.",
+   "La primaire compte cinq candidats : Olivier Faure, Raphaël Glucksmann, Ségolène Royal, Jérôme Guedj et Emmanuel Maurel.",
+   "Le scrutin devait se terminer le samedi à 20 h. Il est prolongé jusqu'au dimanche 11 octobre à 18 h, avec l'accord de tous les candidats, pour « voter sereinement ».",
+   "La plateforme n'a jamais été coupée mais elle a ralenti. Les organisateurs assurent que l'intégrité des votes est garantie.",
+   "Une plainte a été déposée. Patrick Mennucci juge l'attaque « scandaleuse » et « beaucoup plus organisée » qu'un étudiant dans sa chambre.",
+   "Selon une source proche du Premier ministre Sébastien Lecornu, celui-ci a mobilisé l'Anssi.",
+   "Ces faits viennent uniquement des articles fournis (franceinfo, BFMTV, 20 Minutes). Je n'ai pas fait de vérification web supplémentaire."
   ],
   "inventions": [
-   "Jean-Michel Plateau, Martine Couloir et Brent Coudé sont des personnages fictifs.",
-   "Toute la métaphore du Monopoly est inventée : banquier-joueur, case départ, règle du jeu, cartes « Libéré de prison » et « Allez en prison ».",
-   "Le plateau de Monopoly géant devant la CPI n'existe pas.",
-   "Le renvoi des juges, du personnel et du fonds pour les victimes « à la case départ » est une image. L'effet précis des sanctions sur chacun n'est pas détaillé dans les sources.",
-   "La règle du jeu brandie par les Européens est inventée.",
-   "Toutes les répliques de l'invité sont de la fiction et ne sont attribuées à aucune personne réelle.",
-   "Les dépêches du bandeau sont fausses."
+   "Jean-Michel Plateau, Martine Couloir et Gérard Débit sont des personnages fictifs.",
+   "Les militants qui pleurent d'émotion devant les connexions sont inventés.",
+   "Les bots « tous là dès huit heures » et divisés en cinq files sont inventés. Aucun bot n'a voté.",
+   "La conclusion « ça ne peut donc pas venir de la gauche » est une blague de l'envoyée, pas une piste d'enquête. Elle ne désigne aucun suspect.",
+   "Les justifications de l'invité (le candidat unique, l'électeur humain qu'on attend) sont inventées.",
+   "Toutes les dépêches du bandeau sont fausses."
   ],
-  "decoupage": [],
+  "decoupage": [
+   {
+    "scene": "Plateau du JT. Jean-Michel, impassible, annonce l'affluence historique. Derrière lui, une jauge de connexions explose puis l'écran grésille. Il enchaîne sans réagir. Woosh vers le direct.",
+    "repliques": [
+     0,
+     1
+    ],
+    "lieu": "plateau",
+    "son": "woosh",
+    "duree": 7.0
+   },
+   {
+    "scene": "Salle des serveurs, lumière rouge et fumée. Martine, blasée, se tient devant une baie de serveurs brûlante. Derrière elle, des militants en larmes photographient un compteur de connexions. Coupe sur Gérard en duplex, ravi, qui lâche le mot « bots » en haussant les épaules.",
+    "repliques": [
+     2,
+     3
+    ],
+    "lieu": "direct",
+    "son": "dun_dun",
+    "duree": 14.0
+   },
+   {
+    "scene": "Martine montre un écran : un minuscule bonhomme humain face à une marée de petits robots alignés depuis 8 h. Jean-Michel, en plateau, pose sa question. Martine répond sans ciller.",
+    "repliques": [
+     4,
+     5,
+     6
+    ],
+    "lieu": "direct",
+    "son": "rimshot",
+    "duree": 17.0
+   },
+   {
+    "scene": "Duplex. Gérard présente fièrement une animation : les robots se séparent en cinq files qui se tournent le dos. Jean-Michel pose ses questions simples, Gérard aggrave son cas.",
+    "repliques": [
+     7,
+     8,
+     9,
+     10,
+     11
+    ],
+    "lieu": "duplex",
+    "son": "trombone_triste",
+    "duree": 22.0
+   },
+   {
+    "scene": "Retour au direct : des techniciens en combinaison filtrent l'entrée d'une salle de vote vide. Martine commente sans émotion.",
+    "repliques": [
+     12
+    ],
+    "lieu": "direct",
+    "son": "xylo_descente",
+    "duree": 7.0
+   },
+   {
+    "scene": "Plateau. Un silence, puis Jean-Michel lance la chute face caméra, impassible. Le bandeau défile, l'image se fige sur la jauge revenue à zéro.",
+    "repliques": [
+     13
+    ],
+    "lieu": "plateau",
+    "son": "rimshot",
+    "duree": 8.0
+   }
+  ],
   "titres_sujet": [
-   "« Le moment est grave » : pourquoi Donald Trump sanctionne la Cour pénale internationale",
-   "Sanctions des Etats-Unis contre la CPI : Washington lance un ultimatum aux Etats membres",
-   "Etats-Unis : La commentatrice MAGA Katie Zacharia désignée porte-parole par Trump",
-   "Katie Zacharia, « membre dévouée du mouvement MAGA » et nouvelle porte-parole de la Maison Blanche",
-   "Donald Trump choisit la commentatrice conservatrice Katie Zacharia comme porte-parole",
-   "Les Etats-Unis veulent asphyxier la Cour pénale internationale avec de nouvelles sanctions"
+   "Une plainte déposée après la cyberattaque visant la plateforme de vote de la primaire de la gauche",
+   "Le vote de la primaire à gauche prolongé jusqu'à dimanche 18h après une cyberattaque",
+   "Primaire sociale-démocrate: le vote est prolongé jusqu'à dimanche 18h",
+   "Primaire de la gauche : Perturbé par une cyberattaque, le vote prolongé jusqu’à dimanche soir",
+   "«Il se passe quelque chose» autour de David Lisnard... Les indiscrets du Figaro",
+   "Primaire sociale-démocrate: le vote prolongé jusqu'à dimanche 18h, après une série d'attaques informatiques"
   ],
   "verification_web": true,
-  "note": 69.0,
-  "critique": "FAIBLESSES PAR RÉPLIQUE :\n- Découpage VIDE : aucune action visuelle, aucun plan, aucun accessoire décrit pour un format vidéo animée. Le plateau de Monopoly géant devant la CPI n'est jamais utilisé à l'image (pion de la Cour qui recule, billets gelés, carte « Libéré de prison » brandie, plateau retourné). C'est la plus grosse perte de points. À ajouter : par exemple, plan 2 : un pion en forme de marteau de juge glisse jusqu'à « Départ » ; plan 10 : Coudé sort de sa poche une pile de cartes « Libéré de prison ». Plan 12 : un char se pose sur le plateau à la place d'un pion.\n- 1 : relance plate (« vous êtes à La Haye ? »), du temps perdu. Il faut la fusionner avec 0 ou y mettre un gag visuel (Martine debout sur la case « Prison »).\n- 2 : « retour à la case départ » décrit mal la réalité des sanctions (gel d'avoirs, interdiction de transactions). C'est plutôt une case « Prison » financière. La phrase est aussi trop chargée pour une voix synthétique. Proposition : « Avoirs gelés, cartes bancaires bloquées. La Cour passe trois tours. Indéfiniment. »\n- 3 : Coudé arrive sans être présenté (qui est-il ? porte-parole de quoi ?). Le duplex n'est pas lancé. Il faut une demi-réplique : « Nous retrouvons en duplex Brad Coudé, porte-parole de la Maison-Blanche. »\n- 8 : réplique d'exposition pure, sans gag. « On ferme la banque » est faible, la menace mérite une image plus forte. Proposition : « Nouvelle règle : quiconque nous juge perd la partie. Vous avez six mois pour la signer. »\n- 10 :",
+  "note": 70.0,
+  "critique": "Points faibles, réplique par réplique :\n- R1 « ça sent le brûlé ou la gauche ? » : le jeu de mots ne tient pas, car la gauche n'a pas d'odeur. La question est bancale et retombe à plat. Correction : « Martine, c'est la foule ou la gauche qui a pris feu ? », ou une question simple qui laisse Martine faire le gag.\n- R2 et R3 : « autant de monde » revient deux fois de suite. Le gag de l'affluence s'use avant même la révélation des bots. Il faut changer la R2, par exemple : « Les militants pleurent. Certains ont reconnu des gens qu'ils croyaient partis chez Macron. »\n- R4 : c'est une simple constatation chiffrée, sans retournement. Le chiffre de 20 000 humains doit être vérifié, sinon la satire perd en crédibilité. Ajouter une chute : « Les bots, eux, étaient là dès 8 h. Ce sont nos militants les plus assidus. »\n- R5 et R6 : la plainte, qui est le sujet principal, ne tient que dans ces deux répliques. La R6 est la meilleure du sketch (« très organisée, donc pas la gauche »), mais le dépôt de plainte lui-même n'est pas exploité. Ajouter un échange, par exemple : « Plainte contre X. — Pourquoi X ? — On n'a pas réussi à se mettre d'accord sur un nom. »\n- R9 : l'idée est bonne, mais la phrase est molle. Version plus sèche : « Avec un seul candidat, on aurait dû se diviser tout seuls. »\n- R11 : la réplique est confuse. « Voter sereinement » et « trouver un électeur humain » ne s'enchaînent pas. Version plus nette : « On prolonge jusqu'à ce que les humains rattrapent les bots. Dimanche",
   "decision": "à retravailler"
  }
 }
