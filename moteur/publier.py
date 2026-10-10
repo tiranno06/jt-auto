@@ -26,7 +26,7 @@ def canal_tiktok(cle):
             if str(c.get("service", "")).lower() == "tiktok": return c["id"]
     raise RuntimeError("Aucun compte TikTok connecté à Buffer")
 
-def requete_post(canal, texte, url, mode):
+def requete_post(canal, texte, url, mode, ia=True):
     if mode == "shareNow":
         planif = "mode: shareNow"
     else:
@@ -38,6 +38,7 @@ def requete_post(canal, texte, url, mode):
       channelId: {json.dumps(canal)}
       schedulingType: automatic
       {planif}
+      {"metadata: { tiktok: { isAiGenerated: true } }" if ia else ""}
       assets: [{{ video: {{ url: {json.dumps(url)}, metadata: {{ thumbnailOffset: 2500 }} }} }}]
   }}) {{
     ... on PostActionSuccess {{ post {{ id }} }}
@@ -47,14 +48,17 @@ def requete_post(canal, texte, url, mode):
 
 def publier_buffer(url, legende):
     cle = os.environ["BUFFER_API_KEY"]; canal = canal_tiktok(cle); derniere = None
-    for mode in ("shareNow", "customScheduled"):
+    essais = [("shareNow", True), ("customScheduled", True), ("shareNow", False)]   # option « contenu généré par IA » de TikTok cochée
+    for mode, ia in essais:
         try:
-            rep = _gql(requete_post(canal, legende[:2200], url, mode), cle)["createPost"]
-            if rep.get("post"): print(f"Buffer : publication programmée ({mode}), post {rep['post']['id']}"); return rep
+            rep = _gql(requete_post(canal, legende[:2200], url, mode, ia), cle)["createPost"]
+            if rep.get("post"):
+                print(f"Buffer : publication programmée ({mode}), post {rep['post']['id']}" + ("" if ia else " — SANS l'étiquette IA (refusée par Buffer) : à cocher dans TikTok"))
+                return rep
             derniere = rep.get("message")
         except Exception as e:
             derniere = e
-        print(f"Buffer, mode {mode} refusé : {derniere}")
+        print(f"Buffer, mode {mode}{'' if ia else ' sans étiquette IA'} refusé : {derniere}")
     raise RuntimeError(f"Buffer a refusé la publication : {derniere}")
 
 # ------------------------------------------------------------------ Upload-Post (payant)
