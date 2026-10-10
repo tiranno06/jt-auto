@@ -16,7 +16,7 @@ permissions:
 
 jobs:
   supprimer:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     environment:
       name: github-pages
@@ -25,8 +25,8 @@ jobs:
       GH_TOKEN: ${{ github.token }}
       FICHIER: ${{ inputs.fichier }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
       - name: Installer ffmpeg
@@ -44,13 +44,13 @@ jobs:
         run: pip install -q pillow numpy opencv-python-headless && python moteur/site.py
       - name: Préparer GitHub Pages
         continue-on-error: true
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
       - name: Envoyer le site
         continue-on-error: true
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: site
       - name: Mettre en ligne le site
         id: pages
         continue-on-error: true
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

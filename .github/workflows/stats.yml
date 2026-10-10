@@ -19,14 +19,14 @@ concurrency:
 
 jobs:
   stats:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     env:
       TIKTOK_COMPTE: ${{ vars.TIKTOK_COMPTE }}
       PSEUDOS: ${{ inputs.pseudos }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
       - name: Lire les statistiques publiques de la chaîne

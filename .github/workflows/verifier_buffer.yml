@@ -8,12 +8,12 @@ permissions:
 
 jobs:
   verifier:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 5
     env:
       BUFFER_API_KEY: ${{ secrets.BUFFER_API_KEY }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Comptes connectés à Buffer (rien n'est publié)
         run: (python moteur/publier.py --canaux; python moteur/publier.py --schema) 2>&1 | tee episodes/buffer.txt
       - name: Enregistrer

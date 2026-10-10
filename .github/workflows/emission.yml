@@ -25,12 +25,12 @@ permissions:
 
 jobs:
   planning:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 5
     outputs:
       go: ${{ steps.p.outputs.go }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           sparse-checkout: |
             moteur/planning.py
@@ -49,7 +49,7 @@ jobs:
     concurrency:                 # les vidéos manuelles ont leur propre file : elles n'annulent jamais une émission en attente
       group: ${{ inputs.theme != '' && format('manuel-{0}', github.run_id) || 'emission' }}
       cancel-in-progress: false
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 120
     environment:
       name: github-pages
@@ -94,9 +94,9 @@ jobs:
       FREQUENCE: ${{ vars.FREQUENCE }}
       HEURE: ${{ vars.HEURE }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
           cache: pip
@@ -113,7 +113,7 @@ jobs:
 
       - name: Voix de secours (Piper) en cache
         id: cache-piper
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: outils
           key: piper-fr-siwis-v1
@@ -172,12 +172,12 @@ jobs:
       - name: Préparer GitHub Pages
         if: always()
         continue-on-error: true
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
 
       - name: Envoyer le site
         if: always()
         continue-on-error: true
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: site
 
@@ -185,4 +185,4 @@ jobs:
         id: pages
         if: always()
         continue-on-error: true
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
