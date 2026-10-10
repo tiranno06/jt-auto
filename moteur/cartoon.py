@@ -11,7 +11,7 @@ import math, os, re, subprocess, sys, tempfile, wave
 import numpy as np, cv2
 from PIL import Image, ImageDraw, ImageFont
 ICI = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, ICI)
-import marionnette as M
+import marionnette as M, sons_modernes as SM
 from jt import minutage, carton, son, vers_mix, enveloppe, poser, pop, W, H, FPS, SR, SRM, FB
 
 CAP_Y = 1700
@@ -69,6 +69,23 @@ def titre(txt):
         w = d.textlength(l, font=F_TIT); d.text(((larg - w) / 2, 18 + k * hl), l, font=F_TIT, fill=(20, 20, 24))
     return np.array(img).astype(np.float32)
 
+F_CARTE = ImageFont.truetype(FB, 104)
+def carte(txt):
+    """Carton plein écran entre deux scènes (« Deux heures plus tard… »)."""
+    img = Image.new("RGB", (W, H), (255, 208, 40)); d = ImageDraw.Draw(img)
+    for k in range(24):                                                    # rayons qui partent du centre
+        a = k * math.pi / 12; d.polygon([(W / 2, H / 2), (W / 2 + 2400 * math.cos(a), H / 2 + 2400 * math.sin(a)),
+                                         (W / 2 + 2400 * math.cos(a + 0.13), H / 2 + 2400 * math.sin(a + 0.13))], fill=(255, 196, 20))
+    mots, lignes, cur = str(txt).upper().split(), [], ""
+    for m in mots:
+        if d.textlength((cur + " " + m).strip(), font=F_CARTE) > 920: lignes.append(cur); cur = m
+        else: cur = (cur + " " + m).strip()
+    lignes.append(cur); hl = 128; y0 = H / 2 - hl * len(lignes) / 2
+    for k, l in enumerate(lignes):
+        w = d.textlength(l, font=F_CARTE)
+        d.text(((W - w) / 2, y0 + k * hl), l, font=F_CARTE, fill=(255, 255, 255), stroke_width=12, stroke_fill=(20, 20, 24))
+    return np.array(img)
+
 def decor_uni(k):
     img = np.zeros((H, W, 3), np.uint8); img[:] = PASTELS[k % len(PASTELS)]; return img
 
@@ -92,14 +109,18 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
     for k, sc in enumerate(dec):
         for i in sc["repliques"]: scene_de.setdefault(i, k)
     # chronologie
-    t = 0.15; ph = []
+    t = 0.15; ph = []; transitions = []                                 # (début, fin, type, scène d'arrivée)
     for i, (r, a) in enumerate(zip(reps, audios)):
         niv, lv = enveloppe(a); dur = len(a) / SR; att = float(r.get("attente", 0)); t += att
         sc = scene_de.get(i, ph[-1]["scene"] if ph else 0)
+        if ph and sc != ph[-1]["scene"]:                                   # changement de scène : carton ou panoramique rapide
+            a_carte = (not mini) and sc < len(dec) and dec[sc].get("titre")
+            d_tr = 1.15 if a_carte else 0.45
+            transitions.append((t, t + d_tr, "carton" if a_carte else "panoramique", sc)); t += d_tr
         q = dict(i=i, p=r["p"], deb=t, fin=t + dur, lv=lv, emo=emotion(r.get("d")), chute=bool(r.get("chute")) or i == len(reps) - 1,
                  scene=sc, objet=r.get("objet"), groupes=minutage(r["t"], a, t, (mots or [None] * len(reps))[i]))
         ph.append(q); t += dur + (0.5 if q["chute"] and i < len(reps) - 1 else 0.1)
-    total = t + 0.6
+    total = t + 1.4                                                        # place pour l'impact final
     nf = int(total * FPS)
     # placement : qui est dans chaque scène, à quelle place
     places = {}
@@ -175,8 +196,29 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             if o is not None: p["main_d"] = o; p["bras_d"] = (120, -100)
         return p
 
+    CARTES = {tr[3]: carte(dec[tr[3]]["titre"]) for tr in transitions if tr[2] == "carton"}
+    FIN = ph[-1]["fin"]
+
     def image(fi):
-        tm = fi / FPS; q = actif(tm); sc = q["scene"]
+        tm = fi / FPS
+        tr = next((x for x in transitions if x[0] <= tm < x[1]), None)
+        if tr and tr[2] == "carton":                                       # carton plein écran qui « pop »
+            u = (tm - tr[0]) / (tr[1] - tr[0]); z = 1 + 0.25 * (1 - _ease(u / 0.18)) if u < 0.18 else 1 + 0.03 * (u - 0.18)
+            c = CARTES[tr[3]]; M_ = np.float32([[z, 0, W / 2 - z * W / 2], [0, z, H / 2 - z * H / 2]])
+            return cv2.warpAffine(c, M_, (W, H), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REPLICATE)
+        if tr:                                                             # panoramique rapide avec flou de mouvement
+            u = _ease((tm - tr[0]) / (tr[1] - tr[0]))
+            avant = vue(tr[0] - 0.01); apres = vue(tr[1] + 0.01); dx = int(u * W)
+            fr = np.concatenate([avant[:, dx:], apres[:, :dx]], 1) if 0 < dx < W else (apres if dx >= W else avant)
+            k = int(9 + 140 * math.sin(math.pi * u)); return cv2.blur(fr, (k | 1, 1))
+        fr = vue(tm)
+        if tm > FIN:                                                       # impact final : secousse qui s'amortit
+            v = math.exp(-(tm - FIN) * 5) * 22
+            fr = np.roll(fr, (int(v * math.sin(tm * 61)), int(v * math.cos(tm * 53))), (0, 1))
+        return fr
+
+    def vue(tm):
+        q = actif(tm); sc = q["scene"]
         fond = decors.get(sc)
         if fond is None: fond = decors[sc] = decor_uni(sc)
         # caméra
@@ -186,6 +228,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             z, cx, cy = 1.0, W / 2, H / 2
         u0 = min(1, (tm - max(q["deb"] - 0.25, 0)) / 0.3); z *= 1 + 0.04 * (1 - u0) ** 2 + 0.006 * (tm - q["deb"])   # punch-in puis lente dérive
         if q["chute"] and tm > q["fin"] - 0.6: z *= 1 + 0.12 * _ease((tm - q["fin"] + 0.6) / 0.2)
+        if q is ph[-1] and tm > q["fin"]: z *= 1 + 0.1 * _ease((tm - q["fin"]) / 0.12)                # punch final
         cx = min(max(cx, W / (2 * z)), W - W / (2 * z)); cy = min(max(cy, H / (2 * z)), H - H / (2 * z))
         Mx = np.float32([[z, 0, W / 2 - z * cx], [0, z, H / 2 - z * cy]])
         img = cv2.warpAffine(fond, Mx, (W, H), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REPLICATE)
@@ -220,12 +263,18 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
     for q, a in zip(ph, audios):
         b = vers_mix(a); s0 = int(q["deb"] * SRM); mix[s0:s0 + len(b)] += b[:n - s0]
     def ajoute(nom, t_, g):
-        x = son(nom); s0 = int(max(0, t_) * SRM); e = min(n, s0 + len(x))
+        x = SM.son(nom); s0 = int(max(0, t_) * SRM); e = min(n, s0 + len(x))
         if e > s0: mix[s0:e] += x[:e - s0] * g
-    for j, q in enumerate(ph):
-        if j and ph[j - 1]["scene"] != q["scene"]: ajoute("woosh", q["deb"] - 0.3, 0.5)
-        if q["chute"] and j < len(ph) - 1: ajoute("xylo_descente" if j % 2 else "trombone_triste", q["fin"] + 0.05, 0.45)
-    ajoute("rimshot", ph[-1]["fin"] + 0.05, 0.8)
+    for tr in transitions:                                                 # changements de scène bien marqués
+        ajoute("transition", tr[0] - 0.25, 0.8)
+        if tr[2] == "carton": ajoute("pop", tr[0] + 0.05, 0.7)
+    if mini:
+        for k in TITRES: ajoute("pop", min(z2["deb"] for z2 in ph if z2["scene"] == k) - 0.2, 0.6)
+    for j, q in enumerate(ph[:-1]):
+        if q["chute"]: ajoute("boom", q["fin"] + 0.05, 0.35)                # petites vannes en route : impact léger
+    d_m = len(SM.son("montee")) / SRM
+    ajoute("montee", ph[-1]["deb"] - d_m, 0.5)                            # tension juste avant la chute finale
+    ajoute("boom", ph[-1]["fin"] + 0.02, 1.0)                             # gros impact sur la chute finale
     mix = np.clip(mix / max(1.0, np.abs(mix).max() / 0.95), -0.99, 0.99)
     brut, wav = f"{tmp}/mix.wav", f"{tmp}/mix_norm.wav"
     with wave.open(brut, "wb") as w:
