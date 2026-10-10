@@ -74,7 +74,7 @@ def application(nom):
 
 # Service worker : l'appli s'ouvre même hors connexion (dernière version de la page), sans jamais mettre en cache
 # les vidéos (trop lourdes) ni les appels à GitHub.
-SW = r"""const CACHE = "regie-v8";
+SW = r"""const CACHE = "regie-v9";
 const COQUILLE = ["./", "manifest.webmanifest", "icone-192.png", "icone-512.png"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(COQUILLE))); self.skipWaiting(); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(k => Promise.all(k.filter(x => x !== CACHE).map(x => caches.delete(x))))); self.clients.claim(); });
@@ -506,16 +506,18 @@ async function lancerFlux(fichier,bouton,texte,inputs,zone){
   try{
     const r=await gh(`/actions/workflows/${fichier}/dispatches`,{method:"POST",body:JSON.stringify(inputs?{ref:CONF.branche,inputs}:{ref:CONF.branche})});
     if(r.status!==204) throw new Error("GitHub a répondu "+r.status);
-    s.textContent=texte;
+    s.textContent="✓ Lancé. "+texte; let echecs=0;
     for(let k=0;k<200;k++){
       await new Promise(r=>setTimeout(r,15000));
-      const d=await (await gh(`/actions/workflows/${fichier}/runs?event=workflow_dispatch&per_page=3`)).json();
+      let d;                                                     // suivi : une coupure réseau passagère (appli en arrière-plan…) n'est pas une erreur
+      try{d=await (await gh(`/actions/workflows/${fichier}/runs?event=workflow_dispatch&per_page=3`)).json(); echecs=0}
+      catch(e){ if(++echecs>=4){s.textContent="✓ Lancé. Suivi interrompu (connexion) : le résultat apparaîtra dans l'appli quand ce sera fini.";break} continue }
       const run=(d.workflow_runs||[]).find(x=>new Date(x.created_at)>=depart); if(!run) continue;
       if(run.status!=="completed"){s.textContent=texte+" ("+(run.status==="queued"?"en file d'attente":"en cours")+")";continue}
       s.innerHTML=run.conclusion==="success"?"✅ Terminé. Rouvrez l'application dans une minute pour voir le résultat.":`❌ Échec. <a style="color:var(--bleu)" href="${run.html_url}" target="_blank" rel="noopener">Voir le détail</a>`;
       break;
     }
-  }catch(e){s.textContent="Impossible : "+e.message}
+  }catch(e){s.textContent="Impossible : "+(/failed to fetch|load failed|network/i.test(e.message)?"pas de connexion internet (réessayez)":e.message)}
   bouton.disabled=false;
 }
 $("#lancer").onclick=()=>lancerFlux("emission.yml",$("#lancer"),"📰 Le robot fabrique un JT d'actualité (20 à 40 min)…",{format:"actu"});
