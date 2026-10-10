@@ -11,7 +11,14 @@ def _format(png):
     s = max(W / im.shape[1], H / im.shape[0])
     im = cv2.resize(im, (int(im.shape[1] * s + 0.5), int(im.shape[0] * s + 0.5)), interpolation=cv2.INTER_CUBIC)
     y0, x0 = (im.shape[0] - H) // 2, (im.shape[1] - W) // 2
-    return np.ascontiguousarray(im[y0:y0 + H, x0:x0 + W])
+    return simplifier(np.ascontiguousarray(im[y0:y0 + H, x0:x0 + W]))
+
+def simplifier(im):
+    """Style des chaînes analysées : aplats lissés (moins de détails), couleurs plus claires et un léger flou,
+    pour que les personnages blancs ressortent nettement devant le décor."""
+    im = cv2.edgePreservingFilter(im, flags=1, sigma_s=70, sigma_r=0.45)
+    im = cv2.GaussianBlur(im, (0, 0), 1.6)
+    return np.clip(im.astype(np.float32) * 0.78 + 255 * 0.22, 0, 255).astype(np.uint8)
 
 def generer(decoupage, graine=7, delai=1200):              # 1re fois : téléchargement des poids SDXL (~7 Go)
     """decoupage : scènes de l'auteur ; renvoie {indice de scène: image RGB uint8 1080x1920}."""
