@@ -17,9 +17,6 @@ permissions:
   pages: write
   id-token: write
 
-concurrency:
-  group: emission
-  cancel-in-progress: false
 
 jobs:
   publier:
@@ -68,12 +65,11 @@ jobs:
           git config user.email "robot-jt@users.noreply.github.com"
           git add episodes
           git commit -m "Publication : $FICHIER" || echo "rien à enregistrer"
-          git pull --rebase -q || true
-          git push
+          REJOUER="python moteur/publier.py --marquer" MESSAGE="Historique mis à jour" python moteur/fusion.py
 
       - name: Reconstruire le site
         if: always()
-        run: python moteur/site.py
+        run: pip install -q pillow numpy opencv-python-headless && python moteur/site.py
 
       - name: Préparer GitHub Pages
         if: always()

@@ -102,9 +102,27 @@ def preparer():
         f.write(f"video=sortie/{nom}\nlegende=sortie/{txt}\nurl={url}\n")
     print(f"Vidéo prête : {url}")
 
+STATUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "sortie", "statut_publication.json")
+
+def marquer(fichier=None, ok=None, erreur=None):
+    """Note dans l'historique si la vidéo est publiée (rejoué tel quel si l'historique a changé entre-temps)."""
+    if fichier is None:
+        if not os.path.exists(STATUT): return
+        d = json.load(open(STATUT, encoding="utf-8")); fichier, ok, erreur = d["fichier"], d["publie"], d["erreur"]
+    else:
+        os.makedirs(os.path.dirname(STATUT), exist_ok=True)
+        json.dump({"fichier": fichier, "publie": ok, "erreur": erreur}, open(STATUT, "w", encoding="utf-8"))
+    if os.path.exists(HIST):
+        hist = json.load(open(HIST, encoding="utf-8"))
+        for e in hist:
+            if e.get("fichier") == fichier: e["publie"] = ok; e["erreur"] = erreur
+        json.dump(hist, open(HIST, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+
 if __name__ == "__main__":
     if sys.argv[1:] == ["--preparer"]:
         preparer(); sys.exit(0)
+    if sys.argv[1:] == ["--marquer"]:
+        marquer(); sys.exit(0)
     video, legende_txt, url = sys.argv[1:4]
     legende = open(legende_txt, encoding="utf-8").read().split("\n\nSources :")[0].strip()
     ok, erreur = False, None
@@ -112,12 +130,7 @@ if __name__ == "__main__":
         ok = publier(video, legende, url) is not None
     except Exception as e:
         erreur = str(e)[:300]; print(f"Publication automatique échouée : {erreur}")
-    h = HIST
-    if os.path.exists(h):
-        hist = json.load(open(h, encoding="utf-8"))
-        for e in hist:
-            if e.get("fichier") == os.path.basename(video): e["publie"] = ok; e["erreur"] = erreur
-        json.dump(hist, open(h, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    marquer(os.path.basename(video), ok, erreur)
     if not ok:
         print("➡ Vidéo disponible sur le site pour publication en un clic.")
         sys.exit(1)
