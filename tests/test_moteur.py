@@ -312,6 +312,37 @@ class TestGagEclair(unittest.TestCase):
         self.assertEqual(r.stdout.split(), ["True", "8", "à", "20", "45", "True", "3"], r.stderr[-500:])
 
 
+class TestCartoon(unittest.TestCase):
+    def test_emotions(self):
+        try: import cartoon
+        except Exception as e: self.skipTest(f"dépendances vidéo absentes : {e}")
+        self.assertEqual(cartoon.emotion("[laughs] Non mais"), "rire")
+        self.assertEqual(cartoon.emotion("[angry] Kévin !"), "colere")
+        self.assertEqual(cartoon.emotion("[deadpan] Super."), "blase")
+        self.assertEqual(cartoon.emotion("Bonjour."), "neutre")
+
+    def test_rendu_apercu(self):
+        try: import cartoon, tempfile, glob
+        except Exception as e: self.skipTest(f"dépendances vidéo absentes : {e}")
+        sk = {"titre_accroche": "Quand ton pote dit « j'arrive »",
+              "repliques": [{"p": "presentateur", "t": "J'arrive dans cinq minutes.", "d": "[confident] J'arrive dans cinq minutes."},
+                            {"p": "envoyee", "t": "Ça fait deux heures.", "d": "[angry] Ça fait deux heures.", "objet": "telephone"},
+                            {"p": "presentateur", "t": "Bientôt.", "chute": True}],
+              "decoupage": [{"scene": "bar", "repliques": [0, 1]}, {"scene": "rue", "repliques": [2], "effet": "pluie_billets", "titre": "Plus tard"}]}
+        auds = [np.random.default_rng(k).normal(0, 0.2, 22050).astype(np.float32) for k in range(3)]
+        d = tempfile.mkdtemp(); total = cartoon.rendre(sk, d, auds, apercu=True)
+        self.assertGreater(total, 3); self.assertEqual(len(glob.glob(d + "/*.png")), 6)
+
+    def test_decoupage_dessin(self):
+        sk = ecrire.valider({"sujet": "x", "repliques": [{"p": "invite", "t": "Salut.", "objet": "telephone"}, {"p": "envoyee", "t": "Non."},
+                                                         {"p": "invite", "t": "Si."}, {"p": "envoyee", "t": "Bon.", "objet": "bazooka"}],
+                             "decoupage": [{"scene": "s", "repliques": [0, 1], "decor": "a cozy bar <script>", "titre": "Le bar", "effet": "pluie_billets"},
+                                           {"scene": "t", "repliques": [2, 3], "effet": "explosion"}]}, set(), libre=True)
+        self.assertEqual(sk["repliques"][0]["objet"], "telephone"); self.assertNotIn("objet", sk["repliques"][3])
+        self.assertEqual(sk["decoupage"][0]["decor"], "a cozy bar script"); self.assertEqual(sk["decoupage"][0]["effet"], "pluie_billets")
+        self.assertNotIn("effet", sk["decoupage"][1])
+
+
 class TestVoix(unittest.TestCase):
     def test_nombres(self):
         self.assertEqual(voix_banque.en_lettres(3000), "trois mille")

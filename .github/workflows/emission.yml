@@ -69,6 +69,7 @@ jobs:
       MAX_REECRITURES: ${{ vars.MAX_REECRITURES }}
       SEUIL_QUALITE: ${{ vars.SEUIL_QUALITE }}
       FORMAT: ${{ inputs.format || vars.FORMAT }}
+      DECORS: ${{ vars.DECORS }}
       TON: ${{ vars.TON }}
       INFOS_DEMAIN: ${{ vars.INFOS_DEMAIN }}
       GH_TOKEN: ${{ github.token }}
@@ -113,6 +114,7 @@ jobs:
           modal deploy moteur/voix_modal.py || echo "Deploiement voix echoue, voix de secours"
           modal deploy moteur/video_modal.py || echo "Deploiement Wan echoue, pas de plan gag"
           modal deploy moteur/banque_modal.py || echo "Deploiement banque de voix echoue, chaine de secours"
+          modal deploy moteur/decor_modal.py || echo "Deploiement decors echoue, fonds unis"
 
       - name: Fabriquer l'émission
         id: run

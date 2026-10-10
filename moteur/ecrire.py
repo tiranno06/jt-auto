@@ -200,7 +200,13 @@ LIBRE = """
 MODE « SKETCH LIBRE » (prioritaire sur TOUT ce qui précède)
 ═══════════════════════════════════════════
 Aujourd'hui, PAS D'ACTUALITÉ : ignore les étapes de recherche, de vérification et de sélection d'actualité, la règle des gros titres, les faits réels et les sources. Le sujet est une SITUATION DU QUOTIDIEN que tout le monde a vécue (couple, famille, boulot, école, voisins, courses, transports, téléphone, réseaux sociaux, administration, sport, vacances…), observée avec une méchanceté tendre et poussée jusqu'à l'absurde.
-- Personnages : toujours nos trois personnages (clés "p" inchangées), mais ils peuvent jouer d'autres rôles : le présentateur introduit la situation comme un « dossier spécial » du JT, l'envoyée la vit en direct, l'invité est l'« expert » de mauvaise foi ou le personnage qui incarne le problème (nom fictif).
+- PAS DE JT : oublie le présentateur, l'envoyée, l'invité, le plateau et le direct. Le sketch est une scène de dessin animé jouée par nos trois personnages (petits bonshommes blancs à grosse tête ronde), avec les clés "p" habituelles :
+  · "presentateur" = JOJO (bonnet orange) : le pote relou, de mauvaise foi, qui ne lâche jamais ;
+  · "invite" = KÉVIN (casquette à l'envers) : le mytho, le roi des excuses, toujours en retard d'une galère ;
+  · "envoyee" = LILA (nœud rose) : celle qui craque, s'énerve et balance les vérités.
+  Utilise leurs prénoms. 1 à 3 personnages selon la scène (souvent 2 face à face). Le premier à parler peut être n'importe lequel.
+- DÉCOUPAGE POUR L'ANIMATION (obligatoire) : "decoupage" = 1 à 5 scènes ; pour chacune : "repliques" (indices), "decor" = le lieu EN ANGLAIS, court et concret, sans personnage (« a small cozy bar with wooden tables », « a messy bedroom at night », « a supermarket self-checkout », ou « plain » pour un fond uni), "titre" = 2 à 6 mots en français affichés en haut pendant la scène (surtout pour les gags éclair), "effet" = "pluie_billets", "tremblement" ou vide.
+- Une réplique peut faire tenir un objet au personnage : "objet" = telephone, billet, portefeuille, micro, verre ou cafe.
 - Aucune personne réelle, aucune marque, aucune actualité.
 - "faits_reels" : liste vide ; "inventions" : tout ; "sources" : liste vide ; "resume_factuel" : une phrase qui résume la situation.
 - La chute : une punchline qui retourne toute la situation (fausse vérité ironique, aveu involontaire, retournement) ; même exigence de mot qui tue à la fin.
@@ -229,11 +235,12 @@ OUTIL = {"name": "rendre_sketch", "description": "Rendre le sketch complet (livr
              "verite": {"type": "string"}, "concept": {"type": "string"}, "format": {"type": "string"}, "angle": {"type": "string"}, "resume_factuel": {"type": "string"},
              "faits_reels": {"type": "array", "items": {"type": "string"}}, "inventions": {"type": "array", "items": {"type": "string"}},
              "decoupage": {"type": "array", "items": _schema({"scene": {"type": "string"}, "repliques": {"type": "array", "items": {"type": "integer"}},
+                                                              "decor": {"type": "string"}, "titre": {"type": "string"}, "effet": {"type": "string"},
                                                               "lieu": {"type": "string"}, "son": {"type": "string"}, "duree": {"type": "number"}}, ["scene"])},
              "invite_nom": {"type": "string"}, "invite_role": {"type": "string"}, "invite_look": {"type": "string"}, "lieu_direct": {"type": "string"},
              "question": {"type": "string"}, "running_gag": {"type": "string"},
              "repliques": {"type": "array", "items": _schema({"p": {"type": "string"}, "t": {"type": "string"}, "d": {"type": "string"},
-                                                              "chute": {"type": "boolean"}, "attente": {"type": "number"}}, ["p", "t"])},
+                                                              "chute": {"type": "boolean"}, "attente": {"type": "number"}, "objet": {"type": "string"}}, ["p", "t"])},
              "bandeau": {"type": "array", "items": {"type": "string"}},
              "gag": _schema({"replique": {"type": "integer"}, "prompt": {"type": "string"}}, []),
              "legende": {"type": "string"}, "hashtags": {"type": "array", "items": {"type": "string"}}, "sources": {"type": "array", "items": {"type": "string"}}},
@@ -287,7 +294,7 @@ def _liste(v):
         except Exception: return []
     return v if isinstance(v, list) else []
 
-def valider(sk, liens):
+def valider(sk, liens, libre=False):
     reps, attente = [], False
     if not isinstance(sk, dict): raise ValueError("réponse sans sketch")
     brutes = _liste(sk.get("repliques") or sk.get("script") or sk.get("dialogues"))
@@ -299,6 +306,7 @@ def valider(sk, liens):
         x = {"p": p, "t": t}
         if r.get("d"): x["d"] = _court(r["d"], 260)
         if r.get("chute"): x["chute"] = True
+        if str(r.get("objet", "")).lower() in OBJETS: x["objet"] = str(r["objet"]).lower()
         try: a = float(r.get("attente") or 0)
         except (TypeError, ValueError): a = 0
         if a > 0 and not attente: x["attente"] = min(1.2, max(0.3, a)); attente = True
@@ -308,7 +316,7 @@ def valider(sk, liens):
     if len(reps) < (3 if MINI else 4):
         vus = sorted({str((r or {}).get("p", "?"))[:20] for r in brutes if isinstance(r, dict)})[:5]
         raise ValueError(f"sketch trop court ({len(reps)} répliques ; champs reçus : {', '.join(sorted(sk))[:120]} ; rôles : {vus})")
-    if reps[0]["p"] != "presentateur" and not MINI: raise ValueError("le présentateur doit ouvrir")
+    if reps[0]["p"] != "presentateur" and not (MINI or libre): raise ValueError("le présentateur doit ouvrir")
     tags = [re.sub(r"[^a-z0-9]", "", unicodedata.normalize("NFKD", str(h).lower()).encode("ascii", "ignore").decode()) for h in sk.get("hashtags", [])]
     gag = None
     g = sk.get("gag") or {}
@@ -344,6 +352,8 @@ def _sources(proposees, liens):
         if l and l not in out: out.append(l)
     return out[:6]
 
+EFFETS = ("pluie_billets", "tremblement")
+OBJETS = ("telephone", "billet", "portefeuille", "micro", "verre", "cafe")
 SONS_DISPONIBLES = ("rimshot", "xylo_descente", "trombone_triste", "dun_dun", "woosh", "reconstitution")
 def _decoupage(dec, n):
     """Découpage scène par scène, normalisé pour le moteur vidéo :
@@ -357,7 +367,11 @@ def _decoupage(dec, n):
         son = str(s.get("son", "")).lower(); son = son if son in SONS_DISPONIBLES else ""
         try: duree = round(float(s.get("duree", 0)), 1)
         except (TypeError, ValueError): duree = 0
-        out.append({"scene": _court(s.get("scene") or s.get("description"), 300), "repliques": idx, "lieu": lieu, "son": son, "duree": duree})
+        x = {"scene": _court(s.get("scene") or s.get("description"), 300), "repliques": idx, "lieu": lieu, "son": son, "duree": duree}
+        if s.get("decor"): x["decor"] = re.sub(r"[^\w\s,.'-]", "", _court(s["decor"], 160))       # moteur cartoon : décor (anglais)
+        if s.get("titre"): x["titre"] = _court(s["titre"], 50)
+        if str(s.get("effet", "")).lower() in EFFETS: x["effet"] = str(s["effet"]).lower()
+        out.append(x)
     return out
 
 USAGE = {"appels": 0, "entree": 0, "sortie": 0, "recherches_web": 0}                          # suivi du budget (jetons consommés)
@@ -544,7 +558,7 @@ def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=(), li
         for tour in range(1 + (essais if rang == 0 else min(1, essais))):   # écriture puis jusqu'à 3 réécritures (1 pour le sujet de secours)
             try:
                 brut = _appel(client, systeme, conv)
-                sk = valider(brut, liens); hors_sujet(sk, titres); n_mots = longueur(sk); chute_sur_sujet(sk, titres)
+                sk = valider(brut, liens, libre); hors_sujet(sk, titres); n_mots = longueur(sk); chute_sur_sujet(sk, titres)
             except Exception as e:
                 derniere = e
                 if _bloquant(e):

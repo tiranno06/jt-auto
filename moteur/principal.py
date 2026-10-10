@@ -83,7 +83,7 @@ def main():
     test = os.environ.get("SKETCH_TEST", "").strip()
     if test:                                                               # sketch écrit à la main (essai d'un style)
         ecrire.NB_MAX = 20
-        sk = ecrire.valider(json.load(open(test, encoding="utf-8")), set())
+        sk = ecrire.valider(json.load(open(test, encoding="utf-8")), set(), libre)
         print(f"Sketch d'essai : {test}", flush=True)
     else:
         sk = ecrire.ecrire_sketch([c[0] for c in candidats], gags=gags, special=dimanche and not libre, recents=recents, libre=libre)
@@ -103,15 +103,24 @@ def main():
     pris = {h.get("fichier") for h in historique}; n = 1; base = f"sortie/{jour}_{heure}_emission"
     while os.path.basename(base) + ".mp4" in pris: n += 1; base = f"sortie/{jour}_{heure}_emission{n}"   # plusieurs émissions le même jour
     os.makedirs("sortie", exist_ok=True)
-    gag = None
-    if modal_ok and sk.get("gag") and os.environ.get("PLAN_GAG", "1") != "0":
+    gag = None; duree = None; decors = {}
+    if libre:                                                              # sketch libre / gag éclair : moteur cartoon animé
+        try:
+            import cartoon, decors as decors_mod
+            if modal_ok and os.environ.get("DECORS", "1") != "0": decors = decors_mod.generer(sk.get("decoupage"), graine=len(historique) + 7)
+            duree = cartoon.rendre(sk, base + ".mp4", audios, mots=mots, decors=decors, mini=fmt == "mini")
+        except Exception as e:
+            import traceback; traceback.print_exc()
+            print(f"Moteur cartoon en échec ({e}) : rendu de secours avec le moteur JT.", flush=True); duree = None
+    if duree is None and modal_ok and sk.get("gag") and os.environ.get("PLAN_GAG", "1") != "0":
         import video_modal
         i = sk["gag"]["replique"]
         gag = video_modal.generer(sk["gag"]["prompt"], len(audios[i]) / SR + 0.6, base + "_gag.mp4", graine=len(historique))
         print(f"Plan gag IA : {'oui' if gag else 'non'}", flush=True)
-    duree = jt.rendre(sk, base + ".mp4", audios, gag=gag, mots=mots)
+    if duree is None: duree = jt.rendre(sk, base + ".mp4", audios, gag=gag, mots=mots)
     credit = "Voix : " + " ; ".join(credits_voix) + "."
     if gag: credit += " Plan « reconstitution » généré avec Wan 2.2."
+    if decors: credit += " Décors générés avec FLUX.1-schnell (Apache 2.0)."
     legende = f"{sk['legende']}" + (f"\n\n{sk['question']}" if sk.get("question") else "") + "\n\n" + " ".join("#" + h for h in sk["hashtags"]) + f"\n\nContenu généré par IA. {credit}"
     open(base + ".txt", "w", encoding="utf-8").write(legende + "\n\nSources :\n" + "\n".join(sk["sources"]) + "\n")
     os.makedirs("episodes", exist_ok=True)

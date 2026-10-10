@@ -30,6 +30,7 @@ jobs:
             echo "=== voix (Chatterbox) ==="; modal deploy moteur/voix_modal.py 2>&1 | tail -40; echo "code: ${PIPESTATUS[0]}"
             echo "=== plan gag (Wan 2.2) ==="; modal deploy moteur/video_modal.py 2>&1 | tail -40; echo "code: ${PIPESTATUS[0]}"
             echo "=== banque de voix (Kyutai, Zonos, Whisper) ==="; modal deploy moteur/banque_modal.py 2>&1 | tail -60; echo "code: ${PIPESTATUS[0]}"
+            echo "=== decors (FLUX.1-schnell) ==="; modal deploy moteur/decor_modal.py 2>&1 | tail -40; echo "code: ${PIPESTATUS[0]}"
           } > episodes/deploiement.txt
           cat episodes/deploiement.txt
       - name: Enregistrer le compte rendu
