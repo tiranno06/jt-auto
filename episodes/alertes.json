@@ -16,5 +16,11 @@
   "titre": "Pas de vidéo cette fois",
   "texte": "Meilleur sketch : 66/100 (« MOITIÉ-MOITIÉ »), sous votre minimum de 85. Rien n'a été fabriqué : crédits voix et décors économisés.",
   "lien": ""
+ },
+ {
+  "quand": "2026-10-10T20:13+00:00",
+  "titre": "⚠️ Échec de fabrication",
+  "texte": "    if r.returncode: raise RuntimeError(\"téléchargement impossible (vidéo privée, supprimée ou lien incorrect) : \" + r.stderr.strip()[-300:])\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: té",
+  "lien": ""
  }
 ]
