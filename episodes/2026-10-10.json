@@ -1,254 +1,256 @@
 {
- "titre": "TRUDEAU CONFÉRENCIER",
- "sujet": "TRUDEAU CONFÉRENCIER",
- "ecran": "TRUDEAU",
- "invite_nom": "Grégoire Cachet",
- "invite_role": "Agent d'ex-dirigeants (fictif)",
+ "titre": "J'ARRIVE DANS 5 MIN",
+ "sujet": "J'ARRIVE DANS 5 MIN",
+ "ecran": "5 MINUTES",
+ "invite_nom": "Kévin Tardieu",
+ "invite_role": "Pote en retard (fictif)",
  "invite_look": "moustache",
- "lieu_direct": "Salle de conférence VIP",
- "titre_accroche": "Lâché par les sondages, payé pour réussir",
- "question": "Vous aussi, vous seriez payé après un échec ? Racontez votre pire entretien 👇",
- "running_gag": "L'agent d'ex-dirigeants : plus vous avez échoué, plus votre cachet grimpe.",
- "verite": "En politique, l'échec ne coûte rien à celui qui le commet. Trudeau a quitté le pouvoir en 2025, lâché par son propre camp et par les sondages. Depuis, le circuit des élites le paie grassement pour sa notoriété, pas pour son bilan.",
+ "lieu_direct": "Terrasse du bar",
+ "titre_accroche": "Quand ton pote dit « j'arrive dans 5 min »",
+ "question": "C'est quoi le pire « j'arrive » qu'on vous ait sorti ? 👇",
+ "running_gag": "La preuve de Kévin : chaque fois qu'il veut prouver quelque chose, la preuve l'accuse.",
+ "verite": "Le pote qui dit « j'arrive dans cinq minutes » n'est pas parti. Il n'est même pas sorti de la douche. Et parfois, c'est sa propre fête qu'il fait attendre.",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "Justin Trudeau a quitté le pouvoir lâché par les sondages. Depuis, on le paie pour expliquer comment réussir.",
-   "chute": true
-  },
-  {
-   "p": "presentateur",
-   "t": "Martine, il fait quoi, exactement ?"
-  },
-  {
-   "p": "envoyee",
-   "t": "J'ai enquêté. Soit c'est un conférencier, soit c'est le seul chômeur au monde qui a un agent.",
-   "chute": true
-  },
-  {
-   "p": "invite",
-   "t": "Je suis cet agent. Et il n'est pas chômeur. Il est disponible à l'international.",
-   "chute": true
-  },
-  {
-   "p": "presentateur",
-   "t": "On paie pour son bilan ?"
-  },
-  {
-   "p": "invite",
-   "t": "On ne paie pas pour le bilan. Le bilan, tout le monde l'a déjà vu gratuitement.",
+   "t": "Dossier spécial : votre pote arrive dans cinq minutes. Ça fait deux heures.",
    "chute": true
   },
   {
    "p": "envoyee",
-   "t": "Moi, quand je rate mon boulot, on ne m'invite pas à Davos. On me convoque à un entretien préalable au licenciement.",
-   "chute": true
-  },
-  {
-   "p": "invite",
-   "t": "Plus la chute dans les sondages est raide, plus le cachet grimpe. On appelle ça de l'expérience.",
-   "chute": true
-  },
-  {
-   "p": "presentateur",
-   "t": "Et un ex-dirigeant populaire ?"
-  },
-  {
-   "p": "invite",
-   "t": "Ça ne vend rien. Il n'a aucune leçon d'échec à raconter.",
+   "t": "Ses cinq minutes, j'ai eu le temps de manger, payer, divorcer et récupérer la garde.",
    "chute": true
   },
   {
    "p": "envoyee",
-   "t": "Avant, il fallait convaincre tout le Canada. Maintenant, il suffit de convaincre une salle qui a déjà payé.",
+   "t": "Je lui ai demandé où il était. Il m'a dit « bientôt ». C'est pas une adresse, ça. C'est un horoscope.",
+   "chute": true
+  },
+  {
+   "p": "invite",
+   "t": "Wesh, je suis au coin de la rue. Je vois le bar d'ici."
+  },
+  {
+   "p": "envoyee",
+   "t": "Kévin. Ton coin de rue, il a un pommeau ?",
+   "chute": true
+  },
+  {
+   "p": "invite",
+   "t": "C'est la pluie, frère. Et j'ai mis du shampoing anti-pluie.",
    "chute": true
   },
   {
    "p": "envoyee",
-   "t": "À Davos, Katy Perry était au premier rang, en cardigan. Sa seule nouvelle électrice. Elle est américaine.",
+   "t": "Et depuis quand ta rue fait « ding » comme un micro-ondes ?",
+   "chute": true
+  },
+  {
+   "p": "invite",
+   "t": "C'est le GPS. Il me dit que mes lasagnes sont prêtes.",
+   "chute": true
+  },
+  {
+   "p": "envoyee",
+   "t": "Il partage sa position en direct. Ça affiche : « Domicile, salle de bain ».",
+   "chute": true
+  },
+  {
+   "p": "invite",
+   "t": "Attends attends. Je t'envoie une photo de la rue. Preuve."
+  },
+  {
+   "p": "envoyee",
+   "t": "Ta photo, c'est une vue satellite. On voit mon vélo. Volé en 2014.",
+   "d": "Ta photo, c'est une vue satellite. On voit mon vélo. Volé en deux mille quatorze.",
+   "chute": true
+  },
+  {
+   "p": "invite",
+   "t": "Bon, là, je suis en bas de chez toi."
+  },
+  {
+   "p": "envoyee",
+   "t": "Kévin. J'ai déménagé il y a deux ans.",
+   "chute": true
+  },
+  {
+   "p": "invite",
+   "t": "Ok, je mets mes chaussures et j'arrive. Enfin… je les achète et j'arrive.",
    "chute": true
   },
   {
    "p": "presentateur",
-   "t": "Rassurez-vous : en politique, l'échec se paie très cher. À Trudeau.",
+   "t": "Rassurez-vous : Kévin arrive dans cinq minutes. C'est son anniversaire.",
    "chute": true,
-   "attente": 0.7
+   "attente": 0.8
   }
  ],
  "bandeau": [
-  "UN EX-DIRIGEANT POPULAIRE INVENDABLE, SELON SON AGENT",
-  "PÔLE EMPLOI REFUSE DE DEVENIR UNE AGENCE DE CONFÉRENCES",
-  "UNE COURBE DE SONDAGE COTÉE EN BOURSE",
-  "DAVOS : LE PREMIER RANG RÉSERVÉ AUX CARDIGANS"
+  "CINQ MINUTES : DURÉE MOYENNE CONSTATÉE, TROIS HEURES",
+  "ALERTE MÉTÉO : AVERSES DE SHAMPOING AU COIN DE LA RUE",
+  "UN VÉLO VOLÉ EN 2014 RETROUVÉ SUR UNE PREUVE DE KÉVIN",
+  "« JE SUIS EN BAS » : 98 % DES BAS SONT IMAGINAIRES"
  ],
  "gag": {
-  "replique": 11,
-  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. A snowy alpine conference hall, rows of stern businessmen in dark suits holding expensive tickets, and in the front row a single cheerful woman in a pastel cardigan and pencil skirt clapping enthusiastically while everyone else checks their watches, a podium with a falling poll chart on the screen behind it, comedic, deadpan."
+  "replique": 5,
+  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. A man with a moustache stands in his shower covered in shampoo foam, holding a phone to his ear with a confident smile, pointing at a tiny fake street sign stuck on the tiled wall, water pouring over him, a microwave glowing in the background through the bathroom door, comedic, deadpan."
  },
- "legende": "Lâché par les sondages, Trudeau est payé pour expliquer comment réussir. Nous, on a un entretien RH. Satire, personnages fictifs.",
+ "legende": "« J'arrive dans 5 minutes. » Il était sous la douche. Taguez le pote qui vous fait ça. Satire, personnages fictifs.",
  "hashtags": [
-  "trudeau",
-  "satire",
-  "politique",
-  "davos",
-  "katyperry",
   "humour",
-  "actu"
+  "sketch",
+  "retard",
+  "potes",
+  "pov",
+  "animation"
  ],
- "sources": [
-  "https://www.lemonde.fr/m-le-mag/article/2026/10/10/conferences-a-prix-d-or-histoire-d-amour-glamour-la-vie-en-rose-de-l-ex-premier-ministre-canadien-justin-trudeau_6790939_4500055.html"
- ],
+ "sources": [],
  "decoupage": [
   {
-   "scene": "Plateau du JT. Jean-Michel Plateau, impassible, lance l'accroche. Derrière lui s'affiche une courbe de sondage qui plonge, puis une flèche de cachet qui monte. Woosh vers le direct.",
+   "scene": "Plateau du JT. Jean-Michel est impassible. Derrière lui, une horloge tourne à toute vitesse. Woosh vers le direct.",
    "repliques": [
-    0,
-    1
+    0
    ],
    "lieu": "plateau",
    "son": "woosh",
-   "duree": 7.0
+   "duree": 4.0
   },
   {
-   "scene": "Direct depuis une salle de conférence VIP : moquette, pupitre, rangées de costumes. Martine, blasée, pose son hypothèse. L'agent apparaît en duplex avec sa moustache et son téléphone collé à l'oreille.",
+   "scene": "Terrasse du bar, la nuit. Martine est seule à une table couverte d'assiettes vides et d'additions payées, avec un gâteau aux bougies éteintes et des papiers de divorce signés. Elle parle face caméra, blasée.",
    "repliques": [
-    2,
-    3
+    1,
+    2
    ],
    "lieu": "direct",
    "son": "rimshot",
    "duree": 11.0
   },
   {
-   "scene": "Duplex de l'agent. Jean-Michel pose sa question sans la moindre émotion. L'agent répond, sûr de lui. Coupe sur Martine, qui tient une convocation RH.",
+   "scene": "Écran partagé. Kévin au téléphone, cadré serré, assuré. Le plan s'élargit : il est sous sa douche, avec de la mousse sur la tête. Un « ding » de micro-ondes retentit.",
    "repliques": [
+    3,
     4,
     5,
-    6
-   ],
-   "lieu": "duplex",
-   "son": "trombone_triste",
-   "duree": 16.0
-  },
-  {
-   "scene": "L'agent déroule son barème avec un graphique inversé : sondages en bas, cachet en haut. Jean-Michel relance.",
-   "repliques": [
-    7,
-    8,
-    9
+    6,
+    7
    ],
    "lieu": "duplex",
    "son": "dun_dun",
-   "duree": 15.0
+   "duree": 20.0
   },
   {
-   "scene": "Retour sur Martine dans la salle. Un public qui a déjà payé applaudit poliment. Elle décrit ensuite le premier rang de Davos, avec une silhouette en cardigan et une jupe crayon.",
+   "scene": "Martine tourne son téléphone vers la caméra : la carte affiche « Domicile, salle de bain ». Puis la photo envoyée apparaît : une vieille vue satellite pixelisée, avec un vélo entouré en rouge.",
    "repliques": [
-    10,
-    11
+    8,
+    9,
+    10
    ],
-   "lieu": "direct",
-   "son": "rimshot",
+   "lieu": "duplex",
+   "son": "trombone_triste",
+   "duree": 14.0
+  },
+  {
+   "scene": "Kévin, en serviette et pieds nus, cherche ses chaussures en panique, puis se fige en apprenant qu'elle a déménagé. Il finit par ouvrir un site de vente sur son téléphone.",
+   "repliques": [
+    11,
+    12,
+    13
+   ],
+   "lieu": "duplex",
+   "son": "xylo_descente",
    "duree": 13.0
   },
   {
-   "scene": "Plateau. Silence. Jean-Michel regarde la caméra sans bouger et livre la chute. Fondu au noir.",
+   "scene": "Retour plateau. Silence, puis Jean-Michel lâche la chute sans un battement de cil. Plan final : en terrasse, Martine souffle elle-même les bougies du gâteau. Noir.",
    "repliques": [
-    12
+    14
    ],
    "lieu": "plateau",
-   "son": "xylo_descente",
+   "son": "rimshot",
    "duree": 6.0
   }
  ],
  "fiche": {
-  "concept": "« Le chômeur qui a un agent » : notre JT décortique la reconversion dorée de Justin Trudeau. Il est parti au plus bas dans les sondages, et il donne aujourd'hui des conférences très bien payées dans le monde entier. Un agent fictif de conférenciers ex-dirigeants défend une règle simple : plus on a échoué, plus le cachet grimpe.",
-  "format": "Faux JT avec une interview en plateau. L'agent est l'invité, et l'envoyée est en direct d'une salle de conférence.",
-  "angle": "Le double standard de la retraite politique. Un salarié qui rate son boulot est convoqué à un entretien préalable au licenciement. Un Premier ministre lâché par les sondages est payé pour expliquer au monde comment réussir. L'invité fait de l'impopularité un argument de vente. Katy Perry n'est qu'un détail visuel, jamais la cible.",
-  "resume_factuel": "Justin Trudeau a annoncé sa démission en janvier 2025, après près de dix ans au pouvoir. Mark Carney lui a succédé en mars 2025. Selon Le Monde (M le mag, 10 octobre 2026), il donne depuis des conférences lucratives dans le monde entier et s'affiche avec sa compagne, la chanteuse américaine Katy Perry. Le couple a été officialisé le 6 décembre 2025. En janvier 2026, au Forum de Davos, elle était au premier rang pour un discours de Trudeau, en cardigan.",
-  "faits_reels": [
-   "Justin Trudeau a annoncé sa démission en janvier 2025, après près de dix ans au pouvoir, sur fond de sondages en berne et de pressions dans son propre camp. Mark Carney lui a succédé en mars 2025.",
-   "Depuis, il donne des conférences lucratives dans le monde entier (Le Monde, M le mag, 10/10/2026). Les montants exacts ne sont pas vérifiés, donc aucun chiffre n'est cité.",
-   "Il est en couple avec Katy Perry, chanteuse américaine. Couple officialisé sur Instagram le 6 décembre 2025.",
-   "En janvier 2026, à Davos, Katy Perry était au premier rang, en cardigan, pour un discours de Trudeau.",
-   "Aucune recherche web pendant la rédaction : les faits reposent sur l'article du Monde fourni et sur les faits vérifiés transmis par le robot."
-  ],
+  "concept": "Dossier spécial du JT : « Cinq minutes, l'unité de temps la plus élastique de France ». Martine attend en direct à la terrasse d'un bar, devant un gâteau. Kévin, le pote en retard, est en duplex au téléphone et jure qu'il arrive. Chaque bruit, chaque preuve qu'il envoie le trahit un peu plus.",
+  "format": "Faux JT avec duplex téléphonique : l'envoyée blasée face au pote de mauvaise foi qui ne lâche rien.",
+  "angle": "L'escalade des fausses preuves. D'abord les bruits qui le trahissent (douche, micro-ondes), puis des preuves fabriquées qui l'enfoncent (sa position partagée, une photo de la rue qui date de 2014), et pour finir l'aveu glissé dans la phrase : il n'a même pas de chaussures. La chute retourne tout : le retardataire, c'est la star de la soirée.",
+  "resume_factuel": "Un pote promet d'arriver dans cinq minutes alors qu'il est encore sous la douche chez lui, et il nie l'évidence jusqu'au bout. Pourtant, c'est son propre anniversaire.",
+  "faits_reels": [],
   "inventions": [
-   "Grégoire Cachet, agent de conférenciers ex-dirigeants, est un personnage fictif. Ses déclarations aussi.",
-   "Le barème selon lequel « plus la chute dans les sondages est raide, plus le cachet grimpe » est inventé.",
-   "L'idée que Trudeau serait « le seul chômeur au monde qui a un agent » est une hypothèse satirique.",
-   "Le direct depuis la salle de conférence et les commentaires de l'envoyée sont fictifs.",
-   "Les dépêches du bandeau sont inventées."
+   "Tout le sketch est une fiction : la situation, Kévin Tardieu, la terrasse du bar, l'anniversaire, les dialogues et les dépêches du bandeau."
   ],
   "decoupage": [
    {
-    "scene": "Plateau du JT. Jean-Michel Plateau, impassible, lance l'accroche. Derrière lui s'affiche une courbe de sondage qui plonge, puis une flèche de cachet qui monte. Woosh vers le direct.",
+    "scene": "Plateau du JT. Jean-Michel est impassible. Derrière lui, une horloge tourne à toute vitesse. Woosh vers le direct.",
     "repliques": [
-     0,
-     1
+     0
     ],
     "lieu": "plateau",
     "son": "woosh",
-    "duree": 7.0
+    "duree": 4.0
    },
    {
-    "scene": "Direct depuis une salle de conférence VIP : moquette, pupitre, rangées de costumes. Martine, blasée, pose son hypothèse. L'agent apparaît en duplex avec sa moustache et son téléphone collé à l'oreille.",
+    "scene": "Terrasse du bar, la nuit. Martine est seule à une table couverte d'assiettes vides et d'additions payées, avec un gâteau aux bougies éteintes et des papiers de divorce signés. Elle parle face caméra, blasée.",
     "repliques": [
-     2,
-     3
+     1,
+     2
     ],
     "lieu": "direct",
     "son": "rimshot",
     "duree": 11.0
    },
    {
-    "scene": "Duplex de l'agent. Jean-Michel pose sa question sans la moindre émotion. L'agent répond, sûr de lui. Coupe sur Martine, qui tient une convocation RH.",
+    "scene": "Écran partagé. Kévin au téléphone, cadré serré, assuré. Le plan s'élargit : il est sous sa douche, avec de la mousse sur la tête. Un « ding » de micro-ondes retentit.",
     "repliques": [
+     3,
      4,
      5,
-     6
-    ],
-    "lieu": "duplex",
-    "son": "trombone_triste",
-    "duree": 16.0
-   },
-   {
-    "scene": "L'agent déroule son barème avec un graphique inversé : sondages en bas, cachet en haut. Jean-Michel relance.",
-    "repliques": [
-     7,
-     8,
-     9
+     6,
+     7
     ],
     "lieu": "duplex",
     "son": "dun_dun",
-    "duree": 15.0
+    "duree": 20.0
    },
    {
-    "scene": "Retour sur Martine dans la salle. Un public qui a déjà payé applaudit poliment. Elle décrit ensuite le premier rang de Davos, avec une silhouette en cardigan et une jupe crayon.",
+    "scene": "Martine tourne son téléphone vers la caméra : la carte affiche « Domicile, salle de bain ». Puis la photo envoyée apparaît : une vieille vue satellite pixelisée, avec un vélo entouré en rouge.",
     "repliques": [
-     10,
-     11
+     8,
+     9,
+     10
     ],
-    "lieu": "direct",
-    "son": "rimshot",
+    "lieu": "duplex",
+    "son": "trombone_triste",
+    "duree": 14.0
+   },
+   {
+    "scene": "Kévin, en serviette et pieds nus, cherche ses chaussures en panique, puis se fige en apprenant qu'elle a déménagé. Il finit par ouvrir un site de vente sur son téléphone.",
+    "repliques": [
+     11,
+     12,
+     13
+    ],
+    "lieu": "duplex",
+    "son": "xylo_descente",
     "duree": 13.0
    },
    {
-    "scene": "Plateau. Silence. Jean-Michel regarde la caméra sans bouger et livre la chute. Fondu au noir.",
+    "scene": "Retour plateau. Silence, puis Jean-Michel lâche la chute sans un battement de cil. Plan final : en terrasse, Martine souffle elle-même les bougies du gâteau. Noir.",
     "repliques": [
-     12
+     14
     ],
     "lieu": "plateau",
-    "son": "xylo_descente",
+    "son": "rimshot",
     "duree": 6.0
    }
   ],
   "titres_sujet": [
-   "Conférences à prix d’or, histoire d’amour glamour… La vie en rose de l’ex-premier ministre canadien Justin Trudeau"
+   "Quand ton pote te dit « j'arrive dans 5 minutes »"
   ],
-  "verification_web": true,
-  "note": 70.0,
-  "critique": "Points faibles :\n- R11 (Katy Perry) : c'est la réplique la plus faible, alors que c'est celle du plan gag. Le volet « histoire d'amour glamour » du sujet arrive d'un coup à l'avant-dernière réplique, comme une pièce rapportée. Le détail « en cardigan » ne fait pas rire sans la référence visuelle, et le plan montre une silhouette anonyme : le public ne comprendra pas forcément qu'il s'agit de Katy Perry. La chute « elle est américaine » est molle, et la présence de Katy Perry à Davos doit être vérifiée. Correction : relier le couple à la mécanique du cachet. Par exemple, l'agent : « Et depuis Katy Perry, on facture aussi les selfies. » Ou Martine : « Au premier rang, Katy Perry. La seule personne dans la salle qui ne l'a pas payé : c'est lui qui l'a invitée. »\n- R1 (« il fait quoi, exactement ? ») : simple relance sans rien dedans. Ajouter une pique, par exemple : « Martine, il travaille ou il tourne ? »\n- R4 (« On paie pour son bilan ? ») : question plate, qui sert juste à préparer R5. On peut la garder courte, mais avec un effet de cadre impassible plus marqué. Ou la fusionner : « Les organisateurs paient pour son bilan ? »\n- R7 : énonce le concept tel quel, ce qui le rend redondant avec R0 et R9. « On appelle ça de l'expérience » est attendu. Il faut une image chiffrée absurde, par exemple : « Chaque point perdu dans les sondages, c'est 10 000 dollars de plus. Il a perdu beaucoup de points. »\n- R6 : trop longue et trop explicative. À resserrer : « Moi, quand je rate, c'est ",
+  "verification_web": false,
+  "note": 76.0,
+  "critique": "Points faibles, réplique par réplique :\n- R5 (« shampoing anti-pluie ») : c'est la réplique la plus faible du sketch. L'absurde est mou et la mauvaise foi ne marche pas, alors que c'est la réplique du plan gag. Le mensonge de Kévin doit coller à la réalité du pote en retard, et l'aplomb doit être total. Pistes : « C'est la pluie, frère. Il pleut fort, ça mousse, c'est la pollution. » ou « C'est pas un pommeau, c'est un lampadaire qui fuit. Appelle la mairie. »\n- R7 (« le GPS me dit que mes lasagnes sont prêtes ») : le jeu de mots est correct mais attendu, et il ouvre une deuxième fausse piste (cuisine) en plus de la douche. Ça dilue l'image principale. Mieux vaut un aveu qui le trahit davantage : « C'est le GPS. Il dit \"vous êtes arrivé\". Tu vois ? Je suis arrivé. »\n- R3 : mise en place efficace mais sans vanne. On peut la rendre plus drôle : « Je suis au coin de la rue, je vois le bar d'ici. Il est flou, mais je le vois. »\n- R1 : très bonne liste en escalade, mais « récupérer la garde » est ambigu (la garde de qui ?). Plus net et plus noir : « …divorcer, me remarier et perdre la garde. »\n- R0 : correct mais c'est une simple annonce. Pour en faire une vanne : « …Ça fait deux heures. Les scientifiques parlent de la plus grande dilatation du temps depuis Einstein. »\n- R13 : bonne double détente, la reprise « je les achète » fonctionne.\n- R14 (chute) : vrai retournement sur le sujet, préparé visuellement par le gâteau dès le début. Elle ne rappelle pas une blague du sketch : ell",
   "decision": "à retravailler"
  }
 }
