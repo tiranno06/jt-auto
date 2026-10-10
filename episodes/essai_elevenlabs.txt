@@ -1,0 +1,36 @@
+1) Abonnement : HTTP 200
+   offre creator ; caractères utilisés 0 / 131000 ; clonage instantané True ; renouvellement 1794299479
+2) Modèles : HTTP 200
+   eleven_v4                    tts=True français=True coût/caractère=1.0
+   eleven_v4_turbo              tts=True français=True coût/caractère=0.5
+   eleven_v3                    tts=True français=True coût/caractère=1.0
+   eleven_v3_conversational     tts=True français=True coût/caractère=0.5
+   eleven_multilingual_v2       tts=True français=True coût/caractère=1.0
+   eleven_flash_v2_5            tts=True français=True coût/caractère=0.5
+   eleven_turbo_v2_5            tts=True français=True coût/caractère=0.5
+   eleven_turbo_v2              tts=True français=False coût/caractère=0.5
+   eleven_flash_v2              tts=True français=False coût/caractère=0.5
+   eleven_english_sts_v2        tts=False français=False coût/caractère=1.0
+   eleven_multilingual_sts_v2   tts=False français=True coût/caractère=1.0
+   modèle retenu pour l'essai : eleven_v4
+3) Voix françaises de la bibliothèque : HTTP 200
+   Nicolas - Narrator           male/middle_aged accent=parisian usage=narrative_story id=aQROLel5sQbj1vuIVi6B
+   Claire - Warm, Pretty and Ch female/middle_aged accent=standard usage=narrative_story id=6vTyAgAT8PncODBcLjRf
+   Audrey - Energetic Commercia female/middle_aged accent=standard usage=advertisement id=McVZB9hVxVSk3Equu8EH
+   Lucie - Support Agent        female/middle_aged accent=standard usage=conversational id=YxrwjAKoUKULGd0g8K9Y
+   Adina - Young, Welcoming and female/young accent=standard usage=social_media id=FvmvwvObRqIHojkEGh5N
+   Hélène - Neutral, Controled  female/middle_aged accent= usage=informative_educational id=imRmmzTqlLHt9Do1HufF
+   Jeanne - Narrator            female/young accent=parisian usage=narrative_story id=txtf1EDouKke753vN8SL
+   Clara Dupont - Professional  female/middle_aged accent= usage=entertainment_tv id=glDtoWIoIgk38YbycCwG
+   Maevys - Audiobook Narrator  female/young accent=parisian usage=narrative_story id=x10MLxaAmShMYt7vs7pl
+   Victoria - Content Creator   female/young accent=parisian usage=narrative_story id=O31r762Gb3WFygrEOGh0
+   Nicolas Petit - Convincing a male/middle_aged accent= usage=narrative_story id=AmMsHJaCw4BtwV3KoUXF
+   Guillaume - Narrator         male/middle_aged accent=standard usage=narrative_story id=Qrl71rx6Yg8RvyPYRGCQ
+   Voix du compte : HTTP 200 ; 21
+   ajout de la voix Nicolas - Narrator au compte : HTTP 200 
+   ajout de la voix Claire - Warm, Pretty and Charming au compte : HTTP 200 
+4) Réplique jouée (eleven_v4, voix Nicolas - Narrator) : HTTP 200 
+   144239 octets
+5) Dialogue à deux voix : HTTP 200 
+   226159 octets
+6) Après l'essai : caractères utilisés 0 / 131000
