@@ -366,6 +366,7 @@ const $ = s => document.querySelector(s);
 let choisie = null, fichier = null, charge = null, armer = null;
 function toast(t){const e=$("#toast");e.textContent=t;e.style.display="block";clearTimeout(e._t);e._t=setTimeout(()=>e.style.display="none",3200)}
 function dateFr(d){try{return new Date(d+"T12:00:00").toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long"})}catch(e){return d}}
+function heureDe(v){const m=/_(\d{2})h(\d{2})_/.exec(v.fichier||"");return m?` à ${+m[1]} h ${m[2]}`:""}   // heure de fabrication (heure de Paris), lue dans le nom du fichier
 function lireJeton(){try{return localStorage.getItem("jt_jeton")||""}catch(e){return window._jeton||""}}
 function ecrireJeton(v){try{v?localStorage.setItem("jt_jeton",v):localStorage.removeItem("jt_jeton")}catch(e){window._jeton=v}}
 async function gh(chemin, opts={}){
@@ -438,7 +439,7 @@ function rendre(){
   if(!vis.length){L.innerHTML='<p class="vide">'+({court:"Aucune vidéo courte pour l'instant.",long:"Aucune vidéo longue pour l'instant.",manuel:"Aucune vidéo manuelle pour l'instant : tapez votre texte ci-dessus."})[FILTRE]+'</p>';return}
   vis.forEach(([v,i])=>{
     const c=document.createElement("div");c.className="carte";c.dataset.i=i;
-    c.innerHTML=`<img loading="lazy" src="videos/${v.poster}" alt=""><div class="infos"><div class="titre"></div><div class="date">${dateFr(v.date)}${v.vues!=null?` · 👁 ${Number(v.vues).toLocaleString("fr-FR")} vues`:""}</div>${badge(v)}<div class="etat"></div></div><button class="croix" title="Supprimer cette vidéo" aria-label="Supprimer">✕</button>`;
+    c.innerHTML=`<img loading="lazy" src="videos/${v.poster}" alt=""><div class="infos"><div class="titre"></div><div class="date">${dateFr(v.date)}${heureDe(v)}${v.vues!=null?` · 👁 ${Number(v.vues).toLocaleString("fr-FR")} vues`:""}</div>${badge(v)}<div class="etat"></div></div><button class="croix" title="Supprimer cette vidéo" aria-label="Supprimer">✕</button>`;
     c.querySelector(".titre").textContent=v.titre; c.onclick=()=>choisir(i);
     c.querySelector(".croix").onclick=(ev)=>{ev.stopPropagation(); supprimer(i,c)}; L.appendChild(c);
   });
@@ -446,7 +447,7 @@ function rendre(){
 async function supprimer(i,c){
   const v=DATA[i];
   if(!lireJeton()){toast("Connectez la régie (onglet Réglages) pour supprimer");return}
-  if(!confirm(`Supprimer définitivement « ${v.titre} » (${dateFr(v.date)}) ?\n\nLa vidéo sera effacée de l'application et des archives. Cette action est irréversible.`)) return;
+  if(!confirm(`Supprimer définitivement « ${v.titre} » (${dateFr(v.date)}${heureDe(v)}) ?\n\nLa vidéo sera effacée de l'application et des archives. Cette action est irréversible.`)) return;
   c.classList.add("supprimee"); c.querySelector(".etat").textContent="Suppression en cours…";
   try{
     const r=await gh("/actions/workflows/supprimer.yml/dispatches",{method:"POST",body:JSON.stringify({ref:CONF.branche,inputs:{fichier:v.fichier}})});
