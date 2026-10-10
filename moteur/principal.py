@@ -169,7 +169,7 @@ def main():
     if num:                                                                # fin d'épisode : rendez-vous pour la suite (série)
         total_ep = len(serie.etat().get("plan") or []) or serie.taille()
         sk["suite"] = f"Épisode {num + 1} bientôt : abonne-toi !" if num < total_ep else "Fin de la saison : abonne-toi !"
-    if libre and sk.get("titre_accroche") and os.environ.get("VOIX_OFF", "1") != "0" and not sk.get("_monte"):
+    if libre and sk.get("titre_accroche") and os.environ.get("VOIX_OFF", "1") != "0" and not sk.get("_monte") and (os.environ.get("RENDU") or "") != "realiste":
         titre_lu = sk["titre_accroche"].strip()                             # voix off d'ouverture : elle lit le titre « POV : … »
         if num: titre_lu = f"Épisode {num}. {titre_lu}"
         sk["repliques"].insert(0, {"p": "narrateur", "t": titre_lu, "d": "[excited] " + re.sub(r"\bPOV\b", "Pi-o-vi", titre_lu)})
@@ -179,31 +179,46 @@ def main():
         copie = dict(sk["repliques"][k]); copie.pop("chute", None); copie.pop("attente", None); copie.pop("chevauche", None)
         copie["teaser"] = k + 1                                           # indice de l'original une fois la copie insérée
         sk["repliques"].insert(0, copie); decaler(sk, 0)
-    teaser = sk["repliques"][0].get("teaser") if sk.get("repliques") else None
-    if teaser is not None:                                                # la réplique rejouée n'est enregistrée qu'une fois
-        reste = sk["repliques"][1:]
-        audios, credits_voix, mots = voix.generer(reste, jt.VOIX)
-        audios = [audios[teaser - 1]] + list(audios); mots = [mots[teaser - 1]] + list(mots) if mots else mots
-    else:
-        audios, credits_voix, mots = voix.generer(sk["repliques"], jt.VOIX)
-    moteur = " + ".join(credits_voix)
-    print(f"Voix : {moteur}", flush=True)
-    avant = sum(len(a) for a in audios)
-    audios = resserrer(audios, sk)
-    for i_, r_ in enumerate(sk["repliques"][:2]):                         # voix off du titre plus enlevée : on entre vite dans l'action
-        if r_["p"] == "narrateur" and audios[i_] is not None:
-            audios[i_] = accelerer(audios[i_], 1.15)
-            if mots and mots[i_]: mots[i_] = [(m, d / 1.15, e / 1.15) for m, d, e in mots[i_]]
-    if mots and sum(len(a) for a in audios) != avant:                         # débit accéléré : on recale les instants des mots
-        f = avant / max(1, sum(len(a) for a in audios))
-        mots = [[(m, d / f, e / f) for m, d, e in (x or [])] or None for x in mots]
+    def voix_et_minutage():
+        """Voix des répliques (ElevenLabs…), débit ajusté, minutage des mots."""
+        teaser = sk["repliques"][0].get("teaser") if sk.get("repliques") else None
+        if teaser is not None:                                                # la réplique rejouée n'est enregistrée qu'une fois
+            reste = sk["repliques"][1:]
+            audios, credits_voix, mots = voix.generer(reste, jt.VOIX)
+            audios = [audios[teaser - 1]] + list(audios); mots = [mots[teaser - 1]] + list(mots) if mots else mots
+        else:
+            audios, credits_voix, mots = voix.generer(sk["repliques"], jt.VOIX)
+        moteur = " + ".join(credits_voix)
+        print(f"Voix : {moteur}", flush=True)
+        avant = sum(len(a) for a in audios)
+        audios = resserrer(audios, sk)
+        for i_, r_ in enumerate(sk["repliques"][:2]):                         # voix off du titre plus enlevée : on entre vite dans l'action
+            if r_["p"] == "narrateur" and audios[i_] is not None:
+                audios[i_] = accelerer(audios[i_], 1.15)
+                if mots and mots[i_]: mots[i_] = [(m, d / 1.15, e / 1.15) for m, d, e in mots[i_]]
+        if mots and sum(len(a) for a in audios) != avant:                         # débit accéléré : on recale les instants des mots
+            f = avant / max(1, sum(len(a) for a in audios))
+            mots = [[(m, d / f, e / f) for m, d, e in (x or [])] or None for x in mots]
+        return audios, credits_voix, mots, moteur
+
+    REALISTE = libre and ((os.environ.get("RENDU") or "") == "realiste" or (AUTO and (os.environ.get("REALISTE_AUTO") or "0") == "1"))
+    if REALISTE: audios, credits_voix, mots, moteur = [], ["Veo 3.1 via ElevenLabs"], None, "Veo 3.1"   # le son vient de la vidéo réaliste
+    else: audios, credits_voix, mots, moteur = voix_et_minutage()
     jour = datetime.date.today().isoformat()
     heure = datetime.datetime.now(ZoneInfo("Europe/Paris")).strftime("%Hh%M")      # nom unique même si l'historique a été remis à zéro
     pris = {h.get("fichier") for h in historique}; n = 1; base = f"sortie/{jour}_{heure}_emission"
     while os.path.basename(base) + ".mp4" in pris: n += 1; base = f"sortie/{jour}_{heure}_emission{n}"   # plusieurs émissions le même jour
     os.makedirs("sortie", exist_ok=True)
     gag = None; duree = None; decors = {}; video_ok, rapport_video = True, ""
-    if libre:                                                              # sketch libre / gag éclair : moteur cartoon animé
+    if REALISTE:                                                           # mode réaliste (option) : vraie vidéo IA, voix comprises
+        try:
+            import realiste
+            duree = realiste.rendre(sk, base + ".mp4", mini=fmt == "mini")
+        except Exception as e:
+            import traceback; traceback.print_exc()
+            print(f"Mode réaliste en échec ({str(e)[:200]}) : on bascule sur le dessin animé.", flush=True)
+            REALISTE = False; audios, credits_voix, mots, moteur = voix_et_minutage()
+    if libre and not REALISTE:                                             # sketch libre / gag éclair : moteur cartoon animé
         try:
             import cartoon, decors as decors_mod
             if modal_ok and os.environ.get("DECORS", "1") != "0":

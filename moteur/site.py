@@ -81,7 +81,7 @@ def application(nom):
 
 # Service worker : l'appli s'ouvre même hors connexion (dernière version de la page), sans jamais mettre en cache
 # les vidéos (trop lourdes) ni les appels à GitHub.
-SW = r"""const CACHE = "regie-v16";
+SW = r"""const CACHE = "regie-v17";
 const COQUILLE = ["./", "manifest.webmanifest", "logo-192.png", "logo-512.png", "poppins-500.ttf", "poppins-700.ttf"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(COQUILLE))); self.skipWaiting(); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(k => Promise.all(k.filter(x => x !== CACHE).map(x => caches.delete(x))))); self.clients.claim(); });
@@ -235,6 +235,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
       <option value="script">📝 Mon script : les répliques sont jouées mot pour mot</option></select></label>
     <label><span id="mAide">Idée / thème de la vidéo</span><textarea id="mTexte" rows="6" maxlength="1800" placeholder="Ex. : Jojo essaie de résilier son abonnement de salle de sport, mais le conseiller ne le laisse jamais partir."></textarea></label>
     <label>Format<select id="mFormat"><option value="mini">⚡ Gag éclair (15-25 s)</option><option value="libre">🎭 Sketch long (+1 min)</option></select></label>
+    <label>Rendu<select id="mRendu"><option value="">🎨 Dessin animé (Jojo, Kévin, Lila)</option><option value="realiste">🎬 Réaliste, filmé par l'IA (coûte des crédits ElevenLabs)</option></select></label>
     <label id="mStyleL">Ton<select id="mStyle"><option value="">Comme d'habitude (humour noir)</option><option value="Ton encore plus absurde et délirant.">Plus absurde</option><option value="Ton plus méchant et plus cash.">Plus méchant</option><option value="Ton plus tendre, humour bienveillant.">Plus tendre</option></select></label>
     <button class="action" id="mCreer">🎬 Créer la vidéo</button>
     <div id="mSuivi" class="note"></div>
@@ -326,6 +327,15 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <p class="note" id="statsEtat"></p>
     <button class="action" id="lancerStats">📊 Lire les statistiques maintenant</button>
     <div id="suiviStats" class="note"></div>
+  </section>
+  <section class="panneau"><h2>🎬 Mode réaliste (option)</h2>
+    <p class="note">Au lieu du dessin animé, la vidéo est filmée par une IA vidéo (Veo 3.1 via ElevenLabs) : de vrais acteurs générés, avec leurs voix, découpés en plans de 4 à 8 s. Chaque seconde consomme des crédits ElevenLabs : regardez le coût dans votre application ElevenLabs après un premier essai.</p>
+    <div class="auto" style="margin-bottom:12px"><div class="txt"><b>Vidéos automatiques en réaliste</b><small>Coupé : seules les vidéos lancées ci-dessous (ou depuis l'onglet Manuel) sont réalistes.</small></div><button class="inter" data-var="REALISTE_AUTO" data-def="0" data-bascule="1"></button></div>
+    <label>Qualité<select data-var="REALISTE_MODELE" data-def="veo-3.1-fast-generate-001"><option value="veo-3.1-fast-generate-001">Rapide (Veo 3.1 Fast, moins cher)</option><option value="veo-3.1-generate-001">Maximale (Veo 3.1, plus cher)</option></select></label>
+    <label>Définition<select data-var="REALISTE_RESOLUTION" data-def="720p"><option value="720p">720p (recommandé pour TikTok, moins cher)</option><option value="1080p">1080p</option></select></label>
+    <button class="action perso" id="realMini">🎬 Fabriquer un gag éclair réaliste maintenant</button>
+    <button class="action perso" id="realLibre">🎬 Fabriquer un sketch long réaliste maintenant</button>
+    <div id="suiviReal" class="note"></div>
   </section>
   <section class="panneau"><h2>🎥 Vidéo animée</h2>
     <div class="auto" style="margin-bottom:12px"><div class="txt"><b>Voix ElevenLabs</b><small>Voix réalistes avec rires et coups de colère (abonnement ElevenLabs). Coupé : voix gratuites.</small></div><button class="inter" data-var="ELEVENLABS" data-def="1" data-bascule="1"></button></div>
@@ -732,7 +742,8 @@ $("#mCreer").onclick=()=>{
   if(script&&!/^\s*[^:\n]{1,25}:/m.test(t)){toast("Format du script : une réplique par ligne, « Jojo : … »");return}
   const theme=script?"SCRIPT::"+t:(t+($("#mStyle").value?"\n"+$("#mStyle").value:""));
   const f=$("#mFormat").value;
-  lancerFlux("emission.yml",$("#mCreer"),(f==="mini"?"⚡ Gag éclair":"🎭 Sketch long")+" manuel en fabrication (15 à 40 min). Il apparaîtra dans cet onglet.",{format:f,theme},$("#mSuivi"));
+  const rendu=$("#mRendu").value; const inp={format:f,theme}; if(rendu) inp.rendu=rendu;
+  lancerFlux("emission.yml",$("#mCreer"),(f==="mini"?"⚡ Gag éclair":"🎭 Sketch long")+(rendu?" réaliste":"")+" manuel en fabrication (15 à 40 min). Il apparaîtra dans cet onglet.",inp,$("#mSuivi"));
 };
 const b64u=b=>btoa(String.fromCharCode(...new Uint8Array(b))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
 const deB64u=s=>Uint8Array.from(atob(s.replace(/-/g,"+").replace(/_/g,"/")+"===".slice((s.length+3)%4)),c=>c.charCodeAt(0));
@@ -760,6 +771,10 @@ $("#activerNotifs").onclick=async()=>{
   }catch(e){z.textContent="Impossible : "+e.message}
 };
 $("#testNotif").onclick=()=>lancerFlux("notifier.yml",$("#testNotif"),"🔔 Envoi d'une notification de test (environ 30 s)…",{titre:"Petits.Dramas",texte:"Les notifications marchent 🎉"},$("#suiviNotif"));
+$("#realMini").onclick=()=>{if(!lireJeton()){toast("Connectez la régie");return} if(confirm("Fabriquer un gag éclair réaliste ? Il consomme des crédits ElevenLabs (vidéo IA)."))
+  lancerFlux("emission.yml",$("#realMini"),"🎬 Gag réaliste en fabrication (20 à 40 min).",{format:"mini",rendu:"realiste"},$("#suiviReal"))};
+$("#realLibre").onclick=()=>{if(!lireJeton()){toast("Connectez la régie");return} if(confirm("Fabriquer un sketch long réaliste ? Une dizaine de plans de vidéo IA : c'est nettement plus de crédits ElevenLabs."))
+  lancerFlux("emission.yml",$("#realLibre"),"🎬 Sketch long réaliste en fabrication (30 à 60 min).",{format:"libre",rendu:"realiste"},$("#suiviReal"))};
 $("#lancerStats").onclick=()=>{if(!lireJeton()){toast("Connectez la régie pour lancer la lecture");return}
   lancerFlux("stats.yml",$("#lancerStats"),"📊 Lecture des statistiques TikTok (1 à 3 min)…",null,$("#suiviStats"))};
 {const S=__STATS__, e=$("#statsEtat");

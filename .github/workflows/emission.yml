@@ -21,6 +21,10 @@ on:
         description: "1 = lancement du réveil de secours (compte comme une vidéo automatique)"
         required: false
         default: ""
+      rendu:
+        description: "realiste = vidéo réaliste filmée par l'IA (Veo 3.1 via ElevenLabs, coûte des crédits) ; vide = dessin animé"
+        required: false
+        default: ""
       serie:
         description: "1 = série d'un seul jet (régie) : la saison est planifiée puis tous les épisodes s'enchaînent"
         required: false
@@ -91,6 +95,10 @@ jobs:
       FORMAT: ${{ inputs.format || vars.FORMAT }}
       THEME: ${{ inputs.theme }}
       SERIE_LOT: ${{ inputs.serie }}
+      RENDU: ${{ inputs.rendu }}
+      REALISTE_AUTO: ${{ vars.REALISTE_AUTO }}
+      REALISTE_MODELE: ${{ vars.REALISTE_MODELE }}
+      REALISTE_RESOLUTION: ${{ vars.REALISTE_RESOLUTION }}
       PRONONCIATION: ${{ vars.PRONONCIATION }}
       VOIX_PERSOS: ${{ vars.VOIX_PERSOS }}
       REFAIRE: ${{ inputs.refaire }}
