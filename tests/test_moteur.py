@@ -164,6 +164,11 @@ class FauxClaude:
         self.appels.append(noms)
         if self.web_en_panne and "web_search" in noms: raise RuntimeError("outil web non autorisé")
         if "choisir_sujet" in noms: self.prompts.append(kw["messages"][0]["content"]); out = {"notes": [{"index": 0, "note": 4}, {"index": 1, "note": 9}], "choix": self.choix, "angle": "angle test", "faits_verifies": ["fait"]}
+        elif "atelier_vannes" in noms:
+            out = {"vannes": [f"vanne {i}" for i in range(15)], "chutes": [f"Rassurez-vous : chute {i}." for i in range(15)]}
+        elif "jury" in noms:
+            out = {"notes_chutes": [3] * 7 + [9] + [3] * 7, "meilleures_vannes": [2, 5], "meilleure_chute": 7,
+                   "chute_affutee": "Rassurez-vous : le budget est sauvé. Il suffit de ne plus le voter."}
         elif "noter_sketch" in noms:
             n = self.notes.pop(0)
             if self.sans_total:                                              # 1re fois : total oublié et sous-notes incomplètes
@@ -233,6 +238,14 @@ class TestMoteurHumour(unittest.TestCase):
             cands = [[article("Budget 2027 : les économies rejetées", "a", "L1"), article("Budget : les députés et les économies", "b", "L2")]] * 2
             self.assertEqual(ecrire.ecrire_sketch(cands)["fiche"]["note"], 86)    # variable vide : 3 réécritures par défaut, pas de plantage
         finally: os.environ.pop("MAX_REECRITURES")
+
+    def test_atelier_et_jury_nourrissent_l_ecriture(self):
+        faux = FauxClaude(); sk = self._lancer(faux)
+        ecriture = next(m for m in faux.reecritures)                          # premier message envoyé à l'auteur
+        self.assertIn("CHUTE IMPOSÉE", ecriture)
+        self.assertIn("Il suffit de ne plus le voter", ecriture)              # chute affûtée par le jury
+        self.assertIn("vanne 2", ecriture); self.assertNotIn("vanne 3", ecriture)   # seules les vannes retenues
+        self.assertIn("RETOUCHE CIBLÉE", faux.reecritures[1])                # réécriture = punch-up, pas tout jeter
 
     def test_choix_hors_gros_titres_refuse(self):
         faux = FauxClaude(); faux.choix = 4

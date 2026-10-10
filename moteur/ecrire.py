@@ -151,7 +151,34 @@ Rends la note avec l'outil noter_sketch. Le champ "critique" est OBLIGATOIRE et 
 
 REECRITURE = """Ton sketch a obtenu {note}/100 (seuil : 80). Critique du relecteur :
 {critique}
-Réécris-le en profondeur (pas de retouches cosmétiques) pour dépasser 80 : punchlines plus surprenantes, escalade plus forte, chute en fausse vérité ironique sur le sujet principal, aucune métaphore filée. Mêmes faits, mêmes règles. Rends le sketch complet avec l'outil rendre_sketch."""
+RETOUCHE CIBLÉE, comme un punch-up de salle d'auteurs : GARDE telles quelles les répliques qui fonctionnent et la chute si elle n'est pas critiquée. Remplace chaque réplique critiquée par une meilleure vanne (pioche dans les munitions du jury si elles conviennent), supprime les répliques de remplissage. Chute en fausse vérité ironique sur le sujet principal, aucune métaphore filée. Mêmes faits, mêmes règles. Rends le sketch complet avec l'outil rendre_sketch."""
+
+TECHNIQUE_PUNCHLINE = """TECHNIQUE D'UNE PUNCHLINE QUI FAIT HURLER DE RIRE :
+- le mot qui tue est le DERNIER mot de la phrase (rien après lui) ;
+- la phrase la plus courte possible : 8 à 20 mots, deux temps « affirmation rassurante. / démenti sec. » ;
+- le démenti est un fait réel ou sa conséquence directe, dit de la façon la plus brutale et la plus inattendue ;
+- détourne la langue de bois officielle (« Rassurez-vous », « Soyons clairs », « Bonne nouvelle », « Le gouvernement tient à préciser ») ;
+- surprise totale : si le public peut deviner la fin, elle est ratée ; préfère le retournement, l'aveu involontaire, le chiffre qui tue ;
+- jamais d'explication, jamais de jeu de mots facile, jamais de « en fait » ni de « c'est-à-dire »."""
+
+ATELIER = """ATELIER DE VANNES — sujet : « {sujet} »
+Articles :
+{articles}
+{contexte}
+{technique}
+
+1. Écris 15 vannes d'une ligne sur CE sujet (faits réels poussés à l'absurde, mauvaise foi d'un porte-parole, comparaison express avec la vie quotidienne, chiffre retourné). Aucune métaphore filée, aucune vanne qui pourrait s'appliquer à un autre sujet.
+2. Écris 15 CHUTES en fausse vérité ironique sur ce sujet, toutes différentes dans leur mécanique (aveu, chiffre, retournement, langue de bois, conséquence absurde mais logique).
+Rends le tout avec l'outil atelier_vannes."""
+
+JURY = """Tu es le jury d'une émission satirique française : un public TikTok de 18-35 ans, impitoyable, qui ne rit que si c'est vraiment drôle, surprenant et méchant envers les puissants.
+Sujet : « {sujet} »
+VANNES :
+{vannes}
+CHUTES (fausses vérités ironiques) :
+{chutes}
+Donne à chaque vanne et à chaque chute une note de rire sur 10 (10 = on se plie en deux, 5 = sourire poli, 3 = rien). Sois dur : une chute prévisible, longue, expliquée ou hors sujet ne dépasse pas 4.
+Puis désigne les 6 meilleures vannes et LA meilleure chute ; si tu vois comment rendre la meilleure chute encore plus percutante (plus courte, mot qui tue à la fin), donne-en la version affûtée. Rends le tout avec l'outil jury."""
 
 def _schema(props, requis):
     return {"type": "object", "properties": props, "required": requis}
@@ -178,6 +205,15 @@ OUTIL_CHOIX = {"name": "choisir_sujet", "description": "Notes des candidats, suj
                                         "verite": {"type": "string", "description": "La vérité crue du sujet en une phrase."},
                                         "chute": {"type": "string", "description": "La chute : fausse vérité ironique qui révèle cette vérité."},
                                         "faits_verifies": {"type": "array", "items": {"type": "string"}}}, ["choix", "angle", "verite"])}
+OUTIL_ATELIER = {"name": "atelier_vannes", "description": "15 vannes d'une ligne et 15 chutes en fausse vérité ironique.",
+                 "input_schema": _schema({"vannes": {"type": "array", "items": {"type": "string"}},
+                                          "chutes": {"type": "array", "items": {"type": "string"}}}, ["vannes", "chutes"])}
+OUTIL_JURY = {"name": "jury", "description": "Notes de rire et sélection.",
+              "input_schema": _schema({"notes_vannes": {"type": "array", "items": {"type": "number"}},
+                                       "notes_chutes": {"type": "array", "items": {"type": "number"}},
+                                       "meilleures_vannes": {"type": "array", "items": {"type": "integer"}},
+                                       "meilleure_chute": {"type": "integer"}, "chute_affutee": {"type": "string"}},
+                                      ["notes_chutes", "meilleures_vannes", "meilleure_chute"])}
 OUTIL_NOTE = {"name": "noter_sketch", "description": "Note qualité sur 100 et critique.",
               "input_schema": _schema({"chute_vraie": {"type": "boolean", "description": "La dernière réplique est-elle une fausse vérité ironique sur le sujet principal ?"},
                                        "metaphore_filee": {"type": "boolean", "description": "Le sketch transpose-t-il le sujet dans un autre univers ou file-t-il une métaphore ?"},
@@ -360,6 +396,32 @@ def _bloc_candidat(k, titres):
 
 TOP = 3                                                                  # le sujet est pris parmi les 3 plus gros titres du jour
 
+def atelier(client, systeme, titres, contexte=""):
+    """Salle d'auteurs : 15 vannes + 15 chutes, puis un jury séparé garde les 6 meilleures vannes et la meilleure chute.
+    Renvoie (munitions, chute, note_chute) ; ("", "", 0) si l'atelier échoue (le sketch s'écrit alors sans)."""
+    try:
+        at = _appel(client, systeme, [{"role": "user", "content": ATELIER.format(sujet=titres[0]["titre"], articles=_bloc_candidat(0, titres),
+                                                                          contexte=contexte, technique=TECHNIQUE_PUNCHLINE)}],
+                    OUTIL_ATELIER, max_tokens=6000)
+        vannes = [str(v).strip() for v in at.get("vannes", []) if str(v).strip()][:20]
+        chutes = [str(c).strip() for c in at.get("chutes", []) if str(c).strip()][:20]
+        if not chutes: raise ValueError("aucune chute proposée")
+        j = _appel(client, None, [{"role": "user", "content": JURY.format(sujet=titres[0]["titre"],
+                   vannes="\n".join(f"{i}. {v}" for i, v in enumerate(vannes)), chutes="\n".join(f"{i}. {c}" for i, c in enumerate(chutes)))}],
+                   OUTIL_JURY, max_tokens=4000)
+        nc = [float(x) if isinstance(x, (int, float)) else 0.0 for x in j.get("notes_chutes", [])]
+        i = int(j.get("meilleure_chute", max(range(len(nc)), key=nc.__getitem__) if nc else 0))
+        i = i if 0 <= i < len(chutes) else 0
+        chute = str(j.get("chute_affutee") or "").strip() or chutes[i]
+        note_chute = nc[i] if i < len(nc) else 0.0
+        meilleures = [vannes[k] for k in j.get("meilleures_vannes", []) if isinstance(k, int) and 0 <= k < len(vannes)][:6]
+        print(f"  atelier : {len(vannes)} vannes, {len(chutes)} chutes ; chute retenue par le jury ({note_chute:.0f}/10) : {chute[:160]}", flush=True)
+        return "\n".join(f"- {v}" for v in meilleures), chute, note_chute
+    except Exception as e:
+        if _bloquant(e): raise
+        print(f"  atelier de vannes impossible ({str(e)[:120]}) : écriture directe.", flush=True)
+        return "", "", 0.0
+
 def _bloquant(e):
     """Erreurs qui ne se règlent pas en réessayant : crédit épuisé, clé invalide, accès refusé."""
     t = str(e).lower()
@@ -401,10 +463,16 @@ def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=()):
     meilleur = None
     for rang, k in enumerate(ordre[:2]):                                  # au plus deux sujets essayés
         titres = pertinents(candidats[k]); liens = {t["lien"] for t in titres}
-        msg = (f"SUJET CHOISI : « {titres[0]['titre']} »\nArticles :\n" + _bloc_candidat(0, titres) +
-               (f"\nAngle retenu : {angle}" if rang == 0 and angle else "") +
-               (f"\nVÉRITÉ À RÉVÉLER PAR LA CHUTE (fausse vérité ironique, dernière réplique) : {verite}" if rang == 0 and verite else "\nCommence par trouver la vérité crue de ce sujet, puis la fausse vérité ironique qui la révèle : ce sera la chute.") +
-               (f"\nFaits vérifiés : " + " ; ".join(verifs) if rang == 0 and verifs else "") +
+        contexte = ((f"Angle retenu : {angle}\n" if rang == 0 and angle else "") +
+                    (f"Vérité du sujet : {verite}\n" if rang == 0 and verite else "") +
+                    (f"Faits vérifiés : " + " ; ".join(verifs) if rang == 0 and verifs else ""))
+        munitions, chute_jury, _ = atelier(client, systeme, titres, contexte)
+        msg = (f"SUJET CHOISI : « {titres[0]['titre']} »\nArticles :\n" + _bloc_candidat(0, titres) + "\n" + contexte +
+               (f"\nMUNITIONS — les vannes qui ont le plus fait rire le jury (place-les, presque telles quelles, aux bons endroits) :\n{munitions}" if munitions else "") +
+               (f"\nCHUTE IMPOSÉE — dernière réplique, mot pour mot (tu peux seulement l'adapter au personnage qui la dit) : « {chute_jury} »" if chute_jury
+                else "\nCommence par trouver la vérité crue de ce sujet, puis la fausse vérité ironique qui la révèle : ce sera la chute.") +
+               "\n" + TECHNIQUE_PUNCHLINE +
+               "\nDENSITÉ : chaque réplique est une vanne ou une relance de moins de 8 mots qui prépare une vanne ; aucune réplique de remplissage." +
                "\n\nÉcris le sketch sur CE sujet uniquement (étapes 4 à 9).")
         conv = [{"role": "user", "content": msg}]; sk = None; derniere = None; brut = {}
         for tour in range(1 + (essais if rang == 0 else min(1, essais))):   # écriture puis jusqu'à 3 réécritures (1 pour le sujet de secours)
