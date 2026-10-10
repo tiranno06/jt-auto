@@ -1,95 +1,88 @@
 {
- "titre": "PESTICIDES À VIE",
- "sujet": "PESTICIDES À VIE",
- "ecran": "PESTICIDE CDI",
- "invite_nom": "Bernard Reconduit",
- "invite_role": "Porte-parole (fictif) Simplif. UE",
+ "titre": "SANCTIONS CPI",
+ "sujet": "SANCTIONS CPI",
+ "ecran": "MONOPOLY CPI",
+ "invite_nom": "Brent Coudé",
+ "invite_role": "Porte-parole (fictif) justice US",
  "invite_look": "moustache",
- "lieu_direct": "Champ de betteraves",
- "titre_accroche": "Pesticide : 25 ans. Mon yaourt : jeudi",
+ "lieu_direct": "Devant la CPI, La Haye",
+ "titre_accroche": "Washington garde la banque de La Haye",
  "question": "",
  "running_gag": "",
+ "verite": "Washington veut bien d'une justice internationale, à condition qu'elle juge tout le monde sauf lui et ses amis. Il sanctionne la Cour et laisse six mois aux Européens pour céder. Ce sont les victimes de crimes de guerre qui paieront.",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "Bruxelles veut autoriser des pesticides pendant 25 ans. Mon yaourt, lui, périme jeudi.",
-   "d": "Bruxelles veut autoriser des pesticides pendant vingt-cinq ans. Mon yaourt, lui, périme jeudi.",
+   "t": "Washington sanctionne le tribunal des crimes de guerre. Une première : c'est le tribunal qui va en prison.",
    "chute": true
   },
   {
    "p": "presentateur",
-   "t": "Martine, vous êtes dans les betteraves. Elles sont réévaluées, elles ?"
+   "t": "Martine, vous êtes à La Haye ?"
   },
   {
    "p": "envoyee",
-   "t": "Tous les ans. Le pesticide, plus jamais. Soit il est devenu inoffensif, soit il a un très bon syndicat.",
+   "t": "Oui, devant la Cour. Dans six mois, plus aucune transaction. Juges, personnel, fonds pour les victimes : retour à la case départ. Sans toucher la prime.",
    "chute": true
   },
   {
    "p": "presentateur",
-   "t": "Bernard Reconduit, porte-parole de la Simplification. Un syndicat ?"
+   "t": "Monsieur Coudé, dans cette partie, vous êtes le banquier ou un joueur ?"
   },
   {
    "p": "invite",
-   "t": "Pas du tout. Il est titulaire. On ne vire pas un titulaire.",
+   "t": "Le banquier, c'est le joueur qui gagne.",
    "chute": true
   },
   {
    "p": "presentateur",
-   "t": "Et s'il est toxique ?"
+   "t": "Et la Cour, qu'a-t-elle fait de mal ?"
   },
   {
    "p": "invite",
-   "t": "Trop cher à vérifier. 50 experts, 15 millions. Supprimer l'examen, c'est gratuit.",
-   "d": "Trop cher à vérifier. Cinquante experts, quinze millions. Supprimer l'examen, c'est gratuit.",
+   "t": "Elle a regardé notre côté du plateau. Un tribunal qui nous regarde, c'est un tribunal voyou.",
    "chute": true
   },
   {
    "p": "envoyee",
-   "t": "Ici, le glyphosate fête sa titularisation. Il a apporté un gâteau. Personne n'ose le goûter.",
+   "t": "Les Européens ripostent : ils « regrettent vivement ». Puis ils ont sorti la règle du jeu. Personne ne l'avait jamais lue.",
+   "d": "Les Européens ripostent : ils regrettent vivement. Puis ils ont sorti la règle du jeu. Personne ne l'avait jamais lue.",
+   "chute": true
+  },
+  {
+   "p": "invite",
+   "t": "Aucun souci, on a la nouvelle règle. Six mois pour accorder l'immunité aux pays non membres. Sinon, on ferme la banque.",
    "chute": true
   },
   {
    "p": "presentateur",
-   "t": "Ma voiture a 8 ans. Elle repasse le contrôle tous les deux ans.",
-   "d": "Ma voiture a huit ans. Elle repasse le contrôle tous les deux ans."
+   "t": "Et la carte « Libéré de prison » ?",
+   "d": "Et la carte Libéré de prison ?"
   },
   {
    "p": "invite",
-   "t": "Votre voiture n'a pas de lobbyiste à Bruxelles. C'est un défaut de conception.",
-   "chute": true
-  },
-  {
-   "p": "invite",
-   "t": "Et on généralise : permis à vie… pour les tracteurs. Vous, visite médicale à 70 ans.",
-   "d": "Et on généralise : permis à vie… pour les tracteurs. Vous, visite médicale à soixante-dix ans.",
-   "chute": true
-  },
-  {
-   "p": "invite",
-   "t": "Rassurez-vous : l'illimité, c'est pour le faible risque. Les autres, juste 25 ans.",
-   "d": "Rassurez-vous : l'illimité, c'est pour le faible risque. Les autres, juste vingt-cinq ans.",
+   "t": "Réservée à nous et à nos amis. Les autres piochent « Allez en prison ». Ne passez pas par Washington.",
+   "d": "Réservée à nous et à nos amis. Les autres piochent Allez en prison. Ne passez pas par Washington.",
    "chute": true
   },
   {
    "p": "presentateur",
-   "t": "Donc pour durer 25 ans, mon yaourt doit devenir toxique ?",
-   "d": "Donc pour durer vingt-cinq ans, mon yaourt doit devenir toxique ?",
-   "attente": 0.7
+   "t": "Et si la Cour cède, elle juge qui ?"
   },
   {
-   "p": "envoyee",
-   "t": "Trop tard. Votre yaourt vient d'embaucher un lobbyiste. Il périme en 2051.",
-   "d": "Trop tard. Votre yaourt vient d'embaucher un lobbyiste. Il périme en deux mille cinquante et un.",
+   "p": "invite",
+   "t": "Ceux qui n'ont pas d'armée.",
+   "chute": true,
+   "attente": 0.8
+  },
+  {
+   "p": "presentateur",
+   "t": "En clair : Washington garde la banque et la carte « Libéré de prison » pour ses amis. L'Europe a six mois pour plier. Les victimes de guerre ne jouent plus.",
+   "d": "En clair : Washington garde la banque et la carte Libéré de prison pour ses amis. L'Europe a six mois pour plier. Et les victimes de crimes de guerre, elles, n'ont même plus le droit de jouer.",
    "chute": true
   }
  ],
- "bandeau": [
-  "LE GLYPHOSATE TITULARISÉ, PERSONNE NE TOUCHE AU GÂTEAU",
-  "UNE BETTERAVE RECALÉE À SA RÉÉVALUATION ANNUELLE",
-  "BRUXELLES SUPPRIME L'EXAMEN POUR GAGNER DU TEMPS",
-  "UN TRACTEUR OBTIENT SON PERMIS À VIE"
- ],
+ "bandeau": [],
  "gag": null,
  "legende": "L'actu du jour, en dessin animé. Satire, personnages fictifs.",
  "hashtags": [
@@ -99,187 +92,47 @@
   "politique"
  ],
  "sources": [
-  "https://www.lemonde.fr/planete/article/2026/10/10/pesticides-a-vie-non-merci-partout-en-france-des-mobilisations-contre-un-projet-europeen-de-deregulation-devastateur_6790949_3244.html",
-  "https://www.liberation.fr/environnement/lun-des-pires-reculs-jamais-connus-comment-des-pesticides-pourraient-etre-autorises-a-vie-dans-lue-20261009_GU4IFAUN5JEOHA6J3MMQZZL72U/",
-  "https://www.franceinfo.fr/economie/budget/livret-a-retraites-geants-du-numerique-comment-les-deputes-ont-modifie-en-commission-le-volet-recettes-du-projet-de-budget-pour-2027_8229916.html#xtor=RSS-3-[lestitres]"
+  "https://www.lefigaro.fr/international/le-moment-est-grave-pourquoi-donald-trump-sanctionne-la-cour-penale-internationale-20261009",
+  "https://www.lemonde.fr/international/article/2026/10/10/sanctions-des-etats-unis-contre-la-cpi-washington-lance-un-ultimatum-aux-etats-membres_6790870_3210.html",
+  "https://www.20minutes.fr/monde/etats-unis/4253028-20261010-etats-unis-commentatrice-maga-katie-zacharia-designee-porte-parole-trump?at_medium=display&at_campaign=149"
  ],
- "decoupage": [
-  {
-   "scene": "Plateau, plan serré sur Jean-Michel, impassible, un pot de yaourt sur le bureau. Accroche sèche, puis il se tourne vers l'écran. Woosh vers le direct.",
-   "repliques": [
-    0,
-    1
-   ],
-   "lieu": "plateau",
-   "son": "woosh",
-   "duree": 8.0
-  },
-  {
-   "scene": "Direct : Martine en bottes dans un champ de betteraves, au milieu d'un rassemblement avec des pancartes « Pesticides à vie ? Non merci ! ». Un inspecteur à lunettes contrôle une betterave à la loupe. Derrière lui, un bidon de pesticide passe tranquillement.",
-   "repliques": [
-    2
-   ],
-   "lieu": "direct",
-   "son": "rimshot",
-   "duree": 8.0
-  },
-  {
-   "scene": "Duplex : Jean-Michel présente l'invité. Le bandeau « Bernard Reconduit, porte-parole (fictif) Simplification UE » s'affiche. Bernard, moustache impeccable, glisse une liasse « Réévaluation » dans un broyeur sans la regarder.",
-   "repliques": [
-    3,
-    4,
-    5,
-    6
-   ],
-   "lieu": "duplex",
-   "son": "dun_dun",
-   "duree": 15.0
-  },
-  {
-   "scene": "Reconstitution : bureau beige, un bidon de glyphosate en cravate découpe un gâteau « TITULAIRE ». Les collègues, en masque, reculent avec leurs assiettes vides.",
-   "repliques": [
-    7
-   ],
-   "lieu": "reconstitution",
-   "son": "reconstitution",
-   "duree": 7.0
-  },
-  {
-   "scene": "Duplex : Jean-Michel brandit une vignette de contrôle technique. Bernard hausse les épaules, puis montre une carte de permis rose épinglée sur un tracteur souriant, et un vieux monsieur dans une file de visite médicale.",
-   "repliques": [
-    8,
-    9,
-    10
-   ],
-   "lieu": "duplex",
-   "son": "xylo_descente",
-   "duree": 15.0
-  },
-  {
-   "scene": "Duplex : Bernard rassure, tout sourire, et tapote un tampon « 25 ANS ». Silence. Jean-Michel regarde son yaourt sans aucune expression et pose sa question.",
-   "repliques": [
-    11,
-    12
-   ],
-   "lieu": "duplex",
-   "son": "trombone_triste",
-   "duree": 10.0
-  },
-  {
-   "scene": "Direct : Martine tend le micro vers un pot de yaourt en costume-cravate, attaché-case à la main, qui serre la main d'un bidon. Coupe sèche, la vidéo boucle sur l'accroche.",
-   "repliques": [
-    13
-   ],
-   "lieu": "direct",
-   "son": "rimshot",
-   "duree": 6.0
-  }
- ],
+ "decoupage": [],
  "fiche": {
-  "concept": "« Le pesticide titulaire » : au nom de la simplification, Bruxelles titularise les pesticides pendant que les citoyens, leurs voitures et leurs yaourts restent des précaires du renouvellement. À la fin, le yaourt de Jean-Michel comprend la règle : pour durer, il faut un lobbyiste.",
-  "format": "Faux JT : accroche sur le plateau, direct depuis un champ de betteraves pendant un rassemblement, porte-parole européen fictif en duplex.",
-  "angle": "Deux poids, deux mesures. Tout le reste est réévalué : les betteraves, la voiture de huit ans, les conducteurs de soixante-dix ans. Le pesticide, lui, est titulaire. Réévaluer coûte quinze millions, supprimer l'examen est gratuit. L'escalade va du privilège du pesticide au permis à vie réservé aux tracteurs. Jean-Michel pose la question logique : pour durer vingt-cinq ans, faut-il être toxique ? Chute : son yaourt embauche un lobbyiste.",
-  "resume_factuel": "Le 16 décembre 2025, la Commission européenne a présenté le texte « Omnibus X ». Il prévoit des approbations de pesticides allant jusqu'à 25 ans, contre 10 à 15 ans aujourd'hui, et des approbations illimitées pour les biocides. Il prolonge aussi les périodes de grâce des substances interdites. La proposition initiale supprimait le réexamen systématique de la plupart des pesticides, au nom de la simplification administrative et de la compétitivité. Le 30 septembre 2026, le Conseil de l'UE a validé un compromis qui réserve les autorisations illimitées aux substances à faible risque. Selon l'EFSA, 50 experts de plus, pour 15 millions d'euros, lui permettraient de rattraper son retard en trois ans. Le 16 septembre, plus de 570 scientifiques et médecins ont demandé la suspension des négociations. Une coalition de plus de 100 organisations appelle à des rassemblements « Pesticides à vie ? Non merci ! » partout en France les 10 et 11 octobre 2026.",
+  "concept": "« Le Monopoly de La Haye ». La justice internationale devient un Monopoly truqué. Washington se déclare banquier et joueur à la fois. Il renvoie la Cour à la case départ, réécrit la règle du jeu et garde pour lui et ses amis la carte « Libéré de prison ». Les autres piochent « Allez en prison ». La métaphore tient du début à la fin, chute comprise.",
+  "format": "Faux JT. Accroche en plateau, puis direct de l'envoyée devant un plateau de Monopoly géant posé devant la CPI à La Haye. Ensuite, duplex avec un porte-parole américain fictif. Le présentateur lance la chute.",
+  "angle": "Le cœur du sujet, c'est le chantage : six mois pour accorder l'immunité aux ressortissants des pays non membres, sinon plus de banque. On ne s'appuie plus sur le Nobel, trop périphérique : tout passe par la mécanique du jeu truqué. Le banquier est aussi joueur. Une Cour qui regarde le mauvais côté du plateau devient « voyou ». Les Européens brandissent une règle que personne n'a lue. La question naïve du présentateur, « elle juge qui ? », fait tout tomber.",
+  "resume_factuel": "Vendredi 9 octobre 2026, l'administration Trump annonce des sanctions contre la Cour pénale internationale en tant qu'institution. Toute transaction financière avec la Cour sera interdite. Les sanctions entrent en vigueur dans 180 jours, sauf accord. Selon Le Monde, il s'agit d'un ultimatum aux États membres, sommés notamment d'accorder l'immunité devant la Cour aux ressortissants des États non membres. Marco Rubio qualifie la CPI de « tribunal voyou » ; il avait promis de la démanteler « brique par brique ». La CPI, soutenue par 125 États, dénonce « une attaque contre l'État de droit ». La France, le Royaume-Uni, l'Allemagne, l'Italie, le Canada, le Danemark, le Japon et les Pays-Bas réaffirment un soutien « indéfectible » et disent « regretter vivement » ces sanctions. Contexte : selon les sources fournies, l'annonce tombe le jour où le Nobel de la paix 2026 est attribué à Navi Pillay, ancienne juge de la CPI. Ce point n'est pas utilisé dans le sketch.",
   "faits_reels": [
-   "Le texte « Omnibus X » a été présenté par la Commission européenne le 16 décembre 2025 (Basta!).",
-   "Les approbations de pesticides pourraient aller jusqu'à 25 ans, contre 10 à 15 ans aujourd'hui. Les biocides auraient des approbations illimitées (Basta!).",
-   "La proposition initiale supprimait le réexamen systématique de la plupart des pesticides, au nom de la simplification administrative et de la compétitivité agricole.",
-   "Le 30 septembre 2026, le Conseil de l'UE a validé un compromis qui réserve les autorisations illimitées aux substances à faible risque (Basta!).",
-   "D'après un courrier cité par Basta!, l'EFSA estime que 50 experts de plus, pour 15 millions d'euros, lui permettraient de rattraper son retard en trois ans.",
-   "Le 16 septembre, plus de 570 scientifiques et médecins ont demandé la suspension des négociations. Une pétition européenne a dépassé 170 000 signatures.",
-   "Plus de 100 organisations appellent à des rassemblements « Pesticides à vie ? Non merci ! » les 10 et 11 octobre 2026 en France (Le Monde).",
-   "Ces faits viennent des articles fournis et des éléments vérifiés transmis par le robot. Aucune nouvelle recherche web n'a été faite."
+   "Aucun outil de recherche web n'était disponible. Les faits viennent uniquement des articles et des faits vérifiés fournis par le robot (Le Figaro, Le Monde, AFP, CNN, Le Devoir).",
+   "Le 9 octobre 2026, les États-Unis annoncent des sanctions contre la CPI en tant qu'institution, avec l'interdiction de toute transaction.",
+   "Les sanctions entrent en vigueur dans 180 jours (six mois), sauf accord.",
+   "C'est un ultimatum aux États membres : ils doivent notamment accorder l'immunité devant la Cour aux ressortissants des États non membres, dont les États-Unis.",
+   "Marco Rubio parle d'un « tribunal voyou » et avait promis de démanteler la Cour « brique par brique ».",
+   "La CPI, soutenue par 125 États, dénonce une attaque contre l'État de droit.",
+   "La France et plusieurs alliés disent « regretter vivement » ces sanctions.",
+   "Le Nobel de la paix 2026 attribué à Navi Pillay, ancienne juge de la CPI (selon les sources fournies), est volontairement absent des dialogues : je n'ai pas pu le revérifier en ligne, et le relecteur rappelle que le Nobel 2025 était María Corina Machado."
   ],
   "inventions": [
-   "Jean-Michel Plateau, Martine Couloir et Bernard Reconduit sont des personnages fictifs.",
-   "La « Direction européenne de la Simplification » n'existe pas.",
-   "Les betteraves réévaluées tous les ans, le glyphosate qui fête sa titularisation avec un gâteau et le « syndicat » des pesticides sont inventés.",
-   "Le permis à vie réservé aux tracteurs et la visite médicale à soixante-dix ans présentée comme une mesure européenne sont des inventions satiriques.",
-   "Le yaourt qui embauche un lobbyiste et la voiture sans lobbyiste sont des éléments comiques fictifs."
+   "Jean-Michel Plateau, Martine Couloir et Brent Coudé sont des personnages fictifs.",
+   "Toute la métaphore du Monopoly est inventée : banquier-joueur, case départ, règle du jeu, cartes « Libéré de prison » et « Allez en prison ».",
+   "Le plateau de Monopoly géant devant la CPI n'existe pas.",
+   "Le renvoi des juges, du personnel et du fonds pour les victimes « à la case départ » est une image. L'effet précis des sanctions sur chacun n'est pas détaillé dans les sources.",
+   "La règle du jeu brandie par les Européens est inventée.",
+   "Toutes les répliques de l'invité sont de la fiction et ne sont attribuées à aucune personne réelle.",
+   "Les dépêches du bandeau sont fausses."
   ],
-  "decoupage": [
-   {
-    "scene": "Plateau, plan serré sur Jean-Michel, impassible, un pot de yaourt sur le bureau. Accroche sèche, puis il se tourne vers l'écran. Woosh vers le direct.",
-    "repliques": [
-     0,
-     1
-    ],
-    "lieu": "plateau",
-    "son": "woosh",
-    "duree": 8.0
-   },
-   {
-    "scene": "Direct : Martine en bottes dans un champ de betteraves, au milieu d'un rassemblement avec des pancartes « Pesticides à vie ? Non merci ! ». Un inspecteur à lunettes contrôle une betterave à la loupe. Derrière lui, un bidon de pesticide passe tranquillement.",
-    "repliques": [
-     2
-    ],
-    "lieu": "direct",
-    "son": "rimshot",
-    "duree": 8.0
-   },
-   {
-    "scene": "Duplex : Jean-Michel présente l'invité. Le bandeau « Bernard Reconduit, porte-parole (fictif) Simplification UE » s'affiche. Bernard, moustache impeccable, glisse une liasse « Réévaluation » dans un broyeur sans la regarder.",
-    "repliques": [
-     3,
-     4,
-     5,
-     6
-    ],
-    "lieu": "duplex",
-    "son": "dun_dun",
-    "duree": 15.0
-   },
-   {
-    "scene": "Reconstitution : bureau beige, un bidon de glyphosate en cravate découpe un gâteau « TITULAIRE ». Les collègues, en masque, reculent avec leurs assiettes vides.",
-    "repliques": [
-     7
-    ],
-    "lieu": "reconstitution",
-    "son": "reconstitution",
-    "duree": 7.0
-   },
-   {
-    "scene": "Duplex : Jean-Michel brandit une vignette de contrôle technique. Bernard hausse les épaules, puis montre une carte de permis rose épinglée sur un tracteur souriant, et un vieux monsieur dans une file de visite médicale.",
-    "repliques": [
-     8,
-     9,
-     10
-    ],
-    "lieu": "duplex",
-    "son": "xylo_descente",
-    "duree": 15.0
-   },
-   {
-    "scene": "Duplex : Bernard rassure, tout sourire, et tapote un tampon « 25 ANS ». Silence. Jean-Michel regarde son yaourt sans aucune expression et pose sa question.",
-    "repliques": [
-     11,
-     12
-    ],
-    "lieu": "duplex",
-    "son": "trombone_triste",
-    "duree": 10.0
-   },
-   {
-    "scene": "Direct : Martine tend le micro vers un pot de yaourt en costume-cravate, attaché-case à la main, qui serre la main d'un bidon. Coupe sèche, la vidéo boucle sur l'accroche.",
-    "repliques": [
-     13
-    ],
-    "lieu": "direct",
-    "son": "rimshot",
-    "duree": 6.0
-   }
-  ],
+  "decoupage": [],
   "titres_sujet": [
-   "« Pesticides à vie ? Non merci ! » : partout en France, des mobilisations contre un projet européen de dérégulation « dévastateur »",
-   "«L’un des pires reculs jamais connus» : comment des pesticides pourraient être autorisés à vie dans l’UE",
-   "Livret A, retraites, géants du numérique... Comment les députés ont modifié en commission le volet \"recettes\" du projet de budget pour 2027",
-   "\"C'est une loi Duplomb puissance 10\" : des ONG appellent à manifester contre un texte européen sur les pesticides",
-   "A69: trois jours de rassemblements prévus avant la fin des travaux attendue la semaine prochaine",
-   "Le vote de la primaire à gauche prolongé jusqu'à dimanche 18h après une cyberattaque"
+   "« Le moment est grave » : pourquoi Donald Trump sanctionne la Cour pénale internationale",
+   "Sanctions des Etats-Unis contre la CPI : Washington lance un ultimatum aux Etats membres",
+   "Etats-Unis : La commentatrice MAGA Katie Zacharia désignée porte-parole par Trump",
+   "Katie Zacharia, « membre dévouée du mouvement MAGA » et nouvelle porte-parole de la Maison Blanche",
+   "Donald Trump choisit la commentatrice conservatrice Katie Zacharia comme porte-parole",
+   "Les Etats-Unis veulent asphyxier la Cour pénale internationale avec de nouvelles sanctions"
   ],
   "verification_web": true,
-  "note": 72.0,
-  "critique": "Bon squelette : l'accroche (0) frappe tout de suite, le décalage « titulaire / précaire » se lit en une seconde et le chiffre 2051 (2026 + 25) donne une chute précise. Plusieurs répliques restent pourtant des répliques de liaison, et la chute réutilise une idée déjà donnée.\n\nRépliques faibles :\n- 3 : « Un syndicat ? » répète simplement la blague de Martine. C'est une relance sans contenu et elle affaiblit la punchline 2. Proposition : « Bernard Reconduit, porte-parole de la Simplification. Le pesticide est syndiqué ? » Ou mieux, laisser Bernard enchaîner directement : « Syndiqué ? Non, mieux : titulaire. »\n- 4 : « On ne vire pas un titulaire » est attendu, c'est le cliché sur la fonction publique. Proposition : « Il est titulaire. Pour le virer, il faudrait d'abord le réévaluer. Et on a supprimé la réévaluation. » Ça referme la boucle avec la 6.\n- 7 : problème de cohérence. Martine dit « Ici » depuis un champ de betteraves alors que l'image montre un bureau beige. Le texte ne fait aussi que décrire le gag visuel. Proposition : « Pendant ce temps, à Bruxelles, le glyphosate fête sa titularisation. Il a apporté un gâteau. Les collègues ont apporté leurs masques. » Ou couper la réplique et laisser l'image parler.\n- 8 : setup trop plat (« Ma voiture a 8 ans… »). Proposition : « Ma Clio repasse au contrôle tous les deux ans. On lui cherche des fuites, à elle. »\n- 10 : la plus confuse. « On généralise » contredit l'idée que le privilège est réservé aux pesticides, et « permis à vie",
+  "note": 69.0,
+  "critique": "FAIBLESSES PAR RÉPLIQUE :\n- Découpage VIDE : aucune action visuelle, aucun plan, aucun accessoire décrit pour un format vidéo animée. Le plateau de Monopoly géant devant la CPI n'est jamais utilisé à l'image (pion de la Cour qui recule, billets gelés, carte « Libéré de prison » brandie, plateau retourné). C'est la plus grosse perte de points. À ajouter : par exemple, plan 2 : un pion en forme de marteau de juge glisse jusqu'à « Départ » ; plan 10 : Coudé sort de sa poche une pile de cartes « Libéré de prison ». Plan 12 : un char se pose sur le plateau à la place d'un pion.\n- 1 : relance plate (« vous êtes à La Haye ? »), du temps perdu. Il faut la fusionner avec 0 ou y mettre un gag visuel (Martine debout sur la case « Prison »).\n- 2 : « retour à la case départ » décrit mal la réalité des sanctions (gel d'avoirs, interdiction de transactions). C'est plutôt une case « Prison » financière. La phrase est aussi trop chargée pour une voix synthétique. Proposition : « Avoirs gelés, cartes bancaires bloquées. La Cour passe trois tours. Indéfiniment. »\n- 3 : Coudé arrive sans être présenté (qui est-il ? porte-parole de quoi ?). Le duplex n'est pas lancé. Il faut une demi-réplique : « Nous retrouvons en duplex Brad Coudé, porte-parole de la Maison-Blanche. »\n- 8 : réplique d'exposition pure, sans gag. « On ferme la banque » est faible, la menace mérite une image plus forte. Proposition : « Nouvelle règle : quiconque nous juge perd la partie. Vous avez six mois pour la signer. »\n- 10 :",
   "decision": "à retravailler"
  }
 }
