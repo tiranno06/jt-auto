@@ -543,8 +543,10 @@ def idees_libres(recents=(), n=6, consignes=""):
             r = _appel(client, None, [{"role": "user", "content": IDEES.format(secondes=SECONDES, recents=rtxt, style=STYLE_LIBRE) + _serie.idees() + (("\n" + consignes) if consignes else "")}],
                        OUTIL_IDEES, max_tokens=6000)
         except Exception as e:
-            if _bloquant(e): raise
-            print(f"  idées : appel en échec ({str(e)[:120]})", flush=True); continue
+            if _bloquant(e):
+                print(f"  ARRÊT : accès à l'API Claude impossible ({str(e)[:400]}). Action requise : console.anthropic.com > Settings > Limits (plafond de dépenses) ou Billing (crédit).", flush=True)
+                raise
+            print(f"  idées : appel en échec ({str(e)[:300]})", flush=True); continue
         for i in _liste(r.get("idees") or r.get("situations") or r.get("ideas")):
             if isinstance(i, str): i = {"titre": i}
             if isinstance(i, dict) and str(i.get("titre") or i.get("title") or "").strip():
@@ -712,7 +714,7 @@ def relire(client, sk):
 def _bloquant(e):
     """Erreurs qui ne se règlent pas en réessayant : crédit épuisé, clé invalide, accès refusé."""
     t = str(e).lower()
-    return any(m in t for m in ("credit balance", "authentication", "invalid x-api-key", "permission_error", "billing"))
+    return any(m in t for m in ("credit balance", "authentication", "invalid x-api-key", "permission_error", "billing", "usage limits"))
 
 SERIE_BLOC = """- ÉPISODE DE SÉRIE (réglage du propriétaire) : {serie_txt}
   Écris "serie_titre" (le nom de la série, court, identique d'un épisode à l'autre) et "resume_episode" (2 phrases : ce qui s'est passé dans CET épisode, pour écrire la suite).
