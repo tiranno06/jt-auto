@@ -1,20 +1,23 @@
 Casting déjà fait.
-Candidat 0 (à la une chez 5 média(s), 5 médias, 13 articles) : « "Nous allons demander des explications [au ministre]" sur l'origine de "ces 3024 professeurs remplaçants qui o »
-Candidat 1 (à la une chez 6 média(s), 6 médias, 7 articles) : « Prix Nobel de la paix : Navanethem Pillay, l’inlassable avocate de la justice internationale »
-Candidat 2 (à la une chez 3 média(s), 4 médias, 4 articles) : « Un séisme de magnitude 7,7 a secoué le Panama, provoquant d’importants dégâts matériels »
-Candidat 3 (à la une chez 2 média(s), 4 médias, 7 articles) : « Budget 2027 : la commission des finances de l’Assemblée nationale rejette largement la partie «recettes» »
-Candidat 4 (à la une chez 1 média(s), 4 médias, 8 articles) : « Mobilisation lycéenne: "Il faut un débouché politique et si possible dans le cadre du débat budgétaire en cour »
-Candidat 5 (à la une chez 2 média(s), 5 médias, 5 articles) : « Rassemblement national: Franck Allisio se sépare d'un assistant mis en cause pour des posts Facebook »
+  écarté (déjà traité) : « "Nous allons demander des explications [au ministre]" sur l'origine de "ces 3024 professeu »
+  écarté (déjà traité) : « Budget 2027 : la commission des finances de l’Assemblée nationale rejette largement la par »
+  écarté (déjà traité) : « Présidentielle : le match Attal-Philippe s’étend au mouvement lycéen »
+Candidat 0 (à la une chez 6 média(s), 6 médias, 7 articles) : « Prix Nobel de la paix : Navanethem Pillay, l’inlassable avocate de la justice internationale »
+Candidat 1 (à la une chez 2 média(s), 5 médias, 6 articles) : « Rassemblement national: Franck Allisio se sépare d'un assistant mis en cause pour des posts Facebook »
+Candidat 2 (à la une chez 1 média(s), 4 médias, 8 articles) : « Mobilisation lycéenne: "Il faut un débouché politique et si possible dans le cadre du débat budgétaire en cour »
+Candidat 3 (à la une chez 3 média(s), 3 médias, 4 articles) : « Autoroute A69 : l'ouverture officiellement repoussée à début novembre, annonce le concessionnaire »
+Candidat 4 (à la une chez 3 média(s), 3 médias, 4 articles) : « Lens se relance en battant Lyon en ouverture de la 6e journée de Ligue 1 (2-1) »
+Candidat 5 (à la une chez 3 média(s), 3 médias, 4 articles) : « Les deux Renoir volés au musée de Cagnes-sur-Mer ont été retrouvés par la police »
 Recherche web indisponible (Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too lo) : vérification sur les seuls articles fournis.
 Sélection automatique impossible (Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API.) : premier candidat.
   ARRÊT : accès à l'API Claude impossible (Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go). Action requise : recharger le crédit ou vérifier la clé ANTHROPIC_API_KEY.
 Traceback (most recent call last):
-  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 114, in <module>
+  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 119, in <module>
     main()
-  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 71, in main
+  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 75, in main
     sk = ecrire.ecrire_sketch([c[0] for c in candidats], gags=gags, special=dimanche, recents=recents)
          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/jt-auto/jt-auto/moteur/ecrire.py", line 409, in ecrire_sketch
+  File "/home/runner/work/jt-auto/jt-auto/moteur/ecrire.py", line 410, in ecrire_sketch
     if meilleur is None: raise RuntimeError(f"aucun sketch exploitable : {derniere}")
                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-RuntimeError: aucun sketch exploitable : Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CfsmHbKNdHewZTy2BSp6A'}
+RuntimeError: aucun sketch exploitable : Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CfsmjnVpJ8GGm9gyex2zo'}
