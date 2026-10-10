@@ -492,11 +492,21 @@ def idees_libres(recents=(), n=6):
     import anthropic
     client = anthropic.Anthropic()
     rtxt = " ; ".join(r for r in recents if r)[:1500] or "(aucune)"
-    r = _appel(client, None, [{"role": "user", "content": IDEES.format(secondes=SECONDES, recents=rtxt, style=STYLE_LIBRE)}], OUTIL_IDEES, max_tokens=3000)
     out = []
-    for i in r.get("idees", []):
-        if isinstance(i, dict) and str(i.get("titre", "")).strip():
-            out.append([{"titre": _court(i["titre"], 120), "resume": _court(i.get("description"), 400), "lien": "", "date": None, "source": "idée"}])
+    for essai in range(2):                                                 # une seconde tentative si la réponse est inexploitable
+        try:
+            r = _appel(client, None, [{"role": "user", "content": IDEES.format(secondes=SECONDES, recents=rtxt, style=STYLE_LIBRE)}],
+                       OUTIL_IDEES, max_tokens=6000)
+        except Exception as e:
+            if _bloquant(e): raise
+            print(f"  idées : appel en échec ({str(e)[:120]})", flush=True); continue
+        for i in _liste(r.get("idees") or r.get("situations") or r.get("ideas")):
+            if isinstance(i, str): i = {"titre": i}
+            if isinstance(i, dict) and str(i.get("titre") or i.get("title") or "").strip():
+                t = i.get("titre") or i.get("title")
+                out.append([{"titre": _court(t, 120), "resume": _court(i.get("description"), 400), "lien": "", "date": None, "source": "idée"}])
+        if out: break
+        print(f"  idées : réponse inexploitable (champs reçus : {', '.join(sorted(r))[:120]}), nouvelle tentative", flush=True)
     return out[:n]
 
 def _bloquant(e):

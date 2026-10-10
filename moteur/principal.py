@@ -77,7 +77,8 @@ def main():
         except Exception as e: print(f"Repli impossible : {e}", flush=True); t = []
         candidats = [(t, "titres récents")] if t else []
     if not candidats:
-        print("Recherche d'actualité impossible (flux indisponibles ou vides) : pas d'émission aujourd'hui."); return
+        print("Aucune idée de sketch obtenue : pas d'émission." if libre else
+              "Recherche d'actualité impossible (flux indisponibles ou vides) : pas d'émission aujourd'hui.", flush=True); return
     titres = candidats[0][0]
     recents = [f"{h.get('titre', '')} : {h.get('accroche', '')}" for h in historique[-10:]]
     from zoneinfo import ZoneInfo

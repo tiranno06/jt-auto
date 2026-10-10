@@ -271,6 +271,18 @@ class TestMoteurHumour(unittest.TestCase):
         self.assertEqual(sk["sources"], [])                                    # aucune source inventée
         self.assertEqual(sk["fiche"]["note"], 92)
 
+    def test_idees_en_texte(self):
+        faux = FauxClaude(); vrai = faux.create
+        def create(**kw):
+            if kw.get("tools", [{}])[0].get("name") == "proposer_idees":
+                bloc = types.SimpleNamespace(type="tool_use", name="proposer_idees",
+                                             input={"idees": json.dumps([{"titre": "POV : le réveil sonne", "description": "x"}, "Quand le wifi saute"])})
+                return types.SimpleNamespace(content=[bloc], usage=None)
+            return vrai(**kw)
+        faux.create = create
+        sys.modules["anthropic"] = types.SimpleNamespace(Anthropic=lambda: faux)
+        self.assertEqual([c[0]["titre"] for c in ecrire.idees_libres()], ["POV : le réveil sonne", "Quand le wifi saute"])
+
     def test_choix_hors_gros_titres_refuse(self):
         faux = FauxClaude(); faux.choix = 4
         sys.modules["anthropic"] = types.SimpleNamespace(Anthropic=lambda: faux)
