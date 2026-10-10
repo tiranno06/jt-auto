@@ -1,94 +1,150 @@
 {
- "titre": "BON. AUJOURD'HUI, JE RÉSILIE",
- "sujet": "BON. AUJOURD'HUI, JE RÉSILIE",
- "ecran": "BON. AUJOURD'H",
+ "titre": "MOT DE PASSE OUBLIÉ",
+ "sujet": "MOT DE PASSE OUBLIÉ",
+ "ecran": "MOT DE PASSE",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "",
- "question": "",
- "running_gag": "",
- "verite": "",
+ "titre_accroche": "Quand tu cliques « Mot de passe oublié »",
+ "question": "Ton mot de passe, c'est aussi « ton prénom + 123 » ? Tag le Kévin de ta bande 👇",
+ "running_gag": "Le mot de passe de Kévin : Kevin123, que tout le monde connaît sauf lui.",
+ "verite": "Les sites connaissent ton mot de passe mieux que toi, mais ne te le rendent pas : la « sécurité » sert surtout à te laisser dehors de ton propre compte, sans même te laisser partir.",
  "repliques": [
   {
-   "p": "presentateur",
-   "t": "Bon. Aujourd'hui, je résilie ma salle de sport.",
-   "d": "[determined] Bon. Aujourd'hui, je résilie ma salle de sport."
+   "p": "narrateur",
+   "t": "Quand tu cliques « Mot de passe oublié »",
+   "d": "[excited] Quand tu cliques « Mot de passe oublié »"
   },
   {
    "p": "invite",
-   "t": "T'y es allé combien de fois, cette année ?",
-   "d": "[laughs] T'y es allé combien de fois, cette année ?"
-  },
-  {
-   "p": "presentateur",
-   "t": "Une fois. Pour m'inscrire.",
-   "d": "[proudly] Une fois. Pour m'inscrire."
+   "t": "Nouveau mot de passe… Kevin123.",
+   "d": "[proudly] Nouveau mot de passe… Kevin un deux trois."
   },
   {
    "p": "envoyee",
-   "t": "Donc tu payes trente euros par mois… pour un souvenir.",
-   "d": "[sarcastic] Donc tu payes trente euros par mois… pour un souvenir."
+   "t": "« Ne peut pas être identique à l'ancien. »",
+   "d": "[deadpan] « Ne peut pas être identique à l'ancien. »",
+   "attente": 0.5
   },
   {
-   "p": "presentateur",
-   "t": "C'est pas un souvenir, c'est une motivation —",
-   "d": "[annoyed] C'est pas un souvenir, c'est une motivation —"
+   "p": "invite",
+   "t": "Tu le connais ?! Donne-le !",
+   "d": "[shouting] Tu le CONNAIS ?! [angry] Donne-le !",
+   "chute": true,
+   "chevauche": true
   },
   {
-   "p": "envoyee",
-   "t": "Rassure-toi, Jojo : tu fais du sport tous les mois. Ton compte en banque maigrit.",
-   "d": "[deadpan] Rassure-toi, Jojo : tu fais du sport tous les mois. Ton compte en banque maigrit.",
+   "p": "invite",
+   "t": "Bloqué 24 heures. Mon ex m'a bloqué moins longtemps.",
+   "d": "[crying] Bloqué vingt-quatre heures. [sighs] Mon ex m'a bloqué moins longtemps.",
    "chute": true
+  },
+  {
+   "p": "invite",
+   "t": "Je supprime ce compte !",
+   "d": "[angry] Je supprime ce compte !"
+  },
+  {
+   "p": "envoyee",
+   "t": "Rassure-toi : supprimer ton compte prend un clic. Après connexion.",
+   "d": "[deadpan] Rassure-toi : supprimer ton compte prend un clic. … Après connexion.",
+   "chute": true,
+   "attente": 0.7
   }
  ],
- "bandeau": [],
- "gag": null,
- "legende": "Bon. Aujourd'hui, je résilie ma salle de sport.",
+ "bandeau": [
+  "LE SITE CONNAÎT LE MOT DE PASSE, IL NE DIT RIEN",
+  "KEVIN123 : CINQ ANS DE FIDÉLITÉ, ZÉRO MERCI",
+  "COMPTE BLOQUÉ : KÉVIN SUSPECTÉ D'ÊTRE KÉVIN"
+ ],
+ "gag": {
+  "replique": 3,
+  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. A small white round-headed character in a backwards cap grabs an open laptop with a big red error box and screams at it, the laptop shakes, a coffee cup spills, a second white character with a pink bow sits beside him looking bored, plain pastel peach background, comedic, no text."
+ },
+ "legende": "Le site connaît ton mot de passe mais ne te le rendra jamais. Attends la fin. Satire, personnages fictifs.",
  "hashtags": [
   "petitsdramas",
   "humour",
-  "pov",
-  "sketch"
+  "animation",
+  "motdepasse",
+  "motdepasseoublie",
+  "galere"
  ],
  "sources": [],
  "decoupage": [
   {
-   "scene": "1",
+   "scene": "Gag 1 : Kévin, devant son ordinateur portable, tape fièrement dans le champ « Nouveau mot de passe ». Un gros message d'erreur rouge apparaît. Lila, assise à côté de lui, pointe l'écran du doigt et le lit, blasée. Kévin attrape l'ordinateur et hurle dessus, zoom sur sa bouche grande ouverte.",
    "repliques": [
-    0,
     1,
     2,
-    3,
-    4,
-    5
+    3
    ],
-   "lieu": "",
-   "son": "",
-   "duree": 0.0,
-   "decor": "plain"
+   "lieu": "reconstitution",
+   "son": "dun_dun",
+   "duree": 7.0,
+   "decor": "a cluttered bedroom desk, an open laptop showing a 'new password' form with a big red error box, a cold cup of coffee",
+   "effet": "tremblement"
+  },
+  {
+   "scene": "Gag 2 : même bureau, la nuit tombée. L'écran affiche un énorme cadenas rouge, « Trop de tentatives » et un compte à rebours de 24 heures. Kévin pleure, puis s'énerve et veut tout supprimer. Lila, impassible, tranche. Kévin se fige, bouche ouverte.",
+   "repliques": [
+    4,
+    5,
+    6
+   ],
+   "lieu": "reconstitution",
+   "son": "trombone_triste",
+   "duree": 9.0,
+   "decor": "a cluttered bedroom desk, an open laptop showing a big red padlock and a 24-hour countdown, a cold cup of coffee",
+   "titre": "Vingt essais plus tard…"
   }
  ],
  "fiche": {
-  "note": 0,
-  "decision": "vidéo manuelle (script imposé)",
+  "fil": "Pitch : Kévin veut récupérer son compte, mais le site connaît son mot de passe mieux que lui et refuse de le laisser entrer. 1. Kévin clique sur « Mot de passe oublié » et tape fièrement son NOUVEAU mot de passe, Kevin123. Lila, assise à côté de lui, lit le message rouge : « Ne peut pas être identique à l'ancien ». Le site le connaît donc. Kévin hurle sur l'ordinateur pour qu'il le lui rende. 2. Vingt essais plus tard, l'écran affiche « Trop de tentatives : compte bloqué 24 h ». Kévin craque et veut supprimer son compte. Lila tranche : supprimer son compte prend un clic… après connexion. Il ne peut ni entrer ni partir.",
+  "concept": "« Mot de passe oublié » : Kévin se bat contre un site qui connaît son mot de passe, refuse de le lui rendre, le bloque, puis l'empêche même de partir.",
+  "format": "Sketch animé court, deux gags dans un seul lieu (le bureau de Kévin), deux personnages : Kévin et Lila.",
+  "angle": "La sécurité informatique comme une prison dont tu es le seul à ne pas avoir la clé : le site sait tout, Kévin ne sait rien, et même pour partir il faut d'abord entrer.",
+  "resume_factuel": "Kévin a oublié son mot de passe : le site refuse le nouveau parce que c'est l'ancien, le bloque après trop d'essais, et l'empêche même de supprimer son compte.",
+  "faits_reels": [],
+  "inventions": [
+   "Toute la situation, les personnages et les répliques sont fictifs.",
+   "Le mot de passe Kevin123 est inventé."
+  ],
   "decoupage": [
    {
-    "scene": "1",
+    "scene": "Gag 1 : Kévin, devant son ordinateur portable, tape fièrement dans le champ « Nouveau mot de passe ». Un gros message d'erreur rouge apparaît. Lila, assise à côté de lui, pointe l'écran du doigt et le lit, blasée. Kévin attrape l'ordinateur et hurle dessus, zoom sur sa bouche grande ouverte.",
     "repliques": [
-     0,
      1,
      2,
-     3,
-     4,
-     5
+     3
     ],
-    "lieu": "",
-    "son": "",
-    "duree": 0.0,
-    "decor": "plain"
+    "lieu": "reconstitution",
+    "son": "dun_dun",
+    "duree": 7.0,
+    "decor": "a cluttered bedroom desk, an open laptop showing a 'new password' form with a big red error box, a cold cup of coffee",
+    "effet": "tremblement"
+   },
+   {
+    "scene": "Gag 2 : même bureau, la nuit tombée. L'écran affiche un énorme cadenas rouge, « Trop de tentatives » et un compte à rebours de 24 heures. Kévin pleure, puis s'énerve et veut tout supprimer. Lila, impassible, tranche. Kévin se fige, bouche ouverte.",
+    "repliques": [
+     4,
+     5,
+     6
+    ],
+    "lieu": "reconstitution",
+    "son": "trombone_triste",
+    "duree": 9.0,
+    "decor": "a cluttered bedroom desk, an open laptop showing a big red padlock and a 24-hour countdown, a cold cup of coffee",
+    "titre": "Vingt essais plus tard…"
    }
-  ]
+  ],
+  "titres_sujet": [
+   "Quand je clique sur « Mot de passe oublié »"
+  ],
+  "verification_web": false,
+  "note": 79.0,
+  "critique": "AVIS DU PUBLIC TEST (spectateurs sans contexte) :\n- Inès : a compris, rire 5.5/10, perdu par : Je suis restée, mais j'ai failli partir à la 2. Le « mot de passe identique à l'ancien », on l'a vu cent fois et on a déjà compris. La chute sur la suppression du compte est correcte. Elle est attendue et un peu trop expliquée (« Rassure-toi »). Je voulais quelque chose de plus noir ou de plus absurde. Kévin crie beaucoup, ça fatigue.\n- Karim : a compris, rire 6/10, perdu par : Sans le son, je ne vois pas les tons (deadpan, shouting). Le carton « Vingt essais plus tard… » est clair. Mais la réplique 1 est entre guillemets et je ne sais pas si Lila est une personne ou le système. Au début, j'ai hésité. Kévin et Lila ne sont pas bien distingués si on lit vite les sous-titres. Le « Kevin123 » passe vite et je n'ai pas le temps de bien le lire.\n- Sandrine : a compris, rire 4.5/10, perdu par : Je n'ai pas compris tout de suite qui était Lila. Est-ce une amie, ou la voix du site ? Il m'a fallu la dernière réplique pour comprendre. La réplique 2 (« Tu le connais ?! Donne-le ! ») est confuse : il parle à qui, à l'ordinateur ? Sinon, le titre m'a aidée. La chute m'a fait sourire. Je n'ai pas saisi pourquoi on doit se connecter pour supprimer. Ça ne m'a pas paru logique tout de suite.\nCritiques constructives du public :\n- Réplique 1 : on ne sait pas qui est Lila. Montrez-la tout de suite comme la voix du site, avec une icône de cadenas ou un habillage de pop-up. On ne doit pas hésiter une sec",
+  "decision": "à retravailler"
  }
 }
