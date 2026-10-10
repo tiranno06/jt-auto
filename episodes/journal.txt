@@ -1,24 +1,24 @@
 Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
-Idée 0 : « Quand le réveil sonne à 7 h »
-Idée 1 : « Quand je dis « cette semaine, je cuisine » »
-Idée 2 : « Quand on se croise et que « faut qu'on se voie ! » »
-Idée 3 : « POV : je me trouve beau aujourd'hui »
-Idée 4 : « Quand le mail commence par « Petite relance » »
-Idée 5 : « Quand on me demande pourquoi je suis venu au mariage »
-Vérité du sujet : « Faut qu'on se voie » veut dire qu'on ne se verra jamais : c'est une politesse pour fuir l'autre, et la seule chose qui finit par réunir les vieux potes, c'est un enterrement.
-Chute proposée : Rassurez-vous : on a fini par se voir, comme promis. Il a juste fallu que Kévin meure.
-Gros titres soumis : 6.5/10 Quand le réveil sonne à 7 h | 6.0/10 Quand je dis « cette semaine, je cuisine » | 8.5/10 Quand on se croise et que « faut qu'on se voie ! » | 7.0/10 POV : je me trouve beau aujourd'hui | 7.5/10 Quand le mail commence par « Petite relance » | 7.0/10 Quand on me demande pourquoi je suis venu au mariage
-Sujet choisi : « Quand on se croise et que « faut qu'on se voie ! » » — angle : Jojo et Lila se croisent et se renvoient « Faut qu'on se voie ! » avec un enthousiasme parfait, année après année. Le titre passe de 2024 à 2031, ils prennent d
-  atelier : 15 vannes, 15 chutes ; chute retenue par le jury (8/10) : — Faut qu'on se revoie ! — Carrément. Qui meurt ?
-  ARRÊT : accès à l'API Claude impossible (Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go). Action requise : recharger le crédit ou vérifier la clé ANTHROPIC_API_KEY.
-Traceback (most recent call last):
-  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 153, in <module>
-    main()
-  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 93, in main
-    sk = ecrire.ecrire_sketch([c[0] for c in candidats], gags=gags, special=dimanche and not libre, recents=recents, libre=libre)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/jt-auto/jt-auto/moteur/ecrire.py", line 682, in ecrire_sketch
-    if meilleur is None: raise RuntimeError(f"aucun sketch exploitable : {derniere}")
-                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-RuntimeError: aucun sketch exploitable : Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011Cftb7jsPJKfJsy8bg8FJA'}
+Vidéo manuelle (script) : « Jojo : [determined] Bon. Aujourd'hui, je résilie ma salle de sport.
+Kévin : [laughs] T'y es allé combien de fois, cette année ?
+Jojo : [proudly] Une fois. Pour m'inscrire.
+Lila : [sarcastic] Donc tu p »
+  mise en scène automatique impossible (Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too lo) : script joué tel quel, une seule scène
+  script mis en scène : 6 répliques, 1 scène(s)
+Sketch : « BON. AUJOURD'HUI, JE RÉSILIE », 6 répliques
+  dialogue ElevenLabs : paquet 1/1, 6/6 répliques découpées
+  voix 0 (presentateur, dialogue) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.14} OK
+  voix 1 (invite, dialogue) {'sim': 0.89, 'blanc': 0.0, 'debit': 0.95} OK
+  voix 2 (presentateur, dialogue) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.04} OK
+  voix 3 (envoyee, dialogue) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.07} OK
+  voix 4 (presentateur, dialogue) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.06} OK
+  voix 5 (envoyee, dialogue) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.88} OK
+Voix : ElevenLabs (Eleven v4)
+cartoon : durée 21.7 s, 6 répliques, 1 scène(s), personnages ['presentateur', 'invite', 'envoyee']
+  image 0/651
+  image 300/651
+  image 600/651
+Contrôle vidéo impossible (Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anth) : non bloquant.
+Qualité : 0/100 — vidéo manuelle (script imposé)
+OK : sortie/2026-10-10_15h58_emission.mp4 (22 s)

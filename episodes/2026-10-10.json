@@ -1,146 +1,94 @@
 {
- "titre": "CAISSE AUTOMATIQUE",
- "sujet": "CAISSE AUTOMATIQUE",
- "ecran": "CAISSE AUTO",
- "invite_nom": "Kévin",
- "invite_role": "Client honnête (fictif)",
+ "titre": "BON. AUJOURD'HUI, JE RÉSILIE",
+ "sujet": "BON. AUJOURD'HUI, JE RÉSILIE",
+ "ecran": "BON. AUJOURD'H",
+ "invite_nom": "Hubert Rustine",
+ "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
- "lieu_direct": "Caisse automatique",
- "titre_accroche": "POV : la caisse dit « article inattendu »",
- "question": "La caisse automatique vous a déjà traité de voleur pour une baguette ? 👇",
- "running_gag": "La caisse de Kévin : chaque fois qu'il veut payer, la machine l'accuse, et le vrai voleur passe derrière lui.",
- "verite": "La caisse automatique ne fait gagner du temps qu'au magasin : le client fait gratuitement le travail du caissier, on le surveille comme un suspect, et les vrais voleurs passent sans problème.",
+ "lieu_direct": "Assemblée",
+ "titre_accroche": "",
+ "question": "",
+ "running_gag": "",
+ "verite": "",
  "repliques": [
   {
-   "p": "narrateur",
-   "t": "POV : la caisse dit « article inattendu »",
-   "d": "[excited] Pi-o-vi : la caisse dit « article inattendu »"
+   "p": "presentateur",
+   "t": "Bon. Aujourd'hui, je résilie ma salle de sport.",
+   "d": "[determined] Bon. Aujourd'hui, je résilie ma salle de sport."
   },
   {
    "p": "invite",
-   "t": "« Article inattendu » ? Moi aussi, demande à mes parents.",
-   "d": "[shouting] Article inattendu ? Moi aussi, demande à mes parents.",
-   "chute": true
+   "t": "T'y es allé combien de fois, cette année ?",
+   "d": "[laughs] T'y es allé combien de fois, cette année ?"
   },
   {
    "p": "presentateur",
-   "t": "Elle accuse pas. Elle recrute.",
-   "d": "Elle accuse pas. Elle recrute.",
-   "chute": true
-  },
-  {
-   "p": "invite",
-   "t": "Je scanne, j'emballe, je me fouille. Sans mutuelle !",
-   "d": "[angry] Je scanne, j'emballe, je me fouille. Sans mutuelle !",
-   "chute": true
+   "t": "Une fois. Pour m'inscrire.",
+   "d": "[proudly] Une fois. Pour m'inscrire."
   },
   {
    "p": "envoyee",
-   "t": "Kévin ! Le mec sort avec une télé.",
-   "d": "[gasps] Kévin ! Le mec sort avec une télé.",
-   "chute": true
+   "t": "Donc tu payes trente euros par mois… pour un souvenir.",
+   "d": "[sarcastic] Donc tu payes trente euros par mois… pour un souvenir."
   },
   {
    "p": "presentateur",
-   "t": "Rassure-toi : la machine ne soupçonne jamais les voleurs. Que les clients.",
-   "d": "[deadpan] Rassure-toi : la machine ne soupçonne jamais les voleurs. Que les clients.",
-   "chute": true,
-   "attente": 0.6
+   "t": "C'est pas un souvenir, c'est une motivation —",
+   "d": "[annoyed] C'est pas un souvenir, c'est une motivation —"
+  },
+  {
+   "p": "envoyee",
+   "t": "Rassure-toi, Jojo : tu fais du sport tous les mois. Ton compte en banque maigrit.",
+   "d": "[deadpan] Rassure-toi, Jojo : tu fais du sport tous les mois. Ton compte en banque maigrit.",
+   "chute": true
   }
  ],
- "bandeau": [
-  "UNE BAGUETTE PLACÉE EN GARDE À VUE",
-  "KÉVIN EMBAUCHÉ SANS SALAIRE PAR UNE CAISSE AUTO",
-  "UN VOLEUR SORT AVEC UNE TÉLÉ : AUCUN ARTICLE INATTENDU",
-  "LES CLÉS DE KÉVIN PESÉES : ARTICLE INATTENDU"
- ],
- "gag": {
-  "replique": 4,
-  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. Supermarket self-checkout with a flashing red light: a small round-headed white character stands with arms raised, pockets turned inside out, keys and tissues on the scale next to a baguette. Behind him, another character calmly walks out through the exit gate carrying a big flat TV under his arm, no bag, no alarm. Comedic, deadpan."
- },
- "legende": "Je voulais gagner du temps avec une baguette. J'ai fini les poches vides devant la caméra. Satire, personnages fictifs.",
+ "bandeau": [],
+ "gag": null,
+ "legende": "Bon. Aujourd'hui, je résilie ma salle de sport.",
  "hashtags": [
-  "caisseautomatique",
+  "petitsdramas",
   "humour",
-  "supermarche",
-  "galere",
-  "animation",
+  "pov",
   "sketch"
  ],
  "sources": [],
  "decoupage": [
   {
-   "scene": "Gag 1 : devant la caisse automatique, Kévin pose sa baguette et l'écran passe au rouge. Gros plan sur Kévin qui hurle en tremblant. Jojo lui tapote l'épaule comme un chef d'équipe. Kévin explose en mimant les gestes : scanner, emballer, se fouiller. Transition : woosh.",
+   "scene": "1",
    "repliques": [
+    0,
     1,
     2,
-    3
-   ],
-   "lieu": "reconstitution",
-   "son": "woosh",
-   "duree": 7.0,
-   "decor": "a supermarket self-checkout machine with a flashing red error light, a single baguette on the bagging scale, a small security camera dome above",
-   "titre": "Article inattendu",
-   "effet": "tremblement"
-  },
-  {
-   "scene": "Gag 2 : même caisse. Kévin a vidé ses poches sur la balance (clés, mouchoirs) et lève les bras face à la caméra. Lila, bouche bée, montre derrière lui un type qui passe tranquillement le portique avec une grande télé sous le bras. Aucune alarme. Jojo, imperturbable, lâche la chute. Rimshot.",
-   "repliques": [
+    3,
     4,
     5
    ],
-   "lieu": "reconstitution",
-   "son": "rimshot",
-   "duree": 7.0,
-   "decor": "a supermarket self-checkout machine with a flashing red error light, a single baguette on the bagging scale, a small security camera dome above",
-   "titre": "Dix minutes plus tard…"
+   "lieu": "",
+   "son": "",
+   "duree": 0.0,
+   "decor": "plain"
   }
  ],
  "fiche": {
-  "fil": "Pitch : Kévin veut payer vite sa baguette à la caisse automatique, mais la machine le prend pour un voleur. 1. Kévin pose sa baguette, l'écran passe au rouge : « article inattendu ». Il craque. Jojo défend la machine : elle ne l'accuse pas, elle le recrute. Kévin explose : il fait tout le boulot, sans mutuelle. 2. Dix minutes plus tard, Kévin a vidé ses poches et lève les bras devant la caméra. Lila voit un type sortir avec une télé, sans alarme. Jojo conclut avec la logique du magasin : la machine ne soupçonne jamais les voleurs, seulement les clients.",
-  "concept": "« Article inattendu » : Kévin voulait gagner du temps avec une seule baguette. Il finit les poches vides, les bras levés devant la caméra, pendant qu'un vrai voleur sort avec une télé.",
-  "format": "Scène de dessin animé en deux gags (cri intérieur, puis retournement) avec Kévin, Jojo et Lila.",
-  "angle": "Plus le client honnête coopère, plus la machine le soupçonne, alors que le seul vrai voleur passe sans que personne le remarque. Jojo défend la machine avec une mauvaise foi totale.",
-  "resume_factuel": "Kévin passe à la caisse automatique avec une baguette, la machine l'accuse d'« article inattendu », et il finit par vider ses poches pendant qu'un vrai voleur s'en va tranquillement.",
-  "faits_reels": [],
-  "inventions": [
-   "Tout est fictif : Kévin, Jojo, Lila, la caisse automatique, le magasin et le voleur à la télé.",
-   "Situation du quotidien poussée jusqu'à l'absurde, sans marque ni personne réelle."
-  ],
+  "note": 0,
+  "decision": "vidéo manuelle (script imposé)",
   "decoupage": [
    {
-    "scene": "Gag 1 : devant la caisse automatique, Kévin pose sa baguette et l'écran passe au rouge. Gros plan sur Kévin qui hurle en tremblant. Jojo lui tapote l'épaule comme un chef d'équipe. Kévin explose en mimant les gestes : scanner, emballer, se fouiller. Transition : woosh.",
+    "scene": "1",
     "repliques": [
+     0,
      1,
      2,
-     3
-    ],
-    "lieu": "reconstitution",
-    "son": "woosh",
-    "duree": 7.0,
-    "decor": "a supermarket self-checkout machine with a flashing red error light, a single baguette on the bagging scale, a small security camera dome above",
-    "titre": "Article inattendu",
-    "effet": "tremblement"
-   },
-   {
-    "scene": "Gag 2 : même caisse. Kévin a vidé ses poches sur la balance (clés, mouchoirs) et lève les bras face à la caméra. Lila, bouche bée, montre derrière lui un type qui passe tranquillement le portique avec une grande télé sous le bras. Aucune alarme. Jojo, imperturbable, lâche la chute. Rimshot.",
-    "repliques": [
+     3,
      4,
      5
     ],
-    "lieu": "reconstitution",
-    "son": "rimshot",
-    "duree": 7.0,
-    "decor": "a supermarket self-checkout machine with a flashing red error light, a single baguette on the bagging scale, a small security camera dome above",
-    "titre": "Dix minutes plus tard…"
+    "lieu": "",
+    "son": "",
+    "duree": 0.0,
+    "decor": "plain"
    }
-  ],
-  "titres_sujet": [
-   "Quand la caisse automatique dit « article inattendu »"
-  ],
-  "verification_web": false,
-  "note": 69.0,
-  "critique": "Réplique 0 (Kévin) : c'est la meilleure. Elle est noire et inattendue, et elle détourne le message de la caisse en blessure d'enfance. On garde. Réplique 1 (Jojo) : « Elle recrute » est efficace et touche le cœur de la vérité visée (le travail gratuit), mais elle reste un peu sage. On peut la durcir : « Elle accuse pas. Elle t'embauche. Période d'essai : à vie. » Réplique 2 : la liste en trois temps « je scanne, j'emballe, je me fouille » marche bien, mais « Sans mutuelle ! » tombe à plat, c'est une chute administrative molle. À remplacer par « Et c'est moi qui paie ! » ou « Et je me facture ! », qui pousse l'absurde du client qui paie pour travailler. Réplique 3 (Lila) : purement fonctionnelle, sans aucun gag. Il faudrait au moins une touche : « Kévin ! Le mec sort avec une télé… et il dit même pas merci à la machine. » Réplique 4 (chute) : elle porte bien sur le sujet et le « Rassure-toi » donne un ton ironique, mais elle énonce la vérité presque mot pour mot, c'est de l'explication plus qu'un retournement. Elle ne reprend pas non plus le titre. Proposition plus percutante : « Normal : lui, il a rien scanné. Pas d'article, rien d'inattendu. » Cette version retourne la logique de la machine (on n'est suspect que si on paie) et boucle sur « article inattendu ». Visuel : le prompt du plan gag est coupé (« walks out through… »), alors que la télé et le portique sans alarme sont l'image clé du gag. Il faut le terminer : « …the security gate carrying a huge TV, no alarm, while a ",
-  "decision": "à retravailler"
+  ]
  }
 }
