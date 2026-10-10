@@ -432,11 +432,14 @@ def generer(repliques):
     fiche = casting()
     if not fiche.get("roles") or not any(fiche["roles"].values()): return None
     sur_mesure = os.path.join(RACINE, "voix", "voix_persos.json")
-    if (os.environ.get("VOIX_PERSOS") or "") == "sur_mesure" and os.path.exists(sur_mesure):   # voix créées pour la chaîne (Voice Design)
+    if os.path.exists(sur_mesure):                                         # voix créées pour la chaîne (Voice Design)
+        premier = (os.environ.get("VOIX_PERSOS") or "") == "sur_mesure"
         for role, vid in json.load(open(sur_mesure, encoding="utf-8")).items():
             autres = [c for c in fiche["roles"].get(role, []) if c.get("voix") != vid]
-            fiche["roles"][role] = [{"moteur": "elevenlabs", "voix": vid, "nom": "sur mesure"}] + autres
-        journal("  voix sur mesure des personnages")
+            perso = {"moteur": "elevenlabs", "voix": vid, "nom": "sur mesure"}
+            # réglage « sur mesure » : elle passe en premier ; sinon elle est la 1re remplaçante si la voix habituelle échoue
+            fiche["roles"][role] = [perso] + autres if premier else autres[:1] + [perso] + autres[1:]
+        journal("  voix sur mesure des personnages" + ("" if premier else " en remplaçantes"))
     tmp = tempfile.mkdtemp(); n = len(repliques)
     audios, mots, utilises = [None] * n, [None] * n, set()
     meilleures = {}                                                        # i -> (sim, clip, mots, moteur) : meilleure prise refusée
