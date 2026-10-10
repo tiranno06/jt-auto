@@ -11,7 +11,8 @@ from PIL import Image, ImageDraw, ImageFont
 ICI = os.path.dirname(os.path.abspath(__file__))
 MODELE = os.environ.get("MODELE_CONTROLE") or "claude-sonnet-5-5"
 
-PROMPT = """Tu es chef monteur. Voici des images extraites d'une vidéo TikTok animée (format vertical), numérotées dans l'ordre.
+PROMPT = """Tu es chef monteur. Voici des images extraites d'une vidéo TikTok animée (format vertical), numérotées dans l'ordre (carré rouge en haut à gauche).
+Chaque image est SÉPARÉE des autres par une bande noire : ne mélange jamais le bord d'une image avec celui de sa voisine.
 Ce qui doit apparaître :
 {attendu}
 Vérifie chaque image : sous-titre différent du texte attendu ou avec une faute, texte coupé par le bord ou illisible, deux textes qui se chevauchent,
@@ -33,9 +34,10 @@ def planches(video, instants, par_planche=8):
     """Images numérotées assemblées en planches de 4 x 2."""
     f = ImageFont.truetype(os.path.join(ICI, "..", "polices", "Poppins-Bold.ttf"), 30); out = []
     for d in range(0, len(instants), par_planche):
-        lot = instants[d:d + par_planche]; P = Image.new("RGB", (360 * 4, 640 * 2), (40, 40, 40)); dr = ImageDraw.Draw(P)
+        G = 40                                                             # large bande noire entre les images : aucune ne « déborde » sur sa voisine
+        lot = instants[d:d + par_planche]; P = Image.new("RGB", (360 * 4 + G * 5, 640 * 2 + G * 3), (0, 0, 0)); dr = ImageDraw.Draw(P)
         for k, t in enumerate(lot):
-            x, y = 360 * (k % 4), 640 * (k // 4); P.paste(_image(video, t), (x, y))
+            x, y = G + (360 + G) * (k % 4), G + (640 + G) * (k // 4); P.paste(_image(video, t), (x, y))
             dr.rectangle((x, y, x + 64, y + 44), fill=(220, 30, 30)); dr.text((x + 8, y + 2), str(d + k + 1), font=f, fill=(255, 255, 255))
         b = io.BytesIO(); P.save(b, "JPEG", quality=82); out.append(b.getvalue())
     return out

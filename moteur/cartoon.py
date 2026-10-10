@@ -341,14 +341,15 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         return None, None
 
     def chute_au_sol(role, tm, scene):
-        """Sur la chute finale, celui qui l'encaisse tombe à la renverse (angle en degrés, 0 = debout)."""
+        """Sur la chute finale, celui qui l'encaisse s'effondre, KO : il s'affaisse en penchant vers l'extérieur, étoiles autour
+        de la tête (renvoie (angle, avancement 0→1) ; il reste dans le cadre et ne cache jamais les autres)."""
         z = ph[-1]
-        if scene != z["scene"] or role == z["p"] or tm < z["fin"] + 0.25: return 0.0
+        if scene != z["scene"] or role == z["p"] or tm < z["fin"] + 0.25: return 0.0, 0.0
         victime = next((r2 for r2 in places[scene] if r2 != z["p"]), None)
-        if role != victime: return 0.0
-        u = (tm - z["fin"] - 0.25) / 0.32; sens = 1 if position(scene, role)[0] < W / 2 else -1   # tombe vers le centre : reste dans le cadre
-        a = 84 * u * u if u < 1 else 84 - 10 * math.exp(-(u - 1) * 6) * abs(math.sin((u - 1) * 14))   # petit rebond au sol
-        return sens * min(84, a)
+        if role != victime: return 0.0, 0.0
+        u = (tm - z["fin"] - 0.25) / 0.3; sens = -1 if position(scene, role)[0] < W / 2 else 1
+        v = u * u if u < 1 else 1 - 0.12 * math.exp(-(u - 1) * 6) * abs(math.sin((u - 1) * 14))   # petit rebond
+        return sens * 22 * min(1, v), min(1, v)
 
     def vue(tm):
         q = actif(tm); sc = q["scene"]
@@ -379,7 +380,10 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         for role in places[sc]:                                            # personnages dessinés nets à l'échelle du plan
             p = pose(role, tm, q, sc)
             p["x"], p["y"], p["s"] = W / 2 + (p["x"] - cx) * z, H / 2 + (p["y"] - cy) * z, p["s"] * z
-            ang = chute_au_sol(role, tm, sc)
+            ang, ko = chute_au_sol(role, tm, sc)
+            if ko:                                                         # KO : écrasé, yeux en croix, étoiles
+                p["sq"] = max(p["sq"], 0.28 * ko); p["yeux"] = "plisses"; p["forme"] = "o"; p["bouche"] = 0.2
+                p["effets"] = tuple(set(p["effets"]) | {"etoiles"}); p["bras_g"], p["bras_d"] = (-60, 20), (60, -20)
             if not -400 < p["x"] < W + 400: continue
             if not ang: M.dessiner(img, M.ROLES.get(role, "bonnet"), p); continue
             calque = np.empty_like(img); calque[:] = (1, 2, 3); M.dessiner(calque, M.ROLES.get(role, "bonnet"), p)
@@ -406,8 +410,8 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
     if apercu:
         os.makedirs(sortie, exist_ok=True)
         for q in ph:
-            for j, tm in enumerate((q["deb"] + 0.4, q["fin"] + 0.3)):
-                cv2.imwrite(f"{sortie}/{q['i']:02d}{'ab'[j]}.png", cv2.cvtColor(cv2.resize(image(int(tm * FPS)), (360, 640)), cv2.COLOR_RGB2BGR))
+            for j, tm in enumerate((q["deb"] + 0.4, q["fin"] + 0.3) + ((q["fin"] + 1.0, GEL + 0.5) if q is ph[-1] else ())):
+                cv2.imwrite(f"{sortie}/{q['i']:02d}{'abcd'[j]}.png", cv2.cvtColor(cv2.resize(image(int(tm * FPS)), (360, 640)), cv2.COLOR_RGB2BGR))
         return total
 
     # ---- son : voix, bruitages (woosh à chaque scène, rimshot à la chute finale)
