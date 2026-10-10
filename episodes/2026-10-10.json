@@ -14,74 +14,88 @@
   {
    "p": "presentateur",
    "t": "Dossier spécial : votre pote arrive dans cinq minutes. Ça fait deux heures.",
+   "d": "[deadpan] Dossier spécial : votre pote arrive dans cinq minutes. Ça fait deux heures.",
    "chute": true
   },
   {
    "p": "envoyee",
    "t": "Ses cinq minutes, j'ai eu le temps de manger, payer, divorcer et récupérer la garde.",
+   "d": "[exasperated] Ses cinq minutes, j'ai eu le temps de manger, payer, divorcer et récupérer la garde.",
    "chute": true
   },
   {
    "p": "envoyee",
    "t": "Je lui ai demandé où il était. Il m'a dit « bientôt ». C'est pas une adresse, ça. C'est un horoscope.",
+   "d": "[sarcastic] Je lui ai demandé où il était. Il m'a dit « bientôt ». C'est pas une adresse, ça. C'est un horoscope.",
    "chute": true
   },
   {
    "p": "invite",
-   "t": "Wesh, je suis au coin de la rue. Je vois le bar d'ici."
+   "t": "Wesh, je suis au coin de la rue. Je vois le bar d'ici.",
+   "d": "[casual] Wesh, je suis au coin de la rue. Je vois le bar d'ici."
   },
   {
    "p": "envoyee",
    "t": "Kévin. Ton coin de rue, il a un pommeau ?",
+   "d": "[suspicious] Kévin. Ton coin de rue, il a un pommeau ?",
    "chute": true
   },
   {
    "p": "invite",
    "t": "C'est la pluie, frère. Et j'ai mis du shampoing anti-pluie.",
+   "d": "[nervous laugh] C'est la pluie, frère. Et j'ai mis du shampoing anti-pluie.",
    "chute": true
   },
   {
    "p": "envoyee",
    "t": "Et depuis quand ta rue fait « ding » comme un micro-ondes ?",
+   "d": "[annoyed] Et depuis quand ta rue fait « ding » comme un micro-ondes ?",
    "chute": true
   },
   {
    "p": "invite",
    "t": "C'est le GPS. Il me dit que mes lasagnes sont prêtes.",
+   "d": "[confident] C'est le GPS. Il me dit que mes lasagnes sont prêtes.",
    "chute": true
   },
   {
    "p": "envoyee",
    "t": "Il partage sa position en direct. Ça affiche : « Domicile, salle de bain ».",
+   "d": "[laughs] Il partage sa position en direct. Ça affiche : « Domicile, salle de bain ».",
    "chute": true
   },
   {
    "p": "invite",
-   "t": "Attends attends. Je t'envoie une photo de la rue. Preuve."
+   "t": "Attends attends. Je t'envoie une photo de la rue. Preuve.",
+   "d": "[panicked] Attends attends. Je t'envoie une photo de la rue. Preuve."
   },
   {
    "p": "envoyee",
    "t": "Ta photo, c'est une vue satellite. On voit mon vélo. Volé en 2014.",
-   "d": "Ta photo, c'est une vue satellite. On voit mon vélo. Volé en deux mille quatorze.",
+   "d": "[laughing] Ta photo, c'est une vue satellite. On voit mon vélo. Volé en deux mille quatorze.",
    "chute": true
   },
   {
    "p": "invite",
-   "t": "Bon, là, je suis en bas de chez toi."
+   "t": "Bon, là, je suis en bas de chez toi.",
+   "d": "[confident] Bon, là, je suis en bas de chez toi."
   },
   {
    "p": "envoyee",
    "t": "Kévin. J'ai déménagé il y a deux ans.",
+   "d": "[deadpan] Kévin. J'ai déménagé il y a deux ans.",
    "chute": true
   },
   {
    "p": "invite",
    "t": "Ok, je mets mes chaussures et j'arrive. Enfin… je les achète et j'arrive.",
+   "d": "[sighs] Ok, je mets mes chaussures et j'arrive. Enfin… je les achète et j'arrive.",
    "chute": true
   },
   {
    "p": "presentateur",
    "t": "Rassurez-vous : Kévin arrive dans cinq minutes. C'est son anniversaire.",
+   "d": "[deadpan] Rassurez-vous : Kévin arrive dans cinq minutes. C'est son anniversaire.",
    "chute": true,
    "attente": 0.8
   }
@@ -170,87 +184,5 @@
    "son": "rimshot",
    "duree": 6.0
   }
- ],
- "fiche": {
-  "concept": "Dossier spécial du JT : « Cinq minutes, l'unité de temps la plus élastique de France ». Martine attend en direct à la terrasse d'un bar, devant un gâteau. Kévin, le pote en retard, est en duplex au téléphone et jure qu'il arrive. Chaque bruit, chaque preuve qu'il envoie le trahit un peu plus.",
-  "format": "Faux JT avec duplex téléphonique : l'envoyée blasée face au pote de mauvaise foi qui ne lâche rien.",
-  "angle": "L'escalade des fausses preuves. D'abord les bruits qui le trahissent (douche, micro-ondes), puis des preuves fabriquées qui l'enfoncent (sa position partagée, une photo de la rue qui date de 2014), et pour finir l'aveu glissé dans la phrase : il n'a même pas de chaussures. La chute retourne tout : le retardataire, c'est la star de la soirée.",
-  "resume_factuel": "Un pote promet d'arriver dans cinq minutes alors qu'il est encore sous la douche chez lui, et il nie l'évidence jusqu'au bout. Pourtant, c'est son propre anniversaire.",
-  "faits_reels": [],
-  "inventions": [
-   "Tout le sketch est une fiction : la situation, Kévin Tardieu, la terrasse du bar, l'anniversaire, les dialogues et les dépêches du bandeau."
-  ],
-  "decoupage": [
-   {
-    "scene": "Plateau du JT. Jean-Michel est impassible. Derrière lui, une horloge tourne à toute vitesse. Woosh vers le direct.",
-    "repliques": [
-     0
-    ],
-    "lieu": "plateau",
-    "son": "woosh",
-    "duree": 4.0
-   },
-   {
-    "scene": "Terrasse du bar, la nuit. Martine est seule à une table couverte d'assiettes vides et d'additions payées, avec un gâteau aux bougies éteintes et des papiers de divorce signés. Elle parle face caméra, blasée.",
-    "repliques": [
-     1,
-     2
-    ],
-    "lieu": "direct",
-    "son": "rimshot",
-    "duree": 11.0
-   },
-   {
-    "scene": "Écran partagé. Kévin au téléphone, cadré serré, assuré. Le plan s'élargit : il est sous sa douche, avec de la mousse sur la tête. Un « ding » de micro-ondes retentit.",
-    "repliques": [
-     3,
-     4,
-     5,
-     6,
-     7
-    ],
-    "lieu": "duplex",
-    "son": "dun_dun",
-    "duree": 20.0
-   },
-   {
-    "scene": "Martine tourne son téléphone vers la caméra : la carte affiche « Domicile, salle de bain ». Puis la photo envoyée apparaît : une vieille vue satellite pixelisée, avec un vélo entouré en rouge.",
-    "repliques": [
-     8,
-     9,
-     10
-    ],
-    "lieu": "duplex",
-    "son": "trombone_triste",
-    "duree": 14.0
-   },
-   {
-    "scene": "Kévin, en serviette et pieds nus, cherche ses chaussures en panique, puis se fige en apprenant qu'elle a déménagé. Il finit par ouvrir un site de vente sur son téléphone.",
-    "repliques": [
-     11,
-     12,
-     13
-    ],
-    "lieu": "duplex",
-    "son": "xylo_descente",
-    "duree": 13.0
-   },
-   {
-    "scene": "Retour plateau. Silence, puis Jean-Michel lâche la chute sans un battement de cil. Plan final : en terrasse, Martine souffle elle-même les bougies du gâteau. Noir.",
-    "repliques": [
-     14
-    ],
-    "lieu": "plateau",
-    "son": "rimshot",
-    "duree": 6.0
-   }
-  ],
-  "titres_sujet": [
-   "Quand ton pote te dit « j'arrive dans 5 minutes »"
-  ],
-  "verification_web": false,
-  "note": 76.0,
-  "critique": "Points faibles, réplique par réplique :\n- R5 (« shampoing anti-pluie ») : c'est la réplique la plus faible du sketch. L'absurde est mou et la mauvaise foi ne marche pas, alors que c'est la réplique du plan gag. Le mensonge de Kévin doit coller à la réalité du pote en retard, et l'aplomb doit être total. Pistes : « C'est la pluie, frère. Il pleut fort, ça mousse, c'est la pollution. » ou « C'est pas un pommeau, c'est un lampadaire qui fuit. Appelle la mairie. »\n- R7 (« le GPS me dit que mes lasagnes sont prêtes ») : le jeu de mots est correct mais attendu, et il ouvre une deuxième fausse piste (cuisine) en plus de la douche. Ça dilue l'image principale. Mieux vaut un aveu qui le trahit davantage : « C'est le GPS. Il dit \"vous êtes arrivé\". Tu vois ? Je suis arrivé. »\n- R3 : mise en place efficace mais sans vanne. On peut la rendre plus drôle : « Je suis au coin de la rue, je vois le bar d'ici. Il est flou, mais je le vois. »\n- R1 : très bonne liste en escalade, mais « récupérer la garde » est ambigu (la garde de qui ?). Plus net et plus noir : « …divorcer, me remarier et perdre la garde. »\n- R0 : correct mais c'est une simple annonce. Pour en faire une vanne : « …Ça fait deux heures. Les scientifiques parlent de la plus grande dilatation du temps depuis Einstein. »\n- R13 : bonne double détente, la reprise « je les achète » fonctionne.\n- R14 (chute) : vrai retournement sur le sujet, préparé visuellement par le gâteau dès le début. Elle ne rappelle pas une blague du sketch : ell",
-  "decision": "à retravailler"
- }
+ ]
 }
