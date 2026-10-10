@@ -91,6 +91,8 @@ jobs:
       FORMAT: ${{ inputs.format || vars.FORMAT }}
       THEME: ${{ inputs.theme }}
       SERIE_LOT: ${{ inputs.serie }}
+      PRONONCIATION: ${{ vars.PRONONCIATION }}
+      VOIX_PERSOS: ${{ vars.VOIX_PERSOS }}
       REFAIRE: ${{ inputs.refaire }}
       SEUIL_PUBLICATION: ${{ vars.SEUIL_PUBLICATION }}
       TENDANCES: ${{ vars.TENDANCES }}

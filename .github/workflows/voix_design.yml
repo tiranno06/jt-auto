@@ -1,0 +1,44 @@
+name: Voix sur mesure
+
+on:
+  workflow_dispatch:
+    inputs:
+      roles:
+        description: "Personnages à (re)créer : presentateur (Jojo), invite (Kévin), envoyee (Lila), séparés par des virgules"
+        required: false
+        default: "presentateur,invite,envoyee"
+
+permissions:
+  contents: write
+
+jobs:
+  voix:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+      MODAL_TOKEN_ID: ${{ secrets.MODAL_TOKEN_ID }}
+      MODAL_TOKEN_SECRET: ${{ secrets.MODAL_TOKEN_SECRET }}
+      ROLES: ${{ inputs.roles }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Outils
+        run: |
+          sudo apt-get install -y -q ffmpeg || true
+          pip install -r requirements.txt
+      - name: Créer les voix (Voice Design ElevenLabs)
+        run: |
+          set -o pipefail
+          python -u moteur/voix_design.py 2>&1 | tee episodes/voix_design.txt
+      - name: Enregistrer
+        if: always()
+        run: |
+          git config user.name "robot-jt"
+          git config user.email "robot-jt@users.noreply.github.com"
+          git add voix episodes/voix_design.txt
+          git commit -m "Voix sur mesure des personnages" || echo "rien à enregistrer"
+          python moteur/fusion.py

@@ -81,7 +81,7 @@ def application(nom):
 
 # Service worker : l'appli s'ouvre même hors connexion (dernière version de la page), sans jamais mettre en cache
 # les vidéos (trop lourdes) ni les appels à GitHub.
-SW = r"""const CACHE = "regie-v14";
+SW = r"""const CACHE = "regie-v15";
 const COQUILLE = ["./", "manifest.webmanifest", "logo-192.png", "logo-512.png", "poppins-500.ttf", "poppins-700.ttf"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(COQUILLE))); self.skipWaiting(); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(k => Promise.all(k.filter(x => x !== CACHE).map(x => caches.delete(x))))); self.clients.claim(); });
@@ -330,6 +330,10 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
   <section class="panneau"><h2>🎥 Vidéo animée</h2>
     <div class="auto" style="margin-bottom:12px"><div class="txt"><b>Voix ElevenLabs</b><small>Voix réalistes avec rires et coups de colère (abonnement ElevenLabs). Coupé : voix gratuites.</small></div><button class="inter" data-var="ELEVENLABS" data-def="1" data-bascule="1"></button></div>
     <div class="auto"><div class="txt"><b>Décors générés par IA</b><small>Un décor du quotidien par scène, adapté à l'histoire (Stable Diffusion XL, crédits Modal). Coupé : fonds unis pastel.</small></div><button class="inter" data-var="DECORS" data-def="1" data-bascule="1"></button></div>
+      <label>Voix des personnages<select data-var="VOIX_PERSOS" data-def="bibliotheque"><option value="bibliotheque">Voix de la bibliothèque ElevenLabs (actuelles)</option><option value="sur_mesure">🎙️ Voix sur mesure, créées pour Petits.Dramas</option></select></label>
+    <p class="note">Les voix sur mesure sont uniques à la chaîne (Jojo, Kévin et Lila ne ressemblent à aucune autre vidéo TikTok). Elles s'appliquent dès la prochaine vidéo.</p>
+    <label>Prononciation (mots mal lus par les voix)<div class="jeton"><textarea data-var="PRONONCIATION" data-def="" data-texte="1" maxlength="1500" rows="2" placeholder="Ex. : Kévin=Kévinne ; Lidl=Lidle ; OK=okay"></textarea><button class="second" data-enr="PRONONCIATION" style="flex:none;padding:10px 14px">OK</button></div></label>
+    <p class="note">Une règle par « mot=comment il se dit », séparées par « ; ». Les sous-titres gardent l'orthographe normale. Déjà corrigés : POV, PDG, SMS, RER, SNCF, TikTok, wifi, €, %…</p>
   </section>
   <section class="panneau"><h2>📰 Mode JT (ancien format)</h2>
     <label>Durée du JT<select data-var="LONGUEUR" data-def="pro"><option value="pro">60-90 s (rémunérable)</option><option value="courte">Courte (30 s max)</option><option value="monetisable">Long +1 min</option></select></label>

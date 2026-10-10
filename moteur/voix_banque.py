@@ -45,6 +45,26 @@ def sans_tags(t):
     """Retire les indications de jeu entre crochets ([laughs], [sighs]…) : seules les voix ElevenLabs les interprètent."""
     return re.sub(r"\s+", " ", TAGS.sub(" ", t or "")).strip()
 
+# prononciation : mots que les voix lisent mal, réécrits comme ils se disent (les sous-titres, eux, gardent l'orthographe)
+PRONONCIATION = {"POV": "Pi-o-vi", "TikTok": "Tik Tok", "WiFi": "wifi", "Wi-Fi": "wifi", "lol": "lol", "mdr": "mort de rire", "ptdr": "pété de rire",
+                 "PDG": "pé-dé-gé", "SMS": "èssème èsse", "RER": "R-E-R", "SNCF": "S-N-C-F", "CAF": "la caf", "RSA": "R-S-A", "BFM": "B-F-M",
+                 "Netflix": "Nètflix", "Uber": "Ouber", "selfie": "selfi", "€": " euros", "%": " pour cent", "Jojo": "Jojo", "Kévin": "Kévin"}
+
+def prononcer(t):
+    """Applique le dictionaire de prononciation (+ celui de la régie : variable PRONONCIATION « mot=se dit ; … ») hors indications de jeu."""
+    regles = dict(PRONONCIATION)
+    for paire in (os.environ.get("PRONONCIATION") or "").split(";"):
+        if "=" in paire:
+            a, b = (x.strip() for x in paire.split("=", 1))
+            if a and b: regles[a] = b
+    morceaux = re.split(r"(\[[^\]]{1,40}\])", t or "")
+    for k in range(0, len(morceaux), 2):                                   # les [indications] ne sont jamais touchées
+        for a, b in regles.items():
+            if a == b: continue
+            motif = re.escape(a) if not a[0].isalnum() else r"(?<![\w-])" + re.escape(a) + r"(?![\w-])"
+            morceaux[k] = re.sub(motif, b, morceaux[k])
+    return re.sub(r"  +", " ", "".join(morceaux)).strip()
+
 ELEVEN_API = "https://api.elevenlabs.io"
 ELEVEN_MODELE = os.environ.get("ELEVENLABS_MODELE") or "eleven_v4"
 USAGES = ("conversational", "characters_animation", "social_media", "entertainment_tv", "advertisement", "narrative_story")
@@ -403,10 +423,16 @@ def generer(repliques):
     """repliques : [{"p", "t", "d"}]. Renvoie (audios, mots, crédits) ou None si aucune source n'est disponible."""
     fiche = casting()
     if not fiche.get("roles") or not any(fiche["roles"].values()): return None
+    sur_mesure = os.path.join(RACINE, "voix", "voix_persos.json")
+    if (os.environ.get("VOIX_PERSOS") or "") == "sur_mesure" and os.path.exists(sur_mesure):   # voix créées pour la chaîne (Voice Design)
+        for role, vid in json.load(open(sur_mesure, encoding="utf-8")).items():
+            autres = [c for c in fiche["roles"].get(role, []) if c.get("voix") != vid]
+            fiche["roles"][role] = [{"moteur": "elevenlabs", "voix": vid, "nom": "sur mesure"}] + autres
+        journal("  voix sur mesure des personnages")
     tmp = tempfile.mkdtemp(); n = len(repliques)
     audios, mots, utilises = [None] * n, [None] * n, set()
     meilleures = {}                                                        # i -> (sim, clip, mots, moteur) : meilleure prise refusée
-    dits = [r.get("d") or r["t"] for r in repliques]
+    dits = [prononcer(r.get("d") or r["t"]) for r in repliques]
     CONTEXTE.clear()
     for i, d in enumerate(dits):                                           # chaque réplique connaît la phrase d'avant et d'après
         CONTEXTE[d] = (dits[i - 1] if i else "", dits[i + 1] if i + 1 < n else "")
@@ -439,7 +465,7 @@ def generer(repliques):
         for choix in voix_de(role):
             propre = choix["moteur"] in PROPRES; restant = [i for i in idx if audios[i] is None]; ok_role = True
             for tour in range(3):                                          # 1 prise + 2 reprises pour les répliques ratées
-                textes = [repliques[i].get("d") or repliques[i]["t"] for i in restant]
+                textes = [dits[i] for i in restant]
                 brut = synthese(choix, textes); clips = []
                 for i, o in zip(restant, brut):
                     try:
