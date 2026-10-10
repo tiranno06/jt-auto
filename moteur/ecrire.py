@@ -277,7 +277,7 @@ def _decoupage(dec, n):
 
 USAGE = {"appels": 0, "entree": 0, "sortie": 0, "recherches_web": 0}                          # suivi du budget (jetons consommés)
 
-def _appel(client, systeme, messages, outil=OUTIL, web=False, max_tokens=6000):
+def _appel(client, systeme, messages, outil=OUTIL, web=False, max_tokens=12000):
     """Appel Claude ; renvoie l'entrée de l'outil demandé (ou un JSON trouvé dans le texte). Recherche web si possible."""
     outils = [outil] + ([RECHERCHE_WEB] if web else [])
     kw = dict(model=MODELE, max_tokens=max_tokens, messages=messages, tools=outils, tool_choice={"type": "auto"})
@@ -298,6 +298,8 @@ def _appel(client, systeme, messages, outil=OUTIL, web=False, max_tokens=6000):
         if not web: raise
         print(f"Recherche web indisponible ({str(e)[:120]}) : vérification sur les seuls articles fournis.", flush=True)
         return _appel(client, systeme, messages, outil, False, max_tokens)
+    if getattr(r, "stop_reason", "") == "max_tokens":
+        print(f"  réponse coupée (limite de {max_tokens} jetons atteinte) pour {outil['name']}", flush=True)
     brut = "".join(getattr(b, "text", "") or "" for b in r.content if getattr(b, "type", "") == "text")
     for b in r.content:
         if getattr(b, "type", "") == "tool_use" and getattr(b, "name", "") == outil["name"]:
