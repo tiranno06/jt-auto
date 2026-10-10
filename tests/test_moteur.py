@@ -134,7 +134,7 @@ class TestEcriture(unittest.TestCase):
         ecrire.chute_sur_sujet(sk, titres)                                     # vérité sur le sujet : acceptée
 
     def test_exemple_finit_sur_la_verite(self):
-        self.assertIn("En clair", ecrire.EXEMPLE["repliques"][-1]["t"])
+        self.assertTrue(ecrire.EXEMPLE["repliques"][-1]["t"].startswith("Rassurez-vous"))
         self.assertNotIn("rappel à la fin (le plombier)", ecrire.TONS["clash"])
 
     def test_articles_hors_sujet_retires(self):
@@ -156,7 +156,7 @@ class FauxClaude:
     """Simule l'API : choix du candidat 1, puis sketch noté 60 (réécriture demandée) puis 86."""
     def __init__(self, web_en_panne=False, critique_vide=False, sources=("L1",)):
         self.notes = [60, 86]; self.appels = []; self.web_en_panne = web_en_panne; self.choix = 1; self.prompts = []
-        self.critique_vide = critique_vide; self.sources = list(sources); self.reecritures = []; self.sans_total = False; self.chute_fausse = False
+        self.critique_vide = critique_vide; self.sources = list(sources); self.reecritures = []; self.sans_total = False; self.chute_fausse = False; self.metaphore = False
         self.messages = self
 
     def create(self, **kw):
@@ -168,7 +168,7 @@ class FauxClaude:
             n = self.notes.pop(0)
             if self.sans_total:                                              # 1re fois : total oublié et sous-notes incomplètes
                 self.sans_total = False; self.notes.insert(0, n); out = {"critique": "x" * 50, "originalite": 15}
-            else: out = {"total": n, "chute_vraie": not self.chute_fausse, "critique": "" if self.critique_vide else "chute trop faible"}
+            else: out = {"total": n, "chute_vraie": not self.chute_fausse, "metaphore_filee": self.metaphore, "critique": "" if self.critique_vide else "chute trop faible"}
             if self.critique_vide and not self.sans_total:                                            # critique écrite hors de l'outil
                 return types.SimpleNamespace(content=[types.SimpleNamespace(type="text", text="Réplique 3 trop plate."),
                                                       types.SimpleNamespace(type="tool_use", name="noter_sketch", input=out)],
@@ -219,6 +219,12 @@ class TestMoteurHumour(unittest.TestCase):
         sk = ecrire.ecrire_sketch(cands, essais=1)
         self.assertEqual(sk["fiche"]["note"], 70)                             # 90 mais chute hors sujet : plafonné, donc pas publié
         self.assertEqual(sk["fiche"]["decision"], "à retravailler")
+
+    def test_metaphore_filee_plafonnee(self):
+        faux = FauxClaude(); faux.notes = [90, 90, 90, 90, 90, 90]; faux.metaphore = True
+        sys.modules["anthropic"] = types.SimpleNamespace(Anthropic=lambda: faux)
+        cands = [[article("Budget 2027 : les économies rejetées", "a", "L1"), article("Budget : les députés et les économies", "b", "L2")]]
+        self.assertEqual(ecrire.ecrire_sketch(cands, essais=1)["fiche"]["note"], 70)
 
     def test_variable_reecritures_vide(self):
         os.environ["MAX_REECRITURES"] = ""
