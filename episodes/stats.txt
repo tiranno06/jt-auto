@@ -1,11 +1,3 @@
-Traceback (most recent call last):
-  File "/home/runner/work/jt-auto/jt-auto/moteur/stats.py", line 144, in <module>
-    ok = collecter()
-         ^^^^^^^^^^^
-  File "/home/runner/work/jt-auto/jt-auto/moteur/stats.py", line 53, in collecter
-    videos = _videos_ytdlp(nom)
-             ^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/jt-auto/jt-auto/moteur/stats.py", line 38, in _videos_ytdlp
-    try: entrees = json.loads(r.stdout or "{}").get("entries") or []
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'NoneType' object has no attribute 'get'
+Stats @petitsdramas : aucune vidéo publiée pour l'instant (normal pour un compte neuf).
+Pas encore assez de vidéos reliées pour en tirer des leçons.
+Meilleure heure de fabrication : 17 h
