@@ -27,18 +27,53 @@ def _vers_mono(src, dst):
 def lien_valide(url):
     return bool(re.match(r"^https?://([a-z0-9-]+\.)*tiktok\.com/\S+$", (url or "").strip(), re.I))
 
+VARIANTES = (["--impersonate", "chrome"], ["--extractor-args", "tiktok:api_hostname=api16-normal-c-useast1a.tiktokv.com"], [])
+
+def _ytdlp(url, tmp):
+    """yt-dlp, en imitant un vrai navigateur puis par l'API de l'appli TikTok (la page web bloque souvent les serveurs) -> (infos, fichier)."""
+    import sys
+    err = ""
+    for v in VARIANTES:
+        for f in os.listdir(tmp):
+            if f.startswith("src."): os.remove(f"{tmp}/{f}")
+        r = subprocess.run([sys.executable, "-m", "yt_dlp", "--no-playlist", "--no-warnings", "--socket-timeout", "30", *v, "-f", "bestaudio/best",
+                            "-o", f"{tmp}/src.%(ext)s", "-j", "--no-simulate", url], capture_output=True, text=True, timeout=600)
+        src = next((f"{tmp}/{f}" for f in os.listdir(tmp) if f.startswith("src.") and not f.endswith(".part")), None)
+        if r.returncode == 0 and src:
+            journal(f"  son téléchargé (yt-dlp {' '.join(v) or 'standard'})")
+            return json.loads(r.stdout.strip().splitlines()[-1]), src
+        err = (r.stderr or "").strip()[-200:]; journal(f"  yt-dlp {' '.join(v) or 'standard'} : échec ({err[:120]})")
+    return None, err
+
+def _tikwm(url, tmp):
+    """Dernier recours : service public tikwm.com (lien direct du fichier de la vidéo)."""
+    import urllib.parse, urllib.request
+    ua = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36"}
+    req = urllib.request.Request("https://www.tikwm.com/api/?" + urllib.parse.urlencode({"url": url, "hd": "0"}), headers=ua)
+    d = (json.loads(urllib.request.urlopen(req, timeout=60).read()) or {}).get("data") or {}
+    lien = d.get("play") or d.get("wmplay")
+    if not lien: raise RuntimeError("tikwm : vidéo introuvable")
+    if lien.startswith("/"): lien = "https://www.tikwm.com" + lien
+    open(f"{tmp}/src.mp4", "wb").write(urllib.request.urlopen(urllib.request.Request(lien, headers=ua), timeout=300).read())
+    a = d.get("author") or {}
+    journal("  son téléchargé (tikwm)")
+    return {"uploader": a.get("unique_id"), "channel": a.get("nickname"), "duration": d.get("duration"), "webpage_url": url}, f"{tmp}/src.mp4"
+
 def telecharger(url, tmp):
-    """Son de la vidéo -> (infos yt-dlp, piste stéréo 44,1 kHz pour le montage, piste mono 22 kHz pour l'analyse)."""
+    """Son de la vidéo -> (infos, piste stéréo 44,1 kHz pour le montage, piste mono 22 kHz pour l'analyse)."""
+    url = (url or "").strip()
     if not lien_valide(url): raise RuntimeError("il faut un lien de vidéo TikTok (https://www.tiktok.com/@compte/video/… ou https://vm.tiktok.com/…)")
-    r = subprocess.run(["yt-dlp", "--no-playlist", "--no-warnings", "-f", "bestaudio/best", "-o", f"{tmp}/src.%(ext)s", "-j", "--no-simulate", url.strip()],
-                       capture_output=True, text=True, timeout=600)
-    if r.returncode: raise RuntimeError("téléchargement impossible (vidéo privée, supprimée ou lien incorrect) : " + r.stderr.strip()[-300:])
-    info = json.loads(r.stdout.strip().splitlines()[-1])
-    src = next(f"{tmp}/{f}" for f in os.listdir(tmp) if f.startswith("src."))
+    info, src = _ytdlp(url, tmp)
+    if info is None:
+        err = src
+        try: info, src = _tikwm(url, tmp)
+        except Exception as e:
+            raise RuntimeError(f"téléchargement impossible (vidéo privée, supprimée, lien incorrect ou TikTok bloque le serveur) : {err[:200]} / {str(e)[:150]}")
     if float(info.get("duration") or 0) > DUREE_MAX: raise RuntimeError(f"vidéo trop longue ({info.get('duration')} s, {DUREE_MAX} s au plus)")
     piste = f"{tmp}/piste.wav"
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", src, "-vn", "-ac", "2", "-ar", str(SRM), piste], check=True)
     mono = _vers_mono(piste, f"{tmp}/mono.wav")
+    if len(mono) / SR > DUREE_MAX + 5: raise RuntimeError(f"vidéo trop longue ({len(mono) / SR:.0f} s, {DUREE_MAX} s au plus)")
     if np.abs(mono).max() < 0.01: raise RuntimeError("la vidéo n'a pas de son")
     return info, piste, mono
 
