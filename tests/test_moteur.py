@@ -153,9 +153,9 @@ class TestEcriture(unittest.TestCase):
 
 
 class FauxClaude:
-    """Simule l'API : choix du candidat 1, puis sketch noté 60 (réécriture demandée) puis 86."""
+    """Simule l'API : choix du candidat 1, puis sketch noté 60 (réécriture demandée) puis 92."""
     def __init__(self, web_en_panne=False, critique_vide=False, sources=("L1",)):
-        self.notes = [60, 86]; self.appels = []; self.web_en_panne = web_en_panne; self.choix = 1; self.prompts = []
+        self.notes = [60, 92]; self.appels = []; self.web_en_panne = web_en_panne; self.choix = 1; self.prompts = []
         self.critique_vide = critique_vide; self.sources = list(sources); self.reecritures = []; self.sans_total = False; self.chute_fausse = False; self.metaphore = False
         self.messages = self
 
@@ -195,7 +195,7 @@ class TestMoteurHumour(unittest.TestCase):
 
     def test_selection_qualite_reecriture(self):
         faux = FauxClaude(); sk = self._lancer(faux)
-        self.assertEqual(sk["fiche"]["note"], 86)
+        self.assertEqual(sk["fiche"]["note"], 92)
         self.assertEqual(sk["fiche"]["decision"], "prêt pour production")
         self.assertEqual(sk["sources"], ["L1"])                               # c'est bien le candidat choisi (index 1)
         ecritures = [a for a in faux.appels if a and a[0] == "rendre_sketch"]
@@ -215,7 +215,7 @@ class TestMoteurHumour(unittest.TestCase):
         sys.modules["anthropic"] = types.SimpleNamespace(Anthropic=lambda: faux)
         cands = [[article("Budget 2027 : les économies rejetées", "a", "L1"), article("Budget : les députés et les économies", "b", "L2")]]
         sk = ecrire.ecrire_sketch(cands, essais=3)
-        self.assertEqual(sk["fiche"]["note"], 86)                             # sous-notes incomplètes : pas de 0/100 arbitraire
+        self.assertEqual(sk["fiche"]["note"], 92)                             # sous-notes incomplètes : pas de 0/100 arbitraire
 
     def test_chute_hors_sujet_plafonnee(self):
         faux = FauxClaude(); faux.notes = [90, 90, 90, 90, 90, 90]; faux.chute_fausse = True
@@ -231,12 +231,20 @@ class TestMoteurHumour(unittest.TestCase):
         cands = [[article("Budget 2027 : les économies rejetées", "a", "L1"), article("Budget : les députés et les économies", "b", "L2")]]
         self.assertEqual(ecrire.ecrire_sketch(cands, essais=1)["fiche"]["note"], 70)
 
+    def test_retouche_repart_de_la_meilleure_version(self):
+        faux = FauxClaude(); faux.notes = [75, 60, 92]
+        sk = self._lancer(faux)
+        self.assertEqual(sk["fiche"]["note"], 92)
+        self.assertIn("obtenu 75/100", faux.reecritures[2])                   # après la baisse à 60, on retouche la version à 75
+        self.assertIn("objectif : au moins 90", faux.reecritures[2])
+        self.assertIn("Réserve de vannes", faux.reecritures[2])
+
     def test_variable_reecritures_vide(self):
         os.environ["MAX_REECRITURES"] = ""
         try:
             sys.modules["anthropic"] = types.SimpleNamespace(Anthropic=lambda: FauxClaude())
             cands = [[article("Budget 2027 : les économies rejetées", "a", "L1"), article("Budget : les députés et les économies", "b", "L2")]] * 2
-            self.assertEqual(ecrire.ecrire_sketch(cands)["fiche"]["note"], 86)    # variable vide : 3 réécritures par défaut, pas de plantage
+            self.assertEqual(ecrire.ecrire_sketch(cands)["fiche"]["note"], 92)    # variable vide : 4 retouches par défaut, pas de plantage
         finally: os.environ.pop("MAX_REECRITURES")
 
     def test_atelier_et_jury_nourrissent_l_ecriture(self):
@@ -273,7 +281,7 @@ class TestMoteurHumour(unittest.TestCase):
 
     def test_recherche_web_indisponible(self):
         faux = FauxClaude(web_en_panne=True); sk = self._lancer(faux)
-        self.assertEqual(sk["fiche"]["note"], 86)                             # repli sans recherche web, sans planter
+        self.assertEqual(sk["fiche"]["note"], 92)                             # repli sans recherche web, sans planter
 
 
 class TestVoix(unittest.TestCase):

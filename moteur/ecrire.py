@@ -1,7 +1,7 @@
 """Moteur humoristique : écriture du sketch du jour par Claude (API Anthropic).
 Les consignes d'auteur sont dans moteur/prompts/moteur_humour.md (moteur de satire professionnel fourni par l'utilisateur).
 Étapes : 1) sélection du sujet parmi plusieurs candidats notés sur 10 (avec vérification web si disponible) et choix de l'angle ;
-2) écriture ; 3) contrôle qualité noté sur 100, jusqu'à 3 réécritures si < 80, puis changement de sujet si le sketch reste faible."""
+2) écriture ; 3) contrôle qualité noté sur 100, jusqu'à 4 retouches si la note est sous le seuil (90 par défaut), puis changement de sujet si le sketch reste faible."""
 import json, os, re, unicodedata
 ICI = os.path.dirname(os.path.abspath(__file__))
 MOTEUR_HUMOUR = open(os.path.join(ICI, "prompts", "moteur_humour.md"), encoding="utf-8").read()
@@ -149,8 +149,9 @@ EXIGENCES DU PROPRIÉTAIRE :
 2. Aucune métaphore filée : le sketch parle du sujet lui-même. S'il transpose l'actualité dans un autre univers (jeu, restaurant, sport…) ou file une image sur plusieurs répliques (« metaphore_filee » = true), la note est plafonnée à 70.
 Rends la note avec l'outil noter_sketch. Le champ "critique" est OBLIGATOIRE et non vide : cite les répliques faibles (numéro + pourquoi) et propose ce qu'il faut changer."""
 
-REECRITURE = """Ton sketch a obtenu {note}/100 (seuil : 80). Critique du relecteur :
+REECRITURE = """Ton sketch a obtenu {note}/100 (objectif : au moins {seuil}). Critique du relecteur :
 {critique}
+{reserve}
 RETOUCHE CIBLÉE, comme un punch-up de salle d'auteurs : GARDE telles quelles les répliques qui fonctionnent et la chute si elle n'est pas critiquée. Remplace chaque réplique critiquée par une meilleure vanne (pioche dans les munitions du jury si elles conviennent), supprime les répliques de remplissage. Chute en fausse vérité ironique sur le sujet principal, aucune métaphore filée. Mêmes faits, mêmes règles. Rends le sketch complet avec l'outil rendre_sketch."""
 
 TECHNIQUE_PUNCHLINE = """TECHNIQUE D'UNE PUNCHLINE QUI FAIT HURLER DE RIRE :
@@ -394,6 +395,8 @@ def pertinents(titres):
 def _bloc_candidat(k, titres):
     return f"[{k}] " + "\n    ".join(f"- [{t['source']}] {t['titre']} — {t['resume'][:220]} ({t['lien']})" for t in titres[:5])
 
+try: SEUIL = max(50, min(98, int(os.environ.get("SEUIL_QUALITE") or 90)))   # note minimale pour « prêt pour production »
+except ValueError: SEUIL = 90
 TOP = 3                                                                  # le sujet est pris parmi les 3 plus gros titres du jour
 
 def atelier(client, systeme, titres, contexte=""):
@@ -415,12 +418,17 @@ def atelier(client, systeme, titres, contexte=""):
         chute = str(j.get("chute_affutee") or "").strip() or chutes[i]
         note_chute = nc[i] if i < len(nc) else 0.0
         meilleures = [vannes[k] for k in j.get("meilleures_vannes", []) if isinstance(k, int) and 0 <= k < len(vannes)][:6]
+        nv = j.get("notes_vannes", [])
+        classees = sorted(range(len(vannes)), key=lambda k: -(nv[k] if k < len(nv) and isinstance(nv[k], (int, float)) else 0))
+        reserve = [vannes[k] for k in classees if vannes[k] not in meilleures][:6]
+        autres_chutes = [c for k, c in sorted(enumerate(chutes), key=lambda x: -(nc[x[0]] if x[0] < len(nc) else 0)) if k != i][:3]
         print(f"  atelier : {len(vannes)} vannes, {len(chutes)} chutes ; chute retenue par le jury ({note_chute:.0f}/10) : {chute[:160]}", flush=True)
-        return "\n".join(f"- {v}" for v in meilleures), chute, note_chute
+        return "\n".join(f"- {v}" for v in meilleures), chute, note_chute, \
+            "\n".join([f"- {v}" for v in reserve] + [f"- (chute de rechange) {c}" for c in autres_chutes])
     except Exception as e:
         if _bloquant(e): raise
         print(f"  atelier de vannes impossible ({str(e)[:120]}) : écriture directe.", flush=True)
-        return "", "", 0.0
+        return "", "", 0.0, ""
 
 def _bloquant(e):
     """Erreurs qui ne se règlent pas en réessayant : crédit épuisé, clé invalide, accès refusé."""
@@ -436,8 +444,8 @@ def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=()):
     gtxt = " ; ".join(g for g in gags if g)[:600] or "(aucun pour l'instant)"
     rtxt = " ; ".join(r for r in recents if r)[:1500] or "(aucun)"
     if essais is None:
-        try: essais = max(0, min(5, int(os.environ.get("MAX_REECRITURES") or 3)))   # variable vide ou invalide : 3
-        except ValueError: essais = 3
+        try: essais = max(0, min(6, int(os.environ.get("MAX_REECRITURES") or 4)))   # variable vide ou invalide : 4
+        except ValueError: essais = 4
     systeme = MOTEUR_HUMOUR + ADAPTATION.format(cast="\n".join(f"- {k} : {v}" for k, v in CAST.items()), ton=TON, secondes=SECONDES, nb=NB,
                                                  mots=MOTS, mots_min=MOTS_MIN or 40, special=SPECIAL_DEMAIN if special else "", gags=gtxt, recents=rtxt,
                                                  looks="|".join(LOOKS), top=TOP, exemple=json.dumps(EXEMPLE, ensure_ascii=False, indent=0))
@@ -466,7 +474,7 @@ def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=()):
         contexte = ((f"Angle retenu : {angle}\n" if rang == 0 and angle else "") +
                     (f"Vérité du sujet : {verite}\n" if rang == 0 and verite else "") +
                     (f"Faits vérifiés : " + " ; ".join(verifs) if rang == 0 and verifs else ""))
-        munitions, chute_jury, _ = atelier(client, systeme, titres, contexte)
+        munitions, chute_jury, _, reserve = atelier(client, systeme, titres, contexte)
         msg = (f"SUJET CHOISI : « {titres[0]['titre']} »\nArticles :\n" + _bloc_candidat(0, titres) + "\n" + contexte +
                (f"\nMUNITIONS — les vannes qui ont le plus fait rire le jury (place-les, presque telles quelles, aux bons endroits) :\n{munitions}" if munitions else "") +
                (f"\nCHUTE IMPOSÉE — dernière réplique, mot pour mot (tu peux seulement l'adapter au personnage qui la dit) : « {chute_jury} »" if chute_jury
@@ -474,7 +482,7 @@ def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=()):
                "\n" + TECHNIQUE_PUNCHLINE +
                "\nDENSITÉ : chaque réplique est une vanne ou une relance de moins de 8 mots qui prépare une vanne ; aucune réplique de remplissage." +
                "\n\nÉcris le sketch sur CE sujet uniquement (étapes 4 à 9).")
-        conv = [{"role": "user", "content": msg}]; sk = None; derniere = None; brut = {}
+        conv = [{"role": "user", "content": msg}]; sk = None; derniere = None; brut = {}; record = None   # record : meilleure version de CE sujet
         for tour in range(1 + (essais if rang == 0 else min(1, essais))):   # écriture puis jusqu'à 3 réécritures (1 pour le sujet de secours)
             try:
                 brut = _appel(client, systeme, conv)
@@ -518,13 +526,17 @@ def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=()):
             for k2 in ("concept", "format", "angle"):                       # la note F vient du relecteur, jamais de l'auteur
                 if isinstance(sk["fiche"].get(k2), str):
                     sk["fiche"][k2] = re.sub(r"\s*(Note qualit[ée]|Décision|Decision)\b.*$", "", sk["fiche"][k2], flags=re.S | re.I).strip()
-            sk["fiche"].update(verification_web=USAGE["recherches_web"] > 0, note=note, critique=critique[:1500], decision="prêt pour production" if note >= 80 else "à retravailler")
+            sk["fiche"].update(verification_web=USAGE["recherches_web"] > 0, note=note, critique=critique[:1500], decision="prêt pour production" if note >= SEUIL else "à retravailler")
             if meilleur is None or note > meilleur["fiche"]["note"]: meilleur = sk
-            if note >= 80: return sk
-            conv = conv + [{"role": "assistant", "content": json.dumps(brut, ensure_ascii=False)[:8000]},
-                           {"role": "user", "content": REECRITURE.format(note=round(note), critique=critique[:2000])}]
+            if note >= SEUIL: return sk
+            if record is None or note > record[1]: record = (brut, note, critique)
+            elif tour: print(f"  pas de progrès : on repart de la meilleure version ({record[1]:.0f}/100)", flush=True)
+            b_brut, b_note, b_crit = record                                 # on retouche toujours la meilleure version, jamais une moins bonne
+            conv = [{"role": "user", "content": msg}, {"role": "assistant", "content": json.dumps(b_brut, ensure_ascii=False)[:8000]},
+                    {"role": "user", "content": REECRITURE.format(note=round(b_note), seuil=SEUIL, critique=b_crit[:2000],
+                                                                  reserve=f"Réserve de vannes et de chutes validées par le jury :\n{reserve}" if reserve else "")}]
         if derniere is not None and _bloquant(derniere): break
         print(f"  sujet trop faible après réécritures{' : on essaie un autre sujet' if rang == 0 and len(ordre) > 1 else ''}", flush=True)
     if meilleur is None: raise RuntimeError(f"aucun sketch exploitable : {derniere}")
-    print(f"  meilleure version retenue : {meilleur['fiche']['note']:.0f}/100 (à retravailler)", flush=True)
+    print(f"  meilleure version retenue : {meilleur['fiche']['note']:.0f}/100 (sous l'objectif de {SEUIL} : à retravailler, pas de publication automatique)", flush=True)
     return meilleur
