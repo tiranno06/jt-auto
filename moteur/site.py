@@ -197,13 +197,14 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <label>Nom de l'émission<div class="jeton"><input data-var="NOM_EMISSION" data-def="L'info en caoutchouc" data-texte="1" maxlength="30"><button class="second" data-enr="NOM_EMISSION" style="flex:none;padding:10px 14px">OK</button></div></label>
   </section>
   <section class="panneau"><h2>🎥 Vidéo</h2>
-    <label>Type de vidéo (émissions automatiques)<select data-var="FORMAT" data-def="libre"><option value="actu">📰 Actu du jour (sketch sur un gros titre)</option><option value="libre">🎭 Sketch libre (situation du quotidien, sans actualité)</option><option value="alterne">🔁 Alterner : un jour actu, un jour libre</option></select></label>
+    <label>Type de vidéo (émissions automatiques)<select data-var="FORMAT" data-def="libre"><option value="actu">📰 Actu du jour (sketch sur un gros titre)</option><option value="libre">🎭 Sketch libre (situation du quotidien, sans actualité)</option><option value="mini">⚡ Gag éclair (8 à 20 s, style mini)</option><option value="alterne">🔁 Alterner : un jour actu, un jour libre</option></select></label>
     <div class="auto" style="margin-bottom:12px"><div class="txt"><b>« Les infos de demain » le dimanche</b><small>Épisode spécial hebdomadaire : fausses brèves du futur sur le sujet de la semaine (le format qui a fait 586 000 vues).</small></div><button class="inter" data-var="INFOS_DEMAIN" data-def="1" data-bascule="1"></button></div>
     <div class="auto"><div class="txt"><b>Plan gag généré par IA</b><small>Un plan « reconstitution » Wan 2.2 par vidéo. À couper si les crédits Modal fondent.</small></div><button class="inter" data-var="PLAN_GAG" data-def="1" data-bascule="1"></button></div>
   </section>
   <section class="panneau"><h2>🚀 Actions</h2>
     <button class="action" id="lancer">📰 Fabriquer une émission actu maintenant</button>
     <button class="action" id="lancerLibre">🎭 Fabriquer un sketch libre maintenant</button>
+    <button class="action" id="lancerMini">⚡ Fabriquer un gag éclair maintenant</button>
     <button class="action" id="majsite">🔄 Mettre à jour l'application</button>
     <div id="suiviCfg" class="note"></div>
   </section>
@@ -427,6 +428,7 @@ async function lancerFlux(fichier,bouton,texte,inputs){
   bouton.disabled=false;
 }
 $("#lancer").onclick=()=>lancerFlux("emission.yml",$("#lancer"),"🎬 Le robot fabrique une émission actu (20 à 40 min)…",{format:"actu"});
+$("#lancerMini").onclick=()=>lancerFlux("emission.yml",$("#lancerMini"),"⚡ Le robot fabrique un gag éclair (15 à 30 min)…",{format:"mini"});
 $("#lancerLibre").onclick=()=>lancerFlux("emission.yml",$("#lancerLibre"),"🎭 Le robot fabrique un sketch libre (20 à 40 min)…",{format:"libre"});
 $("#majsite").onclick=()=>lancerFlux("site.yml",$("#majsite"),"🔄 Mise à jour de l'application (2 à 3 min)…");
 activer(false);

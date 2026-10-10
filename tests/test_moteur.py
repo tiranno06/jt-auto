@@ -300,6 +300,18 @@ class TestMoteurHumour(unittest.TestCase):
         self.assertEqual(sk["fiche"]["note"], 92)                             # repli sans recherche web, sans planter
 
 
+class TestGagEclair(unittest.TestCase):
+    def test_format_mini(self):
+        import subprocess
+        code = ("import os,sys; sys.path.insert(0,'moteur'); os.environ['LONGUEUR']='eclair'; import ecrire; "
+                "print(ecrire.MINI, ecrire.SECONDES, ecrire.MOTS, 'GAG ÉCLAIR' in ecrire.STYLE_LIBRE); "
+                "sk=ecrire.valider({'sujet':'x','repliques':[{'p':'invite','t':'Mon compte.'},{'p':'invite','t':'[cries] Non.'},{'p':'envoyee','t':'Petit plaisir !'}]}, set()); "
+                "print(len(sk['repliques']))")
+        r = subprocess.run([sys.executable, "-c", code], capture_output=True, text=True, env=dict(os.environ, FORMAT="mini"),
+                           cwd=os.path.join(ICI, ".."))
+        self.assertEqual(r.stdout.split(), ["True", "8", "à", "20", "45", "True", "3"], r.stderr[-500:])
+
+
 class TestVoix(unittest.TestCase):
     def test_nombres(self):
         self.assertEqual(voix_banque.en_lettres(3000), "trois mille")

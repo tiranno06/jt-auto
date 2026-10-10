@@ -10,7 +10,7 @@ on:
         required: false
         default: ""
       format:
-        description: "Type de vidéo : actu (gros titre du jour) ou libre (situation du quotidien). Vide = réglage de la régie."
+        description: "Type de vidéo : actu (gros titre du jour), libre (situation du quotidien) ou mini (gag éclair). Vide = réglage de la régie."
         required: false
         default: ""
 
