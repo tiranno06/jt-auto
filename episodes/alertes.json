@@ -22,5 +22,11 @@
   "titre": "⚠️ Échec de fabrication",
   "texte": "    if r.returncode: raise RuntimeError(\"téléchargement impossible (vidéo privée, supprimée ou lien incorrect) : \" + r.stderr.strip()[-300:])\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: té",
   "lien": ""
+ },
+ {
+  "quand": "2026-10-10T20:18+00:00",
+  "titre": "🎬 Nouvelle vidéo prête",
+  "texte": "« QUAND TU CLIQUES, MOT DE PASSE » — note 0/100. À vérifier dans l'appli.",
+  "lien": ""
  }
 ]

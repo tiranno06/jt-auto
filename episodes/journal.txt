@@ -1,16 +1,20 @@
 Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Vidéo depuis TikTok : https://www.tiktok.com/@petitsdramas/video/7695069178738314529
-Traceback (most recent call last):
-  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 315, in <module>
-    main()
-  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 159, in main
-    sk, *DOUB = doublage.preparer(tiktok)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/jt-auto/jt-auto/moteur/doublage.py", line 149, in preparer
-    info, piste, mono = telecharger(url, tmp)
-                        ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/jt-auto/jt-auto/moteur/doublage.py", line 35, in telecharger
-    if r.returncode: raise RuntimeError("téléchargement impossible (vidéo privée, supprimée ou lien incorrect) : " + r.stderr.strip()[-300:])
-                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-RuntimeError: téléchargement impossible (vidéo privée, supprimée ou lien incorrect) : ERROR: [TikTok] 7695069178738314529: Unexpected response from webpage request; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+  son téléchargé (yt-dlp --impersonate chrome)
+  son récupéré : 23.2 s, compte d'origine @petitsdramas
+  isolation des voix impossible (No module named 'httpx') : son complet utilisé
+  transcription ElevenLabs impossible (No module named 'httpx') : Whisper
+  4 répliques, voix : {'speaker_0': 227}
+  mise en scène automatique impossible (Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API.) : une seule scène, casting par la hauteur des voix
+  casting : speaker_0 → Lila
+Sketch : « QUAND TU CLIQUES, MOT DE PASSE », 4 répliques
+  décor 0 : cozy living room, sofa, coffee table, lamp
+cartoon : durée 25.7 s, 4 répliques, 1 scène(s), personnages ['envoyee']
+  image 0/769
+  image 300/769
+  image 600/769
+Contrôle vidéo impossible (Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anth) : non bloquant.
+Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 0, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 35}
+OK : sortie/2026-10-10_22h17_emission.mp4 (26 s)
