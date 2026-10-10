@@ -660,7 +660,10 @@ def mettre_en_scene(texte):
     brut["repliques"][-1]["chute"] = True
     narr = [r for r in brut["repliques"] if r["p"] == "narrateur"]
     for r in narr: r["p"] = "presentateur"                                 # la voix off n'est ajoutée que par le robot (titre)
-    sk = valider(brut, set(), libre=True, minimum=2)
+    global NB_MAX
+    garde, NB_MAX = NB_MAX, 16                                             # script de l'auteur : aucune réplique supprimée
+    try: sk = valider(brut, set(), libre=True, minimum=2)
+    finally: NB_MAX = garde
     sk["fiche"] = {"note": 0, "decision": "vidéo manuelle (script imposé)", "decoupage": sk["decoupage"]}
     print(f"  script mis en scène : {len(sk['repliques'])} répliques, {len(sk['decoupage'])} scène(s)", flush=True)
     return sk
