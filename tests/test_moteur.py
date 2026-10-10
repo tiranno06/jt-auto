@@ -267,7 +267,7 @@ class TestMoteurHumour(unittest.TestCase):
         self.assertIn("économies", idees[1][0]["titre"])
         sk = ecrire.ecrire_sketch(idees, essais=3, libre=True)
         self.assertFalse(any("web_search" in a for a in faux.appels))          # pas de recherche web en sketch libre
-        self.assertTrue(any("MODE « SKETCH LIBRE »" in (x or "") for x in faux.systemes))
+        self.assertTrue(any("MODE « SKETCH LIBRE »" in (x or "") and "FICHE DE STYLE" in x for x in faux.systemes))
         self.assertEqual(sk["sources"], [])                                    # aucune source inventée
         self.assertEqual(sk["fiche"]["note"], 92)
 

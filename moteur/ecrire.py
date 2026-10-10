@@ -4,6 +4,7 @@ Les consignes d'auteur sont dans moteur/prompts/moteur_humour.md (moteur de sati
 2) écriture ; 3) contrôle qualité noté sur 100, jusqu'à 4 retouches si la note est sous le seuil (90 par défaut), puis changement de sujet si le sketch reste faible."""
 import json, os, re, unicodedata
 ICI = os.path.dirname(os.path.abspath(__file__))
+STYLE_LIBRE = open(os.path.join(ICI, "prompts", "style_libre.md"), encoding="utf-8").read()
 MOTEUR_HUMOUR = open(os.path.join(ICI, "prompts", "moteur_humour.md"), encoding="utf-8").read()
 
 MODELE = os.environ.get("MODELE_CLAUDE") or "claude-opus-5-5"          # Opus : humour plus fin (réglable dans l'appli)
@@ -197,9 +198,14 @@ Aujourd'hui, PAS D'ACTUALITÉ : ignore les étapes de recherche, de vérificatio
 - Aucune personne réelle, aucune marque, aucune actualité.
 - "faits_reels" : liste vide ; "inventions" : tout ; "sources" : liste vide ; "resume_factuel" : une phrase qui résume la situation.
 - La chute : une punchline qui retourne toute la situation (fausse vérité ironique, aveu involontaire, retournement) ; même exigence de mot qui tue à la fin.
-- Anti-répétition : ne reprends aucune situation de la liste des épisodes récents."""
+- Anti-répétition : ne reprends aucune situation de la liste des épisodes récents.
+- "titre_accroche" : le titre affiché en haut de l'écran, au format « POV : … » ou « Quand … » (40 caractères max).
 
-IDEES = """Propose 8 situations du quotidien pour un sketch animé de {secondes} secondes : chacune vécue par presque tout le monde, avec un vrai potentiel de vanne (frustration universelle, hypocrisie sociale, petite humiliation, absurdité d'une règle). Variées (pas deux fois le même thème).
+{style}"""
+
+IDEES = """Propose 8 situations du quotidien pour un sketch animé de {secondes} secondes : chacune vécue par presque tout le monde, avec un vrai potentiel de vanne (frustration universelle, hypocrisie sociale, petite humiliation, absurdité d'une règle). Variées (pas deux fois le même thème), et chacune construite sur une des mécaniques de la fiche de style ci-dessous (dis laquelle dans la description). Titre au format « POV : … » ou « Quand … ».
+
+{style}
 Déjà traitées récemment, à NE PAS reprendre : {recents}
 Pour chacune : un titre court et une description de 2 phrases qui dit ce qui est drôle. Rends-les avec l'outil proposer_idees."""
 
@@ -465,7 +471,7 @@ def idees_libres(recents=(), n=6):
     import anthropic
     client = anthropic.Anthropic()
     rtxt = " ; ".join(r for r in recents if r)[:1500] or "(aucune)"
-    r = _appel(client, None, [{"role": "user", "content": IDEES.format(secondes=SECONDES, recents=rtxt)}], OUTIL_IDEES, max_tokens=3000)
+    r = _appel(client, None, [{"role": "user", "content": IDEES.format(secondes=SECONDES, recents=rtxt, style=STYLE_LIBRE)}], OUTIL_IDEES, max_tokens=3000)
     out = []
     for i in r.get("idees", []):
         if isinstance(i, dict) and str(i.get("titre", "")).strip():
@@ -491,7 +497,7 @@ def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=(), li
     systeme = MOTEUR_HUMOUR + ADAPTATION.format(cast="\n".join(f"- {k} : {v}" for k, v in CAST.items()), ton=TON, secondes=SECONDES, nb=NB,
                                                  mots=MOTS, mots_min=MOTS_MIN or 40, special=SPECIAL_DEMAIN if special else "", gags=gtxt, recents=rtxt,
                                                  looks="|".join(LOOKS), top=TOP, exemple=json.dumps(EXEMPLE, ensure_ascii=False, indent=0))
-    if libre: systeme += LIBRE
+    if libre: systeme += LIBRE.replace("{style}", STYLE_LIBRE)
     top = len(candidats) if libre else TOP                                # sketch libre : toutes les idées sont éligibles
     # 1) sélection du sujet et de l'angle
     ordre, angle, verifs, verite = list(range(len(candidats))), "", [], ""
