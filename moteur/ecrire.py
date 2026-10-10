@@ -112,7 +112,8 @@ STYLE MAISON (validé par le public) : {ton}
 
 DURÉE : {secondes} secondes, {nb} répliques, entre {mots_min} et {mots} mots prononcés au total. Réplique 0 = l'accroche du présentateur (2 secondes, la punchline la plus forte du début). CHUTE = FAUSSE VÉRITÉ IRONIQUE (règle n°1 du propriétaire) : la dernière réplique est une contre-vérité assumée sur le SUJET PRINCIPAL — une affirmation rassurante, façon communiqué officiel (« Rassurez-vous : … », « Bonne nouvelle : … », « Soyons clairs : … »), aussitôt démentie dans la même phrase par un fait réel ou sa conséquence directe, ce qui révèle la vérité du sujet par l'ironie (ex. : « Rassurez-vous : la justice internationale reste totalement indépendante. Elle a juste six mois pour obéir. »). Elle nomme le sujet ou ses acteurs ; jamais une blague annexe, jamais un rappel d'un gag du sketch, jamais une métaphore. Tout le sketch monte vers elle.
 PAS DE MÉTAPHORE FILÉE (règle n°2 du propriétaire) : le sketch parle du sujet lui-même, sans détour, du début à la fin. Interdit de transposer l'actualité dans un autre univers (jeu de société, restaurant, sport, école, cuisine…) ou de filer une image sur plusieurs répliques. Les vannes viennent des faits réels poussés à l'absurde, de la mauvaise foi de l'invité et des comparaisons express d'une ligne.
-Voix synthétiques : phrases courtes, faciles à dire, une idée par phrase. Nombres, sigles et pourcentages en toutes lettres dans le champ "d".
+Voix : phrases courtes, faciles à dire, une idée par phrase. Nombres, sigles et pourcentages en toutes lettres dans le champ "d".
+JEU DES ACTEURS : le champ "d" (texte prononcé) accepte des indications de jeu entre crochets, EN ANGLAIS, que la voix interprète : [laughs], [laughing], [sighs], [angry], [shouting], [whispers], [sarcastic], [nervous laugh], [gasps], [annoyed], [excited], [deadpan], [crying]… Mets-en dans la plupart des répliques (une ou deux par réplique, au bon endroit), pour un jeu vivant, des rires et des coups de colère. Hésitations et coupures s'écrivent aussi (« euh… », « attends- »). Jamais de crochets dans le champ "t" (affiché à l'écran).
 {special}
 Running gags récents de l'émission (un clin d'œil possible s'il colle au sujet) : {gags}
 ANTI-RÉPÉTITION — sujets et vannes des derniers épisodes, à NE PAS refaire : {recents}
@@ -291,7 +292,8 @@ def valider(sk, liens):
     brutes = _liste(sk.get("repliques") or sk.get("script") or sk.get("dialogues"))
     for r in brutes[:16]:
         if not isinstance(r, dict): continue
-        p = _role(r.get("p") or r.get("personnage") or r.get("role"), sk); t = _court(r.get("t") or r.get("texte") or r.get("replique"), 170)
+        p = _role(r.get("p") or r.get("personnage") or r.get("role"), sk)
+        t = _court(re.sub(r"\s+", " ", re.sub(r"\[[^\]\[]{1,40}\]", " ", str(r.get("t") or r.get("texte") or r.get("replique") or ""))), 170)   # pas d'indication de jeu à l'écran
         if p not in CAST or not t: continue
         x = {"p": p, "t": t}
         if r.get("d"): x["d"] = _court(r["d"], 260)

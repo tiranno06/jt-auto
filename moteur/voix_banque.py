@@ -2,6 +2,8 @@
 parmi toutes les sources gratuites et utilisables commercialement, et vérifie chaque réplique.
 
 Sources (activées automatiquement si disponibles) :
+- ElevenLabs, modèle Eleven v4 (secret ELEVENLABS_API_KEY ; abonnement payant, licence commerciale), voix françaises de
+  leur bibliothèque, avec indications de jeu entre crochets ([laughs], [sighs]…) ;
 - Google Cloud TTS, voix « Chirp 3 HD » (secret GOOGLE_TTS_API_KEY ; 1 million de caractères gratuits par mois) ;
 - Azure Speech, voix neuronales (secrets AZURE_SPEECH_KEY + AZURE_SPEECH_REGION ; 500 000 caractères gratuits par mois) ;
 - Kyutai TTS (CC BY 4.0) avec les voix françaises CML-TTS (CC BY 4.0), sur Modal ;
@@ -13,7 +15,7 @@ la réécoute ; le robot garde, pour chaque personnage, la meilleure voix du bon
 Chaque jour : chaque réplique est générée, nettoyée (silences), réécoutée par Whisper. Mot avalé, charabia ou blanc :
 la prise est refaite ; si la voix échoue encore, tout le rôle passe sur la voix remplaçante. Whisper fournit aussi
 l'instant de chaque mot pour caler les sous-titres."""
-import base64, datetime, difflib, io, json, os, re, subprocess, tempfile, unicodedata, urllib.request, wave
+import base64, datetime, difflib, io, json, os, re, subprocess, tempfile, unicodedata, urllib.error, urllib.request, wave
 import numpy as np
 import voix_piper
 
@@ -24,22 +26,33 @@ ROLES = {"presentateur": "h", "invite": "h", "envoyee": "f"}
 TEST = {"presentateur": "Bonsoir. Le gouvernement a présenté son budget ce matin. Les députés, eux, cherchent encore les économies.",
         "invite": "Ce n'est pas un échec. C'est une réussite qui ne s'est pas encore produite. Nous restons très confiants.",
         "envoyee": "Je suis en direct de l'Assemblée. Ici, tout le monde attend. Personne ne sait vraiment quoi, mais tout le monde attend."}
-PRIORITE = {"google": 3.0, "azure": 2.8, "kyutai": 2.2, "zonos": 1.6, "chatterbox": 1.5}
+PRIORITE = {"elevenlabs": 4.0, "google": 3.0, "azure": 2.8, "kyutai": 2.2, "zonos": 1.6, "chatterbox": 1.5}
 GOOGLE = {"h": ["Charon", "Orus", "Fenrir", "Iapetus", "Algieba"], "f": ["Aoede", "Kore", "Leda", "Despina", "Erinome"]}
 AZURE = {"h": ["fr-FR-HenriNeural", "fr-FR-RemyMultilingualNeural", "fr-FR-AlainNeural", "fr-FR-JeromeNeural"],
          "f": ["fr-FR-DeniseNeural", "fr-FR-VivienneMultilingualNeural", "fr-FR-BrigitteNeural", "fr-FR-CelesteNeural"]}
 # débit par rôle : les voix de livres audio lisent trop lentement pour un sketch (accéléré sans changer la hauteur)
 ENERGIE = {"presentateur": 1.12, "envoyee": 1.16, "invite": 1.14}
 
-CREDITS = {"google": "Google Cloud Text-to-Speech", "azure": "Microsoft Azure Speech",
+CREDITS = {"elevenlabs": "ElevenLabs (Eleven v4)", "google": "Google Cloud Text-to-Speech", "azure": "Microsoft Azure Speech",
            "kyutai": "Kyutai TTS (CC BY 4.0), voix CML-TTS (CC BY 4.0)", "zonos": "Zonos (Apache 2.0), voix Multilingual LibriSpeech (CC BY 4.0)",
            "chatterbox": "Chatterbox (MIT), voix Multilingual LibriSpeech (CC BY 4.0)", "piper": "Piper / SIWIS (CC BY 4.0)"}
 
 def journal(*a): print(*a, flush=True)
 
+PROPRES = ("elevenlabs", "google", "azure")                               # voix déjà propres : pas d'accélération ni d'effet studio
+TAGS = re.compile(r"\[[^\]\[]{1,40}\]")
+def sans_tags(t):
+    """Retire les indications de jeu entre crochets ([laughs], [sighs]…) : seules les voix ElevenLabs les interprètent."""
+    return re.sub(r"\s+", " ", TAGS.sub(" ", t or "")).strip()
+
+ELEVEN_API = "https://api.elevenlabs.io"
+ELEVEN_MODELE = os.environ.get("ELEVENLABS_MODELE") or "eleven_v4"
+USAGES = ("conversational", "characters_animation", "social_media", "entertainment_tv", "advertisement", "narrative_story")
+
 # ------------------------------------------------------------------ moteurs
 def sources():
     s = []
+    if os.environ.get("ELEVENLABS_API_KEY"): s.append("elevenlabs")
     if os.environ.get("GOOGLE_TTS_API_KEY"): s.append("google")
     if os.environ.get("AZURE_SPEECH_KEY") and os.environ.get("AZURE_SPEECH_REGION"): s.append("azure")
     if os.environ.get("MODAL_TOKEN_ID") and os.environ.get("MODAL_TOKEN_SECRET"):
@@ -61,6 +74,47 @@ def google(voix, textes):
             out.append(base64.b64decode(r["audioContent"]))
         except Exception as e:
             journal(f"    google {voix} : {str(e)[:120]}"); out.append(b"")
+    return out
+
+def _eleven(chemin, corps=None, binaire=False, timeout=120):
+    req = urllib.request.Request(ELEVEN_API + chemin, data=json.dumps(corps).encode() if corps is not None else None,
+                                 headers={"xi-api-key": os.environ["ELEVENLABS_API_KEY"], "Content-Type": "application/json"},
+                                 method="POST" if corps is not None else "GET")
+    d = urllib.request.urlopen(req, timeout=timeout).read()
+    return d if binaire else json.loads(d or b"{}")
+
+def elevenlabs(voix, textes):
+    out = []
+    for t in textes:
+        if "elevenlabs" in EN_PANNE: out.append(b""); continue
+        try:
+            out.append(_eleven(f"/v1/text-to-speech/{voix}?output_format=mp3_44100_128", {"text": t, "model_id": ELEVEN_MODELE}, binaire=True))
+        except urllib.error.HTTPError as e:
+            msg = e.read().decode("utf-8", "replace")[:200]
+            journal(f"    elevenlabs {voix} : HTTP {e.code} {msg}")
+            if e.code in (401, 402, 403, 429) or "quota" in msg.lower():  # crédit épuisé ou clé refusée : voix gratuites pour la suite
+                EN_PANNE.add("elevenlabs"); journal("    ElevenLabs indisponible (crédit ou accès) : passage aux voix gratuites")
+            out.append(b"")
+        except Exception as e:
+            journal(f"    elevenlabs {voix} : {str(e)[:120]}"); out.append(b"")
+    return out
+
+def voix_eleven(n=4):
+    """Voix françaises de la bibliothèque ElevenLabs pour le casting (n par genre), ajoutées au compte si besoin."""
+    try:
+        mes = {v.get("name"): v.get("voice_id") for v in _eleven("/v2/voices?page_size=100").get("voices", [])}
+        lib = _eleven("/v1/shared-voices?language=fr&page_size=50&sort=usage_character_count_1y").get("voices", [])
+    except Exception as e:
+        journal(f"  ElevenLabs indisponible pour le casting : {str(e)[:120]}"); return []
+    out = []
+    for g, code in (("male", "h"), ("female", "f")):
+        l = sorted([x for x in lib if x.get("gender") == g], key=lambda x: USAGES.index(x["use_case"]) if x.get("use_case") in USAGES else 9)
+        for x in l[:n]:
+            nom = f"JT {x.get('name', '')}"[:30]; vid = mes.get(nom)
+            if not vid:
+                try: vid = _eleven(f"/v1/voices/add/{x['public_owner_id']}/{x['voice_id']}", {"new_name": nom}).get("voice_id")
+                except Exception as e: journal(f"  voix {nom} non ajoutée : {str(e)[:100]}"); continue
+            if vid: out.append({"moteur": "elevenlabs", "voix": vid, "nom": x.get("name", ""), "genre": code})
     return out
 
 def azure(voix, textes):
@@ -114,7 +168,8 @@ def chatterbox(role, textes):
 def synthese(choix, textes):
     m, v = choix["moteur"], choix["voix"]
     try:
-        return {"google": google, "azure": azure, "kyutai": kyutai, "zonos": zonos, "chatterbox": chatterbox}[m](v, textes)
+        if m != "elevenlabs": textes = [sans_tags(t) for t in textes]
+        return {"elevenlabs": elevenlabs, "google": google, "azure": azure, "kyutai": kyutai, "zonos": zonos, "chatterbox": chatterbox}[m](v, textes)
     except Exception as e:
         journal(f"    moteur {m} indisponible : {str(e)[:160]}"); return [b""] * len(textes)
 
@@ -215,7 +270,7 @@ def _norm(t):
 
 def note(texte, a, ecoute):
     """Score de qualité : ressemblance du texte entendu, blanc le plus long, débit plausible. Renvoie (ok, détails)."""
-    dur = len(a) / SR; attendu = max(0.6, len(texte) * 0.06); debit = dur / attendu
+    texte = sans_tags(texte); dur = len(a) / SR; attendu = max(0.6, len(texte) * 0.06); debit = dur / attendu
     if ecoute is None:
         return 0.5 < debit < 1.9, {"debit": round(debit, 2)}
     sim = difflib.SequenceMatcher(None, _norm(texte), _norm(ecoute.get("texte", ""))).ratio()
@@ -226,7 +281,7 @@ def note(texte, a, ecoute):
 
 # ------------------------------------------------------------------ casting automatique
 def candidats():
-    src = sources(); c = []
+    src = sources(); c = voix_eleven() if "elevenlabs" in src else []
     for g in "hf":
         if "google" in src: c += [{"moteur": "google", "voix": v, "genre": g} for v in GOOGLE[g]]
         if "azure" in src: c += [{"moteur": "azure", "voix": v, "genre": g} for v in AZURE[g]]
@@ -255,8 +310,8 @@ def casting(forcer=False):
         o = synthese(c, [texte])[0]
         if not o: continue
         try:
-            a = nettoyer(o, f"{tmp}/c{k}", propre=c["moteur"] in ("google", "azure"))
-            if c["moteur"] not in ("google", "azure"): a = vif(a, ENERGIE.get(roles[0], 1.12), f"{tmp}/c{k}")
+            a = nettoyer(o, f"{tmp}/c{k}", propre=c["moteur"] in PROPRES)
+            if c["moteur"] not in PROPRES: a = vif(a, ENERGIE.get(roles[0], 1.12), f"{tmp}/c{k}")
         except Exception: continue
         essais.append((c, texte, a))
     ecoutes = ecouter([a for _, _, a in essais]) or [None] * len(essais)
@@ -268,7 +323,7 @@ def casting(forcer=False):
         score = (PRIORITE[c["moteur"]] + (2 * d.get("sim", 0.8)) - max(0, d.get("blanc", 0) - 0.4)
                  - abs(np.log(max(d.get("debit", 1), 1e-3))) + 0.35 * min(expr, 4.0))         # bonus aux voix qui « jouent »
         d["expr"] = round(expr, 1)
-        journal(f"  {c['moteur']:10s} {c['voix'][:38]:38s} genre {genre} f0 {hz:5.0f} {d} {'OK' if ok else 'refusée'} score {score:.2f}")
+        journal(f"  {c['moteur']:10s} {(c.get('nom') or c['voix'])[:38]:38s} genre {genre} f0 {hz:5.0f} {d} {'OK' if ok else 'refusée'} score {score:.2f}")
         if ok: fiches.append(dict(c, genre=genre, f0=round(hz), score=round(score, 2)))
     roles, pris = {}, set()
     for role, g in ROLES.items():                                          # chaque rôle : 3 voix du bon genre, distinctes des autres rôles
@@ -295,7 +350,7 @@ def generer(repliques):
     for role in sorted({r["p"] for r in repliques}):
         idx = [i for i, r in enumerate(repliques) if r["p"] == role]
         for choix in fiche["roles"].get(role, []):
-            propre = choix["moteur"] in ("google", "azure"); restant = list(idx); ok_role = True
+            propre = choix["moteur"] in PROPRES; restant = list(idx); ok_role = True
             for tour in range(3):                                          # 1 prise + 2 reprises pour les répliques ratées
                 textes = [repliques[i].get("d") or repliques[i]["t"] for i in restant]
                 brut = synthese(choix, textes); clips = []

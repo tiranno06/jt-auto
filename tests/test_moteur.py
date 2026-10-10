@@ -1,6 +1,6 @@
 """Tests des composants du robot (sans réseau, sans clé API, sans GPU).
 Lancer : python -m unittest discover -s tests -v"""
-import json, os, sys, types, unittest
+import io, json, os, sys, types, unittest
 import numpy as np
 
 ICI = os.path.dirname(os.path.abspath(__file__))
@@ -305,6 +305,30 @@ class TestVoix(unittest.TestCase):
         self.assertEqual(voix_banque.en_lettres(3000), "trois mille")
         self.assertEqual(voix_banque.en_lettres(71), "soixante et onze")
         self.assertEqual(voix_banque.en_lettres(2027), "deux mille vingt sept")
+
+    def test_indications_de_jeu(self):
+        self.assertEqual(voix_banque.sans_tags("[sighs] Non mais [laughs] t'es sérieux ?"), "Non mais t'es sérieux ?")
+        a = np.zeros(int(22050 * 1.5), np.float32)
+        ok, d = voix_banque.note("[laughs] trois mille profs", a, {"texte": "trois mille profs", "mots": []})
+        self.assertTrue(ok)                                                   # les crochets ne faussent pas le contrôle Whisper
+        sk = ecrire.valider({"sujet": "x", "repliques": [{"p": "presentateur", "t": "[laughs] Bonsoir.", "d": "[laughs] Bonsoir."}] +
+                             [{"p": "envoyee", "t": "Ici [sighs] rien."}] * 3}, set())
+        self.assertEqual(sk["repliques"][0]["t"], "Bonsoir.")                 # jamais de crochets à l'écran
+        self.assertEqual(sk["repliques"][0]["d"], "[laughs] Bonsoir.")       # mais gardés pour la voix
+
+    def test_elevenlabs_credit_epuise(self):
+        import urllib.error
+        os.environ["ELEVENLABS_API_KEY"] = "test"; appels = []
+        def faux(chemin, corps=None, binaire=False, timeout=120):
+            appels.append(chemin); raise urllib.error.HTTPError(chemin, 401, "x", {}, io.BytesIO(b'{"detail":{"status":"quota_exceeded"}}'))
+        vrai = voix_banque._eleven; voix_banque._eleven = faux
+        try:
+            out = voix_banque.elevenlabs("v1", ["un", "deux", "trois"])
+            self.assertEqual(out, [b"", b"", b""]); self.assertEqual(len(appels), 1)   # on n'insiste pas : voix gratuites ensuite
+            self.assertIn("elevenlabs", voix_banque.EN_PANNE)
+            self.assertEqual(voix_banque.sources()[0], "elevenlabs")
+        finally:
+            voix_banque._eleven = vrai; voix_banque.EN_PANNE.discard("elevenlabs"); os.environ.pop("ELEVENLABS_API_KEY")
 
     def test_controle_qualite(self):
         a = np.zeros(int(22050 * 1.5), np.float32)
