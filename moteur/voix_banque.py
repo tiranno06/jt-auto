@@ -282,7 +282,8 @@ def _norm(t):
     t = t.replace("%", " pour cent ").replace("€", " euros ")
     t = re.sub(r"\d+", lambda m: " " + en_lettres(int(m.group())) + " ", t)
     t = unicodedata.normalize("NFKD", t).encode("ascii", "ignore").decode()
-    return re.sub(r"[^a-z ]+", " ", t).split()
+    mots = re.sub(r"[^a-z ]+", " ", t).split()
+    return [re.sub(r"(es|s|x|e|ent)$", "", m) if len(m) > 3 else m for m in mots]   # lettres muettes : « article » = « articles »
 
 def note(texte, a, ecoute):
     """Score de qualité : ressemblance du texte entendu, blanc le plus long, débit plausible. Renvoie (ok, détails)."""
@@ -363,6 +364,7 @@ def generer(repliques):
     if not fiche.get("roles") or not any(fiche["roles"].values()): return None
     tmp = tempfile.mkdtemp(); n = len(repliques)
     audios, mots, utilises = [None] * n, [None] * n, set()
+    meilleures = {}                                                        # i -> (sim, clip, mots, moteur) : meilleure prise refusée
     dits = [r.get("d") or r["t"] for r in repliques]
     CONTEXTE.clear()
     for i, d in enumerate(dits):                                           # chaque réplique connaît la phrase d'avant et d'après
@@ -395,6 +397,8 @@ def generer(repliques):
                     journal(f"  voix {i} ({role}, {choix['moteur']}:{choix['voix'][:30]}, prise {tour + 1}) {d} {'OK' if ok else 'refaite'}")
                     if ok:
                         audios[i] = c; mots[i] = (e or {}).get("mots")
+                    elif d.get("blanc", 0) < 0.75 and 0.5 < d.get("debit", 1) < 1.9 and d.get("sim", 0) > meilleures.get(i, (0,))[0]:
+                        meilleures[i] = (d.get("sim", 0), c, (e or {}).get("mots"), choix["moteur"])
                     if not ok: encore.append(i)
                 restant = [i for i in encore if audios[i] is None]
                 if not restant: break
@@ -402,6 +406,10 @@ def generer(repliques):
                 utilises.add(choix["moteur"]); break
             journal(f"  {role} : la voix {choix['moteur']}:{choix['voix']} échoue, passage à la voix de remplacement")
             for i in idx: audios[i] = None; mots[i] = None
+        for i in idx:                                                      # une réplique ratée ne fait plus tomber toute la banque :
+            if audios[i] is None and meilleures.get(i, (0,))[0] >= 0.6:    # on garde sa meilleure prise si elle reste compréhensible
+                _, audios[i], mots[i], m = meilleures[i]; utilises.add(m)
+                journal(f"  voix {i} ({role}) : meilleure prise gardée (ressemblance {meilleures[i][0]})")
         if any(audios[i] is None for i in idx):
             return None                                                    # le robot basculera sur la chaîne de secours
     return audios, mots, sorted(CREDITS[m] for m in utilises)

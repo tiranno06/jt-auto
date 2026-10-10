@@ -453,7 +453,7 @@ def chute_sur_sujet(sk, titres):
 
 def longueur(sk):
     n = sum(len((r.get("d") or r["t"]).split()) for r in sk["repliques"])
-    if n > MOTS * 1.2: raise ValueError(f"trop long : {n} mots prononcés, maximum {MOTS}. Coupe")
+    if n > MOTS * (1.3 if MINI else 1.2): raise ValueError(f"trop long : {n} mots prononcés, maximum {MOTS}. Coupe {n - MOTS} mots : retire les relances, garde les vannes et la chute")
     if MOTS_MIN and n < MOTS_MIN * 0.85: raise ValueError(f"trop court : {n} mots prononcés, minimum {MOTS_MIN}. Développe l'escalade")
     return n
 
