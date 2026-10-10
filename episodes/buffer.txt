@@ -20,9 +20,15 @@ InstagramMetadata :
 YoutubeMetadata : 
 TiktokMetadata : 
 WhatsAppMetadata : 
+PostType = carousel, event, ghost_post, offer, post, reel, short, story, thread, whats_new
 DeletePostInput : id<PostId>
 CreatePostInput : aiAssisted<Boolean>, assets<None>, channelId<ChannelId>, draftId<DraftId>, dueAt<DateTime>, ideaId<IdeaId>, metadata<PostInputMetaData>, mode<ShareMode>, needsApproval<Boolean>, saveToDraft<Boolean>, schedulingType<SchedulingType>, source<String>, tagIds<None>, text<String>
 EditPostInput : id<PostId>, aiAssisted<Boolean>, approvalChange<PostApprovalChange>, assets<None>, draftId<DraftId>, dueAt<DateTime>, ideaId<IdeaId>, metadata<PostInputMetaData>, mode<ShareMode>, saveToDraft<Boolean>, schedulingType<SchedulingType>, source<String>, tagIds<None>, text<String>
+ShareMode = addToQueue, customScheduled, shareNext, shareNow
+PostTypeGoogleBusiness = event, offer, whats_new
+PostTypeFacebook = post, reel, story
+YoutubePrivacy = private, public, unlisted
+YoutubeLicense = creativeCommon, youtube
 ThreadItemBlueskyMetadata : 
 ThreadItemThreadsMetadata : 
 ThreadItemMetadata : 
