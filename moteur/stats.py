@@ -127,10 +127,14 @@ def pseudos_libres(noms):
     for n in noms:
         n = n.strip().lstrip("@")
         if not n: continue
-        r = subprocess.run([sys.executable, "-m", "yt_dlp", "--flat-playlist", "-J", "--playlist-end", "3", "--no-warnings", f"https://www.tiktok.com/@{n}"],
-                           capture_output=True, text=True, timeout=180)
+        try:
+            r = subprocess.run([sys.executable, "-m", "yt_dlp", "--flat-playlist", "-J", "--playlist-end", "3", "--no-warnings", "--socket-timeout", "20",
+                                f"https://www.tiktok.com/@{n}"], capture_output=True, text=True, timeout=120)
+        except subprocess.TimeoutExpired:
+            print(f"Pseudo @{n} : pas de réponse de TikTok (à vérifier à la main)", flush=True); continue
         try: d = json.loads(r.stdout or "{}")
         except ValueError: d = {}
+        sys.stdout.flush()
         if d.get("entries"): print(f"Pseudo @{n} : PRIS ({len(d['entries'])}+ vidéos publiques, ex. « {(d['entries'][0].get('description') or '')[:60]} »)")
         elif "doesn't exist" in (r.stderr or "").lower() or "not exist" in (r.stderr or "").lower() or "404" in (r.stderr or ""):
             print(f"Pseudo @{n} : probablement LIBRE (aucune chaîne à cette adresse)")
