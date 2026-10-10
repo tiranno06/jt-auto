@@ -60,29 +60,42 @@ def icone(taille, marge=0.0):
     return marque.logo(taille, marge=marge)
 
 def application(nom):
+    for g, f in (("500", "Poppins-Medium.ttf"), ("700", "Poppins-Bold.ttf")):          # police servie par le site lui-même (plus rapide)
+        shutil.copy(os.path.join(RACINE, "polices", f), os.path.join(SITE, f"poppins-{g}.ttf"))
     for t in (192, 512):
-        icone(t).save(os.path.join(SITE, f"icone-{t}.png"))
-        icone(t, marge=0.1).save(os.path.join(SITE, f"icone-{t}-maskable.png"))
-    icone(180).save(os.path.join(SITE, "apple-touch-icon.png"))
-    manifeste = {"name": f"{nom} — régie", "short_name": nom, "lang": "fr", "start_url": "./", "scope": "./", "id": "./",
+        icone(t).save(os.path.join(SITE, f"logo-{t}.png"))
+        icone(t, marge=0.1).save(os.path.join(SITE, f"logo-{t}-maskable.png"))
+    icone(180).save(os.path.join(SITE, "logo-apple.png"))
+    manifeste = {"name": f"{nom} — régie", "short_name": nom, "lang": "fr", "start_url": "./", "scope": "./", "id": "./?petits-dramas",
                  "display": "standalone", "orientation": "portrait", "background_color": "#0e0f17", "theme_color": "#ffd028",
                  "description": "Vérifier et publier les vidéos Petits.Dramas sur TikTok.",
-                 "icons": [{"src": f"icone-{t}.png", "sizes": f"{t}x{t}", "type": "image/png", "purpose": "any"} for t in (192, 512)] +
-                          [{"src": f"icone-{t}-maskable.png", "sizes": f"{t}x{t}", "type": "image/png", "purpose": "maskable"} for t in (192, 512)]}
+                 "icons": [{"src": f"logo-{t}.png", "sizes": f"{t}x{t}", "type": "image/png", "purpose": "any"} for t in (192, 512)] +
+                          [{"src": f"logo-{t}-maskable.png", "sizes": f"{t}x{t}", "type": "image/png", "purpose": "maskable"} for t in (192, 512)]}
     json.dump(manifeste, open(os.path.join(SITE, "manifest.webmanifest"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     open(os.path.join(SITE, "sw.js"), "w").write(SW)
 
 # Service worker : l'appli s'ouvre même hors connexion (dernière version de la page), sans jamais mettre en cache
 # les vidéos (trop lourdes) ni les appels à GitHub.
-SW = r"""const CACHE = "regie-v9";
-const COQUILLE = ["./", "manifest.webmanifest", "icone-192.png", "icone-512.png"];
+SW = r"""const CACHE = "regie-v10";
+const COQUILLE = ["./", "manifest.webmanifest", "logo-192.png", "logo-512.png", "poppins-500.ttf", "poppins-700.ttf"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(COQUILLE))); self.skipWaiting(); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(k => Promise.all(k.filter(x => x !== CACHE).map(x => caches.delete(x))))); self.clients.claim(); });
+const garder = (req, r) => { if (r && r.ok) { const c = r.clone(); caches.open(CACHE).then(x => x.put(req, c)); } return r; };
 self.addEventListener("fetch", e => {
   const u = new URL(e.request.url);
   if (e.request.method !== "GET" || u.origin !== location.origin || u.pathname.endsWith(".mp4")) return;
-  e.respondWith(fetch(e.request).then(r => { if (r.ok) { const c = r.clone(); caches.open(CACHE).then(x => x.put(e.request, c)); } return r; })
-    .catch(() => caches.match(e.request).then(r => r || caches.match("./"))));
+  if (e.request.mode === "navigate" || u.pathname.endsWith("/") || u.pathname.endsWith(".html")) {
+    // page : toujours la plus récente si le réseau répond en moins de 3 s, sinon la copie gardée (ouverture instantanée hors ligne)
+    e.respondWith(new Promise(ok => {
+      let fini = false; const copie = () => caches.match(e.request).then(r => r || caches.match("./"));
+      const minuteur = setTimeout(() => copie().then(r => { if (r && !fini) { fini = true; ok(r); } }), 2500);
+      fetch(e.request).then(r => { garder(e.request, r); if (!fini) { fini = true; clearTimeout(minuteur); ok(r); } })
+        .catch(() => copie().then(r => { if (!fini) { fini = true; clearTimeout(minuteur); ok(r || Response.error()); } }));
+    }));
+    return;
+  }
+  // images, polices, icônes : copie gardée tout de suite, mise à jour en arrière-plan
+  e.respondWith(caches.match(e.request).then(c => { const f = fetch(e.request).then(r => garder(e.request, r)).catch(() => c); return c || f; }));
 });
 """
 
@@ -91,11 +104,12 @@ PAGE = r"""<!doctype html>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#0e0f17"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes">
-<link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icone-192.png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="logo-192.png"><link rel="apple-touch-icon" href="logo-apple.png">
 <title>__NOM__ — régie</title><meta name="apple-mobile-web-app-title" content="__NOM__">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+<link rel="preload" href="poppins-700.ttf" as="font" type="font/ttf" crossorigin>
 <style>
+@font-face{font-family:Poppins;font-weight:500;font-display:swap;src:url(poppins-500.ttf) format("truetype")}
+@font-face{font-family:Poppins;font-weight:700;font-display:swap;src:url(poppins-700.ttf) format("truetype")}
 :root{--bg:#0e0f17;--carte:#181a26;--ligne:#2a2d3d;--texte:#f2f2f6;--doux:#9a9db0;--jaune:#ffd628;--rouge:#e3203a;--vert:#2fbf71;--orange:#ff9f1a;--bleu:#5aa9ff}
 *{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--texte);font-family:Poppins,system-ui,sans-serif}
 header{padding:20px 16px 4px;text-align:center}
@@ -168,7 +182,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
 #fermer{display:none;position:absolute;top:8px;right:8px;width:40px;height:40px;padding:0;border-radius:50%;font-size:20px;font-weight:700;line-height:40px;background:rgba(0,0,0,.65);color:#fff;border:1px solid rgba(255,255,255,.35);z-index:2}
 #apercu[style*="block"]+#fermer{display:block}
 </style></head><body data-onglet="videos">
-<header><h1><img src="icone-192.png" alt="" style="width:44px;height:44px;border-radius:12px;vertical-align:-10px;margin-right:10px">__NOM__</h1><div class="sous">Régie de la chaîne · vidéos de la plus récente à la plus ancienne</div>
+<header><h1><img src="logo-192.png" alt="" style="width:44px;height:44px;border-radius:12px;vertical-align:-10px;margin-right:10px">__NOM__</h1><div class="sous">Régie de la chaîne · vidéos de la plus récente à la plus ancienne</div>
 <button id="installer" style="display:none;margin-top:10px;padding:9px 16px;font-size:14px;font-weight:700;background:var(--jaune);color:#111">📲 Installer l'application</button></header>
 <nav class="onglets"><button class="onglet actif" data-o="videos" data-f="court">📱 Courtes</button><button class="onglet" data-o="videos" data-f="long">🎬 Longues</button><button class="onglet" data-o="videos" data-f="manuel">✍️ Manuel</button><button class="onglet reg" data-o="config" aria-label="Réglages" title="Réglages">⚙️</button></nav>
 <main>
@@ -294,7 +308,6 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
   <div id="suivi"></div>
 </div></div>
 <div id="toast"></div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
 <script>
 const DATA = __DATA__, CONF = __CONF__;
 const API = "https://api.github.com/repos/" + CONF.depot;
@@ -408,7 +421,7 @@ async function suivre(depart, v){
       if(run.conclusion==="success"){s.innerHTML="✅ Vidéo envoyée à TikTok. Le site se met à jour dans une minute.";v.publie=true}
       else{s.innerHTML=`❌ Échec. <a style="color:var(--bleu)" href="${run.html_url}" target="_blank" rel="noopener">Voir le détail</a> — vous pouvez utiliser « Partage manuel ».`;v.publie=false}
       document.querySelector(`.carte[data-i="${choisie}"] .badge`).outerHTML=badge(v); majBoutons(); return;
-    }catch(e){s.textContent="Suivi interrompu : "+e.message; majBoutons(); return}
+    }catch(e){ if(k>50){s.textContent="Suivi interrompu (connexion) : l'état apparaîtra dans l'appli."; majBoutons(); return} }
   }
   s.textContent="Toujours en cours : regardez l'onglet Actions du dépôt."; majBoutons();
 }
@@ -445,7 +458,9 @@ $("#manuel").onclick=async()=>{
   try{ecrireJeton(decodeURIComponent(m[1]));}catch(e){}
   history.replaceState(null,"",location.pathname+location.search); setTimeout(()=>toast("Régie connectée sur cet appareil ✓"),300);})();
 function lienConnexion(){return location.origin+location.pathname+"#cle="+encodeURIComponent(lireJeton())}
-$("#montrerQR").onclick=()=>{
+$("#montrerQR").onclick=async()=>{
+  if(typeof qrcode==="undefined") await new Promise(ok=>{const sc=document.createElement("script");
+    sc.src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js";sc.onload=sc.onerror=ok;document.head.appendChild(sc)});
   if(typeof qrcode==="undefined"){toast("Générateur de code indisponible : utilisez « Copier le lien »");$("#qr").style.display="block";return}
   const q=qrcode(0,"M"); q.addData(lienConnexion()); q.make(); $("#qrImg").innerHTML=q.createSvgTag({cellSize:6,margin:2,scalable:true});
   $("#qrImg").querySelector("svg").style.width="240px"; $("#qr").style.display="block"; $("#montrerQR").style.display="none";
