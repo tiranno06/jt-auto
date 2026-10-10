@@ -262,7 +262,9 @@ class TestMoteurHumour(unittest.TestCase):
     def test_sketch_libre(self):
         faux = FauxClaude(); faux.choix = 1
         sys.modules["anthropic"] = types.SimpleNamespace(Anthropic=lambda: faux)
-        idees = ecrire.idees_libres(recents=["MÉTRO BONDÉ : ..."])
+        os.environ["TENDANCES"] = "0"                                          # (les tendances utilisent la recherche web, testées à part)
+        try: idees = ecrire.idees_libres(recents=["MÉTRO BONDÉ : ..."])
+        finally: os.environ.pop("TENDANCES")
         self.assertEqual(len(idees), 2)
         self.assertIn("économies", idees[1][0]["titre"])
         sk = ecrire.ecrire_sketch(idees, essais=3, libre=True)

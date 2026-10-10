@@ -13,6 +13,10 @@ on:
         description: "Type de vidéo : mini (gag éclair), libre (sketch long), actu (JT) ou cycle (3 + 1). Vide = réglage de la régie."
         required: false
         default: ""
+      refaire:
+        description: "Bouton Refaire de la régie : fichier.mp4|texte (ou voix, decors)"
+        required: false
+        default: ""
       auto:
         description: "1 = lancement du réveil de secours (compte comme une vidéo automatique)"
         required: false
@@ -52,7 +56,7 @@ jobs:
     needs: planning
     if: needs.planning.outputs.go == 'true'
     concurrency:                 # les vidéos manuelles ont leur propre file : elles n'annulent jamais une émission en attente
-      group: ${{ inputs.theme != '' && format('manuel-{0}', github.run_id) || 'emission' }}
+      group: ${{ (inputs.theme != '' || inputs.refaire != '') && format('manuel-{0}', github.run_id) || 'emission' }}
       cancel-in-progress: false
     runs-on: ubuntu-24.04
     timeout-minutes: 120
@@ -81,6 +85,9 @@ jobs:
       SEUIL_QUALITE: ${{ vars.SEUIL_QUALITE }}
       FORMAT: ${{ inputs.format || vars.FORMAT }}
       THEME: ${{ inputs.theme }}
+      REFAIRE: ${{ inputs.refaire }}
+      SEUIL_PUBLICATION: ${{ vars.SEUIL_PUBLICATION }}
+      TENDANCES: ${{ vars.TENDANCES }}
       DECORS: ${{ vars.DECORS }}
       TON: ${{ vars.TON }}
       INFOS_DEMAIN: ${{ vars.INFOS_DEMAIN }}
@@ -173,7 +180,7 @@ jobs:
         run: python moteur/alerte.py "⚠️ Échec de fabrication" "$(grep -v '^  image' episodes/journal.txt 2>/dev/null | tail -n 3 | cut -c1-250)"
 
       - name: Publier sur TikTok (seulement si la publication automatique est activée sur le site)
-        if: steps.run.outputs.video != '' && vars.PUBLICATION_AUTO == '1' && steps.run.outputs.qualite != 'faible' && inputs.theme == ''
+        if: steps.run.outputs.video != '' && vars.PUBLICATION_AUTO == '1' && steps.run.outputs.qualite != 'faible' && inputs.theme == '' && inputs.refaire == ''
         continue-on-error: true
         run: |
           URL="${{ github.server_url }}/${{ github.repository }}/releases/download/emissions-${{ steps.run.outputs.mois }}/${{ steps.run.outputs.nom }}"

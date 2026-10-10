@@ -169,6 +169,7 @@ EXIGENCES_LIBRE = """EXIGENCES DU PROPRIÉTAIRE (sketch libre, sans actualité) 
 3. La situation doit être immédiatement reconnaissable par n'importe qui (« c'est trop moi / c'est trop ma mère »). Ici, « pertinence satirique » = justesse de l'observation du quotidien.
 4. FIL CONDUCTEUR ET CONTINUITÉ (sketch long) : une seule histoire continue. Vérifie CHAQUE scène par rapport à la précédente et à la suivante :
    l'enchaînement est-il cohérent (conséquence logique, rien de contradictoire, mêmes personnages et même enjeu), fluide (on passe naturellement de l'une à l'autre, le carton annonce bien le saut), juste (faits internes, personnages qui se souviennent) et limpide (compris en une seconde par quelqu'un qui découvre la vidéo) ?
+   Note aussi chaque gag (= scène) dans « gags », sur 10, comme une mini-vidéo qui devrait faire rire seule, avec son point faible.
    Note chaque passage dans « continuite » (un élément par passage : « scène 1 → 2 : OK » ou le problème précis et sa correction). Si un seul passage pose problème, ou si le sketch enchaîne des vannes sans histoire, « fil_continu » = false et la note est plafonnée à 70."""
 
 TECHNIQUE_PUNCHLINE = """TECHNIQUE D'UNE PUNCHLINE QUI FAIT HURLER DE RIRE :
@@ -308,6 +309,8 @@ OUTIL_NOTE = {"name": "noter_sketch", "description": "Note qualité sur 100 et c
                                        "metaphore_filee": {"type": "boolean", "description": "Le sketch transpose-t-il le sujet dans un autre univers ou file-t-il une métaphore ?"},
                                        "continuite": {"type": "array", "items": {"type": "string"}, "description": "Un avis par passage de scène (sketch long) : « scène 1 → 2 : OK » ou le problème et sa correction."},
                                        "fil_continu": {"type": "boolean", "description": "Une seule histoire continue, cohérente, fluide et limpide, scène après scène ?"},
+                                       "gags": {"type": "array", "items": _schema({"scene": {"type": "integer"}, "note": {"type": "number"}, "probleme": {"type": "string"}}, ["scene", "note"]),
+                                                "description": "Sketch long : chaque gag (= scène) noté sur 10 comme une mini-vidéo autonome, avec son point faible."},
                                        "critique": {"type": "string", "minLength": 40, "description": "À écrire EN PREMIER : répliques faibles (numéro + pourquoi) et corrections précises."},
                                        "originalite": {"type": "number"}, "punchlines": {"type": "number"}, "rythme": {"type": "number"},
                                        "pertinence": {"type": "number"}, "dialogues": {"type": "number"}, "visuel": {"type": "number"},
@@ -550,8 +553,11 @@ def idees_libres(recents=(), n=6, consignes=""):
     for essai in range(2):                                                 # une seconde tentative si la réponse est inexploitable
         try:
             import serie as _serie
-            r = _appel(client, None, [{"role": "user", "content": IDEES.format(secondes=SECONDES, recents=rtxt, style=STYLE_LIBRE) + _serie.idees() + (("\n" + consignes) if consignes else "")}],
-                       OUTIL_IDEES, max_tokens=6000, modele=MODELE_ECO if ECO else None)
+            tendances = os.environ.get("TENDANCES", "1") != "0" and essai == 0
+            r = _appel(client, None, [{"role": "user", "content": IDEES.format(secondes=SECONDES, recents=rtxt, style=STYLE_LIBRE) + _serie.idees() + (("\n" + consignes) if consignes else "")
+                       + ("\nTENDANCES : fais d'abord 1 ou 2 recherches web sur ce qui buzze en France cette semaine (galères et débats du moment, sujets dont tout le monde parle, tendances TikTok) "
+                          "et construis 2 ou 3 des idées sur ces tendances, transposées dans le quotidien de nos personnages (aucune personne réelle, aucune marque)." if tendances else "")}],
+                       OUTIL_IDEES, web=tendances, max_tokens=6000, modele=MODELE_ECO if ECO else None)
         except Exception as e:
             if _bloquant(e):
                 print(f"  ARRÊT : accès à l'API Claude impossible ({str(e)[:400]}). Action requise : console.anthropic.com > Settings > Limits (plafond de dépenses) ou Billing (crédit).", flush=True)
@@ -585,7 +591,7 @@ MODELE_PUBLIC = os.environ.get("MODELE_PUBLIC") or "claude-sonnet-5-5"     # spe
 
 def public_test(client, sk):
     """Piste 5 : trois spectateurs virtuels découvrent le sketch sans contexte. Renvoie (résumé pour la réécriture, tous ont compris)."""
-    if os.environ.get("PUBLIC_TEST", "1") == "0": return "", True
+    if os.environ.get("PUBLIC_TEST", "1") == "0": return "", True, None
     dec = sk.get("decoupage") or []; scene_de = {i: k for k, sc in enumerate(dec) for i in sc.get("repliques", [])}
     lignes = [f"[Titre en haut de l'écran : {sk.get('titre_accroche', '')}]"]; sc0 = None
     for i, r in enumerate(sk["repliques"]):
@@ -597,7 +603,7 @@ def public_test(client, sk):
         a = _appel(client, None, [{"role": "user", "content": PUBLIC.format(video="\n".join(lignes))}], OUTIL_PUBLIC, max_tokens=8000, modele=MODELE_PUBLIC)
     except Exception as e:
         if _bloquant(e): raise
-        print(f"  public test indisponible ({str(e)[:100]})", flush=True); return "", True
+        print(f"  public test indisponible ({str(e)[:100]})", flush=True); return "", True, None
     sp = [x for x in _liste(a.get("spectateurs")) if isinstance(x, dict)]
     crit = [str(x) for x in _liste(a.get("critiques")) if str(x).strip()][:5]
     compris = all(x.get("compris", True) for x in sp) if sp else True
@@ -610,7 +616,7 @@ def public_test(client, sk):
         + (f", aurait scrollé à la réplique {x['scrolle_a']}" if isinstance(x.get('scrolle_a'), int) and x['scrolle_a'] >= 0 else "")
         + (f", perdu par : {x.get('perdu_par')}" if x.get("perdu_par") else "") for x in sp) + \
         ("\nCritiques constructives du public :\n" + "\n".join("- " + c for c in crit) if crit else "")
-    return txt, compris
+    return txt, compris, (sum(rires) / len(rires) if rires else None)
 
 NOMS_LIBRES = {"presentateur": "Jojo", "invite": "Kévin", "envoyee": "Lila", "narrateur": "Voix off"}
 
@@ -733,6 +739,57 @@ SERIE_BLOC = """- ÉPISODE DE SÉRIE (réglage du propriétaire) : {serie_txt}
 ACCROCHE_BLOC = """- ACCROCHE CHOC (réglage du propriétaire) : "teaser" = l'indice de la réplique la plus intrigante ou la plus choquante du sketch (PAS la chute finale) ; elle est rejouée en ouverture, avant le titre, pour accrocher le spectateur dès la première seconde.
 """
 
+VERSIONS = max(1, min(4, int(os.environ.get("VERSIONS") or 3)))          # premier jet : plusieurs versions en parallèle
+OUTIL_CHOIX_VERSION = {"name": "choisir_version", "description": "La meilleure version.",
+                       "input_schema": _schema({"meilleure": {"type": "integer"}, "pourquoi": {"type": "string"}}, ["meilleure"])}
+
+def _premier_jet(client, systeme, conv, titres):
+    """Écrit VERSIONS sketchs en même temps sur le même sujet et garde le plus drôle et le plus clair (un seul arbitrage)."""
+    if VERSIONS == 1: return _appel(client, systeme, conv)
+    from concurrent.futures import ThreadPoolExecutor
+    with ThreadPoolExecutor(VERSIONS) as ex:
+        res = list(ex.map(lambda _: _essai(lambda: _appel(client, systeme, conv)), range(VERSIONS)))
+    ok = [r for r in res if isinstance(r, dict) and _liste(r.get("repliques"))]
+    if not ok:
+        e = next((r for r in res if isinstance(r, Exception)), None)
+        raise e or ValueError("aucune version exploitable")
+    if len(ok) == 1: return ok[0]
+    lots = "\n\n".join(f"=== VERSION {k} ===\n" + "\n".join(f"{(r.get('p') or '?')} : {r.get('t') or ''}" for r in _liste(v.get("repliques")) if isinstance(r, dict))
+                        for k, v in enumerate(ok))
+    try:
+        c = _appel(client, None, [{"role": "user", "content": f"Sujet : « {titres[0]['titre']} ». Voici {len(ok)} versions d'un sketch TikTok. "
+                   "Choisis la plus DRÔLE et la plus CLAIRE (comprise en une écoute, chute qui tue, aucune réplique de trop).\n\n" + lots +
+                   "\n\nRends ton choix avec l'outil choisir_version."}], OUTIL_CHOIX_VERSION, max_tokens=1500, modele=MODELE_ECO if ECO else None)
+        k = int(c.get("meilleure", 0)); k = k if 0 <= k < len(ok) else 0
+        print(f"  {len(ok)} versions écrites en parallèle : la n°{k + 1} est retenue ({_court(c.get('pourquoi'), 120)})", flush=True)
+        return ok[k]
+    except Exception as e:
+        if _bloquant(e): raise
+        return ok[0]
+
+def _essai(f):
+    try: return f()
+    except Exception as e: return e
+
+def exemples_avis():
+    """Vos 👍 / 👎 dans la régie : sketchs aimés donnés en exemple, sujets ratés à éviter."""
+    racine = os.path.join(ICI, "..", "episodes")
+    try: hist = json.load(open(os.path.join(racine, "historique.json"), encoding="utf-8"))
+    except (OSError, ValueError): return ""
+    aimes, bofs = [], []
+    for h in reversed(hist):
+        if h.get("avis") == 1 and len(aimes) < 2:
+            p = os.path.join(racine, "sketchs", (h.get("fichier") or "") + ".json")
+            if os.path.exists(p):
+                sk = json.load(open(p, encoding="utf-8"))
+                aimes.append("\n".join(f"{NOMS_LIBRES.get(r['p'], r['p'])} : {r.get('d') or r['t']}" for r in sk.get("repliques", []) if r.get("p") != "narrateur" and not r.get("teaser")))
+        elif h.get("avis") == -1 and len(bofs) < 6:
+            bofs.append(h.get("titre", ""))
+    txt = ""
+    if aimes: txt += "SKETCHS QUE LE PROPRIÉTAIRE A AIMÉS 👍 (ton, rythme, clarté et niveau de vannes à reproduire — jamais les mêmes blagues) :\n" + "\n---\n".join(aimes) + "\n"
+    if bofs: txt += "SKETCHS QU'IL N'A PAS AIMÉS 👎 (ne refais pas ce genre-là) : " + " ; ".join(bofs) + "\n"
+    return txt
+
 def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=(), libre=False, serie="", stats=""):
     """candidats : liste de sujets (chaque sujet = liste d'articles, le titre principal en premier) — ou une simple liste d'articles.
     Renvoie le sketch validé, avec "fiche" (livrables A-F, note qualité, décision)."""
@@ -752,6 +809,8 @@ def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=(), li
                     .replace("{serie}", SERIE_BLOC.replace("{serie_txt}", serie) + "\n" if serie else "")
                     .replace("{accroche}", ACCROCHE_BLOC if os.environ.get("ACCROCHE", "0") == "1" else ""))
         if stats: systeme += "\n" + stats
+        ex_ = exemples_avis()
+        if ex_: systeme += "\n" + ex_
     top = len(candidats) if libre else TOP                                # sketch libre : toutes les idées sont éligibles
     # 1) sélection du sujet et de l'angle
     ordre, angle, verifs, verite = list(range(len(candidats))), "", [], ""
@@ -790,7 +849,7 @@ def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=(), li
         conv = [{"role": "user", "content": msg}]; sk = None; derniere = None; brut = {}; record = None   # record : meilleure version de CE sujet
         for tour in range(1 + (essais if rang == 0 else min(1, essais))):   # écriture puis jusqu'à 3 réécritures (1 pour le sujet de secours)
             try:
-                brut = _appel(client, systeme, conv)
+                brut = _premier_jet(client, systeme, conv, titres) if (tour == 0 and libre) else _appel(client, systeme, conv)
                 sk = valider(brut, liens, libre); hors_sujet(sk, titres); n_mots = longueur(sk); chute_sur_sujet(sk, titres)
             except Exception as e:
                 derniere = e
@@ -822,6 +881,12 @@ def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=(), li
                     if val is not None and nq.get(cle) is val and note > 70:
                         print(f"  {quoi} : note plafonnée à 70 (au lieu de {note:.0f})", flush=True); note = 70.0
                 suivi = [str(x) for x in _liste(nq.get("continuite")) if str(x).strip()]
+                gags = [g for g in _liste(nq.get("gags")) if isinstance(g, dict) and isinstance(g.get("note"), (int, float))]
+                if libre and not MINI and len(gags) >= 2:                    # sketch long : on retouche d'abord le gag le plus faible
+                    faible = min(gags, key=lambda g: g["note"])
+                    print("  gags : " + " | ".join(f"scène {g.get('scene')} {g['note']:.0f}/10" for g in gags), flush=True)
+                    suivi.insert(0, f"GAG LE PLUS FAIBLE : scène {faible.get('scene')} ({faible['note']:.0f}/10) — {faible.get('probleme', '')}. "
+                                    "Réécris SURTOUT ce gag (nouvelle montée, meilleure vanne de fin), garde les autres presque tels quels.")
                 if libre and not MINI and suivi:
                     print("  continuité : " + " | ".join(x[:90] for x in suivi), flush=True)
                 critique = (("CONTINUITÉ ENTRE LES SCÈNES :\n" + "\n".join("- " + x for x in suivi) + "\n\n") if (libre and not MINI and suivi) else "") + \
@@ -830,8 +895,11 @@ def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=(), li
             except Exception as e:
                 note, critique = 0.0, f"notation impossible ({e})"
             if libre and note >= 60:                                         # piste 5 : le public test donne son avis
-                avis, compris = public_test(client, sk)
+                avis, compris, rire = public_test(client, sk)
                 if avis: critique = avis + "\n\n" + critique
+                if rire is not None:                                         # note finale = 80 % critique + 20 % rire du public test
+                    n2 = round(0.8 * note + 0.2 * rire * 10, 1)
+                    print(f"  note : {note:.0f} (critique) et rire {rire:.1f}/10 → {n2:.0f}", flush=True); note = n2
                 if not compris and note > 80:
                     print(f"  un spectateur n'a pas compris : note plafonnée à 80 (au lieu de {note:.0f})", flush=True); note = 80.0
             print(f"  version {tour + 1} : {note:.0f}/100, {len(sk['repliques'])} répliques, {n_mots} mots", flush=True)

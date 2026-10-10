@@ -19,6 +19,21 @@ if AUTO:                                                                  # nouv
     _go, _raison = planning.decision()
     if not _go: print(f"Planning : rien à faire ({_raison})"); sys.exit(0)
 THEME = (os.environ.get("THEME") or "").strip()[:2000]                 # création manuelle depuis l'onglet « Manuel » de la régie
+REFAIRE = (os.environ.get("REFAIRE") or "").strip()                      # « fichier.mp4|texte|voix|decors » : bouton Refaire de la régie
+ANCIEN, SK_ANCIEN = None, None
+if REFAIRE:
+    _f, _, _mode = REFAIRE.partition("|"); _mode = _mode or "texte"
+    ANCIEN = next((h for h in _hist if h.get("fichier") == _f), None)
+    _p = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "episodes", "sketchs", _f + ".json")
+    SK_ANCIEN = json.load(open(_p, encoding="utf-8")) if os.path.exists(_p) else None
+    if ANCIEN: os.environ["FORMAT"] = ANCIEN.get("format") if ANCIEN.get("format") in ("mini", "libre", "actu") else "mini"
+    if _mode in ("voix", "decors") and SK_ANCIEN is None:
+        print("Sketch d'origine non conservé (vidéo plus ancienne) : on refait une nouvelle version du texte.", flush=True); _mode = "texte"
+    REFAIRE_MODE = _mode
+    if ANCIEN and _mode == "texte" and not THEME:                        # nouvelle version : même sujet, écrit à neuf
+        THEME = ((ANCIEN.get("titre_affiche") or "") + " " + (ANCIEN.get("titre") or "")).strip() + " — " + (ANCIEN.get("accroche") or "")
+else:
+    REFAIRE_MODE = ""
 if THEME and (os.environ.get("FORMAT") or "") not in ("mini", "libre"): os.environ["FORMAT"] = "mini"
 os.environ["FORMAT"] = FORMAT = format_du_jour(os.environ.get("FORMAT"), _hist)
 if FORMAT == "mini": os.environ["LONGUEUR"] = "eclair"                    # gag éclair : ~15 s
@@ -43,7 +58,9 @@ def resserrer(audios, sk, cible=None):
         with wave.open(f"{tmp}/{i}b.wav") as w: sortie.append(np.frombuffer(w.readframes(w.getnframes()), np.int16).astype(np.float32) / 32768)
     return sortie
 
-GPU = {"s": 0.0}                                                          # secondes de GPU Modal (décors)
+GPU = {"s": 0.0}
+try: SEUIL_PUB = float(os.environ.get("SEUIL_PUBLICATION") or 80)        # note minimale pour la publication automatique (régie)
+except ValueError: SEUIL_PUB = 80.0                                                          # secondes de GPU Modal (décors)
 
 def couts():
     """Dépenses de cette vidéo : Claude (dollars, calculés sur les jetons), ElevenLabs (caractères = crédits), GPU Modal (secondes)."""
@@ -114,7 +131,10 @@ def main():
     dimanche = datetime.datetime.now(ZoneInfo("Europe/Paris")).weekday() == 6 and os.environ.get("INFOS_DEMAIN", "1") != "0"
     gags = [h.get("running_gag") for h in historique[-15:] if h.get("running_gag")]
     test = os.environ.get("SKETCH_TEST", "").strip()
-    if script:                                                             # script tapé : les répliques restent mot pour mot
+    if REFAIRE_MODE in ("voix", "decors"):                                 # mêmes répliques : on refait seulement les voix / les décors
+        sk = SK_ANCIEN; sk["_monte"] = True
+        print(f"Refaire ({REFAIRE_MODE}) : « {sk.get('sujet')} », mêmes répliques", flush=True)
+    elif script:                                                           # script tapé : les répliques restent mot pour mot
         sk = ecrire.mettre_en_scene(script)
     elif test:                                                             # sketch écrit à la main (essai d'un style)
         ecrire.NB_MAX = 20
@@ -127,13 +147,13 @@ def main():
         titres = next((c[0] for c in candidats if c[0][0]["lien"] and c[0][0]["lien"] in sk.get("sources", [])), titres)
     print(f"Sketch : « {sk['sujet']} », {len(sk['repliques'])} répliques", flush=True)
     accroche_hist = sk["repliques"][0]["t"] if sk.get("repliques") else ""
-    num = serie.prochain()[0] if (libre and serie.actif() and sk.get("serie_titre")) else None
-    if libre and sk.get("titre_accroche") and os.environ.get("VOIX_OFF", "1") != "0":
+    num = serie.prochain()[0] if (libre and serie.actif() and sk.get("serie_titre") and not REFAIRE) else None
+    if libre and sk.get("titre_accroche") and os.environ.get("VOIX_OFF", "1") != "0" and not sk.get("_monte"):
         titre_lu = sk["titre_accroche"].strip()                             # voix off d'ouverture : elle lit le titre « POV : … »
         if num: titre_lu = f"Épisode {num}. {titre_lu}"
         sk["repliques"].insert(0, {"p": "narrateur", "t": titre_lu, "d": "[excited] " + re.sub(r"\bPOV\b", "Pi-o-vi", titre_lu)})
         decaler(sk, 0)
-    if libre and "teaser" in sk and os.environ.get("ACCROCHE", "0") == "1":
+    if libre and "teaser" in sk and os.environ.get("ACCROCHE", "0") == "1" and not sk.get("_monte"):
         k = sk["teaser"] + (1 if sk["repliques"][0]["p"] == "narrateur" else 0)   # accroche choc : la réplique est rejouée en ouverture
         copie = dict(sk["repliques"][k]); copie.pop("chute", None); copie.pop("attente", None); copie.pop("chevauche", None)
         copie["teaser"] = k + 1                                           # indice de l'original une fois la copie insérée
@@ -162,7 +182,7 @@ def main():
         try:
             import cartoon, decors as decors_mod
             if modal_ok and os.environ.get("DECORS", "1") != "0":
-                t_gpu = datetime.datetime.now(); decors = decors_mod.generer(sk.get("decoupage"), graine=len(historique) + 7)
+                t_gpu = datetime.datetime.now(); decors = decors_mod.generer(sk.get("decoupage"), graine=len(historique) + 7 + (datetime.datetime.now().microsecond % 997 if REFAIRE_MODE == "decors" else 0))
                 GPU["s"] += (datetime.datetime.now() - t_gpu).total_seconds()
             duree = cartoon.rendre(sk, base + ".mp4", audios, mots=mots, decors=decors, mini=fmt == "mini")
             if not test and cartoon.MINUTAGE:                              # piste 13 : une IA regarde la vidéo finie
@@ -194,7 +214,10 @@ def main():
                            empreinte=sorted(actu.empreinte(" ".join((fiche.get("titres_sujet") or []) + [sk["sujet"]] + [r["t"] for r in sk.get("repliques", [])]))), voix=moteur, gag=bool(gag), controle_video=rapport_video[:500] or ("ok" if video_ok else ""), running_gag=sk.get("running_gag", ""), duree=round(duree, 1),
                            fichier=os.path.basename(base) + ".mp4", tag=f"emissions-{jour[:7]}", legende=legende, publie=None))
     json.dump(historique[-200:], open("episodes/historique.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
-    if THEME: historique[-1]["manuel"] = True; historique[-1]["theme"] = THEME[:300]
+    if THEME and not REFAIRE: historique[-1]["manuel"] = True; historique[-1]["theme"] = THEME[:300]
+    if REFAIRE:
+        historique[-1]["refait_de"] = REFAIRE.split("|")[0]
+        if ANCIEN and ANCIEN.get("manuel"): historique[-1]["manuel"] = True
     if AUTO: historique[-1]["auto"] = True
     historique[-1]["couts"] = couts(); print(f"Dépenses : {historique[-1]['couts']}", flush=True)
     os.makedirs("episodes/sketchs", exist_ok=True)                         # le sketch de chaque vidéo : « Refaire », exemples 👍
@@ -207,7 +230,7 @@ def main():
     if sortie:
         with open(sortie, "a") as f:
             f.write(f"video={base}.mp4\nlegende={base}.txt\nnom={os.path.basename(base)}.mp4\nmois={jour[:7]}\ntitre={sk['sujet']}\n"
-                    f"qualite={'ok' if video_ok and (not fiche or fiche.get('note', 0) >= 80) else 'faible'}\nnote={round(fiche.get('note') or 0)}\n")
+                    f"qualite={'ok' if video_ok and (not fiche or (fiche.get('note') or 0) >= SEUIL_PUB) and not REFAIRE else 'faible'}\nnote={round(fiche.get('note') or 0)}\n")
     print(f"OK : {base}.mp4 ({duree:.0f} s)")
 
 if __name__ == "__main__":
