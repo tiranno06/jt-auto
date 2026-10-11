@@ -258,14 +258,21 @@ def main():
         try:
             import cartoon, decors as decors_mod
             if modal_ok and os.environ.get("DECORS", "1") != "0":
-                lum = ""
+                lum = ""; plans_dec = None
                 if cartoon.DETAIL:                                         # même lumière que la bible de l'épisode (heure, lampes)
                     try:
-                        import studio
-                        lum = studio.bible(sk, [r for r in dict.fromkeys(x["p"] for x in sk.get("repliques", [])) if r != "narrateur"])["style_ia"]
+                        import studio, decor_dessin as DD
+                        B0 = studio.bible(sk, [r for r in dict.fromkeys(x["p"] for x in sk.get("repliques", [])) if r != "narrateur"]); lum = B0["style_ia"]
+                        plans_dec = {k: DD.dessiner(B0["lieux"][min(k, len(B0["lieux"]) - 1)], B0, graine=B0["graine"] % 9973 + k)["fond"]   # l'IA peint par-dessus notre plan
+                                     for k in range(len(sk.get("decoupage") or []))}
                     except Exception as e: print(f"Bible du studio indisponible pour les décors IA : {e}", flush=True)
-                t_gpu = datetime.datetime.now(); decors = decors_mod.generer(sk.get("decoupage"), graine=len(historique) + 7 + (datetime.datetime.now().microsecond % 997 if REFAIRE_MODE == "decors" else 0), lumiere=lum)
+                t_gpu = datetime.datetime.now(); decors = decors_mod.generer(sk.get("decoupage"), graine=len(historique) + 7 + (datetime.datetime.now().microsecond % 997 if REFAIRE_MODE == "decors" else 0), lumiere=lum, plans=plans_dec)
                 GPU["s"] += (datetime.datetime.now() - t_gpu).total_seconds()
+            try:                                                           # mode payant : ambiance sonore ElevenLabs de chaque lieu (une fois par lieu)
+                import bruitages_eleven, studio as st_
+                if cartoon.DETAIL and not DOUB:
+                    for l_ in set(st_.bible(sk, [r for r in dict.fromkeys(x["p"] for x in sk.get("repliques", [])) if r != "narrateur"])["lieux"]): bruitages_eleven.ambiance_lieu(l_)
+            except Exception as e: print(f"Ambiances ElevenLabs indisponibles : {e}", flush=True)
             duree = cartoon.rendre(sk, base + ".mp4", audios, mots=mots, decors=decors, mini=fmt == "mini")
             import controle
             tech_ok, rapport_tech = controle.technique(base + ".mp4", duree, cartoon.MINUTAGE[-1][1] if cartoon.MINUTAGE else None)     # contrôles gratuits (format, son, images noires)

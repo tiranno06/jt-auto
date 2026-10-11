@@ -108,8 +108,18 @@ def son(nom):
 def _bruit(n, rng): return rng.normal(0, 1, n)
 
 def ambiance(lieu, duree, graine=7):
-    """Ambiance de fond du lieu (très bas sous les voix) : salle, rue, bar, bureau, cuisine, caverne… Stéréo 44,1 kHz."""
-    rng = np.random.default_rng(graine); n = int(duree * SR); t = np.arange(n) / SR
+    """Ambiance de fond du lieu (très bas sous les voix) : celle d'ElevenLabs si elle a été fabriquée (sons_eleven/ambiances/),
+    sinon une ambiance de synthèse (salle, rue, bar, bureau, cuisine, caverne…). Stéréo 44,1 kHz."""
+    n = int(duree * SR)
+    p = os.path.join(ELEVEN, "ambiances", f"{lieu}.mp3")
+    if os.path.exists(p):
+        try:
+            a = _lire(p)
+            if len(a) > SR:
+                a = np.tile(a, (n // len(a) + 1, 1))[:n]
+                return (a / (np.abs(a).max() + 1e-9) * 0.12).astype(np.float32)
+        except Exception: pass
+    rng = np.random.default_rng(graine); t = np.arange(n) / SR
     fond = _passe_bas(_bruit(n, rng), 400) * 0.05                          # « room tone » : le souffle de la pièce
     if lieu in ("bar", "restaurant", "palais"):                            # murmure de clients, tintements
         mur = _bande(_bruit(n, rng), 250, 2200) * (0.6 + 0.4 * np.sin(2 * np.pi * 0.23 * t + 1) * np.sin(2 * np.pi * 0.71 * t)) * 0.08

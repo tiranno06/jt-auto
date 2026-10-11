@@ -22,19 +22,28 @@ class Decor:
     @modal.enter()
     def charger(self):
         import torch
-        from diffusers import StableDiffusionXLPipeline
+        from diffusers import StableDiffusionXLPipeline, StableDiffusionXLImg2ImgPipeline
         self.pipe = StableDiffusionXLPipeline.from_pretrained(MODELE, torch_dtype=torch.float16, variant="fp16", use_safetensors=True).to("cuda")
+        self.retouche = StableDiffusionXLImg2ImgPipeline(**self.pipe.components)  # même modèle : « peint par-dessus » un plan de décor
         cache.commit()
 
     @modal.method()
-    def generer(self, decors: list, graine: int = 7) -> list:
-        """decors : descriptions en anglais (lieu + objets du gag). Renvoie des PNG 768x1344 (9:16)."""
+    def generer(self, decors: list, graine: int = 7, plans: list = None) -> list:
+        """decors : descriptions en anglais (lieu + objets du gag). plans : PNG du décor dessiné par le robot (ou b"") : l'IA peint
+        PAR-DESSUS ce plan (fenêtre, comptoir, lampes restent à leur place). Renvoie des PNG 768x1344 (9:16)."""
         import torch
+        from PIL import Image
         out = []
         for k, d in enumerate(decors):
             try:
-                im = self.pipe(STYLE.format(decor=d), negative_prompt=NEGATIF, height=1344, width=768, num_inference_steps=30,
-                               guidance_scale=6.5, generator=torch.Generator("cuda").manual_seed(graine + k)).images[0]
+                g = torch.Generator("cuda").manual_seed(graine + k); plan = (plans or [b""] * len(decors))[k] if plans else b""
+                if plan:
+                    init = Image.open(io.BytesIO(plan)).convert("RGB").resize((768, 1344))
+                    im = self.retouche(STYLE.format(decor=d), negative_prompt=NEGATIF, image=init, strength=0.62, num_inference_steps=36,
+                                       guidance_scale=6.5, generator=g).images[0]
+                else:
+                    im = self.pipe(STYLE.format(decor=d), negative_prompt=NEGATIF, height=1344, width=768, num_inference_steps=30,
+                                   guidance_scale=6.5, generator=g).images[0]
                 b = io.BytesIO(); im.save(b, format="PNG"); out.append(b.getvalue())
             except Exception as e:
                 print("decor:", e); out.append(b"")
