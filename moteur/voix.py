@@ -78,4 +78,4 @@ def generer(repliques, secours):
             return chatterbox(repliques, tmp), ["Chatterbox (MIT), voix Multilingual LibriSpeech (CC BY 4.0)"], None
         except Exception as e:
             print(f"Chatterbox indisponible ({e}) : voix de secours Piper.", flush=True)
-    return piper(repliques, tmp, secours), ["Piper / SIWIS (CC BY 4.0)"], None
+    return piper(repliques, tmp, secours), ["Piper (voix libres Siwis, Tom, UPMC, Gilles)"], None
