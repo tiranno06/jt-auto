@@ -70,11 +70,11 @@ STYLE = {  # yeux, sourcils, forme de bouche au repos, bras gauche, bras droit, 
 # rendu détaillé : jeu d'acteur continu (sourcils, pupilles, yeux plissés, coins de la bouche, épaules, buste, pied)
 EXPRESSIF = {
     "rire": dict(plisse=0.6, coins=0.9, sourcils_h=0.5), "joie": dict(plisse=0.4, coins=1.0, pupille=1.2, sourcils_h=0.7),
-    "amour": dict(coins=0.7, sourcils_h=0.5), "fier": dict(coins=0.6, penche=-0.3), "colere": dict(coins=-0.7, pupille=0.8, penche=0.6),
-    "cri": dict(penche=0.8), "pleurs": dict(coins=-0.9, penche=-0.2), "soupir": dict(coins=-0.6, epaules=0.3), "triste": dict(coins=-0.8),
-    "blase": dict(coins=-0.2), "sceptique": dict(sourcil_leve=0.9, coins=-0.3), "gene": dict(epaules=0.6, coins=-0.3, pupille=0.9),
+    "amour": dict(coins=0.7, sourcils_h=0.5), "fier": dict(coins=0.6, penche=-0.3), "colere": dict(coins=-0.7, pupille=0.8, penche=0.6, narines=True),
+    "cri": dict(penche=0.8, narines=True), "pleurs": dict(coins=-0.9, penche=-0.2, cernes=True), "soupir": dict(coins=-0.6, epaules=0.3), "triste": dict(coins=-0.8, cernes=True),
+    "blase": dict(coins=-0.2, paupiere=0.35), "sceptique": dict(sourcil_leve=0.9, coins=-0.3), "gene": dict(epaules=0.6, coins=-0.3, pupille=0.9),
     "choc": dict(pupille=1.4, sourcils_h=1.2, penche=-0.5), "panique": dict(epaules=0.8, sourcils_h=1.0), "reflechit": dict(sourcil_leve=0.6, coins=-0.2),
-    "idee": dict(sourcils_h=1.0, pupille=1.3, coins=0.8), "fatigue": dict(epaules=0.2, coins=-0.3, sourcils_h=-0.4), "chuchote": dict(penche=0.5),
+    "idee": dict(sourcils_h=1.0, pupille=1.3, coins=0.8), "fatigue": dict(epaules=0.2, coins=-0.3, sourcils_h=-0.4, cernes=True, paupiere=0.45), "chuchote": dict(penche=0.5),
 }
 # rendu détaillé : visage plus expressif pour chaque émotion (yeux, bouche au repos, effets, teint)
 DETAILS_EMO = {
@@ -391,7 +391,16 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
                 p["pupille"] = float(np.clip(p.get("pupille", 1.0) + 0.1 * max(0.0, zf), 0.7, 1.45))
                 p["tilt"] += 3.5 * zf
                 if k >= 3 and 0 <= k < len(q["lv"]) and q["lv"][k] - q["lv"][k - 3] > 0.45: p["y"] += 10 * s     # hochement sur les syllabes appuyées
+                res = TON[q["i"]][1]; u_f = (tm - (q["fin"] - 0.6)) / 0.6     # la fin de la phrase
+                if 0 <= u_f <= 1.2 and (res.get("fin", 0) > 0.5 or q.get("texte", "").rstrip().endswith("?")):   # question : sourcil levé, tête penchée
+                    u_q = min(1.0, u_f); p["sourcil_leve"] = max(p.get("sourcil_leve", 0.0), 0.9 * u_q); p["tilt"] += 7 * u_q; p["pupille"] = max(p.get("pupille", 1.0), 1.1)
+                elif 0 <= u_f <= 1.0 and res.get("fin", 0) < -0.5: p["tilt"] -= 3 * u_f; p["y"] += 6 * s * u_f    # affirmation : la tête descend
+                if zf < -0.5 and lv < 0.5: p["paupiere"] = max(p.get("paupiere", 0.0), 0.3)    # voix grave et molle : paupières lourdes
+                if zf > 1.2 and lv > 0.6: p["sourcils_h"] = max(p.get("sourcils_h", 0.0), 1.1); p["pupille"] = max(p.get("pupille", 1.0), 1.3)   # voix qui monte fort
+            if B and q["emo"] in ("colere", "cri"): p["rougeur"] = max(p.get("rougeur", 0.0), 0.65 * lv)   # le rouge monte avec la voix
         else:
+            if B and q["p"] != role and q["i"] in TON and q["fin"] - 0.35 <= tm <= q["fin"] + 0.25 and TON[q["i"]][1].get("fin", 0) < -0.3:
+                p["y"] += 7 * s * math.sin(math.pi * (tm - q["fin"] + 0.35) / 0.6)   # celui qui écoute acquiesce quand la phrase se pose
             p["bouche"] = 0.0 if emo not in ("choc", "panique") else 0.25
             p["sq"] = 0.012 * math.sin(tm * 2.4 + len(role))                  # respiration
             p["tilt"] = 3 * math.sin(tm * 0.9 + len(role))

@@ -543,7 +543,7 @@ BOUCHES = ("neutre", "sourire", "triste", "o", "cri", "dents", "moue", "coin", "
 def _visage(img, t, rx, ry, s, p, P):
     cx, cy = t; tilt = math.radians(p["tilt"]); gx, gy = p["regard"]
     def R(px, py): return _rot(px, py, cx, cy, tilt)
-    ex = 52 * s; ey = cy + 4 * s; er = 15 * s
+    ex = 52 * s; ey = cy + 4 * s; er = 15 * s * float(p.get("yeux_k", 1.0))       # taille des yeux propre au personnage
     yeux, pa = p["yeux"], p["paupiere"]
     detail = bool(p.get("reflets"))                                        # visage détaillé (moteur cartoon) ; le logo garde le dessin d'origine
     lum = p.get("lumiere", 0) or -1
@@ -602,7 +602,7 @@ def _visage(img, t, rx, ry, s, p, P):
                     _ligne(img, (bx_ - sg * j * 5 * s, by_ + j * 3 * s), (bx_ - sg * j * 5 * s + sg * 11 * s, by_ + j * 3 * s - 10 * s), TRAIT, 3.5 * s)
         # sourcils : côté intérieur (vers le nez) = ox - sg * … : colère = intérieur bas (en V), tristesse = intérieur haut
         by = oy - 34 * s - float(p.get("sourcils_h", 0.0)) * 12 * s - (float(p.get("sourcil_leve", 0.0)) * 14 * s if sg > 0 else 0)   # l'intonation fait bouger les sourcils
-        e_s = (7 if not P.get("moustache") else 10) * s
+        e_s = (7 if not P.get("moustache") else 10) * s * float(p.get("sourcil_ep", 1.0))
         if so == "colere": a, b = (ox - sg * 22 * s, by + 10 * s), (ox + sg * 20 * s, by - 10 * s)
         elif so == "triste": a, b = (ox - sg * 22 * s, by - 10 * s), (ox + sg * 20 * s, by + 8 * s)
         elif so == "hausses": a, b = (ox - 22 * s, by - 16 * s), (ox + 22 * s, by - 16 * s)
@@ -611,13 +611,28 @@ def _visage(img, t, rx, ry, s, p, P):
         else: a, b = ((ox - 20 * s, by - 2 * s), (ox + 20 * s, by - 2 * s)) if detail and yeux in ("ouverts", "louche") else (None, None)
         if a:
             if detail and so != "neutre": _poly(img, [R(*a), R((a[0] + b[0]) / 2, min(a[1], b[1]) - 4 * s), R(*b)], TRAIT, False, e_s)
-            elif detail: _arc(img, R((a[0] + b[0]) / 2, a[1] + 6 * s), (22 * s, 8 * s), math.degrees(tilt), 200, 340, TRAIT, 5 * s)
+            elif detail: _arc(img, R((a[0] + b[0]) / 2, a[1] + 6 * s), (22 * s, 8 * s), math.degrees(tilt), 200, 340, TRAIT, 5 * s * float(p.get("sourcil_ep", 1.0)))
             else: _ligne(img, R(*a), R(*b), TRAIT, 7 * s)
     if detail and p.get("rides", True):                                    # rides d'expression
         if so in ("hausses", "sceptique") or yeux in ("grands", "minuscules"):
             for j in range(3): _arc(img, R(cx, cy - ry * (0.45 + 0.09 * j)), (rx * (0.22 - 0.03 * j), 6 * s), math.degrees(tilt), 200, 340, TRAIT, 3 * s)
         if so in ("colere", "fronces"):
             for sg in (-1, 1): _ligne(img, R(cx + sg * 7 * s, cy - 38 * s), R(cx + sg * 5 * s, cy - 22 * s), TRAIT, 3 * s)
+    age = float(p.get("age") or 0)
+    if detail and age >= 38:                                               # l'âge : pattes d'oie, sillons, front, poches sous les yeux
+        k_a = min(1.0, (age - 38) / 30); trait_r = _clair(TRAIT, 0.35)
+        for sg in (-1, 1):
+            for j in range(1 + int(2 * k_a)): _ligne(img, R(cx + sg * (ex + er * 1.5), cy + (j - 1) * 7 * s), R(cx + sg * (ex + er * 2.2), cy + (j - 1) * 11 * s), trait_r, 2.5 * s)
+            if age >= 45: _arc(img, R(cx + sg * 26 * s, cy + 64 * s), (16 * s, 20 * s), math.degrees(tilt), (-50 if sg > 0 else 140), (40 if sg > 0 else 230), trait_r, 2.5 * s)   # plis autour de la bouche
+            if age >= 55: _arc(img, R(cx + sg * ex, cy + er * 1.6), (er * 0.9, er * 0.4), math.degrees(tilt), 20, 160, trait_r, 2.5 * s)
+        if age >= 55 and so not in ("hausses", "sceptique"):
+            for j in range(2): _arc(img, R(cx, cy - ry * (0.5 + 0.1 * j)), (rx * (0.2 - 0.04 * j), 5 * s), math.degrees(tilt), 200, 340, trait_r, 2.5 * s)
+    if detail and p.get("cernes"):                                         # fatigue, pleurs : cernes
+        for sg in (-1, 1): _arc(img, R(cx + sg * ex, cy + er * 1.35), (er * 1.1, er * 0.55), math.degrees(tilt), 20, 160, (170, 150, 190), 5 * s)
+    if detail and p.get("narines"):                                        # colère : narines dilatées
+        for sg in (-1, 1): _ellipse(img, R(cx + sg * 7 * s, cy + 44 * s), (3.5 * s, 2.5 * s), 0, TRAIT)
+    if detail and p.get("maquillage") and not (p.get("joues") or p.get("gene")):
+        for sg in (-1, 1): _ellipse(img, R(cx + sg * 86 * s, cy + 44 * s), (18 * s, 9 * s), 0, (250, 214, 214))
     if p.get("joues") or p.get("gene"):                                    # joues roses (rire) ; gêne : grosses rougeurs hachurées
         for sg in (-1, 1):
             _ellipse(img, R(cx + sg * 88 * s, cy + 46 * s), ((26 if p.get("gene") else 20) * s, (14 if p.get("gene") else 11) * s), 0, (245, 160, 165))
@@ -638,8 +653,10 @@ def _bouche(img, R, cx, cy, s, p, detail):
     def coins_(w, yc):
         if detail and abs(co) > 0.2:
             for sg in (-1, 1): _ligne(img, (mx + sg * w * 0.92, yc), (mx + sg * (w + 8 * s), yc - co * 10 * s), TRAIT, 4 * s)
+    rouge = p.get("rouge")                                                 # rouge à lèvres
     def ouverte(w, h, yc):
         coins_(w, yc - h * 0.15)
+        if rouge: _ellipse(img, (mx, yc), (w + 6 * s, h + 6 * s), 0, rouge)
         _ellipse(img, (mx, yc), (w, h), 0, TRAIT)
         if h > 13 * s: _ellipse(img, (mx, yc + h * 0.5), (w * 0.55, h * 0.35), 0, (220, 80, 90))      # langue
         if dents and h > 11 * s:                                          # rangée de dents du haut
@@ -647,6 +664,9 @@ def _bouche(img, R, cx, cy, s, p, detail):
             if roi:
                 x0, y0, x1, y1 = roi; m = _masque_ellipse(roi, (mx, yc), (w - 3 * s, h - 3 * s), 0); m[int(yc - h * 0.45 - y0):] = 0
                 img[y0:y1, x0:x1][m > 128] = (250, 250, 250)
+                if h > 26 * s:                                             # grande bouche ouverte : dents du bas aussi
+                    m = _masque_ellipse(roi, (mx, yc), (w - 3 * s, h - 3 * s), 0); m[:int(yc + h * 0.62 - y0)] = 0
+                    img[y0:y1, x0:x1][m > 128] = (245, 245, 242)
     if v and f not in ("cri", "sourire") and o > 0.06:                   # bouche calée sur le son prononcé (syllabe par syllabe)
         if v == "M":                                                       # m, b, p : lèvres fermées
             _ligne(img, (mx - 18 * s, my + 2 * s), (mx + 18 * s, my + 2 * s), TRAIT, 7 * s); return
@@ -677,6 +697,7 @@ def _bouche(img, R, cx, cy, s, p, detail):
             _poly(img, [(mx - w * 1.3, my - 4 * s)] + [(mx + w * 1.3 * math.cos(math.pi * k / 10), my - 4 * s + (h + 10 * s) * math.sin(math.pi * k / 10)) for k in range(10, -1, -1)], TRAIT)
         else: ouverte(w, h, my + h * 0.4)
     elif f == "sourire":
+        if rouge: _poly(img, [(mx - 30 * s + k * 6 * s, my + 10 * s * math.sin(math.pi * k / 10)) for k in range(11)], rouge, False, 13 * s)
         _poly(img, [(mx - 30 * s + k * 6 * s, my + 10 * s * math.sin(math.pi * k / 10)) for k in range(11)], TRAIT, False, 6 * s)
         if detail:
             for sg in (-1, 1): _ligne(img, (mx + sg * 31 * s, my - 4 * s), (mx + sg * 36 * s, my + 4 * s), TRAIT, 4 * s)
@@ -693,9 +714,12 @@ def _bouche(img, R, cx, cy, s, p, detail):
     elif f == "tordue":                                                    # bouche qui hésite (gêne, mensonge)
         _poly(img, [(mx - 26 * s + k * 5.2 * s, my + 5 * s * math.sin(k * 1.4)) for k in range(11)], TRAIT, False, 5.5 * s)
     elif detail and abs(co) > 0.15:                                        # bouche au repos qui sourit ou fait la moue
+        if rouge: _poly(img, [(mx - 22 * s + k * 4.4 * s, my - co * 9 * s * ((k - 5) / 5) ** 2) for k in range(11)], rouge, False, 13 * s)
         _poly(img, [(mx - 22 * s + k * 4.4 * s, my - co * 9 * s * ((k - 5) / 5) ** 2) for k in range(11)], TRAIT, False, 6 * s)
     else:
-        _ligne(img, (mx - 16 * s, my), (mx + 16 * s, my), TRAIT, 6 * s)
+        if rouge:                                                          # lèvres fermées maquillées
+            _ellipse(img, (mx, my - 3 * s), (20 * s, 6 * s), 0, rouge); _ellipse(img, (mx, my + 4 * s), (18 * s, 7 * s), 0, rouge)
+        _ligne(img, (mx - 16 * s, my), (mx + 16 * s, my), TRAIT, 6 * s if not rouge else 4 * s)
 
 def _accessoire(img, t, rx, ry, s, p, P):
     cx, cy = t; a = P["accessoire"]; col = P["couleur"]; tilt = math.radians(p["tilt"])

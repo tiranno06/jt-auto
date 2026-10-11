@@ -68,7 +68,9 @@ def _pose(F, p):
     if b and b != "moustache" and b not in det: det.append(b)
     C.setdefault("c_barbe", tuple(F["c_cheveux"]))
     C["details"] = tuple(det); C.pop("cheveux", None); C.pop("c_cheveux", None)
-    return dict(p, adulte=True, s=p["s"] * F["taille"], peau=tuple(F["peau"]) if PEAU_HUMAINE else None, costume=C, reflets=True)
+    rouge = (200, 60, 80) if F.get("maquillage") or "rouge_levres" in det else None
+    return dict(p, adulte=True, s=p["s"] * F["taille"], peau=tuple(F["peau"]) if PEAU_HUMAINE else None, costume=C, reflets=True,
+                age=F["age"], yeux_k=F.get("yeux", 1.0), sourcil_ep=F.get("sourcils", 1.0), rouge=rouge, maquillage=F.get("maquillage"))
 
 def dessiner(img, F, p):
     """Dessine le personnage de fiche F (version adulte de nos marionnettes) selon la pose p. Renvoie (tête, (rx, ry))."""

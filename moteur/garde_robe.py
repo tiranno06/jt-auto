@@ -116,7 +116,7 @@ def cheveux_avant(img, t, rx, ry, s, p, style, col, dos):
         _masse(img, pts, col, ep)
         for k in range(5):                                                 # mèches qui partent de la raie
             sg = 1 if k >= 2 else -1; u = (k - 1.5) / 3 if sg > 0 else (k + 1) / 2
-            _meche(img, R(raie + sg * 6 * s, cy - ry * 0.88), R(raie + sg * rx * (0.3 + 0.25 * abs(u)), cy - ry * 0.85), R(raie + sg * rx * (0.35 + 0.4 * abs(u)), cy - ry * (0.52 - 0.1 * abs(u))), fonce, 3 * s)
+            _meche(img, R(raie + sg * 6 * s, cy - ry * 0.88), R(raie + sg * rx * (0.22 + 0.2 * abs(u)), cy - ry * 0.85), R(raie + sg * rx * (0.28 + 0.28 * abs(u)), cy - ry * (0.55 - 0.08 * abs(u))), fonce, 3 * s)
         M._ligne(img, R(raie, cy - ry * 0.97), R(raie, cy - ry * 0.74), fonce, 3 * s)
         if style in ("ondule", "frange"):                                  # longueurs devant les joues, de chaque côté du visage
             bas = 0.95 if style == "ondule" else 0.62
@@ -125,7 +125,7 @@ def cheveux_avant(img, t, rx, ry, s, p, style, col, dos):
                        R(cx + sg * rx * 0.86, cy + ry * (bas - 0.1)), R(cx + sg * rx * 0.88, cy + ry * 0.2)]
                 _masse(img, pts, col, ep); _meche(img, R(cx + sg * rx * 0.98, cy), R(cx + sg * rx * 1.06, cy + ry * 0.3), R(cx + sg * rx * 1.0, cy + ry * (bas - 0.12)), fonce, 3 * s)
         elif style == "raie":
-            for sg in (-1, 1): M._ligne(img, R(cx + sg * rx * 0.93, cy - ry * 0.32), R(cx + sg * rx * 0.95, cy - ry * 0.02), col, 12 * s)   # pattes
+            for sg in (-1, 1): M._ligne(img, R(cx + sg * rx * 0.86, cy - ry * 0.32), R(cx + sg * rx * 0.88, cy - ry * 0.05), col, 11 * s)   # pattes
     elif style == "afro":
         pts = _calotte(cx, cy, rx, ry, R, 1.0, 0.25) + [R(cx + rx * (0.8 - 0.2 * j), cy - ry * (0.48 + (0.06 if j % 2 else 0))) for j in range(9)]
         M._poly(img, pts, col)
