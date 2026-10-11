@@ -245,41 +245,34 @@
   "cadence": null
  },
  {
-  "moment": "soir",
+  "moment": "jour",
   "lieux": [
    "salon"
   ],
   "source": "robot+image",
-  "duree": 134.6,
+  "duree": 19.6,
   "plans": {
    "large": 1,
-   "epaule": 11,
-   "serre": 15,
-   "tres_serre": 11
+   "serre": 1
   },
   "mouvements": {
-   "avance": 4,
-   "fixe": 32,
-   "zoom_choc": 2
+   "avance": 2
   },
   "costumes": {
-   "presentateur": "polo",
-   "envoyee": "pull"
+   "envoyee": "chemise"
   },
   "figurants": 0,
-  "ambiances": [
-   "poussiere"
-  ],
+  "ambiances": [],
   "controle": "ok",
-  "fichier": "2026-10-11_21h43_emission.mp4",
+  "fichier": "2026-10-11_21h52_emission.mp4",
   "cine": {
    "focus": true,
    "vertige": true,
-   "tiers": false,
+   "tiers": true,
    "etalonnage": true,
-   "profondeur": true,
+   "profondeur": false,
    "grain": true,
-   "reflets": false,
+   "reflets": true,
    "son": true
   },
   "cadence": null
