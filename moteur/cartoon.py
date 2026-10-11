@@ -752,15 +752,20 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
                 k_ = int(5 + 120 * flou_h) | 1; img = cv2.blur(img, (k_, 1 if sh["passage"] == "file" else k_ // 3 | 1))
         if B: img = cv2.multiply(img, GRADE, scale=1 / 255)                 # étalonnage de l'heure + vignettage (avant les textes)
         fr = img.astype(np.float32)
-        if q["p"] == "narrateur" and tm <= q["fin"] + 0.3:                 # voix off d'ouverture : le titre en grand au centre
-            V = VOIX_OFF[q["i"]]; a2 = pop(V, (tm - q["deb"] + 0.2) / 0.3)
-            poser(fr, a2, (W - a2.shape[1]) / 2, H * 0.36 - a2.shape[0] / 2)
+        if q["p"] == "narrateur" and tm <= q["fin"] + 0.3:                 # voix off : le titre en grand au centre à l'ouverture,
+            V = VOIX_OFF[q["i"]]; a2 = pop(V, (tm - q["deb"] + 0.2) / 0.3)   # en haut de l'image ensuite (jamais sur les têtes)
+            poser(fr, a2, (W - a2.shape[1]) / 2, (H * 0.36 - a2.shape[0] / 2) if q is ph[0] else 300)
+            if q is not ph[0]: poser(fr, FILIGRANE, 28, 118)
             return np.clip(fr, 0, 255).astype(np.uint8)
         poser(fr, FILIGRANE, 28, 118)                                     # signature discrète de la chaîne
         T = TITRES.get(sc) if mini else TITRE_FIXE
         if T is not None:
             t0 = min(z2["deb"] for z2 in ph if z2["scene"] == sc) if mini else 0
-            a2 = pop(T, (tm - t0 + 0.25) / 0.25); poser(fr, a2, (W - a2.shape[1]) / 2, 190)
+            d_t = tm - t0
+            if not mini or d_t < 3.2:                                      # carton de scène : 3 s puis il s'efface (il ne cache pas les visages)
+                a2 = pop(T, (d_t + 0.25) / 0.25)
+                if mini and d_t > 2.7: a2 = a2.copy(); a2[..., 3] *= max(0.0, (3.2 - d_t) / 0.5)
+                poser(fr, a2, (W - a2.shape[1]) / 2, 190)
         g = next((x for x in q["groupes"] if x[1] <= tm < x[2] + (0.2 if x is q["groupes"][-1] else 0)), None)
         if g and q["deb"] <= tm < q["fin"] + 0.2:
             cc = pop(carton(g[0]), (tm - g[1]) / 0.12); poser(fr, cc, (W - cc.shape[1]) / 2, CAP_Y - cc.shape[0] / 2)
