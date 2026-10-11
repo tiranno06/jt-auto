@@ -1,32 +1,26 @@
 Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
-Recherche web indisponible (Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too lo) : vérification sur les seuls articles fournis.
-  ARRÊT : accès à l'API Claude impossible (Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CfvAB7xMULoWKVhnTmoVY'}). Action requise : console.anthropic.com > Settings > Limits (plafond de dépenses) ou Billing (crédit).
-Idées de sketch impossibles : Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CfvAB7xMULoWKVhnTmoVY'}
-Traceback (most recent call last):
-  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 315, in <module>
-    main()
-  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 128, in main
-    try: candidats = [(c, "idée") for c in ecrire.idees_libres(recents=[f"{h.get('titre', '')} : {h.get('accroche', '')}" for h in historique[-30:]],
-                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/jt-auto/jt-auto/moteur/ecrire.py", line 565, in idees_libres
-    r = _appel(client, None, [{"role": "user", "content": IDEES.format(secondes=SECONDES, recents=rtxt, style=STYLE_LIBRE) + _serie.idees() + (("\n" + consignes) if consignes else "")
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/jt-auto/jt-auto/moteur/ecrire.py", line 456, in _appel
-    return _appel(client, systeme, messages, outil, False, max_tokens, modele)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/jt-auto/jt-auto/moteur/ecrire.py", line 437, in _appel
-    r = client.messages.create(**kw)
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/anthropic/_utils/_utils.py", line 294, in wrapper
-    return func(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/anthropic/resources/messages/messages.py", line 1029, in create
-    return self._post(
-           ^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/anthropic/_base_client.py", line 1557, in post
-    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
-                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/anthropic/_base_client.py", line 1222, in request
-    raise self._make_status_error_from_response(response) from None
-anthropic.BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CfvAB7xMULoWKVhnTmoVY'}
+Vidéo depuis TikTok : https://www.tiktok.com/@petitsdramas/video/7695069178738314529
+  son téléchargé (yt-dlp --impersonate chrome)
+  son récupéré : 23.2 s, compte d'origine @petitsdramas
+[ WARN:0@2.023] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  image de la vidéo : 2 plans (≈ 11.75 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 0 %, large 100 % ; caméra : fixe 57 %, avance 15 %, recul 15 %, travelling 2 %, epaule 8 % ; 0 personne(s) à l'écran : aucun visage repéré ; agitation 1.0 ; lumière jour ; fond [236, 223, 220]
+  voix isolées (ElevenLabs)
+  transcription ElevenLabs : 52 mots, 3 voix, langue fra
+  7 répliques, voix : {'speaker_1': 212, 'speaker_0': 308, 'speaker_2': 223}
+  scène reconstituée : Dans une chambre en désordre transformée en coin bureau, Jojo et Lila tentent de réinitialiser un mot de passe oublié devant l'ordinateur. La voix froide du site refuse tout, les bloque 24 heures et se moque d'eux quand ils veulent supprimer le compte.
+  casting : speaker_0 → Jojo, speaker_1 → Lila, speaker_2 → voix off
+Sketch : « MOT DE PASSE OUBLIÉ », 7 répliques
+  décor 0 : Messy bedroom desk corner with pink walls big computer monitor showing
+  décor 1 : Same messy bedroom desk at daylight computer monitor showing a red 'bl
+montage : 13 plans (0.2:large>pre/coupe 1.1:serre>env/coupe 2.4:moyen>env/glisse 4.1:serre>env/glisse 5.8:serre>nar/coupe 7.3:contre_plongee>env/coupe 9.8:plongee>pre/coupe 11.0:large>pre/glisse 12.1:contre_plongee>env/coupe 13.3:tres_serre>pre/file 13.8:large>env/file 15.1:epaule>env/glisse 16.1:tres_serre>nar/coupe)
+studio : jour, lieux ['chambre', 'chambre'], tenues presentateur=capuche, envoyee=pull, 0 figurant(s), ambiances [] ; plans large/fixe moyen/avance serre/zoom_choc contre_plongee/avance plongee/recul contre_plongee/epaule tres_serre/zoom_choc
+cartoon : durée 25.6 s, 7 répliques, 2 scène(s), personnages ['presentateur', 'envoyee']
+  image 0/768
+  image 300/768
+  image 600/768
+Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
+Contrôle vidéo : 3 défaut(s) grave(s), 1 mineur(s) — image 1 : L'ouverture devrait afficher un titre. L'image montre à la place une scène avec le sous-titre « QUAND TU CLIQUES MOT »,  (grave); image 3 : Lila parle (« Nouveau mot de passe : Kevin un deux trois ») mais aucun sous-titre n'est affiché. Jojo est en partie coup (grave); image 6 : C'est Lila qui doit parler (« Mon ex m'a bloqué moins longtemps. Je supprime ce compte. »). L'image montre Jojo en gros  (grave); image 7 : Le carton de fin « Rassure-toi, supprimer ton compte prend un clic après » est posé sur les têtes des deux personnages e (mineur)
+Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
+Dépenses : {'claude_usd': 0.071, 'claude_jetons': 7888, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 11}
+OK : sortie/2026-10-11_18h27_emission.mp4 (26 s)

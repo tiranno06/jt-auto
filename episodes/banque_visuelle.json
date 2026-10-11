@@ -1,0 +1,213 @@
+[
+ {
+  "date": "2026-10-11",
+  "source": "https://www.tiktok.com/@petitsdramas/video/7695069178738314529",
+  "auteur": "petitsdramas",
+  "visuel": {
+   "duree": 23.5,
+   "nb_plans": 2,
+   "duree_plan": 11.75,
+   "coupes": [
+    22.0
+   ],
+   "plans": {
+    "tres_serre": 0.0,
+    "serre": 0.0,
+    "moyen": 0.0,
+    "large": 1.0
+   },
+   "camera": {
+    "fixe": 0.578,
+    "avance": 0.156,
+    "recul": 0.156,
+    "travelling": 0.022,
+    "epaule": 0.089
+   },
+   "nb_personnes": 0,
+   "personnes": [],
+   "visages": false,
+   "sourires": 0.0,
+   "energie": 1.0,
+   "mur": [
+    236,
+    223,
+    220
+   ],
+   "palette": [
+    [
+     241,
+     232,
+     229,
+     0.343
+    ],
+    [
+     209,
+     189,
+     186,
+     0.269
+    ],
+    [
+     177,
+     145,
+     146,
+     0.217
+    ],
+    [
+     99,
+     104,
+     133,
+     0.07
+    ],
+    [
+     251,
+     197,
+     31,
+     0.058
+    ],
+    [
+     28,
+     24,
+     29,
+     0.043
+    ]
+   ],
+   "lumiere": {
+    "luminosite": 204.7,
+    "chaleur": 27.2,
+    "saturation": 44.8
+   },
+   "moment": "jour"
+  },
+  "claude": {
+   "lieux": [
+    "chambre",
+    "chambre"
+   ],
+   "moment": "jour",
+   "costumes": {
+    "presentateur": {
+     "haut": "capuche",
+     "c_haut": "gris",
+     "motif": "uni",
+     "bas": "jogging",
+     "chaussures": "chaussons",
+     "details": [
+      "casque_audio"
+     ],
+     "chapeau": "casquette",
+     "c_chapeau": "bleu",
+     "cheveux": "court",
+     "c_cheveux": "brun"
+    },
+    "envoyee": {
+     "haut": "pull",
+     "c_haut": "blanc",
+     "motif": "uni",
+     "bas": "jean",
+     "chaussures": "baskets",
+     "details": [
+      "boucles_oreilles",
+      "rouge_levres"
+     ],
+     "chapeau": "serre_tete",
+     "c_chapeau": "rose",
+     "cheveux": "long",
+     "c_cheveux": "châtain"
+    }
+   },
+   "objets": [
+    {
+     "replique": 1,
+     "objet": "telephone"
+    },
+    {
+     "replique": 4,
+     "objet": "cafe"
+    }
+   ],
+   "gags": [
+    "Post-it : mdp = Kevin123 (NE PAS OUBLIER)",
+    "Écran : « Réessayez dans 23 h 59 »",
+    "Affiche : Keep calm & clique sur oublié"
+   ],
+   "ambiances": [],
+   "plans": [
+    {
+     "replique": 0,
+     "plan": "large",
+     "mouvement": "fixe",
+     "geste": "desespoir",
+     "reaction": "soupir"
+    },
+    {
+     "replique": 1,
+     "plan": "moyen",
+     "mouvement": "avance",
+     "geste": "pouce",
+     "reaction": "sceptique"
+    },
+    {
+     "replique": 2,
+     "plan": "serre",
+     "mouvement": "zoom_choc",
+     "reaction": "choc"
+    },
+    {
+     "replique": 3,
+     "plan": "contre_plongee",
+     "mouvement": "avance",
+     "geste": "pointe_d",
+     "reaction": "yeux_au_ciel"
+    },
+    {
+     "replique": 4,
+     "plan": "plongee",
+     "mouvement": "recul",
+     "geste": "desespoir",
+     "reaction": "bras_croises"
+    },
+    {
+     "replique": 5,
+     "plan": "contre_plongee",
+     "mouvement": "epaule",
+     "geste": "stop",
+     "reaction": "rire"
+    },
+    {
+     "replique": 6,
+     "plan": "tres_serre",
+     "mouvement": "zoom_choc",
+     "reaction": "regard_camera"
+    }
+   ]
+  },
+  "realisation": {
+   "moment": "jour",
+   "lieux": [
+    "chambre",
+    "chambre"
+   ],
+   "gags": [
+    "Post-it : mdp = Kevin123 (NE PAS OUBLIER)",
+    "Écran : « Réessayez dans 23 h 59 »",
+    "Affiche : Keep calm & clique sur oublié"
+   ],
+   "ambiances": [],
+   "source": "auteur+image",
+   "tenues": {
+    "presentateur": "capuche",
+    "envoyee": "pull"
+   },
+   "plans": [
+    "large/fixe",
+    "moyen/avance",
+    "serre/zoom_choc",
+    "contre_plongee/avance",
+    "plongee/recul",
+    "contre_plongee/epaule",
+    "tres_serre/zoom_choc"
+   ]
+  },
+  "video": "2026-10-11_18h27_emission.mp4"
+ }
+]
