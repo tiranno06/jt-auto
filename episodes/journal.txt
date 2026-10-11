@@ -1,34 +1,64 @@
 Casting déjà fait.
-Type de vidéo : gag éclair (~15 s)
+Type de vidéo : sketch long (+1 min)
 Crédits au départ : Claude secours, ElevenLabs ok
-Claude indisponible (crédit Claude épuisé ou clé absente (vérifié au départ)) : bascule automatique sur un sketch de secours (outils gratuits pour l'écriture).
+Vidéo manuelle (idée) : « Un client qui parle avec l'employé de la poste au bureau de la poste , le sujet de discussion et un colis perdu »
+Sélection automatique impossible (Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API.) : premier candidat.
+Claude indisponible (Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go) : bascule automatique sur un sketch de secours (outils gratuits pour l'écriture).
 Notification envoyée à 1/1 appareil(s) : Crédit Claude épuisé ?
-Sketch de secours (sans Claude) : « Le vélo d'occasion »
-Sketch : « Le vélo d'occasion », 6 répliques
-Accroche (pov) : « POV : il a fait une affaire »
+Sketch de secours (sans Claude) : « Le déménagement »
+Moteur humoristique : 0 appels Claude, 0 jetons lus, 0 jetons écrits, 0 recherche(s) web
+Sketch : « Le déménagement », 15 répliques
+Accroche (question) : « Qui t'aide à déménager, toi ? »
   voix sur mesure des personnages en remplaçantes
-  dialogue ElevenLabs : paquet 1/1, 7/7 répliques découpées
-  voix 0 (narrateur, dialogue) {'sim': 0.71, 'blanc': 0.0, 'debit': 1.09} refaite seule
-  voix 1 (invite, dialogue) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.87} OK
-  voix 2 (envoyee, dialogue) {'sim': 0.8, 'blanc': 0.0, 'debit': 0.95} OK
-  voix 3 (invite, dialogue) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.81} OK
-  voix 4 (envoyee, dialogue) {'sim': 0.95, 'blanc': 0.02, 'debit': 1.03} OK
-  voix 5 (invite, dialogue) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.86} OK
-  voix 6 (presentateur, dialogue) {'sim': 1.0, 'blanc': 0.16, 'debit': 1.09} OK
-  voix 0 (narrateur, elevenlabs:PjAkkDaPt1wolu0EMUTN, prise 1) {'sim': 0.71, 'blanc': 0.0, 'debit': 1.04} refaite
-  voix 0 (narrateur, elevenlabs:PjAkkDaPt1wolu0EMUTN, prise 2) {'sim': 0.71, 'blanc': 0.0, 'debit': 1.0} refaite
-  voix 0 (narrateur, elevenlabs:PjAkkDaPt1wolu0EMUTN, prise 3) {'sim': 0.71, 'blanc': 0.0, 'debit': 1.01} refaite
-  voix 0 (narrateur) : meilleure prise gardée pour ne pas changer la voix du personnage
+  dialogue ElevenLabs : paquet 1/1, 16/16 répliques découpées
+  voix 0 (narrateur, dialogue) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.97} OK
+  voix 1 (envoyee, dialogue) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.91} OK
+  voix 2 (presentateur, dialogue) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.04} OK
+  voix 3 (envoyee, dialogue) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.28} OK
+  voix 4 (presentateur, dialogue) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.09} OK
+  voix 5 (invite, dialogue) {'sim': 1.0, 'blanc': 0.16, 'debit': 0.85} OK
+  voix 6 (envoyee, dialogue) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.42} OK
+  voix 7 (invite, dialogue) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.79} OK
+  voix 8 (envoyee, dialogue) {'sim': 0.91, 'blanc': 0.0, 'debit': 1.21} OK
+  voix 9 (presentateur, dialogue) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.17} OK
+  voix 10 (invite, dialogue) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.62} OK
+  voix 11 (envoyee, dialogue) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.79} OK
+  voix 12 (invite, dialogue) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.87} OK
+  voix 13 (presentateur, dialogue) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.1} OK
+  voix 14 (envoyee, dialogue) {'sim': 0.0, 'blanc': 0, 'debit': 1.28} refaite seule
+  voix 15 (presentateur, dialogue) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.93} OK
+  voix 14 (envoyee, elevenlabs:F1toM6PcP54s45kOOAyV, prise 1) {'sim': 0.0, 'blanc': 0, 'debit': 0.88} refaite
+  voix 14 (envoyee, elevenlabs:F1toM6PcP54s45kOOAyV, prise 2) {'sim': 0.0, 'blanc': 0, 'debit': 0.82} refaite
+  voix 14 (envoyee, elevenlabs:F1toM6PcP54s45kOOAyV, prise 3) {'sim': 0.0, 'blanc': 0, 'debit': 0.88} refaite
+  envoyee : la voix elevenlabs:F1toM6PcP54s45kOOAyV échoue, passage à la voix de remplacement
+  voix 14 (envoyee, elevenlabs:PjAkkDaPt1wolu0EMUTN, prise 1) {'sim': 0.0, 'blanc': 0, 'debit': 0.77} refaite
+  voix 14 (envoyee, elevenlabs:PjAkkDaPt1wolu0EMUTN, prise 2) {'sim': 0.0, 'blanc': 0, 'debit': 0.74} refaite
+  voix 14 (envoyee, elevenlabs:PjAkkDaPt1wolu0EMUTN, prise 3) {'sim': 0.0, 'blanc': 0, 'debit': 0.74} refaite
+  envoyee : la voix elevenlabs:PjAkkDaPt1wolu0EMUTN échoue, passage à la voix de remplacement
+  voix 14 (envoyee, elevenlabs:FvmvwvObRqIHojkEGh5N, prise 1) {'sim': 0.0, 'blanc': 0, 'debit': 0.82} refaite
+  voix 14 (envoyee, elevenlabs:FvmvwvObRqIHojkEGh5N, prise 2) {'sim': 0.0, 'blanc': 0, 'debit': 0.82} refaite
+  voix 14 (envoyee, elevenlabs:FvmvwvObRqIHojkEGh5N, prise 3) {'sim': 0.0, 'blanc': 0, 'debit': 0.8} refaite
+  envoyee : la voix elevenlabs:FvmvwvObRqIHojkEGh5N échoue, passage à la voix de remplacement
+  voix 14 (envoyee, elevenlabs:d3AXX0BlgJHYFCuH9X88, prise 1) {'sim': 0.0, 'blanc': 0, 'debit': 0.85} refaite
+  voix 14 (envoyee, elevenlabs:d3AXX0BlgJHYFCuH9X88, prise 2) {'sim': 0.0, 'blanc': 0, 'debit': 0.8} refaite
+  voix 14 (envoyee, elevenlabs:d3AXX0BlgJHYFCuH9X88, prise 3) {'sim': 0.0, 'blanc': 0, 'debit': 0.82} refaite
+  envoyee : la voix elevenlabs:d3AXX0BlgJHYFCuH9X88 échoue, passage à la voix de remplacement
+  envoyee : répliques gardées en ElevenLabs malgré le contrôle (français garanti)
 Voix : ElevenLabs (Eleven v4)
-  décor 0 : a city street with a bike locked to a lamppost, soft pink morning ligh
-montage : 12 plans (0.1:large>nar/coupe 1.9:epaule>inv/glisse 3.5:large>inv/glisse 5.1:moyen>env/glisse 6.3:serre>pre/glisse 7.4:moyen>inv/coupe 9.1:serre>inv/glisse 10.5:epaule>env/file 12.3:large>env/glisse 14.1:large>inv/file 16.3:epaule>inv/glisse 18.4:serre>pre/coupe)
-studio : matin, lieux ['rue'], tenues invite=blouson, envoyee=capuche, presentateur=chemise, 2 figurant(s), ambiances [] ; plans large/fixe epaule/fixe moyen/fixe moyen/fixe epaule/fixe large/fixe serre/avance
-cartoon : durée 25.7 s, 7 répliques, 1 scène(s), personnages ['invite', 'envoyee', 'presentateur']
-  image 0/771 (4 processeurs)
-  image 300/771
-  image 600/771
+  décor 0 : an empty apartment full of boxes, warm golden evening light, lamps on
+  décor 1 : a city street with a van, warm golden evening light, lamps on
+montage : 29 plans (0.1:large>nar/coupe 1.6:moyen>env/coupe 3.0:serre>pre/file 4.4:large>pre/glisse 5.8:serre>env/coupe 6.7:moyen>pre/coupe 7.6:epaule>env/glisse 8.7:tres_serre>inv/coupe 9.3:moyen>pre/glisse 10.8:tres_serre>pre/glisse 12.1:moyen>inv/coupe 13.5:tres_serre>inv/glisse 15.0:moyen>env/coupe 16.4:serre>env/glisse 17.3:large>inv/file 18.6:tres_serre>inv/glisse 21.7:large>env/coupe 22.5:tres_serre>env/glisse 23.5:epaule>pre/file 24.4:large>pre/glisse 25.8:large>inv/coupe 26.8:serre>pre/coupe 27.5:large>env/coupe 28.9:moyen>inv/coupe 29.6:serre>env/coupe 30.7:large>pre/coupe 31.4:tres_serre>inv/glisse 32.7:large>env/glisse 33.9:serre>pre/file)
+studio : soir, lieux ['salon', 'rue'], tenues envoyee=polo, presentateur=chemise, invite=tshirt, 2 figurant(s), ambiances ['poussiere'] ; plans large/fixe moyen/fixe large/fixe epaule/fixe moyen/fixe moyen/fixe moyen/fixe large/fixe large/recul epaule/fixe large/fixe large/fixe moyen/fixe large/fixe large/fixe serre/avance
+cartoon : durée 61.5 s, 16 répliques, 2 scène(s), personnages ['envoyee', 'presentateur', 'invite']
+  image 0/1845 (4 processeurs)
+  image 300/1845
+  image 600/1845
+  image 900/1845
+  image 1200/1845
+  image 1500/1845
+  image 1800/1845
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
 Qualité : 0/100 — sketch de secours (Claude indisponible : crédit épuisé ?)
 Outils utilisés : claude = secours, voix = elevenlabs, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 0, 'cache_lu': 0, 'eleven_caracteres': 504, 'gpu_s': 22}
-OK : sortie/2026-10-11_22h25_emission.mp4 (26 s)
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 0, 'cache_lu': 0, 'eleven_caracteres': 681, 'gpu_s': 25}
+OK : sortie/2026-10-11_22h38_emission.mp4 (62 s)

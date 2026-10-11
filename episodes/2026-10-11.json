@@ -1,46 +1,81 @@
 {
- "sujet": "Le vélo d'occasion",
- "titre": "LE VÉLO D'OCCASION",
- "titre_accroche": "POV : il a fait une affaire",
- "legende": "Trente euros, antivol compris.",
- "question": "Votre pire achat d'occasion ?",
+ "sujet": "Le déménagement",
+ "titre": "LE DÉMÉNAGEMENT",
+ "titre_accroche": "Qui t'aide à déménager, toi ?",
+ "legende": "Les amis, c'est pour les cartons.",
+ "question": "Qui t'aide à déménager, toi ?",
  "hashtags": [
   "petitsdramas",
   "humour",
   "pov",
-  "velo",
-  "arnaque",
-  "sketch"
+  "demenagement",
+  "amis"
  ],
  "repliques": [
   {
    "p": "narrateur",
-   "t": "POV : il a fait une affaire",
-   "d": "[excited] Pi-o-vi : il a fait une affaire"
-  },
-  {
-   "p": "invite",
-   "t": "J'ai acheté un vélo d'occasion, trente euros, une affaire !"
+   "t": "Qui t'aide à déménager, toi ?",
+   "d": "[excited] Qui t'aide à déménager, toi ?"
   },
   {
    "p": "envoyee",
-   "t": "Trente euros ? Il est à qui, ce vélo ?"
-  },
-  {
-   "p": "invite",
-   "t": "Au monsieur qui me l'a vendu. Enfin, c'est ce qu'il m'a dit."
-  },
-  {
-   "p": "envoyee",
-   "t": "Kévin, il est encore attaché au poteau. Avec un cadenas."
-  },
-  {
-   "p": "invite",
-   "t": "C'est l'antivol, il est fourni avec. Le monsieur va m'envoyer le code."
+   "t": "Merci d'être venus m'aider à déménager, les gars."
   },
   {
    "p": "presentateur",
-   "t": "Trente euros sans le code ? Kévin, t'as acheté un poteau.",
+   "t": "Normal. Par contre, c'est vingt euros de l'heure."
+  },
+  {
+   "p": "envoyee",
+   "t": "T'es mon ami, Jojo."
+  },
+  {
+   "p": "presentateur",
+   "t": "Tarif ami. Normalement, c'est vingt-cinq."
+  },
+  {
+   "p": "invite",
+   "t": "Moi je fais ça gratuitement ! J'ai ramené mon camion."
+  },
+  {
+   "p": "envoyee",
+   "t": "Super Kévin ! Il est où ?"
+  },
+  {
+   "p": "invite",
+   "t": "C'est une voiture télécommandée. Mais elle est très rapide."
+  },
+  {
+   "p": "envoyee",
+   "t": "Bon. Il reste le canapé."
+  },
+  {
+   "p": "presentateur",
+   "t": "Le canapé, c'est un supplément."
+  },
+  {
+   "p": "invite",
+   "t": "On peut le faire passer par la fenêtre !"
+  },
+  {
+   "p": "envoyee",
+   "t": "On est au rez-de-chaussée."
+  },
+  {
+   "p": "invite",
+   "t": "Alors c'est encore plus facile."
+  },
+  {
+   "p": "presentateur",
+   "t": "Fenêtre : c'est quinze euros."
+  },
+  {
+   "p": "envoyee",
+   "t": "Pour quoi ?"
+  },
+  {
+   "p": "presentateur",
+   "t": "Pour la vue.",
    "chute": true
   }
  ],
@@ -53,12 +88,30 @@
     3,
     4,
     5,
-    6
+    6,
+    7
    ],
    "lieu": "",
    "son": "",
    "duree": 0,
-   "decor": "a city street with a bike locked to a lamppost"
+   "decor": "an empty apartment full of boxes"
+  },
+  {
+   "scene": "2",
+   "repliques": [
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ],
+   "lieu": "",
+   "son": "",
+   "duree": 0,
+   "decor": "a city street with a van"
   }
  ],
  "sources": [],
@@ -78,46 +131,76 @@
      3,
      4,
      5,
-     6
+     6,
+     7
     ],
     "lieu": "",
     "son": "",
     "duree": 0,
-    "decor": "a city street with a bike locked to a lamppost"
+    "decor": "an empty apartment full of boxes"
+   },
+   {
+    "scene": "2",
+    "repliques": [
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     14,
+     15
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 0,
+    "decor": "a city street with a van"
    }
   ]
  },
  "_voix_hz": {
-  "envoyee": 235,
-  "invite": 125,
-  "narrateur": 315,
-  "presentateur": 173
+  "presentateur": 156,
+  "envoyee": 225,
+  "narrateur": 269,
+  "invite": 137
  },
  "_voix_genre": {
+  "presentateur": "h",
   "envoyee": "f",
-  "invite": "h",
   "narrateur": "f",
-  "presentateur": "h"
+  "invite": "h"
  },
  "realisation": {
-  "moment": "matin",
+  "moment": "soir",
   "lieux": [
+   "salon",
    "rue"
   ],
   "gags": [],
-  "ambiances": [],
+  "ambiances": [
+   "poussiere"
+  ],
   "source": "robot",
   "tenues": {
-   "invite": "blouson",
-   "envoyee": "capuche",
-   "presentateur": "chemise"
+   "envoyee": "polo",
+   "presentateur": "chemise",
+   "invite": "tshirt"
   },
   "plans": [
+   "large/fixe",
+   "moyen/fixe",
    "large/fixe",
    "epaule/fixe",
    "moyen/fixe",
    "moyen/fixe",
+   "moyen/fixe",
+   "large/fixe",
+   "large/recul",
    "epaule/fixe",
+   "large/fixe",
+   "large/fixe",
+   "moyen/fixe",
+   "large/fixe",
    "large/fixe",
    "serre/avance"
   ]

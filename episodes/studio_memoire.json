@@ -353,5 +353,47 @@
    "son": true
   },
   "cadence": null
+ },
+ {
+  "moment": "soir",
+  "lieux": [
+   "salon",
+   "rue"
+  ],
+  "source": "robot",
+  "duree": 61.5,
+  "plans": {
+   "large": 8,
+   "moyen": 5,
+   "epaule": 2,
+   "serre": 1
+  },
+  "mouvements": {
+   "fixe": 14,
+   "recul": 1,
+   "avance": 1
+  },
+  "costumes": {
+   "envoyee": "polo",
+   "presentateur": "chemise",
+   "invite": "tshirt"
+  },
+  "figurants": 2,
+  "ambiances": [
+   "poussiere"
+  ],
+  "controle": "ok",
+  "fichier": "2026-10-11_22h38_emission.mp4",
+  "cine": {
+   "focus": true,
+   "vertige": false,
+   "tiers": true,
+   "etalonnage": true,
+   "profondeur": true,
+   "grain": true,
+   "reflets": true,
+   "son": true
+  },
+  "cadence": null
  }
 ]
