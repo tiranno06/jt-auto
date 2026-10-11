@@ -155,5 +155,54 @@
    "son": true
   },
   "cadence": "rapide"
+ },
+ {
+  "moment": "jour",
+  "lieux": [
+   "rue",
+   "salon",
+   "rue",
+   "salon"
+  ],
+  "source": "auteur+image",
+  "duree": 92.9,
+  "plans": {
+   "moyen": 16,
+   "serre": 5,
+   "epaule": 8,
+   "large": 14,
+   "contre_plongee": 4,
+   "tres_serre": 4,
+   "plongee": 1
+  },
+  "mouvements": {
+   "fixe": 38,
+   "zoom_choc": 6,
+   "recul": 1,
+   "avance": 6,
+   "epaule": 1
+  },
+  "costumes": {
+   "invite": "tshirt",
+   "presentateur": "tshirt"
+  },
+  "figurants": 4,
+  "ambiances": [
+   "neige",
+   "pluie"
+  ],
+  "controle": "ok",
+  "fichier": "2026-10-11_20h45_emission.mp4",
+  "cine": {
+   "focus": true,
+   "vertige": true,
+   "tiers": true,
+   "etalonnage": true,
+   "profondeur": true,
+   "grain": true,
+   "reflets": true,
+   "son": true
+  },
+  "cadence": "normal"
  }
 ]
