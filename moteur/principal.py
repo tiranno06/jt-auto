@@ -40,7 +40,7 @@ if THEME and (os.environ.get("FORMAT") or "") not in ("mini", "libre"): os.envir
 os.environ["FORMAT"] = FORMAT = format_du_jour(os.environ.get("FORMAT"), _hist)
 if FORMAT == "mini": os.environ["LONGUEUR"] = "eclair"                    # gag éclair : ~15 s
 elif FORMAT == "libre": os.environ["LONGUEUR"] = "pro"                    # sketch long : 60 à 90 s (plus d'une minute garantie au montage)
-import actu, ecrire, voix, jt, serie, stats
+import actu, ecrire, voix, jt, serie, stats, secours
 
 SR = 22050
 
@@ -110,7 +110,14 @@ def main():
     print(f"Type de vidéo : {'gag éclair (~15 s)' if fmt == 'mini' else 'sketch long (+1 min)' if libre else 'JT actu du jour'}", flush=True)
     recents = [f"{h.get('titre', '')} : {h.get('accroche', '')}" for h in historique[-10:]]
     # 1. recherche : sujets candidats (articles des dernières 24 h, regroupés par sujet et classés par reprise médiatique)
-    script = None; tiktok = None; DOUB = None
+    script = None; tiktok = None; DOUB = None; SECOURS = False
+    def passer_en_secours(e):                                              # Claude ne répond pas (crédit épuisé) : outils gratuits
+        print(f"Claude indisponible ({str(e)[:160]}) : bascule automatique sur un sketch de secours (outils gratuits pour l'écriture).", flush=True)
+        try:
+            import alerte
+            alerte.alerter("Crédit Claude épuisé ?", "Claude ne répond pas : la vidéo est fabriquée avec un sketch de secours déjà écrit. "
+                           "Rechargez le crédit sur console.anthropic.com pour revenir aux sketchs écrits par Claude.")
+        except Exception: pass
     if THEME.startswith("TIKTOK::"):                                       # vidéo construite sur la bande son d'une vidéo TikTok
         tiktok = THEME.split("::", 1)[1].strip()
         candidats = [([{"titre": "Bande son TikTok", "resume": tiktok, "lien": tiktok, "date": None, "source": "tiktok"}], "tiktok")]
@@ -120,15 +127,21 @@ def main():
         if mode_script: script = texte
         candidats = [([{"titre": texte.splitlines()[0][:120], "resume": texte[:1500], "lien": "", "date": None, "source": "manuel"}], "manuel")]
     elif LOT and libre:                                                    # série d'un seul jet : la saison est planifiée, on fabrique l'épisode suivant
-        if not serie.a_faire()[0]: serie.planifier(fmt, recents=[h.get("titre", "") for h in historique[-30:]])
-        prevu, k_ep = serie.a_faire()
-        candidats = [([{"titre": prevu["titre"], "resume": prevu["resume"], "lien": "", "date": None, "source": "série"}], "série")]
-        print(f"Série d'un seul jet : épisode {k_ep} « {prevu['titre']} »", flush=True)
+        try:
+            if not serie.a_faire()[0]: serie.planifier(fmt, recents=[h.get("titre", "") for h in historique[-30:]])
+            prevu, k_ep = serie.a_faire()
+            candidats = [([{"titre": prevu["titre"], "resume": prevu["resume"], "lien": "", "date": None, "source": "série"}], "série")]
+            print(f"Série d'un seul jet : épisode {k_ep} « {prevu['titre']} »", flush=True)
+        except Exception as e:
+            if not secours.claude_indisponible(e): raise
+            passer_en_secours(e); SECOURS = True; candidats = [([{"titre": "secours", "resume": "", "lien": "", "date": None, "source": "secours"}], "secours")]
     elif libre and not os.environ.get("SKETCH_TEST", "").strip():
         try: candidats = [(c, "idée") for c in ecrire.idees_libres(recents=[f"{h.get('titre', '')} : {h.get('accroche', '')}" for h in historique[-30:]],
                                                                     consignes=stats.pour_idees())]
         except Exception as e:
-            print(f"Idées de sketch impossibles : {e}", flush=True); raise
+            print(f"Idées de sketch impossibles : {e}", flush=True)
+            if not secours.claude_indisponible(e): raise
+            passer_en_secours(e); SECOURS = True; candidats = [([{"titre": "secours", "resume": "", "lien": "", "date": None, "source": "secours"}], "secours")]
         for k, (sel, _) in enumerate(candidats): print(f"Idée {k} : « {sel[0]['titre'][:110]} »", flush=True)
     else:
       try:
@@ -164,6 +177,8 @@ def main():
         ecrire.NB_MAX = 20
         sk = ecrire.valider(json.load(open(test, encoding="utf-8")), set(), libre)
         print(f"Sketch d'essai : {test}", flush=True)
+    elif SECOURS:
+        sk = secours.sketch(fmt)
     else:
         if THEME or LOT or REFAIRE: os.environ["FORCER_FABRICATION"] = "1"   # vidéo demandée explicitement : elle est fabriquée quoi qu'il arrive
         try:
@@ -183,6 +198,11 @@ def main():
                                "Rien n'a été fabriqué : crédits voix et décors économisés. Nouvel essai au prochain réveil (si la limite d'essais du créneau n'est pas atteinte).")
             except Exception: pass
             return
+        except Exception as e:
+            if not secours.claude_indisponible(e): raise
+            passer_en_secours(e); SECOURS = True
+            if not libre: fmt, libre = "mini", True                         # JT d'actu impossible sans Claude : gag éclair de secours
+            sk = secours.sketch(fmt)
         print(f"Moteur humoristique : {ecrire.USAGE['appels']} appels Claude, {ecrire.USAGE['entree']} jetons lus, {ecrire.USAGE['sortie']} jetons écrits, {ecrire.USAGE['recherches_web']} recherche(s) web", flush=True)
         titres = next((c[0] for c in candidats if c[0][0]["lien"] and c[0][0]["lien"] in sk.get("sources", [])), titres)
     print(f"Sketch : « {sk['sujet']} », {len(sk['repliques'])} répliques", flush=True)

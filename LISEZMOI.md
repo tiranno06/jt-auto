@@ -126,6 +126,12 @@ Rythme (chaque jour, un jour sur deux, un jour sur trois, pause), heure de fabri
 
 En cas d'échec, GitHub t'envoie un e-mail ; le détail est dans l'onglet Actions.
 
+## Outils payants par défaut, repli gratuit automatique
+Tous les outils payants sont activés par défaut (Claude pour l'écriture, la mise en scène et le contrôle ; ElevenLabs pour les voix ; Modal pour les décors et le plan « reconstitution »). S'il n'y a plus de crédit, le robot bascule tout seul sur les outils gratuits et la vidéo sort quand même :
+- **écriture** : sans Claude, un sketch de la réserve `moteur/sketchs_secours.json` (écrite à l'avance, jamais deux fois le même tant qu'il en reste d'inédits ; le JT d'actu devient un gag éclair) ; une alerte prévient qu'il faut recharger le crédit ;
+- **doublage TikTok** : sans Claude, casting par la hauteur des voix et mise en scène par le studio gratuit ;
+- **voix** : ElevenLabs → Chatterbox → Piper ; **décors** : IA → dessinés par le robot ; **contrôle** : Claude → contrôle technique gratuit.
+
 ## À savoir
 - **Satire et personnages fictifs** : la mention est incrustée dans chaque vidéo et dans la légende. Le robot ne nomme aucune personne réelle et s'interdit toute consigne de vote.
 - **Contenu IA** : la légende indique « Contenu généré par IA ». Si Buffer n'active pas automatiquement l'étiquette IA de TikTok, active une fois pour toutes l'option correspondante dans les réglages de ton compte TikTok si elle existe, ou passe par Upload-Post qui envoie l'étiquette officielle.

@@ -1,6 +1,6 @@
 """Tests des composants du robot (sans réseau, sans clé API, sans GPU).
 Lancer : python -m unittest discover -s tests -v"""
-import io, json, os, sys, types, unittest
+import io, json, os, sys, tempfile, types, unittest
 import numpy as np
 
 ICI = os.path.dirname(os.path.abspath(__file__))
@@ -670,6 +670,25 @@ class TestImageEtBanque(unittest.TestCase):
         self.assertIn("queue", doublage.consigne("v", "l"))
 
 
+
+class TestSecours(unittest.TestCase):
+    """Sans crédit Claude : bascule automatique sur la réserve de sketchs déjà écrits."""
+    def test_reserve(self):
+        sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "moteur"))
+        import secours, ecrire
+        self.assertTrue(secours.claude_indisponible(RuntimeError("aucun sketch exploitable : Your credit balance is too low to access the Anthropic API")))
+        self.assertTrue(secours.claude_indisponible(TypeError("Could not resolve authentication method")))
+        self.assertFalse(secours.claude_indisponible(ValueError("sketch trop court")))
+        ancien = secours.UTILISES; secours.UTILISES = os.path.join(tempfile.mkdtemp(), "u.json")
+        try:
+            vus = set()
+            for fmt in ("mini", "libre", "mini"):
+                sk = secours.sketch(fmt); vus.add(sk["sujet"])
+                ecrire.valider(sk, set(), libre=True)
+                self.assertTrue(sk["repliques"][-1].get("chute"))
+                self.assertEqual(sum(len(d["repliques"]) for d in sk["decoupage"]), len(sk["repliques"]))
+            self.assertEqual(len(vus), 3)                                                            # jamais deux fois le même
+        finally: secours.UTILISES = ancien
 
 class TestHumains(unittest.TestCase):
     """Personnages adultes (casting libre) ."""
