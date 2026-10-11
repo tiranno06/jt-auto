@@ -268,6 +268,9 @@ def main():
                 sk["realisation"]["tenues"] = {r: c.get("haut") for r, c in B_["costumes"].items()}
                 sk["realisation"]["plans"] = [f"{q.get('plan')}/{q.get('mouvement')}" for q in cartoon.PH]
                 studio.memoriser(B_, cartoon.PH, duree, rapport_video or ("ok" if video_ok else ""))
+            if sk.get("doublage") and not test:                            # banque visuelle : ce qu'on a vu dans la vidéo d'origine et ce qu'on en a fait
+                import banque_visuelle
+                banque_visuelle.ajouter(sk["doublage"], sk.get("studio"), sk.get("realisation"), os.path.basename(base) + ".mp4")
         except Exception as e:
             import traceback; traceback.print_exc()
             print(f"Moteur cartoon en échec ({e}) : rendu de secours avec le moteur JT.", flush=True); duree = None

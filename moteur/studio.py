@@ -55,9 +55,52 @@ POSES = {k: v[0] for k, v in GESTES.items()}
 def _h(*xs):
     return int(hashlib.md5("|".join(map(str, xs)).encode()).hexdigest()[:8], 16)
 
+# ------------------------------------------------------------------ intonation (hauteur et énergie de la voix)
+def prosodie(a, sr=22050, fps=30):
+    """Hauteur de la voix (Hz, 0 quand elle ne chante pas : consonnes, silences) et énergie, image par image (1/30 s)."""
+    a = np.asarray(a, np.float32); hop = sr // fps; n = max(1, len(a) // hop); N = 1024
+    f0 = np.zeros(n, np.float32); en = np.zeros(n, np.float32)
+    lo, hi = sr // 420, sr // 65
+    seuil = 0.08 * (np.percentile(np.abs(a), 99) + 1e-6) if len(a) else 1
+    for i in range(n):
+        seg = a[i * hop:i * hop + N]
+        if len(seg) < N // 2: break
+        seg = seg - seg.mean(); en[i] = float(np.sqrt(np.mean(seg ** 2)))
+        if en[i] < seuil: continue
+        X = np.fft.rfft(seg * np.hanning(len(seg)), 2 * N); ac = np.fft.irfft(np.abs(X) ** 2)[:N]
+        if ac[0] <= 0: continue
+        k = lo + int(np.argmax(ac[lo:hi]))
+        if ac[k] > 0.35 * ac[0]: f0[i] = sr / k
+    return f0, en
+
+def intonation(f0, ref):
+    """Hauteur relative à la voix habituelle du personnage (en « quarts d'octave » : +1 ≈ 3 demi-tons plus aigu), lissée et
+    maintenue sur les consonnes. Renvoie (courbe par image, résumé : moyenne, étendue, montée finale)."""
+    z = np.zeros(len(f0), np.float32); v = f0 > 0
+    if not v.any() or not ref: return z, dict(moy=0.0, etendue=0.0, fin=0.0)
+    z[v] = 12 * np.log2(f0[v] / ref) / 3
+    der = 0.0
+    for i in range(len(z)):                                                # on garde la dernière valeur chantée
+        if v[i]: der = z[i]
+        else: z[i] = der * 0.9; der = z[i]
+    z = np.convolve(z, np.ones(5) / 5, "same").astype(np.float32)
+    zv = z[v]; fin = float(np.mean(zv[-6:]) - np.mean(zv[max(0, len(zv) - 18):max(1, len(zv) - 6)])) if len(zv) >= 12 else 0.0
+    return z, dict(moy=float(np.mean(zv)), etendue=float(np.percentile(zv, 90) - np.percentile(zv, 10)), fin=fin)
+
 # ------------------------------------------------------------------ émotion sans indication de jeu
-def emotion_texte(texte, niveau=0.5):
-    """Émotion devinée d'après la réplique (mots, ponctuation) et le volume de la voix : sert quand aucune indication [..] n'est donnée."""
+def emotion_texte(texte, niveau=0.5, ton=None):
+    """Émotion devinée d'après la réplique (mots, ponctuation), le volume et l'intonation de la voix (ton = résumé d'intonation) :
+    sert quand aucune indication [..] n'est donnée."""
+    e = _emotion_mots(texte, niveau)
+    if e != "neutre" or not ton: return e
+    t = (texte or "").strip()
+    if ton["moy"] > 1.0 and niveau > 0.6: return "cri" if "!" in t else ("choc" if ton["fin"] > 0.5 else "joie")   # voix haute et forte
+    if ton["fin"] > 0.9 and not t.endswith("?"): return "sceptique"         # ça monte à la fin sans être une question : « ah bon… »
+    if ton["etendue"] > 2.4 and niveau > 0.5: return "joie"                 # voix très mélodieuse, animée
+    if ton["moy"] < -0.7 and niveau < 0.45: return "blase"                  # voix basse et molle
+    return "neutre"
+
+def _emotion_mots(texte, niveau=0.5):
     t = (texte or "").lower(); fort = niveau > 0.75
     if re.search(r"\b((ha|hi|hé)( ?(ha|hi|hé))+|mdr|ptdr|lol|je rigole)\b", t): return "rire"
     if re.search(r"\b(d[ée]sol[ée]|pardon|oups|euh+|bah? euh|enfin\b.*\benfin)", t): return "gene"
@@ -157,9 +200,12 @@ def _costume_valide(c):
                chaussures=c.get("chaussures") if c.get("chaussures") in M.CHAUSSURES else "baskets", c_chaussures=col(c.get("c_chaussures"), (240, 240, 240)),
                details=tuple(d for d in (c.get("details") or []) if d in M.DETAILS)[:5])
     out["c_motif"] = col(c.get("c_motif"), M._fonce(out["c_haut"], 0.72))
+    if c.get("cheveux") in M.COIFFURES: out["cheveux"] = c["cheveux"]
+    if c.get("c_cheveux"): out["c_cheveux"] = col(c.get("c_cheveux"), (110, 75, 45))
     return out
 
 NOMS_COULEURS = {"rouge": (220, 60, 60), "bleu": (60, 110, 200), "bleu marine": (40, 50, 90), "vert": (80, 160, 100), "jaune": (245, 200, 60),
+                 "blond": (232, 196, 120), "chatain": (130, 85, 50), "châtain": (130, 85, 50), "brun": (70, 45, 32), "roux": (200, 100, 50),
                  "orange": (240, 130, 60), "violet": (140, 80, 170), "rose": (240, 150, 180), "noir": (40, 40, 46), "blanc": (246, 246, 246),
                  "gris": (150, 150, 158), "marron": (130, 90, 60), "beige": (220, 200, 170), "kaki": (120, 130, 80), "bordeaux": (130, 40, 60)}
 
@@ -171,6 +217,7 @@ def bible(sk, roles):
     graine = _h(txt_global, sk.get("sujet"))
     rng = np.random.default_rng(graine)
     S = sk.get("studio") if isinstance(sk.get("studio"), dict) else {}
+    V = (sk.get("doublage") or {}).get("visuel") or {}                    # ce que montre l'image de la vidéo d'origine (analyse_video)
     dec = [sc for sc in (sk.get("decoupage") or []) if sc.get("repliques")] or [{"repliques": list(range(len(sk.get("repliques", []))))}]
     t_low = txt_global.lower()
     # heure : imposée par Claude, sinon d'après le texte, sinon variée (en évitant de refaire la même que la dernière vidéo)
@@ -179,6 +226,7 @@ def bible(sk, roles):
         if re.search(r"\b(nuit|minuit|dormir|insomnie|3 ?h du mat|cauchemar)\b", t_low): moment = "nuit"
         elif re.search(r"\b(soir|soirée|apéro|dîner|ce soir)\b", t_low): moment = "soir"
         elif re.search(r"\b(matin|réveil|petit[- ]déj|café du matin|lundi matin)\b", t_low): moment = "matin"
+        elif V.get("moment") in MOMENTS: moment = V["moment"]                 # la lumière de la vidéo d'origine
         else:
             deja = memoire_recente("moment")
             choix = [m for m in ("jour", "jour", "soir", "matin") if m != deja] or ["jour"]; moment = choix[int(rng.integers(len(choix)))]
@@ -200,6 +248,15 @@ def bible(sk, roles):
             lieu0 = lieux[0]; meneur = _meneur(sk, dec[0], roles)
             c = tenue(perso, "metier" if role == meneur else "client", lieu0, moment, graine + 17 * k)
         costumes[role] = c
+    # les personnes de la vidéo d'origine habillent nos personnages : la plus présente à l'image joue la voix la plus présente
+    if V.get("personnes"):
+        mots = {r: sum(len(x.get("t", "").split()) for x in sk.get("repliques", []) if x.get("p") == r) for r in roles}
+        demande = (S.get("costumes") or {}) if isinstance(S.get("costumes"), dict) else {}
+        for role, pers in zip(sorted(roles, key=lambda r: -mots.get(r, 0)), V["personnes"]):
+            c = costumes[role] = dict(costumes[role])
+            if pers.get("habit") and "c_haut" not in (demande.get(role) or {}):
+                c["c_haut"] = tuple(int(v) for v in pers["habit"]); c["c_motif"] = M._fonce(c["c_haut"], 0.72)
+            if pers.get("cheveux") and "c_cheveux" not in (demande.get(role) or {}): c["c_cheveux"] = tuple(int(v) for v in pers["cheveux"])
     figurants = []
     if os.environ.get("FIGURANTS", "1") != "0":
         for k, l in enumerate(lieux):
@@ -216,11 +273,19 @@ def bible(sk, roles):
     if moment in ("matin", "soir") and any(l not in ("rue",) for l in lieux): ambiances.add("poussiere")
     if "bar" in lieux: ambiances.add("neon")
     lum = LUMIERE_LIEU.get(lieux[0], -1)
+    c_mur = None
+    if V.get("mur"):                                                       # la couleur dominante du décor de la vidéo, éclaircie pour nos murs
+        c_mur = tuple(int(0.7 * (v + (255 - v) * 0.3) + 0.3 * d) for v, d in zip(V["mur"], DD.COULEURS_MUR.get(lieux[0], (230, 220, 210))))
+    rythme = None                                                          # montage et cadrages : ceux de la vidéo, sinon ceux de la banque
+    try:
+        import banque_visuelle
+        rythme = banque_visuelle.rythme(V) if V.get("plans") else banque_visuelle.tendances().get("rythme")
+    except Exception: pass
     heure = {"matin": (8, 5), "jour": (14, 20), "soir": (19, 40), "nuit": (2, 15)}[moment]
     return dict(graine=graine, moment=moment, lieux=lieux, gags=gags, costumes=costumes, figurants=figurants, ambiances=sorted(ambiances),
                 lumiere=lum, ombre=0.24 if moment != "nuit" else 0.32, etalonnage=ETALONNAGE[moment], heure=heure,
                 style_ia=STYLES_IA[moment], plans=S.get("plans") if isinstance(S.get("plans"), list) else [],
-                source="auteur" if S else "robot")
+                source=("auteur" if S else "robot") + ("+image" if V else ""), c_mur=c_mur, rythme=rythme)
 
 def _meneur(sk, sc, roles):
     """Rôle qui « tient la boutique » dans la scène : celui qui pose le plus de questions (médecin, prof, serveur…)."""
@@ -260,8 +325,15 @@ def realiser(ph, places, B):
         elif q["emo"] in ("pleurs", "soupir", "gene"): plan, mouv = ("plongee" if h % 2 else "serre"), "avance"
         elif q["emo"] in ("choc", "panique"): plan, mouv = "tres_serre", "zoom_choc"
         elif n >= 2:                                                       # dialogue : on varie les valeurs de plan d'une réplique à l'autre
-            plan = ("serre", "epaule", "moyen", "serre", "epaule" if dur > 1.5 else "serre")[(j + h) % 5]
-            mouv = ("fixe", "avance", "travelling")[h % 3] if plan != "epaule" else "fixe"
+            choix = ("serre", "epaule", "moyen", "serre", "epaule" if dur > 1.5 else "serre")
+            ry_ = B.get("rythme") or {}
+            if ry_.get("serre", 0) > 0.6: choix = ("serre", "tres_serre", "epaule", "serre", "tres_serre")    # la vidéo d'origine filme de près
+            elif ry_.get("large", 0) > 0.6: choix = ("moyen", "large", "epaule", "moyen", "large")             # … ou de loin
+            plan = choix[(j + h) % 5]
+            mouvs = ("fixe", "avance", "travelling")
+            cam_ = ry_.get("camera") or {}
+            if cam_: mouvs = tuple(m_ for m_, v_ in sorted(cam_.items(), key=lambda x: -x[1]) if v_ > 0.12 and m_ in MOUVEMENTS) or mouvs
+            mouv = mouvs[h % len(mouvs)] if plan != "epaule" else "fixe"
         elif plan == "serre" and dur > 3.0: mouv = "avance"
         if q.get("chute") and j == len(ph) - 1: plan, mouv = "serre", "avance"
         elif q.get("chute"): plan = "tres_serre" if h % 2 else "serre"
@@ -271,6 +343,7 @@ def realiser(ph, places, B):
         elif q["emo"] in ("blase", "sceptique"): reaction = ("sceptique", "yeux_au_ciel")[h % 2]
         elif q["emo"] == "gene" or q["texte"].rstrip().endswith("..."): reaction = "gene"
         elif q.get("chute"): reaction = ("regard_camera", "facepalm", "choc", "rire", "yeux_au_ciel")[h % 5]
+        elif (B.get("rythme") or {}).get("sourires", 0) > 0.35 and h % 3 == 0: reaction = "rire"         # ça sourit beaucoup dans la vidéo
         elif q["texte"].rstrip().endswith("?"): reaction = ("sceptique", "aucune", "aucune")[h % 3]
         if q.get("rires"): reaction = "rire"                               # des rires dans la bande son : celui qui écoute rit
         a = plans_auteur.get(q["i"]) or {}

@@ -66,6 +66,15 @@ STYLE = {  # yeux, sourcils, forme de bouche au repos, bras gauche, bras droit, 
     "idee":     ("grands", "hausses", "grand_sourire", (-18, 8), (165, -10), ("ampoule",), 0, 0),
     "chante":   ("fermes", "hausses", "o", (-60, -40), (60, 40), ("notes",), 0, 0),
 }
+# rendu détaillé : jeu d'acteur continu (sourcils, pupilles, yeux plissés, coins de la bouche, épaules, buste, pied)
+EXPRESSIF = {
+    "rire": dict(plisse=0.6, coins=0.9, sourcils_h=0.5), "joie": dict(plisse=0.4, coins=1.0, pupille=1.2, sourcils_h=0.7),
+    "amour": dict(coins=0.7, sourcils_h=0.5), "fier": dict(coins=0.6, penche=-0.3), "colere": dict(coins=-0.7, pupille=0.8, penche=0.6),
+    "cri": dict(penche=0.8), "pleurs": dict(coins=-0.9, penche=-0.2), "soupir": dict(coins=-0.6, epaules=0.3), "triste": dict(coins=-0.8),
+    "blase": dict(coins=-0.2), "sceptique": dict(sourcil_leve=0.9, coins=-0.3), "gene": dict(epaules=0.6, coins=-0.3, pupille=0.9),
+    "choc": dict(pupille=1.4, sourcils_h=1.2, penche=-0.5), "panique": dict(epaules=0.8, sourcils_h=1.0), "reflechit": dict(sourcil_leve=0.6, coins=-0.2),
+    "idee": dict(sourcils_h=1.0, pupille=1.3, coins=0.8), "fatigue": dict(epaules=0.2, coins=-0.3, sourcils_h=-0.4), "chuchote": dict(penche=0.5),
+}
 # rendu détaillé : visage plus expressif pour chaque émotion (yeux, bouche au repos, effets, teint)
 DETAILS_EMO = {
     "rire": dict(forme="grand_sourire"), "cri": dict(effets=("traits", "eclairs")), "colere": dict(forme="dents", effets=("veine", "fumee")),
@@ -195,10 +204,18 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
     t = 0.15; ph = []; transitions = []                                 # (début, fin, type, scène d'arrivée, texte du carton)
     DOUB = sk.get("doublage") or None                                      # vidéo construite sur la bande son d'une autre vidéo : minutage imposé
     rms = [float(np.sqrt(np.mean(np.square(a)))) if len(a) else 0.0 for a in audios]; rms_ref = float(np.median([x for x in rms if x > 0] or [1.0]))
+    TON = {}                                                               # intonation de chaque réplique (hauteur relative à la voix du personnage)
+    if DETAIL:
+        f0s = [studio.prosodie(a)[0] if len(a) else np.zeros(1, np.float32) for a in audios]
+        for role in {r["p"] for r in reps}:
+            v = np.concatenate([f0s[i][f0s[i] > 0] for i, r in enumerate(reps) if r["p"] == role and i < len(f0s)] or [np.zeros(0)])
+            ref = float(np.median(v)) if len(v) > 10 else None
+            for i, r in enumerate(reps):
+                if r["p"] == role and i < len(f0s): TON[i] = studio.intonation(f0s[i], ref)
     def emo_de(i, r):
         e = emotion(r.get("d"))
         if DETAIL and e == "neutre" and not re.search(r"\[[^\]]+\]", r.get("d") or ""):     # pas d'indication de jeu : on devine
-            e = studio.emotion_texte(r["t"], min(1.0, rms[i] / (2 * rms_ref + 1e-9)) if i < len(rms) else 0.5)
+            e = studio.emotion_texte(r["t"], min(1.0, rms[i] / (2 * rms_ref + 1e-9)) if i < len(rms) else 0.5, TON.get(i, (None, None))[1])
         return e
     for i, (r, a) in enumerate(zip(reps, audios)):
         niv, lv = enveloppe(a); dur = len(a) / SR; att = float(r.get("attente", 0))
@@ -344,7 +361,11 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         if B:                                                              # rendu détaillé : costume, lumière, visage, mains
             p.update(costume=B["costumes"].get(role), reflets=True, lumiere=B["lumiere"], ombre=B["ombre"], mains=True,
                      balance=0.7 * math.sin(tm * 2.3 + len(role)) + (0.5 * math.sin(tm * 9) if emo in ("rire", "joie", "cri") else 0))
-            p.update(DETAILS_EMO.get(emo, {}))
+            p.update(DETAILS_EMO.get(emo, {})); p.update(EXPRESSIF.get(emo, {}))
+            if p.get("penche"):                                            # on se penche vers l'autre (ou on recule, si négatif)
+                autre_ = q["p"] if q["p"] != role else next((r2 for r2 in places[scene] if r2 != role), None)
+                if autre_ in places[scene]: p["penche"] *= 1 if position(scene, autre_)[0] > x else -1
+            if emo == "blase" and not parle: p["pied"] = abs(math.sin(tm * 5.5))   # il tape du pied, impatient
             if roule: p.update(yeux="roule", sourcils="neutre", forme="moue")
             if cam_regard: p.update(forme="coin" if (len(role) + int(tm)) % 2 else "neutre", sourcils="neutre")
         if recule:                                                         # recul face à quelqu'un qui crie
@@ -361,6 +382,12 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             p["tilt"] = 5 * math.sin(tm * 1.9 + len(role)) + 3 * lv + (8 * math.sin(tm * 15) if emo == "rire" else 0)
             u_d = (tm - q["deb"]) / 0.3
             if 0 <= u_d < 1: p["y"] -= 16 * s * math.sin(math.pi * u_d)            # petit élan quand il prend la parole
+            if B and q["i"] in TON:                                        # l'intonation pilote sourcils, yeux et tête
+                zc = TON[q["i"]][0]; zf = float(zc[k]) if 0 <= k < len(zc) else 0.0
+                p["sourcils_h"] = float(np.clip(p.get("sourcils_h", 0.0) + 0.55 * zf, -0.7, 1.5))
+                p["pupille"] = float(np.clip(p.get("pupille", 1.0) + 0.1 * max(0.0, zf), 0.7, 1.45))
+                p["tilt"] += 3.5 * zf
+                if k >= 3 and 0 <= k < len(q["lv"]) and q["lv"][k] - q["lv"][k - 3] > 0.45: p["y"] += 10 * s     # hochement sur les syllabes appuyées
         else:
             p["bouche"] = 0.0 if emo not in ("choc", "panique") else 0.25
             p["sq"] = 0.012 * math.sin(tm * 2.4 + len(role))                  # respiration
@@ -387,11 +414,12 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             mains = studio.GESTES[g_txt][1] if g_txt in studio.GESTES else mains
             src = q if (reac_geste == g_txt or not mien) else mien; u_g = _ease((tm - src["deb"] + 0.1) / 0.35) * (1 - _ease((tm - src["fin"] - 0.35) / 0.35))
             pg, pd = POSES[g_txt]; bg, bd = _mel(NEUTRE_BRAS[0], pg, u_g), _mel(NEUTRE_BRAS[1], pd, u_g)
-            if g_txt == "haussement": p["y"] -= 10 * s * u_g; p["tilt"] += 7 * u_g
+            if g_txt == "haussement": p["y"] -= 10 * s * u_g; p["tilt"] += 7 * u_g; p["epaules"] = max(p.get("epaules", 0.0), u_g)
             if g_txt.startswith("pointe"): p["tilt"] += (5 if g_txt == "pointe_d" else -5) * u_g
         elif bg is None:
             if parle:
-                per = 1.6; k_ = int((tm - q["deb"]) / per + q["i"]); u = _ease(((tm - q["deb"]) % per) / 0.45)
+                per = 1.6 - 0.7 * float(((B or {}).get("rythme") or {}).get("energie", 0.3))   # vidéo d'origine agitée : gestes plus fréquents
+                k_ = int((tm - q["deb"]) / per + q["i"]); u = _ease(((tm - q["deb"]) % per) / 0.45)
                 g = GESTES[k_ % len(GESTES)]; g0 = GESTES[(k_ - 1) % len(GESTES)] if tm - q["deb"] >= per else ((-18, 8), (18, -8))
                 mains = MAINS_CONV[k_ % len(MAINS_CONV)]
                 bg, bd = _mel(g0[0], g[0], u), _mel(g0[1], g[1], u)

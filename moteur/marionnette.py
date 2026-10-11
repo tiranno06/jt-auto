@@ -44,7 +44,10 @@ HAUTS = ("tshirt", "chemise", "blouse", "costume", "capuche", "survetement", "ta
 MOTIFS = ("uni", "rayures", "carreaux", "pois")
 BAS = ("jean", "pantalon", "jogging", "short", "jupe")
 CHAUSSURES = ("baskets", "ville", "ballerines", "bottes", "chaussons")
-DETAILS = ("cravate", "noeud_pap", "badge", "stethoscope", "stylos", "montre", "logo", "lunettes_vue", "moustache", "barbe", "collier", "echarpe")
+DETAILS = ("cravate", "noeud_pap", "badge", "stethoscope", "stylos", "montre", "logo", "lunettes_vue", "moustache", "barbe", "collier", "echarpe",
+           "ceinture", "boucles_oreilles", "taches_rousseur", "bracelet")
+COIFFURES = ("carre", "long", "queue", "chignon", "boucles", "court", "meches", "nuque", "couronne", "aucune")   # coiffure de l'épisode (costume["cheveux"])
+CHEVEUX_ARRIERE = ("carre", "long", "queue", "chignon", "boucles")
 
 def pose_neutre():
     return dict(x=540, y=1500, s=1.0, sq=0.0, tilt=0.0, regard=(0.0, 0.0), yeux="ouverts", paupiere=0.0, sourcils="neutre",
@@ -161,6 +164,11 @@ def dessiner(img, perso, p):
     """Dessine le personnage `perso` (clé de PERSOS ou dict) dans `img` selon la pose `p`. Renvoie la position de la tête."""
     P = PERSOS[perso] if isinstance(perso, str) else perso
     C = p.get("costume")                                                   # tenue de l'épisode (None : bonhomme blanc d'origine)
+    if C and C.get("cheveux") in COIFFURES:                                # coiffure et couleur de cheveux de l'épisode
+        c_ch = tuple(C.get("c_cheveux") or (P.get("cheveux") or ("", (95, 65, 40)))[1])
+        P = dict(P, cheveux=None if C["cheveux"] == "aucune" else (C["cheveux"], c_ch))
+    elif C and C.get("c_cheveux") and P.get("cheveux"): P = dict(P, cheveux=(P["cheveux"][0], tuple(C["c_cheveux"])))
+    epaules = float(p.get("epaules", 0.0)); penche = float(p.get("penche", 0.0))   # haussement d'épaules (0→1), buste penché (-1→1)
     lum = p.get("lumiere", 0); f_omb = p.get("ombre", 0.0) if lum else 0.0
     s = p["s"]; sq = p["sq"]; sx, sy = 1 - 0.55 * sq, 1 + sq
     x = p["x"] + (math.sin(p["t"] * 61) * 9 * p["tremble"] if p["tremble"] else 0)
@@ -169,7 +177,7 @@ def dessiner(img, perso, p):
     # proportions : grosse tête, petit corps
     pieds = y; corps_h = 150 * s * sy; corps_w = 92 * s * sx
     cy_corps = pieds - 38 * s - corps_h / 2
-    R = 150 * s; tete = (x + math.sin(math.radians(p["tilt"])) * 30 * s, cy_corps - corps_h / 2 - R * 0.78 * sy)
+    R = 150 * s; tete = (x + math.sin(math.radians(p["tilt"])) * 30 * s + penche * 16 * s, cy_corps - corps_h / 2 - R * 0.78 * sy + epaules * 12 * s)
     rx, ry = R * (1 + 0.25 * sq) * (1 - 0.1 * sq), R * (1 - 0.18 * sq)
     dos = bool(p.get("dos"))
 
@@ -178,12 +186,13 @@ def dessiner(img, perso, p):
     # capuche (derrière la tête) et cheveux longs (derrière la tête)
     if C and C.get("haut") == "capuche" and not dos:
         hc = (x, cy_corps - corps_h * 0.42); _ellipse(img, hc, (corps_w * 1.05 + ep, corps_h * 0.32 + ep), 0, TRAIT); _ellipse(img, hc, (corps_w * 1.05, corps_h * 0.32), 0, _fonce(C["c_haut"], 0.85))
-    if P.get("cheveux") and P["cheveux"][0] == "carre" and p.get("coiffure", True):
+    if P.get("cheveux") and P["cheveux"][0] in CHEVEUX_ARRIERE and p.get("coiffure", True):
         _cheveux_arriere(img, tete, rx, ry, s, p, P)
     # jambes (pantalon ou jambes nues) et chaussures
     bas = (C or {}).get("bas"); c_bas = (C or {}).get("c_bas", BLANC)
+    pied = float(p.get("pied", 0.0))                                       # le pied droit tape (impatience) : 0 → 1
     for dx in (-34, 34):
-        a = (x + dx * s * sx, cy_corps + corps_h * 0.35); b = (x + dx * 1.25 * s * sx, pieds)
+        a = (x + dx * s * sx, cy_corps + corps_h * 0.35); b = (x + dx * 1.25 * s * sx, pieds - (pied * 22 * s if dx > 0 else 0))
         _ligne(img, a, b, TRAIT, 34 * s); _ligne(img, a, b, BLANC, 34 * s - 2 * ep)
         if bas in ("jean", "pantalon", "jogging"):
             _ligne(img, a, (b[0], b[1] - 8 * s), c_bas, 34 * s - 2 * ep)
@@ -199,7 +208,7 @@ def dessiner(img, perso, p):
         _poly(img, pts, col); _poly(img, pts, TRAIT, True, ep * 0.8)
         for k in (-1, 0, 1): _ligne(img, (x + k * corps_w * 0.35, y0j + 10 * s), (x + k * corps_w * 0.5, y1j - 6 * s), _fonce(col, 0.82), 3 * s)   # plis
     # bras (épaules)
-    ep_g = (x - corps_w * 0.82, cy_corps - corps_h * 0.22); ep_d = (x + corps_w * 0.82, cy_corps - corps_h * 0.22)
+    ep_g = (x - corps_w * 0.82 + penche * 8 * s, cy_corps - corps_h * 0.22 - epaules * 22 * s); ep_d = (x + corps_w * 0.82 + penche * 8 * s, cy_corps - corps_h * 0.22 - epaules * 22 * s)
     bras = []
     for epaule, ang, signe in ((ep_g, p["bras_g"], -1), (ep_d, p["bras_d"], 1)):
         coude, main = _bras(epaule, (ang[0], ang[1]), 64, s)
@@ -210,6 +219,9 @@ def dessiner(img, perso, p):
     haut = (C or {}).get("haut"); c_haut = (C or {}).get("c_haut", BLANC)
     if haut == "blouse": c_haut = (246, 248, 252)
     _ellipse(img, (x, cy_corps), (corps_w, corps_h / 2), 0, c_haut if C else BLANC)
+    if C and not dos and haut not in ("blouse",):                            # plis du vêtement, du côté de l'ombre
+        sg_p = -lum if lum else 1
+        for k in range(2): _arc(img, (x + sg_p * corps_w * 0.55, cy_corps + (k - 0.3) * 26 * s), (16 * s, 8 * s), 0, 200 if sg_p > 0 else 20, 300 if sg_p > 0 else 120, _fonce(c_haut, 0.72), 3 * s)
     if C:
         _motif(img, (x, cy_corps), (corps_w, corps_h / 2), C.get("motif"), C.get("c_motif") or _fonce(c_haut, 0.8), s)
         _vetement(img, x, cy_corps, corps_w, corps_h, tete, ry, s, ep, C, dos)
@@ -245,9 +257,14 @@ def dessiner(img, perso, p):
             if manche[1] == "longues":
                 poignet = (c_[0] + (m_[0] - c_[0]) * 0.72, c_[1] + (m_[1] - c_[1]) * 0.72)
                 _ligne(img, c_, poignet, manche[0], 34 * s); _ligne(img, poignet, poignet, _fonce(manche[0], 0.7), 36 * s)
+                if p.get("reflets"):                                           # pli au creux du coude
+                    dx_, dy_ = poignet[0] - e2[0], poignet[1] - e2[1]; n_ = math.hypot(dx_, dy_) or 1
+                    _ligne(img, (c_[0] - dy_ / n_ * 9 * s, c_[1] + dx_ / n_ * 9 * s), (c_[0] + dy_ / n_ * 2 * s, c_[1] - dx_ / n_ * 2 * s), _fonce(manche[0], 0.68), 3 * s)
                 if haut == "survetement": _ligne(img, e2, poignet, (250, 250, 250), 5 * s)
         if fm: _main(img, m_, math.atan2(m_[0] - c_[0], m_[1] - c_[1]), fm, r_m, BLANC); _jointures(img, m_, fm, r_m, s)
         else: _ellipse(img, m_, (r_m, r_m), 0, BLANC)
+    if C and "bracelet" in C.get("details", ()):
+        e_, c_, m_ = bras[1]; w_ = (c_[0] + (m_[0] - c_[0]) * 0.66, c_[1] + (m_[1] - c_[1]) * 0.66); _ellipse(img, w_, (15 * s, 7 * s), 0, (240, 200, 80))
     if C and "montre" in C.get("details", ()):
         e_, c_, m_ = bras[0]; w_ = (c_[0] + (m_[0] - c_[0]) * 0.62, c_[1] + (m_[1] - c_[1]) * 0.62)
         _ellipse(img, w_, (12 * s, 12 * s), 0, TRAIT); _ellipse(img, w_, (8 * s, 8 * s), 0, (240, 230, 200))
@@ -320,6 +337,11 @@ def _vetement(img, x, cy, w, h, tete, ry, s, ep, C, dos):
     elif haut == "robe":
         _arc(img, (x, cou + 2 * s), (30 * s, 14 * s), 0, 0, 180, fonce, 4 * s)
         _ligne(img, (x - w * 0.82, cy + h * 0.2), (x + w * 0.82, cy + h * 0.2), fonce, 6 * s)
+    if "ceinture" in det and haut not in ("robe", "tablier", "blouse"):     # ceinture et boucle
+        yb = cy + h * 0.3; dl = w * math.sqrt(max(0.0, 1 - ((yb - cy) / (h / 2)) ** 2))
+        _ligne(img, (x - dl * 0.95, yb), (x + dl * 0.95, yb), (70, 45, 30), 11 * s)
+        _poly(img, [(x - 11 * s, yb - 9 * s), (x + 11 * s, yb - 9 * s), (x + 11 * s, yb + 9 * s), (x - 11 * s, yb + 9 * s)], (220, 190, 90))
+        _poly(img, [(x - 11 * s, yb - 9 * s), (x + 11 * s, yb - 9 * s), (x + 11 * s, yb + 9 * s), (x - 11 * s, yb + 9 * s)], TRAIT, True, 3 * s)
     if "logo" in det and haut in ("tshirt", "capuche", "debardeur", "survetement", "pull"):
         _ellipse(img, (x, cy - 4 * s), (20 * s, 20 * s), 0, _clair(col, 0.55)); _ellipse(img, (x, cy - 4 * s), (11 * s, 11 * s), 0, fonce)
     if "cravate" in det:
@@ -361,6 +383,11 @@ def _details_tete(img, t, rx, ry, s, p, C):
             a = rng.uniform(0.15 * math.pi, 0.85 * math.pi); r_ = rng.uniform(0.62, 0.92)
             _ellipse(img, R(cx + math.cos(a) * rx * r_, cy + math.sin(a) * ry * r_), (2.2 * s, 2.2 * s), 0, (150, 150, 155))
     if "moustache" in det: _moustache(img, R, cx, cy, s)
+    if "taches_rousseur" in det:
+        for sg in (-1, 1):
+            for k in range(5): _ellipse(img, R(cx + sg * (60 + 9 * (k % 3)) * s, cy + (28 + 8 * (k // 2)) * s), (2.6 * s, 2.6 * s), 0, (200, 140, 100))
+    if "boucles_oreilles" in det:
+        for sg in (-1, 1): _ellipse(img, R(cx + sg * rx * 0.98, cy + ry * 0.2 + abs(math.sin(p.get("t", 0) * 4)) * 3 * s), (8 * s, 8 * s), 0, (240, 200, 80))
 
 def _moustache(img, R, cx, cy, s):
     for sg in (-1, 1):
@@ -368,17 +395,41 @@ def _moustache(img, R, cx, cy, s):
         _poly(img, pts, (90, 70, 60))
 
 def _cheveux_arriere(img, t, rx, ry, s, p, P):
-    """Cheveux longs (carré) : la masse derrière la tête et sur les épaules."""
-    cx, cy = t; col = P["cheveux"][1]; tilt = p["tilt"]
-    _ellipse(img, (cx, cy + ry * 0.18), (rx * 1.13 + 8 * s, ry * 1.02 + 8 * s), tilt, TRAIT)
-    _ellipse(img, (cx, cy + ry * 0.18), (rx * 1.13, ry * 1.02), tilt, col)
-    for sg in (-1, 1): _ellipse(img, (cx + sg * rx * 0.62, cy + ry * 0.98), (rx * 0.32, 16 * s), 0, _fonce(col, 0.85))
+    """Cheveux derrière la tête (carré, longs, queue de cheval, chignon, boucles), qui balancent avec les mouvements."""
+    cx, cy = t; style, col = P["cheveux"]; tilt = p["tilt"]; bal = p.get("balance", 0.0); ep = 8 * s
+    def masse(c, ax, ang=tilt):
+        _ellipse(img, c, (ax[0] + ep, ax[1] + ep), ang, TRAIT); _ellipse(img, c, ax, ang, col)
+    if style == "carre":
+        masse((cx, cy + ry * 0.18), (rx * 1.13, ry * 1.02))
+        for sg in (-1, 1): _ellipse(img, (cx + sg * rx * 0.62, cy + ry * 0.98), (rx * 0.32, 16 * s), 0, _fonce(col, 0.85))
+    elif style == "long":                                                  # cheveux longs jusqu'au milieu du dos
+        masse((cx + bal * 10 * s, cy + ry * 0.55), (rx * 1.16, ry * 1.38), tilt + bal * 3)
+        for k in range(-2, 3): _ligne(img, (cx + k * rx * 0.3, cy + ry * 1.1), (cx + k * rx * 0.34 + bal * 14 * s, cy + ry * 1.75), _fonce(col, 0.8), 3 * s)
+    elif style == "boucles":                                               # volume bouclé
+        masse((cx, cy + ry * 0.12), (rx * 1.22, ry * 1.1))
+        for k in range(14):
+            a = math.pi * (0.95 + 1.1 * k / 13); _ellipse(img, (cx + math.cos(a) * rx * 1.18, cy + ry * 0.12 + math.sin(a) * ry * 1.06), (22 * s, 22 * s), 0, TRAIT)
+            _ellipse(img, (cx + math.cos(a) * rx * 1.18, cy + ry * 0.12 + math.sin(a) * ry * 1.06), (16 * s, 16 * s), 0, col)
+    elif style == "queue":                                                 # queue de cheval qui se balance
+        q0 = (cx - rx * 0.92, cy - ry * 0.45); sw = 18 * bal + 8 * math.sin(p.get("t", 0) * 3)   # attachée sur le côté, elle pend et se balance
+        bout = (q0[0] - rx * 0.3 + sw * s, q0[1] + ry * 0.85)
+        _ligne(img, q0, bout, TRAIT, 58 * s); _ligne(img, q0, bout, col, 42 * s)
+        _ellipse(img, (bout[0], bout[1] + 18 * s), (26 * s, 34 * s), 0, TRAIT); _ellipse(img, (bout[0], bout[1] + 18 * s), (19 * s, 27 * s), 0, col)
+        _ellipse(img, q0, (14 * s, 14 * s), 0, (230, 80, 120))                                 # élastique
+    elif style == "chignon":
+        c0 = (cx + bal * 6 * s, cy - ry * 1.02); _ellipse(img, c0, (46 * s + ep, 40 * s + ep), 0, TRAIT); _ellipse(img, c0, (46 * s, 40 * s), 0, col)
+        _arc(img, c0, (30 * s, 24 * s), 0, 200, 340, _fonce(col, 0.75), 4 * s)
 
 def _cheveux_avant(img, t, rx, ry, s, p, P, dos):
     cx, cy = t; style, col = P["cheveux"]; tilt = math.radians(p["tilt"])
     def R(px, py): return _rot(px, py, cx, cy, tilt)
-    if style == "carre":                                                   # frange sur le front
+    if style in ("carre", "long", "boucles", "queue", "chignon"):          # frange sur le front (ou cheveux vus de dos)
         if dos: _ellipse(img, t, (rx * 1.02, ry * 1.0), p["tilt"], col); return
+        if style in ("queue", "chignon"):                                  # cheveux tirés en arrière
+            pts = [R(cx + rx * 0.97 * math.cos(math.pi + math.pi * k / 16), cy - ry * 0.2 + ry * 0.98 * math.sin(math.pi + math.pi * k / 16)) for k in range(17)]
+            _poly(img, pts, col); _poly(img, pts, TRAIT, True, 4 * s)
+            for k in range(4): _arc(img, R(cx, cy + ry * 0.2), (rx * (0.4 + 0.15 * k), ry * 0.95), math.degrees(tilt), 235, 305, _fonce(col, 0.78), 3 * s)
+            return
         pts = [R(cx - rx * 0.92, cy - ry * 0.25)] + [R(cx + rx * 0.97 * math.cos(math.pi + math.pi * k / 14), cy - ry * 0.22 + ry * 0.98 * math.sin(math.pi + math.pi * k / 14)) for k in range(15)] + \
               [R(cx + rx * 0.92, cy - ry * 0.25)] + [R(cx + rx * (0.75 - 0.3 * k), cy - ry * (0.42 - (0.08 if k % 2 else 0))) for k in range(6)]
         _poly(img, pts, col); _poly(img, pts, TRAIT, True, 4 * s)
@@ -391,6 +442,10 @@ def _cheveux_avant(img, t, rx, ry, s, p, P, dos):
             _ligne(img, R(cx + sg * rx * 0.9, cy - ry * 0.3), R(cx + sg * rx * 0.93, cy + ry * 0.05), col, 9 * s)
     elif style == "nuque":                                                 # cheveux courts sous la casquette
         for sg in (-1, 1): _ligne(img, R(cx + sg * rx * 0.88, cy - ry * 0.3), R(cx + sg * rx * 0.92, cy - ry * 0.02), col, 10 * s)
+    elif style == "court":                                                 # cheveux courts : petite masse sur le dessus et les tempes
+        pts = [R(cx + rx * 0.98 * math.cos(math.pi + math.pi * k / 16), cy - ry * 0.32 + ry * 0.92 * math.sin(math.pi + math.pi * k / 16)) for k in range(17)]
+        pts += [R(cx + rx * (0.8 - 0.2 * k), cy - ry * (0.45 + (0.07 if k % 2 else 0))) for k in range(9)]
+        _poly(img, pts, col); _poly(img, pts, TRAIT, True, 4 * s)
     elif style == "couronne":                                              # tour de tête dégarni (Dédé)
         for sg in (-1, 1): _ellipse(img, R(cx + sg * rx * 0.9, cy - ry * 0.12), (16 * s, 34 * s), math.degrees(tilt) + sg * 15, col)
 
@@ -451,9 +506,16 @@ def _visage(img, t, rx, ry, s, p, P):
         elif yeux == "louche":                                             # sonné : chaque œil regarde ailleurs
             _ellipse(img, (ox + sg * er * 0.5, oy + (er * 0.3 if k else -er * 0.3)), (er, er * 1.15), 0, TRAIT)
         else:
-            _ellipse(img, (ox, oy), (er, er * 1.15 * (1 - pa)), 0, TRAIT)
-            if detail and pa < 0.6:                                        # reflet de lumière dans l'œil
-                _ellipse(img, (ox + lum * er * 0.35, oy - er * 0.42 * (1 - pa)), (er * 0.33, er * 0.33 * (1 - pa)), 0, BLANC)
+            pu = float(np.clip(p.get("pupille", 1.0), 0.6, 1.5))          # yeux qui s'agrandissent (surprise, intérêt) ou se rétrécissent
+            _ellipse(img, (ox, oy), (er * pu, er * 1.15 * (1 - pa) * pu), 0, TRAIT)
+            if detail and pa < 0.6:                                        # reflets de lumière dans l'œil
+                _ellipse(img, (ox + lum * er * 0.35 * pu, oy - er * 0.42 * (1 - pa) * pu), (er * 0.33 * pu, er * 0.33 * (1 - pa) * pu), 0, BLANC)
+                _ellipse(img, (ox - lum * er * 0.3 * pu, oy + er * 0.45 * (1 - pa) * pu), (er * 0.13 * pu, er * 0.13 * pu), 0, BLANC)
+            pl = float(p.get("plisse", 0.0))
+            if detail and pl > 0.15:                                       # yeux plissés par le sourire : la joue remonte sous l'œil
+                y_cut = oy + er * 1.15 * pu * (1 - 1.5 * pl)
+                _poly(img, [(ox - er * 1.6, y_cut), (ox + er * 1.6, y_cut), (ox + er * 1.6, oy + er * 1.7), (ox - er * 1.6, oy + er * 1.7)], BLANC)
+                _arc(img, (ox, y_cut + er * 0.55), (er * 1.15, er * 0.55), math.degrees(tilt), 200, 340, TRAIT, 4 * s)
             if detail and pa > 0.15:                                       # paupière tombante
                 _ligne(img, (ox - er * 1.2, oy - er * 1.15 * (1 - pa)), (ox + er * 1.2, oy - er * 1.15 * (1 - pa)), TRAIT, 4.5 * s)
             if detail and P.get("cils"):
@@ -461,7 +523,8 @@ def _visage(img, t, rx, ry, s, p, P):
                     a0 = (-0.25 - 0.3 * j) * sg; bx_, by_ = ox + sg * er * 0.75, oy - er * 0.8 * (1 - pa)
                     _ligne(img, (bx_ - sg * j * 5 * s, by_ + j * 3 * s), (bx_ - sg * j * 5 * s + sg * 11 * s, by_ + j * 3 * s - 10 * s), TRAIT, 3.5 * s)
         # sourcils : côté intérieur (vers le nez) = ox - sg * … : colère = intérieur bas (en V), tristesse = intérieur haut
-        by = oy - 34 * s; e_s = (7 if not P.get("moustache") else 10) * s
+        by = oy - 34 * s - float(p.get("sourcils_h", 0.0)) * 12 * s - (float(p.get("sourcil_leve", 0.0)) * 14 * s if sg > 0 else 0)   # l'intonation fait bouger les sourcils
+        e_s = (7 if not P.get("moustache") else 10) * s
         if so == "colere": a, b = (ox - sg * 22 * s, by + 10 * s), (ox + sg * 20 * s, by - 10 * s)
         elif so == "triste": a, b = (ox - sg * 22 * s, by - 10 * s), (ox + sg * 20 * s, by + 8 * s)
         elif so == "hausses": a, b = (ox - 22 * s, by - 16 * s), (ox + 22 * s, by - 16 * s)
@@ -493,7 +556,12 @@ def _visage(img, t, rx, ry, s, p, P):
 def _bouche(img, R, cx, cy, s, p, detail):
     mx, my = R(cx, cy + 64 * s); o = float(np.clip(p["bouche"], 0, 1)); f = p["forme"]
     v = p.get("viseme"); dents = detail
+    co = float(np.clip(p.get("coins", 0.0), -1, 1))                        # coins de la bouche : relevés (contentement) ou tombants
+    def coins_(w, yc):
+        if detail and abs(co) > 0.2:
+            for sg in (-1, 1): _ligne(img, (mx + sg * w * 0.92, yc), (mx + sg * (w + 8 * s), yc - co * 10 * s), TRAIT, 4 * s)
     def ouverte(w, h, yc):
+        coins_(w, yc - h * 0.15)
         _ellipse(img, (mx, yc), (w, h), 0, TRAIT)
         if h > 13 * s: _ellipse(img, (mx, yc + h * 0.5), (w * 0.55, h * 0.35), 0, (220, 80, 90))      # langue
         if dents and h > 11 * s:                                          # rangée de dents du haut
@@ -546,6 +614,8 @@ def _bouche(img, R, cx, cy, s, p, detail):
         _poly(img, [(mx - sg * 22 * s, my + 4 * s), (mx, my + 6 * s), (mx + sg * 18 * s, my + 2 * s), (mx + sg * 28 * s, my - 8 * s)], TRAIT, False, 6 * s)
     elif f == "tordue":                                                    # bouche qui hésite (gêne, mensonge)
         _poly(img, [(mx - 26 * s + k * 5.2 * s, my + 5 * s * math.sin(k * 1.4)) for k in range(11)], TRAIT, False, 5.5 * s)
+    elif detail and abs(co) > 0.15:                                        # bouche au repos qui sourit ou fait la moue
+        _poly(img, [(mx - 22 * s + k * 4.4 * s, my - co * 9 * s * ((k - 5) / 5) ** 2) for k in range(11)], TRAIT, False, 6 * s)
     else:
         _ligne(img, (mx - 16 * s, my), (mx + 16 * s, my), TRAIT, 6 * s)
 

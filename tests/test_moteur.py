@@ -605,5 +605,70 @@ class TestStudio(unittest.TestCase):
         self.assertEqual(sk["_bible"]["lieux"], ["bar"]); self.assertEqual([q["plan"] for q in cartoon.PH][1:], ["epaule", "contre_plongee"])
 
 
+
+class TestImageEtBanque(unittest.TestCase):
+    """Analyse de l'image de la vidéo d'origine, intonation de la voix, banque visuelle qui s'enrichit."""
+    def setUp(self):
+        try:
+            import studio, analyse_video, banque_visuelle
+        except Exception as e: self.skipTest(f"dépendances vidéo absentes : {e}")
+        self.S, self.A, self.BV = studio, analyse_video, banque_visuelle
+
+    def test_intonation(self):
+        sr = 22050; tt = np.arange(int(sr * 1.2)) / sr
+        a = (0.5 * np.sin(2 * np.pi * np.cumsum(180 * (1 + 0.3 * tt)) / sr)).astype(np.float32)
+        f0, en = self.S.prosodie(a)
+        self.assertAlmostEqual(float(np.median(f0[f0 > 0][:5])), 182, delta=8)      # la voix monte de 180 à 234 Hz
+        z, r = self.S.intonation(f0, 180.0)
+        self.assertGreater(r["moy"], 0.5); self.assertGreater(z[-5], z[5])
+        self.assertEqual(self.S.emotion_texte("Bonjour.", 0.8, dict(moy=1.3, etendue=1.0, fin=0.1)), "joie")
+        self.assertEqual(self.S.emotion_texte("Bonjour.", 0.3, dict(moy=-1.0, etendue=0.3, fin=0.0)), "blase")
+
+    def test_analyse_image(self):
+        import tempfile, cv2
+        chemin = os.path.join(tempfile.mkdtemp(), "v.mp4"); vw = cv2.VideoWriter(chemin, cv2.VideoWriter_fourcc(*"mp4v"), 30, (360, 640))
+        for k in range(150):                                               # plan 1 : mur orangé, un carré qui bouge ; plan 2 : pièce sombre
+            im = np.zeros((640, 360, 3), np.uint8)
+            if k < 75: im[:] = (60, 120, 220); cv2.rectangle(im, (40 + k, 200), (140 + k, 320), (200, 60, 40), -1)
+            else: im[:] = (30, 25, 20)
+            vw.write(im)
+        vw.release()
+        r, cles = self.A.analyser(chemin)
+        if not r: self.skipTest("lecture vidéo indisponible")
+        self.assertEqual(r["nb_plans"], 2); self.assertEqual(len(cles), 2)
+        self.assertAlmostEqual(sum(r["plans"].values()), 1.0, delta=0.01); self.assertIn(r["moment"], ("jour", "soir", "nuit"))
+        self.assertIn("plans", self.A.texte(r))
+
+    def test_bible_depuis_image_et_banque(self):
+        import tempfile
+        BV, S = self.BV, self.S; ancien = (BV.FICHIER, BV.STATS); d = tempfile.mkdtemp()
+        BV.FICHIER, BV.STATS = os.path.join(d, "b.json"), os.path.join(d, "s.json")
+        try:
+            V = dict(plans={"tres_serre": 0.5, "serre": 0.3, "moyen": 0.1, "large": 0.1}, camera={"avance": 0.6, "fixe": 0.4}, energie=0.8, sourires=0.5,
+                     duree_plan=1.5, moment="nuit", mur=[60, 90, 160], personnes=[dict(habit=[200, 30, 40], cheveux=[230, 190, 110], presence=0.9)])
+            sk = {"sujet": "x", "repliques": [{"p": "presentateur", "t": "Bonjour à tous, ça va bien ?"}, {"p": "invite", "t": "Oui."}],
+                  "decoupage": [{"scene": "1", "repliques": [0, 1]}], "doublage": {"visuel": V, "source": "https://www.tiktok.com/@a/video/1"}}
+            B = S.bible(sk, ["presentateur", "invite"])
+            self.assertEqual(B["moment"], "nuit"); self.assertIsNotNone(B["c_mur"])
+            self.assertEqual(B["costumes"]["presentateur"]["c_haut"], (200, 30, 40))          # celui qui parle le plus porte l'habit de la vidéo
+            self.assertEqual(B["costumes"]["presentateur"]["c_cheveux"], (230, 190, 110))
+            self.assertGreater(B["rythme"]["serre"], 0.6)
+            BV.ajouter(sk["doublage"], {"lieux": ["bar"], "objets": [{"replique": 0, "objet": "verre"}]}, {"lieux": ["bar"]}, "v1.mp4")
+            BV.ajouter(sk["doublage"], {"lieux": ["bar"]}, {"lieux": ["bar"]}, "v1.mp4")              # même vidéo d'origine : remplacée
+            self.assertEqual(len(BV.lire()), 1)
+            json.dump({"videos": [{"fichier": "v1.mp4", "vues": 500}]}, open(BV.STATS, "w"))
+            t = BV.tendances(); self.assertEqual(t["lieux"], ["bar"]); self.assertEqual(t["meilleures"][0][0], 500)
+            self.assertIn("BANQUE VISUELLE", BV.consigne())
+            sk2 = {"sujet": "y", "repliques": [{"p": "presentateur", "t": "Salut."}, {"p": "invite", "t": "Salut."}]}
+            self.assertGreater(S.bible(sk2, ["presentateur", "invite"])["rythme"]["serre"], 0.6)   # sans image : le rythme de la banque
+        finally: BV.FICHIER, BV.STATS = ancien
+
+    def test_consigne_images(self):
+        import doublage
+        texte = doublage.IMAGES.format(mesures="2 plans", banque="")
+        self.assertIn("coiffure", texte); self.assertIn("objets", texte)
+        self.assertIn("queue", doublage.consigne("v", "l"))
+
+
 if __name__ == "__main__":
     unittest.main()
