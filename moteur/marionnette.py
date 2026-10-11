@@ -16,6 +16,8 @@ Les clés de pose ajoutées (costume, lumiere, reflets, rides…) sont facultati
 import math
 import numpy as np, cv2
 
+import garde_robe as GR
+
 TRAIT = (26, 22, 30)
 BLANC = (252, 252, 250)
 PEAU_OMBRE = (196, 200, 226)                                               # teinte de l'ombre sur le blanc (froide, comme en animation)
@@ -40,14 +42,16 @@ COSTUMES_DEFAUT = {
     "meche":     dict(haut="tshirt", c_haut=(250, 210, 80), motif="rayures", c_motif=(240, 150, 40), bas="short", c_bas=(80, 120, 160), chaussures="baskets", c_chaussures=(250, 250, 250), details=()),
 }
 
-HAUTS = ("tshirt", "chemise", "blouse", "costume", "capuche", "survetement", "tablier", "pyjama", "pull", "debardeur", "robe", "polo", "gilet")
-MOTIFS = ("uni", "rayures", "carreaux", "pois")
+HAUTS = ("tshirt", "chemise", "blouse", "costume", "capuche", "survetement", "tablier", "pyjama", "pull", "debardeur", "robe", "polo", "gilet",
+         "col_roule", "doudoune", "blouson", "redingote", "uniforme", "tunique", "hawai")
+MOTIFS = ("uni", "rayures", "carreaux", "pois") + GR.MOTIFS
 BAS = ("jean", "pantalon", "jogging", "short", "jupe")
 CHAUSSURES = ("baskets", "ville", "ballerines", "bottes", "chaussons")
 DETAILS = ("cravate", "noeud_pap", "badge", "stethoscope", "stylos", "montre", "logo", "lunettes_vue", "moustache", "barbe", "collier", "echarpe",
-           "ceinture", "boucles_oreilles", "taches_rousseur", "bracelet")
-COIFFURES = ("carre", "long", "queue", "chignon", "boucles", "court", "meches", "nuque", "couronne", "aucune")   # coiffure de l'épisode (costume["cheveux"])
-CHEVEUX_ARRIERE = ("carre", "long", "queue", "chignon", "boucles")
+           "ceinture", "boucles_oreilles", "taches_rousseur", "bracelet", "sac_bandouliere", "casque_audio", "bretelles", "rouge_levres") + GR.BARBES
+CHAPEAUX = GR.CHAPEAUX                                                     # couvre-chef de l'épisode (costume["chapeau"], couleur c_chapeau)
+COIFFURES = ("carre", "long", "queue", "chignon", "boucles", "court", "meches", "nuque", "couronne", "aucune") + GR.COIFFURES   # coiffure de l'épisode (costume["cheveux"])
+CHEVEUX_ARRIERE = ("carre", "long", "queue", "chignon", "boucles") + GR.ARRIERE
 
 def pose_neutre():
     return dict(x=540, y=1500, s=1.0, sq=0.0, tilt=0.0, regard=(0.0, 0.0), yeux="ouverts", paupiere=0.0, sourcils="neutre",
@@ -122,11 +126,12 @@ def _ombre(img, c, ax, ang, cote, force, teinte=PEAU_OMBRE, pts=None):
 
 def _motif(img, c, ax, motif, couleur, s, haut=None, pts=None):
     """Motif du vêtement (rayures, carreaux, pois) peint à l'intérieur de l'ellipse du corps (au-dessous de `haut` seulement si donné)."""
-    if motif not in ("rayures", "carreaux", "pois"): return
+    if motif not in MOTIFS or motif == "uni": return
     roi = _roi(img, c[0], c[1], ax[0] * 1.1, ax[1])
     if roi is None: return
     x0, y0, x1, y1 = roi; m = _masque_ellipse(roi, c, (ax[0] - 2, ax[1] - 2), 0) if pts is None else _masque_poly(roi, pts, 0.98)
     if haut is not None: m[:max(0, int(haut - y0))] = 0
+    if motif in GR.MOTIFS: GR.motif(img, c, ax, motif, couleur, s, (x0, y0, m)); return
     z = img[y0:y1, x0:x1].copy(); pas = max(6, int(26 * s))
     if motif == "rayures":
         for y in range(0, y1 - y0, pas): cv2.line(z, (0, y), (x1 - x0, y), couleur, max(2, int(9 * s)), AA)
@@ -227,18 +232,20 @@ def dessiner(img, perso, p):
     # jambes (pantalon ou jambes nues) et chaussures
     bas = (C or {}).get("bas"); c_bas = (C or {}).get("c_bas", BLANC)
     pied = float(p.get("pied", 0.0))                                       # le pied droit tape (impatience) : 0 → 1
-    baton = A and C and (bas == "jupe" or C.get("haut") == "robe")           # adulte en robe ou jupe : jambes en simples traits
+    baton = A and C and (bas == "jupe" or C.get("haut") in ("robe", "tunique"))           # adulte en robe ou jupe : jambes en simples traits
     for dx in ((-40, 40) if A else (-34, 34)):
         a = (x + dx * s * sx, cy_corps + corps_h * 0.35); b = (x + dx * (1.0 if A else 1.25) * s * sx, pieds - (pied * 22 * s if dx > 0 else 0))
         if baton: _ligne(img, a, b, TRAIT, 7 * s); _chaussure(img, (b[0] + dx * 0.2 * s, b[1] - 5 * s), s * 0.75, dx, C); continue
         _ligne(img, a, b, TRAIT, mb); _ligne(img, a, b, chair, mb - 2 * ep)
         if bas in ("jean", "pantalon", "jogging"):
             _ligne(img, a, (b[0], b[1] - 8 * s), c_bas, mb - 2 * ep)
+            if A and p.get("reflets"): GR.finitions_jambe(img, a, (b[0], b[1] - 8 * s), mb - 2 * ep, s, bas, c_bas, 1 if dx > 0 else -1)
             if bas == "jogging": _ligne(img, (a[0] + dx / 34 * 9 * s, a[1]), (b[0] + dx / 34 * 9 * s, b[1] - 12 * s), (245, 245, 245), 4 * s)
             if bas == "jean": _ligne(img, (b[0] - 11 * s, b[1] - 16 * s), (b[0] + 11 * s, b[1] - 16 * s), _clair(c_bas, 0.3), 4 * s)
         elif bas == "short":
             mi = (a[0] + (b[0] - a[0]) * 0.45, a[1] + (b[1] - a[1]) * 0.45); _ligne(img, a, mi, c_bas, mb - 2 * ep + 4 * s)
         _chaussure(img, (b[0] + dx * 0.25 * s, b[1] - 6 * s), s, dx, C)
+        if A and p.get("reflets"): GR.lacets(img, (b[0] + dx * 0.25 * s, b[1] - 6 * s), s, C)
     # jupe ou robe : trapèze sous le corps
     if C and (bas == "jupe" or C.get("haut") == "robe"):
         col = C["c_haut"] if C.get("haut") == "robe" else c_bas; y0j = cy_corps + corps_h * 0.18; y1j = cy_corps + corps_h * (0.62 if not A else 0.92)
@@ -251,7 +258,7 @@ def dessiner(img, perso, p):
     pts_b = buste(x + penche * 6 * s, cy_corps, corps_w, corps_h) if A else None    # adulte : buste aux épaules carrées
     haut = (C or {}).get("haut")
     manche = None                                                          # manches de la couleur du haut
-    if C and haut not in ("debardeur", "tablier", "robe"):
+    if C and haut not in ("debardeur", "tablier", "robe", "tunique"):
         manche = (C.get("c_manche") or (C.get("c_haut", BLANC) if haut != "blouse" else (246, 248, 252)), "courtes" if haut in ("tshirt", "polo") else "longues")
     if C and haut == "tablier": manche = (C.get("c_manche") or (235, 235, 230), "courtes")
     bras = K["bras"]
@@ -272,6 +279,8 @@ def dessiner(img, perso, p):
     if C:
         _motif(img, (x, cy_corps), (corps_w, corps_h / 2), C.get("motif"), C.get("c_motif") or _fonce(c_haut, 0.8), s, pts=pts_b)
         _vetement(img, x, cy_corps, corps_w, corps_h, tete if not A else (tete[0], cy_corps - corps_h * 0.47 - ry * 0.94), ry, s, ep, C, dos)
+        if A and not dos and p.get("reflets"): GR.finitions_buste(img, pts_b, x + penche * 6 * s, cy_corps, corps_w, corps_h, s, C)
+        if not dos: _sacs(img, x, cy_corps, corps_w, corps_h, s, C)
     _ombre(img, (x, cy_corps), (corps_w, corps_h / 2), 0, lum, f_omb, pts=pts_b)
     if A: _ellipse(img, tete, (rx + ep, ry + ep), p["tilt"], TRAIT)                 # adulte : la tête posée sur le col, avec son contour
     _ellipse(img, tete, (rx, ry), p["tilt"], chair)
@@ -319,6 +328,7 @@ def dessiner(img, perso, p):
     if P.get("cheveux") and p.get("coiffure", True): _cheveux_avant(img, tete, rx, ry, st, p, P, dos)
     if P.get("accessoire"): _accessoire(img, tete, rx, ry, st, p, P)
     if C and not dos: _details_tete(img, tete, rx, ry, st, p, C)
+    if C and C.get("chapeau") in CHAPEAUX: GR.chapeau(img, tete, rx, ry, st, p, C["chapeau"], tuple(C.get("c_chapeau") or (60, 60, 70)))
     _effets(img, tete, rx, ry, st, p)
     for nom in ("main_g", "main_d"):                                       # objet tenu en main (calque RGBA)
         if p.get(nom) is not None:
@@ -429,11 +439,30 @@ def _details_tete(img, t, rx, ry, s, p, C):
             a = rng.uniform(0.15 * math.pi, 0.85 * math.pi); r_ = rng.uniform(0.62, 0.92)
             _ellipse(img, R(cx + math.cos(a) * rx * r_, cy + math.sin(a) * ry * r_), (2.2 * s, 2.2 * s), 0, (150, 150, 155))
     if "moustache" in det: _moustache(img, R, cx, cy, s)
+    for b_ in GR.BARBES:
+        if b_ in det:
+            GR.barbe(img, t, rx, ry, s, p, b_, tuple(C.get("c_barbe") or (90, 65, 45)))
+            if b_ in ("barbe_courte", "barbe_pleine"): _bouche(img, R, cx, cy, s, p, True)   # la bouche reste visible dans la barbe
+    if "casque_audio" in det:
+        _arc(img, (cx, cy - ry * 0.05), (rx * 1.08, ry * 1.05), math.degrees(tilt), 200, 340, TRAIT, 14 * s); _arc(img, (cx, cy - ry * 0.05), (rx * 1.08, ry * 1.05), math.degrees(tilt), 202, 338, (60, 60, 70), 8 * s)
+        for sg in (-1, 1): _ellipse(img, R(cx + sg * rx * 1.0, cy + 4 * s), (20 * s, 34 * s), math.degrees(tilt), TRAIT); _ellipse(img, R(cx + sg * rx * 1.0, cy + 4 * s), (14 * s, 28 * s), math.degrees(tilt), (230, 60, 60))
     if "taches_rousseur" in det:
         for sg in (-1, 1):
             for k in range(5): _ellipse(img, R(cx + sg * (60 + 9 * (k % 3)) * s, cy + (28 + 8 * (k // 2)) * s), (2.6 * s, 2.6 * s), 0, (200, 140, 100))
     if "boucles_oreilles" in det:
         for sg in (-1, 1): _ellipse(img, R(cx + sg * rx * 0.98, cy + ry * 0.2 + abs(math.sin(p.get("t", 0) * 4)) * 3 * s), (8 * s, 8 * s), 0, (240, 200, 80))
+
+def _sacs(img, x, cy, w, h, s, C):
+    """Sac en bandoulière et bretelles (devant le buste)."""
+    det = C.get("details", ())
+    if "bretelles" in det:
+        for sg in (-1, 1): _ligne(img, (x + sg * w * 0.45, cy - h * 0.48), (x + sg * w * 0.4, cy + h * 0.48), (150, 40, 50), 9 * s)
+    if "sac_bandouliere" in det:
+        cs = tuple(C.get("c_sac") or (110, 70, 45))
+        _ligne(img, (x - w * 0.6, cy - h * 0.46), (x + w * 0.85, cy + h * 0.28), TRAIT, 12 * s); _ligne(img, (x - w * 0.6, cy - h * 0.46), (x + w * 0.85, cy + h * 0.28), cs, 6 * s)
+        pts = [(x + w * 0.55, cy + h * 0.2), (x + w * 1.15, cy + h * 0.2), (x + w * 1.15, cy + h * 0.52), (x + w * 0.55, cy + h * 0.52)]
+        _poly(img, pts, cs); _poly(img, pts, TRAIT, True, 4 * s)
+        _poly(img, [(x + w * 0.55, cy + h * 0.2), (x + w * 1.15, cy + h * 0.2), (x + w * 1.1, cy + h * 0.34), (x + w * 0.6, cy + h * 0.34)], _fonce(cs, 0.8)); _ellipse(img, (x + w * 0.85, cy + h * 0.33), (5 * s, 5 * s), 0, (220, 190, 90))
 
 def _moustache(img, R, cx, cy, s):
     for sg in (-1, 1):
@@ -443,6 +472,7 @@ def _moustache(img, R, cx, cy, s):
 def _cheveux_arriere(img, t, rx, ry, s, p, P):
     """Cheveux derrière la tête (carré, longs, queue de cheval, chignon, boucles), qui balancent avec les mouvements."""
     cx, cy = t; style, col = P["cheveux"]; tilt = p["tilt"]; bal = p.get("balance", 0.0); ep = 8 * s
+    if style in GR.COIFFURES: return GR.cheveux_arriere(img, t, rx, ry, s, p, style, col)
     def masse(c, ax, ang=tilt):
         _ellipse(img, c, (ax[0] + ep, ax[1] + ep), ang, TRAIT); _ellipse(img, c, ax, ang, col)
     if style == "carre":
@@ -468,6 +498,7 @@ def _cheveux_arriere(img, t, rx, ry, s, p, P):
 
 def _cheveux_avant(img, t, rx, ry, s, p, P, dos):
     cx, cy = t; style, col = P["cheveux"]; tilt = math.radians(p["tilt"])
+    if style in GR.COIFFURES: return GR.cheveux_avant(img, t, rx, ry, s, p, style, col, dos)
     def R(px, py): return _rot(px, py, cx, cy, tilt)
     if style in ("carre", "long", "boucles", "queue", "chignon"):          # frange sur le front (ou cheveux vus de dos)
         if dos: _ellipse(img, t, (rx * 1.02, ry * 1.0), p["tilt"], col); return

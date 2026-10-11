@@ -153,9 +153,48 @@ METIERS = {
     "cuisine": dict(haut="tablier", c_haut=(120, 160, 210), c_tablier=(250, 250, 245), bas="jean", c_bas=(70, 100, 150), chaussures="chaussons", c_chaussures=(220, 120, 140), details=()),
 }
 VILLE = {                                                                   # tenues de ville selon le lieu (et l'heure)
-    "salle_sport": ("survetement", "debardeur"), "chambre": ("pyjama",), "bureau": ("chemise", "pull", "polo"),
-    "bar": ("chemise", "tshirt", "pull"), "restaurant": ("chemise", "pull", "robe"), "rue": ("capuche", "pull", "tshirt", "chemise"),
+    "salle_sport": ("survetement", "debardeur"), "chambre": ("pyjama",), "bureau": ("chemise", "pull", "polo", "col_roule"),
+    "bar": ("chemise", "tshirt", "pull", "blouson", "hawai", "col_roule"), "restaurant": ("chemise", "pull", "robe", "col_roule"),
+    "rue": ("capuche", "pull", "tshirt", "chemise", "doudoune", "blouson"),
 }
+CHAPEAUX_RUE = ("bonnet", "casquette", "beret", "bob", "chapeau")          # couvre-chefs de ville (dehors surtout)
+
+# thèmes d'époque ou de métier reconnus dans le texte : la tenue de TOUS les personnages suit (comme les chaînes « toons »)
+THEMES = [
+    (r"pr[ée]histo|cro-?magnon|caverne|homme des cavernes|mammouth|n[ée]andert", dict(haut="tunique", c_haut=(160, 110, 60), motif="taches", c_motif=(100, 65, 35),
+        bas="", chaussures="", cheveux={"h": "herisse", "f": "ondule"}, barbe="barbe_pleine")),
+    (r"\b(roi|reine|versailles|marquis|marquise|comtesse|louis xi|xviii|18e si[èe]cle|r[ée]volution fran|napol[ée]on|aristo)", dict(haut="redingote", c_haut=(40, 80, 160),
+        c_dessous=(235, 185, 80), bas="pantalon", c_bas=(40, 80, 160), chaussures="ville", c_chaussures=(30, 30, 30), cheveux={"h": "anglaises", "f": "anglaises"},
+        robe_f=dict(haut="robe", c_haut=(240, 180, 200), motif="uni"), chapeau_h="tricorne", c_chapeau=(35, 35, 45))),
+    (r"\b(police|policier|flic|gendarme|commissariat|garde à vue|contr[ôo]le d'identit)", dict(haut="uniforme", c_haut=(40, 55, 100), bas="pantalon", c_bas=(40, 55, 100),
+        chaussures="ville", c_chaussures=(20, 20, 20), chapeau="casquette", c_chapeau=(40, 55, 100), un_seul=True)),
+    (r"\b(chantier|ma[çc]on|btp|ouvrier)", dict(haut="tshirt", c_haut=(240, 140, 40), bas="jean", c_bas=(70, 90, 120), chaussures="bottes", c_chaussures=(90, 60, 40),
+        chapeau="casque_chantier", un_seul=True)),
+    (r"\b(chef cuisinier|cuisinier|top chef|p[âa]tissier|boulanger)", dict(haut="tablier", c_haut=(250, 250, 250), c_tablier=(250, 250, 250), bas="pantalon", c_bas=(50, 50, 55),
+        chaussures="ville", chapeau="toque", un_seul=True)),
+    (r"\b(plage|vacances|camping|tropiques|hawa[iï]|cocktail)", dict(haut="hawai", c_haut=(60, 170, 200), motif="fleurs", c_motif=(250, 120, 140), bas="short",
+        c_bas=(230, 220, 190), chaussures="chaussons", chapeau="bob", c_chapeau=(240, 230, 200))),
+    (r"\b(prince|princesse|ch[âa]teau|couronn)", dict(chapeau="couronne", un_seul=True)),
+]
+
+def theme(t_low):
+    for motif, c in THEMES:
+        if re.search(motif, t_low): return c
+    return None
+
+def appliquer_theme(c, T, genre, premier):
+    """Tenue d'un personnage d'après le thème T (le premier rôle seulement pour les thèmes « un_seul » : le policier, le chef…)."""
+    if not T or (T.get("un_seul") and not premier): return c
+    c = dict(c)
+    for k, v in T.items():
+        if k in ("cheveux", "barbe", "robe_f", "chapeau_h", "un_seul"): continue
+        if v == "": c.pop(k, None)
+        else: c[k] = v
+    if genre == "f" and T.get("robe_f"): c.update(T["robe_f"]); c.pop("chapeau", None); c["bas"] = "jupe"
+    if genre == "h" and T.get("chapeau_h"): c["chapeau"] = T["chapeau_h"]
+    if T.get("cheveux"): c["cheveux"] = T["cheveux"].get(genre or "h")
+    if T.get("barbe") and genre == "h": c["details"] = tuple(c.get("details") or ()) + (T["barbe"],)
+    return c
 
 def tenue(perso, role_scene, lieu, moment, graine):
     """Garde-robe d'un personnage pour l'épisode : métier s'il mène la scène dans un lieu « professionnel », sinon tenue de ville."""
@@ -177,7 +216,16 @@ def tenue(perso, role_scene, lieu, moment, graine):
     if haut == "pyjama": bas = "pantalon"
     c_bas = c_haut if haut in ("pyjama", "survetement") else BAS_PALETTE[int(rng.integers(len(BAS_PALETTE)))]
     chaus = "chaussons" if haut == "pyjama" else ("ballerines" if bas == "jupe" else ("baskets" if rng.random() < 0.6 else ("ville" if rng.random() < 0.7 else "bottes")))
+    if rng.random() < 0.3 and haut in ("tshirt", "pull", "chemise", "hawai", "col_roule") and motif == "uni":     # imprimés dessinés
+        motif = ("fleurs", "losanges", "chevrons", "etoiles", "palmiers")[int(rng.integers(5))] if haut != "hawai" else "fleurs"
+    if haut == "hawai": motif = ("fleurs", "palmiers")[int(rng.integers(2))]
     details = []
+    if rng.random() < 0.25: details.append(("sac_bandouliere", "casque_audio", "bretelles")[int(rng.integers(3))] if lieu in ("rue", "bar", "magasin") else "montre")
+    if perso == "noeud" and rng.random() < 0.5: details.append("boucles_oreilles")
+    if rng.random() < 0.15: details.append("bracelet")
+    chapeau = None
+    if lieu == "rue" and rng.random() < (0.6 if moment in ("matin", "soir", "nuit") else 0.35): chapeau = CHAPEAUX_RUE[int(rng.integers(len(CHAPEAUX_RUE)))]
+    elif haut in ("capuche", "survetement", "doudoune") and rng.random() < 0.25: chapeau = ("bonnet", "casquette")[int(rng.integers(2))]
     if haut in ("tshirt", "capuche") and rng.random() < 0.5: details.append("logo")
     if rng.random() < 0.25: details.append("montre")
     if perso == "noeud" and rng.random() < 0.4: details.append("collier")
@@ -185,7 +233,8 @@ def tenue(perso, role_scene, lieu, moment, graine):
     if haut == "chemise" and lieu == "bureau": details.append("cravate")
     return dict(haut=haut, c_haut=c_haut, motif=motif, c_motif=M._fonce(c_haut, 0.72) if motif != "pois" else (250, 250, 248),
                 bas=bas, c_bas=c_bas, chaussures=chaus, c_chaussures=PALETTE[int(rng.integers(len(PALETTE)))] if chaus != "ville" else (50, 35, 25),
-                details=tuple(details))
+                details=tuple(details), **({"chapeau": chapeau, "c_chapeau": PALETTE[int(rng.integers(len(PALETTE)))]} if chapeau else {}),
+                **({"c_dessous": (245, 245, 245)} if haut == "blouson" else {}))
 
 def _costume_valide(c):
     """Costume proposé par Claude, ramené aux catalogues de marionnette.py (sinon None)."""
@@ -198,7 +247,8 @@ def _costume_valide(c):
     out = dict(haut=c["haut"], c_haut=col(c.get("c_haut"), (120, 150, 200)), motif=c.get("motif") if c.get("motif") in M.MOTIFS else "uni",
                bas=c.get("bas") if c.get("bas") in M.BAS else "jean", c_bas=col(c.get("c_bas"), (70, 100, 150)),
                chaussures=c.get("chaussures") if c.get("chaussures") in M.CHAUSSURES else "baskets", c_chaussures=col(c.get("c_chaussures"), (240, 240, 240)),
-               details=tuple(d for d in (c.get("details") or []) if d in M.DETAILS)[:5])
+               details=tuple(d for d in (c.get("details") or []) if d in M.DETAILS)[:6])
+    if c.get("chapeau") in M.CHAPEAUX: out["chapeau"] = c["chapeau"]; out["c_chapeau"] = col(c.get("c_chapeau"), (60, 60, 70))
     out["c_motif"] = col(c.get("c_motif"), M._fonce(out["c_haut"], 0.72))
     if c.get("cheveux") in M.COIFFURES: out["cheveux"] = c["cheveux"]
     if c.get("c_cheveux"): out["c_cheveux"] = col(c.get("c_cheveux"), (110, 75, 45))
@@ -248,6 +298,12 @@ def bible(sk, roles):
             lieu0 = lieux[0]; meneur = _meneur(sk, dec[0], roles)
             c = tenue(perso, "metier" if role == meneur else "client", lieu0, moment, graine + 17 * k)
         costumes[role] = c
+    T = theme(t_low)                                                      # thème d'époque / de métier : la tenue suit (sauf costume imposé par Claude)
+    if T:
+        for k, role in enumerate(roles):
+            if isinstance(S.get("costumes"), dict) and (S.get("costumes") or {}).get(role): continue
+            vh = (sk.get("_voix_hz") or {}).get(role); g = ("f" if vh > 165 else "h") if vh else GENRE_ROLE.get(role)
+            costumes[role] = appliquer_theme(costumes[role], T, g, k == 0)
     # les personnes de la vidéo d'origine habillent nos personnages : la plus présente à l'image joue la voix la plus présente
     if V.get("personnes"):
         mots = {r: sum(len(x.get("t", "").split()) for x in sk.get("repliques", []) if x.get("p") == r) for r in roles}
@@ -296,6 +352,7 @@ def _humain():
 GENRE_ROLE = {"presentateur": "h", "invite": "h", "envoyee": "f"}           # sketchs écrits : Jojo, Kévin, Lila (accords du texte)
 COIFFURES_HUMAINS = {"carre": "carre", "long": "long", "queue": "queue", "chignon": "chignon", "boucles": "boucles", "court": "court",
                      "meches": "court", "nuque": "court", "couronne": "chauve", "aucune": "chauve", "raie": "raie", "rase": "rase", "mi_long": "mi_long", "chauve": "chauve"}
+COIFFURES_HUMAINS.update({c: c for c in M.GR.COIFFURES})
 
 def casting(sk, roles, costumes, S, graine):
     """Casting libre : une fiche de personnage adulte par rôle, différente à chaque vidéo.
@@ -328,7 +385,7 @@ def casting(sk, roles, costumes, S, graine):
         fiche = H_.creer(graine + 31 * k, genre=genre, age=age, cheveux=style, c_cheveux=c.get("c_cheveux"),
                          corpulence=d.get("corpulence") if isinstance(d.get("corpulence"), (int, float)) else None,
                          lunettes="rondes" if "lunettes_vue" in det else None,
-                         barbe=("moustache" if "moustache" in det else ("courte" if "barbe" in det else None)))
+                         barbe=next((b for b in M.GR.BARBES if b in det), None) or ("moustache" if "moustache" in det else ("trois_jours" if "barbe" in det else None)))
         out[role] = fiche
     return out
 
