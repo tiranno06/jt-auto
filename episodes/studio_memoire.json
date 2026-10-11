@@ -243,5 +243,45 @@
    "son": true
   },
   "cadence": null
+ },
+ {
+  "moment": "soir",
+  "lieux": [
+   "palais"
+  ],
+  "source": "robot+image",
+  "duree": 86.8,
+  "plans": {
+   "large": 1,
+   "epaule": 10,
+   "serre": 17,
+   "tres_serre": 14
+  },
+  "mouvements": {
+   "avance": 2,
+   "fixe": 40
+  },
+  "costumes": {
+   "envoyee": "redingote",
+   "presentateur": "redingote"
+  },
+  "figurants": 1,
+  "ambiances": [
+   "neige",
+   "poussiere"
+  ],
+  "controle": "ok",
+  "fichier": "2026-10-11_21h47_emission.mp4",
+  "cine": {
+   "focus": true,
+   "vertige": true,
+   "tiers": false,
+   "etalonnage": true,
+   "profondeur": true,
+   "grain": false,
+   "reflets": false,
+   "son": true
+  },
+  "cadence": null
  }
 ]
