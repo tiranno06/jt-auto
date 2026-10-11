@@ -35,7 +35,7 @@ def sketch(fmt="mini"):
     reps, dec = [], []
     for k, (decor, lignes) in enumerate(scenes):
         dec.append({"scene": str(k + 1), "repliques": list(range(len(reps), len(reps) + len(lignes))), "lieu": "", "son": "", "duree": 0, "decor": decor})
-        reps += [{"p": p, "t": t} for p, t in lignes]
+        reps += [dict({"p": l[0], "t": l[1]}, **({"objet": l[2]} if len(l) > 2 and l[2] else {})) for l in lignes]   # 3e élément : objet tenu
     reps[-1]["chute"] = True
     sk = {"sujet": s["sujet"], "titre": s["sujet"].upper(), "titre_accroche": s.get("titre_accroche", ""), "legende": s.get("legende", ""),
           "question": s.get("question", ""), "hashtags": s.get("hashtags") or ["humour", "pov"], "repliques": reps, "decoupage": dec,

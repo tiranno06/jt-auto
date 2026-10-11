@@ -128,7 +128,7 @@ En cas d'échec, GitHub t'envoie un e-mail ; le détail est dans l'onglet Action
 
 ## Outils payants par défaut, repli gratuit automatique
 Tous les outils payants sont activés par défaut (Claude pour l'écriture, la mise en scène et le contrôle ; ElevenLabs pour les voix ; Modal pour les décors et le plan « reconstitution »). S'il n'y a plus de crédit, le robot bascule tout seul sur les outils gratuits et la vidéo sort quand même :
-- **écriture** : sans Claude, un sketch de la réserve `moteur/sketchs_secours.json` (écrite à l'avance, jamais deux fois le même tant qu'il en reste d'inédits ; le JT d'actu devient un gag éclair) ; une alerte prévient qu'il faut recharger le crédit ;
+- **écriture** : sans Claude, un sketch de la réserve `moteur/sketchs_secours.json` (190 sketchs écrits à l'avance : 144 gags éclair et 46 sketchs longs, sur la maison, le travail, l'école, les sorties, le téléphone, l'argent et les époques ; écrite à l'avance, jamais deux fois le même tant qu'il en reste d'inédits ; le JT d'actu devient un gag éclair) ; une alerte prévient qu'il faut recharger le crédit ;
 - **doublage TikTok** : sans Claude, casting par la hauteur des voix et mise en scène par le studio gratuit ;
 - **voix** : ElevenLabs → Chatterbox → Piper ; **décors** : IA → dessinés par le robot ; **contrôle** : Claude → contrôle technique gratuit.
 

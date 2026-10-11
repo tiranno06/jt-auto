@@ -554,9 +554,9 @@ def lieu_de(texte_, defaut="salon"):
     """Lieu du catalogue d'après une description (anglais ou français) : « doctor's office », « au bureau »… (le plus cité gagne)."""
     t = (texte_ or "").lower()
     regles = [("caverne", r"pr[ée]histo|caverne|grotte|mammouth|cro-?magnon|n[ée]andert|homme des cavernes"),
-              ("palais", r"ch[âa]teau|palais|versailles|\broi\b|\breine\b|majest[ée]|cour royale|marquis"),
-              ("administration", r"\bcaf\b|pr[ée]fecture|mairie|administration|guichet|formulaire|imp[ôo]ts|france travail|p[ôo]le emploi|\bs[ée]cu\b|dossier"),
-              ("hall", r"immeuble|voisin|palier|escalier|concierge|gardien|ascenseur|bo[iî]te aux lettres|copropri"),
+              ("palais", r"palace|castle|throne|chandelier|ch[âa]teau|palais|versailles|\broi\b|\breine\b|majest[ée]|cour royale|marquis"),
+              ("administration", r"government|town hall|city hall|tax office|prefecture|\bcaf\b|pr[ée]fecture|mairie|administration|guichet|formulaire|imp[ôo]ts|france travail|p[ôo]le emploi|\bs[ée]cu\b|dossier"),
+              ("hall", r"hallway|apartment building|staircase|stairs|mailbox|immeuble|voisin|palier|escalier|concierge|gardien|ascenseur|bo[iî]te aux lettres|copropri"),
               ("cabinet_medical", r"m[ée]decin|docteur|doctor|medical|m[ée]dical|clinic|hospital|h[ôo]pital|cabinet|infirmi|nurse|dentist|pharmac"),
               ("salle_sport", r"gym|salle de sport|fitness|muscu|coach|sport|treadmill|halt[èe]re"),
               ("bar", r"\bbar\b|pub|ap[ée]ro|cocktail|bi[èe]re|beer|boire un verre|night ?club|bo[îi]te de nuit"),
@@ -564,10 +564,10 @@ def lieu_de(texte_, defaut="salon"):
               ("cuisine", r"kitchen|cuisine|frigo|fridge|cuisin|recette|four|repas|d[îi]ner|petit[- ]d[ée]j"),
               ("bureau", r"office|bureau|boss|patron|chef de|r[ée]union|meeting|coll[èe]gue|entreprise|open ?space|boulot|travail|job|manager|stagiaire"),
               ("classe", r"class|[ée]cole|school|prof|teacher|[ée]l[èe]ve|lyc[ée]e|coll[èe]ge|cours|devoir|interro|exam"),
-              ("magasin", r"shop|store|magasin|supermarch|caisse|cashier|courses|boutique|vendeu|achat|soldes"),
+              ("magasin", r"shop|store|magasin|supermarket|supermarch|caisse|cashier|courses|boutique|vendeu|achat|soldes"),
               ("chambre", r"bedroom|chambre|\blit\b|\bbed\b|dormir|sleep|r[ée]veil|alarm|sieste|nuit blanche"),
               ("rue", r"street|\brue\b|outside|dehors|trottoir|sidewalk|parking|arr[êe]t de bus|bus stop|city|ville|parc\b|park"),
-              ("salon", r"living room|salon|canap[ée]|sofa|t[ée]l[ée]\b|\btv\b|maison|home|ch[ée]ri|cl[ée]s|famille|maman|papa|coloc|appart")]
+              ("salon", r"living room|apartment|salon|canap[ée]|sofa|t[ée]l[ée]\b|\btv\b|maison|home|ch[ée]ri|cl[ée]s|famille|maman|papa|coloc|appart")]
     scores = {lieu: len(re.findall(motif, t)) for lieu, motif in regles}      # le lieu le plus souvent évoqué (à égalité : le 1er de la liste)
     meilleur = max(regles, key=lambda r: scores[r[0]])[0]
     return meilleur if scores[meilleur] else defaut
