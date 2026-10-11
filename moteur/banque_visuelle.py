@@ -1,7 +1,8 @@
-"""Banque visuelle du studio : tout ce qui a été vu dans les vidéos TikTok envoyées, vidéo après vidéo (episodes/banque_visuelle.json).
+"""Banque visuelle et sonore du studio : tout ce qui a été vu ET entendu dans les vidéos TikTok envoyées, vidéo après vidéo (episodes/banque_visuelle.json).
 
 Pour chaque vidéo d'origine : les mesures de l'image (analyse_video : montage, cadrages, caméra, personnes, couleurs d'habits et de
-cheveux, palette, lumière, agitation, sourires), ce que Claude y a reconnu quand il était disponible (lieu, objets, tenues, coiffures,
+cheveux, palette, lumière, agitation, sourires), le son (analyse_audio : voix, débit, blancs, musique, bruitages, événements,
+émotions de jeu), ce que Claude y a reconnu quand il était disponible (lieu, objets, tenues, coiffures,
 gestes, plans), ce que notre studio en a fait (bible) et le fichier de notre vidéo. Les vues TikTok de notre vidéo (stats.json) sont
 relues à chaque fois : plus une vidéo a marché, plus son style pèse dans les tendances.
 
@@ -33,11 +34,11 @@ def rythme(V):
 
 def ajouter(doublage, studio_claude=None, realisation=None, fichier=None):
     """Range une vidéo analysée dans la banque (une seule entrée par vidéo d'origine : la plus récente)."""
-    V = (doublage or {}).get("visuel") or {}
-    if not V and not studio_claude: return
+    V = (doublage or {}).get("visuel") or {}; A = (doublage or {}).get("audio") or {}
+    if not V and not A and not studio_claude: return
     S = studio_claude if isinstance(studio_claude, dict) else {}
     entree = dict(date=datetime.date.today().isoformat(), source=(doublage or {}).get("source"), auteur=(doublage or {}).get("auteur"),
-                  visuel=V, claude={k: S[k] for k in ("lieux", "moment", "costumes", "objets", "gags", "ambiances", "plans") if k in S},
+                  visuel=V, audio=A, claude={k: S[k] for k in ("lieux", "moment", "costumes", "objets", "gags", "ambiances", "plans") if k in S},
                   realisation=realisation or {}, video=fichier)
     b = [e for e in lire() if not entree["source"] or e.get("source") != entree["source"]] + [entree]
     try:
@@ -50,7 +51,7 @@ def tendances():
     b = lire(); vues = _vues()
     if not b: return {}
     tot, acc, cam = 0.0, Counter(), Counter(); lieux, objets, hauts, coiffures, gestes = Counter(), Counter(), Counter(), Counter(), Counter()
-    meilleurs = []
+    meilleurs = []; son, tot_s, evts, emos = Counter(), 0.0, Counter(), Counter()
     for e in b:
         v = vues.get(e.get("video"), 0); w = 1.0 + math.log1p(v) / 3                  # 0 vue : poids 1 ; 1 000 vues : poids ≈ 3,3
         if v: meilleurs.append((v, e))
@@ -59,6 +60,13 @@ def tendances():
             r = rythme(V); tot += w
             for k in ("serre", "large", "tres_serre", "energie", "sourires", "duree_plan"): acc[k] += w * float(r.get(k) or 0)
             for k, x in (r.get("camera") or {}).items(): cam[k] += w * float(x)
+        A = e.get("audio") or {}
+        if A.get("duree"):
+            tot_s += w
+            for k in ("debit", "blanc_moyen", "dynamique_db", "impacts_10s"): son[k] += w * float(A.get(k) or 0)
+            son["musique"] += w * float(A.get("musique") or 0) ; son["sur_vanne"] += w * (A.get("sur_vanne", 0) / max(1, A.get("impacts", 0)))
+            for k, x in (A.get("evenements") or {}).items(): evts[k] += w * x
+            for k, x in (A.get("emotions") or {}).items(): emos[k] += w * x
         C = e.get("claude") or {}; R_ = e.get("realisation") or {}
         for l in (C.get("lieux") or R_.get("lieux") or []): lieux[l] += w
         for o in C.get("objets") or []:
@@ -72,6 +80,10 @@ def tendances():
     out = dict(n=len(b), lieux=[k for k, _ in lieux.most_common(5)], objets=[k for k, _ in objets.most_common(8)], hauts=[k for k, _ in hauts.most_common(6)],
                coiffures=[k for k, _ in coiffures.most_common(4)], gestes=[k for k, _ in gestes.most_common(6)],
                meilleures=[(v, (e.get("realisation") or {}).get("lieux"), e.get("source")) for v, e in sorted(meilleurs, key=lambda x: -x[0])[:3]])
+    if tot_s:
+        out["audio"] = {k: round(son[k] / tot_s, 2) for k in ("debit", "blanc_moyen", "dynamique_db", "impacts_10s", "musique", "sur_vanne")}
+        out["audio"].update(n=int(sum(1 for e in b if (e.get("audio") or {}).get("duree"))), evenements=[k for k, _ in evts.most_common(5)],
+                            emotions=[k for k, _ in emos.most_common(6)])
     if tot:
         out["rythme"] = {k: round(acc[k] / tot, 3) for k in ("serre", "large", "tres_serre", "energie", "sourires", "duree_plan")}
         out["rythme"]["camera"] = {k: round(x / tot, 3) for k, x in cam.items()}
@@ -82,10 +94,15 @@ def consigne():
     t = tendances()
     if not t: return ""
     r = t.get("rythme") or {}
-    morceaux = [f"BANQUE VISUELLE ({t['n']} vidéo(s) déjà analysée(s), pondérée par les vues de nos vidéos) :"]
+    morceaux = [f"BANQUE VISUELLE ET SONORE ({t['n']} vidéo(s) déjà analysée(s), pondérée par les vues de nos vidéos) :"]
     if r: morceaux.append(f"cadrages serrés {int(100 * r['serre'])} %, larges {int(100 * r['large'])} %, un plan toutes les {r['duree_plan']:.1f} s, agitation {r['energie']:.2f}")
     for nom, cle in (("lieux fréquents", "lieux"), ("objets fréquents", "objets"), ("tenues fréquentes", "hauts"), ("coiffures", "coiffures"), ("gestes", "gestes")):
         if t.get(cle): morceaux.append(f"{nom} : {', '.join(t[cle])}")
     if t.get("meilleures"): morceaux.append("ce qui a fait le plus de vues : " + "; ".join(f"{v} vues ({', '.join(l or [])})" for v, l, _ in t["meilleures"]))
+    a = t.get("audio") or {}
+    if a: morceaux.append(f"son ({a['n']} vidéo(s)) : {a['debit']} mots/s, blancs de {a['blanc_moyen']} s, {a['impacts_10s']} bruitage(s) toutes les 10 s "
+                          f"(dont {int(100 * a['sur_vanne'])} % sur une vanne), musique de fond {int(100 * a['musique'])} % du volume"
+                          + (f", événements : {', '.join(a['evenements'])}" if a.get("evenements") else "")
+                          + (f", émotions de jeu : {', '.join(a['emotions'])}" if a.get("emotions") else ""))
     morceaux.append("Inspire-t'en sans copier : la vidéo du jour passe d'abord.")
     return "\n".join(morceaux)

@@ -78,12 +78,22 @@ def _instant(q, debut_mot):
     return float(q["fin"])
 
 
-def choisir(ph, silences=(), graine=0, imposes=None, duree=None):
+def densite_apprise():
+    """Bruitages toutes les 10 s dans les vidéos TikTok déjà analysées (banque, pondérée par les vues), sinon None."""
+    try:
+        import banque_visuelle
+        d = (banque_visuelle.tendances().get("audio") or {}).get("impacts_10s")
+        return float(d) if d else None
+    except Exception: return None
+
+
+def choisir(ph, silences=(), graine=0, imposes=None, duree=None, densite=None):
     """Liste de (nom, instant, gain) pour la vidéo. ph : répliques minutées (texte, emo, chute, deb, fin, groupes).
     imposes : {indice de réplique: nom} choisis par Claude (mode payant)."""
     imposes = {int(k): v for k, v in (imposes or {}).items() if v in CATALOGUE}
     duree = duree or (max((q["fin"] for q in ph), default=0) + 1)
-    plafond = max(2, int(duree / 3.2))                                      # dosage : environ un bruitage toutes les 3 s au plus
+    par_10s = 3.1 if densite is None else min(4.0, max(1.5, densite))       # dosage : appris des vidéos TikTok envoyées (sinon ~1 / 3 s)
+    plafond = max(2, int(duree * par_10s / 10))
     out, compte, dernier = [], {}, None
 
     def ajoute(nom, t, gain=None):

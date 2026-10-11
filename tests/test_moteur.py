@@ -657,6 +657,26 @@ class TestBruitages(unittest.TestCase):
         self.assertEqual(BR.choisir(ph, (), 0, {0: "boing"})[0][0], "boing")        # choix de Claude respecté
 
 
+class TestBanqueSonore(unittest.TestCase):
+    def test_analyse_et_banque(self):
+        import analyse_audio as AA, banque_visuelle as BV, sons_modernes as SM
+        from scipy.signal import resample_poly
+        sr = AA.SR; n = sr * 8; t = np.arange(n) / sr
+        voix = np.zeros(n, np.float32)
+        for a, b, f in ((0.5, 2.0, 130), (3.0, 4.5, 220)): voix[int(a * sr):int(b * sr)] = 0.3 * np.sin(2 * np.pi * f * t[:int(b * sr) - int(a * sr)])
+        fx = np.zeros(n, np.float32); x = resample_poly(SM.son("vine_boom")[:, 0], 441, 882); fx[int(2.1 * sr):int(2.1 * sr) + len(x)] = x[:n - int(2.1 * sr)] * 0.6
+        mono = voix + fx + 0.03 * np.sin(2 * np.pi * 330 * t)
+        segs = [dict(voix="a", deb=0.5, fin=2.0, t="un deux trois quatre"), dict(voix="b", deb=3.0, fin=4.5, t="cinq six")]
+        A = AA.analyser(mono, voix, segs, {"a": 130, "b": 220}, [(5, 6, "laughter")], ["[angry] x"])
+        self.assertEqual(A["nb_voix"], 2); self.assertGreaterEqual(A["impacts"], 1); self.assertGreaterEqual(A["graves"], 1)
+        self.assertEqual(A["sur_vanne"], 1); self.assertEqual(A["evenements"], {"laughter": 1}); self.assertEqual(A["emotions"], {"angry": 1})
+        avant = BV.FICHIER; BV.FICHIER = os.path.join(tempfile.mkdtemp(), "b.json")
+        try:
+            BV.ajouter({"source": "https://tiktok/x", "audio": A}); t_ = BV.tendances()
+            self.assertEqual(t_["audio"]["n"], 1); self.assertIn("son (1 vidéo", BV.consigne())
+        finally: BV.FICHIER = avant
+
+
 class TestModeEco(unittest.TestCase):
     def test_mode_eco(self):
         import reseau

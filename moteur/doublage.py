@@ -283,6 +283,12 @@ def preparer(url):
     segs = segments(separer_voix(transcrire(chemin_voix, mono), sig))
     hz = hauteurs(sig, segs)
     journal(f"  {len(segs)} répliques, voix : {hz}")
+    audio = {}
+    try:                                                                   # le son de la vidéo : voix, débit, musique, bruitages… (banque)
+        import analyse_audio
+        audio = analyse_audio.analyser(mono, voix_sig, segs, hz, EVENEMENTS)
+        journal("  son de la vidéo : " + analyse_audio.texte(audio))
+    except Exception as e: journal(f"  analyse du son impossible ({str(e)[:150]})")
     casting, m = _casting_defaut(segs, hz), {}
     try:
         if os.environ.get("CLAUDE_INDISPONIBLE") == "1": raise RuntimeError("Claude indisponible (crédit vérifié au départ)")
@@ -290,6 +296,7 @@ def preparer(url):
         lignes = "\n".join(f"{k}. {s['voix']} ({s['deb']:.1f}–{s['fin']:.1f}) : {s['t']}" for k, s in enumerate(segs))
         vx = "\n".join(f"- {v} : {h or '?'} Hz, {sum(len(s['mots']) for s in segs if s['voix'] == v)} mots" for v, h in hz.items())
         contenu = consigne(vx, lignes)
+        if audio: contenu += "\nMesures du son de la vidéo (gratuites) : " + __import__("analyse_audio").texte(audio) + "\n"
         if visuel or cles:                                                 # Claude voit aussi la vidéo d'origine (images clés) et ses mesures
             import analyse_video, banque_visuelle
             import marionnette as M_
@@ -328,7 +335,10 @@ def preparer(url):
     if isinstance(m.get("studio"), dict): sk["studio"] = m["studio"]          # direction artistique de Claude (vérifiée par studio.bible)
     sk["sources"] = [lien]
     sk["doublage"] = {"piste": piste, "duree": round(duree, 2), "source": lien, "auteur": auteur, "contexte": m.get("contexte", ""),
-                      "evenements": [list(e) for e in EVENEMENTS][:60], "visuel": visuel}
+                      "evenements": [list(e) for e in EVENEMENTS][:60], "visuel": visuel, "audio": audio}
+    if audio:                                                              # émotions de jeu données par Claude
+        from collections import Counter
+        audio["emotions"] = dict(Counter(m.lower() for x in d for m in re.findall(r"\[([^\]]{2,25})\]", x)).most_common(8))
     if EVENEMENTS: journal(f"  événements sonores : {', '.join(sorted({e[2] for e in EVENEMENTS}))[:200]}")
     sk["fiche"] = {"note": 0, "decision": "vidéo manuelle (bande son d'une vidéo TikTok)", "decoupage": sk["decoupage"]}
     sk["_monte"] = True                                                    # pas de voix off de titre ni d'accroche rejouée : la bande son est imposée

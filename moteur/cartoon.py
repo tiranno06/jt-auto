@@ -969,7 +969,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         for b_ in ((sk.get("studio") or {}).get("bruitages") or []) if isinstance(sk.get("studio"), dict) else []:
             try: imposes[int(b_.get("replique"))] = str(b_.get("son"))
             except (AttributeError, TypeError, ValueError): pass
-        BRUITAGES[:] = BR.choisir(ph, SILENCES if B else (), (B or {}).get("graine", len(sk.get("sujet", ""))), imposes, total)
+        BRUITAGES[:] = BR.choisir(ph, SILENCES if B else (), (B or {}).get("graine", len(sk.get("sujet", ""))), imposes, total, BR.densite_apprise())
         for nom, t_, g in BRUITAGES: ajoute(nom, t_, g)
     if not DOUB:
         d_m = len(SM.son("montee")) / SRM
