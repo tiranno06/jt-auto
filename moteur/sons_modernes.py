@@ -103,3 +103,59 @@ def son(nom):
         except Exception: _cache[nom] = None
         if _cache[nom] is None: _cache[nom] = BANQUE[nom]() if nom in BANQUE else np.zeros((1, 2), np.float32)
     return _cache[nom]
+
+# ------------------------------------------------------------------ son « cinéma » : ambiance du lieu, pas, musique de fond
+def _bruit(n, rng): return rng.normal(0, 1, n)
+
+def ambiance(lieu, duree, graine=7):
+    """Ambiance de fond du lieu (très bas sous les voix) : salle, rue, bar, bureau, cuisine, caverne… Stéréo 44,1 kHz."""
+    rng = np.random.default_rng(graine); n = int(duree * SR); t = np.arange(n) / SR
+    fond = _passe_bas(_bruit(n, rng), 400) * 0.05                          # « room tone » : le souffle de la pièce
+    if lieu in ("bar", "restaurant", "palais"):                            # murmure de clients, tintements
+        mur = _bande(_bruit(n, rng), 250, 2200) * (0.6 + 0.4 * np.sin(2 * np.pi * 0.23 * t + 1) * np.sin(2 * np.pi * 0.71 * t)) * 0.08
+        fond = fond + mur
+        for _ in range(int(duree / 3)):
+            k = int(rng.uniform(0, max(1, n - SR // 2))); d = np.arange(SR // 3) / SR
+            fond[k:k + len(d)] += 0.05 * np.sin(2 * np.pi * rng.uniform(2200, 3400) * d) * np.exp(-d * 18)
+    elif lieu == "rue":                                                    # circulation, une voiture qui passe
+        fond = fond + _passe_bas(_bruit(n, rng), 180) * 0.25
+        for _ in range(max(1, int(duree / 6))):
+            c = rng.uniform(0, duree); env = np.exp(-((t - c) / 1.2) ** 2)
+            fond += _bande(_bruit(n, rng), 80, 900) * env * 0.12
+    elif lieu in ("bureau", "administration", "classe"):                   # climatisation, clics de clavier
+        fond = fond + 0.012 * np.sin(2 * np.pi * 60 * t) + _bande(_bruit(n, rng), 150, 500) * 0.04
+        for _ in range(int(duree * 1.5)):
+            k = int(rng.uniform(0, max(1, n - 800))); fond[k:k + 400] += _bande(rng.normal(0, 1, 400), 2000, 6000) * np.exp(-np.arange(400) / 60) * 0.05
+    elif lieu == "cuisine":
+        fond = fond + 0.01 * np.sin(2 * np.pi * 50 * t) + _bande(_bruit(n, rng), 200, 800) * 0.03
+    elif lieu == "caverne":                                                # vent et crépitement du feu
+        fond = fond + _passe_bas(_bruit(n, rng), 300) * (0.5 + 0.5 * np.sin(2 * np.pi * 0.1 * t)) * 0.15
+        for _ in range(int(duree * 6)):
+            k = int(rng.uniform(0, max(1, n - 300))); fond[k:k + 150] += rng.normal(0, 1, 150) * np.exp(-np.arange(150) / 25) * 0.08
+    elif lieu == "salle_sport":
+        fond = fond + _bande(_bruit(n, rng), 300, 1500) * 0.04
+    return _stereo(_reverb(fond, 0.6, 0.15, graine) * 0.6)
+
+def pas(n=5, intervalle=0.17, graine=8):
+    """Bruits de pas (quelqu'un entre dans le champ)."""
+    rng = np.random.default_rng(graine); x = np.zeros(int((n * intervalle + 0.3) * SR))
+    for k in range(n):
+        s0 = int(k * intervalle * SR); d = np.arange(int(0.09 * SR)) / SR
+        x[s0:s0 + len(d)] += (_passe_bas(rng.normal(0, 1, len(d)), 900) * 0.6 + np.sin(2 * np.pi * 85 * d) * 0.5) * np.exp(-d * 45) * rng.uniform(0.7, 1.0)
+    return _stereo(_norm(x, 0.5))
+
+ACCORDS = {"joie": [(0, 4, 7), (5, 9, 12), (7, 11, 14), (0, 4, 7)], "triste": [(0, 3, 7), (-4, 0, 3), (-2, 2, 5), (0, 3, 7)],
+           "tension": [(0, 3, 6), (1, 4, 7), (0, 3, 6), (-1, 2, 5)], "neutre": [(0, 4, 7), (-3, 0, 4), (5, 9, 12), (7, 11, 14)]}
+
+def musique(duree, humeur="neutre", graine=9):
+    """Nappe musicale très discrète qui suit l'humeur du sketch (accords doux, synthèse : libre de droits)."""
+    acc = ACCORDS.get(humeur, ACCORDS["neutre"]); n = int(duree * SR); t = np.arange(n) / SR; x = np.zeros(n)
+    base = {"joie": 220.0, "triste": 196.0, "tension": 146.8}.get(humeur, 207.7); d_acc = 2.4 if humeur != "tension" else 1.2
+    for k in range(int(duree / d_acc) + 1):
+        s0 = int(k * d_acc * SR); e = min(n, s0 + int((d_acc + 0.6) * SR))
+        if s0 >= n: break
+        tt = t[s0:e] - t[s0]; env = np.minimum(1, tt / 0.5) * np.exp(-np.maximum(0, tt - d_acc) * 4)
+        for i in acc[k % len(acc)]:
+            f = base * 2 ** (i / 12); x[s0:e] += (np.sin(2 * np.pi * f * tt) + 0.3 * np.sin(2 * np.pi * 2 * f * tt)) * env / 3
+    if humeur == "tension": x *= 0.7 + 0.3 * np.sin(2 * np.pi * 2.0 * t)
+    return _stereo(_norm(_reverb(_passe_bas(x, 2500), 1.4, 0.35, graine), 0.35))

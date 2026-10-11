@@ -21,7 +21,7 @@ import marionnette as M
 
 MOMENTS = ("matin", "jour", "soir", "nuit")
 PLANS = ("large", "moyen", "serre", "tres_serre", "plongee", "contre_plongee", "epaule")
-MOUVEMENTS = ("fixe", "avance", "recul", "travelling", "epaule", "zoom_choc")
+MOUVEMENTS = ("fixe", "avance", "recul", "travelling", "epaule", "zoom_choc", "vertige")
 REACTIONS = ("aucune", "regard_camera", "yeux_au_ciel", "sceptique", "choc", "rire", "gene", "soupir", "facepalm", "bras_croises")
 STYLES_IA = {                                                              # ajouté à la description du décor envoyée à SDXL
     "matin": "soft pink morning light", "jour": "bright daylight", "soir": "warm golden evening light, lamps on",
@@ -290,6 +290,9 @@ def bible(sk, roles):
         texte_sc = " ".join(lignes_sc[:max(1, len(lignes_sc) // 2)] * 2 + lignes_sc[max(1, len(lignes_sc) // 2):])   # le début de la scène pose le lieu
         lieux.append(l or DD.lieu_de(decor_sc, "") or DD.lieu_de(texte_sc, "") or DD.lieu_de(t_low, "salon"))
     gags = [str(g)[:80] for g in (S.get("gags") or []) if str(g).strip()][:4]
+    # effets « cinéma » de l'épisode : tirés au hasard (graine de l'épisode) pour varier d'une vidéo à l'autre, mêlés au style d'avant
+    cine = {k: bool(rng.random() < p_) for k, p_ in CINE_PROBA.items()}
+    if isinstance(S.get("cine"), dict): cine.update({k: bool(v) for k, v in S["cine"].items() if k in CINE_PROBA})   # choix de Claude (mode payant)
     assis = {}                                                             # qui est assis (bureau, salon, guichet…) : une chaise est dessinée avec lui
     for k_, l_ in enumerate(lieux):
         if l_ in LIEUX_ASSIS and len(roles) >= 2 and rng.random() < 0.55: assis[k_] = roles[int(rng.integers(len(roles)))]
@@ -349,7 +352,7 @@ def bible(sk, roles):
                 lumiere=lum, ombre=0.24 if moment != "nuit" else 0.32, etalonnage=ETALONNAGE[moment], heure=heure,
                 style_ia=STYLES_IA[moment], plans=S.get("plans") if isinstance(S.get("plans"), list) else [],
                 source=("auteur" if S else "robot") + ("+image" if V else ""), c_mur=c_mur, rythme=rythme, fiches=fiches,
-                cadence=S.get("cadence") if S.get("cadence") in CADENCES else None, assis=assis)
+                cadence=S.get("cadence") if S.get("cadence") in CADENCES else None, assis=assis, cine=cine)
 
 def _humain():
     import humain
@@ -464,6 +467,7 @@ def realiser(ph, places, B):
         q["regard_camera"] = bool(j in silences or (a.get("regard_camera") is True))
     return ph
 
+CINE_PROBA = {"focus": 0.8, "vertige": 0.7, "tiers": 0.65, "etalonnage": 0.9, "profondeur": 0.8, "grain": 0.7, "reflets": 0.5, "son": 1.0}
 LIEUX_ASSIS = ("bureau", "salon", "restaurant", "administration", "classe", "bar", "cabinet_medical", "palais")
 # gestes à deux, déclenchés par les mots de la réplique (le personnage s'approche, sa main atteint vraiment l'autre)
 GESTES_DUO = [("tope", r"\b(tope|bravo|yes|trop bien|on l'a fait|g[ée]nial|check|bien jou[ée])\b"),
@@ -568,11 +572,13 @@ def decouper(ph, places, B, fps=30):
             if prec and prec["scene"] == sc and prec["cible"] == cible and prec["plan"] == plan:   # pas deux fois le même cadre
                 plan = "moyen" if plan in SERRES and len(roles) >= 2 else ("tres_serre" if plan != "tres_serre" else "serre")
             # mouvement du plan, selon l'énergie de la voix et l'émotion
-            if q["emo"] in ("cri", "colere", "panique"): mouv = ("zoom_choc" if k == 0 else "epaule")
+            cine = B.get("cine") or {}
+            if q["emo"] in ("choc", "panique") and k == 0 and cine.get("vertige"): mouv = "vertige"      # effet vertige (travelling compensé)
+            elif q["emo"] in ("cri", "colere", "panique"): mouv = ("zoom_choc" if k == 0 else "epaule")
             elif q["emo"] in ("pleurs", "triste", "soupir", "gene"): mouv = "avance"
             elif plan in LARGES: mouv = ("travelling", "avance", "recul")[h % 3]
             else: mouv = ("avance", "travelling", "fixe", "avance", "recul")[h % 5]
-            if k == 0 and q.get("mouvement") in MOUVEMENTS and q.get("mouvement") != "fixe": mouv = q["mouvement"]
+            if k == 0 and q.get("mouvement") in MOUVEMENTS and q.get("mouvement") != "fixe" and mouv != "vertige": mouv = q["mouvement"]
             force = float(np.clip(0.6 + 0.8 * energie, 0.5, 1.4))
             # passage depuis le plan précédent
             if not prec or prec["scene"] != sc: passage = "coupe"
@@ -580,7 +586,8 @@ def decouper(ph, places, B, fps=30):
             elif prec["cible"] != cible and q["emo"] in ("cri", "colere", "panique", "choc") and h % 2: passage = "file"
             elif prec["cible"] != cible: passage = ("coupe", "coupe", "file", "glisse")[h % 4] if energie > 0.4 else ("coupe", "glisse")[h % 2]
             else: passage = "glisse"
-            prec = dict(t0=a_, t1=b_, scene=sc, cible=cible, plan=plan, mouvement=mouv, force=force, passage=passage, i=q["i"], j=j)
+            tiers = bool((B.get("cine") or {}).get("tiers") and plan in ("serre", "tres_serre", "contre_plongee") and h % 2)   # sujet au tiers de l'image
+            prec = dict(t0=a_, t1=b_, scene=sc, cible=cible, plan=plan, mouvement=mouv, force=force, passage=passage, i=q["i"], j=j, tiers=tiers)
             plans.append(prec)
     for k in range(1, len(plans)):                                         # pas de trou entre deux plans d'une même scène
         if plans[k]["scene"] == plans[k - 1]["scene"]: plans[k - 1]["t1"] = plans[k]["t0"]

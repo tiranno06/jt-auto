@@ -341,6 +341,29 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         return next((x for x in reversed(ph) if x["deb"] - 0.25 <= tm), ph[0])
 
     ASSIS = (B or {}).get("assis") or {}
+    CINE = (B or {}).get("cine") or {}                                     # effets « cinéma » de l'épisode (varient d'une vidéo à l'autre)
+    TEINTES = {"cri": (1.07, 0.97, 0.94), "colere": (1.07, 0.97, 0.94), "pleurs": (0.94, 0.98, 1.07), "triste": (0.94, 0.98, 1.07),
+               "soupir": (0.97, 0.99, 1.04), "joie": (1.05, 1.03, 0.95), "rire": (1.04, 1.02, 0.96), "amour": (1.06, 1.0, 1.0),
+               "choc": (0.97, 0.98, 1.04), "panique": (0.96, 1.0, 1.05)}
+    GRAIN = []
+    if CINE.get("grain"):                                                  # grain de film très léger (3 trames qui alternent)
+        rg_ = np.random.default_rng(3)
+        GRAIN = [np.clip(rg_.normal(4, 2.2, (H, W, 1)), 0, 9).astype(np.uint8).repeat(3, 2) for _ in range(3)]
+    yy_, xx_ = np.mgrid[0:H, 0:W].astype(np.float32)
+    REFLET = (np.exp(-(((xx_ + 80) / 520) ** 2 + ((yy_ - H * 0.35) / 900) ** 2))[..., None] * np.array([70, 45, 15], np.float32)) if CINE.get("reflets") else None
+    del yy_, xx_
+    AVANT_FLOU = {}
+    if CINE.get("profondeur") and B:                                       # 3e couche : une plante floue au tout premier plan (plans serrés)
+        import decor_details as DX
+        for sc_ in places:
+            c_ = np.zeros((H, W, 3), np.uint8); c_[:] = (1, 2, 3); g_ = np.random.default_rng(B["graine"] + sc_)
+            DX.plante_haute(c_, (60 if g_.random() < 0.5 else W - 60), H + 60, 1.6)
+            m_ = (np.abs(c_.astype(np.int16) - (1, 2, 3)).sum(2) > 9).astype(np.float32)
+            AVANT_FLOU[sc_] = (cv2.GaussianBlur(c_, (0, 0), 9), cv2.GaussianBlur(m_, (0, 0), 9)[..., None])
+
+    def teinte_lut(t3):
+        r_, v_, b_ = t3; a_ = np.arange(256, dtype=np.float32)
+        return np.clip(np.stack([a_ * r_, a_ * v_, a_ * b_], 1), 0, 255).astype(np.uint8)[:, None, :]
     T_REAC, OBJ_DUO = {}, {}
 
     def t_reaction(q):
@@ -727,7 +750,11 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         elif mv == "travelling": cx += 70 * f_ * (u - 0.5) / z
         elif mv == "zoom_choc": z *= 1 + 0.14 * f_ * (1 - math.exp(-max(0.0, tm - x["t0"]) * 10))
         elif mv == "epaule": cx += 6 * f_ * math.sin(tm * 1.7) + 4 * math.sin(tm * 3.3); cy += 5 * f_ * math.sin(tm * 2.1)
+        elif mv == "vertige": z *= 1 + 0.22 * _ease(u)                     # le personnage grandit pendant que le décor s'éloigne
         else: z *= 1 + 0.005 * (tm - x["t0"])
+        if x.get("tiers"):                                                 # règle des tiers : de l'espace dans la direction du regard
+            autre = next((r2 for r2 in places[x["scene"]] if r2 != x["cible"]), None)
+            if autre: cx += (1 if position(x["scene"], autre)[0] > position(x["scene"], x["cible"])[0] else -1) * W * 0.13 / z
         return z, cx, cy
 
     PASSAGE = {"glisse": 0.38, "zoom": 0.2, "file": 0.24, "coupe": 0.0}
@@ -786,11 +813,18 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             zb = 1 + (z - 1) * 0.86; cxb, cyb = W / 2 + (cx - W / 2) * 0.86, H / 2 + (cy - H / 2) * 0.86
             cxb = min(max(cxb, W / (2 * zb)), W - W / (2 * zb)); cyb = min(max(cyb, H / (2 * zb)), H - H / (2 * zb))
         else: zb, cxb, cyb = z, cx, cy
+        zm, cxm, cym = zb, cxb, cyb
+        if B and sh is not None and sh["mouvement"] == "vertige":          # effet vertige : le décor recule pendant que le personnage avance
+            zb = max(1.0, zb * (1 - 0.2 * _ease((tm - sh["t0"]) / max(0.4, sh["t1"] - sh["t0"]))))
+            cxb = min(max(cxb, W / (2 * zb)), W - W / (2 * zb)); cyb = min(max(cyb, H / (2 * zb)), H - H / (2 * zb))
+        if B and CINE.get("profondeur"):                                   # couche du milieu : figurants entre le décor et les personnages
+            zm = 1 + (z - 1) * 0.93; cxm, cym = W / 2 + (cx - W / 2) * 0.93, H / 2 + (cy - H / 2) * 0.93
+            cxm = min(max(cxm, W / (2 * zm)), W - W / (2 * zm)); cym = min(max(cym, H / (2 * zm)), H - H / (2 * zm))
         Mx = np.float32([[zb, 0, W / 2 - zb * cxb], [0, zb, H / 2 - zb * cyb]])
         img = cv2.warpAffine(fond, Mx, (W, H), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REPLICATE)
         if B:
             for f_ in B["figurants"]:
-                if f_["scene"] == sc: figurant(f_, tm, img, zb, cxb, cyb)
+                if f_["scene"] == sc: figurant(f_, tm, img, zm, cxm, cym)
             if z > 1.3: img = cv2.GaussianBlur(img, (0, 0), min(4.5, 6 * (z - 1.1)))   # flou d'arrière-plan sur les plans serrés
         sce = dec[sc] if sc < len(dec) else {}
         if sce.get("effet") == "tremblement" or (q["emo"] in ("cri", "colere") and q["deb"] <= tm <= q["fin"]):
@@ -803,6 +837,14 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
                 p["sq"] = max(p["sq"], 0.28 * ko); p["yeux"] = "plisses"; p["forme"] = "o"; p["bouche"] = 0.2
                 p["effets"] = tuple(set(p["effets"]) | {"etoiles"}); p["bras_g"], p["bras_d"] = (-60, 20), (60, -20)
             if not -400 < p["x"] < W + 400: continue
+            flou_p = 0.0
+            if B and CINE.get("focus") and len(places[sc]) > 1 and plan_courant in ("moyen", "large") and not ang and q["p"] in places[sc] and role != q["p"]:
+                flou_p = 3.2 * _ease((tm - q["deb"] + 0.05) / 0.35)                # mise au point sur celui qui parle : l'autre devient flou
+            if flou_p > 0.3:
+                calque = np.empty_like(img); calque[:] = (1, 2, 3); dessine(calque, role, p)
+                m_ = cv2.GaussianBlur((np.abs(calque.astype(np.int16) - (1, 2, 3)).sum(2) > 9).astype(np.float32), (0, 0), flou_p)[..., None]
+                calque = cv2.GaussianBlur(calque, (0, 0), flou_p).astype(np.float32)
+                img[:] = (img * (1 - m_) + calque * m_).astype(np.uint8); continue
             if not ang: dessine(img, role, p); continue
             calque = np.empty_like(img); calque[:] = (1, 2, 3); dessine(calque, role, p)
             R_ = cv2.getRotationMatrix2D((p["x"], p["y"]), -ang, 1.0)
@@ -832,7 +874,20 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             if plan_courant in ("plongee", "contre_plongee") and dans_q and q["p"] in places[sc]: img = keystone(img, plan_courant)
             if flou_h > 0.05:                                              # passage filé / zoom : flou de mouvement
                 k_ = int(5 + 120 * flou_h) | 1; img = cv2.blur(img, (k_, 1 if sh["passage"] == "file" else k_ // 3 | 1))
+        if B and sc in AVANT_FLOU and z > 1.25:                            # 3e couche : feuillage flou au tout premier plan
+            za = z * 1.15; cxa, cya = W / 2 + (cx - W / 2) * 1.15, H / 2 + (cy - H / 2) * 1.05
+            Ma = np.float32([[za, 0, W / 2 - za * cxa], [0, za, H / 2 - za * cya]])
+            c_, m_ = AVANT_FLOU[sc]; ca = cv2.warpAffine(c_, Ma, (W, H)); ma = cv2.warpAffine(m_, Ma, (W, H))[..., None] * 0.95
+            img = (img * (1 - ma) + ca * ma).astype(np.uint8)
         if B: img = cv2.multiply(img, GRADE, scale=1 / 255)                 # étalonnage de l'heure + vignettage (avant les textes)
+        if B and CINE.get("etalonnage"):                                    # couleur de l'émotion (chaude, froide, rouge), en fondu
+            j_ = ph.index(q); t_a = TEINTES.get(q["emo"], (1.0, 1.0, 1.0))
+            t_p = TEINTES.get(ph[j_ - 1]["emo"], (1.0, 1.0, 1.0)) if j_ else (1.0, 1.0, 1.0); u_t = _ease((tm - q["deb"] + 0.2) / 0.5)
+            t3 = tuple(a + (b - a) * u_t for a, b in zip(t_p, t_a))
+            if max(abs(v - 1) for v in t3) > 0.005: img = cv2.LUT(img, teinte_lut(t3))
+        if REFLET is not None and sh is not None and sh["passage"] == "coupe" and int(sh["t0"] * 7) % 3 == 0 and tm - sh["t0"] < 0.7:
+            img = cv2.add(img, (REFLET * math.sin(math.pi * (tm - sh["t0"]) / 0.7)).astype(np.uint8))   # reflet de lumière chaude
+        if GRAIN: img = cv2.subtract(cv2.add(img, GRAIN[int(tm * FPS) % 3]), (4, 4, 4, 0))
         fr = img.astype(np.float32)
         if q["p"] == "narrateur" and tm <= q["fin"] + 0.3:                 # voix off : le titre en grand au centre à l'ouverture,
             V = VOIX_OFF[q["i"]]; a2 = pop(V, (tm - q["deb"] + 0.2) / 0.3)   # en haut de l'image ensuite (jamais sur les têtes)
@@ -850,7 +905,11 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
                 poser(fr, a2, (W - a2.shape[1]) / 2, 190)
         g = next((x for x in q["groupes"] if x[1] <= tm < x[2] + (0.2 if x is q["groupes"][-1] else 0)), None)
         if g and q["deb"] <= tm < q["fin"] + 0.2:
-            cc = pop(carton(g[0]), (tm - g[1]) / 0.12); poser(fr, cc, (W - cc.shape[1]) / 2, CAP_Y - cc.shape[0] / 2)
+            age = tm - g[1]; cc = pop(carton(g[0]), age / 0.12)
+            if B and 0.12 < age < 0.42:                                    # sous-titre animé : petit rebond à l'apparition
+                k_r = 1 + 0.07 * math.sin(math.pi * (age - 0.12) / 0.3); cc = cv2.resize(cc, (int(cc.shape[1] * k_r), int(cc.shape[0] * k_r)))
+            dx_c = 5 * math.sin(tm * 47) if (B and q["emo"] in ("cri", "colere")) else 0          # il tremble quand on crie
+            poser(fr, cc, (W - cc.shape[1]) / 2 + dx_c, CAP_Y - cc.shape[0] / 2)
         return np.clip(fr, 0, 255).astype(np.uint8)
 
     if apercu:
@@ -892,11 +951,33 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         ajoute("boom_fin", ph[-1]["fin"] + 0.02, 1.0)                     # gros impact sur la chute finale
         ajoute("foule_rire", ph[-1]["fin"] + 0.25, 0.8, public)           # gros rire du public
         if len(places[ph[-1]["scene"]]) > 1: ajoute("boom_leger", ph[-1]["fin"] + 0.57, 0.5)   # celui qui encaisse tombe à la renverse
+    amb = np.zeros((n, 2))                                                 # son « cinéma » : ambiance du lieu, pas, whoosh, musique
+    def ajoute_x(x, t_, g, piste):
+        s0 = int(max(0, t_) * SRM); e = min(n, s0 + len(x))
+        if e > s0: piste[s0:e] += x[:e - s0] * g
+    if B and CINE.get("son"):
+        for sh_ in DECOUPE:                                                # passages rapides entre plans
+            if sh_["passage"] == "file": ajoute_x(SM.swipe(), sh_["t0"] - 0.08, 0.3 if not DOUB else 0.15, fx)
+            elif sh_["passage"] == "zoom": ajoute_x(SM.whoosh(0.35), sh_["t0"] - 0.12, 0.2 if not DOUB else 0.1, fx)
+        for sc_, t_sc in DEBUT_SCENE.items():                              # bruits de pas quand ils entrent
+            if sc_ not in SANS_ENTREE: ajoute_x(SM.pas(graine=sc_), t_sc, 0.3, fx)
+        if not DOUB:                                                       # la bande son d'origine a déjà son ambiance et sa musique
+            for sc_ in places:
+                zs = [z2 for z2 in ph if z2["scene"] == sc_]
+                if not zs: continue
+                t0_, t1_ = min(z2["deb"] for z2 in zs) - 0.3, max(z2["fin"] for z2 in zs) + 0.8
+                a_ = SM.ambiance(B["lieux"][min(sc_, len(B["lieux"]) - 1)], max(0.5, t1_ - t0_), graine=B["graine"] % 997 + sc_)
+                f_ = min(len(a_) // 3, int(0.3 * SRM)); a_[:f_] *= np.linspace(0, 1, f_)[:, None]; a_[-f_:] *= np.linspace(1, 0, f_)[:, None]
+                ajoute_x(a_, t0_, 1.0, amb)
+            emos = [z2["emo"] for z2 in ph]
+            humeur = ("tension" if sum(e in ("cri", "colere", "panique") for e in emos) >= 2 else "triste" if sum(e in ("pleurs", "triste", "soupir") for e in emos) >= 2
+                      else "joie" if sum(e in ("rire", "joie", "amour") for e in emos) >= 2 else "neutre")
+            ajoute_x(SM.musique(total, humeur, graine=B["graine"] % 997), 0.0, 0.5, amb)
     ajoute("pop", GEL, 0.5)                                                # arrêt sur image
     if FIN_CARTE is not None: ajoute("pop", FIN_CARTE, 0.6)
     voix_env = np.convolve(np.abs(mix[:, 0]), np.ones(int(0.15 * SRM)) / int(0.15 * SRM), "same")
     voix_env = np.clip(voix_env / (np.percentile(voix_env[voix_env > 1e-4], 90) + 1e-6) if (voix_env > 1e-4).any() else voix_env, 0, 1)
-    mix = mix + fx * (1 - 0.5 * voix_env)[:, None] + public * (1 - 0.8 * voix_env)[:, None]   # le public s'efface quand on parle
+    mix = mix + fx * (1 - 0.5 * voix_env)[:, None] + public * (1 - 0.8 * voix_env)[:, None] + amb * (1 - 0.6 * voix_env)[:, None]   # le public, l'ambiance et la musique s'effacent quand on parle
     mix = np.clip(mix / max(1.0, np.abs(mix).max() / 0.95), -0.99, 0.99)
     brut, wav = f"{tmp}/mix.wav", f"{tmp}/mix_norm.wav"
     with wave.open(brut, "wb") as w:

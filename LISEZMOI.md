@@ -137,6 +137,9 @@ Les consignes envoyées à Claude (doublage d'une vidéo TikTok et sketchs écri
 - **Fiche par vidéo** : l'historique note les outils utilisés (`outils` : Claude ok/secours, voix ElevenLabs/Chatterbox/Piper/TikTok, décors IA/dessinés), affichés en voyants sur le site.
 - **Test automatique avant chaque mise à jour** : chaque demande de fusion fabrique une vraie mini-vidéo de bout en bout.
 
+## Style cinéma (toujours en dessin animé)
+Chaque vidéo tire au hasard ses effets (pour varier d'une vidéo à l'autre, en mélange avec le style d'avant) : mise au point qui glisse sur celui qui parle (l'autre devient flou dans les plans moyens), effet vertige sur les moments de choc (le personnage avance, le décor recule), règle des tiers dans les plans serrés, couleur de l'image selon l'émotion (chaude, froide, rouge de colère), trois couches de profondeur (décor, figurants, feuillage flou au premier plan), grain de film léger et reflets de lumière, son de cinéma (ambiance du lieu, pas, whoosh sur les passages rapides, musique de fond discrète qui suit l'humeur), sous-titres qui rebondissent et tremblent quand on crie. En mode payant, Claude peut choisir ces effets (« cine » dans la direction artistique).
+
 ## Animation des personnages
 Élan et rebond dans les gestes, cheveux et vêtements qui suivent (mouvements secondaires), poids du corps qui change de jambe, vraie marche à l'entrée, visage tourné de trois quarts vers celui à qui on parle, personnages assis sur une chaise dans les lieux qui s'y prêtent, clignements et regard vers celui qui parle, micro-mouvements des sourcils, mains qui « battent » sur les mots appuyés, réactions juste après le mot qui frappe, gestes à deux (main sur l'épaule, « tope là », donner un objet, pousser) avec des mains qui atteignent vraiment l'autre.
 
