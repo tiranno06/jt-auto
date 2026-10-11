@@ -26,6 +26,7 @@
   variés (coupe franche, glissé, filé, zoom).
 - **Tout doit rester fluide** : coupes calées sur la voix (entre deux mots ou sur un mot appuyé), mouvements adoucis, flou de
   mouvement sur les passages rapides, pas de plan trop court ni de faux raccord.
+- **Pas de rires enregistrés** (rires du public façon série américaine, « oooh » du public) : supprimés à la demande de l'auteur.
 - Code : `moteur/studio.py` (`decouper`) et `moteur/cartoon.py` (`vue`, `cadre_plan`) ; réglage MONTAGE (dynamique par défaut).
 
 ## Mode amélioré (Claude + outils payants : c'est le mode par défaut dès qu'il y a du crédit)

@@ -16,8 +16,6 @@ BANQUE = {
     "montee":      ("short suspense tension riser building up quickly, modern cinematic, stops abruptly at the end", 1.6),
     "disque":      ("record scratch sound effect, vinyl stop, comedic freeze moment", 0.9),
     "ding":        ("bright modern notification ding, smartphone message", 0.6),
-    "foule_rire":  ("small crowd laughing out loud in a room, real people, natural sitcom audience laughter", 2.5),
-    "gasp":        ("small crowd gasping in shock, real audience reaction oooh", 1.5),
 }
 
 # ambiance de fond de chaque lieu (mode payant) : fabriquée UNE fois par lieu, gardée dans sons_eleven/ambiances/, puis réutilisée
