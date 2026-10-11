@@ -45,7 +45,7 @@ def creer(graine, genre=None, age=None, cheveux=None, c_cheveux=None, corpulence
 
 # ------------------------------------------------------------------ dessin (corps des marionnettes, version adulte)
 import os
-PEAU_HUMAINE = (os.environ.get("PEAU") or "humaine") != "blanche"
+PEAU_HUMAINE = (os.environ.get("PEAU") or "blanche") == "humaine"     # peau blanche comme nos bonshommes (défaut) ou couleur humaine
 
 COIFF_M = {"carre": "carre", "long": "long", "queue": "queue", "chignon": "chignon", "boucles": "boucles", "court": "court", "raie": "court",
            "rase": "court", "mi_long": "carre", "meches": "meches", "nuque": "nuque"}

@@ -98,26 +98,34 @@ def _masque_ellipse(roi, c, ax, ang):
     cv2.ellipse(m, _pt(c[0] - x0, c[1] - y0), _pt(max(1, ax[0]), max(1, ax[1])), ang, 0, 360, 255, -1, AA, 2)
     return m
 
-def _ombre(img, c, ax, ang, cote, force, teinte=PEAU_OMBRE):
+def _masque_poly(roi, pts, k=1.0, dx=0.0, dy=0.0):
+    """Masque d'un polygone (buste adulte), agrandi de k autour de son centre et décalé de (dx, dy)."""
+    x0, y0, x1, y1 = roi; m = np.zeros((y1 - y0, x1 - x0), np.uint8); a = np.array(pts, np.float32); c = a.mean(0)
+    a = (a - c) * k + c + (dx - x0, dy - y0); cv2.fillPoly(m, [np.round(a * 4).astype(np.int32)], 255, AA, 2)
+    return m
+
+def _ombre(img, c, ax, ang, cote, force, teinte=PEAU_OMBRE, pts=None):
     """Ombre en croissant (dessin animé) : la partie de la forme qui n'est pas tournée vers la lumière (`cote` = côté d'où vient
     la lumière : -1 gauche, 1 droite). Multiplie les couleurs déjà peintes (costume, motif) : l'ombre suit tout ce qui est dessiné dessous."""
     if force <= 0: return
-    roi = _roi(img, c[0], c[1], max(ax), max(ax))
+    roi = _roi(img, c[0], c[1], max(ax) * 1.1, max(ax) * 1.1)
     if roi is None: return
-    m1 = _masque_ellipse(roi, c, (ax[0] - 1, ax[1] - 1), ang)
-    m2 = _masque_ellipse(roi, (c[0] + cote * ax[0] * 0.32, c[1] - ax[1] * 0.16), (ax[0] * 1.02, ax[1] * 1.04), ang)
+    if pts is not None: m1, m2 = _masque_poly(roi, pts, 0.99), _masque_poly(roi, pts, 1.03, cote * ax[0] * 0.32, -ax[1] * 0.16)
+    else:
+        m1 = _masque_ellipse(roi, c, (ax[0] - 1, ax[1] - 1), ang)
+        m2 = _masque_ellipse(roi, (c[0] + cote * ax[0] * 0.32, c[1] - ax[1] * 0.16), (ax[0] * 1.02, ax[1] * 1.04), ang)
     m = (m1 > 128) & (m2 < 128)                                            # croissant net (aplat d'ombre façon cel-shading)
     if not m.any(): return
     x0, y0, x1, y1 = roi; z = img[y0:y1, x0:x1]
     k = (256 * (1 - force + force * np.array(teinte, np.float32) / 255)).astype(np.uint16)
     z[m] = ((z[m].astype(np.uint16) * k) >> 8).astype(np.uint8)
 
-def _motif(img, c, ax, motif, couleur, s, haut=None):
+def _motif(img, c, ax, motif, couleur, s, haut=None, pts=None):
     """Motif du vêtement (rayures, carreaux, pois) peint à l'intérieur de l'ellipse du corps (au-dessous de `haut` seulement si donné)."""
     if motif not in ("rayures", "carreaux", "pois"): return
-    roi = _roi(img, c[0], c[1], ax[0], ax[1])
+    roi = _roi(img, c[0], c[1], ax[0] * 1.1, ax[1])
     if roi is None: return
-    x0, y0, x1, y1 = roi; m = _masque_ellipse(roi, c, (ax[0] - 2, ax[1] - 2), 0)
+    x0, y0, x1, y1 = roi; m = _masque_ellipse(roi, c, (ax[0] - 2, ax[1] - 2), 0) if pts is None else _masque_poly(roi, pts, 0.98)
     if haut is not None: m[:max(0, int(haut - y0))] = 0
     z = img[y0:y1, x0:x1].copy(); pas = max(6, int(26 * s))
     if motif == "rayures":
@@ -160,7 +168,16 @@ def _jointures(img, m, forme, r, s):
         for k in (-1, 1): _arc(img, (m[0] + k * r * 0.35, m[1] + r * 0.05), (r * 0.32, r * 0.25), 0, 200, 340, TRAIT, 3 * s)
 
 # ------------------------------------------------------------------ dessin
-ADULTE_TETE = 0.8                                                          # version adulte : tête un peu moins grosse par rapport au corps
+ADULTE_TETE = 0.9                                                          # version adulte : grosse tête ronde posée sur le col
+
+def buste(x, cy, w, h):
+    """Buste ADULTE (style « toons ») : vêtement aux épaules carrées arrondies, flancs presque droits, bas un peu évasé."""
+    haut, bas = cy - h / 2, cy + h / 2; d = []
+    for a in np.linspace(math.pi / 2, math.pi, 7):                         # épaule gauche : du col au bras
+        d.append((x - 0.5 * w + math.cos(a) * 0.48 * w, haut + 0.3 * w - math.sin(a) * 0.3 * w))
+    d += [(x - 0.97 * w, cy), (x - 1.03 * w, bas - 0.05 * h), (x - 0.96 * w, bas)]
+    g = [(2 * x - px, py) for px, py in reversed(d)]
+    return [(x - 0.3 * w, haut)] + d + g + [(x + 0.3 * w, haut)]
 
 def squelette(p):
     """Proportions du personnage : marionnette d'origine (grosse tête, petit corps) ou version ADULTE (p["adulte"]) du même modèle :
@@ -169,18 +186,19 @@ def squelette(p):
     x = p["x"] + (math.sin(p["t"] * 61) * 9 * p["tremble"] if p.get("tremble") else 0); pieds = p["y"]
     epaules = float(p.get("epaules", 0.0)); penche = float(p.get("penche", 0.0))
     if A:
-        corps_h = 150 * s * sy * 1.75; corps_w = 92 * s * sx * 1.1; cy_corps = pieds - 255 * s * sy - corps_h * 0.35
-        Rt = 150 * s * ADULTE_TETE; cou = 1.16
+        corps_h = 150 * s * sy * 1.6; corps_w = 92 * s * sx * 1.12; cy_corps = pieds - 235 * s * sy - corps_h * 0.35
+        Rt = 150 * s * ADULTE_TETE; cou = 0.86
     else:
         corps_h = 150 * s * sy; corps_w = 92 * s * sx; cy_corps = pieds - 38 * s - corps_h / 2; Rt = 150 * s; cou = 0.78
     tete = (x + math.sin(math.radians(p["tilt"])) * 30 * s + penche * 16 * s, cy_corps - corps_h / 2 - Rt * cou * sy + epaules * 12 * s)
     rx, ry = Rt * (1 + 0.25 * sq) * (1 - 0.1 * sq), Rt * (1 - 0.18 * sq)
-    h_ep = 0.36 if A else 0.22
-    ep_g = (x - corps_w * 0.82 + penche * 8 * s, cy_corps - corps_h * h_ep - epaules * 22 * s); ep_d = (x + corps_w * 0.82 + penche * 8 * s, cy_corps - corps_h * h_ep - epaules * 22 * s)
-    L = 100 if A else 64
+    h_ep = 0.34 if A else 0.22
+    k_ep = (corps_w * 0.97 + 10 * s) if A else corps_w * 0.82             # adulte : les bras tombent le long du buste, sous l'épaule
+    ep_g = (x - k_ep + penche * 8 * s, cy_corps - corps_h * h_ep - epaules * 22 * s); ep_d = (x + k_ep + penche * 8 * s, cy_corps - corps_h * h_ep - epaules * 22 * s)
+    L = 92 if A else 64
     bras = [(e, *_bras(e, (a[0], a[1]), L, s)) for e, a in ((ep_g, p["bras_g"]), (ep_d, p["bras_d"]))]
     return dict(A=A, s=s, sx=sx, sy=sy, x=x, pieds=pieds, corps_h=corps_h, corps_w=corps_w, cy_corps=cy_corps, R=Rt, tete=tete, rx=rx, ry=ry,
-                bras=bras, st=s * (ADULTE_TETE if A else 1.0), membre=(32 if A else 34) * s, r_m=(19 if A else 22) * s, epaules=epaules, penche=penche)
+                bras=bras, st=s * (ADULTE_TETE if A else 1.0), membre=(40 if A else 34) * s, r_m=(22 if A else 22) * s, epaules=epaules, penche=penche)
 
 def dessiner(img, perso, p):
     """Dessine le personnage `perso` (clé de PERSOS ou dict) dans `img` selon la pose `p`. Renvoie la position de la tête."""
@@ -209,8 +227,10 @@ def dessiner(img, perso, p):
     # jambes (pantalon ou jambes nues) et chaussures
     bas = (C or {}).get("bas"); c_bas = (C or {}).get("c_bas", BLANC)
     pied = float(p.get("pied", 0.0))                                       # le pied droit tape (impatience) : 0 → 1
+    baton = A and C and (bas == "jupe" or C.get("haut") == "robe")           # adulte en robe ou jupe : jambes en simples traits
     for dx in ((-40, 40) if A else (-34, 34)):
-        a = (x + dx * s * sx, cy_corps + corps_h * 0.35); b = (x + dx * 1.25 * s * sx, pieds - (pied * 22 * s if dx > 0 else 0))
+        a = (x + dx * s * sx, cy_corps + corps_h * 0.35); b = (x + dx * (1.0 if A else 1.25) * s * sx, pieds - (pied * 22 * s if dx > 0 else 0))
+        if baton: _ligne(img, a, b, TRAIT, 7 * s); _chaussure(img, (b[0] + dx * 0.2 * s, b[1] - 5 * s), s * 0.75, dx, C); continue
         _ligne(img, a, b, TRAIT, mb); _ligne(img, a, b, chair, mb - 2 * ep)
         if bas in ("jean", "pantalon", "jogging"):
             _ligne(img, a, (b[0], b[1] - 8 * s), c_bas, mb - 2 * ep)
@@ -221,28 +241,39 @@ def dessiner(img, perso, p):
         _chaussure(img, (b[0] + dx * 0.25 * s, b[1] - 6 * s), s, dx, C)
     # jupe ou robe : trapèze sous le corps
     if C and (bas == "jupe" or C.get("haut") == "robe"):
-        col = C["c_haut"] if C.get("haut") == "robe" else c_bas; y0j = cy_corps + corps_h * 0.18; y1j = cy_corps + corps_h * (0.62 if not A else 0.95)
-        pts = [(x - corps_w * 0.85, y0j), (x + corps_w * 0.85, y0j), (x + corps_w * 1.18, y1j), (x - corps_w * 1.18, y1j)]
+        col = C["c_haut"] if C.get("haut") == "robe" else c_bas; y0j = cy_corps + corps_h * 0.18; y1j = cy_corps + corps_h * (0.62 if not A else 0.92)
+        ev = 1.18 if not A else 1.35
+        pts = [(x - corps_w * 0.85, y0j), (x + corps_w * 0.85, y0j), (x + corps_w * ev, y1j), (x - corps_w * ev, y1j)]
         _poly(img, pts, col); _poly(img, pts, TRAIT, True, ep * 0.8)
         for k in (-1, 0, 1): _ligne(img, (x + k * corps_w * 0.35, y0j + 10 * s), (x + k * corps_w * 0.5, y1j - 6 * s), _fonce(col, 0.82), 3 * s)   # plis
     # bras (épaules)
     bras = K["bras"]
-    if A:                                                                  # version adulte : un cou entre le buste et la tête
-        c0, c1 = (x + penche * 4 * s, cy_corps - corps_h * 0.42), (tete[0], tete[1] + ry * 0.7)
-        _ligne(img, c0, c1, TRAIT, 46 * s + 2 * ep); _ligne(img, c0, c1, _fonce(chair, 0.93), 46 * s)
+    pts_b = buste(x + penche * 6 * s, cy_corps, corps_w, corps_h) if A else None    # adulte : buste aux épaules carrées
+    haut = (C or {}).get("haut")
+    manche = None                                                          # manches de la couleur du haut
+    if C and haut not in ("debardeur", "tablier", "robe"):
+        manche = (C.get("c_manche") or (C.get("c_haut", BLANC) if haut != "blouse" else (246, 248, 252)), "courtes" if haut in ("tshirt", "polo") else "longues")
+    if C and haut == "tablier": manche = (C.get("c_manche") or (235, 235, 230), "courtes")
+    bras = K["bras"]
+    if A:                                                                  # adulte : le haut du bras sort de dessous l'épaule (derrière le buste)
+        for e_, c_, m_ in bras: _ligne(img, e_, c_, TRAIT, mb + 2 * ep)
+        for e_, c_, m_ in bras: _ligne(img, e_, c_, manche[0] if manche else chair, mb)
     # contour d'abord (tout en noir, un peu plus gros), puis remplissage : le contour des formes se fond
-    for c_, ax, an in ((( x, cy_corps), (corps_w + ep, corps_h / 2 + ep), 0), (tete, (rx + ep, ry + ep), p["tilt"])):
-        _ellipse(img, c_, ax, an, TRAIT)
+    if A: _poly(img, pts_b, TRAIT, True, 2 * ep)
+    else: _ellipse(img, (x, cy_corps), (corps_w + ep, corps_h / 2 + ep), 0, TRAIT)
+    if not A: _ellipse(img, tete, (rx + ep, ry + ep), p["tilt"], TRAIT)
     haut = (C or {}).get("haut"); c_haut = (C or {}).get("c_haut", BLANC)
     if haut == "blouse": c_haut = (246, 248, 252)
-    _ellipse(img, (x, cy_corps), (corps_w, corps_h / 2), 0, c_haut if C else BLANC)
+    if A: _poly(img, pts_b, c_haut if C else BLANC)
+    else: _ellipse(img, (x, cy_corps), (corps_w, corps_h / 2), 0, c_haut if C else BLANC)
     if C and not dos and haut not in ("blouse",):                            # plis du vêtement, du côté de l'ombre
         sg_p = -lum if lum else 1
         for k in range(2): _arc(img, (x + sg_p * corps_w * 0.55, cy_corps + (k - 0.3) * 26 * s), (16 * s, 8 * s), 0, 200 if sg_p > 0 else 20, 300 if sg_p > 0 else 120, _fonce(c_haut, 0.72), 3 * s)
     if C:
-        _motif(img, (x, cy_corps), (corps_w, corps_h / 2), C.get("motif"), C.get("c_motif") or _fonce(c_haut, 0.8), s)
+        _motif(img, (x, cy_corps), (corps_w, corps_h / 2), C.get("motif"), C.get("c_motif") or _fonce(c_haut, 0.8), s, pts=pts_b)
         _vetement(img, x, cy_corps, corps_w, corps_h, tete if not A else (tete[0], cy_corps - corps_h * 0.47 - ry * 0.94), ry, s, ep, C, dos)
-    _ombre(img, (x, cy_corps), (corps_w, corps_h / 2), 0, lum, f_omb)
+    _ombre(img, (x, cy_corps), (corps_w, corps_h / 2), 0, lum, f_omb, pts=pts_b)
+    if A: _ellipse(img, tete, (rx + ep, ry + ep), p["tilt"], TRAIT)                 # adulte : la tête posée sur le col, avec son contour
     _ellipse(img, tete, (rx, ry), p["tilt"], chair)
     _ombre(img, tete, (rx, ry), p["tilt"], lum, f_omb * 0.8)
     for cle, teinte in (("rougeur", (235, 70, 60)), ("paleur", (150, 190, 235))):     # colère : rouge par le haut ; peur : bleu-vert pâle
@@ -255,19 +286,17 @@ def dessiner(img, perso, p):
             a = (m * 0.6 * g)[..., None]; z = img[y0:y1, x0:x1].astype(np.float32)
             img[y0:y1, x0:x1] = (z * (1 - a) + np.array(teinte, np.float32) * a).astype(np.uint8)
     # bras (devant le corps, avec leur propre contour) ; manches de la couleur du haut
-    manche = None
-    if C and haut not in ("debardeur", "tablier", "robe"):
-        manche = (C.get("c_manche") or (c_haut if haut != "blouse" else (246, 248, 252)), "courtes" if haut in ("tshirt", "polo") else "longues")
-    if C and haut == "tablier": manche = (C.get("c_manche") or (235, 235, 230), "courtes")
     formes = (p.get("main_forme_g") or "ouverte", p.get("main_forme_d") or "ouverte") if p.get("mains") else (None, None)
     r_m = K["r_m"]
     for (e_, c_, m_), fm in zip(bras, formes):
         e2 = (e_[0] + (x - e_[0]) * 0.25, e_[1] + 6 * s)
-        _ligne(img, e2, c_, TRAIT, mb + 2 * ep); _ligne(img, c_, m_, TRAIT, mb + 2 * ep)
+        if not A: _ligne(img, e2, c_, TRAIT, mb + 2 * ep)
+        _ligne(img, c_, m_, TRAIT, mb + 2 * ep)
         if fm: _main(img, m_, math.atan2(m_[0] - c_[0], m_[1] - c_[1]), fm, r_m, TRAIT, ep)
         else: _ellipse(img, m_, (r_m + ep, r_m + ep), 0, TRAIT)
     for (e_, c_, m_), fm in zip(bras, formes):
         e2 = (e_[0] + (x - e_[0]) * 0.25, e_[1] + 6 * s)
+        if A: e2 = (e_[0] + (c_[0] - e_[0]) * 0.6, e_[1] + (c_[1] - e_[1]) * 0.6)   # adulte : le haut du bras est déjà peint (on raccorde au coude)
         _ligne(img, e2, c_, chair, mb); _ligne(img, c_, m_, chair, mb)
         if manche:
             _ligne(img, e2, c_, manche[0], mb)

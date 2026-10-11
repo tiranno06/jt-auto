@@ -101,7 +101,7 @@ Pour les sketchs, les gags éclair et les vidéos faites sur la bande son d'une 
 
 ### Personnages adultes, casting libre (par défaut)
 Réglage **Personnages** dans l'onglet ⚙️ : « Adultes semi-réalistes » (par défaut) ou « Marionnettes de la chaîne ».
-- `moteur/humain.py` dessine des **adultes dans le style de nos anciens personnages** : trait noir, aplats et ombre nette, grosse tête ronde aussi expressive que celle de Jojo, Kévin et Lila (mêmes yeux brillants, sourcils, bouche synchronisée, coiffures, effets) sur un vrai corps d'adulte (environ 5 têtes de haut) : cou, épaules, buste, taille, hanches, bras et jambes d'un seul tenant qui se plient en souplesse, mains à quatre doigts et pouce, peau de couleur humaine, oreilles, rides selon l'âge, barbe, lunettes, cheveux qui grisonnent, tenue complète.
+- `moteur/humain.py` dessine des **adultes dans le style des chaînes « toons » de TikTok** (Aristos Toons, Lescromatoons, MotionToonz…), sur la base de nos anciens personnages : grosse tête ronde **blanche** posée directement sur le col (pas de cou), yeux en ovales noirs, sourcils fins, bouche synchronisée ; buste = le vêtement, aux **épaules carrées** et flancs droits ; bras en manches qui tombent sous l'épaule, mains blanches rondes avec pouce ; jambes en pantalon, ou **simples traits noirs** sous une robe ou une jupe ; trait noir épais, aplats. La tenue, la coiffure, la barbe, les lunettes changent à chaque vidéo (casting libre). Réglage `PEAU=humaine` pour une peau de couleur humaine (par défaut : blanche).
 - **Casting libre** : à chaque vidéo, de nouveaux personnages. Le genre vient de la voix (doublage TikTok) ou du prénom du sketch ; l'âge de ce qui est dit (« mamie », « papa », « docteur »…) ou de Claude ; la coiffure, la couleur des cheveux et des habits de la vidéo d'origine ; le reste (visage, peau, yeux, corpulence) est tiré au hasard avec la graine de l'épisode. Les figurants sont aussi des adultes.
 - Toute la mise en scène s'applique (plans, gestes, mimiques, intonation, réactions) ; les cadrages sont adaptés aux proportions d'adulte.
 
@@ -141,7 +141,7 @@ En cas d'échec, GitHub t'envoie un e-mail ; le détail est dans l'onglet Action
 - `moteur/dessin_jt.py` / `moteur/jt.py` : dessins, montage studio et mixage
 - `moteur/cartoon.py` / `moteur/marionnette.py` : dessin animé (sketchs, gags éclair, doublage) et personnages
 - `moteur/studio.py` / `moteur/decor_dessin.py` : direction artistique et réalisation sans IA, décors dessinés par le robot
-- `moteur/humain.py` : personnages adultes 2D en volume et leurs fiches (casting libre)
+- `moteur/humain.py` : personnages adultes (style « toons ») et leurs fiches (casting libre)
 - `moteur/rendu3d.py` / `moteur/blender_humain.py` : vraie 3D (Blender), réglage RENDU_3D
 - `moteur/analyse_video.py` / `moteur/banque_visuelle.py` : analyse de l'image des vidéos TikTok envoyées, banque visuelle (détecteur de visages YuNet, licence MIT, dans `moteur/modeles/`)
 - `moteur/publier.py` : publication TikTok (Buffer, ou Upload-Post)
