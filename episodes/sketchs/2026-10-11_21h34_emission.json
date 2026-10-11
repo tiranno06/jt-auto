@@ -1,0 +1,122 @@
+{
+ "sujet": "Le bébé de la voisine",
+ "titre": "LE BÉBÉ DE LA VOISINE",
+ "titre_accroche": "T'as déjà fait du baby-sitting ?",
+ "legende": "Combien de temps ? Juste cinq minutes.",
+ "question": "T'as déjà fait du baby-sitting ?",
+ "hashtags": [
+  "petitsdramas",
+  "humour",
+  "pov",
+  "famille"
+ ],
+ "repliques": [
+  {
+   "p": "narrateur",
+   "t": "T'as déjà fait du baby-sitting ?",
+   "d": "[excited] T'as déjà fait du baby-sitting ?"
+  },
+  {
+   "p": "envoyee",
+   "t": "Tu peux garder le bébé cinq minutes ?"
+  },
+  {
+   "p": "invite",
+   "t": "Bien sûr, je suis un pro."
+  },
+  {
+   "p": "envoyee",
+   "t": "Il est où, le bébé ?"
+  },
+  {
+   "p": "invite",
+   "t": "Il dort dans le panier à linge."
+  },
+  {
+   "p": "envoyee",
+   "t": "C'est le chat, Kévin."
+  },
+  {
+   "p": "invite",
+   "t": "Ah. Alors le bébé est dans le panier du chat ?",
+   "chute": true
+  }
+ ],
+ "decoupage": [
+  {
+   "scene": "1",
+   "repliques": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lieu": "",
+   "son": "",
+   "duree": 0,
+   "decor": "a living room"
+  }
+ ],
+ "sources": [],
+ "gag": null,
+ "verite": "",
+ "running_gag": "",
+ "bandeau": [],
+ "fiche": {
+  "note": 0,
+  "decision": "sketch de secours (Claude indisponible : crédit épuisé ?)",
+  "decoupage": [
+   {
+    "scene": "1",
+    "repliques": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 0,
+    "decor": "a living room"
+   }
+  ]
+ },
+ "_voix_hz": {
+  "invite": 114,
+  "envoyee": 235,
+  "narrateur": 277
+ },
+ "_voix_genre": {
+  "invite": "h",
+  "envoyee": "f",
+  "narrateur": "f"
+ },
+ "realisation": {
+  "moment": "soir",
+  "lieux": [
+   "salon"
+  ],
+  "gags": [],
+  "ambiances": [
+   "poussiere"
+  ],
+  "source": "robot",
+  "tenues": {
+   "envoyee": "tshirt",
+   "invite": "capuche"
+  },
+  "plans": [
+   "large/fixe",
+   "epaule/fixe",
+   "large/fixe",
+   "epaule/fixe",
+   "moyen/fixe",
+   "moyen/fixe",
+   "serre/avance"
+  ]
+ }
+}
