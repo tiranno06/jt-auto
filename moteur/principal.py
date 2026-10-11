@@ -40,7 +40,7 @@ if THEME and (os.environ.get("FORMAT") or "") not in ("mini", "libre"): os.envir
 os.environ["FORMAT"] = FORMAT = format_du_jour(os.environ.get("FORMAT"), _hist)
 if FORMAT == "mini": os.environ["LONGUEUR"] = "eclair"                    # gag éclair : ~15 s
 elif FORMAT == "libre": os.environ["LONGUEUR"] = "pro"                    # sketch long : 60 à 90 s (plus d'une minute garantie au montage)
-import actu, ecrire, voix, jt, serie, stats
+import actu, ecrire, voix, jt, serie, stats, secours
 
 SR = 22050
 
@@ -110,7 +110,14 @@ def main():
     print(f"Type de vidéo : {'gag éclair (~15 s)' if fmt == 'mini' else 'sketch long (+1 min)' if libre else 'JT actu du jour'}", flush=True)
     recents = [f"{h.get('titre', '')} : {h.get('accroche', '')}" for h in historique[-10:]]
     # 1. recherche : sujets candidats (articles des dernières 24 h, regroupés par sujet et classés par reprise médiatique)
-    script = None; tiktok = None; DOUB = None
+    script = None; tiktok = None; DOUB = None; SECOURS = False
+    def passer_en_secours(e):                                              # Claude ne répond pas (crédit épuisé) : outils gratuits
+        print(f"Claude indisponible ({str(e)[:160]}) : bascule automatique sur un sketch de secours (outils gratuits pour l'écriture).", flush=True)
+        try:
+            import alerte
+            alerte.alerter("Crédit Claude épuisé ?", "Claude ne répond pas : la vidéo est fabriquée avec un sketch de secours déjà écrit. "
+                           "Rechargez le crédit sur console.anthropic.com pour revenir aux sketchs écrits par Claude.")
+        except Exception: pass
     if THEME.startswith("TIKTOK::"):                                       # vidéo construite sur la bande son d'une vidéo TikTok
         tiktok = THEME.split("::", 1)[1].strip()
         candidats = [([{"titre": "Bande son TikTok", "resume": tiktok, "lien": tiktok, "date": None, "source": "tiktok"}], "tiktok")]
@@ -120,15 +127,21 @@ def main():
         if mode_script: script = texte
         candidats = [([{"titre": texte.splitlines()[0][:120], "resume": texte[:1500], "lien": "", "date": None, "source": "manuel"}], "manuel")]
     elif LOT and libre:                                                    # série d'un seul jet : la saison est planifiée, on fabrique l'épisode suivant
-        if not serie.a_faire()[0]: serie.planifier(fmt, recents=[h.get("titre", "") for h in historique[-30:]])
-        prevu, k_ep = serie.a_faire()
-        candidats = [([{"titre": prevu["titre"], "resume": prevu["resume"], "lien": "", "date": None, "source": "série"}], "série")]
-        print(f"Série d'un seul jet : épisode {k_ep} « {prevu['titre']} »", flush=True)
+        try:
+            if not serie.a_faire()[0]: serie.planifier(fmt, recents=[h.get("titre", "") for h in historique[-30:]])
+            prevu, k_ep = serie.a_faire()
+            candidats = [([{"titre": prevu["titre"], "resume": prevu["resume"], "lien": "", "date": None, "source": "série"}], "série")]
+            print(f"Série d'un seul jet : épisode {k_ep} « {prevu['titre']} »", flush=True)
+        except Exception as e:
+            if not secours.claude_indisponible(e): raise
+            passer_en_secours(e); SECOURS = True; candidats = [([{"titre": "secours", "resume": "", "lien": "", "date": None, "source": "secours"}], "secours")]
     elif libre and not os.environ.get("SKETCH_TEST", "").strip():
         try: candidats = [(c, "idée") for c in ecrire.idees_libres(recents=[f"{h.get('titre', '')} : {h.get('accroche', '')}" for h in historique[-30:]],
                                                                     consignes=stats.pour_idees())]
         except Exception as e:
-            print(f"Idées de sketch impossibles : {e}", flush=True); raise
+            print(f"Idées de sketch impossibles : {e}", flush=True)
+            if not secours.claude_indisponible(e): raise
+            passer_en_secours(e); SECOURS = True; candidats = [([{"titre": "secours", "resume": "", "lien": "", "date": None, "source": "secours"}], "secours")]
         for k, (sel, _) in enumerate(candidats): print(f"Idée {k} : « {sel[0]['titre'][:110]} »", flush=True)
     else:
       try:
@@ -164,6 +177,8 @@ def main():
         ecrire.NB_MAX = 20
         sk = ecrire.valider(json.load(open(test, encoding="utf-8")), set(), libre)
         print(f"Sketch d'essai : {test}", flush=True)
+    elif SECOURS:
+        sk = secours.sketch(fmt)
     else:
         if THEME or LOT or REFAIRE: os.environ["FORCER_FABRICATION"] = "1"   # vidéo demandée explicitement : elle est fabriquée quoi qu'il arrive
         try:
@@ -183,6 +198,11 @@ def main():
                                "Rien n'a été fabriqué : crédits voix et décors économisés. Nouvel essai au prochain réveil (si la limite d'essais du créneau n'est pas atteinte).")
             except Exception: pass
             return
+        except Exception as e:
+            if not secours.claude_indisponible(e): raise
+            passer_en_secours(e); SECOURS = True
+            if not libre: fmt, libre = "mini", True                         # JT d'actu impossible sans Claude : gag éclair de secours
+            sk = secours.sketch(fmt)
         print(f"Moteur humoristique : {ecrire.USAGE['appels']} appels Claude, {ecrire.USAGE['entree']} jetons lus, {ecrire.USAGE['sortie']} jetons écrits, {ecrire.USAGE['recherches_web']} recherche(s) web", flush=True)
         titres = next((c[0] for c in candidats if c[0][0]["lien"] and c[0][0]["lien"] in sk.get("sources", [])), titres)
     print(f"Sketch : « {sk['sujet']} », {len(sk['repliques'])} répliques", flush=True)
@@ -247,12 +267,30 @@ def main():
         try:
             import cartoon, decors as decors_mod
             if modal_ok and os.environ.get("DECORS", "1") != "0":
-                t_gpu = datetime.datetime.now(); decors = decors_mod.generer(sk.get("decoupage"), graine=len(historique) + 7 + (datetime.datetime.now().microsecond % 997 if REFAIRE_MODE == "decors" else 0))
+                lum = ""
+                if cartoon.DETAIL:                                         # même lumière que la bible de l'épisode (heure, lampes)
+                    try:
+                        import studio
+                        lum = studio.bible(sk, [r for r in dict.fromkeys(x["p"] for x in sk.get("repliques", [])) if r != "narrateur"])["style_ia"]
+                    except Exception as e: print(f"Bible du studio indisponible pour les décors IA : {e}", flush=True)
+                t_gpu = datetime.datetime.now(); decors = decors_mod.generer(sk.get("decoupage"), graine=len(historique) + 7 + (datetime.datetime.now().microsecond % 997 if REFAIRE_MODE == "decors" else 0), lumiere=lum)
                 GPU["s"] += (datetime.datetime.now() - t_gpu).total_seconds()
             duree = cartoon.rendre(sk, base + ".mp4", audios, mots=mots, decors=decors, mini=fmt == "mini")
+            import controle
+            tech_ok, rapport_tech = controle.technique(base + ".mp4", duree, cartoon.MINUTAGE[-1][1] if cartoon.MINUTAGE else None)     # contrôles gratuits (format, son, images noires)
             if not test and cartoon.MINUTAGE:                              # piste 13 : une IA regarde la vidéo finie
-                import controle
                 video_ok, rapport_video = controle.verifier(base + ".mp4", sk, cartoon.MINUTAGE)
+            if not tech_ok: video_ok = False; rapport_video = (rapport_tech + " ; " + rapport_video).strip(" ;")
+            B_ = sk.pop("_bible", None)
+            if B_:                                                         # direction artistique : fiche de l'épisode + mémoire du studio
+                import studio
+                sk["realisation"] = {k: B_[k] for k in ("moment", "lieux", "gags", "ambiances", "source")}
+                sk["realisation"]["tenues"] = {r: c.get("haut") for r, c in B_["costumes"].items()}
+                sk["realisation"]["plans"] = [f"{q.get('plan')}/{q.get('mouvement')}" for q in cartoon.PH]
+                studio.memoriser(B_, cartoon.PH, duree, rapport_video or ("ok" if video_ok else ""))
+            if sk.get("doublage") and not test:                            # banque visuelle : ce qu'on a vu dans la vidéo d'origine et ce qu'on en a fait
+                import banque_visuelle
+                banque_visuelle.ajouter(sk["doublage"], sk.get("studio"), sk.get("realisation"), os.path.basename(base) + ".mp4")
         except Exception as e:
             import traceback; traceback.print_exc()
             print(f"Moteur cartoon en échec ({e}) : rendu de secours avec le moteur JT.", flush=True); duree = None

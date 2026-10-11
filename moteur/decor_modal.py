@@ -12,10 +12,10 @@ img = (modal.Image.debian_slim(python_version="3.11")
        .env({"HF_HOME": "/cache/hf"}))
 
 MODELE = "stabilityai/stable-diffusion-xl-base-1.0"
-STYLE = ("{decor}, flat 2D cartoon background, empty scene, no people, thin black outlines, soft pastel flat colors, "
-         "very minimalist, few objects, large simple shapes, cute webcomic style, eye level view")                       # décor en premier : SDXL ne lit qu'environ 77 jetons
+STYLE = ("{decor}, detailed 2D cartoon background, empty scene, no people, thick black outlines, flat bright colors, "
+         "many props and furniture, lived-in details, TikTok cartoon animation style, eye level view")                       # décor en premier : SDXL ne lit qu'environ 77 jetons
 NEGATIF = ("people, person, human, man, woman, child, character, face, animal, text, letters, words, logo, watermark, signature, "
-           "photo, photorealistic, 3d render, realistic, noisy, cluttered, detailed, intricate, hatching, texture, dark, blurry")
+           "photo, photorealistic, 3d render, realistic, noisy, hatching, grainy texture, gradient shading, dark, blurry")
 
 @app.cls(gpu="L40S", image=img, volumes={"/cache": cache}, timeout=1200, scaledown_window=60)
 class Decor:

@@ -7,7 +7,7 @@
 4. le moteur cartoon anime Jojo, Kévin et Lila en play-back exact sur la bande son d'origine, gardée telle quelle (voix + musique).
 
 preparer(url) -> (sk, audios, mots) prêts pour cartoon.rendre."""
-import json, os, re, subprocess, tempfile, wave
+import base64, json, os, re, subprocess, tempfile, wave
 import numpy as np
 
 SR, SRM = 22050, 44100
@@ -36,7 +36,7 @@ def _ytdlp(url, tmp):
     for v in VARIANTES:
         for f in os.listdir(tmp):
             if f.startswith("src."): os.remove(f"{tmp}/{f}")
-        r = subprocess.run([sys.executable, "-m", "yt_dlp", "--no-playlist", "--no-warnings", "--socket-timeout", "30", *v, "-f", "bestaudio/best",
+        r = subprocess.run([sys.executable, "-m", "yt_dlp", "--no-playlist", "--no-warnings", "--socket-timeout", "30", *v, "-f", "best[acodec!=none][height<=1080]/best[acodec!=none]/bestaudio/best",
                             "-o", f"{tmp}/src.%(ext)s", "-j", "--no-simulate", url], capture_output=True, text=True, timeout=600)
         src = next((f"{tmp}/{f}" for f in os.listdir(tmp) if f.startswith("src.") and not f.endswith(".part")), None)
         if r.returncode == 0 and src:
@@ -69,6 +69,7 @@ def telecharger(url, tmp):
         try: info, src = _tikwm(url, tmp)
         except Exception as e:
             raise RuntimeError(f"téléchargement impossible (vidéo privée, supprimée, lien incorrect ou TikTok bloque le serveur) : {err[:200]} / {str(e)[:150]}")
+    info["_fichier"] = src                                                 # la vidéo elle-même (image analysée par analyse_video)
     if float(info.get("duration") or 0) > DUREE_MAX: raise RuntimeError(f"vidéo trop longue ({info.get('duration')} s, {DUREE_MAX} s au plus)")
     piste = f"{tmp}/piste.wav"
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", src, "-vn", "-ac", "2", "-ar", str(SRM), piste], check=True)
@@ -106,11 +107,14 @@ def isoler(tmp):
 
 def transcrire(chemin, mono):
     """Mots avec instants et voix : [{"w", "s", "e", "voix"}]. ElevenLabs Scribe (plusieurs voix), sinon Whisper (une voix)."""
+    EVENEMENTS.clear()
     try:
         r = _multipart("/v1/speech-to-text", {"file": ("son.wav", open(chemin, "rb"), "audio/wav")},
-                       {"model_id": "scribe_v1", "diarize": "true", "timestamps_granularity": "word", "tag_audio_events": "false"}).json()
+                       {"model_id": "scribe_v1", "diarize": "true", "timestamps_granularity": "word", "tag_audio_events": "true"}).json()
         mots = [{"w": x["text"].strip(), "s": float(x["start"]), "e": float(x["end"]), "voix": x.get("speaker_id") or "speaker_0"}
                 for x in r.get("words", []) if x.get("type", "word") == "word" and str(x.get("text", "")).strip()]
+        EVENEMENTS[:] = [(float(x["start"]), float(x["end"]), str(x.get("text", "")).strip("() ").lower())       # rires, applaudissements…
+                         for x in r.get("words", []) if x.get("type") == "audio_event" and x.get("start") is not None]
         if mots:
             journal(f"  transcription ElevenLabs : {len(mots)} mots, {len({m['voix'] for m in mots})} voix, langue {r.get('language_code')}"); return mots
     except Exception as e:
@@ -120,6 +124,8 @@ def transcrire(chemin, mono):
     mots = [{"w": w, "s": float(s), "e": float(f), "voix": "speaker_0"} for w, s, f in (e_.get("mots") or [])]
     if not mots: raise RuntimeError("aucune parole reconnue dans la vidéo")
     return mots
+
+EVENEMENTS = []                                                            # événements sonores repérés par Scribe : (début, fin, nom)
 
 def segments(mots):
     """Répliques : mots consécutifs d'une même voix, coupés aux longs silences et aux fins de phrase quand la réplique s'allonge."""
@@ -153,7 +159,9 @@ def hauteurs(voix_sig, segs):
 
 CONSIGNE = """Voici la transcription de la bande son d'une vidéo TikTok (qui parle, quand, quoi). Nos personnages vont la « jouer » en play-back dans
 un dessin animé : on ne change AUCUN mot ni AUCUN minutage, tu reconstitues seulement la scène autour du son.
-Nos personnages : Jojo (homme, la trentaine, bonnet orange), Kévin (jeune homme, casquette bleue), Lila (femme, nœud rose).
+Nos personnages (rôles) : presentateur, invite et envoyee, joués à chaque vidéo par des adultes différents (casting libre) dessinés
+dans le style « toons » ; tout l'univers (lieu, tenues, plans, émotions, rythme) se construit autour de ce son : paroles, intonations,
+émotions et ambiance.
 Une voix qui commente sans être dans la scène peut être la voix off (narrateur : non dessinée).
 Voix repérées (hauteur moyenne : moins de 165 Hz ≈ voix d'homme, plus de 165 Hz ≈ voix de femme ou d'enfant) :
 {voix}
@@ -167,7 +175,25 @@ Avec l'outil doublage :
 - "decoupage" : 1 à 4 scènes (indices des répliques, toutes couvertes, dans l'ordre ; "decor" EN ANGLAIS sans personnage : lieu précis + 2 ou 3 objets,
   cohérent avec ce qui est dit ; "titre" = carton court seulement si la scène change de moment ou de lieu) ;
 - "sujet" (30 caractères max), "titre_accroche" (« POV : … » ou « Quand … », 40 caractères max), "legende" (1 phrase en français),
-  "question" (pour les commentaires), "hashtags" (4 à 6, sans #)."""
+  "question" (pour les commentaires), "hashtags" (4 à 6, sans #) ;
+{studio}"""
+
+IMAGES = """
+
+IMAGES CI-DESSUS : des images clés de la vidéo TikTok d'origine (dans l'ordre). Reconstruis notre scène À SON IMAGE, en la traduisant
+dans notre dessin animé et dans nos listes : le lieu exact, le décor du premier plan à l'arrière-plan ("decor" en anglais, avec les objets
+qu'on y voit), les objets tenus ("studio" → "objets" = [{{"replique", "objet"}}] pris dans la liste des objets ci-dessous), la tenue de
+chaque personne (forme, couleur, motif, accessoires) et sa coiffure ("cheveux" parmi {coiffures} ; "c_cheveux" = couleur), son couvre-chef ("chapeau"), sa barbe, leurs mimiques et gestes (visage, bouche, yeux, bras, mains, jambes, pieds) pour les "plans" (geste, réaction),
+la lumière et l'heure, et le rythme du montage d'origine ("cadence"). La personne la plus présente à l'image joue la voix la plus présente.
+Objets possibles : telephone, billet, portefeuille, micro, verre, cafe, livre, cles, carte, facture, bouteille, haltere, seringue, parapluie,
+telecommande, fleur, cadeau, pizza, croissant, tablette, lettre, journal, stylo, valise.
+Mesures faites par le robot sur la vidéo : {mesures}
+{banque}"""
+
+def consigne(voix, lignes):
+    import studio, decor_dessin as DD, marionnette as M, humain as H
+    L = lambda xs: ", ".join(xs)
+    return CONSIGNE.format(voix=voix, lignes=lignes, studio=studio.consigne_studio())
 
 def _outil():
     import ecrire
@@ -178,7 +204,16 @@ def _outil():
                 "decoupage": {"type": "array", "items": ecrire._schema({"repliques": {"type": "array", "items": {"type": "integer"}},
                                                                        "decor": {"type": "string"}, "titre": {"type": "string"}}, ["repliques"])},
                 "sujet": {"type": "string"}, "titre_accroche": {"type": "string"}, "legende": {"type": "string"}, "question": {"type": "string"},
-                "hashtags": {"type": "array", "items": {"type": "string"}}}, ["casting", "d", "decoupage"])}
+                "hashtags": {"type": "array", "items": {"type": "string"}},
+                "studio": {"type": "object", "properties": {
+                    "moment": {"type": "string"}, "lieux": {"type": "array", "items": {"type": "string"}},
+                    "costumes": {"type": "object"}, "personnages": {"type": "object"}, "gags": {"type": "array", "items": {"type": "string"}},
+                    "cadence": {"type": "string", "enum": ["rapide", "normal", "pose"]},
+                    "ambiances": {"type": "array", "items": {"type": "string"}},
+                    "plans": {"type": "array", "items": ecrire._schema({"replique": {"type": "integer"}, "plan": {"type": "string"}, "mouvement": {"type": "string"},
+                                                                         "geste": {"type": "string"}, "reaction": {"type": "string"}}, ["replique"])},
+                    "objets": {"type": "array", "items": ecrire._schema({"replique": {"type": "integer"}, "objet": {"type": "string"}}, ["replique", "objet"])}}}},
+                ["casting", "d", "decoupage"])}
 
 def _casting_defaut(segs, hz):
     """Sans Claude : voix aiguë -> Lila, les autres -> Jojo puis Kévin (par ordre d'apparition)."""
@@ -197,6 +232,12 @@ def preparer(url):
     lien = info.get("webpage_url") or url.strip()
     duree = len(mono) / SR
     journal(f"  son récupéré : {duree:.1f} s, compte d'origine @{auteur}")
+    visuel, cles = {}, []
+    try:                                                                   # l'image de la vidéo : cadrages, personnes, habits, couleurs, lumière
+        import analyse_video
+        visuel, cles = analyse_video.analyser(info.get("_fichier") or "")
+        journal("  image de la vidéo : " + analyse_video.texte(visuel))
+    except Exception as e: journal(f"  analyse de l'image impossible ({str(e)[:150]}) : mise en scène d'après le son seul")
     voix_sig, chemin_voix = isoler(tmp)
     segs = segments(transcrire(chemin_voix, mono))
     sig = voix_sig if voix_sig is not None and len(voix_sig) >= len(mono) * 0.9 else mono
@@ -207,7 +248,14 @@ def preparer(url):
         import anthropic
         lignes = "\n".join(f"{k}. {s['voix']} ({s['deb']:.1f}–{s['fin']:.1f}) : {s['t']}" for k, s in enumerate(segs))
         vx = "\n".join(f"- {v} : {h or '?'} Hz, {sum(len(s['mots']) for s in segs if s['voix'] == v)} mots" for v, h in hz.items())
-        m = ecrire._appel(anthropic.Anthropic(), None, [{"role": "user", "content": CONSIGNE.format(voix=vx, lignes=lignes)}], _outil(), max_tokens=6000)
+        contenu = consigne(vx, lignes)
+        if visuel or cles:                                                 # Claude voit aussi la vidéo d'origine (images clés) et ses mesures
+            import analyse_video, banque_visuelle
+            import marionnette as M_
+            contenu += IMAGES.format(mesures=analyse_video.texte(visuel), banque=banque_visuelle.consigne(), coiffures=", ".join(M_.COIFFURES))
+            contenu = [{"type": "image", "source": {"type": "base64", "media_type": "image/jpeg", "data": base64.b64encode(j).decode()}} for j in cles[:6]] \
+                      + [{"type": "text", "text": contenu}]
+        m = ecrire._appel(anthropic.Anthropic(), None, [{"role": "user", "content": contenu}], _outil(), max_tokens=8000)
         for c in ecrire._liste(m.get("casting")):
             if isinstance(c, dict) and c.get("voix") in hz and c.get("role") in ROLES: casting[c["voix"]] = c["role"]
         if m.get("contexte"): journal(f"  scène reconstituée : {m['contexte']}")
@@ -220,6 +268,11 @@ def preparer(url):
         r = {"p": casting.get(s["voix"], "presentateur"), "t": s["t"], "_deb": round(float(s["deb"]), 3), "_fin": round(float(s["fin"]), 3)}
         if k < len(d) and ecrire._mots_bruts(re.sub(r"\[[^\]]*\]", " ", d[k])) == ecrire._mots_bruts(s["t"]): r["d"] = d[k]
         reps.append(r)
+    for o in ecrire._liste((m.get("studio") or {}).get("objets") if isinstance(m.get("studio"), dict) else []):   # objets vus dans la vidéo
+        try:
+            k_o = int(o.get("replique")); nom_o = str(o.get("objet", "")).lower()
+            if 0 <= k_o < len(reps) and nom_o in ecrire.OBJETS: reps[k_o]["objet"] = nom_o
+        except (AttributeError, TypeError, ValueError): pass
     if all(r["p"] == "narrateur" for r in reps): reps[0]["p"] = "presentateur"   # au moins un personnage à l'image
     reps[-1]["chute"] = True
     brut = {"sujet": m.get("sujet") or segs[0]["t"][:30], "repliques": [dict(r) for r in reps[:16]], "legende": m.get("legende") or segs[0]["t"][:120],
@@ -229,9 +282,13 @@ def preparer(url):
     sk["repliques"] = reps                                                 # toutes les répliques, texte complet (pas de limite de longueur)
     dec = [x for x in ecrire._liste(m.get("decoupage")) if isinstance(x, dict)]
     sk["decoupage"] = [dict(sc, scene=str(k + 1)) for k, sc in enumerate(ecrire._decoupage(dec, len(reps)))] or \
-                      [{"scene": "1", "repliques": list(range(len(reps))), "lieu": "", "son": "", "duree": 0, "decor": "cozy living room, sofa, coffee table, lamp"}]
+                      [{"scene": "1", "repliques": list(range(len(reps))), "lieu": "", "son": "", "duree": 0,
+                        "decor": "" if os.environ.get("RENDU_DETAILLE", "1") != "0" else "cozy living room, sofa, coffee table, lamp"}]   # sans Claude : le studio devine le lieu
+    if isinstance(m.get("studio"), dict): sk["studio"] = m["studio"]          # direction artistique de Claude (vérifiée par studio.bible)
     sk["sources"] = [lien]
-    sk["doublage"] = {"piste": piste, "duree": round(duree, 2), "source": lien, "auteur": auteur, "contexte": m.get("contexte", "")}
+    sk["doublage"] = {"piste": piste, "duree": round(duree, 2), "source": lien, "auteur": auteur, "contexte": m.get("contexte", ""),
+                      "evenements": [list(e) for e in EVENEMENTS][:60], "visuel": visuel}
+    if EVENEMENTS: journal(f"  événements sonores : {', '.join(sorted({e[2] for e in EVENEMENTS}))[:200]}")
     sk["fiche"] = {"note": 0, "decision": "vidéo manuelle (bande son d'une vidéo TikTok)", "decoupage": sk["decoupage"]}
     sk["_monte"] = True                                                    # pas de voix off de titre ni d'accroche rejouée : la bande son est imposée
     # voix de chaque réplique (pour les bouches) et instants des mots, relatifs au début de la réplique

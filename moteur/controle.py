@@ -17,7 +17,8 @@ Ce qui doit apparaître :
 {attendu}
 Vérifie chaque image : sous-titre différent du texte attendu ou avec une faute, texte coupé par le bord ou illisible, deux textes qui se chevauchent,
 personnage coupé de façon gênante ou absent alors qu'il parle, décor incohérent avec la scène, image noire, vide ou cassée.
-Ne signale pas le style volontairement simple (dessin plat, bonshommes blancs) ni les sous-titres qui n'affichent qu'une partie de la phrase (ils défilent par groupes de mots).
+Ne signale pas le style volontairement simple (dessin plat, personnages à grosse tête ronde), ni les textes humoristiques écrits dans le décor (affiches, enseignes, tableaux : ce sont des gags voulus),
+ni le flou volontaire de l'arrière-plan ou d'un personnage de dos au premier plan, ni les sous-titres qui n'affichent qu'une partie de la phrase (ils défilent par groupes de mots).
 Rends ta réponse avec l'outil controle : "defauts" = liste (image n°, problème, gravité « grave » ou « mineur »), "verdict" = « ok » ou « a_corriger »."""
 OUTIL = {"name": "controle", "description": "Défauts visuels relevés.",
          "input_schema": {"type": "object", "properties": {
@@ -41,6 +42,39 @@ def planches(video, instants, par_planche=8):
             dr.rectangle((x, y, x + 64, y + 44), fill=(220, 30, 30)); dr.text((x + 8, y + 2), str(d + k + 1), font=f, fill=(255, 255, 255))
         b = io.BytesIO(); P.save(b, "JPEG", quality=82); out.append(b.getvalue())
     return out
+
+def technique(video, duree_attendue=None, fin_parole=None):
+    """Contrôles gratuits, sans IA (ffprobe / ffmpeg) : format 1080x1920, 30 images/s, piste son présente et non muette,
+    durée conforme, pas de passage noir ni d'image figée trop longue. Renvoie (ok, rapport)."""
+    defauts = []
+    try:
+        r = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "stream=codec_type,width,height,r_frame_rate:format=duration",
+                            "-of", "json", video], capture_output=True, text=True, timeout=120)
+        import json
+        info = json.loads(r.stdout or "{}"); st = info.get("streams", [])
+        v = next((s for s in st if s.get("codec_type") == "video"), None); a = next((s for s in st if s.get("codec_type") == "audio"), None)
+        if not v: defauts.append("pas de piste vidéo")
+        else:
+            if (v.get("width"), v.get("height")) != (1080, 1920): defauts.append(f"format {v.get('width')}x{v.get('height')} au lieu de 1080x1920")
+            n, d = (v.get("r_frame_rate") or "0/1").split("/")
+            if abs(float(n) / max(1.0, float(d)) - 30) > 0.5: defauts.append(f"{v.get('r_frame_rate')} images/s au lieu de 30")
+        if not a: defauts.append("pas de piste son")
+        duree = float((info.get("format") or {}).get("duration") or 0)
+        if duree_attendue and abs(duree - duree_attendue) > 1.5: defauts.append(f"durée {duree:.1f} s au lieu de {duree_attendue:.1f} s")
+        r = subprocess.run(["ffmpeg", "-hide_banner", "-i", video, "-vf", "blackdetect=d=0.5:pic_th=0.97,freezedetect=n=0.001:d=4",
+                            "-af", "volumedetect", "-f", "null", "-"], capture_output=True, text=True, timeout=900)
+        noirs = re.findall(r"black_start:([\d.]+)", r.stderr); figes = re.findall(r"freeze_start: ([\d.]+)", r.stderr)
+        if noirs: defauts.append("passage noir à " + ", ".join(f"{float(x):.1f} s" for x in noirs[:3]))
+        fin_fige = min(duree - 6, fin_parole + 0.5) if fin_parole else duree - 6   # après la dernière réplique : arrêt sur image et carton de fin voulus
+        figes = [x for x in figes if float(x) < fin_fige]
+        if figes: defauts.append("image figée à " + ", ".join(f"{float(x):.1f} s" for x in figes[:3]))
+        m = re.search(r"mean_volume: ([-\d.]+) dB", r.stderr)
+        if a and m and float(m.group(1)) < -45: defauts.append(f"son presque muet ({m.group(1)} dB)")
+    except Exception as e:
+        print(f"Contrôle technique impossible ({str(e)[:120]}) : non bloquant.", flush=True); return True, ""
+    rapport = "; ".join(defauts)
+    print("Contrôle technique : " + (rapport or "ok (format, son, durée, pas d'image noire ni figée)"), flush=True)
+    return not defauts, ("technique : " + rapport) if rapport else ""
 
 def verifier(video, sk, minutage):
     """minutage : [(début, fin, texte attendu, qui)] par réplique. Renvoie (ok, rapport texte)."""

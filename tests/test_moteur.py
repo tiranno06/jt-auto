@@ -1,6 +1,6 @@
 """Tests des composants du robot (sans réseau, sans clé API, sans GPU).
 Lancer : python -m unittest discover -s tests -v"""
-import io, json, os, sys, types, unittest
+import io, json, os, sys, tempfile, types, unittest
 import numpy as np
 
 ICI = os.path.dirname(os.path.abspath(__file__))
@@ -511,6 +511,260 @@ class TestDoublage(unittest.TestCase):
         self.assertEqual(segs[0]["t"], "Salut ça va?")
         self.assertAlmostEqual(segs[1]["deb"], 1.6)
 
+    def test_consigne_studio(self):
+        try: import doublage
+        except Exception as e: self.skipTest(f"dépendances vidéo absentes : {e}")
+        try: c = doublage.consigne("- speaker_0 : 120 Hz", "0. speaker_0 (0.0–1.0) : Salut")
+        except Exception as e: self.skipTest(f"dépendances vidéo absentes : {e}")
+        for mot in ("cabinet_medical", "stethoscope", "contre_plongee", "regard_camera", "Salut"): self.assertIn(mot, c)
 
-if __name__ == "__main__":
-    unittest.main()
+
+class TestStudio(unittest.TestCase):
+    """Rendu détaillé : réalisateur sans IA, garde-robe, décors dessinés, mains et visages."""
+    def setUp(self):
+        try:
+            import studio, decor_dessin, marionnette
+        except Exception as e: self.skipTest(f"dépendances vidéo absentes : {e}")
+        self.S, self.D, self.M = studio, decor_dessin, marionnette
+
+    def test_emotion_et_geste_sans_indication(self):
+        S = self.S
+        self.assertEqual(S.emotion_texte("Euh… désolé, j'ai oublié."), "gene")
+        self.assertEqual(S.emotion_texte("Non mais t'es sérieux ?", 0.3), "colere")
+        self.assertEqual(S.emotion_texte("Non mais t'es sérieux ?", 0.95), "cri")
+        self.assertEqual(S.emotion_texte("Hahaha t'es nul"), "rire")
+        self.assertEqual(S.emotion_texte("Bonjour madame."), "neutre")
+        self.assertEqual(S.geste("Stop, attends deux secondes.", "neutre"), "stop")
+        self.assertEqual(S.geste("Allô ? Oui maman.", "neutre"), "telephone")
+        for g, (bras, mains) in S.GESTES.items():
+            self.assertEqual(len(bras), 2); self.assertTrue(all(m in self.M.FORMES_MAIN for m in mains), g)
+
+    def test_lieu_et_bible(self):
+        D, S = self.D, self.S
+        self.assertEqual(D.lieu_de("a doctor's office with an examination table"), "cabinet_medical")
+        self.assertEqual(D.lieu_de("de l'eau dans un bar ? j'ai sport demain, un verre au bar"), "bar")
+        sk = {"sujet": "Prise de sang", "repliques": [{"p": "presentateur", "t": "Combien de verres par semaine ?"}, {"p": "invite", "t": "Deux-trois."}],
+              "decoupage": [{"scene": "1", "repliques": [0, 1], "decor": "doctor office"}]}
+        B = S.bible(sk, ["presentateur", "invite"])
+        self.assertEqual(B["lieux"], ["cabinet_medical"]); self.assertIn(B["moment"], S.MOMENTS)
+        self.assertEqual(B["costumes"]["presentateur"]["haut"], "blouse")          # celui qui pose les questions est le médecin
+        self.assertNotEqual(B["costumes"]["invite"]["haut"], "blouse")
+        self.assertEqual(S.bible(sk, ["presentateur", "invite"])["costumes"], B["costumes"])   # même épisode = mêmes choix
+        sk["studio"] = {"moment": "nuit", "lieux": ["bar"], "costumes": {"invite": {"haut": "costume", "c_haut": "bleu marine", "details": ["cravate", "bazooka"]}},
+                        "gags": ["Eau : 12 €"], "plans": [{"replique": 1, "plan": "tres_serre", "reaction": "regard_camera"}]}
+        B = S.bible(sk, ["presentateur", "invite"])
+        self.assertEqual((B["moment"], B["lieux"], B["gags"]), ("nuit", ["bar"], ["Eau : 12 €"]))
+        self.assertEqual(B["costumes"]["invite"]["c_haut"], S.NOMS_COULEURS["bleu marine"]); self.assertEqual(B["costumes"]["invite"]["details"], ("cravate",))
+        ph = [dict(i=0, p="presentateur", deb=0.0, fin=1.0, emo="neutre", scene=0, texte="Combien ?", chute=False, lv=[0.2]),
+              dict(i=1, p="invite", deb=2.0, fin=3.0, emo="neutre", scene=0, texte="Deux.", chute=True, lv=[0.2])]
+        S.realiser(ph, {0: ["presentateur", "invite"]}, B)
+        self.assertEqual((ph[1]["plan"], ph[1]["reaction"]), ("tres_serre", "regard_camera"))
+        self.assertTrue(ph[1]["regard_camera"])                                    # silence d'une seconde avant la réplique
+        self.assertTrue(all(q["plan"] in S.PLANS and q["mouvement"] in S.MOUVEMENTS for q in ph))
+
+    def test_memoire(self):
+        import tempfile
+        S = self.S; ancien = S.MEMOIRE; S.MEMOIRE = os.path.join(tempfile.mkdtemp(), "m.json")
+        try:
+            S.memoriser({"moment": "soir", "lieux": ["bar"], "costumes": {"invite": {"haut": "pull"}}}, [{"plan": "serre", "mouvement": "fixe"}], 12.3)
+            self.assertEqual(S.memoire_recente("moment"), "soir")
+        finally: S.MEMOIRE = ancien
+
+    def test_decors_dessines(self):
+        D = self.D
+        for k, lieu in enumerate(D.LIEUX):
+            r = D.dessiner(lieu, {"moment": ("matin", "jour", "soir", "nuit")[k % 4]}, graine=k)
+            self.assertEqual(r["fond"].shape, (1920, 1080, 3), lieu)
+            if r["avant"] is not None:
+                self.assertEqual(r["avant"].shape, (1920, 1080, 4))
+                self.assertFalse(r["avant"][800:1300, 300:800, 3].any(), lieu)     # le premier plan ne cache jamais les visages
+
+    def test_marionnettes_detaillees(self):
+        M = self.M; img = np.zeros((1920, 1080, 3), np.uint8); img[:] = 200
+        for k, haut in enumerate(M.HAUTS):
+            p = M.pose_neutre(); p.update(costume=dict(haut=haut, c_haut=(200, 80, 80), motif=M.MOTIFS[k % 4], bas=M.BAS[k % 5], c_bas=(60, 60, 90),
+                                                       chaussures=M.CHAUSSURES[k % 5], c_chaussures=(240, 240, 240), details=M.DETAILS),
+                                          reflets=True, lumiere=1, ombre=0.3, mains=True, main_forme_g=M.FORMES_MAIN[k % 5], main_forme_d="index",
+                                          yeux=M.YEUX[k % len(M.YEUX)], sourcils=M.SOURCILS[k % len(M.SOURCILS)], forme=M.BOUCHES[k % len(M.BOUCHES)],
+                                          effets=M.EFFETS, dos=(k == 3), gene=True, paleur=0.5)
+            M.dessiner(img, ("bonnet", "casquette", "noeud", "lunettes", "meche")[k % 5], p)
+        for nom in M.OBJETS: self.assertIsNotNone(M.objet(nom), nom)
+        self.assertEqual(set(ecrire.OBJETS), set(M.OBJETS))
+
+    def test_rendu_detaille_apercu(self):
+        try: import cartoon, tempfile, glob
+        except Exception as e: self.skipTest(f"dépendances vidéo absentes : {e}")
+        if not cartoon.DETAIL: self.skipTest("rendu détaillé coupé")
+        sk = {"titre_accroche": "Au bar", "repliques": [{"p": "presentateur", "t": "Je vous sers quoi ?"}, {"p": "invite", "t": "Euh… de l'eau ?"},
+                                                         {"p": "presentateur", "t": "Non mais t'es sérieux !", "chute": True}],
+              "decoupage": [{"scene": "1", "repliques": [0, 1, 2], "decor": "a bar counter"}],
+              "studio": {"plans": [{"replique": 1, "plan": "epaule"}, {"replique": 2, "plan": "contre_plongee"}], "ambiances": ["neon", "poussiere"]}}
+        auds = [np.random.default_rng(k).normal(0, 0.2, 22050).astype(np.float32) for k in range(3)]
+        d = tempfile.mkdtemp(); total = cartoon.rendre(sk, d, auds, apercu=True)
+        self.assertGreater(total, 3); self.assertEqual(len(glob.glob(d + "/*.png")), 8)
+        self.assertEqual(sk["_bible"]["lieux"], ["bar"]); self.assertEqual([q["plan"] for q in cartoon.PH][1:], ["epaule", "contre_plongee"])
+
+
+
+class TestImageEtBanque(unittest.TestCase):
+    """Analyse de l'image de la vidéo d'origine, intonation de la voix, banque visuelle qui s'enrichit."""
+    def setUp(self):
+        try:
+            import studio, analyse_video, banque_visuelle
+        except Exception as e: self.skipTest(f"dépendances vidéo absentes : {e}")
+        self.S, self.A, self.BV = studio, analyse_video, banque_visuelle
+
+    def test_intonation(self):
+        sr = 22050; tt = np.arange(int(sr * 1.2)) / sr
+        a = (0.5 * np.sin(2 * np.pi * np.cumsum(180 * (1 + 0.3 * tt)) / sr)).astype(np.float32)
+        f0, en = self.S.prosodie(a)
+        self.assertAlmostEqual(float(np.median(f0[f0 > 0][:5])), 182, delta=8)      # la voix monte de 180 à 234 Hz
+        z, r = self.S.intonation(f0, 180.0)
+        self.assertGreater(r["moy"], 0.5); self.assertGreater(z[-5], z[5])
+        self.assertEqual(self.S.emotion_texte("Bonjour.", 0.8, dict(moy=1.3, etendue=1.0, fin=0.1)), "joie")
+        self.assertEqual(self.S.emotion_texte("Bonjour.", 0.3, dict(moy=-1.0, etendue=0.3, fin=0.0)), "blase")
+
+    def test_analyse_image(self):
+        import tempfile, cv2
+        chemin = os.path.join(tempfile.mkdtemp(), "v.mp4"); vw = cv2.VideoWriter(chemin, cv2.VideoWriter_fourcc(*"mp4v"), 30, (360, 640))
+        for k in range(150):                                               # plan 1 : mur orangé, un carré qui bouge ; plan 2 : pièce sombre
+            im = np.zeros((640, 360, 3), np.uint8)
+            if k < 75: im[:] = (60, 120, 220); cv2.rectangle(im, (40 + k, 200), (140 + k, 320), (200, 60, 40), -1)
+            else: im[:] = (30, 25, 20)
+            vw.write(im)
+        vw.release()
+        r, cles = self.A.analyser(chemin)
+        if not r: self.skipTest("lecture vidéo indisponible")
+        self.assertEqual(r["nb_plans"], 2); self.assertEqual(len(cles), 2)
+        self.assertAlmostEqual(sum(r["plans"].values()), 1.0, delta=0.01); self.assertIn(r["moment"], ("jour", "soir", "nuit"))
+        self.assertIn("plans", self.A.texte(r))
+
+    def test_bible_depuis_image_et_banque(self):
+        import tempfile
+        BV, S = self.BV, self.S; ancien = (BV.FICHIER, BV.STATS); d = tempfile.mkdtemp()
+        BV.FICHIER, BV.STATS = os.path.join(d, "b.json"), os.path.join(d, "s.json")
+        try:
+            V = dict(plans={"tres_serre": 0.5, "serre": 0.3, "moyen": 0.1, "large": 0.1}, camera={"avance": 0.6, "fixe": 0.4}, energie=0.8, sourires=0.5,
+                     duree_plan=1.5, moment="nuit", mur=[60, 90, 160], personnes=[dict(habit=[200, 30, 40], cheveux=[230, 190, 110], presence=0.9)])
+            sk = {"sujet": "x", "repliques": [{"p": "presentateur", "t": "Bonjour à tous, ça va bien ?"}, {"p": "invite", "t": "Oui."}],
+                  "decoupage": [{"scene": "1", "repliques": [0, 1]}], "doublage": {"visuel": V, "source": "https://www.tiktok.com/@a/video/1"}}
+            B = S.bible(sk, ["presentateur", "invite"])
+            self.assertEqual(B["moment"], "nuit"); self.assertIsNotNone(B["c_mur"])
+            self.assertEqual(B["costumes"]["presentateur"]["c_haut"], (200, 30, 40))          # celui qui parle le plus porte l'habit de la vidéo
+            self.assertEqual(B["costumes"]["presentateur"]["c_cheveux"], (230, 190, 110))
+            self.assertGreater(B["rythme"]["serre"], 0.6)
+            BV.ajouter(sk["doublage"], {"lieux": ["bar"], "objets": [{"replique": 0, "objet": "verre"}]}, {"lieux": ["bar"]}, "v1.mp4")
+            BV.ajouter(sk["doublage"], {"lieux": ["bar"]}, {"lieux": ["bar"]}, "v1.mp4")              # même vidéo d'origine : remplacée
+            self.assertEqual(len(BV.lire()), 1)
+            json.dump({"videos": [{"fichier": "v1.mp4", "vues": 500}]}, open(BV.STATS, "w"))
+            t = BV.tendances(); self.assertEqual(t["lieux"], ["bar"]); self.assertEqual(t["meilleures"][0][0], 500)
+            self.assertIn("BANQUE VISUELLE", BV.consigne())
+            sk2 = {"sujet": "y", "repliques": [{"p": "presentateur", "t": "Salut."}, {"p": "invite", "t": "Salut."}]}
+            self.assertGreater(S.bible(sk2, ["presentateur", "invite"])["rythme"]["serre"], 0.6)   # sans image : le rythme de la banque
+        finally: BV.FICHIER, BV.STATS = ancien
+
+    def test_consigne_images(self):
+        import doublage
+        texte = doublage.IMAGES.format(mesures="2 plans", banque="", coiffures="carre, ondule")
+        self.assertIn("coiffure", texte); self.assertIn("objets", texte)
+        self.assertIn("queue", doublage.consigne("v", "l"))
+
+
+
+class TestSecours(unittest.TestCase):
+    """Sans crédit Claude : bascule automatique sur la réserve de sketchs déjà écrits."""
+    def test_reserve(self):
+        sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "moteur"))
+        import secours, ecrire
+        self.assertTrue(secours.claude_indisponible(RuntimeError("aucun sketch exploitable : Your credit balance is too low to access the Anthropic API")))
+        self.assertTrue(secours.claude_indisponible(TypeError("Could not resolve authentication method")))
+        self.assertFalse(secours.claude_indisponible(ValueError("sketch trop court")))
+        ancien = secours.UTILISES; secours.UTILISES = os.path.join(tempfile.mkdtemp(), "u.json")
+        try:
+            vus = set()
+            for fmt in ("mini", "libre", "mini"):
+                sk = secours.sketch(fmt); vus.add(sk["sujet"])
+                ecrire.valider(sk, set(), libre=True)
+                self.assertTrue(sk["repliques"][-1].get("chute"))
+                self.assertEqual(sum(len(d["repliques"]) for d in sk["decoupage"]), len(sk["repliques"]))
+            self.assertEqual(len(vus), 3)                                                            # jamais deux fois le même
+        finally: secours.UTILISES = ancien
+
+class TestHumains(unittest.TestCase):
+    """Personnages adultes (casting libre) ."""
+    def setUp(self):
+        try:
+            import humain, studio, marionnette
+        except Exception as e: self.skipTest(f"dépendances vidéo absentes : {e}")
+        self.H, self.S, self.M = humain, studio, marionnette
+
+    def test_fiches_et_dessin(self):
+        H, M = self.H, self.M
+        self.assertEqual(H.creer(5), H.creer(5)); self.assertNotEqual(H.creer(5), H.creer(6))       # même épisode = même casting
+        f = H.creer(3, genre="f", age=70, cheveux="chignon"); self.assertEqual((f["genre"], f["age"], f["cheveux"]), ("f", 70, "chignon"))
+        img = np.zeros((1920, 1080, 3), np.uint8); img[:] = 200
+        for k, st in enumerate(H.COIFFURES_H + H.COIFFURES_F):
+            p = M.pose_neutre(); p.update(x=540, y=1500, s=1.0, mains=True, main_forme_g=M.FORMES_MAIN[k % 5], main_forme_d="index", yeux=M.YEUX[k % len(M.YEUX)],
+                                          forme=M.BOUCHES[k % len(M.BOUCHES)], viseme=("A", "M", None)[k % 3], bouche=0.5, sourcils=M.SOURCILS[k % len(M.SOURCILS)],
+                                          costume=dict(haut=M.HAUTS[k % len(M.HAUTS)], c_haut=(90, 120, 200), motif=M.MOTIFS[k % 4], bas=M.BAS[k % 5], details=M.DETAILS),
+                                          dos=(k == 4), effets=("goutte",), epaules=0.5, penche=0.5, pied=1.0)
+            H.dessiner(img, H.creer(k, cheveux=st, lunettes="rondes", barbe="courte"), p)
+        tete, (rx, ry), mains = H.reperes(H.creer(1), dict(M.pose_neutre(), x=540, y=1500, s=1.0))
+        self.assertTrue(650 < tete[1] < 1000 and 400 < tete[0] < 700); self.assertEqual(len(mains), 2)
+        self.assertLess(H.tete_y(1.0), H.tete_y(0.5)); self.assertGreater(1500 - H.tete_y(1.0), 2 * H.hauteur_tete(1.0))   # adulte : au moins 3 têtes de haut
+
+    def test_garde_robe_themes_et_lieux(self):
+        S, M, H = self.S, self.M, self.H
+        import decor_dessin as DD
+        img = np.zeros((1920, 1080, 3), np.uint8); img[:] = 200
+        for k, st in enumerate(M.GR.COIFFURES):                                                     # chaque coiffure, barbe, chapeau, haut, motif
+            c = dict(haut=M.HAUTS[k % len(M.HAUTS)], c_haut=(90, 120, 200), motif=M.MOTIFS[k % len(M.MOTIFS)], bas="jean",
+                     chapeau=M.CHAPEAUX[k % len(M.CHAPEAUX)], details=(M.GR.BARBES[k % 4], "sac_bandouliere", "casque_audio"))
+            H.dessiner(img, H.creer(k, cheveux=st), dict(M.pose_neutre(), x=540, y=1500, s=1.0, costume=c, mains=True, bouche=0.8, viseme="A"))
+        sk = {"repliques": [{"p": "presentateur", "t": "Ugh, moi trouver feu dans la caverne"}, {"p": "envoyee", "t": "Encore ?"}]}
+        B = S.bible(sk, ["presentateur", "envoyee"])
+        self.assertEqual(B["lieux"][0], "caverne"); self.assertEqual(B["costumes"]["presentateur"]["haut"], "tunique")
+        self.assertIn("barbe_pleine", B["costumes"]["presentateur"]["details"])
+        self.assertEqual(DD.lieu_de("je dois aller à la CAF pour mon dossier"), "administration")
+        for l in ("administration", "hall", "caverne", "palais"):
+            r = DD.dessiner(l, {"moment": "soir"}, 3); self.assertEqual(r["fond"].shape, (1920, 1080, 3))
+
+    def test_montage_dynamique(self):
+        S = self.S
+        lv = np.abs(np.sin(np.arange(150) / 6.0)).astype(np.float32)
+        ph = [dict(i=i, p=("presentateur", "invite")[i % 2], deb=i * 5.2, fin=i * 5.2 + 5.0, lv=lv, emo=("neutre", "cri", "neutre")[i], scene=0,
+                   chute=i == 2, texte="Bonjour à tous ?", plan="serre", mouvement="fixe") for i in range(3)]
+        P = S.decouper(ph, {0: ["presentateur", "invite"]}, {"graine": 3, "rythme": {}}, 30)
+        self.assertGreaterEqual(len(P), 6)                                                          # plusieurs plans par réplique
+        self.assertTrue(any(x["plan"] in S.LARGES for x in P) and any(x["plan"] in S.SERRES for x in P))
+        self.assertTrue(any(x["cible"] == "invite" and ph[x["j"]]["p"] == "presentateur" for x in P))   # plan de réaction
+        for a_, b_ in zip(P, P[1:]):
+            self.assertAlmostEqual(a_["t1"], b_["t0"], places=3); self.assertGreater(b_["t1"] - b_["t0"], 0.3)
+            self.assertNotEqual((a_["cible"], a_["plan"]), (b_["cible"], b_["plan"]))
+        cri = [x for x in P if x["j"] == 1]; calme = [x for x in P if x["j"] == 0]
+        self.assertGreaterEqual(len(cri), len(calme))                                               # la dispute coupe plus vite
+
+    def test_mode_payant_connait_tout(self):
+        S, M = self.S, self.M
+        import decor_dessin as DD, doublage
+        t = S.consigne_studio()
+        for x in list(DD.LIEUX) + list(M.CHAPEAUX) + list(M.GR.BARBES) + ["redingote", "ondule", "fleurs", "cadence", "tres_serre", "zoom_choc"]:
+            self.assertIn(x, t)
+        self.assertIn("cadence", doublage.consigne("- A : 120 Hz", "0. A (0.0-1.0) : Bonjour"))
+        sk = {"repliques": [{"p": "presentateur", "t": "Bonjour"}, {"p": "invite", "t": "Salut"}],
+              "studio": {"cadence": "rapide", "costumes": {"presentateur": {"haut": "chemise", "chapeau": "melon", "details": ["barbe_courte"]}},
+                         "personnages": {"invite": {"genre": "h", "age": 30, "cheveux": "afro", "barbe": "bouc"}}}}
+        B = S.bible(sk, ["presentateur", "invite"])
+        self.assertEqual(B["cadence"], "rapide"); self.assertEqual(B["costumes"]["presentateur"]["chapeau"], "melon")
+        self.assertEqual((B["fiches"]["invite"]["cheveux"], B["fiches"]["invite"]["barbe"]), ("afro", "bouc"))
+
+    def test_casting(self):
+        S = self.S
+        sk = {"repliques": [{"p": "presentateur", "t": "Mamie, tu veux du thé ?"}, {"p": "invite", "t": "Oui mon chéri."}], "doublage": {"source": "x"},
+              "_voix_hz": {"presentateur": 120, "invite": 230}}
+        F = S.casting(sk, ["presentateur", "invite"], {"invite": {"cheveux": "chignon", "c_cheveux": (200, 200, 200), "details": ("lunettes_vue",)}}, {}, 7)
+        self.assertEqual((F["presentateur"]["genre"], F["invite"]["genre"]), ("h", "f"))                 # la voix décide
+        self.assertEqual(F["invite"]["age"], 70); self.assertEqual(F["invite"]["cheveux"], "chignon"); self.assertEqual(F["invite"]["lunettes"], "rondes")
+        sk2 = {"repliques": [{"p": "envoyee", "t": "Salut."}]}                                          # sketch écrit : Lila est une femme
+        self.assertEqual(S.casting(sk2, ["envoyee"], {}, {}, 1)["envoyee"]["genre"], "f")
+
