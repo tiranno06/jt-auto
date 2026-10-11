@@ -1,0 +1,125 @@
+{
+ "sujet": "Le vélo d'occasion",
+ "titre": "LE VÉLO D'OCCASION",
+ "titre_accroche": "POV : il a fait une affaire",
+ "legende": "Trente euros, antivol compris.",
+ "question": "Votre pire achat d'occasion ?",
+ "hashtags": [
+  "petitsdramas",
+  "humour",
+  "pov",
+  "velo",
+  "arnaque",
+  "sketch"
+ ],
+ "repliques": [
+  {
+   "p": "narrateur",
+   "t": "POV : il a fait une affaire",
+   "d": "[excited] Pi-o-vi : il a fait une affaire"
+  },
+  {
+   "p": "invite",
+   "t": "J'ai acheté un vélo d'occasion, trente euros, une affaire !"
+  },
+  {
+   "p": "envoyee",
+   "t": "Trente euros ? Il est à qui, ce vélo ?"
+  },
+  {
+   "p": "invite",
+   "t": "Au monsieur qui me l'a vendu. Enfin, c'est ce qu'il m'a dit."
+  },
+  {
+   "p": "envoyee",
+   "t": "Kévin, il est encore attaché au poteau. Avec un cadenas."
+  },
+  {
+   "p": "invite",
+   "t": "C'est l'antivol, il est fourni avec. Le monsieur va m'envoyer le code."
+  },
+  {
+   "p": "presentateur",
+   "t": "Trente euros sans le code ? Kévin, t'as acheté un poteau.",
+   "chute": true
+  }
+ ],
+ "decoupage": [
+  {
+   "scene": "1",
+   "repliques": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lieu": "",
+   "son": "",
+   "duree": 0,
+   "decor": "a city street with a bike locked to a lamppost"
+  }
+ ],
+ "sources": [],
+ "gag": null,
+ "verite": "",
+ "running_gag": "",
+ "bandeau": [],
+ "fiche": {
+  "note": 0,
+  "decision": "sketch de secours (Claude indisponible : crédit épuisé ?)",
+  "decoupage": [
+   {
+    "scene": "1",
+    "repliques": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 0,
+    "decor": "a city street with a bike locked to a lamppost"
+   }
+  ]
+ },
+ "_voix_hz": {
+  "envoyee": 235,
+  "invite": 125,
+  "narrateur": 315,
+  "presentateur": 173
+ },
+ "_voix_genre": {
+  "envoyee": "f",
+  "invite": "h",
+  "narrateur": "f",
+  "presentateur": "h"
+ },
+ "realisation": {
+  "moment": "matin",
+  "lieux": [
+   "rue"
+  ],
+  "gags": [],
+  "ambiances": [],
+  "source": "robot",
+  "tenues": {
+   "invite": "blouson",
+   "envoyee": "capuche",
+   "presentateur": "chemise"
+  },
+  "plans": [
+   "large/fixe",
+   "epaule/fixe",
+   "moyen/fixe",
+   "moyen/fixe",
+   "epaule/fixe",
+   "large/fixe",
+   "serre/avance"
+  ]
+ }
+}

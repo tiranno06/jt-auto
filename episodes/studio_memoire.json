@@ -315,5 +315,43 @@
    "son": true
   },
   "cadence": null
+ },
+ {
+  "moment": "matin",
+  "lieux": [
+   "rue"
+  ],
+  "source": "robot",
+  "duree": 25.7,
+  "plans": {
+   "large": 2,
+   "epaule": 2,
+   "moyen": 2,
+   "serre": 1
+  },
+  "mouvements": {
+   "fixe": 6,
+   "avance": 1
+  },
+  "costumes": {
+   "invite": "blouson",
+   "envoyee": "capuche",
+   "presentateur": "chemise"
+  },
+  "figurants": 2,
+  "ambiances": [],
+  "controle": "ok",
+  "fichier": "2026-10-11_22h25_emission.mp4",
+  "cine": {
+   "focus": true,
+   "vertige": true,
+   "tiers": true,
+   "etalonnage": true,
+   "profondeur": true,
+   "grain": true,
+   "reflets": false,
+   "son": true
+  },
+  "cadence": null
  }
 ]
