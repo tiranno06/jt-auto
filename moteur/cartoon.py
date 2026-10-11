@@ -105,6 +105,8 @@ def _ressort(u):
     v = (u - 0.15) / 0.85
     return min(1.22, 1 - math.exp(-4.5 * v) * math.cos(6.5 * v))           # dépassement amorti
 
+BOUCHE_ECOUTE = {"o": "moue", "cri": "dents", "grand_sourire": "sourire"}   # bouche fermée de celui qui écoute (même émotion)
+
 def viseme(c):
     """Forme de bouche d'une lettre (français simplifié)."""
     c = c.lower()
@@ -220,6 +222,16 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             v = np.concatenate([f0s[i][f0s[i] > 0] for i, r in enumerate(reps) if r["p"] == role and i < len(f0s)] or [np.zeros(0)])
             ref = float(np.median(v)) if len(v) > 10 else None
             if ref: sk.setdefault("_voix_hz", {})[role] = round(ref)       # le casting devine homme / femme d'après la voix
+            vote = {"h": 0.0, "f": 0.0}                                    # vote réplique par réplique (un cri d'homme monte vers 200 Hz)
+            for i, r in enumerate(reps):
+                if r["p"] != role or i >= len(f0s): continue
+                v_ = f0s[i][f0s[i] > 0]
+                if len(v_) < 8: continue
+                m_ = float(np.percentile(v_, 35))
+                if m_ < 165: vote["h"] += len(v_)
+                elif m_ > 205: vote["f"] += len(v_)
+            if sum(vote.values()) and max(vote.values()) >= 0.7 * sum(vote.values()):
+                sk.setdefault("_voix_genre", {})[role] = max(vote, key=vote.get)
             for i, r in enumerate(reps):
                 if r["p"] == role and i < len(f0s): TON[i] = studio.intonation(f0s[i], ref)
     def emo_de(i, r):
@@ -465,6 +477,9 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         if recule:                                                         # recul face à quelqu'un qui crie
             xa = position(scene, q["p"])[0]; u_r = _ressort((tm - t_r) / 0.35) * (1 - _ease((tm - q["fin"] - 0.1) / 0.3))
             p["x"] += (-1 if xa > x else 1) * 26 * s * u_r; p["tilt"] += (-1 if xa > x else 1) * 6 * u_r
+        if not parle:                                                      # celui qui écoute garde la bouche fermée : il ne doit
+            p["forme"] = BOUCHE_ECOUTE.get(p.get("forme"), p.get("forme"))  # jamais avoir l'air de parler avec la voix d'un autre
+            p["bouche"] = 0.0; p.pop("viseme", None)
         # bouche synchronisée sur la voix
         if parle:
             k = int((tm - q["deb"]) * FPS); lv = float(q["lv"][k]) if 0 <= k < len(q["lv"]) else 0.0
