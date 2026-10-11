@@ -30,14 +30,18 @@ def _format(png):
 
 def simplifier(im):
     """Style des chaînes analysées : aplats lissés (moins de détails), couleurs plus claires et un léger flou,
-    pour que les personnages blancs ressortent nettement devant le décor."""
-    im = cv2.edgePreservingFilter(im, flags=1, sigma_s=70, sigma_r=0.45)
-    im = cv2.GaussianBlur(im, (0, 0), 1.6)
-    return np.clip(im.astype(np.float32) * 0.78 + 255 * 0.22, 0, 255).astype(np.uint8)
+    pour que les personnages blancs ressortent nettement devant le décor. Rendu détaillé : les personnages ont maintenant
+    costumes, contours et ombres, le décor garde donc plus de détails (lissage et voile allégés)."""
+    detail = (os.environ.get("RENDU_DETAILLE") or "1") != "0"
+    im = cv2.edgePreservingFilter(im, flags=1, sigma_s=40 if detail else 70, sigma_r=0.3 if detail else 0.45)
+    im = cv2.GaussianBlur(im, (0, 0), 0.8 if detail else 1.6)
+    voile = 0.12 if detail else 0.22
+    return np.clip(im.astype(np.float32) * (1 - voile) + 255 * voile, 0, 255).astype(np.uint8)
 
-def generer(decoupage, graine=7, delai=1200):              # 1re fois : téléchargement des poids SDXL (~7 Go)
-    """decoupage : scènes de l'auteur ; renvoie {indice de scène: image RGB uint8 1080x1920}."""
-    demandes = [(k, sc["decor"].strip()) for k, sc in enumerate(decoupage or [])
+def generer(decoupage, graine=7, delai=1200, lumiere=""):  # 1re fois : téléchargement des poids SDXL (~7 Go)
+    """decoupage : scènes de l'auteur ; renvoie {indice de scène: image RGB uint8 1080x1920}.
+    lumiere : ambiance de l'épisode choisie par le studio (« warm golden evening light, lamps on »…), ajoutée à chaque décor."""
+    demandes = [(k, sc["decor"].strip() + (f", {lumiere}" if lumiere else "")) for k, sc in enumerate(decoupage or [])
                 if sc.get("decor") and sc["decor"].strip().lower() not in ("plain", "uni", "")]
     if not demandes: return {}
     uniques = list(dict.fromkeys(d for _, d in demandes))                 # même lieu = même décor, généré une seule fois

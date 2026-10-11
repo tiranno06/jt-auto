@@ -5,22 +5,36 @@ celui qui parle, émotions lues dans les indications de jeu ([laughs], [angry], 
 Mise en scène façon TikTok : décor du quotidien, plans serrés qui alternent sur celui qui parle, plan large à chaque scène,
 titre « POV » en haut dans un cadre blanc, sous-titres mot par mot, bruitages.
 
+Rendu détaillé (réglage RENDU_DETAILLE, activé par défaut) : le « studio » (studio.py) fixe la bible de l'épisode (lieu, heure,
+lumière, garde-robe, figurants, gags écrits dans le décor, ambiances) et le storyboard (plan, mouvement de caméra, geste, réaction).
+Le moteur l'exécute : plans larges / moyens / serrés / très serrés, plongée et contre-plongée, plan par-dessus l'épaule (l'autre
+personnage de dos, flou, au premier plan), avancée lente, travelling, caméra à l'épaule, zoom choc ; profondeur (le décor glisse
+moins vite que les personnages, le comptoir du premier plan plus vite), flou d'arrière-plan sur les plans serrés, figurants qui
+vivent au fond, regard caméra sur les silences gênants, vapeur, poussière dans la lumière, pluie, neige, néon qui grésille,
+étalonnage selon l'heure et vignettage.
+
 rendre(sk, sortie, audios, mots=None, decors=None, mini=False) -> durée (s)
-  decors : {indice de scène: image RGB 1080x1920} (générées par Stable Diffusion XL) ; sinon décor uni pastel."""
+  decors : {indice de scène: image RGB 1080x1920} (générées par Stable Diffusion XL) ; sinon décors dessinés par le robot
+  (decor_dessin.py ; fond uni pastel si le rendu détaillé est coupé)."""
 import math, os, re, subprocess, sys, tempfile, wave
 import numpy as np, cv2
 from PIL import Image, ImageDraw, ImageFont
 ICI = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, ICI)
-import marionnette as M, sons_modernes as SM, marque
+import marionnette as M, sons_modernes as SM, marque, studio, decor_dessin as DD
 from jt import minutage, carton, son, vers_mix, enveloppe, poser, pop, W, H, FPS, SR, SRM, FB
 
 CAP_Y = 1700
 MINUTAGE = []                                                              # (début, fin, texte, qui) de la dernière vidéo : contrôle qualité
+PH = []                                                                    # répliques de la dernière vidéo avec leur plan (mémoire du studio)
 COUVERTURE_MS = [2500]                                                     # instant de l'image de couverture (millisecondes)
+DETAIL = (os.environ.get("RENDU_DETAILLE") or "1") != "0"                 # réglage de la régie : rendu détaillé (studio) ou simple
 PASTELS = [(246, 228, 214), (226, 236, 246), (236, 246, 226), (248, 232, 240), (250, 242, 214)]
 
 # ------------------------------------------------------------------ émotions lues dans les indications de jeu
-EMOTIONS = [("rire", r"laugh|giggl|chuckl|rire"), ("cri", r"shout|yell|scream|cri"), ("colere", r"angr|annoy|furious|irrit|mad|col[eè]re"),
+EMOTIONS = [("gene", r"awkward|embarrass|sheepish|g[eê]n[eé]"), ("sceptique", r"skeptic|suspicio|doubt|unconvinc|sceptique"),
+            ("amour", r"love|tender|dreamy|amoureu|flirt"), ("fatigue", r"tired|sleepy|yawn|drows|fatigu"),
+            ("reflechit", r"think|pensive|ponder|hmm|r[eé]fl[eé]ch"), ("idee", r"eureka|idea|realiz|id[eé]e"), ("chante", r"sing|humm|chant"),
+            ("rire", r"laugh|giggl|chuckl|rire"), ("cri", r"shout|yell|scream|cri"), ("colere", r"angr|annoy|furious|irrit|mad|col[eè]re"),
             ("pleurs", r"cry|crie?s|sob|tear|pleur"), ("soupir", r"sigh|tired|exhaust|soupir|weary"), ("panique", r"panic|nervous|scared|afraid|stress"),
             ("choc", r"gasp|shock|surpris|stunned"), ("blase", r"deadpan|sarcas|flat|bored|monoton|ironic"), ("joie", r"excit|happy|cheer|joy|enthous"),
             ("fier", r"confident|smug|proud|cocky"), ("chuchote", r"whisper|chuchot")]
@@ -44,29 +58,32 @@ STYLE = {  # yeux, sourcils, forme de bouche au repos, bras gauche, bras droit, 
     "joie":     ("heureux", "hausses", "sourire", (-165, 20), (165, -20), ("etoiles",), 0, 0),
     "fier":     ("vides", "hausses", "sourire", (-60, 120), (60, -120), (), 0, 0),
     "chuchote": ("ouverts", "hausses", "o", (-20, 10), (110, -120), (), 0, 0),
+    "gene":     ("ouverts", "triste", "tordue", None, None, ("goutte",), 0, 0),
+    "sceptique": ("vides", "sceptique", "coin", None, None, (), 0, 0),
+    "amour":    ("coeur", "hausses", "sourire", (-60, 100), (60, -100), ("coeurs",), 0, 0),
+    "fatigue":  ("vides", "triste", "neutre", (-8, 4), (8, -4), ("zzz",), 0, 0),
+    "reflechit": ("ouverts", "fronces", "moue", None, None, ("interro",), 0, 0),
+    "idee":     ("grands", "hausses", "grand_sourire", (-18, 8), (165, -10), ("ampoule",), 0, 0),
+    "chante":   ("fermes", "hausses", "o", (-60, -40), (60, 40), ("notes",), 0, 0),
 }
+# rendu détaillé : visage plus expressif pour chaque émotion (yeux, bouche au repos, effets, teint)
+DETAILS_EMO = {
+    "rire": dict(forme="grand_sourire"), "cri": dict(effets=("traits", "eclairs")), "colere": dict(forme="dents", effets=("veine", "fumee")),
+    "panique": dict(yeux="minuscules", paleur=0.55, effets=("sueur", "goutte")), "choc": dict(yeux="minuscules", effets=("traits", "exclam")),
+    "blase": dict(forme="coin"), "fier": dict(forme="coin"), "joie": dict(yeux="etoiles", forme="grand_sourire"),
+    "pleurs": dict(forme="triste"), "soupir": dict(forme="moue"), "gene": dict(gene=True),
+}
+
 GESTES = [((-20, 10), (100, -40)), ((-100, 40), (20, -10)), ((-110, -30), (110, 30)), ((-20, 10), (150, -10)), ((-40, 80), (40, -80))]
-# poses expressives (bras gauche, bras droit) : angles épaule / coude en degrés, 0 = vers le bas
-POSES = {
-    "croises":    ((22, 72), (-22, -72)),          # bras croisés : blasé, fier, « j'attends »
-    "haussement": ((-45, -85), (45, 85)),          # haussement d'épaules, paumes vers le ciel : « bah quoi ? »
-    "desespoir":  ((-165, -45), (165, 45)),        # bras levés vers la tête : désespoir, panique
-    "pointe_d":   ((-18, 8), (98, -6)),            # doigt pointé vers la droite : accusation
-    "pointe_g":   ((-98, 6), (18, -8)),            # vers la gauche
-    "poing":      ((-18, 8), (150, -130)),         # poing levé : victoire, colère
-}
+MAINS_CONV = [("ouverte", "paume"), ("paume", "ouverte"), ("paume", "paume"), ("ouverte", "index"), ("ouverte", "ouverte")]   # mains des gestes de conversation
+# poses expressives (bras gauche, bras droit) : angles épaule / coude en degrés, 0 = vers le bas — catalogue complet dans studio.GESTES
+POSES = studio.POSES
 NEUTRE_BRAS = ((-18, 8), (18, -8))
 
-def geste_texte(texte, emo):
-    """Geste choisi d'après la réplique (ponctuation, mots) quand l'émotion n'impose rien."""
-    t = (texte or "").lower()
-    if emo in ("blase", "fier"): return "croises"
-    if emo in ("pleurs", "panique"): return "desespoir"
-    if emo in ("colere", "cri") and "!" in t: return "pointe"
-    if re.search(r"\b(toi|tu|t'|vous)\b", t) and "!" in t: return "pointe"
-    if t.rstrip().endswith("?") and re.search(r"\b(quoi|pourquoi|comment|hein)\b", t): return "haussement"
-    if re.search(r"\b(gagné|yes|enfin|trop fort)\b", t): return "poing"
-    return None
+def geste_texte(texte, emo, k=0):
+    """Geste choisi d'après la réplique (ponctuation, mots) quand l'émotion n'impose rien (voir studio.geste)."""
+    g = studio.geste(texte, emo, k)
+    return g if (DETAIL or g in ("croises", "haussement", "desespoir", "pointe", "poing")) else None
 
 def _ease(u): u = min(1, max(0, u)); return u * u * (3 - 2 * u)
 
@@ -177,6 +194,12 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             scene_de[i] = next((scene_de[j] for j in range(i + 1, len(reps)) if j in scene_de), 0)
     t = 0.15; ph = []; transitions = []                                 # (début, fin, type, scène d'arrivée, texte du carton)
     DOUB = sk.get("doublage") or None                                      # vidéo construite sur la bande son d'une autre vidéo : minutage imposé
+    rms = [float(np.sqrt(np.mean(np.square(a)))) if len(a) else 0.0 for a in audios]; rms_ref = float(np.median([x for x in rms if x > 0] or [1.0]))
+    def emo_de(i, r):
+        e = emotion(r.get("d"))
+        if DETAIL and e == "neutre" and not re.search(r"\[[^\]]+\]", r.get("d") or ""):     # pas d'indication de jeu : on devine
+            e = studio.emotion_texte(r["t"], min(1.0, rms[i] / (2 * rms_ref + 1e-9)) if i < len(rms) else 0.5)
+        return e
     for i, (r, a) in enumerate(zip(reps, audios)):
         niv, lv = enveloppe(a); dur = len(a) / SR; att = float(r.get("attente", 0))
         if DOUB:                                                           # chaque réplique démarre à l'instant exact où elle est dite
@@ -185,9 +208,10 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             if ph and sc != ph[-1]["scene"]:                               # changement de scène : panoramique dans le blanc entre deux répliques
                 d0 = max(ph[-1]["fin"] + 0.05, t - 0.45)
                 if t - d0 >= 0.2: transitions.append((d0, t - 0.02, "panoramique", sc, ""))
-            emo_q = emotion(r.get("d"))
-            ph.append(dict(i=i, p=r["p"], deb=t, fin=t + dur, lv=lv, emo=emo_q, chute=bool(r.get("chute")) or i == len(reps) - 1,
-                           scene=sc, objet=r.get("objet"), teaser=False, texte=r["t"], geste=geste_texte(r["t"], emo_q),
+            emo_q = emo_de(i, r)
+            rires = any(re.search(r"laugh|rire|giggl|chuckl", str(e_[2])) and e_[0] < t + dur + 0.6 and e_[1] > t for e_ in (DOUB.get("evenements") or []))
+            ph.append(dict(i=i, p=r["p"], deb=t, fin=t + dur, lv=lv, emo=emo_q, chute=bool(r.get("chute")) or i == len(reps) - 1, rires=rires,
+                           scene=sc, objet=r.get("objet"), teaser=False, texte=r["t"], geste=geste_texte(r["t"], emo_q, i),
                            groupes=minutage(r["t"], a, t, (mots or [None] * len(reps))[i])))
             continue
         if i == len(reps) - 1 and not att and i: att = 0.45                # un temps avant la chute finale
@@ -203,9 +227,9 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
                                 (dec[sc].get("titre") if sc < len(dec) else "") or "Plus tard…")); t += d_tr
         elif ph and r.get("chevauche") and ph[-1]["p"] != r["p"]:          # coupe la parole : démarre par-dessus la fin de l'autre
             t = max(ph[-1]["deb"] + 0.45, ph[-1]["fin"] - 0.35)
-        emo_q = emotion(r.get("d"))
+        emo_q = emo_de(i, r)
         q = dict(i=i, p=r["p"], deb=t, fin=t + dur, lv=lv, emo=emo_q, chute=(bool(r.get("chute")) or i == len(reps) - 1) and not r.get("teaser"),
-                 scene=sc, objet=r.get("objet"), teaser=r.get("teaser") is not None, texte=r["t"], geste=geste_texte(r["t"], emo_q),
+                 scene=sc, objet=r.get("objet"), teaser=r.get("teaser") is not None, texte=r["t"], geste=geste_texte(r["t"], emo_q, i),
                  groupes=minutage(r["t"], a, t, (mots or [None] * len(reps))[i]))
         ph.append(q)
         vif = emo_q in ("cri", "colere", "panique")                         # dispute : les répliques s'enchaînent sans blanc
@@ -223,6 +247,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         FIN_CARTE = total; total += 1.3
     MINUTAGE[:] = [(q["deb"], q["fin"], q["texte"], {"presentateur": "Jojo", "invite": "Kévin", "envoyee": "Lila"}.get(q["p"], "voix off"))
                    for q in ph if not q["teaser"] and q["p"] != "narrateur"]
+    PH[:] = ph
     nf = int(total * FPS)
     # placement : qui est dans chaque scène, à quelle place
     places = {}
@@ -240,6 +265,35 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         nouvelle = j == 0 or ph[j - 1]["scene"] != q["scene"]
         q["cam"] = "large" if (nouvelle or q["p"] == "narrateur" or len(places[q["scene"]]) <= 1 or q["chute"] and j == len(ph) - 1
                                or (j and ph[j - 1]["p"] == "narrateur")) else "serre"
+    # studio : bible de l'épisode et storyboard (plans, mouvements, réactions), décors dessinés là où l'IA n'en a pas fourni
+    B = studio.bible(sk, roles) if DETAIL else None
+    AVANT, INFOS = {}, {}
+    if B:
+        studio.realiser(ph, places, B); sk["_bible"] = B
+        for sc_ in places:
+            if sc_ in decors: continue
+            lieu = B["lieux"][min(sc_, len(B["lieux"]) - 1)]
+            dd = DD.dessiner(lieu, B, graine=B["graine"] % 9973 + sc_); decors[sc_] = dd["fond"]; INFOS[sc_] = dd
+            if dd.get("avant") is not None: AVANT[sc_] = dd["avant"]
+        print(f"studio : {B['moment']}, lieux {B['lieux']}, tenues " + ", ".join(f"{r}={c['haut']}" for r, c in B["costumes"].items())
+              + f", {len(B['figurants'])} figurant(s), ambiances {B['ambiances']} ; plans " + " ".join(f"{q['plan']}/{q['mouvement']}" for q in ph), flush=True)
+        GRADE = None                                                       # étalonnage (teinte de l'heure) × vignettage, calculé une fois
+        yy_, xx_ = np.mgrid[0:H, 0:W].astype(np.float32)
+        vig = 1 - 0.20 * np.clip(((xx_ - W / 2) / (W * 0.75)) ** 2 + ((yy_ - H * 0.48) / (H * 0.62)) ** 2, 0, 1)
+        teinte = np.array(B["etalonnage"], np.float32); teinte = teinte / teinte.max()
+        GRADE = np.clip(vig[..., None] * teinte[None, None, :] * 255, 0, 255).astype(np.uint8); del yy_, xx_, vig   # multiplicateur (÷255)
+        SILENCES = []                                                      # regard caméra pendant un silence gênant (celui qui vient d'écouter)
+        for j, q in enumerate(ph):
+            if j and q.get("regard_camera") and ph[j - 1]["p"] != "narrateur":
+                qui = next((r2 for r2 in places.get(ph[j - 1]["scene"], []) if r2 != ph[j - 1]["p"]), None)
+                if qui: SILENCES.append((ph[j - 1]["fin"] + 0.1, q["deb"] - 0.05, qui, ph[j - 1]["scene"]))
+        for sc_ in places:                                                 # figurants dans les espaces libres entre les personnages
+            libres = {1: [170, 910], 2: [540, 1010], 3: [365, 715]}.get(len(places[sc_]), [540]); k_ = 0
+            for f_ in B["figurants"]:
+                if f_["scene"] != sc_: continue
+                f_["_x"] = libres[k_ % len(libres)]; f_["_s"] = 0.4 if len(places[sc_]) >= 3 else 0.46; k_ += 1
+        rng_p = np.random.default_rng(B["graine"] % 99991)
+        PARTICULES = rng_p.uniform(0, 1, (60, 4))                          # positions et vitesses (poussière, pluie, neige, vapeur)
     # animation des personnages : état par rôle
     clign = {r: sorted(rng.uniform(0.5, total, int(total / 2.6))) for r in roles}
     DEBUT_SCENE = {}
@@ -275,8 +329,24 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             if q["emo"] in ("cri", "colere"): emo = "panique" if (len(role) + q["i"]) % 2 else "choc"; recule = 1.0
             elif q["emo"] == "pleurs": emo = "blase"
             elif q["emo"] in ("rire", "joie") and (len(role) + q["i"]) % 2: emo = "rire"
+        # storyboard : réaction prévue pour celui qui écoute, regard caméra pendant un silence gênant
+        reac_geste, cam_regard, roule = None, False, False
+        if B and not parle and emo == "neutre":
+            if any(a_ <= tm <= b_ and qui == role and sc2 == scene for a_, b_, qui, sc2 in SILENCES): cam_regard, emo = True, "blase"
+            elif q["p"] != role and q["p"] in places[scene] and q.get("reaction", "aucune") != "aucune" and q["deb"] + 0.4 <= tm <= q["fin"] + 0.5:
+                rc = q["reaction"]
+                if rc == "regard_camera": cam_regard, emo = True, "blase"
+                elif rc == "yeux_au_ciel": roule = True
+                elif rc in ("facepalm", "bras_croises"): reac_geste = "facepalm" if rc == "facepalm" else "croises"
+                elif rc in ("sceptique", "choc", "rire", "gene", "soupir"): emo = rc
         yeux, sour, forme, bg, bd, eff, roug, trem = STYLE.get(emo, STYLE["neutre"])
         p.update(yeux=yeux, sourcils=sour, forme=forme, effets=eff, rougeur=roug, tremble=trem, joues=emo in ("rire", "joie"))
+        if B:                                                              # rendu détaillé : costume, lumière, visage, mains
+            p.update(costume=B["costumes"].get(role), reflets=True, lumiere=B["lumiere"], ombre=B["ombre"], mains=True,
+                     balance=0.7 * math.sin(tm * 2.3 + len(role)) + (0.5 * math.sin(tm * 9) if emo in ("rire", "joie", "cri") else 0))
+            p.update(DETAILS_EMO.get(emo, {}))
+            if roule: p.update(yeux="roule", sourcils="neutre", forme="moue")
+            if cam_regard: p.update(forme="coin" if (len(role) + int(tm)) % 2 else "neutre", sourcils="neutre")
         if recule:                                                         # recul face à quelqu'un qui crie
             xa = position(scene, q["p"])[0]; u_r = _ease((tm - q["deb"] - 0.3) / 0.3) * (1 - _ease((tm - q["fin"] - 0.1) / 0.3))
             p["x"] += (-1 if xa > x else 1) * 26 * s * u_r; p["tilt"] += (-1 if xa > x else 1) * 6 * u_r
@@ -308,11 +378,14 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         if emo == "soupir": p["sq"] -= 0.05
         # gestes : ceux de l'émotion, sinon gestes de conversation qui changent toutes les ~1,2 s
         g_txt = (q["geste"] if parle else None) or (mien["geste"] if (mien and mien["geste"] in ("croises",) and tm <= mien["fin"] + 0.6) else None)
+        mains = ("ouverte", "ouverte")
+        if reac_geste and not g_txt: g_txt = reac_geste
         if g_txt:                                                          # geste expressif tiré de la réplique (bras croisés, doigt pointé…)
             if g_txt == "pointe":
                 cible = next((r2 for r2 in places[scene] if r2 != role), None)
                 g_txt = "pointe_d" if cible and position(scene, cible)[0] > x else "pointe_g"
-            src = mien if mien else q; u_g = _ease((tm - src["deb"] + 0.1) / 0.35) * (1 - _ease((tm - src["fin"] - 0.35) / 0.35))
+            mains = studio.GESTES[g_txt][1] if g_txt in studio.GESTES else mains
+            src = q if (reac_geste == g_txt or not mien) else mien; u_g = _ease((tm - src["deb"] + 0.1) / 0.35) * (1 - _ease((tm - src["fin"] - 0.35) / 0.35))
             pg, pd = POSES[g_txt]; bg, bd = _mel(NEUTRE_BRAS[0], pg, u_g), _mel(NEUTRE_BRAS[1], pd, u_g)
             if g_txt == "haussement": p["y"] -= 10 * s * u_g; p["tilt"] += 7 * u_g
             if g_txt.startswith("pointe"): p["tilt"] += (5 if g_txt == "pointe_d" else -5) * u_g
@@ -320,6 +393,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             if parle:
                 per = 1.6; k_ = int((tm - q["deb"]) / per + q["i"]); u = _ease(((tm - q["deb"]) % per) / 0.45)
                 g = GESTES[k_ % len(GESTES)]; g0 = GESTES[(k_ - 1) % len(GESTES)] if tm - q["deb"] >= per else ((-18, 8), (18, -8))
+                mains = MAINS_CONV[k_ % len(MAINS_CONV)]
                 bg, bd = _mel(g0[0], g[0], u), _mel(g0[1], g[1], u)
                 fin_u = _ease((tm - q["fin"] + 0.3) / 0.3)                     # retour au repos en douceur à la fin de la phrase
                 bg, bd = _mel(bg, (-18, 8), fin_u), _mel(bd, (18, -8), fin_u)
@@ -328,16 +402,18 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             bg, bd = _mel((-18, 8), bg, u_emo), _mel((18, -8), bd, u_emo)
             if emo == "colere": bg, bd = (bg[0] + 10 * math.sin(tm * 18), bg[1]), (bd[0] - 10 * math.sin(tm * 18), bd[1])
         p["bras_g"], p["bras_d"] = bg, bd
+        p["main_forme_g"], p["main_forme_d"] = mains
         # regard vers celui qui parle (ou vers celui à qui on parle), petites saccades, clignements
         autre = q["p"] if q["p"] != role else next((r2 for r2 in places[scene] if r2 != role), None)
         if autre and autre in places[scene]:
             xa = position(scene, autre)[0]; p["regard"] = ((0.8 if xa > x else -0.8) + 0.12 * math.sin(tm * 0.7 + len(role)), 0.08 * math.sin(tm * 1.3))
+        if B and cam_regard: p["regard"] = (0.0, 0.05); p["tilt"] *= 0.3   # il fixe la caméra
         if any(0 <= tm - c < 0.12 for c in clign[role]) and p["yeux"] == "ouverts": p["yeux"] = "fermes"
         # objet en main pendant la réplique
         if mien and mien.get("objet") and tm <= mien["fin"] + 0.3:
             o = objets.get((mien["objet"], round(s, 2)))
             if o is None: o = objets[(mien["objet"], round(s, 2))] = M.objet(mien["objet"], s)
-            if o is not None: p["main_d"] = o; p["bras_d"] = (120, -100)
+            if o is not None: p["main_d"] = o; p["bras_d"] = (120, -100); p["main_forme_d"] = "poing"
         return p
 
     CARTES = {k: carte(tr[4]) for k, tr in enumerate(transitions) if tr[2] == "carton"}
@@ -378,8 +454,97 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         return fr
 
     def cadre(q):
+        if B and q["p"] in places[q["scene"]]:                             # valeur de plan choisie par le storyboard
+            x_, _, s_ = position(q["scene"], q["p"]); tete_y = 1500 - 305 * s_; pl = q.get("plan", "large")
+            if pl == "moyen":
+                xs = [position(q["scene"], r2)[0] for r2 in places[q["scene"]]]; return 1.22, (2 * x_ + sum(xs) / len(xs)) / 3, 1190.0
+            if pl == "serre": return 1.5, x_, 1130.0
+            if pl == "epaule":                                             # l'autre est de dos au premier plan : celui qui parle est décalé
+                ec = ecoutant(q); sens = 1 if (ec and position(q["scene"], ec)[0] < x_) else -1
+                return 1.5, x_ - sens * 120, 1150.0
+            if pl == "tres_serre": return min(2.8, 2.15 * 1.08 / s_), x_, tete_y + 30     # le visage remplit l'écran
+            if pl == "plongee": return 1.4, x_, tete_y + 150
+            if pl == "contre_plongee": return 1.45, x_, tete_y + 120
+            return 1.0, W / 2, H / 2
         if q["cam"] == "serre" and q["p"] in places[q["scene"]]: return 1.5, position(q["scene"], q["p"])[0], 1130.0
         return 1.0, W / 2, H / 2
+
+    def ecoutant(q):
+        """Celui qui écoute la réplique (le plus proche de celui qui parle)."""
+        autres = [r2 for r2 in places.get(q["scene"], []) if r2 != q["p"]]
+        if not autres or q["p"] not in places.get(q["scene"], []): return None
+        x_ = position(q["scene"], q["p"])[0]; return min(autres, key=lambda r2: abs(position(q["scene"], r2)[0] - x_))
+
+    def figurant(f, tm, img, zb, cxb, cyb):
+        """Figurant qui vit au fond de la scène (boit, tape au clavier, téléphone, marche…), à l'échelle du décor."""
+        p = M.pose_neutre(); x0 = f.get("_x", f["x"]); k = x0 * 0.013; act = f["activite"]
+        x = x0 + (math.sin(tm * 0.25 + k) * 60 if act == "marche" else 6 * math.sin(tm * 0.9 + k)); y = 1265
+        p.update(x=W / 2 + (x - cxb) * zb, y=H / 2 + (y - cyb) * zb, s=f.get("_s", 0.5) * zb, t=tm, costume=f["costume"], reflets=True, lumiere=B["lumiere"],
+                 ombre=B["ombre"], mains=True, tilt=4 * math.sin(tm * 0.7 + k), regard=(math.sin(tm * 0.4 + k) * 0.8, 0.1),
+                 balance=0.5 * math.sin(tm * 2 + k))
+        cyc = (tm * 0.35 + k) % 1
+        if act in ("boit", "mange"):
+            lev = _ease(min(1, cyc / 0.15)) * (1 - _ease(max(0, cyc - 0.35) / 0.15)) if cyc < 0.5 else 0.0
+            p["bras_d"] = _mel((60, 80), (150, 75), lev); p["main_d"] = objets.setdefault((act, round(p["s"], 2)), M.objet("verre" if act == "boit" else "croissant", p["s"]))
+            p["main_forme_d"] = "poing"; p["bouche"] = 0.3 * lev
+        elif act == "telephone":
+            p["bras_d"] = POSES["telephone"][1]; p["main_forme_d"] = "poing"; p["bouche"] = 0.4 * abs(math.sin(tm * 7 + k)) if (tm + k) % 4 < 2.5 else 0.0
+            p["viseme"] = "A" if p["bouche"] > 0.2 else None
+        elif act == "tape":
+            p["bras_g"], p["bras_d"] = (-40, 90 + 8 * math.sin(tm * 17)), (40, -90 + 8 * math.sin(tm * 19 + 1)); p["regard"] = (0.0, 0.6)
+        elif act == "souleve":
+            u = abs(math.sin(tm * 1.6 + k)); p["bras_g"], p["bras_d"] = (-60 - 100 * u, -40), (60 + 100 * u, 40)
+            p["main_g"] = p["main_d"] = objets.setdefault(("haltere", round(p["s"], 2)), M.objet("haltere", p["s"] * 0.7)); p["sq"] = -0.05 * u
+        elif act == "cherche":
+            p["regard"] = (math.sin(tm * 0.8 + k), -0.3); p["tilt"] = 10 * math.sin(tm * 0.8 + k); p["bras_d"] = (60, 40); p["main_forme_d"] = "index"
+        if any(0 <= ((tm + k * 3) % 3.7) < 0.12 for _ in (0,)): p["yeux"] = "fermes"
+        M.dessiner(img, f["perso"], p)
+
+    def tache(img, x, y, r, col, a):
+        """Petite tache de lumière / de vapeur, fondue dans l'image (zone locale seulement)."""
+        x0, y0, x1, y1 = int(max(0, x - r)), int(max(0, y - r)), int(min(W, x + r + 1)), int(min(H, y + r + 1))
+        if x1 <= x0 or y1 <= y0 or a <= 0: return
+        yy, xx = np.ogrid[y0:y1, x0:x1]; m = np.clip(1 - np.sqrt((xx - x) ** 2 + (yy - y) ** 2) / r, 0, 1)[..., None] * a
+        img[y0:y1, x0:x1] = (img[y0:y1, x0:x1] * (1 - m) + np.array(col, np.float32) * m).astype(np.uint8)
+
+    def ambiances(img, tm, sc, zb, cxb, cyb):
+        info = INFOS.get(sc, {}); amb = B["ambiances"]; P_ = PARTICULES
+        def ecr(x, y): return W / 2 + (x - cxb) * zb, H / 2 + (y - cyb) * zb
+        if "vapeur" in amb:
+            for (vx, vy) in info.get("vapeur", []):
+                for k in range(7):
+                    ph_ = (tm * 0.3 + k / 7) % 1; x, y = ecr(vx + math.sin(tm * 1.3 + k) * 26 * ph_, vy - ph_ * 300)
+                    tache(img, x, y, (18 + 34 * ph_) * zb, (250, 250, 250), 0.35 * (1 - ph_))
+        if "poussiere" in amb:                                             # poussière qui flotte dans la lumière
+            for k in range(22):
+                x = (P_[k, 0] * W + math.sin(tm * 0.3 + k) * 40) % W; y = (P_[k, 1] * H * 0.7 + tm * 10 * (0.5 + P_[k, 2])) % (H * 0.75)
+                tache(img, x, y, 4 + 3 * P_[k, 3], (255, 244, 210), 0.45 * (0.5 + 0.5 * math.sin(tm * 2 + k)))
+        zone = (0, 0, W, H) if B["lieux"][min(sc, len(B["lieux"]) - 1)] == "rue" else None
+        if zone is None and info.get("fenetre"):
+            fx0, fy0, fx1, fy1 = info["fenetre"]; a, b = ecr(fx0, fy0); c, d = ecr(fx1, fy1); zone = (int(a), int(b), int(c), int(d))
+        if zone and ("pluie" in amb or "neige" in amb):
+            x0, y0, x1, y1 = [int(v) for v in zone]; x0, y0, x1, y1 = max(0, x0), max(0, y0), min(W, x1), min(H, y1)
+            if x1 > x0 and y1 > y0:
+                sub = img[y0:y1, x0:x1]; w_, h_ = x1 - x0, y1 - y0
+                for k in range(60 if "pluie" in amb else 45):
+                    if "pluie" in amb:
+                        x = (P_[k, 0] * w_ + tm * 140) % w_; y = (P_[k, 1] * h_ + tm * 1500 * (0.8 + 0.4 * P_[k, 2])) % h_
+                        cv2.line(sub, (int(x), int(y)), (int(x - 8), int(y + 34)), (205, 215, 235), 2, cv2.LINE_AA)
+                    else:
+                        x = (P_[k, 0] * w_ + math.sin(tm + k) * 30) % w_; y = (P_[k, 1] * h_ + tm * 120 * (0.6 + 0.6 * P_[k, 2])) % h_
+                        cv2.circle(sub, (int(x), int(y)), int(3 + 4 * P_[k, 3]), (252, 252, 255), -1, cv2.LINE_AA)
+        if "neon" in amb and info.get("neons") and (tm % 5.3) < 0.22 and int(tm * 30) % 2:   # le néon grésille
+            for nx0, ny0, nx1, ny1 in info["neons"]:
+                a, b = ecr(nx0, ny0); c, d = ecr(nx1, ny1); a, b, c, d = max(0, int(a)), max(0, int(b)), min(W, int(c)), min(H, int(d))
+                if c > a and d > b: img[b:d, a:c] = (img[b:d, a:c] * 0.7).astype(np.uint8)
+
+    def keystone(img, plan):
+        """Plongée / contre-plongée : les verticales fuient vers le bas (plongée) ou vers le haut (contre-plongée)."""
+        k = 0.075 * W
+        if plan == "contre_plongee": src = np.float32([[-k, 0], [W + k, 0], [W, H], [0, H]])
+        else: src = np.float32([[0, 0], [W, 0], [W + k, H], [-k, H]])
+        Mp = cv2.getPerspectiveTransform(src, np.float32([[0, 0], [W, 0], [W, H], [0, H]]))
+        return cv2.warpPerspective(img, Mp, (W, H), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REPLICATE)
 
     def reaction(tm):
         """Plan de réaction : juste après une vanne, la caméra coupe sur la tête de celui qui l'encaisse."""
@@ -419,12 +584,30 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             if tm > q["fin"] + 0.2 and len(places[sc]) > 1:                # puis plan large pour voir la réaction (chute à la renverse)
                 u_l = _ease((tm - q["fin"] - 0.2) / 0.35); z = z + (1.0 - z) * u_l; cx = cx + (W / 2 - cx) * u_l; cy = cy + (H / 2 - cy) * u_l
         elif q["chute"] and tm > q["fin"] - 0.6: z *= 1 + 0.12 * _ease((tm - q["fin"] + 0.6) / 0.2)
+        dans_q = q["deb"] - 0.3 <= tm <= q["fin"] + 0.3
+        if B and dans_q and q is not ph[-1]:                               # mouvement de caméra prévu par le storyboard
+            u_q = (tm - q["deb"]) / max(0.4, q["fin"] - q["deb"]); mv = q.get("mouvement")
+            if mv == "avance": z *= 1 + 0.10 * _ease(u_q)
+            elif mv == "recul": z *= 1.10 - 0.10 * _ease(u_q)
+            elif mv == "travelling": cx += 80 * (min(1.2, max(-0.2, u_q)) - 0.5) / z
+            elif mv == "zoom_choc": z *= 1 + 0.16 * (1 - math.exp(-max(0.0, tm - q["deb"]) * 10))
+            if mv == "epaule" or q.get("plan") == "epaule":                # caméra tenue à l'épaule : léger flottement
+                cx += 5 * math.sin(tm * 1.7) + 3 * math.sin(tm * 3.3); cy += 4 * math.sin(tm * 2.1)
         zr, cible = reaction(tm)
         if cible and zr["scene"] == sc and len(places[sc]) > 1 and zr is not ph[-1]:   # coupe sèche sur la réaction
             z, cx, cy = 1.55, position(sc, cible)[0], 1120.0
+            if B: z, cy = 1.75, 1500 - 305 * position(sc, cible)[2] + 90
         cx = min(max(cx, W / (2 * z)), W - W / (2 * z)); cy = min(max(cy, H / (2 * z)), H - H / (2 * z))
-        Mx = np.float32([[z, 0, W / 2 - z * cx], [0, z, H / 2 - z * cy]])
+        if B:                                                              # profondeur : le décor glisse moins vite que les personnages
+            zb = 1 + (z - 1) * 0.86; cxb, cyb = W / 2 + (cx - W / 2) * 0.86, H / 2 + (cy - H / 2) * 0.86
+            cxb = min(max(cxb, W / (2 * zb)), W - W / (2 * zb)); cyb = min(max(cyb, H / (2 * zb)), H - H / (2 * zb))
+        else: zb, cxb, cyb = z, cx, cy
+        Mx = np.float32([[zb, 0, W / 2 - zb * cxb], [0, zb, H / 2 - zb * cyb]])
         img = cv2.warpAffine(fond, Mx, (W, H), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REPLICATE)
+        if B:
+            for f_ in B["figurants"]:
+                if f_["scene"] == sc: figurant(f_, tm, img, zb, cxb, cyb)
+            if z > 1.3: img = cv2.GaussianBlur(img, (0, 0), min(4.5, 6 * (z - 1.1)))   # flou d'arrière-plan sur les plans serrés
         sce = dec[sc] if sc < len(dec) else {}
         if sce.get("effet") == "tremblement" or (q["emo"] in ("cri", "colere") and q["deb"] <= tm <= q["fin"]):
             img = np.roll(img, (int(6 * math.sin(tm * 53)), int(6 * math.cos(tm * 47))), (0, 1))
@@ -441,8 +624,27 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             R_ = cv2.getRotationMatrix2D((p["x"], p["y"]), -ang, 1.0)
             calque = cv2.warpAffine(calque, R_, (W, H), flags=cv2.INTER_LINEAR, borderValue=(1, 2, 3))
             m_ = (np.abs(calque.astype(np.int16) - (1, 2, 3)).sum(2) > 9)[..., None]; img[:] = np.where(m_, calque, img)
+        if B and q.get("plan") == "epaule" and dans_q and ecoutant(q):        # l'autre, de dos, flou, en amorce au premier plan
+            ec = ecoutant(q); sens = -1 if position(sc, ec)[0] < position(sc, q["p"])[0] else 1
+            y0_, x0_, x1_ = 1060, (0 if sens < 0 else W // 4), (W * 3 // 4 if sens < 0 else W)
+            sub = np.empty((H - y0_, x1_ - x0_, 3), np.uint8); sub[:] = (1, 2, 3)
+            p = pose(ec, tm, q, sc); p.update(dos=True, s=2.5, x=W / 2 + sens * 0.40 * W - x0_, y=H + 420 - y0_, tremble=0, effets=(), main_g=None, main_d=None,
+                                              bras_g=(-18, 8), bras_d=(18, -8))
+            M.dessiner(sub, M.ROLES.get(ec, "bonnet"), p)
+            m_ = (np.abs(sub.astype(np.int16) - (1, 2, 3)).sum(2) > 9).astype(np.float32)
+            m_ = cv2.GaussianBlur(m_, (0, 0), 6)[..., None]; sub = cv2.GaussianBlur(sub, (0, 0), 6).astype(np.float32) * 0.86
+            zone = img[y0_:, x0_:x1_]; img[y0_:, x0_:x1_] = (zone * (1 - m_) + sub * m_).astype(np.uint8)
+        if B and sc in AVANT:                                              # premier plan (comptoir, bureau) : glisse plus vite que le reste
+            za = z * 1.06; cxa, cya = W / 2 + (cx - W / 2) * 1.1, H / 2 + (cy - H / 2) * 1.04
+            Ma = np.float32([[za, 0, W / 2 - za * cxa], [0, za, H / 2 - za * cya]])
+            av = cv2.warpAffine(AVANT[sc], Ma, (W, H), flags=cv2.INTER_NEAREST, borderMode=cv2.BORDER_REPLICATE)
+            np.copyto(img, av[..., :3], where=av[..., 3:4] > 127)
         if sce.get("effet") == "pluie_billets":
             t0 = min(z2["deb"] for z2 in ph if z2["scene"] == sc); _pluie(img, tm, t0, sc)
+        if B:
+            ambiances(img, tm, sc, zb, cxb, cyb)
+            if q.get("plan") in ("plongee", "contre_plongee") and dans_q and q["p"] in places[sc]: img = keystone(img, q["plan"])
+        if B: img = cv2.multiply(img, GRADE, scale=1 / 255)                 # étalonnage de l'heure + vignettage (avant les textes)
         fr = img.astype(np.float32)
         if q["p"] == "narrateur" and tm <= q["fin"] + 0.3:                 # voix off d'ouverture : le titre en grand au centre
             V = VOIX_OFF[q["i"]]; a2 = pop(V, (tm - q["deb"] + 0.2) / 0.3)

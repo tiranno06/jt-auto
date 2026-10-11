@@ -84,6 +84,19 @@ Les consignes d'auteur sont dans `moteur/prompts/moteur_humour.md` (modifiable s
 4. une salle d'auteurs prépare 15 vannes et 15 chutes, un jury séparé garde les meilleures, puis un relecteur note le sketch sur 100 ; sous le seuil d'exigence (90 par défaut, réglable dans la régie), jusqu'à 4 retouches ciblées en repartant toujours de la meilleure version, puis un second sujet ; la meilleure version est gardée mais **n'est jamais publiée automatiquement si elle reste sous le seuil** ;
 5. les jetons consommés et toutes les décisions sont écrits dans `episodes/journal.txt` ; la fiche complète de l'épisode est dans `episodes/<date>.json` (champ `fiche`).
 
+## Rendu détaillé : le « studio » (gratuit, sans IA)
+Pour les sketchs, les gags éclair et les vidéos faites sur la bande son d'une vidéo TikTok, le robot se comporte comme un petit studio de dessin animé, sans dépenser de crédit Claude ni de GPU :
+- **bible de l'épisode** (`moteur/studio.py`) : le lieu de chaque scène (salon, cuisine, bureau, cabinet médical, bar, chambre, salle de sport, magasin, classe, rue, restaurant), l'heure (matin, jour, soir, nuit), la lumière, la tenue de chaque personnage selon le lieu et son rôle (celui qui pose les questions au cabinet porte la blouse et le stéthoscope, le serveur le tablier…), des figurants qui vivent au fond, des gags écrits dans le décor et des ambiances (vapeur, poussière dans la lumière, pluie, neige, néon qui grésille). Tout est déduit du texte, avec une graine propre à chaque vidéo ;
+- **personnages** (`moteur/marionnette.py`) : garde-robe complète (13 hauts, motifs, bas, chaussures, cravate, badge, stéthoscope, lunettes, moustache…), coiffures, reflets dans les yeux, paupières, rides d'expression, dents, 10 bouches et 12 regards (yeux au ciel, spirale, cœurs, pupilles minuscules…), mains (index pointé, poing, pouce, paume), ombrage selon la lumière, pompon et nœud qui suivent les mouvements, 24 objets à tenir, 15 effets (goutte de gêne, fumée de colère, ampoule, cœurs…) ;
+- **décors dessinés par le robot** (`moteur/decor_dessin.py`) : pièces complètes avec fenêtre dont le ciel suit l'heure, meubles, étagères garnies, tableaux, horloge, lampes allumées le soir, tache de soleil au sol, comptoir ou bureau au premier plan. Utilisés quand les décors IA sont coupés ou indisponibles ;
+- **réalisation** : plans larges, moyens, serrés, très serrés, plongée, contre-plongée, par-dessus l'épaule ; avancée lente, travelling, caméra à l'épaule, zoom choc ; profondeur (le décor glisse moins vite que les personnages), flou d'arrière-plan sur les plans serrés, regard caméra pendant les silences gênants, réactions de celui qui écoute (yeux au ciel, main sur le visage, bras croisés…), étalonnage selon l'heure ;
+- **sans indication de jeu** (doublage sans Claude), l'émotion est devinée d'après les mots, la ponctuation et le volume de la voix ; les rires repérés dans la bande son font rire celui qui écoute ;
+- **contrôle technique gratuit** avant publication (format, son, durée, image noire ou figée), en plus du contrôle par IA quand le crédit le permet ;
+- quand Claude est disponible, il peut choisir lui-même lieux, heure, tenues, gags et plans (catalogues fermés, vérifiés par le robot) ;
+- la mémoire du studio (`episodes/studio_memoire.json`) garde ce qui a été tourné pour varier d'une vidéo à l'autre.
+
+Réglage **Rendu détaillé (studio)** dans l'onglet ⚙️ : coupé, le robot revient exactement à l'ancien rendu (bonshommes blancs, plans simples). Le rendu détaillé prend environ deux fois plus de temps de calcul sur GitHub (gratuit).
+
 ## Réglages depuis l'application (onglet ⚙️ Réglages)
 Rythme (chaque jour, un jour sur deux, un jour sur trois, pause), heure de fabrication, durée et ton des sketchs, modèle Claude, nom de l'émission, plan gag IA, bouton « Fabriquer une émission maintenant » et raccourcis vers les crédits Modal / Claude, Buffer et TikTok Studio. Chaque réglage s'applique dès la prochaine émission.
 
@@ -113,6 +126,8 @@ En cas d'échec, GitHub t'envoie un e-mail ; le détail est dans l'onglet Action
 - `moteur/voix_modal.py` / `moteur/voix.py` : voix Chatterbox (Modal) et secours Piper
 - `moteur/video_modal.py` : plan gag Wan 2.2 (Modal)
 - `moteur/dessin_jt.py` / `moteur/jt.py` : dessins, montage studio et mixage
+- `moteur/cartoon.py` / `moteur/marionnette.py` : dessin animé (sketchs, gags éclair, doublage) et personnages
+- `moteur/studio.py` / `moteur/decor_dessin.py` : direction artistique et réalisation sans IA, décors dessinés par le robot
 - `moteur/publier.py` : publication TikTok (Buffer, ou Upload-Post)
 - `moteur/site.py` : site de régie (GitHub Pages)
 - `.github/workflows/publier.yml` : publication d'une vidéo à la demande (bouton du site)

@@ -234,7 +234,7 @@ Aujourd'hui, PAS D'ACTUALITÉ : ignore les étapes de recherche, de vérificatio
 {persos}
   Utilise leurs prénoms. 1 à 3 personnages selon la scène (souvent 2 face à face). Le premier à parler peut être n'importe lequel.
 - DÉCOUPAGE POUR L'ANIMATION (obligatoire) : "decoupage" = 1 à 5 scènes ; pour chacune : "repliques" (indices), "decor" = le décor EN ANGLAIS, sans aucun personnage : le lieu PRÉCIS de l'histoire + 2 ou 3 objets visibles qui servent le gag (« a narrow apartment building hallway, a closed front door with a peephole, a torn delivery notice on the floor », « a supermarket self-checkout machine with a red error light, a shopping basket full of groceries »). Si l'histoire reste au même endroit, recopie EXACTEMENT le même texte de décor d'une scène à l'autre. « plain » = fond uni (gags éclair surtout), "titre" = pour un SKETCH LONG : construis-le en 2 à 4 GAGS successifs sur la même situation (un gag = une scène, avec sa propre montée et sa propre vanne de fin, le dernier gag porte la chute finale) ; chaque gag à partir du 2e est annoncé par un carton plein écran : écris son texte, court et clair (« Le lendemain… », « Deux heures plus tard… », « Pendant ce temps, chez Kévin… », « Au boulot… ») ; pour un GAG ÉCLAIR, les 2 à 6 mots affichés en haut pendant ce temps de la blague. "effet" = "pluie_billets", "tremblement" ou vide.
-- Une réplique peut faire tenir un objet au personnage : "objet" = telephone, billet, portefeuille, micro, verre ou cafe.
+- Une réplique peut faire tenir un objet au personnage : "objet" = telephone, billet, portefeuille, micro, verre, cafe, livre, cles, carte, facture, bouteille, haltere, seringue, parapluie, telecommande, fleur, cadeau, pizza, croissant, tablette, lettre, journal, stylo ou valise.
 - Aucune personne réelle, aucune marque, aucune actualité.
 - "faits_reels" : liste vide ; "inventions" : tout ; "sources" : liste vide ; "resume_factuel" : une phrase qui résume la situation.
 - La chute : une punchline qui retourne toute la situation (fausse vérité ironique, aveu involontaire, retournement) ; même exigence de mot qui tue à la fin.
@@ -400,7 +400,8 @@ def _sources(proposees, liens):
     return out[:6]
 
 EFFETS = ("pluie_billets", "tremblement")
-OBJETS = ("telephone", "billet", "portefeuille", "micro", "verre", "cafe")
+OBJETS = ("telephone", "billet", "portefeuille", "micro", "verre", "cafe", "livre", "cles", "carte", "facture", "bouteille", "haltere",   # = marionnette.OBJETS
+          "seringue", "parapluie", "telecommande", "fleur", "cadeau", "pizza", "croissant", "tablette", "lettre", "journal", "stylo", "valise")
 SONS_DISPONIBLES = ("rimshot", "xylo_descente", "trombone_triste", "dun_dun", "woosh", "reconstitution")
 def _decoupage(dec, n):
     """Découpage scène par scène, normalisé pour le moteur vidéo :

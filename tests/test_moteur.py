@@ -511,6 +511,99 @@ class TestDoublage(unittest.TestCase):
         self.assertEqual(segs[0]["t"], "Salut ça va?")
         self.assertAlmostEqual(segs[1]["deb"], 1.6)
 
+    def test_consigne_studio(self):
+        try: import doublage
+        except Exception as e: self.skipTest(f"dépendances vidéo absentes : {e}")
+        try: c = doublage.consigne("- speaker_0 : 120 Hz", "0. speaker_0 (0.0–1.0) : Salut")
+        except Exception as e: self.skipTest(f"dépendances vidéo absentes : {e}")
+        for mot in ("cabinet_medical", "stethoscope", "contre_plongee", "regard_camera", "Salut"): self.assertIn(mot, c)
+
+
+class TestStudio(unittest.TestCase):
+    """Rendu détaillé : réalisateur sans IA, garde-robe, décors dessinés, mains et visages."""
+    def setUp(self):
+        try:
+            import studio, decor_dessin, marionnette
+        except Exception as e: self.skipTest(f"dépendances vidéo absentes : {e}")
+        self.S, self.D, self.M = studio, decor_dessin, marionnette
+
+    def test_emotion_et_geste_sans_indication(self):
+        S = self.S
+        self.assertEqual(S.emotion_texte("Euh… désolé, j'ai oublié."), "gene")
+        self.assertEqual(S.emotion_texte("Non mais t'es sérieux ?", 0.3), "colere")
+        self.assertEqual(S.emotion_texte("Non mais t'es sérieux ?", 0.95), "cri")
+        self.assertEqual(S.emotion_texte("Hahaha t'es nul"), "rire")
+        self.assertEqual(S.emotion_texte("Bonjour madame."), "neutre")
+        self.assertEqual(S.geste("Stop, attends deux secondes.", "neutre"), "stop")
+        self.assertEqual(S.geste("Allô ? Oui maman.", "neutre"), "telephone")
+        for g, (bras, mains) in S.GESTES.items():
+            self.assertEqual(len(bras), 2); self.assertTrue(all(m in self.M.FORMES_MAIN for m in mains), g)
+
+    def test_lieu_et_bible(self):
+        D, S = self.D, self.S
+        self.assertEqual(D.lieu_de("a doctor's office with an examination table"), "cabinet_medical")
+        self.assertEqual(D.lieu_de("de l'eau dans un bar ? j'ai sport demain, un verre au bar"), "bar")
+        sk = {"sujet": "Prise de sang", "repliques": [{"p": "presentateur", "t": "Combien de verres par semaine ?"}, {"p": "invite", "t": "Deux-trois."}],
+              "decoupage": [{"scene": "1", "repliques": [0, 1], "decor": "doctor office"}]}
+        B = S.bible(sk, ["presentateur", "invite"])
+        self.assertEqual(B["lieux"], ["cabinet_medical"]); self.assertIn(B["moment"], S.MOMENTS)
+        self.assertEqual(B["costumes"]["presentateur"]["haut"], "blouse")          # celui qui pose les questions est le médecin
+        self.assertNotEqual(B["costumes"]["invite"]["haut"], "blouse")
+        self.assertEqual(S.bible(sk, ["presentateur", "invite"])["costumes"], B["costumes"])   # même épisode = mêmes choix
+        sk["studio"] = {"moment": "nuit", "lieux": ["bar"], "costumes": {"invite": {"haut": "costume", "c_haut": "bleu marine", "details": ["cravate", "bazooka"]}},
+                        "gags": ["Eau : 12 €"], "plans": [{"replique": 1, "plan": "tres_serre", "reaction": "regard_camera"}]}
+        B = S.bible(sk, ["presentateur", "invite"])
+        self.assertEqual((B["moment"], B["lieux"], B["gags"]), ("nuit", ["bar"], ["Eau : 12 €"]))
+        self.assertEqual(B["costumes"]["invite"]["c_haut"], S.NOMS_COULEURS["bleu marine"]); self.assertEqual(B["costumes"]["invite"]["details"], ("cravate",))
+        ph = [dict(i=0, p="presentateur", deb=0.0, fin=1.0, emo="neutre", scene=0, texte="Combien ?", chute=False, lv=[0.2]),
+              dict(i=1, p="invite", deb=2.0, fin=3.0, emo="neutre", scene=0, texte="Deux.", chute=True, lv=[0.2])]
+        S.realiser(ph, {0: ["presentateur", "invite"]}, B)
+        self.assertEqual((ph[1]["plan"], ph[1]["reaction"]), ("tres_serre", "regard_camera"))
+        self.assertTrue(ph[1]["regard_camera"])                                    # silence d'une seconde avant la réplique
+        self.assertTrue(all(q["plan"] in S.PLANS and q["mouvement"] in S.MOUVEMENTS for q in ph))
+
+    def test_memoire(self):
+        import tempfile
+        S = self.S; ancien = S.MEMOIRE; S.MEMOIRE = os.path.join(tempfile.mkdtemp(), "m.json")
+        try:
+            S.memoriser({"moment": "soir", "lieux": ["bar"], "costumes": {"invite": {"haut": "pull"}}}, [{"plan": "serre", "mouvement": "fixe"}], 12.3)
+            self.assertEqual(S.memoire_recente("moment"), "soir")
+        finally: S.MEMOIRE = ancien
+
+    def test_decors_dessines(self):
+        D = self.D
+        for k, lieu in enumerate(D.LIEUX):
+            r = D.dessiner(lieu, {"moment": ("matin", "jour", "soir", "nuit")[k % 4]}, graine=k)
+            self.assertEqual(r["fond"].shape, (1920, 1080, 3), lieu)
+            if r["avant"] is not None:
+                self.assertEqual(r["avant"].shape, (1920, 1080, 4))
+                self.assertFalse(r["avant"][800:1300, 300:800, 3].any(), lieu)     # le premier plan ne cache jamais les visages
+
+    def test_marionnettes_detaillees(self):
+        M = self.M; img = np.zeros((1920, 1080, 3), np.uint8); img[:] = 200
+        for k, haut in enumerate(M.HAUTS):
+            p = M.pose_neutre(); p.update(costume=dict(haut=haut, c_haut=(200, 80, 80), motif=M.MOTIFS[k % 4], bas=M.BAS[k % 5], c_bas=(60, 60, 90),
+                                                       chaussures=M.CHAUSSURES[k % 5], c_chaussures=(240, 240, 240), details=M.DETAILS),
+                                          reflets=True, lumiere=1, ombre=0.3, mains=True, main_forme_g=M.FORMES_MAIN[k % 5], main_forme_d="index",
+                                          yeux=M.YEUX[k % len(M.YEUX)], sourcils=M.SOURCILS[k % len(M.SOURCILS)], forme=M.BOUCHES[k % len(M.BOUCHES)],
+                                          effets=M.EFFETS, dos=(k == 3), gene=True, paleur=0.5)
+            M.dessiner(img, ("bonnet", "casquette", "noeud", "lunettes", "meche")[k % 5], p)
+        for nom in M.OBJETS: self.assertIsNotNone(M.objet(nom), nom)
+        self.assertEqual(set(ecrire.OBJETS), set(M.OBJETS))
+
+    def test_rendu_detaille_apercu(self):
+        try: import cartoon, tempfile, glob
+        except Exception as e: self.skipTest(f"dépendances vidéo absentes : {e}")
+        if not cartoon.DETAIL: self.skipTest("rendu détaillé coupé")
+        sk = {"titre_accroche": "Au bar", "repliques": [{"p": "presentateur", "t": "Je vous sers quoi ?"}, {"p": "invite", "t": "Euh… de l'eau ?"},
+                                                         {"p": "presentateur", "t": "Non mais t'es sérieux !", "chute": True}],
+              "decoupage": [{"scene": "1", "repliques": [0, 1, 2], "decor": "a bar counter"}],
+              "studio": {"plans": [{"replique": 1, "plan": "epaule"}, {"replique": 2, "plan": "contre_plongee"}], "ambiances": ["neon", "poussiere"]}}
+        auds = [np.random.default_rng(k).normal(0, 0.2, 22050).astype(np.float32) for k in range(3)]
+        d = tempfile.mkdtemp(); total = cartoon.rendre(sk, d, auds, apercu=True)
+        self.assertGreater(total, 3); self.assertEqual(len(glob.glob(d + "/*.png")), 8)
+        self.assertEqual(sk["_bible"]["lieux"], ["bar"]); self.assertEqual([q["plan"] for q in cartoon.PH][1:], ["epaule", "contre_plongee"])
+
 
 if __name__ == "__main__":
     unittest.main()

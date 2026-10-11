@@ -247,12 +247,27 @@ def main():
         try:
             import cartoon, decors as decors_mod
             if modal_ok and os.environ.get("DECORS", "1") != "0":
-                t_gpu = datetime.datetime.now(); decors = decors_mod.generer(sk.get("decoupage"), graine=len(historique) + 7 + (datetime.datetime.now().microsecond % 997 if REFAIRE_MODE == "decors" else 0))
+                lum = ""
+                if cartoon.DETAIL:                                         # même lumière que la bible de l'épisode (heure, lampes)
+                    try:
+                        import studio
+                        lum = studio.bible(sk, [r for r in dict.fromkeys(x["p"] for x in sk.get("repliques", [])) if r != "narrateur"])["style_ia"]
+                    except Exception as e: print(f"Bible du studio indisponible pour les décors IA : {e}", flush=True)
+                t_gpu = datetime.datetime.now(); decors = decors_mod.generer(sk.get("decoupage"), graine=len(historique) + 7 + (datetime.datetime.now().microsecond % 997 if REFAIRE_MODE == "decors" else 0), lumiere=lum)
                 GPU["s"] += (datetime.datetime.now() - t_gpu).total_seconds()
             duree = cartoon.rendre(sk, base + ".mp4", audios, mots=mots, decors=decors, mini=fmt == "mini")
+            import controle
+            tech_ok, rapport_tech = controle.technique(base + ".mp4", duree, cartoon.MINUTAGE[-1][1] if cartoon.MINUTAGE else None)     # contrôles gratuits (format, son, images noires)
             if not test and cartoon.MINUTAGE:                              # piste 13 : une IA regarde la vidéo finie
-                import controle
                 video_ok, rapport_video = controle.verifier(base + ".mp4", sk, cartoon.MINUTAGE)
+            if not tech_ok: video_ok = False; rapport_video = (rapport_tech + " ; " + rapport_video).strip(" ;")
+            B_ = sk.pop("_bible", None)
+            if B_:                                                         # direction artistique : fiche de l'épisode + mémoire du studio
+                import studio
+                sk["realisation"] = {k: B_[k] for k in ("moment", "lieux", "gags", "ambiances", "source")}
+                sk["realisation"]["tenues"] = {r: c.get("haut") for r, c in B_["costumes"].items()}
+                sk["realisation"]["plans"] = [f"{q.get('plan')}/{q.get('mouvement')}" for q in cartoon.PH]
+                studio.memoriser(B_, cartoon.PH, duree, rapport_video or ("ok" if video_ok else ""))
         except Exception as e:
             import traceback; traceback.print_exc()
             print(f"Moteur cartoon en échec ({e}) : rendu de secours avec le moteur JT.", flush=True); duree = None

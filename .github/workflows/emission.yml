@@ -108,6 +108,7 @@ jobs:
       SEUIL_PUBLICATION: ${{ vars.SEUIL_PUBLICATION }}
       TENDANCES: ${{ vars.TENDANCES }}
       DECORS: ${{ vars.DECORS }}
+      RENDU_DETAILLE: ${{ vars.RENDU_DETAILLE }}
       TON: ${{ vars.TON }}
       INFOS_DEMAIN: ${{ vars.INFOS_DEMAIN }}
       PERSONNALITES: ${{ vars.PERSONNALITES }}
