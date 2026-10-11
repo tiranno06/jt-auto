@@ -638,6 +638,25 @@ class TestTiktokGratuit(unittest.TestCase):
         self.assertEqual(studio.genre_voix({"doublage": {}, "_voix_genre": {"envoyee": "h"}}, "envoyee", {"genre": "f"}), "h")
 
 
+class TestBruitages(unittest.TestCase):
+    def test_catalogue_et_placement(self):
+        import bruitages as BR, sons_modernes as SM, bruitages_eleven as BE
+        for nom in BR.CATALOGUE:                                                   # chaque son existe en gratuit et en ElevenLabs
+            self.assertIn(nom, SM.BANQUE); self.assertIn(nom, BE.BANQUE)
+        self.assertNotIn("foule_rire", BE.BANQUE); self.assertNotIn("gasp", BE.BANQUE)  # jamais de rires enregistrés
+        ph = [dict(i=0, p="presentateur", texte="Ça coûte quinze euros !", emo="neutre", chute=False, deb=0.2, fin=1.8, groupes=[("Ça coûte", 0.2, 0.9), ("quinze euros !", 0.9, 1.8)]),
+              dict(i=1, p="envoyee", texte="Et tu as encore raté ton permis.", emo="neutre", chute=True, deb=2.2, fin=4.0, groupes=[]),
+              dict(i=2, p="invite", texte="Je suis gêné.", emo="gene", chute=False, deb=4.5, fin=6.0, groupes=[]),
+              dict(i=3, p="presentateur", texte="Fin.", emo="neutre", chute=True, deb=6.5, fin=7.5, groupes=[])]
+        noms = set()
+        for g in range(12):
+            l = BR.choisir(ph, [(7.6, 9.0, "x", 0)], graine=g, duree=10)
+            self.assertLessEqual(len(l), 4); noms |= {n for n, _, _ in l}
+            self.assertTrue(all(a[0] != b[0] for a, b in zip(l, l[1:])))            # jamais deux fois le même d'affilée
+        self.assertTrue(noms & set(BR.CHUTES)); self.assertTrue(noms & {"criquets", "os_craque"})
+        self.assertEqual(BR.choisir(ph, (), 0, {0: "boing"})[0][0], "boing")        # choix de Claude respecté
+
+
 class TestModeEco(unittest.TestCase):
     def test_mode_eco(self):
         import reseau

@@ -20,12 +20,13 @@ import bisect, math, os, re, subprocess, sys, tempfile, wave
 import numpy as np, cv2
 from PIL import Image, ImageDraw, ImageFont
 ICI = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, ICI)
-import marionnette as M, sons_modernes as SM, marque, studio, decor_dessin as DD, humain as HU
+import marionnette as M, sons_modernes as SM, bruitages as BR, marque, studio, decor_dessin as DD, humain as HU
 from jt import minutage, carton, son, vers_mix, enveloppe, poser, pop, W, H, FPS, SR, SRM, FB
 
 CAP_Y = 1700
 MINUTAGE = []                                                              # (début, fin, texte, qui) de la dernière vidéo : contrôle qualité
 PH = []                                                                    # répliques de la dernière vidéo avec leur plan (mémoire du studio)
+BRUITAGES = []                                                             # (nom, instant, gain) des bruitages de la dernière vidéo
 COUVERTURE = None                                                          # instant (s) choisi pour l'image de couverture TikTok
 COUVERTURE_MS = [2500]                                                     # instant de l'image de couverture (millisecondes)
 DETAIL = (os.environ.get("RENDU_DETAILLE") or "1") != "0"                 # réglage de la régie : rendu détaillé (studio) ou simple
@@ -962,8 +963,14 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         if tr[2] == "carton": ajoute("pop", tr[0] + 0.05, 0.7)
     if mini:
         for k in TITRES: ajoute("pop", min(z2["deb"] for z2 in ph if z2["scene"] == k) - 0.2, 0.6)
-    for j, q in enumerate([] if DOUB else ph[:-1]):                       # doublage : la bande son d'origine a déjà ses effets
-        if q["chute"]: ajoute("boom_leger", q["fin"] + 0.05, 0.4)          # vanne en route : impact léger (pas de rires enregistrés)
+    if not DOUB:                                                           # doublage : la bande son d'origine a déjà ses effets
+        # bruitages « tendance » (vine boom, dun dun dun, klaxon, criquets, caisse…) : catalogue moteur/bruitages.py
+        imposes = {}
+        for b_ in ((sk.get("studio") or {}).get("bruitages") or []) if isinstance(sk.get("studio"), dict) else []:
+            try: imposes[int(b_.get("replique"))] = str(b_.get("son"))
+            except (AttributeError, TypeError, ValueError): pass
+        BRUITAGES[:] = BR.choisir(ph, SILENCES if B else (), (B or {}).get("graine", len(sk.get("sujet", ""))), imposes, total)
+        for nom, t_, g in BRUITAGES: ajoute(nom, t_, g)
     if not DOUB:
         d_m = len(SM.son("montee")) / SRM
         ajoute("montee", ph[-1]["deb"] - d_m, 0.5)                        # tension juste avant la chute finale

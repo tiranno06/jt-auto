@@ -508,7 +508,8 @@ CADENCES = {"rapide": 0.72, "normal": 1.0, "pose": 1.35}
 def consigne_studio():
     """Bloc « studio » des consignes de Claude (doublage TikTok et sketchs écrits) : tout ce que le moteur sait dessiner et monter.
     Les listes viennent du code : chaque nouveauté (tenue, coiffure, lieu, plan…) y apparaît d'elle-même."""
-    import decor_dessin as DD, humain as H_
+    import decor_dessin as DD, humain as H_, bruitages as BR_
+    BRUITAGES_TENDANCE = list(BR_.CATALOGUE)
     L = ", ".join
     return f"""- "studio" : la direction artistique de la vidéo. Le moteur dessine tout lui-même dans le style « toons » des chaînes TikTok :
   personnages ADULTES à grosse tête ronde blanche posée sur le col, yeux en ovales noirs, épaules carrées, trait noir épais, avec le
@@ -537,7 +538,11 @@ def consigne_studio():
   {{"debut": fraction de la réplique entre 0 et 1, "plan": …, "cible": rôle filmé (celui qui parle ou celui qui écoute),
   "mouvement": … ou vertige, "passage": coupe, glisse, file ou zoom}}, …]}} — alterne serré / large, montre les réactions ;
   "cine" (facultatif) = effets de l'épisode, vrai ou faux : focus (mise au point sur celui qui parle), vertige, tiers (règle des
-  tiers), etalonnage (couleur selon l'émotion), profondeur (premier plan flou), grain, reflets, son (ambiance, musique)."""
+  tiers), etalonnage (couleur selon l'émotion), profondeur (premier plan flou), grain, reflets, son (ambiance, musique) ;
+  "bruitages" (facultatif) = bruitages « tendance » des vidéos d'humour TikTok, au plus un par réplique et pas plus d'un toutes les
+  3 secondes : [{{"replique": n, "son": …}}] avec son parmi {L(BRUITAGES_TENDANCE)} (vine_boom/dun_dun : vanne ou révélation,
+  klaxon_clown : quelqu'un se ridiculise, sifflet_chute : échec, criquets/os_craque : blanc gênant, violon_triste : fausse tristesse,
+  caisse : argent, clavier/glitch : ordinateur ou bug…) ; JAMAIS de rires enregistrés."""
 
 # ------------------------------------------------------------------ découpage : plusieurs plans par réplique, calés sur le son
 SERRES = ("serre", "tres_serre", "epaule", "plongee", "contre_plongee")
