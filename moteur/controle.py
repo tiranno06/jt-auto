@@ -19,6 +19,9 @@ Vérifie chaque image : sous-titre différent du texte attendu ou avec une faute
 personnage coupé de façon gênante ou absent alors qu'il parle, décor incohérent avec la scène, image noire, vide ou cassée.
 Ne signale pas le style volontairement simple (dessin plat, personnages à grosse tête ronde), ni les textes humoristiques écrits dans le décor (affiches, enseignes, tableaux : ce sont des gags voulus),
 ni le flou volontaire de l'arrière-plan ou d'un personnage de dos au premier plan, ni les sous-titres qui n'affichent qu'une partie de la phrase (ils défilent par groupes de mots).
+Le montage est volontairement dynamique : pendant qu'un personnage parle, la caméra peut montrer en gros plan CELUI QUI ÉCOUTE (plan de réaction),
+un plan très serré peut couper le haut de la tête ou les épaules, des plans larges, plongées et contre-plongées alternent : ne le signale pas.
+Une voix off (narrateur, voix d'un appareil…) s'affiche dans une bulle de texte sans personnage qui parle ; la vidéo peut commencer directement par la scène, sans titre.
 Rends ta réponse avec l'outil controle : "defauts" = liste (image n°, problème, gravité « grave » ou « mineur »), "verdict" = « ok » ou « a_corriger »."""
 OUTIL = {"name": "controle", "description": "Défauts visuels relevés.",
          "input_schema": {"type": "object", "properties": {

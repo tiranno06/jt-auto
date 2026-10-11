@@ -17,10 +17,15 @@ AA = cv2.LINE_AA
 PEAUX = [(255, 226, 200), (246, 205, 172), (234, 186, 146), (214, 160, 118), (176, 118, 82), (130, 86, 58), (96, 64, 46)]
 CHEVEUX = [(30, 24, 22), (62, 42, 30), (104, 70, 44), (150, 100, 58), (196, 150, 90), (228, 196, 130), (170, 70, 40)]
 IRIS = [(80, 50, 30), (110, 75, 45), (60, 110, 150), (80, 130, 90), (120, 120, 110)]
-COIFFURES_H = ("court", "raie", "rase", "boucles", "chauve", "mi_long", "queue", "banane", "herisse", "afro", "degarni")
-COIFFURES_F = ("long", "carre", "queue", "chignon", "boucles", "mi_long", "court", "ondule", "frange", "afro", "tresses")
-P_H = [0.18, 0.15, 0.1, 0.07, 0.06, 0.08, 0.03, 0.1, 0.07, 0.06, 0.1]
-P_F = [0.14, 0.1, 0.1, 0.1, 0.07, 0.05, 0.04, 0.16, 0.12, 0.06, 0.06]
+COIFFURES_H = ("court", "raie", "rase", "boucles", "chauve", "banane", "herisse", "afro", "degarni", "court_texture")
+COIFFURES_F = ("long", "carre", "queue", "chignon", "boucles", "mi_long", "ondule", "frange", "afro", "tresses")
+P_H = [0.16, 0.16, 0.1, 0.07, 0.06, 0.11, 0.07, 0.06, 0.1, 0.11]
+P_F = [0.15, 0.11, 0.1, 0.1, 0.07, 0.05, 0.17, 0.13, 0.06, 0.06]
+# coiffures cohérentes avec le genre (donné par la voix) : une coiffure imposée qui ne va pas est remplacée par la plus proche
+POUR_H = {"long": "raie", "carre": "raie", "mi_long": "raie", "queue": "court_texture", "chignon": "court_texture", "ondule": "banane",
+          "frange": "raie", "tresses": "court_texture"}
+POUR_F = {"court": "carre", "raie": "frange", "rase": "carre", "banane": "frange", "herisse": "ondule", "degarni": "chignon",
+          "chauve": "chignon", "court_texture": "carre", "meches": "carre", "nuque": "carre", "couronne": "chignon"}
 
 def _hex(c): return tuple(int(v) for v in c)
 def _melange(a, b, k): return tuple(int(x + (y - x) * k) for x, y in zip(a, b))
@@ -34,6 +39,7 @@ def creer(graine, genre=None, age=None, cheveux=None, c_cheveux=None, corpulence
     a = int(age) if age else int(rng.choice([24, 28, 32, 36, 42, 48, 55, 63, 70], p=[0.13, 0.15, 0.15, 0.14, 0.13, 0.11, 0.09, 0.06, 0.04]))
     style = cheveux or (rng.choice(COIFFURES_H, p=P_H) if g == "h" else rng.choice(COIFFURES_F, p=P_F))
     if a > 55 and g == "h" and not cheveux and rng.random() < 0.4: style = "chauve"
+    style = (POUR_H if g == "h" else POUR_F).get(str(style), style)          # jamais de coiffure qui brouille le genre
     cc = _hex(c_cheveux) if c_cheveux else CHEVEUX[int(rng.integers(len(CHEVEUX)))]
     if a >= 50 and not c_cheveux: cc = _melange(cc, (190, 190, 192), min(1.0, (a - 45) / 25))       # grisonnant
     return dict(genre=g, age=a, corpulence=float(corpulence if corpulence is not None else rng.beta(2, 3)), taille=float(rng.uniform(0.94, 1.06) * (1.04 if g == "h" else 0.97)),
@@ -41,7 +47,7 @@ def creer(graine, genre=None, age=None, cheveux=None, c_cheveux=None, corpulence
                 iris=IRIS[int(rng.integers(len(IRIS)))], yeux=float(rng.uniform(0.9, 1.12)), nez=str(rng.choice(["droit", "rond", "fort", "fin"])),
                 levres=float(rng.uniform(0.8, 1.25) * (1.12 if g == "f" else 1.0)), sourcils=float(rng.uniform(0.85, 1.3) * (1.15 if g == "h" else 0.9)),
                 cheveux=str(style), c_cheveux=cc,
-                barbe=barbe if barbe is not None else (str(rng.choice(["", "", "", "trois_jours", "courte", "moustache", "bouc", "favoris", "barbe_pleine"])) if g == "h" and a >= 20 else ""),
+                barbe="" if g == "f" else barbe if barbe is not None else (str(rng.choice(["", "", "", "trois_jours", "courte", "moustache", "bouc", "favoris", "barbe_pleine"])) if g == "h" and a >= 20 else ""),
                 lunettes=lunettes if lunettes is not None else (str(rng.choice(["rondes", "rectangle"])) if rng.random() < (0.18 + 0.006 * max(0, a - 35)) else ""),
                 maquillage=bool(g == "f" and rng.random() < 0.6))
 

@@ -39,7 +39,11 @@ def phrase(texte, fin, v, tmp, graine):
     lent = v.get("vitesse", 1.0) * (1.06 if fin == "?" else 0.95 if fin == "!" else 1.0) * r.uniform(0.97, 1.03)
     expr = v.get("expr", 0.7)
     brut = f"{tmp}.brut.wav"
-    subprocess.run([PIPER, "-m", MODELE, "-f", brut, "--length_scale", f"{lent:.3f}", "--noise_scale", f"{0.55 + 0.35 * expr:.3f}",
+    modele = os.path.join(TTS, "voix", v["modele"]) if v.get("modele") else MODELE   # une voix gratuite différente par personnage
+    if not os.path.exists(modele):                                         # voix absente : voix principale, retravaillée
+        modele = MODELE; v = dict(v, pitch=v.get("pitch_secours", v.get("pitch", 1.0)), formant=v.get("formant_secours", v.get("formant", 1.0)))
+    spk = ["--speaker", str(v["speaker"])] if modele != MODELE and v.get("speaker") is not None else []
+    subprocess.run([PIPER, "-m", modele, *spk, "-f", brut, "--length_scale", f"{lent:.3f}", "--noise_scale", f"{0.55 + 0.35 * expr:.3f}",
                     "--noise_w", f"{0.7 + 0.35 * expr:.3f}", "--sentence_silence", "0"], input=texte.encode(), capture_output=True, check=True)
     _, sr = _lire(brut)
     formant = v.get("formant", 1.0)

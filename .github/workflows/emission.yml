@@ -156,7 +156,7 @@ jobs:
         uses: actions/cache@v6
         with:
           path: outils
-          key: piper-fr-siwis-v1
+          key: piper-fr-4voix-v2
 
       - name: Télécharger Piper
         if: steps.cache-piper.outputs.cache-hit != 'true'
@@ -164,6 +164,9 @@ jobs:
           mkdir -p outils/voix
           curl -sSL https://github.com/rhasspy/piper/releases/download/2023.11.14-2/piper_linux_x86_64.tar.gz | tar xz -C outils
           curl -sSL https://github.com/rhasspy/piper/releases/download/v0.0.2/voice-fr-siwis-medium.tar.gz | tar xz -C outils/voix
+          for v in tom/medium/fr_FR-tom-medium gilles/low/fr_FR-gilles-low upmc/medium/fr_FR-upmc-medium; do   # une voix gratuite par personnage
+            for e in onnx onnx.json; do curl -sSL -o "outils/voix/$(basename $v).$e" "https://huggingface.co/rhasspy/piper-voices/resolve/v1.0.0/fr/fr_FR/$v.$e" || true; done
+          done
 
       - name: Bibliothèques Python
         run: pip install -r requirements.txt

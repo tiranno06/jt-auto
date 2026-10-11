@@ -13,10 +13,12 @@ FB, FM = os.path.join(POL, "Poppins-Bold.ttf"), os.path.join(POL, "Poppins-Mediu
 NOM = os.environ.get("NOM_EMISSION") or "L'INFO EN CAOUTCHOUC"
 HEAD_Y, LOWER_Y, CAP_Y, TICK_Y = 232, 1075, 1335, 1438
 # voix de secours (Piper) : hauteur / timbre / débit par rôle
-VOIX = {"presentateur": dict(pitch=0.86, formant=0.92, vitesse=1.1, expr=0.5),
+# voix gratuites Piper : une voix différente par personnage (Tom, Pierre, Siwis, Gilles) ; si le fichier manque, la voix Siwis
+# retravaillée (pitch / formant) prend le relais
+VOIX = {"presentateur": dict(pitch=0.97, formant=1.0, vitesse=1.08, expr=0.55, modele="fr_FR-tom-medium.onnx", pitch_secours=0.86, formant_secours=0.92),
         "envoyee":      dict(pitch=1.04, formant=1.03, vitesse=1.13, expr=0.65),
-        "invite":       dict(pitch=0.80, formant=0.89, vitesse=1.06, expr=0.55),
-        "narrateur":    dict(pitch=0.95, formant=0.98, vitesse=1.08, expr=0.6)}          # voix off des sketchs animés
+        "invite":       dict(pitch=1.0, formant=1.0, vitesse=1.05, expr=0.6, modele="fr_FR-upmc-medium.onnx", speaker=1, pitch_secours=0.80, formant_secours=0.89),
+        "narrateur":    dict(pitch=1.0, formant=1.0, vitesse=1.06, expr=0.6, modele="fr_FR-gilles-low.onnx", pitch_secours=0.95, formant_secours=0.98)}          # voix off des sketchs animés
 
 # ------------------------------------------------------------------ outils
 def poser(base, rgba, x, y):
