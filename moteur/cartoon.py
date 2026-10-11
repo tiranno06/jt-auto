@@ -16,7 +16,7 @@ vivent au fond, regard caméra sur les silences gênants, vapeur, poussière dan
 rendre(sk, sortie, audios, mots=None, decors=None, mini=False) -> durée (s)
   decors : {indice de scène: image RGB 1080x1920} (générées par Stable Diffusion XL) ; sinon décors dessinés par le robot
   (decor_dessin.py ; fond uni pastel si le rendu détaillé est coupé)."""
-import math, os, re, subprocess, sys, tempfile, wave
+import bisect, math, os, re, subprocess, sys, tempfile, wave
 import numpy as np, cv2
 from PIL import Image, ImageDraw, ImageFont
 ICI = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, ICI)
@@ -286,9 +286,11 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
                                or (j and ph[j - 1]["p"] == "narrateur")) else "serre"
     # studio : bible de l'épisode et storyboard (plans, mouvements, réactions), décors dessinés là où l'IA n'en a pas fourni
     B = studio.bible(sk, roles) if DETAIL else None
-    AVANT, INFOS = {}, {}; FICHES = None
+    AVANT, INFOS = {}, {}; FICHES = None; DECOUPE = []
     if B:
         studio.realiser(ph, places, B); sk["_bible"] = B
+        DECOUPE = studio.decouper(ph, places, B, FPS) if os.environ.get("MONTAGE", "dynamique") != "simple" else []   # plusieurs plans par réplique
+        if DECOUPE: print(f"montage : {len(DECOUPE)} plans (" + " ".join(f"{x['t0']:.1f}:{x['plan']}>{x['cible'][:3]}/{x['passage']}" for x in DECOUPE) + ")", flush=True)
         FICHES = B.get("fiches") if HUMAINS else None
         for sc_ in places:
             if sc_ in decors: continue
@@ -628,17 +630,53 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         v = u * u if u < 1 else 1 - 0.12 * math.exp(-(u - 1) * 6) * abs(math.sin((u - 1) * 14))   # petit rebond
         return sens * 22 * min(1, v), min(1, v)
 
+    T0_DECOUPE = [x["t0"] for x in DECOUPE]
+
+    def plan_a(tm):
+        k = bisect.bisect_right(T0_DECOUPE, tm) - 1
+        return (k, DECOUPE[k]) if 0 <= k < len(DECOUPE) and tm < DECOUPE[k]["t1"] + 0.5 else (None, None)
+
+    def cadre_plan(x, tm):
+        """Cadre d'un plan du découpage à l'instant tm, avec son mouvement de caméra (dosé par l'énergie de la voix)."""
+        q_ = ph[x["j"]]; z, cx, cy = cadre(dict(q_, p=x["cible"], plan=x["plan"]))
+        u = min(1.3, max(-0.2, (tm - x["t0"]) / max(0.4, x["t1"] - x["t0"]))); f_ = x["force"]; mv = x["mouvement"]
+        if mv == "avance": z *= 1 + 0.09 * f_ * _ease(u)
+        elif mv == "recul": z *= 1 + 0.09 * f_ * (1 - _ease(u))
+        elif mv == "travelling": cx += 70 * f_ * (u - 0.5) / z
+        elif mv == "zoom_choc": z *= 1 + 0.14 * f_ * (1 - math.exp(-max(0.0, tm - x["t0"]) * 10))
+        elif mv == "epaule": cx += 6 * f_ * math.sin(tm * 1.7) + 4 * math.sin(tm * 3.3); cy += 5 * f_ * math.sin(tm * 2.1)
+        else: z *= 1 + 0.005 * (tm - x["t0"])
+        return z, cx, cy
+
+    PASSAGE = {"glisse": 0.38, "zoom": 0.2, "file": 0.24, "coupe": 0.0}
+
     def vue(tm):
         q = actif(tm); sc = q["scene"]
         fond = decors.get(sc)
         if fond is None: fond = decors[sc] = decor_uni(sc)
-        # caméra : glisse en douceur d'un plan au suivant dans la même scène (pas de coupe sèche)
-        z, cx, cy = cadre(q)
-        j = ph.index(q)
-        if j and ph[j - 1]["scene"] == sc:
-            z0, cx0, cy0 = cadre(ph[j - 1]); u = _ease((tm - (q["deb"] - 0.3)) / 0.45)
-            z, cx, cy = z0 + (z - z0) * u, cx0 + (cx - cx0) * u, cy0 + (cy - cy0) * u
-        u0 = min(1, (tm - max(q["deb"] - 0.25, 0)) / 0.3); z *= 1 + 0.04 * (1 - u0) ** 2 + 0.006 * (tm - q["deb"])   # punch-in puis lente dérive
+        k_sh, sh = plan_a(tm) if DECOUPE else (None, None)
+        if sh is not None and sh["scene"] != sc: sh = None
+        flou_h = 0.0
+        if sh is not None:                                                 # montage dynamique : le plan du découpage et son passage
+            z, cx, cy = cadre_plan(sh, tm)
+            pr = DECOUPE[k_sh - 1] if k_sh and DECOUPE[k_sh - 1]["scene"] == sc else None
+            d_p = PASSAGE.get(sh["passage"], 0.0); u_p = (tm - sh["t0"]) / d_p if d_p else 1.0
+            if pr is not None and u_p < 1:
+                z0, cx0, cy0 = cadre_plan(pr, tm); e = _ease(u_p) if sh["passage"] != "file" else 0.5 - 0.5 * math.cos(math.pi * u_p)
+                z, cx, cy = z0 + (z - z0) * e, cx0 + (cx - cx0) * e, cy0 + (cy - cy0) * e
+                if sh["passage"] == "file": flou_h = math.sin(math.pi * u_p) * min(1.0, abs(cx - cx0) / 200 + 0.4)
+                elif sh["passage"] == "zoom": flou_h = 0.35 * math.sin(math.pi * u_p)
+            elif sh["passage"] == "coupe" and pr is not None:              # coupe franche : petit punch-in pour garder l'élan
+                u0 = min(1.0, (tm - sh["t0"]) / 0.25); z *= 1 + 0.035 * (1 - u0) ** 2
+        else:
+            # caméra : glisse en douceur d'un plan au suivant dans la même scène (pas de coupe sèche)
+            z, cx, cy = cadre(q)
+            j = ph.index(q)
+            if j and ph[j - 1]["scene"] == sc:
+                z0, cx0, cy0 = cadre(ph[j - 1]); u = _ease((tm - (q["deb"] - 0.3)) / 0.45)
+                z, cx, cy = z0 + (z - z0) * u, cx0 + (cx - cx0) * u, cy0 + (cy - cy0) * u
+            u0 = min(1, (tm - max(q["deb"] - 0.25, 0)) / 0.3); z *= 1 + 0.04 * (1 - u0) ** 2 + 0.006 * (tm - q["deb"])   # punch-in puis lente dérive
+        plan_courant = sh["plan"] if sh is not None else q.get("plan")
         if q is ph[-1]:                                                    # chute finale : lent zoom dramatique pendant toute la réplique
             z *= 1 + 0.16 * _ease((tm - q["deb"]) / max(0.5, q["fin"] - q["deb"]))
             if tm > q["fin"]: z *= 1 + 0.08 * _ease((tm - q["fin"]) / 0.12)                            # punch final
@@ -646,13 +684,13 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
                 u_l = _ease((tm - q["fin"] - 0.2) / 0.35); z = z + (1.0 - z) * u_l; cx = cx + (W / 2 - cx) * u_l; cy = cy + (H / 2 - cy) * u_l
         elif q["chute"] and tm > q["fin"] - 0.6: z *= 1 + 0.12 * _ease((tm - q["fin"] + 0.6) / 0.2)
         dans_q = q["deb"] - 0.3 <= tm <= q["fin"] + 0.3
-        if B and dans_q and q is not ph[-1]:                               # mouvement de caméra prévu par le storyboard
+        if B and dans_q and q is not ph[-1] and sh is None:                # mouvement de caméra prévu par le storyboard
             u_q = (tm - q["deb"]) / max(0.4, q["fin"] - q["deb"]); mv = q.get("mouvement")
             if mv == "avance": z *= 1 + 0.10 * _ease(u_q)
             elif mv == "recul": z *= 1.10 - 0.10 * _ease(u_q)
             elif mv == "travelling": cx += 80 * (min(1.2, max(-0.2, u_q)) - 0.5) / z
             elif mv == "zoom_choc": z *= 1 + 0.16 * (1 - math.exp(-max(0.0, tm - q["deb"]) * 10))
-            if mv == "epaule" or q.get("plan") == "epaule":                # caméra tenue à l'épaule : léger flottement
+            if mv == "epaule" or plan_courant == "epaule":                 # caméra tenue à l'épaule : léger flottement
                 cx += 5 * math.sin(tm * 1.7) + 3 * math.sin(tm * 3.3); cy += 4 * math.sin(tm * 2.1)
         zr, cible = reaction(tm)
         if cible and zr["scene"] == sc and len(places[sc]) > 1 and zr is not ph[-1]:   # coupe sèche sur la réaction
@@ -687,7 +725,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             R_ = cv2.getRotationMatrix2D((p["x"], p["y"]), -ang, 1.0)
             calque = cv2.warpAffine(calque, R_, (W, H), flags=cv2.INTER_LINEAR, borderValue=(1, 2, 3))
             m_ = (np.abs(calque.astype(np.int16) - (1, 2, 3)).sum(2) > 9)[..., None]; img[:] = np.where(m_, calque, img)
-        if B and q.get("plan") == "epaule" and dans_q and ecoutant(q):        # l'autre, de dos, flou, en amorce au premier plan
+        if B and plan_courant == "epaule" and dans_q and ecoutant(q) and (sh is None or sh["cible"] == q["p"]):   # l'autre, de dos, flou, en amorce
             ec = ecoutant(q); sens = -1 if position(sc, ec)[0] < position(sc, q["p"])[0] else 1
             y0_, x0_, x1_ = 1060, (0 if sens < 0 else W // 4), (W * 3 // 4 if sens < 0 else W)
             sub = np.empty((H - y0_, x1_ - x0_, 3), np.uint8); sub[:] = (1, 2, 3)
@@ -708,7 +746,9 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             t0 = min(z2["deb"] for z2 in ph if z2["scene"] == sc); _pluie(img, tm, t0, sc)
         if B:
             ambiances(img, tm, sc, zb, cxb, cyb)
-            if q.get("plan") in ("plongee", "contre_plongee") and dans_q and q["p"] in places[sc]: img = keystone(img, q["plan"])
+            if plan_courant in ("plongee", "contre_plongee") and dans_q and q["p"] in places[sc]: img = keystone(img, plan_courant)
+            if flou_h > 0.05:                                              # passage filé / zoom : flou de mouvement
+                k_ = int(5 + 120 * flou_h) | 1; img = cv2.blur(img, (k_, 1 if sh["passage"] == "file" else k_ // 3 | 1))
         if B: img = cv2.multiply(img, GRADE, scale=1 / 255)                 # étalonnage de l'heure + vignettage (avant les textes)
         fr = img.astype(np.float32)
         if q["p"] == "narrateur" and tm <= q["fin"] + 0.3:                 # voix off d'ouverture : le titre en grand au centre

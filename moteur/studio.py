@@ -173,7 +173,7 @@ THEMES = [
         chapeau="casque_chantier", un_seul=True)),
     (r"\b(chef cuisinier|cuisinier|top chef|p[âa]tissier|boulanger)", dict(haut="tablier", c_haut=(250, 250, 250), c_tablier=(250, 250, 250), bas="pantalon", c_bas=(50, 50, 55),
         chaussures="ville", chapeau="toque", un_seul=True)),
-    (r"\b(plage|vacances|camping|tropiques|hawa[iï]|cocktail)", dict(haut="hawai", c_haut=(60, 170, 200), motif="fleurs", c_motif=(250, 120, 140), bas="short",
+    (r"\b(plage|vacances|camping|tropiques|hawa[iï]|bronzer)", dict(haut="hawai", c_haut=(60, 170, 200), motif="fleurs", c_motif=(250, 120, 140), bas="short",
         c_bas=(230, 220, 190), chaussures="chaussons", chapeau="bob", c_chapeau=(240, 230, 200))),
     (r"\b(prince|princesse|ch[âa]teau|couronn)", dict(chapeau="couronne", un_seul=True)),
 ]
@@ -458,6 +458,82 @@ def realiser(ph, places, B):
         q["plan"], q["mouvement"], q["reaction"] = plan, mouv, reaction
         q["regard_camera"] = bool(j in silences or (a.get("regard_camera") is True))
     return ph
+
+# ------------------------------------------------------------------ découpage : plusieurs plans par réplique, calés sur le son
+SERRES = ("serre", "tres_serre", "epaule", "plongee", "contre_plongee")
+LARGES = ("large", "moyen")
+DUREE_PLAN = {"cri": 0.8, "colere": 0.9, "panique": 0.8, "choc": 0.95, "rire": 1.1, "joie": 1.2, "sceptique": 1.4,
+              "pleurs": 2.4, "soupir": 2.2, "triste": 2.4, "fatigue": 2.4, "gene": 1.7}
+
+def _coupe_sur_le_son(lv, fps, t_deb, t_ideal, marge=0.28):
+    """Instant de coupe proche de t_ideal : de préférence dans un creux de la voix (entre deux mots), sinon sur une attaque (un mot appuyé)."""
+    k0 = int((t_ideal - marge - t_deb) * fps); k1 = int((t_ideal + marge - t_deb) * fps)
+    k0, k1 = max(1, k0), min(len(lv) - 2, k1)
+    if k1 <= k0: return t_ideal
+    seg = np.asarray(lv[k0:k1], np.float32); i = int(np.argmin(seg))
+    if seg[i] < 0.25: return t_deb + (k0 + i) / fps                       # une respiration, un blanc entre deux mots
+    d = np.diff(np.asarray(lv[k0 - 1:k1], np.float32)); i = int(np.argmax(d))
+    return t_deb + (k0 + i) / fps                                          # sinon : on coupe sur l'attaque d'un mot
+
+def decouper(ph, places, B, fps=30):
+    """Montage dynamique : chaque réplique est découpée en plusieurs plans selon son énergie et son émotion (dispute : coupes rapides,
+    émotion : plans longs), en alternant plans serrés et plans larges, celui qui parle et celui qui écoute, avec un mouvement de
+    caméra par plan et un « passage » d'un plan à l'autre (coupe franche, glissé, filé, zoom). Les coupes tombent entre deux mots
+    ou sur un mot appuyé. Renvoie la liste des plans : dict(t0, t1, scene, cible, plan, mouvement, force, passage, i)."""
+    ry_ = B.get("rythme") or {}
+    ref = float(ry_.get("duree_plan") or 2.0)                              # durée moyenne des plans de la vidéo d'origine
+    k_ref = float(np.clip(ref / 2.0, 0.6, 1.4))
+    plans, prec = [], None
+    for j, q in enumerate(ph):
+        sc = q["scene"]; roles = places.get(sc, []); autres = [r for r in roles if r != q["p"]]
+        t0 = q["deb"] - (0.08 if j and ph[j - 1]["scene"] == sc else 0.0)     # on coupe un poil AVANT que la voix démarre : plus fluide
+        t1 = ph[j + 1]["deb"] - 0.08 if j + 1 < len(ph) and ph[j + 1]["scene"] == sc else max(q["fin"], t0 + 0.3)
+        if j + 1 < len(ph) and ph[j + 1]["scene"] != sc: t1 = q["fin"] + 0.05
+        lv = np.asarray(q.get("lv") if q.get("lv") is not None else [0.5], np.float32)
+        energie = float(np.mean(lv)) if len(lv) else 0.4
+        d_cible = DUREE_PLAN.get(q["emo"], 1.35) * (1.2 - 0.45 * min(1.0, energie)) * k_ref
+        if q.get("chute") or q["p"] == "narrateur" or j == len(ph) - 1: d_cible = 99   # la chute se joue en un seul plan
+        n = max(1 if (t1 - t0) < 1.6 or d_cible > 50 else 2, int(round((t1 - t0) / max(0.7, d_cible))))
+        coupes = [t0] + [_coupe_sur_le_son(lv, fps, q["deb"], t0 + (t1 - t0) * k / n) for k in range(1, n)] + [t1]
+        coupes = sorted(set(round(c, 3) for c in coupes))
+        for k in range(len(coupes) - 1):
+            a_, b_ = coupes[k], coupes[k + 1]
+            if b_ - a_ < 0.45 and plans and k: plans[-1]["t1"] = b_; continue   # jamais de plan trop court
+            h = _h(B.get("graine", 0), j, k)
+            if k == 0: cible, plan = q["p"], q.get("plan") or "serre"       # 1er plan de la réplique : celui du storyboard
+            else:
+                options = []
+                if autres and q["p"] != "narrateur": options += [("ecoute", "serre"), ("ecoute", "tres_serre")]   # la réaction de celui qui écoute
+                if len(roles) >= 2: options += [("parle", "moyen"), ("parle", "large"), ("parle", "epaule")]
+                options += [("parle", "tres_serre"), ("parle", "serre")]
+                if q["emo"] in ("cri", "colere"): options += [("parle", "contre_plongee")] * 2
+                if q["emo"] in ("pleurs", "triste", "gene", "soupir"): options += [("parle", "plongee")]
+                serre_avant = prec and prec["plan"] in SERRES
+                bons = [o for o in options if (o[1] in LARGES) == bool(serre_avant) or o[0] == "ecoute"] or options   # on alterne serré / large
+                bons = [o for o in bons if not prec or (o[1], (q["p"] if o[0] == "parle" else autres[0] if autres else q["p"])) != (prec["plan"], prec["cible"])] or bons
+                o = bons[h % len(bons)]
+                cible, plan = (q["p"] if o[0] == "parle" or not autres else autres[h % len(autres)]), o[1]
+            if plan == "epaule" and len(roles) < 2: plan = "serre"
+            if prec and prec["scene"] == sc and prec["cible"] == cible and prec["plan"] == plan:   # pas deux fois le même cadre
+                plan = "moyen" if plan in SERRES and len(roles) >= 2 else ("tres_serre" if plan != "tres_serre" else "serre")
+            # mouvement du plan, selon l'énergie de la voix et l'émotion
+            if q["emo"] in ("cri", "colere", "panique"): mouv = ("zoom_choc" if k == 0 else "epaule")
+            elif q["emo"] in ("pleurs", "triste", "soupir", "gene"): mouv = "avance"
+            elif plan in LARGES: mouv = ("travelling", "avance", "recul")[h % 3]
+            else: mouv = ("avance", "travelling", "fixe", "avance", "recul")[h % 5]
+            if k == 0 and q.get("mouvement") in MOUVEMENTS and q.get("mouvement") != "fixe": mouv = q["mouvement"]
+            force = float(np.clip(0.6 + 0.8 * energie, 0.5, 1.4))
+            # passage depuis le plan précédent
+            if not prec or prec["scene"] != sc: passage = "coupe"
+            elif prec["cible"] == cible and (prec["plan"] in LARGES) != (plan in LARGES): passage = "zoom" if energie > 0.55 else "glisse"
+            elif prec["cible"] != cible and q["emo"] in ("cri", "colere", "panique", "choc") and h % 2: passage = "file"
+            elif prec["cible"] != cible: passage = ("coupe", "coupe", "file", "glisse")[h % 4] if energie > 0.4 else ("coupe", "glisse")[h % 2]
+            else: passage = "glisse"
+            prec = dict(t0=a_, t1=b_, scene=sc, cible=cible, plan=plan, mouvement=mouv, force=force, passage=passage, i=q["i"], j=j)
+            plans.append(prec)
+    for k in range(1, len(plans)):                                         # pas de trou entre deux plans d'une même scène
+        if plans[k]["scene"] == plans[k - 1]["scene"]: plans[k - 1]["t1"] = plans[k]["t0"]
+    return plans
 
 # ------------------------------------------------------------------ mémoire du studio
 MEMOIRE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "episodes", "studio_memoire.json")

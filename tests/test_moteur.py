@@ -710,6 +710,21 @@ class TestHumains(unittest.TestCase):
         for l in ("administration", "hall", "caverne", "palais"):
             r = DD.dessiner(l, {"moment": "soir"}, 3); self.assertEqual(r["fond"].shape, (1920, 1080, 3))
 
+    def test_montage_dynamique(self):
+        S = self.S
+        lv = np.abs(np.sin(np.arange(150) / 6.0)).astype(np.float32)
+        ph = [dict(i=i, p=("presentateur", "invite")[i % 2], deb=i * 5.2, fin=i * 5.2 + 5.0, lv=lv, emo=("neutre", "cri", "neutre")[i], scene=0,
+                   chute=i == 2, texte="Bonjour à tous ?", plan="serre", mouvement="fixe") for i in range(3)]
+        P = S.decouper(ph, {0: ["presentateur", "invite"]}, {"graine": 3, "rythme": {}}, 30)
+        self.assertGreaterEqual(len(P), 6)                                                          # plusieurs plans par réplique
+        self.assertTrue(any(x["plan"] in S.LARGES for x in P) and any(x["plan"] in S.SERRES for x in P))
+        self.assertTrue(any(x["cible"] == "invite" and ph[x["j"]]["p"] == "presentateur" for x in P))   # plan de réaction
+        for a_, b_ in zip(P, P[1:]):
+            self.assertAlmostEqual(a_["t1"], b_["t0"], places=3); self.assertGreater(b_["t1"] - b_["t0"], 0.3)
+            self.assertNotEqual((a_["cible"], a_["plan"]), (b_["cible"], b_["plan"]))
+        cri = [x for x in P if x["j"] == 1]; calme = [x for x in P if x["j"] == 0]
+        self.assertGreaterEqual(len(cri), len(calme))                                               # la dispute coupe plus vite
+
     def test_casting(self):
         S = self.S
         sk = {"repliques": [{"p": "presentateur", "t": "Mamie, tu veux du thé ?"}, {"p": "invite", "t": "Oui mon chéri."}], "doublage": {"source": "x"},
