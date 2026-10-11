@@ -598,6 +598,24 @@ class TestImageEtBanque(unittest.TestCase):
 
 
 
+class TestVideoComplete(unittest.TestCase):
+    """Fumée : une vraie mini-vidéo fabriquée de bout en bout (rendu sur plusieurs processeurs, son, encodage)."""
+    def test_mini_video(self):
+        import shutil, subprocess
+        if not shutil.which("ffmpeg"): self.skipTest("ffmpeg absent")
+        sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "moteur"))
+        import cartoon
+        reps = [("presentateur", "Tiens, c'est pour toi !"), ("invite", "Bravo, tope là !"), ("presentateur", "Courage, ça va aller.")]
+        sk = {"titre_accroche": "Essai", "sujet": "Essai", "repliques": [{"p": p, "t": t} for p, t in reps],
+              "decoupage": [{"scene": "1", "repliques": [0, 1, 2], "decor": "an office with a desk"}]}
+        sk["repliques"][-1]["chute"] = True
+        auds = [(0.3 * np.sin(np.arange(int(22050 * 1.4)) / 22050 * 2 * np.pi * 150) * (np.sin(np.arange(int(22050 * 1.4)) / 22050 * 16) > -0.3)).astype(np.float32) for _ in reps]
+        sortie = os.path.join(tempfile.mkdtemp(), "v.mp4")
+        total = cartoon.rendre(sk, sortie, auds, mini=True)
+        self.assertGreater(total, 3); self.assertTrue(os.path.getsize(sortie) > 50000)
+        r = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "stream=codec_type", "-of", "csv=p=0", sortie], capture_output=True, text=True)
+        self.assertIn("video", r.stdout); self.assertIn("audio", r.stdout)
+
 class TestSecours(unittest.TestCase):
     """Sans crédit Claude : bascule automatique sur la réserve de sketchs déjà écrits."""
     def test_reserve(self):

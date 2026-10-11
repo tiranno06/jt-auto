@@ -16,6 +16,7 @@ Chaque jour : chaque réplique est générée, nettoyée (silences), réécouté
 la prise est refaite ; si la voix échoue encore, tout le rôle passe sur la voix remplaçante. Whisper fournit aussi
 l'instant de chaque mot pour caler les sous-titres."""
 import base64, datetime, difflib, io, json, os, re, subprocess, tempfile, unicodedata, urllib.error, urllib.request, wave
+import reseau
 import numpy as np
 import voix_piper
 
@@ -81,7 +82,7 @@ def sources():
 
 def _post(url, data, headers, timeout=60):
     req = urllib.request.Request(url, data=data, headers=headers, method="POST")
-    return urllib.request.urlopen(req, timeout=timeout).read()
+    return reseau.ouvrir(req, timeout=timeout)
 
 def google(voix, textes):
     out, cle = [], os.environ["GOOGLE_TTS_API_KEY"]
@@ -100,7 +101,7 @@ def _eleven(chemin, corps=None, binaire=False, timeout=120):
     req = urllib.request.Request(ELEVEN_API + chemin, data=json.dumps(corps).encode() if corps is not None else None,
                                  headers={"xi-api-key": os.environ["ELEVENLABS_API_KEY"], "Content-Type": "application/json"},
                                  method="POST" if corps is not None else "GET")
-    d = urllib.request.urlopen(req, timeout=timeout).read()
+    d = reseau.ouvrir(req, timeout=timeout)
     return d if binaire else json.loads(d or b"{}")
 
 CONTEXTE = {}                                                             # texte -> (réplique d'avant, réplique d'après) : intonation enchaînée

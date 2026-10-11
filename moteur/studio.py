@@ -290,6 +290,9 @@ def bible(sk, roles):
         texte_sc = " ".join(lignes_sc[:max(1, len(lignes_sc) // 2)] * 2 + lignes_sc[max(1, len(lignes_sc) // 2):])   # le début de la scène pose le lieu
         lieux.append(l or DD.lieu_de(decor_sc, "") or DD.lieu_de(texte_sc, "") or DD.lieu_de(t_low, "salon"))
     gags = [str(g)[:80] for g in (S.get("gags") or []) if str(g).strip()][:4]
+    assis = {}                                                             # qui est assis (bureau, salon, guichet…) : une chaise est dessinée avec lui
+    for k_, l_ in enumerate(lieux):
+        if l_ in LIEUX_ASSIS and len(roles) >= 2 and rng.random() < 0.55: assis[k_] = roles[int(rng.integers(len(roles)))]
     # qui mène chaque scène (le « métier » du lieu) : celui qui parle le plus de questions / le premier à parler
     costumes = {}
     for k, role in enumerate(roles):
@@ -346,7 +349,7 @@ def bible(sk, roles):
                 lumiere=lum, ombre=0.24 if moment != "nuit" else 0.32, etalonnage=ETALONNAGE[moment], heure=heure,
                 style_ia=STYLES_IA[moment], plans=S.get("plans") if isinstance(S.get("plans"), list) else [],
                 source=("auteur" if S else "robot") + ("+image" if V else ""), c_mur=c_mur, rythme=rythme, fiches=fiches,
-                cadence=S.get("cadence") if S.get("cadence") in CADENCES else None)
+                cadence=S.get("cadence") if S.get("cadence") in CADENCES else None, assis=assis)
 
 def _humain():
     import humain
@@ -460,6 +463,19 @@ def realiser(ph, places, B):
         q["plan"], q["mouvement"], q["reaction"] = plan, mouv, reaction
         q["regard_camera"] = bool(j in silences or (a.get("regard_camera") is True))
     return ph
+
+LIEUX_ASSIS = ("bureau", "salon", "restaurant", "administration", "classe", "bar", "cabinet_medical", "palais")
+# gestes à deux, déclenchés par les mots de la réplique (le personnage s'approche, sa main atteint vraiment l'autre)
+GESTES_DUO = [("tope", r"\b(tope|bravo|yes|trop bien|on l'a fait|g[ée]nial|check|bien jou[ée])\b"),
+              ("epaule", r"\b(calme-toi|t'inqui[eè]te|courage|d[ée]sol[ée]e?|mon pote|ma belle|mon grand|ça va aller|pas grave)\b"),
+              ("donne", r"\b(tiens|prends[- ]le|prends[- ]la|voil[àa] (ton|ta|tes|le|la)|cadeau pour toi)\b"),
+              ("pousse", r"\b(d[ée]gage|pousse-toi|va-t'en|sors d'ici|laisse-moi passer)\b")]
+
+def geste_duo(texte):
+    t = (texte or "").lower()
+    for nom, motif in GESTES_DUO:
+        if re.search(motif, t): return nom
+    return None
 
 # ------------------------------------------------------------------ consigne de direction artistique pour Claude (mode payant)
 CADENCES = {"rapide": 0.72, "normal": 1.0, "pose": 1.35}

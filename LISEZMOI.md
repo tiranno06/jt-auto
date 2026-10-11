@@ -130,6 +130,16 @@ Tous les outils payants sont activés par défaut (Claude pour l'écriture, la m
 ### Le mode payant profite de toutes les améliorations
 Les consignes envoyées à Claude (doublage d'une vidéo TikTok et sketchs écrits) sont générées à partir du code (`studio.consigne_studio`) : Claude connaît tous les lieux, tenues, coiffures, barbes, chapeaux, imprimés, thèmes d'époque, plans, mouvements et gestes, choisit le casting adulte (avec barbe et coiffure) et le rythme du montage (« cadence » : rapide, normal ou posé). Le moteur applique ensuite le montage dynamique, les détails et l'intonation comme en mode gratuit. Les décors IA (Stable Diffusion XL) sont demandés en style détaillé (trait noir épais, beaucoup d'objets) et gardent le premier plan dessiné (comptoir, bureau, guichet).
 
+## Vitesse et stabilité
+- **Crédits vérifiés au départ** (appel minuscule à Claude, solde ElevenLabs) : le robot part directement en payant ou en gratuit.
+- **Réessais automatiques** des coupures passagères (réseau, serveur saturé) avant de basculer sur le gratuit ; la publication n'est jamais réessayée (pas de doublon).
+- **Rendu sur les 4 processeurs** des serveurs GitHub (réglage `RENDU_PARALLELE=0` pour revenir à un seul).
+- **Fiche par vidéo** : l'historique note les outils utilisés (`outils` : Claude ok/secours, voix ElevenLabs/Chatterbox/Piper/TikTok, décors IA/dessinés), affichés en voyants sur le site.
+- **Test automatique avant chaque mise à jour** : chaque demande de fusion fabrique une vraie mini-vidéo de bout en bout.
+
+## Animation des personnages
+Élan et rebond dans les gestes, cheveux et vêtements qui suivent (mouvements secondaires), poids du corps qui change de jambe, vraie marche à l'entrée, visage tourné de trois quarts vers celui à qui on parle, personnages assis sur une chaise dans les lieux qui s'y prêtent, clignements et regard vers celui qui parle, micro-mouvements des sourcils, mains qui « battent » sur les mots appuyés, réactions juste après le mot qui frappe, gestes à deux (main sur l'épaule, « tope là », donner un objet, pousser) avec des mains qui atteignent vraiment l'autre.
+
 ## À savoir
 - **Satire et personnages fictifs** : la mention est incrustée dans chaque vidéo et dans la légende. Le robot ne nomme aucune personne réelle et s'interdit toute consigne de vote.
 - **Contenu IA** : la légende indique « Contenu généré par IA ». Si Buffer n'active pas automatiquement l'étiquette IA de TikTok, active une fois pour toutes l'option correspondante dans les réglages de ton compte TikTok si elle existe, ou passe par Upload-Post qui envoie l'étiquette officielle.

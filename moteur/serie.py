@@ -41,7 +41,7 @@ OUTIL_PLAN = {"name": "plan_saison", "description": "Titre de la série et plan 
 def planifier(format_="mini", recents=()):
     """Série d'un seul jet (bouton de la régie) : la saison entière est planifiée d'avance pour que les épisodes s'enchaînent."""
     import anthropic, ecrire
-    r = ecrire._appel(anthropic.Anthropic(), None, [{"role": "user", "content": PLAN.format(
+    r = ecrire._appel(__import__('reseau').claude(), None, [{"role": "user", "content": PLAN.format(
         n=taille(), persos=ecrire.personnalites(), recents=" ; ".join(recents)[:1200] or "(rien)",
         format="gag éclair de 15 à 22 s, une seule scène" if format_ == "mini" else "sketch long de plus d'une minute, 2 à 4 scènes")}],
         OUTIL_PLAN, max_tokens=4000)

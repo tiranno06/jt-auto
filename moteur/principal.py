@@ -109,6 +109,8 @@ def main():
     recents = [f"{h.get('titre', '')} : {h.get('accroche', '')}" for h in historique[-10:]]
     # 1. recherche : sujets candidats (articles des dernières 24 h, regroupés par sujet et classés par reprise médiatique)
     script = None; tiktok = None; DOUB = None; SECOURS = False
+    import reseau
+    CREDITS = reseau.verifier_credits()                                    # crédits vérifiés AU DÉPART : payant si possible, sinon gratuit tout de suite
     def passer_en_secours(e):                                              # Claude ne répond pas (crédit épuisé) : outils gratuits
         print(f"Claude indisponible ({str(e)[:160]}) : bascule automatique sur un sketch de secours (outils gratuits pour l'écriture).", flush=True)
         try:
@@ -133,6 +135,9 @@ def main():
         except Exception as e:
             if not secours.claude_indisponible(e): raise
             passer_en_secours(e); SECOURS = True; candidats = [([{"titre": "secours", "resume": "", "lien": "", "date": None, "source": "secours"}], "secours")]
+    elif libre and not os.environ.get("SKETCH_TEST", "").strip() and CREDITS["claude"] != "ok":   # pas de crédit Claude : réserve de sketchs
+        passer_en_secours(RuntimeError("crédit Claude épuisé ou clé absente (vérifié au départ)")); SECOURS = True
+        candidats = [([{"titre": "secours", "resume": "", "lien": "", "date": None, "source": "secours"}], "secours")]
     elif libre and not os.environ.get("SKETCH_TEST", "").strip():
         try: candidats = [(c, "idée") for c in ecrire.idees_libres(recents=[f"{h.get('titre', '')} : {h.get('accroche', '')}" for h in historique[-30:]],
                                                                     consignes=stats.pour_idees())]
@@ -297,7 +302,11 @@ def main():
     historique.append(dict(date=jour, format=fmt, titre=sk["sujet"], sources=sk["sources"], note=fiche.get("note"), decision=fiche.get("decision"),
                            accroche=accroche_hist, mots=sorted(actu._mots(" ".join(fiche.get("titres_sujet") or [t["titre"] for t in titres])))[:40],
                            empreinte=sorted(actu.empreinte(" ".join((fiche.get("titres_sujet") or []) + [sk["sujet"]] + [r["t"] for r in sk.get("repliques", [])]))), voix=moteur, gag=bool(gag), controle_video=rapport_video[:500] or ("ok" if video_ok else ""), running_gag=sk.get("running_gag", ""), duree=round(duree, 1),
-                           fichier=os.path.basename(base) + ".mp4", tag=f"emissions-{jour[:7]}", legende=legende, publie=None))
+                           fichier=os.path.basename(base) + ".mp4", tag=f"emissions-{jour[:7]}", legende=legende, publie=None,
+                           outils=dict(claude=("secours" if SECOURS else CREDITS["claude"]),
+                                       voix=("tiktok" if DOUB else "elevenlabs" if "eleven" in str(moteur).lower() else "chatterbox" if "chatterbox" in str(moteur).lower() else "piper"),
+                                       decors=("ia" if decors else "dessines"))))
+    print("Outils utilisés : " + ", ".join(f"{k} = {v}" for k, v in historique[-1]["outils"].items()), flush=True)
     json.dump(historique[-200:], open("episodes/historique.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     if THEME and not REFAIRE: historique[-1]["manuel"] = True; historique[-1]["theme"] = THEME[:300]
     if REFAIRE:

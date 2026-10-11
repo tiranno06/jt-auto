@@ -2,6 +2,7 @@
 permission « Sound Effects » requise), enregistrée dans sons_eleven/ et réutilisée à chaque vidéo (aucun crédit consommé ensuite).
 Lancer : python moteur/bruitages_eleven.py [--refaire]"""
 import json, os, sys, urllib.error, urllib.request
+import reseau
 
 RACINE = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 DOSSIER = os.path.join(RACINE, "sons_eleven")
@@ -23,7 +24,7 @@ def generer(nom, texte, duree):
     req = urllib.request.Request("https://api.elevenlabs.io/v1/sound-generation?output_format=mp3_44100_128",
                                  data=json.dumps({"text": texte, "duration_seconds": duree, "prompt_influence": 0.6}).encode(),
                                  headers={"xi-api-key": os.environ["ELEVENLABS_API_KEY"], "Content-Type": "application/json"}, method="POST")
-    return urllib.request.urlopen(req, timeout=120).read()
+    return reseau.ouvrir(req, timeout=120)
 
 def main(refaire=False):
     if not os.environ.get("ELEVENLABS_API_KEY"): print("ÉCHEC : secret ELEVENLABS_API_KEY absent."); return 1
