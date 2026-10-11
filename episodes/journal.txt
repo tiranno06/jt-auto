@@ -1,26 +1,56 @@
 Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
-Vidéo depuis TikTok : https://www.tiktok.com/@petitsdramas/video/7695069178738314529
-  son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 23.2 s, compte d'origine @petitsdramas
-[ WARN:0@2.023] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
-  image de la vidéo : 2 plans (≈ 11.75 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 0 %, large 100 % ; caméra : fixe 57 %, avance 15 %, recul 15 %, travelling 2 %, epaule 8 % ; 0 personne(s) à l'écran : aucun visage repéré ; agitation 1.0 ; lumière jour ; fond [236, 223, 220]
-  voix isolées (ElevenLabs)
-  transcription ElevenLabs : 52 mots, 3 voix, langue fra
-  7 répliques, voix : {'speaker_1': 212, 'speaker_0': 308, 'speaker_2': 223}
-  scène reconstituée : Dans une chambre en désordre transformée en coin bureau, Jojo et Lila tentent de réinitialiser un mot de passe oublié devant l'ordinateur. La voix froide du site refuse tout, les bloque 24 heures et se moque d'eux quand ils veulent supprimer le compte.
-  casting : speaker_0 → Jojo, speaker_1 → Lila, speaker_2 → voix off
-Sketch : « MOT DE PASSE OUBLIÉ », 7 répliques
-  décor 0 : Messy bedroom desk corner with pink walls big computer monitor showing
-  décor 1 : Same messy bedroom desk at daylight computer monitor showing a red 'bl
-montage : 13 plans (0.2:large>pre/coupe 1.1:serre>env/coupe 2.4:moyen>env/glisse 4.1:serre>env/glisse 5.8:serre>nar/coupe 7.3:contre_plongee>env/coupe 9.8:plongee>pre/coupe 11.0:large>pre/glisse 12.1:contre_plongee>env/coupe 13.3:tres_serre>pre/file 13.8:large>env/file 15.1:epaule>env/glisse 16.1:tres_serre>nar/coupe)
-studio : jour, lieux ['chambre', 'chambre'], tenues presentateur=capuche, envoyee=pull, 0 figurant(s), ambiances [] ; plans large/fixe moyen/avance serre/zoom_choc contre_plongee/avance plongee/recul contre_plongee/epaule tres_serre/zoom_choc
-cartoon : durée 25.6 s, 7 répliques, 2 scène(s), personnages ['presentateur', 'envoyee']
-  image 0/768
-  image 300/768
-  image 600/768
+Vidéo manuelle (idée) : « Jojo essaie de se faire rembourser un ticket de cinéma parce que le film était trop long »
+Vérité du sujet : Quand on dit qu'un film est « trop long », on veut souvent dire qu'on s'est endormi devant, et on cherche quelqu'un d'autre à qui faire payer sa propre fatigue.
+Chute proposée : Rassure-toi, Jojo : le film était pas trop long. T'as juste payé quinze balles pour une sieste.
+Gros titres soumis : 7.5/10 Jojo essaie de se faire rembourser un ticket de cinéma parce
+Sujet choisi : « Jojo essaie de se faire rembourser un ticket de cinéma parce que le film était trop long » — angle : Jojo, au guichet du cinéma, réclame le remboursement de sa place parce que le film « était trop long ». Kévin, naïf, le soutient (« trois heures, c'est du vol !
+  atelier : 15 vannes, 15 chutes ; chute retenue par le jury (6/10) : Lila : « Bonne nouvelle : ta place, quinze balles. Le pressing du voisin, soixante. »
+  3 versions écrites en parallèle : la n°2 est retenue (C'est la plus courte et la plus claire. Chaque réplique fait avancer l'histoire : la réclamation, l'ironie du radin (« p)
+  version 1 refusée : trop long : 108 mots prononcés, maximum 60. Coupe 48 mots : retire les relances, garde les vannes et la chute
+  version 2 refusée : chute hors sujet : la dernière réplique (« Bonne nouvelle : ta place, quinze balles. Le pressing du voisin, soixante. ») ne parle pas du sujet princip
+  public test : compris 2/3, rire moyen 3.7/10, scrolls : [4, -1, -1]
+    → Titre : il dit déjà « tu as dormi tout le film », donc la révélation de la réplique 4 n'en est plus une. Le mettre en suspens, par exemple «
+    → Répliques 0 à 3 : Kévin doit avoir un rôle clair. Soit il soutient Jojo jusqu'à la 3, soit il est dès le début du côté du cinéma. Aujourd'hu
+    → Réplique 3 : « J'en ai payé deux. Rendez-moi la troisième » se contredit avec le fait qu'il a dormi. Soit le supprimer, soit le remplacer pa
+  note : 65 (critique) et rire 3.7/10 → 59
+  version 3 : 59/100, 7 répliques, 65 mots
+  version 4 refusée : trop long : 85 mots prononcés, maximum 60. Coupe 25 mots : retire les relances, garde les vannes et la chute
+  public test : compris 2/3, rire moyen 4.0/10, scrolls : [2, -1, -1]
+    → Réplique 2 : réécrire la phrase pour qu'elle soit comprise du premier coup. Par exemple : « Un client qui se plaint que c'est trop long alor
+    → Réplique 0 : mettre un accroche plus forte dans les deux premières secondes, par exemple « Madame, je veux être remboursé : j'ai dormi tout 
+    → Répliques 0 et 1 : clarifier qui est qui. Jojo et Kévin doivent être présentés (« Kévin, son pote » ou un petit carton), et Lila doit être i
+  note : 73 (critique) et rire 4.0/10 → 66
+  version 5 : 66/100, 7 répliques, 70 mots
+  sujet trop faible après réécritures
+  meilleure version retenue : 66/100 (sous l'objectif de 75 : à retravailler, pas de publication automatique)
+  relecture des sous-titres : 0 correction(s)
+Moteur humoristique : 16 appels Claude, 46522 jetons lus, 52584 jetons écrits, 0 recherche(s) web
+Sketch : « FILM TROP LONG », 7 répliques
+  voix sur mesure des personnages en remplaçantes
+  dialogue ElevenLabs : paquet 1/1, 8/8 répliques découpées
+  voix 0 (narrateur, dialogue) {'sim': 0.75, 'blanc': 0.0, 'debit': 0.83} refaite seule
+  voix 1 (presentateur, dialogue) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.16} OK
+  voix 2 (invite, dialogue) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.17} OK
+  voix 3 (envoyee, dialogue) {'sim': 1.0, 'blanc': 0.58, 'debit': 1.22} OK
+  voix 4 (invite, dialogue) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.07} OK
+  voix 5 (presentateur, dialogue) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.65} OK
+  voix 6 (invite, dialogue) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.18} OK
+  voix 7 (envoyee, dialogue) {'sim': 1.0, 'blanc': 0.12, 'debit': 0.9} OK
+  voix 0 (narrateur, elevenlabs:PjAkkDaPt1wolu0EMUTN, prise 1) {'sim': 0.75, 'blanc': 0.0, 'debit': 0.87} refaite
+  voix 0 (narrateur, elevenlabs:PjAkkDaPt1wolu0EMUTN, prise 2) {'sim': 0.75, 'blanc': 0.0, 'debit': 0.91} refaite
+  voix 0 (narrateur, elevenlabs:PjAkkDaPt1wolu0EMUTN, prise 3) {'sim': 0.75, 'blanc': 0.0, 'debit': 0.88} refaite
+  voix 0 (narrateur) : meilleure prise gardée pour ne pas changer la voix du personnage
+Voix : ElevenLabs (Eleven v4)
+  décor 0 : a cinema ticket counter with a glass window and a small speaking hole,
+montage : 12 plans (0.1:contre_plongee>nar/coupe 1.8:contre_plongee>pre/file 2.8:tres_serre>env/file 4.0:serre>inv/coupe 5.0:moyen>inv/glisse 5.9:tres_serre>inv/glisse 7.1:moyen>env/glisse 11.1:serre>inv/glisse 12.6:moyen>pre/file 13.3:serre>pre/glisse 14.2:tres_serre>inv/file 17.3:serre>env/glisse)
+studio : soir, lieux ['hall'], tenues presentateur=doudoune, invite=capuche, envoyee=polo, 0 figurant(s), ambiances ['poussiere'] ; plans contre_plongee/avance contre_plongee/epaule moyen/fixe moyen/fixe serre/zoom_choc moyen/travelling tres_serre/zoom_choc serre/avance
+cartoon : durée 26.7 s, 8 répliques, 1 scène(s), personnages ['presentateur', 'invite', 'envoyee']
+  image 0/801
+  image 300/801
+  image 600/801
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Contrôle vidéo : 3 défaut(s) grave(s), 1 mineur(s) — image 1 : L'ouverture devrait afficher un titre. L'image montre à la place une scène avec le sous-titre « QUAND TU CLIQUES MOT »,  (grave); image 3 : Lila parle (« Nouveau mot de passe : Kevin un deux trois ») mais aucun sous-titre n'est affiché. Jojo est en partie coup (grave); image 6 : C'est Lila qui doit parler (« Mon ex m'a bloqué moins longtemps. Je supprime ce compte. »). L'image montre Jojo en gros  (grave); image 7 : Le carton de fin « Rassure-toi, supprimer ton compte prend un clic après » est posé sur les têtes des deux personnages e (mineur)
-Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Dépenses : {'claude_usd': 0.071, 'claude_jetons': 7888, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 11}
-OK : sortie/2026-10-11_18h27_emission.mp4 (26 s)
+Contrôle vidéo : 0 défaut(s) grave(s), 0 mineur(s)
+Qualité : 66/100 — à retravailler
+Dépenses : {'claude_usd': 1.62, 'claude_jetons': 99106, 'cache_lu': 68184, 'eleven_caracteres': 611, 'gpu_s': 30}
+OK : sortie/2026-10-11_18h40_emission.mp4 (27 s)

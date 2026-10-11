@@ -1,375 +1,292 @@
 {
- "titre": "MOT DE PASSE OUBLIÉ",
- "sujet": "MOT DE PASSE OUBLIÉ",
- "ecran": "MOT DE PASSE O",
- "invite_nom": "Hubert Rustine",
- "invite_role": "Expert (fictif)",
+ "titre": "FILM TROP LONG",
+ "sujet": "FILM TROP LONG",
+ "ecran": "TROP LONG",
+ "invite_nom": "Kévin",
+ "invite_role": "Le pote témoin (fictif)",
  "invite_look": "chauve",
- "lieu_direct": "Assemblée",
- "titre_accroche": "Quand tu cliques « mot de passe oublié »",
- "question": "Combien de fois t'as cliqué sur « mot de passe oublié » cette semaine ?",
- "running_gag": "",
- "verite": "",
+ "lieu_direct": "Guichet du cinéma",
+ "titre_accroche": "POV : tu veux être remboursé au ciné",
+ "question": "Tag le pote qui dort dès la pub 👇 Team Jojo ou team Lila ?",
+ "running_gag": "La sieste de Jojo : il paie plein tarif pour aller dormir quelque part (ciné, concert, réunion), puis il réclame d'être remboursé.",
+ "verite": "Quand on dit qu'un film est « trop long », on veut souvent dire qu'on s'est endormi devant. Et on cherche quelqu'un d'autre à qui faire payer sa propre fatigue.",
  "repliques": [
   {
-   "p": "presentateur",
-   "t": "Quand tu cliques mot de passe oublié.",
-   "_deb": 0.2,
-   "_fin": 1.8,
-   "d": "[resigned] Quand tu cliques mot de passe oublié."
-  },
-  {
-   "p": "envoyee",
-   "t": "Nouveau mot de passe : Kevin un deux trois.",
-   "_deb": 2.48,
-   "_fin": 4.74,
-   "d": "[confident] Nouveau mot de passe : Kevin un deux trois.",
-   "objet": "telephone"
-  },
-  {
    "p": "narrateur",
-   "t": "Ne peut pas être identique à l'ancien.",
-   "_deb": 5.84,
-   "_fin": 7.36,
-   "d": "[flat, robotic] Ne peut pas être identique à l'ancien."
-  },
-  {
-   "p": "envoyee",
-   "t": "Tu le connais? Donne-le.",
-   "_deb": 7.4,
-   "_fin": 8.76,
-   "d": "[outraged] Tu le connais? Donne-le."
+   "t": "POV : tu veux être remboursé au ciné",
+   "d": "[excited] Pi-o-vi : tu veux être remboursé au ciné"
   },
   {
    "p": "presentateur",
-   "t": "Il me bloque vingt-quatre heures.",
-   "_deb": 9.78,
-   "_fin": 11.34,
-   "d": "[crying] Il me bloque vingt-quatre heures.",
-   "objet": "cafe"
+   "t": "Madame, remboursez-moi. Le film était trop long.",
+   "d": "[angry] Madame, remboursez-moi. Le film était trop long.",
+   "objet": "billet"
+  },
+  {
+   "p": "invite",
+   "t": "Trois heures ! C'est du vol !",
+   "d": "[outraged] Trois heures ! C'est du vol !"
   },
   {
    "p": "envoyee",
-   "t": "Mon ex m'a bloqué moins longtemps. Je supprime ce compte.",
-   "_deb": 12.22,
-   "_fin": 15.12,
-   "d": "[furious, sarcastic] Mon ex m'a bloqué moins longtemps. Je supprime ce compte."
-  },
-  {
-   "p": "narrateur",
-   "t": "Rassure-toi, supprimer ton compte prend un clic après connexion.",
-   "_deb": 16.18,
-   "_fin": 19.66,
-   "d": "[smug, robotic] Rassure-toi, supprimer ton compte prend un clic après connexion.",
+   "t": "Un radin qui en a trop pour son argent ? Jamais vu.",
+   "d": "[sarcastic] Un radin qui en a trop pour son argent ? [laughs] Jamais vu.",
    "chute": true
+  },
+  {
+   "p": "invite",
+   "t": "Même qu'il dormait dès la pub —",
+   "d": "[proudly] Même qu'il dormait dès la pub —",
+   "chute": true
+  },
+  {
+   "p": "presentateur",
+   "t": "Kévin, ferme-la !",
+   "d": "[panicked] Kévin, ferme-la !",
+   "chevauche": true
+  },
+  {
+   "p": "invite",
+   "t": "Et il a bavé sur le voisin !",
+   "d": "[excited] Et il a bavé sur le voisin !",
+   "chute": true
+  },
+  {
+   "p": "envoyee",
+   "t": "Bonne nouvelle : ta place est remboursée, quinze balles. Pressing du voisin, soixante. Tu nous dois quarante-cinq.",
+   "d": "[deadpan] Bonne nouvelle : ta place est remboursée, quinze balles. [sarcastic] Pressing du voisin, soixante. Tu nous dois quarante-cinq.",
+   "chute": true,
+   "objet": "facture",
+   "attente": 0.7
   }
  ],
- "bandeau": [],
- "gag": null,
- "legende": "Il connaît mon ancien mot de passe mais refuse de me le donner, logique.",
+ "bandeau": [
+  "UN SPECTATEUR RÉCLAME LE REMBOURSEMENT DE SA SIESTE",
+  "LE VOISIN DU RANG F SÉCHÉ AU SÈCHE-MAINS",
+  "LE CINÉMA LANCE LA SÉANCE AVEC OREILLER : 22 EUROS"
+ ],
+ "gag": {
+  "replique": 6,
+  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. Dark cinema room lit by the screen, a round-headed white character in an orange beanie snoring with his mouth wide open, head fallen on the shoulder of a horrified neighbor whose sleeve is soaked with a huge puddle of drool, popcorn spilled everywhere, comedic, deadpan."
+ },
+ "legende": "Il voulait se faire rembourser sa place. Attends de voir la facture. Satire, personnages fictifs.",
  "hashtags": [
   "petitsdramas",
-  "motdepasse",
   "humour",
-  "relatable",
-  "informatique",
-  "dessinanime"
+  "sketch",
+  "animation",
+  "cinema",
+  "radin",
+  "pov"
  ],
- "sources": [
-  "https://www.tiktok.com/@petitsdramas/video/7695069178738314529"
- ],
+ "sources": [],
  "decoupage": [
   {
-   "scene": "1",
+   "scene": "Guichet de cinéma. Lila, caissière avec un badge, est assise derrière la vitre. Jojo tape son ticket sur le comptoir, Kévin s'indigne à côté de lui. Quand Kévin parle de la bave, un voisin à la manche trempée entre dans le champ derrière eux. Lila glisse une facture sous la vitre et Jojo se décompos",
    "repliques": [
-    0,
     1,
     2,
-    3
-   ],
-   "lieu": "",
-   "son": "",
-   "duree": 0.0,
-   "decor": "Messy bedroom desk corner with pink walls big computer monitor showing a password form, keyboard, cup of coffee on a saucer, pencil pot, red desk lamp, unmade "
-  },
-  {
-   "scene": "2",
-   "repliques": [
+    3,
     4,
     5,
-    6
+    6,
+    7
    ],
-   "lieu": "",
-   "son": "",
-   "duree": 0.0,
-   "decor": "Same messy bedroom desk at daylight computer monitor showing a red 'blocked 24h' warning, keyboard, cold cup of coffee, scattered papers, red desk lamp, unmade",
-   "titre": "Vingt essais plus tard…"
+   "lieu": "reconstitution",
+   "son": "rimshot",
+   "duree": 17.0,
+   "decor": "a cinema ticket counter with a glass window and a small speaking hole, a movie poster showing '3H07' in huge letters, a big popcorn machine",
+   "titre": "Remboursez-moi !"
   }
  ],
  "studio": {
-  "moment": "jour",
+  "moment": "soir",
   "lieux": [
-   "chambre",
-   "chambre"
+   "hall"
   ],
-  "cadence": "rapide",
-  "ambiances": [],
+  "costumes": {
+   "presentateur": {
+    "haut": "doudoune",
+    "c_haut": "kaki",
+    "motif": "uni",
+    "bas": "jogging",
+    "chaussures": "baskets",
+    "details": [
+     "barbe_courte"
+    ],
+    "chapeau": "bonnet",
+    "c_chapeau": "orange",
+    "cheveux": "court",
+    "c_cheveux": "brun"
+   },
+   "invite": {
+    "haut": "capuche",
+    "c_haut": "bleu",
+    "motif": "uni",
+    "bas": "jean",
+    "chaussures": "baskets",
+    "details": [
+     "casque_audio"
+    ],
+    "chapeau": "casquette",
+    "c_chapeau": "rouge",
+    "cheveux": "court",
+    "c_cheveux": "blond"
+   },
+   "envoyee": {
+    "haut": "polo",
+    "c_haut": "bordeaux",
+    "motif": "uni",
+    "bas": "pantalon",
+    "chaussures": "ville",
+    "details": [
+     "badge",
+     "boucles_oreilles",
+     "rouge_levres"
+    ],
+    "chapeau": "serre_tete",
+    "c_chapeau": "rose",
+    "cheveux": "queue",
+    "c_cheveux": "châtain"
+   }
+  },
   "personnages": {
    "presentateur": {
-    "genre": "f",
+    "genre": "h",
+    "age": 34,
+    "corpulence": 0.6,
+    "cheveux": "court",
+    "barbe": "barbe_courte"
+   },
+   "invite": {
+    "genre": "h",
     "age": 27,
     "corpulence": 0.3,
     "cheveux": "court"
    },
    "envoyee": {
     "genre": "f",
-    "age": 29,
-    "corpulence": 0.2,
-    "cheveux": "long"
-   }
-  },
-  "costumes": {
-   "presentateur": {
-    "haut": "capuche",
-    "c_haut": "gris",
-    "motif": "uni",
-    "bas": "jogging",
-    "chaussures": "chaussons",
-    "details": [
-     "casque_audio"
-    ],
-    "chapeau": "casquette",
-    "c_chapeau": "bleu",
-    "cheveux": "court",
-    "c_cheveux": "brun"
-   },
-   "envoyee": {
-    "haut": "pull",
-    "c_haut": "blanc",
-    "motif": "uni",
-    "bas": "jean",
-    "chaussures": "baskets",
-    "details": [
-     "boucles_oreilles",
-     "rouge_levres"
-    ],
-    "chapeau": "serre_tete",
-    "c_chapeau": "rose",
-    "cheveux": "long",
-    "c_cheveux": "châtain"
+    "age": 30,
+    "corpulence": 0.3,
+    "cheveux": "queue"
    }
   },
   "gags": [
-   "Post-it : mdp = Kevin123 (NE PAS OUBLIER)",
-   "Écran : « Réessayez dans 23 h 59 »",
-   "Affiche : Keep calm & clique sur oublié"
+   "CAISSE",
+   "DURÉE : 3H07 (SANS LA PUB)",
+   "PRESSING NON INCLUS"
   ],
-  "objets": [
-   {
-    "replique": 1,
-    "objet": "telephone"
-   },
-   {
-    "replique": 4,
-    "objet": "cafe"
-   }
-  ],
+  "cadence": "rapide",
   "plans": [
    {
     "replique": 0,
-    "plan": "large",
-    "mouvement": "fixe",
-    "geste": "desespoir",
-    "reaction": "soupir"
-   },
-   {
-    "replique": 1,
-    "plan": "moyen",
+    "plan": "contre_plongee",
     "mouvement": "avance",
-    "geste": "pouce",
+    "geste": "poing",
     "reaction": "sceptique"
    },
    {
-    "replique": 2,
-    "plan": "serre",
-    "mouvement": "zoom_choc",
+    "replique": 3,
+    "plan": "moyen",
+    "mouvement": "fixe",
+    "geste": "pointe_d",
     "reaction": "choc"
    },
    {
-    "replique": 3,
-    "plan": "contre_plongee",
-    "mouvement": "avance",
-    "geste": "pointe_d",
-    "reaction": "yeux_au_ciel"
-   },
-   {
     "replique": 4,
-    "plan": "plongee",
-    "mouvement": "recul",
-    "geste": "desespoir",
-    "reaction": "bras_croises"
+    "plan": "serre",
+    "mouvement": "zoom_choc",
+    "geste": "stop",
+    "reaction": "rire"
    },
    {
     "replique": 5,
-    "plan": "contre_plongee",
-    "mouvement": "epaule",
-    "geste": "stop",
-    "reaction": "rire"
+    "plan": "moyen",
+    "mouvement": "travelling",
+    "geste": "explique",
+    "reaction": "gene"
    },
    {
     "replique": 6,
     "plan": "tres_serre",
     "mouvement": "zoom_choc",
+    "geste": "croises",
     "reaction": "regard_camera"
    }
   ]
  },
- "doublage": {
-  "piste": "/tmp/tmpuzqecaxj/piste.wav",
-  "duree": 23.2,
-  "source": "https://www.tiktok.com/@petitsdramas/video/7695069178738314529",
-  "auteur": "petitsdramas",
-  "contexte": "Dans une chambre en désordre transformée en coin bureau, Jojo et Lila tentent de réinitialiser un mot de passe oublié devant l'ordinateur. La voix froide du site refuse tout, les bloque 24 heures et se moque d'eux quand ils veulent supprimer le compte.",
-  "evenements": [],
-  "visuel": {
-   "duree": 23.5,
-   "nb_plans": 2,
-   "duree_plan": 11.75,
-   "coupes": [
-    22.0
-   ],
-   "plans": {
-    "tres_serre": 0.0,
-    "serre": 0.0,
-    "moyen": 0.0,
-    "large": 1.0
-   },
-   "camera": {
-    "fixe": 0.578,
-    "avance": 0.156,
-    "recul": 0.156,
-    "travelling": 0.022,
-    "epaule": 0.089
-   },
-   "nb_personnes": 0,
-   "personnes": [],
-   "visages": false,
-   "sourires": 0.0,
-   "energie": 1.0,
-   "mur": [
-    236,
-    223,
-    220
-   ],
-   "palette": [
-    [
-     241,
-     232,
-     229,
-     0.343
-    ],
-    [
-     209,
-     189,
-     186,
-     0.269
-    ],
-    [
-     177,
-     145,
-     146,
-     0.217
-    ],
-    [
-     99,
-     104,
-     133,
-     0.07
-    ],
-    [
-     251,
-     197,
-     31,
-     0.058
-    ],
-    [
-     28,
-     24,
-     29,
-     0.043
-    ]
-   ],
-   "lumiere": {
-    "luminosite": 204.7,
-    "chaleur": 27.2,
-    "saturation": 44.8
-   },
-   "moment": "jour"
-  }
- },
  "fiche": {
-  "note": 0,
-  "decision": "vidéo manuelle (bande son d'une vidéo TikTok)",
+  "fil": "Au guichet du cinéma, Jojo veut se faire rembourser sa place parce que le film était « trop long ». Lila, la caissière, ne cède pas. Kévin, son pote, veut l'aider et le coule. 1. Jojo exige d'être remboursé et Kévin le soutient : « C'est du vol ! » 2. Lila se moque d'un radin qui en a trop pour son argent. 3. Pour défendre Jojo, Kévin lâche qu'il dormait dès la pub. 4. Jojo essaie de le faire taire, mais Kévin ajoute qu'il a bavé sur son voisin, qui arrive derrière eux, la manche trempée. 5. Lila rembourse la place mais facture le pressing du voisin : au final, c'est Jojo qui doit de l'argent au cinéma.",
+  "concept": "« Remboursez-moi ! » : un radin veut faire payer sa sieste au cinéma. Son meilleur témoin le trahit sans le vouloir, et il repart en devant de l'argent.",
+  "format": "Scène de dessin animé au guichet d'un cinéma : un seul lieu, deux clients face à la caissière.",
+  "angle": "Kévin croit défendre Jojo, mais chacun de ses arguments est un aveu : Jojo a dormi, puis il a bavé. La demande de remboursement se transforme en facture.",
+  "resume_factuel": "Au guichet, Jojo réclame le remboursement de sa place parce que le film était trop long, alors qu'il a dormi pendant toute la séance.",
+  "faits_reels": [],
+  "inventions": [
+   "Toute la situation, les personnages et les répliques sont fictifs.",
+   "Le cinéma, le film de trois heures, le voisin couvert de bave et la facture de pressing sont inventés."
+  ],
   "decoupage": [
    {
-    "scene": "1",
+    "scene": "Guichet de cinéma. Lila, caissière avec un badge, est assise derrière la vitre. Jojo tape son ticket sur le comptoir, Kévin s'indigne à côté de lui. Quand Kévin parle de la bave, un voisin à la manche trempée entre dans le champ derrière eux. Lila glisse une facture sous la vitre et Jojo se décompos",
     "repliques": [
-     0,
      1,
      2,
-     3
-    ],
-    "lieu": "",
-    "son": "",
-    "duree": 0.0,
-    "decor": "Messy bedroom desk corner with pink walls big computer monitor showing a password form, keyboard, cup of coffee on a saucer, pencil pot, red desk lamp, unmade "
-   },
-   {
-    "scene": "2",
-    "repliques": [
+     3,
      4,
      5,
-     6
+     6,
+     7
     ],
-    "lieu": "",
-    "son": "",
-    "duree": 0.0,
-    "decor": "Same messy bedroom desk at daylight computer monitor showing a red 'blocked 24h' warning, keyboard, cold cup of coffee, scattered papers, red desk lamp, unmade",
-    "titre": "Vingt essais plus tard…"
+    "lieu": "reconstitution",
+    "son": "rimshot",
+    "duree": 17.0,
+    "decor": "a cinema ticket counter with a glass window and a small speaking hole, a movie poster showing '3H07' in huge letters, a big popcorn machine",
+    "titre": "Remboursez-moi !"
    }
-  ]
+  ],
+  "titres_sujet": [
+   "Jojo essaie de se faire rembourser un ticket de cinéma parce que le film était trop long"
+  ],
+  "verification_web": false,
+  "note": 66.4,
+  "critique": "AVIS DU PUBLIC TEST (spectateurs sans contexte) :\n- Inès : N A PAS COMPRIS, rire 2/10, aurait scrollé à la réplique 2, perdu par : Les répliques 0 et 1 sont une plainte banale, sans accroche. La réplique 2 est une phrase tordue (« un radin qui en a trop pour son argent ») que je ne comprends pas à la première écoute. Je n'ai pas vu venir la chute, donc j'ai scrollé avant. Le titre « POV » ne me dit pas quel est mon rôle.\n- Karim : a compris, rire 6/10, perdu par : Je lis les sous-titres. La réplique 2 est illisible vite et ne veut rien dire. Le tiret de la réplique 3 et la réplique 4 enchaînent trop vite. Je ne sais pas qui est Kévin (un pote ? un fils ?) ni qui est Lila (la caissière ?). Je l'ai compris seulement à la fin.\n- Sandrine : a compris, rire 4/10, perdu par : Je ne connais pas « POV », donc le titre ne m'aide pas. Je ne sais pas qui parle à qui, ni où ils sont, ni qui est Lila. La réplique 2 m'a perdue. J'ai compris la chute parce que le calcul est simple, mais j'ai dû revoir le début dans ma tête.\nCritiques constructives du public :\n- Réplique 2 : réécrire la phrase pour qu'elle soit comprise du premier coup. Par exemple : « Un client qui se plaint que c'est trop long alors qu'il a payé sa place ? Jamais vu. » Aujourd'hui, « un radin qui en a trop pour son argent » ne veut rien dire et c'est là que le public décroche.\n- Réplique 0 : mettre un accroche plus forte dans les deux premières secondes, par exemple « Madame, je veux être remboursé : j'ai dormi tout le fil",
+  "decision": "à retravailler"
  },
- "_monte": true,
  "_voix_hz": {
-  "presentateur": 290,
-  "narrateur": 218,
-  "envoyee": 201
+  "narrateur": 279,
+  "invite": 204,
+  "envoyee": 242,
+  "presentateur": 235
  },
  "realisation": {
-  "moment": "jour",
+  "moment": "soir",
   "lieux": [
-   "chambre",
-   "chambre"
+   "hall"
   ],
   "gags": [
-   "Post-it : mdp = Kevin123 (NE PAS OUBLIER)",
-   "Écran : « Réessayez dans 23 h 59 »",
-   "Affiche : Keep calm & clique sur oublié"
+   "CAISSE",
+   "DURÉE : 3H07 (SANS LA PUB)",
+   "PRESSING NON INCLUS"
   ],
-  "ambiances": [],
-  "source": "auteur+image",
+  "ambiances": [
+   "poussiere"
+  ],
+  "source": "auteur",
   "tenues": {
-   "presentateur": "capuche",
-   "envoyee": "pull"
+   "presentateur": "doudoune",
+   "invite": "capuche",
+   "envoyee": "polo"
   },
   "plans": [
-   "large/fixe",
-   "moyen/avance",
-   "serre/zoom_choc",
    "contre_plongee/avance",
-   "plongee/recul",
    "contre_plongee/epaule",
-   "tres_serre/zoom_choc"
+   "moyen/fixe",
+   "moyen/fixe",
+   "serre/zoom_choc",
+   "moyen/travelling",
+   "tres_serre/zoom_choc",
+   "serre/avance"
   ]
  }
 }
