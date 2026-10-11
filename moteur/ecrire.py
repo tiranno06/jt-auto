@@ -283,7 +283,8 @@ OUTIL = {"name": "rendre_sketch", "description": "Rendre le sketch complet (livr
              "serie_titre": {"type": "string"}, "resume_episode": {"type": "string"}, "teaser": {"type": "integer"},
              "bandeau": {"type": "array", "items": {"type": "string"}},
              "gag": _schema({"replique": {"type": "integer"}, "prompt": {"type": "string"}}, []),
-             "legende": {"type": "string"}, "hashtags": {"type": "array", "items": {"type": "string"}}, "sources": {"type": "array", "items": {"type": "string"}}},
+             "legende": {"type": "string"}, "hashtags": {"type": "array", "items": {"type": "string"}}, "sources": {"type": "array", "items": {"type": "string"}},
+             "studio": {"type": "object"}},
              ["sujet", "repliques", "legende"])}
 OUTIL_CHOIX = {"name": "choisir_sujet", "description": "Notes des candidats, sujet choisi et angle.",
                "input_schema": _schema({"notes": {"type": "array", "items": _schema({"index": {"type": "integer"}, "note": {"type": "number"},
@@ -386,7 +387,8 @@ def valider(sk, liens, libre=False, minimum=None):
             "sources": _sources(sk.get("sources"), liens),
             "decoupage": _decoupage(sk.get("decoupage"), len(reps)),
             **({"serie_titre": _court(sk.get("serie_titre"), 50), "resume_episode": _court(sk.get("resume_episode"), 400)} if sk.get("serie_titre") else {}),
-            **({"teaser": int(sk["teaser"])} if isinstance(sk.get("teaser"), (int, float)) and 0 <= int(sk["teaser"]) < len(reps) - 1 else {})}
+            **({"teaser": int(sk["teaser"])} if isinstance(sk.get("teaser"), (int, float)) and 0 <= int(sk["teaser"]) < len(reps) - 1 else {}),
+            **({"studio": sk["studio"]} if isinstance(sk.get("studio"), dict) else {})}                # direction artistique (vérifiée par studio.bible)
 
 def _norm_lien(u): return re.sub(r"^https?://(www\.)?|[?#].*$|/$", "", str(u or "").strip().lower())
 
@@ -818,6 +820,10 @@ def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=(), li
                     .replace("{serie}", SERIE_BLOC.replace("{serie_txt}", serie) + "\n" if serie else "")
                     .replace("{accroche}", ACCROCHE_BLOC if os.environ.get("ACCROCHE", "0") == "1" else ""))
         if stats: systeme += "\n" + stats
+        try:                                                               # direction artistique : tout ce que le moteur sait dessiner et monter
+            import studio as _st
+            systeme += "\nDIRECTION ARTISTIQUE (dans l'outil rendre_sketch) :\n" + _st.consigne_studio() + "\n"
+        except Exception as e: print(f"  consigne studio indisponible : {e}", flush=True)
         try:
             import decors as _dec; lieux = _dec.lieux_connus()
         except Exception: lieux = []

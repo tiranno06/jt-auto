@@ -293,10 +293,11 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         if DECOUPE: print(f"montage : {len(DECOUPE)} plans (" + " ".join(f"{x['t0']:.1f}:{x['plan']}>{x['cible'][:3]}/{x['passage']}" for x in DECOUPE) + ")", flush=True)
         FICHES = B.get("fiches") if HUMAINS else None
         for sc_ in places:
-            if sc_ in decors: continue
             lieu = B["lieux"][min(sc_, len(B["lieux"]) - 1)]
-            dd = DD.dessiner(lieu, B, graine=B["graine"] % 9973 + sc_); decors[sc_] = dd["fond"]; INFOS[sc_] = dd
-            if dd.get("avant") is not None: AVANT[sc_] = dd["avant"]
+            dd = DD.dessiner(lieu, B, graine=B["graine"] % 9973 + sc_)
+            if dd.get("avant") is not None: AVANT[sc_] = dd["avant"]          # premier plan (comptoir, bureau, guichet) : aussi devant un décor IA
+            if sc_ in decors: continue                                     # décor IA (mode payant) : gardé tel quel
+            decors[sc_] = dd["fond"]; INFOS[sc_] = dd
         print(f"studio : {B['moment']}, lieux {B['lieux']}, tenues " + ", ".join(f"{r}={c['haut']}" for r, c in B["costumes"].items())
               + f", {len(B['figurants'])} figurant(s), ambiances {B['ambiances']} ; plans " + " ".join(f"{q['plan']}/{q['mouvement']}" for q in ph), flush=True)
         GRADE = None                                                       # étalonnage (teinte de l'heure) × vignettage, calculé une fois

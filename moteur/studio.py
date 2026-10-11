@@ -345,7 +345,8 @@ def bible(sk, roles):
     return dict(graine=graine, moment=moment, lieux=lieux, gags=gags, costumes=costumes, figurants=figurants, ambiances=sorted(ambiances),
                 lumiere=lum, ombre=0.24 if moment != "nuit" else 0.32, etalonnage=ETALONNAGE[moment], heure=heure,
                 style_ia=STYLES_IA[moment], plans=S.get("plans") if isinstance(S.get("plans"), list) else [],
-                source=("auteur" if S else "robot") + ("+image" if V else ""), c_mur=c_mur, rythme=rythme, fiches=fiches)
+                source=("auteur" if S else "robot") + ("+image" if V else ""), c_mur=c_mur, rythme=rythme, fiches=fiches,
+                cadence=S.get("cadence") if S.get("cadence") in CADENCES else None)
 
 def _humain():
     import humain
@@ -382,12 +383,13 @@ def casting(sk, roles, costumes, S, graine):
             elif re.search(r"\b(prof|monsieur|madame|docteur|docteure)\b", autres): age = 45
             elif re.search(r"\b(mec|frérot|wesh|grave|trop styl[ée])\b", lignes[role]): age = 24
         c = costumes.get(role) or {}
-        style = COIFFURES_HUMAINS.get(c.get("cheveux") or "") or (d.get("cheveux") if d.get("cheveux") in H_.COIFFURES_H + H_.COIFFURES_F else None)
+        style = COIFFURES_HUMAINS.get(c.get("cheveux") or "") or (d.get("cheveux") if d.get("cheveux") in tuple(H_.COIFF_M) + ("chauve",) else None)
         det = c.get("details") or ()
         fiche = H_.creer(graine + 31 * k, genre=genre, age=age, cheveux=style, c_cheveux=c.get("c_cheveux"),
                          corpulence=d.get("corpulence") if isinstance(d.get("corpulence"), (int, float)) else None,
                          lunettes="rondes" if "lunettes_vue" in det else None,
-                         barbe=next((b for b in M.GR.BARBES if b in det), None) or ("moustache" if "moustache" in det else ("trois_jours" if "barbe" in det else None)))
+                         barbe=next((b for b in M.GR.BARBES if b in det), None) or ("moustache" if "moustache" in det else ("trois_jours" if "barbe" in det else
+                               (d.get("barbe") if d.get("barbe") in M.GR.BARBES + ("moustache", "trois_jours") else None))))
         out[role] = fiche
     return out
 
@@ -459,6 +461,38 @@ def realiser(ph, places, B):
         q["regard_camera"] = bool(j in silences or (a.get("regard_camera") is True))
     return ph
 
+# ------------------------------------------------------------------ consigne de direction artistique pour Claude (mode payant)
+CADENCES = {"rapide": 0.72, "normal": 1.0, "pose": 1.35}
+
+def consigne_studio():
+    """Bloc « studio » des consignes de Claude (doublage TikTok et sketchs écrits) : tout ce que le moteur sait dessiner et monter.
+    Les listes viennent du code : chaque nouveauté (tenue, coiffure, lieu, plan…) y apparaît d'elle-même."""
+    import decor_dessin as DD, humain as H_
+    L = ", ".join
+    return f"""- "studio" : la direction artistique de la vidéo. Le moteur dessine tout lui-même dans le style « toons » des chaînes TikTok :
+  personnages ADULTES à grosse tête ronde blanche posée sur le col, yeux en ovales noirs, épaules carrées, trait noir épais, avec le
+  MAXIMUM DE DÉTAILS (tenues, coiffures, barbes, chapeaux, accessoires, rides, maquillage, décors remplis d'objets). Choisis UNIQUEMENT
+  dans les listes :
+  "moment" = matin, jour, soir ou nuit ; "lieux" = un lieu par scène parmi {L(DD.LIEUX)} ;
+  "costumes" = pour chaque rôle dessiné (presentateur, invite, envoyee) la tenue qui raconte qui il est dans la scène :
+  "haut" parmi {L(M.HAUTS)}, "c_haut" = une couleur parmi {L(NOMS_COULEURS)}, "motif" parmi {L(M.MOTIFS)}, "bas" parmi {L(M.BAS)},
+  "chaussures" parmi {L(M.CHAUSSURES)}, "details" (0 à 5) parmi {L(M.DETAILS)},
+  "chapeau" (facultatif) parmi {L(M.CHAPEAUX)} avec "c_chapeau" (couleur), "cheveux" parmi {L(M.COIFFURES)} et "c_cheveux" (couleur) ;
+  époque ou métier évident : habille-les en conséquence (préhistoire : tunique motif taches + barbe_pleine + cheveux herisse ; roi, reine,
+  Versailles : redingote ou robe + anglaises + tricorne ou couronne ; police : uniforme + casquette ; chantier : casque_chantier ;
+  cuisinier : tablier + toque ; plage : hawai motif fleurs + bob…) ;
+  "personnages" = pour chaque rôle dessiné, l'adulte qui le joue (casting libre, différent à chaque vidéo, inspiré des voix et des
+  personnes de la vidéo) : "genre" (h ou f), "age" (nombre), "corpulence" (0 = mince à 1 = fort),
+  "cheveux" parmi {L(sorted(set(H_.COIFFURES_H + H_.COIFFURES_F + M.GR.COIFFURES)))}, "barbe" parmi {L(M.GR.BARBES + ("moustache", "trois_jours"))} ;
+  "gags" = 1 à 3 textes très courts et drôles écrits dans le décor (affiche, tableau, enseigne, post-it), liés à la situation ;
+  "ambiances" parmi vapeur, poussiere, pluie, neige, neon ;
+  "cadence" = rapide, normal ou pose : le rythme du montage (rapide pour les disputes et les échanges vifs, pose pour l'émotion) ;
+  "plans" = pour les répliques importantes (n° de réplique) : "plan" parmi {L(PLANS)}, "mouvement" parmi {L(MOUVEMENTS)},
+  "geste" parmi {L(GESTES)}, "reaction" de celui qui écoute parmi {L(REACTIONS)}. Le moteur découpe déjà chaque réplique en plusieurs
+  plans (serrés, larges, réactions de celui qui écoute), calés sur la voix, avec des mouvements de caméra et des passages fluides
+  (coupe, glissé, filé, zoom) : ton choix fixe le premier plan de la réplique et les moments forts (serré ou très serré pour les
+  chutes, contre-plongée pour celui qui s'énerve, plongée pour celui qui se fait écraser, regard caméra pour les silences gênants)."""
+
 # ------------------------------------------------------------------ découpage : plusieurs plans par réplique, calés sur le son
 SERRES = ("serre", "tres_serre", "epaule", "plongee", "contre_plongee")
 LARGES = ("large", "moyen")
@@ -483,6 +517,7 @@ def decouper(ph, places, B, fps=30):
     ry_ = B.get("rythme") or {}
     ref = float(ry_.get("duree_plan") or 2.0)                              # durée moyenne des plans de la vidéo d'origine
     k_ref = float(np.clip(ref / 2.0, 0.6, 1.4))
+    k_ref *= CADENCES.get(B.get("cadence"), 1.0)                          # rythme voulu par Claude (mode payant)
     plans, prec = [], None
     for j, q in enumerate(ph):
         sc = q["scene"]; roles = places.get(sc, []); autres = [r for r in roles if r != q["p"]]

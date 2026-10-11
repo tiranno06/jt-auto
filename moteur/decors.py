@@ -7,8 +7,10 @@ from PIL import Image
 W, H = 1080, 1920
 BANQUE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "decors")   # lieux déjà dessinés, réutilisés tels quels
 
+STYLE_VERSION = "v2"                                                       # style détaillé (trait épais, beaucoup d'objets) : les anciens décors minimalistes ne sont plus repris
+
 def _cle(d):
-    return hashlib.sha1(re.sub(r"[^a-z0-9]+", " ", d.lower()).strip().encode()).hexdigest()[:16]
+    return hashlib.sha1((STYLE_VERSION + "|" + re.sub(r"[^a-z0-9]+", " ", d.lower()).strip()).encode()).hexdigest()[:16]
 
 def lieux_connus(n=12):
     """Décors déjà dans la banque (pour que l'auteur réutilise exactement les mêmes lieux)."""

@@ -132,6 +132,9 @@ Tous les outils payants sont activés par défaut (Claude pour l'écriture, la m
 - **doublage TikTok** : sans Claude, casting par la hauteur des voix et mise en scène par le studio gratuit ;
 - **voix** : ElevenLabs → Chatterbox → Piper ; **décors** : IA → dessinés par le robot ; **contrôle** : Claude → contrôle technique gratuit.
 
+### Le mode payant profite de toutes les améliorations
+Les consignes envoyées à Claude (doublage d'une vidéo TikTok et sketchs écrits) sont générées à partir du code (`studio.consigne_studio`) : Claude connaît tous les lieux, tenues, coiffures, barbes, chapeaux, imprimés, thèmes d'époque, plans, mouvements et gestes, choisit le casting adulte (avec barbe et coiffure) et le rythme du montage (« cadence » : rapide, normal ou posé). Le moteur applique ensuite le montage dynamique, les détails et l'intonation comme en mode gratuit. Les décors IA (Stable Diffusion XL) sont demandés en style détaillé (trait noir épais, beaucoup d'objets) et gardent le premier plan dessiné (comptoir, bureau, guichet).
+
 ## À savoir
 - **Satire et personnages fictifs** : la mention est incrustée dans chaque vidéo et dans la légende. Le robot ne nomme aucune personne réelle et s'interdit toute consigne de vote.
 - **Contenu IA** : la légende indique « Contenu généré par IA ». Si Buffer n'active pas automatiquement l'étiquette IA de TikTok, active une fois pour toutes l'option correspondante dans les réglages de ton compte TikTok si elle existe, ou passe par Upload-Post qui envoie l'étiquette officielle.

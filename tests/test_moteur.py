@@ -665,7 +665,7 @@ class TestImageEtBanque(unittest.TestCase):
 
     def test_consigne_images(self):
         import doublage
-        texte = doublage.IMAGES.format(mesures="2 plans", banque="")
+        texte = doublage.IMAGES.format(mesures="2 plans", banque="", coiffures="carre, ondule")
         self.assertIn("coiffure", texte); self.assertIn("objets", texte)
         self.assertIn("queue", doublage.consigne("v", "l"))
 
@@ -743,6 +743,20 @@ class TestHumains(unittest.TestCase):
             self.assertNotEqual((a_["cible"], a_["plan"]), (b_["cible"], b_["plan"]))
         cri = [x for x in P if x["j"] == 1]; calme = [x for x in P if x["j"] == 0]
         self.assertGreaterEqual(len(cri), len(calme))                                               # la dispute coupe plus vite
+
+    def test_mode_payant_connait_tout(self):
+        S, M = self.S, self.M
+        import decor_dessin as DD, doublage
+        t = S.consigne_studio()
+        for x in list(DD.LIEUX) + list(M.CHAPEAUX) + list(M.GR.BARBES) + ["redingote", "ondule", "fleurs", "cadence", "tres_serre", "zoom_choc"]:
+            self.assertIn(x, t)
+        self.assertIn("cadence", doublage.consigne("- A : 120 Hz", "0. A (0.0-1.0) : Bonjour"))
+        sk = {"repliques": [{"p": "presentateur", "t": "Bonjour"}, {"p": "invite", "t": "Salut"}],
+              "studio": {"cadence": "rapide", "costumes": {"presentateur": {"haut": "chemise", "chapeau": "melon", "details": ["barbe_courte"]}},
+                         "personnages": {"invite": {"genre": "h", "age": 30, "cheveux": "afro", "barbe": "bouc"}}}}
+        B = S.bible(sk, ["presentateur", "invite"])
+        self.assertEqual(B["cadence"], "rapide"); self.assertEqual(B["costumes"]["presentateur"]["chapeau"], "melon")
+        self.assertEqual((B["fiches"]["invite"]["cheveux"], B["fiches"]["invite"]["barbe"]), ("afro", "bouc"))
 
     def test_casting(self):
         S = self.S

@@ -159,7 +159,9 @@ def hauteurs(voix_sig, segs):
 
 CONSIGNE = """Voici la transcription de la bande son d'une vidéo TikTok (qui parle, quand, quoi). Nos personnages vont la « jouer » en play-back dans
 un dessin animé : on ne change AUCUN mot ni AUCUN minutage, tu reconstitues seulement la scène autour du son.
-Nos personnages : Jojo (homme, la trentaine, bonnet orange), Kévin (jeune homme, casquette bleue), Lila (femme, nœud rose).
+Nos personnages (rôles) : presentateur, invite et envoyee, joués à chaque vidéo par des adultes différents (casting libre) dessinés
+dans le style « toons » ; tout l'univers (lieu, tenues, plans, émotions, rythme) se construit autour de ce son : paroles, intonations,
+émotions et ambiance.
 Une voix qui commente sans être dans la scène peut être la voix off (narrateur : non dessinée).
 Voix repérées (hauteur moyenne : moins de 165 Hz ≈ voix d'homme, plus de 165 Hz ≈ voix de femme ou d'enfant) :
 {voix}
@@ -174,28 +176,15 @@ Avec l'outil doublage :
   cohérent avec ce qui est dit ; "titre" = carton court seulement si la scène change de moment ou de lieu) ;
 - "sujet" (30 caractères max), "titre_accroche" (« POV : … » ou « Quand … », 40 caractères max), "legende" (1 phrase en français),
   "question" (pour les commentaires), "hashtags" (4 à 6, sans #) ;
-- "studio" : la direction artistique de la vidéo (le moteur dessine tout lui-même, choisis UNIQUEMENT dans les listes) :
-  "moment" = matin, jour, soir ou nuit ; "lieux" = un lieu par scène parmi {lieux} ;
-  "costumes" = pour chaque rôle dessiné (presentateur, invite, envoyee) la tenue qui raconte qui il est dans la scène :
-  "haut" parmi {hauts}, "c_haut" = une couleur parmi {couleurs}, "motif" parmi {motifs}, "bas" parmi {bas},
-  "chaussures" parmi {chaussures}, "details" (0 à 4) parmi {details} (ex. le médecin : blouse + stethoscope + badge),
-  "cheveux" parmi {coiffures} et "c_cheveux" = une couleur ;
-  "personnages" = pour chaque rôle dessiné, l'adulte qui le joue (casting libre, différent à chaque vidéo, inspiré des personnes de la
-  vidéo et de leur voix) : "genre" (h ou f), "age" (nombre), "corpulence" (0 = mince à 1 = fort), "cheveux" parmi {coiffures_humains} ;
-  "gags" = 1 à 3 textes très courts et drôles écrits dans le décor (affiche, tableau, enseigne, post-it), liés à la situation ;
-  "ambiances" parmi vapeur, poussiere, pluie, neige, neon ;
-  "plans" = pour les répliques importantes (n° de réplique) : "plan" parmi {plans}, "mouvement" parmi {mouvements},
-  "geste" parmi {gestes}, "reaction" de celui qui écoute parmi {reactions} ; garde les plans serrés et très serrés pour les chutes,
-  la contre-plongée pour celui qui s'énerve, la plongée pour celui qui se fait écraser, le regard caméra pour les silences gênants."""
+{studio}"""
 
 IMAGES = """
 
 IMAGES CI-DESSUS : des images clés de la vidéo TikTok d'origine (dans l'ordre). Reconstruis notre scène À SON IMAGE, en la traduisant
 dans notre dessin animé et dans nos listes : le lieu exact, le décor du premier plan à l'arrière-plan ("decor" en anglais, avec les objets
 qu'on y voit), les objets tenus ("studio" → "objets" = [{{"replique", "objet"}}] pris dans la liste des objets ci-dessous), la tenue de
-chaque personne (forme, couleur, motif, accessoires) et sa coiffure ("cheveux" parmi carre, long, queue, chignon, boucles, court, aucune ;
-"c_cheveux" = couleur), leurs mimiques et gestes (visage, bouche, yeux, bras, mains, jambes, pieds) pour les "plans" (geste, réaction),
-la lumière et l'heure. La personne la plus présente à l'image joue la voix la plus présente.
+chaque personne (forme, couleur, motif, accessoires) et sa coiffure ("cheveux" parmi {coiffures} ; "c_cheveux" = couleur), son couvre-chef ("chapeau"), sa barbe, leurs mimiques et gestes (visage, bouche, yeux, bras, mains, jambes, pieds) pour les "plans" (geste, réaction),
+la lumière et l'heure, et le rythme du montage d'origine ("cadence"). La personne la plus présente à l'image joue la voix la plus présente.
 Objets possibles : telephone, billet, portefeuille, micro, verre, cafe, livre, cles, carte, facture, bouteille, haltere, seringue, parapluie,
 telecommande, fleur, cadeau, pizza, croissant, tablette, lettre, journal, stylo, valise.
 Mesures faites par le robot sur la vidéo : {mesures}
@@ -204,9 +193,7 @@ Mesures faites par le robot sur la vidéo : {mesures}
 def consigne(voix, lignes):
     import studio, decor_dessin as DD, marionnette as M, humain as H
     L = lambda xs: ", ".join(xs)
-    return CONSIGNE.format(voix=voix, lignes=lignes, lieux=L(DD.LIEUX), hauts=L(M.HAUTS), couleurs=L(studio.NOMS_COULEURS), motifs=L(M.MOTIFS),
-                           bas=L(M.BAS), chaussures=L(M.CHAUSSURES), details=L(M.DETAILS), plans=L(studio.PLANS), mouvements=L(studio.MOUVEMENTS),
-                           gestes=L(studio.GESTES), reactions=L(studio.REACTIONS), coiffures=L(M.COIFFURES), coiffures_humains=L(sorted(set(H.COIFFURES_H + H.COIFFURES_F))))
+    return CONSIGNE.format(voix=voix, lignes=lignes, studio=studio.consigne_studio())
 
 def _outil():
     import ecrire
@@ -221,6 +208,7 @@ def _outil():
                 "studio": {"type": "object", "properties": {
                     "moment": {"type": "string"}, "lieux": {"type": "array", "items": {"type": "string"}},
                     "costumes": {"type": "object"}, "personnages": {"type": "object"}, "gags": {"type": "array", "items": {"type": "string"}},
+                    "cadence": {"type": "string", "enum": ["rapide", "normal", "pose"]},
                     "ambiances": {"type": "array", "items": {"type": "string"}},
                     "plans": {"type": "array", "items": ecrire._schema({"replique": {"type": "integer"}, "plan": {"type": "string"}, "mouvement": {"type": "string"},
                                                                          "geste": {"type": "string"}, "reaction": {"type": "string"}}, ["replique"])},
@@ -263,7 +251,8 @@ def preparer(url):
         contenu = consigne(vx, lignes)
         if visuel or cles:                                                 # Claude voit aussi la vidéo d'origine (images clés) et ses mesures
             import analyse_video, banque_visuelle
-            contenu += IMAGES.format(mesures=analyse_video.texte(visuel), banque=banque_visuelle.consigne())
+            import marionnette as M_
+            contenu += IMAGES.format(mesures=analyse_video.texte(visuel), banque=banque_visuelle.consigne(), coiffures=", ".join(M_.COIFFURES))
             contenu = [{"type": "image", "source": {"type": "base64", "media_type": "image/jpeg", "data": base64.b64encode(j).decode()}} for j in cles[:6]] \
                       + [{"type": "text", "text": contenu}]
         m = ecrire._appel(anthropic.Anthropic(), None, [{"role": "user", "content": contenu}], _outil(), max_tokens=8000)
