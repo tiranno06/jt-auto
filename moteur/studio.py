@@ -266,6 +266,8 @@ def bible(sk, roles):
                                                             "magasin": ("cherche", "telephone"), "rue": ("marche", "telephone"), "salle_sport": ("souleve", "boit")}[l][j % 2]
                 figurants.append(dict(scene=k, perso=perso, activite=act, x=(150, 930)[(j + graine) % 2] if n == 1 else (150, 930)[j],
                                       costume=tenue(perso, "client", l, moment, graine + 101 + j + 7 * k)))
+    fiches = casting(sk, roles, costumes, S, graine)
+    for k, f_ in enumerate(figurants): f_["fiche"] = _humain().creer(graine + 500 + 7 * k)
     ambiances = set(a for a in (S.get("ambiances") or []) if a in ("vapeur", "poussiere", "pluie", "neige", "neon"))
     if re.search(r"\bpluie|pleu[tv]|rain|parapluie", t_low): ambiances.add("pluie")
     if re.search(r"\bneige|no[ëe]l|snow|hiver", t_low): ambiances.add("neige")
@@ -285,7 +287,50 @@ def bible(sk, roles):
     return dict(graine=graine, moment=moment, lieux=lieux, gags=gags, costumes=costumes, figurants=figurants, ambiances=sorted(ambiances),
                 lumiere=lum, ombre=0.24 if moment != "nuit" else 0.32, etalonnage=ETALONNAGE[moment], heure=heure,
                 style_ia=STYLES_IA[moment], plans=S.get("plans") if isinstance(S.get("plans"), list) else [],
-                source=("auteur" if S else "robot") + ("+image" if V else ""), c_mur=c_mur, rythme=rythme)
+                source=("auteur" if S else "robot") + ("+image" if V else ""), c_mur=c_mur, rythme=rythme, fiches=fiches)
+
+def _humain():
+    import humain
+    return humain
+
+GENRE_ROLE = {"presentateur": "h", "invite": "h", "envoyee": "f"}           # sketchs écrits : Jojo, Kévin, Lila (accords du texte)
+COIFFURES_HUMAINS = {"carre": "carre", "long": "long", "queue": "queue", "chignon": "chignon", "boucles": "boucles", "court": "court",
+                     "meches": "court", "nuque": "court", "couronne": "chauve", "aucune": "chauve", "raie": "raie", "rase": "rase", "mi_long": "mi_long", "chauve": "chauve"}
+
+def casting(sk, roles, costumes, S, graine):
+    """Casting libre : une fiche de personnage adulte par rôle, différente à chaque vidéo.
+    Genre : la voix (doublage : moins de 165 Hz ≈ homme), sinon le prénom du sketch écrit ; âge, corpulence… : ce que Claude a vu
+    ou décidé (« personnages »), sinon le texte (mamie, papa, étudiant…), sinon le hasard de la graine de l'épisode.
+    Coiffure et couleur des cheveux, lunettes, barbe : la tenue de l'épisode (vidéo d'origine, Claude)."""
+    H_ = _humain(); voix = sk.get("_voix_hz") or {}; doub = bool(sk.get("doublage"))
+    P_ = S.get("personnages") if isinstance(S.get("personnages"), dict) else {}
+    lignes = {r: " ".join(x.get("t", "") for x in sk.get("repliques", []) if x.get("p") == r).lower() for r in roles}
+    tout = " ".join(lignes.values())
+    out = {}
+    for k, role in enumerate(roles):
+        d = P_.get(role) if isinstance(P_.get(role), dict) else {}
+        genre = d.get("genre") if d.get("genre") in ("h", "f") else None
+        if not genre and doub and voix.get(role): genre = "f" if voix[role] > 165 else "h"
+        if not genre and not doub: genre = GENRE_ROLE.get(role)
+        age = None
+        try: age = int(d["age"]) if d.get("age") else None
+        except (TypeError, ValueError): age = None
+        autres = " ".join(v for r, v in lignes.items() if r != role)          # comment les autres l'appellent
+        if not age:
+            if re.search(r"\b(mamie|papy|grand-m[èe]re|grand-p[èe]re)\b", autres): age = 70
+            elif re.search(r"\b(maman|papa|m[èe]re|p[èe]re)\b", autres): age = 46
+            elif re.search(r"\b(mon fils|ma fille|mon ch[ée]ri|ma ch[ée]rie|mes enfants)\b", lignes[role]) and "maman" not in tout: age = 44
+            elif re.search(r"\b(prof|monsieur|madame|docteur|docteure)\b", autres): age = 45
+            elif re.search(r"\b(mec|frérot|wesh|grave|trop styl[ée])\b", lignes[role]): age = 24
+        c = costumes.get(role) or {}
+        style = COIFFURES_HUMAINS.get(c.get("cheveux") or "") or (d.get("cheveux") if d.get("cheveux") in H_.COIFFURES_H + H_.COIFFURES_F else None)
+        det = c.get("details") or ()
+        fiche = H_.creer(graine + 31 * k, genre=genre, age=age, cheveux=style, c_cheveux=c.get("c_cheveux"),
+                         corpulence=d.get("corpulence") if isinstance(d.get("corpulence"), (int, float)) else None,
+                         lunettes="rondes" if "lunettes_vue" in det else None,
+                         barbe=("moustache" if "moustache" in det else ("courte" if "barbe" in det else None)))
+        out[role] = fiche
+    return out
 
 def _meneur(sk, sc, roles):
     """Rôle qui « tient la boutique » dans la scène : celui qui pose le plus de questions (médecin, prof, serveur…)."""

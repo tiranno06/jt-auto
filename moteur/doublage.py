@@ -180,6 +180,8 @@ Avec l'outil doublage :
   "haut" parmi {hauts}, "c_haut" = une couleur parmi {couleurs}, "motif" parmi {motifs}, "bas" parmi {bas},
   "chaussures" parmi {chaussures}, "details" (0 à 4) parmi {details} (ex. le médecin : blouse + stethoscope + badge),
   "cheveux" parmi {coiffures} et "c_cheveux" = une couleur ;
+  "personnages" = pour chaque rôle dessiné, l'adulte qui le joue (casting libre, différent à chaque vidéo, inspiré des personnes de la
+  vidéo et de leur voix) : "genre" (h ou f), "age" (nombre), "corpulence" (0 = mince à 1 = fort), "cheveux" parmi {coiffures_humains} ;
   "gags" = 1 à 3 textes très courts et drôles écrits dans le décor (affiche, tableau, enseigne, post-it), liés à la situation ;
   "ambiances" parmi vapeur, poussiere, pluie, neige, neon ;
   "plans" = pour les répliques importantes (n° de réplique) : "plan" parmi {plans}, "mouvement" parmi {mouvements},
@@ -200,11 +202,11 @@ Mesures faites par le robot sur la vidéo : {mesures}
 {banque}"""
 
 def consigne(voix, lignes):
-    import studio, decor_dessin as DD, marionnette as M
+    import studio, decor_dessin as DD, marionnette as M, humain as H
     L = lambda xs: ", ".join(xs)
     return CONSIGNE.format(voix=voix, lignes=lignes, lieux=L(DD.LIEUX), hauts=L(M.HAUTS), couleurs=L(studio.NOMS_COULEURS), motifs=L(M.MOTIFS),
                            bas=L(M.BAS), chaussures=L(M.CHAUSSURES), details=L(M.DETAILS), plans=L(studio.PLANS), mouvements=L(studio.MOUVEMENTS),
-                           gestes=L(studio.GESTES), reactions=L(studio.REACTIONS), coiffures=L(M.COIFFURES))
+                           gestes=L(studio.GESTES), reactions=L(studio.REACTIONS), coiffures=L(M.COIFFURES), coiffures_humains=L(sorted(set(H.COIFFURES_H + H.COIFFURES_F))))
 
 def _outil():
     import ecrire
@@ -218,7 +220,7 @@ def _outil():
                 "hashtags": {"type": "array", "items": {"type": "string"}},
                 "studio": {"type": "object", "properties": {
                     "moment": {"type": "string"}, "lieux": {"type": "array", "items": {"type": "string"}},
-                    "costumes": {"type": "object"}, "gags": {"type": "array", "items": {"type": "string"}},
+                    "costumes": {"type": "object"}, "personnages": {"type": "object"}, "gags": {"type": "array", "items": {"type": "string"}},
                     "ambiances": {"type": "array", "items": {"type": "string"}},
                     "plans": {"type": "array", "items": ecrire._schema({"replique": {"type": "integer"}, "plan": {"type": "string"}, "mouvement": {"type": "string"},
                                                                          "geste": {"type": "string"}, "reaction": {"type": "string"}}, ["replique"])},

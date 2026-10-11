@@ -670,5 +670,51 @@ class TestImageEtBanque(unittest.TestCase):
         self.assertIn("queue", doublage.consigne("v", "l"))
 
 
+
+class TestHumains(unittest.TestCase):
+    """Personnages adultes (casting libre) et vraie 3D (repli 2D sans Blender)."""
+    def setUp(self):
+        try:
+            import humain, studio, rendu3d, marionnette
+        except Exception as e: self.skipTest(f"dépendances vidéo absentes : {e}")
+        self.H, self.S, self.R3, self.M = humain, studio, rendu3d, marionnette
+
+    def test_fiches_et_dessin(self):
+        H, M = self.H, self.M
+        self.assertEqual(H.creer(5), H.creer(5)); self.assertNotEqual(H.creer(5), H.creer(6))       # même épisode = même casting
+        f = H.creer(3, genre="f", age=70, cheveux="chignon"); self.assertEqual((f["genre"], f["age"], f["cheveux"]), ("f", 70, "chignon"))
+        img = np.zeros((1920, 1080, 3), np.uint8); img[:] = 200
+        for k, st in enumerate(H.COIFFURES_H + H.COIFFURES_F):
+            p = M.pose_neutre(); p.update(x=540, y=1500, s=1.0, mains=True, main_forme_g=M.FORMES_MAIN[k % 5], main_forme_d="index", yeux=M.YEUX[k % len(M.YEUX)],
+                                          forme=M.BOUCHES[k % len(M.BOUCHES)], viseme=("A", "M", None)[k % 3], bouche=0.5, sourcils=M.SOURCILS[k % len(M.SOURCILS)],
+                                          costume=dict(haut=M.HAUTS[k % len(M.HAUTS)], c_haut=(90, 120, 200), motif=M.MOTIFS[k % 4], bas=M.BAS[k % 5], details=M.DETAILS),
+                                          dos=(k == 4), effets=("goutte",), epaules=0.5, penche=0.5, pied=1.0)
+            H.dessiner(img, H.creer(k, cheveux=st, lunettes="rondes", barbe="courte"), p)
+        tete, (rx, ry), mains = H.reperes(H.creer(1), dict(M.pose_neutre(), x=540, y=1500, s=1.0))
+        self.assertTrue(500 < tete[1] < 800 and 400 < tete[0] < 700); self.assertEqual(len(mains), 2)
+        self.assertAlmostEqual(H.tete_y(1.0), 1500 - 6.08 * 122, delta=2)
+
+    def test_casting(self):
+        S = self.S
+        sk = {"repliques": [{"p": "presentateur", "t": "Mamie, tu veux du thé ?"}, {"p": "invite", "t": "Oui mon chéri."}], "doublage": {"source": "x"},
+              "_voix_hz": {"presentateur": 120, "invite": 230}}
+        F = S.casting(sk, ["presentateur", "invite"], {"invite": {"cheveux": "chignon", "c_cheveux": (200, 200, 200), "details": ("lunettes_vue",)}}, {}, 7)
+        self.assertEqual((F["presentateur"]["genre"], F["invite"]["genre"]), ("h", "f"))                 # la voix décide
+        self.assertEqual(F["invite"]["age"], 70); self.assertEqual(F["invite"]["cheveux"], "chignon"); self.assertEqual(F["invite"]["lunettes"], "rondes")
+        sk2 = {"repliques": [{"p": "envoyee", "t": "Salut."}]}                                          # sketch écrit : Lila est une femme
+        self.assertEqual(S.casting(sk2, ["envoyee"], {}, {}, 1)["envoyee"]["genre"], "f")
+
+    def test_3d_repli_et_pose(self):
+        R3 = self.R3
+        ancien = os.environ.pop("BLENDER_PYTHON", None)
+        try: self.assertFalse(R3.actif())                                                              # sans Blender : rendu 2D
+        finally:
+            if ancien: os.environ["BLENDER_PYTHON"] = ancien
+        img = np.zeros((1920, 1080, 3), np.uint8); sp = np.zeros((R3.HAUTEUR, R3.LARGEUR, 4), np.uint8); sp[200:1000, 300:480] = (255, 0, 0, 255)
+        R3.poser(img, sp, {"x": 540, "y": 1500, "s": 1.0}, 1.0)
+        ys = np.where(img[..., 0] > 128)[0]; self.assertTrue(len(ys) and abs(ys.max() - 1500) < 120)       # pieds au sol, hauteur d'adulte
+        self.assertEqual(R3._cle({"bras_g": (1.234, 2), "sourcils_h": None, "x": 3}), {"bras_g": [1.23, 2.0]})
+
+
 if __name__ == "__main__":
     unittest.main()

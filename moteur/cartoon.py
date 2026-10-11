@@ -20,7 +20,7 @@ import math, os, re, subprocess, sys, tempfile, wave
 import numpy as np, cv2
 from PIL import Image, ImageDraw, ImageFont
 ICI = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, ICI)
-import marionnette as M, sons_modernes as SM, marque, studio, decor_dessin as DD
+import marionnette as M, sons_modernes as SM, marque, studio, decor_dessin as DD, humain as HU, rendu3d
 from jt import minutage, carton, son, vers_mix, enveloppe, poser, pop, W, H, FPS, SR, SRM, FB
 
 CAP_Y = 1700
@@ -28,6 +28,7 @@ MINUTAGE = []                                                              # (d�
 PH = []                                                                    # répliques de la dernière vidéo avec leur plan (mémoire du studio)
 COUVERTURE_MS = [2500]                                                     # instant de l'image de couverture (millisecondes)
 DETAIL = (os.environ.get("RENDU_DETAILLE") or "1") != "0"                 # réglage de la régie : rendu détaillé (studio) ou simple
+HUMAINS = DETAIL and (os.environ.get("PERSONNAGES") or "humains") == "humains"   # personnages adultes (casting libre) ou marionnettes
 PASTELS = [(246, 228, 214), (226, 236, 246), (236, 246, 226), (248, 232, 240), (250, 242, 214)]
 
 # ------------------------------------------------------------------ émotions lues dans les indications de jeu
@@ -210,6 +211,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         for role in {r["p"] for r in reps}:
             v = np.concatenate([f0s[i][f0s[i] > 0] for i, r in enumerate(reps) if r["p"] == role and i < len(f0s)] or [np.zeros(0)])
             ref = float(np.median(v)) if len(v) > 10 else None
+            if ref: sk.setdefault("_voix_hz", {})[role] = round(ref)       # le casting devine homme / femme d'après la voix
             for i, r in enumerate(reps):
                 if r["p"] == role and i < len(f0s): TON[i] = studio.intonation(f0s[i], ref)
     def emo_de(i, r):
@@ -284,9 +286,10 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
                                or (j and ph[j - 1]["p"] == "narrateur")) else "serre"
     # studio : bible de l'épisode et storyboard (plans, mouvements, réactions), décors dessinés là où l'IA n'en a pas fourni
     B = studio.bible(sk, roles) if DETAIL else None
-    AVANT, INFOS = {}, {}
+    AVANT, INFOS = {}, {}; FICHES = None
     if B:
         studio.realiser(ph, places, B); sk["_bible"] = B
+        FICHES = B.get("fiches") if HUMAINS else None
         for sc_ in places:
             if sc_ in decors: continue
             lieu = B["lieux"][min(sc_, len(B["lieux"]) - 1)]
@@ -422,6 +425,8 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
                 k_ = int((tm - q["deb"]) / per + q["i"]); u = _ease(((tm - q["deb"]) % per) / 0.45)
                 g = GESTES[k_ % len(GESTES)]; g0 = GESTES[(k_ - 1) % len(GESTES)] if tm - q["deb"] >= per else ((-18, 8), (18, -8))
                 mains = MAINS_CONV[k_ % len(MAINS_CONV)]
+                if FICHES:                                                 # adultes : gestes de conversation plus mesurés
+                    g, g0 = tuple((v[0] * 0.6, v[1] * 0.8) for v in g), tuple((v[0] * 0.6, v[1] * 0.8) for v in g0)
                 bg, bd = _mel(g0[0], g[0], u), _mel(g0[1], g[1], u)
                 fin_u = _ease((tm - q["fin"] + 0.3) / 0.3)                     # retour au repos en douceur à la fin de la phrase
                 bg, bd = _mel(bg, (-18, 8), fin_u), _mel(bd, (18, -8), fin_u)
@@ -440,7 +445,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         # objet en main pendant la réplique
         if mien and mien.get("objet") and tm <= mien["fin"] + 0.3:
             o = objets.get((mien["objet"], round(s, 2)))
-            if o is None: o = objets[(mien["objet"], round(s, 2))] = M.objet(mien["objet"], s)
+            if o is None: o = objets[(mien["objet"], round(s, 2))] = M.objet(mien["objet"], s * (0.5 if FICHES else 1.0))
             if o is not None: p["main_d"] = o; p["bras_d"] = (120, -100); p["main_forme_d"] = "poing"
         return p
 
@@ -484,6 +489,18 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
     def cadre(q):
         if B and q["p"] in places[q["scene"]]:                             # valeur de plan choisie par le storyboard
             x_, _, s_ = position(q["scene"], q["p"]); tete_y = 1500 - 305 * s_; pl = q.get("plan", "large")
+            if FICHES and q["p"] in FICHES:                                # humains : la tête est plus petite et plus haute
+                tl = FICHES[q["p"]]["taille"]; ty, hh = HU.tete_y(s_, tl), HU.hauteur_tete(s_, tl)
+                if pl == "moyen":
+                    xs = [position(q["scene"], r2)[0] for r2 in places[q["scene"]]]; return 1.3, (2 * x_ + sum(xs) / len(xs)) / 3, ty + 2.6 * hh
+                if pl == "serre": return 1.9, x_, ty + 1.15 * hh
+                if pl == "epaule":
+                    ec = ecoutant(q); sens = 1 if (ec and position(q["scene"], ec)[0] < x_) else -1
+                    return 1.9, x_ - sens * 110, ty + 1.3 * hh
+                if pl == "tres_serre": return min(3.6, 430 / hh), x_, ty + 0.3 * hh
+                if pl == "plongee": return 1.7, x_, ty + 1.7 * hh
+                if pl == "contre_plongee": return 1.75, x_, ty + 1.5 * hh
+                return 1.0, W / 2, H / 2
             if pl == "moyen":
                 xs = [position(q["scene"], r2)[0] for r2 in places[q["scene"]]]; return 1.22, (2 * x_ + sum(xs) / len(xs)) / 3, 1190.0
             if pl == "serre": return 1.5, x_, 1130.0
@@ -496,6 +513,27 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             return 1.0, W / 2, H / 2
         if q["cam"] == "serre" and q["p"] in places[q["scene"]]: return 1.5, position(q["scene"], q["p"])[0], 1130.0
         return 1.0, W / 2, H / 2
+
+    TROISD = {"rec": None, "rendu": None, "fi": 0}                         # vraie 3D : poses notées au 1er passage, personnages rendus par Blender
+
+    def dessine(img, role, p):
+        """Personnage du rôle : humain adulte (fiche du casting : dessin 2D ou rendu 3D) ou marionnette."""
+        if FICHES and role in FICHES:
+            if TROISD["rec"] is not None:                                  # 1er passage : on note seulement la pose
+                if not p.get("dos") and role in TROISD["rec"] and 0 <= TROISD["fi"] < len(TROISD["rec"][role]): TROISD["rec"][role][TROISD["fi"]] = dict(p)
+                return
+            R3 = TROISD["rendu"]
+            if R3 is not None and R3.ok and not p.get("dos"):
+                sp = R3.sprite(role, TROISD["fi"])
+                if sp is not None:
+                    rendu3d.poser(img, sp, p, FICHES[role]["taille"])
+                    tete, (rx, ry), mains = HU.reperes(FICHES[role], p); hh = 122 * p["s"] * FICHES[role]["taille"]
+                    for nom, xy in (("main_g", mains[0]), ("main_d", mains[1])):
+                        if p.get(nom) is not None: M._coller(img, p[nom], xy[0], xy[1] + 0.25 * hh)
+                    if p.get("effets"): M._effets(img, tete, rx * 1.15, ry * 1.05, rx / 150 * 1.6, p)
+                    return
+            return HU.dessiner(img, FICHES[role], p)
+        return M.dessiner(img, M.ROLES.get(role, "bonnet"), p)
 
     def ecoutant(q):
         """Celui qui écoute la réplique (le plus proche de celui qui parle)."""
@@ -513,7 +551,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         cyc = (tm * 0.35 + k) % 1
         if act in ("boit", "mange"):
             lev = _ease(min(1, cyc / 0.15)) * (1 - _ease(max(0, cyc - 0.35) / 0.15)) if cyc < 0.5 else 0.0
-            p["bras_d"] = _mel((60, 80), (150, 75), lev); p["main_d"] = objets.setdefault((act, round(p["s"], 2)), M.objet("verre" if act == "boit" else "croissant", p["s"]))
+            p["bras_d"] = _mel((60, 80), (150, 75), lev); p["main_d"] = objets.setdefault((act, round(p["s"], 2)), M.objet("verre" if act == "boit" else "croissant", p["s"] * (0.6 if FICHES else 1.0)))
             p["main_forme_d"] = "poing"; p["bouche"] = 0.3 * lev
         elif act == "telephone":
             p["bras_d"] = POSES["telephone"][1]; p["main_forme_d"] = "poing"; p["bouche"] = 0.4 * abs(math.sin(tm * 7 + k)) if (tm + k) % 4 < 2.5 else 0.0
@@ -522,11 +560,12 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             p["bras_g"], p["bras_d"] = (-40, 90 + 8 * math.sin(tm * 17)), (40, -90 + 8 * math.sin(tm * 19 + 1)); p["regard"] = (0.0, 0.6)
         elif act == "souleve":
             u = abs(math.sin(tm * 1.6 + k)); p["bras_g"], p["bras_d"] = (-60 - 100 * u, -40), (60 + 100 * u, 40)
-            p["main_g"] = p["main_d"] = objets.setdefault(("haltere", round(p["s"], 2)), M.objet("haltere", p["s"] * 0.7)); p["sq"] = -0.05 * u
+            p["main_g"] = p["main_d"] = objets.setdefault(("haltere", round(p["s"], 2)), M.objet("haltere", p["s"] * (0.45 if FICHES else 0.7))); p["sq"] = -0.05 * u
         elif act == "cherche":
             p["regard"] = (math.sin(tm * 0.8 + k), -0.3); p["tilt"] = 10 * math.sin(tm * 0.8 + k); p["bras_d"] = (60, 40); p["main_forme_d"] = "index"
         if any(0 <= ((tm + k * 3) % 3.7) < 0.12 for _ in (0,)): p["yeux"] = "fermes"
-        M.dessiner(img, f["perso"], p)
+        if FICHES and f.get("fiche"): p["s"] *= 1.15; HU.dessiner(img, f["fiche"], p)
+        else: M.dessiner(img, f["perso"], p)
 
     def tache(img, x, y, r, col, a):
         """Petite tache de lumière / de vapeur, fondue dans l'image (zone locale seulement)."""
@@ -596,6 +635,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         return sens * 22 * min(1, v), min(1, v)
 
     def vue(tm):
+        TROISD["fi"] = int(round(tm * FPS))
         q = actif(tm); sc = q["scene"]
         fond = decors.get(sc)
         if fond is None: fond = decors[sc] = decor_uni(sc)
@@ -625,6 +665,8 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         if cible and zr["scene"] == sc and len(places[sc]) > 1 and zr is not ph[-1]:   # coupe sèche sur la réaction
             z, cx, cy = 1.55, position(sc, cible)[0], 1120.0
             if B: z, cy = 1.75, 1500 - 305 * position(sc, cible)[2] + 90
+            if FICHES and cible in FICHES:
+                s_c = position(sc, cible)[2]; z, cy = 2.4, HU.tete_y(s_c, FICHES[cible]["taille"]) + 0.8 * HU.hauteur_tete(s_c, FICHES[cible]["taille"])
         cx = min(max(cx, W / (2 * z)), W - W / (2 * z)); cy = min(max(cy, H / (2 * z)), H - H / (2 * z))
         if B:                                                              # profondeur : le décor glisse moins vite que les personnages
             zb = 1 + (z - 1) * 0.86; cxb, cyb = W / 2 + (cx - W / 2) * 0.86, H / 2 + (cy - H / 2) * 0.86
@@ -647,8 +689,8 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
                 p["sq"] = max(p["sq"], 0.28 * ko); p["yeux"] = "plisses"; p["forme"] = "o"; p["bouche"] = 0.2
                 p["effets"] = tuple(set(p["effets"]) | {"etoiles"}); p["bras_g"], p["bras_d"] = (-60, 20), (60, -20)
             if not -400 < p["x"] < W + 400: continue
-            if not ang: M.dessiner(img, M.ROLES.get(role, "bonnet"), p); continue
-            calque = np.empty_like(img); calque[:] = (1, 2, 3); M.dessiner(calque, M.ROLES.get(role, "bonnet"), p)
+            if not ang: dessine(img, role, p); continue
+            calque = np.empty_like(img); calque[:] = (1, 2, 3); dessine(calque, role, p)
             R_ = cv2.getRotationMatrix2D((p["x"], p["y"]), -ang, 1.0)
             calque = cv2.warpAffine(calque, R_, (W, H), flags=cv2.INTER_LINEAR, borderValue=(1, 2, 3))
             m_ = (np.abs(calque.astype(np.int16) - (1, 2, 3)).sum(2) > 9)[..., None]; img[:] = np.where(m_, calque, img)
@@ -656,9 +698,11 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             ec = ecoutant(q); sens = -1 if position(sc, ec)[0] < position(sc, q["p"])[0] else 1
             y0_, x0_, x1_ = 1060, (0 if sens < 0 else W // 4), (W * 3 // 4 if sens < 0 else W)
             sub = np.empty((H - y0_, x1_ - x0_, 3), np.uint8); sub[:] = (1, 2, 3)
-            p = pose(ec, tm, q, sc); p.update(dos=True, s=2.5, x=W / 2 + sens * 0.40 * W - x0_, y=H + 420 - y0_, tremble=0, effets=(), main_g=None, main_d=None,
+            y_dos = H + 420 - y0_
+            if FICHES and ec in FICHES: y_dos = (H - 140 - y0_) + (6.6 - 0.52) * HU.hauteur_tete(2.4, FICHES[ec]["taille"])   # sa tête en bas de l'image
+            p = pose(ec, tm, q, sc); p.update(dos=True, s=2.5 if not (FICHES and ec in FICHES) else 2.4, x=W / 2 + sens * 0.40 * W - x0_, y=y_dos, tremble=0, effets=(), main_g=None, main_d=None,
                                               bras_g=(-18, 8), bras_d=(18, -8))
-            M.dessiner(sub, M.ROLES.get(ec, "bonnet"), p)
+            dessine(sub, ec, p)
             m_ = (np.abs(sub.astype(np.int16) - (1, 2, 3)).sum(2) > 9).astype(np.float32)
             m_ = cv2.GaussianBlur(m_, (0, 0), 6)[..., None]; sub = cv2.GaussianBlur(sub, (0, 0), 6).astype(np.float32) * 0.86
             zone = img[y0_:, x0_:x1_]; img[y0_:, x0_:x1_] = (zone * (1 - m_) + sub * m_).astype(np.uint8)
@@ -737,6 +781,13 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
     with wave.open(brut, "wb") as w:
         w.setnchannels(2); w.setsampwidth(2); w.setframerate(SRM); w.writeframes((mix * 32767).astype(np.int16).tobytes())
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", brut, "-af", "loudnorm=I=-14:TP=-1.5:LRA=11", "-ar", "48000", "-ac", "2", wav], check=True)
+    if FICHES and rendu3d.actif():                                        # vraie 3D : 1er passage à blanc (poses), puis Blender
+        TROISD["rec"] = {r: [None] * (nf + 2) for r in FICHES}
+        for fi in range(nf): image(fi)
+        rec, TROISD["rec"] = TROISD["rec"], None
+        print(f"3D : {sum(1 for r in rec for x in rec[r] if x)} poses notées, rendu Blender…", flush=True)
+        TROISD["rendu"] = rendu3d.Rendu(FICHES, B["costumes"], rec)
+        if not TROISD["rendu"].ok: TROISD["rendu"] = None; print("3D indisponible : personnages en 2D", flush=True)
     ff = subprocess.Popen(["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS),
                            "-i", "-", "-i", wav, "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p",
                            "-c:a", "aac", "-b:a", "192k", "-shortest", "-movflags", "+faststart", sortie], stdin=subprocess.PIPE)

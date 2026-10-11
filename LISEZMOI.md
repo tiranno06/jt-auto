@@ -99,6 +99,15 @@ Pour les sketchs, les gags éclair et les vidéos faites sur la bande son d'une 
 - quand Claude est disponible, il peut choisir lui-même lieux, heure, tenues, gags et plans (catalogues fermés, vérifiés par le robot) ;
 - la mémoire du studio (`episodes/studio_memoire.json`) garde ce qui a été tourné pour varier d'une vidéo à l'autre.
 
+### Personnages adultes, casting libre (par défaut)
+Réglage **Personnages** dans l'onglet ⚙️ : « Adultes semi-réalistes » (par défaut) ou « Marionnettes de la chaîne ».
+- `moteur/humain.py` dessine des **adultes en volume** : environ 7 têtes de haut, épaules, taille et hanches selon le genre et la corpulence, mains à cinq doigts, visage avec yeux colorés (iris, pupille, reflets, paupières, cils), sourcils épais ou fins, nez, lèvres, dents, oreilles, rides selon l'âge, barbe, moustache, lunettes, 13 coiffures possibles (longs, carré, queue, chignon, boucles, court, raie, rasé, chauve…), cheveux qui grisonnent avec l'âge, tenue complète. Ombrage en volume (et non trait noir de dessin animé).
+- **Casting libre** : à chaque vidéo, de nouveaux personnages. Le genre vient de la voix (doublage TikTok) ou du prénom du sketch ; l'âge de ce qui est dit (« mamie », « papa », « docteur »…) ou de Claude ; la coiffure, la couleur des cheveux et des habits de la vidéo d'origine ; le reste (visage, peau, yeux, corpulence) est tiré au hasard avec la graine de l'épisode. Les figurants sont aussi des adultes.
+- Toute la mise en scène s'applique (plans, gestes, mimiques, intonation, réactions) ; les cadrages sont adaptés aux proportions d'adulte.
+
+### Vraie 3D (Blender, coupée par défaut)
+Réglage **Vraie 3D (Blender)** : les personnages adultes sont construits en 3D d'après la même fiche (`moteur/blender_humain.py`, logiciel libre Blender, rendu Cycles : vraies ombres et lumières), animés par les mêmes poses, puis posés sur les décors (`moteur/rendu3d.py`). Le workflow n'installe Blender que si le réglage est activé. Les poses identiques ne sont rendues qu'une fois. C'est **beaucoup plus long** (1 à 3 s par pose sur les serveurs GitHub : une vidéo de 90 s peut dépasser une heure, la limite du workflow est de 120 min). En cas d'échec, la vidéo sort automatiquement en 2D. C'est une première version : formes encore simples (style « figurines »), à affiner.
+
 Réglage **Rendu détaillé (studio)** dans l'onglet ⚙️ : coupé, le robot revient exactement à l'ancien rendu (bonshommes blancs, plans simples). Le rendu détaillé prend environ deux fois plus de temps de calcul sur GitHub (gratuit).
 
 ## Réglages depuis l'application (onglet ⚙️ Réglages)
@@ -132,6 +141,8 @@ En cas d'échec, GitHub t'envoie un e-mail ; le détail est dans l'onglet Action
 - `moteur/dessin_jt.py` / `moteur/jt.py` : dessins, montage studio et mixage
 - `moteur/cartoon.py` / `moteur/marionnette.py` : dessin animé (sketchs, gags éclair, doublage) et personnages
 - `moteur/studio.py` / `moteur/decor_dessin.py` : direction artistique et réalisation sans IA, décors dessinés par le robot
+- `moteur/humain.py` : personnages adultes 2D en volume et leurs fiches (casting libre)
+- `moteur/rendu3d.py` / `moteur/blender_humain.py` : vraie 3D (Blender), réglage RENDU_3D
 - `moteur/analyse_video.py` / `moteur/banque_visuelle.py` : analyse de l'image des vidéos TikTok envoyées, banque visuelle (détecteur de visages YuNet, licence MIT, dans `moteur/modeles/`)
 - `moteur/publier.py` : publication TikTok (Buffer, ou Upload-Post)
 - `moteur/site.py` : site de régie (GitHub Pages)
