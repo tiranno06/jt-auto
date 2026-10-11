@@ -130,11 +130,15 @@ Tous les outils payants sont activés par défaut (Claude pour l'écriture, la m
 ### Le mode payant profite de toutes les améliorations
 Les consignes envoyées à Claude (doublage d'une vidéo TikTok et sketchs écrits) sont générées à partir du code (`studio.consigne_studio`) : Claude connaît tous les lieux, tenues, coiffures, barbes, chapeaux, imprimés, thèmes d'époque, plans, mouvements et gestes, choisit le casting adulte (avec barbe et coiffure) et le rythme du montage (« cadence » : rapide, normal ou posé). Le moteur applique ensuite le montage dynamique, les détails et l'intonation comme en mode gratuit. Les décors IA (Stable Diffusion XL) sont demandés en style détaillé (trait noir épais, beaucoup d'objets) et gardent le premier plan dessiné (comptoir, bureau, guichet).
 
+### Mode économique (réglage « 💰 Mode économique », dans Réglages → Crédits et outils)
+Garde les outils payants (Claude, ElevenLabs, décors IA) mais dépense beaucoup moins de crédit Claude : écriture avec Sonnet au lieu d'Opus, petites étapes sur le modèle économique, un seul premier jet au lieu de trois, 2 réécritures et 2 sujets au plus, sans public test ni recherche des tendances, et pas de nouvelles ambiances sonores ElevenLabs (celles déjà fabriquées restent utilisées). Coupé par défaut (meilleure qualité).
+
 ## Vitesse et stabilité
 - **Crédits vérifiés au départ** (appel minuscule à Claude, solde ElevenLabs) : le robot part directement en payant ou en gratuit.
 - **Réessais automatiques** des coupures passagères (réseau, serveur saturé) avant de basculer sur le gratuit ; la publication n'est jamais réessayée (pas de doublon).
 - **Rendu sur les 4 processeurs** des serveurs GitHub (réglage `RENDU_PARALLELE=0` pour revenir à un seul).
 - **Fiche par vidéo** : l'historique note les outils utilisés (`outils` : Claude ok/secours, voix ElevenLabs/Chatterbox/Piper/TikTok, décors IA/dessinés), affichés en voyants sur le site.
+- **Site toujours à jour** : toutes les mises en ligne du site passent par une seule file d'attente (`site.yml`, reconstruit depuis le dernier historique, 2e essai si GitHub refuse) ; avant, deux mises en ligne en même temps pouvaient en écraser une et faire disparaître une vidéo. En plus, l'application ajoute d'elle-même les vidéos toutes neuves que la version du site ne contient pas encore (lues directement depuis les Releases GitHub).
 - **Test automatique avant chaque mise à jour** : chaque demande de fusion fabrique une vraie mini-vidéo de bout en bout.
 
 ## Style cinéma (toujours en dessin animé)

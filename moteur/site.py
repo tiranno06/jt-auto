@@ -302,6 +302,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
   <details class="groupe" open><summary>💳 Crédits et outils <span id="resumeOutils"></span></summary>
     <p class="note" id="outilsDate"></p>
     <div id="voyants"></div>
+    <div class="auto"><div class="txt"><b>💰 Mode économique</b><small>Garde Claude, ElevenLabs et les décors IA, mais dépense environ 3 à 5 fois moins de crédit Claude : Sonnet au lieu d'Opus, 1 premier jet, 2 réécritures au plus, sans public test ni tendances.</small></div><button class="inter" data-var="MODE_ECO" data-def="0" data-bascule="1"></button></div>
     <div class="auto"><div class="txt"><b>Voix ElevenLabs</b><small>Voix réalistes (rires, colère). Coupé : voix gratuites.</small></div><button class="inter" data-var="ELEVENLABS" data-def="1" data-bascule="1"></button></div>
     <div class="auto"><div class="txt"><b>Décors générés par IA</b><small>Un décor par scène (Modal). Coupé : décors dessinés.</small></div><button class="inter" data-var="DECORS" data-def="1" data-bascule="1"></button></div>
     <div class="auto"><div class="txt"><b>Contrôle de la vidéo finie</b><small>Claude regarde la vidéo avant publication ; défaut grave = pas de publication auto.</small></div><button class="inter" data-var="CONTROLE_VIDEO" data-def="1" data-bascule="1"></button></div>
@@ -496,6 +497,7 @@ function voyants(){
   const d=!o||!o.decors?g("Modal : pas encore d'information")
     :o.decors==="ia"?["vert","Modal : OK (décors IA)"]
     :o.decors==="dessines"?["rouge","Modal : décors IA indisponibles ou coupés, le robot dessine les décors"]:g("Modal : pas encore d'information");
+  if(o&&o.claude==="ok"&&o.eco) c[1]="Claude : OK (mode économique)";
   return [["claude",...c],["voix",...v],["decors",...d]];
 }
 function rendreOutils(){
@@ -516,7 +518,7 @@ function badge(v){
 // ------------------------------------------------ onglet Statistiques (vues, dépenses, alertes)
 const ALERTES = __ALERTES__;
 let STATS_LIVE=__STATS__, DERNIERE_MAJ=0;
-// actualisation automatique des statistiques : au lancement, puis toutes les heures (et au retour sur l'appli après plus d'une heure)
+// actualisation automatique (statistiques et nouvelles vidéos) : au lancement, toutes les heures, et au retour sur l'appli après 5 min
 // régie connectée : lecture directe par l'API GitHub (données fraîches) ; sinon fichiers publics (cache de quelques minutes)
 async function lireEpisode(nom){
   if(lireJeton()){try{const r=await gh(`/contents/episodes/${nom}?ref=${CONF.branche}&t=${Date.now()}`,{headers:{"Accept":"application/vnd.github.raw+json"}});
@@ -530,6 +532,7 @@ async function actualiserStats(){
     const [h,st]=await Promise.all([lireEpisode("historique.json").catch(()=>null),lireEpisode("stats.json").catch(()=>null)]);
     if(Array.isArray(h)){const par={}; h.forEach(e=>{if(e.fichier)par[e.fichier]=e});
       DATA.forEach(v=>{const e=par[v.fichier]; if(!e)return; ["vues","likes","commentaires","partages","publie","couts"].forEach(k=>{if(e[k]!==undefined)v[k]=e[k]})});
+      ajouterNouvelles(h);
       const faites=h.filter(e=>e.fichier), der=faites[faites.length-1];
       if(der){OUTILS={outils:(der.outils&&typeof der.outils==="object")?der.outils:null,date:der.date||"",titre:der.titre||""}; rendreOutils()}}
     if(st&&st.compte){const vids=st.videos||[]; STATS_LIVE={compte:st.compte,maj:st.maj||"",videos:vids.length,
@@ -541,8 +544,23 @@ async function actualiserStats(){
     else if(o==="videos"){rendre(); if(choisie!==null) document.querySelectorAll("#liste .carte").forEach(c=>c.classList.toggle("choisie",+c.dataset.i===choisie))}
   }catch(e){}
 }
+// vidéo fabriquée mais pas encore dans cette version du site (mise en ligne en cours ou ratée) : elle apparaît quand même,
+// lue directement depuis les Releases GitHub où le robot l'archive toujours ; supprimée : elle disparaît de la liste
+function ajouterNouvelles(h){
+  const connus=new Set(DATA.map(v=>v.fichier)), vivants=new Set(h.filter(e=>e.fichier).map(e=>e.fichier));
+  const avant=DATA.length; if(choisie===null) for(let i=DATA.length-1;i>=0;i--) if(!vivants.has(DATA[i].fichier)) DATA.splice(i,1);
+  const neuves=h.filter(e=>e.fichier&&!connus.has(e.fichier)).slice(-15).map(e=>({titre:e.titre||"",date:e.date||"",fichier:e.fichier,poster:"",
+    src:`https://github.com/${CONF.depot}/releases/download/${e.tag||"emissions-"+e.fichier.slice(0,7)}/${e.fichier}`,
+    origine:(e.source_audio||String(e.theme||"").startsWith("Bande son")||String(e.theme||"").startsWith("TIKTOK::"))?"tiktok":(e.manuel||e.theme)?"texte":"auto",
+    legende:e.legende||"",publie:e.publie,vues:e.vues,format:e.format||"",manuel:!!e.manuel,avis:e.avis||0,note:e.note,programmee:e.programmee,
+    couts:e.couts||{},duree:e.duree,likes:e.likes,commentaires:e.commentaires,partages:e.partages}));
+  if(!neuves.length&&DATA.length===avant) return;
+  DATA.unshift(...neuves.reverse());
+  if(choisie!==null) choisie+=neuves.length;                              // la vidéo ouverte garde sa place
+}
+const srcDe=v=>v.src||"videos/"+v.fichier;
 setTimeout(actualiserStats,1500); setInterval(actualiserStats,3600*1000);
-document.addEventListener("visibilitychange",()=>{if(!document.hidden&&Date.now()-DERNIERE_MAJ>3600*1000) actualiserStats()});
+document.addEventListener("visibilitychange",()=>{if(!document.hidden&&Date.now()-DERNIERE_MAJ>300*1000) actualiserStats()});
 // nouveaux abonnés depuis une date : total actuel moins le dernier relevé d'avant cette date (ou le plus ancien connu)
 function gainAbonnes(hist,depuis){
   if(!hist||!hist.length) return null; const n=hist[hist.length-1].n;
@@ -583,7 +601,7 @@ const VIDE={tout:"Aucune vidéo pour l'instant : touchez « Créer une vidéo »
   tiktok:"Aucune vidéo faite depuis un lien TikTok pour l'instant.",texte:"Aucune vidéo faite depuis votre texte pour l'instant."};
 function carte(v,i,petite){
   const c=document.createElement("div");c.className="carte"+(petite?" petite":"");c.dataset.i=i;
-  c.innerHTML=`<img loading="lazy" src="videos/${v.poster}" alt=""><div class="infos"><div class="titre"></div><div class="date">${dateFr(v.date)}${heureDe(v)}${v.vues!=null?` · 👁 ${Number(v.vues).toLocaleString("fr-FR")} vues`:""}</div>${badge(v)}<div class="etat"></div></div>`+(petite?"":`<button class="croix" title="Supprimer cette vidéo" aria-label="Supprimer">✕</button>`);
+  c.innerHTML=`<img loading="lazy" src="${v.poster?"videos/"+v.poster:"logo-192.png"}" alt=""><div class="infos"><div class="titre"></div><div class="date">${dateFr(v.date)}${heureDe(v)}${v.vues!=null?` · 👁 ${Number(v.vues).toLocaleString("fr-FR")} vues`:""}</div>${badge(v)}<div class="etat"></div></div>`+(petite?"":`<button class="croix" title="Supprimer cette vidéo" aria-label="Supprimer">✕</button>`);
   c.querySelector(".titre").textContent=v.titre; return c;
 }
 function rendre(){
@@ -628,7 +646,7 @@ function choisir(i){
   $("#pouce").classList.toggle("actif",v.avis===1); $("#bof").classList.toggle("actif",v.avis===-1);
   document.querySelectorAll("#liste .carte").forEach(c=>c.classList.toggle("choisie",+c.dataset.i===i));
   $("#choix").textContent="Sélection : "+v.titre; ["#copier","#voir","#manuel"].forEach(s=>$(s).disabled=false);
-  const a=$("#apercu"); a.src="videos/"+v.fichier; a.style.display="block"; $("#suivi").textContent=""; majBoutons(); ajusterBas();
+  const a=$("#apercu"); a.src=srcDe(v); a.style.display="block"; $("#suivi").textContent=""; majBoutons(); ajusterBas();
 }
 // ------------------------------------------------ publication en un bouton (workflow publier.yml)
 $("#publier").onclick=async()=>{
@@ -688,13 +706,13 @@ $("#copier").onclick=async()=>{const t=DATA[choisie].legende||"";try{await navig
 $("#manuel").onclick=async()=>{
   const v=DATA[choisie]; navigator.clipboard && navigator.clipboard.writeText(v.legende||"").catch(()=>{});
   if(!peutPartager){
-    const a=document.createElement("a");a.href="videos/"+v.fichier;a.download=v.fichier;document.body.appendChild(a);a.click();a.remove();
+    const a=document.createElement("a");a.href=srcDe(v);a.download=v.fichier;document.body.appendChild(a);a.click();a.remove();
     window.open("https://www.tiktok.com/tiktokstudio/upload","_blank");toast("Légende copiée · vidéo téléchargée");return;
   }
   const b=$("#manuel");
   if(!fichier){b.textContent="Préparation…";const jeton=charge={};
-    try{const r=await fetch("videos/"+v.fichier);const blob=await r.blob();if(charge!==jeton)return;fichier=new File([blob],v.fichier,{type:"video/mp4"});
-      b.textContent="Touchez pour partager";}catch(e){b.textContent="Partage manuel";toast("Chargement impossible")}
+    try{const r=await fetch(srcDe(v));if(!r.ok)throw new Error(r.status);const blob=await r.blob();if(charge!==jeton)return;fichier=new File([blob],v.fichier,{type:"video/mp4"});
+      b.textContent="Touchez pour partager";}catch(e){b.textContent="Partage manuel";if(v.src){window.open(v.src,"_blank");toast("Vidéo toute neuve : téléchargée depuis GitHub, partagez-la depuis vos fichiers")}else toast("Chargement impossible")}
     return;}
   try{await navigator.share({files:[fichier],title:v.titre});toast("Choisissez TikTok, collez la légende, activez « Contenu IA »")}
   catch(e){if(e.name!=="AbortError")toast("Partage impossible : "+e.message)}

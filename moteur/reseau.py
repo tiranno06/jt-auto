@@ -23,6 +23,23 @@ def claude():
     except TypeError: return anthropic.Anthropic()                         # (client simulé des tests)
 
 
+# ------------------------------------------------------------------ mode économique (réglage du site)
+def mode_eco():
+    """Réglage « Mode économique » : on garde les outils payants (Claude, ElevenLabs, décors IA) mais on dépense moins.
+    Claude Sonnet au lieu d'Opus, petites étapes sur le modèle économique, 1 premier jet au lieu de 3, 2 réécritures et 2 sujets
+    au plus, pas de public test ni de recherche des tendances, pas de nouvelles ambiances sonores ElevenLabs (celles déjà faites
+    restent utilisées). À appeler avant d'importer ecrire. Renvoie True si le mode est actif."""
+    import os
+    if (os.environ.get("MODE_ECO") or "0") != "1": return False
+    os.environ.update(MODELE_CLAUDE="claude-sonnet-5-5", ETAPES_ECO="1", VERSIONS="1", PUBLIC_TEST="0", TENDANCES="0", AMBIANCES_ELEVEN="0")
+    for cle, plafond in (("MAX_REECRITURES", 2), ("SUJETS_MAX", 2)):
+        try: v = int(os.environ.get(cle) or plafond)
+        except ValueError: v = plafond
+        os.environ[cle] = str(min(v, plafond))
+    print("Mode économique : Claude Sonnet, 1 premier jet, 2 réécritures au plus, sans public test ni tendances.", flush=True)
+    return True
+
+
 # ------------------------------------------------------------------ crédits vérifiés au départ
 def verifier_credits():
     """Vérifie au lancement si Claude et ElevenLabs répondent et ont du crédit (appel minuscule, coût négligeable).

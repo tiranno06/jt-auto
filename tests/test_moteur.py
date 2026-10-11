@@ -617,6 +617,32 @@ class TestVideoComplete(unittest.TestCase):
         r = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "stream=codec_type", "-of", "csv=p=0", sortie], capture_output=True, text=True)
         self.assertIn("video", r.stdout); self.assertIn("audio", r.stdout)
 
+class TestModeEco(unittest.TestCase):
+    def test_mode_eco(self):
+        import reseau
+        cles = ("MODE_ECO", "MODELE_CLAUDE", "ETAPES_ECO", "VERSIONS", "PUBLIC_TEST", "TENDANCES", "AMBIANCES_ELEVEN", "MAX_REECRITURES", "SUJETS_MAX")
+        avant = {k: os.environ.get(k) for k in cles}
+        try:
+            os.environ.pop("MODE_ECO", None); os.environ["MAX_REECRITURES"] = "6"
+            self.assertFalse(reseau.mode_eco()); self.assertEqual(os.environ["MAX_REECRITURES"], "6")     # coupé : rien ne change
+            os.environ["MODE_ECO"] = "1"; os.environ["SUJETS_MAX"] = "1"
+            self.assertTrue(reseau.mode_eco())
+            self.assertEqual(os.environ["MODELE_CLAUDE"], "claude-sonnet-5-5")
+            self.assertEqual((os.environ["MAX_REECRITURES"], os.environ["SUJETS_MAX"], os.environ["VERSIONS"]), ("2", "1", "1"))
+            self.assertEqual((os.environ["PUBLIC_TEST"], os.environ["TENDANCES"], os.environ["ETAPES_ECO"]), ("0", "0", "1"))
+        finally:
+            for k, v in avant.items():
+                if v is None: os.environ.pop(k, None)
+                else: os.environ[k] = v
+
+    def test_site_reglage_et_videos_neuves(self):
+        src = open(os.path.join(os.path.dirname(__file__), "..", "moteur", "site.py"), encoding="utf-8").read()
+        self.assertIn('data-var="MODE_ECO"', src); self.assertIn("ajouterNouvelles(h)", src)
+        for wf in ("emission", "publier", "supprimer", "regie"):                # une seule file de mise en ligne du site
+            y = open(os.path.join(os.path.dirname(__file__), "..", ".github", "workflows", wf + ".yml"), encoding="utf-8").read()
+            self.assertIn("gh workflow run site.yml", y); self.assertNotIn("deploy-pages", y)
+
+
 class TestAccroches(unittest.TestCase):
     def test_deux_styles_departages_par_les_vues(self):
         sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "moteur"))

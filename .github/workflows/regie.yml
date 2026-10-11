@@ -16,14 +16,12 @@ permissions:
   contents: write
   pages: write
   id-token: write
+  actions: write
 
 jobs:
   action:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
-    environment:
-      name: github-pages
-      url: ${{ steps.pages.outputs.page_url }}
     env:
       ACTION: ${{ inputs.action }}
       FICHIER: ${{ inputs.fichier }}
@@ -43,15 +41,7 @@ jobs:
           git add episodes
           git commit -m "Régie : $ACTION sur $FICHIER" || echo "rien à enregistrer"
           REJOUER="python moteur/regie_action.py" MESSAGE="Régie : $ACTION" python moteur/fusion.py
-      - name: Reconstruire le site
+      - name: Mettre le site à jour (une seule file d'attente pour tout le robot, aucune vidéo oubliée)
+        if: always()
         run: |
-          sudo apt-get install -y -q ffmpeg || true
-          pip install -q pillow numpy opencv-python-headless && python moteur/site.py
-      - uses: actions/configure-pages@v6
-        continue-on-error: true
-      - uses: actions/upload-pages-artifact@v5
-        with:
-          path: site
-      - id: pages
-        uses: actions/deploy-pages@v5
-        continue-on-error: true
+          gh workflow run site.yml --ref main || echo "Mise à jour du site impossible à lancer : relancez « Mettre à jour le site »"

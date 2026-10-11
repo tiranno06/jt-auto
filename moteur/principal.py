@@ -38,6 +38,8 @@ if THEME and (os.environ.get("FORMAT") or "") not in ("mini", "libre"): os.envir
 os.environ["FORMAT"] = FORMAT = format_du_jour(os.environ.get("FORMAT"), _hist)
 if FORMAT == "mini": os.environ["LONGUEUR"] = "eclair"                    # gag éclair : ~15 s
 elif FORMAT == "libre": os.environ["LONGUEUR"] = "pro"                    # sketch long : 60 à 90 s (plus d'une minute garantie au montage)
+import reseau
+ECO = reseau.mode_eco()                                                   # réglage « Mode économique » (avant d'importer ecrire)
 import actu, ecrire, voix, jt, serie, stats, secours
 
 SR = 22050
@@ -276,7 +278,7 @@ def main():
                 GPU["s"] += (datetime.datetime.now() - t_gpu).total_seconds()
             try:                                                           # mode payant : ambiance sonore ElevenLabs de chaque lieu (une fois par lieu)
                 import bruitages_eleven, studio as st_
-                if cartoon.DETAIL and not DOUB:
+                if cartoon.DETAIL and not DOUB and os.environ.get("AMBIANCES_ELEVEN", "1") != "0":
                     for l_ in set(st_.bible(sk, [r for r in dict.fromkeys(x["p"] for x in sk.get("repliques", [])) if r != "narrateur"])["lieux"]): bruitages_eleven.ambiance_lieu(l_)
             except Exception as e: print(f"Ambiances ElevenLabs indisponibles : {e}", flush=True)
             duree = cartoon.rendre(sk, base + ".mp4", audios, mots=mots, decors=decors, mini=fmt == "mini")
@@ -319,7 +321,7 @@ def main():
                            style_accroche=style_acc, couverture_ms=int((getattr(sys.modules.get("cartoon"), "COUVERTURE", None) or 2.5) * 1000),
                            outils=dict(claude=("secours" if SECOURS else CREDITS["claude"]),
                                        voix=("tiktok" if DOUB else "elevenlabs" if "eleven" in str(moteur).lower() else "chatterbox" if "chatterbox" in str(moteur).lower() else "piper"),
-                                       decors=("ia" if decors else "dessines"))))
+                                       decors=("ia" if decors else "dessines"), eco=ECO)))
     print("Outils utilisés : " + ", ".join(f"{k} = {v}" for k, v in historique[-1]["outils"].items()), flush=True)
     json.dump(historique[-200:], open("episodes/historique.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     if THEME and not REFAIRE: historique[-1]["manuel"] = True; historique[-1]["theme"] = THEME[:300]
