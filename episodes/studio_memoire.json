@@ -247,38 +247,38 @@
  {
   "moment": "soir",
   "lieux": [
-   "palais"
+   "salon"
   ],
   "source": "robot+image",
-  "duree": 86.8,
+  "duree": 134.6,
   "plans": {
    "large": 1,
-   "epaule": 10,
-   "serre": 17,
-   "tres_serre": 14
+   "epaule": 11,
+   "serre": 15,
+   "tres_serre": 11
   },
   "mouvements": {
-   "avance": 2,
-   "fixe": 40
+   "avance": 4,
+   "fixe": 32,
+   "zoom_choc": 2
   },
   "costumes": {
-   "envoyee": "redingote",
-   "presentateur": "redingote"
+   "presentateur": "polo",
+   "envoyee": "pull"
   },
-  "figurants": 1,
+  "figurants": 0,
   "ambiances": [
-   "neige",
    "poussiere"
   ],
   "controle": "ok",
-  "fichier": "2026-10-11_21h47_emission.mp4",
+  "fichier": "2026-10-11_21h43_emission.mp4",
   "cine": {
    "focus": true,
    "vertige": true,
    "tiers": false,
    "etalonnage": true,
    "profondeur": true,
-   "grain": false,
+   "grain": true,
    "reflets": false,
    "son": true
   },
