@@ -21,7 +21,7 @@ import marionnette as M
 
 MOMENTS = ("matin", "jour", "soir", "nuit")
 PLANS = ("large", "moyen", "serre", "tres_serre", "plongee", "contre_plongee", "epaule")
-MOUVEMENTS = ("fixe", "avance", "recul", "travelling", "epaule", "zoom_choc")
+MOUVEMENTS = ("fixe", "avance", "recul", "travelling", "epaule", "zoom_choc", "vertige")
 REACTIONS = ("aucune", "regard_camera", "yeux_au_ciel", "sceptique", "choc", "rire", "gene", "soupir", "facepalm", "bras_croises")
 STYLES_IA = {                                                              # ajouté à la description du décor envoyée à SDXL
     "matin": "soft pink morning light", "jour": "bright daylight", "soir": "warm golden evening light, lamps on",
@@ -290,6 +290,12 @@ def bible(sk, roles):
         texte_sc = " ".join(lignes_sc[:max(1, len(lignes_sc) // 2)] * 2 + lignes_sc[max(1, len(lignes_sc) // 2):])   # le début de la scène pose le lieu
         lieux.append(l or DD.lieu_de(decor_sc, "") or DD.lieu_de(texte_sc, "") or DD.lieu_de(t_low, "salon"))
     gags = [str(g)[:80] for g in (S.get("gags") or []) if str(g).strip()][:4]
+    # effets « cinéma » de l'épisode : tirés au hasard (graine de l'épisode) pour varier d'une vidéo à l'autre, mêlés au style d'avant
+    cine = {k: bool(rng.random() < p_) for k, p_ in proba_cine().items()}  # les effets des vidéos qui marchent reviennent plus souvent
+    if isinstance(S.get("cine"), dict): cine.update({k: bool(v) for k, v in S["cine"].items() if k in CINE_PROBA})   # choix de Claude (mode payant)
+    assis = {}                                                             # qui est assis (bureau, salon, guichet…) : une chaise est dessinée avec lui
+    for k_, l_ in enumerate(lieux):
+        if l_ in LIEUX_ASSIS and len(roles) >= 2 and rng.random() < 0.55: assis[k_] = roles[int(rng.integers(len(roles)))]
     # qui mène chaque scène (le « métier » du lieu) : celui qui parle le plus de questions / le premier à parler
     costumes = {}
     for k, role in enumerate(roles):
@@ -346,7 +352,7 @@ def bible(sk, roles):
                 lumiere=lum, ombre=0.24 if moment != "nuit" else 0.32, etalonnage=ETALONNAGE[moment], heure=heure,
                 style_ia=STYLES_IA[moment], plans=S.get("plans") if isinstance(S.get("plans"), list) else [],
                 source=("auteur" if S else "robot") + ("+image" if V else ""), c_mur=c_mur, rythme=rythme, fiches=fiches,
-                cadence=S.get("cadence") if S.get("cadence") in CADENCES else None)
+                cadence=S.get("cadence") if S.get("cadence") in CADENCES else None, assis=assis, cine=cine, decoupe=_decoupe_claude(S, roles))
 
 def _humain():
     import humain
@@ -461,6 +467,34 @@ def realiser(ph, places, B):
         q["regard_camera"] = bool(j in silences or (a.get("regard_camera") is True))
     return ph
 
+CINE_PROBA = {"focus": 0.8, "vertige": 0.7, "tiers": 0.65, "etalonnage": 0.9, "profondeur": 0.8, "grain": 0.7, "reflets": 0.5, "son": 1.0}
+def proba_cine():
+    """Probabilités des effets cinéma, ajustées par les vues TikTok : un effet présent dans les vidéos les plus vues revient plus souvent."""
+    p = dict(CINE_PROBA)
+    try:
+        import banque_visuelle; vues = banque_visuelle._vues()
+        m = [(e.get("cine") or {}, vues[e["fichier"]]) for e in _memoire() if e.get("fichier") in vues and e.get("cine")]
+        for k in p:
+            avec = [v for c, v in m if c.get(k)]; sans = [v for c, v in m if not c.get(k)]
+            if len(avec) >= 3 and len(sans) >= 3:
+                r = (sum(avec) / len(avec) + 1) / (sum(sans) / len(sans) + 1)
+                p[k] = float(np.clip(p[k] * r ** 0.5, 0.15, 0.95))
+    except Exception: pass
+    return p
+
+LIEUX_ASSIS = ("bureau", "salon", "restaurant", "administration", "classe", "bar", "cabinet_medical", "palais")
+# gestes à deux, déclenchés par les mots de la réplique (le personnage s'approche, sa main atteint vraiment l'autre)
+GESTES_DUO = [("tope", r"\b(tope|bravo|yes|trop bien|on l'a fait|g[ée]nial|check|bien jou[ée])\b"),
+              ("epaule", r"\b(calme-toi|t'inqui[eè]te|courage|d[ée]sol[ée]e?|mon pote|ma belle|mon grand|ça va aller|pas grave)\b"),
+              ("donne", r"\b(tiens|prends[- ]le|prends[- ]la|voil[àa] (ton|ta|tes|le|la)|cadeau pour toi)\b"),
+              ("pousse", r"\b(d[ée]gage|pousse-toi|va-t'en|sors d'ici|laisse-moi passer)\b")]
+
+def geste_duo(texte):
+    t = (texte or "").lower()
+    for nom, motif in GESTES_DUO:
+        if re.search(motif, t): return nom
+    return None
+
 # ------------------------------------------------------------------ consigne de direction artistique pour Claude (mode payant)
 CADENCES = {"rapide": 0.72, "normal": 1.0, "pose": 1.35}
 
@@ -491,7 +525,12 @@ def consigne_studio():
   "geste" parmi {L(GESTES)}, "reaction" de celui qui écoute parmi {L(REACTIONS)}. Le moteur découpe déjà chaque réplique en plusieurs
   plans (serrés, larges, réactions de celui qui écoute), calés sur la voix, avec des mouvements de caméra et des passages fluides
   (coupe, glissé, filé, zoom) : ton choix fixe le premier plan de la réplique et les moments forts (serré ou très serré pour les
-  chutes, contre-plongée pour celui qui s'énerve, plongée pour celui qui se fait écraser, regard caméra pour les silences gênants)."""
+  chutes, contre-plongée pour celui qui s'énerve, plongée pour celui qui se fait écraser, regard caméra pour les silences gênants) ;
+  "decoupe" (facultatif, comme un vrai storyboard) = pour les répliques que tu veux monter toi-même : {{"replique": n, "plans": [
+  {{"debut": fraction de la réplique entre 0 et 1, "plan": …, "cible": rôle filmé (celui qui parle ou celui qui écoute),
+  "mouvement": … ou vertige, "passage": coupe, glisse, file ou zoom}}, …]}} — alterne serré / large, montre les réactions ;
+  "cine" (facultatif) = effets de l'épisode, vrai ou faux : focus (mise au point sur celui qui parle), vertige, tiers (règle des
+  tiers), etalonnage (couleur selon l'émotion), profondeur (premier plan flou), grain, reflets, son (ambiance, musique)."""
 
 # ------------------------------------------------------------------ découpage : plusieurs plans par réplique, calés sur le son
 SERRES = ("serre", "tres_serre", "epaule", "plongee", "contre_plongee")
@@ -508,6 +547,24 @@ def _coupe_sur_le_son(lv, fps, t_deb, t_ideal, marge=0.28):
     if seg[i] < 0.25: return t_deb + (k0 + i) / fps                       # une respiration, un blanc entre deux mots
     d = np.diff(np.asarray(lv[k0 - 1:k1], np.float32)); i = int(np.argmax(d))
     return t_deb + (k0 + i) / fps                                          # sinon : on coupe sur l'attaque d'un mot
+
+PASSAGES = ("coupe", "glisse", "file", "zoom")
+
+def _decoupe_claude(S, roles):
+    """Découpage plan par plan proposé par Claude (mode payant), vérifié : {n° de réplique: [plans]}."""
+    out = {}
+    for d in (S.get("decoupe") or []) if isinstance(S.get("decoupe"), list) else []:
+        try:
+            n = int(d.get("replique")); pl = []
+            for x in d.get("plans") or []:
+                deb = float(x.get("debut", 0)); plan = x.get("plan") if x.get("plan") in PLANS else None
+                if not plan or not 0 <= deb < 1: continue
+                pl.append(dict(debut=deb, plan=plan, cible=x.get("cible") if x.get("cible") in roles else None,
+                               mouvement=x.get("mouvement") if x.get("mouvement") in MOUVEMENTS else None,
+                               passage=x.get("passage") if x.get("passage") in PASSAGES else None))
+            if pl: out[n] = sorted(pl, key=lambda x: x["debut"])[:6]
+        except (AttributeError, TypeError, ValueError): continue
+    return out
 
 def decouper(ph, places, B, fps=30):
     """Montage dynamique : chaque réplique est découpée en plusieurs plans selon son énergie et son émotion (dispute : coupes rapides,
@@ -529,7 +586,12 @@ def decouper(ph, places, B, fps=30):
         d_cible = DUREE_PLAN.get(q["emo"], 1.35) * (1.2 - 0.45 * min(1.0, energie)) * k_ref
         if q.get("chute") or q["p"] == "narrateur" or j == len(ph) - 1: d_cible = 99   # la chute se joue en un seul plan
         n = max(1 if (t1 - t0) < 1.6 or d_cible > 50 else 2, int(round((t1 - t0) / max(0.7, d_cible))))
-        coupes = [t0] + [_coupe_sur_le_son(lv, fps, q["deb"], t0 + (t1 - t0) * k / n) for k in range(1, n)] + [t1]
+        dc = (B.get("decoupe") or {}).get(q["i"])                          # storyboard de Claude pour cette réplique
+        if dc:
+            dc = [x for x in dc if x["debut"] < 0.95] or dc[:1]; dc[0] = dict(dc[0], debut=0.0)
+            coupes = [t0] + [_coupe_sur_le_son(lv, fps, q["deb"], t0 + (t1 - t0) * x["debut"], 0.2) for x in dc[1:]] + [t1]
+        else:
+            coupes = [t0] + [_coupe_sur_le_son(lv, fps, q["deb"], t0 + (t1 - t0) * k / n) for k in range(1, n)] + [t1]
         coupes = sorted(set(round(c, 3) for c in coupes))
         for k in range(len(coupes) - 1):
             a_, b_ = coupes[k], coupes[k + 1]
@@ -548,15 +610,20 @@ def decouper(ph, places, B, fps=30):
                 bons = [o for o in bons if not prec or (o[1], (q["p"] if o[0] == "parle" else autres[0] if autres else q["p"])) != (prec["plan"], prec["cible"])] or bons
                 o = bons[h % len(bons)]
                 cible, plan = (q["p"] if o[0] == "parle" or not autres else autres[h % len(autres)]), o[1]
+            if dc and k < len(dc):                                          # le plan choisi par Claude l'emporte
+                plan = dc[k]["plan"]; cible = dc[k]["cible"] if dc[k]["cible"] in roles else cible
             if plan == "epaule" and len(roles) < 2: plan = "serre"
             if prec and prec["scene"] == sc and prec["cible"] == cible and prec["plan"] == plan:   # pas deux fois le même cadre
                 plan = "moyen" if plan in SERRES and len(roles) >= 2 else ("tres_serre" if plan != "tres_serre" else "serre")
             # mouvement du plan, selon l'énergie de la voix et l'émotion
-            if q["emo"] in ("cri", "colere", "panique"): mouv = ("zoom_choc" if k == 0 else "epaule")
+            cine = B.get("cine") or {}
+            if q["emo"] in ("choc", "panique") and k == 0 and cine.get("vertige"): mouv = "vertige"      # effet vertige (travelling compensé)
+            elif q["emo"] in ("cri", "colere", "panique"): mouv = ("zoom_choc" if k == 0 else "epaule")
             elif q["emo"] in ("pleurs", "triste", "soupir", "gene"): mouv = "avance"
             elif plan in LARGES: mouv = ("travelling", "avance", "recul")[h % 3]
             else: mouv = ("avance", "travelling", "fixe", "avance", "recul")[h % 5]
-            if k == 0 and q.get("mouvement") in MOUVEMENTS and q.get("mouvement") != "fixe": mouv = q["mouvement"]
+            if k == 0 and q.get("mouvement") in MOUVEMENTS and q.get("mouvement") != "fixe" and mouv != "vertige": mouv = q["mouvement"]
+            if dc and k < len(dc) and dc[k]["mouvement"]: mouv = dc[k]["mouvement"]
             force = float(np.clip(0.6 + 0.8 * energie, 0.5, 1.4))
             # passage depuis le plan précédent
             if not prec or prec["scene"] != sc: passage = "coupe"
@@ -564,7 +631,9 @@ def decouper(ph, places, B, fps=30):
             elif prec["cible"] != cible and q["emo"] in ("cri", "colere", "panique", "choc") and h % 2: passage = "file"
             elif prec["cible"] != cible: passage = ("coupe", "coupe", "file", "glisse")[h % 4] if energie > 0.4 else ("coupe", "glisse")[h % 2]
             else: passage = "glisse"
-            prec = dict(t0=a_, t1=b_, scene=sc, cible=cible, plan=plan, mouvement=mouv, force=force, passage=passage, i=q["i"], j=j)
+            if dc and k < len(dc) and dc[k]["passage"] and prec and prec["scene"] == sc: passage = dc[k]["passage"]
+            tiers = bool((B.get("cine") or {}).get("tiers") and plan in ("serre", "tres_serre", "contre_plongee") and h % 2)   # sujet au tiers de l'image
+            prec = dict(t0=a_, t1=b_, scene=sc, cible=cible, plan=plan, mouvement=mouv, force=force, passage=passage, i=q["i"], j=j, tiers=tiers)
             plans.append(prec)
     for k in range(1, len(plans)):                                         # pas de trou entre deux plans d'une même scène
         if plans[k]["scene"] == plans[k - 1]["scene"]: plans[k - 1]["t1"] = plans[k]["t0"]
@@ -581,14 +650,14 @@ def _memoire():
 def memoire_recente(cle):
     m = _memoire(); return (m[-1].get(cle) if m else None)
 
-def memoriser(B, ph, duree, controle=""):
+def memoriser(B, ph, duree, controle="", fichier=None):
     """Ce qui a été tourné (pour varier les prochaines vidéos et comparer avec les vues) : 200 dernières vidéos."""
     m = _memoire()
     from collections import Counter
     m.append(dict(moment=B.get("moment"), lieux=B.get("lieux"), source=B.get("source"), duree=round(float(duree or 0), 1),
                   plans=dict(Counter(q.get("plan") for q in ph)), mouvements=dict(Counter(q.get("mouvement") for q in ph)),
                   costumes={r: c.get("haut") for r, c in (B.get("costumes") or {}).items()}, figurants=len(B.get("figurants") or []),
-                  ambiances=B.get("ambiances"), controle=str(controle)[:200]))
+                  ambiances=B.get("ambiances"), controle=str(controle)[:200], fichier=fichier, cine=B.get("cine"), cadence=B.get("cadence")))
     try:
         os.makedirs(os.path.dirname(MEMOIRE), exist_ok=True)
         with open(MEMOIRE, "w", encoding="utf-8") as f: json.dump(m[-200:], f, ensure_ascii=False, indent=1)

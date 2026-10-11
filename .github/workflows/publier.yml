@@ -20,15 +20,13 @@ permissions:
   contents: write
   pages: write
   id-token: write
+  actions: write
 
 
 jobs:
   publier:
     runs-on: ubuntu-24.04
     timeout-minutes: 30
-    environment:
-      name: github-pages
-      url: ${{ steps.pages.outputs.page_url }}
     env:
       BUFFER_API_KEY: ${{ secrets.BUFFER_API_KEY }}
       UPLOAD_POST_API_KEY: ${{ secrets.UPLOAD_POST_API_KEY }}
@@ -89,24 +87,7 @@ jobs:
           git commit -m "Publication : $FICHIER" || echo "rien à enregistrer"
           REJOUER="python moteur/publier.py --marquer" MESSAGE="Historique mis à jour" python moteur/fusion.py
 
-      - name: Reconstruire le site
+      - name: Mettre le site à jour (une seule file d'attente pour tout le robot, aucune vidéo oubliée)
         if: always()
-        run: pip install -q pillow numpy opencv-python-headless && python moteur/site.py
-
-      - name: Préparer GitHub Pages
-        if: always()
-        continue-on-error: true
-        uses: actions/configure-pages@v6
-
-      - name: Envoyer le site
-        if: always()
-        continue-on-error: true
-        uses: actions/upload-pages-artifact@v5
-        with:
-          path: site
-
-      - name: Mettre en ligne le site
-        id: pages
-        if: always()
-        continue-on-error: true
-        uses: actions/deploy-pages@v5
+        run: |
+          gh workflow run site.yml --ref main || echo "Mise à jour du site impossible à lancer : relancez « Mettre à jour le site »"

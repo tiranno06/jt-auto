@@ -88,6 +88,18 @@ def _bras(epaule, angles, L, s):
     main = (coude[0] + math.sin(a2) * L * 0.9 * s, coude[1] + math.cos(a2) * L * 0.9 * s)
     return coude, main
 
+def ik(epaule, cible, L, s, coude_bas=True):
+    """Angles (épaule, coude) pour que la main atteigne `cible` (bras trop court : il se tend vers elle). Inverse de _bras."""
+    l1, l2 = L * s, L * 0.9 * s
+    dx, dy = cible[0] - epaule[0], cible[1] - epaule[1]; d = max(1e-3, math.hypot(dx, dy)); d_ = min(d, (l1 + l2) * 0.999)
+    theta = math.atan2(dx, dy)                                              # 0 = vers le bas, positif = vers la droite
+    alpha = math.acos(max(-1.0, min(1.0, (l1 * l1 + d_ * d_ - l2 * l2) / (2 * l1 * d_))))
+    a1 = theta + (alpha if (dx < 0) == coude_bas else -alpha)               # coude vers le bas / l'extérieur
+    coude = (epaule[0] + math.sin(a1) * l1, epaule[1] + math.cos(a1) * l1)
+    tx, ty = epaule[0] + dx / d * d_, epaule[1] + dy / d * d_
+    a2 = math.atan2(tx - coude[0], ty - coude[1])
+    return math.degrees(a1), math.degrees(a2 - a1)
+
 def _fonce(c, k=0.78): return tuple(int(v * k) for v in c)
 def _clair(c, k=0.35): return tuple(int(v + (255 - v) * k) for v in c)
 
@@ -173,6 +185,7 @@ def _jointures(img, m, forme, r, s):
         for k in (-1, 1): _arc(img, (m[0] + k * r * 0.35, m[1] + r * 0.05), (r * 0.32, r * 0.25), 0, 200, 340, TRAIT, 3 * s)
 
 # ------------------------------------------------------------------ dessin
+ASSIS_BAISSE = 95                                                          # adulte assis : le buste descend de 95 × échelle
 ADULTE_TETE = 0.9                                                          # version adulte : grosse tête ronde posée sur le col
 
 def buste(x, cy, w, h):
@@ -188,10 +201,11 @@ def squelette(p):
     """Proportions du personnage : marionnette d'origine (grosse tête, petit corps) ou version ADULTE (p["adulte"]) du même modèle :
     même tête ronde, même buste en œuf, mêmes bras et jambes en tubes, mais un corps plus grand, des jambes et des bras longs, un cou."""
     A = bool(p.get("adulte")); s = p["s"]; sq = p["sq"]; sx, sy = 1 - 0.55 * sq, 1 + sq
-    x = p["x"] + (math.sin(p["t"] * 61) * 9 * p["tremble"] if p.get("tremble") else 0); pieds = p["y"]
+    x_pieds = p["x"]; hanche = float(p.get("hanche", 0.0))                # poids du corps : le bassin glisse sur la jambe d'appui
+    x = p["x"] + hanche * 9 * s + (math.sin(p["t"] * 61) * 9 * p["tremble"] if p.get("tremble") else 0); pieds = p["y"]
     epaules = float(p.get("epaules", 0.0)); penche = float(p.get("penche", 0.0))
     if A:
-        corps_h = 150 * s * sy * 1.6; corps_w = 92 * s * sx * 1.12; cy_corps = pieds - 235 * s * sy - corps_h * 0.35
+        corps_h = 150 * s * sy * 1.6; corps_w = 92 * s * sx * 1.12; cy_corps = pieds - 235 * s * sy - corps_h * 0.35 + (ASSIS_BAISSE * s if p.get("assis") else 0)
         Rt = 150 * s * ADULTE_TETE; cou = 0.86
     else:
         corps_h = 150 * s * sy; corps_w = 92 * s * sx; cy_corps = pieds - 38 * s - corps_h / 2; Rt = 150 * s; cou = 0.78
@@ -202,7 +216,7 @@ def squelette(p):
     ep_g = (x - k_ep + penche * 8 * s, cy_corps - corps_h * h_ep - epaules * 22 * s); ep_d = (x + k_ep + penche * 8 * s, cy_corps - corps_h * h_ep - epaules * 22 * s)
     L = 92 if A else 64
     bras = [(e, *_bras(e, (a[0], a[1]), L, s)) for e, a in ((ep_g, p["bras_g"]), (ep_d, p["bras_d"]))]
-    return dict(A=A, s=s, sx=sx, sy=sy, x=x, pieds=pieds, corps_h=corps_h, corps_w=corps_w, cy_corps=cy_corps, R=Rt, tete=tete, rx=rx, ry=ry,
+    return dict(A=A, s=s, sx=sx, sy=sy, x=x, x_pieds=x_pieds, hanche=hanche, pieds=pieds, corps_h=corps_h, corps_w=corps_w, cy_corps=cy_corps, R=Rt, tete=tete, rx=rx, ry=ry,
                 bras=bras, st=s * (ADULTE_TETE if A else 1.0), membre=(40 if A else 34) * s, r_m=(22 if A else 22) * s, epaules=epaules, penche=penche)
 
 def dessiner(img, perso, p):
@@ -233,17 +247,38 @@ def dessiner(img, perso, p):
     bas = (C or {}).get("bas"); c_bas = (C or {}).get("c_bas", BLANC)
     pied = float(p.get("pied", 0.0))                                       # le pied droit tape (impatience) : 0 → 1
     baton = A and C and (bas == "jupe" or C.get("haut") in ("robe", "tunique"))           # adulte en robe ou jupe : jambes en simples traits
-    for dx in ((-40, 40) if A else (-34, 34)):
-        a = (x + dx * s * sx, cy_corps + corps_h * 0.35); b = (x + dx * (1.0 if A else 1.25) * s * sx, pieds - (pied * 22 * s if dx > 0 else 0))
-        if baton: _ligne(img, a, b, TRAIT, 7 * s); _chaussure(img, (b[0] + dx * 0.2 * s, b[1] - 5 * s), s * 0.75, dx, C); continue
-        _ligne(img, a, b, TRAIT, mb); _ligne(img, a, b, chair, mb - 2 * ep)
+    assis = bool(p.get("assis")) and A; sens_a = 1 if float(p.get("tq", 0.0)) >= 0 else -1
+    if assis:                                                              # chaise dessinée avec le personnage (elle est toujours au bon endroit)
+        y_s = cy_corps + corps_h * 0.42; c_ch = tuple(p.get("c_chaise") or (150, 105, 70))
+        _poly(img, [(x - sens_a * 95 * s, y_s - 190 * s), (x - sens_a * 70 * s, y_s - 190 * s), (x - sens_a * 70 * s, y_s), (x - sens_a * 95 * s, y_s)], c_ch)
+        _poly(img, [(x - sens_a * 95 * s, y_s - 190 * s), (x - sens_a * 70 * s, y_s - 190 * s), (x - sens_a * 70 * s, y_s), (x - sens_a * 95 * s, y_s)], TRAIT, True, 4 * s)
+        _poly(img, [(x - 95 * s, y_s), (x + 95 * s, y_s), (x + 95 * s, y_s + 22 * s), (x - 95 * s, y_s + 22 * s)], c_ch); _poly(img, [(x - 95 * s, y_s), (x + 95 * s, y_s), (x + 95 * s, y_s + 22 * s), (x - 95 * s, y_s + 22 * s)], TRAIT, True, 4 * s)
+        for xx in (x - 85 * s, x + 75 * s): _ligne(img, (xx, y_s + 22 * s), (xx, pieds), TRAIT, 12 * s); _ligne(img, (xx, y_s + 22 * s), (xx, pieds), _fonce(c_ch, 0.85), 6 * s)
+    marche = p.get("marche"); hanche = K["hanche"]; xp = K["x_pieds"]
+    for k_j, dx in enumerate((-40, 40) if A else (-34, 34)):
+        a = (x + dx * s * sx, cy_corps + corps_h * 0.35); b = (xp + dx * (1.0 if A else 1.25) * s * sx, pieds - (pied * 22 * s if dx > 0 else 0))
+        genou = None
+        if assis:                                                          # assis : cuisse à l'horizontale, tibia vertical
+            genou = (a[0] + sens_a * 95 * s, a[1] + 8 * s); b = (genou[0] + sens_a * 6 * s, pieds)
+        elif marche is not None:                                           # marche : les jambes alternent, le pied se lève
+            ph_ = marche + (math.pi if k_j else 0.0)
+            b = (b[0] + math.sin(ph_) * 24 * s, b[1] - max(0.0, math.cos(ph_)) * 18 * s)
+            genou = ((a[0] + b[0]) / 2 + math.sin(ph_) * 10 * s, (a[1] + b[1]) / 2 - max(0.0, math.cos(ph_)) * 8 * s)
+        elif A and abs(hanche) > 0.15 and (dx > 0) == (hanche < 0):        # jambe libre : genou légèrement plié
+            genou = ((a[0] + b[0]) / 2 + (1 if dx > 0 else -1) * 7 * s * abs(hanche), (a[1] + b[1]) / 2)
+        seg = [(a, genou), (genou, b)] if genou else [(a, b)]
+        if baton:
+            for u_, v_ in seg: _ligne(img, u_, v_, TRAIT, 7 * s)
+            _chaussure(img, (b[0] + dx * 0.2 * s, b[1] - 5 * s), s * 0.75, dx, C); continue
+        for u_, v_ in seg: _ligne(img, u_, v_, TRAIT, mb)
+        for u_, v_ in seg: _ligne(img, u_, v_, chair, mb - 2 * ep)
         if bas in ("jean", "pantalon", "jogging"):
-            _ligne(img, a, (b[0], b[1] - 8 * s), c_bas, mb - 2 * ep)
-            if A and p.get("reflets"): GR.finitions_jambe(img, a, (b[0], b[1] - 8 * s), mb - 2 * ep, s, bas, c_bas, 1 if dx > 0 else -1)
+            for u_, v_ in seg[:-1] + [(seg[-1][0], (b[0], b[1] - 8 * s))]: _ligne(img, u_, v_, c_bas, mb - 2 * ep)
+            if A and p.get("reflets") and not genou: GR.finitions_jambe(img, a, (b[0], b[1] - 8 * s), mb - 2 * ep, s, bas, c_bas, 1 if dx > 0 else -1)
             if bas == "jogging": _ligne(img, (a[0] + dx / 34 * 9 * s, a[1]), (b[0] + dx / 34 * 9 * s, b[1] - 12 * s), (245, 245, 245), 4 * s)
             if bas == "jean": _ligne(img, (b[0] - 11 * s, b[1] - 16 * s), (b[0] + 11 * s, b[1] - 16 * s), _clair(c_bas, 0.3), 4 * s)
         elif bas == "short":
-            mi = (a[0] + (b[0] - a[0]) * 0.45, a[1] + (b[1] - a[1]) * 0.45); _ligne(img, a, mi, c_bas, mb - 2 * ep + 4 * s)
+            v0 = genou or b; mi = (a[0] + (v0[0] - a[0]) * (0.8 if genou else 0.45), a[1] + (v0[1] - a[1]) * (0.8 if genou else 0.45)); _ligne(img, a, mi, c_bas, mb - 2 * ep + 4 * s)
         _chaussure(img, (b[0] + dx * 0.25 * s, b[1] - 6 * s), s, dx, C)
         if A and p.get("reflets"): GR.lacets(img, (b[0] + dx * 0.25 * s, b[1] - 6 * s), s, C)
     # jupe ou robe : trapèze sous le corps
@@ -324,10 +359,12 @@ def dessiner(img, perso, p):
         e_, c_, m_ = bras[0]; w_ = (c_[0] + (m_[0] - c_[0]) * 0.62, c_[1] + (m_[1] - c_[1]) * 0.62)
         _ellipse(img, w_, (12 * s, 12 * s), 0, TRAIT); _ellipse(img, w_, (8 * s, 8 * s), 0, (240, 230, 200))
     # visage (ou nuque, de dos)
-    if not dos: _visage(img, tete, rx, ry, st, p, P)
+    tq = float(np.clip(p.get("tq", 0.0), -1, 1))                           # trois-quarts : le visage se tourne vers celui à qui on parle
+    tete_f = (tete[0] + tq * rx * 0.17, tete[1])
+    if not dos: _visage(img, tete_f, rx, ry, st, p, P)
     if P.get("cheveux") and p.get("coiffure", True): _cheveux_avant(img, tete, rx, ry, st, p, P, dos)
     if P.get("accessoire"): _accessoire(img, tete, rx, ry, st, p, P)
-    if C and not dos: _details_tete(img, tete, rx, ry, st, p, C)
+    if C and not dos: _details_tete(img, tete_f, rx, ry, st, p, C)
     if C and C.get("chapeau") in CHAPEAUX: GR.chapeau(img, tete, rx, ry, st, p, C["chapeau"], tuple(C.get("c_chapeau") or (60, 60, 70)))
     _effets(img, tete, rx, ry, st, p)
     for nom in ("main_g", "main_d"):                                       # objet tenu en main (calque RGBA)
@@ -543,7 +580,7 @@ BOUCHES = ("neutre", "sourire", "triste", "o", "cri", "dents", "moue", "coin", "
 def _visage(img, t, rx, ry, s, p, P):
     cx, cy = t; tilt = math.radians(p["tilt"]); gx, gy = p["regard"]
     def R(px, py): return _rot(px, py, cx, cy, tilt)
-    ex = 52 * s; ey = cy + 4 * s; er = 15 * s * float(p.get("yeux_k", 1.0))       # taille des yeux propre au personnage
+    ex = 52 * s * (1 - 0.16 * abs(float(p.get("tq", 0.0)))); ey = cy + 4 * s; er = 15 * s * float(p.get("yeux_k", 1.0))   # taille des yeux propre au personnage ; trois-quarts : yeux rapprochés
     yeux, pa = p["yeux"], p["paupiere"]
     detail = bool(p.get("reflets"))                                        # visage détaillé (moteur cartoon) ; le logo garde le dessin d'origine
     lum = p.get("lumiere", 0) or -1

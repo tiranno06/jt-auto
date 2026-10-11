@@ -12,15 +12,13 @@ permissions:
   contents: write
   pages: write
   id-token: write
+  actions: write
 
 
 jobs:
   supprimer:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
-    environment:
-      name: github-pages
-      url: ${{ steps.pages.outputs.page_url }}
     env:
       GH_TOKEN: ${{ github.token }}
       FICHIER: ${{ inputs.fichier }}
@@ -40,17 +38,7 @@ jobs:
           git add episodes
           git commit -m "Suppression : $FICHIER" || echo "rien à enregistrer"
           REJOUER="python moteur/supprimer.py" MESSAGE="Historique mis à jour" python moteur/fusion.py
-      - name: Reconstruire le site
-        run: pip install -q pillow numpy opencv-python-headless && python moteur/site.py
-      - name: Préparer GitHub Pages
-        continue-on-error: true
-        uses: actions/configure-pages@v6
-      - name: Envoyer le site
-        continue-on-error: true
-        uses: actions/upload-pages-artifact@v5
-        with:
-          path: site
-      - name: Mettre en ligne le site
-        id: pages
-        continue-on-error: true
-        uses: actions/deploy-pages@v5
+      - name: Mettre le site à jour (une seule file d'attente pour tout le robot, aucune vidéo oubliée)
+        if: always()
+        run: |
+          gh workflow run site.yml --ref main || echo "Mise à jour du site impossible à lancer : relancez « Mettre à jour le site »"

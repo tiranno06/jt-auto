@@ -8,6 +8,7 @@
 
 preparer(url) -> (sk, audios, mots) prêts pour cartoon.rendre."""
 import base64, json, os, re, subprocess, tempfile, wave
+import reseau
 import numpy as np
 
 SR, SRM = 22050, 44100
@@ -50,11 +51,11 @@ def _tikwm(url, tmp):
     import urllib.parse, urllib.request
     ua = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36"}
     req = urllib.request.Request("https://www.tikwm.com/api/?" + urllib.parse.urlencode({"url": url, "hd": "0"}), headers=ua)
-    d = (json.loads(urllib.request.urlopen(req, timeout=60).read()) or {}).get("data") or {}
+    d = (json.loads(reseau.ouvrir(req, timeout=60)) or {}).get("data") or {}
     lien = d.get("play") or d.get("wmplay")
     if not lien: raise RuntimeError("tikwm : vidéo introuvable")
     if lien.startswith("/"): lien = "https://www.tikwm.com" + lien
-    open(f"{tmp}/src.mp4", "wb").write(urllib.request.urlopen(urllib.request.Request(lien, headers=ua), timeout=300).read())
+    open(f"{tmp}/src.mp4", "wb").write(reseau.ouvrir(urllib.request.Request(lien, headers=ua), timeout=300))
     a = d.get("author") or {}
     journal("  son téléchargé (tikwm)")
     return {"uploader": a.get("unique_id"), "channel": a.get("nickname"), "duration": d.get("duration"), "webpage_url": url}, f"{tmp}/src.mp4"
@@ -93,7 +94,7 @@ def _multipart(chemin, fichiers, champs, timeout=600):
     corps += f"--{bord}--\r\n".encode()
     req = urllib.request.Request("https://api.elevenlabs.io" + chemin, data=corps, method="POST",
                                  headers={"xi-api-key": os.environ["ELEVENLABS_API_KEY"], "Content-Type": f"multipart/form-data; boundary={bord}"})
-    try: return _Rep(urllib.request.urlopen(req, timeout=timeout).read())
+    try: return _Rep(reseau.ouvrir(req, timeout=timeout))
     except urllib.error.HTTPError as e: raise RuntimeError(f"ElevenLabs {e.code} : {e.read()[:300]!r}")
 
 def isoler(tmp):
@@ -245,6 +246,7 @@ def preparer(url):
     journal(f"  {len(segs)} répliques, voix : {hz}")
     casting, m = _casting_defaut(segs, hz), {}
     try:
+        if os.environ.get("CLAUDE_INDISPONIBLE") == "1": raise RuntimeError("Claude indisponible (crédit vérifié au départ)")
         import anthropic
         lignes = "\n".join(f"{k}. {s['voix']} ({s['deb']:.1f}–{s['fin']:.1f}) : {s['t']}" for k, s in enumerate(segs))
         vx = "\n".join(f"- {v} : {h or '?'} Hz, {sum(len(s['mots']) for s in segs if s['voix'] == v)} mots" for v, h in hz.items())
@@ -255,7 +257,7 @@ def preparer(url):
             contenu += IMAGES.format(mesures=analyse_video.texte(visuel), banque=banque_visuelle.consigne(), coiffures=", ".join(M_.COIFFURES))
             contenu = [{"type": "image", "source": {"type": "base64", "media_type": "image/jpeg", "data": base64.b64encode(j).decode()}} for j in cles[:6]] \
                       + [{"type": "text", "text": contenu}]
-        m = ecrire._appel(anthropic.Anthropic(), None, [{"role": "user", "content": contenu}], _outil(), max_tokens=8000)
+        m = ecrire._appel(__import__('reseau').claude(), None, [{"role": "user", "content": contenu}], _outil(), max_tokens=8000)
         for c in ecrire._liste(m.get("casting")):
             if isinstance(c, dict) and c.get("voix") in hz and c.get("role") in ROLES: casting[c["voix"]] = c["role"]
         if m.get("contexte"): journal(f"  scène reconstituée : {m['contexte']}")

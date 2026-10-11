@@ -2,6 +2,7 @@
 permission « Sound Effects » requise), enregistrée dans sons_eleven/ et réutilisée à chaque vidéo (aucun crédit consommé ensuite).
 Lancer : python moteur/bruitages_eleven.py [--refaire]"""
 import json, os, sys, urllib.error, urllib.request
+import reseau
 
 RACINE = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 DOSSIER = os.path.join(RACINE, "sons_eleven")
@@ -19,11 +20,42 @@ BANQUE = {
     "gasp":        ("small crowd gasping in shock, real audience reaction oooh", 1.5),
 }
 
+# ambiance de fond de chaque lieu (mode payant) : fabriquée UNE fois par lieu, gardée dans sons_eleven/ambiances/, puis réutilisée
+AMBIANCES = {
+    "salon": "quiet apartment living room ambience, distant city, clock ticking softly, no voices",
+    "cuisine": "kitchen room tone, fridge hum, faint simmering pot, no voices",
+    "bureau": "open space office ambience, air conditioning hum, distant keyboard typing, no clear voices",
+    "cabinet_medical": "quiet doctor's office room tone, soft air vent, distant hallway, no voices",
+    "bar": "busy bar ambience at night, crowd murmur, glasses clinking, no music",
+    "chambre": "quiet bedroom at night, soft room tone, distant traffic outside, no voices",
+    "salle_sport": "gym ambience, weights clanking, treadmill running, no music",
+    "magasin": "supermarket ambience, distant beeps of cashier scanners, trolleys, murmur",
+    "classe": "classroom ambience, chairs moving, pages turning, distant murmur",
+    "rue": "city street ambience, cars passing, distant horn, footsteps on pavement",
+    "restaurant": "restaurant ambience, cutlery and plates, soft crowd murmur, no music",
+    "administration": "public office waiting room ambience, ticket machine beep, murmur, air conditioning",
+    "hall": "apartment building hallway ambience, echo, distant door closing, footsteps upstairs",
+    "caverne": "prehistoric cave ambience, crackling campfire, wind at the entrance, water drops",
+    "palais": "large palace hall ambience, big reverb, distant footsteps on marble, harpsichord far away",
+}
+
+def ambiance_lieu(lieu, duree=20):
+    """Chemin de l'ambiance ElevenLabs du lieu (fabriquée si elle manque) ; None si impossible (pas de clé, pas de crédit)."""
+    if lieu not in AMBIANCES: return None
+    p = os.path.join(DOSSIER, "ambiances", lieu + ".mp3")
+    if os.path.exists(p): return p
+    if not os.environ.get("ELEVENLABS_API_KEY") or os.environ.get("ELEVENLABS") == "0": return None
+    try:
+        os.makedirs(os.path.dirname(p), exist_ok=True); open(p, "wb").write(generer(lieu, AMBIANCES[lieu], duree))
+        print(f"  ambiance ElevenLabs fabriquée : {lieu}", flush=True); return p
+    except Exception as e:
+        print(f"  ambiance ElevenLabs impossible ({lieu} : {str(e)[:120]}) : ambiance de synthèse", flush=True); return None
+
 def generer(nom, texte, duree):
     req = urllib.request.Request("https://api.elevenlabs.io/v1/sound-generation?output_format=mp3_44100_128",
                                  data=json.dumps({"text": texte, "duration_seconds": duree, "prompt_influence": 0.6}).encode(),
                                  headers={"xi-api-key": os.environ["ELEVENLABS_API_KEY"], "Content-Type": "application/json"}, method="POST")
-    return urllib.request.urlopen(req, timeout=120).read()
+    return reseau.ouvrir(req, timeout=120)
 
 def main(refaire=False):
     if not os.environ.get("ELEVENLABS_API_KEY"): print("ÉCHEC : secret ELEVENLABS_API_KEY absent."); return 1

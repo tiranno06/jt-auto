@@ -50,13 +50,22 @@ def _meta(service, ia, titre):
     if service == "instagram": return "metadata: { instagram: { type: reel, shouldShareToFeed: true, isAiGenerated: true } }"
     return ""
 
+def _couverture_ms(url):
+    """Instant de couverture choisi par le moteur pour cette vidéo (historique), sinon réglage COUVERTURE_MS (2,5 s)."""
+    try:
+        nom = os.path.basename(str(url).split("?")[0])
+        for h in reversed(json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "episodes", "historique.json"), encoding="utf-8"))):
+            if h.get("fichier") == nom and h.get("couverture_ms"): return int(h["couverture_ms"])
+    except Exception: pass
+    return int(os.environ.get("COUVERTURE_MS") or 2500)
+
 def requete_post(canal, texte, url, mode, ia=True, service="tiktok", titre="", quand=None):
     if mode == "shareNow":
         planif = "mode: shareNow"
     else:
         quand = quand or (datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(minutes=10)).strftime("%Y-%m-%dT%H:%M:%SZ")
         planif = f'mode: customScheduled\n      dueAt: "{quand}"'
-    vignette = int(os.environ.get("COUVERTURE_MS") or 2500)
+    vignette = _couverture_ms(url)
     return f"""mutation {{
   createPost(input: {{
       text: {json.dumps(texte, ensure_ascii=False)}

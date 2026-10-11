@@ -1,9 +1,11 @@
 name: Tests
 
-on:
+on:                                   # avant chaque mise à jour du robot : chaque demande de fusion et chaque envoi sur main
   push:
     branches: [main]
     paths: ["moteur/**", "tests/**"]
+  pull_request:
+    paths: ["moteur/**", "tests/**", ".github/workflows/**"]
   workflow_dispatch:
 
 permissions:
@@ -19,6 +21,6 @@ jobs:
         with:
           python-version: "3.12"
       - name: Bibliothèques
-        run: pip install -q numpy opencv-python-headless pillow scipy
+        run: pip install -q -r requirements.txt && sudo apt-get install -y -qq ffmpeg rubberband-cli >/dev/null
       - name: Lancer les tests
         run: python -m unittest discover -s tests -v

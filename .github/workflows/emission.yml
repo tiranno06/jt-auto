@@ -10,7 +10,7 @@ on:
         required: false
         default: ""
       format:
-        description: "Type de vidéo : mini (gag éclair), libre (sketch long), actu (JT) ou cycle (3 + 1). Vide = réglage de la régie."
+        description: "Type de vidéo : mini (gag éclair), libre (sketch long) ou cycle (3 + 1). Vide = réglage de la régie."
         required: false
         default: ""
       refaire:
@@ -70,9 +70,6 @@ jobs:
       cancel-in-progress: false
     runs-on: ubuntu-24.04
     timeout-minutes: 120
-    environment:
-      name: github-pages
-      url: ${{ steps.pages.outputs.page_url }}
     env:
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       MODAL_TOKEN_ID: ${{ secrets.MODAL_TOKEN_ID }}
@@ -88,7 +85,6 @@ jobs:
       UPLOAD_POST_USER: ${{ secrets.UPLOAD_POST_USER }}
       MODELE_CLAUDE: ${{ vars.MODELE_CLAUDE }}
       NOM_EMISSION: ${{ vars.NOM_EMISSION }}
-      PLAN_GAG: ${{ vars.PLAN_GAG }}
       LONGUEUR: ${{ vars.LONGUEUR }}
       SKETCH_TEST: ${{ inputs.sketch }}
       MAX_REECRITURES: ${{ vars.MAX_REECRITURES }}
@@ -130,6 +126,7 @@ jobs:
       BUDGET_MOIS: ${{ vars.BUDGET_MOIS }}
       ESSAIS_MAX: ${{ vars.ESSAIS_MAX }}
       ETAPES_ECO: ${{ vars.ETAPES_ECO }}
+      MODE_ECO: ${{ vars.MODE_ECO }}
       VAPID_PRIVEE: ${{ vars.VAPID_PRIVEE }}
       VAPID_PUBLIQUE: ${{ vars.VAPID_PUBLIQUE }}
       PUSH_ABONNEMENTS: ${{ vars.PUSH_ABONNEMENTS }}
@@ -175,11 +172,10 @@ jobs:
         if: startsWith(inputs.theme, 'TIKTOK::')
         run: pip install -q -U "yt-dlp[default,curl-cffi]"
 
-      - name: Déployer les voix (Chatterbox) et le plan gag (Wan 2.2) sur Modal
+      - name: Déployer les voix (Chatterbox), la banque de voix et les décors sur Modal
         if: env.MODAL_TOKEN_ID != ''
         run: |
           modal deploy moteur/voix_modal.py || echo "Deploiement voix echoue, voix de secours"
-          modal deploy moteur/video_modal.py || echo "Deploiement Wan echoue, pas de plan gag"
           modal deploy moteur/banque_modal.py || echo "Deploiement banque de voix echoue, chaine de secours"
           modal deploy moteur/decor_modal.py || echo "Deploiement decors echoue, fonds unis"
 
@@ -221,28 +217,11 @@ jobs:
         run: |
           git config user.name "robot-jt"
           git config user.email "robot-jt@users.noreply.github.com"
-          git add episodes voix decors
+          git add episodes voix decors sons_eleven
           git commit -m "Émission : ${{ steps.run.outputs.titre }}" || echo "rien à enregistrer"
           python moteur/fusion.py      # plusieurs fabrications en parallèle : l'historique est fusionné, jamais écrasé
 
-      - name: Construire le site de secours
+      - name: Mettre le site à jour (une seule file d'attente pour tout le robot, aucune vidéo oubliée)
         if: always()
-        run: python moteur/site.py
-
-      - name: Préparer GitHub Pages
-        if: always()
-        continue-on-error: true
-        uses: actions/configure-pages@v6
-
-      - name: Envoyer le site
-        if: always()
-        continue-on-error: true
-        uses: actions/upload-pages-artifact@v5
-        with:
-          path: site
-
-      - name: Mettre en ligne le site
-        id: pages
-        if: always()
-        continue-on-error: true
-        uses: actions/deploy-pages@v5
+        run: |
+          gh workflow run site.yml --ref main || echo "Mise à jour du site impossible à lancer : relancez « Mettre à jour le site »"

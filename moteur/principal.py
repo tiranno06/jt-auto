@@ -1,10 +1,8 @@
 """Une exécution du robot = une émission.
 1. casting vocal (seulement la première fois)
-2. actualité politique des dernières 36 h (RSS)
-3. sketch écrit par Claude (un seul sujet, puis passe de « script doctor »)
-4. voix (Chatterbox sur Modal, sinon Piper)
-5. plan gag IA (Wan 2.2 sur Modal, facultatif)
-6. rendu studio (moteur/jt.py) ; la publication TikTok est faite ensuite par moteur/publier.py (étape du workflow)"""
+2. idée et sketch écrits par Claude (sinon : réserve de sketchs de secours), ou bande son d'une vidéo TikTok (doublage)
+3. voix (ElevenLabs, sinon Chatterbox sur Modal, sinon Piper)
+4. décors IA (Modal) et rendu du dessin animé (moteur/cartoon.py) ; la publication TikTok est faite ensuite par moteur/publier.py"""
 import json, os, re, sys, datetime
 from zoneinfo import ZoneInfo
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -28,7 +26,7 @@ if REFAIRE:
     ANCIEN = next((h for h in _hist if h.get("fichier") == _f), None)
     _p = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "episodes", "sketchs", _f + ".json")
     SK_ANCIEN = json.load(open(_p, encoding="utf-8")) if os.path.exists(_p) else None
-    if ANCIEN: os.environ["FORMAT"] = ANCIEN.get("format") if ANCIEN.get("format") in ("mini", "libre", "actu") else "mini"
+    if ANCIEN: os.environ["FORMAT"] = ANCIEN.get("format") if ANCIEN.get("format") in ("mini", "libre") else "mini"
     if _mode in ("voix", "decors") and SK_ANCIEN is None:
         print("Sketch d'origine non conservé (vidéo plus ancienne) : on refait une nouvelle version du texte.", flush=True); _mode = "texte"
     REFAIRE_MODE = _mode
@@ -40,6 +38,8 @@ if THEME and (os.environ.get("FORMAT") or "") not in ("mini", "libre"): os.envir
 os.environ["FORMAT"] = FORMAT = format_du_jour(os.environ.get("FORMAT"), _hist)
 if FORMAT == "mini": os.environ["LONGUEUR"] = "eclair"                    # gag éclair : ~15 s
 elif FORMAT == "libre": os.environ["LONGUEUR"] = "pro"                    # sketch long : 60 à 90 s (plus d'une minute garantie au montage)
+import reseau
+ECO = reseau.mode_eco()                                                   # réglage « Mode économique » (avant d'importer ecrire)
 import actu, ecrire, voix, jt, serie, stats, secours
 
 SR = 22050
@@ -106,11 +106,13 @@ def main():
                       sorted(actu.empreinte(" ".join([h.get("titre", ""), h.get("accroche", "")])))
                       for h in historique if h.get("date", "") >= depuis]
     fmt = FORMAT                                                           # résolu au démarrage (cycle 3 + 1 par défaut)
-    libre = fmt in ("libre", "mini")
-    print(f"Type de vidéo : {'gag éclair (~15 s)' if fmt == 'mini' else 'sketch long (+1 min)' if libre else 'JT actu du jour'}", flush=True)
+    libre = True                                                           # toutes les vidéos sont des sketchs animés (gag éclair ou sketch long)
+    print(f"Type de vidéo : {'gag éclair (~15 s)' if fmt == 'mini' else 'sketch long (+1 min)'}", flush=True)
     recents = [f"{h.get('titre', '')} : {h.get('accroche', '')}" for h in historique[-10:]]
     # 1. recherche : sujets candidats (articles des dernières 24 h, regroupés par sujet et classés par reprise médiatique)
     script = None; tiktok = None; DOUB = None; SECOURS = False
+    import reseau
+    CREDITS = reseau.verifier_credits()                                    # crédits vérifiés AU DÉPART : payant si possible, sinon gratuit tout de suite
     def passer_en_secours(e):                                              # Claude ne répond pas (crédit épuisé) : outils gratuits
         print(f"Claude indisponible ({str(e)[:160]}) : bascule automatique sur un sketch de secours (outils gratuits pour l'écriture).", flush=True)
         try:
@@ -135,6 +137,9 @@ def main():
         except Exception as e:
             if not secours.claude_indisponible(e): raise
             passer_en_secours(e); SECOURS = True; candidats = [([{"titre": "secours", "resume": "", "lien": "", "date": None, "source": "secours"}], "secours")]
+    elif libre and not os.environ.get("SKETCH_TEST", "").strip() and CREDITS["claude"] != "ok":   # pas de crédit Claude : réserve de sketchs
+        passer_en_secours(RuntimeError("crédit Claude épuisé ou clé absente (vérifié au départ)")); SECOURS = True
+        candidats = [([{"titre": "secours", "resume": "", "lien": "", "date": None, "source": "secours"}], "secours")]
     elif libre and not os.environ.get("SKETCH_TEST", "").strip():
         try: candidats = [(c, "idée") for c in ecrire.idees_libres(recents=[f"{h.get('titre', '')} : {h.get('accroche', '')}" for h in historique[-30:]],
                                                                     consignes=stats.pour_idees())]
@@ -143,21 +148,10 @@ def main():
             if not secours.claude_indisponible(e): raise
             passer_en_secours(e); SECOURS = True; candidats = [([{"titre": "secours", "resume": "", "lien": "", "date": None, "source": "secours"}], "secours")]
         for k, (sel, _) in enumerate(candidats): print(f"Idée {k} : « {sel[0]['titre'][:110]} »", flush=True)
-    else:
-      try:
-        candidats = actu.candidats_du_jour(deja_vus=deja, mots_recents=mots_recents, n=6, sujets_recents=sujets_recents)
-      except Exception as e:
-        print(f"Recherche d'actualité en erreur : {e}", flush=True); candidats = []
-      for k, (sel, info) in enumerate(candidats):
-        print(f"Candidat {k} ({info}) : « {sel[0]['titre'][:110]} »", flush=True)
-    if not candidats and not libre:
-        print("Aucun sujet repris par plusieurs médias : repli sur les titres politiques récents.", flush=True)
-        try: t = actu.titres_recents(deja_vus=deja)
-        except Exception as e: print(f"Repli impossible : {e}", flush=True); t = []
-        candidats = [(t, "titres récents")] if t else []
+    else:                                                                  # sketch d'essai (SKETCH_TEST)
+        candidats = [([{"titre": "essai", "resume": "", "lien": "", "date": None, "source": "essai"}], "essai")]
     if not candidats:
-        print("Aucune idée de sketch obtenue : pas d'émission." if libre else
-              "Recherche d'actualité impossible (flux indisponibles ou vides) : pas d'émission aujourd'hui.", flush=True); return
+        print("Aucune idée de sketch obtenue : pas d'émission.", flush=True); return
     titres = candidats[0][0]
     recents = [f"{h.get('titre', '')} : {h.get('accroche', '')}" for h in historique[-10:]]
     from zoneinfo import ZoneInfo
@@ -201,7 +195,6 @@ def main():
         except Exception as e:
             if not secours.claude_indisponible(e): raise
             passer_en_secours(e); SECOURS = True
-            if not libre: fmt, libre = "mini", True                         # JT d'actu impossible sans Claude : gag éclair de secours
             sk = secours.sketch(fmt)
         print(f"Moteur humoristique : {ecrire.USAGE['appels']} appels Claude, {ecrire.USAGE['entree']} jetons lus, {ecrire.USAGE['sortie']} jetons écrits, {ecrire.USAGE['recherches_web']} recherche(s) web", flush=True)
         titres = next((c[0] for c in candidats if c[0][0]["lien"] and c[0][0]["lien"] in sk.get("sources", [])), titres)
@@ -212,6 +205,12 @@ def main():
     if num:                                                                # fin d'épisode : rendez-vous pour la suite (série)
         total_ep = len(serie.etat().get("plan") or []) or serie.taille()
         sk["suite"] = f"Épisode {num + 1} bientôt : abonne-toi !" if num < total_ep else "Fin de la saison : abonne-toi !"
+    style_acc = None
+    if not DOUB and not sk.get("_monte"):                                  # deux styles d'accroche départagés par les vues
+        try:
+            import accroches; style_acc = accroches.choisir(sk, historique)
+            if style_acc: print(f"Accroche ({style_acc}) : « {sk['titre_accroche']} »", flush=True)
+        except Exception as e: print(f"Accroche : {e}", flush=True)
     if libre and sk.get("titre_accroche") and os.environ.get("VOIX_OFF", "1") != "0" and not sk.get("_monte") and (os.environ.get("RENDU") or "") != "realiste":
         titre_lu = sk["titre_accroche"].strip()                             # voix off d'ouverture : elle lit le titre « POV : … »
         if num: titre_lu = f"Épisode {num}. {titre_lu}"
@@ -267,14 +266,21 @@ def main():
         try:
             import cartoon, decors as decors_mod
             if modal_ok and os.environ.get("DECORS", "1") != "0":
-                lum = ""
+                lum = ""; plans_dec = None
                 if cartoon.DETAIL:                                         # même lumière que la bible de l'épisode (heure, lampes)
                     try:
-                        import studio
-                        lum = studio.bible(sk, [r for r in dict.fromkeys(x["p"] for x in sk.get("repliques", [])) if r != "narrateur"])["style_ia"]
+                        import studio, decor_dessin as DD
+                        B0 = studio.bible(sk, [r for r in dict.fromkeys(x["p"] for x in sk.get("repliques", [])) if r != "narrateur"]); lum = B0["style_ia"]
+                        plans_dec = {k: DD.dessiner(B0["lieux"][min(k, len(B0["lieux"]) - 1)], B0, graine=B0["graine"] % 9973 + k)["fond"]   # l'IA peint par-dessus notre plan
+                                     for k in range(len(sk.get("decoupage") or []))}
                     except Exception as e: print(f"Bible du studio indisponible pour les décors IA : {e}", flush=True)
-                t_gpu = datetime.datetime.now(); decors = decors_mod.generer(sk.get("decoupage"), graine=len(historique) + 7 + (datetime.datetime.now().microsecond % 997 if REFAIRE_MODE == "decors" else 0), lumiere=lum)
+                t_gpu = datetime.datetime.now(); decors = decors_mod.generer(sk.get("decoupage"), graine=len(historique) + 7 + (datetime.datetime.now().microsecond % 997 if REFAIRE_MODE == "decors" else 0), lumiere=lum, plans=plans_dec)
                 GPU["s"] += (datetime.datetime.now() - t_gpu).total_seconds()
+            try:                                                           # mode payant : ambiance sonore ElevenLabs de chaque lieu (une fois par lieu)
+                import bruitages_eleven, studio as st_
+                if cartoon.DETAIL and not DOUB and os.environ.get("AMBIANCES_ELEVEN", "1") != "0":
+                    for l_ in set(st_.bible(sk, [r for r in dict.fromkeys(x["p"] for x in sk.get("repliques", [])) if r != "narrateur"])["lieux"]): bruitages_eleven.ambiance_lieu(l_)
+            except Exception as e: print(f"Ambiances ElevenLabs indisponibles : {e}", flush=True)
             duree = cartoon.rendre(sk, base + ".mp4", audios, mots=mots, decors=decors, mini=fmt == "mini")
             import controle
             tech_ok, rapport_tech = controle.technique(base + ".mp4", duree, cartoon.MINUTAGE[-1][1] if cartoon.MINUTAGE else None)     # contrôles gratuits (format, son, images noires)
@@ -287,21 +293,17 @@ def main():
                 sk["realisation"] = {k: B_[k] for k in ("moment", "lieux", "gags", "ambiances", "source")}
                 sk["realisation"]["tenues"] = {r: c.get("haut") for r, c in B_["costumes"].items()}
                 sk["realisation"]["plans"] = [f"{q.get('plan')}/{q.get('mouvement')}" for q in cartoon.PH]
-                studio.memoriser(B_, cartoon.PH, duree, rapport_video or ("ok" if video_ok else ""))
+                studio.memoriser(B_, cartoon.PH, duree, rapport_video or ("ok" if video_ok else ""), fichier=os.path.basename(base) + ".mp4")
             if sk.get("doublage") and not test:                            # banque visuelle : ce qu'on a vu dans la vidéo d'origine et ce qu'on en a fait
                 import banque_visuelle
                 banque_visuelle.ajouter(sk["doublage"], sk.get("studio"), sk.get("realisation"), os.path.basename(base) + ".mp4")
         except Exception as e:
             import traceback; traceback.print_exc()
-            print(f"Moteur cartoon en échec ({e}) : rendu de secours avec le moteur JT.", flush=True); duree = None
-    if duree is None and modal_ok and sk.get("gag") and os.environ.get("PLAN_GAG", "1") != "0":
-        import video_modal
-        i = sk["gag"]["replique"]
-        gag = video_modal.generer(sk["gag"]["prompt"], len(audios[i]) / SR + 0.6, base + "_gag.mp4", graine=len(historique))
-        print(f"Plan gag IA : {'oui' if gag else 'non'}", flush=True)
-    if duree is None: duree = jt.rendre(sk, base + ".mp4", audios, gag=gag, mots=mots)
+            print(f"Moteur cartoon en échec ({e}) : nouvel essai en rendu simple, sans décor IA.", flush=True); duree = None
+            import cartoon
+            cartoon.DETAIL = False                                         # secours : bonshommes simples, plans simples (la vidéo sort quand même)
+            duree = cartoon.rendre(sk, base + ".mp4", audios, mots=mots, decors={}, mini=fmt == "mini")
     credit = "Voix : " + " ; ".join(credits_voix) + "."
-    if gag: credit += " Plan « reconstitution » généré avec Wan 2.2."
     if decors: credit += " Décors générés avec Stable Diffusion XL (CreativeML Open RAIL++-M)."
     if libre:                                                              # signature de la chaîne dans les hashtags
         sk["hashtags"] = list(dict.fromkeys(["petitsdramas"] + [h for h in sk["hashtags"] if h != "petitsdramas"]))[:7]
@@ -315,7 +317,12 @@ def main():
     historique.append(dict(date=jour, format=fmt, titre=sk["sujet"], sources=sk["sources"], note=fiche.get("note"), decision=fiche.get("decision"),
                            accroche=accroche_hist, mots=sorted(actu._mots(" ".join(fiche.get("titres_sujet") or [t["titre"] for t in titres])))[:40],
                            empreinte=sorted(actu.empreinte(" ".join((fiche.get("titres_sujet") or []) + [sk["sujet"]] + [r["t"] for r in sk.get("repliques", [])]))), voix=moteur, gag=bool(gag), controle_video=rapport_video[:500] or ("ok" if video_ok else ""), running_gag=sk.get("running_gag", ""), duree=round(duree, 1),
-                           fichier=os.path.basename(base) + ".mp4", tag=f"emissions-{jour[:7]}", legende=legende, publie=None))
+                           fichier=os.path.basename(base) + ".mp4", tag=f"emissions-{jour[:7]}", legende=legende, publie=None,
+                           style_accroche=style_acc, couverture_ms=int((getattr(sys.modules.get("cartoon"), "COUVERTURE", None) or 2.5) * 1000),
+                           outils=dict(claude=("secours" if SECOURS else CREDITS["claude"]),
+                                       voix=("tiktok" if DOUB else "elevenlabs" if "eleven" in str(moteur).lower() else "chatterbox" if "chatterbox" in str(moteur).lower() else "piper"),
+                                       decors=("ia" if decors else "dessines"), eco=ECO)))
+    print("Outils utilisés : " + ", ".join(f"{k} = {v}" for k, v in historique[-1]["outils"].items()), flush=True)
     json.dump(historique[-200:], open("episodes/historique.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     if THEME and not REFAIRE: historique[-1]["manuel"] = True; historique[-1]["theme"] = THEME[:300]
     if REFAIRE:

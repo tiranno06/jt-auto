@@ -11,7 +11,7 @@ permissions:
   pages: write
   id-token: write
 
-concurrency:
+concurrency:                   # une seule mise en ligne à la fois ; la demande en attente la plus récente passe ensuite
   group: pages
   cancel-in-progress: false
 
@@ -27,6 +27,8 @@ jobs:
       GH_TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@v7
+        with:
+          ref: main                # toujours le dernier historique (même si la mise à jour a attendu son tour)
       - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
@@ -48,4 +50,11 @@ jobs:
           path: site
       - name: Mettre en ligne le site
         id: pages
+        continue-on-error: true
+        uses: actions/deploy-pages@v5
+      - name: Deuxième essai de mise en ligne
+        if: steps.pages.outcome == 'failure'
+        run: sleep 45
+      - name: Mettre en ligne le site (2e essai)
+        if: steps.pages.outcome == 'failure'
         uses: actions/deploy-pages@v5

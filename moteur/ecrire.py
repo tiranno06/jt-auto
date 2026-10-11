@@ -558,7 +558,7 @@ def atelier(client, systeme, titres, contexte="", type_chute="fausse vérité ir
 def idees_libres(recents=(), n=6, consignes=""):
     """Mode sketch libre : Claude propose des situations du quotidien ; renvoie des sujets au format des candidats d'actualité."""
     import anthropic
-    client = anthropic.Anthropic()
+    client = __import__('reseau').claude()
     rtxt = " ; ".join(r for r in recents if r)[:1500] or "(aucune)"
     out = []
     for essai in range(2):                                                 # une seconde tentative si la réponse est inexploitable
@@ -675,7 +675,7 @@ def mettre_en_scene(texte):
             "decoupage": [{"scene": "1", "repliques": list(range(len(reps))), "decor": "plain"}], "titre_accroche": ""}
     try:
         import anthropic
-        m = _appel(anthropic.Anthropic(), None, [{"role": "user", "content": MISE_EN_SCENE.format(
+        m = _appel(__import__('reseau').claude(), None, [{"role": "user", "content": MISE_EN_SCENE.format(
             script="\n".join(f"{i}. {NOMS_LIBRES[r['p']]} : {r['t']}" for i, r in enumerate(reps)))}], OUTIL_MES, max_tokens=4000, modele=MODELE_PUBLIC)
         d = [str(x) for x in _liste(m.get("d"))]
         for r, x in zip(brut["repliques"], d):
@@ -805,7 +805,7 @@ def ecrire_sketch(candidats, essais=None, gags=(), special=False, recents=(), li
     """candidats : liste de sujets (chaque sujet = liste d'articles, le titre principal en premier) — ou une simple liste d'articles.
     Renvoie le sketch validé, avec "fiche" (livrables A-F, note qualité, décision)."""
     import anthropic
-    client = anthropic.Anthropic()
+    client = __import__('reseau').claude()
     if candidats and isinstance(candidats[0], dict): candidats = [candidats]
     gtxt = " ; ".join(g for g in gags if g)[:600] or "(aucun pour l'instant)"
     rtxt = " ; ".join(r for r in recents if r)[:1500] or "(aucun)"

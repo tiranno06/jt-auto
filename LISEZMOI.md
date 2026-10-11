@@ -1,16 +1,12 @@
-# L'info en caoutchouc — robot 100 % automatique
+# Petits.Dramas — robot 100 % automatique
 
-Chaque matin, sans aucune intervention :
-1. le robot lit les titres politiques des dernières 36 h (franceinfo, Le Monde, Le Figaro, 20 Minutes, L'Express, BFM) ;
-2. **Claude** choisit LE sujet le plus drôle du jour et écrit un faux JT de 30 à 45 s : le présentateur Jean-Michel Plateau, l'envoyée spéciale Martine Couloir en direct, et un « expert » fictif. Une deuxième passe (« script doctor ») réécrit les blagues les plus faibles. Uniquement des faits présents dans les titres, aucune personne réelle nommée ;
-3. **Chatterbox** (open source, licence MIT) fait parler chaque personnage avec sa voix, sur un GPU **Modal**. Les voix ont été choisies automatiquement par le robot lors de sa première exécution, parmi les lecteurs du corpus *Multilingual LibriSpeech* (CC BY 4.0) ;
-4. **Wan 2.2** (open source, Apache 2.0) génère sur Modal un plan gag « reconstitution » de quelques secondes, signalé à l'écran comme image générée par IA (facultatif) ;
-5. le moteur fait le montage façon studio télé : écran partagé plateau/direct, plans large et serré, réactions du présentateur après chaque vanne, zooms sur les chutes, sous-titres karaoké, bandeau défilant de fausses dépêches, générique, ambiance de salle pour le direct, son normalisé au standard TikTok ;
-6. **Buffer** (plan gratuit) publie la vidéo sur TikTok, avec la mention « contenu généré par IA » dans la légende ;
-7. la vidéo est aussi archivée dans les *Releases* du dépôt.
+Sans aucune intervention, le robot fabrique des sketchs animés pour TikTok (style « toons » : personnages adultes à grosse tête ronde, différents à chaque vidéo) :
+1. **l'histoire** : la bande son d'une vidéo TikTok que tu donnes (doublage : le robot construit tout l'univers autour du son et des paroles), ton propre texte, ou une idée écrite par **Claude** (gag éclair de ~15 s ou sketch long de plus d'une minute) ;
+2. **les voix** : **ElevenLabs** (voix réalistes, rires, colère), sinon Chatterbox sur **Modal**, sinon les voix gratuites Piper (une voix par personnage) ;
+3. **la réalisation** : le « studio » choisit le lieu, l'heure, les tenues, le casting, les décors (IA sur Modal ou dessinés par le robot) et monte la vidéo de façon dynamique (plans serrés et larges, réactions, mouvements de caméra calés sur la voix) ;
+4. **Claude** vérifie la vidéo finie ; **Buffer** la publie sur TikTok (mention « contenu généré par IA ») ; elle est aussi archivée dans les *Releases* du dépôt.
 
-Si un service est en panne, le robot ne s'arrête pas : sans Modal, il utilise la voix de secours Piper et saute le plan gag ; si la publication échoue, la vidéo reste dans les Releases.
-
+Si un service est en panne ou sans crédit, le robot ne s'arrête pas : il bascule tout seul sur les outils gratuits (voir plus bas).
 ---
 
 ## Installation (une seule fois, environ 30 minutes)
@@ -112,7 +108,7 @@ Réglage **Personnages** dans l'onglet ⚙️ : « Adultes semi-réalistes » (p
 Réglage **Rendu détaillé (studio)** dans l'onglet ⚙️ : coupé, le robot revient exactement à l'ancien rendu (bonshommes blancs, plans simples). Le rendu détaillé prend environ deux fois plus de temps de calcul sur GitHub (gratuit).
 
 ## Réglages depuis l'application (onglet ⚙️ Réglages)
-Rythme (chaque jour, un jour sur deux, un jour sur trois, pause), heure de fabrication, durée et ton des sketchs, modèle Claude, nom de l'émission, plan gag IA, bouton « Fabriquer une émission maintenant » et raccourcis vers les crédits Modal / Claude, Buffer et TikTok Studio. Chaque réglage s'applique dès la prochaine émission.
+Rythme (chaque jour, un jour sur deux, un jour sur trois, pause), heure de fabrication, durée et ton des sketchs, modèle Claude, nom de l'émission, bouton « Fabriquer une émission maintenant » et raccourcis vers les crédits Modal / Claude, Buffer et TikTok Studio. Chaque réglage s'applique dès la prochaine émission.
 
 ## Réglages avancés (facultatifs)
 | Je veux… | Où |
@@ -120,7 +116,6 @@ Rythme (chaque jour, un jour sur deux, un jour sur trois, pause), heure de fabri
 | changer le nom de l'émission | *Settings → Secrets and variables → Actions → Variables* → `NOM_EMISSION` |
 | un modèle Claude plus drôle (un peu plus cher) | variable `MODELE_CLAUDE`, par ex. `claude-opus-5-5` |
 | publier en privé pour tester | ajouter la variable d'environnement `TIKTOK_VISIBILITE=SELF_ONLY` dans le workflow |
-| désactiver le plan gag IA (économiser les crédits Modal) | variable `PLAN_GAG` = `0` |
 | refaire le casting des voix | supprimer le dossier `voix/` du dépôt (sauf `.gitkeep`) |
 | mettre en pause | *Actions* → « Émission du jour » → *…* → *Disable workflow* |
 
@@ -135,11 +130,34 @@ Tous les outils payants sont activés par défaut (Claude pour l'écriture, la m
 ### Le mode payant profite de toutes les améliorations
 Les consignes envoyées à Claude (doublage d'une vidéo TikTok et sketchs écrits) sont générées à partir du code (`studio.consigne_studio`) : Claude connaît tous les lieux, tenues, coiffures, barbes, chapeaux, imprimés, thèmes d'époque, plans, mouvements et gestes, choisit le casting adulte (avec barbe et coiffure) et le rythme du montage (« cadence » : rapide, normal ou posé). Le moteur applique ensuite le montage dynamique, les détails et l'intonation comme en mode gratuit. Les décors IA (Stable Diffusion XL) sont demandés en style détaillé (trait noir épais, beaucoup d'objets) et gardent le premier plan dessiné (comptoir, bureau, guichet).
 
+### Mode économique (réglage « 💰 Mode économique », dans Réglages → Crédits et outils)
+Garde les outils payants (Claude, ElevenLabs, décors IA) mais dépense beaucoup moins de crédit Claude : écriture avec Sonnet au lieu d'Opus, petites étapes sur le modèle économique, un seul premier jet au lieu de trois, 2 réécritures et 2 sujets au plus, sans public test ni recherche des tendances, et pas de nouvelles ambiances sonores ElevenLabs (celles déjà fabriquées restent utilisées). Coupé par défaut (meilleure qualité).
+
+## Vitesse et stabilité
+- **Crédits vérifiés au départ** (appel minuscule à Claude, solde ElevenLabs) : le robot part directement en payant ou en gratuit.
+- **Réessais automatiques** des coupures passagères (réseau, serveur saturé) avant de basculer sur le gratuit ; la publication n'est jamais réessayée (pas de doublon).
+- **Rendu sur les 4 processeurs** des serveurs GitHub (réglage `RENDU_PARALLELE=0` pour revenir à un seul).
+- **Fiche par vidéo** : l'historique note les outils utilisés (`outils` : Claude ok/secours, voix ElevenLabs/Chatterbox/Piper/TikTok, décors IA/dessinés), affichés en voyants sur le site.
+- **Site toujours à jour** : toutes les mises en ligne du site passent par une seule file d'attente (`site.yml`, reconstruit depuis le dernier historique, 2e essai si GitHub refuse) ; avant, deux mises en ligne en même temps pouvaient en écraser une et faire disparaître une vidéo. En plus, l'application ajoute d'elle-même les vidéos toutes neuves que la version du site ne contient pas encore (lues directement depuis les Releases GitHub).
+- **Test automatique avant chaque mise à jour** : chaque demande de fusion fabrique une vraie mini-vidéo de bout en bout.
+
+## Style cinéma (toujours en dessin animé)
+Chaque vidéo tire au hasard ses effets (pour varier d'une vidéo à l'autre, en mélange avec le style d'avant) : mise au point qui glisse sur celui qui parle (l'autre devient flou dans les plans moyens), effet vertige sur les moments de choc (le personnage avance, le décor recule), règle des tiers dans les plans serrés, couleur de l'image selon l'émotion (chaude, froide, rouge de colère), trois couches de profondeur (décor, figurants, feuillage flou au premier plan), grain de film léger et reflets de lumière, son de cinéma (ambiance du lieu, pas, whoosh sur les passages rapides, musique de fond discrète qui suit l'humeur), sous-titres qui rebondissent et tremblent quand on crie. En mode payant, Claude peut choisir ces effets (« cine » dans la direction artistique).
+
+## Couverture, accroches et apprentissage
+- **Couverture TikTok** : le moteur choisit l'instant où le titre est visible et le visage le plus expressif ; Buffer l'utilise comme image de couverture et le site comme vignette.
+- **Deux styles d'accroche** (« POV : … » ou une question au spectateur) : chaque vidéo en prend un, les vues TikTok départagent peu à peu les deux styles (le meilleur sort plus souvent, l'autre reste essayé de temps en temps).
+- **Les vidéos qui marchent servent de modèle** : la banque visuelle reprend le rythme et les cadrages des vidéos les plus vues, et les effets cinéma présents dans les vidéos les plus vues reviennent plus souvent.
+- **Aperçu avant publication** : coupe « Publication automatique » dans ⚙️ Réglages → Publication ; chaque vidéo attend alors sur le site (⏸ En attente de validation) avec le bouton Publier.
+
+## Animation des personnages
+Élan et rebond dans les gestes, cheveux et vêtements qui suivent (mouvements secondaires), poids du corps qui change de jambe, vraie marche à l'entrée, visage tourné de trois quarts vers celui à qui on parle, personnages assis sur une chaise dans les lieux qui s'y prêtent, clignements et regard vers celui qui parle, micro-mouvements des sourcils, mains qui « battent » sur les mots appuyés, réactions juste après le mot qui frappe, gestes à deux (main sur l'épaule, « tope là », donner un objet, pousser) avec des mains qui atteignent vraiment l'autre.
+
 ## À savoir
 - **Satire et personnages fictifs** : la mention est incrustée dans chaque vidéo et dans la légende. Le robot ne nomme aucune personne réelle et s'interdit toute consigne de vote.
 - **Contenu IA** : la légende indique « Contenu généré par IA ». Si Buffer n'active pas automatiquement l'étiquette IA de TikTok, active une fois pour toutes l'option correspondante dans les réglages de ton compte TikTok si elle existe, ou passe par Upload-Post qui envoie l'étiquette officielle.
 - **Crédits** : voix issues de *Multilingual LibriSpeech* (CC BY 4.0), transformées ; synthèse Chatterbox (MIT) ; voix de secours Piper/SIWIS (CC BY 4.0) ; polices Poppins (SIL OFL) ; générique et bruitages fabriqués à partir des échantillons d'orchestre VSCO 2 Community Edition (Versilian Studios, CC0) — voir `outils_sons/`. Les crédits sont ajoutés automatiquement à la légende.
-- **Coûts estimés** : GitHub gratuit ; Buffer gratuit ; Modal (voix + plan gag) normalement couvert par les 30 $ de crédits gratuits mensuels — surveille la page *Usage* de Modal les premiers jours, et mets `PLAN_GAG` à `0` si besoin ; Claude quelques euros par mois.
+- **Coûts estimés** : GitHub gratuit ; Buffer gratuit ; Modal (voix et décors) normalement couvert par les 30 $ de crédits gratuits mensuels — surveille la page *Usage* de Modal les premiers jours, et mets `PLAN_GAG` à `0` si besoin ; Claude quelques euros par mois.
 
 ## Organisation
 - `moteur/principal.py` : chef d'orchestre (une exécution = une émission)
@@ -147,8 +165,7 @@ Les consignes envoyées à Claude (doublage d'une vidéo TikTok et sketchs écri
 - `moteur/ecrire.py` : écriture du sketch (méthode comique, personnages, exemple de ton, script doctor)
 - `moteur/casting.py` : choix automatique des voix
 - `moteur/voix_modal.py` / `moteur/voix.py` : voix Chatterbox (Modal) et secours Piper
-- `moteur/video_modal.py` : plan gag Wan 2.2 (Modal)
-- `moteur/dessin_jt.py` / `moteur/jt.py` : dessins, montage studio et mixage
+- `moteur/jt.py` : outils communs (sous-titres, sons, mixage, voix gratuites par personnage)
 - `moteur/cartoon.py` / `moteur/marionnette.py` : dessin animé (sketchs, gags éclair, doublage) et personnages
 - `moteur/studio.py` / `moteur/decor_dessin.py` / `moteur/decor_details.py` : direction artistique et réalisation sans IA, décors dessinés par le robot
 - `moteur/garde_robe.py` : coiffures, barbes, couvre-chefs, imprimés et finitions des vêtements
