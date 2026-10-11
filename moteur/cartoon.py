@@ -491,15 +491,16 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             x_, _, s_ = position(q["scene"], q["p"]); tete_y = 1500 - 305 * s_; pl = q.get("plan", "large")
             if FICHES and q["p"] in FICHES:                                # humains : la tête est plus petite et plus haute
                 tl = FICHES[q["p"]]["taille"]; ty, hh = HU.tete_y(s_, tl), HU.hauteur_tete(s_, tl)
+                def vise(z, f): return z, ty + (0.5 - f) * H / z               # centre de la tête à la fraction f du haut de l'écran
                 if pl == "moyen":
-                    xs = [position(q["scene"], r2)[0] for r2 in places[q["scene"]]]; return 1.3, (2 * x_ + sum(xs) / len(xs)) / 3, ty + 2.6 * hh
-                if pl == "serre": return 1.9, x_, ty + 1.15 * hh
+                    xs = [position(q["scene"], r2)[0] for r2 in places[q["scene"]]]; z, cy = vise(1.3, 0.27); return z, (2 * x_ + sum(xs) / len(xs)) / 3, cy
+                if pl == "serre": z, cy = vise(min(2.3, max(1.5, 430 / hh)), 0.3); return z, x_, cy
                 if pl == "epaule":
                     ec = ecoutant(q); sens = 1 if (ec and position(q["scene"], ec)[0] < x_) else -1
-                    return 1.9, x_ - sens * 110, ty + 1.3 * hh
-                if pl == "tres_serre": return min(3.6, 430 / hh), x_, ty + 0.3 * hh
-                if pl == "plongee": return 1.7, x_, ty + 1.7 * hh
-                if pl == "contre_plongee": return 1.75, x_, ty + 1.5 * hh
+                    z, cy = vise(min(2.3, max(1.5, 430 / hh)), 0.3); return z, x_ - sens * 110, cy
+                if pl == "tres_serre": z, cy = vise(min(3.6, 820 / hh), 0.4); return z, x_, cy
+                if pl == "plongee": z, cy = vise(1.7, 0.36); return z, x_, cy
+                if pl == "contre_plongee": z, cy = vise(1.75, 0.3); return z, x_, cy
                 return 1.0, W / 2, H / 2
             if pl == "moyen":
                 xs = [position(q["scene"], r2)[0] for r2 in places[q["scene"]]]; return 1.22, (2 * x_ + sum(xs) / len(xs)) / 3, 1190.0
@@ -666,7 +667,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             z, cx, cy = 1.55, position(sc, cible)[0], 1120.0
             if B: z, cy = 1.75, 1500 - 305 * position(sc, cible)[2] + 90
             if FICHES and cible in FICHES:
-                s_c = position(sc, cible)[2]; z, cy = 2.4, HU.tete_y(s_c, FICHES[cible]["taille"]) + 0.8 * HU.hauteur_tete(s_c, FICHES[cible]["taille"])
+                s_c = position(sc, cible)[2]; z = min(2.6, 470 / HU.hauteur_tete(s_c, FICHES[cible]["taille"])); cy = HU.tete_y(s_c, FICHES[cible]["taille"]) + 0.2 * H / z
         cx = min(max(cx, W / (2 * z)), W - W / (2 * z)); cy = min(max(cy, H / (2 * z)), H - H / (2 * z))
         if B:                                                              # profondeur : le décor glisse moins vite que les personnages
             zb = 1 + (z - 1) * 0.86; cxb, cyb = W / 2 + (cx - W / 2) * 0.86, H / 2 + (cy - H / 2) * 0.86
@@ -699,7 +700,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             y0_, x0_, x1_ = 1060, (0 if sens < 0 else W // 4), (W * 3 // 4 if sens < 0 else W)
             sub = np.empty((H - y0_, x1_ - x0_, 3), np.uint8); sub[:] = (1, 2, 3)
             y_dos = H + 420 - y0_
-            if FICHES and ec in FICHES: y_dos = (H - 140 - y0_) + (6.6 - 0.52) * HU.hauteur_tete(2.4, FICHES[ec]["taille"])   # sa tête en bas de l'image
+            if FICHES and ec in FICHES: y_dos = (H - 140 - y0_) + 1500 - HU.tete_y(2.4, FICHES[ec]["taille"])   # sa tête en bas de l'image
             p = pose(ec, tm, q, sc); p.update(dos=True, s=2.5 if not (FICHES and ec in FICHES) else 2.4, x=W / 2 + sens * 0.40 * W - x0_, y=y_dos, tremble=0, effets=(), main_g=None, main_d=None,
                                               bras_g=(-18, 8), bras_d=(18, -8))
             dessine(sub, ec, p)

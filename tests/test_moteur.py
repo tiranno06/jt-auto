@@ -691,8 +691,8 @@ class TestHumains(unittest.TestCase):
                                           dos=(k == 4), effets=("goutte",), epaules=0.5, penche=0.5, pied=1.0)
             H.dessiner(img, H.creer(k, cheveux=st, lunettes="rondes", barbe="courte"), p)
         tete, (rx, ry), mains = H.reperes(H.creer(1), dict(M.pose_neutre(), x=540, y=1500, s=1.0))
-        self.assertTrue(500 < tete[1] < 800 and 400 < tete[0] < 700); self.assertEqual(len(mains), 2)
-        self.assertAlmostEqual(H.tete_y(1.0), 1500 - 4.5 * 165, delta=2)
+        self.assertTrue(650 < tete[1] < 1000 and 400 < tete[0] < 700); self.assertEqual(len(mains), 2)
+        self.assertLess(H.tete_y(1.0), H.tete_y(0.5)); self.assertGreater(1500 - H.tete_y(1.0), 2 * H.hauteur_tete(1.0))   # adulte : au moins 3 têtes de haut
 
     def test_casting(self):
         S = self.S
