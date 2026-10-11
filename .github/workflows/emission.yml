@@ -10,7 +10,7 @@ on:
         required: false
         default: ""
       format:
-        description: "Type de vidéo : mini (gag éclair), libre (sketch long), actu (JT) ou cycle (3 + 1). Vide = réglage de la régie."
+        description: "Type de vidéo : mini (gag éclair), libre (sketch long) ou cycle (3 + 1). Vide = réglage de la régie."
         required: false
         default: ""
       refaire:
@@ -88,7 +88,6 @@ jobs:
       UPLOAD_POST_USER: ${{ secrets.UPLOAD_POST_USER }}
       MODELE_CLAUDE: ${{ vars.MODELE_CLAUDE }}
       NOM_EMISSION: ${{ vars.NOM_EMISSION }}
-      PLAN_GAG: ${{ vars.PLAN_GAG }}
       LONGUEUR: ${{ vars.LONGUEUR }}
       SKETCH_TEST: ${{ inputs.sketch }}
       MAX_REECRITURES: ${{ vars.MAX_REECRITURES }}
@@ -175,11 +174,10 @@ jobs:
         if: startsWith(inputs.theme, 'TIKTOK::')
         run: pip install -q -U "yt-dlp[default,curl-cffi]"
 
-      - name: Déployer les voix (Chatterbox) et le plan gag (Wan 2.2) sur Modal
+      - name: Déployer les voix (Chatterbox), la banque de voix et les décors sur Modal
         if: env.MODAL_TOKEN_ID != ''
         run: |
           modal deploy moteur/voix_modal.py || echo "Deploiement voix echoue, voix de secours"
-          modal deploy moteur/video_modal.py || echo "Deploiement Wan echoue, pas de plan gag"
           modal deploy moteur/banque_modal.py || echo "Deploiement banque de voix echoue, chaine de secours"
           modal deploy moteur/decor_modal.py || echo "Deploiement decors echoue, fonds unis"
 

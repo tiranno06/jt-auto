@@ -9,7 +9,7 @@ import datetime, json, os, re, sys
 FENETRE = 120                                                              # minutes après l'heure d'un créneau pendant lesquelles il peut encore partir
 from zoneinfo import ZoneInfo
 
-FORMATS = ("mini", "libre", "actu", "programme")
+FORMATS = ("mini", "libre", "programme")
 
 def horaires():
     """Créneaux réglés dans la régie (variable HEURE). Format libre : « 12:00=mini;18:30=libre;21:15|jours=12345 »

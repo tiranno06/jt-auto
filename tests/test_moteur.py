@@ -14,79 +14,6 @@ def article(titre, source, lien=None, resume=""):
     return dict(titre=titre, resume=resume, lien=lien or f"https://{source}.fr/{abs(hash(titre))}", date=None, source=source)
 
 
-class TestRecherche(unittest.TestCase):
-    def setUp(self):
-        self._lire = actu.lire_flux
-
-    def tearDown(self):
-        actu.lire_flux = self._lire
-
-    def test_filtres(self):
-        self.assertTrue(actu.DRAMES.search("Un mort dans un accident"))
-        self.assertTrue(actu.RUBRIQUES.search("L’actu de ce vendredi 9 octobre"))
-        self.assertTrue(actu.RUBRIQUES.search("Les seuils techniques sur les marchés - 09/10"))
-        self.assertFalse(actu.DRAMES.search("Budget 2027 : les députés rejettent les économies"))
-
-    def test_candidats_distincts_et_classes(self):
-        items = [article("Budget 2027 : les députés rejettent les économies", "a"),
-                 article("Les économies du budget rejetées par les députés", "b"),
-                 article("Budget : les députés taillent dans les économies", "c"),
-                 article("Carburant : le prix de l'essence bat un record", "d"),
-                 article("Prix record de l'essence à la pompe, le carburant flambe", "e"),
-                 article("Un chat élu maire d'un village", "f"),
-                 article("Accident mortel sur l'autoroute", "g")]
-        actu.lire_flux = lambda u: items if u == actu.FLUX[0] else []
-        c = actu.candidats_du_jour()
-        self.assertGreaterEqual(len(c), 2)
-        self.assertIn("Budget", c[0][0][0]["titre"])                          # le sujet le plus repris en premier
-        tous = [a["titre"] for sel, _ in c for a in sel]
-        self.assertFalse(any("Accident" in t for t in tous))                  # drames exclus
-        self.assertFalse(any("chat" in t for t in tous))                      # sujet repris une seule fois : écarté
-
-    def test_gros_titres_a_la_une_en_premier(self):
-        politique = [article(f"Réforme des retraites : le Sénat examine le texte ({m})", m) for m in "abcd"]
-        une = [article(f"Carburant : le prix de l'essence bat un record ({m})", m) for m in ("lemonde", "figaro", "bfm", "franceinfo")]
-        sport = [article(f"Lens - OL : revivez le match ({m})", m) for m in ("lequipe", "bfm", "rmc")]
-        bruit = [article(f"Brève {chr(97 + i % 26)}{i} isolée numéro{i} motunique{i}", f"s{i}") for i in range(60)]   # volume réaliste de flux
-        actu.lire_flux = lambda u: politique + bruit if u == actu.FLUX[0] else une + sport if u == actu.UNES[0] else []
-        c = actu.candidats_du_jour()
-        self.assertIn("essence", c[0][0][0]["titre"])                           # le sujet à la une passe devant
-        self.assertIn("à la une chez 4", c[0][1])
-        self.assertIn("secondaire", c[1][1])                                     # pas à la une : signalé comme secondaire
-        self.assertFalse(any("Lens" in a["titre"] for sel, _ in c for a in sel)) # direct sportif écarté
-
-    def test_titre_reduit_a_un_nom(self):
-        items = [article("Gabriel Attal", "a"), article("Gabriel Attal ", "b", resume="gabriel attal"),
-                 article("Gabriel Attal annonce sa candidature à la présidentielle", "c"),
-                 article("Présidentielle : Gabriel Attal candidat, annonce surprise", "d")]
-        actu.lire_flux = lambda u: items if u == actu.UNES[0] else []
-        c = actu.candidats_du_jour()
-        self.assertGreaterEqual(len(c[0][0][0]["titre"].split()), 4)            # on présente un vrai titre, pas un simple nom
-        self.assertIn("Attal", c[0][0][0]["titre"])
-
-    def test_sujet_deja_traite_ecarte(self):
-        recents = [sorted(actu.empreinte("3000 PROFS EXPRESS Le ministère a trouvé 3 000 profs en 24 heures, des remplaçants recrutés en vitesse."))]
-        profs = [article(f"Les 3024 professeurs remplaçants recrutés en un jour : le ministre interrogé ({m})", m) for m in ("lemonde", "figaro", "bfm")]
-        budget = [article(f"Budget 2027 : la commission des finances rejette les recettes ({m})", m) for m in ("lemonde", "figaro", "libe")]
-        bruit = [article(f"Brève {i} isolée motunique{i}", f"s{i}") for i in range(60)]
-        actu.lire_flux = lambda u: profs + budget + bruit if u == actu.UNES[0] else []
-        c = actu.candidats_du_jour(sujets_recents=recents)
-        self.assertIn("Budget", c[0][0][0]["titre"])                            # le sujet d'hier n'est pas repris
-        self.assertFalse(any("professeurs" in sel[0]["titre"] for sel, _ in c))
-        self.assertTrue(actu.DRAMES.search("Un séisme de magnitude 7,7 a secoué le Panama"))   # catastrophes exclues
-
-    def test_deja_vus_et_flux_en_panne(self):
-        items = [article("Budget 2027 : les députés rejettent les économies", "a", "L1"),
-                 article("Les économies du budget rejetées par les députés", "b", "L2"),
-                 article("Un chat élu maire d'un village", "c", "L3")]
-        def lire(u):
-            if u == actu.FLUX[1]: raise OSError("flux en panne")
-            return items if u == actu.FLUX[0] else []
-        actu.lire_flux = lire
-        self.assertEqual(len(actu.candidats_du_jour()), 1)                    # un flux en panne ne bloque pas
-        self.assertEqual(actu.candidats_du_jour(deja_vus={"L1", "L2"}), [])   # liens déjà traités : rien
-
-
 SKETCH = {
     "sujet": "budget", "ecran": "budget 2027", "titre_accroche": "4 milliards perdus",
     "concept": "c", "format": "faux JT", "angle": "a", "resume_factuel": "r", "faits_reels": ["f"], "inventions": ["i"],
@@ -364,7 +291,7 @@ class TestCycle(unittest.TestCase):
         f = programme.format_du_jour; H = lambda *fs: [{"format": x} for x in fs]
         self.assertEqual([f("cycle", []), f("cycle", H("mini")), f("cycle", H("mini", "mini", "mini")), f("cycle", H("mini", "mini", "mini", "libre")),
                           f("cycle", H("libre", "mini", "actu", "mini")), f("", []), f("actu", []), f("n_importe", [])],
-                         ["mini", "mini", "libre", "mini", "mini", "mini", "actu", "libre"])
+                         ["mini", "mini", "libre", "mini", "mini", "mini", "mini", "mini"])
 
 
 class TestVoix(unittest.TestCase):

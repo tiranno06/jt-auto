@@ -1,16 +1,12 @@
-# L'info en caoutchouc — robot 100 % automatique
+# Petits.Dramas — robot 100 % automatique
 
-Chaque matin, sans aucune intervention :
-1. le robot lit les titres politiques des dernières 36 h (franceinfo, Le Monde, Le Figaro, 20 Minutes, L'Express, BFM) ;
-2. **Claude** choisit LE sujet le plus drôle du jour et écrit un faux JT de 30 à 45 s : le présentateur Jean-Michel Plateau, l'envoyée spéciale Martine Couloir en direct, et un « expert » fictif. Une deuxième passe (« script doctor ») réécrit les blagues les plus faibles. Uniquement des faits présents dans les titres, aucune personne réelle nommée ;
-3. **Chatterbox** (open source, licence MIT) fait parler chaque personnage avec sa voix, sur un GPU **Modal**. Les voix ont été choisies automatiquement par le robot lors de sa première exécution, parmi les lecteurs du corpus *Multilingual LibriSpeech* (CC BY 4.0) ;
-4. **Wan 2.2** (open source, Apache 2.0) génère sur Modal un plan gag « reconstitution » de quelques secondes, signalé à l'écran comme image générée par IA (facultatif) ;
-5. le moteur fait le montage façon studio télé : écran partagé plateau/direct, plans large et serré, réactions du présentateur après chaque vanne, zooms sur les chutes, sous-titres karaoké, bandeau défilant de fausses dépêches, générique, ambiance de salle pour le direct, son normalisé au standard TikTok ;
-6. **Buffer** (plan gratuit) publie la vidéo sur TikTok, avec la mention « contenu généré par IA » dans la légende ;
-7. la vidéo est aussi archivée dans les *Releases* du dépôt.
+Sans aucune intervention, le robot fabrique des sketchs animés pour TikTok (style « toons » : personnages adultes à grosse tête ronde, différents à chaque vidéo) :
+1. **l'histoire** : la bande son d'une vidéo TikTok que tu donnes (doublage : le robot construit tout l'univers autour du son et des paroles), ton propre texte, ou une idée écrite par **Claude** (gag éclair de ~15 s ou sketch long de plus d'une minute) ;
+2. **les voix** : **ElevenLabs** (voix réalistes, rires, colère), sinon Chatterbox sur **Modal**, sinon les voix gratuites Piper (une voix par personnage) ;
+3. **la réalisation** : le « studio » choisit le lieu, l'heure, les tenues, le casting, les décors (IA sur Modal ou dessinés par le robot) et monte la vidéo de façon dynamique (plans serrés et larges, réactions, mouvements de caméra calés sur la voix) ;
+4. **Claude** vérifie la vidéo finie ; **Buffer** la publie sur TikTok (mention « contenu généré par IA ») ; elle est aussi archivée dans les *Releases* du dépôt.
 
-Si un service est en panne, le robot ne s'arrête pas : sans Modal, il utilise la voix de secours Piper et saute le plan gag ; si la publication échoue, la vidéo reste dans les Releases.
-
+Si un service est en panne ou sans crédit, le robot ne s'arrête pas : il bascule tout seul sur les outils gratuits (voir plus bas).
 ---
 
 ## Installation (une seule fois, environ 30 minutes)
@@ -112,7 +108,7 @@ Réglage **Personnages** dans l'onglet ⚙️ : « Adultes semi-réalistes » (p
 Réglage **Rendu détaillé (studio)** dans l'onglet ⚙️ : coupé, le robot revient exactement à l'ancien rendu (bonshommes blancs, plans simples). Le rendu détaillé prend environ deux fois plus de temps de calcul sur GitHub (gratuit).
 
 ## Réglages depuis l'application (onglet ⚙️ Réglages)
-Rythme (chaque jour, un jour sur deux, un jour sur trois, pause), heure de fabrication, durée et ton des sketchs, modèle Claude, nom de l'émission, plan gag IA, bouton « Fabriquer une émission maintenant » et raccourcis vers les crédits Modal / Claude, Buffer et TikTok Studio. Chaque réglage s'applique dès la prochaine émission.
+Rythme (chaque jour, un jour sur deux, un jour sur trois, pause), heure de fabrication, durée et ton des sketchs, modèle Claude, nom de l'émission, bouton « Fabriquer une émission maintenant » et raccourcis vers les crédits Modal / Claude, Buffer et TikTok Studio. Chaque réglage s'applique dès la prochaine émission.
 
 ## Réglages avancés (facultatifs)
 | Je veux… | Où |
@@ -120,7 +116,6 @@ Rythme (chaque jour, un jour sur deux, un jour sur trois, pause), heure de fabri
 | changer le nom de l'émission | *Settings → Secrets and variables → Actions → Variables* → `NOM_EMISSION` |
 | un modèle Claude plus drôle (un peu plus cher) | variable `MODELE_CLAUDE`, par ex. `claude-opus-5-5` |
 | publier en privé pour tester | ajouter la variable d'environnement `TIKTOK_VISIBILITE=SELF_ONLY` dans le workflow |
-| désactiver le plan gag IA (économiser les crédits Modal) | variable `PLAN_GAG` = `0` |
 | refaire le casting des voix | supprimer le dossier `voix/` du dépôt (sauf `.gitkeep`) |
 | mettre en pause | *Actions* → « Émission du jour » → *…* → *Disable workflow* |
 
@@ -139,7 +134,7 @@ Les consignes envoyées à Claude (doublage d'une vidéo TikTok et sketchs écri
 - **Satire et personnages fictifs** : la mention est incrustée dans chaque vidéo et dans la légende. Le robot ne nomme aucune personne réelle et s'interdit toute consigne de vote.
 - **Contenu IA** : la légende indique « Contenu généré par IA ». Si Buffer n'active pas automatiquement l'étiquette IA de TikTok, active une fois pour toutes l'option correspondante dans les réglages de ton compte TikTok si elle existe, ou passe par Upload-Post qui envoie l'étiquette officielle.
 - **Crédits** : voix issues de *Multilingual LibriSpeech* (CC BY 4.0), transformées ; synthèse Chatterbox (MIT) ; voix de secours Piper/SIWIS (CC BY 4.0) ; polices Poppins (SIL OFL) ; générique et bruitages fabriqués à partir des échantillons d'orchestre VSCO 2 Community Edition (Versilian Studios, CC0) — voir `outils_sons/`. Les crédits sont ajoutés automatiquement à la légende.
-- **Coûts estimés** : GitHub gratuit ; Buffer gratuit ; Modal (voix + plan gag) normalement couvert par les 30 $ de crédits gratuits mensuels — surveille la page *Usage* de Modal les premiers jours, et mets `PLAN_GAG` à `0` si besoin ; Claude quelques euros par mois.
+- **Coûts estimés** : GitHub gratuit ; Buffer gratuit ; Modal (voix et décors) normalement couvert par les 30 $ de crédits gratuits mensuels — surveille la page *Usage* de Modal les premiers jours, et mets `PLAN_GAG` à `0` si besoin ; Claude quelques euros par mois.
 
 ## Organisation
 - `moteur/principal.py` : chef d'orchestre (une exécution = une émission)
@@ -147,8 +142,7 @@ Les consignes envoyées à Claude (doublage d'une vidéo TikTok et sketchs écri
 - `moteur/ecrire.py` : écriture du sketch (méthode comique, personnages, exemple de ton, script doctor)
 - `moteur/casting.py` : choix automatique des voix
 - `moteur/voix_modal.py` / `moteur/voix.py` : voix Chatterbox (Modal) et secours Piper
-- `moteur/video_modal.py` : plan gag Wan 2.2 (Modal)
-- `moteur/dessin_jt.py` / `moteur/jt.py` : dessins, montage studio et mixage
+- `moteur/jt.py` : outils communs (sous-titres, sons, mixage, voix gratuites par personnage)
 - `moteur/cartoon.py` / `moteur/marionnette.py` : dessin animé (sketchs, gags éclair, doublage) et personnages
 - `moteur/studio.py` / `moteur/decor_dessin.py` / `moteur/decor_details.py` : direction artistique et réalisation sans IA, décors dessinés par le robot
 - `moteur/garde_robe.py` : coiffures, barbes, couvre-chefs, imprimés et finitions des vêtements
