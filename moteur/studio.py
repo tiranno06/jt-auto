@@ -367,7 +367,7 @@ def genre_voix(sk, role, d=None):
     """Homme ou femme : TOUJOURS d'après la voix entendue. Sketch écrit : voix fixes des rôles (Jojo, Kévin : homme ; Lila : femme).
     Doublage : voix mesurée réplique par réplique quand elle est nette, sinon le choix de Claude, sinon la hauteur moyenne."""
     d = d or {}
-    if not sk.get("doublage"): return GENRE_ROLE.get(role) or (d.get("genre") if d.get("genre") in ("h", "f") else None)
+    if sk.get("doublage") is None: return GENRE_ROLE.get(role) or (d.get("genre") if d.get("genre") in ("h", "f") else None)
     g = (sk.get("_voix_genre") or {}).get(role) or (d.get("genre") if d.get("genre") in ("h", "f") else None)
     vh = (sk.get("_voix_hz") or {}).get(role)
     return g or (("f" if vh > 165 else "h") if vh else None)
