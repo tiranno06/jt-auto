@@ -170,7 +170,7 @@ jobs:
 
       - name: Lecteur TikTok (vidéo depuis une bande son)
         if: startsWith(inputs.theme, 'TIKTOK::')
-        run: pip install -q -U "yt-dlp[default,curl-cffi]"
+        run: pip install -q -U "yt-dlp[default,curl-cffi]" faster-whisper   # Whisper gratuit : repli si ElevenLabs et Modal manquent de crédit
 
       - name: Déployer les voix (Chatterbox), la banque de voix et les décors sur Modal
         if: env.MODAL_TOKEN_ID != ''

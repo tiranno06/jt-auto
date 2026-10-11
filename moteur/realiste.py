@@ -55,7 +55,7 @@ def prompt_plan(groupe, dec, k, total):
     fin = " Final beat: a frozen comedic reaction shot." if k == total - 1 else ""
     return (f"Photorealistic vertical 9:16 French sitcom scene, cinematic, natural light, handheld medium shots and close-ups, realistic faces and lip sync. "
             f"Location: {lieu}. {persos} They speak natural French with Parisian accents, comedic timing, expressive faces. {lignes}{fin} "
-            f"No subtitles, no on-screen text, no music, no logos.")
+            f"No subtitles, no on-screen text, no music, no laugh track or audience laughter, no logos.")
 
 def _attendre(gid, delai=900):
     t0 = time.time()

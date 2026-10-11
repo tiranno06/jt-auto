@@ -105,6 +105,8 @@ def _ressort(u):
     v = (u - 0.15) / 0.85
     return min(1.22, 1 - math.exp(-4.5 * v) * math.cos(6.5 * v))           # dépassement amorti
 
+BOUCHE_ECOUTE = {"o": "moue", "cri": "dents", "grand_sourire": "sourire"}   # bouche fermée de celui qui écoute (même émotion)
+
 def viseme(c):
     """Forme de bouche d'une lettre (français simplifié)."""
     c = c.lower()
@@ -220,6 +222,16 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             v = np.concatenate([f0s[i][f0s[i] > 0] for i, r in enumerate(reps) if r["p"] == role and i < len(f0s)] or [np.zeros(0)])
             ref = float(np.median(v)) if len(v) > 10 else None
             if ref: sk.setdefault("_voix_hz", {})[role] = round(ref)       # le casting devine homme / femme d'après la voix
+            vote = {"h": 0.0, "f": 0.0}                                    # vote réplique par réplique (un cri d'homme monte vers 200 Hz)
+            for i, r in enumerate(reps):
+                if r["p"] != role or i >= len(f0s): continue
+                v_ = f0s[i][f0s[i] > 0]
+                if len(v_) < 8: continue
+                m_ = float(np.percentile(v_, 35))
+                if m_ < 165: vote["h"] += len(v_)
+                elif m_ > 205: vote["f"] += len(v_)
+            if sum(vote.values()) and max(vote.values()) >= 0.7 * sum(vote.values()):
+                sk.setdefault("_voix_genre", {})[role] = max(vote, key=vote.get)
             for i, r in enumerate(reps):
                 if r["p"] == role and i < len(f0s): TON[i] = studio.intonation(f0s[i], ref)
     def emo_de(i, r):
@@ -465,6 +477,9 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         if recule:                                                         # recul face à quelqu'un qui crie
             xa = position(scene, q["p"])[0]; u_r = _ressort((tm - t_r) / 0.35) * (1 - _ease((tm - q["fin"] - 0.1) / 0.3))
             p["x"] += (-1 if xa > x else 1) * 26 * s * u_r; p["tilt"] += (-1 if xa > x else 1) * 6 * u_r
+        if not parle:                                                      # celui qui écoute garde la bouche fermée : il ne doit
+            p["forme"] = BOUCHE_ECOUTE.get(p.get("forme"), p.get("forme"))  # jamais avoir l'air de parler avec la voix d'un autre
+            p["bouche"] = 0.0; p.pop("viseme", None)
         # bouche synchronisée sur la voix
         if parle:
             k = int((tm - q["deb"]) * FPS); lv = float(q["lv"][k]) if 0 <= k < len(q["lv"]) else 0.0
@@ -938,25 +953,21 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
     else:
         for q, a in zip(ph, audios):
             b = vers_mix(a); s0 = int(q["deb"] * SRM); mix[s0:s0 + len(b)] += b[:n - s0]
-    fx = np.zeros((n, 2)); public = np.zeros((n, 2))
-    def ajoute(nom, t_, g, piste=None):
-        x = SM.son(nom); s0 = int(max(0, t_) * SRM); e = min(n, s0 + len(x)); p_ = fx if piste is None else piste
-        if e > s0: p_[s0:e] += x[:e - s0] * g
+    fx = np.zeros((n, 2))
+    def ajoute(nom, t_, g):
+        x = SM.son(nom); s0 = int(max(0, t_) * SRM); e = min(n, s0 + len(x))
+        if e > s0: fx[s0:e] += x[:e - s0] * g
     for tr in (() if DOUB else transitions):                              # changements de scène / de gag bien marqués
         ajoute("transition", tr[0] - 0.25, 0.8)
         if tr[2] == "carton": ajoute("pop", tr[0] + 0.05, 0.7)
     if mini:
         for k in TITRES: ajoute("pop", min(z2["deb"] for z2 in ph if z2["scene"] == k) - 0.2, 0.6)
     for j, q in enumerate([] if DOUB else ph[:-1]):                       # doublage : la bande son d'origine a déjà ses effets
-        if q["chute"]:                                                     # vanne en route : impact léger + rires du public
-            ajoute("boom_leger", q["fin"] + 0.05, 0.4); ajoute("foule_rire", q["fin"] + 0.12, 0.55, public)
-        elif q["emo"] in ("choc", "panique") and j:                        # moment de choc : « oooh » du public
-            ajoute("gasp", q["fin"] + 0.05, 0.45, public)
+        if q["chute"]: ajoute("boom_leger", q["fin"] + 0.05, 0.4)          # vanne en route : impact léger (pas de rires enregistrés)
     if not DOUB:
         d_m = len(SM.son("montee")) / SRM
         ajoute("montee", ph[-1]["deb"] - d_m, 0.5)                        # tension juste avant la chute finale
         ajoute("boom_fin", ph[-1]["fin"] + 0.02, 1.0)                     # gros impact sur la chute finale
-        ajoute("foule_rire", ph[-1]["fin"] + 0.25, 0.8, public)           # gros rire du public
         if len(places[ph[-1]["scene"]]) > 1: ajoute("boom_leger", ph[-1]["fin"] + 0.57, 0.5)   # celui qui encaisse tombe à la renverse
     amb = np.zeros((n, 2))                                                 # son « cinéma » : ambiance du lieu, pas, whoosh, musique
     def ajoute_x(x, t_, g, piste):
@@ -984,7 +995,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
     if FIN_CARTE is not None: ajoute("pop", FIN_CARTE, 0.6)
     voix_env = np.convolve(np.abs(mix[:, 0]), np.ones(int(0.15 * SRM)) / int(0.15 * SRM), "same")
     voix_env = np.clip(voix_env / (np.percentile(voix_env[voix_env > 1e-4], 90) + 1e-6) if (voix_env > 1e-4).any() else voix_env, 0, 1)
-    mix = mix + fx * (1 - 0.5 * voix_env)[:, None] + public * (1 - 0.8 * voix_env)[:, None] + amb * (1 - 0.6 * voix_env)[:, None]   # le public, l'ambiance et la musique s'effacent quand on parle
+    mix = mix + fx * (1 - 0.5 * voix_env)[:, None] + amb * (1 - 0.6 * voix_env)[:, None]   # l'ambiance et la musique s'effacent quand on parle
     mix = np.clip(mix / max(1.0, np.abs(mix).max() / 0.95), -0.99, 0.99)
     brut, wav = f"{tmp}/mix.wav", f"{tmp}/mix_norm.wav"
     with wave.open(brut, "wb") as w:

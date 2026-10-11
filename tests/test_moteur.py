@@ -617,6 +617,27 @@ class TestVideoComplete(unittest.TestCase):
         r = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "stream=codec_type", "-of", "csv=p=0", sortie], capture_output=True, text=True)
         self.assertIn("video", r.stdout); self.assertIn("audio", r.stdout)
 
+class TestTiktokGratuit(unittest.TestCase):
+    def test_voix_separees_par_hauteur(self):
+        sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "moteur"))
+        import doublage as D
+        sr = D.SR; t = np.arange(int(sr * 1.5)) / sr
+        ton = lambda f: (0.4 * np.sin(2 * np.pi * f * t) + 0.2 * np.sin(4 * np.pi * f * t)).astype(np.float32)
+        blanc = np.zeros(int(sr * 0.5), np.float32)
+        sig = np.concatenate([ton(120), blanc, ton(230), blanc, ton(120)])        # homme, femme, homme
+        mots = [{"w": "Salut.", "s": 0.1, "e": 1.4, "voix": "speaker_0"}, {"w": "Bonjour.", "s": 2.1, "e": 3.4, "voix": "speaker_0"},
+                {"w": "Ça va.", "s": 4.1, "e": 5.4, "voix": "speaker_0"}]
+        voix = [m["voix"] for m in D.separer_voix(mots, sig)]
+        self.assertEqual(voix[0], voix[2]); self.assertNotEqual(voix[0], voix[1])
+        segs = D.segments(mots); cast = D._casting_defaut(segs, D.hauteurs(sig, segs))
+        self.assertEqual(cast[voix[1]], "envoyee"); self.assertEqual(cast[voix[0]], "presentateur")
+
+    def test_genre_suit_la_voix(self):
+        import studio
+        self.assertEqual(studio.genre_voix({}, "presentateur", {"genre": "f"}), "h")         # sketch écrit : Jojo reste un homme
+        self.assertEqual(studio.genre_voix({"doublage": {}, "_voix_genre": {"envoyee": "h"}}, "envoyee", {"genre": "f"}), "h")
+
+
 class TestModeEco(unittest.TestCase):
     def test_mode_eco(self):
         import reseau

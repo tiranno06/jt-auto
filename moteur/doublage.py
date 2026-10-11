@@ -7,7 +7,7 @@
 4. le moteur cartoon anime Jojo, Kévin et Lila en play-back exact sur la bande son d'origine, gardée telle quelle (voix + musique).
 
 preparer(url) -> (sk, audios, mots) prêts pour cartoon.rendre."""
-import base64, json, os, re, subprocess, tempfile, wave
+import math, base64, json, os, re, subprocess, tempfile, wave
 import reseau
 import numpy as np
 
@@ -123,7 +123,46 @@ def transcrire(chemin, mono):
     import voix_banque
     e_ = (voix_banque.ecouter([mono]) or [None])[0] or {}
     mots = [{"w": w, "s": float(s), "e": float(f), "voix": "speaker_0"} for w, s, f in (e_.get("mots") or [])]
+    if not mots: mots = whisper_local(mono)                               # ni ElevenLabs ni Modal : Whisper gratuit sur la machine
     if not mots: raise RuntimeError("aucune parole reconnue dans la vidéo")
+    return mots
+
+def whisper_local(mono):
+    """Repli 100 % gratuit : Whisper (faster-whisper, modèle « small ») tourne directement sur la machine GitHub, sans crédit."""
+    try:
+        from faster_whisper import WhisperModel
+        from scipy.signal import resample_poly
+        a = resample_poly(np.asarray(mono, np.float32), 320, 441).astype(np.float32)   # 22 050 Hz -> 16 000 Hz
+        seg, _ = WhisperModel(os.environ.get("WHISPER_LOCAL", "small"), device="cpu", compute_type="int8").transcribe(
+            a, language="fr", word_timestamps=True, vad_filter=True)
+        mots = [{"w": w.word.strip(), "s": float(w.start), "e": float(w.end), "voix": "speaker_0"} for x in seg for w in (x.words or []) if w.word.strip()]
+        journal(f"  transcription gratuite (Whisper sur la machine) : {len(mots)} mots"); return mots
+    except Exception as e:
+        journal(f"  Whisper gratuit indisponible ({str(e)[:150]})"); return []
+
+def separer_voix(mots, sig):
+    """Sans ElevenLabs (une seule voix reconnue) : on sépare les personnes d'après la hauteur de la voix, phrase par phrase
+    (voix grave / voix aiguë), pour que chaque personnage ne dise que ses propres répliques. Gratuit."""
+    if len({m["voix"] for m in mots}) > 1: return mots
+    segs = []                                                              # morceaux fins : coupés à chaque petite pause ou fin de phrase
+    for m in mots:
+        if not segs or m["s"] - segs[-1]["mots"][-1]["e"] > 0.3 or re.search(r"[.!?…]$", segs[-1]["mots"][-1]["w"]): segs.append({"mots": [m]})
+        else: segs[-1]["mots"].append(m)
+    for s in segs: s["deb"], s["fin"] = s["mots"][0]["s"], s["mots"][-1]["e"]
+    hz = []
+    for s in segs:
+        h = hauteurs(sig, [dict(s, voix="x")]).get("x"); hz.append(math.log(h) if h else None)
+    v = [x for x in hz if x is not None]
+    if len(v) < 2 or max(v) - min(v) < math.log(1.3): return mots         # une seule personne (ou voix trop proches)
+    c = [min(v), max(v)]
+    for _ in range(12):                                                    # deux groupes : voix grave, voix aiguë
+        g = [[x for x in v if abs(x - c[0]) <= abs(x - c[1])], [x for x in v if abs(x - c[0]) > abs(x - c[1])]]
+        c = [sum(g[k]) / len(g[k]) if g[k] else c[k] for k in (0, 1)]
+    if c[1] - c[0] < math.log(1.25): return mots
+    for s, x in zip(segs, hz):
+        voix = "speaker_0" if x is None or abs(x - c[0]) <= abs(x - c[1]) else "speaker_1"
+        for m in s["mots"]: m["voix"] = voix
+    journal(f"  voix séparées par la hauteur (gratuit) : {round(math.exp(c[0]))} Hz et {round(math.exp(c[1]))} Hz")
     return mots
 
 EVENEMENTS = []                                                            # événements sonores repérés par Scribe : (début, fin, nom)
@@ -240,8 +279,8 @@ def preparer(url):
         journal("  image de la vidéo : " + analyse_video.texte(visuel))
     except Exception as e: journal(f"  analyse de l'image impossible ({str(e)[:150]}) : mise en scène d'après le son seul")
     voix_sig, chemin_voix = isoler(tmp)
-    segs = segments(transcrire(chemin_voix, mono))
     sig = voix_sig if voix_sig is not None and len(voix_sig) >= len(mono) * 0.9 else mono
+    segs = segments(separer_voix(transcrire(chemin_voix, mono), sig))
     hz = hauteurs(sig, segs)
     journal(f"  {len(segs)} répliques, voix : {hz}")
     casting, m = _casting_defaut(segs, hz), {}

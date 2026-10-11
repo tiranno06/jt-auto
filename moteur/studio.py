@@ -309,8 +309,8 @@ def bible(sk, roles):
     if T:
         for k, role in enumerate(roles):
             if isinstance(S.get("costumes"), dict) and (S.get("costumes") or {}).get(role): continue
-            vh = (sk.get("_voix_hz") or {}).get(role); g = ("f" if vh > 165 else "h") if vh else GENRE_ROLE.get(role)
-            costumes[role] = appliquer_theme(costumes[role], T, g, k == 0)
+            P0 = S.get("personnages") if isinstance(S.get("personnages"), dict) else {}
+            costumes[role] = appliquer_theme(costumes[role], T, genre_voix(sk, role, P0.get(role) if isinstance(P0.get(role), dict) else {}), k == 0)
     # les personnes de la vidéo d'origine habillent nos personnages : la plus présente à l'image joue la voix la plus présente
     if V.get("personnes"):
         mots = {r: sum(len(x.get("t", "").split()) for x in sk.get("repliques", []) if x.get("p") == r) for r in roles}
@@ -363,6 +363,15 @@ COIFFURES_HUMAINS = {"carre": "carre", "long": "long", "queue": "queue", "chigno
                      "meches": "court", "nuque": "court", "couronne": "chauve", "aucune": "chauve", "raie": "raie", "rase": "rase", "mi_long": "mi_long", "chauve": "chauve"}
 COIFFURES_HUMAINS.update({c: c for c in M.GR.COIFFURES})
 
+def genre_voix(sk, role, d=None):
+    """Homme ou femme : TOUJOURS d'après la voix entendue. Sketch écrit : voix fixes des rôles (Jojo, Kévin : homme ; Lila : femme).
+    Doublage : voix mesurée réplique par réplique quand elle est nette, sinon le choix de Claude, sinon la hauteur moyenne."""
+    d = d or {}
+    if sk.get("doublage") is None: return GENRE_ROLE.get(role) or (d.get("genre") if d.get("genre") in ("h", "f") else None)
+    g = (sk.get("_voix_genre") or {}).get(role) or (d.get("genre") if d.get("genre") in ("h", "f") else None)
+    vh = (sk.get("_voix_hz") or {}).get(role)
+    return g or (("f" if vh > 165 else "h") if vh else None)
+
 def casting(sk, roles, costumes, S, graine):
     """Casting libre : une fiche de personnage adulte par rôle, différente à chaque vidéo.
     Genre : la voix (doublage : moins de 165 Hz ≈ homme), sinon le prénom du sketch écrit ; âge, corpulence… : ce que Claude a vu
@@ -375,9 +384,7 @@ def casting(sk, roles, costumes, S, graine):
     out = {}
     for k, role in enumerate(roles):
         d = P_.get(role) if isinstance(P_.get(role), dict) else {}
-        genre = d.get("genre") if d.get("genre") in ("h", "f") else None
-        if not genre and doub and voix.get(role): genre = "f" if voix[role] > 165 else "h"
-        if not genre and not doub: genre = GENRE_ROLE.get(role)
+        genre = genre_voix(sk, role, d)
         age = None
         try: age = int(d["age"]) if d.get("age") else None
         except (TypeError, ValueError): age = None
@@ -566,6 +573,8 @@ def _decoupe_claude(S, roles):
         except (AttributeError, TypeError, ValueError): continue
     return out
 
+REACTION_MAX = 1.0                                                         # plan de réaction : 1 s au plus pendant que l'autre parle
+
 def decouper(ph, places, B, fps=30):
     """Montage dynamique : chaque réplique est découpée en plusieurs plans selon son énergie et son émotion (dispute : coupes rapides,
     émotion : plans longs), en alternant plans serrés et plans larges, celui qui parle et celui qui écoute, avec un mouvement de
@@ -635,6 +644,13 @@ def decouper(ph, places, B, fps=30):
             tiers = bool((B.get("cine") or {}).get("tiers") and plan in ("serre", "tres_serre", "contre_plongee") and h % 2)   # sujet au tiers de l'image
             prec = dict(t0=a_, t1=b_, scene=sc, cible=cible, plan=plan, mouvement=mouv, force=force, passage=passage, i=q["i"], j=j, tiers=tiers)
             plans.append(prec)
+            if cible != q["p"] and q["p"] in roles and b_ - a_ > REACTION_MAX + 0.45:   # réaction courte, puis retour sur celui qui parle
+                m_ = _coupe_sur_le_son(lv, fps, q["deb"], a_ + REACTION_MAX, 0.15)
+                if a_ + 0.6 <= m_ <= b_ - 0.45:
+                    prec["t1"] = m_
+                    prec = dict(prec, t0=m_, t1=b_, cible=q["p"], plan="moyen" if plan in SERRES and len(roles) >= 2 else "serre",
+                                mouvement="avance", passage="coupe", tiers=False)
+                    plans.append(prec)
     for k in range(1, len(plans)):                                         # pas de trou entre deux plans d'une même scène
         if plans[k]["scene"] == plans[k - 1]["scene"]: plans[k - 1]["t1"] = plans[k]["t0"]
     return plans
