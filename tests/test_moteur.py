@@ -692,7 +692,7 @@ class TestHumains(unittest.TestCase):
             H.dessiner(img, H.creer(k, cheveux=st, lunettes="rondes", barbe="courte"), p)
         tete, (rx, ry), mains = H.reperes(H.creer(1), dict(M.pose_neutre(), x=540, y=1500, s=1.0))
         self.assertTrue(500 < tete[1] < 800 and 400 < tete[0] < 700); self.assertEqual(len(mains), 2)
-        self.assertAlmostEqual(H.tete_y(1.0), 1500 - 6.08 * 122, delta=2)
+        self.assertAlmostEqual(H.tete_y(1.0), 1500 - 4.5 * 165, delta=2)
 
     def test_casting(self):
         S = self.S

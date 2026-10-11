@@ -470,6 +470,7 @@ def _visage(img, t, rx, ry, s, p, P):
     yeux, pa = p["yeux"], p["paupiere"]
     detail = bool(p.get("reflets"))                                        # visage détaillé (moteur cartoon) ; le logo garde le dessin d'origine
     lum = p.get("lumiere", 0) or -1
+    fond_ = tuple(p.get("peau") or BLANC)                                   # couleur de la peau (blanc pour nos marionnettes)
     so = p["sourcils"]
     for k, sg in enumerate((-1, 1)):
         ox, oy = R(cx + sg * ex + gx * 10 * s, ey + gy * 8 * s)
@@ -487,11 +488,11 @@ def _visage(img, t, rx, ry, s, p, P):
             if detail and yeux == "grands": _ellipse(img, (ox + gx * 6 * s + lum * er * 0.25, oy + gy * 6 * s - er * 0.3), (er * 0.22, er * 0.22), 0, BLANC)
         elif yeux == "vides":                                              # blasé : demi-paupière
             _ellipse(img, (ox, oy), (er * 1.05, er * 1.15), 0, TRAIT)
-            _poly(img, [(ox - er * 1.6, oy - er * 1.7), (ox + er * 1.6, oy - er * 1.7), (ox + er * 1.6, oy - er * 0.05), (ox - er * 1.6, oy - er * 0.05)], BLANC)
+            _poly(img, [(ox - er * 1.6, oy - er * 1.7), (ox + er * 1.6, oy - er * 1.7), (ox + er * 1.6, oy - er * 0.05), (ox - er * 1.6, oy - er * 0.05)], fond_)
             _ligne(img, (ox - er * 1.2, oy - er * 0.05), (ox + er * 1.2, oy - er * 0.05), TRAIT, 5 * s)
         elif yeux == "roule":                                              # yeux au ciel : pupilles en haut, paupières mi-closes
             _ellipse(img, (ox, oy - er * 0.55), (er * 0.95, er * 0.75), 0, TRAIT)
-            _poly(img, [(ox - er * 1.6, oy - er * 0.25), (ox + er * 1.6, oy - er * 0.25), (ox + er * 1.6, oy + er * 1.6), (ox - er * 1.6, oy + er * 1.6)], BLANC)
+            _poly(img, [(ox - er * 1.6, oy - er * 0.25), (ox + er * 1.6, oy - er * 0.25), (ox + er * 1.6, oy + er * 1.6), (ox - er * 1.6, oy + er * 1.6)], fond_)
             _ligne(img, (ox - er * 1.15, oy - er * 0.2), (ox + er * 1.15, oy - er * 0.2), TRAIT, 5 * s)
         elif yeux == "spirale":
             pts = [(ox + math.cos(a) * er * 1.4 * a / 12, oy + math.sin(a) * er * 1.4 * a / 12) for a in np.linspace(0, 12, 40)]
@@ -514,7 +515,7 @@ def _visage(img, t, rx, ry, s, p, P):
             pl = float(p.get("plisse", 0.0))
             if detail and pl > 0.15:                                       # yeux plissés par le sourire : la joue remonte sous l'œil
                 y_cut = oy + er * 1.15 * pu * (1 - 1.5 * pl)
-                _poly(img, [(ox - er * 1.6, y_cut), (ox + er * 1.6, y_cut), (ox + er * 1.6, oy + er * 1.7), (ox - er * 1.6, oy + er * 1.7)], BLANC)
+                _poly(img, [(ox - er * 1.6, y_cut), (ox + er * 1.6, y_cut), (ox + er * 1.6, oy + er * 1.7), (ox - er * 1.6, oy + er * 1.7)], fond_)
                 _arc(img, (ox, y_cut + er * 0.55), (er * 1.15, er * 0.55), math.degrees(tilt), 200, 340, TRAIT, 4 * s)
             if detail and pa > 0.15:                                       # paupière tombante
                 _ligne(img, (ox - er * 1.2, oy - er * 1.15 * (1 - pa)), (ox + er * 1.2, oy - er * 1.15 * (1 - pa)), TRAIT, 4.5 * s)
