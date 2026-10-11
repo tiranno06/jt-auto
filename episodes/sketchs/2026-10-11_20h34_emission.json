@@ -1,0 +1,436 @@
+{
+ "titre": "PAPA LOUE FISTON",
+ "sujet": "PAPA LOUE FISTON",
+ "ecran": "PAPA RADIN",
+ "invite_nom": "Kévin",
+ "invite_role": "Le fils de 29 ans (fictif)",
+ "invite_look": "chauve",
+ "lieu_direct": "Sortie de gare",
+ "titre_accroche": "Quand papa radin récupère Kévin, 29 ans",
+ "question": "Ton père, il t'aurait loué pour combien ? 👇 Tag le Jojo de ta famille",
+ "running_gag": "La règle de Jojo : chaque fois que Jojo énonce une « règle numéro un », il l'enfreint dès qu'il y a un euro à gagner.",
+ "verite": "Les grands principes des parents sur la sécurité tiennent jusqu'au moment où les enfreindre leur fait économiser quelques euros, ou leur en rapporte.",
+ "repliques": [
+  {
+   "p": "narrateur",
+   "t": "Quand papa radin récupère Kévin, 29 ans",
+   "d": "[excited] Quand papa radin récupère Kévin, 29 ans"
+  },
+  {
+   "p": "envoyee",
+   "t": "Kévin a 29 ans. Pas de permis. Et papa est venu le chercher à pied. Huit kilomètres.",
+   "d": "[deadpan] Kévin a vingt-neuf ans. Pas de permis. [sighs] Et papa est venu le chercher à pied. Huit kilomètres.",
+   "chute": true
+  },
+  {
+   "p": "invite",
+   "t": "Papa ! La dame, là, elle propose de me ramener. Gratuit !",
+   "d": "[excited] Papa ! La dame, là… elle propose de me ramener. Gratuit !"
+  },
+  {
+   "p": "presentateur",
+   "t": "Jamais ! Règle numéro un : on monte JAMAIS avec une inconnue ! … Elle a le plein ?",
+   "d": "[shouting] Jamais ! Règle numéro un : on monte JAMAIS avec une inconnue ! … [whispers] Elle a le plein ?",
+   "chute": true
+  },
+  {
+   "p": "envoyee",
+   "t": "Papa ! Ça fait vingt-neuf ans que tu lui répètes cette règle !",
+   "d": "[angry] Papa ! Ça fait vingt-neuf ans que tu lui répètes cette règle !",
+   "chevauche": true
+  },
+  {
+   "p": "presentateur",
+   "t": "Vingt-neuf ans. Et elle m'a jamais rapporté un centime.",
+   "d": "[sighs] Vingt-neuf ans. [annoyed] Et elle m'a jamais rapporté un centime.",
+   "chute": true,
+   "attente": 0.5
+  },
+  {
+   "p": "invite",
+   "t": "En plus, sa voiture est toute propre.",
+   "d": "[happy] En plus, sa voiture est toute propre."
+  },
+  {
+   "p": "presentateur",
+   "t": "Propre ? Alors c'est quelqu'un de bien. Les tueurs, ils ont des voitures sales.",
+   "d": "[impressed] Propre ? Alors c'est quelqu'un de bien. Les tueurs, ils ont des voitures sales.",
+   "chute": true
+  },
+  {
+   "p": "envoyee",
+   "t": "Ça se trouve, c'est une tueuse !",
+   "d": "[shouting] Ça se trouve, c'est une tueuse !"
+  },
+  {
+   "p": "presentateur",
+   "t": "Le bus, c'est deux euros. Elle, c'est zéro. Kévin, t'as eu ton bac en maths, fais le calcul.",
+   "d": "[sarcastic] Le bus, c'est deux euros. Elle, c'est zéro. Kévin, t'as eu ton bac en maths… fais le calcul.",
+   "chute": true
+  },
+  {
+   "p": "envoyee",
+   "t": "Et si elle demande une rançon, tu paies ?",
+   "d": "[sarcastic] Et si elle demande une rançon… tu paies ?"
+  },
+  {
+   "p": "presentateur",
+   "t": "Ça dépend. Elle fait combien, le kilomètre ?",
+   "d": "[deadpan] Ça dépend. Elle fait combien, le kilomètre ?",
+   "chute": true,
+   "attente": 0.6
+  },
+  {
+   "p": "envoyee",
+   "t": "Papa ! Tu l'as poussé dans la voiture !",
+   "d": "[panicked] Papa ! Tu l'as POUSSÉ dans la voiture !"
+  },
+  {
+   "p": "presentateur",
+   "t": "Je l'ai aidé à monter. Ça s'appelle la politesse.",
+   "d": "[proudly] Je l'ai aidé à monter. Ça s'appelle la politesse.",
+   "chute": true,
+   "chevauche": true
+  },
+  {
+   "p": "invite",
+   "t": "Papa… pourquoi la dame te donne vingt euros ? Et pourquoi elle me demande si je sais tondre ?",
+   "d": "[confused] Papa… pourquoi la dame te donne vingt euros ? Et pourquoi elle me demande… si je sais tondre ?"
+  },
+  {
+   "p": "presentateur",
+   "t": "Euh… pour rien.",
+   "d": "[nervous laugh] Euh… pour rien.",
+   "objet": "billet",
+   "attente": 0.8
+  },
+  {
+   "p": "envoyee",
+   "t": "T'inquiète, Kévin : papa t'a pas vendu à une inconnue. Il t'a loué.",
+   "d": "[deadpan] T'inquiète, Kévin… papa t'a pas vendu à une inconnue. Il t'a loué.",
+   "chute": true
+  }
+ ],
+ "bandeau": [
+  "RÈGLE N°1 : JAMAIS AVEC UNE INCONNUE (SAUF GRATUIT)",
+  "TICKET DE BUS : 2 EUROS. UN FILS : 20 EUROS",
+  "PAPA PROPOSE UNE FORMULE WEEK-END"
+ ],
+ "gag": {
+  "replique": 12,
+  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. At a train station drop-off area at night, a stingy middle-aged father in an orange beanie happily shoves his adult son, a grown man in a backwards cap, into the passenger seat of a clean red car, a shocked adult sister with a pink bow throws her arms up, a bus stop sign in the background, comedic, deadpan."
+ },
+ "legende": "Il ne monte jamais avec une inconnue… jusqu'à ce que ce soit gratuit. Attends la fin. Satire, personnages fictifs.",
+ "hashtags": [
+  "petitsdramas",
+  "humour",
+  "sketch",
+  "pov",
+  "animation",
+  "papa",
+  "radin"
+ ],
+ "sources": [],
+ "decoupage": [
+  {
+   "scene": "Gag 1, la règle sacrée : dépose-minute de la gare, la nuit. Lila, face caméra, présente Kévin (29 ans, sans permis) et papa venu à pied. Kévin montre la voiture rouge. Jojo s'interpose les bras en croix, puis jette un œil discret à la jauge d'essence.",
+   "repliques": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "lieu": "reconstitution",
+   "son": "rimshot",
+   "duree": 22.0,
+   "decor": "a train station drop-off area at night, a clean red car with its passenger door open, a bus stop sign showing a 2 euro ticket price, a station clock showing 23",
+   "titre": "La règle sacrée"
+  },
+  {
+   "scene": "Gag 2, la règle fond : Kévin vante la voiture propre, Jojo calcule à voix haute, Lila s'étrangle. Même décor, Jojo de plus en plus près de la portière.",
+   "repliques": [
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "lieu": "reconstitution",
+   "son": "dun_dun",
+   "duree": 26.0,
+   "decor": "a train station drop-off area at night, a clean red car with its passenger door open, a bus stop sign showing a 2 euro ticket price, a station clock showing 23",
+   "titre": "Deux minutes plus tard…"
+  },
+  {
+   "scene": "Gag 3, papa loue fiston : Kévin est assis dans la voiture, Jojo tient la portière et empoche un billet de vingt euros tendu par une main qui sort de la vitre côté conducteur. Lila hallucine. Plan très serré sur Lila pour la chute.",
+   "repliques": [
+    12,
+    13,
+    14,
+    15,
+    16
+   ],
+   "lieu": "reconstitution",
+   "son": "trombone_triste",
+   "duree": 22.0,
+   "decor": "a train station drop-off area at night, a clean red car with its passenger door open, a bus stop sign showing a 2 euro ticket price, a station clock showing 23",
+   "titre": "Trente secondes plus tard…",
+   "effet": "pluie_billets"
+  }
+ ],
+ "studio": {
+  "moment": "nuit",
+  "lieux": [
+   "rue",
+   "rue",
+   "rue"
+  ],
+  "costumes": {
+   "presentateur": {
+    "haut": "doudoune",
+    "c_haut": "gris",
+    "motif": "uni",
+    "bas": "pantalon",
+    "chaussures": "chaussons",
+    "details": [
+     "moustache",
+     "montre"
+    ],
+    "chapeau": "bonnet",
+    "c_chapeau": "orange",
+    "cheveux": "degarni",
+    "c_cheveux": "gris"
+   },
+   "invite": {
+    "haut": "capuche",
+    "c_haut": "bleu",
+    "motif": "uni",
+    "bas": "jogging",
+    "chaussures": "baskets",
+    "details": [
+     "casque_audio",
+     "sac_bandouliere"
+    ],
+    "chapeau": "casquette",
+    "c_chapeau": "rouge",
+    "cheveux": "court",
+    "c_cheveux": "brun"
+   },
+   "envoyee": {
+    "haut": "blouson",
+    "c_haut": "noir",
+    "motif": "uni",
+    "bas": "jean",
+    "chaussures": "bottes",
+    "details": [
+     "boucles_oreilles",
+     "rouge_levres"
+    ],
+    "chapeau": "serre_tete",
+    "c_chapeau": "rose",
+    "cheveux": "queue",
+    "c_cheveux": "chatain"
+   }
+  },
+  "personnages": {
+   "presentateur": {
+    "genre": "h",
+    "age": 58,
+    "corpulence": 0.7,
+    "cheveux": "degarni",
+    "barbe": "moustache"
+   },
+   "invite": {
+    "genre": "h",
+    "age": 29,
+    "corpulence": 0.3,
+    "cheveux": "court",
+    "barbe": "trois_jours"
+   },
+   "envoyee": {
+    "genre": "f",
+    "age": 32,
+    "corpulence": 0.3,
+    "cheveux": "queue"
+   }
+  },
+  "gags": [
+   "TICKET BUS : 2 €",
+   "DÉPOSE-MINUTE : 0 € (PAPA VALIDE)",
+   "TONDEUR À LOUER"
+  ],
+  "ambiances": [
+   "neon"
+  ],
+  "cadence": "rapide",
+  "plans": [
+   {
+    "replique": 0,
+    "plan": "moyen",
+    "mouvement": "fixe",
+    "geste": "compte",
+    "reaction": "regard_camera"
+   },
+   {
+    "replique": 2,
+    "plan": "contre_plongee",
+    "mouvement": "zoom_choc",
+    "geste": "stop",
+    "reaction": "sceptique"
+   },
+   {
+    "replique": 4,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "haussement",
+    "reaction": "facepalm"
+   },
+   {
+    "replique": 10,
+    "plan": "serre",
+    "mouvement": "avance",
+    "geste": "menton",
+    "reaction": "choc"
+   },
+   {
+    "replique": 14,
+    "plan": "tres_serre",
+    "mouvement": "fixe",
+    "geste": "gratte_tete",
+    "reaction": "gene"
+   },
+   {
+    "replique": 15,
+    "plan": "tres_serre",
+    "mouvement": "avance",
+    "geste": "croises",
+    "reaction": "regard_camera"
+   }
+  ]
+ },
+ "fiche": {
+  "fil": "Pitch : Kévin, 29 ans et sans permis, se voit proposer un trajet gratuit par une dame à la sortie de la gare. Son père Jojo, venu le chercher à pied pour ne pas payer l'essence, doit choisir entre sa règle sacrée et son portefeuille. 1. À la gare, la nuit, Lila pose la situation : Kévin a 29 ans, pas de permis, et papa est venu à pied. Kévin annonce la proposition gratuite de la dame. Jojo crie sa règle numéro un, « on monte jamais avec une inconnue », puis demande si elle a le plein. Lila rappelle qu'il répète cette règle depuis 29 ans, et Jojo répond qu'elle ne lui a jamais rapporté un centime. 2. Du coup, Jojo cherche des raisons de dire oui : la voiture est propre, donc la dame est quelqu'un de bien. Le bus coûte deux euros, elle zéro. Lila parle de rançon, et Jojo demande combien elle prend du kilomètre. 3. Trente secondes plus tard, Jojo a poussé Kévin dans la voiture. La dame tend vingt euros à Jojo et demande à Kévin s'il sait tondre une pelouse. La règle du début revient à l'envers : papa n'a pas vendu son fils à une inconnue, il le lui a loué.",
+  "concept": "« Quand papa radin récupère Kévin, 29 ans » : un père assez radin pour venir à pied à la gare oublie sa règle sacrée sur les inconnus dès que le trajet est gratuit, puis finit par louer son fils adulte à la dame.",
+  "format": "Scène de dessin animé en trois gags successifs au même endroit (dépose-minute d'une gare, la nuit), avec une escalade continue.",
+  "angle": "Une seule idée qui monte : la radinerie de Jojo fait fondre sa règle numéro un, euro après euro. Lila, la lucide, pose le contexte et s'énerve. Jojo, de mauvaise foi, a toujours une excuse. Kévin, le naïf, rapporte sans s'en rendre compte les détails qui trahissent la transaction. La chute retourne la règle : papa n'a pas livré son fils, il l'a mis en location.",
+  "resume_factuel": "Un père radin, venu à pied chercher à la gare son fils de 29 ans sans permis, le pousse dans la voiture d'une inconnue pour économiser le bus, puis le lui loue pour tondre sa pelouse.",
+  "faits_reels": [],
+  "inventions": [
+   "Toute la situation, les personnages et les dialogues sont fictifs.",
+   "Jojo joue le père, Kévin le fils de 29 ans sans permis, Lila la grande sœur.",
+   "Les huit kilomètres à pied pour ne pas payer l'essence.",
+   "La dame à la voiture propre, les vingt euros et la pelouse à tondre."
+  ],
+  "decoupage": [
+   {
+    "scene": "Gag 1, la règle sacrée : dépose-minute de la gare, la nuit. Lila, face caméra, présente Kévin (29 ans, sans permis) et papa venu à pied. Kévin montre la voiture rouge. Jojo s'interpose les bras en croix, puis jette un œil discret à la jauge d'essence.",
+    "repliques": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "lieu": "reconstitution",
+    "son": "rimshot",
+    "duree": 22.0,
+    "decor": "a train station drop-off area at night, a clean red car with its passenger door open, a bus stop sign showing a 2 euro ticket price, a station clock showing 23",
+    "titre": "La règle sacrée"
+   },
+   {
+    "scene": "Gag 2, la règle fond : Kévin vante la voiture propre, Jojo calcule à voix haute, Lila s'étrangle. Même décor, Jojo de plus en plus près de la portière.",
+    "repliques": [
+     6,
+     7,
+     8,
+     9,
+     10,
+     11
+    ],
+    "lieu": "reconstitution",
+    "son": "dun_dun",
+    "duree": 26.0,
+    "decor": "a train station drop-off area at night, a clean red car with its passenger door open, a bus stop sign showing a 2 euro ticket price, a station clock showing 23",
+    "titre": "Deux minutes plus tard…"
+   },
+   {
+    "scene": "Gag 3, papa loue fiston : Kévin est assis dans la voiture, Jojo tient la portière et empoche un billet de vingt euros tendu par une main qui sort de la vitre côté conducteur. Lila hallucine. Plan très serré sur Lila pour la chute.",
+    "repliques": [
+     12,
+     13,
+     14,
+     15,
+     16
+    ],
+    "lieu": "reconstitution",
+    "son": "trombone_triste",
+    "duree": 22.0,
+    "decor": "a train station drop-off area at night, a clean red car with its passenger door open, a bus stop sign showing a 2 euro ticket price, a station clock showing 23",
+    "titre": "Trente secondes plus tard…",
+    "effet": "pluie_billets"
+   }
+  ],
+  "titres_sujet": [
+   "Quand papa oublie toutes ses règles PAPA POUSSE FISTON CHEZ ANGEL — Papa, il y a une inconnue qui s'appelle Little Angel"
+  ],
+  "verification_web": false,
+  "note": 67.5,
+  "critique": "AVIS DU PUBLIC TEST (spectateurs sans contexte) :\n- Inès : a compris, rire 7/10, perdu par : Les 4 premières répliques sont lentes : Lila qui pose tout en voix off blasée, ça sent l'exposition. J'ai failli scroller à la 3 parce que la règle « on monte jamais avec une inconnue » est répétée sans rien de nouveau. Aussi, la chute arrive après un 13 un peu confus : je dois recoller « tondre » + 20 € = location, et le « loué » est expliqué par Lila au lieu de me laisser le deviner.\n- Karim : a compris, rire 5.5/10, perdu par : Sans le son, je perds les tons (deadpan, sarcastic) qui portent beaucoup de vannes. La 2 avec le « … Elle a le plein ? » marche moins à l'écrit. Le passage 5-9 est un empilement de blagues sur la radinerie qui se ressemblent (bus 2 €, rançon, kilomètre) : je décroche un peu. Et pas de visuel décrit : je ne sais pas à quoi ressemble l'inconnue, ni si Kévin a l'air d'un gamin. La chute est comprise mais « louer » arrive très vite, je dois relire.\n- Sandrine : a compris, rire 6/10, perdu par : Au début, je n'ai pas compris pourquoi un homme de 29 ans sans permis se fait chercher à pied sur 8 km : c'est flou, où sont-ils, qui est la dame ? Le titre « Quand papa radin récupère Kévin » m'a aidée mais « Kévin, 29 ans » se comprend seulement avec la 1. Je comprends la chute (il l'a loué pour tondre) mais j'ai eu un temps de retard, et je ne sais pas si c'est de l'humour méchant envers Kévin, qui paraît un peu simple d'esprit. Le côté « deadpan » de Lila ne m'est pas",
+  "decision": "à retravailler"
+ },
+ "_voix_hz": {
+  "envoyee": 227,
+  "invite": 145,
+  "presentateur": 176,
+  "narrateur": 290
+ },
+ "_voix_genre": {
+  "envoyee": "f",
+  "invite": "h",
+  "presentateur": "h",
+  "narrateur": "f"
+ },
+ "realisation": {
+  "moment": "nuit",
+  "lieux": [
+   "rue",
+   "rue",
+   "rue"
+  ],
+  "gags": [
+   "TICKET BUS : 2 €",
+   "DÉPOSE-MINUTE : 0 € (PAPA VALIDE)",
+   "TONDEUR À LOUER"
+  ],
+  "ambiances": [
+   "neon"
+  ],
+  "source": "auteur",
+  "tenues": {
+   "envoyee": "blouson",
+   "invite": "capuche",
+   "presentateur": "doudoune"
+  },
+  "plans": [
+   "moyen/fixe",
+   "tres_serre/avance",
+   "contre_plongee/zoom_choc",
+   "tres_serre/epaule",
+   "serre/fixe",
+   "tres_serre/epaule",
+   "large/recul",
+   "tres_serre/fixe",
+   "contre_plongee/epaule",
+   "serre/fixe",
+   "serre/avance",
+   "serre/fixe",
+   "large/recul",
+   "tres_serre/fixe",
+   "tres_serre/fixe",
+   "tres_serre/avance",
+   "serre/avance"
+  ]
+ }
+}

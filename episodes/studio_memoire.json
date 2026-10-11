@@ -109,5 +109,51 @@
    "son": true
   },
   "cadence": "normal"
+ },
+ {
+  "moment": "nuit",
+  "lieux": [
+   "rue",
+   "rue",
+   "rue"
+  ],
+  "source": "auteur",
+  "duree": 70.4,
+  "plans": {
+   "moyen": 1,
+   "tres_serre": 7,
+   "contre_plongee": 2,
+   "serre": 5,
+   "large": 2
+  },
+  "mouvements": {
+   "fixe": 7,
+   "avance": 4,
+   "zoom_choc": 1,
+   "epaule": 3,
+   "recul": 2
+  },
+  "costumes": {
+   "envoyee": "blouson",
+   "invite": "capuche",
+   "presentateur": "doudoune"
+  },
+  "figurants": 6,
+  "ambiances": [
+   "neon"
+  ],
+  "controle": "ok",
+  "fichier": "2026-10-11_20h34_emission.mp4",
+  "cine": {
+   "focus": true,
+   "vertige": true,
+   "tiers": true,
+   "etalonnage": true,
+   "profondeur": true,
+   "grain": true,
+   "reflets": false,
+   "son": true
+  },
+  "cadence": "rapide"
  }
 ]

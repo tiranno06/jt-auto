@@ -1,1025 +1,436 @@
 {
- "titre": "PAPA POUSSE FISTON CHEZ ANGEL",
- "sujet": "PAPA POUSSE FISTON CHEZ ANGEL",
- "ecran": "PAPA POUSSE FI",
- "invite_nom": "Hubert Rustine",
- "invite_role": "Expert (fictif)",
+ "titre": "PAPA LOUE FISTON",
+ "sujet": "PAPA LOUE FISTON",
+ "ecran": "PAPA RADIN",
+ "invite_nom": "Kévin",
+ "invite_role": "Le fils de 29 ans (fictif)",
  "invite_look": "chauve",
- "lieu_direct": "Assemblée",
- "titre_accroche": "Quand papa oublie toutes ses règles",
- "question": "Et vous, à la place du fils, vous montez dans la voiture ? 😭",
- "running_gag": "",
- "verite": "",
+ "lieu_direct": "Sortie de gare",
+ "titre_accroche": "Quand papa radin récupère Kévin, 29 ans",
+ "question": "Ton père, il t'aurait loué pour combien ? 👇 Tag le Jojo de ta famille",
+ "running_gag": "La règle de Jojo : chaque fois que Jojo énonce une « règle numéro un », il l'enfreint dès qu'il y a un euro à gagner.",
+ "verite": "Les grands principes des parents sur la sécurité tiennent jusqu'au moment où les enfreindre leur fait économiser quelques euros, ou leur en rapporte.",
  "repliques": [
   {
-   "p": "invite",
-   "t": "Papa, il y a une inconnue qui s'appelle Little Angel qui m'a proposé de monter dans sa voiture.",
-   "_deb": 0.16,
-   "_fin": 3.06,
-   "d": "[worried] Papa, il y a une inconnue qui s'appelle Little Angel qui m'a proposé de monter dans sa voiture.",
-   "objet": "telephone"
+   "p": "narrateur",
+   "t": "Quand papa radin récupère Kévin, 29 ans",
+   "d": "[excited] Quand papa radin récupère Kévin, 29 ans"
+  },
+  {
+   "p": "envoyee",
+   "t": "Kévin a 29 ans. Pas de permis. Et papa est venu le chercher à pied. Huit kilomètres.",
+   "d": "[deadpan] Kévin a vingt-neuf ans. Pas de permis. [sighs] Et papa est venu le chercher à pied. Huit kilomètres.",
+   "chute": true
   },
   {
    "p": "invite",
-   "t": "Je fais quoi?",
-   "_deb": 3.1,
-   "_fin": 3.42,
-   "d": "[hesitant] Je fais quoi?"
+   "t": "Papa ! La dame, là, elle propose de me ramener. Gratuit !",
+   "d": "[excited] Papa ! La dame, là… elle propose de me ramener. Gratuit !"
   },
   {
    "p": "presentateur",
-   "t": "Oh putain, fonce fiston, réfléchis pas. Monte dans cette voiture.",
-   "_deb": 3.44,
-   "_fin": 5.66,
-   "d": "[excited] Oh putain, fonce fiston, réfléchis pas. Monte dans cette voiture.",
-   "objet": "telephone"
+   "t": "Jamais ! Règle numéro un : on monte JAMAIS avec une inconnue ! … Elle a le plein ?",
+   "d": "[shouting] Jamais ! Règle numéro un : on monte JAMAIS avec une inconnue ! … [whispers] Elle a le plein ?",
+   "chute": true
+  },
+  {
+   "p": "envoyee",
+   "t": "Papa ! Ça fait vingt-neuf ans que tu lui répètes cette règle !",
+   "d": "[angry] Papa ! Ça fait vingt-neuf ans que tu lui répètes cette règle !",
+   "chevauche": true
+  },
+  {
+   "p": "presentateur",
+   "t": "Vingt-neuf ans. Et elle m'a jamais rapporté un centime.",
+   "d": "[sighs] Vingt-neuf ans. [annoyed] Et elle m'a jamais rapporté un centime.",
+   "chute": true,
+   "attente": 0.5
   },
   {
    "p": "invite",
-   "t": "Tu m'as toujours dit de jamais parler aux inconnus et de surtout pas monter dans la voiture d'un inconnu.",
-   "_deb": 5.7,
-   "_fin": 8.86,
-   "d": "[confused] Tu m'as toujours dit de jamais parler aux inconnus et de surtout pas monter dans la voiture d'un inconnu."
+   "t": "En plus, sa voiture est toute propre.",
+   "d": "[happy] En plus, sa voiture est toute propre."
   },
   {
    "p": "presentateur",
-   "t": "Écoute-moi bien, oublie tout ce que je t'ai dit jusqu'à présent.",
-   "_deb": 8.88,
-   "_fin": 10.92,
-   "d": "[serious] Écoute-moi bien, oublie tout ce que je t'ai dit jusqu'à présent."
+   "t": "Propre ? Alors c'est quelqu'un de bien. Les tueurs, ils ont des voitures sales.",
+   "d": "[impressed] Propre ? Alors c'est quelqu'un de bien. Les tueurs, ils ont des voitures sales.",
+   "chute": true
+  },
+  {
+   "p": "envoyee",
+   "t": "Ça se trouve, c'est une tueuse !",
+   "d": "[shouting] Ça se trouve, c'est une tueuse !"
   },
   {
    "p": "presentateur",
-   "t": "Monte dans cette voiture.",
-   "_deb": 11.06,
-   "_fin": 12.02,
-   "d": "[firm] Monte dans cette voiture."
+   "t": "Le bus, c'est deux euros. Elle, c'est zéro. Kévin, t'as eu ton bac en maths, fais le calcul.",
+   "d": "[sarcastic] Le bus, c'est deux euros. Elle, c'est zéro. Kévin, t'as eu ton bac en maths… fais le calcul.",
+   "chute": true
+  },
+  {
+   "p": "envoyee",
+   "t": "Et si elle demande une rançon, tu paies ?",
+   "d": "[sarcastic] Et si elle demande une rançon… tu paies ?"
+  },
+  {
+   "p": "presentateur",
+   "t": "Ça dépend. Elle fait combien, le kilomètre ?",
+   "d": "[deadpan] Ça dépend. Elle fait combien, le kilomètre ?",
+   "chute": true,
+   "attente": 0.6
+  },
+  {
+   "p": "envoyee",
+   "t": "Papa ! Tu l'as poussé dans la voiture !",
+   "d": "[panicked] Papa ! Tu l'as POUSSÉ dans la voiture !"
+  },
+  {
+   "p": "presentateur",
+   "t": "Je l'ai aidé à monter. Ça s'appelle la politesse.",
+   "d": "[proudly] Je l'ai aidé à monter. Ça s'appelle la politesse.",
+   "chute": true,
+   "chevauche": true
   },
   {
    "p": "invite",
-   "t": "J'ai l'impression que la dame est habillée en mère Noël, c'est assez joli.",
-   "_deb": 12.1,
-   "_fin": 14.04,
-   "d": "[innocent] J'ai l'impression que la dame est habillée en mère Noël, c'est assez joli."
+   "t": "Papa… pourquoi la dame te donne vingt euros ? Et pourquoi elle me demande si je sais tondre ?",
+   "d": "[confused] Papa… pourquoi la dame te donne vingt euros ? Et pourquoi elle me demande… si je sais tondre ?"
   },
   {
    "p": "presentateur",
-   "t": "Oh putain de bordel de merde. Mon fils, va avec la dame.",
-   "_deb": 14.1,
-   "_fin": 16.78,
-   "d": "[ecstatic] Oh putain de bordel de merde. Mon fils, va avec la dame.",
-   "objet": "bouteille"
+   "t": "Euh… pour rien.",
+   "d": "[nervous laugh] Euh… pour rien.",
+   "objet": "billet",
+   "attente": 0.8
   },
   {
-   "p": "presentateur",
-   "t": "Tu te rappelles de la fée Clochette?",
-   "_deb": 16.8,
-   "_fin": 17.76,
-   "d": "[mysterious] Tu te rappelles de la fée Clochette?"
-  },
-  {
-   "p": "invite",
-   "t": "Oui.",
-   "_deb": 17.8,
-   "_fin": 17.98,
-   "d": "[naive] Oui."
-  },
-  {
-   "p": "presentateur",
-   "t": "Bah elle, c'est sa daronne. Donc va, va sans crainte.",
-   "_deb": 18.0,
-   "_fin": 20.1,
-   "d": "[convincing] Bah elle, c'est sa daronne. Donc va, va sans crainte."
-  },
-  {
-   "p": "invite",
-   "t": "Mais...",
-   "_deb": 20.12,
-   "_fin": 20.28,
-   "d": "[hesitant] Mais..."
-  },
-  {
-   "p": "presentateur",
-   "t": "Va avec la dame, réfléchis pas, bordel.",
-   "_deb": 20.38,
-   "_fin": 21.76,
-   "d": "[impatient] Va avec la dame, réfléchis pas, bordel."
-  },
-  {
-   "p": "invite",
-   "t": "Et si elle me fait des trucs bizarres?",
-   "_deb": 21.78,
-   "_fin": 22.74,
-   "d": "[nervous] Et si elle me fait des trucs bizarres?"
-  },
-  {
-   "p": "presentateur",
-   "t": "Eh bah surtout, surtout, tu la laisses faire. Elle n'est pas comme les autres.",
-   "_deb": 22.78,
-   "_fin": 25.74,
-   "d": "[insistent] Eh bah surtout, surtout, tu la laisses faire. Elle n'est pas comme les autres."
-  },
-  {
-   "p": "presentateur",
-   "t": "Elle exauce les vœux.",
-   "_deb": 25.76,
-   "_fin": 26.58,
-   "d": "[dreamy] Elle exauce les vœux."
-  },
-  {
-   "p": "invite",
-   "t": "Mais si maman-",
-   "_deb": 26.6,
-   "_fin": 27.08,
-   "d": "[worried] Mais si maman-"
-  },
-  {
-   "p": "presentateur",
-   "t": "Maman n'en saura jamais rien. Donc arrête de discuter et monte dans cette putain de bagnole.",
-   "_deb": 27.12,
-   "_fin": 30.54,
-   "d": "[annoyed] Maman n'en saura jamais rien. Donc arrête de discuter et monte dans cette putain de bagnole."
-  },
-  {
-   "p": "presentateur",
-   "t": "Tu te rends pas compte de ce qui est en train de t'arriver là, mon fils.",
-   "_deb": 30.58,
-   "_fin": 32.14,
-   "d": "[emotional] Tu te rends pas compte de ce qui est en train de t'arriver là, mon fils."
-  },
-  {
-   "p": "presentateur",
-   "t": "Je pourrais en chialer.",
-   "_deb": 32.28,
-   "_fin": 32.88,
-   "d": "[tearful] Je pourrais en chialer."
-  },
-  {
-   "p": "invite",
-   "t": "Je sais pas, c'est-",
-   "_deb": 32.96,
-   "_fin": 33.48,
-   "d": "[unsure] Je sais pas, c'est-"
-  },
-  {
-   "p": "presentateur",
-   "t": "Bon écoute-moi maintenant. Dans la vie, il y a ceux qui gagnent au loto, il y a ceux qui touchent un héritage d'une grande tante inconnue et qui",
-   "_deb": 33.52,
-   "_fin": 37.12,
-   "d": "[solemn] Bon écoute-moi maintenant. Dans la vie, il y a ceux qui gagnent au loto, il y a ceux qui touchent un héritage d'une grande tante inconnue et qui"
-  },
-  {
-   "p": "presentateur",
-   "t": "se barrent vivre aux Bahamas. Et il y a ceux qui croisent Little Angel sur le parking du Leclerc.",
-   "_deb": 37.14,
-   "_fin": 40.26,
-   "d": "[solemn] se barrent vivre aux Bahamas. Et il y a ceux qui croisent Little Angel sur le parking du Leclerc."
-  },
-  {
-   "p": "invite",
-   "t": "Je comprends pas, papa.",
-   "_deb": 40.34,
-   "_fin": 41.12,
-   "d": "[confused] Je comprends pas, papa."
-  },
-  {
-   "p": "presentateur",
-   "t": "Si tu ne montes pas dans cette voiture, crois-moi que tu t'en voudras toute ta vie.",
-   "_deb": 41.18,
-   "_fin": 44.22,
-   "d": "[grave] Si tu ne montes pas dans cette voiture, crois-moi que tu t'en voudras toute ta vie."
-  },
-  {
-   "p": "presentateur",
-   "t": "Et je te parle d'une longue dépression, le genre de blessure qui se refermera jamais entièrement.",
-   "_deb": 44.26,
-   "_fin": 47.62,
-   "d": "[dramatic] Et je te parle d'une longue dépression, le genre de blessure qui se refermera jamais entièrement."
-  },
-  {
-   "p": "invite",
-   "t": "Putain.",
-   "_deb": 47.74,
-   "_fin": 47.92,
-   "d": "[shocked] Putain."
-  },
-  {
-   "p": "presentateur",
-   "t": "Aujourd'hui, ta vie va changer mon garçon. Donc je t'en supplie, monte dans cette putain de bagnole.",
-   "_deb": 47.96,
-   "_fin": 52.36,
-   "d": "[pleading] Aujourd'hui, ta vie va changer mon garçon. Donc je t'en supplie, monte dans cette putain de bagnole."
-  },
-  {
-   "p": "invite",
-   "t": "Elle me fait signe de venir.",
-   "_deb": 52.44,
-   "_fin": 53.3,
-   "d": "[nervous] Elle me fait signe de venir.",
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Little Angel, c'est quelqu'un de très bien. Tout le monde te le dira.",
-   "_deb": 53.36,
-   "_fin": 55.86,
-   "d": "[reassuring] Little Angel, c'est quelqu'un de très bien. Tout le monde te le dira."
-  },
-  {
-   "p": "presentateur",
-   "t": "Enfin, surtout les darons, mais ce que je veux dire, c'est que tu peux lui faire confiance.",
-   "_deb": 55.94,
-   "_fin": 58.48,
-   "d": "[awkward] Enfin, surtout les darons, mais ce que je veux dire, c'est que tu peux lui faire confiance."
-  },
-  {
-   "p": "presentateur",
-   "t": "C'est ta destinée, mon garçon.",
-   "_deb": 59.06,
-   "_fin": 60.3,
-   "d": "[solemn] C'est ta destinée, mon garçon."
-  },
-  {
-   "p": "presentateur",
-   "t": "Saisis-la.",
-   "_deb": 61.4,
-   "_fin": 61.82,
-   "d": "[whispering] Saisis-la."
-  },
-  {
-   "p": "invite",
-   "t": "Donc j'y vais?",
-   "_deb": 61.86,
-   "_fin": 62.22,
-   "d": "[hesitant] Donc j'y vais?"
-  },
-  {
-   "p": "presentateur",
-   "t": "Je t'en supplie.",
-   "_deb": 62.26,
-   "_fin": 62.82,
-   "d": "[pleading] Je t'en supplie."
-  },
-  {
-   "p": "invite",
-   "t": "Bon d'accord,",
-   "_deb": 62.86,
-   "_fin": 63.24,
-   "d": "[resigned] Bon d'accord,"
-  },
-  {
-   "p": "invite",
-   "t": "j'y vais.",
-   "_deb": 64.22,
-   "_fin": 64.54,
-   "d": "[determined] j'y vais."
-  },
-  {
-   "p": "presentateur",
-   "t": "Fiston, attends. Je voulais juste te dire une dernière chose.",
-   "_deb": 64.58,
-   "_fin": 66.28,
-   "d": "[emotional] Fiston, attends. Je voulais juste te dire une dernière chose.",
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "Oui, papa.",
-   "_deb": 66.3,
-   "_fin": 66.66,
-   "d": "[curious] Oui, papa."
-  },
-  {
-   "p": "presentateur",
-   "t": "Avec maman, on est très fiers de toi, tu sais.",
-   "_deb": 66.72,
-   "_fin": 68.14,
-   "d": "[tender] Avec maman, on est très fiers de toi, tu sais."
-  },
-  {
-   "p": "invite",
-   "t": "On le dira à maman?",
-   "_deb": 68.16,
-   "_fin": 68.72,
-   "d": "[naive] On le dira à maman?"
-  },
-  {
-   "p": "presentateur",
-   "t": "On le dira jamais à maman. Elle nous couperait les couilles à tous les deux.",
-   "_deb": 68.76,
-   "_fin": 70.52,
-   "d": "[panicked] On le dira jamais à maman. Elle nous couperait les couilles à tous les deux."
-  },
-  {
-   "p": "invite",
-   "t": "Pourquoi les couilles?",
-   "_deb": 70.56,
-   "_fin": 71.06,
-   "d": "[confused] Pourquoi les couilles?"
-  },
-  {
-   "p": "presentateur",
-   "t": "Va accomplir ton destin, mon fils. Tu y trouveras toutes les réponses à tes questions.",
-   "_deb": 71.08,
-   "_fin": 74.84,
-   "d": "[solemn] Va accomplir ton destin, mon fils. Tu y trouveras toutes les réponses à tes questions."
-  },
-  {
-   "p": "invite",
-   "t": "J'ai peur.",
-   "_deb": 75.3,
-   "_fin": 75.76,
-   "d": "[scared] J'ai peur."
-  },
-  {
-   "p": "presentateur",
-   "t": "C'est normal. Mais va, sois sans crainte. Va.",
-   "_deb": 75.82,
-   "_fin": 79.2,
-   "d": "[tender] C'est normal. Mais va, sois sans crainte. Va."
-  },
-  {
-   "p": "invite",
-   "t": "OK.",
-   "_deb": 79.3,
-   "_fin": 79.56,
-   "d": "[nervous] OK."
-  },
-  {
-   "p": "invite",
-   "t": "Je monte dans sa voiture.",
-   "_deb": 80.66,
-   "_fin": 81.46,
-   "d": "[nervous] Je monte dans sa voiture."
-  },
-  {
-   "p": "presentateur",
-   "t": "Fiston, quand tu sortiras de cette voiture, tu ne seras plus le même.",
-   "_deb": 81.5,
-   "_fin": 83.6,
-   "d": "[emotional] Fiston, quand tu sortiras de cette voiture, tu ne seras plus le même."
-  },
-  {
-   "p": "presentateur",
-   "t": "Tu seras un homme.",
-   "_deb": 84.86,
-   "_fin": 85.68,
-   "d": "[proud] Tu seras un homme."
-  },
-  {
-   "p": "presentateur",
-   "t": "Tu veux faire plaisir à papa?",
-   "_deb": 87.22,
-   "_fin": 88.1,
-   "d": "[sly] Tu veux faire plaisir à papa?"
-  },
-  {
-   "p": "invite",
-   "t": "Oui, dis-moi.",
-   "_deb": 88.14,
-   "_fin": 88.9,
-   "d": "[eager] Oui, dis-moi."
-  },
-  {
-   "p": "presentateur",
-   "t": "Prends des photos.",
-   "_deb": 88.92,
-   "_fin": 89.46,
-   "d": "[deadpan] Prends des photos.",
-   "objet": "bouteille",
+   "p": "envoyee",
+   "t": "T'inquiète, Kévin : papa t'a pas vendu à une inconnue. Il t'a loué.",
+   "d": "[deadpan] T'inquiète, Kévin… papa t'a pas vendu à une inconnue. Il t'a loué.",
    "chute": true
   }
  ],
- "bandeau": [],
- "gag": null,
- "legende": "Toute sa vie, il lui a interdit de suivre les inconnus… sauf UNE.",
+ "bandeau": [
+  "RÈGLE N°1 : JAMAIS AVEC UNE INCONNUE (SAUF GRATUIT)",
+  "TICKET DE BUS : 2 EUROS. UN FILS : 20 EUROS",
+  "PAPA PROPOSE UNE FORMULE WEEK-END"
+ ],
+ "gag": {
+  "replique": 12,
+  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. At a train station drop-off area at night, a stingy middle-aged father in an orange beanie happily shoves his adult son, a grown man in a backwards cap, into the passenger seat of a clean red car, a shocked adult sister with a pink bow throws her arms up, a bus stop sign in the background, comedic, deadpan."
+ },
+ "legende": "Il ne monte jamais avec une inconnue… jusqu'à ce que ce soit gratuit. Attends la fin. Satire, personnages fictifs.",
  "hashtags": [
   "petitsdramas",
   "humour",
+  "sketch",
+  "pov",
+  "animation",
   "papa",
-  "dessinanime",
-  "pourtoi",
-  "littleangel",
-  "fiston"
+  "radin"
  ],
- "sources": [
-  "https://www.tiktok.com/@yan_animation0/video/7678832582833736993?_r=1&_t=ZN-9ATIuYQUToM"
- ],
+ "sources": [],
  "decoupage": [
   {
-   "scene": "1",
+   "scene": "Gag 1, la règle sacrée : dépose-minute de la gare, la nuit. Lila, face caméra, présente Kévin (29 ans, sans permis) et papa venu à pied. Kévin montre la voiture rouge. Jojo s'interpose les bras en croix, puis jette un œil discret à la jauge d'essence.",
    "repliques": [
-    0,
     1,
     2,
     3,
     4,
-    5,
-    6
+    5
    ],
-   "lieu": "",
-   "son": "",
-   "duree": 0.0,
-   "decor": "Supermarket parking lot by a country road at dusk, grey asphalt with white lines, a black car parked on the side, green hills in the background",
-   "titre": "Parking du Leclerc"
+   "lieu": "reconstitution",
+   "son": "rimshot",
+   "duree": 22.0,
+   "decor": "a train station drop-off area at night, a clean red car with its passenger door open, a bus stop sign showing a 2 euro ticket price, a station clock showing 23",
+   "titre": "La règle sacrée"
   },
   {
-   "scene": "2",
+   "scene": "Gag 2, la règle fond : Kévin vante la voiture propre, Jojo calcule à voix haute, Lila s'étrangle. Même décor, Jojo de plus en plus près de la portière.",
    "repliques": [
+    6,
     7,
     8,
     9,
     10,
-    11,
+    11
+   ],
+   "lieu": "reconstitution",
+   "son": "dun_dun",
+   "duree": 26.0,
+   "decor": "a train station drop-off area at night, a clean red car with its passenger door open, a bus stop sign showing a 2 euro ticket price, a station clock showing 23",
+   "titre": "Deux minutes plus tard…"
+  },
+  {
+   "scene": "Gag 3, papa loue fiston : Kévin est assis dans la voiture, Jojo tient la portière et empoche un billet de vingt euros tendu par une main qui sort de la vitre côté conducteur. Lila hallucine. Plan très serré sur Lila pour la chute.",
+   "repliques": [
     12,
     13,
     14,
     15,
-    16,
-    17,
-    18,
-    19,
-    20,
-    21,
-    22,
-    23,
-    24,
-    25,
-    26,
-    27
+    16
    ],
-   "lieu": "",
-   "son": "",
-   "duree": 0.0,
-   "decor": "Shabby living room, stained purple sofa with crumpled tissues, framed football poster on the wall, round wall clock",
-   "titre": "Pendant ce temps, sur le canapé"
-  },
-  {
-   "scene": "3",
-   "repliques": [
-    28,
-    29,
-    30,
-    31,
-    32,
-    33,
-    34,
-    35,
-    36
-   ],
-   "lieu": "",
-   "son": "",
-   "duree": 0.0,
-   "decor": "Supermarket parking lot by a country road at dusk, grey asphalt with white lines, a black car with open door, green hills in the background"
-  },
-  {
-   "scene": "4",
-   "repliques": [
-    37,
-    38,
-    39,
-    40,
-    41,
-    42,
-    43,
-    44,
-    45,
-    46,
-    47,
-    48,
-    49,
-    50,
-    51,
-    52
-   ],
-   "lieu": "",
-   "son": "",
-   "duree": 0.0,
-   "decor": "Shabby living room, stained purple sofa with crumpled tissues, framed football poster on the wall, round wall clock, energy drink can"
+   "lieu": "reconstitution",
+   "son": "trombone_triste",
+   "duree": 22.0,
+   "decor": "a train station drop-off area at night, a clean red car with its passenger door open, a bus stop sign showing a 2 euro ticket price, a station clock showing 23",
+   "titre": "Trente secondes plus tard…",
+   "effet": "pluie_billets"
   }
  ],
  "studio": {
-  "moment": "soir",
+  "moment": "nuit",
   "lieux": [
    "rue",
-   "salon",
    "rue",
-   "salon"
+   "rue"
   ],
-  "cadence": "normal",
   "costumes": {
    "presentateur": {
-    "haut": "debardeur",
-    "c_haut": "kaki",
-    "motif": "uni",
-    "bas": "jogging",
-    "chaussures": "chaussons",
-    "details": [
-     "moustache"
-    ],
-    "cheveux": "rase",
-    "c_cheveux": "marron"
-   },
-   "invite": {
-    "haut": "chemise",
-    "c_haut": "bleu",
+    "haut": "doudoune",
+    "c_haut": "gris",
     "motif": "uni",
     "bas": "pantalon",
+    "chaussures": "chaussons",
+    "details": [
+     "moustache",
+     "montre"
+    ],
+    "chapeau": "bonnet",
+    "c_chapeau": "orange",
+    "cheveux": "degarni",
+    "c_cheveux": "gris"
+   },
+   "invite": {
+    "haut": "capuche",
+    "c_haut": "bleu",
+    "motif": "uni",
+    "bas": "jogging",
     "chaussures": "baskets",
     "details": [
-     "badge"
+     "casque_audio",
+     "sac_bandouliere"
     ],
-    "cheveux": "afro",
-    "c_cheveux": "noir"
+    "chapeau": "casquette",
+    "c_chapeau": "rouge",
+    "cheveux": "court",
+    "c_cheveux": "brun"
+   },
+   "envoyee": {
+    "haut": "blouson",
+    "c_haut": "noir",
+    "motif": "uni",
+    "bas": "jean",
+    "chaussures": "bottes",
+    "details": [
+     "boucles_oreilles",
+     "rouge_levres"
+    ],
+    "chapeau": "serre_tete",
+    "c_chapeau": "rose",
+    "cheveux": "queue",
+    "c_cheveux": "chatain"
    }
   },
   "personnages": {
    "presentateur": {
     "genre": "h",
-    "age": 50,
-    "corpulence": 0.2,
-    "cheveux": "rase",
+    "age": 58,
+    "corpulence": 0.7,
+    "cheveux": "degarni",
     "barbe": "moustache"
    },
    "invite": {
     "genre": "h",
-    "age": 20,
-    "corpulence": 0.2,
-    "cheveux": "afro"
+    "age": 29,
+    "corpulence": 0.3,
+    "cheveux": "court",
+    "barbe": "trois_jours"
+   },
+   "envoyee": {
+    "genre": "f",
+    "age": 32,
+    "corpulence": 0.3,
+    "cheveux": "queue"
    }
   },
   "gags": [
-   "La fin de carrière de CR7 signifie la fin du football",
-   "Parking Leclerc – Little Angel exauce les vœux",
-   "Maman ne doit JAMAIS savoir"
+   "TICKET BUS : 2 €",
+   "DÉPOSE-MINUTE : 0 € (PAPA VALIDE)",
+   "TONDEUR À LOUER"
   ],
   "ambiances": [
    "neon"
   ],
-  "objets": [
-   {
-    "replique": 0,
-    "objet": "telephone"
-   },
-   {
-    "replique": 2,
-    "objet": "telephone"
-   },
-   {
-    "replique": 7,
-    "objet": "bouteille"
-   },
-   {
-    "replique": 28,
-    "objet": "telephone"
-   },
-   {
-    "replique": 37,
-    "objet": "telephone"
-   },
-   {
-    "replique": 52,
-    "objet": "bouteille"
-   }
-  ],
+  "cadence": "rapide",
   "plans": [
    {
     "replique": 0,
-    "plan": "large",
+    "plan": "moyen",
     "mouvement": "fixe",
-    "geste": "telephone",
-    "reaction": "aucune"
+    "geste": "compte",
+    "reaction": "regard_camera"
    },
    {
     "replique": 2,
-    "plan": "tres_serre",
+    "plan": "contre_plongee",
     "mouvement": "zoom_choc",
-    "geste": "telephone",
-    "reaction": "choc"
+    "geste": "stop",
+    "reaction": "sceptique"
    },
    {
     "replique": 4,
     "plan": "serre",
-    "mouvement": "avance",
-    "geste": "stop",
-    "reaction": "sceptique"
-   },
-   {
-    "replique": 7,
-    "plan": "contre_plongee",
-    "mouvement": "zoom_choc",
-    "geste": "poing",
-    "reaction": "choc"
+    "mouvement": "fixe",
+    "geste": "haussement",
+    "reaction": "facepalm"
    },
    {
     "replique": 10,
     "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "explique",
-    "reaction": "gratte_tete"
+    "mouvement": "avance",
+    "geste": "menton",
+    "reaction": "choc"
    },
    {
     "replique": 14,
     "plan": "tres_serre",
-    "mouvement": "avance",
-    "geste": "supplie",
-    "reaction": "gene"
-   },
-   {
-    "replique": 17,
-    "plan": "contre_plongee",
-    "mouvement": "fixe",
-    "geste": "pointe_d",
-    "reaction": "gene"
-   },
-   {
-    "replique": 19,
-    "plan": "tres_serre",
-    "mouvement": "avance",
-    "geste": "desespoir",
-    "reaction": "sceptique"
-   },
-   {
-    "replique": 22,
-    "plan": "serre",
-    "mouvement": "recul",
-    "geste": "bras_ouverts",
-    "reaction": "sceptique"
-   },
-   {
-    "replique": 26,
-    "plan": "tres_serre",
-    "mouvement": "zoom_choc",
-    "geste": "telephone",
-    "reaction": "choc"
-   },
-   {
-    "replique": 27,
-    "plan": "serre",
-    "mouvement": "avance",
-    "geste": "supplie",
-    "reaction": "gene"
-   },
-   {
-    "replique": 30,
-    "plan": "moyen",
     "mouvement": "fixe",
     "geste": "gratte_tete",
-    "reaction": "regard_camera"
+    "reaction": "gene"
    },
    {
-    "replique": 36,
-    "plan": "large",
-    "mouvement": "fixe",
-    "geste": "haussement",
-    "reaction": "aucune"
-   },
-   {
-    "replique": 41,
+    "replique": 15,
     "plan": "tres_serre",
-    "mouvement": "zoom_choc",
-    "geste": "stop",
-    "reaction": "choc"
-   },
-   {
-    "replique": 42,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "gratte_tete",
-    "reaction": "regard_camera"
-   },
-   {
-    "replique": 49,
-    "plan": "contre_plongee",
     "mouvement": "avance",
-    "geste": "poing",
-    "reaction": "aucune"
-   },
-   {
-    "replique": 52,
-    "plan": "tres_serre",
-    "mouvement": "zoom_choc",
-    "geste": "pouce",
+    "geste": "croises",
     "reaction": "regard_camera"
    }
   ]
  },
- "doublage": {
-  "piste": "/tmp/tmph3ofqf45/piste.wav",
-  "duree": 89.89,
-  "source": "https://www.tiktok.com/@yan_animation0/video/7678832582833736993?_r=1&_t=ZN-9ATIuYQUToM",
-  "auteur": "yan_animation0",
-  "contexte": "Sur le parking du Leclerc, Kévin, un grand garçon naïf, appelle son père : une inconnue nommée Little Angel lui propose de monter dans sa voiture. Avachi sur son canapé miteux, le père, Jojo, oublie toutes ses leçons de prudence et le supplie, ému aux larmes, d'y aller.",
-  "evenements": [],
-  "visuel": {
-   "duree": 90.0,
-   "nb_plans": 36,
-   "duree_plan": 2.5,
-   "coupes": [
-    3.5,
-    6.0,
-    9.0,
-    12.5,
-    14.0,
-    20.0,
-    20.5,
-    22.0,
-    23.0,
-    27.0,
-    27.5,
-    33.0,
-    34.0,
-    40.5,
-    41.5,
-    52.5,
-    53.5,
-    62.0,
-    62.5,
-    63.0,
-    65.0,
-    66.5,
-    67.0,
-    68.5,
-    69.0,
-    71.0,
-    71.5,
-    75.0,
-    76.0,
-    79.5,
-    81.5,
-    84.0,
-    85.0,
-    88.5,
-    89.0
-   ],
-   "plans": {
-    "tres_serre": 0.244,
-    "serre": 0.039,
-    "moyen": 0.0,
-    "large": 0.717
-   },
-   "camera": {
-    "fixe": 1.0,
-    "avance": 0.0,
-    "recul": 0.0,
-    "travelling": 0.0,
-    "epaule": 0.0
-   },
-   "nb_personnes": 1,
-   "personnes": [
-    {
-     "place": "gauche",
-     "presence": 0.239,
-     "habit": [
-      102,
-      103,
-      143
-     ],
-     "cheveux": [
-      21,
-      13,
-      13
-     ],
-     "sourire": 0.0,
-     "taille": 0.332,
-     "tete_penchee": 1.5,
-     "regard_cote": 0.0
-    }
-   ],
-   "visages": true,
-   "sourires": 0.0,
-   "energie": 0.015,
-   "mur": [
-    177,
-    154,
-    139
-   ],
-   "palette": [
-    [
-     172,
-     147,
-     130,
-     0.252
-    ],
-    [
-     185,
-     163,
-     150,
-     0.207
-    ],
-    [
-     100,
-     73,
-     80,
-     0.198
-    ],
-    [
-     46,
-     40,
-     40,
-     0.133
-    ],
-    [
-     216,
-     230,
-     238,
-     0.114
-    ],
-    [
-     147,
-     113,
-     76,
-     0.096
-    ]
-   ],
-   "lumiere": {
-    "luminosite": 150.0,
-    "chaleur": 27.1,
-    "saturation": 63.9
-   },
-   "moment": "soir"
-  }
- },
  "fiche": {
-  "note": 0,
-  "decision": "vidéo manuelle (bande son d'une vidéo TikTok)",
+  "fil": "Pitch : Kévin, 29 ans et sans permis, se voit proposer un trajet gratuit par une dame à la sortie de la gare. Son père Jojo, venu le chercher à pied pour ne pas payer l'essence, doit choisir entre sa règle sacrée et son portefeuille. 1. À la gare, la nuit, Lila pose la situation : Kévin a 29 ans, pas de permis, et papa est venu à pied. Kévin annonce la proposition gratuite de la dame. Jojo crie sa règle numéro un, « on monte jamais avec une inconnue », puis demande si elle a le plein. Lila rappelle qu'il répète cette règle depuis 29 ans, et Jojo répond qu'elle ne lui a jamais rapporté un centime. 2. Du coup, Jojo cherche des raisons de dire oui : la voiture est propre, donc la dame est quelqu'un de bien. Le bus coûte deux euros, elle zéro. Lila parle de rançon, et Jojo demande combien elle prend du kilomètre. 3. Trente secondes plus tard, Jojo a poussé Kévin dans la voiture. La dame tend vingt euros à Jojo et demande à Kévin s'il sait tondre une pelouse. La règle du début revient à l'envers : papa n'a pas vendu son fils à une inconnue, il le lui a loué.",
+  "concept": "« Quand papa radin récupère Kévin, 29 ans » : un père assez radin pour venir à pied à la gare oublie sa règle sacrée sur les inconnus dès que le trajet est gratuit, puis finit par louer son fils adulte à la dame.",
+  "format": "Scène de dessin animé en trois gags successifs au même endroit (dépose-minute d'une gare, la nuit), avec une escalade continue.",
+  "angle": "Une seule idée qui monte : la radinerie de Jojo fait fondre sa règle numéro un, euro après euro. Lila, la lucide, pose le contexte et s'énerve. Jojo, de mauvaise foi, a toujours une excuse. Kévin, le naïf, rapporte sans s'en rendre compte les détails qui trahissent la transaction. La chute retourne la règle : papa n'a pas livré son fils, il l'a mis en location.",
+  "resume_factuel": "Un père radin, venu à pied chercher à la gare son fils de 29 ans sans permis, le pousse dans la voiture d'une inconnue pour économiser le bus, puis le lui loue pour tondre sa pelouse.",
+  "faits_reels": [],
+  "inventions": [
+   "Toute la situation, les personnages et les dialogues sont fictifs.",
+   "Jojo joue le père, Kévin le fils de 29 ans sans permis, Lila la grande sœur.",
+   "Les huit kilomètres à pied pour ne pas payer l'essence.",
+   "La dame à la voiture propre, les vingt euros et la pelouse à tondre."
+  ],
   "decoupage": [
    {
-    "scene": "1",
+    "scene": "Gag 1, la règle sacrée : dépose-minute de la gare, la nuit. Lila, face caméra, présente Kévin (29 ans, sans permis) et papa venu à pied. Kévin montre la voiture rouge. Jojo s'interpose les bras en croix, puis jette un œil discret à la jauge d'essence.",
     "repliques": [
-     0,
      1,
      2,
      3,
      4,
-     5,
-     6
+     5
     ],
-    "lieu": "",
-    "son": "",
-    "duree": 0.0,
-    "decor": "Supermarket parking lot by a country road at dusk, grey asphalt with white lines, a black car parked on the side, green hills in the background",
-    "titre": "Parking du Leclerc"
+    "lieu": "reconstitution",
+    "son": "rimshot",
+    "duree": 22.0,
+    "decor": "a train station drop-off area at night, a clean red car with its passenger door open, a bus stop sign showing a 2 euro ticket price, a station clock showing 23",
+    "titre": "La règle sacrée"
    },
    {
-    "scene": "2",
+    "scene": "Gag 2, la règle fond : Kévin vante la voiture propre, Jojo calcule à voix haute, Lila s'étrangle. Même décor, Jojo de plus en plus près de la portière.",
     "repliques": [
+     6,
      7,
      8,
      9,
      10,
-     11,
+     11
+    ],
+    "lieu": "reconstitution",
+    "son": "dun_dun",
+    "duree": 26.0,
+    "decor": "a train station drop-off area at night, a clean red car with its passenger door open, a bus stop sign showing a 2 euro ticket price, a station clock showing 23",
+    "titre": "Deux minutes plus tard…"
+   },
+   {
+    "scene": "Gag 3, papa loue fiston : Kévin est assis dans la voiture, Jojo tient la portière et empoche un billet de vingt euros tendu par une main qui sort de la vitre côté conducteur. Lila hallucine. Plan très serré sur Lila pour la chute.",
+    "repliques": [
      12,
      13,
      14,
      15,
-     16,
-     17,
-     18,
-     19,
-     20,
-     21,
-     22,
-     23,
-     24,
-     25,
-     26,
-     27
+     16
     ],
-    "lieu": "",
-    "son": "",
-    "duree": 0.0,
-    "decor": "Shabby living room, stained purple sofa with crumpled tissues, framed football poster on the wall, round wall clock",
-    "titre": "Pendant ce temps, sur le canapé"
-   },
-   {
-    "scene": "3",
-    "repliques": [
-     28,
-     29,
-     30,
-     31,
-     32,
-     33,
-     34,
-     35,
-     36
-    ],
-    "lieu": "",
-    "son": "",
-    "duree": 0.0,
-    "decor": "Supermarket parking lot by a country road at dusk, grey asphalt with white lines, a black car with open door, green hills in the background"
-   },
-   {
-    "scene": "4",
-    "repliques": [
-     37,
-     38,
-     39,
-     40,
-     41,
-     42,
-     43,
-     44,
-     45,
-     46,
-     47,
-     48,
-     49,
-     50,
-     51,
-     52
-    ],
-    "lieu": "",
-    "son": "",
-    "duree": 0.0,
-    "decor": "Shabby living room, stained purple sofa with crumpled tissues, framed football poster on the wall, round wall clock, energy drink can"
+    "lieu": "reconstitution",
+    "son": "trombone_triste",
+    "duree": 22.0,
+    "decor": "a train station drop-off area at night, a clean red car with its passenger door open, a bus stop sign showing a 2 euro ticket price, a station clock showing 23",
+    "titre": "Trente secondes plus tard…",
+    "effet": "pluie_billets"
    }
-  ]
+  ],
+  "titres_sujet": [
+   "Quand papa oublie toutes ses règles PAPA POUSSE FISTON CHEZ ANGEL — Papa, il y a une inconnue qui s'appelle Little Angel"
+  ],
+  "verification_web": false,
+  "note": 67.5,
+  "critique": "AVIS DU PUBLIC TEST (spectateurs sans contexte) :\n- Inès : a compris, rire 7/10, perdu par : Les 4 premières répliques sont lentes : Lila qui pose tout en voix off blasée, ça sent l'exposition. J'ai failli scroller à la 3 parce que la règle « on monte jamais avec une inconnue » est répétée sans rien de nouveau. Aussi, la chute arrive après un 13 un peu confus : je dois recoller « tondre » + 20 € = location, et le « loué » est expliqué par Lila au lieu de me laisser le deviner.\n- Karim : a compris, rire 5.5/10, perdu par : Sans le son, je perds les tons (deadpan, sarcastic) qui portent beaucoup de vannes. La 2 avec le « … Elle a le plein ? » marche moins à l'écrit. Le passage 5-9 est un empilement de blagues sur la radinerie qui se ressemblent (bus 2 €, rançon, kilomètre) : je décroche un peu. Et pas de visuel décrit : je ne sais pas à quoi ressemble l'inconnue, ni si Kévin a l'air d'un gamin. La chute est comprise mais « louer » arrive très vite, je dois relire.\n- Sandrine : a compris, rire 6/10, perdu par : Au début, je n'ai pas compris pourquoi un homme de 29 ans sans permis se fait chercher à pied sur 8 km : c'est flou, où sont-ils, qui est la dame ? Le titre « Quand papa radin récupère Kévin » m'a aidée mais « Kévin, 29 ans » se comprend seulement avec la 1. Je comprends la chute (il l'a loué pour tondre) mais j'ai eu un temps de retard, et je ne sais pas si c'est de l'humour méchant envers Kévin, qui paraît un peu simple d'esprit. Le côté « deadpan » de Lila ne m'est pas",
+  "decision": "à retravailler"
  },
- "_monte": true,
  "_voix_hz": {
-  "invite": 174,
-  "presentateur": 159
+  "envoyee": 227,
+  "invite": 145,
+  "presentateur": 176,
+  "narrateur": 290
+ },
+ "_voix_genre": {
+  "envoyee": "f",
+  "invite": "h",
+  "presentateur": "h",
+  "narrateur": "f"
  },
  "realisation": {
-  "moment": "soir",
+  "moment": "nuit",
   "lieux": [
    "rue",
-   "salon",
    "rue",
-   "salon"
+   "rue"
   ],
   "gags": [
-   "La fin de carrière de CR7 signifie la fin du football",
-   "Parking Leclerc – Little Angel exauce les vœux",
-   "Maman ne doit JAMAIS savoir"
+   "TICKET BUS : 2 €",
+   "DÉPOSE-MINUTE : 0 € (PAPA VALIDE)",
+   "TONDEUR À LOUER"
   ],
   "ambiances": [
-   "neige",
-   "neon",
-   "pluie",
-   "poussiere"
+   "neon"
   ],
-  "source": "auteur+image",
+  "source": "auteur",
   "tenues": {
-   "invite": "chemise",
-   "presentateur": "debardeur"
+   "envoyee": "blouson",
+   "invite": "capuche",
+   "presentateur": "doudoune"
   },
   "plans": [
-   "large/fixe",
    "moyen/fixe",
-   "tres_serre/zoom_choc",
-   "epaule/fixe",
-   "serre/avance",
-   "epaule/fixe",
-   "epaule/fixe",
+   "tres_serre/avance",
    "contre_plongee/zoom_choc",
-   "moyen/fixe",
-   "epaule/fixe",
+   "tres_serre/epaule",
    "serre/fixe",
-   "epaule/fixe",
-   "large/fixe",
-   "tres_serre/zoom_choc",
-   "tres_serre/avance",
-   "large/fixe",
-   "epaule/fixe",
-   "contre_plongee/fixe",
-   "large/fixe",
-   "tres_serre/avance",
-   "moyen/fixe",
-   "moyen/fixe",
-   "serre/recul",
-   "large/fixe",
-   "epaule/fixe",
-   "epaule/fixe",
-   "tres_serre/zoom_choc",
+   "tres_serre/epaule",
+   "large/recul",
+   "tres_serre/fixe",
+   "contre_plongee/epaule",
+   "serre/fixe",
    "serre/avance",
-   "large/recul",
-   "large/fixe",
-   "moyen/fixe",
-   "moyen/fixe",
-   "large/fixe",
-   "epaule/fixe",
-   "large/fixe",
-   "moyen/fixe",
-   "large/fixe",
-   "large/recul",
-   "epaule/fixe",
-   "moyen/fixe",
-   "moyen/fixe",
-   "tres_serre/zoom_choc",
    "serre/fixe",
-   "moyen/fixe",
-   "tres_serre/zoom_choc",
-   "large/fixe",
-   "tres_serre/zoom_choc",
-   "tres_serre/zoom_choc",
-   "moyen/fixe",
-   "contre_plongee/avance",
-   "large/fixe",
-   "large/fixe",
-   "tres_serre/zoom_choc"
+   "large/recul",
+   "tres_serre/fixe",
+   "tres_serre/fixe",
+   "tres_serre/avance",
+   "serre/avance"
   ]
  }
 }
