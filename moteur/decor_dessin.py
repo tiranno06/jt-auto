@@ -15,12 +15,15 @@ import math, os, re
 import numpy as np, cv2
 from PIL import Image, ImageDraw, ImageFont
 
+import decor_details as DX
+
 W, H = 1080, 1920
 SOL = 1210                                                                 # ligne mur / sol (les pieds des personnages sont à 1500)
 TRAIT = (26, 22, 30)
 AA = cv2.LINE_AA
 POLICE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "polices", "Poppins-Bold.ttf")
-LIEUX = ("salon", "cuisine", "bureau", "cabinet_medical", "bar", "chambre", "salle_sport", "magasin", "classe", "rue", "restaurant")
+LIEUX = ("salon", "cuisine", "bureau", "cabinet_medical", "bar", "chambre", "salle_sport", "magasin", "classe", "rue", "restaurant",
+         "administration", "hall", "caverne", "palais")
 
 # ------------------------------------------------------------------ outils de dessin
 def _c(c): return tuple(int(max(0, min(255, v))) for v in c)
@@ -392,11 +395,16 @@ GAGS = {
     "magasin": ["Promo : -0 %", "Prix choc (pour votre compte)", "Caisse rapide (en théorie)"],
     "classe": ["Interro surprise (pas une surprise)", "Silence = 20/20", "Le savoir, c'est le pouvoir (de dormir)"],
     "rue": ["Boulangerie Le Pain Perdu", "Coiffure Hair Mess", "Pressing Sec et Net"],
+    "administration": ["Merci de patienter (encore)", "Formulaire B12 : voir formulaire A7", "Pièce manquante ? Revenez demain"],
+    "hall": ["Merci de ne pas claquer la porte", "Réunion de copropriété : venez nombreux (personne)", "Ascenseur en panne depuis 2009"],
+    "caverne": ["Ugh", "Chasse au mammouth : mardi", "Feu : ne pas toucher"],
+    "palais": ["Silence, le roi dort", "Brioche à volonté", "Interdit aux gueux"],
     "restaurant": ["Plat du jour : celui d'hier", "Menu : tout est fait maison (la maison d'à côté)", "Chef : de mauvaise humeur"],
 }
 COULEURS_MUR = {"salon": (238, 214, 190), "cuisine": (214, 232, 222), "bureau": (214, 222, 234), "cabinet_medical": (220, 238, 236),
                 "bar": (150, 76, 60), "chambre": (210, 208, 236), "salle_sport": (226, 228, 232), "magasin": (244, 240, 230),
-                "classe": (240, 226, 196), "rue": (160, 190, 220), "restaurant": (236, 206, 176)}
+                "classe": (240, 226, 196), "rue": (160, 190, 220), "restaurant": (236, 206, 176),
+                "administration": (52, 92, 160), "hall": (236, 226, 206), "caverne": (150, 120, 92), "palais": (244, 236, 214)}
 
 def _variante(c, rng, amp=14): return _c(np.array(c) + rng.integers(-amp, amp + 1, 3))
 
@@ -428,7 +436,7 @@ def dessiner(lieu, bible=None, graine=7):
         lx = 900; ligne(img, (lx, SOL + 120), (lx, 420), TRAIT, 16); ligne(img, (lx, SOL + 120), (lx, 420), (60, 70, 80), 9)
         boite(img, lx - 60, 380, lx + 20, 430, (60, 70, 80), 5); res["lampes"].append((lx - 20, 440))
         res["fenetre"] = (0, 0, W, SOL)
-    else:
+    elif lieu not in DX.NOUVEAUX:
         motif_mur = b.get("motif_mur") or {"salon": "rayures", "cuisine": "uni", "bureau": "uni", "cabinet_medical": "lambris", "bar": "briques",
                                             "chambre": "fleurs", "salle_sport": "uni", "magasin": "uni", "classe": "lambris", "restaurant": "losanges"}[lieu]
         mur(img, c_mur, motif_mur, rng)
@@ -529,6 +537,11 @@ def dessiner(lieu, bible=None, graine=7):
                 if (x // 40 + kk) % 2: cv2.rectangle(img, (x, y), (x + 40, y + 34), (220, 70, 70), -1)
         cv2.rectangle(img, (600, SOL - 90), (1060, SOL + 10), TRAIT, 5)
         boite(img, 760, SOL - 200, 900, SOL - 120, (250, 250, 248), 5, 30); ligne(img, (700, SOL - 200), (700, SOL - 120), (200, 200, 205), 5)
+    elif lieu in DX.NOUVEAUX:                                              # administration, hall, caverne, palais
+        if lieu == "administration": mur(img, c_mur, "uni", rng); sol(img, _variante((200, 200, 196), rng, 6), "carrelage"); plinthe(img)
+        r_ = DX.NOUVEAUX[lieu](img, rng, res, gag, moment, allume)
+        if r_ is not None: av = r_
+    DX.habiller(img, lieu, rng, res, moment, gag)                          # petits objets qui rendent le lieu vivant
     # lumière : soleil par la fenêtre, lampes allumées le soir
     tache_soleil(img, res["fenetre"] if lieu != "rue" else None, moment)
     for c in res["lampes"]:
@@ -540,7 +553,11 @@ def dessiner(lieu, bible=None, graine=7):
 def lieu_de(texte_, defaut="salon"):
     """Lieu du catalogue d'après une description (anglais ou français) : « doctor's office », « au bureau »… (le plus cité gagne)."""
     t = (texte_ or "").lower()
-    regles = [("cabinet_medical", r"m[ée]decin|docteur|doctor|medical|m[ée]dical|clinic|hospital|h[ôo]pital|cabinet|infirmi|nurse|dentist|pharmac"),
+    regles = [("caverne", r"pr[ée]histo|caverne|grotte|mammouth|cro-?magnon|n[ée]andert|homme des cavernes"),
+              ("palais", r"ch[âa]teau|palais|versailles|\broi\b|\breine\b|majest[ée]|cour royale|marquis"),
+              ("administration", r"\bcaf\b|pr[ée]fecture|mairie|administration|guichet|formulaire|imp[ôo]ts|france travail|p[ôo]le emploi|\bs[ée]cu\b|dossier"),
+              ("hall", r"immeuble|voisin|palier|escalier|concierge|gardien|ascenseur|bo[iî]te aux lettres|copropri"),
+              ("cabinet_medical", r"m[ée]decin|docteur|doctor|medical|m[ée]dical|clinic|hospital|h[ôo]pital|cabinet|infirmi|nurse|dentist|pharmac"),
               ("salle_sport", r"gym|salle de sport|fitness|muscu|coach|sport|treadmill|halt[èe]re"),
               ("bar", r"\bbar\b|pub|ap[ée]ro|cocktail|bi[èe]re|beer|boire un verre|night ?club|bo[îi]te de nuit"),
               ("restaurant", r"restaurant|resto|serveur|waiter|menu|addition|caf[ée] ?terrasse|brasserie|diner"),

@@ -150,6 +150,7 @@ METIERS = {
     "salle_sport": dict(haut="debardeur", c_haut=(230, 60, 60), bas="short", c_bas=(40, 40, 48), chaussures="baskets", c_chaussures=(250, 250, 250), details=("montre",)),
     "magasin": dict(haut="polo", c_haut=(230, 60, 60), bas="pantalon", c_bas=(50, 55, 70), chaussures="baskets", c_chaussures=(40, 40, 48), details=("badge",)),
     "classe": dict(haut="gilet", c_haut=(150, 110, 80), c_dessous=(240, 240, 235), bas="pantalon", c_bas=(110, 100, 90), chaussures="ville", c_chaussures=(80, 50, 30), details=("lunettes_vue", "echarpe")),
+    "administration": dict(haut="chemise", c_haut=(248, 248, 246), bas="pantalon", c_bas=(45, 45, 50), chaussures="ville", c_chaussures=(30, 30, 30), details=("badge", "ceinture", "lunettes_vue")),
     "cuisine": dict(haut="tablier", c_haut=(120, 160, 210), c_tablier=(250, 250, 245), bas="jean", c_bas=(70, 100, 150), chaussures="chaussons", c_chaussures=(220, 120, 140), details=()),
 }
 VILLE = {                                                                   # tenues de ville selon le lieu (et l'heure)
@@ -316,10 +317,11 @@ def bible(sk, roles):
     figurants = []
     if os.environ.get("FIGURANTS", "1") != "0":
         for k, l in enumerate(lieux):
-            n = {"bar": 2, "restaurant": 2, "bureau": 1, "magasin": 1, "rue": 2, "salle_sport": 1, "classe": 0}.get(l, 0)
+            n = {"bar": 2, "restaurant": 2, "bureau": 1, "magasin": 1, "rue": 2, "salle_sport": 1, "classe": 0, "administration": 2, "palais": 1}.get(l, 0)
             for j in range(n):
                 perso = ("lunettes", "meche")[j % 2]; act = {"bar": ("boit", "telephone"), "restaurant": ("mange", "boit"), "bureau": ("tape", "telephone"),
-                                                            "magasin": ("cherche", "telephone"), "rue": ("marche", "telephone"), "salle_sport": ("souleve", "boit")}[l][j % 2]
+                                                            "magasin": ("cherche", "telephone"), "rue": ("marche", "telephone"), "salle_sport": ("souleve", "boit"),
+                                                            "administration": ("telephone", "cherche"), "palais": ("boit", "boit")}[l][j % 2]
                 figurants.append(dict(scene=k, perso=perso, activite=act, x=(150, 930)[(j + graine) % 2] if n == 1 else (150, 930)[j],
                                       costume=tenue(perso, "client", l, moment, graine + 101 + j + 7 * k)))
     fiches = casting(sk, roles, costumes, S, graine)
