@@ -76,5 +76,5 @@ def tete_y(s, taille=1.0):
 def hauteur_tete(s, taille=1.0): return 2 * M.squelette(dict(M.pose_neutre(), y=1500, s=s * taille, adulte=True))["ry"]
 
 def reperes(F, p):
-    """Centre et rayons de la tête, positions des deux mains (pour poser objets et effets sur un personnage rendu en 3D)."""
+    """Centre et rayons de la tête, positions des deux mains (pour poser objets et effets)."""
     K = M.squelette(_pose(F, p)); return K["tete"], (K["rx"], K["ry"]), [K["bras"][0][2], K["bras"][1][2]]

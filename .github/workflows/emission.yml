@@ -110,7 +110,6 @@ jobs:
       DECORS: ${{ vars.DECORS }}
       RENDU_DETAILLE: ${{ vars.RENDU_DETAILLE }}
       PERSONNAGES: ${{ vars.PERSONNAGES }}
-      RENDU_3D: ${{ vars.RENDU_3D }}
       TON: ${{ vars.TON }}
       INFOS_DEMAIN: ${{ vars.INFOS_DEMAIN }}
       PERSONNALITES: ${{ vars.PERSONNALITES }}
@@ -167,20 +166,6 @@ jobs:
 
       - name: Bibliothèques Python
         run: pip install -r requirements.txt
-
-      - name: Python 3.11 pour Blender (vraie 3D, réglage RENDU_3D)
-        if: vars.RENDU_3D == '1'
-        id: py311
-        uses: actions/setup-python@v7
-        with:
-          python-version: "3.11"
-          update-environment: false
-
-      - name: Blender (vraie 3D)
-        if: vars.RENDU_3D == '1'
-        run: |
-          "${{ steps.py311.outputs.python-path }}" -m venv /tmp/blender && /tmp/blender/bin/pip install -q "bpy==5.0.1" numpy \
-            && echo "BLENDER_PYTHON=/tmp/blender/bin/python" >> "$GITHUB_ENV" || echo "Blender indisponible : rendu 2D"
 
       - name: Lecteur TikTok (vidéo depuis une bande son)
         if: startsWith(inputs.theme, 'TIKTOK::')

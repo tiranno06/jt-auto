@@ -672,12 +672,12 @@ class TestImageEtBanque(unittest.TestCase):
 
 
 class TestHumains(unittest.TestCase):
-    """Personnages adultes (casting libre) et vraie 3D (repli 2D sans Blender)."""
+    """Personnages adultes (casting libre) ."""
     def setUp(self):
         try:
-            import humain, studio, rendu3d, marionnette
+            import humain, studio, marionnette
         except Exception as e: self.skipTest(f"dépendances vidéo absentes : {e}")
-        self.H, self.S, self.R3, self.M = humain, studio, rendu3d, marionnette
+        self.H, self.S, self.M = humain, studio, marionnette
 
     def test_fiches_et_dessin(self):
         H, M = self.H, self.M
@@ -704,17 +704,3 @@ class TestHumains(unittest.TestCase):
         sk2 = {"repliques": [{"p": "envoyee", "t": "Salut."}]}                                          # sketch écrit : Lila est une femme
         self.assertEqual(S.casting(sk2, ["envoyee"], {}, {}, 1)["envoyee"]["genre"], "f")
 
-    def test_3d_repli_et_pose(self):
-        R3 = self.R3
-        ancien = os.environ.pop("BLENDER_PYTHON", None)
-        try: self.assertFalse(R3.actif())                                                              # sans Blender : rendu 2D
-        finally:
-            if ancien: os.environ["BLENDER_PYTHON"] = ancien
-        img = np.zeros((1920, 1080, 3), np.uint8); sp = np.zeros((R3.HAUTEUR, R3.LARGEUR, 4), np.uint8); sp[200:1000, 300:480] = (255, 0, 0, 255)
-        R3.poser(img, sp, {"x": 540, "y": 1500, "s": 1.0}, 1.0)
-        ys = np.where(img[..., 0] > 128)[0]; self.assertTrue(len(ys) and abs(ys.max() - 1500) < 120)       # pieds au sol, hauteur d'adulte
-        self.assertEqual(R3._cle({"bras_g": (1.234, 2), "sourcils_h": None, "x": 3}), {"bras_g": [1.23, 2.0]})
-
-
-if __name__ == "__main__":
-    unittest.main()

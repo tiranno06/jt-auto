@@ -20,7 +20,7 @@ import math, os, re, subprocess, sys, tempfile, wave
 import numpy as np, cv2
 from PIL import Image, ImageDraw, ImageFont
 ICI = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, ICI)
-import marionnette as M, sons_modernes as SM, marque, studio, decor_dessin as DD, humain as HU, rendu3d
+import marionnette as M, sons_modernes as SM, marque, studio, decor_dessin as DD, humain as HU
 from jt import minutage, carton, son, vers_mix, enveloppe, poser, pop, W, H, FPS, SR, SRM, FB
 
 CAP_Y = 1700
@@ -515,25 +515,9 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         if q["cam"] == "serre" and q["p"] in places[q["scene"]]: return 1.5, position(q["scene"], q["p"])[0], 1130.0
         return 1.0, W / 2, H / 2
 
-    TROISD = {"rec": None, "rendu": None, "fi": 0}                         # vraie 3D : poses notées au 1er passage, personnages rendus par Blender
-
     def dessine(img, role, p):
-        """Personnage du rôle : humain adulte (fiche du casting : dessin 2D ou rendu 3D) ou marionnette."""
-        if FICHES and role in FICHES:
-            if TROISD["rec"] is not None:                                  # 1er passage : on note seulement la pose
-                if not p.get("dos") and role in TROISD["rec"] and 0 <= TROISD["fi"] < len(TROISD["rec"][role]): TROISD["rec"][role][TROISD["fi"]] = dict(p)
-                return
-            R3 = TROISD["rendu"]
-            if R3 is not None and R3.ok and not p.get("dos"):
-                sp = R3.sprite(role, TROISD["fi"])
-                if sp is not None:
-                    rendu3d.poser(img, sp, p, FICHES[role]["taille"])
-                    tete, (rx, ry), mains = HU.reperes(FICHES[role], p); hh = 122 * p["s"] * FICHES[role]["taille"]
-                    for nom, xy in (("main_g", mains[0]), ("main_d", mains[1])):
-                        if p.get(nom) is not None: M._coller(img, p[nom], xy[0], xy[1] + 0.25 * hh)
-                    if p.get("effets"): M._effets(img, tete, rx * 1.15, ry * 1.05, rx / 150 * 1.6, p)
-                    return
-            return HU.dessiner(img, FICHES[role], p)
+        """Personnage du rôle : humain adulte (fiche du casting) ou marionnette."""
+        if FICHES and role in FICHES: return HU.dessiner(img, FICHES[role], p)
         return M.dessiner(img, M.ROLES.get(role, "bonnet"), p)
 
     def ecoutant(q):
@@ -636,7 +620,6 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         return sens * 22 * min(1, v), min(1, v)
 
     def vue(tm):
-        TROISD["fi"] = int(round(tm * FPS))
         q = actif(tm); sc = q["scene"]
         fond = decors.get(sc)
         if fond is None: fond = decors[sc] = decor_uni(sc)
@@ -782,13 +765,6 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
     with wave.open(brut, "wb") as w:
         w.setnchannels(2); w.setsampwidth(2); w.setframerate(SRM); w.writeframes((mix * 32767).astype(np.int16).tobytes())
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", brut, "-af", "loudnorm=I=-14:TP=-1.5:LRA=11", "-ar", "48000", "-ac", "2", wav], check=True)
-    if FICHES and rendu3d.actif():                                        # vraie 3D : 1er passage à blanc (poses), puis Blender
-        TROISD["rec"] = {r: [None] * (nf + 2) for r in FICHES}
-        for fi in range(nf): image(fi)
-        rec, TROISD["rec"] = TROISD["rec"], None
-        print(f"3D : {sum(1 for r in rec for x in rec[r] if x)} poses notées, rendu Blender…", flush=True)
-        TROISD["rendu"] = rendu3d.Rendu(FICHES, B["costumes"], rec)
-        if not TROISD["rendu"].ok: TROISD["rendu"] = None; print("3D indisponible : personnages en 2D", flush=True)
     ff = subprocess.Popen(["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS),
                            "-i", "-", "-i", wav, "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p",
                            "-c:a", "aac", "-b:a", "192k", "-shortest", "-movflags", "+faststart", sortie], stdin=subprocess.PIPE)
