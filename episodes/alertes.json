@@ -46,5 +46,11 @@
   "titre": "✅ Vidéo programmée pour le 2026-10-11T17:00",
   "texte": "2026-10-10_16h55_emission.mp4",
   "lien": ""
+ },
+ {
+  "quand": "2026-10-11T08:47+00:00",
+  "titre": "⚠️ Échec de fabrication",
+  "texte": "  File \"/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/anthropic/_base_client.py\", line 1222, in request\n    raise self._make_status_error_from_response(response) from None\nanthropic.BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error',",
+  "lien": ""
  }
 ]
