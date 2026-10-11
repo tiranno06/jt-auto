@@ -60,5 +60,54 @@
    "poussiere"
   ],
   "controle": "ok"
+ },
+ {
+  "moment": "soir",
+  "lieux": [
+   "rue",
+   "salon",
+   "rue",
+   "salon"
+  ],
+  "source": "auteur+image",
+  "duree": 93.1,
+  "plans": {
+   "large": 14,
+   "moyen": 11,
+   "tres_serre": 10,
+   "epaule": 10,
+   "serre": 5,
+   "contre_plongee": 3
+  },
+  "mouvements": {
+   "fixe": 36,
+   "zoom_choc": 9,
+   "avance": 5,
+   "recul": 3
+  },
+  "costumes": {
+   "invite": "chemise",
+   "presentateur": "debardeur"
+  },
+  "figurants": 4,
+  "ambiances": [
+   "neige",
+   "neon",
+   "pluie",
+   "poussiere"
+  ],
+  "controle": "ok",
+  "fichier": "2026-10-11_19h37_emission.mp4",
+  "cine": {
+   "focus": true,
+   "vertige": true,
+   "tiers": true,
+   "etalonnage": true,
+   "profondeur": true,
+   "grain": true,
+   "reflets": false,
+   "son": true
+  },
+  "cadence": "normal"
  }
 ]

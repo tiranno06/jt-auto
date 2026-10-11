@@ -1,292 +1,1025 @@
 {
- "titre": "FILM TROP LONG",
- "sujet": "FILM TROP LONG",
- "ecran": "TROP LONG",
- "invite_nom": "Kévin",
- "invite_role": "Le pote témoin (fictif)",
+ "titre": "PAPA POUSSE FISTON CHEZ ANGEL",
+ "sujet": "PAPA POUSSE FISTON CHEZ ANGEL",
+ "ecran": "PAPA POUSSE FI",
+ "invite_nom": "Hubert Rustine",
+ "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
- "lieu_direct": "Guichet du cinéma",
- "titre_accroche": "POV : tu veux être remboursé au ciné",
- "question": "Tag le pote qui dort dès la pub 👇 Team Jojo ou team Lila ?",
- "running_gag": "La sieste de Jojo : il paie plein tarif pour aller dormir quelque part (ciné, concert, réunion), puis il réclame d'être remboursé.",
- "verite": "Quand on dit qu'un film est « trop long », on veut souvent dire qu'on s'est endormi devant. Et on cherche quelqu'un d'autre à qui faire payer sa propre fatigue.",
+ "lieu_direct": "Assemblée",
+ "titre_accroche": "Quand papa oublie toutes ses règles",
+ "question": "Et vous, à la place du fils, vous montez dans la voiture ? 😭",
+ "running_gag": "",
+ "verite": "",
  "repliques": [
   {
-   "p": "narrateur",
-   "t": "POV : tu veux être remboursé au ciné",
-   "d": "[excited] Pi-o-vi : tu veux être remboursé au ciné"
+   "p": "invite",
+   "t": "Papa, il y a une inconnue qui s'appelle Little Angel qui m'a proposé de monter dans sa voiture.",
+   "_deb": 0.16,
+   "_fin": 3.06,
+   "d": "[worried] Papa, il y a une inconnue qui s'appelle Little Angel qui m'a proposé de monter dans sa voiture.",
+   "objet": "telephone"
+  },
+  {
+   "p": "invite",
+   "t": "Je fais quoi?",
+   "_deb": 3.1,
+   "_fin": 3.42,
+   "d": "[hesitant] Je fais quoi?"
   },
   {
    "p": "presentateur",
-   "t": "Madame, remboursez-moi. Le film était trop long.",
-   "d": "[angry] Madame, remboursez-moi. Le film était trop long.",
-   "objet": "billet"
+   "t": "Oh putain, fonce fiston, réfléchis pas. Monte dans cette voiture.",
+   "_deb": 3.44,
+   "_fin": 5.66,
+   "d": "[excited] Oh putain, fonce fiston, réfléchis pas. Monte dans cette voiture.",
+   "objet": "telephone"
   },
   {
    "p": "invite",
-   "t": "Trois heures ! C'est du vol !",
-   "d": "[outraged] Trois heures ! C'est du vol !"
-  },
-  {
-   "p": "envoyee",
-   "t": "Un radin qui en a trop pour son argent ? Jamais vu.",
-   "d": "[sarcastic] Un radin qui en a trop pour son argent ? [laughs] Jamais vu.",
-   "chute": true
-  },
-  {
-   "p": "invite",
-   "t": "Même qu'il dormait dès la pub —",
-   "d": "[proudly] Même qu'il dormait dès la pub —",
-   "chute": true
+   "t": "Tu m'as toujours dit de jamais parler aux inconnus et de surtout pas monter dans la voiture d'un inconnu.",
+   "_deb": 5.7,
+   "_fin": 8.86,
+   "d": "[confused] Tu m'as toujours dit de jamais parler aux inconnus et de surtout pas monter dans la voiture d'un inconnu."
   },
   {
    "p": "presentateur",
-   "t": "Kévin, ferme-la !",
-   "d": "[panicked] Kévin, ferme-la !",
-   "chevauche": true
+   "t": "Écoute-moi bien, oublie tout ce que je t'ai dit jusqu'à présent.",
+   "_deb": 8.88,
+   "_fin": 10.92,
+   "d": "[serious] Écoute-moi bien, oublie tout ce que je t'ai dit jusqu'à présent."
+  },
+  {
+   "p": "presentateur",
+   "t": "Monte dans cette voiture.",
+   "_deb": 11.06,
+   "_fin": 12.02,
+   "d": "[firm] Monte dans cette voiture."
   },
   {
    "p": "invite",
-   "t": "Et il a bavé sur le voisin !",
-   "d": "[excited] Et il a bavé sur le voisin !",
-   "chute": true
+   "t": "J'ai l'impression que la dame est habillée en mère Noël, c'est assez joli.",
+   "_deb": 12.1,
+   "_fin": 14.04,
+   "d": "[innocent] J'ai l'impression que la dame est habillée en mère Noël, c'est assez joli."
   },
   {
-   "p": "envoyee",
-   "t": "Bonne nouvelle : ta place est remboursée, quinze balles. Pressing du voisin, soixante. Tu nous dois quarante-cinq.",
-   "d": "[deadpan] Bonne nouvelle : ta place est remboursée, quinze balles. [sarcastic] Pressing du voisin, soixante. Tu nous dois quarante-cinq.",
-   "chute": true,
-   "objet": "facture",
-   "attente": 0.7
+   "p": "presentateur",
+   "t": "Oh putain de bordel de merde. Mon fils, va avec la dame.",
+   "_deb": 14.1,
+   "_fin": 16.78,
+   "d": "[ecstatic] Oh putain de bordel de merde. Mon fils, va avec la dame.",
+   "objet": "bouteille"
+  },
+  {
+   "p": "presentateur",
+   "t": "Tu te rappelles de la fée Clochette?",
+   "_deb": 16.8,
+   "_fin": 17.76,
+   "d": "[mysterious] Tu te rappelles de la fée Clochette?"
+  },
+  {
+   "p": "invite",
+   "t": "Oui.",
+   "_deb": 17.8,
+   "_fin": 17.98,
+   "d": "[naive] Oui."
+  },
+  {
+   "p": "presentateur",
+   "t": "Bah elle, c'est sa daronne. Donc va, va sans crainte.",
+   "_deb": 18.0,
+   "_fin": 20.1,
+   "d": "[convincing] Bah elle, c'est sa daronne. Donc va, va sans crainte."
+  },
+  {
+   "p": "invite",
+   "t": "Mais...",
+   "_deb": 20.12,
+   "_fin": 20.28,
+   "d": "[hesitant] Mais..."
+  },
+  {
+   "p": "presentateur",
+   "t": "Va avec la dame, réfléchis pas, bordel.",
+   "_deb": 20.38,
+   "_fin": 21.76,
+   "d": "[impatient] Va avec la dame, réfléchis pas, bordel."
+  },
+  {
+   "p": "invite",
+   "t": "Et si elle me fait des trucs bizarres?",
+   "_deb": 21.78,
+   "_fin": 22.74,
+   "d": "[nervous] Et si elle me fait des trucs bizarres?"
+  },
+  {
+   "p": "presentateur",
+   "t": "Eh bah surtout, surtout, tu la laisses faire. Elle n'est pas comme les autres.",
+   "_deb": 22.78,
+   "_fin": 25.74,
+   "d": "[insistent] Eh bah surtout, surtout, tu la laisses faire. Elle n'est pas comme les autres."
+  },
+  {
+   "p": "presentateur",
+   "t": "Elle exauce les vœux.",
+   "_deb": 25.76,
+   "_fin": 26.58,
+   "d": "[dreamy] Elle exauce les vœux."
+  },
+  {
+   "p": "invite",
+   "t": "Mais si maman-",
+   "_deb": 26.6,
+   "_fin": 27.08,
+   "d": "[worried] Mais si maman-"
+  },
+  {
+   "p": "presentateur",
+   "t": "Maman n'en saura jamais rien. Donc arrête de discuter et monte dans cette putain de bagnole.",
+   "_deb": 27.12,
+   "_fin": 30.54,
+   "d": "[annoyed] Maman n'en saura jamais rien. Donc arrête de discuter et monte dans cette putain de bagnole."
+  },
+  {
+   "p": "presentateur",
+   "t": "Tu te rends pas compte de ce qui est en train de t'arriver là, mon fils.",
+   "_deb": 30.58,
+   "_fin": 32.14,
+   "d": "[emotional] Tu te rends pas compte de ce qui est en train de t'arriver là, mon fils."
+  },
+  {
+   "p": "presentateur",
+   "t": "Je pourrais en chialer.",
+   "_deb": 32.28,
+   "_fin": 32.88,
+   "d": "[tearful] Je pourrais en chialer."
+  },
+  {
+   "p": "invite",
+   "t": "Je sais pas, c'est-",
+   "_deb": 32.96,
+   "_fin": 33.48,
+   "d": "[unsure] Je sais pas, c'est-"
+  },
+  {
+   "p": "presentateur",
+   "t": "Bon écoute-moi maintenant. Dans la vie, il y a ceux qui gagnent au loto, il y a ceux qui touchent un héritage d'une grande tante inconnue et qui",
+   "_deb": 33.52,
+   "_fin": 37.12,
+   "d": "[solemn] Bon écoute-moi maintenant. Dans la vie, il y a ceux qui gagnent au loto, il y a ceux qui touchent un héritage d'une grande tante inconnue et qui"
+  },
+  {
+   "p": "presentateur",
+   "t": "se barrent vivre aux Bahamas. Et il y a ceux qui croisent Little Angel sur le parking du Leclerc.",
+   "_deb": 37.14,
+   "_fin": 40.26,
+   "d": "[solemn] se barrent vivre aux Bahamas. Et il y a ceux qui croisent Little Angel sur le parking du Leclerc."
+  },
+  {
+   "p": "invite",
+   "t": "Je comprends pas, papa.",
+   "_deb": 40.34,
+   "_fin": 41.12,
+   "d": "[confused] Je comprends pas, papa."
+  },
+  {
+   "p": "presentateur",
+   "t": "Si tu ne montes pas dans cette voiture, crois-moi que tu t'en voudras toute ta vie.",
+   "_deb": 41.18,
+   "_fin": 44.22,
+   "d": "[grave] Si tu ne montes pas dans cette voiture, crois-moi que tu t'en voudras toute ta vie."
+  },
+  {
+   "p": "presentateur",
+   "t": "Et je te parle d'une longue dépression, le genre de blessure qui se refermera jamais entièrement.",
+   "_deb": 44.26,
+   "_fin": 47.62,
+   "d": "[dramatic] Et je te parle d'une longue dépression, le genre de blessure qui se refermera jamais entièrement."
+  },
+  {
+   "p": "invite",
+   "t": "Putain.",
+   "_deb": 47.74,
+   "_fin": 47.92,
+   "d": "[shocked] Putain."
+  },
+  {
+   "p": "presentateur",
+   "t": "Aujourd'hui, ta vie va changer mon garçon. Donc je t'en supplie, monte dans cette putain de bagnole.",
+   "_deb": 47.96,
+   "_fin": 52.36,
+   "d": "[pleading] Aujourd'hui, ta vie va changer mon garçon. Donc je t'en supplie, monte dans cette putain de bagnole."
+  },
+  {
+   "p": "invite",
+   "t": "Elle me fait signe de venir.",
+   "_deb": 52.44,
+   "_fin": 53.3,
+   "d": "[nervous] Elle me fait signe de venir.",
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Little Angel, c'est quelqu'un de très bien. Tout le monde te le dira.",
+   "_deb": 53.36,
+   "_fin": 55.86,
+   "d": "[reassuring] Little Angel, c'est quelqu'un de très bien. Tout le monde te le dira."
+  },
+  {
+   "p": "presentateur",
+   "t": "Enfin, surtout les darons, mais ce que je veux dire, c'est que tu peux lui faire confiance.",
+   "_deb": 55.94,
+   "_fin": 58.48,
+   "d": "[awkward] Enfin, surtout les darons, mais ce que je veux dire, c'est que tu peux lui faire confiance."
+  },
+  {
+   "p": "presentateur",
+   "t": "C'est ta destinée, mon garçon.",
+   "_deb": 59.06,
+   "_fin": 60.3,
+   "d": "[solemn] C'est ta destinée, mon garçon."
+  },
+  {
+   "p": "presentateur",
+   "t": "Saisis-la.",
+   "_deb": 61.4,
+   "_fin": 61.82,
+   "d": "[whispering] Saisis-la."
+  },
+  {
+   "p": "invite",
+   "t": "Donc j'y vais?",
+   "_deb": 61.86,
+   "_fin": 62.22,
+   "d": "[hesitant] Donc j'y vais?"
+  },
+  {
+   "p": "presentateur",
+   "t": "Je t'en supplie.",
+   "_deb": 62.26,
+   "_fin": 62.82,
+   "d": "[pleading] Je t'en supplie."
+  },
+  {
+   "p": "invite",
+   "t": "Bon d'accord,",
+   "_deb": 62.86,
+   "_fin": 63.24,
+   "d": "[resigned] Bon d'accord,"
+  },
+  {
+   "p": "invite",
+   "t": "j'y vais.",
+   "_deb": 64.22,
+   "_fin": 64.54,
+   "d": "[determined] j'y vais."
+  },
+  {
+   "p": "presentateur",
+   "t": "Fiston, attends. Je voulais juste te dire une dernière chose.",
+   "_deb": 64.58,
+   "_fin": 66.28,
+   "d": "[emotional] Fiston, attends. Je voulais juste te dire une dernière chose.",
+   "objet": "telephone"
+  },
+  {
+   "p": "invite",
+   "t": "Oui, papa.",
+   "_deb": 66.3,
+   "_fin": 66.66,
+   "d": "[curious] Oui, papa."
+  },
+  {
+   "p": "presentateur",
+   "t": "Avec maman, on est très fiers de toi, tu sais.",
+   "_deb": 66.72,
+   "_fin": 68.14,
+   "d": "[tender] Avec maman, on est très fiers de toi, tu sais."
+  },
+  {
+   "p": "invite",
+   "t": "On le dira à maman?",
+   "_deb": 68.16,
+   "_fin": 68.72,
+   "d": "[naive] On le dira à maman?"
+  },
+  {
+   "p": "presentateur",
+   "t": "On le dira jamais à maman. Elle nous couperait les couilles à tous les deux.",
+   "_deb": 68.76,
+   "_fin": 70.52,
+   "d": "[panicked] On le dira jamais à maman. Elle nous couperait les couilles à tous les deux."
+  },
+  {
+   "p": "invite",
+   "t": "Pourquoi les couilles?",
+   "_deb": 70.56,
+   "_fin": 71.06,
+   "d": "[confused] Pourquoi les couilles?"
+  },
+  {
+   "p": "presentateur",
+   "t": "Va accomplir ton destin, mon fils. Tu y trouveras toutes les réponses à tes questions.",
+   "_deb": 71.08,
+   "_fin": 74.84,
+   "d": "[solemn] Va accomplir ton destin, mon fils. Tu y trouveras toutes les réponses à tes questions."
+  },
+  {
+   "p": "invite",
+   "t": "J'ai peur.",
+   "_deb": 75.3,
+   "_fin": 75.76,
+   "d": "[scared] J'ai peur."
+  },
+  {
+   "p": "presentateur",
+   "t": "C'est normal. Mais va, sois sans crainte. Va.",
+   "_deb": 75.82,
+   "_fin": 79.2,
+   "d": "[tender] C'est normal. Mais va, sois sans crainte. Va."
+  },
+  {
+   "p": "invite",
+   "t": "OK.",
+   "_deb": 79.3,
+   "_fin": 79.56,
+   "d": "[nervous] OK."
+  },
+  {
+   "p": "invite",
+   "t": "Je monte dans sa voiture.",
+   "_deb": 80.66,
+   "_fin": 81.46,
+   "d": "[nervous] Je monte dans sa voiture."
+  },
+  {
+   "p": "presentateur",
+   "t": "Fiston, quand tu sortiras de cette voiture, tu ne seras plus le même.",
+   "_deb": 81.5,
+   "_fin": 83.6,
+   "d": "[emotional] Fiston, quand tu sortiras de cette voiture, tu ne seras plus le même."
+  },
+  {
+   "p": "presentateur",
+   "t": "Tu seras un homme.",
+   "_deb": 84.86,
+   "_fin": 85.68,
+   "d": "[proud] Tu seras un homme."
+  },
+  {
+   "p": "presentateur",
+   "t": "Tu veux faire plaisir à papa?",
+   "_deb": 87.22,
+   "_fin": 88.1,
+   "d": "[sly] Tu veux faire plaisir à papa?"
+  },
+  {
+   "p": "invite",
+   "t": "Oui, dis-moi.",
+   "_deb": 88.14,
+   "_fin": 88.9,
+   "d": "[eager] Oui, dis-moi."
+  },
+  {
+   "p": "presentateur",
+   "t": "Prends des photos.",
+   "_deb": 88.92,
+   "_fin": 89.46,
+   "d": "[deadpan] Prends des photos.",
+   "objet": "bouteille",
+   "chute": true
   }
  ],
- "bandeau": [
-  "UN SPECTATEUR RÉCLAME LE REMBOURSEMENT DE SA SIESTE",
-  "LE VOISIN DU RANG F SÉCHÉ AU SÈCHE-MAINS",
-  "LE CINÉMA LANCE LA SÉANCE AVEC OREILLER : 22 EUROS"
- ],
- "gag": {
-  "replique": 6,
-  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. Dark cinema room lit by the screen, a round-headed white character in an orange beanie snoring with his mouth wide open, head fallen on the shoulder of a horrified neighbor whose sleeve is soaked with a huge puddle of drool, popcorn spilled everywhere, comedic, deadpan."
- },
- "legende": "Il voulait se faire rembourser sa place. Attends de voir la facture. Satire, personnages fictifs.",
+ "bandeau": [],
+ "gag": null,
+ "legende": "Toute sa vie, il lui a interdit de suivre les inconnus… sauf UNE.",
  "hashtags": [
   "petitsdramas",
   "humour",
-  "sketch",
-  "animation",
-  "cinema",
-  "radin",
-  "pov"
+  "papa",
+  "dessinanime",
+  "pourtoi",
+  "littleangel",
+  "fiston"
  ],
- "sources": [],
+ "sources": [
+  "https://www.tiktok.com/@yan_animation0/video/7678832582833736993?_r=1&_t=ZN-9ATIuYQUToM"
+ ],
  "decoupage": [
   {
-   "scene": "Guichet de cinéma. Lila, caissière avec un badge, est assise derrière la vitre. Jojo tape son ticket sur le comptoir, Kévin s'indigne à côté de lui. Quand Kévin parle de la bave, un voisin à la manche trempée entre dans le champ derrière eux. Lila glisse une facture sous la vitre et Jojo se décompos",
+   "scene": "1",
    "repliques": [
+    0,
     1,
     2,
     3,
     4,
     5,
-    6,
-    7
+    6
    ],
-   "lieu": "reconstitution",
-   "son": "rimshot",
-   "duree": 17.0,
-   "decor": "a cinema ticket counter with a glass window and a small speaking hole, a movie poster showing '3H07' in huge letters, a big popcorn machine",
-   "titre": "Remboursez-moi !"
+   "lieu": "",
+   "son": "",
+   "duree": 0.0,
+   "decor": "Supermarket parking lot by a country road at dusk, grey asphalt with white lines, a black car parked on the side, green hills in the background",
+   "titre": "Parking du Leclerc"
+  },
+  {
+   "scene": "2",
+   "repliques": [
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27
+   ],
+   "lieu": "",
+   "son": "",
+   "duree": 0.0,
+   "decor": "Shabby living room, stained purple sofa with crumpled tissues, framed football poster on the wall, round wall clock",
+   "titre": "Pendant ce temps, sur le canapé"
+  },
+  {
+   "scene": "3",
+   "repliques": [
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36
+   ],
+   "lieu": "",
+   "son": "",
+   "duree": 0.0,
+   "decor": "Supermarket parking lot by a country road at dusk, grey asphalt with white lines, a black car with open door, green hills in the background"
+  },
+  {
+   "scene": "4",
+   "repliques": [
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52
+   ],
+   "lieu": "",
+   "son": "",
+   "duree": 0.0,
+   "decor": "Shabby living room, stained purple sofa with crumpled tissues, framed football poster on the wall, round wall clock, energy drink can"
   }
  ],
  "studio": {
   "moment": "soir",
   "lieux": [
-   "hall"
+   "rue",
+   "salon",
+   "rue",
+   "salon"
   ],
+  "cadence": "normal",
   "costumes": {
    "presentateur": {
-    "haut": "doudoune",
+    "haut": "debardeur",
     "c_haut": "kaki",
     "motif": "uni",
     "bas": "jogging",
-    "chaussures": "baskets",
+    "chaussures": "chaussons",
     "details": [
-     "barbe_courte"
+     "moustache"
     ],
-    "chapeau": "bonnet",
-    "c_chapeau": "orange",
-    "cheveux": "court",
-    "c_cheveux": "brun"
+    "cheveux": "rase",
+    "c_cheveux": "marron"
    },
    "invite": {
-    "haut": "capuche",
+    "haut": "chemise",
     "c_haut": "bleu",
     "motif": "uni",
-    "bas": "jean",
+    "bas": "pantalon",
     "chaussures": "baskets",
     "details": [
-     "casque_audio"
+     "badge"
     ],
-    "chapeau": "casquette",
-    "c_chapeau": "rouge",
-    "cheveux": "court",
-    "c_cheveux": "blond"
-   },
-   "envoyee": {
-    "haut": "polo",
-    "c_haut": "bordeaux",
-    "motif": "uni",
-    "bas": "pantalon",
-    "chaussures": "ville",
-    "details": [
-     "badge",
-     "boucles_oreilles",
-     "rouge_levres"
-    ],
-    "chapeau": "serre_tete",
-    "c_chapeau": "rose",
-    "cheveux": "queue",
-    "c_cheveux": "châtain"
+    "cheveux": "afro",
+    "c_cheveux": "noir"
    }
   },
   "personnages": {
    "presentateur": {
     "genre": "h",
-    "age": 34,
-    "corpulence": 0.6,
-    "cheveux": "court",
-    "barbe": "barbe_courte"
+    "age": 50,
+    "corpulence": 0.2,
+    "cheveux": "rase",
+    "barbe": "moustache"
    },
    "invite": {
     "genre": "h",
-    "age": 27,
-    "corpulence": 0.3,
-    "cheveux": "court"
-   },
-   "envoyee": {
-    "genre": "f",
-    "age": 30,
-    "corpulence": 0.3,
-    "cheveux": "queue"
+    "age": 20,
+    "corpulence": 0.2,
+    "cheveux": "afro"
    }
   },
   "gags": [
-   "CAISSE",
-   "DURÉE : 3H07 (SANS LA PUB)",
-   "PRESSING NON INCLUS"
+   "La fin de carrière de CR7 signifie la fin du football",
+   "Parking Leclerc – Little Angel exauce les vœux",
+   "Maman ne doit JAMAIS savoir"
   ],
-  "cadence": "rapide",
+  "ambiances": [
+   "neon"
+  ],
+  "objets": [
+   {
+    "replique": 0,
+    "objet": "telephone"
+   },
+   {
+    "replique": 2,
+    "objet": "telephone"
+   },
+   {
+    "replique": 7,
+    "objet": "bouteille"
+   },
+   {
+    "replique": 28,
+    "objet": "telephone"
+   },
+   {
+    "replique": 37,
+    "objet": "telephone"
+   },
+   {
+    "replique": 52,
+    "objet": "bouteille"
+   }
+  ],
   "plans": [
    {
     "replique": 0,
-    "plan": "contre_plongee",
-    "mouvement": "avance",
-    "geste": "poing",
-    "reaction": "sceptique"
+    "plan": "large",
+    "mouvement": "fixe",
+    "geste": "telephone",
+    "reaction": "aucune"
    },
    {
-    "replique": 3,
-    "plan": "moyen",
-    "mouvement": "fixe",
-    "geste": "pointe_d",
+    "replique": 2,
+    "plan": "tres_serre",
+    "mouvement": "zoom_choc",
+    "geste": "telephone",
     "reaction": "choc"
    },
    {
     "replique": 4,
     "plan": "serre",
-    "mouvement": "zoom_choc",
+    "mouvement": "avance",
     "geste": "stop",
-    "reaction": "rire"
+    "reaction": "sceptique"
    },
    {
-    "replique": 5,
-    "plan": "moyen",
-    "mouvement": "travelling",
+    "replique": 7,
+    "plan": "contre_plongee",
+    "mouvement": "zoom_choc",
+    "geste": "poing",
+    "reaction": "choc"
+   },
+   {
+    "replique": 10,
+    "plan": "serre",
+    "mouvement": "fixe",
     "geste": "explique",
+    "reaction": "gratte_tete"
+   },
+   {
+    "replique": 14,
+    "plan": "tres_serre",
+    "mouvement": "avance",
+    "geste": "supplie",
     "reaction": "gene"
    },
    {
-    "replique": 6,
+    "replique": 17,
+    "plan": "contre_plongee",
+    "mouvement": "fixe",
+    "geste": "pointe_d",
+    "reaction": "gene"
+   },
+   {
+    "replique": 19,
+    "plan": "tres_serre",
+    "mouvement": "avance",
+    "geste": "desespoir",
+    "reaction": "sceptique"
+   },
+   {
+    "replique": 22,
+    "plan": "serre",
+    "mouvement": "recul",
+    "geste": "bras_ouverts",
+    "reaction": "sceptique"
+   },
+   {
+    "replique": 26,
     "plan": "tres_serre",
     "mouvement": "zoom_choc",
-    "geste": "croises",
+    "geste": "telephone",
+    "reaction": "choc"
+   },
+   {
+    "replique": 27,
+    "plan": "serre",
+    "mouvement": "avance",
+    "geste": "supplie",
+    "reaction": "gene"
+   },
+   {
+    "replique": 30,
+    "plan": "moyen",
+    "mouvement": "fixe",
+    "geste": "gratte_tete",
+    "reaction": "regard_camera"
+   },
+   {
+    "replique": 36,
+    "plan": "large",
+    "mouvement": "fixe",
+    "geste": "haussement",
+    "reaction": "aucune"
+   },
+   {
+    "replique": 41,
+    "plan": "tres_serre",
+    "mouvement": "zoom_choc",
+    "geste": "stop",
+    "reaction": "choc"
+   },
+   {
+    "replique": 42,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "gratte_tete",
+    "reaction": "regard_camera"
+   },
+   {
+    "replique": 49,
+    "plan": "contre_plongee",
+    "mouvement": "avance",
+    "geste": "poing",
+    "reaction": "aucune"
+   },
+   {
+    "replique": 52,
+    "plan": "tres_serre",
+    "mouvement": "zoom_choc",
+    "geste": "pouce",
     "reaction": "regard_camera"
    }
   ]
  },
+ "doublage": {
+  "piste": "/tmp/tmph3ofqf45/piste.wav",
+  "duree": 89.89,
+  "source": "https://www.tiktok.com/@yan_animation0/video/7678832582833736993?_r=1&_t=ZN-9ATIuYQUToM",
+  "auteur": "yan_animation0",
+  "contexte": "Sur le parking du Leclerc, Kévin, un grand garçon naïf, appelle son père : une inconnue nommée Little Angel lui propose de monter dans sa voiture. Avachi sur son canapé miteux, le père, Jojo, oublie toutes ses leçons de prudence et le supplie, ému aux larmes, d'y aller.",
+  "evenements": [],
+  "visuel": {
+   "duree": 90.0,
+   "nb_plans": 36,
+   "duree_plan": 2.5,
+   "coupes": [
+    3.5,
+    6.0,
+    9.0,
+    12.5,
+    14.0,
+    20.0,
+    20.5,
+    22.0,
+    23.0,
+    27.0,
+    27.5,
+    33.0,
+    34.0,
+    40.5,
+    41.5,
+    52.5,
+    53.5,
+    62.0,
+    62.5,
+    63.0,
+    65.0,
+    66.5,
+    67.0,
+    68.5,
+    69.0,
+    71.0,
+    71.5,
+    75.0,
+    76.0,
+    79.5,
+    81.5,
+    84.0,
+    85.0,
+    88.5,
+    89.0
+   ],
+   "plans": {
+    "tres_serre": 0.244,
+    "serre": 0.039,
+    "moyen": 0.0,
+    "large": 0.717
+   },
+   "camera": {
+    "fixe": 1.0,
+    "avance": 0.0,
+    "recul": 0.0,
+    "travelling": 0.0,
+    "epaule": 0.0
+   },
+   "nb_personnes": 1,
+   "personnes": [
+    {
+     "place": "gauche",
+     "presence": 0.239,
+     "habit": [
+      102,
+      103,
+      143
+     ],
+     "cheveux": [
+      21,
+      13,
+      13
+     ],
+     "sourire": 0.0,
+     "taille": 0.332,
+     "tete_penchee": 1.5,
+     "regard_cote": 0.0
+    }
+   ],
+   "visages": true,
+   "sourires": 0.0,
+   "energie": 0.015,
+   "mur": [
+    177,
+    154,
+    139
+   ],
+   "palette": [
+    [
+     172,
+     147,
+     130,
+     0.252
+    ],
+    [
+     185,
+     163,
+     150,
+     0.207
+    ],
+    [
+     100,
+     73,
+     80,
+     0.198
+    ],
+    [
+     46,
+     40,
+     40,
+     0.133
+    ],
+    [
+     216,
+     230,
+     238,
+     0.114
+    ],
+    [
+     147,
+     113,
+     76,
+     0.096
+    ]
+   ],
+   "lumiere": {
+    "luminosite": 150.0,
+    "chaleur": 27.1,
+    "saturation": 63.9
+   },
+   "moment": "soir"
+  }
+ },
  "fiche": {
-  "fil": "Au guichet du cinéma, Jojo veut se faire rembourser sa place parce que le film était « trop long ». Lila, la caissière, ne cède pas. Kévin, son pote, veut l'aider et le coule. 1. Jojo exige d'être remboursé et Kévin le soutient : « C'est du vol ! » 2. Lila se moque d'un radin qui en a trop pour son argent. 3. Pour défendre Jojo, Kévin lâche qu'il dormait dès la pub. 4. Jojo essaie de le faire taire, mais Kévin ajoute qu'il a bavé sur son voisin, qui arrive derrière eux, la manche trempée. 5. Lila rembourse la place mais facture le pressing du voisin : au final, c'est Jojo qui doit de l'argent au cinéma.",
-  "concept": "« Remboursez-moi ! » : un radin veut faire payer sa sieste au cinéma. Son meilleur témoin le trahit sans le vouloir, et il repart en devant de l'argent.",
-  "format": "Scène de dessin animé au guichet d'un cinéma : un seul lieu, deux clients face à la caissière.",
-  "angle": "Kévin croit défendre Jojo, mais chacun de ses arguments est un aveu : Jojo a dormi, puis il a bavé. La demande de remboursement se transforme en facture.",
-  "resume_factuel": "Au guichet, Jojo réclame le remboursement de sa place parce que le film était trop long, alors qu'il a dormi pendant toute la séance.",
-  "faits_reels": [],
-  "inventions": [
-   "Toute la situation, les personnages et les répliques sont fictifs.",
-   "Le cinéma, le film de trois heures, le voisin couvert de bave et la facture de pressing sont inventés."
-  ],
+  "note": 0,
+  "decision": "vidéo manuelle (bande son d'une vidéo TikTok)",
   "decoupage": [
    {
-    "scene": "Guichet de cinéma. Lila, caissière avec un badge, est assise derrière la vitre. Jojo tape son ticket sur le comptoir, Kévin s'indigne à côté de lui. Quand Kévin parle de la bave, un voisin à la manche trempée entre dans le champ derrière eux. Lila glisse une facture sous la vitre et Jojo se décompos",
+    "scene": "1",
     "repliques": [
+     0,
      1,
      2,
      3,
      4,
      5,
-     6,
-     7
+     6
     ],
-    "lieu": "reconstitution",
-    "son": "rimshot",
-    "duree": 17.0,
-    "decor": "a cinema ticket counter with a glass window and a small speaking hole, a movie poster showing '3H07' in huge letters, a big popcorn machine",
-    "titre": "Remboursez-moi !"
+    "lieu": "",
+    "son": "",
+    "duree": 0.0,
+    "decor": "Supermarket parking lot by a country road at dusk, grey asphalt with white lines, a black car parked on the side, green hills in the background",
+    "titre": "Parking du Leclerc"
+   },
+   {
+    "scene": "2",
+    "repliques": [
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     14,
+     15,
+     16,
+     17,
+     18,
+     19,
+     20,
+     21,
+     22,
+     23,
+     24,
+     25,
+     26,
+     27
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 0.0,
+    "decor": "Shabby living room, stained purple sofa with crumpled tissues, framed football poster on the wall, round wall clock",
+    "titre": "Pendant ce temps, sur le canapé"
+   },
+   {
+    "scene": "3",
+    "repliques": [
+     28,
+     29,
+     30,
+     31,
+     32,
+     33,
+     34,
+     35,
+     36
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 0.0,
+    "decor": "Supermarket parking lot by a country road at dusk, grey asphalt with white lines, a black car with open door, green hills in the background"
+   },
+   {
+    "scene": "4",
+    "repliques": [
+     37,
+     38,
+     39,
+     40,
+     41,
+     42,
+     43,
+     44,
+     45,
+     46,
+     47,
+     48,
+     49,
+     50,
+     51,
+     52
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 0.0,
+    "decor": "Shabby living room, stained purple sofa with crumpled tissues, framed football poster on the wall, round wall clock, energy drink can"
    }
-  ],
-  "titres_sujet": [
-   "Jojo essaie de se faire rembourser un ticket de cinéma parce que le film était trop long"
-  ],
-  "verification_web": false,
-  "note": 66.4,
-  "critique": "AVIS DU PUBLIC TEST (spectateurs sans contexte) :\n- Inès : N A PAS COMPRIS, rire 2/10, aurait scrollé à la réplique 2, perdu par : Les répliques 0 et 1 sont une plainte banale, sans accroche. La réplique 2 est une phrase tordue (« un radin qui en a trop pour son argent ») que je ne comprends pas à la première écoute. Je n'ai pas vu venir la chute, donc j'ai scrollé avant. Le titre « POV » ne me dit pas quel est mon rôle.\n- Karim : a compris, rire 6/10, perdu par : Je lis les sous-titres. La réplique 2 est illisible vite et ne veut rien dire. Le tiret de la réplique 3 et la réplique 4 enchaînent trop vite. Je ne sais pas qui est Kévin (un pote ? un fils ?) ni qui est Lila (la caissière ?). Je l'ai compris seulement à la fin.\n- Sandrine : a compris, rire 4/10, perdu par : Je ne connais pas « POV », donc le titre ne m'aide pas. Je ne sais pas qui parle à qui, ni où ils sont, ni qui est Lila. La réplique 2 m'a perdue. J'ai compris la chute parce que le calcul est simple, mais j'ai dû revoir le début dans ma tête.\nCritiques constructives du public :\n- Réplique 2 : réécrire la phrase pour qu'elle soit comprise du premier coup. Par exemple : « Un client qui se plaint que c'est trop long alors qu'il a payé sa place ? Jamais vu. » Aujourd'hui, « un radin qui en a trop pour son argent » ne veut rien dire et c'est là que le public décroche.\n- Réplique 0 : mettre un accroche plus forte dans les deux premières secondes, par exemple « Madame, je veux être remboursé : j'ai dormi tout le fil",
-  "decision": "à retravailler"
+  ]
  },
+ "_monte": true,
  "_voix_hz": {
-  "narrateur": 279,
-  "invite": 204,
-  "envoyee": 242,
-  "presentateur": 235
+  "invite": 174,
+  "presentateur": 159
  },
  "realisation": {
   "moment": "soir",
   "lieux": [
-   "hall"
+   "rue",
+   "salon",
+   "rue",
+   "salon"
   ],
   "gags": [
-   "CAISSE",
-   "DURÉE : 3H07 (SANS LA PUB)",
-   "PRESSING NON INCLUS"
+   "La fin de carrière de CR7 signifie la fin du football",
+   "Parking Leclerc – Little Angel exauce les vœux",
+   "Maman ne doit JAMAIS savoir"
   ],
   "ambiances": [
+   "neige",
+   "neon",
+   "pluie",
    "poussiere"
   ],
-  "source": "auteur",
+  "source": "auteur+image",
   "tenues": {
-   "presentateur": "doudoune",
-   "invite": "capuche",
-   "envoyee": "polo"
+   "invite": "chemise",
+   "presentateur": "debardeur"
   },
   "plans": [
-   "contre_plongee/avance",
-   "contre_plongee/epaule",
+   "large/fixe",
    "moyen/fixe",
-   "moyen/fixe",
-   "serre/zoom_choc",
-   "moyen/travelling",
    "tres_serre/zoom_choc",
-   "serre/avance"
+   "epaule/fixe",
+   "serre/avance",
+   "epaule/fixe",
+   "epaule/fixe",
+   "contre_plongee/zoom_choc",
+   "moyen/fixe",
+   "epaule/fixe",
+   "serre/fixe",
+   "epaule/fixe",
+   "large/fixe",
+   "tres_serre/zoom_choc",
+   "tres_serre/avance",
+   "large/fixe",
+   "epaule/fixe",
+   "contre_plongee/fixe",
+   "large/fixe",
+   "tres_serre/avance",
+   "moyen/fixe",
+   "moyen/fixe",
+   "serre/recul",
+   "large/fixe",
+   "epaule/fixe",
+   "epaule/fixe",
+   "tres_serre/zoom_choc",
+   "serre/avance",
+   "large/recul",
+   "large/fixe",
+   "moyen/fixe",
+   "moyen/fixe",
+   "large/fixe",
+   "epaule/fixe",
+   "large/fixe",
+   "moyen/fixe",
+   "large/fixe",
+   "large/recul",
+   "epaule/fixe",
+   "moyen/fixe",
+   "moyen/fixe",
+   "tres_serre/zoom_choc",
+   "serre/fixe",
+   "moyen/fixe",
+   "tres_serre/zoom_choc",
+   "large/fixe",
+   "tres_serre/zoom_choc",
+   "tres_serre/zoom_choc",
+   "moyen/fixe",
+   "contre_plongee/avance",
+   "large/fixe",
+   "large/fixe",
+   "tres_serre/zoom_choc"
   ]
  }
 }
