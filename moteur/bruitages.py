@@ -49,7 +49,7 @@ CATALOGUE = {
 
 # déclencheurs par mots (la réplique contient…) : (expression, bruitage, au moment du mot)
 MOTS = [
-    (r"\b(euros?|balles|argent|pay[ée]?r?|rembours\w*|prix|cher|ch[èe]re|fric|thunes?|salaire|facture|cr[ée]dit|banque)\b|€", "caisse"),
+    (r"\b(euros?|centimes?|balles|argent|pay[ée]?r?|rembours\w*|prix|cher|ch[èe]re|fric|thunes?|salaire|facture|cr[ée]dit|banque)\b|€", "caisse"),
     (r"\b(photos?|selfies?|flash|film[ée]|story|preuves?)\b", "flash"),
     (r"\b(mot de passe|ordi\w*|clavier|mails?|tap[ée]r?|code|connexion|compte)\b", "clavier"),
     (r"\b(bug\w*|beug\w*|bloqu\w*|plant[ée]\w*|erreur|wifi|r[ée]seau|appli)\b", "glitch"),
@@ -108,18 +108,22 @@ def choisir(ph, silences=(), graine=0, imposes=None, duree=None, densite=None):
         if q["i"] in imposes:                                               # choix de Claude
             ajoute(imposes[q["i"]], q["fin"] + 0.05); continue
         if j == len(ph) - 1: continue                                        # chute finale : déjà son gros impact
-        if q.get("chute"):
+        fin_scene = j + 1 < len(ph) and ph[j + 1].get("scene") != q.get("scene")   # dernière réplique d'une scène = une vanne
+        if q.get("chute") or fin_scene:
             ajoute(CHUTES[h % len(CHUTES)], q["fin"] + 0.08); continue
         fait = False
         for motif, nom in MOTS:
             m = re.search(motif, (q.get("texte") or "").lower())
-            if m and h % 3:                                                  # pas systématique : 2 fois sur 3
+            if m:
                 fait = ajoute(nom, _instant(q, m.start()) if nom in ("caisse", "flash", "glitch", "boing") else
                               (q["deb"] + 0.1 if nom == "clavier" else q["fin"] + 0.05))
                 if fait: break
         if not fait and q.get("emo") in EMOTIONS and h % 2 == 0:
             choix = EMOTIONS[q["emo"]]; nom = choix[h % len(choix)]
-            ajoute(nom, q["deb"] + 0.05 if nom in ("dents", "bouilloire") else q["fin"] + 0.05)
+            fait = ajoute(nom, q["deb"] + 0.05 if nom in ("dents", "bouilloire") else q["fin"] + 0.05)
+        texte = (q.get("texte") or "").rstrip()
+        if not fait and texte.endswith("!") and h % 2 == 0:                  # réplique lancée avec force : petit accent
+            ajoute(("bulle", "boing", "vine_boom")[h % 3], q["fin"] + 0.05)
     for k, (a, b, *_r) in enumerate(silences):                               # blanc gênant
         if b - a >= 0.8: ajoute(SILENCE[(graine + k) % len(SILENCE)], a + 0.15)
     return out
