@@ -613,8 +613,20 @@ class TestVideoComplete(unittest.TestCase):
         sortie = os.path.join(tempfile.mkdtemp(), "v.mp4")
         total = cartoon.rendre(sk, sortie, auds, mini=True)
         self.assertGreater(total, 3); self.assertTrue(os.path.getsize(sortie) > 50000)
+        self.assertTrue(0 < cartoon.COUVERTURE < total)                                        # instant de couverture choisi
         r = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "stream=codec_type", "-of", "csv=p=0", sortie], capture_output=True, text=True)
         self.assertIn("video", r.stdout); self.assertIn("audio", r.stdout)
+
+class TestAccroches(unittest.TestCase):
+    def test_deux_styles_departages_par_les_vues(self):
+        sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "moteur"))
+        import accroches
+        sk = {"titre_accroche": "POV : tu commandes de l'eau au bar", "question": "Toi aussi tu fais ça ?"}
+        self.assertEqual(set(accroches.variantes(sk)), {"pov", "question"})
+        h = [{"style_accroche": "pov", "fichier": f"p{k}"} for k in range(3)] + [{"style_accroche": "question", "fichier": f"q{k}"} for k in range(3)]
+        vues = {**{f"p{k}": 100 for k in range(3)}, **{f"q{k}": 900 for k in range(3)}}
+        s2 = dict(sk); self.assertEqual(accroches.choisir(s2, h, vues, hasard=lambda: 0.9), "question"); self.assertEqual(s2["titre_accroche"], "Toi aussi tu fais ça ?")
+        s3 = dict(sk); self.assertIn(accroches.choisir(s3, [], {}, hasard=lambda: 0.9), ("pov", "question"))   # sans vues : on alterne
 
 class TestSecours(unittest.TestCase):
     """Sans crédit Claude : bascule automatique sur la réserve de sketchs déjà écrits."""

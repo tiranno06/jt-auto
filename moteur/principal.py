@@ -203,6 +203,12 @@ def main():
     if num:                                                                # fin d'épisode : rendez-vous pour la suite (série)
         total_ep = len(serie.etat().get("plan") or []) or serie.taille()
         sk["suite"] = f"Épisode {num + 1} bientôt : abonne-toi !" if num < total_ep else "Fin de la saison : abonne-toi !"
+    style_acc = None
+    if not DOUB and not sk.get("_monte"):                                  # deux styles d'accroche départagés par les vues
+        try:
+            import accroches; style_acc = accroches.choisir(sk, historique)
+            if style_acc: print(f"Accroche ({style_acc}) : « {sk['titre_accroche']} »", flush=True)
+        except Exception as e: print(f"Accroche : {e}", flush=True)
     if libre and sk.get("titre_accroche") and os.environ.get("VOIX_OFF", "1") != "0" and not sk.get("_monte") and (os.environ.get("RENDU") or "") != "realiste":
         titre_lu = sk["titre_accroche"].strip()                             # voix off d'ouverture : elle lit le titre « POV : … »
         if num: titre_lu = f"Épisode {num}. {titre_lu}"
@@ -285,7 +291,7 @@ def main():
                 sk["realisation"] = {k: B_[k] for k in ("moment", "lieux", "gags", "ambiances", "source")}
                 sk["realisation"]["tenues"] = {r: c.get("haut") for r, c in B_["costumes"].items()}
                 sk["realisation"]["plans"] = [f"{q.get('plan')}/{q.get('mouvement')}" for q in cartoon.PH]
-                studio.memoriser(B_, cartoon.PH, duree, rapport_video or ("ok" if video_ok else ""))
+                studio.memoriser(B_, cartoon.PH, duree, rapport_video or ("ok" if video_ok else ""), fichier=os.path.basename(base) + ".mp4")
             if sk.get("doublage") and not test:                            # banque visuelle : ce qu'on a vu dans la vidéo d'origine et ce qu'on en a fait
                 import banque_visuelle
                 banque_visuelle.ajouter(sk["doublage"], sk.get("studio"), sk.get("realisation"), os.path.basename(base) + ".mp4")
@@ -310,6 +316,7 @@ def main():
                            accroche=accroche_hist, mots=sorted(actu._mots(" ".join(fiche.get("titres_sujet") or [t["titre"] for t in titres])))[:40],
                            empreinte=sorted(actu.empreinte(" ".join((fiche.get("titres_sujet") or []) + [sk["sujet"]] + [r["t"] for r in sk.get("repliques", [])]))), voix=moteur, gag=bool(gag), controle_video=rapport_video[:500] or ("ok" if video_ok else ""), running_gag=sk.get("running_gag", ""), duree=round(duree, 1),
                            fichier=os.path.basename(base) + ".mp4", tag=f"emissions-{jour[:7]}", legende=legende, publie=None,
+                           style_accroche=style_acc, couverture_ms=int((getattr(sys.modules.get("cartoon"), "COUVERTURE", None) or 2.5) * 1000),
                            outils=dict(claude=("secours" if SECOURS else CREDITS["claude"]),
                                        voix=("tiktok" if DOUB else "elevenlabs" if "eleven" in str(moteur).lower() else "chatterbox" if "chatterbox" in str(moteur).lower() else "piper"),
                                        decors=("ia" if decors else "dessines"))))

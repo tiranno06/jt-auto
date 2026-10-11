@@ -140,6 +140,12 @@ Les consignes envoyées à Claude (doublage d'une vidéo TikTok et sketchs écri
 ## Style cinéma (toujours en dessin animé)
 Chaque vidéo tire au hasard ses effets (pour varier d'une vidéo à l'autre, en mélange avec le style d'avant) : mise au point qui glisse sur celui qui parle (l'autre devient flou dans les plans moyens), effet vertige sur les moments de choc (le personnage avance, le décor recule), règle des tiers dans les plans serrés, couleur de l'image selon l'émotion (chaude, froide, rouge de colère), trois couches de profondeur (décor, figurants, feuillage flou au premier plan), grain de film léger et reflets de lumière, son de cinéma (ambiance du lieu, pas, whoosh sur les passages rapides, musique de fond discrète qui suit l'humeur), sous-titres qui rebondissent et tremblent quand on crie. En mode payant, Claude peut choisir ces effets (« cine » dans la direction artistique).
 
+## Couverture, accroches et apprentissage
+- **Couverture TikTok** : le moteur choisit l'instant où le titre est visible et le visage le plus expressif ; Buffer l'utilise comme image de couverture et le site comme vignette.
+- **Deux styles d'accroche** (« POV : … » ou une question au spectateur) : chaque vidéo en prend un, les vues TikTok départagent peu à peu les deux styles (le meilleur sort plus souvent, l'autre reste essayé de temps en temps).
+- **Les vidéos qui marchent servent de modèle** : la banque visuelle reprend le rythme et les cadrages des vidéos les plus vues, et les effets cinéma présents dans les vidéos les plus vues reviennent plus souvent.
+- **Aperçu avant publication** : coupe « Publication automatique » dans ⚙️ Réglages → Publication ; chaque vidéo attend alors sur le site (⏸ En attente de validation) avec le bouton Publier.
+
 ## Animation des personnages
 Élan et rebond dans les gestes, cheveux et vêtements qui suivent (mouvements secondaires), poids du corps qui change de jambe, vraie marche à l'entrée, visage tourné de trois quarts vers celui à qui on parle, personnages assis sur une chaise dans les lieux qui s'y prêtent, clignements et regard vers celui qui parle, micro-mouvements des sourcils, mains qui « battent » sur les mots appuyés, réactions juste après le mot qui frappe, gestes à deux (main sur l'épaule, « tope là », donner un objet, pousser) avec des mains qui atteignent vraiment l'autre.
 

@@ -291,7 +291,7 @@ def bible(sk, roles):
         lieux.append(l or DD.lieu_de(decor_sc, "") or DD.lieu_de(texte_sc, "") or DD.lieu_de(t_low, "salon"))
     gags = [str(g)[:80] for g in (S.get("gags") or []) if str(g).strip()][:4]
     # effets « cinéma » de l'épisode : tirés au hasard (graine de l'épisode) pour varier d'une vidéo à l'autre, mêlés au style d'avant
-    cine = {k: bool(rng.random() < p_) for k, p_ in CINE_PROBA.items()}
+    cine = {k: bool(rng.random() < p_) for k, p_ in proba_cine().items()}  # les effets des vidéos qui marchent reviennent plus souvent
     if isinstance(S.get("cine"), dict): cine.update({k: bool(v) for k, v in S["cine"].items() if k in CINE_PROBA})   # choix de Claude (mode payant)
     assis = {}                                                             # qui est assis (bureau, salon, guichet…) : une chaise est dessinée avec lui
     for k_, l_ in enumerate(lieux):
@@ -468,6 +468,20 @@ def realiser(ph, places, B):
     return ph
 
 CINE_PROBA = {"focus": 0.8, "vertige": 0.7, "tiers": 0.65, "etalonnage": 0.9, "profondeur": 0.8, "grain": 0.7, "reflets": 0.5, "son": 1.0}
+def proba_cine():
+    """Probabilités des effets cinéma, ajustées par les vues TikTok : un effet présent dans les vidéos les plus vues revient plus souvent."""
+    p = dict(CINE_PROBA)
+    try:
+        import banque_visuelle; vues = banque_visuelle._vues()
+        m = [(e.get("cine") or {}, vues[e["fichier"]]) for e in _memoire() if e.get("fichier") in vues and e.get("cine")]
+        for k in p:
+            avec = [v for c, v in m if c.get(k)]; sans = [v for c, v in m if not c.get(k)]
+            if len(avec) >= 3 and len(sans) >= 3:
+                r = (sum(avec) / len(avec) + 1) / (sum(sans) / len(sans) + 1)
+                p[k] = float(np.clip(p[k] * r ** 0.5, 0.15, 0.95))
+    except Exception: pass
+    return p
+
 LIEUX_ASSIS = ("bureau", "salon", "restaurant", "administration", "classe", "bar", "cabinet_medical", "palais")
 # gestes à deux, déclenchés par les mots de la réplique (le personnage s'approche, sa main atteint vraiment l'autre)
 GESTES_DUO = [("tope", r"\b(tope|bravo|yes|trop bien|on l'a fait|g[ée]nial|check|bien jou[ée])\b"),
@@ -636,14 +650,14 @@ def _memoire():
 def memoire_recente(cle):
     m = _memoire(); return (m[-1].get(cle) if m else None)
 
-def memoriser(B, ph, duree, controle=""):
+def memoriser(B, ph, duree, controle="", fichier=None):
     """Ce qui a été tourné (pour varier les prochaines vidéos et comparer avec les vues) : 200 dernières vidéos."""
     m = _memoire()
     from collections import Counter
     m.append(dict(moment=B.get("moment"), lieux=B.get("lieux"), source=B.get("source"), duree=round(float(duree or 0), 1),
                   plans=dict(Counter(q.get("plan") for q in ph)), mouvements=dict(Counter(q.get("mouvement") for q in ph)),
                   costumes={r: c.get("haut") for r, c in (B.get("costumes") or {}).items()}, figurants=len(B.get("figurants") or []),
-                  ambiances=B.get("ambiances"), controle=str(controle)[:200]))
+                  ambiances=B.get("ambiances"), controle=str(controle)[:200], fichier=fichier, cine=B.get("cine"), cadence=B.get("cadence")))
     try:
         os.makedirs(os.path.dirname(MEMOIRE), exist_ok=True)
         with open(MEMOIRE, "w", encoding="utf-8") as f: json.dump(m[-200:], f, ensure_ascii=False, indent=1)

@@ -26,6 +26,7 @@ from jt import minutage, carton, son, vers_mix, enveloppe, poser, pop, W, H, FPS
 CAP_Y = 1700
 MINUTAGE = []                                                              # (début, fin, texte, qui) de la dernière vidéo : contrôle qualité
 PH = []                                                                    # répliques de la dernière vidéo avec leur plan (mémoire du studio)
+COUVERTURE = None                                                          # instant (s) choisi pour l'image de couverture TikTok
 COUVERTURE_MS = [2500]                                                     # instant de l'image de couverture (millisecondes)
 DETAIL = (os.environ.get("RENDU_DETAILLE") or "1") != "0"                 # réglage de la régie : rendu détaillé (studio) ou simple
 HUMAINS = DETAIL and (os.environ.get("PERSONNAGES") or "humains") == "humains"   # personnages adultes (casting libre) ou marionnettes
@@ -564,6 +565,12 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             if o is not None: p["main_d"] = o; p["bras_d"] = (120, -100); p["main_forme_d"] = "poing"
         return p
 
+    global COUVERTURE                                                      # couverture : titre visible et visage le plus expressif
+    fortes = [z for z in ph if z["emo"] in ("choc", "cri", "colere", "panique", "rire", "joie") and z["p"] != "narrateur"]
+    if ph and ph[0]["p"] == "narrateur" and mini: COUVERTURE = ph[0]["deb"] + 0.6
+    elif fortes: COUVERTURE = t_reaction(fortes[0]) + 0.15
+    else: COUVERTURE = (ph[-1]["fin"] + 0.45) if ph else 1.0
+    COUVERTURE = round(float(COUVERTURE), 2)
     CARTES = {k: carte(tr[4]) for k, tr in enumerate(transitions) if tr[2] == "carton"}
     GELEE = {}
 

@@ -21,8 +21,8 @@ def recuperer(e, dest):
     if r.returncode: print(f"  vidéo introuvable {e['fichier']} : {r.stderr.strip()[:200]}")
     return os.path.exists(dest)
 
-def affiche(video, image):
-    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-ss", "4", "-i", video, "-frames:v", "1",
+def affiche(video, image, t=4.0):
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-ss", f"{t:.2f}", "-i", video, "-frames:v", "1",
                     "-vf", "scale=360:-2", "-q:v", "4", image])
 
 def origine(e):
@@ -44,7 +44,7 @@ def construire():
         comptes[cat] = comptes.get(cat, 0) + 1
         dest = os.path.join(SITE, "videos", e["fichier"])
         if not recuperer(e, dest): continue
-        poster = e["fichier"].replace(".mp4", ".jpg"); affiche(dest, os.path.join(SITE, "videos", poster))
+        poster = e["fichier"].replace(".mp4", ".jpg"); affiche(dest, os.path.join(SITE, "videos", poster), (e.get("couverture_ms") or 4000) / 1000)
         liste.append(dict(titre=e.get("titre", ""), date=e.get("date", ""), fichier=e["fichier"], poster=poster, origine=origine(e),
                           legende=e.get("legende", ""), publie=e.get("publie"), vues=e.get("vues"),
                           format=e.get("format", ""), manuel=bool(e.get("manuel")), avis=e.get("avis", 0), note=e.get("note"),
