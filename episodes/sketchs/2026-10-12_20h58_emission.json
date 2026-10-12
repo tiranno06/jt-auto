@@ -1,0 +1,240 @@
+{
+ "sujet": "Le réveillon de Jojo",
+ "titre": "LE RÉVEILLON DE JOJO",
+ "titre_accroche": "POV : c'est ton copain qui organise Noël",
+ "legende": "Une dinde très jeune, une enveloppe vide, et une écharpe qui voyage.",
+ "question": "Qui organise le réveillon dans votre famille ?",
+ "hashtags": [
+  "petitsdramas",
+  "humour",
+  "pov",
+  "noel",
+  "reveillon",
+  "radin",
+  "famille"
+ ],
+ "repliques": [
+  {
+   "p": "narrateur",
+   "t": "POV : c'est ton copain qui organise Noël",
+   "d": "[excited] Pi-o-vi : c'est ton copain qui organise Noël"
+  },
+  {
+   "p": "envoyee",
+   "t": "Jojo, tu devais acheter une dinde pour douze personnes."
+  },
+  {
+   "p": "presentateur",
+   "t": "Et voilà. La dinde."
+  },
+  {
+   "p": "envoyee",
+   "t": "C'est un poulet, Jojo. Un tout petit poulet."
+  },
+  {
+   "p": "presentateur",
+   "t": "C'est une dinde très jeune. On coupera des parts très fines, avec beaucoup de sauce."
+  },
+  {
+   "p": "invite",
+   "t": "Joyeux Noël ! Jojo, voilà ton cadeau !",
+   "objet": "cadeau"
+  },
+  {
+   "p": "presentateur",
+   "t": "Merci, Kévin. Une écharpe… C'est celle que je t'ai offerte l'an dernier."
+  },
+  {
+   "p": "invite",
+   "t": "Je sais. Elle est trop belle pour moi, elle te va mieux."
+  },
+  {
+   "p": "presentateur",
+   "t": "Tiens, voilà le tien. Une enveloppe.",
+   "objet": "lettre"
+  },
+  {
+   "p": "invite",
+   "t": "Elle est vide ?"
+  },
+  {
+   "p": "presentateur",
+   "t": "C'est un bon pour un cadeau. Valable le jour où je serai riche."
+  },
+  {
+   "p": "envoyee",
+   "t": "À table ! Jojo, elle est où, la dinde ?"
+  },
+  {
+   "p": "presentateur",
+   "t": "Le chat de la voisine est entré par la fenêtre. Il est reparti avec."
+  },
+  {
+   "p": "invite",
+   "t": "Pas de panique ! J'ai apporté une pizza !",
+   "objet": "pizza"
+  },
+  {
+   "p": "envoyee",
+   "t": "Kévin, pour une fois, tu nous sauves."
+  },
+  {
+   "p": "invite",
+   "t": "Jojo, tu me rembourses ta part ? Douze euros."
+  },
+  {
+   "p": "presentateur",
+   "t": "Je te rends l'écharpe. On est quittes.",
+   "chute": true
+  }
+ ],
+ "decoupage": [
+  {
+   "scene": "1",
+   "repliques": [
+    1,
+    2,
+    3,
+    4
+   ],
+   "lieu": "",
+   "son": "",
+   "duree": 0,
+   "decor": "kitchen decorated for Christmas with a tiny chicken on a big plate"
+  },
+  {
+   "scene": "2",
+   "repliques": [
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "lieu": "",
+   "son": "",
+   "duree": 0,
+   "decor": "living room with a Christmas tree and gifts under it"
+  },
+  {
+   "scene": "3",
+   "repliques": [
+    11,
+    12,
+    13,
+    14,
+    15,
+    16
+   ],
+   "lieu": "",
+   "son": "",
+   "duree": 0,
+   "decor": "living room with a set dinner table for a Christmas meal and an open window"
+  }
+ ],
+ "sources": [],
+ "gag": null,
+ "verite": "",
+ "running_gag": "",
+ "bandeau": [],
+ "fiche": {
+  "note": 0,
+  "decision": "sketch de secours (Claude indisponible : crédit épuisé ?)",
+  "decoupage": [
+   {
+    "scene": "1",
+    "repliques": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 0,
+    "decor": "kitchen decorated for Christmas with a tiny chicken on a big plate"
+   },
+   {
+    "scene": "2",
+    "repliques": [
+     5,
+     6,
+     7,
+     8,
+     9,
+     10
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 0,
+    "decor": "living room with a Christmas tree and gifts under it"
+   },
+   {
+    "scene": "3",
+    "repliques": [
+     11,
+     12,
+     13,
+     14,
+     15,
+     16
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 0,
+    "decor": "living room with a set dinner table for a Christmas meal and an open window"
+   }
+  ]
+ },
+ "_voix_hz": {
+  "narrateur": 315,
+  "invite": 136,
+  "presentateur": 166,
+  "envoyee": 241
+ },
+ "_voix_genre": {
+  "narrateur": "f",
+  "invite": "h",
+  "presentateur": "h",
+  "envoyee": "f"
+ },
+ "realisation": {
+  "moment": "jour",
+  "lieux": [
+   "cuisine",
+   "salon",
+   "salon"
+  ],
+  "gags": [],
+  "ambiances": [
+   "neige",
+   "vapeur"
+  ],
+  "source": "robot",
+  "tenues": {
+   "envoyee": "tablier",
+   "presentateur": "capuche",
+   "invite": "capuche"
+  },
+  "plans": [
+   "large/fixe",
+   "moyen/fixe",
+   "moyen/fixe",
+   "moyen/fixe",
+   "epaule/fixe",
+   "large/recul",
+   "large/fixe",
+   "large/fixe",
+   "moyen/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/recul",
+   "moyen/fixe",
+   "tres_serre/zoom_choc",
+   "large/fixe",
+   "large/fixe",
+   "serre/avance"
+  ]
+ }
+}

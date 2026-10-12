@@ -395,5 +395,51 @@
    "son": true
   },
   "cadence": null
+ },
+ {
+  "moment": "jour",
+  "lieux": [
+   "cuisine",
+   "salon",
+   "salon"
+  ],
+  "source": "robot",
+  "duree": 61.5,
+  "plans": {
+   "large": 9,
+   "moyen": 5,
+   "epaule": 1,
+   "tres_serre": 1,
+   "serre": 1
+  },
+  "mouvements": {
+   "fixe": 13,
+   "recul": 2,
+   "zoom_choc": 1,
+   "avance": 1
+  },
+  "costumes": {
+   "envoyee": "tablier",
+   "presentateur": "capuche",
+   "invite": "capuche"
+  },
+  "figurants": 0,
+  "ambiances": [
+   "neige",
+   "vapeur"
+  ],
+  "controle": "ok",
+  "fichier": "2026-10-12_20h58_emission.mp4",
+  "cine": {
+   "focus": true,
+   "vertige": true,
+   "tiers": false,
+   "etalonnage": true,
+   "profondeur": true,
+   "grain": false,
+   "reflets": false,
+   "son": true
+  },
+  "cadence": null
  }
 ]
