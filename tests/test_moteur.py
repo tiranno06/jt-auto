@@ -772,7 +772,7 @@ class TestRelaisIA(unittest.TestCase):
         class Rep(io.BytesIO): pass
         def faux_urlopen(req, timeout=0):
             corps = _j.loads(req.data.decode()); appels.append((req.full_url, corps))
-            if "mistral" in req.full_url: raise urllib.error.HTTPError(req.full_url, 429, "quota", {}, io.BytesIO(b"rate limit exceeded"))
+            if "mistral" in req.full_url: raise urllib.error.HTTPError(req.full_url, 429, "quota", {}, io.BytesIO(b"monthly quota exceeded"))
             if "tools" not in corps:
                 return Rep(_j.dumps({"choices": [{"message": {"content": "ok"}, "finish_reason": "stop"}], "usage": {}}).encode())
             outil = corps["tools"][0]["function"]
@@ -788,8 +788,9 @@ class TestRelaisIA(unittest.TestCase):
                 @staticmethod
                 def create(**kw): raise RuntimeError("Your credit balance is too low")
         avant = {k: os.environ.get(k) for k in ("MISTRAL_API_KEY", "GEMINI_API_KEY", "CLAUDE_INDISPONIBLE")}
-        vieux = urllib.request.urlopen, sys.modules.get("anthropic")
+        vieux = urllib.request.urlopen, sys.modules.get("anthropic"), reseau.time.sleep
         try:
+            reseau.time.sleep = lambda s: None
             os.environ.update(MISTRAL_API_KEY="m", GEMINI_API_KEY="g"); os.environ.pop("CLAUDE_INDISPONIBLE", None)
             urllib.request.urlopen = faux_urlopen; sys.modules["anthropic"] = types.SimpleNamespace(Anthropic=FauxAnthropic)
             reseau.HORS_SERVICE.clear(); reseau.UTILISES.clear()
@@ -803,7 +804,7 @@ class TestRelaisIA(unittest.TestCase):
             r2 = reseau.claude().messages.create(model="x", max_tokens=50, messages=[{"role": "user", "content": "texte seul"}])   # Mistral à 429 : Gemini
             self.assertIn("mistral", reseau.HORS_SERVICE); self.assertEqual(reseau.UTILISES["gemini"], 2)
         finally:
-            urllib.request.urlopen = vieux[0]
+            urllib.request.urlopen = vieux[0]; reseau.time.sleep = vieux[2]
             if vieux[1] is not None: sys.modules["anthropic"] = vieux[1]
             reseau.HORS_SERVICE.clear(); reseau.UTILISES.clear()
             for k, v in avant.items():

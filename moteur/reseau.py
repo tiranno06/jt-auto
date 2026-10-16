@@ -93,17 +93,23 @@ def _appel_openai(fourn, kw):
         corps["tool_choice"] = ("any" if fourn == "mistral" else "required") if (tc.get("type") in ("tool", "any") or len(outils) == 1) else "auto"
     derniere = None
     for modele in F["images" if images else "texte"]:
-        corps["model"] = modele
-        req = urllib.request.Request(F["url"], data=json.dumps(corps).encode(), method="POST",
-                                     headers={"Authorization": f"Bearer {cle}", "Content-Type": "application/json"})
-        try:
-            d = json.loads(urllib.request.urlopen(req, timeout=240).read())
-        except urllib.error.HTTPError as e:
-            derniere = e; corps_err = e.read()[:300].decode("utf-8", "ignore")
-            if e.code in (404, 400) and "model" in corps_err.lower(): continue          # modèle inconnu : le suivant
-            if e.code == 400 and outils and "tool" in corps_err.lower() and "tool_choice" in corps:
-                corps.pop("tool_choice", None); continue
-            raise RuntimeError(f"{fourn} {e.code} : {corps_err}")
+        corps["model"] = modele; d = None
+        for essai in range(4):
+            _attendre(fourn)
+            req = urllib.request.Request(F["url"], data=json.dumps(corps).encode(), method="POST",
+                                         headers={"Authorization": f"Bearer {cle}", "Content-Type": "application/json"})
+            try:
+                d = json.loads(urllib.request.urlopen(req, timeout=240).read()); break
+            except urllib.error.HTTPError as e:
+                derniere = e; corps_err = e.read()[:300].decode("utf-8", "ignore"); bas = corps_err.lower()
+                if e.code in (404, 400) and "model" in bas: d = "suivant"; break            # modèle inconnu : le suivant
+                if e.code == 400 and outils and "tool" in bas and "tool_choice" in corps: corps.pop("tool_choice", None); continue
+                if e.code == 429 and not any(m in bas for m in ("quota", "exhausted", "billing")) and essai < 3:
+                    time.sleep(2.0 * (essai + 1)); continue                             # trop de demandes à la seconde : on patiente
+                if e.code in (500, 502, 503, 504) and essai < 2: time.sleep(3.0 * (essai + 1)); continue   # serveur saturé un instant
+                if e.code in (500, 502, 503, 504): d = "suivant"; break                  # toujours saturé : modèle suivant
+                raise RuntimeError(f"{fourn} {e.code} : {corps_err}")
+        if d == "suivant" or d is None: continue
         msg = (d.get("choices") or [{}])[0].get("message") or {}
         blocs = []
         if msg.get("content"):
@@ -121,6 +127,16 @@ def _appel_openai(fourn, kw):
                    usage=_NS(input_tokens=u.get("prompt_tokens", 0), output_tokens=u.get("completion_tokens", 0), cache_read_input_tokens=0,
                              cache_creation_input_tokens=0, server_tool_use=None), model=f"{fourn}:{modele}", gratuit=True)
     raise RuntimeError(f"{fourn} : aucun modèle disponible ({derniere})")
+
+
+_DERNIER = {}
+PAUSE_MIN = {"mistral": 1.2, "gemini": 0.5}                                 # Mistral gratuit : une demande par seconde au plus
+
+
+def _attendre(fourn):
+    t = time.time() - _DERNIER.get(fourn, 0)
+    if t < PAUSE_MIN.get(fourn, 0): time.sleep(PAUSE_MIN[fourn] - t)
+    _DERNIER[fourn] = time.time()
 
 
 def ordre_ia(images=False):
@@ -153,7 +169,7 @@ class _Messages:
                 import secours
                 txt = str(e).lower()
                 if f == "claude" and not secours.claude_indisponible(e): raise         # erreur de Claude qui n'est pas un manque de crédit
-                if any(m in txt for m in (" 429", " 401", " 403", "quota", "exhausted", "capacity", "rate limit", "aucun modèle")): HORS_SERVICE.add(f)
+                if any(m in txt for m in (" 401", " 403", "quota", "exhausted", "billing")): HORS_SERVICE.add(f)   # vraiment épuisé / refusé
                 erreurs.append(f"{f} : {str(e)[:120]}")
                 print(f"  IA {f} indisponible ({str(e)[:120]}) : on passe à la suivante", flush=True)
         raise RuntimeError("credit balance : aucune IA disponible (" + " | ".join(erreurs) + ")")
@@ -196,7 +212,7 @@ def verifier_credits():
     if not os.environ.get("ANTHROPIC_API_KEY"): etat["claude"] = "absent"
     else:
         try:
-            claude().messages.create(model="claude-haiku-5-5", max_tokens=1, messages=[{"role": "user", "content": "ok"}]); etat["claude"] = "ok"
+            _anthropic().messages.create(model="claude-haiku-5-5", max_tokens=1, messages=[{"role": "user", "content": "ok"}]); etat["claude"] = "ok"
         except Exception as e:
             import secours
             etat["claude"] = "secours" if secours.claude_indisponible(e) else "ok"   # erreur passagère : on tentera quand même
@@ -206,8 +222,9 @@ def verifier_credits():
         try:
             _appel_openai(f, {"messages": [{"role": "user", "content": "Réponds juste : ok"}], "max_tokens": 5}); etat[f] = "ok"
         except Exception as e:
-            t = str(e).lower(); etat[f] = "epuise" if ("429" in t or "quota" in t or "exhausted" in t) else ("cle" if (" 401" in t or " 403" in t) else "erreur")
-            HORS_SERVICE.add(f); print(f"  {f} : {str(e)[:160]}", flush=True)
+            t = str(e).lower(); etat[f] = "epuise" if ("quota" in t or "exhausted" in t or "billing" in t) else ("cle" if (" 401" in t or " 403" in t) else "erreur")
+            if etat[f] != "erreur": HORS_SERVICE.add(f)                    # erreur passagère : on retentera pendant la fabrication
+            print(f"  {f} : {str(e)[:160]}", flush=True)
     UTILISES.clear()
     etat["ia"] = "ok" if ia_disponible() else "aucune"
     cle = os.environ.get("ELEVENLABS_API_KEY")
