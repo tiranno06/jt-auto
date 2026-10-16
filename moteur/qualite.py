@@ -20,7 +20,7 @@ MEMOIRE = os.path.join(ICI, "..", "episodes", "qualite_memoire.json")
 CRITIQUES = ("humoriste", "realisateur", "directeur_artistique", "son", "spectateur")
 NOMS = {"humoriste": "Humoriste", "realisateur": "Réalisateur", "directeur_artistique": "Directeur artistique", "son": "Ingénieur du son",
         "spectateur": "Spectateur TikTok"}
-TYPES = ("plan", "reaction", "bruitage", "casting", "figurant", "lieux_separes", "lieu", "costume")
+TYPES = ("plan", "reaction", "bruitage", "casting", "figurant", "lieux_separes", "lieu", "costume", "jeu")
 MODELE = os.environ.get("MODELE_CONTROLE") or "claude-sonnet-5-5"
 
 
@@ -41,6 +41,24 @@ def jury_gratuit(R, sk, rapport_tech=""):
     rq = []
     if not ph: return {c: {"note": 5.0, "remarques": []} for c in CRITIQUES}
     parlees = [q for q in ph if q["p"] != "narrateur"]
+    # --- défauts visibles repérés image par image (positions des têtes à l'écran)
+    di = R.get("defauts_image") or []; vus_ = set()
+    qui = {q["i"]: q["p"] for q in ph}
+    for d in di:
+        cle = (d["type"], d.get("i"))
+        if cle in vus_ or d.get("i") is None: continue
+        vus_.add(cle)
+        if d["type"] == "tete_coupee":
+            lui = d["role"] == qui.get(d["i"])                              # celui qui parle coupé : on recule ; un autre : plan serré
+            rq.append(_rq("realisateur", d["t"], f"tête de {d['role']} coupée par le bord de l'image ({d.get('plan')})",
+                          {"type": "plan", "replique": d["i"], "plan": ("large" if d.get("plan") == "moyen" else "moyen") if lui else "serre",
+                           "cible": qui.get(d["i"]), "mouvement": "fixe" if lui else "avance"}, 1.3, "tete_coupee"))
+        elif d["type"] == "chevauchement":
+            rq.append(_rq("directeur_artistique", d["t"], f"deux personnages l'un sur l'autre ({d['role']})",
+                          {"type": "plan", "replique": d["i"], "plan": "serre", "cible": qui.get(d["i"]), "mouvement": "avance"}, 1.2, "chevauchement"))
+        elif d["type"] == "sous_titre_visage":
+            rq.append(_rq("spectateur", d["t"], f"le sous-titre cache le visage de {d['role']}",
+                          {"type": "plan", "replique": d["i"], "plan": "moyen", "cible": qui.get(d["i"]), "mouvement": "fixe"}, 1.0, "sous_titre_visage"))
     # --- humoriste
     chutes = [q for q in ph if q.get("chute")]
     for q in chutes:
@@ -156,7 +174,8 @@ Remarques déjà trouvées par nos règles gratuites : {gratuit}
 Chaque critique donne CLAIREMENT son avis pour rendre la vidéo plus DRÔLE et meilleure : une note sur 10 et au plus 3 remarques
 précises (moment en secondes, problème, et si possible une CORRECTION que le robot sait appliquer, de type : plan {{replique, plan, cible,
 mouvement}}, reaction {{replique, reaction}}, bruitage {{replique, son}}, casting {{role, age, genre, taille, cheveux, barbe}},
-figurant {{avec, genre, age, geste, haut, c_haut, description}}, lieux_separes {{rôle: décor en anglais}}, lieu {{scene, lieu}}, costume {{role, haut, c_haut}}).
+figurant {{avec, genre, age, geste, haut, c_haut, description}}, lieux_separes {{rôle: décor en anglais}}, lieu {{scene, lieu}}, costume {{role, haut, c_haut}},
+jeu {{replique, emotion, geste, intensite 1 à 3}} pour une grimace ou un geste plus exagéré).
 - humoriste : les vannes font-elles rire ? la chute tombe-t-elle au bon moment ? où ajouter une réaction, un regard caméra, un bruitage ?
 - realisateur : rythme des plans, serré / large, celui qui parle bien filmé, réactions, mouvements, faux raccords ;
 - directeur_artistique : âge, sexe, taille et allure des personnages (un « fiston » est un ado ; jamais de grosse barbe ; jamais de barbe
@@ -165,7 +184,8 @@ figurant {{avec, genre, age, geste, haut, c_haut, description}}, lieux_separes {
 - spectateur : accroche dans la 1re seconde, moments d'ennui, envie de commenter ou de partager, fin.
 {consigne_origine}Valeurs possibles — plan : {plans} ; mouvement : {mouvements} ; reaction : {reactions} ; son : {sons} ; geste : coucou, signe, danse, attend,
 telephone, rit, boit ; lieu : {lieux}. Signale aussi les défauts d'image (sous-titre faux, texte coupé, personnage coupé en deux en plan serré,
-image vide) dans "defauts" avec la gravité « grave » ou « mineur ». Le style simple, les gags écrits dans le décor et les plans de réaction sont voulus.
+image vide, deux personnages l'un sur l'autre, objet qui flotte dans le vide, main ou bras qui traverse un meuble ou un corps, faux raccord
+d'une image à l'autre, personnage qui sort du décor) dans "defauts" avec la gravité « grave » ou « mineur ». Le style simple, les gags écrits dans le décor et les plans de réaction sont voulus.
 Réponds avec l'outil jury."""
 OUTIL = {"name": "jury", "description": "Avis des 5 critiques.", "input_schema": {"type": "object", "properties": {
     "critiques": {"type": "array", "items": {"type": "object", "properties": {
@@ -317,6 +337,10 @@ def corriger(sk, corrections):
                 while len(L) <= k: L.append(None)
                 L[k] = c["lieu"]; S["lieux"] = L; sk.setdefault("_decors_a_refaire", []).append(k)
                 faites.append(f"décor de la scène {k + 1} : {c['lieu']}")
+            elif t == "jeu" and 0 <= int(c["replique"]) < len(reps):
+                S["jeu"] = [x for x in (S.get("jeu") or []) if isinstance(x, dict) and x.get("replique") != int(c["replique"])] + \
+                           [{k: c[k] for k in ("replique", "emotion", "geste", "intensite") if k in c}]
+                faites.append(f"jeu plus marqué à la réplique {int(c['replique']) + 1}")
             elif t == "costume" and c.get("role"):
                 C = S.setdefault("costumes", {}); d = C.setdefault(c["role"], {})
                 for k in ("haut", "c_haut", "bas", "c_bas", "chapeau", "chaussures"):
@@ -355,6 +379,8 @@ LIBELLES = {"vanne_sans_bruitage": "des vannes sans accent sonore", "vanne_sans_
             "genre_incoherent": "un sexe qui ne colle pas à la voix", "decor_incoherent": "des décors qui ne collent pas à l'histoire",
             "personne_invisible": "des personnes dont on parle mais qu'on ne voit pas", "appel_meme_lieu": "des appels où les deux sont au même endroit",
             "blanc_long": "des blancs trop longs", "peu_de_bruitages": "trop peu de bruitages", "trop_de_bruitages": "trop de bruitages",
+            "tete_coupee": "des têtes coupées par le bord de l'image", "chevauchement": "des personnages l'un sur l'autre",
+            "sous_titre_visage": "des sous-titres sur les visages",
             "accroche_lente": "une accroche trop lente", "accroche_plate": "une accroche plate", "sous_titres_rapides": "des sous-titres trop rapides"}
 
 

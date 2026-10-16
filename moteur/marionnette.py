@@ -739,7 +739,20 @@ def _bouche(img, R, cx, cy, s, p, detail):
         if v == "F":                                                       # f, v : lèvre sur les dents
             _ellipse(img, (mx, my + 6 * s), (24 * s, 9 * s), 0, TRAIT)
             _poly(img, [(mx - 15 * s, my), (mx + 15 * s, my), (mx + 15 * s, my + 6 * s), (mx - 15 * s, my + 6 * s)], BLANC); return
-        w, h = {"A": (30, 30), "E": (38, 14), "I": (34, 9), "O": (19, 24), "U": (12, 14)}.get(v, (28, 22))
+        if v == "S":                                                       # s, z : dents serrées, lèvres entrouvertes
+            w, h = 26 * s * (0.85 + 0.2 * o), 8 * s
+            if rouge: _ellipse(img, (mx, my + 3 * s), (w + 6 * s, h + 6 * s), 0, rouge)
+            _ellipse(img, (mx, my + 3 * s), (w, h), 0, TRAIT)
+            if dents: _poly(img, [(mx - w * 0.8, my), (mx + w * 0.8, my), (mx + w * 0.8, my + 6 * s), (mx - w * 0.8, my + 6 * s)], (250, 250, 250))
+            return
+        if v == "CH":                                                      # ch, j : lèvres en avant, dents visibles
+            w, h = 17 * s, 15 * s * (0.8 + 0.3 * o)
+            if rouge: _ellipse(img, (mx, my + 6 * s), (w + 7 * s, h + 7 * s), 0, rouge)
+            _ellipse(img, (mx, my + 6 * s), (w + 4 * s, h + 4 * s), 0, TRAIT)
+            _ellipse(img, (mx, my + 6 * s), (w - 2 * s, h - 3 * s), 0, (120, 40, 50))
+            if dents: _poly(img, [(mx - w * 0.6, my + 1 * s), (mx + w * 0.6, my + 1 * s), (mx + w * 0.6, my + 7 * s), (mx - w * 0.6, my + 7 * s)], (250, 250, 250))
+            return
+        w, h = {"A": (30, 30), "E": (38, 14), "I": (34, 9), "O": (19, 24), "U": (12, 14), "T": (24, 11)}.get(v, (28, 22))
         w, h = w * s * (0.75 + 0.35 * o), h * s * (0.45 + 0.75 * o)
         ouverte(w, h, my + h * 0.45); return
     if f == "cri" or (o > 0.75 and f not in ("sourire", "grand_sourire")):
