@@ -524,5 +524,48 @@
    "son": true
   },
   "cadence": null
+ },
+ {
+  "moment": "jour",
+  "lieux": [
+   "salon",
+   "salon"
+  ],
+  "source": "robot",
+  "duree": 61.5,
+  "plans": {
+   "large": 1,
+   "tres_serre": 5,
+   "serre": 3
+  },
+  "mouvements": {
+   "fixe": 4,
+   "epaule": 1,
+   "zoom_choc": 1,
+   "recul": 1,
+   "avance": 2
+  },
+  "costumes": {
+   "presentateur": "pull",
+   "envoyee": "pull",
+   "invite": "pull"
+  },
+  "figurants": 0,
+  "ambiances": [
+   "pluie"
+  ],
+  "controle": "Humoriste 6.0/10 : 48 s La chute finale manque d'impact et mérite un zoom choc sur celui qui la prononce.; 44 s Manque une réaction sceptique de l'envoyée pour accentuer l'effet comique. | Réalisateur",
+  "fichier": "2026-10-16_17h39_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": false,
+   "tiers": true,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": false,
+   "reflets": false,
+   "son": true
+  },
+  "cadence": null
  }
 ]
