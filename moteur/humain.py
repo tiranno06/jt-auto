@@ -82,6 +82,7 @@ def _pose(F, p):
     if F.get("lunettes") and "lunettes_vue" not in det: det.append("lunettes_vue")
     if F["age"] < 18:                                                      # enfant et jeune ado : aucune barbe, même imposée ;
         det = [d for d in det if d not in M.GR.BARBES + ("moustache",) + (("barbe",) if F["age"] < 16 else ())]   # 16-17 ans : mal rasé au plus
+    if F.get("genre") == "f": det = [d for d in det if d not in M.GR.BARBES + ("moustache", "barbe", "bouc", "favoris")]   # jamais de barbe sur une femme
     b = {"courte": "barbe_courte", "trois_jours": "barbe"}.get(F.get("barbe"), F.get("barbe"))
     if b and b != "moustache" and b not in det: det.append(b)
     C.setdefault("c_barbe", tuple(F["c_cheveux"]))

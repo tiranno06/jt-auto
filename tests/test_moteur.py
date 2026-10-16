@@ -858,6 +858,10 @@ class TestAppelPereFils(unittest.TestCase):
         self.assertTrue(studio.separer_lieux(sk)); self.assertEqual(S["lieux"], ["rue", "salon"])
         self.assertFalse(studio.gag_dans_le_sujet(sk, S["gags"][0]))
         S["figurants"] = []; self.assertEqual(studio.figurants_devines(sk)[0]["c_haut"], "rouge")
+        C = studio.compagnons(sk, sk["decoupage"], S["lieux"], "soir", 3)[0]
+        self.assertEqual(C["fiche"]["genre"], "f"); self.assertTrue(C["fiche"]["maquillage"]); self.assertEqual(C["fiche"]["barbe"], "")
+        self.assertIn("rouge_levres", C["costume"]["details"]); self.assertEqual(C["costume"]["c_haut"], studio.NOMS_COULEURS["rouge"])
+        self.assertFalse(any("barbe" in d or d == "moustache" for d in C["costume"]["details"]))
 
 
 class TestModeEco(unittest.TestCase):

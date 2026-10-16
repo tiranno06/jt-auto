@@ -667,14 +667,31 @@ def compagnons(sk, dec, lieux, moment, graine):
         if sc is None: continue
         geste = str(f.get("geste") or "attend").lower()
         geste = geste if geste in ("coucou", "signe", "danse", "attend", "telephone", "rit", "boit") else "attend"
-        c = tenue("meche", "client", lieux[min(sc, len(lieux) - 1)], moment, graine + 301 + k)
-        cv = _costume_valide({x: f[x] for x in ("haut", "c_haut", "bas", "c_bas", "chaussures", "chapeau", "details") if x in f})
+        genre = f.get("genre") if f.get("genre") in ("h", "f") else None
+        tout = " ".join(x.get("t", "") for x in reps).lower() + " " + str(f.get("description") or "").lower()
+        if genre is None and re.search(r"\b(dame|femme|fille|inconnue|meuf|nana|elle)\b", str(f.get("description") or "").lower()): genre = "f"
+        c = tenue("noeud" if genre == "f" else "meche", "client", lieux[min(sc, len(lieux) - 1)], moment, graine + 301 + k)
+        cv = _costume_valide({x: f[x] for x in ("haut", "c_haut", "bas", "c_bas", "chaussures", "chapeau", "c_chapeau", "details") if x in f})
         if cv: c.update(cv)
+        if genre == "f":                                                   # une femme : jamais de barbe, bijoux et maquillage
+            det = [d for d in c.get("details") or () if d not in ("moustache", "barbe", "barbe_courte", "barbe_pleine", "bouc", "favoris", "cravate", "noeud_pap")]
+            for d in ("boucles_oreilles", "rouge_levres", "collier"):
+                if d not in det: det.append(d)
+            c["details"] = tuple(det[:6])
+            if c.get("haut") not in ("robe", "blouse", "debardeur", "tshirt", "gilet", "col_roule", "pull"): c["haut"] = "robe"
+        if re.search(r"m[èe]re no[ëe]l", tout):                            # tenue de mère Noël : rouge, bonnet rouge
+            c.update(haut="robe", c_haut=NOMS_COULEURS["rouge"], c_motif=M._fonce(NOMS_COULEURS["rouge"], 0.72), motif="uni",
+                     chapeau="bonnet", c_chapeau=NOMS_COULEURS["rouge"], bas="jupe", c_bas=NOMS_COULEURS["rouge"])
         try: age = int(f.get("age") or 0) or None
         except (TypeError, ValueError): age = None
-        out.append(dict(scene=sc, avec=avec, activite=geste, compagnon=True, costume=c, perso="meche", x=0,
-                        fiche=_humain().creer(graine + 700 + 13 * k, genre=f.get("genre") if f.get("genre") in ("h", "f") else None, age=age),
-                        description=str(f.get("description") or "")[:120]))
+        cheveux = None
+        if genre == "f" and (c.get("chapeau") or re.search(r"\b(apprêt|bien foutue|belle|sexy|canon)", tout)):
+            cheveux = ("long", "ondule", "mi_long")[k % 3]                     # longs cheveux qui dépassent du bonnet : on la reconnaît
+        fiche = _humain().creer(graine + 700 + 13 * k, genre=genre, age=age, barbe="" if genre == "f" else None,
+                                lunettes="" if genre == "f" else None, cheveux=cheveux)
+        if genre == "f": fiche.update(maquillage=True, sourcils=min(fiche.get("sourcils", 1.0), 0.85), levres=max(fiche.get("levres", 1.0), 1.2))
+        out.append(dict(scene=sc, avec=avec, activite=geste, compagnon=True, costume=c, perso="noeud" if genre == "f" else "meche", x=0,
+                        fiche=fiche, description=str(f.get("description") or "")[:120]))
     return out
 
 LIEUX_ASSIS = ("bureau", "salon", "restaurant", "administration", "classe", "bar", "cabinet_medical", "palais")
