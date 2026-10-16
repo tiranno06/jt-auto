@@ -7,7 +7,7 @@ from PIL import Image
 W, H = 1080, 1920
 BANQUE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "decors")   # lieux déjà dessinés, réutilisés tels quels
 
-STYLE_VERSION = "v4"                                                       # v4 : décor agrandi par l'IA (net) + carte de profondeur ; les anciens ne sont plus repris
+STYLE_VERSION = "v5"                                                       # v4 : décor agrandi par l'IA (net) + carte de profondeur ; les anciens ne sont plus repris
 PROFONDEURS = {}                                                           # indice de scène -> profondeur (0 loin … 255 près), 1080x1920
 
 def _cle(d):

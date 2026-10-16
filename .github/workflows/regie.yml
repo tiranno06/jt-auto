@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       action:
-        description: "avis | legende"
+        description: "avis | legende | remarque"
         required: true
       fichier:
         required: true

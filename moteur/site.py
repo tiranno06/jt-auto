@@ -47,7 +47,7 @@ def construire():
         poster = e["fichier"].replace(".mp4", ".jpg"); affiche(dest, os.path.join(SITE, "videos", poster), (e.get("couverture_ms") or 4000) / 1000)
         liste.append(dict(titre=e.get("titre", ""), date=e.get("date", ""), fichier=e["fichier"], poster=poster, origine=origine(e),
                           legende=e.get("legende", ""), publie=e.get("publie"), vues=e.get("vues"),
-                          format=e.get("format", ""), manuel=bool(e.get("manuel")), avis=e.get("avis", 0), note=e.get("note"),
+                          format=e.get("format", ""), manuel=bool(e.get("manuel")), avis=e.get("avis", 0), note=e.get("note"), note_auteur=e.get("note_auteur"),
                           programmee=e.get("programmee"), couts=e.get("couts") or {}, duree=e.get("duree"),
                           likes=e.get("likes"), commentaires=e.get("commentaires"), partages=e.get("partages")))
     faites = [h for h in hist if h.get("fichier")]
@@ -427,6 +427,9 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
   <div class="ligne2"><button class="second" id="voir" disabled>Aperçu</button><button class="second" id="copier" disabled>Copier la légende</button><button class="second" id="manuel" disabled>Partage manuel</button></div>
   <details id="plus"><summary>⋯ Plus d'actions sur cette vidéo</summary>
     <div class="ligne2"><button class="second" id="pouce" disabled>👍 J'aime</button><button class="second" id="bof" disabled>👎 Bof</button></div>
+    <label>Ma note pour le jury<select id="noteAuteur"><option value="">—</option><option value="10">10/10</option><option value="9">9/10</option><option value="8">8/10</option><option value="7">7/10</option><option value="6">6/10</option><option value="5">5/10</option><option value="4">4/10</option><option value="3">3/10</option><option value="2">2/10</option><option value="1">1/10</option></select></label>
+    <label>Ma remarque (le jury la retient pour les prochaines vidéos)<textarea id="remAuteur" rows="3" maxlength="600" placeholder="Ex. : la dame doit être plus grande, le père en marcel sur le canapé…"></textarea></label>
+    <button class="second" id="remOk" disabled style="width:100%;margin-top:6px">🎬 Envoyer au jury</button>
     <label>Légende<textarea id="legEdit" rows="4" maxlength="2200"></textarea></label>
     <button class="second" id="legOk" disabled style="width:100%;margin-top:6px">✏️ Enregistrer la légende</button>
     <label>Programmer la publication (heure de Paris)<input type="datetime-local" id="quand"></label>
@@ -573,7 +576,7 @@ function ajouterNouvelles(h){
   const neuves=h.filter(e=>e.fichier&&!connus.has(e.fichier)).slice(-15).map(e=>({titre:e.titre||"",date:e.date||"",fichier:e.fichier,poster:"",
     src:`https://github.com/${CONF.depot}/releases/download/${e.tag||"emissions-"+e.fichier.slice(0,7)}/${e.fichier}`,
     origine:(e.source_audio||String(e.theme||"").startsWith("Bande son")||String(e.theme||"").startsWith("TIKTOK::"))?"tiktok":(e.manuel||e.theme)?"texte":"auto",
-    legende:e.legende||"",publie:e.publie,vues:e.vues,format:e.format||"",manuel:!!e.manuel,avis:e.avis||0,note:e.note,programmee:e.programmee,
+    legende:e.legende||"",publie:e.publie,vues:e.vues,format:e.format||"",manuel:!!e.manuel,avis:e.avis||0,note:e.note,note_auteur:e.note_auteur,programmee:e.programmee,
     couts:e.couts||{},duree:e.duree,likes:e.likes,commentaires:e.commentaires,partages:e.partages}));
   if(!neuves.length&&DATA.length===avant) return;
   DATA.unshift(...neuves.reverse());
@@ -663,7 +666,7 @@ function majBoutons(){
 function ajusterBas(){setTimeout(()=>{document.querySelector("main").style.paddingBottom=($("#barre").offsetHeight+24)+"px"},50)}
 function choisir(i){
   choisie=i; fichier=null; const v=DATA[i]; document.body.classList.add("lecture");
-  ["#pouce","#bof","#legOk","#programmer","#refaire"].forEach(s=>$(s).disabled=!lireJeton()); $("#legEdit").value=v.legende||"";
+  ["#pouce","#bof","#legOk","#remOk","#programmer","#refaire"].forEach(s=>$(s).disabled=!lireJeton()); $("#legEdit").value=v.legende||""; $("#noteAuteur").value=v.note_auteur?String(v.note_auteur):"";
   $("#pouce").classList.toggle("actif",v.avis===1); $("#bof").classList.toggle("actif",v.avis===-1);
   document.querySelectorAll("#liste .carte").forEach(c=>c.classList.toggle("choisie",+c.dataset.i===i));
   $("#choix").textContent="Sélection : "+v.titre; ["#copier","#voir","#manuel"].forEach(s=>$(s).disabled=false);
@@ -712,6 +715,8 @@ function action(a,valeur,msg){
 }
 $("#pouce").onclick=()=>{const v=DATA[choisie];v.avis=v.avis===1?0:1;$("#pouce").classList.toggle("actif",v.avis===1);$("#bof").classList.remove("actif");action("avis",v.avis,"👍 Noté : le robot s'en servira comme exemple.")};
 $("#bof").onclick=()=>{const v=DATA[choisie];v.avis=v.avis===-1?0:-1;$("#bof").classList.toggle("actif",v.avis===-1);$("#pouce").classList.remove("actif");action("avis",v.avis,"👎 Noté : le robot évitera ce genre de sketch.")};
+$("#remOk").onclick=()=>{const n=$("#noteAuteur").value, t=$("#remAuteur").value.trim(); if(!n&&!t){toast("Mettez une note ou une remarque");return}
+  action("remarque",(n||"")+"|"+t,"🎬 Merci ! Le jury s'en servira pour les prochaines vidéos."); $("#remAuteur").value=""};
 $("#legOk").onclick=()=>{const t=$("#legEdit").value.trim(); if(!t){toast("Légende vide");return} DATA[choisie].legende=t; action("legende",t,"✏️ Légende enregistrée (le site se met à jour dans 2 à 3 min).")};
 $("#programmer").onclick=()=>{
   const q=$("#quand").value; if(!q){toast("Choisissez la date et l'heure");return}

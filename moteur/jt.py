@@ -5,7 +5,9 @@ import numpy as np, cv2
 from PIL import Image, ImageDraw, ImageFont
 ICI = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, ICI)
 
-W, H, FPS, SR = 1080, 1920, 30, 22050
+import os as _os
+W, H, SR = 1080, 1920, 22050
+FPS = max(24, min(60, int(_os.environ.get("IPS") or 30)))                 # images par seconde (60 = animation deux fois plus fluide)
 POL = os.path.join(ICI, "..", "polices")
 FB, FM = os.path.join(POL, "Poppins-Bold.ttf"), os.path.join(POL, "Poppins-Medium.ttf")
 # voix de secours (Piper) : hauteur / timbre / débit par rôle

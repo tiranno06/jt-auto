@@ -132,6 +132,9 @@ jobs:
       JURY: ${{ vars.JURY }}
       JURY_TOURS: ${{ vars.JURY_TOURS }}
       SEUIL_JURY: ${{ vars.SEUIL_JURY }}
+      IPS: ${{ vars.IPS || '60' }}
+      EXAGERE: ${{ vars.EXAGERE }}
+      CRF: ${{ vars.CRF }}
       VAPID_PRIVEE: ${{ vars.VAPID_PRIVEE }}
       VAPID_PUBLIQUE: ${{ vars.VAPID_PUBLIQUE }}
       PUSH_ABONNEMENTS: ${{ vars.PUSH_ABONNEMENTS }}

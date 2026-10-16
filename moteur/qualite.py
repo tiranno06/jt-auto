@@ -170,7 +170,7 @@ blanche, trait noir épais). Voici des images de NOTRE vidéo (numérotées, dan
 Texte et minutage :
 {texte}
 Mesures du robot : {mesures}
-Remarques déjà trouvées par nos règles gratuites : {gratuit}
+Remarques déjà trouvées par nos règles gratuites : {gratuit}{auteur}
 Chaque critique donne CLAIREMENT son avis pour rendre la vidéo plus DRÔLE et meilleure : une note sur 10 et au plus 3 remarques
 précises (moment en secondes, problème, et si possible une CORRECTION que le robot sait appliquer, de type : plan {{replique, plan, cible,
 mouvement}}, reaction {{replique, reaction}}, bruitage {{replique, son}}, casting {{role, age, genre, taille, cheveux, barbe}},
@@ -226,7 +226,7 @@ def jury_claude(video, R, sk, gratuit):
         mesures = f"durée {total:.0f} s, {len(R.get('plans') or [])} plans, bruitages {[(n, round(t, 1)) for n, t, _ in (R.get('bruitages') or [])][:20]}, " \
                   f"personnages {{{', '.join(f'{r}: {F.get(chr(103) + 'enre')}/{F.get(chr(97) + 'ge')} ans' for r, F in (R.get('fiches') or {}).items())}}}, lieux {R.get('lieux')}"
         gr = "; ".join(f"{NOMS[c]} : {x['probleme']}" for c in CRITIQUES for x in gratuit[c]["remarques"])[:1500] or "aucune"
-        contenu.append({"type": "text", "text": PROMPT.format(origine=origine, texte=texte, mesures=mesures, gratuit=gr, consigne_origine=consigne_o,
+        contenu.append({"type": "text", "text": PROMPT.format(origine=origine, texte=texte, mesures=mesures, gratuit=gr, consigne_origine=consigne_o, auteur="",
                                                               plans=", ".join(studio.PLANS), mouvements=", ".join(studio.MOUVEMENTS), reactions=", ".join(studio.REACTIONS),
                                                               sons=", ".join(bruitages.CATALOGUE), lieux=", ".join(DD.LIEUX)) + regles_apprises()})
         r = __import__("reseau").claude().messages.create(model=MODELE, max_tokens=4000, tools=[OUTIL], tool_choice={"type": "tool", "name": "jury"},
@@ -384,12 +384,25 @@ LIBELLES = {"vanne_sans_bruitage": "des vannes sans accent sonore", "vanne_sans_
             "accroche_lente": "une accroche trop lente", "accroche_plate": "une accroche plate", "sous_titres_rapides": "des sous-titres trop rapides"}
 
 
+REMARQUES_AUTEUR = os.path.join(os.path.dirname(MEMOIRE), "remarques_auteur.json")
+
+def remarques_auteur(n=10):
+    """Les dernières remarques écrites par l'auteur sur le site (prioritaires sur tout le reste)."""
+    try: r = json.load(open(REMARQUES_AUTEUR, encoding="utf-8"))
+    except (OSError, ValueError): return []
+    return [x for x in r if isinstance(x, dict) and x.get("remarque")][-n:]
+
 def regles_apprises(n=30):
-    """Les erreurs qui reviennent dans les dernières vidéos, à éviter dès l'écriture et la mise en scène (consigne pour Claude)."""
+    """Les erreurs qui reviennent dans les dernières vidéos, à éviter dès l'écriture et la mise en scène (consigne pour Claude),
+    et les remarques de l'auteur (prioritaires)."""
     m = _lire()[-n:]
     c = Counter(x for e in m for x in set(e.get("categories") or []) if x in LIBELLES)
     freq = [LIBELLES[k] for k, v in c.most_common(6) if v >= 3]
-    return ("\nERREURS QUI REVIENNENT dans nos dernières vidéos (à éviter absolument) : " + ", ".join(freq) + ".") if freq else ""
+    out = ("\nERREURS QUI REVIENNENT dans nos dernières vidéos (à éviter absolument) : " + ", ".join(freq) + ".") if freq else ""
+    ra = remarques_auteur()
+    if ra: out += "\nREMARQUES DE L'AUTEUR DE LA CHAÎNE sur nos dernières vidéos (à respecter EN PRIORITÉ) : " + " ; ".join(
+        f"« {x['remarque'][:200]} »" + (f" (note {x['note']}/10)" if x.get("note") else "") for x in ra) + "."
+    return out
 
 
 def poids_critiques():

@@ -60,7 +60,8 @@ def technique(video, duree_attendue=None, fin_parole=None):
         else:
             if (v.get("width"), v.get("height")) != (1080, 1920): defauts.append(f"format {v.get('width')}x{v.get('height')} au lieu de 1080x1920")
             n, d = (v.get("r_frame_rate") or "0/1").split("/")
-            if abs(float(n) / max(1.0, float(d)) - 30) > 0.5: defauts.append(f"{v.get('r_frame_rate')} images/s au lieu de 30")
+            ips_ = int(os.environ.get("IPS") or 30)
+            if abs(float(n) / max(1.0, float(d)) - ips_) > 0.5: defauts.append(f"{v.get('r_frame_rate')} images/s au lieu de {ips_}")
         if not a: defauts.append("pas de piste son")
         duree = float((info.get("format") or {}).get("duration") or 0)
         if duree_attendue and abs(duree - duree_attendue) > 1.5: defauts.append(f"durée {duree:.1f} s au lieu de {duree_attendue:.1f} s")

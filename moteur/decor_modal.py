@@ -13,9 +13,10 @@ img = (modal.Image.debian_slim(python_version="3.11")
 
 MODELE = "stabilityai/stable-diffusion-xl-base-1.0"
 STYLE = ("{decor}, detailed 2D cartoon background, empty scene, no people, clean thick black outlines, flat cel shading, "
-         "bright colors, many props, lived-in details, TikTok cartoon style, eye level, sharp")                       # décor en premier : SDXL ne lit qu'environ 77 jetons
+         "bright colors, many props, lived-in details, blank posters, TikTok cartoon style, eye level, sharp")                       # décor en premier : SDXL ne lit qu'environ 77 jetons
 NEGATIF = ("people, person, human, man, woman, child, character, face, animal, text, letters, words, logo, watermark, signature, "
-           "photo, photorealistic, 3d render, realistic, noisy, hatching, grainy texture, gradient shading, dark, blurry, out of focus, depth of field, bokeh")
+           "photo, photorealistic, 3d render, realistic, noisy, hatching, grainy texture, gradient shading, dark, blurry, out of focus, depth of field, bokeh, "
+           "writing, lettering, captions, gibberish text, signs with words, typography")
 # agrandisseur IA (Real-ESRGAN « anime », licence BSD-3) : décor plus fin et plus net ; profondeur (Depth Anything V2 Small, Apache-2.0)
 AGRANDISSEUR = "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.2.4/RealESRGAN_x4plus_anime_6B.pth"
 PROFONDEUR = "depth-anything/Depth-Anything-V2-Small-hf"
@@ -50,7 +51,7 @@ class Decor:
             x = torch.from_numpy(np.asarray(im.convert("RGB"), np.float32) / 255).permute(2, 0, 1)[None].cuda().half()
             with torch.no_grad(): y = self.agr(x)
             y = (y[0].float().clamp(0, 1).permute(1, 2, 0).cpu().numpy() * 255).astype(np.uint8)
-            return Image.fromarray(y).resize((1097, 1920), Image.LANCZOS)    # même proportion (le client recadre en 1080x1920)
+            return Image.fromarray(y).resize((1100, 1920), Image.LANCZOS)    # même proportion (le client recadre en 1080x1920)
         except Exception as e:
             print("agrandissement :", e); return im
 
@@ -80,11 +81,11 @@ class Decor:
             try:
                 g = torch.Generator("cuda").manual_seed(graine + k); plan = (plans or [b""] * len(decors))[k] if plans else b""
                 if plan:
-                    init = Image.open(io.BytesIO(plan)).convert("RGB").resize((768, 1344))
+                    init = Image.open(io.BytesIO(plan)).convert("RGB").resize((880, 1536))
                     im = self.retouche(STYLE.format(decor=" ".join(str(d).split()[:42])), negative_prompt=NEGATIF, image=init, strength=0.62, num_inference_steps=36,
                                        guidance_scale=6.5, generator=g).images[0]
                 else:
-                    im = self.pipe(STYLE.format(decor=" ".join(str(d).split()[:42])), negative_prompt=NEGATIF, height=1344, width=768, num_inference_steps=30,
+                    im = self.pipe(STYLE.format(decor=" ".join(str(d).split()[:42])), negative_prompt=NEGATIF, height=1536, width=880, num_inference_steps=32,
                                    guidance_scale=6.5, generator=g).images[0]
                 b = io.BytesIO(); im.save(b, format="PNG"); out.append(b.getvalue())
             except Exception as e:
