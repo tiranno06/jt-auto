@@ -49,6 +49,9 @@ def emotion(d):
         if re.search(motif, tags): return nom
     return "neutre"
 
+STYLE_RENDU = (os.environ.get("STYLE_RENDU") or "cel").lower()           # cel (aplats pro) | volume (effet 3D doux) | 3d (3D toon brillant)
+SSAA = (os.environ.get("SSAA") or "1") != "0"                             # personnages dessinés en double résolution puis réduits
+DECOR_VIVANT = (os.environ.get("DECOR_VIVANT") or "1") != "0"             # la rue vit : voitures qui passent au loin
 CEL = (os.environ.get("CEL") or "1") != "0"                               # ombrage en aplat + contour extérieur épais (finition « toons » pro)
 LUMIERES_VIVES = (os.environ.get("LUMIERES_VIVES") or "1") != "0"
 MANGA = (os.environ.get("MANGA") or "1") != "0"                           # effets manga : fond qui explose, traits de vitesse
@@ -144,6 +147,41 @@ def viseme_a(groupes, tm):
 def _mel(a, b, u):
     if a is None or b is None: return b if u > 0.5 else a
     return (a[0] + (b[0] - a[0]) * u, a[1] + (b[1] - a[1]) * u)
+
+def volume3d(sub, mm, lum=-1, force=1.0, brillance=0.6, contour_lum=0.5):
+    """« Effet 3D » sans moteur 3D : chaque partie du personnage (séparée par le trait noir) reçoit un relief bombé (carte de
+    distance), éclairé comme un objet en volume : ombre douce, reflet brillant, liseré de lumière, ombre de contact près des traits.
+    Le trait noir et les détails restent nets. sub : image RGB (modifiée), mm : masque du personnage."""
+    g = cv2.cvtColor(sub, cv2.COLOR_RGB2GRAY)
+    clair = mm & (g > 70)
+    if not clair.any(): return
+    sombre = (mm & ~clair).astype(np.uint8)                                # traits et petits détails sombres (yeux, barbe, bouche…)
+    k_, lab_, st_, _c = cv2.connectedComponentsWithStats(sombre, connectivity=8)
+    seuil = max(400, int(0.004 * mm.sum()))
+    petits = np.zeros(k_, bool); petits[1:] = st_[1:, cv2.CC_STAT_AREA] < seuil
+    zone = (clair | petits[lab_]).astype(np.uint8)                         # les détails ne cassent pas le relief : seuls les grands traits séparent les parties
+    zone = cv2.erode(zone, np.ones((3, 3), np.uint8))
+    d = cv2.distanceTransform(zone, cv2.DIST_L2, 5)
+    zf = zone.astype(np.float32); taille = max(8.0, float(np.sqrt(zone.sum())) * 0.05)
+    h = sum(cv2.GaussianBlur(zf, (0, 0), taille * k_s) for k_s in (0.35, 0.8, 1.6)) / 3 * zf   # « gonflé » comme un coussin (sans pli)
+    kz, labz = cv2.connectedComponents(zone, connectivity=4)
+    hmax = np.full(kz, 1e-3, np.float32); np.maximum.at(hmax, labz.ravel(), h.ravel())
+    h = np.clip(h / hmax[labz], 0, 1) ** 0.7                               # chaque partie (tête, buste, bras…) a son propre volume
+    h = cv2.GaussianBlur(h, (0, 0), 1.5)                                   # (carte de relief, pas l'image : rien n'est flou)
+    gx = cv2.Sobel(h, cv2.CV_32F, 1, 0, ksize=5); gy = cv2.Sobel(h, cv2.CV_32F, 0, 1, ksize=5)
+    k = 6.0; nx, ny, nz = -gx * k, -gy * k, np.ones_like(h); n = np.sqrt(nx * nx + ny * ny + nz * nz); nx, ny, nz = nx / n, ny / n, nz / n
+    L = np.array([0.55 * (1 if lum > 0 else -1), -0.6, 0.58], np.float32); L /= np.linalg.norm(L)
+    diff = np.clip(nx * L[0] + ny * L[1] + nz * L[2], 0, 1)
+    ombre = 0.62 + 0.48 * diff                                             # côté à l'ombre plus sombre, côté lumière plus clair
+    Hv = L + np.array([0, 0, 1], np.float32); Hv /= np.linalg.norm(Hv)
+    spec = np.clip(nx * Hv[0] + ny * Hv[1] + nz * Hv[2], 0, 1) ** 40 * brillance
+    rim = np.clip(1 - nz, 0, 1) ** 2 * np.clip(nx * (1 if lum > 0 else -1), 0, 1) * contour_lum
+    ao = 1 - 0.35 * np.exp(-d / 6.0)                                       # ombre de contact contre les traits (occlusion)
+    m3 = clair & zone.astype(bool)                                         # on n'éclaire que les couleurs (les détails sombres restent nets)
+    f = sub.astype(np.float32)
+    fac = (1 + (ombre * ao - 1) * force)[..., None]
+    out = f * fac + (spec[..., None] * 255 + rim[..., None] * np.array([255, 240, 215], np.float32)) * force
+    sub[m3] = np.clip(out[m3], 0, 255).astype(np.uint8)
 
 def lisse(lv):
     """Bouche lissée (pas de clignotement), sur ~0,17 s quelle que soit la cadence (30 ou 60 images/s)."""
@@ -358,8 +396,32 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
                     pr_ = np.repeat(np.clip((np.arange(H, dtype=np.float32) / H - 0.35) / 0.65, 0, 1)[:, None] * 255, W, 1)
                 PROF[sc_] = cv2.resize(np.asarray(pr_, np.float32) / 255.0, (W // 4, H // 4), interpolation=cv2.INTER_AREA)
         except Exception as e: print(f"profondeur des décors indisponible : {e}", flush=True)
+    if B:                                                                  # panneaux vidés des décors IA : un vrai gag écrit, lisible
+        try:
+            import decors as DEC_
+            gags_ = [g for g in (B.get("gags") or []) if g] or ["Home sweet home", "Ici, on ne juge pas", "Wifi : demande à maman"]
+            k_g = 0
+            for sc_, rects in DEC_.PANNEAUX.items():
+                if sc_ not in decors: continue
+                im_ = Image.fromarray(decors[sc_]); dr = ImageDraw.Draw(im_)
+                for (x_, y_, w_, h_) in rects:
+                    txt = str(gags_[k_g % len(gags_)]); k_g += 1
+                    for taille in range(int(h_ * 0.42), 12, -2):           # plus grande taille qui tient dans le panneau
+                        f_ = ImageFont.truetype(FB, taille); mots = txt.split(); lignes, cur = [], ""
+                        for m_ in mots:
+                            essai = (cur + " " + m_).strip()
+                            if dr.textlength(essai, font=f_) <= w_ * 0.9: cur = essai
+                            else: lignes.append(cur); cur = m_
+                        lignes.append(cur)
+                        if len(lignes) * taille * 1.15 <= h_ * 0.85 and all(dr.textlength(l_, font=f_) <= w_ * 0.92 for l_ in lignes): break
+                    y0_ = y_ + (h_ - len(lignes) * taille * 1.15) / 2
+                    for j_, l_ in enumerate(lignes):
+                        dr.text((x_ + (w_ - dr.textlength(l_, font=f_)) / 2, y0_ + j_ * taille * 1.15), l_, font=f_, fill=(40, 34, 44))
+                decors[sc_] = np.array(im_)
+        except Exception as e: print(f"gags des panneaux impossibles : {e}", flush=True)
     GRILLE = np.mgrid[0:H // 4, 0:W // 4].astype(np.float32)[::-1] * 4 + 2  # (x, y) au quart de la résolution
     VOIT = {}                                                              # objets de l'histoire en grand dans le décor (voiture garée)
+    PASSE = {}                                                             # décor vivant : voiture qui passe au loin
     if B:
         studio.realiser(ph, places, B); sk["_bible"] = B
         DECOUPE = studio.decouper(ph, places, B, FPS) if os.environ.get("MONTAGE", "dynamique") != "simple" else []   # plusieurs plans par réplique
@@ -383,6 +445,10 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
                     X0 = (W * 0.06 if xr_ > W / 2 else W * 0.94 - im_.shape[1]); Y0 = 1335 - VH.sol(l_)   # garée derrière, de l'autre côté
                     VOIT[sc_] = (im_, X0, Y0)
             if VOIT: print(f"objets de l'histoire : voiture garée dans {len(VOIT)} décor(s)", flush=True)
+            for sc_ in places:                                             # décor vivant : une voiture passe au loin de temps en temps
+                if B["lieux"][min(sc_, len(B["lieux"]) - 1)] == "rue" and DECOR_VIVANT:
+                    col_ = [(200, 50, 50), (60, 100, 190), (240, 200, 60), (235, 235, 238)][sc_ % 4]
+                    PASSE[sc_] = (VH.voiture(col_, 1, 340), VH.voiture(col_, -1, 340), VH.sol(340))
         except Exception as e: print(f"voiture impossible : {e}", flush=True)
         print(f"studio : {B['moment']}, lieux {B['lieux']}, tenues " + ", ".join(f"{r}={c['haut']}" for r, c in B["costumes"].items())
               + f", {len(B['figurants'])} figurant(s), ambiances {B['ambiances']} ; plans " + " ".join(f"{q['plan']}/{q['mouvement']}" for q in ph), flush=True)
@@ -656,6 +722,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             if autre_ in places[scene] and not cam_regard: p["tq"] = (0.35 if parle or q["p"] != role else 0.2) * (1 if position(scene, autre_)[0] > x else -1)
             p["hanche"] = (0.35 if parle else 0.55) * math.sin(tm * (0.8 if parle else 0.45) + len(role) * 1.3)
             p["balance"] = p.get("balance", 0.0) + 2.4 * elan
+            p["etire"] = max(0.0, 2.2 * elan)                              # geste vif : le bras s'étire un instant (étirement « toons »)
             p["sourcils_h"] = p.get("sourcils_h", 0.0) + 0.1 * math.sin(tm * 2.7 + len(role) * 2) + 0.05 * math.sin(tm * 6.1)
             if FICHES and ASSIS.get(scene) == role:                        # assis : il reste sur sa chaise
                 p.update(assis=True, x=x + 4 * s * math.sin(tm * 0.6), y=y, hanche=0.0, marche=None)
@@ -899,6 +966,31 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
     SONDE = {"on": False, "res": []}
 
     LUM_SC = {}
+    TOILE = {}
+    SENT, MARQ = np.array((1, 2, 3), np.uint8), np.array((3, 1, 2), np.uint8)
+
+    def composer_ssaa(img, liste):
+        """Super-échantillonnage : les personnages sont dessinés sur une toile deux fois plus grande, puis réduits (moyenne des
+        pixels) : traits parfaitement lisses, détails fins (cheveux, barbe, coutures) nets, comme un rendu 4K ramené en 1080p."""
+        if "t" not in TOILE: TOILE["t"] = np.empty((2 * H, 2 * W, 3), np.uint8)
+        T = TOILE["t"]; T[:] = SENT
+        for role, p in liste:
+            p2 = dict(p, x=p["x"] * 2, y=p["y"] * 2, s=p["s"] * 2, couleur_ombre=tuple(int(v) for v in MARQ))
+            dessine(T, role, p2)
+        dif = np.any(T != SENT, axis=2)
+        if not dif.any(): return
+        x, y, w, h = cv2.boundingRect(dif.astype(np.uint8))
+        x0, y0 = (x // 2) * 2, (y // 2) * 2; x1, y1 = min(2 * W, x + w + 2) // 2 * 2, min(2 * H, y + h + 2) // 2 * 2
+        if x1 <= x0 or y1 <= y0: return
+        Tz, dz = T[y0:y1, x0:x1], dif[y0:y1, x0:x1]
+        ombre = np.all(Tz == MARQ, axis=2); corps = dz & ~ombre
+        taille = ((x1 - x0) // 2, (y1 - y0) // 2)
+        a_c = cv2.resize(corps.astype(np.float32), taille, interpolation=cv2.INTER_AREA)[..., None]
+        a_o = cv2.resize(ombre.astype(np.float32), taille, interpolation=cv2.INTER_AREA)[..., None]
+        coul = cv2.resize(np.where(corps[..., None], Tz, 0).astype(np.float32), taille, interpolation=cv2.INTER_AREA)   # couleurs prémultipliées
+        Z = img[y0 // 2:y1 // 2, x0 // 2:x1 // 2].astype(np.float32)
+        Z = Z * (1 - 0.2 * a_o)                                            # ombre au sol : le décor assombri de 20 %
+        img[y0 // 2:y1 // 2, x0 // 2:x1 // 2] = np.clip(Z * (1 - a_c) + coul, 0, 255).astype(np.uint8)
     FM = {}
     FOND_MANGA = {"choc": ((255, 214, 40), (255, 150, 30)), "panique": ((150, 90, 220), (90, 50, 160)), "cri": ((240, 70, 60), (255, 160, 60)),
                   "colere": ((200, 30, 40), (120, 10, 20)), "joie": ((255, 225, 80), (255, 170, 200)), "amour": ((255, 150, 190), (255, 210, 225)),
@@ -947,7 +1039,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             return (u - W / 2) / zk + cxk, (v - H / 2) / zk + cyk
         sx, sy = cam(0.86)
         d = cv2.remap(P, (sx / 4).astype(np.float32), (sy / 4).astype(np.float32), cv2.INTER_LINEAR, borderMode=cv2.BORDER_REPLICATE)
-        mx, my = cam(0.80 + 0.17 * d)
+        mx, my = cam(0.72 + 0.26 * d)                                      # fond loin (72 %) … premier plan (98 %)
         mx = cv2.resize(mx.astype(np.float32), (W, H), interpolation=cv2.INTER_LINEAR); my = cv2.resize(my.astype(np.float32), (W, H), interpolation=cv2.INTER_LINEAR)
         return cv2.remap(fond, mx, my, cv2.INTER_LINEAR, borderMode=cv2.BORDER_REPLICATE)
 
@@ -972,7 +1064,10 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         clair = sub.astype(np.int16).sum(2) > 330                          # sur les parties claires (pas sur le trait noir ni l'ombre)
         z_ = bord & clair
         if z_.any(): sub[z_] = np.clip(sub[z_].astype(np.float32) * 0.55 + c_lis * 0.45, 0, 255).astype(np.uint8)
-        if CEL:                                                            # ombrage en aplat (cel-shading) : bande d'ombre du côté opposé
+        if STYLE_RENDU in ("volume", "3d"):                                 # style « effet 3D » (maquettes de l'auteur)
+            volume3d(sub, mm, sens, force=0.8 if STYLE_RENDU == "volume" else 1.0, brillance=0.25 if STYLE_RENDU == "volume" else 0.7,
+                     contour_lum=0.3 if STYLE_RENDU == "volume" else 0.6)
+        elif CEL:                                                          # ombrage en aplat (cel-shading) : bande d'ombre du côté opposé
             d2 = int(min(60, max(8, 20 * z)))                              # à la lumière → les personnages prennent du volume
             ombre = np.zeros_like(mm); (ombre[:, d2:] if sens > 0 else ombre[:, :-d2])[:] = (mm[:, :-d2] if sens > 0 else mm[:, d2:])
             zone_o = mm & ~ombre & clair & ~bord
@@ -1058,6 +1153,15 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         else:
             Mx = np.float32([[zb, 0, W / 2 - zb * cxb], [0, zb, H / 2 - zb * cyb]])
             img = cv2.warpAffine(fond, Mx, (W, H), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REPLICATE)
+        if B and sc in PASSE:                                              # au loin, une voiture traverse la rue (toutes les ~11 s)
+            per_, d_ = 11.0, 3.2; u_ = (tm + 4.0 * sc) % per_
+            if u_ < d_:
+                g_, dr_, sol_ = PASSE[sc]; sens_ = 1 if int((tm + 4.0 * sc) // per_) % 2 == 0 else -1; im_ = g_ if sens_ > 0 else dr_
+                X0 = (-im_.shape[1] + (W + im_.shape[1]) * u_ / d_) if sens_ > 0 else (W - (W + im_.shape[1]) * u_ / d_); Y0 = 1265 - sol_
+                zp = 1 + (z - 1) * 0.8; cxp = W / 2 + (cx - W / 2) * 0.8; cyp = H / 2 + (cy - H / 2) * 0.8
+                Mv = np.float32([[zp, 0, W / 2 + (X0 - cxp) * zp], [0, zp, H / 2 + (Y0 - cyp) * zp]])
+                cv_ = cv2.warpAffine(im_, Mv, (W, H), flags=cv2.INTER_LINEAR, borderValue=(0, 0, 0, 0)); a_ = cv_[..., 3:4].astype(np.float32) / 255
+                if a_.any(): img[:] = (img * (1 - a_) + cv_[..., :3] * a_).astype(np.uint8)
         if B and sc in VOIT:                                               # voiture garée : elle glisse avec le décor
             im_, X0, Y0 = VOIT[sc]
             Mv = np.float32([[zb, 0, W / 2 + (X0 - cxb) * zb], [0, zb, H / 2 + (Y0 - cyb) * zb]])
@@ -1076,6 +1180,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             fm = fond_manga(q["emo"], int(tm * 6) % 2)                     # rayons qui tournent un peu (2 dessins en alternance)
             img[:] = cv2.addWeighted(img, 1 - 0.82 * u_m, fm, 0.82 * u_m, 0)
         avant_persos = img.copy() if (B and LUMIERE_DECOR) else None      # pour retrouver les pixels des personnages (lumière du lieu)
+        ssaa = []
         for role in places[sc]:                                            # personnages dessinés nets à l'échelle du plan
             if cible_seule and role != cible_seule and cible_seule in places[sc]: continue
             p = pose(role, tm, q, sc)
@@ -1101,11 +1206,15 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
                 m_ = cv2.GaussianBlur((np.abs(calque.astype(np.int16) - (1, 2, 3)).sum(2) > 9).astype(np.float32), (0, 0), flou_p)[..., None]
                 calque = cv2.GaussianBlur(calque, (0, 0), flou_p).astype(np.float32)
                 img[:] = (img * (1 - m_) + calque * m_).astype(np.uint8); continue
-            if not ang: dessine(img, role, p); continue
+            if not ang:
+                if SSAA: ssaa.append((role, p))                            # dessiné en double résolution puis réduit (traits lisses)
+                else: dessine(img, role, p)
+                continue
             calque = np.empty_like(img); calque[:] = (1, 2, 3); dessine(calque, role, p)
             R_ = cv2.getRotationMatrix2D((p["x"], p["y"]), -ang, 1.0)
             calque = cv2.warpAffine(calque, R_, (W, H), flags=cv2.INTER_LINEAR, borderValue=(1, 2, 3))
             m_ = (np.abs(calque.astype(np.int16) - (1, 2, 3)).sum(2) > 9)[..., None]; img[:] = np.where(m_, calque, img)
+        if ssaa: composer_ssaa(img, ssaa)
         if B and not cible_seule:                                          # compagnons (muets) : même échelle que les personnages
             for f_ in COMP.get(sc, []): figurant(f_, tm, img, z, cx, cy)
         if avant_persos is not None: eclairer(img, avant_persos, sc, fond, z)

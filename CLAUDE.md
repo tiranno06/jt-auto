@@ -47,6 +47,12 @@
   (phares, télé, néon : LUMIERES_VIVES) ; effets manga (fond qui explose, traits de vitesse : MANGA) ; signature de la chaîne
   (logo qui « pop », courbe de couleurs : SIGNATURE) ; note et remarque de l'auteur depuis le site → `episodes/remarques_auteur.json`,
   prioritaires dans `qualite.regles_apprises`.
+- **Qualité « 4K ramenée en 1080p »** : personnages dessinés en double résolution puis réduits (SSAA) ; mains à 3-4 doigts
+  (gants toons), avant-bras effilés, bras qui s'étirent sur un geste vif ; décors IA en aplats doux + trait d'origine net
+  (DECOR_APLATS), faux textes de l'IA effacés et remplacés par un gag lisible ; voiture qui passe au loin dans la rue
+  (DECOR_VIVANT) ; parallaxe 72 % (fond) → 98 % (premier plan) ; jury IA attentif à la finesse de l'image.
+  Styles de rendu au choix (STYLE_RENDU) : `cel` (aplats pro, défaut), `volume` (effet 3D doux), `3d` (3D toon brillant) :
+  relief « gonflé » calculé par partie du corps puis éclairé (pas de moteur 3D). Le choix du style revient à l'auteur.
 - Position assise : vue de face (buste, genoux et jambes dans le même sens).
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
