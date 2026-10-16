@@ -1,0 +1,35 @@
+name: Diagnostic Mistral (temporaire)
+on:
+  push:
+    branches: [claude/contenu-tiktok-automatise-k1o5uj]
+    paths: [.github/workflows/diag-mistral.yml]
+jobs:
+  diag:
+    runs-on: ubuntu-latest
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+    steps:
+      - name: Tester Mistral
+        shell: python
+        run: |
+          import json, os, time, urllib.request, urllib.error
+          k = os.environ.get("MISTRAL_API_KEY", "")
+          print("cle presente :", bool(k), "longueur", len(k), "espaces autour :", k != k.strip())
+          k = k.strip()
+          def appel(url, corps=None):
+              req = urllib.request.Request(url, data=json.dumps(corps).encode() if corps else None, method="POST" if corps else "GET",
+                                           headers={"Authorization": f"Bearer {k}", "Content-Type": "application/json"})
+              try:
+                  r = urllib.request.urlopen(req, timeout=60); h = r.headers; b = r.read()[:300]; code = r.status
+              except urllib.error.HTTPError as e:
+                  h = e.headers; b = e.read()[:400]; code = e.code
+              lim = {x: h.get(x) for x in h.keys() if "limit" in x.lower() or "retry" in x.lower()}
+              return code, b.decode("utf-8", "ignore"), lim
+          c, b, l = appel("https://api.mistral.ai/v1/models")
+          print("MODELES", c, l)
+          try: print([m["id"] for m in json.loads(b + "]}") ["data"]][:40])
+          except Exception: print(b[:300])
+          for m in ("mistral-small-latest", "ministral-8b-latest", "open-mistral-nemo", "mistral-medium-latest", "mistral-large-latest"):
+              time.sleep(3)
+              c, b, l = appel("https://api.mistral.ai/v1/chat/completions", {"model": m, "max_tokens": 5, "messages": [{"role": "user", "content": "Dis ok"}]})
+              print(m, c, l, b[:250])
