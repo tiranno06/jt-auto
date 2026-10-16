@@ -7,7 +7,7 @@ from PIL import Image
 W, H = 1080, 1920
 BANQUE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "decors")   # lieux déjà dessinés, réutilisés tels quels
 
-STYLE_VERSION = "v5"                                                       # v4 : décor agrandi par l'IA (net) + carte de profondeur ; les anciens ne sont plus repris
+STYLE_VERSION = "v6"                                                       # v4 : décor agrandi par l'IA (net) + carte de profondeur ; les anciens ne sont plus repris
 PROFONDEURS = {}                                                           # indice de scène -> profondeur (0 loin … 255 près), 1080x1920
 
 def _cle(d):
@@ -23,6 +23,9 @@ def _ranger(d, im, prof=None):
     os.makedirs(BANQUE, exist_ok=True); k = _cle(d)
     cv2.imwrite(os.path.join(BANQUE, k + ".jpg"), cv2.cvtColor(im, cv2.COLOR_RGB2BGR), [cv2.IMWRITE_JPEG_QUALITY, 92])
     if prof is not None: cv2.imwrite(os.path.join(BANQUE, k + "_prof.png"), cv2.resize(prof, (270, 480), interpolation=cv2.INTER_AREA))
+    if getattr(_format, "panneaux", None):
+        import json
+        json.dump(_format.panneaux, open(os.path.join(BANQUE, k + "_panneaux.json"), "w"))
     with open(os.path.join(BANQUE, "index.tsv"), "a", encoding="utf-8") as f: f.write(f"{k}\t{d}\n")
 
 def _png(im):
@@ -38,7 +41,9 @@ def _recadre(im, interp=cv2.INTER_CUBIC):
     return np.ascontiguousarray(im[y0:y0 + H, x0:x0 + W])
 
 def _format(png):
-    return simplifier(_recadre(np.array(Image.open(io.BytesIO(png)).convert("RGB"))))
+    im, pan = faux_textes(simplifier(_recadre(np.array(Image.open(io.BytesIO(png)).convert("RGB")))))
+    _format.panneaux = pan
+    return im
 
 def _prof(png):
     """Carte de profondeur (PNG en niveaux de gris) au format 1080x1920, adoucie (c'est une carte, pas l'image : rien n'est flou)."""
@@ -46,11 +51,39 @@ def _prof(png):
     d = np.array(Image.open(io.BytesIO(png)).convert("L"))
     return cv2.GaussianBlur(_recadre(d, cv2.INTER_LINEAR), (0, 0), 6)
 
+PANNEAUX = {}                                                              # indice de scène -> panneaux vidés [(x, y, w, h)] (gags écrits dedans)
+
+def aplats(im):
+    """Décor IA ramené au style des personnages : aplats de couleur doux (sans bandes), trait noir d'origine gardé net, contours accentués."""
+    sm = cv2.pyrMeanShiftFiltering(cv2.resize(im, (im.shape[1] // 2, im.shape[0] // 2), interpolation=cv2.INTER_AREA), 6, 14)
+    sm = cv2.resize(sm, (im.shape[1], im.shape[0]), interpolation=cv2.INTER_CUBIC)
+    trait = cv2.cvtColor(im, cv2.COLOR_RGB2GRAY) < 80
+    out = sm.copy(); out[trait] = im[trait]
+    return cv2.addWeighted(out, 1.25, cv2.GaussianBlur(out, (0, 0), 1.2), -0.25, 0)
+
+def faux_textes(im):
+    """Panneaux clairs couverts de petits traits sombres (faux texte illisible de l'IA) : vidés, le cadre reste. Renvoie (image, panneaux)."""
+    g = cv2.cvtColor(im, cv2.COLOR_RGB2GRAY); out = im.copy(); res = []
+    clair = (g > max(215, np.percentile(g, 80) + 12)).astype(np.uint8)
+    clair = cv2.morphologyEx(clair, cv2.MORPH_CLOSE, np.ones((25, 25), np.uint8))
+    cs, _ = cv2.findContours(clair, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    for c in cs:
+        x, y, w, h = cv2.boundingRect(c); A = w * h
+        if not (0.004 * g.size < A < 0.12 * g.size) or w < 80 or h < 40 or cv2.contourArea(c) < 0.75 * A: continue
+        zone = g[y + 6:y + h - 6, x + 6:x + w - 6]; sombre = (zone < 110).astype(np.uint8)
+        k, _l, st, _c = cv2.connectedComponentsWithStats(sombre)
+        petits = sum(1 for i in range(1, k) if 8 < st[i, 4] < 0.01 * A and st[i, 3] < 0.4 * h)
+        if petits >= 6 and sombre.mean() > 0.04:
+            fondc = np.median(im[y + 6:y + h - 6, x + 6:x + w - 6][zone >= 110], axis=0)
+            out[y + 6:y + h - 6, x + 6:x + w - 6] = fondc.astype(np.uint8); res.append((int(x + 6), int(y + 6), int(w - 12), int(h - 12)))
+    return out, res
+
 def simplifier(im):
     """Style des chaînes analysées : aplats lissés (moins de détails), couleurs plus claires et un léger flou,
     pour que les personnages blancs ressortent nettement devant le décor. Rendu détaillé : les personnages ont maintenant
     costumes, contours et ombres, le décor garde donc plus de détails (lissage et voile allégés)."""
     detail = (os.environ.get("RENDU_DETAILLE") or "1") != "0"
+    if detail and (os.environ.get("DECOR_APLATS") or "1") != "0": return aplats(im)   # même style que les personnages
     im = cv2.edgePreservingFilter(im, flags=1, sigma_s=25 if detail else 70, sigma_r=0.2 if detail else 0.45)   # aplats, contours gardés nets
     if not detail: im = cv2.GaussianBlur(im, (0, 0), 1.6)                  # (rendu détaillé : AUCUN flou, consigne de l'auteur)
     voile = 0.12 if detail else 0.22
@@ -59,7 +92,7 @@ def simplifier(im):
 def generer(decoupage, graine=7, delai=1200, lumiere="", plans=None):  # 1re fois : téléchargement des poids SDXL (~7 Go)
     """decoupage : scènes de l'auteur ; renvoie {indice de scène: image RGB uint8 1080x1920}.
     lumiere : ambiance de l'épisode choisie par le studio (« warm golden evening light, lamps on »…), ajoutée à chaque décor."""
-    PROFONDEURS.clear()
+    PROFONDEURS.clear(); PANNEAUX.clear()
     demandes = [(k, sc["decor"].strip() + (f", {lumiere}" if lumiere else "")) for k, sc in enumerate(decoupage or [])
                 if sc.get("decor") and sc["decor"].strip().lower() not in ("plain", "uni", "")]
     if not demandes: return {}
@@ -75,6 +108,11 @@ def generer(decoupage, graine=7, delai=1200, lumiere="", plans=None):  # 1re foi
             out[k] = deja[d]; print(f"  décor {k} (lieu déjà connu) : {d[:70]}", flush=True)
             fp = os.path.join(BANQUE, _cle(d) + "_prof.png")
             if os.path.exists(fp): PROFONDEURS[k] = cv2.GaussianBlur(cv2.resize(cv2.imread(fp, 0), (W, H), interpolation=cv2.INTER_LINEAR), (0, 0), 6)
+            fj = os.path.join(BANQUE, _cle(d) + "_panneaux.json")
+            if os.path.exists(fj):
+                import json
+                try: PANNEAUX[k] = [tuple(r) for r in json.load(open(fj))]
+                except (OSError, ValueError): pass
     uniques = [d for d in uniques if d not in deja]
     if not uniques: return out
     try:
@@ -98,6 +136,7 @@ def generer(decoupage, graine=7, delai=1200, lumiere="", plans=None):  # 1re foi
         if png:
             try:
                 out[k] = _format(png); print(f"  décor {k} : {d[:70]}", flush=True)
+                if _format.panneaux: PANNEAUX[k] = list(_format.panneaux)
                 pr = None
                 try: pr = _prof(profs.get(d))
                 except Exception: pr = None

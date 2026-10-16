@@ -72,6 +72,14 @@ def _ligne(img, a, b, couleur, ep):
     r = ep / 2
     if r >= 2: _ellipse(img, a, (r, r), 0, couleur); _ellipse(img, b, (r, r), 0, couleur)
 
+EFFILE = 0.8                                                               # avant-bras plus fin au poignet (dessin plus vivant)
+
+def _tube(img, a, b, ea, eb, couleur):
+    """Membre effilé : épaisseur ea en a, eb en b, bouts arrondis."""
+    dx, dy = b[0] - a[0], b[1] - a[1]; n = math.hypot(dx, dy) or 1.0; nx, ny = -dy / n, dx / n
+    _poly(img, [(a[0] + nx * ea / 2, a[1] + ny * ea / 2), (b[0] + nx * eb / 2, b[1] + ny * eb / 2), (b[0] - nx * eb / 2, b[1] - ny * eb / 2), (a[0] - nx * ea / 2, a[1] - ny * ea / 2)], couleur)
+    _ellipse(img, a, (ea / 2, ea / 2), 0, couleur); _ellipse(img, b, (eb / 2, eb / 2), 0, couleur)
+
 def _poly(img, pts, couleur, ferme=True, ep=-1):
     p = np.array([[x * 4, y * 4] for x, y in pts], np.int32).reshape(-1, 1, 2)
     if ep < 0: cv2.fillPoly(img, [p], couleur, AA, 2)
@@ -170,15 +178,25 @@ def _main(img, m, direction, forme, r, couleur, gonfle=0.0):
     elif forme == "pouce":                                                 # poing, pouce vers le ciel
         _ellipse(img, m, (R_ * 0.9, R_ * 0.9), 0, couleur)
         _ligne(img, (m[0], m[1] - r * 0.3), (m[0], m[1] - r * 1.65), couleur, r * 0.7 + 2 * gonfle)
-    elif forme == "paume":                                                 # main ouverte face à l'autre (« stop »)
+    elif forme == "paume":                                                 # main ouverte face à l'autre (« stop ») : 4 doigts écartés
         _ellipse(img, (m[0] + dx * r * 0.3, m[1] + dy * r * 0.3), (R_ * 1.05, R_ * 1.25), math.degrees(-direction), couleur)
-        for k in (-1, 0, 1):
-            a = direction + k * 0.42; _ligne(img, m, (m[0] + math.sin(a) * r * 1.6, m[1] + math.cos(a) * r * 1.6), couleur, r * 0.55 + 2 * gonfle)
+        for k in (-1.5, -0.5, 0.5, 1.5):
+            a = direction + k * 0.34; l_ = r * (2.25 if abs(k) < 1 else 1.95)
+            _ligne(img, m, (m[0] + math.sin(a) * l_, m[1] + math.cos(a) * l_), couleur, r * 0.42 + 2 * gonfle)
+        a = direction + 1.35; _ligne(img, m, (m[0] + math.sin(a) * r * 1.25, m[1] + math.cos(a) * r * 1.25), couleur, r * 0.5 + 2 * gonfle)
     elif forme == "poing":
         _ellipse(img, m, (R_ * 0.92, R_ * 0.92), 0, couleur)
-    else:                                                                  # main ouverte détendue : la paume et le pouce
+    else:                                                                  # main ouverte détendue : paume, 3 doigts + pouce (gants « toons »)
         _ellipse(img, m, (R_, R_), 0, couleur)
-        a = direction + 1.3; _ellipse(img, (m[0] + math.sin(a) * r * 0.85, m[1] + math.cos(a) * r * 0.85), (R_ * 0.42, R_ * 0.42), 0, couleur)
+        for k in (-1, 0, 1):
+            a = direction + k * 0.3; l_ = r * (1.55 if k == 0 else 1.35)
+            _ligne(img, (m[0] + math.sin(a) * r * 0.3, m[1] + math.cos(a) * r * 0.3), (m[0] + math.sin(a) * (r * 0.3 + l_), m[1] + math.cos(a) * (r * 0.3 + l_)),
+                   couleur, r * 0.44 + 2 * gonfle)
+        a = direction + 1.25; _ellipse(img, (m[0] + math.sin(a) * r * 0.9, m[1] + math.cos(a) * r * 0.9), (R_ * 0.4, R_ * 0.4), 0, couleur)
+        if gonfle == 0 and r > 6:                                          # séparation des doigts (trait fin)
+            for k in (-0.5, 0.5):
+                a = direction + k * 0.33
+                _ligne(img, (m[0] + math.sin(a) * r * 0.75, m[1] + math.cos(a) * r * 0.75), (m[0] + math.sin(a) * r * 1.6, m[1] + math.cos(a) * r * 1.6), TRAIT, max(2, r * 0.09))
 
 def _jointures(img, m, forme, r, s):
     if forme in ("poing", "pouce"):
@@ -214,7 +232,7 @@ def squelette(p):
     h_ep = 0.34 if A else 0.22
     k_ep = (corps_w * 0.97 + 10 * s) if A else corps_w * 0.82             # adulte : les bras tombent le long du buste, sous l'épaule
     ep_g = (x - k_ep + penche * 8 * s, cy_corps - corps_h * h_ep - epaules * 22 * s); ep_d = (x + k_ep + penche * 8 * s, cy_corps - corps_h * h_ep - epaules * 22 * s)
-    L = 92 if A else 64
+    L = (92 if A else 64) * (1 + 0.14 * max(0.0, min(1.0, float(p.get("etire", 0.0)))))   # geste vif : le bras s'étire (dessin animé)
     bras = [(e, *_bras(e, (a[0], a[1]), L, s)) for e, a in ((ep_g, p["bras_g"]), (ep_d, p["bras_d"]))]
     return dict(A=A, s=s, sx=sx, sy=sy, x=x, x_pieds=x_pieds, hanche=hanche, pieds=pieds, corps_h=corps_h, corps_w=corps_w, cy_corps=cy_corps, R=Rt, tete=tete, rx=rx, ry=ry,
                 bras=bras, st=s * (ADULTE_TETE if A else 1.0), membre=(40 if A else 34) * s, r_m=(22 if A else 22) * s, epaules=epaules, penche=penche)
@@ -237,7 +255,8 @@ def dessiner(img, perso, p):
     dos = bool(p.get("dos"))
 
     # ombre au sol (portée du côté opposé à la lumière)
-    _ellipse(img, (x - lum * 22 * s, pieds + 4 * s), (120 * s * sx + abs(lum) * 18 * s, 16 * s), 0, tuple(int(c * 0.80) for c in _fond(img, x, pieds + 4 * s)))
+    _ellipse(img, (x - lum * 22 * s, pieds + 4 * s), (120 * s * sx + abs(lum) * 18 * s, 16 * s), 0,
+             tuple(p["couleur_ombre"]) if p.get("couleur_ombre") is not None else tuple(int(c * 0.80) for c in _fond(img, x, pieds + 4 * s)))
     # capuche (derrière la tête) et cheveux longs (derrière la tête)
     if C and C.get("haut") == "capuche" and not dos:
         hc = (x, cy_corps - corps_h * 0.42); _ellipse(img, hc, (corps_w * 1.05 + ep, corps_h * 0.32 + ep), 0, TRAIT); _ellipse(img, hc, (corps_w * 1.05, corps_h * 0.32), 0, _fonce(C["c_haut"], 0.85))
@@ -348,13 +367,13 @@ def dessiner(img, perso, p):
     for (e_, c_, m_), fm in zip(bras, formes):
         e2 = (e_[0] + (x - e_[0]) * 0.25, e_[1] + 6 * s)
         if not A: _ligne(img, e2, c_, TRAIT, mb + 2 * ep)
-        _ligne(img, c_, m_, TRAIT, mb + 2 * ep)
+        _tube(img, c_, m_, mb + 2 * ep, mb * EFFILE + 2 * ep, TRAIT)
         if fm: _main(img, m_, math.atan2(m_[0] - c_[0], m_[1] - c_[1]), fm, r_m, TRAIT, ep)
         else: _ellipse(img, m_, (r_m + ep, r_m + ep), 0, TRAIT)
     for (e_, c_, m_), fm in zip(bras, formes):
         e2 = (e_[0] + (x - e_[0]) * 0.25, e_[1] + 6 * s)
         if A: e2 = (e_[0] + (c_[0] - e_[0]) * 0.6, e_[1] + (c_[1] - e_[1]) * 0.6)   # adulte : le haut du bras est déjà peint (on raccorde au coude)
-        _ligne(img, e2, c_, chair, mb); _ligne(img, c_, m_, chair, mb)
+        _ligne(img, e2, c_, chair, mb); _tube(img, c_, m_, mb, mb * EFFILE, chair)
         if manche:
             _ligne(img, e2, c_, manche[0], mb)
             if manche[1] == "longues":

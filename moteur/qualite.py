@@ -181,7 +181,10 @@ jeu {{replique, emotion, geste, intensite 1 à 3}} pour une grimace ou un geste 
 - directeur_artistique : âge, sexe, taille et allure des personnages (un « fiston » est un ado ; jamais de grosse barbe ; jamais de barbe
   pour un enfant), tenues, décors, cohérence avec l'histoire, personnes dont on parle qu'on devrait voir, lieux différents (appel) ;
 - son : synchronisation voix / lèvres, bruitages bien placés, volumes, blancs (jamais de rires enregistrés) ;
-- spectateur : accroche dans la 1re seconde, moments d'ennui, envie de commenter ou de partager, fin.
+- spectateur : accroche dans la 1re seconde, moments d'ennui, envie de commenter ou de partager, fin ;
+- TOUS : la FINESSE de l'image comme une chaîne pro en 4K ramenée en 1080p — traits nets et lisses, détails des personnages,
+  décor du même style que les personnages (aplats, trait noir), aucun texte illisible dans le décor, aucun flou, couleurs
+  harmonieuses ; signale chaque faiblesse visible dans "defauts" (gravité « mineur » ou « grave »).
 {consigne_origine}Valeurs possibles — plan : {plans} ; mouvement : {mouvements} ; reaction : {reactions} ; son : {sons} ; geste : coucou, signe, danse, attend,
 telephone, rit, boit ; lieu : {lieux}. Signale aussi les défauts d'image (sous-titre faux, texte coupé, personnage coupé en deux en plan serré,
 image vide, deux personnages l'un sur l'autre, objet qui flotte dans le vide, main ou bras qui traverse un meuble ou un corps, faux raccord
