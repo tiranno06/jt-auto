@@ -1,357 +1,382 @@
 {
- "titre": "DESTINÉE ET HÉSITATION",
- "sujet": "DESTINÉE ET HÉSITATION",
- "ecran": "DESTINÉE ET HÉ",
+ "titre": "MONTER AVEC UNE INCONNUE",
+ "sujet": "MONTER AVEC UNE INCONNUE",
+ "ecran": "MONTER AVEC UN",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "POV : Quand ton père te pousse à réaliser ton ",
- "question": "Que feriez-vous à sa place ?",
+ "titre_accroche": "POV : Quand tu appelles ton père",
+ "question": "L'auriez-vous fait à sa place ?",
  "running_gag": "",
  "verite": "",
  "repliques": [
   {
-   "p": "invite",
-   "t": "Papa, il y a une inconnue qui s'appelle Little Angel qui m'a proposé de monter dans sa voiture.",
+   "p": "presentateur",
+   "t": "Papa, il y a une inconnue qui s'appelle Little Angel qui m'a proposé de monter dans sa voiture, je fais quoi?",
    "_deb": 0.16,
-   "_fin": 3.06,
-   "objet": "telephone"
+   "_fin": 3.42,
+   "d": "[hesitant] Papa, il y a une inconnue qui s'appelle Little Angel qui m'a proposé de monter dans sa voiture, je fais quoi?",
+   "objet": "bouteille"
   },
   {
    "p": "invite",
-   "t": "Je fais quoi?",
-   "_deb": 3.1,
-   "_fin": 3.42,
+   "t": "Oh putain, fonce fiston, réfléchis pas, monte dans cette voiture.",
+   "_deb": 3.44,
+   "_fin": 5.64,
+   "d": "[excited] Oh putain, fonce fiston, réfléchis pas, monte dans cette voiture.",
    "objet": "telephone"
   },
   {
    "p": "presentateur",
-   "t": "Oh putain, fonce fiston, réfléchis pas. Monte dans cette voiture.",
-   "_deb": 3.44,
-   "_fin": 5.64,
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
    "t": "Tu m'as toujours dit de jamais parler aux inconnus et de surtout pas monter dans la voiture d'un inconnu.",
    "_deb": 5.7,
    "_fin": 8.86,
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Écoute-moi bien, oublie tout ce que je t'ai dit jusqu'à présent.",
-   "_deb": 8.88,
-   "_fin": 10.92,
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Monte dans cette voiture.",
-   "_deb": 11.06,
-   "_fin": 12.04,
+   "d": "[confused] Tu m'as toujours dit de jamais parler aux inconnus et de surtout pas monter dans la voiture d'un inconnu.",
    "objet": "telephone"
   },
   {
    "p": "invite",
+   "t": "Écoute-moi bien, oublie tout ce que je t'ai dit jusqu'à présent, monte dans cette voiture.",
+   "_deb": 8.88,
+   "_fin": 12.04,
+   "d": "[insistent] Écoute-moi bien, oublie tout ce que je t'ai dit jusqu'à présent, monte dans cette voiture.",
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
    "t": "J'ai l'impression que la dame est habillée en mère Noël, c'est assez joli.",
    "_deb": 12.1,
    "_fin": 14.04,
+   "d": "[surprised] J'ai l'impression que la dame est habillée en mère Noël, c'est assez joli.",
    "objet": "telephone"
   },
   {
-   "p": "presentateur",
-   "t": "Oh putain de bordel de merde, mon fils. Va avec la dame.",
+   "p": "invite",
+   "t": "Oh putain de bordel de merde, mon fils, va avec la dame.",
    "_deb": 14.1,
    "_fin": 16.78,
+   "d": "[excited] Oh putain de bordel de merde, mon fils, va avec la dame.",
    "objet": "telephone"
   },
   {
-   "p": "presentateur",
+   "p": "invite",
    "t": "Tu te rappelles de la fée Clochette?",
    "_deb": 16.8,
    "_fin": 17.76,
+   "d": "[curious] Tu te rappelles de la fée Clochette?",
    "objet": "telephone"
   },
   {
-   "p": "invite",
+   "p": "presentateur",
    "t": "Oui.",
    "_deb": 17.78,
    "_fin": 17.98,
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Bah elle, c'est sa daronne. Donc va. Va sans crainte.",
-   "_deb": 18.0,
-   "_fin": 20.1,
+   "d": "[neutral] Oui.",
    "objet": "telephone"
   },
   {
    "p": "invite",
+   "t": "Bah elle, c'est sa daronne, donc va. Va sans crainte.",
+   "_deb": 18.0,
+   "_fin": 20.1,
+   "d": "[reassuring] Bah elle, c'est sa daronne, donc va. Va sans crainte.",
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
    "t": "Mais...",
    "_deb": 20.12,
    "_fin": 20.28,
+   "d": "[hesitant] Mais...",
    "objet": "telephone"
   },
   {
-   "p": "presentateur",
+   "p": "invite",
    "t": "Va avec la dame, réfléchis pas, bordel.",
    "_deb": 20.38,
    "_fin": 21.76,
+   "d": "[urgent] Va avec la dame, réfléchis pas, bordel.",
    "objet": "telephone"
   },
   {
-   "p": "invite",
+   "p": "presentateur",
    "t": "Et si elle me fait des trucs bizarres?",
    "_deb": 21.78,
    "_fin": 22.74,
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Eh bah surtout, surtout, tu la laisses faire. Elle n'est pas comme les autres.",
-   "_deb": 22.78,
-   "_fin": 25.74,
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Elle exauce les vœux.",
-   "_deb": 25.76,
-   "_fin": 26.58,
+   "d": "[fearful] Et si elle me fait des trucs bizarres?",
    "objet": "telephone"
   },
   {
    "p": "invite",
+   "t": "Eh bah surtout, surtout, tu la laisses faire. Elle n'est pas comme les autres, elle exauce les vœux.",
+   "_deb": 22.78,
+   "_fin": 26.58,
+   "d": "[reassuring] Eh bah surtout, surtout, tu la laisses faire. Elle n'est pas comme les autres, elle exauce les vœux.",
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
    "t": "Mais si maman-",
    "_deb": 26.62,
    "_fin": 27.08,
+   "d": "[hesitant] Mais si maman-",
    "objet": "telephone"
   },
   {
-   "p": "presentateur",
-   "t": "Maman n'en saura jamais rien. Donc arrête de discuter et monte dans cette putain de bagnole.",
+   "p": "invite",
+   "t": "Maman n'en saura jamais rien, donc arrête de discuter et monte dans cette putain de bagnole.",
    "_deb": 27.12,
    "_fin": 30.54,
+   "d": "[urgent] Maman n'en saura jamais rien, donc arrête de discuter et monte dans cette putain de bagnole.",
    "objet": "telephone"
   },
   {
-   "p": "presentateur",
-   "t": "Tu te rends pas compte de ce qui est en train de t'arriver là, mon fils.",
+   "p": "invite",
+   "t": "Tu te rends pas compte de ce qui est en train d'arriver là, mon fils.",
    "_deb": 30.58,
    "_fin": 32.14,
+   "d": "[emotional] Tu te rends pas compte de ce qui est en train d'arriver là, mon fils.",
    "objet": "telephone"
   },
   {
-   "p": "presentateur",
+   "p": "invite",
    "t": "Je pourrais en chialer.",
    "_deb": 32.28,
    "_fin": 32.88,
+   "d": "[emotional] Je pourrais en chialer.",
    "objet": "telephone"
   },
   {
-   "p": "invite",
+   "p": "presentateur",
    "t": "Je sais pas si-",
    "_deb": 32.96,
    "_fin": 33.5,
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Bon écoute-moi maintenant. Dans la vie, il y a ceux qui gagnent au loto, il y a ceux qui touchent un héritage d'une grande tante inconnue et qui",
-   "_deb": 33.54,
-   "_fin": 37.12,
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "se barrent vivre aux Bahamas. Et il y a ceux qui croisent Little Angel sur le parking du Leclerc.",
-   "_deb": 37.16,
-   "_fin": 40.28,
+   "d": "[hesitant] Je sais pas si-",
    "objet": "telephone"
   },
   {
    "p": "invite",
+   "t": "Bon écoute-moi maintenant, dans la vie, il y a ceux qui gagnent au loto, il y a ceux qui touchent un héritage d'une grande tante inconnue et qui",
+   "_deb": 33.54,
+   "_fin": 37.12,
+   "d": "[insistent] Bon écoute-moi maintenant, dans la vie, il y a ceux qui gagnent au loto, il y a ceux qui touchent un héritage d'une grande tante inconnue et qui",
+   "objet": "telephone"
+  },
+  {
+   "p": "invite",
+   "t": "se barrent vivre aux Bahamas, et il y a ceux qui croisent Little Angel sur le parking du Leclerc.",
+   "_deb": 37.14,
+   "_fin": 40.28,
+   "d": "[insistent] se barrent vivre aux Bahamas, et il y a ceux qui croisent Little Angel sur le parking du Leclerc.",
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
    "t": "Je comprends pas, papa.",
    "_deb": 40.34,
    "_fin": 41.12,
+   "d": "[confused] Je comprends pas, papa.",
    "objet": "telephone"
   },
   {
-   "p": "presentateur",
+   "p": "invite",
    "t": "Si tu ne montes pas dans cette voiture, crois-moi que tu t'en voudras toute ta vie.",
    "_deb": 41.18,
    "_fin": 44.22,
+   "d": "[insistent] Si tu ne montes pas dans cette voiture, crois-moi que tu t'en voudras toute ta vie.",
    "objet": "telephone"
   },
   {
-   "p": "presentateur",
+   "p": "invite",
    "t": "Et je te parle d'une longue dépression, le genre de blessure qui se refermera jamais entièrement.",
    "_deb": 44.26,
    "_fin": 47.58,
+   "d": "[emotional] Et je te parle d'une longue dépression, le genre de blessure qui se refermera jamais entièrement.",
    "objet": "telephone"
   },
   {
-   "p": "invite",
+   "p": "presentateur",
    "t": "Putain.",
    "_deb": 47.74,
    "_fin": 47.92,
+   "d": "[shocked] Putain.",
    "objet": "telephone"
   },
   {
-   "p": "presentateur",
+   "p": "invite",
    "t": "Aujourd'hui, ta vie va changer mon garçon, donc je t'en supplie, monte dans cette putain de bagnole.",
    "_deb": 47.96,
    "_fin": 52.36,
+   "d": "[urgent] Aujourd'hui, ta vie va changer mon garçon, donc je t'en supplie, monte dans cette putain de bagnole.",
    "objet": "telephone"
   },
   {
-   "p": "invite",
+   "p": "presentateur",
    "t": "Elle me fait signe de venir.",
    "_deb": 52.44,
    "_fin": 53.32,
+   "d": "[surprised] Elle me fait signe de venir.",
    "objet": "telephone"
   },
   {
-   "p": "presentateur",
-   "t": "Little Angel, c'est quelqu'un de très bien. Tout le monde te le dira, enfin surtout les darons.",
+   "p": "invite",
+   "t": "Little Angel, c'est quelqu'un de très bien. Tout le monde te le dira.",
    "_deb": 53.36,
-   "_fin": 56.54,
+   "_fin": 55.86,
+   "d": "[reassuring] Little Angel, c'est quelqu'un de très bien. Tout le monde te le dira.",
    "objet": "telephone"
   },
   {
-   "p": "presentateur",
-   "t": "Mais ce que je veux dire, c'est que tu peux lui faire confiance.",
-   "_deb": 56.56,
+   "p": "invite",
+   "t": "Enfin, surtout les darons. Mais ce que je veux dire, c'est que tu peux lui faire confiance.",
+   "_deb": 55.96,
    "_fin": 58.48,
+   "d": "[reassuring] Enfin, surtout les darons. Mais ce que je veux dire, c'est que tu peux lui faire confiance.",
    "objet": "telephone"
   },
   {
-   "p": "presentateur",
+   "p": "invite",
    "t": "C'est ta destinée, mon garçon.",
    "_deb": 59.06,
-   "_fin": 60.3,
+   "_fin": 60.36,
+   "d": "[emotional] C'est ta destinée, mon garçon.",
    "objet": "telephone"
   },
   {
-   "p": "presentateur",
+   "p": "invite",
    "t": "Saisis-la.",
    "_deb": 61.4,
    "_fin": 61.84,
+   "d": "[insistent] Saisis-la.",
    "objet": "telephone"
   },
   {
-   "p": "invite",
+   "p": "presentateur",
    "t": "Donc j'y vais?",
    "_deb": 61.86,
    "_fin": 62.24,
+   "d": "[hesitant] Donc j'y vais?",
    "objet": "telephone"
   },
   {
-   "p": "presentateur",
+   "p": "invite",
    "t": "Je t'en supplie, oui.",
    "_deb": 62.26,
    "_fin": 62.84,
+   "d": "[insistent] Je t'en supplie, oui.",
    "objet": "telephone"
   },
   {
-   "p": "invite",
+   "p": "presentateur",
    "t": "Bon d'accord. J'y vais.",
    "_deb": 62.88,
    "_fin": 64.54,
+   "d": "[relieved] Bon d'accord. J'y vais.",
    "objet": "telephone"
   },
   {
-   "p": "presentateur",
+   "p": "invite",
    "t": "Fiston, attends. Je veux juste te dire une dernière chose.",
    "_deb": 64.58,
    "_fin": 66.26,
+   "d": "[insistent] Fiston, attends. Je veux juste te dire une dernière chose.",
    "objet": "telephone"
   },
   {
-   "p": "invite",
+   "p": "presentateur",
    "t": "Oui, papa.",
    "_deb": 66.32,
    "_fin": 66.66,
+   "d": "[neutral] Oui, papa.",
    "objet": "telephone"
   },
   {
-   "p": "presentateur",
+   "p": "invite",
    "t": "Avec maman, on est très fiers de toi, tu sais.",
    "_deb": 66.72,
    "_fin": 68.14,
+   "d": "[emotional] Avec maman, on est très fiers de toi, tu sais.",
    "objet": "telephone"
   },
   {
-   "p": "invite",
+   "p": "presentateur",
    "t": "On le dira à maman?",
    "_deb": 68.18,
    "_fin": 68.74,
+   "d": "[hesitant] On le dira à maman?",
    "objet": "telephone"
   },
   {
-   "p": "presentateur",
+   "p": "invite",
    "t": "On le dira jamais à maman. Elle nous couperait les couilles à tous les deux.",
    "_deb": 68.76,
    "_fin": 70.54,
+   "d": "[urgent] On le dira jamais à maman. Elle nous couperait les couilles à tous les deux.",
    "objet": "telephone"
   },
   {
-   "p": "invite",
+   "p": "presentateur",
    "t": "Pourquoi les couilles?",
    "_deb": 70.56,
    "_fin": 71.06,
+   "d": "[confused] Pourquoi les couilles?",
    "objet": "telephone"
   },
   {
-   "p": "presentateur",
+   "p": "invite",
    "t": "Va accomplir ton destin, mon fils. Tu y trouveras toutes les réponses à tes questions.",
    "_deb": 71.1,
    "_fin": 74.86,
+   "d": "[insistent] Va accomplir ton destin, mon fils. Tu y trouveras toutes les réponses à tes questions.",
    "objet": "telephone"
   },
   {
-   "p": "invite",
+   "p": "presentateur",
    "t": "J'ai peur.",
    "_deb": 75.3,
    "_fin": 75.78,
+   "d": "[fearful] J'ai peur.",
    "objet": "telephone"
   },
   {
-   "p": "presentateur",
+   "p": "invite",
    "t": "C'est normal. Mais va, sois sans crainte. Va.",
    "_deb": 75.82,
    "_fin": 79.22,
+   "d": "[reassuring] C'est normal. Mais va, sois sans crainte. Va.",
    "objet": "telephone"
   },
   {
-   "p": "invite",
+   "p": "presentateur",
    "t": "OK.",
    "_deb": 79.32,
    "_fin": 79.54,
+   "d": "[neutral] OK.",
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Je vais monter dans sa voiture.",
+   "_deb": 80.66,
+   "_fin": 81.46,
+   "d": "[relieved] Je vais monter dans sa voiture.",
    "objet": "telephone"
   },
   {
    "p": "invite",
-   "t": "Je vais monter dans sa voiture.",
-   "_deb": 80.66,
-   "_fin": 81.46,
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
    "t": "Fiston, quand tu sortiras de cette voiture, tu ne seras plus le même.",
    "_deb": 81.5,
    "_fin": 83.74,
+   "d": "[emotional] Fiston, quand tu sortiras de cette voiture, tu ne seras plus le même.",
    "objet": "telephone"
   },
   {
-   "p": "presentateur",
+   "p": "invite",
    "t": "Tu seras un homme.",
    "_deb": 84.88,
    "_fin": 85.66,
+   "d": "[emotional] Tu seras un homme.",
    "objet": "telephone"
   },
   {
@@ -359,35 +384,37 @@
    "t": "Tu veux faire plaisir à papa?",
    "_deb": 87.24,
    "_fin": 88.12,
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "Oui, dis-moi.",
-   "_deb": 88.16,
-   "_fin": 88.76,
+   "d": "[insistent] Tu veux faire plaisir à papa?",
    "objet": "telephone"
   },
   {
    "p": "presentateur",
+   "t": "Oui, dis-moi.",
+   "_deb": 88.16,
+   "_fin": 88.76,
+   "d": "[neutral] Oui, dis-moi.",
+   "objet": "telephone"
+  },
+  {
+   "p": "invite",
    "t": "Prends des photos.",
    "_deb": 88.94,
    "_fin": 89.48,
+   "d": "[insistent] Prends des photos.",
    "chute": true,
    "objet": "telephone"
   }
  ],
  "bandeau": [],
  "gag": null,
- "legende": "Un fils hésite entre la prudence et une opportunité mystérieuse, sous les conseils pressants de son père.",
+ "legende": "Quand ton père t'encourage à monter dans la voiture d'une inconnue sur un parking.",
  "hashtags": [
   "petitsdramas",
-  "destin",
-  "dilemme",
-  "perefils",
-  "aventure",
-  "decision",
-  "mystere"
+  "humour",
+  "animation",
+  "drole",
+  "parodie",
+  "skit"
  ],
  "sources": [
   "https://www.tiktok.com/@yan_animation0/video/7678832582833736993"
@@ -397,27 +424,25 @@
    "scene": "1",
    "repliques": [
     0,
-    1,
-    3,
-    6,
+    2,
+    4,
+    7,
     9,
     11,
     13,
-    16,
+    17,
     20,
     23,
-    26,
-    28,
-    33,
-    35,
-    37,
-    39,
-    41,
+    25,
+    30,
+    32,
+    34,
+    36,
+    38,
+    40,
+    42,
     43,
-    45,
-    46,
-    49,
-    50
+    47
    ],
    "lieu": "",
    "son": "",
@@ -427,36 +452,35 @@
   {
    "scene": "2",
    "repliques": [
-    2,
-    4,
+    1,
+    3,
     5,
-    7,
+    6,
     8,
     10,
     12,
     14,
     15,
-    17,
+    16,
     18,
     19,
     21,
     22,
     24,
-    25,
+    26,
     27,
+    28,
     29,
-    30,
     31,
-    32,
-    34,
-    36,
-    38,
-    40,
-    42,
+    33,
+    35,
+    37,
+    39,
+    41,
     44,
-    47,
-    48,
-    51
+    45,
+    46,
+    48
    ],
    "lieu": "",
    "son": "",
@@ -465,64 +489,425 @@
   }
  ],
  "studio": {
-  "moment": "nuit",
+  "ambiances": [
+   "poussiere"
+  ],
   "lieux": [
    "rue",
    "salon"
   ],
-  "costumes": {
+  "personnages": {
    "presentateur": {
-    "haut": "tshirt",
-    "c_haut": "bleu marine",
-    "motif": "uni",
-    "bas": "jeans",
-    "chaussures": "baskets",
-    "details": [
-     "barbe_courte",
-     "moustache"
-    ],
-    "chapeau": null,
-    "cheveux": "court",
-    "c_cheveux": "brun"
+    "age": 15,
+    "barbe": "rien",
+    "corpulence": 0,
+    "genre": "h",
+    "taille": 0.8
    },
    "invite": {
-    "haut": "chemise",
-    "c_haut": "rouge",
-    "motif": "carreaux",
-    "bas": "short",
-    "chaussures": "baskets",
-    "details": [
-     "lunettes_vue"
-    ],
-    "chapeau": null,
-    "cheveux": "court_texture",
-    "c_cheveux": "blond"
+    "age": 42,
+    "barbe": "trois_jours",
+    "corpulence": 0.2,
+    "genre": "h",
+    "taille": 1
    }
   },
-  "lieux_de": {
-   "invite": "rue",
-   "presentateur": "salon"
-  },
-  "decoupe": [
+  "plans": [
    {
-    "replique": 51,
-    "plans": [
-     {
-      "debut": 0.0,
-      "plan": "tres_serre",
-      "cible": "presentateur",
-      "mouvement": "zoom_choc"
-     }
-    ]
+    "replique": 0,
+    "plan": "large",
+    "geste": "telephone",
+    "mouvement": "fixe",
+    "reaction": "aucune"
+   },
+   {
+    "geste": "explique",
+    "reaction": "choc",
+    "plan": "large",
+    "mouvement": "fixe",
+    "replique": 1
+   },
+   {
+    "plan": "large",
+    "reaction": "aucune",
+    "geste": "telephone",
+    "replique": 2,
+    "mouvement": "fixe"
+   },
+   {
+    "replique": 3,
+    "mouvement": "fixe",
+    "plan": "large",
+    "reaction": "choc",
+    "geste": "explique"
+   },
+   {
+    "mouvement": "fixe",
+    "plan": "large",
+    "reaction": "aucune",
+    "geste": "telephone",
+    "replique": 4
+   },
+   {
+    "replique": 5,
+    "mouvement": "fixe",
+    "plan": "large",
+    "geste": "explique",
+    "reaction": "choc"
+   },
+   {
+    "geste": "explique",
+    "plan": "large",
+    "replique": 6,
+    "reaction": "choc",
+    "mouvement": "fixe"
+   },
+   {
+    "geste": "telephone",
+    "mouvement": "fixe",
+    "replique": 7,
+    "plan": "large",
+    "reaction": "aucune"
+   },
+   {
+    "geste": "explique",
+    "plan": "large",
+    "reaction": "choc",
+    "mouvement": "fixe",
+    "replique": 8
+   },
+   {
+    "geste": "telephone",
+    "reaction": "aucune",
+    "plan": "large",
+    "replique": 9,
+    "mouvement": "fixe"
+   },
+   {
+    "plan": "large",
+    "mouvement": "fixe",
+    "reaction": "choc",
+    "replique": 10,
+    "geste": "explique"
+   },
+   {
+    "reaction": "aucune",
+    "mouvement": "fixe",
+    "replique": 11,
+    "geste": "telephone",
+    "plan": "large"
+   },
+   {
+    "replique": 12,
+    "plan": "large",
+    "mouvement": "fixe",
+    "geste": "explique",
+    "reaction": "choc"
+   },
+   {
+    "geste": "telephone",
+    "replique": 13,
+    "mouvement": "fixe",
+    "plan": "large",
+    "reaction": "aucune"
+   },
+   {
+    "replique": 14,
+    "reaction": "choc",
+    "geste": "explique",
+    "plan": "large",
+    "mouvement": "fixe"
+   },
+   {
+    "reaction": "choc",
+    "geste": "explique",
+    "plan": "large",
+    "mouvement": "fixe",
+    "replique": 15
+   },
+   {
+    "reaction": "choc",
+    "replique": 16,
+    "mouvement": "fixe",
+    "plan": "large",
+    "geste": "desespoir"
+   },
+   {
+    "plan": "large",
+    "replique": 17,
+    "mouvement": "fixe",
+    "geste": "telephone",
+    "reaction": "aucune"
+   },
+   {
+    "replique": 18,
+    "plan": "large",
+    "reaction": "choc",
+    "mouvement": "fixe",
+    "geste": "explique"
+   },
+   {
+    "replique": 19,
+    "plan": "large",
+    "geste": "explique",
+    "reaction": "choc",
+    "mouvement": "fixe"
+   },
+   {
+    "reaction": "aucune",
+    "mouvement": "fixe",
+    "geste": "telephone",
+    "plan": "large",
+    "replique": 20
+   },
+   {
+    "geste": "explique",
+    "reaction": "choc",
+    "plan": "large",
+    "mouvement": "fixe",
+    "replique": 21
+   },
+   {
+    "mouvement": "fixe",
+    "replique": 22,
+    "plan": "large",
+    "geste": "desespoir",
+    "reaction": "choc"
+   },
+   {
+    "plan": "large",
+    "geste": "telephone",
+    "mouvement": "fixe",
+    "replique": 23,
+    "reaction": "aucune"
+   },
+   {
+    "geste": "explique",
+    "plan": "large",
+    "reaction": "choc",
+    "replique": 24,
+    "mouvement": "fixe"
+   },
+   {
+    "geste": "telephone",
+    "replique": 25,
+    "reaction": "aucune",
+    "mouvement": "fixe",
+    "plan": "large"
+   },
+   {
+    "replique": 26,
+    "plan": "large",
+    "reaction": "choc",
+    "mouvement": "fixe",
+    "geste": "explique"
+   },
+   {
+    "reaction": "choc",
+    "geste": "explique",
+    "plan": "large",
+    "mouvement": "fixe",
+    "replique": 27
+   },
+   {
+    "plan": "large",
+    "replique": 28,
+    "reaction": "choc",
+    "geste": "explique",
+    "mouvement": "fixe"
+   },
+   {
+    "plan": "large",
+    "mouvement": "fixe",
+    "replique": 29,
+    "reaction": "choc",
+    "geste": "explique"
+   },
+   {
+    "replique": 30,
+    "geste": "telephone",
+    "reaction": "aucune",
+    "mouvement": "fixe",
+    "plan": "large"
+   },
+   {
+    "geste": "explique",
+    "replique": 31,
+    "plan": "large",
+    "reaction": "choc",
+    "mouvement": "fixe"
+   },
+   {
+    "reaction": "aucune",
+    "mouvement": "fixe",
+    "geste": "telephone",
+    "replique": 32,
+    "plan": "large"
+   },
+   {
+    "plan": "large",
+    "reaction": "choc",
+    "replique": 33,
+    "geste": "explique",
+    "mouvement": "fixe"
+   },
+   {
+    "geste": "telephone",
+    "replique": 34,
+    "plan": "large",
+    "mouvement": "fixe",
+    "reaction": "aucune"
+   },
+   {
+    "reaction": "choc",
+    "plan": "large",
+    "geste": "explique",
+    "mouvement": "fixe",
+    "replique": 35
+   },
+   {
+    "mouvement": "fixe",
+    "plan": "large",
+    "replique": 36,
+    "geste": "telephone",
+    "reaction": "aucune"
+   },
+   {
+    "geste": "explique",
+    "plan": "large",
+    "reaction": "choc",
+    "mouvement": "fixe",
+    "replique": 37
+   },
+   {
+    "plan": "large",
+    "mouvement": "fixe",
+    "reaction": "aucune",
+    "replique": 38,
+    "geste": "telephone"
+   },
+   {
+    "mouvement": "fixe",
+    "plan": "large",
+    "replique": 39,
+    "geste": "explique",
+    "reaction": "choc"
+   },
+   {
+    "replique": 40,
+    "geste": "telephone",
+    "mouvement": "fixe",
+    "plan": "large",
+    "reaction": "aucune"
+   },
+   {
+    "mouvement": "fixe",
+    "geste": "explique",
+    "reaction": "choc",
+    "plan": "large",
+    "replique": 41
+   },
+   {
+    "plan": "large",
+    "replique": 42,
+    "mouvement": "fixe",
+    "geste": "telephone",
+    "reaction": "aucune"
+   },
+   {
+    "mouvement": "fixe",
+    "plan": "large",
+    "replique": 43,
+    "geste": "telephone",
+    "reaction": "aucune"
+   },
+   {
+    "replique": 44,
+    "geste": "explique",
+    "plan": "large",
+    "mouvement": "fixe",
+    "reaction": "choc"
+   },
+   {
+    "reaction": "choc",
+    "mouvement": "fixe",
+    "geste": "explique",
+    "plan": "large",
+    "replique": 45
+   },
+   {
+    "replique": 46,
+    "mouvement": "fixe",
+    "geste": "explique",
+    "plan": "large",
+    "reaction": "choc"
+   },
+   {
+    "replique": 47,
+    "mouvement": "fixe",
+    "plan": "large",
+    "geste": "telephone",
+    "reaction": "aucune"
+   },
+   {
+    "mouvement": "fixe",
+    "reaction": "choc",
+    "plan": "large",
+    "geste": "explique",
+    "replique": 48
    }
-  ]
+  ],
+  "gags": [
+   "La Fin de Carrière de CR7 Signifie la Fin du Football"
+  ],
+  "objets": [
+   {
+    "replique": 0,
+    "objet": "telephone"
+   },
+   {
+    "replique": 0,
+    "objet": "bouteille"
+   }
+  ],
+  "costumes": {
+   "presentateur": {
+    "bas": "pantalon",
+    "c_bas": "noir",
+    "c_cheveux": "noir",
+    "c_haut": "violet",
+    "chaussures": "baskets",
+    "cheveux": "afro",
+    "details": [
+     "badge"
+    ],
+    "haut": "chemise",
+    "motif": "uni"
+   },
+   "invite": {
+    "bas": "pantalon",
+    "c_bas": "gris",
+    "c_cheveux": "marron",
+    "c_haut": "marron",
+    "chaussures": "chaussons",
+    "cheveux": "degarni",
+    "details": [],
+    "haut": "debardeur",
+    "motif": "uni"
+   }
+  },
+  "cadence": "rapide",
+  "lieux_de": {
+   "presentateur": "rue",
+   "invite": "salon"
+  }
  },
  "doublage": {
-  "piste": "/tmp/tmpn86bw454/piste.wav",
+  "piste": "/tmp/tmp0ox3ckpm/piste.wav",
   "duree": 89.89,
   "source": "https://www.tiktok.com/@yan_animation0/video/7678832582833736993",
   "auteur": "yan_animation0",
-  "contexte": "Un jeune homme, appelé 'fiston', hésite à monter dans la voiture d'une inconnue mystérieuse appelée Little Angel. Son père, au téléphone, tente désespérément de le convaincre de sauter cette opportunité unique, tout en gardant secrète cette décision de sa mère.",
+  "contexte": "Un adolescent appelle son père pour lui demander s'il doit monter dans la voiture d'une inconnue mystérieuse sur un parking, et son père l'encourage vivement à y aller.",
   "evenements": [],
   "visuel": {
    "duree": 90.0,
@@ -657,7 +1042,7 @@
    "nb_voix": 2,
    "voix": [
     {
-     "hz": 170,
+     "hz": 171,
      "genre": "?",
      "part": 0.78
     },
@@ -667,8 +1052,8 @@
      "part": 0.22
     }
    ],
-   "debit": 5.57,
-   "blanc_moyen": 0.16,
+   "debit": 5.54,
+   "blanc_moyen": 0.17,
    "coupes": 23,
    "dynamique_db": 19.0,
    "cris": 0.005,
@@ -680,17 +1065,17 @@
    "sur_vanne": 0,
    "evenements": {},
    "emotions": {
-    "hesitant": 5,
-    "urgent": 5,
-    "insistent": 5,
-    "emotional": 5,
-    "confused": 4,
-    "reassuring": 3,
-    "serious": 3,
-    "determined": 3
+    "insistent": 10,
+    "emotional": 7,
+    "hesitant": 6,
+    "reassuring": 5,
+    "neutral": 4,
+    "urgent": 4,
+    "confused": 3,
+    "excited": 2
    }
   },
-  "video_origine": "/tmp/tmpn86bw454/src.mp4"
+  "video_origine": "/tmp/tmp0ox3ckpm/src.mp4"
  },
  "fiche": {
   "note": 0,
@@ -734,17 +1119,7 @@
      32,
      33,
      34,
-     35
-    ],
-    "lieu": "",
-    "son": "",
-    "duree": 0.0,
-    "decor": "parking Leclerc at night, old car parked nearby, neon signs, trash bins",
-    "titre": "Decision Time"
-   },
-   {
-    "scene": "2",
-    "repliques": [
+     35,
      36,
      37,
      38,
@@ -757,98 +1132,95 @@
      45,
      46,
      47,
-     48,
-     49,
-     50,
-     51
+     48
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "living room with a couch, clock on the wall, scattered papers, a phone on the coffee table",
-    "titre": "Final Words"
+    "decor": "rue voiture montagnes",
+    "titre": "Sur le parking"
    }
   ]
  },
  "_monte": true,
  "_separes": true,
  "_voix_hz": {
-  "presentateur": 162,
-  "invite": 171
+  "presentateur": 172,
+  "invite": 161
  },
  "_voix_genre": {
   "presentateur": "h",
   "invite": "h"
  },
  "realisation": {
-  "moment": "nuit",
+  "moment": "soir",
   "lieux": [
    "rue",
    "salon"
   ],
-  "gags": [],
+  "gags": [
+   "La Fin de Carrière de CR7 Signifie la Fin du Football"
+  ],
   "ambiances": [
    "neige",
-   "pluie"
+   "pluie",
+   "poussiere"
   ],
   "source": "auteur+image",
   "tenues": {
-   "invite": "chemise",
-   "presentateur": "tshirt"
+   "presentateur": "chemise",
+   "invite": "debardeur"
   },
   "plans": [
-   "large/avance",
-   "large/avance",
-   "large/recul",
-   "tres_serre/fixe",
-   "moyen/recul",
-   "serre/avance",
-   "moyen/avance",
-   "serre/travelling",
-   "tres_serre/zoom_choc",
-   "moyen/recul",
-   "serre/avance",
-   "tres_serre/travelling",
-   "tres_serre/zoom_choc",
-   "tres_serre/fixe",
-   "serre/travelling",
-   "tres_serre/recul",
-   "moyen/avance",
-   "serre/travelling",
-   "large/travelling",
-   "tres_serre/avance",
-   "serre/avance",
-   "tres_serre/travelling",
-   "large/recul",
-   "serre/recul",
-   "large/avance",
-   "serre/avance",
-   "serre/recul",
-   "tres_serre/avance",
-   "serre/recul",
-   "serre/travelling",
-   "serre/avance",
-   "moyen/avance",
-   "serre/avance",
-   "moyen/avance",
-   "large/avance",
-   "tres_serre/recul",
-   "tres_serre/travelling",
-   "large/recul",
-   "large/travelling",
-   "serre/travelling",
-   "moyen/travelling",
-   "serre/recul",
-   "serre/travelling",
-   "tres_serre/zoom_choc",
-   "moyen/recul",
-   "serre/avance",
-   "moyen/avance",
-   "moyen/fixe",
-   "serre/recul",
-   "serre/travelling",
-   "serre/avance",
-   "serre/avance"
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe"
   ]
  }
 }
