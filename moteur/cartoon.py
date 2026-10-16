@@ -49,6 +49,12 @@ def emotion(d):
         if re.search(motif, tags): return nom
     return "neutre"
 
+CEL = (os.environ.get("CEL") or "1") != "0"                               # ombrage en aplat + contour extérieur épais (finition « toons » pro)
+LUMIERES_VIVES = (os.environ.get("LUMIERES_VIVES") or "1") != "0"
+MANGA = (os.environ.get("MANGA") or "1") != "0"                           # effets manga : fond qui explose, traits de vitesse
+SIGNATURE = (os.environ.get("SIGNATURE") or "1") != "0"                   # signature visuelle de la chaîne (logo, couleurs)
+_a = np.arange(256) / 255.0
+LUT_CHAINE = np.clip(255 * (_a - 0.30 * np.sin(2 * np.pi * _a) / (2 * np.pi)), 0, 255).astype(np.uint8)[:, None].repeat(3, 1)[:, None, :]   # courbe en S douce       # phares, télé, néon qui vivent pendant la scène
 PARALLAXE = (os.environ.get("PARALLAXE") or "1") != "0"                 # décors IA en profondeur (premier plan / fond)
 LUMIERE_DECOR = (os.environ.get("LUMIERE_DECOR") or "1") != "0"         # personnages éclairés par la lumière du lieu
 EXAGERE = float(os.environ.get("EXAGERE") or 1.25)                     # jeu des personnages : 1 = sobre, 1.25 = toons (défaut), 1.6 = très exagéré
@@ -138,6 +144,12 @@ def viseme_a(groupes, tm):
 def _mel(a, b, u):
     if a is None or b is None: return b if u > 0.5 else a
     return (a[0] + (b[0] - a[0]) * u, a[1] + (b[1] - a[1]) * u)
+
+def lisse(lv):
+    """Bouche lissée (pas de clignotement), sur ~0,17 s quelle que soit la cadence (30 ou 60 images/s)."""
+    n = max(2, int(round(FPS / 15)))
+    k = np.hanning(2 * n + 3)[1:-1]; k = k / k.sum()
+    return np.convolve(np.pad(lv, n, mode="edge"), k, "valid")
 
 def controle_image(tetes):
     """Défauts visibles à un instant, d'après la position des têtes à l'écran : tête coupée par le bord, deux personnages l'un
@@ -267,7 +279,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
     for i, (r, a) in enumerate(zip(reps, audios)):
         niv, lv = enveloppe(a); dur = len(a) / SR; att = float(r.get("attente", 0))
         if DOUB:                                                           # chaque réplique démarre à l'instant exact où elle est dite
-            t = float(r["_deb"]); lv = np.convolve(np.pad(lv, 2, mode="edge"), [0.1, 0.2, 0.4, 0.2, 0.1], "valid")
+            t = float(r["_deb"]); lv = lisse(lv)
             sc = scene_de.get(i, ph[-1]["scene"] if ph else 0)
             if ph and sc != ph[-1]["scene"] and not SEPARES:               # changement de scène : panoramique dans le blanc entre deux répliques
                 d0 = max(ph[-1]["fin"] + 0.05, t - 0.45)
@@ -281,7 +293,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             continue
         if i == len(reps) - 1 and not att and i: att = 0.45                # un temps avant la chute finale
         t += att
-        lv = np.convolve(np.pad(lv, 2, mode="edge"), [0.1, 0.2, 0.4, 0.2, 0.1], "valid")         # bouche lissée : pas de clignotement
+        lv = lisse(lv)         # bouche lissée : pas de clignotement
         sc = scene_de.get(i, ph[-1]["scene"] if ph else 0)
         if ph and ph[-1].get("teaser"):                                     # après l'accroche : retour au début de l'histoire
             transitions.append((t, t + 0.9, "carton", sc, "Un peu plus tôt…")); t += 0.9
@@ -347,6 +359,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
                 PROF[sc_] = cv2.resize(np.asarray(pr_, np.float32) / 255.0, (W // 4, H // 4), interpolation=cv2.INTER_AREA)
         except Exception as e: print(f"profondeur des décors indisponible : {e}", flush=True)
     GRILLE = np.mgrid[0:H // 4, 0:W // 4].astype(np.float32)[::-1] * 4 + 2  # (x, y) au quart de la résolution
+    VOIT = {}                                                              # objets de l'histoire en grand dans le décor (voiture garée)
     if B:
         studio.realiser(ph, places, B); sk["_bible"] = B
         DECOUPE = studio.decouper(ph, places, B, FPS) if os.environ.get("MONTAGE", "dynamique") != "simple" else []   # plusieurs plans par réplique
@@ -358,6 +371,19 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             if dd.get("avant") is not None: AVANT[sc_] = dd["avant"]          # premier plan (comptoir, bureau, guichet) : aussi devant un décor IA
             if sc_ in decors: continue                                     # décor IA (mode payant) : gardé tel quel
             decors[sc_] = dd["fond"]; INFOS[sc_] = dd
+        try:
+            import vehicules as VH
+            for sc_ in places:
+                lieu_ = B["lieux"][min(sc_, len(B["lieux"]) - 1)]
+                tx_ = " ".join(r["t"] for r in reps).lower()
+                if lieu_ in ("rue",) and re.search(r"\b(voiture|caisse|bagnole|berline|parking|4x4|monte dedans|monte dans)\b", tx_):
+                    qui_ = [r2 for r2 in places[sc_] if r2 != "narrateur"]
+                    xr_ = position(sc_, qui_[0])[0] if qui_ else W / 2
+                    l_ = 820; im_ = VH.voiture(VH.couleur_du_texte(tx_), 1 if xr_ > W / 2 else -1, l_)
+                    X0 = (W * 0.06 if xr_ > W / 2 else W * 0.94 - im_.shape[1]); Y0 = 1335 - VH.sol(l_)   # garée derrière, de l'autre côté
+                    VOIT[sc_] = (im_, X0, Y0)
+            if VOIT: print(f"objets de l'histoire : voiture garée dans {len(VOIT)} décor(s)", flush=True)
+        except Exception as e: print(f"voiture impossible : {e}", flush=True)
         print(f"studio : {B['moment']}, lieux {B['lieux']}, tenues " + ", ".join(f"{r}={c['haut']}" for r, c in B["costumes"].items())
               + f", {len(B['figurants'])} figurant(s), ambiances {B['ambiances']} ; plans " + " ".join(f"{q['plan']}/{q['mouvement']}" for q in ph), flush=True)
         GRADE = None                                                       # étalonnage (teinte de l'heure) × vignettage, calculé une fois
@@ -390,6 +416,14 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
     SANS_ENTREE = {ph[0]["scene"]}                                         # 1re scène : déjà là dès la première image (l'accroche compte)
     TITRE_FIXE = titre(sk.get("titre_accroche")) if not mini else None
     FILIGRANE = marque.filigrane(52)
+    TRAITS_VITESSE = []                                                    # traits de vitesse (manga) : du bord vers le centre
+    for k_t in range(2):
+        tv = np.zeros((H, W, 3), np.uint8); rg_t = np.random.default_rng(40 + k_t)
+        for _ in range(70):
+            a_t = rg_t.uniform(0, 2 * math.pi); r0 = rg_t.uniform(0.62, 0.8) * H * 0.55; r1 = H * 0.75
+            p0 = (int(W / 2 + math.cos(a_t) * r0), int(H * 0.42 + math.sin(a_t) * r0)); p1 = (int(W / 2 + math.cos(a_t) * r1), int(H * 0.42 + math.sin(a_t) * r1))
+            cv2.line(tv, p0, p1, (235, 235, 235), int(rg_t.integers(2, 6)), cv2.LINE_AA)
+        TRAITS_VITESSE.append(tv)
     TITRES = {k: titre(sc.get("titre")) for k, sc in enumerate(dec) if sc.get("titre")}
     VOIX_OFF = {q["i"]: carte_titre(reps[q["i"]]["t"]) for q in ph if q["p"] == "narrateur"}
     objets = {}
@@ -540,6 +574,9 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             if emo == "neutre" and lv > 0.72: p["sourcils"] = "hausses"         # sourcils qui appuient les mots forts
             ix = 1 + 0.45 * (q.get("intensite", 1) - 1) * EXAGERE              # jeu marqué ou très exagéré : la tête bouge plus
             p["tilt"] = (5 * math.sin(tm * 1.9 + len(role)) + 3 * lv) * ix + (8 * math.sin(tm * 15) if emo == "rire" else 0)
+            k_p = max(0, k - int(0.17 * FPS)); lv_p = float(q["lv"][k_p]) if k_p < len(q["lv"]) else lv     # la tête 0,17 s plus tôt :
+            t_p = (5 * math.sin((tm - 0.17) * 1.9 + len(role)) + 3 * lv_p) * ix              # cheveux, boucles d'oreilles, écharpe
+            p["balance"] = p.get("balance", 0.0) + 0.09 * (t_p - p["tilt"]) + 0.5 * (lv - lv_p)   # suivent avec du retard
             if q.get("intensite", 1) >= 2 and B:                               # grimace : yeux et sourcils poussés
                 p["pupille"] = p.get("pupille", 1.0) * (1 + 0.12 * (q["intensite"] - 1)); p["sourcils_h"] = p.get("sourcils_h", 0.0) + 0.25 * (q["intensite"] - 1)
             u_d = (tm - q["deb"]) / 0.3
@@ -607,8 +644,9 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             if emo == "colere": bg, bd = (bg[0] + 10 * math.sin(tm * 18), bg[1]), (bd[0] - 10 * math.sin(tm * 18), bd[1])
         if parle and B and not g_txt:                                       # les mains « battent » sur les mots appuyés de la voix
             k_ = int((tm - q["deb"]) * FPS)
-            for j_ in range(min(k_, len(q["lv"]) - 1), max(3, k_ - 9), -1):
-                if q["lv"][j_] - q["lv"][j_ - 3] > 0.32:
+            f3, f9 = max(3, FPS // 10), max(9, int(0.3 * FPS))
+            for j_ in range(min(k_, len(q["lv"]) - 1), max(f3, k_ - f9), -1):
+                if q["lv"][j_] - q["lv"][j_ - f3] > 0.32:
                     b_ = math.sin(math.pi * min(1.0, (k_ - j_) / FPS / 0.3)); bd = (bd[0], bd[1] - 28 * b_); bg = (bg[0], bg[1] + 14 * b_); break
         p["bras_g"], p["bras_d"] = bg, bd
         p["main_forme_g"], p["main_forme_d"] = mains
@@ -624,9 +662,20 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         # regard vers celui qui parle (ou vers celui à qui on parle), petites saccades, clignements
         autre = q["p"] if q["p"] != role else next((r2 for r2 in places[scene] if r2 != role), None)
         if autre and autre in places[scene]:
-            xa = position(scene, autre)[0]; p["regard"] = ((0.8 if xa > x else -0.8) + 0.12 * math.sin(tm * 0.7 + len(role)), 0.08 * math.sin(tm * 1.3))
+            xa = position(scene, autre)[0]
+            k_s = math.floor(tm * 1.7 + len(role) * 3.1)                  # saccades : le regard SAUTE d'un point à l'autre (vrais yeux)
+            sx_ = (math.sin(k_s * 12.9898) * 43758.5453) % 1 - 0.5; sy_ = (math.sin(k_s * 78.233) * 12543.21) % 1 - 0.5
+            p["regard"] = ((0.8 if xa > x else -0.8) + 0.22 * sx_, 0.14 * sy_)
+            if emo == "reflechit": p["regard"] = (0.45 * (1 if xa > x else -1), -0.65)          # il cherche en l'air
+            elif emo == "gene": p["regard"] = (0.35 * (1 if xa > x else -1) * (0.5 + sx_), 0.55)  # il fuit le regard, yeux baissés
         if B and cam_regard: p["regard"] = (0.0, 0.05); p["tilt"] *= 0.3   # il fixe la caméra
-        if any(0 <= tm - c < 0.12 for c in clign[role]) and p["yeux"] == "ouverts": p["yeux"] = "fermes"
+        # clignements : réguliers, plus rapides sous le stress (double clignement), paupière à demi pendant le geste
+        dt_c = min((tm - c for c in clign[role] if 0 <= tm - c < 0.16), default=None)
+        if emo in ("panique", "gene", "choc", "sceptique") and dt_c is None:
+            ph_ = (tm * (1.4 if emo == "panique" else 0.9) + len(role) * 0.37) % 1.0
+            if ph_ < 0.16: dt_c = ph_
+            elif emo == "panique" and 0.24 <= ph_ < 0.40: dt_c = ph_ - 0.24
+        if dt_c is not None and p["yeux"] == "ouverts": p["yeux"] = "fermes" if 0.035 <= dt_c < 0.11 else "vides"
         # objet en main pendant la réplique
         if mien and mien.get("objet") and tm <= mien["fin"] + 0.3:
             o = objets.get((mien["objet"], round(s, 2)))
@@ -849,6 +898,45 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
     AMB = {}
     SONDE = {"on": False, "res": []}
 
+    LUM_SC = {}
+    FM = {}
+    FOND_MANGA = {"choc": ((255, 214, 40), (255, 150, 30)), "panique": ((150, 90, 220), (90, 50, 160)), "cri": ((240, 70, 60), (255, 160, 60)),
+                  "colere": ((200, 30, 40), (120, 10, 20)), "joie": ((255, 225, 80), (255, 170, 200)), "amour": ((255, 150, 190), (255, 210, 225)),
+                  "idee": ((255, 240, 120), (255, 255, 230))}
+
+    def fond_manga(emo, k):
+        """Fond qui explose en rayons de couleur derrière le personnage (choc, colère, panique…), comme dans les mangas."""
+        if (emo, k) not in FM:
+            c1, c2 = FOND_MANGA[emo]; yy, xx = np.mgrid[0:H // 2, 0:W // 2].astype(np.float32) * 2
+            ang = np.arctan2(yy - H * 0.36, xx - W / 2) + k * math.pi / 24
+            ray = (np.floor(ang / (math.pi / 12)) % 2)[..., None]
+            im_ = (ray * np.array(c1, np.float32) + (1 - ray) * np.array(c2, np.float32)).astype(np.uint8)
+            FM[(emo, k)] = cv2.resize(im_, (W, H), interpolation=cv2.INTER_NEAREST)
+        return FM[(emo, k)]
+
+    def lumieres(img, tm, sc):
+        """Éclairage qui vit pendant la scène, selon le lieu et l'heure (lumière ajoutée, rien n'est flou)."""
+        lieu_ = B["lieux"][min(sc, len(B["lieux"]) - 1)] if B.get("lieux") else ""
+        nuit = B.get("moment") in ("soir", "nuit")
+        if sc not in LUM_SC:
+            yy, xx = np.mgrid[0:H // 4, 0:W // 4].astype(np.float32) * 4
+            tele = np.exp(-(((xx - W * 0.1) / 420) ** 2 + ((yy - H * 0.55) / 700) ** 2)) if lieu_ == "salon" else None
+            neon = np.exp(-(((yy - H * 0.12) / 380) ** 2)) if (lieu_ in ("bar", "restaurant") or "neon" in (B.get("ambiances") or [])) else None
+            up = lambda m, c, k: None if m is None else np.clip(cv2.resize(m, (W, H), interpolation=cv2.INTER_LINEAR)[..., None] * np.array(c, np.float32) * k, 0, 255).astype(np.uint8)
+            LUM_SC[sc] = (up(tele, (0.55, 0.7, 1.0), 30), up(neon, (1.0, 0.45, 0.8), 22))
+        tele, neon = LUM_SC[sc]
+        if lieu_ == "rue" and nuit:                                        # phares d'une voiture qui passe : bande de lumière qui balaie
+            per = 7.3; u = (tm + sc * 2.1) % per
+            if u < 1.4:
+                xc = -300 + (W + 600) * (u / 1.4); col_ = np.exp(-((np.arange(W, dtype=np.float32) - xc) / 260) ** 2) * 70 * math.sin(math.pi * u / 1.4)
+                bande = np.clip(col_[None, :, None] * np.array([1.0, 0.92, 0.7], np.float32), 0, 255).astype(np.uint8)
+                img[:] = cv2.add(img, np.broadcast_to(bande, img.shape).copy())
+        if tele is not None:                                               # télé allumée : lueur bleue qui change à chaque plan d'émission
+            pas = math.floor(tm * 3.2); v = 0.6 + 0.4 * ((math.sin(pas * 91.7) * 43758.5) % 1)
+            img[:] = cv2.add(img, cv2.convertScaleAbs(tele, alpha=v))
+        if neon is not None and (tm * 9.0 + sc) % 13.0 >= 0.35:            # néon : léger grésillement de temps en temps
+            img[:] = cv2.add(img, neon)
+
     def profond(fond, P, z, cx, cy):
         """Décor en profondeur (sans 3D) : le fond (loin) suit 80 % du mouvement de caméra, le premier plan (près) 97 %, comme les
         couches d'un vrai dessin animé. Cartes de déplacement calculées au quart de la résolution puis agrandies : l'image reste nette."""
@@ -863,7 +951,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         mx = cv2.resize(mx.astype(np.float32), (W, H), interpolation=cv2.INTER_LINEAR); my = cv2.resize(my.astype(np.float32), (W, H), interpolation=cv2.INTER_LINEAR)
         return cv2.remap(fond, mx, my, cv2.INTER_LINEAR, borderMode=cv2.BORDER_REPLICATE)
 
-    def eclairer(img, avant, sc, fond):
+    def eclairer(img, avant, sc, fond, z=1.0):
         """Les personnages prennent la lumière du lieu : teinte de l'ambiance du décor (orangée le soir dans la rue, bleutée devant
         la télé) et liseré de lumière du côté de la source (ils sont DANS le décor, pas collés dessus). Image toujours nette."""
         if sc not in AMB:
@@ -875,6 +963,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         if not m.any(): return
         ys, xs = np.nonzero(m); y0, y1, x0, x1 = ys.min(), ys.max() + 1, xs.min(), xs.max() + 1
         sub, mm = img[y0:y1, x0:x1], m[y0:y1, x0:x1]
+        mm = cv2.morphologyEx(mm.astype(np.uint8), cv2.MORPH_CLOSE, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (11, 11))) > 0   # sans trous
         sub[mm] = np.clip(sub[mm].astype(np.float32) * teinte, 0, 255).astype(np.uint8)
         sens = 1 if float((B or {}).get("lumiere", -1)) > 0 else -1          # la lumière vient de ce côté (l'ombre au sol part à l'opposé)
         d = 7
@@ -883,6 +972,18 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         clair = sub.astype(np.int16).sum(2) > 330                          # sur les parties claires (pas sur le trait noir ni l'ombre)
         z_ = bord & clair
         if z_.any(): sub[z_] = np.clip(sub[z_].astype(np.float32) * 0.55 + c_lis * 0.45, 0, 255).astype(np.uint8)
+        if CEL:                                                            # ombrage en aplat (cel-shading) : bande d'ombre du côté opposé
+            d2 = int(min(60, max(8, 20 * z)))                              # à la lumière → les personnages prennent du volume
+            ombre = np.zeros_like(mm); (ombre[:, d2:] if sens > 0 else ombre[:, :-d2])[:] = (mm[:, :-d2] if sens > 0 else mm[:, d2:])
+            zone_o = mm & ~ombre & clair & ~bord
+            if zone_o.any(): sub[zone_o] = (sub[zone_o].astype(np.float32) * np.array([0.84, 0.84, 0.9], np.float32)).astype(np.uint8)
+            ep_ = int(min(7, max(2, 2.5 * z)))                             # contour extérieur épais et net autour de toute la silhouette
+            av_ = avant[y0:y1, x0:x1].astype(np.int16)                     # l'ombre au sol (décor assombri) n'a pas de contour
+            sol_ = np.all(np.abs(sub.astype(np.int16) - (av_ * 0.8).astype(np.int16)) <= 6, axis=2)
+            corps = (mm & ~sol_).astype(np.uint8)
+            corps = cv2.morphologyEx(corps, cv2.MORPH_OPEN, np.ones((3, 3), np.uint8))   # sans les petits points isolés (pluie, poussière)
+            cont = (cv2.dilate(corps, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2 * ep_ + 1, 2 * ep_ + 1))) > 0) & ~mm
+            if cont.any(): sub[cont] = M.TRAIT
 
     def vue(tm):
         q = actif(tm); sc = q["scene"]
@@ -957,12 +1058,23 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         else:
             Mx = np.float32([[zb, 0, W / 2 - zb * cxb], [0, zb, H / 2 - zb * cyb]])
             img = cv2.warpAffine(fond, Mx, (W, H), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REPLICATE)
+        if B and sc in VOIT:                                               # voiture garée : elle glisse avec le décor
+            im_, X0, Y0 = VOIT[sc]
+            Mv = np.float32([[zb, 0, W / 2 + (X0 - cxb) * zb], [0, zb, H / 2 + (Y0 - cyb) * zb]])
+            cv_ = cv2.warpAffine(im_, Mv, (W, H), flags=cv2.INTER_LINEAR, borderValue=(0, 0, 0, 0))
+            a_ = cv_[..., 3:4].astype(np.float32) / 255
+            if a_.any(): img[:] = (img * (1 - a_) + cv_[..., :3] * a_).astype(np.uint8)
         if B:
             for f_ in B["figurants"]:
                 if f_["scene"] == sc and not cible_seule and not f_.get("compagnon"): figurant(f_, tm, img, zm, cxm, cym)
         sce = dec[sc] if sc < len(dec) else {}
         if sce.get("effet") == "tremblement" or (q["emo"] in ("cri", "colere") and q["deb"] <= tm <= q["fin"]):
             img = np.roll(img, (int(6 * math.sin(tm * 53)), int(6 * math.cos(tm * 47))), (0, 1))
+        if B and MANGA and plan_courant in studio.SERRES and q["p"] != "narrateur" and q["deb"] - 0.05 <= tm <= q["fin"] + 0.1 \
+                and q["emo"] in FOND_MANGA and (q.get("intensite", 1) >= 2 or q.get("chute")):
+            u_m = _ease((tm - q["deb"] + 0.05) / 0.18) * (1 - _ease((tm - q["fin"]) / 0.1))
+            fm = fond_manga(q["emo"], int(tm * 6) % 2)                     # rayons qui tournent un peu (2 dessins en alternance)
+            img[:] = cv2.addWeighted(img, 1 - 0.82 * u_m, fm, 0.82 * u_m, 0)
         avant_persos = img.copy() if (B and LUMIERE_DECOR) else None      # pour retrouver les pixels des personnages (lumière du lieu)
         for role in places[sc]:                                            # personnages dessinés nets à l'échelle du plan
             if cible_seule and role != cible_seule and cible_seule in places[sc]: continue
@@ -996,7 +1108,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             m_ = (np.abs(calque.astype(np.int16) - (1, 2, 3)).sum(2) > 9)[..., None]; img[:] = np.where(m_, calque, img)
         if B and not cible_seule:                                          # compagnons (muets) : même échelle que les personnages
             for f_ in COMP.get(sc, []): figurant(f_, tm, img, z, cx, cy)
-        if avant_persos is not None: eclairer(img, avant_persos, sc, fond)
+        if avant_persos is not None: eclairer(img, avant_persos, sc, fond, z)
         if False:                                                          # (amorce floue de l'autre, de dos : retirée, elle dédoublait l'image)
             ec = ecoutant(q); sens = -1 if position(sc, ec)[0] < position(sc, q["p"])[0] else 1
             y0_, x0_, x1_ = 1060, (0 if sens < 0 else W // 4), (W * 3 // 4 if sens < 0 else W)
@@ -1027,7 +1139,14 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             Ma = np.float32([[za, 0, W / 2 - za * cxa], [0, za, H / 2 - za * cya]])
             c_, m_ = AVANT_FLOU[sc]; ca = cv2.warpAffine(c_, Ma, (W, H)); ma = cv2.warpAffine(m_, Ma, (W, H))[..., None] * 0.95
             img = (img * (1 - ma) + ca * ma).astype(np.uint8)
+        if B and MANGA:                                                    # zoom choc : traits de vitesse sur les bords (style manga)
+            mv_ = sh["mouvement"] if sh is not None else (q.get("mouvement") if dans_q else None)
+            t0_ = sh["t0"] if sh is not None else q["deb"]
+            if mv_ == "zoom_choc" and 0 <= tm - t0_ < 0.45:
+                img[:] = cv2.add(img, cv2.convertScaleAbs(TRAITS_VITESSE[int(tm * 15) % 2], alpha=1 - (tm - t0_) / 0.45))
+        if B and LUMIERES_VIVES: lumieres(img, tm, sc)                      # phares qui passent, télé qui scintille, néon qui grésille
         if B: img = cv2.multiply(img, GRADE, scale=1 / 255)                 # étalonnage de l'heure + vignettage (avant les textes)
+        if B and SIGNATURE: img = cv2.LUT(img, LUT_CHAINE)                  # « look » de la chaîne : contraste et couleurs vives
         if B and CINE.get("etalonnage"):                                    # couleur de l'émotion (chaude, froide, rouge), en fondu
             j_ = ph.index(q); t_a = TEINTES.get(q["emo"], (1.0, 1.0, 1.0))
             t_p = TEINTES.get(ph[j_ - 1]["emo"], (1.0, 1.0, 1.0)) if j_ else (1.0, 1.0, 1.0); u_t = _ease((tm - q["deb"] + 0.2) / 0.5)
@@ -1042,7 +1161,11 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             poser(fr, a2, (W - a2.shape[1]) / 2, (H * 0.36 - a2.shape[0] / 2) if q is ph[0] else 300)
             if q is not ph[0]: poser(fr, FILIGRANE, 28, 118)
             return np.clip(fr, 0, 255).astype(np.uint8)
-        poser(fr, FILIGRANE, 28, 118)                                     # signature discrète de la chaîne
+        if SIGNATURE and tm < 0.75:                                        # signature de la chaîne : le logo « pop » puis file dans le coin
+            u_s = _ease(max(0.0, tm - 0.25) / 0.5); k_s = 2.4 - 1.4 * u_s
+            Fg = cv2.resize(FILIGRANE, (max(1, int(FILIGRANE.shape[1] * k_s)), max(1, int(FILIGRANE.shape[0] * k_s))), interpolation=cv2.INTER_AREA)
+            poser(fr, pop(Fg, (tm + 0.05) / 0.2), (W - Fg.shape[1]) / 2 * (1 - u_s) + 28 * u_s, 300 * (1 - u_s) + 118 * u_s)
+        else: poser(fr, FILIGRANE, 28, 118)                               # signature discrète de la chaîne
         T = TITRES.get(sc) if mini else TITRE_FIXE
         if T is not None:
             t0 = min(z2["deb"] for z2 in ph if z2["scene"] == sc) if mini else 0
@@ -1064,7 +1187,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         os.makedirs(sortie, exist_ok=True)
         for q in ph:
             for j, tm in enumerate((q["deb"] + 0.4, q["fin"] + 0.3) + ((q["fin"] + 1.0, GEL + 0.5) if q is ph[-1] else ())):
-                cv2.imwrite(f"{sortie}/{q['i']:02d}{'abcd'[j]}.png", cv2.cvtColor(cv2.resize(image(int(tm * FPS)), (360, 640)), cv2.COLOR_RGB2BGR))
+                cv2.imwrite(f"{sortie}/{q['i']:02d}{'abcd'[j]}.png", cv2.cvtColor((image(int(tm * FPS)) if os.environ.get("APERCU_PLEIN") == "1" else cv2.resize(image(int(tm * FPS)), (360, 640))), cv2.COLOR_RGB2BGR))
         return total
 
     # ---- son : voix, bruitages (woosh à chaque scène, rimshot à la chute finale)
@@ -1160,7 +1283,9 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             pool = mp.get_context("fork").Pool(n_proc)
         except Exception as e: print(f"  rendu parallèle impossible ({e}) : un seul processeur", flush=True); pool = None
     ff = subprocess.Popen(["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS),
-                           "-i", "-", "-i", wav, "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p",
+                           "-i", "-", "-i", wav, "-c:v", "libx264", "-preset", (os.environ.get("PRESET_X264") or "slow"), "-tune", "animation",
+                           "-crf", (os.environ.get("CRF") or "15"), "-maxrate", "20M", "-bufsize", "30M", "-profile:v", "high", "-level", "4.2",
+                           "-g", str(2 * FPS), "-colorspace", "bt709", "-color_primaries", "bt709", "-color_trc", "bt709", "-pix_fmt", "yuv420p",
                            "-c:a", "aac", "-b:a", "192k", "-shortest", "-movflags", "+faststart", sortie], stdin=subprocess.PIPE)
     images = pool.imap(_image_octets, range(nf), chunksize=4) if pool else (image(fi).tobytes() for fi in range(nf))
     try:

@@ -894,6 +894,26 @@ class TestQualiteVisuelle(unittest.TestCase):
         self.assertEqual(ph[1]["intensite"], 2)                              # cri : joué fort même sans IA
 
 
+class TestRemarqueAuteur(unittest.TestCase):
+    def test_remarque_retenue_par_le_jury(self):
+        import json as _j, tempfile, regie_action, qualite
+        d = tempfile.mkdtemp(); h = os.path.join(d, "historique.json"); r = os.path.join(d, "remarques_auteur.json")
+        _j.dump([{"fichier": "v.mp4", "titre": "T"}], open(h, "w"))
+        vieux = regie_action.HIST, regie_action.REMARQUES, qualite.REMARQUES_AUTEUR
+        avant = {k: os.environ.get(k) for k in ("ACTION", "FICHIER", "VALEUR")}
+        try:
+            regie_action.HIST, regie_action.REMARQUES, qualite.REMARQUES_AUTEUR = h, r, r
+            os.environ.update(ACTION="remarque", FICHIER="v.mp4", VALEUR="4|le père doit être en marcel sur le canapé")
+            self.assertEqual(regie_action.main(), 0); self.assertEqual(regie_action.main(), 0)      # rejouable : pas de doublon
+            self.assertEqual(len(_j.load(open(r))), 1); self.assertEqual(_j.load(open(h))[0]["note_auteur"], 4)
+            self.assertIn("marcel sur le canapé", qualite.regles_apprises())
+        finally:
+            regie_action.HIST, regie_action.REMARQUES, qualite.REMARQUES_AUTEUR = vieux
+            for k, v in avant.items():
+                if v is None: os.environ.pop(k, None)
+                else: os.environ[k] = v
+
+
 class TestModeEco(unittest.TestCase):
     def test_mode_eco(self):
         import reseau

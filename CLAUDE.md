@@ -41,6 +41,12 @@
   décrits d'après la vidéo d'origine ("decors_vus"), agrandis par l'IA (Real-ESRGAN) et sans flou, avec carte de profondeur
   (Depth Anything) pour la parallaxe (réglage PARALLAXE) ; personnages teintés par la lumière du lieu + liseré (LUMIERE_DECOR) ;
   contrôle image par image gratuit (têtes coupées, chevauchements, sous-titre sur un visage → corrections du jury).
+- **Finition « pro »** : 60 images/s en production (variable IPS, 30 en test), encodage x264 haute qualité (CRF 15, preset slow,
+  tune animation) ; ombrage en aplat + contour extérieur épais (CEL) ; yeux vivants (saccades, clignements selon l'émotion) ;
+  cheveux/vêtements en retard sur la tête ; voiture dessinée quand on en parle (`moteur/vehicules.py`) ; lumières vivantes
+  (phares, télé, néon : LUMIERES_VIVES) ; effets manga (fond qui explose, traits de vitesse : MANGA) ; signature de la chaîne
+  (logo qui « pop », courbe de couleurs : SIGNATURE) ; note et remarque de l'auteur depuis le site → `episodes/remarques_auteur.json`,
+  prioritaires dans `qualite.regles_apprises`.
 - Position assise : vue de face (buste, genoux et jambes dans le même sens).
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
