@@ -720,7 +720,9 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         if B: duo(p, role, tm, q, scene, parle)                            # gestes à deux (tope, main sur l'épaule, donner, pousser)
         if B:                                                              # corps vivant : poids du corps, trois-quarts, cheveux et vêtements qui suivent
             autre_ = q["p"] if q["p"] != role else next((r2 for r2 in places[scene] if r2 != role), None)
-            if autre_ in places[scene] and not cam_regard: p["tq"] = (0.35 if parle or q["p"] != role else 0.2) * (1 if position(scene, autre_)[0] > x else -1)
+            if autre_ in places[scene] and not cam_regard:                 # il tourne la tête vers l'autre (trois-quarts, profil sur une réaction)
+                k_tq = 0.5 if parle else (0.75 if (not parle and emo in ("choc", "sceptique", "blase")) else 0.4 if q["p"] != role else 0.25)
+                p["tq"] = k_tq * (1 if position(scene, autre_)[0] > x else -1)
             p["hanche"] = (0.35 if parle else 0.55) * math.sin(tm * (0.8 if parle else 0.45) + len(role) * 1.3)
             p["balance"] = p.get("balance", 0.0) + 2.4 * elan
             p["etire"] = max(0.0, 2.2 * elan)                              # geste vif : le bras s'étire un instant (étirement « toons »)
