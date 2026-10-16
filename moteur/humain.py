@@ -27,7 +27,7 @@ POUR_H = {"long": "raie", "carre": "raie", "mi_long": "raie", "queue": "court_te
 POUR_F = {"court": "carre", "raie": "frange", "rase": "carre", "banane": "frange", "herisse": "ondule", "degarni": "chignon",
           "chauve": "chignon", "court_texture": "carre", "meches": "carre", "nuque": "carre", "couronne": "chignon"}
 
-COURTS_JEUNE_H = ("court", "court_texture", "herisse", "banane", "raie")  # garçon ado : coiffures courtes de son âge
+COURTS_JEUNE_H = ("court", "court_texture", "herisse")  # garçon ado : coiffures courtes de son âge
 
 def _hex(c): return tuple(int(v) for v in c)
 def _melange(a, b, k): return tuple(int(x + (y - x) * k) for x, y in zip(a, b))
