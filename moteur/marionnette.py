@@ -392,11 +392,24 @@ def dessiner(img, perso, p):
         _ellipse(img, w_, (12 * s, 12 * s), 0, TRAIT); _ellipse(img, w_, (8 * s, 8 * s), 0, (240, 230, 200))
     # visage (ou nuque, de dos)
     tq = float(np.clip(p.get("tq", 0.0), -1, 1))                           # trois-quarts : le visage se tourne vers celui à qui on parle
-    tete_f = (tete[0] + tq * rx * 0.17, tete[1])
+    tete_f = (tete[0] + tq * rx * 0.48, tete[1])                           # le visage glisse vers le côté où il regarde (trois-quarts)
+    garde = None
+    if abs(tq) > 0.12 and not dos:                                         # tout ce qui sort de la tête (barbe, joues) sera recoupé
+        roi_t = _roi(img, tete[0], tete[1], rx * 1.7, ry * 1.4)
+        if roi_t: garde = (roi_t, img[roi_t[1]:roi_t[3], roi_t[0]:roi_t[2]].copy())
     if not dos: _visage(img, tete_f, rx, ry, st, p, P)
+    if C and not dos: _details_tete(img, tete_f, rx, ry, st, p, C)
+    if garde is not None:                                                  # le visage tourné reste DANS la tête
+        (x0_, y0_, x1_, y1_), av_ = garde
+        dedans = _masque_ellipse((x0_, y0_, x1_, y1_), tete, (rx + ep * 0.6, ry + ep * 0.6), p["tilt"]) > 128
+        z_ = img[y0_:y1_, x0_:x1_]; z_[~dedans] = av_[~dedans]
+        if abs(tq) > 0.55 and p.get("reflets"):                            # de profil : le nez dépasse du contour de la tête
+            sg_ = 1 if tq > 0 else -1; k_ = min(1.0, (abs(tq) - 0.55) / 0.35)
+            nzx, nzy = _rot(tete[0] + sg_ * rx * 0.97, tete[1] + 32 * st, tete[0], tete[1], math.radians(p["tilt"]))
+            _ellipse(img, (nzx + sg_ * 6 * st * k_, nzy), (12 * st + 8 * st * k_, 11 * st), 0, TRAIT)
+            _ellipse(img, (nzx + sg_ * 4 * st * k_ - sg_ * 3 * st, nzy), (8 * st + 7 * st * k_, 7 * st), 0, tuple(p.get("peau") or BLANC))
     if P.get("cheveux") and p.get("coiffure", True): _cheveux_avant(img, tete, rx, ry, st, p, P, dos)
     if P.get("accessoire"): _accessoire(img, tete, rx, ry, st, p, P)
-    if C and not dos: _details_tete(img, tete_f, rx, ry, st, p, C)
     if C and C.get("chapeau") in CHAPEAUX: GR.chapeau(img, tete, rx, ry, st, p, C["chapeau"], tuple(C.get("c_chapeau") or (60, 60, 70)))
     _effets(img, tete, rx, ry, st, p)
     for nom in ("main_g", "main_d"):                                       # objet tenu en main (calque RGBA)
@@ -628,7 +641,7 @@ BOUCHES = ("neutre", "sourire", "triste", "o", "cri", "dents", "moue", "coin", "
 def _visage(img, t, rx, ry, s, p, P):
     cx, cy = t; tilt = math.radians(p["tilt"]); gx, gy = p["regard"]
     def R(px, py): return _rot(px, py, cx, cy, tilt)
-    ex = 52 * s * (1 - 0.16 * abs(float(p.get("tq", 0.0)))); ey = cy + 4 * s; er = 15 * s * float(p.get("yeux_k", 1.0))   # taille des yeux propre au personnage ; trois-quarts : yeux rapprochés
+    ex = 52 * s * (1 - 0.28 * abs(float(p.get("tq", 0.0)))); ey = cy + 4 * s; er = 15 * s * float(p.get("yeux_k", 1.0))   # taille des yeux propre au personnage ; trois-quarts : yeux rapprochés
     yeux, pa = p["yeux"], p["paupiere"]
     detail = bool(p.get("reflets"))                                        # visage détaillé (moteur cartoon) ; le logo garde le dessin d'origine
     lum = p.get("lumiere", 0) or -1
