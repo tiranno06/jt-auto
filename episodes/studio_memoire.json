@@ -484,5 +484,45 @@
    "son": true
   },
   "cadence": null
+ },
+ {
+  "moment": "soir",
+  "lieux": [
+   "restaurant"
+  ],
+  "source": "robot",
+  "duree": 25.1,
+  "plans": {
+   "large": 4,
+   "moyen": 2,
+   "serre": 1
+  },
+  "mouvements": {
+   "fixe": 6,
+   "avance": 1
+  },
+  "costumes": {
+   "envoyee": "tablier",
+   "presentateur": "chemise",
+   "invite": "col_roule"
+  },
+  "figurants": 2,
+  "ambiances": [
+   "poussiere",
+   "vapeur"
+  ],
+  "controle": "Humoriste 6.0/10 : 19.8 s La chute sur la valise manque d'impact comique sans gros plan dramatisé. | Réalisateur 7.0/10 : 10.4 s Manque de dynamisme dans les coupes lors de la révélation du sac de cro",
+  "fichier": "2026-10-16_17h26_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": false,
+   "tiers": true,
+   "etalonnage": false,
+   "profondeur": false,
+   "grain": true,
+   "reflets": false,
+   "son": true
+  },
+  "cadence": null
  }
 ]
