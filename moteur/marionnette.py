@@ -477,17 +477,33 @@ def _vetement(img, x, cy, w, h, tete, ry, s, ep, C, dos):
         _ligne(img, (x + 38 * s, cou + 14 * s), (x + 30 * s, cy + 6 * s), (60, 60, 70), 6 * s)
         _ellipse(img, (x + 30 * s, cy + 14 * s), (11 * s, 11 * s), 0, TRAIT); _ellipse(img, (x + 30 * s, cy + 14 * s), (7 * s, 7 * s), 0, (190, 195, 205))
 
+GROSSES_BARBES = ("barbe_pleine", "barbe_courte", "favoris")              # remplacées par une barbe de trois jours (consigne de l'auteur)
+
 def _details_tete(img, t, rx, ry, s, p, C):
     det = C.get("details", ()); cx, cy = t; tilt = math.radians(p["tilt"])
+    if any(b_ in det for b_ in GROSSES_BARBES):                            # choix de l'auteur : jamais de grosse barbe, une barbe mal rasée
+        det = tuple(d for d in det if d not in GROSSES_BARBES) + (("barbe",) if "barbe" not in det else ())
     def R(px, py): return _rot(px, py, cx, cy, tilt)
     if "lunettes_vue" in det:
         for sg in (-1, 1): _ellipse(img, R(cx + sg * 52 * s, cy + 4 * s), (32 * s, 28 * s), math.degrees(tilt), TRAIT, 5 * s)
         _ligne(img, R(cx - 20 * s, cy), R(cx + 20 * s, cy), TRAIT, 4 * s)
-    if "barbe" in det:                                                     # barbe de trois jours : points gris sur le menton
-        rng = np.random.default_rng(3)
-        for _ in range(40):
-            a = rng.uniform(0.15 * math.pi, 0.85 * math.pi); r_ = rng.uniform(0.62, 0.92)
-            _ellipse(img, R(cx + math.cos(a) * rx * r_, cy + math.sin(a) * ry * r_), (2.2 * s, 2.2 * s), 0, (150, 150, 155))
+    if "barbe" in det:                                                     # barbe de trois jours (mal rasée) : joues, menton, lèvre du haut
+        rng = np.random.default_rng(3); cb = tuple(C.get("c_barbe") or (90, 65, 45)); point = tuple(int(v * 0.8) for v in cb)
+        # ombre de la barbe : croissant sur la mâchoire (de l'oreille au menton) et au-dessus de la lèvre, très légère
+        bord = [R(cx + math.cos(a) * rx * 0.97, cy + math.sin(a) * ry * 0.97) for a in np.linspace(0.02 * math.pi, 0.98 * math.pi, 24)]
+        dedans = [R(cx + math.cos(a) * rx * 0.62, cy + ry * 0.30 + math.sin(a) * ry * 0.42) for a in np.linspace(0.98 * math.pi, 0.02 * math.pi, 24)]
+        pts = np.array(bord + dedans, np.float32)
+        x0, y0 = np.floor(pts.min(0)).astype(int) - 2; x1, y1 = np.ceil(pts.max(0)).astype(int) + 2
+        x0, y0 = max(0, x0), max(0, y0); x1, y1 = min(img.shape[1], x1), min(img.shape[0], y1)
+        if x1 > x0 and y1 > y0:
+            zone = img[y0:y1, x0:x1]; calque = zone.copy()
+            cv2.fillPoly(calque, [(pts - [x0, y0]).astype(np.int32)], cb, AA)
+            cv2.addWeighted(calque, 0.16, zone, 0.84, 0, dst=zone)
+        for _ in range(240):                                               # poils fins, serrés sur la mâchoire et le menton
+            a = rng.uniform(0.06 * math.pi, 0.94 * math.pi); r_ = rng.uniform(0.72, 0.95)
+            _ellipse(img, R(cx + math.cos(a) * rx * r_, cy + math.sin(a) * ry * r_), (1.3 * s, 1.3 * s), 0, point)
+        for _ in range(40):                                                # au-dessus de la lèvre
+            _ellipse(img, R(cx + rng.uniform(-28, 28) * s, cy + rng.uniform(0.31, 0.39) * ry), (1.2 * s, 1.2 * s), 0, point)
     if "moustache" in det: _moustache(img, R, cx, cy, s)
     for b_ in GR.BARBES:
         if b_ in det:

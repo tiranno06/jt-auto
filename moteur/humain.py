@@ -55,7 +55,7 @@ def creer(graine, genre=None, age=None, cheveux=None, c_cheveux=None, corpulence
                 iris=IRIS[int(rng.integers(len(IRIS)))], yeux=float(rng.uniform(0.9, 1.12)), nez=str(rng.choice(["droit", "rond", "fort", "fin"])),
                 levres=float(rng.uniform(0.8, 1.25) * (1.12 if g == "f" else 1.0)), sourcils=float(rng.uniform(0.85, 1.3) * (1.15 if g == "h" else 0.9)),
                 cheveux=str(style), c_cheveux=cc,
-                barbe="" if g == "f" else barbe if barbe is not None else (str(rng.choice(["", "", "", "trois_jours", "courte", "moustache", "bouc", "favoris", "barbe_pleine"])) if g == "h" and a >= 20 else ""),
+                barbe="" if g == "f" else barbe if barbe is not None else (str(rng.choice(["", "", "", "trois_jours", "trois_jours", "trois_jours", "moustache", "bouc"])) if g == "h" and a >= 20 else ""),
                 lunettes=lunettes if lunettes is not None else (str(rng.choice(["rondes", "rectangle"])) if rng.random() < (0.18 + 0.006 * max(0, a - 35)) else ""),
                 maquillage=bool(g == "f" and not jeune and rng.random() < 0.6))
 
