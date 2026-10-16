@@ -291,8 +291,8 @@ def main():
                 video_ok, rapport_video = not Q["defauts_graves"], Q["rapport"]
                 try: tours = max(0, min(2, int(os.environ.get("JURY_TOURS") or 1)))
                 except ValueError: tours = 1
-                try: seuil_j = float(os.environ.get("SEUIL_JURY") or 9.5)
-                except ValueError: seuil_j = 9.5
+                try: seuil_j = float(os.environ.get("SEUIL_JURY") or 9.8)
+                except ValueError: seuil_j = 9.8
                 for tour in range(tours):                                  # corrections automatiques puis nouvelle version, on garde la meilleure
                     if Q["note"] >= seuil_j or not Q["corrections"]: break
                     sk2 = copy.deepcopy(sk); faites = qualite.corriger(sk2, Q["corrections"])

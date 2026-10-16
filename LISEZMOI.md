@@ -160,7 +160,7 @@ Les moyennes (pondérées par les vues de nos vidéos) guident les vidéos suiva
 À chaque vidéo, un jury de 5 critiques donne une note sur 10 et au plus 3 remarques précises (avec le moment) : **humoriste** (vannes, chute, réactions, bruitages sur les vannes), **réalisateur** (rythme des plans, celui qui parle bien filmé, réactions, caméra), **directeur artistique** (âge, sexe, allure, décors, personnes dont on parle qu'on devrait voir, lieux séparés), **ingénieur du son** (blancs, bruitages, volume) et **spectateur TikTok** (accroche, moments creux, durée, sous-titres, fin).
 - **Gratuit** (toujours) : règles calculées sur ce que le moteur a vraiment monté.
 - **Claude** (s'il y a du crédit, ~0,10 $) : il regarde les images de la vidéo et, pour un lien TikTok, celles de la vidéo d'origine aux mêmes instants, et liste ce qui manque.
-- **Corrections automatiques** : plan, réaction, bruitage, casting (âge, sexe, barbe), personne ajoutée, lieux séparés, décor, tenue ; la vidéo est refaite et on garde la mieux notée (réglages `JURY_TOURS`, 1 par défaut ; `SEUIL_JURY`, 9,5 ; `JURY=0` pour couper).
+- **Corrections automatiques** : plan, réaction, bruitage, casting (âge, sexe, barbe), personne ajoutée, lieux séparés, décor, tenue ; la vidéo est refaite et on garde la mieux notée (réglages `JURY_TOURS`, 1 par défaut ; `SEUIL_JURY`, 9,8 ; `JURY=0` pour couper).
 - **Mémoire** (`episodes/qualite_memoire.json`) : les erreurs qui reviennent deviennent des règles données à Claude ; le poids de chaque critique s'ajuste selon les vues TikTok. La fiche du jury est gardée dans l'historique de chaque vidéo.
 
 ## Bruitages « tendance » (moteur/bruitages.py)

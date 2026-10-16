@@ -122,7 +122,11 @@ def jury_gratuit(R, sk, rapport_tech=""):
     trous = [(a["fin"], b["deb"]) for a, b in zip(ph, ph[1:]) if b["deb"] - a["fin"] > 1.4]
     if trous and not doub: rq.append(_rq("son", trous[0][0], f"blanc de {trous[0][1] - trous[0][0]:.1f} s sans rien : ça casse le rythme", None, 0.8, "blanc_long"))
     dens = len(br) / total * 10
-    if dens < 0.8 and not doub: rq.append(_rq("son", None, f"peu de bruitages ({len(br)} en {total:.0f} s) : la vidéo manque de relief", None, 0.6, "peu_de_bruitages"))
+    if dens < 0.8 and not doub:
+        cand = [q for q in parlees if q is not ph[-1] and not any(abs(t - q["fin"]) < 1.0 for _, t, _ in br)]
+        q = max(cand, key=lambda z: (z["texte"].rstrip().endswith(("!", "?")), len(z["texte"]))) if cand else None
+        rq.append(_rq("son", q["fin"] if q else None, f"peu de bruitages ({len(br)} en {total:.0f} s) : la vidéo manque de relief",
+                      {"type": "bruitage", "replique": q["i"], "son": "boing" if q["texte"].rstrip().endswith("!") else "bulle"} if q else None, 0.8, "peu_de_bruitages"))
     if dens > 4.5: rq.append(_rq("son", None, "trop de bruitages : ils fatiguent l'oreille", None, 0.6, "trop_de_bruitages"))
     if rapport_tech and "ok" not in rapport_tech[:3]: rq.append(_rq("son", None, f"contrôle technique : {rapport_tech[:120]}", None, 1.5, "technique"))
     # --- spectateur TikTok
