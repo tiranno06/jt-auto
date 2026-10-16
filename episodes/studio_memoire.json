@@ -734,5 +734,51 @@
    "son": true
   },
   "cadence": "rapide"
+ },
+ {
+  "moment": "jour",
+  "lieux": [
+   "rue",
+   "salon"
+  ],
+  "source": "auteur+image",
+  "duree": 93.1,
+  "plans": {
+   "moyen": 13,
+   "tres_serre": 9,
+   "serre": 22,
+   "large": 8
+  },
+  "mouvements": {
+   "fixe": 18,
+   "travelling": 6,
+   "zoom_choc": 3,
+   "avance": 20,
+   "recul": 4,
+   "vertige": 1
+  },
+  "costumes": {
+   "invite": "chemise",
+   "presentateur": "debardeur"
+  },
+  "figurants": 3,
+  "ambiances": [
+   "neige",
+   "pluie",
+   "poussiere"
+  ],
+  "controle": "Humoriste 5.0/10 : 88.9 s La punchline finale 'Prends des photos' manque d'impact comique et tombe à plat sans bruitage pour marquer le choc comique.; 70.6 s Sur 'Pourquoi les couilles ?', le fils dev",
+  "fichier": "2026-10-16_22h35_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": true,
+   "tiers": true,
+   "etalonnage": false,
+   "profondeur": false,
+   "grain": false,
+   "reflets": false,
+   "son": true
+  },
+  "cadence": "rapide"
  }
 ]

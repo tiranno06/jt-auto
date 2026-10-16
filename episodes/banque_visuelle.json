@@ -1396,7 +1396,7 @@
    "nb_voix": 2,
    "voix": [
     {
-     "hz": 171,
+     "hz": 170,
      "genre": "?",
      "part": 0.78
     },
@@ -1406,9 +1406,9 @@
      "part": 0.22
     }
    ],
-   "debit": 5.54,
+   "debit": 5.58,
    "blanc_moyen": 0.17,
-   "coupes": 23,
+   "coupes": 24,
    "dynamique_db": 19.0,
    "cris": 0.005,
    "musique": null,
@@ -1419,14 +1419,14 @@
    "sur_vanne": 0,
    "evenements": {},
    "emotions": {
-    "insistent": 10,
-    "emotional": 7,
-    "hesitant": 6,
+    "hesitant": 16,
+    "insistent": 11,
+    "urgent": 8,
+    "emotional": 6,
     "reassuring": 5,
-    "neutral": 4,
-    "urgent": 4,
-    "confused": 3,
-    "excited": 2
+    "sceptique": 2,
+    "panique": 2,
+    "choc": 1
    }
   },
   "claude": {
@@ -1434,402 +1434,199 @@
     "rue",
     "salon"
    ],
+   "moment": "jour",
    "costumes": {
     "presentateur": {
+     "haut": "debardeur",
+     "c_haut": "kaki",
+     "motif": "uni",
      "bas": "pantalon",
-     "c_bas": "noir",
-     "c_cheveux": "noir",
-     "c_haut": "violet",
-     "chaussures": "baskets",
-     "cheveux": "afro",
-     "details": [
-      "badge"
-     ],
-     "haut": "chemise",
-     "motif": "uni"
-    },
-    "invite": {
-     "bas": "pantalon",
-     "c_bas": "gris",
-     "c_cheveux": "marron",
-     "c_haut": "marron",
      "chaussures": "chaussons",
      "cheveux": "degarni",
-     "details": [],
-     "haut": "debardeur",
-     "motif": "uni"
+     "c_cheveux": "noir",
+     "details": [
+      "moustache"
+     ]
+    },
+    "invite": {
+     "haut": "chemise",
+     "c_haut": "violet",
+     "motif": "uni",
+     "bas": "jean",
+     "chaussures": "baskets",
+     "cheveux": "afro",
+     "c_cheveux": "noir",
+     "details": [
+      "badge"
+     ]
     }
    },
    "objets": [
     {
-     "replique": 0,
+     "objet": "telephone",
+     "replique": 0
+    },
+    {
+     "objet": "telephone",
+     "replique": 2
+    },
+    {
+     "replique": 2,
+     "objet": "bouteille"
+    },
+    {
+     "objet": "telephone",
+     "replique": 6
+    },
+    {
+     "replique": 7,
+     "objet": "bouteille"
+    },
+    {
+     "replique": 21,
      "objet": "telephone"
     },
     {
-     "replique": 0,
-     "objet": "bouteille"
+     "objet": "bouteille",
+     "replique": 27
+    },
+    {
+     "objet": "telephone",
+     "replique": 40
+    },
+    {
+     "replique": 47,
+     "objet": "telephone"
+    },
+    {
+     "objet": "telephone",
+     "replique": 51
     }
    ],
    "gags": [
-    "La Fin de Carrière de CR7 Signifie la Fin du Football"
+    "La Fin de Carrière de CR7 Signifie la Fin du Football",
+    "Horloge suggestive"
    ],
    "ambiances": [
     "poussiere"
    ],
    "plans": [
     {
+     "mouvement": "fixe",
      "replique": 0,
-     "plan": "large",
-     "geste": "telephone",
-     "mouvement": "fixe",
-     "reaction": "aucune"
-    },
-    {
-     "geste": "explique",
-     "reaction": "choc",
-     "plan": "large",
-     "mouvement": "fixe",
-     "replique": 1
-    },
-    {
-     "plan": "large",
-     "reaction": "aucune",
-     "geste": "telephone",
-     "replique": 2,
-     "mouvement": "fixe"
-    },
-    {
-     "replique": 3,
-     "mouvement": "fixe",
-     "plan": "large",
-     "reaction": "choc",
-     "geste": "explique"
-    },
-    {
-     "mouvement": "fixe",
-     "plan": "large",
-     "reaction": "aucune",
-     "geste": "telephone",
-     "replique": 4
-    },
-    {
-     "replique": 5,
-     "mouvement": "fixe",
-     "plan": "large",
-     "geste": "explique",
-     "reaction": "choc"
-    },
-    {
-     "geste": "explique",
-     "plan": "large",
-     "replique": 6,
-     "reaction": "choc",
-     "mouvement": "fixe"
-    },
-    {
-     "geste": "telephone",
-     "mouvement": "fixe",
-     "replique": 7,
-     "plan": "large",
-     "reaction": "aucune"
-    },
-    {
-     "geste": "explique",
-     "plan": "large",
-     "reaction": "choc",
-     "mouvement": "fixe",
-     "replique": 8
-    },
-    {
-     "geste": "telephone",
-     "reaction": "aucune",
-     "plan": "large",
-     "replique": 9,
-     "mouvement": "fixe"
-    },
-    {
-     "plan": "large",
-     "mouvement": "fixe",
-     "reaction": "choc",
-     "replique": 10,
-     "geste": "explique"
-    },
-    {
-     "reaction": "aucune",
-     "mouvement": "fixe",
-     "replique": 11,
-     "geste": "telephone",
-     "plan": "large"
-    },
-    {
-     "replique": 12,
-     "plan": "large",
-     "mouvement": "fixe",
-     "geste": "explique",
-     "reaction": "choc"
-    },
-    {
-     "geste": "telephone",
-     "replique": 13,
-     "mouvement": "fixe",
-     "plan": "large",
-     "reaction": "aucune"
-    },
-    {
-     "replique": 14,
-     "reaction": "choc",
-     "geste": "explique",
-     "plan": "large",
-     "mouvement": "fixe"
-    },
-    {
-     "reaction": "choc",
-     "geste": "explique",
-     "plan": "large",
-     "mouvement": "fixe",
-     "replique": 15
-    },
-    {
-     "reaction": "choc",
-     "replique": 16,
-     "mouvement": "fixe",
-     "plan": "large",
-     "geste": "desespoir"
-    },
-    {
-     "plan": "large",
-     "replique": 17,
-     "mouvement": "fixe",
-     "geste": "telephone",
-     "reaction": "aucune"
-    },
-    {
-     "replique": 18,
-     "plan": "large",
-     "reaction": "choc",
-     "mouvement": "fixe",
-     "geste": "explique"
-    },
-    {
-     "replique": 19,
-     "plan": "large",
-     "geste": "explique",
-     "reaction": "choc",
-     "mouvement": "fixe"
-    },
-    {
-     "reaction": "aucune",
-     "mouvement": "fixe",
-     "geste": "telephone",
-     "plan": "large",
-     "replique": 20
-    },
-    {
-     "geste": "explique",
-     "reaction": "choc",
-     "plan": "large",
-     "mouvement": "fixe",
-     "replique": 21
-    },
-    {
-     "mouvement": "fixe",
-     "replique": 22,
-     "plan": "large",
-     "geste": "desespoir",
-     "reaction": "choc"
-    },
-    {
-     "plan": "large",
-     "geste": "telephone",
-     "mouvement": "fixe",
-     "replique": 23,
-     "reaction": "aucune"
-    },
-    {
-     "geste": "explique",
-     "plan": "large",
-     "reaction": "choc",
-     "replique": 24,
-     "mouvement": "fixe"
-    },
-    {
-     "geste": "telephone",
-     "replique": 25,
-     "reaction": "aucune",
-     "mouvement": "fixe",
-     "plan": "large"
-    },
-    {
-     "replique": 26,
-     "plan": "large",
-     "reaction": "choc",
-     "mouvement": "fixe",
-     "geste": "explique"
-    },
-    {
-     "reaction": "choc",
-     "geste": "explique",
-     "plan": "large",
-     "mouvement": "fixe",
-     "replique": 27
-    },
-    {
-     "plan": "large",
-     "replique": 28,
-     "reaction": "choc",
-     "geste": "explique",
-     "mouvement": "fixe"
-    },
-    {
-     "plan": "large",
-     "mouvement": "fixe",
-     "replique": 29,
-     "reaction": "choc",
-     "geste": "explique"
-    },
-    {
-     "replique": 30,
-     "geste": "telephone",
-     "reaction": "aucune",
-     "mouvement": "fixe",
-     "plan": "large"
-    },
-    {
-     "geste": "explique",
-     "replique": 31,
-     "plan": "large",
-     "reaction": "choc",
-     "mouvement": "fixe"
-    },
-    {
-     "reaction": "aucune",
-     "mouvement": "fixe",
-     "geste": "telephone",
-     "replique": 32,
-     "plan": "large"
-    },
-    {
-     "plan": "large",
-     "reaction": "choc",
-     "replique": 33,
-     "geste": "explique",
-     "mouvement": "fixe"
-    },
-    {
-     "geste": "telephone",
-     "replique": 34,
-     "plan": "large",
-     "mouvement": "fixe",
-     "reaction": "aucune"
-    },
-    {
-     "reaction": "choc",
-     "plan": "large",
-     "geste": "explique",
-     "mouvement": "fixe",
-     "replique": 35
-    },
-    {
-     "mouvement": "fixe",
-     "plan": "large",
-     "replique": 36,
-     "geste": "telephone",
-     "reaction": "aucune"
-    },
-    {
-     "geste": "explique",
-     "plan": "large",
-     "reaction": "choc",
-     "mouvement": "fixe",
-     "replique": 37
-    },
-    {
-     "plan": "large",
-     "mouvement": "fixe",
-     "reaction": "aucune",
-     "replique": 38,
+     "reaction": "sceptique",
+     "plan": "moyen",
      "geste": "telephone"
     },
     {
+     "plan": "moyen",
+     "reaction": "choc",
+     "mouvement": "zoom_choc",
+     "geste": "desespoir",
+     "replique": 2
+    },
+    {
+     "plan": "moyen",
+     "reaction": "aucune",
+     "geste": "telephone",
      "mouvement": "fixe",
-     "plan": "large",
-     "replique": 39,
-     "geste": "explique",
+     "replique": 3
+    },
+    {
+     "reaction": "sceptique",
+     "plan": "serre",
+     "mouvement": "avance",
+     "replique": 4,
+     "geste": "supplie"
+    },
+    {
+     "plan": "serre",
+     "replique": 7,
+     "geste": "desespoir",
+     "mouvement": "vertige",
      "reaction": "choc"
+    },
+    {
+     "plan": "serre",
+     "reaction": "aucune",
+     "mouvement": "fixe",
+     "replique": 13,
+     "geste": "menton"
+    },
+    {
+     "replique": 14,
+     "mouvement": "avance",
+     "geste": "explique",
+     "plan": "serre",
+     "reaction": "sceptique"
+    },
+    {
+     "geste": "desespoir",
+     "mouvement": "fixe",
+     "reaction": "soupir",
+     "plan": "moyen",
+     "replique": 18
+    },
+    {
+     "mouvement": "fixe",
+     "replique": 21,
+     "geste": "explique",
+     "reaction": "sceptique",
+     "plan": "moyen"
+    },
+    {
+     "plan": "serre",
+     "replique": 27,
+     "geste": "supplie",
+     "mouvement": "zoom_choc",
+     "reaction": "choc"
+    },
+    {
+     "replique": 28,
+     "mouvement": "fixe",
+     "plan": "moyen",
+     "geste": "menton",
+     "reaction": "aucune"
+    },
+    {
+     "replique": 31,
+     "geste": "bras_ouverts",
+     "mouvement": "avance",
+     "plan": "serre",
+     "reaction": "sceptique"
     },
     {
      "replique": 40,
-     "geste": "telephone",
-     "mouvement": "fixe",
-     "plan": "large",
-     "reaction": "aucune"
-    },
-    {
-     "mouvement": "fixe",
-     "geste": "explique",
-     "reaction": "choc",
-     "plan": "large",
-     "replique": 41
-    },
-    {
-     "plan": "large",
-     "replique": 42,
-     "mouvement": "fixe",
-     "geste": "telephone",
-     "reaction": "aucune"
-    },
-    {
-     "mouvement": "fixe",
-     "plan": "large",
-     "replique": 43,
-     "geste": "telephone",
-     "reaction": "aucune"
-    },
-    {
-     "replique": 44,
-     "geste": "explique",
-     "plan": "large",
+     "geste": "poing",
+     "plan": "serre",
      "mouvement": "fixe",
      "reaction": "choc"
     },
     {
-     "reaction": "choc",
+     "replique": 48,
+     "geste": "pouce",
+     "plan": "serre",
      "mouvement": "fixe",
-     "geste": "explique",
-     "plan": "large",
-     "replique": 45
+     "reaction": "sceptique"
     },
     {
-     "replique": 46,
-     "mouvement": "fixe",
-     "geste": "explique",
-     "plan": "large",
+     "replique": 51,
+     "plan": "tres_serre",
+     "geste": "chuchote",
+     "mouvement": "zoom_choc",
      "reaction": "choc"
-    },
-    {
-     "replique": 47,
-     "mouvement": "fixe",
-     "plan": "large",
-     "geste": "telephone",
-     "reaction": "aucune"
-    },
-    {
-     "mouvement": "fixe",
-     "reaction": "choc",
-     "plan": "large",
-     "geste": "explique",
-     "replique": 48
     }
    ]
   },
   "realisation": {
-   "moment": "soir",
+   "moment": "jour",
    "lieux": [
     "rue",
     "salon"
    ],
    "gags": [
-    "La Fin de Carrière de CR7 Signifie la Fin du Football"
+    "La Fin de Carrière de CR7 Signifie la Fin du Football",
+    "Horloge suggestive"
    ],
    "ambiances": [
     "neige",
@@ -1838,61 +1635,64 @@
    ],
    "source": "auteur+image",
    "tenues": {
-    "presentateur": "chemise",
-    "invite": "debardeur"
+    "invite": "chemise",
+    "presentateur": "debardeur"
    },
    "plans": [
+    "moyen/fixe",
+    "tres_serre/travelling",
+    "moyen/zoom_choc",
+    "moyen/fixe",
+    "serre/avance",
+    "tres_serre/recul",
+    "moyen/avance",
+    "serre/vertige",
+    "moyen/avance",
+    "tres_serre/avance",
+    "serre/avance",
+    "serre/recul",
+    "serre/avance",
+    "serre/fixe",
+    "serre/avance",
     "large/fixe",
+    "moyen/avance",
+    "moyen/fixe",
+    "moyen/fixe",
+    "serre/fixe",
+    "tres_serre/recul",
+    "moyen/fixe",
+    "moyen/fixe",
+    "tres_serre/fixe",
+    "large/avance",
+    "serre/avance",
+    "serre/recul",
+    "serre/zoom_choc",
+    "moyen/fixe",
+    "large/avance",
+    "serre/avance",
+    "serre/avance",
+    "serre/travelling",
+    "serre/avance",
+    "serre/travelling",
     "large/fixe",
+    "large/avance",
+    "serre/travelling",
+    "large/travelling",
+    "tres_serre/avance",
+    "serre/fixe",
+    "serre/fixe",
+    "serre/travelling",
+    "tres_serre/fixe",
+    "tres_serre/avance",
+    "serre/avance",
+    "moyen/avance",
+    "moyen/fixe",
+    "serre/fixe",
+    "large/avance",
     "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe"
+    "tres_serre/zoom_choc"
    ]
   },
-  "video": "2026-10-16_21h05_emission.mp4"
+  "video": "2026-10-16_22h35_emission.mp4"
  }
 ]
