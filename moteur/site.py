@@ -302,6 +302,8 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
   <details class="groupe" open><summary>💳 Crédits et outils <span id="resumeOutils"></span></summary>
     <p class="note" id="outilsDate"></p>
     <div id="voyants"></div>
+    <button class="action" id="verifCredits">🔍 Vérifier maintenant (Claude, Mistral, Gemini, ElevenLabs, Modal)</button>
+    <p class="note" id="suiviCredits"></p>
     <div class="auto"><div class="txt"><b>💰 Mode économique</b><small>Garde Claude, ElevenLabs et les décors IA, mais dépense environ 3 à 5 fois moins de crédit Claude : Sonnet au lieu d'Opus, 1 premier jet, 2 réécritures au plus, sans public test ni tendances.</small></div><button class="inter" data-var="MODE_ECO" data-def="0" data-bascule="1"></button></div>
     <div class="auto"><div class="txt"><b>Voix ElevenLabs</b><small>Voix réalistes (rires, colère). Coupé : voix gratuites.</small></div><button class="inter" data-var="ELEVENLABS" data-def="1" data-bascule="1"></button></div>
     <div class="auto"><div class="txt"><b>Décors générés par IA</b><small>Un décor par scène (Modal). Coupé : décors dessinés.</small></div><button class="inter" data-var="DECORS" data-def="1" data-bascule="1"></button></div>
@@ -483,8 +485,20 @@ $("#inter").onclick=async()=>{
 };
 $("#oublier").onclick=()=>{ecrireJeton(""); auto=null; afficherAuto(); majBoutons(); majBandeau(); chargerReglages(); toast("Régie déconnectée")};
 // ------------------------------------------------ voyants des outils payants (d'après la dernière vidéo de l'historique)
-const RECHARGE={claude:"https://console.anthropic.com/settings/billing",voix:"https://elevenlabs.io/app/subscription",decors:"https://modal.com/settings/usage"};
+const RECHARGE={claude:"https://console.anthropic.com/settings/billing",mistral:"https://console.mistral.ai/usage",gemini:"https://aistudio.google.com/rate-limit",
+  voix:"https://elevenlabs.io/app/subscription",decors:"https://modal.com/settings/usage"};
+let CRED=null;                                                             // contrôle en direct (episodes/credits.json : bouton « Vérifier maintenant » et chaque vidéo)
+const ETATS={ok:["vert","OK"],epuise:["rouge","quota ou crédit épuisé"],cle:["rouge","clé refusée"],erreur:["rouge","ne répond pas"],absent:["gris","pas de clé"],secours:["rouge","crédit épuisé"]};
+function voyantsDirect(){
+  const c=CRED, e=(k,nom,quoi)=>{const x=ETATS[c[k]]||["gris","pas encore vérifié"]; return [k,x[0],`${nom} : ${x[1]}${quoi&&c[k]==="ok"?" — "+quoi:""}`]};
+  const l=[e("claude","Claude","écriture et doublage"),e("mistral","Mistral (gratuit)","relais de Claude pour l'écriture"),e("gemini","Gemini (gratuit)","relais de Claude pour les images et le contrôle")];
+  const v=c.elevenlabs; l.push(["voix",(ETATS[v]||["gris"])[0],"ElevenLabs : "+((ETATS[v]||[0,"pas encore vérifié"])[1])+(v==="epuise"?", le robot utilise les voix gratuites":"")]);
+  const m=c.modal; l.push(["decors",(ETATS[m]||["gris"])[0],"Modal : "+((ETATS[m]||[0,"pas encore vérifié"])[1])+(m==="ok"?" (décors IA)":"")]);
+  if(c.ia==="aucune") l.unshift(["claude","rouge","Aucune IA ne répond : le robot utilise les sketchs de secours"]);
+  return l;
+}
 function voyants(){
+  if(CRED&&CRED.date&&(!OUTILS||!OUTILS.date||new Date(CRED.date)>=new Date(OUTILS.date))) return voyantsDirect();
   const o=(OUTILS&&OUTILS.outils)||null, g=(t)=>["gris",t];
   const c=!o||!o.claude?g("Claude : pas encore d'information")
     :o.claude==="ok"?["vert","Claude : OK"]
@@ -502,12 +516,18 @@ function voyants(){
 }
 function rendreOutils(){
   const l=voyants();
-  $("#voyants").innerHTML=l.map(([k,coul,t])=>`<div class="voyant"><span class="point ${coul}"></span><span class="t">${t}</span><a href="${RECHARGE[k]}" target="_blank" rel="noopener">Recharger ↗</a></div>`).join("");
-  $("#outilsDate").textContent=OUTILS&&OUTILS.outils&&OUTILS.date?"D'après la dernière vidéo ("+dateFr(OUTILS.date)+").":"Les voyants s'allument après la prochaine vidéo.";
+  $("#voyants").innerHTML=l.map(([k,coul,t])=>`<div class="voyant"><span class="point ${coul}"></span><span class="t">${t}</span><a href="${RECHARGE[k]}" target="_blank" rel="noopener">${k==="mistral"||k==="gemini"?"Quotas ↗":"Recharger ↗"}</a></div>`).join("");
+  $("#outilsDate").textContent=CRED&&CRED.date?"Vérifié le "+new Date(CRED.date).toLocaleString("fr-FR",{dateStyle:"short",timeStyle:"short"})+".":
+    OUTILS&&OUTILS.outils&&OUTILS.date?"D'après la dernière vidéo ("+dateFr(OUTILS.date)+").":"Les voyants s'allument après la prochaine vidéo.";
   const rouges=l.filter(x=>x[1]==="rouge");
   $("#resumeOutils").textContent=rouges.length?"⚠️":"";
   $("#alerteCredit").innerHTML=rouges.length?`<div class="alerte">⚠️ ${rouges.map(x=>x[2].split(" :")[0]).join(", ")} : crédit à vérifier (⚙️ Réglages → Crédits et outils). Les vidéos sortent quand même avec les outils gratuits.</div>`:"";
 }
+$("#verifCredits").onclick=()=>{
+  if(!lireJeton()){toast("Connectez d'abord la régie (une seule fois)");return}
+  lancerFlux("credits.yml",$("#verifCredits"),"🔍 Test de chaque outil en direct (1 à 2 min)…",null,$("#suiviCredits"),
+    async ok=>{ if(ok){await actualiserStats(); rendreOutils(); toast("Crédits vérifiés ✓")} });
+};
 // ------------------------------------------------ liste des vidéos
 function badge(v){
   if(v.publie===true&&v.programmee&&new Date(v.programmee)>new Date()) return '<span class="badge att">🗓️ Programmée le '+new Date(v.programmee).toLocaleString("fr-FR",{dateStyle:"short",timeStyle:"short"})+'</span>';
@@ -529,7 +549,8 @@ async function lireEpisode(nom){
 async function actualiserStats(){
   if(!CONF.depot) return;
   try{
-    const [h,st]=await Promise.all([lireEpisode("historique.json").catch(()=>null),lireEpisode("stats.json").catch(()=>null)]);
+    const [h,st,cr]=await Promise.all([lireEpisode("historique.json").catch(()=>null),lireEpisode("stats.json").catch(()=>null),lireEpisode("credits.json").catch(()=>null)]);
+    if(cr&&cr.date){CRED=cr; rendreOutils()}
     if(Array.isArray(h)){const par={}; h.forEach(e=>{if(e.fichier)par[e.fichier]=e});
       DATA.forEach(v=>{const e=par[v.fichier]; if(!e)return; ["vues","likes","commentaires","partages","publie","couts"].forEach(k=>{if(e[k]!==undefined)v[k]=e[k]})});
       ajouterNouvelles(h);

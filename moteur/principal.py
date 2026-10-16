@@ -113,6 +113,8 @@ def main():
     script = None; tiktok = None; DOUB = None; SECOURS = False
     import reseau
     CREDITS = reseau.verifier_credits()                                    # crédits vérifiés AU DÉPART : payant si possible, sinon gratuit tout de suite
+    try: __import__("credits").enregistrer(dict(CREDITS, modal="ok" if modal_ok else "absent"))   # voyants du site à jour
+    except Exception: pass
     def passer_en_secours(e):                                              # Claude ne répond pas (crédit épuisé) : outils gratuits
         print(f"Claude indisponible ({str(e)[:160]}) : bascule automatique sur un sketch de secours (outils gratuits pour l'écriture).", flush=True)
         try:
@@ -137,7 +139,7 @@ def main():
         except Exception as e:
             if not secours.claude_indisponible(e): raise
             passer_en_secours(e); SECOURS = True; candidats = [([{"titre": "secours", "resume": "", "lien": "", "date": None, "source": "secours"}], "secours")]
-    elif libre and not os.environ.get("SKETCH_TEST", "").strip() and CREDITS["claude"] != "ok":   # pas de crédit Claude : réserve de sketchs
+    elif libre and not os.environ.get("SKETCH_TEST", "").strip() and CREDITS.get("ia", CREDITS["claude"]) != "ok":   # aucune IA (Claude, Mistral, Gemini) : réserve de sketchs
         passer_en_secours(RuntimeError("crédit Claude épuisé ou clé absente (vérifié au départ)")); SECOURS = True
         candidats = [([{"titre": "secours", "resume": "", "lien": "", "date": None, "source": "secours"}], "secours")]
     elif libre and not os.environ.get("SKETCH_TEST", "").strip():
@@ -355,7 +357,8 @@ def main():
                            empreinte=sorted(actu.empreinte(" ".join((fiche.get("titres_sujet") or []) + [sk["sujet"]] + [r["t"] for r in sk.get("repliques", [])]))), voix=moteur, gag=bool(gag), controle_video=rapport_video[:500] or ("ok" if video_ok else ""), running_gag=sk.get("running_gag", ""), duree=round(duree, 1),
                            fichier=os.path.basename(base) + ".mp4", tag=f"emissions-{jour[:7]}", legende=legende, publie=None,
                            style_accroche=style_acc, couverture_ms=int((getattr(sys.modules.get("cartoon"), "COUVERTURE", None) or 2.5) * 1000),
-                           outils=dict(claude=("secours" if SECOURS else CREDITS["claude"]),
+                           outils=dict(claude=("secours" if SECOURS else CREDITS["claude"]), mistral=CREDITS.get("mistral", "absent"),
+                                       gemini=CREDITS.get("gemini", "absent"), ia=", ".join(f"{k} ×{v}" for k, v in __import__("reseau").UTILISES.items()) or "aucune",
                                        voix=("tiktok" if DOUB else "elevenlabs" if "eleven" in str(moteur).lower() else "chatterbox" if "chatterbox" in str(moteur).lower() else "piper"),
                                        decors=("ia" if decors else "dessines"), eco=ECO)))
     if QUALITE["Q"]:                                                       # fiche du jury : notes, remarques, corrections faites

@@ -328,7 +328,7 @@ def preparer(url):
     except Exception as e: journal(f"  analyse du son impossible ({str(e)[:150]})")
     casting, m = _casting_defaut(segs, hz), {}
     try:
-        if os.environ.get("CLAUDE_INDISPONIBLE") == "1": raise RuntimeError("Claude indisponible (crédit vérifié au départ)")
+        if not __import__("reseau").ia_disponible(): raise RuntimeError("aucune IA disponible (crédits vérifiés au départ)")
         import anthropic
         lignes = "\n".join(f"{k}. {s['voix']} ({s['deb']:.1f}–{s['fin']:.1f}) : {s['t']}" for k, s in enumerate(segs))
         vx = "\n".join(f"- {v} : {h or '?'} Hz, {sum(len(s['mots']) for s in segs if s['voix'] == v)} mots" for v, h in hz.items())
