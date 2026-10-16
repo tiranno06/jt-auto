@@ -389,6 +389,13 @@ def casting(sk, roles, costumes, S, graine):
         try: age = int(d["age"]) if d.get("age") else None
         except (TypeError, ValueError): age = None
         autres = " ".join(v for r, v in lignes.items() if r != role)          # comment les autres l'appellent
+        # enfant / ado d'après le dialogue : on l'appelle « fiston », « mon fils »… ou il appelle l'autre « papa », « maman »
+        voc = r"(^|[.!?…]\s+)(papa|maman)\s*,|,\s*(papa|maman)\s*([.!?…]|$)"   # « Papa, … » ou « …, papa. » : on parle À son parent
+        parent = bool(re.search(voc, autres))
+        petit = not parent and (bool(re.search(r"\b(fiston|mon fils|ma fille|mon gar[çc]on|ma puce|mon grand|ma grande|mon bébé)\b", autres))
+                                or bool(re.search(voc, lignes[role])))
+        if parent and not age: age = 46
+        if petit and not (age and age < 18): age = 15 if not re.search(r"\b(doudou|tétine|maternelle|CP|CE1|dessin animé)\b", tout) else 8
         if not age:
             if re.search(r"\b(mamie|papy|grand-m[èe]re|grand-p[èe]re)\b", autres): age = 70
             elif re.search(r"\b(maman|papa|m[èe]re|p[èe]re)\b", autres): age = 46
@@ -398,11 +405,15 @@ def casting(sk, roles, costumes, S, graine):
         c = costumes.get(role) or {}
         style = COIFFURES_HUMAINS.get(c.get("cheveux") or "") or (d.get("cheveux") if d.get("cheveux") in tuple(H_.COIFF_M) + ("chauve",) else None)
         det = c.get("details") or ()
+        if age and age < 18 and genre != "f": style = style if style in H_.COURTS_JEUNE_H else None   # ado : coiffure de son âge
         fiche = H_.creer(graine + 31 * k, genre=genre, age=age, cheveux=style, c_cheveux=c.get("c_cheveux"),
                          corpulence=d.get("corpulence") if isinstance(d.get("corpulence"), (int, float)) else None,
                          lunettes="rondes" if "lunettes_vue" in det else None,
                          barbe=next((b for b in M.GR.BARBES if b in det), None) or ("moustache" if "moustache" in det else ("trois_jours" if "barbe" in det else
                                (d.get("barbe") if d.get("barbe") in M.GR.BARBES + ("moustache", "trois_jours") else None))))
+        try:                                                               # taille vue dans la vidéo ou décidée par Claude (1 = adulte moyen)
+            if d.get("taille"): fiche["taille"] = float(np.clip(float(d["taille"]), 0.55, 1.25)) * (1.04 if fiche["genre"] == "h" else 0.97)
+        except (TypeError, ValueError): pass
         out[role] = fiche
     return out
 
@@ -474,7 +485,7 @@ def realiser(ph, places, B):
         q["regard_camera"] = bool(j in silences or (a.get("regard_camera") is True))
     return ph
 
-CINE_PROBA = {"focus": 0.8, "vertige": 0.7, "tiers": 0.65, "etalonnage": 0.9, "profondeur": 0.8, "grain": 0.7, "reflets": 0.5, "son": 1.0}
+CINE_PROBA = {"focus": 0.0, "vertige": 0.7, "tiers": 0.65, "etalonnage": 0.9, "profondeur": 0.0, "grain": 0.7, "reflets": 0.5, "son": 1.0}   # flous retirés (auteur)
 def proba_cine():
     """Probabilités des effets cinéma, ajustées par les vues TikTok : un effet présent dans les vidéos les plus vues revient plus souvent."""
     p = dict(CINE_PROBA)
@@ -537,8 +548,8 @@ def consigne_studio():
   "decoupe" (facultatif, comme un vrai storyboard) = pour les répliques que tu veux monter toi-même : {{"replique": n, "plans": [
   {{"debut": fraction de la réplique entre 0 et 1, "plan": …, "cible": rôle filmé (celui qui parle ou celui qui écoute),
   "mouvement": … ou vertige, "passage": coupe, glisse, file ou zoom}}, …]}} — alterne serré / large, montre les réactions ;
-  "cine" (facultatif) = effets de l'épisode, vrai ou faux : focus (mise au point sur celui qui parle), vertige, tiers (règle des
-  tiers), etalonnage (couleur selon l'émotion), profondeur (premier plan flou), grain, reflets, son (ambiance, musique) ;
+  "cine" (facultatif) = effets de l'épisode, vrai ou faux : vertige, tiers (règle des tiers), etalonnage (couleur selon
+  l'émotion), grain, reflets, son (ambiance, musique) — l'image reste toujours NETTE (aucun flou sur les personnages ni le décor) ;
   "bruitages" (facultatif) = bruitages « tendance » des vidéos d'humour TikTok, au plus un par réplique et pas plus d'un toutes les
   3 secondes : [{{"replique": n, "son": …}}] avec son parmi {L(BRUITAGES_TENDANCE)} (vine_boom/dun_dun : vanne ou révélation,
   klaxon_clown : quelqu'un se ridiculise, sifflet_chute : échec, criquets/os_craque : blanc gênant, violon_triste : fausse tristesse,

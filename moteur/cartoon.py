@@ -355,7 +355,8 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         return next((x for x in reversed(ph) if x["deb"] - 0.25 <= tm), ph[0])
 
     ASSIS = (B or {}).get("assis") or {}
-    CINE = (B or {}).get("cine") or {}                                     # effets « cinéma » de l'épisode (varient d'une vidéo à l'autre)
+    CINE = dict((B or {}).get("cine") or {})                               # effets « cinéma » de l'épisode (varient d'une vidéo à l'autre)
+    CINE.update(focus=False, profondeur=False)                             # image toujours nette : aucun flou de mise au point ni de premier plan
     TEINTES = {"cri": (1.07, 0.97, 0.94), "colere": (1.07, 0.97, 0.94), "pleurs": (0.94, 0.98, 1.07), "triste": (0.94, 0.98, 1.07),
                "soupir": (0.97, 0.99, 1.04), "joie": (1.05, 1.03, 0.95), "rire": (1.04, 1.02, 0.96), "amour": (1.06, 1.0, 1.0),
                "choc": (0.97, 0.98, 1.04), "panique": (0.96, 1.0, 1.05)}
@@ -809,11 +810,17 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
                 z, cx, cy = z0 + (z - z0) * u, cx0 + (cx - cx0) * u, cy0 + (cy - cy0) * u
             u0 = min(1, (tm - max(q["deb"] - 0.25, 0)) / 0.3); z *= 1 + 0.04 * (1 - u0) ** 2 + 0.006 * (tm - q["deb"])   # punch-in puis lente dérive
         plan_courant = sh["plan"] if sh is not None else q.get("plan")
+        # plan serré : SEUL le personnage filmé est à l'image (personne coupé en deux sur le bord), dès la moitié du passage
+        cible_seule = None
+        if plan_courant in studio.SERRES:
+            if sh is not None: cible_seule = sh["cible"] if (not d_p or u_p >= 0.5 or pr is None) else None
+            else: cible_seule = q["p"]
         if q is ph[-1]:                                                    # chute finale : lent zoom dramatique pendant toute la réplique
             z *= 1 + 0.16 * _ease((tm - q["deb"]) / max(0.5, q["fin"] - q["deb"]))
             if tm > q["fin"]: z *= 1 + 0.08 * _ease((tm - q["fin"]) / 0.12)                            # punch final
             if tm > q["fin"] + 0.2 and len(places[sc]) > 1:                # puis plan large pour voir la réaction (chute à la renverse)
                 u_l = _ease((tm - q["fin"] - 0.2) / 0.35); z = z + (1.0 - z) * u_l; cx = cx + (W / 2 - cx) * u_l; cy = cy + (H / 2 - cy) * u_l
+                if u_l > 0.3: cible_seule = None                           # plan large : tout le monde revient à l'image
         elif q["chute"] and tm > q["fin"] - 0.6: z *= 1 + 0.12 * _ease((tm - q["fin"] + 0.6) / 0.2)
         dans_q = q["deb"] - 0.3 <= tm <= q["fin"] + 0.3
         if B and dans_q and q is not ph[-1] and sh is None:                # mouvement de caméra prévu par le storyboard
@@ -847,12 +854,12 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         img = cv2.warpAffine(fond, Mx, (W, H), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REPLICATE)
         if B:
             for f_ in B["figurants"]:
-                if f_["scene"] == sc: figurant(f_, tm, img, zm, cxm, cym)
-            if z > 1.3: img = cv2.GaussianBlur(img, (0, 0), min(4.5, 6 * (z - 1.1)))   # flou d'arrière-plan sur les plans serrés
+                if f_["scene"] == sc and not cible_seule: figurant(f_, tm, img, zm, cxm, cym)
         sce = dec[sc] if sc < len(dec) else {}
         if sce.get("effet") == "tremblement" or (q["emo"] in ("cri", "colere") and q["deb"] <= tm <= q["fin"]):
             img = np.roll(img, (int(6 * math.sin(tm * 53)), int(6 * math.cos(tm * 47))), (0, 1))
         for role in places[sc]:                                            # personnages dessinés nets à l'échelle du plan
+            if cible_seule and role != cible_seule and cible_seule in places[sc]: continue
             p = pose(role, tm, q, sc)
             p["x"], p["y"], p["s"] = W / 2 + (p["x"] - cx) * z, H / 2 + (p["y"] - cy) * z, p["s"] * z
             ang, ko = chute_au_sol(role, tm, sc)
