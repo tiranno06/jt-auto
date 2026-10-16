@@ -323,12 +323,13 @@ def dessiner(img, perso, p):
         siege = [(x - 118 * s, y_s - 10 * s), (x + 118 * s, y_s - 10 * s), (x + 112 * s, y_s + 20 * s), (x - 112 * s, y_s + 20 * s)]
         _poly(img, siege, c_ch); _poly(img, siege, TRAIT, True, 4 * s)                    # bord du siège (dépasse de chaque côté)
         c_g = c_bas if bas in ("jean", "pantalon", "jogging", "short") else (C or {}).get("c_haut", BLANC) if (C or {}).get("haut") == "robe" or bas == "jupe" else chair
-        for dx in (-46, 46):                                               # cuisse vue de face : courte (elle vient vers nous), plus large que le tibia
-            gx = x + dx * s; cuisse = [(gx - 44 * s, y_b - 14 * s), (gx + 44 * s, y_b - 14 * s), (gx + 40 * s, y_b + 40 * s), (gx - 40 * s, y_b + 40 * s)]
+        lj = mb / 2                                                        # demi-largeur de la jambe : cuisse et genou à peine plus larges
+        for dx in (-40, 40):                                               # cuisse vue de face : courte (elle vient vers nous)
+            gx = x + dx * 1.15 * s
+            cuisse = [(gx - lj * 1.25, y_b - 10 * s), (gx + lj * 1.25, y_b - 10 * s), (gx + lj * 1.12, y_b + 40 * s), (gx - lj * 1.12, y_b + 40 * s)]
             _poly(img, cuisse, c_g); _poly(img, cuisse, TRAIT, True, ep)
-            _ellipse(img, (gx, y_b + 40 * s), (40 * s + ep, 17 * s + ep), 0, TRAIT); _ellipse(img, (gx, y_b + 40 * s), (40 * s, 17 * s), 0, c_g)   # genou
-            _arc(img, (gx, y_b + 38 * s), (18 * s, 8 * s), 0, 200, 340, _fonce(c_g, 0.72), 3 * s)
-        _ligne(img, (x, y_b - 10 * s), (x, y_b + 34 * s), _fonce(c_g, 0.6), 4 * s)                # entre les deux cuisses
+            _ellipse(img, (gx, y_b + 40 * s), (lj * 1.12 + ep / 2, 11 * s + ep / 2), 0, TRAIT); _ellipse(img, (gx, y_b + 40 * s), (lj * 1.12 - ep / 2, 11 * s), 0, c_g)   # genou
+            _arc(img, (gx, y_b + 38 * s), (lj * 0.5, 5 * s), 0, 200, 340, _fonce(c_g, 0.72), 3 * s)
     if A: _ellipse(img, tete, (rx + ep, ry + ep), p["tilt"], TRAIT)                 # adulte : la tête posée sur le col, avec son contour
     _ellipse(img, tete, (rx, ry), p["tilt"], chair)
     _ombre(img, tete, (rx, ry), p["tilt"], lum, f_omb * 0.8)
