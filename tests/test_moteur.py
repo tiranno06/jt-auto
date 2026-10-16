@@ -742,6 +742,29 @@ class TestJuryQualite(unittest.TestCase):
             else: os.environ["CLAUDE_INDISPONIBLE"] = avant
 
 
+class TestVoixProches(unittest.TestCase):
+    def test_empreinte_separe_deux_timbres(self):
+        sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "moteur"))
+        import locuteurs as L
+        sr = 22050; rng = np.random.default_rng(0)
+        def voix(f0, formants, d):                                         # deux voix à la même hauteur, timbres différents
+            t = np.arange(int(sr * d)) / sr; x = sum(np.sin(2 * np.pi * f0 * k * t) / k for k in range(1, 25))
+            from scipy.signal import lfilter, butter
+            y = sum(lfilter(*butter(2, [f * 0.9 / (sr / 2), f * 1.1 / (sr / 2)], "band"), x) for f in formants)
+            return (0.3 * y / np.abs(y).max() * (0.6 + 0.4 * np.sin(2 * np.pi * 3 * t))).astype(np.float32) + rng.normal(0, 0.002, len(t)).astype(np.float32)
+        morceaux, mots, t = [], [], 0.0
+        for k in range(10):
+            a = voix(128 + rng.uniform(-4, 4), (650, 1100, 2500) if k % 2 == 0 else (420, 1800, 3100), 1.2)
+            morceaux += [np.zeros(int(0.4 * sr), np.float32), a]; t += 0.4
+            mots.append({"w": "mot.", "s": t, "e": t + 1.2, "voix": "speaker_0"}); t += 1.2
+        sig = np.concatenate(morceaux)
+        res = L.rediariser([dict(m) for m in mots], sig)
+        v = [m["voix"] for m in res]
+        self.assertTrue(all(v[i] == v[0] for i in range(0, 10, 2)) and all(v[i] == v[1] for i in range(1, 10, 2)) and v[0] != v[1])
+        deux = [dict(m, voix="speaker_%d" % (i % 2)) for i, m in enumerate(mots)]       # déjà séparées par la transcription : on garde
+        self.assertEqual([m["voix"] for m in L.rediariser(deux, sig)], [m["voix"] for m in deux])
+
+
 class TestModeEco(unittest.TestCase):
     def test_mode_eco(self):
         import reseau
