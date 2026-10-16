@@ -377,7 +377,14 @@ def preparer(url):
     sk["decoupage"] = [dict(sc, scene=str(k + 1)) for k, sc in enumerate(ecrire._decoupage(dec, len(reps)))] or \
                       [{"scene": "1", "repliques": list(range(len(reps))), "lieu": "", "son": "", "duree": 0,
                         "decor": "" if os.environ.get("RENDU_DETAILLE", "1") != "0" else "cozy living room, sofa, coffee table, lamp"}]   # sans Claude : le studio devine le lieu
-    if isinstance(m.get("studio"), dict): sk["studio"] = m["studio"]          # direction artistique de Claude (vérifiée par studio.bible)
+    if isinstance(m.get("studio"), dict):
+        sk["studio"] = m["studio"]                                         # direction artistique de Claude (vérifiée par studio.bible)
+        try:
+            import studio as _st
+            g_v = genre_des_voix(segs, hz); g_r = {}
+            for v, r in casting.items(): g_r.setdefault(r, g_v.get(v))
+            if _st.accorder_roles(sk, g_r): journal("  descriptions des personnages remises sur les bons rôles (âge, genre de la voix)")
+        except Exception as e: journal(f"  accord des rôles impossible ({str(e)[:100]})")
     sk["sources"] = [lien]
     sk["doublage"] = {"piste": piste, "duree": round(duree, 2), "source": lien, "auteur": auteur, "contexte": m.get("contexte", ""),
                       "evenements": [list(e) for e in EVENEMENTS][:60], "visuel": visuel, "audio": audio,

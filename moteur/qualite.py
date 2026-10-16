@@ -252,10 +252,27 @@ def evaluer(video, R, sk, rapport_tech=""):
                                                                           for r_ in jury[k]["remarques"]) for k in CRITIQUES)
     print(f"Jury qualité ({source}) : {note}/10 — {rapport[:900]}", flush=True)
     if manques: print("Manque par rapport à la vidéo d'origine : " + " ; ".join(manques), flush=True)
+    corrections += corrections_des_remarques(sk, R, [r_["probleme"] for k in CRITIQUES for r_ in jury[k]["remarques"]] + manques, corrections)
     return dict(note=note, jury=jury, corrections=corrections, defauts_graves=graves, manques_origine=manques, rapport=rapport, source=source)
 
 
 # ------------------------------------------------------------------ corrections automatiques
+SEPARES_TXT = r"(chez lui|chez elle|son salon|dans (le|son) salon|canap[ée]|s[ée]par[ée]|deux (lieux|d[ée]cors)|m[êe]me endroit|tous les deux dans|au t[ée]l[ée]phone|split)"
+INVISIBLE_TXT = r"(on ne (la |le )?voit (pas|jamais)|qu'on ne voit pas|pas assez (clairement )?visible|n'appara[iî]t pas|absente?|l'int[ée]grer|la montrer|le montrer|à c[ôo]t[ée] de lui)"
+
+def corrections_des_remarques(sk, R, textes, deja):
+    """Les critiques écrivent en clair ce qui manque (« le père doit être chez lui », « on ne voit pas la dame ») : on en tire les
+    corrections que le moteur sait faire (un décor chacun, la personne dessinée à côté), même quand l'IA n'a pas rempli la case."""
+    import studio
+    t = " ".join(str(x) for x in textes).lower(); types = {c.get("type") for c in deja if isinstance(c, dict)}; out = []
+    parlants = [r for r in dict.fromkeys(x["p"] for x in sk.get("repliques") or []) if r != "narrateur"]
+    if "lieux_separes" not in types and not (R or {}).get("separes") and not sk.get("_separes") and len(parlants) >= 2 and re.search(SEPARES_TXT, t):
+        out.append({"type": "lieux_separes"})
+    if "figurant" not in types and not (R or {}).get("compagnons") and re.search(INVISIBLE_TXT, t):
+        f = studio.figurants_devines(sk)
+        if f: out.append(dict(f[0], type="figurant"))
+    if out: print("Corrections tirées des remarques du jury : " + ", ".join(c["type"] for c in out), flush=True)
+    return out
 def corriger(sk, corrections):
     """Applique les corrections au « studio » du sketch (copie conseillée). Renvoie la liste des corrections appliquées (texte)."""
     import studio, bruitages, decor_dessin as DD
@@ -293,6 +310,7 @@ def corriger(sk, corrections):
                 sep = {k: v for k, v in c.items() if k not in ("type",) and isinstance(v, str)}
                 parlants = [r for r in dict.fromkeys(x["p"] for x in reps) if r != "narrateur"]
                 S["lieux_separes"] = sep if len(sep) >= 2 else {r: "" for r in parlants[:2]}; S.setdefault("moyen", "telephone")
+                if not isinstance(S.get("lieux_de"), dict): S["lieux_de"] = studio.lieux_devines(sk, list(S["lieux_separes"])[:2])
                 faites.append("un décor pour chaque personnage (lieux séparés)")
             elif t == "lieu" and c.get("lieu") in DD.LIEUX:
                 k = int(c.get("scene", 0)); L = list(S.get("lieux") or [])
