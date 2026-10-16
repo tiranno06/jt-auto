@@ -47,7 +47,9 @@ def creer(graine, genre=None, age=None, cheveux=None, c_cheveux=None, corpulence
     jeune = a < 18                                                         # ado ou enfant : plus petit, cheveux courts, jamais de barbe
     if jeune:
         if g == "h" and style not in COURTS_JEUNE_H: style = COURTS_JEUNE_H[int(rng.integers(len(COURTS_JEUNE_H)))]
-        barbe, corpulence = "", min(float(corpulence if corpulence is not None else rng.beta(2, 3)), 0.45)
+        corpulence = min(float(corpulence if corpulence is not None else rng.beta(2, 3)), 0.45)
+        barbe = "trois_jours" if (a >= 16 and g == "h" and barbe in ("trois_jours", "courte", "barbe_pleine", "favoris", "barbe_courte")) else ""   # grand ado : mal rasé au plus
+    if barbe in ("courte", "barbe_pleine", "favoris", "barbe_courte"): barbe = "trois_jours"   # jamais de grosse barbe (consigne de l'auteur)
     taille_age = 1.0 if not jeune else (0.8 if a >= 14 else 0.7 if a >= 10 else 0.6)
     return dict(genre=g, age=a, corpulence=float(corpulence if corpulence is not None else rng.beta(2, 3)),
                 taille=float(rng.uniform(0.94, 1.06) * (1.04 if g == "h" else 0.97) * taille_age),
@@ -78,7 +80,8 @@ def _P(F):
 def _pose(F, p):
     C = dict(p.get("costume") or {}); det = list(C.get("details") or ())
     if F.get("lunettes") and "lunettes_vue" not in det: det.append("lunettes_vue")
-    if F["age"] < 18: det = [d for d in det if d not in M.GR.BARBES + ("moustache", "barbe")]   # ado : aucune barbe, même imposée
+    if F["age"] < 18:                                                      # enfant et jeune ado : aucune barbe, même imposée ;
+        det = [d for d in det if d not in M.GR.BARBES + ("moustache",) + (("barbe",) if F["age"] < 16 else ())]   # 16-17 ans : mal rasé au plus
     b = {"courte": "barbe_courte", "trois_jours": "barbe"}.get(F.get("barbe"), F.get("barbe"))
     if b and b != "moustache" and b not in det: det.append(b)
     C.setdefault("c_barbe", tuple(F["c_cheveux"]))
