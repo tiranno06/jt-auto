@@ -436,7 +436,7 @@ def compter(r, modele):
     if not u: return
     e_, s_ = getattr(u, "input_tokens", 0) or 0, getattr(u, "output_tokens", 0) or 0
     USAGE["entree"] += e_; USAGE["sortie"] += s_; USAGE["appels"] += 1
-    pe, ps = PRIX.get(modele, PRIX["claude-opus-5-5"]); USAGE["cout"] += (e_ * pe + s_ * ps) / 1e6
+    pe, ps = (0.0, 0.0) if getattr(r, "gratuit", False) else PRIX.get(modele, PRIX["claude-opus-5-5"]); USAGE["cout"] += (e_ * pe + s_ * ps) / 1e6
 
 def _appel(client, systeme, messages, outil=OUTIL, web=False, max_tokens=12000, modele=None):
     """Appel Claude ; renvoie l'entrée de l'outil demandé (ou un JSON trouvé dans le texte). Recherche web si possible."""
@@ -451,7 +451,7 @@ def _appel(client, systeme, messages, outil=OUTIL, web=False, max_tokens=12000, 
             e_, s_ = getattr(u, "input_tokens", 0) or 0, getattr(u, "output_tokens", 0) or 0
             cl, ce = getattr(u, "cache_read_input_tokens", 0) or 0, getattr(u, "cache_creation_input_tokens", 0) or 0
             USAGE["entree"] += e_; USAGE["sortie"] += s_; USAGE["appels"] += 1; USAGE["cache_lu"] += cl; USAGE["cache_ecrit"] += ce
-            pe, ps = PRIX.get(kw["model"], PRIX["claude-opus-5-5"])
+            pe, ps = (0.0, 0.0) if getattr(r, "gratuit", False) else PRIX.get(kw["model"], PRIX["claude-opus-5-5"])   # Mistral / Gemini : gratuits
             USAGE["cout"] += (e_ * pe + s_ * ps + cl * pe * 0.05 + ce * pe * 1.25) / 1e6
         if web:
             n_web = getattr(getattr(u, "server_tool_use", None), "web_search_requests", None)

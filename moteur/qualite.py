@@ -146,7 +146,7 @@ def jury_gratuit(R, sk, rapport_tech=""):
     return jury
 
 
-# ------------------------------------------------------------------ jury Claude (mode payant) : il regarde la vidéo (et l'original)
+# ------------------------------------------------------------------ jury IA (Claude, sinon Gemini / Mistral) : il regarde la vidéo (et l'original)
 PROMPT = """Tu es un jury de 5 critiques exigeants d'une chaîne TikTok d'humour en dessin animé (personnages « toons » : grosse tête ronde
 blanche, trait noir épais). Voici des images de NOTRE vidéo (numérotées, dans l'ordre, avec l'instant en secondes){origine}.
 Texte et minutage :
@@ -187,7 +187,7 @@ def _instants(ph, total, n=16):
 
 def jury_claude(video, R, sk, gratuit):
     """Mode payant : None si Claude est indisponible (crédit, clé, erreur)."""
-    if os.environ.get("CLAUDE_INDISPONIBLE") == "1" or os.environ.get("CONTROLE_VIDEO", "1") == "0" or not os.environ.get("ANTHROPIC_API_KEY"): return None
+    if os.environ.get("CONTROLE_VIDEO", "1") == "0" or not __import__("reseau").ia_disponible(): return None   # Claude, sinon Gemini / Mistral
     try:
         import controle, studio, bruitages, decor_dessin as DD
         ph = R.get("ph") or []; total = float(R.get("total") or 1)
@@ -228,7 +228,7 @@ def evaluer(video, R, sk, rapport_tech=""):
     jury, source, graves, manques = g, "gratuit", [], []
     c = jury_claude(video, R, sk, g)
     if isinstance(c, dict) and c.get("critiques"):
-        jury, source = {}, "claude"
+        jury, source = {}, "ia"
         for x in c["critiques"]:
             if isinstance(x, dict) and x.get("critique") in CRITIQUES:
                 rem = [dict(critique=x["critique"], moment=r_.get("moment"), probleme=str(r_.get("probleme", ""))[:200],

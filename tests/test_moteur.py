@@ -765,6 +765,52 @@ class TestVoixProches(unittest.TestCase):
         self.assertEqual([m["voix"] for m in L.rediariser(deux, sig)], [m["voix"] for m in deux])
 
 
+class TestRelaisIA(unittest.TestCase):
+    def test_bascule_claude_vers_mistral_puis_gemini(self):
+        import json as _j, io, urllib.request, urllib.error, reseau
+        appels = []
+        class Rep(io.BytesIO): pass
+        def faux_urlopen(req, timeout=0):
+            corps = _j.loads(req.data.decode()); appels.append((req.full_url, corps))
+            if "mistral" in req.full_url: raise urllib.error.HTTPError(req.full_url, 429, "quota", {}, io.BytesIO(b"rate limit exceeded"))
+            if "tools" not in corps:
+                return Rep(_j.dumps({"choices": [{"message": {"content": "ok"}, "finish_reason": "stop"}], "usage": {}}).encode())
+            outil = corps["tools"][0]["function"]
+            self.assertEqual(outil["parameters"]["properties"]["studio"]["type"], "string")          # Gemini : objet libre demandé en texte
+            img = [p for m in corps["messages"] if isinstance(m["content"], list) for p in m["content"] if p["type"] == "image_url"]
+            self.assertTrue(img and img[0]["image_url"]["url"].startswith("data:image/jpeg;base64,"))
+            rep = {"choices": [{"message": {"tool_calls": [{"id": "1", "function": {"name": "jury", "arguments": _j.dumps(
+                {"note": 7, "studio": _j.dumps({"lieux": ["salon"]})})}}]}, "finish_reason": "stop"}], "usage": {"prompt_tokens": 10, "completion_tokens": 5}}
+            return Rep(_j.dumps(rep).encode())
+        class FauxAnthropic:
+            def __init__(self, **k): pass
+            class messages:
+                @staticmethod
+                def create(**kw): raise RuntimeError("Your credit balance is too low")
+        avant = {k: os.environ.get(k) for k in ("MISTRAL_API_KEY", "GEMINI_API_KEY", "CLAUDE_INDISPONIBLE")}
+        vieux = urllib.request.urlopen, sys.modules.get("anthropic")
+        try:
+            os.environ.update(MISTRAL_API_KEY="m", GEMINI_API_KEY="g"); os.environ.pop("CLAUDE_INDISPONIBLE", None)
+            urllib.request.urlopen = faux_urlopen; sys.modules["anthropic"] = types.SimpleNamespace(Anthropic=FauxAnthropic)
+            reseau.HORS_SERVICE.clear(); reseau.UTILISES.clear()
+            outil = {"name": "jury", "description": "x", "input_schema": {"type": "object", "properties": {"note": {"type": "number"}, "studio": {"type": "object"}}}}
+            r = reseau.claude().messages.create(model="claude-sonnet-5-5", max_tokens=100, tools=[outil], tool_choice={"type": "tool", "name": "jury"},
+                                                messages=[{"role": "user", "content": [{"type": "image", "source": {"type": "base64", "media_type": "image/jpeg", "data": "QUJD"}},
+                                                                                       {"type": "text", "text": "note"}]}])
+            b = [x for x in r.content if x.type == "tool_use"][0]
+            self.assertEqual(b.input, {"note": 7, "studio": {"lieux": ["salon"]}}); self.assertTrue(r.gratuit)
+            self.assertIn("gemini", reseau.UTILISES)
+            r2 = reseau.claude().messages.create(model="x", max_tokens=50, messages=[{"role": "user", "content": "texte seul"}])   # Mistral à 429 : Gemini
+            self.assertIn("mistral", reseau.HORS_SERVICE); self.assertEqual(reseau.UTILISES["gemini"], 2)
+        finally:
+            urllib.request.urlopen = vieux[0]
+            if vieux[1] is not None: sys.modules["anthropic"] = vieux[1]
+            reseau.HORS_SERVICE.clear(); reseau.UTILISES.clear()
+            for k, v in avant.items():
+                if v is None: os.environ.pop(k, None)
+                else: os.environ[k] = v
+
+
 class TestModeEco(unittest.TestCase):
     def test_mode_eco(self):
         import reseau

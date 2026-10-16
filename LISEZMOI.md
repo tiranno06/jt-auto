@@ -156,6 +156,9 @@ Les moyennes (pondérées par les vues de nos vidéos) guident les vidéos suiva
 - **Personnes muettes** dont on parle ou qu'on voit (« elle me fait signe ») : dessinées à côté du personnage, avec leur geste (coucou, signe, danse, attend…).
 - **Coupes** calées sur celles de la vidéo d'origine ; image toujours nette ; en plan serré, seul celui qui est filmé est à l'image.
 
+## Relais gratuits de Claude : Mistral et Gemini
+Si Claude n'a plus de crédit, le robot passe tout seul à **Mistral** (écriture, humour en français) puis à **Gemini** (en premier pour regarder des images : doublage TikTok, jury qualité). Clés gratuites à ranger dans les secrets GitHub `MISTRAL_API_KEY` et `GEMINI_API_KEY`. Un service dont le quota du jour est épuisé est sauté ; sans aucune IA, les sketchs de secours prennent le relais. Dans **Réglages → Crédits et outils**, le bouton **« Vérifier maintenant »** teste en direct Claude, Mistral, Gemini, ElevenLabs et Modal (voyant vert / rouge) ; la vérification est aussi faite à chaque vidéo.
+
 ## Voix proches : qui parle quand (moteur/locuteurs.py)
 Quand deux voix se ressemblent, la transcription peut les confondre (un seul personnage parle alors avec les deux voix). Le robot :
 1. redemande à ElevenLabs en annonçant 2 voix si le texte est clairement un dialogue ;

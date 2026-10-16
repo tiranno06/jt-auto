@@ -82,7 +82,7 @@ def technique(video, duree_attendue=None, fin_parole=None):
 def verifier(video, sk, minutage):
     """minutage : [(début, fin, texte attendu, qui)] par réplique. Renvoie (ok, rapport texte)."""
     if os.environ.get("CONTROLE_VIDEO", "1") == "0": return True, ""
-    if os.environ.get("CLAUDE_INDISPONIBLE") == "1": return True, ""          # pas de crédit Claude : seul le contrôle technique gratuit
+    if not __import__("reseau").ia_disponible(): return True, ""              # aucune IA (crédit) : seul le contrôle technique gratuit
     try:
         import anthropic
         instants, attendu = [0.3], ["1. ouverture (titre)"]

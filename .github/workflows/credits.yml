@@ -1,0 +1,40 @@
+name: Vérifier les crédits
+
+# Bouton « Vérifier maintenant » des réglages du site : teste Claude, Mistral, Gemini, ElevenLabs et Modal en direct.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: historique
+  cancel-in-progress: false
+
+jobs:
+  credits:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+      MODAL_TOKEN_ID: ${{ secrets.MODAL_TOKEN_ID }}
+      MODAL_TOKEN_SECRET: ${{ secrets.MODAL_TOKEN_SECRET }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Tester chaque outil
+        run: |
+          pip install -q anthropic modal
+          python -u moteur/credits.py
+      - name: Enregistrer
+        run: |
+          git config user.name "robot-jt"
+          git config user.email "robot-jt@users.noreply.github.com"
+          git add episodes/credits.json
+          git commit -m "Crédits vérifiés" || echo "rien à enregistrer"
+          python moteur/fusion.py
