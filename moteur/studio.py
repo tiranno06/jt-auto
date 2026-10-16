@@ -449,9 +449,10 @@ def realiser(ph, places, B):
     for x in B.get("plans") or []:
         if isinstance(x, dict) and isinstance(x.get("replique"), int): plans_auteur[x["replique"]] = x
     silences = {j for t, ty, j in moments(ph) if ty == "silence"}
+    vues = set()
     for j, q in enumerate(ph):
         n = len(places.get(q["scene"], [])); dur = q["fin"] - q["deb"]; h = _h(B["graine"], j)
-        nouvelle = j == 0 or ph[j - 1]["scene"] != q["scene"]
+        nouvelle = q["scene"] not in vues; vues.add(q["scene"])           # lieux séparés : on revient dans un décor déjà présenté
         plan, mouv = q.get("cam") or "large", "fixe"
         if q["p"] == "narrateur": plan = "large"
         elif nouvelle: plan, mouv = "large", ("recul" if j else "avance")
@@ -469,6 +470,9 @@ def realiser(ph, places, B):
             if cam_: mouvs = tuple(m_ for m_, v_ in sorted(cam_.items(), key=lambda x: -x[1]) if v_ > 0.12 and m_ in MOUVEMENTS) or mouvs
             if set(mouvs) <= {"fixe"}: mouvs = ("fixe", "avance", "travelling", "recul")   # vidéo d'origine en plan fixe : notre caméra reste vivante
             mouv = mouvs[h % len(mouvs)] if plan != "epaule" else "fixe"
+        elif n <= 1:                                                       # seul dans son décor (appel) : serré / moyen / large en alternance
+            plan = ("serre", "moyen", "tres_serre", "serre", "large")[(j + h) % 5]
+            mouv = ("avance", "travelling", "recul", "avance", "fixe")[h % 5]
         elif plan == "serre" and dur > 3.0: mouv = "avance"
         if q.get("chute") and j == len(ph) - 1: plan, mouv = "serre", "avance"
         elif q.get("chute"): plan = "tres_serre" if h % 2 else "serre"
@@ -538,6 +542,11 @@ def lieux_devines(sk, roles):
     for r in libres: out[r] = "salon" if "rue" in out.values() else "rue"
     return {r: l for r, l in out.items() if l in DD.LIEUX}
 
+DECOR_EN = {"rue": "quiet city street at dusk, parked car at the curb, sidewalk, street lamps, shop fronts",
+            "salon": "cozy living room, sofa, posters on the wall, coffee table, lamp, television",
+            "bureau": "open space office, desks, computer screens, plants", "bar": "cosy bar, counter, bottles on shelves, stools",
+            "restaurant": "small restaurant, tables with checkered cloths, menu board", "magasin": "shop interior, shelves full of products, counter"}
+
 TIERS = r"\b(la dame|cette dame|une dame|l'inconnue|une inconnue|cette (femme|fille|meuf|nana)|une (femme|fille|meuf|nana)|la (meuf|nana|fille))\b"
 
 def figurants_devines(sk):
@@ -562,6 +571,7 @@ def gag_dans_le_sujet(sk, gag):
     racines = lambda t: {w[:5] for w in re.findall(r"[a-zàâçéèêëîïôûùüÿœ]{5,}", t.lower())}
     histoire = " ".join(x.get("t", "") for x in sk.get("repliques") or []) + " " + str((sk.get("doublage") or {}).get("contexte") or "") + " " + str(sk.get("sujet") or "")
     r = racines(gag)
+    if ((sk.get("doublage") or {}).get("visuel") or {}).get("nb_plans"): return True   # l'IA a vu la vidéo d'origine : affiche recopiée
     return len(r) < 3 or bool(r & racines(histoire))                         # gag très court (« Eau : 12 € ») : toujours accepté
 
 def accorder_roles(sk, genres=None):
@@ -625,7 +635,9 @@ def separer_lieux(sk):
         S["lieux_de"] = {**lieux_devines(sk, parlants[:2]), **(S.get("lieux_de") if isinstance(S.get("lieux_de"), dict) else {})}
     if len(sep) < 2: return False
     ordre = list(sep); scene_de = {r: k for k, r in enumerate(ordre)}
-    dec = [{"scene": str(k + 1), "repliques": [], "lieu": "", "son": "", "duree": 0, "decor": re.sub(r"[^\w\s,.'-]", "", sep[r])[:160]} for k, r in enumerate(ordre)]
+    lieux_role0 = S.get("lieux_de") if isinstance(S.get("lieux_de"), dict) else {}
+    dec = [{"scene": str(k + 1), "repliques": [], "lieu": "", "son": "", "duree": 0,
+            "decor": re.sub(r"[^\w\s,.'-]", "", sep[r] or DECOR_EN.get(lieux_role0.get(r), ""))[:160]} for k, r in enumerate(ordre)]
     k_prec = 0
     for i, x in enumerate(reps):
         k_prec = scene_de.get(x["p"], k_prec); dec[k_prec]["repliques"].append(i)     # voix off et 3e personnage : là où l'on est

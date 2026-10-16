@@ -244,7 +244,7 @@ def evaluer(video, R, sk, rapport_tech=""):
             for r_ in g[k]["remarques"]:
                 if r_.get("correction") and r_["poids"] >= 1.2 and json.dumps(r_["correction"], sort_keys=True) not in deja: jury[k]["remarques"].append(r_)
         graves = [d for d in c.get("defauts") or [] if isinstance(d, dict) and "grave" in str(d.get("gravite", "")).lower()]
-        manques = [str(m)[:160] for m in (c.get("manques_origine") or [])][:8]
+        manques = [str(m)[:160] for m in (c.get("manques_origine") or []) if not re.search(r"rires? (enregistr|du public|en bo[iî]te)|laugh", str(m).lower())][:8]   # jamais de rires enregistrés
     P = poids_critiques()
     note = round(sum(jury[k]["note"] * P.get(k, 1.0) for k in CRITIQUES) / sum(P.get(k, 1.0) for k in CRITIQUES), 1)
     corrections = [r_["correction"] for k in CRITIQUES for r_ in jury[k]["remarques"] if isinstance(r_.get("correction"), dict) and r_["correction"].get("type") in TYPES]
