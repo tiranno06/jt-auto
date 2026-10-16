@@ -1396,102 +1396,186 @@
    "nb_voix": 2,
    "voix": [
     {
-     "hz": 175,
+     "hz": 176,
      "genre": "?",
-     "part": 0.21
+     "part": 0.22
     },
     {
-     "hz": 165,
+     "hz": 170,
      "genre": "?",
-     "part": 0.79
+     "part": 0.78
     }
    ],
-   "debit": 5.61,
-   "blanc_moyen": 0.18,
-   "coupes": 21,
-   "dynamique_db": 18.5,
-   "cris": 0.001,
-   "musique": 1.57,
-   "impacts": 92,
-   "impacts_10s": 10.24,
-   "graves": 25,
-   "aigus": 67,
-   "sur_vanne": 34,
+   "debit": 5.58,
+   "blanc_moyen": 0.17,
+   "coupes": 23,
+   "dynamique_db": 19.0,
+   "cris": 0.005,
+   "musique": null,
+   "impacts": 0,
+   "impacts_10s": 0.0,
+   "graves": 0,
+   "aigus": 0,
+   "sur_vanne": 0,
    "evenements": {},
-   "emotions": {}
+   "emotions": {
+    "fear": 7,
+    "curious": 7,
+    "confident": 7,
+    "serious": 6,
+    "excited": 5,
+    "confused": 3,
+    "command": 2,
+    "angry": 2
+   }
   },
-  "claude": {},
+  "claude": {
+   "lieux": [
+    "rue"
+   ],
+   "costumes": {
+    "presentateur": {
+     "bas": "pantalon",
+     "c_bas": "bleu marine",
+     "c_chapeau": "noir",
+     "c_cheveux": "noir",
+     "c_haut": "violet",
+     "chapeau": "aucune",
+     "cheveux": "afro",
+     "details": [
+      "badge"
+     ],
+     "haut": "chemise",
+     "chaussures": "baskets"
+    },
+    "invite": {
+     "bas": "pantalon",
+     "c_bas": "gris",
+     "c_chapeau": "noir",
+     "c_cheveux": "chatain",
+     "c_haut": "marron",
+     "chapeau": "aucune",
+     "cheveux": "degarni",
+     "details": [
+      "montre"
+     ],
+     "haut": "debardeur",
+     "chaussures": "chaussons"
+    },
+    "envoyee": {
+     "bas": "jupe",
+     "c_bas": "rouge",
+     "c_chapeau": "noir",
+     "c_cheveux": "brun",
+     "c_haut": "rouge",
+     "chapeau": "serre_tete",
+     "cheveux": "tresses",
+     "details": [
+      "boucles_oreilles"
+     ],
+     "haut": "robe",
+     "chaussures": "baskets"
+    }
+   },
+   "objets": [
+    {
+     "replique": 0,
+     "objet": "telephone"
+    },
+    {
+     "objet": "telephone",
+     "replique": 2
+    }
+   ],
+   "gags": [
+    "La Fin de Carrière de CR7 Signifie la Fin du Football"
+   ],
+   "ambiances": [
+    "poussiere"
+   ],
+   "plans": [
+    {
+     "replique": 0,
+     "plan": "large",
+     "mouvement": "fixe",
+     "geste": "telephone",
+     "reaction": "aucune"
+    }
+   ]
+  },
   "realisation": {
    "moment": "soir",
    "lieux": [
-    "salon"
+    "rue"
    ],
-   "gags": [],
+   "gags": [
+    "La Fin de Carrière de CR7 Signifie la Fin du Football"
+   ],
    "ambiances": [
     "neige",
     "pluie",
     "poussiere"
    ],
-   "source": "robot+image",
+   "source": "auteur+image",
    "tenues": {
-    "envoyee": "capuche",
-    "presentateur": "capuche"
+    "envoyee": "robe",
+    "invite": "debardeur"
    },
    "plans": [
-    "large/avance",
     "large/fixe",
-    "epaule/fixe",
     "large/fixe",
-    "epaule/fixe",
+    "large/fixe",
     "large/fixe",
     "moyen/fixe",
-    "moyen/fixe",
+    "epaule/fixe",
+    "epaule/fixe",
     "tres_serre/zoom_choc",
     "large/fixe",
     "moyen/fixe",
     "large/fixe",
-    "tres_serre/zoom_choc",
-    "epaule/fixe",
-    "moyen/fixe",
-    "moyen/fixe",
-    "moyen/fixe",
-    "moyen/fixe",
-    "epaule/fixe",
     "large/fixe",
+    "contre_plongee/epaule",
+    "epaule/fixe",
     "large/fixe",
     "epaule/fixe",
     "moyen/fixe",
-    "moyen/fixe",
-    "moyen/fixe",
-    "large/fixe",
-    "large/fixe",
-    "epaule/fixe",
-    "large/fixe",
-    "large/fixe",
-    "epaule/fixe",
-    "moyen/fixe",
-    "moyen/fixe",
-    "large/fixe",
-    "moyen/fixe",
-    "moyen/fixe",
-    "moyen/fixe",
-    "large/fixe",
+    "contre_plongee/epaule",
     "large/fixe",
     "epaule/fixe",
     "moyen/fixe",
     "large/fixe",
-    "large/fixe",
-    "tres_serre/zoom_choc",
-    "large/fixe",
+    "moyen/fixe",
     "large/fixe",
     "large/fixe",
     "large/fixe",
+    "moyen/fixe",
+    "large/fixe",
+    "epaule/fixe",
+    "moyen/fixe",
+    "epaule/fixe",
+    "moyen/fixe",
+    "moyen/fixe",
+    "large/fixe",
+    "moyen/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "epaule/fixe",
     "moyen/fixe",
     "moyen/fixe",
     "epaule/fixe",
+    "large/fixe",
+    "moyen/fixe",
+    "moyen/fixe",
+    "moyen/fixe",
+    "large/fixe",
+    "moyen/fixe",
+    "epaule/fixe",
+    "large/fixe",
     "serre/avance"
    ]
   },
-  "video": "2026-10-16_08h15_emission.mp4"
+  "video": "2026-10-16_18h14_emission.mp4"
  }
 ]
