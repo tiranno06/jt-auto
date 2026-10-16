@@ -17,6 +17,8 @@ BANQUE = {
     "disque":      ("record scratch sound effect, vinyl stop, comedic freeze moment", 0.9),
     "ding":        ("bright modern notification ding, smartphone message", 0.6),
 }
+import bruitages as _B                                                    # bruitages « tendance » des vidéos d'humour TikTok
+BANQUE.update({nom: (en, d) for nom, (_fr, en, d) in _B.CATALOGUE.items()})
 
 # ambiance de fond de chaque lieu (mode payant) : fabriquée UNE fois par lieu, gardée dans sons_eleven/ambiances/, puis réutilisée
 AMBIANCES = {

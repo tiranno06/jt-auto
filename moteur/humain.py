@@ -27,6 +27,8 @@ POUR_H = {"long": "raie", "carre": "raie", "mi_long": "raie", "queue": "court_te
 POUR_F = {"court": "carre", "raie": "frange", "rase": "carre", "banane": "frange", "herisse": "ondule", "degarni": "chignon",
           "chauve": "chignon", "court_texture": "carre", "meches": "carre", "nuque": "carre", "couronne": "chignon"}
 
+COURTS_JEUNE_H = ("court", "court_texture", "herisse")  # garçon ado : coiffures courtes de son âge
+
 def _hex(c): return tuple(int(v) for v in c)
 def _melange(a, b, k): return tuple(int(x + (y - x) * k) for x, y in zip(a, b))
 def _fonce(c, k=0.7): return tuple(int(v * k) for v in c)
@@ -42,14 +44,20 @@ def creer(graine, genre=None, age=None, cheveux=None, c_cheveux=None, corpulence
     style = (POUR_H if g == "h" else POUR_F).get(str(style), style)          # jamais de coiffure qui brouille le genre
     cc = _hex(c_cheveux) if c_cheveux else CHEVEUX[int(rng.integers(len(CHEVEUX)))]
     if a >= 50 and not c_cheveux: cc = _melange(cc, (190, 190, 192), min(1.0, (a - 45) / 25))       # grisonnant
-    return dict(genre=g, age=a, corpulence=float(corpulence if corpulence is not None else rng.beta(2, 3)), taille=float(rng.uniform(0.94, 1.06) * (1.04 if g == "h" else 0.97)),
+    jeune = a < 18                                                         # ado ou enfant : plus petit, cheveux courts, jamais de barbe
+    if jeune:
+        if g == "h" and style not in COURTS_JEUNE_H: style = COURTS_JEUNE_H[int(rng.integers(len(COURTS_JEUNE_H)))]
+        barbe, corpulence = "", min(float(corpulence if corpulence is not None else rng.beta(2, 3)), 0.45)
+    taille_age = 1.0 if not jeune else (0.8 if a >= 14 else 0.7 if a >= 10 else 0.6)
+    return dict(genre=g, age=a, corpulence=float(corpulence if corpulence is not None else rng.beta(2, 3)),
+                taille=float(rng.uniform(0.94, 1.06) * (1.04 if g == "h" else 0.97) * taille_age),
                 peau=_hex(peau) if peau else PEAUX[int(rng.integers(len(PEAUX)))], visage=str(rng.choice(["ovale", "rond", "carre", "long"])),
                 iris=IRIS[int(rng.integers(len(IRIS)))], yeux=float(rng.uniform(0.9, 1.12)), nez=str(rng.choice(["droit", "rond", "fort", "fin"])),
                 levres=float(rng.uniform(0.8, 1.25) * (1.12 if g == "f" else 1.0)), sourcils=float(rng.uniform(0.85, 1.3) * (1.15 if g == "h" else 0.9)),
                 cheveux=str(style), c_cheveux=cc,
                 barbe="" if g == "f" else barbe if barbe is not None else (str(rng.choice(["", "", "", "trois_jours", "courte", "moustache", "bouc", "favoris", "barbe_pleine"])) if g == "h" and a >= 20 else ""),
                 lunettes=lunettes if lunettes is not None else (str(rng.choice(["rondes", "rectangle"])) if rng.random() < (0.18 + 0.006 * max(0, a - 35)) else ""),
-                maquillage=bool(g == "f" and rng.random() < 0.6))
+                maquillage=bool(g == "f" and not jeune and rng.random() < 0.6))
 
 # ------------------------------------------------------------------ dessin (corps des marionnettes, version adulte)
 import os
@@ -70,6 +78,7 @@ def _P(F):
 def _pose(F, p):
     C = dict(p.get("costume") or {}); det = list(C.get("details") or ())
     if F.get("lunettes") and "lunettes_vue" not in det: det.append("lunettes_vue")
+    if F["age"] < 18: det = [d for d in det if d not in M.GR.BARBES + ("moustache", "barbe")]   # ado : aucune barbe, même imposée
     b = {"courte": "barbe_courte", "trois_jours": "barbe"}.get(F.get("barbe"), F.get("barbe"))
     if b and b != "moustache" and b not in det: det.append(b)
     C.setdefault("c_barbe", tuple(F["c_cheveux"]))

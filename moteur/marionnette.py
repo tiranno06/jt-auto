@@ -250,16 +250,17 @@ def dessiner(img, perso, p):
     assis = bool(p.get("assis")) and A; sens_a = 1 if float(p.get("tq", 0.0)) >= 0 else -1
     if assis:                                                              # chaise dessinée avec le personnage (elle est toujours au bon endroit)
         y_s = cy_corps + corps_h * 0.42; c_ch = tuple(p.get("c_chaise") or (150, 105, 70))
-        _poly(img, [(x - sens_a * 95 * s, y_s - 190 * s), (x - sens_a * 70 * s, y_s - 190 * s), (x - sens_a * 70 * s, y_s), (x - sens_a * 95 * s, y_s)], c_ch)
-        _poly(img, [(x - sens_a * 95 * s, y_s - 190 * s), (x - sens_a * 70 * s, y_s - 190 * s), (x - sens_a * 70 * s, y_s), (x - sens_a * 95 * s, y_s)], TRAIT, True, 4 * s)
+        dossier = [(x - 112 * s, y_s - 250 * s), (x + 112 * s, y_s - 250 * s), (x + 104 * s, y_s), (x - 104 * s, y_s)]   # dossier derrière le buste (vu de face)
+        _poly(img, dossier, c_ch); _poly(img, dossier, TRAIT, True, 4 * s)
+        _ligne(img, (x - 98 * s, y_s - 205 * s), (x + 98 * s, y_s - 205 * s), _fonce(c_ch, 0.8), 5 * s)
         _poly(img, [(x - 95 * s, y_s), (x + 95 * s, y_s), (x + 95 * s, y_s + 22 * s), (x - 95 * s, y_s + 22 * s)], c_ch); _poly(img, [(x - 95 * s, y_s), (x + 95 * s, y_s), (x + 95 * s, y_s + 22 * s), (x - 95 * s, y_s + 22 * s)], TRAIT, True, 4 * s)
         for xx in (x - 85 * s, x + 75 * s): _ligne(img, (xx, y_s + 22 * s), (xx, pieds), TRAIT, 12 * s); _ligne(img, (xx, y_s + 22 * s), (xx, pieds), _fonce(c_ch, 0.85), 6 * s)
     marche = p.get("marche"); hanche = K["hanche"]; xp = K["x_pieds"]
     for k_j, dx in enumerate((-40, 40) if A else (-34, 34)):
         a = (x + dx * s * sx, cy_corps + corps_h * 0.35); b = (xp + dx * (1.0 if A else 1.25) * s * sx, pieds - (pied * 22 * s if dx > 0 else 0))
         genou = None
-        if assis:                                                          # assis : cuisse à l'horizontale, tibia vertical
-            genou = (a[0] + sens_a * 95 * s, a[1] + 8 * s); b = (genou[0] + sens_a * 6 * s, pieds)
+        if assis:                                                          # assis, vu de face comme le buste : cuisse qui vient vers nous
+            genou = (a[0] + dx * 0.55 * s, a[1] + 34 * s); b = (genou[0] + dx * 0.1 * s, pieds)   # (raccourcie), genou, tibia vertical
         elif marche is not None:                                           # marche : les jambes alternent, le pied se lève
             ph_ = marche + (math.pi if k_j else 0.0)
             b = (b[0] + math.sin(ph_) * 24 * s, b[1] - max(0.0, math.cos(ph_)) * 18 * s)
@@ -317,6 +318,14 @@ def dessiner(img, perso, p):
         if A and not dos and p.get("reflets"): GR.finitions_buste(img, pts_b, x + penche * 6 * s, cy_corps, corps_w, corps_h, s, C)
         if not dos: _sacs(img, x, cy_corps, corps_w, corps_h, s, C)
     _ombre(img, (x, cy_corps), (corps_w, corps_h / 2), 0, lum, f_omb, pts=pts_b)
+    if assis:                                                              # assis de face : l'assise et les genoux passent devant le bas du buste
+        y_g = cy_corps + corps_h * 0.40; c_ch = tuple(p.get("c_chaise") or (150, 105, 70))
+        assise = [(x - 104 * s, y_g + 6 * s), (x + 104 * s, y_g + 6 * s), (x + 100 * s, y_g + 34 * s), (x - 100 * s, y_g + 34 * s)]
+        _poly(img, assise, c_ch); _poly(img, assise, TRAIT, True, 4 * s)
+        c_g = c_bas if bas in ("jean", "pantalon", "jogging", "short") else (C or {}).get("c_haut", BLANC) if (C or {}).get("haut") == "robe" or bas == "jupe" else chair
+        for dx in (-40, 40):
+            _ellipse(img, (x + dx * s, y_g), (37 * s + ep, 30 * s + ep), 0, TRAIT); _ellipse(img, (x + dx * s, y_g), (37 * s, 30 * s), 0, c_g)
+            _arc(img, (x + dx * s, y_g + 4 * s), (20 * s, 12 * s), 0, 200, 340, _fonce(c_g, 0.75), 3 * s)        # rotule
     if A: _ellipse(img, tete, (rx + ep, ry + ep), p["tilt"], TRAIT)                 # adulte : la tête posée sur le col, avec son contour
     _ellipse(img, tete, (rx, ry), p["tilt"], chair)
     _ombre(img, tete, (rx, ry), p["tilt"], lum, f_omb * 0.8)

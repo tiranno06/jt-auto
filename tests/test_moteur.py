@@ -592,7 +592,7 @@ class TestImageEtBanque(unittest.TestCase):
 
     def test_consigne_images(self):
         import doublage
-        texte = doublage.IMAGES.format(mesures="2 plans", banque="", coiffures="carre, ondule")
+        texte = doublage.IMAGES.format(mesures="2 plans", banque="", coiffures="carre, ondule", coupes="1.0 s")
         self.assertIn("coiffure", texte); self.assertIn("objets", texte)
         self.assertIn("queue", doublage.consigne("v", "l"))
 
@@ -636,6 +636,70 @@ class TestTiktokGratuit(unittest.TestCase):
         import studio
         self.assertEqual(studio.genre_voix({}, "presentateur", {"genre": "f"}), "h")         # sketch écrit : Jojo reste un homme
         self.assertEqual(studio.genre_voix({"doublage": {}, "_voix_genre": {"envoyee": "h"}}, "envoyee", {"genre": "f"}), "h")
+
+
+class TestBruitages(unittest.TestCase):
+    def test_catalogue_et_placement(self):
+        import bruitages as BR, sons_modernes as SM, bruitages_eleven as BE
+        for nom in BR.CATALOGUE:                                                   # chaque son existe en gratuit et en ElevenLabs
+            self.assertIn(nom, SM.BANQUE); self.assertIn(nom, BE.BANQUE)
+        self.assertNotIn("foule_rire", BE.BANQUE); self.assertNotIn("gasp", BE.BANQUE)  # jamais de rires enregistrés
+        ph = [dict(i=0, p="presentateur", texte="Ça coûte quinze euros !", emo="neutre", chute=False, deb=0.2, fin=1.8, groupes=[("Ça coûte", 0.2, 0.9), ("quinze euros !", 0.9, 1.8)]),
+              dict(i=1, p="envoyee", texte="Et tu as encore raté ton permis.", emo="neutre", chute=True, deb=2.2, fin=4.0, groupes=[]),
+              dict(i=2, p="invite", texte="Je suis gêné.", emo="gene", chute=False, deb=4.5, fin=6.0, groupes=[]),
+              dict(i=3, p="presentateur", texte="Fin.", emo="neutre", chute=True, deb=6.5, fin=7.5, groupes=[])]
+        noms = set()
+        for g in range(12):
+            l = BR.choisir(ph, [(7.6, 9.0, "x", 0)], graine=g, duree=10)
+            self.assertLessEqual(len(l), 4); noms |= {n for n, _, _ in l}
+            self.assertTrue(all(a[0] != b[0] for a, b in zip(l, l[1:])))            # jamais deux fois le même d'affilée
+        self.assertTrue(noms & set(BR.CHUTES)); self.assertTrue(noms & {"criquets", "os_craque"})
+        self.assertEqual(BR.choisir(ph, (), 0, {0: "boing"})[0][0], "boing")        # choix de Claude respecté
+
+
+class TestBanqueSonore(unittest.TestCase):
+    def test_analyse_et_banque(self):
+        import analyse_audio as AA, banque_visuelle as BV, sons_modernes as SM
+        from scipy.signal import resample_poly
+        sr = AA.SR; n = sr * 8; t = np.arange(n) / sr
+        voix = np.zeros(n, np.float32)
+        for a, b, f in ((0.5, 2.0, 130), (3.0, 4.5, 220)): voix[int(a * sr):int(b * sr)] = 0.3 * np.sin(2 * np.pi * f * t[:int(b * sr) - int(a * sr)])
+        fx = np.zeros(n, np.float32); x = resample_poly(SM.son("vine_boom")[:, 0], 441, 882); fx[int(2.1 * sr):int(2.1 * sr) + len(x)] = x[:n - int(2.1 * sr)] * 0.6
+        mono = voix + fx + 0.03 * np.sin(2 * np.pi * 330 * t)
+        segs = [dict(voix="a", deb=0.5, fin=2.0, t="un deux trois quatre"), dict(voix="b", deb=3.0, fin=4.5, t="cinq six")]
+        A = AA.analyser(mono, voix, segs, {"a": 130, "b": 220}, [(5, 6, "laughter")], ["[angry] x"])
+        self.assertEqual(A["nb_voix"], 2); self.assertGreaterEqual(A["impacts"], 1); self.assertGreaterEqual(A["graves"], 1)
+        self.assertEqual(A["sur_vanne"], 1); self.assertEqual(A["evenements"], {"laughter": 1}); self.assertEqual(A["emotions"], {"angry": 1})
+        avant = BV.FICHIER; BV.FICHIER = os.path.join(tempfile.mkdtemp(), "b.json")
+        try:
+            BV.ajouter({"source": "https://tiktok/x", "audio": A}); t_ = BV.tendances()
+            self.assertEqual(t_["audio"]["n"], 1); self.assertIn("son (1 vidéo", BV.consigne())
+        finally: BV.FICHIER = avant
+
+
+class TestHistoireRecreee(unittest.TestCase):
+    def test_lieux_separes_au_telephone(self):
+        import studio
+        sk = {"repliques": [{"p": "invite", "t": "Allô papa, je suis au parking."}, {"p": "presentateur", "t": "T'es où exactement ?"},
+                            {"p": "invite", "t": "Devant le Leclerc."}, {"p": "presentateur", "t": "Je t'entends mal, je te rappelle."}],
+              "decoupage": [{"scene": "1", "repliques": [0, 1, 2, 3]}]}
+        self.assertTrue(studio.separer_lieux(sk))
+        sc = {i: k for k, d in enumerate(sk["decoupage"]) for i in d["repliques"]}
+        self.assertEqual(sc[0], sc[2]); self.assertNotEqual(sc[0], sc[1])                 # un décor chacun
+        self.assertTrue(all(r.get("objet") == "telephone" for r in sk["repliques"]))
+        sk2 = {"repliques": [{"p": "invite", "t": "Salut."}, {"p": "presentateur", "t": "Salut toi."}], "decoupage": []}
+        self.assertFalse(studio.separer_lieux(sk2))                                     # même endroit : rien ne change
+
+    def test_ado_et_compagnon(self):
+        import studio, humain as H
+        sk = {"repliques": [{"p": "invite", "t": "Papa, elle me fait signe."}, {"p": "presentateur", "t": "Vas-y fiston."}],
+              "studio": {"personnages": {"invite": {"genre": "h", "age": 22, "cheveux": "long", "barbe": "barbe_pleine"}},
+                         "figurants": [{"avec": "invite", "genre": "f", "age": 28, "geste": "signe", "haut": "robe", "c_haut": "rouge"}]}}
+        f = studio.casting(sk, ["presentateur", "invite"], {}, sk["studio"], 3)
+        self.assertLess(f["invite"]["age"], 18); self.assertEqual(f["invite"]["barbe"], ""); self.assertLess(f["invite"]["taille"], f["presentateur"]["taille"])
+        self.assertIn(f["invite"]["cheveux"], H.COURTS_JEUNE_H)
+        c = studio.compagnons(sk, [{"repliques": [0, 1]}], ["parking"], "jour", 3)
+        self.assertEqual(len(c), 1); self.assertEqual(c[0]["activite"], "signe"); self.assertEqual(c[0]["fiche"]["genre"], "f")
 
 
 class TestModeEco(unittest.TestCase):

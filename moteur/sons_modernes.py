@@ -83,8 +83,125 @@ def transition(graine=6):
     out[:len(w)] += w; s0 = int(0.3 * SR); out[s0:s0 + len(b)] += b
     return out / max(1, np.abs(out).max() / 0.95)
 
+# ------------------------------------------------------------------ bruitages « tendance » (catalogue : moteur/bruitages.py)
+def _env(t, attaque=0.005, chute=8.0):
+    return np.minimum(1, t / max(attaque, 1e-4)) * np.exp(-t * chute)
+
+def _scie(f, t):                                                           # dent de scie douce (cuivres, violon)
+    ph = np.cumsum(np.broadcast_to(f, t.shape)) / SR
+    return sum(np.sin(2 * np.pi * k * ph) / k for k in range(1, 9))
+
+def vine_boom(graine=11):
+    b = boom(1.1, 1.25, graine)[:, 0]; t = _t(len(b) / SR)
+    anneau = np.sin(2 * np.pi * 410 * t) * np.exp(-t * 9) * 0.12
+    return _stereo(_norm(b + anneau, 0.95))
+
+def dun_dun(graine=12):
+    notes = [(0.0, 0.32, 146.8), (0.42, 0.32, 138.6), (0.84, 1.3, 110.0)]       # ré, do#, la : « dun dun duuun »
+    out = np.zeros(int(2.3 * SR))
+    for d, l, f in notes:
+        t = _t(l); x = _passe_bas(_scie(f * (1 + 0.004 * np.sin(2 * np.pi * 5 * t)), t), 1800) * _env(t, 0.02, 1.2 / l)
+        a = int(d * SR); out[a:a + len(x)] += x
+    return _stereo(_norm(_reverb(out, 1.0, 0.3, graine), 0.8))
+
+def klaxon_clown(graine=13):
+    out = np.zeros(int(0.9 * SR))
+    for d in (0.0, 0.38):
+        t = _t(0.3); f = 330 * (1 + 0.03 * np.sin(2 * np.pi * 9 * t))
+        x = np.sign(np.sin(2 * np.pi * np.cumsum(f) / SR)) * _env(t, 0.01, 4)
+        x = _bande(x, 400, 2600); a = int(d * SR); out[a:a + len(x)] += x
+    return _stereo(_norm(out, 0.7))
+
+def sifflet_chute(graine=14):
+    t = _t(0.95); u = t / 0.95; f = 1900 * (300 / 1900) ** u * (1 + 0.02 * np.sin(2 * np.pi * 7 * t))
+    x = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.minimum(1, t / 0.03) * (1 - u) ** 0.4
+    x += _bande(np.random.default_rng(graine).normal(0, 1, len(t)), 1500, 6000) * 0.05
+    return _stereo(_norm(x, 0.6))
+
+def boing(graine=15):
+    t = _t(0.8); f = 170 * (1 + 0.35 * np.sin(2 * np.pi * 14 * t) * np.exp(-t * 4)) * (1 + 0.6 * np.exp(-t * 25))
+    x = np.sin(2 * np.pi * np.cumsum(f) / SR) * _env(t, 0.003, 4.5) + 0.3 * np.sin(4 * np.pi * np.cumsum(f) / SR) * _env(t, 0.003, 7)
+    return _stereo(_norm(x, 0.7))
+
+def violon_triste(graine=16):
+    out = np.zeros(int(2.7 * SR))
+    for k, f in enumerate((440.0, 392.0, 349.2, 329.6)):                    # la, sol, fa, mi : petit violon qui descend
+        l = 0.55 if k < 3 else 1.0; t = _t(l)
+        x = _passe_bas(_scie(f * (1 + 0.012 * np.sin(2 * np.pi * 5.5 * t) * np.minimum(1, t / 0.2)), t), 4200)
+        x *= np.minimum(1, t / 0.08) * np.minimum(1, (l - t) / 0.08)
+        a = int(k * 0.55 * SR); out[a:a + len(x)] += x
+    return _stereo(_norm(_reverb(out, 1.2, 0.35, graine), 0.55))
+
+def criquets(graine=17):
+    rng = np.random.default_rng(graine); out = np.zeros(int(2.4 * SR))
+    for d in np.arange(0.05, 2.2, 0.55) + rng.uniform(-0.05, 0.05, 4):
+        for k in range(3):                                                 # « cri-cri-cri »
+            t = _t(0.035); x = np.sin(2 * np.pi * 4600 * t) * np.sin(np.pi * t / 0.035)
+            a = int((d + k * 0.06) * SR); out[a:a + len(x)] += x
+    return _stereo(_norm(_reverb(out, 1.5, 0.4, graine), 0.4), pan=0.3)
+
+def os_craque(graine=18):
+    rng = np.random.default_rng(graine); out = np.zeros(int(0.5 * SR))
+    for d in (0.0, 0.05, 0.085, 0.16):
+        t = _t(0.03); x = _bande(rng.normal(0, 1, len(t)), 900, 5000) * np.exp(-t * 160)
+        a = int(d * SR); out[a:a + len(x)] += x
+    return _stereo(_norm(out, 0.8))
+
+def scie_wobble(graine=19):
+    t = _t(1.2); f = 620 * (1 + 0.06 * np.sin(2 * np.pi * 6 * t)) * (1 - 0.25 * t / 1.2)
+    x = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.minimum(1, t / 0.1) * np.minimum(1, (1.2 - t) / 0.2)
+    return _stereo(_norm(_reverb(x, 0.8, 0.25, graine), 0.5))
+
+def dents(graine=20):
+    rng = np.random.default_rng(graine); out = np.zeros(int(1.0 * SR))
+    for d in np.arange(0, 0.95, 1 / 17):
+        t = _t(0.012); x = _bande(rng.normal(0, 1, len(t)), 1800, 7000) * np.exp(-t * 400)
+        a = int(d * SR); out[a:a + len(x)] += x * rng.uniform(0.6, 1)
+    return _stereo(_norm(out, 0.6))
+
+def bouilloire(graine=21):
+    t = _t(1.6); u = t / 1.6; f = 1300 * 2 ** u
+    x = np.sin(2 * np.pi * np.cumsum(f) / SR) * u ** 1.5 + _bande(np.random.default_rng(graine).normal(0, 1, len(t)), 2000, 6000) * 0.15 * u
+    return _stereo(_norm(x, 0.45))
+
+def caisse(graine=22):
+    t = _t(1.0); clic = _bande(np.random.default_rng(graine).normal(0, 1, len(t)), 2000, 8000) * np.exp(-t * 90)
+    cloche = np.zeros(len(t)); a = int(0.08 * SR); tt = t[:len(t) - a]
+    cloche[a:] = (np.sin(2 * np.pi * 2637 * tt) + 0.6 * np.sin(2 * np.pi * 3951 * tt) + 0.3 * np.sin(2 * np.pi * 5274 * tt)) * np.exp(-tt * 5)
+    return _stereo(_norm(clic * 0.7 + cloche * 0.6, 0.6))
+
+def flash(graine=23):
+    rng = np.random.default_rng(graine); t = _t(0.7); out = np.zeros(len(t))
+    for d in (0.0, 0.06):
+        tt = _t(0.02); x = _bande(rng.normal(0, 1, len(tt)), 1500, 9000) * np.exp(-tt * 250); a = int(d * SR); out[a:a + len(x)] += x
+    out += np.sin(2 * np.pi * np.cumsum(3000 + 4000 * t / 0.7) / SR) * 0.08 * np.minimum(1, t / 0.1) * (t > 0.1)
+    return _stereo(_norm(out, 0.6))
+
+def clavier(graine=24):
+    rng = np.random.default_rng(graine); out = np.zeros(int(1.4 * SR)); d = 0.0
+    while d < 1.3:
+        t = _t(0.025); x = _bande(rng.normal(0, 1, len(t)), 1200, 6000) * np.exp(-t * 300) * rng.uniform(0.5, 1)
+        a = int(d * SR); out[a:a + len(x)] += x; d += rng.uniform(0.06, 0.13)
+    return _stereo(_norm(out, 0.5))
+
+def glitch(graine=25):
+    rng = np.random.default_rng(graine); out = []
+    for _ in range(9):
+        l = int(rng.uniform(0.02, 0.07) * SR); f = rng.choice([220, 440, 880, 1760])
+        x = np.sign(np.sin(2 * np.pi * f * np.arange(l) / SR)) * 0.5 + rng.normal(0, 0.3, l)
+        out.append(x * (rng.random() > 0.2))
+    return _stereo(_norm(_passe_bas(np.concatenate(out), 7000), 0.5))
+
+def bulle(graine=26):
+    t = _t(0.18); f = 600 + 2200 * (t / 0.18) ** 0.6
+    x = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t * 28)
+    return _stereo(_norm(x, 0.55))
+
 BANQUE = {"whoosh": whoosh, "swipe": swipe, "boom": boom, "pop": pop, "montee": montee, "transition": transition,
-          "boom_leger": lambda: boom(0.9, 0.6), "boom_fin": boom}
+          "boom_leger": lambda: boom(0.9, 0.6), "boom_fin": boom,
+          "vine_boom": vine_boom, "dun_dun": dun_dun, "klaxon_clown": klaxon_clown, "sifflet_chute": sifflet_chute, "boing": boing,
+          "violon_triste": violon_triste, "criquets": criquets, "os_craque": os_craque, "scie_wobble": scie_wobble, "dents": dents,
+          "bouilloire": bouilloire, "caisse": caisse, "flash": flash, "clavier": clavier, "glitch": glitch, "bulle": bulle}
 ELEVEN = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "sons_eleven")
 _cache = {}
 

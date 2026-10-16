@@ -295,7 +295,8 @@ def bible(sk, roles):
     if isinstance(S.get("cine"), dict): cine.update({k: bool(v) for k, v in S["cine"].items() if k in CINE_PROBA})   # choix de Claude (mode payant)
     assis = {}                                                             # qui est assis (bureau, salon, guichet…) : une chaise est dessinée avec lui
     for k_, l_ in enumerate(lieux):
-        if l_ in LIEUX_ASSIS and len(roles) >= 2 and rng.random() < 0.55: assis[k_] = roles[int(rng.integers(len(roles)))]
+        presents = [r for r in roles if any(i < len(sk.get("repliques", [])) and sk["repliques"][i]["p"] == r for i in (dec[k_].get("repliques", []) if k_ < len(dec) else []))] or roles
+        if l_ in LIEUX_ASSIS and (len(roles) >= 2 or sk.get("_separes")) and rng.random() < 0.55: assis[k_] = presents[int(rng.integers(len(presents)))]
     # qui mène chaque scène (le « métier » du lieu) : celui qui parle le plus de questions / le premier à parler
     costumes = {}
     for k, role in enumerate(roles):
@@ -332,6 +333,7 @@ def bible(sk, roles):
                                       costume=tenue(perso, "client", l, moment, graine + 101 + j + 7 * k)))
     fiches = casting(sk, roles, costumes, S, graine)
     for k, f_ in enumerate(figurants): f_["fiche"] = _humain().creer(graine + 500 + 7 * k)
+    figurants += compagnons(sk, dec, lieux, moment, graine)                # personnages muets voulus par l'histoire (Claude)
     ambiances = set(a for a in (S.get("ambiances") or []) if a in ("vapeur", "poussiere", "pluie", "neige", "neon"))
     if re.search(r"\bpluie|pleu[tv]|rain|parapluie", t_low): ambiances.add("pluie")
     if re.search(r"\bneige|no[ëe]l|snow|hiver", t_low): ambiances.add("neige")
@@ -352,7 +354,8 @@ def bible(sk, roles):
                 lumiere=lum, ombre=0.24 if moment != "nuit" else 0.32, etalonnage=ETALONNAGE[moment], heure=heure,
                 style_ia=STYLES_IA[moment], plans=S.get("plans") if isinstance(S.get("plans"), list) else [],
                 source=("auteur" if S else "robot") + ("+image" if V else ""), c_mur=c_mur, rythme=rythme, fiches=fiches,
-                cadence=S.get("cadence") if S.get("cadence") in CADENCES else None, assis=assis, cine=cine, decoupe=_decoupe_claude(S, roles))
+                cadence=S.get("cadence") if S.get("cadence") in CADENCES else None, assis=assis, cine=cine, decoupe=_decoupe_claude(S, roles),
+                coupes_origine=[float(c) for c in (V.get("coupes") or []) if isinstance(c, (int, float))] if sk.get("doublage") else [])
 
 def _humain():
     import humain
@@ -389,6 +392,13 @@ def casting(sk, roles, costumes, S, graine):
         try: age = int(d["age"]) if d.get("age") else None
         except (TypeError, ValueError): age = None
         autres = " ".join(v for r, v in lignes.items() if r != role)          # comment les autres l'appellent
+        # enfant / ado d'après le dialogue : on l'appelle « fiston », « mon fils »… ou il appelle l'autre « papa », « maman »
+        voc = r"(^|[.!?…]\s+)(papa|maman)\s*,|,\s*(papa|maman)\s*([.!?…]|$)"   # « Papa, … » ou « …, papa. » : on parle À son parent
+        parent = bool(re.search(voc, autres))
+        petit = not parent and (bool(re.search(r"\b(fiston|mon fils|ma fille|mon gar[çc]on|ma puce|mon grand|ma grande|mon bébé)\b", autres))
+                                or bool(re.search(voc, lignes[role])))
+        if parent and not age: age = 46
+        if petit and not (age and age < 18): age = 15 if not re.search(r"\b(doudou|tétine|maternelle|CP|CE1|dessin animé)\b", tout) else 8
         if not age:
             if re.search(r"\b(mamie|papy|grand-m[èe]re|grand-p[èe]re)\b", autres): age = 70
             elif re.search(r"\b(maman|papa|m[èe]re|p[èe]re)\b", autres): age = 46
@@ -398,11 +408,15 @@ def casting(sk, roles, costumes, S, graine):
         c = costumes.get(role) or {}
         style = COIFFURES_HUMAINS.get(c.get("cheveux") or "") or (d.get("cheveux") if d.get("cheveux") in tuple(H_.COIFF_M) + ("chauve",) else None)
         det = c.get("details") or ()
+        if age and age < 18 and genre != "f": style = style if style in H_.COURTS_JEUNE_H else None   # ado : coiffure de son âge
         fiche = H_.creer(graine + 31 * k, genre=genre, age=age, cheveux=style, c_cheveux=c.get("c_cheveux"),
                          corpulence=d.get("corpulence") if isinstance(d.get("corpulence"), (int, float)) else None,
                          lunettes="rondes" if "lunettes_vue" in det else None,
                          barbe=next((b for b in M.GR.BARBES if b in det), None) or ("moustache" if "moustache" in det else ("trois_jours" if "barbe" in det else
                                (d.get("barbe") if d.get("barbe") in M.GR.BARBES + ("moustache", "trois_jours") else None))))
+        try:                                                               # taille vue dans la vidéo ou décidée par Claude (1 = adulte moyen)
+            if d.get("taille"): fiche["taille"] = float(np.clip(float(d["taille"]), 0.55, 1.25)) * (1.04 if fiche["genre"] == "h" else 0.97)
+        except (TypeError, ValueError): pass
         out[role] = fiche
     return out
 
@@ -474,7 +488,7 @@ def realiser(ph, places, B):
         q["regard_camera"] = bool(j in silences or (a.get("regard_camera") is True))
     return ph
 
-CINE_PROBA = {"focus": 0.8, "vertige": 0.7, "tiers": 0.65, "etalonnage": 0.9, "profondeur": 0.8, "grain": 0.7, "reflets": 0.5, "son": 1.0}
+CINE_PROBA = {"focus": 0.0, "vertige": 0.7, "tiers": 0.65, "etalonnage": 0.9, "profondeur": 0.0, "grain": 0.7, "reflets": 0.5, "son": 1.0}   # flous retirés (auteur)
 def proba_cine():
     """Probabilités des effets cinéma, ajustées par les vues TikTok : un effet présent dans les vidéos les plus vues revient plus souvent."""
     p = dict(CINE_PROBA)
@@ -488,6 +502,66 @@ def proba_cine():
                 p[k] = float(np.clip(p[k] * r ** 0.5, 0.15, 0.95))
     except Exception: pass
     return p
+
+# ------------------------------------------------------------------ personnages dans des lieux différents (appel, visio, message…)
+APPEL = r"\b(all[ôo]|je t'appelle|tu m'appelles|au t[ée]l[ée]phone|tu m'entends|je t'entends( pas| mal)?|je raccroche|raccroche|t'es o[ùu]|tu es o[ùu]|" \
+        r"je suis (au|à la|à l'|devant|sur le|chez)|je te rappelle|en visio|ça capte|r[ée]seau|ma batterie)\b"
+
+def separer_lieux(sk):
+    """Quand les personnages ne sont PAS au même endroit (au téléphone, en visio, l'un chez lui et l'autre en ville), chacun a
+    son propre décor : une scène par personnage, et le montage passe de l'un à l'autre au rythme des répliques (coupe franche).
+    Claude le dit (studio → "lieux_separes" : {rôle: décor en anglais}, "moyen" : telephone / visio / message) ; sans Claude,
+    le robot le devine aux mots de l'appel (allô, t'es où, je suis au…). Modifie sk (découpage, objets) ; renvoie True si séparés."""
+    if sk.get("_separes"): return True
+    reps = sk.get("repliques") or []
+    S = sk.get("studio") if isinstance(sk.get("studio"), dict) else {}
+    parlants = [r for r in dict.fromkeys(x["p"] for x in reps) if r != "narrateur"]
+    sep = S.get("lieux_separes") if isinstance(S.get("lieux_separes"), dict) else {}
+    sep = {r: (v.get("decor") if isinstance(v, dict) else str(v or "")) for r, v in sep.items() if r in parlants}
+    moyen = str(S.get("moyen") or "").lower()
+    texte = " ".join(x.get("t", "") for x in reps).lower()
+    if len(sep) < 2 and not S.get("lieux_separes") and len(parlants) >= 2 and len(re.findall(APPEL, texte)) >= 2:
+        sep = {r: "" for r in parlants[:2]}; moyen = moyen or "telephone"            # repli gratuit : un appel deviné aux mots
+    if len(sep) < 2: return False
+    ordre = list(sep); scene_de = {r: k for k, r in enumerate(ordre)}
+    dec = [{"scene": str(k + 1), "repliques": [], "lieu": "", "son": "", "duree": 0, "decor": re.sub(r"[^\w\s,.'-]", "", sep[r])[:160]} for k, r in enumerate(ordre)]
+    k_prec = 0
+    for i, x in enumerate(reps):
+        k_prec = scene_de.get(x["p"], k_prec); dec[k_prec]["repliques"].append(i)     # voix off et 3e personnage : là où l'on est
+    dec = [d for d in dec if d["repliques"]]
+    if len(dec) < 2: return False
+    lieux_role = S.get("lieux_de") if isinstance(S.get("lieux_de"), dict) else {}
+    if lieux_role: S["lieux"] = [lieux_role.get(r) for r in ordre if any(reps[i]["p"] == r for i in range(len(reps)))]
+    else: S.pop("lieux", None)                                                     # les anciens lieux ne correspondent plus aux scènes
+    sk["decoupage"] = [dict(d, scene=str(k + 1)) for k, d in enumerate(dec)]
+    if moyen in ("telephone", "visio", "tel", "téléphone", "appel"):              # chacun son téléphone en main
+        for x in reps:
+            if x["p"] != "narrateur" and not x.get("objet"): x["objet"] = "telephone"
+    sk["_separes"] = True
+    if S: sk["studio"] = S
+    return True
+
+def compagnons(sk, dec, lieux, moment, graine):
+    """Personnages muets qui jouent dans la scène (vus dans la vidéo ou suggérés par l'histoire) : « une femme très apprêtée lui
+    fait signe à côté de sa voiture »… Claude : studio → "figurants" : [{"avec": rôle, "genre", "age", "geste": coucou / signe /
+    danse / attend / telephone / rit / boit, "haut", "c_haut", "description"}]. Dessinés près du personnage, à sa taille."""
+    S = sk.get("studio") if isinstance(sk.get("studio"), dict) else {}
+    out = []
+    for k, f in enumerate([f for f in (S.get("figurants") or []) if isinstance(f, dict)][:3]):
+        avec = f.get("avec"); reps = sk.get("repliques") or []
+        sc = next((j for j, d in enumerate(dec) if any(i < len(reps) and reps[i]["p"] == avec for i in d.get("repliques", []))), None)
+        if sc is None: continue
+        geste = str(f.get("geste") or "attend").lower()
+        geste = geste if geste in ("coucou", "signe", "danse", "attend", "telephone", "rit", "boit") else "attend"
+        c = tenue("meche", "client", lieux[min(sc, len(lieux) - 1)], moment, graine + 301 + k)
+        cv = _costume_valide({x: f[x] for x in ("haut", "c_haut", "bas", "c_bas", "chaussures", "chapeau", "details") if x in f})
+        if cv: c.update(cv)
+        try: age = int(f.get("age") or 0) or None
+        except (TypeError, ValueError): age = None
+        out.append(dict(scene=sc, avec=avec, activite=geste, compagnon=True, costume=c, perso="meche", x=0,
+                        fiche=_humain().creer(graine + 700 + 13 * k, genre=f.get("genre") if f.get("genre") in ("h", "f") else None, age=age),
+                        description=str(f.get("description") or "")[:120]))
+    return out
 
 LIEUX_ASSIS = ("bureau", "salon", "restaurant", "administration", "classe", "bar", "cabinet_medical", "palais")
 # gestes à deux, déclenchés par les mots de la réplique (le personnage s'approche, sa main atteint vraiment l'autre)
@@ -508,7 +582,8 @@ CADENCES = {"rapide": 0.72, "normal": 1.0, "pose": 1.35}
 def consigne_studio():
     """Bloc « studio » des consignes de Claude (doublage TikTok et sketchs écrits) : tout ce que le moteur sait dessiner et monter.
     Les listes viennent du code : chaque nouveauté (tenue, coiffure, lieu, plan…) y apparaît d'elle-même."""
-    import decor_dessin as DD, humain as H_
+    import decor_dessin as DD, humain as H_, bruitages as BR_
+    BRUITAGES_TENDANCE = list(BR_.CATALOGUE)
     L = ", ".join
     return f"""- "studio" : la direction artistique de la vidéo. Le moteur dessine tout lui-même dans le style « toons » des chaînes TikTok :
   personnages ADULTES à grosse tête ronde blanche posée sur le col, yeux en ovales noirs, épaules carrées, trait noir épais, avec le
@@ -522,9 +597,20 @@ def consigne_studio():
   époque ou métier évident : habille-les en conséquence (préhistoire : tunique motif taches + barbe_pleine + cheveux herisse ; roi, reine,
   Versailles : redingote ou robe + anglaises + tricorne ou couronne ; police : uniforme + casquette ; chantier : casque_chantier ;
   cuisinier : tablier + toque ; plage : hawai motif fleurs + bob…) ;
-  "personnages" = pour chaque rôle dessiné, l'adulte qui le joue (casting libre, différent à chaque vidéo, inspiré des voix et des
-  personnes de la vidéo) : "genre" (h ou f), "age" (nombre), "corpulence" (0 = mince à 1 = fort),
-  "cheveux" parmi {L(sorted(set(H_.COIFFURES_H + H_.COIFFURES_F + M.GR.COIFFURES)))}, "barbe" parmi {L(M.GR.BARBES + ("moustache", "trois_jours"))} ;
+  "personnages" = pour chaque rôle dessiné, la personne qui le joue (casting libre, différent à chaque vidéo) : "genre" (h ou f),
+  "age" (nombre), "taille" (1 = adulte moyen ; ado ≈ 0.8 ; enfant ≈ 0.65), "corpulence" (0 = mince à 1 = fort),
+  "cheveux" parmi {L(sorted(set(H_.COIFFURES_H + H_.COIFFURES_F + M.GR.COIFFURES)))}, "barbe" parmi {L(M.GR.BARBES + ("moustache", "trois_jours"))}.
+  L'ÂGE, le genre et la taille doivent coller au DIALOGUE, à la voix et à la vidéo : celui qu'on appelle « fiston », « mon fils »,
+  « ma puce », ou qui dit « papa, … », « maman, … » est un ADO (13-16 ans : plus petit, cheveux courts de son âge, JAMAIS de barbe)
+  ou un enfant si le contexte le dit ; ses parents sont plus âgés ; un patron, un client, un prof… ont l'âge du rôle ;
+  "lieux_separes" (seulement si les personnages ne sont PAS au même endroit : au téléphone, en visio, par message, l'un chez lui et
+  l'autre en ville) = {{rôle: décor EN ANGLAIS de l'endroit où IL se trouve, précis et détaillé}} ; "lieux_de" = {{rôle: lieu parmi
+  {L(DD.LIEUX)}}} ; "moyen" = telephone, visio ou message. Le moteur donne alors un décor à chacun et passe de l'un à l'autre à
+  chaque réplique (coupe franche), sans jamais les mettre ensemble ;
+  "figurants" (facultatif, au plus 3) = les personnes MUETTES dont l'histoire parle ou qu'on voit dans la vidéo, qui jouent dans la
+  scène à côté d'un personnage : [{{"avec": rôle, "description", "genre", "age", "geste": coucou, signe (« viens »), danse, attend,
+  telephone, rit ou boit, "haut", "c_haut", "bas", "chapeau", "details"}}] (ex. : une femme très apprêtée en tenue de mère Noël qui
+  fait signe au fils à côté de sa voiture). Imagine tous ces détails de l'histoire SANS qu'on te les demande ;
   "gags" = 1 à 3 textes très courts et drôles écrits dans le décor (affiche, tableau, enseigne, post-it), liés à la situation ;
   "ambiances" parmi vapeur, poussiere, pluie, neige, neon ;
   "cadence" = rapide, normal ou pose : le rythme du montage (rapide pour les disputes et les échanges vifs, pose pour l'émotion) ;
@@ -536,8 +622,12 @@ def consigne_studio():
   "decoupe" (facultatif, comme un vrai storyboard) = pour les répliques que tu veux monter toi-même : {{"replique": n, "plans": [
   {{"debut": fraction de la réplique entre 0 et 1, "plan": …, "cible": rôle filmé (celui qui parle ou celui qui écoute),
   "mouvement": … ou vertige, "passage": coupe, glisse, file ou zoom}}, …]}} — alterne serré / large, montre les réactions ;
-  "cine" (facultatif) = effets de l'épisode, vrai ou faux : focus (mise au point sur celui qui parle), vertige, tiers (règle des
-  tiers), etalonnage (couleur selon l'émotion), profondeur (premier plan flou), grain, reflets, son (ambiance, musique)."""
+  "cine" (facultatif) = effets de l'épisode, vrai ou faux : vertige, tiers (règle des tiers), etalonnage (couleur selon
+  l'émotion), grain, reflets, son (ambiance, musique) — l'image reste toujours NETTE (aucun flou sur les personnages ni le décor) ;
+  "bruitages" (facultatif) = bruitages « tendance » des vidéos d'humour TikTok, au plus un par réplique et pas plus d'un toutes les
+  3 secondes : [{{"replique": n, "son": …}}] avec son parmi {L(BRUITAGES_TENDANCE)} (vine_boom/dun_dun : vanne ou révélation,
+  klaxon_clown : quelqu'un se ridiculise, sifflet_chute : échec, criquets/os_craque : blanc gênant, violon_triste : fausse tristesse,
+  caisse : argent, clavier/glitch : ordinateur ou bug…) ; JAMAIS de rires enregistrés."""
 
 # ------------------------------------------------------------------ découpage : plusieurs plans par réplique, calés sur le son
 SERRES = ("serre", "tres_serre", "epaule", "plongee", "contre_plongee")
@@ -601,6 +691,8 @@ def decouper(ph, places, B, fps=30):
             coupes = [t0] + [_coupe_sur_le_son(lv, fps, q["deb"], t0 + (t1 - t0) * x["debut"], 0.2) for x in dc[1:]] + [t1]
         else:
             coupes = [t0] + [_coupe_sur_le_son(lv, fps, q["deb"], t0 + (t1 - t0) * k / n) for k in range(1, n)] + [t1]
+            orig = [c for c in B.get("coupes_origine") or [] if t0 + 0.5 < c < t1 - 0.5]   # doublage : les coupes de la vidéo d'origine
+            if orig: coupes = [t0] + orig + [t1]
         coupes = sorted(set(round(c, 3) for c in coupes))
         for k in range(len(coupes) - 1):
             a_, b_ = coupes[k], coupes[k + 1]

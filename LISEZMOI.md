@@ -144,6 +144,22 @@ Garde les outils payants (Claude, ElevenLabs, décors IA) mais dépense beaucoup
 ## Style cinéma (toujours en dessin animé)
 Chaque vidéo tire au hasard ses effets (pour varier d'une vidéo à l'autre, en mélange avec le style d'avant) : mise au point qui glisse sur celui qui parle (l'autre devient flou dans les plans moyens), effet vertige sur les moments de choc (le personnage avance, le décor recule), règle des tiers dans les plans serrés, couleur de l'image selon l'émotion (chaude, froide, rouge de colère), trois couches de profondeur (décor, figurants, feuillage flou au premier plan), grain de film léger et reflets de lumière, son de cinéma (ambiance du lieu, pas, whoosh sur les passages rapides, musique de fond discrète qui suit l'humeur), sous-titres qui rebondissent et tremblent quand on crie. En mode payant, Claude peut choisir ces effets (« cine » dans la direction artistique).
 
+## Ce que le robot apprend de chaque lien TikTok (banque visuelle et sonore)
+À chaque vidéo TikTok envoyée, tout est analysé gratuitement et rangé dans `episodes/banque_visuelle.json` :
+- **l'image** (`analyse_video.py`) : montage, durée des plans, cadrages, mouvements de caméra, personnes, couleurs d'habits et de cheveux, sourires, décor, lumière ; avec Claude : lieu, objets, tenues, coiffures, gestes ;
+- **le son** (`analyse_audio.py`) : nombre de voix, hauteur et genre de chaque voix, part de parole, débit, blancs, coupures de parole, voix posée ou criée, musique de fond, bruitages (graves type « boom » ou aigus type « pop », et s'ils tombent sur une vanne), rires et autres événements, émotions de jeu.
+Les moyennes (pondérées par les vues de nos vidéos) guident les vidéos suivantes : rythme des plans, dosage des bruitages, et un résumé envoyé à Claude.
+
+## L'histoire de la vidéo TikTok, recréée à notre sauce
+- **Âges et allures** d'après le dialogue, la voix et l'image : celui qu'on appelle « fiston », « mon fils », ou qui dit « papa, … » est un ado (plus petit, cheveux courts, jamais de barbe) ; ses parents sont plus âgés. Claude peut aussi donner la taille.
+- **Lieux différents** : au téléphone, en visio ou l'un chez lui et l'autre en ville, chacun a son propre décor et le montage passe de l'un à l'autre (coupe franche, téléphone en main). Deviné aussi sans Claude aux mots de l'appel (allô, t'es où, je suis au…).
+- **Personnes muettes** dont on parle ou qu'on voit (« elle me fait signe ») : dessinées à côté du personnage, avec leur geste (coucou, signe, danse, attend…).
+- **Coupes** calées sur celles de la vidéo d'origine ; image toujours nette ; en plan serré, seul celui qui est filmé est à l'image.
+
+## Bruitages « tendance » (moteur/bruitages.py)
+Catalogue tiré d'une recherche sur les bruitages des vidéos d'humour TikTok (octobre 2026) : vine boom, « dun dun duuun », klaxon de clown, sifflet qui descend, boing, petit violon triste, criquets, craquement d'os, scie qui ondule, claquement de dents, bouilloire, « ka-ching » de caisse, flash photo, clavier, bug numérique, bulle. Ce sont **nos propres versions** (pas les extraits protégés des mèmes) : fabriquées une fois par ElevenLabs (workflow « Fabriquer les bruitages ») et, en gratuit, synthétisées par le robot.
+Placement automatique : sur une vanne, un mot qui s'y prête (argent → caisse, photo → flash, mot de passe → clavier, bug → glitch, raté → sifflet), une émotion (gêne, tristesse, panique, choc) ou un blanc gênant ; un par réplique au plus, environ un toutes les 3 s, jamais deux fois le même d'affilée. En mode payant, Claude peut les choisir lui-même. **Jamais de rires enregistrés.** Pour ajouter un son : une ligne dans `CATALOGUE` (et sa version gratuite dans `sons_modernes.py`).
+
 ## Couverture, accroches et apprentissage
 - **Couverture TikTok** : le moteur choisit l'instant où le titre est visible et le visage le plus expressif ; Buffer l'utilise comme image de couverture et le site comme vignette.
 - **Deux styles d'accroche** (« POV : … » ou une question au spectateur) : chaque vidéo en prend un, les vues TikTok départagent peu à peu les deux styles (le meilleur sort plus souvent, l'autre reste essayé de temps en temps).
