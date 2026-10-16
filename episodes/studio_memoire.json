@@ -825,5 +825,50 @@
    "son": true
   },
   "cadence": "rapide"
+ },
+ {
+  "moment": "soir",
+  "lieux": [
+   "rue",
+   "salon"
+  ],
+  "source": "auteur+image",
+  "duree": 93.1,
+  "plans": {
+   "large": 10,
+   "moyen": 12,
+   "serre": 22,
+   "tres_serre": 8
+  },
+  "mouvements": {
+   "avance": 17,
+   "recul": 14,
+   "fixe": 11,
+   "zoom_choc": 3,
+   "travelling": 7
+  },
+  "costumes": {
+   "presentateur": "pull",
+   "invite": "capuche"
+  },
+  "figurants": 3,
+  "ambiances": [
+   "neige",
+   "pluie",
+   "poussiere"
+  ],
+  "controle": "Humoriste 7.0/10 : 0.4 s La chute finale manque de punch visuel. Un zoom choc sur le père au moment où il dit 'Tu seras un homme' serait plus efficace.; 62.6 s L'humour pourrait être renforcé par un r",
+  "fichier": "2026-10-16_23h58_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": true,
+   "tiers": false,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": true,
+   "reflets": false,
+   "son": true
+  },
+  "cadence": null
  }
 ]
