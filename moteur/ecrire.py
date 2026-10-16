@@ -430,6 +430,14 @@ PRIX = {"claude-opus-5-5": (4.0, 20.0), "claude-sonnet-5-5": (2.0, 10.0), "claud
 ECO = (os.environ.get("ETAPES_ECO") or "0") == "1"                         # réglage : étapes simples sur un modèle moins cher
 MODELE_ECO = "claude-sonnet-5-5"                          # suivi du budget (jetons consommés)
 
+def compter(r, modele):
+    """Ajoute les jetons d'une réponse Claude faite hors de _appel (contrôle qualité) au suivi du budget."""
+    u = getattr(r, "usage", None)
+    if not u: return
+    e_, s_ = getattr(u, "input_tokens", 0) or 0, getattr(u, "output_tokens", 0) or 0
+    USAGE["entree"] += e_; USAGE["sortie"] += s_; USAGE["appels"] += 1
+    pe, ps = PRIX.get(modele, PRIX["claude-opus-5-5"]); USAGE["cout"] += (e_ * pe + s_ * ps) / 1e6
+
 def _appel(client, systeme, messages, outil=OUTIL, web=False, max_tokens=12000, modele=None):
     """Appel Claude ; renvoie l'entrée de l'outil demandé (ou un JSON trouvé dans le texte). Recherche web si possible."""
     outils = [outil] + ([RECHERCHE_WEB] if web else [])

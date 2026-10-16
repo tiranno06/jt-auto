@@ -254,6 +254,7 @@ def main():
     while os.path.basename(base) + ".mp4" in pris: n += 1; base = f"sortie/{jour}_{heure}_emission{n}"   # plusieurs émissions le même jour
     os.makedirs("sortie", exist_ok=True)
     gag = None; duree = None; decors = {}; video_ok, rapport_video = True, ""
+    QUALITE = {"Q": None, "corrigees": []}                                 # jury qualité de la vidéo (moteur/qualite.py)
     if REALISTE:                                                           # mode réaliste (option) : vraie vidéo IA, voix comprises
         try:
             import realiste
@@ -283,10 +284,44 @@ def main():
                     for l_ in set(st_.bible(sk, [r for r in dict.fromkeys(x["p"] for x in sk.get("repliques", [])) if r != "narrateur"])["lieux"]): bruitages_eleven.ambiance_lieu(l_)
             except Exception as e: print(f"Ambiances ElevenLabs indisponibles : {e}", flush=True)
             duree = cartoon.rendre(sk, base + ".mp4", audios, mots=mots, decors=decors, mini=fmt == "mini")
-            import controle
+            import controle, qualite, copy
             tech_ok, rapport_tech = controle.technique(base + ".mp4", duree, cartoon.MINUTAGE[-1][1] if cartoon.MINUTAGE else None)     # contrôles gratuits (format, son, images noires)
-            if not test and cartoon.MINUTAGE:                              # piste 13 : une IA regarde la vidéo finie
-                video_ok, rapport_video = controle.verifier(base + ".mp4", sk, cartoon.MINUTAGE)
+            if not test and cartoon.RENDU and os.environ.get("JURY", "1") != "0":   # jury qualité : 5 critiques (gratuits + Claude s'il y a du crédit)
+                QUALITE["Q"] = Q = qualite.evaluer(base + ".mp4", cartoon.RENDU, sk, "" if tech_ok else rapport_tech)
+                video_ok, rapport_video = not Q["defauts_graves"], Q["rapport"]
+                try: tours = max(0, min(2, int(os.environ.get("JURY_TOURS") or 1)))
+                except ValueError: tours = 1
+                try: seuil_j = float(os.environ.get("SEUIL_JURY") or 9.5)
+                except ValueError: seuil_j = 9.5
+                for tour in range(tours):                                  # corrections automatiques puis nouvelle version, on garde la meilleure
+                    if Q["note"] >= seuil_j or not Q["corrections"]: break
+                    sk2 = copy.deepcopy(sk); faites = qualite.corriger(sk2, Q["corrections"])
+                    if not faites: break
+                    print(f"Corrections du jury (tour {tour + 1}) : " + " ; ".join(faites), flush=True)
+                    dec2 = dict(decors)
+                    for k_ in sk2.pop("_decors_a_refaire", []): dec2.pop(k_, None)
+                    n_sc = len(sk2.get("decoupage") or [])
+                    if _st.separer_lieux(sk2) and len(sk2.get("decoupage") or []) != n_sc or sk2.get("decoupage") != sk.get("decoupage"):
+                        dec2 = {}                                          # nouveaux lieux : nouveaux décors (IA si possible)
+                        if modal_ok and os.environ.get("DECORS", "1") != "0":
+                            try: dec2 = decors_mod.generer(sk2.get("decoupage"), graine=len(historique) + 11)
+                            except Exception as e: print(f"Nouveaux décors IA impossibles ({e}) : décors dessinés", flush=True)
+                    etat = {k_: copy.copy(getattr(cartoon, k_)) for k_ in ("MINUTAGE", "PH", "BRUITAGES", "RENDU", "COUVERTURE", "COUVERTURE_MS")}
+                    try:
+                        d2 = cartoon.rendre(sk2, base + "_v2.mp4", audios, mots=mots, decors=dec2, mini=fmt == "mini")
+                        t2_ok, t2_rap = controle.technique(base + "_v2.mp4", d2, cartoon.MINUTAGE[-1][1] if cartoon.MINUTAGE else None)
+                        Q2 = qualite.evaluer(base + "_v2.mp4", cartoon.RENDU, sk2, "" if t2_ok else t2_rap)
+                    except Exception as e:
+                        print(f"Nouvelle version impossible ({str(e)[:160]}) : on garde la première.", flush=True); Q2, t2_ok = None, False
+                    if Q2 and t2_ok and Q2["note"] > Q["note"]:
+                        os.replace(base + "_v2.mp4", base + ".mp4"); sk.clear(); sk.update(sk2); duree, decors = d2, dec2
+                        print(f"Version corrigée gardée : {Q['note']} → {Q2['note']}/10", flush=True)
+                        QUALITE["corrigees"] += faites; QUALITE["Q"] = Q = Q2; video_ok, rapport_video = not Q["defauts_graves"], Q["rapport"]
+                    else:
+                        if os.path.exists(base + "_v2.mp4"): os.remove(base + "_v2.mp4")
+                        for k_, v_ in etat.items(): setattr(cartoon, k_, v_)
+                        print("La version corrigée n'est pas meilleure : on garde la première.", flush=True); break
+                qualite.memoriser(Q, os.path.basename(base) + ".mp4", QUALITE["corrigees"])
             if not tech_ok: video_ok = False; rapport_video = (rapport_tech + " ; " + rapport_video).strip(" ;")
             B_ = sk.pop("_bible", None)
             if B_:                                                         # direction artistique : fiche de l'épisode + mémoire du studio
@@ -323,6 +358,11 @@ def main():
                            outils=dict(claude=("secours" if SECOURS else CREDITS["claude"]),
                                        voix=("tiktok" if DOUB else "elevenlabs" if "eleven" in str(moteur).lower() else "chatterbox" if "chatterbox" in str(moteur).lower() else "piper"),
                                        decors=("ia" if decors else "dessines"), eco=ECO)))
+    if QUALITE["Q"]:                                                       # fiche du jury : notes, remarques, corrections faites
+        Q_ = QUALITE["Q"]
+        historique[-1]["jury"] = dict(note=Q_["note"], source=Q_["source"], notes={k: v["note"] for k, v in Q_["jury"].items()},
+                                      remarques=[r_["probleme"][:140] for v in Q_["jury"].values() for r_ in v["remarques"]][:12],
+                                      corrigees=QUALITE["corrigees"][:10], manques=Q_.get("manques_origine") or [])
     print("Outils utilisés : " + ", ".join(f"{k} = {v}" for k, v in historique[-1]["outils"].items()), flush=True)
     json.dump(historique[-200:], open("episodes/historique.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     if THEME and not REFAIRE: historique[-1]["manuel"] = True; historique[-1]["theme"] = THEME[:300]

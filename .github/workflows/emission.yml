@@ -127,6 +127,9 @@ jobs:
       ESSAIS_MAX: ${{ vars.ESSAIS_MAX }}
       ETAPES_ECO: ${{ vars.ETAPES_ECO }}
       MODE_ECO: ${{ vars.MODE_ECO }}
+      JURY: ${{ vars.JURY }}
+      JURY_TOURS: ${{ vars.JURY_TOURS }}
+      SEUIL_JURY: ${{ vars.SEUIL_JURY }}
       VAPID_PRIVEE: ${{ vars.VAPID_PRIVEE }}
       VAPID_PUBLIQUE: ${{ vars.VAPID_PUBLIQUE }}
       PUSH_ABONNEMENTS: ${{ vars.PUSH_ABONNEMENTS }}

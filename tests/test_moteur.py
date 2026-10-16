@@ -712,6 +712,36 @@ class TestCastingGratuit(unittest.TestCase):
         self.assertEqual(D.genre_des_voix(segs, {"a": 130, "b": 170})["b"], "f")
 
 
+class TestJuryQualite(unittest.TestCase):
+    def test_jury_gratuit_et_corrections(self):
+        import shutil, copy
+        if not shutil.which("ffmpeg"): self.skipTest("ffmpeg absent")
+        sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "moteur"))
+        import cartoon, qualite
+        reps = [("invite", "Papa, elle me fait signe de venir."), ("presentateur", "Vas-y fiston, fonce !"), ("invite", "Bon d'accord, j'y vais.")]
+        sk = {"titre_accroche": "Essai", "sujet": "Essai", "repliques": [{"p": p, "t": t} for p, t in reps],
+              "decoupage": [{"scene": "1", "repliques": [0, 1, 2], "decor": "a living room"}]}
+        sk["repliques"][-1]["chute"] = True
+        auds = [(0.3 * np.sin(np.arange(int(22050 * 1.4)) / 22050 * 2 * np.pi * 150)).astype(np.float32) for _ in reps]
+        sortie = os.path.join(tempfile.mkdtemp(), "v.mp4"); cartoon.rendre(sk, sortie, auds, mini=True)
+        avant = os.environ.get("CLAUDE_INDISPONIBLE"); os.environ["CLAUDE_INDISPONIBLE"] = "1"
+        mem = qualite.MEMOIRE; qualite.MEMOIRE = os.path.join(tempfile.mkdtemp(), "q.json")
+        try:
+            Q = qualite.evaluer(sortie, cartoon.RENDU, sk)
+            self.assertEqual(Q["source"], "gratuit"); self.assertEqual(set(Q["jury"]), set(qualite.CRITIQUES))
+            self.assertTrue(0 < Q["note"] <= 10)
+            cats = {r["categorie"] for v in Q["jury"].values() for r in v["remarques"]}
+            self.assertIn("personne_invisible", cats)                                  # « elle me fait signe » mais personne à l'image
+            sk2 = copy.deepcopy(sk); faites = qualite.corriger(sk2, Q["corrections"])
+            self.assertTrue(faites); self.assertTrue(sk2["studio"].get("figurants"))
+            qualite.memoriser(Q, "v.mp4", faites); qualite.memoriser(Q, "w.mp4"); qualite.memoriser(Q, "x.mp4")
+            self.assertIn("ERREURS QUI REVIENNENT", qualite.regles_apprises())
+        finally:
+            qualite.MEMOIRE = mem
+            if avant is None: os.environ.pop("CLAUDE_INDISPONIBLE", None)
+            else: os.environ["CLAUDE_INDISPONIBLE"] = avant
+
+
 class TestModeEco(unittest.TestCase):
     def test_mode_eco(self):
         import reseau
