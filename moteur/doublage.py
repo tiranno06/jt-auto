@@ -259,11 +259,28 @@ def _outil():
                     "objets": {"type": "array", "items": ecrire._schema({"replique": {"type": "integer"}, "objet": {"type": "string"}}, ["replique", "objet"])}}}},
                 ["casting", "d", "decoupage"])}
 
+HOMME_DIT = r"\b(fiston|mon fils|mon gar[çc]on|fr[ée]rot|mon fr[èe]re|mec|mon pote|monsieur|papa|mon ch[ée]ri|mon grand)\b"
+FEMME_DIT = r"\b(ma fille|ma puce|madame|maman|ma ch[ée]rie|ma belle|ma s[œo]eur|ma grande|ma copine)\b"
+HOMME_SOI = r"\bje suis (s[ûu]r|content|pr[êe]t|d[ée]sol[ée]|fatigu[ée]|perdu|mort|grand|petit)\b(?!e)"
+FEMME_SOI = r"\bje suis (s[ûu]re|contente|pr[êe]te|d[ée]sol[ée]e|fatigu[ée]e|perdue|morte|grande|petite)\b"
+
+def genre_des_voix(segs, hz):
+    """Homme ou femme pour chaque voix, sans Claude : d'abord les MOTS (comment les autres l'appellent : « fiston », « papa, »,
+    « ma puce »… ; comment elle parle d'elle : « je suis sûre ») puis la hauteur (voix nettement aiguë = femme)."""
+    voix = list(dict.fromkeys(s["voix"] for s in segs)); out = {}
+    for v in voix:
+        a_lui = " ".join(s["t"] for s in segs if s["voix"] != v).lower() if len(voix) == 2 else ""   # à deux : on s'adresse à l'autre
+        lui = " ".join(s["t"] for s in segs if s["voix"] == v).lower()
+        h_ = len(re.findall(HOMME_DIT, a_lui)) + len(re.findall(HOMME_SOI, lui)); f_ = len(re.findall(FEMME_DIT, a_lui)) + len(re.findall(FEMME_SOI, lui))
+        if h_ != f_: out[v] = "h" if h_ > f_ else "f"
+        else: out[v] = "f" if (hz.get(v) or 0) > 190 else "h"                 # 165-190 Hz : souvent un homme (ado, voix qui monte)
+    return out
+
 def _casting_defaut(segs, hz):
-    """Sans Claude : voix aiguë -> Lila, les autres -> Jojo puis Kévin (par ordre d'apparition)."""
-    ordre = list(dict.fromkeys(s["voix"] for s in segs)); res, hommes = {}, ["presentateur", "invite"]
+    """Sans Claude : la voix de femme -> Lila, les autres -> Jojo puis Kévin (par ordre d'apparition)."""
+    ordre = list(dict.fromkeys(s["voix"] for s in segs)); res, hommes = {}, ["presentateur", "invite"]; g = genre_des_voix(segs, hz)
     for v in ordre:
-        if (hz.get(v) or 0) > 165 and "envoyee" not in res.values(): res[v] = "envoyee"
+        if g.get(v) == "f" and "envoyee" not in res.values(): res[v] = "envoyee"
         else: res[v] = next((r for r in hommes if r not in res.values()), "presentateur")
     return res
 
