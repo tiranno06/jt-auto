@@ -234,8 +234,9 @@ IMAGES = """
 IMAGES CI-DESSUS : des images clés de la vidéo TikTok d'origine (dans l'ordre). Reconstruis notre scène À SON IMAGE, en la traduisant
 dans notre dessin animé et dans nos listes : le lieu exact, le décor du premier plan à l'arrière-plan ("decor" en anglais, avec les objets
 qu'on y voit), les objets tenus ("studio" → "objets" = [{{"replique", "objet"}}] pris dans la liste des objets ci-dessous), la tenue de
-chaque personne (forme, couleur, motif, accessoires) et sa coiffure ("cheveux" parmi {coiffures} ; "c_cheveux" = couleur), son couvre-chef ("chapeau"), sa barbe, leurs mimiques et gestes (visage, bouche, yeux, bras, mains, jambes, pieds) pour les "plans" (geste, réaction),
-la lumière et l'heure, et le rythme du montage d'origine ("cadence"). La personne la plus présente à l'image joue la voix la plus présente.
+chaque personne (forme, couleur, motif, accessoires) et sa coiffure ("cheveux" parmi {coiffures} ; "c_cheveux" = couleur), son couvre-chef ("chapeau"), sa barbe, leurs mimiques et gestes (visage, bouche, yeux, bras, mains, jambes, pieds) pour le "jeu" de CHAQUE réplique (émotion, geste, intensité : exagère-les un peu, style toons) et les "plans" (geste, réaction),
+la lumière et l'heure, et le rythme du montage d'origine ("cadence"). OBLIGATOIRE : "studio" → "decors_vus" = {{rôle: décor EN ANGLAIS tel qu'on
+le voit DERRIÈRE cette personne dans la vidéo d'origine (lieu précis + 5 à 8 objets précis avec leur couleur + lumière, 40 mots au plus)}}. La personne la plus présente à l'image joue la voix la plus présente.
 Recrée TOUT ce que montre la vidéo, à notre sauce : chaque personne avec son âge, son genre, sa taille et son allure ("personnages"),
 les lieux (si les personnes ne sont pas au même endroit, "lieux_separes" : un décor pour chacune), les personnes muettes qu'on voit ou
 dont on parle ("figurants"), et la suite des plans de la vidéo d'origine (serré / large, sur qui, avec quel geste) dans "decoupe"
@@ -384,6 +385,11 @@ def preparer(url):
             g_v = genre_des_voix(segs, hz); g_r = {}
             for v, r in casting.items(): g_r.setdefault(r, g_v.get(v))
             if _st.accorder_roles(sk, g_r): journal("  descriptions des personnages remises sur les bons rôles (âge, genre de la voix)")
+            vus = sk["studio"].get("decors_vus") if isinstance(sk["studio"].get("decors_vus"), dict) else {}
+            for sc in sk.get("decoupage") or []:                           # décor trop vague : celui vu dans la vidéo d'origine
+                qui = [reps[i]["p"] for i in sc.get("repliques", []) if i < len(reps)]
+                v_ = next((vus[r] for r in sorted(set(qui), key=qui.count, reverse=True) if vus.get(r)), None)
+                if v_ and len(str(sc.get("decor") or "").split()) < 8: sc["decor"] = re.sub(r"[^\w\s,.'-]", "", str(v_))[:240]
         except Exception as e: journal(f"  accord des rôles impossible ({str(e)[:100]})")
     sk["sources"] = [lien]
     sk["doublage"] = {"piste": piste, "duree": round(duree, 2), "source": lien, "auteur": auteur, "contexte": m.get("contexte", ""),

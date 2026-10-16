@@ -864,6 +864,36 @@ class TestAppelPereFils(unittest.TestCase):
         self.assertFalse(any("barbe" in d or d == "moustache" for d in C["costume"]["details"]))
 
 
+class TestQualiteVisuelle(unittest.TestCase):
+    def test_levres_par_sons(self):
+        import levres
+        self.assertEqual(levres.phonemes("papa"), ["M", "A", "M", "A"])
+        self.assertEqual(levres.phonemes("oui"), ["U", "I"])
+        self.assertEqual(levres.phonemes("chaussure")[:2], ["CH", "O"])
+        self.assertNotIn("S", levres.phonemes("grands"))                     # lettres muettes de fin de mot
+        seg = levres.chronologie([("Papa, oui", 1.0, 2.0)])
+        self.assertEqual(levres.forme(seg, 1.01), "M"); self.assertIsNone(levres.forme(seg, 3.0))
+        seg2 = levres.chronologie([], [("oui", 0.2, 0.6)], 10.0)               # instants exacts des mots (transcription)
+        self.assertEqual(levres.forme(seg2, 10.25), "U"); self.assertEqual(levres.forme(seg2, 10.55), "I")
+
+    def test_controle_image(self):
+        import cartoon
+        tetes = [dict(t=1.0, role="a", x=-30.0, y=800.0, rx=120.0, ry=130.0, plan="moyen", seul=None, parle=True, i=0, sous_titre=False),
+                 dict(t=1.0, role="b", x=600.0, y=1650.0, rx=120.0, ry=130.0, plan="serre", seul=None, parle=True, i=0, sous_titre=True),
+                 dict(t=1.0, role="c", x=650.0, y=1600.0, rx=120.0, ry=130.0, plan="serre", seul=None, parle=False, i=0, sous_titre=True)]
+        types = {d["type"] for d in cartoon.controle_image(tetes)}
+        self.assertEqual(types, {"tete_coupee", "sous_titre_visage", "chevauchement"})
+
+    def test_jeu_exagere(self):
+        import studio
+        ph = [dict(i=0, p="a", scene=0, deb=0.0, fin=1.5, emo="neutre", texte="Quoi ?", chute=False, cam="large"),
+              dict(i=1, p="b", scene=0, deb=1.6, fin=3.0, emo="cri", texte="Dégage !", chute=True, cam="serre")]
+        B = {"graine": 3, "plans": [], "jeu": [{"replique": 0, "emotion": "choc", "geste": "desespoir", "intensite": 3}]}
+        studio.realiser(ph, {0: ["a", "b"]}, B)
+        self.assertEqual((ph[0]["emo"], ph[0]["geste"], ph[0]["intensite"]), ("choc", "desespoir", 3))
+        self.assertEqual(ph[1]["intensite"], 2)                              # cri : joué fort même sans IA
+
+
 class TestModeEco(unittest.TestCase):
     def test_mode_eco(self):
         import reseau

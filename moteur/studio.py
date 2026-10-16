@@ -353,6 +353,7 @@ def bible(sk, roles):
     return dict(graine=graine, moment=moment, lieux=lieux, gags=gags, costumes=costumes, figurants=figurants, ambiances=sorted(ambiances),
                 lumiere=lum, ombre=0.24 if moment != "nuit" else 0.32, etalonnage=ETALONNAGE[moment], heure=heure,
                 style_ia=STYLES_IA[moment], plans=S.get("plans") if isinstance(S.get("plans"), list) else [],
+                jeu=[x for x in (S.get("jeu") or []) if isinstance(x, dict)] if isinstance(S.get("jeu"), list) else [],
                 source=("auteur" if S else "robot") + ("+image" if V else ""), c_mur=c_mur, rythme=rythme, fiches=fiches,
                 cadence=S.get("cadence") if S.get("cadence") in CADENCES else None, assis=assis, cine=cine, decoupe=_decoupe_claude(S, roles),
                 coupes_origine=[float(c) for c in (V.get("coupes") or []) if isinstance(c, (int, float))] if sk.get("doublage") else [])
@@ -443,11 +444,17 @@ def moments(ph):
     return out
 
 # ------------------------------------------------------------------ storyboard
+EMOTIONS_JEU = ("neutre", "rire", "cri", "colere", "pleurs", "soupir", "panique", "choc", "blase", "joie", "fier", "chuchote", "gene",
+                "sceptique", "amour", "fatigue", "reflechit", "idee", "chante")
+VIVES = ("cri", "colere", "choc", "panique", "joie", "rire")               # émotions jouées plus fort (style toons : on exagère)
 def realiser(ph, places, B):
     """Ajoute à chaque réplique q : plan, mouvement, reaction, regard_camera (et respecte les choix de l'auteur s'il y en a)."""
-    plans_auteur = {}
+    plans_auteur, jeux = {}, {}
     for x in B.get("plans") or []:
         if isinstance(x, dict) and isinstance(x.get("replique"), int): plans_auteur[x["replique"]] = x
+    for x in B.get("jeu") or []:
+        try: jeux[int(x.get("replique"))] = x
+        except (TypeError, ValueError): pass
     silences = {j for t, ty, j in moments(ph) if ty == "silence"}
     vues = set()
     for j, q in enumerate(ph):
@@ -490,6 +497,11 @@ def realiser(ph, places, B):
         if a.get("mouvement") in MOUVEMENTS: mouv = a["mouvement"]
         if a.get("reaction") in REACTIONS: reaction = a["reaction"]
         if a.get("geste") in GESTES: q["geste"] = a["geste"]
+        jq = jeux.get(q["i"]) or {}                                         # jeu d'acteur copié sur la vidéo d'origine (IA)
+        if jq.get("emotion") in EMOTIONS_JEU: q["emo"] = jq["emotion"]
+        if jq.get("geste") in GESTES: q["geste"] = jq["geste"]
+        try: q["intensite"] = max(1, min(3, int(jq.get("intensite") or 0))) if jq.get("intensite") else (2 if q["emo"] in VIVES else 1)
+        except (TypeError, ValueError): q["intensite"] = 2 if q["emo"] in VIVES else 1
         q["plan"], q["mouvement"], q["reaction"] = plan, mouv, reaction
         q["regard_camera"] = bool(j in silences or (a.get("regard_camera") is True))
     return ph
@@ -636,6 +648,8 @@ def separer_lieux(sk):
     if len(sep) < 2: return False
     ordre = list(sep); scene_de = {r: k for k, r in enumerate(ordre)}
     lieux_role0 = S.get("lieux_de") if isinstance(S.get("lieux_de"), dict) else {}
+    vus = S.get("decors_vus") if isinstance(S.get("decors_vus"), dict) else {}  # décor vu derrière chacun dans la vidéo d'origine (IA)
+    sep = {r: (sep[r] or str(vus.get(r) or "")) for r in sep}
     dec = [{"scene": str(k + 1), "repliques": [], "lieu": "", "son": "", "duree": 0,
             "decor": re.sub(r"[^\w\s,.'-]", "", sep[r] or DECOR_EN.get(lieux_role0.get(r), ""))[:160]} for k, r in enumerate(ordre)]
     k_prec = 0
@@ -750,6 +764,9 @@ def consigne_studio():
   "gags" = 1 à 3 textes très courts et drôles écrits dans le décor (affiche, tableau, enseigne, post-it), liés à la situation ;
   "ambiances" parmi vapeur, poussiere, pluie, neige, neon ;
   "cadence" = rapide, normal ou pose : le rythme du montage (rapide pour les disputes et les échanges vifs, pose pour l'émotion) ;
+  "jeu" = le JEU D'ACTEUR de chaque réplique (copié sur la vidéo d'origine quand tu la vois, en le poussant un peu plus loin pour
+  l'humour : grimaces et gestes EXAGÉRÉS façon toons) : [{{"replique": n, "emotion" parmi {L(EMOTIONS_JEU)}, "geste" parmi {L(GESTES)},
+  "intensite": 1 (calme), 2 (marqué) ou 3 (très exagéré)}}] — mains sur le visage = facepalm, doigt pointé = pointe, bras levés = desespoir… ;
   "plans" = pour les répliques importantes (n° de réplique) : "plan" parmi {L(PLANS)}, "mouvement" parmi {L(MOUVEMENTS)},
   "geste" parmi {L(GESTES)}, "reaction" de celui qui écoute parmi {L(REACTIONS)}. Le moteur découpe déjà chaque réplique en plusieurs
   plans (serrés, larges, réactions de celui qui écoute), calés sur la voix, avec des mouvements de caméra et des passages fluides
