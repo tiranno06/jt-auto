@@ -104,8 +104,13 @@ def _appel_openai(fourn, kw):
                 derniere = e; corps_err = e.read()[:300].decode("utf-8", "ignore"); bas = corps_err.lower()
                 if e.code in (404, 400) and "model" in bas: d = "suivant"; break            # modèle inconnu : le suivant
                 if e.code == 400 and outils and "tool" in bas and "tool_choice" in corps: corps.pop("tool_choice", None); continue
-                if e.code == 429 and not any(m in bas for m in ("quota", "exhausted", "billing")) and essai < 3:
-                    time.sleep(2.0 * (essai + 1)); continue                             # trop de demandes à la seconde : on patiente
+                if e.code == 429 and not any(m in bas for m in ("quota", "exhausted", "billing")):
+                    if essai < 2:                                                       # trop de demandes à la minute : on patiente
+                        try: att = float(e.headers.get("Retry-After") or 0)
+                        except (TypeError, ValueError, AttributeError): att = 0
+                        time.sleep(min(30.0, att or 8.0 * (essai + 1))); continue
+                    EN_PAUSE[fourn] = time.time() + 60                                  # limite du compte : une minute sans lui
+                    raise RuntimeError(f"{fourn} limite 429 : {corps_err}")
                 if e.code in (500, 502, 503, 504) and essai < 2: time.sleep(3.0 * (essai + 1)); continue   # serveur saturé un instant
                 if e.code in (500, 502, 503, 504): d = "suivant"; break                  # toujours saturé : modèle suivant
                 raise RuntimeError(f"{fourn} {e.code} : {corps_err}")
@@ -130,6 +135,7 @@ def _appel_openai(fourn, kw):
 
 
 _DERNIER = {}
+EN_PAUSE = {}                                                               # fournisseur limité à la minute : sauté jusqu'à cette heure
 PAUSE_MIN = {"mistral": 1.2, "gemini": 0.5}                                 # Mistral gratuit : une demande par seconde au plus
 
 
@@ -144,7 +150,7 @@ def ordre_ia(images=False):
     o = [] if os.environ.get("CLAUDE_INDISPONIBLE") == "1" else ["claude"]
     autres = ["gemini", "mistral"] if images else ["mistral", "gemini"]
     o += [f for f in autres if os.environ.get(FOURNISSEURS[f]["cle"]) and f not in HORS_SERVICE]
-    return [f for f in o if f not in HORS_SERVICE]
+    return [f for f in o if f not in HORS_SERVICE and EN_PAUSE.get(f, 0) <= time.time()] or [f for f in o if f not in HORS_SERVICE]
 
 
 def ia_disponible():
@@ -206,7 +212,7 @@ def verifier_credits():
     """Vérifie au lancement si Claude et ElevenLabs répondent et ont du crédit (appel minuscule, coût négligeable).
     Pose CLAUDE_INDISPONIBLE=1 et/ou ELEVENLABS=0 dans l'environnement : le robot part directement sur les outils gratuits.
     Vérifie aussi Mistral et Gemini (remplaçants gratuits). Renvoie {"claude": "ok"|"secours"|"absent", "mistral"/"gemini":
-    "ok"|"epuise"|"cle"|"erreur"|"absent", "ia": "ok"|"aucune", "elevenlabs": "ok"|"epuise"|"absent"}."""
+    "ok"|"epuise"|"cle"|"limite"|"erreur"|"absent", "ia": "ok"|"aucune", "elevenlabs": "ok"|"epuise"|"absent"}."""
     import json, os
     etat = {}
     if not os.environ.get("ANTHROPIC_API_KEY"): etat["claude"] = "absent"
@@ -222,8 +228,9 @@ def verifier_credits():
         try:
             _appel_openai(f, {"messages": [{"role": "user", "content": "Réponds juste : ok"}], "max_tokens": 5}); etat[f] = "ok"
         except Exception as e:
-            t = str(e).lower(); etat[f] = "epuise" if ("quota" in t or "exhausted" in t or "billing" in t) else ("cle" if (" 401" in t or " 403" in t) else "erreur")
-            if etat[f] != "erreur": HORS_SERVICE.add(f)                    # erreur passagère : on retentera pendant la fabrication
+            t = str(e).lower(); etat[f] = ("epuise" if ("quota" in t or "exhausted" in t or "billing" in t) else "cle" if (" 401" in t or " 403" in t)
+                                         else "limite" if "limite 429" in t else "erreur")
+            if etat[f] in ("epuise", "cle"): HORS_SERVICE.add(f)                    # erreur passagère : on retentera pendant la fabrication
             print(f"  {f} : {str(e)[:160]}", flush=True)
     UTILISES.clear()
     etat["ia"] = "ok" if ia_disponible() else "aucune"
