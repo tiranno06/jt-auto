@@ -163,7 +163,7 @@ CHAPEAUX_RUE = ("bonnet", "casquette", "beret", "bob", "chapeau")          # cou
 # thèmes d'époque ou de métier reconnus dans le texte : la tenue de TOUS les personnages suit (comme les chaînes « toons »)
 THEMES = [
     (r"pr[ée]histo|cro-?magnon|caverne|homme des cavernes|mammouth|n[ée]andert", dict(haut="tunique", c_haut=(160, 110, 60), motif="taches", c_motif=(100, 65, 35),
-        bas="", chaussures="", cheveux={"h": "herisse", "f": "ondule"}, barbe="barbe_pleine")),
+        bas="", chaussures="", cheveux={"h": "herisse", "f": "ondule"}, barbe="barbe")),
     (r"\b(roi|reine|versailles|marquis|marquise|comtesse|louis xi|xviii|18e si[èe]cle|r[ée]volution fran|napol[ée]on|aristo)", dict(haut="redingote", c_haut=(40, 80, 160),
         c_dessous=(235, 185, 80), bas="pantalon", c_bas=(40, 80, 160), chaussures="ville", c_chaussures=(30, 30, 30), cheveux={"h": "anglaises", "f": "anglaises"},
         robe_f=dict(haut="robe", c_haut=(240, 180, 200), motif="uni"), chapeau_h="tricorne", c_chapeau=(35, 35, 45))),
@@ -595,12 +595,12 @@ def consigne_studio():
   "haut" parmi {L(M.HAUTS)}, "c_haut" = une couleur parmi {L(NOMS_COULEURS)}, "motif" parmi {L(M.MOTIFS)}, "bas" parmi {L(M.BAS)},
   "chaussures" parmi {L(M.CHAUSSURES)}, "details" (0 à 5) parmi {L(M.DETAILS)},
   "chapeau" (facultatif) parmi {L(M.CHAPEAUX)} avec "c_chapeau" (couleur), "cheveux" parmi {L(M.COIFFURES)} et "c_cheveux" (couleur) ;
-  époque ou métier évident : habille-les en conséquence (préhistoire : tunique motif taches + barbe_pleine + cheveux herisse ; roi, reine,
+  époque ou métier évident : habille-les en conséquence (préhistoire : tunique motif taches + barbe + cheveux herisse ; roi, reine,
   Versailles : redingote ou robe + anglaises + tricorne ou couronne ; police : uniforme + casquette ; chantier : casque_chantier ;
   cuisinier : tablier + toque ; plage : hawai motif fleurs + bob…) ;
   "personnages" = pour chaque rôle dessiné, la personne qui le joue (casting libre, différent à chaque vidéo) : "genre" (h ou f),
   "age" (nombre), "taille" (1 = adulte moyen ; ado ≈ 0.8 ; enfant ≈ 0.65), "corpulence" (0 = mince à 1 = fort),
-  "cheveux" parmi {L(sorted(set(H_.COIFFURES_H + H_.COIFFURES_F + M.GR.COIFFURES)))}, "barbe" parmi {L(M.GR.BARBES + ("moustache", "trois_jours"))}.
+  "cheveux" parmi {L(sorted(set(H_.COIFFURES_H + H_.COIFFURES_F + M.GR.COIFFURES)))}, "barbe" parmi trois_jours, moustache, bouc ou rien (JAMAIS de grosse barbe : une barbe mal rasée au plus).
   L'ÂGE, le genre et la taille doivent coller au DIALOGUE, à la voix et à la vidéo : celui qu'on appelle « fiston », « mon fils »,
   « ma puce », ou qui dit « papa, … », « maman, … » est un ADO (13-16 ans : plus petit, cheveux courts de son âge, JAMAIS de barbe)
   ou un enfant si le contexte le dit ; ses parents sont plus âgés ; un patron, un client, un prof… ont l'âge du rôle ;

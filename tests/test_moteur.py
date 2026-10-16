@@ -802,7 +802,7 @@ class TestHumains(unittest.TestCase):
         sk = {"repliques": [{"p": "presentateur", "t": "Ugh, moi trouver feu dans la caverne"}, {"p": "envoyee", "t": "Encore ?"}]}
         B = S.bible(sk, ["presentateur", "envoyee"])
         self.assertEqual(B["lieux"][0], "caverne"); self.assertEqual(B["costumes"]["presentateur"]["haut"], "tunique")
-        self.assertIn("barbe_pleine", B["costumes"]["presentateur"]["details"])
+        self.assertIn("barbe", B["costumes"]["presentateur"]["details"])                 # barbe mal rasée, jamais de grosse barbe
         self.assertEqual(DD.lieu_de("je dois aller à la CAF pour mon dossier"), "administration")
         for l in ("administration", "hall", "caverne", "palais"):
             r = DD.dessiner(l, {"moment": "soir"}, 3); self.assertEqual(r["fond"].shape, (1920, 1080, 3))
