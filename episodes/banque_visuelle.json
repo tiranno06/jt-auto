@@ -1396,18 +1396,18 @@
    "nb_voix": 2,
    "voix": [
     {
-     "hz": 170,
-     "genre": "?",
-     "part": 0.78
-    },
-    {
      "hz": 176,
      "genre": "?",
      "part": 0.22
+    },
+    {
+     "hz": 170,
+     "genre": "?",
+     "part": 0.78
     }
    ],
-   "debit": 5.58,
-   "blanc_moyen": 0.17,
+   "debit": 5.57,
+   "blanc_moyen": 0.16,
    "coupes": 24,
    "dynamique_db": 19.0,
    "cris": 0.005,
@@ -1419,14 +1419,14 @@
    "sur_vanne": 0,
    "evenements": {},
    "emotions": {
-    "hesitant": 16,
-    "insistent": 11,
-    "urgent": 8,
-    "emotional": 6,
-    "reassuring": 5,
-    "sceptique": 2,
-    "panique": 2,
-    "choc": 1
+    "hesitant": 5,
+    "solemn": 4,
+    "urgent": 3,
+    "insistent": 3,
+    "confused": 2,
+    "curious": 2,
+    "shocked": 2,
+    "reassuring": 2
    }
   },
   "claude": {
@@ -1440,19 +1440,19 @@
      "haut": "debardeur",
      "c_haut": "kaki",
      "motif": "uni",
-     "bas": "pantalon",
+     "bas": "jogging",
      "chaussures": "chaussons",
-     "cheveux": "degarni",
-     "c_cheveux": "noir",
+     "cheveux": "chauve",
+     "c_cheveux": "brun",
      "details": [
-      "moustache"
+      "barbe_courte"
      ]
     },
     "invite": {
      "haut": "chemise",
-     "c_haut": "violet",
+     "c_haut": "bleu",
      "motif": "uni",
-     "bas": "jean",
+     "bas": "pantalon",
      "chaussures": "baskets",
      "cheveux": "afro",
      "c_cheveux": "noir",
@@ -1467,35 +1467,19 @@
      "replique": 0
     },
     {
-     "objet": "telephone",
-     "replique": 2
+     "replique": 2,
+     "objet": "telephone"
     },
     {
      "replique": 2,
      "objet": "bouteille"
     },
     {
-     "objet": "telephone",
-     "replique": 6
-    },
-    {
-     "replique": 7,
-     "objet": "bouteille"
-    },
-    {
-     "replique": 21,
+     "replique": 27,
      "objet": "telephone"
     },
     {
-     "objet": "bouteille",
-     "replique": 27
-    },
-    {
-     "objet": "telephone",
-     "replique": 40
-    },
-    {
-     "replique": 47,
+     "replique": 40,
      "objet": "telephone"
     },
     {
@@ -1505,116 +1489,53 @@
    ],
    "gags": [
     "La Fin de Carrière de CR7 Signifie la Fin du Football",
-    "Horloge suggestive"
+    "Horloge anatomique au mur"
    ],
    "ambiances": [
     "poussiere"
    ],
    "plans": [
     {
-     "mouvement": "fixe",
      "replique": 0,
-     "reaction": "sceptique",
-     "plan": "moyen",
+     "reaction": "aucune",
+     "mouvement": "fixe",
+     "plan": "large",
      "geste": "telephone"
     },
     {
      "plan": "moyen",
+     "mouvement": "fixe",
+     "geste": "telephone",
      "reaction": "choc",
-     "mouvement": "zoom_choc",
-     "geste": "desespoir",
      "replique": 2
     },
     {
-     "plan": "moyen",
-     "reaction": "aucune",
-     "geste": "telephone",
-     "mouvement": "fixe",
-     "replique": 3
-    },
-    {
-     "reaction": "sceptique",
-     "plan": "serre",
      "mouvement": "avance",
-     "replique": 4,
-     "geste": "supplie"
-    },
-    {
-     "plan": "serre",
      "replique": 7,
-     "geste": "desespoir",
-     "mouvement": "vertige",
-     "reaction": "choc"
-    },
-    {
-     "plan": "serre",
-     "reaction": "aucune",
-     "mouvement": "fixe",
-     "replique": 13,
-     "geste": "menton"
-    },
-    {
-     "replique": 14,
-     "mouvement": "avance",
-     "geste": "explique",
-     "plan": "serre",
-     "reaction": "sceptique"
-    },
-    {
-     "geste": "desespoir",
-     "mouvement": "fixe",
-     "reaction": "soupir",
-     "plan": "moyen",
-     "replique": 18
-    },
-    {
-     "mouvement": "fixe",
-     "replique": 21,
-     "geste": "explique",
      "reaction": "sceptique",
-     "plan": "moyen"
+     "geste": "telephone",
+     "plan": "serre"
     },
     {
-     "plan": "serre",
-     "replique": 27,
-     "geste": "supplie",
-     "mouvement": "zoom_choc",
-     "reaction": "choc"
-    },
-    {
-     "replique": 28,
      "mouvement": "fixe",
      "plan": "moyen",
-     "geste": "menton",
-     "reaction": "aucune"
+     "geste": "supplie",
+     "reaction": "gene",
+     "replique": 27
     },
     {
-     "replique": 31,
-     "geste": "bras_ouverts",
      "mouvement": "avance",
-     "plan": "serre",
-     "reaction": "sceptique"
-    },
-    {
-     "replique": 40,
-     "geste": "poing",
-     "plan": "serre",
-     "mouvement": "fixe",
-     "reaction": "choc"
-    },
-    {
-     "replique": 48,
-     "geste": "pouce",
-     "plan": "serre",
-     "mouvement": "fixe",
-     "reaction": "sceptique"
-    },
-    {
-     "replique": 51,
      "plan": "tres_serre",
-     "geste": "chuchote",
-     "mouvement": "zoom_choc",
-     "reaction": "choc"
+     "replique": 40,
+     "reaction": "choc",
+     "geste": "telephone"
+    },
+    {
+     "mouvement": "avance",
+     "plan": "tres_serre",
+     "geste": "telephone",
+     "replique": 51,
+     "reaction": "yeux_au_ciel"
     }
    ]
   },
@@ -1626,7 +1547,7 @@
    ],
    "gags": [
     "La Fin de Carrière de CR7 Signifie la Fin du Football",
-    "Horloge suggestive"
+    "Horloge anatomique au mur"
    ],
    "ambiances": [
     "neige",
@@ -1639,60 +1560,60 @@
     "presentateur": "debardeur"
    },
    "plans": [
+    "large/fixe",
+    "serre/recul",
     "moyen/fixe",
-    "tres_serre/travelling",
-    "moyen/zoom_choc",
-    "moyen/fixe",
+    "serre/recul",
+    "serre/fixe",
     "serre/avance",
-    "tres_serre/recul",
-    "moyen/avance",
-    "serre/vertige",
+    "serre/fixe",
+    "serre/avance",
     "moyen/avance",
     "tres_serre/avance",
     "serre/avance",
-    "serre/recul",
-    "serre/avance",
     "serre/fixe",
-    "serre/avance",
-    "large/fixe",
-    "moyen/avance",
-    "moyen/fixe",
-    "moyen/fixe",
-    "serre/fixe",
-    "tres_serre/recul",
-    "moyen/fixe",
-    "moyen/fixe",
+    "large/recul",
     "tres_serre/fixe",
     "large/avance",
+    "moyen/travelling",
+    "moyen/avance",
+    "serre/avance",
+    "moyen/avance",
+    "serre/avance",
     "serre/avance",
     "serre/recul",
-    "serre/zoom_choc",
+    "tres_serre/avance",
+    "serre/recul",
+    "serre/travelling",
+    "tres_serre/recul",
+    "tres_serre/zoom_choc",
     "moyen/fixe",
-    "large/avance",
-    "serre/avance",
-    "serre/avance",
-    "serre/travelling",
-    "serre/avance",
-    "serre/travelling",
-    "large/fixe",
-    "large/avance",
-    "serre/travelling",
     "large/travelling",
-    "tres_serre/avance",
     "serre/fixe",
+    "serre/avance",
     "serre/fixe",
     "serre/travelling",
-    "tres_serre/fixe",
-    "tres_serre/avance",
-    "serre/avance",
     "moyen/avance",
-    "moyen/fixe",
+    "tres_serre/avance",
+    "tres_serre/recul",
     "serre/fixe",
+    "tres_serre/avance",
+    "serre/recul",
+    "serre/travelling",
+    "tres_serre/avance",
+    "serre/fixe",
+    "tres_serre/avance",
+    "tres_serre/fixe",
     "large/avance",
     "large/fixe",
-    "tres_serre/zoom_choc"
+    "large/avance",
+    "large/recul",
+    "moyen/avance",
+    "moyen/recul",
+    "serre/avance",
+    "tres_serre/avance"
    ]
   },
-  "video": "2026-10-16_22h35_emission.mp4"
+  "video": "2026-10-16_23h24_emission.mp4"
  }
 ]

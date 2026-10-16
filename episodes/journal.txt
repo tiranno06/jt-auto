@@ -4,35 +4,76 @@ Crédits au départ : Claude secours, Mistral ok, Gemini ok, ElevenLabs ok — I
 Vidéo depuis TikTok : https://www.tiktok.com/@yan_animation0/video/7678832582833736993
   son téléchargé (yt-dlp --impersonate chrome)
   son récupéré : 89.9 s, compte d'origine @yan_animation0
-[ WARN:0@9.189] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+[ WARN:0@7.217] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
   image de la vidéo : 36 plans (≈ 2.5 s chacun) ; cadrages : très serré 24 %, serré 3 %, moyen 0 %, large 71 % ; caméra : fixe 100 % ; 1 personne(s) à l'écran : gauche (habit [102, 103, 143], cheveux [21, 13, 13], sourit 0 %) ; agitation 0.015 ; lumière soir ; fond [177, 154, 139]
-  isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 745 cred) : son complet utilisé
+  isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 715 cred) : son complet utilisé
   transcription ElevenLabs : 451 mots, 2 voix, langue fra
-  52 répliques, voix : {'speaker_1': 170, 'speaker_0': 176}
-  son de la vidéo : 2 voix [170 Hz (?, 78 %), 176 Hz (?, 22 %)], 5.58 mots/s, blancs 0.17 s, 24 coupure(s) de parole, dynamique 19.0 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
-  scène reconstituée : Un adolescent appelle son père en panique après qu'une inconnue provocante lui a proposé de monter dans sa voiture ; son père au bout du fil le supplie d'y aller sans hésiter.
+  52 répliques, voix : {'speaker_0': 176, 'speaker_1': 170}
+  son de la vidéo : 2 voix [176 Hz (?, 22 %), 170 Hz (?, 78 %)], 5.57 mots/s, blancs 0.16 s, 24 coupure(s) de parole, dynamique 19.0 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
+  scène reconstituée : Au téléphone, un adolescent hésite à monter dans la voiture d'une mystérieuse femme sur un parking, tandis que son père chez lui, en transe, lui ordonne d'y aller sans hésiter.
   casting : speaker_0 → Kévin, speaker_1 → Jojo
-Sketch : « PAPA, IL Y A UNE INCONNUE QUI », 52 répliques
+Sketch : « CONSEILS DE PÈRE AU FILS », 52 répliques
 Lieux séparés : chaque personnage a son propre décor (appel, visio, l'un ailleurs)
   décor 0 : quiet city street at dusk, parked car at the curb, sidewalk, street la
   décor 1 : cozy living room, sofa, posters on the wall, coffee table, lamp, telev
-montage : 88 plans (0.2:moyen>inv/coupe 1.4:serre>inv/zoom 3.0:tres_serre>inv/glisse 3.4:moyen>pre/coupe 4.6:serre>pre/glisse 5.7:moyen>inv/coupe 6.9:serre>inv/zoom 7.7:tres_serre>inv/glisse 8.9:serre>pre/coupe 9.7:tres_serre>pre/glisse 11.0:serre>pre/glisse 12.1:moyen>inv/coupe 13.0:tres_serre>inv/zoom 14.1:serre>pre/coupe 15.6:tres_serre>pre/glisse 16.7:moyen>pre/glisse 17.8:tres_serre>inv/coupe 18.0:serre>pre/coupe 19.2:tres_serre>pre/glisse 20.1:serre>inv/coupe 20.4:serre>pre/coupe 21.8:serre>inv/coupe 22.8:serre>pre/coupe 23.9:tres_serre>pre/glisse 25.7:large>pre/glisse 26.6:moyen>inv/coupe 27.1:moyen>pre/coupe 28.1:tres_serre>pre/glisse 29.6:serre>pre/glisse 30.5:moyen>pre/glisse 31.2:serre>pre/glisse 32.2:tres_serre>pre/glisse 33.0:tres_serre>inv/coupe 33.5:moyen>pre/coupe 34.8:tres_serre>pre/glisse 36.0:serre>pre/glisse 37.1:moyen>pre/glisse 38.0:tres_serre>pre/glisse 39.2:serre>pre/glisse 40.3:tres_serre>inv/coupe 41.2:large>pre/coupe 42.2:serre>pre/glisse 43.2:tres_serre>pre/glisse 44.2:serre>pre/glisse 45.4:tres_serre>pre/glisse 46.5:serre>pre/glisse 47.7:serre>inv/coupe 48.0:serre>pre/coupe 49.1:tres_serre>pre/glisse 50.1:serre>pre/glisse 51.3:tres_serre>pre/glisse 52.4:moyen>inv/coupe 53.4:large>pre/coupe 54.3:serre>pre/glisse 55.9:tres_serre>pre/glisse 57.1:serre>pre/glisse 57.8:tres_serre>pre/glisse 59.0:serre>pre/glisse 60.3:tres_serre>pre/glisse 61.3:serre>pre/glisse 61.9:serre>inv/coupe 62.3:serre>pre/coupe 62.9:large>inv/coupe 63.6:tres_serre>inv/glisse 64.6:large>pre/coupe 65.2:serre>pre/glisse 66.3:serre>inv/coupe 66.7:large>pre/coupe 68.2:tres_serre>inv/coupe 68.8:serre>pre/coupe 69.9:tres_serre>pre/glisse 70.6:serre>inv/coupe 71.1:serre>pre/coupe 72.3:tres_serre>pre/glisse 73.6:serre>pre/glisse 75.3:tres_serre>inv/coupe 75.8:tres_serre>pre/coupe 77.0:serre>pre/glisse 78.3:tres_serre>pre/glisse 79.3:serre>inv/coupe 80.6:moyen>inv/zoom 81.5:moyen>pre/coupe 84.0:serre>pre/glisse 84.8:tres_serre>pre/glisse 86.0:serre>pre/glisse 87.2:large>pre/glisse 88.2:large>inv/coupe 88.9:tres_serre>pre/coupe)
-studio : jour, lieux ['rue', 'salon'], tenues invite=chemise, presentateur=debardeur, 3 figurant(s), ambiances ['neige', 'pluie', 'poussiere'] ; plans moyen/fixe tres_serre/travelling moyen/zoom_choc moyen/fixe serre/avance tres_serre/recul moyen/avance serre/vertige moyen/avance tres_serre/avance serre/avance serre/recul serre/avance serre/fixe serre/avance large/fixe moyen/avance moyen/fixe moyen/fixe serre/fixe tres_serre/recul moyen/fixe moyen/fixe tres_serre/fixe large/avance serre/avance serre/recul serre/zoom_choc moyen/fixe large/avance serre/avance serre/avance serre/travelling serre/avance serre/travelling large/fixe large/avance serre/travelling large/travelling tres_serre/avance serre/fixe serre/fixe serre/travelling tres_serre/fixe tres_serre/avance serre/avance moyen/avance moyen/fixe serre/fixe large/avance large/fixe tres_serre/zoom_choc
+montage : 87 plans (0.2:large>inv/coupe 1.8:serre>inv/glisse 3.0:tres_serre>inv/glisse 3.4:moyen>pre/coupe 4.7:serre>pre/glisse 5.7:serre>inv/coupe 6.8:tres_serre>inv/glisse 7.6:serre>inv/glisse 8.9:serre>pre/coupe 9.7:tres_serre>pre/glisse 11.0:serre>pre/glisse 12.1:serre>inv/coupe 13.0:tres_serre>inv/glisse 14.1:serre>pre/coupe 14.7:tres_serre>pre/glisse 15.6:serre>pre/glisse 16.7:moyen>pre/glisse 17.8:tres_serre>inv/coupe 18.0:serre>pre/coupe 19.1:tres_serre>pre/glisse 20.1:serre>inv/coupe 20.4:large>pre/coupe 21.8:tres_serre>inv/coupe 22.8:large>pre/coupe 23.9:tres_serre>pre/glisse 25.7:moyen>pre/glisse 26.6:moyen>inv/coupe 27.1:serre>pre/coupe 28.1:tres_serre>pre/glisse 29.6:serre>pre/glisse 30.5:moyen>pre/glisse 31.2:tres_serre>pre/glisse 32.2:serre>pre/glisse 33.0:serre>inv/coupe 33.5:serre>pre/coupe 34.8:tres_serre>pre/glisse 35.6:serre>pre/glisse 37.1:tres_serre>pre/glisse 38.1:serre>pre/glisse 39.3:tres_serre>pre/glisse 40.3:serre>inv/coupe 41.2:serre>pre/coupe 42.5:tres_serre>pre/glisse 44.2:serre>pre/glisse 45.5:tres_serre>pre/glisse 46.5:serre>pre/glisse 47.7:tres_serre>inv/coupe 48.0:moyen>pre/coupe 49.1:tres_serre>pre/glisse 50.1:serre>pre/glisse 51.3:tres_serre>pre/glisse 52.4:large>inv/coupe 53.4:serre>pre/coupe 54.8:tres_serre>pre/glisse 55.9:serre>pre/glisse 57.3:tres_serre>pre/glisse 59.0:serre>pre/glisse 60.3:tres_serre>pre/glisse 61.3:serre>pre/glisse 61.9:moyen>inv/coupe 62.3:tres_serre>pre/coupe 62.9:tres_serre>inv/coupe 63.6:serre>inv/glisse 64.6:serre>pre/coupe 65.2:tres_serre>pre/glisse 66.3:tres_serre>inv/coupe 66.7:serre>pre/coupe 68.2:serre>inv/coupe 68.8:tres_serre>pre/coupe 69.9:serre>pre/glisse 70.6:serre>inv/coupe 71.1:tres_serre>pre/coupe 72.3:serre>pre/glisse 73.9:tres_serre>pre/glisse 75.3:tres_serre>inv/coupe 75.8:large>pre/coupe 77.1:serre>pre/glisse 78.3:tres_serre>pre/glisse 79.3:large>inv/coupe 80.6:tres_serre>inv/zoom 81.5:large>pre/coupe 84.0:tres_serre>pre/glisse 84.8:moyen>pre/zoom 86.0:tres_serre>pre/zoom 87.2:moyen>pre/glisse 88.2:serre>inv/coupe 88.9:tres_serre>pre/coupe)
+objets de l'histoire : voiture garée dans 1 décor(s)
+studio : jour, lieux ['rue', 'salon'], tenues invite=chemise, presentateur=debardeur, 3 figurant(s), ambiances ['neige', 'pluie', 'poussiere'] ; plans large/fixe serre/recul moyen/fixe serre/recul serre/fixe serre/avance serre/fixe serre/avance moyen/avance tres_serre/avance serre/avance serre/fixe large/recul tres_serre/fixe large/avance moyen/travelling moyen/avance serre/avance moyen/avance serre/avance serre/avance serre/recul tres_serre/avance serre/recul serre/travelling tres_serre/recul tres_serre/zoom_choc moyen/fixe large/travelling serre/fixe serre/avance serre/fixe serre/travelling moyen/avance tres_serre/avance tres_serre/recul serre/fixe tres_serre/avance serre/recul serre/travelling tres_serre/avance serre/fixe tres_serre/avance tres_serre/fixe large/avance large/fixe large/avance large/recul moyen/avance moyen/recul serre/avance tres_serre/avance
 cartoon : durée 93.1 s, 52 répliques, 2 scène(s), personnages ['invite', 'presentateur']
-  image 0/2792 (4 processeurs)
-  image 300/2792
-  image 600/2792
-  image 900/2792
-  image 1200/2792
-  image 1500/2792
-  image 1800/2792
-  image 2100/2792
-  image 2400/2792
-  image 2700/2792
+  image 0/5584 (4 processeurs)
+  image 300/5584
+  image 600/5584
+  image 900/5584
+  image 1200/5584
+  image 1500/5584
+  image 1800/5584
+  image 2100/5584
+  image 2400/5584
+  image 2700/5584
+  image 3000/5584
+  image 3300/5584
+  image 3600/5584
+  image 3900/5584
+  image 4200/5584
+  image 4500/5584
+  image 4800/5584
+  image 5100/5584
+  image 5400/5584
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury qualité (ia) : 4.9/10 — Humoriste 5.0/10 : 88.9 s La punchline finale 'Prends des photos' manque d'impact comique et tombe à plat sans bruitage pour marquer le choc comique.; 70.6 s Sur 'Pourquoi les couilles ?', le fils devrait faire un regard caméra hébété pour accentuer l'absurdité du dialogue.; 3.4 s La panique et l'excitation soudaine du père méritent un effet sonore pour souligner la rupture de ton. | Réalisateur 5.5/10 : 66.5 s L'image 12 est en plan beaucoup trop large et lointain, ce qui casse l'intimité et l'intensité comique du dialogue entre le père et le fils.; 33.3 s Quatre plans durent moins d'une demi-seconde, ce qui crée des sautes d'images hachées et désagréables.; 13.1 s Sur les plans du fils dans la rue, on perd complètement de vue la fille et la voiture en arrière-plan, alors qu'elles créent tout l'enjeu comique. | Directeur artistique 5.0/10 : 0.4 s Les deux personnages tiennent leur smart
-Manque par rapport à la vidéo d'origine : Dans l'original, la fille séduisante et la voiture noire restent visibles en arrière-plan derrière le fils pendant toute la conversation. ; Dans l'original, le père est affalé sur son canapé, torse nu en marcel avec les aisselles poilues, tenant du talc pour bébé au milieu de mouchoirs, renforçant l ; Dans l'original, les deux personnages tiennent correctement leur téléphone collé à l'oreille pendant tout l'appel téléphonique. ; Dans l'original, il n'y a pas de pluie dans la rue, la météo est claire. ; Dans l'original, le décor chez le père comporte des gags visuels au mur (horloge, affiche humoristique sur CR7).
+  IA gemini indisponible (gemini 429 : [{
+  "error": {
+    "code": 429,
+    "message": "You exceeded your current quota, please check your plan an) : on passe à la suivante
+Jury qualité (gratuit) : 9.3/10 — Humoriste 8.6/10 : 88.9 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 8.9/10 : 17.8 s 4 plans trop courts (moins d'une demi-seconde) | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.1/10 : 0.2 s sous-titres trop rapides à lire
+Corrections du jury (tour 1) : plan tres_serre sur la réplique 52
+montage : 87 plans (0.2:large>inv/coupe 1.8:serre>inv/glisse 3.0:tres_serre>inv/glisse 3.4:moyen>pre/coupe 4.7:serre>pre/glisse 5.7:serre>inv/coupe 6.8:tres_serre>inv/glisse 7.6:serre>inv/glisse 8.9:serre>pre/coupe 9.7:tres_serre>pre/glisse 11.0:serre>pre/glisse 12.1:serre>inv/coupe 13.0:tres_serre>inv/glisse 14.1:serre>pre/coupe 14.7:tres_serre>pre/glisse 15.6:serre>pre/glisse 16.7:moyen>pre/glisse 17.8:tres_serre>inv/coupe 18.0:serre>pre/coupe 19.1:tres_serre>pre/glisse 20.1:serre>inv/coupe 20.4:large>pre/coupe 21.8:tres_serre>inv/coupe 22.8:large>pre/coupe 23.9:tres_serre>pre/glisse 25.7:moyen>pre/glisse 26.6:moyen>inv/coupe 27.1:serre>pre/coupe 28.1:tres_serre>pre/glisse 29.6:serre>pre/glisse 30.5:moyen>pre/glisse 31.2:tres_serre>pre/glisse 32.2:serre>pre/glisse 33.0:serre>inv/coupe 33.5:serre>pre/coupe 34.8:tres_serre>pre/glisse 35.6:serre>pre/glisse 37.1:tres_serre>pre/glisse 38.1:serre>pre/glisse 39.3:tres_serre>pre/glisse 40.3:serre>inv/coupe 41.2:serre>pre/coupe 42.5:tres_serre>pre/glisse 44.2:serre>pre/glisse 45.5:tres_serre>pre/glisse 46.5:serre>pre/glisse 47.7:tres_serre>inv/coupe 48.0:moyen>pre/coupe 49.1:tres_serre>pre/glisse 50.1:serre>pre/glisse 51.3:tres_serre>pre/glisse 52.4:large>inv/coupe 53.4:serre>pre/coupe 54.8:tres_serre>pre/glisse 55.9:serre>pre/glisse 57.3:tres_serre>pre/glisse 59.0:serre>pre/glisse 60.3:tres_serre>pre/glisse 61.3:serre>pre/glisse 61.9:moyen>inv/coupe 62.3:tres_serre>pre/coupe 62.9:tres_serre>inv/coupe 63.6:serre>inv/glisse 64.6:serre>pre/coupe 65.2:tres_serre>pre/glisse 66.3:tres_serre>inv/coupe 66.7:serre>pre/coupe 68.2:serre>inv/coupe 68.8:tres_serre>pre/coupe 69.9:serre>pre/glisse 70.6:serre>inv/coupe 71.1:tres_serre>pre/coupe 72.3:serre>pre/glisse 73.9:tres_serre>pre/glisse 75.3:tres_serre>inv/coupe 75.8:large>pre/coupe 77.1:serre>pre/glisse 78.3:tres_serre>pre/glisse 79.3:large>inv/coupe 80.6:tres_serre>inv/zoom 81.5:large>pre/coupe 84.0:tres_serre>pre/glisse 84.8:moyen>pre/zoom 86.0:tres_serre>pre/zoom 87.2:moyen>pre/glisse 88.2:serre>inv/coupe 88.9:tres_serre>pre/coupe)
+objets de l'histoire : voiture garée dans 1 décor(s)
+studio : jour, lieux ['rue', 'salon'], tenues invite=chemise, presentateur=debardeur, 3 figurant(s), ambiances ['neige', 'pluie', 'poussiere'] ; plans large/fixe serre/recul moyen/fixe serre/recul serre/fixe serre/avance serre/fixe serre/avance moyen/avance tres_serre/avance serre/avance serre/fixe large/recul tres_serre/fixe large/avance moyen/travelling moyen/avance serre/avance moyen/avance serre/avance serre/avance serre/recul tres_serre/avance serre/recul serre/travelling tres_serre/recul tres_serre/zoom_choc moyen/fixe large/travelling serre/fixe serre/avance serre/fixe serre/travelling moyen/avance tres_serre/avance tres_serre/recul serre/fixe tres_serre/avance serre/recul serre/travelling tres_serre/avance serre/fixe tres_serre/avance tres_serre/fixe large/avance large/fixe large/avance large/recul moyen/avance moyen/recul serre/avance tres_serre/avance
+cartoon : durée 93.1 s, 52 répliques, 2 scène(s), personnages ['invite', 'presentateur']
+  image 0/5584 (4 processeurs)
+  image 300/5584
+  image 600/5584
+  image 900/5584
+  image 1200/5584
+  image 1500/5584
+  image 1800/5584
+  image 2100/5584
+  image 2400/5584
+  image 2700/5584
+  image 3000/5584
+  image 3300/5584
+  image 3600/5584
+  image 3900/5584
+  image 4200/5584
+  image 4500/5584
+  image 4800/5584
+  image 5100/5584
+  image 5400/5584
+Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
+Jury qualité (ia) : 7.6/10 — Humoriste 7.0/10 : 3.1 s La réplique 'Oh putain, fonce fiston, réfléchis pas' manque d'une réaction visuelle forte de l'invite pour accentuer l'humour.; 22.8 s La chute 'Elle exauce les vœux' pourrait être renforcée par un bruitage ou un effet visuel (ex. : étoiles, paillettes) pour marquer l'ironie.; 48 s Le moment où l'invite dit 'Putain' pourrait être suivi d'un regard caméra pour impliquer le spectateur et renforcer le gag. | Réalisateur 6.0/10 : 0.4 s Le premier plan est trop large et ne met pas assez en valeur les personnages. Un plan moyen ou serré sur les deux personnages serait plus dynamique.; 5.7 s Le faux raccord entre les plans 2 et 3 est visible (changement de décor abrupt). Une transition plus fluide serait nécessaire.; 33.3 s Les sous-titres sont parfois illisibles en raison de leur vitesse et de leur taille. Réduire la vitesse et augmenter la taille des caractères. | Dir
+Manque par rapport à la vidéo d'origine : Le personnage de Little Angel est absent dans notre version, alors qu'il est présent dans l'original. ; Les décors de l'original (rue avec voiture et environnement réaliste) manquent de détails cohérents dans notre version. ; Les expressions faciales et les gestes des personnages dans l'original sont plus exagérés et dynamiques. ; L'ambiance sonore de l'original (bruitages réalistes, musique) est absente dans notre version.
+La version corrigée n'est pas meilleure : on garde la première.
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = gemini ×2, voix = tiktok, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 24696, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 22}
-OK : sortie/2026-10-16_22h35_emission.mp4 (93 s)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = gemini ×1, mistral ×2, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 44072, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 13}
+OK : sortie/2026-10-16_23h24_emission.mp4 (93 s)

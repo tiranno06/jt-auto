@@ -780,5 +780,50 @@
    "son": true
   },
   "cadence": "rapide"
+ },
+ {
+  "moment": "jour",
+  "lieux": [
+   "rue",
+   "salon"
+  ],
+  "source": "auteur+image",
+  "duree": 93.1,
+  "plans": {
+   "large": 8,
+   "serre": 23,
+   "moyen": 9,
+   "tres_serre": 12
+  },
+  "mouvements": {
+   "fixe": 13,
+   "recul": 10,
+   "avance": 23,
+   "travelling": 5,
+   "zoom_choc": 1
+  },
+  "costumes": {
+   "invite": "chemise",
+   "presentateur": "debardeur"
+  },
+  "figurants": 3,
+  "ambiances": [
+   "neige",
+   "pluie",
+   "poussiere"
+  ],
+  "controle": "Humoriste 8.6/10 : 88.9 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 8.9/10 : 17.8 s 4 plans trop courts (moins d'une demi-seconde) | Directeur artistique 10.0/10 :  | Ingé",
+  "fichier": "2026-10-16_23h24_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": true,
+   "tiers": true,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": false,
+   "reflets": true,
+   "son": true
+  },
+  "cadence": "rapide"
  }
 ]
