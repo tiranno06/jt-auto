@@ -372,8 +372,9 @@ def genre_voix(sk, role, d=None):
     d = d or {}
     if sk.get("doublage") is None: return GENRE_ROLE.get(role) or (d.get("genre") if d.get("genre") in ("h", "f") else None)
     g = (sk.get("_voix_genre") or {}).get(role) or (d.get("genre") if d.get("genre") in ("h", "f") else None)
-    vh = (sk.get("_voix_hz") or {}).get(role)
-    return g or (("f" if vh > 165 else "h") if vh else None)
+    vh = (sk.get("_voix_hz") or {}).get(role) or 0
+    if not g and vh: g = "f" if vh > 210 else "h" if vh < 150 else None   # voix nette : elle décide ; entre les deux (ado, voix
+    return g or GENRE_ROLE.get(role)                                       # qui monte) : le rôle donné par le casting (mots + voix)
 
 def casting(sk, roles, costumes, S, graine):
     """Casting libre : une fiche de personnage adulte par rôle, différente à chaque vidéo.

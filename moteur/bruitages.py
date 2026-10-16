@@ -44,7 +44,7 @@ CATALOGUE = {
     "glitch":        ("bug numérique (beug, réseau, appli qui plante)",
                       "short digital glitch stutter sound, data corruption, modern edit", 0.6),
     "bulle":         ("bulle qui éclate (petite vanne, détail ridicule)",
-                      "single bubble pop, cute, crisp, short", 0.4),
+                      "single bubble pop, cute, crisp, short", 0.5),
 }
 
 # déclencheurs par mots (la réplique contient…) : (expression, bruitage, au moment du mot)

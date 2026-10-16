@@ -232,7 +232,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
                 if len(v_) < 8: continue
                 m_ = float(np.percentile(v_, 35))
                 if m_ < 165: vote["h"] += len(v_)
-                elif m_ > 205: vote["f"] += len(v_)
+                elif m_ > 220: vote["f"] += len(v_)
             if sum(vote.values()) and max(vote.values()) >= 0.7 * sum(vote.values()):
                 sk.setdefault("_voix_genre", {})[role] = max(vote, key=vote.get)
             for i, r in enumerate(reps):

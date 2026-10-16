@@ -702,6 +702,16 @@ class TestHistoireRecreee(unittest.TestCase):
         self.assertEqual(len(c), 1); self.assertEqual(c[0]["activite"], "signe"); self.assertEqual(c[0]["fiche"]["genre"], "f")
 
 
+class TestCastingGratuit(unittest.TestCase):
+    def test_genre_par_les_mots(self):
+        sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "moteur"))
+        import doublage as D
+        segs = [{"voix": "a", "t": "Papa, une dame m'a parlé."}, {"voix": "b", "t": "Fonce fiston !"}, {"voix": "a", "t": "Je suis sûr ?"}]
+        self.assertEqual(D.genre_des_voix(segs, {"a": 178, "b": 160}), {"a": "h", "b": "h"})     # l'ado à la voix aiguë reste un garçon
+        segs = [{"voix": "a", "t": "Bonjour madame."}, {"voix": "b", "t": "Je suis désolée."}]
+        self.assertEqual(D.genre_des_voix(segs, {"a": 130, "b": 170})["b"], "f")
+
+
 class TestModeEco(unittest.TestCase):
     def test_mode_eco(self):
         import reseau
