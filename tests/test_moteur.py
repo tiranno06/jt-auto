@@ -840,6 +840,26 @@ class TestLimiteMistral(unittest.TestCase):
                 else: os.environ[k] = v
 
 
+class TestAppelPereFils(unittest.TestCase):
+    def test_roles_lieux_dame(self):
+        import studio
+        reps = [{"p": "envoyee", "t": "Papa, il y a une inconnue qui m'a proposé de monter dans sa voiture."},
+                {"p": "invite", "t": "Fonce fiston, monte dans cette voiture."},
+                {"p": "envoyee", "t": "La dame est habillée en mère Noël."}, {"p": "invite", "t": "Va avec la dame."}]
+        sk = {"repliques": reps, "doublage": {"contexte": "Un ado appelle son père depuis la rue.", "visuel": {"nb_personnes": 1}},
+              "studio": {"personnages": {"presentateur": {"genre": "h", "age": 15}, "invite": {"genre": "h", "age": 42}, "envoyee": {"genre": "f", "age": 25}},
+                         "costumes": {"presentateur": {"haut": "chemise"}, "invite": {"haut": "debardeur"}, "envoyee": {"haut": "robe"}},
+                         "gags": ["La fin de carrière de CR7 signifie la fin du football"]},
+              "decoupage": [{"scene": "1", "repliques": [0, 1, 2, 3], "decor": ""}]}
+        self.assertEqual(studio.accorder_roles(sk, {"envoyee": "h", "invite": "h"}), 1)
+        S = sk["studio"]
+        self.assertEqual(S["personnages"]["envoyee"]["age"], 15); self.assertEqual(S["costumes"]["envoyee"]["haut"], "chemise")
+        self.assertEqual(S["figurants"][0]["avec"], "envoyee"); self.assertEqual(S["figurants"][0]["genre"], "f")
+        self.assertTrue(studio.separer_lieux(sk)); self.assertEqual(S["lieux"], ["rue", "salon"])
+        self.assertFalse(studio.gag_dans_le_sujet(sk, S["gags"][0]))
+        S["figurants"] = []; self.assertEqual(studio.figurants_devines(sk)[0]["c_haut"], "rouge")
+
+
 class TestModeEco(unittest.TestCase):
     def test_mode_eco(self):
         import reseau

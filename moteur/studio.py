@@ -289,7 +289,7 @@ def bible(sk, roles):
         lignes_sc = [sk["repliques"][i]["t"] for i in sc.get("repliques", []) if i < len(sk.get("repliques", []))]
         texte_sc = " ".join(lignes_sc[:max(1, len(lignes_sc) // 2)] * 2 + lignes_sc[max(1, len(lignes_sc) // 2):])   # le début de la scène pose le lieu
         lieux.append(l or DD.lieu_de(decor_sc, "") or DD.lieu_de(texte_sc, "") or DD.lieu_de(t_low, "salon"))
-    gags = [str(g)[:80] for g in (S.get("gags") or []) if str(g).strip()][:4]
+    gags = [str(g)[:80] for g in (S.get("gags") or []) if str(g).strip() and gag_dans_le_sujet(sk, str(g))][:4]
     # effets « cinéma » de l'épisode : tirés au hasard (graine de l'épisode) pour varier d'une vidéo à l'autre, mêlés au style d'avant
     cine = {k: bool(rng.random() < p_) for k, p_ in proba_cine().items()}  # les effets des vidéos qui marchent reviennent plus souvent
     if isinstance(S.get("cine"), dict): cine.update({k: bool(v) for k, v in S["cine"].items() if k in CINE_PROBA})   # choix de Claude (mode payant)
@@ -467,6 +467,7 @@ def realiser(ph, places, B):
             mouvs = ("fixe", "avance", "travelling")
             cam_ = ry_.get("camera") or {}
             if cam_: mouvs = tuple(m_ for m_, v_ in sorted(cam_.items(), key=lambda x: -x[1]) if v_ > 0.12 and m_ in MOUVEMENTS) or mouvs
+            if set(mouvs) <= {"fixe"}: mouvs = ("fixe", "avance", "travelling", "recul")   # vidéo d'origine en plan fixe : notre caméra reste vivante
             mouv = mouvs[h % len(mouvs)] if plan != "epaule" else "fixe"
         elif plan == "serre" and dur > 3.0: mouv = "avance"
         if q.get("chute") and j == len(ph) - 1: plan, mouv = "serre", "avance"
@@ -508,6 +509,104 @@ def proba_cine():
 APPEL = r"\b(all[ôo]|je t'appelle|tu m'appelles|au t[ée]l[ée]phone|tu m'entends|je t'entends( pas| mal)?|je raccroche|raccroche|t'es o[ùu]|tu es o[ùu]|" \
         r"je suis (au|à la|à l'|devant|sur le|chez)|je te rappelle|en visio|ça capte|r[ée]seau|ma batterie)\b"
 
+CONTEXTE_APPEL = r"\b(appel\w*|t[ée]l[ée]phon\w*|visio\w*|au bout du fil|par message|[àa] distance|facetime)\b"
+DEHORS = r"\b(voiture|parking|rue|dehors|trottoir|arr[êe]t de bus|en ville|devant chez)\b"
+
+def appel_devine(sk):
+    """Sans Claude (ou quand il ne l'a pas dit) : les personnages se parlent-ils à distance ? Les mots de l'appel (allô, t'es où…),
+    la situation résumée par l'IA (« il appelle son père »), et la vidéo d'origine qui ne montre qu'une personne à la fois."""
+    reps = sk.get("repliques") or []
+    texte = " ".join(x.get("t", "") for x in reps).lower()
+    D = sk.get("doublage") or {}
+    n = len(re.findall(APPEL, texte))
+    seul = ((D.get("visuel") or {}).get("nb_personnes") or 0) == 1
+    return n >= 2 or bool(re.search(CONTEXTE_APPEL, str(D.get("contexte") or "").lower())) or (n >= 1 and seul)
+
+def lieux_devines(sk, roles):
+    """Où est chacun pendant l'appel : celui qui parle de la voiture, de la rue… est dehors ; le parent appelé est chez lui."""
+    import decor_dessin as DD
+    reps = sk.get("repliques") or []
+    lignes = {r: " ".join(x.get("t", "") for x in reps if x.get("p") == r).lower() for r in roles}
+    out = {}
+    for r in roles:
+        autres = " ".join(v for k, v in lignes.items() if k != r)
+        if re.search(r"\bje suis (dans la rue|dehors|en ville|au parking|sur le parking|devant)", lignes[r]): out[r] = "rue"
+        elif re.search(r"\b(fiston|mon fils|ma fille|ma puce)\b", autres): out[r] = "rue"          # l'enfant qui appelle : dehors
+        elif re.search(r"\b(fiston|mon fils|ma fille|ma puce)\b", lignes[r]) or re.search(r"(papa|maman)\s*[,!?]", autres): out[r] = "salon"
+        elif re.search(DEHORS, lignes[r]): out[r] = "rue"                      # le parent appelé reste chez lui, même s'il parle de la voiture
+    libres = [r for r in roles if r not in out]
+    for r in libres: out[r] = "salon" if "rue" in out.values() else "rue"
+    return {r: l for r, l in out.items() if l in DD.LIEUX}
+
+TIERS = r"\b(la dame|cette dame|une dame|l'inconnue|une inconnue|cette (femme|fille|meuf|nana)|une (femme|fille|meuf|nana)|la (meuf|nana|fille))\b"
+
+def figurants_devines(sk):
+    """Sans Claude : une personne muette dont un personnage parle (« la dame », « une inconnue », « cette fille »…) est dessinée
+    à côté de celui qui la voit, et lui fait signe."""
+    reps = [x for x in sk.get("repliques") or [] if x.get("p") != "narrateur"]
+    compte = {}
+    for x in reps:
+        n = len(re.findall(TIERS, x.get("t", "").lower()))
+        if n and not re.search(r"\b(je|j')\b.{0,12}\b(suis|m'appelle)\b", x.get("t", "").lower()[:20]): compte[x["p"]] = compte.get(x["p"], 0) + n
+    if not compte: return []
+    tout = " ".join(x.get("t", "") for x in reps).lower()
+    lieux = (sk.get("studio") or {}).get("lieux_de") if isinstance(sk.get("studio"), dict) else None
+    avec = max(compte, key=lambda r: (lieux or {}).get(r) == "rue" if lieux else compte[r])
+    if lieux and lieux.get(avec) != "rue": avec = max(compte, key=compte.get)
+    f = {"avec": avec, "genre": "f", "age": 28, "geste": "signe", "description": "la personne dont on parle, à côté de lui"}
+    if re.search(r"m[èe]re no[ëe]l", tout): f.update(haut="robe", c_haut="rouge", chapeau="bonnet", description="une femme apprêtée en mère Noël")
+    return [f]
+
+def gag_dans_le_sujet(sk, gag):
+    """Un gag écrit dans le décor doit parler de l'histoire (un mot commun avec le dialogue ou la situation), pas de l'actualité."""
+    racines = lambda t: {w[:5] for w in re.findall(r"[a-zàâçéèêëîïôûùüÿœ]{5,}", t.lower())}
+    histoire = " ".join(x.get("t", "") for x in sk.get("repliques") or []) + " " + str((sk.get("doublage") or {}).get("contexte") or "") + " " + str(sk.get("sujet") or "")
+    r = racines(gag)
+    return len(r) < 3 or bool(r & racines(histoire))                         # gag très court (« Eau : 12 € ») : toujours accepté
+
+def accorder_roles(sk, genres=None):
+    """L'IA décrit parfois les personnes (« personnages », « costumes ») sous d'autres rôles que ceux qui parlent : le fils de 15 ans
+    rangé sous « presentateur » alors que sa voix est jouée par « envoyee ». On remet chaque description sur le bon rôle (genre de la
+    voix, ado d'après le dialogue) ; une description restée sans voix devient une personne muette à côté (figurant)."""
+    S = sk.get("studio") if isinstance(sk.get("studio"), dict) else None
+    if not S or not isinstance(S.get("personnages"), dict): return 0
+    P, C = S["personnages"], S.get("costumes") if isinstance(S.get("costumes"), dict) else {}
+    reps = sk.get("repliques") or []
+    parlants = [r for r in dict.fromkeys(x["p"] for x in reps) if r != "narrateur"]
+    lignes = {r: " ".join(x.get("t", "") for x in reps if x.get("p") == r).lower() for r in parlants}
+    genres = genres or {}
+    def jeune(r):
+        autres = " ".join(v for k, v in lignes.items() if k != r)
+        return bool(re.search(r"(^|[.!?…]\s+)(papa|maman)\s*,|,\s*(papa|maman)\s*([.!?…]|$)", lignes.get(r, "")) or
+                    re.search(r"\b(fiston|mon fils|ma fille|ma puce)\b", autres))
+    def colle(r, d):
+        if not isinstance(d, dict): return False
+        g = genres.get(r)
+        if g in ("h", "f") and d.get("genre") in ("h", "f") and d["genre"] != g: return False
+        try: age = float(d.get("age") or 30)
+        except (TypeError, ValueError): age = 30
+        return not (jeune(r) and age >= 18)
+    faits = 0
+    for r in parlants:
+        if colle(r, P.get(r)): continue
+        cand = [k for k in P if k not in parlants and colle(r, P.get(k))] or [k for k in parlants if k != r and colle(r, P.get(k)) and not colle(k, P.get(k))]
+        if not cand: continue
+        k = cand[0]
+        P[r], P[k] = P[k], P.get(r)
+        if C: C[r], C[k] = C.get(k), C.get(r)
+        faits += 1
+    for k in [k for k in list(P) if k not in parlants and k != "narrateur"]:      # décrit mais muet : une personne à côté
+        d = P.pop(k) or {}; c = C.pop(k, None) or {} if C else {}
+        if not isinstance(d, dict) or not re.search(TIERS, " ".join(lignes.values())): continue
+        if any(isinstance(f, dict) for f in S.get("figurants") or []): continue
+        avec = max(parlants, key=lambda r: len(re.findall(TIERS, lignes[r]))) if parlants else None
+        if avec: S["figurants"] = [dict({x: c[x] for x in ("haut", "c_haut", "bas", "chapeau", "details") if isinstance(c, dict) and x in c},
+                                        avec=avec, genre=d.get("genre"), age=d.get("age"), geste="signe", description="personne vue dans la vidéo")]
+    for r in parlants:
+        if C.get(r) is None: C.pop(r, None)
+        if P.get(r) is None: P.pop(r, None)
+    return faits
+
 def separer_lieux(sk):
     """Quand les personnages ne sont PAS au même endroit (au téléphone, en visio, l'un chez lui et l'autre en ville), chacun a
     son propre décor : une scène par personnage, et le montage passe de l'un à l'autre au rythme des répliques (coupe franche).
@@ -521,8 +620,9 @@ def separer_lieux(sk):
     sep = {r: (v.get("decor") if isinstance(v, dict) else str(v or "")) for r, v in sep.items() if r in parlants}
     moyen = str(S.get("moyen") or "").lower()
     texte = " ".join(x.get("t", "") for x in reps).lower()
-    if len(sep) < 2 and not S.get("lieux_separes") and len(parlants) >= 2 and len(re.findall(APPEL, texte)) >= 2:
+    if len(sep) < 2 and not S.get("lieux_separes") and len(parlants) >= 2 and appel_devine(sk):
         sep = {r: "" for r in parlants[:2]}; moyen = moyen or "telephone"            # repli gratuit : un appel deviné aux mots
+        S["lieux_de"] = {**lieux_devines(sk, parlants[:2]), **(S.get("lieux_de") if isinstance(S.get("lieux_de"), dict) else {})}
     if len(sep) < 2: return False
     ordre = list(sep); scene_de = {r: k for k, r in enumerate(ordre)}
     dec = [{"scene": str(k + 1), "repliques": [], "lieu": "", "son": "", "duree": 0, "decor": re.sub(r"[^\w\s,.'-]", "", sep[r])[:160]} for k, r in enumerate(ordre)]
@@ -548,7 +648,8 @@ def compagnons(sk, dec, lieux, moment, graine):
     danse / attend / telephone / rit / boit, "haut", "c_haut", "description"}]. Dessinés près du personnage, à sa taille."""
     S = sk.get("studio") if isinstance(sk.get("studio"), dict) else {}
     out = []
-    for k, f in enumerate([f for f in (S.get("figurants") or []) if isinstance(f, dict)][:3]):
+    liste = [f for f in (S.get("figurants") or []) if isinstance(f, dict)] or figurants_devines(sk)
+    for k, f in enumerate(liste[:3]):
         avec = f.get("avec"); reps = sk.get("repliques") or []
         sc = next((j for j, d in enumerate(dec) if any(i < len(reps) and reps[i]["p"] == avec for i in d.get("repliques", []))), None)
         if sc is None: continue
