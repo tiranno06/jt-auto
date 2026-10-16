@@ -156,6 +156,13 @@ Les moyennes (pondérées par les vues de nos vidéos) guident les vidéos suiva
 - **Personnes muettes** dont on parle ou qu'on voit (« elle me fait signe ») : dessinées à côté du personnage, avec leur geste (coucou, signe, danse, attend…).
 - **Coupes** calées sur celles de la vidéo d'origine ; image toujours nette ; en plan serré, seul celui qui est filmé est à l'image.
 
+## Voix proches : qui parle quand (moteur/locuteurs.py)
+Quand deux voix se ressemblent, la transcription peut les confondre (un seul personnage parle alors avec les deux voix). Le robot :
+1. redemande à ElevenLabs en annonçant 2 voix si le texte est clairement un dialogue ;
+2. recalcule l'**empreinte** de chaque morceau de phrase (ECAPA si installée, sinon timbre MFCC + hauteur + brillance) et regroupe les morceaux qui se ressemblent (gratuit) ;
+3. si c'est la même personne qui fait les deux voix, suit le **fil du dialogue** (questions / réponses, « papa, … », « fiston », saut de hauteur) ;
+4. en mode payant, Claude relit le dialogue et réattribue chaque réplique à la bonne personne.
+
 ## Jury qualité : 5 critiques, corrections automatiques (moteur/qualite.py)
 À chaque vidéo, un jury de 5 critiques donne une note sur 10 et au plus 3 remarques précises (avec le moment) : **humoriste** (vannes, chute, réactions, bruitages sur les vannes), **réalisateur** (rythme des plans, celui qui parle bien filmé, réactions, caméra), **directeur artistique** (âge, sexe, allure, décors, personnes dont on parle qu'on devrait voir, lieux séparés), **ingénieur du son** (blancs, bruitages, volume) et **spectateur TikTok** (accroche, moments creux, durée, sous-titres, fin).
 - **Gratuit** (toujours) : règles calculées sur ce que le moteur a vraiment monté.

@@ -110,10 +110,18 @@ def transcrire(chemin, mono):
     """Mots avec instants et voix : [{"w", "s", "e", "voix"}]. ElevenLabs Scribe (plusieurs voix), sinon Whisper (une voix)."""
     EVENEMENTS.clear()
     try:
-        r = _multipart("/v1/speech-to-text", {"file": ("son.wav", open(chemin, "rb"), "audio/wav")},
-                       {"model_id": "scribe_v1", "diarize": "true", "timestamps_granularity": "word", "tag_audio_events": "true"}).json()
+        champs = {"model_id": "scribe_v1", "diarize": "true", "timestamps_granularity": "word", "tag_audio_events": "true"}
+        r = _multipart("/v1/speech-to-text", {"file": ("son.wav", open(chemin, "rb"), "audio/wav")}, champs).json()
         mots = [{"w": x["text"].strip(), "s": float(x["start"]), "e": float(x["end"]), "voix": x.get("speaker_id") or "speaker_0"}
                 for x in r.get("words", []) if x.get("type", "word") == "word" and str(x.get("text", "")).strip()]
+        import locuteurs
+        if mots and len({m["voix"] for m in mots}) == 1 and locuteurs._echange(locuteurs.morceaux(mots)) >= 3:
+            try:                                                           # une seule voix mais un vrai dialogue : on redemande pour 2 voix
+                r2 = _multipart("/v1/speech-to-text", {"file": ("son.wav", open(chemin, "rb"), "audio/wav")}, dict(champs, num_speakers="2")).json()
+                m2 = [{"w": x["text"].strip(), "s": float(x["start"]), "e": float(x["end"]), "voix": x.get("speaker_id") or "speaker_0"}
+                      for x in r2.get("words", []) if x.get("type", "word") == "word" and str(x.get("text", "")).strip()]
+                if len({m["voix"] for m in m2}) >= 2: journal("  2e écoute ElevenLabs (2 voix annoncées) : voix proches séparées"); mots, r = m2, r2
+            except Exception as e: journal(f"  2e écoute ElevenLabs impossible ({str(e)[:100]})")
         EVENEMENTS[:] = [(float(x["start"]), float(x["end"]), str(x.get("text", "")).strip("() ").lower())       # rires, applaudissements…
                          for x in r.get("words", []) if x.get("type") == "audio_event" and x.get("start") is not None]
         if mots:
@@ -209,6 +217,9 @@ Transcription (n° de réplique, voix, début–fin en secondes, texte) :
 {lignes}
 Avec l'outil doublage :
 - "casting" : pour CHAQUE voix ci-dessus, le personnage qui la joue : presentateur (= Jojo), invite (= Kévin), envoyee (= Lila) ou narrateur.
+- "roles" (IMPORTANT quand deux voix se ressemblent ou qu'une même personne fait plusieurs voix) : la reconnaissance a pu donner la
+  MÊME voix à deux personnages. Relis le dialogue (qui pose la question, qui répond, qui dit « papa », qui dit « fiston »…) et donne pour
+  chaque réplique le rôle qui la dit vraiment : [{{"replique": n, "role": …}}] — seulement pour les répliques à corriger.
   Voix de femme → Lila ; deux voix différentes → deux personnages différents ; au plus 3 personnages dessinés.
 - "contexte" : en 1 ou 2 phrases, la situation que tu reconstitues (qui, où, ce qui se passe), d'après ce qui est dit et le ton ;
 - "d" : pour chaque réplique (même ordre, même nombre), l'émotion juste en indication anglaise entre crochets suivie du texte (« [annoyed] … ») ;
@@ -244,6 +255,7 @@ def _outil():
     return {"name": "doublage", "description": "Mise en scène d'une bande son imposée.",
             "input_schema": ecrire._schema({
                 "casting": {"type": "array", "items": ecrire._schema({"voix": {"type": "string"}, "role": {"type": "string", "enum": list(ROLES)}}, ["voix", "role"])},
+                "roles": {"type": "array", "items": ecrire._schema({"replique": {"type": "integer"}, "role": {"type": "string", "enum": list(ROLES)}}, ["replique", "role"])},
                 "contexte": {"type": "string"}, "d": {"type": "array", "items": {"type": "string"}},
                 "decoupage": {"type": "array", "items": ecrire._schema({"repliques": {"type": "array", "items": {"type": "integer"}},
                                                                        "decor": {"type": "string"}, "titre": {"type": "string"}}, ["repliques"])},
@@ -301,7 +313,11 @@ def preparer(url):
     except Exception as e: journal(f"  analyse de l'image impossible ({str(e)[:150]}) : mise en scène d'après le son seul")
     voix_sig, chemin_voix = isoler(tmp)
     sig = voix_sig if voix_sig is not None and len(voix_sig) >= len(mono) * 0.9 else mono
-    segs = segments(separer_voix(transcrire(chemin_voix, mono), sig))
+    mots = transcrire(chemin_voix, mono)
+    try:                                                                   # voix proches confondues : on les re-sépare par leur empreinte
+        import locuteurs; mots = locuteurs.rediariser(mots, sig)
+    except Exception as e: journal(f"  re-séparation des voix impossible ({str(e)[:120]})")
+    segs = segments(separer_voix(mots, sig))                               # dernier recours : la hauteur (voix grave / aiguë)
     hz = hauteurs(sig, segs)
     journal(f"  {len(segs)} répliques, voix : {hz}")
     audio = {}
@@ -343,6 +359,13 @@ def preparer(url):
             k_o = int(o.get("replique")); nom_o = str(o.get("objet", "")).lower()
             if 0 <= k_o < len(reps) and nom_o in ecrire.OBJETS: reps[k_o]["objet"] = nom_o
         except (AttributeError, TypeError, ValueError): pass
+    corr = 0
+    for x in ecrire._liste(m.get("roles")):                                # Claude : la bonne personne réplique par réplique (voix proches)
+        try:
+            k_r = int(x.get("replique"))
+            if 0 <= k_r < len(reps) and x.get("role") in ROLES and reps[k_r]["p"] != x["role"]: reps[k_r]["p"] = x["role"]; corr += 1
+        except (AttributeError, TypeError, ValueError): pass
+    if corr: journal(f"  Claude a réattribué {corr} réplique(s) à la bonne personne (voix proches)")
     if all(r["p"] == "narrateur" for r in reps): reps[0]["p"] = "presentateur"   # au moins un personnage à l'image
     reps[-1]["chute"] = True
     brut = {"sujet": m.get("sujet") or segs[0]["t"][:30], "repliques": [dict(r) for r in reps[:16]], "legende": m.get("legende") or segs[0]["t"][:120],

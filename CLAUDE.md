@@ -51,5 +51,12 @@ déjà en place, pour aller plus loin que le mode gratuit, et doit être enrichi
 - Les briques existent (`ecrire.py`, `doublage.py` : consignes « studio », `controle.py`, `decors.py`) : à enrichir sans jamais
   casser le repli gratuit.
 
+## Plus tard : remplaçants gratuits de Claude (recherche d'octobre 2026, en attente de l'accord de l'auteur)
+- L'auteur n'a plus de crédit Claude. Piste retenue : clés gratuites **Gemini** (images, doublage, contrôle ; Flash ≈ 20/jour,
+  Flash-Lite ≈ 500/jour) et **Mistral** (humour en français), puis Groq, OpenRouter `:free` (1 000/jour après 10 $ uniques),
+  NVIDIA / Cloudflare en dépannage, modèle libre sur Modal (Gemma 4 / Qwen 3.6 avec vLLM, ~0,2-0,5 $/vidéo) ; bascule avec LiteLLM ;
+  le mode gratuit actuel reste le dernier secours. Fermés ou plus gratuits en 2026 : GitHub Models, Cerebras ; Cohere interdit
+  l'usage commercial. À brancher seulement quand l'auteur aura créé les clés.
+
 ## Langue
 - L'auteur parle français : répondre et documenter en français simple.
