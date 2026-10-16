@@ -834,7 +834,8 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         # plan serré : SEUL le personnage filmé est à l'image (personne coupé en deux sur le bord), dès la moitié du passage
         cible_seule = None
         if plan_courant in studio.SERRES:
-            if sh is not None: cible_seule = sh["cible"] if (not d_p or u_p >= 0.5 or pr is None) else None
+            if sh is not None:                                             # pendant le passage : seuls l'ancien et le nouveau sujet
+                cible_seule = sh["cible"] if (not d_p or u_p >= 0.5 or pr is None or pr["cible"] == sh["cible"]) else None
             else: cible_seule = q["p"]
         if q is ph[-1]:                                                    # chute finale : lent zoom dramatique pendant toute la réplique
             z *= 1 + 0.16 * _ease((tm - q["deb"]) / max(0.5, q["fin"] - q["deb"]))
@@ -903,7 +904,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             m_ = (np.abs(calque.astype(np.int16) - (1, 2, 3)).sum(2) > 9)[..., None]; img[:] = np.where(m_, calque, img)
         if B and not cible_seule:                                          # compagnons (muets) : même échelle que les personnages
             for f_ in COMP.get(sc, []): figurant(f_, tm, img, z, cx, cy)
-        if B and plan_courant == "epaule" and dans_q and ecoutant(q) and (sh is None or sh["cible"] == q["p"]):   # l'autre, de dos, flou, en amorce
+        if False:                                                          # (amorce floue de l'autre, de dos : retirée, elle dédoublait l'image)
             ec = ecoutant(q); sens = -1 if position(sc, ec)[0] < position(sc, q["p"])[0] else 1
             y0_, x0_, x1_ = 1060, (0 if sens < 0 else W // 4), (W * 3 // 4 if sens < 0 else W)
             sub = np.empty((H - y0_, x1_ - x0_, 3), np.uint8); sub[:] = (1, 2, 3)
