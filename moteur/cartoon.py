@@ -819,7 +819,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
                 z0, cx0, cy0 = cadre_plan(pr, tm); e = _ease(u_p) if sh["passage"] != "file" else 0.5 - 0.5 * math.cos(math.pi * u_p)
                 z, cx, cy = z0 + (z - z0) * e, cx0 + (cx - cx0) * e, cy0 + (cy - cy0) * e
                 if sh["passage"] == "file": flou_h = math.sin(math.pi * u_p) * min(1.0, abs(cx - cx0) / 200 + 0.4)
-                elif sh["passage"] == "zoom": flou_h = 0.35 * math.sin(math.pi * u_p)
+                # passage zoom : AUCUN flou (il dédoublait les contours des personnages)
             elif sh["passage"] == "coupe" and pr is not None:              # coupe franche : petit punch-in pour garder l'élan
                 u0 = min(1.0, (tm - sh["t0"]) / 0.25); z *= 1 + 0.035 * (1 - u0) ** 2
         else:
@@ -926,7 +926,8 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             ambiances(img, tm, sc, zb, cxb, cyb)
             if plan_courant in ("plongee", "contre_plongee") and dans_q and q["p"] in places[sc]: img = keystone(img, plan_courant)
             if flou_h > 0.05:                                              # passage filé / zoom : flou de mouvement
-                k_ = int(5 + 120 * flou_h) | 1; img = cv2.blur(img, (k_, 1 if sh["passage"] == "file" else k_ // 3 | 1))
+                sig = 1.0 + 14 * flou_h                                    # flou gaussien horizontal : filé doux, jamais de double contour
+                img = cv2.GaussianBlur(img, (int(6 * sig) | 1, 1), sigmaX=sig, sigmaY=0.1)
         if B and sc in AVANT_FLOU and z > 1.25:                            # 3e couche : feuillage flou au tout premier plan
             za = z * 1.15; cxa, cya = W / 2 + (cx - W / 2) * 1.15, H / 2 + (cy - H / 2) * 1.05
             Ma = np.float32([[za, 0, W / 2 - za * cxa], [0, za, H / 2 - za * cya]])
