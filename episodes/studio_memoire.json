@@ -652,5 +652,49 @@
    "son": true
   },
   "cadence": "normal"
+ },
+ {
+  "moment": "nuit",
+  "lieux": [
+   "rue",
+   "salon"
+  ],
+  "source": "auteur+image",
+  "duree": 93.1,
+  "plans": {
+   "large": 9,
+   "tres_serre": 12,
+   "moyen": 10,
+   "serre": 21
+  },
+  "mouvements": {
+   "avance": 20,
+   "recul": 13,
+   "fixe": 3,
+   "travelling": 13,
+   "zoom_choc": 3
+  },
+  "costumes": {
+   "invite": "chemise",
+   "presentateur": "tshirt"
+  },
+  "figurants": 3,
+  "ambiances": [
+   "neige",
+   "pluie"
+  ],
+  "controle": "Humoriste 10.0/10 :  | Réalisateur 8.9/10 : 17.8 s 4 plans trop courts (moins d'une demi-seconde) | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 8.0/10 : 0.4 s L'a",
+  "fichier": "2026-10-16_18h52_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": true,
+   "tiers": true,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": true,
+   "reflets": true,
+   "son": true
+  },
+  "cadence": null
  }
 ]

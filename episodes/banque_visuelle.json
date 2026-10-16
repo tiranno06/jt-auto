@@ -1396,7 +1396,7 @@
    "nb_voix": 2,
    "voix": [
     {
-     "hz": 171,
+     "hz": 170,
      "genre": "?",
      "part": 0.78
     },
@@ -1406,9 +1406,9 @@
      "part": 0.22
     }
    ],
-   "debit": 5.58,
+   "debit": 5.57,
    "blanc_moyen": 0.16,
-   "coupes": 25,
+   "coupes": 23,
    "dynamique_db": 19.0,
    "cris": 0.005,
    "musique": null,
@@ -1419,12 +1419,14 @@
    "sur_vanne": 0,
    "evenements": {},
    "emotions": {
-    "confident": 21,
-    "curious": 12,
-    "fear": 7,
-    "excited": 6,
-    "serious": 4,
-    "confused": 2
+    "hesitant": 5,
+    "urgent": 5,
+    "insistent": 5,
+    "emotional": 5,
+    "confused": 4,
+    "reassuring": 3,
+    "serious": 3,
+    "determined": 3
    }
   },
   "claude": {
@@ -1432,89 +1434,39 @@
     "rue",
     "salon"
    ],
+   "moment": "nuit",
    "costumes": {
-    "invite": {
-     "bas": "pantalon",
-     "c_haut": "bleu marine",
-     "chaussures": "baskets",
-     "cheveux": "afro",
-     "c_cheveux": "noir",
-     "details": [
-      "badge"
-     ],
-     "haut": "chemise",
-     "motif": "uni"
-    },
     "presentateur": {
-     "bas": "pantalon",
-     "c_haut": "marron",
-     "chaussures": "chaussons",
-     "cheveux": "rase",
-     "c_cheveux": "marron",
-     "details": [],
-     "haut": "debardeur",
-     "motif": "uni"
+     "haut": "tshirt",
+     "c_haut": "bleu marine",
+     "motif": "uni",
+     "bas": "jeans",
+     "chaussures": "baskets",
+     "details": [
+      "barbe_courte",
+      "moustache"
+     ],
+     "chapeau": null,
+     "cheveux": "court",
+     "c_cheveux": "brun"
+    },
+    "invite": {
+     "haut": "chemise",
+     "c_haut": "rouge",
+     "motif": "carreaux",
+     "bas": "short",
+     "chaussures": "baskets",
+     "details": [
+      "lunettes_vue"
+     ],
+     "chapeau": null,
+     "cheveux": "court_texture",
+     "c_cheveux": "blond"
     }
-   },
-   "objets": [
-    {
-     "replique": 0,
-     "objet": "telephone"
-    },
-    {
-     "objet": "bouteille",
-     "replique": 0
-    }
-   ],
-   "gags": [
-    "La Fin de Carrière de CR7 Signifie la Fin du Football"
-   ],
-   "ambiances": [],
-   "plans": [
-    {
-     "plan": "large",
-     "geste": "telephone",
-     "replique": 0
-    },
-    {
-     "replique": 2,
-     "plan": "large",
-     "geste": "telephone"
-    },
-    {
-     "replique": 3,
-     "plan": "large",
-     "geste": "telephone"
-    },
-    {
-     "plan": "large",
-     "replique": 7,
-     "geste": "telephone"
-    },
-    {
-     "geste": "telephone",
-     "plan": "large",
-     "replique": 17
-    },
-    {
-     "replique": 27,
-     "plan": "large",
-     "geste": "telephone"
-    },
-    {
-     "plan": "large",
-     "replique": 47,
-     "geste": "telephone"
-    },
-    {
-     "plan": "large",
-     "geste": "telephone",
-     "replique": 51
-    }
-   ]
+   }
   },
   "realisation": {
-   "moment": "soir",
+   "moment": "nuit",
    "lieux": [
     "rue",
     "salon"
@@ -1522,69 +1474,68 @@
    "gags": [],
    "ambiances": [
     "neige",
-    "pluie",
-    "poussiere"
+    "pluie"
    ],
    "source": "auteur+image",
    "tenues": {
     "invite": "chemise",
-    "presentateur": "debardeur"
+    "presentateur": "tshirt"
    },
    "plans": [
     "large/avance",
-    "large/fixe",
+    "large/avance",
     "large/recul",
+    "tres_serre/fixe",
+    "moyen/recul",
+    "serre/avance",
+    "moyen/avance",
+    "serre/travelling",
+    "tres_serre/zoom_choc",
+    "moyen/recul",
+    "serre/avance",
+    "tres_serre/travelling",
+    "tres_serre/zoom_choc",
+    "tres_serre/fixe",
+    "serre/travelling",
+    "tres_serre/recul",
+    "moyen/avance",
+    "serre/travelling",
+    "large/travelling",
+    "tres_serre/avance",
+    "serre/avance",
+    "tres_serre/travelling",
     "large/recul",
+    "serre/recul",
+    "large/avance",
+    "serre/avance",
+    "serre/recul",
+    "tres_serre/avance",
+    "serre/recul",
+    "serre/travelling",
+    "serre/avance",
+    "moyen/avance",
+    "serre/avance",
+    "moyen/avance",
+    "large/avance",
+    "tres_serre/recul",
+    "tres_serre/travelling",
     "large/recul",
-    "large/fixe",
-    "large/recul",
-    "large/recul",
-    "large/fixe",
-    "large/recul",
-    "large/recul",
-    "large/recul",
-    "large/recul",
-    "large/recul",
-    "large/recul",
-    "large/fixe",
-    "large/recul",
-    "large/recul",
-    "large/fixe",
-    "large/fixe",
-    "large/recul",
-    "large/recul",
-    "large/fixe",
-    "large/recul",
-    "large/recul",
-    "large/fixe",
-    "large/recul",
-    "large/recul",
-    "large/recul",
-    "large/recul",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/recul",
-    "large/recul",
-    "large/recul",
-    "large/recul",
-    "large/recul",
-    "large/recul",
-    "large/recul",
-    "large/recul",
-    "large/recul",
-    "large/recul",
-    "large/recul",
-    "large/recul",
-    "large/recul",
-    "large/fixe",
-    "large/recul",
-    "large/fixe",
-    "large/fixe",
-    "large/recul",
-    "large/avance"
+    "large/travelling",
+    "serre/travelling",
+    "moyen/travelling",
+    "serre/recul",
+    "serre/travelling",
+    "tres_serre/zoom_choc",
+    "moyen/recul",
+    "serre/avance",
+    "moyen/avance",
+    "moyen/fixe",
+    "serre/recul",
+    "serre/travelling",
+    "serre/avance",
+    "serre/avance"
    ]
   },
-  "video": "2026-10-16_18h41_emission.mp4"
+  "video": "2026-10-16_18h52_emission.mp4"
  }
 ]
