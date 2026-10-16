@@ -580,6 +580,11 @@ def geste_duo(texte):
 # ------------------------------------------------------------------ consigne de direction artistique pour Claude (mode payant)
 CADENCES = {"rapide": 0.72, "normal": 1.0, "pose": 1.35}
 
+def _regles():
+    try:
+        import qualite; return qualite.regles_apprises()                   # erreurs relevées par le jury qualité qui reviennent souvent
+    except Exception: return ""
+
 def consigne_studio():
     """Bloc « studio » des consignes de Claude (doublage TikTok et sketchs écrits) : tout ce que le moteur sait dessiner et monter.
     Les listes viennent du code : chaque nouveauté (tenue, coiffure, lieu, plan…) y apparaît d'elle-même."""
@@ -628,7 +633,7 @@ def consigne_studio():
   "bruitages" (facultatif) = bruitages « tendance » des vidéos d'humour TikTok, au plus un par réplique et pas plus d'un toutes les
   3 secondes : [{{"replique": n, "son": …}}] avec son parmi {L(BRUITAGES_TENDANCE)} (vine_boom/dun_dun : vanne ou révélation,
   klaxon_clown : quelqu'un se ridiculise, sifflet_chute : échec, criquets/os_craque : blanc gênant, violon_triste : fausse tristesse,
-  caisse : argent, clavier/glitch : ordinateur ou bug…) ; JAMAIS de rires enregistrés."""
+  caisse : argent, clavier/glitch : ordinateur ou bug…) ; JAMAIS de rires enregistrés.""" + _regles()
 
 # ------------------------------------------------------------------ découpage : plusieurs plans par réplique, calés sur le son
 SERRES = ("serre", "tres_serre", "epaule", "plongee", "contre_plongee")

@@ -27,6 +27,7 @@ CAP_Y = 1700
 MINUTAGE = []                                                              # (début, fin, texte, qui) de la dernière vidéo : contrôle qualité
 PH = []                                                                    # répliques de la dernière vidéo avec leur plan (mémoire du studio)
 BRUITAGES = []                                                             # (nom, instant, gain) des bruitages de la dernière vidéo
+RENDU = {}                                                                 # ce qui a été monté (contrôle qualité : moteur/qualite.py)
 COUVERTURE = None                                                          # instant (s) choisi pour l'image de couverture TikTok
 COUVERTURE_MS = [2500]                                                     # instant de l'image de couverture (millisecondes)
 DETAIL = (os.environ.get("RENDU_DETAILLE") or "1") != "0"                 # réglage de la régie : rendu détaillé (studio) ou simple
@@ -1040,6 +1041,12 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
     with wave.open(brut, "wb") as w:
         w.setnchannels(2); w.setsampwidth(2); w.setframerate(SRM); w.writeframes((mix * 32767).astype(np.int16).tobytes())
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", brut, "-af", "loudnorm=I=-14:TP=-1.5:LRA=11", "-ar", "48000", "-ac", "2", wav], check=True)
+    RENDU.clear(); RENDU.update(ph=[{k: q.get(k) for k in ("i", "p", "deb", "fin", "texte", "emo", "chute", "scene", "plan", "mouvement", "reaction")} for q in ph],
+                                plans=[{k: x.get(k) for k in ("t0", "t1", "scene", "cible", "plan", "mouvement", "passage", "i")} for x in DECOUPE],
+                                fiches={r: {k: f.get(k) for k in ("genre", "age", "taille", "barbe", "cheveux")} for r, f in (FICHES or {}).items()},
+                                places={k: list(v) for k, v in places.items()}, total=total, doublage=bool(DOUB), mini=mini, separes=SEPARES,
+                                bruitages=list(BRUITAGES), lieux=list((B or {}).get("lieux") or []), compagnons=sum(len(v) for v in COMP.values()),
+                                decors_ia=bool(decors), coupes_origine=list((B or {}).get("coupes_origine") or []))
     global _IMAGE
     _IMAGE = image                                                         # les processus de rendu héritent de tout (fork)
     n_proc = min(4, os.cpu_count() or 1) if os.environ.get("RENDU_PARALLELE", "1") != "0" else 1

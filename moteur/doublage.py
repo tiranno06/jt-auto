@@ -357,7 +357,8 @@ def preparer(url):
     if isinstance(m.get("studio"), dict): sk["studio"] = m["studio"]          # direction artistique de Claude (vérifiée par studio.bible)
     sk["sources"] = [lien]
     sk["doublage"] = {"piste": piste, "duree": round(duree, 2), "source": lien, "auteur": auteur, "contexte": m.get("contexte", ""),
-                      "evenements": [list(e) for e in EVENEMENTS][:60], "visuel": visuel, "audio": audio}
+                      "evenements": [list(e) for e in EVENEMENTS][:60], "visuel": visuel, "audio": audio,
+                      "video_origine": info.get("_fichier") or ""}                    # (contrôle qualité : comparaison avec l'original)
     if audio:                                                              # émotions de jeu données par Claude
         from collections import Counter
         audio["emotions"] = dict(Counter(m.lower() for x in d for m in re.findall(r"\[([^\]]{2,25})\]", x)).most_common(8))
