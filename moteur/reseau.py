@@ -30,7 +30,7 @@ from types import SimpleNamespace as _NS
 
 FOURNISSEURS = {
     "mistral": dict(cle="MISTRAL_API_KEY", url="https://api.mistral.ai/v1/chat/completions",
-                    texte=("mistral-medium-latest", "mistral-small-latest"), images=("mistral-medium-latest", "mistral-small-latest")),
+                    texte=("ministral-14b-2512", "ministral-8b-latest"), images=("ministral-14b-2512", "ministral-8b-latest")),
     "gemini": dict(cle="GEMINI_API_KEY", url="https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
                    texte=("gemini-flash-lite-latest", "gemini-2.5-flash-lite", "gemini-flash-latest"),
                    images=("gemini-flash-latest", "gemini-2.5-flash", "gemini-flash-lite-latest")),
@@ -92,7 +92,8 @@ def _appel_openai(fourn, kw):
         tc = kw.get("tool_choice") or {}
         corps["tool_choice"] = ("any" if fourn == "mistral" else "required") if (tc.get("type") in ("tool", "any") or len(outils) == 1) else "auto"
     derniere = None
-    for modele in F["images" if images else "texte"]:
+    modeles = F["images" if images else "texte"]
+    for modele in modeles:
         corps["model"] = modele; d = None
         for essai in range(4):
             _attendre(fourn)
@@ -104,7 +105,11 @@ def _appel_openai(fourn, kw):
                 derniere = e; corps_err = e.read()[:300].decode("utf-8", "ignore"); bas = corps_err.lower()
                 if e.code in (404, 400) and "model" in bas: d = "suivant"; break            # modèle inconnu : le suivant
                 if e.code == 400 and outils and "tool" in bas and "tool_choice" in corps: corps.pop("tool_choice", None); continue
+                if e.code == 429 and str(getattr(e, "headers", None) and e.headers.get("x-ratelimit-limit-req-minute")) == "0":
+                    d = "suivant"; break                                                # modèle fermé à l'offre gratuite (0 / minute) : le suivant
+                if e.code == 403 and "tier" in bas: d = "suivant"; break                  # modèle réservé aux offres payantes : le suivant
                 if e.code == 429 and not any(m in bas for m in ("quota", "exhausted", "billing")):
+                    if modele != modeles[-1]: d = "suivant"; break                     # limite à la minute : d'abord le modèle suivant
                     if essai < 2:                                                       # trop de demandes à la minute : on patiente
                         try: att = float(e.headers.get("Retry-After") or 0)
                         except (TypeError, ValueError, AttributeError): att = 0
@@ -136,7 +141,7 @@ def _appel_openai(fourn, kw):
 
 _DERNIER = {}
 EN_PAUSE = {}                                                               # fournisseur limité à la minute : sauté jusqu'à cette heure
-PAUSE_MIN = {"mistral": 1.2, "gemini": 0.5}                                 # Mistral gratuit : une demande par seconde au plus
+PAUSE_MIN = {"mistral": 2.1, "gemini": 0.5}                                 # Mistral gratuit : ministral-14b = 30 demandes / minute
 
 
 def _attendre(fourn):

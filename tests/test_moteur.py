@@ -829,7 +829,7 @@ class TestLimiteMistral(unittest.TestCase):
             reseau.HORS_SERVICE.clear(); reseau.EN_PAUSE.clear()
             r = reseau.claude().messages.create(model="x", max_tokens=5, messages=[{"role": "user", "content": "salut"}])
             self.assertEqual(r.content[0].text, "ok"); self.assertNotIn("mistral", reseau.HORS_SERVICE)
-            self.assertEqual(sum("mistral" in u for u in vus), 3)                 # 2 patiences puis Gemini
+            self.assertEqual(sum("mistral" in u for u in vus), 4)                 # 14b, puis 8b avec 2 patiences, puis Gemini
             vus.clear(); reseau.claude().messages.create(model="x", max_tokens=5, messages=[{"role": "user", "content": "encore"}])
             self.assertFalse(any("mistral" in u for u in vus))                    # Mistral en pause une minute
         finally:
