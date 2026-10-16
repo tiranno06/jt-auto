@@ -215,7 +215,7 @@ details.groupe>summary::after{content:"▾";margin-left:auto;color:var(--doux);t
 details.groupe[open]>summary::after{transform:rotate(180deg)}
 .voyant{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--ligne);font-size:14px}
 .voyant span.t{flex:1;min-width:0}.voyant a{color:var(--bleu);font-size:13px;text-decoration:none;flex:none}
-.point{width:14px;height:14px;border-radius:50%;flex:none;background:#5a5d70}.point.vert{background:var(--vert)}.point.rouge{background:var(--rouge)}
+.point{width:14px;height:14px;border-radius:50%;flex:none;background:#5a5d70}.point.vert{background:var(--vert)}.point.rouge{background:var(--rouge)}.point.orange{background:var(--orange)}
 .filtres{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 6px}
 .filtres .chip.on{background:var(--jaune);color:#111;border-color:var(--jaune)}
 textarea{resize:vertical}
@@ -488,7 +488,7 @@ $("#oublier").onclick=()=>{ecrireJeton(""); auto=null; afficherAuto(); majBouton
 const RECHARGE={claude:"https://console.anthropic.com/settings/billing",mistral:"https://console.mistral.ai/usage",gemini:"https://aistudio.google.com/rate-limit",
   voix:"https://elevenlabs.io/app/subscription",decors:"https://modal.com/settings/usage"};
 let CRED=null;                                                             // contrôle en direct (episodes/credits.json : bouton « Vérifier maintenant » et chaque vidéo)
-const ETATS={ok:["vert","OK"],epuise:["rouge","quota ou crédit épuisé"],cle:["rouge","clé refusée"],erreur:["rouge","ne répond pas"],absent:["gris","pas de clé"],secours:["rouge","crédit épuisé"]};
+const ETATS={ok:["vert","OK"],epuise:["rouge","quota ou crédit épuisé"],cle:["rouge","clé refusée"],erreur:["rouge","ne répond pas"],limite:["orange","limite par minute atteinte (compte à vérifier)"],absent:["gris","pas de clé"],secours:["rouge","crédit épuisé"]};
 function voyantsDirect(){
   const c=CRED, e=(k,nom,quoi)=>{const x=ETATS[c[k]]||["gris","pas encore vérifié"]; return [k,x[0],`${nom} : ${x[1]}${quoi&&c[k]==="ok"?" — "+quoi:""}`]};
   const l=[e("claude","Claude","écriture et doublage"),e("mistral","Mistral (gratuit)","relais de Claude pour l'écriture"),e("gemini","Gemini (gratuit)","relais de Claude pour les images et le contrôle")];

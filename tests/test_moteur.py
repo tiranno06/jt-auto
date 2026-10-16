@@ -812,6 +812,34 @@ class TestRelaisIA(unittest.TestCase):
                 else: os.environ[k] = v
 
 
+class TestLimiteMistral(unittest.TestCase):
+    def test_limite_minute_passe_a_gemini(self):
+        import json as _j, io, urllib.request, urllib.error, reseau
+        vus = []
+        def faux_urlopen(req, timeout=0):
+            vus.append(req.full_url)
+            if "mistral" in req.full_url:
+                raise urllib.error.HTTPError(req.full_url, 429, "x", {"Retry-After": "1"}, io.BytesIO(b'{"message":"Rate limit exceeded","code":"1300"}'))
+            return io.BytesIO(_j.dumps({"choices": [{"message": {"content": "ok"}, "finish_reason": "stop"}], "usage": {}}).encode())
+        avant = {k: os.environ.get(k) for k in ("MISTRAL_API_KEY", "GEMINI_API_KEY", "CLAUDE_INDISPONIBLE")}
+        vieux = urllib.request.urlopen, reseau.time.sleep
+        try:
+            reseau.time.sleep = lambda s: None; urllib.request.urlopen = faux_urlopen
+            os.environ.update(MISTRAL_API_KEY="m", GEMINI_API_KEY="g", CLAUDE_INDISPONIBLE="1")
+            reseau.HORS_SERVICE.clear(); reseau.EN_PAUSE.clear()
+            r = reseau.claude().messages.create(model="x", max_tokens=5, messages=[{"role": "user", "content": "salut"}])
+            self.assertEqual(r.content[0].text, "ok"); self.assertNotIn("mistral", reseau.HORS_SERVICE)
+            self.assertEqual(sum("mistral" in u for u in vus), 3)                 # 2 patiences puis Gemini
+            vus.clear(); reseau.claude().messages.create(model="x", max_tokens=5, messages=[{"role": "user", "content": "encore"}])
+            self.assertFalse(any("mistral" in u for u in vus))                    # Mistral en pause une minute
+        finally:
+            urllib.request.urlopen, reseau.time.sleep = vieux
+            reseau.HORS_SERVICE.clear(); reseau.EN_PAUSE.clear(); reseau.UTILISES.clear()
+            for k, v in avant.items():
+                if v is None: os.environ.pop(k, None)
+                else: os.environ[k] = v
+
+
 class TestModeEco(unittest.TestCase):
     def test_mode_eco(self):
         import reseau
