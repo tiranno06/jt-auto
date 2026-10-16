@@ -1396,19 +1396,19 @@
    "nb_voix": 2,
    "voix": [
     {
+     "hz": 171,
+     "genre": "?",
+     "part": 0.78
+    },
+    {
      "hz": 176,
      "genre": "?",
      "part": 0.22
-    },
-    {
-     "hz": 170,
-     "genre": "?",
-     "part": 0.78
     }
    ],
    "debit": 5.58,
-   "blanc_moyen": 0.17,
-   "coupes": 23,
+   "blanc_moyen": 0.16,
+   "coupes": 25,
    "dynamique_db": 19.0,
    "cris": 0.005,
    "musique": null,
@@ -1419,62 +1419,41 @@
    "sur_vanne": 0,
    "evenements": {},
    "emotions": {
+    "confident": 21,
+    "curious": 12,
     "fear": 7,
-    "curious": 7,
-    "confident": 7,
-    "serious": 6,
-    "excited": 5,
-    "confused": 3,
-    "command": 2,
-    "angry": 2
+    "excited": 6,
+    "serious": 4,
+    "confused": 2
    }
   },
   "claude": {
    "lieux": [
-    "rue"
+    "rue",
+    "salon"
    ],
    "costumes": {
-    "presentateur": {
+    "invite": {
      "bas": "pantalon",
-     "c_bas": "bleu marine",
-     "c_chapeau": "noir",
-     "c_cheveux": "noir",
-     "c_haut": "violet",
-     "chapeau": "aucune",
+     "c_haut": "bleu marine",
+     "chaussures": "baskets",
      "cheveux": "afro",
+     "c_cheveux": "noir",
      "details": [
       "badge"
      ],
      "haut": "chemise",
-     "chaussures": "baskets"
+     "motif": "uni"
     },
-    "invite": {
+    "presentateur": {
      "bas": "pantalon",
-     "c_bas": "gris",
-     "c_chapeau": "noir",
-     "c_cheveux": "chatain",
      "c_haut": "marron",
-     "chapeau": "aucune",
-     "cheveux": "degarni",
-     "details": [
-      "montre"
-     ],
+     "chaussures": "chaussons",
+     "cheveux": "rase",
+     "c_cheveux": "marron",
+     "details": [],
      "haut": "debardeur",
-     "chaussures": "chaussons"
-    },
-    "envoyee": {
-     "bas": "jupe",
-     "c_bas": "rouge",
-     "c_chapeau": "noir",
-     "c_cheveux": "brun",
-     "c_haut": "rouge",
-     "chapeau": "serre_tete",
-     "cheveux": "tresses",
-     "details": [
-      "boucles_oreilles"
-     ],
-     "haut": "robe",
-     "chaussures": "baskets"
+     "motif": "uni"
     }
    },
    "objets": [
@@ -1483,34 +1462,64 @@
      "objet": "telephone"
     },
     {
-     "objet": "telephone",
-     "replique": 2
+     "objet": "bouteille",
+     "replique": 0
     }
    ],
    "gags": [
     "La Fin de Carrière de CR7 Signifie la Fin du Football"
    ],
-   "ambiances": [
-    "poussiere"
-   ],
+   "ambiances": [],
    "plans": [
     {
-     "replique": 0,
      "plan": "large",
-     "mouvement": "fixe",
      "geste": "telephone",
-     "reaction": "aucune"
+     "replique": 0
+    },
+    {
+     "replique": 2,
+     "plan": "large",
+     "geste": "telephone"
+    },
+    {
+     "replique": 3,
+     "plan": "large",
+     "geste": "telephone"
+    },
+    {
+     "plan": "large",
+     "replique": 7,
+     "geste": "telephone"
+    },
+    {
+     "geste": "telephone",
+     "plan": "large",
+     "replique": 17
+    },
+    {
+     "replique": 27,
+     "plan": "large",
+     "geste": "telephone"
+    },
+    {
+     "plan": "large",
+     "replique": 47,
+     "geste": "telephone"
+    },
+    {
+     "plan": "large",
+     "geste": "telephone",
+     "replique": 51
     }
    ]
   },
   "realisation": {
    "moment": "soir",
    "lieux": [
-    "rue"
+    "rue",
+    "salon"
    ],
-   "gags": [
-    "La Fin de Carrière de CR7 Signifie la Fin du Football"
-   ],
+   "gags": [],
    "ambiances": [
     "neige",
     "pluie",
@@ -1518,64 +1527,64 @@
    ],
    "source": "auteur+image",
    "tenues": {
-    "envoyee": "robe",
-    "invite": "debardeur"
+    "invite": "chemise",
+    "presentateur": "debardeur"
    },
    "plans": [
+    "large/avance",
+    "large/fixe",
+    "large/recul",
+    "large/recul",
+    "large/recul",
+    "large/fixe",
+    "large/recul",
+    "large/recul",
+    "large/fixe",
+    "large/recul",
+    "large/recul",
+    "large/recul",
+    "large/recul",
+    "large/recul",
+    "large/recul",
+    "large/fixe",
+    "large/recul",
+    "large/recul",
+    "large/fixe",
+    "large/fixe",
+    "large/recul",
+    "large/recul",
+    "large/fixe",
+    "large/recul",
+    "large/recul",
+    "large/fixe",
+    "large/recul",
+    "large/recul",
+    "large/recul",
+    "large/recul",
     "large/fixe",
     "large/fixe",
     "large/fixe",
+    "large/recul",
+    "large/recul",
+    "large/recul",
+    "large/recul",
+    "large/recul",
+    "large/recul",
+    "large/recul",
+    "large/recul",
+    "large/recul",
+    "large/recul",
+    "large/recul",
+    "large/recul",
+    "large/recul",
     "large/fixe",
-    "moyen/fixe",
-    "epaule/fixe",
-    "epaule/fixe",
-    "tres_serre/zoom_choc",
-    "large/fixe",
-    "moyen/fixe",
-    "large/fixe",
-    "large/fixe",
-    "contre_plongee/epaule",
-    "epaule/fixe",
-    "large/fixe",
-    "epaule/fixe",
-    "moyen/fixe",
-    "contre_plongee/epaule",
-    "large/fixe",
-    "epaule/fixe",
-    "moyen/fixe",
-    "large/fixe",
-    "moyen/fixe",
+    "large/recul",
     "large/fixe",
     "large/fixe",
-    "large/fixe",
-    "moyen/fixe",
-    "large/fixe",
-    "epaule/fixe",
-    "moyen/fixe",
-    "epaule/fixe",
-    "moyen/fixe",
-    "moyen/fixe",
-    "large/fixe",
-    "moyen/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "epaule/fixe",
-    "moyen/fixe",
-    "moyen/fixe",
-    "epaule/fixe",
-    "large/fixe",
-    "moyen/fixe",
-    "moyen/fixe",
-    "moyen/fixe",
-    "large/fixe",
-    "moyen/fixe",
-    "epaule/fixe",
-    "large/fixe",
-    "serre/avance"
+    "large/recul",
+    "large/avance"
    ]
   },
-  "video": "2026-10-16_18h14_emission.mp4"
+  "video": "2026-10-16_18h41_emission.mp4"
  }
 ]
