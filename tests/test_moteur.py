@@ -592,7 +592,7 @@ class TestImageEtBanque(unittest.TestCase):
 
     def test_consigne_images(self):
         import doublage
-        texte = doublage.IMAGES.format(mesures="2 plans", banque="", coiffures="carre, ondule")
+        texte = doublage.IMAGES.format(mesures="2 plans", banque="", coiffures="carre, ondule", coupes="1.0 s")
         self.assertIn("coiffure", texte); self.assertIn("objets", texte)
         self.assertIn("queue", doublage.consigne("v", "l"))
 
@@ -675,6 +675,31 @@ class TestBanqueSonore(unittest.TestCase):
             BV.ajouter({"source": "https://tiktok/x", "audio": A}); t_ = BV.tendances()
             self.assertEqual(t_["audio"]["n"], 1); self.assertIn("son (1 vidéo", BV.consigne())
         finally: BV.FICHIER = avant
+
+
+class TestHistoireRecreee(unittest.TestCase):
+    def test_lieux_separes_au_telephone(self):
+        import studio
+        sk = {"repliques": [{"p": "invite", "t": "Allô papa, je suis au parking."}, {"p": "presentateur", "t": "T'es où exactement ?"},
+                            {"p": "invite", "t": "Devant le Leclerc."}, {"p": "presentateur", "t": "Je t'entends mal, je te rappelle."}],
+              "decoupage": [{"scene": "1", "repliques": [0, 1, 2, 3]}]}
+        self.assertTrue(studio.separer_lieux(sk))
+        sc = {i: k for k, d in enumerate(sk["decoupage"]) for i in d["repliques"]}
+        self.assertEqual(sc[0], sc[2]); self.assertNotEqual(sc[0], sc[1])                 # un décor chacun
+        self.assertTrue(all(r.get("objet") == "telephone" for r in sk["repliques"]))
+        sk2 = {"repliques": [{"p": "invite", "t": "Salut."}, {"p": "presentateur", "t": "Salut toi."}], "decoupage": []}
+        self.assertFalse(studio.separer_lieux(sk2))                                     # même endroit : rien ne change
+
+    def test_ado_et_compagnon(self):
+        import studio, humain as H
+        sk = {"repliques": [{"p": "invite", "t": "Papa, elle me fait signe."}, {"p": "presentateur", "t": "Vas-y fiston."}],
+              "studio": {"personnages": {"invite": {"genre": "h", "age": 22, "cheveux": "long", "barbe": "barbe_pleine"}},
+                         "figurants": [{"avec": "invite", "genre": "f", "age": 28, "geste": "signe", "haut": "robe", "c_haut": "rouge"}]}}
+        f = studio.casting(sk, ["presentateur", "invite"], {}, sk["studio"], 3)
+        self.assertLess(f["invite"]["age"], 18); self.assertEqual(f["invite"]["barbe"], ""); self.assertLess(f["invite"]["taille"], f["presentateur"]["taille"])
+        self.assertIn(f["invite"]["cheveux"], H.COURTS_JEUNE_H)
+        c = studio.compagnons(sk, [{"repliques": [0, 1]}], ["parking"], "jour", 3)
+        self.assertEqual(len(c), 1); self.assertEqual(c[0]["activite"], "signe"); self.assertEqual(c[0]["fiche"]["genre"], "f")
 
 
 class TestModeEco(unittest.TestCase):

@@ -203,6 +203,8 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
     tmp = tempfile.mkdtemp(); reps = sk["repliques"]; decors = decors or {}; rng = np.random.default_rng(11)
     roles = sorted({r["p"] for r in reps if r["p"] != "narrateur"}, key=lambda r: [x["p"] for x in reps].index(r))   # la voix off n'est pas dessinée
     # scènes : découpage de l'auteur (sinon une seule scène)
+    studio.separer_lieux(sk)                                               # personnages dans des lieux différents : un décor chacun
+    SEPARES = bool(sk.get("_separes"))
     dec = [sc for sc in (sk.get("decoupage") or []) if sc.get("repliques")]
     scene_de = {}
     for k, sc in enumerate(dec):
@@ -245,7 +247,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         if DOUB:                                                           # chaque réplique démarre à l'instant exact où elle est dite
             t = float(r["_deb"]); lv = np.convolve(np.pad(lv, 2, mode="edge"), [0.1, 0.2, 0.4, 0.2, 0.1], "valid")
             sc = scene_de.get(i, ph[-1]["scene"] if ph else 0)
-            if ph and sc != ph[-1]["scene"]:                               # changement de scène : panoramique dans le blanc entre deux répliques
+            if ph and sc != ph[-1]["scene"] and not SEPARES:               # changement de scène : panoramique dans le blanc entre deux répliques
                 d0 = max(ph[-1]["fin"] + 0.05, t - 0.45)
                 if t - d0 >= 0.2: transitions.append((d0, t - 0.02, "panoramique", sc, ""))
             emo_q = emo_de(i, r)
@@ -260,6 +262,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         sc = scene_de.get(i, ph[-1]["scene"] if ph else 0)
         if ph and ph[-1].get("teaser"):                                     # après l'accroche : retour au début de l'histoire
             transitions.append((t, t + 0.9, "carton", sc, "Un peu plus tôt…")); t += 0.9
+        elif ph and sc != ph[-1]["scene"] and SEPARES: pass                # lieux séparés : coupe franche de l'un à l'autre
         elif ph and sc != ph[-1]["scene"]:                                 # changement de scène : carton ou panoramique rapide
             # vidéo longue : chaque nouveau gag est TOUJOURS annoncé par un carton plein écran (« Plus tard… » par défaut)
             d_tr = 0.45 if mini else 1.35
@@ -295,8 +298,9 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
     for q in ph:
         if q["p"] != "narrateur" and q["p"] not in places[q["scene"]]: places[q["scene"]].append(q["p"])
     for k in places: places[k].sort(key=roles.index)                     # chacun garde son côté d'une scène à l'autre
+    COMP = {}                                                              # personnages muets voulus par l'histoire, par scène (bible)
     def position(scene, role):
-        ps = places[scene]; n = len(ps); k = ps.index(role) if role in ps else 0
+        ps = places[scene] + [f"@{j}" for j in range(len(COMP.get(scene, [])))]; n = len(ps); k = ps.index(role) if role in ps else 0
         if n == 1: return (540, 1500, 1.35)
         if n == 2: return ((285, 795)[k], 1500, 1.08)
         return ((190, 540, 890)[min(k, 2)], 1500, 0.86)
@@ -334,8 +338,13 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         for sc_ in places:                                                 # figurants dans les espaces libres entre les personnages
             libres = {1: [170, 910], 2: [540, 1010], 3: [365, 715]}.get(len(places[sc_]), [540]); k_ = 0
             for f_ in B["figurants"]:
-                if f_["scene"] != sc_: continue
+                if f_["scene"] != sc_ or f_.get("compagnon"): continue
                 f_["_x"] = libres[k_ % len(libres)]; f_["_s"] = 0.4 if len(places[sc_]) >= 3 else 0.46; k_ += 1
+        for f_ in B["figurants"]:                                          # compagnons : à côté du personnage, à sa taille
+            if f_.get("compagnon") and f_["scene"] in places: COMP.setdefault(f_["scene"], []).append(f_)
+        for sc_, l_ in COMP.items():
+            for j_, f_ in enumerate(l_):
+                f_["_x"], f_["_y"], f_["_s"] = position(sc_, f"@{j_}"); f_["_s"] *= 0.95
         rng_p = np.random.default_rng(B["graine"] % 99991)
         PARTICULES = rng_p.uniform(0, 1, (60, 4))                          # positions et vitesses (poussière, pluie, neige, vapeur)
     # animation des personnages : état par rôle
@@ -669,7 +678,8 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
     def figurant(f, tm, img, zb, cxb, cyb):
         """Figurant qui vit au fond de la scène (boit, tape au clavier, téléphone, marche…), à l'échelle du décor."""
         p = M.pose_neutre(); x0 = f.get("_x", f["x"]); k = x0 * 0.013; act = f["activite"]
-        x = x0 + (math.sin(tm * 0.25 + k) * 60 if act == "marche" else 6 * math.sin(tm * 0.9 + k)); y = 1265
+        x = x0 + (math.sin(tm * 0.25 + k) * 60 if act == "marche" else 6 * math.sin(tm * 0.9 + k)); y = f.get("_y", 1265)
+        if act == "danse": x += 18 * math.sin(tm * 4.2 + k)
         p.update(x=W / 2 + (x - cxb) * zb, y=H / 2 + (y - cyb) * zb, s=f.get("_s", 0.5) * zb, t=tm, costume=f["costume"], reflets=True, lumiere=B["lumiere"],
                  ombre=B["ombre"], mains=True, tilt=4 * math.sin(tm * 0.7 + k), regard=(math.sin(tm * 0.4 + k) * 0.8, 0.1),
                  balance=0.5 * math.sin(tm * 2 + k))
@@ -686,10 +696,21 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         elif act == "souleve":
             u = abs(math.sin(tm * 1.6 + k)); p["bras_g"], p["bras_d"] = (-60 - 100 * u, -40), (60 + 100 * u, 40)
             p["main_g"] = p["main_d"] = objets.setdefault(("haltere", round(p["s"], 2)), M.objet("haltere", p["s"] * (0.45 if FICHES else 0.7))); p["sq"] = -0.05 * u
+        elif act == "coucou":                                              # elle fait coucou de la main
+            u = math.sin(tm * 9 + k); p["bras_d"] = (150 + 18 * u, -120 - 10 * u); p["main_forme_d"] = "paume"; p["forme"] = "sourire"
+        elif act == "signe":                                               # « viens ! » : bras tendu, l'index qui appelle
+            u = abs(math.sin(tm * 5 + k)); p["bras_d"] = (95 - 25 * u, -20); p["main_forme_d"] = "index"; p["forme"] = "coin"; p["tilt"] = 8
+        elif act == "danse":
+            u = math.sin(tm * 4.2 + k); p["bras_g"], p["bras_d"] = (-120 - 30 * u, -40), (120 - 30 * u, 40); p["balance"] = 1.2 * u; p["forme"] = "sourire"
+        elif act == "rit":
+            p["forme"] = "grand_sourire"; p["yeux"] = "plisses"; p["tilt"] = 6 * math.sin(tm * 12 + k)
+        elif act == "attend":
+            p["bras_g"], p["bras_d"] = POSES["croises"]; p["main_forme_g"] = p["main_forme_d"] = "poing"
         elif act == "cherche":
             p["regard"] = (math.sin(tm * 0.8 + k), -0.3); p["tilt"] = 10 * math.sin(tm * 0.8 + k); p["bras_d"] = (60, 40); p["main_forme_d"] = "index"
         if any(0 <= ((tm + k * 3) % 3.7) < 0.12 for _ in (0,)): p["yeux"] = "fermes"
-        if FICHES and f.get("fiche"): p["s"] *= 1.15; HU.dessiner(img, f["fiche"], p)
+        if f.get("compagnon"): p.update(costume=f["costume"], regard=(0.7 if x0 < 540 else -0.7, 0.0), bouche=0.0)
+        if FICHES and f.get("fiche"): p["s"] *= (1.0 if f.get("compagnon") else 1.15); HU.dessiner(img, f["fiche"], p)
         else: M.dessiner(img, f["perso"], p)
 
     def tache(img, x, y, r, col, a):
@@ -854,7 +875,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         img = cv2.warpAffine(fond, Mx, (W, H), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REPLICATE)
         if B:
             for f_ in B["figurants"]:
-                if f_["scene"] == sc and not cible_seule: figurant(f_, tm, img, zm, cxm, cym)
+                if f_["scene"] == sc and not cible_seule and not f_.get("compagnon"): figurant(f_, tm, img, zm, cxm, cym)
         sce = dec[sc] if sc < len(dec) else {}
         if sce.get("effet") == "tremblement" or (q["emo"] in ("cri", "colere") and q["deb"] <= tm <= q["fin"]):
             img = np.roll(img, (int(6 * math.sin(tm * 53)), int(6 * math.cos(tm * 47))), (0, 1))
@@ -880,6 +901,8 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             R_ = cv2.getRotationMatrix2D((p["x"], p["y"]), -ang, 1.0)
             calque = cv2.warpAffine(calque, R_, (W, H), flags=cv2.INTER_LINEAR, borderValue=(1, 2, 3))
             m_ = (np.abs(calque.astype(np.int16) - (1, 2, 3)).sum(2) > 9)[..., None]; img[:] = np.where(m_, calque, img)
+        if B and not cible_seule:                                          # compagnons (muets) : même échelle que les personnages
+            for f_ in COMP.get(sc, []): figurant(f_, tm, img, z, cx, cy)
         if B and plan_courant == "epaule" and dans_q and ecoutant(q) and (sh is None or sh["cible"] == q["p"]):   # l'autre, de dos, flou, en amorce
             ec = ecoutant(q); sens = -1 if position(sc, ec)[0] < position(sc, q["p"])[0] else 1
             y0_, x0_, x1_ = 1060, (0 if sens < 0 else W // 4), (W * 3 // 4 if sens < 0 else W)

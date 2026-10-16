@@ -225,6 +225,10 @@ dans notre dessin animé et dans nos listes : le lieu exact, le décor du premie
 qu'on y voit), les objets tenus ("studio" → "objets" = [{{"replique", "objet"}}] pris dans la liste des objets ci-dessous), la tenue de
 chaque personne (forme, couleur, motif, accessoires) et sa coiffure ("cheveux" parmi {coiffures} ; "c_cheveux" = couleur), son couvre-chef ("chapeau"), sa barbe, leurs mimiques et gestes (visage, bouche, yeux, bras, mains, jambes, pieds) pour les "plans" (geste, réaction),
 la lumière et l'heure, et le rythme du montage d'origine ("cadence"). La personne la plus présente à l'image joue la voix la plus présente.
+Recrée TOUT ce que montre la vidéo, à notre sauce : chaque personne avec son âge, son genre, sa taille et son allure ("personnages"),
+les lieux (si les personnes ne sont pas au même endroit, "lieux_separes" : un décor pour chacune), les personnes muettes qu'on voit ou
+dont on parle ("figurants"), et la suite des plans de la vidéo d'origine (serré / large, sur qui, avec quel geste) dans "decoupe"
+et "plans", aux mêmes moments que ses coupes ({coupes}).
 Objets possibles : telephone, billet, portefeuille, micro, verre, cafe, livre, cles, carte, facture, bouteille, haltere, seringue, parapluie,
 telecommande, fleur, cadeau, pizza, croissant, tablette, lettre, journal, stylo, valise.
 Mesures faites par le robot sur la vidéo : {mesures}
@@ -300,7 +304,8 @@ def preparer(url):
         if visuel or cles:                                                 # Claude voit aussi la vidéo d'origine (images clés) et ses mesures
             import analyse_video, banque_visuelle
             import marionnette as M_
-            contenu += IMAGES.format(mesures=analyse_video.texte(visuel), banque=banque_visuelle.consigne(), coiffures=", ".join(M_.COIFFURES))
+            contenu += IMAGES.format(mesures=analyse_video.texte(visuel), banque=banque_visuelle.consigne(), coiffures=", ".join(M_.COIFFURES),
+                                     coupes=", ".join(f"{c:.1f} s" for c in (visuel.get("coupes") or [])[:40]) or "aucune coupe repérée")
             contenu = [{"type": "image", "source": {"type": "base64", "media_type": "image/jpeg", "data": base64.b64encode(j).decode()}} for j in cles[:6]] \
                       + [{"type": "text", "text": contenu}]
         m = ecrire._appel(__import__('reseau').claude(), None, [{"role": "user", "content": contenu}], _outil(), max_tokens=8000)

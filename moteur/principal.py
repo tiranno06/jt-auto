@@ -264,7 +264,8 @@ def main():
             REALISTE = False; audios, credits_voix, mots, moteur = voix_et_minutage()
     if libre and not REALISTE:                                             # sketch libre / gag éclair : moteur cartoon animé
         try:
-            import cartoon, decors as decors_mod
+            import cartoon, decors as decors_mod, studio as _st
+            if _st.separer_lieux(sk): print("Lieux séparés : chaque personnage a son propre décor (appel, visio, l'un ailleurs)", flush=True)
             if modal_ok and os.environ.get("DECORS", "1") != "0":
                 lum = ""; plans_dec = None
                 if cartoon.DETAIL:                                         # même lumière que la bible de l'épisode (heure, lampes)
