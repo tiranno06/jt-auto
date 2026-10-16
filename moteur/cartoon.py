@@ -103,6 +103,7 @@ GESTES = [((-20, 10), (100, -40)), ((-100, 40), (20, -10)), ((-110, -30), (110, 
 MAINS_CONV = [("ouverte", "paume"), ("paume", "ouverte"), ("paume", "paume"), ("ouverte", "index"), ("ouverte", "ouverte")]   # mains des gestes de conversation
 # poses expressives (bras gauche, bras droit) : angles épaule / coude en degrés, 0 = vers le bas — catalogue complet dans studio.GESTES
 POSES = studio.POSES
+TEL_OREILLE = (140, 95)                                                    # bras qui tient le téléphone contre l'oreille
 NEUTRE_BRAS = ((-18, 8), (18, -8))
 
 def geste_texte(texte, emo, k=0):
@@ -747,7 +748,9 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         if mien and mien.get("objet") and tm <= mien["fin"] + 0.3:
             o = objets.get((mien["objet"], round(s, 2)))
             if o is None: o = objets[(mien["objet"], round(s, 2))] = M.objet(mien["objet"], s * (0.5 if FICHES else 1.0))
-            if o is not None: p["main_d"] = o; p["bras_d"] = (120, -100); p["main_forme_d"] = "poing"
+            if o is not None:
+                p["main_d"] = o; p["main_forme_d"] = "poing"
+                p["bras_d"] = TEL_OREILLE if mien["objet"] == "telephone" else (120, -100)   # téléphone : tenu à l'oreille
         return p
 
     global COUVERTURE                                                      # couverture : titre visible et visage le plus expressif
@@ -1279,9 +1282,10 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         if T is not None:
             t0 = min(z2["deb"] for z2 in ph if z2["scene"] == sc) if mini else 0
             d_t = tm - t0
-            if not mini or d_t < 3.2:                                      # carton de scène : 3 s puis il s'efface (il ne cache pas les visages)
+            d_max = 3.2 if mini else 4.5                                   # le titre s'efface : il ne cache jamais les visages
+            if d_t < d_max:
                 a2 = pop(T, (d_t + 0.25) / 0.25)
-                if mini and d_t > 2.7: a2 = a2.copy(); a2[..., 3] *= max(0.0, (3.2 - d_t) / 0.5)
+                if d_t > d_max - 0.5: a2 = a2.copy(); a2[..., 3] *= max(0.0, (d_max - d_t) / 0.5)
                 poser(fr, a2, (W - a2.shape[1]) / 2, 190)
         g = next((x for x in q["groupes"] if x[1] <= tm < x[2] + (0.2 if x is q["groupes"][-1] else 0)), None)
         if g and q["deb"] <= tm < q["fin"] + 0.2:

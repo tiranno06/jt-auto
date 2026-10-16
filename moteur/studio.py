@@ -46,7 +46,7 @@ GESTES = {
     "pouce":         (((-18, 8), (120, -95)), ("ouverte", "pouce")),          # « nickel »
     "compte":        (((-60, -50), (60, 70)), ("index", "paume")),            # il compte sur ses doigts
     "bras_ouverts":  (((-110, -20), (110, 20)), ("paume", "paume")),          # accueil, évidence
-    "telephone":     (((-18, 8), (150, 75)), ("ouverte", "poing")),           # main à l'oreille
+    "telephone":     (((-18, 8), (140, 95)), ("ouverte", "poing")),           # main à l'oreille
     "supplie":       (((-60, 75), (60, -75)), ("ouverte", "ouverte")),        # mains jointes
     "explique":      (((-60, -40), (70, -50)), ("paume", "index")),
 }
