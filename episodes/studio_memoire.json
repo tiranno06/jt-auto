@@ -441,5 +441,48 @@
    "son": true
   },
   "cadence": null
+ },
+ {
+  "moment": "soir",
+  "lieux": [
+   "salon"
+  ],
+  "source": "robot+image",
+  "duree": 93.1,
+  "plans": {
+   "large": 21,
+   "epaule": 9,
+   "moyen": 18,
+   "tres_serre": 3,
+   "serre": 1
+  },
+  "mouvements": {
+   "avance": 2,
+   "fixe": 47,
+   "zoom_choc": 3
+  },
+  "costumes": {
+   "envoyee": "capuche",
+   "presentateur": "capuche"
+  },
+  "figurants": 0,
+  "ambiances": [
+   "neige",
+   "pluie",
+   "poussiere"
+  ],
+  "controle": "ok",
+  "fichier": "2026-10-16_08h15_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": true,
+   "tiers": true,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": true,
+   "reflets": true,
+   "son": true
+  },
+  "cadence": null
  }
 ]
