@@ -63,6 +63,8 @@ def creer(graine, genre=None, age=None, cheveux=None, c_cheveux=None, corpulence
 
 # ------------------------------------------------------------------ dessin (corps des marionnettes, version adulte)
 import os
+STYLE_PERSO = (os.environ.get("STYLE_PERSO") or "toon").lower()  # "toon" : nouveau style (référence : tête en œuf de trois-quarts, corps élancé) ; "ancien" : marionnettes
+if STYLE_PERSO == "toon": M.JAMBES_ADULTE, M.ADULTE_TETE = 1.88, 0.7   # silhouette de la référence : tête = 1/4 de la hauteur
 PEAU_HUMAINE = (os.environ.get("PEAU") or "blanche") == "humaine"     # peau blanche comme nos bonshommes (défaut) ou couleur humaine
 
 COIFF_M = {"carre": "carre", "long": "long", "queue": "queue", "chignon": "chignon", "boucles": "boucles", "court": "court_texture",
@@ -93,6 +95,9 @@ def _pose(F, p):
 
 def dessiner(img, F, p):
     """Dessine le personnage de fiche F (version adulte de nos marionnettes) selon la pose p. Renvoie (tête, (rx, ry))."""
+    if STYLE_PERSO == "toon":
+        import toon
+        return toon.dessiner(img, _P(F), _pose(F, p))
     return M.dessiner(img, _P(F), _pose(F, p))
 
 def tete_y(s, taille=1.0):
@@ -103,4 +108,8 @@ def hauteur_tete(s, taille=1.0): return 2 * M.squelette(dict(M.pose_neutre(), y=
 
 def reperes(F, p):
     """Centre et rayons de la tête, positions des deux mains (pour poser objets et effets)."""
-    K = M.squelette(_pose(F, p)); return K["tete"], (K["rx"], K["ry"]), [K["bras"][0][2], K["bras"][1][2]]
+    if STYLE_PERSO == "toon":
+        import toon
+        K = toon.squelette(_pose(F, p))
+    else: K = M.squelette(_pose(F, p))
+    return K["tete"], (K["rx"], K["ry"]), [K["bras"][0][2], K["bras"][1][2]]

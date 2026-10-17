@@ -52,7 +52,8 @@ def emotion(d):
 STYLE_RENDU = (os.environ.get("STYLE_RENDU") or "cel").lower()           # cel (aplats pro) | volume (effet 3D doux) | 3d (3D toon brillant)
 SSAA = (os.environ.get("SSAA") or "1") != "0"                             # personnages dessinés en double résolution puis réduits
 DECOR_VIVANT = (os.environ.get("DECOR_VIVANT") or "1") != "0"             # la rue vit : voitures qui passent au loin
-CEL = (os.environ.get("CEL") or "1") != "0"                               # ombrage en aplat + contour extérieur épais (finition « toons » pro)
+CEL = (os.environ.get("CEL") or ("0" if (os.environ.get("STYLE_PERSO") or "toon").lower() == "toon" else "1")) != "0"   # ombrage en aplat + contour épais
+# (coupé par défaut avec le nouveau style « toon » : trait fin et ombres déjà dessinés comme la référence)
 LUMIERES_VIVES = (os.environ.get("LUMIERES_VIVES") or "1") != "0"
 MANGA = (os.environ.get("MANGA") or "1") != "0"                           # effets manga : fond qui explose, traits de vitesse
 SIGNATURE = (os.environ.get("SIGNATURE") or "1") != "0"                   # signature visuelle de la chaîne (logo, couleurs)

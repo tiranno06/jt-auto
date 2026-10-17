@@ -12,9 +12,13 @@
 - **Pas de 3D** (abandonnée : trop lourde et trop coûteuse).
 
 ## Style visuel
-- Personnages adultes dans le style des chaînes « toons » de TikTok (Aristos Toons, Lescromatoons, MotionToonz) sur la base de
-  nos anciens personnages : grosse tête ronde blanche posée sur le col, yeux en ovales noirs, vêtements aux épaules carrées,
-  trait noir épais, aplats. Casting libre (personnages différents à chaque vidéo).
+- **Nouveau style de personnage (octobre 2026, `moteur/toon.py`, réglage STYLE_PERSO=toon par défaut, « ancien » = marionnettes)** :
+  copié sur l'image de référence de l'auteur et les vidéos du créateur animady67 (nos propres personnages, jamais les siens) :
+  tête blanche en œuf de trois-quarts (1/4 de la hauteur), grands yeux ovales blancs à petite pupille, sourcils courts, bouche
+  NORMALE dans le visage (petite moue fermée ; ouverte quand il parle : dents en grille, langue), corps élancé (sweat ample à
+  capuche et cordons, short long, jambes blanches, grands pieds nus à orteils), trait noir fin et régulier, ombre douce grise
+  sur la tête. Gestes naturels des vidéos : bras croisés, mains sur les hanches, main au menton, téléphone, main sur la bouche.
+  Casting libre (personnages différents à chaque vidéo).
 - **Le maximum de détails partout** : tenues, coiffures, barbes, chapeaux, accessoires, expressions du visage, décors.
 - Tout l'univers visuel (lieu, tenues, plans, émotions) se construit autour de l'audio TikTok (paroles, intonations, émotions,
   ambiance) et de l'image de la vidéo d'origine ; la banque visuelle s'enrichit vidéo après vidéo.

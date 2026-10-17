@@ -1048,3 +1048,20 @@ class TestHumains(unittest.TestCase):
         sk2 = {"repliques": [{"p": "envoyee", "t": "Salut."}]}                                          # sketch écrit : Lila est une femme
         self.assertEqual(S.casting(sk2, ["envoyee"], {}, {}, 1)["envoyee"]["genre"], "f")
 
+
+
+class TestStyleToon(unittest.TestCase):
+    """Nouveau style de personnage (référence de l'auteur) : il dessine toutes les poses et la bouche reste dans le visage."""
+    def test_poses_et_bouche(self):
+        import humain as HU, marionnette as M, studio, toon
+        F = HU.creer(3, genre="h", age=30)
+        for nom, (bras, _) in list(studio.GESTES.items())[:8]:
+            for tq, ouv in ((0.0, 0.0), (0.5, 0.8), (-0.5, 0.3)):
+                img = np.full((1920, 1080, 3), 200, np.uint8)
+                p = dict(M.pose_neutre(), x=540, y=1700, s=1.2, tq=tq, bras_g=bras[0], bras_d=bras[1], bouche=ouv, viseme="A", mains=True,
+                         costume=dict(haut="capuche", c_haut=(30, 190, 40), bas="short", c_bas=(30, 190, 40), chaussures="pieds_nus", details=("lunettes_soleil",)))
+                (tx, ty), (rx, ry) = HU.dessiner(img, F, p)
+                self.assertGreater((np.abs(img.astype(int) - 200).sum(2) > 30).mean(), 0.03)
+        K = toon.squelette(dict(M.pose_neutre(), x=540, y=1700, s=1.2, bras_g=studio.POSES["croises"][0], bras_d=studio.POSES["croises"][1], adulte=True))
+        self.assertGreater(K["croise"], 0.9)                                                            # bras croisés reconnus
+        self.assertGreater(K["bras"][0][2][0], 540)                                                    # main gauche de l'autre côté
