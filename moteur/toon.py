@@ -419,8 +419,75 @@ def coiffure_avant(img, t, rxe, R, d, k34, style, col, ep, tilt, chapeau=False):
 
 
 # ------------------------------------------------------------------ corps
-def _main(img, m, a, forme_, r, peau, ep):
-    M._main(img, m, a, forme_, r, TRAIT, ep * 0.9); M._main(img, m, a, forme_, r, peau)
+SENS = [1]                                                                 # côté du pouce (sens du regard), mis à jour par dessiner()
+
+
+def silhouette(img, polys=(), tubes=(), ellipses=(), coul=BLANC, ep=2.0, ouvert=(), lignes=()):
+    """Forme pleine faite de plusieurs morceaux (polygones lissés, tubes, ellipses) avec UN SEUL contour noir autour de
+    l'ensemble (comme un dessin à la main) ; `ouvert` : disques (centre, rayon) où le contour s'efface (raccord au vêtement) ;
+    `lignes` : traits intérieurs (doigts, orteils) posés ensuite."""
+    pts_all = [q for P in polys for q in P] + [q for a_, b_, ra, rb in tubes for q in (a_, b_)] + [c for c, _, _ in ellipses]
+    rmax = max([ra for _, _, ra, _ in tubes] + [max(rx, ry) for _, rx, ry in ellipses] + [4])
+    xs = [q[0] for q in pts_all]; ys = [q[1] for q in pts_all]; mg = int(rmax + 3 * ep + 6)
+    x0, y0 = max(0, int(min(xs)) - mg), max(0, int(min(ys)) - mg); x1, y1 = min(img.shape[1], int(max(xs)) + mg), min(img.shape[0], int(max(ys)) + mg)
+    if x1 <= x0 or y1 <= y0: return
+    K = 3; m = np.zeros(((y1 - y0) * K, (x1 - x0) * K), np.uint8)
+    def L(q): return (int(round((q[0] - x0) * K)), int(round((q[1] - y0) * K)))
+    for P in polys: cv2.fillPoly(m, [np.array([L(q) for q in P], np.int32)], 255)
+    for a_, b_, ra, rb in tubes:
+        n = max(2, int(math.hypot(b_[0] - a_[0], b_[1] - a_[1]) / 1.0))
+        for k in range(n + 1):
+            u = k / n; cv2.circle(m, L((a_[0] + (b_[0] - a_[0]) * u, a_[1] + (b_[1] - a_[1]) * u)), max(1, int((ra + (rb - ra) * u) * K)), 255, -1)
+    for c, rx_, ry_ in ellipses: cv2.ellipse(m, L(c), (max(1, int(rx_ * K)), max(1, int(ry_ * K))), 0, 0, 360, 255, -1)
+    e2 = max(1, int(round(ep * K)))
+    anneau = cv2.dilate(m, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2 * e2 + 1, 2 * e2 + 1))) & ~m
+    yy, xx = np.mgrid[0:m.shape[0], 0:m.shape[1]]
+    for c, r in ouvert: anneau[((xx - (c[0] - x0) * K) ** 2 + (yy - (c[1] - y0) * K) ** 2) < (r * K) ** 2] = 0
+    z = img[y0:y1, x0:x1].astype(np.float32)
+    for mk, col in ((anneau, TRAIT), (m, coul)):
+        a = cv2.resize(mk, (x1 - x0, y1 - y0), interpolation=cv2.INTER_AREA).astype(np.float32)[..., None] / 255
+        z = z * (1 - a) + np.array(col, np.float32) * a
+    img[y0:y1, x0:x1] = np.clip(z, 0, 255).astype(np.uint8)
+    for pts, e_ in lignes: _trait(img, pts, e_)
+
+
+def _main(img, m, a, forme_, r, peau, ep, pouce=None):
+    """Main dessinée comme dans les vidéos de référence : paume, 4 doigts serrés séparés par de fins traits, pouce à part,
+    un seul contour. Formes : ouverte (main au repos), poing (poing, mains sur les hanches, bras croisés), index (doigt
+    pointé), paume (main levée, doigts écartés), pouce (pouce levé)."""
+    ux, uy = math.sin(a), math.cos(a)                                      # u : sens de l'avant-bras (vers le bout des doigts)
+    vx, vy = uy, -ux                                                       # v : côté du pouce
+    s_ = pouce if pouce is not None else SENS[0]
+    if vx * s_ < 0 or (abs(vx) < 0.2 and vy > 0): vx, vy = -vx, -vy
+    o = (m[0] - ux * r * 1.05, m[1] - uy * r * 1.05)                       # poignet
+    def P(v, u): return (o[0] + (vx * v + ux * u) * r, o[1] + (vy * v + uy * u) * r)
+    e1 = ep * 0.5; lig = []
+    if forme_ in ("poing", None) or forme_ not in ("ouverte", "index", "paume", "pouce"):
+        corps = lisse([P(-0.72, 0.0), P(-0.86, 0.75), P(-0.78, 1.45), P(-0.35, 1.78), P(0.25, 1.78), P(0.72, 1.45), P(0.82, 0.75), P(0.68, 0.0)])
+        lig = [([P(-0.62, 1.05), P(-0.66, 1.4), P(-0.5, 1.62)], e1), ([P(-0.2, 1.1), P(-0.22, 1.5), P(-0.1, 1.72)], e1), ([P(0.22, 1.1), P(0.22, 1.5), P(0.32, 1.68)], e1),
+               ([P(0.75, 0.55), P(0.35, 0.9), P(0.05, 1.0)], e1)]   # doigts repliés + pouce par-dessus
+        silhouette(img, [corps], coul=peau, ep=ep, ouvert=[(o, r * 0.55)], lignes=lig); return
+    if forme_ == "ouverte":                                                # main au repos : doigts serrés légèrement courbés, pouce le long
+        corps = lisse([P(-0.70, 0.0), P(-0.82, 0.8), P(-0.80, 1.6), P(-0.62, 2.15), P(-0.25, 2.38), P(0.15, 2.32), P(0.42, 1.95), P(0.50, 1.3), P(0.62, 0.0)])
+        pouce_ = [(P(0.55, 0.45), P(0.95, 1.05), r * 0.32, r * 0.24)]
+        lig = [([P(-0.42, 1.55), P(-0.45, 1.95), P(-0.4, 2.2)], e1), ([P(-0.05, 1.6), P(-0.06, 2.0), P(-0.03, 2.3)], e1), ([P(0.25, 1.55), P(0.25, 1.85), P(0.27, 2.08)], e1)]
+        silhouette(img, [corps], pouce_, coul=peau, ep=ep, ouvert=[(o, r * 0.55)], lignes=lig); return
+    if forme_ == "index":                                                  # poing + index tendu
+        corps = lisse([P(-0.72, 0.0), P(-0.86, 0.75), P(-0.75, 1.4), P(-0.3, 1.62), P(0.3, 1.6), P(0.7, 1.3), P(0.8, 0.7), P(0.68, 0.0)])
+        doigt = [(P(0.05, 1.3), P(0.05, 2.75), r * 0.24, r * 0.21)]
+        lig = [([P(-0.55, 1.0), P(-0.6, 1.3), P(-0.45, 1.5)], e1), ([P(-0.25, 1.05), P(-0.28, 1.35), P(-0.18, 1.55)], e1), ([P(0.72, 0.5), P(0.4, 0.85), P(0.25, 1.1)], e1)]
+        silhouette(img, [corps], doigt, coul=peau, ep=ep, ouvert=[(o, r * 0.55)], lignes=lig); return
+    if forme_ == "pouce":                                                  # poing + pouce levé
+        corps = lisse([P(-0.72, 0.0), P(-0.86, 0.75), P(-0.78, 1.45), P(-0.35, 1.72), P(0.25, 1.72), P(0.6, 1.4), P(0.68, 0.7), P(0.6, 0.0)])
+        pouce_ = [(P(0.55, 0.9), P(1.35, 1.05), r * 0.27, r * 0.22)]
+        lig = [([P(-0.6, 1.05), P(-0.62, 1.4), P(-0.48, 1.6)], e1), ([P(-0.2, 1.1), P(-0.2, 1.5), P(-0.1, 1.68)], e1), ([P(0.2, 1.1), P(0.2, 1.45), P(0.28, 1.62)], e1)]
+        silhouette(img, [corps], pouce_, coul=peau, ep=ep, ouvert=[(o, r * 0.55)], lignes=lig); return
+    # paume : main levée, doigts un peu écartés
+    paume = lisse([P(-0.75, 0.0), P(-0.85, 0.8), P(-0.7, 1.35), P(0.0, 1.45), P(0.7, 1.3), P(0.8, 0.6), P(0.65, 0.0)])
+    doigts = [(P(-0.62, 1.2), P(-0.85, 2.15), r * 0.21, r * 0.18), (P(-0.22, 1.3), P(-0.28, 2.45), r * 0.22, r * 0.19),
+              (P(0.18, 1.3), P(0.25, 2.4), r * 0.22, r * 0.19), (P(0.52, 1.15), P(0.72, 2.05), r * 0.2, r * 0.17), (P(0.7, 0.45), P(1.35, 0.95), r * 0.24, r * 0.2)]
+    lig = [([P(-0.4, 0.75), P(-0.05, 0.95), P(0.35, 0.8)], e1)]            # pli de la paume
+    silhouette(img, [paume], doigts, coul=peau, ep=ep, ouvert=[(o, r * 0.55)], lignes=lig)
 
 
 def _trait(img, pts, ep, coul=TRAIT, ferme=False):
@@ -500,34 +567,32 @@ def _manche(img, e, c, m, larg, coul, courte, peau, ep, forme_main, r_m, R):
 
 
 def jambe_pied(img, a, g, sol, f, R, peau, ep, sh):
-    """Jambe nue et pied d'un seul contour, d'après les vidéos de référence : cuisse, genou discret, mollet arrondi, cheville
-    large, talon rond, semelle plate posée au sol, dessus du pied en pente jusqu'au gros orteil, petits orteils en traits courbes.
-    a = hanche, g = genou, sol = point au sol sous la cheville, f = sens du pied (±1 de profil, ±0.55 tourné vers la caméra)."""
-    fs = 1 if f >= 0 else -1; kf = abs(f)                                  # kf < 1 : pied vu un peu de face (raccourci)
-    wa, wc, wk, wh = 0.46 * R, 0.56 * R, 0.52 * R, CUISSE * R              # largeurs : cheville, mollet, genou, cuisse
-    ha = 0.40 * R                                                          # hauteur de la cheville au-dessus du sol
-    cv_ = (sol[0], sol[1] - ha)                                            # centre de la cheville
-    def cote(p0, p1, w, s):                                                # point décalé perpendiculairement à la jambe, côté s (+1 = vers le pied)
-        dx, dy = p1[0] - p0[0], p1[1] - p0[1]; n = math.hypot(dx, dy) or 1; nx, ny = dy / n, -dx / n
-        if nx * fs < 0: nx, ny = -nx, -ny
-        return (p0[0] + nx * w / 2 * s, p0[1] + ny * w / 2 * s)
-    mol = (g[0] + (cv_[0] - g[0]) * 0.35, g[1] + (cv_[1] - g[1]) * 0.35)
-    L = R * (0.92 * kf + 0.35 * (1 - kf))                                   # longueur du pied devant la cheville
-    hp = R * (0.36 + 0.06 * (1 - kf))
-    arriere = [cote(a, g, wh, -1), cote(g, cv_, wk, -1), cote(mol, cv_, wc, -1), cote(cv_, g, wa, -1),
-               (sol[0] - fs * wa * 0.62, sol[1] - ha * 0.55), (sol[0] - fs * wa * 0.50, sol[1] - ha * 0.08)]      # mollet, cheville, talon
-    semelle = [(sol[0] - fs * wa * 0.15, sol[1]), (sol[0] + fs * L * 0.55, sol[1] + 0.01 * R), (sol[0] + fs * L * 0.90, sol[1] - 0.01 * R)]
-    bout = [(sol[0] + fs * L * 1.02, sol[1] - hp * 0.35), (sol[0] + fs * L * 0.95, sol[1] - hp * 0.80)]                 # gros orteil
-    cv2_ = (cv_[0] + (g[0] - cv_[0]) * 0.12, cv_[1] + (g[1] - cv_[1]) * 0.12)   # le dessus du pied remonte en douceur sur le tibia
-    dessus = [(sol[0] + fs * L * 0.60, sol[1] - hp * 1.05), (sol[0] + fs * L * 0.32, sol[1] - hp * 1.32), cote(cv2_, g, wa, 1),
-              cote(mol, g, wc * 0.94, 1), (g[0] + fs * wk * 0.52, g[1]), cote(a, g, wh, 1)]
-    chemin = lisse(arriere + semelle + bout + dessus, ferme=False, n=6)
-    forme_ = chemin + [cote(a, g, wh, -1)]
-    _poly(img, forme_, peau)
-    _poly(img, chemin, TRAIT, False, ep)
-    for k in range(3):                                                     # petits orteils : 3 courts traits courbes derrière le gros orteil
-        ox = sol[0] + fs * L * (0.80 - 0.10 * k); oy = sol[1] - hp * 0.05
-        _trait(img, [(ox, oy), (ox + fs * L * 0.06, oy - hp * 0.22), (ox + fs * L * 0.05, oy - hp * 0.42)], ep * 0.85)
+    """Jambe nue et pied nu d'un seul contour, copiés sur les vidéos de référence : mollet arrondi, cheville avec sa petite
+    bosse, talon rond, pied assez court vu de trois-quarts, gros orteil côté intérieur, petits orteils en bosses arrondies
+    séparés par de petits traits, ongle du gros orteil. f = sens des orteils (±1 de profil, ±0.55 tourné vers la caméra)."""
+    fs = 1 if f >= 0 else -1; kf = abs(f)
+    ha = 0.36 * R; cv_ = (sol[0], sol[1] - ha)                             # cheville
+    mol = (g[0] + (cv_[0] - g[0]) * 0.32, g[1] + (cv_[1] - g[1]) * 0.32)
+    tubes = [(a, g, CUISSE * R / 2, GENOU * R / 2), (g, mol, GENOU * R / 2, 0.28 * R), (mol, cv_, 0.28 * R, 0.185 * R)]
+    L = R * (0.95 * kf + 0.45 * (1 - kf)); hp = 0.30 * R                    # longueur du pied devant la cheville, hauteur
+    W = R * (0.30 + 0.16 * (1 - kf))                                       # demi-largeur du pied (plus large vu de face)
+    talon = (cv_[0] - fs * 0.10 * R * kf, sol[1] - 0.15 * R)
+    pied = lisse([(cv_[0] - fs * 0.20 * R, cv_[1] - 0.05 * R), (talon[0] - fs * 0.12 * R, talon[1]), (talon[0] - fs * 0.02 * R, sol[1]),
+                  (sol[0] + fs * L * 0.45, sol[1] + 0.02 * R), (sol[0] + fs * L * 0.70, sol[1] - 0.04 * R),
+                  (sol[0] + fs * L * 0.80, sol[1] - hp * 0.55), (sol[0] + fs * L * 0.42, sol[1] - hp * 0.98), (cv_[0] + fs * 0.20 * R, cv_[1] - 0.02 * R), (cv_[0] + fs * 0.17 * R, cv_[1] - 0.24 * R), (cv_[0] - fs * 0.05 * R, cv_[1] - 0.2 * R)], n=5)
+    # orteils : le gros (côté intérieur, devant), puis 4 petits qui s'étagent vers l'extérieur et la caméra
+    go = (sol[0] + fs * (L * 0.80 + 0.04 * R), sol[1] - 0.13 * R)
+    oe = [(go, 0.15 * R, 0.125 * R)]
+    for k in range(4):                                                     # petits orteils : bosses rondes qui dépassent du bord du pied
+        rk = 0.095 * R * (1 - 0.08 * k)
+        oe.append(((go[0] - fs * (0.15 + 0.115 * k) * R * (0.5 + 0.5 * kf) + fs * 0.05 * R * (1 - kf), sol[1] - rk * 0.95), rk, rk))
+    lig = []
+    for (c, rx_, ry_), (c2, rx2, _) in zip(oe[:-1], oe[1:]):              # traits entre les orteils, qui remontent un peu dans le pied
+        mx = c2[0] + fs * rx2 * 0.85
+        lig.append(([(mx, sol[1] - 0.01 * R), (mx - fs * 0.01 * R, sol[1] - rx2 * 0.8), (mx - fs * 0.03 * R, sol[1] - rx2 * 1.25)], ep * 0.7))
+    lig.append(([(go[0] + fs * 0.03 * R, go[1] - 0.06 * R), (go[0] + fs * 0.11 * R, go[1] - 0.02 * R)], ep * 0.6))   # ongle
+    lig.append(([(cv_[0] - fs * 0.06 * R, cv_[1] - 0.04 * R), (cv_[0] - fs * 0.11 * R, cv_[1] + 0.06 * R)], ep * 0.6))   # bosse de la cheville
+    silhouette(img, [pied], tubes, oe, coul=peau, ep=ep, ouvert=[(a, CUISSE * R * 0.55)], lignes=lig)
 
 
 def avant_bras(img, c, m, larg, coul, courte, peau, ep, forme_main, r_m):
@@ -627,6 +692,7 @@ def dessiner(img, P, p):
     lum = p.get("lumiere", 0) or -1; sh = -1 if lum > 0 else 1
     tq = float(np.clip(p.get("tq", 0.0), -1, 1)); d = 1 if tq > 0 else (-1 if tq < 0 else (1 if (p.get("regard") or (0, 0))[0] >= 0 else -1))
     k34 = min(1.0, abs(tq) / 0.5) if abs(tq) > 0.05 else 0.0
+    SENS[0] = d
     dos = bool(p.get("dos"))
     haut = C.get("haut") or "tshirt"; c_haut = tuple(C.get("c_haut") or (90, 140, 200)); c_haut_o = _fonce(c_haut, 0.88)
     bas = C.get("bas") or "jean"; c_bas = tuple(C.get("c_bas") or (60, 80, 130)); c_bas_o = _fonce(c_bas, 0.90)
@@ -651,6 +717,7 @@ def dessiner(img, P, p):
     bras = K["bras"]; formes = (p.get("main_forme_g") or "ouverte", p.get("main_forme_d") or "ouverte") if p.get("mains") else ("ouverte", "ouverte")
     loin_i = 1 if d > 0 else 0
     larg_b = MANCHE * R
+    if K.get("croise", 0) > 0.5: formes = ("ouverte", "ouverte")          # bras croisés : mains à plat sur les biceps (référence)
     def bras_k(i, coul_m): e_, c_, m_ = bras[i]; _manche(img, e_, c_, m_, larg_b, coul_m, courte, peau, ep, formes[i], r_m, R)
     def devant(i):                                                         # main devant le buste (ou croisée de l'autre côté)
         m_ = bras[i][2]; sg_ = -1 if i == 0 else 1
@@ -681,8 +748,8 @@ def dessiner(img, P, p):
         else:
             nu = (C.get("chaussures") or "baskets") in ("pieds_nus", "aucune")
             if nu:                                                         # jambe et pied nu d'un seul trait (vidéos de référence)
-                f_ = d if (sg == d or not k34) else -d * 0.55              # un pied de profil vers où il regarde, l'autre tourné vers la caméra
-                if not k34: f_ = sg * 0.55
+                f_ = d * (0.9 if loin_j else 0.55)                         # les deux pieds vers où il regarde ; le plus proche tourné vers la caméra
+                if not k34: f_ = sg * 0.45
                 jambe_pied(img, a, g, (b[0], b[1] + 0.12 * R), f_, R, peau, ep, sh)
                 continue
             mol = (g[0] + (b[0] - g[0]) * 0.32, g[1] + (b[1] - g[1]) * 0.32); cu = ((a[0] + g[0]) / 2, (a[1] + g[1]) / 2)

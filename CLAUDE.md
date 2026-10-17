@@ -24,7 +24,10 @@
   **Plus de style marionnette** : bras et jambes d'un seul contour (`toon.membre` : biceps, coude, mollet, cheville), sans boule aux
   articulations, manche qui sort du sweat sans trait, pli intérieur du coude, genou et mollet ; main sur le visage / téléphone : l'avant-bras passe devant la tête.
   Jambes nues et pieds nus d'un seul contour (`toon.jambe_pied`, d'après les vidéos) : cheville large, talon rond, semelle plate,
-  dessus du pied en pente jusqu'au gros orteil, 3 petits orteils en traits courbes ; un pied de profil, l'autre tourné vers la caméra.
+  pied plus court, talon rond, cheville fine avec sa bosse, dessus du pied qui descend en douceur, gros orteil + 4 petits
+  orteils en bosses qui dépassent du bord, séparés par de petits traits ; les deux pieds vers où il regarde.
+  Mains (`toon._main`, un seul contour via `toon.silhouette`) : au repos (doigts serrés + pouce), poing, index, paume, pouce ;
+  bras croisés = mains à plat sur les biceps.
   Casting libre (personnages différents à chaque vidéo).
 - **Le maximum de détails partout** : tenues, coiffures, barbes, chapeaux, accessoires, expressions du visage, décors.
 - Tout l'univers visuel (lieu, tenues, plans, émotions) se construit autour de l'audio TikTok (paroles, intonations, émotions,
