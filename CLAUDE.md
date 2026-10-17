@@ -18,6 +18,9 @@
   NORMALE dans le visage (petite moue fermée ; ouverte quand il parle : dents en grille, langue), corps élancé (sweat ample à
   capuche et cordons, short long, jambes blanches, grands pieds nus à orteils), trait noir fin et régulier, ombre douce grise
   sur la tête. Gestes naturels des vidéos : bras croisés, mains sur les hanches, main au menton, téléphone, main sur la bouche.
+  Coiffures redessinées sur la tête en œuf (queue de cheval haute + mèche le long du visage, cheveux longs/carré, courts en calotte,
+  dreads qui encadrent le visage même sous la casquette, afro, chignon), oreille côté nuque, plis du sweat, jupe droite, lèvres
+  rouges épaisses pour le maquillage. Méthode : toujours comparer côte à côte avec les images des vidéos de référence.
   Casting libre (personnages différents à chaque vidéo).
 - **Le maximum de détails partout** : tenues, coiffures, barbes, chapeaux, accessoires, expressions du visage, décors.
 - Tout l'univers visuel (lieu, tenues, plans, émotions) se construit autour de l'audio TikTok (paroles, intonations, émotions,
