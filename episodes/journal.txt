@@ -1,77 +1,66 @@
 Casting déjà fait.
 Type de vidéo : sketch long (+1 min)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, ElevenLabs epuise — IA utilisée : mistral
-Vidéo depuis TikTok : https://www.tiktok.com/@eliotlehanneur/video/7671249958967840022?_r=1&_t=ZN-9ATSfV4hJ6E
+Vidéo depuis TikTok : https://www.tiktok.com/@same_same53/video/7697560465672588577
   son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 90.8 s, compte d'origine @eliotlehanneur
-[ WARN:0@5.796] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
-  image de la vidéo : 31 plans (≈ 2.94 s chacun) ; cadrages : très serré 97 %, serré 0 %, moyen 0 %, large 2 % ; caméra : fixe 89 %, avance 2 %, recul 3 %, travelling 0 %, epaule 4 % ; 1 personne(s) à l'écran : centre (habit [96, 63, 60], cheveux [91, 56, 38], sourit 0 %); droite (habit [97, 64, 60], cheveux [95, 54, 30], sourit 0 %) ; agitation 0.404 ; lumière soir ; fond [64, 72, 78]
+  son récupéré : 63.2 s, compte d'origine @same_same53
+[ WARN:0@5.825] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  image de la vidéo : 1 plans (≈ 63.5 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 33 %, large 66 % ; caméra : fixe 100 % ; 1 personne(s) à l'écran : centre (habit [0, 0, 0], cheveux [42, 42, 42], sourit 0 %) ; agitation 0.19 ; lumière jour ; fond [0, 0, 0]
   isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
   transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-  voix trop proches : répliques réparties d'après le fil du dialogue (questions, réponses)
-  27 répliques, voix : {'speaker_0': 126, 'speaker_1': 105}
-  son de la vidéo : 2 voix [126 Hz (h, 39 %), 105 Hz (h, 61 %)], 4.58 mots/s, blancs 1.2 s, 4 coupure(s) de parole, dynamique 16.6 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
-  scène reconstituée : Un grand frère fan absolu d'animés prend un air mystique et dramatique quand son petit frère commence Naruto et insulte Itachi.
-  casting : speaker_0 → Kévin, speaker_1 → Jojo
-  Claude a réattribué 5 réplique(s) à la bonne personne (voix proches)
-Sketch : « QUAND LE PETIT FRÈRE VOIT NARU », 27 répliques
-  décor 0 : Teen bedroom with anime posters, neon signs, white shelves and a desk 
-montage : 63 plans (0.0:tres_serre>inv/coupe 3.5:large>inv/glisse 8.5:tres_serre>pre/file 10.0:moyen>pre/glisse 12.0:contre_plongee>inv/file 14.5:moyen>inv/glisse 15.0:tres_serre>pre/file 15.9:moyen>inv/coupe 16.7:serre>inv/glisse 18.0:large>inv/glisse 18.5:tres_serre>pre/file 19.4:tres_serre>inv/glisse 20.6:large>inv/glisse 21.7:tres_serre>pre/coupe 22.9:serre>inv/coupe 24.4:moyen>inv/glisse 25.1:serre>pre/glisse 26.4:serre>inv/coupe 27.3:tres_serre>inv/glisse 28.7:tres_serre>pre/glisse 30.4:moyen>pre/zoom 31.9:tres_serre>pre/zoom 33.5:moyen>pre/zoom 34.7:serre>inv/glisse 35.2:tres_serre>pre/file 36.7:moyen>pre/glisse 38.2:tres_serre>pre/glisse 39.9:tres_serre>inv/coupe 40.9:moyen>pre/coupe 41.5:tres_serre>pre/glisse 43.0:moyen>pre/glisse 46.0:serre>inv/coupe 47.0:tres_serre>pre/glisse 48.4:moyen>pre/zoom 49.9:serre>pre/glisse 52.0:large>pre/glisse 53.6:tres_serre>inv/glisse 54.2:large>inv/glisse 55.3:tres_serre>pre/file 56.5:tres_serre>inv/coupe 57.3:tres_serre>pre/coupe 58.4:large>pre/glisse 59.9:tres_serre>pre/glisse 60.5:large>pre/glisse 61.0:serre>pre/glisse 62.9:plongee>pre/glisse 65.0:large>pre/glisse 68.7:tres_serre>pre/zoom 70.0:tres_serre>inv/coupe 70.5:large>pre/coupe 72.5:tres_serre>pre/glisse 73.5:serre>inv/coupe 74.0:tres_serre>inv/glisse 75.0:moyen>pre/coupe 75.5:tres_serre>pre/glisse 78.0:tres_serre>inv/coupe 79.0:moyen>pre/coupe 79.8:moyen>inv/glisse 83.0:tres_serre>inv/glisse 84.0:tres_serre>pre/glisse 85.0:moyen>inv/coupe 88.7:serre>nar/glisse 89.5:large>nar/glisse)
-studio : soir, lieux ['chambre'], tenues invite=tshirt, presentateur=pull, 0 figurant(s), ambiances ['neige', 'neon', 'poussiere'] ; plans tres_serre/fixe tres_serre/fixe contre_plongee/epaule serre/recul tres_serre/fixe tres_serre/avance serre/recul serre/fixe tres_serre/travelling tres_serre/travelling tres_serre/fixe serre/recul tres_serre/travelling tres_serre/travelling tres_serre/fixe tres_serre/recul serre/recul tres_serre/recul tres_serre/avance tres_serre/avance tres_serre/recul plongee/avance tres_serre/recul tres_serre/fixe tres_serre/avance moyen/recul serre/avance
-cartoon : durée 94.3 s, 27 répliques, 1 scène(s), personnages ['invite', 'presentateur']
-Contrôle image : 46 défaut(s) — 3.75 s tete_coupee (presentateur), 10.75 s tete_coupee (invite), 11.25 s tete_coupee (invite), 11.75 s tete_coupee (invite), 14.75 s tete_coupee (presentateur), 16.25 s tete_coupee (presentateur), 24.75 s tete_coupee (presentateur), 25.25 s tete_coupee (presentateur)
-  image 0/5659 (4 processeurs)
-  image 300/5659
-  image 600/5659
-  image 900/5659
-  image 1200/5659
-  image 1500/5659
-  image 1800/5659
-  image 2100/5659
-  image 2400/5659
-  image 2700/5659
-  image 3000/5659
-  image 3300/5659
-  image 3600/5659
-  image 3900/5659
-  image 4200/5659
-  image 4500/5659
-  image 4800/5659
-  image 5100/5659
-  image 5400/5659
+  voix re-séparées par leur empreinte (ECAPA) : 2 voix (netteté 0.16)
+  20 répliques, voix : {'speaker_0': 272, 'speaker_1': 132}
+  son de la vidéo : 2 voix [272 Hz (f, 32 %), 132 Hz (h, 68 %)], 4.21 mots/s, blancs 0.79 s, 4 coupure(s) de parole, dynamique 23.2 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
+  scène reconstituée : Un couple discute dans le salon d'un dilemme financier absurde : frapperait-il sa copine au visage pour un million d'euros ? Il répond sans aucune hésitation avec un enthousiasme terrifiant.
+  casting : speaker_0 → Lila, speaker_1 → Jojo
+Sketch : « FRAPPER POUR UN MILLION », 20 répliques
+  décor 0 : modern bright living room with minimalist white walls, grey sofa, pott
+montage : 50 plans (0.0:moyen>env/coupe 1.4:epaule>env/glisse 3.3:large>env/glisse 5.0:large>pre/coupe 6.0:epaule>env/glisse 7.5:large>env/glisse 9.2:epaule>env/glisse 10.4:large>env/glisse 11.1:moyen>pre/coupe 12.3:epaule>pre/glisse 13.8:serre>pre/glisse 15.4:moyen>pre/glisse 16.6:tres_serre>pre/glisse 17.1:tres_serre>env/file 18.0:epaule>pre/glisse 18.6:tres_serre>env/file 19.3:tres_serre>pre/file 20.5:serre>pre/glisse 21.5:large>pre/glisse 22.7:tres_serre>pre/glisse 23.9:moyen>pre/glisse 25.8:serre>pre/glisse 26.6:serre>env/coupe 27.6:moyen>pre/coupe 28.3:tres_serre>pre/glisse 29.7:moyen>pre/glisse 31.6:epaule>env/glisse 32.6:moyen>pre/file 34.0:tres_serre>pre/glisse 35.4:tres_serre>env/coupe 36.6:large>pre/coupe 38.3:moyen>pre/glisse 39.4:large>env/glisse 40.8:serre>pre/coupe 42.0:large>pre/glisse 43.7:serre>pre/glisse 45.1:serre>env/coupe 45.9:moyen>pre/coupe 46.6:tres_serre>pre/glisse 48.4:moyen>pre/glisse 50.0:large>env/coupe 51.0:serre>pre/coupe 52.3:large>env/coupe 53.9:serre>pre/glisse 55.0:large>pre/glisse 56.9:tres_serre>env/coupe 57.7:moyen>pre/coupe 59.1:tres_serre>env/glisse 59.9:moyen>pre/coupe 60.8:serre>env/glisse)
+studio : jour, lieux ['salon'], tenues envoyee=debardeur, presentateur=tshirt, 0 figurant(s), ambiances ['poussiere'] ; plans moyen/fixe large/travelling epaule/fixe epaule/fixe moyen/fixe serre/fixe moyen/travelling tres_serre/zoom_choc epaule/fixe tres_serre/zoom_choc large/avance moyen/travelling epaule/fixe moyen/fixe moyen/recul large/travelling serre/zoom_choc large/fixe serre/fixe serre/avance
+cartoon : durée 65.6 s, 20 répliques, 1 scène(s), personnages ['envoyee', 'presentateur']
+Contrôle image : 37 défaut(s) — 0.25 s tete_coupee (presentateur), 0.75 s tete_coupee (presentateur), 1.25 s tete_coupee (presentateur), 11.25 s tete_coupee (envoyee), 11.75 s tete_coupee (envoyee), 12.25 s tete_coupee (envoyee), 15.75 s tete_coupee (envoyee), 16.25 s tete_coupee (envoyee)
+  image 0/3934 (4 processeurs)
+  image 300/3934
+  image 600/3934
+  image 900/3934
+  image 1200/3934
+  image 1500/3934
+  image 1800/3934
+  image 2100/3934
+  image 2400/3934
+  image 2700/3934
+  image 3000/3934
+  image 3300/3934
+  image 3600/3934
+  image 3900/3934
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury qualité (ia) : 4.8/10 — Humoriste 5.0/10 : 14.1 s Manque d'impact comique sur la réplique Game of Thrones.; 58.7 s Intensité dramatique sous-exploitée sur la mention de Tenten. | Réalisateur 5.0/10 : 33.3 s Cadrage trop statique et bras coupés lors du monologue.; 58.7 s Mauvais cadrage en bord d'écran au lieu d'un champ-contrechamp net.; 3.8 s tête de presentateur coupée par le bord de l'image (large); 10.8 s tête de invite coupée par le bord de l'image (moyen); 14.8 s tête de presentateur coupée par le bord de l'image (moyen) | Directeur artistique 5.0/10 : 11 s Faute d'orthographe sur Itachi écrit avec un H dans le sous-titre.; 24.9 s Personnages trop similaires morphologiquement par rapport aux deux frères originaux. | Ingénieur du son 4.0/10 : 14.1 s Absence totale de bruitages pour ponctuer les répliques clés.; 80.2 s Sortie trop silencieuse sans effet sonore de chute ou de pas. | Spectateur TikTok 5.0/10 
-Manque par rapport à la vidéo d'origine : Jeu d'acteur expressif et regards latéraux intenses de l'original absents du toon. ; Alternance stricte champ/contrechamp face caméra sur fond d'étagère de chambre.
-Corrections du jury (tour 1) : plan serre sur la réplique 1 ; plan serre sur la réplique 2 ; plan serre sur la réplique 3
-montage : 58 plans (0.0:serre>inv/coupe 8.5:serre>pre/file 12.0:serre>inv/file 16.7:moyen>inv/glisse 18.0:epaule>inv/glisse 18.5:moyen>inv/glisse 19.4:tres_serre>inv/glisse 20.6:large>inv/glisse 21.7:tres_serre>pre/coupe 22.9:serre>inv/coupe 24.4:moyen>inv/glisse 25.1:serre>pre/glisse 26.4:serre>inv/coupe 27.3:tres_serre>inv/glisse 28.7:tres_serre>pre/glisse 30.4:moyen>pre/zoom 31.9:tres_serre>pre/zoom 33.5:moyen>pre/zoom 34.7:serre>inv/glisse 35.2:tres_serre>pre/file 36.7:moyen>pre/glisse 38.2:tres_serre>pre/glisse 39.9:tres_serre>inv/coupe 40.9:moyen>pre/coupe 41.5:tres_serre>pre/glisse 43.0:moyen>pre/glisse 46.0:serre>inv/coupe 47.0:tres_serre>pre/glisse 48.4:moyen>pre/zoom 49.9:serre>pre/glisse 52.0:large>pre/glisse 53.6:tres_serre>inv/glisse 54.2:large>inv/glisse 55.3:tres_serre>pre/file 56.5:tres_serre>inv/coupe 57.3:tres_serre>pre/coupe 58.4:large>pre/glisse 59.9:tres_serre>pre/glisse 60.5:large>pre/glisse 61.0:serre>pre/glisse 62.9:plongee>pre/glisse 65.0:large>pre/glisse 68.7:tres_serre>pre/zoom 70.0:tres_serre>inv/coupe 70.5:large>pre/coupe 72.5:tres_serre>pre/glisse 73.5:serre>inv/coupe 74.0:tres_serre>inv/glisse 75.0:moyen>pre/coupe 75.5:tres_serre>pre/glisse 78.0:tres_serre>inv/coupe 79.0:moyen>pre/coupe 79.8:moyen>inv/glisse 83.0:tres_serre>inv/glisse 84.0:tres_serre>pre/glisse 85.0:moyen>inv/coupe 88.7:serre>nar/glisse 89.5:large>nar/glisse)
-studio : soir, lieux ['chambre'], tenues invite=tshirt, presentateur=pull, 0 figurant(s), ambiances ['neige', 'neon', 'poussiere'] ; plans tres_serre/fixe tres_serre/fixe contre_plongee/epaule serre/recul tres_serre/fixe tres_serre/avance serre/recul serre/fixe tres_serre/travelling tres_serre/travelling tres_serre/fixe serre/recul tres_serre/travelling tres_serre/travelling tres_serre/fixe tres_serre/recul serre/recul tres_serre/recul tres_serre/avance tres_serre/avance tres_serre/recul plongee/avance tres_serre/recul tres_serre/fixe tres_serre/avance moyen/recul serre/avance
-cartoon : durée 94.3 s, 27 répliques, 1 scène(s), personnages ['invite', 'presentateur']
-Contrôle image : 44 défaut(s) — 17.25 s tete_coupee (presentateur), 17.75 s tete_coupee (presentateur), 18.75 s tete_coupee (presentateur), 19.25 s tete_coupee (presentateur), 24.75 s tete_coupee (presentateur), 25.25 s tete_coupee (presentateur), 30.75 s tete_coupee (invite), 31.25 s tete_coupee (invite)
-  image 0/5659 (4 processeurs)
-  image 300/5659
-  image 600/5659
-  image 900/5659
-  image 1200/5659
-  image 1500/5659
-  image 1800/5659
-  image 2100/5659
-  image 2400/5659
-  image 2700/5659
-  image 3000/5659
-  image 3300/5659
-  image 3600/5659
-  image 3900/5659
-  image 4200/5659
-  image 4500/5659
-  image 4800/5659
-  image 5100/5659
-  image 5400/5659
+  IA gemini indisponible (The read operation timed out) : on passe à la suivante
+Jury qualité (gratuit) : 7.9/10 — Humoriste 8.6/10 : 60.8 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 2.0/10 : 0.2 s tête de presentateur coupée par le bord de l'image (moyen); 11.2 s tête de envoyee coupée par le bord de l'image (moyen); 15.8 s tête de envoyee coupée par le bord de l'image (moyen) | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.1/10 : 6.1 s sous-titres trop rapides à lire
+Corrections du jury (tour 1) : plan tres_serre sur la réplique 20 ; plan serre sur la réplique 1 ; plan serre sur la réplique 5 ; plan serre sur la réplique 6
+montage : 46 plans (0.0:serre>env/coupe 5.0:large>pre/coupe 6.0:epaule>env/glisse 7.5:large>env/glisse 9.2:epaule>env/glisse 10.4:large>env/glisse 11.1:serre>pre/coupe 13.8:moyen>pre/glisse 16.6:tres_serre>pre/glisse 17.1:tres_serre>env/file 18.0:epaule>pre/glisse 18.6:tres_serre>env/file 19.3:tres_serre>pre/file 20.5:serre>pre/glisse 21.5:large>pre/glisse 22.7:tres_serre>pre/glisse 23.9:moyen>pre/glisse 25.8:serre>pre/glisse 26.6:serre>env/coupe 27.6:moyen>pre/coupe 28.3:tres_serre>pre/glisse 29.7:moyen>pre/glisse 31.6:epaule>env/glisse 32.6:moyen>pre/file 34.0:tres_serre>pre/glisse 35.4:tres_serre>env/coupe 36.6:large>pre/coupe 38.3:moyen>pre/glisse 39.4:large>env/glisse 40.8:serre>pre/coupe 42.0:large>pre/glisse 43.7:serre>pre/glisse 45.1:serre>env/coupe 45.9:moyen>pre/coupe 46.6:tres_serre>pre/glisse 48.4:moyen>pre/glisse 50.0:large>env/coupe 51.0:serre>pre/coupe 52.3:large>env/coupe 53.9:serre>pre/glisse 55.0:large>pre/glisse 56.9:tres_serre>env/coupe 57.7:moyen>pre/coupe 59.1:tres_serre>env/glisse 59.9:moyen>pre/coupe 60.8:tres_serre>env/glisse)
+studio : jour, lieux ['salon'], tenues envoyee=debardeur, presentateur=tshirt, 0 figurant(s), ambiances ['poussiere'] ; plans moyen/fixe large/travelling epaule/fixe epaule/fixe moyen/fixe serre/fixe moyen/travelling tres_serre/zoom_choc epaule/fixe tres_serre/zoom_choc large/avance moyen/travelling epaule/fixe moyen/fixe moyen/recul large/travelling serre/zoom_choc large/fixe serre/fixe serre/avance
+cartoon : durée 65.6 s, 20 répliques, 1 scène(s), personnages ['envoyee', 'presentateur']
+Contrôle image : 34 défaut(s) — 14.25 s tete_coupee (envoyee), 14.75 s tete_coupee (envoyee), 15.25 s tete_coupee (envoyee), 15.75 s tete_coupee (envoyee), 16.25 s tete_coupee (envoyee), 17.25 s tete_coupee (envoyee), 18.25 s tete_coupee (presentateur), 18.75 s tete_coupee (envoyee)
+  image 0/3934 (4 processeurs)
+  image 300/3934
+  image 600/3934
+  image 900/3934
+  image 1200/3934
+  image 1500/3934
+  image 1800/3934
+  image 2100/3934
+  image 2400/3934
+  image 2700/3934
+  image 3000/3934
+  image 3300/3934
+  image 3600/3934
+  image 3900/3934
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury qualité (ia) : 5.4/10 — Humoriste 5.5/10 : 14.1 s Manque d'impact comique sur la réplique culte.; 60 s La rupture comique sur Tenten manque d'exagération. | Réalisateur 5.0/10 : 22 s Alternance champ/contre-champ trop lente comparée au rythme TikTok.; 58.7 s Personnage mal cadré et coupé sur le bord gauche de l'écran.; 17.2 s tête de presentateur coupée par le bord de l'image (moyen); 24.8 s tête de presentateur coupée par le bord de l'image (moyen); 25.2 s tête de presentateur coupée par le bord de l'image (serre) | Directeur artistique 5.5/10 : 0.4 s Textes incohérents et déformés sur les affiches du mur en arrière-plan. | Ingénieur du son 5.0/10 : 65 s Absence totale de bruitages pour ponctuer le ton dramatique parodique. | Spectateur TikTok 6.0/10 : 0.4 s Accroche visuelle initiale un peu trop statique.
-Manque par rapport à la vidéo d'origine : Cadrages serrés dynamiques et expressifs absents sur les répliques clés. ; Jeu de regard intense et dramatique de l'acteur original non retranscrit.
-Version corrigée gardée : 4.8 → 5.4/10
+Jury qualité (ia) : 6.0/10 — Humoriste 6.0/10 : 17.6 s Manque un impact comique sur la surprise de l'envoyée. | Réalisateur 5.0/10 : 5.4 s Le plan est un peu trop large au moment où le présentateur réagit.; 17.6 s Le plan de réaction de l'envoyée manque d'intensité visuelle.; 14.2 s tête de envoyee coupée par le bord de l'image (moyen); 17.2 s tête de envoyee coupée par le bord de l'image (tres_serre); 18.2 s tête de presentateur coupée par le bord de l'image (epaule) | Directeur artistique 7.0/10 : 0.4 s Le présentateur est en t-shirt noir au lieu d'un costume-cravate comme dans l'original. | Ingénieur du son 6.0/10 : 38.9 s Absence de bruitage percutant sur la mention du high kick. | Spectateur TikTok 6.0/10 : 1.7 s Le début est un peu plat par rapport au concept original en POV épuré.
+Manque par rapport à la vidéo d'origine : Le style visuel minimaliste sur fond blanc uni de la vidéo d'origine. ; Le costume cravate du présentateur.
+La version corrigée n'est pas meilleure : on garde la première.
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = gemini ×3, voix = tiktok, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 28937, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 27}
-OK : sortie/2026-10-17_16h26_emission.mp4 (94 s)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = gemini ×2, mistral ×1, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 27483, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 19}
+OK : sortie/2026-10-17_18h26_emission.mp4 (66 s)
