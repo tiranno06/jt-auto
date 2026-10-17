@@ -1,83 +1,74 @@
 {
- "date": "2026-10-10",
- "sources": "elevenlabs,kyutai,chatterbox",
+ "date": "2026-10-17",
+ "sources": "kyutai,chatterbox",
  "roles": {
   "presentateur": [
    {
-    "moteur": "elevenlabs",
-    "voix": "IPgYtHTNLjC7Bq7IPHrm",
-    "nom": "Alexandre Boutin - Professional",
+    "moteur": "kyutai",
+    "voix": "cml-tts/fr/1406_1028_000009-0003_enhanced.wav",
     "genre": "h",
-    "f0": 149,
-    "score": 7.36
+    "f0": 101,
+    "score": 7.49
    },
    {
-    "moteur": "elevenlabs",
-    "voix": "5Qfm4RqcAer0xoyWtoHC",
-    "nom": "Maxime - Young and Casual",
+    "moteur": "kyutai",
+    "voix": "cml-tts/fr/2216_1745_000007-0001_enhanced.wav",
     "genre": "h",
-    "f0": 166,
-    "score": 7.31
+    "f0": 125,
+    "score": 7.44
    },
    {
-    "moteur": "elevenlabs",
-    "voix": "NyxenPOqNyllHIzSoPbJ",
-    "nom": "Theo - Warm and Young",
+    "moteur": "kyutai",
+    "voix": "cml-tts/fr/296_1028_000022-0001_enhanced.wav",
     "genre": "h",
-    "f0": 124,
-    "score": 7.29
+    "f0": 150,
+    "score": 7.41
    }
   ],
   "invite": [
    {
-    "moteur": "elevenlabs",
-    "voix": "NyxenPOqNyllHIzSoPbJ",
-    "nom": "Theo - Warm and Young",
+    "moteur": "kyutai",
+    "voix": "cml-tts/fr/2216_1745_000007-0001_enhanced.wav",
     "genre": "h",
-    "f0": 124,
-    "score": 7.29
+    "f0": 125,
+    "score": 7.44
    },
    {
-    "moteur": "elevenlabs",
-    "voix": "5Qfm4RqcAer0xoyWtoHC",
-    "nom": "Maxime - Young and Casual",
+    "moteur": "kyutai",
+    "voix": "cml-tts/fr/296_1028_000022-0001_enhanced.wav",
     "genre": "h",
-    "f0": 166,
-    "score": 7.31
+    "f0": 150,
+    "score": 7.41
    },
    {
-    "moteur": "elevenlabs",
-    "voix": "93nuHbke4dTER9x2pDwE",
-    "nom": "Adam - warm and friendly",
+    "moteur": "kyutai",
+    "voix": "cml-tts/fr/1770_1028_000036-0002_enhanced.wav",
     "genre": "h",
-    "f0": 141,
-    "score": 7.26
+    "f0": 134,
+    "score": 7.36
    }
   ],
   "envoyee": [
    {
-    "moteur": "elevenlabs",
-    "voix": "F1toM6PcP54s45kOOAyV",
-    "nom": "Koraly - Expressive and Engaging",
+    "moteur": "kyutai",
+    "voix": "cml-tts/fr/2154_2576_000020-0003_enhanced.wav",
     "genre": "f",
-    "f0": 217,
-    "score": 7.38
+    "f0": 206,
+    "score": 7.48
    },
    {
-    "moteur": "elevenlabs",
-    "voix": "FvmvwvObRqIHojkEGh5N",
-    "nom": "Adina - Young, Welcoming and Joyful",
+    "moteur": "kyutai",
+    "voix": "cml-tts/fr/3267_1902_000075-0001_enhanced.wav",
     "genre": "f",
-    "f0": 248,
-    "score": 7.33
+    "f0": 259,
+    "score": 7.3
    },
    {
-    "moteur": "elevenlabs",
-    "voix": "d3AXX0BlgJHYFCuH9X88",
-    "nom": "Emilie - Podcast Host",
+    "moteur": "kyutai",
+    "voix": "cml-tts/fr/10087_11650_000028-0002_enhanced.wav",
     "genre": "f",
-    "f0": 197,
-    "score": 7.29
+    "f0": 232,
+    "score": 7.21
    }
   ]
  }
