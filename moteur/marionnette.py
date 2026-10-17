@@ -47,7 +47,7 @@ HAUTS = ("tshirt", "chemise", "blouse", "costume", "capuche", "survetement", "ta
 MOTIFS = ("uni", "rayures", "carreaux", "pois") + GR.MOTIFS
 BAS = ("jean", "pantalon", "jogging", "short", "jupe")
 CHAUSSURES = ("baskets", "ville", "ballerines", "bottes", "chaussons")
-DETAILS = ("cravate", "noeud_pap", "badge", "stethoscope", "stylos", "montre", "logo", "lunettes_vue", "moustache", "barbe", "collier", "echarpe",
+DETAILS = ("cravate", "noeud_pap", "badge", "stethoscope", "stylos", "montre", "logo", "lunettes_vue", "lunettes_soleil", "moustache", "barbe", "collier", "echarpe",
            "ceinture", "boucles_oreilles", "taches_rousseur", "bracelet", "sac_bandouliere", "casque_audio", "bretelles", "rouge_levres") + GR.BARBES
 CHAPEAUX = GR.CHAPEAUX                                                     # couvre-chef de l'épisode (costume["chapeau"], couleur c_chapeau)
 COIFFURES = ("carre", "long", "queue", "chignon", "boucles", "court", "meches", "nuque", "couronne", "aucune") + GR.COIFFURES   # coiffure de l'épisode (costume["cheveux"])
@@ -203,6 +203,7 @@ def _jointures(img, m, forme, r, s):
         for k in (-1, 1): _arc(img, (m[0] + k * r * 0.35, m[1] + r * 0.05), (r * 0.32, r * 0.25), 0, 200, 340, TRAIT, 3 * s)
 
 # ------------------------------------------------------------------ dessin
+JAMBES_ADULTE = 1.0                                                      # longueur des jambes des adultes (1.4 : style « toon » élancé)
 ASSIS_BAISSE = 50                                                          # adulte assis : le buste descend de 95 × échelle
 ADULTE_TETE = 0.9                                                          # version adulte : grosse tête ronde posée sur le col
 
@@ -223,7 +224,8 @@ def squelette(p):
     x = p["x"] + hanche * 9 * s + (math.sin(p["t"] * 61) * 9 * p["tremble"] if p.get("tremble") else 0); pieds = p["y"]
     epaules = float(p.get("epaules", 0.0)); penche = float(p.get("penche", 0.0))
     if A:
-        corps_h = 150 * s * sy * 1.6; corps_w = 92 * s * sx * 1.12; cy_corps = pieds - 235 * s * sy - corps_h * 0.35 + (ASSIS_BAISSE * s if p.get("assis") else 0)
+        corps_h = 150 * s * sy * 1.6; corps_w = 92 * s * sx * 1.12
+        cy_corps = pieds - 235 * s * sy * JAMBES_ADULTE - corps_h * 0.35 + ((ASSIS_BAISSE * s + 235 * s * sy * (JAMBES_ADULTE - 1)) if p.get("assis") else 0)
         Rt = 150 * s * ADULTE_TETE; cou = 0.86
     else:
         corps_h = 150 * s * sy; corps_w = 92 * s * sx; cy_corps = pieds - 38 * s - corps_h / 2; Rt = 150 * s; cou = 0.78
