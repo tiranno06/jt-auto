@@ -120,7 +120,7 @@ OEUF_X = 0.86                                                              # tê
 # positions dessinées (unités R) : (coude, main) par bras, chacun (u, v, repère) ; repère "corps" : u vers l'extérieur du bras depuis
 # le milieu du buste, v sous la ligne des épaules ; repère "tete" : u vers où il regarde depuis le centre de la tête, v vers le bas
 CIBLES = {
-    "croises": (((LARG_EP + 0.10, 0.82, "corps"), (-0.88, 0.62, "corps")), ((LARG_EP + 0.10, 0.82, "corps"), (-0.88, 0.80, "corps"))),
+    "croises": (((LARG_EP + 0.10, 0.82, "corps"), (-0.62, 0.60, "corps")), ((LARG_EP + 0.10, 0.82, "corps"), (-0.62, 0.78, "corps"))),
     "mains_hanches": (((LARG_EP + 0.50, 0.78, "corps"), (LARG_B + 0.02, 1.42, "corps")), ((LARG_EP + 0.50, 0.78, "corps"), (LARG_B + 0.02, 1.42, "corps"))),
     "facepalm": (None, ((LARG_EP + 0.1, 1.15, "corps"), (0.25, 0.30, "tete"))),
     "menton": (((LARG_EP + 0.05, 1.0, "corps"), (-0.62, 1.12, "corps")), ((LARG_EP - 0.05, 1.2, "corps"), (0.45, 0.95, "tete"))),
@@ -170,7 +170,7 @@ def squelette(p):
             c = (c[0] + (c2[0] - c[0]) * w, c[1] + (c2[1] - c[1]) * w); m = (m[0] + (m2[0] - m[0]) * w, m[1] + (m2[1] - m[1]) * w)
         out.append((e, c, m))
     bras = out; K["croise"] = croise
-    K.update(bras=bras, x=x, cy_corps=ty + (COU + OURLET) / 2 * R, corps_h=(OURLET - COU) * R, corps_w=LARG_B * R, r_m=0.22 * R, membre=MANCHE * R)
+    K.update(bras=bras, x=x, cy_corps=ty + (COU + OURLET) / 2 * R, corps_h=(OURLET - COU) * R, corps_w=LARG_B * R, r_m=0.24 * R, membre=MANCHE * R)
     return K
 
 
@@ -258,7 +258,9 @@ def _bouche(img, cx, cy, rxe, R, d, k34, p, ep, tilt):
             _ligne(img, (xk, cy + my - h * 0.36), (xk, cy + my - h * 0.36 + h * 0.34), TRAIT, ep * 0.5)
         _ligne(img, T(m0 - w2 * 0.9, my - h * 0.02), T(m0 + w2 * 0.9, my - h * 0.02), TRAIT, ep * 0.45)
     if h > R * 0.15: _ellipse(img, T(m0 + d * w2 * 0.05, my + h * 0.38), (w2 * 0.5, h * 0.18), 0, (220, 85, 100))   # langue
-    if p.get("rouge"): _poly(img, out, tuple(p["rouge"]), True, ep * 1.5)
+    if p.get("rouge"):                                                     # lèvres maquillées : bourrelet rouge brillant (référence)
+        _poly(img, out, TRAIT, True, ep * 4.6); _poly(img, out, tuple(p["rouge"]), True, ep * 3.0)
+        _ligne(img, T(m0 - w2 * 0.2, my - h * 0.5), T(m0 + w2 * 0.25, my - h * 0.5), _clair(tuple(p["rouge"]), 0.5), ep * 0.8)
     _poly(img, out, TRAIT, True, ep)
 
 
@@ -314,6 +316,106 @@ def barbe(img, ov, t, rxe, R, d, k34, det, cb, tilt):
     if "moustache" in det:
         _poly(img, lisse([T(mx - w * 1.05, R * 0.47), T(mx, R * 0.36), T(mx + w * 1.0, R * 0.47), T(mx, R * 0.44)]), tuple(cb))
     # bouc : petite ombre de poils sur le menton seulement (jamais de tache)
+
+
+# ------------------------------------------------------------------ coiffures (dessinées sur la tête en œuf, de face ou de trois-quarts)
+COURTS = ("court", "court_texture", "rase", "degarni", "nuque", "herisse", "raie", "banane", "frange")
+LONGS = {"long": 2.1, "carre": 1.0, "ondule": 1.9, "boucles": 1.5, "anglaises": 1.8, "meches": 1.2, "mi_long": 1.3, "tresses": 1.9}
+
+
+def _bord(T, d, rxe, R, phi, k=1.05):
+    """Point sur le pourtour de la tête : phi en degrés, 0 = côté du visage, -90 = sommet, -180 = nuque (vers le bas : > 0)."""
+    a = math.radians(phi); return T(d * rxe * k * math.cos(a), R * k * math.sin(a))
+
+
+def oreille(img, t, rxe, R, d, tilt, peau, ep):
+    """Oreille du côté de la nuque (trois-quarts), comme dans les vidéos de référence."""
+    cx, cy = t
+    def T(u, w): return M._rot(cx + u, cy + w, cx, cy, math.radians(tilt))
+    o = lisse([T(-d * rxe * 0.50, -R * 0.08), T(-d * rxe * 0.66, -R * 0.14), T(-d * rxe * 0.74, R * 0.05), T(-d * rxe * 0.64, R * 0.26), T(-d * rxe * 0.50, R * 0.24)])
+    forme(img, o, peau, ep)
+    _trait(img, [T(-d * rxe * 0.56, -R * 0.02), T(-d * rxe * 0.66, R * 0.04), T(-d * rxe * 0.58, R * 0.16)], ep * 0.8)
+
+
+def coiffure_arriere(img, t, rxe, R, d, k34, style, col, ep, tilt):
+    """Masse de cheveux derrière la tête (cheveux longs, queue, chignon, tresses, afro) : dessinée avant la tête."""
+    cx, cy = t; b = -d if k34 >= 0.15 else 0
+    def T(u, w): return M._rot(cx + u, cy + w, cx, cy, math.radians(tilt))
+    fo = _fonce(col, 0.72)
+    if style in LONGS and style != "tresses":
+        L = LONGS[style]
+        if b:
+            pts = [T(d * rxe * 0.3, -R * 1.02), T(b * rxe * 0.6, -R * 1.05), T(b * rxe * 1.18, -R * 0.55), T(b * rxe * 1.25, R * 0.3),
+                   T(b * rxe * 1.2, R * L), T(b * rxe * 0.55, R * (L + 0.12)), T(-b * rxe * 0.1, R * (L - 0.1)), T(0, R * 0.4)]
+        else:
+            pts = [T(-rxe * 1.12, -R * 0.5), T(0, -R * 1.12), T(rxe * 1.12, -R * 0.5), T(rxe * 1.22, R * L), T(rxe * 0.5, R * (L + 0.1)),
+                   T(-rxe * 0.5, R * (L + 0.1)), T(-rxe * 1.22, R * L)]
+        pts = lisse(pts); forme(img, pts, col, ep)
+        for k in range(3):                                                 # mèches (traits plus foncés)
+            u0 = (b or 1) * rxe * (0.7 + 0.18 * k)
+            _trait(img, [T(u0 * 0.8, -R * 0.2), T(u0 * 1.05, R * 0.4), T(u0, R * (L - 0.15))], ep * 0.7, fo)
+            if not b: _trait(img, [T(-u0 * 0.8, -R * 0.2), T(-u0 * 1.05, R * 0.4), T(-u0, R * (L - 0.15))], ep * 0.7, fo)
+    elif style == "queue":                                                 # queue de cheval haute (référence)
+        bb = b or 1
+        q = lisse([T(bb * rxe * 0.55, -R * 0.95), T(bb * rxe * 1.25, -R * 0.75), T(bb * rxe * 1.45, -R * 0.1), T(bb * rxe * 1.3, R * 0.75),
+                   T(bb * rxe * 1.05, R * 1.1), T(bb * rxe * 1.0, R * 0.4), T(bb * rxe * 0.85, -R * 0.4)])
+        forme(img, q, col, ep)
+        for k in range(3): _trait(img, [T(bb * rxe * (1.0 + 0.1 * k), -R * 0.6), T(bb * rxe * (1.25 + 0.05 * k), R * 0.1), T(bb * rxe * (1.12 + 0.04 * k), R * 0.8)], ep * 0.7, fo)
+    elif style == "chignon":
+        bb = b or 0; c = T(bb * rxe * 0.75, -R * 0.95) if bb else T(0, -R * 1.18)
+        _ellipse(img, c, (R * 0.38 + ep, R * 0.34 + ep), 0, TRAIT); _ellipse(img, c, (R * 0.38, R * 0.34), 0, col)
+        _arc(img, c, (R * 0.24, R * 0.2), 0, 200, 340, fo, ep * 0.8)
+    elif style == "afro":
+        c = T((b or 0) * rxe * 0.25, -R * 0.35); n = 22
+        pts = [(c[0] + math.cos(2 * math.pi * k / n) * R * (1.32 + 0.07 * (k % 2)), c[1] + math.sin(2 * math.pi * k / n) * R * (1.22 + 0.07 * (k % 2))) for k in range(n)]
+        forme(img, lisse(pts), col, ep)
+    elif style == "tresses":                                               # dreadlocks qui pendent des deux côtés du visage (référence)
+        cotes = [(b, 4), (-b, 3)] if b else [(-1, 4), (1, 4)]
+        for sgn, n in cotes:
+            for j in range(n):
+                u0 = sgn * rxe * (0.55 + 0.17 * j) if sgn == b or not b else sgn * rxe * (0.70 + 0.16 * j)
+                a_ = T(u0, -R * (0.45 - 0.05 * j)); z_ = T(u0 * (1.12 + 0.03 * j), R * (1.15 + 0.22 * (j % 3)))
+                _tube(img, a_, z_, R * 0.13 + 2 * ep, R * 0.11 + 2 * ep, TRAIT); _tube(img, a_, z_, R * 0.13, R * 0.11, col)
+                for s_ in (0.35, 0.6, 0.85):
+                    q = (a_[0] + (z_[0] - a_[0]) * s_, a_[1] + (z_[1] - a_[1]) * s_)
+                    _ligne(img, (q[0] - R * 0.05, q[1]), (q[0] + R * 0.05, q[1] + R * 0.03), _clair(col, 0.25), ep * 0.6)
+
+def coiffure_avant(img, t, rxe, R, d, k34, style, col, ep, tilt, chapeau=False):
+    """Calotte de cheveux sur la tête (ligne du front, nuque, frange, mèche le long du visage)."""
+    if not style or style == "aucune": return
+    if style == "tresses" and chapeau: return                              # dreads sous la casquette : on ne voit que les mèches qui pendent
+    cx, cy = t; b = k34 >= 0.15; dd = d if b else 1
+    def T(u, w): return M._rot(cx + u, cy + w, cx, cy, math.radians(tilt))
+    fo = _fonce(col, 0.70)
+    if style == "rase": col = _clair(col, 0.45)
+    if style == "couronne" or style == "degarni":                         # crâne dégarni : cheveux autour de la nuque seulement
+        if b: pts = [_bord(T, dd, rxe, R, phi, 1.05) for phi in range(-128, -206, -6)] + [T(-dd * rxe * 0.66, R * 0.28), T(-dd * rxe * 0.62, -R * 0.15), T(-dd * rxe * 0.5, -R * 0.55)]
+        else: pts = [T(-rxe * 1.05, -R * 0.45), T(-rxe * 1.06, R * 0.15), T(-rxe * 0.88, R * 0.1), T(-rxe * 0.9, -R * 0.4)]
+        forme(img, lisse(pts), col, ep)
+        if not b: forme(img, lisse([(2 * cx - q[0], q[1]) for q in pts]), col, ep)
+        return
+    if b:                                                                  # trois-quarts : du front (côté visage) à la nuque
+        haut = [_bord(T, dd, rxe, R, phi, 1.05) for phi in range(-38, -196, -8)]
+        ligne = [T(-dd * rxe * 0.66, R * 0.12), T(-dd * rxe * 0.48, -R * 0.22), T(-dd * rxe * 0.12, -R * 0.50), T(dd * rxe * 0.30, -R * 0.58), T(dd * rxe * 0.62, -R * 0.62)]
+        if style in LONGS or style in ("queue", "chignon", "frange", "banane"):   # frange balayée vers le visage
+            ligne = [T(-dd * rxe * 0.66, R * 0.12), T(-dd * rxe * 0.5, -R * 0.15), T(-dd * rxe * 0.15, -R * 0.38), T(dd * rxe * 0.35, -R * 0.30), T(dd * rxe * 0.75, -R * 0.42)]
+    else:                                                                  # de face : symétrique, raie ou frange
+        haut = [_bord(T, 1, rxe, R, phi, 1.05) for phi in range(-8, -176, -8)]
+        bas_f = -R * (0.30 if style in LONGS or style in ("frange", "queue", "chignon") else 0.52)
+        ligne = [T(-rxe * 1.0, R * 0.05), T(-rxe * 0.75, -R * 0.40), T(-rxe * 0.3, bas_f), T(rxe * 0.25, bas_f - R * 0.05), T(rxe * 0.75, -R * 0.42), T(rxe * 1.0, R * 0.05)]
+    pts = lisse(haut + ligne, ferme=True, n=4); forme(img, pts, col, ep)
+    if style != "rase":                                                    # mèches dessinées
+        for k in range(4):
+            u = (dd if b else 1) * rxe * (-0.5 + 0.32 * k)
+            _trait(img, [T(u * 0.6, -R * 0.98), T(u * 0.9, -R * 0.78), T(u + (dd if b else 1) * rxe * 0.12, -R * 0.55)], ep * 0.65, fo)
+    if style == "herisse":
+        for k in range(6):
+            u = (dd if b else 1) * rxe * (-0.7 + 0.28 * k); base = T(u, -R * 0.98)
+            _poly(img, [T(u - rxe * 0.12, -R * 0.9), T(u + rxe * 0.04, -R * 1.32), T(u + rxe * 0.14, -R * 0.9)], col); _poly(img, [T(u - rxe * 0.12, -R * 0.9), T(u + rxe * 0.04, -R * 1.32), T(u + rxe * 0.14, -R * 0.9)], TRAIT, False, ep)
+    if b and style in LONGS and style != "tresses" and not chapeau:       # mèche le long du visage, côté visage (référence)
+        m = lisse([T(dd * rxe * 0.60, -R * 0.55), T(dd * rxe * 0.98, -R * 0.35), T(dd * rxe * 1.04, R * 0.35), T(dd * rxe * 0.92, R * min(1.0, LONGS[style] * 0.5)),
+                   T(dd * rxe * 0.82, R * 0.3), T(dd * rxe * 0.78, -R * 0.25)])
+        forme(img, m, col, ep); _trait(img, [T(dd * rxe * 0.85, -R * 0.3), T(dd * rxe * 0.92, R * 0.4)], ep * 0.6, fo)
 
 
 # ------------------------------------------------------------------ corps
@@ -452,7 +554,10 @@ def dessiner(img, P, p):
     _ellipse(img, (x - lum * 0.2 * R, pieds + 0.04 * R), (1.25 * R, 0.17 * R), 0,
              tuple(p["couleur_ombre"]) if p.get("couleur_ombre") is not None else tuple(int(c * 0.80) for c in M._fond(img, x, pieds + 4 * s)))
     rxe = R * OEUF_X * (1.0 - 0.05 * k34)
-    if P.get("cheveux") and P["cheveux"][0] in M.CHEVEUX_ARRIERE and p.get("coiffure", True): M._cheveux_arriere(img, tete, rxe * 1.05, R, st, p, P)
+    tilt = float(p.get("tilt", 0.0)) + d * 4 * k34
+    style_ch, col_ch = (P["cheveux"][0], tuple(P["cheveux"][1])) if P.get("cheveux") and p.get("coiffure", True) else (None, None)
+    if style_ch and not dos and style_ch != "tresses": coiffure_arriere(img, tete, rxe, R, d, k34, style_ch, col_ch, ep, tilt)
+    elif style_ch: coiffure_arriere(img, tete, rxe, R, 1, 0.0, style_ch, col_ch, ep, tilt)
 
     bras = K["bras"]; formes = (p.get("main_forme_g") or "ouverte", p.get("main_forme_d") or "ouverte") if p.get("mains") else ("ouverte", "ouverte")
     loin_i = 1 if d > 0 else 0
@@ -506,14 +611,15 @@ def dessiner(img, P, p):
             _ligne(img, (q0[0], q0[1] - 0.10 * R), (q1[0], q1[1] - 0.10 * R), TRAIT, ep * 0.8)
             ext = (a[0] + sg * 0.44 * R, a[1] - 0.2 * R); ext2 = (gx + sg * 0.56 * R, y_bas)   # bande sur le côté
             _ligne(img, (ext[0] - sg * 0.1 * R, ext[1] + 0.3 * R), (ext2[0] - sg * 0.1 * R, ext2[1] - 0.14 * R), _clair(cj, 0.35), ep * 0.9)
+            _trait(img, [(ent[0] + sg * 0.05 * R, ent[1] + 0.05 * R), (ent[0] + sg * 0.22 * R, ent[1] + 0.32 * R)], ep * 0.7, _fonce(cj, 0.62))   # pli de l'entrejambe
             _poly(img, pts, TRAIT, True, ep)
         ceinture = [tourne(x - 0.78 * R, y_hanche - 0.32 * R), tourne(x + 0.78 * R, y_hanche - 0.32 * R), tourne(x + 0.78 * R, y_hanche + 0.05 * R), tourne(x - 0.78 * R, y_hanche + 0.05 * R)]
         forme(img, ceinture, c_bas, ep)
         cx_ = x + d * 0.22 * R * k34                                       # cordon du short
         for sg in (-1, 1): _trait(img, [(cx_, y_ourlet + 0.04 * R), (cx_ + sg * 0.12 * R, y_ourlet + 0.25 * R), (cx_ + sg * 0.08 * R, y_ourlet + 0.55 * R)], ep * 1.6, _fonce(c_bas, 0.75))
     if robe:
-        jy = ty + 5.0 * R
-        jupe = [tourne(x - 0.95 * R, y_hanche - 0.4 * R), tourne(x + 0.95 * R, y_hanche - 0.4 * R), tourne(x + 1.3 * R, jy), tourne(x - 1.3 * R, jy)]
+        jy = ty + (4.85 if bas == "jupe" else 5.0) * R; ev = 0.98 if bas == "jupe" else 1.25
+        jupe = [tourne(x - 0.84 * R, y_hanche - 0.4 * R), tourne(x + 0.84 * R, y_hanche - 0.4 * R), tourne(x + ev * R, jy), tourne(x - ev * R, jy)]
         cj = c_haut if haut in ("robe", "tunique") else c_bas
         forme(img, jupe, cj, ep); ombre_cel(img, jupe, sh, 0.3 * R, _fonce(cj, 0.82)); _poly(img, jupe, TRAIT, True, ep)
         for k in (-1, 0, 1): _ligne(img, tourne(x + k * 0.4 * R, y_hanche), tourne(x + k * 0.62 * R, jy - 0.1 * R), _fonce(cj, 0.78), ep * 0.7)
@@ -534,13 +640,20 @@ def dessiner(img, P, p):
     degrade(img, pts_b, (x - sh * 0.3 * R, y_cou + 0.5 * R), R * 2.6, _fonce(c_haut, 0.72), 0.45, 0.5)   # volume doux du sweat
     _poly(img, pts_b, TRAIT, True, ep)
     fx = x + d * 0.25 * R * k34                                            # milieu du vêtement (tourné)
+    if haut not in ("costume", "chemise", "robe") and not dos:            # plis du tissu : sous les bras et au-dessus du bord-côte
+        pli = _fonce(c_haut, 0.62)
+        for sg in (-1, 1):
+            _trait(img, [tourne(x + sg * 0.70 * R, y_ep + 0.40 * R), tourne(x + sg * 0.60 * R, y_ep + 0.62 * R), tourne(x + sg * 0.48 * R, y_ep + 0.78 * R)], ep * 0.75, pli)
+            _trait(img, [tourne(x + sg * 0.74 * R, y_ourlet - 0.75 * R), tourne(x + sg * 0.62 * R, y_ourlet - 0.55 * R)], ep * 0.7, pli)
+        for k in range(-2, 3):
+            _trait(img, [tourne(x + k * 0.3 * R, y_ourlet - 0.36 * R), tourne(x + k * 0.3 * R + 0.04 * R, y_ourlet - 0.48 * R)], ep * 0.6, pli)
     for sg in (-1, 1):                                                     # coutures raglan (du col à l'aisselle)
         if haut in ("capuche", "pull", "survetement", "sweat"):
             _trait(img, [tourne(x + sg * 0.55 * R, y_cou + 0.08 * R), tourne(x + sg * 0.78 * R, y_ep + 0.3 * R), tourne(x + sg * 0.86 * R, y_ep + 0.75 * R)], ep * 0.8)
     if haut in ("capuche", "pull", "col_roule", "survetement", "doudoune", "gilet", "sweat"):   # bord-côte en bas
         bc = [tourne(x - LARG_B * 0.95 * R, y_ourlet - 0.30 * R), tourne(x + LARG_B * 0.95 * R, y_ourlet - 0.30 * R), tourne(x + LARG_B * 0.9 * R, y_ourlet), tourne(x - LARG_B * 0.9 * R, y_ourlet)]
         forme(img, bc, c_haut, ep)
-    if haut == "capuche":                                                  # poche kangourou
+    if haut == "capuche" and C.get("poche"):                               # poche kangourou (sur demande seulement)
         _trait(img, [tourne(x - 0.55 * R, y_ourlet - 0.4 * R), tourne(x - 0.45 * R, y_ourlet - 0.9 * R), tourne(x + 0.45 * R, y_ourlet - 0.9 * R), tourne(x + 0.55 * R, y_ourlet - 0.4 * R)], ep * 0.8, _fonce(c_haut, 0.6))
     if haut in ("chemise", "polo", "pyjama"):
         for sg in (-1, 1): forme(img, [(fx, y_cou + 0.22 * R), (fx + sg * 0.42 * R, y_cou - 0.02 * R), (fx + sg * 0.36 * R, y_cou + 0.3 * R)], _clair(c_haut, 0.15), ep * 0.8)
@@ -565,8 +678,8 @@ def dessiner(img, P, p):
     if "collier" in det: _arc(img, (fx, y_cou + 0.1 * R), (0.36 * R, 0.26 * R), 0, 10, 170, (240, 200, 80), ep)
     if "ceinture" in det: _ligne(img, tourne(x - 0.97 * R, y_ourlet - 0.08 * R), tourne(x + 0.97 * R, y_ourlet - 0.08 * R), (60, 40, 30), 0.1 * R)
     if hood:                                                               # col de la capuche autour du cou + cordons à embouts
-        col_ = lisse([(fx - 0.72 * R, y_cou + 0.02 * R), (fx - 0.4 * R, y_cou - 0.12 * R), (fx + 0.4 * R, y_cou - 0.12 * R), (fx + 0.72 * R, y_cou + 0.02 * R),
-                      (fx + 0.45 * R, y_cou + 0.34 * R), (fx, y_cou + 0.42 * R), (fx - 0.45 * R, y_cou + 0.34 * R)])
+        col_ = lisse([(fx - 0.62 * R, y_cou + 0.04 * R), (fx - 0.35 * R, y_cou - 0.06 * R), (fx + 0.35 * R, y_cou - 0.06 * R), (fx + 0.62 * R, y_cou + 0.04 * R),
+                      (fx + 0.40 * R, y_cou + 0.26 * R), (fx, y_cou + 0.32 * R), (fx - 0.40 * R, y_cou + 0.26 * R)])
         forme(img, col_, c_haut, ep)
         for xc in (fx - 0.24 * R, fx + 0.18 * R):
             _trait(img, [(xc, y_cou + 0.32 * R), (xc - 0.02 * R, y_cou + 0.8 * R), (xc, y_cou + 1.25 * R)], ep * 2.6)
@@ -586,7 +699,7 @@ def dessiner(img, P, p):
             _ellipse(img, w_, (0.12 * R, 0.08 * R), 0, TRAIT); _ellipse(img, w_, (0.08 * R, 0.055 * R), 0, (240, 200, 80))
 
     # --- tête en œuf
-    tilt = float(p.get("tilt", 0.0)) + d * 4 * k34
+    if style_ch == "tresses" and not dos: coiffure_arriere(img, tete, rxe, R, d, k34, style_ch, col_ch, ep, tilt)   # dreads devant les épaules
     ov = oeuf(tete[0], tete[1], rxe, R, tilt, d=d if k34 >= 0.15 else 0)
     _poly(img, ov, TRAIT, True, ep * 2.2); _poly(img, ov, peau)
     b_ = -d if k34 else sh                                                 # ombre douce du côté du dos (croissant gris)
@@ -601,7 +714,9 @@ def dessiner(img, P, p):
             M._details_tete(img, (tete[0] + d * rxe * 0.3 * k34, tete[1]), rxe, R, st, p, dict(C, details=tuple(x_ for x_ in det if x_ not in BARBES_T + ("lunettes_vue", "lunettes_soleil"))))
             if garde is not None:
                 x0_, y0_, x1_, y1_ = roi_t; m_ = _masque(ov, roi_t) > 127; z_ = img[y0_:y1_, x0_:x1_]; z_[~m_] = garde[~m_]
-    if P.get("cheveux") and p.get("coiffure", True) and C.get("chapeau") not in ("bonnet", "casquette"): M._cheveux_avant(img, tete, rxe * 1.04, R, st, p, P, dos)
+    if not dos and k34 >= 0.15 and style_ch not in LONGS: oreille(img, tete, rxe, R, d, tilt, peau, ep)
+    if style_ch: coiffure_avant(img, tete, rxe, R, d, k34, style_ch, col_ch, ep, tilt, chapeau=bool(C.get("chapeau")))
+    elif not dos and k34 >= 0.15: pass
     if P.get("accessoire") and P["accessoire"] != "lunettes": M._accessoire(img, tete, rxe, R, st, p, P)
     if C.get("chapeau") == "bonnet": bonnet(img, tete, rxe, R, tilt, tuple(C.get("c_chapeau") or (190, 150, 70)), ep)
     elif C.get("chapeau") == "casquette": casquette(img, tete, rxe, R, tilt, tuple(C.get("c_chapeau") or (40, 60, 140)), ep, d if k34 else 0)
