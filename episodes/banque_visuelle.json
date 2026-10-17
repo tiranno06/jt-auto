@@ -1511,18 +1511,18 @@
  },
  {
   "date": "2026-10-17",
-  "source": "https://www.tiktok.com/@same_same53/video/7697181664186830112?_r=1&_t=ZN-9AcnNhfc3uw",
+  "source": "https://www.tiktok.com/@same_same53/video/7697560465672588577?_r=1&_t=ZN-9Ad3ocZh9eg",
   "auteur": "same_same53",
   "visuel": {
-   "duree": 72.5,
+   "duree": 63.5,
    "nb_plans": 1,
-   "duree_plan": 72.5,
+   "duree_plan": 63.5,
    "coupes": [],
    "plans": {
     "tres_serre": 0.0,
     "serre": 0.0,
-    "moyen": 0.317,
-    "large": 0.683
+    "moyen": 0.331,
+    "large": 0.669
    },
    "camera": {
     "fixe": 1.0,
@@ -1534,45 +1534,27 @@
    "nb_personnes": 1,
    "personnes": [
     {
-     "place": "gauche",
-     "presence": 0.221,
-     "habit": [
-      1,
-      1,
-      1
-     ],
-     "cheveux": [
-      251,
-      251,
-      251
-     ],
-     "sourire": 0.0,
-     "taille": 0.122,
-     "tete_penchee": 0.7,
-     "regard_cote": 0.0
-    },
-    {
      "place": "centre",
-     "presence": 0.097,
+     "presence": 0.331,
      "habit": [
-      1,
-      1,
-      1
+      0,
+      0,
+      0
      ],
      "cheveux": [
-      251,
-      251,
-      251
+      42,
+      42,
+      42
      ],
      "sourire": 0.0,
-     "taille": 0.127,
-     "tete_penchee": 0.2,
-     "regard_cote": 0.0
+     "taille": 0.136,
+     "tete_penchee": 1.1,
+     "regard_cote": 0.357
     }
    ],
    "visages": true,
    "sourires": 0.0,
-   "energie": 0.013,
+   "energie": 0.19,
    "mur": [
     0,
     0,
@@ -1583,66 +1565,66 @@
      0,
      0,
      0,
-     0.596
+     0.589
     ],
     [
-     251,
-     251,
-     251,
-     0.224
+     253,
+     253,
+     253,
+     0.371
     ],
     [
-     162,
-     162,
-     162,
-     0.128
+     42,
+     41,
+     42,
+     0.02
     ],
     [
-     82,
-     82,
-     82,
-     0.026
+     77,
+     77,
+     77,
+     0.008
     ],
     [
-     221,
-     221,
-     221,
-     0.013
+     249,
+     1,
+     160,
+     0.006
     ],
     [
-     39,
-     39,
-     39,
-     0.012
+     171,
+     171,
+     171,
+     0.005
     ]
    ],
    "lumiere": {
-    "luminosite": 83.0,
-    "chaleur": 0.1,
-    "saturation": 0.2
+    "luminosite": 98.6,
+    "chaleur": 0.6,
+    "saturation": 1.9
    },
    "moment": "jour"
   },
   "audio": {
-   "duree": 72.1,
+   "duree": 63.2,
    "nb_voix": 2,
    "voix": [
     {
-     "hz": 266,
-     "genre": "f",
-     "part": 0.2
+     "hz": 134,
+     "genre": "h",
+     "part": 0.72
     },
     {
-     "hz": 133,
-     "genre": "h",
-     "part": 0.8
+     "hz": 272,
+     "genre": "f",
+     "part": 0.28
     }
    ],
-   "debit": 4.13,
-   "blanc_moyen": 0.53,
+   "debit": 4.12,
+   "blanc_moyen": 0.72,
    "coupes": 2,
-   "dynamique_db": 21.2,
-   "cris": 0.001,
+   "dynamique_db": 23.2,
+   "cris": 0.014,
    "musique": null,
    "impacts": 0,
    "impacts_10s": 0.0,
@@ -1651,138 +1633,142 @@
    "sur_vanne": 0,
    "evenements": {},
    "emotions": {
-    "confident": 1,
-    "joyful": 1,
-    "philosophical": 1,
-    "passionate": 1,
-    "excited": 1,
-    "enthusiastic": 1,
-    "triumphant": 1,
-    "agreeing": 1
+    "sceptique": 3,
+    "fier": 3,
+    "rire": 3,
+    "blase": 3,
+    "choc": 2,
+    "neutre": 2,
+    "reflechit": 1,
+    "explique": 1
    }
   },
   "claude": {
    "lieux": [
-    "rue"
+    "salon"
    ],
    "moment": "jour",
    "costumes": {
-    "presentateur": {
-     "haut": "chemise",
-     "c_haut": "blanc",
+    "envoyee": {
+     "haut": "debardeur",
+     "c_haut": "rose",
      "motif": "uni",
      "bas": "pantalon",
-     "chaussures": "ville",
+     "chaussures": "ballerines",
+     "cheveux": "long",
+     "c_cheveux": "noir",
      "details": [
-      "cravate"
-     ],
-     "cheveux": "court",
-     "c_cheveux": "brun"
+      "rouge_levres"
+     ]
     },
-    "envoyee": {
+    "presentateur": {
      "haut": "tshirt",
-     "c_haut": "rose",
+     "c_haut": "noir",
      "motif": "uni",
      "bas": "jean",
      "chaussures": "baskets",
-     "details": [
-      "boucles_oreilles"
-     ],
-     "cheveux": "queue",
-     "c_cheveux": "chatain"
+     "cheveux": "court",
+     "c_cheveux": "brun",
+     "barbe": "trois_jours"
     }
    },
-   "gags": [
-    "Désodorisant auto parfum Chantilly",
-    "Compteur de vitesse bloqué à 20 km/h"
+   "objets": [
+    {
+     "replique": 0,
+     "objet": "cafe"
+    },
+    {
+     "objet": "billet",
+     "replique": 10
+    }
    ],
-   "ambiances": [],
+   "gags": [
+    "Affiche: Championnat de boxe de couple 2024",
+    "Tasse: Meilleur copain de l'année (ou pas)"
+   ],
+   "ambiances": [
+    "neon"
+   ],
    "plans": [
     {
      "plan": "moyen",
+     "geste": "croises",
      "replique": 0,
-     "geste": "explique",
-     "reaction": "regard_camera",
-     "mouvement": "fixe"
-    },
-    {
-     "plan": "large",
-     "replique": 3,
-     "reaction": "sceptique",
      "mouvement": "fixe",
-     "geste": "bras_ouverts"
+     "reaction": "sceptique"
     },
     {
-     "replique": 6,
-     "plan": "serre",
-     "mouvement": "avance",
-     "geste": "pouce",
-     "reaction": "rire"
-    },
-    {
-     "geste": "desespoir",
-     "mouvement": "zoom_choc",
      "reaction": "choc",
-     "replique": 11,
-     "plan": "tres_serre"
+     "plan": "serre",
+     "geste": "poing",
+     "replique": 5,
+     "mouvement": "zoom_choc"
     },
     {
-     "plan": "moyen",
+     "reaction": "blase",
+     "geste": "mains_hanches",
+     "replique": 10,
+     "plan": "tres_serre",
+     "mouvement": "avance"
+    },
+    {
      "mouvement": "fixe",
-     "reaction": "yeux_au_ciel",
-     "replique": 16,
-     "geste": "stop"
+     "plan": "serre",
+     "reaction": "soupir",
+     "geste": "facepalm",
+     "replique": 12
     },
     {
-     "geste": "supplie",
-     "reaction": "facepalm",
-     "mouvement": "recule",
-     "plan": "moyen",
-     "replique": 19
+     "reaction": "regard_camera",
+     "replique": 20,
+     "mouvement": "vertige",
+     "plan": "serre",
+     "geste": "desespoir"
     }
    ]
   },
   "realisation": {
    "moment": "jour",
    "lieux": [
-    "rue"
+    "salon"
    ],
    "gags": [
-    "Désodorisant auto parfum Chantilly",
-    "Compteur de vitesse bloqué à 20 km/h"
+    "Affiche: Championnat de boxe de couple 2024",
+    "Tasse: Meilleur copain de l'année (ou pas)"
    ],
-   "ambiances": [],
+   "ambiances": [
+    "neon"
+   ],
    "source": "auteur+image",
    "tenues": {
-    "presentateur": "chemise",
-    "envoyee": "tshirt"
+    "envoyee": "debardeur",
+    "presentateur": "tshirt"
    },
    "plans": [
     "moyen/fixe",
-    "large/avance",
-    "large/travelling",
-    "large/fixe",
-    "large/fixe",
     "epaule/fixe",
-    "serre/avance",
-    "large/travelling",
     "moyen/fixe",
+    "moyen/fixe",
+    "moyen/avance",
+    "serre/zoom_choc",
+    "epaule/fixe",
+    "epaule/fixe",
+    "epaule/fixe",
+    "contre_plongee/epaule",
+    "tres_serre/avance",
+    "moyen/recul",
+    "serre/fixe",
+    "epaule/fixe",
+    "moyen/avance",
+    "plongee/avance",
+    "moyen/recul",
     "moyen/avance",
     "epaule/fixe",
-    "tres_serre/zoom_choc",
-    "large/fixe",
-    "moyen/fixe",
-    "moyen/avance",
-    "moyen/travelling",
-    "moyen/fixe",
-    "moyen/avance",
-    "large/recul",
-    "moyen/recul",
-    "moyen/recul",
-    "large/travelling",
+    "epaule/fixe",
+    "serre/vertige",
     "serre/avance"
    ]
   },
-  "video": "2026-10-17_13h08_emission.mp4"
+  "video": "2026-10-17_13h25_emission.mp4"
  }
 ]

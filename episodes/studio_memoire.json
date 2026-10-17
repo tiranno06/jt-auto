@@ -874,32 +874,36 @@
  {
   "moment": "jour",
   "lieux": [
-   "rue"
+   "salon"
   ],
   "source": "auteur+image",
-  "duree": 75.4,
+  "duree": 66.5,
   "plans": {
-   "moyen": 10,
-   "large": 8,
-   "epaule": 2,
-   "serre": 2,
-   "tres_serre": 1
+   "moyen": 8,
+   "epaule": 7,
+   "serre": 4,
+   "contre_plongee": 1,
+   "tres_serre": 1,
+   "plongee": 1
   },
   "mouvements": {
-   "fixe": 9,
+   "fixe": 11,
    "avance": 6,
-   "travelling": 4,
    "zoom_choc": 1,
-   "recul": 3
+   "epaule": 1,
+   "recul": 2,
+   "vertige": 1
   },
   "costumes": {
-   "presentateur": "chemise",
-   "envoyee": "tshirt"
+   "envoyee": "debardeur",
+   "presentateur": "tshirt"
   },
-  "figurants": 2,
-  "ambiances": [],
-  "controle": "Humoriste 5.5/10 : 2.2 s Manque d'impact comique sur le début du monologue.; 70.7 s La chute finale manque de punch visuel. | Réalisateur 5.0/10 : 17.4 s Cadrage mal équilibré et bras qui traverse le ",
-  "fichier": "2026-10-17_13h08_emission.mp4",
+  "figurants": 0,
+  "ambiances": [
+   "neon"
+  ],
+  "controle": "Humoriste 6.0/10 : 32 s Manque de renfort comique sur la détresse de la fille.; 58.4 s La chute finale manque d'intensité visuelle. | Réalisateur 5.0/10 : 0.4 s Le présentateur est tronqué sur le bord",
+  "fichier": "2026-10-17_13h25_emission.mp4",
   "cine": {
    "focus": false,
    "vertige": true,
@@ -907,7 +911,7 @@
    "etalonnage": true,
    "profondeur": false,
    "grain": true,
-   "reflets": false,
+   "reflets": true,
    "son": true
   },
   "cadence": "rapide"
