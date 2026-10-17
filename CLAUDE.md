@@ -27,7 +27,11 @@
   pied plus court, talon rond, cheville fine avec sa bosse, dessus du pied qui descend en douceur, gros orteil + 4 petits
   orteils en bosses qui dépassent du bord, séparés par de petits traits ; les deux pieds vers où il regarde.
   Mains (`toon._main`, un seul contour via `toon.silhouette`) : au repos (doigts serrés + pouce), poing, index, paume, pouce ;
-  bras croisés = mains à plat sur les biceps.
+  bras croisés = mains à plat sur les biceps ; mains sur les hanches = main à plat sur la hanche (« hanche ») ; le poing
+  fermé est remplacé par une main détendue (« detendue ») sauf colère ou objet tenu. Manche longue : la main est dessinée sous
+  la manche (aucune articulation au poignet).
+  Chaussures (`toon.chaussure`) d'un seul contour, dessinées sous le bas du pantalon (coupé droit, un pli sur la chaussure) ;
+  manches courtes coupées droit, sans boule à l'épaule. (Pied nu : garder la version validée par l'auteur, un essai plus long a été refusé.)
   Casting libre (personnages différents à chaque vidéo).
 - **Le maximum de détails partout** : tenues, coiffures, barbes, chapeaux, accessoires, expressions du visage, décors.
 - Tout l'univers visuel (lieu, tenues, plans, émotions) se construit autour de l'audio TikTok (paroles, intonations, émotions,
@@ -71,6 +75,10 @@
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.
+- **Fiabilité de fabrication** : le dessin toon doit rester rapide (masques sur-échantillonnés ×2, ×1 sur les très gros plans,
+  contours par `cv2.findContours`, jamais de `np.mgrid` ni de grosse dilatation : un gros plan coûtait 40 s et 2,4 Go par image et
+  GitHub coupait la machine) ; un dessin qui plante repasse en ancien style ; le « Réveil de secours » (garde.yml) relance une
+  fois toute fabrication en échec des 6 dernières heures.
 - Code : `moteur/studio.py` (`decouper`) et `moteur/cartoon.py` (`vue`, `cadre_plan`) ; réglage MONTAGE (dynamique par défaut).
 
 ## Mode amélioré (Claude + outils payants : c'est le mode par défaut dès qu'il y a du crédit)
