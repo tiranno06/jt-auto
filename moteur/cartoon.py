@@ -106,6 +106,26 @@ MAINS_CONV = [("ouverte", "paume"), ("paume", "ouverte"), ("paume", "paume"), ("
 POSES = studio.POSES
 TEL_OREILLE = (140, 95)                                                    # bras qui tient le téléphone contre l'oreille
 NEUTRE_BRAS = ((-18, 8), (18, -8))
+TOON = (os.environ.get("STYLE_PERSO") or "toon").lower() == "toon"
+# style toon : gestes de conversation NATURELS (copiés sur les vidéos de référence) — un bras qui explique, coude près du
+# corps, l'autre au repos ; gestes tenus 2,5 à 3,5 s (pas de bras qui moulinent) ; amplitude bornée
+GESTES_TOON = [((-12, 6), (14, 100)), ((-14, -100), (12, -6)), ((-22, -88), (22, 88)), ((-12, 6), (12, -6)), ((-12, 6), (24, 112)), ((-24, -112), (12, -6))]
+# gestes expressifs en version naturelle (coudes pliés près du corps, avant-bras vers l'avant), comme dans les vidéos de référence
+POSES_TOON = {"explique": ((-12, 6), (12, 98)), "bras_ouverts": ((-26, -86), (26, 86)), "haussement": ((-30, -96), (30, 96)),
+              "pointe_d": ((-12, 6), (62, 12)), "pointe_g": ((-62, -12), (12, -6)), "stop": ((-12, 6), (38, 112)),
+              "compte": ((-30, -92), (30, 102)), "poing": ((-12, 6), (40, 120))}
+MAINS_TOON = [("ouverte", "paume"), ("paume", "ouverte"), ("paume", "paume"), ("ouverte", "ouverte"), ("ouverte", "index"), ("index", "ouverte")]
+GESTES_TETE = ("facepalm", "gratte_tete", "menton", "telephone", "desespoir", "pouce")   # gestes qui montent vraiment près du visage
+
+
+def bras_naturel(b, g=None):
+    """Style toon : bras ramené dans une amplitude naturelle (pas de bras tendus à l'horizontale ni levés derrière la tête),
+    sauf pour les gestes qui vont vraiment vers le visage ou au-dessus."""
+    if not TOON or g in GESTES_TETE: return b
+    a1, a2 = b; s1 = 1 if a1 >= 0 else -1; m1 = abs(a1)
+    if m1 > 45: m1 = 45 + (m1 - 45) * 0.35                                 # épaule : on lève peu le bras, le coude reste bas
+    a2 = max(-110, min(110, a2))
+    return (s1 * m1, a2)
 
 def geste_texte(texte, emo, k=0):
     """Geste choisi d'après la réplique (ponctuation, mots) quand l'émotion n'impose rien (voir studio.geste)."""
@@ -691,16 +711,19 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             mains = studio.GESTES[g_txt][1] if g_txt in studio.GESTES else mains
             src = q if (reac_geste == g_txt or not mien) else mien; u_g = _ressort((tm - src["deb"] + 0.1) / 0.45) * (1 - _ease((tm - src["fin"] - 0.35) / 0.35))
             elan = u_g - _ease((tm - src["deb"] + 0.1) / 0.45)              # dépassement : les cheveux et vêtements suivent
-            pg, pd = POSES[g_txt]; bg, bd = _mel(NEUTRE_BRAS[0], pg, u_g), _mel(NEUTRE_BRAS[1], pd, u_g)
+            pg, pd = (POSES_TOON.get(g_txt) or POSES[g_txt]) if TOON else POSES[g_txt]; bg, bd = _mel(NEUTRE_BRAS[0], pg, u_g), _mel(NEUTRE_BRAS[1], pd, u_g)
             if g_txt == "haussement": p["y"] -= 10 * s * u_g; p["tilt"] += 7 * u_g; p["epaules"] = max(p.get("epaules", 0.0), u_g)
             if g_txt.startswith("pointe"): p["tilt"] += (5 if g_txt == "pointe_d" else -5) * u_g
         elif bg is None:
             if parle:
                 per = 1.6 - 0.7 * float(((B or {}).get("rythme") or {}).get("energie", 0.3))   # vidéo d'origine agitée : gestes plus fréquents
-                k_ = int((tm - q["deb"]) / per + q["i"]); u = _ressort(((tm - q["deb"]) % per) / 0.55); elan = u - _ease(((tm - q["deb"]) % per) / 0.55)
-                g = GESTES[k_ % len(GESTES)]; g0 = GESTES[(k_ - 1) % len(GESTES)] if tm - q["deb"] >= per else ((-18, 8), (18, -8))
-                mains = MAINS_CONV[k_ % len(MAINS_CONV)]
-                if FICHES:                                                 # adultes : gestes plus mesurés, sauf jeu exagéré (style toons)
+                if TOON: per = 3.2 - 0.8 * float(((B or {}).get("rythme") or {}).get("energie", 0.3))   # toon : gestes tenus, comme dans les vidéos
+                k_ = int((tm - q["deb"]) / per + q["i"] * 7); trans = 0.7 if TOON else 0.55
+                u = (_ease if TOON else _ressort)(((tm - q["deb"]) % per) / trans); elan = 0.0 if TOON else u - _ease(((tm - q["deb"]) % per) / 0.55)
+                GS, MS = (GESTES_TOON, MAINS_TOON) if TOON else (GESTES, MAINS_CONV)
+                g = GS[k_ % len(GS)]; g0 = GS[(k_ - 1) % len(GS)] if tm - q["deb"] >= per else ((-18, 8), (18, -8))
+                mains = MS[k_ % len(MS)]
+                if FICHES and not TOON:                                    # adultes : gestes plus mesurés, sauf jeu exagéré (style toons)
                     kx = min(1.15, 0.6 * (1 + EXAGERE * (q.get("intensite", 1) - 1) * 0.45) * (1 + 0.25 * (EXAGERE - 1)))
                     g, g0 = tuple((v[0] * kx, v[1] * 0.8) for v in g), tuple((v[0] * kx, v[1] * 0.8) for v in g0)
                 bg, bd = _mel(g0[0], g[0], u), _mel(g0[1], g[1], u)
@@ -715,8 +738,8 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             f3, f9 = max(3, FPS // 10), max(9, int(0.3 * FPS))
             for j_ in range(min(k_, len(q["lv"]) - 1), max(f3, k_ - f9), -1):
                 if q["lv"][j_] - q["lv"][j_ - f3] > 0.32:
-                    b_ = math.sin(math.pi * min(1.0, (k_ - j_) / FPS / 0.3)); bd = (bd[0], bd[1] - 28 * b_); bg = (bg[0], bg[1] + 14 * b_); break
-        p["bras_g"], p["bras_d"] = bg, bd
+                    b_ = math.sin(math.pi * min(1.0, (k_ - j_) / FPS / 0.3)) * (0.45 if TOON else 1.0); bd = (bd[0], bd[1] - 28 * b_); bg = (bg[0], bg[1] + 14 * b_); break
+        p["bras_g"], p["bras_d"] = bras_naturel(bg, g_txt), bras_naturel(bd, g_txt)
         p["main_forme_g"], p["main_forme_d"] = mains
         if B: duo(p, role, tm, q, scene, parle)                            # gestes à deux (tope, main sur l'épaule, donner, pousser)
         if B:                                                              # corps vivant : poids du corps, trois-quarts, cheveux et vêtements qui suivent
@@ -750,7 +773,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         # objet en main pendant la réplique
         if mien and mien.get("objet") and tm <= mien["fin"] + 0.3:
             o = objets.get((mien["objet"], round(s, 2)))
-            if o is None: o = objets[(mien["objet"], round(s, 2))] = M.objet(mien["objet"], s * (0.5 if FICHES else 1.0))
+            if o is None: o = objets[(mien["objet"], round(s, 2))] = M.objet(mien["objet"], s * ((0.8 if TOON else 0.5) if FICHES else 1.0))
             if o is not None:
                 p["main_d"] = o; p["main_forme_d"] = "poing"
                 p["bras_d"] = TEL_OREILLE if mien["objet"] == "telephone" else (120, -100)   # téléphone : tenu à l'oreille
@@ -851,7 +874,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         cyc = (tm * 0.35 + k) % 1
         if act in ("boit", "mange"):
             lev = _ease(min(1, cyc / 0.15)) * (1 - _ease(max(0, cyc - 0.35) / 0.15)) if cyc < 0.5 else 0.0
-            p["bras_d"] = _mel((60, 80), (150, 75), lev); p["main_d"] = objets.setdefault((act, round(p["s"], 2)), M.objet("verre" if act == "boit" else "croissant", p["s"] * (0.6 if FICHES else 1.0)))
+            p["bras_d"] = _mel((60, 80), (150, 75), lev); p["main_d"] = objets.setdefault((act, round(p["s"], 2)), M.objet("verre" if act == "boit" else "croissant", p["s"] * ((0.8 if TOON else 0.6) if FICHES else 1.0)))
             p["main_forme_d"] = "poing"; p["bouche"] = 0.3 * lev
         elif act == "telephone":
             p["bras_d"] = POSES["telephone"][1]; p["main_forme_d"] = "poing"; p["bouche"] = 0.4 * abs(math.sin(tm * 7 + k)) if (tm + k) % 4 < 2.5 else 0.0
