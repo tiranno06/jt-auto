@@ -382,6 +382,21 @@ def coiffure_arriere(img, t, rxe, R, d, k34, style, col, ep, tilt):
                     q = (a_[0] + (z_[0] - a_[0]) * s_, a_[1] + (z_[1] - a_[1]) * s_)
                     _ligne(img, (q[0] - R * 0.05, q[1]), (q[0] + R * 0.05, q[1] + R * 0.03), _clair(col, 0.25), ep * 0.6)
 
+def meches(ligne, centre, amp):
+    """Ligne du front transformée en mèches : petites pointes qui descendent vers le visage (cheveux dessinés, pas un bol)."""
+    if len(ligne) < 3: return ligne
+    L = np.array(ligne, np.float32); seg = np.hypot(*(L[1:] - L[:-1]).T); tot = float(seg.sum())
+    n = max(3, int(tot / (amp * 3.6)))                                     # peu de grosses mèches (comme les vidéos), pas une scie
+    cum = np.concatenate([[0], np.cumsum(seg)]); out = []
+    for i in range(n * 2 + 1):
+        s_ = tot * i / (n * 2); j = min(len(seg) - 1, int(np.searchsorted(cum, s_) - 1)); j = max(0, j)
+        u = (s_ - cum[j]) / max(1e-6, seg[j]); q = L[j] + (L[j + 1] - L[j]) * u
+        if i % 2 and 0 < i < n * 2:                                        # pointe de la mèche, tirée vers le visage
+            dv = np.array(centre, np.float32) - q; dv /= max(1e-6, float(np.hypot(*dv))); q = q + dv * amp * (0.7 + 0.3 * math.sin(i * 2.3))
+        out.append((float(q[0]), float(q[1])))
+    return lisse(out, ferme=False, n=4)
+
+
 def coiffure_avant(img, t, rxe, R, d, k34, style, col, ep, tilt, chapeau=False):
     """Calotte de cheveux sur la tête (ligne du front, nuque, frange, mèche le long du visage)."""
     if not style or style == "aucune": return
@@ -405,11 +420,20 @@ def coiffure_avant(img, t, rxe, R, d, k34, style, col, ep, tilt, chapeau=False):
         haut = [_bord(T, 1, rxe, R, phi, 1.05) for phi in range(-8, -176, -8)]
         bas_f = -R * (0.30 if style in LONGS or style in ("frange", "queue", "chignon") else 0.52)
         ligne = [T(-rxe * 1.0, R * 0.05), T(-rxe * 0.75, -R * 0.40), T(-rxe * 0.3, bas_f), T(rxe * 0.25, bas_f - R * 0.05), T(rxe * 0.75, -R * 0.42), T(rxe * 1.0, R * 0.05)]
-    pts = lisse(haut + ligne, ferme=True, n=4); forme(img, pts, col, ep)
-    if style != "rase":                                                    # mèches dessinées
-        for k in range(4):
-            u = (dd if b else 1) * rxe * (-0.5 + 0.32 * k)
-            _trait(img, [T(u * 0.6, -R * 0.98), T(u * 0.9, -R * 0.78), T(u + (dd if b else 1) * rxe * 0.12, -R * 0.55)], ep * 0.65, fo)
+    lisse_ = style in ("rase", "couronne")
+    if not lisse_:                                                         # volume : contour du dessus légèrement bosselé (touffes)
+        haut = [(q[0] + (q[0] - cx) * 0.035 * math.sin(i * 1.9), q[1] + (q[1] - cy) * 0.035 * math.sin(i * 1.9)) for i, q in enumerate(haut)]
+        ligne = meches(lisse(ligne, ferme=False, n=3), (cx, cy + R * 0.2), R * (0.13 if style not in COURTS else 0.09))
+    pts = lisse(haut, ferme=False, n=4) + ligne
+    forme(img, pts, col, ep)
+    if not lisse_:                                                         # ombre vers la nuque, reflet brillant sur le dessus, mèches
+        degrade(img, pts, T(dd * rxe * 0.35, -R * 0.95), R * 1.25, _fonce(col, 0.62), 0.65, 0.35)
+        _poly(img, pts, TRAIT, True, ep)
+        brillant = _clair(col, 0.42)
+        _trait(img, [T(-dd * rxe * 0.35, -R * 0.86), T(dd * rxe * 0.05, -R * 0.97), T(dd * rxe * 0.42, -R * 0.90)], ep * 1.6, brillant)
+        for k in range(7):                                                 # mèches : traits fins qui partent du sommet et suivent la coiffure
+            u0 = (dd if b else 1) * rxe * (-0.62 + 0.2 * k); lg = 0.30 + 0.12 * ((k * 5) % 3)
+            _trait(img, [T(u0 * 0.55, -R * 1.0), T(u0 * 0.85, -R * (0.98 - lg * 0.6)), T(u0 + (dd if b else 1) * rxe * 0.10, -R * (0.98 - lg))], ep * 0.55, fo)
     if style == "herisse":
         for k in range(6):
             u = (dd if b else 1) * rxe * (-0.7 + 0.28 * k); base = T(u, -R * 0.98)
@@ -567,6 +591,17 @@ def membre(img, pts, rayons, coul, ep, ouvert_debut=True, ouvert_fin=False, ombr
     return m
 
 
+def manche_courte(e, c, larg, haut_, aisselle):
+    """Manche courte du t-shirt, d'un seul morceau avec le buste : part de l'emmanchure (haut de l'épaule → aisselle) et
+    s'arrête droit à mi-bras, un peu évasée."""
+    ex_, ey_ = c[0] - e[0], c[1] - e[1]; ne = math.hypot(ex_, ey_) or 1; px_, py_ = -ey_ / ne, ex_ / ne
+    mc = (e[0] + ex_ * 0.55, e[1] + ey_ * 0.55); hw = larg * 0.58
+    h1, h2 = (mc[0] + px_ * hw, mc[1] + py_ * hw), (mc[0] - px_ * hw, mc[1] - py_ * hw)
+    pts = np.array([haut_, aisselle, h1, h2, (e[0], e[1])], np.float32)
+    hull = cv2.convexHull(pts).reshape(-1, 2)
+    return [tuple(q) for q in hull], (h1, h2)
+
+
 def _plis_coude(img, e, c, m, larg, ep, coul):
     """Pli à l'intérieur du coude (côté où le bras se plie) et petit pli sur la manche."""
     v1 = (e[0] - c[0], e[1] - c[1]); v2 = (m[0] - c[0], m[1] - c[1])
@@ -585,16 +620,8 @@ def _manche(img, e, c, m, larg, coul, courte, peau, ep, forme_main, r_m, R):
     pg = (m[0] - ux * r_m * 1.05, m[1] - uy * r_m * 1.05)                  # poignet
     mi1 = ((e[0] + c[0]) / 2, (e[1] + c[1]) / 2); mi2 = ((c[0] + pg[0]) / 2, (c[1] + pg[1]) / 2)
     ombre = _fonce(coul, 0.86)
-    if courte:                                                             # bras nu, manche courte par-dessus
+    if courte:                                                             # bras nu : la manche courte fait partie du t-shirt (dessinée avec le buste)
         membre(img, [e, mi1, c, mi2, pg], [larg * 0.40, larg * 0.36, larg * 0.32, larg * 0.31, larg * 0.26], peau, ep, True, False)
-        mc = (e[0] + (c[0] - e[0]) * 0.62, e[1] + (c[1] - e[1]) * 0.62)  # manche courte coupée droit, un peu évasée (pas de boule)
-        ex_, ey_ = c[0] - e[0], c[1] - e[1]; ne = math.hypot(ex_, ey_) or 1; px_, py_ = -ey_ / ne, ex_ / ne
-        e0 = (e[0] - ex_ / ne * larg * 0.35, e[1] - ey_ / ne * larg * 0.35)   # la manche part de l'intérieur du buste (pas de couture ronde)
-        man = [(e0[0] + px_ * larg * 0.50, e0[1] + py_ * larg * 0.50), (mc[0] + px_ * larg * 0.58, mc[1] + py_ * larg * 0.58),
-               (mc[0] - px_ * larg * 0.58, mc[1] - py_ * larg * 0.58), (e0[0] - px_ * larg * 0.50, e0[1] - py_ * larg * 0.50)]
-        silhouette(img, [man], coul=coul, ep=ep, ouvert=[(e0, larg * 0.75)])
-        _trait(img, [(mc[0] + px_ * larg * 0.5 - ex_ / ne * larg * 0.12, mc[1] + py_ * larg * 0.5 - ey_ / ne * larg * 0.12),
-                     (mc[0] - px_ * larg * 0.5 - ex_ / ne * larg * 0.12, mc[1] - py_ * larg * 0.5 - ey_ / ne * larg * 0.12)], ep * 0.6, _fonce(coul, 0.6))   # ourlet
     else:                                                                  # manche longue : la main est dessinée DESSOUS, la manche la recouvre au poignet
         a = math.atan2(m[0] - c[0], m[1] - c[1])                           # (aucune articulation visible au poignet)
         if forme_main: _main(img, m, a, forme_main, r_m, peau, ep)
@@ -802,7 +829,9 @@ def dessiner(img, P, p):
     def devant(i):                                                         # main devant le buste (ou croisée de l'autre côté)
         m_ = bras[i][2]; sg_ = -1 if i == 0 else 1
         return (m_[0] - x) * sg_ < LARG_B * R * 0.95 and y_cou < m_[1] < y_ourlet + 0.2 * R
-    if not devant(loin_i): bras_k(loin_i, c_haut_o)
+    if courte:                                                             # t-shirt : les deux bras nus d'abord, le t-shirt (manches comprises) par-dessus
+        bras_k(loin_i, c_haut_o); bras_k(1 - loin_i, c_haut)
+    elif not devant(loin_i): bras_k(loin_i, c_haut_o)
 
     # --- jambes, pieds, bas
     xp = K["x_pieds"]; marche = p.get("marche")
@@ -885,11 +914,19 @@ def dessiner(img, P, p):
 
     # --- buste : sweat / pull / chemise…
     pts_b = [tourne(*q) for q in buste(x, y_cou, y_ourlet, R)]
-    forme(img, pts_b, c_haut, ep)
+    manches, ourlets = [], []
+    if courte:                                                             # t-shirt + manches courtes = UN seul contour
+        for i_, sg in ((0, -1), (1, 1)):
+            e_, c_, m_ = bras[i_]
+            mp, ou = manche_courte(e_, c_, larg_b, tourne(x + sg * LARG_EP * 0.80 * R, y_cou + 0.12 * R), tourne(x + sg * LARG_B * 1.0 * R, y_ep + 0.62 * R))
+            manches.append(mp); ourlets.append(ou)
+        silhouette(img, [pts_b] + manches, coul=c_haut, ep=ep)
+    else: forme(img, pts_b, c_haut, ep)
     motif(img, pts_b, C.get("motif"), tuple(C.get("c_motif") or _fonce(c_haut, 0.72)), s)
-    ombre_cel(img, pts_b, sh, 0.16 * R, c_haut_o)
+    if not courte: ombre_cel(img, pts_b, sh, 0.16 * R, c_haut_o)
     degrade(img, pts_b, (x - sh * 0.3 * R, y_cou + 0.5 * R), R * 2.6, _fonce(c_haut, 0.72), 0.45, 0.5)   # volume doux du sweat
-    _poly(img, pts_b, TRAIT, True, ep)
+    if not courte: _poly(img, pts_b, TRAIT, True, ep)
+    for h1, h2 in ourlets: _trait(img, [h1, ((h1[0] + h2[0]) / 2, (h1[1] + h2[1]) / 2), h2], ep * 0.55, _fonce(c_haut, 0.6))   # ourlet de la manche
     fx = x + d * 0.25 * R * k34                                            # milieu du vêtement (tourné)
     if haut not in ("costume", "chemise", "robe") and not dos:            # plis du tissu : sous les bras et au-dessus du bord-côte
         pli = _fonce(c_haut, 0.62)
@@ -940,8 +977,12 @@ def dessiner(img, P, p):
     M._sacs(img, x, K["cy_corps"], K["corps_w"], K["corps_h"], s, C)
 
     # --- bras devant le corps
-    if devant(loin_i): bras_k(loin_i, c_haut)
-    bras_k(1 - loin_i, c_haut)
+    if courte:                                                             # avant-bras qui passent devant le t-shirt : redessinés par-dessus
+        for i_ in (loin_i, 1 - loin_i):
+            if devant(i_): e_, c_, m_ = bras[i_]; avant_bras(img, c_, m_, larg_b, c_haut, True, peau, ep, formes[i_], r_m)
+    else:
+        if devant(loin_i): bras_k(loin_i, c_haut)
+        bras_k(1 - loin_i, c_haut)
     if K.get("croise", 0) > 0.5:                                           # bras croisés : la main lointaine ressort sur le biceps
         e_, c_, m_ = bras[loin_i]; _main(img, m_, math.atan2(m_[0] - c_[0], m_[1] - c_[1]), formes[loin_i], r_m, peau, ep)
     for i_ in (0, 1):
@@ -980,5 +1021,8 @@ def dessiner(img, P, p):
     M._effets(img, tete, rx, R, st, p)
     for nom in ("main_g", "main_d"):
         if p.get(nom) is not None:
-            m_ = bras[0][2] if nom == "main_g" else bras[1][2]; M._coller(img, p[nom], m_[0], m_[1])
+            i_ = 0 if nom == "main_g" else 1; e_, c_, m_ = bras[i_]
+            a_ = math.atan2(m_[0] - c_[0], m_[1] - c_[1]); ux_, uy_ = math.sin(a_), math.cos(a_)
+            M._coller(img, p[nom], m_[0] + ux_ * r_m * 0.5, m_[1] + uy_ * r_m * 0.5 - r_m * 0.4)   # objet bien en main (taille réelle)
+            _main(img, m_, a_, "detendue", r_m, peau, ep)                   # les doigts se referment PAR-DESSUS l'objet
     return tete, (rx, R)

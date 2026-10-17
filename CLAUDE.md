@@ -31,7 +31,10 @@
   fermé est remplacé par une main détendue (« detendue ») sauf colère ou objet tenu. Manche longue : la main est dessinée sous
   la manche (aucune articulation au poignet).
   Chaussures (`toon.chaussure`) d'un seul contour, dessinées sous le bas du pantalon (coupé droit, un pli sur la chaussure) ;
-  manches courtes coupées droit, sans boule à l'épaule. (Pied nu : garder la version validée par l'auteur, un essai plus long a été refusé.)
+  t-shirt : buste + manches courtes d'UN seul contour (`toon.manche_courte`, bras nus dessinés dessous) ; objets tenus à taille
+  réelle (×0,8 de l'échelle, doigts refermés par-dessus) ; cheveux : grosses mèches arrondies (`toon.meches`), volume bosselé,
+  reflet brillant, ombre vers la nuque. Gestes (cartoon : `GESTES_TOON`, `POSES_TOON`, `bras_naturel`) : coudes pliés près du
+  corps, un bras qui explique, gestes tenus ~3 s, amplitude bornée (pas de bras tendus ni levés derrière la tête). (Pied nu : garder la version validée par l'auteur, un essai plus long a été refusé.)
   Casting libre (personnages différents à chaque vidéo).
 - **Le maximum de détails partout** : tenues, coiffures, barbes, chapeaux, accessoires, expressions du visage, décors.
 - Tout l'univers visuel (lieu, tenues, plans, émotions) se construit autour de l'audio TikTok (paroles, intonations, émotions,
