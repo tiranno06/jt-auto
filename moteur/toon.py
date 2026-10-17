@@ -428,28 +428,117 @@ def _trait(img, pts, ep, coul=TRAIT, ferme=False):
     for i in range(len(pts) - 1): _ligne(img, pts[i], pts[i + 1], coul, ep)
 
 
+def membre(img, pts, rayons, coul, ep, ouvert_debut=True, ouvert_fin=False, ombre=None, cote_ombre=(0.0, 1.0)):
+    """Bras ou jambe d'un seul tenant (fini les tubes de marionnette) : la forme est balayée le long de la ligne
+    épaule-coude-main (ou hanche-genou-cheville) avec une épaisseur qui varie (biceps, coude, mollet, cheville) ;
+    le contour suit toute la silhouette sans boule aux articulations, et reste ouvert là où le membre sort du
+    vêtement ou du corps (épaule, hanche) pour s'y fondre."""
+    P = [(float(a), float(b)) for a, b in pts]; rmax = max(rayons)
+    xs = [q[0] for q in P]; ys = [q[1] for q in P]; mg = int(rmax + 3 * ep + 4)
+    x0, y0 = max(0, int(min(xs)) - mg), max(0, int(min(ys)) - mg); x1, y1 = min(img.shape[1], int(max(xs)) + mg), min(img.shape[0], int(max(ys)) + mg)
+    if x1 <= x0 or y1 <= y0: return None
+    K = 2                                                                  # dessin en double résolution dans la zone (bords lisses)
+    m = np.zeros(((y1 - y0) * K, (x1 - x0) * K), np.uint8)
+    for i in range(len(P) - 1):
+        (ax, ay), (bx, by) = P[i], P[i + 1]; ra, rb = rayons[i], rayons[i + 1]
+        n = max(2, int(math.hypot(bx - ax, by - ay) / 1.5))
+        for k in range(n + 1):
+            u = k / n; cx_ = (ax + (bx - ax) * u - x0) * K; cy_ = (ay + (by - ay) * u - y0) * K
+            cv2.circle(m, (int(round(cx_)), int(round(cy_))), max(1, int(round((ra + (rb - ra) * u) * K))), 255, -1)
+    e2 = max(1, int(round(ep * K)))
+    anneau = cv2.dilate(m, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2 * e2 + 1, 2 * e2 + 1))) & ~m
+    yy, xx = np.mgrid[0:m.shape[0], 0:m.shape[1]]
+    for ouvert, q, r in ((ouvert_debut, P[0], rayons[0]), (ouvert_fin, P[-1], rayons[-1])):
+        if ouvert: anneau[((xx - (q[0] - x0) * K) ** 2 + (yy - (q[1] - y0) * K) ** 2) < (r * 1.08 * K) ** 2] = 0
+    z = img[y0:y1, x0:x1].astype(np.float32)
+    def pose(masque, c):
+        a = cv2.resize(masque, (x1 - x0, y1 - y0), interpolation=cv2.INTER_AREA).astype(np.float32)[..., None] / 255
+        z[:] = z * (1 - a) + np.array(c, np.float32) * a
+    pose(anneau, TRAIT); pose(m, coul)
+    if ombre is not None:                                                  # ombre douce sur un côté du membre
+        o = np.zeros_like(m); dxo, dyo = cote_ombre
+        for i in range(len(P) - 1):
+            (ax, ay), (bx, by) = P[i], P[i + 1]; ra, rb = rayons[i], rayons[i + 1]; n = max(2, int(math.hypot(bx - ax, by - ay) / 2))
+            for k in range(n + 1):
+                u = k / n; r_ = ra + (rb - ra) * u
+                cv2.circle(o, (int(((ax + (bx - ax) * u) + dxo * r_ * 0.62 - x0) * K), int(((ay + (by - ay) * u) + dyo * r_ * 0.62 - y0) * K)), max(1, int(r_ * 0.5 * K)), 255, -1)
+        pose(cv2.GaussianBlur(o & m, (0, 0), K * 1.2), ombre)
+    img[y0:y1, x0:x1] = np.clip(z, 0, 255).astype(np.uint8)
+    return m
+
+
+def _plis_coude(img, e, c, m, larg, ep, coul):
+    """Pli à l'intérieur du coude (côté où le bras se plie) et petit pli sur la manche."""
+    v1 = (e[0] - c[0], e[1] - c[1]); v2 = (m[0] - c[0], m[1] - c[1])
+    n1 = math.hypot(*v1) or 1; n2 = math.hypot(*v2) or 1
+    bis = (v1[0] / n1 + v2[0] / n2, v1[1] / n1 + v2[1] / n2); nb = math.hypot(*bis)
+    if nb < 0.15: return                                                   # bras tendu : pas de pli
+    bx, by = bis[0] / nb, bis[1] / nb; p0 = (c[0] + bx * larg * 0.30, c[1] + by * larg * 0.30)
+    _trait(img, [p0, (p0[0] + bx * larg * 0.22 + v2[0] / n2 * larg * 0.12, p0[1] + by * larg * 0.22 + v2[1] / n2 * larg * 0.12)], ep * 0.8, coul)
+    _trait(img, [(p0[0] + v1[0] / n1 * larg * 0.3, p0[1] + v1[1] / n1 * larg * 0.3), (p0[0] + v1[0] / n1 * larg * 0.3 + bx * larg * 0.18, p0[1] + v1[1] / n1 * larg * 0.3 + by * larg * 0.18)], ep * 0.7, coul)
+
+
 def _manche(img, e, c, m, larg, coul, courte, peau, ep, forme_main, r_m, R):
-    """Bras en manche épaisse (sweat), plis au coude, bord-côte au poignet, main blanche à 4 doigts."""
-    if courte:
-        mi = (e[0] + (c[0] - e[0]) * 0.6, e[1] + (c[1] - e[1]) * 0.6)
-        _tube(img, e, c, larg * 0.72 + 2 * ep, larg * 0.62 + 2 * ep, TRAIT); _tube(img, c, m, larg * 0.62 + 2 * ep, larg * 0.5 + 2 * ep, TRAIT)
-        _tube(img, e, c, larg * 0.72, larg * 0.62, peau); _tube(img, c, m, larg * 0.62, larg * 0.5, peau)
-        _tube(img, e, mi, larg + 2 * ep, larg * 0.95 + 2 * ep, TRAIT); _tube(img, e, mi, larg, larg * 0.95, coul)
+    """Bras d'un seul tenant : manche ample (biceps, coude, avant-bras qui s'affine), pli du coude, poignet élastique,
+    main blanche à 4 doigts ; la manche sort du sweat sans trait à l'épaule."""
+    dx, dy = m[0] - c[0], m[1] - c[1]; n = math.hypot(dx, dy) or 1; ux, uy = dx / n, dy / n; nx, ny = -uy, ux
+    pg = (m[0] - ux * r_m * 1.05, m[1] - uy * r_m * 1.05)                  # poignet
+    mi1 = ((e[0] + c[0]) / 2, (e[1] + c[1]) / 2); mi2 = ((c[0] + pg[0]) / 2, (c[1] + pg[1]) / 2)
+    ombre = _fonce(coul, 0.86)
+    if courte:                                                             # bras nu, manche courte par-dessus
+        membre(img, [e, mi1, c, mi2, pg], [larg * 0.40, larg * 0.36, larg * 0.32, larg * 0.31, larg * 0.26], peau, ep, True, False)
+        mc = (e[0] + (c[0] - e[0]) * 0.62, e[1] + (c[1] - e[1]) * 0.62)
+        membre(img, [e, mc], [larg * 0.52, larg * 0.48], coul, ep, True, False, ombre, (nx, ny) if ny > 0 else (-nx, -ny))
     else:
-        _tube(img, e, c, larg + 2 * ep, larg * 0.95 + 2 * ep, TRAIT); _tube(img, c, m, larg * 0.95 + 2 * ep, larg * 0.82 + 2 * ep, TRAIT)
-        _tube(img, e, c, larg, larg * 0.95, coul); _tube(img, c, m, larg * 0.95, larg * 0.82, coul)
-        for q0, q1, l0 in ((e, c, larg), (c, m, larg * 0.9)):            # ombre douce le long du dessous de la manche
-            dx_, dy_ = q1[0] - q0[0], q1[1] - q0[1]; n_ = math.hypot(dx_, dy_) or 1; ox, oy = -dy_ / n_ * l0 * 0.28, dx_ / n_ * l0 * 0.28
-            if oy < 0: ox, oy = -ox, -oy
-            _tube(img, (q0[0] + ox, q0[1] + oy), (q1[0] + ox, q1[1] + oy), l0 * 0.32, l0 * 0.3, _fonce(coul, 0.88))
-        dx, dy = m[0] - c[0], m[1] - c[1]; n = math.hypot(dx, dy) or 1; ux, uy = dx / n, dy / n; nx, ny = -uy, ux
-        for k in (-0.25, 0.2):                                             # plis du coude
-            a_ = (c[0] + nx * larg * k * 1.4, c[1] + ny * larg * k * 1.4)
-            _trait(img, [a_, (a_[0] + ux * larg * 0.35 + nx * larg * 0.08, a_[1] + uy * larg * 0.35 + ny * larg * 0.08)], ep * 0.7)
-        pg = (m[0] - ux * r_m * 1.15, m[1] - uy * r_m * 1.15); pg2 = (pg[0] - ux * larg * 0.42, pg[1] - uy * larg * 0.42)
-        _tube(img, pg, pg2, larg * 0.84 + 2 * ep, larg * 0.84 + 2 * ep, TRAIT); _tube(img, pg, pg2, larg * 0.84, larg * 0.84, coul)
-        _ligne(img, (pg2[0] + nx * larg * 0.45, pg2[1] + ny * larg * 0.45), (pg2[0] - nx * larg * 0.45, pg2[1] - ny * larg * 0.45), TRAIT, ep * 0.8)
+        membre(img, [e, mi1, c, mi2, pg], [larg * 0.50, larg * 0.50, larg * 0.45, larg * 0.46, larg * 0.40], coul, ep, True, False, ombre, (nx, ny) if ny > 0 else (-nx, -ny))
+        _plis_coude(img, e, c, pg, larg, ep, _fonce(coul, 0.55))
+        pg2 = (pg[0] - ux * larg * 0.36, pg[1] - uy * larg * 0.36)          # poignet élastique
+        membre(img, [pg2, pg], [larg * 0.40, larg * 0.39], coul, ep, False, False)
     a = math.atan2(m[0] - c[0], m[1] - c[1])
+    if forme_main: _main(img, m, a, forme_main, r_m, peau, ep)
+    else: _ellipse(img, m, (r_m + ep, r_m + ep), 0, TRAIT); _ellipse(img, m, (r_m, r_m), 0, peau)
+
+
+def jambe_pied(img, a, g, sol, f, R, peau, ep, sh):
+    """Jambe nue et pied d'un seul contour, d'après les vidéos de référence : cuisse, genou discret, mollet arrondi, cheville
+    large, talon rond, semelle plate posée au sol, dessus du pied en pente jusqu'au gros orteil, petits orteils en traits courbes.
+    a = hanche, g = genou, sol = point au sol sous la cheville, f = sens du pied (±1 de profil, ±0.55 tourné vers la caméra)."""
+    fs = 1 if f >= 0 else -1; kf = abs(f)                                  # kf < 1 : pied vu un peu de face (raccourci)
+    wa, wc, wk, wh = 0.46 * R, 0.56 * R, 0.52 * R, CUISSE * R              # largeurs : cheville, mollet, genou, cuisse
+    ha = 0.40 * R                                                          # hauteur de la cheville au-dessus du sol
+    cv_ = (sol[0], sol[1] - ha)                                            # centre de la cheville
+    def cote(p0, p1, w, s):                                                # point décalé perpendiculairement à la jambe, côté s (+1 = vers le pied)
+        dx, dy = p1[0] - p0[0], p1[1] - p0[1]; n = math.hypot(dx, dy) or 1; nx, ny = dy / n, -dx / n
+        if nx * fs < 0: nx, ny = -nx, -ny
+        return (p0[0] + nx * w / 2 * s, p0[1] + ny * w / 2 * s)
+    mol = (g[0] + (cv_[0] - g[0]) * 0.35, g[1] + (cv_[1] - g[1]) * 0.35)
+    L = R * (0.92 * kf + 0.35 * (1 - kf))                                   # longueur du pied devant la cheville
+    hp = R * (0.36 + 0.06 * (1 - kf))
+    arriere = [cote(a, g, wh, -1), cote(g, cv_, wk, -1), cote(mol, cv_, wc, -1), cote(cv_, g, wa, -1),
+               (sol[0] - fs * wa * 0.62, sol[1] - ha * 0.55), (sol[0] - fs * wa * 0.50, sol[1] - ha * 0.08)]      # mollet, cheville, talon
+    semelle = [(sol[0] - fs * wa * 0.15, sol[1]), (sol[0] + fs * L * 0.55, sol[1] + 0.01 * R), (sol[0] + fs * L * 0.90, sol[1] - 0.01 * R)]
+    bout = [(sol[0] + fs * L * 1.02, sol[1] - hp * 0.35), (sol[0] + fs * L * 0.95, sol[1] - hp * 0.80)]                 # gros orteil
+    cv2_ = (cv_[0] + (g[0] - cv_[0]) * 0.12, cv_[1] + (g[1] - cv_[1]) * 0.12)   # le dessus du pied remonte en douceur sur le tibia
+    dessus = [(sol[0] + fs * L * 0.60, sol[1] - hp * 1.05), (sol[0] + fs * L * 0.32, sol[1] - hp * 1.32), cote(cv2_, g, wa, 1),
+              cote(mol, g, wc * 0.94, 1), (g[0] + fs * wk * 0.52, g[1]), cote(a, g, wh, 1)]
+    chemin = lisse(arriere + semelle + bout + dessus, ferme=False, n=6)
+    forme_ = chemin + [cote(a, g, wh, -1)]
+    _poly(img, forme_, peau)
+    _poly(img, chemin, TRAIT, False, ep)
+    for k in range(3):                                                     # petits orteils : 3 courts traits courbes derrière le gros orteil
+        ox = sol[0] + fs * L * (0.80 - 0.10 * k); oy = sol[1] - hp * 0.05
+        _trait(img, [(ox, oy), (ox + fs * L * 0.06, oy - hp * 0.22), (ox + fs * L * 0.05, oy - hp * 0.42)], ep * 0.85)
+
+
+def avant_bras(img, c, m, larg, coul, courte, peau, ep, forme_main, r_m):
+    """Avant-bras et main redessinés par-dessus la tête (geste vers le visage)."""
+    dx, dy = m[0] - c[0], m[1] - c[1]; n = math.hypot(dx, dy) or 1; ux, uy = dx / n, dy / n
+    pg = (m[0] - ux * r_m * 1.05, m[1] - uy * r_m * 1.05); mi = ((c[0] + pg[0]) / 2, (c[1] + pg[1]) / 2)
+    if courte: membre(img, [c, mi, pg], [larg * 0.32, larg * 0.31, larg * 0.26], peau, ep, True, False)
+    else:
+        membre(img, [c, mi, pg], [larg * 0.45, larg * 0.46, larg * 0.40], coul, ep, True, False)
+        pg2 = (pg[0] - ux * larg * 0.36, pg[1] - uy * larg * 0.36); membre(img, [pg2, pg], [larg * 0.40, larg * 0.39], coul, ep, False, False)
+    a = math.atan2(dx, dy)
     if forme_main: _main(img, m, a, forme_main, r_m, peau, ep)
     else: _ellipse(img, m, (r_m + ep, r_m + ep), 0, TRAIT); _ellipse(img, m, (r_m, r_m), 0, peau)
 
@@ -584,18 +673,22 @@ def dessiner(img, P, p):
         long_ = not (robe or bas in ("short", "bermuda"))
         if long_:
             cj = c_bas_o if loin_j else c_bas; lw = (0.74 * R, 0.66 * R, 0.6 * R)
-            _tube(img, a, g, lw[0] + 2 * ep, lw[1] + 2 * ep, TRAIT); _tube(img, g, b, lw[1] + 2 * ep, lw[2] + 2 * ep, TRAIT)
-            _tube(img, a, g, lw[0], lw[1], cj); _tube(img, g, b, lw[1], lw[2], cj)
+            mol = (g[0] + (b[0] - g[0]) * 0.35, g[1] + (b[1] - g[1]) * 0.35); cu = ((a[0] + g[0]) / 2, (a[1] + g[1]) / 2)
+            membre(img, [a, cu, g, mol, b], [lw[0] / 2, lw[0] * 0.49, lw[1] / 2, lw[1] * 0.5, lw[2] / 2], cj, ep, True, False, _fonce(cj, 0.88), (sh, 0.0))
             _trait(img, [(g[0] - lw[1] * 0.3, g[1] - 0.1 * R), (g[0] + lw[1] * 0.15, g[1] + 0.02 * R)], ep * 0.7)   # pli du genou
             if bas == "jean": _ligne(img, (a[0] + sh * lw[0] * 0.25, a[1] + 0.2 * R), (b[0] + sh * lw[2] * 0.25, b[1] - 0.1 * R), _clair(cj, 0.3), ep * 0.6)
             if bas == "jogging": _tube(img, (b[0], b[1] - 0.14 * R), (b[0], b[1]), lw[2] * 0.9 + 2 * ep, lw[2] * 0.9 + 2 * ep, TRAIT); _tube(img, (b[0], b[1] - 0.14 * R), (b[0], b[1]), lw[2] * 0.9, lw[2] * 0.9, _fonce(cj, 0.88))
         else:
             nu = (C.get("chaussures") or "baskets") in ("pieds_nus", "aucune")
-            _tube(img, a, g, CUISSE * R + 2 * ep, GENOU * R + 2 * ep, TRAIT); _tube(img, g, b, GENOU * R + 2 * ep, CHEVILLE * R + 2 * ep, TRAIT)
-            if nu: _pied(img, (b[0], b[1] + 0.08 * R), d, R, C, peau, ep, peau_o)   # pied nu : la jambe se fond dans le pied (pas de trait à la cheville)
-            _tube(img, a, g, CUISSE * R, GENOU * R, peau); _tube(img, g, b, GENOU * R, CHEVILLE * R, peau)
-            cote = [(g[0] + sh * GENOU * R * 0.5, g[1]), (b[0] + sh * CHEVILLE * R * 0.5, b[1]), (b[0] + sh * CHEVILLE * R * 0.1, b[1]), (g[0] + sh * GENOU * R * 0.15, g[1])]
-            ombre_cel(img, cote, sh, GENOU * R * 0.12, _fonce(peau, 0.93))   # liseré d'ombre discret au bord de la jambe
+            if nu:                                                         # jambe et pied nu d'un seul trait (vidéos de référence)
+                f_ = d if (sg == d or not k34) else -d * 0.55              # un pied de profil vers où il regarde, l'autre tourné vers la caméra
+                if not k34: f_ = sg * 0.55
+                jambe_pied(img, a, g, (b[0], b[1] + 0.12 * R), f_, R, peau, ep, sh)
+                continue
+            mol = (g[0] + (b[0] - g[0]) * 0.32, g[1] + (b[1] - g[1]) * 0.32); cu = ((a[0] + g[0]) / 2, (a[1] + g[1]) / 2)
+            gn = (g[0] + d * 0.03 * R, g[1])                                # genou : légère bosse vers l'avant
+            membre(img, [a, cu, gn, mol, b], [CUISSE * R / 2, CUISSE * R * 0.47, GENOU * R / 2, GENOU * R * 0.53, CHEVILLE * R / 2], peau, ep, True, nu,
+                   _fonce(peau, 0.93), (sh, 0.0))
             if nu: continue
         _pied(img, (b[0], b[1] + 0.08 * R), d, R, C, peau, ep, peau_o)
     if bas in ("short", "bermuda") and not robe:                           # short long et large jusqu'au genou (référence)
@@ -721,6 +814,11 @@ def dessiner(img, P, p):
     if C.get("chapeau") == "bonnet": bonnet(img, tete, rxe, R, tilt, tuple(C.get("c_chapeau") or (190, 150, 70)), ep)
     elif C.get("chapeau") == "casquette": casquette(img, tete, rxe, R, tilt, tuple(C.get("c_chapeau") or (40, 60, 140)), ep, d if k34 else 0)
     elif C.get("chapeau") in M.CHAPEAUX: GR.chapeau(img, tete, rxe * 1.05, R, st, p, C["chapeau"], tuple(C.get("c_chapeau") or (60, 60, 70)))
+    if not dos:                                                            # main sur le visage, à la bouche, téléphone à l'oreille : l'avant-bras passe devant la tête
+        for i_ in (0, 1):
+            e_, c_, m_ = bras[i_]
+            if math.hypot(m_[0] - tete[0], m_[1] - tete[1]) < R * 1.25:
+                avant_bras(img, c_, m_, larg_b, c_haut, courte, peau, ep, formes[i_], r_m)
     M._effets(img, tete, rx, R, st, p)
     for nom in ("main_g", "main_d"):
         if p.get(nom) is not None:
