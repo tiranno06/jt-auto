@@ -97,7 +97,9 @@ def dessiner(img, F, p):
     """Dessine le personnage de fiche F (version adulte de nos marionnettes) selon la pose p. Renvoie (tête, (rx, ry))."""
     if STYLE_PERSO == "toon":
         import toon
-        return toon.dessiner(img, _P(F), _pose(F, p))
+        try: return toon.dessiner(img, _P(F), _pose(F, p))
+        except Exception as e:                                             # filet de sécurité : un souci de dessin ne bloque jamais la vidéo
+            if not getattr(dessiner, "_signale", False): print(f"  dessin toon impossible ({e}) : ancien style pour ce personnage", flush=True); dessiner._signale = True
     return M.dessiner(img, _P(F), _pose(F, p))
 
 def tete_y(s, taille=1.0):

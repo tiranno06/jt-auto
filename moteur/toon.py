@@ -51,7 +51,8 @@ def oeuf(cx, cy, rx, ry, ang, n=72, d=0):
 def _bbox(pts, img, marge=6):
     a = np.array(pts, np.float32)
     x0, y0 = np.floor(a.min(0)).astype(int) - marge; x1, y1 = np.ceil(a.max(0)).astype(int) + marge
-    return max(0, x0), max(0, y0), min(img.shape[1], x1), min(img.shape[0], y1)
+    x0, y0 = max(0, x0), max(0, y0); x1, y1 = min(img.shape[1], x1), min(img.shape[0], y1)
+    return x0, y0, max(x0, x1), max(y0, y1)                                # hors de l'image : zone vide (jamais de taille négative)
 
 
 def _masque(pts, roi):
@@ -152,7 +153,7 @@ def squelette(p):
     # gestes « naturels » copiés sur les vidéos de référence : quand la pose demandée est proche d'un geste connu,
     # le coude et la main glissent (en douceur) vers la position dessinée par l'animateur (coudes dehors, mains posées…)
     d = 1 if float(p.get("tq", 0.0)) > 0 else (-1 if float(p.get("tq", 0.0)) < 0 else 1)
-    out = []; croise = 0.0
+    out = []; croise = 0.0; gestes = [None, None]
     for i, (sg, ang) in enumerate(((-1, p["bras_g"]), (1, p["bras_d"]))):
         e, c, m = bras[i]; best, w = None, 0.0
         for nom, cible in CIBLES.items():
@@ -167,10 +168,11 @@ def squelette(p):
             c2, m2 = pt(cx_, cy_, rel_c), pt(mx_, my_, rel_m)
             w = w * w * (3 - 2 * w)
             if nom_b == "croises": croise = max(croise, w)
+            if w > 0.5: gestes[i] = nom_b
             c = (c[0] + (c2[0] - c[0]) * w, c[1] + (c2[1] - c[1]) * w); m = (m[0] + (m2[0] - m[0]) * w, m[1] + (m2[1] - m[1]) * w)
         out.append((e, c, m))
-    bras = out; K["croise"] = croise
-    K.update(bras=bras, x=x, cy_corps=ty + (COU + OURLET) / 2 * R, corps_h=(OURLET - COU) * R, corps_w=LARG_B * R, r_m=0.24 * R, membre=MANCHE * R)
+    bras = out; K["croise"] = croise; K["gestes"] = gestes
+    K.update(bras=bras, x=x, cy_corps=ty + (COU + OURLET) / 2 * R, corps_h=(OURLET - COU) * R, corps_w=LARG_B * R, r_m=0.28 * R, membre=MANCHE * R)
     return K
 
 
@@ -422,6 +424,45 @@ def coiffure_avant(img, t, rxe, R, d, k34, style, col, ep, tilt, chapeau=False):
 SENS = [1]                                                                 # côté du pouce (sens du regard), mis à jour par dessiner()
 
 
+def _tubes_masque(m, L, K, tubes):
+    """Tubes (a, b, ra, rb) remplis vite : un disque à chaque bout + le quadrilatère tangent entre les deux."""
+    for a_, b_, ra, rb in tubes:
+        A, B = L(a_), L(b_); rA, rB = max(1, int(ra * K)), max(1, int(rb * K))
+        cv2.circle(m, A, rA, 255, -1, cv2.LINE_8); cv2.circle(m, B, rB, 255, -1, cv2.LINE_8)
+        dx, dy = B[0] - A[0], B[1] - A[1]; n = math.hypot(dx, dy)
+        if n < 1: continue
+        nx, ny = -dy / n, dx / n
+        q = np.array([(A[0] + nx * rA, A[1] + ny * rA), (B[0] + nx * rB, B[1] + ny * rB), (B[0] - nx * rB, B[1] - ny * rB), (A[0] - nx * rA, A[1] - ny * rA)], np.int32)
+        cv2.fillConvexPoly(m, q, 255)
+
+
+def _anneau(m, e2, ouverts):
+    """Contour extérieur d'épaisseur e2 autour du masque (tracé des bords, rapide), effacé dans les disques `ouverts`."""
+    cs, _ = cv2.findContours(m, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+    a = np.zeros_like(m); cv2.drawContours(a, cs, -1, 255, 2 * e2 + 1, cv2.LINE_8)
+    a &= ~m
+    if ouverts:
+        o = np.zeros_like(m)
+        for c, r in ouverts: cv2.circle(o, c, max(1, int(r)), 255, -1)
+        a &= ~o
+    return a
+
+
+def _poser(z, masque, col):
+    """Pose une couleur dans la zone z (vue sur l'image) selon un masque sur-échantillonné, en ne calculant que les pixels touchés."""
+    a = cv2.resize(masque, (z.shape[1], z.shape[0]), interpolation=cv2.INTER_AREA) if masque.shape[:2] != z.shape[:2] else masque
+    z[a == 255] = col                                                      # intérieur : couleur pleine
+    ys, xs = np.nonzero((a > 0) & (a < 255))                               # bords : mélange anti-crénelé
+    if not len(ys): return
+    al = (a[ys, xs].astype(np.float32) / 255)[:, None]
+    z[ys, xs] = (z[ys, xs].astype(np.float32) * (1 - al) + np.array(col, np.float32) * al + 0.5).astype(np.uint8)
+
+
+def _echelle(x0, y0, x1, y1):
+    """Sur-échantillonnage local : 2 en général, 1 sur les très gros plans (mémoire et vitesse)."""
+    return 2 if (x1 - x0) * (y1 - y0) < 1_500_000 else 1
+
+
 def silhouette(img, polys=(), tubes=(), ellipses=(), coul=BLANC, ep=2.0, ouvert=(), lignes=()):
     """Forme pleine faite de plusieurs morceaux (polygones lissés, tubes, ellipses) avec UN SEUL contour noir autour de
     l'ensemble (comme un dessin à la main) ; `ouvert` : disques (centre, rayon) où le contour s'efface (raccord au vêtement) ;
@@ -431,23 +472,14 @@ def silhouette(img, polys=(), tubes=(), ellipses=(), coul=BLANC, ep=2.0, ouvert=
     xs = [q[0] for q in pts_all]; ys = [q[1] for q in pts_all]; mg = int(rmax + 3 * ep + 6)
     x0, y0 = max(0, int(min(xs)) - mg), max(0, int(min(ys)) - mg); x1, y1 = min(img.shape[1], int(max(xs)) + mg), min(img.shape[0], int(max(ys)) + mg)
     if x1 <= x0 or y1 <= y0: return
-    K = 3; m = np.zeros(((y1 - y0) * K, (x1 - x0) * K), np.uint8)
+    K = _echelle(x0, y0, x1, y1); m = np.zeros(((y1 - y0) * K, (x1 - x0) * K), np.uint8)
     def L(q): return (int(round((q[0] - x0) * K)), int(round((q[1] - y0) * K)))
     for P in polys: cv2.fillPoly(m, [np.array([L(q) for q in P], np.int32)], 255)
-    for a_, b_, ra, rb in tubes:
-        n = max(2, int(math.hypot(b_[0] - a_[0], b_[1] - a_[1]) / 1.0))
-        for k in range(n + 1):
-            u = k / n; cv2.circle(m, L((a_[0] + (b_[0] - a_[0]) * u, a_[1] + (b_[1] - a_[1]) * u)), max(1, int((ra + (rb - ra) * u) * K)), 255, -1)
+    _tubes_masque(m, L, K, tubes)
     for c, rx_, ry_ in ellipses: cv2.ellipse(m, L(c), (max(1, int(rx_ * K)), max(1, int(ry_ * K))), 0, 0, 360, 255, -1)
-    e2 = max(1, int(round(ep * K)))
-    anneau = cv2.dilate(m, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2 * e2 + 1, 2 * e2 + 1))) & ~m
-    yy, xx = np.mgrid[0:m.shape[0], 0:m.shape[1]]
-    for c, r in ouvert: anneau[((xx - (c[0] - x0) * K) ** 2 + (yy - (c[1] - y0) * K) ** 2) < (r * K) ** 2] = 0
-    z = img[y0:y1, x0:x1].astype(np.float32)
-    for mk, col in ((anneau, TRAIT), (m, coul)):
-        a = cv2.resize(mk, (x1 - x0, y1 - y0), interpolation=cv2.INTER_AREA).astype(np.float32)[..., None] / 255
-        z = z * (1 - a) + np.array(col, np.float32) * a
-    img[y0:y1, x0:x1] = np.clip(z, 0, 255).astype(np.uint8)
+    anneau = _anneau(m, max(1, int(round(ep * K))), [(L(c), r * K) for c, r in ouvert])
+    z = img[y0:y1, x0:x1]
+    for mk, col in ((anneau, TRAIT), (m, coul)): _poser(z, mk, col)
     for pts, e_ in lignes: _trait(img, pts, e_)
 
 
@@ -462,6 +494,20 @@ def _main(img, m, a, forme_, r, peau, ep, pouce=None):
     o = (m[0] - ux * r * 1.05, m[1] - uy * r * 1.05)                       # poignet
     def P(v, u): return (o[0] + (vx * v + ux * u) * r, o[1] + (vy * v + uy * u) * r)
     e1 = ep * 0.5; lig = []
+    if forme_ == "hanche":                                                 # main posée sur la hanche : dos de la main, 4 doigts vers le bas
+        a2 = 0.15 * (1 if ux > 0 else -1); ux, uy = math.sin(a2), math.cos(a2); vx, vy = uy, -ux
+        if vx * s_ < 0: vx, vy = -vx, -vy
+        o = (m[0] - ux * r * 0.6, m[1] - uy * r * 0.6)
+        def P(v, u): return (o[0] + (vx * v + ux * u) * r, o[1] + (vy * v + uy * u) * r)
+        corps = lisse([P(-0.80, 0.0), P(-0.92, 0.7), P(-0.82, 1.5), P(-0.55, 1.95), P(-0.15, 2.05), P(0.25, 1.95), P(0.6, 1.6), P(0.75, 0.9), P(0.70, 0.0)])
+        lig = [([P(-0.45, 1.05), P(-0.48, 1.55), P(-0.42, 1.9)], e1), ([P(-0.08, 1.1), P(-0.08, 1.6), P(-0.05, 2.0)], e1), ([P(0.3, 1.05), P(0.3, 1.5), P(0.32, 1.85)], e1)]
+        silhouette(img, [corps], coul=peau, ep=ep, lignes=lig); return
+    if forme_ == "detendue":                                               # main détendue, doigts un peu repliés (ni poing ni main à plat)
+        corps = lisse([P(-0.72, 0.0), P(-0.84, 0.8), P(-0.80, 1.55), P(-0.55, 1.98), P(-0.15, 2.08), P(0.22, 1.95), P(0.42, 1.55), P(0.50, 1.1), P(0.62, 0.0)])
+        pouce_ = [(P(0.55, 0.45), P(0.85, 1.15), r * 0.30, r * 0.22)]
+        lig = [([P(-0.42, 1.35), P(-0.44, 1.75), P(-0.32, 1.98)], e1), ([P(-0.05, 1.4), P(-0.04, 1.8), P(0.05, 2.0)], e1), ([P(0.25, 1.35), P(0.27, 1.65), P(0.34, 1.82)], e1),
+               ([P(-0.55, 1.75), P(-0.2, 1.88), P(0.2, 1.75)], e1 * 0.8)]                       # bout des doigts repliés
+        silhouette(img, [corps], pouce_, coul=peau, ep=ep, ouvert=[(o, r * 0.55)], lignes=lig); return
     if forme_ in ("poing", None) or forme_ not in ("ouverte", "index", "paume", "pouce"):
         corps = lisse([P(-0.72, 0.0), P(-0.86, 0.75), P(-0.78, 1.45), P(-0.35, 1.78), P(0.25, 1.78), P(0.72, 1.45), P(0.82, 0.75), P(0.68, 0.0)])
         lig = [([P(-0.62, 1.05), P(-0.66, 1.4), P(-0.5, 1.62)], e1), ([P(-0.2, 1.1), P(-0.22, 1.5), P(-0.1, 1.72)], e1), ([P(0.22, 1.1), P(0.22, 1.5), P(0.32, 1.68)], e1),
@@ -504,33 +550,20 @@ def membre(img, pts, rayons, coul, ep, ouvert_debut=True, ouvert_fin=False, ombr
     xs = [q[0] for q in P]; ys = [q[1] for q in P]; mg = int(rmax + 3 * ep + 4)
     x0, y0 = max(0, int(min(xs)) - mg), max(0, int(min(ys)) - mg); x1, y1 = min(img.shape[1], int(max(xs)) + mg), min(img.shape[0], int(max(ys)) + mg)
     if x1 <= x0 or y1 <= y0: return None
-    K = 2                                                                  # dessin en double résolution dans la zone (bords lisses)
+    K = _echelle(x0, y0, x1, y1)                                           # dessin en double résolution dans la zone (bords lisses)
     m = np.zeros(((y1 - y0) * K, (x1 - x0) * K), np.uint8)
-    for i in range(len(P) - 1):
-        (ax, ay), (bx, by) = P[i], P[i + 1]; ra, rb = rayons[i], rayons[i + 1]
-        n = max(2, int(math.hypot(bx - ax, by - ay) / 1.5))
-        for k in range(n + 1):
-            u = k / n; cx_ = (ax + (bx - ax) * u - x0) * K; cy_ = (ay + (by - ay) * u - y0) * K
-            cv2.circle(m, (int(round(cx_)), int(round(cy_))), max(1, int(round((ra + (rb - ra) * u) * K))), 255, -1)
-    e2 = max(1, int(round(ep * K)))
-    anneau = cv2.dilate(m, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2 * e2 + 1, 2 * e2 + 1))) & ~m
-    yy, xx = np.mgrid[0:m.shape[0], 0:m.shape[1]]
-    for ouvert, q, r in ((ouvert_debut, P[0], rayons[0]), (ouvert_fin, P[-1], rayons[-1])):
-        if ouvert: anneau[((xx - (q[0] - x0) * K) ** 2 + (yy - (q[1] - y0) * K) ** 2) < (r * 1.08 * K) ** 2] = 0
-    z = img[y0:y1, x0:x1].astype(np.float32)
-    def pose(masque, c):
-        a = cv2.resize(masque, (x1 - x0, y1 - y0), interpolation=cv2.INTER_AREA).astype(np.float32)[..., None] / 255
-        z[:] = z * (1 - a) + np.array(c, np.float32) * a
+    def L(q): return (int(round((q[0] - x0) * K)), int(round((q[1] - y0) * K)))
+    _tubes_masque(m, L, K, [(P[i], P[i + 1], rayons[i], rayons[i + 1]) for i in range(len(P) - 1)])
+    ouv = [(L(q), r * 1.08 * K) for ouvert, q, r in ((ouvert_debut, P[0], rayons[0]), (ouvert_fin, P[-1], rayons[-1])) if ouvert]
+    anneau = _anneau(m, max(1, int(round(ep * K))), ouv)
+    z = img[y0:y1, x0:x1]
+    def pose(masque, c): _poser(z, masque, c)
     pose(anneau, TRAIT); pose(m, coul)
     if ombre is not None:                                                  # ombre douce sur un côté du membre
         o = np.zeros_like(m); dxo, dyo = cote_ombre
-        for i in range(len(P) - 1):
-            (ax, ay), (bx, by) = P[i], P[i + 1]; ra, rb = rayons[i], rayons[i + 1]; n = max(2, int(math.hypot(bx - ax, by - ay) / 2))
-            for k in range(n + 1):
-                u = k / n; r_ = ra + (rb - ra) * u
-                cv2.circle(o, (int(((ax + (bx - ax) * u) + dxo * r_ * 0.62 - x0) * K), int(((ay + (by - ay) * u) + dyo * r_ * 0.62 - y0) * K)), max(1, int(r_ * 0.5 * K)), 255, -1)
+        _tubes_masque(o, L, K, [((P[i][0] + dxo * rayons[i] * 0.62, P[i][1] + dyo * rayons[i] * 0.62), (P[i + 1][0] + dxo * rayons[i + 1] * 0.62, P[i + 1][1] + dyo * rayons[i + 1] * 0.62),
+                                 rayons[i] * 0.5, rayons[i + 1] * 0.5) for i in range(len(P) - 1)])
         pose(cv2.GaussianBlur(o & m, (0, 0), K * 1.2), ombre)
-    img[y0:y1, x0:x1] = np.clip(z, 0, 255).astype(np.uint8)
     return m
 
 
@@ -554,13 +587,22 @@ def _manche(img, e, c, m, larg, coul, courte, peau, ep, forme_main, r_m, R):
     ombre = _fonce(coul, 0.86)
     if courte:                                                             # bras nu, manche courte par-dessus
         membre(img, [e, mi1, c, mi2, pg], [larg * 0.40, larg * 0.36, larg * 0.32, larg * 0.31, larg * 0.26], peau, ep, True, False)
-        mc = (e[0] + (c[0] - e[0]) * 0.62, e[1] + (c[1] - e[1]) * 0.62)
-        membre(img, [e, mc], [larg * 0.52, larg * 0.48], coul, ep, True, False, ombre, (nx, ny) if ny > 0 else (-nx, -ny))
-    else:
-        membre(img, [e, mi1, c, mi2, pg], [larg * 0.50, larg * 0.50, larg * 0.45, larg * 0.46, larg * 0.40], coul, ep, True, False, ombre, (nx, ny) if ny > 0 else (-nx, -ny))
+        mc = (e[0] + (c[0] - e[0]) * 0.62, e[1] + (c[1] - e[1]) * 0.62)  # manche courte coupée droit, un peu évasée (pas de boule)
+        ex_, ey_ = c[0] - e[0], c[1] - e[1]; ne = math.hypot(ex_, ey_) or 1; px_, py_ = -ey_ / ne, ex_ / ne
+        e0 = (e[0] - ex_ / ne * larg * 0.35, e[1] - ey_ / ne * larg * 0.35)   # la manche part de l'intérieur du buste (pas de couture ronde)
+        man = [(e0[0] + px_ * larg * 0.50, e0[1] + py_ * larg * 0.50), (mc[0] + px_ * larg * 0.58, mc[1] + py_ * larg * 0.58),
+               (mc[0] - px_ * larg * 0.58, mc[1] - py_ * larg * 0.58), (e0[0] - px_ * larg * 0.50, e0[1] - py_ * larg * 0.50)]
+        silhouette(img, [man], coul=coul, ep=ep, ouvert=[(e0, larg * 0.75)])
+        _trait(img, [(mc[0] + px_ * larg * 0.5 - ex_ / ne * larg * 0.12, mc[1] + py_ * larg * 0.5 - ey_ / ne * larg * 0.12),
+                     (mc[0] - px_ * larg * 0.5 - ex_ / ne * larg * 0.12, mc[1] - py_ * larg * 0.5 - ey_ / ne * larg * 0.12)], ep * 0.6, _fonce(coul, 0.6))   # ourlet
+    else:                                                                  # manche longue : la main est dessinée DESSOUS, la manche la recouvre au poignet
+        a = math.atan2(m[0] - c[0], m[1] - c[1])                           # (aucune articulation visible au poignet)
+        if forme_main: _main(img, m, a, forme_main, r_m, peau, ep)
+        membre(img, [e, mi1, c, mi2, pg], [larg * 0.50, larg * 0.50, larg * 0.45, larg * 0.46, larg * 0.41], coul, ep, True, False, ombre, (nx, ny) if ny > 0 else (-nx, -ny))
         _plis_coude(img, e, c, pg, larg, ep, _fonce(coul, 0.55))
-        pg2 = (pg[0] - ux * larg * 0.36, pg[1] - uy * larg * 0.36)          # poignet élastique
-        membre(img, [pg2, pg], [larg * 0.40, larg * 0.39], coul, ep, False, False)
+        pg2 = (pg[0] - ux * larg * 0.30, pg[1] - uy * larg * 0.30)          # petit pli de l'élastique (un trait fin, pas de bague)
+        _trait(img, [(pg2[0] + nx * larg * 0.30, pg2[1] + ny * larg * 0.30), (pg2[0] - ux * larg * 0.04, pg2[1] - uy * larg * 0.04), (pg2[0] - nx * larg * 0.30, pg2[1] - ny * larg * 0.30)], ep * 0.6, _fonce(coul, 0.6))
+        return
     a = math.atan2(m[0] - c[0], m[1] - c[1])
     if forme_main: _main(img, m, a, forme_main, r_m, peau, ep)
     else: _ellipse(img, m, (r_m + ep, r_m + ep), 0, TRAIT); _ellipse(img, m, (r_m, r_m), 0, peau)
@@ -601,11 +643,44 @@ def avant_bras(img, c, m, larg, coul, courte, peau, ep, forme_main, r_m):
     pg = (m[0] - ux * r_m * 1.05, m[1] - uy * r_m * 1.05); mi = ((c[0] + pg[0]) / 2, (c[1] + pg[1]) / 2)
     if courte: membre(img, [c, mi, pg], [larg * 0.32, larg * 0.31, larg * 0.26], peau, ep, True, False)
     else:
-        membre(img, [c, mi, pg], [larg * 0.45, larg * 0.46, larg * 0.40], coul, ep, True, False)
-        pg2 = (pg[0] - ux * larg * 0.36, pg[1] - uy * larg * 0.36); membre(img, [pg2, pg], [larg * 0.40, larg * 0.39], coul, ep, False, False)
+        if forme_main: _main(img, m, math.atan2(dx, dy), forme_main, r_m, peau, ep)
+        membre(img, [c, mi, pg], [larg * 0.45, larg * 0.46, larg * 0.41], coul, ep, True, False)
+        return
     a = math.atan2(dx, dy)
     if forme_main: _main(img, m, a, forme_main, r_m, peau, ep)
     else: _ellipse(img, m, (r_m + ep, r_m + ep), 0, TRAIT); _ellipse(img, m, (r_m, r_m), 0, peau)
+
+
+def chaussure(img, sol, f, R, C, ep):
+    """Chaussure d'un seul contour, de la même forme que le pied des vidéos (talon rond, bout arrondi), dessinée AVANT le
+    bas du pantalon qui vient la recouvrir : baskets (semelle blanche épaisse, lacets, virgule), chaussures de ville
+    (cuir brillant, semelle fine), bottes (tige haute), talons (talon fin), chaussons."""
+    forme_ = (C or {}).get("chaussures") or "baskets"; col = tuple((C or {}).get("c_chaussures") or (240, 240, 240))
+    fs = 1 if f >= 0 else -1; kf = abs(f); w = 0.44 * R; sx = (0.55 + 0.45 * kf) * 1.15
+    def Q(x, y): return (sol[0] + fs * x * (sx if x > 0 else 1.0) * w, sol[1] - y * w)
+    haut = 2.6 if forme_ == "bottes" else (1.15 if forme_ in ("baskets", "chaussons") else 0.95)
+    if forme_ in ("talons", "escarpins"):
+        P = [Q(-0.45, 1.1), Q(-0.55, 0.85), Q(-0.45, 0.6), Q(0.4, 0.35), Q(1.3, 0.05), Q(2.1, 0.02), Q(2.35, 0.2), Q(2.15, 0.45), Q(1.4, 0.65), Q(0.6, 1.0), Q(0.45, 1.15)]
+        silhouette(img, [lisse(P, n=4)], [(Q(-0.35, 0.6), Q(-0.32, 0.0), 0.07 * w, 0.05 * w)], coul=col, ep=ep)
+        _trait(img, [Q(-0.40, 1.02), Q(0.50, 0.92)], ep * 0.7)
+        return
+    P = [Q(-0.50, haut), Q(-0.58, haut * 0.55 if haut > 1.5 else 0.6), Q(-0.62, 0.30), Q(-0.50, 0.02), Q(0.4, -0.02), Q(1.6, -0.02),
+         Q(2.25, 0.04), Q(2.48, 0.30), Q(2.38, 0.60), Q(1.95, 0.80), Q(1.30, 0.98), Q(0.70, haut if haut < 1.5 else 1.3), Q(0.55, haut)]
+    semelle = [Q(-0.52, 0.30), Q(2.42, 0.30)]
+    lig = []
+    if forme_ in ("baskets", "chaussons"):
+        silhouette(img, [lisse(P, n=4)], coul=col, ep=ep)
+        sm = [Q(-0.62, 0.32), Q(2.45, 0.34), Q(2.42, 0.02), Q(-0.52, -0.02)]   # semelle épaisse
+        silhouette(img, [lisse(sm, n=3)], coul=(250, 250, 250) if sum(col) < 600 else (205, 205, 212), ep=ep * 0.8)
+        if forme_ == "baskets":
+            for k in range(3): _trait(img, [Q(0.75 + 0.22 * k, 1.12 - 0.12 * k), Q(0.95 + 0.22 * k, 0.98 - 0.12 * k)], ep * 0.7)   # lacets
+            _trait(img, [Q(0.1, 0.55), Q(0.7, 0.45), Q(1.3, 0.62)], ep * 0.8, _fonce(col, 0.6) if sum(col) > 300 else (230, 230, 235))   # bande sur le côté
+            _trait(img, [Q(1.85, 0.40), Q(2.25, 0.62)], ep * 0.6, _fonce(col, 0.7))   # couture du bout
+        return
+    silhouette(img, [lisse(P, n=4)], coul=col, ep=ep)                      # ville, bottes, sandales…
+    _trait(img, semelle, ep * 0.9, _fonce(col, 0.5))
+    _ellipse(img, Q(1.7, 0.62), (0.22 * w, 0.08 * w), 0, _clair(col, 0.45))   # reflet du cuir
+    if forme_ == "bottes": _trait(img, [Q(-0.45, 2.3), Q(0.5, 2.35)], ep * 0.8)
 
 
 def _pied(img, c, d, R, C, peau, ep, peau_o):
@@ -715,6 +790,11 @@ def dessiner(img, P, p):
     elif style_ch: coiffure_arriere(img, tete, rxe, R, 1, 0.0, style_ch, col_ch, ep, tilt)
 
     bras = K["bras"]; formes = (p.get("main_forme_g") or "ouverte", p.get("main_forme_d") or "ouverte") if p.get("mains") else ("ouverte", "ouverte")
+    def _forme_naturelle(f_, g_):                                          # mains ouvertes et détendues comme dans les vidéos :
+        if g_ == "mains_hanches": return "hanche"                          # main à plat sur la hanche, doigts vers le bas
+        if f_ == "poing" and g_ not in ("poing", "telephone"): return "detendue"   # le poing fermé seulement pour la colère / tenir un objet
+        return f_
+    formes = tuple(_forme_naturelle(f_, g_) for f_, g_ in zip(formes, K.get("gestes") or (None, None)))
     loin_i = 1 if d > 0 else 0
     larg_b = MANCHE * R
     if K.get("croise", 0) > 0.5: formes = ("ouverte", "ouverte")          # bras croisés : mains à plat sur les biceps (référence)
@@ -738,26 +818,37 @@ def dessiner(img, P, p):
     jambes.sort(key=lambda j: not j[0])                                    # la jambe lointaine d'abord
     for loin_j, a, g, b, sg in jambes:
         long_ = not (robe or bas in ("short", "bermuda"))
+        f_ = d * (0.9 if loin_j else 0.55)                                 # les deux pieds vers où il regarde ; le plus proche tourné vers la caméra
+        if not k34: f_ = sg * 0.45
+        nu = (C.get("chaussures") or "baskets") in ("pieds_nus", "aucune")
+        sol_ = (b[0], b[1] + 0.12 * R)
         if long_:
             cj = c_bas_o if loin_j else c_bas; lw = (0.74 * R, 0.66 * R, 0.6 * R)
+            if nu: jambe_pied(img, g, g, sol_, f_, R, peau, ep, sh)        # pied nu sous le pantalon
+            else: chaussure(img, sol_, f_, R, C, ep)
+            b = (b[0], sol_[1] - (0.30 if nu else 0.50) * R)                # le bas du pantalon tombe sur la chaussure
             mol = (g[0] + (b[0] - g[0]) * 0.35, g[1] + (b[1] - g[1]) * 0.35); cu = ((a[0] + g[0]) / 2, (a[1] + g[1]) / 2)
-            membre(img, [a, cu, g, mol, b], [lw[0] / 2, lw[0] * 0.49, lw[1] / 2, lw[1] * 0.5, lw[2] / 2], cj, ep, True, False, _fonce(cj, 0.88), (sh, 0.0))
+            hw = lw[2] * 0.56                                              # demi-largeur du bas (pantalon qui s'évase un peu sur la chaussure)
+            haut_b = (b[0] + (mol[0] - b[0]) * 0.35, b[1] + (mol[1] - b[1]) * 0.35)
+            bas_p = [(haut_b[0] - lw[2] * 0.5, haut_b[1]), (haut_b[0] + lw[2] * 0.5, haut_b[1]), (b[0] + hw + 0.02 * R, b[1]), (b[0] - hw - 0.02 * R, b[1] - 0.03 * R * d)]
+            silhouette(img, [bas_p], [(a, cu, lw[0] / 2, lw[0] * 0.49), (cu, g, lw[0] * 0.49, lw[1] / 2), (g, mol, lw[1] / 2, lw[1] * 0.5), (mol, haut_b, lw[1] * 0.5, lw[2] / 2)],
+                       coul=cj, ep=ep, ouvert=[(a, lw[0] * 0.55)])        # jambe de pantalon d'un seul contour, bas coupé droit
             _trait(img, [(g[0] - lw[1] * 0.3, g[1] - 0.1 * R), (g[0] + lw[1] * 0.15, g[1] + 0.02 * R)], ep * 0.7)   # pli du genou
-            if bas == "jean": _ligne(img, (a[0] + sh * lw[0] * 0.25, a[1] + 0.2 * R), (b[0] + sh * lw[2] * 0.25, b[1] - 0.1 * R), _clair(cj, 0.3), ep * 0.6)
-            if bas == "jogging": _tube(img, (b[0], b[1] - 0.14 * R), (b[0], b[1]), lw[2] * 0.9 + 2 * ep, lw[2] * 0.9 + 2 * ep, TRAIT); _tube(img, (b[0], b[1] - 0.14 * R), (b[0], b[1]), lw[2] * 0.9, lw[2] * 0.9, _fonce(cj, 0.88))
+            _trait(img, [(b[0] - hw * 0.6, b[1] - 0.22 * R), (b[0] - hw * 0.1, b[1] - 0.12 * R)], ep * 0.6, _fonce(cj, 0.6))   # pli sur la chaussure
+            if bas == "jean": _ligne(img, (a[0] + sh * lw[0] * 0.25, a[1] + 0.2 * R), (b[0] + sh * hw * 0.5, b[1] - 0.1 * R), _clair(cj, 0.3), ep * 0.6)
+            if bas == "jogging":                                           # bas élastique resserré
+                silhouette(img, [[(b[0] - hw * 0.85, b[1] - 0.16 * R), (b[0] + hw * 0.85, b[1] - 0.16 * R), (b[0] + hw * 0.8, b[1]), (b[0] - hw * 0.8, b[1])]], coul=_fonce(cj, 0.88), ep=ep * 0.8)
+            continue
         else:
-            nu = (C.get("chaussures") or "baskets") in ("pieds_nus", "aucune")
             if nu:                                                         # jambe et pied nu d'un seul trait (vidéos de référence)
-                f_ = d * (0.9 if loin_j else 0.55)                         # les deux pieds vers où il regarde ; le plus proche tourné vers la caméra
-                if not k34: f_ = sg * 0.45
-                jambe_pied(img, a, g, (b[0], b[1] + 0.12 * R), f_, R, peau, ep, sh)
+                jambe_pied(img, a, g, sol_, f_, R, peau, ep, sh)
                 continue
+            chaussure(img, sol_, f_, R, C, ep)
+            b = (b[0], sol_[1] - 0.45 * R)
             mol = (g[0] + (b[0] - g[0]) * 0.32, g[1] + (b[1] - g[1]) * 0.32); cu = ((a[0] + g[0]) / 2, (a[1] + g[1]) / 2)
             gn = (g[0] + d * 0.03 * R, g[1])                                # genou : légère bosse vers l'avant
-            membre(img, [a, cu, gn, mol, b], [CUISSE * R / 2, CUISSE * R * 0.47, GENOU * R / 2, GENOU * R * 0.53, CHEVILLE * R / 2], peau, ep, True, nu,
-                   _fonce(peau, 0.93), (sh, 0.0))
-            if nu: continue
-        _pied(img, (b[0], b[1] + 0.08 * R), d, R, C, peau, ep, peau_o)
+            membre(img, [a, cu, gn, mol, b], [CUISSE * R / 2, CUISSE * R * 0.47, GENOU * R / 2, GENOU * R * 0.53, CHEVILLE * R / 2], peau, ep, True, True,
+                   _fonce(peau, 0.93), (sh, 0.0))                          # la jambe entre dans la chaussure sans trait
     if bas in ("short", "bermuda") and not robe:                           # short long et large jusqu'au genou (référence)
         y_bas = ty + (4.85 if bas == "short" else 5.25) * R
         for loin_j, a, g, b, sg in jambes:

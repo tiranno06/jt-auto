@@ -41,3 +41,14 @@ jobs:
           else
             echo "Une fabrication est déjà en cours : rien à faire."
           fi
+      - name: Relancer une fabrication coupée par GitHub (machine arrêtée en pleine vidéo)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # une vidéo dont la machine a été coupée (« shutdown signal », délai dépassé…) n'a ni vidéo ni alerte :
+          # on relance une seule fois chaque fabrication en échec des 6 dernières heures (1re tentative seulement)
+          DEPUIS=$(date -u -d '-6 hours' +%Y-%m-%dT%H:%M:%SZ)
+          gh run list -R "$GITHUB_REPOSITORY" -w emission.yml -L 20 --json databaseId,conclusion,attempt,createdAt \
+            -q ".[] | select(.conclusion==\"failure\" and .attempt==1 and .createdAt > \"$DEPUIS\") | .databaseId" | while read -r ID; do
+            gh run rerun "$ID" -R "$GITHUB_REPOSITORY" --failed && echo "Fabrication $ID relancée (coupée en route)."
+          done || true
