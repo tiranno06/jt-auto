@@ -64,7 +64,7 @@ def creer(graine, genre=None, age=None, cheveux=None, c_cheveux=None, corpulence
 # ------------------------------------------------------------------ dessin (corps des marionnettes, version adulte)
 import os
 STYLE_PERSO = (os.environ.get("STYLE_PERSO") or "toon").lower()  # "toon" : nouveau style (référence : tête en œuf de trois-quarts, corps élancé) ; "ancien" : marionnettes
-if STYLE_PERSO == "toon": M.JAMBES_ADULTE, M.ADULTE_TETE = 1.88, 0.7   # silhouette de la référence : tête = 1/4 de la hauteur
+if STYLE_PERSO == "toon": M.JAMBES_ADULTE, M.ADULTE_TETE = 1.70, 0.7   # silhouette de la référence : tête = 1/4 de la hauteur
 PEAU_HUMAINE = (os.environ.get("PEAU") or "blanche") == "humaine"     # peau blanche comme nos bonshommes (défaut) ou couleur humaine
 
 COIFF_M = {"carre": "carre", "long": "long", "queue": "queue", "chignon": "chignon", "boucles": "boucles", "court": "court_texture",
