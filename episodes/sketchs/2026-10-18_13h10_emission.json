@@ -1,0 +1,420 @@
+{
+ "titre": "CLÉ PERDUE",
+ "sujet": "CLÉ PERDUE",
+ "ecran": "PYJAMA & CRI",
+ "invite_nom": "Hubert Rustine",
+ "invite_role": "Expert (fictif)",
+ "invite_look": "chauve",
+ "lieu_direct": "Assemblée",
+ "titre_accroche": "POV : Ton voisin a déménagé...",
+ "question": "Team Jojo ou team Kévin ? 👇",
+ "running_gag": "Le voisin qui n'existe pas.",
+ "verite": "Le voisin a menti effrontément pour éviter de rendre des comptes, et en réalité, il n'a jamais eu la clé, ni même existé comme voisin.",
+ "repliques": [
+  {
+   "p": "narrateur",
+   "t": "Épisode 2. POV : Ton voisin a déménagé...",
+   "d": "[excited] Épisode 2. Pi-o-vi : Ton voisin a déménagé..."
+  },
+  {
+   "p": "presentateur",
+   "t": "Jojo frappe à la porte de son voisin à 8 h du matin.",
+   "d": "[annoyed] Jojo : PUTAIN, KÉVIN ! OUVRE !"
+  },
+  {
+   "p": "invite",
+   "t": "Kévin ouvre en pyjama, sourire innocent.",
+   "d": "[laughs] Kévin : Oh, salut Jojo ! T’es en forme ce matin !"
+  },
+  {
+   "p": "presentateur",
+   "t": "Jojo : T’as encore oublié de me rendre la clé ?",
+   "d": "[shouting] Jojo : T’AU MOINS UNE EXCUSE CETTE FOIS ?!"
+  },
+  {
+   "p": "invite",
+   "t": "Kévin : Ben… j’ai déménagé.",
+   "d": "[deadpan] Kévin : Ben… J’AI DÉMÉNAGÉ.",
+   "chute": true,
+   "attente": 0.5
+  },
+  {
+   "p": "presentateur",
+   "t": "Jojo : QUOI ? !",
+   "d": "[panicked] Jojo : QUOI ?! TU QUOI ?!"
+  },
+  {
+   "p": "invite",
+   "t": "Kévin : Ouais, enfin, t’as vu l’appart ?",
+   "d": "[nervous laugh] Kévin : Euh… attends, je te montre !"
+  },
+  {
+   "p": "presentateur",
+   "t": "Jojo : T’as bouffé les clés en déménageant ?",
+   "d": "[disgusted] Jojo : T’AU MOINS PRÉVENU LE PROPRIO ?"
+  },
+  {
+   "p": "envoyee",
+   "t": "La clé n’a jamais existé.",
+   "d": "[deadpan] Lila : [sighs] La clé n’a JAMAIS existé."
+  }
+ ],
+ "bandeau": [
+  "VOISIN DISPARU : LA CLÉ A DISPARU AVEC LUI",
+  "DÉMÉNAGEMENT EXPRESS : L'APPART EST DÉJÀ VIDE",
+  "PROPRIÉTAIRE EN COLÈRE : 'DEGAGEZ !'"
+ ],
+ "gag": {
+  "replique": 4,
+  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. A narrow apartment hallway with a closed front door. The door opens to reveal a neighbor in pajamas holding a cardboard box, smiling innocently while Jojo knocks furiously, his face red with anger. Cartons are visible inside the apartment."
+ },
+ "legende": "Épisode 2 · L'APPART DE LA GALÈRE — Quand ton voisin invente son existence pour éviter de te rendre des comptes. Satire, personnages fictifs.",
+ "hashtags": [
+  "petitsdramas",
+  "humour",
+  "pov",
+  "sketch",
+  "voisins",
+  "galere",
+  "dessinanime"
+ ],
+ "sources": [],
+ "decoupage": [
+  {
+   "scene": "Jojo frappe à la porte de son voisin en pyjama, qui ouvre avec un sourire innocent. Intérieur : le voisin est en pyjama, des cartons sont visibles.",
+   "repliques": [
+    1,
+    2,
+    3,
+    4
+   ],
+   "lieu": "",
+   "son": "rimshot",
+   "duree": 8.0,
+   "decor": "a narrow apartment hallway, a closed front door with a peephole, a torn delivery notice on the floor"
+  },
+  {
+   "scene": "Jojo réalise que le voisin a déménagé et explose. Le voisin tente de se justifier.",
+   "repliques": [
+    5,
+    6,
+    7,
+    8
+   ],
+   "lieu": "",
+   "son": "dun_dun",
+   "duree": 8.0,
+   "decor": "a narrow apartment hallway, a closed front door with a peephole, a torn delivery notice on the floor",
+   "titre": "Le lendemain..."
+  },
+  {
+   "scene": "Jojo comprend que tout était un mensonge et hurle sa colère.",
+   "repliques": [],
+   "lieu": "",
+   "son": "",
+   "duree": 8.0,
+   "decor": "a narrow apartment hallway, a closed front door with a peephole, a torn delivery notice on the floor",
+   "titre": "La vérité éclate..."
+  }
+ ],
+ "serie_titre": "L'APPART DE LA GALÈRE",
+ "resume_episode": "Jojo découvre que son voisin Kévin a menti effrontément sur son existence pour éviter de lui rendre une clé. La situation empire quand il réalise que tout était un mensonge.",
+ "studio": {
+  "moment": "jour",
+  "lieux": "hall",
+  "costumes": {
+   "presentateur": {
+    "haut": "tshirt",
+    "c_haut": "bleu",
+    "motif": "uni",
+    "bas": "pantalon",
+    "chaussures": "baskets",
+    "details": [
+     "barbe_courte"
+    ],
+    "chapeau": null
+   },
+   "invite": {
+    "haut": "pyjama",
+    "c_haut": "bleu",
+    "motif": "rayures",
+    "bas": "pantalon",
+    "chaussures": "chaussons",
+    "details": null,
+    "chapeau": null
+   }
+  },
+  "personnages": [
+   {
+    "genre": "h",
+    "age": 35,
+    "taille": 1,
+    "corpulence": 0.8,
+    "cheveux": "court",
+    "barbe": "trois_jours"
+   },
+   {
+    "genre": "h",
+    "age": 30,
+    "taille": 0.9,
+    "corpulence": 0.7,
+    "cheveux": "court_texture",
+    "barbe": null
+   }
+  ],
+  "figurants": [],
+  "gags": [
+   "'LA CLÉ ? JAMAIS ENTENDU PARLER.'"
+  ],
+  "ambiances": "poussiere",
+  "cadence": "rapide",
+  "jeu": [
+   {
+    "replique": 0,
+    "emotion": "colere",
+    "geste": "poing",
+    "intensite": 3
+   },
+   {
+    "replique": 1,
+    "emotion": "rire",
+    "geste": "sourire",
+    "intensite": 2
+   },
+   {
+    "replique": 2,
+    "emotion": "colere",
+    "geste": "pointe_d",
+    "intensite": 3
+   },
+   {
+    "replique": 3,
+    "emotion": "neutre",
+    "geste": "haussement",
+    "intensite": 1
+   },
+   {
+    "replique": 4,
+    "emotion": "choc",
+    "geste": "mains_hanches",
+    "intensite": 3
+   },
+   {
+    "replique": 5,
+    "emotion": "nervous laugh",
+    "geste": "gratte_tete",
+    "intensite": 2
+   },
+   {
+    "replique": 6,
+    "emotion": "disgusted",
+    "geste": "pointe_g",
+    "intensite": 3
+   },
+   {
+    "replique": 7,
+    "emotion": "sarcastic",
+    "geste": "croises",
+    "intensite": 2
+   },
+   {
+    "replique": 8,
+    "emotion": "colere",
+    "geste": "poing",
+    "intensite": 3
+   },
+   {
+    "replique": 9,
+    "emotion": "whispers",
+    "geste": "gratte_tete",
+    "intensite": 1
+   },
+   {
+    "replique": 10,
+    "emotion": "panicked",
+    "geste": "desespoir",
+    "intensite": 3
+   }
+  ],
+  "plans": [
+   {
+    "replique": 0,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "cible": "presentateur"
+   },
+   {
+    "replique": 1,
+    "plan": "moyen",
+    "mouvement": "fixe",
+    "cible": "invite"
+   },
+   {
+    "replique": 2,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "cible": "presentateur"
+   },
+   {
+    "replique": 3,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "cible": "invite"
+   },
+   {
+    "replique": 4,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "cible": "presentateur"
+   },
+   {
+    "replique": 5,
+    "plan": "moyen",
+    "mouvement": "fixe",
+    "cible": "invite"
+   },
+   {
+    "replique": 6,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "cible": "presentateur"
+   },
+   {
+    "replique": 7,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "cible": "invite"
+   },
+   {
+    "replique": 8,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "cible": "presentateur"
+   },
+   {
+    "replique": 9,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "cible": "invite"
+   },
+   {
+    "replique": 10,
+    "plan": "serre",
+    "mouvement": "zoom_choc",
+    "cible": "presentateur"
+   }
+  ],
+  "bruitages": [
+   {
+    "replique": 3,
+    "son": "vine_boom"
+   },
+   {
+    "replique": 7,
+    "son": "dun_dun"
+   },
+   {
+    "replique": 10,
+    "son": "klaxon_clown"
+   }
+  ]
+ },
+ "fiche": {
+  "fil": "Jojo se rend compte que son voisin a 'oublié' de lui rendre une clé qu'il n'a jamais eue. Il découvre que le voisin a déménagé sans le prévenir, et que tout était un mensonge pour éviter de lui rendre des comptes. La chute révèle que le voisin n'a jamais existé, inventé pour justifier son absence.",
+  "concept": "Un voisin mythomane qui invente son existence pour éviter de rendre une clé à Jojo. La révélation finale est un aveu involontaire qui retourne toute la situation.",
+  "format": "Sketch long (3 gags)",
+  "angle": "Méchanceté tendre envers les voisins égoïstes et les mensonges quotidiens, poussés jusqu'à l'absurde.",
+  "resume_factuel": "Un voisin oublie systématiquement de rendre une clé à Jojo, ce qui devient une source de conflits récurrents.",
+  "faits_reels": [],
+  "inventions": [
+   "Le voisin a déménagé sans prévenir.",
+   "Le voisin n'a jamais eu la clé et a tout inventé.",
+   "Le propriétaire a 'demandé' à Jojo de partir."
+  ],
+  "decoupage": [
+   {
+    "scene": "Jojo frappe à la porte de son voisin en pyjama, qui ouvre avec un sourire innocent. Intérieur : le voisin est en pyjama, des cartons sont visibles.",
+    "repliques": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "lieu": "",
+    "son": "rimshot",
+    "duree": 8.0,
+    "decor": "a narrow apartment hallway, a closed front door with a peephole, a torn delivery notice on the floor"
+   },
+   {
+    "scene": "Jojo réalise que le voisin a déménagé et explose. Le voisin tente de se justifier.",
+    "repliques": [
+     5,
+     6,
+     7,
+     8
+    ],
+    "lieu": "",
+    "son": "dun_dun",
+    "duree": 8.0,
+    "decor": "a narrow apartment hallway, a closed front door with a peephole, a torn delivery notice on the floor",
+    "titre": "Le lendemain..."
+   },
+   {
+    "scene": "Jojo comprend que tout était un mensonge et hurle sa colère.",
+    "repliques": [],
+    "lieu": "",
+    "son": "",
+    "duree": 8.0,
+    "decor": "a narrow apartment hallway, a closed front door with a peephole, a torn delivery notice on the floor",
+    "titre": "La vérité éclate..."
+   }
+  ],
+  "titres_sujet": [
+   "L'APPART DE LA GALÈRE : À 8h du matin, tu réalises que ton voisin a encore oublié de te rendre la clé..."
+  ],
+  "verification_web": false,
+  "note": 80.0,
+  "critique": "AVIS DU PUBLIC TEST (spectateurs sans contexte) :\n- Inès : a compris, rire 8/10, aurait scrollé à la réplique 3, perdu par : Le début un peu lent, aurait préféré un ton plus absurde dès le début.\n- Karim : a compris, rire 9/10\n- Sandrine : N A PAS COMPRIS, rire 3/10, aurait scrollé à la réplique 2, perdu par : Le manque de contexte clair et les références trop TikTok (ex : 'deadpan'). N’a pas compris l’humour noir.\nCritiques constructives du public :\n- Réplique n°1 (Kévin en pyjama) : Le sourire innocent de Kévin est bien, mais il manque une réaction plus exagérée ou un détail visuel (ex : un chat bizarre en arrière-plan) pour capter l’attention dès le début et justifier le scroll.\n- Réplique n°4 (Jojo paniqué) : Le ton de Jojo devrait être encore plus dramatique (ex : ajouter un zoom sur son visage ou un son de surprise exagéré) pour renforcer l’effet comique quand il réalise la situation.\n- Réplique n°6 (T’as bouffé les clés ?) : La réplique est forte, mais elle pourrait être encore plus drôle avec un effet visuel (ex : Kévin qui mime qu’il mange une clé ou un carton 'RIP clés' qui apparaît).\n- Ajouter un sous-titre ou un carton explicatif très court (ex : 'POV : Tu réalises que ton voisin est un menteur pathologique') pour aider les spectateurs comme Sandrine à comprendre le ton et le contexte.\n- La chute (réplique n°7) est excellente, mais elle pourrait être renforcée par un changement de musique ou un effet sonore (ex : un 'Dun Dun DUN' dramatique) pour marquer le moment",
+  "decision": "prêt pour production"
+ },
+ "suite": "Épisode 3 bientôt : abonne-toi !",
+ "_voix_hz": {
+  "envoyee": 216,
+  "invite": 95,
+  "narrateur": 182,
+  "presentateur": 137
+ },
+ "_voix_genre": {
+  "invite": "h",
+  "narrateur": "h",
+  "presentateur": "h"
+ },
+ "realisation": {
+  "moment": "jour",
+  "lieux": [
+   "hall",
+   "hall"
+  ],
+  "gags": [
+   "'LA CLÉ ? JAMAIS ENTENDU PARLER.'"
+  ],
+  "ambiances": [],
+  "source": "auteur",
+  "tenues": {
+   "presentateur": "tshirt",
+   "invite": "pyjama",
+   "envoyee": "chemise"
+  },
+  "plans": [
+   "serre/fixe",
+   "moyen/fixe",
+   "serre/fixe",
+   "serre/fixe",
+   "serre/fixe",
+   "moyen/fixe",
+   "serre/fixe",
+   "serre/fixe",
+   "serre/fixe"
+  ]
+ }
+}
