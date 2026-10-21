@@ -1,0 +1,534 @@
+{
+ "titre": "SQUATTAGE VOISIN",
+ "sujet": "SQUATTAGE VOISIN",
+ "ecran": "FRIGO PARTAGÉ",
+ "invite_nom": "Kevin",
+ "invite_role": "Voisin squatteur",
+ "invite_look": "moustache",
+ "lieu_direct": "Chez Jojo, salon",
+ "titre_accroche": "Quand ton voisin squatte ton frigo",
+ "question": "Ton voisin squatte ton frigo ET ton canapé ? 😏",
+ "running_gag": "Le frigo partagé",
+ "verite": "Un voisin squatte ton appartement sans remords, ment avec une logique implacable et retourne même les preuves contre toi.",
+ "repliques": [
+  {
+   "p": "narrateur",
+   "t": "Épisode 4. Quand ton voisin squatte ton frigo",
+   "d": "[excited] Épisode 4. Quand ton voisin squatte ton frigo"
+  },
+  {
+   "p": "presentateur",
+   "t": "Jojo, ton voisin a squatté ton frigo !",
+   "d": "[shouting] Jojo, ton voisin a squatté ton frigo !"
+  },
+  {
+   "p": "envoyee",
+   "t": "Il a mangé TON yaourt. ‘Partage’, dit-il.",
+   "d": "[sarcastic] Il a mangé TON yaourt. ‘Partage’, dit-il. Comme si tu avais signé un pacte.",
+   "chute": true
+  },
+  {
+   "p": "invite",
+   "t": "C’est MOI qui ai squatté. Toi, t’es jamais là !",
+   "d": "[laughing] C’est MOI qui ai squatté. Toi, t’es jamais là !"
+  },
+  {
+   "p": "presentateur",
+   "t": "Bonne nouvelle : ton voisin n’a pas squatté. Il a juste ‘loué ton appart à lui-même… en te facturant le loyer.’",
+   "d": "[deadpan] Bonne nouvelle : ton voisin n’a pas squatté. Il a juste ‘loué ton appart à lui-même… en te facturant le loyer.’",
+   "chute": true,
+   "attente": 0.8
+  }
+ ],
+ "bandeau": [
+  "TON YAOURT A DISPARU",
+  "IL A DRAGUÉ TA MEUF",
+  "BONNE NOUVELLE : IL T'A FACTURÉ"
+ ],
+ "gag": {
+  "replique": 2,
+  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. A living room with an empty fridge, Kevin sitting on the sofa holding a spoon with crumbs, Jojo standing shocked in the doorway."
+ },
+ "legende": "Épisode 4 · L'APPART DE LA GALÈRE — Quand ton voisin squatte ton frigo ET ton canapé. Satire, personnages fictifs.",
+ "hashtags": [
+  "petitsdramas",
+  "humour",
+  "pov",
+  "sketch",
+  "voisins",
+  "squattage",
+  "animation"
+ ],
+ "sources": [],
+ "decoupage": [
+  {
+   "scene": "Jojo découvre les preuves du squattage.",
+   "repliques": [
+    1,
+    2
+   ],
+   "lieu": "",
+   "son": "dun_dun",
+   "duree": 5.0,
+   "decor": "a cozy living room with an empty fridge and a sofa."
+  },
+  {
+   "scene": "Kevin ment effrontément.",
+   "repliques": [
+    3
+   ],
+   "lieu": "",
+   "son": "",
+   "duree": 5.0,
+   "decor": "a narrow apartment hallway with a closed front door slightly ajar."
+  },
+  {
+   "scene": "La chute révèle l'absurdité.",
+   "repliques": [
+    4
+   ],
+   "lieu": "",
+   "son": "",
+   "duree": 6.0,
+   "decor": "a cozy living room with a sofa and a fridge."
+  }
+ ],
+ "serie_titre": "L'APPART DE LA GALÈRE",
+ "resume_episode": "Jojo découvre que Kevin a squatté son appartement et son frigo. Malgré les preuves, Kevin ment effrontément, transformant chaque situation en excuse grotesque.",
+ "studio": {
+  "moment": "jour",
+  "lieux": "salon",
+  "costumes": {
+   "presentateur": {
+    "haut": "tshirt",
+    "c_haut": "bleu",
+    "bas": "jean",
+    "chaussures": "baskets",
+    "details": [
+     "barbe_courte"
+    ],
+    "chapeau": null
+   },
+   "invite": {
+    "haut": "tshirt",
+    "c_haut": "rouge",
+    "bas": "short",
+    "chaussures": "baskets",
+    "details": [
+     "moustache"
+    ],
+    "chapeau": "casquette"
+   },
+   "envoyee": {
+    "haut": "polo",
+    "c_haut": "rose",
+    "bas": "pantalon",
+    "chaussures": "ballerines",
+    "details": [],
+    "chapeau": null
+   }
+  },
+  "personnages": [
+   {
+    "genre": "h",
+    "age": 35,
+    "taille": 1,
+    "corpulence": 0.8,
+    "cheveux": "court",
+    "barbe": "trois_jours"
+   },
+   {
+    "genre": "h",
+    "age": 28,
+    "taille": 1,
+    "corpulence": 0.9,
+    "cheveux": "court",
+    "barbe": "moustache"
+   },
+   {
+    "genre": "f",
+    "age": 30,
+    "taille": 0.95,
+    "corpulence": 0.7,
+    "cheveux": "long",
+    "barbe": null
+   }
+  ],
+  "decor": "a cozy living room with an empty fridge, a torn delivery notice on the floor, a sofa, bright daylight",
+  "gags": [
+   "‘FRIGO PARTAGÉ’ écrit sur un post-it collé sur le frigo"
+  ],
+  "ambiances": "poussiere",
+  "cadence": "rapide",
+  "jeu": [
+   {
+    "replique": 0,
+    "emotion": "colere",
+    "geste": "poing",
+    "intensite": 3
+   },
+   {
+    "replique": 1,
+    "emotion": "sarcastic",
+    "geste": "pointe_d",
+    "intensite": 2
+   },
+   {
+    "replique": 2,
+    "emotion": "rire",
+    "geste": "bras_ouverts",
+    "intensite": 3
+   },
+   {
+    "replique": 3,
+    "emotion": "deadpan",
+    "geste": "menton",
+    "intensite": 2
+   }
+  ],
+  "bruitages": [
+   {
+    "replique": 1,
+    "son": "vine_boom"
+   },
+   {
+    "replique": 3,
+    "son": "sifflet_chute"
+   }
+  ]
+ },
+ "fiche": {
+  "fil": "Jojo découvre que Kevin a squatté son frigo et son canapé. Kevin ment avec une logique implacable, transformant chaque preuve en excuse absurde.",
+  "concept": "Gag éclair en 3 répliques : Jojo découvre les preuves du squattage, Kevin ment effrontément, et la chute révèle l'absurdité totale.",
+  "format": "Gag éclair",
+  "angle": "L'escalade des mensonges de Kevin jusqu'à la chute qui révèle la vérité grotesque.",
+  "resume_factuel": "Jojo réalise que son voisin Kevin a squatté son appartement et son frigo.",
+  "faits_reels": [],
+  "inventions": [
+   "Kevin squattant l'appartement et le frigo de Jojo",
+   "Les mensonges effrontés de Kevin",
+   "La chute révélant l'absurdité"
+  ],
+  "decoupage": [
+   {
+    "scene": "Jojo découvre les preuves du squattage.",
+    "repliques": [
+     1,
+     2
+    ],
+    "lieu": "",
+    "son": "dun_dun",
+    "duree": 5.0,
+    "decor": "a cozy living room with an empty fridge and a sofa."
+   },
+   {
+    "scene": "Kevin ment effrontément.",
+    "repliques": [
+     3
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 5.0,
+    "decor": "a narrow apartment hallway with a closed front door slightly ajar."
+   },
+   {
+    "scene": "La chute révèle l'absurdité.",
+    "repliques": [
+     4
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 6.0,
+    "decor": "a cozy living room with a sofa and a fridge."
+   }
+  ],
+  "titres_sujet": [
+   "L'APPART DE LA GALÈRE : Quand tu réalises que ton voisin Kevin a utilisé ta clé pour squatter ton appart pendant que tu "
+  ],
+  "verification_web": false,
+  "note": 80.0,
+  "critique": "AVIS DU PUBLIC TEST (spectateurs sans contexte) :\n- Inès : a compris, rire 8/10, aurait scrollé à la réplique 2, perdu par : La chute était un peu trop longue pour son rythme de scroll rapide.\n- Karim : a compris, rire 9/10\n- Sandrine : N A PAS COMPRIS, rire 3/10, aurait scrollé à la réplique 1, perdu par : Elle n'a pas compris l'humour absurde et la chute, car elle ne connaît pas les codes TikTok. Le ton sarcastique et la réplique finale lui ont semblé confus.\nCritiques constructives du public :\n- Réplique n°3 (la chute) : La chute est excellente, mais elle arrive un peu tard. Pour capter l'attention des spectateurs comme Inès, qui scrollent vite, il faudrait la raccourcir ou la rendre encore plus percutante dès la réplique n°2 pour éviter qu'ils ne perdent le fil.\n- Ajouter un visuel ou une animation plus marquante pour la réplique n°3 afin d'ancrer l'idée absurde et de faciliter la compréhension pour des spectateurs comme Sandrine, qui ne sont pas familiers avec ce type d'humour.\n- Réplique n°1 : Le ton sarcastique de Lila est bien trouvé, mais il pourrait être accentué visuellement (ex. : un yaourt qui 'disparaît' ou un regard noir) pour renforcer l'effet comique et éviter que des spectateurs ne la survolent.\n- Introduire un carton ou un sous-titre plus explicite avant la chute (réplique n°3) pour clarifier le concept absurde sans spoiler l'humour. Par exemple, un carton avec 'Spoiler : ça va devenir bizarre' pourrait préparer le public.\n- Réplique n°0 : Le titre est clai",
+  "decision": "prêt pour production"
+ },
+ "suite": "Épisode 5 bientôt : abonne-toi !",
+ "_voix_hz": {
+  "envoyee": 182,
+  "narrateur": 227,
+  "presentateur": 89,
+  "invite": 137
+ },
+ "_voix_genre": {
+  "envoyee": "h",
+  "presentateur": "h",
+  "invite": "h"
+ },
+ "_bible": {
+  "graine": 4143811704,
+  "moment": "jour",
+  "lieux": [
+   "salon",
+   "hall",
+   "salon"
+  ],
+  "gags": [
+   "‘FRIGO PARTAGÉ’ écrit sur un post-it collé sur le frigo"
+  ],
+  "costumes": {
+   "presentateur": {
+    "haut": "tshirt",
+    "c_haut": [
+     60,
+     110,
+     200
+    ],
+    "motif": "uni",
+    "bas": "jean",
+    "c_bas": [
+     70,
+     100,
+     150
+    ],
+    "chaussures": "baskets",
+    "c_chaussures": [
+     240,
+     240,
+     240
+    ],
+    "details": [
+     "barbe_courte"
+    ],
+    "c_motif": [
+     43,
+     79,
+     144
+    ]
+   },
+   "envoyee": {
+    "haut": "polo",
+    "c_haut": [
+     240,
+     150,
+     180
+    ],
+    "motif": "uni",
+    "bas": "pantalon",
+    "c_bas": [
+     70,
+     100,
+     150
+    ],
+    "chaussures": "ballerines",
+    "c_chaussures": [
+     240,
+     240,
+     240
+    ],
+    "details": [],
+    "c_motif": [
+     172,
+     108,
+     129
+    ]
+   },
+   "invite": {
+    "haut": "tshirt",
+    "c_haut": [
+     220,
+     60,
+     60
+    ],
+    "motif": "uni",
+    "bas": "short",
+    "c_bas": [
+     70,
+     100,
+     150
+    ],
+    "chaussures": "baskets",
+    "c_chaussures": [
+     240,
+     240,
+     240
+    ],
+    "details": [
+     "moustache"
+    ],
+    "chapeau": "casquette",
+    "c_chapeau": [
+     60,
+     60,
+     70
+    ],
+    "c_motif": [
+     158,
+     43,
+     43
+    ]
+   }
+  },
+  "figurants": [],
+  "ambiances": [],
+  "lumiere": -1,
+  "ombre": 0.24,
+  "etalonnage": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "heure": [
+   14,
+   20
+  ],
+  "style_ia": "bright daylight",
+  "plans": [],
+  "jeu": [
+   {
+    "replique": 0,
+    "emotion": "colere",
+    "geste": "poing",
+    "intensite": 3
+   },
+   {
+    "replique": 1,
+    "emotion": "sarcastic",
+    "geste": "pointe_d",
+    "intensite": 2
+   },
+   {
+    "replique": 2,
+    "emotion": "rire",
+    "geste": "bras_ouverts",
+    "intensite": 3
+   },
+   {
+    "replique": 3,
+    "emotion": "deadpan",
+    "geste": "menton",
+    "intensite": 2
+   }
+  ],
+  "source": "auteur",
+  "c_mur": null,
+  "rythme": {
+   "serre": 0.24,
+   "large": 0.663,
+   "tres_serre": 0.224,
+   "energie": 0.219,
+   "sourires": 0.0,
+   "duree_plan": 20.046,
+   "camera": {
+    "fixe": 0.934,
+    "avance": 0.021,
+    "recul": 0.022,
+    "travelling": 0.008,
+    "epaule": 0.015
+   }
+  },
+  "fiches": {
+   "presentateur": {
+    "genre": "h",
+    "age": 24,
+    "corpulence": 0.5079353047124969,
+    "taille": 0.9835085334795282,
+    "peau": [
+     96,
+     64,
+     46
+    ],
+    "visage": "carre",
+    "iris": [
+     80,
+     130,
+     90
+    ],
+    "yeux": 1.0805416938734527,
+    "nez": "droit",
+    "levres": 0.9249083424126068,
+    "sourcils": 1.4144467754769876,
+    "cheveux": "chauve",
+    "c_cheveux": [
+     30,
+     24,
+     22
+    ],
+    "barbe": "trois_jours",
+    "lunettes": "",
+    "maquillage": false
+   },
+   "envoyee": {
+    "genre": "f",
+    "age": 32,
+    "corpulence": 0.23996055408055333,
+    "taille": 1.0110519707361136,
+    "peau": [
+     176,
+     118,
+     82
+    ],
+    "visage": "long",
+    "iris": [
+     120,
+     120,
+     110
+    ],
+    "yeux": 1.0607817482591044,
+    "nez": "rond",
+    "levres": 1.1311825787919758,
+    "sourcils": 0.9224581088227243,
+    "cheveux": "ondule",
+    "c_cheveux": [
+     196,
+     150,
+     90
+    ],
+    "barbe": "",
+    "lunettes": "rectangle",
+    "maquillage": true
+   },
+   "invite": {
+    "genre": "h",
+    "age": 48,
+    "corpulence": 0.42453566868467196,
+    "taille": 0.9963362623242709,
+    "peau": [
+     214,
+     160,
+     118
+    ],
+    "visage": "rond",
+    "iris": [
+     60,
+     110,
+     150
+    ],
+    "yeux": 1.0543046562583311,
+    "nez": "fin",
+    "levres": 1.039975039673041,
+    "sourcils": 1.2657161174595561,
+    "cheveux": "raie",
+    "c_cheveux": [
+     150,
+     100,
+     58
+    ],
+    "barbe": "moustache",
+    "lunettes": "",
+    "maquillage": false
+   }
+  },
+  "cadence": "rapide",
+  "assis": {},
+  "cine": {
+   "focus": true,
+   "vertige": true,
+   "tiers": false,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": true,
+   "reflets": false,
+   "son": true
+  },
+  "decoupe": {},
+  "coupes_origine": []
+ }
+}
