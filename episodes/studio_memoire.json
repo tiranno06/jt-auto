@@ -1086,5 +1086,51 @@
    "son": true
   },
   "cadence": "rapide"
+ },
+ {
+  "moment": "jour",
+  "lieux": [
+   "salon",
+   "salon",
+   "salon"
+  ],
+  "source": "auteur",
+  "duree": 61.5,
+  "plans": {
+   "moyen": 3,
+   "serre": 2,
+   "tres_serre": 4,
+   "large": 4
+  },
+  "mouvements": {
+   "fixe": 3,
+   "zoom_choc": 1,
+   "recul": 5,
+   "avance": 2,
+   "epaule": 1,
+   "travelling": 1
+  },
+  "costumes": {
+   "presentateur": "tshirt",
+   "envoyee": "chemise",
+   "invite": "tshirt"
+  },
+  "figurants": 0,
+  "ambiances": [
+   "pluie"
+  ],
+  "controle": "Humoriste 7.0/10 : 53.3 s La chute finale est trop longue, la vanne se dilue.; 60.9 s La chute finale mérite un zoom choc sur celui qui la dit pour accentuer l'effet comique. | Réalisateur 6.0/10 : 25",
+  "fichier": "2026-10-21_17h53_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": false,
+   "tiers": true,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": true,
+   "reflets": false,
+   "son": true
+  },
+  "cadence": "rapide"
  }
 ]

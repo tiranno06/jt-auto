@@ -1,100 +1,152 @@
 {
- "titre": "SQUATTAGE VOISIN",
- "sujet": "SQUATTAGE VOISIN",
- "ecran": "FRIGO PARTAGÉ",
- "invite_nom": "Kevin",
- "invite_role": "Voisin squatteur",
- "invite_look": "moustache",
- "lieu_direct": "Chez Jojo, salon",
- "titre_accroche": "Quand ton voisin squatte ton frigo",
- "question": "Ton voisin squatte ton frigo ET ton canapé ? 😏",
- "running_gag": "Le frigo partagé",
- "verite": "Un voisin squatte ton appartement sans remords, ment avec une logique implacable et retourne même les preuves contre toi.",
+ "titre": "CLÉ USB VOLÉE",
+ "sujet": "CLÉ USB VOLÉE",
+ "ecran": "POV : CLÉ USB ",
+ "invite_nom": "Hubert Rustine",
+ "invite_role": "Expert (fictif)",
+ "invite_look": "chauve",
+ "lieu_direct": "Assemblée",
+ "titre_accroche": "POV : Kevin a piraté ton appart en slip.",
+ "question": "Team Jojo ou team Kevin ? 👇",
+ "running_gag": "Les photos en slip",
+ "verite": "Kevin a volé la clé USB de Jojo pour y stocker des photos compromettantes de tout le bâtiment, y compris des images de Jojo en situation gênante.",
  "repliques": [
   {
    "p": "narrateur",
-   "t": "Épisode 4. Quand ton voisin squatte ton frigo",
-   "d": "[excited] Épisode 4. Quand ton voisin squatte ton frigo"
+   "t": "Épisode 5. POV : Kevin a piraté ton appart en slip.",
+   "d": "[excited] Épisode 5. Pi-o-vi : Kevin a piraté ton appart en slip."
   },
   {
    "p": "presentateur",
-   "t": "Jojo, ton voisin a squatté ton frigo !",
-   "d": "[shouting] Jojo, ton voisin a squatté ton frigo !"
+   "t": "Jojo, tu as retrouvé ta clé USB ?",
+   "d": "[excited] Jojo, tu as retrouvé ta clé USB ?"
   },
   {
    "p": "envoyee",
-   "t": "Il a mangé TON yaourt. ‘Partage’, dit-il.",
-   "d": "[sarcastic] Il a mangé TON yaourt. ‘Partage’, dit-il. Comme si tu avais signé un pacte.",
-   "chute": true
+   "t": "Non, mais j'ai trouvé pire : Kevin l'a utilisée pour stocker des photos compromettantes.",
+   "d": "[panicked] Non, mais j'ai trouvé pire : Kevin l'a utilisée pour stocker des photos compromettantes. Regarde !"
   },
   {
    "p": "invite",
-   "t": "C’est MOI qui ai squatté. Toi, t’es jamais là !",
-   "d": "[laughing] C’est MOI qui ai squatté. Toi, t’es jamais là !"
+   "t": "C’est pour un album de vacances !",
+   "d": "[laughs] C’est pour un album de vacances !",
+   "chute": true
   },
   {
    "p": "presentateur",
-   "t": "Bonne nouvelle : ton voisin n’a pas squatté. Il a juste ‘loué ton appart à lui-même… en te facturant le loyer.’",
-   "d": "[deadpan] Bonne nouvelle : ton voisin n’a pas squatté. Il a juste ‘loué ton appart à lui-même… en te facturant le loyer.’",
+   "t": "Des vacances en slip ?",
+   "d": "[sarcastic] Des vacances en slip ?"
+  },
+  {
+   "p": "envoyee",
+   "t": "Non, c’est pire : il a effacé tes factures.",
+   "d": "[angry] Non, c’est pire : il a effacé tes factures. Et il dit que c’est pour optimiser l’espace !",
+   "objet": "facture"
+  },
+  {
+   "p": "invite",
+   "t": "C’est une opération sous couverture !",
+   "d": "[whispers] C’est une opération sous couverture !",
+   "chute": true
+  },
+  {
+   "p": "presentateur",
+   "t": "Pourquoi tu cherches des photos en slip ?",
+   "d": "[confused] Pourquoi tu cherches des photos en slip, Kevin ?"
+  },
+  {
+   "p": "envoyee",
+   "t": "Parce que tu es dedans, en train de courir après ton voisin.",
+   "d": "[deadpan] Parce que tu es dedans, en train de courir après ton voisin. Et il dit que c’est un projet artistique !"
+  },
+  {
+   "p": "invite",
+   "t": "C’est pour un projet artistique !",
+   "d": "[excited] C’est pour un projet artistique !",
+   "chute": true
+  },
+  {
+   "p": "presentateur",
+   "t": "Et les virus ?",
+   "d": "[annoyed] Et les virus sur ta clé, c’est quoi ?"
+  },
+  {
+   "p": "envoyee",
+   "t": "Une mise à jour de sécurité, bien sûr.",
+   "d": "[sarcastic] Une mise à jour de sécurité. Comme si on avait besoin de ça."
+  },
+  {
+   "p": "invite",
+   "t": "Bonne nouvelle : les photos compromettantes sont toutes floues. Sauf celles où vous cherchez la clé USB en slip.",
+   "d": "[deadpan] Bonne nouvelle : les photos compromettantes sont toutes floues. Sauf celles où vous cherchez la clé USB en slip.",
    "chute": true,
    "attente": 0.8
   }
  ],
  "bandeau": [
-  "TON YAOURT A DISPARU",
-  "IL A DRAGUÉ TA MEUF",
-  "BONNE NOUVELLE : IL T'A FACTURÉ"
+  "CLÉ USB VOLÉE : UNE OPÉRATION SOUS COUVERTURE",
+  "KEVIN CHANTE EN SLIP : PROJET ARTISTIQUE",
+  "FACTURES EFFACÉES : OPTIMISATION DE L'ESPACE"
  ],
  "gag": {
-  "replique": 2,
-  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. A living room with an empty fridge, Kevin sitting on the sofa holding a spoon with crumbs, Jojo standing shocked in the doorway."
+  "replique": 3,
+  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. A living room with a laptop screen displaying a blurry photo of a person in underwear, Kevin sitting on the sofa with a guilty expression, Jojo standing next to him with a shocked face, comedic, exaggerated expressions."
  },
- "legende": "Épisode 4 · L'APPART DE LA GALÈRE — Quand ton voisin squatte ton frigo ET ton canapé. Satire, personnages fictifs.",
+ "legende": "Épisode 5 · L'APPART DE LA GALÈRE — Quand ta clé USB devient un album de vacances en slip. Satire, personnages fictifs.",
  "hashtags": [
   "petitsdramas",
   "humour",
-  "pov",
   "sketch",
-  "voisins",
-  "squattage",
+  "pov",
+  "cleusbvolee",
   "animation"
  ],
  "sources": [],
  "decoupage": [
   {
-   "scene": "Jojo découvre les preuves du squattage.",
+   "scene": "Jojo découvre les photos compromettantes sur son ordinateur.",
    "repliques": [
     1,
-    2
-   ],
-   "lieu": "",
-   "son": "dun_dun",
-   "duree": 5.0,
-   "decor": "a cozy living room with an empty fridge and a sofa."
-  },
-  {
-   "scene": "Kevin ment effrontément.",
-   "repliques": [
+    2,
     3
    ],
    "lieu": "",
-   "son": "",
-   "duree": 5.0,
-   "decor": "a narrow apartment hallway with a closed front door slightly ajar."
+   "son": "dun_dun",
+   "duree": 15.0,
+   "decor": "cozy living room, sofa, coffee table with a laptop open displaying compromising photos, bright daylight"
   },
   {
-   "scene": "La chute révèle l'absurdité.",
+   "scene": "Kevin invente des excuses de plus en plus absurdes.",
    "repliques": [
-    4
+    4,
+    5,
+    6,
+    7
    ],
    "lieu": "",
    "son": "",
-   "duree": 6.0,
-   "decor": "a cozy living room with a sofa and a fridge."
+   "duree": 25.0,
+   "decor": "cozy living room, sofa, coffee table with a laptop, bright daylight",
+   "titre": "Le lendemain…"
+  },
+  {
+   "scene": "Jojo exige des explications, Kevin s'enfonce dans ses mensonges.",
+   "repliques": [
+    8,
+    9,
+    10,
+    11
+   ],
+   "lieu": "",
+   "son": "",
+   "duree": 20.0,
+   "decor": "cozy living room, sofa, coffee table with a laptop, bright daylight",
+   "titre": "Deux heures plus tard…"
   }
  ],
  "serie_titre": "L'APPART DE LA GALÈRE",
- "resume_episode": "Jojo découvre que Kevin a squatté son appartement et son frigo. Malgré les preuves, Kevin ment effrontément, transformant chaque situation en excuse grotesque.",
+ "resume_episode": "Dans cet épisode, Jojo découvre que Kevin a utilisé sa clé USB pour stocker des photos compromettantes du bâtiment. Malgré les excuses absurdes de Kevin, Jojo finit par réaliser l'ampleur du désastre, révélant des images compromettantes de lui-même.",
+ "teaser": 0,
  "studio": {
   "moment": "jour",
   "lieux": "salon",
@@ -103,33 +155,38 @@
     "haut": "tshirt",
     "c_haut": "bleu",
     "bas": "jean",
-    "chaussures": "baskets",
+    "chapeau": null,
     "details": [
-     "barbe_courte"
+     "moustache"
     ],
-    "chapeau": null
+    "cheveux": "court",
+    "c_cheveux": "brun"
    },
    "invite": {
     "haut": "tshirt",
     "c_haut": "rouge",
-    "bas": "short",
-    "chaussures": "baskets",
+    "bas": "jogging",
+    "chapeau": "casquette",
     "details": [
-     "moustache"
+     "barbe_courte"
     ],
-    "chapeau": "casquette"
+    "cheveux": "court",
+    "c_cheveux": "chatain"
    },
    "envoyee": {
-    "haut": "polo",
-    "c_haut": "rose",
+    "haut": "chemise",
+    "c_haut": "blanc",
     "bas": "pantalon",
-    "chaussures": "ballerines",
-    "details": [],
-    "chapeau": null
+    "chapeau": null,
+    "details": [
+     "lunettes_vue"
+    ],
+    "cheveux": "long",
+    "c_cheveux": "brun"
    }
   },
-  "personnages": [
-   {
+  "personnages": {
+   "presentateur": {
     "genre": "h",
     "age": 35,
     "taille": 1,
@@ -137,398 +194,212 @@
     "cheveux": "court",
     "barbe": "trois_jours"
    },
-   {
+   "invite": {
     "genre": "h",
     "age": 28,
     "taille": 1,
     "corpulence": 0.9,
     "cheveux": "court",
-    "barbe": "moustache"
+    "barbe": "bouc"
    },
-   {
+   "envite": {
     "genre": "f",
     "age": 30,
-    "taille": 0.95,
+    "taille": 1,
     "corpulence": 0.7,
     "cheveux": "long",
     "barbe": null
    }
-  ],
-  "decor": "a cozy living room with an empty fridge, a torn delivery notice on the floor, a sofa, bright daylight",
+  },
+  "figurants": [],
   "gags": [
-   "‘FRIGO PARTAGÉ’ écrit sur un post-it collé sur le frigo"
+   "\"OPÉRATION SOUS COUVERTURE\" - Kevin",
+   "\"PROJET ARTISTIQUE\" - Kevin"
   ],
   "ambiances": "poussiere",
   "cadence": "rapide",
   "jeu": [
    {
     "replique": 0,
-    "emotion": "colere",
-    "geste": "poing",
-    "intensite": 3
-   },
-   {
-    "replique": 1,
-    "emotion": "sarcastic",
+    "emotion": "excited",
     "geste": "pointe_d",
     "intensite": 2
    },
    {
     "replique": 2,
-    "emotion": "rire",
+    "emotion": "laughs",
     "geste": "bras_ouverts",
     "intensite": 3
    },
    {
     "replique": 3,
-    "emotion": "deadpan",
-    "geste": "menton",
+    "emotion": "sarcastic",
+    "geste": "gratte_tete",
     "intensite": 2
+   },
+   {
+    "replique": 5,
+    "emotion": "whispers",
+    "geste": "pointe_g",
+    "intensite": 2
+   },
+   {
+    "replique": 7,
+    "emotion": "annoyed",
+    "geste": "pointe_d",
+    "intensite": 3
+   },
+   {
+    "replique": 10,
+    "emotion": "deadpan",
+    "geste": "mains_hanches",
+    "intensite": 2
+   }
+  ],
+  "plans": [
+   {
+    "replique": 0,
+    "plan": "moyen",
+    "mouvement": "fixe",
+    "ciblé": "presentateur"
+   },
+   {
+    "replique": 2,
+    "plan": "serre",
+    "mouvement": "zoom_choc",
+    "ciblé": "invite"
+   },
+   {
+    "replique": 5,
+    "plan": "tres_serre",
+    "mouvement": "fixe",
+    "ciblé": "invite"
+   },
+   {
+    "replique": 10,
+    "plan": "large",
+    "mouvement": "contre_plongee",
+    "ciblé": "invite"
    }
   ],
   "bruitages": [
    {
-    "replique": 1,
+    "replique": 2,
     "son": "vine_boom"
    },
    {
-    "replique": 3,
+    "replique": 10,
     "son": "sifflet_chute"
    }
   ]
  },
  "fiche": {
-  "fil": "Jojo découvre que Kevin a squatté son frigo et son canapé. Kevin ment avec une logique implacable, transformant chaque preuve en excuse absurde.",
-  "concept": "Gag éclair en 3 répliques : Jojo découvre les preuves du squattage, Kevin ment effrontément, et la chute révèle l'absurdité totale.",
-  "format": "Gag éclair",
-  "angle": "L'escalade des mensonges de Kevin jusqu'à la chute qui révèle la vérité grotesque.",
-  "resume_factuel": "Jojo réalise que son voisin Kevin a squatté son appartement et son frigo.",
+  "fil": "Jojo découvre que Kevin a utilisé sa clé USB pour stocker des photos compromettantes du bâtiment. Il exige des explications, mais Kevin invente des excuses de plus en plus absurdes. La situation empire jusqu'à ce que Jojo réalise l'ampleur du désastre, culminant avec la chute finale.",
+  "concept": "Un épisode de la série « L'Appart de la Galère » où Jojo découvre que Kevin a détourné sa clé USB pour y cacher des photos compromettantes. Le duo s'affronte dans un escalade d'excuses de plus en plus absurdes.",
+  "format": "Sketch long en 3 gags",
+  "angle": "L'absurdité des excuses de Kevin face à l'évidence accablante, poussée jusqu'à une chute qui révèle toute l'ampleur du désastre.",
+  "resume_factuel": "Jojo découvre que Kevin a utilisé sa clé USB pour stocker des photos compromettantes du bâtiment, y compris des images de lui-même dans des situations gênantes.",
   "faits_reels": [],
   "inventions": [
-   "Kevin squattant l'appartement et le frigo de Jojo",
-   "Les mensonges effrontés de Kevin",
-   "La chute révélant l'absurdité"
+   "Photos compromettantes stockées sur la clé USB",
+   "Excuses absurdes de Kevin",
+   "Chute révélant les photos en slip"
   ],
   "decoupage": [
    {
-    "scene": "Jojo découvre les preuves du squattage.",
+    "scene": "Jojo découvre les photos compromettantes sur son ordinateur.",
     "repliques": [
      1,
-     2
-    ],
-    "lieu": "",
-    "son": "dun_dun",
-    "duree": 5.0,
-    "decor": "a cozy living room with an empty fridge and a sofa."
-   },
-   {
-    "scene": "Kevin ment effrontément.",
-    "repliques": [
+     2,
      3
     ],
     "lieu": "",
-    "son": "",
-    "duree": 5.0,
-    "decor": "a narrow apartment hallway with a closed front door slightly ajar."
+    "son": "dun_dun",
+    "duree": 15.0,
+    "decor": "cozy living room, sofa, coffee table with a laptop open displaying compromising photos, bright daylight"
    },
    {
-    "scene": "La chute révèle l'absurdité.",
+    "scene": "Kevin invente des excuses de plus en plus absurdes.",
     "repliques": [
-     4
+     4,
+     5,
+     6,
+     7
     ],
     "lieu": "",
     "son": "",
-    "duree": 6.0,
-    "decor": "a cozy living room with a sofa and a fridge."
+    "duree": 25.0,
+    "decor": "cozy living room, sofa, coffee table with a laptop, bright daylight",
+    "titre": "Le lendemain…"
+   },
+   {
+    "scene": "Jojo exige des explications, Kevin s'enfonce dans ses mensonges.",
+    "repliques": [
+     8,
+     9,
+     10,
+     11
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 20.0,
+    "decor": "cozy living room, sofa, coffee table with a laptop, bright daylight",
+    "titre": "Deux heures plus tard…"
    }
   ],
   "titres_sujet": [
-   "L'APPART DE LA GALÈRE : Quand tu réalises que ton voisin Kevin a utilisé ta clé pour squatter ton appart pendant que tu "
+   "L'APPART DE LA GALÈRE : POV : la clé USB volée"
   ],
   "verification_web": false,
   "note": 80.0,
-  "critique": "AVIS DU PUBLIC TEST (spectateurs sans contexte) :\n- Inès : a compris, rire 8/10, aurait scrollé à la réplique 2, perdu par : La chute était un peu trop longue pour son rythme de scroll rapide.\n- Karim : a compris, rire 9/10\n- Sandrine : N A PAS COMPRIS, rire 3/10, aurait scrollé à la réplique 1, perdu par : Elle n'a pas compris l'humour absurde et la chute, car elle ne connaît pas les codes TikTok. Le ton sarcastique et la réplique finale lui ont semblé confus.\nCritiques constructives du public :\n- Réplique n°3 (la chute) : La chute est excellente, mais elle arrive un peu tard. Pour capter l'attention des spectateurs comme Inès, qui scrollent vite, il faudrait la raccourcir ou la rendre encore plus percutante dès la réplique n°2 pour éviter qu'ils ne perdent le fil.\n- Ajouter un visuel ou une animation plus marquante pour la réplique n°3 afin d'ancrer l'idée absurde et de faciliter la compréhension pour des spectateurs comme Sandrine, qui ne sont pas familiers avec ce type d'humour.\n- Réplique n°1 : Le ton sarcastique de Lila est bien trouvé, mais il pourrait être accentué visuellement (ex. : un yaourt qui 'disparaît' ou un regard noir) pour renforcer l'effet comique et éviter que des spectateurs ne la survolent.\n- Introduire un carton ou un sous-titre plus explicite avant la chute (réplique n°3) pour clarifier le concept absurde sans spoiler l'humour. Par exemple, un carton avec 'Spoiler : ça va devenir bizarre' pourrait préparer le public.\n- Réplique n°0 : Le titre est clai",
+  "critique": "AVIS DU PUBLIC TEST (spectateurs sans contexte) :\n- Inès : a compris, rire 8/10, aurait scrollé à la réplique 6, perdu par : Le rythme est trop rapide pour capter toute la subtilité de l'humour noir, mais j'ai compris l'idée générale.\n- Karim : a compris, rire 7/10, perdu par : Les sous-titres sont utiles, mais certaines répliques chuchotées ou sarcastiques pourraient être plus claires (ex. réplique n°5).\n- Sandrine : N A PAS COMPRIS, rire 3/10, aurait scrollé à la réplique 3, perdu par : L'humour est trop absurde et les références TikTok/jeunes incompréhensibles. Le titre ne donne pas assez d'indices sur le ton.\nCritiques constructives du public :\n- Réplique n°1 : Le ton de Lila (« Non, mais j'ai trouvé pire ») pourrait être plus paniqué ou dramatique pour mieux préparer le public à l'humour noir qui suit. Actuellement, ça passe trop vite.\n- Réplique n°6 : La question de Jojo (« Pourquoi tu cherches des photos en slip ? ») est confuse car elle semble hors contexte. Un carton ou une transition visuelle (ex. écran qui montre Kevin en slip) aiderait à clarifier.\n- Réplique n°8 : « C’est pour un projet artistique ! » est drôle, mais manque de réactivité visuelle (ex. un fond d'atelier d'art ou un pinceau qui apparaît brièvement) pour renforcer le côté absurde.\n- Titre et cartons : Le titre est accrocheur, mais les cartons (« Le lendemain… », « Deux heures plus tard… ») pourraient inclure des icônes ou des visuels (ex. une horloge, un calendrier) pour guider le spectateur sur le ",
   "decision": "prêt pour production"
  },
- "suite": "Épisode 5 bientôt : abonne-toi !",
+ "suite": "Fin de la saison : abonne-toi !",
  "_voix_hz": {
-  "envoyee": 182,
-  "narrateur": 227,
-  "presentateur": 89,
-  "invite": 137
+  "narrateur": 190,
+  "invite": 108,
+  "envoyee": 204,
+  "presentateur": 145
  },
  "_voix_genre": {
-  "envoyee": "h",
-  "presentateur": "h",
-  "invite": "h"
+  "invite": "h",
+  "presentateur": "h"
  },
- "_bible": {
-  "graine": 4143811704,
+ "realisation": {
   "moment": "jour",
   "lieux": [
    "salon",
-   "hall",
+   "salon",
    "salon"
   ],
   "gags": [
-   "‘FRIGO PARTAGÉ’ écrit sur un post-it collé sur le frigo"
+   "\"OPÉRATION SOUS COUVERTURE\" - Kevin",
+   "\"PROJET ARTISTIQUE\" - Kevin"
   ],
-  "costumes": {
-   "presentateur": {
-    "haut": "tshirt",
-    "c_haut": [
-     60,
-     110,
-     200
-    ],
-    "motif": "uni",
-    "bas": "jean",
-    "c_bas": [
-     70,
-     100,
-     150
-    ],
-    "chaussures": "baskets",
-    "c_chaussures": [
-     240,
-     240,
-     240
-    ],
-    "details": [
-     "barbe_courte"
-    ],
-    "c_motif": [
-     43,
-     79,
-     144
-    ]
-   },
-   "envoyee": {
-    "haut": "polo",
-    "c_haut": [
-     240,
-     150,
-     180
-    ],
-    "motif": "uni",
-    "bas": "pantalon",
-    "c_bas": [
-     70,
-     100,
-     150
-    ],
-    "chaussures": "ballerines",
-    "c_chaussures": [
-     240,
-     240,
-     240
-    ],
-    "details": [],
-    "c_motif": [
-     172,
-     108,
-     129
-    ]
-   },
-   "invite": {
-    "haut": "tshirt",
-    "c_haut": [
-     220,
-     60,
-     60
-    ],
-    "motif": "uni",
-    "bas": "short",
-    "c_bas": [
-     70,
-     100,
-     150
-    ],
-    "chaussures": "baskets",
-    "c_chaussures": [
-     240,
-     240,
-     240
-    ],
-    "details": [
-     "moustache"
-    ],
-    "chapeau": "casquette",
-    "c_chapeau": [
-     60,
-     60,
-     70
-    ],
-    "c_motif": [
-     158,
-     43,
-     43
-    ]
-   }
-  },
-  "figurants": [],
-  "ambiances": [],
-  "lumiere": -1,
-  "ombre": 0.24,
-  "etalonnage": [
-   1.0,
-   1.0,
-   1.0
-  ],
-  "heure": [
-   14,
-   20
-  ],
-  "style_ia": "bright daylight",
-  "plans": [],
-  "jeu": [
-   {
-    "replique": 0,
-    "emotion": "colere",
-    "geste": "poing",
-    "intensite": 3
-   },
-   {
-    "replique": 1,
-    "emotion": "sarcastic",
-    "geste": "pointe_d",
-    "intensite": 2
-   },
-   {
-    "replique": 2,
-    "emotion": "rire",
-    "geste": "bras_ouverts",
-    "intensite": 3
-   },
-   {
-    "replique": 3,
-    "emotion": "deadpan",
-    "geste": "menton",
-    "intensite": 2
-   }
+  "ambiances": [
+   "pluie"
   ],
   "source": "auteur",
-  "c_mur": null,
-  "rythme": {
-   "serre": 0.24,
-   "large": 0.663,
-   "tres_serre": 0.224,
-   "energie": 0.219,
-   "sourires": 0.0,
-   "duree_plan": 20.046,
-   "camera": {
-    "fixe": 0.934,
-    "avance": 0.021,
-    "recul": 0.022,
-    "travelling": 0.008,
-    "epaule": 0.015
-   }
+  "tenues": {
+   "presentateur": "tshirt",
+   "envoyee": "chemise",
+   "invite": "tshirt"
   },
-  "fiches": {
-   "presentateur": {
-    "genre": "h",
-    "age": 24,
-    "corpulence": 0.5079353047124969,
-    "taille": 0.9835085334795282,
-    "peau": [
-     96,
-     64,
-     46
-    ],
-    "visage": "carre",
-    "iris": [
-     80,
-     130,
-     90
-    ],
-    "yeux": 1.0805416938734527,
-    "nez": "droit",
-    "levres": 0.9249083424126068,
-    "sourcils": 1.4144467754769876,
-    "cheveux": "chauve",
-    "c_cheveux": [
-     30,
-     24,
-     22
-    ],
-    "barbe": "trois_jours",
-    "lunettes": "",
-    "maquillage": false
-   },
-   "envoyee": {
-    "genre": "f",
-    "age": 32,
-    "corpulence": 0.23996055408055333,
-    "taille": 1.0110519707361136,
-    "peau": [
-     176,
-     118,
-     82
-    ],
-    "visage": "long",
-    "iris": [
-     120,
-     120,
-     110
-    ],
-    "yeux": 1.0607817482591044,
-    "nez": "rond",
-    "levres": 1.1311825787919758,
-    "sourcils": 0.9224581088227243,
-    "cheveux": "ondule",
-    "c_cheveux": [
-     196,
-     150,
-     90
-    ],
-    "barbe": "",
-    "lunettes": "rectangle",
-    "maquillage": true
-   },
-   "invite": {
-    "genre": "h",
-    "age": 48,
-    "corpulence": 0.42453566868467196,
-    "taille": 0.9963362623242709,
-    "peau": [
-     214,
-     160,
-     118
-    ],
-    "visage": "rond",
-    "iris": [
-     60,
-     110,
-     150
-    ],
-    "yeux": 1.0543046562583311,
-    "nez": "fin",
-    "levres": 1.039975039673041,
-    "sourcils": 1.2657161174595561,
-    "cheveux": "raie",
-    "c_cheveux": [
-     150,
-     100,
-     58
-    ],
-    "barbe": "moustache",
-    "lunettes": "",
-    "maquillage": false
-   }
-  },
-  "cadence": "rapide",
-  "assis": {},
-  "cine": {
-   "focus": true,
-   "vertige": true,
-   "tiers": false,
-   "etalonnage": true,
-   "profondeur": false,
-   "grain": true,
-   "reflets": false,
-   "son": true
-  },
-  "decoupe": {},
-  "coupes_origine": []
+  "plans": [
+   "moyen/fixe",
+   "moyen/fixe",
+   "serre/zoom_choc",
+   "tres_serre/recul",
+   "large/recul",
+   "tres_serre/fixe",
+   "tres_serre/avance",
+   "large/recul",
+   "large/recul",
+   "tres_serre/recul",
+   "large/epaule",
+   "moyen/travelling",
+   "serre/avance"
+  ]
  }
 }
