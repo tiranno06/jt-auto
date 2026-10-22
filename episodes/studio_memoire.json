@@ -1213,5 +1213,48 @@
    "son": true
   },
   "cadence": "normal"
+ },
+ {
+  "moment": "soir",
+  "lieux": [
+   "rue",
+   "salon"
+  ],
+  "source": "auteur+image",
+  "duree": 60.4,
+  "plans": {
+   "moyen": 5,
+   "large": 1,
+   "serre": 6,
+   "tres_serre": 1
+  },
+  "mouvements": {
+   "fixe": 6,
+   "avance": 3,
+   "travelling": 2,
+   "zoom_choc": 1,
+   "recul": 1
+  },
+  "costumes": {
+   "presentateur": "tshirt",
+   "envoyee": "tshirt"
+  },
+  "figurants": 2,
+  "ambiances": [
+   "poussiere"
+  ],
+  "controle": "Humoriste 5.0/10 : 59.8 s La chute finale manque d'impact comique, il faut un zoom choc sur le présentateur. | Réalisateur 6.0/10 : 25.7 s Rythme trop haché et mouvements de caméra inadaptés dans cert",
+  "fichier": "2026-10-22_20h35_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": false,
+   "tiers": true,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": true,
+   "reflets": false,
+   "son": true
+  },
+  "cadence": "normal"
  }
 ]
