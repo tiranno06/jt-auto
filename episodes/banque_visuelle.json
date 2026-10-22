@@ -2375,5 +2375,226 @@
    ]
   },
   "video": "2026-10-17_18h26_emission.mp4"
+ },
+ {
+  "date": "2026-10-22",
+  "source": "https://www.tiktok.com/@vincedessine/video/7699107142774672673?_r=1&_t=ZN-9AlZAJ3zSJG",
+  "auteur": "vincedessine",
+  "visuel": {
+   "duree": 7.0,
+   "nb_plans": 1,
+   "duree_plan": 7.02,
+   "coupes": [],
+   "plans": {
+    "tres_serre": 0.0,
+    "serre": 0.0,
+    "moyen": 0.0,
+    "large": 1.0
+   },
+   "camera": {
+    "fixe": 0.923,
+    "avance": 0.077,
+    "recul": 0.0,
+    "travelling": 0.0,
+    "epaule": 0.0
+   },
+   "nb_personnes": 0,
+   "personnes": [],
+   "visages": false,
+   "sourires": 0.0,
+   "energie": 0.268,
+   "mur": [
+    251,
+    250,
+    248
+   ],
+   "palette": [
+    [
+     251,
+     250,
+     248,
+     0.691
+    ],
+    [
+     11,
+     8,
+     9,
+     0.085
+    ],
+    [
+     241,
+     175,
+     147,
+     0.072
+    ],
+    [
+     91,
+     73,
+     65,
+     0.068
+    ],
+    [
+     126,
+     132,
+     147,
+     0.045
+    ],
+    [
+     160,
+     175,
+     191,
+     0.038
+    ]
+   ],
+   "lumiere": {
+    "luminosite": 213.8,
+    "chaleur": 8.3,
+    "saturation": 28.4
+   },
+   "moment": "jour"
+  },
+  "audio": {
+   "duree": 6.7,
+   "nb_voix": 2,
+   "voix": [
+    {
+     "hz": 213,
+     "genre": "f",
+     "part": 0.59
+    },
+    {
+     "hz": 134,
+     "genre": "h",
+     "part": 0.41
+    }
+   ],
+   "debit": 3.41,
+   "blanc_moyen": 0.41,
+   "coupes": 0,
+   "dynamique_db": 40.3,
+   "cris": 0.02,
+   "musique": null,
+   "impacts": 0,
+   "impacts_10s": 0.0,
+   "graves": 0,
+   "aigus": 0,
+   "sur_vanne": 0,
+   "evenements": {},
+   "emotions": {
+    "douceur": 1,
+    "souriant": 1,
+    "romantique": 1,
+    "taquin": 1
+   }
+  },
+  "claude": {
+   "lieux": [
+    "chambre"
+   ],
+   "moment": "soir",
+   "costumes": {
+    "envoyee": {
+     "haut": "pyjama",
+     "c_haut": "rose",
+     "motif": "uni",
+     "bas": "short",
+     "chaussures": "chaussons",
+     "details": [
+      "boucles_oreilles",
+      "taches_rousseur"
+     ]
+    },
+    "presentateur": {
+     "haut": "tshirt",
+     "c_haut": "bleu",
+     "motif": "uni",
+     "bas": "pantalon",
+     "chaussures": "chaussons",
+     "details": [
+      "moustache",
+      "lunettes_vue"
+     ]
+    }
+   },
+   "objets": [
+    {
+     "replique": 0,
+     "objet": "tablette"
+    },
+    {
+     "replique": 2,
+     "objet": "tasse"
+    },
+    {
+     "replique": 3,
+     "objet": "tablette"
+    }
+   ],
+   "gags": [
+    "\"La menace la plus douce du monde\" écrit sur un post-it collé sur la tablette.",
+    "\"Ne jamais sous-estimer les pyjamas en soie\" sur un cadre photo.",
+    "\"Thé : 1, Menaces romantiques : 0\" gravé sur la tasse."
+   ],
+   "ambiances": [
+    "vapeur"
+   ],
+   "plans": [
+    {
+     "replique": 0,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "pointe_g",
+     "reaction": "regard_camera"
+    },
+    {
+     "replique": 1,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "sourit",
+     "reaction": "aucune"
+    },
+    {
+     "replique": 2,
+     "plan": "moyen",
+     "mouvement": "fixe",
+     "geste": "bras_ouverts",
+     "reaction": "joie"
+    },
+    {
+     "replique": 3,
+     "plan": "large",
+     "mouvement": "fixe",
+     "geste": "gratte_tete",
+     "reaction": "sceptique"
+    }
+   ]
+  },
+  "realisation": {
+   "moment": "soir",
+   "lieux": [
+    "chambre"
+   ],
+   "gags": [
+    "\"La menace la plus douce du monde\" écrit sur un post-it collé sur la tablette.",
+    "\"Ne jamais sous-estimer les pyjamas en soie\" sur un cadre photo.",
+    "\"Thé : 1, Menaces romantiques : 0\" gravé sur la tasse."
+   ],
+   "ambiances": [
+    "poussiere",
+    "vapeur"
+   ],
+   "source": "auteur+image",
+   "tenues": {
+    "envoyee": "pyjama",
+    "presentateur": "tshirt"
+   },
+   "plans": [
+    "serre/fixe",
+    "serre/fixe",
+    "moyen/fixe",
+    "large/fixe"
+   ]
+  },
+  "video": "2026-10-22_13h32_emission.mp4"
  }
 ]
