@@ -1170,5 +1170,48 @@
    "son": true
   },
   "cadence": "pose"
+ },
+ {
+  "moment": "jour",
+  "lieux": [
+   "rue",
+   "salon"
+  ],
+  "source": "auteur+image",
+  "duree": 79.2,
+  "plans": {
+   "large": 5,
+   "contre_plongee": 6,
+   "serre": 8,
+   "tres_serre": 2,
+   "moyen": 6
+  },
+  "mouvements": {
+   "fixe": 2,
+   "recul": 10,
+   "epaule": 6,
+   "avance": 4,
+   "travelling": 4,
+   "zoom_choc": 1
+  },
+  "costumes": {
+   "presentateur": "pull",
+   "invite": "debardeur"
+  },
+  "figurants": 2,
+  "ambiances": [],
+  "controle": "Humoriste 6.0/10 : 71.7 s La chute finale manque d'un zoom choc pour accentuer l'effet comique.; 0.4 s Le début manque d'une réaction marquée du présentateur au moment du décroché. | Réalisateur 5.0/1",
+  "fichier": "2026-10-22_17h38_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": false,
+   "tiers": false,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": true,
+   "reflets": true,
+   "son": true
+  },
+  "cadence": "normal"
  }
 ]

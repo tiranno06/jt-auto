@@ -1,43 +1,47 @@
 Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, ElevenLabs epuise — IA utilisée : mistral
-Vidéo depuis TikTok : https://vm.tiktok.com/ZN8AGVAKH/
+Vidéo depuis TikTok : https://vm.tiktok.com/ZN8AW37EN/
   son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 6.7 s, compte d'origine @vincedessine
-[ WARN:0@6.227] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
-  image de la vidéo : 1 plans (≈ 7.02 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 0 %, large 100 % ; caméra : fixe 92 %, avance 7 % ; 0 personne(s) à l'écran : aucun visage repéré ; agitation 0.268 ; lumière jour ; fond [251, 250, 248]
+  son récupéré : 76.8 s, compte d'origine @vignianimation
+[ WARN:0@26.413] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  image de la vidéo : 28 plans (≈ 2.75 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 14 %, large 85 % ; caméra : fixe 100 % ; 1 personne(s) à l'écran : gauche (habit [145, 121, 73], cheveux [44, 27, 24], sourit 0 %) ; agitation 0.085 ; lumière jour ; fond [193, 204, 239]
   isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
   transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-  voix re-séparées par leur empreinte (ECAPA) : 2 voix (netteté 0.23)
-  4 répliques, voix : {'speaker_0': 213, 'speaker_1': 134}
-  son de la vidéo : 2 voix [213 Hz (f, 59 %), 134 Hz (h, 41 %)], 3.41 mots/s, blancs 0.41 s, 0 coupure(s) de parole, dynamique 40.3 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
-  IA gemini indisponible (The read operation timed out) : on passe à la suivante
-  scène reconstituée : Une scène intime dans une chambre cosy en soirée, où un couple semble partager un moment complice devant une tablette. L'ambiance est douce et légèrement romantique, mais teintée d'humour.
-  casting : speaker_0 → Lila, speaker_1 → Jojo
-Sketch : « ROMANCE ET HUMOUR EN CHAMBRE », 4 répliques
-  décor 0 : chambre cosy avec un lit défait, une tablette posée sur une couverture
-montage : 5 plans (0.0:serre>env/coupe 1.3:serre>pre/coupe 2.0:moyen>env/glisse 3.3:epaule>env/glisse 4.2:large>pre/coupe)
-studio : soir, lieux ['chambre'], tenues envoyee=pyjama, presentateur=tshirt, 0 figurant(s), ambiances ['poussiere', 'vapeur'] ; plans serre/fixe serre/fixe moyen/fixe large/fixe
-cartoon : durée 9.2 s, 4 répliques, 1 scène(s), personnages ['envoyee', 'presentateur']
-Contrôle image : 2 défaut(s) — 2.75 s tete_coupee (presentateur), 3.25 s tete_coupee (presentateur)
-  image 0/553 (4 processeurs)
-  image 300/553
+  voix re-séparées par leur empreinte (ECAPA) : 2 voix (netteté 0.12)
+  27 répliques, voix : {'speaker_0': 315, 'speaker_1': 178}
+  son de la vidéo : 2 voix [315 Hz (f, 46 %), 178 Hz (?, 54 %)], 6.33 mots/s, blancs 0.48 s, 8 coupure(s) de parole, dynamique 18.4 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
+  scène reconstituée : Un homme en pleine rupture téléphonique avec sa compagne, tandis qu'il se trouve dans un parc ensoleillé et qu'elle erre dans une rue résidentielle.
+  casting : speaker_0 → Jojo, speaker_1 → Lila
+  Claude a réattribué 13 réplique(s) à la bonne personne (voix proches)
+Sketch : « RUPTURE TÉLÉPHONIQUE », 27 répliques
+Lieux séparés : chaque personnage a son propre décor (appel, visio, l'un ailleurs)
+  décor 0 : quiet city street at dusk, parked car at the curb, sidewalk, street la
+  décor 1 : cozy living room, sofa, posters on the wall, coffee table, lamp, telev
+montage : 50 plans (0.0:large>pre/coupe 0.4:large>inv/coupe 1.4:serre>inv/glisse 2.1:contre_plongee>pre/coupe 2.8:serre>inv/coupe 4.4:tres_serre>inv/glisse 6.1:contre_plongee>pre/coupe 6.5:tres_serre>inv/coupe 8.6:serre>inv/glisse 10.6:contre_plongee>pre/coupe 11.5:serre>pre/glisse 13.1:large>inv/coupe 14.5:tres_serre>inv/glisse 15.9:serre>inv/glisse 17.7:tres_serre>inv/glisse 19.4:contre_plongee>pre/coupe 20.0:tres_serre>pre/glisse 20.8:moyen>inv/coupe 22.2:tres_serre>inv/glisse 23.8:serre>inv/glisse 25.6:tres_serre>inv/glisse 26.7:contre_plongee>pre/coupe 27.0:serre>inv/coupe 28.4:tres_serre>inv/glisse 29.6:serre>inv/glisse 31.5:contre_plongee>pre/coupe 33.0:moyen>inv/coupe 34.2:tres_serre>inv/glisse 35.8:moyen>inv/glisse 39.0:tres_serre>inv/glisse 39.5:serre>inv/glisse 40.4:large>inv/glisse 42.3:tres_serre>inv/glisse 44.4:moyen>inv/glisse 45.0:tres_serre>inv/glisse 46.3:moyen>pre/coupe 50.0:tres_serre>pre/glisse 51.3:serre>pre/glisse 56.5:tres_serre>pre/glisse 57.1:large>pre/glisse 58.9:serre>pre/glisse 60.8:tres_serre>pre/glisse 62.8:serre>pre/glisse 64.5:tres_serre>pre/glisse 65.5:serre>pre/glisse 67.8:moyen>pre/glisse 70.0:serre>pre/glisse 71.6:tres_serre>pre/glisse 72.5:serre>pre/glisse 74.3:tres_serre>pre/glisse)
+studio : jour, lieux ['rue', 'salon'], tenues presentateur=pull, invite=debardeur, 2 figurant(s), ambiances [] ; plans large/fixe large/recul contre_plongee/epaule serre/avance contre_plongee/epaule tres_serre/recul contre_plongee/epaule large/recul serre/recul contre_plongee/epaule moyen/travelling serre/recul contre_plongee/epaule serre/avance serre/travelling contre_plongee/epaule moyen/avance moyen/fixe large/travelling moyen/recul moyen/travelling serre/recul large/recul serre/recul moyen/recul tres_serre/zoom_choc serre/avance
+cartoon : durée 79.2 s, 27 répliques, 2 scène(s), personnages ['presentateur', 'invite']
+  image 0/4751 (4 processeurs)
+  image 300/4751
+  image 600/4751
+  image 900/4751
+  image 1200/4751
+  image 1500/4751
+  image 1800/4751
+  image 2100/4751
+  image 2400/4751
+  image 2700/4751
+  image 3000/4751
+  image 3300/4751
+  image 3600/4751
+  image 3900/4751
+  image 4200/4751
+  image 4500/4751
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-  IA gemini indisponible (The read operation timed out) : on passe à la suivante
-Jury qualité (ia) : 8.4/10 — Humoriste 7.0/10 : 0.4 s La chute finale ('C’est une menace') manque d’un effet visuel marquant pour renforcer le côté drôle. Un zoom choc ou un effet de surprise visuel serait idéal.; 4.0 s L’humour pourrait être amplifié par une réaction plus exagérée du présentateur à la phrase 'Toute ma vie à tes côtés'. Un regard caméra ou un geste comique serait parfait.; 8.6 s L’écran de fin avec le logo et l’appel à l’abonnement est trop court. Ajouter un bruitage ou une animation pour capter l’attention serait bénéfique. | Réalisateur 6.0/10 : 0.5 s La tête du présentateur est coupée par le bord de l’image, ce qui nuit à la qualité visuelle. Un cadrage plus large ou un plan mieux ajusté serait nécessaire.; 2.9 s Les plans de réaction du présentateur sont insuffisants. Il manque des moments où il réagit visiblement aux répliques.; 5.0 s Le rythme des plans pourrait être amélioré pour éviter les t
-Corrections du jury (tour 1) : plan serre sur la réplique 3
-montage : 4 plans (0.0:serre>env/coupe 1.3:serre>pre/coupe 2.0:serre>env/glisse 4.2:large>pre/coupe)
-studio : soir, lieux ['chambre'], tenues envoyee=pyjama, presentateur=tshirt, 0 figurant(s), ambiances ['poussiere', 'vapeur'] ; plans serre/fixe serre/fixe moyen/fixe large/fixe
-cartoon : durée 9.2 s, 4 répliques, 1 scène(s), personnages ['envoyee', 'presentateur']
-Contrôle image : 1 défaut(s) — 2.25 s tete_coupee (envoyee)
-  image 0/553 (4 processeurs)
-  image 300/553
-Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury qualité (ia) : 6.4/10 — Humoriste 7.0/10 : 5 s La chute manque d'un effet dramatique appuyé pour faire rire. | Réalisateur 6.0/10 : 0.4 s La tête de l'envoyée est coupée par le haut de l'image (serre).; 5 s Pas assez de plans de réaction de celui qui écoute.; 2.2 s tête de envoyee coupée par le bord de l'image (serre) | Directeur artistique 6.0/10 : 0.4 s Le décor et les personnages ne reproduisent pas le confort du lit de l'original (ils sont debout). | Ingénieur du son 7.0/10 : 5 s Manque un bruitage fort ou un effet sonore pour appuyer la chute. | Spectateur TikTok 6.0/10 : 0.4 s Sous-titres un peu trop denses et rapides au début.
-Manque par rapport à la vidéo d'origine : Dans l'original, les deux personnages sont allongés dans leur lit sous la couette, l'envoyée tricote et l'homme est sur sa tablette. Chez nous, ils sont debout 
-La version corrigée n'est pas meilleure : on garde la première.
+Jury qualité (ia) : 6.0/10 — Humoriste 6.0/10 : 71.7 s La chute finale manque d'un zoom choc pour accentuer l'effet comique.; 0.4 s Le début manque d'une réaction marquée du présentateur au moment du décroché. | Réalisateur 5.0/10 : 0.4 s Le plan 2 dure seulement 0.2s, ce qui est trop court et crée un flash visuel désagréable.; 2.5 s Le personnage est parfois coupé bizarrement par le cadre dans les plans serrés. | Directeur artistique 7.0/10 : 0.4 s Le premier plan se déroule dans le salon alors que l'original montre la rue pour l'appel.; 2.5 s Le style vestimentaire s'éloigne un peu trop de l'original épuré de la référence TikTok. | Ingénieur du son 6.0/10 : 71.7 s Absence de bruitage percutant sur la chute finale pour souligner le gag. | Spectateur TikTok 6.0/10 : 26.9 s Les sous-titres défilent parfois trop vite pour qu'on puisse tout lire confortablement.; 78.6 s L'appel à l'abonnement final manque d'un regard d
+Manque par rapport à la vidéo d'origine : La scène d'introduction dans l'original se passe dans une rue avec un visuel de personnage spécifique (grosse tête et ventre rebondi), alors qu'ici nous sommes  ; Le style graphique original est beaucoup plus minimaliste et épuré en arrière-plan.
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = mistral ×2, gemini ×1, voix = tiktok, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 18171, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 26}
-OK : sortie/2026-10-22_13h32_emission.mp4 (9 s)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = gemini ×2, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 21989, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 31}
+OK : sortie/2026-10-22_17h38_emission.mp4 (79 s)
