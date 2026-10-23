@@ -265,6 +265,12 @@ def emotion_de(t):
     if "..." in brut or "…" in brut: return "calme"
     return "neutre"
 
+def enregistrees():
+    """Rôles dont l'auteur a enregistré sa propre voix depuis le site (idée 30) : leur voix imitée passe en priorité au casting."""
+    p = os.path.join(RACINE, "voix", "refs", "enregistrees.json")
+    try: return set(json.load(open(p, encoding="utf-8")))
+    except Exception: return set()
+
 def _ref(role, emo="neutre"):
     """Voix de référence à imiter (Chatterbox, Zonos) : d'abord celle de l'émotion (voix/refs/<rôle>_<émotion>.wav),
     sinon la référence générale du rôle. Une référence vivante donne une voix vivante (V1/V2)."""
@@ -444,7 +450,7 @@ def candidats():
     return c
 
 def casting(forcer=False):
-    src = sources(); signature = ",".join(src)
+    src = sources(); signature = ",".join(src) + ("" if not enregistrees() else "+voix_auteur:" + ",".join(sorted(enregistrees())))
     if os.path.exists(FICHE) and not forcer:
         f = json.load(open(FICHE, encoding="utf-8"))
         age = (datetime.date.today() - datetime.date.fromisoformat(f.get("date", "2000-01-01"))).days
@@ -469,7 +475,8 @@ def casting(forcer=False):
         expr = expressivite(a)
         score = (PRIORITE[c["moteur"]] + (4 * d.get("sim", 0.8)) - max(0, d.get("blanc", 0) - 0.4)       # articulation : voix bien comprise par Whisper
                  - abs(np.log(max(d.get("debit", 1), 1e-3))) + 0.35 * min(expr, 4.0)          # bonus aux voix qui « jouent »
-                 + (1.5 * (d["mos"] - 3.0) if d.get("mos") is not None else 0.0))     # naturel UTMOS : les voix robotiques descendent
+                 + (1.5 * (d["mos"] - 3.0) if d.get("mos") is not None else 0.0)     # naturel UTMOS : les voix robotiques descendent
+                 + (3.0 if c["moteur"] in ("chatterbox", "zonos") and c.get("role") in enregistrees() else 0.0))   # voix enregistrée par l'auteur
         d["expr"] = round(expr, 1)
         journal(f"  {c['moteur']:10s} {(c.get('nom') or c['voix'])[:38]:38s} genre {genre} f0 {hz:5.0f} {d} {'OK' if ok else 'refusée'} score {score:.2f}")
         if ok: fiches.append(dict(c, genre=genre, f0=round(hz), score=round(score, 2)))
@@ -522,6 +529,7 @@ def generer(repliques):
         if fiche["roles"].get(role):                                       # une voix fixe par personnage : jamais celle d'un autre
             autres = {v for r, v in principales.items() if r != role}
             l = [c for c in fiche["roles"][role] if (c["moteur"], c["voix"]) not in autres] or fiche["roles"][role][:1]
+            if os.environ.get("VOIX_NOUVELLES") == "1" and len(l) > 1: l = l[1:] + l[:1]   # bouton « juste la voix » : la suivante
             return [c for c in l if c["moteur"] not in EN_PANNE] or l      # crédit épuisé en route : on passe aux voix gratuites
         # voix off (« narrateur ») : une voix de la banque que n'utilise aucun personnage du sketch
         autres = [c for r in ("envoyee", "presentateur", "invite") for c in fiche["roles"].get(r, [])[1:]]

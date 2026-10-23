@@ -20,7 +20,7 @@ import bisect, math, os, re, subprocess, sys, tempfile, wave
 import numpy as np, cv2
 from PIL import Image, ImageDraw, ImageFont
 ICI = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, ICI)
-import marionnette as M, sons_modernes as SM, bruitages as BR, marque, studio, decor_dessin as DD, humain as HU, levres
+import marionnette as M, sons_modernes as SM, bruitages as BR, marque, studio, decor_dessin as DD, humain as HU, levres, decor_anime as DA
 from jt import minutage, carton, son, vers_mix, enveloppe, poser, pop, W, H, FPS, SR, SRM, FB
 
 CAP_Y = 1700
@@ -51,6 +51,9 @@ def emotion(d):
 
 STYLE_RENDU = (os.environ.get("STYLE_RENDU") or "cel").lower()           # cel (aplats pro) | volume (effet 3D doux) | 3d (3D toon brillant)
 SSAA = (os.environ.get("SSAA") or "1") != "0"                             # personnages dessinés en double résolution puis réduits
+APPEL_ON = (os.environ.get("APPEL_PARTAGE") or "1") != "0"               # appels : écran partagé, plans d'écoute, voix au téléphone
+REMB_ON = (os.environ.get("REMBOBINAGE") or "1") != "0"                  # « revenons 5 minutes avant » : rembobinage façon cassette
+OMBRES = (os.environ.get("OMBRES") or "1") != "0"                         # ombres portées des personnages (sol, mur le soir)
 DECOR_VIVANT = (os.environ.get("DECOR_VIVANT") or "1") != "0"             # la rue vit : voitures qui passent au loin
 CEL = (os.environ.get("CEL") or ("0" if (os.environ.get("STYLE_PERSO") or "toon").lower() == "toon" else "1")) != "0"   # ombrage en aplat + contour épais
 # (coupé par défaut avec le nouveau style « toon » : trait fin et ombres déjà dessinés comme la référence)
@@ -104,7 +107,7 @@ GESTES = [((-20, 10), (100, -40)), ((-100, 40), (20, -10)), ((-110, -30), (110, 
 MAINS_CONV = [("ouverte", "paume"), ("paume", "ouverte"), ("paume", "paume"), ("ouverte", "index"), ("ouverte", "ouverte")]   # mains des gestes de conversation
 # poses expressives (bras gauche, bras droit) : angles épaule / coude en degrés, 0 = vers le bas — catalogue complet dans studio.GESTES
 POSES = studio.POSES
-TEL_OREILLE = (140, 95)                                                    # bras qui tient le téléphone contre l'oreille
+TEL_OREILLE = (105, 120) if (os.environ.get("STYLE_PERSO") or "toon").lower() == "toon" else (140, 95)   # téléphone contre l'oreille (bord de la tête)
 NEUTRE_BRAS = ((-18, 8), (18, -8))
 TOON = (os.environ.get("STYLE_PERSO") or "toon").lower() == "toon"
 # style toon : gestes de conversation NATURELS (copiés sur les vidéos de référence) — un bras qui explique, coude près du
@@ -410,7 +413,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
                                or (j and ph[j - 1]["p"] == "narrateur")) else "serre"
     # studio : bible de l'épisode et storyboard (plans, mouvements, réactions), décors dessinés là où l'IA n'en a pas fourni
     B = studio.bible(sk, roles) if DETAIL else None
-    AVANT, INFOS = {}, {}; FICHES = None; DECOUPE = []
+    AVANT, INFOS = {}, {}; FICHES = None; DECOUPE = []; ERREURS_ANIM = []; SC_COURANT = [0]; TETES_Y = {}
     PROF = {}                                                              # décors IA : profondeur (le premier plan glisse plus vite que le fond)
     if B and PARALLAXE:
         try:
@@ -454,7 +457,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         FICHES = B.get("fiches") if HUMAINS else None
         for sc_ in places:
             lieu = B["lieux"][min(sc_, len(B["lieux"]) - 1)]
-            dd = DD.dessiner(lieu, B, graine=B["graine"] % 9973 + sc_)
+            dd = DD.dessiner(lieu, B, graine=B["graine"] % 9973 + sc_ + int(os.environ.get("DECOR_GRAINE") or 0))   # « juste le décor » : tirage neuf
             if dd.get("avant") is not None: AVANT[sc_] = dd["avant"]          # premier plan (comptoir, bureau, guichet) : aussi devant un décor IA
             if sc_ in decors: continue                                     # décor IA (mode payant) : gardé tel quel
             decors[sc_] = dd["fond"]; INFOS[sc_] = dd
@@ -505,6 +508,27 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
     for q in ph: DEBUT_SCENE.setdefault(q["scene"], q["deb"] - 0.1)
     COUVERTURE_MS[0] = int(max(0.5, ph[-1]["deb"] + 0.4) * 1000)           # image de couverture TikTok : la chute finale
     SANS_ENTREE = {ph[0]["scene"]}                                         # 1re scène : déjà là dès la première image (l'accroche compte)
+    # appel (lieux séparés) : écran partagé sur une réplique sur trois, plan d'écoute (on voit celui qui écoute, la voix sort
+    # du téléphone) sur la fin des longues répliques (idées 16 et 21)
+    APPEL = []                                                             # (t0, t1, "partage" | "ecoute", scène de l'autre)
+    sc_parl = sorted({z2["scene"] for z2 in ph if z2["p"] != "narrateur"})
+    if SEPARES and APPEL_ON and len(sc_parl) >= 2:
+        for j, q in enumerate(ph):
+            if q["p"] == "narrateur" or j == 0 or q is ph[-1]: continue
+            autre_sc = next((s_ for s_ in sc_parl if s_ != q["scene"]), None)
+            if autre_sc is None: continue
+            d_ = q["fin"] - q["deb"]
+            deja = all(DEBUT_SCENE.get(s_, 1e9) < q["deb"] - 0.9 for s_ in (q["scene"], autre_sc))   # les deux sont déjà en scène
+            if j % 3 == 1 and d_ >= 0.8 and deja: APPEL.append((q["deb"] - 0.05, q["fin"] + 0.1, "partage", autre_sc))
+            elif j % 3 == 2 and d_ >= 2.2 and deja: APPEL.append((q["deb"] + 0.55 * d_, q["fin"], "ecoute", autre_sc))
+        if APPEL: print(f"appel : {sum(a[2] == 'partage' for a in APPEL)} écran(s) partagé(s), {sum(a[2] == 'ecoute' for a in APPEL)} plan(s) d'écoute", flush=True)
+    SC_HAUT = sc_parl[0] if sc_parl else 0
+    # rembobinage (idée 22) : « revenons 5 minutes avant », « deux heures plus tôt »… → l'image repart en arrière façon cassette
+    REMB = []
+    for j, q in enumerate(ph):
+        if j and REMB_ON and re.search(r"revenons|retour en arri[èe]re|rembobin|flash-?back|(minutes?|heures?|jours?|semaines?|mois|ans?) (plus t[ôo]t|avant)\b|la veille|hier soir,", reps[q["i"]]["t"].lower()):
+            t0_ = q["fin"] + 0.02; REMB.append((t0_, t0_ + 0.85, max(0.0, ph[max(0, j - 3)]["deb"] + 0.2)))   # on remonte 3 répliques
+    if REMB: print(f"rembobinage : {len(REMB)} fois", flush=True)
     TITRE_FIXE = titre(sk.get("titre_accroche")) if not mini else None
     FILIGRANE = marque.filigrane(52)
     TRAITS_VITESSE = []                                                    # traits de vitesse (manga) : du bord vers le centre
@@ -647,6 +671,11 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
                 if autre_ in places[scene]: p["penche"] *= 1 if position(scene, autre_)[0] > x else -1
             if emo == "blase" and not parle: p["pied"] = abs(math.sin(tm * 5.5))   # il tape du pied, impatient
             if roule: p.update(yeux="roule", sourcils="neutre", forme="moue")
+            if TOON:                                                       # idée 13 : le teint change peu à peu pendant la réplique
+                u_t = float(np.clip((tm - q["deb"] + 0.2) / 2.2, 0, 1))
+                if emo in ("colere", "cri"): p["rougeur"] = max(p.get("rougeur", 0.0), 0.25 + 0.75 * u_t)
+                elif emo == "panique": p["paleur"] = max(p.get("paleur", 0.0), 0.2 + 0.7 * u_t)
+                elif emo == "gene": p["gene"] = 0.25 + 0.75 * u_t
             if TOON:                                                       # P1 : gros plans plus expressifs (larmes, sueur)
                 ex_ = tuple(p.get("effets") or ())
                 if emo in ("triste", "soupir") and q.get("intensite", 1) >= 2: ex_ += ("larme",)
@@ -801,8 +830,11 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             o = objets.get((mien["objet"], round(s, 2)))
             if o is None: o = objets[(mien["objet"], round(s, 2))] = M.objet(mien["objet"], s * ((0.8 if TOON else 0.5) if FICHES else 1.0))
             if o is not None:
-                p["main_d"] = o; p["main_forme_d"] = "poing"
-                p["bras_d"] = TEL_OREILLE if mien["objet"] == "telephone" else (120, -100)   # téléphone : tenu à l'oreille
+                if TOON and mien["objet"] == "telephone" and (p.get("tq") or 0) > 0.15:   # tourné vers la droite : l'oreille visible
+                    p["main_g"] = o; p["main_forme_g"] = "poing"; p["bras_g"] = (-TEL_OREILLE[0], -TEL_OREILLE[1])   # est à gauche
+                else:
+                    p["main_d"] = o; p["main_forme_d"] = "poing"
+                    p["bras_d"] = TEL_OREILLE if mien["objet"] == "telephone" else (120, -100)   # téléphone : tenu à l'oreille
         return p
 
     global COUVERTURE                                                      # couverture : titre visible et visage le plus expressif
@@ -813,6 +845,35 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
     COUVERTURE = round(float(COUVERTURE), 2)
     CARTES = {k: carte(tr[4]) for k, tr in enumerate(transitions) if tr[2] == "carton"}
     GELEE = {}
+
+    def partage(haut, bas, u, sc_h=None, sc_b=None):
+        """Écran partagé : une bande de chaque plan, centrée sur la tête du personnage, l'une au-dessus de l'autre, séparées par
+        un trait blanc ; la moitié du bas glisse en place au début (u : 0 → 1)."""
+        h2 = H // 2
+        def y0_(sc_): return int(np.clip(TETES_Y.get(sc_, H * 0.4) - 0.38 * h2, 0, H - h2))
+        fr = np.empty_like(haut); y_h, y_b = y0_(sc_h), y0_(sc_b); fr[:h2] = haut[y_h:y_h + h2]; fr[h2:] = bas[y_b:y_b + H - h2]
+        if u < 1:
+            dx = int(W * (1 - _ease(max(0.0, u)))); fr[h2:] = np.roll(fr[h2:], dx, 1)
+            if dx: fr[h2:, :dx] = (30, 30, 36)
+        cv2.rectangle(fr, (0, h2 - 5), (W, h2 + 5), (250, 250, 250), -1)
+        return fr
+
+    def rembobine(fr, tm, u):
+        """Effet cassette qui rembobine : lignes qui ondulent, couleurs décalées, bande de bruit, « ◀◀ » qui clignote."""
+        fr = fr.copy(); rg = np.random.default_rng(int(tm * 1000))
+        for y in range(0, H, 6):                                           # lignes décalées (tracking VHS)
+            d_ = int(10 * math.sin(y * 0.03 + tm * 40) + rg.integers(-3, 4))
+            if d_: fr[y:y + 6] = np.roll(fr[y:y + 6], d_, 1)
+        fr[..., 0] = np.roll(fr[..., 0], 6, 1); fr[..., 2] = np.roll(fr[..., 2], -6, 1)   # couleurs décalées
+        yb = int((tm * 2400) % H); fr[yb:yb + 50] = np.clip(fr[yb:yb + 50].astype(np.int16) + rg.integers(-60, 60, fr[yb:yb + 50].shape), 0, 255).astype(np.uint8)
+        fr = cv2.addWeighted(fr, 0.85, np.full_like(fr, (40, 60, 120)), 0.15, 0)
+        if int(tm * 6) % 2 == 0:
+            for k in range(2):                                             # « ◀◀ »
+                x0 = 80 + k * 70
+                pts = np.array([(x0 + 60, 260), (x0, 300), (x0 + 60, 340)], np.int32)
+                cv2.fillPoly(fr, [pts], (250, 250, 250), cv2.LINE_AA)
+        cv2.putText(fr, "REMBOBINAGE", (230, 318), cv2.FONT_HERSHEY_DUPLEX, 1.6, (250, 250, 250), 3, cv2.LINE_AA)
+        return fr
 
     def image(fi):
         tm = fi / FPS
@@ -842,6 +903,18 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             g = g * GELEE["vig"]
             if u < 0.08: g = g + (255 - g) * (0.3 * (1 - u / 0.08))            # petit flash au moment du gel
             return np.clip(g, 0, 255).astype(np.uint8)
+        rb = next((r_ for r_ in REMB if r_[0] <= tm < r_[1]), None)
+        if rb is not None:                                                 # rembobinage : les images d'avant défilent à l'envers
+            u = (tm - rb[0]) / (rb[1] - rb[0]); t_src = max(0.0, rb[0] - (rb[0] - rb[2]) * min(1.0, 1.25 * u) - 0.02)
+            return rembobine(vue(t_src), tm, u)
+        ap = next((a_ for a_ in APPEL if a_[0] <= tm < a_[1]), None)
+        if ap is not None and ap[2] == "partage":                          # écran partagé : les deux personnages de l'appel
+            q_ = actif(tm); haut = vue(tm, SC_HAUT if q_["scene"] != SC_HAUT else None, False)
+            bas = vue(tm, ap[3] if q_["scene"] == SC_HAUT else None, False)
+            fr = partage(haut, bas, (tm - ap[0]) / 0.25, SC_HAUT, ap[3] if q_["scene"] == SC_HAUT else q_["scene"])
+            return habiller(fr, tm, q_, q_["scene"])
+        if ap is not None and ap[2] == "ecoute":                           # plan d'écoute : on voit l'autre, la voix sort du téléphone
+            return habiller(vue(tm, ap[3], False), tm, actif(tm), actif(tm)["scene"])
         fr = vue(tm)
         if tm > FIN and not DOUB:                                          # impact final : secousse qui s'amortit
             v = math.exp(-(tm - FIN) * 5) * 22
@@ -1024,7 +1097,37 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
     TOILE = {}
     SENT, MARQ = np.array((1, 2, 3), np.uint8), np.array((3, 1, 2), np.uint8)
 
-    def composer_ssaa(img, liste):
+    def ombres_portees(img, a_c, box, liste, sol_y):
+        """Ombre portée de chaque personnage (idée 6) : sa silhouette couchée sur le sol, à l'opposé de la lumière du lieu ; le soir,
+        une deuxième ombre plus pâle se projette aussi sur le mur derrière lui (lampes allumées). Ombre nette (style aplat)."""
+        x0, y0, x1, y1 = box; h2, w2 = H // 2, W // 2
+        Mf = np.zeros((h2, w2), np.float32)
+        zf = Mf[y0 // 2:y1 // 2, x0 // 2:x1 // 2]
+        if zf.size == 0: return
+        zf[:] = cv2.resize(a_c[..., 0], (zf.shape[1], zf.shape[0]), interpolation=cv2.INTER_AREA)
+        sens = 1 if float((B or {}).get("lumiere", -1)) > 0 else -1
+        sol_ = np.zeros_like(Mf); mur_ = np.zeros_like(Mf)
+        soir = (B or {}).get("moment") in ("soir", "nuit") and INFOS.get(SC_COURANT[0], {}).get("lieu") not in ("rue", None)   # dehors : pas de mur proche
+        for role, p in liste:
+            if p.get("assis") or p.get("dos"): continue
+            xf, yf, s_ = p["x"] / 2, p["y"] / 2, p["s"]
+            src = np.zeros_like(Mf); a_, b_ = int(max(0, xf - 230 * s_ / 2)), int(min(w2, xf + 230 * s_ / 2)); yb = int(min(h2, yf + 2))
+            if b_ <= a_ or yb <= 0: continue
+            src[:yb, a_:b_] = Mf[:yb, a_:b_]
+            k_ = -sens * 0.55                                              # x' = x + k (yf - y) ; y' = yf + 0.18 (yf - y)
+            Ms = np.float32([[1, -k_, k_ * yf], [0, -0.18, 1.18 * yf]])
+            sol_ = np.maximum(sol_, cv2.warpAffine(src, Ms, (w2, h2), flags=cv2.INTER_LINEAR))
+            if soir and sol_y is not None:
+                Mm = np.float32([[1, 0, -sens * 34 * s_], [0, 1, -14 * s_]])
+                mur_ = np.maximum(mur_, cv2.warpAffine(src, Mm, (w2, h2), flags=cv2.INTER_LINEAR))
+        if sol_y is not None:                                              # chaque ombre reste sur sa surface (sol / mur)
+            ys = int(np.clip(sol_y / 2, 0, h2)); mur_[ys:] = 0
+        f_ = np.maximum(0.17 * (sol_ > 0.5), 0.11 * (mur_ > 0.5)).astype(np.float32)
+        if not f_.any(): return
+        f_ = cv2.resize(f_, (W, H), interpolation=cv2.INTER_LINEAR)[..., None]
+        img[:] = (img.astype(np.float32) * (1 - f_)).astype(np.uint8)
+
+    def composer_ssaa(img, liste, sol_y=None):
         """Super-échantillonnage : les personnages sont dessinés sur une toile deux fois plus grande, puis réduits (moyenne des
         pixels) : traits parfaitement lisses, détails fins (cheveux, barbe, coutures) nets, comme un rendu 4K ramené en 1080p."""
         if "t" not in TOILE: TOILE["t"] = np.empty((2 * H, 2 * W, 3), np.uint8)
@@ -1043,6 +1146,9 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         a_c = cv2.resize(corps.astype(np.float32), taille, interpolation=cv2.INTER_AREA)[..., None]
         a_o = cv2.resize(ombre.astype(np.float32), taille, interpolation=cv2.INTER_AREA)[..., None]
         coul = cv2.resize(np.where(corps[..., None], Tz, 0).astype(np.float32), taille, interpolation=cv2.INTER_AREA)   # couleurs prémultipliées
+        if B and OMBRES:
+            try: ombres_portees(img, a_c, (x0 // 2, y0 // 2, x1 // 2, y1 // 2), liste, sol_y)
+            except Exception as e_: print(f"ombre portée impossible : {e_}", flush=True)
         Z = img[y0 // 2:y1 // 2, x0 // 2:x1 // 2].astype(np.float32)
         Z = Z * (1 - 0.2 * a_o)                                            # ombre au sol : le décor assombri de 20 %
         img[y0 // 2:y1 // 2, x0 // 2:x1 // 2] = np.clip(Z * (1 - a_c) + coul, 0, 255).astype(np.uint8)
@@ -1135,8 +1241,14 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             cont = (cv2.dilate(corps, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2 * ep_ + 1, 2 * ep_ + 1))) > 0) & ~mm
             if cont.any(): sub[cont] = M.TRAIT
 
-    def vue(tm):
-        q = actif(tm); sc = q["scene"]
+    def vue(tm, force_sc=None, textes=True):
+        """Image du plan à l'instant tm. force_sc : montrer une autre scène (appel : celui qui écoute, écran partagé) ;
+        textes=False : sans sous-titres ni logo (posés ensuite sur l'image composée)."""
+        q = actif(tm); q_reel = q
+        if force_sc is not None and force_sc != q["scene"]:
+            zs = [z2 for z2 in ph if z2["scene"] == force_sc]
+            q = next((z2 for z2 in reversed(zs) if z2["deb"] <= tm), zs[0]) if zs else q
+        sc = q["scene"]; SC_COURANT[0] = sc
         fond = decors.get(sc)
         if fond is None: fond = decors[sc] = decor_uni(sc)
         k_sh, sh = plan_a(tm) if DECOUPE else (None, None)
@@ -1226,6 +1338,15 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         if B:
             for f_ in B["figurants"]:
                 if f_["scene"] == sc and not cible_seule and not f_.get("compagnon"): figurant(f_, tm, img, zm, cxm, cym)
+        if B and sc in INFOS and DECOR_VIVANT:                             # le décor vit : horloge, tasse, ventilateur, chat, pigeons, météo
+            try:
+                cris_ = [z2["deb"] for z2 in ph if z2["scene"] == sc and z2["emo"] in ("cri", "colere") and z2["deb"] <= tm]
+                DA.animer(img, INFOS[sc], tm, lambda x_, y_: (W / 2 + (x_ - cxb) * zb, H / 2 + (y_ - cyb) * zb), zb,
+                          dict(lieu=INFOS[sc].get("lieu", ""), ambiances=B.get("ambiances") or (), t_scene=tm - DEBUT_SCENE.get(sc, 0.0),
+                               entree=sc not in SANS_ENTREE, t_cri=(tm - cris_[0]) if cris_ else -1.0, graine=B.get("graine", 0) + sc))
+            except Exception as e_:
+                if not ERREURS_ANIM: print(f"décor animé impossible : {e_}", flush=True)
+                ERREURS_ANIM.append(1)
         sce = dec[sc] if sc < len(dec) else {}
         if sce.get("effet") == "tremblement" or (q["emo"] in ("cri", "colere") and q["deb"] <= tm <= q["fin"]):
             img = np.roll(img, (int(6 * math.sin(tm * 53)), int(6 * math.cos(tm * 47))), (0, 1))
@@ -1234,7 +1355,8 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             u_m = _ease((tm - q["deb"] + 0.05) / 0.18) * (1 - _ease((tm - q["fin"]) / 0.1))
             fm = fond_manga(q["emo"], int(tm * 6) % 2)                     # rayons qui tournent un peu (2 dessins en alternance)
             img[:] = cv2.addWeighted(img, 1 - 0.82 * u_m, fm, 0.82 * u_m, 0)
-        avant_persos = img.copy() if (B and LUMIERE_DECOR) else None      # pour retrouver les pixels des personnages (lumière du lieu)
+        reflet_ = B and sc in INFOS and (INFOS[sc].get("miroirs") or INFOS[sc].get("vitrines") or (B.get("moment") in ("soir", "nuit") and INFOS[sc].get("fenetre")))
+        avant_persos = img.copy() if (B and (LUMIERE_DECOR or reflet_)) else None   # pour retrouver les pixels des personnages (lumière, reflets)
         ssaa = []
         for role in places[sc]:                                            # personnages dessinés nets à l'échelle du plan
             if cible_seule and role != cible_seule and cible_seule in places[sc]: continue
@@ -1245,6 +1367,8 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
                 p["sq"] = max(p["sq"], 0.28 * ko); p["yeux"] = "plisses"; p["forme"] = "o"; p["bouche"] = 0.2
                 p["effets"] = tuple(set(p["effets"]) | {"etoiles"}); p["bras_g"], p["bras_d"] = (-60, 20), (60, -20)
             if not -400 < p["x"] < W + 400: continue
+            if FICHES and role in FICHES:                                  # hauteur de la tête à l'écran (écran partagé)
+                TETES_Y[sc] = p["y"] - (1500 - HU.tete_y(p["s"], FICHES[role]["taille"]))
             if SONDE["on"]:                                                # contrôle image : où est la tête de chacun à l'écran
                 try:
                     if FICHES and role in FICHES: (hx, hy), (hrx, hry), _m = HU.reperes(FICHES[role], p)
@@ -1269,10 +1393,13 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             R_ = cv2.getRotationMatrix2D((p["x"], p["y"]), -ang, 1.0)
             calque = cv2.warpAffine(calque, R_, (W, H), flags=cv2.INTER_LINEAR, borderValue=(1, 2, 3))
             m_ = (np.abs(calque.astype(np.int16) - (1, 2, 3)).sum(2) > 9)[..., None]; img[:] = np.where(m_, calque, img)
-        if ssaa: composer_ssaa(img, ssaa)
+        if ssaa: composer_ssaa(img, ssaa, (H / 2 + (DD.SOL - cyb) * zb) if (B and not (INFOS.get(sc, {}).get("lieu") == "voiture")) else None)
         if B and not cible_seule:                                          # compagnons (muets) : même échelle que les personnages
             for f_ in COMP.get(sc, []): figurant(f_, tm, img, z, cx, cy)
-        if avant_persos is not None: eclairer(img, avant_persos, sc, fond, z)
+        if avant_persos is not None and LUMIERE_DECOR: eclairer(img, avant_persos, sc, fond, z)
+        if reflet_ and avant_persos is not None and z < 1.3:             # plans larges seulement (en gros plan : tête fantôme)                           # reflet dans le miroir, les vitrines, la vitre le soir
+            try: DA.reflets(img, np.any(img != avant_persos, axis=2), INFOS[sc], lambda x_, y_: (W / 2 + (x_ - cxb) * zb, H / 2 + (y_ - cyb) * zb), B.get("moment") in ("soir", "nuit"))
+            except Exception as e_: print(f"reflet impossible : {e_}", flush=True)
         if False:                                                          # (amorce floue de l'autre, de dos : retirée, elle dédoublait l'image)
             ec = ecoutant(q); sens = -1 if position(sc, ec)[0] < position(sc, q["p"])[0] else 1
             y0_, x0_, x1_ = 1060, (0 if sens < 0 else W // 4), (W * 3 // 4 if sens < 0 else W)
@@ -1319,6 +1446,11 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         if REFLET is not None and sh is not None and sh["passage"] == "coupe" and int(sh["t0"] * 7) % 3 == 0 and tm - sh["t0"] < 0.7:
             img = cv2.add(img, (REFLET * math.sin(math.pi * (tm - sh["t0"]) / 0.7)).astype(np.uint8))   # reflet de lumière chaude
         if GRAIN: img = cv2.subtract(cv2.add(img, GRAIN[int(tm * FPS) % 3]), (4, 4, 4, 0))
+        if not textes: return img
+        return habiller(img, tm, q_reel, q_reel["scene"])
+
+    def habiller(img, tm, q, sc):
+        """Textes par-dessus l'image : titre, voix off, signature de la chaîne, sous-titres de la réplique en cours."""
         fr = img.astype(np.float32)
         if q["p"] == "narrateur" and tm <= q["fin"] + 0.3:                 # voix off : le titre en grand au centre à l'ouverture,
             V = VOIX_OFF[q["i"]]; a2 = pop(V, (tm - q["deb"] + 0.2) / 0.3)   # en haut de l'image ensuite (jamais sur les têtes)
@@ -1367,7 +1499,16 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
     else:
         for q, a in zip(ph, audios):
             b = vers_mix(a); s0 = int(q["deb"] * SRM); mix[s0:s0 + len(b)] += b[:n - s0]
+    for t0_, t1_, mode_, _sc in APPEL:                                     # voix au téléphone pendant les plans d'écoute (idée 16)
+        if mode_ != "ecoute": continue
+        a_, b_ = int(t0_ * SRM), min(n, int(t1_ * SRM))
+        if b_ - a_ > SRM // 10:
+            seg = mix[a_:b_].copy(); tel = SM.telephone(seg, SRM)
+            f_ = min(len(seg) // 4, int(0.04 * SRM)); w_ = np.ones(len(seg)); w_[:f_] = np.linspace(0, 1, f_); w_[-f_:] = np.linspace(1, 0, f_)
+            mix[a_:b_] = seg * (1 - w_[:, None]) + tel * w_[:, None]
     fx = np.zeros((n, 2))
+    for t0_, t1_, _src in REMB:                                            # bruit de cassette qui rembobine (idée 22)
+        a_ = int(t0_ * SRM); r_ = SM.rembobinage(t1_ - t0_, SRM); fx[a_:a_ + len(r_)] += r_[:max(0, n - a_)]
     def ajoute(nom, t_, g):
         x = SM.son(nom); s0 = int(max(0, t_) * SRM); e = min(n, s0 + len(x))
         if e > s0: fx[s0:e] += x[:e - s0] * g
@@ -1407,6 +1548,9 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
                 a_ = SM.ambiance(B["lieux"][min(sc_, len(B["lieux"]) - 1)], max(0.5, t1_ - t0_), graine=B["graine"] % 997 + sc_)
                 f_ = min(len(a_) // 3, int(0.3 * SRM)); a_[:f_] *= np.linspace(0, 1, f_)[:, None]; a_[-f_:] *= np.linspace(1, 0, f_)[:, None]
                 ajoute_x(a_, t0_, 1.0, amb)
+            if {"pluie", "orage"} & set(B.get("ambiances") or ()):            # pluie et tonnerre (calé sur les éclairs)
+                try: ajoute_x(SM.meteo(total, "orage" in B["ambiances"], graine=B["graine"] % 997), 0.0, 1.0, amb)
+                except Exception as e_: print(f"son de pluie impossible : {e_}", flush=True)
             emos = [z2["emo"] for z2 in ph]
             humeur = ("tension" if sum(e in ("cri", "colere", "panique") for e in emos) >= 2 else "triste" if sum(e in ("pleurs", "triste", "soupir") for e in emos) >= 2
                       else "joie" if sum(e in ("rire", "joie", "amour") for e in emos) >= 2 else "neutre")

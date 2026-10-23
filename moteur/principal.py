@@ -30,6 +30,8 @@ if REFAIRE:
     if _mode in ("voix", "decors") and SK_ANCIEN is None:
         print("Sketch d'origine non conservé (vidéo plus ancienne) : on refait une nouvelle version du texte.", flush=True); _mode = "texte"
     REFAIRE_MODE = _mode
+    if _mode == "voix": os.environ["VOIX_NOUVELLES"] = "1"              # « juste la voix » : d'autres voix de la banque que la dernière fois
+    if _mode == "decors": os.environ["DECOR_GRAINE"] = str(datetime.datetime.now().microsecond % 997 + 1)   # décors dessinés tirés à neuf
     if ANCIEN and _mode == "texte" and not THEME:                        # nouvelle version : même sujet, écrit à neuf
         THEME = ((ANCIEN.get("titre_affiche") or "") + " " + (ANCIEN.get("titre") or "")).strip() + " — " + (ANCIEN.get("accroche") or "")
 else:

@@ -14,13 +14,22 @@ permissions:
 jobs:
   tests:
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
       - name: Bibliothèques
-        run: pip install -q -r requirements.txt && sudo apt-get install -y -qq ffmpeg rubberband-cli >/dev/null
+        run: pip install -q -r requirements.txt
+      - name: "ffmpeg (miroir apt lent, repli sur la version statique)"
+        timeout-minutes: 8
+        run: |
+          if ! (timeout 150 sudo apt-get update -q && timeout 150 sudo apt-get install -y -qq ffmpeg rubberband-cli >/dev/null); then
+            echo "apt indisponible : ffmpeg statique"
+            curl -sSL https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-linux64-gpl.tar.xz | tar xJ -C /tmp
+            sudo cp /tmp/ffmpeg-master-latest-linux64-gpl/bin/ff* /usr/local/bin/
+          fi
+          ffmpeg -version | head -1
       - name: Lancer les tests
         run: python -m unittest discover -s tests -v

@@ -52,7 +52,8 @@ def construire():
                           likes=e.get("likes"), commentaires=e.get("commentaires"), partages=e.get("partages"),
                           voix_secours=("piper" in str(e.get("voix", "")).lower())))
     faites = [h for h in hist if h.get("fichier")]
-    derniere = faites[-1] if faites else {}                                # voyants des outils payants : d'après la dernière vidéo
+    vraies = [e for e in faites if not e.get("betisier")]                  # le bêtisier n'utilise aucun outil : il ne compte pas
+    derniere = vraies[-1] if vraies else {}                                # voyants des outils payants : d'après la dernière vidéo
     outils = {"outils": derniere.get("outils") if isinstance(derniere.get("outils"), dict) else None,
               "date": derniere.get("date", ""), "titre": derniere.get("titre", "")}
     import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import marque
@@ -399,6 +400,17 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <label>Définition<select data-var="REALISTE_RESOLUTION" data-def="720p"><option value="720p">720p (recommandé)</option><option value="1080p">1080p</option></select></label>
     <div class="ligne2"><select id="realFormat" class="perso" style="margin:0;flex:1"><option value="mini">⚡ Court</option><option value="libre">🎭 Long</option></select><button class="second perso" id="realLancer" style="flex:1.4">🎬 Essayer en réaliste</button></div>
     <div id="suiviReal" class="note"></div>
+    <h3>🎙️ Ma voix pour un personnage</h3>
+    <p class="note">Parlez 10 à 18 secondes, près du micro, comme si vous jouiez le personnage. Les voix gratuites imiteront votre timbre et votre ton (et passeront en priorité pour ce personnage).</p>
+    <div class="ligne2"><select id="vxRole" style="margin:0;flex:1"><option value="presentateur">Personnage 1 (homme)</option><option value="invite">Personnage 2 (homme)</option><option value="envoyee">Personnage féminin</option></select>
+      <select id="vxEmo" style="margin:0;flex:1"><option value="base">Toutes les émotions</option><option value="rire">Quand il rit</option><option value="colere">En colère</option><option value="triste">Triste</option><option value="vif">Excité</option><option value="calme">Chuchoté</option></select></div>
+    <div class="ligne2"><button class="action" id="vxRec" style="flex:1">⏺️ Enregistrer</button><button class="action" id="vxEnv" style="flex:1" disabled>📤 Envoyer</button></div>
+    <audio id="vxEcoute" controls style="width:100%;display:none;margin-top:6px"></audio>
+    <div id="suiviVx" class="note"></div>
+    <h3>😅 Bêtisier de la semaine</h3>
+    <p class="note">Chaque dimanche, les ratés relevés par le jury sont montés en une vidéo d'environ 15 s (jamais publiée toute seule).</p>
+    <button class="action" id="betLancer">🎬 Le fabriquer maintenant</button>
+    <div id="suiviBet" class="note"></div>
     <h3>Notifications</h3>
     <p class="note">Prévenu quand une vidéo est prête ou publiée. Sur iPhone : installez d'abord l'appli.</p>
     <button class="action" id="activerNotifs">🔔 Activer sur cet appareil</button>
@@ -438,6 +450,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <button class="second" id="programmer" disabled style="width:100%;margin-top:6px">🗓️ Programmer sur TikTok</button>
     <label>Refaire cette vidéo<select id="refaireQuoi"><option value="texte">Nouvelle version du sketch (même sujet)</option><option value="voix">Mêmes répliques, nouvelles voix</option><option value="decors">Mêmes répliques, nouveaux décors</option></select></label>
     <button class="second" id="refaire" disabled style="width:100%;margin-top:6px">🔁 Refaire (15 à 40 min)</button>
+    <div style="display:flex;gap:6px;margin-top:6px"><button class="second" id="refaireVoix" disabled style="flex:1">🎙️ Juste la voix</button><button class="second" id="refaireDecor" disabled style="flex:1">🖼️ Juste le décor</button></div>
   </details>
   <div id="suivi"></div>
 </div></div>
@@ -668,7 +681,7 @@ function majBoutons(){
 function ajusterBas(){setTimeout(()=>{document.querySelector("main").style.paddingBottom=($("#barre").offsetHeight+24)+"px"},50)}
 function choisir(i){
   choisie=i; fichier=null; const v=DATA[i]; document.body.classList.add("lecture");
-  ["#pouce","#bof","#legOk","#remOk","#programmer","#refaire"].forEach(s=>$(s).disabled=!lireJeton()); $("#legEdit").value=v.legende||""; $("#noteAuteur").value=v.note_auteur?String(v.note_auteur):"";
+  ["#pouce","#bof","#legOk","#remOk","#programmer","#refaire","#refaireVoix","#refaireDecor"].forEach(s=>$(s).disabled=!lireJeton()); $("#legEdit").value=v.legende||""; $("#noteAuteur").value=v.note_auteur?String(v.note_auteur):"";
   $("#pouce").classList.toggle("actif",v.avis===1); $("#bof").classList.toggle("actif",v.avis===-1);
   document.querySelectorAll("#liste .carte").forEach(c=>c.classList.toggle("choisie",+c.dataset.i===i));
   $("#choix").textContent="Sélection : "+v.titre; ["#copier","#voir","#manuel"].forEach(s=>$(s).disabled=false);
@@ -728,6 +741,9 @@ $("#programmer").onclick=()=>{
 };
 $("#refaire").onclick=()=>{const v=DATA[choisie], q=$("#refaireQuoi").value;
   lancerFlux("emission.yml",$("#refaire"),"🔁 Nouvelle version en fabrication. Elle apparaîtra à côté de l'ancienne (supprimez celle que vous ne gardez pas).",{refaire:v.fichier+"|"+q},$("#suivi"))};
+[["#refaireVoix","voix","🎙️ Mêmes répliques et même image, nouvelles voix : la nouvelle version apparaîtra à côté de l'ancienne."],
+ ["#refaireDecor","decors","🖼️ Mêmes répliques et mêmes voix, nouveaux décors : la nouvelle version apparaîtra à côté de l'ancienne."]].forEach(([s,q,m])=>{
+  $(s).onclick=()=>{const v=DATA[choisie]; lancerFlux("emission.yml",$(s),m,{refaire:v.fichier+"|"+q},$("#suivi"))}});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&choisie!==null)fermerVideo()});
 $("#voir").onclick=()=>{const a=$("#apercu");a.style.display="block";a.play()};
 $("#copier").onclick=async()=>{const t=DATA[choisie].legende||"";try{await navigator.clipboard.writeText(t);toast("Légende copiée")}catch(e){prompt("Copiez la légende :",t)}};
@@ -963,6 +979,27 @@ $("#activerNotifs").onclick=async()=>{
     z.textContent="✅ Notifications activées sur cet appareil ("+l.length+" appareil(s) au total). Touchez « Envoyer une notification de test »."
   }catch(e){z.textContent="Impossible : "+e.message}
 };
+$("#betLancer").onclick=()=>lancerFlux("betisier.yml",$("#betLancer"),"😅 Bêtisier en montage (2 à 5 min). Il apparaîtra dans la liste des vidéos.",{jours:"7"},$("#suiviBet"));
+let VX={rec:null,morceaux:[],b64:"",fin:null};
+$("#vxRec").onclick=async()=>{
+  if(VX.rec&&VX.rec.state==="recording"){VX.rec.stop();return}
+  try{
+    const flux=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true}});
+    const type=["audio/webm;codecs=opus","audio/ogg;codecs=opus","audio/mp4"].find(x=>window.MediaRecorder&&MediaRecorder.isTypeSupported(x))||"";
+    VX.rec=new MediaRecorder(flux,type?{mimeType:type,audioBitsPerSecond:16000}:{audioBitsPerSecond:16000}); VX.morceaux=[];
+    VX.rec.ondataavailable=e=>VX.morceaux.push(e.data);
+    VX.rec.onstop=()=>{flux.getTracks().forEach(x=>x.stop()); clearTimeout(VX.fin); $("#vxRec").textContent="⏺️ Recommencer";
+      const b=new Blob(VX.morceaux,{type:VX.rec.mimeType}); $("#vxEcoute").src=URL.createObjectURL(b); $("#vxEcoute").style.display="block";
+      const r=new FileReader(); r.onload=()=>{VX.b64=String(r.result).split(",")[1]||"";
+        const ok=VX.b64.length>3000&&VX.b64.length<60000; $("#vxEnv").disabled=!ok||!lireJeton();
+        $("#suiviVx").textContent=ok?"Réécoutez, puis envoyez.":(VX.b64.length>=60000?"Trop long : recommencez en 15 secondes environ.":"Trop court : parlez au moins 8 secondes.")};
+      r.readAsDataURL(b)};
+    VX.rec.start(); $("#vxRec").textContent="⏹️ Arrêter"; $("#suiviVx").textContent="🔴 Enregistrement… (arrêt automatique à 18 s)";
+    VX.fin=setTimeout(()=>{if(VX.rec.state==="recording")VX.rec.stop()},18000);
+  }catch(e){$("#suiviVx").textContent="Micro indisponible : autorisez le micro pour ce site ("+e.message+")."}
+};
+$("#vxEnv").onclick=()=>{if(!VX.b64)return;
+  lancerFlux("voix_auteur.yml",$("#vxEnv"),"🎙️ Votre voix est en cours d'installation (1 à 2 min). Elle servira dès la prochaine vidéo.",{role:$("#vxRole").value,emotion:$("#vxEmo").value,audio:VX.b64},$("#suiviVx"))};
 $("#testNotif").onclick=()=>lancerFlux("notifier.yml",$("#testNotif"),"🔔 Envoi d'une notification de test (environ 30 s)…",{titre:"Petits.Dramas",texte:"Les notifications marchent 🎉"},$("#suiviNotif"));
 $("#realLancer").onclick=()=>{if(!lireJeton()){toast("Connectez la régie");return} const f=$("#realFormat").value;
   if(confirm(f==="mini"?"Fabriquer un gag éclair réaliste ? Il consomme des crédits ElevenLabs (vidéo IA).":"Fabriquer un sketch long réaliste ? Une dizaine de plans de vidéo IA : c'est nettement plus de crédits ElevenLabs."))

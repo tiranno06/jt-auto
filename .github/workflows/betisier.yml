@@ -1,0 +1,54 @@
+name: Bêtisier de la semaine
+on:
+  schedule:
+    - cron: "13 17 * * 0"        # chaque dimanche vers 18 h-19 h (heure de Paris)
+  workflow_dispatch:
+    inputs:
+      jours:
+        description: "Nombre de jours à parcourir"
+        required: false
+        default: "7"
+permissions:
+  contents: write
+  actions: write
+concurrency:
+  group: betisier
+  cancel-in-progress: false
+jobs:
+  betisier:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Installer ffmpeg
+        timeout-minutes: 10
+        run: |
+          if ! (timeout 240 sudo apt-get update -q && timeout 240 sudo apt-get install -y -q ffmpeg); then
+            curl -sSL https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-linux64-gpl.tar.xz | tar xJ -C /tmp
+            sudo cp /tmp/ffmpeg-master-latest-linux64-gpl/bin/ff* /usr/local/bin/
+          fi
+      - name: Monter le bêtisier (ratés relevés par le jury)
+        id: run
+        run: |
+          pip install -q numpy pillow
+          python moteur/betisier.py "${{ inputs.jours || '7' }}"
+      - name: Archiver la vidéo dans les Releases du mois
+        if: steps.run.outputs.video != ''
+        run: |
+          TAG="emissions-${{ steps.run.outputs.mois }}"
+          gh release view "$TAG" >/dev/null 2>&1 || gh release create "$TAG" --title "Émissions ${{ steps.run.outputs.mois }}" --notes "Vidéos fabriquées par le robot."
+          gh release upload "$TAG" "${{ steps.run.outputs.video }}" "${{ steps.run.outputs.legende }}" --clobber
+      - name: Enregistrer l'historique
+        if: steps.run.outputs.video != ''
+        run: |
+          git config user.name "robot-jt"; git config user.email "robot-jt@users.noreply.github.com"
+          git add episodes; git commit -m "Bêtisier de la semaine" || echo "rien à enregistrer"
+          python moteur/fusion.py
+      - name: Mettre le site à jour
+        if: steps.run.outputs.video != ''
+        run: gh workflow run site.yml --ref main || echo "Mise à jour du site impossible à lancer"

@@ -1,0 +1,43 @@
+name: Ma voix (enregistrée depuis le site)
+on:
+  workflow_dispatch:
+    inputs:
+      role:
+        description: "presentateur, invite ou envoyee"
+        required: true
+      emotion:
+        description: "base (toutes émotions), neutre, vif, rire, colere, triste ou calme"
+        required: false
+        default: "base"
+      audio:
+        description: "Enregistrement (Opus en base64), envoyé par le site"
+        required: true
+permissions:
+  contents: write
+concurrency:
+  group: voix-auteur
+  cancel-in-progress: false
+jobs:
+  voix:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - name: Installer ffmpeg
+        run: sudo apt-get update -q && sudo apt-get install -y -q ffmpeg
+      - name: Nettoyer et enregistrer la voix
+        env:
+          AUDIO: ${{ inputs.audio }}
+          ROLE: ${{ inputs.role }}
+          EMO: ${{ inputs.emotion }}
+        run: |
+          printf '%s' "$AUDIO" > /tmp/voix.b64
+          python3 moteur/voix_auteur.py "$ROLE" "$EMO" /tmp/voix.b64
+      - name: Enregistrer dans le dépôt
+        env:
+          ROLE: ${{ inputs.role }}
+          EMO: ${{ inputs.emotion }}
+        run: |
+          git config user.name "robot-jt"; git config user.email "robot-jt@users.noreply.github.com"
+          git add voix/refs; git commit -m "Voix de l'auteur : $ROLE ($EMO)" || echo "rien à enregistrer"
+          for k in 1 2 3; do git pull --rebase -q && git push && break; sleep 5; done
