@@ -20,7 +20,7 @@ import bisect, math, os, re, subprocess, sys, tempfile, wave
 import numpy as np, cv2
 from PIL import Image, ImageDraw, ImageFont
 ICI = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, ICI)
-import marionnette as M, sons_modernes as SM, bruitages as BR, marque, studio, decor_dessin as DD, humain as HU, levres
+import marionnette as M, sons_modernes as SM, bruitages as BR, marque, studio, decor_dessin as DD, humain as HU, levres, decor_anime as DA
 from jt import minutage, carton, son, vers_mix, enveloppe, poser, pop, W, H, FPS, SR, SRM, FB
 
 CAP_Y = 1700
@@ -51,6 +51,7 @@ def emotion(d):
 
 STYLE_RENDU = (os.environ.get("STYLE_RENDU") or "cel").lower()           # cel (aplats pro) | volume (effet 3D doux) | 3d (3D toon brillant)
 SSAA = (os.environ.get("SSAA") or "1") != "0"                             # personnages dessinés en double résolution puis réduits
+OMBRES = (os.environ.get("OMBRES") or "1") != "0"                         # ombres portées des personnages (sol, mur le soir)
 DECOR_VIVANT = (os.environ.get("DECOR_VIVANT") or "1") != "0"             # la rue vit : voitures qui passent au loin
 CEL = (os.environ.get("CEL") or ("0" if (os.environ.get("STYLE_PERSO") or "toon").lower() == "toon" else "1")) != "0"   # ombrage en aplat + contour épais
 # (coupé par défaut avec le nouveau style « toon » : trait fin et ombres déjà dessinés comme la référence)
@@ -410,7 +411,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
                                or (j and ph[j - 1]["p"] == "narrateur")) else "serre"
     # studio : bible de l'épisode et storyboard (plans, mouvements, réactions), décors dessinés là où l'IA n'en a pas fourni
     B = studio.bible(sk, roles) if DETAIL else None
-    AVANT, INFOS = {}, {}; FICHES = None; DECOUPE = []
+    AVANT, INFOS = {}, {}; FICHES = None; DECOUPE = []; ERREURS_ANIM = []; SC_COURANT = [0]
     PROF = {}                                                              # décors IA : profondeur (le premier plan glisse plus vite que le fond)
     if B and PARALLAXE:
         try:
@@ -1024,7 +1025,37 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
     TOILE = {}
     SENT, MARQ = np.array((1, 2, 3), np.uint8), np.array((3, 1, 2), np.uint8)
 
-    def composer_ssaa(img, liste):
+    def ombres_portees(img, a_c, box, liste, sol_y):
+        """Ombre portée de chaque personnage (idée 6) : sa silhouette couchée sur le sol, à l'opposé de la lumière du lieu ; le soir,
+        une deuxième ombre plus pâle se projette aussi sur le mur derrière lui (lampes allumées). Ombre nette (style aplat)."""
+        x0, y0, x1, y1 = box; h2, w2 = H // 2, W // 2
+        Mf = np.zeros((h2, w2), np.float32)
+        zf = Mf[y0 // 2:y1 // 2, x0 // 2:x1 // 2]
+        if zf.size == 0: return
+        zf[:] = cv2.resize(a_c[..., 0], (zf.shape[1], zf.shape[0]), interpolation=cv2.INTER_AREA)
+        sens = 1 if float((B or {}).get("lumiere", -1)) > 0 else -1
+        sol_ = np.zeros_like(Mf); mur_ = np.zeros_like(Mf)
+        soir = (B or {}).get("moment") in ("soir", "nuit") and INFOS.get(SC_COURANT[0], {}).get("lieu") not in ("rue", None)   # dehors : pas de mur proche
+        for role, p in liste:
+            if p.get("assis") or p.get("dos"): continue
+            xf, yf, s_ = p["x"] / 2, p["y"] / 2, p["s"]
+            src = np.zeros_like(Mf); a_, b_ = int(max(0, xf - 230 * s_ / 2)), int(min(w2, xf + 230 * s_ / 2)); yb = int(min(h2, yf + 2))
+            if b_ <= a_ or yb <= 0: continue
+            src[:yb, a_:b_] = Mf[:yb, a_:b_]
+            k_ = -sens * 0.55                                              # x' = x + k (yf - y) ; y' = yf + 0.18 (yf - y)
+            Ms = np.float32([[1, -k_, k_ * yf], [0, -0.18, 1.18 * yf]])
+            sol_ = np.maximum(sol_, cv2.warpAffine(src, Ms, (w2, h2), flags=cv2.INTER_LINEAR))
+            if soir and sol_y is not None:
+                Mm = np.float32([[1, 0, -sens * 34 * s_], [0, 1, -14 * s_]])
+                mur_ = np.maximum(mur_, cv2.warpAffine(src, Mm, (w2, h2), flags=cv2.INTER_LINEAR))
+        if sol_y is not None:                                              # chaque ombre reste sur sa surface (sol / mur)
+            ys = int(np.clip(sol_y / 2, 0, h2)); mur_[ys:] = 0
+        f_ = np.maximum(0.17 * (sol_ > 0.5), 0.11 * (mur_ > 0.5)).astype(np.float32)
+        if not f_.any(): return
+        f_ = cv2.resize(f_, (W, H), interpolation=cv2.INTER_LINEAR)[..., None]
+        img[:] = (img.astype(np.float32) * (1 - f_)).astype(np.uint8)
+
+    def composer_ssaa(img, liste, sol_y=None):
         """Super-échantillonnage : les personnages sont dessinés sur une toile deux fois plus grande, puis réduits (moyenne des
         pixels) : traits parfaitement lisses, détails fins (cheveux, barbe, coutures) nets, comme un rendu 4K ramené en 1080p."""
         if "t" not in TOILE: TOILE["t"] = np.empty((2 * H, 2 * W, 3), np.uint8)
@@ -1043,6 +1074,9 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         a_c = cv2.resize(corps.astype(np.float32), taille, interpolation=cv2.INTER_AREA)[..., None]
         a_o = cv2.resize(ombre.astype(np.float32), taille, interpolation=cv2.INTER_AREA)[..., None]
         coul = cv2.resize(np.where(corps[..., None], Tz, 0).astype(np.float32), taille, interpolation=cv2.INTER_AREA)   # couleurs prémultipliées
+        if B and OMBRES:
+            try: ombres_portees(img, a_c, (x0 // 2, y0 // 2, x1 // 2, y1 // 2), liste, sol_y)
+            except Exception as e_: print(f"ombre portée impossible : {e_}", flush=True)
         Z = img[y0 // 2:y1 // 2, x0 // 2:x1 // 2].astype(np.float32)
         Z = Z * (1 - 0.2 * a_o)                                            # ombre au sol : le décor assombri de 20 %
         img[y0 // 2:y1 // 2, x0 // 2:x1 // 2] = np.clip(Z * (1 - a_c) + coul, 0, 255).astype(np.uint8)
@@ -1136,7 +1170,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             if cont.any(): sub[cont] = M.TRAIT
 
     def vue(tm):
-        q = actif(tm); sc = q["scene"]
+        q = actif(tm); sc = q["scene"]; SC_COURANT[0] = sc
         fond = decors.get(sc)
         if fond is None: fond = decors[sc] = decor_uni(sc)
         k_sh, sh = plan_a(tm) if DECOUPE else (None, None)
@@ -1226,6 +1260,15 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         if B:
             for f_ in B["figurants"]:
                 if f_["scene"] == sc and not cible_seule and not f_.get("compagnon"): figurant(f_, tm, img, zm, cxm, cym)
+        if B and sc in INFOS and DECOR_VIVANT:                             # le décor vit : horloge, tasse, ventilateur, chat, pigeons, météo
+            try:
+                cris_ = [z2["deb"] for z2 in ph if z2["scene"] == sc and z2["emo"] in ("cri", "colere") and z2["deb"] <= tm]
+                DA.animer(img, INFOS[sc], tm, lambda x_, y_: (W / 2 + (x_ - cxb) * zb, H / 2 + (y_ - cyb) * zb), zb,
+                          dict(lieu=INFOS[sc].get("lieu", ""), ambiances=B.get("ambiances") or (), t_scene=tm - DEBUT_SCENE.get(sc, 0.0),
+                               entree=sc not in SANS_ENTREE, t_cri=(tm - cris_[0]) if cris_ else -1.0, graine=B.get("graine", 0) + sc))
+            except Exception as e_:
+                if not ERREURS_ANIM: print(f"décor animé impossible : {e_}", flush=True)
+                ERREURS_ANIM.append(1)
         sce = dec[sc] if sc < len(dec) else {}
         if sce.get("effet") == "tremblement" or (q["emo"] in ("cri", "colere") and q["deb"] <= tm <= q["fin"]):
             img = np.roll(img, (int(6 * math.sin(tm * 53)), int(6 * math.cos(tm * 47))), (0, 1))
@@ -1234,7 +1277,8 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             u_m = _ease((tm - q["deb"] + 0.05) / 0.18) * (1 - _ease((tm - q["fin"]) / 0.1))
             fm = fond_manga(q["emo"], int(tm * 6) % 2)                     # rayons qui tournent un peu (2 dessins en alternance)
             img[:] = cv2.addWeighted(img, 1 - 0.82 * u_m, fm, 0.82 * u_m, 0)
-        avant_persos = img.copy() if (B and LUMIERE_DECOR) else None      # pour retrouver les pixels des personnages (lumière du lieu)
+        reflet_ = B and sc in INFOS and (INFOS[sc].get("miroirs") or INFOS[sc].get("vitrines") or (B.get("moment") in ("soir", "nuit") and INFOS[sc].get("fenetre")))
+        avant_persos = img.copy() if (B and (LUMIERE_DECOR or reflet_)) else None   # pour retrouver les pixels des personnages (lumière, reflets)
         ssaa = []
         for role in places[sc]:                                            # personnages dessinés nets à l'échelle du plan
             if cible_seule and role != cible_seule and cible_seule in places[sc]: continue
@@ -1269,10 +1313,13 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             R_ = cv2.getRotationMatrix2D((p["x"], p["y"]), -ang, 1.0)
             calque = cv2.warpAffine(calque, R_, (W, H), flags=cv2.INTER_LINEAR, borderValue=(1, 2, 3))
             m_ = (np.abs(calque.astype(np.int16) - (1, 2, 3)).sum(2) > 9)[..., None]; img[:] = np.where(m_, calque, img)
-        if ssaa: composer_ssaa(img, ssaa)
+        if ssaa: composer_ssaa(img, ssaa, (H / 2 + (DD.SOL - cyb) * zb) if (B and not (INFOS.get(sc, {}).get("lieu") == "voiture")) else None)
         if B and not cible_seule:                                          # compagnons (muets) : même échelle que les personnages
             for f_ in COMP.get(sc, []): figurant(f_, tm, img, z, cx, cy)
-        if avant_persos is not None: eclairer(img, avant_persos, sc, fond, z)
+        if avant_persos is not None and LUMIERE_DECOR: eclairer(img, avant_persos, sc, fond, z)
+        if reflet_ and avant_persos is not None and z < 1.3:             # plans larges seulement (en gros plan : tête fantôme)                           # reflet dans le miroir, les vitrines, la vitre le soir
+            try: DA.reflets(img, np.any(img != avant_persos, axis=2), INFOS[sc], lambda x_, y_: (W / 2 + (x_ - cxb) * zb, H / 2 + (y_ - cyb) * zb), B.get("moment") in ("soir", "nuit"))
+            except Exception as e_: print(f"reflet impossible : {e_}", flush=True)
         if False:                                                          # (amorce floue de l'autre, de dos : retirée, elle dédoublait l'image)
             ec = ecoutant(q); sens = -1 if position(sc, ec)[0] < position(sc, q["p"])[0] else 1
             y0_, x0_, x1_ = 1060, (0 if sens < 0 else W // 4), (W * 3 // 4 if sens < 0 else W)

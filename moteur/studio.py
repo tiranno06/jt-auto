@@ -343,7 +343,8 @@ def bible(sk, roles):
     fiches = casting(sk, roles, costumes, S, graine)
     for k, f_ in enumerate(figurants): f_["fiche"] = _humain().creer(graine + 500 + 7 * k)
     figurants += compagnons(sk, dec, lieux, moment, graine)                # personnages muets voulus par l'histoire (Claude)
-    ambiances = set(a for a in (S.get("ambiances") or []) if a in ("vapeur", "poussiere", "pluie", "neige", "neon"))
+    ambiances = set(a for a in (S.get("ambiances") or []) if a in ("vapeur", "poussiere", "pluie", "neige", "neon", "orage"))
+    if re.search(r"\borage|tonnerre|[ée]clairs?\b|storm|thunder", t_low): ambiances.update(("orage", "pluie"))
     if re.search(r"\bpluie|pleu[tv]|rain|parapluie", t_low): ambiances.add("pluie")
     if re.search(r"\bneige|no[ëe]l|snow|hiver", t_low): ambiances.add("neige")
     if "cuisine" in lieux or "restaurant" in lieux: ambiances.add("vapeur")
@@ -772,7 +773,7 @@ def consigne_studio():
   telephone, rit ou boit, "haut", "c_haut", "bas", "chapeau", "details"}}] (ex. : une femme très apprêtée en tenue de mère Noël qui
   fait signe au fils à côté de sa voiture). Imagine tous ces détails de l'histoire SANS qu'on te les demande ;
   "gags" = 1 à 3 textes très courts et drôles écrits dans le décor (affiche, tableau, enseigne, post-it), liés à la situation ;
-  "ambiances" parmi vapeur, poussiere, pluie, neige, neon ;
+  "ambiances" parmi vapeur, poussiere, pluie, neige, neon, orage ;
   "cadence" = rapide, normal ou pose : le rythme du montage (rapide pour les disputes et les échanges vifs, pose pour l'émotion) ;
   "jeu" = le JEU D'ACTEUR de chaque réplique (copié sur la vidéo d'origine quand tu la vois, en le poussant un peu plus loin pour
   l'humour : grimaces et gestes EXAGÉRÉS façon toons) : [{{"replique": n, "emotion" parmi {L(EMOTIONS_JEU)}, "geste" parmi {L(GESTES)},

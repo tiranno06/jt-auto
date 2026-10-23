@@ -222,7 +222,10 @@ def pot(img, x, y, k=1.0, couleur=(210, 110, 80)):
         cv2.ellipse(img, (int((x + fx) / 2), int((y - 60 * k + fy) / 2)), (int(46 * k), int(12 * k)), a + 90, 0, 360, (90, 160, 90), -1, AA)
     poly(img, [(x - 36 * k, y - 66 * k), (x + 36 * k, y - 66 * k), (x + 26 * k, y), (x - 26 * k, y)], couleur, 5)
 
+HORLOGES = []                                                              # horloges du décor en cours (trotteuse animée ensuite)
+
 def horloge(img, x, y, r=56, heure=None):
+    HORLOGES.append((x, y, r))
     rond(img, (x, y), r, (252, 252, 248), 7)
     for k in range(12):
         a = k * math.pi / 6; ligne(img, (x + math.cos(a) * r * 0.72, y + math.sin(a) * r * 0.72), (x + math.cos(a) * r * 0.85, y + math.sin(a) * r * 0.85), TRAIT, 3)
@@ -416,7 +419,8 @@ def dessiner(lieu, bible=None, graine=7):
     img = np.zeros((H, W, 3), np.uint8); av = None
     gags = list(b.get("gags") or []) + GAGS[lieu]; gag = lambda k: gags[k % len(gags)]
     allume = moment in ("soir", "nuit")
-    res = {"fenetre": None, "lampes": [], "vapeur": [], "neons": [], "ecrans": []}
+    res = {"fenetre": None, "lampes": [], "vapeur": [], "neons": [], "ecrans": [], "vitrines": [], "lieu": lieu}
+    HORLOGES.clear()
     c_mur = _variante(b.get("c_mur") or COULEURS_MUR[lieu], rng)
     if lieu == "rue":
         ciel(img, 0, 0, W, SOL, moment, rng, False)
@@ -431,6 +435,7 @@ def dessiner(lieu, bible=None, graine=7):
             boite(img, x + 30, SOL - 330, x + bw - 30, SOL - 250, (200, 60, 60) if k % 2 == 0 else (60, 110, 160), 6, 6)
             texte(img, gag(k), x + 46, SOL - 324, x + bw - 46, SOL - 256, (255, 255, 255), 44)
             boite(img, x + 50, SOL - 240, x + bw - 50, SOL, (150, 190, 215), 6)      # vitrine
+            res["vitrines"].append((x + 50, SOL - 240, x + bw - 50, SOL))
             for kk in range(3): ligne(img, (x + 70 + kk * 40, SOL - 200), (x + 110 + kk * 40, SOL - 120), (255, 255, 255), 5)
             x += bw; k += 1
         sol(img, (186, 186, 190), "trottoir")
@@ -543,6 +548,9 @@ def dessiner(lieu, bible=None, graine=7):
         r_ = DX.NOUVEAUX[lieu](img, rng, res, gag, moment, allume)
         if r_ is not None: av = r_
     DX.habiller(img, lieu, rng, res, moment, gag)                          # petits objets qui rendent le lieu vivant
+    import decor_anime as DA
+    DA.placer(img, lieu, rng, res, moment)                                 # objets qui bougeront (tasse, ventilateur, bocal, télé)
+    res["horloges"] = list(HORLOGES)
     # lumière : soleil par la fenêtre, lampes allumées le soir
     tache_soleil(img, res["fenetre"] if lieu != "rue" else None, moment)
     for c in res["lampes"]:
