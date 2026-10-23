@@ -22,7 +22,7 @@ jobs:
           python-version: "3.12"
       - name: Bibliothèques
         run: pip install -q -r requirements.txt
-      - name: ffmpeg (miroir apt lent : repli sur la version statique)
+      - name: "ffmpeg (miroir apt lent, repli sur la version statique)"
         timeout-minutes: 8
         run: |
           if ! (timeout 150 sudo apt-get update -q && timeout 150 sudo apt-get install -y -qq ffmpeg rubberband-cli >/dev/null); then
