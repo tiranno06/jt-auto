@@ -28,6 +28,49 @@ def _ranger(d, im, prof=None):
         json.dump(_format.panneaux, open(os.path.join(BANQUE, k + "_panneaux.json"), "w"))
     with open(os.path.join(BANQUE, "index.tsv"), "a", encoding="utf-8") as f: f.write(f"{k}\t{d}\n")
 
+LUMIERES = ("bright daylight", "warm golden evening light, lamps on", "night, dark blue ambience, warm lamp light", "lamps on", "daylight")
+VIDES = set("a an the with of and on in at to its their wall light".split())
+
+def _mots(d):
+    d = d.lower()
+    for l in LUMIERES: d = d.replace(l, " ")
+    return {m for m in re.findall(r"[a-z]+", d) if m not in VIDES and len(m) > 2}
+
+def _lumiere(d):
+    d = d.lower()
+    return "nuit" if "night" in d else "soir" if "evening" in d or "dusk" in d else "jour"
+
+def voisin(d, seuil):
+    """Décor de la banque qui ressemble le plus au lieu demandé (mêmes mots-clés, même moment de la journée), ou None."""
+    try: idx = [l.rstrip("\n").split("\t", 1) for l in open(os.path.join(BANQUE, "index.tsv"), encoding="utf-8")]
+    except OSError: return None
+    m0, l0, best = _mots(d), _lumiere(d), None
+    if not m0: return None
+    for cle, desc in idx:
+        f_ = os.path.join(BANQUE, cle + ".jpg")
+        if not os.path.exists(f_) or _lumiere(desc) != l0: continue
+        m1 = _mots(desc); s = len(m0 & m1) / max(1, len(m0 | m1))
+        if best is None or s > best[0]: best = (s, cle)
+    if best is None or best[0] < seuil: return None
+    return cv2.cvtColor(cv2.imread(os.path.join(BANQUE, best[1] + ".jpg")), cv2.COLOR_BGR2RGB), best[1]
+
+def varier(im, d):
+    """Petite variante d'un décor réutilisé (miroir et légère nuance de couleur selon le lieu) : jamais deux fois exactement pareil."""
+    h = int(hashlib.sha1(d.encode()).hexdigest()[:6], 16)
+    if h % 2: im = im[:, ::-1].copy()
+    hsv = cv2.cvtColor(im, cv2.COLOR_RGB2HSV).astype(np.int16)
+    hsv[..., 0] = (hsv[..., 0] + (h % 9) - 4) % 180
+    hsv[..., 1] = np.clip(hsv[..., 1] * (0.92 + (h % 17) / 100), 0, 255)
+    return cv2.cvtColor(hsv.astype(np.uint8), cv2.COLOR_HSV2RGB)
+
+def generes_ce_mois():
+    """Décors neufs fabriqués sur Modal ce mois-ci (fichiers de la banque datés du mois)."""
+    import datetime, glob
+    mois = datetime.date.today().strftime("%Y-%m"); n = 0
+    for f in glob.glob(os.path.join(BANQUE, "*.jpg")):
+        if datetime.date.fromtimestamp(os.path.getmtime(f)).strftime("%Y-%m") == mois: n += 1
+    return n
+
 def _png(im):
     """Image RGB (plan du décor dessiné) -> PNG, ou b"" ."""
     if im is None: return b""
@@ -115,6 +158,19 @@ def generer(decoupage, graine=7, delai=1200, lumiere="", plans=None):  # 1re foi
                 except (OSError, ValueError): pass
     uniques = [d for d in uniques if d not in deja]
     if not uniques: return out
+    if not os.environ.get("REFAIRE", "").endswith("|decors"):              # D2 : lieu ressemblant déjà dans la banque -> réutilisé
+        budget_ok = generes_ce_mois() < int(os.environ.get("DECORS_MOIS") or 60)   # D1 : budget Modal (décors neufs par mois)
+        for d in list(uniques):
+            proche = voisin(d, 0.55 if budget_ok else 0.25)
+            if proche is None: continue
+            im, cle = proche; im = varier(im, d)
+            for k, d_ in demandes:
+                if d_ == d:
+                    out[k] = im; print(f"  décor {k} (lieu ressemblant de la banque{'' if budget_ok else ', budget Modal du mois atteint'}) : {d[:60]}", flush=True)
+                    fp = os.path.join(BANQUE, cle + "_prof.png")
+                    if os.path.exists(fp): PROFONDEURS[k] = cv2.GaussianBlur(cv2.resize(cv2.imread(fp, 0), (W, H), interpolation=cv2.INTER_LINEAR), (0, 0), 6)
+            uniques.remove(d)
+        if not uniques: return out
     try:
         import modal
         pl = [_png(plans.get(next(k for k, d_ in demandes if d_ == d))) if plans else b"" for d in uniques]   # plan dessiné de chaque décor

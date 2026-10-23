@@ -49,7 +49,8 @@ def construire():
                           legende=e.get("legende", ""), publie=e.get("publie"), vues=e.get("vues"),
                           format=e.get("format", ""), manuel=bool(e.get("manuel")), avis=e.get("avis", 0), note=e.get("note"), note_auteur=e.get("note_auteur"),
                           programmee=e.get("programmee"), couts=e.get("couts") or {}, duree=e.get("duree"),
-                          likes=e.get("likes"), commentaires=e.get("commentaires"), partages=e.get("partages")))
+                          likes=e.get("likes"), commentaires=e.get("commentaires"), partages=e.get("partages"),
+                          voix_secours=("piper" in str(e.get("voix", "")).lower())))
     faites = [h for h in hist if h.get("fichier")]
     derniere = faites[-1] if faites else {}                                # voyants des outils payants : d'après la dernière vidéo
     outils = {"outils": derniere.get("outils") if isinstance(derniere.get("outils"), dict) else None,
@@ -275,6 +276,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
       <button class="opt on" data-fmt="mini"><span class="ico">⚡</span><span>Court<small>Gag éclair, 15-25 s</small></span></button>
       <button class="opt" data-fmt="libre"><span class="ico">🎭</span><span>Long<small>Sketch, plus d'1 min</small></span></button>
     </div>
+    <label class="ligne"><input type="checkbox" id="mApercu"> Aperçu rapide (10 secondes, environ 8 min) : pour juger le style avant la vraie vidéo</label>
     <button class="gros lancer" id="mCreer">🎬 Lancer la fabrication</button>
   </section>
   <section class="panneau"><h2>⏳ Fabrication en cours</h2><div id="mSuivi" class="note" data-libre="1">Aucune fabrication lancée depuis cet appareil.</div></section>
@@ -625,7 +627,7 @@ const VIDE={tout:"Aucune vidéo pour l'instant : touchez « Créer une vidéo »
   tiktok:"Aucune vidéo faite depuis un lien TikTok pour l'instant.",texte:"Aucune vidéo faite depuis votre texte pour l'instant."};
 function carte(v,i,petite){
   const c=document.createElement("div");c.className="carte"+(petite?" petite":"");c.dataset.i=i;
-  c.innerHTML=`<img loading="lazy" src="${v.poster?"videos/"+v.poster:"logo-192.png"}" alt=""><div class="infos"><div class="titre"></div><div class="date">${dateFr(v.date)}${heureDe(v)}${v.vues!=null?` · 👁 ${Number(v.vues).toLocaleString("fr-FR")} vues`:""}</div>${badge(v)}<div class="etat"></div></div>`+(petite?"":`<button class="croix" title="Supprimer cette vidéo" aria-label="Supprimer">✕</button>`);
+  c.innerHTML=`<img loading="lazy" src="${v.poster?"videos/"+v.poster:"logo-192.png"}" alt=""><div class="infos"><div class="titre"></div><div class="date">${dateFr(v.date)}${heureDe(v)}${v.vues!=null?` · 👁 ${Number(v.vues).toLocaleString("fr-FR")} vues`:""}</div>${badge(v)}${v.voix_secours?'<div class="date" style="color:#c0392b">⚠ voix de secours (robotique)</div>':""}<div class="etat"></div></div>`+(petite?"":`<button class="croix" title="Supprimer cette vidéo" aria-label="Supprimer">✕</button>`);
   c.querySelector(".titre").textContent=v.titre; return c;
 }
 function rendre(){
@@ -904,6 +906,7 @@ $("#mMode").onchange=()=>{const s=$("#mMode").value==="script";
   $("#mStyleL").style.display=s?"none":""};
 function lancerCreation(texte,inputs){
   $("#mSuivi").dataset.libre="0";
+  if($("#mApercu")&&$("#mApercu").checked){inputs=Object.assign({},inputs,{apercu:"1"}); texte="👀 Aperçu rapide (10 s) en fabrication (environ 8 min). Il apparaîtra dans l'onglet Vidéos."}
   lancerFlux("emission.yml",$("#mCreer"),texte,inputs,$("#mSuivi"));
   $("#creer").style.display="none"; $("#creerBtn").textContent="➕ Créer une vidéo";
   $("#mSuivi").scrollIntoView({behavior:"smooth",block:"center"});

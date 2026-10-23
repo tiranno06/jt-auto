@@ -1,7 +1,9 @@
 """Banque de voix sur GPU Modal : moteurs open source utilisables commercialement + contrôle qualité.
 - Kyutai TTS 1.6B en/fr (poids CC BY 4.0) avec les voix françaises CML-TTS de la banque kyutai/tts-voices (CC BY 4.0) ;
 - Zonos v0.1 (Apache 2.0), clonage des voix de casting (Multilingual LibriSpeech, CC BY 4.0) ;
-- Whisper large-v3-turbo (MIT) : réécoute chaque réplique (texte bien prononcé ?) et donne l'instant exact de chaque mot.
+- Whisper large-v3-turbo (MIT) : réécoute chaque réplique (texte bien prononcé ?) et donne l'instant exact de chaque mot ;
+- UTMOS (SpeechMOS, MIT) : note le naturel de chaque prise (1 = robot, 5 = voix humaine) pour écarter les voix robotiques ;
+- Kokoro 82M (Apache 2.0) : voix française de secours, avant Piper.
 Déployé automatiquement par le robot : `modal deploy moteur/banque_modal.py`."""
 import io, os, tempfile
 import modal
@@ -16,7 +18,9 @@ img_zonos = (modal.Image.debian_slim(python_version="3.11").apt_install("ffmpeg"
              .pip_install("torch==2.5.1", "torchaudio==2.5.1", "numpy", "soundfile", "huggingface_hub")
              .pip_install("git+https://github.com/Zyphra/Zonos.git").env(ENV))
 img_whisper = (modal.Image.debian_slim(python_version="3.11").apt_install("ffmpeg")
-               .pip_install("torch==2.5.1", "transformers>=4.45,<5", "accelerate", "numpy", "soundfile", "librosa").env(ENV))
+               .pip_install("torch==2.5.1", "torchaudio==2.5.1", "transformers>=4.45,<5", "accelerate", "numpy", "soundfile", "librosa").env(ENV))
+img_kokoro = (modal.Image.debian_slim(python_version="3.11").apt_install("ffmpeg", "espeak-ng")
+              .pip_install("kokoro>=0.9.4", "soundfile", "numpy").env(ENV))
 
 def _wav(a, sr):
     import soundfile as sf
@@ -98,7 +102,18 @@ class Whisper:
         import torch
         from transformers import pipeline
         self.p = pipeline("automatic-speech-recognition", model="openai/whisper-large-v3-turbo", torch_dtype=torch.float16, device="cuda")
+        try:                                                                # juge du naturel d'une voix (UTMOS, MIT) : note de 1 (robot) à 5 (humain)
+            self.mos = torch.hub.load("tarepan/SpeechMOS:v1.2.0", "utmos22_strong", trust_repo=True).to("cuda").eval()
+        except Exception as e:
+            print("UTMOS indisponible :", e); self.mos = None
         cache.commit()
+
+    def _naturel(self, a):
+        """Note de naturel UTMOS (1 = robot, 5 = voix humaine) d'un signal 16 kHz, ou None."""
+        if self.mos is None or len(a) < 8000: return None
+        import torch
+        with torch.no_grad():
+            return round(float(self.mos(torch.from_numpy(a[None, :]).float().cuda(), 16000).item()), 2)
 
     @modal.method()
     def ecouter(self, wavs: list) -> list:
@@ -112,7 +127,30 @@ class Whisper:
                 if sr != 16000: a = librosa.resample(a, orig_sr=sr, target_sr=16000)
                 r = self.p({"raw": a, "sampling_rate": 16000}, return_timestamps="word", generate_kwargs={"language": "french", "task": "transcribe"})
                 mots = [(c["text"].strip(), float(c["timestamp"][0] or 0), float(c["timestamp"][1] or c["timestamp"][0] or 0)) for c in r.get("chunks", [])]
-                out.append({"texte": r.get("text", "").strip(), "mots": mots})
+                try: mos = self._naturel(a)
+                except Exception as e: print("utmos:", e); mos = None
+                out.append({"texte": r.get("text", "").strip(), "mots": mots, "mos": mos})
             except Exception as e:
                 print("whisper:", e); out.append({"texte": "", "mots": [], "erreur": str(e)[:200]})
+        return out
+
+
+# ------------------------------------------------------------------ Kokoro (secours naturel avant Piper)
+@app.cls(image=img_kokoro, volumes={"/cache": cache}, timeout=900, scaledown_window=60, cpu=4)
+class Kokoro:
+    @modal.enter()
+    def charger(self):
+        from kokoro import KPipeline
+        self.p = KPipeline(lang_code="f"); cache.commit()                 # français (phonèmes espeak-ng)
+
+    @modal.method()
+    def synthese(self, textes: list, voix: str = "ff_siwis", vitesse: float = 1.05) -> list:
+        import numpy as np
+        out = []
+        for t in textes:
+            try:
+                morceaux = [np.asarray(a, dtype="float32") for _, _, a in self.p(t, voice=voix, speed=vitesse)]
+                out.append(_wav(np.concatenate(morceaux), 24000) if morceaux else b"")
+            except Exception as e:
+                print("kokoro:", e); out.append(b"")
         return out

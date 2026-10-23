@@ -75,6 +75,18 @@
   Styles de rendu au choix (STYLE_RENDU) : `cel` (aplats pro, défaut), `volume` (effet 3D doux), `3d` (3D toon brillant) :
   relief « gonflé » calculé par partie du corps puis éclairé (pas de moteur 3D). Le choix du style revient à l'auteur.
 - Position assise : vue de face (buste, genoux et jambes dans le même sens).
+- **Améliorations d'octobre 2026 (liste V/D/P/S/F choisie par l'auteur)** :
+  voix gratuites : références de jeu par émotion (`moteur/voix_refs.py`, voix/refs/<rôle>_<émotion>.wav, faites avec ElevenLabs ou
+  Google Chirp 3 ; un enregistrement de l'auteur du même nom n'est jamais écrasé), juge automatique UTMOS + Whisper (MOS_MIN, la
+  meilleure prise gagne), Kokoro en repli avant Piper, Piper = dernier recours avec badge « voix de secours » sur le site,
+  hésitations / souffles dans les voix gratuites ; décors : réutilisation d'un lieu ressemblant de la banque avec variante
+  (`decors.voisin` / `varier`) et budget Modal mensuel (DECORS_MOIS, 60 par défaut), intérieur de voiture dessiné (« voiture »,
+  volant et tableau de bord au premier plan), lieux plus détaillés ; personnages : larmes, sueur, mâchoire qui tombe, yeux au ciel
+  (`toon._larmes_sueur`), poses tenues « poches », « appuye », « pianote » (téléphone), « volant », veste en jean, maillot de foot,
+  chaîne, banane, sac à dos, écouteurs ; gestes calés sur les mouvements de l'original (`analyse_video` → "gestes",
+  B["gestes_origine"], tenus 2 s au moins) ; plan de réaction sur la chute ; musiques IA ACE-Step (`moteur/musique_modal.py`,
+  workflow « Musiques d'ambiance » → sons/musique, MUSIQUE_IA=0 pour la nappe synthétisée) ; aperçu rapide 10 s (case du site,
+  24 images/s, jamais publié).
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.

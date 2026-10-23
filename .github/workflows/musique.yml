@@ -1,0 +1,27 @@
+name: Musiques d'ambiance (IA gratuite)
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  musique:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Générer la bibliothèque (ACE-Step sur Modal, une seule fois)
+        env:
+          MODAL_TOKEN_ID: ${{ secrets.MODAL_TOKEN_ID }}
+          MODAL_TOKEN_SECRET: ${{ secrets.MODAL_TOKEN_SECRET }}
+        run: |
+          pip install -q modal
+          modal run moteur/musique_modal.py 2>&1 | tail -40
+      - name: Enregistrer
+        if: always()
+        run: |
+          git config user.name robot-jt; git config user.email robot-jt@users.noreply.github.com
+          git add sons/musique 2>/dev/null; git commit -m "Musiques d'ambiance (ACE-Step)" || true
+          git pull --rebase -q || true; git push || true

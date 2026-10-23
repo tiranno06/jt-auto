@@ -274,8 +274,31 @@ def pas(n=5, intervalle=0.17, graine=8):
 ACCORDS = {"joie": [(0, 4, 7), (5, 9, 12), (7, 11, 14), (0, 4, 7)], "triste": [(0, 3, 7), (-4, 0, 3), (-2, 2, 5), (0, 3, 7)],
            "tension": [(0, 3, 6), (1, 4, 7), (0, 3, 6), (-1, 2, 5)], "neutre": [(0, 4, 7), (-3, 0, 4), (5, 9, 12), (7, 11, 14)]}
 
+def _bibliotheque(duree, humeur, graine):
+    """Boucle de la bibliothèque générée par IA (sons/musique/<humeur>_<n>.wav, ACE-Step Apache 2.0), ou None."""
+    import glob, wave
+    racine = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "sons", "musique")
+    fichiers = sorted(glob.glob(os.path.join(racine, f"{humeur}_*.wav"))) or sorted(glob.glob(os.path.join(racine, "neutre_*.wav")))
+    if not fichiers or os.environ.get("MUSIQUE_IA", "1") == "0": return None
+    try:
+        import subprocess, tempfile
+        tmp = tempfile.mktemp(suffix=".wav")
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", fichiers[graine % len(fichiers)], "-ac", "1", "-ar", str(SR), tmp], check=True)
+        with wave.open(tmp) as w: x = np.frombuffer(w.readframes(w.getnframes()), np.int16).astype(np.float32) / 32768
+        n = int(duree * SR)
+        if len(x) < SR: return None
+        while len(x) < n: x = np.concatenate([x, x])                       # bouclée si la vidéo est plus longue
+        x = x[:n].copy(); f = min(n // 4, int(1.5 * SR)); x[:f] *= np.linspace(0, 1, f); x[-f:] *= np.linspace(1, 0, f)
+        return _stereo(_norm(x, 0.35))
+    except Exception:
+        return None
+
+
 def musique(duree, humeur="neutre", graine=9):
-    """Nappe musicale très discrète qui suit l'humeur du sketch (accords doux, synthèse : libre de droits)."""
+    """Musique d'ambiance très discrète qui suit l'humeur du sketch : boucle de la bibliothèque générée par IA (S2) si elle existe,
+    sinon nappe synthétisée (accords doux, libre de droits)."""
+    m = _bibliotheque(duree, humeur, graine)
+    if m is not None: return m
     acc = ACCORDS.get(humeur, ACCORDS["neutre"]); n = int(duree * SR); t = np.arange(n) / SR; x = np.zeros(n)
     base = {"joie": 220.0, "triste": 196.0, "tension": 146.8}.get(humeur, 207.7); d_acc = 2.4 if humeur != "tension" else 1.2
     for k in range(int(duree / d_acc) + 1):

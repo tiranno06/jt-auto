@@ -33,6 +33,10 @@ on:
         description: "Vidéo manuelle (onglet Manuel de la régie) : idée ou script (préfixe SCRIPT::). Hors cycle, jamais publiée automatiquement."
         required: false
         default: ""
+      apercu:
+        description: "1 = aperçu rapide : seulement les 10 premières secondes, 24 images/s (pour juger le style)"
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -132,7 +136,8 @@ jobs:
       JURY: ${{ vars.JURY }}
       JURY_TOURS: ${{ vars.JURY_TOURS }}
       SEUIL_JURY: ${{ vars.SEUIL_JURY }}
-      IPS: ${{ vars.IPS || '60' }}
+      IPS: ${{ inputs.apercu == '1' && '24' || vars.IPS || '60' }}
+      APERCU_RAPIDE: ${{ inputs.apercu }}
       EXAGERE: ${{ vars.EXAGERE }}
       CRF: ${{ vars.CRF }}
       VAPID_PRIVEE: ${{ vars.VAPID_PRIVEE }}
@@ -216,7 +221,7 @@ jobs:
         run: python moteur/alerte.py "⚠️ Échec de fabrication" "$(grep -v '^  image' episodes/journal.txt 2>/dev/null | tail -n 3 | cut -c1-250)"
 
       - name: Publier sur TikTok (seulement si la publication automatique est activée sur le site)
-        if: steps.run.outputs.video != '' && vars.PUBLICATION_AUTO == '1' && steps.run.outputs.qualite != 'faible' && inputs.theme == '' && inputs.refaire == '' && inputs.serie == ''
+        if: steps.run.outputs.video != '' && vars.PUBLICATION_AUTO == '1' && steps.run.outputs.qualite != 'faible' && inputs.theme == '' && inputs.refaire == '' && inputs.serie == '' && inputs.apercu != '1'
         continue-on-error: true
         run: |
           URL="${{ github.server_url }}/${{ github.repository }}/releases/download/emissions-${{ steps.run.outputs.mois }}/${{ steps.run.outputs.nom }}"

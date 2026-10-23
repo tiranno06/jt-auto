@@ -80,6 +80,7 @@ def analyser(chemin, duree_max=200):
     if len(ech) < 2: return {}, []
     H_, W_ = ech[0][1].shape[:2]
     coupes, plans_tailles, obs, mvt, energie, fond_px, pal_px = [], [], [], [], [], [], []
+    corps_mvt = []                                                         # P4 : ce qui bouge sous les visages (bras, mains) image par image
     lum, chal, sat = [], [], []
     prec_hist = prec_gris = None; debut_plan = [0]; difs = []
     for j, (t, im) in enumerate(ech):
@@ -123,6 +124,10 @@ def analyser(chemin, duree_max=200):
             obs.append(dict(t=t, x=(x + w / 2) / W_, taille=h / H_, habit=_dominante(habit) if habit.size else None,
                             cheveux=_dominante(cheveux, 2) if cheveux.size else None, sourire=sour, penche=penche, cote=cote))
             masque[max(0, y - h // 3):min(H_, y + int(3.0 * h)), max(0, x - w // 3):min(W_, x + w + w // 3)] = False
+            if prec_gris is not None and not coupe:                        # mouvement du buste et des bras de cette personne
+                zc = (slice(min(H_ - 1, y + h), min(H_, y + int(3.2 * h))), slice(max(0, x - w), min(W_, x + 2 * w)))
+                a_, b_ = gris[zc], prec_gris[zc]
+                if a_.size > 20: corps_mvt.append((t, (x + w / 2) / W_, float(np.mean(cv2.absdiff(a_, b_))) / 255))
         plans_tailles.append(grand)
         fond_px.append(im[masque][::7]); pal_px.append(im[::6, ::6].reshape(-1, 3))
         if prec_gris is not None and not coupe:                            # agitation : ce qui bouge d'une image à l'autre
@@ -158,7 +163,14 @@ def analyser(chemin, duree_max=200):
     L, Ch = float(np.mean(lum)), float(np.mean(chal))
     moment = "nuit" if L < 70 else ("soir" if Ch > 18 and L < 165 else "jour")
     fp = np.concatenate([f for f in fond_px if len(f)] or [np.zeros((0, 3))])
-    resume = dict(duree=round(duree, 1), nb_plans=len(coupes) + 1, duree_plan=round(duree / (len(coupes) + 1), 2), coupes=coupes[:60],
+    gestes = []                                                            # P4 : instants où quelqu'un fait un geste dans l'original
+    if len(corps_mvt) >= 6:
+        seuil = max(0.02, 2.2 * float(np.median([c[2] for c in corps_mvt])))
+        for tc, xc, f in corps_mvt:
+            if f < seuil: continue
+            if gestes and tc - gestes[-1][0] < 0.6: gestes[-1][2] = max(gestes[-1][2], round(min(1.0, f / seuil / 3), 2)); continue
+            gestes.append([round(tc, 2), round(xc, 2), round(min(1.0, f / seuil / 3), 2)])
+    resume = dict(gestes=gestes[:120], duree=round(duree, 1), nb_plans=len(coupes) + 1, duree_plan=round(duree / (len(coupes) + 1), 2), coupes=coupes[:60],
                   plans=plans, camera=cam, nb_personnes=nb, personnes=personnes[:3], visages=bool(obs),
                   sourires=round(sum(x["sourire"] for x in obs) / len(obs), 3) if obs else 0.0,
                   energie=round(float(np.clip(np.mean(energie) * 12, 0, 1)) if energie else 0.0, 3),

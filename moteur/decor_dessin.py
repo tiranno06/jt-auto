@@ -23,7 +23,7 @@ TRAIT = (26, 22, 30)
 AA = cv2.LINE_AA
 POLICE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "polices", "Poppins-Bold.ttf")
 LIEUX = ("salon", "cuisine", "bureau", "cabinet_medical", "bar", "chambre", "salle_sport", "magasin", "classe", "rue", "restaurant",
-         "administration", "hall", "caverne", "palais")
+         "administration", "hall", "caverne", "palais", "voiture")
 
 # ------------------------------------------------------------------ outils de dessin
 def _c(c): return tuple(int(max(0, min(255, v))) for v in c)
@@ -399,12 +399,13 @@ GAGS = {
     "hall": ["Merci de ne pas claquer la porte", "Réunion de copropriété : venez nombreux (personne)", "Ascenseur en panne depuis 2009"],
     "caverne": ["Ugh", "Chasse au mammouth : mardi", "Feu : ne pas toucher"],
     "palais": ["Silence, le roi dort", "Brioche à volonté", "Interdit aux gueux"],
+    "voiture": ["Ne pas klaxonner : conducteur sensible", "Plein : la semaine prochaine", "Bébé à bord (le conducteur)"],
     "restaurant": ["Plat du jour : celui d'hier", "Menu : tout est fait maison (la maison d'à côté)", "Chef : de mauvaise humeur"],
 }
 COULEURS_MUR = {"salon": (238, 214, 190), "cuisine": (214, 232, 222), "bureau": (214, 222, 234), "cabinet_medical": (220, 238, 236),
                 "bar": (150, 76, 60), "chambre": (210, 208, 236), "salle_sport": (226, 228, 232), "magasin": (244, 240, 230),
                 "classe": (240, 226, 196), "rue": (160, 190, 220), "restaurant": (236, 206, 176),
-                "administration": (52, 92, 160), "hall": (236, 226, 206), "caverne": (150, 120, 92), "palais": (244, 236, 214)}
+                "administration": (52, 92, 160), "hall": (236, 226, 206), "caverne": (150, 120, 92), "palais": (244, 236, 214), "voiture": (70, 74, 86)}
 
 def _variante(c, rng, amp=14): return _c(np.array(c) + rng.integers(-amp, amp + 1, 3))
 
@@ -553,7 +554,8 @@ def dessiner(lieu, bible=None, graine=7):
 def lieu_de(texte_, defaut="salon"):
     """Lieu du catalogue d'après une description (anglais ou français) : « doctor's office », « au bureau »… (le plus cité gagne)."""
     t = (texte_ or "").lower()
-    regles = [("caverne", r"pr[ée]histo|caverne|grotte|mammouth|cro-?magnon|n[ée]andert|homme des cavernes"),
+    regles = [("voiture", r"inside (a|the) car|in the car|car interior|driver seat|steering wheel|dans (la|sa|ma|ta) (voiture|caisse|bagnole)|au volant|en voiture|conduit|conduire|driving|road trip|embouteillage|traffic jam|passager"),
+              ("caverne", r"pr[ée]histo|caverne|grotte|mammouth|cro-?magnon|n[ée]andert|homme des cavernes"),
               ("palais", r"palace|castle|throne|chandelier|ch[âa]teau|palais|versailles|\broi\b|\breine\b|majest[ée]|cour royale|marquis"),
               ("administration", r"government|town hall|city hall|tax office|prefecture|\bcaf\b|pr[ée]fecture|mairie|administration|guichet|formulaire|imp[ôo]ts|france travail|p[ôo]le emploi|\bs[ée]cu\b|dossier"),
               ("hall", r"hallway|apartment building|staircase|stairs|mailbox|immeuble|voisin|palier|escalier|concierge|gardien|ascenseur|bo[iî]te aux lettres|copropri"),

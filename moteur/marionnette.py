@@ -43,12 +43,12 @@ COSTUMES_DEFAUT = {
 }
 
 HAUTS = ("tshirt", "chemise", "blouse", "costume", "capuche", "survetement", "tablier", "pyjama", "pull", "debardeur", "robe", "polo", "gilet",
-         "col_roule", "doudoune", "blouson", "redingote", "uniforme", "tunique", "hawai")
+         "col_roule", "doudoune", "blouson", "redingote", "uniforme", "tunique", "hawai", "veste_jean", "maillot")
 MOTIFS = ("uni", "rayures", "carreaux", "pois") + GR.MOTIFS
 BAS = ("jean", "pantalon", "jogging", "short", "jupe")
 CHAUSSURES = ("baskets", "ville", "ballerines", "bottes", "chaussons")
 DETAILS = ("cravate", "noeud_pap", "badge", "stethoscope", "stylos", "montre", "logo", "lunettes_vue", "lunettes_soleil", "moustache", "barbe", "collier", "echarpe",
-           "ceinture", "boucles_oreilles", "taches_rousseur", "bracelet", "sac_bandouliere", "casque_audio", "bretelles", "rouge_levres") + GR.BARBES
+           "ceinture", "boucles_oreilles", "taches_rousseur", "bracelet", "sac_bandouliere", "casque_audio", "bretelles", "rouge_levres", "chaine", "banane", "sac_a_dos", "ecouteurs") + GR.BARBES
 CHAPEAUX = GR.CHAPEAUX                                                     # couvre-chef de l'épisode (costume["chapeau"], couleur c_chapeau)
 COIFFURES = ("carre", "long", "queue", "chignon", "boucles", "court", "meches", "nuque", "couronne", "aucune") + GR.COIFFURES   # coiffure de l'épisode (costume["cheveux"])
 CHEVEUX_ARRIERE = ("carre", "long", "queue", "chignon", "boucles") + GR.ARRIERE
