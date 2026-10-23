@@ -87,6 +87,17 @@
   B["gestes_origine"], tenus 2 s au moins) ; plan de réaction sur la chute ; musiques IA ACE-Step (`moteur/musique_modal.py`,
   workflow « Musiques d'ambiance » → sons/musique, MUSIQUE_IA=0 pour la nappe synthétisée) ; aperçu rapide 10 s (case du site,
   24 images/s, jamais publié).
+- **Améliorations d'octobre 2026, 2e liste (3, 6-11, 13, 16, 21, 22, 29, 30)** : décors dessinés vivants (`moteur/decor_anime.py` :
+  trotteuse, vapeur de tasse, ventilateur, poisson rouge, match à la télé du bar, porte du hall, chat qui traverse, pigeons qui
+  s'envolent quand on crie, gouttes sur les vitres, orage + tonnerre `SM.meteo`, essuie-glace ; réglage DECOR_VIVANT) ; ombres
+  portées des personnages au sol (+ sur le mur le soir, jamais dehors ; OMBRES) ; reflets dans le miroir, les vitrines et la vitre
+  le soir (plans larges seulement : pas de tête fantôme en gros plan) ; tatouages et bracelets sur les bras nus (adultes seulement),
+  teint qui change peu à peu (colère qui monte, pâleur, joues de gêne : `toon.teint`) ; appels (lieux séparés) : écran partagé,
+  plans d'écoute avec voix filtrée « téléphone » (`SM.telephone`), téléphone collé à l'oreille (APPEL_PARTAGE) ; « revenons… /
+  deux heures plus tôt » = rembobinage façon cassette (REMBOBINAGE) ; boutons « Juste la voix » (autres voix de la banque :
+  VOIX_NOUVELLES) et « Juste le décor » (décors tirés à neuf : DECOR_GRAINE) ; bêtisier du dimanche (`moteur/betisier.py`,
+  workflow betisier.yml, ratés notés par le jury) ; voix de l'auteur enregistrée depuis le site (`moteur/voix_auteur.py`,
+  workflow voix_auteur.yml → voix/refs, priorité au casting, jamais écrasée).
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.

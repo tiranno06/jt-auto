@@ -457,7 +457,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         FICHES = B.get("fiches") if HUMAINS else None
         for sc_ in places:
             lieu = B["lieux"][min(sc_, len(B["lieux"]) - 1)]
-            dd = DD.dessiner(lieu, B, graine=B["graine"] % 9973 + sc_)
+            dd = DD.dessiner(lieu, B, graine=B["graine"] % 9973 + sc_ + int(os.environ.get("DECOR_GRAINE") or 0))   # « juste le décor » : tirage neuf
             if dd.get("avant") is not None: AVANT[sc_] = dd["avant"]          # premier plan (comptoir, bureau, guichet) : aussi devant un décor IA
             if sc_ in decors: continue                                     # décor IA (mode payant) : gardé tel quel
             decors[sc_] = dd["fond"]; INFOS[sc_] = dd
