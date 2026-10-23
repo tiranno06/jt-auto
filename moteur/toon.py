@@ -188,7 +188,7 @@ def _oeil(img, c, ex, ey, p, d, ep):
     _ellipse(img, c, (ex + ep * 0.5, ey + ep * 0.5), 0, TRAIT); _ellipse(img, c, (ex - ep * 0.5, ey - ep * 0.5), 0, (238, 238, 250))
     k = {"grands": 0.26, "minuscules": 0.2}.get(yeux, 0.36) * float(np.clip(p.get("pupille", 1.0), 0.6, 1.5))
     px = c[0] + float(np.clip(0.30 * d + 0.45 * gx, -0.6, 0.6)) * (ex - k * ex); py = c[1] + float(np.clip(0.05 + 0.4 * gy, -0.5, 0.5)) * (ey - k * ex * 1.2)
-    if yeux == "roule": py = c[1] - ey * 0.45
+    if yeux == "roule": px, py = c[0] + 0.1 * d * ex, c[1] - ey * 0.58                     # yeux au ciel : pupilles tout en haut
     if yeux == "coeur":
         for sg in (-1, 1): _ellipse(img, (px + sg * ex * 0.25, py - ey * 0.1), (ex * 0.32, ey * 0.24), 0, (220, 40, 70))
         _poly(img, [(px - ex * 0.55, py - ey * 0.02), (px + ex * 0.55, py - ey * 0.02), (px, py + ey * 0.45)], (220, 40, 70))
@@ -227,7 +227,7 @@ def _bouche(img, cx, cy, rxe, R, d, k34, p, ep, tilt):
     o = float(np.clip(p.get("bouche", 0.0), 0, 1)); f = p.get("forme", "neutre"); v = p.get("viseme")
     def T(u, w): return M._rot(cx + u, cy + w, cx, cy, tilt)
     mx = d * rxe * 0.58 * k34; my = R * 0.55; w = rxe * (0.24 - 0.06 * k34)
-    if v == "M" or (o < 0.08 and f not in ("o", "cri", "grand_sourire", "dents")):
+    if v == "M" or (o < 0.08 and f not in ("o", "cri", "grand_sourire", "dents", "machoire")):
         courbe = {"sourire": 0.55, "grand_sourire": 0.7, "coin": 0.3, "triste": -0.6, "moue": -0.45, "tordue": 0.1}.get(f, -0.35)
         courbe += float(np.clip(p.get("coins", 0.0), -1, 1)) * 0.5
         w_ = w * (0.75 if courbe < 0 else 1.0)
@@ -244,6 +244,7 @@ def _bouche(img, cx, cy, rxe, R, d, k34, p, ep, tilt):
     h = R * (0.10 + 0.30 * o) * {"I": 0.55, "E": 0.7, "A": 1.15, "S": 0.45, "T": 0.6, "F": 0.45}.get(v, 1.0)
     w2 = w * (1.35 + 0.25 * o) * (1.15 if v in ("I", "E", "S") else 1.0)
     if f == "cri": h = R * (0.28 + 0.2 * o); w2 *= 1.1
+    if f == "machoire": h = R * (0.52 + 0.1 * o); w2 *= 0.95; v = None             # P1 : la mâchoire tombe (choc), bouche immense
     sour = 0.4 if f in ("sourire", "grand_sourire", "dents") else (-0.2 if f == "triste" else 0.0)
     m0 = mx + d * w * 0.25 * k34                                           # la bouche ouverte glisse vers le bord du visage
     out = lisse([T(m0 - w2, my - h * 0.18 - sour * h * 0.3), T(m0 - w2 * 0.3, my - h * 0.36), T(m0 + w2 * 0.5, my - h * 0.34), T(m0 + w2, my - h * 0.2 - sour * h * 0.3),
@@ -291,8 +292,37 @@ def visage(img, t, rxe, R, p, d, k34, tilt_deg, ep):
         if k34 >= 0.15:                                                    # branche vers l'oreille (côté du dos)
             cp = c2; _ligne(img, (cp[0] - d * centres[1][1] * 1.5, cp[1] - ey * 0.2), (cx - d * rxe * 0.85, cy - R * 0.02), TRAIT, ep * 1.2)
     _bouche(img, cx, cy, rxe, R, d, k34, p, ep, tilt)
+    _larmes_sueur(img, centres, cx, cy, rxe, R, p, d, ep)
     if p.get("rougeur"):
         _ellipse(img, T(d * rxe * 0.15 * k34, R * 0.38), (rxe * 0.2, R * 0.07), 0, (245, 175, 180))
+
+
+EFFETS_TOON = ("larmes", "larme", "sueur")                               # dessinés par le visage toon (P1), pas par l'ancien style
+
+def _goutte(img, c, r, ep, coul=(150, 210, 250)):
+    """Goutte d'eau cernée de noir (pointe en haut) avec son reflet."""
+    x, y = c; pts = lisse([(x, y - r * 2.1), (x + r, y - r * 0.2), (x + r * 0.7, y + r * 0.8), (x - r * 0.7, y + r * 0.8), (x - r, y - r * 0.2)], n=6)
+    forme(img, pts, coul, ep); _ellipse(img, (x - r * 0.35, y - r * 0.15), (r * 0.22, r * 0.32), 0, (250, 252, 255))
+
+
+def _larmes_sueur(img, centres, cx, cy, rxe, R, p, d, ep):
+    """Gros plans expressifs (P1) : ruisseaux de larmes sous les yeux, larme qui coule, gouttes de sueur sur le front."""
+    eff = p.get("effets") or (); tm = float(p.get("t", 0.0))
+    if "larmes" in eff:                                                    # pleurs : deux ruisseaux qui descendent les joues
+        for c, ex_, ey_ in centres:
+            sg = 1 if c[0] >= cx else -1; x0, y0 = c[0] + sg * ex_ * 0.3, c[1] + ey_ * 0.85
+            pts = [(x0 + sg * R * 0.04 * k / 4 + math.sin(tm * 6 + k) * R * 0.006, y0 + R * 0.12 * k) for k in range(5)]
+            for i in range(len(pts) - 1): _ligne(img, pts[i], pts[i + 1], TRAIT, ep * 3.4)
+            for i in range(len(pts) - 1): _ligne(img, pts[i], pts[i + 1], (150, 210, 250), ep * 2.0)
+            ph = (tm * 1.6 + (0.5 if sg > 0 else 0)) % 1                   # goutte qui tombe au bout
+            _goutte(img, (pts[-1][0], pts[-1][1] + R * 0.06 + ph * R * 0.35), R * 0.035, ep * 0.8)
+    elif "larme" in eff:                                                   # une larme qui roule sur la joue
+        c, ex_, ey_ = max(centres, key=lambda z: z[1]); ph = (tm * 0.7) % 1
+        _goutte(img, (c[0] + d * ex_ * 0.2, c[1] + ey_ * 1.1 + ph * R * 0.4), R * 0.04, ep * 0.8)
+    if "sueur" in eff:                                                     # panique, gêne : gouttes de sueur sur le front
+        for k in range(2 if R > 60 else 1):
+            ph = (tm * 0.9 + k * 0.5) % 1; sg = -d if d else (1 if k else -1)
+            _goutte(img, (cx + sg * rxe * (0.62 + 0.12 * k), cy - R * (0.4 - 0.1 * k) + ph * R * 0.25), R * (0.07 - 0.015 * k), ep * 0.8)
 
 
 BARBES_T = ("barbe", "barbe_courte", "barbe_pleine", "bouc", "moustache", "favoris", "collier_barbe")
@@ -518,6 +548,8 @@ def _main(img, m, a, forme_, r, peau, ep, pouce=None):
     o = (m[0] - ux * r * 1.05, m[1] - uy * r * 1.05)                       # poignet
     def P(v, u): return (o[0] + (vx * v + ux * u) * r, o[1] + (vy * v + uy * u) * r)
     e1 = ep * 0.5; lig = []
+    if forme_ == "poche":                                                  # main dans la poche (P2) : la main disparaît sous le bas du haut
+        return
     if forme_ == "hanche":                                                 # main posée sur la hanche : dos de la main, 4 doigts vers le bas
         a2 = 0.15 * (1 if ux > 0 else -1); ux, uy = math.sin(a2), math.cos(a2); vx, vy = uy, -ux
         if vx * s_ < 0: vx, vy = -vx, -vy
@@ -799,7 +831,7 @@ def dessiner(img, P, p):
     haut = C.get("haut") or "tshirt"; c_haut = tuple(C.get("c_haut") or (90, 140, 200)); c_haut_o = _fonce(c_haut, 0.88)
     bas = C.get("bas") or "jean"; c_bas = tuple(C.get("c_bas") or (60, 80, 130)); c_bas_o = _fonce(c_bas, 0.90)
     robe = haut in ("robe", "tunique") or bas == "jupe"
-    courte = haut in ("tshirt", "polo", "debardeur", "hawai")
+    courte = haut in ("tshirt", "polo", "debardeur", "hawai", "maillot")
     det = tuple(C.get("details") or ())
     def tourne(px, py):                                                    # trois-quarts : le côté fuyant (vers d) se resserre
         dx = px - x; k = (0.86 if dx * d > 0 else 1.04) if k34 else 1.0
@@ -947,6 +979,32 @@ def dessiner(img, P, p):
         for sg in (-1, 1): forme(img, [(fx, y_cou + 0.22 * R), (fx + sg * 0.42 * R, y_cou - 0.02 * R), (fx + sg * 0.36 * R, y_cou + 0.3 * R)], _clair(c_haut, 0.15), ep * 0.8)
         _ligne(img, (fx, y_cou + 0.22 * R), (fx, y_ourlet), _fonce(c_haut, 0.8), ep * 0.7)
         for k in range(4 if haut != "polo" else 1): _ellipse(img, (fx + 0.06 * R, y_cou + 0.45 * R + k * 0.5 * R), (0.045 * R, 0.045 * R), 0, _fonce(c_haut, 0.65))
+    if haut == "veste_jean":                                               # veste en jean (P3) : t-shirt dessous, surpiqûres, poches poitrine
+        inner = tuple(C.get("c_dessous") or (248, 248, 248))
+        _poly(img, [(fx - 0.3 * R, y_cou), (fx + 0.3 * R, y_cou), (fx + 0.22 * R, y_ourlet), (fx - 0.22 * R, y_ourlet)], inner)
+        for sg in (-1, 1):
+            _trait(img, [(fx + sg * 0.3 * R, y_cou), (fx + sg * 0.22 * R, y_ourlet)], ep * 0.9)
+            forme(img, [(fx + sg * 0.3 * R, y_cou - 0.04 * R), (fx + sg * 0.62 * R, y_cou + 0.06 * R), (fx + sg * 0.34 * R, y_cou + 0.4 * R)], _clair(c_haut, 0.12), ep * 0.8)
+            px_ = fx + sg * 0.62 * R; forme(img, [(px_ - 0.2 * R, y_cou + 0.6 * R), (px_ + 0.2 * R, y_cou + 0.6 * R), (px_ + 0.18 * R, y_cou + 0.95 * R), (px_ - 0.18 * R, y_cou + 0.95 * R)], c_haut, ep * 0.7)
+            _ligne(img, (px_ - 0.2 * R, y_cou + 0.68 * R), (px_ + 0.2 * R, y_cou + 0.68 * R), _clair(c_haut, 0.45), ep * 0.5)
+            _ellipse(img, (px_, y_cou + 0.75 * R), (0.035 * R, 0.035 * R), 0, (200, 160, 80))
+        _ligne(img, tourne(x - 0.95 * R, y_ourlet - 0.28 * R), tourne(x + 0.95 * R, y_ourlet - 0.28 * R), _clair(c_haut, 0.45), ep * 0.5)
+    if haut == "maillot":                                                  # maillot de foot (P3) : col en V, bandes, grand numéro
+        _poly(img, [(fx - 0.26 * R, y_cou), (fx + 0.26 * R, y_cou), (fx, y_cou + 0.38 * R)], _clair(c_haut, 0.5)); _trait(img, [(fx - 0.28 * R, y_cou), (fx, y_cou + 0.4 * R), (fx + 0.28 * R, y_cou)], ep)
+        num = str(C.get("numero") or (7 + (sum(map(ord, str(C.get("c_haut")))) % 3) * 3))
+        cv2.putText(img, num, (int(fx - 0.24 * R * len(num)), int(y_cou + 1.35 * R)), cv2.FONT_HERSHEY_DUPLEX, R / 42, TRAIT, int(max(4, ep * 3.2)), cv2.LINE_AA)
+        cv2.putText(img, num, (int(fx - 0.24 * R * len(num)), int(y_cou + 1.35 * R)), cv2.FONT_HERSHEY_DUPLEX, R / 42, (250, 250, 250), int(max(2, ep * 1.6)), cv2.LINE_AA)
+    if "chaine" in det:                                                    # grosse chaîne dorée (P3)
+        for k in range(11):
+            a_ = math.radians(10 + k * 16); q_ = (fx + 0.36 * R * math.cos(a_), y_cou + 0.02 * R + 0.5 * R * math.sin(a_))
+            _ellipse(img, q_, (0.06 * R + ep * 0.6, 0.045 * R + ep * 0.6), 0, TRAIT); _ellipse(img, q_, (0.06 * R, 0.045 * R), 0, (230, 185, 60))
+        _ellipse(img, (fx, y_cou + 0.6 * R), (0.1 * R, 0.1 * R), 0, (240, 200, 70)); _ellipse(img, (fx, y_cou + 0.6 * R), (0.1 * R, 0.1 * R), 0, TRAIT, ep * 0.7)
+    if "sac_a_dos" in det and not dos:                                     # bretelles du sac à dos (P3)
+        for sg in (-1, 1): membre(img, [(x + sg * 0.55 * R, y_cou + 0.02 * R), (x + sg * 0.62 * R, y_cou + 0.9 * R), (x + sg * 0.72 * R, y_ourlet - 0.2 * R)], [0.09 * R] * 3, tuple(C.get("c_sac") or (60, 60, 70)), ep)
+    if "banane" in det:                                                    # sacoche banane portée en travers (P3)
+        _ligne(img, (x - 0.7 * R, y_cou + 0.1 * R), (x + 0.6 * R, y_cou + 1.3 * R), TRAIT, 0.09 * R + 2 * ep); _ligne(img, (x - 0.7 * R, y_cou + 0.1 * R), (x + 0.6 * R, y_cou + 1.3 * R), (40, 40, 46), 0.09 * R)
+        b_ = lisse([(x - 0.05 * R, y_cou + 0.85 * R), (x + 0.5 * R, y_cou + 1.05 * R), (x + 0.42 * R, y_cou + 1.4 * R), (x - 0.12 * R, y_cou + 1.2 * R)])
+        forme(img, b_, tuple(C.get("c_sac") or (40, 40, 46)), ep); _trait(img, [(x - 0.02 * R, y_cou + 1.0 * R), (x + 0.44 * R, y_cou + 1.18 * R)], ep * 0.6, (200, 200, 205))
     if haut in ("costume", "blouse", "blouson", "redingote", "gilet", "uniforme"):
         inner = tuple(C.get("c_dessous") or (248, 248, 248))
         _poly(img, [(fx - 0.28 * R, y_cou), (fx + 0.28 * R, y_cou), (fx + 0.06 * R, y_cou + 1.2 * R), (fx - 0.06 * R, y_cou + 1.2 * R)], inner)
@@ -1008,6 +1066,11 @@ def dessiner(img, P, p):
                 x0_, y0_, x1_, y1_ = roi_t; m_ = _masque(ov, roi_t) > 127; z_ = img[y0_:y1_, x0_:x1_]; z_[~m_] = garde[~m_]
     if not dos and k34 >= 0.15 and style_ch not in LONGS: oreille(img, tete, rxe, R, d, tilt, peau, ep)
     if style_ch: coiffure_avant(img, tete, rxe, R, d, k34, style_ch, col_ch, ep, tilt, chapeau=bool(C.get("chapeau")))
+    if "ecouteurs" in det and not dos:                                     # écouteurs blancs sans fil (P3)
+        for u_ in ((-d * rxe * 0.68,) if k34 >= 0.15 else (-rxe * 0.97, rxe * 0.97)):
+            q_ = M._rot(tete[0] + u_, tete[1] + R * 0.1, tete[0], tete[1], math.radians(tilt))
+            _ellipse(img, q_, (R * 0.06 + ep, R * 0.06 + ep), 0, TRAIT); _ellipse(img, q_, (R * 0.06, R * 0.06), 0, (250, 250, 252))
+            _ligne(img, (q_[0], q_[1] + R * 0.05), (q_[0], q_[1] + R * 0.2), TRAIT, R * 0.045 + 2 * ep); _ligne(img, (q_[0], q_[1] + R * 0.05), (q_[0], q_[1] + R * 0.2), (250, 250, 252), R * 0.045)
     elif not dos and k34 >= 0.15: pass
     if P.get("accessoire") and P["accessoire"] != "lunettes": M._accessoire(img, tete, rxe, R, st, p, P)
     if C.get("chapeau") == "bonnet": bonnet(img, tete, rxe, R, tilt, tuple(C.get("c_chapeau") or (190, 150, 70)), ep)
@@ -1018,7 +1081,7 @@ def dessiner(img, P, p):
             e_, c_, m_ = bras[i_]
             if math.hypot(m_[0] - tete[0], m_[1] - tete[1]) < R * 1.25:
                 avant_bras(img, c_, m_, larg_b, c_haut, courte, peau, ep, formes[i_], r_m)
-    M._effets(img, tete, rx, R, st, p)
+    M._effets(img, tete, rx, R, st, dict(p, effets=tuple(e for e in (p.get("effets") or ()) if e not in EFFETS_TOON)))
     for nom in ("main_g", "main_d"):
         if p.get(nom) is not None:
             i_ = 0 if nom == "main_g" else 1; e_, c_, m_ = bras[i_]

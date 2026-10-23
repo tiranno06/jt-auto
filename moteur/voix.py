@@ -66,6 +66,11 @@ def generer(repliques, secours):
     Renvoie (audios, crédits, mots) : la banque de voix d'abord (meilleure voix vérifiée par Whisper),
     puis Chatterbox seul, puis Piper pour que la vidéo sorte quoi qu'il arrive."""
     tmp = tempfile.mkdtemp()
+    try:                                                                   # références par émotion (une seule fois, V1/V2)
+        import voix_refs
+        if voix_refs.manquantes(): voix_refs.fabriquer()
+    except Exception as e:
+        print(f"Références de voix non créées ({str(e)[:120]})", flush=True)
     try:
         import voix_banque
         r = voix_banque.generer(repliques)
@@ -77,5 +82,30 @@ def generer(repliques, secours):
         try:
             return chatterbox(repliques, tmp), ["Chatterbox (MIT), voix Multilingual LibriSpeech (CC BY 4.0)"], None
         except Exception as e:
-            print(f"Chatterbox indisponible ({e}) : voix de secours Piper.", flush=True)
+            print(f"Chatterbox indisponible ({e}) : voix de secours Kokoro / Piper.", flush=True)
+        try:                                                               # Kokoro (naturel) pour les voix féminines et la voix off,
+            return kokoro_ou_piper(repliques, tmp, secours)                 # Piper seulement pour ce que Kokoro ne sait pas faire
+        except Exception as e:
+            print(f"Kokoro indisponible ({str(e)[:120]}) : voix de secours Piper.", flush=True)
+    print("ATTENTION : voix de secours Piper (robotique) utilisée pour toute la vidéo.", flush=True)
     return piper(repliques, tmp, secours), ["Piper (voix libres Siwis, Tom, UPMC, Gilles)"], None
+
+
+FEMININS = ("envoyee", "narrateur")
+
+def kokoro_ou_piper(repliques, tmp, secours):
+    """Dernier recours avant Piper : Kokoro (Apache 2.0) pour les rôles féminins et la voix off ; Piper pour les autres."""
+    import voix_banque
+    idx = [i for i, x in enumerate(repliques) if x["p"] in FEMININS]
+    sortie = [None] * len(repliques); credits = []
+    if idx:
+        brut = voix_banque.kokoro("ff_siwis", [voix_banque.sans_tags(voix_banque.prononcer(repliques[i].get("d") or repliques[i]["t"])) for i in idx])
+        for i, o in zip(idx, brut):
+            if not o: raise RuntimeError(f"réplique {i} impossible")
+            sortie[i] = voix_banque.nettoyer(o, f"{tmp}/ko{i}")
+        credits.append("Kokoro (Apache 2.0)")
+    reste = [i for i in range(len(repliques)) if sortie[i] is None]
+    if reste:
+        for i, a in zip(reste, piper([repliques[i] for i in reste], tmp, secours)): sortie[i] = a
+        credits.append("Piper (voix libres Siwis, Tom, UPMC, Gilles)")
+    return sortie, credits, None

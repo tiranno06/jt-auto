@@ -49,6 +49,10 @@ GESTES = {
     "telephone":     (((-18, 8), (140, 95)), ("ouverte", "poing")),           # main à l'oreille
     "supplie":       (((-60, 75), (60, -75)), ("ouverte", "ouverte")),        # mains jointes
     "explique":      (((-60, -40), (70, -50)), ("paume", "index")),
+    "poches":        (((-22, 40), (22, -40)), ("poche", "poche")),            # mains dans les poches : tranquille, gêné, blasé (P2)
+    "appuye":        (((-18, 8), (22, -40)), ("ouverte", "poche")),           # déhanché, une main dans la poche
+    "pianote":       (((-8, 100), (8, -100)), ("ouverte", "ouverte")),        # il pianote sur son téléphone, tête baissée
+    "volant":        (((-32, 80), (32, -80)), ("ouverte", "ouverte")),        # assis au volant (voiture)
 }
 POSES = {k: v[0] for k, v in GESTES.items()}
 
@@ -118,10 +122,12 @@ def _emotion_mots(texte, niveau=0.5):
 def geste(texte, emo, k=0):
     """Geste choisi d'après la réplique (ponctuation, mots) quand l'émotion n'impose rien."""
     t = (texte or "").lower()
-    if emo in ("blase", "fier"): return "croises" if k % 2 == 0 else "mains_hanches"
+    if re.search(r"\b(message|texto|sms|insta|snap|whatsapp|story|tiktok|j'[ée]cris|je poste|notif)", t): return "pianote"
+    if emo in ("blase", "fier"): return ("croises", "mains_hanches", "poches")[k % 3]
     if emo in ("pleurs", "panique"): return "desespoir"
     if emo == "gene": return "gratte_tete"
-    if emo == "sceptique": return "menton" if k % 2 else "croises"
+    if emo == "sceptique": return ("menton", "croises", "appuye")[k % 3]
+    if re.search(r"\b(tranquille|t'inqui[èe]te|bof|osef|cool|pas grave|relax)\b", t): return "poches" if k % 2 else "appuye"
     if emo in ("colere", "cri") and "!" in t: return "pointe"
     if re.search(r"\b(stop|attends|arr[êe]te|calme[- ]toi|doucement)\b", t): return "stop"
     if re.search(r"\b(t[ée]l[ée]phone|allo|all[ôo]|appelle)\b", t): return "telephone"
@@ -155,8 +161,8 @@ METIERS = {
 }
 VILLE = {                                                                   # tenues de ville selon le lieu (et l'heure)
     "salle_sport": ("survetement", "debardeur"), "chambre": ("pyjama",), "bureau": ("chemise", "pull", "polo", "col_roule"),
-    "bar": ("chemise", "tshirt", "pull", "blouson", "hawai", "col_roule"), "restaurant": ("chemise", "pull", "robe", "col_roule"),
-    "rue": ("capuche", "pull", "tshirt", "chemise", "doudoune", "blouson"),
+    "bar": ("chemise", "tshirt", "pull", "blouson", "hawai", "col_roule", "veste_jean"), "restaurant": ("chemise", "pull", "robe", "col_roule"),
+    "rue": ("capuche", "pull", "tshirt", "chemise", "doudoune", "blouson", "veste_jean", "maillot"),
 }
 CHAPEAUX_RUE = ("bonnet", "casquette", "beret", "bob", "chapeau")          # couvre-chefs de ville (dehors surtout)
 
@@ -205,13 +211,14 @@ def tenue(perso, role_scene, lieu, moment, graine):
         if perso == "noeud" and c["bas"] == "pantalon" and rng.random() < 0.5: c["bas"] = "jupe"
         return c
     if lieu == "chambre" or (moment == "nuit" and lieu == "salon" and rng.random() < 0.6): choix = ("pyjama",)
-    else: choix = VILLE.get(lieu) or ("tshirt", "pull", "chemise", "capuche", "polo")
+    else: choix = VILLE.get(lieu) or ("tshirt", "pull", "chemise", "capuche", "polo", "veste_jean")
     haut = choix[int(rng.integers(len(choix)))]
     if haut == "robe" and perso != "noeud": haut = "chemise"
     c_haut = PALETTE[int(rng.integers(len(PALETTE)))]
+    if haut == "veste_jean": c_haut = ((90, 130, 180), (60, 90, 140), (150, 175, 205))[int(rng.integers(3))]   # denim
     motif = "uni" if rng.random() < 0.6 else ("rayures", "carreaux", "pois")[int(rng.integers(3))]
     if haut == "pyjama": motif = ("rayures", "pois", "carreaux")[int(rng.integers(3))]
-    if haut in ("capuche", "survetement", "debardeur"): motif = "uni"
+    if haut in ("capuche", "survetement", "debardeur", "veste_jean", "maillot"): motif = "uni"
     bas = "jogging" if haut in ("survetement", "capuche") and rng.random() < 0.6 else ("short" if haut == "debardeur" else
           ("jupe" if perso == "noeud" and rng.random() < 0.5 else ("jean" if rng.random() < 0.55 else "pantalon")))
     if haut == "pyjama": bas = "pantalon"
@@ -224,6 +231,8 @@ def tenue(perso, role_scene, lieu, moment, graine):
     if rng.random() < 0.25: details.append(("sac_bandouliere", "casque_audio", "bretelles")[int(rng.integers(3))] if lieu in ("rue", "bar", "magasin") else "montre")
     if perso == "noeud" and rng.random() < 0.5: details.append("boucles_oreilles")
     if rng.random() < 0.15: details.append("bracelet")
+    if lieu in ("rue", "bar", "magasin", "voiture") and rng.random() < 0.35:   # accessoires de la rue (P3)
+        details.append(("chaine", "banane", "sac_a_dos", "ecouteurs")[int(rng.integers(4))])
     chapeau = None
     if lieu == "rue" and rng.random() < (0.6 if moment in ("matin", "soir", "nuit") else 0.35): chapeau = CHAPEAUX_RUE[int(rng.integers(len(CHAPEAUX_RUE)))]
     elif haut in ("capuche", "survetement", "doudoune") and rng.random() < 0.25: chapeau = ("bonnet", "casquette")[int(rng.integers(2))]
@@ -235,7 +244,7 @@ def tenue(perso, role_scene, lieu, moment, graine):
     return dict(haut=haut, c_haut=c_haut, motif=motif, c_motif=M._fonce(c_haut, 0.72) if motif != "pois" else (250, 250, 248),
                 bas=bas, c_bas=c_bas, chaussures=chaus, c_chaussures=PALETTE[int(rng.integers(len(PALETTE)))] if chaus != "ville" else (50, 35, 25),
                 details=tuple(details), **({"chapeau": chapeau, "c_chapeau": PALETTE[int(rng.integers(len(PALETTE)))]} if chapeau else {}),
-                **({"c_dessous": (245, 245, 245)} if haut == "blouson" else {}))
+                **({"c_dessous": (245, 245, 245)} if haut in ("blouson", "veste_jean") else {}))
 
 def _costume_valide(c):
     """Costume proposé par Claude, ramené aux catalogues de marionnette.py (sinon None)."""
@@ -356,7 +365,8 @@ def bible(sk, roles):
                 jeu=[x for x in (S.get("jeu") or []) if isinstance(x, dict)] if isinstance(S.get("jeu"), list) else [],
                 source=("auteur" if S else "robot") + ("+image" if V else ""), c_mur=c_mur, rythme=rythme, fiches=fiches,
                 cadence=S.get("cadence") if S.get("cadence") in CADENCES else None, assis=assis, cine=cine, decoupe=_decoupe_claude(S, roles),
-                coupes_origine=[float(c) for c in (V.get("coupes") or []) if isinstance(c, (int, float))] if sk.get("doublage") else [])
+                coupes_origine=[float(c) for c in (V.get("coupes") or []) if isinstance(c, (int, float))] if sk.get("doublage") else [],
+                gestes_origine=[float(g[0]) for g in (V.get("gestes") or []) if isinstance(g, (list, tuple)) and g] if sk.get("doublage") else [])
 
 def _humain():
     import humain
@@ -708,7 +718,7 @@ def compagnons(sk, dec, lieux, moment, graine):
                         fiche=fiche, description=str(f.get("description") or "")[:120]))
     return out
 
-LIEUX_ASSIS = ("bureau", "salon", "restaurant", "administration", "classe", "bar", "cabinet_medical", "palais")
+LIEUX_ASSIS = ("bureau", "salon", "restaurant", "administration", "classe", "bar", "cabinet_medical", "palais", "voiture")
 # gestes à deux, déclenchés par les mots de la réplique (le personnage s'approche, sa main atteint vraiment l'autre)
 GESTES_DUO = [("tope", r"\b(tope|bravo|yes|trop bien|on l'a fait|g[ée]nial|check|bien jou[ée])\b"),
               ("epaule", r"\b(calme-toi|t'inqui[eè]te|courage|d[ée]sol[ée]e?|mon pote|ma belle|mon grand|ça va aller|pas grave)\b"),
@@ -896,6 +906,14 @@ def decouper(ph, places, B, fps=30):
                     prec = dict(prec, t0=m_, t1=b_, cible=q["p"], plan="moyen" if plan in SERRES and len(roles) >= 2 else "serre",
                                 mouvement="avance", passage="coupe", tiers=False)
                     plans.append(prec)
+        if q.get("chute") and autres and q["p"] != "narrateur" and plans and plans[-1]["i"] == q["i"]:   # S3 : sur la chute, on coupe
+            p_ = plans[-1]; m_ = _coupe_sur_le_son(lv, fps, q["deb"], p_["t0"] + (p_["t1"] - p_["t0"]) * 0.68, 0.2)   # sur la tête de celui qui encaisse
+            if p_["t0"] + 0.9 <= m_ <= p_["t1"] - 0.6:
+                fin_ = p_["t1"]; p_["t1"] = m_
+                h = _h(B.get("graine", 0), j, 77)
+                prec = dict(p_, t0=m_, t1=fin_, cible=autres[h % len(autres)], plan="tres_serre",
+                            mouvement="zoom_choc" if h % 2 else "avance", passage="coupe", tiers=False, reaction=True)
+                plans.append(prec)
     for k in range(1, len(plans)):                                         # pas de trou entre deux plans d'une même scène
         if plans[k]["scene"] == plans[k - 1]["scene"]: plans[k - 1]["t1"] = plans[k]["t0"]
     return plans

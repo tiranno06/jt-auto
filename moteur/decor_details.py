@@ -221,7 +221,49 @@ def palais(img, rng, res, gag, moment, allume):
     D.sol(img, (238, 236, 232), "damier")
 
 
-NOUVEAUX = {"administration": administration, "hall": hall, "caverne": caverne, "palais": palais}
+def voiture(img, rng, res, gag, moment, allume):
+    """Intérieur de voiture (D4) vu depuis le pare-brise : dossiers et appuie-tête derrière les personnages, lunette arrière qui
+    montre la route, plafonnier, rétroviseur et petit sapin parfumé ; au premier plan, tableau de bord et volant (devant eux)."""
+    c_hab = D._variante((70, 74, 86), rng, 8); img[:] = c_hab
+    nuit = moment in ("soir", "nuit")
+    D.boite(img, 120, 260, 960, 760, (40, 44, 52), 10, 60)                 # lunette arrière (la route derrière)
+    D.ciel(img, 140, 280, 940, 740, moment, rng, True)
+    D.poly(img, [(140, 740), (940, 740), (600, 560), (480, 560)], (90, 92, 100), 0)          # route qui file
+    for k in range(4): D.ligne(img, (540, 580 + k * 42), (540, 600 + k * 42), (250, 250, 240), 6 + 2 * k)
+    for xx in (230, 860):
+        if nuit: cv2.circle(img, (xx, 690), 16, (255, 236, 170), -1, cv2.LINE_AA)
+    cv2.rectangle(img, (120, 260), (960, 760), D.TRAIT, 10, cv2.LINE_AA)
+    D.boite(img, 0, 0, D.W, 150, D.fonce(c_hab, 0.85), 6)                  # pavillon + plafonnier
+    D.boite(img, 470, 70, 610, 130, (240, 236, 220) if nuit else (210, 210, 214), 5, 20)
+    res["lampes"].append((540, 140)) if nuit else None
+    D.ligne(img, (0, 160), (110, 900), D.TRAIT, 24); D.ligne(img, (D.W, 160), (D.W - 110, 900), D.TRAIT, 24)   # montants
+    c_siege = D._variante(rng.choice([(150, 60, 50), (50, 60, 80), (120, 100, 80), (40, 40, 46)]), rng)
+    for x0 in (40, 580):                                                   # dossiers + appuie-tête (derrière les personnages)
+        D.boite(img, x0 + 90, 640, x0 + 370, 820, c_siege, 7, 40)
+        D.boite(img, x0 + 20, 800, x0 + 440, D.H, c_siege, 8, 70)
+        for k in range(3): D.ligne(img, (x0 + 80, 920 + k * 150), (x0 + 380, 920 + k * 150), D.fonce(c_siege, 0.8), 5)
+        D.ligne(img, (x0 + 180, 820), (x0 + 180, 800), (180, 180, 186), 8); D.ligne(img, (x0 + 280, 820), (x0 + 280, 800), (180, 180, 186), 8)
+    D.boite(img, 440, 150, 640, 210, (30, 30, 36), 5, 14)                  # rétroviseur
+    D.boite(img, 455, 160, 625, 200, (150, 180, 210), 3, 10)
+    D.ligne(img, (590, 210), (590, 300), D.TRAIT, 3)                       # petit sapin parfumé
+    D.poly(img, [(590, 300), (560, 380), (620, 380)], (60, 170, 90), 4); D.poly(img, [(590, 340), (550, 430), (630, 430)], (60, 170, 90), 4)
+    D.texte(img, "VANILLE", 555, 395, 625, 425, (255, 255, 255), 14)
+    res["fenetre"] = (120, 260, 960, 760)
+    res["voiture"] = True
+    c_tab = D._variante((44, 46, 54), rng, 6)
+    def devant(a3):
+        D.boite(a3, -20, 1300, D.W + 20, D.H + 20, c_tab, 8, 60)           # tableau de bord
+        D.boite(a3, 30, 1360, D.W - 30, 1400, D.fonce(c_tab, 0.7), 4, 20)
+        D.ecran(a3, 470, 1420, 640, 1530, "bleu"); D.texte(a3, "GPS : demi-tour", 476, 1540, 636, 1580, (220, 230, 240), 18)
+        for xx in (380, 720): D.boite(a3, xx - 40, 1430, xx + 40, 1480, (30, 30, 36), 5, 10)    # aérations
+        cv2.circle(a3, (200, 1410), 170, D.TRAIT, 44, cv2.LINE_AA); cv2.circle(a3, (200, 1410), 170, (36, 36, 42), 30, cv2.LINE_AA)   # volant
+        D.boite(a3, 160, 1385, 240, 1445, (36, 36, 42), 5, 20); D.ligne(a3, (60, 1425), (160, 1412), (36, 36, 42), 24); D.ligne(a3, (240, 1412), (340, 1425), (36, 36, 42), 24)
+        D.boite(a3, 700, 1560, 1010, 1760, D.fonce(c_tab, 0.85), 6, 18); D.boite(a3, 820, 1640, 890, 1666, (150, 150, 160), 3, 8)   # boîte à gants
+        D.boite(a3, 820, 1330, 1000, 1400, (230, 200, 90), 4, 10); D.texte(a3, gag(0), 826, 1334, 994, 1396, D.TRAIT, 16)   # post-it collé
+    return D._avant(devant, 1300, [(0, 1200, 300, 1300)])
+
+
+NOUVEAUX = {"administration": administration, "hall": hall, "caverne": caverne, "palais": palais, "voiture": voiture}
 
 
 # ------------------------------------------------------------------ habillage des lieux existants
@@ -240,9 +282,18 @@ def habiller(img, lieu, rng, res, moment, gag=lambda k: ""):
     elif lieu == "cuisine":
         tapis(img, 560, S + 300, 520, 120, D._variante((220, 120, 60), rng))
         for k in range(3): D.boite(img, 680 + k * 54, 868, 722 + k * 54, 940, D._variante((240, 240, 230), rng), 4, 8)   # bocaux
+        for k, c_ in enumerate(((230, 60, 60), (250, 200, 60), (60, 140, 220))):          # aimants sur le frigo (D3)
+            cv2.circle(img, (60 + k * 40, 860 + (k % 2) * 30), 14, c_, -1, cv2.LINE_AA); cv2.circle(img, (60 + k * 40, 860 + (k % 2) * 30), 14, TRAIT, 3, cv2.LINE_AA)
+        cv2.ellipse(img, (900, 900), (80, 34), 0, 0, 180, D._variante((200, 120, 70), rng), -1, cv2.LINE_AA)   # corbeille de fruits
+        for k, c_ in enumerate(((230, 60, 50), (250, 200, 50), (120, 190, 70))): cv2.circle(img, (860 + k * 40, 890 - (k % 2) * 14), 22, c_, -1, cv2.LINE_AA)
+        cv2.ellipse(img, (900, 900), (80, 34), 0, 0, 180, TRAIT, 4, cv2.LINE_AA)
+        D.boite(img, 980, 760, 1060, 940, (210, 170, 120), 4, 6)                 # planche à découper
     elif lieu == "bureau":
         extincteur(img, 570, S + 30); calendrier(img, 190, 880, 350, 1040, "LUNDI")
         D.postit(img, 375, 870, "Urgent", D._variante((255, 230, 110), rng), -6)
+        D.postit(img, 990, 1010, "Café !", D._variante((150, 220, 255), rng), 5)
+        poubelle(img, 900, S + 40)
+        for k in range(3): D.boite(img, 600 + k * 60, 720 - k * 6, 650 + k * 60, 730 - k * 6, (240, 240, 236), 2)  # feuilles punaisées
     elif lieu == "cabinet_medical":
         poubelle(img, 760, S + 40, (230, 232, 236)); plante_haute(img, 280, S + 40, 0.8)
         D.boite(img, 880, S - 420, 1040, S - 330, (250, 250, 250), 5, 8); D.texte(img, "GANTS", 880, S - 420, 1040, S - 330, (60, 120, 200), 26)
@@ -259,6 +310,12 @@ def habiller(img, lieu, rng, res, moment, gag=lambda k: ""):
     elif lieu == "magasin":
         D.boite(img, 40, 260, 340, 340, (60, 130, 210), 5, 8); D.texte(img, "Rayon 4", 40, 260, 340, 340, (255, 255, 255), 40)
         D.boite(img, 740, 260, 1040, 340, (60, 130, 210), 5, 8); D.texte(img, "Caisses", 740, 260, 1040, 340, (255, 255, 255), 40)
+        x0, y0 = 60, S + 60                                                     # caddie (D3)
+        for k in range(6): D.ligne(img, (x0 + k * 40, y0), (x0 + 20 + k * 34, y0 + 150), (150, 155, 165), 4)
+        cv2.polylines(img, [np.array([(x0, y0), (x0 + 240, y0), (x0 + 220, y0 + 150), (x0 + 20, y0 + 150)], np.int32)], True, TRAIT, 6, cv2.LINE_AA)
+        D.ligne(img, (x0 + 240, y0), (x0 + 290, y0 - 40), TRAIT, 8)
+        for xx in (x0 + 40, x0 + 200): cv2.circle(img, (xx, y0 + 180), 18, TRAIT, -1, cv2.LINE_AA)
+        D.boite(img, 820, S + 60, 1020, S + 200, (250, 220, 90), 5, 6); D.texte(img, "PROMO", 820, S + 60, 1020, S + 200, (220, 40, 40), 44)   # présentoir
     elif lieu == "classe":
         for k, l in enumerate("ABCDEFGHIJ"):                               # frise de l'alphabet
             x = 30 + k * 104; D.boite(img, x, 150, x + 90, 240, D._variante(((240, 120, 100), (120, 180, 230), (250, 210, 90), (140, 200, 140))[k % 4], rng), 4, 8)

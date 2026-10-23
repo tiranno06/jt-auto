@@ -27,7 +27,7 @@ ROLES = {"presentateur": "h", "invite": "h", "envoyee": "f"}
 TEST = {"presentateur": "Bonsoir. Le gouvernement a présenté son budget ce matin. Les députés, eux, cherchent encore les économies.",
         "invite": "Ce n'est pas un échec. C'est une réussite qui ne s'est pas encore produite. Nous restons très confiants.",
         "envoyee": "Je suis en direct de l'Assemblée. Ici, tout le monde attend. Personne ne sait vraiment quoi, mais tout le monde attend."}
-PRIORITE = {"elevenlabs": 4.0, "google": 3.0, "azure": 2.8, "kyutai": 2.2, "zonos": 1.6, "chatterbox": 1.5}
+PRIORITE = {"elevenlabs": 4.0, "google": 3.0, "azure": 2.8, "kyutai": 2.2, "zonos": 1.6, "chatterbox": 1.5, "kokoro": 1.2}
 GOOGLE = {"h": ["Charon", "Orus", "Fenrir", "Iapetus", "Algieba"], "f": ["Aoede", "Kore", "Leda", "Despina", "Erinome"]}
 AZURE = {"h": ["fr-FR-HenriNeural", "fr-FR-RemyMultilingualNeural", "fr-FR-AlainNeural", "fr-FR-JeromeNeural"],
          "f": ["fr-FR-DeniseNeural", "fr-FR-VivienneMultilingualNeural", "fr-FR-BrigitteNeural", "fr-FR-CelesteNeural"]}
@@ -36,7 +36,7 @@ ENERGIE = {"presentateur": 1.12, "envoyee": 1.16, "invite": 1.14}
 
 CREDITS = {"elevenlabs": "ElevenLabs (Eleven v4)", "google": "Google Cloud Text-to-Speech", "azure": "Microsoft Azure Speech",
            "kyutai": "Kyutai TTS (CC BY 4.0), voix CML-TTS (CC BY 4.0)", "zonos": "Zonos (Apache 2.0), voix Multilingual LibriSpeech (CC BY 4.0)",
-           "chatterbox": "Chatterbox (MIT), voix Multilingual LibriSpeech (CC BY 4.0)", "piper": "Piper / SIWIS (CC BY 4.0)"}
+           "chatterbox": "Chatterbox (MIT), voix Multilingual LibriSpeech (CC BY 4.0)", "kokoro": "Kokoro (Apache 2.0)", "piper": "Piper / SIWIS (CC BY 4.0)"}
 
 def journal(*a): print(*a, flush=True)
 
@@ -69,6 +69,25 @@ def prononcer(t):
 ELEVEN_API = "https://api.elevenlabs.io"
 ELEVEN_MODELE = os.environ.get("ELEVENLABS_MODELE") or "eleven_v4"
 USAGES = ("conversational", "characters_animation", "social_media", "entertainment_tv", "advertisement", "narrative_story")
+
+def souffle(graine=0, duree=0.28):
+    """Inspiration discrète (bruit filtré qui monte puis retombe), très bas sous la voix."""
+    rng = np.random.default_rng(graine); n = int(duree * SR)
+    b = rng.normal(0, 1, n).astype(np.float32)
+    b = np.convolve(b, np.ones(6) / 6, "same") - np.convolve(b, np.ones(60) / 60, "same")   # souffle : ni grave ni sifflant
+    env = np.sin(np.linspace(0, np.pi, n)) ** 1.5
+    return (b * env * 0.018 / (np.abs(b).max() + 1e-6) * 3).astype(np.float32)
+
+
+HESITATIONS = ("Euh, ", "Bah, ", "Ben, ", "Attends, ", "Non mais ", "Genre, ")
+def naturel(d, i):
+    """Jeu « conversation » pour les voix gratuites (qui lisent trop proprement) : une petite hésitation en début de réplique
+    de temps en temps (1 réplique sur 4, jamais sur une phrase courte ni sur une question qui commence déjà par un mot d'appui)."""
+    brut = sans_tags(d)
+    if len(brut) < 25 or i % 4 != 1 or re.match(r"(?i)(euh|bah|ben|non|attends|genre|mais|bon|oh|ah|hein)\b", brut): return d
+    h = HESITATIONS[(i // 4) % len(HESITATIONS)]
+    m = re.match(r"^((?:\[[^\]]{1,40}\]\s*)*)(.*)$", d, re.S)
+    reste = m.group(2); return m.group(1) + h + reste[:1].lower() + reste[1:]
 
 # ------------------------------------------------------------------ moteurs
 def sources():
@@ -229,9 +248,33 @@ def _distant(app, cls, methode, *args, delai=600):
         except Exception: pass
         raise RuntimeError(f"{cls} : {type(e).__name__} {str(e)[:120]}")
 
-def _ref(role):
-    p = os.path.join(RACINE, "voix", f"{role}.wav")
-    return open(p, "rb").read() if os.path.exists(p) else None
+EMOTIONS = {"rire": ("laugh", "giggl", "chuckl"), "colere": ("angry", "shout", "yell", "furious", "frustrat"),
+            "triste": ("sad", "cry", "sigh", "sob", "tired"), "vif": ("excited", "surpris", "amazed", "happy", "cheer"),
+            "calme": ("whisper", "calm", "soft")}
+HESITE = set()                                                            # répliques où une hésitation a été ajoutée
+EMO_TEXTE = {}                                                            # texte dit -> émotion (indications de jeu de la réplique)
+
+def emotion_de(t):
+    """Émotion d'une réplique d'après ses indications de jeu ([laughs], [angry]…) et sa ponctuation."""
+    tags = " ".join(TAGS.findall(t or "")).lower()
+    for emo, mots in EMOTIONS.items():
+        if any(m in tags for m in mots): return emo
+    brut = sans_tags(t)
+    if brut.count("!") >= 2 or (brut.isupper() and len(brut) > 6): return "colere"
+    if "?!" in brut or brut.endswith("!"): return "vif"
+    if "..." in brut or "…" in brut: return "calme"
+    return "neutre"
+
+def _ref(role, emo="neutre"):
+    """Voix de référence à imiter (Chatterbox, Zonos) : d'abord celle de l'émotion (voix/refs/<rôle>_<émotion>.wav),
+    sinon la référence générale du rôle. Une référence vivante donne une voix vivante (V1/V2)."""
+    for nom in ((f"refs/{role}_{emo}.wav", f"refs/{role}_neutre.wav") if emo else ()) + (f"{role}.wav",):
+        p = os.path.join(RACINE, "voix", nom)
+        if os.path.exists(p): return open(p, "rb").read()
+    return None
+
+# expressivité Chatterbox selon l'émotion : (exagération, cfg)
+JEU_EMO = {"neutre": (0.65, 0.4), "vif": (0.85, 0.35), "rire": (0.9, 0.3), "colere": (0.95, 0.3), "triste": (0.55, 0.45), "calme": (0.45, 0.5)}
 
 def kyutai(voix, textes):
     return _distant("jt-banque", "Kyutai", "synthese", textes, voix, delai=900)
@@ -243,17 +286,29 @@ def zonos(role, textes):
     return _distant("jt-banque", "Zonos", "synthese", textes, ref, "vif" if role != "presentateur" else "neutre", delai=420)
 
 def chatterbox(role, textes):
+    """Chatterbox imite, pour chaque réplique, la référence du personnage DANS L'ÉMOTION de la réplique (rire, colère…)."""
     import modal
-    ref = _ref(role); refs = {role: ref} if ref else {}
-    jeu = {"presentateur": (0.6, 0.4), "envoyee": (0.75, 0.35), "invite": (0.85, 0.35)}.get(role, (0.7, 0.4))   # plus expressif
-    res = _distant("jt-voix", "Voix", "synthese", [dict(texte=t, role=role, exag=jeu[0], cfg=jeu[1]) for t in textes], refs, delai=900)
+    lignes, refs = [], {}
+    for t in textes:
+        emo = EMO_TEXTE.get(t, "neutre"); cle = f"{role}_{emo}"
+        if cle not in refs:
+            r = _ref(role, emo)
+            if r: refs[cle] = r
+        ex, cfg = JEU_EMO.get(emo, JEU_EMO["neutre"])
+        lignes.append(dict(texte=t, role=cle if cle in refs else role, exag=ex, cfg=cfg))
+    if role not in refs and _ref(role): refs[role] = _ref(role)
+    res = _distant("jt-voix", "Voix", "synthese", lignes, refs, delai=900)
     return [(r.get("wav", b"") if isinstance(r, dict) else r) for r in res]
+
+def kokoro(voix, textes):
+    """Kokoro (Apache 2.0) : voix française naturelle de secours (féminine), avant Piper."""
+    return _distant("jt-banque", "Kokoro", "synthese", textes, voix or "ff_siwis", delai=600)
 
 def synthese(choix, textes):
     m, v = choix["moteur"], choix["voix"]
     try:
         if m != "elevenlabs": textes = [sans_tags(t) for t in textes]
-        return {"elevenlabs": elevenlabs, "google": google, "azure": azure, "kyutai": kyutai, "zonos": zonos, "chatterbox": chatterbox}[m](v, textes)
+        return {"elevenlabs": elevenlabs, "google": google, "azure": azure, "kyutai": kyutai, "zonos": zonos, "chatterbox": chatterbox, "kokoro": kokoro}[m](v, textes)
     except Exception as e:
         journal(f"    moteur {m} indisponible : {str(e)[:160]}"); return [b""] * len(textes)
 
@@ -363,8 +418,13 @@ def note(texte, a, ecoute):
     sim = difflib.SequenceMatcher(None, _norm(texte), _norm(ecoute.get("texte", ""))).ratio()
     mots = ecoute.get("mots") or []
     blanc = max([mots[k + 1][1] - mots[k][2] for k in range(len(mots) - 1)] or [0])
-    ok = sim >= 0.78 and blanc < 0.75 and 0.5 < debit < 1.9
-    return ok, {"sim": round(sim, 2), "blanc": round(blanc, 2), "debit": round(debit, 2)}
+    mos = ecoute.get("mos")                                                # naturel (UTMOS) : 1 = robot, 5 = humain
+    ok = sim >= 0.78 and blanc < 0.75 and 0.5 < debit < 1.9 and (mos is None or mos >= MOS_MIN)
+    d = {"sim": round(sim, 2), "blanc": round(blanc, 2), "debit": round(debit, 2)}
+    if mos is not None: d["mos"] = mos
+    return ok, d
+
+MOS_MIN = float(os.environ.get("MOS_MIN") or 2.6)                         # en dessous : prise jugée robotique, refaite (V3)
 
 # ------------------------------------------------------------------ casting automatique
 def candidats():
@@ -408,7 +468,8 @@ def casting(forcer=False):
         genre = c["genre"] if c["genre"] != "?" else ("h" if 0 < hz < 165 else "f" if hz > 175 else "?")
         expr = expressivite(a)
         score = (PRIORITE[c["moteur"]] + (4 * d.get("sim", 0.8)) - max(0, d.get("blanc", 0) - 0.4)       # articulation : voix bien comprise par Whisper
-                 - abs(np.log(max(d.get("debit", 1), 1e-3))) + 0.35 * min(expr, 4.0))         # bonus aux voix qui « jouent »
+                 - abs(np.log(max(d.get("debit", 1), 1e-3))) + 0.35 * min(expr, 4.0)          # bonus aux voix qui « jouent »
+                 + (1.5 * (d["mos"] - 3.0) if d.get("mos") is not None else 0.0))     # naturel UTMOS : les voix robotiques descendent
         d["expr"] = round(expr, 1)
         journal(f"  {c['moteur']:10s} {(c.get('nom') or c['voix'])[:38]:38s} genre {genre} f0 {hz:5.0f} {d} {'OK' if ok else 'refusée'} score {score:.2f}")
         if ok: fiches.append(dict(c, genre=genre, f0=round(hz), score=round(score, 2)))
@@ -419,7 +480,8 @@ def casting(forcer=False):
         if role == "invite":                                               # l'invité doit sonner différemment du présentateur
             p0 = roles.get("presentateur", [{}])[0] if roles.get("presentateur") else {}
             liste.sort(key=lambda f: -(f["score"] + (0.3 if abs(f.get("f0", 0) - p0.get("f0", 0)) > 20 else 0)))
-        roles[role] = liste[:3]
+        gratuites = [f for f in liste if f["moteur"] != "elevenlabs"]       # toujours 2 voix gratuites en réserve : si le crédit
+        roles[role] = liste[:3] + [f for f in gratuites[:2] if f not in liste[:3]]   # payant s'épuise en route, la banque continue
         if liste: pris.add((liste[0]["moteur"], liste[0]["voix"]))
         journal(f"  -> {role} : " + ", ".join(f"{f['moteur']}:{f['voix']}" for f in roles[role]))
     fiche = {"date": str(datetime.date.today()), "sources": signature, "roles": roles}
@@ -445,6 +507,12 @@ def generer(repliques):
     audios, mots, utilises = [None] * n, [None] * n, set()
     meilleures = {}                                                        # i -> (sim, clip, mots, moteur) : meilleure prise refusée
     dits = [prononcer(r.get("d") or r["t"]) for r in repliques]
+    EMO_TEXTE.clear()
+    for d in dits: EMO_TEXTE[sans_tags(d)] = emotion_de(d)
+    if not any(c["moteur"] == "elevenlabs" for v in fiche["roles"].values() for c in v[:1]) or "elevenlabs" in EN_PANNE:
+        dits_v = [naturel(d, i) for i, d in enumerate(dits)]                # voix gratuites : petites hésitations de vraie conversation (V7)
+        HESITE.clear(); HESITE.update(i for i, (a_, b_) in enumerate(zip(dits, dits_v)) if a_ != b_); dits = dits_v
+        for d in dits: EMO_TEXTE.setdefault(sans_tags(d), emotion_de(d))
     CONTEXTE.clear()
     for i, d in enumerate(dits):                                           # chaque réplique connaît la phrase d'avant et d'après
         CONTEXTE[d] = (dits[i - 1] if i else "", dits[i + 1] if i + 1 < n else "")
@@ -453,7 +521,8 @@ def generer(repliques):
     def voix_de(role):
         if fiche["roles"].get(role):                                       # une voix fixe par personnage : jamais celle d'un autre
             autres = {v for r, v in principales.items() if r != role}
-            return [c for c in fiche["roles"][role] if (c["moteur"], c["voix"]) not in autres] or fiche["roles"][role][:1]
+            l = [c for c in fiche["roles"][role] if (c["moteur"], c["voix"]) not in autres] or fiche["roles"][role][:1]
+            return [c for c in l if c["moteur"] not in EN_PANNE] or l      # crédit épuisé en route : on passe aux voix gratuites
         # voix off (« narrateur ») : une voix de la banque que n'utilise aucun personnage du sketch
         autres = [c for r in ("envoyee", "presentateur", "invite") for c in fiche["roles"].get(r, [])[1:]]
         libres = [c for c in autres if (c["moteur"], c["voix"]) not in pris]
@@ -523,4 +592,12 @@ def generer(repliques):
                 if all(audios[i] is not None for i in manque): journal(f"  {role} : répliques gardées en ElevenLabs malgré le contrôle (français garanti)")
         if any(audios[i] is None for i in idx):
             return None                                                    # le robot basculera sur la chaîne de secours
+    if not ("elevenlabs" in utilises and len(utilises) == 1):              # voix gratuites : une petite inspiration avant certaines
+        for i, a in enumerate(audios):                                     # répliques (on entend respirer, comme une vraie personne)
+            if a is None or i % 3 != 2 or repliques[i]["p"] == "narrateur": continue
+            s = souffle(i); audios[i] = np.concatenate([s, a]).astype(np.float32)
+            if mots[i]: mots[i] = [(m, d0 + len(s) / SR, d1 + len(s) / SR) for m, d0, d1 in mots[i]]
+    for i in HESITE:                                                       # l'hésitation ajoutée n'est pas dans les sous-titres : on retire
+        if mots[i] and len(mots[i]) > 2 and re.sub(r"\W", "", mots[i][0][0].lower()) in ("euh", "bah", "ben", "attends", "non", "genre"):
+            mots[i] = mots[i][1:] if mots[i][0][0].lower().strip(" ,.") not in ("non",) else mots[i][2:]   # son instant des mots
     return audios, mots, sorted(CREDITS[m] for m in utilises)

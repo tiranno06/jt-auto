@@ -113,7 +113,8 @@ GESTES_TOON = [((-12, 6), (14, 100)), ((-14, -100), (12, -6)), ((-22, -88), (22,
 # gestes expressifs en version naturelle (coudes pliés près du corps, avant-bras vers l'avant), comme dans les vidéos de référence
 POSES_TOON = {"explique": ((-12, 6), (12, 98)), "bras_ouverts": ((-26, -86), (26, 86)), "haussement": ((-30, -96), (30, 96)),
               "pointe_d": ((-12, 6), (62, 12)), "pointe_g": ((-62, -12), (12, -6)), "stop": ((-12, 6), (38, 112)),
-              "compte": ((-30, -92), (30, 102)), "poing": ((-12, 6), (40, 120))}
+              "compte": ((-30, -92), (30, 102)), "poing": ((-12, 6), (40, 120)),
+              "poches": ((-22, 40), (22, -40)), "appuye": ((-12, 6), (22, -40)), "pianote": ((-8, 100), (8, -100)), "volant": ((-32, 80), (32, -80))}
 MAINS_TOON = [("ouverte", "paume"), ("paume", "ouverte"), ("paume", "paume"), ("ouverte", "ouverte"), ("ouverte", "index"), ("index", "ouverte")]
 GESTES_TETE = ("facepalm", "gratte_tete", "menton", "telephone", "desespoir", "pouce")   # gestes qui montent vraiment près du visage
 
@@ -387,6 +388,8 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
     MINUTAGE[:] = [(q["deb"], q["fin"], q["texte"], {"presentateur": "Jojo", "invite": "Kévin", "envoyee": "Lila"}.get(q["p"], "voix off"))
                    for q in ph if not q["teaser"] and q["p"] != "narrateur"]
     PH[:] = ph
+    if (os.environ.get("APERCU_RAPIDE") or "") == "1":                     # aperçu rapide : les 10 premières secondes seulement
+        total = min(total, 10.0); FIN_CARTE = None
     nf = int(total * FPS)
     # placement : qui est dans chaque scène, à quelle place
     places = {}
@@ -521,6 +524,9 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         return next((x for x in reversed(ph) if x["deb"] - 0.25 <= tm), ph[0])
 
     ASSIS = (B or {}).get("assis") or {}
+    GESTES_ORIG = []                                                       # P4 : instants des gestes dans la vidéo d'origine (tenus 2 s au moins)
+    for t_ in sorted((B or {}).get("gestes_origine") or []):
+        if not GESTES_ORIG or t_ - GESTES_ORIG[-1] >= 2.0: GESTES_ORIG.append(t_)
     CINE = dict((B or {}).get("cine") or {})                               # effets « cinéma » de l'épisode (varient d'une vidéo à l'autre)
     CINE.update(focus=False, profondeur=False)                             # image toujours nette : aucun flou de mise au point ni de premier plan
     TEINTES = {"cri": (1.07, 0.97, 0.94), "colere": (1.07, 0.97, 0.94), "pleurs": (0.94, 0.98, 1.07), "triste": (0.94, 0.98, 1.07),
@@ -641,6 +647,11 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
                 if autre_ in places[scene]: p["penche"] *= 1 if position(scene, autre_)[0] > x else -1
             if emo == "blase" and not parle: p["pied"] = abs(math.sin(tm * 5.5))   # il tape du pied, impatient
             if roule: p.update(yeux="roule", sourcils="neutre", forme="moue")
+            if TOON:                                                       # P1 : gros plans plus expressifs (larmes, sueur)
+                ex_ = tuple(p.get("effets") or ())
+                if emo in ("triste", "soupir") and q.get("intensite", 1) >= 2: ex_ += ("larme",)
+                if emo == "gene" or (emo == "choc" and q.get("intensite", 1) >= 3): ex_ += ("sueur",)
+                p["effets"] = ex_
             if cam_regard: p.update(forme="coin" if (len(role) + int(tm)) % 2 else "neutre", sourcils="neutre")
         if recule:                                                         # recul face à quelqu'un qui crie
             xa = position(scene, q["p"])[0]; u_r = _ressort((tm - t_r) / 0.35) * (1 - _ease((tm - q["fin"] - 0.1) / 0.3))
@@ -648,6 +659,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         if not parle:                                                      # celui qui écoute garde la bouche fermée : il ne doit
             p["forme"] = BOUCHE_ECOUTE.get(p.get("forme"), p.get("forme"))  # jamais avoir l'air de parler avec la voix d'un autre
             p["bouche"] = 0.0; p.pop("viseme", None)
+            if TOON and B and emo == "choc" and q.get("intensite", 1) >= 2: p["forme"] = "machoire"; p["bouche"] = 0.3   # P1 : mâchoire qui tombe (figée)
         # bouche synchronisée sur la voix
         if parle:
             k = int((tm - q["deb"]) * FPS); lv = float(q["lv"][k]) if 0 <= k < len(q["lv"]) else 0.0
@@ -720,6 +732,10 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
                 if TOON: per = 3.2 - 0.8 * float(((B or {}).get("rythme") or {}).get("energie", 0.3))   # toon : gestes tenus, comme dans les vidéos
                 k_ = int((tm - q["deb"]) / per + q["i"] * 7); trans = 0.7 if TOON else 0.55
                 u = (_ease if TOON else _ressort)(((tm - q["deb"]) % per) / trans); elan = 0.0 if TOON else u - _ease(((tm - q["deb"]) % per) / 0.55)
+                g_o = [t_ for t_ in GESTES_ORIG if q["deb"] - 0.2 <= t_ <= tm]       # P4 : le geste change quand l'acteur de l'original bouge
+                if TOON and g_o and len([t_ for t_ in GESTES_ORIG if q["deb"] - 0.2 <= t_ <= q["fin"]]) >= 1:
+                    k_ = len(g_o) + q["i"] * 7; u = _ease((tm - g_o[-1]) / trans)
+                    if tm - q["deb"] < trans and len(g_o) == 1: u = _ease((tm - q["deb"]) / trans)
                 GS, MS = (GESTES_TOON, MAINS_TOON) if TOON else (GESTES, MAINS_CONV)
                 g = GS[k_ % len(GS)]; g0 = GS[(k_ - 1) % len(GS)] if tm - q["deb"] >= per else ((-18, 8), (18, -8))
                 mains = MS[k_ % len(MS)]
@@ -739,6 +755,11 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             for j_ in range(min(k_, len(q["lv"]) - 1), max(f3, k_ - f9), -1):
                 if q["lv"][j_] - q["lv"][j_ - f3] > 0.32:
                     b_ = math.sin(math.pi * min(1.0, (k_ - j_) / FPS / 0.3)) * (0.45 if TOON else 1.0); bd = (bd[0], bd[1] - 28 * b_); bg = (bg[0], bg[1] + 14 * b_); break
+        if TOON and B and ASSIS.get(scene) == role and B.get("lieux") and B["lieux"][min(scene, len(B["lieux"]) - 1)] == "voiture" and g_txt not in GESTES_TETE:
+            bg = POSES_TOON["volant"][0]; mains = ("ouverte", mains[1])            # P2 : au volant, une main reste sur le volant
+            if not parle: bd = POSES_TOON["volant"][1]; mains = ("ouverte", "ouverte")
+        if g_txt == "pianote": bd = (bd[0], bd[1] + 5 * math.sin(tm * 19))         # le pouce tape sur l'écran
+        if g_txt == "appuye": p["hanche"] = 0.9; p["tilt"] += 4                 # déhanché
         p["bras_g"], p["bras_d"] = bras_naturel(bg, g_txt), bras_naturel(bd, g_txt)
         p["main_forme_g"], p["main_forme_d"] = mains
         if B: duo(p, role, tm, q, scene, parle)                            # gestes à deux (tope, main sur l'épaule, donner, pousser)
@@ -770,6 +791,11 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             if ph_ < 0.16: dt_c = ph_
             elif emo == "panique" and 0.24 <= ph_ < 0.40: dt_c = ph_ - 0.24
         if dt_c is not None and p["yeux"] == "ouverts": p["yeux"] = "fermes" if 0.035 <= dt_c < 0.11 else "vides"
+        if g_txt == "pianote":                                             # téléphone tenu devant lui, il regarde l'écran
+            o = objets.get(("telephone", round(s, 2)))
+            if o is None: o = objets[("telephone", round(s, 2))] = M.objet("telephone", s * ((0.8 if TOON else 0.5) if FICHES else 1.0))
+            if o is not None: p["main_d"] = o
+            p["regard"] = (0.15 * (p.get("tq") or 0), 0.7)
         # objet en main pendant la réplique
         if mien and mien.get("objet") and tm <= mien["fin"] + 0.3:
             o = objets.get((mien["objet"], round(s, 2)))
