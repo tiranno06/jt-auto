@@ -1,633 +1,270 @@
 {
- "titre": "ANNIVERSAIRE SURPRISE AU RESTA",
- "sujet": "ANNIVERSAIRE SURPRISE AU RESTA",
- "ecran": "ANNIVERSAIRE S",
+ "titre": "NETFLIX PREMIUM",
+ "sujet": "NETFLIX PREMIUM",
+ "ecran": "PUBS PREMIUM",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "POV : Tu crois savoir où tu vas ?",
- "question": "Où iriez-vous pour célébrer deux ans d'amour ?",
+ "titre_accroche": "Quand ton Premium a des pubs.",
+ "question": "",
  "running_gag": "",
- "verite": "",
+ "verite": "Netflix Premium avec pubs est une arnaque déguisée où les abonnés paient pour éviter les pubs, mais finissent par en subir malgré tout.",
  "repliques": [
   {
-   "p": "envoyee",
-   "t": "Putain, je sais pas comment je m 'habille pour ce soir.",
-   "_deb": 0.0,
-   "_fin": 2.7,
-   "objet": "telephone"
+   "p": "narrateur",
+   "t": "Quand ton Premium a des pubs.",
+   "d": "[excited] Quand ton Premium a des pubs."
   },
   {
    "p": "presentateur",
-   "t": "Pourquoi tu veux t 'habiller, tu vas où?",
-   "_deb": 3.78,
-   "_fin": 5.12,
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "T 'es bête, mais t 'imagines quand même, ça fait deux ans qu 'on est ensemble, ça passe tellement vite.",
-   "_deb": 5.78,
-   "_fin": 11.66,
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Eh ouais, ouais, ça fait deux ans bien sûr, c 'est évident, comment oublier la date,",
-   "_deb": 13.38,
-   "_fin": 17.56,
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "ouais. Tu m 'as prévu quoi?",
-   "_deb": 17.56,
-   "_fin": 20.02,
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Euh, bah, à ton avis, qu 'est -ce que j 'ai prévu?",
-   "_deb": 20.42,
-   "_fin": 24.3,
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Réfléchis.",
-   "_deb": 24.3,
-   "_fin": 25.04,
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "Je sais pas.",
-   "_deb": 25.52,
-   "_fin": 26.5,
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Bah, essaye de réfléchir un peu quand même.",
-   "_deb": 26.94,
-   "_fin": 28.8,
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "Attends, non, me dis pas qu 'on va là où je pense",
-   "_deb": 28.38,
-   "_fin": 31.78,
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Si, si, c 'est exactement là où on va ce soir",
-   "_deb": 32.2,
-   "_fin": 34.44,
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "Non, me dis pas qu 'on va au Beluga",
-   "_deb": 35.06,
-   "_fin": 36.94,
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Beluga, Beluga, mais oui, bien sûr que oui, on va là -bas Évident, par contre, ça s 'écrit comment Beluga?",
-   "_deb": 37.28,
-   "_fin": 45.0,
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "Bah, B -E -L -U -G -A",
-   "_deb": 45.24,
-   "_fin": 47.88,
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Ok, bah écoute, c 'est exactement là où on va ce soir",
-   "_deb": 48.98,
-   "_fin": 50.94,
-   "objet": "bouteille"
-  },
-  {
-   "p": "invite",
-   "t": "Mais t 'es vraiment un mec en or",
-   "_deb": 51.48,
-   "_fin": 53.72,
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Ouais, ouais, évident Sous",
-   "_deb": 54.86,
-   "_fin": 59.22,
-   "objet": "telephone"
+   "t": "PUTAIN, MON PREMIUM A DES PUBS !",
+   "d": "[horrified] PUTAIN, MON PREMIUM A DES PUBS !"
   },
   {
    "p": "envoyee",
-   "t": "-titrage Société Radio -Canada",
-   "_deb": 59.22,
-   "_fin": 59.76,
+   "t": "Ils appellent ça ‘Premium’ ? Moi j’appelle ça ‘l’abonnement qui te fait regretter ton écran’.",
+   "d": "[sarcastic] Ils appellent ça ‘Premium’ ? Moi j’appelle ça ‘l’abonnement qui te fait regretter ton écran’.",
+   "chute": true
+  },
+  {
+   "p": "invite",
+   "t": "Netflix Premium avec pubs, c’est comme un resto étoilé qui te sert ton plat... avec la carte des desserts *en* couverts.",
+   "d": "[excited] Netflix Premium avec pubs, c’est comme un resto étoilé qui te sert ton plat... avec la carte des desserts en couverts !",
+   "chute": true
+  },
+  {
+   "p": "presentateur",
+   "t": "Bonne nouvelle : les pubs sur Netflix Premium sont un service de streaming alternatif. Elles te permettent de regarder des pubs... en mode 'binge-watching'.",
+   "d": "[deadpan] Bonne nouvelle : les pubs sur Netflix Premium sont un service de streaming alternatif. Elles te permettent de regarder des pubs... en mode 'binge-watching'.",
    "chute": true,
-   "objet": "telephone"
+   "attente": 0.8
   }
  ],
- "bandeau": [],
+ "bandeau": [
+  "NETFLIX PREMIUM : LES PUBS EN PLUS",
+  "LE RESTO ÉTOILÉ QUI TE FAIT PAYER LES COUVERTS",
+  "BINGE-WATCHING : MAINTENANT POUR LES PUBS"
+ ],
  "gag": null,
- "legende": "Quand l'amour se cache dans les détails d'un dîner surprise.",
+ "legende": "Quand ton abonnement Premium te fait douter de tout. 😤 Tag un ami qui a cru à la pub.",
  "hashtags": [
   "petitsdramas",
-  "amour",
-  "surprise",
-  "rendezvous",
-  "anniversaire",
-  "diner",
-  "complicite"
+  "humour",
+  "sketch",
+  "pov",
+  "netflix",
+  "arnaque"
  ],
- "sources": [
-  "https://www.tiktok.com/@charly.bse/video/7696887555169471776?_r=1&_t=ZN-9Am7CSapwEY"
- ],
+ "sources": [],
  "decoupage": [
   {
-   "scene": "1",
+   "scene": "Jojo, assis sur son canapé, regarde son écran avec horreur.",
    "repliques": [
-    0,
-    17
+    1
    ],
-   "lieu": "",
-   "son": "",
-   "duree": 0,
-   "decor": "quiet city street at dusk, parked car at the curb, sidewalk, street lamps, shop fronts"
+   "lieu": "plateau",
+   "son": "dun_dun",
+   "duree": 3.0,
+   "decor": "cozy living room, sofa, television displaying Netflix with ads, bright daylight"
   },
   {
-   "scene": "2",
+   "scene": "Lila et Kévin réagissent à sa découverte.",
    "repliques": [
-    1,
     2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-    10,
-    11,
-    12,
-    13,
-    14,
-    15,
-    16
+    3
    ],
-   "lieu": "",
+   "lieu": "plateau",
    "son": "",
-   "duree": 0,
-   "decor": "un salon cosy avec un canapé beige, une table basse en bois clair, des étagères remplies de livres colorés, un cadre photo en noir et blanc, une lampe d'appoint"
+   "duree": 5.0,
+   "decor": "cozy living room, sofa, television displaying Netflix with ads, bright daylight"
+  },
+  {
+   "scene": "Chute finale.",
+   "repliques": [
+    4
+   ],
+   "lieu": "plateau",
+   "son": "",
+   "duree": 4.0,
+   "decor": "cozy living room, sofa, television displaying Netflix with ads, bright daylight"
   }
  ],
  "studio": {
   "moment": "soir",
-  "lieux": [
-   "rue",
-   "salon"
-  ],
+  "lieux": "salon",
   "costumes": {
-   "invite": {
+   "presentateur": {
     "haut": "tshirt",
-    "c_haut": "rouge",
-    "motif": "uni",
+    "c_haut": "bleu",
     "bas": "jean",
     "chaussures": "baskets",
     "details": [
-     "bracelet",
-     "collier"
-    ]
+     "barbe_courte"
+    ],
+    "chapeau": null
    },
    "envoyee": {
     "haut": "chemise",
-    "c_haut": "bleu marine",
-    "motif": "uni",
+    "c_haut": "blanc",
     "bas": "pantalon",
     "chaussures": "ville",
     "details": [
-     "cravate",
-     "montre"
-    ]
+     "lunettes_vue"
+    ],
+    "chapeau": null
+   },
+   "invite": {
+    "haut": "pull",
+    "c_haut": "rouge",
+    "bas": "jogging",
+    "chaussures": "baskets",
+    "details": [
+     "moustache"
+    ],
+    "chapeau": null
    }
   },
   "personnages": {
-   "invite": {
+   "presentateur": {
     "genre": "h",
-    "age": 28,
+    "age": 40,
     "taille": 1,
-    "corpulence": 0.4,
+    "corpulence": 0.8,
     "cheveux": "court",
-    "c_cheveux": "blond",
     "barbe": "trois_jours"
    },
    "envoyee": {
     "genre": "f",
-    "age": 30,
-    "taille": 1,
-    "corpulence": 0.3,
-    "cheveux": "long",
-    "c_cheveux": "brun",
+    "age": 35,
+    "taille": 0.95,
+    "corpulence": 0.7,
+    "cheveux": "carre",
     "barbe": "rien"
+   },
+   "invite": {
+    "genre": "h",
+    "age": 38,
+    "taille": 1.05,
+    "corpulence": 0.9,
+    "cheveux": "moustache",
+    "barbe": "moustache"
    }
   },
-  "gags": [
-   "Affiche : 'Beluga : où le poisson rencontre le champagne'",
-   "Post-it sur le frigo : 'Ne pas oublier les bougies'",
-   "Tableau : 'Notre histoire en 2 ans : 730 jours de bonheur'"
-  ],
-  "ambiances": [
-   "neon"
-  ],
-  "cadence": "normal",
-  "plans": [
-   {
-    "replique": 0,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "gratte_tete",
-    "reaction": "aucun"
-   },
-   {
-    "replique": 1,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "haussement",
-    "reaction": "sceptique"
-   },
+  "decoupe": [
    {
     "replique": 2,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "bras_ouverts",
-    "reaction": "choc"
+    "plans": [
+     {
+      "debut": 0.0,
+      "plan": "moyen",
+      "cible": "envoyee",
+      "mouvement": "fixe"
+     }
+    ]
    },
    {
     "replique": 3,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "pointe_g",
-    "reaction": "regard_camera"
-   },
-   {
-    "replique": 4,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "telephone",
-    "reaction": "gene"
-   },
-   {
-    "replique": 5,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "gratte_tete",
-    "reaction": "soupir"
-   },
-   {
-    "replique": 6,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "pointe_d",
-    "reaction": "facepalm"
-   },
-   {
-    "replique": 7,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "desespoir",
-    "reaction": "choc"
-   },
-   {
-    "replique": 8,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "facepalm",
-    "reaction": "sceptique"
-   },
-   {
-    "replique": 9,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "pointe_g",
-    "reaction": "regard_camera"
-   },
-   {
-    "replique": 10,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "pointe_d",
-    "reaction": "panique"
-   },
-   {
-    "replique": 11,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "sourire",
-    "reaction": "joie"
-   },
-   {
-    "replique": 12,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "bras_ouverts",
-    "reaction": "choc"
-   },
-   {
-    "replique": 13,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "explique",
-    "reaction": "rire"
-   },
-   {
-    "replique": 14,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "pouce",
-    "reaction": "fier"
-   },
-   {
-    "replique": 15,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "amour",
-    "reaction": "sourire"
-   },
-   {
-    "replique": 16,
-    "plan": "large",
-    "mouvement": "zoom_choc",
-    "geste": "bras_ouverts",
-    "reaction": "aucun"
-   }
-  ],
-  "objets": [
-   {
-    "replique": 0,
-    "objet": "telephone"
-   },
-   {
-    "replique": 5,
-    "objet": "telephone"
-   },
-   {
-    "replique": 14,
-    "objet": "bouteille"
-   }
-  ],
-  "decors_vus": {
-   "presentateur": "un salon cosy avec un canapé beige, une table basse en bois clair, des étagères remplies de livres colorés, un cadre photo en noir et blanc, une lampe d'appoint allumée et une grande fenêtre avec vue sur une ville illuminée.",
-   "invite": "même décor que le présentateur : un canapé beige, une table basse avec une bouteille de champagne ouverte, des livres sur les étagères et une vue nocturne à travers la fenêtre."
-  },
-  "lieux_de": {
-   "envoyee": "rue",
-   "presentateur": "salon"
-  }
- },
- "doublage": {
-  "piste": "/tmp/tmp2jnul8ya/piste.wav",
-  "duree": 60.14,
-  "source": "https://www.tiktok.com/@charly.bse/video/7696887555169471776?_r=1&_t=ZN-9Am7CSapwEY",
-  "auteur": "charly.bse",
-  "contexte": "Deux amis, un homme et une femme, discutent par téléphone dans un salon cosy. Ils évoquent leur anniversaire de deux ans ensemble et l'endroit où ils vont dîner ce soir. L'ambiance est à la fois complice et pleine de suspense.",
-  "evenements": [],
-  "visuel": {
-   "duree": 60.5,
-   "nb_plans": 1,
-   "duree_plan": 60.48,
-   "coupes": [],
-   "plans": {
-    "tres_serre": 0.182,
-    "serre": 0.157,
-    "moyen": 0.0,
-    "large": 0.661
-   },
-   "camera": {
-    "fixe": 1.0,
-    "avance": 0.0,
-    "recul": 0.0,
-    "travelling": 0.0,
-    "epaule": 0.0
-   },
-   "nb_personnes": 1,
-   "personnes": [
-    {
-     "place": "centre",
-     "presence": 0.339,
-     "habit": [
-      208,
-      177,
-      141
-     ],
-     "cheveux": [
-      233,
-      204,
-      166
-     ],
-     "sourire": 0.683,
-     "taille": 0.304,
-     "tete_penchee": 3.7,
-     "regard_cote": 0.073
-    }
-   ],
-   "visages": true,
-   "sourires": 0.683,
-   "energie": 0.044,
-   "mur": [
-    230,
-    206,
-    173
-   ],
-   "palette": [
-    [
-     239,
-     209,
-     172,
-     0.462
-    ],
-    [
-     38,
-     29,
-     12,
-     0.154
-    ],
-    [
-     196,
-     103,
-     27,
-     0.151
-    ],
-    [
-     183,
-     151,
-     115,
-     0.124
-    ],
-    [
-     18,
-     99,
-     138,
-     0.068
-    ],
-    [
-     171,
-     201,
-     201,
-     0.04
+    "plans": [
+     {
+      "debut": 0.0,
+      "plan": "serre",
+      "cible": "invite",
+      "mouvement": "avance"
+     }
     ]
-   ],
-   "lumiere": {
-    "luminosite": 185.7,
-    "chaleur": 60.0,
-    "saturation": 119.1
-   },
-   "moment": "jour"
-  },
-  "audio": {
-   "duree": 60.1,
-   "nb_voix": 2,
-   "voix": [
-    {
-     "hz": 190,
-     "genre": "f",
-     "part": 0.55
-    },
-    {
-     "hz": 263,
-     "genre": "f",
-     "part": 0.45
-    }
-   ],
-   "debit": 3.37,
-   "blanc_moyen": 0.71,
-   "coupes": 3,
-   "dynamique_db": 25.1,
-   "cris": 0.014,
-   "musique": null,
-   "impacts": 0,
-   "impacts_10s": 0.0,
-   "graves": 0,
-   "aigus": 0,
-   "sur_vanne": 0,
-   "evenements": {},
-   "emotions": {
-    "sourire": 2,
-    "confused": 1,
-    "sceptique": 1,
-    "emue": 1,
-    "ironique": 1,
-    "inquiet": 1,
-    "mystereux": 1,
-    "reflechit": 1
-   }
-  },
-  "video_origine": "/tmp/tmp2jnul8ya/src.mp4"
- },
- "fiche": {
-  "note": 0,
-  "decision": "vidéo manuelle (bande son d'une vidéo TikTok)",
-  "decoupage": [
-   {
-    "scene": "1",
-    "repliques": [
-     0,
-     1,
-     2,
-     3,
-     4
-    ],
-    "lieu": "",
-    "son": "",
-    "duree": 0.0,
-    "decor": "salons cosy avec canapé beige, table basse en bois clair, étagères remplies de livres, cadre photo et lampe d'appoint",
-    "titre": "Préparation du rendez-vous"
-   },
-   {
-    "scene": "2",
-    "repliques": [
-     5,
-     6,
-     7,
-     8,
-     9,
-     10,
-     11,
-     12,
-     13,
-     14,
-     15,
-     16
-    ],
-    "lieu": "",
-    "son": "",
-    "duree": 0.0,
-    "decor": "salons cosy avec vue sur une ville illuminée à travers une grande fenêtre, même canapé et table basse, mais avec une bouteille de champagne ouverte sur la table",
-    "titre": "Révélation du plan"
    }
   ]
  },
- "_monte": true,
- "_separes": true,
+ "fiche": {
+  "fil": "Jojo découvre avec horreur que son abonnement Netflix Premium contient des publicités. Lila et Kévin tentent de justifier cette absurdité avec des comparaisons déjantées.",
+  "concept": "Un gag éclair qui exploite l'absurdité d'un abonnement 'premium' incluant des pubs, avec une chute qui pousse la logique à son paroxysme.",
+  "format": "Gag éclair (3 répliques)",
+  "angle": "L'absurdité d'un service premium qui se transforme en arnaque, révélée par une chute brutale.",
+  "resume_factuel": "Netflix a intégré des publicités dans son abonnement 'Premium', ce qui a provoqué la colère des utilisateurs.",
+  "faits_reels": [
+   "Netflix a ajouté des pubs dans son abonnement Premium.",
+   "Les abonnés Premium paient pour éviter les pubs.",
+   "Les utilisateurs sont mécontents de cette décision."
+  ],
+  "inventions": [
+   "La comparaison du restaurant étoilé par Kévin.",
+   "La réaction disproportionnée de Jojo.",
+   "La chute sur le 'binge-watching' des pubs."
+  ],
+  "decoupage": [
+   {
+    "scene": "Jojo, assis sur son canapé, regarde son écran avec horreur.",
+    "repliques": [
+     1
+    ],
+    "lieu": "plateau",
+    "son": "dun_dun",
+    "duree": 3.0,
+    "decor": "cozy living room, sofa, television displaying Netflix with ads, bright daylight"
+   },
+   {
+    "scene": "Lila et Kévin réagissent à sa découverte.",
+    "repliques": [
+     2,
+     3
+    ],
+    "lieu": "plateau",
+    "son": "",
+    "duree": 5.0,
+    "decor": "cozy living room, sofa, television displaying Netflix with ads, bright daylight"
+   },
+   {
+    "scene": "Chute finale.",
+    "repliques": [
+     4
+    ],
+    "lieu": "plateau",
+    "son": "",
+    "duree": 4.0,
+    "decor": "cozy living room, sofa, television displaying Netflix with ads, bright daylight"
+   }
+  ],
+  "titres_sujet": [
+   "Quand tu réalises que ton abonnement 'Netflix Premium' inclut... les pubs."
+  ],
+  "verification_web": false,
+  "note": 80.0,
+  "critique": "AVIS DU PUBLIC TEST (spectateurs sans contexte) :\n- Inès : a compris, rire 8/10, aurait scrollé à la réplique 1\n- Karim : a compris, rire 9/10\n- Sandrine : N A PAS COMPRIS, rire 3/10, aurait scrollé à la réplique 0, perdu par : Les références trop spécifiques aux codes TikTok et Netflix Premium (ne comprend pas le concept de 'binge-watching' ou 'Premium')\nCritiques constructives du public :\n- Réplique n°3 : La chute avec 'binge-watching' est trop niche et méta pour un public non initié. Remplacer par une comparaison plus universelle, comme 'C’est comme si tu payais pour le film... et qu’on te facturait aussi les interruptions' pour toucher Sandrine.\n- Ajouter un visuel ou un carton explicatif très court (1-2 secondes) après la réplique n°0 pour clarifier le concept de 'Premium avec pubs' pour les spectateurs comme Sandrine, sans ralentir le rythme.\n- Réplique n°1 : Le ton sarcastique de Lila est excellent, mais la phrase pourrait être raccourcie pour plus d'impact : 'Premium ? Plutôt l’abonnement qui te nique.' (plus punchy et mémorable).\n- Introduire un deuxième exemple concret après la réplique n°2 pour éviter la monotonie. Par exemple, une réplique de Jojo du type : 'C’est comme acheter une voiture de luxe... et découvrir qu’elle a un compteur kilométrique truqué.'\n- La réplique n°0 est trop courte et manque de punch. La remplacer par quelque chose comme : 'PUTAIN, NETFLIX ! MON PREMIUM, C’EST DU PREMIUM... POUR LES PUBS !' pour marquer davantage les esprits et donner un t",
+  "decision": "prêt pour production"
+ },
  "_voix_hz": {
-  "envoyee": 320,
-  "invite": 255,
-  "presentateur": 190
+  "narrateur": 220,
+  "envoyee": 210,
+  "presentateur": 96,
+  "invite": 119
  },
  "_voix_genre": {
-  "envoyee": "f",
-  "invite": "f",
-  "presentateur": "h"
+  "presentateur": "h",
+  "invite": "h"
  },
  "realisation": {
   "moment": "soir",
   "lieux": [
-   "rue",
+   "salon",
+   "salon",
    "salon"
   ],
-  "gags": [
-   "Affiche : 'Beluga : où le poisson rencontre le champagne'",
-   "Post-it sur le frigo : 'Ne pas oublier les bougies'",
-   "Tableau : 'Notre histoire en 2 ans : 730 jours de bonheur'"
-  ],
+  "gags": [],
   "ambiances": [
-   "neon",
    "poussiere"
   ],
-  "source": "auteur+image",
+  "source": "auteur",
   "tenues": {
+   "presentateur": "tshirt",
    "envoyee": "chemise",
-   "presentateur": "pull",
-   "invite": "tshirt"
+   "invite": "pull"
   },
   "plans": [
-   "serre/fixe",
-   "serre/fixe",
-   "serre/fixe",
-   "serre/fixe",
-   "serre/fixe",
-   "serre/fixe",
-   "serre/fixe",
-   "serre/fixe",
-   "serre/fixe",
-   "serre/fixe",
-   "serre/fixe",
-   "serre/fixe",
-   "serre/fixe",
-   "serre/fixe",
-   "serre/fixe",
-   "serre/fixe",
-   "large/zoom_choc",
+   "large/fixe",
+   "moyen/avance",
+   "tres_serre/recul",
+   "tres_serre/avance",
    "serre/avance"
   ]
  }

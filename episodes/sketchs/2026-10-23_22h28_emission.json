@@ -1,0 +1,271 @@
+{
+ "titre": "NETFLIX PREMIUM",
+ "sujet": "NETFLIX PREMIUM",
+ "ecran": "PUBS PREMIUM",
+ "invite_nom": "Hubert Rustine",
+ "invite_role": "Expert (fictif)",
+ "invite_look": "chauve",
+ "lieu_direct": "Assemblée",
+ "titre_accroche": "Quand ton Premium a des pubs.",
+ "question": "",
+ "running_gag": "",
+ "verite": "Netflix Premium avec pubs est une arnaque déguisée où les abonnés paient pour éviter les pubs, mais finissent par en subir malgré tout.",
+ "repliques": [
+  {
+   "p": "narrateur",
+   "t": "Quand ton Premium a des pubs.",
+   "d": "[excited] Quand ton Premium a des pubs."
+  },
+  {
+   "p": "presentateur",
+   "t": "PUTAIN, MON PREMIUM A DES PUBS !",
+   "d": "[horrified] PUTAIN, MON PREMIUM A DES PUBS !"
+  },
+  {
+   "p": "envoyee",
+   "t": "Ils appellent ça ‘Premium’ ? Moi j’appelle ça ‘l’abonnement qui te fait regretter ton écran’.",
+   "d": "[sarcastic] Ils appellent ça ‘Premium’ ? Moi j’appelle ça ‘l’abonnement qui te fait regretter ton écran’.",
+   "chute": true
+  },
+  {
+   "p": "invite",
+   "t": "Netflix Premium avec pubs, c’est comme un resto étoilé qui te sert ton plat... avec la carte des desserts *en* couverts.",
+   "d": "[excited] Netflix Premium avec pubs, c’est comme un resto étoilé qui te sert ton plat... avec la carte des desserts en couverts !",
+   "chute": true
+  },
+  {
+   "p": "presentateur",
+   "t": "Bonne nouvelle : les pubs sur Netflix Premium sont un service de streaming alternatif. Elles te permettent de regarder des pubs... en mode 'binge-watching'.",
+   "d": "[deadpan] Bonne nouvelle : les pubs sur Netflix Premium sont un service de streaming alternatif. Elles te permettent de regarder des pubs... en mode 'binge-watching'.",
+   "chute": true,
+   "attente": 0.8
+  }
+ ],
+ "bandeau": [
+  "NETFLIX PREMIUM : LES PUBS EN PLUS",
+  "LE RESTO ÉTOILÉ QUI TE FAIT PAYER LES COUVERTS",
+  "BINGE-WATCHING : MAINTENANT POUR LES PUBS"
+ ],
+ "gag": null,
+ "legende": "Quand ton abonnement Premium te fait douter de tout. 😤 Tag un ami qui a cru à la pub.",
+ "hashtags": [
+  "petitsdramas",
+  "humour",
+  "sketch",
+  "pov",
+  "netflix",
+  "arnaque"
+ ],
+ "sources": [],
+ "decoupage": [
+  {
+   "scene": "Jojo, assis sur son canapé, regarde son écran avec horreur.",
+   "repliques": [
+    1
+   ],
+   "lieu": "plateau",
+   "son": "dun_dun",
+   "duree": 3.0,
+   "decor": "cozy living room, sofa, television displaying Netflix with ads, bright daylight"
+  },
+  {
+   "scene": "Lila et Kévin réagissent à sa découverte.",
+   "repliques": [
+    2,
+    3
+   ],
+   "lieu": "plateau",
+   "son": "",
+   "duree": 5.0,
+   "decor": "cozy living room, sofa, television displaying Netflix with ads, bright daylight"
+  },
+  {
+   "scene": "Chute finale.",
+   "repliques": [
+    4
+   ],
+   "lieu": "plateau",
+   "son": "",
+   "duree": 4.0,
+   "decor": "cozy living room, sofa, television displaying Netflix with ads, bright daylight"
+  }
+ ],
+ "studio": {
+  "moment": "soir",
+  "lieux": "salon",
+  "costumes": {
+   "presentateur": {
+    "haut": "tshirt",
+    "c_haut": "bleu",
+    "bas": "jean",
+    "chaussures": "baskets",
+    "details": [
+     "barbe_courte"
+    ],
+    "chapeau": null
+   },
+   "envoyee": {
+    "haut": "chemise",
+    "c_haut": "blanc",
+    "bas": "pantalon",
+    "chaussures": "ville",
+    "details": [
+     "lunettes_vue"
+    ],
+    "chapeau": null
+   },
+   "invite": {
+    "haut": "pull",
+    "c_haut": "rouge",
+    "bas": "jogging",
+    "chaussures": "baskets",
+    "details": [
+     "moustache"
+    ],
+    "chapeau": null
+   }
+  },
+  "personnages": {
+   "presentateur": {
+    "genre": "h",
+    "age": 40,
+    "taille": 1,
+    "corpulence": 0.8,
+    "cheveux": "court",
+    "barbe": "trois_jours"
+   },
+   "envoyee": {
+    "genre": "f",
+    "age": 35,
+    "taille": 0.95,
+    "corpulence": 0.7,
+    "cheveux": "carre",
+    "barbe": "rien"
+   },
+   "invite": {
+    "genre": "h",
+    "age": 38,
+    "taille": 1.05,
+    "corpulence": 0.9,
+    "cheveux": "moustache",
+    "barbe": "moustache"
+   }
+  },
+  "decoupe": [
+   {
+    "replique": 2,
+    "plans": [
+     {
+      "debut": 0.0,
+      "plan": "moyen",
+      "cible": "envoyee",
+      "mouvement": "fixe"
+     }
+    ]
+   },
+   {
+    "replique": 3,
+    "plans": [
+     {
+      "debut": 0.0,
+      "plan": "serre",
+      "cible": "invite",
+      "mouvement": "avance"
+     }
+    ]
+   }
+  ]
+ },
+ "fiche": {
+  "fil": "Jojo découvre avec horreur que son abonnement Netflix Premium contient des publicités. Lila et Kévin tentent de justifier cette absurdité avec des comparaisons déjantées.",
+  "concept": "Un gag éclair qui exploite l'absurdité d'un abonnement 'premium' incluant des pubs, avec une chute qui pousse la logique à son paroxysme.",
+  "format": "Gag éclair (3 répliques)",
+  "angle": "L'absurdité d'un service premium qui se transforme en arnaque, révélée par une chute brutale.",
+  "resume_factuel": "Netflix a intégré des publicités dans son abonnement 'Premium', ce qui a provoqué la colère des utilisateurs.",
+  "faits_reels": [
+   "Netflix a ajouté des pubs dans son abonnement Premium.",
+   "Les abonnés Premium paient pour éviter les pubs.",
+   "Les utilisateurs sont mécontents de cette décision."
+  ],
+  "inventions": [
+   "La comparaison du restaurant étoilé par Kévin.",
+   "La réaction disproportionnée de Jojo.",
+   "La chute sur le 'binge-watching' des pubs."
+  ],
+  "decoupage": [
+   {
+    "scene": "Jojo, assis sur son canapé, regarde son écran avec horreur.",
+    "repliques": [
+     1
+    ],
+    "lieu": "plateau",
+    "son": "dun_dun",
+    "duree": 3.0,
+    "decor": "cozy living room, sofa, television displaying Netflix with ads, bright daylight"
+   },
+   {
+    "scene": "Lila et Kévin réagissent à sa découverte.",
+    "repliques": [
+     2,
+     3
+    ],
+    "lieu": "plateau",
+    "son": "",
+    "duree": 5.0,
+    "decor": "cozy living room, sofa, television displaying Netflix with ads, bright daylight"
+   },
+   {
+    "scene": "Chute finale.",
+    "repliques": [
+     4
+    ],
+    "lieu": "plateau",
+    "son": "",
+    "duree": 4.0,
+    "decor": "cozy living room, sofa, television displaying Netflix with ads, bright daylight"
+   }
+  ],
+  "titres_sujet": [
+   "Quand tu réalises que ton abonnement 'Netflix Premium' inclut... les pubs."
+  ],
+  "verification_web": false,
+  "note": 80.0,
+  "critique": "AVIS DU PUBLIC TEST (spectateurs sans contexte) :\n- Inès : a compris, rire 8/10, aurait scrollé à la réplique 1\n- Karim : a compris, rire 9/10\n- Sandrine : N A PAS COMPRIS, rire 3/10, aurait scrollé à la réplique 0, perdu par : Les références trop spécifiques aux codes TikTok et Netflix Premium (ne comprend pas le concept de 'binge-watching' ou 'Premium')\nCritiques constructives du public :\n- Réplique n°3 : La chute avec 'binge-watching' est trop niche et méta pour un public non initié. Remplacer par une comparaison plus universelle, comme 'C’est comme si tu payais pour le film... et qu’on te facturait aussi les interruptions' pour toucher Sandrine.\n- Ajouter un visuel ou un carton explicatif très court (1-2 secondes) après la réplique n°0 pour clarifier le concept de 'Premium avec pubs' pour les spectateurs comme Sandrine, sans ralentir le rythme.\n- Réplique n°1 : Le ton sarcastique de Lila est excellent, mais la phrase pourrait être raccourcie pour plus d'impact : 'Premium ? Plutôt l’abonnement qui te nique.' (plus punchy et mémorable).\n- Introduire un deuxième exemple concret après la réplique n°2 pour éviter la monotonie. Par exemple, une réplique de Jojo du type : 'C’est comme acheter une voiture de luxe... et découvrir qu’elle a un compteur kilométrique truqué.'\n- La réplique n°0 est trop courte et manque de punch. La remplacer par quelque chose comme : 'PUTAIN, NETFLIX ! MON PREMIUM, C’EST DU PREMIUM... POUR LES PUBS !' pour marquer davantage les esprits et donner un t",
+  "decision": "prêt pour production"
+ },
+ "_voix_hz": {
+  "narrateur": 220,
+  "envoyee": 210,
+  "presentateur": 96,
+  "invite": 119
+ },
+ "_voix_genre": {
+  "presentateur": "h",
+  "invite": "h"
+ },
+ "realisation": {
+  "moment": "soir",
+  "lieux": [
+   "salon",
+   "salon",
+   "salon"
+  ],
+  "gags": [],
+  "ambiances": [
+   "poussiere"
+  ],
+  "source": "auteur",
+  "tenues": {
+   "presentateur": "tshirt",
+   "envoyee": "chemise",
+   "invite": "pull"
+  },
+  "plans": [
+   "large/fixe",
+   "moyen/avance",
+   "tres_serre/recul",
+   "tres_serre/avance",
+   "serre/avance"
+  ]
+ }
+}

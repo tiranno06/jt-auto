@@ -1,69 +1,78 @@
 Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, ElevenLabs epuise — IA utilisée : mistral
-Vidéo depuis TikTok : https://www.tiktok.com/@charly.bse/video/7696887555169471776?_r=1&_t=ZN-9Am7CSapwEY
-  son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 60.1 s, compte d'origine @charly.bse
-[ WARN:0@19.392] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
-  image de la vidéo : 1 plans (≈ 60.48 s chacun) ; cadrages : très serré 18 %, serré 15 %, moyen 0 %, large 66 % ; caméra : fixe 100 % ; 1 personne(s) à l'écran : centre (habit [208, 177, 141], cheveux [233, 204, 166], sourit 68 %) ; agitation 0.044 ; lumière jour ; fond [230, 206, 173]
-  isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
-  transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
-Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-  voix re-séparées par leur empreinte (ECAPA) : 2 voix (netteté 0.24)
-  18 répliques, voix : {'speaker_1': 190, 'speaker_0': 263}
-  son de la vidéo : 2 voix [190 Hz (f, 55 %), 263 Hz (f, 45 %)], 3.37 mots/s, blancs 0.71 s, 3 coupure(s) de parole, dynamique 25.1 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
-  IA gemini indisponible (The read operation timed out) : on passe à la suivante
-  scène reconstituée : Deux amis, un homme et une femme, discutent par téléphone dans un salon cosy. Ils évoquent leur anniversaire de deux ans ensemble et l'endroit où ils vont dîner ce soir. L'ambiance est à la fois complice et pleine de suspense.
-  casting : speaker_0 → Lila, speaker_1 → Jojo
-  Claude a réattribué 7 réplique(s) à la bonne personne (voix proches)
-  descriptions des personnages remises sur les bons rôles (âge, genre de la voix)
-Sketch : « ANNIVERSAIRE SURPRISE AU RESTA », 18 répliques
-Lieux séparés : chaque personnage a son propre décor (appel, visio, l'un ailleurs)
-  décor 0 (lieu déjà connu) : quiet city street at dusk, parked car at the curb, sidewalk, street la
-  décor 1 : un salon cosy avec un canapé beige, une table basse en bois clair, des
-montage : 42 plans (0.0:serre>env/coupe 1.5:tres_serre>env/glisse 3.8:serre>pre/coupe 4.9:serre>inv/coupe 5.7:moyen>inv/glisse 7.0:tres_serre>pre/file 7.9:moyen>inv/file 8.7:tres_serre>pre/coupe 9.7:moyen>inv/coupe 10.1:tres_serre>inv/glisse 11.3:moyen>inv/glisse 12.2:serre>inv/glisse 13.3:serre>pre/glisse 15.4:moyen>pre/glisse 17.5:serre>inv/coupe 18.7:large>inv/glisse 20.3:serre>pre/coupe 22.0:large>pre/glisse 24.2:serre>pre/glisse 25.4:serre>inv/glisse 26.9:serre>pre/coupe 28.3:serre>inv/coupe 30.1:large>inv/glisse 32.1:serre>pre/glisse 33.3:large>pre/glisse 35.0:serre>inv/glisse 35.9:tres_serre>pre/coupe 37.2:serre>pre/glisse 38.7:serre>inv/coupe 40.1:large>pre/glisse 42.0:serre>inv/coupe 43.3:moyen>pre/coupe 45.2:serre>inv/coupe 47.3:large>inv/glisse 48.9:serre>pre/glisse 50.1:tres_serre>inv/coupe 51.4:serre>inv/glisse 52.9:serre>pre/coupe 53.9:moyen>inv/coupe 54.8:large>pre/glisse 56.8:epaule>pre/glisse 59.2:serre>env/coupe)
-studio : soir, lieux ['rue', 'salon'], tenues envoyee=chemise, presentateur=pull, invite=tshirt, 2 figurant(s), ambiances ['neon', 'poussiere'] ; plans serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe large/zoom_choc serre/avance
-cartoon : durée 63.4 s, 18 répliques, 2 scène(s), personnages ['envoyee', 'presentateur', 'invite']
-Contrôle image : 16 défaut(s) — 6.25 s tete_coupee (presentateur), 6.75 s tete_coupee (presentateur), 8.25 s tete_coupee (presentateur), 9.75 s tete_coupee (presentateur), 11.75 s tete_coupee (presentateur), 15.75 s tete_coupee (invite), 16.25 s tete_coupee (invite), 16.75 s tete_coupee (invite)
-  image 0/3801 (4 processeurs)
-  image 300/3801
-  image 600/3801
-  image 900/3801
-  image 1200/3801
-  image 1500/3801
-  image 1800/3801
-  image 2100/3801
-  image 2400/3801
-  image 2700/3801
-  image 3000/3801
-  image 3300/3801
-  image 3600/3801
+Recherche web : 0 requête(s) — le modèle n'a pas consulté le web, vérification sur les articles RSS uniquement
+Idée 0 : « POV : Tu es un parent qui vient de découvrir que ton enfant a un compte TikTok. »
+Idée 1 : « Quand tu réalises que ton abonnement 'Netflix Premium' inclut... les pubs. »
+Idée 2 : « POV : Tu es en train de faire une photo pour ton profil LinkedIn quand ton chat fait ses besoins dessus. »
+Idée 3 : « À 7h30 du matin... quand ton réveil sonne mais que c'est déjà trop tard. »
+Idée 4 : « POV : Tu es en train de remplir ta déclaration d'impôts quand tu réalises que tu as oublié de déclarer ton job »
+Idée 5 : « Quand tu demandes à ton partenaire de 'juste ranger un peu' et qu'il transforme ton salon en champ de bataille »
+Vérité du sujet : Les abonnés paient pour un service 'premium' qui se révèle être une arnaque déguisée, et personne ne peut y échapper sans résilier, ce qui est aussi une galère.
+Chute proposée : Rassurez-vous : Netflix Premium reste une expérience 100% sans pubs. Il suffit de ne jamais regarder vos vidéos en streaming, mais uniquement en téléchargement… pour les revendre à des plateformes ill
+Gros titres soumis : 8.0/10 POV : Tu es un parent qui vient de découvrir que ton enfant  | 9.0/10 Quand tu réalises que ton abonnement 'Netflix Premium' inclu | 7.0/10 POV : Tu es en train de faire une photo pour ton profil Link | 8.0/10 À 7h30 du matin... quand ton réveil sonne mais que c'est déj | 8.0/10 POV : Tu es en train de remplir ta déclaration d'impôts quan | 9.0/10 Quand tu demandes à ton partenaire de 'juste ranger un peu' 
+Sujet choisi : « Quand tu réalises que ton abonnement 'Netflix Premium' inclut... les pubs. » — angle : L'absurdité d'un service premium qui inclut des publicités, poussée à l'extrême avec une logique commerciale délirante et une réaction humaine disproportionnée.
+  atelier : 15 vannes, 15 chutes ; chute retenue par le jury (9/10) : Bonne nouvelle : les pubs sur Netflix Premium sont un service de streaming alternatif. Elles te permettent de regarder des pubs... en mode 'binge-watching'.
+  3 versions écrites en parallèle : la n°3 est retenue (La **VERSION 2** est la plus drôle et claire pour un sketch TikTok. Voici pourquoi :
+
+1. **Rythme et fluidité** : Les ré)
+  version 1 refusée : trop long : 123 mots prononcés, maximum 60. Coupe 63 mots : retire les relances, garde les vannes et la chute
+  version 2 refusée : trop long : 98 mots prononcés, maximum 60. Coupe 38 mots : retire les relances, garde les vannes et la chute
+  public test : compris 2/3, rire moyen 6.7/10, scrolls : [1, -1, 0]
+    → Réplique n°3 : La chute avec 'binge-watching' est trop niche et méta pour un public non initié. Remplacer par une comparaison plus universel
+    → Ajouter un visuel ou un carton explicatif très court (1-2 secondes) après la réplique n°0 pour clarifier le concept de 'Premium avec pubs' p
+    → Réplique n°1 : Le ton sarcastique de Lila est excellent, mais la phrase pourrait être raccourcie pour plus d'impact : 'Premium ? Plutôt l’ab
+  note : 99 (critique) et rire 6.7/10 → 92
+  un spectateur n'a pas compris : note plafonnée à 80 (au lieu de 92)
+  version 3 : 80/100, 4 répliques, 72 mots
+  relecture des sous-titres : 2 correction(s)
+Moteur humoristique : 13 appels Claude, 105786 jetons lus, 15317 jetons écrits, 0 recherche(s) web
+Sketch : « NETFLIX PREMIUM », 4 répliques
+Accroche (pov) : « Quand ton Premium a des pubs. »
+  voix sur mesure des personnages en remplaçantes
+  voix 2 (envoyee, kyutai:cml-tts/fr/2154_2576_000020-00, prise 1) {'sim': 0.8, 'blanc': 0.0, 'debit': 0.77, 'mos': 3.07} OK
+  voix 3 (invite, kyutai:cml-tts/fr/2216_1745_000007-00, prise 1) {'sim': 0.93, 'blanc': 0.0, 'debit': 0.92, 'mos': 3.23} OK
+    elevenlabs PjAkkDaPt1wolu0EMUTN : HTTP 401 {"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credits remaining, while 17 credits are required for this request.","status
+    ElevenLabs indisponible (crédit ou accès) : passage aux voix gratuites
+  narrateur : la voix elevenlabs:PjAkkDaPt1wolu0EMUTN échoue, passage à la voix de remplacement
+  voix 0 (narrateur, kyutai:cml-tts/fr/3267_1902_000075-00, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.72, 'mos': 3.38} OK
+  voix 1 (presentateur, kyutai:cml-tts/fr/1406_1028_000009-00, prise 1) {'sim': 0.62, 'blanc': 0.0, 'debit': 1.47, 'mos': 3.11} refaite
+  voix 4 (presentateur, kyutai:cml-tts/fr/1406_1028_000009-00, prise 1) {'sim': 1.0, 'blanc': 0.18, 'debit': 0.87, 'mos': 2.85} OK
+  voix 1 (presentateur, kyutai:cml-tts/fr/1406_1028_000009-00, prise 2) {'sim': 0.0, 'blanc': 0.0, 'debit': 1.51, 'mos': 3.1} refaite
+  voix 1 (presentateur, kyutai:cml-tts/fr/1406_1028_000009-00, prise 3) {'sim': 0.43, 'blanc': 0.0, 'debit': 1.36, 'mos': 3.2} refaite
+  voix 1 (presentateur) : meilleure prise gardée pour ne pas changer la voix du personnage
+Voix : Kyutai TTS (CC BY 4.0), voix CML-TTS (CC BY 4.0)
+  décor 0 : cozy living room, sofa, television displaying Netflix with ads, bright
+  décor 1 : cozy living room, sofa, television displaying Netflix with ads, bright
+  décor 2 : cozy living room, sofa, television displaying Netflix with ads, bright
+montage : 8 plans (0.1:large>nar/coupe 1.1:moyen>pre/coupe 2.5:tres_serre>pre/glisse 4.9:tres_serre>env/coupe 8.1:tres_serre>inv/coupe 9.7:moyen>inv/glisse 14.1:tres_serre>env/coupe 17.7:serre>pre/coupe)
+studio : soir, lieux ['salon', 'salon', 'salon'], tenues presentateur=tshirt, envoyee=chemise, invite=pull, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe moyen/avance tres_serre/recul tres_serre/avance serre/avance
+cartoon : durée 28.9 s, 5 répliques, 3 scène(s), personnages ['presentateur', 'envoyee', 'invite']
+Contrôle image : 12 défaut(s) — 3.25 s sous_titre_visage (presentateur), 3.75 s sous_titre_visage (presentateur), 4.25 s sous_titre_visage (presentateur), 5.25 s tete_coupee (envoyee), 10.25 s tete_coupee (envoyee), 10.75 s tete_coupee (envoyee), 11.25 s tete_coupee (envoyee), 11.75 s tete_coupee (envoyee)
+  image 0/1736 (4 processeurs)
+  image 300/1736
+  image 600/1736
+  image 900/1736
+  image 1200/1736
+  image 1500/1736
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury qualité (ia) : 4.8/10 — Humoriste 5.0/10 : 37.3 s Manque de punch sonore lors de l'hésitation comique.; 49 s La fausse assurance du personnage manque d'impact visuel.; 54.9 s La chute finale est trop plate sans mimique de panique. | Réalisateur 5.0/10 : 0.4 s Cadrage trop serré, tête coupée par le haut du cadre.; 22.4 s Les deux interlocuteurs au téléphone sont réunis dans la même pièce.; 26 s Haut du crâne coupé sur le plan fixe.; 6.2 s tête de presentateur coupée par le bord de l'image (moyen); 15.8 s tête de invite coupée par le bord de l'image (moyen); 30.2 s tête de presentateur coupée par le bord de l'image (large) | Directeur artistique 4.5/10 : 18.8 s Tableaux au mur avec du faux texte illisible de type lorem ipsum.; 22.4 s Incohérence de décor pour une conversation téléphonique entre deux lieux distants.; 57.1 s Substituer les textures mouchetées du pull par un aplat net conforme au style toon. | Ingén
-Manque par rapport à la vidéo d'origine : L'original met en scène un personnage unique assis sur un canapé filmé sous un angle constant. ; Dans l'original, l'interlocutrice n'est qu'une voix au téléphone et n'apparaît jamais physiquement. ; L'original conserve un décor fixe et cohérent tout au long de l'échange téléphonique.
-Corrections du jury (tour 1) : plan serre sur la réplique 3 ; plan serre sur la réplique 4 ; plan serre sur la réplique 10
-montage : 33 plans (0.0:serre>env/coupe 1.5:tres_serre>env/glisse 3.8:serre>pre/coupe 4.9:serre>inv/coupe 5.7:moyen>inv/glisse 13.3:serre>pre/glisse 17.5:serre>inv/coupe 18.7:large>inv/glisse 20.3:serre>pre/coupe 22.0:large>pre/glisse 24.2:serre>pre/glisse 25.4:serre>inv/glisse 26.9:serre>pre/coupe 28.3:serre>inv/coupe 32.1:serre>pre/glisse 33.3:large>pre/glisse 35.0:serre>inv/glisse 35.9:tres_serre>pre/coupe 37.2:serre>pre/glisse 38.7:serre>inv/coupe 40.1:large>pre/glisse 42.0:serre>inv/coupe 43.3:moyen>pre/coupe 45.2:serre>inv/coupe 47.3:large>inv/glisse 48.9:serre>pre/glisse 50.1:tres_serre>inv/coupe 51.4:serre>inv/glisse 52.9:serre>pre/coupe 53.9:moyen>inv/coupe 54.8:large>pre/glisse 56.8:epaule>pre/glisse 59.2:serre>env/coupe)
-studio : soir, lieux ['rue', 'salon'], tenues envoyee=chemise, presentateur=pull, invite=tshirt, 2 figurant(s), ambiances ['neon', 'poussiere'] ; plans serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe large/zoom_choc serre/avance
-cartoon : durée 63.4 s, 18 répliques, 2 scène(s), personnages ['envoyee', 'presentateur', 'invite']
-Contrôle image : 21 défaut(s) — 6.25 s tete_coupee (presentateur), 6.75 s tete_coupee (presentateur), 7.25 s tete_coupee (presentateur), 7.75 s tete_coupee (presentateur), 8.25 s tete_coupee (presentateur), 8.75 s tete_coupee (presentateur), 9.25 s tete_coupee (presentateur), 9.75 s tete_coupee (presentateur)
-  image 0/3801 (4 processeurs)
-  image 300/3801
-  image 600/3801
-  image 900/3801
-  image 1200/3801
-  image 1500/3801
-  image 1800/3801
-  image 2100/3801
-  image 2400/3801
-  image 2700/3801
-  image 3000/3801
-  image 3300/3801
-  image 3600/3801
+Jury qualité (ia) : 5.3/10 — Humoriste 5.5/10 : 17.7 s Chute finale trop étirée et manque d'impact comique.; 16 s Manque de dynamisme sonore après la punchline intermédiaire. | Réalisateur 5.0/10 : 7.1 s Cadrage trop serré coupant le sommet de la tête.; 12.9 s Posture rigide en T-pose non naturelle pour le personnage.; 5.2 s tête de envoyee coupée par le bord de l'image (tres_serre); 10.2 s tête de envoyee coupée par le bord de l'image (moyen) | Directeur artistique 5.5/10 : 12.9 s Incohérence visuelle sur le genre de l'invité par rapport aux métadonnées.; 2.8 s Texte illisible et déformé sur le cadre d'arrière-plan. | Ingénieur du son 5.0/10 : 16.1 s Blanc sonore de près de deux secondes coupant l'élan de la scène. | Spectateur TikTok 5.5/10 : 0.4 s Le bandeau titre masque complètement le visage du personnage au début.; 21.6 s Rythme de lecture trop dense sur les répliques finales.
+Manque par rapport à la vidéo d'origine : Accroche visuelle non obstruée dès la première seconde ; Cadrages aérés évitant de couper les têtes
+Corrections du jury (tour 1) : plan moyen sur la réplique 3 ; plan serre sur la réplique 4
+montage : 8 plans (0.1:large>nar/coupe 1.1:moyen>pre/coupe 2.5:tres_serre>pre/glisse 4.9:moyen>env/coupe 8.1:tres_serre>inv/coupe 9.7:serre>inv/glisse 14.1:tres_serre>env/coupe 17.7:serre>pre/coupe)
+studio : soir, lieux ['salon', 'salon', 'salon'], tenues presentateur=tshirt, envoyee=chemise, invite=pull, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe moyen/avance tres_serre/recul tres_serre/avance serre/avance
+cartoon : durée 28.9 s, 5 répliques, 3 scène(s), personnages ['presentateur', 'envoyee', 'invite']
+Contrôle image : 9 défaut(s) — 3.25 s sous_titre_visage (presentateur), 3.75 s sous_titre_visage (presentateur), 4.25 s sous_titre_visage (presentateur), 5.25 s tete_coupee (invite), 5.75 s tete_coupee (invite), 6.25 s tete_coupee (invite), 6.75 s tete_coupee (invite), 7.25 s tete_coupee (invite)
+  image 0/1736 (4 processeurs)
+  image 300/1736
+  image 600/1736
+  image 900/1736
+  image 1200/1736
+  image 1500/1736
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury qualité (ia) : 4.7/10 — Humoriste 5.0/10 : 54.9 s Chute finale sans zoom choc pour appuyer le comique.; 37.3 s Manque d'effet comique lors du mensonge flagrant. | Réalisateur 5.0/10 : 8.7 s Faux raccord : les deux personnages se téléphonent dans la même pièce.; 26 s Haut de la tête coupé par le bord du cadre.; 6.2 s tête de presentateur coupée par le bord de l'image (moyen); 13.2 s tête de presentateur coupée par le bord de l'image (moyen); 40.2 s tête de presentateur coupée par le bord de l'image (large) | Directeur artistique 4.0/10 : 5.8 s Décors incohérents avec la conversation téléphonique.; Textes illisibles générés dans les tableaux du décor. | Ingénieur du son 5.0/10 : 20.4 s Absence de bruitage marquant le blanc et la gêne. | Spectateur TikTok 5.0/10 : 57.1 s Sous-titre final tronqué et confus.; 8.7 s Situation confuse avec les deux protagonistes réunis au téléphone.
-Manque par rapport à la vidéo d'origine : L'original cadre uniquement le protagoniste sur son canapé pour accentuer ses réactions expressives. ; La version originale évite la confusion spatiale en ne montrant pas l'interlocutrice dans la même pièce.
-La version corrigée n'est pas meilleure : on garde la première.
-Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = mistral ×1, gemini ×2, voix = tiktok, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 22530, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 19}
-OK : sortie/2026-10-23_15h35_emission.mp4 (63 s)
+Jury qualité (ia) : 6.0/10 — Humoriste 6.0/10 : 17.7 s La chute finale manque d'un zoom choc pour percuter le spectateur. | Réalisateur 5.0/10 : 9.7 s Tête du personnage coupée par le haut de l'image (plan 3).; 21.6 s Plan trop large sur la fin, on perd l'expressivité du présentateur.; 5.2 s tête de invite coupée par le bord de l'image (moyen) | Directeur artistique 7.0/10 : 4.3 s Les tenues se ressemblent trop entre les différents intervenants sur certains plans. | Ingénieur du son 6.0/10 : 4.9 s Il y a un blanc sonore de près de 2 secondes qui casse le rythme du sketch. | Spectateur TikTok 6.0/10 : 0.4 s Le sous-titre sur l'image 1 cache une partie du bas du visage du présentateur.
+Version corrigée gardée : 5.3 → 6.0/10
+Qualité : 80/100 — prêt pour production
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = mistral ×13, gemini ×2, voix = piper, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 127895, 'cache_lu': 0, 'eleven_caracteres': 39, 'gpu_s': 24}
+OK : sortie/2026-10-23_22h28_emission.mp4 (29 s)
