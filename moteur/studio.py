@@ -231,6 +231,8 @@ def tenue(perso, role_scene, lieu, moment, graine):
     if rng.random() < 0.25: details.append(("sac_bandouliere", "casque_audio", "bretelles")[int(rng.integers(3))] if lieu in ("rue", "bar", "magasin") else "montre")
     if perso == "noeud" and rng.random() < 0.5: details.append("boucles_oreilles")
     if rng.random() < 0.15: details.append("bracelet")
+    if haut in ("tshirt", "debardeur", "maillot", "hawai", "polo") and rng.random() < 0.25: details.append("tatouage")   # bras nus (idée 11)
+    if haut in ("tshirt", "debardeur", "hawai") and rng.random() < (0.35 if perso == "noeud" else 0.12): details.append("bracelets")
     if lieu in ("rue", "bar", "magasin", "voiture") and rng.random() < 0.35:   # accessoires de la rue (P3)
         details.append(("chaine", "banane", "sac_a_dos", "ecouteurs")[int(rng.integers(4))])
     chapeau = None

@@ -148,10 +148,10 @@ def animer(img, info, tm, ecr, k, etat):
     for (x, y, r) in info.get("horloges", []):                             # trotteuse : un pas par seconde
         a = math.radians(int(tm) * 6 - 90); c = ecr(x, y)
         _ligne(img, c, (c[0] + math.cos(a) * r * 0.78 * k, c[1] + math.sin(a) * r * 0.78 * k), (210, 50, 50), 2.5 * k)
-    for (x, y) in info.get("tasses", []):                                  # vapeur de la tasse
-        for j in range(3):
-            u = (tm * 0.45 + j / 3) % 1; c = ecr(x + math.sin(tm * 2 + j * 2) * 10 * u, y - u * 110)
-            cv2.circle(img, (_i(c[0]), _i(c[1])), max(1, _i((8 + 12 * u) * k)), (250, 250, 250), max(1, _i(3 * k)), AA) if u < 0.85 else None
+    for (x, y) in info.get("tasses", []):                                  # vapeur de la tasse : deux volutes qui montent et ondulent
+        for j in (-1, 1):
+            pts = [ecr(x + j * 9 + math.sin(tm * 3 + u * 6 + j) * 7, y - 8 - u * 80) for u in np.linspace(0, 1, 8)]
+            for a_, b_ in zip(pts[:-1], pts[1:]): _ligne(img, a_, b_, (252, 252, 252), 3.5 * k)
     for (x, y) in info.get("ventilos", []):                                # pales du ventilateur qui tournent
         c = ecr(x, y)
         for j in range(3):

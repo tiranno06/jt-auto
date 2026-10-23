@@ -224,6 +224,18 @@ def son(nom):
 # ------------------------------------------------------------------ son « cinéma » : ambiance du lieu, pas, musique de fond
 def _bruit(n, rng): return rng.normal(0, 1, n)
 
+def meteo(duree, orage=False, graine=7):
+    """Pluie (bruissement doux) et, s'il y a de l'orage, grondement de tonnerre juste après chaque éclair de l'image
+    (decor_anime : éclair toutes les 6,5 s, le premier à 5,2 s). Stéréo 44,1 kHz, très bas sous les voix."""
+    n = int(duree * SR); rng = np.random.default_rng(graine); t = np.arange(n) / SR
+    pluie = _bande(_bruit(n, rng), 1500, 7000) * 0.035 + _passe_bas(_bruit(n, rng), 600) * 0.03
+    if orage:
+        for c in np.arange(5.2, duree, 6.5):
+            env = np.where(t >= c + 0.25, np.exp(-(t - c - 0.25) / 1.4), 0.0) * (1 - np.exp(-np.maximum(0, t - c - 0.25) * 20))
+            pluie = pluie + _passe_bas(_bruit(n, rng), 120) * env * 0.5
+    return np.stack([pluie, pluie * 0.96], 1).astype(np.float32)
+
+
 def ambiance(lieu, duree, graine=7):
     """Ambiance de fond du lieu (très bas sous les voix) : celle d'ElevenLabs si elle a été fabriquée (sons_eleven/ambiances/),
     sinon une ambiance de synthèse (salle, rue, bar, bureau, cuisine, caverne…). Stéréo 44,1 kHz."""

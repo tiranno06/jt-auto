@@ -297,6 +297,63 @@ def visage(img, t, rxe, R, p, d, k34, tilt_deg, ep):
         _ellipse(img, T(d * rxe * 0.15 * k34, R * 0.38), (rxe * 0.2, R * 0.07), 0, (245, 175, 180))
 
 
+def teint(img, ov, tete, R, p):
+    """Teint qui change peu à peu (idée 13) : la colère fait monter le rouge depuis le haut du crâne, la peur rend pâle
+    (bleu-vert, depuis le haut), la gêne fait rougir les joues de plus en plus (grosses rougeurs hachurées)."""
+    roi = _bbox(ov, img)
+    if roi is None or roi[2] <= roi[0] or roi[3] <= roi[1]: return
+    x0, y0, x1, y1 = roi; m = None
+    for cle, coul in (("rougeur", (232, 72, 60)), ("paleur", (150, 200, 225))):
+        f = float(np.clip(p.get(cle) or 0.0, 0, 1))
+        if f <= 0.02: continue
+        if m is None: m = (_masque(ov, roi).astype(np.float32) / 255)
+        yy = np.arange(y0, y1, dtype=np.float32)[:, None]; top = tete[1] - R
+        g = np.clip((top + 2.1 * R * f - yy) / (R * 0.8), 0, 1)            # le dégradé descend du crâne à mesure que f monte
+        a = (m * 0.55 * g)[..., None]; z = img[y0:y1, x0:x1].astype(np.float32)
+        img[y0:y1, x0:x1] = (z * (1 - a) + np.array(coul, np.float32) * a).astype(np.uint8)
+    g_ = p.get("gene")
+    f = float(np.clip(g_ if isinstance(g_, (int, float)) and not isinstance(g_, bool) else (0.7 if g_ else 0.0), 0, 1))
+    if f > 0.05:                                                           # joues rouges de gêne (de plus en plus grandes)
+        for sg in (-1, 1):
+            c = (tete[0] + sg * R * 0.42, tete[1] + R * 0.32); rx_, ry_ = R * (0.12 + 0.12 * f), R * (0.05 + 0.05 * f)
+            sub = img.copy(); _ellipse(sub, c, (rx_, ry_), 0, (240, 120, 130))
+            cv2.addWeighted(sub, 0.35 + 0.4 * f, img, 0.65 - 0.4 * f, 0, img)
+            for k in range(-2, 3): _ligne(img, (c[0] + k * rx_ * 0.38 - rx_ * 0.1, c[1] + ry_ * 0.6), (c[0] + k * rx_ * 0.38 + rx_ * 0.1, c[1] - ry_ * 0.6), (210, 70, 90), max(1.0, R * 0.012))
+
+
+TATOUAGES = ("coeur", "ancre", "etoile", "rose", "maman")
+
+
+def tatouage(img, c, m, larg, motif, ep):
+    """Petit tatouage sur l'avant-bras nu (idée 11), dans le sens du bras : cœur, ancre, étoile, rose ou bandeau « MAMAN »."""
+    dx, dy = m[0] - c[0], m[1] - c[1]; n = math.hypot(dx, dy) or 1; ux, uy = dx / n, dy / n; nx, ny = -uy, ux
+    o = (c[0] + dx * 0.45, c[1] + dy * 0.45); r = larg * 0.3; e = max(1.0, ep * 0.6); enc = (40, 50, 80)
+    def P(v, u): return (o[0] + nx * v * r + ux * u * r, o[1] + ny * v * r + uy * u * r)
+    if motif == "coeur":
+        _poly(img, [P(0, 0.9), P(-0.9, 0.0), P(-0.7, -0.7), P(0, -0.35), P(0.7, -0.7), P(0.9, 0.0)], (210, 50, 60)); _poly(img, [P(0, 0.9), P(-0.9, 0.0), P(-0.7, -0.7), P(0, -0.35), P(0.7, -0.7), P(0.9, 0.0)], enc, True, e)
+    elif motif == "ancre":
+        _ligne(img, P(0, -0.9), P(0, 0.8), enc, e * 1.6); _ligne(img, P(-0.45, -0.5), P(0.45, -0.5), enc, e * 1.6)
+        _trait(img, [P(-0.75, 0.3), P(-0.4, 0.85), P(0, 0.95), P(0.4, 0.85), P(0.75, 0.3)], e * 1.6, enc); _ellipse(img, P(0, -1.05), (r * 0.2, r * 0.2), 0, enc, e)
+    elif motif == "etoile":
+        pts = [P(math.cos(math.pi / 2 + j * 4 * math.pi / 5) * 0.9, -math.sin(math.pi / 2 + j * 4 * math.pi / 5) * 0.9) for j in range(5)]
+        _poly(img, pts, (60, 80, 140)); _poly(img, pts, enc, True, e)
+    elif motif == "rose":
+        _ellipse(img, P(0, -0.2), (r * 0.55, r * 0.55), 0, (200, 50, 70)); _arc(img, P(0, -0.2), (r * 0.3, r * 0.3), 0, 0, 300, enc, e)
+        _ligne(img, P(0, 0.3), P(0, 1.1), (50, 120, 70), e * 1.4); _ellipse(img, P(0.3, 0.7), (r * 0.25, r * 0.12), 0, (50, 120, 70))
+    else:                                                                  # cœur + bandeau « MAMAN »
+        _poly(img, [P(0, 0.3), P(-0.6, -0.3), P(-0.45, -0.8), P(0, -0.55), P(0.45, -0.8), P(0.6, -0.3)], (210, 50, 60))
+        _poly(img, [P(-1.0, 0.25), P(1.0, 0.25), P(1.0, 0.75), P(-1.0, 0.75)], (245, 235, 210)); _poly(img, [P(-1.0, 0.25), P(1.0, 0.25), P(1.0, 0.75), P(-1.0, 0.75)], enc, True, e)
+
+
+def bracelets(img, c, m, R, ep, cols=((240, 200, 80), (220, 70, 120), (80, 170, 210))):
+    """Plusieurs bracelets fins près du poignet (bras nu)."""
+    for j, col in enumerate(cols):
+        u = 0.66 + 0.06 * j; w_ = (c[0] + (m[0] - c[0]) * u, c[1] + (m[1] - c[1]) * u)
+        a = math.degrees(math.atan2(m[1] - c[1], m[0] - c[0])) + 90
+        cv2.ellipse(img, (int(w_[0]), int(w_[1])), (max(2, int(0.11 * R)), max(1, int(0.03 * R))), a, 0, 360, TRAIT, max(1, int(ep * 1.8)), cv2.LINE_AA)
+        cv2.ellipse(img, (int(w_[0]), int(w_[1])), (max(2, int(0.11 * R)), max(1, int(0.03 * R))), a, 0, 360, col, max(1, int(ep * 0.9)), cv2.LINE_AA)
+
+
 EFFETS_TOON = ("larmes", "larme", "sueur")                               # dessinés par le visage toon (P1), pas par l'ancien style
 
 def _goutte(img, c, r, ep, coul=(150, 210, 250)):
@@ -857,7 +914,14 @@ def dessiner(img, P, p):
     loin_i = 1 if d > 0 else 0
     larg_b = MANCHE * R
     if K.get("croise", 0) > 0.5: formes = ("ouverte", "ouverte")          # bras croisés : mains à plat sur les biceps (référence)
-    def bras_k(i, coul_m): e_, c_, m_ = bras[i]; _manche(img, e_, c_, m_, larg_b, coul_m, courte, peau, ep, formes[i], r_m, R)
+    majeur = float(p.get("age") or P.get("age") or 30) >= 18
+    tatou_i = (sum(map(ord, str(C.get("c_haut")))) % 2) if ("tatouage" in det and majeur) else None
+    def deco_bras(i):                                                      # tatouage et bracelets sur l'avant-bras nu (idées 11)
+        e_, c_, m_ = bras[i]
+        if courte and not dos and i == tatou_i: tatouage(img, c_, m_, larg_b, C.get("tatouage") or TATOUAGES[sum(map(ord, str(C.get("c_bas")))) % len(TATOUAGES)], ep)
+        if courte and "bracelets" in det and i == 1: bracelets(img, c_, m_, R, ep)
+    def bras_k(i, coul_m):
+        e_, c_, m_ = bras[i]; _manche(img, e_, c_, m_, larg_b, coul_m, courte, peau, ep, formes[i], r_m, R); deco_bras(i)
     def devant(i):                                                         # main devant le buste (ou croisée de l'autre côté)
         m_ = bras[i][2]; sg_ = -1 if i == 0 else 1
         return (m_[0] - x) * sg_ < LARG_B * R * 0.95 and y_cou < m_[1] < y_ourlet + 0.2 * R
@@ -1037,7 +1101,7 @@ def dessiner(img, P, p):
     # --- bras devant le corps
     if courte:                                                             # avant-bras qui passent devant le t-shirt : redessinés par-dessus
         for i_ in (loin_i, 1 - loin_i):
-            if devant(i_): e_, c_, m_ = bras[i_]; avant_bras(img, c_, m_, larg_b, c_haut, True, peau, ep, formes[i_], r_m)
+            if devant(i_): e_, c_, m_ = bras[i_]; avant_bras(img, c_, m_, larg_b, c_haut, True, peau, ep, formes[i_], r_m); deco_bras(i_)
     else:
         if devant(loin_i): bras_k(loin_i, c_haut)
         bras_k(1 - loin_i, c_haut)
@@ -1054,6 +1118,7 @@ def dessiner(img, P, p):
     _poly(img, ov, TRAIT, True, ep * 2.2); _poly(img, ov, peau)
     b_ = -d if k34 else sh                                                 # ombre douce du côté du dos (croissant gris)
     degrade(img, ov, (tete[0] + b_ * -rxe * 0.35, tete[1] - R * 0.25), rxe * 1.55, peau_o, 0.85, 0.62)
+    if not dos: teint(img, ov, tete, R, p)
     if not dos:
         lun = "soleil" if "lunettes_soleil" in det else ("vue" if ("lunettes_vue" in det or P.get("accessoire") == "lunettes") else None)
         visage(img, tete, rxe, R, dict(p, _lunettes=lun), d, k34, tilt, ep)

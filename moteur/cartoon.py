@@ -648,6 +648,11 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
                 if autre_ in places[scene]: p["penche"] *= 1 if position(scene, autre_)[0] > x else -1
             if emo == "blase" and not parle: p["pied"] = abs(math.sin(tm * 5.5))   # il tape du pied, impatient
             if roule: p.update(yeux="roule", sourcils="neutre", forme="moue")
+            if TOON:                                                       # idée 13 : le teint change peu à peu pendant la réplique
+                u_t = float(np.clip((tm - q["deb"] + 0.2) / 2.2, 0, 1))
+                if emo in ("colere", "cri"): p["rougeur"] = max(p.get("rougeur", 0.0), 0.25 + 0.75 * u_t)
+                elif emo == "panique": p["paleur"] = max(p.get("paleur", 0.0), 0.2 + 0.7 * u_t)
+                elif emo == "gene": p["gene"] = 0.25 + 0.75 * u_t
             if TOON:                                                       # P1 : gros plans plus expressifs (larmes, sueur)
                 ex_ = tuple(p.get("effets") or ())
                 if emo in ("triste", "soupir") and q.get("intensite", 1) >= 2: ex_ += ("larme",)
@@ -1454,6 +1459,9 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
                 a_ = SM.ambiance(B["lieux"][min(sc_, len(B["lieux"]) - 1)], max(0.5, t1_ - t0_), graine=B["graine"] % 997 + sc_)
                 f_ = min(len(a_) // 3, int(0.3 * SRM)); a_[:f_] *= np.linspace(0, 1, f_)[:, None]; a_[-f_:] *= np.linspace(1, 0, f_)[:, None]
                 ajoute_x(a_, t0_, 1.0, amb)
+            if {"pluie", "orage"} & set(B.get("ambiances") or ()):            # pluie et tonnerre (calé sur les éclairs)
+                try: ajoute_x(SM.meteo(total, "orage" in B["ambiances"], graine=B["graine"] % 997), 0.0, 1.0, amb)
+                except Exception as e_: print(f"son de pluie impossible : {e_}", flush=True)
             emos = [z2["emo"] for z2 in ph]
             humeur = ("tension" if sum(e in ("cri", "colere", "panique") for e in emos) >= 2 else "triste" if sum(e in ("pleurs", "triste", "soupir") for e in emos) >= 2
                       else "joie" if sum(e in ("rire", "joie", "amour") for e in emos) >= 2 else "neutre")
