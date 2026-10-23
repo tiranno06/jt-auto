@@ -1,67 +1,69 @@
 Casting déjà fait.
-Type de vidéo : sketch long (+1 min)
+Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, ElevenLabs epuise — IA utilisée : mistral
-Vidéo depuis TikTok : https://vm.tiktok.com/ZN8Avg6wp/
+Vidéo depuis TikTok : https://www.tiktok.com/@charly.bse/video/7696887555169471776?_r=1&_t=ZN-9Am7CSapwEY
   son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 60.2 s, compte d'origine @charly.bse
-[ WARN:0@9.414] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  son récupéré : 60.1 s, compte d'origine @charly.bse
+[ WARN:0@19.392] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
   image de la vidéo : 1 plans (≈ 60.48 s chacun) ; cadrages : très serré 18 %, serré 15 %, moyen 0 %, large 66 % ; caméra : fixe 100 % ; 1 personne(s) à l'écran : centre (habit [208, 177, 141], cheveux [233, 204, 166], sourit 68 %) ; agitation 0.044 ; lumière jour ; fond [230, 206, 173]
   isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
   transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
   voix re-séparées par leur empreinte (ECAPA) : 2 voix (netteté 0.24)
-  18 répliques, voix : {'speaker_0': 263, 'speaker_1': 190}
-  son de la vidéo : 2 voix [263 Hz (f, 45 %), 190 Hz (f, 55 %)], 3.36 mots/s, blancs 0.71 s, 3 coupure(s) de parole, dynamique 25.1 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
-  IA gemini indisponible (gemini 429 : [{
-  "error": {
-    "code": 429,
-    "message": "You exceeded your current quota, please check your plan an) : on passe à la suivante
-  scène reconstituée : Deux amis, un couple depuis deux ans, discutent dans un salon cosy en soirée. L'un est stressé par son choix vestimentaire pour une sortie spéciale, tandis que l'autre semble avoir tout prévu avec humour et complicité.
-  casting : speaker_0 → Jojo, speaker_1 → Kévin
-Sketch : « ANNIVERSAIREDUCOUPLE », 18 répliques
-  décor 0 : living_room_with_couch_armchair_coffee_table_and_bookshelf, warm golde
-montage : 46 plans (0.0:large>pre/coupe 1.9:epaule>pre/zoom 3.7:epaule>inv/glisse 4.9:serre>pre/coupe 5.7:tres_serre>pre/glisse 7.0:moyen>pre/glisse 7.9:tres_serre>inv/file 8.7:large>pre/file 10.1:serre>inv/file 11.3:tres_serre>inv/glisse 12.2:serre>inv/glisse 13.3:large>inv/glisse 15.4:epaule>inv/glisse 17.5:large>pre/glisse 18.7:serre>inv/coupe 19.6:moyen>pre/coupe 20.3:serre>inv/coupe 22.0:large>inv/glisse 24.2:moyen>inv/glisse 25.4:moyen>pre/coupe 26.9:large>inv/glisse 28.3:epaule>pre/file 30.1:tres_serre>inv/coupe 31.0:moyen>pre/coupe 32.1:moyen>inv/glisse 33.3:tres_serre>inv/glisse 35.0:large>pre/coupe 35.9:serre>pre/zoom 37.2:moyen>inv/glisse 38.7:serre>pre/glisse 40.1:tres_serre>pre/glisse 41.0:moyen>inv/coupe 42.0:epaule>inv/glisse 43.3:serre>pre/coupe 44.4:moyen>inv/coupe 45.2:moyen>pre/file 47.3:tres_serre>pre/glisse 48.9:epaule>inv/coupe 50.1:tres_serre>pre/coupe 51.4:large>pre/zoom 52.9:tres_serre>inv/file 53.9:moyen>pre/coupe 54.8:large>inv/coupe 56.7:serre>pre/glisse 57.5:moyen>inv/coupe 59.1:serre>pre/coupe)
-studio : soir, lieux ['salon'], tenues presentateur=tshirt, invite=chemise, 0 figurant(s), ambiances ['poussiere'] ; plans large/avance epaule/fixe tres_serre/zoom_choc large/recul large/recul serre/avance moyen/travelling moyen/recul large/travelling epaule/fixe moyen/avance large/recul moyen/fixe moyen/avance epaule/fixe large/avance large/recul serre/avance
-cartoon : durée 63.5 s, 18 répliques, 1 scène(s), personnages ['presentateur', 'invite']
-Contrôle image : 31 défaut(s) — 6.25 s sous_titre_visage (presentateur), 6.75 s sous_titre_visage (presentateur), 7.75 s tete_coupee (invite), 10.25 s tete_coupee (presentateur), 19.75 s tete_coupee (invite), 20.25 s tete_coupee (invite), 24.75 s tete_coupee (presentateur), 25.25 s tete_coupee (presentateur)
-  image 0/3812 (4 processeurs)
-  image 300/3812
-  image 600/3812
-  image 900/3812
-  image 1200/3812
-  image 1500/3812
-  image 1800/3812
-  image 2100/3812
-  image 2400/3812
-  image 2700/3812
-  image 3000/3812
-  image 3300/3812
-  image 3600/3812
+  18 répliques, voix : {'speaker_1': 190, 'speaker_0': 263}
+  son de la vidéo : 2 voix [190 Hz (f, 55 %), 263 Hz (f, 45 %)], 3.37 mots/s, blancs 0.71 s, 3 coupure(s) de parole, dynamique 25.1 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
+  IA gemini indisponible (The read operation timed out) : on passe à la suivante
+  scène reconstituée : Deux amis, un homme et une femme, discutent par téléphone dans un salon cosy. Ils évoquent leur anniversaire de deux ans ensemble et l'endroit où ils vont dîner ce soir. L'ambiance est à la fois complice et pleine de suspense.
+  casting : speaker_0 → Lila, speaker_1 → Jojo
+  Claude a réattribué 7 réplique(s) à la bonne personne (voix proches)
+  descriptions des personnages remises sur les bons rôles (âge, genre de la voix)
+Sketch : « ANNIVERSAIRE SURPRISE AU RESTA », 18 répliques
+Lieux séparés : chaque personnage a son propre décor (appel, visio, l'un ailleurs)
+  décor 0 (lieu déjà connu) : quiet city street at dusk, parked car at the curb, sidewalk, street la
+  décor 1 : un salon cosy avec un canapé beige, une table basse en bois clair, des
+montage : 42 plans (0.0:serre>env/coupe 1.5:tres_serre>env/glisse 3.8:serre>pre/coupe 4.9:serre>inv/coupe 5.7:moyen>inv/glisse 7.0:tres_serre>pre/file 7.9:moyen>inv/file 8.7:tres_serre>pre/coupe 9.7:moyen>inv/coupe 10.1:tres_serre>inv/glisse 11.3:moyen>inv/glisse 12.2:serre>inv/glisse 13.3:serre>pre/glisse 15.4:moyen>pre/glisse 17.5:serre>inv/coupe 18.7:large>inv/glisse 20.3:serre>pre/coupe 22.0:large>pre/glisse 24.2:serre>pre/glisse 25.4:serre>inv/glisse 26.9:serre>pre/coupe 28.3:serre>inv/coupe 30.1:large>inv/glisse 32.1:serre>pre/glisse 33.3:large>pre/glisse 35.0:serre>inv/glisse 35.9:tres_serre>pre/coupe 37.2:serre>pre/glisse 38.7:serre>inv/coupe 40.1:large>pre/glisse 42.0:serre>inv/coupe 43.3:moyen>pre/coupe 45.2:serre>inv/coupe 47.3:large>inv/glisse 48.9:serre>pre/glisse 50.1:tres_serre>inv/coupe 51.4:serre>inv/glisse 52.9:serre>pre/coupe 53.9:moyen>inv/coupe 54.8:large>pre/glisse 56.8:epaule>pre/glisse 59.2:serre>env/coupe)
+studio : soir, lieux ['rue', 'salon'], tenues envoyee=chemise, presentateur=pull, invite=tshirt, 2 figurant(s), ambiances ['neon', 'poussiere'] ; plans serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe large/zoom_choc serre/avance
+cartoon : durée 63.4 s, 18 répliques, 2 scène(s), personnages ['envoyee', 'presentateur', 'invite']
+Contrôle image : 16 défaut(s) — 6.25 s tete_coupee (presentateur), 6.75 s tete_coupee (presentateur), 8.25 s tete_coupee (presentateur), 9.75 s tete_coupee (presentateur), 11.75 s tete_coupee (presentateur), 15.75 s tete_coupee (invite), 16.25 s tete_coupee (invite), 16.75 s tete_coupee (invite)
+  image 0/3801 (4 processeurs)
+  image 300/3801
+  image 600/3801
+  image 900/3801
+  image 1200/3801
+  image 1500/3801
+  image 1800/3801
+  image 2100/3801
+  image 2400/3801
+  image 2700/3801
+  image 3000/3801
+  image 3300/3801
+  image 3600/3801
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury qualité (ia) : 6.8/10 — Humoriste 7.0/10 : 41.2 s Le gag sur l'orthographe de 'Beluga' n'est pas assez exploité visuellement.; 50.0 s Le présentateur pourrait avoir une réaction plus exagérée pour souligner son émerveillement ('Mais t'es vraiment un mec en or').; 57.1 s L'invite pourrait rire ou exprimer plus de satisfaction pour renforcer l'humour. | Réalisateur 6.0/10 : 0 s Les plans sont parfois trop courts, ce qui rend le rythme saccadé et difficile à suivre.; 5.8 s La tête de l'invite est coupée par le bord de l'image dans plusieurs plans.; 24.3 s Les sous-titres apparaissent trop rapidement, ce qui nuit à la lisibilité.; 7.8 s tête de invite coupée par le bord de l'image (moyen); 19.8 s tête de invite coupée par le bord de l'image (moyen); 20.2 s tête de invite coupée par le bord de l'image (moyen) | Directeur artistique 8.0/10 : 0 s Les personnages secondaires (comme l'enfant) pourraient être mieux intég
-Manque par rapport à la vidéo d'origine : Les personnages originaux ont des expressions faciales plus variées et exagérées, notamment dans les moments clés comme les réactions de surprise ou de doute. ; L'original utilise des bruitages et des effets sonores plus fréquents pour renforcer l'humour (ex : sons comiques lors des répliques clés). ; Les décors originaux incluent des détails supplémentaires qui renforcent l'immersion (ex : objets spécifiques comme un téléphone ou un calendrier visible). ; Dans l'original, les transitions entre les plans sont plus fluides et utilisent des mouvements de caméra pour guider l'attention.
-Corrections du jury (tour 1) : plan serre sur la réplique 3 ; plan serre sur la réplique 5 ; plan large sur la réplique 6
-montage : 37 plans (0.0:large>pre/coupe 1.9:epaule>pre/zoom 3.7:epaule>inv/glisse 4.9:serre>pre/coupe 5.7:moyen>pre/glisse 13.3:large>inv/coupe 15.4:epaule>inv/glisse 17.5:serre>pre/glisse 20.3:large>inv/coupe 24.2:moyen>inv/glisse 25.4:moyen>pre/coupe 26.9:large>inv/glisse 28.3:epaule>pre/file 30.1:tres_serre>inv/coupe 31.0:moyen>pre/coupe 32.1:moyen>inv/glisse 33.3:tres_serre>inv/glisse 35.0:large>pre/coupe 35.9:serre>pre/zoom 37.2:moyen>inv/glisse 38.7:serre>pre/glisse 40.1:tres_serre>pre/glisse 41.0:moyen>inv/coupe 42.0:epaule>inv/glisse 43.3:serre>pre/coupe 44.4:moyen>inv/coupe 45.2:moyen>pre/file 47.3:tres_serre>pre/glisse 48.9:epaule>inv/coupe 50.1:tres_serre>pre/coupe 51.4:large>pre/zoom 52.9:tres_serre>inv/file 53.9:moyen>pre/coupe 54.8:large>inv/coupe 56.7:serre>pre/glisse 57.5:moyen>inv/coupe 59.1:serre>pre/coupe)
-studio : soir, lieux ['salon'], tenues presentateur=tshirt, invite=chemise, 0 figurant(s), ambiances ['poussiere'] ; plans large/avance epaule/fixe tres_serre/zoom_choc large/recul large/recul serre/avance moyen/travelling moyen/recul large/travelling epaule/fixe moyen/avance large/recul moyen/fixe moyen/avance epaule/fixe large/avance large/recul serre/avance
-cartoon : durée 63.5 s, 18 répliques, 1 scène(s), personnages ['presentateur', 'invite']
-Contrôle image : 40 défaut(s) — 6.25 s tete_coupee (invite), 6.75 s tete_coupee (invite), 7.25 s tete_coupee (invite), 7.75 s tete_coupee (invite), 8.25 s tete_coupee (invite), 8.75 s tete_coupee (invite), 9.25 s tete_coupee (invite), 9.75 s tete_coupee (invite)
-  image 0/3812 (4 processeurs)
-  image 300/3812
-  image 600/3812
-  image 900/3812
-  image 1200/3812
-  image 1500/3812
-  image 1800/3812
-  image 2100/3812
-  image 2400/3812
-  image 2700/3812
-  image 3000/3812
-  image 3300/3812
-  image 3600/3812
+Jury qualité (ia) : 4.8/10 — Humoriste 5.0/10 : 37.3 s Manque de punch sonore lors de l'hésitation comique.; 49 s La fausse assurance du personnage manque d'impact visuel.; 54.9 s La chute finale est trop plate sans mimique de panique. | Réalisateur 5.0/10 : 0.4 s Cadrage trop serré, tête coupée par le haut du cadre.; 22.4 s Les deux interlocuteurs au téléphone sont réunis dans la même pièce.; 26 s Haut du crâne coupé sur le plan fixe.; 6.2 s tête de presentateur coupée par le bord de l'image (moyen); 15.8 s tête de invite coupée par le bord de l'image (moyen); 30.2 s tête de presentateur coupée par le bord de l'image (large) | Directeur artistique 4.5/10 : 18.8 s Tableaux au mur avec du faux texte illisible de type lorem ipsum.; 22.4 s Incohérence de décor pour une conversation téléphonique entre deux lieux distants.; 57.1 s Substituer les textures mouchetées du pull par un aplat net conforme au style toon. | Ingén
+Manque par rapport à la vidéo d'origine : L'original met en scène un personnage unique assis sur un canapé filmé sous un angle constant. ; Dans l'original, l'interlocutrice n'est qu'une voix au téléphone et n'apparaît jamais physiquement. ; L'original conserve un décor fixe et cohérent tout au long de l'échange téléphonique.
+Corrections du jury (tour 1) : plan serre sur la réplique 3 ; plan serre sur la réplique 4 ; plan serre sur la réplique 10
+montage : 33 plans (0.0:serre>env/coupe 1.5:tres_serre>env/glisse 3.8:serre>pre/coupe 4.9:serre>inv/coupe 5.7:moyen>inv/glisse 13.3:serre>pre/glisse 17.5:serre>inv/coupe 18.7:large>inv/glisse 20.3:serre>pre/coupe 22.0:large>pre/glisse 24.2:serre>pre/glisse 25.4:serre>inv/glisse 26.9:serre>pre/coupe 28.3:serre>inv/coupe 32.1:serre>pre/glisse 33.3:large>pre/glisse 35.0:serre>inv/glisse 35.9:tres_serre>pre/coupe 37.2:serre>pre/glisse 38.7:serre>inv/coupe 40.1:large>pre/glisse 42.0:serre>inv/coupe 43.3:moyen>pre/coupe 45.2:serre>inv/coupe 47.3:large>inv/glisse 48.9:serre>pre/glisse 50.1:tres_serre>inv/coupe 51.4:serre>inv/glisse 52.9:serre>pre/coupe 53.9:moyen>inv/coupe 54.8:large>pre/glisse 56.8:epaule>pre/glisse 59.2:serre>env/coupe)
+studio : soir, lieux ['rue', 'salon'], tenues envoyee=chemise, presentateur=pull, invite=tshirt, 2 figurant(s), ambiances ['neon', 'poussiere'] ; plans serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe serre/fixe large/zoom_choc serre/avance
+cartoon : durée 63.4 s, 18 répliques, 2 scène(s), personnages ['envoyee', 'presentateur', 'invite']
+Contrôle image : 21 défaut(s) — 6.25 s tete_coupee (presentateur), 6.75 s tete_coupee (presentateur), 7.25 s tete_coupee (presentateur), 7.75 s tete_coupee (presentateur), 8.25 s tete_coupee (presentateur), 8.75 s tete_coupee (presentateur), 9.25 s tete_coupee (presentateur), 9.75 s tete_coupee (presentateur)
+  image 0/3801 (4 processeurs)
+  image 300/3801
+  image 600/3801
+  image 900/3801
+  image 1200/3801
+  image 1500/3801
+  image 1800/3801
+  image 2100/3801
+  image 2400/3801
+  image 2700/3801
+  image 3000/3801
+  image 3300/3801
+  image 3600/3801
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury qualité (gratuit) : 7.9/10 — Humoriste 8.6/10 : 59.2 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 2.0/10 : 6.2 s tête de invite coupée par le bord de l'image (moyen); 13.2 s tête de invite coupée par le bord de l'image (moyen); 24.8 s tête de presentateur coupée par le bord de l'image (moyen) | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.1/10 : 3.8 s sous-titres trop rapides à lire
-Version corrigée gardée : 6.8 → 7.9/10
+Jury qualité (ia) : 4.7/10 — Humoriste 5.0/10 : 54.9 s Chute finale sans zoom choc pour appuyer le comique.; 37.3 s Manque d'effet comique lors du mensonge flagrant. | Réalisateur 5.0/10 : 8.7 s Faux raccord : les deux personnages se téléphonent dans la même pièce.; 26 s Haut de la tête coupé par le bord du cadre.; 6.2 s tête de presentateur coupée par le bord de l'image (moyen); 13.2 s tête de presentateur coupée par le bord de l'image (moyen); 40.2 s tête de presentateur coupée par le bord de l'image (large) | Directeur artistique 4.0/10 : 5.8 s Décors incohérents avec la conversation téléphonique.; Textes illisibles générés dans les tableaux du décor. | Ingénieur du son 5.0/10 : 20.4 s Absence de bruitage marquant le blanc et la gêne. | Spectateur TikTok 5.0/10 : 57.1 s Sous-titre final tronqué et confus.; 8.7 s Situation confuse avec les deux protagonistes réunis au téléphone.
+Manque par rapport à la vidéo d'origine : L'original cadre uniquement le protagoniste sur son canapé pour accentuer ses réactions expressives. ; La version originale évite la confusion spatiale en ne montrant pas l'interlocutrice dans la même pièce.
+La version corrigée n'est pas meilleure : on garde la première.
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = mistral ×3, voix = tiktok, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 35249, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 20}
-OK : sortie/2026-10-22_21h14_emission.mp4 (64 s)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = mistral ×1, gemini ×2, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 22530, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 19}
+OK : sortie/2026-10-23_15h35_emission.mp4 (63 s)

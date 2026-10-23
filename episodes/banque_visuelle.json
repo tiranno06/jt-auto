@@ -3129,7 +3129,7 @@
   "video": "2026-10-22_20h35_emission.mp4"
  },
  {
-  "date": "2026-10-22",
+  "date": "2026-10-23",
   "source": "https://www.tiktok.com/@charly.bse/video/7696887555169471776?_r=1&_t=ZN-9Am7CSapwEY",
   "auteur": "charly.bse",
   "visuel": {
@@ -3225,21 +3225,21 @@
    "moment": "jour"
   },
   "audio": {
-   "duree": 60.2,
+   "duree": 60.1,
    "nb_voix": 2,
    "voix": [
-    {
-     "hz": 263,
-     "genre": "f",
-     "part": 0.45
-    },
     {
      "hz": 190,
      "genre": "f",
      "part": 0.55
+    },
+    {
+     "hz": 263,
+     "genre": "f",
+     "part": 0.45
     }
    ],
-   "debit": 3.36,
+   "debit": 3.37,
    "blanc_moyen": 0.71,
    "coupes": 3,
    "dynamique_db": 25.1,
@@ -3252,87 +3252,232 @@
    "sur_vanne": 0,
    "evenements": {},
    "emotions": {
-    "panicked": 2,
-    "teasing": 2,
-    "annoyed": 2,
+    "sourire": 2,
     "confused": 1,
-    "dramatic": 1,
-    "sarcastic": 1,
-    "nervous": 1,
-    "whispered": 1
+    "sceptique": 1,
+    "emue": 1,
+    "ironique": 1,
+    "inquiet": 1,
+    "mystereux": 1,
+    "reflechit": 1
    }
   },
   "claude": {
    "lieux": [
+    "rue",
     "salon"
    ],
    "moment": "soir",
    "costumes": {
-    "presentateur": {
+    "invite": {
      "haut": "tshirt",
-     "c_haut": "bleu",
+     "c_haut": "rouge",
      "motif": "uni",
-     "bas": "jeans",
+     "bas": "jean",
      "chaussures": "baskets",
      "details": [
-      "barbe_courte",
-      "bracelet"
-     ],
-     "chapeau": null,
-     "cheveux": "court",
-     "c_cheveux": "brun"
+      "bracelet",
+      "collier"
+     ]
     },
-    "invite": {
+    "envoyee": {
      "haut": "chemise",
-     "c_haut": "blanc",
-     "motif": "rayures",
+     "c_haut": "bleu marine",
+     "motif": "uni",
      "bas": "pantalon",
      "chaussures": "ville",
      "details": [
-      "montre",
-      "lunettes_vue"
-     ],
-     "chapeau": null,
-     "cheveux": "carre",
-     "c_cheveux": "blond"
+      "cravate",
+      "montre"
+     ]
     }
-   }
+   },
+   "objets": [
+    {
+     "replique": 0,
+     "objet": "telephone"
+    },
+    {
+     "replique": 5,
+     "objet": "telephone"
+    },
+    {
+     "replique": 14,
+     "objet": "bouteille"
+    }
+   ],
+   "gags": [
+    "Affiche : 'Beluga : où le poisson rencontre le champagne'",
+    "Post-it sur le frigo : 'Ne pas oublier les bougies'",
+    "Tableau : 'Notre histoire en 2 ans : 730 jours de bonheur'"
+   ],
+   "ambiances": [
+    "neon"
+   ],
+   "plans": [
+    {
+     "replique": 0,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "gratte_tete",
+     "reaction": "aucun"
+    },
+    {
+     "replique": 1,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "haussement",
+     "reaction": "sceptique"
+    },
+    {
+     "replique": 2,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "bras_ouverts",
+     "reaction": "choc"
+    },
+    {
+     "replique": 3,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "pointe_g",
+     "reaction": "regard_camera"
+    },
+    {
+     "replique": 4,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "telephone",
+     "reaction": "gene"
+    },
+    {
+     "replique": 5,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "gratte_tete",
+     "reaction": "soupir"
+    },
+    {
+     "replique": 6,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "pointe_d",
+     "reaction": "facepalm"
+    },
+    {
+     "replique": 7,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "desespoir",
+     "reaction": "choc"
+    },
+    {
+     "replique": 8,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "facepalm",
+     "reaction": "sceptique"
+    },
+    {
+     "replique": 9,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "pointe_g",
+     "reaction": "regard_camera"
+    },
+    {
+     "replique": 10,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "pointe_d",
+     "reaction": "panique"
+    },
+    {
+     "replique": 11,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "sourire",
+     "reaction": "joie"
+    },
+    {
+     "replique": 12,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "bras_ouverts",
+     "reaction": "choc"
+    },
+    {
+     "replique": 13,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "explique",
+     "reaction": "rire"
+    },
+    {
+     "replique": 14,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "pouce",
+     "reaction": "fier"
+    },
+    {
+     "replique": 15,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "amour",
+     "reaction": "sourire"
+    },
+    {
+     "replique": 16,
+     "plan": "large",
+     "mouvement": "zoom_choc",
+     "geste": "bras_ouverts",
+     "reaction": "aucun"
+    }
+   ]
   },
   "realisation": {
    "moment": "soir",
    "lieux": [
+    "rue",
     "salon"
    ],
-   "gags": [],
+   "gags": [
+    "Affiche : 'Beluga : où le poisson rencontre le champagne'",
+    "Post-it sur le frigo : 'Ne pas oublier les bougies'",
+    "Tableau : 'Notre histoire en 2 ans : 730 jours de bonheur'"
+   ],
    "ambiances": [
+    "neon",
     "poussiere"
    ],
    "source": "auteur+image",
    "tenues": {
-    "presentateur": "tshirt",
-    "invite": "chemise"
+    "envoyee": "chemise",
+    "presentateur": "pull",
+    "invite": "tshirt"
    },
    "plans": [
-    "large/avance",
-    "epaule/fixe",
-    "tres_serre/zoom_choc",
-    "large/recul",
-    "large/recul",
-    "serre/avance",
-    "moyen/travelling",
-    "moyen/recul",
-    "large/travelling",
-    "epaule/fixe",
-    "moyen/avance",
-    "large/recul",
-    "moyen/fixe",
-    "moyen/avance",
-    "epaule/fixe",
-    "large/avance",
-    "large/recul",
+    "serre/fixe",
+    "serre/fixe",
+    "serre/fixe",
+    "serre/fixe",
+    "serre/fixe",
+    "serre/fixe",
+    "serre/fixe",
+    "serre/fixe",
+    "serre/fixe",
+    "serre/fixe",
+    "serre/fixe",
+    "serre/fixe",
+    "serre/fixe",
+    "serre/fixe",
+    "serre/fixe",
+    "serre/fixe",
+    "large/zoom_choc",
     "serre/avance"
    ]
   },
-  "video": "2026-10-22_21h14_emission.mp4"
+  "video": "2026-10-23_15h35_emission.mp4"
  }
 ]
