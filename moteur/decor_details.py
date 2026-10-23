@@ -256,11 +256,11 @@ def voiture(img, rng, res, gag, moment, allume):
         D.boite(a3, 30, 1360, D.W - 30, 1400, D.fonce(c_tab, 0.7), 4, 20)
         D.ecran(a3, 470, 1420, 640, 1530, "bleu"); D.texte(a3, "GPS : demi-tour", 476, 1540, 636, 1580, (220, 230, 240), 18)
         for xx in (380, 720): D.boite(a3, xx - 40, 1430, xx + 40, 1480, (30, 30, 36), 5, 10)    # aérations
-        cv2.circle(a3, (250, 1300), 190, D.TRAIT, 44, cv2.LINE_AA); cv2.circle(a3, (250, 1300), 190, (36, 36, 42), 30, cv2.LINE_AA)   # volant
-        D.boite(a3, 205, 1270, 295, 1340, (36, 36, 42), 5, 20); D.ligne(a3, (100, 1320), (205, 1305), (36, 36, 42), 26); D.ligne(a3, (295, 1305), (400, 1320), (36, 36, 42), 26)
+        cv2.circle(a3, (200, 1410), 170, D.TRAIT, 44, cv2.LINE_AA); cv2.circle(a3, (200, 1410), 170, (36, 36, 42), 30, cv2.LINE_AA)   # volant
+        D.boite(a3, 160, 1385, 240, 1445, (36, 36, 42), 5, 20); D.ligne(a3, (60, 1425), (160, 1412), (36, 36, 42), 24); D.ligne(a3, (240, 1412), (340, 1425), (36, 36, 42), 24)
         D.boite(a3, 700, 1560, 1010, 1760, D.fonce(c_tab, 0.85), 6, 18); D.boite(a3, 820, 1640, 890, 1666, (150, 150, 160), 3, 8)   # boîte à gants
         D.boite(a3, 820, 1330, 1000, 1400, (230, 200, 90), 4, 10); D.texte(a3, gag(0), 826, 1334, 994, 1396, D.TRAIT, 16)   # post-it collé
-    return D._avant(devant, 1300, [(40, 1090, 460, 1300)])
+    return D._avant(devant, 1300, [(0, 1200, 300, 1300)])
 
 
 NOUVEAUX = {"administration": administration, "hall": hall, "caverne": caverne, "palais": palais, "voiture": voiture}

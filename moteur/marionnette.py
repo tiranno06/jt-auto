@@ -165,7 +165,7 @@ def _motif(img, c, ax, motif, couleur, s, haut=None, pts=None):
     img[y0:y1, x0:x1] = (img[y0:y1, x0:x1] * (1 - a) + z * a).astype(np.uint8)
 
 # ------------------------------------------------------------------ mains
-FORMES_MAIN = ("ouverte", "poing", "index", "pouce", "paume")
+FORMES_MAIN = ("ouverte", "poing", "index", "pouce", "paume", "poche")
 
 def _main(img, m, direction, forme, r, couleur, gonfle=0.0):
     """Main au bout du bras : `direction` = angle de l'avant-bras (radians, sens du bras), `gonfle` = épaisseur du contour.
