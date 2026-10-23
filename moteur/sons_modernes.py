@@ -224,6 +224,24 @@ def son(nom):
 # ------------------------------------------------------------------ son « cinéma » : ambiance du lieu, pas, musique de fond
 def _bruit(n, rng): return rng.normal(0, 1, n)
 
+def telephone(x, sr=SR):
+    """Voix « dans le téléphone » : bande étroite (300-3400 Hz), un peu saturée et compressée. x : (n, 2)."""
+    from scipy.signal import butter, sosfilt
+    sos = butter(4, [300, 3400], btype="bandpass", fs=sr, output="sos")
+    m = sosfilt(sos, x.mean(1)); m = np.tanh(m * 3.0) / 3.0 * 1.25
+    return np.stack([m, m], 1)
+
+
+def rembobinage(duree, sr=SR, graine=3):
+    """Bruit de cassette qui rembobine : sifflement qui monte très vite + crépitement, en fondu. Stéréo."""
+    n = int(duree * sr); t = np.arange(n) / sr; rng = np.random.default_rng(graine)
+    f = 400 + 3800 * (t / max(duree, 1e-3)) ** 0.6; ph = 2 * np.pi * np.cumsum(f) / sr
+    s = 0.05 * np.sin(ph) * (1 + 0.5 * np.sin(2 * np.pi * 37 * t)) + _bande(rng.normal(0, 1, n), 2000, 8000) * 0.02
+    env = np.minimum(1, t / 0.05) * np.minimum(1, (duree - t) / 0.12)
+    s = s * env
+    return np.stack([s, s], 1)
+
+
 def meteo(duree, orage=False, graine=7):
     """Pluie (bruissement doux) et, s'il y a de l'orage, grondement de tonnerre juste après chaque éclair de l'image
     (decor_anime : éclair toutes les 6,5 s, le premier à 5,2 s). Stéréo 44,1 kHz, très bas sous les voix."""
