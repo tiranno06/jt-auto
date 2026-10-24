@@ -1,12 +1,12 @@
 """Profils TikTok de l'auteur : une réserve de sons pour les vidéos automatiques.
 
-Sur le site (Réglages), l'auteur colle une liste de profils TikTok (@pseudo ou lien du profil, un par ligne) et choisit la part
-des vidéos automatiques faites à partir de ces profils (PART_PROFILS : 0, 25, 50, 75 ou 100 %). À chaque vidéo automatique, le
-robot tire au sort : soit une idée de sketch comme avant, soit une vidéo au hasard d'un profil de la liste, jamais déjà utilisée,
-d'une durée raisonnable ; il reprend alors son audio et fabrique la vidéo autour, exactement comme avec un lien collé à la main.
+Filière « Sons TikTok », totalement à part des sketchs du robot (onglet 🎵 TikTok du site) : l'auteur colle une liste de profils
+(@pseudo ou lien du profil, un par ligne : PROFILS_TIKTOK) et règle son propre planning (HEURE_TIKTOK, FREQUENCE_TIKTOK). À chaque
+créneau, le robot prend une vidéo au hasard d'un profil, jamais déjà utilisée, d'une durée raisonnable ; il reprend son audio et
+fabrique la vidéo autour, exactement comme avec un lien collé à la main.
 
 Liste des vidéos d'un profil : yt-dlp (en imitant un navigateur, puis par l'API de l'appli) ; sinon le service public tikwm.com.
-Si aucun profil ne répond, ou si le son ne passe pas, le robot revient aux idées automatiques : la vidéo sort quand même."""
+Si aucun profil ne répond ou qu'aucun son ne passe : pas de vidéo cette fois (jamais de sketch à la place), nouvel essai au réveil suivant."""
 import json, os, random, re, subprocess, sys
 
 DUREE_MIN, DUREE_MAX = 8, 150                                              # secondes : assez de dialogue, pas un film entier
@@ -22,13 +22,6 @@ def liste(texte=None):
         r = re.search(r"tiktok\.com/@([\w.\-]+)", m) or re.match(r"^@?([\w.\-]{2,40})$", m)
         if r and r.group(1).lower() not in [x.lower() for x in out]: out.append(r.group(1))
     return out
-
-
-def part():
-    """Part des vidéos automatiques faites depuis les profils (0 à 1). Par défaut une sur deux quand une liste existe."""
-    try: p = float((os.environ.get("PART_PROFILS") or "50").strip().rstrip("%"))
-    except ValueError: p = 50.0
-    return max(0.0, min(1.0, p / 100))
 
 
 def deja_utilisees(historique):
@@ -96,9 +89,3 @@ def choisir(historique, journal=print, graine=None, essais=4):
         rng.shuffle(vs); out += [v["url"] for v in vs[:max(2, essais // len(profils))]]
         if len(out) >= essais: break
     return out[:essais]
-
-
-def tirage(auto, theme="", lot=False, graine=None):
-    """Cette vidéo automatique vient-elle d'un profil ? (seulement les vidéos du planning, jamais une demande manuelle)"""
-    if not auto or theme or lot or not liste(): return False
-    return random.Random(graine).random() < part()

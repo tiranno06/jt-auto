@@ -1068,19 +1068,30 @@ class TestStyleToon(unittest.TestCase):
 
 
 class TestProfilsTiktok(unittest.TestCase):
-    """Profils TikTok de l'auteur : liste lue du réglage, vidéos déjà utilisées écartées, tirage réservé au planning."""
-    def test_liste_et_tirage(self):
+    """Sons TikTok : filière à part des sketchs (liste des profils, vidéos déjà utilisées écartées, planning séparé)."""
+    def test_liste(self):
         import profils_tiktok as P
         self.assertEqual(P.liste("@charly.bse\nhttps://www.tiktok.com/@Foo_Bar?lang=fr ; baz, @charly.bse"), ["charly.bse", "Foo_Bar", "baz"])
         h = [{"sources": ["https://www.tiktok.com/@x/video/123?_r=1"]}, {"source_audio": "https://www.tiktok.com/@y/video/456"}]
         self.assertEqual(P.deja_utilisees(h), {"123", "456"})
-        anc = {k: os.environ.get(k) for k in ("PROFILS_TIKTOK", "PART_PROFILS")}
+        self.assertFalse(hasattr(P, "tirage"))                             # plus aucun mélange avec les sketchs automatiques
+
+    def test_plannings_separes(self):
+        import datetime as dt
+        from zoneinfo import ZoneInfo
+        now = dt.datetime.now(ZoneInfo("Europe/Paris"))
+        hhmm = (now - dt.timedelta(minutes=5)).strftime("%H:%M")
+        if (now - dt.timedelta(minutes=5)).date() != now.date(): self.skipTest("minuit")
+        fich = f"{now.date()}_{now.strftime('%Hh%M')}_emission.mp4"
+        hist = [{"date": now.date().isoformat(), "auto": True, "filiere": "tiktok", "fichier": fich}]
+        anc = {k: os.environ.get(k) for k in ("EVENEMENT", "FILIERE", "HEURE", "FREQUENCE")}
         try:
-            os.environ["PROFILS_TIKTOK"] = "@charly.bse"; os.environ["PART_PROFILS"] = "100"
-            self.assertTrue(P.tirage(True)); self.assertFalse(P.tirage(False)); self.assertFalse(P.tirage(True, "TIKTOK::lien"))
-            os.environ["PART_PROFILS"] = "0"; self.assertFalse(P.tirage(True))
-            os.environ["PROFILS_TIKTOK"] = ""; os.environ["PART_PROFILS"] = "100"; self.assertFalse(P.tirage(True))
+            os.environ.update(EVENEMENT="schedule", HEURE=hhmm, FREQUENCE="1")
+            planning._hist = lambda: hist
+            os.environ["FILIERE"] = "tiktok"; self.assertFalse(planning.decision()[0])     # créneau TikTok déjà traité
+            os.environ["FILIERE"] = ""; self.assertTrue(planning.decision()[0])            # le planning des sketchs n'est pas touché
         finally:
+            import importlib; importlib.reload(planning)
             for k, v in anc.items():
                 if v is None: os.environ.pop(k, None)
                 else: os.environ[k] = v

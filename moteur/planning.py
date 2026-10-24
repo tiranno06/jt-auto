@@ -72,10 +72,12 @@ def decision_complete():
         except (TypeError, ValueError): return False
     def heure_fichier(e):
         r_ = re.search(r"_(\d{2})h(\d{2})_", e.get("fichier", "")); return f"{r_.group(1)}:{r_.group(2)}" if r_ else None
-    faites = sum(1 for e in hist if e.get("auto") and apres(e.get("date"), heure_fichier(e))); rates = 0
+    filiere = "tiktok" if (os.environ.get("FILIERE") or "").strip() == "tiktok" else "sketch"   # sketchs et sons TikTok : plannings séparés
+    de_la_filiere = lambda e: (e.get("filiere") or "sketch") == filiere
+    faites = sum(1 for e in hist if e.get("auto") and de_la_filiere(e) and apres(e.get("date"), heure_fichier(e))); rates = 0
     try:
         tent = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "episodes", "tentatives.json"), encoding="utf-8"))
-        rates = sum(1 for e in tent if e.get("auto") and apres(e.get("date"), e.get("heure") or "00:00"))
+        rates = sum(1 for e in tent if e.get("auto") and de_la_filiere(e) and apres(e.get("date"), e.get("heure") or "00:00"))
     except (OSError, ValueError): pass
     budget = (os.environ.get("BUDGET_MOIS") or "").strip().replace(",", ".")
     if budget:                                                             # plafond de dépenses Claude du mois (réglage de la régie)
