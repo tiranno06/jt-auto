@@ -1551,5 +1551,49 @@
    "son": true
   },
   "cadence": "rapide"
+ },
+ {
+  "moment": "jour",
+  "lieux": [
+   "restaurant"
+  ],
+  "source": "auteur+image",
+  "duree": 10.0,
+  "plans": {
+   "moyen": 8,
+   "contre_plongee": 7,
+   "serre": 4,
+   "large": 9,
+   "epaule": 3,
+   "tres_serre": 2
+  },
+  "mouvements": {
+   "fixe": 13,
+   "epaule": 15,
+   "zoom_choc": 3,
+   "travelling": 1,
+   "avance": 1
+  },
+  "costumes": {
+   "invite": "gilet",
+   "presentateur": "debardeur"
+  },
+  "figurants": 2,
+  "ambiances": [
+   "vapeur"
+  ],
+  "controle": "Humoriste 8.6/10 : 60.6 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 2.0/10 : 3.2 s tête de presentateur coupée par le bord de l'image (moyen); 8.2 s tête de invite coupée ",
+  "fichier": "2026-10-24_21h22_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": true,
+   "tiers": true,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": false,
+   "reflets": false,
+   "son": true
+  },
+  "cadence": "rapide"
  }
 ]
