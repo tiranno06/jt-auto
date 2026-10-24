@@ -95,7 +95,7 @@ def lire(p, d):
 
 def main():
     import progression as PR                                               # avancement en direct sur le site (barre de progression)
-    PR.TYPE[0] = "🎵 Son TikTok" if (FILIERE == "tiktok" or THEME.startswith("TIKTOK::")) else "🎭 Sketch"
+    PR.TYPE[0] = "tiktok" if (FILIERE == "tiktok" or THEME.startswith("TIKTOK::")) else "sketch"
     PR.etape(3, "Démarrage du robot", forcer=True)
     historique = lire("episodes/historique.json", [])
     modal_ok = bool(os.environ.get("MODAL_TOKEN_ID") and os.environ.get("MODAL_TOKEN_SECRET"))

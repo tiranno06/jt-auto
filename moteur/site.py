@@ -1082,9 +1082,11 @@ async function suiviRapide(){                                              // to
   for(const s of Object.values(SUIVI.runs)){
     if(s.statut==="completed"&&s.lu) continue;
     try{const d=await (await ghLire(`/commits/${s.sha}/status?per_page=100`)).json(); s.vu=true;
-      const st=(d.statuses||[]).find(x=>x.context==="progression-"+s.id);
+      let st=(d.statuses||[]).find(x=>x.context==="progression-"+s.id);
+      if(!st){try{const c=await (await ghLire(`/commits/${s.sha}/check-runs?check_name=progression-${s.id}`)).json(); const cr=(c.check_runs||[])[0];   // voie de secours
+        if(cr&&cr.output&&cr.output.title) st={description:cr.output.title,state:cr.status!=="completed"?"pending":(cr.conclusion==="success"?"success":"failure")}}catch(e){}}
       if(st){const [p,ty,txt,fin]=String(st.description||"").split("|"); const pct=+p||0;
-        if(pct!==s.pct||txt!==s.texte){s.pct=pct; s.t_pct=Date.now()} s.type=ty; s.texte=txt; s.fin=fin?(+fin)*1000:null; s.etat=st.state; if(s.statut==="completed") s.lu=true}
+        if(pct!==s.pct||txt!==s.texte){s.pct=pct; s.t_pct=Date.now()} s.type=ty==="tiktok"?"🎵 Son TikTok":ty==="sketch"?"🎭 Sketch":ty; s.texte=txt; s.fin=fin?(+fin)*1000:null; s.etat=st.state; if(s.statut==="completed") s.lu=true}
     }catch(e){}
   }
   dessinerSuivi();
