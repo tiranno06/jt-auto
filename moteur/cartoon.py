@@ -296,8 +296,55 @@ def _pluie(img, tm, t0, graine):
         pts = np.array([[x + c * dx - s_ * dy, y + s_ * dx + c * dy] for dx, dy in ((-46, -24), (46, -24), (46, 24), (-46, 24))], np.int32)
         cv2.fillPoly(img, [pts], M.TRAIT, cv2.LINE_AA); cv2.fillPoly(img, [((pts - [x, y]) * 0.82 + [x, y]).astype(np.int32)], (150, 210, 140), cv2.LINE_AA)
 
+# ------------------------------------------------------------------ redessin partiel (2e version du jury)
+def _sig(x):
+    """Empreinte courte d'un élément (plan, réplique, réglages) : sert à savoir si une image change d'une version à l'autre."""
+    import hashlib, json
+    def norm(v):
+        if isinstance(v, np.ndarray): return "nd:" + hashlib.md5(np.ascontiguousarray(v).tobytes()).hexdigest()
+        if isinstance(v, dict): return {str(k): norm(w) for k, w in sorted(v.items(), key=lambda kv: str(kv[0]))}
+        if isinstance(v, (list, tuple)): return [norm(w) for w in v]
+        if isinstance(v, (np.integer, np.floating)): return v.item()
+        return v if isinstance(v, (int, float, str, bool, type(None))) else str(v)
+    return hashlib.md5(json.dumps(norm(x), sort_keys=True).encode()).hexdigest()[:16]
+
+
+def images_a_refaire(ancien, neuf, nf, fps, marge=1.0):
+    """Images de la nouvelle version qui diffèrent de l'ancienne : celles dont un plan ou une réplique proche (± marge s) a changé.
+    None = tout est à refaire (réglages généraux, durée ou cadence différents)."""
+    if not ancien or ancien.get("sig_global") != neuf.get("sig_global") or ancien.get("nf") != nf or ancien.get("fps") != fps: return None
+    def autour(liste, t): return tuple(sig for a, b, sig in liste if a - marge <= t <= b + marge)
+    refaire = []
+    for fi in range(nf):
+        t = fi / fps
+        if autour(ancien["sig_plans"], t) != autour(neuf["sig_plans"], t) or autour(ancien["sig_ph"], t) != autour(neuf["sig_ph"], t): refaire.append(fi)
+    return refaire
+
+
+def _images_cles(video, fps):
+    r = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0", "-skip_frame", "nokey", "-show_entries", "frame=pts_time",
+                        "-of", "csv=p=0", video], capture_output=True, text=True, timeout=300)
+    return sorted({int(round(float(x) * fps)) for x in re.findall(r"\d+(?:\.\d+)?", r.stdout)})
+
+
+def plages(refaire, cles, nf):
+    """Morceaux à redessiner, élargis aux images clés de l'ancienne vidéo (pour recoller sans réencoder le reste)."""
+    if not refaire: return []
+    cles = [c for c in cles if 0 <= c <= nf] + [nf]
+    out = []
+    for fi in refaire:
+        a = max([c for c in cles if c <= fi] or [0]); b = min(c for c in cles if c > fi)
+        if out and a <= out[-1][1]: out[-1][1] = max(out[-1][1], b)
+        else: out.append([a, b])
+    return [tuple(x) for x in out]
+
+
 # ------------------------------------------------------------------ rendu
-def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False):
+class TempsDepasse(RuntimeError):
+    """La 2e version du jury n'aurait pas le temps de finir avant la limite de GitHub : on garde la 1re."""
+
+
+def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False, reprise=None, limite=None):
     tmp = tempfile.mkdtemp(); reps = sk["repliques"]; decors = decors or {}; rng = np.random.default_rng(11)
     roles = sorted({r["p"] for r in reps if r["p"] != "narrateur"}, key=lambda r: [x["p"] for x in reps].index(r))   # la voix off n'est pas dessinée
     # scènes : découpage de l'auteur (sinon une seule scène)
@@ -1130,22 +1177,26 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
     def composer_ssaa(img, liste, sol_y=None):
         """Super-échantillonnage : les personnages sont dessinés sur une toile deux fois plus grande, puis réduits (moyenne des
         pixels) : traits parfaitement lisses, détails fins (cheveux, barbe, coutures) nets, comme un rendu 4K ramené en 1080p."""
-        if "t" not in TOILE: TOILE["t"] = np.empty((2 * H, 2 * W, 3), np.uint8)
-        T = TOILE["t"]; T[:] = SENT
+        if "t" not in TOILE: TOILE["t"] = np.empty((2 * H, 2 * W, 3), np.uint8); TOILE["t"][:] = SENT; TOILE["sale"] = None
+        T = TOILE["t"]
+        if TOILE["sale"] is not None:                                      # vitesse : on ne remet à zéro que la zone dessinée la fois d'avant
+            a_, b_, c_, d_ = TOILE["sale"]; T[b_:d_, a_:c_] = SENT
+        TOILE["sale"] = (0, 0, 2 * W, 2 * H)                               # si un dessin plante en route : tout sera remis à zéro
         for role, p in liste:
             p2 = dict(p, x=p["x"] * 2, y=p["y"] * 2, s=p["s"] * 2, couleur_ombre=tuple(int(v) for v in MARQ))
             dessine(T, role, p2)
-        dif = np.any(T != SENT, axis=2)
-        if not dif.any(): return
-        x, y, w, h = cv2.boundingRect(dif.astype(np.uint8))
+        vide = cv2.inRange(T, SENT, SENT)                                  # vitesse : comparaison des 3 couleurs d'un coup (OpenCV)
+        x, y, w, h = cv2.boundingRect(cv2.bitwise_not(vide))
+        TOILE["sale"] = (x, y, x + w, y + h) if w and h else None
+        if not (w and h): return
         x0, y0 = (x // 2) * 2, (y // 2) * 2; x1, y1 = min(2 * W, x + w + 2) // 2 * 2, min(2 * H, y + h + 2) // 2 * 2
         if x1 <= x0 or y1 <= y0: return
-        Tz, dz = T[y0:y1, x0:x1], dif[y0:y1, x0:x1]
-        ombre = np.all(Tz == MARQ, axis=2); corps = dz & ~ombre
+        Tz, dz = T[y0:y1, x0:x1], vide[y0:y1, x0:x1] == 0
+        ombre = cv2.inRange(Tz, MARQ, MARQ) > 0; corps = dz & ~ombre
         taille = ((x1 - x0) // 2, (y1 - y0) // 2)
         a_c = cv2.resize(corps.astype(np.float32), taille, interpolation=cv2.INTER_AREA)[..., None]
         a_o = cv2.resize(ombre.astype(np.float32), taille, interpolation=cv2.INTER_AREA)[..., None]
-        coul = cv2.resize(np.where(corps[..., None], Tz, 0).astype(np.float32), taille, interpolation=cv2.INTER_AREA)   # couleurs prémultipliées
+        coul = cv2.resize(cv2.bitwise_and(Tz, Tz, mask=corps.view(np.uint8)).astype(np.float32), taille, interpolation=cv2.INTER_AREA)   # couleurs prémultipliées
         if B and OMBRES:
             try: ombres_portees(img, a_c, (x0 // 2, y0 // 2, x1 // 2, y1 // 2), liste, sol_y)
             except Exception as e_: print(f"ombre portée impossible : {e_}", flush=True)
@@ -1212,9 +1263,10 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             AMB[sc] = (np.clip(1 + 0.20 * (amb - 1), 0.86, 1.12).astype(np.float32),
                        np.clip(np.array([255, 236, 200], np.float32) * (0.9 if (B or {}).get("moment") in ("soir", "nuit") else 0.6), 0, 255))
         teinte, c_lis = AMB[sc]
-        m = np.any(img != avant, axis=2)
-        if not m.any(): return
-        ys, xs = np.nonzero(m); y0, y1, x0, x1 = ys.min(), ys.max() + 1, xs.min(), xs.max() + 1
+        d_ = cv2.absdiff(img, avant); m = (d_[..., 0] | d_[..., 1] | d_[..., 2]) > 0   # vitesse : sans np.any sur toute l'image
+        x0, y0, w_, h_ = cv2.boundingRect(m.astype(np.uint8))
+        if not (w_ and h_): return
+        y1, x1 = y0 + h_, x0 + w_
         sub, mm = img[y0:y1, x0:x1], m[y0:y1, x0:x1]
         mm = cv2.morphologyEx(mm.astype(np.uint8), cv2.MORPH_CLOSE, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (11, 11))) > 0   # sans trous
         sub[mm] = np.clip(sub[mm].astype(np.float32) * teinte, 0, 255).astype(np.uint8)
@@ -1583,6 +1635,13 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
                                 places={k: list(v) for k, v in places.items()}, total=total, doublage=bool(DOUB), mini=mini, separes=SEPARES,
                                 bruitages=list(BRUITAGES), lieux=list((B or {}).get("lieux") or []), compagnons=sum(len(v) for v in COMP.values()),
                                 decors_ia=bool(decors), coupes_origine=list((B or {}).get("coupes_origine") or []))
+    try:                                                                   # empreintes : redessin partiel d'une 2e version (jury)
+        RENDU.update(fps=FPS, nf=nf, sig_plans=[(x["t0"], x["t1"], _sig(x)) for x in DECOUPE], sig_ph=[(q["deb"], q["fin"], _sig(q)) for q in ph],
+                     sig_parts={k: _sig(v) for k, v in {"fiches": FICHES, "places": places, "comp": COMP, "transitions": transitions, **{"B." + k: v for k, v in (B or {}).items()}}.items()},
+                     sig_global=_sig({"fiches": FICHES, "places": places, "lieux": (B or {}).get("lieux"), "comp": COMP, "sep": SEPARES, "total": total,
+                                      "decors": sorted(str(k) for k in (decors or {})), "fin": FIN_CARTE, "gel": GEL, "w": W, "h": H, "mini": mini,
+                                      "transitions": transitions, "studio": {k: v for k, v in (B or {}).items() if k not in ("decoupe", "plans", "bruitages", "source")}}))
+    except Exception as e: print(f"empreintes impossibles ({str(e)[:100]}) : pas de redessin partiel", flush=True); RENDU["sig_global"] = None
     global _IMAGE
     _IMAGE = image                                                         # les processus de rendu héritent de tout (fork)
     n_proc = min(4, os.cpu_count() or 1) if os.environ.get("RENDU_PARALLELE", "1") != "0" else 1
@@ -1593,22 +1652,70 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
             cv2.setNumThreads(1)                                           # avant de dupliquer le programme : pas de fil OpenCV en cours (sinon blocage)
             pool = mp.get_context("fork").Pool(n_proc)
         except Exception as e: print(f"  rendu parallèle impossible ({e}) : un seul processeur", flush=True); pool = None
-    ff = subprocess.Popen(["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS),
-                           "-i", "-", "-i", wav, "-c:v", "libx264", "-preset", (os.environ.get("PRESET_X264") or "slow"), "-tune", "animation",
-                           "-crf", (os.environ.get("CRF") or "15"), "-maxrate", "20M", "-bufsize", "30M", "-profile:v", "high", "-level", "4.2",
-                           "-g", str(2 * FPS), "-colorspace", "bt709", "-color_primaries", "bt709", "-color_trc", "bt709", "-pix_fmt", "yuv420p",
-                           "-c:a", "aac", "-b:a", "192k", "-shortest", "-movflags", "+faststart", sortie], stdin=subprocess.PIPE)
-    images = pool.imap(_image_octets, range(nf), chunksize=4) if pool else (image(fi).tobytes() for fi in range(nf))
+    x264 = ["-c:v", "libx264", "-preset", (os.environ.get("PRESET_X264") or "slow"), "-tune", "animation",
+            "-crf", (os.environ.get("CRF") or "15"), "-maxrate", "20M", "-bufsize", "30M", "-profile:v", "high", "-level", "4.2",
+            "-g", str(2 * FPS), "-colorspace", "bt709", "-color_primaries", "bt709", "-color_trc", "bt709", "-pix_fmt", "yuv420p"]
+    entree = ["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-"]
+    morceaux = None                                                        # 2e version du jury : seulement les passages qui changent
+    if reprise and os.path.exists(reprise.get("video") or "") and os.environ.get("REDESSIN_PARTIEL", "1") != "0":
+        try:
+            refaire = images_a_refaire(reprise.get("rendu"), RENDU, nf, FPS)
+            if refaire is not None:
+                morceaux = plages(refaire, _images_cles(reprise["video"], FPS), nf)
+                n_ref = sum(b_ - a_ for a_, b_ in morceaux)
+                if n_ref > 0.75 * nf: morceaux = None                      # presque tout change : rendu complet, plus simple
+                else: print(f"  redessin partiel : {n_ref}/{nf} images à redessiner ({len(morceaux)} passage(s)), le reste repris tel quel", flush=True)
+        except Exception as e: print(f"  redessin partiel impossible ({str(e)[:120]}) : rendu complet", flush=True); morceaux = None
     import progression, time as _time
     t_rendu = _time.time()
-    try:
-        for fi, octets in enumerate(images):
-            ff.stdin.write(octets)
-            if fi % 300 == 0: print(f"  image {fi}/{nf}" + (f" ({n_proc} processeurs)" if pool and fi == 0 else ""), flush=True)
-            if fi % 30 == 0: progression.rendu(fi, nf, t_rendu)          # barre de progression du site (au plus toutes les 5 s)
+    if limite:                                                             # 2e version du jury : assez de temps avant la limite de GitHub ?
+        v_ = float((reprise or {}).get("rendu", {}).get("vitesse") or 0)
+        a_faire = nf if morceaux is None else sum(b_ - a_ for a_, b_ in morceaux)
+        if v_ > 0 and t_rendu + a_faire / v_ * 1.15 > limite:
+            if pool: pool.close(); pool.join()
+            raise TempsDepasse(f"{a_faire} images à redessiner, environ {a_faire / v_ / 60:.0f} min : pas le temps avant la limite")
+    if morceaux is None:
+        ff = subprocess.Popen(entree + ["-i", wav] + x264 + ["-c:a", "aac", "-b:a", "192k", "-shortest", "-movflags", "+faststart", sortie], stdin=subprocess.PIPE)
+        images = pool.imap(_image_octets, range(nf), chunksize=4) if pool else (image(fi).tobytes() for fi in range(nf))
+        try:
+            for fi, octets in enumerate(images):
+                ff.stdin.write(octets)
+                if fi % 300 == 0: print(f"  image {fi}/{nf}" + (f" ({n_proc} processeurs)" if pool and fi == 0 else ""), flush=True)
+                if fi % 30 == 0: progression.rendu(fi, nf, t_rendu)      # barre de progression du site
+                if limite and _time.time() > limite: raise TempsDepasse("plus le temps de finir la 2e version")
+        except BaseException:
+            ff.kill(); raise
+        finally:
+            if pool: pool.close(); pool.join()
+        ff.stdin.close(); ff.wait()
+        RENDU["vitesse"] = nf / max(1.0, _time.time() - t_rendu)            # images par seconde (sert à prévoir une 2e version)
+        return total
+    try:                                                                   # passages redessinés, encodés à part (mêmes réglages)
+        n_ref, fait, liste = sum(b_ - a_ for a_, b_ in morceaux), 0, []
+        for k_, (a_, b_) in enumerate(morceaux):
+            seg = f"{tmp}/morceau_{k_}.mp4"
+            ff = subprocess.Popen(entree + x264 + ["-an", seg], stdin=subprocess.PIPE)
+            images = pool.imap(_image_octets, range(a_, b_), chunksize=4) if pool else (image(fi).tobytes() for fi in range(a_, b_))
+            for octets in images:
+                if limite and _time.time() > limite: ff.kill(); raise TempsDepasse("plus le temps de finir la 2e version")
+                ff.stdin.write(octets); fait += 1
+                if fait % 30 == 0: progression.rendu(fait, n_ref, t_rendu)
+            ff.stdin.close(); ff.wait()
+            if ff.returncode != 0: raise RuntimeError("encodage d'un passage en échec")
+            liste.append((a_, seg))
     finally:
         if pool: pool.close(); pool.join()
-    ff.stdin.close(); ff.wait()
+    coupes = sorted({x for ab in morceaux for x in ab if 0 < x < nf})       # l'ancienne vidéo coupée net à ces images clés (sans réencoder)
+    os.makedirs(f"{tmp}/ancien", exist_ok=True)
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", reprise["video"], "-map", "0:v", "-c", "copy", "-f", "segment",
+                    "-segment_frames", ",".join(map(str, coupes)) or "999999999", "-reset_timestamps", "1", f"{tmp}/ancien/p_%04d.mp4"], check=True, timeout=600)
+    bornes = [0] + coupes + [nf]; neufs = dict(liste); lignes = []
+    for k_ in range(len(bornes) - 1):
+        a_ = bornes[k_]
+        lignes.append(f"file '{neufs[a_]}'" if a_ in neufs else f"file '{tmp}/ancien/p_{k_:04d}.mp4'")
+    open(f"{tmp}/recollage.txt", "w").write("\n".join(lignes) + "\n")
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", f"{tmp}/recollage.txt", "-i", wav, "-map", "0:v", "-map", "1:a",
+                    "-c:v", "copy", "-c:a", "aac", "-b:a", "192k", "-shortest", "-movflags", "+faststart", sortie], check=True, timeout=900)
     return total
 
 _IMAGE = None
