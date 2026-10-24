@@ -1597,10 +1597,13 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
                            "-g", str(2 * FPS), "-colorspace", "bt709", "-color_primaries", "bt709", "-color_trc", "bt709", "-pix_fmt", "yuv420p",
                            "-c:a", "aac", "-b:a", "192k", "-shortest", "-movflags", "+faststart", sortie], stdin=subprocess.PIPE)
     images = pool.imap(_image_octets, range(nf), chunksize=4) if pool else (image(fi).tobytes() for fi in range(nf))
+    import progression, time as _time
+    t_rendu = _time.time()
     try:
         for fi, octets in enumerate(images):
             ff.stdin.write(octets)
             if fi % 300 == 0: print(f"  image {fi}/{nf}" + (f" ({n_proc} processeurs)" if pool and fi == 0 else ""), flush=True)
+            if fi % 30 == 0: progression.rendu(fi, nf, t_rendu)          # barre de progression du site (au plus toutes les 5 s)
     finally:
         if pool: pool.close(); pool.join()
     ff.stdin.close(); ff.wait()

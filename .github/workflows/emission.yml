@@ -47,6 +47,7 @@ permissions:
   pages: write
   id-token: write
   actions: write
+  statuses: write              # avancement de la fabrication, lu par le site (barre de progression)
 
 jobs:
   planning:

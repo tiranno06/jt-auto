@@ -111,6 +111,10 @@
   (au-delà : vidéo lue depuis les Releases) ; après chaque mise en ligne, `moteur/verif_site.py` vérifie que la dernière vidéo est
   visible sur le site en ligne (sinon 2e mise en ligne puis alerte téléphone) ; l'appli relit l'historique à chaque retour
   (page jamais servie depuis un cache périmé) ; nouvelle vidéo TikTok = point rouge sur l'onglet 🎵 TikTok + message dans l'accueil.
+- **Barre de progression en temps réel** (accueil + onglet TikTok, PC et mobile) : le robot publie son avancement toutes les 5 s
+  (`moteur/progression.py` → statut « progression-<run> » du commit : %, type, étape, heure de fin ; dessin des images = vitesse
+  réelle) ; le site le relit toutes les 5 s, fait avancer barre et compte à rebours chaque seconde, montre la file d'attente et la
+  mise en ligne du site (durées habituelles des derniers runs). Workflow emission.yml : permission `statuses: write`.
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.

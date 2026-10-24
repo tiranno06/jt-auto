@@ -231,6 +231,11 @@ label{display:block;font-size:13px;color:var(--doux);margin:12px 0}
 select{display:block;width:100%;margin-top:6px;font:inherit;font-size:15px;padding:11px;border-radius:10px;border:1px solid var(--ligne);background:#0e0f17;color:var(--texte)}
 label .jeton{margin-top:6px}
 .note{font-size:12.5px;color:var(--doux);line-height:1.45}
+.prog{margin:10px 0 4px}.prog .haut{display:flex;justify-content:space-between;gap:8px;font-size:13.5px;font-weight:600}
+.prog .barre{height:14px;border-radius:8px;background:var(--ligne);overflow:hidden;margin:6px 0 4px}
+.prog .plein{height:100%;border-radius:8px;background:linear-gradient(90deg,#25f4ee,#fe2c55);transition:width 1s linear}
+.prog.ok .plein{background:#2ecc71}.prog.ko .plein{background:#e74c3c}
+.prog .bas{display:flex;justify-content:space-between;gap:8px;font-size:12.5px;color:var(--doux)}
 .action{display:block;width:100%;margin:8px 0;padding:14px;font-size:15px;font-weight:700;background:var(--carte);color:var(--texte);border:1px solid var(--ligne)}
 .action:disabled{opacity:.45}
 .lien{display:block;padding:11px 0;color:var(--bleu);text-decoration:none;border-bottom:1px solid var(--ligne);font-size:14px}.lien:last-child{border:0}
@@ -311,7 +316,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <label class="ligne"><input type="checkbox" id="mApercu"> Aperçu rapide (10 secondes, environ 8 min) : pour juger le style avant la vraie vidéo</label>
     <button class="gros lancer" id="mCreer">🎬 Lancer la fabrication</button>
   </section>
-  <section class="panneau"><h2>⏳ Fabrication en cours</h2><div id="mSuivi" class="note" data-libre="1">Aucune fabrication lancée depuis cet appareil.</div></section>
+  <section class="panneau"><h2>⏳ Fabrication en cours</h2><div class="progressions"></div><div id="mSuivi" class="note" data-libre="1">Aucune fabrication lancée depuis cet appareil.</div></section>
   <section class="panneau"><h2>🆕 Dernières vidéos</h2><div id="recents"></div>
     <button class="second" id="toutVoir" style="width:100%;margin-top:4px">Voir toutes les vidéos</button></section>
  </div>
@@ -325,6 +330,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
  </div>
  <!-- ======================================================== SONS TIKTOK (à part des sketchs) -->
  <div id="o-tiktok" style="display:none">
+  <section class="panneau"><h2>⏳ Fabrication en cours</h2><div class="progressions"><p class="note">Aucune fabrication en cours.</p></div></section>
   <section class="panneau"><h2>🔗 Une vidéo sur un son TikTok</h2>
     <label>Lien de la vidéo TikTok<input id="tkLien" type="url" inputmode="url" placeholder="https://www.tiktok.com/@compte/video/…"></label>
     <p class="note">3 min au plus. Nos personnages rejouent le son ; le compte d'origine est crédité. ⚠️ Sans accord du créateur, TikTok peut couper le son : privilégiez vos vidéos ou des sons libres.</p>
@@ -1035,7 +1041,78 @@ $("#mCreer").onclick=()=>{
   lancerCreation(nomF+" (votre texte) en fabrication (15 à 40 min). Il apparaîtra dans l'onglet Vidéos.",{format:FMT,theme});
 };
 // fabrication déjà en cours (lancée par le planning ou un autre appareil) : affichée dans l'Accueil
+// ------------------------------------------------ barre de progression en temps réel (accueil et onglet TikTok)
+// le robot publie son avancement toutes les 5 s (statut « progression-<run> » du commit) ; entre deux points, la barre et le
+// compte à rebours avancent seuls, seconde par seconde
+const SUIVI={runs:{},site:null,durees:{emission:25*60,site:5*60},maj:0};
+const fmtReste=s=>s<=20?"quelques secondes":s<90?"≈ "+Math.round(s)+" s":"≈ "+Math.floor(s/60)+" min"+(s<600&&s%60>=10?" "+String(Math.round(s%60)).padStart(2,"0")+" s":"");
+async function suiviLent(){                                                // toutes les 20 s : fabrications en cours, étape, durées habituelles
+  if(!lireJeton()||!CONF.depot) return;
+  try{
+    if(Date.now()-SUIVI.maj>600000){SUIVI.maj=Date.now();
+      for(const [w,k] of [["emission.yml","emission"],["site.yml","site"]]){
+        const d=await (await gh(`/actions/workflows/${w}/runs?status=success&per_page=15`)).json();
+        const ds=(d.workflow_runs||[]).map(r=>(new Date(r.updated_at)-new Date(r.run_started_at||r.created_at))/1000).filter(x=>x>(k==="site"?60:300)).sort((a,b)=>a-b);
+        if(ds.length) SUIVI.durees[k]=ds[Math.floor(ds.length/2)]}}
+    const d=await (await gh("/actions/workflows/emission.yml/runs?per_page=8")).json(); const vus=new Set();
+    for(const r of (d.workflow_runs||[])){
+      const recent=r.status!=="completed"||(Date.now()-new Date(r.updated_at))<10*60000; if(!recent) continue;
+      const s=SUIVI.runs[r.id]||(SUIVI.runs[r.id]={id:r.id,sha:r.head_sha,url:r.html_url,debut:new Date(r.run_started_at||r.created_at).getTime()});
+      s.statut=r.status; s.conclusion=r.conclusion;
+      try{const j=await (await gh(`/actions/runs/${r.id}/jobs`)).json(); const job=(j.jobs||[]).find(x=>x.name==="emission");
+        s.fabrique=!!job&&job.conclusion!=="skipped"; if(job){s.etapeGh=((job.steps||[]).find(x=>x.status==="in_progress")||{}).name||""; s.jobStatut=job.status; s.debut=new Date(job.started_at||s.debut).getTime()}}catch(e){}
+      if(s.fabrique) vus.add(String(r.id));
+    }
+    Object.keys(SUIVI.runs).forEach(k=>{if(!vus.has(k)) delete SUIVI.runs[k]});
+    const sd=await (await gh("/actions/workflows/site.yml/runs?per_page=1")).json(); const r=(sd.workflow_runs||[])[0];
+    SUIVI.site=r&&r.status!=="completed"?{debut:new Date(r.run_started_at||r.created_at).getTime(),url:r.html_url}:null;
+  }catch(e){}
+  dessinerSuivi();
+}
+async function suiviRapide(){                                              // toutes les 5 s : l'avancement publié par le robot
+  if(!lireJeton()) return;
+  for(const s of Object.values(SUIVI.runs)){
+    if(s.statut==="completed"&&s.lu) continue;
+    try{const d=await (await gh(`/commits/${s.sha}/status?per_page=100`)).json();
+      const st=(d.statuses||[]).find(x=>x.context==="progression-"+s.id);
+      if(st){const [p,ty,txt,fin]=String(st.description||"").split("|"); const pct=+p||0;
+        if(pct!==s.pct||txt!==s.texte){s.pct=pct; s.t_pct=Date.now()} s.type=ty; s.texte=txt; s.fin=fin?(+fin)*1000:null; s.etat=st.state; if(s.statut==="completed") s.lu=true}
+    }catch(e){}
+  }
+  dessinerSuivi();
+}
+function dessinerSuivi(){                                                  // chaque seconde : barre et compte à rebours qui avancent
+  const zones=document.querySelectorAll(".progressions"); if(!zones.length) return;
+  const now=Date.now(), lignes=[];
+  for(const s of Object.values(SUIVI.runs).sort((a,b)=>a.debut-b.debut)){
+    let pct, txt, reste, cls="";
+    const finEst=s.fin||(s.debut+SUIVI.durees.emission*1000);
+    if(s.statut==="completed"&&s.pct==null&&s.conclusion==="success") continue;   // rien fabriqué (planning : rien à faire)
+    if(s.statut==="completed"){
+      const ok=s.conclusion==="success"&&s.etat!=="failure"; cls=ok?"ok":"ko"; pct=ok?100:(s.pct||0);
+      txt=ok?(s.texte||"Vidéo prête"):(s.etat==="failure"?(s.texte||"Pas de vidéo cette fois"):"Échec de la fabrication"); reste=null;
+    }else if(s.jobStatut==="queued"||s.statut==="queued"){pct=0; txt="En file d'attente (une autre vidéo passe avant)"; reste=null}
+    else if(s.pct!=null){
+      reste=Math.max(0,(finEst-now)/1000);
+      const plafond=Math.min(99,s.pct+(s.texte&&s.texte.startsWith("Dessin")?6:4));   // avance doucement jusqu'au prochain point du robot
+      const u=s.fin?Math.min(1,(now-s.t_pct)/Math.max(1000,(s.fin-s.t_pct))):Math.min(1,(now-s.t_pct)/60000);
+      pct=s.pct+(plafond-s.pct)*u*(s.fin?(100-s.pct)/100:0.5); txt=s.texte;
+    }else{const u=Math.min(1,(now-s.debut)/120000); pct=1+2*u; txt=s.etapeGh&&!/Fabriquer/.test(s.etapeGh)?"Préparation de la machine ("+s.etapeGh+")":"Préparation de la machine"; reste=Math.max(0,(finEst-now)/1000)}
+    const debut=new Date(s.debut).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});
+    lignes.push(`<div class="prog ${cls}"><div class="haut"><span>${(s.type||"🎬 Vidéo")} · lancée à ${debut}</span><span>${Math.floor(pct)} %</span></div>
+      <div class="barre"><div class="plein" style="width:${pct.toFixed(1)}%"></div></div>
+      <div class="bas"><span>${String(txt||"").replace(/[<>&]/g,"")}</span><span>${reste!=null?fmtReste(reste)+" restantes":(cls==="ko"?`<a style="color:var(--bleu)" href="${s.url}" target="_blank" rel="noopener">Détail</a>`:"")}</span></div></div>`);
+  }
+  if(SUIVI.site){const u=Math.min(0.97,(now-SUIVI.site.debut)/(SUIVI.durees.site*1000)), r=Math.max(0,SUIVI.durees.site-(now-SUIVI.site.debut)/1000);
+    lignes.push(`<div class="prog"><div class="haut"><span>🌐 Mise en ligne sur le site</span><span>${Math.floor(u*100)} %</span></div><div class="barre"><div class="plein" style="width:${(u*100).toFixed(1)}%"></div></div><div class="bas"><span>La vidéo apparaîtra dans l'appli à la fin</span><span>${fmtReste(r)} restantes</span></div></div>`)}
+  const html=lignes.length?lignes.join(""):'<p class="note">Aucune fabrication en cours.</p>';
+  zones.forEach(z=>{if(z.innerHTML!==html) z.innerHTML=html});
+  const m=$("#mSuivi"); if(m&&m.dataset.libre==="1") m.style.display=lignes.length?"none":"";
+}
+setInterval(suiviLent,20000); setInterval(suiviRapide,5000); setInterval(dessinerSuivi,1000);
+document.addEventListener("visibilitychange",()=>{if(!document.hidden){suiviLent().then(suiviRapide)}});
 async function verifierEnCours(){
+  suiviLent().then(suiviRapide);
   if(!lireJeton()||!CONF.depot) return;
   try{const d=await (await gh("/actions/workflows/emission.yml/runs?per_page=5")).json();
     const run=(d.workflow_runs||[]).find(x=>x.status!=="completed"); const z=$("#mSuivi");
