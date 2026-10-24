@@ -1,31 +1,73 @@
 Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, ElevenLabs epuise — IA utilisée : mistral
-Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @same_same53, @charly.bse, @motiontoonz, @kodanimation, @vignianimation, @vincedessine, @gebutaw
-Profil TikTok @gebutaw : 33 vidéo(s) jamais utilisée(s)
-Profil TikTok @vincedessine : 38 vidéo(s) jamais utilisée(s)
-Vidéo depuis TikTok : https://www.tiktok.com/@gebutaw/video/7663794905151524103
+Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @same_same53, @charly.bse, @gebutaw, @motiontoonz, @kodanimation, @vignianimation, @vincedessine
+Profil TikTok @eliotlehanneur : 40 vidéo(s) jamais utilisée(s)
+Profil TikTok @kodanimation : 36 vidéo(s) jamais utilisée(s)
+Vidéo depuis TikTok : https://www.tiktok.com/@eliotlehanneur/video/7687920816100642050
   son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 17.7 s, compte d'origine @gebutaw
-[ WARN:0@21.900] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
-  image de la vidéo : 2 plans (≈ 9.0 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 0 %, large 100 % ; caméra : fixe 91 %, travelling 2 %, epaule 5 % ; 0 personne(s) à l'écran : aucun visage repéré ; agitation 0.223 ; lumière jour ; fond [242, 222, 207]
+  son récupéré : 75.0 s, compte d'origine @eliotlehanneur
+[ WARN:0@21.940] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  image de la vidéo : 56 plans (≈ 1.35 s chacun) ; cadrages : très serré 60 %, serré 38 %, moyen 0 %, large 0 % ; caméra : fixe 32 %, avance 21 %, recul 25 %, travelling 13 %, epaule 7 % ; 1 personne(s) à l'écran : centre (habit [195, 184, 178], cheveux [60, 44, 33], sourit 3 %); gauche (habit [197, 199, 200], cheveux [40, 25, 14], sourit 0 %); droite (habit [202, 202, 205], cheveux [47, 30, 20], sourit 0 %) ; agitation 0.665 ; lumière soir ; fond [189, 190, 190]
   isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
   transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
-  1 répliques, voix : {'speaker_0': 117}
-  son de la vidéo : 1 voix [117 Hz (h, 100 %)], 10.0 mots/s, blancs 0.0 s, 0 coupure(s) de parole, dynamique 4.7 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
-  scène reconstituée : Un présentateur télé annonce solennellement les crédits de sous-titrage avant un reportage de rue sur le bonheur simple.
-  casting : speaker_0 → Jojo
-Sketch : « SOUS-TITRAGE OFFICIEL », 1 répliques
-  décor 0 : Minimalist pastel studio background with a microphone and TV camera eq
-montage : 1 plans (0.0:moyen>pre/coupe)
-studio : jour, lieux ['rue'], tenues presentateur=costume, 2 figurant(s), ambiances ['neon'] ; plans moyen/fixe
-cartoon : durée 6.9 s, 1 répliques, 1 scène(s), personnages ['presentateur']
-  image 0/416 (4 processeurs)
-  image 300/416
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+  voix re-séparées par leur empreinte (ECAPA) : 2 voix (netteté 0.11)
+  38 répliques, voix : {'speaker_0': 167, 'speaker_1': 216}
+  son de la vidéo : 2 voix [167 Hz (?, 54 %), 216 Hz (f, 46 %)], 5.81 mots/s, blancs 0.19 s, 16 coupure(s) de parole, dynamique 12.9 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
+  scène reconstituée : Un jeune homme demande à sa meilleure amie de jouer sa fausse copine pour rendre son ex jalouse, mais elle négocie un tarif exorbitant et des surnoms ridicules.
+  casting : speaker_0 → Jojo, speaker_1 → Lila
+Sketch : « FAUSSE PETITE AMIE », 38 répliques
+  décor 0 : Bright apartment living room with tall loaded bookshelves behind the m
+montage : 86 plans (0.0:serre>pre/coupe 1.0:serre>env/coupe 2.0:moyen>pre/coupe 2.5:serre>pre/glisse 3.2:serre>env/coupe 4.0:serre>pre/coupe 5.5:moyen>env/coupe 6.6:serre>env/glisse 7.0:tres_serre>pre/file 8.0:serre>env/coupe 8.6:moyen>env/zoom 9.5:serre>pre/coupe 10.0:large>env/coupe 10.8:tres_serre>env/zoom 11.5:serre>pre/coupe 12.4:contre_plongee>pre/glisse 13.0:moyen>pre/zoom 14.6:serre>env/coupe 15.3:serre>pre/glisse 16.0:serre>env/coupe 16.8:moyen>pre/coupe 17.9:serre>env/glisse 18.5:serre>pre/coupe 20.0:moyen>env/coupe 20.9:serre>pre/glisse 21.7:serre>env/coupe 22.5:large>env/zoom 23.0:serre>pre/file 23.5:large>env/coupe 25.1:tres_serre>env/zoom 26.0:serre>pre/coupe 26.8:moyen>pre/zoom 27.4:epaule>pre/zoom 28.9:large>pre/zoom 29.6:tres_serre>env/coupe 30.1:epaule>pre/file 30.5:moyen>pre/zoom 31.9:serre>pre/zoom 32.6:tres_serre>env/coupe 33.3:moyen>env/zoom 34.0:tres_serre>pre/glisse 35.0:moyen>env/coupe 36.5:tres_serre>pre/coupe 37.3:epaule>env/glisse 38.0:moyen>env/zoom 39.0:tres_serre>pre/coupe 40.0:large>env/coupe 40.5:tres_serre>env/zoom 41.4:serre>pre/glisse 42.1:large>pre/zoom 42.9:tres_serre>env/coupe 43.8:serre>env/glisse 44.5:tres_serre>env/glisse 44.9:serre>pre/file 45.5:serre>env/coupe 46.4:moyen>pre/coupe 47.5:serre>pre/glisse 48.5:tres_serre>pre/glisse 49.5:moyen>pre/zoom 52.6:tres_serre>pre/zoom 54.0:moyen>pre/zoom 54.6:tres_serre>env/coupe 55.1:tres_serre>pre/coupe 55.9:moyen>pre/zoom 56.9:serre>env/glisse 57.8:tres_serre>pre/coupe 59.0:tres_serre>env/coupe 60.0:serre>env/glisse 61.0:large>pre/file 61.6:tres_serre>pre/zoom 62.5:epaule>env/coupe 63.5:moyen>env/glisse 64.7:serre>pre/coupe 65.5:moyen>pre/zoom 66.3:tres_serre>env/coupe 67.0:moyen>env/zoom 68.2:contre_plongee>pre/coupe 68.7:tres_serre>env/file 69.2:serre>pre/coupe 70.2:tres_serre>pre/glisse 70.9:serre>env/coupe 71.3:large>pre/coupe 72.0:tres_serre>env/coupe 72.5:moyen>env/zoom 73.0:epaule>env/zoom 73.8:serre>env/glisse)
+studio : jour, lieux ['salon'], tenues presentateur=tshirt, envoyee=debardeur, 0 figurant(s), ambiances [] ; plans serre/fixe serre/fixe serre/fixe serre/recul tres_serre/zoom_choc serre/fixe tres_serre/recul contre_plongee/epaule serre/avance serre/recul serre/recul serre/fixe serre/avance tres_serre/avance serre/fixe moyen/fixe tres_serre/travelling epaule/fixe tres_serre/avance epaule/fixe serre/fixe tres_serre/travelling serre/recul tres_serre/avance tres_serre/travelling tres_serre/recul tres_serre/recul serre/travelling tres_serre/fixe tres_serre/recul epaule/fixe serre/recul tres_serre/avance contre_plongee/epaule tres_serre/avance tres_serre/zoom_choc tres_serre/avance serre/avance
+cartoon : durée 78.3 s, 38 répliques, 1 scène(s), personnages ['presentateur', 'envoyee']
+Contrôle image : 41 défaut(s) — 2.25 s tete_coupee (envoyee), 5.75 s tete_coupee (presentateur), 6.25 s tete_coupee (presentateur), 8.75 s tete_coupee (presentateur), 9.25 s tete_coupee (presentateur), 13.25 s tete_coupee (envoyee), 13.75 s tete_coupee (envoyee), 14.25 s tete_coupee (envoyee)
+  image 0/4700 (4 processeurs)
+  image 300/4700
+  image 600/4700
+  image 900/4700
+  image 1200/4700
+  image 1500/4700
+  image 1800/4700
+  image 2100/4700
+  image 2400/4700
+  image 2700/4700
+  image 3000/4700
+  image 3300/4700
+  image 3600/4700
+  image 3900/4700
+  image 4200/4700
+  image 4500/4700
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury qualité (ia) : 4.2/10 — Humoriste 4.0/10 : 0.4 s Absence de gag ou de dialogue comique, simple texte technique lu.; 6.3 s Pas de punchline visuelle ni de zoom choc sur la chute. | Réalisateur 4.5/10 : 0.4 s Plan unique statique sans contrechamp sur l'interlocuteur.; 6.3 s Fin abrupte sur carton d'abonnement sans conclusion de scène. | Directeur artistique 4.5/10 : 0.4 s Il manque le duo intervieweuse/passant présent dans l'original.; 0.4 s Bras gauche du personnage tordu de façon anormale. | Ingénieur du son 4.0/10 : 0.5 s Manque de bruitages d'accentuation et voix isolée. | Spectateur TikTok 4.0/10 : 0.4 s Accroche faible avec un texte de sous-titrage institutionnel.; 6.3 s Outro trop longue par rapport au contenu utile.
-Manque par rapport à la vidéo d'origine : Format micro-trottoir avec une intervieweuse tenant le micro à un passant ; Réaction souriante et geste du doigt du passant à la chute ; Décor épuré beige remplacé par une rue chargée
+Jury qualité (ia) : 5.0/10 — Humoriste 5.2/10 : 7.9 s Manque d'impact comique sur la réplique des pépites.; 71.1 s Chute finale sans zoom choc pour souligner la vanne. | Réalisateur 4.8/10 : 71.1 s Mauvais personnage cadré : la fille est montrée quand le gars parle.; 31.8 s Personnages coupés maladroitement sur les bords en plan large.; 2.2 s tête de envoyee coupée par le bord de l'image (moyen); 5.8 s tête de presentateur coupée par le bord de l'image (moyen); 8.8 s tête de presentateur coupée par le bord de l'image (moyen) | Directeur artistique 5.0/10 : 11.7 s La fille reste debout sans accessoire au lieu d'être affalée avec son téléphone.; Texte baveux et illisible sur les tableaux d'arrière-plan. | Ingénieur du son 4.5/10 : 26.5 s Absence totale de bruitages pour dynamiser les punchlines. | Spectateur TikTok 5.1/10 : 7.9 s Faute de frappe gênante dans le sous-titre ("chaisais").; 2.9 s Manque d'accroche visuell
+Manque par rapport à la vidéo d'origine : La fille est nonchalamment installée dans un fauteuil avec son téléphone portable. ; Alternance champ/contrechamp assis-debout absente, remplacée par des plans debout statiques.
+Corrections du jury (tour 1) : plan serre sur la réplique 1 ; plan serre sur la réplique 3 ; plan serre sur la réplique 6
+montage : 80 plans (0.0:serre>pre/coupe 2.5:moyen>pre/glisse 3.2:serre>env/coupe 6.6:moyen>env/glisse 7.0:tres_serre>pre/file 8.0:serre>env/coupe 8.6:moyen>env/zoom 10.8:tres_serre>env/zoom 11.5:serre>pre/coupe 12.4:contre_plongee>pre/glisse 13.0:moyen>pre/zoom 14.6:serre>env/coupe 15.3:serre>pre/glisse 16.0:serre>env/coupe 16.8:moyen>pre/coupe 17.9:serre>env/glisse 18.5:serre>pre/coupe 20.0:moyen>env/coupe 20.9:serre>pre/glisse 21.7:serre>env/coupe 22.5:large>env/zoom 23.0:serre>pre/file 23.5:large>env/coupe 25.1:tres_serre>env/zoom 26.0:serre>pre/coupe 26.8:moyen>pre/zoom 27.4:epaule>pre/zoom 28.9:large>pre/zoom 29.6:tres_serre>env/coupe 30.1:epaule>pre/file 30.5:moyen>pre/zoom 31.9:serre>pre/zoom 32.6:tres_serre>env/coupe 33.3:moyen>env/zoom 34.0:tres_serre>pre/glisse 35.0:moyen>env/coupe 36.5:tres_serre>pre/coupe 37.3:epaule>env/glisse 38.0:moyen>env/zoom 39.0:tres_serre>pre/coupe 40.0:large>env/coupe 40.5:tres_serre>env/zoom 41.4:serre>pre/glisse 42.1:large>pre/zoom 42.9:tres_serre>env/coupe 43.8:serre>env/glisse 44.5:tres_serre>env/glisse 44.9:serre>pre/file 45.5:serre>env/coupe 46.4:moyen>pre/coupe 47.5:serre>pre/glisse 48.5:tres_serre>pre/glisse 49.5:moyen>pre/zoom 52.6:tres_serre>pre/zoom 54.0:moyen>pre/zoom 54.6:tres_serre>env/coupe 55.1:tres_serre>pre/coupe 55.9:moyen>pre/zoom 56.9:serre>env/glisse 57.8:tres_serre>pre/coupe 59.0:tres_serre>env/coupe 60.0:serre>env/glisse 61.0:large>pre/file 61.6:tres_serre>pre/zoom 62.5:epaule>env/coupe 63.5:moyen>env/glisse 64.7:serre>pre/coupe 65.5:moyen>pre/zoom 66.3:tres_serre>env/coupe 67.0:moyen>env/zoom 68.2:contre_plongee>pre/coupe 68.7:tres_serre>env/file 69.2:serre>pre/coupe 70.2:tres_serre>pre/glisse 70.9:serre>env/coupe 71.3:large>pre/coupe 72.0:tres_serre>env/coupe 72.5:moyen>env/zoom 73.0:epaule>env/zoom 73.8:serre>env/glisse)
+studio : jour, lieux ['salon'], tenues presentateur=tshirt, envoyee=debardeur, 0 figurant(s), ambiances [] ; plans serre/fixe serre/fixe serre/fixe serre/recul tres_serre/zoom_choc serre/fixe tres_serre/recul contre_plongee/epaule serre/avance serre/recul serre/recul serre/fixe serre/avance tres_serre/avance serre/fixe moyen/fixe tres_serre/travelling epaule/fixe tres_serre/avance epaule/fixe serre/fixe tres_serre/travelling serre/recul tres_serre/avance tres_serre/travelling tres_serre/recul tres_serre/recul serre/travelling tres_serre/fixe tres_serre/recul epaule/fixe serre/recul tres_serre/avance contre_plongee/epaule tres_serre/avance tres_serre/zoom_choc tres_serre/avance serre/avance
+cartoon : durée 78.3 s, 38 répliques, 1 scène(s), personnages ['presentateur', 'envoyee']
+Contrôle image : 42 défaut(s) — 2.75 s tete_coupee (envoyee), 8.75 s tete_coupee (presentateur), 9.25 s tete_coupee (presentateur), 9.75 s tete_coupee (presentateur), 10.25 s tete_coupee (presentateur), 10.75 s tete_coupee (presentateur), 13.25 s tete_coupee (envoyee), 13.75 s tete_coupee (envoyee)
+  image 0/4700 (4 processeurs)
+  image 300/4700
+  image 600/4700
+  image 900/4700
+  image 1200/4700
+  image 1500/4700
+  image 1800/4700
+  image 2100/4700
+  image 2400/4700
+  image 2700/4700
+  image 3000/4700
+  image 3300/4700
+  image 3600/4700
+  image 3900/4700
+  image 4200/4700
+  image 4500/4700
+Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
+Jury qualité (ia) : 5.2/10 — Humoriste 5.5/10 : 70.3 s Absence de zoom choc et d'emphase sur la chute finale pour marquer le gag.; 8.7 s Manque de ponctuation sonore comique sur l'annonce du tarif excessif. | Réalisateur 5.0/10 : 70.3 s Mauvais personnage à l'écran : le présentateur parle mais l'envoyée est cadrée.; 0.4 s Haut du crâne légèrement rogné par le haut du cadre.; 2.8 s tête de envoyee coupée par le bord de l'image (moyen); 8.8 s tête de presentateur coupée par le bord de l'image (moyen); 10.8 s tête de presentateur coupée par le bord de l'image (moyen) | Directeur artistique 5.2/10 : 3.2 s L'amie reste debout sans accessoire au lieu d'être affalée avec son smartphone comme dans l'original.; Textes du décor en pseudo-anglais illisible au lieu d'inscriptions nettes et lisibles. | Ingénieur du son 4.8/10 : 2.5 s Bande sonore trop dépouillée sans bruitages d'ambiance ou d'accentuation. | Spectateur TikTok 5.
+Manque par rapport à la vidéo d'origine : La fille est assise et consulte son smartphone avec détachement dans l'original, ce qui renforce le comique de situation par rapport à sa posture debout ici. ; Absence de cadrages serrés alternés et de champ/contre-champ dynamiques lors des répliques rapides.
+Version corrigée gardée : 5.0 → 5.2/10
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = gemini ×2, voix = tiktok, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 11673, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 28}
-OK : sortie/2026-10-24_18h32_emission.mp4 (7 s)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = gemini ×3, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 30605, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 22}
+OK : sortie/2026-10-24_18h50_emission.mp4 (78 s)
