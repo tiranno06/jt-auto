@@ -1,118 +1,931 @@
 {
- "titre": "3000 PROFS EXPRESS",
- "sujet": "3000 PROFS EXPRESS",
- "ecran": "3000 PROFS",
+ "titre": "LEÇON DE VIE DANS L'AU-DELÀ",
+ "sujet": "LEÇON DE VIE DANS L'AU-DELÀ",
+ "ecran": "LEÇON DE VIE D",
  "invite_nom": "Hubert Rustine",
- "invite_role": "Porte-parole (fictif) du ministère",
+ "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
- "lieu_direct": "Rayon surgelés",
- "titre_accroche": "3000 profs en 24 h, mon plombier : 3 semaines",
- "question": "Votre prof remplaçant, il était encore congelé ? 👇",
+ "lieu_direct": "Assemblée",
+ "titre_accroche": "POV : Quand tu meurs avec ton argent",
+ "question": "Quel est votre plus beau souvenir d'enfance ?",
  "running_gag": "",
- "verite": "Il manque des profs depuis des années ; pour le cacher, on recrute à la va-vite, et ce sont les élèves qui paient.",
+ "verite": "",
  "repliques": [
   {
-   "p": "narrateur",
-   "t": "3000 profs en 24 h, mon plombier : 3 semaines",
-   "d": "[excited] 3000 profs en 24 h, mon plombier : 3 semaines"
+   "p": "presentateur",
+   "t": "C 'est bon, je crois que je suis prêt. Désolé, mais les bagages ne sont pas autorisés.",
+   "_deb": 0.0,
+   "_fin": 3.28,
+   "d": "[neutral] C 'est bon, je crois que je suis prêt. Désolé, mais les bagages ne sont pas autorisés.",
+   "objet": "valise"
   },
   {
    "p": "presentateur",
-   "t": "Le ministère a trouvé 3 000 profs en 24 heures. Moi, j'ai mis trois semaines à trouver un plombier.",
-   "d": "Le ministère a trouvé trois mille profs en vingt-quatre heures. Moi, j'ai mis trois semaines à trouver un plombier.",
-   "chute": true
+   "t": "Ce que t 'as dans les mains, c 'est interdit de la porter.",
+   "_deb": 4.76,
+   "_fin": 6.76,
+   "d": "[angry] Ce que t 'as dans les mains, c 'est interdit de la porter."
   },
   {
    "p": "presentateur",
-   "t": "Martine, ils sortent d'où, ces profs ?"
-  },
-  {
-   "p": "envoyee",
-   "t": "J'ai mené l'enquête. Soit c'est un miracle, soit ils ont recruté au rayon surgelés.",
-   "chute": true
+   "t": "Mais pourquoi pas? Ça ne te servira à rien là -bas.",
+   "_deb": 6.78,
+   "_fin": 8.7,
+   "d": "[confused] Mais pourquoi pas? Ça ne te servira à rien là -bas."
   },
   {
    "p": "invite",
-   "t": "N'importe quoi. Nos profs sont frais. Ils ont été décongelés ce matin.",
-   "chute": true
+   "t": "Mais c 'est mon argent, toute ma vie est là -dedans.",
+   "_deb": 8.72,
+   "_fin": 10.42,
+   "d": "[shocked] Mais c 'est mon argent, toute ma vie est là -dedans.",
+   "objet": "billet"
   },
   {
    "p": "presentateur",
-   "t": "Et ils enseignent quoi ?"
+   "t": "Je ferais quoi avec tout cet argent dans ta tombe, de toute façon?",
+   "_deb": 10.42,
+   "_fin": 12.66,
+   "d": "[neutral] Je ferais quoi avec tout cet argent dans ta tombe, de toute façon?"
   },
   {
    "p": "invite",
-   "t": "Ce qui reste. Le prof de sport fait les maths. Il compte les tours de terrain.",
-   "chute": true
-  },
-  {
-   "p": "envoyee",
-   "t": "Bonne nouvelle, Jean-Michel : votre plombier est arrivé. Il vient d'être nommé prof de physique.",
-   "chute": true,
-   "attente": 0.5
+   "t": "Vous voulez me voler, c 'est ça?",
+   "_deb": 12.68,
+   "_fin": 13.86,
+   "d": "[fear] Vous voulez me voler, c 'est ça?"
   },
   {
    "p": "presentateur",
-   "t": "En clair : il manque des profs depuis des années, on recrute à la va-vite, et vos enfants servent de période d'essai.",
+   "t": "Si c 'est ce que je voulais, ce serait déjà fait.",
+   "_deb": 13.88,
+   "_fin": 15.52,
+   "d": "[neutral] Si c 'est ce que je voulais, ce serait déjà fait."
+  },
+  {
+   "p": "invite",
+   "t": "Hey! C 'est tout ce que t 'as. J 'ai travaillé toute ma vie pour la ramasser.",
+   "_deb": 17.06,
+   "_fin": 20.14,
+   "d": "[angry] Hey! C 'est tout ce que t 'as. J 'ai travaillé toute ma vie pour la ramasser."
+  },
+  {
+   "p": "invite",
+   "t": "Ça ne vaut plus rien maintenant. Donc tout ce que j 'ai fait pour cet argent tout au long de ma vie, ça ne servait à rien?",
+   "_deb": 20.14,
+   "_fin": 24.62,
+   "d": "[sad] Ça ne vaut plus rien maintenant. Donc tout ce que j 'ai fait pour cet argent tout au long de ma vie, ça ne servait à rien?"
+  },
+  {
+   "p": "presentateur",
+   "t": "Tu n 'avais personne dans ta vie?",
+   "_deb": 24.62,
+   "_fin": 25.98,
+   "d": "[confused] Tu n 'avais personne dans ta vie?"
+  },
+  {
+   "p": "presentateur",
+   "t": "J 'ai toujours dit que c 'était plus important de faire de l 'argent parce qu 'elle au moins ne laisserait jamais tomber.",
+   "_deb": 25.98,
+   "_fin": 29.82,
+   "d": "[neutral] J 'ai toujours dit que c 'était plus important de faire de l 'argent parce qu 'elle au moins ne laisserait jamais tomber."
+  },
+  {
+   "p": "presentateur",
+   "t": "Sauf qu 'aujourd 'hui, tu vois bien que t 'avais tort.",
+   "_deb": 29.7,
+   "_fin": 31.52,
+   "d": "[neutral] Sauf qu 'aujourd 'hui, tu vois bien que t 'avais tort."
+  },
+  {
+   "p": "presentateur",
+   "t": "Parce que si tu me laisses l 'emporter avec moi, les seules choses que tu peux emporter avec toi, Adam, elles sont ici, mes cheveux, tes souvenirs des",
+   "_deb": 31.52,
+   "_fin": 36.86,
+   "d": "[neutral] Parce que si tu me laisses l 'emporter avec moi, les seules choses que tu peux emporter avec toi, Adam, elles sont ici, mes cheveux, tes souvenirs des"
+  },
+  {
+   "p": "presentateur",
+   "t": "bons moments que t 'as passé avec les gens que t 'aiment, et ces moments où tu as porté de la joie dans la vie des autres, c",
+   "_deb": 36.86,
+   "_fin": 40.96,
+   "d": "[neutral] bons moments que t 'as passé avec les gens que t 'aiment, et ces moments où tu as porté de la joie dans la vie des autres, c"
+  },
+  {
+   "p": "presentateur",
+   "t": "'est la seule chose que je peux te laisser emporter.",
+   "_deb": 40.96,
+   "_fin": 42.66,
+   "d": "[neutral] 'est la seule chose que je peux te laisser emporter."
+  },
+  {
+   "p": "presentateur",
+   "t": "C 'est bon, Adam?",
+   "_deb": 43.0,
+   "_fin": 43.62,
+   "d": "[neutral] C 'est bon, Adam?"
+  },
+  {
+   "p": "invite",
+   "t": "Disons que si c 'est comme ça, j 'emporterais pas grand -chose avec moi d 'abord.",
+   "_deb": 43.64,
+   "_fin": 46.36,
+   "d": "[sad] Disons que si c 'est comme ça, j 'emporterais pas grand -chose avec moi d 'abord."
+  },
+  {
+   "p": "invite",
+   "t": "Parce que je pense que le dernier bon souvenir que j 'ai, ça remonte à quand j 'avais 8 ans.",
+   "_deb": 46.36,
+   "_fin": 49.28,
+   "d": "[sad] Parce que je pense que le dernier bon souvenir que j 'ai, ça remonte à quand j 'avais 8 ans."
+  },
+  {
+   "p": "invite",
+   "t": "C 'est déjà bien. Sauf que j 'en ai plus depuis ce temps -là.",
+   "_deb": 49.3,
+   "_fin": 51.12,
+   "d": "[sad] C 'est déjà bien. Sauf que j 'en ai plus depuis ce temps -là."
+  },
+  {
+   "p": "invite",
+   "t": "Mon père s 'est fait renvoyer de son travail, donc on a dû déménager dans un petit appartement parce qu 'on avait plus d 'argent.",
+   "_deb": 51.12,
+   "_fin": 55.38,
+   "d": "[sad] Mon père s 'est fait renvoyer de son travail, donc on a dû déménager dans un petit appartement parce qu 'on avait plus d 'argent."
+  },
+  {
+   "p": "invite",
+   "t": "Et un matin, ma mère a vendu notre console de jeu pour nous acheter à manger.",
+   "_deb": 55.38,
+   "_fin": 58.52,
+   "d": "[sad] Et un matin, ma mère a vendu notre console de jeu pour nous acheter à manger."
+  },
+  {
+   "p": "invite",
+   "t": "Depuis ce jour -là, je me suis fait la promesse de faire beaucoup d 'argent pour ne jamais en manquer comme mes parents.",
+   "_deb": 58.42,
+   "_fin": 62.22,
+   "d": "[sad] Depuis ce jour -là, je me suis fait la promesse de faire beaucoup d 'argent pour ne jamais en manquer comme mes parents."
+  },
+  {
+   "p": "invite",
+   "t": "Alors on peut dire que tu as réussi. Tu as amélioré ta situation.",
+   "_deb": 62.22,
+   "_fin": 64.94
+  },
+  {
+   "p": "invite",
+   "t": "Ce n 'est pas ma vie. En essayant de la rendre meilleure, je crois bien que j 'ai fini par oublier de la vivre.",
+   "_deb": 65.04,
+   "_fin": 69.72,
+   "d": "[sad] Ce n 'est pas ma vie. En essayant de la rendre meilleure, je crois bien que j 'ai fini par oublier de la vivre."
+  },
+  {
+   "p": "invite",
+   "t": "Vous accepteriez de faire un échange? De quoi?",
+   "_deb": 69.78,
+   "_fin": 72.04,
+   "d": "[supplicate] Vous accepteriez de faire un échange? De quoi?"
+  },
+  {
+   "p": "invite",
+   "t": "Je vous donne tout mon argent et en échange, vous me donnez juste un peu de temps.",
+   "_deb": 72.06,
+   "_fin": 75.36,
+   "d": "[supplicate] Je vous donne tout mon argent et en échange, vous me donnez juste un peu de temps."
+  },
+  {
+   "p": "presentateur",
+   "t": "Je n 'ai pas besoin de ton argent, d 'accord?",
+   "_deb": 75.36,
+   "_fin": 76.72,
+   "d": "[neutral] Je n 'ai pas besoin de ton argent, d 'accord?"
+  },
+  {
+   "p": "invite",
+   "t": "Je veux rattraper le temps que j 'ai manqué. Je ne peux pas faire ça.",
+   "_deb": 77.02,
+   "_fin": 79.42,
+   "d": "[supplicate] Je veux rattraper le temps que j 'ai manqué. Je ne peux pas faire ça."
+  },
+  {
+   "p": "invite",
+   "t": "C 'est trop tard. Rappelle -moi. Pourquoi tu es ici déjà?",
+   "_deb": 79.44,
+   "_fin": 82.2,
+   "d": "[sad] C 'est trop tard. Rappelle -moi. Pourquoi tu es ici déjà?"
+  },
+  {
+   "p": "invite",
+   "t": "J 'ai eu un accident. Le camion m 'a percuté parce que son chauffeur était inattentif.",
+   "_deb": 82.2,
+   "_fin": 86.14,
+   "d": "[neutral] J 'ai eu un accident. Le camion m 'a percuté parce que son chauffeur était inattentif."
+  },
+  {
+   "p": "invite",
+   "t": "Tu es avec quel âge? Je venais d 'avoir 25 ans.",
+   "_deb": 86.14,
+   "_fin": 88.28,
+   "d": "[neutral] Tu es avec quel âge? Je venais d 'avoir 25 ans."
+  },
+  {
+   "p": "invite",
+   "t": "Bon, perdons pas plus de temps, je suis sûr que vous avez d 'autres personnes plus importantes à vous occuper.",
+   "_deb": 88.14,
+   "_fin": 92.24,
+   "d": "[neutral] Bon, perdons pas plus de temps, je suis sûr que vous avez d 'autres personnes plus importantes à vous occuper."
+  },
+  {
+   "p": "invite",
+   "t": "Mais avant que je parte, vous pouvez me promettre de donner mon argent à quelqu 'un qui en a vraiment besoin.",
+   "_deb": 92.28,
+   "_fin": 96.32,
+   "d": "[neutral] Mais avant que je parte, vous pouvez me promettre de donner mon argent à quelqu 'un qui en a vraiment besoin."
+  },
+  {
+   "p": "invite",
+   "t": "Pourquoi?",
+   "_deb": 96.36,
+   "_fin": 96.8,
+   "d": "[neutral] Pourquoi?"
+  },
+  {
+   "p": "presentateur",
+   "t": "Parce que je veux avoir aidé les autres, une fois dans ma vie.",
+   "_deb": 96.8,
+   "_fin": 99.18,
+   "d": "[neutral] Parce que je veux avoir aidé les autres, une fois dans ma vie."
+  },
+  {
+   "p": "presentateur",
+   "t": "Désolé Adam, mais je ne peux pas faire ça non plus.",
+   "_deb": 99.24,
+   "_fin": 101.54,
+   "d": "[neutral] Désolé Adam, mais je ne peux pas faire ça non plus."
+  },
+  {
+   "p": "presentateur",
+   "t": "D 'abord allons -y. En fait, je pense que... Ça serait mieux si tu le faisais partout en même.",
+   "_deb": 101.88,
+   "_fin": 107.4,
+   "d": "[neutral] D 'abord allons -y. En fait, je pense que... Ça serait mieux si tu le faisais partout en même."
+  },
+  {
+   "p": "envoyee",
+   "t": "Respire! Il est encore vivant! Il est encore vivant!",
+   "_deb": 113.94,
+   "_fin": 117.02,
+   "d": "[panik] Respire! Il est encore vivant! Il est encore vivant!"
+  },
+  {
+   "p": "envoyee",
+   "t": "Sous -titrage Société Radio -Canada",
+   "_deb": 118.14,
+   "_fin": 120.56,
+   "d": "[joy] Sous -titrage Société Radio -Canada",
    "chute": true
   }
  ],
- "bandeau": [
-  "UN PROF RETROUVÉ ENTRE LES PETITS POIS ET LES FRITES",
-  "LE PLOMBIER DE JEAN-MICHEL NOMMÉ PROF DE PHYSIQUE",
-  "RECRUTEMENT EXPRESS : DES PROFS LIVRÉS EN DRIVE"
- ],
- "gag": {
-  "replique": 3,
-  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. In a supermarket frozen food aisle, a confused teacher with a briefcase and glasses steps out of a chest freezer covered in frost, holding a piece of chalk, shoppers stare, comedic, deadpan."
- },
- "legende": "3000 profs trouvés en 24 h. Le secret ? Le rayon surgelés. Satire, personnages fictifs.",
+ "bandeau": [],
+ "gag": null,
+ "legende": "Il réalise qu'on n'emporte rien dans l'au-delà.",
  "hashtags": [
   "petitsdramas",
-  "humour",
-  "education",
-  "prof",
-  "actualite",
-  "satire",
-  "drole"
+  "dessinanime",
+  "mort",
+  "argent",
+  "morale",
+  "histoire"
  ],
- "sources": [],
- "decoupage": [],
+ "sources": [
+  "https://www.tiktok.com/@yan_animation0/video/7671802136782474528"
+ ],
+ "decoupage": [
+  {
+   "scene": "1",
+   "repliques": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36
+   ],
+   "lieu": "",
+   "son": "",
+   "duree": 0.0,
+   "decor": "Cemetery with dark tombstones under a grey sky and a scythe hanging above.",
+   "titre": "Cimetière"
+  },
+  {
+   "scene": "2",
+   "repliques": [
+    37,
+    38
+   ],
+   "lieu": "",
+   "son": "",
+   "duree": 0.0,
+   "decor": "Hospital room with medical equipment and doctors around a bed.",
+   "titre": "Hôpital"
+  }
+ ],
+ "studio": {
+  "personnages": {
+   "presentateur": {
+    "genre": "h",
+    "age": 35,
+    "taille": 1.0,
+    "corpulence": 0.3,
+    "cheveux": "herisse",
+    "barbe": "rien"
+   },
+   "invite": {
+    "genre": "h",
+    "age": 25,
+    "taille": 0.8,
+    "corpulence": 0.2,
+    "cheveux": "court",
+    "barbe": "rien"
+   },
+   "envoyee": {
+    "genre": "f",
+    "age": 30,
+    "taille": 1.0,
+    "corpulence": 0.3,
+    "cheveux": "queue",
+    "barbe": "rien"
+   }
+  },
+  "plans": [
+   {
+    "plan": "moyen",
+    "mouvement": "fixe",
+    "replique": 0
+   },
+   {
+    "mouvement": "avance",
+    "replique": 1,
+    "plan": "serre"
+   },
+   {
+    "mouvement": "fixe",
+    "replique": 5,
+    "plan": "moyen"
+   },
+   {
+    "replique": 12,
+    "plan": "tres_serre",
+    "mouvement": "zoom_choc"
+   },
+   {
+    "plan": "moyen",
+    "replique": 37,
+    "mouvement": "fixe"
+   }
+  ],
+  "gags": [],
+  "cadence": "normal",
+  "costumes": {
+   "presentateur": {
+    "haut": "costume",
+    "c_haut": "noir",
+    "motif": "uni",
+    "bas": "pantalon",
+    "chaussures": "ville",
+    "details": [
+     "collier"
+    ],
+    "cheveux": "herisse",
+    "c_cheveux": "noir"
+   },
+   "invite": {
+    "haut": "costume",
+    "c_haut": "noir",
+    "motif": "uni",
+    "bas": "pantalon",
+    "chaussures": "ville",
+    "details": [],
+    "cheveux": "court",
+    "c_cheveux": "noir"
+   },
+   "envoyee": {
+    "haut": "blouse",
+    "c_haut": "blanc",
+    "motif": "uni",
+    "bas": "pantalon",
+    "chaussures": "baskets",
+    "details": [
+     "stethoscope"
+    ],
+    "cheveux": "queue",
+    "c_cheveux": "chatain"
+   }
+  },
+  "objets": [
+   {
+    "objet": "valise",
+    "replique": 0
+   },
+   {
+    "objet": "billet",
+    "replique": 3
+   }
+  ],
+  "lieux": [
+   "rue",
+   "chambre"
+  ],
+  "ambiances": [
+   "orage"
+  ],
+  "decoupe": [
+   {
+    "replique": 0,
+    "plans": [
+     {
+      "debut": 0.0,
+      "plan": "serre",
+      "cible": "presentateur",
+      "mouvement": "avance"
+     }
+    ]
+   },
+   {
+    "replique": 1,
+    "plans": [
+     {
+      "debut": 0.0,
+      "plan": "serre",
+      "cible": "presentateur",
+      "mouvement": "avance"
+     }
+    ]
+   },
+   {
+    "replique": 5,
+    "plans": [
+     {
+      "debut": 0.0,
+      "plan": "serre",
+      "cible": "invite",
+      "mouvement": "avance"
+     }
+    ]
+   }
+  ]
+ },
+ "doublage": {
+  "piste": "/tmp/tmp70c5e823/piste.wav",
+  "duree": 120.58,
+  "source": "https://www.tiktok.com/@yan_animation0/video/7671802136782474528",
+  "auteur": "yan_animation0",
+  "contexte": "Un jeune homme se retrouve dans l'au-delà face à la Mort, entouré de tombes, et réalise qu'il a passé toute sa vie à amasser de l'argent au lieu de vivre.",
+  "evenements": [],
+  "visuel": {
+   "gestes": [
+    [
+     16.0,
+     0.5,
+     1.0
+    ],
+    [
+     18.5,
+     0.44,
+     1.0
+    ],
+    [
+     27.5,
+     0.5,
+     1.0
+    ],
+    [
+     31.5,
+     0.44,
+     1.0
+    ],
+    [
+     36.0,
+     0.43,
+     1.0
+    ],
+    [
+     50.0,
+     0.46,
+     1.0
+    ],
+    [
+     51.0,
+     0.47,
+     1.0
+    ],
+    [
+     54.0,
+     0.72,
+     1.0
+    ],
+    [
+     56.5,
+     0.42,
+     1.0
+    ],
+    [
+     60.5,
+     0.44,
+     1.0
+    ],
+    [
+     65.5,
+     0.43,
+     1.0
+    ],
+    [
+     77.0,
+     0.43,
+     1.0
+    ],
+    [
+     78.5,
+     0.49,
+     1.0
+    ],
+    [
+     82.5,
+     0.35,
+     1.0
+    ],
+    [
+     83.5,
+     0.35,
+     0.55
+    ],
+    [
+     84.5,
+     0.44,
+     1.0
+    ],
+    [
+     87.0,
+     0.44,
+     1.0
+    ],
+    [
+     102.0,
+     0.44,
+     1.0
+    ],
+    [
+     108.0,
+     0.44,
+     1.0
+    ],
+    [
+     110.5,
+     0.5,
+     0.43
+    ],
+    [
+     112.0,
+     0.35,
+     0.55
+    ],
+    [
+     113.0,
+     0.49,
+     1.0
+    ],
+    [
+     114.0,
+     0.49,
+     0.68
+    ],
+    [
+     115.0,
+     0.5,
+     0.71
+    ],
+    [
+     116.0,
+     0.5,
+     0.68
+    ]
+   ],
+   "duree": 121.0,
+   "nb_plans": 21,
+   "duree_plan": 5.76,
+   "coupes": [
+    0.5,
+    7.0,
+    8.0,
+    9.0,
+    10.5,
+    13.0,
+    14.0,
+    23.0,
+    42.0,
+    49.5,
+    51.5,
+    52.5,
+    53.0,
+    53.5,
+    54.5,
+    72.5,
+    75.5,
+    97.0,
+    109.0,
+    111.5
+   ],
+   "plans": {
+    "tres_serre": 0.0,
+    "serre": 0.017,
+    "moyen": 0.583,
+    "large": 0.401
+   },
+   "camera": {
+    "fixe": 0.647,
+    "avance": 0.127,
+    "recul": 0.095,
+    "travelling": 0.009,
+    "epaule": 0.122
+   },
+   "nb_personnes": 1,
+   "personnes": [
+    {
+     "place": "centre",
+     "presence": 0.57,
+     "habit": [
+      29,
+      29,
+      28
+     ],
+     "cheveux": [
+      2,
+      1,
+      1
+     ],
+     "sourire": 0.0,
+     "taille": 0.134,
+     "tete_penchee": 1.4,
+     "regard_cote": 0.022
+    }
+   ],
+   "visages": true,
+   "sourires": 0.0,
+   "energie": 0.433,
+   "mur": [
+    40,
+    40,
+    35
+   ],
+   "palette": [
+    [
+     37,
+     38,
+     33,
+     0.386
+    ],
+    [
+     8,
+     8,
+     8,
+     0.302
+    ],
+    [
+     114,
+     116,
+     127,
+     0.119
+    ],
+    [
+     82,
+     83,
+     79,
+     0.114
+    ],
+    [
+     209,
+     207,
+     208,
+     0.059
+    ],
+    [
+     202,
+     125,
+     81,
+     0.019
+    ]
+   ],
+   "lumiere": {
+    "luminosite": 59.7,
+    "chaleur": 3.0,
+    "saturation": 28.4
+   },
+   "moment": "nuit"
+  },
+  "audio": {
+   "duree": 120.6,
+   "nb_voix": 2,
+   "voix": [
+    {
+     "hz": 99,
+     "genre": "h",
+     "part": 0.48
+    },
+    {
+     "hz": 98,
+     "genre": "h",
+     "part": 0.52
+    }
+   ],
+   "debit": 5.29,
+   "blanc_moyen": 0.61,
+   "coupes": 7,
+   "dynamique_db": 12.7,
+   "cris": 0.004,
+   "musique": null,
+   "impacts": 0,
+   "impacts_10s": 0.0,
+   "graves": 0,
+   "aigus": 0,
+   "sur_vanne": 0,
+   "evenements": {},
+   "emotions": {
+    "neutral": 19,
+    "sad": 9,
+    "supplicate": 3,
+    "angry": 2,
+    "confused": 2,
+    "shocked": 1,
+    "fear": 1,
+    "panik": 1
+   }
+  },
+  "video_origine": "/tmp/tmp70c5e823/src.mp4"
+ },
+ "fiche": {
+  "note": 0,
+  "decision": "vidéo manuelle (bande son d'une vidéo TikTok)",
+  "decoupage": [
+   {
+    "scene": "1",
+    "repliques": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     14,
+     15,
+     16,
+     17,
+     18,
+     19,
+     20,
+     21,
+     22,
+     23,
+     24,
+     25,
+     26,
+     27,
+     28,
+     29,
+     30,
+     31,
+     32,
+     33,
+     34,
+     35,
+     36
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 0.0,
+    "decor": "Cemetery with dark tombstones under a grey sky and a scythe hanging above.",
+    "titre": "Cimetière"
+   },
+   {
+    "scene": "2",
+    "repliques": [
+     37,
+     38
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 0.0,
+    "decor": "Hospital room with medical equipment and doctors around a bed.",
+    "titre": "Hôpital"
+   }
+  ]
+ },
+ "_monte": true,
  "_voix_hz": {
-  "presentateur": 130,
-  "narrateur": 190,
-  "invite": 121,
-  "envoyee": 210
+  "invite": 103,
+  "envoyee": 197,
+  "presentateur": 111
  },
  "_voix_genre": {
-  "presentateur": "h",
-  "invite": "h"
+  "invite": "h",
+  "envoyee": "h",
+  "presentateur": "h"
  },
  "realisation": {
   "moment": "matin",
   "lieux": [
-   "classe"
+   "rue",
+   "chambre"
   ],
   "gags": [],
   "ambiances": [
-   "pluie",
+   "orage",
    "poussiere"
   ],
-  "source": "robot",
+  "source": "auteur+image",
   "tenues": {
-   "presentateur": "gilet",
-   "envoyee": "pull",
-   "invite": "chemise"
+   "presentateur": "costume",
+   "invite": "costume",
+   "envoyee": "blouse"
   },
   "plans": [
-   "large/fixe",
+   "moyen/fixe",
+   "serre/avance",
    "serre/fixe",
+   "tres_serre/zoom_choc",
    "epaule/fixe",
+   "moyen/fixe",
+   "serre/epaule",
+   "contre_plongee/epaule",
+   "serre/epaule",
+   "serre/epaule",
+   "serre/epaule",
+   "serre/epaule",
+   "tres_serre/zoom_choc",
+   "moyen/epaule",
+   "epaule/fixe",
+   "moyen/avance",
    "serre/fixe",
    "serre/epaule",
-   "moyen/recul",
-   "tres_serre/avance",
-   "tres_serre/fixe",
+   "moyen/epaule",
+   "serre/fixe",
+   "serre/fixe",
+   "epaule/fixe",
+   "moyen/fixe",
+   "epaule/fixe",
+   "serre/epaule",
+   "serre/avance",
+   "serre/fixe",
+   "moyen/epaule",
+   "serre/epaule",
+   "epaule/fixe",
+   "serre/epaule",
+   "epaule/fixe",
+   "epaule/fixe",
+   "serre/avance",
+   "serre/avance",
+   "epaule/fixe",
+   "epaule/fixe",
+   "moyen/fixe",
    "serre/avance"
   ]
  }

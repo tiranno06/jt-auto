@@ -1434,45 +1434,46 @@
  {
   "moment": "matin",
   "lieux": [
-   "classe"
+   "rue",
+   "chambre"
   ],
-  "source": "robot",
-  "duree": 10.0,
+  "source": "auteur+image",
+  "duree": 124.1,
   "plans": {
-   "large": 1,
-   "serre": 4,
-   "epaule": 1,
-   "moyen": 1,
-   "tres_serre": 2
+   "moyen": 8,
+   "serre": 19,
+   "tres_serre": 2,
+   "epaule": 9,
+   "contre_plongee": 1
   },
   "mouvements": {
-   "fixe": 5,
-   "epaule": 1,
-   "recul": 1,
-   "avance": 2
+   "fixe": 18,
+   "avance": 6,
+   "zoom_choc": 2,
+   "epaule": 13
   },
   "costumes": {
-   "presentateur": "gilet",
-   "envoyee": "pull",
-   "invite": "chemise"
+   "presentateur": "costume",
+   "invite": "costume",
+   "envoyee": "blouse"
   },
-  "figurants": 0,
+  "figurants": 2,
   "ambiances": [
-   "pluie",
+   "orage",
    "poussiere"
   ],
-  "controle": "ok",
-  "fichier": "2026-10-24_15h31_emission.mp4",
+  "controle": "Humoriste 5.0/10 : 105 s Absence de zoom choc sur la réplique finale pour marquer la chute.; 1 s Ouverture trop plate, manque d'un effet sonore pour lancer le gag. | Réalisateur 4.5/10 : 0.4 s Tête du",
+  "fichier": "2026-10-24_14h27_emission.mp4",
   "cine": {
-   "focus": true,
+   "focus": false,
    "vertige": true,
-   "tiers": true,
+   "tiers": false,
    "etalonnage": true,
    "profondeur": false,
-   "grain": false,
-   "reflets": true,
+   "grain": true,
+   "reflets": false,
    "son": true
   },
-  "cadence": null
+  "cadence": "normal"
  }
 ]

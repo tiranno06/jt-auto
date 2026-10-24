@@ -1,28 +1,93 @@
 Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, ElevenLabs epuise — IA utilisée : mistral
-Sketch d'essai : tests/sketch_C_clash.json
-Sketch : « 3000 PROFS EXPRESS », 8 répliques
-  voix sur mesure des personnages en remplaçantes
-  voix 3 (envoyee, kyutai:cml-tts/fr/10087_11650_000028-, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.91, 'mos': 3.3} OK
-  voix 7 (envoyee, kyutai:cml-tts/fr/10087_11650_000028-, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.76, 'mos': 3.02} OK
-  voix 4 (invite, kyutai:cml-tts/fr/2216_1745_000007-00, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.85, 'mos': 3.53} OK
-  voix 6 (invite, kyutai:cml-tts/fr/2216_1745_000007-00, prise 1) {'sim': 1.0, 'blanc': 0.04, 'debit': 0.76, 'mos': 3.34} OK
-    elevenlabs PjAkkDaPt1wolu0EMUTN : HTTP 401 {"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credits remaining, while 24 credits are required for this request.","status
-    ElevenLabs indisponible (crédit ou accès) : passage aux voix gratuites
-  narrateur : la voix elevenlabs:PjAkkDaPt1wolu0EMUTN échoue, passage à la voix de remplacement
-  voix 0 (narrateur, kyutai:cml-tts/fr/2154_2576_000020-00, prise 1) {'sim': 1.0, 'blanc': 0.08, 'debit': 1.44, 'mos': 3.35} OK
-  voix 1 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 0.98, 'blanc': 0.14, 'debit': 0.81, 'mos': 3.23} OK
-  voix 2 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 0.86, 'blanc': 0.0, 'debit': 1.14, 'mos': 3.1} OK
-  voix 5 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.97, 'mos': 3.59} OK
-  voix 8 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0.04, 'debit': 0.9, 'mos': 3.04} OK
-Voix : Kyutai TTS (CC BY 4.0), voix CML-TTS (CC BY 4.0)
-montage : 17 plans (0.1:large>nar/coupe 3.3:serre>pre/glisse 7.5:tres_serre>inv/coupe 9.3:epaule>pre/glisse 10.8:moyen>pre/glisse 12.2:serre>env/glisse 15.4:tres_serre>pre/coupe 17.0:serre>inv/coupe 19.4:tres_serre>pre/coupe 20.9:moyen>pre/glisse 21.4:serre>inv/glisse 22.6:tres_serre>inv/glisse 25.5:tres_serre>env/coupe 27.0:moyen>env/zoom 30.5:tres_serre>pre/coupe 32.0:serre>pre/glisse 36.1:tres_serre>inv/coupe)
-studio : matin, lieux ['classe'], tenues presentateur=gilet, envoyee=pull, invite=chemise, 0 figurant(s), ambiances ['pluie', 'poussiere'] ; plans large/fixe serre/fixe epaule/fixe serre/fixe serre/epaule moyen/recul tres_serre/avance tres_serre/fixe serre/avance
-cartoon : durée 10.0 s, 9 répliques, 1 scène(s), personnages ['presentateur', 'envoyee', 'invite']
-Contrôle image : 12 défaut(s) — 11.25 s tete_coupee (invite), 21.25 s tete_coupee (invite), 27.25 s tete_coupee (presentateur), 27.25 s tete_coupee (invite), 27.75 s tete_coupee (presentateur), 27.75 s tete_coupee (invite), 28.25 s tete_coupee (presentateur), 28.25 s tete_coupee (invite)
-  image 0/240 (4 processeurs)
+Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @same_same53, @charly.bse, @motiontoonz, @kodanimation, @vignianimation, @vincedessine, @gebutaw
+Profil TikTok @yan_animation0 : 37 vidéo(s) jamais utilisée(s)
+Profil TikTok @gebutaw : 33 vidéo(s) jamais utilisée(s)
+Vidéo depuis TikTok : https://www.tiktok.com/@yan_animation0/video/7671802136782474528
+  son téléchargé (yt-dlp --impersonate chrome)
+  son récupéré : 120.6 s, compte d'origine @yan_animation0
+[ WARN:0@15.163] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  image de la vidéo : 21 plans (≈ 5.76 s chacun) ; cadrages : très serré 0 %, serré 1 %, moyen 58 %, large 40 % ; caméra : fixe 64 %, avance 12 %, recul 9 %, travelling 0 %, epaule 12 % ; 1 personne(s) à l'écran : centre (habit [29, 29, 28], cheveux [2, 1, 1], sourit 0 %) ; agitation 0.433 ; lumière nuit ; fond [40, 40, 35]
+  isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
+  transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+  voix trop proches : répliques réparties d'après le fil du dialogue (questions, réponses)
+  39 répliques, voix : {'speaker_0': 99, 'speaker_1': 98}
+  son de la vidéo : 2 voix [99 Hz (h, 48 %), 98 Hz (h, 52 %)], 5.29 mots/s, blancs 0.61 s, 7 coupure(s) de parole, dynamique 12.7 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
+  scène reconstituée : Un jeune homme se retrouve dans l'au-delà face à la Mort, entouré de tombes, et réalise qu'il a passé toute sa vie à amasser de l'argent au lieu de vivre.
+  casting : speaker_0 → voix off, speaker_1 → Lila
+  Claude a réattribué 37 réplique(s) à la bonne personne (voix proches)
+Sketch : « LEÇON DE VIE DANS L'AU-DELÀ », 39 répliques
+  décor 0 : Cemetery with dark tombstones under a grey sky and a scythe hanging ab
+  décor 1 : Hospital room with medical equipment and doctors around a bed., soft p
+montage : 89 plans (0.0:moyen>pre/coupe 1.8:epaule>pre/glisse 3.2:tres_serre>inv/coupe 4.2:moyen>pre/coupe 4.7:serre>pre/zoom 5.9:moyen>pre/zoom 6.7:serre>pre/zoom 8.0:serre>inv/coupe 8.6:tres_serre>inv/glisse 9.7:tres_serre>pre/file 10.3:epaule>pre/glisse 11.3:serre>inv/coupe 12.6:moyen>inv/zoom 13.8:serre>pre/coupe 15.2:large>pre/zoom 17.0:contre_plongee>inv/file 18.1:moyen>inv/zoom 18.7:contre_plongee>inv/zoom 20.1:serre>inv/glisse 23.0:moyen>inv/glisse 24.5:serre>pre/glisse 25.9:moyen>pre/zoom 27.6:tres_serre>pre/zoom 29.6:serre>pre/glisse 30.7:tres_serre>inv/coupe 31.4:tres_serre>pre/glisse 33.2:large>pre/glisse 34.8:serre>inv/glisse 35.7:moyen>pre/coupe 36.8:tres_serre>pre/zoom 38.9:moyen>pre/zoom 40.9:epaule>pre/zoom 42.0:tres_serre>inv/coupe 42.9:moyen>pre/coupe 43.6:serre>inv/glisse 45.1:tres_serre>pre/coupe 46.3:serre>inv/glisse 47.6:serre>pre/coupe 48.6:moyen>inv/coupe 49.2:tres_serre>inv/zoom 50.0:large>inv/zoom 51.0:serre>inv/glisse 52.5:serre>pre/coupe 53.0:tres_serre>pre/glisse 53.5:large>inv/coupe 54.5:serre>inv/glisse 55.3:moyen>inv/zoom 56.6:tres_serre>inv/zoom 58.3:epaule>inv/glisse 60.4:tres_serre>pre/coupe 61.4:moyen>inv/coupe 62.1:tres_serre>inv/zoom 63.4:serre>pre/coupe 64.4:moyen>inv/coupe 65.0:epaule>inv/glisse 67.1:moyen>inv/glisse 69.7:serre>inv/glisse 70.9:tres_serre>pre/coupe 72.0:serre>inv/glisse 72.5:tres_serre>pre/coupe 73.4:moyen>inv/coupe 75.3:serre>pre/glisse 76.2:tres_serre>inv/coupe 76.9:moyen>inv/glisse 78.4:tres_serre>pre/glisse 79.4:serre>inv/file 80.7:serre>pre/coupe 82.1:epaule>inv/coupe 84.1:large>inv/glisse 86.1:serre>inv/glisse 87.0:large>inv/glisse 88.1:epaule>inv/glisse 90.0:tres_serre>pre/glisse 91.0:moyen>inv/coupe 92.2:epaule>inv/glisse 93.9:moyen>inv/glisse 96.3:serre>inv/glisse 96.7:serre>pre/file 98.1:tres_serre>inv/coupe 99.2:epaule>pre/coupe 100.5:serre>inv/coupe 101.8:epaule>pre/file 103.9:large>pre/glisse 105.7:serre>inv/coupe 106.5:moyen>pre/coupe 113.9:moyen>env/coupe 115.3:serre>env/zoom 116.9:tres_serre>env/glisse 118.1:serre>env/glisse)
+studio : matin, lieux ['rue', 'chambre'], tenues presentateur=costume, invite=costume, envoyee=blouse, 2 figurant(s), ambiances ['orage', 'poussiere'] ; plans moyen/fixe serre/avance serre/fixe tres_serre/zoom_choc epaule/fixe moyen/fixe serre/epaule contre_plongee/epaule serre/epaule serre/epaule serre/epaule serre/epaule tres_serre/zoom_choc moyen/epaule epaule/fixe moyen/avance serre/fixe serre/epaule moyen/epaule serre/fixe serre/fixe epaule/fixe moyen/fixe epaule/fixe serre/epaule serre/avance serre/fixe moyen/epaule serre/epaule epaule/fixe serre/epaule epaule/fixe epaule/fixe serre/avance serre/avance epaule/fixe epaule/fixe moyen/fixe serre/avance
+cartoon : durée 124.1 s, 39 répliques, 2 scène(s), personnages ['presentateur', 'invite', 'envoyee']
+Contrôle image : 54 défaut(s) — 0.25 s tete_coupee (invite), 0.75 s tete_coupee (invite), 1.25 s tete_coupee (invite), 1.75 s tete_coupee (invite), 4.25 s tete_coupee (invite), 6.25 s tete_coupee (invite), 12.75 s tete_coupee (presentateur), 13.25 s tete_coupee (presentateur)
+  image 0/7447 (4 processeurs)
+  image 300/7447
+  image 600/7447
+  image 900/7447
+  image 1200/7447
+  image 1500/7447
+  image 1800/7447
+  image 2100/7447
+  image 2400/7447
+  image 2700/7447
+  image 3000/7447
+  image 3300/7447
+  image 3600/7447
+  image 3900/7447
+  image 4200/7447
+  image 4500/7447
+  image 4800/7447
+  image 5100/7447
+  image 5400/7447
+  image 5700/7447
+  image 6000/7447
+  image 6300/7447
+  image 6600/7447
+  image 6900/7447
+  image 7200/7447
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = aucune, voix = piper, decors = dessines, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 0, 'cache_lu': 0, 'eleven_caracteres': 55, 'gpu_s': 0}
-OK : sortie/2026-10-24_15h31_emission.mp4 (10 s)
+Jury qualité (ia) : 2.9/10 — Humoriste 3.0/10 : 55.4 s Le récit d'enfance tragique manque cruellement d'un soutien sonore dramatique ou parodique pour accentuer l'émotion.; 113.9 s La chute du réveil à l'hôpital / sauvetage manque d'un zoom choc pour marquer la surprise finale.; 0.4 s Absence totale de bruitages sur toute la vidéo (0 bruitage en 124s), ce qui rend le dialogue monotone et mou. | Réalisateur 3.5/10 : 43 s Tête du présentateur coupée par le haut du cadre à l'image 7.; 90.2 s À l'image 13, cadrage catastrophique avec la tête du personnage coupée à gauche et en haut.; 104.7 s Tête du présentateur encore coupée sur le bord supérieur à l'image 15.; 0.2 s tête de invite coupée par le bord de l'image (moyen); 6.2 s tête de invite coupée par le bord de l'image (moyen); 12.8 s tête de presentateur coupée par le bord de l'image (moyen) | Directeur artistique 2.0/10 : 0.4 s Le décor est une rue commerçante banal
+Manque par rapport à la vidéo d'origine : La Mort / Faucheuse (squelette avec cape noire à capuche, yeux rouges lumineux et faux géante) est totalement absente et remplacée par un homme en veste avec de ; Le décor du cimetière brumeux avec ses nombreuses pierres tombales est remplacé par une rue citadine colorée et animée. ; La mallette d'argent remplie de billets et les pièces/bijoux posés au sol sont absents. ; Les yeux rouges larmoyants de la Mort à l'instant où elle est émue (image 9 de l'original) n'existent pas dans notre version. ; L'ambiance sombre, funèbre et mystique de l'original est complètement perdue au profit d'une scène de rue banale.
+Corrections du jury (tour 1) : plan serre sur la réplique 1 ; plan serre sur la réplique 2 ; plan serre sur la réplique 6
+montage : 85 plans (0.0:serre>pre/coupe 4.7:moyen>pre/zoom 6.7:serre>pre/zoom 8.0:serre>inv/coupe 8.6:tres_serre>inv/glisse 9.7:tres_serre>pre/file 10.3:epaule>pre/glisse 11.3:serre>inv/coupe 12.6:moyen>inv/zoom 13.8:serre>pre/coupe 15.2:large>pre/zoom 17.0:contre_plongee>inv/file 18.1:moyen>inv/zoom 18.7:contre_plongee>inv/zoom 20.1:serre>inv/glisse 23.0:moyen>inv/glisse 24.5:serre>pre/glisse 25.9:moyen>pre/zoom 27.6:tres_serre>pre/zoom 29.6:serre>pre/glisse 30.7:tres_serre>inv/coupe 31.4:tres_serre>pre/glisse 33.2:large>pre/glisse 34.8:serre>inv/glisse 35.7:moyen>pre/coupe 36.8:tres_serre>pre/zoom 38.9:moyen>pre/zoom 40.9:epaule>pre/zoom 42.0:tres_serre>inv/coupe 42.9:moyen>pre/coupe 43.6:serre>inv/glisse 45.1:tres_serre>pre/coupe 46.3:serre>inv/glisse 47.6:serre>pre/coupe 48.6:moyen>inv/coupe 49.2:tres_serre>inv/zoom 50.0:large>inv/zoom 51.0:serre>inv/glisse 52.5:serre>pre/coupe 53.0:tres_serre>pre/glisse 53.5:large>inv/coupe 54.5:serre>inv/glisse 55.3:moyen>inv/zoom 56.6:tres_serre>inv/zoom 58.3:epaule>inv/glisse 60.4:tres_serre>pre/coupe 61.4:moyen>inv/coupe 62.1:tres_serre>inv/zoom 63.4:serre>pre/coupe 64.4:moyen>inv/coupe 65.0:epaule>inv/glisse 67.1:moyen>inv/glisse 69.7:serre>inv/glisse 70.9:tres_serre>pre/coupe 72.0:serre>inv/glisse 72.5:tres_serre>pre/coupe 73.4:moyen>inv/coupe 75.3:serre>pre/glisse 76.2:tres_serre>inv/coupe 76.9:moyen>inv/glisse 78.4:tres_serre>pre/glisse 79.4:serre>inv/file 80.7:serre>pre/coupe 82.1:epaule>inv/coupe 84.1:large>inv/glisse 86.1:serre>inv/glisse 87.0:large>inv/glisse 88.1:epaule>inv/glisse 90.0:tres_serre>pre/glisse 91.0:moyen>inv/coupe 92.2:epaule>inv/glisse 93.9:moyen>inv/glisse 96.3:serre>inv/glisse 96.7:serre>pre/file 98.1:tres_serre>inv/coupe 99.2:epaule>pre/coupe 100.5:serre>inv/coupe 101.8:epaule>pre/file 103.9:large>pre/glisse 105.7:serre>inv/coupe 106.5:moyen>pre/coupe 113.9:moyen>env/coupe 115.3:serre>env/zoom 116.9:tres_serre>env/glisse 118.1:serre>env/glisse)
+studio : matin, lieux ['rue', 'chambre'], tenues presentateur=costume, invite=costume, envoyee=blouse, 2 figurant(s), ambiances ['orage', 'poussiere'] ; plans moyen/fixe serre/avance serre/fixe tres_serre/zoom_choc epaule/fixe moyen/fixe serre/epaule contre_plongee/epaule serre/epaule serre/epaule serre/epaule serre/epaule tres_serre/zoom_choc moyen/epaule epaule/fixe moyen/avance serre/fixe serre/epaule moyen/epaule serre/fixe serre/fixe epaule/fixe moyen/fixe epaule/fixe serre/epaule serre/avance serre/fixe moyen/epaule serre/epaule epaule/fixe serre/epaule epaule/fixe epaule/fixe serre/avance serre/avance epaule/fixe epaule/fixe moyen/fixe serre/avance
+cartoon : durée 124.1 s, 39 répliques, 2 scène(s), personnages ['presentateur', 'invite', 'envoyee']
+Contrôle image : 57 défaut(s) — 0.75 s tete_coupee (presentateur), 1.25 s tete_coupee (presentateur), 1.75 s tete_coupee (presentateur), 2.25 s tete_coupee (presentateur), 2.75 s tete_coupee (presentateur), 3.25 s tete_coupee (presentateur), 5.25 s tete_coupee (invite), 5.75 s tete_coupee (invite)
+  image 0/7447 (4 processeurs)
+  image 300/7447
+  image 600/7447
+  image 900/7447
+  image 1200/7447
+  image 1500/7447
+  image 1800/7447
+  image 2100/7447
+  image 2400/7447
+  image 2700/7447
+  image 3000/7447
+  image 3300/7447
+  image 3600/7447
+  image 3900/7447
+  image 4200/7447
+  image 4500/7447
+  image 4800/7447
+  image 5100/7447
+  image 5400/7447
+  image 5700/7447
+  image 6000/7447
+  image 6300/7447
+  image 6600/7447
+  image 6900/7447
+  image 7200/7447
+Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
+Jury qualité (ia) : 4.7/10 — Humoriste 5.0/10 : 105 s Absence de zoom choc sur la réplique finale pour marquer la chute.; 1 s Ouverture trop plate, manque d'un effet sonore pour lancer le gag. | Réalisateur 4.5/10 : 0.4 s Tête du présentateur coupée par le bord supérieur de l'image.; 43.3 s Cadrage trop serré verticalement, sommet du crâne coupé.; 0.8 s tête de presentateur coupée par le bord de l'image (serre); 5.2 s tête de invite coupée par le bord de l'image (moyen); 12.8 s tête de presentateur coupée par le bord de l'image (moyen) | Directeur artistique 4.0/10 : 0 s Décor urbain inadapté au thème de la mort et du passage dans l'au-delà.; 0 s Le présentateur ressemble à un passant ordinaire plutôt qu'à la Mort. | Ingénieur du son 5.0/10 : 5.8 s Manque de bruitage d'accentuation sur l'interdiction.; 57 s Moment mélodramatique sans soutien sonore illustratif. | Spectateur TikTok 5.0/10 : 0.4 s L'enjeu n'est pas cl
+Manque par rapport à la vidéo d'origine : Décor de cimetière avec tombes et ambiance lugubre absent. ; Personnage de la Faucheuse (squelette encapuchonné, yeux rouges et faux) remplacé par un humain standard. ; Mallette d'argent et billets éparpillés au sol manquants.
+Version corrigée gardée : 2.9 → 4.7/10
+Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = gemini ×3, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 32369, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 29}
+OK : sortie/2026-10-24_14h27_emission.mp4 (124 s)
