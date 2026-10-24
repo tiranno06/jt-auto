@@ -94,6 +94,9 @@ def lire(p, d):
     return json.load(open(p, encoding="utf-8")) if os.path.exists(p) else d
 
 def main():
+    import progression as PR                                               # avancement en direct sur le site (barre de progression)
+    PR.TYPE[0] = "🎵 Son TikTok" if (FILIERE == "tiktok" or THEME.startswith("TIKTOK::")) else "🎭 Sketch"
+    PR.etape(3, "Démarrage du robot", forcer=True)
     historique = lire("episodes/historique.json", [])
     modal_ok = bool(os.environ.get("MODAL_TOKEN_ID") and os.environ.get("MODAL_TOKEN_SECRET"))
     if modal_ok:
@@ -125,6 +128,7 @@ def main():
             alerte.alerter("Crédit Claude épuisé ?", "Claude ne répond pas : la vidéo est fabriquée avec un sketch de secours déjà écrit. "
                            "Rechargez le crédit sur console.anthropic.com pour revenir aux sketchs écrits par Claude.")
         except Exception: pass
+    PR.etape(6, "Écoute du son TikTok" if (FILIERE == "tiktok" or THEME.startswith("TIKTOK::")) else "Recherche de l'idée", forcer=True)
     PROFIL_PREP = None                                                     # filière « Sons TikTok » (à part des sketchs) : une vidéo
     if FILIERE == "tiktok" and not THEME:                                  # au hasard d'un profil de la liste, jamais déjà utilisée
         import profils_tiktok, doublage
@@ -134,6 +138,7 @@ def main():
             except Exception as e: print(f"  son de {url_} impossible ({str(e)[:160]}) : vidéo suivante", flush=True)
         if PROFIL_PREP is None:                                            # jamais de sketch à la place : les deux filières sont séparées
             print("Sons TikTok : aucune vidéo des profils utilisable cette fois (pas de vidéo).", flush=True)
+            PR.fini(False, "Aucun son TikTok utilisable cette fois")
             t_ = "episodes/tentatives.json"; tent = lire(t_, [])
             tent.append({"date": datetime.datetime.now(ZoneInfo("Europe/Paris")).date().isoformat(), "heure": datetime.datetime.now(ZoneInfo("Europe/Paris")).strftime("%H:%M"),
                          "auto": AUTO, "filiere": "tiktok", "note": 0, "titre": "aucun son TikTok utilisable"})
@@ -197,11 +202,13 @@ def main():
         sk = secours.sketch(fmt)
     else:
         if THEME or LOT or REFAIRE: os.environ["FORCER_FABRICATION"] = "1"   # vidéo demandée explicitement : elle est fabriquée quoi qu'il arrive
+        PR.etape(10, "Écriture du sketch", forcer=True)
         try:
             sk = ecrire.ecrire_sketch([c[0] for c in candidats], gags=gags, special=dimanche and not libre, recents=recents, libre=libre,
                                       serie=serie.contexte() if (libre and not THEME) else "", stats=stats.pour_auteur() if libre else "")
         except ecrire.QualiteInsuffisante as q:                             # sous la note minimale : pas de vidéo moyenne (voix et décors économisés)
             print(f"Pas de vidéo : {q} (réglage ⚙️ Écriture → note minimale).", flush=True)
+            PR.fini(False, "Sketch pas assez drôle : nouvel essai au prochain réveil")
             print(f"Moteur humoristique : {ecrire.USAGE['appels']} appels Claude, {ecrire.USAGE['entree']} jetons lus, {ecrire.USAGE['sortie']} jetons écrits, coût {ecrire.USAGE.get('cout', 0):.2f} $", flush=True)
             t_ = "episodes/tentatives.json"; tent = lire(t_, [])
             tent.append({"date": datetime.datetime.now(ZoneInfo("Europe/Paris")).date().isoformat(), "heure": datetime.datetime.now(ZoneInfo("Europe/Paris")).strftime("%H:%M"),
@@ -245,6 +252,7 @@ def main():
         sk["repliques"].insert(0, copie); decaler(sk, 0)
     def voix_et_minutage():
         """Voix des répliques (ElevenLabs…), débit ajusté, minutage des mots."""
+        PR.etape(22, "Voix des personnages", forcer=True)
         teaser = sk["repliques"][0].get("teaser") if sk.get("repliques") else None
         if teaser is not None:                                                # la réplique rejouée n'est enregistrée qu'une fois
             reste = sk["repliques"][1:]
@@ -298,6 +306,7 @@ def main():
                         plans_dec = {k: DD.dessiner(B0["lieux"][min(k, len(B0["lieux"]) - 1)], B0, graine=B0["graine"] % 9973 + k)["fond"]   # l'IA peint par-dessus notre plan
                                      for k in range(len(sk.get("decoupage") or []))}
                     except Exception as e: print(f"Bible du studio indisponible pour les décors IA : {e}", flush=True)
+                PR.etape(32, "Décors", forcer=True)
                 t_gpu = datetime.datetime.now(); decors = decors_mod.generer(sk.get("decoupage"), graine=len(historique) + 7 + (datetime.datetime.now().microsecond % 997 if REFAIRE_MODE == "decors" else 0), lumiere=lum, plans=plans_dec)
                 GPU["s"] += (datetime.datetime.now() - t_gpu).total_seconds()
             try:                                                           # mode payant : ambiance sonore ElevenLabs de chaque lieu (une fois par lieu)
@@ -305,10 +314,12 @@ def main():
                 if cartoon.DETAIL and not DOUB and os.environ.get("AMBIANCES_ELEVEN", "1") != "0":
                     for l_ in set(st_.bible(sk, [r for r in dict.fromkeys(x["p"] for x in sk.get("repliques", [])) if r != "narrateur"])["lieux"]): bruitages_eleven.ambiance_lieu(l_)
             except Exception as e: print(f"Ambiances ElevenLabs indisponibles : {e}", flush=True)
+            PR.PLAGE[:] = [40, 86]; PR.etape(40, "Dessin des images", forcer=True)
             duree = cartoon.rendre(sk, base + ".mp4", audios, mots=mots, decors=decors, mini=fmt == "mini")
             import controle, qualite, copy
             tech_ok, rapport_tech = controle.technique(base + ".mp4", duree, cartoon.MINUTAGE[-1][1] if cartoon.MINUTAGE else None)     # contrôles gratuits (format, son, images noires)
             if not test and cartoon.RENDU and os.environ.get("JURY", "1") != "0":   # jury qualité : 5 critiques (gratuits + Claude s'il y a du crédit)
+                PR.etape(88, "Contrôle qualité par le jury", 120, forcer=True)
                 QUALITE["Q"] = Q = qualite.evaluer(base + ".mp4", cartoon.RENDU, sk, "" if tech_ok else rapport_tech)
                 video_ok, rapport_video = not Q["defauts_graves"], Q["rapport"]
                 try: tours = max(0, min(2, int(os.environ.get("JURY_TOURS") or 1)))
@@ -330,6 +341,7 @@ def main():
                             except Exception as e: print(f"Nouveaux décors IA impossibles ({e}) : décors dessinés", flush=True)
                     etat = {k_: copy.copy(getattr(cartoon, k_)) for k_ in ("MINUTAGE", "PH", "BRUITAGES", "RENDU", "COUVERTURE", "COUVERTURE_MS")}
                     try:
+                        PR.PLAGE[:] = [90, 97]; PR.APRES[0] = 90; PR.etape(90, "Nouvelle version corrigée par le jury", forcer=True)
                         d2 = cartoon.rendre(sk2, base + "_v2.mp4", audios, mots=mots, decors=dec2, mini=fmt == "mini")
                         t2_ok, t2_rap = controle.technique(base + "_v2.mp4", d2, cartoon.MINUTAGE[-1][1] if cartoon.MINUTAGE else None)
                         Q2 = qualite.evaluer(base + "_v2.mp4", cartoon.RENDU, sk2, "" if t2_ok else t2_rap)
@@ -420,6 +432,7 @@ def main():
         with open(sortie, "a") as f:
             f.write(f"video={base}.mp4\nlegende={base}.txt\nnom={os.path.basename(base)}.mp4\nmois={jour[:7]}\ntitre={sk['sujet']}\n"
                     f"qualite={'ok' if video_ok and (not fiche or (fiche.get('note') or 0) >= SEUIL_PUB) and not REFAIRE else 'faible'}\nnote={round(fiche.get('note') or 0)}\n")
+    PR.fini(True)
     print(f"OK : {base}.mp4 ({duree:.0f} s)")
 
 if __name__ == "__main__":
