@@ -4827,5 +4827,186 @@
    ]
   },
   "video": "2026-10-24_21h22_emission.mp4"
+ },
+ {
+  "date": "2026-10-24",
+  "source": "https://www.tiktok.com/@gebutaw/video/7664157906304011528",
+  "auteur": "gebutaw",
+  "visuel": {
+   "gestes": [],
+   "duree": 10.0,
+   "nb_plans": 1,
+   "duree_plan": 10.0,
+   "coupes": [],
+   "plans": {
+    "tres_serre": 0.0,
+    "serre": 0.0,
+    "moyen": 0.0,
+    "large": 1.0
+   },
+   "camera": {
+    "fixe": 0.789,
+    "avance": 0.0,
+    "recul": 0.0,
+    "travelling": 0.0,
+    "epaule": 0.211
+   },
+   "nb_personnes": 0,
+   "personnes": [],
+   "visages": false,
+   "sourires": 0.0,
+   "energie": 0.303,
+   "mur": [
+    243,
+    223,
+    208
+   ],
+   "palette": [
+    [
+     243,
+     223,
+     208,
+     0.812
+    ],
+    [
+     253,
+     253,
+     252,
+     0.143
+    ],
+    [
+     14,
+     12,
+     12,
+     0.019
+    ],
+    [
+     171,
+     166,
+     164,
+     0.009
+    ],
+    [
+     111,
+     105,
+     103,
+     0.009
+    ],
+    [
+     58,
+     55,
+     54,
+     0.007
+    ]
+   ],
+   "lumiere": {
+    "luminosite": 237.6,
+    "chaleur": 29.1,
+    "saturation": 31.9
+   },
+   "moment": "jour"
+  },
+  "audio": {
+   "duree": 10.0,
+   "nb_voix": 1,
+   "voix": [
+    {
+     "hz": 320,
+     "genre": "f",
+     "part": 1.0
+    }
+   ],
+   "debit": 2.21,
+   "blanc_moyen": 0.0,
+   "coupes": 0,
+   "dynamique_db": 8.9,
+   "cris": 0.079,
+   "musique": null,
+   "impacts": 0,
+   "impacts_10s": 0.0,
+   "graves": 0,
+   "aigus": 0,
+   "sur_vanne": 0,
+   "evenements": {},
+   "emotions": {
+    "excited": 1
+   }
+  },
+  "claude": {
+   "lieux": [
+    "studio"
+   ],
+   "moment": "soir",
+   "costumes": {
+    "presentateur": {
+     "haut": "chemise",
+     "c_haut": "bleu",
+     "motif": "rayures",
+     "bas": "pantalon",
+     "chaussures": "baskets",
+     "details": [
+      "moustache",
+      "lunettes_soleil",
+      "micro"
+     ],
+     "chapeau": null,
+     "cheveux": "carre",
+     "c_cheveux": "brun"
+    }
+   },
+   "objets": [
+    {
+     "replique": 0,
+     "objet": "micro"
+    }
+   ],
+   "gags": [
+    "« Le défi du jour : 100 likes ou c'est la banqueroute ! »",
+    "\"Ne cherchez pas la logique, c'est de l'art !\"",
+    "\"Gagnant : celui qui rit le moins !\""
+   ],
+   "ambiances": [
+    "neon"
+   ],
+   "plans": [
+    {
+     "replique": 0,
+     "plan": "large",
+     "mouvement": "fixe",
+     "geste": "bras_ouverts",
+     "reaction": "aucune"
+    },
+    {
+     "replique": 0,
+     "plan": "serre",
+     "mouvement": "epaule",
+     "geste": "pointe_d",
+     "reaction": "regard_camera"
+    }
+   ]
+  },
+  "realisation": {
+   "moment": "soir",
+   "lieux": [
+    "salon"
+   ],
+   "gags": [
+    "« Le défi du jour : 100 likes ou c'est la banqueroute ! »",
+    "\"Ne cherchez pas la logique, c'est de l'art !\"",
+    "\"Gagnant : celui qui rit le moins !\""
+   ],
+   "ambiances": [
+    "neon",
+    "poussiere"
+   ],
+   "source": "auteur+image",
+   "tenues": {
+    "presentateur": "chemise"
+   },
+   "plans": [
+    "serre/epaule"
+   ]
+  },
+  "video": "2026-10-24_21h43_emission.mp4"
  }
 ]

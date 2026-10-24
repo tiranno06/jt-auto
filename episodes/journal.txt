@@ -1,41 +1,46 @@
 Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, ElevenLabs epuise — IA utilisée : mistral
-Vidéo depuis TikTok : https://www.tiktok.com/@motiontoonz/video/7692426082045152545
+Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @motiontoonz, @same_same53, @charly.bse, @gebutaw, @kodanimation, @vignianimation, @vincedessine
+Profil TikTok @gebutaw : 33 vidéo(s) jamais utilisée(s)
+Profil TikTok @vincedessine : 38 vidéo(s) jamais utilisée(s)
+Vidéo depuis TikTok : https://www.tiktok.com/@gebutaw/video/7664157906304011528
   son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 61.1 s, compte d'origine @motiontoonz
-[ WARN:0@7.379] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
-  image de la vidéo : 28 plans (≈ 2.2 s chacun) ; cadrages : très serré 0 %, serré 4 %, moyen 0 %, large 95 % ; caméra : fixe 41 %, recul 2 %, epaule 56 % ; 1 personne(s) à l'écran : aucun visage repéré ; agitation 0.46 ; lumière jour ; fond [242, 240, 238]
+  son récupéré : 10.0 s, compte d'origine @gebutaw
+[ WARN:0@12.649] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  image de la vidéo : 1 plans (≈ 10.0 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 0 %, large 100 % ; caméra : fixe 78 %, epaule 21 % ; 0 personne(s) à l'écran : aucun visage repéré ; agitation 0.303 ; lumière jour ; fond [243, 223, 208]
   isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
   transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
-Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-  voix re-séparées par leur empreinte (ECAPA) : 2 voix (netteté 0.10)
-  voix vérifiées mot par mot : 54 mot(s) remis sur la bonne voix
-  33 répliques, voix : {'speaker_1': 248, 'speaker_0': 172}
-  son de la vidéo : 2 voix [248 Hz (f, 68 %), 172 Hz (?, 32 %)], 6.93 mots/s, blancs 0.09 s, 18 coupure(s) de parole, dynamique 16.3 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
-  scène reconstituée : En terrasse d'un bistro parisien chic, un client bodybuildé demande sa viande bien cuite, mais le serveur refuse catégoriquement au nom de la gastronomie.
-  casting : speaker_0 → Kévin, speaker_1 → Jojo
-Sketch : « CUISSON DE LA VIANDE AU RESTO », 33 répliques
-  décor 0 : Parisian cafe terrace with green awning, wicker chairs, round bistro t
-montage : 66 plans (0.0:moyen>inv/coupe 1.0:serre>inv/zoom 1.5:moyen>inv/zoom 2.9:contre_plongee>inv/zoom 3.2:large>inv/zoom 4.1:serre>pre/file 4.6:tres_serre>inv/file 5.8:moyen>pre/file 6.5:serre>inv/file 7.3:contre_plongee>pre/file 7.8:moyen>pre/glisse 8.8:large>inv/file 9.7:tres_serre>inv/zoom 11.0:contre_plongee>pre/file 11.7:tres_serre>inv/file 12.2:serre>inv/glisse 12.9:large>pre/file 13.9:serre>pre/zoom 14.5:epaule>inv/coupe 15.6:serre>pre/coupe 16.2:large>pre/glisse 17.2:tres_serre>inv/coupe 18.2:large>pre/file 19.3:contre_plongee>pre/glisse 22.5:moyen>pre/glisse 23.5:contre_plongee>pre/glisse 24.5:serre>inv/coupe 25.3:tres_serre>inv/glisse 26.3:moyen>inv/zoom 27.6:tres_serre>pre/coupe 28.1:serre>inv/coupe 29.1:moyen>pre/file 29.5:epaule>inv/coupe 30.8:large>pre/coupe 32.1:epaule>pre/glisse 33.3:tres_serre>inv/coupe 34.2:moyen>inv/glisse 34.4:tres_serre>pre/glisse 35.9:moyen>pre/zoom 37.2:large>pre/glisse 38.4:tres_serre>inv/coupe 39.1:large>inv/zoom 40.0:contre_plongee>pre/file 40.7:serre>inv/coupe 41.5:tres_serre>inv/glisse 42.1:large>pre/coupe 43.0:moyen>inv/glisse 43.5:contre_plongee>pre/coupe 44.3:serre>inv/coupe 45.2:moyen>pre/file 45.9:large>inv/file 46.8:tres_serre>pre/coupe 48.2:large>inv/glisse 49.4:large>pre/coupe 50.4:large>inv/glisse 51.2:moyen>pre/glisse 52.0:tres_serre>pre/zoom 52.8:serre>inv/coupe 53.9:epaule>pre/coupe 55.2:tres_serre>inv/coupe 56.2:moyen>inv/glisse 57.2:serre>pre/glisse 58.0:moyen>inv/coupe 58.7:moyen>pre/coupe 59.4:serre>inv/glisse 60.5:serre>pre/glisse)
-studio : jour, lieux ['restaurant'], tenues invite=gilet, presentateur=debardeur, 2 figurant(s), ambiances ['vapeur'] ; plans moyen/fixe contre_plongee/epaule serre/zoom_choc contre_plongee/epaule large/fixe contre_plongee/epaule epaule/fixe serre/fixe contre_plongee/epaule contre_plongee/epaule moyen/fixe tres_serre/zoom_choc epaule/fixe large/epaule moyen/fixe tres_serre/zoom_choc moyen/epaule large/fixe large/fixe contre_plongee/epaule large/epaule moyen/fixe contre_plongee/epaule large/epaule large/epaule large/epaule large/epaule moyen/fixe serre/fixe epaule/fixe moyen/epaule moyen/travelling serre/avance
-cartoon : durée 10.0 s, 33 répliques, 1 scène(s), personnages ['invite', 'presentateur']
-Contrôle image : 30 défaut(s) — 0.25 s tete_coupee (presentateur), 0.75 s tete_coupee (presentateur), 1.75 s tete_coupee (presentateur), 2.25 s tete_coupee (presentateur), 2.75 s tete_coupee (presentateur), 3.25 s tete_coupee (presentateur), 4.75 s tete_coupee (invite), 5.25 s tete_coupee (invite)
-  image 0/240 (4 processeurs)
+  1 répliques, voix : {'speaker_0': 320}
+  son de la vidéo : 1 voix [320 Hz (f, 100 %)], 2.21 mots/s, blancs 0.0 s, 0 coupure(s) de parole, dynamique 8.9 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
+  IA gemini indisponible (gemini 429 : [{
+  "error": {
+    "code": 429,
+    "message": "You exceeded your current quota, please check your plan an) : on passe à la suivante
+  scène reconstituée : Un présentateur excentrique et joyeux anime une émission décalée où il lance des phrases chantonnantes et rythmiques pour capter l'attention des spectateurs. L'ambiance est légère et humoristique, comme un jeu ou un défi vocal.
+  casting : speaker_0 → Jojo
+Sketch : « DÉFI VOCAL ÉPIQUE », 1 répliques
+  décor 0 : studio avec des lumières néon colorées, des microphones géants, et des
+montage : 1 plans (0.0:serre>pre/coupe)
+studio : soir, lieux ['salon'], tenues presentateur=chemise, 0 figurant(s), ambiances ['neon', 'poussiere'] ; plans serre/epaule
+cartoon : durée 13.1 s, 1 répliques, 1 scène(s), personnages ['presentateur']
+  image 0/787 (4 processeurs)
+  image 300/787
+  image 600/787
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury qualité (ia) : 4.6/10 — Humoriste 5.0/10 : 58.8 s Chute finale plate sans punch visuel ni zoom percutant.; 4.5 s Manque d'impact comique sur la réplique absurde du puma. | Réalisateur 4.0/10 : 8.2 s Cadrage trop serré, sommet de tête et personnage de gauche coupés.; 26.3 s Absence d'alternance dynamique champ/contrechamp comme l'original.; 0.2 s tête de presentateur coupée par le bord de l'image (moyen); 2.8 s tête de presentateur coupée par le bord de l'image (moyen); 4.8 s tête de invite coupée par le bord de l'image (tres_serre) | Directeur artistique 5.0/10 : 0.4 s Le client musclé emblématique en marcel est devenu une femme ordinaire.; 0.4 s Décor intérieur générique au lieu d'une terrasse parisienne reconnaissable. | Ingénieur du son 5.0/10 : 34.2 s Le refus sec du serveur manque de ponctuation sonore dramatique. | Spectateur TikTok 4.0/10 : 0.4 s Accroche visuelle statique et sous-titres initiaux trop co
-Manque par rapport à la vidéo d'origine : Client assis en terrasse avec débardeur musclé remplacé par un personnage debout en intérieur ; Serveur tenant un terminal de commande absent de notre version ; Alternance stricte champ-contrechamp en plans rapprochés absente ; Décor emblématique de café parisien extérieur remplacé par une pièce fermée
-Corrections du jury (tour 1) : plan serre sur la réplique 1 ; plan serre sur la réplique 2 ; plan serre sur la réplique 3
-montage : 60 plans (0.0:serre>inv/coupe 2.9:moyen>inv/zoom 4.1:serre>pre/file 7.3:contre_plongee>pre/glisse 7.8:moyen>pre/glisse 8.8:large>inv/file 9.7:tres_serre>inv/zoom 11.0:contre_plongee>pre/file 11.7:tres_serre>inv/file 12.2:serre>inv/glisse 12.9:large>pre/file 13.9:serre>pre/zoom 14.5:epaule>inv/coupe 15.6:serre>pre/coupe 16.2:large>pre/glisse 17.2:tres_serre>inv/coupe 18.2:large>pre/file 19.3:contre_plongee>pre/glisse 22.5:moyen>pre/glisse 23.5:contre_plongee>pre/glisse 24.5:serre>inv/coupe 25.3:tres_serre>inv/glisse 26.3:moyen>inv/zoom 27.6:tres_serre>pre/coupe 28.1:serre>inv/coupe 29.1:moyen>pre/file 29.5:epaule>inv/coupe 30.8:large>pre/coupe 32.1:epaule>pre/glisse 33.3:tres_serre>inv/coupe 34.2:moyen>inv/glisse 34.4:tres_serre>pre/glisse 35.9:moyen>pre/zoom 37.2:large>pre/glisse 38.4:tres_serre>inv/coupe 39.1:large>inv/zoom 40.0:contre_plongee>pre/file 40.7:serre>inv/coupe 41.5:tres_serre>inv/glisse 42.1:large>pre/coupe 43.0:moyen>inv/glisse 43.5:contre_plongee>pre/coupe 44.3:serre>inv/coupe 45.2:moyen>pre/file 45.9:large>inv/file 46.8:tres_serre>pre/coupe 48.2:large>inv/glisse 49.4:large>pre/coupe 50.4:large>inv/glisse 51.2:moyen>pre/glisse 52.0:tres_serre>pre/zoom 52.8:serre>inv/coupe 53.9:epaule>pre/coupe 55.2:tres_serre>inv/coupe 56.2:moyen>inv/glisse 57.2:serre>pre/glisse 58.0:moyen>inv/coupe 58.7:moyen>pre/coupe 59.4:serre>inv/glisse 60.5:serre>pre/glisse)
-studio : jour, lieux ['restaurant'], tenues invite=gilet, presentateur=debardeur, 2 figurant(s), ambiances ['vapeur'] ; plans moyen/fixe contre_plongee/epaule serre/zoom_choc contre_plongee/epaule large/fixe contre_plongee/epaule epaule/fixe serre/fixe contre_plongee/epaule contre_plongee/epaule moyen/fixe tres_serre/zoom_choc epaule/fixe large/epaule moyen/fixe tres_serre/zoom_choc moyen/epaule large/fixe large/fixe contre_plongee/epaule large/epaule moyen/fixe contre_plongee/epaule large/epaule large/epaule large/epaule large/epaule moyen/fixe serre/fixe epaule/fixe moyen/epaule moyen/travelling serre/avance
-cartoon : durée 10.0 s, 33 répliques, 1 scène(s), personnages ['invite', 'presentateur']
-Contrôle image : 22 défaut(s) — 3.25 s tete_coupee (presentateur), 3.75 s tete_coupee (presentateur), 8.25 s tete_coupee (invite), 8.75 s tete_coupee (invite), 12.25 s tete_coupee (invite), 22.75 s tete_coupee (invite), 23.25 s tete_coupee (invite), 26.75 s tete_coupee (presentateur)
-  image 0/240 (4 processeurs)
+Jury qualité (gratuit) : 9.0/10 — Humoriste 7.1/10 : 0.0 s la chute finale est trop longue : la vanne se dilue; 0.0 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 8.2/10 : montage trop lent : 0.8 plans toutes les 10 s (il en faudrait ~3.5) | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 10.0/10 : 
+Corrections du jury (tour 1) : plan tres_serre sur la réplique 1
+montage : 1 plans (0.0:tres_serre>pre/coupe)
+studio : soir, lieux ['salon'], tenues presentateur=chemise, 0 figurant(s), ambiances ['neon', 'poussiere'] ; plans serre/epaule
+cartoon : durée 13.1 s, 1 répliques, 1 scène(s), personnages ['presentateur']
+  image 0/787 (4 processeurs)
+  image 300/787
+  image 600/787
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-  IA gemini indisponible (The read operation timed out) : on passe à la suivante
-Jury qualité (gratuit) : 7.9/10 — Humoriste 8.6/10 : 60.6 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 2.0/10 : 3.2 s tête de presentateur coupée par le bord de l'image (moyen); 8.2 s tête de invite coupée par le bord de l'image (moyen); 8.8 s tête de invite coupée par le bord de l'image (moyen) | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.1/10 : 0.0 s sous-titres trop rapides à lire
-Version corrigée gardée : 4.6 → 7.9/10
+Jury qualité (ia) : 8.7/10 — Humoriste 6.0/10 : 0.4 s Le texte "Eh, eh, sakadung kading" est peu clair et manque de rythme comique. La répétition n'est pas assez travaillée pour créer une chute drôle.; 4.8 s La chute finale est trop longue et perd en efficacité. La vanne pourrait être raccourcie pour garder l'impact.; 12.5 s L'absence de réaction visuelle ou sonore à la fin rend la chute moins percutante. | Réalisateur 8.2/10 : montage trop lent : 0.8 plans toutes les 10 s (il en faudrait ~3.5) | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 10.0/10 : 
+Manque par rapport à la vidéo d'origine : Les personnages originaux ont des expressions faciales plus exagérées et des gestes comiques (ex. : mains qui bougent) qui manquent dans notre version. ; L'ambiance sonore originale inclut des bruitages plus variés et des rires naturels, absents ici. ; Les décors originaux intègrent des détails visuels humoristiques (ex. : objets ou personnages secondaires) qui renforcent l'humour.
+La version corrigée n'est pas meilleure : on garde la première.
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = gemini ×2, mistral ×1, voix = tiktok, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 35558, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 27}
-OK : sortie/2026-10-24_21h22_emission.mp4 (10 s)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = mistral ×3, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 21116, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 25}
+OK : sortie/2026-10-24_21h43_emission.mp4 (13 s)
