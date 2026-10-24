@@ -106,6 +106,11 @@
   déjà utilisée, 8 à 150 s ; yt-dlp puis tikwm) ; aucun son utilisable = pas de vidéo (jamais un sketch à la place).
   Profils déjà connus (`profils_tiktok.connus()` : comptes des sons déjà repris, jamais notre chaîne) = liste de départ tant que
   PROFILS_TIKTOK est vide ; sur le site, liste pré-remplie et bouton « ➕ Ajouter les profils déjà connus ».
+- **Site toujours à jour** (`moteur/site.py`, site.yml) : GitHub Pages refuse au-delà de 1 Go → les 6 vidéos les plus récentes en
+  pleine qualité (partage manuel), les autres en version légère 720p (~5 Mo, cache `.cache_site` du workflow), plafond 930 Mo
+  (au-delà : vidéo lue depuis les Releases) ; après chaque mise en ligne, `moteur/verif_site.py` vérifie que la dernière vidéo est
+  visible sur le site en ligne (sinon 2e mise en ligne puis alerte téléphone) ; l'appli relit l'historique à chaque retour
+  (page jamais servie depuis un cache périmé) ; nouvelle vidéo TikTok = point rouge sur l'onglet 🎵 TikTok + message dans l'accueil.
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.

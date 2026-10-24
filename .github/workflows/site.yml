@@ -18,7 +18,7 @@ concurrency:                   # une seule mise en ligne à la fois ; la demande
 jobs:
   site:
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 45
     environment:
       name: github-pages
       url: ${{ steps.pages.outputs.page_url }}
@@ -42,6 +42,12 @@ jobs:
           fi
           ffmpeg -version | head -1
           pip install pillow numpy opencv-python-headless
+      - name: Versions légères des vidéos (gardées d'une mise à jour à l'autre)
+        uses: actions/cache@v6
+        with:
+          path: .cache_site
+          key: site-videos-${{ github.run_id }}
+          restore-keys: site-videos-
       - name: Construire le site
         run: python moteur/site.py
       - uses: actions/configure-pages@v6
@@ -58,3 +64,27 @@ jobs:
       - name: Mettre en ligne le site (2e essai)
         if: steps.pages.outcome == 'failure'
         uses: actions/deploy-pages@v5
+      - name: Vérifier que la dernière vidéo est bien en ligne
+        id: verif
+        continue-on-error: true
+        run: python moteur/verif_site.py "${{ steps.pages.outputs.page_url || format('https://{0}.github.io/{1}/', github.repository_owner, github.event.repository.name) }}"
+      - name: Nouvelle mise en ligne (la vidéo n'était pas visible)
+        if: steps.verif.outcome == 'failure'
+        id: pages3
+        continue-on-error: true
+        uses: actions/deploy-pages@v5
+      - name: Vérifier encore
+        if: steps.verif.outcome == 'failure'
+        id: verif2
+        continue-on-error: true
+        run: python moteur/verif_site.py "${{ steps.pages.outputs.page_url || format('https://{0}.github.io/{1}/', github.repository_owner, github.event.repository.name) }}"
+      - name: Prévenir le téléphone (site pas à jour)
+        if: steps.verif.outcome == 'failure' && steps.verif2.outcome == 'failure'
+        env:
+          VAPID_PRIVEE: ${{ vars.VAPID_PRIVEE }}
+          VAPID_PUBLIQUE: ${{ vars.VAPID_PUBLIQUE }}
+          PUSH_ABONNEMENTS: ${{ vars.PUSH_ABONNEMENTS }}
+        run: |
+          pip install -q cryptography
+          python moteur/alerte.py "⚠️ Site pas à jour" "La dernière vidéo n'apparaît pas sur le site malgré deux mises en ligne. Elle est quand même visible dans l'appli (lue depuis les archives)." || true
+          exit 1

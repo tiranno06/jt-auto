@@ -10,16 +10,36 @@ import html, json, os, shutil, subprocess
 
 RACINE = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 SITE = os.path.join(RACINE, "site")
-NB = int(os.environ.get("SITE_NB_VIDEOS", "15"))          # GitHub Pages : 1 Go max, ~25 Mo par vidéo
+NB = int(os.environ.get("SITE_NB_VIDEOS", "15"))          # vidéos gardées par catégorie
+PLEINES = int(os.environ.get("SITE_PLEINES", "6"))                                                # les plus récentes en pleine qualité (partage manuel), les autres allégées
+PLAFOND_PLEINES = 650e6                                    # GitHub Pages refuse au-delà de 1 Go : on reste toujours bien en dessous
+PLAFOND_SITE = 930e6
+CACHE_WEB = os.path.join(RACINE, ".cache_site")            # versions allégées gardées d'une mise à jour à l'autre (cache du workflow)
 
 def recuperer(e, dest):
     """Copie la vidéo depuis sortie/ ou la télécharge depuis la Release du mois."""
     local = os.path.join(RACINE, "sortie", e["fichier"])
     if os.path.exists(local): shutil.copy(local, dest); return True
-    r = subprocess.run(["gh", "release", "download", e["tag"], "-p", e["fichier"], "-D", os.path.dirname(dest), "--clobber"],
+    r = subprocess.run(["gh", "release", "download", e.get("tag") or f"emissions-{e['fichier'][:7]}", "-p", e["fichier"], "-D", os.path.dirname(dest), "--clobber"],
                        capture_output=True, text=True)
     if r.returncode: print(f"  vidéo introuvable {e['fichier']} : {r.stderr.strip()[:200]}")
     return os.path.exists(dest)
+
+def allegee(e, dest):
+    """Version légère pour regarder dans l'appli (720p, 30 images/s, ~5 Mo) : la vidéo pleine qualité reste dans les Releases
+    (c'est elle qui est publiée). Gardée en cache d'une mise à jour du site à l'autre."""
+    os.makedirs(CACHE_WEB, exist_ok=True); c = os.path.join(CACHE_WEB, e["fichier"])
+    if not os.path.exists(c):
+        brut = os.path.join(CACHE_WEB, "brut_" + e["fichier"])
+        if not recuperer(e, brut): return False
+        r = subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", brut, "-vf", "scale=720:-2,fps=30", "-c:v", "libx264", "-preset", "veryfast",
+                            "-crf", "27", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "96k", "-movflags", "+faststart", c + ".tmp.mp4"], capture_output=True, text=True)
+        if r.returncode == 0: os.replace(c + ".tmp.mp4", c)
+        else: print(f"  version légère impossible pour {e['fichier']} : {r.stderr.strip()[:160]}")
+        try: os.remove(brut)
+        except OSError: pass
+        if r.returncode: return False
+    shutil.copy(c, dest); return True
 
 def affiche(video, image, t=4.0):
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-ss", f"{t:.2f}", "-i", video, "-frames:v", "1",
@@ -28,7 +48,7 @@ def affiche(video, image, t=4.0):
 def origine(e):
     """D'où vient la vidéo : « tiktok » (rejouée sur le son d'une vidéo TikTok), « texte » (idée ou script tapé) ou « auto »."""
     theme = str(e.get("theme") or "")
-    if e.get("source_audio") or theme.startswith(("Bande son", "TIKTOK::")): return "tiktok"
+    if e.get("filiere") == "tiktok" or e.get("source_audio") or theme.startswith(("Bande son", "TIKTOK::")): return "tiktok"
     manuelle = e.get("manuel") or theme or str(e.get("decision") or "").startswith("vidéo manuelle")
     return "texte" if manuelle else "auto"
 
@@ -37,13 +57,20 @@ def construire():
         if os.path.exists(os.path.join(RACINE, "episodes", "historique.json")) else []
     shutil.rmtree(SITE, ignore_errors=True); os.makedirs(os.path.join(SITE, "videos"))
     liste = []
-    comptes = {}
+    comptes = {}; total = 0; pleines = 0
     for e in reversed([h for h in hist if h.get("fichier")]):
-        cat = "manuel" if e.get("manuel") else "court" if e.get("format") == "mini" else "long"
+        cat = "tiktok" if origine(e) == "tiktok" else "manuel" if e.get("manuel") else "court" if e.get("format") == "mini" else "long"
         if comptes.get(cat, 0) >= NB: continue                             # jusqu'à NB vidéos par onglet
-        comptes[cat] = comptes.get(cat, 0) + 1
         dest = os.path.join(SITE, "videos", e["fichier"])
-        if not recuperer(e, dest): continue
+        ok = False
+        if pleines < PLEINES and recuperer(e, dest):                       # les plus récentes : pleine qualité (si le poids le permet)
+            if total + os.path.getsize(dest) <= PLAFOND_PLEINES: ok = True; pleines += 1
+            else: os.remove(dest)
+        if not ok: ok = allegee(e, dest)
+        if not ok: continue
+        if total + os.path.getsize(dest) > PLAFOND_SITE:                   # jamais au-delà de la limite de GitHub Pages : la vidéo reste
+            os.remove(dest); print(f"  {e['fichier']} : site plein, lue depuis les Releases"); continue   # visible (lue depuis les Releases)
+        total += os.path.getsize(dest); comptes[cat] = comptes.get(cat, 0) + 1
         poster = e["fichier"].replace(".mp4", ".jpg"); affiche(dest, os.path.join(SITE, "videos", poster), (e.get("couverture_ms") or 4000) / 1000)
         liste.append(dict(titre=e.get("titre", ""), date=e.get("date", ""), fichier=e["fichier"], poster=poster, origine=origine(e),
                           legende=e.get("legende", ""), publie=e.get("publie"), vues=e.get("vues"),
@@ -74,6 +101,8 @@ def construire():
             .replace("__ALERTES__", json.dumps(alertes, ensure_ascii=False).replace("</", "<\\/"))
             .replace("__DATA__", json.dumps(liste, ensure_ascii=False).replace("</", "<\\/")))
     open(os.path.join(SITE, "index.html"), "w", encoding="utf-8").write(page)
+    open(os.path.join(SITE, "derniere.txt"), "w").write((liste[0]["fichier"] if liste else "") + "\n")   # contrôle après mise en ligne
+    print(f"Site : {total / 1e6:.0f} Mo de vidéos ({pleines} en pleine qualité)")
     open(os.path.join(SITE, ".nojekyll"), "w").close()
     application(nom)
     print(f"Site : {len(liste)} vidéos")
@@ -101,7 +130,7 @@ def application(nom):
 
 # Service worker : l'appli s'ouvre même hors connexion (dernière version de la page), sans jamais mettre en cache
 # les vidéos (trop lourdes) ni les appels à GitHub.
-SW = r"""const CACHE = "regie-v23";
+SW = r"""const CACHE = "regie-v24";
 const COQUILLE = ["./", "manifest.webmanifest", "logo-192.png", "logo-512.png", "poppins-500.ttf", "poppins-700.ttf"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(COQUILLE))); self.skipWaiting(); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(k => Promise.all(k.filter(x => x !== CACHE).map(x => caches.delete(x))))); self.clients.claim(); });
@@ -116,13 +145,13 @@ self.addEventListener("notificationclick", e => {
 });
 self.addEventListener("fetch", e => {
   const u = new URL(e.request.url);
-  if (e.request.method !== "GET" || u.origin !== location.origin || u.pathname.endsWith(".mp4")) return;
+  if (e.request.method !== "GET" || u.origin !== location.origin || /\.(mp4|json|txt)$/.test(u.pathname)) return;
   if (e.request.mode === "navigate" || u.pathname.endsWith("/") || u.pathname.endsWith(".html")) {
     // page : toujours la plus récente si le réseau répond en moins de 3 s, sinon la copie gardée (ouverture instantanée hors ligne)
     e.respondWith(new Promise(ok => {
       let fini = false; const copie = () => caches.match(e.request).then(r => r || caches.match("./"));
-      const minuteur = setTimeout(() => copie().then(r => { if (r && !fini) { fini = true; ok(r); } }), 2500);
-      fetch(e.request).then(r => { garder(e.request, r); if (!fini) { fini = true; clearTimeout(minuteur); ok(r); } })
+      const minuteur = setTimeout(() => copie().then(r => { if (r && !fini) { fini = true; ok(r); } }), 6000);
+      fetch(e.request, { cache: "no-store" }).then(r => { garder(e.request, r); if (!fini) { fini = true; clearTimeout(minuteur); ok(r); } })
         .catch(() => copie().then(r => { if (!fini) { fini = true; clearTimeout(minuteur); ok(r || Response.error()); } }));
     }));
     return;
@@ -257,6 +286,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
  <div id="o-accueil">
   <section class="panneau" id="bandeauCnx" style="display:none"><span class="note">🔑 Connectez la régie une fois pour lancer et publier des vidéos.</span><button class="second" id="allerCnx" style="flex:none;padding:10px 14px">Connecter</button></section>
   <div id="alerteCredit"></div>
+  <section class="panneau" id="nouveauTk" style="display:none"></section>
   <button class="gros" id="creerBtn">➕ Créer une vidéo</button>
   <section class="panneau" id="creer" style="display:none">
     <div class="etape">1. À partir de quoi ?</div>
@@ -602,7 +632,9 @@ async function actualiserStats(){
     const o=document.body.dataset.onglet;
     if(o==="stats") rendreStats();
     else if(o==="accueil") rendreRecents();
-    else if(o==="videos"){rendre(); if(choisie!==null) document.querySelectorAll("#liste .carte").forEach(c=>c.classList.toggle("choisie",+c.dataset.i===choisie))}
+    else if(o==="tiktok") rendreTk();
+    majPointTk();
+    if(o==="videos"){rendre(); if(choisie!==null) document.querySelectorAll("#liste .carte").forEach(c=>c.classList.toggle("choisie",+c.dataset.i===choisie))}
   }catch(e){}
 }
 // vidéo fabriquée mais pas encore dans cette version du site (mise en ligne en cours ou ratée) : elle apparaît quand même,
@@ -612,7 +644,7 @@ function ajouterNouvelles(h){
   const avant=DATA.length; if(choisie===null) for(let i=DATA.length-1;i>=0;i--) if(!vivants.has(DATA[i].fichier)) DATA.splice(i,1);
   const neuves=h.filter(e=>e.fichier&&!connus.has(e.fichier)).slice(-15).map(e=>({titre:e.titre||"",date:e.date||"",fichier:e.fichier,poster:"",
     src:`https://github.com/${CONF.depot}/releases/download/${e.tag||"emissions-"+e.fichier.slice(0,7)}/${e.fichier}`,
-    origine:(e.source_audio||String(e.theme||"").startsWith("Bande son")||String(e.theme||"").startsWith("TIKTOK::"))?"tiktok":(e.manuel||e.theme)?"texte":"auto",
+    origine:(e.filiere==="tiktok"||e.source_audio||String(e.theme||"").startsWith("Bande son")||String(e.theme||"").startsWith("TIKTOK::"))?"tiktok":(e.manuel||e.theme)?"texte":"auto",
     legende:e.legende||"",publie:e.publie,vues:e.vues,format:e.format||"",manuel:!!e.manuel,avis:e.avis||0,note:e.note,note_auteur:e.note_auteur,programmee:e.programmee,
     couts:e.couts||{},duree:e.duree,likes:e.likes,commentaires:e.commentaires,partages:e.partages}));
   if(!neuves.length&&DATA.length===avant) return;
@@ -621,7 +653,7 @@ function ajouterNouvelles(h){
 }
 const srcDe=v=>v.src||"videos/"+v.fichier;
 setTimeout(actualiserStats,1500); setInterval(actualiserStats,3600*1000);
-document.addEventListener("visibilitychange",()=>{if(!document.hidden&&Date.now()-DERNIERE_MAJ>300*1000) actualiserStats()});
+document.addEventListener("visibilitychange",()=>{if(!document.hidden&&Date.now()-DERNIERE_MAJ>20*1000) actualiserStats()});   // à chaque retour dans l'appli
 // nouveaux abonnés depuis une date : total actuel moins le dernier relevé d'avant cette date (ou le plus ancien connu)
 function gainAbonnes(hist,depuis){
   if(!hist||!hist.length) return null; const n=hist[hist.length-1].n;
@@ -681,6 +713,13 @@ function rendreRecents(){
     const x=document.querySelector(`#liste .carte[data-i="${i}"]`); if(x) x.scrollIntoView({block:"center"})}; R.appendChild(c)});
 }
 $("#toutVoir").onclick=()=>allerOnglet("videos","tout");
+function lireVus(){try{return new Set(JSON.parse(localStorage.getItem("tk_vus")||"[]"))}catch(e){return new Set()}}
+function majPointTk(){                                                     // nouvelle vidéo TikTok pas encore vue : point sur l'onglet + mot dans l'accueil
+  const vus=lireVus(), neuves=DATA.filter(v=>v.origine==="tiktok"&&!vus.has(v.fichier)&&(Date.now()-new Date(v.date).getTime())<4*86400000);
+  const b=document.querySelector('.onglet[data-o="tiktok"]'); if(b) b.textContent="🎵 TikTok"+(neuves.length?" 🔴":"");
+  const z=$("#nouveauTk"); if(z){z.style.display=neuves.length?"":"none"; z.innerHTML=neuves.length?`🎵 <b>${neuves.length} nouvelle${neuves.length>1?"s":""} vidéo${neuves.length>1?"s":""} TikTok</b> prête${neuves.length>1?"s":""} : « ${neuves[0].titre.replace(/[<>&]/g,"")} » <button class="second" style="flex:none;padding:8px 12px" onclick="allerOnglet('tiktok')">Voir</button>`:""}
+}
+function marquerVusTk(){try{const vus=lireVus(); DATA.filter(v=>v.origine==="tiktok").forEach(v=>vus.add(v.fichier)); localStorage.setItem("tk_vus",JSON.stringify([...vus].slice(-300)))}catch(e){} majPointTk()}
 function rendreTk(){                                                       // onglet TikTok : ses vidéos à lui
   const L=$("#listeTk"); L.innerHTML="";
   const vis=DATA.map((v,i)=>[v,i]).filter(([v])=>v.origine==="tiktok");
@@ -840,7 +879,7 @@ function allerOnglet(o,f){
   if(o==="accueil") rendreRecents();
   if(o==="stats") rendreStats();
   if(o==="config"||o==="tiktok") chargerReglages();
-  if(o==="tiktok"){rendreTk(); majConnus()}
+  if(o==="tiktok"){rendreTk(); majConnus(); marquerVusTk()}
   window.scrollTo(0,0);
 }
 function choisirFiltre(f){
@@ -1064,7 +1103,7 @@ let invite=null;
 window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();invite=e;$("#installer").style.display="inline-block"});
 $("#installer").onclick=async()=>{if(!invite)return;invite.prompt();await invite.userChoice.catch(()=>{});invite=null;$("#installer").style.display="none"};
 window.addEventListener("appinstalled",()=>{$("#installer").style.display="none";toast("Application installée ✓")});
-rendre(); rendreRecents(); rendreOutils(); afficherAuto(); lireAuto(); majBoutons(); majBandeau(); verifierEnCours(); $("#barre").style.display="none";
+rendre(); rendreRecents(); rendreOutils(); afficherAuto(); lireAuto(); majBoutons(); majBandeau(); verifierEnCours(); majPointTk(); $("#barre").style.display="none";
 if(!CONF.depot) $("#autoAide").textContent="Site de test : boutons du robot inactifs.";
 </script></body></html>
 """
