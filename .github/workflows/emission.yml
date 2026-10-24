@@ -105,6 +105,7 @@ jobs:
     timeout-minutes: 180          # limite de GitHub pour une fabrication (la 2e version du jury s'arrête 25 min avant : moteur/principal.limite_job)
     env:
       LIMITE_JOB_MIN: "180"                             # même valeur que timeout-minutes ci-dessus
+      PYTHONHASHSEED: "0"                               # dessin identique à l'image près sur toutes les machines (dessin partagé)
       CHAINE: ${{ inputs.chaine }}                      # vidéos TikTok à la chaîne : « 2/3 » affiché sur la barre du site
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}

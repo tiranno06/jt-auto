@@ -832,6 +832,30 @@ class TestRedessinPartiel(unittest.TestCase):
         self.assertEqual(C.plages([10, 70], [0, 60, 120], 300), [(0, 120)])
 
 
+class TestDessinPartage(unittest.TestCase):
+    def test_aide_en_echec_morceau_dessine_ici(self):
+        sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "moteur"))
+        import dessin_partage as DP
+        d = tempfile.mkdtemp(); ancien = DP.LOCAL; DP.LOCAL = d
+        lance = []
+        def aides_en_echec(nom, sha, plages):                              # chaque aide signale tout de suite son échec
+            for a, b in plages:
+                lance.append((a, b)); open(os.path.join(d, f"{nom}_{a}_{b}.echec"), "w").write("panne")
+        faits = []
+        def plage(a, b, chemin, progres=None): faits.append((a, b)); open(chemin, "w").write(f"{a}-{b}")
+        vieux = DP.lancer_aides; DP.lancer_aides = aides_en_echec
+        try:
+            os.environ["AIDES"] = "3"
+            liste = DP.dessiner(400, {"sk": {}}, plage, journal=lambda m: None)
+        finally:
+            DP.lancer_aides = vieux; DP.LOCAL = ancien; os.environ.pop("AIDES", None)
+        self.assertEqual(DP.decouper(400, 4), [(0, 100), (100, 200), (200, 300), (300, 400)])
+        self.assertEqual(lance, [(100, 200), (200, 300), (300, 400)])
+        self.assertEqual(sorted(faits), [(0, 100), (100, 200), (200, 300), (300, 400)])          # tout dessiné ici, rien de perdu
+        self.assertEqual([open(c).read() for c in liste], ["0-100", "100-200", "200-300", "300-400"])   # dans l'ordre
+        self.assertEqual(os.listdir(d), [])                                                     # release temporaire vidée
+
+
 class TestRelaisIA(unittest.TestCase):
     def test_bascule_claude_vers_mistral_puis_gemini(self):
         import json as _j, io, urllib.request, urllib.error, reseau
