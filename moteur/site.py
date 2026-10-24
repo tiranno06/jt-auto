@@ -524,6 +524,8 @@ let choisie = null, fichier = null, charge = null, armer = null;
 function toast(t){const e=$("#toast");e.textContent=t;e.style.display="block";clearTimeout(e._t);e._t=setTimeout(()=>e.style.display="none",3200)}
 function dateFr(d){try{return new Date(d+"T12:00:00").toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long"})}catch(e){return d}}
 function heureDe(v){const m=/_(\d{2})h(\d{2})_/.exec(v.fichier||"");return m?` à ${+m[1]} h ${m[2]}`:""}   // heure de fabrication (heure de Paris), lue dans le nom du fichier
+function quand(v){const m=/(\d{4}-\d{2}-\d{2})_(\d{2})h(\d{2})/.exec(v.fichier||"");return m?m[1]+" "+m[2]+":"+m[3]:(v.date||"")}   // date + heure de fabrication
+const recentsDabord=(a,b)=>quand(b[0]).localeCompare(quand(a[0]));    // du plus récent au plus ancien
 function lireJeton(){try{return localStorage.getItem("jt_jeton")||""}catch(e){return window._jeton||""}}
 function ecrireJeton(v){try{v?localStorage.setItem("jt_jeton",v):localStorage.removeItem("jt_jeton")}catch(e){window._jeton=v}}
 async function gh(chemin, opts={}){
@@ -706,7 +708,7 @@ function carte(v,i,petite){
 }
 function rendre(){
   const L=$("#liste"); L.innerHTML="";
-  const vis=DATA.map((v,i)=>[v,i]).filter(([v])=>passe(v,FILTRE));
+  const vis=DATA.map((v,i)=>[v,i]).filter(([v])=>passe(v,FILTRE)).sort(recentsDabord);
   if(!vis.length){L.innerHTML='<p class="vide">'+VIDE[FILTRE]+'</p>';return}
   vis.forEach(([v,i])=>{
     const c=carte(v,i,false); c.onclick=()=>choisir(i);
@@ -716,7 +718,7 @@ function rendre(){
 function rendreRecents(){
   const R=$("#recents"); R.innerHTML="";
   if(!DATA.length){R.innerHTML='<p class="note">Pas encore de vidéo.</p>';$("#toutVoir").style.display="none";return}
-  DATA.map((v,i)=>[v,i]).filter(([v])=>v.origine!=="tiktok").slice(0,3).forEach(([v,i])=>{const c=carte(v,i,true); c.onclick=()=>{allerOnglet("videos","tout"); choisir(i);
+  DATA.map((v,i)=>[v,i]).filter(([v])=>v.origine!=="tiktok").sort(recentsDabord).slice(0,3).forEach(([v,i])=>{const c=carte(v,i,true); c.onclick=()=>{allerOnglet("videos","tout"); choisir(i);
     const x=document.querySelector(`#liste .carte[data-i="${i}"]`); if(x) x.scrollIntoView({block:"center"})}; R.appendChild(c)});
 }
 $("#toutVoir").onclick=()=>allerOnglet("videos","tout");
@@ -729,7 +731,7 @@ function majPointTk(){                                                     // no
 function marquerVusTk(){try{const vus=lireVus(); DATA.filter(v=>v.origine==="tiktok").forEach(v=>vus.add(v.fichier)); localStorage.setItem("tk_vus",JSON.stringify([...vus].slice(-300)))}catch(e){} majPointTk()}
 function rendreTk(){                                                       // onglet TikTok : ses vidéos à lui
   const L=$("#listeTk"); L.innerHTML="";
-  const vis=DATA.map((v,i)=>[v,i]).filter(([v])=>v.origine==="tiktok");
+  const vis=DATA.map((v,i)=>[v,i]).filter(([v])=>v.origine==="tiktok").sort(recentsDabord);
   if(!vis.length){L.innerHTML='<p class="vide">Aucune vidéo sur un son TikTok pour l\'instant.</p>';return}
   vis.forEach(([v,i])=>{const c=carte(v,i,false); c.onclick=()=>{allerOnglet("videos","tiktok"); choisir(i)};
     c.querySelector(".croix").onclick=(ev)=>{ev.stopPropagation(); supprimer(i,c)}; L.appendChild(c)});   // ✕ : supprimer aussi depuis cet onglet
