@@ -209,3 +209,122 @@ def tours_de_parole(mots, s16=None):
         for m in c["mots"]: m["voix"] = f"speaker_{l}"
     print(f"  voix trop proches : répliques réparties d'après le fil du dialogue (questions, réponses{', papa / fiston' if enfant or parent else ''})", flush=True)
     return mots
+
+
+def _fenetres(s16, t0, t1, enc, long_=0.8, pas=0.2):
+    """Empreintes sur une fenêtre glissante (0,8 s tous les 0,2 s) : [(centre, vecteur normé)]."""
+    out = []
+    t = t0
+    while t + long_ / 2 <= t1 + 0.2:
+        a, b = max(0, int((t - long_ / 2) * 16000)), int((t + long_ / 2) * 16000); seg = s16[a:b]
+        if len(seg) >= int(0.5 * 16000):
+            if enc is not None:
+                import torch
+                with torch.no_grad(): e = enc.encode_batch(torch.tensor(seg, dtype=torch.float32)[None]).squeeze().numpy()
+            else:
+                e = empreinte_mfcc(seg)
+                e = None if e is None else e[list(range(19)) + [38, 39, 40]]
+            if e is not None: out.append((t, np.asarray(e, np.float64)))
+        t += pas
+    return out
+
+
+_P = {"son": 10.0, "avis": 0.1, "pause": 0.6, "court": 1.4, "colle": 1.5}   # réglages du fil des voix (banc d'essai)
+
+
+def _frontiere(mots, p):
+    """Entre le mot p-1 et le mot p : 2 = fin de phrase (. ? ! …), 1 = vraie pause, 0 = milieu de phrase."""
+    if re.search(r"[.!?…]$", mots[p - 1]["w"]): return 2
+    return 1 if mots[p]["s"] - mots[p - 1]["e"] > 0.35 else 0
+
+
+def caler_sur_phrases(mots, lab, portee=3):
+    """Les changements de personne tombent sur une fin de phrase (sinon une pause) : l'empreinte vocale glisse souvent d'un ou deux
+    mots (« Je m'en bats | les couilles »). Un changement ailleurs est déplacé sur la fin de phrase la plus proche (3 mots au plus)."""
+    lab = list(lab); n = len(lab)
+    for p in range(1, n):
+        if lab[p] == lab[p - 1]: continue
+        niv = _frontiere(mots, p)
+        if niv == 2: continue
+        for voulu in ((2,) if niv == 1 else (2, 1)):
+            ecart = lambda q: sum(1 for r in range(min(p, q), max(p, q)) if not re.match(r"^['’-]", mots[r]["w"]))   # « m 'en » = un mot
+            cands = sorted((q for q in range(max(1, p - 2 * portee), min(n, p + 2 * portee + 1))
+                            if q != p and _frontiere(mots, q) >= voulu and ecart(q) <= portee), key=lambda q: (ecart(q), q))
+            fait = False
+            for q in cands:
+                a_, b_ = min(p, q), max(p, q)
+                if any(lab[r] != lab[r - 1] for r in range(a_ + 1, b_ + 1) if r != p): continue   # un autre changement entre les deux
+                if q > p: lab[p:q] = [lab[p - 1]] * (q - p)
+                else: lab[q:p] = [lab[p]] * (p - q)
+                fait = True; break
+            if fait: break
+    return lab
+
+
+def affiner(mots, sig, sr=SR):
+    """Qui parle, MOT PAR MOT (gratuit) : la transcription colle parfois la fin d'une phrase de l'un au début de celle de l'autre,
+    ou range un morceau sur la mauvaise voix ; la voix « saute » alors d'un personnage à l'autre. On compare chaque mot (empreinte
+    vocale autour du mot) à l'empreinte moyenne de chaque voix, puis on choisit le fil le plus probable (Viterbi) : changer de
+    personne coûte cher au milieu d'une phrase, peu après une pause ou une question. Chaque mot reçoit aussi sa « certitude »
+    (m["sure"], 0 à 1) : sert à refuser qu'une IA qui ne lit que le texte déplace une réplique dont la voix est sûre."""
+    voix = sorted({m["voix"] for m in mots})
+    if len(voix) < 2 or len(mots) < 6 or os.environ.get("AFFINER_VOIX", "1") == "0": return mots
+    from scipy.signal import resample_poly
+    s16 = resample_poly(np.asarray(sig, np.float32), 320, 441) if sr == 22050 else np.asarray(sig, np.float32)
+    enc = _ecapa()
+    F = _fenetres(s16, mots[0]["s"], mots[-1]["e"], enc)
+    if len(F) < 6: return mots
+    T = np.array([t for t, _ in F]); X = np.array([e for _, e in F])
+    if enc is None: X = (X - X.mean(0)) / (X.std(0) + 1e-6)
+    X = X / (np.linalg.norm(X, axis=1, keepdims=True) + 1e-9)
+    # empreinte de chaque mot : fenêtres centrées dans le mot (sinon la plus proche)
+    W = []
+    for m in mots:
+        idx = np.where((T >= m["s"] - 0.05) & (T <= m["e"] + 0.05))[0]
+        if not len(idx): idx = [int(np.argmin(np.abs(T - (m["s"] + m["e"]) / 2)))]
+        w = X[idx].mean(0); W.append(w / (np.linalg.norm(w) + 1e-9))
+    W = np.array(W); depart = [m["voix"] for m in mots]; lab_v = list(depart); n = len(mots)
+    for _tour in range(3):                                                 # 2-3 tours : empreintes des voix recalculées sur le fil trouvé
+        voix = sorted(set(lab_v)); k = len(voix)
+        if k < 2: break
+        C = []
+        for v in voix:
+            sel = [i for i in range(n) if lab_v[i] == v]
+            c = W[sel].mean(0); C.append(c / (np.linalg.norm(c) + 1e-9))
+        C = np.array(C)
+        if os.environ.get("VOIX_DEBUG"): print("  ressemblance des voix :", np.round(C @ C.T, 3).tolist(), flush=True)
+        if k == 2 and float(C[0] @ C[1]) > 0.97: break                     # deux « voix » identiques : le son ne tranche pas
+        S = W @ C.T                                                        # ressemblance de chaque mot à chaque voix
+        S = (S - S.mean(1, keepdims=True)) / (S.std() + 1e-9)
+        ini = np.array([voix.index(v) for v in lab_v])
+        cout = np.zeros((n, k)); arr = np.zeros((n, k), int)
+        for i in range(n):
+            d = max(0.05, min(0.6, mots[i]["e"] - mots[i]["s"]))
+            e = S[i] * _P["son"] * d / 0.3 + _P["avis"] * (np.arange(k) == ini[i])   # le son du mot + un peu l'avis de départ
+            if i == 0: cout[i] = e; continue
+            pause = mots[i]["s"] - mots[i - 1]["e"]; fin = re.search(r"[.!?…]$", mots[i - 1]["w"]) is not None
+            pen = _P["pause"] if (pause > 0.35 or (fin and pause > 0.08)) else _P["court"] if (pause > 0.15 or fin) else _P["colle"]
+            for j in range(k):
+                cand = cout[i - 1] - pen * (np.arange(k) != j)
+                arr[i, j] = int(np.argmax(cand)); cout[i, j] = cand[arr[i, j]] + e[j]
+        lab = [int(np.argmax(cout[-1]))]
+        for i in range(n - 1, 0, -1): lab.append(arr[i, lab[-1]])
+        lab = lab[::-1]
+        neuf = [voix[l] for l in lab]
+        for i in range(n):
+            tri = np.sort(S[i])[::-1]; mien = S[i][lab[i]]
+            mots[i]["sure"] = round(float(min(1.0, max(0.0, (mien - (tri[1] if tri[0] == mien else tri[0]) + 0.5) / 1.5))), 2)
+        temps = {v: sum(mots[i]["e"] - mots[i]["s"] for i in range(n) if neuf[i] == v) for v in voix}
+        petite = [v for v in voix if temps[v] < 0.1 * sum(temps.values())]   # une « voix » presque muette : morceaux d'une autre
+        if petite and k > 2:
+            v0 = petite[0]; garde = [v for v in voix if v != v0]
+            proche = garde[int(np.argmax([C[voix.index(v0)] @ C[voix.index(w)] for w in garde]))]
+            neuf = [proche if x == v0 else x for x in neuf]; print(f"  une voix en trop (presque muette) rattachée à la plus proche", flush=True)
+        if neuf == lab_v: break
+        lab_v = neuf
+    lab_v = caler_sur_phrases(mots, lab_v)
+    noms = {v: f"speaker_{q}" for q, v in enumerate(dict.fromkeys(lab_v))}   # numéros dans l'ordre d'apparition
+    change = sum(1 for a, b in zip(depart, lab_v) if a != b)
+    for m, v in zip(mots, lab_v): m["voix"] = noms[v]
+    if change: print(f"  voix vérifiées mot par mot : {change} mot(s) remis sur la bonne voix", flush=True)
+    return mots

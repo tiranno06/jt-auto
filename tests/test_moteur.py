@@ -764,6 +764,42 @@ class TestVoixProches(unittest.TestCase):
         deux = [dict(m, voix="speaker_%d" % (i % 2)) for i, m in enumerate(mots)]       # déjà séparées par la transcription : on garde
         self.assertEqual([m["voix"] for m in L.rediariser(deux, sig)], [m["voix"] for m in deux])
 
+    def test_voix_verifiee_mot_par_mot(self):
+        """Une phrase rangée sur la mauvaise voix est remise sur la bonne ; deux voix = deux personnages ; l'IA ne déplace pas une voix sûre."""
+        sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "moteur"))
+        import locuteurs as L, doublage as D
+        sr = 22050; rng = np.random.default_rng(1)
+        from scipy.signal import lfilter, butter
+        def voix(f0, formants, d):
+            t = np.arange(int(sr * d)) / sr; x = sum(np.sin(2 * np.pi * f0 * k * t) / k for k in range(1, 25))
+            y = sum(lfilter(*butter(2, [f * 0.9 / (sr / 2), f * 1.1 / (sr / 2)], "band"), x) for f in formants)
+            return (0.3 * y / np.abs(y).max()).astype(np.float32) + rng.normal(0, 0.002, len(t)).astype(np.float32)
+        morceaux, mots, verite, t = [], [], [], 0.0
+        for k in range(8):                                                 # 8 phrases de 4 mots, voix A / B en alternance
+            a = voix(120 if k % 2 == 0 else 230, (650, 1100, 2500) if k % 2 == 0 else (420, 1800, 3100), 2.4)
+            morceaux += [np.zeros(int(0.5 * sr), np.float32), a]; t += 0.5
+            for j in range(4):
+                mots.append({"w": "mot" + ("." if j == 3 else ""), "s": t + 0.6 * j, "e": t + 0.6 * j + 0.55, "voix": "speaker_%d" % (k % 2)}); verite.append(k % 2)
+            t += 2.4
+        sig = np.concatenate(morceaux)
+        faux = [dict(m) for m in mots]
+        for m in faux[8:12]: m["voix"] = "speaker_1"                       # la 3e phrase (voix A) rangée sur la voix B
+        ancien = os.environ.get("ECAPA"); os.environ["ECAPA"] = "0"
+        try: res = L.affiner(faux, sig)
+        finally:
+            if ancien is None: os.environ.pop("ECAPA", None)
+            else: os.environ["ECAPA"] = ancien
+        self.assertEqual([int(m["voix"][-1]) for m in res], verite)
+        self.assertTrue(all(m.get("sure") is not None for m in res))
+        segs = D.segments(res)
+        self.assertTrue(all(D.voix_sure(s_) for s_ in segs))
+        self.assertFalse(D.voix_sure({"mots": [{"w": "a"}]}))
+        hz = {"speaker_0": 120, "speaker_1": 230}
+        c = D.casting_unique({"speaker_0": "presentateur", "speaker_1": "presentateur"}, segs, hz)
+        self.assertNotEqual(c["speaker_0"], c["speaker_1"])
+        self.assertEqual(c["speaker_1"], "envoyee")                        # voix aiguë : un personnage féminin libre
+        self.assertEqual(D.casting_unique({"speaker_0": "presentateur", "speaker_1": "envoyee"}, segs, hz), {"speaker_0": "presentateur", "speaker_1": "envoyee"})
+
 
 class TestRelaisIA(unittest.TestCase):
     def test_bascule_claude_vers_mistral_puis_gemini(self):

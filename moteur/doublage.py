@@ -189,6 +189,11 @@ def segments(mots):
         s["deb"], s["fin"] = s["mots"][0]["s"], s["mots"][-1]["e"]
     return out
 
+def voix_sure(seg, seuil=0.5):
+    """La voix de cette réplique est-elle reconnue avec certitude (empreinte vocale mot par mot, locuteurs.affiner) ?"""
+    v = [x["sure"] for x in seg.get("mots", []) if x.get("sure") is not None]
+    return bool(v) and sum(v) / len(v) >= seuil
+
 def hauteurs(voix_sig, segs):
     """Hauteur moyenne (Hz) de chaque voix : aide Claude à choisir qui joue qui (voix grave / aiguë)."""
     res = {}
@@ -220,6 +225,7 @@ Avec l'outil doublage :
 - "roles" (IMPORTANT quand deux voix se ressemblent ou qu'une même personne fait plusieurs voix) : la reconnaissance a pu donner la
   MÊME voix à deux personnages. Relis le dialogue (qui pose la question, qui répond, qui dit « papa », qui dit « fiston »…) et donne pour
   chaque réplique le rôle qui la dit vraiment : [{{"replique": n, "role": …}}] — seulement pour les répliques à corriger.
+  Les répliques marquées « voix sûre » ont été reconnues à l'empreinte vocale : ne les change jamais.
   Voix de femme → Lila ; deux voix différentes → deux personnages différents ; au plus 3 personnages dessinés.
 - "contexte" : en 1 ou 2 phrases, la situation que tu reconstitues (qui, où, ce qui se passe), d'après ce qui est dit et le ton ;
 - "d" : pour chaque réplique (même ordre, même nombre), l'émotion juste en indication anglaise entre crochets suivie du texte (« [annoyed] … ») ;
@@ -297,6 +303,22 @@ def _casting_defaut(segs, hz):
         else: res[v] = next((r for r in hommes if r not in res.values()), "presentateur")
     return res
 
+def casting_unique(casting, segs, hz):
+    """Deux voix différentes = deux personnages différents : si l'IA donne la même personne à deux voix, la voix qui parle le moins
+    reçoit un personnage libre (du bon genre si possible). Sinon un personnage parlerait tantôt avec une voix d'homme, tantôt de femme."""
+    g = genre_des_voix(segs, hz); res = dict(casting)
+    poids = {v: sum(len(s["mots"]) for s in segs if s["voix"] == v) for v in res}
+    rang = lambda v: ((g.get(v) == "f") == (res[v] == "envoyee"), poids[v])   # garde le rôle : la voix du bon genre, puis la plus bavarde
+    for v in sorted(res, key=rang, reverse=True):
+        autres = [w for w in res if w != v and res[w] == res[v] and rang(w) >= rang(v)]
+        if res[v] == "narrateur" or not autres: continue
+        pris = set(res.values())
+        libres = [r for r in (("envoyee", "presentateur", "invite") if g.get(v) == "f" else ("presentateur", "invite", "envoyee")) if r not in pris]
+        if libres:
+            journal(f"  {v} et {autres[0]} jouaient tous deux {NOMS[res[v]]} : {v} → {NOMS[libres[0]]} (deux voix = deux personnages)")
+            res[v] = libres[0]
+    return res
+
 def preparer(url):
     import ecrire
     tmp = tempfile.mkdtemp()
@@ -318,7 +340,11 @@ def preparer(url):
     try:                                                                   # voix proches confondues : on les re-sépare par leur empreinte
         import locuteurs; mots = locuteurs.rediariser(mots, sig)
     except Exception as e: journal(f"  re-séparation des voix impossible ({str(e)[:120]})")
-    segs = segments(separer_voix(mots, sig))                               # dernier recours : la hauteur (voix grave / aiguë)
+    mots = separer_voix(mots, sig)                                         # dernier recours : la hauteur (voix grave / aiguë)
+    try:                                                                   # qui parle, mot par mot (la voix ne saute plus d'un perso à l'autre)
+        import locuteurs; mots = locuteurs.affiner(mots, sig)
+    except Exception as e: journal(f"  vérification mot par mot impossible ({str(e)[:120]})")
+    segs = segments(mots)
     hz = hauteurs(sig, segs)
     journal(f"  {len(segs)} répliques, voix : {hz}")
     audio = {}
@@ -331,7 +357,7 @@ def preparer(url):
     try:
         if not __import__("reseau").ia_disponible(): raise RuntimeError("aucune IA disponible (crédits vérifiés au départ)")
         import anthropic
-        lignes = "\n".join(f"{k}. {s['voix']} ({s['deb']:.1f}–{s['fin']:.1f}) : {s['t']}" for k, s in enumerate(segs))
+        lignes = "\n".join(f"{k}. {s['voix']}{' (voix sûre)' if voix_sure(s) else ''} ({s['deb']:.1f}–{s['fin']:.1f}) : {s['t']}" for k, s in enumerate(segs))
         vx = "\n".join(f"- {v} : {h or '?'} Hz, {sum(len(s['mots']) for s in segs if s['voix'] == v)} mots" for v, h in hz.items())
         contenu = consigne(vx, lignes)
         if audio: contenu += "\nMesures du son de la vidéo (gratuites) : " + __import__("analyse_audio").texte(audio) + "\n"
@@ -346,6 +372,7 @@ def preparer(url):
         for c in ecrire._liste(m.get("casting")):
             if isinstance(c, dict) and c.get("voix") in hz and c.get("role") in ROLES: casting[c["voix"]] = c["role"]
         if m.get("contexte"): journal(f"  scène reconstituée : {m['contexte']}")
+        casting = casting_unique(casting, segs, hz)
     except Exception as e:
         journal(f"  mise en scène automatique impossible ({str(e)[:150]}) : une seule scène, casting par la hauteur des voix")
     journal("  casting : " + ", ".join(f"{v} → {NOMS[r]}" for v, r in casting.items()))
@@ -360,13 +387,16 @@ def preparer(url):
             k_o = int(o.get("replique")); nom_o = str(o.get("objet", "")).lower()
             if 0 <= k_o < len(reps) and nom_o in ecrire.OBJETS: reps[k_o]["objet"] = nom_o
         except (AttributeError, TypeError, ValueError): pass
-    corr = 0
+    corr, refus = 0, 0
     for x in ecrire._liste(m.get("roles")):                                # Claude : la bonne personne réplique par réplique (voix proches)
         try:
             k_r = int(x.get("replique"))
-            if 0 <= k_r < len(reps) and x.get("role") in ROLES and reps[k_r]["p"] != x["role"]: reps[k_r]["p"] = x["role"]; corr += 1
+            if 0 <= k_r < len(reps) and x.get("role") in ROLES and reps[k_r]["p"] != x["role"]:
+                if voix_sure(segs[k_r]): refus += 1; continue              # la voix est reconnue : l'IA (qui lit le texte) ne la déplace pas
+                reps[k_r]["p"] = x["role"]; corr += 1
         except (AttributeError, TypeError, ValueError): pass
     if corr: journal(f"  Claude a réattribué {corr} réplique(s) à la bonne personne (voix proches)")
+    if refus: journal(f"  {refus} réattribution(s) de l'IA refusée(s) : la voix de ces répliques est reconnue avec certitude")
     if all(r["p"] == "narrateur" for r in reps): reps[0]["p"] = "presentateur"   # au moins un personnage à l'image
     reps[-1]["chute"] = True
     brut = {"sujet": m.get("sujet") or segs[0]["t"][:30], "repliques": [dict(r) for r in reps[:16]], "legende": m.get("legende") or segs[0]["t"][:120],
