@@ -11,6 +11,7 @@ os.chdir(RACINE)
 from programme import format_du_jour
 
 _hist = json.load(open("episodes/historique.json", encoding="utf-8")) if os.path.exists("episodes/historique.json") else []
+FILIERE = "tiktok" if (os.environ.get("FILIERE") or "").strip() == "tiktok" else "sketch"   # « Sons TikTok » : filière à part
 AUTO = os.environ.get("EVENEMENT") == "schedule"                         # fabrication déclenchée par le planning (pas un bouton)
 if AUTO:                                                                  # nouvelle vérification au démarrage : évite un doublon si deux réveils se suivent
     import planning
@@ -124,17 +125,20 @@ def main():
             alerte.alerter("Crédit Claude épuisé ?", "Claude ne répond pas : la vidéo est fabriquée avec un sketch de secours déjà écrit. "
                            "Rechargez le crédit sur console.anthropic.com pour revenir aux sketchs écrits par Claude.")
         except Exception: pass
-    PROFIL_PREP = None                                                     # vidéo automatique sur le son d'un profil TikTok de la liste
-    try:
-        import profils_tiktok
-        if profils_tiktok.tirage(AUTO, THEME, LOT):
-            print(f"Vidéo automatique depuis un profil TikTok ({', '.join('@' + p for p in profils_tiktok.liste())})", flush=True)
-            import doublage
-            for url_ in profils_tiktok.choisir(historique):
-                try: PROFIL_PREP = (url_, doublage.preparer(url_)); break
-                except Exception as e: print(f"  son de {url_} impossible ({str(e)[:160]}) : vidéo suivante", flush=True)
-            if PROFIL_PREP is None: print("Aucune vidéo des profils utilisable : idée automatique comme d'habitude.", flush=True)
-    except Exception as e: print(f"Profils TikTok indisponibles ({str(e)[:160]}) : idée automatique.", flush=True); PROFIL_PREP = None
+    PROFIL_PREP = None                                                     # filière « Sons TikTok » (à part des sketchs) : une vidéo
+    if FILIERE == "tiktok" and not THEME:                                  # au hasard d'un profil de la liste, jamais déjà utilisée
+        import profils_tiktok, doublage
+        print(f"Sons TikTok : vidéo tirée des profils {', '.join('@' + p for p in profils_tiktok.liste()) or '(aucun profil réglé)'}", flush=True)
+        for url_ in profils_tiktok.choisir(historique):
+            try: PROFIL_PREP = (url_, doublage.preparer(url_)); break
+            except Exception as e: print(f"  son de {url_} impossible ({str(e)[:160]}) : vidéo suivante", flush=True)
+        if PROFIL_PREP is None:                                            # jamais de sketch à la place : les deux filières sont séparées
+            print("Sons TikTok : aucune vidéo des profils utilisable cette fois (pas de vidéo).", flush=True)
+            t_ = "episodes/tentatives.json"; tent = lire(t_, [])
+            tent.append({"date": datetime.datetime.now(ZoneInfo("Europe/Paris")).date().isoformat(), "heure": datetime.datetime.now(ZoneInfo("Europe/Paris")).strftime("%H:%M"),
+                         "auto": AUTO, "filiere": "tiktok", "note": 0, "titre": "aucun son TikTok utilisable"})
+            json.dump(tent[-100:], open(t_, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+            return
     if PROFIL_PREP:
         tiktok = PROFIL_PREP[0]
         candidats = [([{"titre": "Bande son TikTok (profil)", "resume": tiktok, "lien": tiktok, "date": None, "source": "tiktok"}], "tiktok")]
@@ -201,7 +205,7 @@ def main():
             print(f"Moteur humoristique : {ecrire.USAGE['appels']} appels Claude, {ecrire.USAGE['entree']} jetons lus, {ecrire.USAGE['sortie']} jetons écrits, coût {ecrire.USAGE.get('cout', 0):.2f} $", flush=True)
             t_ = "episodes/tentatives.json"; tent = lire(t_, [])
             tent.append({"date": datetime.datetime.now(ZoneInfo("Europe/Paris")).date().isoformat(), "heure": datetime.datetime.now(ZoneInfo("Europe/Paris")).strftime("%H:%M"),
-                         "auto": AUTO, "note": round(q.note, 1), "titre": q.sk.get("sujet", ""),
+                         "auto": AUTO, "filiere": FILIERE, "note": round(q.note, 1), "titre": q.sk.get("sujet", ""),
                          "cout_usd": round(ecrire.USAGE.get("cout", 0), 3)})
             json.dump(tent[-100:], open(t_, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
             try:
@@ -390,6 +394,7 @@ def main():
         historique[-1]["refait_de"] = REFAIRE.split("|")[0]
         if ANCIEN and ANCIEN.get("manuel"): historique[-1]["manuel"] = True
     if AUTO: historique[-1]["auto"] = True
+    if DOUB: historique[-1]["filiere"] = "tiktok"                         # vidéo sur un son TikTok : rangée à part des sketchs
     if DOUB: historique[-1]["source_audio"] = sk["doublage"]["source"]; historique[-1]["theme"] = "Bande son : " + sk["doublage"]["source"]
     historique[-1]["couts"] = couts(); print(f"Dépenses : {historique[-1]['couts']}", flush=True)
     if libre and duree:

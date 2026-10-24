@@ -248,7 +248,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
 </style></head><body data-onglet="accueil">
 <header><h1><img src="logo-192.png" alt="" style="width:44px;height:44px;border-radius:12px;vertical-align:-10px;margin-right:10px">__NOM__</h1><div class="sous">Régie de la chaîne</div>
 <button id="installer" style="display:none;margin-top:10px;padding:9px 16px;font-size:14px;font-weight:700;background:var(--jaune);color:#111">📲 Installer l'application</button></header>
-<nav class="onglets"><button class="onglet actif" data-o="accueil">🏠 Accueil</button><button class="onglet" data-o="videos">🎬 Vidéos</button><button class="onglet" data-o="stats">📊 Stats</button><button class="onglet" data-o="config">⚙️ Réglages</button></nav>
+<nav class="onglets"><button class="onglet actif" data-o="accueil">🏠 Accueil</button><button class="onglet" data-o="videos">🎬 Vidéos</button><button class="onglet" data-o="tiktok">🎵 TikTok</button><button class="onglet" data-o="stats">📊 Stats</button><button class="onglet" data-o="config">⚙️ Réglages</button></nav>
 <main>
  <!-- ======================================================== ACCUEIL -->
  <div id="o-accueil">
@@ -258,13 +258,10 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
   <section class="panneau" id="creer" style="display:none">
     <div class="etape">1. À partir de quoi ?</div>
     <div class="opts">
-      <button class="opt on" data-src="tiktok"><span class="ico">🔗</span><span>Un lien TikTok<small>Nos personnages rejouent le son de la vidéo</small></span></button>
-      <button class="opt" data-src="texte"><span class="ico">✍️</span><span>Mon texte<small>Une idée ou un script que je tape</small></span></button>
+      <button class="opt on" data-src="texte"><span class="ico">✍️</span><span>Mon texte<small>Une idée ou un script que je tape</small></span></button>
       <button class="opt" data-src="idee"><span class="ico">💡</span><span>Idée automatique<small>Le robot choisit le sujet</small></span></button>
     </div>
-    <div id="mTiktok"><label>Lien de la vidéo TikTok<input id="mLien" type="url" inputmode="url" placeholder="https://www.tiktok.com/@compte/video/…"></label>
-      <p class="note">3 min au plus. Le compte d'origine est crédité. ⚠️ Sans accord du créateur, TikTok peut couper le son : privilégiez vos vidéos ou des sons libres.</p></div>
-    <div id="mTexteBloc" style="display:none">
+    <div id="mTexteBloc">
       <label>Ce que je tape<select id="mMode">
         <option value="idee">💡 Une idée : le robot écrit le sketch</option>
         <option value="script">📝 Mon script : joué mot pour mot</option></select></label>
@@ -288,8 +285,28 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
  <div id="o-videos" style="display:none">
   <div class="filtres" id="filtres">
     <button class="chip on" data-f="tout">Toutes</button><button class="chip" data-f="court">⚡ Courtes</button><button class="chip" data-f="long">🎭 Longues</button>
-    <button class="chip" data-f="tiktok">🔗 Depuis un TikTok</button><button class="chip" data-f="texte">✍️ Depuis un texte</button></div>
+    <button class="chip" data-f="texte">✍️ Depuis un texte</button></div>
+  <div id="enteteTk" style="display:none" class="panneau"><b>🎵 Vidéos sur des sons TikTok</b> <button class="second" id="retourTk" style="flex:none;padding:8px 12px">← Onglet TikTok</button></div>
   <div id="liste"></div>
+ </div>
+ <!-- ======================================================== SONS TIKTOK (à part des sketchs) -->
+ <div id="o-tiktok" style="display:none">
+  <section class="panneau"><h2>🔗 Une vidéo sur un son TikTok</h2>
+    <label>Lien de la vidéo TikTok<input id="tkLien" type="url" inputmode="url" placeholder="https://www.tiktok.com/@compte/video/…"></label>
+    <p class="note">3 min au plus. Nos personnages rejouent le son ; le compte d'origine est crédité. ⚠️ Sans accord du créateur, TikTok peut couper le son : privilégiez vos vidéos ou des sons libres.</p>
+    <button class="gros lancer" id="tkCreer">🎬 Fabriquer sur ce son</button>
+    <div id="tkSuivi" class="note"></div></section>
+  <section class="panneau"><h2>🎵 Mes profils TikTok</h2>
+    <p class="note">Un profil par ligne (@pseudo ou lien du profil). Le robot y prend une vidéo au hasard, jamais déjà utilisée, et fabrique la vidéo sur son son.</p>
+    <label>Profils<div class="jeton"><textarea data-var="PROFILS_TIKTOK" data-def="" data-texte="1" maxlength="3000" rows="5" placeholder="@profil1&#10;@profil2&#10;https://www.tiktok.com/@profil3"></textarea><button class="second" data-enr="PROFILS_TIKTOK" style="flex:none;padding:10px 14px">OK</button></div></label>
+    <button class="action" id="tkHasard">🎲 Une vidéo maintenant (son au hasard des profils)</button>
+    <div id="tkSuiviH" class="note"></div></section>
+  <section class="panneau"><h2>⏰ Vidéos TikTok automatiques</h2>
+    <p class="note">Planning à part : il ne touche jamais au planning des sketchs.</p>
+    <div class="auto"><div class="txt"><b>Activées</b><small>Une vidéo sur un son des profils à chaque heure ci-dessous.</small></div><button class="inter" data-var="FREQUENCE_TIKTOK" data-def="0" data-bascule="1"></button></div>
+    <label>Heures (séparées par « ; »)<div class="jeton"><input data-var="HEURE_TIKTOK" data-def="14:00" data-texte="1" maxlength="60" placeholder="ex. 14:00 ; 21:30"><button class="second" data-enr="HEURE_TIKTOK" style="flex:none;padding:10px 14px">OK</button></div></label>
+    <p class="note">Vidéo prête 20 à 40 min après l'heure. S'il n'y a aucun son utilisable, pas de vidéo cette fois (jamais de sketch à la place).</p></section>
+  <section class="panneau"><h2>🎬 Mes vidéos TikTok</h2><div id="listeTk"></div></section>
  </div>
  <!-- ======================================================== STATISTIQUES -->
  <div id="o-stats" style="display:none"></div>
@@ -340,10 +357,6 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <div class="ligne2"><button class="second perso" id="ajCreneau">+ Un créneau</button><button class="second perso" id="ajAuto">+ Créneau 📊 auto</button></div>
     <button class="action perso" id="planEnr">Enregistrer le planning</button>
     <p class="note">Vidéo prête 20 à 40 min après l'heure. « 📊 auto » : l'heure qui fait le plus de vues.</p>
-    <h3>🎵 Profils TikTok (sons pour les vidéos automatiques)</h3>
-    <p class="note">Collez des profils TikTok (un par ligne : @pseudo ou lien du profil). Le robot y prend une vidéo au hasard, jamais déjà utilisée, reprend son son et fabrique la vidéo autour, comme avec un lien collé à la main.</p>
-    <label>Profils<div class="jeton"><textarea data-var="PROFILS_TIKTOK" data-def="" data-texte="1" maxlength="3000" rows="4" placeholder="@profil1&#10;@profil2&#10;https://www.tiktok.com/@profil3"></textarea><button class="second" data-enr="PROFILS_TIKTOK" style="flex:none;padding:10px 14px">OK</button></div></label>
-    <label>Part des vidéos automatiques faites avec ces sons<select data-var="PART_PROFILS" data-def="50"><option value="0">Aucune (idées seulement)</option><option value="25">1 sur 4</option><option value="50">1 sur 2</option><option value="75">3 sur 4</option><option value="100">Toutes</option></select></label>
     <h3>Plateformes</h3>
     <p class="note">TikTok toujours. Les autres : connectez d'abord le compte dans Buffer.</p>
     <div class="auto"><div class="txt"><b>YouTube Shorts</b><small>Publie aussi sur YouTube.</small></div><button class="inter" data-var="PUBLIER_YOUTUBE" data-def="0" data-bascule="1"></button></div>
@@ -639,9 +652,9 @@ function rendreStats(){
 }
 // filtre de l'onglet Vidéos : toutes, courtes, longues, depuis un TikTok, depuis un texte
 let FILTRE="tout";
-const passe=(v,f)=>f==="tout"||(f==="court"?v.format==="mini":f==="long"?v.format!=="mini":v.origine===f);
-const VIDE={tout:"Aucune vidéo pour l'instant : touchez « Créer une vidéo » dans l'Accueil.",court:"Aucune vidéo courte pour l'instant.",long:"Aucune vidéo longue pour l'instant.",
-  tiktok:"Aucune vidéo faite depuis un lien TikTok pour l'instant.",texte:"Aucune vidéo faite depuis votre texte pour l'instant."};
+const passe=(v,f)=>f==="tiktok"?v.origine==="tiktok":(v.origine!=="tiktok"&&(f==="tout"||(f==="court"?v.format==="mini":f==="long"?v.format!=="mini":v.origine===f)));   // sons TikTok : à part
+const VIDE={tiktok:"Aucune vidéo sur un son TikTok pour l'instant.",tout:"Aucune vidéo pour l'instant : touchez « Créer une vidéo » dans l'Accueil.",court:"Aucune vidéo courte pour l'instant.",long:"Aucune vidéo longue pour l'instant.",
+  texte:"Aucune vidéo faite depuis votre texte pour l'instant."};
 function carte(v,i,petite){
   const c=document.createElement("div");c.className="carte"+(petite?" petite":"");c.dataset.i=i;
   c.innerHTML=`<img loading="lazy" src="${v.poster?"videos/"+v.poster:"logo-192.png"}" alt=""><div class="infos"><div class="titre"></div><div class="date">${dateFr(v.date)}${heureDe(v)}${v.vues!=null?` · 👁 ${Number(v.vues).toLocaleString("fr-FR")} vues`:""}</div>${badge(v)}${v.voix_secours?'<div class="date" style="color:#c0392b">⚠ voix de secours (robotique)</div>':""}<div class="etat"></div></div>`+(petite?"":`<button class="croix" title="Supprimer cette vidéo" aria-label="Supprimer">✕</button>`);
@@ -659,10 +672,27 @@ function rendre(){
 function rendreRecents(){
   const R=$("#recents"); R.innerHTML="";
   if(!DATA.length){R.innerHTML='<p class="note">Pas encore de vidéo.</p>';$("#toutVoir").style.display="none";return}
-  DATA.slice(0,3).forEach((v,i)=>{const c=carte(v,i,true); c.onclick=()=>{allerOnglet("videos","tout"); choisir(i);
+  DATA.map((v,i)=>[v,i]).filter(([v])=>v.origine!=="tiktok").slice(0,3).forEach(([v,i])=>{const c=carte(v,i,true); c.onclick=()=>{allerOnglet("videos","tout"); choisir(i);
     const x=document.querySelector(`#liste .carte[data-i="${i}"]`); if(x) x.scrollIntoView({block:"center"})}; R.appendChild(c)});
 }
-$("#toutVoir").onclick=()=>allerOnglet("videos");
+$("#toutVoir").onclick=()=>allerOnglet("videos","tout");
+function rendreTk(){                                                       // onglet TikTok : ses vidéos à lui
+  const L=$("#listeTk"); L.innerHTML="";
+  const vis=DATA.map((v,i)=>[v,i]).filter(([v])=>v.origine==="tiktok");
+  if(!vis.length){L.innerHTML='<p class="vide">Aucune vidéo sur un son TikTok pour l\'instant.</p>';return}
+  vis.forEach(([v,i])=>{const c=carte(v,i,true); c.onclick=()=>{allerOnglet("videos","tiktok"); choisir(i)}; L.appendChild(c)});
+}
+$("#retourTk").onclick=()=>allerOnglet("tiktok");
+$("#tkCreer").onclick=()=>{
+  if(!lireJeton()){toast("Connectez d'abord la régie (onglet Réglages)");allerOnglet("config");return}
+  const u=$("#tkLien").value.trim();
+  if(!/^https?:\/\/([a-z0-9-]+\.)*tiktok\.com\/\S+$/i.test(u)){toast("Collez un lien de vidéo TikTok (https://www.tiktok.com/… ou https://vm.tiktok.com/…)");return}
+  lancerFlux("emission.yml",$("#tkCreer"),"🔗 Vidéo sur le son TikTok en fabrication (15 à 40 min). Elle apparaîtra dans cet onglet.",{theme:"TIKTOK::"+u,format:"mini"},$("#tkSuivi"));
+};
+$("#tkHasard").onclick=()=>{
+  if(!lireJeton()){toast("Connectez d'abord la régie (onglet Réglages)");allerOnglet("config");return}
+  lancerFlux("emission.yml",$("#tkHasard"),"🎲 Le robot choisit un son au hasard dans vos profils et fabrique la vidéo (20 à 45 min). Elle apparaîtra dans cet onglet.",{filiere:"tiktok"},$("#tkSuiviH"));
+};
 async function supprimer(i,c){
   const v=DATA[i];
   if(!lireJeton()){toast("Connectez la régie (onglet Réglages) pour supprimer");return}
@@ -785,19 +815,22 @@ $("#copierLien").onclick=async()=>{try{await navigator.clipboard.writeText(lienC
 function allerOnglet(o,f){
   document.querySelectorAll(".onglet").forEach(x=>x.classList.toggle("actif",x.dataset.o===o));
   if(f) choisirFiltre(f);
-  ["accueil","videos","stats","config"].forEach(k=>$("#o-"+k).style.display=k===o?"":"none");
+  ["accueil","videos","tiktok","stats","config"].forEach(k=>$("#o-"+k).style.display=k===o?"":"none");
+  document.querySelectorAll(".onglet").forEach(x=>x.classList.toggle("actif",x.dataset.o===(o==="videos"&&FILTRE==="tiktok"?"tiktok":o)));
+  $("#filtres").style.display=(o==="videos"&&FILTRE==="tiktok")?"none":""; $("#enteteTk").style.display=(o==="videos"&&FILTRE==="tiktok")?"":"none";
   document.body.dataset.onglet=o; $("#barre").style.display=o==="videos"?"":"none";
   if(o==="videos"){rendre(); if(choisie!==null) document.querySelectorAll("#liste .carte").forEach(c=>c.classList.toggle("choisie",+c.dataset.i===choisie))}
   if(o==="accueil") rendreRecents();
   if(o==="stats") rendreStats();
-  if(o==="config") chargerReglages();
+  if(o==="config"||o==="tiktok") chargerReglages();
+  if(o==="tiktok") rendreTk();
   window.scrollTo(0,0);
 }
 function choisirFiltre(f){
   FILTRE=f; document.querySelectorAll("#filtres .chip").forEach(x=>x.classList.toggle("on",x.dataset.f===f));
   if(choisie!==null&&!passe(DATA[choisie],FILTRE)) fermerVideo(); rendre();
 }
-document.querySelectorAll(".onglet").forEach(b=>b.onclick=()=>allerOnglet(b.dataset.o));
+document.querySelectorAll(".onglet").forEach(b=>b.onclick=()=>allerOnglet(b.dataset.o,b.dataset.o==="videos"?"tout":null));
 document.querySelectorAll("#filtres .chip").forEach(b=>b.onclick=()=>choisirFiltre(b.dataset.f));
 $("#allerCnx").onclick=()=>{allerOnglet("config"); setTimeout(()=>$("#jeton2").focus(),100)};
 // ------------------------------------------------ réglages (variables du dépôt GitHub)
@@ -859,7 +892,7 @@ async function ecrireVar(nom,valeur){
   if(r.status===404) r=await gh("/actions/variables",{method:"POST",body:corps});
   if(!r.ok) throw new Error("GitHub a répondu "+r.status);
 }
-const champs=()=>document.querySelectorAll("#o-config [data-var]");
+const champs=()=>document.querySelectorAll("#o-config [data-var], #o-tiktok [data-var]");
 function activer(on){champs().forEach(c=>c.disabled=!on);document.querySelectorAll("#o-config .action,[data-enr],#o-config .perso").forEach(b=>b.disabled=!on)}
 $("#garder2").onclick=()=>{const v=$("#jeton2").value.trim(); if(!v)return; ecrireJeton(v); $("#jeton2").value=""; lireAuto(); majBoutons(); majBandeau(); chargerReglages(); verifierEnCours()};
 async function chargerReglages(){
@@ -910,11 +943,11 @@ async function lancerFlux(fichier,bouton,texte,inputs,zone,fini){
   bouton.disabled=false;
 }
 // ------------------------------------------------ Accueil : « Créer une vidéo » (lien TikTok, mon texte ou idée automatique ; court ou long)
-let SRC="tiktok", FMT="mini";
+let SRC="texte", FMT="mini";
 function majCreer(){
   document.querySelectorAll("[data-src]").forEach(b=>b.classList.toggle("on",b.dataset.src===SRC));
   document.querySelectorAll("[data-fmt]").forEach(b=>b.classList.toggle("on",b.dataset.fmt===FMT));
-  $("#mTiktok").style.display=SRC==="tiktok"?"":"none"; $("#mTexteBloc").style.display=SRC==="texte"?"":"none"; $("#mAutoNote").style.display=SRC==="idee"?"":"none";
+  $("#mTexteBloc").style.display=SRC==="texte"?"":"none"; $("#mAutoNote").style.display=SRC==="idee"?"":"none";
 }
 $("#creerBtn").onclick=()=>{const p=$("#creer"), ouvrir=p.style.display==="none"; p.style.display=ouvrir?"":"none";
   $("#creerBtn").textContent=ouvrir?"✕ Fermer":"➕ Créer une vidéo"; if(ouvrir) majCreer()};
@@ -934,12 +967,6 @@ function lancerCreation(texte,inputs){
 $("#mCreer").onclick=()=>{
   if(!lireJeton()){toast("Connectez d'abord la régie (onglet Réglages)");allerOnglet("config");return}
   const nomF=FMT==="mini"?"⚡ Gag éclair":"🎭 Sketch long";
-  if(SRC==="tiktok"){
-    const u=$("#mLien").value.trim();
-    if(!/^https?:\/\/([a-z0-9-]+\.)*tiktok\.com\/\S+$/i.test(u)){toast("Collez un lien de vidéo TikTok (https://www.tiktok.com/… ou https://vm.tiktok.com/…)");return}
-    lancerCreation("🔗 "+nomF+" sur le son TikTok en fabrication (15 à 40 min). Il apparaîtra dans l'onglet Vidéos.",{format:FMT,theme:"TIKTOK::"+u});
-    return;
-  }
   if(SRC==="idee"){
     lancerCreation(FMT==="mini"?"⚡ Le robot fabrique un gag éclair (15 à 30 min)…":"🎭 Le robot fabrique un sketch long (20 à 40 min)…",{format:FMT});
     return;

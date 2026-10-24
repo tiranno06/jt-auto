@@ -41,6 +41,23 @@ jobs:
           else
             echo "Une fabrication est déjà en cours : rien à faire."
           fi
+      - id: tk
+        name: Planning des sons TikTok (filière à part des sketchs)
+        if: vars.PROFILS_TIKTOK != ''
+        env:
+          EVENEMENT: schedule
+          FILIERE: tiktok
+          FREQUENCE: ${{ vars.FREQUENCE_TIKTOK || '0' }}
+          HEURE: ${{ vars.HEURE_TIKTOK || '14:00' }}
+          ESSAIS_MAX: ${{ vars.ESSAIS_MAX }}
+        run: python3 moteur/planning.py
+      - name: Lancer une vidéo sur un son TikTok (créneau du planning TikTok)
+        if: steps.tk.outputs.go == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # file d'attente « sons-tiktok » : un 2e lancement attend le 1er puis s'arrête (créneau déjà traité)
+          gh workflow run emission.yml -R "$GITHUB_REPOSITORY" -f auto=1 -f filiere=tiktok && echo "Créneau TikTok : vidéo lancée."
       - name: Relancer une fabrication coupée par GitHub (machine arrêtée en pleine vidéo)
         env:
           GH_TOKEN: ${{ github.token }}

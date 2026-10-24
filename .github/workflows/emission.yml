@@ -33,6 +33,10 @@ on:
         description: "Vidéo manuelle (onglet Manuel de la régie) : idée ou script (préfixe SCRIPT::). Hors cycle, jamais publiée automatiquement."
         required: false
         default: ""
+      filiere:
+        description: "tiktok = filière « Sons TikTok » (planning et vidéos à part des sketchs) : une vidéo au hasard des profils"
+        required: false
+        default: ""
       apercu:
         description: "1 = aperçu rapide : seulement les 10 premières secondes, 24 images/s (pour juger le style)"
         required: false
@@ -60,8 +64,9 @@ jobs:
       - id: p
         env:
           EVENEMENT: ${{ inputs.auto == '1' && 'schedule' || github.event_name }}
-          FREQUENCE: ${{ vars.FREQUENCE }}
-          HEURE: ${{ vars.HEURE }}
+          FILIERE: ${{ inputs.filiere }}
+          FREQUENCE: ${{ inputs.filiere == 'tiktok' && (vars.FREQUENCE_TIKTOK || '0') || vars.FREQUENCE }}
+          HEURE: ${{ inputs.filiere == 'tiktok' && (vars.HEURE_TIKTOK || '14:00') || vars.HEURE }}
           BUDGET_MOIS: ${{ vars.BUDGET_MOIS }}
           ESSAIS_MAX: ${{ vars.ESSAIS_MAX }}
         run: python3 moteur/planning.py
@@ -70,7 +75,7 @@ jobs:
     needs: planning
     if: needs.planning.outputs.go == 'true'
     concurrency:                 # les vidéos manuelles ont leur propre file : elles n'annulent jamais une émission en attente
-      group: ${{ (inputs.theme != '' || inputs.refaire != '') && format('manuel-{0}', github.run_id) || (inputs.serie != '' && 'serie') || 'emission' }}
+      group: ${{ (inputs.theme != '' || inputs.refaire != '') && format('manuel-{0}', github.run_id) || (inputs.serie != '' && 'serie') || (inputs.filiere == 'tiktok' && 'sons-tiktok') || 'emission' }}
       cancel-in-progress: false
     runs-on: ubuntu-24.04
     timeout-minutes: 120
@@ -126,11 +131,11 @@ jobs:
       CONTROLE_VIDEO: ${{ vars.CONTROLE_VIDEO }}
       TIKTOK_COMPTE: ${{ vars.TIKTOK_COMPTE }}
       PROFILS_TIKTOK: ${{ vars.PROFILS_TIKTOK }}
-      PART_PROFILS: ${{ vars.PART_PROFILS }}
       GH_TOKEN: ${{ github.token }}
       EVENEMENT: ${{ inputs.auto == '1' && 'schedule' || github.event_name }}
-      FREQUENCE: ${{ vars.FREQUENCE }}
-      HEURE: ${{ vars.HEURE }}
+      FILIERE: ${{ inputs.filiere }}
+      FREQUENCE: ${{ inputs.filiere == 'tiktok' && (vars.FREQUENCE_TIKTOK || '0') || vars.FREQUENCE }}
+      HEURE: ${{ inputs.filiere == 'tiktok' && (vars.HEURE_TIKTOK || '14:00') || vars.HEURE }}
       BUDGET_MOIS: ${{ vars.BUDGET_MOIS }}
       ESSAIS_MAX: ${{ vars.ESSAIS_MAX }}
       ETAPES_ECO: ${{ vars.ETAPES_ECO }}
@@ -184,7 +189,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Lecteur TikTok (vidéo depuis une bande son)
-        if: startsWith(inputs.theme, 'TIKTOK::') || (vars.PROFILS_TIKTOK != '' && inputs.theme == '' && inputs.refaire == '')
+        if: startsWith(inputs.theme, 'TIKTOK::') || inputs.filiere == 'tiktok'
         run: |
           pip install -q -U "yt-dlp[default,curl-cffi]" faster-whisper   # Whisper gratuit : repli si ElevenLabs et Modal manquent de crédit
           (pip install -q torch torchaudio --index-url https://download.pytorch.org/whl/cpu && pip install -q speechbrain) || echo "empreinte vocale ECAPA indisponible : timbre MFCC"
