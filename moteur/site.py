@@ -28,16 +28,17 @@ def recuperer(e, dest):
 def allegee(e, dest):
     """Version légère pour regarder dans l'appli (720p, 30 images/s, ~5 Mo) : la vidéo pleine qualité reste dans les Releases
     (c'est elle qui est publiée). Gardée en cache d'une mise à jour du site à l'autre."""
+    import tempfile
     os.makedirs(CACHE_WEB, exist_ok=True); c = os.path.join(CACHE_WEB, e["fichier"])
+    if os.path.exists(c) and os.path.getsize(c) > 40e6: os.remove(c)        # un original rangé là par erreur : on refait la version légère
     if not os.path.exists(c):
-        brut = os.path.join(CACHE_WEB, "brut_" + e["fichier"])
-        if not recuperer(e, brut): return False
+        brut = os.path.join(tempfile.mkdtemp(), e["fichier"])               # téléchargé sous son vrai nom, hors du cache
+        if not recuperer(e, brut): print(f"  {e['fichier']} : original introuvable"); return False
         r = subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", brut, "-vf", "scale=720:-2,fps=30", "-c:v", "libx264", "-preset", "veryfast",
                             "-crf", "27", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "96k", "-movflags", "+faststart", c + ".tmp.mp4"], capture_output=True, text=True)
         if r.returncode == 0: os.replace(c + ".tmp.mp4", c)
         else: print(f"  version légère impossible pour {e['fichier']} : {r.stderr.strip()[:160]}")
-        try: os.remove(brut)
-        except OSError: pass
+        shutil.rmtree(os.path.dirname(brut), ignore_errors=True)
         if r.returncode: return False
     shutil.copy(c, dest); return True
 
