@@ -1075,6 +1075,12 @@ class TestProfilsTiktok(unittest.TestCase):
         h = [{"sources": ["https://www.tiktok.com/@x/video/123?_r=1"]}, {"source_audio": "https://www.tiktok.com/@y/video/456"}]
         self.assertEqual(P.deja_utilisees(h), {"123", "456"})
         self.assertFalse(hasattr(P, "tirage"))                             # plus aucun mélange avec les sketchs automatiques
+        c = P.connus()                                                     # profils déjà connus : jamais notre propre chaîne
+        self.assertTrue(all(x.lower() not in P.NOTRE_CHAINE for x in c))
+        anc = os.environ.pop("PROFILS_TIKTOK", None)
+        try: self.assertEqual(P.liste(), c)                                # liste vide : les profils déjà connus
+        finally:
+            if anc is not None: os.environ["PROFILS_TIKTOK"] = anc
 
     def test_plannings_separes(self):
         import datetime as dt

@@ -12,9 +12,33 @@ import json, os, random, re, subprocess, sys
 DUREE_MIN, DUREE_MAX = 8, 150                                              # secondes : assez de dialogue, pas un film entier
 
 
+RACINE = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+NOTRE_CHAINE = {"petitsdramas", "petits.dramas"}
+
+
+def connus():
+    """Profils déjà connus du robot : les comptes des vidéos TikTok dont il a déjà repris le son (historique et sketchs gardés),
+    du plus utilisé au moins utilisé. Jamais notre propre chaîne. Sert de liste de départ tant que l'auteur n'a pas la sienne."""
+    import glob
+    nous = NOTRE_CHAINE | {(os.environ.get("TIKTOK_COMPTE") or "").strip().lstrip("@").lower()}
+    textes = []
+    try: textes.append(open(os.path.join(RACINE, "episodes", "historique.json"), encoding="utf-8").read())
+    except OSError: pass
+    for f in glob.glob(os.path.join(RACINE, "episodes", "sketchs", "*.json")):
+        try: textes.append(open(f, encoding="utf-8").read())
+        except OSError: pass
+    compte = {}
+    for tx in textes:
+        for m in set(re.findall(r"tiktok\.com/@([\w.\-]+)/video/", tx)):
+            if m.lower() not in nous: compte[m] = compte.get(m, 0) + 1
+    return sorted(compte, key=lambda m: (-compte[m], m.lower()))
+
+
 def liste(texte=None):
-    """Pseudos (sans @) tirés du réglage PROFILS_TIKTOK : « @pseudo », « pseudo » ou lien https://www.tiktok.com/@pseudo…"""
+    """Pseudos (sans @) tirés du réglage PROFILS_TIKTOK : « @pseudo », « pseudo » ou lien https://www.tiktok.com/@pseudo…
+    Réglage vide : les profils déjà connus du robot (voir connus())."""
     t = os.environ.get("PROFILS_TIKTOK", "") if texte is None else texte
+    if texte is None and not (t or "").strip(): return connus()
     out = []
     for morceau in re.split(r"[\n,;]+", t or ""):
         m = morceau.strip()

@@ -43,7 +43,6 @@ jobs:
           fi
       - id: tk
         name: Planning des sons TikTok (filière à part des sketchs)
-        if: vars.PROFILS_TIKTOK != ''
         env:
           EVENEMENT: schedule
           FILIERE: tiktok
