@@ -340,6 +340,10 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <div class="ligne2"><button class="second perso" id="ajCreneau">+ Un créneau</button><button class="second perso" id="ajAuto">+ Créneau 📊 auto</button></div>
     <button class="action perso" id="planEnr">Enregistrer le planning</button>
     <p class="note">Vidéo prête 20 à 40 min après l'heure. « 📊 auto » : l'heure qui fait le plus de vues.</p>
+    <h3>🎵 Profils TikTok (sons pour les vidéos automatiques)</h3>
+    <p class="note">Collez des profils TikTok (un par ligne : @pseudo ou lien du profil). Le robot y prend une vidéo au hasard, jamais déjà utilisée, reprend son son et fabrique la vidéo autour, comme avec un lien collé à la main.</p>
+    <label>Profils<div class="jeton"><textarea data-var="PROFILS_TIKTOK" data-def="" data-texte="1" maxlength="3000" rows="4" placeholder="@profil1&#10;@profil2&#10;https://www.tiktok.com/@profil3"></textarea><button class="second" data-enr="PROFILS_TIKTOK" style="flex:none;padding:10px 14px">OK</button></div></label>
+    <label>Part des vidéos automatiques faites avec ces sons<select data-var="PART_PROFILS" data-def="50"><option value="0">Aucune (idées seulement)</option><option value="25">1 sur 4</option><option value="50">1 sur 2</option><option value="75">3 sur 4</option><option value="100">Toutes</option></select></label>
     <h3>Plateformes</h3>
     <p class="note">TikTok toujours. Les autres : connectez d'abord le compte dans Buffer.</p>
     <div class="auto"><div class="txt"><b>YouTube Shorts</b><small>Publie aussi sur YouTube.</small></div><button class="inter" data-var="PUBLIER_YOUTUBE" data-def="0" data-bascule="1"></button></div>

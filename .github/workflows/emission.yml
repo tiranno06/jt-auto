@@ -125,6 +125,8 @@ jobs:
       PUBLIC_TEST: ${{ vars.PUBLIC_TEST }}
       CONTROLE_VIDEO: ${{ vars.CONTROLE_VIDEO }}
       TIKTOK_COMPTE: ${{ vars.TIKTOK_COMPTE }}
+      PROFILS_TIKTOK: ${{ vars.PROFILS_TIKTOK }}
+      PART_PROFILS: ${{ vars.PART_PROFILS }}
       GH_TOKEN: ${{ github.token }}
       EVENEMENT: ${{ inputs.auto == '1' && 'schedule' || github.event_name }}
       FREQUENCE: ${{ vars.FREQUENCE }}
@@ -182,7 +184,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Lecteur TikTok (vidéo depuis une bande son)
-        if: startsWith(inputs.theme, 'TIKTOK::')
+        if: startsWith(inputs.theme, 'TIKTOK::') || (vars.PROFILS_TIKTOK != '' && inputs.theme == '' && inputs.refaire == '')
         run: |
           pip install -q -U "yt-dlp[default,curl-cffi]" faster-whisper   # Whisper gratuit : repli si ElevenLabs et Modal manquent de crédit
           (pip install -q torch torchaudio --index-url https://download.pytorch.org/whl/cpu && pip install -q speechbrain) || echo "empreinte vocale ECAPA indisponible : timbre MFCC"
