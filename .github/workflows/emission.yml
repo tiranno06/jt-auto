@@ -41,6 +41,10 @@ on:
         description: "1 = aperçu rapide : seulement les 10 premières secondes, 24 images/s (pour juger le style)"
         required: false
         default: ""
+      chaine:
+        description: "Vidéos TikTok à la chaîne : « 1/3 » = 1re de 3 ; chaque vidéo finie lance la suivante (bouton du site)"
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -73,8 +77,26 @@ jobs:
           ESSAIS_MAX: ${{ vars.ESSAIS_MAX }}
         run: python3 moteur/planning.py
 
-  emission:
+  file:                          # file d'attente : une seule vidéo fabriquée à la fois, dans l'ordre des demandes (moteur/file_attente.py)
     needs: planning
+    if: needs.planning.outputs.go == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          sparse-checkout: |
+            moteur/file_attente.py
+            moteur/progression.py
+      - name: Attendre que les vidéos lancées avant soient finies
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TYPE_VIDEO: ${{ (inputs.filiere == 'tiktok' || startsWith(inputs.theme, 'TIKTOK::')) && 'tiktok' || 'sketch' }}
+          CHAINE: ${{ inputs.chaine }}
+        run: python3 moteur/file_attente.py
+
+  emission:
+    needs: [planning, file]
     if: needs.planning.outputs.go == 'true'
     concurrency:                 # les vidéos manuelles ont leur propre file : elles n'annulent jamais une émission en attente
       group: ${{ (inputs.theme != '' || inputs.refaire != '') && format('manuel-{0}', github.run_id) || (inputs.serie != '' && 'serie') || (inputs.filiere == 'tiktok' && 'sons-tiktok') || 'emission' }}
@@ -82,6 +104,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 120
     env:
+      CHAINE: ${{ inputs.chaine }}                      # vidéos TikTok à la chaîne : « 2/3 » affiché sur la barre du site
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -154,6 +177,13 @@ jobs:
       PUSH_ABONNEMENTS: ${{ vars.PUSH_ABONNEMENTS }}
     steps:
       - uses: actions/checkout@v7
+
+      - name: Vérifier son tour (fabrication relancée par le garde)
+        timeout-minutes: 100
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TYPE_VIDEO: ${{ (inputs.filiere == 'tiktok' || startsWith(inputs.theme, 'TIKTOK::')) && 'tiktok' || 'sketch' }}
+        run: python3 moteur/file_attente.py
 
       - uses: actions/setup-python@v7
         with:
@@ -249,3 +279,18 @@ jobs:
         if: always()
         run: |
           gh workflow run site.yml --ref main || echo "Mise à jour du site impossible à lancer : relancez « Mettre à jour le site »"
+
+      - name: Lancer la vidéo suivante de la chaîne
+        if: ${{ !cancelled() && inputs.chaine != '' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CHAINE: ${{ inputs.chaine }}
+        run: |
+          # « 2/3 » : 2e vidéo sur 3 ; même si celle-ci a échoué (aucun son utilisable…), la suivante est lancée
+          K="${CHAINE%%/*}"; N="${CHAINE##*/}"
+          if ! [[ "$K" =~ ^[0-9]+$ && "$N" =~ ^[0-9]+$ ]] || [ "$K" -ge "$N" ]; then echo "Chaîne terminée ($CHAINE)."; exit 0; fi
+          if [ "${{ github.run_attempt }}" != "1" ]; then              # fabrication relancée par le garde : la suivante était-elle déjà lancée ?
+            DEJA=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/${{ github.run_id }}/attempts/1/jobs" -q '[.jobs[].steps[]? | select(.name=="Lancer la vidéo suivante de la chaîne" and .conclusion=="success")] | length' || echo 0)
+            if [ "$DEJA" != "0" ]; then echo "Vidéo suivante déjà lancée par la 1re tentative."; exit 0; fi
+          fi
+          gh workflow run emission.yml --ref main -f filiere=tiktok -f chaine="$((K + 1))/$N" && echo "Vidéo $((K + 1))/$N de la chaîne lancée."
