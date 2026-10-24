@@ -1,6 +1,6 @@
 """Avancement de la fabrication en cours, lu en direct par le site (barre de progression, étape, temps restant).
 
-Toutes les 5 s au plus, le robot publie « pourcentage|type|étape|heure de fin prévue (secondes epoch) » (texte simple, sans
+Toutes les 8 s au plus, le robot publie « pourcentage|type|étape|heure de fin prévue (secondes epoch) » (texte simple, sans
 émoji : type = sketch ou tiktok) par deux voies, pour que la barre marche toujours :
 1. un statut du commit de la fabrication (contexte progression-<n° du run>) ;
 2. en secours, si GitHub refuse le statut : une « vérification » (check run) nommée progression-<n° du run>.
@@ -37,6 +37,7 @@ def _envoyer(pct, texte, fin=None, etat="pending"):
             and os.environ.get("GITHUB_SHA") and os.environ.get("GITHUB_RUN_ID")): return
     sha, run = os.environ["GITHUB_SHA"], os.environ["GITHUB_RUN_ID"]
     texte = re.sub(r"[^\w\s'’:/().,%+-]", "", str(texte)).strip()          # texte simple (GitHub refuse certains caractères)
+    if re.match(r"^\d+/\d+$", os.environ.get("CHAINE") or ""): texte = f"vidéo {os.environ['CHAINE']} : {texte}"   # vidéos à la chaîne
     desc = f"{int(max(0, min(100, pct)))}|{TYPE[0]}|{texte}|{int(fin) if fin else ''}"[:140]
     if "statut" not in _ERREUR:
         try: _api("POST", f"/statuses/{sha}", {"state": etat, "context": f"progression-{run}", "description": desc}); return
@@ -54,7 +55,7 @@ def _envoyer(pct, texte, fin=None, etat="pending"):
 def etape(pct, texte, reste_s=None, forcer=False):
     """Nouvelle étape (ou point d'avancement). reste_s : temps restant estimé en secondes (sinon le site l'estime)."""
     maintenant = time.time()
-    if not forcer and maintenant - _DERNIER[0] < 5: return                 # temps réel : un point toutes les 5 s
+    if not forcer and maintenant - _DERNIER[0] < 8: return                 # temps réel : un point toutes les 8 s (quota de l'API GitHub)
     _DERNIER[0] = maintenant
     _envoyer(pct, texte, maintenant + reste_s if reste_s else None)
 

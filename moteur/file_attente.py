@@ -44,19 +44,18 @@ def attendre():
     moi = int(os.environ.get("GITHUB_RUN_ID") or 0)
     if not moi or not (os.environ.get("GH_TOKEN") or os.environ.get("GITHUB_TOKEN")): return
     progression.TYPE[0] = os.environ.get("TYPE_VIDEO") or "sketch"
-    sautes, debut, vu, nous = set(), time.time(), None, None
+    verdict, debut, vu, nous = {}, time.time(), None, None                 # verdict : n° -> bloque ou non (définitif une fois connu)
     while True:
         try:
             nous = nous or _lire(f"/actions/runs/{moi}")
-            runs = []
-            for st in ("in_progress", "queued", "waiting", "pending", "requested"):
-                runs += _lire(f"/actions/workflows/emission.yml/runs?status={st}&per_page=50").get("workflow_runs") or []
-            def jobs_de(i):
-                if i in sautes: return [{"name": "emission", "status": "completed", "conclusion": "skipped"}]
+            runs = [r for r in _lire("/actions/workflows/emission.yml/runs?per_page=60").get("workflow_runs") or [] if r.get("status") in EN_COURS]
+            def jobs_de(i):                                                # appels à GitHub économisés : un verdict connu ne change plus
+                if i in verdict: return [{"name": "emission", "status": "in_progress" if verdict[i] else "completed", "conclusion": None if verdict[i] else "skipped"}]
                 j = _lire(f"/actions/runs/{i}/jobs").get("jobs") or []
-                if any(x.get("name") == "emission" and x.get("conclusion") == "skipped" for x in j): sautes.add(i)
+                noms = {x.get("name"): x for x in j}
+                if "emission" in noms or "file" in noms: verdict[i] = bloque(j)
                 return j
-            d = devant({r["id"]: r for r in runs}.values(), nous, jobs_de)
+            d = devant(runs, nous, jobs_de)
         except Exception as e:
             print(f"File d'attente : lecture impossible ({str(e)[:120]}), nouvel essai", flush=True); time.sleep(PAUSE); continue
         if not d:
@@ -67,7 +66,7 @@ def attendre():
             vu = len(d)
             print(f"File d'attente : {vu} fabrication(s) avant la nôtre : " + ", ".join(r.get("html_url", str(r["id"])) for r in d), flush=True)
         progression.etape(0, f"En file d'attente : {vu} vidéo{'s' if vu > 1 else ''} avant", forcer=True)
-        time.sleep(PAUSE)
+        time.sleep(min(300, PAUSE + 25 * (vu - 1)))                        # plus on est loin dans la file, moins on regarde souvent
 
 
 if __name__ == "__main__":

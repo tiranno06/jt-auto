@@ -342,7 +342,11 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <button class="second" id="tkConnus" style="width:100%;margin-bottom:6px">➕ Ajouter les profils déjà connus</button>
     <p class="note" id="tkConnusNote"></p>
     <button class="action" id="tkHasard">🎲 Une vidéo maintenant (son au hasard des profils)</button>
-    <div id="tkSuiviH" class="note"></div></section>
+    <div id="tkSuiviH" class="note"></div>
+    <div class="jeton" style="align-items:center"><button class="action" id="tkSerie" style="margin:0">🎲 Plusieurs vidéos à la chaîne</button>
+      <input id="tkNb" type="number" min="1" max="10" value="3" inputmode="numeric" aria-label="Nombre de vidéos à la chaîne" style="flex:none;width:72px;text-align:center;font-size:17px;font-weight:700"></div>
+    <p class="note">Choisissez le nombre (1 à 10) puis touchez le bouton : le robot fabrique ces vidéos l'une après l'autre, chacune sur un son différent pris au hasard dans vos profils. Inutile d'attendre la fin d'une vidéo.</p>
+    <div id="tkSuiviS" class="note"></div></section>
   <section class="panneau"><h2>⏰ Vidéos TikTok automatiques</h2>
     <p class="note">Planning à part : il ne touche jamais au planning des sketchs.</p>
     <div class="auto"><div class="txt"><b>Activées</b><small>Une vidéo sur un son des profils à chaque heure ci-dessous.</small></div><button class="inter" data-var="FREQUENCE_TIKTOK" data-def="0" data-bascule="1"></button></div>
@@ -758,6 +762,16 @@ $("#tkCreer").onclick=()=>{
 $("#tkHasard").onclick=()=>{
   if(!lireJeton()){toast("Connectez d'abord la régie (onglet Réglages)");allerOnglet("config");return}
   lancerFlux("emission.yml",$("#tkHasard"),"🎲 Le robot choisit un son au hasard dans vos profils et fabrique la vidéo (20 à 45 min). Elle apparaîtra dans cet onglet.",{filiere:"tiktok"},$("#tkSuiviH"));
+  setTimeout(()=>{$("#tkHasard").disabled=false},8000);                     // file d'attente : on peut en relancer une autre sans attendre
+};
+try{const n=+localStorage.getItem("tk_nb"); if(n>=1&&n<=10) $("#tkNb").value=n}catch(e){}
+$("#tkNb").onchange=()=>{try{localStorage.setItem("tk_nb",$("#tkNb").value)}catch(e){}};
+$("#tkSerie").onclick=()=>{                                                // plusieurs vidéos TikTok à la chaîne : chaque vidéo finie lance la suivante
+  if(!lireJeton()){toast("Connectez d'abord la régie (onglet Réglages)");allerOnglet("config");return}
+  const n=Math.max(1,Math.min(10,Math.round(+$("#tkNb").value||0))); $("#tkNb").value=n;
+  if(!confirm(`Lancer ${n} vidéo${n>1?"s":""} TikTok à la chaîne ?\n\nElles seront fabriquées l'une après l'autre (environ 20 à 45 min chacune), chacune sur un son au hasard de vos profils.`)) return;
+  lancerFlux("emission.yml",$("#tkSerie"),`🎲 ${n} vidéo${n>1?"s":""} à la chaîne : la 1re est en fabrication, chaque vidéo finie lance la suivante (barre « vidéo 1/${n} », « 2/${n} »…). Elles apparaîtront dans cet onglet.`,{filiere:"tiktok",chaine:"1/"+n},$("#tkSuiviS"));
+  setTimeout(()=>{$("#tkSerie").disabled=false},8000);
 };
 async function supprimer(i,c){
   const v=DATA[i];
@@ -1063,7 +1077,7 @@ async function suiviLent(){                                                // to
         const d=await (await gh(`/actions/workflows/${w}/runs?status=success&per_page=15`)).json();
         const ds=(d.workflow_runs||[]).map(r=>(new Date(r.updated_at)-new Date(r.run_started_at||r.created_at))/1000).filter(x=>x>(k==="site"?60:300)).sort((a,b)=>a-b);
         if(ds.length) SUIVI.durees[k]=ds[Math.floor(ds.length/2)]}}
-    const d=await (await ghLire("/actions/workflows/emission.yml/runs?per_page=8")).json(); const vus=new Set();
+    const d=await (await ghLire("/actions/workflows/emission.yml/runs?per_page=15")).json(); const vus=new Set();
     for(const r of (d.workflow_runs||[])){
       const recent=r.status!=="completed"||(Date.now()-new Date(r.updated_at))<10*60000; if(!recent) continue;
       const s=SUIVI.runs[r.id]||(SUIVI.runs[r.id]={id:r.id,sha:r.head_sha,url:r.html_url,debut:new Date(r.run_started_at||r.created_at).getTime()});
@@ -1105,10 +1119,10 @@ function dessinerSuivi(){                                                  // ch
     if(s.statut==="completed"){
       const ok=s.conclusion==="success"&&s.etat!=="failure"; cls=ok?"ok":"ko"; pct=ok?100:(s.pct||0);
       txt=ok?(s.texte||"Vidéo prête"):(s.etat==="failure"?(s.texte||"Pas de vidéo cette fois"):"Échec de la fabrication"); reste=null;
-    }else if(s.attente||s.jobStatut==="queued"||s.statut==="queued"){pct=0; txt=s.texte&&/^En file/.test(s.texte)?s.texte:"En file d'attente (une autre vidéo passe avant)"; reste=null}
-    else if(s.pct!=null&&!/^En file/.test(s.texte||"")){
+    }else if(s.attente||s.jobStatut==="queued"||s.statut==="queued"){pct=0; txt=s.texte&&/En file/.test(s.texte)?s.texte:"En file d'attente (une autre vidéo passe avant)"; reste=null}
+    else if(s.pct!=null&&!/En file/.test(s.texte||"")){
       reste=Math.max(0,(finEst-now)/1000);
-      const plafond=Math.min(99,s.pct+(s.texte&&s.texte.startsWith("Dessin")?6:4));   // avance doucement jusqu'au prochain point du robot
+      const plafond=Math.min(99,s.pct+(s.texte&&s.texte.includes("Dessin")?6:4));   // avance doucement jusqu'au prochain point du robot
       const u=s.fin?Math.min(1,(now-s.t_pct)/Math.max(1000,(s.fin-s.t_pct))):Math.min(1,(now-s.t_pct)/60000);
       pct=s.pct+(plafond-s.pct)*u*(s.fin?(100-s.pct)/100:0.5); txt=s.texte;
     }else{const u=Math.min(1,(now-s.debut)/120000); pct=1+2*u; txt=s.etapeGh&&!/Fabriquer/.test(s.etapeGh)?"Préparation de la machine ("+s.etapeGh+")":"Préparation de la machine"; reste=Math.max(0,(finEst-now)/1000)}
