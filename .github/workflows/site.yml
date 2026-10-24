@@ -46,8 +46,8 @@ jobs:
         uses: actions/cache@v6
         with:
           path: .cache_site
-          key: site-videos-${{ github.run_id }}
-          restore-keys: site-videos-
+          key: site-legeres-${{ github.run_id }}
+          restore-keys: site-legeres-
       - name: Construire le site
         run: python moteur/site.py
       - uses: actions/configure-pages@v6
