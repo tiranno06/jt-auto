@@ -1,28 +1,54 @@
 Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, ElevenLabs epuise — IA utilisée : mistral
-Sketch d'essai : tests/sketch_C_clash.json
-Sketch : « 3000 PROFS EXPRESS », 8 répliques
-  voix sur mesure des personnages en remplaçantes
-  voix 3 (envoyee, kyutai:cml-tts/fr/10087_11650_000028-, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.86, 'mos': 3.34} OK
-  voix 7 (envoyee, kyutai:cml-tts/fr/10087_11650_000028-, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.78, 'mos': 3.07} OK
-  voix 4 (invite, kyutai:cml-tts/fr/2216_1745_000007-00, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.85, 'mos': 3.34} OK
-  voix 6 (invite, kyutai:cml-tts/fr/2216_1745_000007-00, prise 1) {'sim': 1.0, 'blanc': 0.04, 'debit': 0.68, 'mos': 3.29} OK
-    elevenlabs PjAkkDaPt1wolu0EMUTN : HTTP 401 {"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credits remaining, while 24 credits are required for this request.","status
-    ElevenLabs indisponible (crédit ou accès) : passage aux voix gratuites
-  narrateur : la voix elevenlabs:PjAkkDaPt1wolu0EMUTN échoue, passage à la voix de remplacement
-  voix 0 (narrateur, kyutai:cml-tts/fr/2154_2576_000020-00, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.44, 'mos': 3.32} OK
-  voix 1 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 0.95, 'blanc': 0.12, 'debit': 0.87, 'mos': 3.1} OK
-  voix 2 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 0.86, 'blanc': 0.0, 'debit': 1.06, 'mos': 3.23} OK
-  voix 5 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.82, 'mos': 3.36} OK
-  voix 8 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0.1, 'debit': 0.97, 'mos': 2.89} OK
-Voix : Kyutai TTS (CC BY 4.0), voix CML-TTS (CC BY 4.0)
-montage : 16 plans (0.1:large>nar/coupe 3.3:serre>pre/glisse 7.8:tres_serre>inv/coupe 9.8:epaule>pre/glisse 10.8:moyen>pre/glisse 12.5:serre>env/glisse 15.6:tres_serre>pre/coupe 17.0:serre>inv/coupe 19.4:tres_serre>pre/coupe 20.9:moyen>pre/glisse 22.4:tres_serre>inv/coupe 25.0:tres_serre>env/coupe 26.4:moyen>env/zoom 30.0:tres_serre>pre/coupe 31.6:serre>pre/glisse 36.0:tres_serre>inv/coupe)
-studio : matin, lieux ['classe'], tenues presentateur=gilet, envoyee=pull, invite=chemise, 0 figurant(s), ambiances ['pluie', 'poussiere'] ; plans large/fixe serre/fixe epaule/fixe serre/fixe serre/epaule moyen/recul tres_serre/avance tres_serre/fixe serre/avance
-cartoon : durée 10.0 s, 9 répliques, 1 scène(s), personnages ['presentateur', 'envoyee', 'invite']
-Contrôle image : 13 défaut(s) — 11.25 s tete_coupee (invite), 21.75 s tete_coupee (invite), 22.25 s tete_coupee (invite), 26.75 s tete_coupee (presentateur), 26.75 s tete_coupee (invite), 27.25 s tete_coupee (presentateur), 27.25 s tete_coupee (invite), 27.75 s tete_coupee (presentateur)
-  image 0/240 (4 processeurs)
+Vidéo depuis TikTok : https://www.tiktok.com/@yan_animation0/video/7657305776096054561
+  son téléchargé (yt-dlp --impersonate chrome)
+  son récupéré : 112.6 s, compte d'origine @yan_animation0
+[ WARN:0@9.924] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  image de la vidéo : 16 plans (≈ 7.07 s chacun) ; cadrages : très serré 0 %, serré 8 %, moyen 90 %, large 1 % ; caméra : fixe 83 %, avance 1 %, recul 1 %, travelling 0 %, epaule 13 % ; 2 personne(s) à l'écran : gauche (habit [31, 29, 35], cheveux [7, 5, 11], sourit 0 %); droite (habit [170, 128, 44], cheveux [152, 104, 62], sourit 0 %); centre (habit [31, 29, 35], cheveux [7, 5, 11], sourit 0 %) ; agitation 0.125 ; lumière soir ; fond [165, 141, 124]
+  isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
+  transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+  voix re-séparées par leur empreinte (ECAPA) : 2 voix (netteté 0.16)
+  voix vérifiées mot par mot : 2 mot(s) remis sur la bonne voix
+  47 répliques, voix : {'speaker_0': 183, 'speaker_1': 224}
+  son de la vidéo : 2 voix [183 Hz (?, 74 %), 224 Hz (f, 26 %)], 5.53 mots/s, blancs 0.08 s, 4 coupure(s) de parole, dynamique 13.4 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
+  réponse coupée (limite de 8000 jetons atteinte) pour doublage
+  scène reconstituée : Deux potes sont posés sur le canapé en train de jouer aux jeux vidéo quand l'un d'eux enchaîne les pires appels téléphoniques de sa vie avec un flegme déconcertant.
+  casting : speaker_0 → Jojo, speaker_1 → Lila
+  descriptions des personnages remises sur les bons rôles (âge, genre de la voix)
+Sketch : « LA PIRE JOURNÉE », 47 répliques
+Lieux séparés : chaque personnage a son propre décor (appel, visio, l'un ailleurs)
+  décor 0 (lieu déjà connu) : quiet city street at dusk, parked car at the curb, sidewalk, street la
+  décor 1 (lieu déjà connu) : cozy living room, sofa, posters on the wall, coffee table, lamp, telev
+montage : 87 plans (0.0:moyen>pre/coupe 1.4:tres_serre>pre/glisse 2.5:large>env/coupe 4.0:serre>env/glisse 6.1:serre>pre/coupe 6.7:large>env/coupe 7.8:serre>pre/coupe 8.9:moyen>env/coupe 10.5:serre>env/glisse 11.3:moyen>pre/coupe 12.4:serre>pre/zoom 13.9:serre>env/coupe 14.6:tres_serre>env/glisse 15.9:large>pre/coupe 16.9:serre>pre/zoom 17.7:large>env/coupe 18.6:serre>pre/coupe 20.4:tres_serre>pre/glisse 21.6:serre>pre/glisse 23.1:tres_serre>pre/glisse 24.3:serre>pre/glisse 25.6:tres_serre>pre/glisse 27.5:moyen>pre/zoom 28.9:tres_serre>pre/zoom 29.8:serre>pre/glisse 30.9:large>pre/zoom 32.3:tres_serre>pre/zoom 33.8:serre>pre/glisse 35.3:tres_serre>pre/glisse 36.3:serre>pre/glisse 37.7:tres_serre>pre/glisse 38.9:serre>pre/glisse 40.2:tres_serre>pre/glisse 41.4:moyen>pre/glisse 42.1:tres_serre>env/coupe 43.5:serre>env/glisse 45.4:moyen>env/glisse 46.0:serre>env/glisse 47.0:tres_serre>env/glisse 48.5:serre>env/glisse 50.0:tres_serre>env/glisse 50.8:serre>env/glisse 51.8:tres_serre>env/glisse 53.3:moyen>env/glisse 54.4:tres_serre>env/glisse 55.7:serre>env/glisse 57.4:tres_serre>env/glisse 59.1:moyen>env/glisse 59.8:tres_serre>env/glisse 60.9:tres_serre>pre/coupe 62.5:serre>pre/glisse 64.3:tres_serre>pre/glisse 65.7:serre>pre/glisse 67.0:tres_serre>pre/glisse 68.2:serre>pre/glisse 69.4:tres_serre>pre/glisse 70.5:serre>pre/glisse 72.3:tres_serre>pre/glisse 75.1:serre>pre/glisse 75.7:tres_serre>pre/glisse 76.8:serre>pre/glisse 77.6:large>pre/zoom 78.9:moyen>pre/glisse 79.9:serre>pre/zoom 80.8:tres_serre>pre/glisse 82.0:serre>pre/glisse 83.4:tres_serre>pre/glisse 84.7:serre>pre/glisse 86.1:moyen>pre/glisse 87.5:serre>pre/glisse 88.9:moyen>pre/glisse 90.3:serre>pre/glisse 91.5:tres_serre>pre/glisse 93.3:serre>pre/glisse 94.9:large>pre/zoom 95.8:serre>pre/zoom 96.8:moyen>pre/glisse 98.6:serre>pre/glisse 99.1:tres_serre>pre/glisse 100.1:serre>pre/glisse 101.6:tres_serre>pre/glisse 102.8:serre>pre/glisse 104.2:tres_serre>pre/glisse 105.8:serre>pre/glisse 107.3:tres_serre>pre/glisse 108.0:serre>pre/glisse 109.3:moyen>pre/zoom)
+studio : soir, lieux ['rue', 'salon'], tenues presentateur=tshirt, envoyee=tshirt, 2 figurant(s), ambiances ['pluie', 'poussiere'] ; plans moyen/fixe large/recul serre/avance large/travelling serre/fixe moyen/travelling moyen/fixe serre/travelling large/travelling large/avance serre/avance serre/fixe serre/avance moyen/avance serre/travelling large/fixe tres_serre/travelling serre/avance serre/avance tres_serre/zoom_choc moyen/travelling tres_serre/travelling moyen/fixe serre/avance moyen/recul serre/avance moyen/avance tres_serre/avance serre/recul serre/travelling serre/avance serre/zoom_choc tres_serre/avance large/travelling moyen/recul serre/avance tres_serre/travelling moyen/fixe moyen/avance serre/travelling large/fixe moyen/avance serre/avance serre/avance serre/travelling tres_serre/recul moyen/fixe
+appel : 14 écran(s) partagé(s), 8 plan(s) d'écoute
+cartoon : durée 116.2 s, 47 répliques, 2 scène(s), personnages ['presentateur', 'envoyee']
+Contrôle image : 14 défaut(s) — 15.25 s sous_titre_visage (envoyee), 42.25 s sous_titre_visage (envoyee), 42.75 s sous_titre_visage (envoyee), 43.25 s sous_titre_visage (envoyee), 47.75 s sous_titre_visage (envoyee), 48.25 s sous_titre_visage (envoyee), 52.25 s sous_titre_visage (envoyee), 52.75 s sous_titre_visage (envoyee)
+  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~1742 images)
+  morceau 3486–5228 reçu d'une machine d'aide
+  morceau 1743–3486 reçu d'une machine d'aide
+  morceau 5228–6971 reçu d'une machine d'aide
+  dessin partagé terminé en 11.7 min
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = aucune, voix = piper, decors = dessines, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 0, 'cache_lu': 0, 'eleven_caracteres': 55, 'gpu_s': 0}
-OK : sortie/2026-10-24_00h13_emission.mp4 (10 s)
+  IA gemini indisponible (gemini 429 : [{
+  "error": {
+    "code": 429,
+    "message": "You exceeded your current quota, please check your plan an) : on passe à la suivante
+Jury qualité (ia) : 7.6/10 — Humoriste 7.0/10 : 101.7 s La chute finale manque de punch visuel. Un zoom choc sur le personnage principal serait nécessaire pour renforcer l'impact comique.; 64.4 s L'humour pourrait être renforcé par une réaction plus exagérée du personnage lors de l'annonce de la perte du pénis.; 2.5 s Le ton initial manque légèrement d'énergie. Un bruitage ou une réaction immédiate du personnage pourrait dynamiser la scène. | Réalisateur 10.0/10 :  | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 2.0/10 : 15.2 s le sous-titre cache le visage de envoyee; 42.2 s le sous-titre cache le visage de envoyee; 47.8 s le sous-titre cache le visage de envoyee
+Manque par rapport à la vidéo d'origine : Les personnages secondaires (comme les amis dans le salon) sont absents dans notre version. ; Les expressions faciales plus détaillées des personnages dans l'original (ex. : sourires, clignements d'yeux) manquent dans notre version. ; Les objets comme les téléphones portables et les manettes de jeu sont stylisés différemment dans notre version. ; Les transitions entre les plans (ex. : faux raccords humoristiques) sont moins marquées chez nous. ; Les ambiances sonores de fond (comme les rires ou les bruits de salon) sont absentes.
+Corrections du jury (tour 1) : plan moyen sur la réplique 8 ; plan moyen sur la réplique 22 ; plan moyen sur la réplique 23
+montage : 81 plans (0.0:moyen>pre/coupe 1.4:tres_serre>pre/glisse 2.5:large>env/coupe 4.0:serre>env/glisse 6.1:serre>pre/coupe 6.7:large>env/coupe 7.8:serre>pre/coupe 8.9:moyen>env/coupe 10.5:serre>env/glisse 11.3:moyen>pre/coupe 12.4:serre>pre/zoom 13.9:moyen>env/coupe 15.9:large>pre/coupe 16.9:serre>pre/zoom 17.7:large>env/coupe 18.6:serre>pre/coupe 20.4:tres_serre>pre/glisse 21.6:serre>pre/glisse 23.1:tres_serre>pre/glisse 24.3:serre>pre/glisse 25.6:tres_serre>pre/glisse 27.5:moyen>pre/zoom 28.9:tres_serre>pre/zoom 29.8:serre>pre/glisse 30.9:large>pre/zoom 32.3:tres_serre>pre/zoom 33.8:serre>pre/glisse 35.3:tres_serre>pre/glisse 36.3:serre>pre/glisse 37.7:tres_serre>pre/glisse 38.9:serre>pre/glisse 40.2:tres_serre>pre/glisse 41.4:moyen>pre/glisse 42.1:moyen>env/coupe 45.4:tres_serre>env/glisse 50.8:serre>env/glisse 51.8:tres_serre>env/glisse 53.3:moyen>env/glisse 54.4:tres_serre>env/glisse 55.7:serre>env/glisse 57.4:tres_serre>env/glisse 59.1:moyen>env/glisse 59.8:tres_serre>env/glisse 60.9:tres_serre>pre/coupe 62.5:serre>pre/glisse 64.3:tres_serre>pre/glisse 65.7:serre>pre/glisse 67.0:tres_serre>pre/glisse 68.2:serre>pre/glisse 69.4:tres_serre>pre/glisse 70.5:serre>pre/glisse 72.3:tres_serre>pre/glisse 75.1:serre>pre/glisse 75.7:tres_serre>pre/glisse 76.8:serre>pre/glisse 77.6:large>pre/zoom 78.9:moyen>pre/glisse 79.9:serre>pre/zoom 80.8:tres_serre>pre/glisse 82.0:serre>pre/glisse 83.4:tres_serre>pre/glisse 84.7:serre>pre/glisse 86.1:moyen>pre/glisse 87.5:serre>pre/glisse 88.9:moyen>pre/glisse 90.3:serre>pre/glisse 91.5:tres_serre>pre/glisse 93.3:serre>pre/glisse 94.9:large>pre/zoom 95.8:serre>pre/zoom 96.8:moyen>pre/glisse 98.6:serre>pre/glisse 99.1:tres_serre>pre/glisse 100.1:serre>pre/glisse 101.6:tres_serre>pre/glisse 102.8:serre>pre/glisse 104.2:tres_serre>pre/glisse 105.8:serre>pre/glisse 107.3:tres_serre>pre/glisse 108.0:serre>pre/glisse 109.3:moyen>pre/zoom)
+studio : soir, lieux ['rue', 'salon'], tenues presentateur=tshirt, envoyee=tshirt, 2 figurant(s), ambiances ['pluie', 'poussiere'] ; plans moyen/fixe large/recul serre/avance large/travelling serre/fixe moyen/travelling moyen/fixe serre/travelling large/travelling large/avance serre/avance serre/fixe serre/avance moyen/avance serre/travelling large/fixe tres_serre/travelling serre/avance serre/avance tres_serre/zoom_choc moyen/travelling tres_serre/travelling moyen/fixe serre/avance moyen/recul serre/avance moyen/avance tres_serre/avance serre/recul serre/travelling serre/avance serre/zoom_choc tres_serre/avance large/travelling moyen/recul serre/avance tres_serre/travelling moyen/fixe moyen/avance serre/travelling large/fixe moyen/avance serre/avance serre/avance serre/travelling tres_serre/recul moyen/fixe
+appel : 14 écran(s) partagé(s), 8 plan(s) d'écoute
+cartoon : durée 116.2 s, 47 répliques, 2 scène(s), personnages ['presentateur', 'envoyee']
+Contrôle image : 18 défaut(s) — 45.75 s sous_titre_visage (envoyee), 46.25 s sous_titre_visage (envoyee), 46.75 s sous_titre_visage (envoyee), 47.25 s sous_titre_visage (envoyee), 47.75 s sous_titre_visage (envoyee), 48.25 s sous_titre_visage (envoyee), 48.75 s sous_titre_visage (envoyee), 49.25 s sous_titre_visage (envoyee)
+  redessin partiel : 1082/6971 images à redessiner (2 passage(s)), le reste repris tel quel
+Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
+Jury qualité (ia) : 6.6/10 — Humoriste 7.0/10 : 0.4 s La chute finale manque de punch et d'impact visuel. Le zoom choc sur le présentateur n'est pas assez marqué pour renforcer la chute.; 62.6 s Les réactions du présentateur aux appels téléphoniques pourraient être plus exagérées pour souligner l'absurdité des situations.; 115.6 s L'humour noir pourrait être encore plus poussé avec un bruitage ou une réaction sonore pour accentuer la chute. | Réalisateur 6.0/10 : 0.4 s Les plans sur le présentateur pourraient être plus variés pour éviter la monotonie visuelle.; 23.0 s Les réactions du personnage secondaire (l'ami) ne sont pas assez visibles ou marquées.; 103.0 s Certains raccords entre les plans manquent de fluidité, notamment lors des transitions entre les appels. | Directeur artistique 8.0/10 : 0.0 s Le décor du salon manque de détails pour renforcer l'ambiance comique (objets, affiches, ou éléments personnalisés)
+La version corrigée n'est pas meilleure : on garde la première.
+Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = gemini ×2, mistral ×2, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 44668, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0}
+OK : sortie/2026-10-24_01h29_emission.mp4 (116 s)

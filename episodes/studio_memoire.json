@@ -1674,5 +1674,49 @@
    "son": true
   },
   "cadence": null
+ },
+ {
+  "moment": "soir",
+  "lieux": [
+   "rue",
+   "salon"
+  ],
+  "source": "auteur+image",
+  "duree": 116.2,
+  "plans": {
+   "moyen": 13,
+   "large": 7,
+   "serre": 20,
+   "tres_serre": 7
+  },
+  "mouvements": {
+   "fixe": 9,
+   "recul": 5,
+   "avance": 18,
+   "travelling": 13,
+   "zoom_choc": 2
+  },
+  "costumes": {
+   "presentateur": "tshirt",
+   "envoyee": "tshirt"
+  },
+  "figurants": 2,
+  "ambiances": [
+   "pluie",
+   "poussiere"
+  ],
+  "controle": "Humoriste 7.0/10 : 101.7 s La chute finale manque de punch visuel. Un zoom choc sur le personnage principal serait nécessaire pour renforcer l'impact comique.; 64.4 s L'humour pourrait être renforcé p",
+  "fichier": "2026-10-24_01h29_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": false,
+   "tiers": false,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": true,
+   "reflets": true,
+   "son": true
+  },
+  "cadence": "normal"
  }
 ]
