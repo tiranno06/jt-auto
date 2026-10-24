@@ -6,6 +6,7 @@ Sans jeton (essais sur un ordinateur) : rien n'est envoyé, la fabrication conti
 import json, os, time, urllib.request
 
 _DERNIER = [0.0]
+_ERREUR = [False]
 PLAGE = [0.0, 100.0]                                                       # part de la barre donnée au rendu en cours (cartoon)
 APRES = [150.0]                                                            # secondes estimées après le rendu (contrôle, archivage)
 TYPE = ["Vidéo"]
@@ -20,7 +21,12 @@ def _envoyer(pct, texte, fin=None, etat="pending"):
     req = urllib.request.Request(f"https://api.github.com/repos/{depot}/statuses/{sha}", data=corps, method="POST",
                                  headers={"Authorization": f"Bearer {jeton}", "Accept": "application/vnd.github+json"})
     try: urllib.request.urlopen(req, timeout=10).read()
-    except Exception: pass
+    except Exception as e:                                                 # jamais bloquant, mais signalé une fois dans le journal
+        if not _ERREUR[0]:
+            _ERREUR[0] = True; detail = ""
+            try: detail = e.read().decode()[:200]
+            except Exception: pass
+            print(f"Barre de progression du site : envoi impossible ({str(e)[:120]} {detail})", flush=True)
 
 
 def etape(pct, texte, reste_s=None, forcer=False):

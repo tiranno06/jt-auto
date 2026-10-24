@@ -1044,36 +1044,44 @@ $("#mCreer").onclick=()=>{
 // ------------------------------------------------ barre de progression en temps réel (accueil et onglet TikTok)
 // le robot publie son avancement toutes les 5 s (statut « progression-<run> » du commit) ; entre deux points, la barre et le
 // compte à rebours avancent seuls, seconde par seconde
-const SUIVI={runs:{},site:null,durees:{emission:25*60,site:5*60},maj:0};
+const SUIVI={runs:{},site:null,durees:{emission:25*60,site:5*60},maj:0,anonyme:0};
+// sans la clé de la régie (autre appareil, PC) : lecture publique du dépôt, plus espacée (GitHub : 60 lectures/heure)
+async function ghLire(chemin){
+  if(lireJeton()) return gh(chemin);
+  const r=await fetch(API+chemin,{headers:{"Accept":"application/vnd.github+json"}}); if(!r.ok) throw new Error("lecture "+r.status); return r}
 const fmtReste=s=>s<=20?"quelques secondes":s<90?"≈ "+Math.round(s)+" s":"≈ "+Math.floor(s/60)+" min"+(s<600&&s%60>=10?" "+String(Math.round(s%60)).padStart(2,"0")+" s":"");
 async function suiviLent(){                                                // toutes les 20 s : fabrications en cours, étape, durées habituelles
-  if(!lireJeton()||!CONF.depot) return;
+  if(!CONF.depot||document.hidden) return;
+  if(!lireJeton()){if(Date.now()-SUIVI.anonyme<110000) return; SUIVI.anonyme=Date.now()}   // sans clé : toutes les 2 min
   try{
     if(Date.now()-SUIVI.maj>600000){SUIVI.maj=Date.now();
       for(const [w,k] of [["emission.yml","emission"],["site.yml","site"]]){
+        if(!lireJeton()) break;
         const d=await (await gh(`/actions/workflows/${w}/runs?status=success&per_page=15`)).json();
         const ds=(d.workflow_runs||[]).map(r=>(new Date(r.updated_at)-new Date(r.run_started_at||r.created_at))/1000).filter(x=>x>(k==="site"?60:300)).sort((a,b)=>a-b);
         if(ds.length) SUIVI.durees[k]=ds[Math.floor(ds.length/2)]}}
-    const d=await (await gh("/actions/workflows/emission.yml/runs?per_page=8")).json(); const vus=new Set();
+    const d=await (await ghLire("/actions/workflows/emission.yml/runs?per_page=8")).json(); const vus=new Set();
     for(const r of (d.workflow_runs||[])){
       const recent=r.status!=="completed"||(Date.now()-new Date(r.updated_at))<10*60000; if(!recent) continue;
       const s=SUIVI.runs[r.id]||(SUIVI.runs[r.id]={id:r.id,sha:r.head_sha,url:r.html_url,debut:new Date(r.run_started_at||r.created_at).getTime()});
       s.statut=r.status; s.conclusion=r.conclusion;
-      try{const j=await (await gh(`/actions/runs/${r.id}/jobs`)).json(); const job=(j.jobs||[]).find(x=>x.name==="emission");
+      if(!lireJeton()&&r.status==="completed"&&!s.vu) continue;           // sans clé : seulement les fabrications en cours
+      try{const j=await (await ghLire(`/actions/runs/${r.id}/jobs`)).json(); const job=(j.jobs||[]).find(x=>x.name==="emission");
         s.fabrique=!!job&&job.conclusion!=="skipped"; if(job){s.etapeGh=((job.steps||[]).find(x=>x.status==="in_progress")||{}).name||""; s.jobStatut=job.status; s.debut=new Date(job.started_at||s.debut).getTime()}}catch(e){}
       if(s.fabrique) vus.add(String(r.id));
     }
     Object.keys(SUIVI.runs).forEach(k=>{if(!vus.has(k)) delete SUIVI.runs[k]});
-    const sd=await (await gh("/actions/workflows/site.yml/runs?per_page=1")).json(); const r=(sd.workflow_runs||[])[0];
+    const sd=await (await ghLire("/actions/workflows/site.yml/runs?per_page=1")).json(); const r=(sd.workflow_runs||[])[0];
     SUIVI.site=r&&r.status!=="completed"?{debut:new Date(r.run_started_at||r.created_at).getTime(),url:r.html_url}:null;
   }catch(e){}
   dessinerSuivi();
 }
 async function suiviRapide(){                                              // toutes les 5 s : l'avancement publié par le robot
-  if(!lireJeton()) return;
+  if(document.hidden||(!lireJeton()&&Date.now()-(SUIVI.anoRapide||0)<110000)) return;
+  if(!lireJeton()) SUIVI.anoRapide=Date.now();
   for(const s of Object.values(SUIVI.runs)){
     if(s.statut==="completed"&&s.lu) continue;
-    try{const d=await (await gh(`/commits/${s.sha}/status?per_page=100`)).json();
+    try{const d=await (await ghLire(`/commits/${s.sha}/status?per_page=100`)).json(); s.vu=true;
       const st=(d.statuses||[]).find(x=>x.context==="progression-"+s.id);
       if(st){const [p,ty,txt,fin]=String(st.description||"").split("|"); const pct=+p||0;
         if(pct!==s.pct||txt!==s.texte){s.pct=pct; s.t_pct=Date.now()} s.type=ty; s.texte=txt; s.fin=fin?(+fin)*1000:null; s.etat=st.state; if(s.statut==="completed") s.lu=true}
