@@ -115,6 +115,11 @@
   (`moteur/progression.py` → statut « progression-<run> » du commit : %, type, étape, heure de fin ; dessin des images = vitesse
   réelle) ; le site le relit toutes les 5 s, fait avancer barre et compte à rebours chaque seconde, montre la file d'attente et la
   mise en ligne du site (durées habituelles des derniers runs). Workflow emission.yml : permission `statuses: write`.
+- **File d'attente des fabrications** (`moteur/file_attente.py`, job « file » d'emission.yml, 340 min max) : une seule vidéo fabriquée à
+  la fois (sketch, son TikTok, manuelle, refaire, aperçu, série), dans l'ordre des demandes (heure de lancement de la tentative :
+  une fabrication relancée par le garde repasse en fin de file, et revérifie son tour au début du job « emission ») ; aucune demande
+  perdue (les files « concurrency » de GitHub n'en gardent qu'une en attente) ; les réveils « rien à faire » ne bloquent personne ;
+  le site affiche « En file d'attente : n vidéo(s) avant ».
 - **Bonne voix sur le bon personnage (sons TikTok)** : `locuteurs.affiner` vérifie qui parle MOT PAR MOT (empreinte vocale ECAPA
   autour de chaque mot, comparée à chaque voix, fil le plus probable façon Viterbi, 2-3 tours ; une « voix » presque muette est
   rattachée à la plus proche) puis `caler_sur_phrases` met chaque changement de personne sur la fin de phrase la plus proche

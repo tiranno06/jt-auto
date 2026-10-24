@@ -73,8 +73,25 @@ jobs:
           ESSAIS_MAX: ${{ vars.ESSAIS_MAX }}
         run: python3 moteur/planning.py
 
-  emission:
+  file:                          # file d'attente : une seule vidéo fabriquée à la fois, dans l'ordre des demandes (moteur/file_attente.py)
     needs: planning
+    if: needs.planning.outputs.go == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          sparse-checkout: |
+            moteur/file_attente.py
+            moteur/progression.py
+      - name: Attendre que les vidéos lancées avant soient finies
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TYPE_VIDEO: ${{ (inputs.filiere == 'tiktok' || startsWith(inputs.theme, 'TIKTOK::')) && 'tiktok' || 'sketch' }}
+        run: python3 moteur/file_attente.py
+
+  emission:
+    needs: [planning, file]
     if: needs.planning.outputs.go == 'true'
     concurrency:                 # les vidéos manuelles ont leur propre file : elles n'annulent jamais une émission en attente
       group: ${{ (inputs.theme != '' || inputs.refaire != '') && format('manuel-{0}', github.run_id) || (inputs.serie != '' && 'serie') || (inputs.filiere == 'tiktok' && 'sons-tiktok') || 'emission' }}
@@ -154,6 +171,13 @@ jobs:
       PUSH_ABONNEMENTS: ${{ vars.PUSH_ABONNEMENTS }}
     steps:
       - uses: actions/checkout@v7
+
+      - name: Vérifier son tour (fabrication relancée par le garde)
+        timeout-minutes: 100
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TYPE_VIDEO: ${{ (inputs.filiere == 'tiktok' || startsWith(inputs.theme, 'TIKTOK::')) && 'tiktok' || 'sketch' }}
+        run: python3 moteur/file_attente.py
 
       - uses: actions/setup-python@v7
         with:

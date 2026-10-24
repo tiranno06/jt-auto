@@ -1069,8 +1069,9 @@ async function suiviLent(){                                                // to
       const s=SUIVI.runs[r.id]||(SUIVI.runs[r.id]={id:r.id,sha:r.head_sha,url:r.html_url,debut:new Date(r.run_started_at||r.created_at).getTime()});
       s.statut=r.status; s.conclusion=r.conclusion;
       if(!lireJeton()&&r.status==="completed"&&!s.vu) continue;           // sans clé : seulement les fabrications en cours
-      try{const j=await (await ghLire(`/actions/runs/${r.id}/jobs`)).json(); const job=(j.jobs||[]).find(x=>x.name==="emission");
-        s.fabrique=!!job&&job.conclusion!=="skipped"; if(job){s.etapeGh=((job.steps||[]).find(x=>x.status==="in_progress")||{}).name||""; s.jobStatut=job.status; s.debut=new Date(job.started_at||s.debut).getTime()}}catch(e){}
+      try{const j=await (await ghLire(`/actions/runs/${r.id}/jobs`)).json(); const job=(j.jobs||[]).find(x=>x.name==="emission"), fj=(j.jobs||[]).find(x=>x.name==="file");
+        s.attente=!job&&!!fj&&fj.status!=="completed";                     // file d'attente : attend que la vidéo d'avant soit finie
+        s.fabrique=(!!job&&job.conclusion!=="skipped")||s.attente; if(job){s.etapeGh=((job.steps||[]).find(x=>x.status==="in_progress")||{}).name||""; s.jobStatut=job.status; s.debut=new Date(job.started_at||s.debut).getTime()}}catch(e){}
       if(s.fabrique) vus.add(String(r.id));
     }
     Object.keys(SUIVI.runs).forEach(k=>{if(!vus.has(k)) delete SUIVI.runs[k]});
@@ -1104,8 +1105,8 @@ function dessinerSuivi(){                                                  // ch
     if(s.statut==="completed"){
       const ok=s.conclusion==="success"&&s.etat!=="failure"; cls=ok?"ok":"ko"; pct=ok?100:(s.pct||0);
       txt=ok?(s.texte||"Vidéo prête"):(s.etat==="failure"?(s.texte||"Pas de vidéo cette fois"):"Échec de la fabrication"); reste=null;
-    }else if(s.jobStatut==="queued"||s.statut==="queued"){pct=0; txt="En file d'attente (une autre vidéo passe avant)"; reste=null}
-    else if(s.pct!=null){
+    }else if(s.attente||s.jobStatut==="queued"||s.statut==="queued"){pct=0; txt=s.texte&&/^En file/.test(s.texte)?s.texte:"En file d'attente (une autre vidéo passe avant)"; reste=null}
+    else if(s.pct!=null&&!/^En file/.test(s.texte||"")){
       reste=Math.max(0,(finEst-now)/1000);
       const plafond=Math.min(99,s.pct+(s.texte&&s.texte.startsWith("Dessin")?6:4));   // avance doucement jusqu'au prochain point du robot
       const u=s.fin?Math.min(1,(now-s.t_pct)/Math.max(1000,(s.fin-s.t_pct))):Math.min(1,(now-s.t_pct)/60000);

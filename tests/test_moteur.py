@@ -801,6 +801,23 @@ class TestVoixProches(unittest.TestCase):
         self.assertEqual(D.casting_unique({"speaker_0": "presentateur", "speaker_1": "envoyee"}, segs, hz), {"speaker_0": "presentateur", "speaker_1": "envoyee"})
 
 
+class TestFileAttente(unittest.TestCase):
+    def test_une_video_a_la_fois_dans_l_ordre(self):
+        sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "moteur"))
+        import file_attente as F
+        J = {1: [{"name": "planning", "status": "completed", "conclusion": "success"}, {"name": "emission", "status": "in_progress"}],      # en fabrication
+             2: [{"name": "planning", "status": "completed", "conclusion": "success"}, {"name": "emission", "status": "completed", "conclusion": "skipped"}],   # rien à faire
+             3: [{"name": "planning", "status": "in_progress"}],                                                                          # planning en cours
+             4: [{"name": "planning", "status": "completed", "conclusion": "success"}, {"name": "file", "status": "in_progress"}]}       # attend déjà
+        J[5] = J[4]
+        R = lambda i, t: {"id": i, "status": "in_progress", "run_started_at": t}
+        runs = [R(1, "2026-10-25T10:00:00Z"), R(2, "2026-10-25T10:05:00Z"), R(3, "2026-10-25T10:06:00Z"), R(4, "2026-10-25T10:07:00Z"), R(5, "2026-10-25T10:08:00Z")]
+        self.assertEqual([r["id"] for r in F.devant(runs, runs[4], J.get)], [1, 3, 4])     # la 5e attend les 1, 3 et 4 (pas la 2)
+        self.assertEqual(F.devant(runs, runs[0], J.get), [])                                # la 1re passe
+        relance = dict(runs[0], id=1, run_started_at="2026-10-25T11:00:00Z")                # relancée par le garde : en fin de file
+        self.assertEqual([r["id"] for r in F.devant(runs[1:] + [relance], relance, J.get)], [3, 4, 5])
+
+
 class TestRelaisIA(unittest.TestCase):
     def test_bascule_claude_vers_mistral_puis_gemini(self):
         import json as _j, io, urllib.request, urllib.error, reseau
