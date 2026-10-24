@@ -98,6 +98,10 @@
   VOIX_NOUVELLES) et « Juste le décor » (décors tirés à neuf : DECOR_GRAINE) ; bêtisier du dimanche (`moteur/betisier.py`,
   workflow betisier.yml, ratés notés par le jury) ; voix de l'auteur enregistrée depuis le site (`moteur/voix_auteur.py`,
   workflow voix_auteur.yml → voix/refs, priorité au casting, jamais écrasée).
+- **Profils TikTok** (`moteur/profils_tiktok.py`) : l'auteur colle une liste de profils sur le site (réglage PROFILS_TIKTOK) et
+  choisit la part des vidéos automatiques faites avec leurs sons (PART_PROFILS : 0/25/50/75/100 %, 50 par défaut) ; le robot
+  prend une vidéo au hasard (jamais déjà utilisée, 8 à 150 s ; liste par yt-dlp, sinon tikwm), reprend son son et fabrique la
+  vidéo comme avec un lien collé ; si rien ne passe : idée automatique habituelle. Seulement les vidéos du planning.
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.

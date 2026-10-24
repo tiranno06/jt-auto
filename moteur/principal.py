@@ -124,7 +124,21 @@ def main():
             alerte.alerter("Crédit Claude épuisé ?", "Claude ne répond pas : la vidéo est fabriquée avec un sketch de secours déjà écrit. "
                            "Rechargez le crédit sur console.anthropic.com pour revenir aux sketchs écrits par Claude.")
         except Exception: pass
-    if THEME.startswith("TIKTOK::"):                                       # vidéo construite sur la bande son d'une vidéo TikTok
+    PROFIL_PREP = None                                                     # vidéo automatique sur le son d'un profil TikTok de la liste
+    try:
+        import profils_tiktok
+        if profils_tiktok.tirage(AUTO, THEME, LOT):
+            print(f"Vidéo automatique depuis un profil TikTok ({', '.join('@' + p for p in profils_tiktok.liste())})", flush=True)
+            import doublage
+            for url_ in profils_tiktok.choisir(historique):
+                try: PROFIL_PREP = (url_, doublage.preparer(url_)); break
+                except Exception as e: print(f"  son de {url_} impossible ({str(e)[:160]}) : vidéo suivante", flush=True)
+            if PROFIL_PREP is None: print("Aucune vidéo des profils utilisable : idée automatique comme d'habitude.", flush=True)
+    except Exception as e: print(f"Profils TikTok indisponibles ({str(e)[:160]}) : idée automatique.", flush=True); PROFIL_PREP = None
+    if PROFIL_PREP:
+        tiktok = PROFIL_PREP[0]
+        candidats = [([{"titre": "Bande son TikTok (profil)", "resume": tiktok, "lien": tiktok, "date": None, "source": "tiktok"}], "tiktok")]
+    elif THEME.startswith("TIKTOK::"):                                     # vidéo construite sur la bande son d'une vidéo TikTok
         tiktok = THEME.split("::", 1)[1].strip()
         candidats = [([{"titre": "Bande son TikTok", "resume": tiktok, "lien": tiktok, "date": None, "source": "tiktok"}], "tiktok")]
     elif THEME:                                                              # vidéo manuelle : le thème (ou le script) tapé dans la régie
@@ -167,7 +181,7 @@ def main():
         print(f"Refaire ({REFAIRE_MODE}) : « {sk.get('sujet')} », mêmes répliques", flush=True)
     elif tiktok:
         import doublage
-        sk, *DOUB = doublage.preparer(tiktok)
+        sk, *DOUB = PROFIL_PREP[1] if PROFIL_PREP else doublage.preparer(tiktok)   # (déjà préparé quand il vient d'un profil)
         fmt = "libre" if sk["doublage"]["duree"] >= 60 else "mini"         # rangée en vidéo longue au-delà d'une minute
     elif script:                                                           # script tapé : les répliques restent mot pour mot
         sk = ecrire.mettre_en_scene(script)

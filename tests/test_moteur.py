@@ -1065,3 +1065,22 @@ class TestStyleToon(unittest.TestCase):
         K = toon.squelette(dict(M.pose_neutre(), x=540, y=1700, s=1.2, bras_g=studio.POSES["croises"][0], bras_d=studio.POSES["croises"][1], adulte=True))
         self.assertGreater(K["croise"], 0.9)                                                            # bras croisés reconnus
         self.assertGreater(K["bras"][0][2][0], 540)                                                    # main gauche de l'autre côté
+
+
+class TestProfilsTiktok(unittest.TestCase):
+    """Profils TikTok de l'auteur : liste lue du réglage, vidéos déjà utilisées écartées, tirage réservé au planning."""
+    def test_liste_et_tirage(self):
+        import profils_tiktok as P
+        self.assertEqual(P.liste("@charly.bse\nhttps://www.tiktok.com/@Foo_Bar?lang=fr ; baz, @charly.bse"), ["charly.bse", "Foo_Bar", "baz"])
+        h = [{"sources": ["https://www.tiktok.com/@x/video/123?_r=1"]}, {"source_audio": "https://www.tiktok.com/@y/video/456"}]
+        self.assertEqual(P.deja_utilisees(h), {"123", "456"})
+        anc = {k: os.environ.get(k) for k in ("PROFILS_TIKTOK", "PART_PROFILS")}
+        try:
+            os.environ["PROFILS_TIKTOK"] = "@charly.bse"; os.environ["PART_PROFILS"] = "100"
+            self.assertTrue(P.tirage(True)); self.assertFalse(P.tirage(False)); self.assertFalse(P.tirage(True, "TIKTOK::lien"))
+            os.environ["PART_PROFILS"] = "0"; self.assertFalse(P.tirage(True))
+            os.environ["PROFILS_TIKTOK"] = ""; os.environ["PART_PROFILS"] = "100"; self.assertFalse(P.tirage(True))
+        finally:
+            for k, v in anc.items():
+                if v is None: os.environ.pop(k, None)
+                else: os.environ[k] = v
