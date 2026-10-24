@@ -223,11 +223,13 @@ button{font:inherit;border:0;border-radius:14px;cursor:pointer}
 #suivi{font-size:13px;margin-top:8px;min-height:18px;color:var(--doux)}
 #toast{position:fixed;top:16px;left:50%;transform:translateX(-50%);background:var(--jaune);color:#111;font-weight:700;padding:10px 16px;border-radius:12px;display:none;z-index:20;max-width:90vw;text-align:center}
 .onglets{position:sticky;top:0;z-index:5;display:flex;gap:6px;max-width:560px;margin:0 auto;padding:8px 12px;background:var(--bg)}
-.onglet{flex:1;min-width:0;padding:10px 2px;font-size:13px;white-space:nowrap;font-weight:700;background:var(--carte);color:var(--doux);border:1px solid var(--ligne)}
+.onglet{flex:1;min-width:0;padding:6px 2px;font-size:min(13px,3.3vw);line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:700;background:var(--carte);color:var(--doux);border:1px solid var(--ligne);display:flex;flex-direction:column;align-items:center;gap:2px}
+.onglet .ic{font-size:18px;line-height:1}.onglet .nom{max-width:100%;overflow:hidden;text-overflow:ellipsis}   /* icône au-dessus du nom : jamais de texte qui dépasse */
 .onglet.actif{background:var(--jaune);color:#111;border-color:var(--jaune)}
 h2{margin:0 0 10px;font-size:17px}
 h3{margin:18px 0 4px;font-size:15px;color:var(--jaune)}
 label{display:block;font-size:13px;color:var(--doux);margin:12px 0}
+label>input,label>select,label>textarea{display:block;width:100%;box-sizing:border-box;margin-top:6px}   /* la case reste dans son cadre */
 select{display:block;width:100%;margin-top:6px;font:inherit;font-size:15px;padding:11px;border-radius:10px;border:1px solid var(--ligne);background:#0e0f17;color:var(--texte)}
 label .jeton{margin-top:6px}
 .note{font-size:12.5px;color:var(--doux);line-height:1.45}
@@ -282,11 +284,11 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
   #barre video{max-height:62vh}
   body:not(.lecture) #fermer{display:none}
 }
-@media (max-width:380px){.onglet{font-size:12px}.opts.deux{grid-template-columns:1fr}}
+@media (max-width:380px){.opts.deux{grid-template-columns:1fr}}
 </style></head><body data-onglet="accueil">
 <header><h1><img src="logo-192.png" alt="" style="width:44px;height:44px;border-radius:12px;vertical-align:-10px;margin-right:10px">__NOM__</h1><div class="sous">Régie de la chaîne</div>
 <button id="installer" style="display:none;margin-top:10px;padding:9px 16px;font-size:14px;font-weight:700;background:var(--jaune);color:#111">📲 Installer l'application</button></header>
-<nav class="onglets"><button class="onglet actif" data-o="accueil">🏠 Accueil</button><button class="onglet" data-o="videos">🎬 Vidéos</button><button class="onglet" data-o="tiktok">🎵 TikTok</button><button class="onglet" data-o="stats">📊 Stats</button><button class="onglet" data-o="config">⚙️ Réglages</button></nav>
+<nav class="onglets"><button class="onglet actif" data-o="accueil"><span class="ic">🏠</span><span class="nom">Accueil</span></button><button class="onglet" data-o="videos"><span class="ic">🎬</span><span class="nom">Vidéos</span></button><button class="onglet" data-o="tiktok"><span class="ic">🎵</span><span class="nom">TikTok</span></button><button class="onglet" data-o="stats"><span class="ic">📊</span><span class="nom">Stats</span></button><button class="onglet" data-o="config"><span class="ic">⚙️</span><span class="nom">Réglages</span></button></nav>
 <main>
  <!-- ======================================================== ACCUEIL -->
  <div id="o-accueil">
@@ -729,7 +731,7 @@ $("#toutVoir").onclick=()=>allerOnglet("videos","tout");
 function lireVus(){try{return new Set(JSON.parse(localStorage.getItem("tk_vus")||"[]"))}catch(e){return new Set()}}
 function majPointTk(){                                                     // nouvelle vidéo TikTok pas encore vue : point sur l'onglet + mot dans l'accueil
   const vus=lireVus(), neuves=DATA.filter(v=>v.origine==="tiktok"&&!vus.has(v.fichier)&&(Date.now()-new Date(v.date).getTime())<4*86400000);
-  const b=document.querySelector('.onglet[data-o="tiktok"]'); if(b) b.textContent="🎵 TikTok"+(neuves.length?" 🔴":"");
+  const b=document.querySelector('.onglet[data-o="tiktok"]'); if(b) b.querySelector(".ic").textContent="🎵"+(neuves.length?"🔴":"");   // point rouge à côté de l'icône (le nom tient dans sa case)
   const z=$("#nouveauTk"); if(z){z.style.display=neuves.length?"":"none"; z.innerHTML=neuves.length?`🎵 <b>${neuves.length} nouvelle${neuves.length>1?"s":""} vidéo${neuves.length>1?"s":""} TikTok</b> prête${neuves.length>1?"s":""} : « ${neuves[0].titre.replace(/[<>&]/g,"")} » <button class="second" style="flex:none;padding:8px 12px" onclick="allerOnglet('tiktok')">Voir</button>`:""}
 }
 function marquerVusTk(){try{const vus=lireVus(); DATA.filter(v=>v.origine==="tiktok").forEach(v=>vus.add(v.fichier)); localStorage.setItem("tk_vus",JSON.stringify([...vus].slice(-300)))}catch(e){} majPointTk()}
