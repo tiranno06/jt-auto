@@ -1,51 +1,51 @@
 {
- "date": "2026-10-17",
+ "date": "2026-10-24",
  "sources": "kyutai,chatterbox",
  "roles": {
   "presentateur": [
    {
     "moteur": "kyutai",
+    "voix": "cml-tts/fr/296_1028_000022-0001_enhanced.wav",
+    "genre": "h",
+    "f0": 140,
+    "score": 8.17
+   },
+   {
+    "moteur": "kyutai",
     "voix": "cml-tts/fr/1406_1028_000009-0003_enhanced.wav",
     "genre": "h",
-    "f0": 101,
-    "score": 7.49
+    "f0": 114,
+    "score": 7.55
    },
    {
     "moteur": "kyutai",
     "voix": "cml-tts/fr/2216_1745_000007-0001_enhanced.wav",
     "genre": "h",
-    "f0": 125,
-    "score": 7.44
-   },
-   {
-    "moteur": "kyutai",
-    "voix": "cml-tts/fr/296_1028_000022-0001_enhanced.wav",
-    "genre": "h",
-    "f0": 150,
-    "score": 7.41
+    "f0": 131,
+    "score": 7.45
    }
   ],
   "invite": [
    {
     "moteur": "kyutai",
+    "voix": "cml-tts/fr/1406_1028_000009-0003_enhanced.wav",
+    "genre": "h",
+    "f0": 114,
+    "score": 7.55
+   },
+   {
+    "moteur": "kyutai",
     "voix": "cml-tts/fr/2216_1745_000007-0001_enhanced.wav",
     "genre": "h",
-    "f0": 125,
-    "score": 7.44
+    "f0": 131,
+    "score": 7.45
    },
    {
     "moteur": "kyutai",
-    "voix": "cml-tts/fr/296_1028_000022-0001_enhanced.wav",
+    "voix": "cml-tts/fr/2114_1656_000053-0001_enhanced.wav",
     "genre": "h",
-    "f0": 150,
-    "score": 7.41
-   },
-   {
-    "moteur": "kyutai",
-    "voix": "cml-tts/fr/1770_1028_000036-0002_enhanced.wav",
-    "genre": "h",
-    "f0": 134,
-    "score": 7.36
+    "f0": 123,
+    "score": 6.71
    }
   ],
   "envoyee": [
@@ -53,22 +53,22 @@
     "moteur": "kyutai",
     "voix": "cml-tts/fr/2154_2576_000020-0003_enhanced.wav",
     "genre": "f",
-    "f0": 206,
-    "score": 7.48
+    "f0": 184,
+    "score": 7.17
    },
    {
     "moteur": "kyutai",
-    "voix": "cml-tts/fr/3267_1902_000075-0001_enhanced.wav",
+    "voix": "cml-tts/fr/2223_1745_000009-0002_enhanced.wav",
     "genre": "f",
-    "f0": 259,
-    "score": 7.3
+    "f0": 179,
+    "score": 7.13
    },
    {
     "moteur": "kyutai",
     "voix": "cml-tts/fr/10087_11650_000028-0002_enhanced.wav",
     "genre": "f",
-    "f0": 232,
-    "score": 7.21
+    "f0": 206,
+    "score": 7.08
    }
   ]
  }

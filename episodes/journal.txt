@@ -1,70 +1,78 @@
 Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, ElevenLabs epuise — IA utilisée : mistral
-Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @same_same53, @charly.bse, @kodanimation, @motiontoonz, @vignianimation, @vincedessine, @gebutaw
-Profil TikTok @motiontoonz : 39 vidéo(s) jamais utilisée(s)
-Profil TikTok @vincedessine : 38 vidéo(s) jamais utilisée(s)
-Vidéo depuis TikTok : https://www.tiktok.com/@motiontoonz/video/7692426082045152545
-  son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 61.1 s, compte d'origine @motiontoonz
-[ WARN:0@13.830] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
-  image de la vidéo : 28 plans (≈ 2.2 s chacun) ; cadrages : très serré 0 %, serré 4 %, moyen 0 %, large 95 % ; caméra : fixe 41 %, recul 2 %, epaule 56 % ; 1 personne(s) à l'écran : aucun visage repéré ; agitation 0.46 ; lumière jour ; fond [242, 240, 238]
-  isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
-  transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
-Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-  voix re-séparées par leur empreinte (ECAPA) : 2 voix (netteté 0.10)
-  29 répliques, voix : {'speaker_0': 184, 'speaker_1': 248}
-  son de la vidéo : 2 voix [184 Hz (?, 38 %), 248 Hz (f, 62 %)], 6.9 mots/s, blancs 0.09 s, 17 coupure(s) de parole, dynamique 16.3 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
-  IA gemini indisponible (The read operation timed out) : on passe à la suivante
-  scène reconstituée : Un client insatisfait dans un restaurant exprime son mécontentement face à une viande mal cuite, tandis qu'un serveur tente de gérer la situation avec diplomatie.
-  casting : speaker_0 → Jojo, speaker_1 → Kévin
-  Claude a réattribué 9 réplique(s) à la bonne personne (voix proches)
-Sketch : « QUELLE CUISSON POUR LA VIANDE? », 29 répliques
-  décor 0 : restaurant interior, wooden tables, chairs, plates with food, wine bot
-  décor 1 : restaurant kitchen view, chefs in action, cooking tools, meat on grill
-montage : 59 plans (0.0:large>pre/coupe 1.0:epaule>pre/glisse 1.5:moyen>pre/glisse 2.9:tres_serre>pre/glisse 4.1:large>inv/coupe 5.4:epaule>inv/glisse 6.0:moyen>inv/glisse 7.3:serre>inv/glisse 9.0:tres_serre>pre/coupe 10.1:moyen>inv/coupe 11.4:large>pre/coupe 12.2:tres_serre>pre/glisse 13.5:serre>inv/coupe 14.5:tres_serre>inv/glisse 15.6:epaule>pre/coupe 16.5:tres_serre>inv/coupe 17.7:serre>inv/glisse 18.7:large>pre/file 19.3:moyen>inv/glisse 20.2:epaule>inv/glisse 22.5:large>inv/glisse 23.9:tres_serre>inv/glisse 25.0:moyen>inv/glisse 26.3:large>pre/coupe 28.0:tres_serre>inv/file 29.1:moyen>pre/coupe 29.5:serre>inv/file 30.1:large>inv/zoom 31.3:large>pre/file 32.3:serre>pre/glisse 33.3:moyen>pre/glisse 34.2:large>inv/coupe 34.9:epaule>inv/glisse 35.4:tres_serre>pre/coupe 36.6:serre>pre/glisse 37.2:epaule>inv/coupe 38.3:moyen>inv/zoom 39.1:large>pre/coupe 40.0:large>inv/coupe 41.3:epaule>inv/glisse 42.1:tres_serre>pre/file 43.0:moyen>inv/coupe 43.7:epaule>inv/glisse 44.9:moyen>inv/glisse 45.9:epaule>pre/glisse 46.8:moyen>pre/glisse 48.2:epaule>pre/glisse 49.5:tres_serre>inv/coupe 50.4:moyen>pre/coupe 51.2:epaule>inv/coupe 52.2:large>inv/glisse 52.8:moyen>pre/coupe 53.9:moyen>inv/coupe 55.2:serre>pre/glisse 56.2:epaule>pre/glisse 57.2:moyen>pre/glisse 58.7:moyen>inv/glisse 59.4:tres_serre>pre/coupe 60.5:serre>inv/glisse)
-studio : soir, lieux ['restaurant', 'restaurant'], tenues presentateur=chemise, invite=tshirt, 6 figurant(s), ambiances ['neon', 'poussiere', 'vapeur'] ; plans large/fixe moyen/fixe large/epaule serre/epaule large/fixe tres_serre/zoom_choc epaule/fixe moyen/fixe epaule/fixe large/epaule large/recul serre/fixe large/fixe large/epaule epaule/fixe epaule/fixe large/fixe large/travelling tres_serre/zoom_choc moyen/epaule epaule/fixe epaule/fixe moyen/epaule epaule/fixe moyen/epaule moyen/epaule epaule/fixe moyen/avance serre/avance
-cartoon : durée 64.6 s, 29 répliques, 2 scène(s), personnages ['presentateur', 'invite']
-Contrôle image : 24 défaut(s) — 6.25 s tete_coupee (presentateur), 18.75 s tete_coupee (presentateur), 25.25 s tete_coupee (presentateur), 29.25 s tete_coupee (invite), 30.25 s tete_coupee (presentateur), 33.75 s tete_coupee (invite), 38.75 s tete_coupee (presentateur), 42.25 s tete_coupee (presentateur)
-  image 0/3878 (4 processeurs)
-  image 300/3878
-  image 600/3878
-  image 900/3878
-  image 1200/3878
-  image 1500/3878
-  image 1800/3878
-  image 2100/3878
-  image 2400/3878
-  image 2700/3878
-  image 3000/3878
-  image 3300/3878
-  image 3600/3878
-Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury qualité (ia) : 3.4/10 — Humoriste 3.5/10 : 59.7 s La punchline finale est attribuée visuellement au serveur au lieu du client furieux, et sans aucun zoom choc pour marquer la chute.; 18 s La dispute verbale est intense mais manque cruellement de bruitages d'impact pour dynamiser les punchlines absurdes.; 34.5 s Le refus sec du serveur manque de réaction physique marquée de stupéfaction chez le client. | Réalisateur 3.0/10 : 59.7 s Faux raccord majeur à l'image 15 : c'est le présentateur qui est cadré et dont la bouche bouge alors que c'est le client qui dit la phrase.; 3.6 s Cadrage raté : le sommet du crâne du présentateur est tronqué par le bord supérieur de l'écran sur plusieurs plans (images 2, 3, 12, 15).; 25.2 s À l'image 6, un personnage fantôme flotte juste derrière la tête de la cliente, créant une superposition incohérente.; 6.2 s tête de presentateur coupée par le bord de l'image (moyen); 18.8 s tête
-Manque par rapport à la vidéo d'origine : Le client dans l'original est un jeune homme musclé en débardeur 'REQUIN MUSCU', alors que chez nous c'est une petite femme avec des lunettes. ; L'action originale se déroule en terrasse d'une brasserie parisienne réputée (Café de Flore) avec un serveur en gilet noir et nœud papillon tenant un TPE, ce qu ; La chute à 60s est filmée sur le client furieux dans l'original, tandis que chez nous elle cadre le serveur par erreur.
-Corrections du jury (tour 1) : plan serre sur la réplique 3 ; plan moyen sur la réplique 7 ; plan serre sur la réplique 10
-montage : 52 plans (0.0:large>pre/coupe 1.0:epaule>pre/glisse 1.5:moyen>pre/glisse 2.9:tres_serre>pre/glisse 4.1:serre>inv/coupe 7.3:moyen>inv/glisse 9.0:serre>inv/glisse 11.4:large>pre/coupe 12.2:tres_serre>pre/glisse 13.5:serre>inv/coupe 14.5:tres_serre>inv/glisse 15.6:moyen>pre/coupe 19.3:moyen>inv/glisse 20.2:epaule>inv/glisse 22.5:large>inv/glisse 23.9:serre>inv/glisse 26.3:large>pre/coupe 28.0:tres_serre>inv/file 29.1:moyen>pre/coupe 29.5:serre>inv/file 30.1:large>inv/zoom 31.3:large>pre/file 32.3:serre>pre/glisse 33.3:moyen>pre/glisse 34.2:large>inv/coupe 34.9:epaule>inv/glisse 35.4:tres_serre>pre/coupe 36.6:serre>pre/glisse 37.2:epaule>inv/coupe 38.3:moyen>inv/zoom 39.1:large>pre/coupe 40.0:large>inv/coupe 41.3:epaule>inv/glisse 42.1:tres_serre>pre/file 43.0:moyen>inv/coupe 43.7:epaule>inv/glisse 44.9:moyen>inv/glisse 45.9:epaule>pre/glisse 46.8:moyen>pre/glisse 48.2:epaule>pre/glisse 49.5:tres_serre>inv/coupe 50.4:moyen>pre/coupe 51.2:epaule>inv/coupe 52.2:large>inv/glisse 52.8:moyen>pre/coupe 53.9:moyen>inv/coupe 55.2:serre>pre/glisse 56.2:epaule>pre/glisse 57.2:moyen>pre/glisse 58.7:moyen>inv/glisse 59.4:tres_serre>pre/coupe 60.5:serre>inv/glisse)
-studio : soir, lieux ['restaurant', 'restaurant'], tenues presentateur=chemise, invite=tshirt, 6 figurant(s), ambiances ['neon', 'poussiere', 'vapeur'] ; plans large/fixe moyen/fixe large/epaule serre/epaule large/fixe tres_serre/zoom_choc epaule/fixe moyen/fixe epaule/fixe large/epaule large/recul serre/fixe large/fixe large/epaule epaule/fixe epaule/fixe large/fixe large/travelling tres_serre/zoom_choc moyen/epaule epaule/fixe epaule/fixe moyen/epaule epaule/fixe moyen/epaule moyen/epaule epaule/fixe moyen/avance serre/avance
-cartoon : durée 64.6 s, 29 répliques, 2 scène(s), personnages ['presentateur', 'invite']
-Contrôle image : 21 défaut(s) — 29.25 s tete_coupee (invite), 30.25 s tete_coupee (presentateur), 33.75 s tete_coupee (invite), 38.75 s tete_coupee (presentateur), 42.25 s tete_coupee (presentateur), 43.25 s tete_coupee (presentateur), 45.25 s tete_coupee (presentateur), 45.75 s tete_coupee (presentateur)
-  image 0/3878 (4 processeurs)
-  image 300/3878
-  image 600/3878
-  image 900/3878
-  image 1200/3878
-  image 1500/3878
-  image 1800/3878
-  image 2100/3878
-  image 2400/3878
-  image 2700/3878
-  image 3000/3878
-  image 3300/3878
-  image 3600/3878
-Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury qualité (ia) : 5.1/10 — Humoriste 5.5/10 : 3.6 s Manque d'impact comique sur la réaction initiale du serveur.; 59.7 s Chute finale sans dynamisme ni zoom percutant. | Réalisateur 5.0/10 : 0.4 s Cadrage trop serré en haut, tête coupée par le bord supérieur.; 9.5 s Alternance brutale avec fond rayé psychédélique hors contexte.; 29.2 s tête de invite coupée par le bord de l'image (moyen); 30.2 s tête de presentateur coupée par le bord de l'image (large); 33.8 s tête de invite coupée par le bord de l'image (moyen) | Directeur artistique 4.8/10 : 0.4 s Le client d'origine est un jeune homme musclé en débardeur assis en terrasse.; 3.6 s Le serveur devrait avoir la tenue typique garçon de café parisien. | Ingénieur du son 5.2/10 : 19.8 s Aucun bruitage rythmique sur les moments d'énervement.; 59.7 s Fin abrupte sans accent sonore de conclusion. | Spectateur TikTok 5.0/10 : 0.4 s Accroche visuelle confuse avec trop de 
-Manque par rapport à la vidéo d'origine : Le client est un homme musclé en débardeur 'Requin Muscu', pas une femme à lunettes. ; La scène originale se déroule en terrasse d'un bistrot parisien (Café de Flore) et non en salle fermée. ; Le serveur porte un gilet noir, nœud papillon et tient un terminal de commande TPE. ; Le client est assis à table face au serveur debout.
-Version corrigée gardée : 3.4 → 5.1/10
-Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = mistral ×1, gemini ×2, voix = tiktok, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 29599, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 28}
-OK : sortie/2026-10-24_09h41_emission.mp4 (65 s)
+Sketch d'essai : tests/sketch_C_clash.json
+Sketch : « 3000 PROFS EXPRESS », 8 répliques
+Casting des voix (sources : kyutai,chatterbox)…
+  kyutai     cml-tts/fr/10087_11650_000028-0002_enh genre f f0   206 {'sim': 1.0, 'blanc': 0.14, 'debit': 0.86, 'mos': 2.89, 'expr': 3.4} OK score 7.08
+  kyutai     cml-tts/fr/10177_10625_000134-0003_enh genre f f0   197 {'sim': 1.0, 'blanc': 0.1, 'debit': 0.75, 'mos': 2.56, 'expr': 4.2} refusée score 6.65
+  kyutai     cml-tts/fr/10179_11051_000005-0001_enh genre f f0   286 {'sim': 1.0, 'blanc': 0.06, 'debit': 0.8, 'mos': 2.56, 'expr': 2.5} refusée score 6.19
+  kyutai     cml-tts/fr/12080_11650_000047-0001_enh genre f f0   232 {'sim': 1.0, 'blanc': 0.06, 'debit': 0.73, 'mos': 2.77, 'expr': 3.3} OK score 6.71
+  kyutai     cml-tts/fr/12205_11650_000004-0002_enh genre f f0   187 {'sim': 1.0, 'blanc': 0.0, 'debit': 0.8, 'mos': 2.96, 'expr': 2.9} OK score 6.92
+  kyutai     cml-tts/fr/12977_10625_000037-0001_enh genre f f0   222 {'sim': 1.0, 'blanc': 0.1, 'debit': 0.81, 'mos': 2.32, 'expr': 3.5} refusée score 6.21
+  kyutai     cml-tts/fr/1406_1028_000009-0003_enhan genre h f0   114 {'sim': 1.0, 'blanc': 0.24, 'debit': 0.96, 'mos': 3.09, 'expr': 3.6} OK score 7.55
+  kyutai     cml-tts/fr/1591_1028_000108-0004_enhan genre f f0   206 {'sim': 1.0, 'blanc': 0.08, 'debit': 0.71, 'mos': 2.3, 'expr': 2.4} refusée score 5.64
+  kyutai     cml-tts/fr/1770_1028_000036-0002_enhan genre h f0   130 {'sim': 1.0, 'blanc': 0.08, 'debit': 0.75, 'mos': 2.58, 'expr': 4.2} refusée score 6.68
+  kyutai     cml-tts/fr/2114_1656_000053-0001_enhan genre h f0   123 {'sim': 1.0, 'blanc': 0.1, 'debit': 0.77, 'mos': 2.76, 'expr': 3.2} OK score 6.71
+  kyutai     cml-tts/fr/2154_2576_000020-0003_enhan genre f f0   184 {'sim': 1.0, 'blanc': 0.1, 'debit': 0.84, 'mos': 2.96, 'expr': 3.4} OK score 7.17
+  kyutai     cml-tts/fr/2216_1745_000007-0001_enhan genre h f0   131 {'sim': 1.0, 'blanc': 0.0, 'debit': 0.86, 'mos': 3.0, 'expr': 5.1} OK score 7.45
+  kyutai     cml-tts/fr/2223_1745_000009-0002_enhan genre f f0   179 {'sim': 1.0, 'blanc': 0.08, 'debit': 0.75, 'mos': 2.88, 'expr': 4.1} OK score 7.13
+  kyutai     cml-tts/fr/2465_1943_000152-0002_enhan genre f f0   214 {'sim': 1.0, 'blanc': 0.14, 'debit': 0.81, 'mos': 2.95, 'expr': 2.6} OK score 6.81
+  kyutai     cml-tts/fr/296_1028_000022-0001_enhanc genre h f0   140 {'sim': 1.0, 'blanc': 0.08, 'debit': 0.85, 'mos': 3.49, 'expr': 4.2} OK score 8.17
+  kyutai     cml-tts/fr/3267_1902_000075-0001_enhan genre f f0   241 {'sim': 1.0, 'blanc': 0.06, 'debit': 0.7, 'mos': 2.74, 'expr': 3.1} OK score 6.52
+  chatterbox presentateur                           genre h f0   134 {'sim': 0.94, 'blanc': 0.02, 'debit': 0.88, 'mos': 2.48, 'expr': 5.2} refusée score 5.75
+  chatterbox invite                                 genre h f0    92 {'sim': 1.0, 'blanc': 0.04, 'debit': 0.71, 'mos': 2.58, 'expr': 9.0} refusée score 5.93
+  chatterbox envoyee                                genre f f0   204 {'sim': 1.0, 'blanc': 0.16, 'debit': 0.81, 'mos': 2.24, 'expr': 4.0} refusée score 5.55
+  -> presentateur : kyutai:cml-tts/fr/296_1028_000022-0001_enhanced.wav, kyutai:cml-tts/fr/1406_1028_000009-0003_enhanced.wav, kyutai:cml-tts/fr/2216_1745_000007-0001_enhanced.wav
+  -> invite : kyutai:cml-tts/fr/1406_1028_000009-0003_enhanced.wav, kyutai:cml-tts/fr/2216_1745_000007-0001_enhanced.wav, kyutai:cml-tts/fr/2114_1656_000053-0001_enhanced.wav
+  -> envoyee : kyutai:cml-tts/fr/2154_2576_000020-0003_enhanced.wav, kyutai:cml-tts/fr/2223_1745_000009-0002_enhanced.wav, kyutai:cml-tts/fr/10087_11650_000028-0002_enhanced.wav
+  voix sur mesure des personnages en remplaçantes
+  voix 3 (envoyee, kyutai:cml-tts/fr/2154_2576_000020-00, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.94, 'mos': 3.06} OK
+  voix 7 (envoyee, kyutai:cml-tts/fr/2154_2576_000020-00, prise 1) {'sim': 1.0, 'blanc': 0.1, 'debit': 0.65, 'mos': 2.74} OK
+  voix 4 (invite, kyutai:cml-tts/fr/1406_1028_000009-00, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.79, 'mos': 2.55} refaite
+  voix 6 (invite, kyutai:cml-tts/fr/1406_1028_000009-00, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.93, 'mos': 2.94} OK
+  voix 4 (invite, kyutai:cml-tts/fr/1406_1028_000009-00, prise 2) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.88, 'mos': 2.59} refaite
+  voix 4 (invite, kyutai:cml-tts/fr/1406_1028_000009-00, prise 3) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.02, 'mos': 2.9} OK
+    elevenlabs PjAkkDaPt1wolu0EMUTN : HTTP 401 {"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credits remaining, while 24 credits are required for this request.","status
+    ElevenLabs indisponible (crédit ou accès) : passage aux voix gratuites
+  narrateur : la voix elevenlabs:PjAkkDaPt1wolu0EMUTN échoue, passage à la voix de remplacement
+  voix 0 (narrateur, kyutai:cml-tts/fr/2223_1745_000009-00, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.36, 'mos': 3.07} OK
+  voix 1 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 0.95, 'blanc': 0.12, 'debit': 0.87, 'mos': 3.14} OK
+  voix 2 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 0.86, 'blanc': 0.0, 'debit': 1.2, 'mos': 3.45} OK
+  voix 5 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.9, 'mos': 3.62} OK
+  voix 8 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.83, 'mos': 2.77} OK
+Voix : Kyutai TTS (CC BY 4.0), voix CML-TTS (CC BY 4.0)
+montage : 17 plans (0.1:large>nar/coupe 3.1:serre>pre/glisse 7.4:tres_serre>inv/coupe 9.5:epaule>pre/glisse 11.1:moyen>pre/glisse 12.5:serre>env/glisse 15.8:tres_serre>pre/coupe 17.4:serre>inv/coupe 20.4:tres_serre>pre/coupe 22.0:moyen>pre/glisse 22.5:serre>inv/glisse 23.6:tres_serre>inv/glisse 27.2:tres_serre>env/coupe 28.7:moyen>env/zoom 31.8:tres_serre>pre/coupe 33.2:serre>pre/glisse 37.0:tres_serre>inv/coupe)
+studio : matin, lieux ['classe'], tenues presentateur=gilet, envoyee=pull, invite=chemise, 0 figurant(s), ambiances ['pluie', 'poussiere'] ; plans large/fixe serre/fixe epaule/fixe serre/fixe serre/epaule moyen/recul tres_serre/avance tres_serre/fixe serre/avance
+cartoon : durée 10.0 s, 9 répliques, 1 scène(s), personnages ['presentateur', 'envoyee', 'invite']
+Traceback (most recent call last):
+  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 318, in main
+    duree = cartoon.rendre(sk, base + ".mp4", audios, mots=mots, decors=decors, mini=fmt == "mini")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/jt-auto/jt-auto/moteur/cartoon.py", line 1501, in rendre
+    b = vers_mix(a); s0 = int(q["deb"] * SRM); mix[s0:s0 + len(b)] += b[:n - s0]
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: operands could not be broadcast together with shapes (0,2) (124820,2) (0,2) 
+Moteur cartoon en échec (operands could not be broadcast together with shapes (0,2) (124820,2) (0,2) ) : nouvel essai en rendu simple, sans décor IA.
+cartoon : durée 10.0 s, 9 répliques, 1 scène(s), personnages ['presentateur', 'envoyee', 'invite']
+Traceback (most recent call last):
+  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 318, in main
+    duree = cartoon.rendre(sk, base + ".mp4", audios, mots=mots, decors=decors, mini=fmt == "mini")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/jt-auto/jt-auto/moteur/cartoon.py", line 1501, in rendre
+    b = vers_mix(a); s0 = int(q["deb"] * SRM); mix[s0:s0 + len(b)] += b[:n - s0]
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: operands could not be broadcast together with shapes (0,2) (124820,2) (0,2) 
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 439, in <module>
+    main()
+  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 375, in main
+    duree = cartoon.rendre(sk, base + ".mp4", audios, mots=mots, decors={}, mini=fmt == "mini")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/jt-auto/jt-auto/moteur/cartoon.py", line 1501, in rendre
+    b = vers_mix(a); s0 = int(q["deb"] * SRM); mix[s0:s0 + len(b)] += b[:n - s0]
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: operands could not be broadcast together with shapes (0,2) (124820,2) (0,2) 

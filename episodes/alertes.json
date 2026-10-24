@@ -1,11 +1,5 @@
 [
  {
-  "quand": "2026-10-16T15:25+00:00",
-  "titre": "Crédit Claude épuisé ?",
-  "texte": "Claude ne répond pas : la vidéo est fabriquée avec un sketch de secours déjà écrit. Rechargez le crédit sur console.anthropic.com pour revenir aux sketchs écrits par Claude.",
-  "lien": ""
- },
- {
   "quand": "2026-10-16T15:29+00:00",
   "titre": "🎬 Nouvelle vidéo prête",
   "texte": "« Le buffet de l'hôtel » — note 0/100. À vérifier dans l'appli.",
@@ -177,6 +171,12 @@
   "quand": "2026-10-24T08:52+00:00",
   "titre": "✅ Vidéo envoyée à TikTok",
   "texte": "2026-10-24_09h41_emission.mp4",
+  "lien": ""
+ },
+ {
+  "quand": "2026-10-24T13:14+00:00",
+  "titre": "⚠️ Échec de fabrication",
+  "texte": "    b = vers_mix(a); s0 = int(q[\"deb\"] * SRM); mix[s0:s0 + len(b)] += b[:n - s0]\n                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: operands could not be broadcast together with shapes (0,2) (124820,2) (0,2) ",
   "lien": ""
  }
 ]
