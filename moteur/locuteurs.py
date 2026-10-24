@@ -209,3 +209,78 @@ def tours_de_parole(mots, s16=None):
         for m in c["mots"]: m["voix"] = f"speaker_{l}"
     print(f"  voix trop proches : répliques réparties d'après le fil du dialogue (questions, réponses{', papa / fiston' if enfant or parent else ''})", flush=True)
     return mots
+
+
+def _fenetres(s16, t0, t1, enc, long_=0.8, pas=0.2):
+    """Empreintes sur une fenêtre glissante (0,8 s tous les 0,2 s) : [(centre, vecteur normé)]."""
+    out = []
+    t = t0
+    while t + long_ / 2 <= t1 + 0.2:
+        a, b = max(0, int((t - long_ / 2) * 16000)), int((t + long_ / 2) * 16000); seg = s16[a:b]
+        if len(seg) >= int(0.5 * 16000):
+            if enc is not None:
+                import torch
+                with torch.no_grad(): e = enc.encode_batch(torch.tensor(seg, dtype=torch.float32)[None]).squeeze().numpy()
+            else:
+                e = empreinte_mfcc(seg)
+                e = None if e is None else e[list(range(19)) + [38, 39, 40]]
+            if e is not None: out.append((t, np.asarray(e, np.float64)))
+        t += pas
+    return out
+
+
+_P = {"son": 3.0, "avis": 0.35, "pause": 0.6, "court": 1.4, "colle": 3.5}   # réglages du fil des voix (banc d'essai)
+
+
+def affiner(mots, sig, sr=SR):
+    """Qui parle, MOT PAR MOT (gratuit) : la transcription colle parfois la fin d'une phrase de l'un au début de celle de l'autre,
+    ou range un morceau sur la mauvaise voix ; la voix « saute » alors d'un personnage à l'autre. On compare chaque mot (empreinte
+    vocale autour du mot) à l'empreinte moyenne de chaque voix, puis on choisit le fil le plus probable (Viterbi) : changer de
+    personne coûte cher au milieu d'une phrase, peu après une pause ou une question. Chaque mot reçoit aussi sa « certitude »
+    (m["sure"], 0 à 1) : sert à refuser qu'une IA qui ne lit que le texte déplace une réplique dont la voix est sûre."""
+    voix = sorted({m["voix"] for m in mots})
+    if len(voix) < 2 or len(mots) < 6 or os.environ.get("AFFINER_VOIX", "1") == "0": return mots
+    from scipy.signal import resample_poly
+    s16 = resample_poly(np.asarray(sig, np.float32), 320, 441) if sr == 22050 else np.asarray(sig, np.float32)
+    enc = _ecapa()
+    F = _fenetres(s16, mots[0]["s"], mots[-1]["e"], enc)
+    if len(F) < 6: return mots
+    T = np.array([t for t, _ in F]); X = np.array([e for _, e in F])
+    if enc is None: X = (X - X.mean(0)) / (X.std(0) + 1e-6)
+    X = X / (np.linalg.norm(X, axis=1, keepdims=True) + 1e-9)
+    # empreinte de chaque mot : fenêtres centrées dans le mot (sinon la plus proche)
+    W = []
+    for m in mots:
+        idx = np.where((T >= m["s"] - 0.05) & (T <= m["e"] + 0.05))[0]
+        if not len(idx): idx = [int(np.argmin(np.abs(T - (m["s"] + m["e"]) / 2)))]
+        w = X[idx].mean(0); W.append(w / (np.linalg.norm(w) + 1e-9))
+    W = np.array(W)
+    C = []                                                                 # empreinte moyenne de chaque voix (mots les plus longs)
+    for v in voix:
+        sel = [i for i, m in enumerate(mots) if m["voix"] == v]
+        if len(sel) < 3: return mots
+        c = W[sel].mean(0); C.append(c / (np.linalg.norm(c) + 1e-9))
+    C = np.array(C)
+    if float(C[0] @ C[1]) > 0.97 and len(voix) == 2: return mots           # deux « voix » identiques : le son ne tranche pas
+    S = W @ C.T                                                            # ressemblance de chaque mot à chaque voix
+    S = (S - S.mean(1, keepdims=True)) / (S.std() + 1e-9)
+    k = len(voix); n = len(mots); ini = np.array([voix.index(m["voix"]) for m in mots])
+    cout = np.zeros((n, k)); arr = np.zeros((n, k), int)
+    for i in range(n):
+        d = max(0.05, min(0.6, mots[i]["e"] - mots[i]["s"]))
+        e = S[i] * _P["son"] * d / 0.3 + _P["avis"] * (np.arange(k) == ini[i])   # le son du mot + un peu l'avis de départ
+        if i == 0: cout[i] = e; continue
+        pause = mots[i]["s"] - mots[i - 1]["e"]; fin = re.search(r"[.!?…]$", mots[i - 1]["w"]) is not None
+        pen = _P["pause"] if (pause > 0.35 or (fin and pause > 0.08)) else _P["court"] if (pause > 0.15 or fin) else _P["colle"]
+        for j in range(k):
+            cand = cout[i - 1] - pen * (np.arange(k) != j)
+            arr[i, j] = int(np.argmax(cand)); cout[i, j] = cand[arr[i, j]] + e[j]
+    lab = [int(np.argmax(cout[-1]))]
+    for i in range(n - 1, 0, -1): lab.append(arr[i, lab[-1]])
+    lab = lab[::-1]
+    change = sum(1 for i in range(n) if lab[i] != ini[i])
+    for i, m in enumerate(mots):
+        m["voix"] = voix[lab[i]]
+        tri = np.sort(S[i])[::-1]; m["sure"] = round(float(min(1.0, max(0.0, (S[i][lab[i]] - (tri[1] if tri[0] == S[i][lab[i]] else tri[0]) + 0.5) / 1.5))), 2)
+    if change: print(f"  voix vérifiées mot par mot : {change} mot(s) remis sur la bonne voix", flush=True)
+    return mots
