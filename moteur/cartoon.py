@@ -1498,7 +1498,9 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False)
         mix[:len(b)] += b[:n]
     else:
         for q, a in zip(ph, audios):
-            b = vers_mix(a); s0 = int(q["deb"] * SRM); mix[s0:s0 + len(b)] += b[:n - s0]
+            s0 = int(q["deb"] * SRM)
+            if s0 >= n: continue                                           # aperçu 10 s : réplique après la coupure
+            b = vers_mix(a)[:n - s0]; mix[s0:s0 + len(b)] += b
     for t0_, t1_, mode_, _sc in APPEL:                                     # voix au téléphone pendant les plans d'écoute (idée 16)
         if mode_ != "ecoute": continue
         a_, b_ = int(t0_ * SRM), min(n, int(t1_ * SRM))
