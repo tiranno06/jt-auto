@@ -174,9 +174,9 @@
   "lien": ""
  },
  {
-  "quand": "2026-10-24T13:14+00:00",
+  "quand": "2026-10-24T13:23+00:00",
   "titre": "⚠️ Échec de fabrication",
-  "texte": "    b = vers_mix(a); s0 = int(q[\"deb\"] * SRM); mix[s0:s0 + len(b)] += b[:n - s0]\n                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: operands could not be broadcast together with shapes (0,2) (124820,2) (0,2) ",
+  "texte": "    b = vers_mix(a); s0 = int(q[\"deb\"] * SRM); mix[s0:s0 + len(b)] += b[:n - s0]\n                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: operands could not be broadcast together with shapes (0,2) (53068,2) (0,2) ",
   "lien": ""
  }
 ]
