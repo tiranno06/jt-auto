@@ -30,8 +30,10 @@ def bloque(jobs):
 
 
 def rang(r):
-    """Ordre de passage : heure de lancement de la tentative (une fabrication relancée par le garde repasse en fin de file), puis n°."""
-    return (str(r.get("run_started_at") or r.get("created_at") or ""), int(r["id"]))
+    """Ordre de passage : une reprise de fabrication en pause passe en premier ; sinon heure de lancement de la tentative (une
+    fabrication relancée par le garde repasse en fin de file), puis n°."""
+    prio = "0" if str(r.get("display_title") or "").startswith("Reprise") else "1"
+    return (prio, str(r.get("run_started_at") or r.get("created_at") or ""), int(r["id"]))
 
 
 def devant(runs, moi, jobs_de):

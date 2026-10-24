@@ -18,6 +18,7 @@ LOCAL = os.environ.get("DESSIN_LOCAL")                                     # ess
 def actif(nf):
     if os.environ.get("DESSIN_PARTAGE", "1") == "0" or os.environ.get("AIDE_DESSIN") == "1": return False
     if nf < int(os.environ.get("PARTAGE_MIN_IMAGES") or 1200): return False
+    if (os.environ.get("RENDU") or "") == "essai_pause": return False      # essai de la pause/reprise : une seule machine
     return bool(LOCAL) or (bool(os.environ.get("GH_TOKEN") or os.environ.get("GITHUB_TOKEN")) and bool(os.environ.get("GITHUB_REPOSITORY"))
                            and bool(os.environ.get("GITHUB_SHA")))
 
@@ -86,7 +87,8 @@ def menage(rel, garder=""):
     """Efface les morceaux de plus de 6 h (fabrications coupées) et ceux de ce dessin une fois recollé."""
     for a in fichiers(rel):
         import calendar
-        vieux = time.time() - calendar.timegm(time.strptime(a["created_at"], "%Y-%m-%dT%H:%M:%SZ")) > 6 * 3600
+        age = time.time() - calendar.timegm(time.strptime(a["created_at"], "%Y-%m-%dT%H:%M:%SZ"))
+        vieux = age > (3 * 86400 if a["name"].startswith("s") else 6 * 3600)   # fabrication en pause (reprise.py) : gardée 3 jours
         if vieux or (garder and a["name"].startswith(garder)): effacer(a)
 
 

@@ -856,6 +856,27 @@ class TestDessinPartage(unittest.TestCase):
         self.assertEqual(os.listdir(d), [])                                                     # release temporaire vidée
 
 
+class TestPauseReprise(unittest.TestCase):
+    def test_sauver_puis_reprendre(self):
+        sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "moteur"))
+        import dessin_partage as DP, reprise as RP
+        d = tempfile.mkdtemp(); ancien = DP.LOCAL; DP.LOCAL = d
+        try:
+            bloc = os.path.join(tempfile.mkdtemp(), "bloc_0_600.mp4"); open(bloc, "wb").write(b"images")
+            ctx = {"phase": "v1", "faits": [(0, 600, bloc)], "sk": {"doublage": {"piste": bloc}}, "base": "sortie/x", "audios": [np.zeros(4, np.float32)]}
+            nom = RP.sauver(ctx, [bloc, None, "/inexistant"])
+            os.environ["CHAINE"] = f"suite:{nom}|2/3"
+            self.assertEqual(RP.demandee(), (nom, "2/3"))
+            S = RP.charger(nom)
+            self.assertEqual(S["phase"], "v1"); self.assertEqual(S["faits"][0][:2], (0, 600))
+            self.assertNotEqual(S["faits"][0][2], bloc); self.assertEqual(open(S["faits"][0][2], "rb").read(), b"images")   # copie locale
+            self.assertEqual(S["sk"]["doublage"]["piste"], S["faits"][0][2])
+            RP.nettoyer(nom); self.assertEqual(os.listdir(d), [])
+        finally:
+            DP.LOCAL = ancien; os.environ.pop("CHAINE", None)
+        self.assertEqual(RP.demandee(), (None, None))
+
+
 class TestRelaisIA(unittest.TestCase):
     def test_bascule_claude_vers_mistral_puis_gemini(self):
         import json as _j, io, urllib.request, urllib.error, reseau

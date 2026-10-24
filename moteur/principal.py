@@ -96,14 +96,29 @@ def lire(p, d):
 def limite_job():
     """Heure (secondes) à laquelle une 2e version du jury doit être finie : limite du job GitHub moins 25 min (vérification,
     archivage, site, historique). Sans DEBUT_JOB (essai sur un ordinateur) : pas de limite."""
+    if (os.environ.get("RENDU") or "") == "essai_pause" and not EN_REPRISE[0]: return __import__("time").time() + 60   # essai : pause tout de suite
     try: return float(os.environ["DEBUT_JOB"]) + (float(os.environ.get("LIMITE_JOB_MIN") or 180) - 25) * 60
     except (KeyError, ValueError): return None
+
+
+EN_REPRISE = [False]                                                       # cette fabrication est la reprise d'une fabrication en pause
 
 
 def main():
     import progression as PR                                               # avancement en direct sur le site (barre de progression)
     PR.TYPE[0] = "tiktok" if (FILIERE == "tiktok" or THEME.startswith("TIKTOK::")) else "sketch"
-    PR.etape(3, "Démarrage du robot", forcer=True)
+    import reprise as RP
+    SUITE_NOM, CHAINE_ORIG = RP.demandee(); S = None                        # reprise d'une fabrication mise en pause (limite de temps)
+    EN_REPRISE[0] = bool(SUITE_NOM)
+    if SUITE_NOM:
+        os.environ["CHAINE"] = CHAINE_ORIG                                 # « 2/3 » d'une chaîne de vidéos TikTok, sinon vide
+        try:
+            S = RP.charger(SUITE_NOM)
+            print(f"Reprise de la fabrication en pause {SUITE_NOM} ({'2e version du jury' if S['phase'] == 'v2' else '1re version'}, "
+                  f"{len(S.get('faits') or [])} bloc(s) d'images déjà dessinés)", flush=True)
+        except Exception as e:
+            print(f"Reprise {SUITE_NOM} impossible ({str(e)[:160]}) : la vidéo est refaite entièrement", flush=True); S = None
+    PR.etape(3, "Reprise de la fabrication" if S else "Démarrage du robot", forcer=True)
     historique = lire("episodes/historique.json", [])
     modal_ok = bool(os.environ.get("MODAL_TOKEN_ID") and os.environ.get("MODAL_TOKEN_SECRET"))
     if modal_ok:
@@ -137,7 +152,7 @@ def main():
         except Exception: pass
     PR.etape(6, "Écoute du son TikTok" if (FILIERE == "tiktok" or THEME.startswith("TIKTOK::")) else "Recherche de l'idée", forcer=True)
     PROFIL_PREP = None                                                     # filière « Sons TikTok » (à part des sketchs) : une vidéo
-    if FILIERE == "tiktok" and not THEME:                                  # au hasard d'un profil de la liste, jamais déjà utilisée
+    if FILIERE == "tiktok" and not THEME and not S:                        # au hasard d'un profil de la liste, jamais déjà utilisée
         import profils_tiktok, doublage
         print(f"Sons TikTok : vidéo tirée des profils {', '.join('@' + p for p in profils_tiktok.liste()) or '(aucun profil réglé)'}", flush=True)
         for url_ in profils_tiktok.choisir(historique):
@@ -151,7 +166,9 @@ def main():
                          "auto": AUTO, "filiere": "tiktok", "note": 0, "titre": "aucun son TikTok utilisable"})
             json.dump(tent[-100:], open(t_, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
             return
-    if PROFIL_PREP:
+    if S:                                                                  # reprise : l'idée / le son déjà choisis
+        candidats = S["candidats"]; tiktok = S.get("tiktok"); SECOURS = S.get("secours", False)
+    elif PROFIL_PREP:
         tiktok = PROFIL_PREP[0]
         candidats = [([{"titre": "Bande son TikTok (profil)", "resume": tiktok, "lien": tiktok, "date": None, "source": "tiktok"}], "tiktok")]
     elif THEME.startswith("TIKTOK::"):                                     # vidéo construite sur la bande son d'une vidéo TikTok
@@ -192,7 +209,9 @@ def main():
     dimanche = datetime.datetime.now(ZoneInfo("Europe/Paris")).weekday() == 6 and os.environ.get("INFOS_DEMAIN", "1") != "0"
     gags = [h.get("running_gag") for h in historique[-15:] if h.get("running_gag")]
     test = os.environ.get("SKETCH_TEST", "").strip()
-    if REFAIRE_MODE in ("voix", "decors"):                                 # mêmes répliques : on refait seulement les voix / les décors
+    if S:                                                                  # reprise : sketch, son et format déjà prêts
+        sk, DOUB, fmt = S["sk"], S["DOUB"], S["fmt"]
+    elif REFAIRE_MODE in ("voix", "decors"):                               # mêmes répliques : on refait seulement les voix / les décors
         sk = SK_ANCIEN; sk["_monte"] = True
         print(f"Refaire ({REFAIRE_MODE}) : « {sk.get('sujet')} », mêmes répliques", flush=True)
     elif tiktok:
@@ -235,24 +254,24 @@ def main():
         print(f"Moteur humoristique : {ecrire.USAGE['appels']} appels Claude, {ecrire.USAGE['entree']} jetons lus, {ecrire.USAGE['sortie']} jetons écrits, {ecrire.USAGE['recherches_web']} recherche(s) web", flush=True)
         titres = next((c[0] for c in candidats if c[0][0]["lien"] and c[0][0]["lien"] in sk.get("sources", [])), titres)
     print(f"Sketch : « {sk['sujet']} », {len(sk['repliques'])} répliques", flush=True)
-    accroche_hist = sk["repliques"][0]["t"] if sk.get("repliques") else ""
+    accroche_hist = S["accroche_hist"] if S else (sk["repliques"][0]["t"] if sk.get("repliques") else "")
     if LOT and serie.etat().get("titre"): sk["serie_titre"] = serie.etat()["titre"]   # l'épisode compte toujours dans la saison
-    num = serie.prochain()[0] if (libre and serie.actif() and sk.get("serie_titre") and not REFAIRE) else None
+    num = S["num"] if S else (serie.prochain()[0] if (libre and serie.actif() and sk.get("serie_titre") and not REFAIRE) else None)
     if num:                                                                # fin d'épisode : rendez-vous pour la suite (série)
         total_ep = len(serie.etat().get("plan") or []) or serie.taille()
         sk["suite"] = f"Épisode {num + 1} bientôt : abonne-toi !" if num < total_ep else "Fin de la saison : abonne-toi !"
-    style_acc = None
-    if not DOUB and not sk.get("_monte"):                                  # deux styles d'accroche départagés par les vues
+    style_acc = S["style_acc"] if S else None
+    if not DOUB and not sk.get("_monte") and not S:                        # deux styles d'accroche départagés par les vues
         try:
             import accroches; style_acc = accroches.choisir(sk, historique)
             if style_acc: print(f"Accroche ({style_acc}) : « {sk['titre_accroche']} »", flush=True)
         except Exception as e: print(f"Accroche : {e}", flush=True)
-    if libre and sk.get("titre_accroche") and os.environ.get("VOIX_OFF", "1") != "0" and not sk.get("_monte") and (os.environ.get("RENDU") or "") != "realiste":
+    if libre and sk.get("titre_accroche") and os.environ.get("VOIX_OFF", "1") != "0" and not sk.get("_monte") and (os.environ.get("RENDU") or "") != "realiste" and not S:
         titre_lu = sk["titre_accroche"].strip()                             # voix off d'ouverture : elle lit le titre « POV : … »
         if num: titre_lu = f"Épisode {num}. {titre_lu}"
         sk["repliques"].insert(0, {"p": "narrateur", "t": titre_lu, "d": "[excited] " + re.sub(r"\bPOV\b", "Pi-o-vi", titre_lu)})
         decaler(sk, 0)
-    if libre and "teaser" in sk and os.environ.get("ACCROCHE", "0") == "1" and not sk.get("_monte"):
+    if libre and "teaser" in sk and os.environ.get("ACCROCHE", "0") == "1" and not sk.get("_monte") and not S:
         k = sk["teaser"] + (1 if sk["repliques"][0]["p"] == "narrateur" else 0)   # accroche choc : la réplique est rejouée en ouverture
         copie = dict(sk["repliques"][k]); copie.pop("chute", None); copie.pop("attente", None); copie.pop("chevauche", None)
         copie["teaser"] = k + 1                                           # indice de l'original une fois la copie insérée
@@ -280,8 +299,9 @@ def main():
             mots = [[(m, d / f, e / f) for m, d, e in (x or [])] or None for x in mots]
         return audios, credits_voix, mots, moteur
 
-    REALISTE = libre and not DOUB and ((os.environ.get("RENDU") or "") == "realiste" or (AUTO and (os.environ.get("REALISTE_AUTO") or "0") == "1"))
-    if DOUB:                                                               # bande son d'origine : pas de voix à fabriquer
+    REALISTE = libre and not DOUB and not S and ((os.environ.get("RENDU") or "") == "realiste" or (AUTO and (os.environ.get("REALISTE_AUTO") or "0") == "1"))
+    if S: audios, credits_voix, mots, moteur = S["audios"], S["credits_voix"], S["mots"], S["moteur"]   # reprise : voix déjà faites
+    elif DOUB:                                                               # bande son d'origine : pas de voix à fabriquer
         audios, mots = DOUB; credits_voix = [f"bande son d'origine (@{sk['doublage']['auteur']})"]; moteur = "bande son TikTok"
     elif REALISTE: audios, credits_voix, mots, moteur = [], ["Veo 3.1 via ElevenLabs"], None, "Veo 3.1"   # le son vient de la vidéo réaliste
     else: audios, credits_voix, mots, moteur = voix_et_minutage()
@@ -289,6 +309,7 @@ def main():
     heure = datetime.datetime.now(ZoneInfo("Europe/Paris")).strftime("%Hh%M")      # nom unique même si l'historique a été remis à zéro
     pris = {h.get("fichier") for h in historique}; n = 1; base = f"sortie/{jour}_{heure}_emission"
     while os.path.basename(base) + ".mp4" in pris: n += 1; base = f"sortie/{jour}_{heure}_emission{n}"   # plusieurs émissions le même jour
+    if S: base, jour = S["base"], S["jour"]                                # reprise : même vidéo, même nom
     os.makedirs("sortie", exist_ok=True)
     gag = None; duree = None; decors = {}; video_ok, rapport_video = True, ""
     QUALITE = {"Q": None, "corrigees": []}                                 # jury qualité de la vidéo (moteur/qualite.py)
@@ -303,8 +324,9 @@ def main():
     if libre and not REALISTE:                                             # sketch libre / gag éclair : moteur cartoon animé
         try:
             import cartoon, decors as decors_mod, studio as _st
-            if _st.separer_lieux(sk): print("Lieux séparés : chaque personnage a son propre décor (appel, visio, l'un ailleurs)", flush=True)
-            if modal_ok and os.environ.get("DECORS", "1") != "0":
+            if not S and _st.separer_lieux(sk): print("Lieux séparés : chaque personnage a son propre décor (appel, visio, l'un ailleurs)", flush=True)
+            if S: decors = S["decors"]                                     # reprise : décors déjà faits
+            elif modal_ok and os.environ.get("DECORS", "1") != "0":
                 lum = ""; plans_dec = None
                 if cartoon.DETAIL:                                         # même lumière que la bible de l'épisode (heure, lampes)
                     try:
@@ -318,43 +340,74 @@ def main():
                 GPU["s"] += (datetime.datetime.now() - t_gpu).total_seconds()
             try:                                                           # mode payant : ambiance sonore ElevenLabs de chaque lieu (une fois par lieu)
                 import bruitages_eleven, studio as st_
-                if cartoon.DETAIL and not DOUB and os.environ.get("AMBIANCES_ELEVEN", "1") != "0":
+                if cartoon.DETAIL and not DOUB and not S and os.environ.get("AMBIANCES_ELEVEN", "1") != "0":
                     for l_ in set(st_.bible(sk, [r for r in dict.fromkeys(x["p"] for x in sk.get("repliques", [])) if r != "narrateur"])["lieux"]): bruitages_eleven.ambiance_lieu(l_)
             except Exception as e: print(f"Ambiances ElevenLabs indisponibles : {e}", flush=True)
-            PR.PLAGE[:] = [40, 86]; PR.etape(40, "Dessin des images", forcer=True)
-            duree = cartoon.rendre(sk, base + ".mp4", audios, mots=mots, decors=decors, mini=fmt == "mini")
             import controle, qualite, copy
-            tech_ok, rapport_tech = controle.technique(base + ".mp4", duree, cartoon.MINUTAGE[-1][1] if cartoon.MINUTAGE else None)     # contrôles gratuits (format, son, images noires)
+            reprise_v2 = bool(S and S["phase"] == "v2")                    # reprise pendant la 2e version du jury
+            def pause(phase, faits, **plus):
+                """Limite de temps de GitHub proche : tout est sauvegardé et une nouvelle machine reprend là où on en est."""
+                ctx = dict(phase=phase, faits=faits, sk=plus.get("sk", sk), DOUB=DOUB, fmt=fmt, candidats=candidats, tiktok=tiktok, secours=SECOURS,
+                           num=num, style_acc=style_acc, accroche_hist=accroche_hist, audios=audios, credits_voix=credits_voix, mots=mots,
+                           moteur=moteur, base=base, jour=jour, decors=plus.get("decors", decors))
+                if phase == "v2": ctx.update(video_v1=base + ".mp4", duree=duree, tech=(tech_ok, rapport_tech), qualite=copy.deepcopy(QUALITE), **plus)
+                d_ = (ctx["sk"].get("doublage") or {})
+                fich = [c_ for _a, _b, c_ in faits] + ([base + ".mp4"] if phase == "v2" else []) + [d_.get("piste"), d_.get("video_origine")]
+                PR.etape(PR.PLAGE[0], "Mise en pause : la suite repart sur une nouvelle machine", forcer=True)
+                nom_ = RP.sauver(ctx, fich); RP.relancer(nom_, os.environ.get("CHAINE", ""))
+                print(f"Fabrication mise en pause ({phase}, {len(faits)} bloc(s) déjà dessinés) : reprise {nom_} lancée", flush=True)
+                if os.environ.get("GITHUB_OUTPUT"):
+                    with open(os.environ["GITHUB_OUTPUT"], "a") as f_: f_.write("pause=1\n")
+                PR._envoyer(PR.PLAGE[0], "En pause : reprise automatique sur une nouvelle machine", None, "success")
+                raise RP.EnPause(nom_)
+            if reprise_v2:                                                 # la 1re version est déjà faite et jugée
+                import shutil; shutil.copy(S["video_v1"], base + ".mp4"); duree = S["duree"]
+                for k_, v_ in S["etat_v1"].items(): setattr(cartoon, k_, v_)
+                tech_ok, rapport_tech = S["tech"]
+            else:
+                PR.PLAGE[:] = [40, 86]; PR.etape(40, "Dessin des images", forcer=True)
+                sk_avant, dec_avant = copy.deepcopy(sk), copy.deepcopy(decors)
+                try: duree = cartoon.rendre(sk, base + ".mp4", audios, mots=mots, decors=decors, mini=fmt == "mini", limite=limite_job(), deja=(S or {}).get("faits"))
+                except cartoon.TempsDepasse as e: pause("v1", e.faits, sk=sk_avant, decors=dec_avant)
+                tech_ok, rapport_tech = controle.technique(base + ".mp4", duree, cartoon.MINUTAGE[-1][1] if cartoon.MINUTAGE else None)     # contrôles gratuits (format, son, images noires)
             if not test and cartoon.RENDU and os.environ.get("JURY", "1") != "0":   # jury qualité : 5 critiques (gratuits + Claude s'il y a du crédit)
                 PR.etape(88, "Contrôle qualité par le jury", 120, forcer=True)
-                QUALITE["Q"] = Q = qualite.evaluer(base + ".mp4", cartoon.RENDU, sk, "" if tech_ok else rapport_tech)
+                if reprise_v2: QUALITE.update(S["qualite"]); Q = QUALITE["Q"]
+                else: QUALITE["Q"] = Q = qualite.evaluer(base + ".mp4", cartoon.RENDU, sk, "" if tech_ok else rapport_tech)
                 video_ok, rapport_video = not Q["defauts_graves"], Q["rapport"]
                 try: tours = max(0, min(2, int(os.environ.get("JURY_TOURS") or 1)))
                 except ValueError: tours = 1
                 try: seuil_j = float(os.environ.get("SEUIL_JURY") or 9.8)
                 except ValueError: seuil_j = 9.8
                 for tour in range(tours):                                  # corrections automatiques puis nouvelle version, on garde la meilleure
-                    if Q["note"] >= seuil_j or not Q["corrections"]: break
-                    sk2 = copy.deepcopy(sk); faites = qualite.corriger(sk2, Q["corrections"])
-                    if not faites: break
-                    print(f"Corrections du jury (tour {tour + 1}) : " + " ; ".join(faites), flush=True)
-                    dec2 = dict(decors)
-                    for k_ in sk2.pop("_decors_a_refaire", []): dec2.pop(k_, None)
-                    n_sc = len(sk2.get("decoupage") or [])
-                    if _st.separer_lieux(sk2) and len(sk2.get("decoupage") or []) != n_sc or sk2.get("decoupage") != sk.get("decoupage"):
-                        dec2 = {}                                          # nouveaux lieux : nouveaux décors (IA si possible)
-                        if modal_ok and os.environ.get("DECORS", "1") != "0":
-                            try: dec2 = decors_mod.generer(sk2.get("decoupage"), graine=len(historique) + 11)
-                            except Exception as e: print(f"Nouveaux décors IA impossibles ({e}) : décors dessinés", flush=True)
-                    etat = {k_: copy.copy(getattr(cartoon, k_)) for k_ in ("MINUTAGE", "PH", "BRUITAGES", "RENDU", "COUVERTURE", "COUVERTURE_MS")}
+                    if reprise_v2 and tour < S["tour"]: continue           # (tours déjà faits avant la pause)
+                    if reprise_v2 and tour == S["tour"]:                   # reprise : mêmes corrections, la 2e version continue où elle s'était arrêtée
+                        sk2, dec2, faites, etat, deja2 = S["sk2"], S["dec2"], S["faites"], S["etat_v1"], S["faits"]
+                        print(f"Reprise de la 2e version (tour {tour + 1}) : " + " ; ".join(faites), flush=True)
+                    else:
+                        if Q["note"] >= seuil_j or not Q["corrections"]: break
+                        sk2 = copy.deepcopy(sk); faites = qualite.corriger(sk2, Q["corrections"])
+                        if not faites: break
+                        print(f"Corrections du jury (tour {tour + 1}) : " + " ; ".join(faites), flush=True)
+                        dec2 = dict(decors)
+                        for k_ in sk2.pop("_decors_a_refaire", []): dec2.pop(k_, None)
+                        n_sc = len(sk2.get("decoupage") or [])
+                        if _st.separer_lieux(sk2) and len(sk2.get("decoupage") or []) != n_sc or sk2.get("decoupage") != sk.get("decoupage"):
+                            dec2 = {}                                      # nouveaux lieux : nouveaux décors (IA si possible)
+                            if modal_ok and os.environ.get("DECORS", "1") != "0":
+                                try: dec2 = decors_mod.generer(sk2.get("decoupage"), graine=len(historique) + 11)
+                                except Exception as e: print(f"Nouveaux décors IA impossibles ({e}) : décors dessinés", flush=True)
+                        etat = {k_: copy.copy(getattr(cartoon, k_)) for k_ in ("MINUTAGE", "PH", "BRUITAGES", "RENDU", "COUVERTURE", "COUVERTURE_MS")}
+                        deja2 = None
+                    sk2_avant, dec2_avant = copy.deepcopy(sk2), copy.deepcopy(dec2)
                     try:
                         PR.PLAGE[:] = [90, 97]; PR.APRES[0] = 90; PR.etape(90, "Nouvelle version corrigée par le jury", forcer=True)
                         d2 = cartoon.rendre(sk2, base + "_v2.mp4", audios, mots=mots, decors=dec2, mini=fmt == "mini",
-                                            reprise={"video": base + ".mp4", "rendu": copy.deepcopy(etat["RENDU"])}, limite=limite_job())
+                                            reprise={"video": base + ".mp4", "rendu": copy.deepcopy(etat["RENDU"])}, limite=limite_job(), deja=deja2)
                         t2_ok, t2_rap = controle.technique(base + "_v2.mp4", d2, cartoon.MINUTAGE[-1][1] if cartoon.MINUTAGE else None)
                         Q2 = qualite.evaluer(base + "_v2.mp4", cartoon.RENDU, sk2, "" if t2_ok else t2_rap)
-                    except cartoon.TempsDepasse as e:
-                        print(f"2e version abandonnée ({e}) : on garde la première (aucune vidéo perdue).", flush=True); Q2, t2_ok = None, False
+                    except cartoon.TempsDepasse as e:                      # plus le temps : la 2e version sera finie par une nouvelle machine
+                        pause("v2", e.faits, tour=tour, sk2=sk2_avant, dec2=dec2_avant, faites=faites, etat_v1=etat)
                     except Exception as e:
                         print(f"Nouvelle version impossible ({str(e)[:160]}) : on garde la première.", flush=True); Q2, t2_ok = None, False
                     if Q2 and t2_ok and Q2["note"] > Q["note"]:
@@ -442,8 +495,13 @@ def main():
         with open(sortie, "a") as f:
             f.write(f"video={base}.mp4\nlegende={base}.txt\nnom={os.path.basename(base)}.mp4\nmois={jour[:7]}\ntitre={sk['sujet']}\n"
                     f"qualite={'ok' if video_ok and (not fiche or (fiche.get('note') or 0) >= SEUIL_PUB) and not REFAIRE else 'faible'}\nnote={round(fiche.get('note') or 0)}\n")
+    if sortie:
+        with open(sortie, "a") as f: f.write(f"chaine={os.environ.get('CHAINE', '')}\n")
+    if SUITE_NOM: RP.nettoyer(SUITE_NOM)                                   # reprise terminée : fichiers de la pause effacés
     PR.fini(True)
     print(f"OK : {base}.mp4 ({duree:.0f} s)")
 
 if __name__ == "__main__":
-    main()
+    import reprise as _RP
+    try: main()
+    except _RP.EnPause as e: print(f"Fabrication en pause : reprise {e} lancée sur une nouvelle machine.", flush=True)

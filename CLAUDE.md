@@ -127,15 +127,19 @@
   on a dessiné, comparaisons de couleurs par OpenCV, dégradés et barbe sans grille, grain de barbe calculé une fois) ; 2e version
   du jury = **redessin partiel** (`cartoon.images_a_refaire` : empreinte de chaque plan et réplique ; seules les images autour de ce
   qui change sont redessinées, le reste est recopié de la 1re version sans réencodage, coupé aux images clés, REDESSIN_PARTIEL=0
-  pour couper) ; **jamais de vidéo perdue par la limite de temps** : job emission 180 min (LIMITE_JOB_MIN), la 2e version n'est
-  lancée que si elle a le temps de finir 25 min avant la limite (`principal.limite_job`, vitesse mesurée au 1er rendu) et
-  s'arrête proprement sinon (`cartoon.TempsDepasse` → on garde la 1re). Vérifier toute accélération image par image avec
+  pour couper) ; **jamais de vidéo perdue par la limite de temps** : job emission 180 min (LIMITE_JOB_MIN), mise en pause puis
+  reprise automatique 25 min avant la limite (`principal.limite_job`, `cartoon.TempsDepasse`, voir « Pause et reprise »). Vérifier toute accélération image par image avec
   PYTHONHASHSEED fixé (le dessin varie très légèrement d'un lancement à l'autre sinon).
   **Dessin partagé entre plusieurs machines** (`moteur/dessin_partage.py`, `dessin_aide.py`, workflow dessin.yml) : au-delà de
   1 200 images (PARTAGE_MIN_IMAGES), la vidéo est coupée en morceaux ; 3 machines d'aide (AIDES) en dessinent chacune un pendant
   que la principale fait le sien (paquet + morceaux échangés par la release temporaire « dessins-temp », vidée ensuite, jamais de
   secret dans le paquet), puis recollage sans réencodage ; une aide en retard ou en échec → la principale redessine le morceau
   elle-même (rien n'est perdu). PYTHONHASHSEED=0 partout. DESSIN_PARTAGE=0 pour couper ; DESSIN_LOCAL=dossier pour les essais.
+  **Pause et reprise** (`moteur/reprise.py`) : le dessin se fait par blocs (BLOC_IMAGES, 600) ; à 25 min de la limite, la fabrication
+  (1re OU 2e version du jury) se met en pause : sketch, son, voix, décors, blocs déjà dessinés, 1re version et avis du jury sont
+  sauvegardés (release « dessins-temp », 3 jours) et une fabrication « Reprise d'une fabrication en pause » est relancée avec les
+  mêmes réglages (entrée chaine = « suite:<nom>|<chaîne d'origine> »), en tête de file ; elle repart du bloc suivant (vidéo
+  identique à l'image près). Essai : entrée rendu = essai_pause (pause après le 1er bloc).
 - **Bonne voix sur le bon personnage (sons TikTok)** : `locuteurs.affiner` vérifie qui parle MOT PAR MOT (empreinte vocale ECAPA
   autour de chaque mot, comparée à chaque voix, fil le plus probable façon Viterbi, 2-3 tours ; une « voix » presque muette est
   rattachée à la plus proche) puis `caler_sur_phrases` met chaque changement de personne sur la fin de phrase la plus proche
