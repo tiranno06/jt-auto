@@ -731,7 +731,8 @@ function rendreTk(){                                                       // on
   const L=$("#listeTk"); L.innerHTML="";
   const vis=DATA.map((v,i)=>[v,i]).filter(([v])=>v.origine==="tiktok");
   if(!vis.length){L.innerHTML='<p class="vide">Aucune vidéo sur un son TikTok pour l\'instant.</p>';return}
-  vis.forEach(([v,i])=>{const c=carte(v,i,true); c.onclick=()=>{allerOnglet("videos","tiktok"); choisir(i)}; L.appendChild(c)});
+  vis.forEach(([v,i])=>{const c=carte(v,i,false); c.onclick=()=>{allerOnglet("videos","tiktok"); choisir(i)};
+    c.querySelector(".croix").onclick=(ev)=>{ev.stopPropagation(); supprimer(i,c)}; L.appendChild(c)});   // ✕ : supprimer aussi depuis cet onglet
 }
 $("#retourTk").onclick=()=>allerOnglet("tiktok");
 const CONNUS=(CONF.profils_connus||[]).map(p=>"@"+p);
