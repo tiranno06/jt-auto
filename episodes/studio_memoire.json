@@ -1430,5 +1430,49 @@
    "son": true
   },
   "cadence": "rapide"
+ },
+ {
+  "moment": "matin",
+  "lieux": [
+   "classe"
+  ],
+  "source": "robot",
+  "duree": 10.0,
+  "plans": {
+   "large": 1,
+   "serre": 4,
+   "epaule": 1,
+   "moyen": 1,
+   "tres_serre": 2
+  },
+  "mouvements": {
+   "fixe": 5,
+   "epaule": 1,
+   "recul": 1,
+   "avance": 2
+  },
+  "costumes": {
+   "presentateur": "gilet",
+   "envoyee": "pull",
+   "invite": "chemise"
+  },
+  "figurants": 0,
+  "ambiances": [
+   "pluie",
+   "poussiere"
+  ],
+  "controle": "ok",
+  "fichier": "2026-10-24_15h31_emission.mp4",
+  "cine": {
+   "focus": true,
+   "vertige": true,
+   "tiers": true,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": false,
+   "reflets": true,
+   "son": true
+  },
+  "cadence": null
  }
 ]

@@ -1,0 +1,119 @@
+{
+ "titre": "3000 PROFS EXPRESS",
+ "sujet": "👀 Aperçu 10 s — 3000 PROFS EXPRESS",
+ "ecran": "3000 PROFS",
+ "invite_nom": "Hubert Rustine",
+ "invite_role": "Porte-parole (fictif) du ministère",
+ "invite_look": "chauve",
+ "lieu_direct": "Rayon surgelés",
+ "titre_accroche": "3000 profs en 24 h, mon plombier : 3 semaines",
+ "question": "Votre prof remplaçant, il était encore congelé ? 👇",
+ "running_gag": "",
+ "verite": "Il manque des profs depuis des années ; pour le cacher, on recrute à la va-vite, et ce sont les élèves qui paient.",
+ "repliques": [
+  {
+   "p": "narrateur",
+   "t": "3000 profs en 24 h, mon plombier : 3 semaines",
+   "d": "[excited] 3000 profs en 24 h, mon plombier : 3 semaines"
+  },
+  {
+   "p": "presentateur",
+   "t": "Le ministère a trouvé 3 000 profs en 24 heures. Moi, j'ai mis trois semaines à trouver un plombier.",
+   "d": "Le ministère a trouvé trois mille profs en vingt-quatre heures. Moi, j'ai mis trois semaines à trouver un plombier.",
+   "chute": true
+  },
+  {
+   "p": "presentateur",
+   "t": "Martine, ils sortent d'où, ces profs ?"
+  },
+  {
+   "p": "envoyee",
+   "t": "J'ai mené l'enquête. Soit c'est un miracle, soit ils ont recruté au rayon surgelés.",
+   "chute": true
+  },
+  {
+   "p": "invite",
+   "t": "N'importe quoi. Nos profs sont frais. Ils ont été décongelés ce matin.",
+   "chute": true
+  },
+  {
+   "p": "presentateur",
+   "t": "Et ils enseignent quoi ?"
+  },
+  {
+   "p": "invite",
+   "t": "Ce qui reste. Le prof de sport fait les maths. Il compte les tours de terrain.",
+   "chute": true
+  },
+  {
+   "p": "envoyee",
+   "t": "Bonne nouvelle, Jean-Michel : votre plombier est arrivé. Il vient d'être nommé prof de physique.",
+   "chute": true,
+   "attente": 0.5
+  },
+  {
+   "p": "presentateur",
+   "t": "En clair : il manque des profs depuis des années, on recrute à la va-vite, et vos enfants servent de période d'essai.",
+   "chute": true
+  }
+ ],
+ "bandeau": [
+  "UN PROF RETROUVÉ ENTRE LES PETITS POIS ET LES FRITES",
+  "LE PLOMBIER DE JEAN-MICHEL NOMMÉ PROF DE PHYSIQUE",
+  "RECRUTEMENT EXPRESS : DES PROFS LIVRÉS EN DRIVE"
+ ],
+ "gag": {
+  "replique": 3,
+  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. In a supermarket frozen food aisle, a confused teacher with a briefcase and glasses steps out of a chest freezer covered in frost, holding a piece of chalk, shoppers stare, comedic, deadpan."
+ },
+ "legende": "3000 profs trouvés en 24 h. Le secret ? Le rayon surgelés. Satire, personnages fictifs.",
+ "hashtags": [
+  "petitsdramas",
+  "humour",
+  "education",
+  "prof",
+  "actualite",
+  "satire",
+  "drole"
+ ],
+ "sources": [],
+ "decoupage": [],
+ "_voix_hz": {
+  "presentateur": 130,
+  "narrateur": 190,
+  "invite": 121,
+  "envoyee": 210
+ },
+ "_voix_genre": {
+  "presentateur": "h",
+  "invite": "h"
+ },
+ "realisation": {
+  "moment": "matin",
+  "lieux": [
+   "classe"
+  ],
+  "gags": [],
+  "ambiances": [
+   "pluie",
+   "poussiere"
+  ],
+  "source": "robot",
+  "tenues": {
+   "presentateur": "gilet",
+   "envoyee": "pull",
+   "invite": "chemise"
+  },
+  "plans": [
+   "large/fixe",
+   "serre/fixe",
+   "epaule/fixe",
+   "serre/fixe",
+   "serre/epaule",
+   "moyen/recul",
+   "tres_serre/avance",
+   "tres_serre/fixe",
+   "serre/avance"
+  ]
+ }
+}

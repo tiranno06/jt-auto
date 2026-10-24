@@ -1,708 +1,118 @@
 {
- "titre": "QUELLE CUISSON POUR LA VIANDE?",
- "sujet": "QUELLE CUISSON POUR LA VIANDE?",
- "ecran": "QUELLE CUISSON",
+ "titre": "3000 PROFS EXPRESS",
+ "sujet": "3000 PROFS EXPRESS",
+ "ecran": "3000 PROFS",
  "invite_nom": "Hubert Rustine",
- "invite_role": "Expert (fictif)",
+ "invite_role": "Porte-parole (fictif) du ministère",
  "invite_look": "chauve",
- "lieu_direct": "Assemblée",
- "titre_accroche": "POV : Client énervé au resto",
- "question": "Comment gérer une situation conflictuelle en restaurant avec humour ?",
+ "lieu_direct": "Rayon surgelés",
+ "titre_accroche": "3000 profs en 24 h, mon plombier : 3 semaines",
+ "question": "Votre prof remplaçant, il était encore congelé ? 👇",
  "running_gag": "",
- "verite": "",
+ "verite": "Il manque des profs depuis des années ; pour le cacher, on recrute à la va-vite, et ce sont les élèves qui paient.",
  "repliques": [
   {
-   "p": "presentateur",
-   "t": "Quelle cuisson pour la viande? Bien cuite s 'il vous plaît Alors c 'est pas comme ça qu 'on mange de la viande Pardon?",
-   "_deb": 0.0,
-   "_fin": 2.96
+   "p": "narrateur",
+   "t": "3000 profs en 24 h, mon plombier : 3 semaines",
+   "d": "[excited] 3000 profs en 24 h, mon plombier : 3 semaines"
   },
   {
    "p": "presentateur",
-   "t": "Non je dis c 'est pas comme ça qu 'on...",
-   "_deb": 2.98,
-   "_fin": 4.12
-  },
-  {
-   "p": "invite",
-   "t": "Eh écoute écoute moi la viande je la mange bien cuite C 'est bon t 'as cru que j 'étais un puma je la mangeais cru ou quoi?",
-   "_deb": 4.16,
-   "_fin": 7.38
-  },
-  {
-   "p": "invite",
-   "t": "Donc ramène moi ma viande bien cuite s 'il te plaît Oui alors seulement le chef va pas être content Je mange pas les couilles je vais au",
-   "_deb": 7.42,
-   "_fin": 11.48,
-   "objet": "telephone"
+   "t": "Le ministère a trouvé 3 000 profs en 24 heures. Moi, j'ai mis trois semaines à trouver un plombier.",
+   "d": "Le ministère a trouvé trois mille profs en vingt-quatre heures. Moi, j'ai mis trois semaines à trouver un plombier.",
+   "chute": true
   },
   {
    "p": "presentateur",
-   "t": "restaurant pour manger ce que je veux Non je paye donc ramène moi ce que je t 'ai demandé il est fou ou quoi?",
-   "_deb": 11.48,
-   "_fin": 14.6
+   "t": "Martine, ils sortent d'où, ces profs ?"
+  },
+  {
+   "p": "envoyee",
+   "t": "J'ai mené l'enquête. Soit c'est un miracle, soit ils ont recruté au rayon surgelés.",
+   "chute": true
   },
   {
    "p": "invite",
-   "t": "Une bonne viande ce manque?",
-   "_deb": 14.62,
-   "_fin": 15.68
+   "t": "N'importe quoi. Nos profs sont frais. Ils ont été décongelés ce matin.",
+   "chute": true
   },
   {
    "p": "presentateur",
-   "t": "Eh vas -y tu commences à monter les nerfs là C 'est toi tu veux manger ta viande comme un viking et chier des steaks charles après?",
-   "_deb": 15.68,
-   "_fin": 19.42
+   "t": "Et ils enseignent quoi ?"
   },
   {
    "p": "invite",
-   "t": "Fais! Fais!",
-   "_deb": 19.42,
-   "_fin": 20.22
+   "t": "Ce qui reste. Le prof de sport fait les maths. Il compte les tours de terrain.",
+   "chute": true
   },
   {
-   "p": "invite",
-   "t": "Mais moi ma viande elle est cuite et je la mange avec de la moutarde Après on a du très bon poisson regardez Je veux de la viande",
-   "_deb": 20.3,
-   "_fin": 23.98
-  },
-  {
-   "p": "invite",
-   "t": "de la viande cuite pas avec le sang qui dégouline Qu 'est -ce que tu comprends pas?",
-   "_deb": 23.98,
-   "_fin": 26.32
+   "p": "envoyee",
+   "t": "Bonne nouvelle, Jean-Michel : votre plombier est arrivé. Il vient d'être nommé prof de physique.",
+   "chute": true,
+   "attente": 0.5
   },
   {
    "p": "presentateur",
-   "t": "Une viande normalement ça se mange bleu monsieur Quoi donc ça veut dire que je suis le seul à faire cuire ma viande?",
-   "_deb": 26.34,
-   "_fin": 29.58
-  },
-  {
-   "p": "invite",
-   "t": "J 'ai envoyé un barbecue ici, monsieur? Eh, vas -y, tu sais quoi?",
-   "_deb": 29.62,
-   "_fin": 31.4,
-   "objet": "billet"
-  },
-  {
-   "p": "presentateur",
-   "t": "Arrête de parler maintenant et ramène -moi ma viande bien cuite, s 'il te plaît.",
-   "_deb": 31.4,
-   "_fin": 33.68
-  },
-  {
-   "p": "invite",
-   "t": "Non. Comment ça?",
-   "_deb": 34.24,
-   "_fin": 34.96
-  },
-  {
-   "p": "invite",
-   "t": "Non, mais t 'es un baiser, toi, ou quoi? Je te demande un plat, tu me dis non, mais c 'est quoi?",
-   "_deb": 34.96,
-   "_fin": 37.32
-  },
-  {
-   "p": "invite",
-   "t": "C 'est la viande de ton chien que vous cuisinez derrière, ou c 'est comment?",
-   "_deb": 37.32,
-   "_fin": 39.1
-  },
-  {
-   "p": "presentateur",
-   "t": "La viande, ce manche...",
-   "_deb": 39.14,
-   "_fin": 40.1
-  },
-  {
-   "p": "invite",
-   "t": "J 'aime pas le sang, ta grande tante, le jarret de porc!",
-   "_deb": 40.12,
-   "_fin": 42.1
-  },
-  {
-   "p": "presentateur",
-   "t": "Parce que là, vous prenez autre chose.",
-   "_deb": 42.16,
-   "_fin": 43.04
-  },
-  {
-   "p": "invite",
-   "t": "J 'ai pas envie d 'autre chose, j 'ai envie de viande, de viande bien cuite!",
-   "_deb": 43.04,
-   "_fin": 45.92
-  },
-  {
-   "p": "presentateur",
-   "t": "Je sais pas, là, franchement, je sais pas, là, je...",
-   "_deb": 45.94,
-   "_fin": 47.74
-  },
-  {
-   "p": "presentateur",
-   "t": "Je sais pas, on a des pâtes aussi. C 'est un truc de fou, ce qui se passe.",
-   "_deb": 48.28,
-   "_fin": 50.42
-  },
-  {
-   "p": "presentateur",
-   "t": "Je regrette, mais voilà.",
-   "_deb": 50.44,
-   "_fin": 51.2
-  },
-  {
-   "p": "invite",
-   "t": "Donc, vous allez pas me servir le plat que je vous ai demandé?",
-   "_deb": 51.24,
-   "_fin": 52.9
-  },
-  {
-   "p": "presentateur",
-   "t": "Non, j 'en suis navré.",
-   "_deb": 52.92,
-   "_fin": 53.96
-  },
-  {
-   "p": "invite",
-   "t": "Uniquement parce que la cuisson que je demande n 'est pas la bonne, selon vous?",
-   "_deb": 53.96,
-   "_fin": 56.3
-  },
-  {
-   "p": "presentateur",
-   "t": "C 'est... Voilà. Vas -y, bah, tu sais quoi?",
-   "_deb": 56.32,
-   "_fin": 58.76
-  },
-  {
-   "p": "invite",
-   "t": "Nick Taras, je vais au Buffalo Grill juste en face.",
-   "_deb": 58.82,
-   "_fin": 60.56
-  },
-  {
-   "p": "invite",
-   "t": "Vas -y, bouge.",
-   "_deb": 60.56,
-   "_fin": 61.06,
+   "t": "En clair : il manque des profs depuis des années, on recrute à la va-vite, et vos enfants servent de période d'essai.",
    "chute": true
   }
  ],
- "bandeau": [],
- "gag": null,
- "legende": "Un client exaspéré réclame sa viande bien cuite dans un restaurant.",
+ "bandeau": [
+  "UN PROF RETROUVÉ ENTRE LES PETITS POIS ET LES FRITES",
+  "LE PLOMBIER DE JEAN-MICHEL NOMMÉ PROF DE PHYSIQUE",
+  "RECRUTEMENT EXPRESS : DES PROFS LIVRÉS EN DRIVE"
+ ],
+ "gag": {
+  "replique": 3,
+  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. In a supermarket frozen food aisle, a confused teacher with a briefcase and glasses steps out of a chest freezer covered in frost, holding a piece of chalk, shoppers stare, comedic, deadpan."
+ },
+ "legende": "3000 profs trouvés en 24 h. Le secret ? Le rayon surgelés. Satire, personnages fictifs.",
  "hashtags": [
   "petitsdramas",
-  "restaurant",
   "humour",
-  "client",
-  "cuisine",
-  "conflict",
-  "viande"
+  "education",
+  "prof",
+  "actualite",
+  "satire",
+  "drole"
  ],
- "sources": [
-  "https://www.tiktok.com/@motiontoonz/video/7692426082045152545"
- ],
- "decoupage": [
-  {
-   "scene": "1",
-   "repliques": [
-    0,
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9
-   ],
-   "lieu": "",
-   "son": "",
-   "duree": 0.0,
-   "decor": "restaurant interior, wooden tables, chairs, plates with food, wine bottles, menu board",
-   "titre": "La Réclamation"
-  },
-  {
-   "scene": "2",
-   "repliques": [
-    10,
-    11,
-    12,
-    13,
-    14,
-    15,
-    16,
-    17,
-    18,
-    19,
-    20,
-    21,
-    22,
-    23,
-    24,
-    25,
-    26,
-    27,
-    28
-   ],
-   "lieu": "",
-   "son": "",
-   "duree": 0.0,
-   "decor": "restaurant kitchen view, chefs in action, cooking tools, meat on grill, restaurant entrance",
-   "titre": "La Solution"
-  }
- ],
- "studio": {
-  "moment": "soir",
-  "lieux": [
-   "restaurant"
-  ],
-  "costumes": {
-   "presentateur": {
-    "haut": "chemise",
-    "c_haut": "blanc",
-    "motif": "uni",
-    "bas": "pantalon",
-    "chaussures": "ville",
-    "details": [
-     "cravate",
-     "moustache"
-    ]
-   },
-   "invite": {
-    "haut": "tshirt",
-    "c_haut": "noir",
-    "motif": "uni",
-    "bas": "jean",
-    "chaussures": "baskets",
-    "details": [
-     "barbe_courte"
-    ]
-   }
-  },
-  "personnages": {
-   "presentateur": {
-    "genre": "h",
-    "age": 45,
-    "taille": 1,
-    "corpulence": 0.7,
-    "cheveux": "court",
-    "c_cheveux": "brun",
-    "barbe": "moustache"
-   },
-   "invite": {
-    "genre": "h",
-    "age": 50,
-    "taille": 1,
-    "corpulence": 0.8,
-    "cheveux": "court",
-    "c_cheveux": "roux",
-    "barbe": "trois_jours"
-   }
-  },
-  "gags": [
-   "Viande bien cuite garantie ou remboursé",
-   "Steaks saignants interdits ici",
-   "Buffalo Grill à 50 mètres"
-  ],
-  "ambiances": [
-   "neon"
-  ],
-  "cadence": "rapide",
-  "plans": [
-   {
-    "replique": 0,
-    "plan": "large",
-    "mouvement": "fixe",
-    "geste": "bras_ouverts",
-    "reaction": "aucune"
-   },
-   {
-    "replique": 3,
-    "plan": "serre",
-    "mouvement": "epaule",
-    "geste": "pointe_d",
-    "reaction": "choc"
-   },
-   {
-    "replique": 5,
-    "plan": "tres_serre",
-    "mouvement": "zoom_choc",
-    "geste": "poing",
-    "reaction": "colere"
-   },
-   {
-    "replique": 11,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "mains_hanches",
-    "reaction": "sceptique"
-   },
-   {
-    "replique": 17,
-    "plan": "large",
-    "mouvement": "travelling",
-    "geste": "facepalm",
-    "reaction": "gene"
-   },
-   {
-    "replique": 27,
-    "plan": "moyen",
-    "mouvement": "avance",
-    "geste": "pointe_g",
-    "reaction": "colere"
-   }
-  ],
-  "objets": [
-   {
-    "replique": 3,
-    "objet": "telephone"
-   },
-   {
-    "replique": 11,
-    "objet": "billet"
-   },
-   {
-    "replique": 27,
-    "objet": "clefs"
-   }
-  ],
-  "decors_vus": {
-   "presentateur": "restaurant interior, wooden tables, chairs, plates with food, wine bottles, menu board, neon lights",
-   "invite": "restaurant entrance, chefs in action, cooking tools, meat on grill"
-  },
-  "lieux_separes": {},
-  "figurants": [
-   {
-    "avec": "presentateur",
-    "description": "chef de cuisine",
-    "genre": "h",
-    "age": 55,
-    "geste": "rit",
-    "haut": "blouse",
-    "c_haut": "blanc",
-    "bas": "pantalon",
-    "chapeau": "toque",
-    "details": [
-     "barbe_pleine"
-    ]
-   },
-   {
-    "avec": "invite",
-    "description": "serveur",
-    "genre": "h",
-    "age": 30,
-    "geste": "attend",
-    "haut": "chemise",
-    "c_haut": "bleu",
-    "bas": "pantalon",
-    "details": [
-     "cravate"
-    ]
-   }
-  ],
-  "decoupe": [
-   {
-    "replique": 2,
-    "plans": [
-     {
-      "debut": 0.0,
-      "plan": "serre",
-      "cible": "invite",
-      "mouvement": "avance"
-     }
-    ]
-   },
-   {
-    "replique": 6,
-    "plans": [
-     {
-      "debut": 0.0,
-      "plan": "moyen",
-      "cible": "presentateur",
-      "mouvement": "fixe"
-     }
-    ]
-   },
-   {
-    "replique": 9,
-    "plans": [
-     {
-      "debut": 0.0,
-      "plan": "serre",
-      "cible": "invite",
-      "mouvement": "avance"
-     }
-    ]
-   }
-  ]
- },
- "doublage": {
-  "piste": "/tmp/tmpi_sm0wne/piste.wav",
-  "duree": 61.09,
-  "source": "https://www.tiktok.com/@motiontoonz/video/7692426082045152545",
-  "auteur": "motiontoonz",
-  "contexte": "Un client insatisfait dans un restaurant exprime son mécontentement face à une viande mal cuite, tandis qu'un serveur tente de gérer la situation avec diplomatie.",
-  "evenements": [],
-  "visuel": {
-   "gestes": [],
-   "duree": 61.5,
-   "nb_plans": 28,
-   "duree_plan": 2.2,
-   "coupes": [
-    1.0,
-    1.5,
-    4.5,
-    9.0,
-    11.0,
-    15.0,
-    16.0,
-    22.5,
-    23.5,
-    26.5,
-    28.0,
-    30.0,
-    31.0,
-    34.0,
-    34.5,
-    39.5,
-    40.0,
-    42.5,
-    43.0,
-    46.0,
-    49.5,
-    50.5,
-    51.5,
-    53.0,
-    54.0,
-    56.5,
-    58.5
-   ],
-   "plans": {
-    "tres_serre": 0.0,
-    "serre": 0.049,
-    "moyen": 0.0,
-    "large": 0.951
-   },
-   "camera": {
-    "fixe": 0.411,
-    "avance": 0.0,
-    "recul": 0.021,
-    "travelling": 0.0,
-    "epaule": 0.568
-   },
-   "nb_personnes": 1,
-   "personnes": [],
-   "visages": true,
-   "sourires": 0.0,
-   "energie": 0.46,
-   "mur": [
-    242,
-    240,
-    238
-   ],
-   "palette": [
-    [
-     176,
-     169,
-     163,
-     0.232
-    ],
-    [
-     249,
-     249,
-     249,
-     0.208
-    ],
-    [
-     25,
-     29,
-     19,
-     0.167
-    ],
-    [
-     72,
-     74,
-     50,
-     0.164
-    ],
-    [
-     126,
-     115,
-     90,
-     0.136
-    ],
-    [
-     215,
-     211,
-     207,
-     0.092
-    ]
-   ],
-   "lumiere": {
-    "luminosite": 149.1,
-    "chaleur": 12.9,
-    "saturation": 52.6
-   },
-   "moment": "jour"
-  },
-  "audio": {
-   "duree": 61.1,
-   "nb_voix": 2,
-   "voix": [
-    {
-     "hz": 184,
-     "genre": "?",
-     "part": 0.38
-    },
-    {
-     "hz": 248,
-     "genre": "f",
-     "part": 0.62
-    }
-   ],
-   "debit": 6.9,
-   "blanc_moyen": 0.09,
-   "coupes": 17,
-   "dynamique_db": 16.3,
-   "cris": 0.01,
-   "musique": null,
-   "impacts": 0,
-   "impacts_10s": 0.0,
-   "graves": 0,
-   "aigus": 0,
-   "sur_vanne": 0,
-   "evenements": {},
-   "emotions": {
-    "angry": 9,
-    "confused": 3,
-    "hesitant": 3,
-    "annoyed": 2,
-    "sarcastic": 2,
-    "exasperated": 2,
-    "defiant": 1,
-    "loud": 1
-   }
-  },
-  "video_origine": "/tmp/tmpi_sm0wne/src.mp4"
- },
- "fiche": {
-  "note": 0,
-  "decision": "vidéo manuelle (bande son d'une vidéo TikTok)",
-  "decoupage": [
-   {
-    "scene": "1",
-    "repliques": [
-     0,
-     1,
-     2,
-     3,
-     4,
-     5,
-     6,
-     7,
-     8,
-     9
-    ],
-    "lieu": "",
-    "son": "",
-    "duree": 0.0,
-    "decor": "restaurant interior, wooden tables, chairs, plates with food, wine bottles, menu board",
-    "titre": "La Réclamation"
-   },
-   {
-    "scene": "2",
-    "repliques": [
-     10,
-     11,
-     12,
-     13,
-     14,
-     15,
-     16,
-     17,
-     18,
-     19,
-     20,
-     21,
-     22,
-     23,
-     24,
-     25,
-     26,
-     27,
-     28
-    ],
-    "lieu": "",
-    "son": "",
-    "duree": 0.0,
-    "decor": "restaurant kitchen view, chefs in action, cooking tools, meat on grill, restaurant entrance",
-    "titre": "La Solution"
-   }
-  ]
- },
- "_monte": true,
+ "sources": [],
+ "decoupage": [],
  "_voix_hz": {
-  "invite": 253,
-  "presentateur": 197
+  "presentateur": 130,
+  "narrateur": 190,
+  "invite": 121,
+  "envoyee": 210
  },
  "_voix_genre": {
-  "invite": "f",
-  "presentateur": "h"
+  "presentateur": "h",
+  "invite": "h"
  },
  "realisation": {
-  "moment": "soir",
+  "moment": "matin",
   "lieux": [
-   "restaurant",
-   "restaurant"
+   "classe"
   ],
-  "gags": [
-   "Viande bien cuite garantie ou remboursé",
-   "Steaks saignants interdits ici",
-   "Buffalo Grill à 50 mètres"
-  ],
+  "gags": [],
   "ambiances": [
-   "neon",
-   "poussiere",
-   "vapeur"
+   "pluie",
+   "poussiere"
   ],
-  "source": "auteur+image",
+  "source": "robot",
   "tenues": {
-   "presentateur": "chemise",
-   "invite": "tshirt"
+   "presentateur": "gilet",
+   "envoyee": "pull",
+   "invite": "chemise"
   },
   "plans": [
    "large/fixe",
-   "moyen/fixe",
-   "large/epaule",
-   "serre/epaule",
-   "large/fixe",
-   "tres_serre/zoom_choc",
-   "epaule/fixe",
-   "moyen/fixe",
-   "epaule/fixe",
-   "large/epaule",
-   "large/recul",
    "serre/fixe",
-   "large/fixe",
-   "large/epaule",
    "epaule/fixe",
-   "epaule/fixe",
-   "large/fixe",
-   "large/travelling",
-   "tres_serre/zoom_choc",
-   "moyen/epaule",
-   "epaule/fixe",
-   "epaule/fixe",
-   "moyen/epaule",
-   "epaule/fixe",
-   "moyen/epaule",
-   "moyen/epaule",
-   "epaule/fixe",
-   "moyen/avance",
+   "serre/fixe",
+   "serre/epaule",
+   "moyen/recul",
+   "tres_serre/avance",
+   "tres_serre/fixe",
    "serre/avance"
   ]
  }
