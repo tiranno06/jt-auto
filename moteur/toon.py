@@ -79,8 +79,9 @@ def degrade(img, pts, centre, rayon, coul, force=0.6, debut=0.45):
     roi = _bbox(pts, img)
     if roi[2] <= roi[0] or roi[3] <= roi[1]: return
     m = _masque(pts, roi).astype(np.float32) / 255
-    yy, xx = np.mgrid[roi[1]:roi[3], roi[0]:roi[2]].astype(np.float32)
-    dist = np.sqrt((xx - centre[0]) ** 2 + (yy - centre[1]) ** 2) / max(1.0, rayon)
+    xx = np.arange(roi[0], roi[2]).astype(np.float32) - centre[0]           # vitesse : distances par lignes et colonnes (sans grille)
+    yy = np.arange(roi[1], roi[3]).astype(np.float32) - centre[1]
+    dist = np.sqrt(xx[None, :] ** 2 + yy[:, None] ** 2) / max(1.0, rayon)
     a = (np.clip((dist - debut) / (1.15 - debut), 0, 1) ** 1.5 * force * m)[..., None]
     z = img[roi[1]:roi[3], roi[0]:roi[2]].astype(np.float32)
     img[roi[1]:roi[3], roi[0]:roi[2]] = (z * (1 - a) + np.array(coul, np.float32) * a).astype(np.uint8)
@@ -385,20 +386,23 @@ def _larmes_sueur(img, centres, cx, cy, rxe, R, p, d, ep):
 BARBES_T = ("barbe", "barbe_courte", "barbe_pleine", "bouc", "moustache", "favoris", "collier_barbe")
 
 
+_GRAIN = {}
+
+
 def barbe(img, ov, t, rxe, R, d, k34, det, cb, tilt):
     """Barbe mal rasée : ombre légère et grain sur la mâchoire, bouc et moustache autour de la bouche."""
     roi = _bbox(ov, img)
     if roi[2] <= roi[0] or roi[3] <= roi[1]: return
     x0, y0, x1, y1 = roi; m = _masque(ov, roi).astype(np.float32) / 255
-    yy, xx = np.mgrid[y0:y1, x0:x1].astype(np.float32)
+    xx = np.arange(x0, x1).astype(np.float32)[None, :]; yy = np.arange(y0, y1).astype(np.float32)[:, None]   # vitesse : sans grille
     u = (xx - t[0]) / rxe; v = (yy - t[1]) / R
     cote = np.clip((u * d + 0.45) / 0.4, 0, 1) if k34 >= 0.15 else 1.0
     zone = np.clip((v - 0.30) / 0.25, 0, 1) * cote
     if "bouc" in det and not any(b in det for b in ("barbe", "barbe_courte", "barbe_pleine")):
         zone = zone * np.clip(1.0 - np.abs(u - d * 0.55 * k34) / 0.35, 0, 1)
     if any(b in det for b in ("barbe", "barbe_courte", "barbe_pleine", "collier_barbe", "favoris", "bouc")):
-        rng = np.random.default_rng(5); grain = (rng.random(m.shape) < 0.10).astype(np.float32)
-        a = (zone * m * (0.14 + 0.30 * grain))[..., None]
+        if m.shape not in _GRAIN: _GRAIN[m.shape] = (np.random.default_rng(5).random(m.shape) < 0.10).astype(np.float32)   # même grain, calculé une fois
+        a = (np.broadcast_to(zone, m.shape) * m * (0.14 + 0.30 * _GRAIN[m.shape]))[..., None]
         z = img[y0:y1, x0:x1].astype(np.float32); img[y0:y1, x0:x1] = (z * (1 - a) + np.array(cb, np.float32) * a).astype(np.uint8)
     def T(u_, w_): return M._rot(t[0] + u_, t[1] + w_, t[0], t[1], math.radians(tilt))
     mx = d * rxe * 0.50 * k34; w = rxe * (0.34 - 0.10 * k34)

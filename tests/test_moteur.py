@@ -818,6 +818,20 @@ class TestFileAttente(unittest.TestCase):
         self.assertEqual([r["id"] for r in F.devant(runs[1:] + [relance], relance, J.get)], [3, 4, 5])
 
 
+class TestRedessinPartiel(unittest.TestCase):
+    def test_seules_les_images_changees(self):
+        sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "moteur"))
+        import cartoon as C
+        anc = {"sig_global": "g", "nf": 300, "fps": 30, "sig_plans": [(0, 4, "a"), (4, 7, "b"), (7, 10, "c")], "sig_ph": [(0, 5, "x"), (5, 10, "y")]}
+        neuf = dict(anc, sig_plans=[(0, 4, "a"), (4, 7, "B"), (7, 10, "c")])            # seul le 2e plan change
+        r = C.images_a_refaire(anc, neuf, 300, 30)
+        self.assertTrue(r and min(r) >= 3 * 30 - 1 and max(r) <= 8 * 30 + 1)              # autour du plan changé (± 1 s)
+        self.assertEqual(C.images_a_refaire(anc, dict(anc), 300, 30), [])
+        self.assertIsNone(C.images_a_refaire(anc, dict(anc, sig_global="autre"), 300, 30))   # réglages généraux changés : tout refaire
+        self.assertEqual(C.plages([95, 96, 100, 200], [0, 60, 120, 180, 240], 300), [(60, 120), (180, 240)])
+        self.assertEqual(C.plages([10, 70], [0, 60, 120], 300), [(0, 120)])
+
+
 class TestRelaisIA(unittest.TestCase):
     def test_bascule_claude_vers_mistral_puis_gemini(self):
         import json as _j, io, urllib.request, urllib.error, reseau

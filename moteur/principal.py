@@ -93,6 +93,13 @@ def decaler(sk, pos):
 def lire(p, d):
     return json.load(open(p, encoding="utf-8")) if os.path.exists(p) else d
 
+def limite_job():
+    """Heure (secondes) à laquelle une 2e version du jury doit être finie : limite du job GitHub moins 25 min (vérification,
+    archivage, site, historique). Sans DEBUT_JOB (essai sur un ordinateur) : pas de limite."""
+    try: return float(os.environ["DEBUT_JOB"]) + (float(os.environ.get("LIMITE_JOB_MIN") or 180) - 25) * 60
+    except (KeyError, ValueError): return None
+
+
 def main():
     import progression as PR                                               # avancement en direct sur le site (barre de progression)
     PR.TYPE[0] = "tiktok" if (FILIERE == "tiktok" or THEME.startswith("TIKTOK::")) else "sketch"
@@ -342,9 +349,12 @@ def main():
                     etat = {k_: copy.copy(getattr(cartoon, k_)) for k_ in ("MINUTAGE", "PH", "BRUITAGES", "RENDU", "COUVERTURE", "COUVERTURE_MS")}
                     try:
                         PR.PLAGE[:] = [90, 97]; PR.APRES[0] = 90; PR.etape(90, "Nouvelle version corrigée par le jury", forcer=True)
-                        d2 = cartoon.rendre(sk2, base + "_v2.mp4", audios, mots=mots, decors=dec2, mini=fmt == "mini")
+                        d2 = cartoon.rendre(sk2, base + "_v2.mp4", audios, mots=mots, decors=dec2, mini=fmt == "mini",
+                                            reprise={"video": base + ".mp4", "rendu": copy.deepcopy(etat["RENDU"])}, limite=limite_job())
                         t2_ok, t2_rap = controle.technique(base + "_v2.mp4", d2, cartoon.MINUTAGE[-1][1] if cartoon.MINUTAGE else None)
                         Q2 = qualite.evaluer(base + "_v2.mp4", cartoon.RENDU, sk2, "" if t2_ok else t2_rap)
+                    except cartoon.TempsDepasse as e:
+                        print(f"2e version abandonnée ({e}) : on garde la première (aucune vidéo perdue).", flush=True); Q2, t2_ok = None, False
                     except Exception as e:
                         print(f"Nouvelle version impossible ({str(e)[:160]}) : on garde la première.", flush=True); Q2, t2_ok = None, False
                     if Q2 and t2_ok and Q2["note"] > Q["note"]:

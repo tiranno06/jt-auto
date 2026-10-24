@@ -123,6 +123,14 @@
   Onglet TikTok : bouton « 🎲 Plusieurs vidéos à la chaîne » + nombre (1 à 10) → emission.yml chaine=« 1/n » ; chaque vidéo finie
   (même ratée) lance la suivante (« 2/n »…, dernière étape d'emission.yml, pas de doublon si le garde relance) ; la barre affiche
   « vidéo 2/n : … ». Le robot publie son avancement toutes les 8 s et la file regarde de moins en moins souvent (quota de l'API GitHub).
+- **Vitesse de fabrication** (octobre 2026) : dessin accéléré sans changer un pixel (toile des personnages remise à zéro seulement là où
+  on a dessiné, comparaisons de couleurs par OpenCV, dégradés et barbe sans grille, grain de barbe calculé une fois) ; 2e version
+  du jury = **redessin partiel** (`cartoon.images_a_refaire` : empreinte de chaque plan et réplique ; seules les images autour de ce
+  qui change sont redessinées, le reste est recopié de la 1re version sans réencodage, coupé aux images clés, REDESSIN_PARTIEL=0
+  pour couper) ; **jamais de vidéo perdue par la limite de temps** : job emission 180 min (LIMITE_JOB_MIN), la 2e version n'est
+  lancée que si elle a le temps de finir 25 min avant la limite (`principal.limite_job`, vitesse mesurée au 1er rendu) et
+  s'arrête proprement sinon (`cartoon.TempsDepasse` → on garde la 1re). Vérifier toute accélération image par image avec
+  PYTHONHASHSEED fixé (le dessin varie très légèrement d'un lancement à l'autre sinon).
 - **Bonne voix sur le bon personnage (sons TikTok)** : `locuteurs.affiner` vérifie qui parle MOT PAR MOT (empreinte vocale ECAPA
   autour de chaque mot, comparée à chaque voix, fil le plus probable façon Viterbi, 2-3 tours ; une « voix » presque muette est
   rattachée à la plus proche) puis `caler_sur_phrases` met chaque changement de personne sur la fin de phrase la plus proche
