@@ -59,6 +59,9 @@ def construire():
     import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import marque
     nom = marque.NOM                                                       # nom de la chaîne
     conf = {"depot": os.environ.get("GITHUB_REPOSITORY", ""), "branche": os.environ.get("GITHUB_REF_NAME") or "main"}
+    try:
+        import profils_tiktok; conf["profils_connus"] = profils_tiktok.connus()   # liste de départ de l'onglet TikTok
+    except Exception: conf["profils_connus"] = []
     try: st = json.load(open(os.path.join(RACINE, "episodes", "stats.json"), encoding="utf-8"))
     except (OSError, ValueError): st = {}
     try: alertes = json.load(open(os.path.join(RACINE, "episodes", "alertes.json"), encoding="utf-8"))[-15:]
@@ -299,6 +302,8 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
   <section class="panneau"><h2>🎵 Mes profils TikTok</h2>
     <p class="note">Un profil par ligne (@pseudo ou lien du profil). Le robot y prend une vidéo au hasard, jamais déjà utilisée, et fabrique la vidéo sur son son.</p>
     <label>Profils<div class="jeton"><textarea data-var="PROFILS_TIKTOK" data-def="" data-texte="1" maxlength="3000" rows="5" placeholder="@profil1&#10;@profil2&#10;https://www.tiktok.com/@profil3"></textarea><button class="second" data-enr="PROFILS_TIKTOK" style="flex:none;padding:10px 14px">OK</button></div></label>
+    <button class="second" id="tkConnus" style="width:100%;margin-bottom:6px">➕ Ajouter les profils déjà connus</button>
+    <p class="note" id="tkConnusNote"></p>
     <button class="action" id="tkHasard">🎲 Une vidéo maintenant (son au hasard des profils)</button>
     <div id="tkSuiviH" class="note"></div></section>
   <section class="panneau"><h2>⏰ Vidéos TikTok automatiques</h2>
@@ -683,6 +688,18 @@ function rendreTk(){                                                       // on
   vis.forEach(([v,i])=>{const c=carte(v,i,true); c.onclick=()=>{allerOnglet("videos","tiktok"); choisir(i)}; L.appendChild(c)});
 }
 $("#retourTk").onclick=()=>allerOnglet("tiktok");
+const CONNUS=(CONF.profils_connus||[]).map(p=>"@"+p);
+function majConnus(){                                                      // profils déjà connus : liste de départ, ou ajout à la liste de l'auteur
+  const z=document.querySelector('[data-var="PROFILS_TIKTOK"]'); if(!z) return;
+  if(!z.value.trim()&&CONNUS.length&&!(VARS&&VARS.PROFILS_TIKTOK)) z.value=CONNUS.join("\n");
+  const deja=new Set(z.value.toLowerCase().split(/[\n,;]+/).map(x=>x.trim().replace(/^https?:\/\/(www\.)?tiktok\.com\//,"").replace(/[/?].*$/,"").replace(/^@?/,"@")));
+  const manque=CONNUS.filter(p=>!deja.has(p.toLowerCase()));
+  $("#tkConnus").style.display=manque.length?"":"none";
+  $("#tkConnusNote").textContent=!(VARS&&VARS.PROFILS_TIKTOK)&&CONNUS.length?`${CONNUS.length} profils déjà connus du robot (ceux des sons déjà repris), utilisés tant que vous n'enregistrez pas votre liste. Modifiez si besoin puis touchez OK.`:"";
+  return manque;
+}
+$("#tkConnus").onclick=()=>{const z=document.querySelector('[data-var="PROFILS_TIKTOK"]'), m=majConnus()||[]; if(!m.length) return;
+  z.value=(z.value.trim()?z.value.trim()+"\n":"")+m.join("\n"); majConnus(); toast(m.length+" profil(s) ajouté(s) : touchez OK pour enregistrer")};
 $("#tkCreer").onclick=()=>{
   if(!lireJeton()){toast("Connectez d'abord la régie (onglet Réglages)");allerOnglet("config");return}
   const u=$("#tkLien").value.trim();
@@ -823,7 +840,7 @@ function allerOnglet(o,f){
   if(o==="accueil") rendreRecents();
   if(o==="stats") rendreStats();
   if(o==="config"||o==="tiktok") chargerReglages();
-  if(o==="tiktok") rendreTk();
+  if(o==="tiktok"){rendreTk(); majConnus()}
   window.scrollTo(0,0);
 }
 function choisirFiltre(f){
@@ -904,7 +921,7 @@ async function chargerReglages(){
     (d.variables||[]).forEach(x=>v[x.name]=x.value);
     champs().forEach(c=>{const val=(c.dataset.var in v)?v[c.dataset.var]:c.dataset.def;
       if(c.dataset.bascule) c.classList.toggle("on",String(val)!=="0"); else c.value=val;});
-    chargerPerso(v); activer(true); $("#cfgEtat").textContent="Régie connectée ✓ — chaque changement est enregistré tout de suite.";
+    chargerPerso(v); activer(true); majConnus(); $("#cfgEtat").textContent="Régie connectée ✓ — chaque changement est enregistré tout de suite.";
   }catch(e){$("#cfgEtat").textContent="Erreur : "+e.message+" — vérifiez la clé (droits Actions et Variables).";activer(false);
     if(/jeton refusé/.test(e.message)) $("#cfgConnexion").style.display=""}
 }
