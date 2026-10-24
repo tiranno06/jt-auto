@@ -341,10 +341,13 @@ def plages(refaire, cles, nf):
 
 # ------------------------------------------------------------------ rendu
 class TempsDepasse(RuntimeError):
-    """La 2e version du jury n'aurait pas le temps de finir avant la limite de GitHub : on garde la 1re."""
+    """Plus le temps de finir avant la limite de GitHub : la fabrication est mise en pause (principal → reprise.py) avec les
+    morceaux d'images déjà dessinés (faits = [(début, fin, fichier)]), puis reprise sur une nouvelle machine."""
+    def __init__(self, msg, faits=()):
+        super().__init__(msg); self.faits = list(faits)
 
 
-def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False, reprise=None, limite=None, plage=None):
+def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False, reprise=None, limite=None, plage=None, deja=None):
     import dessin_partage as DP
     args0 = None                                                           # pour le dessin partagé : les arguments tels qu'au départ
     if not apercu and reprise is None and plage is None and os.environ.get("DESSIN_PARTAGE", "1") != "0" and os.environ.get("GH_TOKEN"):
@@ -1692,12 +1695,17 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
                 else: print(f"  redessin partiel : {n_ref}/{nf} images à redessiner ({len(morceaux)} passage(s)), le reste repris tel quel", flush=True)
         except Exception as e: print(f"  redessin partiel impossible ({str(e)[:120]}) : rendu complet", flush=True); morceaux = None
     t_rendu = _time.time()
-    if limite:                                                             # 2e version du jury : assez de temps avant la limite de GitHub ?
-        v_ = float((reprise or {}).get("rendu", {}).get("vitesse") or 0)
-        a_faire = nf if morceaux is None else sum(b_ - a_ for a_, b_ in morceaux)
-        if v_ > 0 and t_rendu + a_faire / v_ * 1.15 > limite:
+    BLOC = max(60, int(os.environ.get("BLOC_IMAGES") or 600))              # dessin par blocs (~10 s) : on peut s'arrêter et reprendre
+    faits_avant = {(int(a_), int(b_)): c_ for a_, b_, c_ in (deja or []) if os.path.exists(c_)}
+    if faits_avant: print(f"  reprise : {len(faits_avant)} bloc(s) déjà dessiné(s) repris", flush=True)
+    termines = [(a_, b_, c_) for (a_, b_), c_ in faits_avant.items()]
+    def bloc(a_, b_, progres=None):
+        """Un bloc d'images (déjà fait lors d'une fabrication précédente, ou dessiné maintenant). Pause si le temps manque."""
+        if (a_, b_) in faits_avant: return faits_avant[(a_, b_)]
+        if limite and _time.time() > limite:
             if pool: pool.close(); pool.join()
-            raise TempsDepasse(f"{a_faire} images à redessiner, environ {a_faire / v_ / 60:.0f} min : pas le temps avant la limite")
+            raise TempsDepasse(f"limite de temps proche ({len(termines)} bloc(s) dessinés)", termines)
+        c_ = f"{tmp}/bloc_{a_}_{b_}.mp4"; encoder_plage(a_, b_, c_, progres); termines.append((a_, b_, c_)); return c_
     if morceaux is None and args0 is not None and DP.actif(nf):           # vidéo longue : dessin partagé entre plusieurs machines
         compte = [0]
         def suivi():
@@ -1714,34 +1722,26 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
             print(f"  dessin partagé terminé en {(_time.time() - t_rendu) / 60:.1f} min", flush=True)
             return total
     if morceaux is None:
-        ff = subprocess.Popen(entree + ["-i", wav] + x264 + ["-c:a", "aac", "-b:a", "192k", "-shortest", "-movflags", "+faststart", sortie], stdin=subprocess.PIPE)
-        images = pool.imap(_image_octets, range(nf), chunksize=4) if pool else (image(fi).tobytes() for fi in range(nf))
-        try:
-            for fi, octets in enumerate(images):
-                ff.stdin.write(octets)
-                if fi % 300 == 0: print(f"  image {fi}/{nf}" + (f" ({n_proc} processeurs)" if pool and fi == 0 else ""), flush=True)
-                if fi % 30 == 0: progression.rendu(fi, nf, t_rendu)      # barre de progression du site
-                if limite and _time.time() > limite: raise TempsDepasse("plus le temps de finir la 2e version")
-        except BaseException:
-            ff.kill(); raise
+        compte = [sum(b_ - a_ for a_, b_ in faits_avant)]; t_neuf = _time.time(); n_neuf = [0]
+        def suivi_():
+            compte[0] += 1; n_neuf[0] += 1
+            if compte[0] % 300 == 0: print(f"  image {compte[0]}/{nf}" + (f" ({n_proc} processeurs)" if pool and compte[0] == 300 else ""), flush=True)
+            if compte[0] % 30 == 0: progression.rendu(compte[0], nf, t_rendu)   # barre de progression du site
+        try: blocs = [bloc(a_, min(nf, a_ + BLOC), suivi_) for a_ in range(0, nf, BLOC)]
         finally:
             if pool: pool.close(); pool.join()
-        ff.stdin.close(); ff.wait()
-        RENDU["vitesse"] = nf / max(1.0, _time.time() - t_rendu)            # images par seconde (sert à prévoir une 2e version)
+        open(f"{tmp}/recollage.txt", "w").write("\n".join(f"file '{c}'" for c in blocs) + "\n")
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", f"{tmp}/recollage.txt", "-i", wav, "-map", "0:v", "-map", "1:a",
+                        "-c:v", "copy", "-c:a", "aac", "-b:a", "192k", "-shortest", "-movflags", "+faststart", sortie], check=True, timeout=900)
+        RENDU["vitesse"] = n_neuf[0] / max(1.0, _time.time() - t_neuf) if n_neuf[0] > 30 else float((reprise or {}).get("rendu", {}).get("vitesse") or 0) or 1.0
         return total
-    try:                                                                   # passages redessinés, encodés à part (mêmes réglages)
-        n_ref, fait, liste = sum(b_ - a_ for a_, b_ in morceaux), 0, []
-        for k_, (a_, b_) in enumerate(morceaux):
-            seg = f"{tmp}/morceau_{k_}.mp4"
-            ff = subprocess.Popen(entree + x264 + ["-an", seg], stdin=subprocess.PIPE)
-            images = pool.imap(_image_octets, range(a_, b_), chunksize=4) if pool else (image(fi).tobytes() for fi in range(a_, b_))
-            for octets in images:
-                if limite and _time.time() > limite: ff.kill(); raise TempsDepasse("plus le temps de finir la 2e version")
-                ff.stdin.write(octets); fait += 1
-                if fait % 30 == 0: progression.rendu(fait, n_ref, t_rendu)
-            ff.stdin.close(); ff.wait()
-            if ff.returncode != 0: raise RuntimeError("encodage d'un passage en échec")
-            liste.append((a_, seg))
+    try:                                                                   # passages redessinés, encodés à part (mêmes réglages), par blocs
+        n_ref, fait, liste = sum(b_ - a_ for a_, b_ in morceaux), [0], []
+        def suivi_p():
+            fait[0] += 1
+            if fait[0] % 30 == 0: progression.rendu(fait[0], n_ref, t_rendu)
+        for a_, b_ in morceaux:
+            liste.append((a_, [bloc(x_, min(b_, x_ + BLOC), suivi_p) for x_ in range(a_, b_, BLOC)]))
     finally:
         if pool: pool.close(); pool.join()
     coupes = sorted({x for ab in morceaux for x in ab if 0 < x < nf})       # l'ancienne vidéo coupée net à ces images clés (sans réencoder)
@@ -1751,7 +1751,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
     bornes = [0] + coupes + [nf]; neufs = dict(liste); lignes = []
     for k_ in range(len(bornes) - 1):
         a_ = bornes[k_]
-        lignes.append(f"file '{neufs[a_]}'" if a_ in neufs else f"file '{tmp}/ancien/p_{k_:04d}.mp4'")
+        lignes += [f"file '{c_}'" for c_ in neufs[a_]] if a_ in neufs else [f"file '{tmp}/ancien/p_{k_:04d}.mp4'"]
     open(f"{tmp}/recollage.txt", "w").write("\n".join(lignes) + "\n")
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", f"{tmp}/recollage.txt", "-i", wav, "-map", "0:v", "-map", "1:a",
                     "-c:v", "copy", "-c:a", "aac", "-b:a", "192k", "-shortest", "-movflags", "+faststart", sortie], check=True, timeout=900)
