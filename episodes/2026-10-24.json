@@ -1,270 +1,119 @@
 {
- "titre": "DÉFI VOCAL ÉPIQUE",
- "sujet": "DÉFI VOCAL ÉPIQUE",
- "ecran": "DÉFI VOCAL ÉPI",
+ "titre": "3000 PROFS EXPRESS",
+ "sujet": "3000 PROFS EXPRESS",
+ "ecran": "3000 PROFS",
  "invite_nom": "Hubert Rustine",
- "invite_role": "Expert (fictif)",
+ "invite_role": "Porte-parole (fictif) du ministère",
  "invite_look": "chauve",
- "lieu_direct": "Assemblée",
- "titre_accroche": "POV : Vous êtes le présentateur d'un défi voca",
- "question": "Qui osera relever ce défi vocal complètement déjanté ?",
+ "lieu_direct": "Rayon surgelés",
+ "titre_accroche": "3000 profs en 24 h, mon plombier : 3 semaines",
+ "question": "Votre prof remplaçant, il était encore congelé ? 👇",
  "running_gag": "",
- "verite": "",
+ "verite": "Il manque des profs depuis des années ; pour le cacher, on recrute à la va-vite, et ce sont les élèves qui paient.",
  "repliques": [
   {
+   "p": "narrateur",
+   "t": "3000 profs en 24 h, mon plombier : 3 semaines",
+   "d": "[excited] 3000 profs en 24 h, mon plombier : 3 semaines"
+  },
+  {
    "p": "presentateur",
-   "t": "Eh, eh, sakadung kading, padung ding, dung padung king Eh, eh, sakading, sakading, padung ding, dung padung king Eh, eh, eh",
-   "_deb": 0.0,
-   "_fin": 9.52,
-   "objet": "micro",
+   "t": "Le ministère a trouvé 3 000 profs en 24 heures. Moi, j'ai mis trois semaines à trouver un plombier.",
+   "d": "Le ministère a trouvé trois mille profs en vingt-quatre heures. Moi, j'ai mis trois semaines à trouver un plombier.",
+   "chute": true
+  },
+  {
+   "p": "presentateur",
+   "t": "Martine, ils sortent d'où, ces profs ?"
+  },
+  {
+   "p": "envoyee",
+   "t": "J'ai mené l'enquête. Soit c'est un miracle, soit ils ont recruté au rayon surgelés.",
+   "chute": true
+  },
+  {
+   "p": "invite",
+   "t": "N'importe quoi. Nos profs sont frais. Ils ont été décongelés ce matin.",
+   "chute": true
+  },
+  {
+   "p": "presentateur",
+   "t": "Et ils enseignent quoi ?"
+  },
+  {
+   "p": "invite",
+   "t": "Ce qui reste. Le prof de sport fait les maths. Il compte les tours de terrain.",
+   "chute": true
+  },
+  {
+   "p": "envoyee",
+   "t": "Bonne nouvelle, Jean-Michel : votre plombier est arrivé. Il vient d'être nommé prof de physique.",
+   "chute": true,
+   "attente": 0.5
+  },
+  {
+   "p": "presentateur",
+   "t": "En clair : il manque des profs depuis des années, on recrute à la va-vite, et vos enfants servent de période d'essai.",
    "chute": true
   }
  ],
- "bandeau": [],
- "gag": null,
- "legende": "Un présentateur lance un défi vocal absurde dans son studio.",
+ "bandeau": [
+  "UN PROF RETROUVÉ ENTRE LES PETITS POIS ET LES FRITES",
+  "LE PLOMBIER DE JEAN-MICHEL NOMMÉ PROF DE PHYSIQUE",
+  "RECRUTEMENT EXPRESS : DES PROFS LIVRÉS EN DRIVE"
+ ],
+ "gag": {
+  "replique": 3,
+  "prompt": "Flat 2D cartoon, thick black outlines, simple shapes. In a supermarket frozen food aisle, a confused teacher with a briefcase and glasses steps out of a chest freezer covered in frost, holding a piece of chalk, shoppers stare, comedic, deadpan."
+ },
+ "legende": "3000 profs trouvés en 24 h. Le secret ? Le rayon surgelés. Satire, personnages fictifs.",
  "hashtags": [
   "petitsdramas",
-  "defivocal",
-  "humourabsurde",
-  "studiofolklorique",
-  "chantdecale",
-  "emissionfun",
-  "deliresonore"
+  "humour",
+  "education",
+  "prof",
+  "actualite",
+  "satire",
+  "drole"
  ],
- "sources": [
-  "https://www.tiktok.com/@gebutaw/video/7664157906304011528"
- ],
- "decoupage": [
-  {
-   "scene": "1",
-   "repliques": [
-    0
-   ],
-   "lieu": "",
-   "son": "",
-   "duree": 0.0,
-   "decor": "studio avec des lumières néon colorées, des microphones géants, et des écrans géants affichant des mots-clés comme 'DÉFI' et 'CHALLENGE'.",
-   "titre": "Studio du Défi Vocal"
-  }
- ],
- "studio": {
-  "moment": "soir",
-  "lieux": [
-   "studio"
-  ],
-  "costumes": {
-   "presentateur": {
-    "haut": "chemise",
-    "c_haut": "bleu",
-    "motif": "rayures",
-    "bas": "pantalon",
-    "chaussures": "baskets",
-    "details": [
-     "moustache",
-     "lunettes_soleil",
-     "micro"
-    ],
-    "chapeau": null,
-    "cheveux": "carre",
-    "c_cheveux": "brun"
-   }
-  },
-  "personnages": {
-   "presentateur": {
-    "genre": "h",
-    "age": 45,
-    "taille": 1,
-    "corpulence": 0.7,
-    "cheveux": "carre",
-    "barbe": "trois_jours"
-   }
-  },
-  "gags": [
-   "« Le défi du jour : 100 likes ou c'est la banqueroute ! »",
-   "\"Ne cherchez pas la logique, c'est de l'art !\"",
-   "\"Gagnant : celui qui rit le moins !\""
-  ],
-  "ambiances": [
-   "neon"
-  ],
-  "cadence": "rapide",
-  "plans": [
-   {
-    "replique": 0,
-    "plan": "large",
-    "mouvement": "fixe",
-    "geste": "bras_ouverts",
-    "reaction": "aucune"
-   },
-   {
-    "replique": 0,
-    "plan": "serre",
-    "mouvement": "epaule",
-    "geste": "pointe_d",
-    "reaction": "regard_camera"
-   }
-  ],
-  "objets": [
-   {
-    "replique": 0,
-    "objet": "micro"
-   }
-  ]
- },
- "doublage": {
-  "piste": "/tmp/tmppzc0091r/piste.wav",
-  "duree": 9.96,
-  "source": "https://www.tiktok.com/@gebutaw/video/7664157906304011528",
-  "auteur": "gebutaw",
-  "contexte": "Un présentateur excentrique et joyeux anime une émission décalée où il lance des phrases chantonnantes et rythmiques pour capter l'attention des spectateurs. L'ambiance est légère et humoristique, comme un jeu ou un défi vocal.",
-  "evenements": [],
-  "visuel": {
-   "gestes": [],
-   "duree": 10.0,
-   "nb_plans": 1,
-   "duree_plan": 10.0,
-   "coupes": [],
-   "plans": {
-    "tres_serre": 0.0,
-    "serre": 0.0,
-    "moyen": 0.0,
-    "large": 1.0
-   },
-   "camera": {
-    "fixe": 0.789,
-    "avance": 0.0,
-    "recul": 0.0,
-    "travelling": 0.0,
-    "epaule": 0.211
-   },
-   "nb_personnes": 0,
-   "personnes": [],
-   "visages": false,
-   "sourires": 0.0,
-   "energie": 0.303,
-   "mur": [
-    243,
-    223,
-    208
-   ],
-   "palette": [
-    [
-     243,
-     223,
-     208,
-     0.812
-    ],
-    [
-     253,
-     253,
-     252,
-     0.143
-    ],
-    [
-     14,
-     12,
-     12,
-     0.019
-    ],
-    [
-     171,
-     166,
-     164,
-     0.009
-    ],
-    [
-     111,
-     105,
-     103,
-     0.009
-    ],
-    [
-     58,
-     55,
-     54,
-     0.007
-    ]
-   ],
-   "lumiere": {
-    "luminosite": 237.6,
-    "chaleur": 29.1,
-    "saturation": 31.9
-   },
-   "moment": "jour"
-  },
-  "audio": {
-   "duree": 10.0,
-   "nb_voix": 1,
-   "voix": [
-    {
-     "hz": 320,
-     "genre": "f",
-     "part": 1.0
-    }
-   ],
-   "debit": 2.21,
-   "blanc_moyen": 0.0,
-   "coupes": 0,
-   "dynamique_db": 8.9,
-   "cris": 0.079,
-   "musique": null,
-   "impacts": 0,
-   "impacts_10s": 0.0,
-   "graves": 0,
-   "aigus": 0,
-   "sur_vanne": 0,
-   "evenements": {},
-   "emotions": {
-    "excited": 1
-   }
-  },
-  "video_origine": "/tmp/tmppzc0091r/src.mp4"
- },
- "fiche": {
-  "note": 0,
-  "decision": "vidéo manuelle (bande son d'une vidéo TikTok)",
-  "decoupage": [
-   {
-    "scene": "1",
-    "repliques": [
-     0
-    ],
-    "lieu": "",
-    "son": "",
-    "duree": 0.0,
-    "decor": "studio avec des lumières néon colorées, des microphones géants, et des écrans géants affichant des mots-clés comme 'DÉFI' et 'CHALLENGE'.",
-    "titre": "Studio du Défi Vocal"
-   }
-  ]
- },
- "_monte": true,
+ "sources": [],
+ "decoupage": [],
  "_voix_hz": {
-  "presentateur": 329
+  "narrateur": 197,
+  "invite": 124,
+  "presentateur": 129,
+  "envoyee": 206
  },
  "_voix_genre": {
-  "presentateur": "f"
+  "invite": "h",
+  "presentateur": "h"
  },
  "realisation": {
-  "moment": "soir",
+  "moment": "matin",
   "lieux": [
-   "salon"
+   "classe"
   ],
-  "gags": [
-   "« Le défi du jour : 100 likes ou c'est la banqueroute ! »",
-   "\"Ne cherchez pas la logique, c'est de l'art !\"",
-   "\"Gagnant : celui qui rit le moins !\""
-  ],
+  "gags": [],
   "ambiances": [
-   "neon",
+   "pluie",
    "poussiere"
   ],
-  "source": "auteur+image",
+  "source": "robot",
   "tenues": {
-   "presentateur": "chemise"
+   "presentateur": "gilet",
+   "envoyee": "pull",
+   "invite": "chemise"
   },
   "plans": [
-   "serre/epaule"
+   "large/fixe",
+   "serre/fixe",
+   "epaule/fixe",
+   "serre/fixe",
+   "serre/epaule",
+   "moyen/recul",
+   "tres_serre/avance",
+   "tres_serre/fixe",
+   "serre/avance"
   ]
  }
 }
