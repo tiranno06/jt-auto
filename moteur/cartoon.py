@@ -344,7 +344,11 @@ class TempsDepasse(RuntimeError):
     """La 2e version du jury n'aurait pas le temps de finir avant la limite de GitHub : on garde la 1re."""
 
 
-def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False, reprise=None, limite=None):
+def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False, reprise=None, limite=None, plage=None):
+    import dessin_partage as DP
+    args0 = None                                                           # pour le dessin partagé : les arguments tels qu'au départ
+    if not apercu and reprise is None and plage is None and os.environ.get("DESSIN_PARTAGE", "1") != "0" and os.environ.get("GH_TOKEN"):
+        import copy as _cp; args0 = _cp.deepcopy({"sk": sk, "audios": audios, "mots": mots, "decors": decors, "mini": mini, "module": {"DETAIL": DETAIL}})
     tmp = tempfile.mkdtemp(); reps = sk["repliques"]; decors = decors or {}; rng = np.random.default_rng(11)
     roles = sorted({r["p"] for r in reps if r["p"] != "narrateur"}, key=lambda r: [x["p"] for x in reps].index(r))   # la voix off n'est pas dessinée
     # scènes : découpage de l'auteur (sinon une seule scène)
@@ -1539,6 +1543,41 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
                 cv2.imwrite(f"{sortie}/{q['i']:02d}{'abcd'[j]}.png", cv2.cvtColor((image(int(tm * FPS)) if os.environ.get("APERCU_PLEIN") == "1" else cv2.resize(image(int(tm * FPS)), (360, 640))), cv2.COLOR_RGB2BGR))
         return total
 
+    global _IMAGE
+    _IMAGE = image                                                         # les processus de rendu héritent de tout (fork)
+    n_proc = min(4, os.cpu_count() or 1) if os.environ.get("RENDU_PARALLELE", "1") != "0" else 1
+    pool = None
+    if n_proc > 1 and nf > 90:                                             # rendu sur plusieurs processeurs (images dans l'ordre)
+        import multiprocessing as mp
+        try:
+            cv2.setNumThreads(1)                                           # avant de dupliquer le programme : pas de fil OpenCV en cours (sinon blocage)
+            pool = mp.get_context("fork").Pool(n_proc)
+        except Exception as e: print(f"  rendu parallèle impossible ({e}) : un seul processeur", flush=True); pool = None
+    x264 = ["-c:v", "libx264", "-preset", (os.environ.get("PRESET_X264") or "slow"), "-tune", "animation",
+            "-crf", (os.environ.get("CRF") or "15"), "-maxrate", "20M", "-bufsize", "30M", "-profile:v", "high", "-level", "4.2",
+            "-g", str(2 * FPS), "-colorspace", "bt709", "-color_primaries", "bt709", "-color_trc", "bt709", "-pix_fmt", "yuv420p"]
+    entree = ["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-"]
+    import progression, time as _time
+
+    def encoder_plage(a_, b_, chemin, progres=None):
+        """Dessine les images a_..b_-1 et les encode (vidéo seule, mêmes réglages : les morceaux se recollent sans réencoder)."""
+        ff_ = subprocess.Popen(entree + x264 + ["-an", chemin], stdin=subprocess.PIPE)
+        try:
+            imgs = pool.imap(_image_octets, range(a_, b_), chunksize=4) if pool else (image(fi).tobytes() for fi in range(a_, b_))
+            for octets in imgs:
+                ff_.stdin.write(octets)
+                if progres: progres()
+        except BaseException:
+            ff_.kill(); raise
+        ff_.stdin.close(); ff_.wait()
+        if ff_.returncode != 0: raise RuntimeError("encodage d'un morceau en échec")
+
+    if plage is not None:                                                  # machine d'aide (dessin partagé) : seulement son morceau
+        try: encoder_plage(plage[0], plage[1], sortie)
+        finally:
+            if pool: pool.close(); pool.join()
+        return total
+
     # ---- son : voix, bruitages (woosh à chaque scène, rimshot à la chute finale)
     n = int(SRM * (total + 1)); mix = np.zeros((n, 2))
     if DOUB:                                                               # la bande son d'origine telle quelle (voix + musique)
@@ -1642,20 +1681,6 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
                                       "decors": sorted(str(k) for k in (decors or {})), "fin": FIN_CARTE, "gel": GEL, "w": W, "h": H, "mini": mini,
                                       "transitions": transitions, "studio": {k: v for k, v in (B or {}).items() if k not in ("decoupe", "plans", "bruitages", "source")}}))
     except Exception as e: print(f"empreintes impossibles ({str(e)[:100]}) : pas de redessin partiel", flush=True); RENDU["sig_global"] = None
-    global _IMAGE
-    _IMAGE = image                                                         # les processus de rendu héritent de tout (fork)
-    n_proc = min(4, os.cpu_count() or 1) if os.environ.get("RENDU_PARALLELE", "1") != "0" else 1
-    pool = None
-    if n_proc > 1 and nf > 90:                                             # rendu sur plusieurs processeurs (images dans l'ordre)
-        import multiprocessing as mp
-        try:
-            cv2.setNumThreads(1)                                           # avant de dupliquer le programme : pas de fil OpenCV en cours (sinon blocage)
-            pool = mp.get_context("fork").Pool(n_proc)
-        except Exception as e: print(f"  rendu parallèle impossible ({e}) : un seul processeur", flush=True); pool = None
-    x264 = ["-c:v", "libx264", "-preset", (os.environ.get("PRESET_X264") or "slow"), "-tune", "animation",
-            "-crf", (os.environ.get("CRF") or "15"), "-maxrate", "20M", "-bufsize", "30M", "-profile:v", "high", "-level", "4.2",
-            "-g", str(2 * FPS), "-colorspace", "bt709", "-color_primaries", "bt709", "-color_trc", "bt709", "-pix_fmt", "yuv420p"]
-    entree = ["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-"]
     morceaux = None                                                        # 2e version du jury : seulement les passages qui changent
     if reprise and os.path.exists(reprise.get("video") or "") and os.environ.get("REDESSIN_PARTIEL", "1") != "0":
         try:
@@ -1666,7 +1691,6 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
                 if n_ref > 0.75 * nf: morceaux = None                      # presque tout change : rendu complet, plus simple
                 else: print(f"  redessin partiel : {n_ref}/{nf} images à redessiner ({len(morceaux)} passage(s)), le reste repris tel quel", flush=True)
         except Exception as e: print(f"  redessin partiel impossible ({str(e)[:120]}) : rendu complet", flush=True); morceaux = None
-    import progression, time as _time
     t_rendu = _time.time()
     if limite:                                                             # 2e version du jury : assez de temps avant la limite de GitHub ?
         v_ = float((reprise or {}).get("rendu", {}).get("vitesse") or 0)
@@ -1674,6 +1698,21 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
         if v_ > 0 and t_rendu + a_faire / v_ * 1.15 > limite:
             if pool: pool.close(); pool.join()
             raise TempsDepasse(f"{a_faire} images à redessiner, environ {a_faire / v_ / 60:.0f} min : pas le temps avant la limite")
+    if morceaux is None and args0 is not None and DP.actif(nf):           # vidéo longue : dessin partagé entre plusieurs machines
+        compte = [0]
+        def suivi():
+            compte[0] += 1
+            if compte[0] % 30 == 0: progression.rendu(compte[0], nf, t_rendu)   # (les morceaux des aides arrivent ensuite d'un coup)
+        try: liste_p = DP.dessiner(nf, args0, encoder_plage, journal=lambda m: print(m, flush=True), progres=suivi)
+        except Exception as e: print(f"  dessin partagé en échec ({str(e)[:150]}) : une seule machine", flush=True); liste_p = None
+        if liste_p:
+            if pool: pool.close(); pool.join()
+            open(f"{tmp}/recollage.txt", "w").write("\n".join(f"file '{c}'" for c in liste_p) + "\n")
+            subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", f"{tmp}/recollage.txt", "-i", wav, "-map", "0:v", "-map", "1:a",
+                            "-c:v", "copy", "-c:a", "aac", "-b:a", "192k", "-shortest", "-movflags", "+faststart", sortie], check=True, timeout=900)
+            RENDU["vitesse"] = DP.VITESSE[0] or nf / max(1.0, _time.time() - t_rendu) / len(liste_p)   # vitesse d'UNE machine (2e version : seule)
+            print(f"  dessin partagé terminé en {(_time.time() - t_rendu) / 60:.1f} min", flush=True)
+            return total
     if morceaux is None:
         ff = subprocess.Popen(entree + ["-i", wav] + x264 + ["-c:a", "aac", "-b:a", "192k", "-shortest", "-movflags", "+faststart", sortie], stdin=subprocess.PIPE)
         images = pool.imap(_image_octets, range(nf), chunksize=4) if pool else (image(fi).tobytes() for fi in range(nf))

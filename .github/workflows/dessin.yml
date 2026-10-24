@@ -1,0 +1,53 @@
+name: Dessin partagé (machines d'aide)
+run-name: "Dessin partagé ${{ inputs.paquet }}"
+
+on:
+  workflow_dispatch:             # lancé par la fabrication (moteur/dessin_partage.py) : une machine par morceau d'images
+    inputs:
+      paquet:
+        description: "Nom du paquet de la fabrication (release dessins-temp)"
+        required: true
+      sha:
+        description: "Version exacte du robot à utiliser (celle de la fabrication)"
+        required: true
+      plages:
+        description: "Morceaux d'images à dessiner, en JSON : [[début, fin], …]"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  dessin:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 150
+    strategy:
+      fail-fast: false
+      matrix:
+        plage: ${{ fromJSON(inputs.plages) }}
+    env:
+      PYTHONHASHSEED: "0"        # même dessin, à l'image près, que la machine principale
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ inputs.sha }}
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Installer ffmpeg
+        timeout-minutes: 10
+        run: |
+          if ! (timeout 240 sudo apt-get update -q && timeout 240 sudo apt-get install -y -q ffmpeg); then
+            curl -sSL https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-linux64-gpl.tar.xz | tar xJ -C /tmp
+            sudo cp /tmp/ffmpeg-master-latest-linux64-gpl/bin/ff* /usr/local/bin/
+          fi
+
+      - name: Bibliothèques Python
+        run: pip install -r requirements.txt
+
+      - name: Dessiner le morceau
+        run: python moteur/dessin_aide.py "${{ inputs.paquet }}" "${{ matrix.plage[0] }}" "${{ matrix.plage[1] }}"
