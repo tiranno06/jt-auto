@@ -12441,54 +12441,59 @@
  },
  {
   "date": "2026-10-25",
-  "source": "https://www.tiktok.com/@vincedessine/video/7652417305963498784",
+  "source": "https://www.tiktok.com/@vincedessine/video/7618225218565197078",
   "auteur": "vincedessine",
   "visuel": {
-   "gestes": [],
-   "duree": 62.7,
-   "nb_plans": 35,
-   "duree_plan": 1.79,
+   "gestes": [
+    [
+     55.5,
+     0.49,
+     1.0
+    ],
+    [
+     108.5,
+     0.48,
+     1.0
+    ]
+   ],
+   "duree": 123.5,
+   "nb_plans": 29,
+   "duree_plan": 4.26,
    "coupes": [
-    1.48,
-    2.47,
-    5.43,
-    7.4,
-    8.39,
-    9.38,
-    10.86,
-    13.33,
-    16.29,
-    16.78,
-    22.21,
-    22.71,
-    23.69,
-    24.68,
-    26.65,
-    28.63,
-    30.11,
-    30.6,
-    36.03,
-    36.53,
-    37.51,
-    38.5,
-    41.96,
-    43.93,
-    44.42,
-    45.41,
-    45.9,
-    53.8,
-    54.79,
-    56.27,
-    57.75,
-    59.23,
-    60.71,
-    61.7
+    2.0,
+    3.5,
+    4.5,
+    8.0,
+    10.0,
+    14.0,
+    16.0,
+    17.0,
+    28.0,
+    32.0,
+    33.5,
+    36.0,
+    43.0,
+    45.5,
+    46.5,
+    63.5,
+    67.0,
+    68.5,
+    73.5,
+    77.0,
+    82.5,
+    87.5,
+    90.5,
+    93.0,
+    96.5,
+    100.5,
+    114.0,
+    121.0
    ],
    "plans": {
     "tres_serre": 0.0,
-    "serre": 0.0,
+    "serre": 0.377,
     "moyen": 0.0,
-    "large": 1.0
+    "large": 0.623
    },
    "camera": {
     "fixe": 1.0,
@@ -12497,81 +12502,105 @@
     "travelling": 0.0,
     "epaule": 0.0
    },
-   "nb_personnes": 0,
-   "personnes": [],
-   "visages": false,
+   "nb_personnes": 1,
+   "personnes": [
+    {
+     "place": "centre",
+     "presence": 0.377,
+     "habit": [
+      248,
+      242,
+      241
+     ],
+     "cheveux": [
+      177,
+      177,
+      180
+     ],
+     "sourire": 0.0,
+     "taille": 0.239,
+     "tete_penchee": 13.1,
+     "regard_cote": 0.0
+    }
+   ],
+   "visages": true,
    "sourires": 0.0,
-   "energie": 0.319,
+   "energie": 0.104,
    "mur": [
     252,
-    250,
-    253
+    249,
+    250
    ],
    "palette": [
     [
-     253,
-     251,
-     253,
-     0.778
+     252,
+     249,
+     250,
+     0.417
     ],
     [
-     9,
-     5,
-     7,
-     0.076
+     1,
+     0,
+     1,
+     0.213
     ],
     [
-     248,
-     180,
-     152,
-     0.072
+     225,
+     189,
+     162,
+     0.118
     ],
     [
-     129,
-     100,
-     102,
-     0.034
+     218,
+     105,
+     54,
+     0.104
     ],
     [
-     200,
-     197,
-     199,
-     0.021
+     28,
+     28,
+     36,
+     0.101
     ],
     [
-     60,
-     51,
-     51,
-     0.018
+     117,
+     88,
+     67,
+     0.047
     ]
    ],
    "lumiere": {
-    "luminosite": 225.9,
-    "chaleur": 8.2,
-    "saturation": 23.0
+    "luminosite": 165.9,
+    "chaleur": 26.7,
+    "saturation": 50.8
    },
    "moment": "jour"
   },
   "audio": {
-   "duree": 62.3,
-   "nb_voix": 2,
+   "duree": 123.1,
+   "nb_voix": 3,
    "voix": [
     {
-     "hz": 188,
+     "hz": 200,
      "genre": "f",
-     "part": 0.61
+     "part": 0.1
     },
     {
-     "hz": 230,
-     "genre": "f",
-     "part": 0.39
+     "hz": 110,
+     "genre": "h",
+     "part": 0.45
+    },
+    {
+     "hz": 107,
+     "genre": "h",
+     "part": 0.45
     }
    ],
-   "debit": 5.16,
-   "blanc_moyen": 0.16,
-   "coupes": 11,
-   "dynamique_db": 20.9,
-   "cris": 0.025,
+   "debit": 3.27,
+   "blanc_moyen": 0.77,
+   "coupes": 4,
+   "dynamique_db": 22.7,
+   "cris": 0.014,
    "musique": null,
    "impacts": 0,
    "impacts_10s": 0.0,
@@ -12580,135 +12609,177 @@
    "sur_vanne": 0,
    "evenements": {},
    "emotions": {
-    "provocative": 4,
-    "excited": 2,
-    "confused": 2,
-    "shocked": 2,
-    "furious": 2,
-    "annoyed": 1,
-    "provoked": 1,
-    "whispered": 1
+    "excited": 9,
+    "solemn": 6,
+    "sarcastic": 3,
+    "urgent": 3,
+    "confident": 2,
+    "skeptical": 2,
+    "serious": 2,
+    "doubtful": 1
    }
   },
   "claude": {
    "lieux": [
-    "salon"
+    "bureau",
+    "salle de crise"
    ],
-   "moment": "soir",
+   "moment": "jour",
    "costumes": {
     "presentateur": {
-     "haut": "tshirt",
-     "c_haut": "rouge",
-     "motif": "carreaux",
-     "bas": "jean",
-     "chaussures": "baskets",
+     "haut": "costume",
+     "c_haut": "bleu marine",
+     "motif": "uni",
+     "bas": "pantalon",
+     "chaussures": "ville",
      "details": [
-      "barbe_courte",
-      "lunettes_soleil"
-     ],
-     "chapeau": null
+      "cravate",
+      "montre",
+      "barbe_courte"
+     ]
+    },
+    "invite": {
+     "haut": "chemise",
+     "c_haut": "blanc",
+     "motif": "uni",
+     "bas": "pantalon",
+     "chaussures": "ville",
+     "details": [
+      "cravate",
+      "lunettes_vue",
+      "barbe_pleine"
+     ]
     },
     "envoyee": {
-     "haut": "chemise",
+     "haut": "blouse",
      "c_haut": "bleu",
      "motif": "uni",
      "bas": "pantalon",
      "chaussures": "ville",
      "details": [
-      "moustache",
-      "montre"
-     ],
-     "chapeau": null
+      "stylos",
+      "lunettes_soleil",
+      "bracelet"
+     ]
     }
    },
    "objets": [
     {
-     "replique": 0,
-     "objet": "micro"
+     "replique": 3,
+     "objet": "ordinateur"
     },
     {
-     "replique": 10,
+     "replique": 5,
+     "objet": "calculatrice"
+    },
+    {
+     "replique": 16,
+     "objet": "carte"
+    },
+    {
+     "replique": 28,
      "objet": "telephone"
-    },
-    {
-     "replique": 20,
-     "objet": "bouteille"
     }
    ],
    "gags": [
-    "Jeu des préférences : 100% absurde",
-    "Questions interdites : à vos risques et périls",
-    "Réponses garanties sans filtre"
+    "Les notes de frais : jamais payées.",
+    "Mission Afrique : 2000 ans de retard.",
+    "Self-service : toujours en rupture de stock."
    ],
    "ambiances": [
-    "neon"
+    "poussiere"
    ],
    "plans": [
     {
      "replique": 0,
-     "plan": "large",
+     "plan": "serre",
      "mouvement": "fixe",
-     "geste": "bras_ouverts",
-     "reaction": "aucune"
-    },
-    {
-     "replique": 2,
-     "plan": "serre",
-     "mouvement": "zoom_choc",
-     "geste": "pointe_g",
-     "reaction": "choc"
-    },
-    {
-     "replique": 8,
-     "plan": "serre",
-     "mouvement": "zoom_choc",
-     "geste": "facepalm",
+     "geste": "pointe_d",
      "reaction": "sceptique"
     },
     {
-     "replique": 16,
+     "replique": 1,
      "plan": "serre",
-     "mouvement": "zoom_choc",
-     "geste": "poing",
-     "reaction": "colere"
+     "mouvement": "fixe",
+     "geste": "haussement",
+     "reaction": "choc"
     },
     {
-     "replique": 20,
-     "plan": "tres_serre",
-     "mouvement": "zoom_choc",
+     "replique": 3,
+     "plan": "moyen",
+     "mouvement": "fixe",
      "geste": "gratte_tete",
      "reaction": "gene"
     },
     {
-     "replique": 22,
-     "plan": "serre",
+     "replique": 5,
+     "plan": "large",
      "mouvement": "zoom_choc",
+     "geste": "bras_ouverts",
+     "reaction": "pleurs"
+    },
+    {
+     "replique": 12,
+     "plan": "serre",
+     "mouvement": "avance",
+     "geste": "pointe_g",
+     "reaction": "colere"
+    },
+    {
+     "replique": 16,
+     "plan": "tres_serre",
+     "mouvement": "fixe",
+     "geste": "poings",
+     "reaction": "choc"
+    },
+    {
+     "replique": 19,
+     "plan": "large",
+     "mouvement": "travelling",
+     "geste": "mains_hanches",
+     "reaction": "sceptique"
+    },
+    {
+     "replique": 24,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "facepalm",
+     "reaction": "gene"
+    },
+    {
+     "replique": 32,
+     "plan": "contre_plongee",
+     "mouvement": "fixe",
      "geste": "pointe_d",
      "reaction": "colere"
     }
    ]
   },
   "realisation": {
-   "moment": "soir",
+   "moment": "jour",
    "lieux": [
-    "salon",
-    "salon"
+    "bureau",
+    "bureau"
    ],
    "gags": [
-    "Jeu des préférences : 100% absurde",
-    "Questions interdites : à vos risques et périls",
-    "Réponses garanties sans filtre"
+    "Les notes de frais : jamais payées.",
+    "Mission Afrique : 2000 ans de retard.",
+    "Self-service : toujours en rupture de stock."
    ],
    "ambiances": [
-    "neon",
     "poussiere"
    ],
    "source": "auteur+image",
    "tenues": {
-    "presentateur": "tshirt",
-    "envoyee": "chemise"
+    "presentateur": "costume",
+    "invite": "chemise",
+    "envoyee": "blouse"
    },
    "plans": [
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
     "large/fixe",
     "large/fixe",
     "large/fixe",
@@ -12741,6 +12812,358 @@
     "large/fixe"
    ]
   },
-  "video": "2026-10-26_00h35_emission.mp4"
+  "video": "2026-10-26_00h04_emission.mp4"
+ },
+ {
+  "date": "2026-10-25",
+  "source": "https://www.tiktok.com/@yan_animation0/video/7696516142185172257",
+  "auteur": "yan_animation0",
+  "visuel": {
+   "gestes": [],
+   "duree": 61.5,
+   "nb_plans": 13,
+   "duree_plan": 4.73,
+   "coupes": [
+    3.0,
+    4.0,
+    13.0,
+    13.5,
+    21.5,
+    23.5,
+    32.0,
+    33.0,
+    37.5,
+    39.0,
+    51.5,
+    52.5
+   ],
+   "plans": {
+    "tres_serre": 0.0,
+    "serre": 0.065,
+    "moyen": 0.049,
+    "large": 0.886
+   },
+   "camera": {
+    "fixe": 1.0,
+    "avance": 0.0,
+    "recul": 0.0,
+    "travelling": 0.0,
+    "epaule": 0.0
+   },
+   "nb_personnes": 1,
+   "personnes": [
+    {
+     "place": "centre",
+     "presence": 0.114,
+     "habit": [
+      0,
+      0,
+      0
+     ],
+     "cheveux": [
+      241,
+      157,
+      79
+     ],
+     "sourire": 0.0,
+     "taille": 0.161,
+     "tete_penchee": 1.4,
+     "regard_cote": 0.0
+    }
+   ],
+   "visages": true,
+   "sourires": 0.0,
+   "energie": 0.074,
+   "mur": [
+    0,
+    0,
+    0
+   ],
+   "palette": [
+    [
+     0,
+     0,
+     0,
+     0.675
+    ],
+    [
+     130,
+     125,
+     123,
+     0.122
+    ],
+    [
+     177,
+     171,
+     169,
+     0.107
+    ],
+    [
+     88,
+     54,
+     49,
+     0.053
+    ],
+    [
+     237,
+     224,
+     218,
+     0.036
+    ],
+    [
+     234,
+     156,
+     74,
+     0.007
+    ]
+   ],
+   "lumiere": {
+    "luminosite": 50.4,
+    "chaleur": 5.8,
+    "saturation": 12.0
+   },
+   "moment": "nuit"
+  },
+  "audio": {
+   "duree": 61.1,
+   "nb_voix": 2,
+   "voix": [
+    {
+     "hz": 159,
+     "genre": "h",
+     "part": 0.63
+    },
+    {
+     "hz": 220,
+     "genre": "f",
+     "part": 0.37
+    }
+   ],
+   "debit": 7.86,
+   "blanc_moyen": 5.09,
+   "coupes": 4,
+   "dynamique_db": 34.6,
+   "cris": 0.014,
+   "musique": null,
+   "impacts": 0,
+   "impacts_10s": 0.0,
+   "graves": 0,
+   "aigus": 0,
+   "sur_vanne": 0,
+   "evenements": {},
+   "emotions": {
+    "mocking": 7,
+    "excited": 1,
+    "suspicious": 1,
+    "playful": 1,
+    "laughing": 1,
+    "teasing": 1,
+    "mimicking": 1,
+    "whispering": 1
+   }
+  },
+  "claude": {
+   "lieux": [
+    "cuisine"
+   ],
+   "moment": "soir",
+   "costumes": {
+    "presentateur": {
+     "haut": "tshirt",
+     "c_haut": "bleu",
+     "motif": "uni",
+     "bas": "jean",
+     "chaussures": "baskets",
+     "details": [
+      "barbe_courte",
+      "bracelets"
+     ]
+    },
+    "envoyee": {
+     "haut": "pull",
+     "c_haut": "vert",
+     "motif": "carreaux",
+     "bas": "jogging",
+     "chaussures": "baskets",
+     "details": [
+      "collier",
+      "sac_bandouliere"
+     ]
+    }
+   },
+   "objets": [
+    {
+     "replique": 0,
+     "objet": "micro"
+    },
+    {
+     "replique": 2,
+     "objet": "assiette"
+    },
+    {
+     "replique": 3,
+     "objet": "couteau"
+    },
+    {
+     "replique": 5,
+     "objet": "telephone"
+    },
+    {
+     "replique": 14,
+     "objet": "bouteille"
+    }
+   ],
+   "gags": [
+    "Micro-ondes : Le seul endroit où la viande peut faire des feintes !",
+    "Attention : Ne pas toucher la viande, même si elle dit qu'elle est chaude !",
+    "Blague garantie : 100% de risques de se faire avoir !"
+   ],
+   "ambiances": [
+    "vapeur"
+   ],
+   "plans": [
+    {
+     "replique": 0,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "gratte_tete",
+     "reaction": "aucune"
+    },
+    {
+     "replique": 1,
+     "plan": "moyen",
+     "mouvement": "fixe",
+     "geste": "pointe_d",
+     "reaction": "sceptique"
+    },
+    {
+     "replique": 2,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "bras_ouverts",
+     "reaction": "joie"
+    },
+    {
+     "replique": 3,
+     "plan": "large",
+     "mouvement": "zoom_choc",
+     "geste": "facepalm",
+     "reaction": "choc"
+    },
+    {
+     "replique": 4,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "poches",
+     "reaction": "rire"
+    },
+    {
+     "replique": 5,
+     "plan": "tres_serre",
+     "mouvement": "fixe",
+     "geste": "pointe_g",
+     "reaction": "aucune"
+    },
+    {
+     "replique": 6,
+     "plan": "large",
+     "mouvement": "fixe",
+     "geste": "mains_hanches",
+     "reaction": "gene"
+    },
+    {
+     "replique": 7,
+     "plan": "serre",
+     "mouvement": "zoom_choc",
+     "geste": "poing",
+     "reaction": "choc"
+    },
+    {
+     "replique": 8,
+     "plan": "moyen",
+     "mouvement": "travelling",
+     "geste": "explique",
+     "reaction": "sceptique"
+    },
+    {
+     "replique": 9,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "gratte_tete",
+     "reaction": "joie"
+    },
+    {
+     "replique": 10,
+     "plan": "large",
+     "mouvement": "fixe",
+     "geste": "pointe_d",
+     "reaction": "aucune"
+    },
+    {
+     "replique": 11,
+     "plan": "tres_serre",
+     "mouvement": "fixe",
+     "geste": "pointe_g",
+     "reaction": "choc"
+    },
+    {
+     "replique": 12,
+     "plan": "serre",
+     "mouvement": "zoom_choc",
+     "geste": "facepalm",
+     "reaction": "rire"
+    },
+    {
+     "replique": 13,
+     "plan": "moyen",
+     "mouvement": "fixe",
+     "geste": "chuchote",
+     "reaction": "joie"
+    },
+    {
+     "replique": 14,
+     "reaction": "regard_camera"
+    }
+   ]
+  },
+  "realisation": {
+   "moment": "soir",
+   "lieux": [
+    "cuisine",
+    "cuisine"
+   ],
+   "gags": [
+    "Micro-ondes : Le seul endroit où la viande peut faire des feintes !",
+    "Attention : Ne pas toucher la viande, même si elle dit qu'elle est chaude !",
+    "Blague garantie : 100% de risques de se faire avoir !"
+   ],
+   "ambiances": [
+    "poussiere",
+    "vapeur"
+   ],
+   "source": "auteur+image",
+   "tenues": {
+    "presentateur": "tshirt",
+    "envoyee": "pull"
+   },
+   "plans": [
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe"
+   ]
+  },
+  "video": "2026-10-26_00h52_emission.mp4"
  }
 ]

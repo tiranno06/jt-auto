@@ -2688,36 +2688,73 @@
   "cadence": "rapide"
  },
  {
-  "moment": "soir",
+  "moment": "jour",
   "lieux": [
-   "salon",
-   "salon"
+   "bureau",
+   "bureau"
   ],
   "source": "auteur+image",
-  "duree": 65.8,
+  "duree": 126.4,
   "plans": {
-   "large": 30
+   "large": 34
   },
   "mouvements": {
-   "fixe": 30
+   "fixe": 34
   },
   "costumes": {
-   "presentateur": "tshirt",
-   "envoyee": "chemise"
+   "presentateur": "costume",
+   "invite": "chemise",
+   "envoyee": "blouse"
   },
-  "figurants": 0,
+  "figurants": 2,
   "ambiances": [
-   "neon",
    "poussiere"
   ],
-  "controle": "Humoriste 7.0/10 : 0.4 s La chute finale manque de punch. Le zoom choc sur le personnage qui dit 'C’est un pouilleux!' est absent, ce qui affaiblit l'impact comique.; 16.9 s Les vannes à ce moment-là ",
-  "fichier": "2026-10-26_00h35_emission.mp4",
+  "controle": "Humoriste 6.0/10 : 111.9 s La chute finale manque de punch et n'est pas assez mise en valeur.; 70.5 s Les vannes sur les Africains pourraient être plus nuancées pour éviter tout malentendu.; 81.8 s Aj",
+  "fichier": "2026-10-26_00h04_emission.mp4",
   "cine": {
-   "focus": false,
+   "focus": true,
    "vertige": true,
    "tiers": true,
    "etalonnage": true,
-   "profondeur": true,
+   "profondeur": false,
+   "grain": true,
+   "reflets": true,
+   "son": true
+  },
+  "cadence": "rapide"
+ },
+ {
+  "moment": "soir",
+  "lieux": [
+   "cuisine",
+   "cuisine"
+  ],
+  "source": "auteur+image",
+  "duree": 64.5,
+  "plans": {
+   "large": 15
+  },
+  "mouvements": {
+   "fixe": 15
+  },
+  "costumes": {
+   "presentateur": "tshirt",
+   "envoyee": "pull"
+  },
+  "figurants": 0,
+  "ambiances": [
+   "poussiere",
+   "vapeur"
+  ],
+  "controle": "Humoriste 6.0/10 : 0.4 s La chute finale n'est pas assez mise en valeur. Le zoom choc sur le personnage qui dit 'chaud là-dedans' est absent, ce qui réduit l'impact comique.; 30.8 s Les répétitions de",
+  "fichier": "2026-10-26_00h52_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": false,
+   "tiers": false,
+   "etalonnage": true,
+   "profondeur": false,
    "grain": true,
    "reflets": true,
    "son": true
