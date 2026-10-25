@@ -2002,27 +2002,28 @@
   "cadence": "rapide"
  },
  {
-  "moment": "jour",
+  "moment": "soir",
   "lieux": [
-   "chambre",
-   "chambre"
+   "bar"
   ],
-  "source": "robot+image",
-  "duree": 70.6,
+  "source": "auteur",
+  "duree": 63.5,
   "plans": {
-   "large": 27
+   "large": 1
   },
   "mouvements": {
-   "fixe": 27
+   "fixe": 1
   },
   "costumes": {
-   "presentateur": "pyjama",
-   "invite": "pyjama"
+   "presentateur": "chemise"
   },
-  "figurants": 0,
-  "ambiances": [],
-  "controle": "Humoriste 8.6/10 : 66.6 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 6.6/10 : montage trop lent : 0.3 plans toutes les 10 s (il en faudrait ~4.8); 56.6 s pas assez de plans",
-  "fichier": "2026-10-25_14h23_emission.mp4",
+  "figurants": 2,
+  "ambiances": [
+   "neon",
+   "poussiere"
+  ],
+  "controle": "Humoriste 6.0/10 : 0.4 s La chute finale n'est pas assez marquée et manque d'un zoom choc pour accentuer l'effet comique.; 30.0 s Les réactions des personnages secondaires (barman et client) sont trop",
+  "fichier": "2026-10-25_14h39_emission.mp4",
   "cine": {
    "focus": false,
    "vertige": false,
@@ -2030,9 +2031,9 @@
    "etalonnage": true,
    "profondeur": false,
    "grain": true,
-   "reflets": false,
+   "reflets": true,
    "son": true
   },
-  "cadence": null
+  "cadence": "pose"
  }
 ]

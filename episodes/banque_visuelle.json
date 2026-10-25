@@ -6957,167 +6957,24 @@
  },
  {
   "date": "2026-10-25",
-  "source": "https://www.tiktok.com/@charly.bse/video/7649401581833588000",
-  "auteur": "charly.bse",
-  "visuel": {
-   "gestes": [
-    [
-     35.5,
-     0.5,
-     1.0
-    ],
-    [
-     41.0,
-     0.5,
-     1.0
-    ]
-   ],
-   "duree": 67.5,
-   "nb_plans": 35,
-   "duree_plan": 1.93,
-   "coupes": [
-    1.5,
-    4.0,
-    5.5,
-    6.5,
-    7.5,
-    9.0,
-    10.0,
-    11.5,
-    12.5,
-    14.5,
-    15.5,
-    17.5,
-    18.5,
-    20.5,
-    21.5,
-    22.5,
-    27.0,
-    29.0,
-    31.5,
-    32.5,
-    33.0,
-    45.0,
-    47.0,
-    49.0,
-    50.5,
-    53.0,
-    54.5,
-    57.5,
-    59.5,
-    60.5,
-    61.5,
-    63.0,
-    64.0,
-    65.5
-   ],
-   "plans": {
-    "tres_serre": 0.0,
-    "serre": 0.081,
-    "moyen": 0.0,
-    "large": 0.919
-   },
-   "camera": {
-    "fixe": 0.87,
-    "avance": 0.03,
-    "recul": 0.09,
-    "travelling": 0.0,
-    "epaule": 0.01
-   },
-   "nb_personnes": 1,
-   "personnes": [
-    {
-     "place": "centre",
-     "presence": 0.081,
-     "habit": [
-      204,
-      214,
-      231
-     ],
-     "cheveux": [
-      205,
-      191,
-      160
-     ],
-     "sourire": 0.545,
-     "taille": 0.266,
-     "tete_penchee": 6.4,
-     "regard_cote": 0.0
-    }
-   ],
-   "visages": true,
-   "sourires": 0.545,
-   "energie": 0.361,
-   "mur": [
-    217,
-    226,
-    238
-   ],
-   "palette": [
-    [
-     225,
-     232,
-     241,
-     0.414
-    ],
-    [
-     179,
-     201,
-     222,
-     0.238
-    ],
-    [
-     134,
-     179,
-     183,
-     0.161
-    ],
-    [
-     240,
-     198,
-     152,
-     0.089
-    ],
-    [
-     18,
-     12,
-     9,
-     0.068
-    ],
-    [
-     151,
-     53,
-     116,
-     0.03
-    ]
-   ],
-   "lumiere": {
-    "luminosite": 210.6,
-    "chaleur": -15.2,
-    "saturation": 53.9
-   },
-   "moment": "jour"
-  },
+  "source": "https://www.tiktok.com/@vincedessine/video/7621893553626615063",
+  "auteur": "vincedessine",
+  "visuel": {},
   "audio": {
-   "duree": 67.1,
-   "nb_voix": 2,
+   "duree": 60.0,
+   "nb_voix": 1,
    "voix": [
     {
-     "hz": 235,
+     "hz": 218,
      "genre": "f",
-     "part": 0.59
-    },
-    {
-     "hz": 350,
-     "genre": "f",
-     "part": 0.41
+     "part": 1.0
     }
    ],
-   "debit": 3.12,
-   "blanc_moyen": 0.48,
-   "coupes": 3,
-   "dynamique_db": 21.6,
-   "cris": 0.001,
+   "debit": 0.13,
+   "blanc_moyen": 0.0,
+   "coupes": 0,
+   "dynamique_db": 13.2,
+   "cris": 0.027,
    "musique": null,
    "impacts": 0,
    "impacts_10s": 0.0,
@@ -7126,60 +6983,86 @@
    "sur_vanne": 0,
    "evenements": {},
    "emotions": {
-    "'[confused": 5,
-    "'[insistent": 5,
-    "'[urgent": 4,
-    "'[denial": 2,
-    "'[firm": 2,
-    "'[neutral": 2,
-    "'[frustrated": 1,
-    "'[exasperated": 1
+    "mysterious": 1
    }
   },
-  "claude": {},
-  "realisation": {
-   "moment": "jour",
+  "claude": {
    "lieux": [
-    "chambre",
-    "chambre"
+    "studio"
    ],
-   "gags": [],
-   "ambiances": [],
-   "source": "robot+image",
+   "moment": "soir",
+   "costumes": {
+    "presentateur": {
+     "haut": "chemise",
+     "c_haut": "bleu",
+     "motif": "uni",
+     "bas": "pantalon",
+     "chaussures": "ville",
+     "details": [
+      "cravate",
+      "lunettes_soleil",
+      "montre"
+     ],
+     "chapeau": null,
+     "cheveux": "court",
+     "c_cheveux": "noir"
+    }
+   },
+   "objets": [
+    {
+     "replique": 0,
+     "objet": "écran holographique"
+    },
+    {
+     "replique": 0,
+     "objet": "bouton lumineux rouge"
+    }
+   ],
+   "gags": [
+    "Affiche : 'Accès réservé aux initiés'",
+    "Post-it : 'Ne pas appuyer sur le bouton rouge'",
+    "Tableau : 'Code ST’ 501 : Top Secret'"
+   ],
+   "ambiances": [
+    "neon"
+   ],
+   "plans": [
+    {
+     "replique": 0,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "pointe_d",
+     "reaction": "regard_camera"
+    },
+    {
+     "replique": 0,
+     "plan": "large",
+     "mouvement": "zoom_choc",
+     "geste": "bras_ouverts",
+     "reaction": "aucune"
+    }
+   ]
+  },
+  "realisation": {
+   "moment": "soir",
+   "lieux": [
+    "bar"
+   ],
+   "gags": [
+    "Tableau : 'Code ST’ 501 : Top Secret'"
+   ],
+   "ambiances": [
+    "neon",
+    "poussiere"
+   ],
+   "source": "auteur",
    "tenues": {
-    "presentateur": "pyjama",
-    "invite": "pyjama"
+    "presentateur": "chemise"
    },
    "plans": [
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
     "large/fixe"
    ]
   },
-  "video": "2026-10-25_14h23_emission.mp4"
+  "video": "2026-10-25_14h39_emission.mp4"
  }
 ]

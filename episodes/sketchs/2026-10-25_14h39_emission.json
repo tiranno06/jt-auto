@@ -1,0 +1,195 @@
+{
+ "titre": "MYSTÈRE ST' 501",
+ "sujet": "MYSTÈRE ST' 501",
+ "ecran": "MYSTÈRE ST' 50",
+ "invite_nom": "Hubert Rustine",
+ "invite_role": "Expert (fictif)",
+ "invite_look": "chauve",
+ "lieu_direct": "Assemblée",
+ "titre_accroche": "POV : Vous êtes le présentateur d'une émission",
+ "question": "Quel est le secret derrière le sous-titre 'ST’ 501' ?",
+ "running_gag": "",
+ "verite": "",
+ "repliques": [
+  {
+   "p": "presentateur",
+   "t": "Sous -titrage ST' 501 Sous -titrage ST' 501",
+   "_deb": 0.0,
+   "_fin": 59.9,
+   "chute": true
+  }
+ ],
+ "bandeau": [],
+ "gag": null,
+ "legende": "Un présentateur intrigue son public avec un message énigmatique.",
+ "hashtags": [
+  "petitsdramas",
+  "mystere",
+  "secret",
+  "emission",
+  "intrigue",
+  "futur",
+  "anime"
+ ],
+ "sources": [
+  "https://www.tiktok.com/@vincedessine/video/7621893553626615063"
+ ],
+ "decoupage": [
+  {
+   "scene": "1",
+   "repliques": [
+    0
+   ],
+   "lieu": "",
+   "son": "",
+   "duree": 0.0,
+   "decor": "studio futuriste avec des écrans holographiques et des boutons lumineux",
+   "titre": "Émission Mystère X"
+  }
+ ],
+ "studio": {
+  "moment": "soir",
+  "lieux": [
+   "studio"
+  ],
+  "costumes": {
+   "presentateur": {
+    "haut": "chemise",
+    "c_haut": "bleu",
+    "motif": "uni",
+    "bas": "pantalon",
+    "chaussures": "ville",
+    "details": [
+     "cravate",
+     "lunettes_soleil",
+     "montre"
+    ],
+    "chapeau": null,
+    "cheveux": "court",
+    "c_cheveux": "noir"
+   }
+  },
+  "personnages": {
+   "presentateur": {
+    "genre": "h",
+    "age": 40,
+    "taille": 1,
+    "corpulence": 0.5,
+    "cheveux": "court",
+    "barbe": "trois_jours"
+   }
+  },
+  "gags": [
+   "Affiche : 'Accès réservé aux initiés'",
+   "Post-it : 'Ne pas appuyer sur le bouton rouge'",
+   "Tableau : 'Code ST’ 501 : Top Secret'"
+  ],
+  "ambiances": [
+   "neon"
+  ],
+  "cadence": "pose",
+  "plans": [
+   {
+    "replique": 0,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "pointe_d",
+    "reaction": "regard_camera"
+   },
+   {
+    "replique": 0,
+    "plan": "large",
+    "mouvement": "zoom_choc",
+    "geste": "bras_ouverts",
+    "reaction": "aucune"
+   }
+  ],
+  "objets": [
+   {
+    "replique": 0,
+    "objet": "écran holographique"
+   },
+   {
+    "replique": 0,
+    "objet": "bouton lumineux rouge"
+   }
+  ]
+ },
+ "doublage": {
+  "piste": "/tmp/tmpj7xnssgx/piste.wav",
+  "duree": 60.0,
+  "source": "https://www.tiktok.com/@vincedessine/video/7621893553626615063",
+  "auteur": "vincedessine",
+  "contexte": "Un présentateur dynamique et enthousiaste anime une émission mystérieuse où il semble répéter un sous-titre énigmatique, 'ST’ 501', dans un studio futuriste ou un lieu technologique. L'ambiance est intrigante, comme s'il s'agissait d'une révélation ou d'un code secret.",
+  "evenements": [],
+  "visuel": {},
+  "audio": {
+   "duree": 60.0,
+   "nb_voix": 1,
+   "voix": [
+    {
+     "hz": 218,
+     "genre": "f",
+     "part": 1.0
+    }
+   ],
+   "debit": 0.13,
+   "blanc_moyen": 0.0,
+   "coupes": 0,
+   "dynamique_db": 13.2,
+   "cris": 0.027,
+   "musique": null,
+   "impacts": 0,
+   "impacts_10s": 0.0,
+   "graves": 0,
+   "aigus": 0,
+   "sur_vanne": 0,
+   "evenements": {},
+   "emotions": {
+    "mysterious": 1
+   }
+  },
+  "video_origine": "/tmp/tmpj7xnssgx/src.m4a"
+ },
+ "fiche": {
+  "note": 0,
+  "decision": "vidéo manuelle (bande son d'une vidéo TikTok)",
+  "decoupage": [
+   {
+    "scene": "1",
+    "repliques": [
+     0
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 0.0,
+    "decor": "studio futuriste avec des écrans holographiques et des boutons lumineux",
+    "titre": "Émission Mystère X"
+   }
+  ]
+ },
+ "_monte": true,
+ "_voix_hz": {
+  "presentateur": 245
+ },
+ "realisation": {
+  "moment": "soir",
+  "lieux": [
+   "bar"
+  ],
+  "gags": [
+   "Tableau : 'Code ST’ 501 : Top Secret'"
+  ],
+  "ambiances": [
+   "neon",
+   "poussiere"
+  ],
+  "source": "auteur",
+  "tenues": {
+   "presentateur": "chemise"
+  },
+  "plans": [
+   "large/fixe"
+  ]
+ }
+}

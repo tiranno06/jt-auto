@@ -2,14 +2,13 @@ Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, ElevenLabs epuise — IA utilisée : mistral
 Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @motiontoonz, @same_same53, @charly.bse, @kodanimation, @vignianimation, @vincedessine
-Profil TikTok @charly.bse : 39 vidéo(s) jamais utilisée(s)
-Profil TikTok @eliotlehanneur : 38 vidéo(s) jamais utilisée(s)
 Profil TikTok @vincedessine : 37 vidéo(s) jamais utilisée(s)
-Vidéo depuis TikTok : https://www.tiktok.com/@charly.bse/video/7649401581833588000
+Profil TikTok @motiontoonz : 38 vidéo(s) jamais utilisée(s)
+Profil TikTok @same_same53 : 38 vidéo(s) jamais utilisée(s)
+Vidéo depuis TikTok : https://www.tiktok.com/@vincedessine/video/7621893553626615063
   son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 67.1 s, compte d'origine @charly.bse
-[ WARN:0@16.350] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
-  image de la vidéo : 35 plans (≈ 1.93 s chacun) ; cadrages : très serré 0 %, serré 8 %, moyen 0 %, large 91 % ; caméra : fixe 87 %, avance 3 %, recul 9 %, epaule 1 % ; 1 personne(s) à l'écran : centre (habit [204, 214, 231], cheveux [205, 191, 160], sourit 54 %) ; agitation 0.361 ; lumière jour ; fond [217, 226, 238]
+  son récupéré : 60.0 s, compte d'origine @vincedessine
+  image de la vidéo : image de la vidéo non analysée
   isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
   transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/core/io.py:48: UserWarning: 
@@ -19,48 +18,36 @@ torchcodec is not installed correctly so built-in audio decoding will fail. Solu
 
 Could not load this library: /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/torchcodec/libtorchcodec_image.so
   warnings.warn(
-[0;93m2026-10-25 13:21:42.659121651 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[0;93m2026-10-25 13:38:40.594535436 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1913.)
   std = sequences.std(dim=-1, correction=1)
-  voix séparées par pyannote : 2 voix, 54 tours de parole
-Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-  voix vérifiées mot par mot : 19 mot(s) remis sur la bonne voix
-  27 répliques, voix : {'speaker_0': 235, 'speaker_1': 350}
-  son de la vidéo : 2 voix [235 Hz (f, 59 %), 350 Hz (f, 41 %)], 3.12 mots/s, blancs 0.48 s, 3 coupure(s) de parole, dynamique 21.6 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
+  voix séparées par pyannote : 1 voix, 7 tours de parole
+  1 répliques, voix : {'speaker_0': 218}
+  son de la vidéo : 1 voix [218 Hz (f, 100 %)], 0.13 mots/s, blancs 0.0 s, 0 coupure(s) de parole, dynamique 13.2 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
+  scène reconstituée : Un présentateur dynamique et enthousiaste anime une émission mystérieuse où il semble répéter un sous-titre énigmatique, 'ST’ 501', dans un studio futuriste ou un lieu technologique. L'ambiance est intrigante, comme s'il s'agissait d'une révélation ou d'un code secret.
+  casting : speaker_0 → Jojo
+Sketch : « MYSTÈRE ST' 501 », 1 répliques
+  décor 0 : studio futuriste avec des écrans holographiques et des boutons lumineu
+montage : 1 plans (0.0:large>pre/coupe)
+studio : soir, lieux ['bar'], tenues presentateur=chemise, 2 figurant(s), ambiances ['neon', 'poussiere'] ; plans large/fixe
+cartoon : durée 63.5 s, 1 répliques, 1 scène(s), personnages ['presentateur']
+montage : 1 plans (0.0:large>pre/coupe)
+studio : soir, lieux ['bar'], tenues presentateur=chemise, 2 figurant(s), ambiances ['neon', 'poussiere'] ; plans large/fixe
+cartoon : durée 63.5 s, 1 répliques, 1 scène(s), personnages ['presentateur']
+  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~952 images)
+  morceau 2857–3809 reçu d'une machine d'aide
+  morceau 952–1904 reçu d'une machine d'aide
+  morceau 1904–2857 reçu d'une machine d'aide
+  dessin partagé terminé en 4.8 min
+Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
   IA gemini indisponible (gemini 429 : [{
   "error": {
     "code": 429,
     "message": "You exceeded your current quota, please check your plan an) : on passe à la suivante
-  scène reconstituée : Une scène drôle et absurde où une mère et son fils adolescent s'affrontent sur une confusion hilarante concernant leur relation familiale. Le fils insiste sur le fait que son père est son fils, tandis que la mère tente de clarifier les choses dans une chambre d'enfant.
-  casting : speaker_0 → Jojo, speaker_1 → Kévin
-  sous-titres : 11 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
-  1 réattribution(s) de l'IA refusée(s) : la voix de ces répliques est reconnue avec certitude
-Sketch : « TOI T 'ES MON FILS », 27 répliques
-  décor 0 : chambre d'enfant avec un berceau, un tapis à motifs nuages, des jouets
-  décor 1 : même chambre, mais avec un tableau noir et des crayons posés sur une t
-montage : 2 plans (0.0:large>pre/coupe 18.4:large>inv/coupe)
-studio : jour, lieux ['chambre', 'chambre'], tenues presentateur=pyjama, invite=pyjama, 0 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 70.6 s, 27 répliques, 2 scène(s), personnages ['presentateur', 'invite']
-montage : 2 plans (0.0:large>pre/coupe 18.4:large>inv/coupe)
-studio : jour, lieux ['chambre', 'chambre'], tenues presentateur=pyjama, invite=pyjama, 0 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 70.6 s, 27 répliques, 2 scène(s), personnages ['presentateur', 'invite']
-  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~1058 images)
-  morceau 1058–2117 reçu d'une machine d'aide
-  morceau 2117–3176 reçu d'une machine d'aide
-  morceau 3176–4234 reçu d'une machine d'aide
-  dessin partagé terminé en 4.2 min
-Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury qualité (ia) : 8.2/10 — Humoriste 8.6/10 : 66.6 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 6.6/10 : montage trop lent : 0.3 plans toutes les 10 s (il en faudrait ~4.8); 56.6 s pas assez de plans de réaction de celui qui écoute | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 6.0/10 : 0.4 s Accroche dans la première seconde correcte, mais l'humour pourrait être plus immédiat.; 20.5 s Moment d'ennui possible si le rythme ne s'accélère pas.; 71 s La fin est claire, mais manque un appel à l'action pour inciter au partage ou aux commentaires.
-Corrections du jury (tour 1) : réaction « sceptique » à la réplique 25
-montage : 2 plans (0.0:large>pre/coupe 18.4:large>inv/coupe)
-studio : jour, lieux ['chambre', 'chambre'], tenues presentateur=pyjama, invite=pyjama, 0 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 70.6 s, 27 répliques, 2 scène(s), personnages ['presentateur', 'invite']
-  redessin partiel : 600/4234 images à redessiner (1 passage(s)), le reste repris tel quel
-Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury qualité (ia) : 7.5/10 — Humoriste 6.0/10 : 0.4 s La chute finale manque de punch. Le moment où l'invité dit 'Fils' à la place de 'Maman' est trop rapide et manque d'un zoom choc ou d'une réaction exagérée.; 20.5 s La réplique 'Et moi je suis quoi alors?' manque de réactions visuelles ou sonores pour renforcer l'humour.; 66.6 s Le texte 'Fils' à la fin est illisible et manque de mise en valeur. | Réalisateur 5.0/10 : 0.0 s Le rythme des plans est trop lent. Il faudrait environ 4.8 plans par seconde pour maintenir l'attention.; 7.0 s Manque de plans de réaction de l'invité lors des répliques du présentateur.; 15.4 s Faux raccord entre les images 6 et 7. Les positions des personnages ne correspondent pas. | Directeur artistique 7.0/10 : 0.0 s Les personnages ont des traits trop épais et peu lisses, ce qui nuit à la finesse de l'image. | Ingénieur du son 10.0/10 :  | Spectateur TikTok 10.0/10 : 
-La version corrigée n'est pas meilleure : on garde la première.
+Jury qualité (ia) : 8.8/10 — Humoriste 6.0/10 : 0.4 s La chute finale n'est pas assez marquée et manque d'un zoom choc pour accentuer l'effet comique.; 30.0 s Les réactions des personnages secondaires (barman et client) sont trop discrètes et ne renforcent pas l'humour.; 62.9 s L'appel à l'abonnement (call-to-action) est trop abrupt et ne s'intègre pas naturellement à la chute. | Réalisateur 8.2/10 : montage trop lent : 0.2 plans toutes les 10 s (il en faudrait ~2.8) | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 10.0/10 : 
+Manque par rapport à la vidéo d'origine : Dans l'original, les réactions des personnages secondaires sont plus exagérées et synchronisées avec les gags. ; L'original inclut des bruitages supplémentaires (ex. : rires naturels) qui renforcent l'ambiance comique. ; Un plan plus serré sur le présentateur lors de la chute finale pour un effet plus percutant.
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = mistral ×3, voix = tiktok, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 40673, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 31}
-Quota de l'API GitHub : 4775 appels restants
-OK : sortie/2026-10-25_14h23_emission.mp4 (71 s)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = mistral ×2, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 13239, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 25}
+Quota de l'API GitHub : 4976 appels restants
+OK : sortie/2026-10-25_14h39_emission.mp4 (63 s)
