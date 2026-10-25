@@ -11197,5 +11197,279 @@
    ]
   },
   "video": "2026-10-25_21h43_emission.mp4"
+ },
+ {
+  "date": "2026-10-25",
+  "source": "https://www.tiktok.com/@same_same53/video/7676055755618897185",
+  "auteur": "same_same53",
+  "visuel": {
+   "gestes": [],
+   "duree": 82.0,
+   "nb_plans": 1,
+   "duree_plan": 82.0,
+   "coupes": [],
+   "plans": {
+    "tres_serre": 0.0,
+    "serre": 0.0,
+    "moyen": 0.006,
+    "large": 0.994
+   },
+   "camera": {
+    "fixe": 1.0,
+    "avance": 0.0,
+    "recul": 0.0,
+    "travelling": 0.0,
+    "epaule": 0.0
+   },
+   "nb_personnes": 1,
+   "personnes": [],
+   "visages": true,
+   "sourires": 0.0,
+   "energie": 0.481,
+   "mur": [
+    3,
+    2,
+    3
+   ],
+   "palette": [
+    [
+     0,
+     0,
+     0,
+     0.6
+    ],
+    [
+     252,
+     252,
+     252,
+     0.29
+    ],
+    [
+     179,
+     44,
+     39,
+     0.057
+    ],
+    [
+     45,
+     46,
+     52,
+     0.036
+    ],
+    [
+     142,
+     141,
+     142,
+     0.012
+    ],
+    [
+     244,
+     150,
+     42,
+     0.005
+    ]
+   ],
+   "lumiere": {
+    "luminosite": 88.8,
+    "chaleur": 8.4,
+    "saturation": 16.3
+   },
+   "moment": "jour"
+  },
+  "audio": {
+   "duree": 81.6,
+   "nb_voix": 2,
+   "voix": [
+    {
+     "hz": 130,
+     "genre": "h",
+     "part": 0.3
+    },
+    {
+     "hz": 98,
+     "genre": "h",
+     "part": 0.7
+    }
+   ],
+   "debit": 3.09,
+   "blanc_moyen": 1.23,
+   "coupes": 3,
+   "dynamique_db": 9.0,
+   "cris": 0.031,
+   "musique": null,
+   "impacts": 0,
+   "impacts_10s": 0.0,
+   "graves": 0,
+   "aigus": 0,
+   "sur_vanne": 0,
+   "evenements": {},
+   "emotions": {
+    "calm": 4,
+    "serious": 2,
+    "chilling": 2,
+    "neutral": 1,
+    "hesitant": 1,
+    "menacing": 1,
+    "cold": 1,
+    "sceptique": 1
+   }
+  },
+  "claude": {
+   "lieux": [
+    "rue"
+   ],
+   "moment": "nuit",
+   "costumes": {
+    "presentateur": {
+     "haut": "uniforme",
+     "c_haut": "bleu marine",
+     "motif": "uni",
+     "bas": "pantalon",
+     "chaussures": "bottes",
+     "chapeau": "casquette",
+     "c_chapeau": "bleu marine",
+     "cheveux": "court",
+     "c_cheveux": "chatain",
+     "details": [
+      "badge",
+      "cravate",
+      "ceinture"
+     ]
+    },
+    "invite": {
+     "haut": "blouson",
+     "c_haut": "noir",
+     "motif": "uni",
+     "bas": "pantalon",
+     "chaussures": "ville",
+     "cheveux": "court_texture",
+     "c_cheveux": "brun",
+     "details": [
+      "col_roule",
+      "montre"
+     ]
+    }
+   },
+   "objets": [
+    {
+     "replique": 0,
+     "objet": "cles"
+    },
+    {
+     "replique": 14,
+     "objet": "stylo"
+    }
+   ],
+   "gags": [
+    "Panneau: Attention aux dragons (non balisés)",
+    "Police de Bemidji: Restez prudents (ou vivants)"
+   ],
+   "ambiances": [
+    "neige",
+    "vapeur"
+   ],
+   "plans": [
+    {
+     "replique": 0,
+     "reaction": "aucune",
+     "geste": "stop",
+     "plan": "moyen",
+     "mouvement": "fixe"
+    },
+    {
+     "replique": 1,
+     "mouvement": "fixe",
+     "reaction": "sceptique",
+     "plan": "serre",
+     "geste": "volant"
+    },
+    {
+     "mouvement": "avance",
+     "geste": "explique",
+     "replique": 7,
+     "reaction": "gene",
+     "plan": "serre"
+    },
+    {
+     "plan": "moyen",
+     "reaction": "choc",
+     "geste": "mains_hanches",
+     "replique": 9,
+     "mouvement": "fixe"
+    },
+    {
+     "plan": "tres_serre",
+     "replique": 11,
+     "geste": "volant",
+     "reaction": "aucune",
+     "mouvement": "avance"
+    },
+    {
+     "reaction": "sceptique",
+     "plan": "serre",
+     "replique": 14,
+     "geste": "stop",
+     "mouvement": "zoom_choc"
+    },
+    {
+     "plan": "tres_serre",
+     "mouvement": "vertige",
+     "reaction": "choc",
+     "geste": "volant",
+     "replique": 18
+    },
+    {
+     "mouvement": "fixe",
+     "plan": "tres_serre",
+     "geste": "menton",
+     "reaction": "choc",
+     "replique": 21
+    }
+   ]
+  },
+  "realisation": {
+   "moment": "nuit",
+   "lieux": [
+    "rue"
+   ],
+   "gags": [
+    "Panneau: Attention aux dragons (non balisés)",
+    "Police de Bemidji: Restez prudents (ou vivants)"
+   ],
+   "ambiances": [
+    "neige",
+    "vapeur"
+   ],
+   "source": "auteur+image",
+   "tenues": {
+    "presentateur": "uniforme",
+    "invite": "blouson"
+   },
+   "plans": [
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe"
+   ]
+  },
+  "video": "2026-10-25_22h03_emission.mp4"
  }
 ]
