@@ -10911,5 +10911,291 @@
    ]
   },
   "video": "2026-10-25_21h23_emission.mp4"
+ },
+ {
+  "date": "2026-10-25",
+  "source": "https://www.tiktok.com/@charly.bse/video/7644571744572869920",
+  "auteur": "charly.bse",
+  "visuel": {
+   "gestes": [],
+   "duree": 136.5,
+   "nb_plans": 1,
+   "duree_plan": 136.5,
+   "coupes": [],
+   "plans": {
+    "tres_serre": 0.0,
+    "serre": 0.0,
+    "moyen": 0.0,
+    "large": 1.0
+   },
+   "camera": {
+    "fixe": 1.0,
+    "avance": 0.0,
+    "recul": 0.0,
+    "travelling": 0.0,
+    "epaule": 0.0
+   },
+   "nb_personnes": 0,
+   "personnes": [],
+   "visages": false,
+   "sourires": 0.0,
+   "energie": 0.133,
+   "mur": [
+    241,
+    218,
+    151
+   ],
+   "palette": [
+    [
+     242,
+     218,
+     151,
+     0.344
+    ],
+    [
+     151,
+     133,
+     176,
+     0.224
+    ],
+    [
+     201,
+     121,
+     105,
+     0.154
+    ],
+    [
+     15,
+     11,
+     15,
+     0.141
+    ],
+    [
+     74,
+     115,
+     186,
+     0.1
+    ],
+    [
+     193,
+     0,
+     1,
+     0.038
+    ]
+   ],
+   "lumiere": {
+    "luminosite": 180.4,
+    "chaleur": 34.5,
+    "saturation": 111.3
+   },
+   "moment": "jour"
+  },
+  "audio": {
+   "duree": 136.1,
+   "nb_voix": 2,
+   "voix": [
+    {
+     "hz": 214,
+     "genre": "f",
+     "part": 0.58
+    },
+    {
+     "hz": 178,
+     "genre": "?",
+     "part": 0.42
+    }
+   ],
+   "debit": 3.86,
+   "blanc_moyen": 0.4,
+   "coupes": 8,
+   "dynamique_db": 14.4,
+   "cris": 0.002,
+   "musique": null,
+   "impacts": 0,
+   "impacts_10s": 0.0,
+   "graves": 0,
+   "aigus": 0,
+   "sur_vanne": 0,
+   "evenements": {},
+   "emotions": {
+    "furieux": 5,
+    "défensif": 3,
+    "agressif": 2,
+    "colérique": 2,
+    "sarcastique": 2,
+    "menace": 2,
+    "douteux": 2,
+    "confiant": 1
+   }
+  },
+  "claude": {
+   "lieux": [
+    "salon"
+   ],
+   "moment": "soir",
+   "costumes": {
+    "presentateur": {
+     "haut": "tshirt",
+     "c_haut": "rouge",
+     "motif": "uni",
+     "bas": "jean",
+     "chaussures": "baskets",
+     "details": [
+      "barbe_courte",
+      "poing_serré"
+     ]
+    },
+    "invite": {
+     "haut": "chemise",
+     "c_haut": "blanc",
+     "motif": "uni",
+     "bas": "pantalon",
+     "chaussures": "ville",
+     "details": [
+      "lunettes_vue",
+      "ceinture"
+     ]
+    },
+    "envoyee": {
+     "haut": "pull",
+     "c_haut": "bleu",
+     "motif": "carreaux",
+     "bas": "jogging",
+     "chaussures": "baskets",
+     "details": [
+      "boucles_oreilles",
+      "sac_bandouliere"
+     ]
+    }
+   },
+   "objets": [
+    {
+     "replique": 6,
+     "objet": "doudou"
+    },
+    {
+     "replique": 23,
+     "objet": "flingue"
+    },
+    {
+     "replique": 17,
+     "objet": "bouteille"
+    },
+    {
+     "replique": 3,
+     "objet": "verre"
+    }
+   ],
+   "gags": [
+    "Trotrot : 1er de la classe !",
+    "Daniel : Le cheval qui a tout vu... et tout compris.",
+    "Pêches : Pour une digestion légère."
+   ],
+   "ambiances": [
+    "neon"
+   ],
+   "plans": [
+    {
+     "replique": 0,
+     "plan": "large",
+     "mouvement": "fixe",
+     "geste": "bras_ouverts",
+     "reaction": "aucune"
+    },
+    {
+     "replique": 6,
+     "plan": "serre",
+     "mouvement": "zoom_choc",
+     "geste": "pointe_d",
+     "reaction": "choc"
+    },
+    {
+     "replique": 19,
+     "plan": "contre_plongee",
+     "mouvement": "fixe",
+     "geste": "poing",
+     "reaction": "panique"
+    },
+    {
+     "replique": 23,
+     "plan": "tres_serre",
+     "mouvement": "fixe",
+     "geste": "pointe_g",
+     "reaction": "sceptique"
+    },
+    {
+     "replique": 38,
+     "plan": "moyen",
+     "mouvement": "travelling",
+     "geste": "gratte_tete",
+     "reaction": "reflechit"
+    }
+   ]
+  },
+  "realisation": {
+   "moment": "soir",
+   "lieux": [
+    "salon",
+    "salon",
+    "salon",
+    "salon"
+   ],
+   "gags": [
+    "Trotrot : 1er de la classe !",
+    "Daniel : Le cheval qui a tout vu... et tout compris.",
+    "Pêches : Pour une digestion légère."
+   ],
+   "ambiances": [
+    "neon",
+    "poussiere"
+   ],
+   "source": "auteur+image",
+   "tenues": {
+    "presentateur": "tshirt",
+    "invite": "chemise"
+   },
+   "plans": [
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe"
+   ]
+  },
+  "video": "2026-10-25_21h43_emission.mp4"
  }
 ]
