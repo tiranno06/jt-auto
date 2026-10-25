@@ -160,6 +160,11 @@
   (3 mots au plus) ; chaque mot a sa certitude (`sure`) : l'IA qui ne lit que le texte ne peut plus déplacer une réplique « voix
   sûre » (`doublage.voix_sure`) ; deux voix ne jouent jamais le même personnage (`doublage.casting_unique`). Réglages `_P` trouvés
   sur un banc d'essai (dialogues montés avec nos voix, vérité connue : 84 % → 96 % de temps de parole bien attribué).
+  **Voix trop proches** (même personne qui fait les deux voix, ressemblance ECAPA > 0,7 : `locuteurs.PROCHES`) : le son ne tranche
+  plus, la vérification mot par mot est laissée de côté (aucune voix « sûre ») et le **contrôle questions-réponses** décide phrase
+  par phrase (`locuteurs.fil_dialogue`) : logique du texte (`indices_dialogue` : après une question l'autre répond, « oui / bah /
+  mais » = réponse, reprise des mots de l'autre, phrase coupée = la suite) + relecture du dialogue par l'IA, Gemini d'abord
+  (`doublage.relire_dialogue`, `reseau.claude(raisonner=True)`, RELIRE_DIALOGUE=0 pour couper). « Battle d'aura » : 68 % → 97 %.
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.

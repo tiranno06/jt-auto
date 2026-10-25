@@ -163,10 +163,10 @@ def ia_disponible():
 
 
 class _Messages:
-    def __init__(self): self._client = None                              # une seule connexion Claude par client (comme avant)
+    def __init__(self, raisonner=False): self._client = None; self.raisonner = raisonner   # une seule connexion Claude par client
 
     def create(self, **kw):
-        images = any(isinstance(b, dict) and b.get("type") == "image" for m in kw.get("messages") or [] if isinstance(m.get("content"), list) for b in m["content"])
+        images = self.raisonner or any(isinstance(b, dict) and b.get("type") == "image" for m in kw.get("messages") or [] if isinstance(m.get("content"), list) for b in m["content"])
         erreurs = []
         for f in ordre_ia(images):
             try:
@@ -187,12 +187,13 @@ class _Messages:
 
 
 class _IA:
-    def __init__(self): self.messages = _Messages()
+    def __init__(self, raisonner=False): self.messages = _Messages(raisonner)
 
 
-def claude():
-    """Client « façon Claude » : Claude si possible, sinon Mistral puis Gemini (bascule automatique, quotas épuisés évités)."""
-    return _IA()
+def claude(raisonner=False):
+    """Client « façon Claude » : Claude si possible, sinon Mistral puis Gemini (bascule automatique, quotas épuisés évités).
+    raisonner=True : Gemini avant Mistral (comme pour les images), pour les tâches de logique (qui dit quoi dans un dialogue)."""
+    return _IA(raisonner)
 
 
 # ------------------------------------------------------------------ mode économique (réglage du site)
