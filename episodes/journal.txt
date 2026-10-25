@@ -1,29 +1,38 @@
+Reprise de la fabrication en pause s40144708370_86774 (1re version, 1 bloc(s) d'images déjà dessinés)
 Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, ElevenLabs epuise — IA utilisée : mistral
-Vidéo depuis TikTok : https://www.tiktok.com/@kodanimation/video/7699286492669021472
-  son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 31.8 s, compte d'origine @kodanimation
-[ WARN:0@7.524] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
-  image de la vidéo : 2 plans (≈ 16.0 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 0 %, large 100 % ; caméra : fixe 77 %, avance 11 %, recul 8 %, travelling 3 % ; 0 personne(s) à l'écran : aucun visage repéré ; agitation 0.779 ; lumière jour ; fond [251, 251, 249]
-  isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
-  transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
-Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-  voix re-séparées par leur empreinte (ECAPA) : 2 voix (netteté 0.15)
-  voix vérifiées mot par mot : 4 mot(s) remis sur la bonne voix
-  12 répliques, voix : {'speaker_0': 158, 'speaker_1': 120}
-  son de la vidéo : 2 voix [158 Hz (h, 20 %), 120 Hz (h, 80 %)], 5.28 mots/s, blancs 0.34 s, 2 coupure(s) de parole, dynamique 18.3 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
-  réponse coupée (limite de 8000 jetons atteinte) pour doublage
-  scène reconstituée : Dans le salon, un adolescent raconte innocemment à sa mère ce qu'il a vu faire par la voisine dans la chambre de son père.
-  casting : speaker_0 → Lila, speaker_1 → Kévin
-  descriptions des personnages remises sur les bons rôles (âge, genre de la voix)
 Sketch : « LA VOISINE ET LE VENTRE DE PAP », 12 répliques
-  décor 0 (lieu ressemblant de la banque, budget Modal du mois atteint) : Cozy family living room with sofa, coffee table, potted plan
 montage : 25 plans (0.0:large>env/coupe 0.7:serre>inv/file 1.8:moyen>inv/glisse 4.0:serre>inv/glisse 5.7:serre>env/file 6.8:large>env/glisse 7.3:tres_serre>env/glisse 8.5:epaule>inv/coupe 9.6:large>inv/glisse 11.1:serre>env/glisse 12.1:large>inv/coupe 13.5:serre>inv/glisse 14.4:epaule>inv/glisse 15.5:large>inv/glisse 17.3:tres_serre>inv/glisse 19.5:serre>env/coupe 20.5:moyen>inv/coupe 21.4:tres_serre>env/file 22.5:serre>inv/coupe 23.5:large>inv/glisse 25.2:tres_serre>inv/glisse 27.3:serre>inv/glisse 28.3:tres_serre>env/file 29.4:moyen>inv/coupe 29.9:tres_serre>inv/glisse)
 studio : jour, lieux ['salon'], tenues envoyee=tshirt, invite=tshirt, 0 figurant(s), ambiances ['pluie', 'poussiere'] ; plans large/fixe moyen/fixe serre/avance epaule/fixe serre/fixe large/avance epaule/fixe tres_serre/zoom_choc tres_serre/zoom_choc large/travelling serre/avance tres_serre/fixe
 cartoon : durée 35.4 s, 12 répliques, 1 scène(s), personnages ['envoyee', 'invite']
 Contrôle image : 18 défaut(s) — 2.25 s tete_coupee (envoyee), 2.75 s tete_coupee (envoyee), 3.25 s tete_coupee (envoyee), 3.75 s tete_coupee (envoyee), 9.75 s tete_coupee (envoyee), 17.75 s sous_titre_visage (invite), 18.25 s sous_titre_visage (invite), 18.75 s sous_titre_visage (invite)
-  image 300/2123 (4 processeurs)
-  image 600/2123
-Fabrication mise en pause (v1, 1 bloc(s) déjà dessinés) : reprise s40144708370_86774 lancée
-Fabrication en pause : reprise s40144708370_86774 lancée sur une nouvelle machine.
+  reprise : 1 bloc(s) déjà dessiné(s) repris
+  image 900/2123
+  image 1200/2123
+  image 1500/2123
+  image 1800/2123
+  image 2100/2123
+Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
+  IA gemini indisponible (gemini 429 : [{
+  "error": {
+    "code": 429,
+    "message": "You exceeded your current quota, please check your plan an) : on passe à la suivante
+Jury qualité (ia) : 6.1/10 — Humoriste 8.6/10 : 30.0 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 2.0/10 : 2.2 s tête de envoyee coupée par le bord de l'image (moyen); 9.8 s tête de envoyee coupée par le bord de l'image (large); 20.8 s tête de envoyee coupée par le bord de l'image (moyen) | Directeur artistique 6.0/10 : 0 s Les personnages manquent de cohérence dans leur style vestimentaire par rapport à l’ambiance humoristique voulue.; 3.8 s L’âge et le style des personnages ne correspondent pas toujours à l’univers enfantin et décalé de la vidéo.; 11.7 s Le décor du salon manque de détails humoristiques ou interactifs pour renforcer les gags. | Ingénieur du son 5.0/10 : 0 s Les voix ne sont pas parfaitement synchronisées avec les lèvres des personnages.; 15.9 s Les blancs entre les répliques sont trop longs et cassent le rythme comique.; 28.5 s L’absence de bruitages spécifiques réduit 
+Corrections du jury (tour 1) : plan tres_serre sur la réplique 12 ; plan serre sur la réplique 2 ; plan serre sur la réplique 4 ; plan serre sur la réplique 8
+montage : 21 plans (0.0:large>env/coupe 0.7:serre>inv/file 1.8:moyen>inv/glisse 5.7:serre>env/file 6.8:large>env/glisse 7.3:tres_serre>env/glisse 8.5:serre>inv/coupe 11.1:serre>env/glisse 12.1:large>inv/coupe 13.5:serre>inv/glisse 14.4:epaule>inv/glisse 15.5:large>inv/glisse 17.3:serre>inv/glisse 21.4:tres_serre>env/file 22.5:serre>inv/coupe 23.5:large>inv/glisse 25.2:tres_serre>inv/glisse 27.3:serre>inv/glisse 28.3:tres_serre>env/file 29.4:moyen>inv/coupe 29.9:tres_serre>inv/glisse)
+studio : jour, lieux ['salon'], tenues envoyee=tshirt, invite=tshirt, 0 figurant(s), ambiances ['pluie', 'poussiere'] ; plans large/fixe moyen/fixe serre/avance epaule/fixe serre/fixe large/avance epaule/fixe tres_serre/zoom_choc tres_serre/zoom_choc large/travelling serre/avance tres_serre/fixe
+cartoon : durée 35.4 s, 12 répliques, 1 scène(s), personnages ['envoyee', 'invite']
+Contrôle image : 17 défaut(s) — 2.25 s tete_coupee (envoyee), 2.75 s tete_coupee (envoyee), 3.25 s tete_coupee (envoyee), 3.75 s tete_coupee (envoyee), 4.25 s tete_coupee (envoyee), 4.75 s tete_coupee (envoyee), 5.25 s tete_coupee (envoyee), 5.75 s tete_coupee (envoyee)
+  redessin partiel : 1561/2123 images à redessiner (3 passage(s)), le reste repris tel quel
+Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
+Jury qualité (gratuit) : 7.2/10 — Humoriste 10.0/10 :  | Réalisateur 2.0/10 : 2.2 s tête de envoyee coupée par le bord de l'image (moyen); 5.8 s tête de envoyee coupée par le bord de l'image (serre); 11.2 s tête de envoyee coupée par le bord de l'image (serre) | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 4.1/10 : 25.8 s le sous-titre cache le visage de invite; 30.2 s le sous-titre cache le visage de invite; 35 s pour un gag éclair : trop long
+Version corrigée gardée : 6.1 → 7.2/10
+Traceback (most recent call last):
+  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 506, in <module>
+    try: main()
+         ^^^^^^
+  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 444, in main
+    legende = f"{sk['legende']}" + (f"\n\n{sk['question']}" if sk.get("question") else "") + (f"\n\n{doublage.credit(sk)}" if DOUB else "")   # crédit du son d'origine + "\n\n" + " ".join("#" + h for h in sk["hashtags"]) + "\n\nContenu généré par IA."     # outils et crédits : seulement dans l'historique, jamais dans la légende
+                                                                                                     ^^^^^^^^
+UnboundLocalError: cannot access local variable 'doublage' where it is not associated with a value
