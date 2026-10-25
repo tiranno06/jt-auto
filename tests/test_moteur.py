@@ -527,9 +527,20 @@ class TestStudio(unittest.TestCase):
               "decoupage": [{"scene": "1", "repliques": [0, 1, 2], "decor": "a bar counter"}],
               "studio": {"plans": [{"replique": 1, "plan": "epaule"}, {"replique": 2, "plan": "contre_plongee"}], "ambiances": ["neon", "poussiere"]}}
         auds = [np.random.default_rng(k).normal(0, 0.2, 22050).astype(np.float32) for k in range(3)]
-        d = tempfile.mkdtemp(); total = cartoon.rendre(sk, d, auds, apercu=True)
+        import copy as _cp
+        sk_large = _cp.deepcopy(sk)
+        ancien = os.environ.get("MONTAGE"); os.environ["MONTAGE"] = "dynamique"          # le storyboard (plans voulus) en montage dynamique
+        try: d = tempfile.mkdtemp(); total = cartoon.rendre(sk, d, auds, apercu=True)
+        finally:
+            if ancien is None: os.environ.pop("MONTAGE", None)
+            else: os.environ["MONTAGE"] = ancien
         self.assertGreater(total, 3); self.assertEqual(len(glob.glob(d + "/*.png")), 8)
         self.assertEqual(sk["_bible"]["lieux"], ["bar"]); self.assertEqual([q["plan"] for q in cartoon.PH][1:], ["epaule", "contre_plongee"])
+        os.environ.pop("MONTAGE", None)                                                  # par défaut : plan large fixe partout
+        try: cartoon.rendre(sk_large, tempfile.mkdtemp(), auds, apercu=True)
+        finally:
+            if ancien is not None: os.environ["MONTAGE"] = ancien
+        self.assertEqual({q["plan"] for q in cartoon.PH}, {"large"}); self.assertEqual({q["mouvement"] for q in cartoon.PH}, {"fixe"})
 
 
 

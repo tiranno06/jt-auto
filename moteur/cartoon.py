@@ -353,6 +353,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
     if not apercu and reprise is None and plage is None and os.environ.get("DESSIN_PARTAGE", "1") != "0" and os.environ.get("GH_TOKEN"):
         import copy as _cp; args0 = _cp.deepcopy({"sk": sk, "audios": audios, "mots": mots, "decors": decors, "mini": mini, "module": {"DETAIL": DETAIL}})
     tmp = tempfile.mkdtemp(); reps = sk["repliques"]; decors = decors or {}; rng = np.random.default_rng(11)
+    PLAN_LARGE = (os.environ.get("MONTAGE") or "large") == "large"         # montage « plan large » : tout le monde à l'image, caméra fixe
     roles = sorted({r["p"] for r in reps if r["p"] != "narrateur"}, key=lambda r: [x["p"] for x in reps].index(r))   # la voix off n'est pas dessinée
     # scènes : découpage de l'auteur (sinon une seule scène)
     studio.separer_lieux(sk)                                               # personnages dans des lieux différents : un décor chacun
@@ -506,7 +507,10 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
     PASSE = {}                                                             # décor vivant : voiture qui passe au loin
     if B:
         studio.realiser(ph, places, B); sk["_bible"] = B
-        DECOUPE = studio.decouper(ph, places, B, FPS) if os.environ.get("MONTAGE", "dynamique") != "simple" else []   # plusieurs plans par réplique
+        DECOUPE = studio.decouper(ph, places, B, FPS) if os.environ.get("MONTAGE") != "simple" else []   # plusieurs plans par réplique
+        if PLAN_LARGE and DECOUPE:
+            DECOUPE = studio.plans_larges(DECOUPE)
+            for q_ in ph: q_["plan"], q_["mouvement"] = "large", "fixe"
         if DECOUPE: print(f"montage : {len(DECOUPE)} plans (" + " ".join(f"{x['t0']:.1f}:{x['plan']}>{x['cible'][:3]}/{x['passage']}" for x in DECOUPE) + ")", flush=True)
         FICHES = B.get("fiches") if HUMAINS else None
         for sc_ in places:
@@ -1355,8 +1359,9 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
             elif mv == "zoom_choc": z *= 1 + 0.16 * (1 - math.exp(-max(0.0, tm - q["deb"]) * 10))
             if mv == "epaule" or plan_courant == "epaule":                 # caméra tenue à l'épaule : léger flottement
                 cx += 5 * math.sin(tm * 1.7) + 3 * math.sin(tm * 3.3); cy += 4 * math.sin(tm * 2.1)
+        if PLAN_LARGE: z, cx, cy = 1.0, W / 2, H / 2                       # plan large : caméra fixe, aucun zoom (choix de l'auteur)
         zr, cible = reaction(tm)
-        if cible and zr["scene"] == sc and len(places[sc]) > 1 and zr is not ph[-1]:   # coupe sèche sur la réaction
+        if cible and zr["scene"] == sc and len(places[sc]) > 1 and zr is not ph[-1] and not PLAN_LARGE:   # coupe sèche sur la réaction
             z, cx, cy = 1.55, position(sc, cible)[0], 1120.0
             if B: z, cy = 1.75, 1500 - 305 * position(sc, cible)[2] + 90
             if FICHES and cible in FICHES:

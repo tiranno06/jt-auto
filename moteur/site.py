@@ -417,7 +417,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
 
   <details class="groupe"><summary>🎨 Style</summary>
     <label>Personnages<select data-var="PERSONNAGES" data-def="humains"><option value="humains">Adultes style toons, différents à chaque vidéo (recommandé)</option><option value="marionnettes">Anciennes marionnettes de la chaîne</option></select></label>
-    <label>Montage<select data-var="MONTAGE" data-def="dynamique"><option value="dynamique">Dynamique : beaucoup de plans et caméra vivante (recommandé)</option><option value="simple">Simple : un plan par réplique</option></select></label>
+    <label>Montage<select data-var="MONTAGE" data-def="large"><option value="large">Plan large : les personnages toujours à l'image, caméra fixe (recommandé)</option><option value="dynamique">Dynamique : beaucoup de plans, zooms et caméra vivante</option><option value="simple">Simple : un plan par réplique</option></select></label>
     <div class="auto"><div class="txt"><b>Rendu détaillé</b><small>Tenues, visages, décors et plans soignés (gratuit).</small></div><button class="inter" data-var="RENDU_DETAILLE" data-def="1" data-bascule="1"></button></div>
     <div class="auto"><div class="txt"><b>Accroche choc en ouverture</b><small>La réplique la plus intrigante dès la 1re seconde.</small></div><button class="inter" data-var="ACCROCHE" data-def="0" data-bascule="1"></button></div>
     <label>Voix des personnages<select data-var="VOIX_PERSOS" data-def="bibliotheque"><option value="bibliotheque">Voix de la bibliothèque ElevenLabs</option><option value="sur_mesure">🎙️ Voix sur mesure de la chaîne</option></select></label>
@@ -481,6 +481,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <h3>Notifications</h3>
     <p class="note">Prévenu quand une vidéo est prête ou publiée. Sur iPhone : installez d'abord l'appli.</p>
     <button class="action" id="activerNotifs">🔔 Activer sur cet appareil</button>
+    <button class="action" id="couperNotifs">🔕 Désactiver sur cet appareil</button>
     <button class="action" id="testNotif">Envoyer une notification de test</button>
     <div id="suiviNotif" class="note"></div>
     <section id="appairage" style="display:none"><h3>Connecter un autre appareil</h3>
@@ -1208,6 +1209,21 @@ $("#vxRec").onclick=async()=>{
 };
 $("#vxEnv").onclick=()=>{if(!VX.b64)return;
   lancerFlux("voix_auteur.yml",$("#vxEnv"),"🎙️ Votre voix est en cours d'installation (1 à 2 min). Elle servira dès la prochaine vidéo.",{role:$("#vxRole").value,emotion:$("#vxEmo").value,audio:VX.b64},$("#suiviVx"))};
+$("#couperNotifs").onclick=async()=>{                                     // plus aucune notification sur CET appareil
+  const z=$("#suiviNotif");
+  try{
+    if(!lireJeton()) throw new Error("connectez d'abord la régie");
+    z.textContent="Désactivation…"; let fin="";
+    if("serviceWorker" in navigator){const reg=await Promise.race([navigator.serviceWorker.ready,new Promise(r=>setTimeout(()=>r(null),4000))]); const ab=reg&&reg.pushManager&&await reg.pushManager.getSubscription();
+      if(ab){fin=ab.endpoint; await ab.unsubscribe()}}
+    if(!Object.keys(VARS).length){const r=await gh("/actions/variables?per_page=100"); (await r.json()).variables.forEach(x=>VARS[x.name]=x.value)}
+    let l=[]; try{l=JSON.parse(VARS.PUSH_ABONNEMENTS||"[]")}catch(_){}
+    const reste=fin?l.filter(x=>x.endpoint!==fin):l;
+    if(reste.length!==l.length){await ecrireVar("PUSH_ABONNEMENTS",JSON.stringify(reste)); VARS.PUSH_ABONNEMENTS=JSON.stringify(reste)}
+    z.textContent=fin?`🔕 Notifications désactivées sur cet appareil (${reste.length} autre(s) appareil(s) les reçoivent encore). Touchez « Activer » pour les remettre.`
+                     :"🔕 Cet appareil ne recevait pas de notifications.";
+  }catch(e){z.textContent="Impossible : "+e.message}
+};
 $("#testNotif").onclick=()=>lancerFlux("notifier.yml",$("#testNotif"),"🔔 Envoi d'une notification de test (environ 30 s)…",{titre:"Petits.Dramas",texte:"Les notifications marchent 🎉"},$("#suiviNotif"));
 $("#realLancer").onclick=()=>{if(!lireJeton()){toast("Connectez la régie");return} const f=$("#realFormat").value;
   if(confirm(f==="mini"?"Fabriquer un gag éclair réaliste ? Il consomme des crédits ElevenLabs (vidéo IA).":"Fabriquer un sketch long réaliste ? Une dizaine de plans de vidéo IA : c'est nettement plus de crédits ElevenLabs."))

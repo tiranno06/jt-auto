@@ -831,6 +831,16 @@ def _decoupe_claude(S, roles):
 
 REACTION_MAX = 1.0                                                         # plan de réaction : 1 s au plus pendant que l'autre parle
 
+def plans_larges(plans):
+    """Montage « plan large » (choix de l'auteur, octobre 2026) : un seul plan large et FIXE par scène, où l'on voit tout le monde
+    (les deux personnages qui se parlent), sans zoom ni mouvement de caméra ; on ne coupe qu'au changement de scène."""
+    out = []
+    for p in plans:
+        if out and out[-1]["scene"] == p["scene"]: out[-1]["t1"] = max(out[-1]["t1"], p["t1"]); continue
+        out.append(dict(p, plan="large", mouvement="fixe", passage="coupe", force=0.0))
+    return out
+
+
 def decouper(ph, places, B, fps=30):
     """Montage dynamique : chaque réplique est découpée en plusieurs plans selon son énergie et son émotion (dispute : coupes rapides,
     émotion : plans longs), en alternant plans serrés et plans larges, celui qui parle et celui qui écoute, avec un mouvement de

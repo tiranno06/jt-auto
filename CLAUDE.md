@@ -41,6 +41,10 @@
   ambiance) et de l'image de la vidéo d'origine ; la banque visuelle s'enrichit vidéo après vidéo.
 
 ## Montage (à garder en tête pour chaque vidéo)
+- **Choix de l'auteur (25 octobre 2026) : montage « plan large » par défaut** (réglage MONTAGE = large) : un seul plan large et FIXE
+  par scène, les personnages qui se parlent toujours à l'image, aucun zoom, aucun mouvement de caméra, aucune coupe sur la réaction
+  (`studio.plans_larges`, `cartoon` → PLAN_LARGE) ; le jury n'ajoute jamais de plan serré dans ce mode. Le montage « dynamique »
+  ci-dessous reste disponible dans les Réglages.
 - Vidéos **dynamiques**, toujours en fonction de l'audio, de son univers et des échanges entre les personnages.
 - **Beaucoup de changements de plan** : plans serrés et plans larges sur les personnages, plans de réaction de celui qui écoute.
 - **Caméra vivante** : mouvements dans chaque plan (avancée, recul, travelling, caméra à l'épaule, zoom choc) et passages de plan
@@ -149,6 +153,7 @@
   **pré-jury** : les règles sûres du jury appliquées avant de dessiner (`cartoon.rendre(plans_seuls=True)` + `qualite.jury_gratuit`,
   PRE_JURY=0 pour couper) ; quota de l'API GitHub surveillé (`moteur/quota.py` : barre et file ralentissent, voyant sur la barre) ;
   vidéos d'essai rangées à part (filtre « 🧪 Essais », historique "essai") et effacées au bout de 3 jours (garde → supprimer.yml ESSAIS).
+  Réglages → notifications : « Activer » et « Désactiver sur cet appareil » (retire l'appareil de PUSH_ABONNEMENTS).
 - **Bonne voix sur le bon personnage (sons TikTok)** : `locuteurs.affiner` vérifie qui parle MOT PAR MOT (empreinte vocale ECAPA
   autour de chaque mot, comparée à chaque voix, fil le plus probable façon Viterbi, 2-3 tours ; une « voix » presque muette est
   rattachée à la plus proche) puis `caler_sur_phrases` met chaque changement de personne sur la fin de phrase la plus proche
@@ -162,7 +167,7 @@
   contours par `cv2.findContours`, jamais de `np.mgrid` ni de grosse dilatation : un gros plan coûtait 40 s et 2,4 Go par image et
   GitHub coupait la machine) ; un dessin qui plante repasse en ancien style ; le « Réveil de secours » (garde.yml) relance une
   fois toute fabrication en échec des 6 dernières heures.
-- Code : `moteur/studio.py` (`decouper`) et `moteur/cartoon.py` (`vue`, `cadre_plan`) ; réglage MONTAGE (dynamique par défaut).
+- Code : `moteur/studio.py` (`decouper`, `plans_larges`) et `moteur/cartoon.py` (`vue`, `cadre_plan`) ; réglage MONTAGE (large par défaut, dynamique, simple).
 
 ## Mode amélioré (Claude + outils payants : c'est le mode par défaut dès qu'il y a du crédit)
 L'auteur rechargera à un moment le crédit Claude (Anthropic). Le mode amélioré s'appuie sur Claude et sur les outils payants

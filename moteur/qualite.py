@@ -307,6 +307,7 @@ def corriger(sk, corrections):
         if cle in vues: continue
         vues.add(cle); t = c.get("type")
         try:
+            if t == "plan" and (os.environ.get("MONTAGE") or "large") == "large": continue   # montage « plan large » : on n'ajoute jamais de plan serré
             if t == "plan" and 0 <= int(c["replique"]) < len(reps) and c.get("plan") in studio.PLANS:
                 S["decoupe"] = [d for d in (S.get("decoupe") or []) if isinstance(d, dict) and d.get("replique") != int(c["replique"])]
                 S["decoupe"].append({"replique": int(c["replique"]), "plans": [{"debut": 0.0, "plan": c["plan"], "cible": c.get("cible"), "mouvement": c.get("mouvement")}]})
