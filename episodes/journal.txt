@@ -2,54 +2,67 @@ Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, ElevenLabs epuise — IA utilisée : mistral
 Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @motiontoonz, @same_same53, @charly.bse, @kodanimation, @vignianimation, @vincedessine
-Profil TikTok @yan_animation0 : 35 vidéo(s) jamais utilisée(s)
-Profil TikTok @eliotlehanneur : 39 vidéo(s) jamais utilisée(s)
-Vidéo depuis TikTok : https://www.tiktok.com/@yan_animation0/video/7649654721422150945
+Profil TikTok @same_same53 : 38 vidéo(s) jamais utilisée(s)
+Profil TikTok @motiontoonz : 38 vidéo(s) jamais utilisée(s)
+Vidéo depuis TikTok : https://www.tiktok.com/@same_same53/video/7672365525586021665
   son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 63.8 s, compte d'origine @yan_animation0
-[ WARN:0@12.916] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
-  image de la vidéo : 1 plans (≈ 64.0 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 78 %, large 21 % ; caméra : fixe 100 % ; 2 personne(s) à l'écran : droite (habit [133, 47, 54], cheveux [222, 160, 107], sourit 0 %); gauche (habit [81, 75, 72], cheveux [33, 25, 25], sourit 0 %) ; agitation 0.015 ; lumière nuit ; fond [0, 0, 0]
+  son récupéré : 92.0 s, compte d'origine @same_same53
+[ WARN:0@12.851] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  image de la vidéo : 1 plans (≈ 92.0 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 6 %, large 94 % ; caméra : fixe 100 % ; 1 personne(s) à l'écran : aucun visage repéré ; agitation 0.13 ; lumière jour ; fond [0, 0, 0]
   isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
   transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-  voix re-séparées par leur empreinte (ECAPA) : 2 voix (netteté 0.11)
-  voix vérifiées mot par mot : 8 mot(s) remis sur la bonne voix
-  18 répliques, voix : {'speaker_0': 146, 'speaker_1': 298}
-  son de la vidéo : 2 voix [146 Hz (h, 40 %), 298 Hz (f, 60 %)], 4.14 mots/s, blancs 1.05 s, 1 coupure(s) de parole, dynamique 21.1 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
-  scène reconstituée : En pleine virée en voiture, la passagère lâche un pet dévastateur pour la toute première fois, provoquant la panique et le dégoût horrifié du conducteur.
-  casting : speaker_0 → Jojo, speaker_1 → Lila
-  sous-titres : 16 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
-Sketch : « PREMIER PET EN VOITURE », 18 répliques
-  décor 0 : Inside of a modern compact car, dashboard with air vents, digital car 
-montage : 54 plans (0.0:moyen>pre/coupe 1.3:tres_serre>env/coupe 2.3:serre>env/glisse 3.5:large>env/zoom 5.3:tres_serre>env/zoom 6.8:tres_serre>pre/file 7.3:serre>env/coupe 8.3:large>pre/coupe 9.1:epaule>pre/zoom 9.9:serre>pre/glisse 10.9:serre>env/coupe 11.9:serre>pre/file 12.5:tres_serre>env/file 13.3:serre>env/glisse 14.8:moyen>pre/file 16.1:contre_plongee>pre/glisse 16.7:moyen>pre/glisse 17.8:contre_plongee>pre/glisse 18.7:large>pre/glisse 19.5:serre>env/file 20.5:tres_serre>env/glisse 21.2:epaule>env/glisse 22.3:serre>pre/coupe 23.5:moyen>env/coupe 24.0:serre>pre/coupe 25.5:large>pre/glisse 26.6:epaule>pre/glisse 28.0:moyen>pre/glisse 29.4:tres_serre>pre/glisse 30.9:tres_serre>env/glisse 32.3:serre>env/glisse 33.3:large>env/glisse 34.9:tres_serre>env/glisse 35.6:large>env/glisse 36.5:tres_serre>env/glisse 37.2:serre>env/glisse 38.0:large>env/glisse 39.1:tres_serre>env/glisse 40.3:moyen>env/glisse 41.5:serre>pre/file 42.7:large>env/coupe 43.9:tres_serre>env/glisse 45.4:serre>pre/coupe 46.8:large>env/glisse 48.6:serre>env/glisse 50.4:moyen>env/glisse 51.6:serre>env/glisse 53.3:moyen>env/glisse 54.4:contre_plongee>env/glisse 54.9:tres_serre>pre/file 55.9:moyen>env/file 57.3:contre_plongee>env/glisse 58.0:tres_serre>env/glisse 61.9:tres_serre>pre/coupe)
-studio : jour, lieux ['voiture'], tenues presentateur=blouson, envoyee=debardeur, 0 figurant(s), ambiances ['vapeur'] ; plans moyen/fixe serre/zoom_choc tres_serre/zoom_choc serre/travelling serre/avance contre_plongee/epaule epaule/fixe serre/fixe epaule/fixe moyen/travelling serre/avance tres_serre/zoom_choc serre/travelling tres_serre/zoom_choc tres_serre/zoom_choc serre/avance serre/vertige tres_serre/zoom_choc
-cartoon : durée 67.1 s, 18 répliques, 1 scène(s), personnages ['presentateur', 'envoyee']
-Contrôle image : 30 défaut(s) — 0.25 s tete_coupee (envoyee), 0.75 s tete_coupee (envoyee), 1.25 s tete_coupee (envoyee), 2.75 s tete_coupee (envoyee), 3.25 s tete_coupee (envoyee), 15.25 s tete_coupee (envoyee), 15.75 s tete_coupee (envoyee), 17.25 s tete_coupee (envoyee)
-Pré-jury (avant de dessiner) : plan serre sur la réplique 1 ; plan moyen sur la réplique 2 ; plan serre sur la réplique 5
-montage : 47 plans (0.0:serre>pre/coupe 2.3:moyen>env/coupe 6.8:tres_serre>pre/file 7.3:serre>env/coupe 8.3:large>pre/coupe 9.1:epaule>pre/zoom 9.9:serre>pre/glisse 10.9:serre>env/coupe 11.9:serre>pre/file 16.7:contre_plongee>pre/glisse 17.8:moyen>pre/glisse 18.7:serre>env/file 19.5:tres_serre>env/glisse 20.5:serre>env/glisse 21.2:epaule>env/glisse 22.3:serre>pre/coupe 23.5:moyen>env/coupe 24.0:serre>pre/coupe 25.5:large>pre/glisse 26.6:epaule>pre/glisse 28.0:moyen>pre/glisse 29.4:tres_serre>pre/glisse 30.9:tres_serre>env/glisse 32.3:serre>env/glisse 33.3:large>env/glisse 34.9:tres_serre>env/glisse 35.6:large>env/glisse 36.5:tres_serre>env/glisse 37.2:serre>env/glisse 38.0:large>env/glisse 39.1:tres_serre>env/glisse 40.3:moyen>env/glisse 41.5:serre>pre/file 42.7:large>env/coupe 43.9:tres_serre>env/glisse 45.4:serre>pre/coupe 46.8:large>env/glisse 48.6:serre>env/glisse 50.4:moyen>env/glisse 51.6:serre>env/glisse 53.3:moyen>env/glisse 54.4:contre_plongee>env/glisse 54.9:tres_serre>pre/file 55.9:moyen>env/file 57.3:contre_plongee>env/glisse 58.0:tres_serre>env/glisse 61.9:tres_serre>pre/coupe)
-studio : jour, lieux ['voiture'], tenues presentateur=blouson, envoyee=debardeur, 0 figurant(s), ambiances ['vapeur'] ; plans moyen/fixe serre/zoom_choc tres_serre/zoom_choc serre/travelling serre/avance contre_plongee/epaule epaule/fixe serre/fixe epaule/fixe moyen/travelling serre/avance tres_serre/zoom_choc serre/travelling tres_serre/zoom_choc tres_serre/zoom_choc serre/avance serre/vertige tres_serre/zoom_choc
-cartoon : durée 67.1 s, 18 répliques, 1 scène(s), personnages ['presentateur', 'envoyee']
-Contrôle image : 32 défaut(s) — 2.75 s tete_coupee (presentateur), 3.25 s tete_coupee (presentateur), 3.75 s tete_coupee (presentateur), 4.25 s tete_coupee (presentateur), 4.75 s tete_coupee (presentateur), 5.25 s tete_coupee (presentateur), 5.75 s tete_coupee (presentateur), 6.25 s tete_coupee (presentateur)
-  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~1007 images)
-  morceau 1007–2014 reçu d'une machine d'aide
-  morceau 2014–3021 reçu d'une machine d'aide
-  morceau 3021–4028 reçu d'une machine d'aide
-  dessin partagé terminé en 6.8 min
-Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury qualité (ia) : 5.2/10 — Humoriste 5.5/10 : 3 s Manque le bruitage de pet déclencheur du dialogue.; 55.7 s La réaction finale manque de punch visuel pour ponctuer le gag. | Réalisateur 4.8/10 : 14.1 s Cadrage trop haut, sommet du crâne coupé au bord supérieur.; 18.9 s Flou de rendu parasite sur le plan de l'envoyée.; 2.8 s tête de presentateur coupée par le bord de l'image (moyen); 6.8 s tête de presentateur coupée par le bord de l'image (moyen); 18.2 s tête de envoyee coupée par le bord de l'image (moyen) | Directeur artistique 5.2/10 : 0.4 s Position des corps non assise dans l'habitacle de la voiture.; 51.8 s Bande parasite blanche barrant la tête du personnage. | Ingénieur du son 5.0/10 : 30.2 s Aucun accent sonore pour appuyer la vanne de concentration.; 47 s Absence d'effet sonore de déconnexion mentionné dans le texte. | Spectateur TikTok 5.3/10 : 7.3 s Bulle d'information jaune superposée au sous-titre p
-Manque par rapport à la vidéo d'origine : Effet visuel de fumée verte matérialisant le pet dans l'habitacle. ; Plan frontal fixe à travers le pare-brise montrant les deux personnages assis côte à côte.
-Corrections du jury (tour 1) : plan serre sur la réplique 2 ; plan large sur la réplique 3 ; plan serre sur la réplique 6
-montage : 40 plans (0.0:serre>pre/coupe 2.3:serre>env/coupe 6.8:large>pre/file 9.9:serre>pre/glisse 10.9:serre>env/coupe 11.9:serre>pre/file 16.7:moyen>pre/glisse 21.2:epaule>env/glisse 22.3:serre>pre/coupe 23.5:moyen>env/coupe 24.0:serre>pre/coupe 25.5:large>pre/glisse 26.6:epaule>pre/glisse 28.0:moyen>pre/glisse 29.4:tres_serre>pre/glisse 30.9:tres_serre>env/glisse 32.3:serre>env/glisse 33.3:large>env/glisse 34.9:tres_serre>env/glisse 35.6:large>env/glisse 36.5:tres_serre>env/glisse 37.2:serre>env/glisse 38.0:large>env/glisse 39.1:tres_serre>env/glisse 40.3:moyen>env/glisse 41.5:serre>pre/file 42.7:large>env/coupe 43.9:tres_serre>env/glisse 45.4:serre>pre/coupe 46.8:large>env/glisse 48.6:serre>env/glisse 50.4:moyen>env/glisse 51.6:serre>env/glisse 53.3:moyen>env/glisse 54.4:contre_plongee>env/glisse 54.9:tres_serre>pre/file 55.9:moyen>env/file 57.3:contre_plongee>env/glisse 58.0:tres_serre>env/glisse 61.9:tres_serre>pre/coupe)
-studio : jour, lieux ['voiture'], tenues presentateur=blouson, envoyee=debardeur, 0 figurant(s), ambiances ['vapeur'] ; plans moyen/fixe serre/zoom_choc tres_serre/zoom_choc serre/travelling serre/avance contre_plongee/epaule epaule/fixe serre/fixe epaule/fixe moyen/travelling serre/avance tres_serre/zoom_choc serre/travelling tres_serre/zoom_choc tres_serre/zoom_choc serre/avance serre/vertige tres_serre/zoom_choc
-cartoon : durée 67.1 s, 18 répliques, 1 scène(s), personnages ['presentateur', 'envoyee']
-Contrôle image : 32 défaut(s) — 2.75 s tete_coupee (envoyee), 3.25 s tete_coupee (envoyee), 17.25 s tete_coupee (envoyee), 17.75 s tete_coupee (envoyee), 18.25 s tete_coupee (envoyee), 18.75 s tete_coupee (envoyee), 19.25 s tete_coupee (envoyee), 19.75 s tete_coupee (envoyee)
-  redessin partiel : 1221/4028 images à redessiner (2 passage(s)), le reste repris tel quel
-Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
+  voix trop proches : répliques réparties d'après le fil du dialogue (questions, réponses)
+  voix vérifiées mot par mot : 117 mot(s) remis sur la bonne voix
+  44 répliques, voix : {'speaker_0': 198, 'speaker_1': 216}
+  son de la vidéo : 2 voix [198 Hz (f, 56 %), 216 Hz (f, 43 %)], 5.14 mots/s, blancs 0.13 s, 25 coupure(s) de parole, dynamique 14.7 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
   IA gemini indisponible (The read operation timed out) : on passe à la suivante
-Jury qualité (gratuit) : 8.4/10 — Humoriste 8.6/10 : 58.1 s la chute finale est trop longue : la vanne se dilue | Réalisateur 2.0/10 : 2.8 s tête de envoyee coupée par le bord de l'image (serre); 17.2 s tête de envoyee coupée par le bord de l'image (moyen); 21.2 s tête de envoyee coupée par le bord de l'image (epaule) | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.1/10 : 0.0 s sous-titres trop rapides à lire
-Version corrigée gardée : 5.2 → 8.4/10
-Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = gemini ×2, mistral ×1, voix = tiktok, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 28733, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 19}
-Quota de l'API GitHub : 4745 appels restants
-OK : sortie/2026-10-25_08h42_emission.mp4 (67 s)
+  scène reconstituée : Un échange tendu dans un tribunal futuriste où une enquêteur (Lila) est jugée pour avoir utilisé une intelligence artificielle pour piéger un pédocriminel. Le présentateur (Jojo) joue le rôle du procureur ou de l'avocat de la défense, questionnant et défendant une vision déshumanisée de la justice.
+  casting : speaker_0 → Jojo, speaker_1 → Lila
+  sous-titres : 3 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
+  1 réattribution(s) de l'IA refusée(s) : la voix de ces répliques est reconnue avec certitude
+Sketch : « ATTENDEZ, J 'AI QUAND MÊME FAI », 44 répliques
+Lieux séparés : chaque personnage a son propre décor (appel, visio, l'un ailleurs)
+  décor 0 : tribunal futuriste avec écrans holographiques affichant des données ju
+  décor 1 : même décor que le présentateur, mais vue depuis l'autre côté de la sal
+montage : 77 plans (0.0:moyen>pre/coupe 1.4:tres_serre>pre/glisse 2.4:large>pre/glisse 3.9:serre>pre/glisse 5.5:tres_serre>pre/glisse 6.3:large>env/coupe 7.4:serre>pre/coupe 8.5:serre>env/coupe 9.6:moyen>pre/coupe 11.0:serre>pre/glisse 12.6:tres_serre>pre/glisse 13.9:serre>pre/glisse 15.0:serre>env/coupe 16.5:tres_serre>env/glisse 17.9:serre>env/glisse 19.6:contre_plongee>env/glisse 20.7:tres_serre>env/glisse 21.2:contre_plongee>env/glisse 22.1:serre>pre/coupe 23.8:tres_serre>pre/glisse 25.1:serre>pre/glisse 26.4:tres_serre>pre/glisse 27.7:serre>pre/glisse 28.9:tres_serre>pre/glisse 30.4:large>env/coupe 31.1:serre>env/glisse 32.0:serre>pre/coupe 33.3:tres_serre>env/coupe 34.4:serre>env/glisse 35.9:tres_serre>env/glisse 36.5:tres_serre>pre/coupe 37.3:serre>pre/glisse 38.7:moyen>env/coupe 39.4:serre>env/glisse 40.4:serre>pre/coupe 41.8:tres_serre>pre/glisse 42.7:serre>pre/glisse 44.4:tres_serre>pre/glisse 45.6:large>pre/zoom 47.1:large>env/coupe 48.6:tres_serre>env/glisse 50.3:tres_serre>pre/coupe 51.8:serre>pre/glisse 53.0:moyen>pre/glisse 54.0:serre>env/coupe 55.4:large>pre/coupe 57.2:serre>pre/glisse 58.7:large>pre/glisse 60.8:tres_serre>env/coupe 61.4:serre>env/glisse 62.5:serre>pre/coupe 62.9:moyen>env/coupe 63.6:tres_serre>env/glisse 64.6:plongee>pre/coupe 66.6:serre>pre/glisse 68.3:large>env/coupe 69.5:tres_serre>env/glisse 70.5:serre>env/glisse 71.8:serre>pre/coupe 73.3:serre>env/coupe 74.4:large>pre/coupe 74.9:serre>pre/glisse 75.9:serre>env/coupe 76.6:contre_plongee>pre/coupe 77.4:serre>pre/glisse 78.8:tres_serre>pre/glisse 79.6:moyen>env/coupe 80.7:serre>env/glisse 81.8:tres_serre>env/glisse 82.8:large>pre/coupe 83.4:large>env/coupe 84.4:tres_serre>env/zoom 85.4:serre>env/glisse 86.5:large>env/zoom 87.9:tres_serre>env/glisse 88.4:serre>pre/coupe 90.0:serre>env/coupe)
+studio : soir, lieux ['rue', 'salon'], tenues presentateur=costume, envoyee=blouse, 2 figurant(s), ambiances ['neon', 'pluie', 'poussiere'] ; plans moyen/fixe large/avance tres_serre/avance large/recul serre/fixe serre/fixe moyen/avance tres_serre/avance serre/avance contre_plongee/epaule serre/avance tres_serre/travelling large/recul serre/recul tres_serre/avance tres_serre/zoom_choc tres_serre/travelling moyen/fixe serre/avance large/avance large/travelling tres_serre/travelling moyen/fixe serre/avance large/avance large/fixe tres_serre/travelling serre/avance moyen/avance plongee/avance large/fixe serre/recul serre/avance large/travelling serre/fixe contre_plongee/fixe moyen/avance serre/travelling large/travelling large/avance large/fixe tres_serre/travelling epaule/fixe serre/avance
+appel : 11 écran(s) partagé(s), 6 plan(s) d'écoute
+cartoon : durée 94.6 s, 44 répliques, 2 scène(s), personnages ['presentateur', 'envoyee']
+montage : 77 plans (0.0:moyen>pre/coupe 1.4:tres_serre>pre/glisse 2.4:large>pre/glisse 3.9:serre>pre/glisse 5.5:tres_serre>pre/glisse 6.3:large>env/coupe 7.4:serre>pre/coupe 8.5:serre>env/coupe 9.6:moyen>pre/coupe 11.0:serre>pre/glisse 12.6:tres_serre>pre/glisse 13.9:serre>pre/glisse 15.0:serre>env/coupe 16.5:tres_serre>env/glisse 17.9:serre>env/glisse 19.6:contre_plongee>env/glisse 20.7:tres_serre>env/glisse 21.2:contre_plongee>env/glisse 22.1:serre>pre/coupe 23.8:tres_serre>pre/glisse 25.1:serre>pre/glisse 26.4:tres_serre>pre/glisse 27.7:serre>pre/glisse 28.9:tres_serre>pre/glisse 30.4:large>env/coupe 31.1:serre>env/glisse 32.0:serre>pre/coupe 33.3:tres_serre>env/coupe 34.4:serre>env/glisse 35.9:tres_serre>env/glisse 36.5:tres_serre>pre/coupe 37.3:serre>pre/glisse 38.7:moyen>env/coupe 39.4:serre>env/glisse 40.4:serre>pre/coupe 41.8:tres_serre>pre/glisse 42.7:serre>pre/glisse 44.4:tres_serre>pre/glisse 45.6:large>pre/zoom 47.1:large>env/coupe 48.6:tres_serre>env/glisse 50.3:tres_serre>pre/coupe 51.8:serre>pre/glisse 53.0:moyen>pre/glisse 54.0:serre>env/coupe 55.4:large>pre/coupe 57.2:serre>pre/glisse 58.7:large>pre/glisse 60.8:tres_serre>env/coupe 61.4:serre>env/glisse 62.5:serre>pre/coupe 62.9:moyen>env/coupe 63.6:tres_serre>env/glisse 64.6:plongee>pre/coupe 66.6:serre>pre/glisse 68.3:large>env/coupe 69.5:tres_serre>env/glisse 70.5:serre>env/glisse 71.8:serre>pre/coupe 73.3:serre>env/coupe 74.4:large>pre/coupe 74.9:serre>pre/glisse 75.9:serre>env/coupe 76.6:contre_plongee>pre/coupe 77.4:serre>pre/glisse 78.8:tres_serre>pre/glisse 79.6:moyen>env/coupe 80.7:serre>env/glisse 81.8:tres_serre>env/glisse 82.8:large>pre/coupe 83.4:large>env/coupe 84.4:tres_serre>env/zoom 85.4:serre>env/glisse 86.5:large>env/zoom 87.9:tres_serre>env/glisse 88.4:serre>pre/coupe 90.0:serre>env/coupe)
+studio : soir, lieux ['rue', 'salon'], tenues presentateur=costume, envoyee=blouse, 2 figurant(s), ambiances ['neon', 'pluie', 'poussiere'] ; plans moyen/fixe large/avance tres_serre/avance large/recul serre/fixe serre/fixe moyen/avance tres_serre/avance serre/avance contre_plongee/epaule serre/avance tres_serre/travelling large/recul serre/recul tres_serre/avance tres_serre/zoom_choc tres_serre/travelling moyen/fixe serre/avance large/avance large/travelling tres_serre/travelling moyen/fixe serre/avance large/avance large/fixe tres_serre/travelling serre/avance moyen/avance plongee/avance large/fixe serre/recul serre/avance large/travelling serre/fixe contre_plongee/fixe moyen/avance serre/travelling large/travelling large/avance large/fixe tres_serre/travelling epaule/fixe serre/avance
+appel : 11 écran(s) partagé(s), 6 plan(s) d'écoute
+cartoon : durée 94.6 s, 44 répliques, 2 scène(s), personnages ['presentateur', 'envoyee']
+Traceback (most recent call last):
+  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 396, in main
+    try: duree = cartoon.rendre(sk, base + ".mp4", audios, mots=mots, decors=decors, mini=fmt == "mini", limite=limite_job(), deja=(S or {}).get("faits"))
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/jt-auto/jt-auto/moteur/cartoon.py", line 1700, in rendre
+    faits_avant = {(int(a_), int(b_)): c_ for a_, b_, c_ in (deja or []) if os.path.exists(c_)}
+                                                             ^^^^^^^^^^
+TypeError: 'bool' object is not iterable
+Moteur cartoon en échec ('bool' object is not iterable) : nouvel essai en rendu simple, sans décor IA.
+appel : 11 écran(s) partagé(s), 6 plan(s) d'écoute
+cartoon : durée 94.6 s, 44 répliques, 2 scène(s), personnages ['presentateur', 'envoyee']
+Traceback (most recent call last):
+  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 396, in main
+    try: duree = cartoon.rendre(sk, base + ".mp4", audios, mots=mots, decors=decors, mini=fmt == "mini", limite=limite_job(), deja=(S or {}).get("faits"))
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/jt-auto/jt-auto/moteur/cartoon.py", line 1700, in rendre
+    faits_avant = {(int(a_), int(b_)): c_ for a_, b_, c_ in (deja or []) if os.path.exists(c_)}
+                                                             ^^^^^^^^^^
+TypeError: 'bool' object is not iterable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 538, in <module>
+    try: main()
+         ^^^^^^
+  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 465, in main
+    duree = cartoon.rendre(sk, base + ".mp4", audios, mots=mots, decors={}, mini=fmt == "mini")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/jt-auto/jt-auto/moteur/cartoon.py", line 1700, in rendre
+    faits_avant = {(int(a_), int(b_)): c_ for a_, b_, c_ in (deja or []) if os.path.exists(c_)}
+                                                             ^^^^^^^^^^
+TypeError: 'bool' object is not iterable
