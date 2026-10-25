@@ -9668,5 +9668,235 @@
    ]
   },
   "video": "2026-10-25_19h53_emission.mp4"
+ },
+ {
+  "date": "2026-10-25",
+  "source": "https://www.tiktok.com/@kodanimation/video/7690385188756409632",
+  "auteur": "kodanimation",
+  "visuel": {
+   "gestes": [],
+   "duree": 14.5,
+   "nb_plans": 3,
+   "duree_plan": 4.83,
+   "coupes": [
+    7.0,
+    12.5
+   ],
+   "plans": {
+    "tres_serre": 0.0,
+    "serre": 0.0,
+    "moyen": 0.0,
+    "large": 1.0
+   },
+   "camera": {
+    "fixe": 1.0,
+    "avance": 0.0,
+    "recul": 0.0,
+    "travelling": 0.0,
+    "epaule": 0.0
+   },
+   "nb_personnes": 0,
+   "personnes": [],
+   "visages": false,
+   "sourires": 0.0,
+   "energie": 0.146,
+   "mur": [
+    202,
+    127,
+    111
+   ],
+   "palette": [
+    [
+     197,
+     145,
+     131,
+     0.337
+    ],
+    [
+     208,
+     102,
+     82,
+     0.236
+    ],
+    [
+     236,
+     241,
+     244,
+     0.137
+    ],
+    [
+     132,
+     103,
+     103,
+     0.11
+    ],
+    [
+     90,
+     58,
+     47,
+     0.106
+    ],
+    [
+     17,
+     10,
+     9,
+     0.075
+    ]
+   ],
+   "lumiere": {
+    "luminosite": 177.1,
+    "chaleur": 59.5,
+    "saturation": 101.9
+   },
+   "moment": "jour"
+  },
+  "audio": {
+   "duree": 14.0,
+   "nb_voix": 1,
+   "voix": [
+    {
+     "hz": 140,
+     "genre": "h",
+     "part": 1.0
+    }
+   ],
+   "debit": 4.66,
+   "blanc_moyen": 0.61,
+   "coupes": 0,
+   "dynamique_db": 22.9,
+   "cris": 0.028,
+   "musique": null,
+   "impacts": 0,
+   "impacts_10s": 0.0,
+   "graves": 0,
+   "aigus": 0,
+   "sur_vanne": 0,
+   "evenements": {},
+   "emotions": {
+    "détendu": 1,
+    "enthousiaste": 1,
+    "confus": 1,
+    "ironique": 1,
+    "sarcastique": 1
+   }
+  },
+  "claude": {
+   "lieux": [
+    "salle de bain"
+   ],
+   "moment": "soir",
+   "costumes": {
+    "presentateur": {
+     "haut": "tshirt",
+     "c_haut": "bleu",
+     "motif": "uni",
+     "bas": "pantalon",
+     "chaussures": "chaussons",
+     "details": [
+      "gratte_tete",
+      "bracelets"
+     ],
+     "chapeau": null,
+     "cheveux": "court_texture",
+     "c_cheveux": "brun"
+    }
+   },
+   "objets": [
+    {
+     "replique": 0,
+     "objet": "telephone"
+    },
+    {
+     "replique": 1,
+     "objet": "gommage"
+    },
+    {
+     "replique": 2,
+     "objet": "shampoing"
+    },
+    {
+     "replique": 3,
+     "objet": "serviette"
+    },
+    {
+     "replique": 4,
+     "objet": "micro"
+    }
+   ],
+   "gags": [
+    "Gommage : 100% efficace !",
+    "Cheveux gras ? Demain, c'est demain !",
+    "Félicitations : pour quoi ?"
+   ],
+   "ambiances": [
+    "vapeur"
+   ],
+   "plans": [
+    {
+     "replique": 0,
+     "plan": "large",
+     "mouvement": "fixe",
+     "geste": "bras_ouverts",
+     "reaction": "aucune"
+    },
+    {
+     "replique": 1,
+     "plan": "serre",
+     "mouvement": "zoom_choc",
+     "geste": "pointe_g",
+     "reaction": "joie"
+    },
+    {
+     "replique": 2,
+     "plan": "moyen",
+     "mouvement": "fixe",
+     "geste": "gratte_tete",
+     "reaction": "sceptique"
+    },
+    {
+     "replique": 3,
+     "plan": "contre_plongee",
+     "mouvement": "fixe",
+     "geste": "mains_hanches",
+     "reaction": "choc"
+    },
+    {
+     "replique": 4,
+     "plan": "tres_serre",
+     "mouvement": "fixe",
+     "geste": "pouce",
+     "reaction": "rire"
+    }
+   ]
+  },
+  "realisation": {
+   "moment": "soir",
+   "lieux": [
+    "bar"
+   ],
+   "gags": [
+    "Gommage : 100% efficace !",
+    "Cheveux gras ? Demain, c'est demain !",
+    "Félicitations : pour quoi ?"
+   ],
+   "ambiances": [
+    "neon",
+    "pluie",
+    "poussiere",
+    "vapeur"
+   ],
+   "source": "auteur+image",
+   "tenues": {
+    "presentateur": "tshirt"
+   },
+   "plans": [
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe"
+   ]
+  },
+  "video": "2026-10-25_20h01_emission.mp4"
  }
 ]
