@@ -10,6 +10,7 @@ on:
 permissions:
   contents: read
   actions: write
+  checks: read                 # messages des étapes coupées (annulée par GitHub ou par l'auteur ?)
 
 jobs:
   garde:
@@ -21,6 +22,8 @@ jobs:
           sparse-checkout: |
             moteur/planning.py
             moteur/stats.py
+            moteur/relance.py
+            moteur/dessin_partage.py
             episodes
       - id: p
         env:
@@ -57,14 +60,19 @@ jobs:
         run: |
           # file d'attente « sons-tiktok » : un 2e lancement attend le 1er puis s'arrête (créneau déjà traité)
           gh workflow run emission.yml -R "$GITHUB_REPOSITORY" -f auto=1 -f filiere=tiktok && echo "Créneau TikTok : vidéo lancée."
+      - name: Ménage des vidéos d'essai (une fois par jour, vers 4 h du matin)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # aperçus 10 s, sketchs d'essai, essais de pause : effacés au bout de 3 jours (moteur/supprimer.py → menage_essais)
+          if [ "$(date -u +%H)" = "03" ] && [ "$(date -u +%M)" -lt 30 ]; then
+            gh workflow run supprimer.yml -R "$GITHUB_REPOSITORY" -f fichier=ESSAIS && echo "Ménage des essais lancé."
+          fi
+
       - name: Relancer une fabrication coupée par GitHub (machine arrêtée en pleine vidéo)
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          # une vidéo dont la machine a été coupée (« shutdown signal », délai dépassé…) n'a ni vidéo ni alerte :
-          # on relance une seule fois chaque fabrication en échec des 6 dernières heures (1re tentative seulement)
-          DEPUIS=$(date -u -d '-6 hours' +%Y-%m-%dT%H:%M:%SZ)
-          gh run list -R "$GITHUB_REPOSITORY" -w emission.yml -L 20 --json databaseId,conclusion,attempt,createdAt \
-            -q ".[] | select(.conclusion==\"failure\" and .attempt==1 and .createdAt > \"$DEPUIS\") | .databaseId" | while read -r ID; do
-            gh run rerun "$ID" -R "$GITHUB_REPOSITORY" --failed && echo "Fabrication $ID relancée (coupée en route)."
-          done || true
+          # une seule relance par fabrication des 6 dernières heures : en échec, ou annulée PAR GITHUB (délai dépassé, machine
+          # coupée) ; jamais une fabrication annulée par l'auteur (moteur/relance.py)
+          python3 moteur/relance.py || true

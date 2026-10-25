@@ -347,7 +347,7 @@ class TempsDepasse(RuntimeError):
         super().__init__(msg); self.faits = list(faits)
 
 
-def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False, reprise=None, limite=None, plage=None, deja=None):
+def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False, reprise=None, limite=None, plage=None, deja=None, plans_seuls=False):
     import dessin_partage as DP
     args0 = None                                                           # pour le dessin partagé : les arguments tels qu'au départ
     if not apercu and reprise is None and plage is None and os.environ.get("DESSIN_PARTAGE", "1") != "0" and os.environ.get("GH_TOKEN"):
@@ -1548,7 +1548,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
 
     global _IMAGE
     _IMAGE = image                                                         # les processus de rendu héritent de tout (fork)
-    n_proc = min(4, os.cpu_count() or 1) if os.environ.get("RENDU_PARALLELE", "1") != "0" else 1
+    n_proc = min(4, os.cpu_count() or 1) if os.environ.get("RENDU_PARALLELE", "1") != "0" and not plans_seuls else 1
     pool = None
     if n_proc > 1 and nf > 90:                                             # rendu sur plusieurs processeurs (images dans l'ordre)
         import multiprocessing as mp
@@ -1684,6 +1684,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
                                       "decors": sorted(str(k) for k in (decors or {})), "fin": FIN_CARTE, "gel": GEL, "w": W, "h": H, "mini": mini,
                                       "transitions": transitions, "studio": {k: v for k, v in (B or {}).items() if k not in ("decoupe", "plans", "bruitages", "source")}}))
     except Exception as e: print(f"empreintes impossibles ({str(e)[:100]}) : pas de redessin partiel", flush=True); RENDU["sig_global"] = None
+    if plans_seuls: return total                                           # pré-jury : le montage est prêt, aucune image dessinée
     morceaux = None                                                        # 2e version du jury : seulement les passages qui changent
     if reprise and os.path.exists(reprise.get("video") or "") and os.environ.get("REDESSIN_PARTIEL", "1") != "0":
         try:
@@ -1705,7 +1706,11 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
         if limite and _time.time() > limite:
             if pool: pool.close(); pool.join()
             raise TempsDepasse(f"limite de temps proche ({len(termines)} bloc(s) dessinés)", termines)
-        c_ = f"{tmp}/bloc_{a_}_{b_}.mp4"; encoder_plage(a_, b_, c_, progres); termines.append((a_, b_, c_)); return c_
+        c_ = f"{tmp}/bloc_{a_}_{b_}.mp4"; encoder_plage(a_, b_, c_, progres); termines.append((a_, b_, c_))
+        if APRES_BLOC[0]:                                                  # point de sauvegarde : le bloc est mis à l'abri tout de suite
+            try: APRES_BLOC[0](a_, b_, c_)
+            except Exception as e_: print(f"  sauvegarde du bloc impossible ({e_})", flush=True)
+        return c_
     if morceaux is None and args0 is not None and DP.actif(nf):           # vidéo longue : dessin partagé entre plusieurs machines
         compte = [0]
         def suivi():
@@ -1757,6 +1762,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
                     "-c:v", "copy", "-c:a", "aac", "-b:a", "192k", "-shortest", "-movflags", "+faststart", sortie], check=True, timeout=900)
     return total
 
+APRES_BLOC = [None]                                                        # (début, fin, fichier) → appelé à chaque bloc fini (reprise.py)
 _IMAGE = None
 def _image_octets(fi):
     """Une image de la vidéo en cours (appelée dans les processus de rendu)."""

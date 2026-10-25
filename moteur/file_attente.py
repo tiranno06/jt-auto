@@ -8,7 +8,7 @@ affiche « En file d'attente : n vidéo(s) avant ». Sans jeton (essai sur un or
 import json, os, sys, time, urllib.request
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import progression
+import progression, quota
 
 PAUSE = 40                                                                 # secondes entre deux coups d'œil (quota de l'API GitHub)
 EN_COURS = ("queued", "in_progress", "waiting", "pending", "requested")
@@ -18,7 +18,9 @@ def _lire(chemin):
     jeton, depot = os.environ.get("GH_TOKEN") or os.environ.get("GITHUB_TOKEN"), os.environ.get("GITHUB_REPOSITORY")
     req = urllib.request.Request(f"https://api.github.com/repos/{depot}{chemin}",
                                  headers={"Authorization": f"Bearer {jeton}", "Accept": "application/vnd.github+json", "User-Agent": "petitsdramas-robot"})
-    return json.loads(urllib.request.urlopen(req, timeout=20).read() or b"{}")
+    r = urllib.request.urlopen(req, timeout=20)
+    quota.noter(r.headers)
+    return json.loads(r.read() or b"{}")
 
 
 def bloque(jobs):
@@ -68,7 +70,7 @@ def attendre():
             vu = len(d)
             print(f"File d'attente : {vu} fabrication(s) avant la nôtre : " + ", ".join(r.get("html_url", str(r["id"])) for r in d), flush=True)
         progression.etape(0, f"En file d'attente : {vu} vidéo{'s' if vu > 1 else ''} avant", forcer=True)
-        time.sleep(min(300, PAUSE + 25 * (vu - 1)))                        # plus on est loin dans la file, moins on regarde souvent
+        time.sleep(quota.pause_conseillee(min(300, PAUSE + 25 * (vu - 1))))   # plus on est loin, moins on regarde souvent (et quota)
 
 
 if __name__ == "__main__":

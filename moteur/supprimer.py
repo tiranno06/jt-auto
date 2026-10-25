@@ -5,8 +5,25 @@ import json, os, re, subprocess, sys
 RACINE = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 HIST = os.path.join(RACINE, "episodes", "historique.json")
 
+def essai(h):
+    """Vidéo d'essai (aperçu 10 s, sketch d'essai, essai de pause) : rangée à part, effacée au bout de 3 jours."""
+    return bool(h.get("essai")) or str(h.get("titre", "")).startswith("👀 Aperçu")
+
+
+def menage_essais(jours=3):
+    """Ménage quotidien (garde.yml) : les vidéos d'essai de plus de 3 jours sont effacées (historique + Releases)."""
+    import datetime
+    hist = json.load(open(HIST, encoding="utf-8")) if os.path.exists(HIST) else []
+    limite = (datetime.date.today() - datetime.timedelta(days=jours)).isoformat()
+    vieux = [h for h in hist if essai(h) and h.get("fichier") and str(h.get("date", "")) < limite]
+    for h in vieux:
+        os.environ["FICHIER"] = h["fichier"]; main()
+    print(f"Ménage des essais : {len(vieux)} vidéo(s) d'essai de plus de {jours} jours effacée(s)"); return 0
+
+
 def main():
     nom = os.environ.get("FICHIER", "").strip()
+    if nom == "ESSAIS": return menage_essais()
     if not re.fullmatch(r"[\w.-]+\.mp4", nom): print(f"Nom de fichier refusé : {nom!r}"); return 1
     hist = json.load(open(HIST, encoding="utf-8")) if os.path.exists(HIST) else []
     e = next((h for h in hist if h.get("fichier") == nom), None)

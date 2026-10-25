@@ -20,7 +20,10 @@ def _api(methode, chemin, corps):
     req = urllib.request.Request(f"https://api.github.com/repos/{depot}{chemin}", data=json.dumps(corps).encode(), method=methode,
                                  headers={"Authorization": f"Bearer {jeton}", "Accept": "application/vnd.github+json",
                                           "User-Agent": "petitsdramas-robot", "Content-Type": "application/json"})
-    return json.loads(urllib.request.urlopen(req, timeout=10).read() or b"{}")
+    r = urllib.request.urlopen(req, timeout=10)
+    try: __import__("quota").noter(r.headers)                               # appels restants (quota de l'API GitHub)
+    except Exception: pass
+    return json.loads(r.read() or b"{}")
 
 
 def _signaler(voie, e):
@@ -38,6 +41,9 @@ def _envoyer(pct, texte, fin=None, etat="pending"):
     sha, run = os.environ["GITHUB_SHA"], os.environ["GITHUB_RUN_ID"]
     texte = re.sub(r"[^\w\s'’:/().,%+-]", "", str(texte)).strip()          # texte simple (GitHub refuse certains caractères)
     if re.match(r"^\d+/\d+$", os.environ.get("CHAINE") or ""): texte = f"vidéo {os.environ['CHAINE']} : {texte}"   # vidéos à la chaîne
+    try:
+        if __import__("quota").econome(): texte += " (suivi ralenti : quota GitHub presque épuisé)"   # voyant sur la barre du site
+    except Exception: pass
     desc = f"{int(max(0, min(100, pct)))}|{TYPE[0]}|{texte}|{int(fin) if fin else ''}"[:140]
     if "statut" not in _ERREUR:
         try: _api("POST", f"/statuses/{sha}", {"state": etat, "context": f"progression-{run}", "description": desc}); return
@@ -55,7 +61,9 @@ def _envoyer(pct, texte, fin=None, etat="pending"):
 def etape(pct, texte, reste_s=None, forcer=False):
     """Nouvelle étape (ou point d'avancement). reste_s : temps restant estimé en secondes (sinon le site l'estime)."""
     maintenant = time.time()
-    if not forcer and maintenant - _DERNIER[0] < 8: return                 # temps réel : un point toutes les 8 s (quota de l'API GitHub)
+    import quota
+    if not forcer and maintenant - _DERNIER[0] < (8 if not quota.econome() else 90): return   # temps réel : un point toutes les 8 s
+    #                                                                        (toutes les 90 s quand le quota de l'API GitHub est presque épuisé)
     _DERNIER[0] = maintenant
     _envoyer(pct, texte, maintenant + reste_s if reste_s else None)
 

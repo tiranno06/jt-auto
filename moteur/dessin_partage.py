@@ -30,6 +30,8 @@ def _req(methode, url, corps=None, entetes=None, brut=False, timeout=120):
     data = corps if isinstance(corps, (bytes, type(None))) else json.dumps(corps).encode()
     if data is not None and "Content-Type" not in h: h["Content-Type"] = "application/json"
     r = urllib.request.urlopen(urllib.request.Request(url, data=data, method=methode, headers=h), timeout=timeout)
+    try: __import__("quota").noter(r.headers)
+    except Exception: pass
     contenu = r.read()
     return contenu if brut else (json.loads(contenu) if contenu else {})
 
@@ -88,7 +90,7 @@ def menage(rel, garder=""):
     for a in fichiers(rel):
         import calendar
         age = time.time() - calendar.timegm(time.strptime(a["created_at"], "%Y-%m-%dT%H:%M:%SZ"))
-        vieux = age > (3 * 86400 if a["name"].startswith("s") else 6 * 3600)   # fabrication en pause (reprise.py) : gardée 3 jours
+        vieux = age > (3 * 86400 if a["name"].startswith(("s", "c")) else 6 * 3600)   # pause / point de sauvegarde (reprise.py) : 3 jours
         if vieux or (garder and a["name"].startswith(garder)): effacer(a)
 
 
@@ -176,7 +178,7 @@ def dessiner(nf, args, dessiner_plage, journal=print, progres=None):
                     chemins[p] = f"{tmp}/{p[0]}.mp4"; dessiner_plage(p[0], p[1], chemins[p], progres)
         except Exception as e:
             journal(f"  lecture des morceaux impossible ({str(e)[:120]}), nouvel essai")
-        if restants: time.sleep(20)
+        if restants: time.sleep(__import__("quota").pause_conseillee(20))
     try: menage(rel, garder=nom)
     except Exception: pass
     return [chemins[p] for p in morceaux]

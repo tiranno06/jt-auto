@@ -877,6 +877,61 @@ class TestPauseReprise(unittest.TestCase):
         self.assertEqual(RP.demandee(), (None, None))
 
 
+class TestReveilSecours(unittest.TestCase):
+    def test_relance_coupees_par_github_pas_par_l_auteur(self):
+        sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "moteur"))
+        import relance as R, time as T
+        t = T.strftime("%Y-%m-%dT%H:%M:%SZ", T.gmtime(T.time() - 3600)); vieux = T.strftime("%Y-%m-%dT%H:%M:%SZ", T.gmtime(T.time() - 9 * 3600))
+        runs = [{"id": 1, "status": "completed", "conclusion": "failure", "run_attempt": 1, "created_at": t},
+                {"id": 2, "status": "completed", "conclusion": "cancelled", "run_attempt": 1, "created_at": t},     # coupée par GitHub
+                {"id": 3, "status": "completed", "conclusion": "cancelled", "run_attempt": 1, "created_at": t},     # annulée par l'auteur
+                {"id": 4, "status": "completed", "conclusion": "failure", "run_attempt": 2, "created_at": t},       # déjà relancée
+                {"id": 5, "status": "completed", "conclusion": "failure", "run_attempt": 1, "created_at": vieux},   # trop ancienne
+                {"id": 6, "status": "completed", "conclusion": "success", "run_attempt": 1, "created_at": t}]
+        self.assertEqual(R.a_relancer(runs, T.time(), lambda i: i == 2), [1, 2])
+        self.assertTrue(R.COUPE_GITHUB.search("The job has exceeded the maximum execution time of 2h0m0s"))
+
+    def test_alertes_appareil_mort(self):
+        sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "moteur"))
+        import alerte
+        ancien = alerte.MORTS; alerte.MORTS = os.path.join(tempfile.mkdtemp(), "m.json")
+        try:
+            alerte.noter_mort("https://push.exemple/abc")
+            self.assertIn(alerte.empreinte("https://push.exemple/abc"), alerte.morts())
+            self.assertNotIn("push.exemple", open(alerte.MORTS).read())                         # jamais l'adresse elle-même
+        finally: alerte.MORTS = ancien
+
+
+class TestAmeliorationsOctobre3(unittest.TestCase):
+    def setUp(self): sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "moteur"))
+
+    def test_voix_par_tours_pyannote(self):
+        import locuteurs as L
+        mots = [{"w": "a", "s": 0.0, "e": 0.4}, {"w": "b", "s": 0.5, "e": 0.9}, {"w": "c", "s": 1.6, "e": 2.0}, {"w": "d", "s": 3.5, "e": 3.8}]
+        res = L.mots_par_tours(mots, [(0.0, 1.0, "SPK_B"), (1.5, 3.0, "SPK_A")])
+        self.assertEqual([m["voix"] for m in res], ["speaker_0", "speaker_0", "speaker_1", "speaker_1"])   # dernier mot : tour le plus proche
+        self.assertIsNone(L.pyannote(mots, np.zeros(22050, np.float32)) if not os.environ.get("HF_TOKEN") else None)
+
+    def test_sous_titres_corriges_sans_reecriture(self):
+        import doublage as D
+        segs = [{"t": "Non, c'est 1000 ballons rien.", "mots": [{"w": w} for w in "Non, c'est 1000 ballons rien.".split()]},
+                {"t": "Bonjour à tous", "mots": [{"w": w} for w in "Bonjour à tous".split()]}]
+        out = D.corriger_textes(segs, ["Non, c'est mille balles ou rien.", "Une tout autre phrase inventée de toutes pièces par l'IA"])
+        self.assertEqual(out, ["Non, c'est mille balles ou rien.", "Bonjour à tous"])
+
+    def test_essais_a_part_et_menage(self):
+        import supprimer as SU
+        self.assertTrue(SU.essai({"titre": "👀 Aperçu 10 s — X"})); self.assertTrue(SU.essai({"essai": True})); self.assertFalse(SU.essai({"titre": "Vrai"}))
+
+    def test_quota_ralentit(self):
+        import quota, time as T
+        quota.ETAT.update(reste=50, remise=int(T.time()) + 200)
+        try:
+            self.assertTrue(quota.econome()); self.assertGreater(quota.pause_conseillee(40), 150)
+            quota.ETAT.update(reste=900); self.assertFalse(quota.econome()); self.assertEqual(quota.pause_conseillee(40), 40)
+        finally: quota.ETAT.update(reste=None, remise=None)
+
+
 class TestRelaisIA(unittest.TestCase):
     def test_bascule_claude_vers_mistral_puis_gemini(self):
         import json as _j, io, urllib.request, urllib.error, reseau

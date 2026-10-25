@@ -148,7 +148,7 @@ def main(jours=7):
     if len(rates) < 2: print("Pas assez de ratés cette semaine : pas de bêtisier."); return 0
     videos = telecharger(rates, os.path.join(RACINE, "sortie", "sources"))
     rates = [x for x in rates if x[0]["fichier"] in videos]
-    jour = datetime.date.today().isoformat(); base = os.path.join(RACINE, "sortie", f"{jour}_betisier")
+    jour = datetime.datetime.now(__import__("zoneinfo").ZoneInfo("Europe/Paris")).date().isoformat(); base = os.path.join(RACINE, "sortie", f"{jour}_betisier")
     os.makedirs(os.path.dirname(base), exist_ok=True)
     duree = monter(rates, base + ".mp4", videos)
     if duree <= 0: print("Montage impossible : pas de bêtisier."); return 0

@@ -57,17 +57,42 @@ def noter(titre, texte, lien=""):
     os.makedirs(os.path.dirname(JOURNAL), exist_ok=True)
     json.dump(j[-30:], open(JOURNAL, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 
+MORTS = os.path.join(RACINE, "episodes", "abonnements_morts.json")
+
+
+def empreinte(endpoint):
+    """Empreinte d'un appareil (jamais l'adresse elle-même : le dépôt est public)."""
+    import hashlib
+    return hashlib.sha256(str(endpoint).encode()).hexdigest()[:20]
+
+
+def morts():
+    try: return set(json.load(open(MORTS, encoding="utf-8")))
+    except (OSError, ValueError): return set()
+
+
+def noter_mort(endpoint):
+    """Appareil qui n'existe plus (désinstallé, notifications coupées) : noté ; le site le retire de la liste à sa prochaine ouverture."""
+    m = morts() | {empreinte(endpoint)}
+    os.makedirs(os.path.dirname(MORTS), exist_ok=True)
+    json.dump(sorted(m)[-50:], open(MORTS, "w", encoding="utf-8"), indent=1)
+
+
 def alerter(titre, texte, lien=""):
     """Envoie la notification à tous les appareils abonnés ; ne fait jamais échouer le robot."""
     noter(titre, texte, lien)
     prive, publique = os.environ.get("VAPID_PRIVEE", ""), os.environ.get("VAPID_PUBLIQUE", "")
     try: abos = json.loads(os.environ.get("PUSH_ABONNEMENTS") or "[]")
     except ValueError: abos = []
-    if not (prive and publique and abos): print("Notification non envoyée : notifications pas encore activées dans l'appli."); return 0
+    deja_morts = morts(); abos = [a for a in abos if empreinte(a.get("endpoint")) not in deja_morts]   # appareils disparus : sautés
+    if not (prive and publique and abos): print("Notification non envoyée : aucun appareil actif (réactivez les notifications dans l'appli)."); return 0
     n = 0
     for a in abos:
         try: envoyer(a, {"titre": titre, "texte": texte, "lien": lien}, prive, publique); n += 1
-        except Exception as e: print(f"Notification refusée par un appareil : {str(e)[:150]}")
+        except Exception as e:
+            code = getattr(e, "code", None)
+            if code in (404, 410): noter_mort(a.get("endpoint")); print("Notification : un appareil n'existe plus (il sera retiré de la liste)")
+            else: print(f"Notification refusée par un appareil : {str(e)[:150]}")
     print(f"Notification envoyée à {n}/{len(abos)} appareil(s) : {titre}"); return n
 
 if __name__ == "__main__":

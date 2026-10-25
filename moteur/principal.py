@@ -109,11 +109,16 @@ def main():
     PR.TYPE[0] = "tiktok" if (FILIERE == "tiktok" or THEME.startswith("TIKTOK::")) else "sketch"
     import reprise as RP
     SUITE_NOM, CHAINE_ORIG = RP.demandee(); S = None                        # reprise d'une fabrication mise en pause (limite de temps)
+    if not SUITE_NOM:                                                      # relance par le garde d'une fabrication coupée par surprise :
+        nom_p, S_p = RP.point_existant()                                   # on repart de son point de sauvegarde
+        if S_p:
+            SUITE_NOM, S = nom_p, S_p
+            print(f"Relance : reprise depuis le point de sauvegarde {nom_p} ({len(S.get('faits') or [])} bloc(s) d'images déjà dessinés)", flush=True)
     EN_REPRISE[0] = bool(SUITE_NOM)
     if SUITE_NOM:
         os.environ["CHAINE"] = CHAINE_ORIG                                 # « 2/3 » d'une chaîne de vidéos TikTok, sinon vide
         try:
-            S = RP.charger(SUITE_NOM)
+            S = RP.charger(SUITE_NOM)                                       # (reprise lancée par une fabrication en pause)
             print(f"Reprise de la fabrication en pause {SUITE_NOM} ({'2e version du jury' if S['phase'] == 'v2' else '1re version'}, "
                   f"{len(S.get('faits') or [])} bloc(s) d'images déjà dessinés)", flush=True)
         except Exception as e:
@@ -306,8 +311,8 @@ def main():
         audios, mots = DOUB; credits_voix = [f"bande son d'origine (@{sk['doublage']['auteur']})"]; moteur = "bande son TikTok"
     elif REALISTE: audios, credits_voix, mots, moteur = [], ["Veo 3.1 via ElevenLabs"], None, "Veo 3.1"   # le son vient de la vidéo réaliste
     else: audios, credits_voix, mots, moteur = voix_et_minutage()
-    jour = datetime.date.today().isoformat()
-    heure = datetime.datetime.now(ZoneInfo("Europe/Paris")).strftime("%Hh%M")      # nom unique même si l'historique a été remis à zéro
+    maintenant = datetime.datetime.now(ZoneInfo("Europe/Paris"))            # date ET heure de Paris (avant : date de Londres + heure de Paris,
+    jour, heure = maintenant.date().isoformat(), maintenant.strftime("%Hh%M")     # une vidéo de 1 h 29 portait la date de la veille)
     pris = {h.get("fichier") for h in historique}; n = 1; base = f"sortie/{jour}_{heure}_emission"
     while os.path.basename(base) + ".mp4" in pris: n += 1; base = f"sortie/{jour}_{heure}_emission{n}"   # plusieurs émissions le même jour
     if S: base, jour = S["base"], S["jour"]                                # reprise : même vidéo, même nom
@@ -346,16 +351,25 @@ def main():
             except Exception as e: print(f"Ambiances ElevenLabs indisponibles : {e}", flush=True)
             import controle, qualite, copy
             reprise_v2 = bool(S and S["phase"] == "v2")                    # reprise pendant la 2e version du jury
-            def pause(phase, faits, **plus):
-                """Limite de temps de GitHub proche : tout est sauvegardé et une nouvelle machine reprend là où on en est."""
+            def etat_a_sauver(phase, faits, **plus):
+                """Tout ce qu'il faut pour reprendre la fabrication ailleurs (et les fichiers à joindre)."""
                 ctx = dict(phase=phase, faits=faits, sk=plus.get("sk", sk), DOUB=DOUB, fmt=fmt, candidats=candidats, tiktok=tiktok, secours=SECOURS,
                            num=num, style_acc=style_acc, accroche_hist=accroche_hist, audios=audios, credits_voix=credits_voix, mots=mots,
                            moteur=moteur, base=base, jour=jour, decors=plus.get("decors", decors))
                 if phase == "v2": ctx.update(video_v1=base + ".mp4", duree=duree, tech=(tech_ok, rapport_tech), qualite=copy.deepcopy(QUALITE), **plus)
                 d_ = (ctx["sk"].get("doublage") or {})
-                fich = [c_ for _a, _b, c_ in faits] + ([base + ".mp4"] if phase == "v2" else []) + [d_.get("piste"), d_.get("video_origine")]
+                return ctx, [c_ for _a, _b, c_ in faits] + ([base + ".mp4"] if phase == "v2" else []) + [d_.get("piste"), d_.get("video_origine")]
+            def point(phase, **plus):
+                """Point de sauvegarde avant de dessiner : si la machine est coupée par surprise, la relance repart du dernier bloc."""
+                nom_p = RP.poser_point(*etat_a_sauver(phase, [], **plus), phase)
+                cartoon.APRES_BLOC[0] = (lambda a_, b_, c_: RP.deposer_bloc(nom_p, a_, b_, c_)) if nom_p else None
+            def pause(phase, faits, **plus):
+                """Limite de temps de GitHub proche : tout est sauvegardé et une nouvelle machine reprend là où on en est."""
+                ctx, fich = etat_a_sauver(phase, faits, **plus)
                 PR.etape(PR.PLAGE[0], "Mise en pause : la suite repart sur une nouvelle machine", forcer=True)
                 nom_ = RP.sauver(ctx, fich); RP.relancer(nom_, os.environ.get("CHAINE", ""))
+                for t_ in RP.ENVOIS: t_.join(timeout=120)
+                for n_ in (RP.nom_point("v1"), RP.nom_point("v2")): RP.nettoyer(n_)   # la pause a sa propre sauvegarde
                 print(f"Fabrication mise en pause ({phase}, {len(faits)} bloc(s) déjà dessinés) : reprise {nom_} lancée", flush=True)
                 if os.environ.get("GITHUB_OUTPUT"):
                     with open(os.environ["GITHUB_OUTPUT"], "a") as f_: f_.write("pause=1\n")
@@ -367,7 +381,18 @@ def main():
                 tech_ok, rapport_tech = S["tech"]
             else:
                 PR.PLAGE[:] = [40, 86]; PR.etape(40, "Dessin des images", forcer=True)
+                if not S and not test and os.environ.get("JURY", "1") != "0" and os.environ.get("PRE_JURY", "1") != "0":
+                    try:                                                   # pré-jury : les règles sûres du jury appliquées AVANT de dessiner
+                        import tempfile as _tf                             # (tête coupée, chevauchement, sous-titre sur un visage, chute
+                        cartoon.rendre(copy.deepcopy(sk), _tf.mkdtemp(), audios, mots=mots, decors=copy.deepcopy(decors), mini=fmt == "mini", plans_seuls=True)
+                        G_ = qualite.jury_gratuit(cartoon.RENDU, sk)        # sans zoom…) : la 2e version ne sert plus qu'aux remarques de l'IA
+                        corr_ = [r_["correction"] for v_ in G_.values() for r_ in v_["remarques"]
+                                 if isinstance(r_.get("correction"), dict) and r_["correction"].get("type") in ("plan", "reaction", "bruitage") and r_["poids"] >= 1.0]
+                        faites_ = qualite.corriger(sk, corr_) if corr_ else []
+                        if faites_: print("Pré-jury (avant de dessiner) : " + " ; ".join(faites_), flush=True); QUALITE["corrigees"] += faites_
+                    except Exception as e: print(f"Pré-jury impossible ({str(e)[:120]})", flush=True)
                 sk_avant, dec_avant = copy.deepcopy(sk), copy.deepcopy(decors)
+                point("v1", sk=sk_avant, decors=dec_avant)
                 try: duree = cartoon.rendre(sk, base + ".mp4", audios, mots=mots, decors=decors, mini=fmt == "mini", limite=limite_job(), deja=(S or {}).get("faits"))
                 except cartoon.TempsDepasse as e: pause("v1", e.faits, sk=sk_avant, decors=dec_avant)
                 tech_ok, rapport_tech = controle.technique(base + ".mp4", duree, cartoon.MINUTAGE[-1][1] if cartoon.MINUTAGE else None)     # contrôles gratuits (format, son, images noires)
@@ -401,6 +426,7 @@ def main():
                         etat = {k_: copy.copy(getattr(cartoon, k_)) for k_ in ("MINUTAGE", "PH", "BRUITAGES", "RENDU", "COUVERTURE", "COUVERTURE_MS")}
                         deja2 = None
                     sk2_avant, dec2_avant = copy.deepcopy(sk2), copy.deepcopy(dec2)
+                    point("v2", tour=tour, sk2=sk2_avant, dec2=dec2_avant, faites=faites, etat_v1=etat)
                     try:
                         PR.PLAGE[:] = [90, 97]; PR.APRES[0] = 90; PR.etape(90, "Nouvelle version corrigée par le jury", forcer=True)
                         d2 = cartoon.rendre(sk2, base + "_v2.mp4", audios, mots=mots, decors=dec2, mini=fmt == "mini",
@@ -470,6 +496,8 @@ def main():
         historique[-1]["refait_de"] = REFAIRE.split("|")[0]
         if ANCIEN and ANCIEN.get("manuel"): historique[-1]["manuel"] = True
     if AUTO: historique[-1]["auto"] = True
+    if test or (os.environ.get("APERCU_RAPIDE") or "") == "1" or (os.environ.get("RENDU") or "") == "essai_pause":
+        historique[-1]["essai"] = True                                     # essai : rangé à part sur le site, effacé au bout de 3 jours
     if DOUB: historique[-1]["filiere"] = "tiktok"                         # vidéo sur un son TikTok : rangée à part des sketchs
     if DOUB: historique[-1]["source_audio"] = sk["doublage"]["source"]; historique[-1]["theme"] = "Bande son : " + sk["doublage"]["source"]
     historique[-1]["couts"] = couts(); print(f"Dépenses : {historique[-1]['couts']}", flush=True)
@@ -498,8 +526,11 @@ def main():
                     f"qualite={'ok' if video_ok and (not fiche or (fiche.get('note') or 0) >= SEUIL_PUB) and not REFAIRE else 'faible'}\nnote={round(fiche.get('note') or 0)}\n")
     if sortie:
         with open(sortie, "a") as f: f.write(f"chaine={os.environ.get('CHAINE', '')}\n")
-    if SUITE_NOM: RP.nettoyer(SUITE_NOM)                                   # reprise terminée : fichiers de la pause effacés
+    for t_ in RP.ENVOIS: t_.join(timeout=300)                              # sauvegardes en cours terminées, puis effacées (vidéo finie)
+    for n_ in [SUITE_NOM, RP.nom_point("v1"), RP.nom_point("v2")]:
+        if n_: RP.nettoyer(n_)
     PR.fini(True)
+    print(f"Quota de l'API GitHub : {__import__('quota').resume()}", flush=True)
     print(f"OK : {base}.mp4 ({duree:.0f} s)")
 
 if __name__ == "__main__":
