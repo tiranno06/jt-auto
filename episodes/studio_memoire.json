@@ -1760,5 +1760,46 @@
    "son": true
   },
   "cadence": "rapide"
+ },
+ {
+  "moment": "jour",
+  "lieux": [
+   "classe"
+  ],
+  "source": "robot+image",
+  "duree": 92.4,
+  "plans": {
+   "large": 8,
+   "contre_plongee": 5,
+   "moyen": 4,
+   "epaule": 6,
+   "plongee": 1,
+   "serre": 1
+  },
+  "mouvements": {
+   "avance": 6,
+   "epaule": 5,
+   "fixe": 10,
+   "travelling": 4
+  },
+  "costumes": {
+   "presentateur": "polo",
+   "envoyee": "gilet"
+  },
+  "figurants": 0,
+  "ambiances": [],
+  "controle": "Humoriste 7.0/10 : 49 s La chute sur 'Vous êtes Charlie' manque de réactions exagérées et de zoom choc pour renforcer l'humour.; 86 s Le gag sur le bonnet de Charlie pourrait être renforcé par un brui",
+  "fichier": "2026-10-25_05h59_emission.mp4",
+  "cine": {
+   "focus": true,
+   "vertige": true,
+   "tiers": false,
+   "etalonnage": true,
+   "profondeur": true,
+   "grain": true,
+   "reflets": false,
+   "son": true
+  },
+  "cadence": null
  }
 ]

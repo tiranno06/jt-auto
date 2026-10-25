@@ -2,62 +2,49 @@ Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, ElevenLabs epuise — IA utilisée : mistral
 Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @motiontoonz, @same_same53, @charly.bse, @kodanimation, @vignianimation, @vincedessine
-Profil TikTok @vignianimation : 39 vidéo(s) jamais utilisée(s)
+Profil TikTok @vincedessine : 38 vidéo(s) jamais utilisée(s)
 Profil TikTok @kodanimation : 35 vidéo(s) jamais utilisée(s)
-Vidéo depuis TikTok : https://www.tiktok.com/@vignianimation/video/7678042028785143073
+Vidéo depuis TikTok : https://www.tiktok.com/@vincedessine/video/7619412384939003158
   son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 60.0 s, compte d'origine @vignianimation
-[ WARN:0@16.059] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
-  image de la vidéo : 18 plans (≈ 3.33 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 55 %, large 44 % ; caméra : fixe 90 %, avance 7 %, epaule 2 % ; 1 personne(s) à l'écran : gauche (habit [226, 152, 35], cheveux [27, 27, 27], sourit 0 %); centre (habit [184, 28, 146], cheveux [246, 246, 247], sourit 0 %) ; agitation 0.219 ; lumière jour ; fond [208, 160, 97]
+  son récupéré : 89.2 s, compte d'origine @vincedessine
+[ WARN:0@13.915] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  image de la vidéo : 40 plans (≈ 2.24 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 0 %, large 100 % ; caméra : fixe 100 % ; 0 personne(s) à l'écran : aucun visage repéré ; agitation 0.077 ; lumière jour ; fond [249, 247, 247]
   isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
   transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-  voix re-séparées par leur empreinte (ECAPA) : 2 voix (netteté 0.14)
-  voix vérifiées mot par mot : 21 mot(s) remis sur la bonne voix
-  21 répliques, voix : {'speaker_0': 128, 'speaker_1': 225}
-  son de la vidéo : 2 voix [128 Hz (h, 70 %), 225 Hz (f, 30 %)], 4.7 mots/s, blancs 1.16 s, 1 coupure(s) de parole, dynamique 24.8 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
-  scène reconstituée : Un homme assis dans sa cuisine a la flemme de sortir au restaurant avec ses amis et monte un faux clash de couple avec sa femme pour avoir une excuse en béton.
+  voix re-séparées par leur empreinte (ECAPA) : 2 voix (netteté 0.23)
+  voix vérifiées mot par mot : 1 mot(s) remis sur la bonne voix
+  25 répliques, voix : {'speaker_0': 237, 'speaker_1': 227}
+  son de la vidéo : 2 voix [237 Hz (f, 28 %), 227 Hz (f, 72 %)], 3.85 mots/s, blancs 1.05 s, 4 coupure(s) de parole, dynamique 16.0 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
+  scène reconstituée : Une journaliste interviewe un homme assis sur ses toilettes dans le cadre d'un micro-trottoir sur la liberté d'expression.
   casting : speaker_0 → Jojo, speaker_1 → Lila
-  1 réattribution(s) de l'IA refusée(s) : la voix de ces répliques est reconnue avec certitude
-Sketch : « L'ESQUIVE EN COUPLE », 21 répliques
-Lieux séparés : chaque personnage a son propre décor (appel, visio, l'un ailleurs)
-  décor 0 (lieu déjà connu) : quiet city street at dusk, parked car at the curb, sidewalk, street la
-  décor 1 (lieu déjà connu) : cozy living room, sofa, posters on the wall, coffee table, lamp, telev
-montage : 37 plans (0.0:moyen>pre/coupe 1.1:serre>pre/glisse 2.3:tres_serre>pre/glisse 3.1:serre>pre/glisse 3.9:moyen>env/coupe 5.3:serre>pre/coupe 7.2:plongee>pre/glisse 8.7:tres_serre>env/coupe 9.9:large>pre/coupe 10.9:large>env/coupe 11.6:tres_serre>env/glisse 12.7:moyen>pre/coupe 14.3:serre>env/coupe 15.6:tres_serre>env/glisse 17.1:tres_serre>pre/coupe 18.5:serre>pre/glisse 19.0:tres_serre>pre/glisse 23.0:moyen>pre/glisse 25.3:serre>pre/glisse 27.7:tres_serre>pre/glisse 29.1:serre>pre/glisse 30.5:tres_serre>pre/glisse 32.9:serre>pre/glisse 35.0:contre_plongee>pre/glisse 36.2:serre>pre/glisse 37.1:contre_plongee>pre/glisse 38.5:serre>pre/glisse 39.2:contre_plongee>pre/glisse 40.5:serre>pre/glisse 41.7:serre>env/coupe 42.9:tres_serre>env/glisse 44.2:serre>env/glisse 45.0:tres_serre>env/glisse 45.8:serre>env/glisse 47.5:tres_serre>env/glisse 49.6:tres_serre>pre/coupe 59.2:serre>env/coupe)
-studio : soir, lieux ['rue', 'salon'], tenues presentateur=debardeur, envoyee=debardeur, 2 figurant(s), ambiances ['poussiere'] ; plans moyen/fixe serre/fixe moyen/fixe serre/avance tres_serre/avance large/fixe large/avance moyen/fixe serre/avance tres_serre/avance moyen/avance serre/recul serre/avance serre/recul contre_plongee/epaule serre/avance serre/fixe tres_serre/avance serre/zoom_choc tres_serre/zoom_choc serre/avance
-appel : 5 écran(s) partagé(s), 2 plan(s) d'écoute
-cartoon : durée 63.6 s, 21 répliques, 2 scène(s), personnages ['presentateur', 'envoyee']
-Contrôle image : 7 défaut(s) — 8.75 s sous_titre_visage (envoyee), 9.25 s sous_titre_visage (envoyee), 12.25 s sous_titre_visage (envoyee), 16.25 s sous_titre_visage (envoyee), 16.75 s sous_titre_visage (envoyee), 48.25 s sous_titre_visage (envoyee), 48.75 s sous_titre_visage (envoyee)
-Traceback (most recent call last):
-  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 371, in main
-    try: duree = cartoon.rendre(sk, base + ".mp4", audios, mots=mots, decors=decors, mini=fmt == "mini", limite=limite_job(), deja=(S or {}).get("faits"))
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/jt-auto/jt-auto/moteur/cartoon.py", line 1699, in rendre
-    faits_avant = {(int(a_), int(b_)): c_ for a_, b_, c_ in (deja or []) if os.path.exists(c_)}
-                                                             ^^^^^^^^^^
-TypeError: 'bool' object is not iterable
-Moteur cartoon en échec ('bool' object is not iterable) : nouvel essai en rendu simple, sans décor IA.
-appel : 5 écran(s) partagé(s), 2 plan(s) d'écoute
-cartoon : durée 63.6 s, 21 répliques, 2 scène(s), personnages ['presentateur', 'envoyee']
-Traceback (most recent call last):
-  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 371, in main
-    try: duree = cartoon.rendre(sk, base + ".mp4", audios, mots=mots, decors=decors, mini=fmt == "mini", limite=limite_job(), deja=(S or {}).get("faits"))
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/jt-auto/jt-auto/moteur/cartoon.py", line 1699, in rendre
-    faits_avant = {(int(a_), int(b_)): c_ for a_, b_, c_ in (deja or []) if os.path.exists(c_)}
-                                                             ^^^^^^^^^^
-TypeError: 'bool' object is not iterable
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 507, in <module>
-    try: main()
-         ^^^^^^
-  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 439, in main
-    duree = cartoon.rendre(sk, base + ".mp4", audios, mots=mots, decors={}, mini=fmt == "mini")
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/jt-auto/jt-auto/moteur/cartoon.py", line 1699, in rendre
-    faits_avant = {(int(a_), int(b_)): c_ for a_, b_, c_ in (deja or []) if os.path.exists(c_)}
-                                                             ^^^^^^^^^^
-TypeError: 'bool' object is not iterable
+Sketch : « J'AI TROUVÉ CHARLIE », 25 répliques
+  décor 0 : bathroom with white toilet door and plain walls, bright daylight
+montage : 57 plans (0.0:large>pre/coupe 0.6:contre_plongee>env/coupe 2.0:tres_serre>pre/file 2.5:serre>pre/glisse 3.3:moyen>env/coupe 3.9:serre>pre/file 5.1:large>pre/glisse 7.8:tres_serre>pre/glisse 13.8:moyen>env/coupe 15.2:tres_serre>pre/file 15.7:epaule>pre/glisse 17.4:large>pre/glisse 19.2:large>env/file 21.5:tres_serre>env/glisse 23.0:contre_plongee>env/glisse 23.9:serre>pre/coupe 25.3:contre_plongee>env/coupe 26.3:tres_serre>pre/file 26.8:moyen>env/file 27.8:contre_plongee>env/zoom 28.7:tres_serre>pre/file 29.9:contre_plongee>env/file 31.8:serre>pre/coupe 32.3:moyen>env/file 33.3:contre_plongee>env/glisse 34.7:large>env/glisse 37.2:epaule>pre/coupe 38.2:moyen>pre/glisse 39.1:plongee>env/file 40.1:moyen>env/glisse 41.2:large>pre/coupe 42.1:epaule>pre/glisse 44.3:moyen>pre/glisse 45.0:tres_serre>pre/glisse 48.2:epaule>env/file 50.9:tres_serre>pre/coupe 52.1:moyen>env/coupe 59.2:epaule>env/zoom 59.9:large>env/glisse 61.6:serre>env/glisse 66.7:large>pre/coupe 67.4:epaule>env/glisse 68.0:tres_serre>pre/coupe 69.0:moyen>env/coupe 72.2:epaule>env/glisse 73.4:large>env/glisse 74.3:serre>pre/coupe 75.3:moyen>env/coupe 76.6:epaule>pre/coupe 77.2:large>env/file 78.8:serre>pre/coupe 79.6:moyen>env/coupe 83.1:tres_serre>env/glisse 85.6:tres_serre>pre/coupe 86.3:large>pre/glisse 86.9:serre>env/file 87.5:large>env/glisse)
+studio : jour, lieux ['classe'], tenues presentateur=polo, envoyee=gilet, 0 figurant(s), ambiances [] ; plans large/avance contre_plongee/epaule large/avance moyen/fixe epaule/fixe large/avance contre_plongee/epaule contre_plongee/epaule contre_plongee/epaule contre_plongee/epaule epaule/fixe plongee/avance large/travelling moyen/travelling epaule/fixe moyen/fixe large/travelling large/travelling epaule/fixe epaule/fixe epaule/fixe large/avance moyen/fixe large/fixe serre/avance
+cartoon : durée 92.4 s, 25 répliques, 1 scène(s), personnages ['presentateur', 'envoyee']
+Contrôle image : 48 défaut(s) — 3.75 s tete_coupee (presentateur), 5.25 s tete_coupee (envoyee), 14.25 s tete_coupee (presentateur), 14.75 s tete_coupee (presentateur), 15.25 s tete_coupee (presentateur), 15.25 s tete_coupee (envoyee), 27.25 s tete_coupee (presentateur), 27.75 s tete_coupee (presentateur)
+  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~1385 images)
+  morceau 4156–5541 reçu d'une machine d'aide
+  morceau 1385–2770 reçu d'une machine d'aide
+  morceau 2770–4156 reçu d'une machine d'aide
+  dessin partagé terminé en 7.3 min
+Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
+  IA gemini indisponible (gemini 429 : [{
+  "error": {
+    "code": 429,
+    "message": "You exceeded your current quota, please check your plan an) : on passe à la suivante
+Jury qualité (ia) : 7.1/10 — Humoriste 7.0/10 : 49 s La chute sur 'Vous êtes Charlie' manque de réactions exagérées et de zoom choc pour renforcer l'humour.; 86 s Le gag sur le bonnet de Charlie pourrait être renforcé par un bruitage ou une réaction physique plus marquée.; 67 s L'envoyée dit 'dis-donc' sans réaction caméra ou regard pour capter l'attention. | Réalisateur 6.0/10 : 76 s Faux raccord entre les plans 7 et 8, le décor change légèrement.; 3.8 s tête de presentateur coupée par le bord de l'image (moyen); 5.2 s tête de envoyee coupée par le bord de l'image (large); 14.2 s tête de presentateur coupée par le bord de l'image (moyen) | Directeur artistique 8.0/10 : 0 s Les personnages ont des traits et proportions cohérents, mais les décors pourraient être plus détaillés pour renforcer l'immersion.; 10 s L'absence de personnages secondaires (comme des élèves en arrière-plan) pour renforcer l'ambiance scolaire. 
+Corrections du jury (tour 1) : plan serre sur la réplique 2 ; plan serre sur la réplique 3 ; plan serre sur la réplique 4 ; plan moyen sur la réplique 23
+montage : 50 plans (0.0:large>pre/coupe 0.6:serre>env/coupe 5.1:serre>pre/file 13.8:serre>env/coupe 15.7:epaule>pre/coupe 17.4:large>pre/glisse 19.2:large>env/file 21.5:tres_serre>env/glisse 23.0:contre_plongee>env/glisse 23.9:serre>pre/coupe 25.3:contre_plongee>env/coupe 26.3:tres_serre>pre/file 26.8:moyen>env/file 27.8:contre_plongee>env/zoom 28.7:tres_serre>pre/file 29.9:contre_plongee>env/file 31.8:serre>pre/coupe 32.3:moyen>env/file 33.3:contre_plongee>env/glisse 34.7:large>env/glisse 37.2:epaule>pre/coupe 38.2:moyen>pre/glisse 39.1:plongee>env/file 40.1:moyen>env/glisse 41.2:large>pre/coupe 42.1:epaule>pre/glisse 44.3:moyen>pre/glisse 45.0:tres_serre>pre/glisse 48.2:epaule>env/file 50.9:tres_serre>pre/coupe 52.1:moyen>env/coupe 59.2:epaule>env/zoom 59.9:large>env/glisse 61.6:serre>env/glisse 66.7:large>pre/coupe 67.4:epaule>env/glisse 68.0:tres_serre>pre/coupe 69.0:moyen>env/coupe 72.2:epaule>env/glisse 73.4:large>env/glisse 74.3:serre>pre/coupe 75.3:moyen>env/coupe 76.6:epaule>pre/coupe 77.2:large>env/file 78.8:serre>pre/coupe 79.6:moyen>env/coupe 83.1:tres_serre>env/glisse 86.3:large>pre/file 86.9:serre>env/file 87.5:large>env/glisse)
+studio : jour, lieux ['classe'], tenues presentateur=polo, envoyee=gilet, 0 figurant(s), ambiances [] ; plans large/avance contre_plongee/epaule large/avance moyen/fixe epaule/fixe large/avance contre_plongee/epaule contre_plongee/epaule contre_plongee/epaule contre_plongee/epaule epaule/fixe plongee/avance large/travelling moyen/travelling epaule/fixe moyen/fixe large/travelling large/travelling epaule/fixe epaule/fixe epaule/fixe large/avance moyen/fixe large/fixe serre/avance
+cartoon : durée 92.4 s, 25 répliques, 1 scène(s), personnages ['presentateur', 'envoyee']
+Contrôle image : 41 défaut(s) — 27.25 s tete_coupee (presentateur), 27.75 s tete_coupee (presentateur), 32.75 s tete_coupee (presentateur), 33.25 s tete_coupee (presentateur), 38.75 s tete_coupee (envoyee), 40.75 s tete_coupee (presentateur), 44.75 s tete_coupee (envoyee), 48.25 s tete_coupee (presentateur)
+  redessin partiel : 1596/5541 images à redessiner (2 passage(s)), le reste repris tel quel
+Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
+Jury qualité (ia) : 6.9/10 — Humoriste 7.0/10 : 49 s La chute finale manque de punch. La révélation 'Vous êtes Charlie' est sous-jacente mais pas assez soulignée.; 60 s Le gag sur le bonnet n'est pas assez mis en valeur avec une réaction exagérée.; 87 s L'humour sur 'rebelle' est un peu faible et manque d'une chute plus drôle. | Réalisateur 6.0/10 : 0.4 s Tête du présentateur coupée par le bord de l'image dans plusieurs plans.; 20.4 s Rythme des plans trop rapide, manque de fluidité dans les transitions.; 42.9 s Faux raccord entre les plans 9 et 10.; 27.2 s tête de presentateur coupée par le bord de l'image (moyen); 32.8 s tête de presentateur coupée par le bord de l'image (moyen); 33.2 s tête de presentateur coupée par le bord de l'image (moyen) | Directeur artistique 8.0/10 : 0 s Les personnages manquent de cohérence dans leur apparence avec l'histoire (ex. : le présentateur semble trop jeune pour un mémoire).; 15
+La version corrigée n'est pas meilleure : on garde la première.
+Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = gemini ×1, mistral ×2, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 41857, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 27}
+OK : sortie/2026-10-25_05h59_emission.mp4 (92 s)
