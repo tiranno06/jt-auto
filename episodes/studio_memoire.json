@@ -2397,34 +2397,74 @@
   "cadence": "normal"
  },
  {
-  "moment": "jour",
+  "moment": "soir",
+  "lieux": [
+   "magasin",
+   "magasin",
+   "magasin"
+  ],
+  "source": "auteur+image",
+  "duree": 63.9,
+  "plans": {
+   "large": 33
+  },
+  "mouvements": {
+   "fixe": 33
+  },
+  "costumes": {
+   "presentateur": "tshirt",
+   "invite": "chemise"
+  },
+  "figurants": 3,
+  "ambiances": [
+   "neon",
+   "poussiere"
+  ],
+  "controle": "Humoriste 7.0/10 : 0.4 s La chute finale manque de punch. Le zoom choc sur le personnage qui dit 'Tu es un voleur' est absent, ce qui réduit l'impact comique.; 12.9 s L'humour repose souvent sur les r",
+  "fichier": "2026-10-25_20h13_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": false,
+   "tiers": true,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": true,
+   "reflets": false,
+   "son": true
+  },
+  "cadence": "rapide"
+ },
+ {
+  "moment": "soir",
   "lieux": [
    "salon"
   ],
   "source": "auteur+image",
-  "duree": 30.8,
+  "duree": 65.3,
   "plans": {
-   "large": 15
+   "large": 27
   },
   "mouvements": {
-   "fixe": 15
+   "fixe": 27
   },
   "costumes": {
    "presentateur": "tshirt",
-   "envoyee": "robe"
+   "invite": "chemise"
   },
   "figurants": 0,
-  "ambiances": [],
-  "controle": "Humoriste 6.0/10 : 25.8 s La chute finale manque de puissance et de réactivité. Le public n'a pas assez de temps pour réagir à la réplique 'Moi, je sais pas me remettre en question ?'.; 0 s L'humour p",
-  "fichier": "2026-10-25_20h29_emission.mp4",
+  "ambiances": [
+   "poussiere"
+  ],
+  "controle": "Humoriste 7.0/10 : 0.4 s La chute finale manque de punch. Le moment où l’invité dit 'Tiens, donne-moi tes affaires' mériterait un zoom choc sur le présentateur pour accentuer la réaction.; 38.3 s Les ",
+  "fichier": "2026-10-25_20h43_emission.mp4",
   "cine": {
    "focus": false,
-   "vertige": false,
+   "vertige": true,
    "tiers": false,
-   "etalonnage": true,
+   "etalonnage": false,
    "profondeur": false,
-   "grain": true,
-   "reflets": true,
+   "grain": false,
+   "reflets": false,
    "son": true
   },
   "cadence": "rapide"

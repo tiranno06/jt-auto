@@ -9901,105 +9901,199 @@
  },
  {
   "date": "2026-10-25",
-  "source": "https://www.tiktok.com/@kodanimation/video/7675147524562226464",
-  "auteur": "kodanimation",
+  "source": "https://www.tiktok.com/@vignianimation/video/7682124897128074529",
+  "auteur": "vignianimation",
   "visuel": {
-   "gestes": [],
-   "duree": 27.5,
-   "nb_plans": 3,
-   "duree_plan": 9.17,
+   "gestes": [
+    [
+     3.0,
+     0.66,
+     0.86
+    ],
+    [
+     5.0,
+     0.66,
+     1.0
+    ],
+    [
+     13.5,
+     0.66,
+     1.0
+    ],
+    [
+     22.0,
+     0.66,
+     1.0
+    ],
+    [
+     26.5,
+     0.66,
+     0.84
+    ],
+    [
+     29.5,
+     0.66,
+     0.83
+    ],
+    [
+     32.5,
+     0.66,
+     1.0
+    ],
+    [
+     34.5,
+     0.66,
+     1.0
+    ],
+    [
+     38.5,
+     0.65,
+     1.0
+    ],
+    [
+     44.0,
+     0.66,
+     1.0
+    ],
+    [
+     47.0,
+     0.66,
+     0.85
+    ],
+    [
+     48.5,
+     0.65,
+     0.9
+    ],
+    [
+     49.5,
+     0.65,
+     1.0
+    ],
+    [
+     54.5,
+     0.66,
+     1.0
+    ]
+   ],
+   "duree": 60.5,
+   "nb_plans": 7,
+   "duree_plan": 8.64,
    "coupes": [
-    20.0,
-    20.5
+    6.5,
+    10.5,
+    19.0,
+    19.5,
+    20.5,
+    21.0
    ],
    "plans": {
     "tres_serre": 0.0,
     "serre": 0.0,
-    "moyen": 0.018,
-    "large": 0.982
+    "moyen": 0.264,
+    "large": 0.736
    },
    "camera": {
-    "fixe": 0.481,
-    "avance": 0.096,
-    "recul": 0.077,
-    "travelling": 0.115,
-    "epaule": 0.231
+    "fixe": 0.719,
+    "avance": 0.132,
+    "recul": 0.14,
+    "travelling": 0.009,
+    "epaule": 0.0
    },
    "nb_personnes": 1,
-   "personnes": [],
+   "personnes": [
+    {
+     "place": "droite",
+     "presence": 0.264,
+     "habit": [
+      94,
+      96,
+      91
+     ],
+     "cheveux": [
+      28,
+      28,
+      28
+     ],
+     "sourire": 0.0,
+     "taille": 0.095,
+     "tete_penchee": 0.3,
+     "regard_cote": 0.0
+    }
+   ],
    "visages": true,
    "sourires": 0.0,
-   "energie": 0.377,
+   "energie": 0.654,
    "mur": [
-    252,
-    252,
-    252
+    197,
+    160,
+    123
    ],
    "palette": [
     [
-     253,
-     253,
-     253,
-     0.905
+     205,
+     168,
+     129,
+     0.333
     ],
     [
-     111,
-     85,
-     92,
-     0.023
+     174,
+     142,
+     108,
+     0.242
     ],
     [
-     16,
-     13,
+     71,
+     66,
+     46,
+     0.177
+    ],
+    [
+     133,
+     102,
+     75,
+     0.136
+    ],
+    [
+     21,
+     18,
      14,
-     0.023
+     0.07
     ],
     [
-     197,
-     196,
-     197,
-     0.02
-    ],
-    [
-     73,
-     110,
-     181,
-     0.018
-    ],
-    [
-     209,
-     62,
-     96,
-     0.011
+     246,
+     240,
+     235,
+     0.043
     ]
    ],
    "lumiere": {
-    "luminosite": 241.5,
-    "chaleur": -0.2,
-    "saturation": 7.8
+    "luminosite": 154.2,
+    "chaleur": 54.7,
+    "saturation": 90.9
    },
-   "moment": "jour"
+   "moment": "soir"
   },
   "audio": {
-   "duree": 27.3,
+   "duree": 60.3,
    "nb_voix": 2,
    "voix": [
     {
-     "hz": 192,
-     "genre": "f",
-     "part": 0.57
+     "hz": 140,
+     "genre": "h",
+     "part": 0.68
     },
     {
-     "hz": 245,
-     "genre": "f",
-     "part": 0.43
+     "hz": 143,
+     "genre": "h",
+     "part": 0.32
     }
    ],
-   "debit": 5.46,
-   "blanc_moyen": 0.38,
-   "coupes": 2,
-   "dynamique_db": 23.8,
-   "cris": 0.048,
+   "debit": 5.62,
+   "blanc_moyen": 0.29,
+   "coupes": 5,
+   "dynamique_db": 24.3,
+   "cris": 0.012,
    "musique": null,
    "impacts": 0,
    "impacts_10s": 0.0,
@@ -10008,104 +10102,200 @@
    "sur_vanne": 0,
    "evenements": {},
    "emotions": {
-    "hesitant": 2,
-    "annoyed": 2,
-    "angry": 2,
-    "affectionate": 1,
-    "neutral": 1,
-    "ironic": 1,
-    "confused": 1,
-    "sarcastic": 1
+    "'[colere": 6,
+    "\"[colere": 5,
+    "\"[neutre": 4,
+    "'[neutre": 3,
+    "'[blase": 2,
+    "'[choc": 2,
+    "\"[ironique": 2,
+    "\"[sceptique": 1
    }
   },
   "claude": {
    "lieux": [
-    "salon"
+    "magasin"
    ],
-   "moment": "jour",
+   "moment": "soir",
    "costumes": {
     "presentateur": {
      "haut": "tshirt",
-     "c_haut": "bleu",
+     "c_haut": "bleu marine",
      "motif": "uni",
-     "bas": "short",
-     "chaussures": "chaussons",
-     "cheveux": "rase",
-     "c_cheveux": "blanc"
-    },
-    "envoyee": {
-     "haut": "robe",
-     "c_haut": "rose",
-     "motif": "uni",
-     "bas": "jupe",
-     "chaussures": "ballerines",
-     "cheveux": "ondule",
-     "c_cheveux": "chatain",
+     "bas": "jean",
+     "chaussures": "baskets",
      "details": [
-      "lunettes_vue",
-      "collier",
-      "rouge_levres"
-     ]
+      "barbe_courte",
+      "bracelets"
+     ],
+     "chapeau": null,
+     "cheveux": "court",
+     "c_cheveux": "brun"
+    },
+    "invite": {
+     "haut": "chemise",
+     "c_haut": "blanc",
+     "motif": "rayures",
+     "bas": "pantalon",
+     "chaussures": "ville",
+     "details": [
+      "moustache",
+      "montres"
+     ],
+     "chapeau": null,
+     "cheveux": "court_texture",
+     "c_cheveux": "roux"
     }
    },
-   "objets": [],
-   "gags": [
-    "Règle d'or : 50/50"
+   "objets": [
+    {
+     "replique": 2,
+     "objet": "bouteille"
+    },
+    {
+     "replique": 14,
+     "objet": "bouteille"
+    },
+    {
+     "replique": 28,
+     "objet": "billet"
+    }
    ],
-   "ambiances": [],
+   "gags": [
+    "Achetez en gros, économisez !",
+    "Red Bull : L'énergie à prix d'or !",
+    "Amis : 45€, Ennemis : 0€"
+   ],
+   "ambiances": [
+    "neon"
+   ],
    "plans": [
     {
+     "replique": 0,
      "plan": "moyen",
-     "geste": "menton",
      "mouvement": "fixe",
-     "reaction": "aucune",
-     "replique": 0
+     "geste": "bras_ouverts",
+     "reaction": "neutre"
     },
     {
-     "reaction": "yeux_au_ciel",
+     "replique": 1,
+     "plan": "moyen",
+     "mouvement": "fixe",
+     "geste": "gratte_tete",
+     "reaction": "neutre"
+    },
+    {
      "replique": 2,
-     "plan": "moyen",
+     "plan": "serre",
      "mouvement": "avance",
-     "geste": "bras_ouverts"
-    },
-    {
-     "mouvement": "fixe",
-     "plan": "serre",
-     "reaction": "sceptique",
-     "replique": 5,
-     "geste": "croises"
-    },
-    {
-     "mouvement": "zoom_choc",
-     "plan": "serre",
-     "geste": "croises",
-     "replique": 10,
+     "geste": "pointe_d",
      "reaction": "choc"
     },
     {
-     "mouvement": "fixe",
+     "replique": 3,
      "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "poches",
+     "reaction": "sceptique"
+    },
+    {
+     "replique": 4,
+     "plan": "large",
+     "mouvement": "fixe",
+     "geste": "haussement",
+     "reaction": "neutre"
+    },
+    {
+     "replique": 5,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "pointe_g",
+     "reaction": "blase"
+    },
+    {
+     "replique": 6,
+     "plan": "moyen",
+     "mouvement": "fixe",
+     "geste": "bras_ouverts",
+     "reaction": "joie"
+    },
+    {
+     "replique": 7,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "pointe_g",
+     "reaction": "blase"
+    },
+    {
+     "replique": 8,
+     "plan": "serre",
+     "mouvement": "avance",
      "geste": "pointe_d",
-     "replique": 13,
      "reaction": "colere"
+    },
+    {
+     "replique": 9,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "sourire_sarcastique",
+     "reaction": "sceptique"
+    },
+    {
+     "replique": 14,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "exaspéré",
+     "reaction": "colere"
+    },
+    {
+     "replique": 28,
+     "plan": "serre",
+     "mouvement": "zoom_choc",
+     "geste": "pointe_d",
+     "reaction": "choc"
     }
    ]
   },
   "realisation": {
-   "moment": "jour",
+   "moment": "soir",
    "lieux": [
-    "salon"
+    "magasin",
+    "magasin",
+    "magasin"
    ],
    "gags": [
-    "Règle d'or : 50/50"
+    "Achetez en gros, économisez !",
+    "Red Bull : L'énergie à prix d'or !",
+    "Amis : 45€, Ennemis : 0€"
    ],
-   "ambiances": [],
+   "ambiances": [
+    "neon",
+    "poussiere"
+   ],
    "source": "auteur+image",
    "tenues": {
     "presentateur": "tshirt",
-    "envoyee": "robe"
+    "invite": "chemise"
    },
    "plans": [
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
     "large/fixe",
     "large/fixe",
     "large/fixe",
@@ -10123,6 +10313,472 @@
     "large/fixe"
    ]
   },
-  "video": "2026-10-25_20h29_emission.mp4"
+  "video": "2026-10-25_20h13_emission.mp4"
+ },
+ {
+  "date": "2026-10-25",
+  "source": "https://www.tiktok.com/@vincedessine/video/7620763452943944963",
+  "auteur": "vincedessine",
+  "visuel": {
+   "gestes": [],
+   "duree": 63.2,
+   "nb_plans": 35,
+   "duree_plan": 1.81,
+   "coupes": [
+    1.51,
+    3.51,
+    5.02,
+    5.52,
+    7.03,
+    8.53,
+    9.53,
+    10.04,
+    12.04,
+    14.05,
+    17.56,
+    18.57,
+    21.58,
+    22.08,
+    25.59,
+    26.6,
+    28.6,
+    31.61,
+    33.62,
+    35.13,
+    37.13,
+    38.64,
+    39.64,
+    40.14,
+    45.16,
+    46.67,
+    51.18,
+    52.19,
+    53.69,
+    55.2,
+    56.2,
+    59.21,
+    60.22,
+    61.22
+   ],
+   "plans": {
+    "tres_serre": 0.0,
+    "serre": 0.0,
+    "moyen": 0.365,
+    "large": 0.635
+   },
+   "camera": {
+    "fixe": 1.0,
+    "avance": 0.0,
+    "recul": 0.0,
+    "travelling": 0.0,
+    "epaule": 0.0
+   },
+   "nb_personnes": 1,
+   "personnes": [
+    {
+     "place": "centre",
+     "presence": 0.365,
+     "habit": [
+      240,
+      220,
+      196
+     ],
+     "cheveux": [
+      150,
+      86,
+      49
+     ],
+     "sourire": 0.0,
+     "taille": 0.134,
+     "tete_penchee": 2.0,
+     "regard_cote": 0.0
+    }
+   ],
+   "visages": true,
+   "sourires": 0.0,
+   "energie": 0.008,
+   "mur": [
+    251,
+    249,
+    248
+   ],
+   "palette": [
+    [
+     251,
+     249,
+     248,
+     0.477
+    ],
+    [
+     160,
+     87,
+     52,
+     0.161
+    ],
+    [
+     231,
+     203,
+     173,
+     0.122
+    ],
+    [
+     105,
+     60,
+     44,
+     0.101
+    ],
+    [
+     189,
+     155,
+     130,
+     0.082
+    ],
+    [
+     27,
+     14,
+     12,
+     0.057
+    ]
+   ],
+   "lumiere": {
+    "luminosite": 202.6,
+    "chaleur": 38.0,
+    "saturation": 66.0
+   },
+   "moment": "jour"
+  },
+  "audio": {
+   "duree": 62.9,
+   "nb_voix": 2,
+   "voix": [
+    {
+     "hz": 251,
+     "genre": "f",
+     "part": 0.49
+    },
+    {
+     "hz": 133,
+     "genre": "h",
+     "part": 0.51
+    }
+   ],
+   "debit": 5.49,
+   "blanc_moyen": 0.25,
+   "coupes": 12,
+   "dynamique_db": 24.5,
+   "cris": 0.016,
+   "musique": null,
+   "impacts": 0,
+   "impacts_10s": 0.0,
+   "graves": 0,
+   "aigus": 0,
+   "sur_vanne": 0,
+   "evenements": {},
+   "emotions": {
+    "neutral": 5,
+    "sarcastic": 4,
+    "firm": 2,
+    "angry": 2,
+    "shocked": 2,
+    "mocking": 2,
+    "excited": 1,
+    "calm": 1
+   }
+  },
+  "claude": {
+   "lieux": [
+    "salon"
+   ],
+   "moment": "soir",
+   "costumes": {
+    "presentateur": {
+     "haut": "tshirt",
+     "c_haut": "rouge",
+     "motif": "uni",
+     "bas": "jean",
+     "chaussures": "baskets",
+     "details": [
+      "bracelets",
+      "sac_bandouliere"
+     ],
+     "chapeau": null,
+     "cheveux": "long",
+     "c_cheveux": "brun"
+    },
+    "invite": {
+     "haut": "chemise",
+     "c_haut": "blanc",
+     "motif": "uni",
+     "bas": "pantalon",
+     "chaussures": "ville",
+     "details": [
+      "cravate",
+      "montre"
+     ],
+     "chapeau": null,
+     "cheveux": "court",
+     "c_cheveux": "brun"
+    }
+   },
+   "objets": [
+    {
+     "replique": 1,
+     "objet": "chaussures"
+    },
+    {
+     "replique": 17,
+     "objet": "lavabo"
+    },
+    {
+     "replique": 25,
+     "objet": "serviettes"
+    }
+   ],
+   "gags": [
+    "Enlevez vos chaussures, sauf si vous êtes des licornes.",
+    "Tapis : Pour marcher ou pour décorer ?",
+    "Bactéries : Nos nouvelles meilleures amies ?"
+   ],
+   "ambiances": [
+    "none"
+   ],
+   "plans": [
+    {
+     "replique": 0,
+     "plan": "large",
+     "mouvement": "fixe",
+     "geste": "bras_ouverts",
+     "reaction": "aucune"
+    },
+    {
+     "replique": 1,
+     "plan": "moyen",
+     "mouvement": "fixe",
+     "geste": "pointe_d",
+     "reaction": "sceptique"
+    },
+    {
+     "replique": 2,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "haussement",
+     "reaction": "choc"
+    },
+    {
+     "replique": 3,
+     "plan": "large",
+     "mouvement": "fixe",
+     "geste": "mains_hanches",
+     "reaction": "colere"
+    },
+    {
+     "replique": 4,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "poing",
+     "reaction": "annoyed"
+    },
+    {
+     "replique": 5,
+     "plan": "moyen",
+     "mouvement": "fixe",
+     "geste": "sarcastic",
+     "reaction": "sceptique"
+    },
+    {
+     "replique": 6,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "expliquer",
+     "reaction": "gene"
+    },
+    {
+     "replique": 7,
+     "plan": "large",
+     "mouvement": "fixe",
+     "geste": "pointe_g",
+     "reaction": "colere"
+    },
+    {
+     "replique": 8,
+     "plan": "tres_serre",
+     "mouvement": "fixe",
+     "geste": "desespoir",
+     "reaction": "choc"
+    },
+    {
+     "replique": 9,
+     "plan": "moyen",
+     "mouvement": "fixe",
+     "geste": "pointe_d",
+     "reaction": "annoyed"
+    },
+    {
+     "replique": 10,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "neutre",
+     "reaction": "sceptique"
+    },
+    {
+     "replique": 11,
+     "plan": "large",
+     "mouvement": "fixe",
+     "geste": "bras_ouverts",
+     "reaction": "joie"
+    },
+    {
+     "replique": 12,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "facepalm",
+     "reaction": "blase"
+    },
+    {
+     "replique": 13,
+     "plan": "moyen",
+     "mouvement": "fixe",
+     "geste": "pointe_g",
+     "reaction": "colere"
+    },
+    {
+     "replique": 14,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "mains_hanches",
+     "reaction": "sceptique"
+    },
+    {
+     "replique": 15,
+     "plan": "large",
+     "mouvement": "fixe",
+     "geste": "bras_ouverts",
+     "reaction": "gene"
+    },
+    {
+     "replique": 16,
+     "plan": "tres_serre",
+     "mouvement": "fixe",
+     "geste": "pointe_d",
+     "reaction": "choc"
+    },
+    {
+     "replique": 17,
+     "plan": "moyen",
+     "mouvement": "fixe",
+     "geste": "soupir",
+     "reaction": "fatigue"
+    },
+    {
+     "replique": 18,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "neutre",
+     "reaction": "aucune"
+    },
+    {
+     "replique": 19,
+     "plan": "large",
+     "mouvement": "fixe",
+     "geste": "pointe_g",
+     "reaction": "colere"
+    },
+    {
+     "replique": 20,
+     "plan": "moyen",
+     "mouvement": "fixe",
+     "geste": "sarcastic",
+     "reaction": "sceptique"
+    },
+    {
+     "replique": 21,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "expliquer",
+     "reaction": "gene"
+    },
+    {
+     "replique": 22,
+     "plan": "large",
+     "mouvement": "fixe",
+     "geste": "bras_ouverts",
+     "reaction": "choc"
+    },
+    {
+     "replique": 23,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "pointe_d",
+     "reaction": "colere"
+    },
+    {
+     "replique": 24,
+     "plan": "moyen",
+     "mouvement": "fixe",
+     "geste": "shocked",
+     "reaction": "choc"
+    },
+    {
+     "replique": 25,
+     "plan": "large",
+     "mouvement": "fixe",
+     "geste": "bras_ouverts",
+     "reaction": "apologetic"
+    },
+    {
+     "replique": 26,
+     "reaction": "regard_camera"
+    }
+   ]
+  },
+  "realisation": {
+   "moment": "soir",
+   "lieux": [
+    "salon"
+   ],
+   "gags": [
+    "Enlevez vos chaussures, sauf si vous êtes des licornes.",
+    "Tapis : Pour marcher ou pour décorer ?",
+    "Bactéries : Nos nouvelles meilleures amies ?"
+   ],
+   "ambiances": [
+    "poussiere"
+   ],
+   "source": "auteur+image",
+   "tenues": {
+    "presentateur": "tshirt",
+    "invite": "chemise"
+   },
+   "plans": [
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe"
+   ]
+  },
+  "video": "2026-10-25_20h43_emission.mp4"
  }
 ]

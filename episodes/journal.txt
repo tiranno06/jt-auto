@@ -2,14 +2,14 @@ Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, ElevenLabs epuise — IA utilisée : mistral
 Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @motiontoonz, @same_same53, @charly.bse, @kodanimation, @vignianimation, @vincedessine
-Profil TikTok @kodanimation : 32 vidéo(s) jamais utilisée(s)
-Profil TikTok @charly.bse : 37 vidéo(s) jamais utilisée(s)
 Profil TikTok @vincedessine : 36 vidéo(s) jamais utilisée(s)
-Vidéo depuis TikTok : https://www.tiktok.com/@kodanimation/video/7675147524562226464
+Profil TikTok @same_same53 : 36 vidéo(s) jamais utilisée(s)
+Profil TikTok @motiontoonz : 37 vidéo(s) jamais utilisée(s)
+Vidéo depuis TikTok : https://www.tiktok.com/@vincedessine/video/7620763452943944963
   son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 27.3 s, compte d'origine @kodanimation
-[ WARN:0@15.074] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
-  image de la vidéo : 3 plans (≈ 9.17 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 1 %, large 98 % ; caméra : fixe 48 %, avance 9 %, recul 7 %, travelling 11 %, epaule 23 % ; 1 personne(s) à l'écran : aucun visage repéré ; agitation 0.377 ; lumière jour ; fond [252, 252, 252]
+  son récupéré : 62.9 s, compte d'origine @vincedessine
+[ WARN:0@15.924] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  image de la vidéo : 35 plans (≈ 1.81 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 36 %, large 63 % ; caméra : fixe 100 % ; 1 personne(s) à l'écran : centre (habit [240, 220, 196], cheveux [150, 86, 49], sourit 0 %) ; agitation 0.008 ; lumière jour ; fond [251, 249, 248]
   isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
   transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/core/io.py:48: UserWarning: 
@@ -19,38 +19,39 @@ torchcodec is not installed correctly so built-in audio decoding will fail. Solu
 
 Could not load this library: /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/torchcodec/libtorchcodec_image.so
   warnings.warn(
-[0;93m2026-10-25 19:26:44.576456136 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[0;93m2026-10-25 19:42:05.056421756 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1913.)
   std = sequences.std(dim=-1, correction=1)
-  voix séparées par pyannote : 2 voix, 15 tours de parole
+  voix séparées par pyannote : 2 voix, 24 tours de parole
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-  voix vérifiées mot par mot : 8 mot(s) remis sur la bonne voix
-  15 répliques, voix : {'speaker_0': 192, 'speaker_1': 245}
-  son de la vidéo : 2 voix [192 Hz (f, 56 %), 245 Hz (f, 43 %)], 5.46 mots/s, blancs 0.38 s, 2 coupure(s) de parole, dynamique 23.8 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
-  scène reconstituée : Dans le salon, un couple se dispute après que l'homme exige des excuses en retour suite à son premier pas.
-  casting : speaker_0 → Jojo, speaker_1 → Lila
-  sous-titres : 14 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
-Sketch : « DISPUTE DE COUPLE 50/50 », 15 répliques
-  décor 0 (lieu ressemblant de la banque, budget Modal du mois atteint) : White minimalist living room with plain backdrop, bright day
-montage : 1 plans (0.0:large>pre/coupe)
-studio : jour, lieux ['salon'], tenues presentateur=tshirt, envoyee=robe, 0 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 30.8 s, 15 répliques, 1 scène(s), personnages ['presentateur', 'envoyee']
-montage : 1 plans (0.0:large>pre/coupe)
-studio : jour, lieux ['salon'], tenues presentateur=tshirt, envoyee=robe, 0 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 30.8 s, 15 répliques, 1 scène(s), personnages ['presentateur', 'envoyee']
-  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~462 images)
-  morceau 1388–1850 reçu d'une machine d'aide
-  morceau 925–1388 reçu d'une machine d'aide
-  morceau 462–925 reçu d'une machine d'aide
-  dessin partagé terminé en 6.9 min
-Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
+  voix vérifiées mot par mot : 23 mot(s) remis sur la bonne voix
+  27 répliques, voix : {'speaker_0': 251, 'speaker_1': 133}
+  son de la vidéo : 2 voix [251 Hz (f, 49 %), 133 Hz (h, 51 %)], 5.49 mots/s, blancs 0.25 s, 12 coupure(s) de parole, dynamique 24.5 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
   IA gemini indisponible (gemini 429 : [{
   "error": {
     "code": 429,
     "message": "You exceeded your current quota, please check your plan an) : on passe à la suivante
-Jury qualité (ia) : 5.8/10 — Humoriste 6.0/10 : 25.8 s La chute finale manque de puissance et de réactivité. Le public n'a pas assez de temps pour réagir à la réplique 'Moi, je sais pas me remettre en question ?'.; 0 s L'humour pourrait être renforcé par des regards caméra ou des réactions plus marquées dès les premières répliques.; 15.7 s La réplique 'T'as le culot de venir vers moi...' manque d'une réaction visuelle forte pour accentuer le côté comique. | Réalisateur 5.0/10 : 0 s Montage trop lent. Les plans devraient être plus dynamiques pour maintenir l'attention.; 6.9 s Manque de plans de réaction pour le personnage qui écoute, ce qui donne un côté statique à la scène.; 30.2 s La fin de la vidéo manque de fluidité et de dynamisme. Un dernier plan percutant pourrait améliorer l'impact. | Directeur artistique 7.0/10 : 0 s Les personnages ont un style cohérent, mais les tenues pourraient être légèrement ajustées p
+  scène reconstituée : Deux personnages, un homme et une femme, sont en pleine dispute dans un appartement parisien après une invitation à un rendez-vous. L'homme refuse d'enlever ses chaussures, ce qui déclenche une discussion houleuse sur l'hygiène et les règles de la maison.
+  casting : speaker_0 → Jojo, speaker_1 → Kévin
+  sous-titres : 16 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
+Sketch : « DÉBAT CHAUSSETTES PARISIENNES », 27 répliques
+  décor 0 (lieu ressemblant de la banque, budget Modal du mois atteint) : salon parisien avec un tapis épais brun clair, un canapé mar
+montage : 1 plans (0.0:large>pre/coupe)
+studio : soir, lieux ['salon'], tenues presentateur=tshirt, invite=chemise, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 65.3 s, 27 répliques, 1 scène(s), personnages ['presentateur', 'invite']
+Pré-jury (avant de dessiner) : réaction « regard_camera » à la réplique 27
+montage : 1 plans (0.0:large>pre/coupe)
+studio : soir, lieux ['salon'], tenues presentateur=tshirt, invite=chemise, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 65.3 s, 27 répliques, 1 scène(s), personnages ['presentateur', 'invite']
+  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~979 images)
+  morceau 1959–2938 reçu d'une machine d'aide
+  morceau 2938–3918 reçu d'une machine d'aide
+  morceau 980–1959 reçu d'une machine d'aide
+  dessin partagé terminé en 4.3 min
+Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
+Jury qualité (ia) : 8.0/10 — Humoriste 7.0/10 : 0.4 s La chute finale manque de punch. Le moment où l’invité dit 'Tiens, donne-moi tes affaires' mériterait un zoom choc sur le présentateur pour accentuer la réaction.; 38.3 s Les répliques sur les bactéries pourraient être plus drôles avec un bruitage de désinfection ou un son de spray antibactérien pour renforcer l’absurdité. | Réalisateur 6.0/10 : 0.6 s Le montage est trop lent. Il manque des plans serrés sur les réactions du présentateur pour dynamiser les échanges.; 15.7 s Les réactions de l’invité sont peu visibles. Ajouter des plans rapprochés sur ses expressions faciales renforcerait l’humour. | Directeur artistique 8.0/10 : 0 s Les personnages manquent de cohérence avec l’ambiance humoristique. Le présentateur pourrait avoir un look plus décalé (ex : chaussettes à licornes visibles) dès le début.; 27.1 s Le décor du salon est trop générique. Ajouter des détai
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = gemini ×1, mistral ×1, voix = tiktok, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 24000, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0}
-Quota de l'API GitHub : 4680 appels restants
-OK : sortie/2026-10-25_20h29_emission.mp4 (31 s)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = mistral ×2, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 26428, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0}
+Quota de l'API GitHub : 4977 appels restants
+OK : sortie/2026-10-25_20h43_emission.mp4 (65 s)
