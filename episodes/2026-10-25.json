@@ -1,210 +1,185 @@
 {
- "titre": "DOUTE SUR L'ÂGE D'UN LYCÉEN",
- "sujet": "DOUTE SUR L'ÂGE D'UN LYCÉEN",
- "ecran": "DOUTE SUR L'ÂG",
+ "titre": "TOI, T 'ES MON FILS.",
+ "sujet": "TOI, T 'ES MON FILS.",
+ "ecran": "TOI, T 'ES MON",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "POV : Quand ton invité doute de ton âge",
- "question": "Comment réagir face à un doute aussi absurde ?",
+ "titre_accroche": "",
+ "question": "",
  "running_gag": "",
  "verite": "",
  "repliques": [
   {
-   "p": "envoyee",
-   "t": "Bon, je vais pas tarder là, il est tard, je dois me lever demain, j'ai cours en plus.",
+   "p": "presentateur",
+   "t": "Toi, t 'es mon fils.",
    "_deb": 0.0,
-   "_fin": 5.26,
-   "d": "['[urgent]', \"Bon, je vais pas tarder là, il est tard, je dois me lever demain, j'ai cours en plus.\"]",
-   "objet": "telephone"
+   "_fin": 1.08
   },
   {
    "p": "invite",
-   "t": "Ah ouais, t'as cours? T'es encore à l'école?",
-   "_deb": 5.48,
-   "_fin": 6.96,
-   "d": "['[sceptique]', \"Ah ouais, t'as cours? T'es encore à l'école?\"]"
+   "t": "Non, papa, c 'est mon fils. Non, papa, c 'est mon fils.",
+   "_deb": 1.44,
+   "_fin": 6.32
   },
   {
-   "p": "envoyee",
-   "t": "Bah oui.",
-   "_deb": 7.1,
-   "_fin": 7.54,
-   "d": "['[neutre]', 'Bah oui.']"
-  },
-  {
-   "p": "invite",
-   "t": "Je sais bien, tu fais quoi comme études?",
-   "_deb": 7.6,
-   "_fin": 9.18,
-   "d": "['[confused]', 'Je sais bien, tu fais quoi comme études?']"
-  },
-  {
-   "p": "envoyee",
-   "t": "Je suis en seconde.",
-   "_deb": 9.32,
-   "_fin": 11.14,
-   "d": "['[urgent]', 'Je suis en seconde.']"
+   "p": "presentateur",
+   "t": "Toi, t 'es le fils.",
+   "_deb": 6.32,
+   "_fin": 6.92
   },
   {
    "p": "invite",
-   "t": "C'est quoi, t'as en seconde année de médecine?",
-   "_deb": 13.06,
-   "_fin": 15.72,
-   "d": "['[colere]', \"C'est quoi, t'as en seconde année de médecine?\"]"
+   "t": "Non, papa, c 'est mon fils. Toi, t 'es le fils de papa.",
+   "_deb": 6.98,
+   "_fin": 9.42
   },
   {
    "p": "invite",
-   "t": "Je sais bien pourquoi tu dis pas les trucs comme ça, faut dire les trucs.",
-   "_deb": 16.26,
-   "_fin": 18.44,
-   "d": "['[hesitant]', 'Je sais bien pourquoi tu dis pas les trucs comme ça, faut dire les trucs.']"
+   "t": "Papa, c 'est mon fils.",
+   "_deb": 9.76,
+   "_fin": 11.24
   },
   {
-   "p": "envoyee",
-   "t": "Non, je suis pas en seconde année de médecine, je suis en seconde au lycée.",
-   "_deb": 18.46,
-   "_fin": 21.52,
-   "d": "['[urgent]', 'Non, je suis pas en seconde année de médecine, je suis en seconde au lycée.']"
-  },
-  {
-   "p": "envoyee",
-   "t": "Je viens de rentrer en seconde là.",
-   "_deb": 21.8,
-   "_fin": 23.66,
-   "d": "['[neutre]', 'Je viens de rentrer en seconde là.']"
+   "p": "presentateur",
+   "t": "Mais non, papa, c 'est ton père.",
+   "_deb": 11.3,
+   "_fin": 12.92
   },
   {
    "p": "invite",
-   "t": "Pourquoi tu redoubles ta seconde depuis 2018?",
-   "_deb": 26.58,
-   "_fin": 29.82,
-   "d": "['[colere]', 'Pourquoi tu redoubles ta seconde depuis 2018?']"
+   "t": "Papa, c 'est mon fils.",
+   "_deb": 12.94,
+   "_fin": 14.24
   },
   {
-   "p": "envoyee",
-   "t": "Hein?",
-   "_deb": 30.0,
-   "_fin": 31.04,
-   "d": "['[choc]', 'Hein?']"
-  },
-  {
-   "p": "invite",
-   "t": "C'est quoi la pro? Après, c'est vrai que la seconde, elle est quand même compliquée à passer.",
-   "_deb": 31.48,
-   "_fin": 35.2,
-   "d": "['[sceptique]', \"C'est quoi la pro? Après, c'est vrai que la seconde, elle est quand même compliquée à passer.\"]"
+   "p": "presentateur",
+   "t": "Mais papa, c 'est ton père.",
+   "_deb": 14.24,
+   "_fin": 15.24
   },
   {
    "p": "invite",
-   "t": "Mais moi, tu la redoubles depuis 2018, ta seconde?",
-   "_deb": 35.42,
-   "_fin": 37.64,
-   "d": "['[colere]', 'Mais moi, tu la redoubles depuis 2018, ta seconde?']"
+   "t": "Non, papa, c 'est mon fils.",
+   "_deb": 15.3,
+   "_fin": 17.2
   },
   {
-   "p": "envoyee",
-   "t": "Non, mais non, je n'ai jamais redoublé. Je suis très forte à l'école.",
-   "_deb": 37.86,
-   "_fin": 40.36,
-   "d": "['[urgent]', \"Non, mais non, je n'ai jamais redoublé. Je suis très forte à l'école.\"]"
-  },
-  {
-   "p": "envoyee",
-   "t": "Je n'ai jamais redoublé.",
-   "_deb": 40.88,
-   "_fin": 41.68,
-   "d": "['[urgent]', \"Je n'ai jamais redoublé.\"]"
+   "p": "presentateur",
+   "t": "Non, papa, c 'est ton père.",
+   "_deb": 17.22,
+   "_fin": 18.12
   },
   {
    "p": "invite",
-   "t": "Mais... Mais tu as quel âge?",
-   "_deb": 43.38,
-   "_fin": 45.3,
-   "d": "['[confused]', 'Mais... Mais tu as quel âge?']",
-   "objet": "bouteille"
+   "t": "Non, papa, c 'est mon fils.",
+   "_deb": 18.18,
+   "_fin": 20.36
   },
   {
-   "p": "envoyee",
-   "t": "J'ai 16 ans.",
-   "_deb": 45.66,
-   "_fin": 46.5,
-   "d": "['[neutre]', \"J'ai 16 ans.\"]"
+   "p": "presentateur",
+   "t": "Et moi, je suis quoi alors? Pour toi?",
+   "_deb": 20.36,
+   "_fin": 22.9
   },
   {
-   "p": "envoyee",
-   "t": "Mais quoi?",
-   "_deb": 49.48,
-   "_fin": 49.98,
-   "d": "['[choc]', 'Mais quoi?']"
+   "p": "presentateur",
+   "t": "Oui, je suis ta mère.",
+   "_deb": 26.0,
+   "_fin": 28.28
   },
   {
    "p": "invite",
-   "t": "Non, ce n'est pas possible.",
-   "_deb": 50.1,
-   "_fin": 51.12,
-   "d": "['[colere]', \"Non, ce n'est pas possible.\"]"
+   "t": "Non, c 'est pas ma mère.",
+   "_deb": 27.9,
+   "_fin": 30.92
   },
   {
-   "p": "envoyee",
-   "t": "Mais il y a quoi?",
-   "_deb": 51.24,
-   "_fin": 52.38,
-   "d": "['[choc]', 'Mais il y a quoi?']"
-  },
-  {
-   "p": "invite",
-   "t": "Non, ce n'est pas possible.",
-   "_deb": 52.72,
-   "_fin": 53.72,
-   "d": "['[colere]', \"Non, ce n'est pas possible.\"]"
+   "p": "presentateur",
+   "t": "Maman et mère, c 'est pareil. Non.",
+   "_deb": 30.98,
+   "_fin": 32.74
   },
   {
    "p": "invite",
-   "t": "Donc toi, là, toi, là, hein? Toi, tu as 16 ans, là!",
-   "_deb": 55.66,
-   "_fin": 59.92,
-   "d": "['[panique]', 'Donc toi, là, toi, là, hein? Toi, tu as 16 ans, là!']"
+   "t": "Si. Ma mère?",
+   "_deb": 32.86,
+   "_fin": 33.88
+  },
+  {
+   "p": "presentateur",
+   "t": "Oui, je suis ta mère. Et t 'es mon fils.",
+   "_deb": 33.98,
+   "_fin": 37.02
   },
   {
    "p": "invite",
-   "t": "bah oui toi là t'as saison",
-   "_deb": 59.98,
-   "_fin": 62.24,
-   "d": "['[gene]', \"bah oui toi là t'as saison\"]"
+   "t": "Non. C 'est papa mon fils.",
+   "_deb": 37.1,
+   "_fin": 40.08
   },
   {
-   "p": "envoyee",
-   "t": "oui mais",
-   "_deb": 62.24,
-   "_fin": 64.86,
-   "d": "['[gene]', 'oui mais']"
+   "p": "presentateur",
+   "t": "Amaël, c 'est qui pour toi? Petit frère. Oui, c 'est ton petit frère.",
+   "_deb": 40.9,
+   "_fin": 44.46
   },
   {
    "p": "invite",
-   "t": "c'est quoi là tu bois du sperme de taureau tous les matins tu te fais des smoothies à la testostérone de minotaure tous les matins",
-   "_deb": 64.86,
-   "_fin": 71.9,
-   "d": "['[colere]', \"c'est quoi là tu bois du sperme de taureau tous les matins tu te fais des smoothies à la testostérone de minotaure tous les matins\"]",
-   "objet": "bouteille",
+   "t": "Et papa, c 'est mon fils.",
+   "_deb": 44.7,
+   "_fin": 46.96
+  },
+  {
+   "p": "presentateur",
+   "t": "Papa, c 'est pas ton fils.",
+   "_deb": 47.24,
+   "_fin": 48.44
+  },
+  {
+   "p": "invite",
+   "t": "Si. Papa, c 'est mon fils.",
+   "_deb": 48.46,
+   "_fin": 50.18
+  },
+  {
+   "p": "presentateur",
+   "t": "Toi, tu es le fils de papa. Ton père, il s 'appelle comment?",
+   "_deb": 50.18,
+   "_fin": 53.2
+  },
+  {
+   "p": "invite",
+   "t": "Mon fils.",
+   "_deb": 53.6,
+   "_fin": 54.32
+  },
+  {
+   "p": "presentateur",
+   "t": "Non, non. Ton père, il s 'appelle comment? Papa, il s 'appelle comment?",
+   "_deb": 54.34,
+   "_fin": 57.26
+  },
+  {
+   "p": "presentateur",
+   "t": "Maman s 'appelle comment? Et papa il s 'appelle comment?",
+   "_deb": 57.9,
+   "_fin": 65.58,
    "chute": true
   }
  ],
  "bandeau": [],
  "gag": null,
- "legende": "Un échange hilarant entre un lycéen et un adulte sceptique dans une voiture.",
+ "legende": "Toi, t 'es mon fils.",
  "hashtags": [
   "petitsdramas",
-  "lyceen",
-  "doute",
   "humour",
-  "voiture",
-  "age",
-  "etudes"
+  "doublage",
+  "pov"
  ],
  "sources": [
-  "https://www.tiktok.com/@yan_animation0/video/7635069843049352470"
+  "https://www.tiktok.com/@same_same53/video/7699802718549871904"
  ],
  "decoupage": [
   {
@@ -214,17 +189,7 @@
     1,
     2,
     3,
-    4
-   ],
-   "lieu": "",
-   "son": "",
-   "duree": 0.0,
-   "decor": "voiture interior, nuit, volant, tableau de bord, sièges en cuir noir, vitres teintées",
-   "titre": "Scène 1 : Début de la conversation"
-  },
-  {
-   "scene": "2",
-   "repliques": [
+    4,
     5,
     6,
     7,
@@ -234,17 +199,7 @@
     11,
     12,
     13,
-    14
-   ],
-   "lieu": "",
-   "son": "",
-   "duree": 0.0,
-   "decor": "voiture interior, nuit, volant, tableau de bord, sièges en cuir noir, vitres teintées",
-   "titre": "Scène 2 : Doutes et explications"
-  },
-  {
-   "scene": "3",
-   "repliques": [
+    14,
     15,
     16,
     17,
@@ -254,287 +209,33 @@
     21,
     22,
     23,
-    24
+    24,
+    25
    ],
    "lieu": "",
    "son": "",
-   "duree": 0.0,
-   "decor": "voiture interior, nuit, volant, tableau de bord, sièges en cuir noir, vitres teintées, bouteille d'eau sur le siège arrière",
-   "titre": "Scène 3 : La révélation et la confusion finale"
+   "duree": 0,
+   "decor": ""
   }
  ],
- "studio": {
-  "moment": "nuit",
-  "lieux": [
-   "voiture"
-  ],
-  "costumes": {
-   "invite": {
-    "haut": "chemise",
-    "c_haut": "rouge",
-    "motif": "uni",
-    "bas": "pantalon",
-    "chaussures": "ville",
-    "details": [
-     "moustache",
-     "montre"
-    ],
-    "chapeau": null,
-    "cheveux": "court_texture",
-    "c_cheveux": "roux"
-   },
-   "envoyee": {
-    "haut": "tshirt",
-    "c_haut": "vert",
-    "motif": "uni",
-    "bas": "short",
-    "chaussures": "baskets",
-    "details": [
-     "bracelets"
-    ],
-    "chapeau": null,
-    "cheveux": "long",
-    "c_cheveux": "blond"
-   }
-  },
-  "personnages": {
-   "invite": {
-    "genre": "h",
-    "age": 45,
-    "taille": 1,
-    "corpulence": 0.6,
-    "cheveux": "court_texture",
-    "barbe": "trois_jours"
-   },
-   "envoyee": {
-    "genre": "f",
-    "age": 16,
-    "taille": 0.8,
-    "corpulence": 0.3,
-    "cheveux": "long",
-    "barbe": "rien"
-   }
-  },
-  "gags": [
-   "École : 2018-2024 : Redoublez-vous ?",
-   "Smoothies à la testostérone : Recette secrète",
-   "Lycée : Où est la médecine ?"
-  ],
-  "ambiances": [
-   "neon"
-  ],
-  "cadence": "rapide",
-  "plans": [
-   {
-    "replique": 0,
-    "plan": "moyen",
-    "mouvement": "fixe",
-    "geste": "poches",
-    "reaction": "aucune"
-   },
-   {
-    "replique": 1,
-    "plan": "serre",
-    "mouvement": "zoom_choc",
-    "geste": "haussement",
-    "reaction": "choc"
-   },
-   {
-    "replique": 2,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "menton",
-    "reaction": "sceptique"
-   },
-   {
-    "replique": 3,
-    "plan": "moyen",
-    "mouvement": "fixe",
-    "geste": "gratte_tete",
-    "reaction": "confused"
-   },
-   {
-    "replique": 4,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "pointe_g",
-    "reaction": "choc"
-   },
-   {
-    "replique": 5,
-    "plan": "serre",
-    "mouvement": "zoom_choc",
-    "geste": "pointe_d",
-    "reaction": "colere"
-   },
-   {
-    "replique": 6,
-    "plan": "large",
-    "mouvement": "fixe",
-    "geste": "bras_ouverts",
-    "reaction": "gene"
-   },
-   {
-    "replique": 7,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "pointe_g",
-    "reaction": "choc"
-   },
-   {
-    "replique": 8,
-    "plan": "moyen",
-    "mouvement": "fixe",
-    "geste": "menton",
-    "reaction": "sceptique"
-   },
-   {
-    "replique": 9,
-    "plan": "serre",
-    "mouvement": "zoom_choc",
-    "geste": "pointe_d",
-    "reaction": "colere"
-   },
-   {
-    "replique": 10,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "facepalm",
-    "reaction": "choc"
-   },
-   {
-    "replique": 11,
-    "plan": "moyen",
-    "mouvement": "fixe",
-    "geste": "gratte_tete",
-    "reaction": "confused"
-   },
-   {
-    "replique": 12,
-    "plan": "serre",
-    "mouvement": "zoom_choc",
-    "geste": "pointe_d",
-    "reaction": "colere"
-   },
-   {
-    "replique": 13,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "poing",
-    "reaction": "choc"
-   },
-   {
-    "replique": 14,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "pointe_g",
-    "reaction": "sceptique"
-   },
-   {
-    "replique": 15,
-    "plan": "serre",
-    "mouvement": "zoom_choc",
-    "geste": "gratte_tete",
-    "reaction": "gene"
-   },
-   {
-    "replique": 16,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "menton",
-    "reaction": "choc"
-   },
-   {
-    "replique": 17,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "facepalm",
-    "reaction": "colere"
-   },
-   {
-    "replique": 18,
-    "plan": "large",
-    "mouvement": "fixe",
-    "geste": "desespoir",
-    "reaction": "panique"
-   },
-   {
-    "replique": 19,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "pointe_g",
-    "reaction": "choc"
-   },
-   {
-    "replique": 20,
-    "plan": "serre",
-    "mouvement": "zoom_choc",
-    "geste": "bras_ouverts",
-    "reaction": "colere"
-   },
-   {
-    "replique": 21,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "pointe_d",
-    "reaction": "panique"
-   },
-   {
-    "replique": 22,
-    "plan": "moyen",
-    "mouvement": "fixe",
-    "geste": "gratte_tete",
-    "reaction": "gene"
-   },
-   {
-    "replique": 23,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "pointe_g",
-    "reaction": "choc"
-   },
-   {
-    "replique": 24,
-    "reaction": "sceptique"
-   }
-  ],
-  "objets": [
-   {
-    "replique": 0,
-    "objet": "telephone"
-   },
-   {
-    "replique": 15,
-    "objet": "bouteille"
-   },
-   {
-    "replique": 24,
-    "objet": "bouteille"
-   }
-  ],
-  "decors_vus": {
-   "presentateur": "voiture interior, nuit, volant en cuir noir, tableau de bord lumineux, sièges en cuir noir, vitres teintées, téléphone posé sur le tableau de bord",
-   "invite": "voiture interior, nuit, volant en cuir noir, tableau de bord lumineux, sièges en cuir noir, vitres teintées, bouteille d'eau sur le siège arrière"
-  }
- },
  "doublage": {
-  "piste": "/tmp/tmpltcr4w7l/piste.wav",
-  "duree": 72.24,
-  "source": "https://www.tiktok.com/@yan_animation0/video/7635069843049352470",
-  "auteur": "yan_animation0",
-  "contexte": "Deux personnages sont dans une voiture, l'un jouant le rôle d'un lycéen en seconde et l'autre celui d'un adulte sceptique qui doute de son âge et de ses études.",
+  "piste": "/tmp/tmp5nj_lt2u/piste.wav",
+  "duree": 67.69,
+  "source": "https://www.tiktok.com/@same_same53/video/7699802718549871904",
+  "auteur": "same_same53",
+  "contexte": "",
   "evenements": [],
   "visuel": {
    "gestes": [],
-   "duree": 72.5,
+   "duree": 68.0,
    "nb_plans": 1,
-   "duree_plan": 72.5,
+   "duree_plan": 68.0,
    "coupes": [],
    "plans": {
     "tres_serre": 0.0,
     "serre": 0.0,
-    "moyen": 0.993,
-    "large": 0.007
+    "moyen": 0.0,
+    "large": 1.0
    },
    "camera": {
     "fixe": 1.0,
@@ -543,118 +244,81 @@
     "travelling": 0.0,
     "epaule": 0.0
    },
-   "nb_personnes": 2,
-   "personnes": [
-    {
-     "place": "droite",
-     "presence": 1.0,
-     "habit": [
-      150,
-      62,
-      73
-     ],
-     "cheveux": [
-      44,
-      30,
-      26
-     ],
-     "sourire": 0.0,
-     "taille": 0.07,
-     "tete_penchee": 1.1,
-     "regard_cote": 0.0
-    },
-    {
-     "place": "gauche",
-     "presence": 0.903,
-     "habit": [
-      89,
-      79,
-      77
-     ],
-     "cheveux": [
-      20,
-      15,
-      12
-     ],
-     "sourire": 0.0,
-     "taille": 0.077,
-     "tete_penchee": 1.1,
-     "regard_cote": 0.183
-    }
-   ],
-   "visages": true,
+   "nb_personnes": 0,
+   "personnes": [],
+   "visages": false,
    "sourires": 0.0,
-   "energie": 0.021,
+   "energie": 0.363,
    "mur": [
-    0,
-    0,
-    0
+    1,
+    1,
+    1
    ],
    "palette": [
     [
-     0,
-     0,
-     0,
-     0.677
+     1,
+     1,
+     1,
+     0.616
     ],
     [
-     44,
-     39,
-     41,
-     0.126
+     252,
+     252,
+     253,
+     0.313
     ],
     [
-     74,
-     69,
-     74,
-     0.106
-    ],
-    [
-     127,
-     106,
-     98,
-     0.049
-    ],
-    [
+     203,
      193,
-     149,
-     114,
-     0.03
+     204,
+     0.033
     ],
     [
-     240,
-     239,
-     240,
-     0.013
+     137,
+     105,
+     103,
+     0.026
+    ],
+    [
+     241,
+     150,
+     36,
+     0.006
+    ],
+    [
+     10,
+     181,
+     118,
+     0.005
     ]
    ],
    "lumiere": {
-    "luminosite": 30.0,
-    "chaleur": 3.9,
-    "saturation": 17.8
+    "luminosite": 94.1,
+    "chaleur": 1.7,
+    "saturation": 9.6
    },
-   "moment": "nuit"
+   "moment": "jour"
   },
   "audio": {
-   "duree": 72.2,
+   "duree": 67.7,
    "nb_voix": 2,
    "voix": [
     {
-     "hz": 220,
-     "genre": "f",
-     "part": 0.39
+     "hz": null,
+     "genre": null,
+     "part": 0.56
     },
     {
-     "hz": 181,
-     "genre": "?",
-     "part": 0.61
+     "hz": null,
+     "genre": null,
+     "part": 0.44
     }
    ],
-   "debit": 4.0,
-   "blanc_moyen": 0.7,
-   "coupes": 3,
-   "dynamique_db": 15.2,
-   "cris": 0.018,
+   "debit": 3.23,
+   "blanc_moyen": 0.34,
+   "coupes": 9,
+   "dynamique_db": 14.4,
+   "cris": 0.003,
    "musique": null,
    "impacts": 0,
    "impacts_10s": 0.0,
@@ -662,18 +326,9 @@
    "aigus": 0,
    "sur_vanne": 0,
    "evenements": {},
-   "emotions": {
-    "'[colere": 6,
-    "'[urgent": 5,
-    "'[neutre": 3,
-    "'[choc": 3,
-    "'[sceptique": 2,
-    "'[confused": 2,
-    "'[gene": 2,
-    "'[hesitant": 1
-   }
+   "emotions": {}
   },
-  "video_origine": "/tmp/tmpltcr4w7l/src.mp4"
+  "video_origine": "/tmp/tmp5nj_lt2u/src.mp4"
  },
  "fiche": {
   "note": 0,
@@ -686,17 +341,7 @@
      1,
      2,
      3,
-     4
-    ],
-    "lieu": "",
-    "son": "",
-    "duree": 0.0,
-    "decor": "voiture interior, nuit, volant, tableau de bord, sièges en cuir noir, vitres teintées",
-    "titre": "Scène 1 : Début de la conversation"
-   },
-   {
-    "scene": "2",
-    "repliques": [
+     4,
      5,
      6,
      7,
@@ -706,17 +351,7 @@
      11,
      12,
      13,
-     14
-    ],
-    "lieu": "",
-    "son": "",
-    "duree": 0.0,
-    "decor": "voiture interior, nuit, volant, tableau de bord, sièges en cuir noir, vitres teintées",
-    "titre": "Scène 2 : Doutes et explications"
-   },
-   {
-    "scene": "3",
-    "repliques": [
+     14,
      15,
      16,
      17,
@@ -726,45 +361,39 @@
      21,
      22,
      23,
-     24
+     24,
+     25
     ],
     "lieu": "",
     "son": "",
-    "duree": 0.0,
-    "decor": "voiture interior, nuit, volant, tableau de bord, sièges en cuir noir, vitres teintées, bouteille d'eau sur le siège arrière",
-    "titre": "Scène 3 : La révélation et la confusion finale"
+    "duree": 0,
+    "decor": ""
    }
   ]
  },
  "_monte": true,
  "_voix_hz": {
-  "envoyee": 424,
-  "invite": 272
+  "presentateur": 218,
+  "invite": 339
  },
  "_voix_genre": {
-  "envoyee": "f"
+  "presentateur": "f",
+  "invite": "f"
  },
  "realisation": {
-  "moment": "nuit",
+  "moment": "jour",
   "lieux": [
-   "voiture",
-   "cabinet_medical",
-   "classe"
+   "salon"
   ],
-  "gags": [
-   "École : 2018-2024 : Redoublez-vous ?",
-   "Smoothies à la testostérone : Recette secrète",
-   "Lycée : Où est la médecine ?"
-  ],
-  "ambiances": [
-   "neon"
-  ],
-  "source": "auteur+image",
+  "gags": [],
+  "ambiances": [],
+  "source": "robot+image",
   "tenues": {
-   "envoyee": "tshirt",
+   "presentateur": "capuche",
    "invite": "chemise"
   },
   "plans": [
+   "large/fixe",
    "large/fixe",
    "large/fixe",
    "large/fixe",
