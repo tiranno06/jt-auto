@@ -1761,5 +1761,48 @@
    "son": true
   },
   "cadence": "normal"
+ },
+ {
+  "moment": "jour",
+  "lieux": [
+   "salon"
+  ],
+  "source": "auteur+image",
+  "duree": 35.4,
+  "plans": {
+   "large": 3,
+   "moyen": 1,
+   "serre": 3,
+   "epaule": 2,
+   "tres_serre": 3
+  },
+  "mouvements": {
+   "fixe": 6,
+   "avance": 3,
+   "zoom_choc": 2,
+   "travelling": 1
+  },
+  "costumes": {
+   "envoyee": "tshirt",
+   "invite": "tshirt"
+  },
+  "figurants": 0,
+  "ambiances": [
+   "pluie",
+   "poussiere"
+  ],
+  "controle": "Humoriste 8.6/10 : 30.0 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 2.0/10 : 2.2 s tête de envoyee coupée par le bord de l'image (moyen); 5.8 s tête de envoyee coupée par ",
+  "fichier": "2026-10-25_02h02_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": true,
+   "tiers": true,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": true,
+   "reflets": false,
+   "son": true
+  },
+  "cadence": "normal"
  }
 ]
