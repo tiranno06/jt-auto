@@ -165,6 +165,9 @@
   par phrase (`locuteurs.fil_dialogue`) : logique du texte (`indices_dialogue` : après une question l'autre répond, « oui / bah /
   mais » = réponse, reprise des mots de l'autre, phrase coupée = la suite) + relecture du dialogue par l'IA, Gemini d'abord
   (`doublage.relire_dialogue`, `reseau.claude(raisonner=True)`, RELIRE_DIALOGUE=0 pour couper). « Battle d'aura » : 68 % → 97 %.
+  **Tirage au hasard des sons TikTok** : le robot préfère les vidéos aux voix bien différentes (ressemblance ≤ 0,6, réglage
+  VOIX_DIFFERENTES ; 1 = sans tri) : jusqu'à 6 vidéos écoutées (25 min au plus), sinon celle aux voix les plus nettes. Un lien collé
+  à la main n'est jamais refusé (le contrôle questions-réponses s'en charge).
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.
