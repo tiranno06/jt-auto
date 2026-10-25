@@ -1,265 +1,135 @@
 {
- "titre": "ACHAT TENDU EN ÉPICERIE",
- "sujet": "ACHAT TENDU EN ÉPICERIE",
- "ecran": "ACHAT TENDU EN",
+ "titre": "DISPUTE DE COUPLE 50/50",
+ "sujet": "DISPUTE DE COUPLE 50/50",
+ "ecran": "DISPUTE DE COU",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "POV : Quand ton pote te fait payer une fortune",
- "question": "Comment gérer une amitié quand les prix deviennent exagérés ?",
+ "titre_accroche": "POV : Les excuses dans un couple",
+ "question": "Qui a tort d'après vous ?",
  "running_gag": "",
  "verite": "",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "Il est, frérot, ça va?",
+   "t": "Mon amour ?",
    "_deb": 0.0,
-   "_fin": 1.56,
-   "d": "['[neutre] Il est, frérot, ça va ?']"
+   "_fin": 0.68,
+   "d": "[affectionate] Mon amour ?"
   },
   {
-   "p": "invite",
-   "t": "Ça va bien, mon frère, tranquille?",
-   "_deb": 1.7,
-   "_fin": 2.82,
-   "d": "['[neutre] Ça va bien, mon frère, tranquille ?']"
-  },
-  {
-   "p": "presentateur",
-   "t": "Tu manques à ces deux canettes, s'il te plaît?",
-   "_deb": 3.04,
-   "_fin": 4.32,
-   "d": "[\"[neutre] Tu manques à ces deux canettes, s'il te plaît ?\"]",
-   "objet": "bouteille"
-  },
-  {
-   "p": "invite",
-   "t": "Ouais, bien sûr. 45 euros, s'il te plaît.",
-   "_deb": 4.46,
-   "_fin": 8.24,
-   "d": "[\"[sceptique] Ouais, bien sûr. 45 euros, s'il te plaît.\"]"
+   "p": "envoyee",
+   "t": "Oui ?",
+   "_deb": 0.74,
+   "_fin": 1.2,
+   "d": "[neutral] Oui ?"
   },
   {
    "p": "presentateur",
-   "t": "On est... Tu sais qui je suis, au cas où?",
-   "_deb": 10.38,
-   "_fin": 12.52,
-   "d": "['[annoyed] On est... Tu sais qui je suis, au cas où ?']"
+   "t": "Pardon pour tout à l'heure.",
+   "_deb": 1.38,
+   "_fin": 2.28,
+   "d": "[hesitant] Pardon pour tout à l'heure."
   },
   {
-   "p": "invite",
-   "t": "Ouais, Nas.",
-   "_deb": 12.64,
-   "_fin": 13.08,
-   "d": "['[blase] Ouais, Nas.']"
-  },
-  {
-   "p": "presentateur",
-   "t": "Nas, c'est moi, voilà. On est amis. On est amis, moi et toi?",
-   "_deb": 13.14,
-   "_fin": 15.4,
-   "d": "[\"[joyeux] Nas, c'est moi, voilà. On est amis. On est amis, moi, et toi ?\"]"
-  },
-  {
-   "p": "invite",
-   "t": "Ouais, on est amis, moi.",
-   "_deb": 15.4,
-   "_fin": 15.84,
-   "d": "['[blase] Ouais, on est amis, moi.']"
+   "p": "envoyee",
+   "t": "Oh, merci mon cœur, c'est gentil.",
+   "_deb": 2.5,
+   "_fin": 4.02,
+   "d": "[ironic] Oh, merci mon cœur, c'est gentil."
   },
   {
    "p": "presentateur",
-   "t": "Fais-moi les vrais prix, s'il te plaît. Fais-moi les vrais.",
-   "_deb": 15.88,
-   "_fin": 17.26,
-   "d": "[\"[colere] Fais-moi les vrais prix, s'il te plaît. Fais-moi les vrais.\"]"
+   "t": "Quoi ? Pardon pour tout à l'heure.",
+   "_deb": 6.94,
+   "_fin": 9.2,
+   "d": "[confused] Quoi ? Pardon pour tout à l'heure."
   },
   {
-   "p": "invite",
-   "t": "45 euros, mon frère. Mon ami.",
-   "_deb": 17.38,
-   "_fin": 20.1,
-   "d": "['[sarcastique] 45 euros, mon frère. Mon ami.']"
+   "p": "envoyee",
+   "t": "Oui, j'ai compris, tu t'es excusé, je t'ai remercié.",
+   "_deb": 9.38,
+   "_fin": 11.1,
+   "d": "[annoyed] Oui, j'ai compris, tu t'es excusé, je t'ai remercié."
   },
   {
-   "p": "presentateur",
-   "t": "45 euros?",
-   "_deb": 20.5,
-   "_fin": 21.28,
-   "d": "['[choc] 45 euros ?']"
-  },
-  {
-   "p": "invite",
-   "t": "Ouais.",
-   "_deb": 21.4,
-   "_fin": 21.48,
-   "d": "['[neutre] Ouais.']"
+   "p": "envoyee",
+   "t": "Merci mon amour.",
+   "_deb": 11.14,
+   "_fin": 11.86,
+   "d": "[sarcastic] Merci mon amour."
   },
   {
    "p": "presentateur",
-   "t": "J'achète une carte de Santos ou des Red Bulls, là?",
-   "_deb": 21.52,
-   "_fin": 23.24,
-   "d": "[\"[confused] J'achète une carte de Santos ou des Red Bulls, là ?\"]"
+   "t": "Bah là, t'es censée...",
+   "_deb": 12.1,
+   "_fin": 13.02,
+   "d": "[hesitant] Bah là, t'es censée..."
+  },
+  {
+   "p": "envoyee",
+   "t": "Je suis censée quoi ?",
+   "_deb": 13.1,
+   "_fin": 14.02,
+   "d": "[annoyed] Je suis censée quoi ?"
   },
   {
    "p": "presentateur",
-   "t": "Je comprends pas.",
-   "_deb": 23.26,
-   "_fin": 23.64,
-   "d": "['[colere] Je comprends pas.']"
+   "t": "Bah t'excuser aussi, en fait.",
+   "_deb": 14.52,
+   "_fin": 15.66,
+   "d": "[indignant] Bah t'excuser aussi, en fait."
   },
   {
-   "p": "invite",
-   "t": "C'est des Red Bulls, mon frère. Ça ferait 45 euros, s'il te plaît.",
-   "_deb": 23.64,
-   "_fin": 25.7,
-   "d": "[\"[exaspéré] C'est des Red Bulls, mon frère. Ça ferait 45 euros, s'il te plaît.\"]",
-   "objet": "bouteille"
-  },
-  {
-   "p": "presentateur",
-   "t": "D'accord. Donc là, 45 euros, toi, t'es comme ça, toi.",
-   "_deb": 26.62,
-   "_fin": 29.06,
-   "d": "[\"[ironique] D'accord. Donc là, 45 euros, toi, t'es comme ça, toi.\"]"
+   "p": "envoyee",
+   "t": "T'as le culot de venir vers moi, là, et de me demander de m'excuser alors que c'est toi qui es en tort ?",
+   "_deb": 15.74,
+   "_fin": 18.68,
+   "d": "[angry] T'as le culot de venir vers moi, là, et de me demander de m'excuser alors que c'est toi qui es en tort ?"
   },
   {
    "p": "presentateur",
-   "t": "Tes potes, ils arrivent, ils viennent t'aider. Donnent de la force.",
-   "_deb": 28.94,
-   "_fin": 31.98,
-   "d": "[\"[ironique] Tes potes, ils arrivent, ils viennent t'aider. Donnent de la force.\"]"
+   "t": "Je fais le premier pas vers toi. Mais tu te fiches de ma gueule !",
+   "_deb": 18.68,
+   "_fin": 20.38,
+   "d": "[angry] Je fais le premier pas vers toi. Mais tu te fiches de ma gueule !"
   },
   {
    "p": "presentateur",
-   "t": "Et toi, 45 euros.",
-   "_deb": 32.32,
-   "_fin": 33.56,
-   "d": "['[colere] Et toi, 45 euros.']"
-  },
-  {
-   "p": "invite",
-   "t": "C'est ça? Ouais, c'est ça, 45 euros.",
-   "_deb": 34.26,
-   "_fin": 35.2,
-   "d": "[\"[neutre] C'est ça ? Ouais, c'est ça, 45 euros.\"]"
+   "t": "Je fais le premier pas vers toi, tu restes campée !",
+   "_deb": 20.4,
+   "_fin": 22.98,
+   "d": "[frustrated] Je fais le premier pas vers toi, tu restes campée !"
   },
   {
    "p": "presentateur",
-   "t": "C'est ça, vas-y. Ouais, c'est ça. Je te dois de l'argent, toi, non?",
-   "_deb": 35.2,
-   "_fin": 37.28,
-   "d": "[\"[neutre] C'est ça, vas-y. Ouais, c'est ça. Je te dois de l'argent, toi, non ?\"]"
+   "t": "On est à 50/50. On est à 50/50 !",
+   "_deb": 23.02,
+   "_fin": 25.84,
+   "d": "[stubborn] On est à 50/50. On est à 50/50 !"
   },
   {
-   "p": "invite",
-   "t": "Ah, mais ouais, que j'ai oublié, quand même.",
-   "_deb": 37.4,
-   "_fin": 38.68,
-   "d": "[\"[chuchote] Ah, mais ouais, que j'ai oublié, quand même.\"]"
-  },
-  {
-   "p": "presentateur",
-   "t": "Je te dois, je te dois, je te dois.",
-   "_deb": 38.82,
-   "_fin": 39.4,
-   "d": "['[panique] Je te dois, je te dois, je te dois.']"
-  },
-  {
-   "p": "invite",
-   "t": "50, 45, 95 euros.",
-   "_deb": 39.88,
-   "_fin": 41.94,
-   "d": "['[colere] 50, 45, 95 euros.']"
-  },
-  {
-   "p": "presentateur",
-   "t": "95, du coup, en tout?",
-   "_deb": 42.3,
-   "_fin": 43.3,
-   "d": "['[choc] 95, du coup, en tout ?']"
-  },
-  {
-   "p": "invite",
-   "t": "Ouais, c'est ça.",
-   "_deb": 43.42,
-   "_fin": 43.9,
-   "d": "[\"[neutre] Ouais, c'est ça.\"]"
-  },
-  {
-   "p": "presentateur",
-   "t": "D'accord. Mais tu sais quoi, les 95 euros, ça va être ça.",
-   "_deb": 44.0,
-   "_fin": 46.26,
-   "d": "[\"[colere] D'accord. Mais tu sais quoi, les 95 euros, ça va être ça.\"]"
-  },
-  {
-   "p": "presentateur",
-   "t": "Voilà, moi, je ne te rembourse plus. 95 euros, ça va être ça.",
-   "_deb": 46.34,
-   "_fin": 48.84,
-   "d": "['[colere] Voilà, moi, je ne te rembourse plus. 95 euros, ça va être ça.']"
-  },
-  {
-   "p": "presentateur",
-   "t": "Et d'ailleurs, on se bloque. Je ne vais plus parler avec toi, moi, c'est bon.",
-   "_deb": 49.06,
-   "_fin": 51.8,
-   "d": "[\"[colere] Et d'ailleurs, on se bloque. Je ne vais plus parler avec toi, moi, c'est bon.\"]"
-  },
-  {
-   "p": "presentateur",
-   "t": "Fais-moi encaisser, là, directement, là. Je ne sais pas ce que tu me racontes.",
-   "_deb": 51.92,
-   "_fin": 53.92,
-   "d": "['[colere] Fais-moi encaisser, là, directement, là. Je ne sais pas ce que tu me racontes.']",
-   "objet": "billet"
-  },
-  {
-   "p": "presentateur",
-   "t": "Tu ne sais pas pourquoi je te donne de... Tu sais quoi, je vais aller chez l'autre.",
-   "_deb": 54.16,
-   "_fin": 56.08,
-   "d": "[\"[colere] Tu ne sais pas pourquoi je te donne de... Tu sais quoi, je vais aller chez l'autre.\"]"
-  },
-  {
-   "p": "presentateur",
-   "t": "Moi, la prochaine fois, je vais chez l'autre. Je ne viens plus ici.",
-   "_deb": 56.08,
-   "_fin": 57.8,
-   "d": "[\"[colere] Moi, la prochaine fois, je vais chez l'autre. Je ne viens plus ici.\"]"
-  },
-  {
-   "p": "presentateur",
-   "t": "Tu es un voleur.",
-   "_deb": 58.16,
-   "_fin": 58.88,
-   "d": "['[colere] Tu es un voleur.']"
-  },
-  {
-   "p": "invite",
-   "t": "Sous -titrage ST' 501",
-   "_deb": 58.94,
-   "_fin": 60.28,
+   "p": "envoyee",
+   "t": "Moi, je sais pas me remettre en question ?",
+   "_deb": 25.84,
+   "_fin": 27.26,
+   "d": "[offended] Moi, je sais pas me remettre en question ?",
    "chute": true
   }
  ],
  "bandeau": [],
  "gag": null,
- "legende": "Un échange houleux entre amis dans un magasin d'épicerie.",
+ "legende": "Quand tu t'excuses mais que tu attends la réciproque...",
  "hashtags": [
   "petitsdramas",
-  "amitie",
-  "epicerie",
-  "prixexagere",
-  "conflit",
+  "couple",
+  "dispute",
   "humour",
-  "tiktok"
+  "toons"
  ],
  "sources": [
-  "https://www.tiktok.com/@vignianimation/video/7682124897128074529"
+  "https://www.tiktok.com/@kodanimation/video/7675147524562226464"
  ],
  "decoupage": [
   {
@@ -268,17 +138,7 @@
     0,
     1,
     2,
-    3
-   ],
-   "lieu": "",
-   "son": "",
-   "duree": 0.0,
-   "decor": "magasin épicerie avec des rayons remplis de bouteilles d'eau, boissons énergisantes, et étagères de produits alimentaires, caisse enregistreuse allumée.",
-   "titre": "Scène 1 : L'échange initial"
-  },
-  {
-   "scene": "2",
-   "repliques": [
+    3,
     4,
     5,
     6,
@@ -294,403 +154,205 @@
    "lieu": "",
    "son": "",
    "duree": 0.0,
-   "decor": "même magasin épicerie, mais avec un focus sur les boissons énergisantes et les étiquettes de prix.",
-   "titre": "Scène 2 : La négociation"
-  },
-  {
-   "scene": "3",
-   "repliques": [
-    15,
-    16,
-    17,
-    18,
-    19,
-    20,
-    21,
-    22,
-    23,
-    24,
-    25,
-    26,
-    27,
-    28,
-    29,
-    30,
-    31,
-    32
-   ],
-   "lieu": "",
-   "son": "",
-   "duree": 0.0,
-   "decor": "même magasin épicerie, avec une caisse enregistreuse en premier plan et des clients en arrière-plan.",
-   "titre": "Scène 3 : La rupture"
+   "decor": "White minimalist living room with plain backdrop"
   }
  ],
  "studio": {
-  "moment": "soir",
+  "plans": [
+   {
+    "plan": "moyen",
+    "geste": "menton",
+    "mouvement": "fixe",
+    "reaction": "aucune",
+    "replique": 0
+   },
+   {
+    "reaction": "yeux_au_ciel",
+    "replique": 2,
+    "plan": "moyen",
+    "mouvement": "avance",
+    "geste": "bras_ouverts"
+   },
+   {
+    "mouvement": "fixe",
+    "plan": "serre",
+    "reaction": "sceptique",
+    "replique": 5,
+    "geste": "croises"
+   },
+   {
+    "mouvement": "zoom_choc",
+    "plan": "serre",
+    "geste": "croises",
+    "replique": 10,
+    "reaction": "choc"
+   },
+   {
+    "mouvement": "fixe",
+    "plan": "serre",
+    "geste": "pointe_d",
+    "replique": 13,
+    "reaction": "colere"
+   }
+  ],
   "lieux": [
-   "magasin"
+   "salon"
+  ],
+  "personnages": {
+   "presentateur": {
+    "genre": "h",
+    "age": 30,
+    "taille": 1,
+    "corpulence": 0.5,
+    "cheveux": "chauve",
+    "barbe": "trois_jours"
+   },
+   "envoyee": {
+    "genre": "f",
+    "age": 28,
+    "taille": 1,
+    "corpulence": 0.6,
+    "cheveux": "ondule",
+    "barbe": "rien"
+   }
+  },
+  "cadence": "rapide",
+  "ambiances": [],
+  "moment": "jour",
+  "objets": [],
+  "gags": [
+   "Règle d'or : 50/50"
   ],
   "costumes": {
    "presentateur": {
     "haut": "tshirt",
-    "c_haut": "bleu marine",
+    "c_haut": "bleu",
     "motif": "uni",
-    "bas": "jean",
-    "chaussures": "baskets",
+    "bas": "short",
+    "chaussures": "chaussons",
+    "cheveux": "rase",
+    "c_cheveux": "blanc"
+   },
+   "envoyee": {
+    "haut": "robe",
+    "c_haut": "rose",
+    "motif": "uni",
+    "bas": "jupe",
+    "chaussures": "ballerines",
+    "cheveux": "ondule",
+    "c_cheveux": "chatain",
     "details": [
-     "barbe_courte",
-     "bracelets"
-    ],
-    "chapeau": null,
-    "cheveux": "court",
-    "c_cheveux": "brun"
-   },
-   "invite": {
-    "haut": "chemise",
-    "c_haut": "blanc",
-    "motif": "rayures",
-    "bas": "pantalon",
-    "chaussures": "ville",
-    "details": [
-     "moustache",
-     "montres"
-    ],
-    "chapeau": null,
-    "cheveux": "court_texture",
-    "c_cheveux": "roux"
+     "lunettes_vue",
+     "collier",
+     "rouge_levres"
+    ]
    }
-  },
-  "personnages": [
-   {
-    "genre": "h",
-    "age": 35,
-    "taille": 1,
-    "corpulence": 0.7,
-    "cheveux": "court",
-    "barbe": "trois_jours"
-   },
-   {
-    "genre": "h",
-    "age": 32,
-    "taille": 0.95,
-    "corpulence": 0.8,
-    "cheveux": "court_texture",
-    "barbe": "moustache"
-   }
-  ],
-  "objets": [
-   {
-    "replique": 2,
-    "objet": "bouteille"
-   },
-   {
-    "replique": 14,
-    "objet": "bouteille"
-   },
-   {
-    "replique": 28,
-    "objet": "billet"
-   }
-  ],
-  "gags": [
-   "Achetez en gros, économisez !",
-   "Red Bull : L'énergie à prix d'or !",
-   "Amis : 45€, Ennemis : 0€"
-  ],
-  "ambiances": [
-   "neon"
-  ],
-  "cadence": "rapide",
-  "plans": [
-   {
-    "replique": 0,
-    "plan": "moyen",
-    "mouvement": "fixe",
-    "geste": "bras_ouverts",
-    "reaction": "neutre"
-   },
-   {
-    "replique": 1,
-    "plan": "moyen",
-    "mouvement": "fixe",
-    "geste": "gratte_tete",
-    "reaction": "neutre"
-   },
-   {
-    "replique": 2,
-    "plan": "serre",
-    "mouvement": "avance",
-    "geste": "pointe_d",
-    "reaction": "choc"
-   },
-   {
-    "replique": 3,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "poches",
-    "reaction": "sceptique"
-   },
-   {
-    "replique": 4,
-    "plan": "large",
-    "mouvement": "fixe",
-    "geste": "haussement",
-    "reaction": "neutre"
-   },
-   {
-    "replique": 5,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "pointe_g",
-    "reaction": "blase"
-   },
-   {
-    "replique": 6,
-    "plan": "moyen",
-    "mouvement": "fixe",
-    "geste": "bras_ouverts",
-    "reaction": "joie"
-   },
-   {
-    "replique": 7,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "pointe_g",
-    "reaction": "blase"
-   },
-   {
-    "replique": 8,
-    "plan": "serre",
-    "mouvement": "avance",
-    "geste": "pointe_d",
-    "reaction": "colere"
-   },
-   {
-    "replique": 9,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "sourire_sarcastique",
-    "reaction": "sceptique"
-   },
-   {
-    "replique": 14,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "exaspéré",
-    "reaction": "colere"
-   },
-   {
-    "replique": 28,
-    "plan": "serre",
-    "mouvement": "zoom_choc",
-    "geste": "pointe_d",
-    "reaction": "choc"
-   }
-  ],
-  "decors_vus": {
-   "presentateur": "magasin épicerie avec des bouteilles de boissons énergisantes, des étiquettes de prix, une caisse enregistreuse et des rayons remplis de produits alimentaires.",
-   "invite": "magasin épicerie avec des bouteilles de Red Bull, des étagères de produits et une caisse enregistreuse en arrière-plan."
   }
  },
  "doublage": {
-  "piste": "/tmp/tmpi6opgb40/piste.wav",
-  "duree": 60.3,
-  "source": "https://www.tiktok.com/@vignianimation/video/7682124897128074529",
-  "auteur": "vignianimation",
-  "contexte": "Deux amis se retrouvent dans un magasin d'épicerie où une discussion tendue éclate autour d'un achat exagérément cher. Le présentateur, frustré, refuse de payer le prix demandé par son ami, l'invite, qui insiste sur le prix abusif des produits.",
+  "piste": "/tmp/tmpugon8of2/piste.wav",
+  "duree": 27.28,
+  "source": "https://www.tiktok.com/@kodanimation/video/7675147524562226464",
+  "auteur": "kodanimation",
+  "contexte": "Dans le salon, un couple se dispute après que l'homme exige des excuses en retour suite à son premier pas.",
   "evenements": [],
   "visuel": {
-   "gestes": [
-    [
-     3.0,
-     0.66,
-     0.86
-    ],
-    [
-     5.0,
-     0.66,
-     1.0
-    ],
-    [
-     13.5,
-     0.66,
-     1.0
-    ],
-    [
-     22.0,
-     0.66,
-     1.0
-    ],
-    [
-     26.5,
-     0.66,
-     0.84
-    ],
-    [
-     29.5,
-     0.66,
-     0.83
-    ],
-    [
-     32.5,
-     0.66,
-     1.0
-    ],
-    [
-     34.5,
-     0.66,
-     1.0
-    ],
-    [
-     38.5,
-     0.65,
-     1.0
-    ],
-    [
-     44.0,
-     0.66,
-     1.0
-    ],
-    [
-     47.0,
-     0.66,
-     0.85
-    ],
-    [
-     48.5,
-     0.65,
-     0.9
-    ],
-    [
-     49.5,
-     0.65,
-     1.0
-    ],
-    [
-     54.5,
-     0.66,
-     1.0
-    ]
-   ],
-   "duree": 60.5,
-   "nb_plans": 7,
-   "duree_plan": 8.64,
+   "gestes": [],
+   "duree": 27.5,
+   "nb_plans": 3,
+   "duree_plan": 9.17,
    "coupes": [
-    6.5,
-    10.5,
-    19.0,
-    19.5,
-    20.5,
-    21.0
+    20.0,
+    20.5
    ],
    "plans": {
     "tres_serre": 0.0,
     "serre": 0.0,
-    "moyen": 0.264,
-    "large": 0.736
+    "moyen": 0.018,
+    "large": 0.982
    },
    "camera": {
-    "fixe": 0.719,
-    "avance": 0.132,
-    "recul": 0.14,
-    "travelling": 0.009,
-    "epaule": 0.0
+    "fixe": 0.481,
+    "avance": 0.096,
+    "recul": 0.077,
+    "travelling": 0.115,
+    "epaule": 0.231
    },
    "nb_personnes": 1,
-   "personnes": [
-    {
-     "place": "droite",
-     "presence": 0.264,
-     "habit": [
-      94,
-      96,
-      91
-     ],
-     "cheveux": [
-      28,
-      28,
-      28
-     ],
-     "sourire": 0.0,
-     "taille": 0.095,
-     "tete_penchee": 0.3,
-     "regard_cote": 0.0
-    }
-   ],
+   "personnes": [],
    "visages": true,
    "sourires": 0.0,
-   "energie": 0.654,
+   "energie": 0.377,
    "mur": [
-    197,
-    160,
-    123
+    252,
+    252,
+    252
    ],
    "palette": [
     [
-     205,
-     168,
-     129,
-     0.333
+     253,
+     253,
+     253,
+     0.905
     ],
     [
-     174,
-     142,
-     108,
-     0.242
+     111,
+     85,
+     92,
+     0.023
     ],
     [
-     71,
-     66,
-     46,
-     0.177
-    ],
-    [
-     133,
-     102,
-     75,
-     0.136
-    ],
-    [
-     21,
-     18,
+     16,
+     13,
      14,
-     0.07
+     0.023
     ],
     [
-     246,
-     240,
-     235,
-     0.043
+     197,
+     196,
+     197,
+     0.02
+    ],
+    [
+     73,
+     110,
+     181,
+     0.018
+    ],
+    [
+     209,
+     62,
+     96,
+     0.011
     ]
    ],
    "lumiere": {
-    "luminosite": 154.2,
-    "chaleur": 54.7,
-    "saturation": 90.9
+    "luminosite": 241.5,
+    "chaleur": -0.2,
+    "saturation": 7.8
    },
-   "moment": "soir"
+   "moment": "jour"
   },
   "audio": {
-   "duree": 60.3,
+   "duree": 27.3,
    "nb_voix": 2,
    "voix": [
     {
-     "hz": 140,
-     "genre": "h",
-     "part": 0.68
+     "hz": 192,
+     "genre": "f",
+     "part": 0.57
     },
     {
-     "hz": 143,
-     "genre": "h",
-     "part": 0.32
+     "hz": 245,
+     "genre": "f",
+     "part": 0.43
     }
    ],
-   "debit": 5.62,
-   "blanc_moyen": 0.29,
-   "coupes": 5,
-   "dynamique_db": 24.3,
-   "cris": 0.012,
+   "debit": 5.46,
+   "blanc_moyen": 0.38,
+   "coupes": 2,
+   "dynamique_db": 23.8,
+   "cris": 0.048,
    "musique": null,
    "impacts": 0,
    "impacts_10s": 0.0,
@@ -699,17 +361,17 @@
    "sur_vanne": 0,
    "evenements": {},
    "emotions": {
-    "'[colere": 6,
-    "\"[colere": 5,
-    "\"[neutre": 4,
-    "'[neutre": 3,
-    "'[blase": 2,
-    "'[choc": 2,
-    "\"[ironique": 2,
-    "\"[sceptique": 1
+    "hesitant": 2,
+    "annoyed": 2,
+    "angry": 2,
+    "affectionate": 1,
+    "neutral": 1,
+    "ironic": 1,
+    "confused": 1,
+    "sarcastic": 1
    }
   },
-  "video_origine": "/tmp/tmpi6opgb40/src.mp4"
+  "video_origine": "/tmp/tmpugon8of2/src.mp4"
  },
  "fiche": {
   "note": 0,
@@ -721,17 +383,7 @@
      0,
      1,
      2,
-     3
-    ],
-    "lieu": "",
-    "son": "",
-    "duree": 0.0,
-    "decor": "magasin épicerie avec des rayons remplis de bouteilles d'eau, boissons énergisantes, et étagères de produits alimentaires, caisse enregistreuse allumée.",
-    "titre": "Scène 1 : L'échange initial"
-   },
-   {
-    "scene": "2",
-    "repliques": [
+     3,
      4,
      5,
      6,
@@ -747,88 +399,34 @@
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "même magasin épicerie, mais avec un focus sur les boissons énergisantes et les étiquettes de prix.",
-    "titre": "Scène 2 : La négociation"
-   },
-   {
-    "scene": "3",
-    "repliques": [
-     15,
-     16,
-     17,
-     18,
-     19,
-     20,
-     21,
-     22,
-     23,
-     24,
-     25,
-     26,
-     27,
-     28,
-     29,
-     30,
-     31,
-     32
-    ],
-    "lieu": "",
-    "son": "",
-    "duree": 0.0,
-    "decor": "même magasin épicerie, avec une caisse enregistreuse en premier plan et des clients en arrière-plan.",
-    "titre": "Scène 3 : La rupture"
+    "decor": "White minimalist living room with plain backdrop"
    }
   ]
  },
  "_monte": true,
  "_voix_hz": {
-  "presentateur": 134,
-  "invite": 130
+  "presentateur": 197,
+  "envoyee": 235
  },
  "_voix_genre": {
   "presentateur": "h",
-  "invite": "h"
+  "envoyee": "f"
  },
  "realisation": {
-  "moment": "soir",
+  "moment": "jour",
   "lieux": [
-   "magasin",
-   "magasin",
-   "magasin"
+   "salon"
   ],
   "gags": [
-   "Achetez en gros, économisez !",
-   "Red Bull : L'énergie à prix d'or !",
-   "Amis : 45€, Ennemis : 0€"
+   "Règle d'or : 50/50"
   ],
-  "ambiances": [
-   "neon",
-   "poussiere"
-  ],
+  "ambiances": [],
   "source": "auteur+image",
   "tenues": {
    "presentateur": "tshirt",
-   "invite": "chemise"
+   "envoyee": "robe"
   },
   "plans": [
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
    "large/fixe",
    "large/fixe",
    "large/fixe",

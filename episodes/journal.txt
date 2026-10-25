@@ -2,14 +2,14 @@ Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, ElevenLabs epuise — IA utilisée : mistral
 Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @motiontoonz, @same_same53, @charly.bse, @kodanimation, @vignianimation, @vincedessine
-Profil TikTok @vignianimation : 39 vidéo(s) jamais utilisée(s)
+Profil TikTok @kodanimation : 32 vidéo(s) jamais utilisée(s)
 Profil TikTok @charly.bse : 37 vidéo(s) jamais utilisée(s)
-Profil TikTok @motiontoonz : 37 vidéo(s) jamais utilisée(s)
-Vidéo depuis TikTok : https://www.tiktok.com/@vignianimation/video/7682124897128074529
+Profil TikTok @vincedessine : 36 vidéo(s) jamais utilisée(s)
+Vidéo depuis TikTok : https://www.tiktok.com/@kodanimation/video/7675147524562226464
   son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 60.3 s, compte d'origine @vignianimation
-[ WARN:0@16.434] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
-  image de la vidéo : 7 plans (≈ 8.64 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 26 %, large 73 % ; caméra : fixe 71 %, avance 13 %, recul 14 %, travelling 0 % ; 1 personne(s) à l'écran : droite (habit [94, 96, 91], cheveux [28, 28, 28], sourit 0 %) ; agitation 0.654 ; lumière soir ; fond [197, 160, 123]
+  son récupéré : 27.3 s, compte d'origine @kodanimation
+[ WARN:0@15.074] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  image de la vidéo : 3 plans (≈ 9.17 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 1 %, large 98 % ; caméra : fixe 48 %, avance 9 %, recul 7 %, travelling 11 %, epaule 23 % ; 1 personne(s) à l'écran : aucun visage repéré ; agitation 0.377 ; lumière jour ; fond [252, 252, 252]
   isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
   transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/core/io.py:48: UserWarning: 
@@ -19,45 +19,38 @@ torchcodec is not installed correctly so built-in audio decoding will fail. Solu
 
 Could not load this library: /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/torchcodec/libtorchcodec_image.so
   warnings.warn(
-[0;93m2026-10-25 19:10:33.136688762 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[0;93m2026-10-25 19:26:44.576456136 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1913.)
   std = sequences.std(dim=-1, correction=1)
-  voix séparées par pyannote : 2 voix, 11 tours de parole
+  voix séparées par pyannote : 2 voix, 15 tours de parole
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-  voix re-séparées par leur empreinte (ECAPA) : 2 voix (netteté 0.12)
-  voix vérifiées mot par mot : 12 mot(s) remis sur la bonne voix
-  33 répliques, voix : {'speaker_0': 140, 'speaker_1': 143}
-  son de la vidéo : 2 voix [140 Hz (h, 68 %), 143 Hz (h, 32 %)], 5.62 mots/s, blancs 0.29 s, 5 coupure(s) de parole, dynamique 24.3 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
+  voix vérifiées mot par mot : 8 mot(s) remis sur la bonne voix
+  15 répliques, voix : {'speaker_0': 192, 'speaker_1': 245}
+  son de la vidéo : 2 voix [192 Hz (f, 56 %), 245 Hz (f, 43 %)], 5.46 mots/s, blancs 0.38 s, 2 coupure(s) de parole, dynamique 23.8 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
+  scène reconstituée : Dans le salon, un couple se dispute après que l'homme exige des excuses en retour suite à son premier pas.
+  casting : speaker_0 → Jojo, speaker_1 → Lila
+  sous-titres : 14 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
+Sketch : « DISPUTE DE COUPLE 50/50 », 15 répliques
+  décor 0 (lieu ressemblant de la banque, budget Modal du mois atteint) : White minimalist living room with plain backdrop, bright day
+montage : 1 plans (0.0:large>pre/coupe)
+studio : jour, lieux ['salon'], tenues presentateur=tshirt, envoyee=robe, 0 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 30.8 s, 15 répliques, 1 scène(s), personnages ['presentateur', 'envoyee']
+montage : 1 plans (0.0:large>pre/coupe)
+studio : jour, lieux ['salon'], tenues presentateur=tshirt, envoyee=robe, 0 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 30.8 s, 15 répliques, 1 scène(s), personnages ['presentateur', 'envoyee']
+  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~462 images)
+  morceau 1388–1850 reçu d'une machine d'aide
+  morceau 925–1388 reçu d'une machine d'aide
+  morceau 462–925 reçu d'une machine d'aide
+  dessin partagé terminé en 6.9 min
+Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
   IA gemini indisponible (gemini 429 : [{
   "error": {
     "code": 429,
     "message": "You exceeded your current quota, please check your plan an) : on passe à la suivante
-  scène reconstituée : Deux amis se retrouvent dans un magasin d'épicerie où une discussion tendue éclate autour d'un achat exagérément cher. Le présentateur, frustré, refuse de payer le prix demandé par son ami, l'invite, qui insiste sur le prix abusif des produits.
-  casting : speaker_0 → Jojo, speaker_1 → Kévin
-  sous-titres : 17 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
-  8 réattribution(s) de l'IA refusée(s) : la voix de ces répliques est reconnue avec certitude
-Sketch : « ACHAT TENDU EN ÉPICERIE », 33 répliques
-  décor 0 : magasin épicerie avec des rayons remplis de bouteilles d'eau, boissons
-  décor 1 : même magasin épicerie, mais avec un focus sur les boissons énergisante
-  décor 2 : même magasin épicerie, avec une caisse enregistreuse en premier plan e
-montage : 3 plans (0.0:large>pre/coupe 10.4:large>pre/coupe 26.6:large>pre/coupe)
-studio : soir, lieux ['magasin', 'magasin', 'magasin'], tenues presentateur=tshirt, invite=chemise, 3 figurant(s), ambiances ['neon', 'poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 63.9 s, 33 répliques, 3 scène(s), personnages ['presentateur', 'invite']
-Contrôle image : 2 défaut(s) — 26.75 s tete_coupee (presentateur), 26.75 s tete_coupee (invite)
-montage : 3 plans (0.0:large>pre/coupe 10.4:large>pre/coupe 26.6:large>pre/coupe)
-studio : soir, lieux ['magasin', 'magasin', 'magasin'], tenues presentateur=tshirt, invite=chemise, 3 figurant(s), ambiances ['neon', 'poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 63.9 s, 33 répliques, 3 scène(s), personnages ['presentateur', 'invite']
-Contrôle image : 2 défaut(s) — 26.75 s tete_coupee (presentateur), 26.75 s tete_coupee (invite)
-  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~957 images)
-  morceau 958–1916 reçu d'une machine d'aide
-  morceau 2873–3831 reçu d'une machine d'aide
-  morceau 1916–2873 reçu d'une machine d'aide
-  dessin partagé terminé en 5.3 min
-Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury qualité (ia) : 6.9/10 — Humoriste 7.0/10 : 0.4 s La chute finale manque de punch. Le zoom choc sur le personnage qui dit 'Tu es un voleur' est absent, ce qui réduit l'impact comique.; 12.9 s L'humour repose souvent sur les réactions de l'invité, mais celles-ci sont trop peu marquées ou absentes.; 57.0 s Le gag de la fin ('Je vais chez l'autre') pourrait être renforcé par un bruitage ou une musique comique. | Réalisateur 6.0/10 : 0.4 s Montage trop lent avec seulement 0.5 plans toutes les 10 secondes. Il faudrait accélérer le rythme pour maintenir l'attention.; 6.4 s Tête du présentateur coupée par le bord de l'image, ce qui nuit à la lisibilité et à l'immersion.; 20.9 s Manque de plans de réaction de l'invité pour renforcer les échanges.; 26.8 s tête de presentateur coupée par le bord de l'image (large) | Directeur artistique 8.0/10 : 0 s Les personnages ont des traits nets et un style cohérent, mais le décor p
-Manque par rapport à la vidéo d'origine : Les personnages de l'original ont des expressions faciales plus variées et des gestes plus dynamiques (ex : le présentateur en uniforme de supermarché). ; L'ambiance sonore originale inclut des bruitages de magasin (étiquettes, caisses) qui renforcent l'immersion. ; Les sous-titres originaux sont plus courts et mieux espacés pour une lecture fluide.
+Jury qualité (ia) : 5.8/10 — Humoriste 6.0/10 : 25.8 s La chute finale manque de puissance et de réactivité. Le public n'a pas assez de temps pour réagir à la réplique 'Moi, je sais pas me remettre en question ?'.; 0 s L'humour pourrait être renforcé par des regards caméra ou des réactions plus marquées dès les premières répliques.; 15.7 s La réplique 'T'as le culot de venir vers moi...' manque d'une réaction visuelle forte pour accentuer le côté comique. | Réalisateur 5.0/10 : 0 s Montage trop lent. Les plans devraient être plus dynamiques pour maintenir l'attention.; 6.9 s Manque de plans de réaction pour le personnage qui écoute, ce qui donne un côté statique à la scène.; 30.2 s La fin de la vidéo manque de fluidité et de dynamisme. Un dernier plan percutant pourrait améliorer l'impact. | Directeur artistique 7.0/10 : 0 s Les personnages ont un style cohérent, mais les tenues pourraient être légèrement ajustées p
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = mistral ×2, voix = tiktok, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 29194, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 39}
-Quota de l'API GitHub : 4771 appels restants
-OK : sortie/2026-10-25_20h13_emission.mp4 (64 s)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = gemini ×1, mistral ×1, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 24000, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0}
+Quota de l'API GitHub : 4680 appels restants
+OK : sortie/2026-10-25_20h29_emission.mp4 (31 s)

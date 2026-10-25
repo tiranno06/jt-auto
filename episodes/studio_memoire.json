@@ -2397,39 +2397,34 @@
   "cadence": "normal"
  },
  {
-  "moment": "soir",
+  "moment": "jour",
   "lieux": [
-   "magasin",
-   "magasin",
-   "magasin"
+   "salon"
   ],
   "source": "auteur+image",
-  "duree": 63.9,
+  "duree": 30.8,
   "plans": {
-   "large": 33
+   "large": 15
   },
   "mouvements": {
-   "fixe": 33
+   "fixe": 15
   },
   "costumes": {
    "presentateur": "tshirt",
-   "invite": "chemise"
+   "envoyee": "robe"
   },
-  "figurants": 3,
-  "ambiances": [
-   "neon",
-   "poussiere"
-  ],
-  "controle": "Humoriste 7.0/10 : 0.4 s La chute finale manque de punch. Le zoom choc sur le personnage qui dit 'Tu es un voleur' est absent, ce qui réduit l'impact comique.; 12.9 s L'humour repose souvent sur les r",
-  "fichier": "2026-10-25_20h13_emission.mp4",
+  "figurants": 0,
+  "ambiances": [],
+  "controle": "Humoriste 6.0/10 : 25.8 s La chute finale manque de puissance et de réactivité. Le public n'a pas assez de temps pour réagir à la réplique 'Moi, je sais pas me remettre en question ?'.; 0 s L'humour p",
+  "fichier": "2026-10-25_20h29_emission.mp4",
   "cine": {
    "focus": false,
    "vertige": false,
-   "tiers": true,
+   "tiers": false,
    "etalonnage": true,
    "profondeur": false,
    "grain": true,
-   "reflets": false,
+   "reflets": true,
    "son": true
   },
   "cadence": "rapide"
