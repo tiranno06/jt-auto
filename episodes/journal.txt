@@ -2,14 +2,18 @@ Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, ElevenLabs epuise — IA utilisée : mistral
 Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @motiontoonz, @same_same53, @charly.bse, @kodanimation, @vignianimation, @vincedessine
-Profil TikTok @same_same53 : 38 vidéo(s) jamais utilisée(s)
-Profil TikTok @motiontoonz : 37 vidéo(s) jamais utilisée(s)
+  profil @same_same53 : liste impossible (HTTP Error 403: Forbidden)
+Profil TikTok @same_same53 : 0 vidéo(s) jamais utilisée(s)
+  profil @motiontoonz : liste impossible (HTTP Error 403: Forbidden)
+Profil TikTok @motiontoonz : 0 vidéo(s) jamais utilisée(s)
+Profil TikTok @yan_animation0 : 33 vidéo(s) jamais utilisée(s)
 Profil TikTok @charly.bse : 38 vidéo(s) jamais utilisée(s)
-Vidéo depuis TikTok : https://www.tiktok.com/@same_same53/video/7699802718549871904
+Profil TikTok @vignianimation : 39 vidéo(s) jamais utilisée(s)
+Vidéo depuis TikTok : https://www.tiktok.com/@yan_animation0/video/7683899238467636513
   son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 67.7 s, compte d'origine @same_same53
-[ WARN:0@15.636] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
-  image de la vidéo : 1 plans (≈ 68.0 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 0 %, large 100 % ; caméra : fixe 100 % ; 0 personne(s) à l'écran : aucun visage repéré ; agitation 0.363 ; lumière jour ; fond [1, 1, 1]
+  son récupéré : 90.6 s, compte d'origine @yan_animation0
+[ WARN:0@43.259] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  image de la vidéo : 1 plans (≈ 91.0 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 58 %, large 41 % ; caméra : fixe 93 %, avance 1 %, recul 2 %, epaule 3 % ; 5 personne(s) à l'écran : gauche (habit [85, 22, 21], cheveux [208, 150, 102], sourit 0 %); centre (habit [74, 62, 61], cheveux [19, 10, 8], sourit 0 %); droite (habit [134, 83, 60], cheveux [54, 46, 43], sourit 0 %) ; agitation 0.346 ; lumière nuit ; fond [0, 0, 0]
   isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
   transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/core/io.py:48: UserWarning: 
@@ -19,63 +23,41 @@ torchcodec is not installed correctly so built-in audio decoding will fail. Solu
 
 Could not load this library: /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/torchcodec/libtorchcodec_image.so
   warnings.warn(
-[0;93m2026-10-25 16:37:21.864679622 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/VMBUS:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[0;93m2026-10-25 17:07:49.076524425 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1913.)
   std = sequences.std(dim=-1, correction=1)
-  voix séparées par pyannote : 2 voix, 49 tours de parole
+  voix séparées par pyannote : 4 voix, 48 tours de parole
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-  voix vérifiées mot par mot : 29 mot(s) remis sur la bonne voix
-  26 répliques, voix : {'speaker_0': None, 'speaker_1': None}
-  son de la vidéo : 2 voix [None Hz (?, 56 %), None Hz (?, 44 %)], 3.23 mots/s, blancs 0.34 s, 9 coupure(s) de parole, dynamique 14.4 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
+  une voix en trop (presque muette) rattachée à la plus proche
+  une voix en trop (presque muette) rattachée à la plus proche
+  voix vérifiées mot par mot : 62 mot(s) remis sur la bonne voix
+  40 répliques, voix : {'speaker_0': 162, 'speaker_1': 223}
+  son de la vidéo : 2 voix [162 Hz (h, 63 %), 223 Hz (f, 37 %)], 4.54 mots/s, blancs 0.3 s, 6 coupure(s) de parole, dynamique 18.1 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
+  scène reconstituée : Dans une salle de classe, un professeur totalement décomplexé et sans filtre distribue les moyennes du deuxième trimestre au pur favoritisme et aux vannes méchantes.
+  casting : speaker_0 → Jojo, speaker_1 → Lila
+  sous-titres : 35 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
+Sketch : « FAVORITISME SCOLAIRE », 40 répliques
+  décor 0 : classroom with wooden teacher desk, chalkboard on wall, stack of repor
+montage : 1 plans (0.0:large>pre/coupe)
+studio : jour, lieux ['classe'], tenues presentateur=costume, envoyee=pull, 1 figurant(s), ambiances ['neon'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 94.1 s, 40 répliques, 1 scène(s), personnages ['presentateur', 'envoyee']
+montage : 1 plans (0.0:large>pre/coupe)
+studio : jour, lieux ['classe'], tenues presentateur=costume, envoyee=pull, 1 figurant(s), ambiances ['neon'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 94.1 s, 40 répliques, 1 scène(s), personnages ['presentateur', 'envoyee']
+  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~1411 images)
+  morceau 1412–2824 reçu d'une machine d'aide
+  morceau 2824–4235 reçu d'une machine d'aide
+  morceau 4235–5647 reçu d'une machine d'aide
+  dessin partagé terminé en 5.6 min
+Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
   IA gemini indisponible (gemini 429 : [{
   "error": {
     "code": 429,
     "message": "You exceeded your current quota, please check your plan an) : on passe à la suivante
-  IA mistral indisponible (The read operation timed out) : on passe à la suivante
-  mise en scène automatique impossible (credit balance : aucune IA disponible (gemini : gemini 429 : [{
-  "error": {
-    "code": 429,
-    "message": "You exceeded your current quota, please ) : une seule scène, casting par la hauteur des voix
-  casting : speaker_0 → Jojo, speaker_1 → Kévin
-Sketch : « TOI, T 'ES MON FILS. », 26 répliques
-montage : 1 plans (0.0:large>pre/coupe)
-studio : jour, lieux ['salon'], tenues presentateur=capuche, invite=chemise, 0 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 70.1 s, 26 répliques, 1 scène(s), personnages ['presentateur', 'invite']
-montage : 1 plans (0.0:large>pre/coupe)
-studio : jour, lieux ['salon'], tenues presentateur=capuche, invite=chemise, 0 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 70.1 s, 26 répliques, 1 scène(s), personnages ['presentateur', 'invite']
-  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~1051 images)
-  morceau 1051–2102 reçu d'une machine d'aide
-  morceau 3154–4205 reçu d'une machine d'aide
-  morceau 2102–3154 reçu d'une machine d'aide
-  dessin partagé terminé en 4.6 min
-Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury qualité (ia) : 6.8/10 — Humoriste 8.6/10 : 57.9 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 6.6/10 : montage trop lent : 0.1 plans toutes les 10 s (il en faudrait ~2.8); 57.9 s pas assez de plans de réaction de celui qui écoute | Directeur artistique 5.3/10 : presentateur est appelé « fiston / mon fils » mais il est dessiné en adulte; invite est appelé « fiston / mon fils » mais il est dessiné en adulte | Ingénieur du son 10.0/10 :  | Spectateur TikTok 5.0/10 : 69.5 s La fin n'est pas assez mémorable pour inciter à partager.
-Manque par rapport à la vidéo d'origine : Les personnages dans la vidéo originale sont plus expressifs avec des expressions faciales variées et des mouvements de caméra dynamiques. ; Les plans de réaction de l'invitée sont plus fréquents et mieux intégrés. ; Les bruitages et les effets sonores sont mieux placés pour renforcer l'humour. ; Les décors et tenues des personnages dans l'original sont plus cohérents avec l'âge des personnages (ados). ; La synchronisation des sous-titres est plus précise et lisible. ; Les plans serrés et les zooms choc sont utilisés plus souvent pour renforcer les moments clés.
-Corrections du jury (tour 1) : réaction « sceptique » à la réplique 26 ; casting de presentateur : age 15 ; casting de invite : age 15
-montage : 1 plans (0.0:large>pre/coupe)
-studio : jour, lieux ['salon'], tenues presentateur=capuche, invite=chemise, 0 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 70.1 s, 26 répliques, 1 scène(s), personnages ['presentateur', 'invite']
-  image 300/4205 (4 processeurs)
-  image 600/4205
-  image 900/4205
-  image 1200/4205
-  image 1500/4205
-  image 1800/4205
-  image 2100/4205
-  image 2400/4205
-  image 2700/4205
-  image 3000/4205
-  image 3300/4205
-  image 3600/4205
-  image 3900/4205
-  image 4200/4205
-Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury qualité (ia) : 5.8/10 — Humoriste 6.0/10 : 0.4 s La chute finale manque de punch. Le moment où l'on découvre que le présentateur est la mère n'est pas assez mis en valeur.; 69.5 s Aucun regard caméra ou réaction exagérée pour renforcer l'humour de la chute.; 13.6 s Les vannes sur 'ton père' pourraient être plus drôles avec un bruitage ou un effet visuel. | Réalisateur 5.0/10 : 0.0 s Montage trop lent. Il manque des plans serrés ou des réactions pour dynamiser les échanges.; 21.7 s Peu de plans de réaction de l'invitée, ce qui rend le dialogue moins vivant.; 65.6 s Faux raccord possible entre les plans 15 et 16 à cause d'un changement de décor non justifié. | Directeur artistique 7.0/10 : 0.0 s Les personnages ont un style cohérent, mais le décor du salon pourrait être plus détaillé pour renforcer l'immersion.; 55.8 s L'absence de personnages supplémentaires (comme le petit frère mentionné) appauvrit l'histoire.
-Manque par rapport à la vidéo d'origine : Personnages supplémentaires (comme le petit frère) manquants dans certains plans. ; Absence de bruitages pour renforcer les moments clés. ; Variation des tenues des personnages limitée. ; Décor moins détaillé que dans l'original, notamment pour le salon. ; Réactions visuelles moins marquées (ex : regards caméra, gestes exagérés).
-La version corrigée n'est pas meilleure : on garde la première.
+Jury qualité (ia) : 6.9/10 — Humoriste 7.0/10 : 0.4 s La chute finale ('On est bon ? / Est-ce que c'est bon pour vous ?') manque de réactivité visuelle. Un zoom choc sur le personnage qui répondrait serait nécessaire pour renforcer l'humour.; 14.4 s Les répliques 'Je sais pas, 16 ?' et 'Ouais, je te mets 18' pourraient être plus drôles avec une réaction exagérée du personnage féminin.; 85.2 s Le gag final manque d'un bruitage ou d'un effet sonore pour marquer le contraste entre les répliques. | Réalisateur 6.0/10 : 0 s Montage trop lent avec seulement 0.1 plan toutes les 10 secondes. Il faudrait accélérer le rythme pour maintenir l'attention.; 24.8 s Les plans de réaction de l'élève sont insuffisants, ce qui affaiblit l'interaction comique.; 93.5 s Faux raccord entre les images 15 et 16, où le personnage disparaît et réapparaît sans transition. | Directeur artistique 8.0/10 : 0 s Les personnages secondaires (les élè
+Manque par rapport à la vidéo d'origine : Les personnages de l'original ont des expressions plus variées et des réactions immédiates (ex. : réactions de surprise ou de colère). ; Dans l'original, les décors sont plus détaillés et reflètent mieux l'ambiance scolaire (ex. : tableaux noirs avec des inscriptions humoristiques).
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = mistral ×2, voix = tiktok, decors = dessines, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 28814, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0}
-Quota de l'API GitHub : 4932 appels restants
-OK : sortie/2026-10-25_17h42_emission.mp4 (70 s)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = gemini ×1, mistral ×1, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 25030, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 32}
+Quota de l'API GitHub : 4833 appels restants
+OK : sortie/2026-10-25_18h13_emission.mp4 (94 s)
