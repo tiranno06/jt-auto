@@ -6775,19 +6775,19 @@
    "nb_voix": 2,
    "voix": [
     {
-     "hz": 200,
-     "genre": "f",
-     "part": 0.84
+     "hz": 174,
+     "genre": "?",
+     "part": 0.44
     },
     {
-     "hz": 141,
-     "genre": "h",
-     "part": 0.16
+     "hz": 216,
+     "genre": "f",
+     "part": 0.56
     }
    ],
-   "debit": 6.19,
-   "blanc_moyen": 0.23,
-   "coupes": 11,
+   "debit": 6.23,
+   "blanc_moyen": 0.19,
+   "coupes": 22,
    "dynamique_db": 19.9,
    "cris": 0.002,
    "musique": null,
@@ -6798,14 +6798,14 @@
    "sur_vanne": 0,
    "evenements": {},
    "emotions": {
-    "skeptical": 2,
-    "annoyed": 2,
-    "confused": 2,
-    "explaining": 1,
-    "cheerful": 1,
-    "disgusted": 1,
-    "indignant": 1,
-    "hesitant": 1
+    "enerve": 6,
+    "sceptique": 4,
+    "explique": 4,
+    "gene": 4,
+    "colere": 3,
+    "reflechit": 3,
+    "joyeux": 2,
+    "confused": 2
    }
   },
   "claude": {
@@ -6815,73 +6815,79 @@
    "moment": "jour",
    "costumes": {
     "presentateur": {
-     "haut": "chemise",
-     "c_haut": "blanc",
-     "motif": "uni",
      "bas": "pantalon",
+     "c_bas": "noir",
+     "c_chapeau": "noir",
+     "c_haut": "blanc",
      "chaussures": "ville",
+     "cheveux": "court",
+     "c_cheveux": "chatain",
      "details": [
+      "badge",
       "barbe_courte"
      ],
-     "cheveux": "court",
-     "c_cheveux": "chatain"
+     "haut": "chemise",
+     "motif": "uni"
     },
     "invite": {
-     "haut": "pull",
-     "c_haut": "beige",
-     "motif": "uni",
-     "bas": "jean",
-     "chaussures": "baskets",
-     "details": [],
-     "chapeau": "casquette",
+     "bas": "pantalon",
+     "c_bas": "beige",
      "c_chapeau": "noir",
+     "c_haut": "blanc",
+     "chaussures": "baskets",
+     "chapeau": "casquette",
      "cheveux": "court",
-     "c_cheveux": "chatain"
+     "c_cheveux": "chatain",
+     "details": [
+      "badge",
+      "barbe_courte"
+     ],
+     "haut": "pull",
+     "motif": "uni"
     }
    },
    "objets": [],
    "gags": [
-    "Affiche Tecktonik 2007 au mur",
-    "Guide de survie parent-ado"
+    "Post-it sur le frigo : 'Interdit de faire des battles d'aura dans le salon'"
    ],
    "ambiances": [
-    "neon"
+    "poussiere"
    ],
    "plans": [
     {
-     "mouvement": "fixe",
-     "reaction": "sceptique",
-     "plan": "serre",
      "replique": 0,
-     "geste": "gratte_tete"
+     "mouvement": "fixe",
+     "plan": "tres_serre"
     },
     {
-     "geste": "stop",
-     "mouvement": "zoom_choc",
-     "replique": 3,
-     "plan": "tres_serre",
-     "reaction": "facepalm"
-    },
-    {
-     "plan": "moyen",
-     "geste": "bras_ouverts",
-     "replique": 11,
-     "reaction": "yeux_au_ciel",
-     "mouvement": "recul"
-    },
-    {
-     "reaction": "gene",
-     "geste": "facepalm",
+     "mouvement": "recule",
      "plan": "serre",
-     "mouvement": "avance",
-     "replique": 22
+     "replique": 1
     },
     {
-     "mouvement": "zoom_choc",
-     "replique": 33,
-     "geste": "haussement",
+     "replique": 2,
+     "mouvement": "avance",
+     "plan": "tres_serre"
+    },
+    {
+     "replique": 3,
+     "mouvement": "fixe",
+     "plan": "serre"
+    },
+    {
      "plan": "tres_serre",
-     "reaction": "choc"
+     "replique": 4,
+     "mouvement": "recule"
+    },
+    {
+     "mouvement": "fixe",
+     "plan": "tres_serre",
+     "replique": 18
+    },
+    {
+     "replique": 34,
+     "plan": "tres_serre",
+     "mouvement": "avance"
     }
    ]
   },
@@ -6891,55 +6897,56 @@
     "salon"
    ],
    "gags": [
-    "Affiche Tecktonik 2007 au mur",
-    "Guide de survie parent-ado"
+    "Post-it sur le frigo : 'Interdit de faire des battles d'aura dans le salon'"
    ],
    "ambiances": [
-    "neon",
-    "pluie"
+    "pluie",
+    "poussiere"
    ],
    "source": "auteur+image",
    "tenues": {
-    "invite": "pull",
-    "presentateur": "chemise"
+    "presentateur": "chemise",
+    "invite": "pull"
    },
    "plans": [
-    "serre/fixe",
-    "serre/travelling",
-    "serre/avance",
-    "tres_serre/zoom_choc",
-    "serre/recul",
-    "serre/travelling",
-    "contre_plongee/epaule",
-    "tres_serre/avance",
-    "serre/avance",
-    "epaule/fixe",
-    "epaule/fixe",
-    "moyen/recul",
-    "contre_plongee/epaule",
-    "epaule/fixe",
-    "tres_serre/travelling",
-    "epaule/fixe",
-    "serre/avance",
-    "serre/travelling",
-    "tres_serre/avance",
-    "contre_plongee/epaule",
-    "tres_serre/travelling",
-    "serre/avance",
-    "serre/avance",
-    "serre/travelling",
-    "serre/travelling",
-    "serre/travelling",
-    "serre/recul",
-    "tres_serre/avance",
-    "tres_serre/travelling",
-    "serre/travelling",
-    "epaule/fixe",
-    "epaule/fixe",
-    "serre/travelling",
-    "tres_serre/zoom_choc"
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe"
    ]
   },
-  "video": "2026-10-25_09h35_emission.mp4"
+  "video": "2026-10-25_13h14_emission.mp4"
  }
 ]
