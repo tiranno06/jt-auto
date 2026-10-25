@@ -5573,123 +5573,151 @@
    "sur_vanne": 0,
    "evenements": {},
    "emotions": {
-    "curious": 1,
-    "innocent": 1,
-    "nervous": 1,
-    "explaining": 1,
-    "awkward": 1,
-    "confident": 1,
+    "reassuring": 2,
+    "amused": 1,
     "confused": 1,
-    "matter-of-fact": 1
+    "excited": 1,
+    "sarcastic": 1,
+    "nodding": 1,
+    "emphatic": 1,
+    "puzzled": 1
    }
   },
   "claude": {
    "lieux": [
+    "cuisine",
     "salon"
    ],
    "moment": "jour",
    "costumes": {
-    "envoyee": {
-     "haut": "tshirt",
-     "c_haut": "bleu",
-     "motif": "uni",
-     "bas": "short",
-     "chaussures": "baskets",
-     "details": [],
-     "cheveux": "court",
-     "c_cheveux": "chatain"
-    },
-    "invite": {
-     "haut": "tshirt",
-     "c_haut": "rose",
+    "presentateur": {
+     "haut": "chemise",
+     "c_haut": "bleu marine",
      "motif": "uni",
      "bas": "pantalon",
+     "chaussures": "ville",
+     "details": [
+      "cravate",
+      "lunettes_vue"
+     ]
+    },
+    "invite": {
+     "haut": "robe",
+     "c_haut": "rose",
+     "motif": "uni",
+     "bas": "jupe",
      "chaussures": "ballerines",
      "details": [
-      "lunettes_vue",
       "collier",
-      "rouge_levres"
-     ],
-     "cheveux": "ondule",
-     "c_cheveux": "chatain"
+      "boucles_oreilles"
+     ]
     }
    },
-   "objets": [],
+   "objets": [
+    {
+     "replique": 1,
+     "objet": "cendrier"
+    },
+    {
+     "replique": 7,
+     "objet": "bouteille"
+    },
+    {
+     "replique": 9,
+     "objet": "telephone"
+    }
+   ],
    "gags": [
-    "Post-it sur le frigo : Ne pas oublier de remercier la voisine"
+    "\"Cendrier : le nouveau gymnase de papa\"",
+    "\"Ne pas confondre : gonfler = mauvais, dégonfler = bon\"",
+    "\"La voisine : experte en regonflage\""
    ],
    "ambiances": [
-    "poussiere"
+    "vapeur"
    ],
    "plans": [
     {
-     "mouvement": "fixe",
-     "plan": "large",
      "replique": 0,
-     "reaction": "sceptique",
-     "geste": "bras_ouverts"
-    },
-    {
-     "reaction": "gene",
-     "geste": "explique",
      "plan": "moyen",
      "mouvement": "fixe",
-     "replique": 1
+     "geste": "bras_ouverts",
+     "reaction": "regard_camera"
     },
     {
-     "mouvement": "avance",
-     "replique": 2,
+     "replique": 1,
      "plan": "serre",
-     "reaction": "choc",
-     "geste": "mains_hanches"
+     "mouvement": "fixe",
+     "geste": "gratte_tete",
+     "reaction": "choc"
     },
     {
-     "plan": "epaule",
+     "replique": 2,
+     "plan": "tres_serre",
+     "mouvement": "zoom_choc",
+     "geste": "pointe_g",
+     "reaction": "sceptique"
+    },
+    {
      "replique": 3,
+     "plan": "large",
      "mouvement": "fixe",
      "geste": "explique",
+     "reaction": "aucune"
+    },
+    {
+     "replique": 4,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "nodding",
+     "reaction": "joie"
+    },
+    {
+     "replique": 5,
+     "plan": "tres_serre",
+     "mouvement": "zoom_choc",
+     "geste": "pointe_d",
+     "reaction": "choc"
+    },
+    {
+     "replique": 6,
+     "plan": "moyen",
+     "mouvement": "fixe",
+     "geste": "desespoir",
      "reaction": "gene"
     },
     {
-     "mouvement": "fixe",
-     "geste": "haussement",
-     "reaction": "sceptique",
-     "replique": 4,
-     "plan": "serre"
+     "replique": 7,
+     "plan": "serre",
+     "mouvement": "avance",
+     "geste": "pointe_g",
+     "reaction": "panique"
     },
     {
-     "mouvement": "fixe",
-     "replique": 6,
-     "plan": "epaule",
-     "geste": "explique",
-     "reaction": "facepalm"
-    },
-    {
-     "reaction": "choc",
-     "plan": "tres_serre",
-     "geste": "pointe_d",
-     "mouvement": "zoom_choc",
-     "replique": 7
-    },
-    {
-     "plan": "tres_serre",
      "replique": 8,
-     "geste": "desespoir",
+     "plan": "tres_serre",
      "mouvement": "zoom_choc",
+     "geste": "cri",
      "reaction": "choc"
+    },
+    {
+     "replique": 9,
+     "plan": "large",
+     "mouvement": "recule",
+     "geste": "mains_hanches",
+     "reaction": "soupir"
     },
     {
      "replique": 10,
      "plan": "serre",
-     "geste": "poing",
-     "mouvement": "avance",
-     "reaction": "regard_camera"
+     "mouvement": "fixe",
+     "geste": "reassuring",
+     "reaction": "joie"
     },
     {
      "replique": 11,
-     "plan": "tres_serre",
+     "plan": "moyen",
      "mouvement": "fixe",
-     "geste": "croises",
+     "geste": "bras_ouverts",
      "reaction": "regard_camera"
     }
    ]
@@ -5697,35 +5725,38 @@
   "realisation": {
    "moment": "jour",
    "lieux": [
+    "cuisine",
     "salon"
    ],
    "gags": [
-    "Post-it sur le frigo : Ne pas oublier de remercier la voisine"
+    "\"Cendrier : le nouveau gymnase de papa\"",
+    "\"Ne pas confondre : gonfler = mauvais, dégonfler = bon\"",
+    "\"La voisine : experte en regonflage\""
    ],
    "ambiances": [
     "pluie",
-    "poussiere"
+    "vapeur"
    ],
    "source": "auteur+image",
    "tenues": {
-    "envoyee": "tshirt",
-    "invite": "tshirt"
+    "presentateur": "chemise",
+    "invite": "robe"
    },
    "plans": [
+    "moyen/fixe",
+    "serre/fixe",
+    "tres_serre/zoom_choc",
     "large/fixe",
+    "serre/fixe",
+    "tres_serre/zoom_choc",
     "moyen/fixe",
     "serre/avance",
-    "epaule/fixe",
+    "tres_serre/zoom_choc",
+    "large/fixe",
     "serre/fixe",
-    "large/avance",
-    "epaule/fixe",
-    "tres_serre/zoom_choc",
-    "tres_serre/zoom_choc",
-    "large/travelling",
-    "serre/avance",
-    "tres_serre/fixe"
+    "moyen/fixe"
    ]
   },
-  "video": "2026-10-25_02h02_emission.mp4"
+  "video": "2026-10-25_02h54_emission.mp4"
  }
 ]

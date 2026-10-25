@@ -1,112 +1,103 @@
 {
- "titre": "LA VOISINE ET LE VENTRE DE PAP",
- "sujet": "LA VOISINE ET LE VENTRE DE PAP",
- "ecran": "LA VOISINE ET ",
+ "titre": "VENTRE QUI GONFLE ET DÉGONFLE",
+ "sujet": "VENTRE QUI GONFLE ET DÉGONFLE",
+ "ecran": "VENTRE QUI GON",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "Quand ton fils balance son père",
- "question": "Vous feriez quoi à la place de la mère ?",
+ "titre_accroche": "POV : Quand votre voisine s'en mêle",
+ "question": "Qui va finalement régler le problème du ventre de papa ?",
  "running_gag": "",
  "verite": "",
  "repliques": [
   {
-   "p": "envoyee",
+   "p": "presentateur",
    "t": "Hé maman! Oui mon coeur!",
    "_deb": 0.0,
-   "_fin": 1.7,
-   "d": "[curious] Hé maman! Oui mon coeur!"
+   "_fin": 1.7
   },
   {
    "p": "invite",
    "t": "Tu sais, la dernière fois quand je suis rentré dans votre cendres, et que tu sautais sur le ventre de papa?",
    "_deb": 1.9,
-   "_fin": 5.64,
-   "d": "[innocent] Tu sais, la dernière fois quand je suis rentré dans votre cendres, et que tu sautais sur le ventre de papa?"
+   "_fin": 5.64
   },
   {
-   "p": "envoyee",
+   "p": "presentateur",
    "t": "Oui, oui, oui, oui, oui! Eh ben, qu 'est -ce qu 'il y a?",
    "_deb": 5.76,
-   "_fin": 8.36,
-   "d": "[nervous] Oui, oui, oui, oui, oui! Eh ben, qu 'est -ce qu 'il y a?"
+   "_fin": 8.36
   },
   {
    "p": "invite",
    "t": "Bah tu m 'as dit que c 'était pour dégonfler le ventre de papa!",
    "_deb": 8.62,
-   "_fin": 11.1,
-   "d": "[explaining] Bah tu m 'as dit que c 'était pour dégonfler le ventre de papa!"
+   "_fin": 11.1
   },
   {
-   "p": "envoyee",
+   "p": "presentateur",
    "t": "Hum, hum, hum, oui",
    "_deb": 11.2,
-   "_fin": 12.18,
-   "d": "[awkward] Hum, hum, hum, oui"
+   "_fin": 12.18
   },
   {
    "p": "invite",
    "t": "c 'est ça, c 'est ça, c 'est pour dégonfler le ventre de papa!",
    "_deb": 12.18,
-   "_fin": 14.32,
-   "d": "[confident] c 'est ça, c 'est ça, c 'est pour dégonfler le ventre de papa!"
+   "_fin": 14.32
   },
   {
    "p": "invite",
    "t": "Mais alors moi je comprends pas! Bah en fait qu 'est -ce que tu comprends pas mon chéri?",
    "_deb": 14.44,
-   "_fin": 17.22,
-   "d": "[confused] Mais alors moi je comprends pas! Bah en fait qu 'est -ce que tu comprends pas mon chéri?"
+   "_fin": 17.22
   },
   {
    "p": "invite",
    "t": "Bah ce matin je suis allé dans un cendres de papa, et il y avait la voisine qui était en train de lui regonfler",
    "_deb": 17.34,
    "_fin": 21.52,
-   "d": "[matter-of-fact] Bah ce matin je suis allé dans un cendres de papa, et il y avait la voisine qui était en train de lui regonfler"
+   "objet": "bouteille"
   },
   {
-   "p": "envoyee",
+   "p": "presentateur",
    "t": "le ventre!",
    "_deb": 21.52,
-   "_fin": 22.1,
-   "d": "[shocked] le ventre!"
+   "_fin": 22.1
   },
   {
    "p": "invite",
    "t": "Bah du coup si elle fait ça c 'est pas très gentil, papa il arrivera jamais à dégonfler son ventre!",
    "_deb": 23.62,
    "_fin": 27.28,
-   "d": "[pouting] Bah du coup si elle fait ça c 'est pas très gentil, papa il arrivera jamais à dégonfler son ventre!"
+   "objet": "telephone"
   },
   {
    "p": "invite",
    "t": "Si t 'inquiète pas, maman va bien s 'en occuper!",
    "_deb": 27.4,
-   "_fin": 29.54,
-   "d": "[furious] Si t 'inquiète pas, maman va bien s 'en occuper!"
+   "_fin": 29.54
   },
   {
    "p": "invite",
    "t": "Elle va bien s 'en occuper.",
    "_deb": 30.0,
    "_fin": 31.8,
-   "d": "[threatening] Elle va bien s 'en occuper.",
    "chute": true
   }
  ],
  "bandeau": [],
  "gag": null,
- "legende": "Quand la vérité sort de la bouche des enfants... La voisine va passer un sale quart d'heure !",
+ "legende": "Une discussion absurde sur le ventre de papa prend un tournant inattendu.",
  "hashtags": [
   "petitsdramas",
   "humour",
-  "infidelite",
-  "voisine",
-  "drole",
-  "couple"
+  "famille",
+  "absurde",
+  "debat",
+  "cuisine",
+  "voisins"
  ],
  "sources": [
   "https://www.tiktok.com/@kodanimation/video/7699286492669021472"
@@ -120,7 +111,17 @@
     2,
     3,
     4,
-    5,
+    5
+   ],
+   "lieu": "",
+   "son": "",
+   "duree": 0.0,
+   "decor": "cuisine avec une table en bois, une bouilloire fumante, des tasses et une corbeille de pain",
+   "titre": "Scène 1 : La discussion absurde"
+  },
+  {
+   "scene": "2",
+   "repliques": [
     6,
     7,
     8,
@@ -131,203 +132,180 @@
    "lieu": "",
    "son": "",
    "duree": 0.0,
-   "decor": "Cozy family living room with sofa, coffee table, potted plant, pastel walls",
-   "titre": "Révélation innocente"
+   "decor": "salon avec un canapé, une télévision allumée, un cendrier rempli et une bouteille de soda",
+   "titre": "Scène 2 : L'inquiétude de la voisine"
   }
  ],
  "studio": {
-  "objets": [],
-  "cadence": "normal",
+  "moment": "jour",
+  "lieux": [
+   "cuisine",
+   "salon"
+  ],
+  "costumes": {
+   "presentateur": {
+    "haut": "chemise",
+    "c_haut": "bleu marine",
+    "motif": "uni",
+    "bas": "pantalon",
+    "chaussures": "ville",
+    "details": [
+     "cravate",
+     "lunettes_vue"
+    ]
+   },
+   "invite": {
+    "haut": "robe",
+    "c_haut": "rose",
+    "motif": "uni",
+    "bas": "jupe",
+    "chaussures": "ballerines",
+    "details": [
+     "collier",
+     "boucles_oreilles"
+    ]
+   }
+  },
+  "personnages": {
+   "presentateur": {
+    "genre": "h",
+    "age": 55,
+    "taille": 1,
+    "corpulence": 0.7,
+    "cheveux": "court",
+    "c_cheveux": "brun",
+    "barbe": "trois_jours"
+   },
+   "invite": {
+    "genre": "f",
+    "age": 50,
+    "taille": 0.95,
+    "corpulence": 0.6,
+    "cheveux": "boucles",
+    "c_cheveux": "châtain",
+    "barbe": "rien"
+   }
+  },
+  "gags": [
+   "\"Cendrier : le nouveau gymnase de papa\"",
+   "\"Ne pas confondre : gonfler = mauvais, dégonfler = bon\"",
+   "\"La voisine : experte en regonflage\""
+  ],
+  "ambiances": [
+   "vapeur"
+  ],
+  "cadence": "rapide",
   "plans": [
    {
-    "mouvement": "fixe",
-    "plan": "large",
     "replique": 0,
-    "reaction": "sceptique",
-    "geste": "bras_ouverts"
-   },
-   {
-    "reaction": "gene",
-    "geste": "explique",
     "plan": "moyen",
     "mouvement": "fixe",
-    "replique": 1
+    "geste": "bras_ouverts",
+    "reaction": "regard_camera"
    },
    {
-    "mouvement": "avance",
-    "replique": 2,
+    "replique": 1,
     "plan": "serre",
-    "reaction": "choc",
-    "geste": "mains_hanches"
+    "mouvement": "fixe",
+    "geste": "gratte_tete",
+    "reaction": "choc"
    },
    {
-    "plan": "epaule",
+    "replique": 2,
+    "plan": "tres_serre",
+    "mouvement": "zoom_choc",
+    "geste": "pointe_g",
+    "reaction": "sceptique"
+   },
+   {
     "replique": 3,
+    "plan": "large",
     "mouvement": "fixe",
     "geste": "explique",
+    "reaction": "aucune"
+   },
+   {
+    "replique": 4,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "nodding",
+    "reaction": "joie"
+   },
+   {
+    "replique": 5,
+    "plan": "tres_serre",
+    "mouvement": "zoom_choc",
+    "geste": "pointe_d",
+    "reaction": "choc"
+   },
+   {
+    "replique": 6,
+    "plan": "moyen",
+    "mouvement": "fixe",
+    "geste": "desespoir",
     "reaction": "gene"
    },
    {
-    "mouvement": "fixe",
-    "geste": "haussement",
-    "reaction": "sceptique",
-    "replique": 4,
-    "plan": "serre"
+    "replique": 7,
+    "plan": "serre",
+    "mouvement": "avance",
+    "geste": "pointe_g",
+    "reaction": "panique"
    },
    {
-    "mouvement": "fixe",
-    "replique": 6,
-    "plan": "epaule",
-    "geste": "explique",
-    "reaction": "facepalm"
-   },
-   {
-    "reaction": "choc",
-    "plan": "tres_serre",
-    "geste": "pointe_d",
-    "mouvement": "zoom_choc",
-    "replique": 7
-   },
-   {
-    "plan": "tres_serre",
     "replique": 8,
-    "geste": "desespoir",
+    "plan": "tres_serre",
     "mouvement": "zoom_choc",
+    "geste": "cri",
     "reaction": "choc"
+   },
+   {
+    "replique": 9,
+    "plan": "large",
+    "mouvement": "recule",
+    "geste": "mains_hanches",
+    "reaction": "soupir"
    },
    {
     "replique": 10,
     "plan": "serre",
-    "geste": "poing",
-    "mouvement": "avance",
-    "reaction": "regard_camera"
+    "mouvement": "fixe",
+    "geste": "reassuring",
+    "reaction": "joie"
    },
    {
     "replique": 11,
-    "plan": "tres_serre",
+    "plan": "moyen",
     "mouvement": "fixe",
-    "geste": "croises",
+    "geste": "bras_ouverts",
     "reaction": "regard_camera"
    }
   ],
-  "lieux": [
-   "salon"
-  ],
-  "personnages": {
-   "envoyee": {
-    "genre": "h",
-    "age": 14,
-    "taille": 0.8,
-    "corpulence": 0.2,
-    "cheveux": "court",
-    "barbe": ""
-   },
-   "invite": {
-    "genre": "f",
-    "age": 38,
-    "taille": 1,
-    "corpulence": 0.6,
-    "cheveux": "ondule",
-    "barbe": ""
-   }
-  },
-  "gags": [
-   "Post-it sur le frigo : Ne pas oublier de remercier la voisine"
-  ],
-  "ambiances": [
-   "poussiere"
-  ],
-  "costumes": {
-   "envoyee": {
-    "haut": "tshirt",
-    "c_haut": "bleu",
-    "motif": "uni",
-    "bas": "short",
-    "chaussures": "baskets",
-    "details": [],
-    "cheveux": "court",
-    "c_cheveux": "chatain"
-   },
-   "invite": {
-    "haut": "tshirt",
-    "c_haut": "rose",
-    "motif": "uni",
-    "bas": "pantalon",
-    "chaussures": "ballerines",
-    "details": [
-     "lunettes_vue",
-     "collier",
-     "rouge_levres"
-    ],
-    "cheveux": "ondule",
-    "c_cheveux": "chatain"
-   }
-  },
-  "moment": "jour",
-  "decoupe": [
+  "objets": [
    {
     "replique": 1,
-    "plans": [
-     {
-      "debut": 0.0,
-      "plan": "serre",
-      "cible": "invite",
-      "mouvement": "avance"
-     }
-    ]
-   },
-   {
-    "replique": 3,
-    "plans": [
-     {
-      "debut": 0.0,
-      "plan": "serre",
-      "cible": "invite",
-      "mouvement": "avance"
-     }
-    ]
+    "objet": "cendrier"
    },
    {
     "replique": 7,
-    "plans": [
-     {
-      "debut": 0.0,
-      "plan": "moyen",
-      "cible": "invite",
-      "mouvement": "fixe"
-     }
-    ]
+    "objet": "bouteille"
    },
    {
     "replique": 9,
-    "plans": [
-     {
-      "debut": 0.0,
-      "plan": "moyen",
-      "cible": "invite",
-      "mouvement": "fixe"
-     }
-    ]
-   },
-   {
-    "replique": 11,
-    "plans": [
-     {
-      "debut": 0.0,
-      "plan": "moyen",
-      "cible": "invite",
-      "mouvement": "fixe"
-     }
-    ]
+    "objet": "telephone"
    }
-  ]
+  ],
+  "decors_vus": {
+   "presentateur": "cuisine avec une table en bois, une bouilloire fumante, des tasses et une corbeille de pain, lumière douce",
+   "invite": "salon avec un canapé, une télévision allumée, un cendrier rempli et une bouteille de soda, lumière ambiante"
+  }
  },
  "doublage": {
-  "piste": "/tmp/tmp_li64hbn/s40144708370_86774_f1.wav",
+  "piste": "/tmp/tmp8inynb4z/piste.wav",
   "duree": 31.84,
   "source": "https://www.tiktok.com/@kodanimation/video/7699286492669021472",
   "auteur": "kodanimation",
-  "contexte": "Dans le salon, un adolescent raconte innocemment à sa mère ce qu'il a vu faire par la voisine dans la chambre de son père.",
+  "contexte": "Une scène humoristique entre un père et sa mère, où ils discutent de manière absurde et décalée de l'inflation et du dégonflement du ventre du père, dans un cadre domestique. La mère semble s'inquiéter des actions de la voisine.",
   "evenements": [],
   "visuel": {
    "gestes": [],
@@ -433,17 +411,17 @@
    "sur_vanne": 0,
    "evenements": {},
    "emotions": {
-    "curious": 1,
-    "innocent": 1,
-    "nervous": 1,
-    "explaining": 1,
-    "awkward": 1,
-    "confident": 1,
+    "reassuring": 2,
+    "amused": 1,
     "confused": 1,
-    "matter-of-fact": 1
+    "excited": 1,
+    "sarcastic": 1,
+    "nodding": 1,
+    "emphatic": 1,
+    "puzzled": 1
    }
   },
-  "video_origine": "/tmp/tmp_li64hbn/s40144708370_86774_f2.mp4"
+  "video_origine": "/tmp/tmp8inynb4z/src.mp4"
  },
  "fiche": {
   "note": 0,
@@ -457,7 +435,17 @@
      2,
      3,
      4,
-     5,
+     5
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 0.0,
+    "decor": "cuisine avec une table en bois, une bouilloire fumante, des tasses et une corbeille de pain",
+    "titre": "Scène 1 : La discussion absurde"
+   },
+   {
+    "scene": "2",
+    "repliques": [
      6,
      7,
      8,
@@ -468,50 +456,53 @@
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "Cozy family living room with sofa, coffee table, potted plant, pastel walls",
-    "titre": "Révélation innocente"
+    "decor": "salon avec un canapé, une télévision allumée, un cendrier rempli et une bouteille de soda",
+    "titre": "Scène 2 : L'inquiétude de la voisine"
    }
   ]
  },
  "_monte": true,
  "_voix_hz": {
-  "envoyee": 156,
+  "presentateur": 156,
   "invite": 121
  },
  "_voix_genre": {
-  "envoyee": "h",
+  "presentateur": "h",
   "invite": "h"
  },
  "realisation": {
   "moment": "jour",
   "lieux": [
+   "cuisine",
    "salon"
   ],
   "gags": [
-   "Post-it sur le frigo : Ne pas oublier de remercier la voisine"
+   "\"Cendrier : le nouveau gymnase de papa\"",
+   "\"Ne pas confondre : gonfler = mauvais, dégonfler = bon\"",
+   "\"La voisine : experte en regonflage\""
   ],
   "ambiances": [
    "pluie",
-   "poussiere"
+   "vapeur"
   ],
   "source": "auteur+image",
   "tenues": {
-   "envoyee": "tshirt",
-   "invite": "tshirt"
+   "presentateur": "chemise",
+   "invite": "robe"
   },
   "plans": [
+   "moyen/fixe",
+   "serre/fixe",
+   "tres_serre/zoom_choc",
    "large/fixe",
+   "serre/fixe",
+   "tres_serre/zoom_choc",
    "moyen/fixe",
    "serre/avance",
-   "epaule/fixe",
+   "tres_serre/zoom_choc",
+   "large/fixe",
    "serre/fixe",
-   "large/avance",
-   "epaule/fixe",
-   "tres_serre/zoom_choc",
-   "tres_serre/zoom_choc",
-   "large/travelling",
-   "serre/avance",
-   "tres_serre/fixe"
+   "moyen/fixe"
   ]
  }
 }
