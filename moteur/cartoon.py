@@ -1705,7 +1705,11 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
         if limite and _time.time() > limite:
             if pool: pool.close(); pool.join()
             raise TempsDepasse(f"limite de temps proche ({len(termines)} bloc(s) dessinés)", termines)
-        c_ = f"{tmp}/bloc_{a_}_{b_}.mp4"; encoder_plage(a_, b_, c_, progres); termines.append((a_, b_, c_)); return c_
+        c_ = f"{tmp}/bloc_{a_}_{b_}.mp4"; encoder_plage(a_, b_, c_, progres); termines.append((a_, b_, c_))
+        if APRES_BLOC[0]:                                                  # point de sauvegarde : le bloc est mis à l'abri tout de suite
+            try: APRES_BLOC[0](a_, b_, c_)
+            except Exception as e_: print(f"  sauvegarde du bloc impossible ({e_})", flush=True)
+        return c_
     if morceaux is None and args0 is not None and DP.actif(nf):           # vidéo longue : dessin partagé entre plusieurs machines
         compte = [0]
         def suivi():
@@ -1757,6 +1761,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
                     "-c:v", "copy", "-c:a", "aac", "-b:a", "192k", "-shortest", "-movflags", "+faststart", sortie], check=True, timeout=900)
     return total
 
+APRES_BLOC = [None]                                                        # (début, fin, fichier) → appelé à chaque bloc fini (reprise.py)
 _IMAGE = None
 def _image_octets(fi):
     """Une image de la vidéo en cours (appelée dans les processus de rendu)."""

@@ -877,6 +877,31 @@ class TestPauseReprise(unittest.TestCase):
         self.assertEqual(RP.demandee(), (None, None))
 
 
+class TestReveilSecours(unittest.TestCase):
+    def test_relance_coupees_par_github_pas_par_l_auteur(self):
+        sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "moteur"))
+        import relance as R, time as T
+        t = T.strftime("%Y-%m-%dT%H:%M:%SZ", T.gmtime(T.time() - 3600)); vieux = T.strftime("%Y-%m-%dT%H:%M:%SZ", T.gmtime(T.time() - 9 * 3600))
+        runs = [{"id": 1, "status": "completed", "conclusion": "failure", "run_attempt": 1, "created_at": t},
+                {"id": 2, "status": "completed", "conclusion": "cancelled", "run_attempt": 1, "created_at": t},     # coupée par GitHub
+                {"id": 3, "status": "completed", "conclusion": "cancelled", "run_attempt": 1, "created_at": t},     # annulée par l'auteur
+                {"id": 4, "status": "completed", "conclusion": "failure", "run_attempt": 2, "created_at": t},       # déjà relancée
+                {"id": 5, "status": "completed", "conclusion": "failure", "run_attempt": 1, "created_at": vieux},   # trop ancienne
+                {"id": 6, "status": "completed", "conclusion": "success", "run_attempt": 1, "created_at": t}]
+        self.assertEqual(R.a_relancer(runs, T.time(), lambda i: i == 2), [1, 2])
+        self.assertTrue(R.COUPE_GITHUB.search("The job has exceeded the maximum execution time of 2h0m0s"))
+
+    def test_alertes_appareil_mort(self):
+        sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "moteur"))
+        import alerte
+        ancien = alerte.MORTS; alerte.MORTS = os.path.join(tempfile.mkdtemp(), "m.json")
+        try:
+            alerte.noter_mort("https://push.exemple/abc")
+            self.assertIn(alerte.empreinte("https://push.exemple/abc"), alerte.morts())
+            self.assertNotIn("push.exemple", open(alerte.MORTS).read())                         # jamais l'adresse elle-même
+        finally: alerte.MORTS = ancien
+
+
 class TestRelaisIA(unittest.TestCase):
     def test_bascule_claude_vers_mistral_puis_gemini(self):
         import json as _j, io, urllib.request, urllib.error, reseau

@@ -88,7 +88,7 @@ def menage(rel, garder=""):
     for a in fichiers(rel):
         import calendar
         age = time.time() - calendar.timegm(time.strptime(a["created_at"], "%Y-%m-%dT%H:%M:%SZ"))
-        vieux = age > (3 * 86400 if a["name"].startswith("s") else 6 * 3600)   # fabrication en pause (reprise.py) : gardée 3 jours
+        vieux = age > (3 * 86400 if a["name"].startswith(("s", "c")) else 6 * 3600)   # pause / point de sauvegarde (reprise.py) : 3 jours
         if vieux or (garder and a["name"].startswith(garder)): effacer(a)
 
 

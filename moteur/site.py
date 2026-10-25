@@ -89,6 +89,7 @@ def construire():
     conf = {"depot": os.environ.get("GITHUB_REPOSITORY", ""), "branche": os.environ.get("GITHUB_REF_NAME") or "main"}
     try:
         import profils_tiktok; conf["profils_connus"] = profils_tiktok.connus()   # liste de départ de l'onglet TikTok
+        conf["abos_morts"] = sorted(__import__("alerte").morts())         # appareils qui ne reçoivent plus les alertes (empreintes)
     except Exception: conf["profils_connus"] = []
     try: st = json.load(open(os.path.join(RACINE, "episodes", "stats.json"), encoding="utf-8"))
     except (OSError, ValueError): st = {}
@@ -987,6 +988,7 @@ async function chargerReglages(){
     champs().forEach(c=>{const val=(c.dataset.var in v)?v[c.dataset.var]:c.dataset.def;
       if(c.dataset.bascule) c.classList.toggle("on",String(val)!=="0"); else c.value=val;});
     chargerPerso(v); activer(true); majConnus(); $("#cfgEtat").textContent="Régie connectée ✓ — chaque changement est enregistré tout de suite.";
+    nettoyerAbos(v);
   }catch(e){$("#cfgEtat").textContent="Erreur : "+e.message+" — vérifiez la clé (droits Actions et Variables).";activer(false);
     if(/jeton refusé/.test(e.message)) $("#cfgConnexion").style.display=""}
 }
@@ -1151,6 +1153,16 @@ async function verifierEnCours(){
 }
 const b64u=b=>btoa(String.fromCharCode(...new Uint8Array(b))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
 const deB64u=s=>Uint8Array.from(atob(s.replace(/-/g,"+").replace(/_/g,"/")+"===".slice((s.length+3)%4)),c=>c.charCodeAt(0));
+async function nettoyerAbos(v){                                            // appareils disparus (signalés par le robot) : retirés de la liste
+  try{
+    const morts=new Set(CONF.abos_morts||[]); if(!morts.size) return; let l=[]; try{l=JSON.parse(v.PUSH_ABONNEMENTS||"[]")}catch(_){return}
+    const emp=async e=>Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256",new TextEncoder().encode(String(e))))).map(b=>b.toString(16).padStart(2,"0")).join("").slice(0,20);
+    const garde=[]; for(const a of l){if(!morts.has(await emp(a.endpoint))) garde.push(a)}
+    if(garde.length===l.length) return;
+    await ecrireVar("PUSH_ABONNEMENTS",JSON.stringify(garde)); v.PUSH_ABONNEMENTS=JSON.stringify(garde);
+    toast(garde.length?`🔔 ${l.length-garde.length} appareil(s) qui ne recevaient plus les alertes retiré(s)`:"🔔 Plus aucun appareil ne reçoit les alertes : réactivez les notifications (Réglages)");
+  }catch(e){}
+}
 $("#activerNotifs").onclick=async()=>{
   const z=$("#suiviNotif");
   try{
