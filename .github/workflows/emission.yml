@@ -89,6 +89,7 @@ jobs:
           sparse-checkout: |
             moteur/file_attente.py
             moteur/progression.py
+            moteur/quota.py
       - name: Attendre que les vidéos lancées avant soient finies
         env:
           GH_TOKEN: ${{ github.token }}
@@ -118,6 +119,7 @@ jobs:
       AZURE_SPEECH_KEY: ${{ secrets.AZURE_SPEECH_KEY }}
       AZURE_SPEECH_REGION: ${{ secrets.AZURE_SPEECH_REGION }}
       ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}                 # facultatif : clé Hugging Face gratuite → séparation des voix par pyannote
       ELEVENLABS_MODELE: ${{ vars.ELEVENLABS_MODELE }}
       ELEVENLABS: ${{ vars.ELEVENLABS }}
       BUFFER_API_KEY: ${{ secrets.BUFFER_API_KEY }}
@@ -227,11 +229,19 @@ jobs:
       - name: Bibliothèques Python
         run: pip install -r requirements.txt
 
+      - name: Modèles de reconnaissance vocale et d'empreinte en cache (Whisper large-v3-turbo, ECAPA)
+        if: startsWith(inputs.theme, 'TIKTOK::') || inputs.filiere == 'tiktok'
+        uses: actions/cache@v6
+        with:
+          path: ~/.cache/huggingface
+          key: hf-whisper-turbo-v1
+
       - name: Lecteur TikTok (vidéo depuis une bande son)
         if: startsWith(inputs.theme, 'TIKTOK::') || inputs.filiere == 'tiktok'
         run: |
           pip install -q -U "yt-dlp[default,curl-cffi]" faster-whisper   # Whisper gratuit : repli si ElevenLabs et Modal manquent de crédit
           (pip install -q torch torchaudio --index-url https://download.pytorch.org/whl/cpu && pip install -q speechbrain) || echo "empreinte vocale ECAPA indisponible : timbre MFCC"
+          if [ -n "$HF_TOKEN" ]; then pip install -q pyannote.audio || echo "pyannote indisponible : empreinte ECAPA seule"; fi   # séparation des voix (clé Hugging Face gratuite)
 
       - name: Déployer les voix (Chatterbox), la banque de voix et les décors sur Modal
         if: env.MODAL_TOKEN_ID != ''

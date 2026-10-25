@@ -140,6 +140,15 @@
   sauvegardés (release « dessins-temp », 3 jours) et une fabrication « Reprise d'une fabrication en pause » est relancée avec les
   mêmes réglages (entrée chaine = « suite:<nom>|<chaîne d'origine> »), en tête de file ; elle repart du bloc suivant (vidéo
   identique à l'image près). Essai : entrée rendu = essai_pause (pause après le 1er bloc).
+- **Améliorations d'octobre 2026, 3e liste (1-7, 9, 10 choisis par l'auteur)** : point de sauvegarde au fil du dessin (chaque bloc fini
+  déposé en arrière-plan ; une relance repart du dernier bloc : `reprise.poser_point`, `deposer_bloc`, `point_existant`) ; Réveil
+  de secours `moteur/relance.py` (relance aussi les fabrications annulées PAR GITHUB, jamais celles annulées par l'auteur) ; date
+  des fichiers à l'heure de Paris ; alertes : appareils disparus notés par empreinte (`episodes/abonnements_morts.json`) et retirés
+  par le site ; sous-titres : Whisper large-v3-turbo (en cache) + correction des mots mal entendus par l'IA (`doublage.corriger_textes`,
+  jamais de réécriture) ; pyannote si le secret HF_TOKEN (clé Hugging Face gratuite) est réglé (`locuteurs.pyannote`) ;
+  **pré-jury** : les règles sûres du jury appliquées avant de dessiner (`cartoon.rendre(plans_seuls=True)` + `qualite.jury_gratuit`,
+  PRE_JURY=0 pour couper) ; quota de l'API GitHub surveillé (`moteur/quota.py` : barre et file ralentissent, voyant sur la barre) ;
+  vidéos d'essai rangées à part (filtre « 🧪 Essais », historique "essai") et effacées au bout de 3 jours (garde → supprimer.yml ESSAIS).
 - **Bonne voix sur le bon personnage (sons TikTok)** : `locuteurs.affiner` vérifie qui parle MOT PAR MOT (empreinte vocale ECAPA
   autour de chaque mot, comparée à chaque voix, fil le plus probable façon Viterbi, 2-3 tours ; une « voix » presque muette est
   rattachée à la plus proche) puis `caler_sur_phrases` met chaque changement de personne sur la fin de phrase la plus proche

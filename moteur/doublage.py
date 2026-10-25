@@ -136,12 +136,13 @@ def transcrire(chemin, mono):
     return mots
 
 def whisper_local(mono):
-    """Repli 100 % gratuit : Whisper (faster-whisper, modèle « small ») tourne directement sur la machine GitHub, sans crédit."""
+    """Repli 100 % gratuit : Whisper (faster-whisper, modèle « large-v3-turbo » : bien moins de fautes que « small », ponctuation
+    juste) tourne directement sur la machine GitHub, sans crédit (modèle gardé en cache par le workflow)."""
     try:
         from faster_whisper import WhisperModel
         from scipy.signal import resample_poly
         a = resample_poly(np.asarray(mono, np.float32), 320, 441).astype(np.float32)   # 22 050 Hz -> 16 000 Hz
-        seg, _ = WhisperModel(os.environ.get("WHISPER_LOCAL", "small"), device="cpu", compute_type="int8").transcribe(
+        seg, _ = WhisperModel(os.environ.get("WHISPER_LOCAL", "large-v3-turbo"), device="cpu", compute_type="int8").transcribe(
             a, language="fr", word_timestamps=True, vad_filter=True)
         mots = [{"w": w.word.strip(), "s": float(w.start), "e": float(w.end), "voix": "speaker_0"} for x in seg for w in (x.words or []) if w.word.strip()]
         journal(f"  transcription gratuite (Whisper sur la machine) : {len(mots)} mots"); return mots
@@ -228,6 +229,9 @@ Avec l'outil doublage :
   Les répliques marquées « voix sûre » ont été reconnues à l'empreinte vocale : ne les change jamais.
   Voix de femme → Lila ; deux voix différentes → deux personnages différents ; au plus 3 personnages dessinés.
 - "contexte" : en 1 ou 2 phrases, la situation que tu reconstitues (qui, où, ce qui se passe), d'après ce qui est dit et le ton ;
+- "texte" : pour chaque réplique (même ordre, même nombre), le texte avec SEULEMENT les mots mal entendus par la reconnaissance
+  vocale corrigés (mots inventés, argot, noms, liaisons : « mille ballons rien » → « mille balles ou rien »), sans reformuler ni
+  résumer, ponctuation juste ; recopie la réplique telle quelle si elle est correcte ;
 - "d" : pour chaque réplique (même ordre, même nombre), l'émotion juste en indication anglaise entre crochets suivie du texte (« [annoyed] … ») ;
 - "decoupage" : 1 à 4 scènes (indices des répliques, toutes couvertes, dans l'ordre ; "decor" EN ANGLAIS sans personnage : lieu précis + 2 ou 3 objets,
   cohérent avec ce qui est dit ; "titre" = carton court seulement si la scène change de moment ou de lieu) ;
@@ -264,6 +268,7 @@ def _outil():
                 "casting": {"type": "array", "items": ecrire._schema({"voix": {"type": "string"}, "role": {"type": "string", "enum": list(ROLES)}}, ["voix", "role"])},
                 "roles": {"type": "array", "items": ecrire._schema({"replique": {"type": "integer"}, "role": {"type": "string", "enum": list(ROLES)}}, ["replique", "role"])},
                 "contexte": {"type": "string"}, "d": {"type": "array", "items": {"type": "string"}},
+                "texte": {"type": "array", "items": {"type": "string"}},
                 "decoupage": {"type": "array", "items": ecrire._schema({"repliques": {"type": "array", "items": {"type": "integer"}},
                                                                        "decor": {"type": "string"}, "titre": {"type": "string"}}, ["repliques"])},
                 "sujet": {"type": "string"}, "titre_accroche": {"type": "string"}, "legende": {"type": "string"}, "question": {"type": "string"},
@@ -303,6 +308,24 @@ def _casting_defaut(segs, hz):
         else: res[v] = next((r for r in hommes if r not in res.values()), "presentateur")
     return res
 
+def corriger_textes(segs, textes):
+    """Texte de chaque réplique corrigé par l'IA (mots mal entendus par la reconnaissance vocale), accepté seulement s'il reste très
+    proche de ce qui a été entendu (pas de réécriture) ; quand le nombre de mots est le même, les mots minutés (bouches) suivent."""
+    import difflib, ecrire
+    out = []
+    for k, s in enumerate(segs):
+        t = textes[k].strip() if k < len(textes) and isinstance(textes[k], str) else ""
+        a, b = " ".join(ecrire._mots_bruts(s["t"])), " ".join(ecrire._mots_bruts(t))
+        if not t or not b or abs(len(a.split()) - len(b.split())) > 3 or difflib.SequenceMatcher(None, a, b).ratio() < 0.6: out.append(s["t"]); continue
+        if t != s["t"]:
+            mots_t = t.split()
+            if len(mots_t) == len(s["mots"]):
+                for m_, w in zip(s["mots"], mots_t): m_["w"] = w
+        out.append(t)
+    n = sum(1 for o, s in zip(out, segs) if o != s["t"])
+    if n: journal(f"  sous-titres : {n} réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)")
+    return out
+
 def casting_unique(casting, segs, hz):
     """Deux voix différentes = deux personnages différents : si l'IA donne la même personne à deux voix, la voix qui parle le moins
     reçoit un personnage libre (du bon genre si possible). Sinon un personnage parlerait tantôt avec une voix d'homme, tantôt de femme."""
@@ -337,6 +360,12 @@ def preparer(url):
     voix_sig, chemin_voix = isoler(tmp)
     sig = voix_sig if voix_sig is not None and len(voix_sig) >= len(mono) * 0.9 else mono
     mots = transcrire(chemin_voix, mono)
+    try:                                                                   # pyannote (si la clé Hugging Face gratuite est réglée) :
+        import locuteurs                                                   # meilleure séparation des voix que la transcription gratuite
+        if len({m["voix"] for m in mots}) == 1:
+            p_ = locuteurs.pyannote(mots, sig)
+            if p_: mots = p_
+    except Exception as e: journal(f"  pyannote impossible ({str(e)[:120]})")
     try:                                                                   # voix proches confondues : on les re-sépare par leur empreinte
         import locuteurs; mots = locuteurs.rediariser(mots, sig)
     except Exception as e: journal(f"  re-séparation des voix impossible ({str(e)[:120]})")
@@ -377,10 +406,11 @@ def preparer(url):
         journal(f"  mise en scène automatique impossible ({str(e)[:150]}) : une seule scène, casting par la hauteur des voix")
     journal("  casting : " + ", ".join(f"{v} → {NOMS[r]}" for v, r in casting.items()))
     d = [str(x) for x in ecrire._liste(m.get("d"))]
+    corrige = corriger_textes(segs, [str(x) for x in ecrire._liste(m.get("texte"))])   # sous-titres sans fautes de reconnaissance
     reps = []
     for k, s in enumerate(segs):
-        r = {"p": casting.get(s["voix"], "presentateur"), "t": s["t"], "_deb": round(float(s["deb"]), 3), "_fin": round(float(s["fin"]), 3)}
-        if k < len(d) and ecrire._mots_bruts(re.sub(r"\[[^\]]*\]", " ", d[k])) == ecrire._mots_bruts(s["t"]): r["d"] = d[k]
+        r = {"p": casting.get(s["voix"], "presentateur"), "t": corrige[k], "_deb": round(float(s["deb"]), 3), "_fin": round(float(s["fin"]), 3)}
+        if k < len(d) and ecrire._mots_bruts(re.sub(r"\[[^\]]*\]", " ", d[k])) in (ecrire._mots_bruts(s["t"]), ecrire._mots_bruts(corrige[k])): r["d"] = d[k]
         reps.append(r)
     for o in ecrire._liste((m.get("studio") or {}).get("objets") if isinstance(m.get("studio"), dict) else []):   # objets vus dans la vidéo
         try:

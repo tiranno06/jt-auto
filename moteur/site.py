@@ -74,6 +74,7 @@ def construire():
         total += os.path.getsize(dest); comptes[cat] = comptes.get(cat, 0) + 1
         poster = e["fichier"].replace(".mp4", ".jpg"); affiche(dest, os.path.join(SITE, "videos", poster), (e.get("couverture_ms") or 4000) / 1000)
         liste.append(dict(titre=e.get("titre", ""), date=e.get("date", ""), fichier=e["fichier"], poster=poster, origine=origine(e),
+                          essai=bool(e.get("essai")) or str(e.get("titre", "")).startswith("👀 Aperçu"),
                           legende=e.get("legende", ""), publie=e.get("publie"), vues=e.get("vues"),
                           format=e.get("format", ""), manuel=bool(e.get("manuel")), avis=e.get("avis", 0), note=e.get("note"), note_auteur=e.get("note_auteur"),
                           programmee=e.get("programmee"), couts=e.get("couts") or {}, duree=e.get("duree"),
@@ -327,7 +328,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
  <div id="o-videos" style="display:none">
   <div class="filtres" id="filtres">
     <button class="chip on" data-f="tout">Toutes</button><button class="chip" data-f="court">⚡ Courtes</button><button class="chip" data-f="long">🎭 Longues</button>
-    <button class="chip" data-f="texte">✍️ Depuis un texte</button></div>
+    <button class="chip" data-f="texte">✍️ Depuis un texte</button><button class="chip" data-f="essais" title="Aperçus et essais : effacés tout seuls au bout de 3 jours">🧪 Essais</button></div>
   <div id="enteteTk" style="display:none" class="panneau"><b>🎵 Vidéos sur des sons TikTok</b> <button class="second" id="retourTk" style="flex:none;padding:8px 12px">← Onglet TikTok</button></div>
   <div id="liste"></div>
  </div>
@@ -705,8 +706,8 @@ function rendreStats(){
 }
 // filtre de l'onglet Vidéos : toutes, courtes, longues, depuis un TikTok, depuis un texte
 let FILTRE="tout";
-const passe=(v,f)=>f==="tiktok"?v.origine==="tiktok":(v.origine!=="tiktok"&&(f==="tout"||(f==="court"?v.format==="mini":f==="long"?v.format!=="mini":v.origine===f)));   // sons TikTok : à part
-const VIDE={tiktok:"Aucune vidéo sur un son TikTok pour l'instant.",tout:"Aucune vidéo pour l'instant : touchez « Créer une vidéo » dans l'Accueil.",court:"Aucune vidéo courte pour l'instant.",long:"Aucune vidéo longue pour l'instant.",
+const passe=(v,f)=>f==="essais"?!!v.essai:v.essai?false:f==="tiktok"?v.origine==="tiktok":(v.origine!=="tiktok"&&(f==="tout"||(f==="court"?v.format==="mini":f==="long"?v.format!=="mini":v.origine===f)));   // sons TikTok et essais : à part
+const VIDE={essais:"Aucun essai en ce moment (les aperçus et essais s'effacent seuls au bout de 3 jours).",tiktok:"Aucune vidéo sur un son TikTok pour l'instant.",tout:"Aucune vidéo pour l'instant : touchez « Créer une vidéo » dans l'Accueil.",court:"Aucune vidéo courte pour l'instant.",long:"Aucune vidéo longue pour l'instant.",
   texte:"Aucune vidéo faite depuis votre texte pour l'instant."};
 function carte(v,i,petite){
   const c=document.createElement("div");c.className="carte"+(petite?" petite":"");c.dataset.i=i;
@@ -725,20 +726,20 @@ function rendre(){
 function rendreRecents(){
   const R=$("#recents"); R.innerHTML="";
   if(!DATA.length){R.innerHTML='<p class="note">Pas encore de vidéo.</p>';$("#toutVoir").style.display="none";return}
-  DATA.map((v,i)=>[v,i]).filter(([v])=>v.origine!=="tiktok").sort(recentsDabord).slice(0,3).forEach(([v,i])=>{const c=carte(v,i,true); c.onclick=()=>{allerOnglet("videos","tout"); choisir(i);
+  DATA.map((v,i)=>[v,i]).filter(([v])=>v.origine!=="tiktok"&&!v.essai).sort(recentsDabord).slice(0,3).forEach(([v,i])=>{const c=carte(v,i,true); c.onclick=()=>{allerOnglet("videos","tout"); choisir(i);
     const x=document.querySelector(`#liste .carte[data-i="${i}"]`); if(x) x.scrollIntoView({block:"center"})}; R.appendChild(c)});
 }
 $("#toutVoir").onclick=()=>allerOnglet("videos","tout");
 function lireVus(){try{return new Set(JSON.parse(localStorage.getItem("tk_vus")||"[]"))}catch(e){return new Set()}}
 function majPointTk(){                                                     // nouvelle vidéo TikTok pas encore vue : point sur l'onglet + mot dans l'accueil
-  const vus=lireVus(), neuves=DATA.filter(v=>v.origine==="tiktok"&&!vus.has(v.fichier)&&(Date.now()-new Date(v.date).getTime())<4*86400000);
+  const vus=lireVus(), neuves=DATA.filter(v=>v.origine==="tiktok"&&!v.essai&&!vus.has(v.fichier)&&(Date.now()-new Date(v.date).getTime())<4*86400000);
   const b=document.querySelector('.onglet[data-o="tiktok"]'); if(b) b.querySelector(".ic").textContent="🎵"+(neuves.length?"🔴":"");   // point rouge à côté de l'icône (le nom tient dans sa case)
   const z=$("#nouveauTk"); if(z){z.style.display=neuves.length?"":"none"; z.innerHTML=neuves.length?`🎵 <b>${neuves.length} nouvelle${neuves.length>1?"s":""} vidéo${neuves.length>1?"s":""} TikTok</b> prête${neuves.length>1?"s":""} : « ${neuves[0].titre.replace(/[<>&]/g,"")} » <button class="second" style="flex:none;padding:8px 12px" onclick="allerOnglet('tiktok')">Voir</button>`:""}
 }
 function marquerVusTk(){try{const vus=lireVus(); DATA.filter(v=>v.origine==="tiktok").forEach(v=>vus.add(v.fichier)); localStorage.setItem("tk_vus",JSON.stringify([...vus].slice(-300)))}catch(e){} majPointTk()}
 function rendreTk(){                                                       // onglet TikTok : ses vidéos à lui
   const L=$("#listeTk"); L.innerHTML="";
-  const vis=DATA.map((v,i)=>[v,i]).filter(([v])=>v.origine==="tiktok").sort(recentsDabord);
+  const vis=DATA.map((v,i)=>[v,i]).filter(([v])=>v.origine==="tiktok"&&!v.essai).sort(recentsDabord);
   if(!vis.length){L.innerHTML='<p class="vide">Aucune vidéo sur un son TikTok pour l\'instant.</p>';return}
   vis.forEach(([v,i])=>{const c=carte(v,i,false); c.onclick=()=>{allerOnglet("videos","tiktok"); choisir(i)};
     c.querySelector(".croix").onclick=(ev)=>{ev.stopPropagation(); supprimer(i,c)}; L.appendChild(c)});   // ✕ : supprimer aussi depuis cet onglet

@@ -60,6 +60,15 @@ jobs:
         run: |
           # file d'attente « sons-tiktok » : un 2e lancement attend le 1er puis s'arrête (créneau déjà traité)
           gh workflow run emission.yml -R "$GITHUB_REPOSITORY" -f auto=1 -f filiere=tiktok && echo "Créneau TikTok : vidéo lancée."
+      - name: Ménage des vidéos d'essai (une fois par jour, vers 4 h du matin)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # aperçus 10 s, sketchs d'essai, essais de pause : effacés au bout de 3 jours (moteur/supprimer.py → menage_essais)
+          if [ "$(date -u +%H)" = "03" ] && [ "$(date -u +%M)" -lt 30 ]; then
+            gh workflow run supprimer.yml -R "$GITHUB_REPOSITORY" -f fichier=ESSAIS && echo "Ménage des essais lancé."
+          fi
+
       - name: Relancer une fabrication coupée par GitHub (machine arrêtée en pleine vidéo)
         env:
           GH_TOKEN: ${{ github.token }}

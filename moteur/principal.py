@@ -381,6 +381,16 @@ def main():
                 tech_ok, rapport_tech = S["tech"]
             else:
                 PR.PLAGE[:] = [40, 86]; PR.etape(40, "Dessin des images", forcer=True)
+                if not S and not test and os.environ.get("JURY", "1") != "0" and os.environ.get("PRE_JURY", "1") != "0":
+                    try:                                                   # pré-jury : les règles sûres du jury appliquées AVANT de dessiner
+                        import tempfile as _tf                             # (tête coupée, chevauchement, sous-titre sur un visage, chute
+                        cartoon.rendre(copy.deepcopy(sk), _tf.mkdtemp(), audios, mots=mots, decors=copy.deepcopy(decors), mini=fmt == "mini", plans_seuls=True)
+                        G_ = qualite.jury_gratuit(cartoon.RENDU, sk)        # sans zoom…) : la 2e version ne sert plus qu'aux remarques de l'IA
+                        corr_ = [r_["correction"] for v_ in G_.values() for r_ in v_["remarques"]
+                                 if isinstance(r_.get("correction"), dict) and r_["correction"].get("type") in ("plan", "reaction", "bruitage") and r_["poids"] >= 1.0]
+                        faites_ = qualite.corriger(sk, corr_) if corr_ else []
+                        if faites_: print("Pré-jury (avant de dessiner) : " + " ; ".join(faites_), flush=True); QUALITE["corrigees"] += faites_
+                    except Exception as e: print(f"Pré-jury impossible ({str(e)[:120]})", flush=True)
                 sk_avant, dec_avant = copy.deepcopy(sk), copy.deepcopy(decors)
                 point("v1", sk=sk_avant, decors=dec_avant)
                 try: duree = cartoon.rendre(sk, base + ".mp4", audios, mots=mots, decors=decors, mini=fmt == "mini", limite=limite_job(), deja=(S or {}).get("faits"))
@@ -486,6 +496,8 @@ def main():
         historique[-1]["refait_de"] = REFAIRE.split("|")[0]
         if ANCIEN and ANCIEN.get("manuel"): historique[-1]["manuel"] = True
     if AUTO: historique[-1]["auto"] = True
+    if test or (os.environ.get("APERCU_RAPIDE") or "") == "1" or (os.environ.get("RENDU") or "") == "essai_pause":
+        historique[-1]["essai"] = True                                     # essai : rangé à part sur le site, effacé au bout de 3 jours
     if DOUB: historique[-1]["filiere"] = "tiktok"                         # vidéo sur un son TikTok : rangée à part des sketchs
     if DOUB: historique[-1]["source_audio"] = sk["doublage"]["source"]; historique[-1]["theme"] = "Bande son : " + sk["doublage"]["source"]
     historique[-1]["couts"] = couts(); print(f"Dépenses : {historique[-1]['couts']}", flush=True)
@@ -518,6 +530,7 @@ def main():
     for n_ in [SUITE_NOM, RP.nom_point("v1"), RP.nom_point("v2")]:
         if n_: RP.nettoyer(n_)
     PR.fini(True)
+    print(f"Quota de l'API GitHub : {__import__('quota').resume()}", flush=True)
     print(f"OK : {base}.mp4 ({duree:.0f} s)")
 
 if __name__ == "__main__":

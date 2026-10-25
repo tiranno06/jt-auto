@@ -328,3 +328,45 @@ def affiner(mots, sig, sr=SR):
     for m, v in zip(mots, lab_v): m["voix"] = noms[v]
     if change: print(f"  voix vérifiées mot par mot : {change} mot(s) remis sur la bonne voix", flush=True)
     return mots
+
+
+def mots_par_tours(mots, tours):
+    """Chaque mot reçoit la personne qui parle le plus longtemps pendant ce mot (tours = [(début, fin, personne)]) ; un mot hors de
+    tout tour prend la personne du tour le plus proche. Personnes renommées speaker_0, speaker_1… dans l'ordre d'apparition."""
+    if not tours: return mots
+    noms = {}
+    for m in mots:
+        rec = {}
+        for a, b, p in tours:
+            r = min(b, m["e"]) - max(a, m["s"])
+            if r > 0: rec[p] = rec.get(p, 0) + r
+        p = max(rec, key=rec.get) if rec else min(tours, key=lambda x: min(abs(x[0] - m["e"]), abs(x[1] - m["s"])))[2]
+        m["voix"] = noms.setdefault(p, f"speaker_{len(noms)}")
+    return mots
+
+
+def pyannote(mots, sig, sr=SR):
+    """Qui parle quand, par pyannote (outil spécialisé, gratuit) : seulement si le secret HF_TOKEN (clé Hugging Face gratuite) est
+    réglé et l'outil installé ; sinon None (on garde l'empreinte vocale ECAPA). Renvoie les mots avec leur voix."""
+    jeton = os.environ.get("HF_TOKEN")
+    if not jeton or os.environ.get("PYANNOTE", "1") == "0": return None
+    try:
+        import torch
+        from pyannote.audio import Pipeline
+    except Exception: return None
+    pipe = None
+    for nom in ("pyannote/speaker-diarization-community-1", "pyannote/speaker-diarization-3.1"):
+        try:
+            try: pipe = Pipeline.from_pretrained(nom, token=jeton)
+            except TypeError: pipe = Pipeline.from_pretrained(nom, use_auth_token=jeton)
+            if pipe is not None: break
+        except Exception as e: print(f"  pyannote {nom} indisponible ({str(e)[:100]})", flush=True)
+    if pipe is None: return None
+    from scipy.signal import resample_poly
+    s16 = resample_poly(np.asarray(sig, np.float32), 320, 441) if sr == 22050 else np.asarray(sig, np.float32)
+    res = pipe({"waveform": torch.tensor(s16, dtype=torch.float32)[None], "sample_rate": 16000}, min_speakers=1, max_speakers=4)
+    ann = getattr(res, "speaker_diarization", res)
+    tours = [(float(t.start), float(t.end), str(p)) for t, _, p in ann.itertracks(yield_label=True)]
+    if len({p for _, _, p in tours}) < 1: return None
+    print(f"  voix séparées par pyannote : {len({p for _, _, p in tours})} voix, {len(tours)} tours de parole", flush=True)
+    return mots_par_tours([dict(m) for m in mots], tours)
