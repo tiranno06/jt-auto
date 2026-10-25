@@ -1,11 +1,15 @@
 Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, ElevenLabs epuise — IA utilisée : mistral
-Vidéo depuis TikTok : https://www.tiktok.com/@eliotlehanneur/video/7673915679715724576?_r=1&_t=ZN-9ATSODCDG4c
+Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @motiontoonz, @same_same53, @charly.bse, @kodanimation, @vignianimation, @vincedessine
+Profil TikTok @charly.bse : 39 vidéo(s) jamais utilisée(s)
+Profil TikTok @eliotlehanneur : 38 vidéo(s) jamais utilisée(s)
+Profil TikTok @vincedessine : 37 vidéo(s) jamais utilisée(s)
+Vidéo depuis TikTok : https://www.tiktok.com/@charly.bse/video/7649401581833588000
   son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 132.1 s, compte d'origine @eliotlehanneur
-[ WARN:0@8.825] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
-  image de la vidéo : 40 plans (≈ 3.31 s chacun) ; cadrages : très serré 97 %, serré 0 %, moyen 0 %, large 3 % ; caméra : fixe 92 %, avance 2 %, recul 0 %, travelling 0 %, epaule 4 % ; 1 personne(s) à l'écran : centre (habit [92, 60, 57], cheveux [90, 51, 30], sourit 0 %) ; agitation 0.327 ; lumière soir ; fond [187, 183, 184]
+  son récupéré : 67.1 s, compte d'origine @charly.bse
+[ WARN:0@16.350] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  image de la vidéo : 35 plans (≈ 1.93 s chacun) ; cadrages : très serré 0 %, serré 8 %, moyen 0 %, large 91 % ; caméra : fixe 87 %, avance 3 %, recul 9 %, epaule 1 % ; 1 personne(s) à l'écran : centre (habit [204, 214, 231], cheveux [205, 191, 160], sourit 54 %) ; agitation 0.361 ; lumière jour ; fond [217, 226, 238]
   isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
   transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/core/io.py:48: UserWarning: 
@@ -15,53 +19,48 @@ torchcodec is not installed correctly so built-in audio decoding will fail. Solu
 
 Could not load this library: /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/torchcodec/libtorchcodec_image.so
   warnings.warn(
-[0;93m2026-10-25 12:47:50.381945893 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[0;93m2026-10-25 13:21:42.659121651 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1913.)
   std = sequences.std(dim=-1, correction=1)
-  voix séparées par pyannote : 1 voix, 45 tours de parole
+  voix séparées par pyannote : 2 voix, 54 tours de parole
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-  voix trop proches : répliques réparties d'après le fil du dialogue (questions, réponses)
-  voix trop proches (ressemblance 0.76) : vérification mot par mot laissée de côté
-  relecture du dialogue par l'IA : 57/57 phrases ()
-  contrôle questions-réponses (avec relecture de l'IA) : 57 phrases, 151 mot(s) changé(s) de voix
-  53 répliques, voix : {'speaker_0': 97, 'speaker_1': 96}
-  son de la vidéo : 2 voix [97 Hz (h, 43 %), 96 Hz (h, 56 %)], 3.39 mots/s, blancs 0.66 s, 18 coupure(s) de parole, dynamique 14.8 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
-  IA gemini indisponible (The read operation timed out) : on passe à la suivante
-  scène reconstituée : Deux amis discutent dans un salon cosy après avoir regardé une série animée. L'un exprime ses émotions et réflexions sur les personnages, tandis que l'autre l'encourage et partage ses propres pensées.
-  casting : speaker_0 → Jojo, speaker_1 → Kévin
-  sous-titres : 24 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
-Sketch : « NARUTO ET LEÇONS DE VIE », 53 répliques
-  décor 0 (lieu ressemblant de la banque, budget Modal du mois atteint) : salon cosy avec canapé, table basse, livres sur Itachi et Na
-  décor 1 (lieu ressemblant de la banque, budget Modal du mois atteint) : même salon, mais avec une lampe allumée et des photos de per
-  décor 2 (lieu ressemblant de la banque, budget Modal du mois atteint) : même salon, mais avec une tasse de thé posée sur la table ba
-  décor 3 (lieu ressemblant de la banque, budget Modal du mois atteint) : même salon, avec une tablette posée sur la table basse et un
-montage : 4 plans (0.0:large>pre/coupe 21.2:large>inv/coupe 54.4:large>inv/coupe 88.4:large>inv/coupe)
-studio : soir, lieux ['salon', 'salon', 'salon', 'salon'], tenues presentateur=tshirt, invite=pull, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 134.6 s, 53 répliques, 4 scène(s), personnages ['presentateur', 'invite']
-montage : 4 plans (0.0:large>pre/coupe 21.2:large>inv/coupe 54.4:large>inv/coupe 88.4:large>inv/coupe)
-studio : soir, lieux ['salon', 'salon', 'salon', 'salon'], tenues presentateur=tshirt, invite=pull, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 134.6 s, 53 répliques, 4 scène(s), personnages ['presentateur', 'invite']
-  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~2018 images)
-  morceau 2018–4036 reçu d'une machine d'aide
-  morceau 4036–6055 reçu d'une machine d'aide
-  morceau 6055–8073 reçu d'une machine d'aide
-  dessin partagé terminé en 8.5 min
-Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
+  voix vérifiées mot par mot : 19 mot(s) remis sur la bonne voix
+  27 répliques, voix : {'speaker_0': 235, 'speaker_1': 350}
+  son de la vidéo : 2 voix [235 Hz (f, 59 %), 350 Hz (f, 41 %)], 3.12 mots/s, blancs 0.48 s, 3 coupure(s) de parole, dynamique 21.6 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
   IA gemini indisponible (gemini 429 : [{
   "error": {
     "code": 429,
     "message": "You exceeded your current quota, please check your plan an) : on passe à la suivante
-Jury qualité (gratuit) : 8.7/10 — Humoriste 8.6/10 : 125.0 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 5.5/10 : montage trop lent : 0.3 plans toutes les 10 s (il en faudrait ~2.9); 54.4 s pas assez de plans de réaction de celui qui écoute; 88.4 s trois plans identiques d'affilée : ça manque de variété | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.1/10 : 14.9 s sous-titres trop rapides à lire
-Corrections du jury (tour 1) : réaction « sceptique » à la réplique 24
-montage : 4 plans (0.0:large>pre/coupe 21.2:large>inv/coupe 54.4:large>inv/coupe 88.4:large>inv/coupe)
-studio : soir, lieux ['salon', 'salon', 'salon', 'salon'], tenues presentateur=tshirt, invite=pull, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 134.6 s, 53 répliques, 4 scène(s), personnages ['presentateur', 'invite']
-  redessin partiel : 720/8073 images à redessiner (1 passage(s)), le reste repris tel quel
+  scène reconstituée : Une scène drôle et absurde où une mère et son fils adolescent s'affrontent sur une confusion hilarante concernant leur relation familiale. Le fils insiste sur le fait que son père est son fils, tandis que la mère tente de clarifier les choses dans une chambre d'enfant.
+  casting : speaker_0 → Jojo, speaker_1 → Kévin
+  sous-titres : 11 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
+  1 réattribution(s) de l'IA refusée(s) : la voix de ces répliques est reconnue avec certitude
+Sketch : « TOI T 'ES MON FILS », 27 répliques
+  décor 0 : chambre d'enfant avec un berceau, un tapis à motifs nuages, des jouets
+  décor 1 : même chambre, mais avec un tableau noir et des crayons posés sur une t
+montage : 2 plans (0.0:large>pre/coupe 18.4:large>inv/coupe)
+studio : jour, lieux ['chambre', 'chambre'], tenues presentateur=pyjama, invite=pyjama, 0 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 70.6 s, 27 répliques, 2 scène(s), personnages ['presentateur', 'invite']
+montage : 2 plans (0.0:large>pre/coupe 18.4:large>inv/coupe)
+studio : jour, lieux ['chambre', 'chambre'], tenues presentateur=pyjama, invite=pyjama, 0 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 70.6 s, 27 répliques, 2 scène(s), personnages ['presentateur', 'invite']
+  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~1058 images)
+  morceau 1058–2117 reçu d'une machine d'aide
+  morceau 2117–3176 reçu d'une machine d'aide
+  morceau 3176–4234 reçu d'une machine d'aide
+  dessin partagé terminé en 4.2 min
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury qualité (gratuit) : 8.7/10 — Humoriste 8.6/10 : 125.0 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 5.5/10 : montage trop lent : 0.3 plans toutes les 10 s (il en faudrait ~2.9); 54.4 s pas assez de plans de réaction de celui qui écoute; 88.4 s trois plans identiques d'affilée : ça manque de variété | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.1/10 : 14.9 s sous-titres trop rapides à lire
+Jury qualité (ia) : 8.2/10 — Humoriste 8.6/10 : 66.6 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 6.6/10 : montage trop lent : 0.3 plans toutes les 10 s (il en faudrait ~4.8); 56.6 s pas assez de plans de réaction de celui qui écoute | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 6.0/10 : 0.4 s Accroche dans la première seconde correcte, mais l'humour pourrait être plus immédiat.; 20.5 s Moment d'ennui possible si le rythme ne s'accélère pas.; 71 s La fin est claire, mais manque un appel à l'action pour inciter au partage ou aux commentaires.
+Corrections du jury (tour 1) : réaction « sceptique » à la réplique 25
+montage : 2 plans (0.0:large>pre/coupe 18.4:large>inv/coupe)
+studio : jour, lieux ['chambre', 'chambre'], tenues presentateur=pyjama, invite=pyjama, 0 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 70.6 s, 27 répliques, 2 scène(s), personnages ['presentateur', 'invite']
+  redessin partiel : 600/4234 images à redessiner (1 passage(s)), le reste repris tel quel
+Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
+Jury qualité (ia) : 7.5/10 — Humoriste 6.0/10 : 0.4 s La chute finale manque de punch. Le moment où l'invité dit 'Fils' à la place de 'Maman' est trop rapide et manque d'un zoom choc ou d'une réaction exagérée.; 20.5 s La réplique 'Et moi je suis quoi alors?' manque de réactions visuelles ou sonores pour renforcer l'humour.; 66.6 s Le texte 'Fils' à la fin est illisible et manque de mise en valeur. | Réalisateur 5.0/10 : 0.0 s Le rythme des plans est trop lent. Il faudrait environ 4.8 plans par seconde pour maintenir l'attention.; 7.0 s Manque de plans de réaction de l'invité lors des répliques du présentateur.; 15.4 s Faux raccord entre les images 6 et 7. Les positions des personnages ne correspondent pas. | Directeur artistique 7.0/10 : 0.0 s Les personnages ont des traits trop épais et peu lisses, ce qui nuit à la finesse de l'image. | Ingénieur du son 10.0/10 :  | Spectateur TikTok 10.0/10 : 
 La version corrigée n'est pas meilleure : on garde la première.
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = gemini ×1, mistral ×3, voix = tiktok, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 42561, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0}
-Quota de l'API GitHub : 4901 appels restants
-OK : sortie/2026-10-25_13h55_emission.mp4 (135 s)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = mistral ×3, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 40673, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 31}
+Quota de l'API GitHub : 4775 appels restants
+OK : sortie/2026-10-25_14h23_emission.mp4 (71 s)

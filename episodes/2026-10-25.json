@@ -1,350 +1,203 @@
 {
- "titre": "NARUTO ET LEÇONS DE VIE",
- "sujet": "NARUTO ET LEÇONS DE VIE",
- "ecran": "NARUTO ET LEÇO",
+ "titre": "TOI T 'ES MON FILS",
+ "sujet": "TOI T 'ES MON FILS",
+ "ecran": "TOI T 'ES MON ",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "POV : Quand ton frère te parle de Naruto...",
- "question": "Quelle est la leçon principale que tu retiens de Naruto ?",
+ "titre_accroche": "",
+ "question": "",
  "running_gag": "",
  "verite": "",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "Ça y est, j'ai terminé Naruto.",
+   "t": "Toi t'es mon fils",
    "_deb": 0.0,
-   "_fin": 1.34
+   "_fin": 0.94,
+   "d": "['[confused]', \"Toi t'es mon fils\"]"
   },
   {
    "p": "invite",
-   "t": "Approche.",
-   "_deb": 3.84,
-   "_fin": 4.92
-  },
-  {
-   "p": "invite",
-   "t": "Parle.",
-   "_deb": 6.06,
-   "_fin": 6.66
+   "t": "Non, papa c'est mon fils",
+   "_deb": 1.54,
+   "_fin": 3.8,
+   "d": "['[insistent]', \"Non, papa c'est mon fils\"]"
   },
   {
    "p": "presentateur",
-   "t": "J'avais tout faux sur Itachi.",
-   "_deb": 6.66,
-   "_fin": 8.04
+   "t": "Non,",
+   "_deb": 4.0,
+   "_fin": 4.58,
+   "d": "['[denial]', 'Non,']"
   },
   {
    "p": "invite",
-   "t": "Ne t'en fais pas.",
-   "_deb": 8.22,
-   "_fin": 9.1
+   "t": "papa c'est mon fils",
+   "_deb": 4.58,
+   "_fin": 6.34,
+   "d": "['[insistent]', \"papa c'est mon fils\"]"
   },
   {
    "p": "presentateur",
-   "t": "Il a réussi à tous nous berner dans son illusion.",
-   "_deb": 9.96,
-   "_fin": 12.34
+   "t": "Toi t'es le fils",
+   "_deb": 6.4,
+   "_fin": 7.04,
+   "d": "['[frustrated]', \"Toi t'es le fils\"]"
   },
   {
    "p": "invite",
-   "t": "N'oublie pas qu'il en est le maître.",
-   "_deb": 13.28,
-   "_fin": 14.8
+   "t": "Non, papa c'est mon fils Papa c'est mon fils",
+   "_deb": 7.04,
+   "_fin": 11.02,
+   "d": "['[urgent]', \"Non, papa c'est mon fils Papa c'est mon fils\"]"
   },
   {
    "p": "presentateur",
-   "t": "C'est vrai.",
-   "_deb": 14.86,
-   "_fin": 15.22
+   "t": "Mais non, papa c'est ton père",
+   "_deb": 11.36,
+   "_fin": 12.54,
+   "d": "['[exasperated]', \"Mais non, papa c'est ton père\"]"
   },
   {
    "p": "invite",
-   "t": "Itachi est le maître absolu du Genjutsu.",
-   "_deb": 15.24,
-   "_fin": 17.54
+   "t": "Papa c'est mon fils",
+   "_deb": 12.82,
+   "_fin": 14.12,
+   "d": "['[insistent]', \"Papa c'est mon fils\"]"
   },
   {
    "p": "presentateur",
-   "t": "Ses illusions sont absolument époustouflantes.",
-   "_deb": 18.34,
-   "_fin": 20.54
+   "t": "Papa c'est ton père",
+   "_deb": 14.34,
+   "_fin": 15.28,
+   "d": "['[firm]', \"Papa c'est ton père\"]"
   },
   {
    "p": "invite",
-   "t": "Vas-y, exprime-toi, je sens que tu en as gros.",
-   "_deb": 21.18,
-   "_fin": 22.98
+   "t": "Papa c'est mon fils",
+   "_deb": 15.4,
+   "_fin": 16.94,
+   "d": "['[urgent]', \"Papa c'est mon fils\"]"
   },
   {
    "p": "presentateur",
-   "t": "Roshimaru, Yerozen, Danzo, Idan, Kabuto, je...",
-   "_deb": 22.98,
-   "_fin": 27.08
+   "t": "Papa c 'est ton père",
+   "_deb": 17.32,
+   "_fin": 18.18
+  },
+  {
+   "p": "invite",
+   "t": "Papa c 'est mon fils",
+   "_deb": 18.38,
+   "_fin": 20.08
   },
   {
    "p": "presentateur",
-   "t": "J'ai voulu leur faire du mal. À tous.",
-   "_deb": 28.1,
-   "_fin": 31.32
-  },
-  {
-   "p": "invite",
-   "t": "Tu es encore jeune, mais ta réaction est légitime.",
-   "_deb": 31.38,
-   "_fin": 33.66
+   "t": "Et moi je suis quoi alors? Pour toi?",
+   "_deb": 20.48,
+   "_fin": 23.24
   },
   {
    "p": "presentateur",
-   "t": "Tu n'as pas à t'en faire.",
-   "_deb": 35.02,
-   "_fin": 36.36
+   "t": "Oui, je suis ta mère",
+   "_deb": 26.1,
+   "_fin": 28.0
   },
   {
    "p": "invite",
-   "t": "On l'a tous souhaité secrètement.",
-   "_deb": 37.76,
-   "_fin": 39.26
+   "t": "Non c'est papa mon fils",
+   "_deb": 28.04,
+   "_fin": 30.96,
+   "d": "['[insistent]', \"Non c'est papa mon fils\"]"
   },
   {
    "p": "presentateur",
-   "t": "Je sais.",
-   "_deb": 39.3,
-   "_fin": 39.86
+   "t": "Maman et mère c 'est pareil Ma mère? Oui je suis ta mère Et t 'es mon fils",
+   "_deb": 31.08,
+   "_fin": 36.92
   },
   {
    "p": "invite",
-   "t": "Vas-y, laisse venir.",
-   "_deb": 39.98,
-   "_fin": 41.6
+   "t": "Non c 'est papa mon fils",
+   "_deb": 37.28,
+   "_fin": 39.96
   },
   {
    "p": "presentateur",
-   "t": "Jiraiya me manque.",
-   "_deb": 41.6,
-   "_fin": 42.86
+   "t": "Amaël c 'est qui pour toi?",
+   "_deb": 40.72,
+   "_fin": 42.22
+  },
+  {
+   "p": "invite",
+   "t": "Petit frère",
+   "_deb": 42.36,
+   "_fin": 42.98
+  },
+  {
+   "p": "invite",
+   "t": "Si papa c'est mon fils",
+   "_deb": 44.72,
+   "_fin": 46.78,
+   "d": "['[urgent]', \"Si papa c'est mon fils\"]"
   },
   {
    "p": "presentateur",
-   "t": "Tellement.",
-   "_deb": 44.64,
-   "_fin": 45.38
+   "t": "Papa c 'est pas ton fils",
+   "_deb": 47.3,
+   "_fin": 48.36
   },
   {
    "p": "invite",
-   "t": "Ah, Jiraiya.",
-   "_deb": 45.72,
-   "_fin": 46.98
-  },
-  {
-   "p": "invite",
-   "t": "Il nous manque à tous.",
-   "_deb": 47.96,
-   "_fin": 49.56
+   "t": "Si papa c 'est mon fils",
+   "_deb": 48.58,
+   "_fin": 50.34
   },
   {
    "p": "presentateur",
-   "t": "Ce personnage symbolise la figure paternelle de Naruto.",
-   "_deb": 50.46,
-   "_fin": 53.54
-  },
-  {
-   "p": "invite",
-   "t": "Il est et restera une légende du monde shinobi, que ce soit dans ce monde ou dans l'au-delà.",
-   "_deb": 54.38,
-   "_fin": 60.68
+   "t": "Toi tu es le fils de papa Ton père il s 'appelle comment?",
+   "_deb": 50.4,
+   "_fin": 53.28
   },
   {
    "p": "presentateur",
-   "t": "Cette œuvre m'a appris tant de choses.",
-   "_deb": 60.82,
-   "_fin": 62.54
-  },
-  {
-   "p": "invite",
-   "t": "Nomme-en une.",
-   "_deb": 62.68,
-   "_fin": 63.48
+   "t": "Non c 'est je Ton père il s 'appelle comment?",
+   "_deb": 53.74,
+   "_fin": 56.28
   },
   {
    "p": "presentateur",
-   "t": "La persévérance.",
-   "_deb": 63.5,
-   "_fin": 64.7
-  },
-  {
-   "p": "invite",
-   "t": "Sans la persévérance, Naruto n'aurait jamais réussi à amener Sasuke à la raison.",
-   "_deb": 65.42,
-   "_fin": 68.82
+   "t": "Papa il s 'appelle comment? Maman elle s 'appelle comment?",
+   "_deb": 56.6,
+   "_fin": 62.76
   },
   {
    "p": "presentateur",
-   "t": "Jamais.",
-   "_deb": 69.34,
-   "_fin": 69.7
+   "t": "Maman elle s 'appelle comment?",
+   "_deb": 62.88,
+   "_fin": 65.62
   },
   {
    "p": "invite",
-   "t": "C'est exact.",
-   "_deb": 69.72,
-   "_fin": 70.48
-  },
-  {
-   "p": "presentateur",
-   "t": "La persévérance est l'une des cordes névralgiques de notre monde.",
-   "_deb": 71.06,
-   "_fin": 74.16
-  },
-  {
-   "p": "invite",
-   "t": "Sans persévérance, il est impossible d'atteindre ses objectifs, quels qu'ils soient.",
-   "_deb": 74.72,
-   "_fin": 79.86
-  },
-  {
-   "p": "presentateur",
-   "t": "Le pardon, oui.",
-   "_deb": 79.86,
-   "_fin": 81.08
-  },
-  {
-   "p": "invite",
-   "t": "Accorder son pardon à une personne qui nous a fait du mal est la définition même de la grandeur d'âme.",
-   "_deb": 81.84,
-   "_fin": 86.04
-  },
-  {
-   "p": "presentateur",
-   "t": "C'est l'accuité de la vraie force.",
-   "_deb": 86.7,
-   "_fin": 88.4
-  },
-  {
-   "p": "invite",
-   "t": "Je n'en serai plus jamais le même désormais.",
-   "_deb": 88.4,
-   "_fin": 90.3
-  },
-  {
-   "p": "presentateur",
-   "t": "Je vois les choses plus clairement.",
-   "_deb": 91.58,
-   "_fin": 92.78
-  },
-  {
-   "p": "invite",
-   "t": "Tu as bien grandi, mon jeune frère.",
-   "_deb": 92.82,
-   "_fin": 94.4
-  },
-  {
-   "p": "invite",
-   "t": "Et je suis fier de toi.",
-   "_deb": 95.38,
-   "_fin": 96.32
-  },
-  {
-   "p": "presentateur",
-   "t": "J'en veux plus.",
-   "_deb": 96.32,
-   "_fin": 97.4
-  },
-  {
-   "p": "invite",
-   "t": "Conseille-moi une autre œuvre à regarder, je t'en supplie.",
-   "_deb": 98.42,
-   "_fin": 100.52
-  },
-  {
-   "p": "presentateur",
-   "t": "Je veux progresser.",
-   "_deb": 102.3,
-   "_fin": 103.56
-  },
-  {
-   "p": "invite",
-   "t": "Très bien. Mais je te préviens, lorsque l 'on emprunte ce chemin,",
-   "_deb": 103.98,
-   "_fin": 108.1
-  },
-  {
-   "p": "invite",
-   "t": "il est impossible de faire marche arrière.",
-   "_deb": 109.3,
-   "_fin": 111.06
-  },
-  {
-   "p": "presentateur",
-   "t": "Je suis prêt.",
-   "_deb": 111.1,
-   "_fin": 111.76
-  },
-  {
-   "p": "invite",
-   "t": "Très bien.",
-   "_deb": 111.76,
-   "_fin": 112.5
-  },
-  {
-   "p": "invite",
-   "t": "Alors découvre le chef -d 'œuvre de Togashi.",
-   "_deb": 113.42,
-   "_fin": 115.54
-  },
-  {
-   "p": "presentateur",
-   "t": "Hunter x Hunter ?",
-   "_deb": 115.18,
-   "_fin": 117.46
-  },
-  {
-   "p": "invite",
-   "t": "Hunter x Hunter?",
-   "_deb": 117.46,
-   "_fin": 118.48
-  },
-  {
-   "p": "presentateur",
-   "t": "Je te préviens, tu n 'en sortiras pas indemne.",
-   "_deb": 118.54,
-   "_fin": 122.48
-  },
-  {
-   "p": "invite",
-   "t": "Merci, grand frère.",
-   "_deb": 122.52,
-   "_fin": 123.46
-  },
-  {
-   "p": "presentateur",
-   "t": "Je saurais me montrer digne.",
-   "_deb": 123.46,
-   "_fin": 124.96
-  },
-  {
-   "p": "invite",
-   "t": "Va maintenant et accomplis ton destin.",
-   "_deb": 125.0,
-   "_fin": 128.68,
+   "t": "Fils",
+   "_deb": 66.62,
+   "_fin": 66.98,
    "chute": true
   }
  ],
  "bandeau": [],
  "gag": null,
- "legende": "Deux amis échangent sur leurs émotions après avoir terminé Naruto.",
+ "legende": "Toi t 'es mon fils",
  "hashtags": [
   "petitsdramas",
-  "naruto",
-  "amis",
-  "leconsdevie",
-  "anime",
-  "emotions",
-  "conseils"
+  "humour",
+  "doublage",
+  "pov"
  ],
  "sources": [
-  "https://www.tiktok.com/@eliotlehanneur/video/7673915679715724576?_r=1&_t=ZN-9ATSODCDG4c"
+  "https://www.tiktok.com/@charly.bse/video/7649401581833588000"
  ],
  "decoupage": [
   {
@@ -359,18 +212,18 @@
     6,
     7,
     8,
-    9
+    9,
+    10
    ],
    "lieu": "",
    "son": "",
    "duree": 0.0,
-   "decor": "salon cosy avec canapé, table basse, livres sur Itachi et Naruto, et une fenêtre ouverte sur la ville.",
-   "titre": "Réflexions sur Naruto"
+   "decor": "chambre d'enfant avec un berceau, un tapis à motifs nuages, des jouets cubes empilés, peluche et un livre ouvert sur un lit.",
+   "titre": "La Confusion Familiale"
   },
   {
    "scene": "2",
    "repliques": [
-    10,
     11,
     12,
     13,
@@ -382,304 +235,185 @@
     19,
     20,
     21,
-    22
-   ],
-   "lieu": "",
-   "son": "",
-   "duree": 0.0,
-   "decor": "même salon, mais avec une lampe allumée et des photos de personnages de Naruto sur les murs.",
-   "titre": "Émotions partagées"
-  },
-  {
-   "scene": "3",
-   "repliques": [
+    22,
     23,
     24,
     25,
-    26,
-    27,
-    28,
-    29,
-    30,
-    31,
-    32,
-    33,
-    34
+    26
    ],
    "lieu": "",
    "son": "",
    "duree": 0.0,
-   "decor": "même salon, mais avec une tasse de thé posée sur la table basse.",
-   "titre": "Leçons de vie"
-  },
-  {
-   "scene": "4",
-   "repliques": [
-    35,
-    36,
-    37,
-    38,
-    39,
-    40,
-    41,
-    42,
-    43,
-    44,
-    45,
-    46,
-    47,
-    48,
-    49,
-    50,
-    51,
-    52
-   ],
-   "lieu": "",
-   "son": "",
-   "duree": 0.0,
-   "decor": "même salon, avec une tablette posée sur la table basse et une lumière tamisée.",
-   "titre": "Nouveaux horizons"
+   "decor": "même chambre, mais avec un tableau noir et des crayons posés sur une table basse, et un téléphone portable posé sur le lit.",
+   "titre": "Qui est Qui ?"
   }
  ],
- "studio": {
-  "moment": "soir",
-  "lieux": [
-   "salon"
-  ],
-  "costumes": {
-   "presentateur": {
-    "haut": "tshirt",
-    "c_haut": "noir",
-    "bas": "jeans",
-    "chaussures": "baskets",
-    "details": [
-     "barbe_courte",
-     "moustache",
-     "bracelets"
-    ],
-    "chapeau": {
-     "type": "casquette",
-     "c_chapeau": "noir"
-    },
-    "cheveux": "court_texture",
-    "c_cheveux": "blond"
-   }
-  },
-  "invite": {
-   "haut": "pullover",
-   "c_haut": "marron",
-   "bas": "pantalon",
-   "chaussures": "ville",
-   "details": [
-    "lunettes_vue",
-    "montre"
-   ],
-   "chapeau": null,
-   "cheveux": "court",
-   "c_cheveux": "brun"
-  }
- },
  "doublage": {
-  "piste": "/tmp/tmp_e9lyy2_/piste.wav",
-  "duree": 132.15,
-  "source": "https://www.tiktok.com/@eliotlehanneur/video/7673915679715724576?_r=1&_t=ZN-9ATSODCDG4c",
-  "auteur": "eliotlehanneur",
-  "contexte": "Deux amis discutent dans un salon cosy après avoir regardé une série animée. L'un exprime ses émotions et réflexions sur les personnages, tandis que l'autre l'encourage et partage ses propres pensées.",
+  "piste": "/tmp/tmp11xhgmm7/piste.wav",
+  "duree": 67.08,
+  "source": "https://www.tiktok.com/@charly.bse/video/7649401581833588000",
+  "auteur": "charly.bse",
+  "contexte": "Une scène drôle et absurde où une mère et son fils adolescent s'affrontent sur une confusion hilarante concernant leur relation familiale. Le fils insiste sur le fait que son père est son fils, tandis que la mère tente de clarifier les choses dans une chambre d'enfant.",
   "evenements": [],
   "visuel": {
    "gestes": [
     [
-     1.0,
-     0.56,
-     1.0
-    ],
-    [
-     2.0,
-     0.42,
-     0.46
-    ],
-    [
-     34.0,
+     35.5,
      0.5,
-     0.36
-    ],
-    [
-     53.0,
-     0.51,
-     0.4
-    ],
-    [
-     88.5,
-     0.51,
-     0.37
-    ],
-    [
-     97.5,
-     0.48,
-     0.42
-    ],
-    [
-     102.5,
-     0.42,
      1.0
     ],
     [
-     115.0,
-     0.46,
-     0.35
+     41.0,
+     0.5,
+     1.0
     ]
    ],
-   "duree": 132.5,
-   "nb_plans": 40,
-   "duree_plan": 3.31,
+   "duree": 67.5,
+   "nb_plans": 35,
+   "duree_plan": 1.93,
    "coupes": [
-    0.5,
     1.5,
-    5.0,
+    4.0,
     5.5,
-    6.0,
-    7.0,
-    8.0,
-    15.0,
+    6.5,
+    7.5,
+    9.0,
+    10.0,
+    11.5,
+    12.5,
+    14.5,
     15.5,
+    17.5,
+    18.5,
     20.5,
-    22.0,
-    23.5,
+    21.5,
+    22.5,
     27.0,
     29.0,
-    32.0,
-    39.5,
-    40.0,
-    42.0,
-    45.5,
-    61.0,
-    62.5,
+    31.5,
+    32.5,
+    33.0,
+    45.0,
+    47.0,
+    49.0,
+    50.5,
+    53.0,
+    54.5,
+    57.5,
+    59.5,
+    60.5,
+    61.5,
+    63.0,
     64.0,
-    70.0,
-    80.0,
-    80.5,
-    89.0,
-    93.5,
-    96.5,
-    102.0,
-    103.5,
-    111.5,
-    112.0,
-    118.0,
-    119.0,
-    123.0,
-    124.5,
-    125.0,
-    125.5,
-    130.5
+    65.5
    ],
    "plans": {
-    "tres_serre": 0.97,
-    "serre": 0.0,
+    "tres_serre": 0.0,
+    "serre": 0.081,
     "moyen": 0.0,
-    "large": 0.03
+    "large": 0.919
    },
    "camera": {
-    "fixe": 0.923,
-    "avance": 0.023,
-    "recul": 0.005,
-    "travelling": 0.009,
-    "epaule": 0.041
+    "fixe": 0.87,
+    "avance": 0.03,
+    "recul": 0.09,
+    "travelling": 0.0,
+    "epaule": 0.01
    },
    "nb_personnes": 1,
    "personnes": [
     {
      "place": "centre",
-     "presence": 0.94,
+     "presence": 0.081,
      "habit": [
-      92,
-      60,
-      57
+      204,
+      214,
+      231
      ],
      "cheveux": [
-      90,
-      51,
-      30
+      205,
+      191,
+      160
      ],
-     "sourire": 0.0,
-     "taille": 0.472,
-     "tete_penchee": 4.8,
-     "regard_cote": 0.466
+     "sourire": 0.545,
+     "taille": 0.266,
+     "tete_penchee": 6.4,
+     "regard_cote": 0.0
     }
    ],
    "visages": true,
-   "sourires": 0.0,
-   "energie": 0.327,
+   "sourires": 0.545,
+   "energie": 0.361,
    "mur": [
-    187,
-    183,
-    184
+    217,
+    226,
+    238
    ],
    "palette": [
     [
-     97,
-     65,
-     57,
-     0.292
+     225,
+     232,
+     241,
+     0.414
     ],
     [
-     221,
-     133,
-     110,
-     0.172
+     179,
+     201,
+     222,
+     0.238
     ],
     [
-     187,
-     185,
-     186,
-     0.171
+     134,
+     179,
+     183,
+     0.161
     ],
     [
-     44,
-     31,
-     35,
-     0.145
+     240,
+     198,
+     152,
+     0.089
     ],
     [
-     156,
+     18,
+     12,
+     9,
+     0.068
+    ],
+    [
+     151,
+     53,
      116,
-     97,
-     0.119
-    ],
-    [
-     231,
-     233,
-     229,
-     0.102
+     0.03
     ]
    ],
    "lumiere": {
-    "luminosite": 149.2,
-    "chaleur": 39.6,
-    "saturation": 81.0
+    "luminosite": 210.6,
+    "chaleur": -15.2,
+    "saturation": 53.9
    },
-   "moment": "soir"
+   "moment": "jour"
   },
   "audio": {
-   "duree": 132.1,
+   "duree": 67.1,
    "nb_voix": 2,
    "voix": [
     {
-     "hz": 97,
-     "genre": "h",
-     "part": 0.43
+     "hz": 235,
+     "genre": "f",
+     "part": 0.59
     },
     {
-     "hz": 96,
-     "genre": "h",
-     "part": 0.57
+     "hz": 350,
+     "genre": "f",
+     "part": 0.41
     }
    ],
-   "debit": 3.39,
-   "blanc_moyen": 0.66,
-   "coupes": 18,
-   "dynamique_db": 14.8,
-   "cris": 0.002,
+   "debit": 3.12,
+   "blanc_moyen": 0.48,
+   "coupes": 3,
+   "dynamique_db": 21.6,
+   "cris": 0.001,
    "musique": null,
    "impacts": 0,
    "impacts_10s": 0.0,
@@ -688,17 +422,17 @@
    "sur_vanne": 0,
    "evenements": {},
    "emotions": {
-    "sourire": 13,
-    "émou": 7,
-    "réfléchi": 6,
-    "déterminé": 5,
-    "doux": 4,
-    "encourageant": 3,
-    "enthousiaste": 2,
-    "admiratif": 2
+    "'[confused": 5,
+    "'[insistent": 5,
+    "'[urgent": 4,
+    "'[denial": 2,
+    "'[firm": 2,
+    "'[neutral": 2,
+    "'[frustrated": 1,
+    "'[exasperated": 1
    }
   },
-  "video_origine": "/tmp/tmp_e9lyy2_/src.mp4"
+  "video_origine": "/tmp/tmp11xhgmm7/src.mp4"
  },
  "fiche": {
   "note": 0,
@@ -716,18 +450,18 @@
      6,
      7,
      8,
-     9
+     9,
+     10
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "salon cosy avec canapé, table basse, livres sur Itachi et Naruto, et une fenêtre ouverte sur la ville.",
-    "titre": "Réflexions sur Naruto"
+    "decor": "chambre d'enfant avec un berceau, un tapis à motifs nuages, des jouets cubes empilés, peluche et un livre ouvert sur un lit.",
+    "titre": "La Confusion Familiale"
    },
    {
     "scene": "2",
     "repliques": [
-     10,
      11,
      12,
      13,
@@ -739,119 +473,43 @@
      19,
      20,
      21,
-     22
-    ],
-    "lieu": "",
-    "son": "",
-    "duree": 0.0,
-    "decor": "même salon, mais avec une lampe allumée et des photos de personnages de Naruto sur les murs.",
-    "titre": "Émotions partagées"
-   },
-   {
-    "scene": "3",
-    "repliques": [
+     22,
      23,
      24,
      25,
-     26,
-     27,
-     28,
-     29,
-     30,
-     31,
-     32,
-     33,
-     34
+     26
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "même salon, mais avec une tasse de thé posée sur la table basse.",
-    "titre": "Leçons de vie"
-   },
-   {
-    "scene": "4",
-    "repliques": [
-     35,
-     36,
-     37,
-     38,
-     39,
-     40,
-     41,
-     42,
-     43,
-     44,
-     45,
-     46,
-     47,
-     48,
-     49,
-     50,
-     51,
-     52
-    ],
-    "lieu": "",
-    "son": "",
-    "duree": 0.0,
-    "decor": "même salon, avec une tablette posée sur la table basse et une lumière tamisée.",
-    "titre": "Nouveaux horizons"
+    "decor": "même chambre, mais avec un tableau noir et des crayons posés sur une table basse, et un téléphone portable posé sur le lit.",
+    "titre": "Qui est Qui ?"
    }
   ]
  },
  "_monte": true,
  "_voix_hz": {
-  "presentateur": 106,
-  "invite": 98
+  "presentateur": 223,
+  "invite": 339
  },
  "_voix_genre": {
-  "presentateur": "h",
-  "invite": "h"
+  "presentateur": "f",
+  "invite": "f"
  },
  "realisation": {
-  "moment": "soir",
+  "moment": "jour",
   "lieux": [
-   "salon",
-   "salon",
-   "salon",
-   "salon"
+   "chambre",
+   "chambre"
   ],
   "gags": [],
-  "ambiances": [
-   "poussiere"
-  ],
-  "source": "auteur+image",
+  "ambiances": [],
+  "source": "robot+image",
   "tenues": {
-   "presentateur": "tshirt",
-   "invite": "pull"
+   "presentateur": "pyjama",
+   "invite": "pyjama"
   },
   "plans": [
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
    "large/fixe",
    "large/fixe",
    "large/fixe",
