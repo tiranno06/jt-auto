@@ -1,11 +1,5 @@
 [
  {
-  "quand": "2026-10-16T21:43+00:00",
-  "titre": "🎬 Nouvelle vidéo prête",
-  "texte": "« CONSEILS DE PÈRE AU FILS » — note 0/100. À vérifier dans l'appli.",
-  "lien": ""
- },
- {
   "quand": "2026-10-16T22:34+00:00",
   "titre": "🎬 Nouvelle vidéo prête",
   "texte": "« PAPA, IL Y A UNE INCONNUE QUI » — note 0/100. À vérifier dans l'appli.",
@@ -177,6 +171,12 @@
   "quand": "2026-10-25T01:11+00:00",
   "titre": "🎬 Nouvelle vidéo prête",
   "texte": "« VENTRE QUI GONFLE ET DÉGONFLE » — note 0/100. À vérifier dans l'appli.",
+  "lien": ""
+ },
+ {
+  "quand": "2026-10-25T03:06+00:00",
+  "titre": "⚠️ Échec de fabrication",
+  "texte": "    faits_avant = {(int(a_), int(b_)): c_ for a_, b_, c_ in (deja or []) if os.path.exists(c_)}\n                                                             ^^^^^^^^^^\nTypeError: 'bool' object is not iterable",
   "lien": ""
  }
 ]
