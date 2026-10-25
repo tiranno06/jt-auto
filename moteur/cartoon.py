@@ -576,9 +576,9 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
             autre_sc = next((s_ for s_ in sc_parl if s_ != q["scene"]), None)
             if autre_sc is None: continue
             d_ = q["fin"] - q["deb"]
-            deja = all(DEBUT_SCENE.get(s_, 1e9) < q["deb"] - 0.9 for s_ in (q["scene"], autre_sc))   # les deux sont déjà en scène
-            if j % 3 == 1 and d_ >= 0.8 and deja: APPEL.append((q["deb"] - 0.05, q["fin"] + 0.1, "partage", autre_sc))
-            elif j % 3 == 2 and d_ >= 2.2 and deja: APPEL.append((q["deb"] + 0.55 * d_, q["fin"], "ecoute", autre_sc))
+            en_scene = all(DEBUT_SCENE.get(s_, 1e9) < q["deb"] - 0.9 for s_ in (q["scene"], autre_sc))   # les deux sont déjà en scène
+            if j % 3 == 1 and d_ >= 0.8 and en_scene: APPEL.append((q["deb"] - 0.05, q["fin"] + 0.1, "partage", autre_sc))
+            elif j % 3 == 2 and d_ >= 2.2 and en_scene: APPEL.append((q["deb"] + 0.55 * d_, q["fin"], "ecoute", autre_sc))
         if APPEL: print(f"appel : {sum(a[2] == 'partage' for a in APPEL)} écran(s) partagé(s), {sum(a[2] == 'ecoute' for a in APPEL)} plan(s) d'écoute", flush=True)
     SC_HAUT = sc_parl[0] if sc_parl else 0
     # rembobinage (idée 22) : « revenons 5 minutes avant », « deux heures plus tôt »… → l'image repart en arrière façon cassette

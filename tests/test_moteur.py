@@ -811,6 +811,16 @@ class TestVoixProches(unittest.TestCase):
         self.assertEqual(c["speaker_1"], "envoyee")                        # voix aiguë : un personnage féminin libre
         self.assertEqual(D.casting_unique({"speaker_0": "presentateur", "speaker_1": "envoyee"}, segs, hz), {"speaker_0": "presentateur", "speaker_1": "envoyee"})
 
+    def test_rendre_garde_ses_parametres(self):
+        """Aucune variable du dessin ne réutilise le nom d'un réglage de reprise (un appel téléphonique écrasait « deja » et le dessin plantait)."""
+        import ast
+        arbre = ast.parse(open(os.path.join(os.path.dirname(__file__), "..", "moteur", "cartoon.py"), encoding="utf-8").read())
+        f = next(n for n in arbre.body if isinstance(n, ast.FunctionDef) and n.name == "rendre")
+        proteges = {"deja", "limite", "plage", "reprise", "plans_seuls", "apercu"}
+        ecrits = {c.id for n in ast.walk(f) for c in ([n.target] if isinstance(n, (ast.AugAssign, ast.AnnAssign, ast.For)) else getattr(n, "targets", []))
+                  for c in ast.walk(c) if isinstance(c, ast.Name) and isinstance(c.ctx, ast.Store)}
+        self.assertFalse(ecrits & proteges, ecrits & proteges)
+
     def test_controle_questions_reponses(self):
         """Voix trop proches (même personne qui fait les deux voix) : le fil du dialogue et la relecture de l'IA décident, phrase par phrase."""
         sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "moteur"))
