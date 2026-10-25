@@ -2,14 +2,14 @@ Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, ElevenLabs epuise — IA utilisée : mistral
 Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @motiontoonz, @same_same53, @charly.bse, @kodanimation, @vignianimation, @vincedessine
-Profil TikTok @eliotlehanneur : 38 vidéo(s) jamais utilisée(s)
 Profil TikTok @same_same53 : 37 vidéo(s) jamais utilisée(s)
-Profil TikTok @motiontoonz : 37 vidéo(s) jamais utilisée(s)
-Vidéo depuis TikTok : https://www.tiktok.com/@eliotlehanneur/video/7698036962388790561
+Profil TikTok @yan_animation0 : 33 vidéo(s) jamais utilisée(s)
+Profil TikTok @charly.bse : 38 vidéo(s) jamais utilisée(s)
+Vidéo depuis TikTok : https://www.tiktok.com/@same_same53/video/7679043667536989473
   son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 89.6 s, compte d'origine @eliotlehanneur
-[ WARN:0@17.851] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
-  image de la vidéo : 62 plans (≈ 1.45 s chacun) ; cadrages : très serré 1 %, serré 97 %, moyen 0 %, large 1 % ; caméra : fixe 41 %, avance 7 %, recul 4 %, travelling 10 %, epaule 36 % ; 1 personne(s) à l'écran : gauche (habit [164, 163, 160], cheveux [18, 16, 14], sourit 1 %); centre (habit [83, 103, 102], cheveux [71, 50, 39], sourit 5 %); droite (habit [56, 74, 72], cheveux [72, 51, 40], sourit 0 %) ; agitation 0.34 ; lumière jour ; fond [146, 142, 138]
+  son récupéré : 62.4 s, compte d'origine @same_same53
+[ WARN:0@16.613] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  image de la vidéo : 1 plans (≈ 62.5 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 4 %, large 95 % ; caméra : fixe 100 % ; 1 personne(s) à l'écran : aucun visage repéré ; agitation 0.165 ; lumière jour ; fond [0, 0, 0]
   isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
   transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/core/io.py:48: UserWarning: 
@@ -19,37 +19,87 @@ torchcodec is not installed correctly so built-in audio decoding will fail. Solu
 
 Could not load this library: /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/torchcodec/libtorchcodec_image.so
   warnings.warn(
-[0;93m2026-10-25 17:27:00.021542417 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[0;93m2026-10-25 17:48:14.213953053 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1913.)
   std = sequences.std(dim=-1, correction=1)
-  voix séparées par pyannote : 2 voix, 40 tours de parole
+  voix séparées par pyannote : 2 voix, 4 tours de parole
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-  voix vérifiées mot par mot : 48 mot(s) remis sur la bonne voix
-  42 répliques, voix : {'speaker_0': 262, 'speaker_1': 150}
-  son de la vidéo : 2 voix [262 Hz (f, 40 %), 150 Hz (h, 60 %)], 5.95 mots/s, blancs 0.27 s, 21 coupure(s) de parole, dynamique 24.7 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
+  voix trop proches (ressemblance 0.70) : vérification mot par mot laissée de côté
+  relecture du dialogue par l'IA : 28/28 phrases ()
+  contrôle questions-réponses (avec relecture de l'IA) : 28 phrases, 305 mot(s) changé(s) de voix
+  36 répliques, voix : {'speaker_0': 158, 'speaker_1': 156}
+  son de la vidéo : 2 voix [158 Hz (h, 27 %), 156 Hz (h, 73 %)], 7.28 mots/s, blancs 0.08 s, 22 coupure(s) de parole, dynamique 16.1 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
   IA gemini indisponible (gemini 429 : [{
   "error": {
     "code": 429,
     "message": "You exceeded your current quota, please check your plan an) : on passe à la suivante
-  réponse coupée (limite de 8000 jetons atteinte) pour doublage
-  casting : speaker_0 → Lila, speaker_1 → Jojo
-Sketch : « NON MAIS T 'INQUIÈTE PAS, C 'E », 42 répliques
-montage : 1 plans (0.0:large>env/coupe)
-studio : soir, lieux ['rue'], tenues envoyee=hawai, presentateur=hawai, 2 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 93.2 s, 42 répliques, 1 scène(s), personnages ['envoyee', 'presentateur']
-montage : 1 plans (0.0:large>env/coupe)
-studio : soir, lieux ['rue'], tenues envoyee=hawai, presentateur=hawai, 2 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 93.2 s, 42 répliques, 1 scène(s), personnages ['envoyee', 'presentateur']
-  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~1397 images)
-  morceau 2794–4192 reçu d'une machine d'aide
-  morceau 4192–5589 reçu d'une machine d'aide
-  morceau 1397–2794 reçu d'une machine d'aide
-  dessin partagé terminé en 8.0 min
+  scène reconstituée : Deux amis alcooliques, assis dans un bar enfumé, discutent de leur relation ambiguë et de leurs habitudes de consommation d'alcool. La conversation oscille entre humour noir et moments de gêne.
+  casting : speaker_0 → Jojo, speaker_1 → Kévin
+  sous-titres : 4 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
+  Claude a réattribué 2 réplique(s) à la bonne personne (voix proches)
+  voix trop proches dans https://www.tiktok.com/@same_same53/video/7679043667536989473 (ressemblance 0.70) : on cherche une vidéo aux voix bien différentes
+Vidéo depuis TikTok : https://www.tiktok.com/@same_same53/video/7674581630681484577
+  son téléchargé (yt-dlp --impersonate chrome)
+  son récupéré : 84.6 s, compte d'origine @same_same53
+[ WARN:0@245.092] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  image de la vidéo : 1 plans (≈ 85.0 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 0 %, large 100 % ; caméra : fixe 100 % ; 0 personne(s) à l'écran : aucun visage repéré ; agitation 0.147 ; lumière jour ; fond [0, 0, 0]
+  isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
+  transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1913.)
+  std = sequences.std(dim=-1, correction=1)
+  voix séparées par pyannote : 1 voix, 25 tours de parole
+  voix trop proches : répliques réparties d'après le fil du dialogue (questions, réponses)
+  voix trop proches (ressemblance 0.80) : vérification mot par mot laissée de côté
+  relecture du dialogue par l'IA : 47/47 phrases (A : la personne mature/parentale (probablement un adulte qui joue le rôle d'un g)
+  contrôle questions-réponses (avec relecture de l'IA) : 47 phrases, 168 mot(s) changé(s) de voix
+  41 répliques, voix : {'speaker_0': 146, 'speaker_1': 104}
+  son de la vidéo : 2 voix [146 Hz (h, 36 %), 104 Hz (h, 64 %)], 4.71 mots/s, blancs 0.59 s, 16 coupure(s) de parole, dynamique 16.3 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
+  scène reconstituée : Deux adultes discutent passionnément d'un épisode de l'anime Naruto, avec des opinions opposées sur le personnage d'Itachi. Le débat est à la fois intense et philosophique, mêlant colère, réflexion et humour. La scène se déroule probablement dans un salon ou un espace informel où les deux personnages peuvent s'exprimer librement.
+  casting : speaker_0 → Jojo, speaker_1 → Kévin
+  sous-titres : 19 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
+  voix trop proches dans https://www.tiktok.com/@same_same53/video/7674581630681484577 (ressemblance 0.80) : on cherche une vidéo aux voix bien différentes
+Vidéo depuis TikTok : https://www.tiktok.com/@yan_animation0/video/7650254772997590304
+  son téléchargé (yt-dlp --impersonate chrome)
+  son récupéré : 64.9 s, compte d'origine @yan_animation0
+[ WARN:0@423.981] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  image de la vidéo : 1 plans (≈ 65.0 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 100 %, large 0 % ; caméra : fixe 100 % ; 2 personne(s) à l'écran : gauche (habit [51, 45, 43], cheveux [26, 19, 15], sourit 0 %); droite (habit [138, 50, 56], cheveux [46, 34, 29], sourit 0 %) ; agitation 0.049 ; lumière nuit ; fond [1, 1, 0]
+  isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
+  transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1913.)
+  std = sequences.std(dim=-1, correction=1)
+  voix séparées par pyannote : 2 voix, 46 tours de parole
+  voix vérifiées mot par mot : 20 mot(s) remis sur la bonne voix
+  17 répliques, voix : {'speaker_0': 192, 'speaker_1': 206}
+  son de la vidéo : 2 voix [192 Hz (f, 65 %), 206 Hz (f, 35 %)], 3.49 mots/s, blancs 1.21 s, 5 coupure(s) de parole, dynamique 16.9 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
+  scène reconstituée : Deux adultes discutent dans une voiture, le présentateur tente de deviner l'âge de l'envoyée, qui révèle avoir 47 ans, ce qui le surprend et déclenche une conversation humoristique sur les différences d'âge et les produits de soin.
+  casting : speaker_0 → Jojo, speaker_1 → Lila
+  sous-titres : 16 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
+  1 réattribution(s) de l'IA refusée(s) : la voix de ces répliques est reconnue avec certitude
+Sketch : « SURPRISE D'ANNIVERSAIRE », 17 répliques
+  décor 0 : car interior with steering wheel, rearview mirror, dashboard, two cups
+montage : 1 plans (0.0:large>pre/coupe)
+studio : soir, lieux ['voiture'], tenues presentateur=tshirt, envoyee=debardeur, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 68.0 s, 17 répliques, 1 scène(s), personnages ['presentateur', 'envoyee']
+montage : 1 plans (0.0:large>pre/coupe)
+studio : soir, lieux ['voiture'], tenues presentateur=tshirt, envoyee=debardeur, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 68.0 s, 17 répliques, 1 scène(s), personnages ['presentateur', 'envoyee']
+  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~1019 images)
+  morceau 2040–3059 reçu d'une machine d'aide
+  morceau 1020–2040 reçu d'une machine d'aide
+  morceau 3059–4079 reçu d'une machine d'aide
+  dessin partagé terminé en 4.6 min
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury qualité (ia) : 6.8/10 — Humoriste 6.0/10 : 0.4 s La chute finale ('Ils sont tous tarés') manque d'impact visuel. Un zoom choc sur le personnage qui la dit serait nécessaire pour renforcer l'effet comique.; 46.3 s Les vannes sur la 'poitrine' et le 'gouvernail' pourraient être plus explicites avec un sous-titre visuel ou un gag dans le décor pour clarifier le jeu de mots.; 61.5 s Le moment où le présentateur dit 'De remballer le camping-car' manque de réaction comique. Ajouter une mimique ou un geste exagéré pour renforcer l'humour. | Réalisateur 5.0/10 : 0 s Montage trop lent. Il faudrait accélérer le rythme pour éviter l'ennui. Par exemple, ajouter des plans serrés ou des réactions plus fréquentes.; 17.2 s Manque de plans de réaction du présentateur lorsque l'envoyée parle. Cela rend le dialogue moins dynamique.; 83.4 s Le dernier plan manque de transition visuelle forte. Un fondu au noir ou un effet de zoom p
-Manque par rapport à la vidéo d'origine : Personnages secondaires (comme les voisins ou figurants) manquants dans les plans. ; Absence de détails visuels pour renforcer les vannes ('Jeux Olympiques', 'Excalibur', 'gouvernail', 'Viagra'). ; Manque de réactions physiques ou visuelles des personnages pour certains gags. ; Décor moins détaillé et moins cohérent avec les dialogues. ; Absence de bruitages pour renforcer l'humour.
+Jury qualité (gratuit) : 8.9/10 — Humoriste 8.6/10 : 58.0 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 6.6/10 : montage trop lent : 0.1 plans toutes les 10 s (il en faudrait ~2.8); 39.5 s pas assez de plans de réaction de celui qui écoute | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.1/10 : 0.0 s sous-titres trop rapides à lire
+Corrections du jury (tour 1) : réaction « sceptique » à la réplique 13
+montage : 1 plans (0.0:large>pre/coupe)
+studio : soir, lieux ['voiture'], tenues presentateur=tshirt, envoyee=debardeur, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 68.0 s, 17 répliques, 1 scène(s), personnages ['presentateur', 'envoyee']
+  redessin partiel : 600/4079 images à redessiner (1 passage(s)), le reste repris tel quel
+Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
+Jury qualité (gratuit) : 8.9/10 — Humoriste 8.6/10 : 58.0 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 6.6/10 : montage trop lent : 0.1 plans toutes les 10 s (il en faudrait ~2.8); 39.5 s pas assez de plans de réaction de celui qui écoute | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.1/10 : 0.0 s sous-titres trop rapides à lire
+La version corrigée n'est pas meilleure : on garde la première.
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = mistral ×2, voix = tiktok, decors = dessines, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 31779, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0}
-Quota de l'API GitHub : 4746 appels restants
-OK : sortie/2026-10-25_18h31_emission.mp4 (93 s)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = gemini ×1, mistral ×6, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 59915, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 20}
+Quota de l'API GitHub : 4924 appels restants
+OK : sortie/2026-10-25_18h56_emission.mp4 (68 s)
