@@ -1,186 +1,212 @@
 {
- "titre": "SOIRÉE ENTRE AMIES",
- "sujet": "SOIRÉE ENTRE AMIES",
- "ecran": "SOIRÉE ENTRE A",
+ "titre": "CONFLIT AU PARC",
+ "sujet": "CONFLIT AU PARC",
+ "ecran": "CONFLIT AU PAR",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "POV : Tu découvres un inconnu chez ton pote",
- "question": "Qui est ce mystérieux Thibaut ?",
+ "titre_accroche": "POV : Quand un ballon lance tout le monde dans",
+ "question": "Qui a raison dans cette histoire ?",
  "running_gag": "",
  "verite": "",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "Et bah finalement j'ai acheté la robe que je voulais, franchement je suis hyper contente, tu sais c'est celle qui avait des petites fleurs, mais attention",
+   "t": "Ah, quelle belle journée, je vais en profiter pour consulter mes meubles.",
    "_deb": 0.0,
-   "_fin": 6.12,
-   "d": "['[excited]', \"Et bah finalement j'ai acheté la robe que je voulais, franchement je suis hyper contente, tu sais c'est celle qui avait des petites fleurs, mais attention\"]"
+   "_fin": 4.3,
+   "d": "[relaxed] Ah, quelle belle journée, je vais en profiter pour consulter mes meubles."
   },
   {
    "p": "presentateur",
-   "t": "c'était pas les fleurs bleues, j'ai vraiment pris celle qui avait des petites fleurs roses, je trouve que ça me va vraiment beaucoup mieux au teint,",
-   "_deb": 6.12,
-   "_fin": 12.06,
-   "d": "['[enthousiast]', \"c'était pas les fleurs bleues, j'ai vraiment pris celle qui avait des petites fleurs roses, je trouve que ça me va vraiment beaucoup mieux au teint,\"]"
+   "t": "Aïe! Eh, vas-y, renvois le ballon!",
+   "_deb": 4.66,
+   "_fin": 7.36,
+   "d": "[annoyed] Aïe! Eh, vas-y, renvois le ballon!"
   },
   {
    "p": "presentateur",
-   "t": "j'ai aussi pris des escarpins, mais tu dors là ou tu m'écoutes?",
-   "_deb": 12.06,
-   "_fin": 18.64,
-   "d": "['[playful]', \"j'ai aussi pris des escarpins, mais tu dors là ou tu m'écoutes?\"]"
-  },
-  {
-   "p": "invite",
-   "t": "Non non non je t'écoute t'inquiète, vas-y continue continue",
-   "_deb": 19.04,
-   "_fin": 21.06,
-   "d": "['[assured]', \"Non non non je t'écoute t'inquiète, vas-y continue continue\"]"
+   "t": "Ouais, ouais, tiens, par contre, faites attention quand vous jouez au foot, les gars, il y a du monde dans le parc.",
+   "_deb": 8.76,
+   "_fin": 12.5
   },
   {
    "p": "presentateur",
-   "t": "Après, du coup, je me suis préparée, on est partis au restaurant, j'ai pris les petites pâtes carbos, qu'est-ce qu'elles sont bonnes, celles-là?",
-   "_deb": 21.44,
-   "_fin": 29.18,
-   "d": "['[delighted]', \"Après, du coup, je me suis préparée, on est partis au restaurant, j'ai pris les petites pâtes carbos, qu'est-ce qu'elles sont bonnes, celles-là?\"]"
+   "t": "Mais, t'avais pas 4 mètres là, l'ancien! Bah ouais, qu'est-ce qu'il dit, lui?",
+   "_deb": 12.58,
+   "_fin": 16.14
+  },
+  {
+   "p": "envoyee",
+   "t": "Crouton!",
+   "_deb": 16.28,
+   "_fin": 17.06,
+   "d": "[mischievous] Crouton!"
   },
   {
    "p": "presentateur",
-   "t": "Après, on a voulu continuer la petite soirée, on a été chez Thibaut, ensuite, qu'est-ce qu'on a fait?",
-   "_deb": 29.76,
-   "_fin": 36.36,
-   "d": "['[reflective]', \"Après, on a voulu continuer la petite soirée, on a été chez Thibaut, ensuite, qu'est-ce qu'on a fait?\"]"
-  },
-  {
-   "p": "invite",
-   "t": "Chez qui? T'as dit qui, là?",
-   "_deb": 36.8,
-   "_fin": 38.12,
-   "d": "['[confused]', \"Chez qui? T'as dit qui, là?\"]"
+   "t": "Pardon? Bah ouais, le parc, il est pour tout le monde!",
+   "_deb": 17.66,
+   "_fin": 19.74,
+   "d": "[confused] Pardon? Bah ouais, le parc, il est pour tout le monde!"
   },
   {
    "p": "presentateur",
-   "t": "C'est Thibaut.",
-   "_deb": 38.48,
-   "_fin": 39.6,
-   "d": "['[neutral]', \"C'est Thibaut.\"]"
-  },
-  {
-   "p": "invite",
-   "t": "C'est qui, lui?",
-   "_deb": 39.84,
-   "_fin": 41.18,
-   "d": "['[skeptical]', \"C'est qui, lui?\"]"
+   "t": "L'ancien!",
+   "_deb": 20.02,
+   "_fin": 20.84,
+   "d": "[angry] L'ancien!"
   },
   {
    "p": "presentateur",
-   "t": "C'est un pote, c'est un pote à Sandra, je crois.",
-   "_deb": 41.48,
-   "_fin": 44.78,
-   "d": "['[hesitant]', \"C'est un pote, c'est un pote à Sandra, je crois.\"]"
-  },
-  {
-   "p": "invite",
-   "t": "Comment ça? Vous avez fait quoi chez lui, là?",
-   "_deb": 45.24,
-   "_fin": 47.38,
-   "d": "['[curious]', 'Comment ça? Vous avez fait quoi chez lui, là?']"
+   "t": "Et le respect aussi, chacal. Calme-toi. Vas-y, renvois le ballon, le vieux, là!",
+   "_deb": 21.98,
+   "_fin": 25.54,
+   "d": "[frustrated] Et le respect aussi, chacal. Calme-toi. Vas-y, renvois le ballon, le vieux, là!"
   },
   {
    "p": "presentateur",
-   "t": "On a fait une petite soirée, on a fait un petit apéro.",
-   "_deb": 47.7,
-   "_fin": 51.42,
-   "d": "['[neutral]', 'On a fait une petite soirée, on a fait un petit apéro.']"
-  },
-  {
-   "p": "invite",
-   "t": "Il habite où, lui?",
-   "_deb": 51.62,
-   "_fin": 52.98,
-   "d": "['[inquisitive]', 'Il habite où, lui?']"
+   "t": "Regarde, tu me le demandes autrement et je suis pas vieux.",
+   "_deb": 25.56,
+   "_fin": 27.22,
+   "d": "[defensive] Regarde, tu me le demandes autrement et je suis pas vieux."
   },
   {
    "p": "presentateur",
-   "t": "Écoute, c'est hyper drôle parce qu'il habite vraiment pas très loin de chez moi.",
-   "_deb": 54.32,
-   "_fin": 58.32,
-   "d": "['[amused]', \"Écoute, c'est hyper drôle parce qu'il habite vraiment pas très loin de chez moi.\"]"
-  },
-  {
-   "p": "invite",
-   "t": "Attends, mais tu le connais d'où, ce mec? C'est qui, ça?",
-   "_deb": 59.2,
-   "_fin": 61.3,
-   "d": "['[investigative]', \"Attends, mais tu le connais d'où, ce mec? C'est qui, ça?\"]"
-  },
-  {
-   "p": "invite",
-   "t": "Je n'ai jamais entendu parler de lui.",
-   "_deb": 61.3,
-   "_fin": 63.16,
-   "d": "['[exasperated]', \"Je n'ai jamais entendu parler de lui.\"]"
+   "t": "Si, t'es vieux! J'ai 24 ans. Ouh! Presque un quart de siècle!",
+   "_deb": 27.24,
+   "_fin": 32.74,
+   "d": "[mocking] Si, t'es vieux! J'ai 24 ans. Ouh! Presque un quart de siècle!"
   },
   {
    "p": "presentateur",
-   "t": "Je ne sais pas, c'est un pote de Sandra, elle l'a ramené comme ça.",
-   "_deb": 63.38,
-   "_fin": 66.84,
-   "d": "['[neutral]', \"Je ne sais pas, c'est un pote de Sandra, elle l'a ramené comme ça.\"]"
+   "t": "Prouton!",
+   "_deb": 34.36,
+   "_fin": 35.06,
+   "d": "[laughing] Prouton!"
   },
   {
    "p": "presentateur",
-   "t": "C'était good vibe, tout le monde était hyper cool.",
-   "_deb": 67.02,
-   "_fin": 69.74,
-   "d": "['[satisfied]', \"C'était good vibe, tout le monde était hyper cool.\"]"
+   "t": "Ils sont tes parents? Papa, il y a le monsieur mort, il ne veut pas me rendre mon ballon!",
+   "_deb": 36.9,
+   "_fin": 39.76,
+   "d": "[shouting] Ils sont tes parents? Papa, il y a le monsieur mort, il ne veut pas me rendre mon ballon!"
+  },
+  {
+   "p": "envoyee",
+   "t": "Oui, qu'est-ce qui se passe?",
+   "_deb": 40.34,
+   "_fin": 41.12,
+   "d": "[concerned] Oui, qu'est-ce qui se passe?"
   },
   {
    "p": "presentateur",
-   "t": "Franchement, c'était trop bien, cette soirée. J'ai adoré.",
-   "_deb": 70.04,
-   "_fin": 72.22,
-   "d": "['[happy]', \"Franchement, c'était trop bien, cette soirée. J'ai adoré.\"]"
-  },
-  {
-   "p": "invite",
-   "t": "Il habite à côté de chez toi, tu m'as dit?",
-   "_deb": 72.34,
-   "_fin": 74.06,
-   "d": "['[neutral]', \"Il habite à côté de chez toi, tu m'as dit?\"]"
+   "t": "Non, non, monsieur, en fait, votre fils m'a lancé son ballon sur la tête.",
+   "_deb": 41.16,
+   "_fin": 43.58,
+   "d": "[calm] Non, non, monsieur, en fait, votre fils m'a lancé son ballon sur la tête."
   },
   {
    "p": "presentateur",
-   "t": "Ouais, je crois, deux rues, pas la rue Magenta.",
-   "_deb": 74.2,
-   "_fin": 77.74,
-   "d": "['[neutral]', 'Ouais, je crois, deux rues, pas la rue Magenta.']"
+   "t": "Je lui ai juste demandé de faire attention et il m'a répondu que tu n'avais qu'à te mettre ailleurs.",
+   "_deb": 43.66,
+   "_fin": 46.38,
+   "d": "[explaining] Je lui ai juste demandé de faire attention et il m'a répondu que tu n'avais qu'à te mettre ailleurs."
   },
   {
-   "p": "invite",
-   "t": "Attends, mais bouge pas, bouge pas, j'arrive. Je dors chez toi ce soir, j'arrive.",
-   "_deb": 77.78,
-   "_fin": 81.1,
-   "d": "['[excited]', \"Attends, mais bouge pas, bouge pas, j'arrive. Je dors chez toi ce soir, j'arrive.\"]",
+   "p": "envoyee",
+   "t": "Bah, est-ce qu'il a tort?",
+   "_deb": 46.48,
+   "_fin": 48.04,
+   "d": "[sarcastic] Bah, est-ce qu'il a tort?"
+  },
+  {
+   "p": "presentateur",
+   "t": "Hein?",
+   "_deb": 48.74,
+   "_fin": 49.1,
+   "d": "[confused] Hein?"
+  },
+  {
+   "p": "envoyee",
+   "t": "Je ne comprends pas.",
+   "_deb": 49.1,
+   "_fin": 51.32,
+   "d": "[clueless] Je ne comprends pas."
+  },
+  {
+   "p": "presentateur",
+   "t": "Plait-il?",
+   "_deb": 53.16,
+   "_fin": 53.8,
+   "d": "[annoyed] Plait-il?"
+  },
+  {
+   "p": "envoyee",
+   "t": "Est-ce qu'il a tort? Hein? Le parc, il est à tout le monde, on est bien d'accord.",
+   "_deb": 53.94,
+   "_fin": 57.24,
+   "d": "[defensive] Est-ce qu'il a tort? Hein? Le parc, il est à tout le monde, on est bien d'accord."
+  },
+  {
+   "p": "presentateur",
+   "t": "Oui? mais elle m 'a envoyé son ballon sur",
+   "_deb": 58.6,
+   "_fin": 60.9
+  },
+  {
+   "p": "envoyee",
+   "t": "le crâne et alors c 'est un enfant je comprends pas je vois pas où est le problème là il rigole ou quoi lui",
+   "_deb": 60.9,
+   "_fin": 65.06
+  },
+  {
+   "p": "presentateur",
+   "t": "mais qu 'est ce qui t 'arrive toi",
+   "_deb": 66.22,
+   "_fin": 67.12
+  },
+  {
+   "p": "presentateur",
+   "t": "déjà ton fils il manque de respect et toi tu veux pas comprendre qu 'il me manque de respect là il",
+   "_deb": 68.12,
+   "_fin": 71.1
+  },
+  {
+   "p": "envoyee",
+   "t": "va faire l 'éducation de mon fils maintenant",
+   "_deb": 71.1,
+   "_fin": 72.18
+  },
+  {
+   "p": "envoyee",
+   "t": "mais chauffe pas j 'ai déjà le moteur qui tourne",
+   "_deb": 73.16,
+   "_fin": 74.5
+  },
+  {
+   "p": "envoyee",
+   "t": "Ne regarde pas comme ça je fais pas ton contrôle technique",
+   "_deb": 76.42,
+   "_fin": 77.96,
    "chute": true
   }
  ],
  "bandeau": [],
  "gag": null,
- "legende": "Lila raconte sa soirée mouvementée à Kévin avec enthousiasme.",
+ "legende": "Un simple ballon peut déclencher une tempête de mots et d'émotions.",
  "hashtags": [
   "petitsdramas",
-  "soiree",
-  "amies",
-  "mystere",
-  "humour",
-  "tiktok",
-  "drole"
+  "conflitpublic",
+  "parcdrama",
+  "respect",
+  "humourquotidien",
+  "famille",
+  "ballondefoot"
  ],
  "sources": [
-  "https://www.tiktok.com/@charly.bse/video/7638967808029674785"
+  "https://www.tiktok.com/@vignianimation/video/7697683746144668960"
  ],
  "decoupage": [
   {
@@ -192,22 +218,21 @@
     3,
     4,
     5,
-    18
-   ],
-   "lieu": "",
-   "son": "",
-   "duree": 0.0,
-   "decor": "chambre à coucher, lit défait avec une couverture rose, table de chevet avec un téléphone et une tasse de café, étagères avec des robes et des escarpins.",
-   "titre": "La soirée de Lila"
-  },
-  {
-   "scene": "2",
-   "repliques": [
     6,
     7,
     8,
     9,
-    10,
+    10
+   ],
+   "lieu": "",
+   "son": "",
+   "duree": 0.0,
+   "decor": "parc public avec bancs en bois, ballon de foot, arbres et grillage en arrière-plan, ciel bleu",
+   "titre": "Scène 1 : Le conflit au parc"
+  },
+  {
+   "scene": "2",
+   "repliques": [
     11,
     12,
     13,
@@ -215,155 +240,357 @@
     15,
     16,
     17,
+    18,
     19,
     20,
-    21
+    21,
+    22,
+    23,
+    24,
+    25,
+    26
    ],
    "lieu": "",
    "son": "",
    "duree": 0.0,
-   "decor": "salon cosy avec un canapé, une table basse avec des bouteilles et des verres, un poster de fleurs au mur.",
-   "titre": "Les questions de Kévin"
+   "decor": "parc public, bancs en bois, ballon de foot, famille avec enfant, arbres et grillage en arrière-plan, ciel bleu",
+   "titre": "Scène 2 : L'escalade du conflit"
   }
  ],
  "studio": {
-  "moment": "soir",
+  "moment": "jour",
   "lieux": [
-   "chambre",
-   "salon"
+   "parc"
   ],
   "costumes": {
    "presentateur": {
-    "haut": "robe",
-    "c_haut": "rose",
-    "motif": "fleurs",
-    "bas": "escarpins",
-    "chaussures": "ville",
-    "details": [
-     "bracelets",
-     "collier"
-    ],
-    "chapeau": null,
-    "cheveux": "long",
-    "c_cheveux": "brun"
-   },
-   "invite": {
     "haut": "tshirt",
     "c_haut": "bleu",
     "motif": "uni",
+    "bas": "jean",
+    "chaussures": "baskets",
+    "details": [
+     "lunettes_soleil",
+     "barbe_courte"
+    ]
+   },
+   "invite": {
+    "haut": "chemise",
+    "c_haut": "blanc",
+    "motif": "uni",
     "bas": "pantalon",
+    "chaussures": "ville",
+    "details": [
+     "cravate",
+     "barbe_pleine"
+    ]
+   },
+   "envoyee": {
+    "haut": "tshirt",
+    "c_haut": "orange",
+    "motif": "uni",
+    "bas": "short",
     "chaussures": "baskets",
     "details": [
      "barbe_courte",
-     "lunettes_soleil"
-    ],
-    "chapeau": null,
-    "cheveux": "court",
-    "c_cheveux": "blond"
+     "sac_a_dos"
+    ]
    }
+  },
+  "personnages": [
+   {
+    "genre": "h",
+    "age": 55,
+    "taille": 1,
+    "corpulence": 0.8,
+    "cheveux": "court",
+    "c_cheveux": "gris",
+    "barbe": "trois_jours"
+   },
+   {
+    "genre": "f",
+    "age": 40,
+    "taille": 0.9,
+    "corpulence": 0.6,
+    "cheveux": "long",
+    "c_cheveux": "brun",
+    "barbe": "rien"
+   },
+   {
+    "genre": "m",
+    "age": 15,
+    "taille": 0.8,
+    "corpulence": 0.5,
+    "cheveux": "court",
+    "c_cheveux": "noir",
+    "barbe": "rien"
+   }
+  ],
+  "objets": [
+   {
+    "replique": 1,
+    "objet": "ballon"
+   },
+   {
+    "replique": 11,
+    "objet": "ballon"
+   }
+  ],
+  "ambiances": [
+   "soleil"
+  ],
+  "cadence": "rapide",
+  "plans": [
+   {
+    "replique": 0,
+    "plan": "moyen",
+    "mouvement": "fixe",
+    "geste": "explique",
+    "reaction": "aucune"
+   },
+   {
+    "replique": 1,
+    "plan": "serre",
+    "mouvement": "zoom_choc",
+    "geste": "facepalm",
+    "reaction": "choc"
+   },
+   {
+    "replique": 11,
+    "plan": "moyen",
+    "mouvement": "fixe",
+    "geste": "pointe_d",
+    "reaction": "sceptique"
+   },
+   {
+    "replique": 24,
+    "plan": "large",
+    "mouvement": "travelling",
+    "geste": "bras_ouverts",
+    "reaction": "colère"
+   }
+  ],
+  "gags": [
+   "'Respectez les vieux, ils ont plus de balles que vous !'",
+   "'Attention : Bancs piégés par des ballons'",
+   "'Parc : Ici, même les ballons ont des droits !'"
+  ],
+  "decors_vus": {
+   "presentateur": "banc en bois, ballon de foot noir et blanc, arbres verts en arrière-plan, ciel bleu, grillage métallique",
+   "invite": "banc en bois, ballon de foot noir et blanc, arbres verts en arrière-plan, ciel bleu, grillage métallique",
+   "envoyee": "banc en bois, ballon de foot noir et blanc, arbres verts en arrière-plan, ciel bleu, grillage métallique"
   }
  },
  "doublage": {
-  "piste": "/tmp/tmp8ejfn7wj/piste.wav",
-  "duree": 81.34,
-  "source": "https://www.tiktok.com/@charly.bse/video/7638967808029674785",
-  "auteur": "charly.bse",
-  "contexte": "Deux amies, Lila (presentatrice) et Kévin (invité), discutent d'une soirée passée ensemble. Lila raconte ses aventures avec enthousiasme tandis que Kévin pose des questions pour en savoir plus, avec une pointe de curiosité et d'humour.",
+  "piste": "/tmp/tmps3wxq8l9/piste.wav",
+  "duree": 83.15,
+  "source": "https://www.tiktok.com/@vignianimation/video/7697683746144668960",
+  "auteur": "vignianimation",
+  "contexte": "Un parc en pleine journée où un homme assis sur un banc est victime d'un enfant qui lui lance un ballon. Une dispute éclate entre lui, l'enfant et ses parents, révélant un manque de respect et de compréhension.",
   "evenements": [],
   "visuel": {
-   "gestes": [],
-   "duree": 81.5,
-   "nb_plans": 1,
-   "duree_plan": 81.5,
-   "coupes": [],
+   "gestes": [
+    [
+     1.5,
+     0.51,
+     1.0
+    ],
+    [
+     8.0,
+     0.41,
+     1.0
+    ],
+    [
+     15.0,
+     0.4,
+     1.0
+    ],
+    [
+     16.5,
+     0.39,
+     1.0
+    ],
+    [
+     35.0,
+     0.5,
+     1.0
+    ],
+    [
+     48.5,
+     0.4,
+     1.0
+    ],
+    [
+     49.5,
+     0.39,
+     1.0
+    ],
+    [
+     58.0,
+     0.4,
+     1.0
+    ],
+    [
+     66.5,
+     0.4,
+     1.0
+    ],
+    [
+     67.5,
+     0.4,
+     1.0
+    ],
+    [
+     68.5,
+     0.4,
+     1.0
+    ]
+   ],
+   "duree": 83.5,
+   "nb_plans": 16,
+   "duree_plan": 5.22,
+   "coupes": [
+    0.5,
+    4.5,
+    14.5,
+    17.0,
+    18.0,
+    21.0,
+    22.0,
+    33.0,
+    37.0,
+    47.5,
+    48.0,
+    52.0,
+    56.0,
+    57.5,
+    58.5
+   ],
    "plans": {
     "tres_serre": 0.0,
     "serre": 0.0,
-    "moyen": 0.0,
-    "large": 1.0
+    "moyen": 0.796,
+    "large": 0.204
    },
    "camera": {
-    "fixe": 0.994,
-    "avance": 0.0,
-    "recul": 0.0,
+    "fixe": 0.887,
+    "avance": 0.093,
+    "recul": 0.013,
     "travelling": 0.0,
-    "epaule": 0.006
+    "epaule": 0.007
    },
-   "nb_personnes": 0,
-   "personnes": [],
-   "visages": false,
+   "nb_personnes": 1,
+   "personnes": [
+    {
+     "place": "centre",
+     "presence": 0.635,
+     "habit": [
+      174,
+      190,
+      60
+     ],
+     "cheveux": [
+      13,
+      12,
+      13
+     ],
+     "sourire": 0.0,
+     "taille": 0.109,
+     "tete_penchee": 2.3,
+     "regard_cote": 0.745
+    },
+    {
+     "place": "gauche",
+     "presence": 0.162,
+     "habit": [
+      173,
+      191,
+      61
+     ],
+     "cheveux": [
+      13,
+      13,
+      13
+     ],
+     "sourire": 0.0,
+     "taille": 0.111,
+     "tete_penchee": 2.2,
+     "regard_cote": 0.037
+    }
+   ],
+   "visages": true,
    "sourires": 0.0,
-   "energie": 0.148,
+   "energie": 0.253,
    "mur": [
-    248,
-    229,
-    213
+    97,
+    125,
+    42
    ],
    "palette": [
     [
-     248,
-     229,
-     212,
-     0.412
+     97,
+     131,
+     28,
+     0.332
     ],
     [
-     205,
-     195,
-     187,
-     0.219
+     179,
+     184,
+     52,
+     0.161
     ],
     [
-     126,
-     86,
-     51,
-     0.122
+     36,
+     42,
+     20,
+     0.142
     ],
     [
-     250,
-     200,
-     149,
-     0.087
+     192,
+     218,
+     243,
+     0.139
     ],
     [
-     134,
-     128,
-     128,
-     0.081
+     106,
+     110,
+     98,
+     0.138
     ],
     [
-     16,
-     12,
-     12,
-     0.079
+     164,
+     169,
+     155,
+     0.088
     ]
    ],
    "lumiere": {
-    "luminosite": 196.3,
-    "chaleur": 36.6,
-    "saturation": 56.7
+    "luminosite": 148.3,
+    "chaleur": 40.4,
+    "saturation": 129.0
    },
-   "moment": "jour"
+   "moment": "soir"
   },
   "audio": {
-   "duree": 81.3,
+   "duree": 83.2,
    "nb_voix": 2,
    "voix": [
     {
-     "hz": 256,
+     "hz": 212,
      "genre": "f",
-     "part": 0.77
+     "part": 0.72
     },
     {
-     "hz": 146,
-     "genre": "h",
-     "part": 0.23
+     "hz": 216,
+     "genre": "f",
+     "part": 0.28
     }
    ],
-   "debit": 3.94,
-   "blanc_moyen": 0.38,
-   "coupes": 1,
-   "dynamique_db": 16.1,
-   "cris": 0.006,
+   "debit": 5.0,
+   "blanc_moyen": 0.76,
+   "coupes": 4,
+   "dynamique_db": 28.7,
+   "cris": 0.016,
    "musique": null,
    "impacts": 0,
    "impacts_10s": 0.0,
@@ -372,17 +599,17 @@
    "sur_vanne": 0,
    "evenements": {},
    "emotions": {
-    "'[neutral": 5,
-    "'[excited": 2,
-    "'[enthousiast": 1,
-    "'[playful": 1,
-    "'[assured": 1,
-    "'[delighted": 1,
-    "'[reflective": 1,
-    "'[confused": 1
+    "annoyed": 2,
+    "accusing": 2,
+    "confused": 2,
+    "angry": 2,
+    "frustrated": 2,
+    "defensive": 2,
+    "mocking": 2,
+    "relaxed": 1
    }
   },
-  "video_origine": "/tmp/tmp8ejfn7wj/src.mp4"
+  "video_origine": "/tmp/tmps3wxq8l9/src.mp4"
  },
  "fiche": {
   "note": 0,
@@ -397,22 +624,21 @@
      3,
      4,
      5,
-     18
-    ],
-    "lieu": "",
-    "son": "",
-    "duree": 0.0,
-    "decor": "chambre à coucher, lit défait avec une couverture rose, table de chevet avec un téléphone et une tasse de café, étagères avec des robes et des escarpins.",
-    "titre": "La soirée de Lila"
-   },
-   {
-    "scene": "2",
-    "repliques": [
      6,
      7,
      8,
      9,
-     10,
+     10
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 0.0,
+    "decor": "parc public avec bancs en bois, ballon de foot, arbres et grillage en arrière-plan, ciel bleu",
+    "titre": "Scène 1 : Le conflit au parc"
+   },
+   {
+    "scene": "2",
+    "repliques": [
      11,
      12,
      13,
@@ -420,43 +646,57 @@
      15,
      16,
      17,
+     18,
      19,
      20,
-     21
+     21,
+     22,
+     23,
+     24,
+     25,
+     26
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "salon cosy avec un canapé, une table basse avec des bouteilles et des verres, un poster de fleurs au mur.",
-    "titre": "Les questions de Kévin"
+    "decor": "parc public, bancs en bois, ballon de foot, famille avec enfant, arbres et grillage en arrière-plan, ciel bleu",
+    "titre": "Scène 2 : L'escalade du conflit"
    }
   ]
  },
  "_monte": true,
  "_voix_hz": {
-  "presentateur": 245,
-  "invite": 140
+  "presentateur": 199,
+  "envoyee": 214
  },
  "_voix_genre": {
-  "presentateur": "f",
-  "invite": "h"
+  "envoyee": "h"
  },
  "realisation": {
-  "moment": "soir",
+  "moment": "jour",
   "lieux": [
-   "chambre",
-   "salon"
+   "rue",
+   "bar"
   ],
-  "gags": [],
+  "gags": [
+   "'Respectez les vieux, ils ont plus de balles que vous !'",
+   "'Attention : Bancs piégés par des ballons'",
+   "'Parc : Ici, même les ballons ont des droits !'"
+  ],
   "ambiances": [
-   "poussiere"
+   "neon"
   ],
   "source": "auteur+image",
   "tenues": {
-   "presentateur": "robe",
-   "invite": "tshirt"
+   "presentateur": "tshirt",
+   "envoyee": "tshirt"
   },
   "plans": [
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
    "large/fixe",
    "large/fixe",
    "large/fixe",
