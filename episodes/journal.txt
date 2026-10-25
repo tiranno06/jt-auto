@@ -2,14 +2,14 @@ Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, ElevenLabs epuise — IA utilisée : mistral
 Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @motiontoonz, @same_same53, @charly.bse, @kodanimation, @vignianimation, @vincedessine
-Profil TikTok @vincedessine : 37 vidéo(s) jamais utilisée(s)
-Profil TikTok @motiontoonz : 37 vidéo(s) jamais utilisée(s)
 Profil TikTok @kodanimation : 34 vidéo(s) jamais utilisée(s)
-Vidéo depuis TikTok : https://www.tiktok.com/@vincedessine/video/7617896256156830998
+Profil TikTok @motiontoonz : 37 vidéo(s) jamais utilisée(s)
+Profil TikTok @vignianimation : 39 vidéo(s) jamais utilisée(s)
+Vidéo depuis TikTok : https://www.tiktok.com/@kodanimation/video/7675884924020313376
   son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 87.5 s, compte d'origine @vincedessine
-[ WARN:0@19.441] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
-  image de la vidéo : 28 plans (≈ 3.14 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 0 %, large 100 % ; caméra : fixe 98 %, epaule 1 % ; 0 personne(s) à l'écran : aucun visage repéré ; agitation 0.221 ; lumière jour ; fond [249, 248, 249]
+  son récupéré : 65.3 s, compte d'origine @kodanimation
+[ WARN:0@15.477] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  image de la vidéo : 6 plans (≈ 10.92 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 0 %, large 100 % ; caméra : fixe 95 %, avance 2 %, recul 0 %, travelling 1 % ; 0 personne(s) à l'écran : aucun visage repéré ; agitation 0.194 ; lumière jour ; fond [168, 186, 207]
   isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
   transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/core/io.py:48: UserWarning: 
@@ -19,47 +19,44 @@ torchcodec is not installed correctly so built-in audio decoding will fail. Solu
 
 Could not load this library: /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/torchcodec/libtorchcodec_image.so
   warnings.warn(
-[0;93m2026-10-25 15:27:39.321634086 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[0;93m2026-10-25 15:55:58.816618622 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1913.)
   std = sequences.std(dim=-1, correction=1)
-  voix séparées par pyannote : 2 voix, 30 tours de parole
+  voix séparées par pyannote : 2 voix, 14 tours de parole
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-  voix vérifiées mot par mot : 16 mot(s) remis sur la bonne voix
-  35 répliques, voix : {'speaker_0': None, 'speaker_1': 311}
-  son de la vidéo : 2 voix [None Hz (?, 43 %), 311 Hz (f, 56 %)], 6.04 mots/s, blancs 0.19 s, 8 coupure(s) de parole, dynamique 15.0 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
+  voix re-séparées par leur empreinte (ECAPA) : 2 voix (netteté 0.15)
+  voix vérifiées mot par mot : 24 mot(s) remis sur la bonne voix
+  25 répliques, voix : {'speaker_0': 242, 'speaker_1': 212}
+  son de la vidéo : 2 voix [242 Hz (f, 74 %), 212 Hz (f, 26 %)], 5.44 mots/s, blancs 0.37 s, 4 coupure(s) de parole, dynamique 23.4 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
   IA gemini indisponible (gemini 429 : [{
   "error": {
     "code": 429,
     "message": "You exceeded your current quota, please check your plan an) : on passe à la suivante
-  scène reconstituée : Deux personnages, un couple, discutent dans leur chambre à coucher après un moment intime. La conversation dérive vers des tensions et des non-dits, révélant des frustrations mutuelles.
-  casting : speaker_0 → Jojo, speaker_1 → Lila
-  sous-titres : 17 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
-  19 réattribution(s) de l'IA refusée(s) : la voix de ces répliques est reconnue avec certitude
-Sketch : « COUPLE EN CRISE », 35 répliques
-  décor 0 : chambre à coucher, lit défait avec une couverture, une table de chevet
-  décor 1 : même chambre, mais les personnages sont assis sur le lit, le livre est
-  décor 2 : même chambre, les personnages sont debout près du lit, le livre est po
-  décor 3 : même chambre, les personnages se font face, un livre est posé sur le s
-montage : 4 plans (0.0:large>pre/coupe 8.4:large>env/coupe 21.2:large>pre/coupe 46.5:large>env/coupe)
-studio : nuit, lieux ['chambre', 'chambre', 'chambre', 'chambre'], tenues presentateur=tshirt, envoyee=pyjama, 0 figurant(s), ambiances ['pluie'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-rembobinage : 1 fois
-cartoon : durée 91.1 s, 35 répliques, 4 scène(s), personnages ['presentateur', 'envoyee']
-Contrôle image : 2 défaut(s) — 46.75 s tete_coupee (presentateur), 46.75 s tete_coupee (envoyee)
-montage : 4 plans (0.0:large>pre/coupe 8.4:large>env/coupe 21.2:large>pre/coupe 46.5:large>env/coupe)
-studio : nuit, lieux ['chambre', 'chambre', 'chambre', 'chambre'], tenues presentateur=tshirt, envoyee=pyjama, 0 figurant(s), ambiances ['pluie'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-rembobinage : 1 fois
-cartoon : durée 91.1 s, 35 répliques, 4 scène(s), personnages ['presentateur', 'envoyee']
-Contrôle image : 2 défaut(s) — 46.75 s tete_coupee (presentateur), 46.75 s tete_coupee (envoyee)
-  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~1366 images)
-  morceau 4098–5464 reçu d'une machine d'aide
-  morceau 1366–2732 reçu d'une machine d'aide
-  morceau 2732–4098 reçu d'une machine d'aide
-  dessin partagé terminé en 6.6 min
+  scène reconstituée : Deux collègues de bureau, un présentateur enthousiaste et un invité blasé, discutent d'une proposition farfelue de bataille d'eau pendant une canicule, alors qu'ils sont en pleine réunion de travail. L'ambiance est détendue mais tendue, entre humour et exaspération.
+  casting : speaker_0 → Jojo, speaker_1 → Kévin
+  sous-titres : 1 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
+Sketch : « BATAILLE D'EAU AU BUREAU », 25 répliques
+  décor 0 : bureau moderne avec tables en désordre, chaises, ordinateurs, ventilo 
+  décor 1 : même bureau, mais avec une affiche 'Bataille deau interdite' accrochée
+  décor 2 : même bureau, dessin d'une bite sur un tableau blanc effaçable, pistole
+montage : 3 plans (0.0:large>pre/coupe 32.0:large>pre/coupe 48.1:large>pre/coupe)
+studio : jour, lieux ['bureau', 'bureau', 'bureau'], tenues presentateur=tshirt, invite=chemise, 5 figurant(s), ambiances ['pluie', 'poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 68.5 s, 25 répliques, 3 scène(s), personnages ['presentateur', 'invite']
+Contrôle image : 4 défaut(s) — 32.25 s tete_coupee (presentateur), 32.25 s tete_coupee (invite), 48.25 s tete_coupee (presentateur), 48.25 s tete_coupee (invite)
+montage : 3 plans (0.0:large>pre/coupe 32.0:large>pre/coupe 48.1:large>pre/coupe)
+studio : jour, lieux ['bureau', 'bureau', 'bureau'], tenues presentateur=tshirt, invite=chemise, 5 figurant(s), ambiances ['pluie', 'poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 68.5 s, 25 répliques, 3 scène(s), personnages ['presentateur', 'invite']
+Contrôle image : 4 défaut(s) — 32.25 s tete_coupee (presentateur), 32.25 s tete_coupee (invite), 48.25 s tete_coupee (presentateur), 48.25 s tete_coupee (invite)
+  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~1027 images)
+  morceau 2054–3081 reçu d'une machine d'aide
+  morceau 1027–2054 reçu d'une machine d'aide
+  morceau 3081–4108 reçu d'une machine d'aide
+  dessin partagé terminé en 7.3 min
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury qualité (ia) : 7.1/10 — Humoriste 7.0/10 : 0.4 s La chute finale manque de réactivité visuelle. Un zoom choc sur le personnage qui dit la réplique pourrait amplifier l'effet comique.; 60.6 s L'humour repose sur des sous-entendus qui pourraient être renforcés par des regards caméra ou des réactions exagérées.; 80.4 s L'accumulation des 'oui' pourrait être plus drôle avec un bruitage ou un effet sonore pour casser la monotonie. | Réalisateur 6.0/10 : 0 s Montage trop lent avec seulement 0.4 plans toutes les 10 secondes. Il faudrait accélérer le rythme pour maintenir l'attention.; 10.3 s Manque de plans de réaction de la personne qui écoute, ce qui rend les échanges moins dynamiques.; 28.0 s Tête du présentateur parfois coupée par le bord de l'image, ce qui nuit à la qualité professionnelle.; 46.8 s tête de presentateur coupée par le bord de l'image (large) | Directeur artistique 8.0/10 : 0 s Les personnages manqu
-Manque par rapport à la vidéo d'origine : Les personnages de l'original ont une tête plus ronde et un style de dessin plus simplifié (trait noir épais). ; Dans l'original, les décors sont plus minimalistes et les dialogues sont parfois accompagnés de bruitages spécifiques comme des 'boings' ou des sons de jeu vidé ; L'ambiance de l'original est plus 'jeu vidéo' avec des effets visuels comme des étoiles ou des bulles pour les répliques. ; Les réactions des personnages dans l'original sont plus exagérées et accompagnées de mouvements de caméra plus dynamiques.
+Jury qualité (ia) : 5.8/10 — Humoriste 6.0/10 : 34.9 s La chute finale manque de punch. La vanne sur le chômage et la fin avec le pistolet à eau se dilue et n'est pas assez marquée.; 60.2 s ; 67.9 s Aucune réaction forte ou regard caméra pour renforcer la chute finale. | Réalisateur 5.0/10 : 0.4 s Têtes des personnages coupées par le bord de l'image, notamment celle du présentateur.; 8.5 s Manque de plans serrés sur les réactions des personnages.; 67.9 s Montage trop lent pour la chute finale.; 32.2 s tête de presentateur coupée par le bord de l'image (large); 48.2 s tête de presentateur coupée par le bord de l'image (large) | Directeur artistique 7.0/10 : 0 s Les personnages ne reflètent pas toujours l'âge et le style souhaités (ex : barbe absente mais allure trop mature).; 16.3 s Les décors ne montrent pas les objets mentionnés (ex : pistolet à eau).; 67.9 s Absence de cohérence visuelle pour la chute finale (ex :
+Manque par rapport à la vidéo d'origine : Absence de barbe sur les personnages malgré leur âge mature dans l'original. ; Absence de pistolet à eau visible dans les mains des personnages. ; Manque de réactions exagérées et de regards caméra pour renforcer l'humour. ; Absence de bruitages pour les actions clés (ex : tir d'eau). ; Décors moins détaillés (ex : absence de graphiques ou objets contextuels comme dans l'original).
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = mistral ×2, voix = tiktok, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 27083, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 42}
-Quota de l'API GitHub : 4402 appels restants
-OK : sortie/2026-10-25_16h30_emission.mp4 (91 s)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = gemini ×1, mistral ×2, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 20373, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 35}
+Quota de l'API GitHub : 4898 appels restants
+OK : sortie/2026-10-25_16h58_emission.mp4 (68 s)
