@@ -2,14 +2,14 @@ Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, ElevenLabs epuise — IA utilisée : mistral
 Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @motiontoonz, @same_same53, @charly.bse, @kodanimation, @vignianimation, @vincedessine
-Profil TikTok @vignianimation : 38 vidéo(s) jamais utilisée(s)
 Profil TikTok @same_same53 : 36 vidéo(s) jamais utilisée(s)
-Profil TikTok @motiontoonz : 37 vidéo(s) jamais utilisée(s)
-Vidéo depuis TikTok : https://www.tiktok.com/@vignianimation/video/7672445285896817952
+Profil TikTok @vignianimation : 37 vidéo(s) jamais utilisée(s)
+Profil TikTok @vincedessine : 35 vidéo(s) jamais utilisée(s)
+Vidéo depuis TikTok : https://www.tiktok.com/@same_same53/video/7675002356685081889
   son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 97.3 s, compte d'origine @vignianimation
-[ WARN:0@14.222] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
-  image de la vidéo : 9 plans (≈ 10.83 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 78 %, large 21 % ; caméra : fixe 92 %, avance 2 %, recul 1 %, travelling 0 %, epaule 2 % ; 1 personne(s) à l'écran : gauche (habit [163, 162, 163], cheveux [39, 39, 39], sourit 0 %) ; agitation 0.292 ; lumière jour ; fond [187, 174, 159]
+  son récupéré : 62.7 s, compte d'origine @same_same53
+[ WARN:0@16.763] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  image de la vidéo : 1 plans (≈ 63.0 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 11 %, large 88 % ; caméra : fixe 100 % ; 1 personne(s) à l'écran : aucun visage repéré ; agitation 0.103 ; lumière jour ; fond [0, 0, 0]
   isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
   transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/core/io.py:48: UserWarning: 
@@ -19,48 +19,59 @@ torchcodec is not installed correctly so built-in audio decoding will fail. Solu
 
 Could not load this library: /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/torchcodec/libtorchcodec_image.so
   warnings.warn(
-[0;93m2026-10-25 19:55:33.425941578 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[0;93m2026-10-25 20:16:39.981760156 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1913.)
   std = sequences.std(dim=-1, correction=1)
-  voix séparées par pyannote : 2 voix, 23 tours de parole
+  voix séparées par pyannote : 1 voix, 22 tours de parole
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-  voix vérifiées mot par mot : 7 mot(s) remis sur la bonne voix
-  26 répliques, voix : {'speaker_0': 229, 'speaker_1': 120}
-  son de la vidéo : 2 voix [229 Hz (f, 14 %), 120 Hz (h, 86 %)], 3.99 mots/s, blancs 0.23 s, 1 coupure(s) de parole, dynamique 12.8 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
-  scène reconstituée : Dans le salon un dimanche soir, une femme pose à son conjoint la question piège ultime sur son poids, plongeant l'homme dans une panique intérieure totale.
-  casting : speaker_0 → Lila, speaker_1 → Jojo
-  sous-titres : 25 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
-Sketch : « LA QUESTION PIÈGE DU COUPLE », 26 répliques
-  décor 0 (lieu ressemblant de la banque, budget Modal du mois atteint) : Modern living room with a grey sofa, wooden coffee table, po
-montage : 1 plans (0.0:large>env/coupe)
-studio : soir, lieux ['salon'], tenues envoyee=tshirt, presentateur=debardeur, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 100.8 s, 26 répliques, 1 scène(s), personnages ['envoyee', 'presentateur']
-montage : 1 plans (0.0:large>env/coupe)
-studio : soir, lieux ['salon'], tenues envoyee=tshirt, presentateur=debardeur, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 100.8 s, 26 répliques, 1 scène(s), personnages ['envoyee', 'presentateur']
-  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~1511 images)
-  morceau 3023–4534 reçu d'une machine d'aide
-  morceau 4534–6046 reçu d'une machine d'aide
-  morceau 1512–3023 reçu d'une machine d'aide
-  dessin partagé terminé en 7.3 min
-Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
+  voix re-séparées par leur empreinte (ECAPA) : 2 voix (netteté 0.16)
+  voix vérifiées mot par mot : 3 mot(s) remis sur la bonne voix
+  18 répliques, voix : {'speaker_0': 242, 'speaker_1': 227}
+  son de la vidéo : 2 voix [242 Hz (f, 82 %), 227 Hz (f, 18 %)], 3.82 mots/s, blancs 0.84 s, 1 coupure(s) de parole, dynamique 24.5 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
   IA gemini indisponible (gemini 429 : [{
   "error": {
     "code": 429,
     "message": "You exceeded your current quota, please check your plan an) : on passe à la suivante
-Jury qualité (ia) : 8.3/10 — Humoriste 6.0/10 : 0.4 s La chute finale manque de dynamisme visuel. Le zoom choc sur le personnage qui dit 'T’es sûr ?' est absent, ce qui réduit l'impact comique.; 31.7 s Les vannes sur le 'gigot' et la viande pourraient être renforcées par un bruitage ou une réaction visuelle plus marquée.; 95.3 s La chute sur 'T’es sûr ?' aurait gagné en efficacité avec un regard caméra ou un geste exagéré pour renforcer le côté sarcastique. | Réalisateur 6.6/10 : montage trop lent : 0.1 plans toutes les 10 s (il en faudrait ~0.8); 52.2 s pas assez de plans de réaction de celui qui écoute | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.1/10 : 2.3 s sous-titres trop rapides à lire
-Manque par rapport à la vidéo d'origine : Les personnages de l'original ont des expressions faciales plus exagérées et des réactions immédiates (ex. : regard caméra, gestes spontanés). ; L'ambiance sonore originale inclut des bruitages plus variés (ex. : sons de boucherie pour les vannes sur la viande). ; Les plans de réaction du personnage qui écoute sont plus fréquents et dynamiques dans l'original.
-Corrections du jury (tour 1) : réaction « sceptique » à la réplique 15
-montage : 1 plans (0.0:large>env/coupe)
-studio : soir, lieux ['salon'], tenues envoyee=tshirt, presentateur=debardeur, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 100.8 s, 26 répliques, 1 scène(s), personnages ['envoyee', 'presentateur']
-  redessin partiel : 0/6046 images à redessiner (0 passage(s)), le reste repris tel quel
+  scène reconstituée : Une émission humoristique où un présentateur pose des questions absurdes à deux invités qui répondent en chœur par un mot-clé, dans un décor de plateau télé stylisé et décalé.
+  casting : speaker_0 → Jojo, speaker_1 → Lila
+  sous-titres : 12 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
+  6 réattribution(s) de l'IA refusée(s) : la voix de ces répliques est reconnue avec certitude
+  voix trop proches dans https://www.tiktok.com/@same_same53/video/7675002356685081889 (ressemblance 0.64) : on cherche une vidéo aux voix bien différentes
+Vidéo depuis TikTok : https://www.tiktok.com/@same_same53/video/7699485556987759905
+  son téléchargé (yt-dlp --impersonate chrome)
+  son récupéré : 106.0 s, compte d'origine @same_same53
+[ WARN:0@196.818] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  image de la vidéo : 1 plans (≈ 106.5 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 0 %, large 100 % ; caméra : fixe 100 % ; 0 personne(s) à l'écran : aucun visage repéré ; agitation 0.092 ; lumière jour ; fond [0, 0, 0]
+  isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
+  transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1913.)
+  std = sequences.std(dim=-1, correction=1)
+  voix séparées par pyannote : 2 voix, 21 tours de parole
+  voix vérifiées mot par mot : 31 mot(s) remis sur la bonne voix
+  27 répliques, voix : {'speaker_0': 262, 'speaker_1': 126}
+  son de la vidéo : 2 voix [262 Hz (f, 17 %), 126 Hz (h, 83 %)], 4.15 mots/s, blancs 0.31 s, 2 coupure(s) de parole, dynamique 23.8 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
+  scène reconstituée : Deux amis, l'un présentateur et l'autre invité, discutent d'un match de football entre le PSG et Barcelone, avec des explications farfelues et humoristiques sur les actions de l'invité pendant le match. Ils sont dans un bar animé, après une soirée arrosée.
+  casting : speaker_0 → Jojo, speaker_1 → Kévin
+  sous-titres : 11 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
+  3 réattribution(s) de l'IA refusée(s) : la voix de ces répliques est reconnue avec certitude
+Sketch : « MATCH PSG-BARÇA DÉLIRANT », 27 répliques
+  décor 0 : bar with scattered football scarves, half-empty beer bottles, and a la
+  décor 1 : bar with broken crayons scattered on the table, empty beer bottles, an
+montage : 2 plans (0.0:large>pre/coupe 17.7:large>pre/coupe)
+studio : soir, lieux ['bar', 'bar'], tenues presentateur=tshirt, invite=chemise, 4 figurant(s), ambiances ['neon', 'poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 109.2 s, 27 répliques, 2 scène(s), personnages ['presentateur', 'invite']
+montage : 2 plans (0.0:large>pre/coupe 17.7:large>pre/coupe)
+studio : soir, lieux ['bar', 'bar'], tenues presentateur=tshirt, invite=chemise, 4 figurant(s), ambiances ['neon', 'poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 109.2 s, 27 répliques, 2 scène(s), personnages ['presentateur', 'invite']
+  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~1638 images)
+  morceau 4916–6554 reçu d'une machine d'aide
+  morceau 3277–4916 reçu d'une machine d'aide
+  morceau 1638–3277 reçu d'une machine d'aide
+  dessin partagé terminé en 8.1 min
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury qualité (ia) : 6.3/10 — Humoriste 6.0/10 : 0.4 s La chute finale manque d'impact visuel. Le zoom choc sur le personnage qui dit 'T'es sûr ?' n'est pas présent et pourrait renforcer l'effet comique.; 64.1 s Les vannes sur les sushis et le White Lotus pourraient être encore plus drôles avec une réaction exagérée du personnage qui écoute.; 95.3 s Le timing de la chute 'Bah oui, t'as de la marge, hein' est un peu long et manque de punch. Un bruitage ou un effet sonore pourrait le renforcer. | Réalisateur 5.0/10 : 0 s Montage trop lent. Il faudrait ajouter des plans plus serrés pour dynamiser la scène, notamment lors des répliques clés.; 31.7 s Manque de plans de réaction du présentateur pour certaines répliques, notamment lors des moments comiques.; 89.3 s Faux raccord entre les plans 14 et 15. Le décor et les expressions faciales ne correspondent pas parfaitement. | Directeur artistique 7.0/10 : 0 s Les personnage
-Manque par rapport à la vidéo d'origine : Les personnages originaux ont des expressions faciales plus exagérées et des gestes plus dynamiques. ; L'ambiance sonore originale inclut des bruitages plus variés et des effets comiques comme des 'vine_boom' ou des 'dun_dun'. ; Les décors originaux incluent des détails plus stylisés et un style visuel plus cohérent avec l'humour absurde. ; Les transitions entre les plans sont plus fluides et dynamiques dans l'original. ; L'humour repose davantage sur des réactions physiques et des expressions faciales très marquées.
-La version corrigée n'est pas meilleure : on garde la première.
+Jury qualité (ia) : 8.0/10 — Humoriste 6.0/10 : 0.4 s La chute finale est trop longue et la vanne se dilue. La chute devrait être plus concise et percutante.; 69.9 s Manque de réaction visuelle ou de regard caméra pour renforcer le gag des cul-secs de bière.; 108.6 s La chute finale manque d'impact visuel. Un zoom choc ou une réaction exagérée renforcerait l'humour. | Réalisateur 5.0/10 : 0 s Montage trop lent. Il faudrait environ 2,8 plans par seconde pour dynamiser la vidéo.; 23.5 s Manque de plans de réaction de l'invité pour renforcer les échanges.; 88.9 s Faux raccords visibles entre certains plans, notamment lors des changements de décor ou de personnages. | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.1/10 : 7.9 s sous-titres trop rapides à lire
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = gemini ×1, mistral ×2, voix = tiktok, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 45265, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0}
-Quota de l'API GitHub : 4911 appels restants
-OK : sortie/2026-10-25_21h00_emission.mp4 (101 s)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = mistral ×3, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 34250, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 33}
+Quota de l'API GitHub : 4854 appels restants
+OK : sortie/2026-10-25_21h23_emission.mp4 (109 s)
