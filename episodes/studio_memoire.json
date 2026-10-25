@@ -1844,35 +1844,33 @@
  {
   "moment": "jour",
   "lieux": [
-   "voiture"
+   "rue"
   ],
   "source": "auteur+image",
-  "duree": 67.1,
+  "duree": 84.4,
   "plans": {
-   "moyen": 2,
-   "serre": 8,
-   "tres_serre": 5,
-   "contre_plongee": 1,
-   "epaule": 2
+   "moyen": 3,
+   "serre": 14,
+   "tres_serre": 2,
+   "epaule": 5,
+   "contre_plongee": 5
   },
   "mouvements": {
-   "fixe": 4,
-   "zoom_choc": 6,
+   "fixe": 9,
    "travelling": 3,
-   "avance": 3,
-   "epaule": 1,
-   "vertige": 1
+   "zoom_choc": 3,
+   "avance": 8,
+   "epaule": 4,
+   "recul": 2
   },
   "costumes": {
-   "presentateur": "blouson",
-   "envoyee": "debardeur"
+   "invite": "survetement",
+   "presentateur": "tshirt"
   },
-  "figurants": 0,
-  "ambiances": [
-   "vapeur"
-  ],
-  "controle": "Humoriste 8.6/10 : 58.1 s la chute finale est trop longue : la vanne se dilue | Réalisateur 2.0/10 : 2.8 s tête de envoyee coupée par le bord de l'image (serre); 17.2 s tête de envoyee coupée par le b",
-  "fichier": "2026-10-25_08h42_emission.mp4",
+  "figurants": 2,
+  "ambiances": [],
+  "controle": "Humoriste 5.4/10 : 4.7 s Manque d'impact comique lors de l'arrivée du ballon.; 76.4 s Chute finale sans punch visuel. | Réalisateur 5.0/10 : 48.9 s Haut de la tête et cheveux coupés par le cadre.; 23.",
+  "fichier": "2026-10-25_08h09_emission.mp4",
   "cine": {
    "focus": true,
    "vertige": true,
@@ -1880,6 +1878,51 @@
    "etalonnage": true,
    "profondeur": false,
    "grain": true,
+   "reflets": false,
+   "son": true
+  },
+  "cadence": "rapide"
+ },
+ {
+  "moment": "jour",
+  "lieux": [
+   "salon"
+  ],
+  "source": "auteur+image",
+  "duree": 83.7,
+  "plans": {
+   "serre": 16,
+   "tres_serre": 8,
+   "contre_plongee": 3,
+   "epaule": 6,
+   "moyen": 1
+  },
+  "mouvements": {
+   "fixe": 7,
+   "travelling": 11,
+   "avance": 8,
+   "zoom_choc": 2,
+   "recul": 3,
+   "epaule": 3
+  },
+  "costumes": {
+   "invite": "pull",
+   "presentateur": "chemise"
+  },
+  "figurants": 0,
+  "ambiances": [
+   "neon",
+   "pluie"
+  ],
+  "controle": "Humoriste 6.5/10 : 51 s La référence à la Tecktonik tombe un peu à plat sans accentuation comique sonore.; 79.5 s La chute finale sur 'Le quoi ?' manque d'impact et d'exagération visuelle.; 54 s Le pè",
+  "fichier": "2026-10-25_09h35_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": false,
+   "tiers": true,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": false,
    "reflets": true,
    "son": true
   },
