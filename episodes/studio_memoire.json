@@ -2397,39 +2397,34 @@
   "cadence": "normal"
  },
  {
-  "moment": "soir",
+  "moment": "jour",
   "lieux": [
-   "magasin",
-   "magasin",
-   "magasin"
+   "salon"
   ],
   "source": "auteur+image",
-  "duree": 63.9,
+  "duree": 30.8,
   "plans": {
-   "large": 33
+   "large": 15
   },
   "mouvements": {
-   "fixe": 33
+   "fixe": 15
   },
   "costumes": {
    "presentateur": "tshirt",
-   "invite": "chemise"
+   "envoyee": "robe"
   },
-  "figurants": 3,
-  "ambiances": [
-   "neon",
-   "poussiere"
-  ],
-  "controle": "Humoriste 7.0/10 : 0.4 s La chute finale manque de punch. Le zoom choc sur le personnage qui dit 'Tu es un voleur' est absent, ce qui réduit l'impact comique.; 12.9 s L'humour repose souvent sur les r",
-  "fichier": "2026-10-25_20h13_emission.mp4",
+  "figurants": 0,
+  "ambiances": [],
+  "controle": "Humoriste 6.0/10 : 25.8 s La chute finale manque de puissance et de réactivité. Le public n'a pas assez de temps pour réagir à la réplique 'Moi, je sais pas me remettre en question ?'.; 0 s L'humour p",
+  "fichier": "2026-10-25_20h29_emission.mp4",
   "cine": {
    "focus": false,
    "vertige": false,
-   "tiers": true,
+   "tiers": false,
    "etalonnage": true,
    "profondeur": false,
    "grain": true,
-   "reflets": false,
+   "reflets": true,
    "son": true
   },
   "cadence": "rapide"
@@ -2440,33 +2435,33 @@
    "salon"
   ],
   "source": "auteur+image",
-  "duree": 65.3,
+  "duree": 100.8,
   "plans": {
-   "large": 27
+   "large": 26
   },
   "mouvements": {
-   "fixe": 27
+   "fixe": 26
   },
   "costumes": {
-   "presentateur": "tshirt",
-   "invite": "chemise"
+   "envoyee": "tshirt",
+   "presentateur": "debardeur"
   },
   "figurants": 0,
   "ambiances": [
    "poussiere"
   ],
-  "controle": "Humoriste 7.0/10 : 0.4 s La chute finale manque de punch. Le moment où l’invité dit 'Tiens, donne-moi tes affaires' mériterait un zoom choc sur le présentateur pour accentuer la réaction.; 38.3 s Les ",
-  "fichier": "2026-10-25_20h43_emission.mp4",
+  "controle": "Humoriste 6.0/10 : 0.4 s La chute finale manque de dynamisme visuel. Le zoom choc sur le personnage qui dit 'T’es sûr ?' est absent, ce qui réduit l'impact comique.; 31.7 s Les vannes sur le 'gigot' e",
+  "fichier": "2026-10-25_21h00_emission.mp4",
   "cine": {
    "focus": false,
    "vertige": true,
-   "tiers": false,
-   "etalonnage": false,
+   "tiers": true,
+   "etalonnage": true,
    "profondeur": false,
-   "grain": false,
+   "grain": true,
    "reflets": false,
    "son": true
   },
-  "cadence": "rapide"
+  "cadence": "normal"
  }
 ]
