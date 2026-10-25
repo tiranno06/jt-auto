@@ -11863,102 +11863,118 @@
  },
  {
   "date": "2026-10-25",
-  "source": "https://www.tiktok.com/@same_same53/video/7679769398256618785",
-  "auteur": "same_same53",
+  "source": "https://www.tiktok.com/@kodanimation/video/7681093058674396448",
+  "auteur": "kodanimation",
   "visuel": {
    "gestes": [],
-   "duree": 131.5,
-   "nb_plans": 1,
-   "duree_plan": 131.5,
-   "coupes": [],
+   "duree": 14.5,
+   "nb_plans": 2,
+   "duree_plan": 7.25,
+   "coupes": [
+    5.0
+   ],
    "plans": {
-    "tres_serre": 0.0,
+    "tres_serre": 0.103,
     "serre": 0.0,
     "moyen": 0.0,
-    "large": 1.0
+    "large": 0.897
    },
    "camera": {
-    "fixe": 1.0,
-    "avance": 0.0,
-    "recul": 0.0,
+    "fixe": 0.593,
+    "avance": 0.148,
+    "recul": 0.185,
     "travelling": 0.0,
-    "epaule": 0.0
+    "epaule": 0.074
    },
-   "nb_personnes": 0,
-   "personnes": [],
-   "visages": false,
+   "nb_personnes": 1,
+   "personnes": [
+    {
+     "place": "centre",
+     "presence": 0.103,
+     "habit": [
+      224,
+      227,
+      234
+     ],
+     "cheveux": [
+      251,
+      251,
+      251
+     ],
+     "sourire": 0.0,
+     "taille": 0.366,
+     "tete_penchee": 9.3,
+     "regard_cote": 0.0
+    }
+   ],
+   "visages": true,
    "sourires": 0.0,
-   "energie": 0.17,
+   "energie": 1.0,
    "mur": [
-    0,
-    0,
-    0
+    244,
+    244,
+    244
    ],
    "palette": [
     [
-     0,
-     0,
-     0,
-     0.57
+     252,
+     252,
+     252,
+     0.481
     ],
     [
-     254,
-     253,
-     253,
-     0.388
+     220,
+     220,
+     220,
+     0.161
     ],
     [
-     32,
-     35,
-     43,
-     0.025
+     4,
+     4,
+     5,
+     0.122
     ],
     [
-     175,
-     175,
-     176,
-     0.008
+     118,
+     131,
+     149,
+     0.092
     ],
     [
-     123,
-     101,
-     92,
-     0.006
+     75,
+     76,
+     83,
+     0.075
     ],
     [
-     10,
-     169,
-     105,
-     0.004
+     206,
+     130,
+     3,
+     0.068
     ]
    ],
    "lumiere": {
-    "luminosite": 101.7,
-    "chaleur": -0.4,
-    "saturation": 4.8
+    "luminosite": 192.1,
+    "chaleur": 10.8,
+    "saturation": 30.9
    },
    "moment": "jour"
   },
   "audio": {
-   "duree": 131.2,
-   "nb_voix": 2,
+   "duree": 14.1,
+   "nb_voix": 1,
    "voix": [
     {
-     "hz": 269,
+     "hz": 242,
      "genre": "f",
-     "part": 0.86
-    },
-    {
-     "hz": 223,
-     "genre": "f",
-     "part": 0.14
+     "part": 1.0
     }
    ],
-   "debit": 3.33,
-   "blanc_moyen": 0.83,
-   "coupes": 7,
-   "dynamique_db": 21.1,
-   "cris": 0.007,
+   "debit": 3.35,
+   "blanc_moyen": 0.0,
+   "coupes": 0,
+   "dynamique_db": 39.6,
+   "cris": 0.01,
    "musique": null,
    "impacts": 0,
    "impacts_10s": 0.0,
@@ -11967,47 +11983,29 @@
    "sur_vanne": 0,
    "evenements": {},
    "emotions": {
-    "chuchote": 7,
-    "colere": 4,
-    "confus": 3,
-    "urgent": 3,
-    "inquiet": 2,
-    "panique": 2,
     "annoyed": 1,
-    "neutre": 1
+    "furious": 1
    }
   },
   "claude": {
+   "lieux": [
+    "salon"
+   ],
    "moment": "soir",
    "costumes": {
     "presentateur": {
-     "haut": "tshirt",
+     "haut": "chemise",
      "c_haut": "bleu",
      "motif": "uni",
-     "bas": "jean",
-     "chaussures": "baskets",
+     "bas": "pantalon",
+     "chaussures": "ville",
      "details": [
-      "barbe_courte",
-      "bracelets"
+      "moustache",
+      "lunettes_vue"
      ],
      "chapeau": null,
      "cheveux": "court",
      "c_cheveux": "brun"
-    },
-    "invite": {
-     "haut": "chemise",
-     "c_haut": "blanc",
-     "motif": "rayures",
-     "bas": "pantalon",
-     "chaussures": "ville",
-     "details": [
-      "lunettes_soleil",
-      "montre"
-     ],
-     "chapeau": "casquette",
-     "c_chapeau": "bleu",
-     "cheveux": "court_texture",
-     "c_cheveux": "roux"
     }
    },
    "objets": [
@@ -12016,122 +12014,65 @@
      "objet": "telephone"
     },
     {
-     "replique": 14,
+     "replique": 1,
      "objet": "telephone"
-    },
-    {
-     "replique": 26,
-     "objet": "billet"
-    },
-    {
-     "replique": 32,
-     "objet": "micro"
     }
    ],
    "gags": [
-    "Affiche : 'Bienvenue à l'Église – On ne ment pas ici (sauf dimanche)'",
-    "Tableau noir : 'Règles de l'Église : 1. Pas de mensonges 2. Toujours appeler Alain'",
-    "Post-it sur le téléphone : 'Appeler Alain – Urgent'"
+    "\"ZONE DE JEU INTERDITE\" écrit sur une étiquette collée sur le canapé.",
+    "\"Fortnite = Ennemi Public N°1\" affiché sur un cadre photo.",
+    "Un poster de 'Les règles du salon' avec une flèche pointant vers la porte."
    ],
    "ambiances": [
-    "neon"
+    "vapeur"
    ],
    "plans": [
     {
      "replique": 0,
-     "plan": "moyen",
-     "mouvement": "fixe",
-     "geste": "gratte_tete",
-     "reaction": "regard_camera"
+     "plan": "large",
+     "mouvement": "avance",
+     "geste": "pointe_d",
+     "reaction": "aucun"
     },
     {
-     "replique": 6,
+     "replique": 0,
      "plan": "tres_serre",
-     "mouvement": "zoom_choc",
-     "geste": "pointe_d",
+     "mouvement": "fixe",
+     "geste": "facepalm",
      "reaction": "choc"
     },
     {
-     "replique": 11,
-     "plan": "serre",
-     "mouvement": "avance",
-     "geste": "facepalm",
-     "reaction": "sceptique"
-    },
-    {
-     "replique": 25,
-     "plan": "large",
-     "mouvement": "fixe",
-     "geste": "bras_ouverts",
-     "reaction": "aucune"
-    },
-    {
-     "replique": 32,
+     "replique": 1,
      "plan": "contre_plongee",
-     "mouvement": "travelling",
-     "geste": "poings",
-     "reaction": "colere"
+     "mouvement": "zoom_choc",
+     "geste": "poing",
+     "reaction": "sceptique"
     }
    ]
   },
   "realisation": {
    "moment": "soir",
    "lieux": [
-    "salon",
-    "bureau"
+    "salon"
    ],
    "gags": [
-    "Affiche : 'Bienvenue à l'Église – On ne ment pas ici (sauf dimanche)'",
-    "Tableau noir : 'Règles de l'Église : 1. Pas de mensonges 2. Toujours appeler Ala",
-    "Post-it sur le téléphone : 'Appeler Alain – Urgent'"
+    "\"ZONE DE JEU INTERDITE\" écrit sur une étiquette collée sur le canapé.",
+    "\"Fortnite = Ennemi Public N°1\" affiché sur un cadre photo.",
+    "Un poster de 'Les règles du salon' avec une flèche pointant vers la porte."
    ],
    "ambiances": [
-    "neon",
-    "poussiere"
+    "poussiere",
+    "vapeur"
    ],
    "source": "auteur+image",
    "tenues": {
-    "presentateur": "tshirt",
-    "invite": "chemise"
+    "presentateur": "chemise"
    },
    "plans": [
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
     "large/fixe",
     "large/fixe"
    ]
   },
-  "video": "2026-10-25_22h46_emission.mp4"
+  "video": "2026-10-25_23h02_emission.mp4"
  }
 ]
