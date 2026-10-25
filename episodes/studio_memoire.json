@@ -1967,37 +1967,70 @@
  {
   "moment": "soir",
   "lieux": [
-   "salon",
-   "salon",
-   "salon",
    "salon"
   ],
   "source": "auteur+image",
-  "duree": 134.6,
+  "duree": 35.4,
   "plans": {
-   "large": 53
+   "large": 12
   },
   "mouvements": {
-   "fixe": 53
+   "fixe": 12
   },
   "costumes": {
-   "presentateur": "tshirt",
-   "invite": "pull"
+   "invite": "pull",
+   "envoyee": "tshirt"
   },
   "figurants": 0,
   "ambiances": [
-   "poussiere"
+   "pluie",
+   "poussiere",
+   "vapeur"
   ],
-  "controle": "Humoriste 8.6/10 : 125.0 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 5.5/10 : montage trop lent : 0.3 plans toutes les 10 s (il en faudrait ~2.9); 54.4 s pas assez de plan",
-  "fichier": "2026-10-25_13h55_emission.mp4",
+  "controle": "Humoriste 8.6/10 : 30.0 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 8.4/10 : 17.3 s pas assez de plans de réaction de celui qui écoute | Directeur artistique 10.0/10 :  | ",
+  "fichier": "2026-10-25_13h35_emission.mp4",
   "cine": {
    "focus": false,
    "vertige": false,
    "tiers": true,
    "etalonnage": true,
-   "profondeur": true,
+   "profondeur": false,
    "grain": true,
    "reflets": true,
+   "son": true
+  },
+  "cadence": "rapide"
+ },
+ {
+  "moment": "jour",
+  "lieux": [
+   "chambre",
+   "chambre"
+  ],
+  "source": "robot+image",
+  "duree": 70.6,
+  "plans": {
+   "large": 27
+  },
+  "mouvements": {
+   "fixe": 27
+  },
+  "costumes": {
+   "presentateur": "pyjama",
+   "invite": "pyjama"
+  },
+  "figurants": 0,
+  "ambiances": [],
+  "controle": "Humoriste 8.6/10 : 66.6 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 6.6/10 : montage trop lent : 0.3 plans toutes les 10 s (il en faudrait ~4.8); 56.6 s pas assez de plans",
+  "fichier": "2026-10-25_14h23_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": false,
+   "tiers": true,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": true,
+   "reflets": false,
    "son": true
   },
   "cadence": null
@@ -2005,34 +2038,35 @@
  {
   "moment": "soir",
   "lieux": [
+   "chambre",
    "salon"
   ],
   "source": "auteur+image",
-  "duree": 73.5,
+  "duree": 84.7,
   "plans": {
-   "large": 34
+   "large": 22
   },
   "mouvements": {
-   "fixe": 34
+   "fixe": 22
   },
   "costumes": {
-   "presentateur": "tshirt",
+   "presentateur": "robe",
    "invite": "tshirt"
   },
-  "figurants": 1,
+  "figurants": 0,
   "ambiances": [
    "poussiere"
   ],
-  "controle": "Humoriste 7.0/10 : 66 s La chute finale manque de punch visuel. Le public ne perçoit pas clairement qui dit la réplique finale.; 32.4 s Le gag sur le poulet cuit du street ching pourrait être renforcé",
-  "fichier": "2026-10-25_15h11_emission.mp4",
+  "controle": "Humoriste 8.6/10 : 77.8 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 6.6/10 : montage trop lent : 0.5 plans toutes les 10 s (il en faudrait ~2.8); 21.4 s pas assez de plans",
+  "fichier": "2026-10-25_15h33_emission.mp4",
   "cine": {
    "focus": false,
-   "vertige": true,
+   "vertige": false,
    "tiers": true,
    "etalonnage": true,
-   "profondeur": true,
+   "profondeur": false,
    "grain": true,
-   "reflets": false,
+   "reflets": true,
    "son": true
   },
   "cadence": null
