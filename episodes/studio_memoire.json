@@ -2220,29 +2220,62 @@
  {
   "moment": "soir",
   "lieux": [
-   "voiture"
+   "rue"
   ],
-  "source": "auteur+image",
-  "duree": 68.0,
+  "source": "robot+image",
+  "duree": 93.2,
   "plans": {
-   "large": 17
+   "large": 42
   },
   "mouvements": {
-   "fixe": 17
+   "fixe": 42
   },
   "costumes": {
-   "presentateur": "tshirt",
-   "envoyee": "debardeur"
+   "envoyee": "hawai",
+   "presentateur": "hawai"
   },
-  "figurants": 0,
-  "ambiances": [
-   "poussiere"
-  ],
-  "controle": "Humoriste 8.6/10 : 58.0 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 6.6/10 : montage trop lent : 0.1 plans toutes les 10 s (il en faudrait ~2.8); 39.5 s pas assez de plans",
-  "fichier": "2026-10-25_18h56_emission.mp4",
+  "figurants": 2,
+  "ambiances": [],
+  "controle": "Humoriste 6.0/10 : 0.4 s La chute finale ('Ils sont tous tarés') manque d'impact visuel. Un zoom choc sur le personnage qui la dit serait nécessaire pour renforcer l'effet comique.; 46.3 s Les vannes ",
+  "fichier": "2026-10-25_18h31_emission.mp4",
   "cine": {
    "focus": false,
    "vertige": false,
+   "tiers": false,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": false,
+   "reflets": false,
+   "son": true
+  },
+  "cadence": null
+ },
+ {
+  "moment": "jour",
+  "lieux": [
+   "cuisine"
+  ],
+  "source": "robot+image",
+  "duree": 70.8,
+  "plans": {
+   "large": 11
+  },
+  "mouvements": {
+   "fixe": 11
+  },
+  "costumes": {
+   "envoyee": "tablier",
+   "presentateur": "tshirt"
+  },
+  "figurants": 0,
+  "ambiances": [
+   "vapeur"
+  ],
+  "controle": "Humoriste 7.1/10 : 63.1 s la chute finale est trop longue : la vanne se dilue; 63.1 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 6.6/10 : montage trop lent : 0.1 plans tout",
+  "fichier": "2026-10-25_19h18_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": true,
    "tiers": true,
    "etalonnage": true,
    "profondeur": false,
