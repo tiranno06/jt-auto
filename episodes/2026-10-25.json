@@ -1,73 +1,234 @@
 {
- "titre": "MÈRE ET CORVÉES D'ADO",
- "sujet": "MÈRE ET CORVÉES D'ADO",
- "ecran": "MÈRE ET CORVÉE",
+ "titre": "EMBROUILLE DE PARC",
+ "sujet": "EMBROUILLE DE PARC",
+ "ecran": "EMBROUILLE DE ",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "POV : Quand ta mère te demande un truc",
- "question": "Vos parents vous faisaient le même coup ?",
+ "titre_accroche": "POV : Un enfant te manque de respect...",
+ "question": "Vous auriez rendu le ballon ou pas ?",
  "running_gag": "",
  "verite": "",
  "repliques": [
   {
-   "p": "envoyee",
-   "t": "Faudra que tu me sortes les poubelles. Oui maman. Et que tu me fasses la vaisselle. Tout de suite maman. Et que tu passes l'aspirateur aussi. Avec",
+   "p": "invite",
+   "t": "Ah,",
    "_deb": 0.0,
-   "_fin": 9.86,
-   "d": "[authoritative] Faudra que tu me sortes les poubelles, oui maman, et que tu me fasses la vaisselle, tout de suite maman, et que tu passes l'aspirateur aussi, avec"
+   "_fin": 0.86,
+   "d": "[relieved] Ah,"
   },
   {
-   "p": "envoyee",
-   "t": "plaisir. Que tu m'étendes le",
-   "_deb": 9.86,
-   "_fin": 13.3,
-   "d": "[authoritative] plaisir, que tu m'étendes le"
-  },
-  {
-   "p": "invite",
-   "t": "linge. Aucun problème.",
-   "_deb": 13.3,
-   "_fin": 14.26,
-   "d": "[neutral] linge, aucun problème !"
-  },
-  {
-   "p": "envoyee",
-   "t": "Faudra réparer le frigo aussi.",
-   "_deb": 15.46,
-   "_fin": 16.84,
-   "d": "[authoritative] Faudra réparer le frigo aussi !"
+   "p": "presentateur",
+   "t": "quelle belle",
+   "_deb": 0.86,
+   "_fin": 1.28,
+   "d": "[joyful] quelle belle"
   },
   {
    "p": "invite",
-   "t": "Ah ça je saurais pas faire maman, ah !",
-   "_deb": 17.16,
-   "_fin": 19.16,
-   "d": "[hesitant] Ah ça je saurais pas faire maman, ah..."
+   "t": "journée, je vais en profiter pour consulter mes mails.",
+   "_deb": 1.28,
+   "_fin": 4.3,
+   "d": "[content] journée, je vais en profiter pour consulter mes mails.",
+   "objet": "telephone"
   },
   {
-   "p": "envoyee",
-   "t": "Tu vois, on peut rien te demander à toi !",
-   "_deb": 20.1,
-   "_fin": 23.22,
-   "d": "[annoyed] Tu vois, on peut rien te demander à toi !",
+   "p": "presentateur",
+   "t": "Aïe ! Eh, vas-y, renvoie le ballon !",
+   "_deb": 4.66,
+   "_fin": 7.36,
+   "d": "[surprised] Aïe ! Eh, vas-y, renvoie le ballon !"
+  },
+  {
+   "p": "presentateur",
+   "t": "Ouais, ouais, tiens, par contre, faites attention quand vous jouez au foot, les gars, il y a du monde dans le parc.",
+   "_deb": 8.76,
+   "_fin": 12.5,
+   "d": "[annoyed] Ouais, ouais, tiens... Par contre, faites attention quand vous jouez au foot les gars, il y a du monde dans le parc."
+  },
+  {
+   "p": "presentateur",
+   "t": "Mais t'avais pas qu'à te mettre là, l'ancien ! Bah ouais, qu'est-ce qu'il dit, lui ?",
+   "_deb": 12.58,
+   "_fin": 16.14,
+   "d": "[mocking] Mais t'avais pas qu'à te mettre là, l'ancien ! Bah ouais, qu'est-ce qu'il dit, lui ?"
+  },
+  {
+   "p": "invite",
+   "t": "Croûton !",
+   "_deb": 16.28,
+   "_fin": 17.06,
+   "d": "[arrogant] Croûton !"
+  },
+  {
+   "p": "presentateur",
+   "t": "Pardon ? Bah ouais, le parc, il est pour tout le monde !",
+   "_deb": 17.66,
+   "_fin": 19.74,
+   "d": "[offended] Pardon ? Bah ouais, le parc, il est pour tout le monde !"
+  },
+  {
+   "p": "presentateur",
+   "t": "L'ancien !",
+   "_deb": 20.02,
+   "_fin": 20.84,
+   "d": "[mocking] L'ancien !"
+  },
+  {
+   "p": "presentateur",
+   "t": "Et le respect aussi, chacal. Calme-toi. Vas-y, renvoie le ballon, le vieux, là !",
+   "_deb": 21.98,
+   "_fin": 25.54,
+   "d": "[furious] Et le respect aussi, chacal. Calme-toi. Vas-y, renvoie le ballon, le vieux, là !"
+  },
+  {
+   "p": "presentateur",
+   "t": "Regarde, tu me le demandes autrement et je suis pas vieux.",
+   "_deb": 25.56,
+   "_fin": 27.22,
+   "d": "[stern] Regarde, tu me le demandes autrement et je suis pas vieux."
+  },
+  {
+   "p": "presentateur",
+   "t": "Si, t'es vieux ! J'ai 24 ans.",
+   "_deb": 27.24,
+   "_fin": 28.66,
+   "d": "[scoffing] Si, t'es vieux ! J'ai 24 ans."
+  },
+  {
+   "p": "invite",
+   "t": "Ouh !",
+   "_deb": 28.66,
+   "_fin": 29.44,
+   "d": "[mocking] Ouh !"
+  },
+  {
+   "p": "presentateur",
+   "t": "Presque un quart de siècle !",
+   "_deb": 29.56,
+   "_fin": 32.74,
+   "d": "[mocking] Presque un quart de siècle !"
+  },
+  {
+   "p": "presentateur",
+   "t": "Croûton !",
+   "_deb": 34.36,
+   "_fin": 35.06,
+   "d": "[mocking] Croûton !"
+  },
+  {
+   "p": "presentateur",
+   "t": "Ils sont où tes parents ? Papa, il y a le monsieur qui ne veut pas me rendre mon ballon !",
+   "_deb": 36.9,
+   "_fin": 39.76
+  },
+  {
+   "p": "invite",
+   "t": "Oui, qu'est-ce qui se passe ?",
+   "_deb": 40.34,
+   "_fin": 41.12,
+   "d": "[curious] Oui, qu'est-ce qui se passe ?"
+  },
+  {
+   "p": "presentateur",
+   "t": "Non, non, monsieur, en fait, votre fils m'a lancé son ballon sur la tête.",
+   "_deb": 41.16,
+   "_fin": 43.58,
+   "d": "[exasperated] Non, non, monsieur, en fait, votre fils m'a lancé son ballon sur la tête."
+  },
+  {
+   "p": "presentateur",
+   "t": "Je lui ai juste demandé de faire attention et il m'a répondu : t'avais pas qu'à te mettre là.",
+   "_deb": 43.66,
+   "_fin": 46.38,
+   "d": "[indignant] Je lui ai juste demandé de faire attention et il m'a répondu : t'avais pas qu'à te mettre là."
+  },
+  {
+   "p": "invite",
+   "t": "Bah, est-ce qu'il a tort ? Hein ? Je ne comprends pas.",
+   "_deb": 46.48,
+   "_fin": 51.32,
+   "d": "[skeptical] Bah, est-ce qu'il a tort ? Hein ? Je ne comprends pas."
+  },
+  {
+   "p": "presentateur",
+   "t": "Plaît-il ?",
+   "_deb": 53.16,
+   "_fin": 53.8,
+   "d": "[shocked] Plaît-il ?"
+  },
+  {
+   "p": "invite",
+   "t": "Est-ce qu'il a tort ? Hein ? Le parc, il est à tout le monde, on est bien d'accord.",
+   "_deb": 53.94,
+   "_fin": 57.24,
+   "d": "[condescending] Est-ce qu'il a tort ? Hein ? Le parc, il est à tout le monde, on est bien d'accord."
+  },
+  {
+   "p": "presentateur",
+   "t": "Oui ? Mais il m'a envoyé son ballon sur",
+   "_deb": 58.6,
+   "_fin": 60.9,
+   "d": "[annoyed] Oui ? Mais il m'a envoyé son ballon sur"
+  },
+  {
+   "p": "invite",
+   "t": "le crâne ! Et alors ? C'est un enfant, je comprends pas, je vois pas où est le problème là. Il rigole ou quoi lui ?",
+   "_deb": 60.9,
+   "_fin": 65.06,
+   "d": "[aggressive] le crâne ! Et alors ? C'est un enfant, je comprends pas, je vois pas où est le problème là. Il rigole ou quoi lui ?"
+  },
+  {
+   "p": "presentateur",
+   "t": "Mais qu'est-ce qui t'arrive, toi ?",
+   "_deb": 66.22,
+   "_fin": 67.12,
+   "d": "[angry] Mais qu'est-ce qui t'arrive, toi ?"
+  },
+  {
+   "p": "presentateur",
+   "t": "Déjà ton fils il manque de respect et toi tu veux pas comprendre qu'il me manque de respect là !",
+   "_deb": 68.12,
+   "_fin": 71.1,
+   "d": "[furious] Déjà ton fils il manque de respect, et toi tu veux pas comprendre qu'il me manque de respect là !"
+  },
+  {
+   "p": "invite",
+   "t": "Il va faire l'éducation de mon fils maintenant !",
+   "_deb": 71.1,
+   "_fin": 72.18,
+   "d": "[provocative] Il va faire l'éducation de mon fils maintenant !"
+  },
+  {
+   "p": "invite",
+   "t": "Mais chauffe pas, j'ai déjà le moteur qui tourne !",
+   "_deb": 73.16,
+   "_fin": 74.5,
+   "d": "[threatening] Mais chauffe pas, j'ai déjà le moteur qui tourne !"
+  },
+  {
+   "p": "invite",
+   "t": "Ne me regarde pas comme ça, je fais pas ton contrôle technique !",
+   "_deb": 76.42,
+   "_fin": 77.96,
+   "d": "[aggressive] Ne me regarde pas comme ça, je fais pas ton contrôle technique !",
    "chute": true
   }
  ],
  "bandeau": [],
  "gag": null,
- "legende": "Les mères retiennent toujours le seul truc qu'on ne sait pas faire !",
+ "legende": "Quand le père est encore pire que le gamin irrespectueux...",
  "hashtags": [
   "petitsdramas",
   "humour",
-  "maman",
-  "famille",
-  "relou",
-  "pov"
+  "pov",
+  "sketch",
+  "dispute",
+  "education"
  ],
  "sources": [
-  "https://www.tiktok.com/@kodanimation/video/7698546519946841376"
+  "https://www.tiktok.com/@vignianimation/video/7697683746144668960"
  ],
  "decoupage": [
   {
@@ -78,132 +239,132 @@
     2,
     3,
     4,
-    5
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28
    ],
    "lieu": "",
    "son": "",
    "duree": 0.0,
-   "decor": "A bedroom doorway with wooden stairs in the background, plain wall and open door.",
-   "titre": "Les corvées"
+   "decor": "sunny municipal park lawn, green grass, modern city skyline in background, trees, wooden park bench",
+   "titre": "Au parc"
   }
  ],
  "studio": {
-  "gags": [
-   "Post-it sur le mur : Liste infinie de corvées"
-  ],
   "costumes": {
-   "envoyee": {
+   "presentateur": {
     "haut": "tshirt",
-    "c_haut": "jaune",
+    "c_haut": "orange",
     "motif": "uni",
     "bas": "short",
-    "chaussures": "chaussons",
-    "cheveux": "ondule",
-    "c_cheveux": "chatain",
+    "chaussures": "baskets",
+    "cheveux": "afro",
+    "c_cheveux": "noir",
     "details": [
-     "collier",
-     "lunettes_vue",
-     "rouge_levres"
+     "boucles_oreilles"
     ]
    },
    "invite": {
-    "haut": "tshirt",
-    "c_haut": "bleu",
+    "haut": "survetement",
+    "c_haut": "noir",
     "motif": "uni",
-    "bas": "short",
-    "chaussures": "chaussons",
+    "bas": "jogging",
+    "chaussures": "baskets",
     "cheveux": "court",
-    "c_cheveux": "marron",
+    "c_cheveux": "brun",
     "details": [
-     "lunettes_vue"
+     "barbe_courte",
+     "chaine"
     ]
    }
   },
-  "moment": "jour",
-  "ambiances": [
-   "poussiere"
+  "objets": [
+   {
+    "replique": 2,
+    "objet": "telephone"
+   }
+  ],
+  "ambiances": [],
+  "lieux": [
+   "rue"
+  ],
+  "plans": [
+   {
+    "plan": "moyen",
+    "reaction": "aucune",
+    "geste": "poches",
+    "mouvement": "fixe",
+    "replique": 0
+   },
+   {
+    "plan": "moyen",
+    "replique": 4,
+    "mouvement": "avance",
+    "reaction": "sceptique",
+    "geste": "stop"
+   },
+   {
+    "plan": "serre",
+    "mouvement": "zoom_choc",
+    "replique": 19,
+    "reaction": "choc",
+    "geste": "poing"
+   },
+   {
+    "geste": "mains_hanches",
+    "reaction": "yeux_au_ciel",
+    "replique": 27,
+    "mouvement": "avance",
+    "plan": "contre_plongee"
+   }
+  ],
+  "gags": [
+   "Panneau : Pelouse interdite aux tirs cadrés"
   ],
   "personnages": {
-   "envoyee": {
-    "genre": "f",
-    "age": 48,
-    "taille": 1.0,
-    "corpulence": 0.6,
-    "cheveux": "ondule",
-    "barbe": "rien"
+   "presentateur": {
+    "genre": "h",
+    "age": 24,
+    "taille": 1,
+    "corpulence": 0.3,
+    "cheveux": "afro",
+    "barbe": "trois_jours"
    },
    "invite": {
     "genre": "h",
-    "age": 16,
-    "taille": 0.8,
-    "corpulence": 0.3,
+    "age": 42,
+    "taille": 1.1,
+    "corpulence": 0.6,
     "cheveux": "court",
-    "barbe": "rien"
+    "barbe": "trois_jours"
    }
   },
-  "plans": [
-   {
-    "mouvement": "fixe",
-    "reaction": "aucune",
-    "plan": "large",
-    "replique": 0,
-    "geste": "croises"
-   },
-   {
-    "mouvement": "fixe",
-    "reaction": "sceptique",
-    "geste": "mains_hanches",
-    "plan": "large",
-    "replique": 1
-   },
-   {
-    "plan": "large",
-    "geste": "pouce",
-    "replique": 2,
-    "reaction": "aucune",
-    "mouvement": "fixe"
-   },
-   {
-    "mouvement": "avance",
-    "geste": "pointe_d",
-    "reaction": "choc",
-    "plan": "moyen",
-    "replique": 3
-   },
-   {
-    "reaction": "aucune",
-    "mouvement": "fixe",
-    "replique": 4,
-    "geste": "gratte_tete",
-    "plan": "moyen"
-   },
-   {
-    "replique": 5,
-    "plan": "serre",
-    "reaction": "facepalm",
-    "mouvement": "zoom_choc",
-    "geste": "desespoir"
-   }
-  ],
-  "objets": [],
-  "lieux": [
-   "chambre"
-  ],
+  "moment": "jour",
   "cadence": "rapide",
   "decoupe": [
    {
     "replique": 0,
-    "plans": [
-     {
-      "debut": 0.0,
-      "plan": "serre",
-      "cible": "envoyee",
-      "mouvement": "avance"
-     }
-    ]
-   },
-   {
-    "replique": 2,
     "plans": [
      {
       "debut": 0.0,
@@ -218,25 +379,14 @@
     "plans": [
      {
       "debut": 0.0,
-      "plan": "serre",
-      "cible": "envoyee",
-      "mouvement": "avance"
+      "plan": "large",
+      "cible": "presentateur",
+      "mouvement": "fixe"
      }
     ]
    },
    {
-    "replique": 3,
-    "plans": [
-     {
-      "debut": 0.0,
-      "plan": "serre",
-      "cible": "envoyee",
-      "mouvement": "avance"
-     }
-    ]
-   },
-   {
-    "replique": 4,
+    "replique": 2,
     "plans": [
      {
       "debut": 0.0,
@@ -249,116 +399,215 @@
   ]
  },
  "doublage": {
-  "piste": "/tmp/tmpmbixtcr7/piste.wav",
-  "duree": 23.24,
-  "source": "https://www.tiktok.com/@kodanimation/video/7698546519946841376",
-  "auteur": "kodanimation",
-  "contexte": "Une mère énumère une tonne de corvées à son fils qui accepte tout docilement, jusqu'au moment où elle lui demande de réparer le frigo.",
+  "piste": "/tmp/tmpqcujkyum/piste.wav",
+  "duree": 83.15,
+  "source": "https://www.tiktok.com/@vignianimation/video/7697683746144668960",
+  "auteur": "vignianimation",
+  "contexte": "Au parc, un jeune homme assis sur un banc reçoit un ballon de foot sur la tête. Quand il demande au gamin d'être poli, le père débarque et prend la défense de son fils avec une mauvaise foi légendaire.",
   "evenements": [],
   "visuel": {
-   "gestes": [],
-   "duree": 23.5,
-   "nb_plans": 10,
-   "duree_plan": 2.35,
+   "gestes": [
+    [
+     1.5,
+     0.51,
+     1.0
+    ],
+    [
+     8.0,
+     0.41,
+     1.0
+    ],
+    [
+     15.0,
+     0.4,
+     1.0
+    ],
+    [
+     16.5,
+     0.39,
+     1.0
+    ],
+    [
+     35.0,
+     0.5,
+     1.0
+    ],
+    [
+     48.5,
+     0.4,
+     1.0
+    ],
+    [
+     49.5,
+     0.39,
+     1.0
+    ],
+    [
+     58.0,
+     0.4,
+     1.0
+    ],
+    [
+     66.5,
+     0.4,
+     1.0
+    ],
+    [
+     67.5,
+     0.4,
+     1.0
+    ],
+    [
+     68.5,
+     0.4,
+     1.0
+    ]
+   ],
+   "duree": 83.5,
+   "nb_plans": 16,
+   "duree_plan": 5.22,
    "coupes": [
+    0.5,
     4.5,
-    5.5,
-    6.5,
-    10.0,
-    10.5,
-    14.0,
     14.5,
     17.0,
-    18.5
+    18.0,
+    21.0,
+    22.0,
+    33.0,
+    37.0,
+    47.5,
+    48.0,
+    52.0,
+    56.0,
+    57.5,
+    58.5
    ],
    "plans": {
     "tres_serre": 0.0,
     "serre": 0.0,
-    "moyen": 0.0,
-    "large": 1.0
+    "moyen": 0.796,
+    "large": 0.204
    },
    "camera": {
-    "fixe": 0.919,
-    "avance": 0.027,
-    "recul": 0.054,
+    "fixe": 0.887,
+    "avance": 0.093,
+    "recul": 0.013,
     "travelling": 0.0,
-    "epaule": 0.0
+    "epaule": 0.007
    },
-   "nb_personnes": 0,
-   "personnes": [],
-   "visages": false,
+   "nb_personnes": 1,
+   "personnes": [
+    {
+     "place": "centre",
+     "presence": 0.635,
+     "habit": [
+      174,
+      183,
+      60
+     ],
+     "cheveux": [
+      12,
+      12,
+      12
+     ],
+     "sourire": 0.0,
+     "taille": 0.109,
+     "tete_penchee": 2.3,
+     "regard_cote": 0.745
+    },
+    {
+     "place": "gauche",
+     "presence": 0.162,
+     "habit": [
+      174,
+      191,
+      61
+     ],
+     "cheveux": [
+      13,
+      13,
+      13
+     ],
+     "sourire": 0.0,
+     "taille": 0.111,
+     "tete_penchee": 2.2,
+     "regard_cote": 0.037
+    }
+   ],
+   "visages": true,
    "sourires": 0.0,
-   "energie": 0.233,
+   "energie": 0.253,
    "mur": [
-    147,
-    130,
-    131
+    97,
+    125,
+    44
    ],
    "palette": [
     [
-     153,
-     123,
-     102,
-     0.284
+     96,
+     131,
+     28,
+     0.332
     ],
     [
-     113,
-     89,
-     80,
-     0.244
+     179,
+     184,
+     52,
+     0.162
     ],
     [
-     137,
-     134,
-     165,
-     0.233
+     36,
+     41,
+     20,
+     0.14
     ],
     [
-     9,
-     6,
-     6,
-     0.1
+     192,
+     218,
+     243,
+     0.139
     ],
     [
-     79,
-     59,
-     59,
-     0.084
+     106,
+     110,
+     98,
+     0.138
     ],
     [
-     240,
-     239,
-     237,
-     0.056
+     164,
+     169,
+     155,
+     0.088
     ]
    ],
    "lumiere": {
-    "luminosite": 132.8,
-    "chaleur": 19.1,
-    "saturation": 72.8
+    "luminosite": 148.3,
+    "chaleur": 40.4,
+    "saturation": 129.0
    },
    "moment": "soir"
   },
   "audio": {
-   "duree": 23.2,
+   "duree": 83.2,
    "nb_voix": 2,
    "voix": [
     {
-     "hz": 225,
+     "hz": 212,
      "genre": "f",
-     "part": 0.86
+     "part": 0.37
     },
     {
-     "hz": 160,
-     "genre": "h",
-     "part": 0.14
+     "hz": 214,
+     "genre": "f",
+     "part": 0.63
     }
    ],
-   "debit": 2.84,
-   "blanc_moyen": 0.82,
-   "coupes": 1,
-   "dynamique_db": 25.7,
-   "cris": 0.015,
+   "debit": 4.96,
+   "blanc_moyen": 0.73,
+   "coupes": 6,
+   "dynamique_db": 28.7,
+   "cris": 0.016,
    "musique": null,
    "impacts": 0,
    "impacts_10s": 0.0,
@@ -367,13 +616,17 @@
    "sur_vanne": 0,
    "evenements": {},
    "emotions": {
-    "authoritative": 3,
-    "neutral": 1,
-    "hesitant": 1,
-    "annoyed": 1
+    "mocking": 5,
+    "annoyed": 2,
+    "furious": 2,
+    "angry": 2,
+    "aggressive": 2,
+    "relieved": 1,
+    "joyful": 1,
+    "content": 1
    }
   },
-  "video_origine": "/tmp/tmpmbixtcr7/src.mp4"
+  "video_origine": "/tmp/tmpqcujkyum/src.mp4"
  },
  "fiche": {
   "note": 0,
@@ -387,48 +640,91 @@
      2,
      3,
      4,
-     5
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     14,
+     15,
+     16,
+     17,
+     18,
+     19,
+     20,
+     21,
+     22,
+     23,
+     24,
+     25,
+     26,
+     27,
+     28
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "A bedroom doorway with wooden stairs in the background, plain wall and open door.",
-    "titre": "Les corvées"
+    "decor": "sunny municipal park lawn, green grass, modern city skyline in background, trees, wooden park bench",
+    "titre": "Au parc"
    }
   ]
  },
  "_monte": true,
  "_voix_hz": {
-  "envoyee": 227,
-  "invite": 158
+  "presentateur": 212,
+  "invite": 200
  },
  "_voix_genre": {
-  "envoyee": "f",
   "invite": "h"
  },
  "realisation": {
   "moment": "jour",
   "lieux": [
-   "chambre"
+   "rue"
   ],
   "gags": [
-   "Post-it sur le mur : Liste infinie de corvées"
+   "Panneau : Pelouse interdite aux tirs cadrés"
   ],
-  "ambiances": [
-   "poussiere"
-  ],
+  "ambiances": [],
   "source": "auteur+image",
   "tenues": {
-   "envoyee": "tshirt",
-   "invite": "tshirt"
+   "invite": "survetement",
+   "presentateur": "tshirt"
   },
   "plans": [
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "moyen/avance",
    "moyen/fixe",
-   "serre/zoom_choc"
+   "serre/travelling",
+   "serre/fixe",
+   "tres_serre/zoom_choc",
+   "moyen/avance",
+   "serre/avance",
+   "serre/avance",
+   "epaule/fixe",
+   "serre/travelling",
+   "contre_plongee/epaule",
+   "serre/recul",
+   "serre/avance",
+   "serre/avance",
+   "epaule/fixe",
+   "serre/avance",
+   "serre/travelling",
+   "epaule/fixe",
+   "epaule/fixe",
+   "serre/fixe",
+   "serre/zoom_choc",
+   "tres_serre/zoom_choc",
+   "epaule/fixe",
+   "contre_plongee/epaule",
+   "moyen/fixe",
+   "contre_plongee/epaule",
+   "contre_plongee/epaule",
+   "serre/recul",
+   "contre_plongee/avance",
+   "serre/avance"
   ]
  }
 }
