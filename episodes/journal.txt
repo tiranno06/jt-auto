@@ -1,1 +1,50 @@
-Planning : rien à faire (aucun créneau en cours (06:35, créneaux 4:00, 8:00, 14:00, 18:00))
+Casting déjà fait.
+Type de vidéo : gag éclair (~15 s)
+Crédits au départ : Claude secours, Mistral ok, Gemini ok, ElevenLabs epuise — IA utilisée : mistral
+Vidéo depuis TikTok : https://www.tiktok.com/@kodanimation/video/7698546519946841376
+  son téléchargé (yt-dlp --impersonate chrome)
+  son récupéré : 23.2 s, compte d'origine @kodanimation
+[ WARN:0@8.793] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  image de la vidéo : 10 plans (≈ 2.35 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 0 %, large 100 % ; caméra : fixe 91 %, avance 2 %, recul 5 % ; 0 personne(s) à l'écran : aucun visage repéré ; agitation 0.233 ; lumière soir ; fond [147, 130, 131]
+  isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
+  transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+  voix séparées par la hauteur (gratuit) : 151 Hz et 221 Hz
+  voix vérifiées mot par mot : 3 mot(s) remis sur la bonne voix
+  6 répliques, voix : {'speaker_0': 225, 'speaker_1': 160}
+  son de la vidéo : 2 voix [225 Hz (f, 86 %), 160 Hz (h, 14 %)], 2.84 mots/s, blancs 0.82 s, 1 coupure(s) de parole, dynamique 25.7 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
+  scène reconstituée : Une mère énumère une tonne de corvées à son fils qui accepte tout docilement, jusqu'au moment où elle lui demande de réparer le frigo.
+  casting : speaker_0 → Lila, speaker_1 → Kévin
+  sous-titres : 6 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
+Sketch : « MÈRE ET CORVÉES D'ADO », 6 répliques
+  décor 0 : A bedroom doorway with wooden stairs in the background, plain wall and
+montage : 17 plans (0.0:large>env/coupe 4.5:tres_serre>inv/coupe 5.5:moyen>env/coupe 6.5:serre>inv/glisse 7.3:moyen>env/coupe 9.8:large>env/glisse 10.5:epaule>env/glisse 13.2:large>inv/coupe 14.0:tres_serre>env/glisse 14.5:moyen>inv/coupe 15.4:moyen>env/coupe 16.4:epaule>env/glisse 17.1:moyen>inv/coupe 18.5:serre>env/coupe 19.5:moyen>inv/coupe 20.0:serre>env/file 22.1:tres_serre>inv/coupe)
+studio : jour, lieux ['chambre'], tenues envoyee=tshirt, invite=tshirt, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe moyen/avance moyen/fixe serre/zoom_choc
+cartoon : durée 10.0 s, 6 répliques, 1 scène(s), personnages ['envoyee', 'invite']
+Contrôle image : 15 défaut(s) — 5.75 s tete_coupee (invite), 6.25 s tete_coupee (invite), 7.75 s tete_coupee (invite), 8.25 s tete_coupee (invite), 8.75 s tete_coupee (invite), 9.25 s tete_coupee (invite), 9.75 s tete_coupee (invite), 14.75 s tete_coupee (envoyee)
+Pré-jury (avant de dessiner) : plan serre sur la réplique 1 ; plan serre sur la réplique 2 ; plan serre sur la réplique 3
+montage : 10 plans (0.0:serre>env/coupe 9.8:moyen>env/glisse 13.2:serre>inv/coupe 15.4:moyen>env/coupe 16.4:epaule>env/glisse 17.1:moyen>inv/coupe 18.5:serre>env/coupe 19.5:moyen>inv/coupe 20.0:serre>env/file 22.1:tres_serre>inv/coupe)
+studio : jour, lieux ['chambre'], tenues envoyee=tshirt, invite=tshirt, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe moyen/avance moyen/fixe serre/zoom_choc
+cartoon : durée 10.0 s, 6 répliques, 1 scène(s), personnages ['envoyee', 'invite']
+Contrôle image : 12 défaut(s) — 10.25 s tete_coupee (invite), 10.75 s tete_coupee (invite), 11.25 s tete_coupee (invite), 11.75 s tete_coupee (invite), 12.25 s tete_coupee (invite), 12.75 s tete_coupee (invite), 15.75 s tete_coupee (invite), 16.25 s tete_coupee (invite)
+Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
+Jury qualité (ia) : 4.6/10 — Humoriste 4.5/10 : 20.1 s Chute sans impact visuel ni dynamique comique.; 20.1 s Absence de ponctuation sonore sur la réplique finale. | Réalisateur 4.0/10 : 11.6 s Écrans noirs complets du plan 3 au plan 7 sans contrechamp sur l'invité.; 0.4 s Cadrage trop haut coupant le sommet du crâne.; 10.2 s tête de invite coupée par le bord de l'image (moyen); 15.8 s tête de invite coupée par le bord de l'image (moyen); 17.2 s tête de envoyee coupée par le bord de l'image (moyen) | Directeur artistique 5.0/10 : 5 s Le fils assis sur le lit n'apparaît jamais à l'écran.; 0.4 s Texte parasite illisible incrusté sur le mur en arrière-plan. | Ingénieur du son 5.0/10 : 15.5 s Bande-son trop plate sans bruitages d'accentuation. | Spectateur TikTok 4.0/10 : 11.6 s Décrochage immédiat causé par les images noires consécutives.
+Manque par rapport à la vidéo d'origine : Présence visuelle du fils assis sur son lit en champ-contrechamp. ; Décor de l'escalier/porte pour la mère au lieu d'un mur uniforme. ; Déformation comique et pose exagérée de la mère sur le cri final.
+Corrections du jury (tour 1) : plan serre sur la réplique 2 ; plan serre sur la réplique 4 ; plan serre sur la réplique 5
+montage : 7 plans (0.0:serre>env/coupe 9.8:moyen>env/glisse 13.2:serre>inv/coupe 15.4:serre>env/coupe 17.1:serre>inv/coupe 20.0:serre>env/file 22.1:tres_serre>inv/coupe)
+studio : jour, lieux ['chambre'], tenues envoyee=tshirt, invite=tshirt, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe moyen/avance moyen/fixe serre/zoom_choc
+cartoon : durée 10.0 s, 6 répliques, 1 scène(s), personnages ['envoyee', 'invite']
+Contrôle image : 6 défaut(s) — 10.25 s tete_coupee (invite), 10.75 s tete_coupee (invite), 11.25 s tete_coupee (invite), 11.75 s tete_coupee (invite), 12.25 s tete_coupee (invite), 12.75 s tete_coupee (invite)
+  redessin partiel : 0/240 images à redessiner (0 passage(s)), le reste repris tel quel
+Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
+  IA gemini indisponible (gemini 429 : [{
+  "error": {
+    "code": 429,
+    "message": "You exceeded your current quota, please check your plan an) : on passe à la suivante
+Jury qualité (gratuit) : 9.5/10 — Humoriste 10.0/10 :  | Réalisateur 6.8/10 : 10.2 s tête de invite coupée par le bord de l'image (moyen); caméra peu vivante : presque toujours le même mouvement | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 10.0/10 : 
+Version corrigée gardée : 4.6 → 9.5/10
+Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = gemini ×2, mistral ×1, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 24405, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 34}
+Quota de l'API GitHub : 4784 appels restants
+OK : sortie/2026-10-25_06h40_emission.mp4 (10 s)

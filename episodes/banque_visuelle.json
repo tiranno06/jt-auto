@@ -5957,5 +5957,239 @@
    ]
   },
   "video": "2026-10-25_05h59_emission.mp4"
+ },
+ {
+  "date": "2026-10-25",
+  "source": "https://www.tiktok.com/@kodanimation/video/7698546519946841376",
+  "auteur": "kodanimation",
+  "visuel": {
+   "gestes": [],
+   "duree": 23.5,
+   "nb_plans": 10,
+   "duree_plan": 2.35,
+   "coupes": [
+    4.5,
+    5.5,
+    6.5,
+    10.0,
+    10.5,
+    14.0,
+    14.5,
+    17.0,
+    18.5
+   ],
+   "plans": {
+    "tres_serre": 0.0,
+    "serre": 0.0,
+    "moyen": 0.0,
+    "large": 1.0
+   },
+   "camera": {
+    "fixe": 0.919,
+    "avance": 0.027,
+    "recul": 0.054,
+    "travelling": 0.0,
+    "epaule": 0.0
+   },
+   "nb_personnes": 0,
+   "personnes": [],
+   "visages": false,
+   "sourires": 0.0,
+   "energie": 0.233,
+   "mur": [
+    147,
+    130,
+    131
+   ],
+   "palette": [
+    [
+     153,
+     123,
+     102,
+     0.284
+    ],
+    [
+     113,
+     89,
+     80,
+     0.244
+    ],
+    [
+     137,
+     134,
+     165,
+     0.233
+    ],
+    [
+     9,
+     6,
+     6,
+     0.1
+    ],
+    [
+     79,
+     59,
+     59,
+     0.084
+    ],
+    [
+     240,
+     239,
+     237,
+     0.056
+    ]
+   ],
+   "lumiere": {
+    "luminosite": 132.8,
+    "chaleur": 19.1,
+    "saturation": 72.8
+   },
+   "moment": "soir"
+  },
+  "audio": {
+   "duree": 23.2,
+   "nb_voix": 2,
+   "voix": [
+    {
+     "hz": 225,
+     "genre": "f",
+     "part": 0.86
+    },
+    {
+     "hz": 160,
+     "genre": "h",
+     "part": 0.14
+    }
+   ],
+   "debit": 2.84,
+   "blanc_moyen": 0.82,
+   "coupes": 1,
+   "dynamique_db": 25.7,
+   "cris": 0.015,
+   "musique": null,
+   "impacts": 0,
+   "impacts_10s": 0.0,
+   "graves": 0,
+   "aigus": 0,
+   "sur_vanne": 0,
+   "evenements": {},
+   "emotions": {
+    "authoritative": 3,
+    "neutral": 1,
+    "hesitant": 1,
+    "annoyed": 1
+   }
+  },
+  "claude": {
+   "lieux": [
+    "chambre"
+   ],
+   "moment": "jour",
+   "costumes": {
+    "envoyee": {
+     "haut": "tshirt",
+     "c_haut": "jaune",
+     "motif": "uni",
+     "bas": "short",
+     "chaussures": "chaussons",
+     "cheveux": "ondule",
+     "c_cheveux": "chatain",
+     "details": [
+      "collier",
+      "lunettes_vue",
+      "rouge_levres"
+     ]
+    },
+    "invite": {
+     "haut": "tshirt",
+     "c_haut": "bleu",
+     "motif": "uni",
+     "bas": "short",
+     "chaussures": "chaussons",
+     "cheveux": "court",
+     "c_cheveux": "marron",
+     "details": [
+      "lunettes_vue"
+     ]
+    }
+   },
+   "objets": [],
+   "gags": [
+    "Post-it sur le mur : Liste infinie de corvées"
+   ],
+   "ambiances": [
+    "poussiere"
+   ],
+   "plans": [
+    {
+     "mouvement": "fixe",
+     "reaction": "aucune",
+     "plan": "large",
+     "replique": 0,
+     "geste": "croises"
+    },
+    {
+     "mouvement": "fixe",
+     "reaction": "sceptique",
+     "geste": "mains_hanches",
+     "plan": "large",
+     "replique": 1
+    },
+    {
+     "plan": "large",
+     "geste": "pouce",
+     "replique": 2,
+     "reaction": "aucune",
+     "mouvement": "fixe"
+    },
+    {
+     "mouvement": "avance",
+     "geste": "pointe_d",
+     "reaction": "choc",
+     "plan": "moyen",
+     "replique": 3
+    },
+    {
+     "reaction": "aucune",
+     "mouvement": "fixe",
+     "replique": 4,
+     "geste": "gratte_tete",
+     "plan": "moyen"
+    },
+    {
+     "replique": 5,
+     "plan": "serre",
+     "reaction": "facepalm",
+     "mouvement": "zoom_choc",
+     "geste": "desespoir"
+    }
+   ]
+  },
+  "realisation": {
+   "moment": "jour",
+   "lieux": [
+    "chambre"
+   ],
+   "gags": [
+    "Post-it sur le mur : Liste infinie de corvées"
+   ],
+   "ambiances": [
+    "poussiere"
+   ],
+   "source": "auteur+image",
+   "tenues": {
+    "envoyee": "tshirt",
+    "invite": "tshirt"
+   },
+   "plans": [
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "moyen/avance",
+    "moyen/fixe",
+    "serre/zoom_choc"
+   ]
+  },
+  "video": "2026-10-25_06h40_emission.mp4"
  }
 ]

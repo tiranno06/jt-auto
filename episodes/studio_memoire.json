@@ -1801,5 +1801,44 @@
    "son": true
   },
   "cadence": null
+ },
+ {
+  "moment": "jour",
+  "lieux": [
+   "chambre"
+  ],
+  "source": "auteur+image",
+  "duree": 10.0,
+  "plans": {
+   "large": 3,
+   "moyen": 2,
+   "serre": 1
+  },
+  "mouvements": {
+   "fixe": 4,
+   "avance": 1,
+   "zoom_choc": 1
+  },
+  "costumes": {
+   "envoyee": "tshirt",
+   "invite": "tshirt"
+  },
+  "figurants": 0,
+  "ambiances": [
+   "poussiere"
+  ],
+  "controle": "Humoriste 10.0/10 :  | Réalisateur 6.8/10 : 10.2 s tête de invite coupée par le bord de l'image (moyen); caméra peu vivante : presque toujours le même mouvement | Directeur artistique 10.0/10 :  | Ing",
+  "fichier": "2026-10-25_06h40_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": true,
+   "tiers": true,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": true,
+   "reflets": true,
+   "son": true
+  },
+  "cadence": "rapide"
  }
 ]

@@ -1,0 +1,434 @@
+{
+ "titre": "MÈRE ET CORVÉES D'ADO",
+ "sujet": "👀 Aperçu 10 s — MÈRE ET CORVÉES D'ADO",
+ "ecran": "MÈRE ET CORVÉE",
+ "invite_nom": "Hubert Rustine",
+ "invite_role": "Expert (fictif)",
+ "invite_look": "chauve",
+ "lieu_direct": "Assemblée",
+ "titre_accroche": "POV : Quand ta mère te demande un truc",
+ "question": "Vos parents vous faisaient le même coup ?",
+ "running_gag": "",
+ "verite": "",
+ "repliques": [
+  {
+   "p": "envoyee",
+   "t": "Faudra que tu me sortes les poubelles. Oui maman. Et que tu me fasses la vaisselle. Tout de suite maman. Et que tu passes l'aspirateur aussi. Avec",
+   "_deb": 0.0,
+   "_fin": 9.86,
+   "d": "[authoritative] Faudra que tu me sortes les poubelles, oui maman, et que tu me fasses la vaisselle, tout de suite maman, et que tu passes l'aspirateur aussi, avec"
+  },
+  {
+   "p": "envoyee",
+   "t": "plaisir. Que tu m'étendes le",
+   "_deb": 9.86,
+   "_fin": 13.3,
+   "d": "[authoritative] plaisir, que tu m'étendes le"
+  },
+  {
+   "p": "invite",
+   "t": "linge. Aucun problème.",
+   "_deb": 13.3,
+   "_fin": 14.26,
+   "d": "[neutral] linge, aucun problème !"
+  },
+  {
+   "p": "envoyee",
+   "t": "Faudra réparer le frigo aussi.",
+   "_deb": 15.46,
+   "_fin": 16.84,
+   "d": "[authoritative] Faudra réparer le frigo aussi !"
+  },
+  {
+   "p": "invite",
+   "t": "Ah ça je saurais pas faire maman, ah !",
+   "_deb": 17.16,
+   "_fin": 19.16,
+   "d": "[hesitant] Ah ça je saurais pas faire maman, ah..."
+  },
+  {
+   "p": "envoyee",
+   "t": "Tu vois, on peut rien te demander à toi !",
+   "_deb": 20.1,
+   "_fin": 23.22,
+   "d": "[annoyed] Tu vois, on peut rien te demander à toi !",
+   "chute": true
+  }
+ ],
+ "bandeau": [],
+ "gag": null,
+ "legende": "Les mères retiennent toujours le seul truc qu'on ne sait pas faire !",
+ "hashtags": [
+  "petitsdramas",
+  "humour",
+  "maman",
+  "famille",
+  "relou",
+  "pov"
+ ],
+ "sources": [
+  "https://www.tiktok.com/@kodanimation/video/7698546519946841376"
+ ],
+ "decoupage": [
+  {
+   "scene": "1",
+   "repliques": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "lieu": "",
+   "son": "",
+   "duree": 0.0,
+   "decor": "A bedroom doorway with wooden stairs in the background, plain wall and open door.",
+   "titre": "Les corvées"
+  }
+ ],
+ "studio": {
+  "gags": [
+   "Post-it sur le mur : Liste infinie de corvées"
+  ],
+  "costumes": {
+   "envoyee": {
+    "haut": "tshirt",
+    "c_haut": "jaune",
+    "motif": "uni",
+    "bas": "short",
+    "chaussures": "chaussons",
+    "cheveux": "ondule",
+    "c_cheveux": "chatain",
+    "details": [
+     "collier",
+     "lunettes_vue",
+     "rouge_levres"
+    ]
+   },
+   "invite": {
+    "haut": "tshirt",
+    "c_haut": "bleu",
+    "motif": "uni",
+    "bas": "short",
+    "chaussures": "chaussons",
+    "cheveux": "court",
+    "c_cheveux": "marron",
+    "details": [
+     "lunettes_vue"
+    ]
+   }
+  },
+  "moment": "jour",
+  "ambiances": [
+   "poussiere"
+  ],
+  "personnages": {
+   "envoyee": {
+    "genre": "f",
+    "age": 48,
+    "taille": 1.0,
+    "corpulence": 0.6,
+    "cheveux": "ondule",
+    "barbe": "rien"
+   },
+   "invite": {
+    "genre": "h",
+    "age": 16,
+    "taille": 0.8,
+    "corpulence": 0.3,
+    "cheveux": "court",
+    "barbe": "rien"
+   }
+  },
+  "plans": [
+   {
+    "mouvement": "fixe",
+    "reaction": "aucune",
+    "plan": "large",
+    "replique": 0,
+    "geste": "croises"
+   },
+   {
+    "mouvement": "fixe",
+    "reaction": "sceptique",
+    "geste": "mains_hanches",
+    "plan": "large",
+    "replique": 1
+   },
+   {
+    "plan": "large",
+    "geste": "pouce",
+    "replique": 2,
+    "reaction": "aucune",
+    "mouvement": "fixe"
+   },
+   {
+    "mouvement": "avance",
+    "geste": "pointe_d",
+    "reaction": "choc",
+    "plan": "moyen",
+    "replique": 3
+   },
+   {
+    "reaction": "aucune",
+    "mouvement": "fixe",
+    "replique": 4,
+    "geste": "gratte_tete",
+    "plan": "moyen"
+   },
+   {
+    "replique": 5,
+    "plan": "serre",
+    "reaction": "facepalm",
+    "mouvement": "zoom_choc",
+    "geste": "desespoir"
+   }
+  ],
+  "objets": [],
+  "lieux": [
+   "chambre"
+  ],
+  "cadence": "rapide",
+  "decoupe": [
+   {
+    "replique": 0,
+    "plans": [
+     {
+      "debut": 0.0,
+      "plan": "serre",
+      "cible": "envoyee",
+      "mouvement": "avance"
+     }
+    ]
+   },
+   {
+    "replique": 2,
+    "plans": [
+     {
+      "debut": 0.0,
+      "plan": "serre",
+      "cible": "invite",
+      "mouvement": "avance"
+     }
+    ]
+   },
+   {
+    "replique": 1,
+    "plans": [
+     {
+      "debut": 0.0,
+      "plan": "serre",
+      "cible": "envoyee",
+      "mouvement": "avance"
+     }
+    ]
+   },
+   {
+    "replique": 3,
+    "plans": [
+     {
+      "debut": 0.0,
+      "plan": "serre",
+      "cible": "envoyee",
+      "mouvement": "avance"
+     }
+    ]
+   },
+   {
+    "replique": 4,
+    "plans": [
+     {
+      "debut": 0.0,
+      "plan": "serre",
+      "cible": "invite",
+      "mouvement": "avance"
+     }
+    ]
+   }
+  ]
+ },
+ "doublage": {
+  "piste": "/tmp/tmpmbixtcr7/piste.wav",
+  "duree": 23.24,
+  "source": "https://www.tiktok.com/@kodanimation/video/7698546519946841376",
+  "auteur": "kodanimation",
+  "contexte": "Une mère énumère une tonne de corvées à son fils qui accepte tout docilement, jusqu'au moment où elle lui demande de réparer le frigo.",
+  "evenements": [],
+  "visuel": {
+   "gestes": [],
+   "duree": 23.5,
+   "nb_plans": 10,
+   "duree_plan": 2.35,
+   "coupes": [
+    4.5,
+    5.5,
+    6.5,
+    10.0,
+    10.5,
+    14.0,
+    14.5,
+    17.0,
+    18.5
+   ],
+   "plans": {
+    "tres_serre": 0.0,
+    "serre": 0.0,
+    "moyen": 0.0,
+    "large": 1.0
+   },
+   "camera": {
+    "fixe": 0.919,
+    "avance": 0.027,
+    "recul": 0.054,
+    "travelling": 0.0,
+    "epaule": 0.0
+   },
+   "nb_personnes": 0,
+   "personnes": [],
+   "visages": false,
+   "sourires": 0.0,
+   "energie": 0.233,
+   "mur": [
+    147,
+    130,
+    131
+   ],
+   "palette": [
+    [
+     153,
+     123,
+     102,
+     0.284
+    ],
+    [
+     113,
+     89,
+     80,
+     0.244
+    ],
+    [
+     137,
+     134,
+     165,
+     0.233
+    ],
+    [
+     9,
+     6,
+     6,
+     0.1
+    ],
+    [
+     79,
+     59,
+     59,
+     0.084
+    ],
+    [
+     240,
+     239,
+     237,
+     0.056
+    ]
+   ],
+   "lumiere": {
+    "luminosite": 132.8,
+    "chaleur": 19.1,
+    "saturation": 72.8
+   },
+   "moment": "soir"
+  },
+  "audio": {
+   "duree": 23.2,
+   "nb_voix": 2,
+   "voix": [
+    {
+     "hz": 225,
+     "genre": "f",
+     "part": 0.86
+    },
+    {
+     "hz": 160,
+     "genre": "h",
+     "part": 0.14
+    }
+   ],
+   "debit": 2.84,
+   "blanc_moyen": 0.82,
+   "coupes": 1,
+   "dynamique_db": 25.7,
+   "cris": 0.015,
+   "musique": null,
+   "impacts": 0,
+   "impacts_10s": 0.0,
+   "graves": 0,
+   "aigus": 0,
+   "sur_vanne": 0,
+   "evenements": {},
+   "emotions": {
+    "authoritative": 3,
+    "neutral": 1,
+    "hesitant": 1,
+    "annoyed": 1
+   }
+  },
+  "video_origine": "/tmp/tmpmbixtcr7/src.mp4"
+ },
+ "fiche": {
+  "note": 0,
+  "decision": "vidéo manuelle (bande son d'une vidéo TikTok)",
+  "decoupage": [
+   {
+    "scene": "1",
+    "repliques": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 0.0,
+    "decor": "A bedroom doorway with wooden stairs in the background, plain wall and open door.",
+    "titre": "Les corvées"
+   }
+  ]
+ },
+ "_monte": true,
+ "_voix_hz": {
+  "envoyee": 227,
+  "invite": 158
+ },
+ "_voix_genre": {
+  "envoyee": "f",
+  "invite": "h"
+ },
+ "realisation": {
+  "moment": "jour",
+  "lieux": [
+   "chambre"
+  ],
+  "gags": [
+   "Post-it sur le mur : Liste infinie de corvées"
+  ],
+  "ambiances": [
+   "poussiere"
+  ],
+  "source": "auteur+image",
+  "tenues": {
+   "envoyee": "tshirt",
+   "invite": "tshirt"
+  },
+  "plans": [
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "moyen/avance",
+   "moyen/fixe",
+   "serre/zoom_choc"
+  ]
+ }
+}
