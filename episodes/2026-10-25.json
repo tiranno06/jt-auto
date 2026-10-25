@@ -1,143 +1,251 @@
 {
- "titre": "MYSTÈRE ST' 501",
- "sujet": "MYSTÈRE ST' 501",
- "ecran": "MYSTÈRE ST' 50",
+ "titre": "CAFÉ ET IMPATIENCE",
+ "sujet": "CAFÉ ET IMPATIENCE",
+ "ecran": "CAFÉ ET IMPATI",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "POV : Vous êtes le présentateur d'une émission",
- "question": "Quel est le secret derrière le sous-titre 'ST’ 501' ?",
+ "titre_accroche": "POV : Attendre son café",
+ "question": "Qui va préparer les cafés ?",
  "running_gag": "",
  "verite": "",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "Sous -titrage ST' 501 Sous -titrage ST' 501",
+   "t": "Et nous commencerons dès que, dès que Thaïs nous aura fait deux petits cafés.",
    "_deb": 0.0,
-   "_fin": 59.9,
+   "_fin": 4.56,
+   "d": "['[impatience]', 'Et nous commencerons dès que, dès que Thaïs nous aura fait deux petits cafés.']"
+  },
+  {
+   "p": "presentateur",
+   "t": "Deux, tu prends un café Hugo ? Trois s'il te plaît Thaïs, trois.",
+   "_deb": 6.62,
+   "_fin": 9.6,
+   "d": "['[exaspération_amicale]', \"Deux, tu prends un café Hugo ? Trois s'il te plaît Thaïs, trois.\"]",
    "chute": true
   }
  ],
  "bandeau": [],
  "gag": null,
- "legende": "Un présentateur intrigue son public avec un message énigmatique.",
+ "legende": "Un présentateur stressé par l'attente de ses cafés.",
  "hashtags": [
   "petitsdramas",
-  "mystere",
-  "secret",
-  "emission",
-  "intrigue",
-  "futur",
-  "anime"
+  "cafe",
+  "impatience",
+  "humour",
+  "quotidien",
+  "comedie",
+  "cafeine"
  ],
  "sources": [
-  "https://www.tiktok.com/@vincedessine/video/7621893553626615063"
+  "https://www.tiktok.com/@vincedessine/video/7676440419336490273"
  ],
  "decoupage": [
   {
    "scene": "1",
    "repliques": [
-    0
+    0,
+    1
    ],
    "lieu": "",
    "son": "",
    "duree": 0.0,
-   "decor": "studio futuriste avec des écrans holographiques et des boutons lumineux",
-   "titre": "Émission Mystère X"
+   "decor": "cafe_bar_little_lemon_with_two_chairs black_background",
+   "titre": "En attente des cafés"
+  },
+  {
+   "scene": "2",
+   "repliques": [],
+   "lieu": "",
+   "son": "",
+   "duree": 0.0,
+   "decor": "cafe_kitchen_with_machine_and_syringe",
+   "titre": "Préparation des cafés"
   }
  ],
  "studio": {
-  "moment": "soir",
+  "moment": "jour",
   "lieux": [
-   "studio"
+   "cafe_bar",
+   "cafe_kitchen"
   ],
   "costumes": {
    "presentateur": {
     "haut": "chemise",
-    "c_haut": "bleu",
+    "c_haut": "bleu marine",
     "motif": "uni",
     "bas": "pantalon",
     "chaussures": "ville",
     "details": [
-     "cravate",
-     "lunettes_soleil",
-     "montre"
+     "montre",
+     "cravate"
     ],
     "chapeau": null,
-    "cheveux": "court",
-    "c_cheveux": "noir"
-   }
-  },
-  "personnages": {
-   "presentateur": {
-    "genre": "h",
-    "age": 40,
-    "taille": 1,
-    "corpulence": 0.5,
-    "cheveux": "court",
-    "barbe": "trois_jours"
-   }
-  },
-  "gags": [
-   "Affiche : 'Accès réservé aux initiés'",
-   "Post-it : 'Ne pas appuyer sur le bouton rouge'",
-   "Tableau : 'Code ST’ 501 : Top Secret'"
-  ],
-  "ambiances": [
-   "neon"
-  ],
-  "cadence": "pose",
-  "plans": [
-   {
-    "replique": 0,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "pointe_d",
-    "reaction": "regard_camera"
+    "cheveux": "court_texture",
+    "c_cheveux": "brun"
    },
-   {
-    "replique": 0,
-    "plan": "large",
-    "mouvement": "zoom_choc",
-    "geste": "bras_ouverts",
-    "reaction": "aucune"
+   "envoyee": {
+    "haut": "tablier",
+    "c_haut": "blanc",
+    "motif": "uni",
+    "bas": "pantalon",
+    "chaussures": "baskets",
+    "details": [
+     "logo",
+     "bracelets"
+    ],
+    "chapeau": null,
+    "cheveux": "long",
+    "c_cheveux": "blond"
    }
-  ],
-  "objets": [
-   {
-    "replique": 0,
-    "objet": "écran holographique"
-   },
-   {
-    "replique": 0,
-    "objet": "bouton lumineux rouge"
-   }
-  ]
+  }
  },
  "doublage": {
-  "piste": "/tmp/tmpj7xnssgx/piste.wav",
-  "duree": 60.0,
-  "source": "https://www.tiktok.com/@vincedessine/video/7621893553626615063",
+  "piste": "/tmp/tmp30uve568/piste.wav",
+  "duree": 10.01,
+  "source": "https://www.tiktok.com/@vincedessine/video/7676440419336490273",
   "auteur": "vincedessine",
-  "contexte": "Un présentateur dynamique et enthousiaste anime une émission mystérieuse où il semble répéter un sous-titre énigmatique, 'ST’ 501', dans un studio futuriste ou un lieu technologique. L'ambiance est intrigante, comme s'il s'agissait d'une révélation ou d'un code secret.",
+  "contexte": "Un présentateur attend dans un café avec impatience que Thaïs, une employée, lui prépare ses cafés. L'ambiance est détendue mais légèrement stressée par l'attente.",
   "evenements": [],
-  "visuel": {},
+  "visuel": {
+   "gestes": [
+    [
+     5.02,
+     0.28,
+     1.0
+    ],
+    [
+     8.53,
+     0.29,
+     1.0
+    ]
+   ],
+   "duree": 10.0,
+   "nb_plans": 1,
+   "duree_plan": 10.04,
+   "coupes": [],
+   "plans": {
+    "tres_serre": 0.0,
+    "serre": 0.65,
+    "moyen": 0.35,
+    "large": 0.0
+   },
+   "camera": {
+    "fixe": 0.842,
+    "avance": 0.053,
+    "recul": 0.105,
+    "travelling": 0.0,
+    "epaule": 0.0
+   },
+   "nb_personnes": 1,
+   "personnes": [
+    {
+     "place": "droite",
+     "presence": 0.8,
+     "habit": [
+      250,
+      249,
+      248
+     ],
+     "cheveux": [
+      40,
+      31,
+      31
+     ],
+     "sourire": 0.0,
+     "taille": 0.161,
+     "tete_penchee": 1.6,
+     "regard_cote": 0.0
+    },
+    {
+     "place": "gauche",
+     "presence": 0.2,
+     "habit": [
+      248,
+      245,
+      242
+     ],
+     "cheveux": [
+      242,
+      194,
+      118
+     ],
+     "sourire": 0.0,
+     "taille": 0.163,
+     "tete_penchee": 2.1,
+     "regard_cote": 0.0
+    }
+   ],
+   "visages": true,
+   "sourires": 0.0,
+   "energie": 0.428,
+   "mur": [
+    0,
+    0,
+    0
+   ],
+   "palette": [
+    [
+     0,
+     0,
+     0,
+     0.458
+    ],
+    [
+     253,
+     253,
+     252,
+     0.419
+    ],
+    [
+     203,
+     192,
+     174,
+     0.037
+    ],
+    [
+     35,
+     33,
+     34,
+     0.034
+    ],
+    [
+     65,
+     82,
+     107,
+     0.026
+    ],
+    [
+     148,
+     103,
+     77,
+     0.025
+    ]
+   ],
+   "lumiere": {
+    "luminosite": 121.5,
+    "chaleur": 2.2,
+    "saturation": 11.6
+   },
+   "moment": "jour"
+  },
   "audio": {
-   "duree": 60.0,
+   "duree": 10.0,
    "nb_voix": 1,
    "voix": [
     {
-     "hz": 218,
-     "genre": "f",
+     "hz": 130,
+     "genre": "h",
      "part": 1.0
     }
    ],
-   "debit": 0.13,
-   "blanc_moyen": 0.0,
+   "debit": 3.71,
+   "blanc_moyen": 2.06,
    "coupes": 0,
-   "dynamique_db": 13.2,
-   "cris": 0.027,
+   "dynamique_db": 24.8,
+   "cris": 0.032,
    "musique": null,
    "impacts": 0,
    "impacts_10s": 0.0,
@@ -146,10 +254,11 @@
    "sur_vanne": 0,
    "evenements": {},
    "emotions": {
-    "mysterious": 1
+    "'[impatience": 1,
+    "'[exaspération_amicale": 1
    }
   },
-  "video_origine": "/tmp/tmpj7xnssgx/src.m4a"
+  "video_origine": "/tmp/tmp30uve568/src.mp4"
  },
  "fiche": {
   "note": 0,
@@ -158,37 +267,46 @@
    {
     "scene": "1",
     "repliques": [
-     0
+     0,
+     1
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "studio futuriste avec des écrans holographiques et des boutons lumineux",
-    "titre": "Émission Mystère X"
+    "decor": "cafe_bar_little_lemon_with_two_chairs black_background",
+    "titre": "En attente des cafés"
+   },
+   {
+    "scene": "2",
+    "repliques": [],
+    "lieu": "",
+    "son": "",
+    "duree": 0.0,
+    "decor": "cafe_kitchen_with_machine_and_syringe",
+    "titre": "Préparation des cafés"
    }
   ]
  },
  "_monte": true,
  "_voix_hz": {
-  "presentateur": 245
+  "presentateur": 140
+ },
+ "_voix_genre": {
+  "presentateur": "h"
  },
  "realisation": {
-  "moment": "soir",
+  "moment": "jour",
   "lieux": [
-   "bar"
+   "salon"
   ],
-  "gags": [
-   "Tableau : 'Code ST’ 501 : Top Secret'"
-  ],
-  "ambiances": [
-   "neon",
-   "poussiere"
-  ],
-  "source": "auteur",
+  "gags": [],
+  "ambiances": [],
+  "source": "auteur+image",
   "tenues": {
    "presentateur": "chemise"
   },
   "plans": [
+   "large/fixe",
    "large/fixe"
   ]
  }

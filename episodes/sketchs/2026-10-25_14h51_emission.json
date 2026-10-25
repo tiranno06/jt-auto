@@ -1,0 +1,313 @@
+{
+ "titre": "CAFÉ ET IMPATIENCE",
+ "sujet": "CAFÉ ET IMPATIENCE",
+ "ecran": "CAFÉ ET IMPATI",
+ "invite_nom": "Hubert Rustine",
+ "invite_role": "Expert (fictif)",
+ "invite_look": "chauve",
+ "lieu_direct": "Assemblée",
+ "titre_accroche": "POV : Attendre son café",
+ "question": "Qui va préparer les cafés ?",
+ "running_gag": "",
+ "verite": "",
+ "repliques": [
+  {
+   "p": "presentateur",
+   "t": "Et nous commencerons dès que, dès que Thaïs nous aura fait deux petits cafés.",
+   "_deb": 0.0,
+   "_fin": 4.56,
+   "d": "['[impatience]', 'Et nous commencerons dès que, dès que Thaïs nous aura fait deux petits cafés.']"
+  },
+  {
+   "p": "presentateur",
+   "t": "Deux, tu prends un café Hugo ? Trois s'il te plaît Thaïs, trois.",
+   "_deb": 6.62,
+   "_fin": 9.6,
+   "d": "['[exaspération_amicale]', \"Deux, tu prends un café Hugo ? Trois s'il te plaît Thaïs, trois.\"]",
+   "chute": true
+  }
+ ],
+ "bandeau": [],
+ "gag": null,
+ "legende": "Un présentateur stressé par l'attente de ses cafés.",
+ "hashtags": [
+  "petitsdramas",
+  "cafe",
+  "impatience",
+  "humour",
+  "quotidien",
+  "comedie",
+  "cafeine"
+ ],
+ "sources": [
+  "https://www.tiktok.com/@vincedessine/video/7676440419336490273"
+ ],
+ "decoupage": [
+  {
+   "scene": "1",
+   "repliques": [
+    0,
+    1
+   ],
+   "lieu": "",
+   "son": "",
+   "duree": 0.0,
+   "decor": "cafe_bar_little_lemon_with_two_chairs black_background",
+   "titre": "En attente des cafés"
+  },
+  {
+   "scene": "2",
+   "repliques": [],
+   "lieu": "",
+   "son": "",
+   "duree": 0.0,
+   "decor": "cafe_kitchen_with_machine_and_syringe",
+   "titre": "Préparation des cafés"
+  }
+ ],
+ "studio": {
+  "moment": "jour",
+  "lieux": [
+   "cafe_bar",
+   "cafe_kitchen"
+  ],
+  "costumes": {
+   "presentateur": {
+    "haut": "chemise",
+    "c_haut": "bleu marine",
+    "motif": "uni",
+    "bas": "pantalon",
+    "chaussures": "ville",
+    "details": [
+     "montre",
+     "cravate"
+    ],
+    "chapeau": null,
+    "cheveux": "court_texture",
+    "c_cheveux": "brun"
+   },
+   "envoyee": {
+    "haut": "tablier",
+    "c_haut": "blanc",
+    "motif": "uni",
+    "bas": "pantalon",
+    "chaussures": "baskets",
+    "details": [
+     "logo",
+     "bracelets"
+    ],
+    "chapeau": null,
+    "cheveux": "long",
+    "c_cheveux": "blond"
+   }
+  }
+ },
+ "doublage": {
+  "piste": "/tmp/tmp30uve568/piste.wav",
+  "duree": 10.01,
+  "source": "https://www.tiktok.com/@vincedessine/video/7676440419336490273",
+  "auteur": "vincedessine",
+  "contexte": "Un présentateur attend dans un café avec impatience que Thaïs, une employée, lui prépare ses cafés. L'ambiance est détendue mais légèrement stressée par l'attente.",
+  "evenements": [],
+  "visuel": {
+   "gestes": [
+    [
+     5.02,
+     0.28,
+     1.0
+    ],
+    [
+     8.53,
+     0.29,
+     1.0
+    ]
+   ],
+   "duree": 10.0,
+   "nb_plans": 1,
+   "duree_plan": 10.04,
+   "coupes": [],
+   "plans": {
+    "tres_serre": 0.0,
+    "serre": 0.65,
+    "moyen": 0.35,
+    "large": 0.0
+   },
+   "camera": {
+    "fixe": 0.842,
+    "avance": 0.053,
+    "recul": 0.105,
+    "travelling": 0.0,
+    "epaule": 0.0
+   },
+   "nb_personnes": 1,
+   "personnes": [
+    {
+     "place": "droite",
+     "presence": 0.8,
+     "habit": [
+      250,
+      249,
+      248
+     ],
+     "cheveux": [
+      40,
+      31,
+      31
+     ],
+     "sourire": 0.0,
+     "taille": 0.161,
+     "tete_penchee": 1.6,
+     "regard_cote": 0.0
+    },
+    {
+     "place": "gauche",
+     "presence": 0.2,
+     "habit": [
+      248,
+      245,
+      242
+     ],
+     "cheveux": [
+      242,
+      194,
+      118
+     ],
+     "sourire": 0.0,
+     "taille": 0.163,
+     "tete_penchee": 2.1,
+     "regard_cote": 0.0
+    }
+   ],
+   "visages": true,
+   "sourires": 0.0,
+   "energie": 0.428,
+   "mur": [
+    0,
+    0,
+    0
+   ],
+   "palette": [
+    [
+     0,
+     0,
+     0,
+     0.458
+    ],
+    [
+     253,
+     253,
+     252,
+     0.419
+    ],
+    [
+     203,
+     192,
+     174,
+     0.037
+    ],
+    [
+     35,
+     33,
+     34,
+     0.034
+    ],
+    [
+     65,
+     82,
+     107,
+     0.026
+    ],
+    [
+     148,
+     103,
+     77,
+     0.025
+    ]
+   ],
+   "lumiere": {
+    "luminosite": 121.5,
+    "chaleur": 2.2,
+    "saturation": 11.6
+   },
+   "moment": "jour"
+  },
+  "audio": {
+   "duree": 10.0,
+   "nb_voix": 1,
+   "voix": [
+    {
+     "hz": 130,
+     "genre": "h",
+     "part": 1.0
+    }
+   ],
+   "debit": 3.71,
+   "blanc_moyen": 2.06,
+   "coupes": 0,
+   "dynamique_db": 24.8,
+   "cris": 0.032,
+   "musique": null,
+   "impacts": 0,
+   "impacts_10s": 0.0,
+   "graves": 0,
+   "aigus": 0,
+   "sur_vanne": 0,
+   "evenements": {},
+   "emotions": {
+    "'[impatience": 1,
+    "'[exaspération_amicale": 1
+   }
+  },
+  "video_origine": "/tmp/tmp30uve568/src.mp4"
+ },
+ "fiche": {
+  "note": 0,
+  "decision": "vidéo manuelle (bande son d'une vidéo TikTok)",
+  "decoupage": [
+   {
+    "scene": "1",
+    "repliques": [
+     0,
+     1
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 0.0,
+    "decor": "cafe_bar_little_lemon_with_two_chairs black_background",
+    "titre": "En attente des cafés"
+   },
+   {
+    "scene": "2",
+    "repliques": [],
+    "lieu": "",
+    "son": "",
+    "duree": 0.0,
+    "decor": "cafe_kitchen_with_machine_and_syringe",
+    "titre": "Préparation des cafés"
+   }
+  ]
+ },
+ "_monte": true,
+ "_voix_hz": {
+  "presentateur": 140
+ },
+ "_voix_genre": {
+  "presentateur": "h"
+ },
+ "realisation": {
+  "moment": "jour",
+  "lieux": [
+   "salon"
+  ],
+  "gags": [],
+  "ambiances": [],
+  "source": "auteur+image",
+  "tenues": {
+   "presentateur": "chemise"
+  },
+  "plans": [
+   "large/fixe",
+   "large/fixe"
+  ]
+ }
+}
