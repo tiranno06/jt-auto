@@ -210,6 +210,7 @@ def main():
     gags = [h.get("running_gag") for h in historique[-15:] if h.get("running_gag")]
     test = os.environ.get("SKETCH_TEST", "").strip()
     if S:                                                                  # reprise : sketch, son et format déjà prêts
+        import doublage
         sk, DOUB, fmt = S["sk"], S["DOUB"], S["fmt"]
     elif REFAIRE_MODE in ("voix", "decors"):                               # mêmes répliques : on refait seulement les voix / les décors
         sk = SK_ANCIEN; sk["_monte"] = True
