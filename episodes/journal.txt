@@ -2,14 +2,14 @@ Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, ElevenLabs epuise — IA utilisée : mistral
 Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @motiontoonz, @same_same53, @charly.bse, @kodanimation, @vignianimation, @vincedessine
-Profil TikTok @same_same53 : 35 vidéo(s) jamais utilisée(s)
-Profil TikTok @eliotlehanneur : 37 vidéo(s) jamais utilisée(s)
+Profil TikTok @vignianimation : 37 vidéo(s) jamais utilisée(s)
 Profil TikTok @vincedessine : 35 vidéo(s) jamais utilisée(s)
-Vidéo depuis TikTok : https://www.tiktok.com/@same_same53/video/7676055755618897185
+Profil TikTok @charly.bse : 36 vidéo(s) jamais utilisée(s)
+Vidéo depuis TikTok : https://www.tiktok.com/@vignianimation/video/7689554466865024288
   son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 81.6 s, compte d'origine @same_same53
-[ WARN:0@17.945] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
-  image de la vidéo : 1 plans (≈ 82.0 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 0 %, large 99 % ; caméra : fixe 100 % ; 1 personne(s) à l'écran : aucun visage repéré ; agitation 0.481 ; lumière jour ; fond [3, 2, 3]
+  son récupéré : 61.0 s, compte d'origine @vignianimation
+[ WARN:0@16.068] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  image de la vidéo : 1 plans (≈ 61.0 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 31 %, large 68 % ; caméra : fixe 70 %, avance 11 %, recul 17 %, travelling 0 % ; 1 personne(s) à l'écran : centre (habit [222, 190, 158], cheveux [13, 13, 13], sourit 0 %) ; agitation 0.84 ; lumière jour ; fond [242, 221, 198]
   isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
   transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/core/io.py:48: UserWarning: 
@@ -19,42 +19,39 @@ torchcodec is not installed correctly so built-in audio decoding will fail. Solu
 
 Could not load this library: /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/torchcodec/libtorchcodec_image.so
   warnings.warn(
-[0;93m2026-10-25 21:00:04.372254529 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[0;93m2026-10-25 21:18:05.881995067 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1913.)
   std = sequences.std(dim=-1, correction=1)
-  voix séparées par pyannote : 1 voix, 24 tours de parole
+  voix séparées par pyannote : 2 voix, 15 tours de parole
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-  voix re-séparées par leur empreinte (ECAPA) : 2 voix (netteté 0.17)
-  voix vérifiées mot par mot : 1 mot(s) remis sur la bonne voix
-  22 répliques, voix : {'speaker_0': 130, 'speaker_1': 98}
-  son de la vidéo : 2 voix [130 Hz (h, 30 %), 98 Hz (h, 70 %)], 3.09 mots/s, blancs 1.23 s, 3 coupure(s) de parole, dynamique 9.0 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
-  scène reconstituée : En pleine nuit sur une route déserte et enneigée, un policier effectue un contrôle routier de routine mais le conducteur, d'un calme glacial, lui met un coup de pression psychologique mémorable.
-  casting : speaker_0 → Jojo, speaker_1 → Kévin
-  sous-titres : 12 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
-Sketch : « LE COUP DE PRESSION AU POLICIE », 22 répliques
-  décor 0 : dark snowy deserted country road at night, police cruiser with red and
-montage : 1 plans (0.0:large>pre/coupe)
-objets de l'histoire : voiture garée dans 1 décor(s)
-studio : nuit, lieux ['rue'], tenues presentateur=uniforme, invite=blouson, 2 figurant(s), ambiances ['neige', 'vapeur'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 84.0 s, 22 répliques, 1 scène(s), personnages ['presentateur', 'invite']
-montage : 1 plans (0.0:large>pre/coupe)
-objets de l'histoire : voiture garée dans 1 décor(s)
-studio : nuit, lieux ['rue'], tenues presentateur=uniforme, invite=blouson, 2 figurant(s), ambiances ['neige', 'vapeur'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 84.0 s, 22 répliques, 1 scène(s), personnages ['presentateur', 'invite']
-  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~1260 images)
-  morceau 2520–3781 reçu d'une machine d'aide
-  morceau 1260–2520 reçu d'une machine d'aide
-  morceau 3781–5041 reçu d'une machine d'aide
-  dessin partagé terminé en 6.8 min
-Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
+  voix vérifiées mot par mot : 7 mot(s) remis sur la bonne voix
+  12 répliques, voix : {'speaker_0': 306, 'speaker_1': 165}
+  son de la vidéo : 2 voix [306 Hz (f, 98 %), 165 Hz (?, 2 %)], 2.99 mots/s, blancs 0.91 s, 1 coupure(s) de parole, dynamique 17.0 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
   IA gemini indisponible (gemini 429 : [{
   "error": {
     "code": 429,
     "message": "You exceeded your current quota, please check your plan an) : on passe à la suivante
-Jury qualité (ia) : 6.9/10 — Humoriste 7.0/10 : 0.4 s La chute finale manque de punch. La dernière réplique est longue et pourrait être raccourcie ou accentuée par un zoom choc ou un bruitage marquant.; 40.0 s L'humour pourrait être renforcé par des regards caméra ou des réactions exagérées du personnage.; 74.0 s Ajouter un bruitage pour marquer la transition entre la lumière et la noirceur (exemple : un 'dun dun' mystérieux ou un 'violon triste'). | Réalisateur 6.0/10 : 0.0 s Montage trop lent. Il faudrait environ 2,8 plans par seconde pour dynamiser la vidéo.; 10.4 s Manque de plans de réaction du personnage écoutant.; 83.4 s Faux raccord entre les images 15 et 16. Le changement de décor et de style doit être fluide. | Directeur artistique 8.0/10 : 0.0 s Les personnages manquent de cohérence dans leur style vestimentaire. Le présentateur et l'invité devraient avoir des tenues plus distinctives pour renforcer leur 
-Manque par rapport à la vidéo d'origine : Les personnages originaux ont des expressions faciales plus exagérées et des gestes plus marqués (ex. : mains qui gesticulent). ; L'ambiance sonore originale inclut des bruitages plus variés et des transitions musicales. ; Les décors originaux incluent des détails interactifs (ex. : objets qui bougent ou changent selon l'action).
+  scène reconstituée : Une scène de dispute violente dans un salon entre une femme âgée, en colère contre son petit-fils, et un homme plus jeune, qui semble être son fils. La tension monte entre générations, avec des insultes et des accusations.
+  casting : speaker_0 → Jojo, speaker_1 → Kévin
+  sous-titres : 5 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
+  2 réattribution(s) de l'IA refusée(s) : la voix de ces répliques est reconnue avec certitude
+Sketch : « CONFLIT FAMILIAL EXPLOSIF », 12 répliques
+  décor 0 (lieu ressemblant de la banque, budget Modal du mois atteint) : salon avec un canapé marron, une table basse en verre, une l
+montage : 1 plans (0.0:large>pre/coupe)
+studio : soir, lieux ['salon'], tenues presentateur=pull, invite=tshirt, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 63.4 s, 12 répliques, 1 scène(s), personnages ['presentateur', 'invite']
+montage : 1 plans (0.0:large>pre/coupe)
+studio : soir, lieux ['salon'], tenues presentateur=pull, invite=tshirt, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 63.4 s, 12 répliques, 1 scène(s), personnages ['presentateur', 'invite']
+  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~951 images)
+  morceau 1903–2854 reçu d'une machine d'aide
+  morceau 2854–3806 reçu d'une machine d'aide
+  morceau 952–1903 reçu d'une machine d'aide
+  dessin partagé terminé en 4.2 min
+Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
+Jury qualité (ia) : 5.8/10 — Humoriste 6.0/10 : 0.4 s La chute finale manque de punch. Le zoom choc sur le personnage qui dit 'On va te faire enculer !' est absent, ce qui diminue l'impact comique.; 15.6 s Les vannes sont efficaces, mais il manque des regards caméra ou des réactions exagérées pour renforcer le côté humoristique.; 62.8 s La chute finale est trop longue et manque de rythme. Ajouter un bruitage pour marquer la fin serait bénéfique. | Réalisateur 5.0/10 : 0 s Montage trop lent. Il faudrait environ 2,8 plans par seconde pour dynamiser la vidéo.; 10.3 s Pas assez de plans de réaction de l’invité pour renforcer l’interaction.; 17.8 s Faux raccord entre les plans 7 et 8. Le personnage semble changer de position sans logique. | Directeur artistique 7.0/10 : 0 s Les personnages manquent de cohérence avec l’histoire. Le présentateur semble trop jeune pour jouer un rôle de figure d’autorité agressive.; 0 s Les 
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = gemini ×1, mistral ×1, voix = tiktok, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 22588, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 32}
-Quota de l'API GitHub : 4895 appels restants
-OK : sortie/2026-10-25_22h03_emission.mp4 (84 s)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = mistral ×2, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 21917, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0}
+Quota de l'API GitHub : 4809 appels restants
+OK : sortie/2026-10-25_22h21_emission.mp4 (63 s)
