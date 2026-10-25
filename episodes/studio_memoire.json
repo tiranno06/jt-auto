@@ -2187,26 +2187,24 @@
  {
   "moment": "jour",
   "lieux": [
-   "classe"
+   "salon"
   ],
-  "source": "auteur+image",
-  "duree": 94.1,
+  "source": "robot+image",
+  "duree": 70.1,
   "plans": {
-   "large": 40
+   "large": 26
   },
   "mouvements": {
-   "fixe": 40
+   "fixe": 26
   },
   "costumes": {
-   "presentateur": "costume",
-   "envoyee": "pull"
+   "presentateur": "capuche",
+   "invite": "chemise"
   },
-  "figurants": 1,
-  "ambiances": [
-   "neon"
-  ],
-  "controle": "Humoriste 7.0/10 : 0.4 s La chute finale ('On est bon ? / Est-ce que c'est bon pour vous ?') manque de réactivité visuelle. Un zoom choc sur le personnage qui répondrait serait nécessaire pour renforc",
-  "fichier": "2026-10-25_18h13_emission.mp4",
+  "figurants": 0,
+  "ambiances": [],
+  "controle": "Humoriste 8.6/10 : 57.9 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 6.6/10 : montage trop lent : 0.1 plans toutes les 10 s (il en faudrait ~2.8); 57.9 s pas assez de plans",
+  "fichier": "2026-10-25_17h42_emission.mp4",
   "cine": {
    "focus": false,
    "vertige": false,
@@ -2217,6 +2215,39 @@
    "reflets": true,
    "son": true
   },
-  "cadence": "rapide"
+  "cadence": null
+ },
+ {
+  "moment": "soir",
+  "lieux": [
+   "rue"
+  ],
+  "source": "robot+image",
+  "duree": 93.2,
+  "plans": {
+   "large": 42
+  },
+  "mouvements": {
+   "fixe": 42
+  },
+  "costumes": {
+   "envoyee": "hawai",
+   "presentateur": "hawai"
+  },
+  "figurants": 2,
+  "ambiances": [],
+  "controle": "Humoriste 6.0/10 : 0.4 s La chute finale ('Ils sont tous tarés') manque d'impact visuel. Un zoom choc sur le personnage qui la dit serait nécessaire pour renforcer l'effet comique.; 46.3 s Les vannes ",
+  "fichier": "2026-10-25_18h31_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": false,
+   "tiers": false,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": false,
+   "reflets": false,
+   "son": true
+  },
+  "cadence": null
  }
 ]
