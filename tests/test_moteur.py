@@ -527,9 +527,20 @@ class TestStudio(unittest.TestCase):
               "decoupage": [{"scene": "1", "repliques": [0, 1, 2], "decor": "a bar counter"}],
               "studio": {"plans": [{"replique": 1, "plan": "epaule"}, {"replique": 2, "plan": "contre_plongee"}], "ambiances": ["neon", "poussiere"]}}
         auds = [np.random.default_rng(k).normal(0, 0.2, 22050).astype(np.float32) for k in range(3)]
-        d = tempfile.mkdtemp(); total = cartoon.rendre(sk, d, auds, apercu=True)
+        import copy as _cp
+        sk_large = _cp.deepcopy(sk)
+        ancien = os.environ.get("MONTAGE"); os.environ["MONTAGE"] = "dynamique"          # le storyboard (plans voulus) en montage dynamique
+        try: d = tempfile.mkdtemp(); total = cartoon.rendre(sk, d, auds, apercu=True)
+        finally:
+            if ancien is None: os.environ.pop("MONTAGE", None)
+            else: os.environ["MONTAGE"] = ancien
         self.assertGreater(total, 3); self.assertEqual(len(glob.glob(d + "/*.png")), 8)
         self.assertEqual(sk["_bible"]["lieux"], ["bar"]); self.assertEqual([q["plan"] for q in cartoon.PH][1:], ["epaule", "contre_plongee"])
+        os.environ.pop("MONTAGE", None)                                                  # par défaut : plan large fixe partout
+        try: cartoon.rendre(sk_large, tempfile.mkdtemp(), auds, apercu=True)
+        finally:
+            if ancien is not None: os.environ["MONTAGE"] = ancien
+        self.assertEqual({q["plan"] for q in cartoon.PH}, {"large"}); self.assertEqual({q["mouvement"] for q in cartoon.PH}, {"fixe"})
 
 
 
@@ -799,6 +810,48 @@ class TestVoixProches(unittest.TestCase):
         self.assertNotEqual(c["speaker_0"], c["speaker_1"])
         self.assertEqual(c["speaker_1"], "envoyee")                        # voix aiguë : un personnage féminin libre
         self.assertEqual(D.casting_unique({"speaker_0": "presentateur", "speaker_1": "envoyee"}, segs, hz), {"speaker_0": "presentateur", "speaker_1": "envoyee"})
+
+    def test_rendre_garde_ses_parametres(self):
+        """Aucune variable du dessin ne réutilise le nom d'un réglage de reprise (un appel téléphonique écrasait « deja » et le dessin plantait)."""
+        import ast
+        arbre = ast.parse(open(os.path.join(os.path.dirname(__file__), "..", "moteur", "cartoon.py"), encoding="utf-8").read())
+        f = next(n for n in arbre.body if isinstance(n, ast.FunctionDef) and n.name == "rendre")
+        proteges = {"deja", "limite", "plage", "reprise", "plans_seuls", "apercu"}
+        ecrits = {c.id for n in ast.walk(f) for c in ([n.target] if isinstance(n, (ast.AugAssign, ast.AnnAssign, ast.For)) else getattr(n, "targets", []))
+                  for c in ast.walk(c) if isinstance(c, ast.Name) and isinstance(c.ctx, ast.Store)}
+        self.assertFalse(ecrits & proteges, ecrits & proteges)
+
+    def test_controle_questions_reponses(self):
+        """Voix trop proches (même personne qui fait les deux voix) : le fil du dialogue et la relecture de l'IA décident, phrase par phrase."""
+        sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "moteur"))
+        import locuteurs as L, doublage as D, ecrire, reseau
+        dialogue = [("Alors, t'as fait une battle dans la cour, c'est ça ?", 0), ("Voilà, c'est ça.", 1),
+                    ("Et tu peux m'expliquer le concept ?", 0), ("Bah, tu danses devant ton pote.", 1),
+                    ("Mais c'est bizarre.", 0), ("Comme un homme ?", 1), ("Oui, comme un homme.", 0),
+                    ("Donc on trouve le moyen,", 1), ("et au lieu de nous féliciter, vous criez.", 1), ("Le quoi ?", 0)]
+        mots, verite, t = [], [], 0.0
+        for phrase, qui in dialogue:
+            for w in phrase.split():
+                mots.append({"w": w, "s": t, "e": t + 0.25, "voix": "speaker_0"}); verite.append(qui); t += 0.3
+            t += 0.4
+        self.assertEqual(len(L.phrases(mots)), len(dialogue))
+        tr = L.indices_dialogue(mots, L.phrases(mots))
+        self.assertGreater(tr[1], 0); self.assertLess(tr[8], 0)            # après une question : l'autre ; « Donc…, et… » : la suite
+        vu = {}
+        def faux(client, systeme, messages, outil, **k):
+            vu["gemini"] = client.messages.raisonner; vu["texte"] = messages[0]["content"]
+            return {"personnes": "A : le père, B : le fils", "phrases": [{"n": i, "qui": "AB"[q]} for i, (_, q) in enumerate(dialogue)]}
+        anc = ecrire._appel, reseau.ia_disponible
+        ecrire._appel, reseau.ia_disponible = faux, (lambda: True)
+        try: ia = D.relire_dialogue(mots)
+        finally: ecrire._appel, reseau.ia_disponible = anc
+        self.assertTrue(vu["gemini"]); self.assertIn("t'as fait", vu["texte"])
+        mal = [dict(m, voix="speaker_0" if i < 40 else "speaker_1") for i, m in enumerate(mots)]   # voix mal séparées au départ
+        res = L.fil_dialogue(mal, ia)
+        lab = [int(m["voix"][-1]) for m in res]
+        self.assertEqual(lab if lab[0] == 0 else [1 - x for x in lab], verite)
+        self.assertTrue(all(m["sure"] == 0.0 for m in res))               # jamais « sûr » : l'IA du casting peut encore corriger
+        self.assertEqual(L.fil_dialogue([dict(m) for m in mal], None)[0]["voix"], "speaker_0")   # sans IA : le texte seul, sans planter
 
 
 class TestFileAttente(unittest.TestCase):

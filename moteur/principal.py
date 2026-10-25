@@ -3,7 +3,7 @@
 2. idée et sketch écrits par Claude (sinon : réserve de sketchs de secours), ou bande son d'une vidéo TikTok (doublage)
 3. voix (ElevenLabs, sinon Chatterbox sur Modal, sinon Piper)
 4. décors IA (Modal) et rendu du dessin animé (moteur/cartoon.py) ; la publication TikTok est faite ensuite par moteur/publier.py"""
-import json, os, re, sys, datetime
+import json, os, re, sys, time, datetime
 from zoneinfo import ZoneInfo
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 RACINE = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -160,9 +160,21 @@ def main():
     if FILIERE == "tiktok" and not THEME and not S:                        # au hasard d'un profil de la liste, jamais déjà utilisée
         import profils_tiktok, doublage
         print(f"Sons TikTok : vidéo tirée des profils {', '.join('@' + p for p in profils_tiktok.liste()) or '(aucun profil réglé)'}", flush=True)
-        for url_ in profils_tiktok.choisir(historique):
-            try: PROFIL_PREP = (url_, doublage.preparer(url_)); break
-            except Exception as e: print(f"  son de {url_} impossible ({str(e)[:160]}) : vidéo suivante", flush=True)
+        import locuteurs
+        seuil_v = float(os.environ.get("VOIX_DIFFERENTES") or 0.6)          # au-delà : voix trop proches (même personne qui fait les deux)
+        garde_v, t_v = None, time.time()
+        for url_ in profils_tiktok.choisir(historique, essais=6):
+            locuteurs.ETAT["ressemblance"] = None
+            try: prep_ = doublage.preparer(url_)
+            except Exception as e: print(f"  son de {url_} impossible ({str(e)[:160]}) : vidéo suivante", flush=True); continue
+            r_ = locuteurs.ETAT.get("ressemblance")
+            if r_ is None or r_ <= seuil_v or seuil_v >= 1:                 # voix bien différentes (ou une seule voix) : on la prend
+                PROFIL_PREP = (url_, prep_); break
+            print(f"  voix trop proches dans {url_} (ressemblance {r_:.2f}) : on cherche une vidéo aux voix bien différentes", flush=True)
+            if garde_v is None or r_ < garde_v[0]: garde_v = (r_, url_, prep_)
+            if time.time() - t_v > 25 * 60: break                          # pas plus de 25 min de recherche
+        if PROFIL_PREP is None and garde_v:                                # que des voix proches : la plus nette (contrôle questions-réponses)
+            PROFIL_PREP = garde_v[1:]; print(f"  aucune vidéo aux voix bien différentes : on garde {garde_v[1]} (ressemblance {garde_v[0]:.2f})", flush=True)
         if PROFIL_PREP is None:                                            # jamais de sketch à la place : les deux filières sont séparées
             print("Sons TikTok : aucune vidéo des profils utilisable cette fois (pas de vidéo).", flush=True)
             PR.fini(False, "Aucun son TikTok utilisable cette fois")

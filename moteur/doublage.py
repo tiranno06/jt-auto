@@ -195,6 +195,48 @@ def voix_sure(seg, seuil=0.5):
     v = [x["sure"] for x in seg.get("mots", []) if x.get("sure") is not None]
     return bool(v) and sum(v) / len(v) >= seuil
 
+RELIRE = """Voici la transcription d'un dialogue entre DEUX personnes (sketch TikTok), découpée en phrases numérotées. Les deux voix se
+ressemblent trop : le son ne dit pas qui parle. Pour CHAQUE phrase, dis qui la prononce : "A" ou "B" (A = la personne qui dit la
+phrase 0). Raisonne sur le fil du dialogue, comme un scénariste :
+- une question appelle presque toujours la réponse de l'AUTRE ; « oui », « non », « bah », « mais », « voilà », « ok » en début de
+  phrase répondent souvent à l'autre ;
+- une phrase qui reprend les mots de l'autre (« Comme un homme ? ») est la réaction de l'autre ;
+- qui s'adresse à qui : « papa », « maman » sont dits par l'enfant, « fiston », « ma fille » par le parent ; « vous » / « nous » ;
+- chacun garde son point de vue du début à la fin (celui qui défend une idée continue de la défendre, celui qui ne comprend pas
+  continue de poser des questions) ;
+- une même personne peut dire plusieurs phrases de suite (phrase coupée, « et… », « donc… », tirade).
+Dis aussi en quelques mots qui est A et qui est B (ex. « A : le père, B : le fils »).
+
+{lignes}
+"""
+
+def relire_dialogue(mots):
+    """Contrôle « questions-réponses » par l'IA (Gemini d'abord, gratuit) quand les voix se ressemblent trop : elle lit le dialogue
+    PHRASE PAR PHRASE (phrases de locuteurs.phrases) et dit qui dit chaque phrase. Renvoie une liste 0/1 (0 = A), ou None."""
+    import ecrire, locuteurs, reseau
+    if os.environ.get("RELIRE_DIALOGUE", "1") == "0" or not reseau.ia_disponible(): return None
+    ph = locuteurs.phrases(mots)
+    if len(ph) < 3: return None
+    txt = [re.sub(r"\s+([,.!?…'’-])", r"\1", " ".join(mots[i]["w"] for i in p)) for p in ph]   # « j 'ai » -> « j'ai »
+    lignes = "\n".join(f"{k}. {t}" for k, t in enumerate(txt))
+    outil = {"name": "dialogue", "description": "Qui dit chaque phrase du dialogue.",
+             "input_schema": ecrire._schema({"personnes": {"type": "string"},
+                                             "phrases": {"type": "array", "items": ecrire._schema({"n": {"type": "integer"}, "qui": {"type": "string", "enum": ["A", "B"]}}, ["n", "qui"])}},
+                                            ["phrases"])}
+    try:
+        r = ecrire._appel(reseau.claude(raisonner=True), None, [{"role": "user", "content": RELIRE.format(lignes=lignes)}], outil, max_tokens=4000)
+    except Exception as e:
+        journal(f"  relecture du dialogue par l'IA impossible ({str(e)[:120]})"); return None
+    ia = [None] * len(ph)
+    for x in ecrire._liste(r.get("phrases")):
+        try:
+            n = int(x.get("n"))
+            if 0 <= n < len(ph) and x.get("qui") in ("A", "B"): ia[n] = 0 if x["qui"] == "A" else 1
+        except (AttributeError, TypeError, ValueError): pass
+    if sum(x is not None for x in ia) < len(ph) / 2: return None
+    journal(f"  relecture du dialogue par l'IA : {sum(x is not None for x in ia)}/{len(ph)} phrases ({str(r.get('personnes') or '')[:80]})")
+    return ia
+
 def hauteurs(voix_sig, segs):
     """Hauteur moyenne (Hz) de chaque voix : aide Claude à choisir qui joue qui (voix grave / aiguë)."""
     res = {}
@@ -373,6 +415,13 @@ def preparer(url):
     try:                                                                   # qui parle, mot par mot (la voix ne saute plus d'un perso à l'autre)
         import locuteurs; mots = locuteurs.affiner(mots, sig)
     except Exception as e: journal(f"  vérification mot par mot impossible ({str(e)[:120]})")
+    try:                                                                   # voix trop proches : contrôle questions-réponses (texte + IA)
+        import locuteurs
+        r_ = locuteurs.ETAT.get("ressemblance")
+        if r_ is not None and r_ > locuteurs.PROCHES:
+            ia = relire_dialogue(mots)
+            if ia: mots = locuteurs.fil_dialogue(mots, ia)
+    except Exception as e: journal(f"  contrôle questions-réponses impossible ({str(e)[:120]})")
     segs = segments(mots)
     hz = hauteurs(sig, segs)
     journal(f"  {len(segs)} répliques, voix : {hz}")

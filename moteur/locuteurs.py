@@ -267,7 +267,7 @@ def affiner(mots, sig, sr=SR):
     vocale autour du mot) à l'empreinte moyenne de chaque voix, puis on choisit le fil le plus probable (Viterbi) : changer de
     personne coûte cher au milieu d'une phrase, peu après une pause ou une question. Chaque mot reçoit aussi sa « certitude »
     (m["sure"], 0 à 1) : sert à refuser qu'une IA qui ne lit que le texte déplace une réplique dont la voix est sûre."""
-    voix = sorted({m["voix"] for m in mots})
+    voix = sorted({m["voix"] for m in mots}); ETAT["ressemblance"] = None
     if len(voix) < 2 or len(mots) < 6 or os.environ.get("AFFINER_VOIX", "1") == "0": return mots
     from scipy.signal import resample_poly
     s16 = resample_poly(np.asarray(sig, np.float32), 320, 441) if sr == 22050 else np.asarray(sig, np.float32)
@@ -293,6 +293,7 @@ def affiner(mots, sig, sr=SR):
             c = W[sel].mean(0); C.append(c / (np.linalg.norm(c) + 1e-9))
         C = np.array(C)
         if os.environ.get("VOIX_DEBUG"): print("  ressemblance des voix :", np.round(C @ C.T, 3).tolist(), flush=True)
+        if k == 2 and enc is not None: ETAT["ressemblance"] = round(float(C[0] @ C[1]), 3)   # (mesure valable avec ECAPA seulement)
         if k == 2 and float(C[0] @ C[1]) > 0.97: break                     # deux « voix » identiques : le son ne tranche pas
         S = W @ C.T                                                        # ressemblance de chaque mot à chaque voix
         S = (S - S.mean(1, keepdims=True)) / (S.std() + 1e-9)
@@ -322,6 +323,10 @@ def affiner(mots, sig, sr=SR):
             neuf = [proche if x == v0 else x for x in neuf]; print(f"  une voix en trop (presque muette) rattachée à la plus proche", flush=True)
         if neuf == lab_v: break
         lab_v = neuf
+    if ETAT["ressemblance"] is not None and ETAT["ressemblance"] > PROCHES and len(set(lab_v)) == 2:
+        for m in mots: m["sure"] = 0.0                                     # voix trop proches : le son ne tranche pas, on ne touche à rien
+        print(f"  voix trop proches (ressemblance {ETAT['ressemblance']:.2f}) : vérification mot par mot laissée de côté", flush=True)
+        return mots
     lab_v = caler_sur_phrases(mots, lab_v)
     noms = {v: f"speaker_{q}" for q, v in enumerate(dict.fromkeys(lab_v))}   # numéros dans l'ordre d'apparition
     change = sum(1 for a, b in zip(depart, lab_v) if a != b)
@@ -370,3 +375,87 @@ def pyannote(mots, sig, sr=SR):
     if len({p for _, _, p in tours}) < 1: return None
     print(f"  voix séparées par pyannote : {len({p for _, _, p in tours})} voix, {len(tours)} tours de parole", flush=True)
     return mots_par_tours([dict(m) for m in mots], tours)
+
+
+
+SUITE = re.compile(r"^(et|donc|puis|parce|alors|enfin|sinon|ou|que|qui)\b", re.I)
+_Q = {"change": 0.0, "fini": 1.5, "question": 2.0, "reponse": 1.0, "suite": 1.5, "echo": 1.0, "ia": 2.0, "avis": 0.3}   # fil du dialogue
+PROCHES = 0.7                                                              # ressemblance des 2 voix au-delà de laquelle le son ne tranche plus
+ETAT = {"ressemblance": None}                                              # dernière mesure (affiner)
+
+
+def phrases(mots):
+    """Phrases : coupées à chaque fin de phrase (. ? ! …) ou vraie pause (0,35 s) ; une phrase de plus de 8 s est recoupée sur une
+    virgule suivie d'une petite pause. Renvoie des listes d'indices de mots."""
+    out = [[]]
+    for i, m in enumerate(mots):
+        if out[-1]:
+            p = m["s"] - mots[i - 1]["e"]; long_ = m["s"] - mots[out[-1][0]]["s"]
+            if p > 0.35 or (long_ > 8 and p > 0.15 and mots[i - 1]["w"].endswith(",")): out.append([])
+        out[-1].append(i)
+        if re.search(r"[.!?…]$", m["w"]): out.append([])
+    return [p for p in out if p]
+
+
+def _mots_txt(mots, p): return [re.sub(r"[^\w'-]", "", mots[i]["w"].lower()) for i in p]
+
+
+def indices_dialogue(mots, ph):
+    """Ce que dit le TEXTE entre deux phrases : > 0 = l'autre personne parle, < 0 = la même continue. Dans un dialogue, après une
+    phrase finie l'autre parle souvent ; après une question, l'autre répond ; « oui », « non », « bah », « mais »… = une réponse ;
+    « Comme un homme ? » qui reprend les derniers mots de l'autre = une réaction ; une phrase coupée sur une virgule (ou qui
+    repart sur « et », « donc »…) = la suite de la même personne."""
+    out = [0.0]
+    for j in range(1, len(ph)):
+        fin = mots[ph[j - 1][-1]]["w"]; debut = " ".join(mots[i]["w"] for i in ph[j]).strip()
+        pause = mots[ph[j][0]]["s"] - mots[ph[j - 1][-1]]["e"]; s = 0.0
+        if re.search(r"[.!?…]$", fin) and not fin.endswith("..."): s += _Q["fini"]
+        if fin.endswith("?"): s += _Q["question"]
+        if REPONSE.search(debut) or re.match(r"^(voilà|exactement|carrément|grave|jamais|bon)\b", debut, re.I): s += _Q["reponse"]
+        if not re.search(r"[.!?…]$", fin) or fin.endswith(","):           # phrase pas finie (coupée par une pause)
+            s -= _Q["suite"] * (1.0 if pause < 0.8 else 0.5)
+        if SUITE.search(debut) and not fin.endswith("?"): s -= 0.5 * _Q["suite"]
+        a, b = _mots_txt(mots, ph[j - 1])[-4:], _mots_txt(mots, ph[j])[:4]
+        if len([w for w in b if w and w in a]) >= 2: s += _Q["echo"]       # reprend les mots de l'autre
+        out.append(s)
+    return out
+
+
+def _viterbi2(em, tr):
+    """Fil le plus probable à 2 personnes : em[j] = (score pers. 0, score pers. 1), tr[j] = bonus pour changer avant la phrase j."""
+    n = len(em); cout = np.array(em[0], float); arr = np.zeros((n, 2), int)
+    for j in range(1, n):
+        neuf = np.zeros(2)
+        for b in range(2):
+            rester, changer = cout[b], cout[1 - b] + tr[j]
+            arr[j, b] = b if rester >= changer else 1 - b; neuf[b] = max(rester, changer) + em[j][b]
+        cout = neuf
+    lab = [int(np.argmax(cout))]
+    for j in range(n - 1, 0, -1): lab.append(arr[j, lab[-1]])
+    return lab[::-1]
+
+
+def fil_dialogue(mots, ia=None):
+    """Contrôle « questions-réponses » quand les deux voix se ressemblent trop pour que le son tranche (même personne qui fait les
+    deux voix) : qui dit chaque PHRASE, d'après la logique du dialogue (indices_dialogue), l'avis de l'IA qui a lu le dialogue
+    phrase par phrase (ia = liste 0/1 par phrase, ou None) et, un peu, les voix trouvées avant. Deux personnes seulement."""
+    voix0 = sorted({m["voix"] for m in mots})
+    if len(voix0) > 2: return mots
+    ph = phrases(mots)
+    if len(ph) < 3: return mots
+    avant = [int(np.argmax(np.bincount([voix0.index(mots[i]["voix"]) for i in p], minlength=2))) for p in ph]
+    ia = [x if x in (0, 1) else None for x in (ia or [])][:len(ph)] + [None] * max(0, len(ph) - len(ia or []))
+    connus = [(a, b) for a, b in zip(avant, ia) if b is not None]
+    if connus and sum(a == b for a, b in connus) < len(connus) / 2: ia = [None if b is None else 1 - b for b in ia]   # mêmes numéros
+    em = [tuple(_Q["avis"] * (a == q) + (_Q["ia"] * (b == q) if b is not None else 0.0) for q in (0, 1)) for a, b in zip(avant, ia)]
+    tr = [_Q["change"] + s for s in indices_dialogue(mots, ph)]
+    lab = _viterbi2(em, tr)
+    if len(set(lab)) < 2: return mots
+    noms = {}
+    for q in lab: noms.setdefault(q, f"speaker_{len(noms)}")
+    av = [m["voix"] for m in mots]
+    for j, p in enumerate(ph):
+        for i in p: mots[i]["voix"] = noms[lab[j]]; mots[i]["sure"] = 0.0      # le son ne tranche pas : jamais « sûr »
+    change = sum(1 for a, m in zip(av, mots) if a != m["voix"])
+    print(f"  contrôle questions-réponses ({'avec' if connus else 'sans'} relecture de l'IA) : {len(ph)} phrases, {change} mot(s) changé(s) de voix", flush=True)
+    return mots

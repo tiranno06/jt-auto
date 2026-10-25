@@ -41,6 +41,10 @@
   ambiance) et de l'image de la vidéo d'origine ; la banque visuelle s'enrichit vidéo après vidéo.
 
 ## Montage (à garder en tête pour chaque vidéo)
+- **Choix de l'auteur (25 octobre 2026) : montage « plan large » par défaut** (réglage MONTAGE = large) : un seul plan large et FIXE
+  par scène, les personnages qui se parlent toujours à l'image, aucun zoom, aucun mouvement de caméra, aucune coupe sur la réaction
+  (`studio.plans_larges`, `cartoon` → PLAN_LARGE) ; le jury n'ajoute jamais de plan serré dans ce mode. Le montage « dynamique »
+  ci-dessous reste disponible dans les Réglages.
 - Vidéos **dynamiques**, toujours en fonction de l'audio, de son univers et des échanges entre les personnages.
 - **Beaucoup de changements de plan** : plans serrés et plans larges sur les personnages, plans de réaction de celui qui écoute.
 - **Caméra vivante** : mouvements dans chaque plan (avancée, recul, travelling, caméra à l'épaule, zoom choc) et passages de plan
@@ -149,12 +153,21 @@
   **pré-jury** : les règles sûres du jury appliquées avant de dessiner (`cartoon.rendre(plans_seuls=True)` + `qualite.jury_gratuit`,
   PRE_JURY=0 pour couper) ; quota de l'API GitHub surveillé (`moteur/quota.py` : barre et file ralentissent, voyant sur la barre) ;
   vidéos d'essai rangées à part (filtre « 🧪 Essais », historique "essai") et effacées au bout de 3 jours (garde → supprimer.yml ESSAIS).
+  Réglages → notifications : « Activer » et « Désactiver sur cet appareil » (retire l'appareil de PUSH_ABONNEMENTS).
 - **Bonne voix sur le bon personnage (sons TikTok)** : `locuteurs.affiner` vérifie qui parle MOT PAR MOT (empreinte vocale ECAPA
   autour de chaque mot, comparée à chaque voix, fil le plus probable façon Viterbi, 2-3 tours ; une « voix » presque muette est
   rattachée à la plus proche) puis `caler_sur_phrases` met chaque changement de personne sur la fin de phrase la plus proche
   (3 mots au plus) ; chaque mot a sa certitude (`sure`) : l'IA qui ne lit que le texte ne peut plus déplacer une réplique « voix
   sûre » (`doublage.voix_sure`) ; deux voix ne jouent jamais le même personnage (`doublage.casting_unique`). Réglages `_P` trouvés
   sur un banc d'essai (dialogues montés avec nos voix, vérité connue : 84 % → 96 % de temps de parole bien attribué).
+  **Voix trop proches** (même personne qui fait les deux voix, ressemblance ECAPA > 0,7 : `locuteurs.PROCHES`) : le son ne tranche
+  plus, la vérification mot par mot est laissée de côté (aucune voix « sûre ») et le **contrôle questions-réponses** décide phrase
+  par phrase (`locuteurs.fil_dialogue`) : logique du texte (`indices_dialogue` : après une question l'autre répond, « oui / bah /
+  mais » = réponse, reprise des mots de l'autre, phrase coupée = la suite) + relecture du dialogue par l'IA, Gemini d'abord
+  (`doublage.relire_dialogue`, `reseau.claude(raisonner=True)`, RELIRE_DIALOGUE=0 pour couper). « Battle d'aura » : 68 % → 97 %.
+  **Tirage au hasard des sons TikTok** : le robot préfère les vidéos aux voix bien différentes (ressemblance ≤ 0,6, réglage
+  VOIX_DIFFERENTES ; 1 = sans tri) : jusqu'à 6 vidéos écoutées (25 min au plus), sinon celle aux voix les plus nettes. Un lien collé
+  à la main n'est jamais refusé (le contrôle questions-réponses s'en charge).
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.
@@ -162,7 +175,7 @@
   contours par `cv2.findContours`, jamais de `np.mgrid` ni de grosse dilatation : un gros plan coûtait 40 s et 2,4 Go par image et
   GitHub coupait la machine) ; un dessin qui plante repasse en ancien style ; le « Réveil de secours » (garde.yml) relance une
   fois toute fabrication en échec des 6 dernières heures.
-- Code : `moteur/studio.py` (`decouper`) et `moteur/cartoon.py` (`vue`, `cadre_plan`) ; réglage MONTAGE (dynamique par défaut).
+- Code : `moteur/studio.py` (`decouper`, `plans_larges`) et `moteur/cartoon.py` (`vue`, `cadre_plan`) ; réglage MONTAGE (large par défaut, dynamique, simple).
 
 ## Mode amélioré (Claude + outils payants : c'est le mode par défaut dès qu'il y a du crédit)
 L'auteur rechargera à un moment le crédit Claude (Anthropic). Le mode amélioré s'appuie sur Claude et sur les outils payants
