@@ -8025,5 +8025,439 @@
    ]
   },
   "video": "2026-10-25_16h58_emission.mp4"
+ },
+ {
+  "date": "2026-10-25",
+  "source": "https://www.tiktok.com/@yan_animation0/video/7635069843049352470",
+  "auteur": "yan_animation0",
+  "visuel": {
+   "gestes": [],
+   "duree": 72.5,
+   "nb_plans": 1,
+   "duree_plan": 72.5,
+   "coupes": [],
+   "plans": {
+    "tres_serre": 0.0,
+    "serre": 0.0,
+    "moyen": 0.993,
+    "large": 0.007
+   },
+   "camera": {
+    "fixe": 1.0,
+    "avance": 0.0,
+    "recul": 0.0,
+    "travelling": 0.0,
+    "epaule": 0.0
+   },
+   "nb_personnes": 2,
+   "personnes": [
+    {
+     "place": "droite",
+     "presence": 1.0,
+     "habit": [
+      150,
+      62,
+      73
+     ],
+     "cheveux": [
+      44,
+      30,
+      26
+     ],
+     "sourire": 0.0,
+     "taille": 0.07,
+     "tete_penchee": 1.1,
+     "regard_cote": 0.0
+    },
+    {
+     "place": "gauche",
+     "presence": 0.903,
+     "habit": [
+      89,
+      79,
+      77
+     ],
+     "cheveux": [
+      20,
+      15,
+      12
+     ],
+     "sourire": 0.0,
+     "taille": 0.077,
+     "tete_penchee": 1.1,
+     "regard_cote": 0.183
+    }
+   ],
+   "visages": true,
+   "sourires": 0.0,
+   "energie": 0.021,
+   "mur": [
+    0,
+    0,
+    0
+   ],
+   "palette": [
+    [
+     0,
+     0,
+     0,
+     0.677
+    ],
+    [
+     44,
+     39,
+     41,
+     0.126
+    ],
+    [
+     74,
+     69,
+     74,
+     0.106
+    ],
+    [
+     127,
+     106,
+     98,
+     0.049
+    ],
+    [
+     193,
+     149,
+     114,
+     0.03
+    ],
+    [
+     240,
+     239,
+     240,
+     0.013
+    ]
+   ],
+   "lumiere": {
+    "luminosite": 30.0,
+    "chaleur": 3.9,
+    "saturation": 17.8
+   },
+   "moment": "nuit"
+  },
+  "audio": {
+   "duree": 72.2,
+   "nb_voix": 2,
+   "voix": [
+    {
+     "hz": 220,
+     "genre": "f",
+     "part": 0.39
+    },
+    {
+     "hz": 181,
+     "genre": "?",
+     "part": 0.61
+    }
+   ],
+   "debit": 4.0,
+   "blanc_moyen": 0.7,
+   "coupes": 3,
+   "dynamique_db": 15.2,
+   "cris": 0.018,
+   "musique": null,
+   "impacts": 0,
+   "impacts_10s": 0.0,
+   "graves": 0,
+   "aigus": 0,
+   "sur_vanne": 0,
+   "evenements": {},
+   "emotions": {
+    "'[colere": 6,
+    "'[urgent": 5,
+    "'[neutre": 3,
+    "'[choc": 3,
+    "'[sceptique": 2,
+    "'[confused": 2,
+    "'[gene": 2,
+    "'[hesitant": 1
+   }
+  },
+  "claude": {
+   "lieux": [
+    "voiture"
+   ],
+   "moment": "nuit",
+   "costumes": {
+    "invite": {
+     "haut": "chemise",
+     "c_haut": "rouge",
+     "motif": "uni",
+     "bas": "pantalon",
+     "chaussures": "ville",
+     "details": [
+      "moustache",
+      "montre"
+     ],
+     "chapeau": null,
+     "cheveux": "court_texture",
+     "c_cheveux": "roux"
+    },
+    "envoyee": {
+     "haut": "tshirt",
+     "c_haut": "vert",
+     "motif": "uni",
+     "bas": "short",
+     "chaussures": "baskets",
+     "details": [
+      "bracelets"
+     ],
+     "chapeau": null,
+     "cheveux": "long",
+     "c_cheveux": "blond"
+    }
+   },
+   "objets": [
+    {
+     "replique": 0,
+     "objet": "telephone"
+    },
+    {
+     "replique": 15,
+     "objet": "bouteille"
+    },
+    {
+     "replique": 24,
+     "objet": "bouteille"
+    }
+   ],
+   "gags": [
+    "École : 2018-2024 : Redoublez-vous ?",
+    "Smoothies à la testostérone : Recette secrète",
+    "Lycée : Où est la médecine ?"
+   ],
+   "ambiances": [
+    "neon"
+   ],
+   "plans": [
+    {
+     "replique": 0,
+     "plan": "moyen",
+     "mouvement": "fixe",
+     "geste": "poches",
+     "reaction": "aucune"
+    },
+    {
+     "replique": 1,
+     "plan": "serre",
+     "mouvement": "zoom_choc",
+     "geste": "haussement",
+     "reaction": "choc"
+    },
+    {
+     "replique": 2,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "menton",
+     "reaction": "sceptique"
+    },
+    {
+     "replique": 3,
+     "plan": "moyen",
+     "mouvement": "fixe",
+     "geste": "gratte_tete",
+     "reaction": "confused"
+    },
+    {
+     "replique": 4,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "pointe_g",
+     "reaction": "choc"
+    },
+    {
+     "replique": 5,
+     "plan": "serre",
+     "mouvement": "zoom_choc",
+     "geste": "pointe_d",
+     "reaction": "colere"
+    },
+    {
+     "replique": 6,
+     "plan": "large",
+     "mouvement": "fixe",
+     "geste": "bras_ouverts",
+     "reaction": "gene"
+    },
+    {
+     "replique": 7,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "pointe_g",
+     "reaction": "choc"
+    },
+    {
+     "replique": 8,
+     "plan": "moyen",
+     "mouvement": "fixe",
+     "geste": "menton",
+     "reaction": "sceptique"
+    },
+    {
+     "replique": 9,
+     "plan": "serre",
+     "mouvement": "zoom_choc",
+     "geste": "pointe_d",
+     "reaction": "colere"
+    },
+    {
+     "replique": 10,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "facepalm",
+     "reaction": "choc"
+    },
+    {
+     "replique": 11,
+     "plan": "moyen",
+     "mouvement": "fixe",
+     "geste": "gratte_tete",
+     "reaction": "confused"
+    },
+    {
+     "replique": 12,
+     "plan": "serre",
+     "mouvement": "zoom_choc",
+     "geste": "pointe_d",
+     "reaction": "colere"
+    },
+    {
+     "replique": 13,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "poing",
+     "reaction": "choc"
+    },
+    {
+     "replique": 14,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "pointe_g",
+     "reaction": "sceptique"
+    },
+    {
+     "replique": 15,
+     "plan": "serre",
+     "mouvement": "zoom_choc",
+     "geste": "gratte_tete",
+     "reaction": "gene"
+    },
+    {
+     "replique": 16,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "menton",
+     "reaction": "choc"
+    },
+    {
+     "replique": 17,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "facepalm",
+     "reaction": "colere"
+    },
+    {
+     "replique": 18,
+     "plan": "large",
+     "mouvement": "fixe",
+     "geste": "desespoir",
+     "reaction": "panique"
+    },
+    {
+     "replique": 19,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "pointe_g",
+     "reaction": "choc"
+    },
+    {
+     "replique": 20,
+     "plan": "serre",
+     "mouvement": "zoom_choc",
+     "geste": "bras_ouverts",
+     "reaction": "colere"
+    },
+    {
+     "replique": 21,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "pointe_d",
+     "reaction": "panique"
+    },
+    {
+     "replique": 22,
+     "plan": "moyen",
+     "mouvement": "fixe",
+     "geste": "gratte_tete",
+     "reaction": "gene"
+    },
+    {
+     "replique": 23,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "pointe_g",
+     "reaction": "choc"
+    },
+    {
+     "replique": 24,
+     "reaction": "sceptique"
+    }
+   ]
+  },
+  "realisation": {
+   "moment": "nuit",
+   "lieux": [
+    "voiture",
+    "cabinet_medical",
+    "classe"
+   ],
+   "gags": [
+    "École : 2018-2024 : Redoublez-vous ?",
+    "Smoothies à la testostérone : Recette secrète",
+    "Lycée : Où est la médecine ?"
+   ],
+   "ambiances": [
+    "neon"
+   ],
+   "source": "auteur+image",
+   "tenues": {
+    "envoyee": "tshirt",
+    "invite": "chemise"
+   },
+   "plans": [
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe"
+   ]
+  },
+  "video": "2026-10-25_17h16_emission.mp4"
  }
 ]

@@ -1,186 +1,210 @@
 {
- "titre": "BATAILLE D'EAU AU BUREAU",
- "sujet": "BATAILLE D'EAU AU BUREAU",
- "ecran": "BATAILLE D'EAU",
+ "titre": "DOUTE SUR L'ÂGE D'UN LYCÉEN",
+ "sujet": "DOUTE SUR L'ÂGE D'UN LYCÉEN",
+ "ecran": "DOUTE SUR L'ÂG",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "POV : Votre collègue propose une bataille d'ea",
- "question": "Et vous, seriez-vous prêt à une bataille d'eau en plein bureau ?",
+ "titre_accroche": "POV : Quand ton invité doute de ton âge",
+ "question": "Comment réagir face à un doute aussi absurde ?",
  "running_gag": "",
  "verite": "",
  "repliques": [
   {
-   "p": "presentateur",
-   "t": "Ouais frérot t'es chiant on fait une bataille d'eau ?",
+   "p": "envoyee",
+   "t": "Bon, je vais pas tarder là, il est tard, je dois me lever demain, j'ai cours en plus.",
    "_deb": 0.0,
-   "_fin": 2.14,
-   "d": "['[excited]', \"Ouais frérot t'es chiant on fait une bataille d'eau ?\"]",
+   "_fin": 5.26,
+   "d": "['[urgent]', \"Bon, je vais pas tarder là, il est tard, je dois me lever demain, j'ai cours en plus.\"]",
    "objet": "telephone"
   },
   {
-   "p": "presentateur",
-   "t": "Tu veux faire une bataille d 'eau? Bah ouais c 'est la canicule là Attends je demande à mes collègues de bureau attends Vas -y vas -y Eh",
-   "_deb": 2.38,
-   "_fin": 8.12,
+   "p": "invite",
+   "t": "Ah ouais, t'as cours? T'es encore à l'école?",
+   "_deb": 5.48,
+   "_fin": 6.96,
+   "d": "['[sceptique]', \"Ah ouais, t'as cours? T'es encore à l'école?\"]"
+  },
+  {
+   "p": "envoyee",
+   "t": "Bah oui.",
+   "_deb": 7.1,
+   "_fin": 7.54,
+   "d": "['[neutre]', 'Bah oui.']"
+  },
+  {
+   "p": "invite",
+   "t": "Je sais bien, tu fais quoi comme études?",
+   "_deb": 7.6,
+   "_fin": 9.18,
+   "d": "['[confused]', 'Je sais bien, tu fais quoi comme études?']"
+  },
+  {
+   "p": "envoyee",
+   "t": "Je suis en seconde.",
+   "_deb": 9.32,
+   "_fin": 11.14,
+   "d": "['[urgent]', 'Je suis en seconde.']"
+  },
+  {
+   "p": "invite",
+   "t": "C'est quoi, t'as en seconde année de médecine?",
+   "_deb": 13.06,
+   "_fin": 15.72,
+   "d": "['[colere]', \"C'est quoi, t'as en seconde année de médecine?\"]"
+  },
+  {
+   "p": "invite",
+   "t": "Je sais bien pourquoi tu dis pas les trucs comme ça, faut dire les trucs.",
+   "_deb": 16.26,
+   "_fin": 18.44,
+   "d": "['[hesitant]', 'Je sais bien pourquoi tu dis pas les trucs comme ça, faut dire les trucs.']"
+  },
+  {
+   "p": "envoyee",
+   "t": "Non, je suis pas en seconde année de médecine, je suis en seconde au lycée.",
+   "_deb": 18.46,
+   "_fin": 21.52,
+   "d": "['[urgent]', 'Non, je suis pas en seconde année de médecine, je suis en seconde au lycée.']"
+  },
+  {
+   "p": "envoyee",
+   "t": "Je viens de rentrer en seconde là.",
+   "_deb": 21.8,
+   "_fin": 23.66,
+   "d": "['[neutre]', 'Je viens de rentrer en seconde là.']"
+  },
+  {
+   "p": "invite",
+   "t": "Pourquoi tu redoubles ta seconde depuis 2018?",
+   "_deb": 26.58,
+   "_fin": 29.82,
+   "d": "['[colere]', 'Pourquoi tu redoubles ta seconde depuis 2018?']"
+  },
+  {
+   "p": "envoyee",
+   "t": "Hein?",
+   "_deb": 30.0,
+   "_fin": 31.04,
+   "d": "['[choc]', 'Hein?']"
+  },
+  {
+   "p": "invite",
+   "t": "C'est quoi la pro? Après, c'est vrai que la seconde, elle est quand même compliquée à passer.",
+   "_deb": 31.48,
+   "_fin": 35.2,
+   "d": "['[sceptique]', \"C'est quoi la pro? Après, c'est vrai que la seconde, elle est quand même compliquée à passer.\"]"
+  },
+  {
+   "p": "invite",
+   "t": "Mais moi, tu la redoubles depuis 2018, ta seconde?",
+   "_deb": 35.42,
+   "_fin": 37.64,
+   "d": "['[colere]', 'Mais moi, tu la redoubles depuis 2018, ta seconde?']"
+  },
+  {
+   "p": "envoyee",
+   "t": "Non, mais non, je n'ai jamais redoublé. Je suis très forte à l'école.",
+   "_deb": 37.86,
+   "_fin": 40.36,
+   "d": "['[urgent]', \"Non, mais non, je n'ai jamais redoublé. Je suis très forte à l'école.\"]"
+  },
+  {
+   "p": "envoyee",
+   "t": "Je n'ai jamais redoublé.",
+   "_deb": 40.88,
+   "_fin": 41.68,
+   "d": "['[urgent]', \"Je n'ai jamais redoublé.\"]"
+  },
+  {
+   "p": "invite",
+   "t": "Mais... Mais tu as quel âge?",
+   "_deb": 43.38,
+   "_fin": 45.3,
+   "d": "['[confused]', 'Mais... Mais tu as quel âge?']",
    "objet": "bouteille"
   },
   {
-   "p": "presentateur",
-   "t": "les gars j 'ai une question",
-   "_deb": 8.12,
-   "_fin": 8.88
+   "p": "envoyee",
+   "t": "J'ai 16 ans.",
+   "_deb": 45.66,
+   "_fin": 46.5,
+   "d": "['[neutre]', \"J'ai 16 ans.\"]"
+  },
+  {
+   "p": "envoyee",
+   "t": "Mais quoi?",
+   "_deb": 49.48,
+   "_fin": 49.98,
+   "d": "['[choc]', 'Mais quoi?']"
   },
   {
    "p": "invite",
-   "t": "Eh gros il fait 40 degrés dans le bureau je transpire sur mon clavier m 'énerve même pas s 'il te plaît Non non",
-   "_deb": 9.06,
-   "_fin": 13.64
+   "t": "Non, ce n'est pas possible.",
+   "_deb": 50.1,
+   "_fin": 51.12,
+   "d": "['[colere]', \"Non, ce n'est pas possible.\"]"
   },
   {
-   "p": "presentateur",
-   "t": "t 'inquiète c 'est juste qu 'il y a mon classos de potes qui est au chômage Et qui demande si on veut faire une bataille d 'eau",
-   "_deb": 13.64,
-   "_fin": 18.92
-  },
-  {
-   "p": "presentateur",
-   "t": "alors qu 'on est mercredi",
-   "_deb": 18.92,
-   "_fin": 20.5
-  },
-  {
-   "p": "presentateur",
-   "t": "Bah ou sinon on peut aller à quoi boulevard comme vous",
-   "_deb": 21.78,
-   "_fin": 23.74
+   "p": "envoyee",
+   "t": "Mais il y a quoi?",
+   "_deb": 51.24,
+   "_fin": 52.38,
+   "d": "['[choc]', 'Mais il y a quoi?']"
   },
   {
    "p": "invite",
-   "t": "voulez À quoi boulevard?",
-   "_deb": 23.74,
-   "_fin": 25.42
-  },
-  {
-   "p": "presentateur",
-   "t": "Attends attends mais me dis pas que t 'as acheté un pistolet à eau Non non non pas du tout Il y a intérêt, je te jure, il",
-   "_deb": 26.02,
-   "_fin": 30.52
-  },
-  {
-   "p": "presentateur",
-   "t": "y a intérêt. C 'est pas 10 ans non plus, hein.",
-   "_deb": 30.52,
-   "_fin": 31.96
-  },
-  {
-   "p": "presentateur",
-   "t": "Putain, et c 'est nous qui payons son chômage à ce casque -là.",
-   "_deb": 32.04,
-   "_fin": 33.96
-  },
-  {
-   "p": "presentateur",
-   "t": "Non, non, mais t 'inquiète, je prends que 1,6, moi.",
-   "_deb": 33.96,
-   "_fin": 35.8
-  },
-  {
-   "p": "presentateur",
-   "t": "On prend tous 1,5 ici, là.",
-   "_deb": 35.82,
-   "_fin": 37.26
+   "t": "Non, ce n'est pas possible.",
+   "_deb": 52.72,
+   "_fin": 53.72,
+   "d": "['[colere]', \"Non, ce n'est pas possible.\"]"
   },
   {
    "p": "invite",
-   "t": "Ah, sans compter les impôts.",
-   "_deb": 37.62,
-   "_fin": 39.18
-  },
-  {
-   "p": "presentateur",
-   "t": "Ouais, mais vous avez la clim dans le bureau, non?",
-   "_deb": 39.32,
-   "_fin": 41.02
-  },
-  {
-   "p": "presentateur",
-   "t": "On a un ventilo et une bouteille d 'eau pour 6.",
-   "_deb": 41.12,
-   "_fin": 43.18
+   "t": "Donc toi, là, toi, là, hein? Toi, tu as 16 ans, là!",
+   "_deb": 55.66,
+   "_fin": 59.92,
+   "d": "['[panique]', 'Donc toi, là, toi, là, hein? Toi, tu as 16 ans, là!']"
   },
   {
    "p": "invite",
-   "t": "Ah, pour 5, du coup, il y a Bastien qui vient de s 'évanouir.",
-   "_deb": 43.98,
-   "_fin": 47.66
+   "t": "bah oui toi là t'as saison",
+   "_deb": 59.98,
+   "_fin": 62.24,
+   "d": "['[gene]', \"bah oui toi là t'as saison\"]"
   },
   {
-   "p": "presentateur",
-   "t": "Hé, t 'es en train de faire quoi, là, ces fois que j 'entends, là?",
-   "_deb": 48.08,
-   "_fin": 50.22,
-   "objet": "tablette"
-  },
-  {
-   "p": "presentateur",
-   "t": "Je dessine une bite. T 'es en train de dessiner une teub, là.",
-   "_deb": 50.4,
-   "_fin": 53.88
-  },
-  {
-   "p": "presentateur",
-   "t": "Une bite, ouais.",
-   "_deb": 53.94,
-   "_fin": 54.56
+   "p": "envoyee",
+   "t": "oui mais",
+   "_deb": 62.24,
+   "_fin": 64.86,
+   "d": "['[gene]', 'oui mais']"
   },
   {
    "p": "invite",
-   "t": "Vas -y, je vais l 'enculer.",
-   "_deb": 55.08,
-   "_fin": 55.72
-  },
-  {
-   "p": "presentateur",
-   "t": "Ah, vas -y, les gars, non, va le montant en l 'air, c 'est bon, c 'est bon.",
-   "_deb": 55.72,
-   "_fin": 57.58
-  },
-  {
-   "p": "presentateur",
-   "t": "Non, va le montant en l 'air basé.",
-   "_deb": 57.6,
-   "_fin": 58.54
-  },
-  {
-   "p": "invite",
-   "t": "Je vais pisser dans son pistolet à haut Et je vais lui tirer dessus",
-   "_deb": 58.42,
-   "_fin": 61.86
-  },
-  {
-   "p": "presentateur",
-   "t": "Je crois que je vais lui chier dessus La vie de ma mère je vais lui chier dessus",
-   "_deb": 62.72,
-   "_fin": 64.88,
+   "t": "c'est quoi là tu bois du sperme de taureau tous les matins tu te fais des smoothies à la testostérone de minotaure tous les matins",
+   "_deb": 64.86,
+   "_fin": 71.9,
+   "d": "['[colere]', \"c'est quoi là tu bois du sperme de taureau tous les matins tu te fais des smoothies à la testostérone de minotaure tous les matins\"]",
+   "objet": "bouteille",
    "chute": true
   }
  ],
  "bandeau": [],
  "gag": null,
- "legende": "Quand la canicule pousse à des idées aussi folles qu'impraticables.",
+ "legende": "Un échange hilarant entre un lycéen et un adulte sceptique dans une voiture.",
  "hashtags": [
   "petitsdramas",
-  "canicule",
-  "batailledeau",
-  "bureau",
-  "foliecollective",
+  "lyceen",
+  "doute",
   "humour",
-  "travail"
+  "voiture",
+  "age",
+  "etudes"
  ],
  "sources": [
-  "https://www.tiktok.com/@kodanimation/video/7675884924020313376"
+  "https://www.tiktok.com/@yan_animation0/video/7635069843049352470"
  ],
  "decoupage": [
   {
@@ -190,38 +214,39 @@
     1,
     2,
     3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9
+    4
    ],
    "lieu": "",
    "son": "",
    "duree": 0.0,
-   "decor": "bureau moderne avec tables en désordre, chaises, ordinateurs, ventilo et bouteille d'eau sur une table, climatiseur en arrière-plan",
-   "titre": "La proposition farfelue"
+   "decor": "voiture interior, nuit, volant, tableau de bord, sièges en cuir noir, vitres teintées",
+   "titre": "Scène 1 : Début de la conversation"
   },
   {
    "scene": "2",
    "repliques": [
+    5,
+    6,
+    7,
+    8,
+    9,
     10,
     11,
     12,
     13,
-    14,
-    15,
-    16
+    14
    ],
    "lieu": "",
    "son": "",
    "duree": 0.0,
-   "decor": "même bureau, mais avec une affiche 'Bataille deau interdite' accrochée au mur"
+   "decor": "voiture interior, nuit, volant, tableau de bord, sièges en cuir noir, vitres teintées",
+   "titre": "Scène 2 : Doutes et explications"
   },
   {
    "scene": "3",
    "repliques": [
+    15,
+    16,
     17,
     18,
     19,
@@ -234,277 +259,243 @@
    "lieu": "",
    "son": "",
    "duree": 0.0,
-   "decor": "même bureau, dessin d'une bite sur un tableau blanc effaçable, pistolets à eau cachés sous les tables"
+   "decor": "voiture interior, nuit, volant, tableau de bord, sièges en cuir noir, vitres teintées, bouteille d'eau sur le siège arrière",
+   "titre": "Scène 3 : La révélation et la confusion finale"
   }
  ],
  "studio": {
-  "moment": "jour",
+  "moment": "nuit",
   "lieux": [
-   "bureau"
+   "voiture"
   ],
   "costumes": {
-   "presentateur": {
-    "haut": "tshirt",
-    "c_haut": "bleu",
-    "motif": "uni",
-    "bas": "pantalon",
-    "chaussures": "baskets",
-    "details": [
-     "stylos",
-     "montre",
-     "barbe_courte"
-    ],
-    "chapeau": {
-     "type": "casquette",
-     "c_chapeau": "rouge"
-    }
-   },
    "invite": {
     "haut": "chemise",
-    "c_haut": "blanc",
+    "c_haut": "rouge",
     "motif": "uni",
-    "bas": "jeans",
+    "bas": "pantalon",
     "chaussures": "ville",
     "details": [
-     "lunettes_vue",
-     "cravate"
+     "moustache",
+     "montre"
     ],
-    "chapeau": null
+    "chapeau": null,
+    "cheveux": "court_texture",
+    "c_cheveux": "roux"
+   },
+   "envoyee": {
+    "haut": "tshirt",
+    "c_haut": "vert",
+    "motif": "uni",
+    "bas": "short",
+    "chaussures": "baskets",
+    "details": [
+     "bracelets"
+    ],
+    "chapeau": null,
+    "cheveux": "long",
+    "c_cheveux": "blond"
    }
   },
   "personnages": {
-   "presentateur": {
+   "invite": {
     "genre": "h",
     "age": 45,
     "taille": 1,
-    "corpulence": 0.7,
+    "corpulence": 0.6,
     "cheveux": "court_texture",
-    "c_cheveux": "brun",
     "barbe": "trois_jours"
    },
-   "invite": {
-    "genre": "h",
-    "age": 38,
-    "taille": 1,
-    "corpulence": 0.6,
-    "cheveux": "court",
-    "c_cheveux": "noir",
-    "barbe": "moustache"
+   "envoyee": {
+    "genre": "f",
+    "age": 16,
+    "taille": 0.8,
+    "corpulence": 0.3,
+    "cheveux": "long",
+    "barbe": "rien"
    }
   },
-  "figurants": [
-   {
-    "avec": "presentateur",
-    "description": "collègue muet en train de boire un verre d'eau",
-    "genre": "h",
-    "age": 30,
-    "geste": "boit",
-    "haut": "tshirt",
-    "c_haut": "vert",
-    "bas": "short",
-    "chapeau": null,
-    "details": [
-     "lunettes_soleil"
-    ]
-   },
-   {
-    "avec": "invite",
-    "description": "collègue dessiné sur un tableau blanc",
-    "genre": "h",
-    "age": 25,
-    "geste": "signe",
-    "haut": "aucun",
-    "bas": "aucun",
-    "chapeau": null,
-    "details": [
-     "dessin_bite"
-    ]
-   }
-  ],
   "gags": [
-   "Bataille d'eau interdite",
-   "Pistolet à eau : obligatoire en cas de canicule",
-   "Bastien s'évanouit : cause probable : la chaleur"
+   "École : 2018-2024 : Redoublez-vous ?",
+   "Smoothies à la testostérone : Recette secrète",
+   "Lycée : Où est la médecine ?"
   ],
   "ambiances": [
-   "poussiere"
+   "neon"
   ],
   "cadence": "rapide",
   "plans": [
    {
     "replique": 0,
-    "plan": "serre",
+    "plan": "moyen",
     "mouvement": "fixe",
-    "geste": "pointe_g",
-    "reaction": "choc"
+    "geste": "poches",
+    "reaction": "aucune"
    },
    {
     "replique": 1,
-    "plan": "moyen",
-    "mouvement": "fixe",
-    "geste": "bras_ouverts",
-    "reaction": "sceptique"
+    "plan": "serre",
+    "mouvement": "zoom_choc",
+    "geste": "haussement",
+    "reaction": "choc"
    },
    {
     "replique": 2,
     "plan": "serre",
     "mouvement": "fixe",
-    "geste": "facepalm",
-    "reaction": "colere"
+    "geste": "menton",
+    "reaction": "sceptique"
    },
    {
     "replique": 3,
-    "plan": "large",
-    "mouvement": "travelling",
-    "geste": "gratte_tete",
-    "reaction": "gene"
-   },
-   {
-    "replique": 4,
-    "plan": "serre",
-    "mouvement": "zoom_choc",
-    "geste": "pointe_d",
-    "reaction": "soupir"
-   },
-   {
-    "replique": 5,
-    "plan": "serre",
+    "plan": "moyen",
     "mouvement": "fixe",
-    "geste": "haussement",
+    "geste": "gratte_tete",
     "reaction": "confused"
    },
    {
-    "replique": 6,
+    "replique": 4,
     "plan": "serre",
     "mouvement": "fixe",
     "geste": "pointe_g",
     "reaction": "choc"
    },
    {
-    "replique": 7,
+    "replique": 5,
     "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "facepalm",
+    "mouvement": "zoom_choc",
+    "geste": "pointe_d",
     "reaction": "colere"
    },
    {
+    "replique": 6,
+    "plan": "large",
+    "mouvement": "fixe",
+    "geste": "bras_ouverts",
+    "reaction": "gene"
+   },
+   {
+    "replique": 7,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "pointe_g",
+    "reaction": "choc"
+   },
+   {
     "replique": 8,
-    "plan": "tres_serre",
-    "mouvement": "zoom_choc",
-    "geste": "poing",
-    "reaction": "panique"
+    "plan": "moyen",
+    "mouvement": "fixe",
+    "geste": "menton",
+    "reaction": "sceptique"
    },
    {
     "replique": 9,
     "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "mains_hanches",
+    "mouvement": "zoom_choc",
+    "geste": "pointe_d",
     "reaction": "colere"
    },
    {
     "replique": 10,
     "plan": "serre",
     "mouvement": "fixe",
-    "geste": "pointe_d",
+    "geste": "facepalm",
     "reaction": "choc"
    },
    {
     "replique": 11,
-    "plan": "serre",
+    "plan": "moyen",
     "mouvement": "fixe",
-    "geste": "defensive",
-    "reaction": "sceptique"
+    "geste": "gratte_tete",
+    "reaction": "confused"
    },
    {
     "replique": 12,
     "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "pointe_g",
-    "reaction": "soupir"
+    "mouvement": "zoom_choc",
+    "geste": "pointe_d",
+    "reaction": "colere"
    },
    {
     "replique": 13,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "poing",
+    "reaction": "choc"
+   },
+   {
+    "replique": 14,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "pointe_g",
+    "reaction": "sceptique"
+   },
+   {
+    "replique": 15,
+    "plan": "serre",
+    "mouvement": "zoom_choc",
+    "geste": "gratte_tete",
+    "reaction": "gene"
+   },
+   {
+    "replique": 16,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "menton",
+    "reaction": "choc"
+   },
+   {
+    "replique": 17,
     "plan": "serre",
     "mouvement": "fixe",
     "geste": "facepalm",
     "reaction": "colere"
    },
    {
-    "replique": 14,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "gratte_tete",
-    "reaction": "gene"
-   },
-   {
-    "replique": 15,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "pointe_g",
-    "reaction": "choc"
-   },
-   {
-    "replique": 16,
-    "plan": "serre",
+    "replique": 18,
+    "plan": "large",
     "mouvement": "fixe",
     "geste": "desespoir",
     "reaction": "panique"
-   },
-   {
-    "replique": 17,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "pointe_d",
-    "reaction": "colere"
-   },
-   {
-    "replique": 18,
-    "plan": "serre",
-    "mouvement": "zoom_choc",
-    "geste": "mains_hanches",
-    "reaction": "choc"
    },
    {
     "replique": 19,
     "plan": "serre",
     "mouvement": "fixe",
     "geste": "pointe_g",
-    "reaction": "colere"
+    "reaction": "choc"
    },
    {
     "replique": 20,
     "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "poing",
-    "reaction": "extreme"
+    "mouvement": "zoom_choc",
+    "geste": "bras_ouverts",
+    "reaction": "colere"
    },
    {
     "replique": 21,
     "plan": "serre",
     "mouvement": "fixe",
-    "geste": "bras_ouverts",
-    "reaction": "joie"
+    "geste": "pointe_d",
+    "reaction": "panique"
    },
    {
     "replique": 22,
+    "plan": "moyen",
+    "mouvement": "fixe",
+    "geste": "gratte_tete",
+    "reaction": "gene"
+   },
+   {
+    "replique": 23,
     "plan": "serre",
     "mouvement": "fixe",
     "geste": "pointe_g",
     "reaction": "choc"
    },
    {
-    "replique": 23,
-    "plan": "serre",
-    "mouvement": "zoom_choc",
-    "geste": "poing",
-    "reaction": "extreme"
-   },
-   {
     "replique": 24,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "facepalm",
-    "reaction": "colere"
+    "reaction": "sceptique"
    }
   ],
   "objets": [
@@ -513,134 +504,157 @@
     "objet": "telephone"
    },
    {
-    "replique": 1,
+    "replique": 15,
     "objet": "bouteille"
    },
    {
-    "replique": 5,
-    "objet": "pistolet_a_eau"
-   },
-   {
-    "replique": 17,
-    "objet": "tablette"
-   },
-   {
-    "replique": 23,
-    "objet": "pistolet_a_eau"
+    "replique": 24,
+    "objet": "bouteille"
    }
   ],
   "decors_vus": {
-   "presentateur": "bureau moderne avec tables en désordre, chaises, ordinateurs, ventilo et bouteille d'eau sur une table, climatiseur en arrière-plan, affiche 'Bataille d’eau interdite'",
-   "invite": "même bureau, dessin sur tableau blanc effaçable, pistolets à eau cachés sous les tables"
+   "presentateur": "voiture interior, nuit, volant en cuir noir, tableau de bord lumineux, sièges en cuir noir, vitres teintées, téléphone posé sur le tableau de bord",
+   "invite": "voiture interior, nuit, volant en cuir noir, tableau de bord lumineux, sièges en cuir noir, vitres teintées, bouteille d'eau sur le siège arrière"
   }
  },
  "doublage": {
-  "piste": "/tmp/tmpira1fzzx/piste.wav",
-  "duree": 65.32,
-  "source": "https://www.tiktok.com/@kodanimation/video/7675884924020313376",
-  "auteur": "kodanimation",
-  "contexte": "Deux collègues de bureau, un présentateur enthousiaste et un invité blasé, discutent d'une proposition farfelue de bataille d'eau pendant une canicule, alors qu'ils sont en pleine réunion de travail. L'ambiance est détendue mais tendue, entre humour et exaspération.",
+  "piste": "/tmp/tmpltcr4w7l/piste.wav",
+  "duree": 72.24,
+  "source": "https://www.tiktok.com/@yan_animation0/video/7635069843049352470",
+  "auteur": "yan_animation0",
+  "contexte": "Deux personnages sont dans une voiture, l'un jouant le rôle d'un lycéen en seconde et l'autre celui d'un adulte sceptique qui doute de son âge et de ses études.",
   "evenements": [],
   "visuel": {
    "gestes": [],
-   "duree": 65.5,
-   "nb_plans": 6,
-   "duree_plan": 10.92,
-   "coupes": [
-    21.0,
-    22.0,
-    25.5,
-    26.0,
-    47.0
-   ],
+   "duree": 72.5,
+   "nb_plans": 1,
+   "duree_plan": 72.5,
+   "coupes": [],
    "plans": {
     "tres_serre": 0.0,
     "serre": 0.0,
-    "moyen": 0.0,
-    "large": 1.0
+    "moyen": 0.993,
+    "large": 0.007
    },
    "camera": {
-    "fixe": 0.952,
-    "avance": 0.024,
-    "recul": 0.008,
-    "travelling": 0.016,
+    "fixe": 1.0,
+    "avance": 0.0,
+    "recul": 0.0,
+    "travelling": 0.0,
     "epaule": 0.0
    },
-   "nb_personnes": 0,
-   "personnes": [],
-   "visages": false,
+   "nb_personnes": 2,
+   "personnes": [
+    {
+     "place": "droite",
+     "presence": 1.0,
+     "habit": [
+      150,
+      62,
+      73
+     ],
+     "cheveux": [
+      44,
+      30,
+      26
+     ],
+     "sourire": 0.0,
+     "taille": 0.07,
+     "tete_penchee": 1.1,
+     "regard_cote": 0.0
+    },
+    {
+     "place": "gauche",
+     "presence": 0.903,
+     "habit": [
+      89,
+      79,
+      77
+     ],
+     "cheveux": [
+      20,
+      15,
+      12
+     ],
+     "sourire": 0.0,
+     "taille": 0.077,
+     "tete_penchee": 1.1,
+     "regard_cote": 0.183
+    }
+   ],
+   "visages": true,
    "sourires": 0.0,
-   "energie": 0.194,
+   "energie": 0.021,
    "mur": [
-    168,
-    186,
-    207
+    0,
+    0,
+    0
    ],
    "palette": [
     [
-     185,
-     186,
-     188,
-     0.396
+     0,
+     0,
+     0,
+     0.677
     ],
     [
-     144,
-     192,
-     247,
-     0.208
-    ],
-    [
-     202,
-     98,
-     20,
+     44,
+     39,
+     41,
      0.126
     ],
     [
-     251,
-     250,
-     250,
-     0.112
+     74,
+     69,
+     74,
+     0.106
     ],
     [
-     23,
-     18,
-     18,
-     0.08
+     127,
+     106,
+     98,
+     0.049
     ],
     [
-     99,
-     105,
-     115,
-     0.078
+     193,
+     149,
+     114,
+     0.03
+    ],
+    [
+     240,
+     239,
+     240,
+     0.013
     ]
    ],
    "lumiere": {
-    "luminosite": 192.3,
-    "chaleur": 0.0,
-    "saturation": 67.3
+    "luminosite": 30.0,
+    "chaleur": 3.9,
+    "saturation": 17.8
    },
-   "moment": "jour"
+   "moment": "nuit"
   },
   "audio": {
-   "duree": 65.3,
+   "duree": 72.2,
    "nb_voix": 2,
    "voix": [
     {
-     "hz": 242,
+     "hz": 220,
      "genre": "f",
-     "part": 0.74
+     "part": 0.39
     },
     {
-     "hz": 212,
-     "genre": "f",
-     "part": 0.26
+     "hz": 181,
+     "genre": "?",
+     "part": 0.61
     }
    ],
-   "debit": 5.44,
-   "blanc_moyen": 0.37,
-   "coupes": 4,
-   "dynamique_db": 23.4,
-   "cris": 0.042,
+   "debit": 4.0,
+   "blanc_moyen": 0.7,
+   "coupes": 3,
+   "dynamique_db": 15.2,
+   "cris": 0.018,
    "musique": null,
    "impacts": 0,
    "impacts_10s": 0.0,
@@ -649,17 +663,17 @@
    "sur_vanne": 0,
    "evenements": {},
    "emotions": {
-    "'[sarcastic": 2,
-    "'[neutral": 2,
-    "'[provocative": 2,
-    "'[excited": 1,
-    "'[enthusiastic": 1,
-    "'[annoyed": 1,
-    "'[casual": 1,
-    "'[suggestive": 1
+    "'[colere": 6,
+    "'[urgent": 5,
+    "'[neutre": 3,
+    "'[choc": 3,
+    "'[sceptique": 2,
+    "'[confused": 2,
+    "'[gene": 2,
+    "'[hesitant": 1
    }
   },
-  "video_origine": "/tmp/tmpira1fzzx/src.mp4"
+  "video_origine": "/tmp/tmpltcr4w7l/src.mp4"
  },
  "fiche": {
   "note": 0,
@@ -672,38 +686,39 @@
      1,
      2,
      3,
-     4,
-     5,
-     6,
-     7,
-     8,
-     9
+     4
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "bureau moderne avec tables en désordre, chaises, ordinateurs, ventilo et bouteille d'eau sur une table, climatiseur en arrière-plan",
-    "titre": "La proposition farfelue"
+    "decor": "voiture interior, nuit, volant, tableau de bord, sièges en cuir noir, vitres teintées",
+    "titre": "Scène 1 : Début de la conversation"
    },
    {
     "scene": "2",
     "repliques": [
+     5,
+     6,
+     7,
+     8,
+     9,
      10,
      11,
      12,
      13,
-     14,
-     15,
-     16
+     14
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "même bureau, mais avec une affiche 'Bataille deau interdite' accrochée au mur"
+    "decor": "voiture interior, nuit, volant, tableau de bord, sièges en cuir noir, vitres teintées",
+    "titre": "Scène 2 : Doutes et explications"
    },
    {
     "scene": "3",
     "repliques": [
+     15,
+     16,
      17,
      18,
      19,
@@ -716,38 +731,37 @@
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "même bureau, dessin d'une bite sur un tableau blanc effaçable, pistolets à eau cachés sous les tables"
+    "decor": "voiture interior, nuit, volant, tableau de bord, sièges en cuir noir, vitres teintées, bouteille d'eau sur le siège arrière",
+    "titre": "Scène 3 : La révélation et la confusion finale"
    }
   ]
  },
  "_monte": true,
  "_voix_hz": {
-  "presentateur": 242,
-  "invite": 210
+  "envoyee": 424,
+  "invite": 272
  },
  "_voix_genre": {
-  "presentateur": "f",
-  "invite": "f"
+  "envoyee": "f"
  },
  "realisation": {
-  "moment": "jour",
+  "moment": "nuit",
   "lieux": [
-   "bureau",
-   "bureau",
-   "bureau"
+   "voiture",
+   "cabinet_medical",
+   "classe"
   ],
   "gags": [
-   "Bataille d'eau interdite",
-   "Pistolet à eau : obligatoire en cas de canicule",
-   "Bastien s'évanouit : cause probable : la chaleur"
+   "École : 2018-2024 : Redoublez-vous ?",
+   "Smoothies à la testostérone : Recette secrète",
+   "Lycée : Où est la médecine ?"
   ],
   "ambiances": [
-   "pluie",
-   "poussiere"
+   "neon"
   ],
   "source": "auteur+image",
   "tenues": {
-   "presentateur": "tshirt",
+   "envoyee": "tshirt",
    "invite": "chemise"
   },
   "plans": [
