@@ -2003,31 +2003,34 @@
   "cadence": null
  },
  {
-  "moment": "jour",
+  "moment": "soir",
   "lieux": [
    "salon"
   ],
   "source": "auteur+image",
-  "duree": 13.2,
+  "duree": 73.5,
   "plans": {
-   "large": 2
+   "large": 34
   },
   "mouvements": {
-   "fixe": 2
+   "fixe": 34
   },
   "costumes": {
-   "presentateur": "chemise"
+   "presentateur": "tshirt",
+   "invite": "tshirt"
   },
-  "figurants": 0,
-  "ambiances": [],
-  "controle": "Humoriste 6.0/10 : 0.4 s La chute finale ('Hugo ?') n'est pas assez mise en valeur. Le public ne perçoit pas immédiatement son potentiel comique.; 2.3 s L'humour repose sur l'attente des cafés, mais l",
-  "fichier": "2026-10-25_14h51_emission.mp4",
+  "figurants": 1,
+  "ambiances": [
+   "poussiere"
+  ],
+  "controle": "Humoriste 7.0/10 : 66 s La chute finale manque de punch visuel. Le public ne perçoit pas clairement qui dit la réplique finale.; 32.4 s Le gag sur le poulet cuit du street ching pourrait être renforcé",
+  "fichier": "2026-10-25_15h11_emission.mp4",
   "cine": {
    "focus": false,
    "vertige": true,
-   "tiers": false,
+   "tiers": true,
    "etalonnage": true,
-   "profondeur": false,
+   "profondeur": true,
    "grain": true,
    "reflets": false,
    "son": true

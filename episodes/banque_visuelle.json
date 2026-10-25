@@ -7074,145 +7074,135 @@
  },
  {
   "date": "2026-10-25",
-  "source": "https://www.tiktok.com/@vincedessine/video/7676440419336490273",
-  "auteur": "vincedessine",
+  "source": "https://www.tiktok.com/@motiontoonz/video/7686141383161154848",
+  "auteur": "motiontoonz",
   "visuel": {
-   "gestes": [
-    [
-     5.02,
-     0.28,
-     1.0
-    ],
-    [
-     8.53,
-     0.29,
-     1.0
-    ]
+   "gestes": [],
+   "duree": 71.5,
+   "nb_plans": 33,
+   "duree_plan": 2.17,
+   "coupes": [
+    3.0,
+    4.0,
+    5.0,
+    6.5,
+    9.0,
+    11.5,
+    12.0,
+    15.0,
+    15.5,
+    17.0,
+    19.0,
+    23.0,
+    26.5,
+    27.0,
+    29.0,
+    31.5,
+    32.0,
+    34.5,
+    37.0,
+    40.0,
+    41.0,
+    43.0,
+    47.5,
+    52.0,
+    54.0,
+    58.5,
+    61.0,
+    63.0,
+    65.5,
+    66.5,
+    68.0,
+    69.0
    ],
-   "duree": 10.0,
-   "nb_plans": 1,
-   "duree_plan": 10.04,
-   "coupes": [],
    "plans": {
     "tres_serre": 0.0,
-    "serre": 0.65,
-    "moyen": 0.35,
-    "large": 0.0
+    "serre": 0.0,
+    "moyen": 0.0,
+    "large": 1.0
    },
    "camera": {
-    "fixe": 0.842,
-    "avance": 0.053,
-    "recul": 0.105,
-    "travelling": 0.0,
-    "epaule": 0.0
+    "fixe": 0.464,
+    "avance": 0.009,
+    "recul": 0.0,
+    "travelling": 0.009,
+    "epaule": 0.518
    },
-   "nb_personnes": 1,
-   "personnes": [
-    {
-     "place": "droite",
-     "presence": 0.8,
-     "habit": [
-      250,
-      249,
-      248
-     ],
-     "cheveux": [
-      40,
-      31,
-      31
-     ],
-     "sourire": 0.0,
-     "taille": 0.161,
-     "tete_penchee": 1.6,
-     "regard_cote": 0.0
-    },
-    {
-     "place": "gauche",
-     "presence": 0.2,
-     "habit": [
-      248,
-      245,
-      242
-     ],
-     "cheveux": [
-      242,
-      194,
-      118
-     ],
-     "sourire": 0.0,
-     "taille": 0.163,
-     "tete_penchee": 2.1,
-     "regard_cote": 0.0
-    }
-   ],
-   "visages": true,
+   "nb_personnes": 0,
+   "personnes": [],
+   "visages": false,
    "sourires": 0.0,
-   "energie": 0.428,
+   "energie": 0.523,
    "mur": [
-    0,
-    0,
-    0
+    247,
+    247,
+    244
    ],
    "palette": [
     [
-     0,
-     0,
-     0,
-     0.458
+     248,
+     247,
+     244,
+     0.475
     ],
     [
-     253,
-     253,
-     252,
-     0.419
+     230,
+     164,
+     120,
+     0.158
     ],
     [
-     203,
-     192,
-     174,
-     0.037
-    ],
-    [
-     35,
-     33,
-     34,
-     0.034
-    ],
-    [
-     65,
-     82,
-     107,
-     0.026
-    ],
-    [
-     148,
      103,
-     77,
-     0.025
+     143,
+     146,
+     0.109
+    ],
+    [
+     204,
+     108,
+     106,
+     0.103
+    ],
+    [
+     62,
+     62,
+     61,
+     0.099
+    ],
+    [
+     19,
+     17,
+     16,
+     0.056
     ]
    ],
    "lumiere": {
-    "luminosite": 121.5,
-    "chaleur": 2.2,
-    "saturation": 11.6
+    "luminosite": 201.9,
+    "chaleur": 24.4,
+    "saturation": 56.1
    },
    "moment": "jour"
   },
   "audio": {
-   "duree": 10.0,
-   "nb_voix": 1,
+   "duree": 71.1,
+   "nb_voix": 2,
    "voix": [
     {
-     "hz": 130,
+     "hz": 230,
+     "genre": "f",
+     "part": 0.46
+    },
+    {
+     "hz": 158,
      "genre": "h",
-     "part": 1.0
+     "part": 0.54
     }
    ],
-   "debit": 3.71,
-   "blanc_moyen": 2.06,
-   "coupes": 0,
-   "dynamique_db": 24.8,
-   "cris": 0.032,
+   "debit": 6.04,
+   "blanc_moyen": 0.1,
+   "coupes": 15,
+   "dynamique_db": 13.2,
+   "cris": 0.035,
    "musique": null,
    "impacts": 0,
    "impacts_10s": 0.0,
@@ -7221,40 +7211,45 @@
    "sur_vanne": 0,
    "evenements": {},
    "emotions": {
-    "'[impatience": 1,
-    "'[exaspération_amicale": 1
+    "'[décidé": 2,
+    "'[interrogatif": 2,
+    "'[ironique": 2,
+    "'[confident": 1,
+    "'[encourageant": 1,
+    "'[sûr": 1,
+    "'[exalté": 1,
+    "'[nerveux": 1
    }
   },
   "claude": {
    "lieux": [
-    "cafe_bar",
-    "cafe_kitchen"
+    "salon"
    ],
-   "moment": "jour",
+   "moment": "soir",
    "costumes": {
     "presentateur": {
-     "haut": "chemise",
+     "haut": "tshirt",
      "c_haut": "bleu marine",
      "motif": "uni",
-     "bas": "pantalon",
-     "chaussures": "ville",
+     "bas": "jeans",
+     "chaussures": "baskets",
      "details": [
-      "montre",
-      "cravate"
+      "barbe_courte",
+      "lunettes_soleil"
      ],
      "chapeau": null,
      "cheveux": "court_texture",
      "c_cheveux": "brun"
     },
-    "envoyee": {
-     "haut": "tablier",
-     "c_haut": "blanc",
+    "invite": {
+     "haut": "tshirt",
+     "c_haut": "noir",
      "motif": "uni",
      "bas": "pantalon",
      "chaussures": "baskets",
      "details": [
       "logo",
-      "bracelets"
+      "bracelet"
      ],
      "chapeau": null,
      "cheveux": "long",
@@ -7263,21 +7258,56 @@
    }
   },
   "realisation": {
-   "moment": "jour",
+   "moment": "soir",
    "lieux": [
     "salon"
    ],
    "gags": [],
-   "ambiances": [],
+   "ambiances": [
+    "poussiere"
+   ],
    "source": "auteur+image",
    "tenues": {
-    "presentateur": "chemise"
+    "presentateur": "tshirt",
+    "invite": "tshirt"
    },
    "plans": [
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
     "large/fixe",
     "large/fixe"
    ]
   },
-  "video": "2026-10-25_14h51_emission.mp4"
+  "video": "2026-10-25_15h11_emission.mp4"
  }
 ]
