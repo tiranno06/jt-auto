@@ -2614,30 +2614,71 @@
  {
   "moment": "soir",
   "lieux": [
-   "salon"
+   "salon",
+   "bureau"
   ],
   "source": "auteur+image",
-  "duree": 16.5,
+  "duree": 133.8,
   "plans": {
-   "large": 2
+   "large": 35
   },
   "mouvements": {
-   "fixe": 2
+   "fixe": 35
   },
   "costumes": {
-   "presentateur": "chemise"
+   "presentateur": "tshirt",
+   "invite": "chemise"
+  },
+  "figurants": 1,
+  "ambiances": [
+   "neon",
+   "poussiere"
+  ],
+  "controle": "Humoriste 8.6/10 : 126.7 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 7.3/10 : montage trop lent : 1.1 plans toutes les 10 s (il en faudrait ~2.8); caméra peu vivante : pre",
+  "fichier": "2026-10-25_22h46_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": true,
+   "tiers": false,
+   "etalonnage": true,
+   "profondeur": true,
+   "grain": true,
+   "reflets": false,
+   "son": true
+  },
+  "cadence": "rapide"
+ },
+ {
+  "moment": "nuit",
+  "lieux": [
+   "chambre",
+   "chambre",
+   "chambre",
+   "chambre"
+  ],
+  "source": "auteur+image",
+  "duree": 85.0,
+  "plans": {
+   "large": 34
+  },
+  "mouvements": {
+   "fixe": 34
+  },
+  "costumes": {
+   "presentateur": "tshirt",
+   "envoyee": "tshirt",
+   "invite": "debardeur"
   },
   "figurants": 0,
   "ambiances": [
-   "poussiere",
-   "vapeur"
+   "neon"
   ],
-  "controle": "Humoriste 8.6/10 : 9.1 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 10.0/10 :  | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 10.0/10 :",
-  "fichier": "2026-10-25_23h02_emission.mp4",
+  "controle": "Humoriste 8.6/10 : 80.4 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 5.0/10 : 64.2 s tête de presentateur coupée par le bord de l'image (large); 44.3 s pas assez de plans d",
+  "fichier": "2026-10-25_23h27_emission.mp4",
   "cine": {
-   "focus": true,
+   "focus": false,
    "vertige": true,
-   "tiers": true,
+   "tiers": false,
    "etalonnage": true,
    "profondeur": false,
    "grain": true,

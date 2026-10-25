@@ -11863,118 +11863,102 @@
  },
  {
   "date": "2026-10-25",
-  "source": "https://www.tiktok.com/@kodanimation/video/7681093058674396448",
-  "auteur": "kodanimation",
+  "source": "https://www.tiktok.com/@same_same53/video/7679769398256618785",
+  "auteur": "same_same53",
   "visuel": {
    "gestes": [],
-   "duree": 14.5,
-   "nb_plans": 2,
-   "duree_plan": 7.25,
-   "coupes": [
-    5.0
-   ],
+   "duree": 131.5,
+   "nb_plans": 1,
+   "duree_plan": 131.5,
+   "coupes": [],
    "plans": {
-    "tres_serre": 0.103,
+    "tres_serre": 0.0,
     "serre": 0.0,
     "moyen": 0.0,
-    "large": 0.897
+    "large": 1.0
    },
    "camera": {
-    "fixe": 0.593,
-    "avance": 0.148,
-    "recul": 0.185,
+    "fixe": 1.0,
+    "avance": 0.0,
+    "recul": 0.0,
     "travelling": 0.0,
-    "epaule": 0.074
+    "epaule": 0.0
    },
-   "nb_personnes": 1,
-   "personnes": [
-    {
-     "place": "centre",
-     "presence": 0.103,
-     "habit": [
-      224,
-      227,
-      234
-     ],
-     "cheveux": [
-      251,
-      251,
-      251
-     ],
-     "sourire": 0.0,
-     "taille": 0.366,
-     "tete_penchee": 9.3,
-     "regard_cote": 0.0
-    }
-   ],
-   "visages": true,
+   "nb_personnes": 0,
+   "personnes": [],
+   "visages": false,
    "sourires": 0.0,
-   "energie": 1.0,
+   "energie": 0.17,
    "mur": [
-    244,
-    244,
-    244
+    0,
+    0,
+    0
    ],
    "palette": [
     [
-     252,
-     252,
-     252,
-     0.481
+     0,
+     0,
+     0,
+     0.57
     ],
     [
-     220,
-     220,
-     220,
-     0.161
+     254,
+     253,
+     253,
+     0.388
     ],
     [
-     4,
-     4,
-     5,
-     0.122
+     32,
+     35,
+     43,
+     0.025
     ],
     [
-     118,
-     131,
-     149,
-     0.092
+     175,
+     175,
+     176,
+     0.008
     ],
     [
-     75,
-     76,
-     83,
-     0.075
+     123,
+     101,
+     92,
+     0.006
     ],
     [
-     206,
-     130,
-     3,
-     0.068
+     10,
+     169,
+     105,
+     0.004
     ]
    ],
    "lumiere": {
-    "luminosite": 192.1,
-    "chaleur": 10.8,
-    "saturation": 30.9
+    "luminosite": 101.7,
+    "chaleur": -0.4,
+    "saturation": 4.8
    },
    "moment": "jour"
   },
   "audio": {
-   "duree": 14.1,
-   "nb_voix": 1,
+   "duree": 131.2,
+   "nb_voix": 2,
    "voix": [
     {
-     "hz": 242,
+     "hz": 269,
      "genre": "f",
-     "part": 1.0
+     "part": 0.86
+    },
+    {
+     "hz": 223,
+     "genre": "f",
+     "part": 0.14
     }
    ],
-   "debit": 3.35,
-   "blanc_moyen": 0.0,
-   "coupes": 0,
-   "dynamique_db": 39.6,
-   "cris": 0.01,
+   "debit": 3.33,
+   "blanc_moyen": 0.83,
+   "coupes": 7,
+   "dynamique_db": 21.1,
+   "cris": 0.007,
    "musique": null,
    "impacts": 0,
    "impacts_10s": 0.0,
@@ -11983,29 +11967,47 @@
    "sur_vanne": 0,
    "evenements": {},
    "emotions": {
+    "chuchote": 7,
+    "colere": 4,
+    "confus": 3,
+    "urgent": 3,
+    "inquiet": 2,
+    "panique": 2,
     "annoyed": 1,
-    "furious": 1
+    "neutre": 1
    }
   },
   "claude": {
-   "lieux": [
-    "salon"
-   ],
    "moment": "soir",
    "costumes": {
     "presentateur": {
-     "haut": "chemise",
+     "haut": "tshirt",
      "c_haut": "bleu",
      "motif": "uni",
-     "bas": "pantalon",
-     "chaussures": "ville",
+     "bas": "jean",
+     "chaussures": "baskets",
      "details": [
-      "moustache",
-      "lunettes_vue"
+      "barbe_courte",
+      "bracelets"
      ],
      "chapeau": null,
      "cheveux": "court",
      "c_cheveux": "brun"
+    },
+    "invite": {
+     "haut": "chemise",
+     "c_haut": "blanc",
+     "motif": "rayures",
+     "bas": "pantalon",
+     "chaussures": "ville",
+     "details": [
+      "lunettes_soleil",
+      "montre"
+     ],
+     "chapeau": "casquette",
+     "c_chapeau": "bleu",
+     "cheveux": "court_texture",
+     "c_cheveux": "roux"
     }
    },
    "objets": [
@@ -12014,65 +12016,427 @@
      "objet": "telephone"
     },
     {
-     "replique": 1,
+     "replique": 14,
      "objet": "telephone"
+    },
+    {
+     "replique": 26,
+     "objet": "billet"
+    },
+    {
+     "replique": 32,
+     "objet": "micro"
     }
    ],
    "gags": [
-    "\"ZONE DE JEU INTERDITE\" écrit sur une étiquette collée sur le canapé.",
-    "\"Fortnite = Ennemi Public N°1\" affiché sur un cadre photo.",
-    "Un poster de 'Les règles du salon' avec une flèche pointant vers la porte."
+    "Affiche : 'Bienvenue à l'Église – On ne ment pas ici (sauf dimanche)'",
+    "Tableau noir : 'Règles de l'Église : 1. Pas de mensonges 2. Toujours appeler Alain'",
+    "Post-it sur le téléphone : 'Appeler Alain – Urgent'"
    ],
    "ambiances": [
-    "vapeur"
+    "neon"
    ],
    "plans": [
     {
      "replique": 0,
-     "plan": "large",
-     "mouvement": "avance",
-     "geste": "pointe_d",
-     "reaction": "aucun"
+     "plan": "moyen",
+     "mouvement": "fixe",
+     "geste": "gratte_tete",
+     "reaction": "regard_camera"
     },
     {
-     "replique": 0,
+     "replique": 6,
      "plan": "tres_serre",
-     "mouvement": "fixe",
-     "geste": "facepalm",
+     "mouvement": "zoom_choc",
+     "geste": "pointe_d",
      "reaction": "choc"
     },
     {
-     "replique": 1,
-     "plan": "contre_plongee",
-     "mouvement": "zoom_choc",
-     "geste": "poing",
+     "replique": 11,
+     "plan": "serre",
+     "mouvement": "avance",
+     "geste": "facepalm",
      "reaction": "sceptique"
+    },
+    {
+     "replique": 25,
+     "plan": "large",
+     "mouvement": "fixe",
+     "geste": "bras_ouverts",
+     "reaction": "aucune"
+    },
+    {
+     "replique": 32,
+     "plan": "contre_plongee",
+     "mouvement": "travelling",
+     "geste": "poings",
+     "reaction": "colere"
     }
    ]
   },
   "realisation": {
    "moment": "soir",
    "lieux": [
-    "salon"
+    "salon",
+    "bureau"
    ],
    "gags": [
-    "\"ZONE DE JEU INTERDITE\" écrit sur une étiquette collée sur le canapé.",
-    "\"Fortnite = Ennemi Public N°1\" affiché sur un cadre photo.",
-    "Un poster de 'Les règles du salon' avec une flèche pointant vers la porte."
+    "Affiche : 'Bienvenue à l'Église – On ne ment pas ici (sauf dimanche)'",
+    "Tableau noir : 'Règles de l'Église : 1. Pas de mensonges 2. Toujours appeler Ala",
+    "Post-it sur le téléphone : 'Appeler Alain – Urgent'"
    ],
    "ambiances": [
-    "poussiere",
-    "vapeur"
+    "neon",
+    "poussiere"
    ],
    "source": "auteur+image",
    "tenues": {
-    "presentateur": "chemise"
+    "presentateur": "tshirt",
+    "invite": "chemise"
    },
    "plans": [
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
     "large/fixe",
     "large/fixe"
    ]
   },
-  "video": "2026-10-25_23h02_emission.mp4"
+  "video": "2026-10-25_22h46_emission.mp4"
+ },
+ {
+  "date": "2026-10-25",
+  "source": "https://www.tiktok.com/@motiontoonz/video/7690276481276202272",
+  "auteur": "motiontoonz",
+  "visuel": {
+   "gestes": [],
+   "duree": 81.5,
+   "nb_plans": 7,
+   "duree_plan": 11.64,
+   "coupes": [
+    64.5,
+    65.0,
+    67.5,
+    68.0,
+    72.0,
+    74.5
+   ],
+   "plans": {
+    "tres_serre": 0.0,
+    "serre": 0.0,
+    "moyen": 0.0,
+    "large": 1.0
+   },
+   "camera": {
+    "fixe": 0.622,
+    "avance": 0.064,
+    "recul": 0.109,
+    "travelling": 0.026,
+    "epaule": 0.179
+   },
+   "nb_personnes": 0,
+   "personnes": [],
+   "visages": false,
+   "sourires": 0.0,
+   "energie": 0.472,
+   "mur": [
+    231,
+    235,
+    240
+   ],
+   "palette": [
+    [
+     231,
+     235,
+     240,
+     0.645
+    ],
+    [
+     205,
+     212,
+     224,
+     0.149
+    ],
+    [
+     73,
+     81,
+     96,
+     0.13
+    ],
+    [
+     125,
+     77,
+     50,
+     0.03
+    ],
+    [
+     14,
+     12,
+     14,
+     0.028
+    ],
+    [
+     126,
+     133,
+     149,
+     0.019
+    ]
+   ],
+   "lumiere": {
+    "luminosite": 207.9,
+    "chaleur": -9.9,
+    "saturation": 25.7
+   },
+   "moment": "jour"
+  },
+  "audio": {
+   "duree": 81.5,
+   "nb_voix": 2,
+   "voix": [
+    {
+     "hz": 167,
+     "genre": "?",
+     "part": 0.55
+    },
+    {
+     "hz": 237,
+     "genre": "f",
+     "part": 0.45
+    }
+   ],
+   "debit": 4.78,
+   "blanc_moyen": 0.36,
+   "coupes": 14,
+   "dynamique_db": 21.1,
+   "cris": 0.005,
+   "musique": null,
+   "impacts": 0,
+   "impacts_10s": 0.0,
+   "graves": 0,
+   "aigus": 0,
+   "sur_vanne": 0,
+   "evenements": {},
+   "emotions": {
+    "sarcastic": 14,
+    "confused": 6,
+    "colere": 4,
+    "blase": 2,
+    "hesitant": 2,
+    "defensive": 1,
+    "annoyed": 1,
+    "urgent": 1
+   }
+  },
+  "claude": {
+   "lieux": [
+    "chambre"
+   ],
+   "moment": "nuit",
+   "costumes": {
+    "presentateur": {
+     "haut": "tshirt",
+     "c_haut": "bleu marine",
+     "motif": "uni",
+     "bas": "pantalon",
+     "chaussures": "chaussons",
+     "details": [
+      "barbe_courte",
+      "bracelets"
+     ]
+    },
+    "invite": {
+     "haut": "debardeur",
+     "c_haut": "blanc",
+     "motif": "uni",
+     "bas": "short",
+     "chaussures": "ballerines",
+     "details": [
+      "boucles_oreilles",
+      "bracelet"
+     ]
+    },
+    "envoyee": {
+     "haut": "tshirt",
+     "c_haut": "rouge",
+     "motif": "uni",
+     "bas": "jogging",
+     "chaussures": "baskets",
+     "details": [
+      "sac_bandouliere",
+      "lunettes_soleil"
+     ]
+    }
+   },
+   "objets": [
+    {
+     "replique": 4,
+     "objet": "tasse"
+    },
+    {
+     "replique": 17,
+     "objet": "tablette"
+    },
+    {
+     "replique": 27,
+     "objet": "valise"
+    }
+   ],
+   "gags": [
+    "\"Préliminaires : mode d'emploi, demandez à ChatGPT\"",
+    "\"Le thé : toujours une mauvaise idée après minuit\"",
+    "\"Performance : hisser les couleurs ou planter le drapeau ?\""
+   ],
+   "ambiances": [
+    "neon"
+   ],
+   "plans": [
+    {
+     "replique": 0,
+     "plan": "large",
+     "mouvement": "fixe",
+     "geste": "bras_ouverts",
+     "reaction": "aucune"
+    },
+    {
+     "replique": 1,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "facepalm",
+     "reaction": "sceptique"
+    },
+    {
+     "replique": 3,
+     "plan": "serre",
+     "mouvement": "zoom_choc",
+     "geste": "pointe_d",
+     "reaction": "choc"
+    },
+    {
+     "replique": 7,
+     "plan": "serre",
+     "mouvement": "avance",
+     "geste": "pointe_g",
+     "reaction": "colere"
+    },
+    {
+     "replique": 15,
+     "plan": "contre_plongée",
+     "mouvement": "fixe",
+     "geste": "mains_hanches",
+     "reaction": "blase"
+    },
+    {
+     "replique": 22,
+     "plan": "tres_serre",
+     "mouvement": "zoom_choc",
+     "geste": "gratte_tete",
+     "reaction": "panique"
+    },
+    {
+     "replique": 27,
+     "plan": "moyen",
+     "mouvement": "recul",
+     "geste": "poches",
+     "reaction": "soupir"
+    },
+    {
+     "replique": 33,
+     "plan": "epaule",
+     "mouvement": "fixe",
+     "geste": "desespoir",
+     "reaction": "choc"
+    }
+   ]
+  },
+  "realisation": {
+   "moment": "nuit",
+   "lieux": [
+    "chambre",
+    "chambre",
+    "chambre",
+    "chambre"
+   ],
+   "gags": [
+    "\"Préliminaires : mode d'emploi, demandez à ChatGPT\"",
+    "\"Le thé : toujours une mauvaise idée après minuit\"",
+    "\"Performance : hisser les couleurs ou planter le drapeau ?\""
+   ],
+   "ambiances": [
+    "neon"
+   ],
+   "source": "auteur+image",
+   "tenues": {
+    "presentateur": "tshirt",
+    "envoyee": "tshirt",
+    "invite": "debardeur"
+   },
+   "plans": [
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe"
+   ]
+  },
+  "video": "2026-10-25_23h27_emission.mp4"
  }
 ]
