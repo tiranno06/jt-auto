@@ -19977,128 +19977,122 @@
  },
  {
   "date": "2026-10-26",
-  "source": "https://www.tiktok.com/@charly.bse/video/7659354376519077152",
-  "auteur": "charly.bse",
+  "source": "https://www.tiktok.com/@tepeianimation/video/7699834545570417942?_r=1&_t=ZN-9AsLontNSP0",
+  "auteur": "tepeianimation",
   "visuel": {
    "gestes": [],
-   "duree": 74.5,
-   "nb_plans": 26,
-   "duree_plan": 2.87,
+   "duree": 63.0,
+   "nb_plans": 20,
+   "duree_plan": 3.15,
    "coupes": [
-    1.0,
-    2.0,
-    5.0,
-    8.5,
-    12.0,
-    14.0,
-    15.5,
-    16.5,
-    18.5,
+    0.5,
+    2.5,
+    4.5,
+    7.0,
+    8.0,
+    10.5,
+    12.5,
     20.5,
-    34.5,
-    35.0,
-    35.5,
-    40.0,
-    42.0,
-    43.5,
-    45.5,
-    46.0,
-    51.0,
-    51.5,
-    56.5,
-    62.5,
-    64.5,
-    67.5,
-    69.0
+    22.5,
+    24.0,
+    25.0,
+    26.5,
+    28.0,
+    31.0,
+    32.5,
+    37.5,
+    39.0,
+    49.0,
+    50.0
    ],
    "plans": {
     "tres_serre": 0.0,
-    "serre": 0.013,
+    "serre": 0.0,
     "moyen": 0.0,
-    "large": 0.987
+    "large": 1.0
    },
    "camera": {
-    "fixe": 0.602,
-    "avance": 0.008,
-    "recul": 0.0,
+    "fixe": 0.972,
+    "avance": 0.009,
+    "recul": 0.019,
     "travelling": 0.0,
-    "epaule": 0.39
+    "epaule": 0.0
    },
-   "nb_personnes": 1,
+   "nb_personnes": 0,
    "personnes": [],
-   "visages": true,
-   "sourires": 1.0,
-   "energie": 0.16,
+   "visages": false,
+   "sourires": 0.0,
+   "energie": 0.175,
    "mur": [
-    221,
-    179,
-    132
+    243,
+    241,
+    246
    ],
    "palette": [
     [
-     218,
-     169,
+     236,
+     234,
+     242,
+     0.374
+    ],
+    [
+     254,
+     254,
+     254,
+     0.179
+    ],
+    [
+     156,
+     140,
      115,
-     0.34
+     0.156
     ],
     [
-     133,
+     218,
+     174,
+     146,
+     0.152
+    ],
+    [
      76,
-     40,
-     0.213
+     68,
+     75,
+     0.089
     ],
     [
-     229,
-     192,
-     163,
-     0.174
-    ],
-    [
-     116,
-     122,
-     72,
-     0.136
-    ],
-    [
-     28,
-     19,
-     12,
-     0.102
-    ],
-    [
-     41,
-     132,
-     204,
-     0.035
+     32,
+     22,
+     25,
+     0.05
     ]
    ],
    "lumiere": {
-    "luminosite": 171.0,
-    "chaleur": 67.8,
-    "saturation": 132.2
+    "luminosite": 206.3,
+    "chaleur": 15.7,
+    "saturation": 41.4
    },
    "moment": "jour"
   },
   "audio": {
-   "duree": 74.4,
+   "duree": 62.8,
    "nb_voix": 2,
    "voix": [
     {
-     "hz": 145,
-     "genre": "h",
-     "part": 0.38
+     "hz": 192,
+     "genre": "f",
+     "part": 0.73
     },
     {
-     "hz": 242,
+     "hz": 190,
      "genre": "f",
-     "part": 0.62
+     "part": 0.27
     }
    ],
-   "debit": 5.84,
-   "blanc_moyen": 0.61,
-   "coupes": 0,
-   "dynamique_db": 23.2,
-   "cris": 0.01,
+   "debit": 4.14,
+   "blanc_moyen": 0.45,
+   "coupes": 3,
+   "dynamique_db": 29.1,
+   "cris": 0.02,
    "musique": null,
    "impacts": 0,
    "impacts_10s": 0.0,
@@ -20107,187 +20101,83 @@
    "sur_vanne": 0,
    "evenements": {},
    "emotions": {
-    "annoyed": 3,
-    "sarcastic": 3,
-    "proud": 3,
-    "excited": 3,
-    "neutral": 3,
-    "confused": 2,
-    "embarrassed": 2,
-    "cheerful": 2
+    "'[indignant": 1,
+    "confused": 1,
+    "'[alarmed": 1,
+    "'[aggressive": 1,
+    "'[exasperated": 1,
+    "\"[panicked": 1,
+    "'[sarcastic": 1,
+    "'[defiant": 1
    }
   },
   "claude": {
    "lieux": [
-    "salon"
+    "studio"
    ],
-   "moment": "soir",
+   "moment": "jour",
    "costumes": {
     "presentateur": {
-     "haut": "tshirt",
-     "c_haut": "bleu",
-     "bas": "jeans",
-     "chaussures": "baskets",
+     "haut": "chemise",
+     "c_haut": "blanc",
+     "motif": "uni",
+     "bas": "pantalon",
+     "chaussures": "ville",
      "details": [
-      "barbe_courte",
+      "cravate",
       "lunettes_vue"
      ],
      "chapeau": null,
-     "cheveux": "court_texture",
+     "cheveux": "carre",
      "c_cheveux": "brun"
     },
     "invite": {
-     "haut": "robe",
-     "c_haut": "rose",
-     "bas": "baskets",
-     "chaussures": "baskets",
+     "haut": "tshirt",
+     "c_haut": "vert",
+     "motif": "uni",
+     "bas": "jupe",
+     "chaussures": "ville",
      "details": [
-      "boucles_oreilles",
-      "sac_bandouliere"
+      "bracelets",
+      "boucles_oreilles"
      ],
      "chapeau": null,
      "cheveux": "long",
-     "c_cheveux": "noir"
+     "c_cheveux": "châtain"
+    },
+    "envoyee": {
+     "haut": "blouse",
+     "c_haut": "bleu marine",
+     "motif": "uni",
+     "bas": "pantalon",
+     "chaussures": "bottes",
+     "details": [
+      "ceinture",
+      "stylos"
+     ],
+     "chapeau": null,
+     "cheveux": "chignon",
+     "c_cheveux": "blond"
     }
-   },
-   "objets": [
-    {
-     "replique": 1,
-     "objet": "telephone"
-    },
-    {
-     "replique": 14,
-     "objet": "facture"
-    },
-    {
-     "replique": 18,
-     "objet": "chaussures"
-    }
-   ],
-   "gags": [
-    "Économies : 50€ - Communication : 0€",
-    "Chaussures : 50% de réduction, 100% de bonheur",
-    "La communication est la clé, mais pas toujours la paire de chaussures."
-   ],
-   "ambiances": [
-    "none"
-   ],
-   "plans": [
-    {
-     "replique": 0,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "gratte_tete",
-     "reaction": "aucune"
-    },
-    {
-     "replique": 1,
-     "plan": "moyen",
-     "mouvement": "fixe",
-     "geste": "bras_ouverts",
-     "reaction": "choc"
-    },
-    {
-     "replique": 2,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "pointe_d",
-     "reaction": "sceptique"
-    },
-    {
-     "replique": 3,
-     "plan": "large",
-     "mouvement": "epaule",
-     "geste": "gratte_tete",
-     "reaction": "regard_camera"
-    },
-    {
-     "replique": 4,
-     "plan": "serre",
-     "mouvement": "zoom_choc",
-     "geste": "haussement",
-     "reaction": "soupir"
-    },
-    {
-     "replique": 7,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "pointe_g",
-     "reaction": "choc"
-    },
-    {
-     "replique": 8,
-     "plan": "moyen",
-     "mouvement": "epaule",
-     "geste": "mains_hanches",
-     "reaction": "sceptique"
-    },
-    {
-     "replique": 11,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "pointe_d",
-     "reaction": "facepalm"
-    },
-    {
-     "replique": 14,
-     "plan": "serre",
-     "mouvement": "zoom_choc",
-     "geste": "poches",
-     "reaction": "joie"
-    },
-    {
-     "replique": 18,
-     "plan": "large",
-     "mouvement": "travelling",
-     "geste": "bras_ouverts",
-     "reaction": "choc"
-    },
-    {
-     "replique": 21,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "pouce",
-     "reaction": "rire"
-    },
-    {
-     "replique": 27,
-     "plan": "moyen",
-     "mouvement": "epaule",
-     "geste": "bras_ouverts",
-     "reaction": "joie"
-    }
-   ]
+   }
   },
   "realisation": {
-   "moment": "soir",
+   "moment": "jour",
    "lieux": [
-    "salon",
-    "salon"
+    "rue",
+    "bureau",
+    "bureau"
    ],
-   "gags": [
-    "Économies : 50€ - Communication : 0€",
-    "Chaussures : 50% de réduction, 100% de bonheur",
-    "La communication est la clé, mais pas toujours la paire de chaussures."
-   ],
+   "gags": [],
    "ambiances": [
-    "pluie",
-    "poussiere"
+    "pluie"
    ],
    "source": "auteur+image",
    "tenues": {
-    "presentateur": "tshirt",
-    "invite": "robe"
+    "envoyee": "blouse",
+    "invite": "tshirt"
    },
    "plans": [
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
     "large/fixe",
     "large/fixe",
     "large/fixe",
@@ -20311,6 +20201,6 @@
     "large/fixe"
    ]
   },
-  "video": "2026-10-26_12h20_emission.mp4"
+  "video": "2026-10-26_12h38_emission.mp4"
  }
 ]
