@@ -1,179 +1,118 @@
 {
- "titre": "TRAHISON ET RIVALITÉ",
- "sujet": "TRAHISON ET RIVALITÉ",
- "ecran": "TRAHISON ET RI",
+ "titre": "QUIZ HISTORIQUE",
+ "sujet": "QUIZ HISTORIQUE",
+ "ecran": "QUIZ HISTORIQU",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "POV : ton pote te trahit",
- "question": "Comment gérer une trahison entre amis ?",
+ "titre_accroche": "POV : Vous croyez tout savoir sur l'histoire ?",
+ "question": "Qui a la meilleure mémoire historique ?",
  "running_gag": "",
  "verite": "",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "Robin, faut que je dise un truc. Quoi? Bah voilà, je t'ai trompé avec ton pote.",
+   "t": "La chute du mur de Berlin, 1989. Je suis doué pour les dates, monsieur.",
    "_deb": 0.0,
-   "_fin": 4.56,
-   "d": "[\"[embarrassed] Robin, faut que je dise un truc. Quoi? Bah voilà, je t'ai trompé avec ton pote.\"]"
+   "_fin": 3.94,
+   "d": "[confident] La chute du mur de Berlin, 1989. Je suis doué pour les dates, monsieur."
   },
   {
-   "p": "invite",
-   "t": "Quoi? Avec qui?",
-   "_deb": 4.94,
-   "_fin": 5.86,
-   "d": "['[shocked] Quoi? Avec qui?']"
+   "p": "envoyee",
+   "t": "dates, monsieur. Tiens, non. Vous m'intriguez.",
+   "_deb": 3.94,
+   "_fin": 7.9,
+   "d": "[sceptique] dates, monsieur. Tiens, non. Vous m'intriguez."
   },
   {
    "p": "presentateur",
-   "t": "Avec Enzo. Je suis désolée, c'est ton pote.",
-   "_deb": 5.96,
-   "_fin": 8.02,
-   "d": "[\"[apologetic] Avec Enzo. Je suis désolée, c'est ton pote.\"]"
+   "t": "Donnez -moi l 'année de la loi sur les droits",
+   "_deb": 9.08,
+   "_fin": 12.1
   },
   {
-   "p": "invite",
-   "t": "C'était qui le mieux? Quoi? Avec qui c'était le mieux?",
-   "_deb": 8.1,
-   "_fin": 11.84,
-   "d": "[\"[confused] C'était qui le mieux? Quoi? Avec qui c'était le mieux?\"]"
+   "p": "envoyee",
+   "t": "civiques.",
+   "_deb": 12.1,
+   "_fin": 12.92
   },
   {
    "p": "presentateur",
-   "t": "Bah, avec toi?",
-   "_deb": 12.28,
-   "_fin": 13.68,
-   "d": "['[sarcastic] Bah, avec toi?']"
-  },
-  {
-   "p": "envoyee",
-   "t": "Voilà!",
-   "_deb": 13.92,
-   "_fin": 14.64,
-   "d": "['[triumphant] Voilà!']"
-  },
-  {
-   "p": "invite",
-   "t": "Alors, on ferme sa gueule maintenant! Je sais que t'as baisé ma meuf, mais t'es trop nul mon frère!",
-   "_deb": 14.84,
-   "_fin": 20.02,
-   "d": "[\"[angry] Alors, on ferme sa gueule maintenant! Je sais que t'as baisé ma meuf, mais t'es trop nul mon frère!\"]"
-  },
-  {
-   "p": "invite",
-   "t": "Eh frère, elle a dit que c'était moi le meilleur, alors dégage bouffon!",
-   "_deb": 20.02,
-   "_fin": 22.76,
-   "d": "[\"[defiant] Eh frère, elle a dit que c'était moi le meilleur, alors dégage bouffon!\"]"
-  },
-  {
-   "p": "envoyee",
-   "t": "Maintenant, tu fermes moi ou Robin? Avec lui! Robin? Voilà!",
-   "_deb": 22.86,
-   "_fin": 27.18,
-   "d": "['[mocking] Maintenant, tu fermes moi ou Robin? Avec lui! Robin? Voilà!']"
-  },
-  {
-   "p": "envoyee",
-   "t": "Je vais bien baiser ma",
-   "_deb": 27.38,
-   "_fin": 28.4,
-   "d": "['[interrupted] Je vais bien baiser ma']"
-  },
-  {
-   "p": "invite",
-   "t": "meuf, on baisera quand même.",
-   "_deb": 28.4,
-   "_fin": 29.14,
-   "d": "['[whispering] meuf, on baisera quand même.']"
-  },
-  {
-   "p": "envoyee",
-   "t": "Ah bah tu vas voir! Non mais j'en ai pas ou quoi?",
-   "_deb": 29.12,
-   "_fin": 31.54,
-   "d": "[\"[exasperated] Ah bah tu vas voir! Non mais j'en ai pas ou quoi?\"]"
-  },
-  {
-   "p": "invite",
-   "t": "Oh comment il ferme sa gueule maintenant",
-   "_deb": 33.5,
-   "_fin": 35.24,
-   "d": "['[annoyed] Oh comment il ferme sa gueule maintenant']"
-  },
-  {
-   "p": "envoyee",
-   "t": "T'es pas fâchée?",
-   "_deb": 35.66,
-   "_fin": 36.58,
-   "d": "[\"[playful] T'es pas fâchée?\"]"
-  },
-  {
-   "p": "invite",
-   "t": "Non Manon pourquoi je serais fâchée? Encore un truc où je suis mieux que lui. Je t'aime tellement",
-   "_deb": 36.72,
-   "_fin": 41.0,
-   "d": "[\"[loving] Non Manon pourquoi je serais fâchée? Encore un truc où je suis mieux que lui. Je t'aime tellement\"]"
-  },
-  {
-   "p": "invite",
-   "t": "Dans sa gueule! Yes, je t'aime",
-   "_deb": 43.94,
-   "_fin": 48.4,
-   "d": "[\"[mocking] Dans sa gueule! Yes, je t'aime\"]"
+   "t": "1964.",
+   "_deb": 14.18,
+   "_fin": 14.66
   },
   {
    "p": "presentateur",
-   "t": "Moi aussi",
-   "_deb": 49.02,
-   "_fin": 49.58,
-   "d": "['[soft] Moi aussi']"
-  },
-  {
-   "p": "invite",
-   "t": "Merci",
-   "_deb": 50.0,
-   "_fin": 50.2,
-   "d": "['[whispering] Merci']"
-  },
-  {
-   "p": "invite",
-   "t": "Maman tu sais que Manon m'a trompé et qu'apparemment je suis meilleur qu'Enzo",
-   "_deb": 53.12,
-   "_fin": 56.04,
-   "d": "[\"[dramatic] Maman tu sais que Manon m'a trompé et qu'apparemment je suis meilleur qu'Enzo\"]"
+   "t": "Assassinat de John Fitzgerald Kennedy, 1963. Celui de Martin Luther King, 68.",
+   "_deb": 16.58,
+   "_fin": 21.76
   },
   {
    "p": "presentateur",
-   "t": "Et bien je vais appeler sa mère pour lui dire que t'es meilleur que son fils.",
-   "_deb": 56.08,
-   "_fin": 60.14,
-   "d": "[\"[scheming] Et bien je vais appeler sa mère pour lui dire que t'es meilleur que son fils.\"]"
+   "t": "De Lincoln, 1865. L 'égalisation de l 'avortement, 1963. La fin de la ségrégation scolaire, 1954.",
+   "_deb": 21.88,
+   "_fin": 27.52
   },
   {
-   "p": "invite",
-   "t": "Voilà, et elle va bien fermer sa gueule cette conne.",
-   "_deb": 60.16,
-   "_fin": 62.04,
-   "d": "['[defiant] Voilà, et elle va bien fermer sa gueule cette conne.']",
+   "p": "presentateur",
+   "t": "La bataille de Gettysburg, 1863. La guerre de Corée. De 1950 à 1953.",
+   "_deb": 27.52,
+   "_fin": 32.76
+  },
+  {
+   "p": "presentateur",
+   "t": "Elle a fini en 52.",
+   "_deb": 33.32,
+   "_fin": 35.02
+  },
+  {
+   "p": "envoyee",
+   "t": "Monsieur, en fait, c 'était bien en 53.",
+   "_deb": 36.94,
+   "_fin": 40.2
+  },
+  {
+   "p": "presentateur",
+   "t": "Vérifiez sa réponse.",
+   "_deb": 44.8,
+   "_fin": 45.94
+  },
+  {
+   "p": "envoyee",
+   "t": "Allez, dépêchez -vous.",
+   "_deb": 46.2,
+   "_fin": 48.3
+  },
+  {
+   "p": "presentateur",
+   "t": "Alors, c 'était en 1953.",
+   "_deb": 48.72,
+   "_fin": 52.6
+  },
+  {
+   "p": "envoyee",
+   "t": "Sous -titrage ST' 501",
+   "_deb": 60.0,
+   "_fin": 61.66,
    "chute": true
   }
  ],
  "bandeau": [],
  "gag": null,
- "legende": "Une scène de trahison et de rivalité entre amis dans une cuisine.",
+ "legende": "Un duel de dates entre un présentateur et ses invités dans une ambiance de quiz endiablé.",
  "hashtags": [
   "petitsdramas",
-  "amitie",
-  "trahison",
-  "rivalite",
-  "humour",
-  "drama",
-  "potins"
+  "quizhistoire",
+  "cultureg",
+  "datescles",
+  "saviezvous",
+  "histoireenjeu",
+  "duelculturel"
  ],
  "sources": [
-  "https://www.tiktok.com/@charly.bse/video/7641499602822237473"
+  "https://www.tiktok.com/@yan_animation0/video/7689561227600678176"
  ],
  "decoupage": [
   {
@@ -184,17 +123,7 @@
     2,
     3,
     4,
-    5
-   ],
-   "lieu": "",
-   "son": "",
-   "duree": 0.0,
-   "decor": "cuisine, table en bois avec une tasse de café, un téléphone portable, des placards marron et une fenêtre avec vue sur une maison",
-   "titre": "Confession"
-  },
-  {
-   "scene": "2",
-   "repliques": [
+    5,
     6,
     7,
     8,
@@ -206,243 +135,287 @@
    "lieu": "",
    "son": "",
    "duree": 0.0,
-   "decor": "cuisine, même décor avec une bouteille de vin à moitié vide et un verre sale sur le comptoir",
-   "titre": "Dispute"
-  },
-  {
-   "scene": "3",
-   "repliques": [
-    13,
-    14,
-    15,
-    16,
-    17,
-    18,
-    19,
-    20
-   ],
-   "lieu": "",
-   "son": "",
-   "duree": 0.0,
-   "decor": "cuisine, même décor avec un croissant sur la table et une lettre ouverte",
-   "titre": "Réconciliation"
+   "decor": "classe avec tableau noir, chaises en bois, cartes historiques, horloge murale, affiches de dates clés, craie, globe terrestre.",
+   "titre": "Quiz Historique : Qui a raison ?"
   }
  ],
  "studio": {
   "moment": "soir",
   "lieux": [
-   "cuisine"
+   "classe"
   ],
   "costumes": {
    "presentateur": {
-    "haut": "tshirt",
-    "c_haut": "rouge",
-    "motif": "uni",
-    "bas": "jean",
-    "chaussures": "baskets",
-    "details": [
-     "barbe_courte"
-    ],
-    "chapeau": null,
-    "cheveux": "court_texture",
-    "c_cheveux": "brun"
-   },
-   "invite": {
-    "haut": "chemise",
-    "c_haut": "bleu",
+    "haut": "costume",
+    "c_haut": "bleu marine",
     "motif": "uni",
     "bas": "pantalon",
-    "chaussures": "ville",
+    "chaussures": "bottes",
     "details": [
      "cravate",
+     "lunettes_vue",
      "montre"
     ],
     "chapeau": null,
     "cheveux": "court",
-    "c_cheveux": "noir"
+    "c_cheveux": "brun"
+   },
+   "invite": {
+    "haut": "chemise",
+    "c_haut": "blanc",
+    "motif": "uni",
+    "bas": "pantalon",
+    "chaussures": "baskets",
+    "details": [
+     "cravate",
+     "lunettes_soleil"
+    ],
+    "chapeau": null,
+    "cheveux": "court_texture",
+    "c_cheveux": "roux"
    },
    "envoyee": {
-    "haut": "robe",
+    "haut": "blouse",
     "c_haut": "rose",
-    "motif": "uni",
-    "bas": "null",
+    "motif": "fleurs",
+    "bas": "jupe",
     "chaussures": "ballerines",
     "details": [
-     "boucles_oreilles",
-     "collier"
+     "bracelets",
+     "boucles_oreilles"
     ],
     "chapeau": null,
     "cheveux": "long",
-    "c_cheveux": "châtain"
+    "c_cheveux": "blond"
    }
   }
  },
  "doublage": {
-  "piste": "/tmp/tmpwn6ywwfv/piste.wav",
-  "duree": 62.21,
-  "source": "https://www.tiktok.com/@charly.bse/video/7641499602822237473",
-  "auteur": "charly.bse",
-  "contexte": "Une scène humoristique et tendue dans une cuisine où trois amis discutent d'une trahison amoureuse. Robin (presentateur) avoue avoir trompé son ami avec son pote Enzo, déclenchant une dispute entre les trois.",
+  "piste": "/tmp/tmpql30gkz9/piste.wav",
+  "duree": 61.7,
+  "source": "https://www.tiktok.com/@yan_animation0/video/7689561227600678176",
+  "auteur": "yan_animation0",
+  "contexte": "Un quiz historique animé dans un décor de classe, où un présentateur et deux invités s'affrontent sur leurs connaissances en dates clés. L'ambiance est compétitive mais légère, avec des réactions exagérées pour l'humour.",
   "evenements": [],
   "visuel": {
    "gestes": [
     [
-     46.0,
-     0.49,
+     24.0,
+     0.45,
      1.0
     ],
     [
-     50.0,
-     0.49,
+     25.0,
+     0.15,
      1.0
+    ],
+    [
+     26.0,
+     0.45,
+     1.0
+    ],
+    [
+     27.0,
+     0.13,
+     1.0
+    ],
+    [
+     28.0,
+     0.45,
+     1.0
+    ],
+    [
+     29.0,
+     0.12,
+     1.0
+    ],
+    [
+     30.0,
+     0.44,
+     1.0
+    ],
+    [
+     31.0,
+     0.09,
+     1.0
+    ],
+    [
+     42.5,
+     0.47,
+     0.97
     ]
    ],
-   "duree": 62.5,
-   "nb_plans": 30,
-   "duree_plan": 2.08,
+   "duree": 62.0,
+   "nb_plans": 24,
+   "duree_plan": 2.58,
    "coupes": [
-    1.5,
     2.0,
-    4.5,
-    6.0,
-    8.5,
-    9.5,
+    5.0,
     10.5,
-    12.0,
-    14.0,
+    11.5,
+    13.0,
     15.0,
-    16.0,
-    18.0,
-    20.5,
-    24.5,
-    26.5,
-    30.0,
-    32.0,
+    18.5,
+    19.5,
+    21.5,
+    22.0,
+    23.0,
     33.0,
-    34.0,
-    36.0,
+    36.5,
     37.0,
-    41.5,
-    44.0,
+    42.0,
     47.0,
-    48.0,
+    47.5,
+    48.5,
     51.5,
-    53.5,
-    56.5,
-    60.5
+    52.0,
+    55.5,
+    58.0,
+    61.0
    ],
    "plans": {
     "tres_serre": 0.0,
-    "serre": 0.12,
-    "moyen": 0.0,
-    "large": 0.88
+    "serre": 0.202,
+    "moyen": 0.758,
+    "large": 0.04
    },
    "camera": {
-    "fixe": 0.779,
-    "avance": 0.189,
-    "recul": 0.0,
+    "fixe": 0.53,
+    "avance": 0.07,
+    "recul": 0.06,
     "travelling": 0.0,
-    "epaule": 0.032
+    "epaule": 0.34
    },
-   "nb_personnes": 1,
+   "nb_personnes": 3,
    "personnes": [
     {
      "place": "centre",
-     "presence": 0.12,
+     "presence": 0.944,
      "habit": [
-      201,
-      173,
-      114
+      58,
+      52,
+      49
      ],
      "cheveux": [
-      164,
-      123,
-      68
+      219,
+      161,
+      108
      ],
-     "sourire": 0.333,
-     "taille": 0.255,
-     "tete_penchee": 6.0,
+     "sourire": 0.0,
+     "taille": 0.139,
+     "tete_penchee": 1.1,
+     "regard_cote": 0.0
+    },
+    {
+     "place": "droite",
+     "presence": 0.387,
+     "habit": [
+      177,
+      135,
+      61
+     ],
+     "cheveux": [
+      209,
+      151,
+      98
+     ],
+     "sourire": 0.0,
+     "taille": 0.113,
+     "tete_penchee": 1.1,
+     "regard_cote": 0.0
+    },
+    {
+     "place": "gauche",
+     "presence": 0.323,
+     "habit": [
+      134,
+      77,
+      59
+     ],
+     "cheveux": [
+      32,
+      30,
+      27
+     ],
+     "sourire": 0.0,
+     "taille": 0.102,
+     "tete_penchee": 1.3,
      "regard_cote": 0.0
     }
    ],
    "visages": true,
-   "sourires": 0.333,
-   "energie": 0.281,
+   "sourires": 0.0,
+   "energie": 0.486,
    "mur": [
-    217,
-    190,
-    135
+    236,
+    228,
+    214
    ],
    "palette": [
     [
-     222,
-     191,
-     133,
-     0.343
+     237,
+     229,
+     215,
+     0.396
     ],
     [
-     145,
-     106,
-     60,
-     0.314
+     80,
+     65,
+     58,
+     0.14
     ],
     [
-     29,
-     30,
-     22,
-     0.149
+     92,
+     128,
+     117,
+     0.135
     ],
     [
-     178,
-     170,
-     97,
+     197,
+     152,
+     114,
      0.117
     ],
     [
-     174,
-     221,
-     233,
-     0.055
+     40,
+     36,
+     34,
+     0.114
     ],
     [
-     18,
-     114,
-     199,
-     0.022
+     131,
+     92,
+     62,
+     0.098
     ]
    ],
    "lumiere": {
-    "luminosite": 168.6,
-    "chaleur": 60.4,
-    "saturation": 131.9
+    "luminosite": 164.2,
+    "chaleur": 26.0,
+    "saturation": 61.5
    },
-   "moment": "jour"
+   "moment": "soir"
   },
   "audio": {
-   "duree": 62.2,
-   "nb_voix": 3,
+   "duree": 61.7,
+   "nb_voix": 2,
    "voix": [
     {
-     "hz": 294,
-     "genre": "f",
-     "part": 0.18
+     "hz": 120,
+     "genre": "h",
+     "part": 0.72
     },
     {
-     "hz": 220,
+     "hz": 242,
      "genre": "f",
-     "part": 0.25
-    },
-    {
-     "hz": 245,
-     "genre": "f",
-     "part": 0.57
+     "part": 0.28
     }
    ],
-   "debit": 3.86,
-   "blanc_moyen": 0.66,
-   "coupes": 4,
-   "dynamique_db": 25.8,
-   "cris": 0.009,
+   "debit": 2.38,
+   "blanc_moyen": 1.96,
+   "coupes": 2,
+   "dynamique_db": 10.2,
+   "cris": 0.053,
    "musique": null,
    "impacts": 0,
    "impacts_10s": 0.0,
@@ -451,17 +424,17 @@
    "sur_vanne": 0,
    "evenements": {},
    "emotions": {
-    "'[whispering": 2,
-    "\"[embarrassed": 1,
-    "'[shocked": 1,
-    "\"[apologetic": 1,
-    "\"[confused": 1,
-    "'[sarcastic": 1,
-    "'[triumphant": 1,
-    "\"[angry": 1
+    "énumère": 3,
+    "corrige": 2,
+    "confident": 1,
+    "sceptique": 1,
+    "réfléchit": 1,
+    "sûr": 1,
+    "ironique": 1,
+    "urgent": 1
    }
   },
-  "video_origine": "/tmp/tmpwn6ywwfv/src.mp4"
+  "video_origine": "/tmp/tmpql30gkz9/src.mp4"
  },
  "fiche": {
   "note": 0,
@@ -475,17 +448,7 @@
      2,
      3,
      4,
-     5
-    ],
-    "lieu": "",
-    "son": "",
-    "duree": 0.0,
-    "decor": "cuisine, table en bois avec une tasse de café, un téléphone portable, des placards marron et une fenêtre avec vue sur une maison",
-    "titre": "Confession"
-   },
-   {
-    "scene": "2",
-    "repliques": [
+     5,
      6,
      7,
      8,
@@ -497,65 +460,35 @@
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "cuisine, même décor avec une bouteille de vin à moitié vide et un verre sale sur le comptoir",
-    "titre": "Dispute"
-   },
-   {
-    "scene": "3",
-    "repliques": [
-     13,
-     14,
-     15,
-     16,
-     17,
-     18,
-     19,
-     20
-    ],
-    "lieu": "",
-    "son": "",
-    "duree": 0.0,
-    "decor": "cuisine, même décor avec un croissant sur la table et une lettre ouverte",
-    "titre": "Réconciliation"
+    "decor": "classe avec tableau noir, chaises en bois, cartes historiques, horloge murale, affiches de dates clés, craie, globe terrestre.",
+    "titre": "Quiz Historique : Qui a raison ?"
    }
   ]
  },
  "_monte": true,
  "_voix_hz": {
-  "presentateur": 223,
-  "invite": 251,
-  "envoyee": 276
+  "presentateur": 125,
+  "envoyee": 329
  },
  "_voix_genre": {
-  "presentateur": "f",
+  "presentateur": "h",
   "envoyee": "f"
  },
  "realisation": {
   "moment": "soir",
   "lieux": [
-   "cuisine",
-   "cuisine",
-   "cuisine"
+   "classe"
   ],
   "gags": [],
   "ambiances": [
-   "poussiere",
-   "vapeur"
+   "poussiere"
   ],
   "source": "auteur+image",
   "tenues": {
-   "presentateur": "tshirt",
-   "invite": "chemise",
-   "envoyee": "robe"
+   "presentateur": "costume",
+   "envoyee": "blouse"
   },
   "plans": [
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
    "large/fixe",
    "large/fixe",
    "large/fixe",
