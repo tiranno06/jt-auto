@@ -1,125 +1,374 @@
 {
- "titre": "MYSTÈRE ST' 501",
- "sujet": "MYSTÈRE ST' 501",
- "ecran": "MYSTÈRE ST' 50",
+ "titre": "AGRICULTURE ET ÉTHIQUE",
+ "sujet": "AGRICULTURE ET ÉTHIQUE",
+ "ecran": "AGRICULTURE ET",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "POV : Vous êtes le présentateur d'une émission",
- "question": "Que cache vraiment le sous-titre 'ST’ 501' ?",
+ "titre_accroche": "POV : Vous labouriez un champ",
+ "question": "Et vous, seriez-vous prêt à renoncer à certains aliments pour sauver des vies animales ?",
  "running_gag": "",
  "verite": "",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "Sous -titrage ST' 501 Sous -titrage ST' 501",
+   "t": "On est là pour protester contre l'existence d'une police financée par notre État qui protège l'élevage intensif et le massacre de millions d'animaux innocents chaque année.",
    "_deb": 0.0,
-   "_fin": 50.7,
+   "_fin": 9.3,
+   "d": "[indigné] On est là pour protester contre l'existence d'une police financée par notre État qui protège l'élevage intensif et le massacre de millions d'animaux innocents [souligné] chaque année.",
+   "objet": "micro"
+  },
+  {
+   "p": "presentateur",
+   "t": "chaque année.",
+   "_deb": 9.3,
+   "_fin": 10.12
+  },
+  {
+   "p": "invite",
+   "t": "Vous savez labourer un champ?",
+   "_deb": 10.88,
+   "_fin": 12.66
+  },
+  {
+   "p": "invite",
+   "t": "C 'est nécessaire pour planter votre quinoa, votre sorgho et tous les trucs que vous mangez.",
+   "_deb": 13.62,
+   "_fin": 17.86
+  },
+  {
+   "p": "invite",
+   "t": "Et ce qui se passe, c 'est que ça tue tous les animaux qui vivent dans le champ.",
+   "_deb": 18.26,
+   "_fin": 21.4
+  },
+  {
+   "p": "invite",
+   "t": "Toutes les taupes, les grenouilles, les serpents, les vers, les mulots.",
+   "_deb": 21.82,
+   "_fin": 25.48
+  },
+  {
+   "p": "invite",
+   "t": "Il n 'en reste plus un. Le véritable problème, d 'après moi, c 'est que si une bête n 'est pas assez mignonne à vos yeux, vous n",
+   "_deb": 26.18,
+   "_fin": 35.2,
+   "objet": "billet"
+  },
+  {
+   "p": "invite",
+   "t": "'en avez rien à foutre qu 'elle crève pour vous nourrir.",
+   "_deb": 35.2,
+   "_fin": 37.76,
    "chute": true
   }
  ],
  "bandeau": [],
  "gag": null,
- "legende": "Un présentateur intrigue son public avec des sous-titres énigmatiques.",
+ "legende": "Débat choc sur les conséquences cachées de l'agriculture industrielle.",
  "hashtags": [
   "petitsdramas",
-  "mystere",
-  "emissionsecrete",
-  "futuriste",
-  "animateur",
-  "enigme",
-  "st501"
+  "agriculture",
+  "ethique",
+  "environnement",
+  "protestation",
+  "animaux",
+  "ecologie"
  ],
  "sources": [
-  "https://www.tiktok.com/@vincedessine/video/7624637700171189526"
+  "https://www.tiktok.com/@vincedessine/video/7677869320864566561"
  ],
  "decoupage": [
   {
    "scene": "1",
    "repliques": [
-    0
+    0,
+    1
    ],
    "lieu": "",
    "son": "",
    "duree": 0.0,
-   "decor": "studio futuriste avec écrans géants et boutons lumineux, un pupitre de présentation high-tech",
-   "titre": "ÉMISSION MYSTÈRE"
+   "decor": "ferme abandonnée avec des outils agricoles abandonnés et des affiches protestataires",
+   "titre": "La Réalité de l'Agriculture"
+  },
+  {
+   "scene": "2",
+   "repliques": [
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lieu": "",
+   "son": "",
+   "duree": 0.0,
+   "decor": "champ labouré avec des animaux en peluche éparpillés et des panneaux 'STOP' plantés dans la terre",
+   "titre": "Le Coût Caché"
   }
  ],
  "studio": {
-  "moment": "soir",
+  "moment": "jour",
   "lieux": [
-   "studio"
+   "ferme_abandonnee",
+   "champ_labouré"
   ],
   "costumes": {
    "presentateur": {
     "haut": "chemise",
-    "c_haut": "bleu",
-    "motif": "rayures",
+    "c_haut": "bleu marine",
+    "motif": "uni",
     "bas": "pantalon",
-    "chaussures": "baskets",
+    "chaussures": "ville",
     "details": [
      "cravate",
      "lunettes_soleil",
-     "montre"
-    ],
-    "chapeau": null
+     "barbe_courte"
+    ]
+   },
+   "invite": {
+    "haut": "tshirt",
+    "c_haut": "vert",
+    "motif": "uni",
+    "bas": "jeans",
+    "chaussures": "baskets",
+    "details": [
+     "barbe_pleine",
+     "bracelets"
+    ]
    }
   },
   "personnages": {
    "presentateur": {
     "genre": "h",
-    "age": 45,
+    "age": 40,
     "taille": 1,
     "corpulence": 0.7,
     "cheveux": "court_texture",
-    "c_cheveux": "noir",
+    "c_cheveux": "brun",
     "barbe": "trois_jours"
+   },
+   "invite": {
+    "genre": "h",
+    "age": 35,
+    "taille": 1,
+    "corpulence": 0.8,
+    "cheveux": "long",
+    "c_cheveux": "roux",
+    "barbe": "bouc"
    }
   },
   "gags": [
-   "Affiche : 'Accès interdit sans badge ST’ 501'",
-   "Tableau noir : 'Énigme du jour : Qui êtes-vous ?'",
-   "Post-it sur le pupitre : 'Ne pas appuyer sur le bouton rouge'"
+   "Affiche : 'Mangez des carottes, pas des mulots !'",
+   "Panneau : 'Labourer = Massacrer'",
+   "Post-it sur une charrue : 'Attention : Animaux invisibles'"
   ],
   "ambiances": [
-   "neon"
+   "poussiere"
   ],
   "cadence": "rapide",
   "plans": [
    {
     "replique": 0,
+    "plan": "large",
+    "mouvement": "fixe",
+    "geste": "bras_ouverts",
+    "reaction": "aucune"
+   },
+   {
+    "replique": 1,
     "plan": "serre",
     "mouvement": "zoom_choc",
     "geste": "pointe_d",
-    "reaction": "aucune"
+    "reaction": "choc"
+   },
+   {
+    "replique": 2,
+    "plan": "moyen",
+    "mouvement": "fixe",
+    "geste": "gratte_tete",
+    "reaction": "sceptique"
+   },
+   {
+    "replique": 3,
+    "plan": "serre",
+    "mouvement": "avance",
+    "geste": "poing",
+    "reaction": "colere"
+   },
+   {
+    "replique": 4,
+    "plan": "tres_serre",
+    "mouvement": "fixe",
+    "geste": "enumere",
+    "reaction": "regard_camera"
+   },
+   {
+    "replique": 5,
+    "plan": "contre_plongee",
+    "mouvement": "fixe",
+    "geste": "pointe_g",
+    "reaction": "choc"
+   },
+   {
+    "replique": 6,
+    "plan": "large",
+    "mouvement": "recul",
+    "geste": "mains_hanches",
+    "reaction": "colere"
    }
-  ]
+  ],
+  "objets": [
+   {
+    "replique": 0,
+    "objet": "micro"
+   },
+   {
+    "replique": 2,
+    "objet": "clés"
+   },
+   {
+    "replique": 6,
+    "objet": "billet"
+   }
+  ],
+  "decors_vus": {
+   "presentateur": "ferme abandonnée avec des outils agricoles rouillés, une affiche 'STOP' déchirée, une chaise en bois et des bouteilles vides, lumière naturelle",
+   "invite": "champ labouré avec des animaux en peluche éparpillés, des panneaux 'STOP' plantés, une charrue rouillée et des traces de pas, lumière du jour"
+  }
  },
  "doublage": {
-  "piste": "/tmp/tmp2axksgxi/piste.wav",
-  "duree": 55.46,
-  "source": "https://www.tiktok.com/@vincedessine/video/7624637700171189526",
+  "piste": "/tmp/tmpjqmx4i_o/piste.wav",
+  "duree": 38.85,
+  "source": "https://www.tiktok.com/@vincedessine/video/7677869320864566561",
   "auteur": "vincedessine",
-  "contexte": "Un présentateur excentrique et enthousiaste anime une émission surréaliste dans un décor futuriste et coloré. Il semble s'adresser à un public imaginaire ou à des invités invisibles, répétant une phrase mystérieuse liée à un sous-titre codé ('ST’ 501').",
+  "contexte": "Un débat animé devant un public engagé, dans un lieu symbolique comme une ferme abandonnée transformée en espace de protestation. Les personnages discutent de l'impact de l'élevage intensif et de l'agriculture industrielle sur les animaux et l'environnement.",
   "evenements": [],
-  "visuel": {},
-  "audio": {
-   "duree": 55.5,
-   "nb_voix": 1,
-   "voix": [
+  "visuel": {
+   "gestes": [
+    [
+     24.64,
+     0.66,
+     1.0
+    ],
+    [
+     38.22,
+     0.66,
+     1.0
+    ]
+   ],
+   "duree": 39.2,
+   "nb_plans": 1,
+   "duree_plan": 39.23,
+   "coupes": [],
+   "plans": {
+    "tres_serre": 0.0,
+    "serre": 0.0,
+    "moyen": 0.179,
+    "large": 0.821
+   },
+   "camera": {
+    "fixe": 0.883,
+    "avance": 0.039,
+    "recul": 0.065,
+    "travelling": 0.0,
+    "epaule": 0.013
+   },
+   "nb_personnes": 1,
+   "personnes": [
     {
-     "hz": 242,
-     "genre": "f",
-     "part": 1.0
+     "place": "droite",
+     "presence": 0.179,
+     "habit": [
+      51,
+      54,
+      52
+     ],
+     "cheveux": [
+      42,
+      113,
+      74
+     ],
+     "sourire": 0.0,
+     "taille": 0.134,
+     "tete_penchee": 0.5,
+     "regard_cote": 1.0
     }
    ],
-   "debit": 0.16,
-   "blanc_moyen": 0.0,
+   "visages": true,
+   "sourires": 0.0,
+   "energie": 0.518,
+   "mur": [
+    251,
+    251,
+    250
+   ],
+   "palette": [
+    [
+     251,
+     251,
+     250,
+     0.771
+    ],
+    [
+     65,
+     62,
+     63,
+     0.079
+    ],
+    [
+     193,
+     167,
+     145,
+     0.063
+    ],
+    [
+     12,
+     9,
+     9,
+     0.051
+    ],
+    [
+     79,
+     117,
+     111,
+     0.027
+    ],
+    [
+     234,
+     132,
+     21,
+     0.008
+    ]
+   ],
+   "lumiere": {
+    "luminosite": 218.0,
+    "chaleur": 5.1,
+    "saturation": 23.2
+   },
+   "moment": "jour"
+  },
+  "audio": {
+   "duree": 38.8,
+   "nb_voix": 2,
+   "voix": [
+    {
+     "hz": null,
+     "genre": null,
+     "part": 0.29
+    },
+    {
+     "hz": 129,
+     "genre": "h",
+     "part": 0.71
+    }
+   ],
+   "debit": 3.45,
+   "blanc_moyen": 0.65,
    "coupes": 0,
-   "dynamique_db": 12.0,
-   "cris": 0.007,
+   "dynamique_db": 19.7,
+   "cris": 0.021,
    "musique": null,
    "impacts": 0,
    "impacts_10s": 0.0,
@@ -128,10 +377,16 @@
    "sur_vanne": 0,
    "evenements": {},
    "emotions": {
-    "excited_whisper": 1
+    "indigné": 1,
+    "souligné": 1,
+    "sarcastique": 1,
+    "neutre": 1,
+    "colérique": 1,
+    "énumérant": 1,
+    "furieux": 1
    }
   },
-  "video_origine": "/tmp/tmp2axksgxi/src.mp3"
+  "video_origine": "/tmp/tmpjqmx4i_o/src.mp4"
  },
  "fiche": {
   "note": 0,
@@ -140,40 +395,69 @@
    {
     "scene": "1",
     "repliques": [
-     0
+     0,
+     1
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "studio futuriste avec écrans géants et boutons lumineux, un pupitre de présentation high-tech",
-    "titre": "ÉMISSION MYSTÈRE"
+    "decor": "ferme abandonnée avec des outils agricoles abandonnés et des affiches protestataires",
+    "titre": "La Réalité de l'Agriculture"
+   },
+   {
+    "scene": "2",
+    "repliques": [
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 0.0,
+    "decor": "champ labouré avec des animaux en peluche éparpillés et des panneaux 'STOP' plantés dans la terre",
+    "titre": "Le Coût Caché"
    }
   ]
  },
  "_monte": true,
  "_voix_hz": {
-  "presentateur": 294
+  "presentateur": 245,
+  "invite": 115
  },
  "_voix_genre": {
-  "presentateur": "f"
+  "presentateur": "f",
+  "invite": "h"
  },
  "realisation": {
-  "moment": "soir",
+  "moment": "jour",
   "lieux": [
+   "bar",
    "bar"
   ],
   "gags": [
-   "Tableau noir : 'Énigme du jour : Qui êtes-vous ?'"
+   "Affiche : 'Mangez des carottes, pas des mulots !'",
+   "Panneau : 'Labourer = Massacrer'",
+   "Post-it sur une charrue : 'Attention : Animaux invisibles'"
   ],
   "ambiances": [
    "neon",
    "poussiere"
   ],
-  "source": "auteur",
+  "source": "auteur+image",
   "tenues": {
-   "presentateur": "chemise"
+   "presentateur": "chemise",
+   "invite": "tshirt"
   },
   "plans": [
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
    "large/fixe"
   ]
  }

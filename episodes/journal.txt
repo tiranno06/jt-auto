@@ -2,13 +2,14 @@ Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, ElevenLabs epuise — IA utilisée : mistral
 Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @motiontoonz, @same_same53, @charly.bse, @kodanimation, @vignianimation, @vincedessine
-Profil TikTok @vincedessine : 33 vidéo(s) jamais utilisée(s)
-Profil TikTok @yan_animation0 : 29 vidéo(s) jamais utilisée(s)
+Profil TikTok @vincedessine : 32 vidéo(s) jamais utilisée(s)
 Profil TikTok @eliotlehanneur : 35 vidéo(s) jamais utilisée(s)
-Vidéo depuis TikTok : https://www.tiktok.com/@vincedessine/video/7624637700171189526
+Profil TikTok @charly.bse : 35 vidéo(s) jamais utilisée(s)
+Vidéo depuis TikTok : https://www.tiktok.com/@vincedessine/video/7677869320864566561
   son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 55.5 s, compte d'origine @vincedessine
-  image de la vidéo : image de la vidéo non analysée
+  son récupéré : 38.8 s, compte d'origine @vincedessine
+[ WARN:0@14.312] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  image de la vidéo : 1 plans (≈ 39.23 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 17 %, large 82 % ; caméra : fixe 88 %, avance 3 %, recul 6 %, epaule 1 % ; 1 personne(s) à l'écran : droite (habit [51, 54, 52], cheveux [42, 113, 74], sourit 0 %) ; agitation 0.518 ; lumière jour ; fond [251, 251, 250]
   isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
   transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/core/io.py:48: UserWarning: 
@@ -18,30 +19,38 @@ torchcodec is not installed correctly so built-in audio decoding will fail. Solu
 
 Could not load this library: /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/torchcodec/libtorchcodec_image.so
   warnings.warn(
-[0;93m2026-10-26 05:13:31.593705405 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
-  1 répliques, voix : {'speaker_0': 242}
-  son de la vidéo : 1 voix [242 Hz (f, 100 %)], 0.16 mots/s, blancs 0.0 s, 0 coupure(s) de parole, dynamique 12.0 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
-  scène reconstituée : Un présentateur excentrique et enthousiaste anime une émission surréaliste dans un décor futuriste et coloré. Il semble s'adresser à un public imaginaire ou à des invités invisibles, répétant une phrase mystérieuse liée à un sous-titre codé ('ST’ 501').
-  casting : speaker_0 → Jojo
-Sketch : « MYSTÈRE ST' 501 », 1 répliques
-  décor 0 : studio futuriste avec écrans géants et boutons lumineux, un pupitre de
-montage : 1 plans (0.0:large>pre/coupe)
-studio : soir, lieux ['bar'], tenues presentateur=chemise, 2 figurant(s), ambiances ['neon', 'poussiere'] ; plans large/fixe
-cartoon : durée 57.1 s, 1 répliques, 1 scène(s), personnages ['presentateur']
-montage : 1 plans (0.0:large>pre/coupe)
-studio : soir, lieux ['bar'], tenues presentateur=chemise, 2 figurant(s), ambiances ['neon', 'poussiere'] ; plans large/fixe
-cartoon : durée 57.1 s, 1 répliques, 1 scène(s), personnages ['presentateur']
-  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~857 images)
-  morceau 1714–2571 reçu d'une machine d'aide
-  morceau 2571–3428 reçu d'une machine d'aide
-  morceau 857–1714 reçu d'une machine d'aide
-  dessin partagé terminé en 3.7 min
+[0;93m2026-10-26 05:27:25.787673467 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1913.)
+  std = sequences.std(dim=-1, correction=1)
+  voix séparées par pyannote : 2 voix, 8 tours de parole
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+  8 répliques, voix : {'speaker_0': None, 'speaker_1': 129}
+  son de la vidéo : 2 voix [None Hz (?, 28 %), 129 Hz (h, 71 %)], 3.45 mots/s, blancs 0.65 s, 0 coupure(s) de parole, dynamique 19.7 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
+  IA gemini indisponible (gemini 429 : [{
+  "error": {
+    "code": 429,
+    "message": "You exceeded your current quota, please check your plan an) : on passe à la suivante
+  scène reconstituée : Un débat animé devant un public engagé, dans un lieu symbolique comme une ferme abandonnée transformée en espace de protestation. Les personnages discutent de l'impact de l'élevage intensif et de l'agriculture industrielle sur les animaux et l'environnement.
+  casting : speaker_0 → Jojo, speaker_1 → Kévin
+  sous-titres : 1 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
+Sketch : « AGRICULTURE ET ÉTHIQUE », 8 répliques
+  décor 0 : ferme abandonnée avec des outils agricoles abandonnés et des affiches 
+  décor 1 : champ labouré avec des animaux en peluche éparpillés et des panneaux '
+montage : 2 plans (0.0:large>pre/coupe 10.9:large>inv/coupe)
+studio : jour, lieux ['bar', 'bar'], tenues presentateur=chemise, invite=tshirt, 4 figurant(s), ambiances ['neon', 'poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 41.4 s, 8 répliques, 2 scène(s), personnages ['presentateur', 'invite']
+montage : 2 plans (0.0:large>pre/coupe 10.9:large>inv/coupe)
+studio : jour, lieux ['bar', 'bar'], tenues presentateur=chemise, invite=tshirt, 4 figurant(s), ambiances ['neon', 'poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 41.4 s, 8 répliques, 2 scène(s), personnages ['presentateur', 'invite']
+  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~620 images)
+  morceau 1861–2481 reçu d'une machine d'aide
+  morceau 620–1240 reçu d'une machine d'aide
+  morceau 1240–1861 reçu d'une machine d'aide
+  dessin partagé terminé en 3.0 min
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-  IA gemini indisponible (The read operation timed out) : on passe à la suivante
-Jury qualité (ia) : 5.9/10 — Humoriste 6.0/10 : 0.4 s La chute n'est pas assez marquée et manque d'un zoom choc pour capter l'attention. Le gag pourrait être renforcé par une réaction plus exagérée du personnage.; 25.4 s Les vannes manquent de réactions spontanées des personnages secondaires, ce qui affaiblit l'humour.; 56.5 s La chute finale n'est pas assez surprenante et manque d'un bruitage marquant pour renforcer l'effet comique. | Réalisateur 5.0/10 : 0 s Montage trop lent avec seulement 0.2 plans toutes les 10 secondes. Le rythme est peu dynamique et manque de variété.; 25.4 s Le personnage principal n'est pas toujours bien cadré, notamment en plan serré, ce qui nuit à la clarté du message.; 56.5 s Faux raccord visible entre les images 2 et 3, ce qui rompt l'immersion. | Directeur artistique 7.0/10 : 0 s Les personnages secondaires manquent de détails distinctifs, ce qui les rend interchangeables.; 56.5 s Le d
-Manque par rapport à la vidéo d'origine : Réactions spontanées des personnages secondaires en temps réel (ex : rires, scepticisme). ; Bruitages de fond adaptés à l'ambiance (ex : criquets, musique légère). ; Zoom choc sur la chute finale pour renforcer l'impact comique. ; Cohérence visuelle entre les décors des différentes images. ; Personnages secondaires avec des détails distinctifs (ex : expressions faciales, tenues variées).
+Jury qualité (ia) : 5.8/10 — Humoriste 6.0/10 : 0.4 s La chute finale manque de punch. La chute à 36.5 s est trop longue et manque d'un zoom choc pour marquer les esprits.; 40.8 s ; 9.7 s Les vannes pourraient être plus percutantes avec des réactions visuelles plus marquées. | Réalisateur 5.0/10 : 0 s Montage trop lent. Il faudrait environ 3.5 plans toutes les 10 secondes pour maintenir le rythme.; 15.8 s ; 23.7 s Les transitions entre les plans pourraient être plus dynamiques pour éviter les faux raccords. | Directeur artistique 7.0/10 : 0 s Les personnages manquent de cohérence avec l'univers du bar. Les tenues et les décors doivent refléter l'ambiance satirique et humoristique.; ; 11.8 s Les personnages secondaires (figurants) pourraient être plus expressifs pour renforcer le gag. | Ingénieur du son 6.0/10 : 0 s Les blancs dans la voix pourraient être comblés par des bruitages légers pour éviter les silences gêna
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
 Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = mistral ×2, voix = tiktok, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 12851, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 26}
-Quota de l'API GitHub : 4978 appels restants
-OK : sortie/2026-10-26_06h13_emission.mp4 (57 s)
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 21229, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 33}
+Quota de l'API GitHub : 4923 appels restants
+OK : sortie/2026-10-26_06h28_emission.mp4 (41 s)
