@@ -2,14 +2,14 @@ Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, ElevenLabs epuise — IA utilisée : mistral
 Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @motiontoonz, @same_same53, @charly.bse, @kodanimation, @vignianimation, @vincedessine
-Profil TikTok @charly.bse : 32 vidéo(s) jamais utilisée(s)
+Profil TikTok @vincedessine : 32 vidéo(s) jamais utilisée(s)
 Profil TikTok @kodanimation : 22 vidéo(s) jamais utilisée(s)
-Profil TikTok @eliotlehanneur : 33 vidéo(s) jamais utilisée(s)
-Vidéo depuis TikTok : https://www.tiktok.com/@charly.bse/video/7647875288214342944
+Profil TikTok @yan_animation0 : 26 vidéo(s) jamais utilisée(s)
+Vidéo depuis TikTok : https://www.tiktok.com/@vincedessine/video/7688877142532312353
   son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 65.3 s, compte d'origine @charly.bse
-[ WARN:0@47.121] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
-  image de la vidéo : 22 plans (≈ 2.98 s chacun) ; cadrages : très serré 0 %, serré 20 %, moyen 0 %, large 79 % ; caméra : fixe 87 %, avance 10 %, recul 1 %, epaule 0 % ; 1 personne(s) à l'écran : centre (habit [211, 182, 125], cheveux [169, 127, 75], sourit 25 %) ; agitation 0.258 ; lumière jour ; fond [217, 189, 135]
+  son récupéré : 87.6 s, compte d'origine @vincedessine
+[ WARN:0@30.717] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  image de la vidéo : 20 plans (≈ 4.4 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 0 %, large 100 % ; caméra : fixe 99 %, recul 0 % ; 0 personne(s) à l'écran : aucun visage repéré ; agitation 0.027 ; lumière jour ; fond [251, 250, 249]
   isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
   transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/core/io.py:48: UserWarning: 
@@ -19,57 +19,40 @@ torchcodec is not installed correctly so built-in audio decoding will fail. Solu
 
 Could not load this library: /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/torchcodec/libtorchcodec_image.so
   warnings.warn(
-[0;93m2026-10-26 14:40:48.606786297 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[0;93m2026-10-26 17:05:10.559488009 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1913.)
   std = sequences.std(dim=-1, correction=1)
-  voix séparées par pyannote : 2 voix, 18 tours de parole
+  voix séparées par pyannote : 2 voix, 13 tours de parole
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-  voix re-séparées par leur empreinte (ECAPA) : 2 voix (netteté 0.12)
-  voix vérifiées mot par mot : 25 mot(s) remis sur la bonne voix
-  21 répliques, voix : {'speaker_0': 136, 'speaker_1': 210}
-  son de la vidéo : 2 voix [136 Hz (h, 28 %), 210 Hz (f, 72 %)], 4.84 mots/s, blancs 0.19 s, 5 coupure(s) de parole, dynamique 25.4 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
+  voix vérifiées mot par mot : 4 mot(s) remis sur la bonne voix
+  14 répliques, voix : {'speaker_0': 253, 'speaker_1': 131}
+  son de la vidéo : 2 voix [253 Hz (f, 5 %), 131 Hz (h, 95 %)], 3.28 mots/s, blancs 0.68 s, 0 coupure(s) de parole, dynamique 21.9 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
   IA gemini indisponible (gemini 429 : [{
   "error": {
     "code": 429,
     "message": "You exceeded your current quota, please check your plan an) : on passe à la suivante
-  scène reconstituée : Deux amis discutent dans une cuisine moderne après une dispute dans la rue. L'un raconte son expérience avec un policier et ses difficultés à insulter correctement.
+  scène reconstituée : Une discussion animée entre un présentateur et un invité dans un salon littéraire ou une émission culturelle. L'invité, passionné, parle de son livre et de son impact émotionnel et social, évoquant des thèmes universels comme l'immigration et la poésie.
   casting : speaker_0 → Jojo, speaker_1 → Kévin
-  sous-titres : 15 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
-  voix trop proches dans https://www.tiktok.com/@charly.bse/video/7647875288214342944 (ressemblance 0.69) : on cherche une vidéo aux voix bien différentes
-Vidéo depuis TikTok : https://www.tiktok.com/@charly.bse/video/7652247984586919201
-  son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 60.3 s, compte d'origine @charly.bse
-[ WARN:0@298.482] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
-  image de la vidéo : 1 plans (≈ 60.5 s chacun) ; cadrages : très serré 2 %, serré 2 %, moyen 0 %, large 95 % ; caméra : fixe 100 % ; 1 personne(s) à l'écran : aucun visage repéré ; agitation 0.094 ; lumière jour ; fond [231, 204, 171]
-  isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
-  transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
-/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1913.)
-  std = sequences.std(dim=-1, correction=1)
-  voix séparées par pyannote : 2 voix, 23 tours de parole
-  voix trop proches : répliques réparties d'après le fil du dialogue (questions, réponses)
-  6 répliques, voix : {'speaker_0': 151, 'speaker_1': None}
-  son de la vidéo : 2 voix [151 Hz (h, 94 %), None Hz (?, 6 %)], 1.02 mots/s, blancs 6.48 s, 0 coupure(s) de parole, dynamique 28.3 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
-  scène reconstituée : Deux amis, un présentateur enthousiaste et une envoyée sceptique, discutent dans un salon cosy d'un sujet qui semble les opposer, probablement une rupture ou une séparation ('adieu au couple'). Le ton est léger mais tendu, avec des sous-entendus humoristiques.
-  casting : speaker_0 → Jojo, speaker_1 → Lila
-  sous-titres : 5 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
-Sketch : « DÉNIGREMENT ET RUPTURE », 6 répliques
-  décor 0 (lieu ressemblant de la banque, budget Modal du mois atteint) : living room with a beige sofa, a coffee table, a lamp, and a
-  décor 1 (lieu ressemblant de la banque, budget Modal du mois atteint) : same living room, but closer to the sofa and coffee table, w
-montage : 4 plans (0.0:large>pre/coupe 39.8:large>env/coupe 52.3:large>pre/coupe 59.0:large>env/coupe)
-studio : soir, lieux ['salon', 'salon'], tenues presentateur=tshirt, envoyee=polo, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 63.4 s, 6 répliques, 2 scène(s), personnages ['presentateur', 'envoyee']
-montage : 4 plans (0.0:large>pre/coupe 39.8:large>env/coupe 52.3:large>pre/coupe 59.0:large>env/coupe)
-studio : soir, lieux ['salon', 'salon'], tenues presentateur=tshirt, envoyee=polo, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 63.4 s, 6 répliques, 2 scène(s), personnages ['presentateur', 'envoyee']
-  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~950 images)
-  morceau 1900–2851 reçu d'une machine d'aide
-  morceau 2851–3801 reçu d'une machine d'aide
-  morceau 950–1900 reçu d'une machine d'aide
-  dessin partagé terminé en 7.7 min
+  sous-titres : 9 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
+Sketch : « LIVRE ET ÉMOTION », 14 répliques
+  décor 1 (lieu ressemblant de la banque, budget Modal du mois atteint) : salon cosy avec des canapés, une table basse avec un livre o
+  décor 0 : bureau avec un fond de livres anciens, une lampe de bureau et un micro
+  décor 2 : salon avec une vue sur une fenêtre ouverte, un livre posé sur une étag
+montage : 3 plans (0.0:large>pre/coupe 4.3:large>inv/coupe 49.3:large>inv/coupe)
+studio : soir, lieux ['bureau', 'salon', 'salon'], tenues presentateur=chemise, invite=pull, 1 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 91.1 s, 14 répliques, 3 scène(s), personnages ['presentateur', 'invite']
+montage : 3 plans (0.0:large>pre/coupe 4.3:large>inv/coupe 49.3:large>inv/coupe)
+studio : soir, lieux ['bureau', 'salon', 'salon'], tenues presentateur=chemise, invite=pull, 1 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 91.1 s, 14 répliques, 3 scène(s), personnages ['presentateur', 'invite']
+  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~1366 images)
+  morceau 1366–2732 reçu d'une machine d'aide
+  morceau 4099–5465 reçu d'une machine d'aide
+  morceau 2732–4099 reçu d'une machine d'aide
+  dessin partagé terminé en 9.5 min
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury qualité (gratuit) : 9.3/10 — Humoriste 8.6/10 : 59.0 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 8.2/10 : montage trop lent : 0.6 plans toutes les 10 s (il en faudrait ~2.8) | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 10.0/10 : 
+Jury qualité (ia) : 7.8/10 — Humoriste 8.6/10 : 84.3 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 8.2/10 : montage trop lent : 0.3 plans toutes les 10 s (il en faudrait ~2.1) | Directeur artistique 10.0/10 :  | Ingénieur du son 5.0/10 : 0.4 s La synchronisation voix/lèvres n'est pas toujours parfaite, surtout pour les répliques rapides.; 25.0 s Manque de bruitages pour renforcer les moments comiques ou dramatiques.; 85.9 s Les blancs sonores sont trop longs et perturbent le rythme. | Spectateur TikTok 6.0/10 : 0.4 s L'accroche dans la première seconde est faible et pourrait être améliorée avec un effet visuel ou sonore.; 67.1 s Moment d'ennui dû à un manque d'action ou de réaction visuelle.; 90.5 s La fin manque de punch et pourrait être plus mémorable avec un effet visuel ou un message percutant.
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = mistral ×3, voix = tiktok, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 26086, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0}
-Quota de l'API GitHub : 4968 appels restants
-OK : sortie/2026-10-26_15h48_emission.mp4 (63 s)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = mistral ×2, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 26985, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 36}
+Quota de l'API GitHub : 4951 appels restants
+OK : sortie/2026-10-26_18h08_emission.mp4 (91 s)
