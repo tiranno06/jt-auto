@@ -1,374 +1,648 @@
 {
- "titre": "AGRICULTURE ET ÉTHIQUE",
- "sujet": "AGRICULTURE ET ÉTHIQUE",
- "ecran": "AGRICULTURE ET",
+ "titre": "HARCÈLEMENT ET PROVISEUR",
+ "sujet": "HARCÈLEMENT ET PROVISEUR",
+ "ecran": "HARCÈLEMENT ET",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "POV : Vous labouriez un champ",
- "question": "Et vous, seriez-vous prêt à renoncer à certains aliments pour sauver des vies animales ?",
+ "titre_accroche": "POV : Quand le proviseur s'en fout royalement",
+ "question": "Vous auriez réagi comment à la place de la mère ?",
  "running_gag": "",
  "verite": "",
  "repliques": [
   {
-   "p": "presentateur",
-   "t": "On est là pour protester contre l'existence d'une police financée par notre État qui protège l'élevage intensif et le massacre de millions d'animaux innocents chaque année.",
+   "p": "envoyee",
+   "t": "Pourquoi mon fils il se retrouve dans la même classe que les mecs qui l'ont harcelé toute l'année dernière ?",
    "_deb": 0.0,
-   "_fin": 9.3,
-   "d": "[indigné] On est là pour protester contre l'existence d'une police financée par notre État qui protège l'élevage intensif et le massacre de millions d'animaux innocents [souligné] chaque année.",
-   "objet": "micro"
+   "_fin": 2.92,
+   "d": "[annoyed] Pourquoi mon fils il se retrouve dans la même classe que les mecs qui l'ont harcelé toute l'année dernière ?"
   },
   {
    "p": "presentateur",
-   "t": "chaque année.",
-   "_deb": 9.3,
-   "_fin": 10.12
+   "t": "Alors, n'y voyez aucun lien, disons que c'est le hasard des choses.",
+   "_deb": 3.08,
+   "_fin": 5.8,
+   "d": "[smug] Alors, n'y voyez aucun lien, disons que c'est le hasard des choses."
   },
   {
-   "p": "invite",
-   "t": "Vous savez labourer un champ?",
-   "_deb": 10.88,
-   "_fin": 12.66
+   "p": "envoyee",
+   "t": "Ok, donc est-ce que par le hasard des choses on peut le changer de classe s'il vous plaît ?",
+   "_deb": 5.82,
+   "_fin": 8.22,
+   "d": "[annoyed] Ok, donc est-ce que par le hasard des choses on peut le changer de classe s'il vous plaît ?"
   },
   {
-   "p": "invite",
-   "t": "C 'est nécessaire pour planter votre quinoa, votre sorgho et tous les trucs que vous mangez.",
-   "_deb": 13.62,
-   "_fin": 17.86
+   "p": "presentateur",
+   "t": "Non, je regrette, mais là c'est trop compliqué, les emplois du temps sont faits, on va pas tout chambouler.",
+   "_deb": 8.26,
+   "_fin": 11.74,
+   "d": "[disdainful] Non, je regrette, mais là c'est trop compliqué, les emplois du temps sont faits, on va pas tout chambouler.",
+   "objet": "stylo"
   },
   {
-   "p": "invite",
-   "t": "Et ce qui se passe, c 'est que ça tue tous les animaux qui vivent dans le champ.",
-   "_deb": 18.26,
-   "_fin": 21.4
+   "p": "envoyee",
+   "t": "Tout chambouler ? Mais on parle d'un enfant qui a peur de retourner en classe.",
+   "_deb": 11.76,
+   "_fin": 14.38,
+   "d": "[furious] Tout chambouler ? Mais on parle d'un enfant qui a peur de retourner en classe !"
   },
   {
-   "p": "invite",
-   "t": "Toutes les taupes, les grenouilles, les serpents, les vers, les mulots.",
-   "_deb": 21.82,
-   "_fin": 25.48
+   "p": "presentateur",
+   "t": "Après, faut pas exagérer non plus, enfin je veux dire, il y a harcèlement et harcèlement.",
+   "_deb": 14.42,
+   "_fin": 17.48,
+   "d": "[condescending] Après, faut pas exagérer non plus, enfin je veux dire, il y a harcèlement et harcèlement."
   },
   {
-   "p": "invite",
-   "t": "Il n 'en reste plus un. Le véritable problème, d 'après moi, c 'est que si une bête n 'est pas assez mignonne à vos yeux, vous n",
-   "_deb": 26.18,
-   "_fin": 35.2,
-   "objet": "billet"
+   "p": "envoyee",
+   "t": "Je vous demande pardon ?",
+   "_deb": 17.54,
+   "_fin": 18.16,
+   "d": "[shocked] Je vous demande pardon ?"
   },
   {
-   "p": "invite",
-   "t": "'en avez rien à foutre qu 'elle crève pour vous nourrir.",
-   "_deb": 35.2,
-   "_fin": 37.76,
+   "p": "presentateur",
+   "t": "Bah oui, c'est-à-dire qu'il faut bien distinguer les chamailleries entre élèves et le harcèlement scolaire, qui sont deux choses bien distinctes.",
+   "_deb": 18.18,
+   "_fin": 23.3,
+   "d": "[smug] Bah oui, c'est-à-dire qu'il faut bien distinguer les chamailleries entre élèves et le harcèlement scolaire, qui sont deux choses bien distinctes."
+  },
+  {
+   "p": "envoyee",
+   "t": "Oui, bah à partir du moment où on se moque de sa tenue vestimentaire, qu'on lui crache dessus et qu'on l'attend à la sortie des",
+   "_deb": 23.3,
+   "_fin": 27.06,
+   "d": "[furious] Oui, bah à partir du moment où on se moque de sa tenue vestimentaire, qu'on lui crache dessus et qu'on l'attend à la sortie des"
+  },
+  {
+   "p": "envoyee",
+   "t": "cours pour l'emmerder, j'estime que le terme n'est pas excessif.",
+   "_deb": 27.06,
+   "_fin": 29.16,
+   "d": "[furious] cours pour l'emmerder, j'estime que le terme n'est pas excessif !"
+  },
+  {
+   "p": "presentateur",
+   "t": "Écoutez, c'est très compliqué à changer un emploi du temps.",
+   "_deb": 29.16,
+   "_fin": 31.26,
+   "d": "[dismissive] Écoutez, c'est très compliqué à changer un emploi du temps."
+  },
+  {
+   "p": "presentateur",
+   "t": "Là, tout est calé, on peut pas...",
+   "_deb": 31.26,
+   "_fin": 32.72,
+   "d": "[dismissive] Là, tout est calé, on peut pas..."
+  },
+  {
+   "p": "envoyee",
+   "t": "Je vous parle de la santé mentale et physique d'un élève, et vous, vous me parlez de votre emploi du temps de merde ?",
+   "_deb": 32.76,
+   "_fin": 36.08,
+   "d": "[screaming] Je vous parle de la santé mentale et physique d'un élève, et vous, vous me parlez de votre emploi du temps de merde ?"
+  },
+  {
+   "p": "presentateur",
+   "t": "Écoutez, on la connaît, la technique du « Oh, je me fais harceler uniquement pour qu'on le change de classe, pour qu'il soit dans l'autre",
+   "_deb": 36.24,
+   "_fin": 40.4,
+   "d": "[arrogant] Écoutez, on la connaît, la technique du « Oh, je me fais harceler uniquement pour qu'on le change de classe, pour qu'il soit dans l'autre"
+  },
+  {
+   "p": "presentateur",
+   "t": "classe avec ses petits copains. » Mais je vous",
+   "_deb": 40.4,
+   "_fin": 41.62
+  },
+  {
+   "p": "envoyee",
+   "t": "parle pas de ça, je vous dis qu'il a peur de revenir en cours parce qu'il est précisément dans la même classe que ses harceleurs.",
+   "_deb": 41.62,
+   "_fin": 45.48
+  },
+  {
+   "p": "envoyee",
+   "t": "Et d'ailleurs, comment c'est possible, ça ?",
+   "_deb": 45.66,
+   "_fin": 46.94,
+   "d": "[furious] Et d'ailleurs, comment c'est possible, ça ?"
+  },
+  {
+   "p": "presentateur",
+   "t": "Écoutez, on a 400 élèves ici, vous imaginez bien qu'on peut pas faire du cas par cas.",
+   "_deb": 47.06,
+   "_fin": 49.96,
+   "d": "[defensive] Écoutez, on a 400 élèves ici, vous imaginez bien qu'on peut pas faire du cas par cas."
+  },
+  {
+   "p": "envoyee",
+   "t": "Mais c'est votre boulot d'assurer leur sécurité, merde !",
+   "_deb": 49.96,
+   "_fin": 52.0,
+   "d": "[screaming] Mais c'est votre boulot d'assurer leur sécurité, merde !"
+  },
+  {
+   "p": "presentateur",
+   "t": "Mon boulot, c'est de faire en sorte que tous les élèves aient accès à un enseignement scolaire et d'en faire des citoyens respectables.",
+   "_deb": 52.0,
+   "_fin": 56.56,
+   "d": "[pompous] Mon boulot, c'est de faire en sorte que tous les élèves aient accès à un enseignement scolaire et d'en faire des citoyens respectables."
+  },
+  {
+   "p": "envoyee",
+   "t": "Donc un élève qui se fait ouvertement harceler par ses camarades, c'est quoi les mesures que vous prenez ?",
+   "_deb": 56.58,
+   "_fin": 60.0,
+   "d": "[demanding] Donc un élève qui se fait ouvertement harceler par ses camarades, c'est quoi les mesures que vous prenez ?"
+  },
+  {
+   "p": "presentateur",
+   "t": "Bon, écoutez, votre fils a été harcelé ?",
+   "_deb": 60.0,
+   "_fin": 61.6,
+   "d": "[blunt] Bon, écoutez, votre fils a été harcelé ?"
+  },
+  {
+   "p": "envoyee",
+   "t": "Oui, toute l'année dernière.",
+   "_deb": 61.66,
+   "_fin": 62.52,
+   "d": "[serious] Oui, toute l'année dernière."
+  },
+  {
+   "p": "presentateur",
+   "t": "Mais là, là, cette année...",
+   "_deb": 62.56,
+   "_fin": 63.48,
+   "d": "[skeptical] Mais là, là, cette année..."
+  },
+  {
+   "p": "envoyee",
+   "t": "Bah, c'est la rentrée, donc non, pas encore, mais...",
+   "_deb": 63.48,
+   "_fin": 64.96,
+   "d": "[annoyed] Bah, c'est la rentrée, donc non, pas encore, mais..."
+  },
+  {
+   "p": "presentateur",
+   "t": "Donc là, excusez-moi, mais vous êtes en train de me prendre le chou pour un problème qui n'a même pas encore eu lieu, c'est ça ?",
+   "_deb": 64.98,
+   "_fin": 68.86,
+   "d": "[mocking] Donc là, excusez-moi, mais vous êtes en train de me prendre le chou pour un problème qui n'a même pas encore eu lieu, c'est ça ?"
+  },
+  {
+   "p": "envoyee",
+   "t": "Ils se retrouvent dans la même classe que les types qui harcelaient, mais qu'est-ce qu'il vous faut de plus ?",
+   "_deb": 68.88,
+   "_fin": 71.48
+  },
+  {
+   "p": "presentateur",
+   "t": "Des preuves, madame. Sans preuves, je peux rien faire.",
+   "_deb": 71.52,
+   "_fin": 73.04,
+   "d": "[cold] Des preuves, madame. Sans preuves, je peux rien faire."
+  },
+  {
+   "p": "envoyee",
+   "t": "Des preuves ?",
+   "_deb": 73.04,
+   "_fin": 73.46,
+   "d": "[shocked] Des preuves ?"
+  },
+  {
+   "p": "presentateur",
+   "t": "Voilà, des témoignages, des vidéos, des photos, mais quelque chose de concret, parce que là, je peux pas me permettre de changer tous les emplois du temps sur",
+   "_deb": 73.5,
+   "_fin": 78.2,
+   "d": "[condescending] Voilà, des témoignages, des vidéos, des photos, mais quelque chose de concret, parce que là, je peux pas me permettre de changer tous les emplois du temps sur"
+  },
+  {
+   "p": "presentateur",
+   "t": "des théories.",
+   "_deb": 78.2,
+   "_fin": 78.62,
+   "d": "[condescending] des théories."
+  },
+  {
+   "p": "envoyee",
+   "t": "Vous êtes un très mauvais directeur, monsieur, vous le savez, ça ?",
+   "_deb": 78.62,
+   "_fin": 80.24,
+   "d": "[disgusted] Vous êtes un très mauvais directeur, monsieur, vous le savez, ça ?"
+  },
+  {
+   "p": "presentateur",
+   "t": "C'est ça, j'ai envie de vous y voir à ma place.",
+   "_deb": 80.24,
+   "_fin": 81.72,
+   "d": "[annoyed] C'est ça, j'ai envie de vous y voir à ma place."
+  },
+  {
+   "p": "envoyee",
+   "t": "Bah, si c'est comme ça, je vais m'adresser directement au rectorat, ce sera plus simple.",
+   "_deb": 81.72,
+   "_fin": 84.04,
+   "d": "[resolute] Bah, si c'est comme ça, je vais m'adresser directement au rectorat, ce sera plus simple.",
+   "objet": "lettre"
+  },
+  {
+   "p": "presentateur",
+   "t": "Voilà, bah, faites donc ça. Ils sont pas cons, je crois.",
+   "_deb": 84.06,
+   "_fin": 86.88,
+   "d": "[arrogant] Voilà, bah, faites donc ça. Ils sont pas cons, je crois.",
    "chute": true
   }
  ],
  "bandeau": [],
  "gag": null,
- "legende": "Débat choc sur les conséquences cachées de l'agriculture industrielle.",
+ "legende": "Quand l'administration scolaire préfère son planning à la sécurité des élèves...",
  "hashtags": [
   "petitsdramas",
-  "agriculture",
-  "ethique",
-  "environnement",
-  "protestation",
-  "animaux",
-  "ecologie"
+  "harcelementscolaire",
+  "rentreescolaire",
+  "pov",
+  "ecole",
+  "humour"
  ],
  "sources": [
-  "https://www.tiktok.com/@vincedessine/video/7677869320864566561"
+  "https://www.tiktok.com/@eliotlehanneur/video/7683186575932525846"
  ],
  "decoupage": [
   {
    "scene": "1",
    "repliques": [
     0,
-    1
-   ],
-   "lieu": "",
-   "son": "",
-   "duree": 0.0,
-   "decor": "ferme abandonnée avec des outils agricoles abandonnés et des affiches protestataires",
-   "titre": "La Réalité de l'Agriculture"
-  },
-  {
-   "scene": "2",
-   "repliques": [
+    1,
     2,
     3,
     4,
     5,
-    6
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34
    ],
    "lieu": "",
    "son": "",
    "duree": 0.0,
-   "decor": "champ labouré avec des animaux en peluche éparpillés et des panneaux 'STOP' plantés dans la terre",
-   "titre": "Le Coût Caché"
+   "decor": "classic school principal office with ornate painting in golden frame, wood armchair, files and desk",
+   "titre": "Bureau du proviseur"
   }
  ],
  "studio": {
-  "moment": "jour",
+  "gags": [
+   "Affiche: 'Priorité n°1 : Ne rien changer à l'emploi du temps'",
+   "Post-it: 'Répondre aux parents : désolé le logiciel a crashé'"
+  ],
   "lieux": [
-   "ferme_abandonnee",
-   "champ_labouré"
+   "bureau"
   ],
   "costumes": {
+   "envoyee": {
+    "haut": "debardeur",
+    "c_haut": "blanc",
+    "motif": "uni",
+    "bas": "pantalon",
+    "chaussures": "ballerines",
+    "cheveux": "ondule",
+    "c_cheveux": "blond",
+    "details": [
+     "collier",
+     "sac_bandouliere",
+     "boucles_oreilles"
+    ]
+   },
    "presentateur": {
-    "haut": "chemise",
-    "c_haut": "bleu marine",
+    "haut": "costume",
+    "c_haut": "kaki",
     "motif": "uni",
     "bas": "pantalon",
     "chaussures": "ville",
+    "cheveux": "court_texture",
+    "c_cheveux": "chatain",
     "details": [
-     "cravate",
-     "lunettes_soleil",
+     "lunettes_vue",
      "barbe_courte"
     ]
-   },
-   "invite": {
-    "haut": "tshirt",
-    "c_haut": "vert",
-    "motif": "uni",
-    "bas": "jeans",
-    "chaussures": "baskets",
-    "details": [
-     "barbe_pleine",
-     "bracelets"
-    ]
    }
   },
+  "cadence": "rapide",
+  "plans": [
+   {
+    "reaction": "sceptique",
+    "mouvement": "zoom_choc",
+    "replique": 0,
+    "plan": "serre",
+    "geste": "mains_hanches"
+   },
+   {
+    "geste": "explique",
+    "plan": "serre",
+    "reaction": "yeux_au_ciel",
+    "replique": 1,
+    "mouvement": "fixe"
+   },
+   {
+    "geste": "desespoir",
+    "mouvement": "zoom_choc",
+    "replique": 12,
+    "plan": "tres_serre",
+    "reaction": "facepalm"
+   },
+   {
+    "geste": "croises",
+    "mouvement": "fixe",
+    "reaction": "choc",
+    "plan": "serre",
+    "replique": 25
+   },
+   {
+    "mouvement": "zoom_choc",
+    "reaction": "yeux_au_ciel",
+    "plan": "tres_serre",
+    "geste": "pointe_d",
+    "replique": 31
+   },
+   {
+    "reaction": "regard_camera",
+    "mouvement": "fixe",
+    "geste": "bras_ouverts",
+    "plan": "serre",
+    "replique": 34
+   }
+  ],
   "personnages": {
+   "envoyee": {
+    "genre": "f",
+    "age": 30,
+    "taille": 1,
+    "corpulence": 0.3,
+    "cheveux": "ondule",
+    "barbe": "rien"
+   },
    "presentateur": {
     "genre": "h",
-    "age": 40,
+    "age": 38,
     "taille": 1,
-    "corpulence": 0.7,
+    "corpulence": 0.5,
     "cheveux": "court_texture",
-    "c_cheveux": "brun",
     "barbe": "trois_jours"
-   },
-   "invite": {
-    "genre": "h",
-    "age": 35,
-    "taille": 1,
-    "corpulence": 0.8,
-    "cheveux": "long",
-    "c_cheveux": "roux",
-    "barbe": "bouc"
    }
   },
-  "gags": [
-   "Affiche : 'Mangez des carottes, pas des mulots !'",
-   "Panneau : 'Labourer = Massacrer'",
-   "Post-it sur une charrue : 'Attention : Animaux invisibles'"
+  "objets": [
+   {
+    "replique": 3,
+    "objet": "stylo"
+   },
+   {
+    "objet": "lettre",
+    "replique": 33
+   }
   ],
   "ambiances": [
    "poussiere"
   ],
-  "cadence": "rapide",
-  "plans": [
-   {
-    "replique": 0,
-    "plan": "large",
-    "mouvement": "fixe",
-    "geste": "bras_ouverts",
-    "reaction": "aucune"
-   },
-   {
-    "replique": 1,
-    "plan": "serre",
-    "mouvement": "zoom_choc",
-    "geste": "pointe_d",
-    "reaction": "choc"
-   },
-   {
-    "replique": 2,
-    "plan": "moyen",
-    "mouvement": "fixe",
-    "geste": "gratte_tete",
-    "reaction": "sceptique"
-   },
-   {
-    "replique": 3,
-    "plan": "serre",
-    "mouvement": "avance",
-    "geste": "poing",
-    "reaction": "colere"
-   },
-   {
-    "replique": 4,
-    "plan": "tres_serre",
-    "mouvement": "fixe",
-    "geste": "enumere",
-    "reaction": "regard_camera"
-   },
-   {
-    "replique": 5,
-    "plan": "contre_plongee",
-    "mouvement": "fixe",
-    "geste": "pointe_g",
-    "reaction": "choc"
-   },
-   {
-    "replique": 6,
-    "plan": "large",
-    "mouvement": "recul",
-    "geste": "mains_hanches",
-    "reaction": "colere"
-   }
-  ],
-  "objets": [
-   {
-    "replique": 0,
-    "objet": "micro"
-   },
-   {
-    "replique": 2,
-    "objet": "clés"
-   },
-   {
-    "replique": 6,
-    "objet": "billet"
-   }
-  ],
-  "decors_vus": {
-   "presentateur": "ferme abandonnée avec des outils agricoles rouillés, une affiche 'STOP' déchirée, une chaise en bois et des bouteilles vides, lumière naturelle",
-   "invite": "champ labouré avec des animaux en peluche éparpillés, des panneaux 'STOP' plantés, une charrue rouillée et des traces de pas, lumière du jour"
-  }
+  "moment": "jour"
  },
  "doublage": {
-  "piste": "/tmp/tmpjqmx4i_o/piste.wav",
-  "duree": 38.85,
-  "source": "https://www.tiktok.com/@vincedessine/video/7677869320864566561",
-  "auteur": "vincedessine",
-  "contexte": "Un débat animé devant un public engagé, dans un lieu symbolique comme une ferme abandonnée transformée en espace de protestation. Les personnages discutent de l'impact de l'élevage intensif et de l'agriculture industrielle sur les animaux et l'environnement.",
+  "piste": "/tmp/tmp8uwb7kzh/piste.wav",
+  "duree": 88.17,
+  "source": "https://www.tiktok.com/@eliotlehanneur/video/7683186575932525846",
+  "auteur": "eliotlehanneur",
+  "contexte": "Dans le bureau du proviseur, une mère furieuse exige le changement de classe de son fils qui se retrouve avec ses harceleurs de l'année précédente, mais le directeur refuse obstinément par flemme administrative.",
   "evenements": [],
   "visuel": {
    "gestes": [
     [
-     24.64,
-     0.66,
-     1.0
-    ],
-    [
-     38.22,
-     0.66,
-     1.0
+     19.5,
+     0.51,
+     0.35
     ]
    ],
-   "duree": 39.2,
-   "nb_plans": 1,
-   "duree_plan": 39.23,
-   "coupes": [],
+   "duree": 88.5,
+   "nb_plans": 48,
+   "duree_plan": 1.84,
+   "coupes": [
+    0.5,
+    1.5,
+    3.0,
+    6.0,
+    6.5,
+    8.0,
+    8.5,
+    9.5,
+    11.0,
+    12.0,
+    15.0,
+    18.0,
+    18.5,
+    20.0,
+    20.5,
+    24.0,
+    25.5,
+    27.0,
+    29.5,
+    33.0,
+    34.0,
+    35.0,
+    36.5,
+    38.5,
+    40.0,
+    42.0,
+    47.5,
+    50.5,
+    52.5,
+    57.0,
+    60.5,
+    62.0,
+    63.0,
+    64.0,
+    65.5,
+    69.5,
+    72.0,
+    73.5,
+    74.0,
+    79.0,
+    80.5,
+    82.0,
+    84.5,
+    85.0,
+    85.5,
+    86.0,
+    87.5
+   ],
    "plans": {
-    "tres_serre": 0.0,
-    "serre": 0.0,
-    "moyen": 0.179,
-    "large": 0.821
+    "tres_serre": 0.136,
+    "serre": 0.847,
+    "moyen": 0.0,
+    "large": 0.017
    },
    "camera": {
-    "fixe": 0.883,
-    "avance": 0.039,
-    "recul": 0.065,
-    "travelling": 0.0,
-    "epaule": 0.013
+    "fixe": 0.562,
+    "avance": 0.125,
+    "recul": 0.062,
+    "travelling": 0.141,
+    "epaule": 0.109
    },
    "nb_personnes": 1,
    "personnes": [
     {
-     "place": "droite",
-     "presence": 0.179,
+     "place": "centre",
+     "presence": 0.672,
      "habit": [
-      51,
-      54,
+      74,
+      67,
       52
      ],
      "cheveux": [
-      42,
-      113,
-      74
+      65,
+      46,
+      35
+     ],
+     "sourire": 0.008,
+     "taille": 0.284,
+     "tete_penchee": 4.7,
+     "regard_cote": 0.16
+    },
+    {
+     "place": "gauche",
+     "presence": 0.198,
+     "habit": [
+      57,
+      55,
+      50
+     ],
+     "cheveux": [
+      67,
+      46,
+      34
      ],
      "sourire": 0.0,
-     "taille": 0.134,
-     "tete_penchee": 0.5,
-     "regard_cote": 1.0
+     "taille": 0.284,
+     "tete_penchee": 5.8,
+     "regard_cote": 0.314
+    },
+    {
+     "place": "droite",
+     "presence": 0.113,
+     "habit": [
+      78,
+      69,
+      41
+     ],
+     "cheveux": [
+      55,
+      43,
+      35
+     ],
+     "sourire": 0.0,
+     "taille": 0.28,
+     "tete_penchee": 6.7,
+     "regard_cote": 0.0
     }
    ],
    "visages": true,
-   "sourires": 0.0,
-   "energie": 0.518,
+   "sourires": 0.006,
+   "energie": 0.606,
    "mur": [
-    251,
-    251,
-    250
+    82,
+    71,
+    54
    ],
    "palette": [
     [
-     251,
-     251,
-     250,
-     0.771
-    ],
-    [
-     65,
-     62,
+     74,
      63,
-     0.079
+     49,
+     0.293
     ],
     [
-     193,
-     167,
-     145,
-     0.063
+     115,
+     93,
+     70,
+     0.199
     ],
     [
-     12,
-     9,
-     9,
-     0.051
+     205,
+     207,
+     208,
+     0.138
     ],
     [
-     79,
-     117,
+     157,
+     126,
      111,
-     0.027
+     0.137
     ],
     [
-     234,
-     132,
-     21,
-     0.008
+     173,
+     168,
+     166,
+     0.12
+    ],
+    [
+     32,
+     26,
+     20,
+     0.114
     ]
    ],
    "lumiere": {
-    "luminosite": 218.0,
-    "chaleur": 5.1,
-    "saturation": 23.2
+    "luminosite": 122.1,
+    "chaleur": 24.6,
+    "saturation": 69.1
    },
-   "moment": "jour"
+   "moment": "soir"
   },
   "audio": {
-   "duree": 38.8,
+   "duree": 88.2,
    "nb_voix": 2,
    "voix": [
     {
-     "hz": null,
-     "genre": null,
-     "part": 0.29
+     "hz": 272,
+     "genre": "f",
+     "part": 0.44
     },
     {
-     "hz": 129,
+     "hz": 139,
      "genre": "h",
-     "part": 0.71
+     "part": 0.56
     }
    ],
-   "debit": 3.45,
-   "blanc_moyen": 0.65,
-   "coupes": 0,
-   "dynamique_db": 19.7,
-   "cris": 0.021,
+   "debit": 6.2,
+   "blanc_moyen": 0.06,
+   "coupes": 24,
+   "dynamique_db": 20.6,
+   "cris": 0.003,
    "musique": null,
    "impacts": 0,
    "impacts_10s": 0.0,
@@ -377,16 +651,17 @@
    "sur_vanne": 0,
    "evenements": {},
    "emotions": {
-    "indigné": 1,
-    "souligné": 1,
-    "sarcastique": 1,
-    "neutre": 1,
-    "colérique": 1,
-    "énumérant": 1,
-    "furieux": 1
+    "furious": 5,
+    "annoyed": 4,
+    "condescending": 4,
+    "smug": 2,
+    "shocked": 2,
+    "dismissive": 2,
+    "screaming": 2,
+    "arrogant": 2
    }
   },
-  "video_origine": "/tmp/tmpjqmx4i_o/src.mp4"
+  "video_origine": "/tmp/tmp8uwb7kzh/src.mp4"
  },
  "fiche": {
   "note": 0,
@@ -396,61 +671,104 @@
     "scene": "1",
     "repliques": [
      0,
-     1
-    ],
-    "lieu": "",
-    "son": "",
-    "duree": 0.0,
-    "decor": "ferme abandonnée avec des outils agricoles abandonnés et des affiches protestataires",
-    "titre": "La Réalité de l'Agriculture"
-   },
-   {
-    "scene": "2",
-    "repliques": [
+     1,
      2,
      3,
      4,
      5,
-     6
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     14,
+     15,
+     16,
+     17,
+     18,
+     19,
+     20,
+     21,
+     22,
+     23,
+     24,
+     25,
+     26,
+     27,
+     28,
+     29,
+     30,
+     31,
+     32,
+     33,
+     34
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "champ labouré avec des animaux en peluche éparpillés et des panneaux 'STOP' plantés dans la terre",
-    "titre": "Le Coût Caché"
+    "decor": "classic school principal office with ornate painting in golden frame, wood armchair, files and desk",
+    "titre": "Bureau du proviseur"
    }
   ]
  },
  "_monte": true,
  "_voix_hz": {
-  "presentateur": 245,
-  "invite": 115
+  "envoyee": 272,
+  "presentateur": 138
  },
  "_voix_genre": {
-  "presentateur": "f",
-  "invite": "h"
+  "envoyee": "f",
+  "presentateur": "h"
  },
  "realisation": {
   "moment": "jour",
   "lieux": [
-   "bar",
-   "bar"
+   "bureau"
   ],
   "gags": [
-   "Affiche : 'Mangez des carottes, pas des mulots !'",
-   "Panneau : 'Labourer = Massacrer'",
-   "Post-it sur une charrue : 'Attention : Animaux invisibles'"
+   "Affiche: 'Priorité n°1 : Ne rien changer à l'emploi du temps'",
+   "Post-it: 'Répondre aux parents : désolé le logiciel a crashé'"
   ],
   "ambiances": [
-   "neon",
+   "pluie",
    "poussiere"
   ],
   "source": "auteur+image",
   "tenues": {
-   "presentateur": "chemise",
-   "invite": "tshirt"
+   "envoyee": "debardeur",
+   "presentateur": "costume"
   },
   "plans": [
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
    "large/fixe",
    "large/fixe",
    "large/fixe",
