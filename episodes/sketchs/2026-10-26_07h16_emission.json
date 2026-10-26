@@ -1,0 +1,380 @@
+{
+ "titre": "TÉLÉCHARGEMENT RISQUÉ",
+ "sujet": "TÉLÉCHARGEMENT RISQUÉ",
+ "ecran": "TÉLÉCHARGEMENT",
+ "invite_nom": "Hubert Rustine",
+ "invite_role": "Expert (fictif)",
+ "invite_look": "chauve",
+ "lieu_direct": "Assemblée",
+ "titre_accroche": "Quand tu télécharges le mauvais film",
+ "question": "C'était quoi le pire faux film que vous avez téléchargé ?",
+ "running_gag": "",
+ "verite": "",
+ "repliques": [
+  {
+   "p": "presentateur",
+   "t": "Ouais, j'avais regardé Harry Potter.",
+   "_deb": 0.0,
+   "_fin": 2.24,
+   "d": "[reminiscing] Ouais, j'avais regardé Harry Potter.",
+   "objet": "telecommande"
+  },
+  {
+   "p": "presentateur",
+   "t": "Cliquez ici pour télécharger Harry Potter et la chambre des sécrétions.",
+   "_deb": 4.32,
+   "_fin": 10.1,
+   "d": "[confused] Cliquez ici pour télécharger Harry Potter et la chambre des sécrétions."
+  },
+  {
+   "p": "presentateur",
+   "t": "Ah, papa il m'avait expliqué, ça doit être le titre du Canada.",
+   "_deb": 10.62,
+   "_fin": 13.88,
+   "d": "[realization] Ah, papa il m'avait expliqué, ça doit être le titre du Canada."
+  },
+  {
+   "p": "presentateur",
+   "t": "Tu veux voir le pouvoir de la",
+   "_deb": 30.0,
+   "_fin": 32.86,
+   "d": "[mysterious] Tu veux voir le pouvoir de la"
+  },
+  {
+   "p": "invite",
+   "t": "force ?",
+   "_deb": 32.86,
+   "_fin": 33.52,
+   "d": "[questioning] force ?",
+   "chute": true
+  }
+ ],
+ "bandeau": [],
+ "gag": null,
+ "legende": "Quand tu découvres les vrais dangers du streaming illégal...",
+ "hashtags": [
+  "petitsdramas",
+  "humour",
+  "harrypotter",
+  "streaming",
+  "souvenir",
+  "nostalgie"
+ ],
+ "sources": [
+  "https://www.tiktok.com/@kodanimation/video/7696312641202998560"
+ ],
+ "decoupage": [
+  {
+   "scene": "1",
+   "repliques": [
+    0,
+    1,
+    2
+   ],
+   "lieu": "",
+   "son": "",
+   "duree": 0.0,
+   "decor": "A messy bedroom desk with a desktop computer, glowing monitor, keyboard, mouse, and gamer chair against a white wall."
+  },
+  {
+   "scene": "2",
+   "repliques": [
+    3,
+    4
+   ],
+   "lieu": "",
+   "son": "",
+   "duree": 0.0,
+   "decor": "A messy bedroom desk with a glowing monitor showing weird video downloads, energy drink cans and posters on the wall.",
+   "titre": "Le film québécois"
+  }
+ ],
+ "studio": {
+  "personnages": {
+   "presentateur": {
+    "genre": "h",
+    "age": 19,
+    "taille": 1,
+    "corpulence": 0.3,
+    "cheveux": "court",
+    "barbe": "rien"
+   },
+   "invite": {
+    "genre": "h",
+    "age": 18,
+    "taille": 0.95,
+    "corpulence": 0.4,
+    "cheveux": "court",
+    "barbe": "rien"
+   }
+  },
+  "plans": [
+   {
+    "mouvement": "fixe",
+    "geste": "pianote",
+    "plan": "moyen",
+    "replique": 0,
+    "reaction": "aucune"
+   },
+   {
+    "mouvement": "zoom_choc",
+    "replique": 1,
+    "reaction": "choc",
+    "plan": "tres_serre",
+    "geste": "appuye"
+   },
+   {
+    "geste": "menton",
+    "mouvement": "recul",
+    "reaction": "regard_camera",
+    "replique": 2,
+    "plan": "moyen"
+   },
+   {
+    "replique": 3,
+    "reaction": "sceptique",
+    "mouvement": "avance",
+    "geste": "pointe_d",
+    "plan": "serre"
+   },
+   {
+    "plan": "serre",
+    "geste": "haussement",
+    "reaction": "sceptique",
+    "replique": 4,
+    "mouvement": "fixe"
+   }
+  ],
+  "objets": [
+   {
+    "replique": 0,
+    "objet": "telecommande"
+   }
+  ],
+  "lieux": [
+   "chambre",
+   "chambre"
+  ],
+  "ambiances": [
+   "neon"
+  ],
+  "costumes": {
+   "presentateur": {
+    "haut": "tshirt",
+    "c_haut": "orange",
+    "motif": "uni",
+    "bas": "pantalon",
+    "chaussures": "chaussons",
+    "chapeau": "bob",
+    "c_chapeau": "jaune",
+    "cheveux": "court",
+    "c_cheveux": "brun",
+    "details": [
+     "lunettes_vue"
+    ]
+   },
+   "invite": {
+    "haut": "capuche",
+    "c_haut": "gris",
+    "motif": "uni",
+    "bas": "jogging",
+    "chaussures": "chaussons",
+    "cheveux": "court",
+    "c_cheveux": "chatain",
+    "details": []
+   }
+  },
+  "gags": [
+   "Téléchargement 100% garanti sans virus",
+   "Harry Potter version canadienne non censurée"
+  ],
+  "moment": "jour",
+  "cadence": "normal"
+ },
+ "doublage": {
+  "piste": "/tmp/tmp1su_hclu/piste.wav",
+  "duree": 33.55,
+  "source": "https://www.tiktok.com/@kodanimation/video/7696312641202998560",
+  "auteur": "kodanimation",
+  "contexte": "Devant son ordinateur, un jeune homme tente de télécharger un film Harry Potter en streaming illégal et tombe sur un titre très douteux qu'il justifie naïvement.",
+  "evenements": [],
+  "visuel": {
+   "gestes": [],
+   "duree": 34.0,
+   "nb_plans": 3,
+   "duree_plan": 11.33,
+   "coupes": [
+    25.0,
+    26.5
+   ],
+   "plans": {
+    "tres_serre": 0.0,
+    "serre": 0.0,
+    "moyen": 0.0,
+    "large": 1.0
+   },
+   "camera": {
+    "fixe": 0.969,
+    "avance": 0.031,
+    "recul": 0.0,
+    "travelling": 0.0,
+    "epaule": 0.0
+   },
+   "nb_personnes": 0,
+   "personnes": [],
+   "visages": false,
+   "sourires": 0.0,
+   "energie": 0.143,
+   "mur": [
+    251,
+    251,
+    251
+   ],
+   "palette": [
+    [
+     253,
+     253,
+     253,
+     0.43
+    ],
+    [
+     127,
+     130,
+     144,
+     0.242
+    ],
+    [
+     179,
+     182,
+     192,
+     0.145
+    ],
+    [
+     8,
+     8,
+     9,
+     0.084
+    ],
+    [
+     233,
+     156,
+     28,
+     0.056
+    ],
+    [
+     83,
+     80,
+     82,
+     0.043
+    ]
+   ],
+   "lumiere": {
+    "luminosite": 189.5,
+    "chaleur": 5.4,
+    "saturation": 35.9
+   },
+   "moment": "jour"
+  },
+  "audio": {
+   "duree": 33.6,
+   "nb_voix": 2,
+   "voix": [
+    {
+     "hz": 113,
+     "genre": "h",
+     "part": 0.96
+    },
+    {
+     "hz": 125,
+     "genre": "h",
+     "part": 0.04
+    }
+   ],
+   "debit": 2.57,
+   "blanc_moyen": 6.24,
+   "coupes": 1,
+   "dynamique_db": 28.2,
+   "cris": 0.007,
+   "musique": null,
+   "impacts": 0,
+   "impacts_10s": 0.0,
+   "graves": 0,
+   "aigus": 0,
+   "sur_vanne": 0,
+   "evenements": {},
+   "emotions": {
+    "reminiscing": 1,
+    "confused": 1,
+    "realization": 1,
+    "mysterious": 1,
+    "questioning": 1
+   }
+  },
+  "video_origine": "/tmp/tmp1su_hclu/src.mp4"
+ },
+ "fiche": {
+  "note": 0,
+  "decision": "vidéo manuelle (bande son d'une vidéo TikTok)",
+  "decoupage": [
+   {
+    "scene": "1",
+    "repliques": [
+     0,
+     1,
+     2
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 0.0,
+    "decor": "A messy bedroom desk with a desktop computer, glowing monitor, keyboard, mouse, and gamer chair against a white wall."
+   },
+   {
+    "scene": "2",
+    "repliques": [
+     3,
+     4
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 0.0,
+    "decor": "A messy bedroom desk with a glowing monitor showing weird video downloads, energy drink cans and posters on the wall.",
+    "titre": "Le film québécois"
+   }
+  ]
+ },
+ "_monte": true,
+ "_voix_hz": {
+  "presentateur": 116,
+  "invite": 125
+ },
+ "_voix_genre": {
+  "presentateur": "h",
+  "invite": "h"
+ },
+ "realisation": {
+  "moment": "jour",
+  "lieux": [
+   "chambre",
+   "chambre"
+  ],
+  "gags": [
+   "Téléchargement 100% garanti sans virus",
+   "Harry Potter version canadienne non censurée"
+  ],
+  "ambiances": [
+   "neon"
+  ],
+  "source": "auteur+image",
+  "tenues": {
+   "presentateur": "tshirt",
+   "invite": "capuche"
+  },
+  "plans": [
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe"
+  ]
+ }
+}

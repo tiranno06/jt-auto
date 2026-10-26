@@ -1,220 +1,67 @@
 {
- "titre": "LIBERTÉ OU ESCLAVAGE MASQUÉ",
- "sujet": "LIBERTÉ OU ESCLAVAGE MASQUÉ",
- "ecran": "LIBERTÉ OU ESC",
+ "titre": "TÉLÉCHARGEMENT RISQUÉ",
+ "sujet": "TÉLÉCHARGEMENT RISQUÉ",
+ "ecran": "TÉLÉCHARGEMENT",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "POV : L'abolition qui n'en est pas une",
- "question": "Jusqu'où peut-on aller pour garder le contrôle ?",
+ "titre_accroche": "Quand tu télécharges le mauvais film",
+ "question": "C'était quoi le pire faux film que vous avez téléchargé ?",
  "running_gag": "",
  "verite": "",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "Esclaves, je t'affranchis, tu es un homme libre.",
+   "t": "Ouais, j'avais regardé Harry Potter.",
    "_deb": 0.0,
-   "_fin": 2.36,
-   "objet": "billet"
+   "_fin": 2.24,
+   "d": "[reminiscing] Ouais, j'avais regardé Harry Potter.",
+   "objet": "telecommande"
+  },
+  {
+   "p": "presentateur",
+   "t": "Cliquez ici pour télécharger Harry Potter et la chambre des sécrétions.",
+   "_deb": 4.32,
+   "_fin": 10.1,
+   "d": "[confused] Cliquez ici pour télécharger Harry Potter et la chambre des sécrétions."
+  },
+  {
+   "p": "presentateur",
+   "t": "Ah, papa il m'avait expliqué, ça doit être le titre du Canada.",
+   "_deb": 10.62,
+   "_fin": 13.88,
+   "d": "[realization] Ah, papa il m'avait expliqué, ça doit être le titre du Canada."
+  },
+  {
+   "p": "presentateur",
+   "t": "Tu veux voir le pouvoir de la",
+   "_deb": 30.0,
+   "_fin": 32.86,
+   "d": "[mysterious] Tu veux voir le pouvoir de la"
   },
   {
    "p": "invite",
-   "t": "Merci. Mais quoi, ça veut dire que je ne ramasserai plus le coton ?",
-   "_deb": 2.46,
-   "_fin": 5.76
-  },
-  {
-   "p": "presentateur",
-   "t": "Eh ben voilà, c'est terminé. Fini les limbagos.",
-   "_deb": 5.8,
-   "_fin": 7.84
-  },
-  {
-   "p": "invite",
-   "t": "C'est génial. Et je ne ferai plus le ménage non plus ?",
-   "_deb": 7.86,
-   "_fin": 10.28
-  },
-  {
-   "p": "presentateur",
-   "t": "Ben non, c'est fini, ça aussi.",
-   "_deb": 10.34,
-   "_fin": 11.48
-  },
-  {
-   "p": "invite",
-   "t": "C'est super, ça. Et je ne brosserai plus les chevaux.",
-   "_deb": 11.52,
-   "_fin": 13.58
-  },
-  {
-   "p": "presentateur",
-   "t": "Mais tu es libre, je te dis.",
-   "_deb": 13.58,
-   "_fin": 14.78
-  },
-  {
-   "p": "invite",
-   "t": "Ah, merci. Merci du fond du cœur, merci.",
-   "_deb": 14.82,
-   "_fin": 16.94
-  },
-  {
-   "p": "presentateur",
-   "t": "Qu'est-ce que vous allez faire maintenant ?",
-   "_deb": 17.0,
-   "_fin": 18.26
-  },
-  {
-   "p": "invite",
-   "t": "Ben, dormir un peu. Je suis épuisé, moi. Bon, je reverrai.",
-   "_deb": 18.4,
-   "_fin": 21.6
-  },
-  {
-   "p": "invite",
-   "t": "De toute façon, j'habite à côté.",
-   "_deb": 21.6,
-   "_fin": 22.66
-  },
-  {
-   "p": "presentateur",
-   "t": "Ah non, désolé, mais vous ne pouvez pas rester ici, hein.",
-   "_deb": 22.74,
-   "_fin": 24.88
-  },
-  {
-   "p": "invite",
-   "t": "Quoi ? Mais pourquoi ?",
-   "_deb": 25.0,
-   "_fin": 26.4
-  },
-  {
-   "p": "presentateur",
-   "t": "Ben parce que quand on est un homme libre, on s'achète une maison et on ne vit pas chez son voisin.",
-   "_deb": 26.46,
-   "_fin": 29.56
-  },
-  {
-   "p": "presentateur",
-   "t": "on s'assume.",
-   "_deb": 29.42,
-   "_fin": 30.28
-  },
-  {
-   "p": "invite",
-   "t": "Comment je peux me payer une maison ? J'ai pas d'argent.",
-   "_deb": 30.28,
-   "_fin": 32.22
-  },
-  {
-   "p": "presentateur",
-   "t": "Vous avez pas mis deux-trois sous de côté quand vous étiez chez moi ?",
-   "_deb": 32.22,
-   "_fin": 34.52
-  },
-  {
-   "p": "invite",
-   "t": "C'est-à-dire que j'ai pas vu une pièce de monnaie depuis que je suis arrivé d'Afrique.",
-   "_deb": 34.52,
-   "_fin": 37.34
-  },
-  {
-   "p": "presentateur",
-   "t": "Vous avez tout claqué, c'est ça ? Flambeur ! Bon, je vais pas vous laisser tomber.",
-   "_deb": 37.36,
-   "_fin": 42.38
-  },
-  {
-   "p": "presentateur",
-   "t": "Qu'est-ce que vous savez faire ? Vous savez ramasser le coton ?",
-   "_deb": 42.38,
-   "_fin": 45.02,
-   "objet": "stylo"
-  },
-  {
-   "p": "presentateur",
-   "t": "Oui. Et le ménage et les chevaux, c'est dans vos cordes ?",
-   "_deb": 45.02,
-   "_fin": 47.22
-  },
-  {
-   "p": "invite",
-   "t": "Aussi, oui.",
-   "_deb": 47.36,
-   "_fin": 47.92
-  },
-  {
-   "p": "presentateur",
-   "t": "Écoutez, c 'est incroyable. J 'ai une place qui vient de se libérer.",
-   "_deb": 47.92,
-   "_fin": 50.16
-  },
-  {
-   "p": "presentateur",
-   "t": "Si vous voulez, elle est à vous.",
-   "_deb": 50.16,
-   "_fin": 51.16
-  },
-  {
-   "p": "invite",
-   "t": "Merci.",
-   "_deb": 51.44,
-   "_fin": 52.36
-  },
-  {
-   "p": "presentateur",
-   "t": "Ça me fait plaisir.",
-   "_deb": 52.36,
-   "_fin": 53.5
-  },
-  {
-   "p": "invite",
-   "t": "Et alors, comment on fait pour le salaire?",
-   "_deb": 53.56,
-   "_fin": 54.84
-  },
-  {
-   "p": "presentateur",
-   "t": "Un dollar par mois, ça vous va?",
-   "_deb": 54.94,
-   "_fin": 56.4
-  },
-  {
-   "p": "invite",
-   "t": "Mais c 'est de l 'esclavage?",
-   "_deb": 56.4,
-   "_fin": 57.38
-  },
-  {
-   "p": "presentateur",
-   "t": "Impossible, il vient d 'être aboli.",
-   "_deb": 57.5,
-   "_fin": 58.88
-  },
-  {
-   "p": "invite",
-   "t": "Sous -titrage ST' 501",
-   "_deb": 59.42,
-   "_fin": 60.74,
+   "t": "force ?",
+   "_deb": 32.86,
+   "_fin": 33.52,
+   "d": "[questioning] force ?",
    "chute": true
   }
  ],
  "bandeau": [],
  "gag": null,
- "legende": "Quand la liberté a un prix...",
+ "legende": "Quand tu découvres les vrais dangers du streaming illégal...",
  "hashtags": [
   "petitsdramas",
-  "abolition",
-  "ironie",
-  "liberte",
-  "esclavage",
-  "humournoir",
-  "reflexion"
+  "humour",
+  "harrypotter",
+  "streaming",
+  "souvenir",
+  "nostalgie"
  ],
  "sources": [
-  "https://www.tiktok.com/@yan_animation0/video/7676978179428371745"
+  "https://www.tiktok.com/@kodanimation/video/7696312641202998560"
  ],
  "decoupage": [
   {
@@ -222,545 +69,232 @@
    "repliques": [
     0,
     1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7
+    2
    ],
    "lieu": "",
    "son": "",
    "duree": 0.0,
-   "decor": "champ_de_coton_sous_coucher_de_soleil, chaise_en_bois, paniers_de_coton, balai, brosse_a_cheval",
-   "titre": "La Liberté"
+   "decor": "A messy bedroom desk with a desktop computer, glowing monitor, keyboard, mouse, and gamer chair against a white wall."
   },
   {
    "scene": "2",
    "repliques": [
-    8,
-    9,
-    10,
-    11,
-    12,
-    13,
-    14,
-    15,
-    16,
-    17,
-    18
+    3,
+    4
    ],
    "lieu": "",
    "son": "",
    "duree": 0.0,
-   "decor": "cabane_en_bois, table_en_bois, chaises, vieux_livre_compte, lampe_a_petrole",
-   "titre": "La Réalité"
-  },
-  {
-   "scene": "3",
-   "repliques": [
-    19,
-    20,
-    21,
-    22,
-    23,
-    24,
-    25,
-    26,
-    27,
-    28
-   ],
-   "lieu": "",
-   "son": "",
-   "duree": 0.0,
-   "decor": "bureau_en_bois, chaises, contrat_ecrit, stylo, encre",
-   "titre": "Le Contrat"
+   "decor": "A messy bedroom desk with a glowing monitor showing weird video downloads, energy drink cans and posters on the wall.",
+   "titre": "Le film québécois"
   }
  ],
  "studio": {
-  "moment": "soir",
-  "lieux": [
-   "champ_de_coton",
-   "cabane_en_bois",
-   "bureau"
-  ],
-  "costumes": {
+  "personnages": {
    "presentateur": {
-    "haut": "chemise",
-    "c_haut": "blanc",
-    "motif": "uni",
-    "bas": "pantalon",
-    "chaussures": "bottes",
-    "details": [
-     "cravate",
-     "lunettes_soleil",
-     "barbe_courte"
-    ]
+    "genre": "h",
+    "age": 19,
+    "taille": 1,
+    "corpulence": 0.3,
+    "cheveux": "court",
+    "barbe": "rien"
    },
    "invite": {
-    "haut": "tshirt",
-    "c_haut": "bleu",
-    "motif": "uni",
-    "bas": "short",
-    "chaussures": "baskets",
-    "details": [
-     "bracelets",
-     "barbe_pleine"
-    ]
+    "genre": "h",
+    "age": 18,
+    "taille": 0.95,
+    "corpulence": 0.4,
+    "cheveux": "court",
+    "barbe": "rien"
    }
   },
-  "personnages": [
+  "plans": [
    {
-    "genre": "h",
-    "age": 50,
-    "taille": 1,
-    "corpulence": 0.7,
-    "cheveux": "court_texture",
-    "barbe": "barbe_courte",
-    "role": "presentateur"
+    "mouvement": "fixe",
+    "geste": "pianote",
+    "plan": "moyen",
+    "replique": 0,
+    "reaction": "aucune"
    },
    {
-    "genre": "h",
-    "age": 35,
-    "taille": 0.9,
-    "corpulence": 0.6,
-    "cheveux": "herisse",
-    "barbe": "barbe_pleine",
-    "role": "invite"
+    "mouvement": "zoom_choc",
+    "replique": 1,
+    "reaction": "choc",
+    "plan": "tres_serre",
+    "geste": "appuye"
+   },
+   {
+    "geste": "menton",
+    "mouvement": "recul",
+    "reaction": "regard_camera",
+    "replique": 2,
+    "plan": "moyen"
+   },
+   {
+    "replique": 3,
+    "reaction": "sceptique",
+    "mouvement": "avance",
+    "geste": "pointe_d",
+    "plan": "serre"
+   },
+   {
+    "plan": "serre",
+    "geste": "haussement",
+    "reaction": "sceptique",
+    "replique": 4,
+    "mouvement": "fixe"
    }
   ],
   "objets": [
    {
     "replique": 0,
-    "objet": "billet"
-   },
-   {
-    "replique": 19,
-    "objet": "stylo"
-   },
-   {
-    "replique": 22,
-    "objet": "contrat_ecrit"
+    "objet": "telecommande"
    }
   ],
-  "figurants": [
-   {
-    "avec": "presentateur",
-    "description": "un vieil homme assis à distance, observant",
-    "genre": "h",
-    "age": 70,
-    "geste": "reflechit",
-    "haut": "veste_jean",
-    "c_haut": "bleu marine",
-    "bas": "pantalon",
-    "chapeau": "casquette",
-    "details": [
-     "barbe_pleine"
-    ]
-   }
-  ],
-  "gags": [
-   "Abolition : 1, Exploitation : 2",
-   "Un dollar par mois... ou l'art de bien compter",
-   "Liberté : Apprendre à vivre sans maître"
+  "lieux": [
+   "chambre",
+   "chambre"
   ],
   "ambiances": [
-   "vapeur"
+   "neon"
   ],
-  "cadence": "rapide",
-  "plans": [
-   {
-    "replique": 0,
-    "plan": "large",
-    "mouvement": "fixe",
-    "geste": "bras_ouverts",
-    "reaction": "regard_camera"
-   },
-   {
-    "replique": 1,
-    "plan": "serré",
-    "mouvement": "fixe",
-    "geste": "gratte_tete",
-    "reaction": "sceptique"
-   },
-   {
-    "replique": 3,
-    "plan": "moyen",
-    "mouvement": "zoom_choc",
-    "geste": "bras_ouverts",
-    "reaction": "joie"
-   },
-   {
-    "replique": 7,
-    "plan": "serré",
-    "mouvement": "fixe",
-    "geste": "mains_hanches",
-    "reaction": "soupir"
-   },
-   {
-    "replique": 12,
-    "plan": "contre_plongee",
-    "mouvement": "fixe",
-    "geste": "pointe_d",
-    "reaction": "choc"
-   },
-   {
-    "replique": 18,
-    "plan": "serré",
-    "mouvement": "fixe",
-    "geste": "poing",
-    "reaction": "colere"
-   },
-   {
-    "replique": 21,
-    "plan": "serré",
-    "mouvement": "fixe",
-    "geste": "pouce",
-    "reaction": "soulagé"
-   },
-   {
-    "replique": 27,
-    "plan": "serré",
-    "mouvement": "fixe",
-    "geste": "facepalm",
-    "reaction": "révolté"
-   }
-  ],
-  "decoupe": [
-   {
-    "replique": 1,
-    "plans": [
-     {
-      "debut": 0.1,
-      "plan": "serré",
-      "cible": "invite",
-      "mouvement": "zoom_choc",
-      "passage": "glissé"
-     },
-     {
-      "debut": 0.7,
-      "plan": "moyen",
-      "cible": "presentateur",
-      "mouvement": "fixe",
-      "passage": "coupe"
-     }
+  "costumes": {
+   "presentateur": {
+    "haut": "tshirt",
+    "c_haut": "orange",
+    "motif": "uni",
+    "bas": "pantalon",
+    "chaussures": "chaussons",
+    "chapeau": "bob",
+    "c_chapeau": "jaune",
+    "cheveux": "court",
+    "c_cheveux": "brun",
+    "details": [
+     "lunettes_vue"
     ]
    },
-   {
-    "replique": 18,
-    "plans": [
-     {
-      "debut": 0.3,
-      "plan": "serré",
-      "cible": "presentateur",
-      "mouvement": "zoom_choc",
-      "passage": "glissé"
-     },
-     {
-      "debut": 0.8,
-      "plan": "large",
-      "cible": "invite",
-      "mouvement": "travelling",
-      "passage": "file"
-     }
-    ]
+   "invite": {
+    "haut": "capuche",
+    "c_haut": "gris",
+    "motif": "uni",
+    "bas": "jogging",
+    "chaussures": "chaussons",
+    "cheveux": "court",
+    "c_cheveux": "chatain",
+    "details": []
    }
-  ]
+  },
+  "gags": [
+   "Téléchargement 100% garanti sans virus",
+   "Harry Potter version canadienne non censurée"
+  ],
+  "moment": "jour",
+  "cadence": "normal"
  },
  "doublage": {
-  "piste": "/tmp/tmp6u1opwgg/piste.wav",
-  "duree": 60.77,
-  "source": "https://www.tiktok.com/@yan_animation0/video/7676978179428371745",
-  "auteur": "yan_animation0",
-  "contexte": "Un ancien esclave, nouvellement affranchi, discute avec son ancien maître sur les implications concrètes de sa liberté, dans un champ de coton au coucher du soleil. L'ancien maître tente de lui expliquer ce que signifie être un homme libre, mais le dialogue révèle une ironie cruelle sur la notion même de liberté.",
+  "piste": "/tmp/tmp1su_hclu/piste.wav",
+  "duree": 33.55,
+  "source": "https://www.tiktok.com/@kodanimation/video/7696312641202998560",
+  "auteur": "kodanimation",
+  "contexte": "Devant son ordinateur, un jeune homme tente de télécharger un film Harry Potter en streaming illégal et tombe sur un titre très douteux qu'il justifie naïvement.",
   "evenements": [],
   "visuel": {
-   "gestes": [
-    [
-     0.5,
-     0.3,
-     1.0
-    ],
-    [
-     2.5,
-     0.47,
-     1.0
-    ],
-    [
-     5.0,
-     0.47,
-     0.69
-    ],
-    [
-     6.0,
-     0.3,
-     1.0
-    ],
-    [
-     8.0,
-     0.47,
-     1.0
-    ],
-    [
-     9.5,
-     0.47,
-     0.76
-    ],
-    [
-     10.5,
-     0.3,
-     1.0
-    ],
-    [
-     12.0,
-     0.47,
-     1.0
-    ],
-    [
-     14.0,
-     0.31,
-     1.0
-    ],
-    [
-     15.0,
-     0.47,
-     1.0
-    ],
-    [
-     16.5,
-     0.3,
-     1.0
-    ],
-    [
-     18.5,
-     0.47,
-     1.0
-    ],
-    [
-     21.5,
-     0.47,
-     0.71
-    ],
-    [
-     23.0,
-     0.3,
-     1.0
-    ],
-    [
-     25.0,
-     0.47,
-     1.0
-    ],
-    [
-     26.5,
-     0.3,
-     1.0
-    ],
-    [
-     30.5,
-     0.47,
-     1.0
-    ],
-    [
-     32.5,
-     0.3,
-     1.0
-    ],
-    [
-     35.0,
-     0.47,
-     1.0
-    ],
-    [
-     37.5,
-     0.31,
-     1.0
-    ],
-    [
-     41.0,
-     0.47,
-     1.0
-    ],
-    [
-     42.0,
-     0.3,
-     1.0
-    ],
-    [
-     45.0,
-     0.47,
-     1.0
-    ],
-    [
-     47.5,
-     0.47,
-     1.0
-    ],
-    [
-     48.5,
-     0.31,
-     1.0
-    ],
-    [
-     51.5,
-     0.47,
-     1.0
-    ],
-    [
-     52.5,
-     0.3,
-     1.0
-    ],
-    [
-     53.5,
-     0.47,
-     1.0
-    ],
-    [
-     55.0,
-     0.3,
-     1.0
-    ],
-    [
-     56.5,
-     0.47,
-     1.0
-    ],
-    [
-     57.5,
-     0.31,
-     1.0
-    ]
+   "gestes": [],
+   "duree": 34.0,
+   "nb_plans": 3,
+   "duree_plan": 11.33,
+   "coupes": [
+    25.0,
+    26.5
    ],
-   "duree": 61.0,
-   "nb_plans": 1,
-   "duree_plan": 61.0,
-   "coupes": [],
    "plans": {
     "tres_serre": 0.0,
     "serre": 0.0,
-    "moyen": 0.426,
-    "large": 0.574
+    "moyen": 0.0,
+    "large": 1.0
    },
    "camera": {
-    "fixe": 1.0,
-    "avance": 0.0,
+    "fixe": 0.969,
+    "avance": 0.031,
     "recul": 0.0,
     "travelling": 0.0,
     "epaule": 0.0
    },
-   "nb_personnes": 1,
-   "personnes": [
-    {
-     "place": "gauche",
-     "presence": 0.566,
-     "habit": [
-      192,
-      184,
-      172
-     ],
-     "cheveux": [
-      129,
-      89,
-      13
-     ],
-     "sourire": 0.0,
-     "taille": 0.034,
-     "tete_penchee": 3.4,
-     "regard_cote": 0.0
-    },
-    {
-     "place": "centre",
-     "presence": 0.426,
-     "habit": [
-      126,
-      88,
-      57
-     ],
-     "cheveux": [
-      36,
-      37,
-      39
-     ],
-     "sourire": 0.0,
-     "taille": 0.081,
-     "tete_penchee": 0.7,
-     "regard_cote": 0.0
-    }
-   ],
-   "visages": true,
+   "nb_personnes": 0,
+   "personnes": [],
+   "visages": false,
    "sourires": 0.0,
-   "energie": 0.194,
+   "energie": 0.143,
    "mur": [
-    0,
-    0,
-    0
+    251,
+    251,
+    251
    ],
    "palette": [
     [
-     0,
-     0,
-     0,
-     0.672
+     253,
+     253,
+     253,
+     0.43
     ],
     [
-     229,
-     239,
-     248,
-     0.096
-    ],
-    [
-     158,
-     132,
-     108,
-     0.076
-    ],
-    [
-     57,
-     53,
-     33,
-     0.07
-    ],
-    [
-     101,
-     95,
-     64,
-     0.064
-    ],
-    [
-     160,
-     158,
+     127,
+     130,
      144,
-     0.023
+     0.242
+    ],
+    [
+     179,
+     182,
+     192,
+     0.145
+    ],
+    [
+     8,
+     8,
+     9,
+     0.084
+    ],
+    [
+     233,
+     156,
+     28,
+     0.056
+    ],
+    [
+     83,
+     80,
+     82,
+     0.043
     ]
    ],
    "lumiere": {
-    "luminosite": 51.7,
-    "chaleur": 6.3,
-    "saturation": 25.3
+    "luminosite": 189.5,
+    "chaleur": 5.4,
+    "saturation": 35.9
    },
-   "moment": "nuit"
+   "moment": "jour"
   },
   "audio": {
-   "duree": 60.8,
+   "duree": 33.6,
    "nb_voix": 2,
    "voix": [
     {
-     "hz": 138,
+     "hz": 113,
      "genre": "h",
-     "part": 0.57
+     "part": 0.96
     },
     {
-     "hz": 136,
+     "hz": 125,
      "genre": "h",
-     "part": 0.43
+     "part": 0.04
     }
    ],
-   "debit": 4.81,
-   "blanc_moyen": 0.11,
-   "coupes": 12,
-   "dynamique_db": 14.7,
-   "cris": 0.036,
+   "debit": 2.57,
+   "blanc_moyen": 6.24,
+   "coupes": 1,
+   "dynamique_db": 28.2,
+   "cris": 0.007,
    "musique": null,
    "impacts": 0,
    "impacts_10s": 0.0,
@@ -769,17 +303,14 @@
    "sur_vanne": 0,
    "evenements": {},
    "emotions": {
-    "neutre": 4,
-    "joyeux": 2,
-    "enthousiaste": 2,
-    "ironique": 2,
-    "autoritaire": 1,
+    "reminiscing": 1,
     "confused": 1,
-    "fier": 1,
-    "exaspéré": 1
+    "realization": 1,
+    "mysterious": 1,
+    "questioning": 1
    }
   },
-  "video_origine": "/tmp/tmp6u1opwgg/src.mp4"
+  "video_origine": "/tmp/tmp1su_hclu/src.mp4"
  },
  "fiche": {
   "note": 0,
@@ -790,119 +321,55 @@
     "repliques": [
      0,
      1,
-     2,
-     3,
-     4,
-     5,
-     6,
-     7
+     2
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "champ_de_coton_sous_coucher_de_soleil, chaise_en_bois, paniers_de_coton, balai, brosse_a_cheval",
-    "titre": "La Liberté"
+    "decor": "A messy bedroom desk with a desktop computer, glowing monitor, keyboard, mouse, and gamer chair against a white wall."
    },
    {
     "scene": "2",
     "repliques": [
-     8,
-     9,
-     10,
-     11,
-     12,
-     13,
-     14,
-     15,
-     16,
-     17,
-     18
+     3,
+     4
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "cabane_en_bois, table_en_bois, chaises, vieux_livre_compte, lampe_a_petrole",
-    "titre": "La Réalité"
-   },
-   {
-    "scene": "3",
-    "repliques": [
-     19,
-     20,
-     21,
-     22,
-     23,
-     24,
-     25,
-     26,
-     27,
-     28
-    ],
-    "lieu": "",
-    "son": "",
-    "duree": 0.0,
-    "decor": "bureau_en_bois, chaises, contrat_ecrit, stylo, encre",
-    "titre": "Le Contrat"
+    "decor": "A messy bedroom desk with a glowing monitor showing weird video downloads, energy drink cans and posters on the wall.",
+    "titre": "Le film québécois"
    }
   ]
  },
  "_monte": true,
  "_voix_hz": {
-  "presentateur": 138,
-  "invite": 139
+  "presentateur": 116,
+  "invite": 125
  },
  "_voix_genre": {
   "presentateur": "h",
   "invite": "h"
  },
  "realisation": {
-  "moment": "soir",
+  "moment": "jour",
   "lieux": [
-   "salon",
    "chambre",
-   "bureau"
+   "chambre"
   ],
   "gags": [
-   "Abolition : 1, Exploitation : 2",
-   "Un dollar par mois... ou l'art de bien compter",
-   "Liberté : Apprendre à vivre sans maître"
+   "Téléchargement 100% garanti sans virus",
+   "Harry Potter version canadienne non censurée"
   ],
   "ambiances": [
-   "poussiere",
-   "vapeur"
+   "neon"
   ],
   "source": "auteur+image",
   "tenues": {
-   "presentateur": "chemise",
-   "invite": "tshirt"
+   "presentateur": "tshirt",
+   "invite": "capuche"
   },
   "plans": [
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
    "large/fixe",
    "large/fixe",
    "large/fixe",

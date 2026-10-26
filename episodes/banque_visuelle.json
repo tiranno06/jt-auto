@@ -17511,5 +17511,232 @@
    ]
   },
   "video": "2026-10-26_07h01_emission.mp4"
+ },
+ {
+  "date": "2026-10-26",
+  "source": "https://www.tiktok.com/@kodanimation/video/7696312641202998560",
+  "auteur": "kodanimation",
+  "visuel": {
+   "gestes": [],
+   "duree": 34.0,
+   "nb_plans": 3,
+   "duree_plan": 11.33,
+   "coupes": [
+    25.0,
+    26.5
+   ],
+   "plans": {
+    "tres_serre": 0.0,
+    "serre": 0.0,
+    "moyen": 0.0,
+    "large": 1.0
+   },
+   "camera": {
+    "fixe": 0.969,
+    "avance": 0.031,
+    "recul": 0.0,
+    "travelling": 0.0,
+    "epaule": 0.0
+   },
+   "nb_personnes": 0,
+   "personnes": [],
+   "visages": false,
+   "sourires": 0.0,
+   "energie": 0.143,
+   "mur": [
+    251,
+    251,
+    251
+   ],
+   "palette": [
+    [
+     253,
+     253,
+     253,
+     0.43
+    ],
+    [
+     127,
+     130,
+     144,
+     0.242
+    ],
+    [
+     179,
+     182,
+     192,
+     0.145
+    ],
+    [
+     8,
+     8,
+     9,
+     0.084
+    ],
+    [
+     233,
+     156,
+     28,
+     0.056
+    ],
+    [
+     83,
+     80,
+     82,
+     0.043
+    ]
+   ],
+   "lumiere": {
+    "luminosite": 189.5,
+    "chaleur": 5.4,
+    "saturation": 35.9
+   },
+   "moment": "jour"
+  },
+  "audio": {
+   "duree": 33.6,
+   "nb_voix": 2,
+   "voix": [
+    {
+     "hz": 113,
+     "genre": "h",
+     "part": 0.96
+    },
+    {
+     "hz": 125,
+     "genre": "h",
+     "part": 0.04
+    }
+   ],
+   "debit": 2.57,
+   "blanc_moyen": 6.24,
+   "coupes": 1,
+   "dynamique_db": 28.2,
+   "cris": 0.007,
+   "musique": null,
+   "impacts": 0,
+   "impacts_10s": 0.0,
+   "graves": 0,
+   "aigus": 0,
+   "sur_vanne": 0,
+   "evenements": {},
+   "emotions": {
+    "reminiscing": 1,
+    "confused": 1,
+    "realization": 1,
+    "mysterious": 1,
+    "questioning": 1
+   }
+  },
+  "claude": {
+   "lieux": [
+    "chambre",
+    "chambre"
+   ],
+   "moment": "jour",
+   "costumes": {
+    "presentateur": {
+     "haut": "tshirt",
+     "c_haut": "orange",
+     "motif": "uni",
+     "bas": "pantalon",
+     "chaussures": "chaussons",
+     "chapeau": "bob",
+     "c_chapeau": "jaune",
+     "cheveux": "court",
+     "c_cheveux": "brun",
+     "details": [
+      "lunettes_vue"
+     ]
+    },
+    "invite": {
+     "haut": "capuche",
+     "c_haut": "gris",
+     "motif": "uni",
+     "bas": "jogging",
+     "chaussures": "chaussons",
+     "cheveux": "court",
+     "c_cheveux": "chatain",
+     "details": []
+    }
+   },
+   "objets": [
+    {
+     "replique": 0,
+     "objet": "telecommande"
+    }
+   ],
+   "gags": [
+    "Téléchargement 100% garanti sans virus",
+    "Harry Potter version canadienne non censurée"
+   ],
+   "ambiances": [
+    "neon"
+   ],
+   "plans": [
+    {
+     "mouvement": "fixe",
+     "geste": "pianote",
+     "plan": "moyen",
+     "replique": 0,
+     "reaction": "aucune"
+    },
+    {
+     "mouvement": "zoom_choc",
+     "replique": 1,
+     "reaction": "choc",
+     "plan": "tres_serre",
+     "geste": "appuye"
+    },
+    {
+     "geste": "menton",
+     "mouvement": "recul",
+     "reaction": "regard_camera",
+     "replique": 2,
+     "plan": "moyen"
+    },
+    {
+     "replique": 3,
+     "reaction": "sceptique",
+     "mouvement": "avance",
+     "geste": "pointe_d",
+     "plan": "serre"
+    },
+    {
+     "plan": "serre",
+     "geste": "haussement",
+     "reaction": "sceptique",
+     "replique": 4,
+     "mouvement": "fixe"
+    }
+   ]
+  },
+  "realisation": {
+   "moment": "jour",
+   "lieux": [
+    "chambre",
+    "chambre"
+   ],
+   "gags": [
+    "Téléchargement 100% garanti sans virus",
+    "Harry Potter version canadienne non censurée"
+   ],
+   "ambiances": [
+    "neon"
+   ],
+   "source": "auteur+image",
+   "tenues": {
+    "presentateur": "tshirt",
+    "invite": "capuche"
+   },
+   "plans": [
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe"
+   ]
+  },
+  "video": "2026-10-26_07h16_emission.mp4"
  }
 ]
