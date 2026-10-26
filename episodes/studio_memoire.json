@@ -3702,33 +3702,71 @@
   "cadence": null
  },
  {
-  "moment": "jour",
+  "moment": "soir",
   "lieux": [
-   "rue"
+   "classe"
   ],
   "source": "auteur+image",
-  "duree": 73.1,
+  "duree": 65.2,
   "plans": {
-   "large": 33
+   "large": 14
   },
   "mouvements": {
-   "fixe": 33
+   "fixe": 14
   },
   "costumes": {
-   "presentateur": "tshirt",
-   "invite": "polo"
+   "presentateur": "costume",
+   "envoyee": "blouse"
   },
-  "figurants": 2,
-  "ambiances": [],
-  "controle": "Humoriste 8.6/10 : 68.7 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 6.6/10 : montage trop lent : 0.1 plans toutes les 10 s (il en faudrait ~4.6); 44.6 s pas assez de plans",
-  "fichier": "2026-10-26_14h47_emission.mp4",
+  "figurants": 0,
+  "ambiances": [
+   "poussiere"
+  ],
+  "controle": "Humoriste 6.0/10 : 0.4 s La chute finale manque de punch. La réaction de l'envoyée à 60.8 s n'est pas assez marquée pour faire rire.; 45.4 s Les vannes sur les dates pourraient être renforcées par des",
+  "fichier": "2026-10-26_14h11_emission.mp4",
   "cine": {
    "focus": false,
    "vertige": false,
-   "tiers": false,
+   "tiers": true,
    "etalonnage": true,
    "profondeur": false,
-   "grain": true,
+   "grain": false,
+   "reflets": false,
+   "son": true
+  },
+  "cadence": null
+ },
+ {
+  "moment": "jour",
+  "lieux": [
+   "salon",
+   "salon"
+  ],
+  "source": "auteur+image",
+  "duree": 81.6,
+  "plans": {
+   "large": 17
+  },
+  "mouvements": {
+   "fixe": 17
+  },
+  "costumes": {
+   "presentateur": "chemise",
+   "invite": "costume"
+  },
+  "figurants": 0,
+  "ambiances": [
+   "vapeur"
+  ],
+  "controle": "Humoriste 8.6/10 : 76.6 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 4.2/10 : 53.2 s tête de invite coupée par le bord de l'image (large); montage trop lent : 0.2 plans tou",
+  "fichier": "2026-10-26_15h19_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": false,
+   "tiers": true,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": false,
    "reflets": false,
    "son": true
   },
