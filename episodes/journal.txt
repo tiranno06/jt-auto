@@ -2,14 +2,14 @@ Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, ElevenLabs epuise — IA utilisée : mistral
 Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @motiontoonz, @same_same53, @charly.bse, @kodanimation, @vignianimation, @vincedessine
-Profil TikTok @yan_animation0 : 32 vidéo(s) jamais utilisée(s)
-Profil TikTok @same_same53 : 33 vidéo(s) jamais utilisée(s)
+Profil TikTok @kodanimation : 30 vidéo(s) jamais utilisée(s)
 Profil TikTok @vignianimation : 36 vidéo(s) jamais utilisée(s)
-Vidéo depuis TikTok : https://www.tiktok.com/@yan_animation0/video/7696516142185172257
+Profil TikTok @same_same53 : 33 vidéo(s) jamais utilisée(s)
+Vidéo depuis TikTok : https://www.tiktok.com/@kodanimation/video/7671416307342085409
   son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 61.1 s, compte d'origine @yan_animation0
-[ WARN:0@15.894] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
-  image de la vidéo : 13 plans (≈ 4.73 s chacun) ; cadrages : très serré 0 %, serré 6 %, moyen 4 %, large 88 % ; caméra : fixe 100 % ; 1 personne(s) à l'écran : centre (habit [0, 0, 0], cheveux [241, 157, 79], sourit 0 %) ; agitation 0.074 ; lumière nuit ; fond [0, 0, 0]
+  son récupéré : 15.1 s, compte d'origine @kodanimation
+[ WARN:0@15.852] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  image de la vidéo : 2 plans (≈ 7.75 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 0 %, large 100 % ; caméra : fixe 75 %, avance 13 %, recul 3 %, travelling 3 %, epaule 3 % ; 0 personne(s) à l'écran : aucun visage repéré ; agitation 0.302 ; lumière jour ; fond [252, 252, 252]
   isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
   transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/core/io.py:48: UserWarning: 
@@ -19,45 +19,37 @@ torchcodec is not installed correctly so built-in audio decoding will fail. Solu
 
 Could not load this library: /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/torchcodec/libtorchcodec_image.so
   warnings.warn(
-[0;93m2026-10-25 23:49:58.304868283 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[0;93m2026-10-26 00:03:58.944091159 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1913.)
   std = sequences.std(dim=-1, correction=1)
-  voix séparées par pyannote : 1 voix, 16 tours de parole
+  voix séparées par pyannote : 1 voix, 8 tours de parole
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-  voix re-séparées par leur empreinte (ECAPA) : 2 voix (netteté 0.12)
-  voix vérifiées mot par mot : 44 mot(s) remis sur la bonne voix
-  15 répliques, voix : {'speaker_0': 159, 'speaker_1': 220}
-  son de la vidéo : 2 voix [159 Hz (h, 63 %), 220 Hz (f, 37 %)], 7.86 mots/s, blancs 5.09 s, 4 coupure(s) de parole, dynamique 34.6 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
+  voix re-séparées par leur empreinte (ECAPA) : 2 voix (netteté 0.19)
+  8 répliques, voix : {'speaker_0': 294, 'speaker_1': 137}
+  son de la vidéo : 2 voix [294 Hz (f, 28 %), 137 Hz (h, 72 %)], 5.27 mots/s, blancs 0.61 s, 0 coupure(s) de parole, dynamique 28.4 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
+  scène reconstituée : Une actrice épuisée se plaint de sa fatigue auprès de son ami, qui lui rappelle avec ironie qu'elle vient d'enchaîner le tournage intensif d'une série dans l'immeuble d'à côté.
+  casting : speaker_0 → Lila, speaker_1 → Jojo
+  sous-titres : 8 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
+Sketch : « LE RÔLE PRINCIPAL », 8 répliques
+  décor 0 (lieu ressemblant de la banque, budget Modal du mois atteint) : Modern living room with a couch, film poster on the wall, co
+montage : 1 plans (0.0:large>env/coupe)
+studio : jour, lieux ['salon'], tenues envoyee=robe, presentateur=tshirt, 0 figurant(s), ambiances ['neon'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 18.0 s, 8 répliques, 1 scène(s), personnages ['envoyee', 'presentateur']
+montage : 1 plans (0.0:large>env/coupe)
+studio : jour, lieux ['salon'], tenues envoyee=robe, presentateur=tshirt, 0 figurant(s), ambiances ['neon'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 18.0 s, 8 répliques, 1 scène(s), personnages ['envoyee', 'presentateur']
+  image 300/1077 (4 processeurs)
+  image 600/1077
+  image 900/1077
+Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
   IA gemini indisponible (gemini 429 : [{
   "error": {
     "code": 429,
     "message": "You exceeded your current quota, please check your plan an) : on passe à la suivante
-  scène reconstituée : Deux amis jouent à une blague dans une cuisine en utilisant un micro-ondes. L'un prétend que la viande à l'intérieur est chaude pour tromper l'autre, qui doit deviner si elle est vraiment chaude ou non.
-  casting : speaker_0 → Jojo, speaker_1 → Lila
-  sous-titres : 4 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
-  1 réattribution(s) de l'IA refusée(s) : la voix de ces répliques est reconnue avec certitude
-Sketch : « BLAGUE MICRO-ONDES », 15 répliques
-  décor 0 : cuisine avec micro-ondes ouvert, assiette avec viande, planche à décou
-  décor 1 : cuisine avec micro-ondes fermé, assiette vide, bouteille d'eau, téléph
-montage : 2 plans (0.0:large>pre/coupe 30.0:large>pre/coupe)
-studio : soir, lieux ['cuisine', 'cuisine'], tenues presentateur=tshirt, envoyee=pull, 0 figurant(s), ambiances ['poussiere', 'vapeur'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 64.5 s, 15 répliques, 2 scène(s), personnages ['presentateur', 'envoyee']
-Contrôle image : 1 défaut(s) — 30.25 s tete_coupee (presentateur)
-Pré-jury (avant de dessiner) : réaction « regard_camera » à la réplique 15
-montage : 2 plans (0.0:large>pre/coupe 30.0:large>pre/coupe)
-studio : soir, lieux ['cuisine', 'cuisine'], tenues presentateur=tshirt, envoyee=pull, 0 figurant(s), ambiances ['poussiere', 'vapeur'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 64.5 s, 15 répliques, 2 scène(s), personnages ['presentateur', 'envoyee']
-Contrôle image : 1 défaut(s) — 30.25 s tete_coupee (presentateur)
-  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~968 images)
-  morceau 1936–2904 reçu d'une machine d'aide
-  morceau 968–1936 reçu d'une machine d'aide
-  morceau 2904–3872 reçu d'une machine d'aide
-  dessin partagé terminé en 4.8 min
-Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury qualité (ia) : 6.3/10 — Humoriste 6.0/10 : 0.4 s La chute finale n'est pas assez mise en valeur. Le zoom choc sur le personnage qui dit 'chaud là-dedans' est absent, ce qui réduit l'impact comique.; 30.8 s Les répétitions de 'pu' manquent de dynamisme. Un bruitage plus varié ou des réactions visuelles pourraient renforcer l'humour.; 63.9 s La chute finale manque de punch. Un regard caméra ou un geste exagéré renforcerait l'effet comique. | Réalisateur 5.0/10 : 0.4 s Tête du présentateur coupée par le bord de l'image, ce qui nuit à la clarté du plan.; 9.9 s Montage trop lent avec seulement 0.3 plans toutes les 10 secondes. Un rythme plus soutenu est nécessaire.; 23.4 s Manque de plans de réaction de l'envoyée, ce qui rend la dynamique moins engageante.; 30.2 s tête de presentateur coupée par le bord de l'image (large) | Directeur artistique 7.0/10 : 0 s Les personnages ont un style cohérent, mais les décors pour
-Manque par rapport à la vidéo d'origine : Les personnages dans l'original ont des expressions faciales plus exagérées et des gestes plus dynamiques. ; L'utilisation de plans serrés et de zooms chocs pour les moments clés est absente. ; Les bruitages variés et synchronisés avec les actions sont manquants dans notre version. ; L'ambiance sonore de fond (comme des rires ou des bruits de cuisine) est absente.
+Jury qualité (ia) : 6.6/10 — Humoriste 7.0/10 : 1 s La chute finale manque de punch. Le zoom choc sur le personnage qui dit 'Bah voilà !' est absent, ce qui réduit l'impact comique.; 14 s Les réactions de l'envoyée sont trop subtiles. Un regard caméra ou un geste exagéré renforcerait l'humour.; 17.4 s Le texte 'Abonne-toi !' est trop petit et illisible sur le fond jaune. Cela nuit à l'accroche finale. | Réalisateur 6.0/10 : 0.4 s Le plan initial est trop large et manque de dynamisme. Un plan serré sur l'envoyée avec un mouvement d'épaule renforcerait l'énergie.; 5.8 s Les réactions du présentateur ne sont pas assez marquées. Un faux raccord ou un changement de plan ajouterait du rythme.; 12.8 s Le montage entre les répliques est trop lent. Ajouter un bruitage ou un effet visuel (ex. : 'boing') accélérerait le rythme. | Directeur artistique 8.0/10 : 0 s Les personnages manquent de cohérence vestimentaire. L'envoyée d
+Manque par rapport à la vidéo d'origine : Les sous-titres sont trop rapides et illisibles dans la vidéo originale. ; Dans l'original, le personnage de l'envoyée a les cheveux attachés en queue-de-cheval, ce qui manque dans notre version. ; Les réactions du présentateur sont plus exagérées dans l'original (ex. : gestes, expressions faciales). ; La vidéo originale utilise des bruitages comme 'boing' pour marquer les transitions.
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = mistral ×2, voix = tiktok, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 24528, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 31}
-Quota de l'API GitHub : 4959 appels restants
-OK : sortie/2026-10-26_00h52_emission.mp4 (65 s)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = gemini ×1, mistral ×1, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 22407, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0}
+Quota de l'API GitHub : 4916 appels restants
+OK : sortie/2026-10-26_01h06_emission.mp4 (18 s)

@@ -12441,59 +12441,54 @@
  },
  {
   "date": "2026-10-25",
-  "source": "https://www.tiktok.com/@vincedessine/video/7618225218565197078",
+  "source": "https://www.tiktok.com/@vincedessine/video/7652417305963498784",
   "auteur": "vincedessine",
   "visuel": {
-   "gestes": [
-    [
-     55.5,
-     0.49,
-     1.0
-    ],
-    [
-     108.5,
-     0.48,
-     1.0
-    ]
-   ],
-   "duree": 123.5,
-   "nb_plans": 29,
-   "duree_plan": 4.26,
+   "gestes": [],
+   "duree": 62.7,
+   "nb_plans": 35,
+   "duree_plan": 1.79,
    "coupes": [
-    2.0,
-    3.5,
-    4.5,
-    8.0,
-    10.0,
-    14.0,
-    16.0,
-    17.0,
-    28.0,
-    32.0,
-    33.5,
-    36.0,
-    43.0,
-    45.5,
-    46.5,
-    63.5,
-    67.0,
-    68.5,
-    73.5,
-    77.0,
-    82.5,
-    87.5,
-    90.5,
-    93.0,
-    96.5,
-    100.5,
-    114.0,
-    121.0
+    1.48,
+    2.47,
+    5.43,
+    7.4,
+    8.39,
+    9.38,
+    10.86,
+    13.33,
+    16.29,
+    16.78,
+    22.21,
+    22.71,
+    23.69,
+    24.68,
+    26.65,
+    28.63,
+    30.11,
+    30.6,
+    36.03,
+    36.53,
+    37.51,
+    38.5,
+    41.96,
+    43.93,
+    44.42,
+    45.41,
+    45.9,
+    53.8,
+    54.79,
+    56.27,
+    57.75,
+    59.23,
+    60.71,
+    61.7
    ],
    "plans": {
     "tres_serre": 0.0,
-    "serre": 0.377,
+    "serre": 0.0,
     "moyen": 0.0,
-    "large": 0.623
+    "large": 1.0
    },
    "camera": {
     "fixe": 1.0,
@@ -12502,448 +12497,81 @@
     "travelling": 0.0,
     "epaule": 0.0
    },
-   "nb_personnes": 1,
-   "personnes": [
-    {
-     "place": "centre",
-     "presence": 0.377,
-     "habit": [
-      248,
-      242,
-      241
-     ],
-     "cheveux": [
-      177,
-      177,
-      180
-     ],
-     "sourire": 0.0,
-     "taille": 0.239,
-     "tete_penchee": 13.1,
-     "regard_cote": 0.0
-    }
-   ],
-   "visages": true,
+   "nb_personnes": 0,
+   "personnes": [],
+   "visages": false,
    "sourires": 0.0,
-   "energie": 0.104,
+   "energie": 0.319,
    "mur": [
     252,
-    249,
-    250
+    250,
+    253
    ],
    "palette": [
     [
-     252,
-     249,
-     250,
-     0.417
+     253,
+     251,
+     253,
+     0.778
     ],
     [
-     1,
-     0,
-     1,
-     0.213
+     9,
+     5,
+     7,
+     0.076
     ],
     [
-     225,
-     189,
-     162,
-     0.118
+     248,
+     180,
+     152,
+     0.072
     ],
     [
-     218,
-     105,
-     54,
-     0.104
+     129,
+     100,
+     102,
+     0.034
     ],
     [
-     28,
-     28,
-     36,
-     0.101
+     200,
+     197,
+     199,
+     0.021
     ],
     [
-     117,
-     88,
-     67,
-     0.047
+     60,
+     51,
+     51,
+     0.018
     ]
    ],
    "lumiere": {
-    "luminosite": 165.9,
-    "chaleur": 26.7,
-    "saturation": 50.8
+    "luminosite": 225.9,
+    "chaleur": 8.2,
+    "saturation": 23.0
    },
    "moment": "jour"
   },
   "audio": {
-   "duree": 123.1,
-   "nb_voix": 3,
-   "voix": [
-    {
-     "hz": 200,
-     "genre": "f",
-     "part": 0.1
-    },
-    {
-     "hz": 110,
-     "genre": "h",
-     "part": 0.45
-    },
-    {
-     "hz": 107,
-     "genre": "h",
-     "part": 0.45
-    }
-   ],
-   "debit": 3.27,
-   "blanc_moyen": 0.77,
-   "coupes": 4,
-   "dynamique_db": 22.7,
-   "cris": 0.014,
-   "musique": null,
-   "impacts": 0,
-   "impacts_10s": 0.0,
-   "graves": 0,
-   "aigus": 0,
-   "sur_vanne": 0,
-   "evenements": {},
-   "emotions": {
-    "excited": 9,
-    "solemn": 6,
-    "sarcastic": 3,
-    "urgent": 3,
-    "confident": 2,
-    "skeptical": 2,
-    "serious": 2,
-    "doubtful": 1
-   }
-  },
-  "claude": {
-   "lieux": [
-    "bureau",
-    "salle de crise"
-   ],
-   "moment": "jour",
-   "costumes": {
-    "presentateur": {
-     "haut": "costume",
-     "c_haut": "bleu marine",
-     "motif": "uni",
-     "bas": "pantalon",
-     "chaussures": "ville",
-     "details": [
-      "cravate",
-      "montre",
-      "barbe_courte"
-     ]
-    },
-    "invite": {
-     "haut": "chemise",
-     "c_haut": "blanc",
-     "motif": "uni",
-     "bas": "pantalon",
-     "chaussures": "ville",
-     "details": [
-      "cravate",
-      "lunettes_vue",
-      "barbe_pleine"
-     ]
-    },
-    "envoyee": {
-     "haut": "blouse",
-     "c_haut": "bleu",
-     "motif": "uni",
-     "bas": "pantalon",
-     "chaussures": "ville",
-     "details": [
-      "stylos",
-      "lunettes_soleil",
-      "bracelet"
-     ]
-    }
-   },
-   "objets": [
-    {
-     "replique": 3,
-     "objet": "ordinateur"
-    },
-    {
-     "replique": 5,
-     "objet": "calculatrice"
-    },
-    {
-     "replique": 16,
-     "objet": "carte"
-    },
-    {
-     "replique": 28,
-     "objet": "telephone"
-    }
-   ],
-   "gags": [
-    "Les notes de frais : jamais payées.",
-    "Mission Afrique : 2000 ans de retard.",
-    "Self-service : toujours en rupture de stock."
-   ],
-   "ambiances": [
-    "poussiere"
-   ],
-   "plans": [
-    {
-     "replique": 0,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "pointe_d",
-     "reaction": "sceptique"
-    },
-    {
-     "replique": 1,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "haussement",
-     "reaction": "choc"
-    },
-    {
-     "replique": 3,
-     "plan": "moyen",
-     "mouvement": "fixe",
-     "geste": "gratte_tete",
-     "reaction": "gene"
-    },
-    {
-     "replique": 5,
-     "plan": "large",
-     "mouvement": "zoom_choc",
-     "geste": "bras_ouverts",
-     "reaction": "pleurs"
-    },
-    {
-     "replique": 12,
-     "plan": "serre",
-     "mouvement": "avance",
-     "geste": "pointe_g",
-     "reaction": "colere"
-    },
-    {
-     "replique": 16,
-     "plan": "tres_serre",
-     "mouvement": "fixe",
-     "geste": "poings",
-     "reaction": "choc"
-    },
-    {
-     "replique": 19,
-     "plan": "large",
-     "mouvement": "travelling",
-     "geste": "mains_hanches",
-     "reaction": "sceptique"
-    },
-    {
-     "replique": 24,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "facepalm",
-     "reaction": "gene"
-    },
-    {
-     "replique": 32,
-     "plan": "contre_plongee",
-     "mouvement": "fixe",
-     "geste": "pointe_d",
-     "reaction": "colere"
-    }
-   ]
-  },
-  "realisation": {
-   "moment": "jour",
-   "lieux": [
-    "bureau",
-    "bureau"
-   ],
-   "gags": [
-    "Les notes de frais : jamais payées.",
-    "Mission Afrique : 2000 ans de retard.",
-    "Self-service : toujours en rupture de stock."
-   ],
-   "ambiances": [
-    "poussiere"
-   ],
-   "source": "auteur+image",
-   "tenues": {
-    "presentateur": "costume",
-    "invite": "chemise",
-    "envoyee": "blouse"
-   },
-   "plans": [
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe"
-   ]
-  },
-  "video": "2026-10-26_00h04_emission.mp4"
- },
- {
-  "date": "2026-10-25",
-  "source": "https://www.tiktok.com/@yan_animation0/video/7696516142185172257",
-  "auteur": "yan_animation0",
-  "visuel": {
-   "gestes": [],
-   "duree": 61.5,
-   "nb_plans": 13,
-   "duree_plan": 4.73,
-   "coupes": [
-    3.0,
-    4.0,
-    13.0,
-    13.5,
-    21.5,
-    23.5,
-    32.0,
-    33.0,
-    37.5,
-    39.0,
-    51.5,
-    52.5
-   ],
-   "plans": {
-    "tres_serre": 0.0,
-    "serre": 0.065,
-    "moyen": 0.049,
-    "large": 0.886
-   },
-   "camera": {
-    "fixe": 1.0,
-    "avance": 0.0,
-    "recul": 0.0,
-    "travelling": 0.0,
-    "epaule": 0.0
-   },
-   "nb_personnes": 1,
-   "personnes": [
-    {
-     "place": "centre",
-     "presence": 0.114,
-     "habit": [
-      0,
-      0,
-      0
-     ],
-     "cheveux": [
-      241,
-      157,
-      79
-     ],
-     "sourire": 0.0,
-     "taille": 0.161,
-     "tete_penchee": 1.4,
-     "regard_cote": 0.0
-    }
-   ],
-   "visages": true,
-   "sourires": 0.0,
-   "energie": 0.074,
-   "mur": [
-    0,
-    0,
-    0
-   ],
-   "palette": [
-    [
-     0,
-     0,
-     0,
-     0.675
-    ],
-    [
-     130,
-     125,
-     123,
-     0.122
-    ],
-    [
-     177,
-     171,
-     169,
-     0.107
-    ],
-    [
-     88,
-     54,
-     49,
-     0.053
-    ],
-    [
-     237,
-     224,
-     218,
-     0.036
-    ],
-    [
-     234,
-     156,
-     74,
-     0.007
-    ]
-   ],
-   "lumiere": {
-    "luminosite": 50.4,
-    "chaleur": 5.8,
-    "saturation": 12.0
-   },
-   "moment": "nuit"
-  },
-  "audio": {
-   "duree": 61.1,
+   "duree": 62.3,
    "nb_voix": 2,
    "voix": [
     {
-     "hz": 159,
-     "genre": "h",
-     "part": 0.63
+     "hz": 188,
+     "genre": "f",
+     "part": 0.61
     },
     {
-     "hz": 220,
+     "hz": 230,
      "genre": "f",
-     "part": 0.37
+     "part": 0.39
     }
    ],
-   "debit": 7.86,
-   "blanc_moyen": 5.09,
-   "coupes": 4,
-   "dynamique_db": 34.6,
-   "cris": 0.014,
+   "debit": 5.16,
+   "blanc_moyen": 0.16,
+   "coupes": 11,
+   "dynamique_db": 20.9,
+   "cris": 0.025,
    "musique": null,
    "impacts": 0,
    "impacts_10s": 0.0,
@@ -12952,43 +12580,45 @@
    "sur_vanne": 0,
    "evenements": {},
    "emotions": {
-    "mocking": 7,
-    "excited": 1,
-    "suspicious": 1,
-    "playful": 1,
-    "laughing": 1,
-    "teasing": 1,
-    "mimicking": 1,
-    "whispering": 1
+    "provocative": 4,
+    "excited": 2,
+    "confused": 2,
+    "shocked": 2,
+    "furious": 2,
+    "annoyed": 1,
+    "provoked": 1,
+    "whispered": 1
    }
   },
   "claude": {
    "lieux": [
-    "cuisine"
+    "salon"
    ],
    "moment": "soir",
    "costumes": {
     "presentateur": {
      "haut": "tshirt",
-     "c_haut": "bleu",
-     "motif": "uni",
+     "c_haut": "rouge",
+     "motif": "carreaux",
      "bas": "jean",
      "chaussures": "baskets",
      "details": [
       "barbe_courte",
-      "bracelets"
-     ]
+      "lunettes_soleil"
+     ],
+     "chapeau": null
     },
     "envoyee": {
-     "haut": "pull",
-     "c_haut": "vert",
-     "motif": "carreaux",
-     "bas": "jogging",
-     "chaussures": "baskets",
+     "haut": "chemise",
+     "c_haut": "bleu",
+     "motif": "uni",
+     "bas": "pantalon",
+     "chaussures": "ville",
      "details": [
-      "collier",
-      "sac_bandouliere"
-     ]
+      "moustache",
+      "montre"
+     ],
+     "chapeau": null
     }
    },
    "objets": [
@@ -12997,156 +12627,103 @@
      "objet": "micro"
     },
     {
-     "replique": 2,
-     "objet": "assiette"
-    },
-    {
-     "replique": 3,
-     "objet": "couteau"
-    },
-    {
-     "replique": 5,
+     "replique": 10,
      "objet": "telephone"
     },
     {
-     "replique": 14,
+     "replique": 20,
      "objet": "bouteille"
     }
    ],
    "gags": [
-    "Micro-ondes : Le seul endroit où la viande peut faire des feintes !",
-    "Attention : Ne pas toucher la viande, même si elle dit qu'elle est chaude !",
-    "Blague garantie : 100% de risques de se faire avoir !"
+    "Jeu des préférences : 100% absurde",
+    "Questions interdites : à vos risques et périls",
+    "Réponses garanties sans filtre"
    ],
    "ambiances": [
-    "vapeur"
+    "neon"
    ],
    "plans": [
     {
      "replique": 0,
-     "plan": "serre",
+     "plan": "large",
      "mouvement": "fixe",
-     "geste": "gratte_tete",
+     "geste": "bras_ouverts",
      "reaction": "aucune"
-    },
-    {
-     "replique": 1,
-     "plan": "moyen",
-     "mouvement": "fixe",
-     "geste": "pointe_d",
-     "reaction": "sceptique"
     },
     {
      "replique": 2,
      "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "bras_ouverts",
-     "reaction": "joie"
-    },
-    {
-     "replique": 3,
-     "plan": "large",
      "mouvement": "zoom_choc",
-     "geste": "facepalm",
-     "reaction": "choc"
-    },
-    {
-     "replique": 4,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "poches",
-     "reaction": "rire"
-    },
-    {
-     "replique": 5,
-     "plan": "tres_serre",
-     "mouvement": "fixe",
      "geste": "pointe_g",
-     "reaction": "aucune"
-    },
-    {
-     "replique": 6,
-     "plan": "large",
-     "mouvement": "fixe",
-     "geste": "mains_hanches",
-     "reaction": "gene"
-    },
-    {
-     "replique": 7,
-     "plan": "serre",
-     "mouvement": "zoom_choc",
-     "geste": "poing",
      "reaction": "choc"
     },
     {
      "replique": 8,
-     "plan": "moyen",
-     "mouvement": "travelling",
-     "geste": "explique",
-     "reaction": "sceptique"
-    },
-    {
-     "replique": 9,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "gratte_tete",
-     "reaction": "joie"
-    },
-    {
-     "replique": 10,
-     "plan": "large",
-     "mouvement": "fixe",
-     "geste": "pointe_d",
-     "reaction": "aucune"
-    },
-    {
-     "replique": 11,
-     "plan": "tres_serre",
-     "mouvement": "fixe",
-     "geste": "pointe_g",
-     "reaction": "choc"
-    },
-    {
-     "replique": 12,
      "plan": "serre",
      "mouvement": "zoom_choc",
      "geste": "facepalm",
-     "reaction": "rire"
+     "reaction": "sceptique"
     },
     {
-     "replique": 13,
-     "plan": "moyen",
-     "mouvement": "fixe",
-     "geste": "chuchote",
-     "reaction": "joie"
+     "replique": 16,
+     "plan": "serre",
+     "mouvement": "zoom_choc",
+     "geste": "poing",
+     "reaction": "colere"
     },
     {
-     "replique": 14,
-     "reaction": "regard_camera"
+     "replique": 20,
+     "plan": "tres_serre",
+     "mouvement": "zoom_choc",
+     "geste": "gratte_tete",
+     "reaction": "gene"
+    },
+    {
+     "replique": 22,
+     "plan": "serre",
+     "mouvement": "zoom_choc",
+     "geste": "pointe_d",
+     "reaction": "colere"
     }
    ]
   },
   "realisation": {
    "moment": "soir",
    "lieux": [
-    "cuisine",
-    "cuisine"
+    "salon",
+    "salon"
    ],
    "gags": [
-    "Micro-ondes : Le seul endroit où la viande peut faire des feintes !",
-    "Attention : Ne pas toucher la viande, même si elle dit qu'elle est chaude !",
-    "Blague garantie : 100% de risques de se faire avoir !"
+    "Jeu des préférences : 100% absurde",
+    "Questions interdites : à vos risques et périls",
+    "Réponses garanties sans filtre"
    ],
    "ambiances": [
-    "poussiere",
-    "vapeur"
+    "neon",
+    "poussiere"
    ],
    "source": "auteur+image",
    "tenues": {
     "presentateur": "tshirt",
-    "envoyee": "pull"
+    "envoyee": "chemise"
    },
    "plans": [
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
     "large/fixe",
     "large/fixe",
     "large/fixe",
@@ -13164,6 +12741,233 @@
     "large/fixe"
    ]
   },
-  "video": "2026-10-26_00h52_emission.mp4"
+  "video": "2026-10-26_00h35_emission.mp4"
+ },
+ {
+  "date": "2026-10-26",
+  "source": "https://www.tiktok.com/@kodanimation/video/7671416307342085409",
+  "auteur": "kodanimation",
+  "visuel": {
+   "gestes": [],
+   "duree": 15.5,
+   "nb_plans": 2,
+   "duree_plan": 7.75,
+   "coupes": [
+    14.5
+   ],
+   "plans": {
+    "tres_serre": 0.0,
+    "serre": 0.0,
+    "moyen": 0.0,
+    "large": 1.0
+   },
+   "camera": {
+    "fixe": 0.759,
+    "avance": 0.138,
+    "recul": 0.034,
+    "travelling": 0.034,
+    "epaule": 0.034
+   },
+   "nb_personnes": 0,
+   "personnes": [],
+   "visages": false,
+   "sourires": 0.0,
+   "energie": 0.302,
+   "mur": [
+    252,
+    252,
+    252
+   ],
+   "palette": [
+    [
+     253,
+     253,
+     253,
+     0.88
+    ],
+    [
+     19,
+     16,
+     16,
+     0.035
+    ],
+    [
+     201,
+     92,
+     49,
+     0.028
+    ],
+    [
+     83,
+     106,
+     151,
+     0.023
+    ],
+    [
+     199,
+     199,
+     199,
+     0.018
+    ],
+    [
+     148,
+     168,
+     60,
+     0.016
+    ]
+   ],
+   "lumiere": {
+    "luminosite": 239.2,
+    "chaleur": 4.3,
+    "saturation": 13.6
+   },
+   "moment": "jour"
+  },
+  "audio": {
+   "duree": 15.1,
+   "nb_voix": 2,
+   "voix": [
+    {
+     "hz": 294,
+     "genre": "f",
+     "part": 0.28
+    },
+    {
+     "hz": 137,
+     "genre": "h",
+     "part": 0.72
+    }
+   ],
+   "debit": 5.27,
+   "blanc_moyen": 0.61,
+   "coupes": 0,
+   "dynamique_db": 28.4,
+   "cris": 0.046,
+   "musique": null,
+   "impacts": 0,
+   "impacts_10s": 0.0,
+   "graves": 0,
+   "aigus": 0,
+   "sur_vanne": 0,
+   "evenements": {},
+   "emotions": {
+    "annoyed": 1,
+    "sarcastic": 1,
+    "confused": 1,
+    "explaining": 1,
+    "hesitant": 1,
+    "amused": 1,
+    "shocked": 1,
+    "smug": 1
+   }
+  },
+  "claude": {
+   "lieux": [
+    "salon"
+   ],
+   "moment": "jour",
+   "costumes": {
+    "envoyee": {
+     "haut": "robe",
+     "c_haut": "vert",
+     "motif": "uni",
+     "bas": "jupe",
+     "chaussures": "ballerines",
+     "cheveux": "boucles",
+     "c_cheveux": "roux",
+     "details": [
+      "rouge_levres"
+     ]
+    },
+    "presentateur": {
+     "haut": "tshirt",
+     "c_haut": "bleu",
+     "motif": "uni",
+     "bas": "short",
+     "chaussures": "chaussons",
+     "cheveux": "aucune",
+     "c_cheveux": "brun",
+     "details": []
+    }
+   },
+   "gags": [
+    "Affiche de film: Les feux de l'amour du quartier"
+   ],
+   "ambiances": [
+    "neon"
+   ],
+   "plans": [
+    {
+     "mouvement": "zoom_choc",
+     "geste": "desespoir",
+     "reaction": "sceptique",
+     "plan": "serre",
+     "replique": 0
+    },
+    {
+     "mouvement": "fixe",
+     "replique": 1,
+     "geste": "explique",
+     "plan": "moyen",
+     "reaction": "gene"
+    },
+    {
+     "replique": 2,
+     "plan": "tres_serre",
+     "mouvement": "avance",
+     "reaction": "yeux_au_ciel",
+     "geste": "gratte_tete"
+    },
+    {
+     "geste": "pointe_d",
+     "plan": "moyen",
+     "replique": 3,
+     "mouvement": "fixe",
+     "reaction": "sceptique"
+    },
+    {
+     "mouvement": "fixe",
+     "reaction": "choc",
+     "replique": 5,
+     "plan": "moyen",
+     "geste": "bras_ouverts"
+    },
+    {
+     "reaction": "rire",
+     "mouvement": "zoom_choc",
+     "plan": "tres_serre",
+     "geste": "facepalm",
+     "replique": 6
+    }
+   ]
+  },
+  "realisation": {
+   "moment": "jour",
+   "lieux": [
+    "salon"
+   ],
+   "gags": [
+    "Affiche de film: Les feux de l'amour du quartier"
+   ],
+   "ambiances": [
+    "neon"
+   ],
+   "source": "auteur+image",
+   "tenues": {
+    "envoyee": "robe",
+    "presentateur": "tshirt"
+   },
+   "plans": [
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe"
+   ]
+  },
+  "video": "2026-10-26_01h06_emission.mp4"
  }
 ]
