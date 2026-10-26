@@ -3341,38 +3341,39 @@
   "cadence": "rapide"
  },
  {
-  "moment": "jour",
+  "moment": "soir",
   "lieux": [
-   "rue"
+   "rue",
+   "salon"
   ],
   "source": "auteur+image",
-  "duree": 93.3,
+  "duree": 12.7,
   "plans": {
-   "large": 38
+   "large": 4
   },
   "mouvements": {
-   "fixe": 38
+   "fixe": 4
   },
   "costumes": {
-   "presentateur": "polo",
-   "envoyee": "tshirt"
+   "presentateur": "tshirt",
+   "invite": "capuche"
   },
   "figurants": 2,
   "ambiances": [
-   "pluie"
+   "poussiere"
   ],
-  "controle": "Humoriste 5.0/10 : 18.5 s Manque de ponctuation sonore sur les moments de malaise comique.; 78.6 s La chute finale manque d'emphase visuelle pour marquer le gag. | Réalisateur 4.0/10 : 1 s Absence tot",
-  "fichier": "2026-10-26_08h21_emission.mp4",
+  "controle": "Humoriste 5.0/10 : 6.1 s La chute finale manque d'un zoom choc pour accentuer l'impact comique. | Réalisateur 5.0/10 : 4.6 s Manque de dynamisme dans les réactions lors du passage d'un plan à l'autre.",
+  "fichier": "2026-10-26_08h44_emission.mp4",
   "cine": {
    "focus": false,
-   "vertige": false,
+   "vertige": true,
    "tiers": true,
    "etalonnage": true,
-   "profondeur": false,
+   "profondeur": true,
    "grain": true,
    "reflets": false,
    "son": true
   },
-  "cadence": "normal"
+  "cadence": "rapide"
  }
 ]

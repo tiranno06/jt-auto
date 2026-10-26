@@ -1,555 +1,214 @@
 {
- "titre": "DRAGUE RESPECTUEUSE",
- "sujet": "DRAGUE RESPECTUEUSE",
- "ecran": "DRAGUE RESPECT",
+ "titre": "POUVOIRS IMAGINAIRES",
+ "sujet": "POUVOIRS IMAGINAIRES",
+ "ecran": "POUVOIRS IMAGI",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "POV : Quand un mec comprend le mot NON",
- "question": "Vous préférez qu'un mec insiste ou qu'il lâche direct ?",
+ "titre_accroche": "POV : ton pote a cru aux pouvoirs de Spider-Ma",
+ "question": "Et toi, tu aurais sauté après une telle révélation ?",
  "running_gag": "",
  "verite": "",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "Excuse-moi, je...",
+   "t": "Quand je t'ai dit que t'avais les pouvoirs de Spider-Man après la piqûre d'araignée, j'ai peut-être un peu exagéré.",
    "_deb": 0.0,
-   "_fin": 0.74,
-   "d": "[polite] Excuse-moi, je..."
+   "_fin": 4.1,
+   "d": "[\"[sceptique] Quand je t'ai dit que t'avais les pouvoirs de Spider-Man après la piqûre d'araignée, j'ai peut-être un peu exagéré.\"]",
+   "objet": "verre"
   },
   {
-   "p": "envoyee",
-   "t": "Pas intéressée.",
-   "_deb": 0.74,
-   "_fin": 1.28,
-   "d": "[dry] Pas intéressée.",
+   "p": "invite",
+   "t": "exagéré.",
+   "_deb": 4.1,
+   "_fin": 5.0,
+   "d": "['[blase] exagéré.']",
    "objet": "telephone"
   },
   {
    "p": "presentateur",
-   "t": "Ok, pas de problème.",
-   "_deb": 1.5,
-   "_fin": 2.96,
-   "d": "[calm] Ok, pas de problème."
-  },
-  {
-   "p": "envoyee",
-   "t": "Attends, c'est tout ?",
-   "_deb": 3.58,
-   "_fin": 4.36,
-   "d": "[surprised] Attends, c'est tout ?",
+   "t": "J'espère que t'as pas sauté.",
+   "_deb": 5.28,
+   "_fin": 6.86,
+   "d": "[\"[panique légère] J'espère que t'as pas sauté.\"]",
    "objet": "telephone"
   },
   {
-   "p": "envoyee",
-   "t": "Hein ? C'est tout ce que t'avais à me dire ?",
-   "_deb": 5.52,
-   "_fin": 6.88,
-   "d": "[confused] Hein ? C'est tout ce que t'avais à me dire ?"
-  },
-  {
-   "p": "presentateur",
-   "t": "Bah, je sais pas, tu m'as dit que t'étais pas intéressée, donc...",
-   "_deb": 7.12,
-   "_fin": 9.72,
-   "d": "[calm] Bah, je sais pas, tu m'as dit que t'étais pas intéressée, donc..."
-  },
-  {
-   "p": "envoyee",
-   "t": "Oui, je sais.",
-   "_deb": 10.0,
-   "_fin": 10.56,
-   "d": "[hesitant] Oui, je sais."
-  },
-  {
-   "p": "presentateur",
-   "t": "Bah, du coup, je m'en vais, enfin... Tu voulais que je te dise quoi d'autre ?",
-   "_deb": 10.58,
-   "_fin": 13.28,
-   "d": "[rational] Bah, du coup, je m'en vais, enfin... Tu voulais que je te dise quoi d'autre ?"
-  },
-  {
-   "p": "envoyee",
-   "t": "Bah non, mais je sais pas, en général, les mecs, ils sont un peu plus forceurs, quoi.",
-   "_deb": 13.28,
-   "_fin": 15.72,
-   "d": "[baffled] Bah non, mais je sais pas, en général, les mecs, ils sont un peu plus forceurs, quoi.",
-   "objet": "telephone"
-  },
-  {
-   "p": "envoyee",
-   "t": "Ils veulent mon snap, euh...",
-   "_deb": 15.98,
-   "_fin": 17.12,
-   "d": "[matter-of-fact] Ils veulent mon snap, euh..."
-  },
-  {
-   "p": "presentateur",
-   "t": "Tu veux que je te demande tout ça ?",
-   "_deb": 17.22,
-   "_fin": 18.3,
-   "d": "[ironic] Tu veux que je te demande tout ça ?"
-  },
-  {
-   "p": "envoyee",
-   "t": "Bah non, pas du tout, c'est super lourd. C'est juste que, d'habitude, c'est comme ça.",
-   "_deb": 18.32,
-   "_fin": 21.46,
-   "d": "[embarrassed] Bah non, pas du tout, c'est super lourd. C'est juste que, d'habitude, c'est comme ça."
-  },
-  {
-   "p": "presentateur",
-   "t": "Ok.",
-   "_deb": 21.56,
-   "_fin": 21.94,
-   "d": "[neutral] Ok."
-  },
-  {
-   "p": "presentateur",
-   "t": "Je...",
-   "_deb": 22.92,
-   "_fin": 23.28,
-   "d": "[hesitant] Je..."
-  },
-  {
-   "p": "envoyee",
-   "t": "C'est tout ? Attends, donc là, tu vas me dire que tu te contentes de ça et que tu vas t'en aller ?",
-   "_deb": 23.68,
-   "_fin": 26.28,
-   "d": "[incredulous] C'est tout ? Attends, donc là, tu vas me dire que tu te contentes de ça et que tu vas t'en aller ?",
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "J'ai pas envie de t'importuner, enfin... Je t'ai trouvé très jolie, mais tu m'as dit que t'étais pas intéressée, donc...",
-   "_deb": 26.28,
-   "_fin": 30.32,
-   "d": "[sincere] J'ai pas envie de t'importuner, enfin... Je t'ai trouvé très jolie, mais tu m'as dit que t'étais pas intéressée, donc..."
-  },
-  {
-   "p": "envoyee",
-   "t": "Donc là, tu vas repartir comme si de rien n'était ?",
-   "_deb": 30.88,
-   "_fin": 32.46,
-   "d": "[disconcerted] Donc là, tu vas repartir comme si de rien n'était ?"
-  },
-  {
-   "p": "presentateur",
-   "t": "Oui, t'attends quelque chose de moi ?",
-   "_deb": 32.6,
-   "_fin": 33.98,
-   "d": "[puzzled] Oui, t'attends quelque chose de moi ?"
-  },
-  {
-   "p": "envoyee",
-   "t": "Non, je comprends pas ce qui est en train de se passer.",
-   "_deb": 34.02,
-   "_fin": 36.06,
-   "d": "[lost] Non, je comprends pas ce qui est en train de se passer."
-  },
-  {
-   "p": "presentateur",
-   "t": "Mais quoi, tu veux que je te courtise ou que je sois plus insistant ?",
-   "_deb": 36.48,
-   "_fin": 39.18,
-   "d": "[curious] Mais quoi, tu veux que je te courtise ou que je sois plus insistant ?"
-  },
-  {
-   "p": "envoyee",
-   "t": "Non, pas du tout. C'est juste que j'ai l'impression que t'abandonnes très facilement.",
-   "_deb": 39.18,
-   "_fin": 43.22,
-   "d": "[defensive] Non, pas du tout. C'est juste que j'ai l'impression que t'abandonnes très facilement."
-  },
-  {
-   "p": "presentateur",
-   "t": "Tu m'as dit que t'étais pas intéressée ?",
-   "_deb": 44.76,
-   "_fin": 46.4,
-   "d": "[incredulous] Tu m'as dit que t'étais pas intéressée ?"
-  },
-  {
-   "p": "envoyee",
-   "t": "Oui, je sais.",
-   "_deb": 46.46,
-   "_fin": 47.18,
-   "d": "[reluctant] Oui, je sais."
-  },
-  {
-   "p": "presentateur",
-   "t": "Et alors ? Si quelqu'un n'est pas intéressé par moi, je le respecte.",
-   "_deb": 47.18,
-   "_fin": 50.42,
-   "d": "[philosophical] Et alors ? Si quelqu'un n'est pas intéressé par moi, je le respecte."
-  },
-  {
-   "p": "presentateur",
-   "t": "Je vais pas faire le forceur. Mais pourquoi ? Parce que c'est comme ça que les gens souffrent.",
-   "_deb": 50.72,
-   "_fin": 54.36,
-   "d": "[firm] Je vais pas faire le forceur. Mais pourquoi ? Parce que c'est comme ça que les gens souffrent."
-  },
-  {
-   "p": "presentateur",
-   "t": "Et j'ai pas envie de souffrir et j'ai pas du tout envie de te faire souffrir.",
-   "_deb": 54.66,
-   "_fin": 57.18,
-   "d": "[empathetic] Et j'ai pas envie de souffrir et j'ai pas du tout envie de te faire souffrir."
-  },
-  {
-   "p": "envoyee",
-   "t": "Parfois, il faut se battre pour ce qu'on veut dans la vie, en fait.",
-   "_deb": 57.22,
-   "_fin": 58.94,
-   "d": "[philosophical] Parfois, il faut se battre pour ce qu'on veut dans la vie, en fait."
-  },
-  {
-   "p": "presentateur",
-   "t": "Oui, c'est vrai. Je ne veux pas me battre pour quelqu'un qui ne me veut pas en retour.",
-   "_deb": 59.0,
-   "_fin": 61.92,
-   "d": "[mature] Oui, c'est vrai. Je ne veux pas me battre pour quelqu'un qui ne me veut pas en retour."
-  },
-  {
-   "p": "envoyee",
-   "t": "Mais attends, là, c'est quoi ? C'est un prank ?",
-   "_deb": 61.92,
-   "_fin": 63.4,
-   "d": "[suspicious] Mais attends, là, c'est quoi ? C'est un prank ?",
-   "objet": "telephone"
-  },
-  {
-   "p": "envoyee",
-   "t": "Il y a des caméras ?",
-   "_deb": 63.4,
-   "_fin": 64.2,
-   "d": "[paranoid] Il y a des caméras ?"
-  },
-  {
-   "p": "presentateur",
-   "t": "Non, non, non. Il n'y a pas de caméras.",
-   "_deb": 64.26,
-   "_fin": 65.96,
-   "d": "[gentle] Non, non, non. Il n'y a pas de caméras."
-  },
-  {
-   "p": "presentateur",
-   "t": "J'ai voulu t'aborder. Tu m'as dit que tu n'étais pas intéressée.",
-   "_deb": 66.5,
-   "_fin": 69.0,
-   "d": "[patient] J'ai voulu t'aborder. Tu m'as dit que tu n'étais pas intéressée."
-  },
-  {
-   "p": "presentateur",
-   "t": "Donc, je m'en vais. Enfin, c'est normal.",
-   "_deb": 69.02,
-   "_fin": 70.96,
-   "d": "[logical] Donc, je m'en vais. Enfin, c'est normal."
-  },
-  {
-   "p": "envoyee",
-   "t": "C'est bien la première fois que je vois ça.",
-   "_deb": 71.02,
-   "_fin": 72.26,
-   "d": "[thoughtful] C'est bien la première fois que je vois ça."
-  },
-  {
-   "p": "presentateur",
-   "t": "Ça, c'est triste. Et pour ça, je suis vraiment, sincèrement désolé.",
-   "_deb": 72.32,
-   "_fin": 75.84,
-   "d": "[compassionate] Ça, c'est triste. Et pour ça, je suis vraiment, sincèrement désolé."
-  },
-  {
-   "p": "envoyee",
-   "t": "Bah, t'inquiète. T'y étais pas. Donc, t'y es pour rien.",
-   "_deb": 75.86,
-   "_fin": 78.56,
-   "d": "[touched] Bah, t'inquiète. T'y étais pas. Donc, t'y es pour rien."
-  },
-  {
-   "p": "presentateur",
-   "t": "Non. Je suis quand même désolé.",
-   "_deb": 78.58,
-   "_fin": 81.12,
-   "d": "[sincere] Non. Je suis quand même désolé."
-  },
-  {
-   "p": "presentateur",
-   "t": "Bon, bah, je te souhaite une bonne journée. Sous -titrage Société Radio -Canada",
-   "_deb": 83.48,
-   "_fin": 89.76,
+   "p": "invite",
+   "t": "Allô? Allô? T'es là?",
+   "_deb": 7.3,
+   "_fin": 9.06,
+   "d": "[\"[inquiet] Allô? Allô? T'es là?\"]",
+   "objet": "telephone",
    "chute": true
   }
  ],
  "bandeau": [],
  "gag": null,
- "legende": "Quand respecter un refus devient le plus gros choc de sa journée.",
+ "legende": "Quand une blague tourne au cauchemar...",
  "hashtags": [
   "petitsdramas",
-  "humour",
-  "dating",
-  "respect",
-  "france",
-  "relatable"
+  "pouvoirsimaginaires",
+  "spiderman",
+  "blaguequitournemal",
+  "amispaniques",
+  "tiktokhumour",
+  "superherosfaux"
  ],
  "sources": [
-  "https://www.tiktok.com/@motiontoonz/video/7686945510283922720"
+  "https://www.tiktok.com/@kodanimation/video/7678870631944834336"
  ],
  "decoupage": [
   {
    "scene": "1",
    "repliques": [
     0,
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-    10,
-    11,
-    12,
-    13,
-    14,
-    15,
-    16,
-    17,
-    18,
-    19,
-    20,
-    21,
-    22,
-    23,
-    24,
-    25,
-    26,
-    27,
-    28,
-    29,
-    30,
-    31,
-    32,
-    33,
-    34,
-    35,
-    36,
-    37
+    2
    ],
    "lieu": "",
    "son": "",
-   "duree": 0.0,
-   "decor": "Paris sidewalk with asphalt street, trees, grey buildings, modern glass facade and bus shelter",
-   "titre": "Le consentement"
+   "duree": 0,
+   "decor": "salon avec un canapé gris, une table basse en bois clair, une télé allumée en arrière-plan écran bleu, une bouteille d'eau vide et un verre à moitié plein sur l"
+  },
+  {
+   "scene": "2",
+   "repliques": [
+    1,
+    3
+   ],
+   "lieu": "",
+   "son": "",
+   "duree": 0,
+   "decor": "même salon, mais avec un coussin rouge par terre et un téléphone portable posé sur la table basse."
   }
  ],
  "studio": {
-  "cadence": "normal",
-  "ambiances": [],
-  "objets": [
-   {
-    "objet": "telephone",
-    "replique": 1
-   },
-   {
-    "replique": 3,
-    "objet": "telephone"
-   },
-   {
-    "objet": "telephone",
-    "replique": 8
-   },
-   {
-    "replique": 14,
-    "objet": "telephone"
-   },
-   {
-    "replique": 28,
-    "objet": "telephone"
-   }
+  "moment": "soir",
+  "lieux": [
+   "rue",
+   "salon"
   ],
   "costumes": {
    "presentateur": {
-    "haut": "polo",
+    "haut": "tshirt",
     "c_haut": "bleu",
     "motif": "uni",
-    "bas": "jean",
+    "bas": "pantalon",
     "chaussures": "baskets",
-    "cheveux": "aucune",
-    "c_cheveux": "noir",
     "details": [
-     "montre"
-    ]
+     "barre_taille",
+     "lunettes_vue"
+    ],
+    "chapeau": null,
+    "cheveux": "court_texture",
+    "c_cheveux": "brun"
    },
-   "envoyee": {
-    "haut": "tshirt",
-    "c_haut": "blanc",
+   "invite": {
+    "haut": "sweat",
+    "c_haut": "rouge",
     "motif": "uni",
-    "bas": "jean",
-    "chaussures": "chaussons",
-    "cheveux": "long",
-    "c_cheveux": "chatain",
-    "details": []
+    "bas": "jeans",
+    "chaussures": "baskets",
+    "details": [
+     "bracelets",
+     "barre_taille"
+    ],
+    "chapeau": null,
+    "cheveux": "boucles",
+    "c_cheveux": "roux"
    }
   },
-  "gags": [
-   "Arrêt République : Lignes 20, 56, 86",
-   "Affiche RATP : Restons courtois"
-  ],
-  "lieux": [
-   "rue"
-  ],
-  "plans": [
-   {
-    "replique": 0,
-    "geste": "pointe_d",
-    "reaction": "blase",
-    "mouvement": "fixe",
-    "plan": "moyen"
-   },
-   {
-    "replique": 1,
-    "geste": "telephone",
-    "reaction": "neutre",
-    "mouvement": "fixe",
-    "plan": "moyen"
-   },
-   {
-    "reaction": "sceptique",
-    "mouvement": "fixe",
-    "plan": "moyen",
-    "replique": 2,
-    "geste": "bras_ouverts"
-   },
-   {
-    "geste": "gratte_tete",
-    "plan": "moyen",
-    "replique": 3,
-    "mouvement": "avance",
-    "reaction": "neutre"
-   },
-   {
-    "replique": 5,
-    "mouvement": "fixe",
-    "geste": "haussement",
-    "plan": "moyen",
-    "reaction": "choc"
-   },
-   {
-    "reaction": "sceptique",
-    "mouvement": "fixe",
-    "replique": 10,
-    "plan": "moyen",
-    "geste": "bras_ouverts"
-   },
-   {
-    "reaction": "gene",
-    "mouvement": "fixe",
-    "geste": "appuye",
-    "plan": "serre",
-    "replique": 14
-   },
-   {
-    "plan": "moyen",
-    "reaction": "sceptique",
-    "replique": 15,
-    "geste": "explique",
-    "mouvement": "fixe"
-   },
-   {
-    "plan": "serre",
-    "replique": 23,
-    "geste": "desespoir",
-    "mouvement": "fixe",
-    "reaction": "soupir"
-   },
-   {
-    "geste": "gratte_tete",
-    "replique": 28,
-    "mouvement": "zoom_choc",
-    "plan": "serre",
-    "reaction": "neutre"
-   },
-   {
-    "plan": "large",
-    "reaction": "regard_camera",
-    "mouvement": "recul",
-    "geste": "bras_ouverts",
-    "replique": 37
-   }
-  ],
   "personnages": {
    "presentateur": {
     "genre": "h",
-    "age": 24,
+    "age": 30,
     "taille": 1,
-    "corpulence": 0.3,
-    "cheveux": "chauve",
-    "barbe": "rien"
+    "corpulence": 0.5,
+    "cheveux": "court_texture",
+    "barbe": "trois_jours"
    },
-   "envoyee": {
-    "genre": "f",
-    "age": 22,
+   "invite": {
+    "genre": "h",
+    "age": 25,
     "taille": 0.95,
-    "corpulence": 0.2,
-    "cheveux": "long",
-    "barbe": "rien"
+    "corpulence": 0.6,
+    "cheveux": "boucles",
+    "barbe": null
    }
   },
-  "moment": "jour"
+  "gags": [
+   "Affiche au mur : 'Ne saute pas, même si tu crois avoir des pouvoirs !'",
+   "Post-it sur la télé : 'Spider-Man : 0, Réalité : 100'",
+   "Coussin par terre avec écrit : 'Où est passé mon pote ?'"
+  ],
+  "ambiances": [
+   "aucun"
+  ],
+  "cadence": "rapide",
+  "plans": [
+   {
+    "replique": 0,
+    "plan": "large",
+    "mouvement": "fixe",
+    "geste": "gratte_tete",
+    "reaction": "sceptique"
+   },
+   {
+    "replique": 1,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "haussement",
+    "reaction": "blase"
+   },
+   {
+    "replique": 2,
+    "plan": "moyen",
+    "mouvement": "fixe",
+    "geste": "pointe_g",
+    "reaction": "panique"
+   },
+   {
+    "replique": 3,
+    "plan": "tres_serre",
+    "mouvement": "zoom_choc",
+    "geste": "telephone",
+    "reaction": "inquiet"
+   }
+  ],
+  "objets": [
+   {
+    "replique": 3,
+    "objet": "telephone"
+   },
+   {
+    "replique": 0,
+    "objet": "verre"
+   }
+  ],
+  "decors_vus": {
+   "presentateur": "salon avec un canapé gris, une table basse en bois clair, une télé allumée en arrière-plan (écran bleu), une bouteille d'eau vide et un verre à moitié plein sur la table basse, lumière tamisée.",
+   "invite": "même salon, mais avec un coussin rouge par terre et un téléphone portable posé sur la table basse."
+  },
+  "lieux_de": {
+   "presentateur": "rue",
+   "invite": "salon"
+  }
  },
  "doublage": {
-  "piste": "/tmp/tmp42aql5j0/piste.wav",
-  "duree": 89.79,
-  "source": "https://www.tiktok.com/@motiontoonz/video/7686945510283922720",
-  "auteur": "motiontoonz",
-  "contexte": "Un homme aborde poliment une jeune femme à un arrêt de bus, mais dès qu'elle lui dit qu'elle n'est pas intéressée, il s'apprête à partir respectueusement, ce qui déstabilise totalement la fille habituée aux dragueurs lourds.",
+  "piste": "/tmp/tmpj67fdejk/piste.wav",
+  "duree": 9.92,
+  "source": "https://www.tiktok.com/@kodanimation/video/7678870631944834336",
+  "auteur": "kodanimation",
+  "contexte": "Deux amis discutent dans un salon après une blague sur des pouvoirs imaginaires. L'un semble inquiet après avoir entendu l'autre exagérer une situation.",
   "evenements": [],
   "visuel": {
    "gestes": [],
-   "duree": 90.0,
-   "nb_plans": 35,
-   "duree_plan": 2.57,
-   "coupes": [
-    1.0,
-    4.0,
-    5.5,
-    6.0,
-    7.5,
-    10.0,
-    11.0,
-    13.5,
-    17.5,
-    18.5,
-    22.0,
-    24.5,
-    26.5,
-    31.0,
-    33.0,
-    34.0,
-    36.5,
-    39.5,
-    43.5,
-    46.5,
-    48.0,
-    52.0,
-    52.5,
-    57.5,
-    59.0,
-    62.0,
-    64.5,
-    71.0,
-    72.5,
-    76.0,
-    79.0,
-    81.5,
-    83.5,
-    87.5
-   ],
+   "duree": 10.0,
+   "nb_plans": 1,
+   "duree_plan": 10.0,
+   "coupes": [],
    "plans": {
     "tres_serre": 0.0,
     "serre": 0.0,
@@ -557,87 +216,87 @@
     "large": 1.0
    },
    "camera": {
-    "fixe": 0.566,
-    "avance": 0.007,
+    "fixe": 1.0,
+    "avance": 0.0,
     "recul": 0.0,
     "travelling": 0.0,
-    "epaule": 0.428
+    "epaule": 0.0
    },
    "nb_personnes": 0,
    "personnes": [],
    "visages": false,
    "sourires": 0.0,
-   "energie": 0.304,
+   "energie": 0.216,
    "mur": [
-    211,
-    216,
-    217
+    218,
+    218,
+    218
    ],
    "palette": [
     [
-     212,
-     208,
-     203,
-     0.359
+     214,
+     214,
+     214,
+     0.554
     ],
     [
-     134,
-     150,
-     160,
-     0.167
+     177,
+     178,
+     179,
+     0.185
     ],
     [
-     158,
-     196,
-     221,
-     0.148
-    ],
-    [
-     92,
-     99,
-     98,
-     0.146
-    ],
-    [
-     239,
-     244,
-     246,
-     0.118
-    ],
-    [
-     34,
-     37,
      40,
-     0.063
+     41,
+     46,
+     0.083
+    ],
+    [
+     113,
+     124,
+     125,
+     0.078
+    ],
+    [
+     253,
+     253,
+     253,
+     0.06
+    ],
+    [
+     5,
+     5,
+     6,
+     0.04
     ]
    ],
    "lumiere": {
-    "luminosite": 186.1,
-    "chaleur": -12.4,
-    "saturation": 42.6
+    "luminosite": 184.3,
+    "chaleur": -1.7,
+    "saturation": 8.0
    },
    "moment": "jour"
   },
   "audio": {
-   "duree": 89.8,
+   "duree": 9.9,
    "nb_voix": 2,
    "voix": [
     {
-     "hz": 122,
+     "hz": 109,
      "genre": "h",
-     "part": 0.63
+     "part": 0.68
     },
     {
-     "hz": 202,
-     "genre": "f",
-     "part": 0.37
+     "hz": 133,
+     "genre": "h",
+     "part": 0.32
     }
    ],
-   "debit": 5.32,
-   "blanc_moyen": 0.37,
-   "coupes": 12,
-   "dynamique_db": 23.1,
-   "cris": 0.002,
+   "debit": 4.44,
+   "blanc_moyen": 0.36,
+   "coupes": 1,
+   "dynamique_db": 23.2,
+   "cris": 0.079,
    "musique": null,
    "impacts": 0,
    "impacts_10s": 0.0,
@@ -646,17 +305,13 @@
    "sur_vanne": 0,
    "evenements": {},
    "emotions": {
-    "polite": 2,
-    "calm": 2,
-    "hesitant": 2,
-    "incredulous": 2,
-    "sincere": 2,
-    "philosophical": 2,
-    "dry": 1,
-    "surprised": 1
+    "\"[sceptique": 1,
+    "'[blase": 1,
+    "\"[panique légère": 1,
+    "\"[inquiet": 1
    }
   },
-  "video_origine": "/tmp/tmp42aql5j0/src.mp4"
+  "video_origine": "/tmp/tmpj67fdejk/src.mp4"
  },
  "fiche": {
   "note": 0,
@@ -666,113 +321,58 @@
     "scene": "1",
     "repliques": [
      0,
-     1,
-     2,
-     3,
-     4,
-     5,
-     6,
-     7,
-     8,
-     9,
-     10,
-     11,
-     12,
-     13,
-     14,
-     15,
-     16,
-     17,
-     18,
-     19,
-     20,
-     21,
-     22,
-     23,
-     24,
-     25,
-     26,
-     27,
-     28,
-     29,
-     30,
-     31,
-     32,
-     33,
-     34,
-     35,
-     36,
-     37
+     1
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "Paris sidewalk with asphalt street, trees, grey buildings, modern glass facade and bus shelter",
-    "titre": "Le consentement"
+    "decor": "salon avec un canapé gris, une table basse en bois clair, une télé allumée en fond, une bouteille d'eau et un verre vide sur la table basse.",
+    "titre": "La blague de trop"
+   },
+   {
+    "scene": "2",
+    "repliques": [
+     2,
+     3
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 0.0,
+    "decor": "salon, même décor, mais avec un téléphone portable posé sur la table basse et un coussin qui tombe par terre.",
+    "titre": "La panique monte"
    }
   ]
  },
  "_monte": true,
+ "_separes": true,
  "_voix_hz": {
-  "presentateur": 122,
-  "envoyee": 193
+  "presentateur": 109,
+  "invite": 131
  },
  "_voix_genre": {
   "presentateur": "h",
-  "envoyee": "h"
+  "invite": "h"
  },
  "realisation": {
-  "moment": "jour",
+  "moment": "soir",
   "lieux": [
-   "rue"
+   "rue",
+   "salon"
   ],
   "gags": [
-   "Arrêt République : Lignes 20, 56, 86",
-   "Affiche RATP : Restons courtois"
+   "Affiche au mur : 'Ne saute pas, même si tu crois avoir des pouvoirs !'",
+   "Post-it sur la télé : 'Spider-Man : 0, Réalité : 100'",
+   "Coussin par terre avec écrit : 'Où est passé mon pote ?'"
   ],
   "ambiances": [
-   "pluie"
+   "poussiere"
   ],
   "source": "auteur+image",
   "tenues": {
-   "presentateur": "polo",
-   "envoyee": "tshirt"
+   "presentateur": "tshirt",
+   "invite": "capuche"
   },
   "plans": [
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
    "large/fixe",
    "large/fixe",
    "large/fixe",
