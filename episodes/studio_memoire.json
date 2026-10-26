@@ -2976,36 +2976,35 @@
  {
   "moment": "soir",
   "lieux": [
-   "classe",
-   "classe",
-   "bureau"
+   "chambre",
+   "chambre"
   ],
   "source": "auteur+image",
-  "duree": 81.8,
+  "duree": 72.9,
   "plans": {
-   "large": 28
+   "large": 35
   },
   "mouvements": {
-   "fixe": 28
+   "fixe": 35
   },
   "costumes": {
-   "presentateur": "tshirt",
-   "invite": "chemise"
+   "envoyee": "tshirt",
+   "presentateur": "pull"
   },
-  "figurants": 1,
+  "figurants": 0,
   "ambiances": [
    "poussiere",
    "vapeur"
   ],
-  "controle": "Humoriste 8.6/10 : 75.9 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 3.2/10 : 48.2 s tête de presentateur coupée par le bord de l'image (large); montage trop lent : 0.4 pla",
-  "fichier": "2026-10-26_04h07_emission.mp4",
+  "controle": "Humoriste 8.6/10 : 65.5 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 6.6/10 : montage trop lent : 0.3 plans toutes les 10 s (il en faudrait ~4.9); 14.2 s pas assez de plans",
+  "fichier": "2026-10-26_04h39_emission.mp4",
   "cine": {
-   "focus": true,
-   "vertige": false,
-   "tiers": true,
+   "focus": false,
+   "vertige": true,
+   "tiers": false,
    "etalonnage": true,
    "profondeur": false,
-   "grain": true,
+   "grain": false,
    "reflets": true,
    "son": true
   },
