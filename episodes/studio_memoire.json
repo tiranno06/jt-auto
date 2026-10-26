@@ -3702,38 +3702,34 @@
   "cadence": null
  },
  {
-  "moment": "soir",
+  "moment": "jour",
   "lieux": [
-   "bureau",
-   "hall"
+   "rue"
   ],
   "source": "auteur+image",
-  "duree": 66.5,
+  "duree": 73.1,
   "plans": {
-   "large": 17
+   "large": 33
   },
   "mouvements": {
-   "fixe": 17
+   "fixe": 33
   },
   "costumes": {
    "presentateur": "tshirt",
-   "invite": "chemise"
+   "invite": "polo"
   },
-  "figurants": 1,
-  "ambiances": [
-   "neon",
-   "poussiere"
-  ],
-  "controle": "Humoriste 6.0/10 : 0.4 s La chute finale est trop longue et la vanne se dilue. Le rythme des répliques pourrait être accéléré pour garder l'humour intact.; 59.5 s Manque de réactions marquées lors des",
-  "fichier": "2026-10-26_14h32_emission.mp4",
+  "figurants": 2,
+  "ambiances": [],
+  "controle": "Humoriste 8.6/10 : 68.7 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 6.6/10 : montage trop lent : 0.1 plans toutes les 10 s (il en faudrait ~4.6); 44.6 s pas assez de plans",
+  "fichier": "2026-10-26_14h47_emission.mp4",
   "cine": {
    "focus": false,
-   "vertige": true,
+   "vertige": false,
    "tiers": false,
    "etalonnage": true,
    "profondeur": false,
-   "grain": false,
-   "reflets": true,
+   "grain": true,
+   "reflets": false,
    "son": true
   },
   "cadence": "rapide"

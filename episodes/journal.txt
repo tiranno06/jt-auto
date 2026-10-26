@@ -2,14 +2,14 @@ Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, ElevenLabs epuise — IA utilisée : mistral
 Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @motiontoonz, @same_same53, @charly.bse, @kodanimation, @vignianimation, @vincedessine
-Profil TikTok @vignianimation : 36 vidéo(s) jamais utilisée(s)
-Profil TikTok @vincedessine : 32 vidéo(s) jamais utilisée(s)
 Profil TikTok @motiontoonz : 35 vidéo(s) jamais utilisée(s)
-Vidéo depuis TikTok : https://www.tiktok.com/@vignianimation/video/7685457076637715744
+Profil TikTok @charly.bse : 32 vidéo(s) jamais utilisée(s)
+Profil TikTok @same_same53 : 31 vidéo(s) jamais utilisée(s)
+Vidéo depuis TikTok : https://www.tiktok.com/@motiontoonz/video/7689102652696825120
   son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 63.0 s, compte d'origine @vignianimation
-[ WARN:0@72.469] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
-  image de la vidéo : 5 plans (≈ 12.6 s chacun) ; cadrages : très serré 0 %, serré 19 %, moyen 0 %, large 80 % ; caméra : fixe 69 %, avance 8 %, recul 0 %, epaule 21 % ; 1 personne(s) à l'écran : centre (habit [14, 67, 104], cheveux [48, 45, 45], sourit 0 %) ; agitation 0.275 ; lumière jour ; fond [14, 50, 109]
+  son récupéré : 69.8 s, compte d'origine @motiontoonz
+[ WARN:0@20.826] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  image de la vidéo : 35 plans (≈ 2.0 s chacun) ; cadrages : très serré 0 %, serré 9 %, moyen 17 %, large 73 % ; caméra : fixe 80 %, epaule 19 % ; 1 personne(s) à l'écran : centre (habit [41, 55, 80], cheveux [57, 73, 101], sourit 0 %) ; agitation 0.326 ; lumière jour ; fond [56, 66, 61]
   isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
   transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/core/io.py:48: UserWarning: 
@@ -19,43 +19,47 @@ torchcodec is not installed correctly so built-in audio decoding will fail. Solu
 
 Could not load this library: /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/torchcodec/libtorchcodec_image.so
   warnings.warn(
-[0;93m2026-10-26 13:29:59.057806891 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[0;93m2026-10-26 13:43:46.457209012 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1913.)
   std = sequences.std(dim=-1, correction=1)
-  voix séparées par pyannote : 2 voix, 15 tours de parole
+  voix séparées par pyannote : 1 voix, 24 tours de parole
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-  voix re-séparées par leur empreinte (ECAPA) : 2 voix (netteté 0.11)
-  voix vérifiées mot par mot : 4 mot(s) remis sur la bonne voix
-  17 répliques, voix : {'speaker_0': 131, 'speaker_1': 129}
-  son de la vidéo : 2 voix [131 Hz (h, 81 %), 129 Hz (h, 19 %)], 4.23 mots/s, blancs 0.42 s, 5 coupure(s) de parole, dynamique 15.9 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
+  voix re-séparées par leur empreinte (ECAPA) : 2 voix (netteté 0.13)
+  voix vérifiées mot par mot : 27 mot(s) remis sur la bonne voix
+  33 répliques, voix : {'speaker_0': 170, 'speaker_1': 156}
+  son de la vidéo : 2 voix [170 Hz (?, 42 %), 156 Hz (h, 57 %)], 5.46 mots/s, blancs 0.35 s, 6 coupure(s) de parole, dynamique 31.7 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
+  scène reconstituée : Devant le portail de son pavillon, un homme tente de récupérer son colis auprès d'un facteur zélé qui refuse obstinément sous prétexte qu'il l'a déjà coché absent.
+  casting : speaker_0 → Jojo, speaker_1 → Kévin
+  sous-titres : 22 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
+Sketch : « LE COLIS INTROUVABLE », 33 répliques
+  décor 0 : Suburban house yard with black metal gate, driveway, modern pavillon f
+montage : 1 plans (0.0:large>pre/coupe)
+studio : jour, lieux ['rue'], tenues presentateur=tshirt, invite=polo, 2 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 73.1 s, 33 répliques, 1 scène(s), personnages ['presentateur', 'invite']
+montage : 1 plans (0.0:large>pre/coupe)
+studio : jour, lieux ['rue'], tenues presentateur=tshirt, invite=polo, 2 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 73.1 s, 33 répliques, 1 scène(s), personnages ['presentateur', 'invite']
+  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~1096 images)
+  morceau 2194–3290 reçu d'une machine d'aide
+  morceau 1097–2194 reçu d'une machine d'aide
+  morceau 3290–4387 reçu d'une machine d'aide
+  dessin partagé terminé en 9.5 min
+Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
   IA gemini indisponible (gemini 429 : [{
   "error": {
     "code": 429,
     "message": "You exceeded your current quota, please check your plan an) : on passe à la suivante
-  scène reconstituée : Deux amis, un présentateur énergique et un invité sceptique, sont dans un studio de jeu vidéo improvisé. Ils jouent à un jeu compétitif où l’un des deux est en difficulté face à des adversaires. Le présentateur encourage son ami tout en évoquant des métaphores poétiques et des références à leur vie quotidienne.
-  casting : speaker_0 → Jojo, speaker_1 → Kévin
-  sous-titres : 5 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
-  2 réattribution(s) de l'IA refusée(s) : la voix de ces répliques est reconnue avec certitude
-Sketch : « AMITIÉ ET DÉFIS », 17 répliques
-  décor 0 : studio de jeu vidéo, bureau avec écrans géants, manettes de jeu, boute
-  décor 1 : même décor, mais avec des effets visuels de jeu vidéo intégrés aux mur
-montage : 2 plans (0.0:large>pre/coupe 15.1:large>pre/coupe)
-studio : soir, lieux ['bureau', 'hall'], tenues presentateur=tshirt, invite=chemise, 1 figurant(s), ambiances ['neon', 'poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 66.5 s, 17 répliques, 2 scène(s), personnages ['presentateur', 'invite']
-Contrôle image : 2 défaut(s) — 15.25 s tete_coupee (presentateur), 15.25 s tete_coupee (invite)
-montage : 2 plans (0.0:large>pre/coupe 15.1:large>pre/coupe)
-studio : soir, lieux ['bureau', 'hall'], tenues presentateur=tshirt, invite=chemise, 1 figurant(s), ambiances ['neon', 'poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 66.5 s, 17 répliques, 2 scène(s), personnages ['presentateur', 'invite']
-Contrôle image : 2 défaut(s) — 15.25 s tete_coupee (presentateur), 15.25 s tete_coupee (invite)
-  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~997 images)
-  morceau 1994–2991 reçu d'une machine d'aide
-  morceau 2991–3988 reçu d'une machine d'aide
-  morceau 997–1994 reçu d'une machine d'aide
-  dessin partagé terminé en 4.5 min
+Jury qualité (gratuit) : 8.8/10 — Humoriste 8.6/10 : 68.7 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 6.6/10 : montage trop lent : 0.1 plans toutes les 10 s (il en faudrait ~4.6); 44.6 s pas assez de plans de réaction de celui qui écoute | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.1/10 : 1.8 s sous-titres trop rapides à lire
+Corrections du jury (tour 1) : réaction « sceptique » à la réplique 25
+montage : 1 plans (0.0:large>pre/coupe)
+studio : jour, lieux ['rue'], tenues presentateur=tshirt, invite=polo, 2 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 73.1 s, 33 répliques, 1 scène(s), personnages ['presentateur', 'invite']
+  redessin partiel : 480/4387 images à redessiner (1 passage(s)), le reste repris tel quel
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury qualité (ia) : 5.8/10 — Humoriste 6.0/10 : 0.4 s La chute finale est trop longue et la vanne se dilue. Le rythme des répliques pourrait être accéléré pour garder l'humour intact.; 59.5 s Manque de réactions marquées lors des répliques humoristiques, notamment pour renforcer les moments clés.; 16.9 s La chute sur 'Tu es mon ange gardien' manque d'impact visuel. Un regard caméra ou un geste exagéré renforcerait l'effet comique. | Réalisateur 5.0/10 : 0 s Montage trop lent avec seulement 0.3 plans toutes les 10 secondes. Il faudrait environ 0.6 plans pour dynamiser la vidéo.; 7.8 s Tête du présentateur coupée par le bord de l'image dans certains plans.; 29.4 s Manque de plans de réaction de l'invité pour renforcer l'interaction.; 15.2 s tête de presentateur coupée par le bord de l'image (large) | Directeur artistique 7.0/10 : 0 s Les personnages secondaires (comme le frère d'armes) ne sont pas représentés visuelle
+Jury qualité (gratuit) : 8.8/10 — Humoriste 8.6/10 : 68.7 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 6.6/10 : montage trop lent : 0.1 plans toutes les 10 s (il en faudrait ~4.6); 44.6 s pas assez de plans de réaction de celui qui écoute | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.1/10 : 1.8 s sous-titres trop rapides à lire
+La version corrigée n'est pas meilleure : on garde la première.
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = mistral ×2, voix = tiktok, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 23758, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 30}
-Quota de l'API GitHub : 4993 appels restants
-OK : sortie/2026-10-26_14h32_emission.mp4 (66 s)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = gemini ×1, mistral ×2, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 41223, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 26}
+Quota de l'API GitHub : 4864 appels restants
+OK : sortie/2026-10-26_14h47_emission.mp4 (73 s)

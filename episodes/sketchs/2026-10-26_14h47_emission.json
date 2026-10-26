@@ -1,0 +1,698 @@
+{
+ "titre": "LE COLIS INTROUVABLE",
+ "sujet": "LE COLIS INTROUVABLE",
+ "ecran": "LE COLIS INTRO",
+ "invite_nom": "Hubert Rustine",
+ "invite_role": "Expert (fictif)",
+ "invite_look": "chauve",
+ "lieu_direct": "Assemblée",
+ "titre_accroche": "Quand le facteur refuse de te livrer",
+ "question": "Ça vous est déjà arrivé d'être chez vous et d'avoir un avis de passage ?",
+ "running_gag": "",
+ "verite": "",
+ "repliques": [
+  {
+   "p": "presentateur",
+   "t": "Ah, c'est mon colis !",
+   "_deb": 0.0,
+   "_fin": 1.16,
+   "d": "[happy] Ah, c'est mon colis !"
+  },
+  {
+   "p": "invite",
+   "t": "Ah oui !",
+   "_deb": 1.16,
+   "_fin": 1.64,
+   "d": "[neutral] Ah oui !"
+  },
+  {
+   "p": "presentateur",
+   "t": "Bah je vais vous le prendre.",
+   "_deb": 1.78,
+   "_fin": 2.7,
+   "d": "[neutral] Bah je vais vous le prendre."
+  },
+  {
+   "p": "invite",
+   "t": "Ah mais non, parce que vous êtes absent.",
+   "_deb": 2.98,
+   "_fin": 4.5,
+   "d": "[serious] Ah mais non, parce que vous êtes absent."
+  },
+  {
+   "p": "presentateur",
+   "t": "Ah bah non, bah je suis là.",
+   "_deb": 4.54,
+   "_fin": 5.22,
+   "d": "[confused] Ah bah non, bah je suis là."
+  },
+  {
+   "p": "invite",
+   "t": "Vous remarquez quoi là ?",
+   "_deb": 5.26,
+   "_fin": 6.2,
+   "d": "[condescending] Vous remarquez quoi là ?"
+  },
+  {
+   "p": "presentateur",
+   "t": "Avis de passage.",
+   "_deb": 7.04,
+   "_fin": 7.68,
+   "d": "[annoyed] Avis de passage.",
+   "objet": "lettre"
+  },
+  {
+   "p": "invite",
+   "t": "Avis de passage, parce que quand je suis passé, c'est qu'absent.",
+   "_deb": 7.68,
+   "_fin": 10.48,
+   "d": "[explaining] Avis de passage, parce que quand je suis passé, c'est qu'absent."
+  },
+  {
+   "p": "presentateur",
+   "t": "Bon, je peux récupérer mon colis ?",
+   "_deb": 10.72,
+   "_fin": 11.9,
+   "d": "[irritated] Bon, je peux récupérer mon colis ?",
+   "objet": "cadeau"
+  },
+  {
+   "p": "invite",
+   "t": "Vous allez l'avoir à partir de demain, 10h, au bureau de poste.",
+   "_deb": 11.94,
+   "_fin": 14.3,
+   "d": "[matter-of-fact] Vous allez l'avoir à partir de demain, 10h, au bureau de poste."
+  },
+  {
+   "p": "presentateur",
+   "t": "Non mais vous voyez bien que je suis là là.",
+   "_deb": 14.58,
+   "_fin": 16.04,
+   "d": "[frustrated] Non mais vous voyez bien que je suis là là."
+  },
+  {
+   "p": "invite",
+   "t": "Je vous ai dit que je vous ai noté absent, donc à partir de là, vous êtes absent.",
+   "_deb": 16.2,
+   "_fin": 20.04,
+   "d": "[firm] Je vous ai dit que je vous ai noté absent, donc à partir de là, vous êtes absent."
+  },
+  {
+   "p": "presentateur",
+   "t": "Mais c'est pas comme ça que ça fonctionne !",
+   "_deb": 20.14,
+   "_fin": 21.46,
+   "d": "[angry] Mais c'est pas comme ça que ça fonctionne !"
+  },
+  {
+   "p": "invite",
+   "t": "C'est exactement comme ça que ça fonctionne.",
+   "_deb": 21.54,
+   "_fin": 23.16,
+   "d": "[smug] C'est exactement comme ça que ça fonctionne."
+  },
+  {
+   "p": "presentateur",
+   "t": "Non, c'est pas comme ça que ça marche, c'est pas parce que je décrète que vous n'êtes pas là, que forcément vous n'êtes pas",
+   "_deb": 23.4,
+   "_fin": 27.2
+  },
+  {
+   "p": "presentateur",
+   "t": "là. Bah vous n'êtes pas là.",
+   "_deb": 27.2,
+   "_fin": 27.94
+  },
+  {
+   "p": "invite",
+   "t": "Je vais mettre à votre voisin M. Berthier absent parce que je ne sais pas apparemment, il n'est pas là.",
+   "_deb": 27.82,
+   "_fin": 31.14,
+   "d": "[matter-of-fact] Je vais mettre à votre voisin M. Berthier absent parce que je ne sais pas, apparemment, il n'est pas là."
+  },
+  {
+   "p": "presentateur",
+   "t": "Ah non, si, je l'ai vu à sa fenêtre.",
+   "_deb": 31.28,
+   "_fin": 32.46,
+   "d": "[surprised] Ah non, si, je l'ai vu à sa fenêtre."
+  },
+  {
+   "p": "presentateur",
+   "t": "Oh. Thierry ? Ouais. T'es là ? Ouais. Bah, il y a ton colis, là.",
+   "_deb": 32.56,
+   "_fin": 36.72,
+   "d": "[shouting] Oh, Thierry ? Ouais ! T'es là ? Ouais ! Bah, il y a ton colis, là !"
+  },
+  {
+   "p": "presentateur",
+   "t": "J'arrive. C'est bon, il est là.",
+   "_deb": 36.78,
+   "_fin": 37.84,
+   "d": "[reassured] J'arrive. C'est bon, il est là."
+  },
+  {
+   "p": "invite",
+   "t": "Bonjour M. Berthier. Présent.",
+   "_deb": 38.0,
+   "_fin": 39.62,
+   "d": "[condescending] Bonjour M. Berthier. Présent."
+  },
+  {
+   "p": "presentateur",
+   "t": "Vous voyez bien qu'il est là.",
+   "_deb": 40.2,
+   "_fin": 41.12,
+   "d": "[annoyed] Vous voyez bien qu'il est là !"
+  },
+  {
+   "p": "invite",
+   "t": "Mais moi, je l'ai mis absent, donc...",
+   "_deb": 41.4,
+   "_fin": 42.88,
+   "d": "[stubborn] Mais moi, je l'ai mis absent, donc..."
+  },
+  {
+   "p": "presentateur",
+   "t": "Vas-y, donne-moi mon colis, là.",
+   "_deb": 43.28,
+   "_fin": 44.38,
+   "d": "[furious] Vas-y, donne-moi mon colis, là."
+  },
+  {
+   "p": "invite",
+   "t": "Écoutez, monsieur, je ne peux pas vous donner votre colis parce que, comme je vous l'ai dit, je vous ai noté absent.",
+   "_deb": 44.58,
+   "_fin": 49.32,
+   "d": "[condescending] Écoutez, monsieur, je ne peux pas vous donner votre colis parce que, comme je vous l'ai dit, je vous ai noté absent."
+  },
+  {
+   "p": "invite",
+   "t": "Donc, si moi, derrière, je vous donne votre colis, je vais avoir des problèmes.",
+   "_deb": 49.5,
+   "_fin": 52.46,
+   "d": "[cautious] Donc, si moi, derrière, je vous donne votre colis, je vais avoir des problèmes."
+  },
+  {
+   "p": "presentateur",
+   "t": "Si tu ne me donnes pas mon colis, tu vas avoir des vrais problèmes.",
+   "_deb": 52.66,
+   "_fin": 54.74,
+   "d": "[threatening] Si tu ne me donnes pas mon colis, tu vas avoir des vrais problèmes."
+  },
+  {
+   "p": "invite",
+   "t": "Écoutez-moi bien. Je fais du yoga de combat. Donc c'est vraiment...",
+   "_deb": 54.98,
+   "_fin": 58.78,
+   "d": "[confident] Écoutez-moi bien. Je fais du yoga de combat. Donc c'est vraiment..."
+  },
+  {
+   "p": "invite",
+   "t": "J'ai pris un coup de pelle, là, non ?",
+   "_deb": 59.56,
+   "_fin": 60.72,
+   "d": "[dazed] J'ai pris un coup de pelle, là, non ?"
+  },
+  {
+   "p": "presentateur",
+   "t": "Ouais, ça serait con d'en prendre un deuxième juste pour un colis.",
+   "_deb": 60.94,
+   "_fin": 63.04,
+   "d": "[threatening] Ouais, ça serait con d'en prendre un deuxième juste pour un colis."
+  },
+  {
+   "p": "invite",
+   "t": "Vous n'auriez pas de la glace ?",
+   "_deb": 65.98,
+   "_fin": 67.04,
+   "d": "[in_pain] Vous n'auriez pas de la glace ?"
+  },
+  {
+   "p": "presentateur",
+   "t": "Ah bah non, je suis absent.",
+   "_deb": 67.42,
+   "_fin": 68.3,
+   "d": "[smug] Ah bah non, je suis absent."
+  },
+  {
+   "p": "invite",
+   "t": "Ah oui, merde.",
+   "_deb": 68.68,
+   "_fin": 69.52,
+   "d": "[defeated] Ah oui, merde.",
+   "chute": true
+  }
+ ],
+ "bandeau": [],
+ "gag": null,
+ "legende": "Quand la bureaucratie de La Poste va un tout petit peu trop loin...",
+ "hashtags": [
+  "petitsdramas",
+  "livraison",
+  "laposte",
+  "facteur",
+  "humour",
+  "animation"
+ ],
+ "sources": [
+  "https://www.tiktok.com/@motiontoonz/video/7689102652696825120"
+ ],
+ "decoupage": [
+  {
+   "scene": "1",
+   "repliques": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32
+   ],
+   "lieu": "",
+   "son": "",
+   "duree": 0.0,
+   "decor": "Suburban house yard with black metal gate, driveway, modern pavillon facade and mailboxes",
+   "titre": "Le facteur intraitable"
+  }
+ ],
+ "studio": {
+  "cadence": "rapide",
+  "ambiances": [],
+  "moment": "jour",
+  "plans": [
+   {
+    "reaction": "aucune",
+    "plan": "moyen",
+    "mouvement": "fixe",
+    "geste": "pointe_d",
+    "replique": 0
+   },
+   {
+    "plan": "serre",
+    "mouvement": "fixe",
+    "replique": 4,
+    "reaction": "sceptique",
+    "geste": "haussement"
+   },
+   {
+    "plan": "moyen",
+    "reaction": "regard_camera",
+    "geste": "bras_ouverts",
+    "mouvement": "fixe",
+    "replique": 14
+   },
+   {
+    "reaction": "choc",
+    "mouvement": "avance",
+    "geste": "menacant",
+    "replique": 26,
+    "plan": "serre"
+   },
+   {
+    "geste": "facepalm",
+    "reaction": "soupir",
+    "replique": 28,
+    "plan": "serre",
+    "mouvement": "zoom_choc"
+   },
+   {
+    "mouvement": "fixe",
+    "reaction": "regard_camera",
+    "plan": "moyen",
+    "replique": 31,
+    "geste": "croises"
+   }
+  ],
+  "personnages": {
+   "presentateur": {
+    "genre": "h",
+    "age": 28,
+    "taille": 1,
+    "corpulence": 0.5,
+    "cheveux": "rase",
+    "barbe": "trois_jours"
+   },
+   "invite": {
+    "genre": "h",
+    "age": 35,
+    "taille": 1,
+    "corpulence": 0.5,
+    "cheveux": "court",
+    "barbe": ""
+   }
+  },
+  "lieux": [
+   "rue"
+  ],
+  "gags": [
+   "Avis de passage : Présent mais absent"
+  ],
+  "costumes": {
+   "presentateur": {
+    "haut": "tshirt",
+    "c_haut": "blanc",
+    "motif": "uni",
+    "bas": "jogging",
+    "chaussures": "baskets",
+    "cheveux": "rase",
+    "c_cheveux": "noir"
+   },
+   "invite": {
+    "haut": "polo",
+    "c_haut": "bleu marine",
+    "motif": "uni",
+    "bas": "pantalon",
+    "chaussures": "bottes",
+    "chapeau": "casquette",
+    "c_chapeau": "bleu marine",
+    "cheveux": "court",
+    "c_cheveux": "brun",
+    "details": [
+     "sac_bandouliere",
+     "badge"
+    ]
+   }
+  },
+  "objets": [
+   {
+    "objet": "lettre",
+    "replique": 6
+   },
+   {
+    "objet": "cadeau",
+    "replique": 8
+   }
+  ]
+ },
+ "doublage": {
+  "piste": "/tmp/tmpuska43qr/piste.wav",
+  "duree": 69.82,
+  "source": "https://www.tiktok.com/@motiontoonz/video/7689102652696825120",
+  "auteur": "motiontoonz",
+  "contexte": "Devant le portail de son pavillon, un homme tente de récupérer son colis auprès d'un facteur zélé qui refuse obstinément sous prétexte qu'il l'a déjà coché absent.",
+  "evenements": [],
+  "visuel": {
+   "gestes": [],
+   "duree": 70.0,
+   "nb_plans": 35,
+   "duree_plan": 2.0,
+   "coupes": [
+    1.5,
+    2.0,
+    3.0,
+    4.5,
+    5.5,
+    7.0,
+    8.0,
+    11.0,
+    12.0,
+    15.0,
+    16.5,
+    20.5,
+    22.0,
+    23.5,
+    27.5,
+    28.0,
+    28.5,
+    31.5,
+    33.0,
+    33.5,
+    38.5,
+    40.5,
+    41.5,
+    43.5,
+    44.5,
+    53.0,
+    55.0,
+    58.5,
+    59.0,
+    60.0,
+    61.0,
+    63.5,
+    67.5,
+    68.5
+   ],
+   "plans": {
+    "tres_serre": 0.0,
+    "serre": 0.093,
+    "moyen": 0.171,
+    "large": 0.736
+   },
+   "camera": {
+    "fixe": 0.808,
+    "avance": 0.0,
+    "recul": 0.0,
+    "travelling": 0.0,
+    "epaule": 0.192
+   },
+   "nb_personnes": 1,
+   "personnes": [
+    {
+     "place": "centre",
+     "presence": 0.243,
+     "habit": [
+      41,
+      55,
+      80
+     ],
+     "cheveux": [
+      57,
+      73,
+      101
+     ],
+     "sourire": 0.0,
+     "taille": 0.156,
+     "tete_penchee": 1.1,
+     "regard_cote": 0.0
+    }
+   ],
+   "visages": true,
+   "sourires": 0.0,
+   "energie": 0.326,
+   "mur": [
+    56,
+    66,
+    61
+   ],
+   "palette": [
+    [
+     41,
+     50,
+     60,
+     0.274
+    ],
+    [
+     174,
+     161,
+     150,
+     0.207
+    ],
+    [
+     93,
+     104,
+     78,
+     0.167
+    ],
+    [
+     242,
+     237,
+     231,
+     0.156
+    ],
+    [
+     132,
+     194,
+     244,
+     0.119
+    ],
+    [
+     159,
+     166,
+     66,
+     0.077
+    ]
+   ],
+   "lumiere": {
+    "luminosite": 152.5,
+    "chaleur": -2.2,
+    "saturation": 73.8
+   },
+   "moment": "jour"
+  },
+  "audio": {
+   "duree": 69.8,
+   "nb_voix": 2,
+   "voix": [
+    {
+     "hz": 170,
+     "genre": "?",
+     "part": 0.42
+    },
+    {
+     "hz": 156,
+     "genre": "h",
+     "part": 0.58
+    }
+   ],
+   "debit": 5.46,
+   "blanc_moyen": 0.35,
+   "coupes": 6,
+   "dynamique_db": 31.7,
+   "cris": 0.055,
+   "musique": null,
+   "impacts": 0,
+   "impacts_10s": 0.0,
+   "graves": 0,
+   "aigus": 0,
+   "sur_vanne": 0,
+   "evenements": {},
+   "emotions": {
+    "condescending": 3,
+    "annoyed": 3,
+    "neutral": 2,
+    "matter-of-fact": 2,
+    "smug": 2,
+    "threatening": 2,
+    "happy": 1,
+    "serious": 1
+   }
+  },
+  "video_origine": "/tmp/tmpuska43qr/src.mp4"
+ },
+ "fiche": {
+  "note": 0,
+  "decision": "vidéo manuelle (bande son d'une vidéo TikTok)",
+  "decoupage": [
+   {
+    "scene": "1",
+    "repliques": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     14,
+     15,
+     16,
+     17,
+     18,
+     19,
+     20,
+     21,
+     22,
+     23,
+     24,
+     25,
+     26,
+     27,
+     28,
+     29,
+     30,
+     31,
+     32
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 0.0,
+    "decor": "Suburban house yard with black metal gate, driveway, modern pavillon facade and mailboxes",
+    "titre": "Le facteur intraitable"
+   }
+  ]
+ },
+ "_monte": true,
+ "_voix_hz": {
+  "presentateur": 168,
+  "invite": 151
+ },
+ "_voix_genre": {
+  "presentateur": "h",
+  "invite": "h"
+ },
+ "realisation": {
+  "moment": "jour",
+  "lieux": [
+   "rue"
+  ],
+  "gags": [
+   "Avis de passage : Présent mais absent"
+  ],
+  "ambiances": [],
+  "source": "auteur+image",
+  "tenues": {
+   "presentateur": "tshirt",
+   "invite": "polo"
+  },
+  "plans": [
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe"
+  ]
+ }
+}
