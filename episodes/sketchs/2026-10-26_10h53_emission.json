@@ -1,0 +1,389 @@
+{
+ "titre": "POUVOIRS EXAGÉRÉS",
+ "sujet": "POUVOIRS EXAGÉRÉS",
+ "ecran": "POUVOIRS EXAGÉ",
+ "invite_nom": "Hubert Rustine",
+ "invite_role": "Expert (fictif)",
+ "invite_look": "chauve",
+ "lieu_direct": "Assemblée",
+ "titre_accroche": "POV : Ton père croit que tu as des pouvoirs...",
+ "question": "Et si la réalité dépassait la fiction ?",
+ "running_gag": "",
+ "verite": "",
+ "repliques": [
+  {
+   "p": "presentateur",
+   "t": "Quand je t'ai dit que t'avais les pouvoirs de Spider-Man après la piqûre d'araignée, j'ai peut-être un peu exagéré.",
+   "_deb": 0.0,
+   "_fin": 4.1,
+   "objet": "telecommande"
+  },
+  {
+   "p": "invite",
+   "t": "exagéré.",
+   "_deb": 4.1,
+   "_fin": 5.0,
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "J 'espère que t 'as pas sauté.",
+   "_deb": 5.28,
+   "_fin": 6.86,
+   "objet": "telephone"
+  },
+  {
+   "p": "invite",
+   "t": "Allô? Allô? T 'es là?",
+   "_deb": 7.3,
+   "_fin": 9.06,
+   "objet": "telephone",
+   "chute": true
+  }
+ ],
+ "bandeau": [],
+ "gag": null,
+ "legende": "Quand la blague tourne au cauchemar.",
+ "hashtags": [
+  "petitsdramas",
+  "pouvoirs",
+  "spiderman",
+  "blague",
+  "perefils",
+  "surprise"
+ ],
+ "sources": [
+  "https://www.tiktok.com/@kodanimation/video/7678870631944834336"
+ ],
+ "decoupage": [
+  {
+   "scene": "1",
+   "repliques": [
+    0,
+    2
+   ],
+   "lieu": "",
+   "son": "",
+   "duree": 0,
+   "decor": "salon avec un canapé gris, une table basse en bois clair, une télécommande sur la table, un téléphone portable posé sur un coussin, une fenêtre ouverte avec des"
+  },
+  {
+   "scene": "2",
+   "repliques": [
+    1,
+    3
+   ],
+   "lieu": "",
+   "son": "",
+   "duree": 0,
+   "decor": "salon avec un tapis rouge, une étagère remplie de livres, une lampe de chevet allumée et une affiche 'Ne pas sauter des fenêtres' sur le mur."
+  }
+ ],
+ "studio": {
+  "moment": "jour",
+  "lieux": [
+   "rue",
+   "salon"
+  ],
+  "costumes": {
+   "presentateur": {
+    "haut": "tshirt",
+    "c_haut": "bleu",
+    "motif": "uni",
+    "bas": "pantalon",
+    "chaussures": "baskets",
+    "details": [
+     "barbe_courte",
+     "lunettes_vue"
+    ],
+    "chapeau": null,
+    "cheveux": "court_texture",
+    "c_cheveux": "brun"
+   },
+   "invite": {
+    "haut": "sweat_shirt",
+    "c_haut": "rouge",
+    "motif": "carreaux",
+    "bas": "short",
+    "chaussures": "baskets",
+    "details": [
+     "ecouteurs"
+    ],
+    "chapeau": null,
+    "cheveux": "court",
+    "c_cheveux": "noir"
+   }
+  },
+  "personnages": {
+   "presentateur": {
+    "genre": "h",
+    "age": 45,
+    "taille": 1,
+    "corpulence": 0.7,
+    "cheveux": "court_texture",
+    "barbe": "trois_jours"
+   },
+   "invite": {
+    "genre": "h",
+    "age": 16,
+    "taille": 0.8,
+    "corpulence": 0.5,
+    "cheveux": "court",
+    "barbe": "rien"
+   }
+  },
+  "gags": [
+   "Affiche : 'Attention, Spider-Man en herbe !'",
+   "Post-it sur le frigo : 'Ne pas sauter des fenêtres'",
+   "Tableau noir : 'Règles de la maison : 1. Pas de super-pouvoirs'"
+  ],
+  "ambiances": [
+   "neutre"
+  ],
+  "cadence": "rapide",
+  "jeu": [
+   {
+    "replique": 0,
+    "emotion": "excited",
+    "geste": "bras_ouverts",
+    "intensite": 3
+   },
+   {
+    "replique": 1,
+    "emotion": "sceptique",
+    "geste": "gratte_tete",
+    "intensite": 2
+   },
+   {
+    "replique": 2,
+    "emotion": "worried",
+    "geste": "pointe_g",
+    "intensite": 2
+   },
+   {
+    "replique": 3,
+    "emotion": "panique",
+    "geste": "telephone",
+    "intensite": 3
+   }
+  ],
+  "plans": [
+   {
+    "replique": 0,
+    "plan": "large",
+    "mouvement": "fixe",
+    "geste": "bras_ouverts",
+    "reaction": "aucune"
+   },
+   {
+    "replique": 1,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "gratte_tete",
+    "reaction": "sceptique"
+   },
+   {
+    "replique": 2,
+    "plan": "moyen",
+    "mouvement": "fixe",
+    "geste": "pointe_g",
+    "reaction": "choc"
+   },
+   {
+    "replique": 3,
+    "plan": "tres_serre",
+    "mouvement": "zoom_choc",
+    "geste": "telephone",
+    "reaction": "panique"
+   }
+  ],
+  "objets": [
+   {
+    "replique": 0,
+    "objet": "telecommande"
+   },
+   {
+    "replique": 3,
+    "objet": "telephone"
+   }
+  ],
+  "decors_vus": {
+   "presentateur": "salon avec un canapé gris, une table basse en bois clair, une télécommande sur la table, un téléphone portable posé sur un coussin, une fenêtre ouverte avec des rideaux blancs et une affiche 'Attention Spider-Man' au mur.",
+   "invite": "salon avec un tapis rouge, une étagère remplie de livres, une lampe de chevet allumée et une affiche 'Ne pas sauter des fenêtres' sur le mur."
+  },
+  "lieux_de": {
+   "presentateur": "rue",
+   "invite": "salon"
+  }
+ },
+ "doublage": {
+  "piste": "/tmp/tmp_dk82ssy/piste.wav",
+  "duree": 9.92,
+  "source": "https://www.tiktok.com/@kodanimation/video/7678870631944834336",
+  "auteur": "kodanimation",
+  "contexte": "Un père et son fils adolescent jouent dans le salon de la maison. Le père, excité par une blague sur les pouvoirs de Spider-Man, attend une réaction de son fils, qui semble avoir disparu ou ne pas répondre.",
+  "evenements": [],
+  "visuel": {
+   "gestes": [],
+   "duree": 10.0,
+   "nb_plans": 1,
+   "duree_plan": 10.0,
+   "coupes": [],
+   "plans": {
+    "tres_serre": 0.0,
+    "serre": 0.0,
+    "moyen": 0.0,
+    "large": 1.0
+   },
+   "camera": {
+    "fixe": 1.0,
+    "avance": 0.0,
+    "recul": 0.0,
+    "travelling": 0.0,
+    "epaule": 0.0
+   },
+   "nb_personnes": 0,
+   "personnes": [],
+   "visages": false,
+   "sourires": 0.0,
+   "energie": 0.216,
+   "mur": [
+    218,
+    218,
+    218
+   ],
+   "palette": [
+    [
+     214,
+     214,
+     214,
+     0.554
+    ],
+    [
+     177,
+     178,
+     179,
+     0.185
+    ],
+    [
+     40,
+     41,
+     46,
+     0.083
+    ],
+    [
+     113,
+     124,
+     125,
+     0.078
+    ],
+    [
+     253,
+     253,
+     253,
+     0.06
+    ],
+    [
+     5,
+     5,
+     6,
+     0.04
+    ]
+   ],
+   "lumiere": {
+    "luminosite": 184.3,
+    "chaleur": -1.7,
+    "saturation": 8.0
+   },
+   "moment": "jour"
+  },
+  "audio": {
+   "duree": 9.9,
+   "nb_voix": 2,
+   "voix": [
+    {
+     "hz": 109,
+     "genre": "h",
+     "part": 0.68
+    },
+    {
+     "hz": 133,
+     "genre": "h",
+     "part": 0.32
+    }
+   ],
+   "debit": 4.44,
+   "blanc_moyen": 0.36,
+   "coupes": 1,
+   "dynamique_db": 23.2,
+   "cris": 0.079,
+   "musique": null,
+   "impacts": 0,
+   "impacts_10s": 0.0,
+   "graves": 0,
+   "aigus": 0,
+   "sur_vanne": 0,
+   "evenements": {},
+   "emotions": {
+    "excited": 1,
+    "sceptical": 1,
+    "worried": 1
+   }
+  },
+  "video_origine": "/tmp/tmp_dk82ssy/src.mp4"
+ },
+ "fiche": {
+  "note": 0,
+  "decision": "vidéo manuelle (bande son d'une vidéo TikTok)",
+  "decoupage": [
+   {
+    "scene": "1",
+    "repliques": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 0.0,
+    "decor": "salon avec un canapé gris, une table basse en bois clair, une télécommande sur la table, un téléphone portable posé sur un coussin, une fenêtre ouverte avec des",
+    "titre": "La blague de Spider-Man"
+   }
+  ]
+ },
+ "_monte": true,
+ "_separes": true,
+ "_voix_hz": {
+  "presentateur": 109,
+  "invite": 131
+ },
+ "_voix_genre": {
+  "presentateur": "h",
+  "invite": "h"
+ },
+ "realisation": {
+  "moment": "jour",
+  "lieux": [
+   "rue",
+   "salon"
+  ],
+  "gags": [
+   "Affiche : 'Attention, Spider-Man en herbe !'",
+   "Post-it sur le frigo : 'Ne pas sauter des fenêtres'",
+   "Tableau noir : 'Règles de la maison : 1. Pas de super-pouvoirs'"
+  ],
+  "ambiances": [],
+  "source": "auteur+image",
+  "tenues": {
+   "presentateur": "tshirt",
+   "invite": "doudoune"
+  },
+  "plans": [
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe"
+  ]
+ }
+}

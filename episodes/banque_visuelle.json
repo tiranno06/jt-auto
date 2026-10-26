@@ -19235,5 +19235,226 @@
    ]
   },
   "video": "2026-10-26_09h42_emission.mp4"
+ },
+ {
+  "date": "2026-10-26",
+  "source": "https://www.tiktok.com/@kodanimation/video/7678870631944834336",
+  "auteur": "kodanimation",
+  "visuel": {
+   "gestes": [],
+   "duree": 10.0,
+   "nb_plans": 1,
+   "duree_plan": 10.0,
+   "coupes": [],
+   "plans": {
+    "tres_serre": 0.0,
+    "serre": 0.0,
+    "moyen": 0.0,
+    "large": 1.0
+   },
+   "camera": {
+    "fixe": 1.0,
+    "avance": 0.0,
+    "recul": 0.0,
+    "travelling": 0.0,
+    "epaule": 0.0
+   },
+   "nb_personnes": 0,
+   "personnes": [],
+   "visages": false,
+   "sourires": 0.0,
+   "energie": 0.216,
+   "mur": [
+    218,
+    218,
+    218
+   ],
+   "palette": [
+    [
+     214,
+     214,
+     214,
+     0.554
+    ],
+    [
+     177,
+     178,
+     179,
+     0.185
+    ],
+    [
+     40,
+     41,
+     46,
+     0.083
+    ],
+    [
+     113,
+     124,
+     125,
+     0.078
+    ],
+    [
+     253,
+     253,
+     253,
+     0.06
+    ],
+    [
+     5,
+     5,
+     6,
+     0.04
+    ]
+   ],
+   "lumiere": {
+    "luminosite": 184.3,
+    "chaleur": -1.7,
+    "saturation": 8.0
+   },
+   "moment": "jour"
+  },
+  "audio": {
+   "duree": 9.9,
+   "nb_voix": 2,
+   "voix": [
+    {
+     "hz": 109,
+     "genre": "h",
+     "part": 0.68
+    },
+    {
+     "hz": 133,
+     "genre": "h",
+     "part": 0.32
+    }
+   ],
+   "debit": 4.44,
+   "blanc_moyen": 0.36,
+   "coupes": 1,
+   "dynamique_db": 23.2,
+   "cris": 0.079,
+   "musique": null,
+   "impacts": 0,
+   "impacts_10s": 0.0,
+   "graves": 0,
+   "aigus": 0,
+   "sur_vanne": 0,
+   "evenements": {},
+   "emotions": {
+    "excited": 1,
+    "sceptical": 1,
+    "worried": 1
+   }
+  },
+  "claude": {
+   "lieux": [
+    "rue",
+    "salon"
+   ],
+   "moment": "jour",
+   "costumes": {
+    "presentateur": {
+     "haut": "tshirt",
+     "c_haut": "bleu",
+     "motif": "uni",
+     "bas": "pantalon",
+     "chaussures": "baskets",
+     "details": [
+      "barbe_courte",
+      "lunettes_vue"
+     ],
+     "chapeau": null,
+     "cheveux": "court_texture",
+     "c_cheveux": "brun"
+    },
+    "invite": {
+     "haut": "sweat_shirt",
+     "c_haut": "rouge",
+     "motif": "carreaux",
+     "bas": "short",
+     "chaussures": "baskets",
+     "details": [
+      "ecouteurs"
+     ],
+     "chapeau": null,
+     "cheveux": "court",
+     "c_cheveux": "noir"
+    }
+   },
+   "objets": [
+    {
+     "replique": 0,
+     "objet": "telecommande"
+    },
+    {
+     "replique": 3,
+     "objet": "telephone"
+    }
+   ],
+   "gags": [
+    "Affiche : 'Attention, Spider-Man en herbe !'",
+    "Post-it sur le frigo : 'Ne pas sauter des fenêtres'",
+    "Tableau noir : 'Règles de la maison : 1. Pas de super-pouvoirs'"
+   ],
+   "ambiances": [
+    "neutre"
+   ],
+   "plans": [
+    {
+     "replique": 0,
+     "plan": "large",
+     "mouvement": "fixe",
+     "geste": "bras_ouverts",
+     "reaction": "aucune"
+    },
+    {
+     "replique": 1,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "gratte_tete",
+     "reaction": "sceptique"
+    },
+    {
+     "replique": 2,
+     "plan": "moyen",
+     "mouvement": "fixe",
+     "geste": "pointe_g",
+     "reaction": "choc"
+    },
+    {
+     "replique": 3,
+     "plan": "tres_serre",
+     "mouvement": "zoom_choc",
+     "geste": "telephone",
+     "reaction": "panique"
+    }
+   ]
+  },
+  "realisation": {
+   "moment": "jour",
+   "lieux": [
+    "rue",
+    "salon"
+   ],
+   "gags": [
+    "Affiche : 'Attention, Spider-Man en herbe !'",
+    "Post-it sur le frigo : 'Ne pas sauter des fenêtres'",
+    "Tableau noir : 'Règles de la maison : 1. Pas de super-pouvoirs'"
+   ],
+   "ambiances": [],
+   "source": "auteur+image",
+   "tenues": {
+    "presentateur": "tshirt",
+    "invite": "doudoune"
+   },
+   "plans": [
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe"
+   ]
+  },
+  "video": "2026-10-26_10h53_emission.mp4"
  }
 ]
