@@ -14045,5 +14045,226 @@
    ]
   },
   "video": "2026-10-26_02h06_emission.mp4"
+ },
+ {
+  "date": "2026-10-26",
+  "source": "https://www.tiktok.com/@kodanimation/video/7677373578869869856",
+  "auteur": "kodanimation",
+  "visuel": {
+   "gestes": [],
+   "duree": 24.0,
+   "nb_plans": 2,
+   "duree_plan": 12.0,
+   "coupes": [
+    5.5
+   ],
+   "plans": {
+    "tres_serre": 0.0,
+    "serre": 0.0,
+    "moyen": 0.0,
+    "large": 1.0
+   },
+   "camera": {
+    "fixe": 1.0,
+    "avance": 0.0,
+    "recul": 0.0,
+    "travelling": 0.0,
+    "epaule": 0.0
+   },
+   "nb_personnes": 0,
+   "personnes": [],
+   "visages": false,
+   "sourires": 0.0,
+   "energie": 0.096,
+   "mur": [
+    220,
+    215,
+    206
+   ],
+   "palette": [
+    [
+     206,
+     185,
+     173,
+     0.258
+    ],
+    [
+     130,
+     130,
+     161,
+     0.209
+    ],
+    [
+     127,
+     99,
+     86,
+     0.151
+    ],
+    [
+     228,
+     240,
+     246,
+     0.146
+    ],
+    [
+     49,
+     38,
+     37,
+     0.142
+    ],
+    [
+     160,
+     183,
+     73,
+     0.092
+    ]
+   ],
+   "lumiere": {
+    "luminosite": 170.6,
+    "chaleur": 15.1,
+    "saturation": 71.1
+   },
+   "moment": "jour"
+  },
+  "audio": {
+   "duree": 23.7,
+   "nb_voix": 2,
+   "voix": [
+    {
+     "hz": 140,
+     "genre": "h",
+     "part": 0.24
+    },
+    {
+     "hz": 276,
+     "genre": "f",
+     "part": 0.76
+    }
+   ],
+   "debit": 2.63,
+   "blanc_moyen": 0.44,
+   "coupes": 0,
+   "dynamique_db": 19.2,
+   "cris": 0.025,
+   "musique": null,
+   "impacts": 0,
+   "impacts_10s": 0.0,
+   "graves": 0,
+   "aigus": 0,
+   "sur_vanne": 0,
+   "evenements": {},
+   "emotions": {
+    "enthousiaste": 1,
+    "taquine": 1,
+    "éclate_de_rire": 1
+   }
+  },
+  "claude": {
+   "lieux": [
+    "rue",
+    "salon"
+   ],
+   "moment": "jour",
+   "costumes": {
+    "presentateur": {
+     "haut": "tshirt",
+     "c_haut": "bleu",
+     "motif": "uni",
+     "bas": "jean",
+     "chaussures": "baskets",
+     "details": [
+      "stylos",
+      "montre"
+     ],
+     "chapeau": null,
+     "cheveux": "court_texture",
+     "c_cheveux": "brun"
+    },
+    "invite": {
+     "haut": "chemise",
+     "c_haut": "rouge",
+     "motif": "carreaux",
+     "bas": "pantalon",
+     "chaussures": "ville",
+     "details": [
+      "lunettes_vue",
+      "bracelet"
+     ],
+     "chapeau": null,
+     "cheveux": "long",
+     "c_cheveux": "roux",
+     "barbe": null
+    }
+   },
+   "objets": [
+    {
+     "replique": 0,
+     "objet": "telephone"
+    },
+    {
+     "replique": 1,
+     "objet": "cafe"
+    },
+    {
+     "replique": 2,
+     "objet": "livre"
+    }
+   ],
+   "gags": [
+    "\"Les leçons de vie de Mamie : toujours surprenantes !\"",
+    "\"Mamie : 90 ans d'expérience, 0 filtre\"",
+    "\"Le trou du cul : une forme rare, mais bien réelle !\""
+   ],
+   "ambiances": [
+    "aucun"
+   ],
+   "plans": [
+    {
+     "replique": 0,
+     "plan": "large",
+     "mouvement": "fixe",
+     "geste": "bras_ouverts",
+     "reaction": "aucune"
+    },
+    {
+     "replique": 1,
+     "plan": "moyen",
+     "mouvement": "fixe",
+     "geste": "gratte_tete",
+     "reaction": "sceptique"
+    },
+    {
+     "replique": 2,
+     "plan": "serre",
+     "mouvement": "zoom_choc",
+     "geste": "pointe_g",
+     "reaction": "rire"
+    }
+   ]
+  },
+  "realisation": {
+   "moment": "jour",
+   "lieux": [
+    "rue",
+    "salon"
+   ],
+   "gags": [
+    "\"Les leçons de vie de Mamie : toujours surprenantes !\"",
+    "\"Mamie : 90 ans d'expérience, 0 filtre\"",
+    "\"Le trou du cul : une forme rare, mais bien réelle !\""
+   ],
+   "ambiances": [],
+   "source": "auteur+image",
+   "tenues": {
+    "presentateur": "tshirt",
+    "invite": "chemise"
+   },
+   "plans": [
+    "large/fixe",
+    "large/fixe",
+    "large/fixe"
+   ]
+  },
+  "video": "2026-10-26_02h19_emission.mp4"
  }
 ]
