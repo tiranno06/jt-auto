@@ -3265,5 +3265,41 @@
    "son": true
   },
   "cadence": "normal"
+ },
+ {
+  "moment": "soir",
+  "lieux": [
+   "salon"
+  ],
+  "source": "robot+image",
+  "duree": 83.2,
+  "plans": {
+   "large": 40
+  },
+  "mouvements": {
+   "fixe": 40
+  },
+  "costumes": {
+   "envoyee": "capuche",
+   "presentateur": "pull"
+  },
+  "figurants": 1,
+  "ambiances": [
+   "pluie",
+   "poussiere"
+  ],
+  "controle": "Humoriste 6.0/10 : 1 s La chute finale ('Putain j'y crois pas.') manque d'impact visuel. Un zoom choc sur le personnage qui la dit serait nécessaire pour renforcer l'humour.; 49.3 s Les répliques comm",
+  "fichier": "2026-10-26_07h29_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": true,
+   "tiers": true,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": true,
+   "reflets": true,
+   "son": true
+  },
+  "cadence": null
  }
 ]
