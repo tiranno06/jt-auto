@@ -20532,5 +20532,216 @@
    ]
   },
   "video": "2026-10-26_12h57_emission.mp4"
+ },
+ {
+  "date": "2026-10-26",
+  "source": "https://www.tiktok.com/@kodanimation/video/7673659263591419169",
+  "auteur": "kodanimation",
+  "visuel": {
+   "gestes": [],
+   "duree": 15.5,
+   "nb_plans": 1,
+   "duree_plan": 15.5,
+   "coupes": [],
+   "plans": {
+    "tres_serre": 0.0,
+    "serre": 0.0,
+    "moyen": 0.0,
+    "large": 1.0
+   },
+   "camera": {
+    "fixe": 0.933,
+    "avance": 0.0,
+    "recul": 0.0,
+    "travelling": 0.0,
+    "epaule": 0.067
+   },
+   "nb_personnes": 0,
+   "personnes": [],
+   "visages": false,
+   "sourires": 0.0,
+   "energie": 0.135,
+   "mur": [
+    254,
+    254,
+    254
+   ],
+   "palette": [
+    [
+     254,
+     254,
+     254,
+     0.715
+    ],
+    [
+     144,
+     110,
+     101,
+     0.083
+    ],
+    [
+     6,
+     5,
+     5,
+     0.072
+    ],
+    [
+     118,
+     162,
+     224,
+     0.053
+    ],
+    [
+     201,
+     201,
+     201,
+     0.045
+    ],
+    [
+     81,
+     66,
+     62,
+     0.033
+    ]
+   ],
+   "lumiere": {
+    "luminosite": 218.3,
+    "chaleur": -1.3,
+    "saturation": 22.4
+   },
+   "moment": "jour"
+  },
+  "audio": {
+   "duree": 15.3,
+   "nb_voix": 1,
+   "voix": [
+    {
+     "hz": 111,
+     "genre": "h",
+     "part": 1.0
+    }
+   ],
+   "debit": 3.32,
+   "blanc_moyen": 2.7,
+   "coupes": 0,
+   "dynamique_db": 43.6,
+   "cris": 0.016,
+   "musique": null,
+   "impacts": 0,
+   "impacts_10s": 0.0,
+   "graves": 0,
+   "aigus": 0,
+   "sur_vanne": 0,
+   "evenements": {},
+   "emotions": {
+    "resigne": 1,
+    "blase": 1,
+    "exagere": 1,
+    "emou": 1
+   }
+  },
+  "claude": {
+   "lieux": [
+    "bar"
+   ],
+   "moment": "soir",
+   "costumes": {
+    "presentateur": {
+     "haut": "chemise",
+     "c_haut": "bleu marine",
+     "motif": "uni",
+     "bas": "jean",
+     "chaussures": "baskets",
+     "details": [
+      "barbe_courte",
+      "lunettes_vue",
+      "bracelet"
+     ],
+     "chapeau": null,
+     "cheveux": "court",
+     "c_cheveux": "brun"
+    }
+   },
+   "objets": [
+    {
+     "replique": 0,
+     "objet": "tasse"
+    },
+    {
+     "replique": 1,
+     "objet": "bouteille"
+    },
+    {
+     "replique": 3,
+     "objet": "telephone"
+    }
+   ],
+   "gags": [
+    "\"La dernière bière était aussi amère que son départ.\"",
+    "\"Résultat : 1 cœur brisé, 0 chance de rebond.\"",
+    "\"Spécialité de la maison : les regrets en shots.\""
+   ],
+   "ambiances": [
+    "vapeur",
+    "neon"
+   ],
+   "plans": [
+    {
+     "replique": 0,
+     "plan": "moyen",
+     "mouvement": "fixe",
+     "geste": "gratte_tete",
+     "reaction": "aucune"
+    },
+    {
+     "replique": 1,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "haussement",
+     "reaction": "regard_camera"
+    },
+    {
+     "replique": 2,
+     "plan": "large",
+     "mouvement": "epaule",
+     "geste": "bras_ouverts",
+     "reaction": "sceptique"
+    },
+    {
+     "replique": 3,
+     "plan": "tres_serre",
+     "mouvement": "zoom_choc",
+     "geste": "poings",
+     "reaction": "pleurs"
+    }
+   ]
+  },
+  "realisation": {
+   "moment": "soir",
+   "lieux": [
+    "bar"
+   ],
+   "gags": [
+    "\"La dernière bière était aussi amère que son départ.\"",
+    "\"Résultat : 1 cœur brisé, 0 chance de rebond.\"",
+    "\"Spécialité de la maison : les regrets en shots.\""
+   ],
+   "ambiances": [
+    "neon",
+    "poussiere",
+    "vapeur"
+   ],
+   "source": "auteur+image",
+   "tenues": {
+    "presentateur": "chemise"
+   },
+   "plans": [
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe"
+   ]
+  },
+  "video": "2026-10-26_13h18_emission.mp4"
  }
 ]
