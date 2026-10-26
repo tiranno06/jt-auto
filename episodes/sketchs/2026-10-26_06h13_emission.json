@@ -1,0 +1,180 @@
+{
+ "titre": "MYSTÈRE ST' 501",
+ "sujet": "MYSTÈRE ST' 501",
+ "ecran": "MYSTÈRE ST' 50",
+ "invite_nom": "Hubert Rustine",
+ "invite_role": "Expert (fictif)",
+ "invite_look": "chauve",
+ "lieu_direct": "Assemblée",
+ "titre_accroche": "POV : Vous êtes le présentateur d'une émission",
+ "question": "Que cache vraiment le sous-titre 'ST’ 501' ?",
+ "running_gag": "",
+ "verite": "",
+ "repliques": [
+  {
+   "p": "presentateur",
+   "t": "Sous -titrage ST' 501 Sous -titrage ST' 501",
+   "_deb": 0.0,
+   "_fin": 50.7,
+   "chute": true
+  }
+ ],
+ "bandeau": [],
+ "gag": null,
+ "legende": "Un présentateur intrigue son public avec des sous-titres énigmatiques.",
+ "hashtags": [
+  "petitsdramas",
+  "mystere",
+  "emissionsecrete",
+  "futuriste",
+  "animateur",
+  "enigme",
+  "st501"
+ ],
+ "sources": [
+  "https://www.tiktok.com/@vincedessine/video/7624637700171189526"
+ ],
+ "decoupage": [
+  {
+   "scene": "1",
+   "repliques": [
+    0
+   ],
+   "lieu": "",
+   "son": "",
+   "duree": 0.0,
+   "decor": "studio futuriste avec écrans géants et boutons lumineux, un pupitre de présentation high-tech",
+   "titre": "ÉMISSION MYSTÈRE"
+  }
+ ],
+ "studio": {
+  "moment": "soir",
+  "lieux": [
+   "studio"
+  ],
+  "costumes": {
+   "presentateur": {
+    "haut": "chemise",
+    "c_haut": "bleu",
+    "motif": "rayures",
+    "bas": "pantalon",
+    "chaussures": "baskets",
+    "details": [
+     "cravate",
+     "lunettes_soleil",
+     "montre"
+    ],
+    "chapeau": null
+   }
+  },
+  "personnages": {
+   "presentateur": {
+    "genre": "h",
+    "age": 45,
+    "taille": 1,
+    "corpulence": 0.7,
+    "cheveux": "court_texture",
+    "c_cheveux": "noir",
+    "barbe": "trois_jours"
+   }
+  },
+  "gags": [
+   "Affiche : 'Accès interdit sans badge ST’ 501'",
+   "Tableau noir : 'Énigme du jour : Qui êtes-vous ?'",
+   "Post-it sur le pupitre : 'Ne pas appuyer sur le bouton rouge'"
+  ],
+  "ambiances": [
+   "neon"
+  ],
+  "cadence": "rapide",
+  "plans": [
+   {
+    "replique": 0,
+    "plan": "serre",
+    "mouvement": "zoom_choc",
+    "geste": "pointe_d",
+    "reaction": "aucune"
+   }
+  ]
+ },
+ "doublage": {
+  "piste": "/tmp/tmp2axksgxi/piste.wav",
+  "duree": 55.46,
+  "source": "https://www.tiktok.com/@vincedessine/video/7624637700171189526",
+  "auteur": "vincedessine",
+  "contexte": "Un présentateur excentrique et enthousiaste anime une émission surréaliste dans un décor futuriste et coloré. Il semble s'adresser à un public imaginaire ou à des invités invisibles, répétant une phrase mystérieuse liée à un sous-titre codé ('ST’ 501').",
+  "evenements": [],
+  "visuel": {},
+  "audio": {
+   "duree": 55.5,
+   "nb_voix": 1,
+   "voix": [
+    {
+     "hz": 242,
+     "genre": "f",
+     "part": 1.0
+    }
+   ],
+   "debit": 0.16,
+   "blanc_moyen": 0.0,
+   "coupes": 0,
+   "dynamique_db": 12.0,
+   "cris": 0.007,
+   "musique": null,
+   "impacts": 0,
+   "impacts_10s": 0.0,
+   "graves": 0,
+   "aigus": 0,
+   "sur_vanne": 0,
+   "evenements": {},
+   "emotions": {
+    "excited_whisper": 1
+   }
+  },
+  "video_origine": "/tmp/tmp2axksgxi/src.mp3"
+ },
+ "fiche": {
+  "note": 0,
+  "decision": "vidéo manuelle (bande son d'une vidéo TikTok)",
+  "decoupage": [
+   {
+    "scene": "1",
+    "repliques": [
+     0
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 0.0,
+    "decor": "studio futuriste avec écrans géants et boutons lumineux, un pupitre de présentation high-tech",
+    "titre": "ÉMISSION MYSTÈRE"
+   }
+  ]
+ },
+ "_monte": true,
+ "_voix_hz": {
+  "presentateur": 294
+ },
+ "_voix_genre": {
+  "presentateur": "f"
+ },
+ "realisation": {
+  "moment": "soir",
+  "lieux": [
+   "bar"
+  ],
+  "gags": [
+   "Tableau noir : 'Énigme du jour : Qui êtes-vous ?'"
+  ],
+  "ambiances": [
+   "neon",
+   "poussiere"
+  ],
+  "source": "auteur",
+  "tenues": {
+   "presentateur": "chemise"
+  },
+  "plans": [
+   "large/fixe"
+  ]
+ }
+}

@@ -1,262 +1,70 @@
 {
- "titre": "DIALOGUE ABSURDE EN RUE",
- "sujet": "DIALOGUE ABSURDE EN RUE",
- "ecran": "DIALOGUE ABSUR",
+ "titre": "MYSTÈRE ST' 501",
+ "sujet": "MYSTÈRE ST' 501",
+ "ecran": "MYSTÈRE ST' 50",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "POV : Quand on vous arrête pour vos lacets",
- "question": "Comment réagiriez-vous dans une situation aussi absurde ?",
+ "titre_accroche": "POV : Vous êtes le présentateur d'une émission",
+ "question": "Que cache vraiment le sous-titre 'ST’ 501' ?",
  "running_gag": "",
  "verite": "",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "Madame? Madame, excusez -moi. Madame?",
+   "t": "Sous -titrage ST' 501 Sous -titrage ST' 501",
    "_deb": 0.0,
-   "_fin": 2.26
-  },
-  {
-   "p": "envoyee",
-   "t": "Non, ça va, je suis pas intéressée, j'ai pas de numéro.",
-   "_deb": 2.4,
-   "_fin": 4.12,
-   "d": "['[annoyed]', \"Non, ça va, je suis pas intéressée, j'ai pas de numéro.\"]"
-  },
-  {
-   "p": "presentateur",
-   "t": "Vos lacets?",
-   "_deb": 4.18,
-   "_fin": 5.22,
-   "d": "['[sarcastic]', 'Vos lacets?']"
-  },
-  {
-   "p": "envoyee",
-   "t": "Genre, tu m'as arrêtée pour mes lacets?",
-   "_deb": 6.0,
-   "_fin": 7.48,
-   "d": "['[mocking]', \"Genre, tu m'as arrêtée pour mes lacets?\"]",
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Oui, ils sont défaits, vous avez cassé la gueule.",
-   "_deb": 7.58,
-   "_fin": 9.04,
-   "d": "['[exaggerated]', 'Oui, ils sont défaits, vous avez cassé la gueule.']"
-  },
-  {
-   "p": "envoyee",
-   "t": "Ouais, c'est ça. Alors, tu m'as pas arrêtée pour prendre mon numéro, hein, c'est ça?",
-   "_deb": 9.32,
-   "_fin": 12.04,
-   "d": "['[suspicious]', \"Ouais, c'est ça. Alors, tu m'as pas arrêtée pour prendre mon numéro, hein, c'est ça?\"]"
-  },
-  {
-   "p": "presentateur",
-   "t": "Ah non, pas du tout, vous êtes pas mon genre.",
-   "_deb": 12.14,
-   "_fin": 13.34,
-   "d": "['[neutral]', 'Ah non, pas du tout, vous êtes pas mon genre.']"
-  },
-  {
-   "p": "envoyee",
-   "t": "Oui, c'est ça. Je suis pas ton genre. Moi, je suis pas ton genre.",
-   "_deb": 13.46,
-   "_fin": 17.88,
-   "d": "['[repetitive]', \"Oui, c'est ça. Je suis pas ton genre. Moi, je suis pas ton genre.\"]"
-  },
-  {
-   "p": "envoyee",
-   "t": "Regarde bien.",
-   "_deb": 18.28,
-   "_fin": 19.3,
-   "d": "['[defiant]', 'Regarde bien.']"
-  },
-  {
-   "p": "presentateur",
-   "t": "Vous êtes très très belle, mais vous êtes pas mon genre.",
-   "_deb": 19.44,
-   "_fin": 21.1,
-   "d": "['[smug]', 'Vous êtes très très belle, mais vous êtes pas mon genre.']"
-  },
-  {
-   "p": "envoyee",
-   "t": "Mais je sais comment ça va se passer. Tu vas prendre mon numéro, on va sortir ensemble, ça va être l'amour fou.",
-   "_deb": 21.14,
-   "_fin": 25.36,
-   "d": "['[dramatic]', \"Mais je sais comment ça va se passer. Tu vas prendre mon numéro, on va sortir ensemble, ça va être l'amour fou.\"]"
-  },
-  {
-   "p": "envoyee",
-   "t": "Ensuite, on va être ensemble pendant un an, ça va être génial.",
-   "_deb": 25.6,
-   "_fin": 27.56,
-   "d": "['[dreamy]', 'Ensuite, on va être ensemble pendant un an, ça va être génial.']"
-  },
-  {
-   "p": "envoyee",
-   "t": "Après, tu vas commencer à sortir avec tes collègues. Après tu vas faire quoi?",
-   "_deb": 27.56,
-   "_fin": 29.98
-  },
-  {
-   "p": "envoyee",
-   "t": "Tu vas me tromper parce que tu vas passer toutes tes journées sur ta playstation Et t 'en pourras plus de moi, pourquoi?",
-   "_deb": 29.98,
-   "_fin": 33.54,
-   "objet": "telephone"
-  },
-  {
-   "p": "envoyee",
-   "t": "Parce que je fouille dans ton téléphone Ouais ça fait 3 mois que je fouille dans ton téléphone Après tu vas faire quoi?",
-   "_deb": 33.54,
-   "_fin": 37.24
-  },
-  {
-   "p": "envoyee",
-   "t": "Tu vas me tromper avec ma sœur? Ouais je vais devoir brûler ta caisse, je vais devoir crever tes pneus Et après je vais passer quoi?",
-   "_deb": 37.24,
-   "_fin": 41.76
-  },
-  {
-   "p": "envoyee",
-   "t": "Mes journées en garde à vue? J 'ai pas envie de passer mes journées en garde à vue, ok?",
-   "_deb": 41.76,
-   "_fin": 44.54
-  },
-  {
-   "p": "envoyee",
-   "t": "Tu me veux du mal",
-   "_deb": 44.6,
-   "_fin": 45.08
-  },
-  {
-   "p": "presentateur",
-   "t": "Madame c 'était vraiment juste pour vous la sèche, je suis d 'un vrai",
-   "_deb": 45.82,
-   "_fin": 48.2
-  },
-  {
-   "p": "envoyee",
-   "t": "Tu veux pas mon numéro? Genre là tu veux pas me pécho là?",
-   "_deb": 48.36,
-   "_fin": 51.14
-  },
-  {
-   "p": "presentateur",
-   "t": "Non, je vais vous laisser Prends mon numéro, je vais vous laisser",
-   "_deb": 51.4,
-   "_fin": 53.94
-  },
-  {
-   "p": "envoyee",
-   "t": "Prends mon numéro je te dis, tu vas pas repartir sans mon numéro Prends -le mon numéro, je te dis, prends -le Aïe, putain, mais là c 'est",
-   "_deb": 55.3,
-   "_fin": 62.34,
-   "objet": "telephone",
+   "_fin": 50.7,
    "chute": true
   }
  ],
  "bandeau": [],
  "gag": null,
- "legende": "Une scène hilarante où une femme transforme une simple interaction en un monologue dramatique.",
+ "legende": "Un présentateur intrigue son public avec des sous-titres énigmatiques.",
  "hashtags": [
   "petitsdramas",
-  "humourabsurde",
-  "dialoguecomique",
-  "rueanimee",
-  "scenedrama",
-  "tiktokfun",
-  "situationhilarante"
+  "mystere",
+  "emissionsecrete",
+  "futuriste",
+  "animateur",
+  "enigme",
+  "st501"
  ],
  "sources": [
-  "https://www.tiktok.com/@kodanimation/video/7697653338422168865"
+  "https://www.tiktok.com/@vincedessine/video/7624637700171189526"
  ],
  "decoupage": [
   {
    "scene": "1",
    "repliques": [
-    0,
-    1,
-    2,
-    3,
-    4,
-    5
+    0
    ],
    "lieu": "",
    "son": "",
    "duree": 0.0,
-   "decor": "rue animée avec des bâtiments anciens, des voitures garées, un banc public et des affiches publicitaires collées aux murs.",
-   "titre": "La Rencontre"
-  },
-  {
-   "scene": "2",
-   "repliques": [
-    6,
-    7,
-    8,
-    9,
-    10,
-    11,
-    12,
-    13,
-    14,
-    15,
-    16,
-    17
-   ],
-   "lieu": "",
-   "son": "",
-   "duree": 0.0,
-   "decor": "même rue, mais avec un éclairage plus dramatique, des ombres allongées et des passants en arrière-plan qui regardent la scène.",
-   "titre": "Le Discours"
-  },
-  {
-   "scene": "3",
-   "repliques": [
-    18,
-    19,
-    20,
-    21
-   ],
-   "lieu": "",
-   "son": "",
-   "duree": 0.0,
-   "decor": "même rue, mais avec une ambiance plus comique, des objets absurdes comme un panneau 'Attention, séchage en cours' et un téléphone qui tombe par terre.",
-   "titre": "La Fin"
+   "decor": "studio futuriste avec écrans géants et boutons lumineux, un pupitre de présentation high-tech",
+   "titre": "ÉMISSION MYSTÈRE"
   }
  ],
  "studio": {
   "moment": "soir",
   "lieux": [
-   "rue"
+   "studio"
   ],
   "costumes": {
    "presentateur": {
     "haut": "chemise",
-    "c_haut": "bleu marine",
-    "motif": "uni",
+    "c_haut": "bleu",
+    "motif": "rayures",
     "bas": "pantalon",
-    "chaussures": "ville",
+    "chaussures": "baskets",
     "details": [
      "cravate",
      "lunettes_soleil",
-     "barbe_courte"
-    ]
-   },
-   "envoyee": {
-    "haut": "robe",
-    "c_haut": "rouge",
-    "motif": "uni",
-    "bas": "ballerines",
-    "chaussures": "ville",
-    "details": [
-     "boucles_oreilles",
-     "sac_bandouliere",
-     "rouge_levres"
-    ]
+     "montre"
+    ],
+    "chapeau": null
    }
   },
   "personnages": {
@@ -264,39 +72,16 @@
     "genre": "h",
     "age": 45,
     "taille": 1,
-    "corpulence": 0.6,
+    "corpulence": 0.7,
     "cheveux": "court_texture",
-    "c_cheveux": "brun",
+    "c_cheveux": "noir",
     "barbe": "trois_jours"
-   },
-   "envoyee": {
-    "genre": "f",
-    "age": 35,
-    "taille": 0.95,
-    "corpulence": 0.5,
-    "cheveux": "long",
-    "c_cheveux": "brun",
-    "barbe": "rien"
    }
   },
-  "objets": [
-   {
-    "replique": 3,
-    "objet": "telephone"
-   },
-   {
-    "replique": 13,
-    "objet": "telephone"
-   },
-   {
-    "replique": 21,
-    "objet": "telephone"
-   }
-  ],
   "gags": [
-   "Attention, séchage en cours",
-   "Interdiction de tromper avec les sœurs",
-   "PlayStation interdite dans un rayon de 50 mètres"
+   "Affiche : 'Accès interdit sans badge ST’ 501'",
+   "Tableau noir : 'Énigme du jour : Qui êtes-vous ?'",
+   "Post-it sur le pupitre : 'Ne pas appuyer sur le bouton rouge'"
   ],
   "ambiances": [
    "neon"
@@ -305,288 +90,36 @@
   "plans": [
    {
     "replique": 0,
-    "plan": "large",
-    "mouvement": "fixe",
-    "geste": "bras_ouverts",
-    "reaction": "aucune"
-   },
-   {
-    "replique": 1,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "mains_hanches",
-    "reaction": "regard_camera"
-   },
-   {
-    "replique": 2,
     "plan": "serre",
     "mouvement": "zoom_choc",
     "geste": "pointe_d",
-    "reaction": "sceptique"
-   },
-   {
-    "replique": 3,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "facepalm",
-    "reaction": "choc"
-   },
-   {
-    "replique": 4,
-    "plan": "moyen",
-    "mouvement": "travelling",
-    "geste": "gratte_tete",
-    "reaction": "yeux_au_ciel"
-   },
-   {
-    "replique": 5,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "poing",
-    "reaction": "colere"
-   },
-   {
-    "replique": 6,
-    "plan": "large",
-    "mouvement": "fixe",
-    "geste": "haussement",
     "reaction": "aucune"
-   },
-   {
-    "replique": 7,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "pointe_g",
-    "reaction": "sceptique"
-   },
-   {
-    "replique": 8,
-    "plan": "serre",
-    "mouvement": "zoom_choc",
-    "geste": "pointe_d",
-    "reaction": "choc"
-   },
-   {
-    "replique": 9,
-    "plan": "moyen",
-    "mouvement": "fixe",
-    "geste": "smug",
-    "reaction": "regard_camera"
-   },
-   {
-    "replique": 10,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "dramatic",
-    "reaction": "choc"
-   },
-   {
-    "replique": 11,
-    "plan": "large",
-    "mouvement": "fixe",
-    "geste": "bras_ouverts",
-    "reaction": "joie"
-   },
-   {
-    "replique": 12,
-    "plan": "serre",
-    "mouvement": "zoom_choc",
-    "geste": "pointe_g",
-    "reaction": "colere"
-   },
-   {
-    "replique": 13,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "obsessive",
-    "reaction": "panique"
-   },
-   {
-    "replique": 14,
-    "plan": "large",
-    "mouvement": "travelling",
-    "geste": "pointe_d",
-    "reaction": "sceptique"
-   },
-   {
-    "replique": 15,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "threatening",
-    "reaction": "choc"
-   },
-   {
-    "replique": 16,
-    "plan": "serre",
-    "mouvement": "zoom_choc",
-    "geste": "panique",
-    "reaction": "yeux_au_ciel"
-   },
-   {
-    "replique": 17,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "accusatory",
-    "reaction": "colere"
-   },
-   {
-    "replique": 18,
-    "plan": "moyen",
-    "mouvement": "fixe",
-    "geste": "embarrassed",
-    "reaction": "gene"
-   },
-   {
-    "replique": 19,
-    "plan": "serre",
-    "mouvement": "zoom_choc",
-    "geste": "confused",
-    "reaction": "choc"
-   },
-   {
-    "replique": 20,
-    "plan": "large",
-    "mouvement": "fixe",
-    "geste": "neutral",
-    "reaction": "aucune"
-   },
-   {
-    "replique": 21,
-    "plan": "serre",
-    "mouvement": "zoom_choc",
-    "geste": "insistent",
-    "reaction": "panique"
    }
-  ],
-  "decors_vus": {
-   "presentateur": "rue avec des bâtiments anciens en pierre, voitures garées, banc public en métal, affiches publicitaires collées aux murs, éclairage néon doux.",
-   "envoyee": "même rue, mais avec un éclairage plus dramatique, ombres allongées, passants en arrière-plan, un téléphone qui tombe par terre et un panneau 'Attention, séchage en cours'."
-  }
+  ]
  },
  "doublage": {
-  "piste": "/tmp/tmplcduiezd/piste.wav",
-  "duree": 62.76,
-  "source": "https://www.tiktok.com/@kodanimation/video/7697653338422168865",
-  "auteur": "kodanimation",
-  "contexte": "Une scène humoristique dans une rue animée où un présentateur (un policier ou un agent municipal) tente de discuter avec une femme qui refuse catégoriquement de lui parler ou de lui donner son numéro. Elle réagit avec sarcasme et exagération, transformant une situation anodine en un dialogue absurde et comique.",
+  "piste": "/tmp/tmp2axksgxi/piste.wav",
+  "duree": 55.46,
+  "source": "https://www.tiktok.com/@vincedessine/video/7624637700171189526",
+  "auteur": "vincedessine",
+  "contexte": "Un présentateur excentrique et enthousiaste anime une émission surréaliste dans un décor futuriste et coloré. Il semble s'adresser à un public imaginaire ou à des invités invisibles, répétant une phrase mystérieuse liée à un sous-titre codé ('ST’ 501').",
   "evenements": [],
-  "visuel": {
-   "gestes": [],
-   "duree": 63.0,
-   "nb_plans": 23,
-   "duree_plan": 2.74,
-   "coupes": [
-    2.5,
-    4.5,
-    5.0,
-    5.5,
-    6.0,
-    9.0,
-    12.0,
-    13.0,
-    14.5,
-    18.0,
-    18.5,
-    19.0,
-    38.0,
-    38.5,
-    44.5,
-    45.5,
-    48.5,
-    51.0,
-    52.0,
-    56.5,
-    57.0,
-    59.5
-   ],
-   "plans": {
-    "tres_serre": 0.008,
-    "serre": 0.056,
-    "moyen": 0.0,
-    "large": 0.937
-   },
-   "camera": {
-    "fixe": 0.798,
-    "avance": 0.111,
-    "recul": 0.081,
-    "travelling": 0.01,
-    "epaule": 0.0
-   },
-   "nb_personnes": 1,
-   "personnes": [],
-   "visages": true,
-   "sourires": 0.0,
-   "energie": 1.0,
-   "mur": [
-    145,
-    89,
-    63
-   ],
-   "palette": [
-    [
-     198,
-     188,
-     182,
-     0.233
-    ],
-    [
-     6,
-     4,
-     4,
-     0.206
-    ],
-    [
-     88,
-     63,
-     43,
-     0.174
-    ],
-    [
-     253,
-     253,
-     253,
-     0.168
-    ],
-    [
-     207,
-     71,
-     45,
-     0.11
-    ],
-    [
-     123,
-     124,
-     104,
-     0.109
-    ]
-   ],
-   "lumiere": {
-    "luminosite": 143.8,
-    "chaleur": 31.9,
-    "saturation": 76.7
-   },
-   "moment": "soir"
-  },
+  "visuel": {},
   "audio": {
-   "duree": 62.8,
-   "nb_voix": 2,
+   "duree": 55.5,
+   "nb_voix": 1,
    "voix": [
     {
-     "hz": 166,
-     "genre": "?",
-     "part": 0.22
-    },
-    {
-     "hz": 253,
+     "hz": 242,
      "genre": "f",
-     "part": 0.78
+     "part": 1.0
     }
    ],
-   "debit": 5.32,
-   "blanc_moyen": 0.31,
-   "coupes": 1,
-   "dynamique_db": 25.3,
-   "cris": 0.002,
+   "debit": 0.16,
+   "blanc_moyen": 0.0,
+   "coupes": 0,
+   "dynamique_db": 12.0,
+   "cris": 0.007,
    "musique": null,
    "impacts": 0,
    "impacts_10s": 0.0,
@@ -595,17 +128,10 @@
    "sur_vanne": 0,
    "evenements": {},
    "emotions": {
-    "'[confused": 2,
-    "'[sarcastic": 2,
-    "'[neutral": 2,
-    "'[annoyed": 1,
-    "'[mocking": 1,
-    "'[exaggerated": 1,
-    "'[suspicious": 1,
-    "'[repetitive": 1
+    "excited_whisper": 1
    }
   },
-  "video_origine": "/tmp/tmplcduiezd/src.mp4"
+  "video_origine": "/tmp/tmp2axksgxi/src.mp3"
  },
  "fiche": {
   "note": 0,
@@ -614,109 +140,40 @@
    {
     "scene": "1",
     "repliques": [
-     0,
-     1,
-     2,
-     3,
-     4,
-     5
+     0
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "rue animée avec des bâtiments anciens, des voitures garées, un banc public et des affiches publicitaires collées aux murs.",
-    "titre": "La Rencontre"
-   },
-   {
-    "scene": "2",
-    "repliques": [
-     6,
-     7,
-     8,
-     9,
-     10,
-     11,
-     12,
-     13,
-     14,
-     15,
-     16,
-     17
-    ],
-    "lieu": "",
-    "son": "",
-    "duree": 0.0,
-    "decor": "même rue, mais avec un éclairage plus dramatique, des ombres allongées et des passants en arrière-plan qui regardent la scène.",
-    "titre": "Le Discours"
-   },
-   {
-    "scene": "3",
-    "repliques": [
-     18,
-     19,
-     20,
-     21
-    ],
-    "lieu": "",
-    "son": "",
-    "duree": 0.0,
-    "decor": "même rue, mais avec une ambiance plus comique, des objets absurdes comme un panneau 'Attention, séchage en cours' et un téléphone qui tombe par terre.",
-    "titre": "La Fin"
+    "decor": "studio futuriste avec écrans géants et boutons lumineux, un pupitre de présentation high-tech",
+    "titre": "ÉMISSION MYSTÈRE"
    }
   ]
  },
  "_monte": true,
  "_voix_hz": {
-  "presentateur": 163,
-  "envoyee": 253
+  "presentateur": 294
  },
  "_voix_genre": {
-  "presentateur": "h",
-  "envoyee": "f"
+  "presentateur": "f"
  },
  "realisation": {
   "moment": "soir",
   "lieux": [
-   "rue",
-   "classe",
-   "classe"
+   "bar"
   ],
   "gags": [
-   "Attention, séchage en cours",
-   "Interdiction de tromper avec les sœurs",
-   "PlayStation interdite dans un rayon de 50 mètres"
+   "Tableau noir : 'Énigme du jour : Qui êtes-vous ?'"
   ],
   "ambiances": [
    "neon",
    "poussiere"
   ],
-  "source": "auteur+image",
+  "source": "auteur",
   "tenues": {
-   "presentateur": "chemise",
-   "envoyee": "robe"
+   "presentateur": "chemise"
   },
   "plans": [
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
    "large/fixe"
   ]
  }
