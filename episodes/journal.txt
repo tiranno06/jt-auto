@@ -2,14 +2,14 @@ Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, ElevenLabs epuise — IA utilisée : mistral
 Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @motiontoonz, @same_same53, @charly.bse, @kodanimation, @vignianimation, @vincedessine
-Profil TikTok @kodanimation : 25 vidéo(s) jamais utilisée(s)
-Profil TikTok @vignianimation : 36 vidéo(s) jamais utilisée(s)
-Profil TikTok @eliotlehanneur : 32 vidéo(s) jamais utilisée(s)
-Vidéo depuis TikTok : https://www.tiktok.com/@kodanimation/video/7678870631944834336
+Profil TikTok @same_same53 : 32 vidéo(s) jamais utilisée(s)
+Profil TikTok @motiontoonz : 36 vidéo(s) jamais utilisée(s)
+Profil TikTok @yan_animation0 : 28 vidéo(s) jamais utilisée(s)
+Vidéo depuis TikTok : https://www.tiktok.com/@same_same53/video/7671622029765856545
   son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 9.9 s, compte d'origine @kodanimation
-[ WARN:0@16.052] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
-  image de la vidéo : 1 plans (≈ 10.0 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 0 %, large 100 % ; caméra : fixe 100 % ; 0 personne(s) à l'écran : aucun visage repéré ; agitation 0.216 ; lumière jour ; fond [218, 218, 218]
+  son récupéré : 75.0 s, compte d'origine @same_same53
+[ WARN:0@15.452] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  image de la vidéo : 1 plans (≈ 75.0 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 0 %, large 100 % ; caméra : fixe 100 % ; 0 personne(s) à l'écran : aucun visage repéré ; agitation 0.072 ; lumière jour ; fond [0, 0, 0]
   isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
   transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/core/io.py:48: UserWarning: 
@@ -19,35 +19,44 @@ torchcodec is not installed correctly so built-in audio decoding will fail. Solu
 
 Could not load this library: /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/torchcodec/libtorchcodec_image.so
   warnings.warn(
-[0;93m2026-10-26 07:39:57.711840267 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[0;93m2026-10-26 07:54:19.914374008 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1913.)
   std = sequences.std(dim=-1, correction=1)
-  voix séparées par pyannote : 1 voix, 2 tours de parole
+  voix séparées par pyannote : 2 voix, 18 tours de parole
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-  voix re-séparées par leur empreinte (ECAPA) : 2 voix (netteté 0.17)
-  4 répliques, voix : {'speaker_0': 109, 'speaker_1': 133}
-  son de la vidéo : 2 voix [109 Hz (h, 68 %), 133 Hz (h, 32 %)], 4.44 mots/s, blancs 0.36 s, 1 coupure(s) de parole, dynamique 23.2 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
-  IA gemini indisponible (The read operation timed out) : on passe à la suivante
-  scène reconstituée : Deux amis discutent dans un salon après une blague sur des pouvoirs imaginaires. L'un semble inquiet après avoir entendu l'autre exagérer une situation.
+  voix vérifiées mot par mot : 3 mot(s) remis sur la bonne voix
+  20 répliques, voix : {'speaker_0': 286, 'speaker_1': 123}
+  son de la vidéo : 2 voix [286 Hz (f, 25 %), 123 Hz (h, 75 %)], 3.82 mots/s, blancs 0.28 s, 2 coupure(s) de parole, dynamique 23.9 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
+  scène reconstituée : Un couple discute après un barbecue familial mouvementé où le invité a multiplié les gaffes et les blagues lourdes.
   casting : speaker_0 → Jojo, speaker_1 → Kévin
-  sous-titres : 3 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
-Sketch : « POUVOIRS IMAGINAIRES », 4 répliques
-Lieux séparés : chaque personnage a son propre décor (appel, visio, l'un ailleurs)
-  décor 1 (lieu ressemblant de la banque, budget Modal du mois atteint) : même salon, mais avec un coussin rouge par terre et un télép
-  décor 0 : salon avec un canapé gris, une table basse en bois clair, une télé all
-montage : 4 plans (0.0:large>pre/coupe 4.1:large>inv/coupe 5.3:large>pre/coupe 7.3:large>inv/coupe)
-studio : soir, lieux ['rue', 'salon'], tenues presentateur=tshirt, invite=capuche, 2 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 12.7 s, 4 répliques, 2 scène(s), personnages ['presentateur', 'invite']
-montage : 4 plans (0.0:large>pre/coupe 4.1:large>inv/coupe 5.3:large>pre/coupe 7.3:large>inv/coupe)
-studio : soir, lieux ['rue', 'salon'], tenues presentateur=tshirt, invite=capuche, 2 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 12.7 s, 4 répliques, 2 scène(s), personnages ['presentateur', 'invite']
-  image 300/759 (4 processeurs)
-  image 600/759
+  sous-titres : 13 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
+Sketch : « BARBECUE DE FAMILLE CATASTROPH », 20 répliques
+  décor 0 (lieu ressemblant de la banque, budget Modal du mois atteint) : kitchen with white walls, simple table, modern oven, minimal
+montage : 1 plans (0.0:large>pre/coupe)
+studio : jour, lieux ['cuisine'], tenues presentateur=chemise, invite=tshirt, 0 figurant(s), ambiances ['vapeur'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 78.5 s, 20 répliques, 1 scène(s), personnages ['presentateur', 'invite']
+montage : 1 plans (0.0:large>pre/coupe)
+studio : jour, lieux ['cuisine'], tenues presentateur=chemise, invite=tshirt, 0 figurant(s), ambiances ['vapeur'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 78.5 s, 20 répliques, 1 scène(s), personnages ['presentateur', 'invite']
+  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~1177 images)
+  morceau 1178–2356 reçu d'une machine d'aide
+  morceau 2356–3533 reçu d'une machine d'aide
+  morceau 3533–4711 reçu d'une machine d'aide
+  dessin partagé terminé en 8.3 min
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury qualité (ia) : 4.9/10 — Humoriste 5.0/10 : 6.1 s La chute finale manque d'un zoom choc pour accentuer l'impact comique. | Réalisateur 5.0/10 : 4.6 s Manque de dynamisme dans les réactions lors du passage d'un plan à l'autre. | Directeur artistique 4.0/10 : 4.6 s Le décor de la version originale montre un personnage au sol, on a changé les personnages et les lieux de manière incohérente par rapport au gag visuel d'origine. | Ingénieur du son 6.0/10 : 8.2 s Absence de bruitage sur l'appel téléphonique pour renforcer le gag. | Spectateur TikTok 5.0/10 : 12.1 s La fin manque d'impact et de lisibilité.
-Manque par rapport à la vidéo d'origine : Dans l'original, le personnage principal est allongé au sol de tout son long sur le trottoir après une chute, ce qui rend le gag de la piqûre d'araignée absurde ; Le smartphone au sol affiche l'application de messagerie avec une bulle verte active tout au long de la conversation.
+  IA gemini indisponible (The read operation timed out) : on passe à la suivante
+Jury qualité (gratuit) : 8.8/10 — Humoriste 8.6/10 : 69.5 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 6.6/10 : montage trop lent : 0.1 plans toutes les 10 s (il en faudrait ~2.8); 49.0 s pas assez de plans de réaction de celui qui écoute | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.1/10 : 0.0 s sous-titres trop rapides à lire
+Corrections du jury (tour 1) : réaction « sceptique » à la réplique 16
+montage : 1 plans (0.0:large>pre/coupe)
+studio : jour, lieux ['cuisine'], tenues presentateur=chemise, invite=tshirt, 0 figurant(s), ambiances ['vapeur'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 78.5 s, 20 répliques, 1 scène(s), personnages ['presentateur', 'invite']
+  redessin partiel : 817/4711 images à redessiner (1 passage(s)), le reste repris tel quel
+Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
+Jury qualité (ia) : 5.0/10 — Humoriste 5.5/10 : 69.5 s Chute finale sans impact comique ni gros plan percutant.; 26.6 s Manque de ponctuation sonore sur la vanne de la saucisse. | Réalisateur 4.5/10 : 0 s Plan d'ensemble fixe durant toute la vidéo sans champ/contrechamp.; 27.1 s Absence de plans de réaction et dynamisme de montage insuffisant. | Directeur artistique 5.0/10 : 1.1 s Design des personnages trop générique comparé au look décalé de l'original.; 0.4 s Tenue tailleur trop formelle par rapport au sujet barbecue/famille. | Ingénieur du son 5.2/10 : 16.5 s Absence totale d'effets sonores pour rythmer les révélations gênantes. | Spectateur TikTok 4.8/10 : 0.4 s Accroche visuelle confuse avec double texte superposé dans le bandeau.; 45.3 s Rythme global monotone incitant à zapper avant la fin.
+Manque par rapport à la vidéo d'origine : Alternance champ-contrechamp serré centrée sur le locuteur à chaque réplique. ; Personnage masculin avec crête orange, corpulence ronde et cravate. ; Personnage féminin aux cheveux noirs vêtue d'une robe bleue à motifs.
+La version corrigée n'est pas meilleure : on garde la première.
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = mistral ×1, gemini ×1, voix = tiktok, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 11006, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 19}
-Quota de l'API GitHub : 4873 appels restants
-OK : sortie/2026-10-26_08h44_emission.mp4 (13 s)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = gemini ×2, mistral ×1, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 28924, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0}
+Quota de l'API GitHub : 4800 appels restants
+OK : sortie/2026-10-26_08h55_emission.mp4 (79 s)

@@ -3341,37 +3341,36 @@
   "cadence": "rapide"
  },
  {
-  "moment": "soir",
+  "moment": "jour",
   "lieux": [
-   "rue",
-   "salon"
+   "cuisine"
   ],
   "source": "auteur+image",
-  "duree": 12.7,
+  "duree": 78.5,
   "plans": {
-   "large": 4
+   "large": 20
   },
   "mouvements": {
-   "fixe": 4
+   "fixe": 20
   },
   "costumes": {
-   "presentateur": "tshirt",
-   "invite": "capuche"
+   "presentateur": "chemise",
+   "invite": "tshirt"
   },
-  "figurants": 2,
+  "figurants": 0,
   "ambiances": [
-   "poussiere"
+   "vapeur"
   ],
-  "controle": "Humoriste 5.0/10 : 6.1 s La chute finale manque d'un zoom choc pour accentuer l'impact comique. | Réalisateur 5.0/10 : 4.6 s Manque de dynamisme dans les réactions lors du passage d'un plan à l'autre.",
-  "fichier": "2026-10-26_08h44_emission.mp4",
+  "controle": "Humoriste 8.6/10 : 69.5 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 6.6/10 : montage trop lent : 0.1 plans toutes les 10 s (il en faudrait ~2.8); 49.0 s pas assez de plans",
+  "fichier": "2026-10-26_08h55_emission.mp4",
   "cine": {
    "focus": false,
    "vertige": true,
    "tiers": true,
    "etalonnage": true,
-   "profondeur": true,
+   "profondeur": false,
    "grain": true,
-   "reflets": false,
+   "reflets": true,
    "son": true
   },
   "cadence": "rapide"
