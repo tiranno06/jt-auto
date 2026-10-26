@@ -2,14 +2,14 @@ Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, ElevenLabs epuise — IA utilisée : mistral
 Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @motiontoonz, @same_same53, @charly.bse, @kodanimation, @vignianimation, @vincedessine
-Profil TikTok @yan_animation0 : 27 vidéo(s) jamais utilisée(s)
+Profil TikTok @vignianimation : 36 vidéo(s) jamais utilisée(s)
 Profil TikTok @vincedessine : 32 vidéo(s) jamais utilisée(s)
 Profil TikTok @motiontoonz : 35 vidéo(s) jamais utilisée(s)
-Vidéo depuis TikTok : https://www.tiktok.com/@yan_animation0/video/7689561227600678176
+Vidéo depuis TikTok : https://www.tiktok.com/@vignianimation/video/7685457076637715744
   son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 61.7 s, compte d'origine @yan_animation0
-[ WARN:0@48.213] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
-  image de la vidéo : 24 plans (≈ 2.58 s chacun) ; cadrages : très serré 0 %, serré 20 %, moyen 75 %, large 4 % ; caméra : fixe 53 %, avance 7 %, recul 6 %, epaule 34 % ; 3 personne(s) à l'écran : centre (habit [58, 52, 49], cheveux [219, 161, 108], sourit 0 %); droite (habit [177, 135, 61], cheveux [209, 151, 98], sourit 0 %); gauche (habit [134, 77, 59], cheveux [32, 30, 27], sourit 0 %) ; agitation 0.486 ; lumière soir ; fond [236, 228, 214]
+  son récupéré : 63.0 s, compte d'origine @vignianimation
+[ WARN:0@72.469] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  image de la vidéo : 5 plans (≈ 12.6 s chacun) ; cadrages : très serré 0 %, serré 19 %, moyen 0 %, large 80 % ; caméra : fixe 69 %, avance 8 %, recul 0 %, epaule 21 % ; 1 personne(s) à l'écran : centre (habit [14, 67, 104], cheveux [48, 45, 45], sourit 0 %) ; agitation 0.275 ; lumière jour ; fond [14, 50, 109]
   isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
   transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/core/io.py:48: UserWarning: 
@@ -19,42 +19,43 @@ torchcodec is not installed correctly so built-in audio decoding will fail. Solu
 
 Could not load this library: /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/torchcodec/libtorchcodec_image.so
   warnings.warn(
-[0;93m2026-10-26 13:04:40.387657506 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[0;93m2026-10-26 13:29:59.057806891 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1913.)
   std = sequences.std(dim=-1, correction=1)
-  voix séparées par pyannote : 1 voix, 18 tours de parole
+  voix séparées par pyannote : 2 voix, 15 tours de parole
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-  voix séparées par la hauteur (gratuit) : 122 Hz et 266 Hz
-  voix vérifiées mot par mot : 6 mot(s) remis sur la bonne voix
-  14 répliques, voix : {'speaker_0': 120, 'speaker_1': 242}
-  son de la vidéo : 2 voix [120 Hz (h, 72 %), 242 Hz (f, 28 %)], 2.38 mots/s, blancs 1.96 s, 2 coupure(s) de parole, dynamique 10.2 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
-  IA gemini indisponible (The read operation timed out) : on passe à la suivante
-  scène reconstituée : Un quiz historique animé dans un décor de classe, où un présentateur et deux invités s'affrontent sur leurs connaissances en dates clés. L'ambiance est compétitive mais légère, avec des réactions exagérées pour l'humour.
-  casting : speaker_0 → Jojo, speaker_1 → Lila
-  sous-titres : 2 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
-  4 réattribution(s) de l'IA refusée(s) : la voix de ces répliques est reconnue avec certitude
-Sketch : « QUIZ HISTORIQUE », 14 répliques
-  décor 0 : classe avec tableau noir, chaises en bois, cartes historiques, horloge
-montage : 1 plans (0.0:large>pre/coupe)
-studio : soir, lieux ['classe'], tenues presentateur=costume, envoyee=blouse, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 65.2 s, 14 répliques, 1 scène(s), personnages ['presentateur', 'envoyee']
-montage : 1 plans (0.0:large>pre/coupe)
-studio : soir, lieux ['classe'], tenues presentateur=costume, envoyee=blouse, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 65.2 s, 14 répliques, 1 scène(s), personnages ['presentateur', 'envoyee']
-  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~978 images)
-  morceau 1957–2936 reçu d'une machine d'aide
-  morceau 2936–3914 reçu d'une machine d'aide
-  morceau 978–1957 reçu d'une machine d'aide
-  dessin partagé terminé en 4.1 min
-Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
+  voix re-séparées par leur empreinte (ECAPA) : 2 voix (netteté 0.11)
+  voix vérifiées mot par mot : 4 mot(s) remis sur la bonne voix
+  17 répliques, voix : {'speaker_0': 131, 'speaker_1': 129}
+  son de la vidéo : 2 voix [131 Hz (h, 81 %), 129 Hz (h, 19 %)], 4.23 mots/s, blancs 0.42 s, 5 coupure(s) de parole, dynamique 15.9 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
   IA gemini indisponible (gemini 429 : [{
   "error": {
     "code": 429,
     "message": "You exceeded your current quota, please check your plan an) : on passe à la suivante
-Jury qualité (ia) : 6.2/10 — Humoriste 6.0/10 : 0.4 s La chute finale manque de punch. La réaction de l'envoyée à 60.8 s n'est pas assez marquée pour faire rire.; 45.4 s Les vannes sur les dates pourraient être renforcées par des regards caméra ou des bruitages pour accentuer l'humour.; 34.2 s L'humour sur la guerre de Corée (1952 vs 1953) est un peu rapide. Un zoom sur le présentateur ou une exagération du geste pourrait aider. | Réalisateur 5.0/10 : 0 s Montage trop lent. Les plans devraient être plus dynamiques pour maintenir l'attention.; 14.4 s Manque de plans de réaction de l'envoyée pour illustrer son scepticisme.; 60.8 s Faux raccord entre les images 15 et 16, la transition est brutale. | Directeur artistique 7.0/10 : Les personnages manquent de cohérence dans leurs expressions et gestes pour renforcer l'humour.; Les décors sont répétitifs et pourraient être variés pour éviter la monotonie.; 30.2 s L'âge et 
-Manque par rapport à la vidéo d'origine : Les personnages de l'original ont des expressions plus exagérées et des gestes plus dynamiques (ex. : mains qui gesticulent davantage). ; Les bruitages sont plus présents dans l'original, notamment pour accentuer les moments comiques. ; Les transitions entre les plans sont plus fluides et moins brutales. ; Les décors originaux incluent des détails supplémentaires qui renforcent l'humour (ex. : objets comiques sur les tables).
+  scène reconstituée : Deux amis, un présentateur énergique et un invité sceptique, sont dans un studio de jeu vidéo improvisé. Ils jouent à un jeu compétitif où l’un des deux est en difficulté face à des adversaires. Le présentateur encourage son ami tout en évoquant des métaphores poétiques et des références à leur vie quotidienne.
+  casting : speaker_0 → Jojo, speaker_1 → Kévin
+  sous-titres : 5 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
+  2 réattribution(s) de l'IA refusée(s) : la voix de ces répliques est reconnue avec certitude
+Sketch : « AMITIÉ ET DÉFIS », 17 répliques
+  décor 0 : studio de jeu vidéo, bureau avec écrans géants, manettes de jeu, boute
+  décor 1 : même décor, mais avec des effets visuels de jeu vidéo intégrés aux mur
+montage : 2 plans (0.0:large>pre/coupe 15.1:large>pre/coupe)
+studio : soir, lieux ['bureau', 'hall'], tenues presentateur=tshirt, invite=chemise, 1 figurant(s), ambiances ['neon', 'poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 66.5 s, 17 répliques, 2 scène(s), personnages ['presentateur', 'invite']
+Contrôle image : 2 défaut(s) — 15.25 s tete_coupee (presentateur), 15.25 s tete_coupee (invite)
+montage : 2 plans (0.0:large>pre/coupe 15.1:large>pre/coupe)
+studio : soir, lieux ['bureau', 'hall'], tenues presentateur=tshirt, invite=chemise, 1 figurant(s), ambiances ['neon', 'poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 66.5 s, 17 répliques, 2 scène(s), personnages ['presentateur', 'invite']
+Contrôle image : 2 défaut(s) — 15.25 s tete_coupee (presentateur), 15.25 s tete_coupee (invite)
+  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~997 images)
+  morceau 1994–2991 reçu d'une machine d'aide
+  morceau 2991–3988 reçu d'une machine d'aide
+  morceau 997–1994 reçu d'une machine d'aide
+  dessin partagé terminé en 4.5 min
+Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
+Jury qualité (ia) : 5.8/10 — Humoriste 6.0/10 : 0.4 s La chute finale est trop longue et la vanne se dilue. Le rythme des répliques pourrait être accéléré pour garder l'humour intact.; 59.5 s Manque de réactions marquées lors des répliques humoristiques, notamment pour renforcer les moments clés.; 16.9 s La chute sur 'Tu es mon ange gardien' manque d'impact visuel. Un regard caméra ou un geste exagéré renforcerait l'effet comique. | Réalisateur 5.0/10 : 0 s Montage trop lent avec seulement 0.3 plans toutes les 10 secondes. Il faudrait environ 0.6 plans pour dynamiser la vidéo.; 7.8 s Tête du présentateur coupée par le bord de l'image dans certains plans.; 29.4 s Manque de plans de réaction de l'invité pour renforcer l'interaction.; 15.2 s tête de presentateur coupée par le bord de l'image (large) | Directeur artistique 7.0/10 : 0 s Les personnages secondaires (comme le frère d'armes) ne sont pas représentés visuelle
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
 Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = mistral ×2, voix = tiktok, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 25997, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 23}
-Quota de l'API GitHub : 4861 appels restants
-OK : sortie/2026-10-26_14h11_emission.mp4 (65 s)
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 23758, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 30}
+Quota de l'API GitHub : 4993 appels restants
+OK : sortie/2026-10-26_14h32_emission.mp4 (66 s)

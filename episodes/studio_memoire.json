@@ -3704,36 +3704,38 @@
  {
   "moment": "soir",
   "lieux": [
-   "classe"
+   "bureau",
+   "hall"
   ],
   "source": "auteur+image",
-  "duree": 65.2,
+  "duree": 66.5,
   "plans": {
-   "large": 14
+   "large": 17
   },
   "mouvements": {
-   "fixe": 14
+   "fixe": 17
   },
   "costumes": {
-   "presentateur": "costume",
-   "envoyee": "blouse"
+   "presentateur": "tshirt",
+   "invite": "chemise"
   },
-  "figurants": 0,
+  "figurants": 1,
   "ambiances": [
+   "neon",
    "poussiere"
   ],
-  "controle": "Humoriste 6.0/10 : 0.4 s La chute finale manque de punch. La réaction de l'envoyée à 60.8 s n'est pas assez marquée pour faire rire.; 45.4 s Les vannes sur les dates pourraient être renforcées par des",
-  "fichier": "2026-10-26_14h11_emission.mp4",
+  "controle": "Humoriste 6.0/10 : 0.4 s La chute finale est trop longue et la vanne se dilue. Le rythme des répliques pourrait être accéléré pour garder l'humour intact.; 59.5 s Manque de réactions marquées lors des",
+  "fichier": "2026-10-26_14h32_emission.mp4",
   "cine": {
    "focus": false,
-   "vertige": false,
-   "tiers": true,
+   "vertige": true,
+   "tiers": false,
    "etalonnage": true,
    "profondeur": false,
    "grain": false,
-   "reflets": false,
+   "reflets": true,
    "son": true
   },
-  "cadence": null
+  "cadence": "rapide"
  }
 ]
