@@ -21345,19 +21345,19 @@
  },
  {
   "date": "2026-10-26",
-  "source": "https://www.tiktok.com/@vignianimation/video/7677681991629688096",
-  "auteur": "vignianimation",
+  "source": "https://www.tiktok.com/@charly.bse/video/7652247984586919201",
+  "auteur": "charly.bse",
   "visuel": {
    "gestes": [],
-   "duree": 78.0,
+   "duree": 60.5,
    "nb_plans": 1,
-   "duree_plan": 78.0,
+   "duree_plan": 60.5,
    "coupes": [],
    "plans": {
-    "tres_serre": 0.0,
-    "serre": 0.0,
-    "moyen": 1.0,
-    "large": 0.0
+    "tres_serre": 0.025,
+    "serre": 0.025,
+    "moyen": 0.0,
+    "large": 0.95
    },
    "camera": {
     "fixe": 1.0,
@@ -21367,99 +21367,80 @@
     "epaule": 0.0
    },
    "nb_personnes": 1,
-   "personnes": [
-    {
-     "place": "gauche",
-     "presence": 1.0,
-     "habit": [
-      11,
-      9,
-      14
-     ],
-     "cheveux": [
-      23,
-      23,
-      24
-     ],
-     "sourire": 0.0,
-     "taille": 0.105,
-     "tete_penchee": 3.8,
-     "regard_cote": 1.0
-    }
-   ],
+   "personnes": [],
    "visages": true,
-   "sourires": 0.0,
-   "energie": 0.042,
+   "sourires": 0.667,
+   "energie": 0.094,
    "mur": [
-    238,
-    200,
-    196
+    231,
+    204,
+    171
    ],
    "palette": [
     [
-     242,
-     221,
-     213,
-     0.262
+     234,
+     209,
+     177,
+     0.465
     ],
     [
-     25,
-     98,
-     151,
-     0.214
+     215,
+     108,
+     29,
+     0.158
     ],
     [
-     229,
-     175,
-     170,
-     0.202
+     187,
+     155,
+     120,
+     0.123
     ],
     [
-     236,
-     150,
-     87,
-     0.145
+     107,
+     72,
+     32,
+     0.092
     ],
     [
-     25,
-     19,
-     21,
-     0.096
+     12,
+     12,
+     9,
+     0.09
     ],
     [
-     132,
-     82,
-     81,
-     0.082
+     18,
+     96,
+     131,
+     0.072
     ]
    ],
    "lumiere": {
-    "luminosite": 190.5,
-    "chaleur": 17.2,
-    "saturation": 112.7
+    "luminosite": 188.5,
+    "chaleur": 63.7,
+    "saturation": 120.4
    },
    "moment": "jour"
   },
   "audio": {
-   "duree": 78.0,
+   "duree": 60.3,
    "nb_voix": 2,
    "voix": [
     {
-     "hz": 306,
-     "genre": "f",
-     "part": 0.4
+     "hz": 151,
+     "genre": "h",
+     "part": 0.94
     },
     {
-     "hz": 146,
-     "genre": "h",
-     "part": 0.6
+     "hz": null,
+     "genre": null,
+     "part": 0.06
     }
    ],
-   "debit": 2.83,
-   "blanc_moyen": 0.8,
+   "debit": 1.02,
+   "blanc_moyen": 6.48,
    "coupes": 0,
-   "dynamique_db": 19.5,
-   "cris": 0.01,
+   "dynamique_db": 28.3,
+   "cris": 0.005,
    "musique": null,
    "impacts": 0,
    "impacts_10s": 0.0,
@@ -21468,147 +21449,65 @@
    "sur_vanne": 0,
    "evenements": {},
    "emotions": {
-    "'[ironique": 2,
-    "'[neutre": 2,
-    "'[confident": 1,
-    "'[fier": 1,
-    "'[sarcastique": 1,
-    "'[exagéré": 1,
-    "'[polie": 1,
-    "'[auto-satisfait": 1
+    "sarcastic": 2,
+    "excited": 1,
+    "confused": 1,
+    "neutral": 1,
+    "blase": 1
    }
   },
   "claude": {
    "lieux": [
     "salon"
    ],
-   "moment": "jour",
+   "moment": "soir",
    "costumes": {
     "presentateur": {
-     "haut": "chemise",
-     "c_haut": "bleu marine",
+     "haut": "tshirt",
+     "c_haut": "bleu",
+     "motif": "uni",
+     "bas": "jeans",
+     "chaussures": "baskets",
+     "details": [
+      "barbe_courte",
+      "bracelets"
+     ],
+     "chapeau": null,
+     "cheveux": "court",
+     "c_cheveux": "brun"
+    },
+    "envoyee": {
+     "haut": "polo",
+     "c_haut": "rouge",
      "motif": "uni",
      "bas": "pantalon",
      "chaussures": "ville",
      "details": [
-      "cravate",
-      "lunettes_vue"
-     ]
-    },
-    "invite": {
-     "haut": "costume",
-     "c_haut": "violet",
-     "motif": "rayures",
-     "bas": "pantalon",
-     "chaussures": "ville",
-     "details": [
-      "cravate",
       "lunettes_soleil",
-      "barbe_courte"
-     ]
+      "bracelet"
+     ],
+     "chapeau": null,
+     "cheveux": "long",
+     "c_cheveux": "blond"
     }
-   },
-   "objets": [
-    {
-     "replique": 1,
-     "objet": "telephone"
-    },
-    {
-     "replique": 11,
-     "objet": "tablette"
-    }
-   ],
-   "gags": [
-    "Diplômé de Snapchat™",
-    "Erreur 404 : Diplôme non trouvé",
-    "Anglais : niveau expert (selon lui)"
-   ],
-   "ambiances": [
-    "vapeur"
-   ],
-   "plans": [
-    {
-     "replique": 0,
-     "plan": "moyen",
-     "mouvement": "fixe",
-     "geste": "bras_ouverts",
-     "reaction": "regard_camera"
-    },
-    {
-     "replique": 1,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "pointe_g",
-     "reaction": "choc"
-    },
-    {
-     "replique": 3,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "gratte_tete",
-     "reaction": "sceptique"
-    },
-    {
-     "replique": 4,
-     "plan": "large",
-     "mouvement": "fixe",
-     "geste": "bras_ouverts",
-     "reaction": "aucune"
-    },
-    {
-     "replique": 7,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "pointe_d",
-     "reaction": "rire"
-    },
-    {
-     "replique": 11,
-     "plan": "moyen",
-     "mouvement": "zoom_choc",
-     "geste": "pointe_g",
-     "reaction": "choc"
-    },
-    {
-     "replique": 12,
-     "plan": "tres_serre",
-     "mouvement": "fixe",
-     "geste": "gratte_tete",
-     "reaction": "gene"
-    }
-   ]
+   }
   },
   "realisation": {
-   "moment": "jour",
+   "moment": "soir",
    "lieux": [
     "salon",
     "salon"
    ],
-   "gags": [
-    "Diplômé de Snapchat™",
-    "Erreur 404 : Diplôme non trouvé",
-    "Anglais : niveau expert (selon lui)"
-   ],
+   "gags": [],
    "ambiances": [
-    "vapeur"
+    "poussiere"
    ],
    "source": "auteur+image",
    "tenues": {
-    "presentateur": "chemise",
-    "invite": "costume"
+    "presentateur": "tshirt",
+    "envoyee": "polo"
    },
    "plans": [
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
     "large/fixe",
     "large/fixe",
     "large/fixe",
@@ -21617,6 +21516,6 @@
     "large/fixe"
    ]
   },
-  "video": "2026-10-26_15h19_emission.mp4"
+  "video": "2026-10-26_15h48_emission.mp4"
  }
 ]

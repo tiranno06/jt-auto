@@ -1,148 +1,74 @@
 {
- "titre": "ENTRETIEN LINGUISTIQUE ABSURDE",
- "sujet": "ENTRETIEN LINGUISTIQUE ABSURDE",
- "ecran": "ENTRETIEN LING",
+ "titre": "DÉNIGREMENT ET RUPTURE",
+ "sujet": "DÉNIGREMENT ET RUPTURE",
+ "ecran": "DÉNIGREMENT ET",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "POV : Un entretien qui tourne au vinaigre",
- "question": "Comment gérer un entretien avec un invité aussi excentrique ?",
+ "titre_accroche": "POV : Quand ton pote te balance une phrase qui",
+ "question": "Est-ce qu'ils parlent vraiment d'une rupture ou d'un jeu ?",
  "running_gag": "",
  "verite": "",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "Je vois que vous parlez anglais?",
+   "t": "C'est un dénigre, j'en ai dit !",
    "_deb": 0.0,
-   "_fin": 2.98,
-   "d": "['[confident]', 'Je vois que vous parlez anglais?']"
-  },
-  {
-   "p": "invite",
-   "t": "Oui, je parle anglais couramment, l'espagnol, l'italien et le français bien sûr.",
-   "_deb": 3.48,
-   "_fin": 9.12,
-   "d": "['[fier]', \"Oui, je parle anglais couramment, l'espagnol, l'italien et le français bien sûr.\"]",
-   "objet": "telephone"
+   "_fin": 12.06,
+   "d": "[excited] C'est un dénigre, j'en ai dit !"
   },
   {
    "p": "presentateur",
-   "t": "Et l'anglais justement, ça m'intéresse, est-ce que vous pouvez vous présenter?",
-   "_deb": 9.88,
-   "_fin": 12.8,
-   "d": "['[ironique]', \"Et l'anglais justement, ça m'intéresse, est-ce que vous pouvez vous présenter?\"]"
-  },
-  {
-   "p": "invite",
-   "t": "En anglais?",
-   "_deb": 13.42,
-   "_fin": 14.16,
-   "d": "['[sarcastique]', 'En anglais?']"
-  },
-  {
-   "p": "invite",
-   "t": "Mon name c'est Chou, I'm 30 years old, voilà, je me suis présenté.",
-   "_deb": 15.8,
-   "_fin": 29.58,
-   "d": "['[exagéré]', \"Mon name c'est Chou, I'm 30 years old, voilà, je me suis présenté.\"]"
+   "t": "T'as dit quoi ? Y allons-y, j'y allons-y",
+   "_deb": 21.76,
+   "_fin": 30.04,
+   "d": "[confused] T'as dit quoi ? Y allons-y, j'y allons-y"
   },
   {
    "p": "presentateur",
-   "t": "Ok, je vois.",
-   "_deb": 30.0,
-   "_fin": 31.98,
-   "d": "['[neutre]', 'Ok, je vois.']"
+   "t": "Adieu au couple ?",
+   "_deb": 36.94,
+   "_fin": 37.82,
+   "d": "[sarcastic] Adieu au couple ?"
+  },
+  {
+   "p": "envoyee",
+   "t": "Ok, ready ?",
+   "_deb": 39.8,
+   "_fin": 40.64,
+   "d": "[neutral] Ok, ready ?"
   },
   {
    "p": "presentateur",
-   "t": "Pouvez-vous citer un défaut et une qualité, s'il vous plaît?",
-   "_deb": 32.9,
-   "_fin": 35.76,
-   "d": "['[polie]', \"Pouvez-vous citer un défaut et une qualité, s'il vous plaît?\"]"
+   "t": "Adieu au couple ?",
+   "_deb": 52.28,
+   "_fin": 56.8,
+   "d": "[sarcastic] Adieu au couple ?"
   },
   {
-   "p": "invite",
-   "t": "En qualité, je suis extrêmement jovial, je suis drôle, je suis beau, je suis intelligent, plein de choses.",
-   "_deb": 35.98,
-   "_fin": 40.1,
-   "d": "['[auto-satisfait]', 'En qualité, je suis extrêmement jovial, je suis drôle, je suis beau, je suis intelligent, plein de choses.']"
-  },
-  {
-   "p": "invite",
-   "t": "En défaut, je pense que je suis un peu perfectionniste et trop parfait.",
-   "_deb": 40.5,
-   "_fin": 43.96,
-   "d": "['[auto-dérision]', 'En défaut, je pense que je suis un peu perfectionniste et trop parfait.']"
-  },
-  {
-   "p": "invite",
-   "t": "Du coup, souvent, les gens, ça les agace.",
-   "_deb": 43.96,
-   "_fin": 46.3,
-   "d": "['[réfléchi]', 'Du coup, souvent, les gens, ça les agace.']"
-  },
-  {
-   "p": "presentateur",
-   "t": "Ok, je vois. Excusez-moi, c'est parce qu'on me fait rire à côté.",
-   "_deb": 49.12,
-   "_fin": 52.62,
-   "d": "['[amusé]', \"Ok, je vois. Excusez-moi, c'est parce qu'on me fait rire à côté.\"]"
-  },
-  {
-   "p": "presentateur",
-   "t": "Dites-moi, j'ai vu que votre diplôme... j'avais écrit Snapchat, vous l'avez eu sur Snapchat le diplôme?",
-   "_deb": 53.04,
-   "_fin": 61.04,
-   "d": "['[incrédule]', \"Dites-moi, j'ai vu que votre diplôme... j'avais écrit Snapchat, vous l'avez eu sur Snapchat le diplôme?\"]",
-   "objet": "tablette"
-  },
-  {
-   "p": "invite",
-   "t": "il y avait le logo dessus? oui non c 'est une erreur c 'est parce que du coup j 'avais fait une capture c 'est dans mes mémories",
-   "_deb": 61.64,
-   "_fin": 67.82
-  },
-  {
-   "p": "invite",
-   "t": "et du coup c 'est pour ça",
-   "_deb": 68.9,
-   "_fin": 70.5
-  },
-  {
-   "p": "presentateur",
-   "t": "d 'accord je vois écoutez on vous rappellera",
-   "_deb": 71.5,
-   "_fin": 74.54
-  },
-  {
-   "p": "invite",
-   "t": "c 'est vrai?",
-   "_deb": 74.94,
-   "_fin": 76.44
-  },
-  {
-   "p": "presentateur",
-   "t": "ou pas?",
-   "_deb": 76.6,
-   "_fin": 77.98,
+   "p": "envoyee",
+   "t": "Ok, ok.",
+   "_deb": 59.0,
+   "_fin": 59.76,
+   "d": "[blase] Ok, ok.",
    "chute": true
   }
  ],
  "bandeau": [],
  "gag": null,
- "legende": "Un invité prétentieux se présente avec des compétences linguistiques douteuses et un diplôme... snapchat.",
+ "legende": "Une discussion ambiguë entre amis sur l'amour et les ruptures.",
  "hashtags": [
   "petitsdramas",
-  "entretien",
+  "amour",
+  "rupture",
   "humour",
-  "langues",
-  "pretention",
-  "doublage",
-  "absurde"
+  "pote",
+  "discussion",
+  "toons"
  ],
  "sources": [
-  "https://www.tiktok.com/@vignianimation/video/7677681991629688096"
+  "https://www.tiktok.com/@charly.bse/video/7652247984586919201"
  ],
  "decoupage": [
   {
@@ -151,234 +77,81 @@
     0,
     1,
     2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-    10
+    4
    ],
    "lieu": "",
    "son": "",
    "duree": 0.0,
-   "decor": "salon élégant avec un canapé en velours bleu, une table basse en marbre avec une tasse de café fumante, une étagère remplie de livres et diplômes douteux, et un",
-   "titre": "L'entretien linguistique"
+   "decor": "living room with a beige sofa, a coffee table, a lamp, and a framed picture on the wall",
+   "titre": "Scene 1: Salon"
   },
   {
    "scene": "2",
    "repliques": [
-    11,
-    12,
-    13,
-    14,
-    15
+    3,
+    5
    ],
    "lieu": "",
    "son": "",
    "duree": 0.0,
-   "decor": "le même salon, mais avec un écran géant affichant un faux diplôme Snapchat et une tablette ouverte sur un document.",
-   "titre": "Le diplôme mystère"
+   "decor": "same living room, but closer to the sofa and coffee table",
+   "titre": "Scene 1: Continuation"
   }
  ],
  "studio": {
-  "moment": "jour",
+  "moment": "soir",
   "lieux": [
    "salon"
   ],
   "costumes": {
    "presentateur": {
-    "haut": "chemise",
-    "c_haut": "bleu marine",
+    "haut": "tshirt",
+    "c_haut": "bleu",
+    "motif": "uni",
+    "bas": "jeans",
+    "chaussures": "baskets",
+    "details": [
+     "barbe_courte",
+     "bracelets"
+    ],
+    "chapeau": null,
+    "cheveux": "court",
+    "c_cheveux": "brun"
+   },
+   "envoyee": {
+    "haut": "polo",
+    "c_haut": "rouge",
     "motif": "uni",
     "bas": "pantalon",
     "chaussures": "ville",
     "details": [
-     "cravate",
-     "lunettes_vue"
-    ]
-   },
-   "invite": {
-    "haut": "costume",
-    "c_haut": "violet",
-    "motif": "rayures",
-    "bas": "pantalon",
-    "chaussures": "ville",
-    "details": [
-     "cravate",
      "lunettes_soleil",
-     "barbe_courte"
-    ]
-   }
-  },
-  "personnages": {
-   "presentateur": {
-    "genre": "h",
-    "age": 45,
-    "taille": 1,
-    "corpulence": 0.3,
-    "cheveux": "carre",
-    "c_cheveux": "brun",
-    "barbe": "trois_jours"
-   },
-   "invite": {
-    "genre": "h",
-    "age": 30,
-    "taille": 1,
-    "corpulence": 0.4,
+     "bracelet"
+    ],
+    "chapeau": null,
     "cheveux": "long",
-    "c_cheveux": "roux",
-    "barbe": "bouc"
+    "c_cheveux": "blond"
    }
-  },
-  "decors_vus": {
-   "presentateur": "salon avec un canapé bleu velours, une table basse en marbre, une tasse de café fumante, un lampadaire design et une étagère remplie de livres.",
-   "invite": "le même salon, mais avec un écran géant affichant un faux diplôme Snapchat et une tablette ouverte sur un document."
-  },
-  "gags": [
-   "Diplômé de Snapchat™",
-   "Erreur 404 : Diplôme non trouvé",
-   "Anglais : niveau expert (selon lui)"
-  ],
-  "ambiances": [
-   "vapeur"
-  ],
-  "cadence": "rapide",
-  "plans": [
-   {
-    "replique": 0,
-    "plan": "moyen",
-    "mouvement": "fixe",
-    "geste": "bras_ouverts",
-    "reaction": "regard_camera"
-   },
-   {
-    "replique": 1,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "pointe_g",
-    "reaction": "choc"
-   },
-   {
-    "replique": 3,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "gratte_tete",
-    "reaction": "sceptique"
-   },
-   {
-    "replique": 4,
-    "plan": "large",
-    "mouvement": "fixe",
-    "geste": "bras_ouverts",
-    "reaction": "aucune"
-   },
-   {
-    "replique": 7,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "pointe_d",
-    "reaction": "rire"
-   },
-   {
-    "replique": 11,
-    "plan": "moyen",
-    "mouvement": "zoom_choc",
-    "geste": "pointe_g",
-    "reaction": "choc"
-   },
-   {
-    "replique": 12,
-    "plan": "tres_serre",
-    "mouvement": "fixe",
-    "geste": "gratte_tete",
-    "reaction": "gene"
-   }
-  ],
-  "objets": [
-   {
-    "replique": 1,
-    "objet": "telephone"
-   },
-   {
-    "replique": 11,
-    "objet": "tablette"
-   }
-  ],
-  "jeu": [
-   {
-    "replique": 0,
-    "emotion": "neutre",
-    "geste": "bras_ouverts",
-    "intensite": 2
-   },
-   {
-    "replique": 1,
-    "emotion": "fier",
-    "geste": "pointe_g",
-    "intensite": 3
-   },
-   {
-    "replique": 3,
-    "emotion": "sarcastique",
-    "geste": "gratte_tete",
-    "intensite": 2
-   },
-   {
-    "replique": 4,
-    "emotion": "exagéré",
-    "geste": "bras_ouverts",
-    "intensite": 3
-   },
-   {
-    "replique": 7,
-    "emotion": "auto-satisfait",
-    "geste": "pointe_d",
-    "intensite": 3
-   },
-   {
-    "replique": 11,
-    "emotion": "incrédule",
-    "geste": "pointe_g",
-    "intensite": 2
-   },
-   {
-    "replique": 12,
-    "emotion": "nerveux",
-    "geste": "gratte_tete",
-    "intensite": 3
-   }
-  ],
-  "bruitages": [
-   {
-    "replique": 1,
-    "son": "vine_boom"
-   },
-   {
-    "replique": 11,
-    "son": "dun_dun"
-   }
-  ]
+  }
  },
  "doublage": {
-  "piste": "/tmp/tmp_671fkqu/piste.wav",
-  "duree": 78.02,
-  "source": "https://www.tiktok.com/@vignianimation/video/7677681991629688096",
-  "auteur": "vignianimation",
-  "contexte": "Un entretien humoristique et décalé se déroule dans un salon élégant mais excentrique, où un présentateur interroge un invité prétentieux sur ses compétences linguistiques et ses diplômes douteux.",
+  "piste": "/tmp/tmpt45iyeyx/piste.wav",
+  "duree": 60.28,
+  "source": "https://www.tiktok.com/@charly.bse/video/7652247984586919201",
+  "auteur": "charly.bse",
+  "contexte": "Deux amis, un présentateur enthousiaste et une envoyée sceptique, discutent dans un salon cosy d'un sujet qui semble les opposer, probablement une rupture ou une séparation ('adieu au couple'). Le ton est léger mais tendu, avec des sous-entendus humoristiques.",
   "evenements": [],
   "visuel": {
    "gestes": [],
-   "duree": 78.0,
+   "duree": 60.5,
    "nb_plans": 1,
-   "duree_plan": 78.0,
+   "duree_plan": 60.5,
    "coupes": [],
    "plans": {
-    "tres_serre": 0.0,
-    "serre": 0.0,
-    "moyen": 1.0,
-    "large": 0.0
+    "tres_serre": 0.025,
+    "serre": 0.025,
+    "moyen": 0.0,
+    "large": 0.95
    },
    "camera": {
     "fixe": 1.0,
@@ -388,99 +161,80 @@
     "epaule": 0.0
    },
    "nb_personnes": 1,
-   "personnes": [
-    {
-     "place": "gauche",
-     "presence": 1.0,
-     "habit": [
-      11,
-      9,
-      14
-     ],
-     "cheveux": [
-      23,
-      23,
-      24
-     ],
-     "sourire": 0.0,
-     "taille": 0.105,
-     "tete_penchee": 3.8,
-     "regard_cote": 1.0
-    }
-   ],
+   "personnes": [],
    "visages": true,
-   "sourires": 0.0,
-   "energie": 0.042,
+   "sourires": 0.667,
+   "energie": 0.094,
    "mur": [
-    238,
-    200,
-    196
+    231,
+    204,
+    171
    ],
    "palette": [
     [
-     242,
-     221,
-     213,
-     0.262
+     234,
+     209,
+     177,
+     0.465
     ],
     [
-     25,
-     98,
-     151,
-     0.214
+     215,
+     108,
+     29,
+     0.158
     ],
     [
-     229,
-     175,
-     170,
-     0.202
+     187,
+     155,
+     120,
+     0.123
     ],
     [
-     236,
-     150,
-     87,
-     0.145
+     107,
+     72,
+     32,
+     0.092
     ],
     [
-     25,
-     19,
-     21,
-     0.096
+     12,
+     12,
+     9,
+     0.09
     ],
     [
-     132,
-     82,
-     81,
-     0.082
+     18,
+     96,
+     131,
+     0.072
     ]
    ],
    "lumiere": {
-    "luminosite": 190.5,
-    "chaleur": 17.2,
-    "saturation": 112.7
+    "luminosite": 188.5,
+    "chaleur": 63.7,
+    "saturation": 120.4
    },
    "moment": "jour"
   },
   "audio": {
-   "duree": 78.0,
+   "duree": 60.3,
    "nb_voix": 2,
    "voix": [
     {
-     "hz": 306,
-     "genre": "f",
-     "part": 0.4
+     "hz": 151,
+     "genre": "h",
+     "part": 0.94
     },
     {
-     "hz": 146,
-     "genre": "h",
-     "part": 0.6
+     "hz": null,
+     "genre": null,
+     "part": 0.06
     }
    ],
-   "debit": 2.83,
-   "blanc_moyen": 0.8,
+   "debit": 1.02,
+   "blanc_moyen": 6.48,
    "coupes": 0,
-   "dynamique_db": 19.5,
-   "cris": 0.01,
+   "dynamique_db": 28.3,
+   "cris": 0.005,
    "musique": null,
    "impacts": 0,
    "impacts_10s": 0.0,
@@ -489,17 +243,14 @@
    "sur_vanne": 0,
    "evenements": {},
    "emotions": {
-    "'[ironique": 2,
-    "'[neutre": 2,
-    "'[confident": 1,
-    "'[fier": 1,
-    "'[sarcastique": 1,
-    "'[exagéré": 1,
-    "'[polie": 1,
-    "'[auto-satisfait": 1
+    "sarcastic": 2,
+    "excited": 1,
+    "confused": 1,
+    "neutral": 1,
+    "blase": 1
    }
   },
-  "video_origine": "/tmp/tmp_671fkqu/src.mp4"
+  "video_origine": "/tmp/tmpt45iyeyx/src.mp4"
  },
  "fiche": {
   "note": 0,
@@ -511,78 +262,53 @@
      0,
      1,
      2,
-     3,
-     4,
-     5,
-     6,
-     7,
-     8,
-     9,
-     10
+     4
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "salon élégant avec un canapé en velours bleu, une table basse en marbre avec une tasse de café fumante, une étagère remplie de livres et diplômes douteux, et un",
-    "titre": "L'entretien linguistique"
+    "decor": "living room with a beige sofa, a coffee table, a lamp, and a framed picture on the wall",
+    "titre": "Scene 1: Salon"
    },
    {
     "scene": "2",
     "repliques": [
-     11,
-     12,
-     13,
-     14,
-     15
+     3,
+     5
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "le même salon, mais avec un écran géant affichant un faux diplôme Snapchat et une tablette ouverte sur un document.",
-    "titre": "Le diplôme mystère"
+    "decor": "same living room, but closer to the sofa and coffee table",
+    "titre": "Scene 1: Continuation"
    }
   ]
  },
  "_monte": true,
  "_voix_hz": {
-  "presentateur": 200,
-  "invite": 140
+  "presentateur": 149,
+  "envoyee": 137
  },
  "_voix_genre": {
-  "presentateur": "f",
-  "invite": "h"
+  "presentateur": "h",
+  "envoyee": "h"
  },
  "realisation": {
-  "moment": "jour",
+  "moment": "soir",
   "lieux": [
    "salon",
    "salon"
   ],
-  "gags": [
-   "Diplômé de Snapchat™",
-   "Erreur 404 : Diplôme non trouvé",
-   "Anglais : niveau expert (selon lui)"
-  ],
+  "gags": [],
   "ambiances": [
-   "vapeur"
+   "poussiere"
   ],
   "source": "auteur+image",
   "tenues": {
-   "presentateur": "chemise",
-   "invite": "costume"
+   "presentateur": "tshirt",
+   "envoyee": "polo"
   },
   "plans": [
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
    "large/fixe",
    "large/fixe",
    "large/fixe",
