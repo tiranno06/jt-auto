@@ -21520,122 +21520,174 @@
  },
  {
   "date": "2026-10-26",
-  "source": "https://www.tiktok.com/@vincedessine/video/7688877142532312353",
-  "auteur": "vincedessine",
+  "source": "https://www.tiktok.com/@motiontoonz/video/7695352339489672481",
+  "auteur": "motiontoonz",
   "visuel": {
-   "gestes": [],
-   "duree": 88.0,
-   "nb_plans": 20,
-   "duree_plan": 4.4,
+   "gestes": [
+    [
+     4.0,
+     0.49,
+     1.0
+    ],
+    [
+     5.0,
+     0.48,
+     1.0
+    ],
+    [
+     6.5,
+     0.48,
+     1.0
+    ],
+    [
+     13.0,
+     0.49,
+     1.0
+    ],
+    [
+     24.0,
+     0.49,
+     1.0
+    ]
+   ],
+   "duree": 71.0,
+   "nb_plans": 27,
+   "duree_plan": 2.63,
    "coupes": [
-    1.94,
-    4.37,
-    16.52,
-    21.86,
-    28.66,
-    33.04,
-    37.9,
-    39.84,
-    42.75,
-    46.64,
-    50.04,
-    54.9,
-    58.3,
-    61.7,
-    64.62,
-    69.96,
-    72.88,
-    74.82,
-    79.68
+    1.0,
+    3.0,
+    9.5,
+    10.0,
+    11.5,
+    19.5,
+    21.0,
+    22.0,
+    23.0,
+    27.5,
+    31.0,
+    32.0,
+    41.0,
+    41.5,
+    44.5,
+    47.0,
+    51.5,
+    52.5,
+    53.5,
+    56.0,
+    59.0,
+    63.0,
+    65.0,
+    65.5,
+    67.0,
+    68.5
    ],
    "plans": {
     "tres_serre": 0.0,
-    "serre": 0.0,
-    "moyen": 0.0,
-    "large": 1.0
+    "serre": 0.211,
+    "moyen": 0.028,
+    "large": 0.761
    },
    "camera": {
-    "fixe": 0.994,
-    "avance": 0.0,
-    "recul": 0.006,
+    "fixe": 0.33,
+    "avance": 0.07,
+    "recul": 0.087,
     "travelling": 0.0,
-    "epaule": 0.0
+    "epaule": 0.513
    },
-   "nb_personnes": 0,
-   "personnes": [],
-   "visages": false,
+   "nb_personnes": 1,
+   "personnes": [
+    {
+     "place": "centre",
+     "presence": 0.239,
+     "habit": [
+      53,
+      54,
+      59
+     ],
+     "cheveux": [
+      249,
+      249,
+      249
+     ],
+     "sourire": 0.0,
+     "taille": 0.201,
+     "tete_penchee": 3.1,
+     "regard_cote": 0.0
+    }
+   ],
+   "visages": true,
    "sourires": 0.0,
-   "energie": 0.027,
+   "energie": 0.894,
    "mur": [
-    251,
-    250,
-    249
+    195,
+    186,
+    177
    ],
    "palette": [
     [
-     252,
-     251,
-     250,
-     0.603
+     199,
+     191,
+     183,
+     0.246
     ],
     [
-     36,
-     36,
-     36,
-     0.16
+     178,
+     153,
+     130,
+     0.201
     ],
     [
-     33,
-     51,
-     92,
-     0.1
+     244,
+     243,
+     244,
+     0.186
     ],
     [
-     117,
-     84,
-     65,
-     0.07
+     64,
+     63,
+     61,
+     0.184
     ],
     [
-     8,
-     8,
-     8,
-     0.054
+     125,
+     109,
+     93,
+     0.13
     ],
     [
-     174,
-     172,
-     171,
-     0.013
+     20,
+     18,
+     17,
+     0.052
     ]
    ],
    "lumiere": {
-    "luminosite": 177.7,
-    "chaleur": -1.0,
-    "saturation": 29.3
+    "luminosite": 161.7,
+    "chaleur": 17.9,
+    "saturation": 37.5
    },
    "moment": "jour"
   },
   "audio": {
-   "duree": 87.6,
+   "duree": 71.1,
    "nb_voix": 2,
    "voix": [
     {
-     "hz": 253,
-     "genre": "f",
-     "part": 0.05
+     "hz": 152,
+     "genre": "h",
+     "part": 0.89
     },
     {
-     "hz": 131,
-     "genre": "h",
-     "part": 0.95
+     "hz": 172,
+     "genre": "?",
+     "part": 0.11
     }
    ],
-   "debit": 3.28,
-   "blanc_moyen": 0.68,
-   "coupes": 0,
-   "dynamique_db": 21.9,
-   "cris": 0.034,
+   "debit": 7.39,
+   "blanc_moyen": 0.2,
+   "coupes": 2,
+   "dynamique_db": 17.3,
+   "cris": 0.008,
    "musique": null,
    "impacts": 0,
    "impacts_10s": 0.0,
@@ -21644,26 +21696,25 @@
    "sur_vanne": 0,
    "evenements": {},
    "emotions": {
-    "'[admiring": 1,
-    "'[emotional": 1,
-    "'[reflective": 1,
-    "'[passionate": 1,
-    "'[inspirational": 1,
-    "'[thoughtful": 1,
-    "'[determined": 1,
-    "'[urgent": 1
+    "sarcastic": 13,
+    "frustrated": 10,
+    "angry": 10,
+    "sure": 7,
+    "neutral": 6,
+    "confused": 3,
+    "determined": 3,
+    "firm": 2
    }
   },
   "claude": {
    "lieux": [
-    "bureau",
-    "salon"
+    "bureau"
    ],
-   "moment": "soir",
+   "moment": "jour",
    "costumes": {
     "presentateur": {
      "haut": "chemise",
-     "c_haut": "blanc",
+     "c_haut": "bleu marine",
      "motif": "uni",
      "bas": "pantalon",
      "chaussures": "ville",
@@ -21671,50 +21722,47 @@
       "cravate",
       "lunettes_vue",
       "montre"
-     ]
+     ],
+     "chapeau": null,
+     "cheveux": "court",
+     "c_cheveux": "brun"
     },
     "invite": {
-     "haut": "pull",
-     "c_haut": "bleu marine",
+     "haut": "tshirt",
+     "c_haut": "blanc",
      "motif": "uni",
      "bas": "jean",
      "chaussures": "baskets",
      "details": [
-      "barbe_courte",
-      "bracelet"
-     ]
+      "barbe_courte"
+     ],
+     "chapeau": null,
+     "cheveux": "court_texture",
+     "c_cheveux": "roux"
     }
    },
    "objets": [
     {
      "replique": 0,
-     "objet": "micro"
+     "objet": "telephone"
     },
     {
-     "replique": 1,
-     "objet": "livre"
+     "replique": 2,
+     "objet": "billet"
     },
     {
-     "replique": 3,
-     "objet": "tasse"
-    },
-    {
-     "replique": 5,
+     "replique": 15,
      "objet": "stylo"
     },
     {
-     "replique": 7,
-     "objet": "livre"
-    },
-    {
-     "replique": 13,
-     "objet": "tasse"
+     "replique": 25,
+     "objet": "facture"
     }
    ],
    "gags": [
-    "\"La poésie, c'est comme le café : ça réveille les âmes endormies\"",
-    "\"Ce livre est si puissant qu'il devrait être distribué dans les écoles... et en prison\"",
-    "\"Hugo 2.0 : Bienvenue dans le XXIe siècle !\""
+    "\"Le client a toujours raison... sauf quand il a tort\"",
+    "\"Votre argent dort mieux ici\"",
+    "\"Les économies, c'est comme les relations : ça ne se retire pas quand ça ne va pas\""
    ],
    "ambiances": [
     "poussiere"
@@ -21722,125 +21770,87 @@
    "plans": [
     {
      "replique": 0,
-     "plan": "moyen",
-     "mouvement": "fixe",
-     "geste": "bras_ouverts",
-     "reaction": "regard_camera"
-    },
-    {
-     "replique": 1,
      "plan": "serre",
      "mouvement": "fixe",
-     "geste": "pointe_d",
-     "reaction": "choc"
-    },
-    {
-     "replique": 2,
-     "plan": "moyen",
-     "mouvement": "fixe",
      "geste": "gratte_tete",
-     "reaction": "reflechit"
+     "reaction": "aucune"
     },
     {
      "replique": 3,
-     "plan": "large",
-     "mouvement": "fixe",
-     "geste": "bras_ouverts",
-     "reaction": "joie"
-    },
-    {
-     "replique": 4,
      "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "pointe_g",
-     "reaction": "sceptique"
-    },
-    {
-     "replique": 5,
-     "plan": "moyen",
-     "mouvement": "fixe",
-     "geste": "explique",
-     "reaction": "neutre"
+     "mouvement": "zoom_choc",
+     "geste": "pointe_d",
+     "reaction": "choc"
     },
     {
      "replique": 6,
-     "plan": "serre",
-     "mouvement": "zoom_choc",
-     "geste": "pointe_d",
-     "reaction": "choc"
+     "plan": "moyen",
+     "mouvement": "epaule",
+     "geste": "bras_ouverts",
+     "reaction": "sceptique"
     },
     {
-     "replique": 7,
+     "replique": 12,
+     "plan": "tres_serre",
+     "mouvement": "fixe",
+     "geste": "facepalm",
+     "reaction": "rire"
+    },
+    {
+     "replique": 20,
      "plan": "large",
      "mouvement": "travelling",
-     "geste": "bras_ouverts",
-     "reaction": "joie"
+     "geste": "mains_hanches",
+     "reaction": "gene"
     },
     {
-     "replique": 8,
-     "plan": "moyen",
-     "mouvement": "fixe",
-     "geste": "rire",
-     "reaction": "regard_camera"
-    },
-    {
-     "replique": 9,
+     "replique": 27,
      "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "explique",
-     "reaction": "choc"
-    },
-    {
-     "replique": 10,
-     "plan": "large",
-     "mouvement": "fixe",
-     "geste": "bras_ouverts",
-     "reaction": "neutre"
-    },
-    {
-     "replique": 11,
-     "plan": "serre",
-     "mouvement": "zoom_choc",
+     "mouvement": "avance",
      "geste": "pointe_g",
      "reaction": "choc"
     },
     {
-     "replique": 12,
-     "plan": "moyen",
-     "mouvement": "fixe",
-     "geste": "pointe_d",
-     "reaction": "sceptique"
-    },
-    {
-     "replique": 13,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "soupir",
-     "reaction": "solemn"
+     "replique": 32,
+     "plan": "tres_serre",
+     "mouvement": "zoom_choc",
+     "geste": "poing",
+     "reaction": "colere"
     }
    ]
   },
   "realisation": {
-   "moment": "soir",
+   "moment": "jour",
    "lieux": [
     "bureau",
-    "salon",
-    "salon"
+    "bureau"
    ],
    "gags": [
-    "\"La poésie, c'est comme le café : ça réveille les âmes endormies\"",
-    "\"Ce livre est si puissant qu'il devrait être distribué dans les écoles... et en ",
-    "\"Hugo 2.0 : Bienvenue dans le XXIe siècle !\""
+    "\"Le client a toujours raison... sauf quand il a tort\"",
+    "\"Votre argent dort mieux ici\"",
+    "\"Les économies, c'est comme les relations : ça ne se retire pas quand ça ne va p"
    ],
    "ambiances": [
+    "pluie",
     "poussiere"
    ],
    "source": "auteur+image",
    "tenues": {
     "presentateur": "chemise",
-    "invite": "pull"
+    "invite": "tshirt"
    },
    "plans": [
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
     "large/fixe",
     "large/fixe",
     "large/fixe",
@@ -21857,6 +21867,6 @@
     "large/fixe"
    ]
   },
-  "video": "2026-10-26_18h08_emission.mp4"
+  "video": "2026-10-26_18h41_emission.mp4"
  }
 ]

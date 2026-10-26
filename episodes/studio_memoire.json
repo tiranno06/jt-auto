@@ -3773,40 +3773,40 @@
   "cadence": null
  },
  {
-  "moment": "soir",
+  "moment": "jour",
   "lieux": [
    "bureau",
-   "salon",
-   "salon"
+   "bureau"
   ],
   "source": "auteur+image",
-  "duree": 91.1,
+  "duree": 74.4,
   "plans": {
-   "large": 14
+   "large": 25
   },
   "mouvements": {
-   "fixe": 14
+   "fixe": 25
   },
   "costumes": {
    "presentateur": "chemise",
-   "invite": "pull"
+   "invite": "tshirt"
   },
-  "figurants": 1,
+  "figurants": 2,
   "ambiances": [
+   "pluie",
    "poussiere"
   ],
-  "controle": "Humoriste 8.6/10 : 84.3 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 8.2/10 : montage trop lent : 0.3 plans toutes les 10 s (il en faudrait ~2.1) | Directeur artistique 10.",
-  "fichier": "2026-10-26_18h08_emission.mp4",
+  "controle": "Humoriste 8.6/10 : 69.1 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 6.6/10 : montage trop lent : 0.3 plans toutes les 10 s (il en faudrait ~3.5); 34.7 s pas assez de plans",
+  "fichier": "2026-10-26_18h41_emission.mp4",
   "cine": {
-   "focus": false,
-   "vertige": true,
-   "tiers": true,
+   "focus": true,
+   "vertige": false,
+   "tiers": false,
    "etalonnage": true,
    "profondeur": false,
    "grain": true,
-   "reflets": false,
+   "reflets": true,
    "son": true
   },
-  "cadence": "normal"
+  "cadence": "rapide"
  }
 ]
