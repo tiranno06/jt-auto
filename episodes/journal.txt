@@ -2,13 +2,14 @@ Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, ElevenLabs epuise — IA utilisée : mistral
 Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @motiontoonz, @same_same53, @charly.bse, @kodanimation, @vignianimation, @vincedessine
-Profil TikTok @vincedessine : 31 vidéo(s) jamais utilisée(s)
+Profil TikTok @motiontoonz : 36 vidéo(s) jamais utilisée(s)
 Profil TikTok @eliotlehanneur : 32 vidéo(s) jamais utilisée(s)
-Profil TikTok @same_same53 : 32 vidéo(s) jamais utilisée(s)
-Vidéo depuis TikTok : https://www.tiktok.com/@vincedessine/video/7617093638601837847
+Profil TikTok @kodanimation : 25 vidéo(s) jamais utilisée(s)
+Vidéo depuis TikTok : https://www.tiktok.com/@motiontoonz/video/7696064794150964513
   son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 60.1 s, compte d'origine @vincedessine
-  image de la vidéo : image de la vidéo non analysée
+  son récupéré : 82.9 s, compte d'origine @motiontoonz
+[ WARN:0@15.113] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  image de la vidéo : 24 plans (≈ 3.46 s chacun) ; cadrages : très serré 0 %, serré 30 %, moyen 0 %, large 69 % ; caméra : fixe 57 %, avance 0 %, recul 1 %, epaule 40 % ; 1 personne(s) à l'écran : centre (habit [239, 230, 218], cheveux [35, 34, 33], sourit 0 %) ; agitation 0.363 ; lumière jour ; fond [190, 158, 126]
   isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
   transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/core/io.py:48: UserWarning: 
@@ -18,35 +19,56 @@ torchcodec is not installed correctly so built-in audio decoding will fail. Solu
 
 Could not load this library: /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/torchcodec/libtorchcodec_image.so
   warnings.warn(
-[0;93m2026-10-26 06:59:24.662876204 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
-  3 répliques, voix : {'speaker_0': 99}
-  son de la vidéo : 1 voix [99 Hz (h, 100 %)], 0.21 mots/s, blancs 1.59 s, 0 coupure(s) de parole, dynamique 11.4 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
-  scène reconstituée : Un présentateur excentrique anime une émission insolite dans un studio de télévision futuriste, où il présente des sous-titres mystérieux et répétitifs à un public invisible. L'ambiance est décalée et pleine de suspense, comme s'il s'agissait d'un jeu ou d'une énigme.
-  casting : speaker_0 → Jojo
-  sous-titres : 3 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
-Sketch : « MYSTÈRE DES SOUS-TITRES », 3 répliques
-  décor 0 (lieu ressemblant de la banque, budget Modal du mois atteint) : studio television futuriste avec écrans géants et boutons lu
-Pré-jury impossible (boolean index did not match indexed array along axis 0; size of axis is 5 but size of corresponding boolean axis is 1)
-Traceback (most recent call last):
-  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 408, in main
-    try: duree = cartoon.rendre(sk, base + ".mp4", audios, mots=mots, decors=decors, mini=fmt == "mini", limite=limite_job(), deja=(S or {}).get("faits"))
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/jt-auto/jt-auto/moteur/cartoon.py", line 392, in rendre
-    if r["p"] == role and i < len(f0s): TON[i] = studio.intonation(f0s[i], ref)
-                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/jt-auto/jt-auto/moteur/studio.py", line 91, in intonation
-    zv = z[v]; fin = float(np.mean(zv[-6:]) - np.mean(zv[max(0, len(zv) - 18):max(1, len(zv) - 6)])) if len(zv) >= 12 else 0.0
-         ~^^^
-IndexError: boolean index did not match indexed array along axis 0; size of axis is 5 but size of corresponding boolean axis is 1
-Moteur cartoon en échec (boolean index did not match indexed array along axis 0; size of axis is 5 but size of corresponding boolean axis is 1) : nouvel essai en rendu simple, sans décor IA.
-cartoon : durée 63.6 s, 3 répliques, 1 scène(s), personnages ['presentateur']
-  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~954 images)
-  morceau 1908–2862 reçu d'une machine d'aide
-  morceau 954–1908 reçu d'une machine d'aide
-  morceau 2862–3816 reçu d'une machine d'aide
-  dessin partagé terminé en 2.8 min
+[0;93m2026-10-26 07:07:22.811241324 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1913.)
+  std = sequences.std(dim=-1, correction=1)
+  voix séparées par pyannote : 2 voix, 4 tours de parole
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+  voix trop proches (ressemblance 0.78) : vérification mot par mot laissée de côté
+  relecture du dialogue par l'IA : 15/15 phrases (A : le conseiller d'orientation / l'enseignant, B : l'élève / le jeune)
+  contrôle questions-réponses (avec relecture de l'IA) : 15 phrases, 145 mot(s) changé(s) de voix
+  24 répliques, voix : {'speaker_0': 220, 'speaker_1': 190}
+  son de la vidéo : 2 voix [220 Hz (f, 68 %), 190 Hz (f, 32 %)], 5.24 mots/s, blancs 0.05 s, 11 coupure(s) de parole, dynamique 16.4 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
+  IA gemini indisponible (The read operation timed out) : on passe à la suivante
+  scène reconstituée : Une conversation entre un conseiller d'orientation et un élève dans un bureau d'administration scolaire. L'élève insiste sur son choix d'intégrer une filière professionnelle malgré les conseils du conseiller.
+  casting : speaker_0 → Jojo, speaker_1 → Kévin
+  sous-titres : 4 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
+  Claude a réattribué 4 réplique(s) à la bonne personne (voix proches)
+  voix trop proches dans https://www.tiktok.com/@motiontoonz/video/7696064794150964513 (ressemblance 0.78) : on cherche une vidéo aux voix bien différentes
+Vidéo depuis TikTok : https://www.tiktok.com/@motiontoonz/video/7686945510283922720
+  son téléchargé (yt-dlp --impersonate chrome)
+  son récupéré : 89.8 s, compte d'origine @motiontoonz
+[ WARN:0@570.286] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  image de la vidéo : 35 plans (≈ 2.57 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 0 %, large 100 % ; caméra : fixe 56 %, avance 0 %, epaule 42 % ; 0 personne(s) à l'écran : aucun visage repéré ; agitation 0.304 ; lumière jour ; fond [211, 216, 217]
+  isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
+  transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1913.)
+  std = sequences.std(dim=-1, correction=1)
+  voix séparées par pyannote : 2 voix, 41 tours de parole
+  voix vérifiées mot par mot : 35 mot(s) remis sur la bonne voix
+  38 répliques, voix : {'speaker_0': 122, 'speaker_1': 202}
+  son de la vidéo : 2 voix [122 Hz (h, 63 %), 202 Hz (f, 37 %)], 5.32 mots/s, blancs 0.37 s, 12 coupure(s) de parole, dynamique 23.1 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
+  scène reconstituée : Un homme aborde poliment une jeune femme à un arrêt de bus, mais dès qu'elle lui dit qu'elle n'est pas intéressée, il s'apprête à partir respectueusement, ce qui déstabilise totalement la fille habituée aux dragueurs lourds.
+  casting : speaker_0 → Jojo, speaker_1 → Lila
+  sous-titres : 29 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
+Sketch : « DRAGUE RESPECTUEUSE », 38 répliques
+  décor 0 : Paris sidewalk with asphalt street, trees, grey buildings, modern glas
+montage : 1 plans (0.0:large>pre/coupe)
+studio : jour, lieux ['rue'], tenues presentateur=polo, envoyee=tshirt, 2 figurant(s), ambiances ['pluie'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 93.3 s, 38 répliques, 1 scène(s), personnages ['presentateur', 'envoyee']
+montage : 1 plans (0.0:large>pre/coupe)
+studio : jour, lieux ['rue'], tenues presentateur=polo, envoyee=tshirt, 2 figurant(s), ambiances ['pluie'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 93.3 s, 38 répliques, 1 scène(s), personnages ['presentateur', 'envoyee']
+  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~1400 images)
+  morceau 2800–4200 reçu d'une machine d'aide
+  morceau 4200–5600 reçu d'une machine d'aide
+  morceau 1400–2800 reçu d'une machine d'aide
+  dessin partagé terminé en 7.0 min
+Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
+Jury qualité (ia) : 4.6/10 — Humoriste 5.0/10 : 18.5 s Manque de ponctuation sonore sur les moments de malaise comique.; 78.6 s La chute finale manque d'emphase visuelle pour marquer le gag. | Réalisateur 4.0/10 : 1 s Absence totale de découpage : aucun champ-contrechamp sur 90 secondes.; 16 s Manque de plans de réaction pour dynamiser le dialogue. | Directeur artistique 4.0/10 : 1 s Erreur de casting : le rôle féminin est incarné par un personnage masculin.; 0.5 s Le décor ne correspond pas au contexte d'attente à l'abribus de la vidéo originale. | Ingénieur du son 5.0/10 : 1 s Premier refus trop plat sans effet sonore d'impact.; 63.4 s Absence de bruitage sur la suspicion de caméra cachée. | Spectateur TikTok 5.0/10 : 0.4 s Accroche visuelle faible due au plan d'ensemble statique dès le début.; 76 s Baisse de rythme vers la fin par manque d'animation expressive.
+Manque par rapport à la vidéo d'origine : Le personnage de l'envoyée est une femme brune aux pieds nus consultant son téléphone, alors que notre version utilise un personnage masculin sans accessoire. ; L'original se déroule devant un abribus identifiable, remplacé ici par une rue sous la pluie. ; L'original repose sur une alternance fluide en champ-contrechamp (plans moyens individuels), absente dans notre plan large unique.
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = mistral ×2, voix = tiktok, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 4065, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0}
-Quota de l'API GitHub : 4793 appels restants
-OK : sortie/2026-10-26_07h59_emission.mp4 (64 s)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = gemini ×4, mistral ×1, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 34089, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 26}
+Quota de l'API GitHub : 4935 appels restants
+OK : sortie/2026-10-26_08h21_emission.mp4 (93 s)
