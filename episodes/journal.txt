@@ -2,14 +2,14 @@ Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, ElevenLabs epuise — IA utilisée : mistral
 Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @motiontoonz, @same_same53, @charly.bse, @kodanimation, @vignianimation, @vincedessine
-Profil TikTok @kodanimation : 29 vidéo(s) jamais utilisée(s)
-Profil TikTok @vincedessine : 32 vidéo(s) jamais utilisée(s)
-Profil TikTok @eliotlehanneur : 37 vidéo(s) jamais utilisée(s)
-Vidéo depuis TikTok : https://www.tiktok.com/@kodanimation/video/7677373578869869856
+Profil TikTok @kodanimation : 28 vidéo(s) jamais utilisée(s)
+Profil TikTok @yan_animation0 : 29 vidéo(s) jamais utilisée(s)
+Profil TikTok @vincedessine : 31 vidéo(s) jamais utilisée(s)
+Vidéo depuis TikTok : https://www.tiktok.com/@kodanimation/video/7682597579695115553
   son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 23.7 s, compte d'origine @kodanimation
-[ WARN:0@15.931] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
-  image de la vidéo : 2 plans (≈ 12.0 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 0 %, large 100 % ; caméra : fixe 100 % ; 0 personne(s) à l'écran : aucun visage repéré ; agitation 0.096 ; lumière jour ; fond [220, 215, 206]
+  son récupéré : 68.7 s, compte d'origine @kodanimation
+[ WARN:0@17.613] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  image de la vidéo : 2 plans (≈ 34.5 s chacun) ; cadrages : très serré 1 %, serré 0 %, moyen 0 %, large 97 % ; caméra : fixe 75 %, avance 11 %, recul 7 %, travelling 1 %, epaule 5 % ; 1 personne(s) à l'écran : aucun visage repéré ; agitation 0.721 ; lumière jour ; fond [254, 254, 254]
   isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
   transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/core/io.py:48: UserWarning: 
@@ -19,39 +19,43 @@ torchcodec is not installed correctly so built-in audio decoding will fail. Solu
 
 Could not load this library: /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/torchcodec/libtorchcodec_image.so
   warnings.warn(
-[0;93m2026-10-26 01:18:48.482117193 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[0;93m2026-10-26 01:27:30.260969594 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1913.)
   std = sequences.std(dim=-1, correction=1)
-  voix séparées par pyannote : 2 voix, 5 tours de parole
+  voix séparées par pyannote : 4 voix, 41 tours de parole
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-  3 répliques, voix : {'speaker_0': 140, 'speaker_1': 276}
-  son de la vidéo : 2 voix [140 Hz (h, 24 %), 276 Hz (f, 76 %)], 2.63 mots/s, blancs 0.44 s, 0 coupure(s) de parole, dynamique 19.2 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
+  voix vérifiées mot par mot : 25 mot(s) remis sur la bonne voix
+  21 répliques, voix : {'speaker_2': 119, 'speaker_0': 149, 'speaker_3': 109, 'speaker_1': 128}
+  son de la vidéo : 4 voix [119 Hz (h, 14 %), 149 Hz (h, 47 %), 109 Hz (h, 18 %), 128 Hz (h, 21 %)], 3.7 mots/s, blancs 0.88 s, 0 coupure(s) de parole, dynamique 31.6 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
   IA gemini indisponible (gemini 429 : [{
   "error": {
     "code": 429,
     "message": "You exceeded your current quota, please check your plan an) : on passe à la suivante
-  scène reconstituée : Un jeune homme se rend chez sa grand-mère pour lui rendre visite. Une invitée, assise dans un salon cosy, réagit avec humour et spontanéité aux réflexions de ce dernier.
-  casting : speaker_0 → Jojo, speaker_1 → Kévin
-  sous-titres : 1 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
-Sketch : « VISITE À MAMIE », 3 répliques
-  décor 1 (lieu ressemblant de la banque, budget Modal du mois atteint) : salon chaleureux avec des canapés en velours, une table bass
-  décor 0 : rue devant une maison de campagne, avec un chemin de gravier et une vi
-montage : 2 plans (0.0:large>pre/coupe 5.5:large>inv/coupe)
-studio : jour, lieux ['rue', 'salon'], tenues presentateur=tshirt, invite=chemise, 2 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe
-cartoon : durée 27.3 s, 3 répliques, 2 scène(s), personnages ['presentateur', 'invite']
-montage : 2 plans (0.0:large>pre/coupe 5.5:large>inv/coupe)
-studio : jour, lieux ['rue', 'salon'], tenues presentateur=tshirt, invite=chemise, 2 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe
-cartoon : durée 27.3 s, 3 répliques, 2 scène(s), personnages ['presentateur', 'invite']
-  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~408 images)
-  morceau 1226–1635 reçu d'une machine d'aide
-  morceau 409–818 reçu d'une machine d'aide
-  morceau 818–1226 reçu d'une machine d'aide
-  dessin partagé terminé en 2.6 min
+  scène reconstituée : Une scène humoristique et absurde se déroule dans un bureau d'administration, où un présentateur, assis derrière un bureau, écoute des confessions toujours plus extravagantes et choquantes de deux invités. L'ambiance est tendue et comique, avec des réactions exagérées.
+  casting : speaker_0 → Jojo, speaker_1 → Kévin, speaker_2 → Lila, speaker_3 → Kévin
+  sous-titres : 7 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
+  9 réattribution(s) de l'IA refusée(s) : la voix de ces répliques est reconnue avec certitude
+Sketch : « CONFESSIONS ABSURDES », 21 répliques
+  décor 0 : bureau with a large wooden desk, a coffee cup, a stapler, a framed cer
+  décor 1 : same office but with a closer view of the guests, showing their reacti
+montage : 17 plans (0.0:large>pre/coupe 2.8:large>inv/coupe 8.7:large>pre/coupe 11.4:large>env/coupe 17.7:large>pre/coupe 20.9:large>inv/coupe 25.8:large>pre/coupe 30.0:large>inv/coupe 34.8:large>inv/coupe 36.4:large>pre/coupe 38.3:large>env/coupe 46.0:large>pre/coupe 48.6:large>inv/coupe 54.9:large>pre/coupe 57.2:large>inv/coupe 60.0:large>pre/coupe 61.8:large>pre/coupe)
+studio : jour, lieux ['bureau', 'bureau'], tenues presentateur=chemise, invite=chemise, envoyee=blouse, 2 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 72.0 s, 21 répliques, 2 scène(s), personnages ['presentateur', 'invite', 'envoyee']
+Contrôle image : 1 défaut(s) — 2.75 s chevauchement (invite+envoyee)
+montage : 17 plans (0.0:large>pre/coupe 2.8:large>inv/coupe 8.7:large>pre/coupe 11.4:large>env/coupe 17.7:large>pre/coupe 20.9:large>inv/coupe 25.8:large>pre/coupe 30.0:large>inv/coupe 34.8:large>inv/coupe 36.4:large>pre/coupe 38.3:large>env/coupe 46.0:large>pre/coupe 48.6:large>inv/coupe 54.9:large>pre/coupe 57.2:large>inv/coupe 60.0:large>pre/coupe 61.8:large>pre/coupe)
+studio : jour, lieux ['bureau', 'bureau'], tenues presentateur=chemise, invite=chemise, envoyee=blouse, 2 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 72.0 s, 21 répliques, 2 scène(s), personnages ['presentateur', 'invite', 'envoyee']
+Contrôle image : 1 défaut(s) — 2.75 s chevauchement (invite+envoyee)
+  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~1079 images)
+  morceau 1080–2160 reçu d'une machine d'aide
+  morceau 2160–3239 reçu d'une machine d'aide
+  morceau 3239–4319 reçu d'une machine d'aide
+  dessin partagé terminé en 4.6 min
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury qualité (ia) : 7.2/10 — Humoriste 6.0/10 : 0.4 s La chute finale n'est pas assez mise en valeur. Le texte 'Il est au val, mon trou de cul' mérite un effet visuel plus fort pour marquer les esprits.; 5.4 s Le présentateur ne réagit pas assez à la chute de l'invité. Ajouter une réaction exagérée (ex. : rire ou scepticisme) renforcerait l'humour.; 26.7 s Le texte 'Abonne-toi !' à la fin n'est pas assez dynamique. Un bruitage ou un effet visuel pourrait capter l'attention. | Réalisateur 7.0/10 : 0.4 s Le rythme des plans est correct, mais certains plans larges pourraient être remplacés par des plans serrés pour plus d'intimité et de dynamisme.; 10.0 s Le changement de décor entre l'extérieur et l'intérieur n'est pas fluide. Ajouter un fondu ou un mouvement de caméra pourrait améliorer la transition.; 26.7 s Le dernier plan manque de dynamisme. Un mouvement de caméra ou un zoom pourrait rendre la fin plus mémorable.
-Manque par rapport à la vidéo d'origine : Les personnages de la vidéo originale ont des expressions faciales plus détaillées et des animations plus fluides. ; L'ambiance sonore de la vidéo originale (bruits de rue et ambiance chaleureuse) est absente dans notre version. ; Les réactions des personnages dans la vidéo originale sont plus exagérées et mieux synchronisées avec les répliques.
+Jury qualité (ia) : 5.9/10 — Humoriste 6.0/10 : 66.3 s La chute finale manque d'impact visuel. Le zoom choc sur le personnage qui dit 'C’est Epstein' est absent, ce qui diminue l'effet comique.; 47.2 s Les vannes sur la durée des relations et les noms propres ('Epstein') pourraient être renforcées par un regard caméra ou une réaction exagérée.; 19.0 s Les répliques sur les 'petites salopes' et les confessions pourraient être mieux rythmé avec des bruitages pour accentuer l'humour noir. | Réalisateur 5.0/10 : 0 s Le rythme des plans est trop lent. Les transitions entre les répliques manquent de dynamisme.; 25.2 s Les réactions du présentateur aux confessions sont trop faibles. Il faudrait des expressions plus marquées ou des gestes.; 60.5 s La caméra reste statique dans presque tous les plans, ce qui donne un côté monotone à la vidéo. | Directeur artistique 7.0/10 : 0 s Les personnages secondaires (comme l'envoyée) n
+Manque par rapport à la vidéo d'origine : Les personnages dans l'original ont des expressions faciales plus exagérées et des gestes plus dynamiques (ex : mains qui gesticulent davantage). ; Les bruitages et effets sonores sont plus présents et mieux synchronisés dans l'original (ex : sons de café, rires naturels). ; Les décors originaux intègrent des éléments visuels plus interactifs (ex : objets comiques comme une agrafeuse géante ou des gags écrits dans le décor).
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
 Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = mistral ×2, voix = tiktok, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 15089, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 20}
-Quota de l'API GitHub : 4868 appels restants
-OK : sortie/2026-10-26_02h19_emission.mp4 (27 s)
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 23542, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 34}
+Quota de l'API GitHub : 4813 appels restants
+OK : sortie/2026-10-26_02h30_emission.mp4 (72 s)
