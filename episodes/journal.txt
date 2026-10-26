@@ -1,11 +1,15 @@
 Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, ElevenLabs epuise — IA utilisée : mistral
-Vidéo depuis TikTok : https://vm.tiktok.com/ZN8Dx98xA/
+Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @motiontoonz, @same_same53, @charly.bse, @kodanimation, @vignianimation, @vincedessine
+Profil TikTok @kodanimation : 24 vidéo(s) jamais utilisée(s)
+Profil TikTok @yan_animation0 : 27 vidéo(s) jamais utilisée(s)
+Profil TikTok @vincedessine : 32 vidéo(s) jamais utilisée(s)
+Vidéo depuis TikTok : https://www.tiktok.com/@kodanimation/video/7697065997978668321
   son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 62.8 s, compte d'origine @tepeianimation
-[ WARN:0@13.577] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
-  image de la vidéo : 20 plans (≈ 3.15 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 0 %, large 100 % ; caméra : fixe 97 %, avance 0 %, recul 1 % ; 0 personne(s) à l'écran : aucun visage repéré ; agitation 0.175 ; lumière jour ; fond [243, 241, 246]
+  son récupéré : 8.1 s, compte d'origine @kodanimation
+[ WARN:0@18.175] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  image de la vidéo : 1 plans (≈ 8.5 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 0 %, large 100 % ; caméra : fixe 18 %, avance 6 %, recul 6 %, epaule 68 % ; 0 personne(s) à l'écran : aucun visage repéré ; agitation 0.798 ; lumière jour ; fond [253, 253, 253]
   isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
   transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/core/io.py:48: UserWarning: 
@@ -15,42 +19,36 @@ torchcodec is not installed correctly so built-in audio decoding will fail. Solu
 
 Could not load this library: /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/torchcodec/libtorchcodec_image.so
   warnings.warn(
-[0;93m2026-10-26 11:36:15.485613174 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[0;93m2026-10-26 11:57:06.405046911 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1913.)
   std = sequences.std(dim=-1, correction=1)
-  voix séparées par pyannote : 2 voix, 19 tours de parole
+  voix séparées par pyannote : 1 voix, 1 tours de parole
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-  voix re-séparées par leur empreinte (ECAPA) : 2 voix (netteté 0.10)
-  voix vérifiées mot par mot : 25 mot(s) remis sur la bonne voix
-  21 répliques, voix : {'speaker_0': 192, 'speaker_1': 190}
-  son de la vidéo : 2 voix [192 Hz (f, 73 %), 190 Hz (f, 27 %)], 4.14 mots/s, blancs 0.45 s, 3 coupure(s) de parole, dynamique 29.1 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
+  voix re-séparées par leur empreinte (ECAPA) : 2 voix (netteté 0.20)
+  4 répliques, voix : {'speaker_0': 146, 'speaker_1': 150}
+  son de la vidéo : 2 voix [146 Hz (h, 33 %), 150 Hz (h, 67 %)], 5.7 mots/s, blancs 0.18 s, 0 coupure(s) de parole, dynamique 12.7 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
   IA gemini indisponible (gemini 429 : [{
   "error": {
     "code": 429,
     "message": "You exceeded your current quota, please check your plan an) : on passe à la suivante
-  scène reconstituée : Cette scène se déroule dans un débat animé en direct, probablement dans un studio de télévision ou un lieu similaire. Deux femmes, une présentatrice et une invitée, échangent des points de vue tendus sur des sujets sensibles, avec une troisième personne (envoyée) qui intervient brièvement.
-  casting : speaker_0 → Lila, speaker_1 → Kévin
-  sous-titres : 1 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
-  1 réattribution(s) de l'IA refusée(s) : la voix de ces répliques est reconnue avec certitude
-Sketch : « DÉBAT HOULEUX ET POLITIQUE », 21 répliques
-  décor 0 : studio television avec micro, écrans géants, drapeau français, affiche
-  décor 1 : studio television avec micro, écrans géants, drapeau français, table a
-  décor 2 : studio television avec micro, écrans géants, drapeau français, affiche
-montage : 3 plans (0.0:large>env/coupe 13.7:large>env/coupe 38.8:large>env/coupe)
-studio : jour, lieux ['rue', 'bureau', 'bureau'], tenues envoyee=blouse, invite=tshirt, 4 figurant(s), ambiances ['pluie'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 66.2 s, 21 répliques, 3 scène(s), personnages ['envoyee', 'invite']
-montage : 3 plans (0.0:large>env/coupe 13.7:large>env/coupe 38.8:large>env/coupe)
-studio : jour, lieux ['rue', 'bureau', 'bureau'], tenues envoyee=blouse, invite=tshirt, 4 figurant(s), ambiances ['pluie'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 66.2 s, 21 répliques, 3 scène(s), personnages ['envoyee', 'invite']
-  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~993 images)
-  morceau 1987–2980 reçu d'une machine d'aide
-  morceau 994–1987 reçu d'une machine d'aide
-  morceau 2980–3974 reçu d'une machine d'aide
-  dessin partagé terminé en 4.8 min
+  scène reconstituée : Deux hommes adultes s'affrontent verbalement dans un bar bondé, où l'ambiance est tendue. L'un, présentateur, semble exaspéré par l'attitude de l'autre, un invité qui le provoque avec des insultes.
+  casting : speaker_0 → Jojo, speaker_1 → Kévin
+  sous-titres : 2 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
+Sketch : « CONFLIT VERBAL AU BAR », 4 répliques
+  décor 0 : bar avec comptoir en bois sombre, bouteilles de bière alignées, verres
+montage : 1 plans (0.0:large>pre/coupe)
+studio : soir, lieux ['bar'], tenues presentateur=chemise, invite=tshirt, 2 figurant(s), ambiances ['neon', 'poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 11.7 s, 4 répliques, 1 scène(s), personnages ['presentateur', 'invite']
+montage : 1 plans (0.0:large>pre/coupe)
+studio : soir, lieux ['bar'], tenues presentateur=chemise, invite=tshirt, 2 figurant(s), ambiances ['neon', 'poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 11.7 s, 4 répliques, 1 scène(s), personnages ['presentateur', 'invite']
+  image 300/699 (4 processeurs)
+  image 600/699
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury qualité (ia) : 6.1/10 — Humoriste 6.0/10 : 0.4 s La chute finale manque de punch. Le moment où la personne dit 'anti-fable' pourrait être renforcé par un zoom choc ou un effet visuel pour marquer les esprits.; 22.5 s Les vannes sur Zemmour et les Algériens pourraient être encore plus drôles avec des réactions exagérées des personnages en arrière-plan.; 55.0 s Ajouter un bruitage comme un 'dun dun' ou un 'sifflet_chute' lors de la chute finale pour renforcer l'impact comique. | Réalisateur 5.0/10 : 0.0 s Montage trop lent. Il faudrait environ 2.9 plans par seconde pour maintenir le rythme. Ajouter des plans serrés ou des réactions en temps réel pour dynamiser.; 11.7 s Manque de variété dans les plans. Trois plans identiques d'affilée (ex. : les personnages en discussion) nuisent au dynamisme.; 18.3 s Les réactions de l'invité manquent. Ajouter des réactions comme 'sceptique' ou 'choc' pour rendre les échanges pl
+Jury qualité (ia) : 5.9/10 — Humoriste 6.0/10 : 0.4 s La chute finale manque de punch. Le texte 'QUE JE TE DÉTESTE' est dit sans réaction visuelle marquante ni zoom choc.; 1.4 s Les vannes pourraient être plus percutantes avec des réactions exagérées de l'invité.; 6.6 s L'insulte 'enculé' est dite sans bruitage ou effet sonore pour renforcer le côté agressif. | Réalisateur 5.0/10 : 0 s Montage trop lent avec seulement un plan fixe pendant toute la durée.; 2.8 s Pas assez de plans de réaction de l'invité pour accentuer les répliques.; 11.1 s La fin manque de dynamisme avec un simple fond jaune. | Directeur artistique 7.0/10 : 0 s Les personnages manquent de détails dans leurs expressions faciales pour renforcer les émotions.; 0 s Le bar comme décor est bien exploité, mais les bouteilles en arrière-plan pourraient être plus variées pour un effet visuel riche.; 6.6 s L'invité a une apparence trop similaire au présentat
+Manque par rapport à la vidéo d'origine : Les réactions exagérées de l'invité (ex. : yeux au ciel, choc) lors des répliques agressives. ; Les bruitages pour renforcer les répliques (ex. : klaxon, dun dun). ; Les plans variés (serré, moyen, large) pour dynamiser le montage. ; Les expressions faciales détaillées des personnages. ; Les sous-titres plus lisibles et moins rapides. ; Un fond sonore ambiant pour les moments tendus.
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
 Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = mistral ×2, voix = tiktok, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 24595, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 41}
-Quota de l'API GitHub : 4892 appels restants
-OK : sortie/2026-10-26_12h38_emission.mp4 (66 s)
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 14948, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 31}
+Quota de l'API GitHub : 4838 appels restants
+OK : sortie/2026-10-26_12h57_emission.mp4 (12 s)

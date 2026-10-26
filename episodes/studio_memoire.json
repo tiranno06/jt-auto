@@ -3554,40 +3554,76 @@
   "cadence": "rapide"
  },
  {
-  "moment": "jour",
+  "moment": "soir",
   "lieux": [
-   "rue",
-   "bureau",
-   "bureau"
+   "salon",
+   "salon"
   ],
   "source": "auteur+image",
-  "duree": 66.2,
+  "duree": 76.8,
   "plans": {
-   "large": 21
+   "large": 29
   },
   "mouvements": {
-   "fixe": 21
+   "fixe": 29
   },
   "costumes": {
-   "envoyee": "blouse",
-   "invite": "tshirt"
+   "presentateur": "tshirt",
+   "invite": "robe"
   },
-  "figurants": 4,
+  "figurants": 0,
   "ambiances": [
-   "pluie"
+   "pluie",
+   "poussiere"
   ],
-  "controle": "Humoriste 6.0/10 : 0.4 s La chute finale manque de punch. Le moment où la personne dit 'anti-fable' pourrait être renforcé par un zoom choc ou un effet visuel pour marquer les esprits.; 22.5 s Les van",
-  "fichier": "2026-10-26_12h38_emission.mp4",
+  "controle": "Humoriste 8.6/10 : 72.6 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 6.6/10 : montage trop lent : 0.3 plans toutes les 10 s (il en faudrait ~3.3); 22.7 s pas assez de plans",
+  "fichier": "2026-10-26_12h20_emission.mp4",
   "cine": {
    "focus": false,
-   "vertige": true,
-   "tiers": false,
+   "vertige": false,
+   "tiers": true,
    "etalonnage": true,
    "profondeur": false,
-   "grain": false,
+   "grain": true,
    "reflets": true,
    "son": true
   },
-  "cadence": null
+  "cadence": "rapide"
+ },
+ {
+  "moment": "soir",
+  "lieux": [
+   "bar"
+  ],
+  "source": "auteur+image",
+  "duree": 11.7,
+  "plans": {
+   "large": 4
+  },
+  "mouvements": {
+   "fixe": 4
+  },
+  "costumes": {
+   "presentateur": "chemise",
+   "invite": "tshirt"
+  },
+  "figurants": 2,
+  "ambiances": [
+   "neon",
+   "poussiere"
+  ],
+  "controle": "Humoriste 6.0/10 : 0.4 s La chute finale manque de punch. Le texte 'QUE JE TE DÉTESTE' est dit sans réaction visuelle marquante ni zoom choc.; 1.4 s Les vannes pourraient être plus percutantes avec de",
+  "fichier": "2026-10-26_12h57_emission.mp4",
+  "cine": {
+   "focus": true,
+   "vertige": true,
+   "tiers": true,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": true,
+   "reflets": false,
+   "son": true
+  },
+  "cadence": "rapide"
  }
 ]

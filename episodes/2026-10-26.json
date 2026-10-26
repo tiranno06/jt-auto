@@ -1,158 +1,62 @@
 {
- "titre": "DÉBAT HOULEUX ET POLITIQUE",
- "sujet": "DÉBAT HOULEUX ET POLITIQUE",
- "ecran": "DÉBAT HOULEUX ",
+ "titre": "CONFLIT VERBAL AU BAR",
+ "sujet": "CONFLIT VERBAL AU BAR",
+ "ecran": "CONFLIT VERBAL",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "POV : Quand le débat tourne au clash",
- "question": "Comment gérer les tensions dans un débat sans perdre son sang-froid ?",
+ "titre_accroche": "POV : Quand ton invité te pousse à bout",
+ "question": "Qui va craquer le premier ?",
  "running_gag": "",
  "verite": "",
  "repliques": [
   {
-   "p": "envoyee",
-   "t": "Alors, il y en a trop en France. Des Algériens.",
+   "p": "presentateur",
+   "t": "Et du coup, je vais exercer... Bah, je vais...",
    "_deb": 0.0,
-   "_fin": 3.28
-  },
-  {
-   "p": "envoyee",
-   "t": "Pardon? Un truc qu'on n'a pas envie de voir.",
-   "_deb": 4.16,
-   "_fin": 6.6
+   "_fin": 1.38,
+   "d": "[exaspéré] Et du coup, je vais exercer... Bah, je vais..."
   },
   {
    "p": "invite",
-   "t": "Des femmes volées.",
-   "_deb": 6.88,
-   "_fin": 7.8
-  },
-  {
-   "p": "envoyee",
-   "t": "Arrête de me parler. Pire ville pour des vacances. Ah bah Marseille ou",
-   "_deb": 7.94,
-   "_fin": 11.24
+   "t": "Bah, articule, fils de pulpe, bah, espèce de merde, bah.",
+   "_deb": 1.48,
+   "_fin": 4.02,
+   "d": "[provocateur] Bah, articule, fils de pulpe, bah, espèce de merde, bah.",
+   "objet": "bouteille"
   },
   {
    "p": "invite",
-   "t": "Alger, on sait plus.",
-   "_deb": 11.24,
-   "_fin": 12.04
+   "t": "Eh, tu devais avoir une tondeuse ou quoi, enculé, t'es vraiment une grosse merde.",
+   "_deb": 4.08,
+   "_fin": 6.56,
+   "d": "[agressif] Eh, tu devais avoir une tondeuse ou quoi, enculé, t'es vraiment une grosse merde.",
+   "objet": "verre"
   },
   {
-   "p": "envoyee",
-   "t": "Non mais là je vais perdre mon sang -froid, ouais.",
-   "_deb": 12.1,
-   "_fin": 13.64
-  },
-  {
-   "p": "envoyee",
-   "t": "On m 'a mis en duo avec Zemmour, donc moi je fais comment en fait là?",
-   "_deb": 13.72,
-   "_fin": 16.26
-  },
-  {
-   "p": "envoyee",
-   "t": "La personne à ma droite, donc moi, en un",
-   "_deb": 16.3,
-   "_fin": 18.28
-  },
-  {
-   "p": "invite",
-   "t": "mot.",
-   "_deb": 18.28,
-   "_fin": 18.72
-  },
-  {
-   "p": "envoyee",
-   "t": "Sans papiers. Je suis née en France, Fabrice. Prouve -le.",
-   "_deb": 20.52,
-   "_fin": 24.44
-  },
-  {
-   "p": "envoyee",
-   "t": "Alors, c 'est relou dans un train. Les gitans.",
-   "_deb": 24.54,
-   "_fin": 27.58
-  },
-  {
-   "p": "invite",
-   "t": "Ah oui, ok, donc tout le monde y a le droit.",
-   "_deb": 27.68,
-   "_fin": 29.48
-  },
-  {
-   "p": "envoyee",
-   "t": "On le fait en souriant Une OQTF",
-   "_deb": 29.16,
-   "_fin": 31.68
-  },
-  {
-   "p": "invite",
-   "t": "Et oui Et j 'y avais pas pensé Ça se reproduit vite Les Algériens",
-   "_deb": 32.44,
-   "_fin": 38.1
-  },
-  {
-   "p": "envoyee",
-   "t": "Lâche ça Fabrice maintenant C 'est un peu trop personnel j 'ai l 'impression Je crois que je vais aller manifester Uniquement contre toi C 'est plus anti",
-   "_deb": 38.78,
-   "_fin": 45.96
-  },
-  {
-   "p": "envoyee",
-   "t": "-fable",
-   "_deb": 45.96,
-   "_fin": 46.2
-  },
-  {
-   "p": "envoyee",
-   "t": "C 'est un peu un mix des deux tu me diras Je vais fumer Je t 'en prie",
-   "_deb": 47.16,
-   "_fin": 50.04
-  },
-  {
-   "p": "invite",
-   "t": "Je t 'attends pas Même pas un peu Non vraiment pas",
-   "_deb": 50.62,
-   "_fin": 53.24
-  },
-  {
-   "p": "envoyee",
-   "t": "Fume -en 10 Je serai plus là On se remet ça une autre fois?",
-   "_deb": 53.66,
-   "_fin": 56.32
-  },
-  {
-   "p": "envoyee",
-   "t": "Non on va se remettre ça devant le service juridique Fabrice, c 'est tout ce qu 'on va faire.",
-   "_deb": 56.48,
-   "_fin": 59.86
-  },
-  {
-   "p": "invite",
-   "t": "Apprenez à parler avec vos collègues. Ah non, mais puis quoi encore?",
-   "_deb": 60.02,
-   "_fin": 62.64,
+   "p": "presentateur",
+   "t": "Qu'est-ce que je te déteste, tu sais...",
+   "_deb": 6.94,
+   "_fin": 8.08,
+   "d": "[haineux] Qu'est-ce que je te déteste, tu sais...",
    "chute": true
   }
  ],
  "bandeau": [],
  "gag": null,
- "legende": "Deux femmes s'affrontent dans un débat politique tendu, entre provocation et émotion.",
+ "legende": "Deux hommes en pleine dispute hargneuse dans un bar enfumé.",
  "hashtags": [
   "petitsdramas",
-  "debat",
-  "politique",
-  "clash",
-  "tension",
+  "conflit",
+  "provocation",
+  "bar",
   "humour",
-  "reaction"
+  "debat",
+  "tense"
  ],
  "sources": [
-  "https://www.tiktok.com/@tepeianimation/video/7699834545570417942?_r=1&_t=ZN-9AsLontNSP0"
+  "https://www.tiktok.com/@kodanimation/video/7697065997978668321"
  ],
  "decoupage": [
   {
@@ -161,133 +65,133 @@
     0,
     1,
     2,
-    3,
-    4,
-    5
+    3
    ],
    "lieu": "",
    "son": "",
    "duree": 0.0,
-   "decor": "studio television avec micro, écrans géants, drapeau français, affiches politiques, table avec café et télécommande",
-   "titre": "Début du Débat"
-  },
-  {
-   "scene": "2",
-   "repliques": [
-    6,
-    7,
-    8,
-    9,
-    10,
-    11,
-    12,
-    13
-   ],
-   "lieu": "",
-   "son": "",
-   "duree": 0.0,
-   "decor": "studio television avec micro, écrans géants, drapeau français, table avec café et télécommande, affiches politiques, gobelet de café renversé"
-  },
-  {
-   "scene": "3",
-   "repliques": [
-    14,
-    15,
-    16,
-    17,
-    18,
-    19,
-    20
-   ],
-   "lieu": "",
-   "son": "",
-   "duree": 0.0,
-   "decor": "studio television avec micro, écrans géants, drapeau français, affiche 'Service Juridique', table avec café et télécommande, cendrier rempli, paquets de cigaret"
+   "decor": "bar avec comptoir en bois sombre, bouteilles de bière alignées, verres sales et tabourets en métal.",
+   "titre": "Bar : L'affrontement"
   }
  ],
  "studio": {
-  "moment": "jour",
+  "moment": "soir",
   "lieux": [
-   "studio"
+   "bar"
   ],
   "costumes": {
    "presentateur": {
     "haut": "chemise",
-    "c_haut": "blanc",
+    "c_haut": "bleu marine",
     "motif": "uni",
     "bas": "pantalon",
     "chaussures": "ville",
     "details": [
      "cravate",
-     "lunettes_vue"
-    ],
-    "chapeau": null,
-    "cheveux": "carre",
-    "c_cheveux": "brun"
+     "lunettes_soleil",
+     "montre"
+    ]
    },
    "invite": {
     "haut": "tshirt",
-    "c_haut": "vert",
-    "motif": "uni",
-    "bas": "jupe",
-    "chaussures": "ville",
+    "c_haut": "rouge",
+    "motif": "carreaux",
+    "bas": "jean",
+    "chaussures": "baskets",
     "details": [
-     "bracelets",
-     "boucles_oreilles"
-    ],
-    "chapeau": null,
-    "cheveux": "long",
-    "c_cheveux": "châtain"
-   },
-   "envoyee": {
-    "haut": "blouse",
-    "c_haut": "bleu marine",
-    "motif": "uni",
-    "bas": "pantalon",
-    "chaussures": "bottes",
-    "details": [
-     "ceinture",
-     "stylos"
-    ],
-    "chapeau": null,
-    "cheveux": "chignon",
-    "c_cheveux": "blond"
+     "barbe_trois_jours",
+     "bracelets"
+    ]
    }
+  },
+  "personnages": {
+   "presentateur": {
+    "genre": "h",
+    "age": 45,
+    "taille": 1,
+    "corpulence": 0.7,
+    "cheveux": "court_texture",
+    "c_cheveux": "brun",
+    "barbe": "trois_jours"
+   },
+   "invite": {
+    "genre": "h",
+    "age": 35,
+    "taille": 0.95,
+    "corpulence": 0.8,
+    "cheveux": "court",
+    "c_cheveux": "roux",
+    "barbe": "trois_jours"
+   }
+  },
+  "gags": [
+   "\"Le meilleur pour dernier !\" écrit sur une bouteille de bière.",
+   "\"Interdit de provoquer le barman\" sur un panneau froissé.",
+   "\"Dernière tournée offerte si vous arrêtez de vous engueuler.\" sur un tableau noir."
+  ],
+  "ambiances": [
+   "neon",
+   "fumee"
+  ],
+  "cadence": "rapide",
+  "plans": [
+   {
+    "replique": 0,
+    "plan": "moyen",
+    "mouvement": "fixe",
+    "geste": "gratte_tete",
+    "reaction": "regard_camera"
+   },
+   {
+    "replique": 1,
+    "plan": "serre",
+    "mouvement": "avance",
+    "geste": "pointe_d",
+    "reaction": "choc"
+   },
+   {
+    "replique": 2,
+    "plan": "tres_serre",
+    "mouvement": "zoom_choc",
+    "geste": "poing",
+    "reaction": "colere"
+   },
+   {
+    "replique": 3,
+    "plan": "large",
+    "mouvement": "epaule",
+    "geste": "mains_hanches",
+    "reaction": "sceptique"
+   }
+  ],
+  "objets": [
+   {
+    "replique": 1,
+    "objet": "bouteille"
+   },
+   {
+    "replique": 2,
+    "objet": "verre"
+   }
+  ],
+  "decors_vus": {
+   "presentateur": "bar avec comptoir en bois sombre, bouteilles de bière alignées en arrière-plan, tabourets en métal et néons clignotants.",
+   "invite": "même décor, mais avec des verres sales et une enseigne lumineuse 'Bar du Coin' en fond."
   }
  },
  "doublage": {
-  "piste": "/tmp/tmpk6daxom5/piste.wav",
-  "duree": 62.81,
-  "source": "https://www.tiktok.com/@tepeianimation/video/7699834545570417942?_r=1&_t=ZN-9AsLontNSP0",
-  "auteur": "tepeianimation",
-  "contexte": "Cette scène se déroule dans un débat animé en direct, probablement dans un studio de télévision ou un lieu similaire. Deux femmes, une présentatrice et une invitée, échangent des points de vue tendus sur des sujets sensibles, avec une troisième personne (envoyée) qui intervient brièvement.",
+  "piste": "/tmp/tmp0z2nh08f/piste.wav",
+  "duree": 8.1,
+  "source": "https://www.tiktok.com/@kodanimation/video/7697065997978668321",
+  "auteur": "kodanimation",
+  "contexte": "Deux hommes adultes s'affrontent verbalement dans un bar bondé, où l'ambiance est tendue. L'un, présentateur, semble exaspéré par l'attitude de l'autre, un invité qui le provoque avec des insultes.",
   "evenements": [],
   "visuel": {
    "gestes": [],
-   "duree": 63.0,
-   "nb_plans": 20,
-   "duree_plan": 3.15,
-   "coupes": [
-    0.5,
-    2.5,
-    4.5,
-    7.0,
-    8.0,
-    10.5,
-    12.5,
-    20.5,
-    22.5,
-    24.0,
-    25.0,
-    26.5,
-    28.0,
-    31.0,
-    32.5,
-    37.5,
-    39.0,
-    49.0,
-    50.0
-   ],
+   "duree": 8.5,
+   "nb_plans": 1,
+   "duree_plan": 8.5,
+   "coupes": [],
    "plans": {
     "tres_serre": 0.0,
     "serre": 0.0,
@@ -295,87 +199,87 @@
     "large": 1.0
    },
    "camera": {
-    "fixe": 0.972,
-    "avance": 0.009,
-    "recul": 0.019,
+    "fixe": 0.188,
+    "avance": 0.062,
+    "recul": 0.062,
     "travelling": 0.0,
-    "epaule": 0.0
+    "epaule": 0.688
    },
    "nb_personnes": 0,
    "personnes": [],
    "visages": false,
    "sourires": 0.0,
-   "energie": 0.175,
+   "energie": 0.798,
    "mur": [
-    243,
-    241,
-    246
+    253,
+    253,
+    253
    ],
    "palette": [
     [
-     236,
-     234,
-     242,
-     0.374
+     253,
+     253,
+     253,
+     0.698
     ],
     [
-     254,
-     254,
-     254,
-     0.179
+     9,
+     6,
+     7,
+     0.103
     ],
     [
-     156,
-     140,
-     115,
-     0.156
+     197,
+     195,
+     194,
+     0.061
     ],
     [
-     218,
-     174,
-     146,
-     0.152
+     100,
+     93,
+     102,
+     0.061
     ],
     [
-     76,
-     68,
-     75,
-     0.089
+     72,
+     109,
+     179,
+     0.06
     ],
     [
-     32,
-     22,
-     25,
-     0.05
+     201,
+     42,
+     41,
+     0.016
     ]
    ],
    "lumiere": {
-    "luminosite": 206.3,
-    "chaleur": 15.7,
-    "saturation": 41.4
+    "luminosite": 210.9,
+    "chaleur": -3.3,
+    "saturation": 22.1
    },
    "moment": "jour"
   },
   "audio": {
-   "duree": 62.8,
+   "duree": 8.1,
    "nb_voix": 2,
    "voix": [
     {
-     "hz": 192,
-     "genre": "f",
-     "part": 0.73
+     "hz": 146,
+     "genre": "h",
+     "part": 0.33
     },
     {
-     "hz": 190,
-     "genre": "f",
-     "part": 0.27
+     "hz": 150,
+     "genre": "h",
+     "part": 0.67
     }
    ],
-   "debit": 4.14,
-   "blanc_moyen": 0.45,
-   "coupes": 3,
-   "dynamique_db": 29.1,
-   "cris": 0.02,
+   "debit": 5.7,
+   "blanc_moyen": 0.18,
+   "coupes": 0,
+   "dynamique_db": 12.7,
+   "cris": 0.035,
    "musique": null,
    "impacts": 0,
    "impacts_10s": 0.0,
@@ -384,17 +288,13 @@
    "sur_vanne": 0,
    "evenements": {},
    "emotions": {
-    "'[indignant": 1,
-    "confused": 1,
-    "'[alarmed": 1,
-    "'[aggressive": 1,
-    "'[exasperated": 1,
-    "\"[panicked": 1,
-    "'[sarcastic": 1,
-    "'[defiant": 1
+    "exaspéré": 1,
+    "provocateur": 1,
+    "agressif": 1,
+    "haineux": 1
    }
   },
-  "video_origine": "/tmp/tmpk6daxom5/src.mp4"
+  "video_origine": "/tmp/tmp0z2nh08f/src.mp4"
  },
  "fiche": {
   "note": 0,
@@ -406,94 +306,45 @@
      0,
      1,
      2,
-     3,
-     4,
-     5
+     3
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "studio television avec micro, écrans géants, drapeau français, affiches politiques, table avec café et télécommande",
-    "titre": "Début du Débat"
-   },
-   {
-    "scene": "2",
-    "repliques": [
-     6,
-     7,
-     8,
-     9,
-     10,
-     11,
-     12,
-     13
-    ],
-    "lieu": "",
-    "son": "",
-    "duree": 0.0,
-    "decor": "studio television avec micro, écrans géants, drapeau français, table avec café et télécommande, affiches politiques, gobelet de café renversé"
-   },
-   {
-    "scene": "3",
-    "repliques": [
-     14,
-     15,
-     16,
-     17,
-     18,
-     19,
-     20
-    ],
-    "lieu": "",
-    "son": "",
-    "duree": 0.0,
-    "decor": "studio television avec micro, écrans géants, drapeau français, affiche 'Service Juridique', table avec café et télécommande, cendrier rempli, paquets de cigaret"
+    "decor": "bar avec comptoir en bois sombre, bouteilles de bière alignées, verres sales et tabourets en métal.",
+    "titre": "Bar : L'affrontement"
    }
   ]
  },
  "_monte": true,
  "_voix_hz": {
-  "envoyee": 195,
-  "invite": 181
+  "presentateur": 147,
+  "invite": 151
  },
  "_voix_genre": {
-  "envoyee": "h",
+  "presentateur": "h",
   "invite": "h"
  },
  "realisation": {
-  "moment": "jour",
+  "moment": "soir",
   "lieux": [
-   "rue",
-   "bureau",
-   "bureau"
+   "bar"
   ],
-  "gags": [],
+  "gags": [
+   "\"Le meilleur pour dernier !\" écrit sur une bouteille de bière.",
+   "\"Interdit de provoquer le barman\" sur un panneau froissé.",
+   "\"Dernière tournée offerte si vous arrêtez de vous engueuler.\" sur un tableau noi"
+  ],
   "ambiances": [
-   "pluie"
+   "neon",
+   "poussiere"
   ],
   "source": "auteur+image",
   "tenues": {
-   "envoyee": "blouse",
+   "presentateur": "chemise",
    "invite": "tshirt"
   },
   "plans": [
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
    "large/fixe",
    "large/fixe",
    "large/fixe",
