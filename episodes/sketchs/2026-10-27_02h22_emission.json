@@ -1,0 +1,763 @@
+{
+ "titre": "BUG ET CONFUSION",
+ "sujet": "BUG ET CONFUSION",
+ "ecran": "BUG ET CONFUSI",
+ "invite_nom": "Hubert Rustine",
+ "invite_role": "Expert (fictif)",
+ "invite_look": "chauve",
+ "lieu_direct": "Assemblée",
+ "titre_accroche": "POV : Quand ton téléphone te joue des tours",
+ "question": "Comment gérer un bug de connexion qui vous fait remonter le temps ?",
+ "running_gag": "",
+ "verite": "",
+ "repliques": [
+  {
+   "p": "presentateur",
+   "t": "{'replique': 0, 'texte': 'Ouais, dis-moi, je vais prendre des billets pour la Grèce, là.'}",
+   "_deb": 0.0,
+   "_fin": 2.84,
+   "d": "{'replique': 0, 'texte': '[neutre] Ouais, dis-moi, je vais prendre des billets pour la Grèce, là.'}",
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "{'replique': 1, 'texte': \"J'ai pris ton ordi, il me faudrait juste ton mot de passe, s'il te plaît.\"}",
+   "_deb": 3.12,
+   "_fin": 5.44,
+   "d": "{'replique': 1, 'texte': \"[neutre] J'ai pris ton ordi, il me faudrait juste ton mot de passe, s'il te plaît.\"}",
+   "objet": "telephone"
+  },
+  {
+   "p": "envoyee",
+   "t": "Bah écoute, c 'est facile, Anthony. Le mot de passe, c 'est le jour de notre...",
+   "_deb": 6.74,
+   "_fin": 10.2,
+   "objet": "telephone"
+  },
+  {
+   "p": "envoyee",
+   "t": "C 'est bon?",
+   "_deb": 15.03,
+   "_fin": 16.17,
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "{'replique': 4, 'texte': \"Allô ? Je t'entends super mal, là.\"}",
+   "_deb": 18.32,
+   "_fin": 20.48,
+   "d": "{'replique': 4, 'texte': \"[confused] Allô ? Je t'entends super mal, là.\"}",
+   "objet": "telephone"
+  },
+  {
+   "p": "envoyee",
+   "t": "{'replique': 5, 'texte': \"Tu m'entends, là ?\"}",
+   "_deb": 21.6,
+   "_fin": 22.98,
+   "d": "{'replique': 5, 'texte': \"[sarcastic] Tu m'entends, là ?\"}",
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "{'replique': 6, 'texte': \"Allô ? Putain, ça bug de fou. Je t'entends pas du tout, là.\"}",
+   "_deb": 24.5,
+   "_fin": 27.02,
+   "d": "{'replique': 6, 'texte': \"[panique] Allô ? Putain, ça bug de fou. Je t'entends pas du tout, là.\"}",
+   "objet": "telephone"
+  },
+  {
+   "p": "envoyee",
+   "t": "{'replique': 7, 'texte': \"Et là, c'est mieux, là ?\"}",
+   "_deb": 27.62,
+   "_fin": 29.38,
+   "d": "{'replique': 7, 'texte': \"[sceptique] Et là, c'est mieux, là ?\"}",
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "{'replique': 8, 'texte': 'Tu sais quoi ? Au pire, envoie-le-moi en message.'}",
+   "_deb": 31.4,
+   "_fin": 34.46,
+   "d": "{'replique': 8, 'texte': '[idee] Tu sais quoi ? Au pire, envoie-le-moi en message.'}",
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "{'replique': 9, 'texte': \"Et comme ça, c'est fait, parce que je t'entends plus du tout, là.\"}",
+   "_deb": 34.76,
+   "_fin": 37.06,
+   "d": "{'replique': 9, 'texte': \"[annoyed] Et comme ça, c'est fait, parce que je t'entends plus du tout, là.\"}",
+   "objet": "telephone"
+  },
+  {
+   "p": "envoyee",
+   "t": "{'replique': 10, 'texte': \"Bon, ok, d'accord, je te l'envoie, c'est bon.\"}",
+   "_deb": 37.5,
+   "_fin": 39.42,
+   "d": "{'replique': 10, 'texte': \"[neutre] Bon, ok, d'accord, je te l'envoie, c'est bon.\"}",
+   "objet": "telephone"
+  },
+  {
+   "p": "invite",
+   "t": "01 -02 -2025?",
+   "_deb": 47.66,
+   "_fin": 49.68,
+   "objet": "tablette"
+  },
+  {
+   "p": "invite",
+   "t": "{'replique': 12, 'texte': \"On s'est rencontrés en 2025 ? Mais j'ai aucun souvenir !\"}",
+   "_deb": 51.71,
+   "_fin": 56.75,
+   "d": "{'replique': 12, 'texte': \"[choc] On s'est rencontrés en 2025 ? Mais j'ai aucun souvenir !\"}",
+   "chute": true,
+   "objet": "telephone"
+  }
+ ],
+ "bandeau": [],
+ "gag": null,
+ "legende": "Deux amis tentent désespérément de communiquer malgré les interférences.",
+ "hashtags": [
+  "petitsdramas",
+  "bugtemporel",
+  "connexionmauvaise",
+  "povtech",
+  "humourgeek",
+  "amisenligne",
+  "drametelephonique"
+ ],
+ "sources": [
+  "https://www.tiktok.com/@yan_animation0/video/7672450890929851681"
+ ],
+ "decoupage": [
+  {
+   "scene": "1",
+   "repliques": [
+    0,
+    1,
+    4,
+    6,
+    8,
+    9
+   ],
+   "lieu": "",
+   "son": "",
+   "duree": 0,
+   "decor": "bureau en bois clair, ordinateur portable ouvert affichant un écran de connexion, clavier mécanique, téléphone portable sur la table, fond beige avec une fenêtr"
+  },
+  {
+   "scene": "2",
+   "repliques": [
+    2,
+    3,
+    5,
+    7,
+    10,
+    11,
+    12
+   ],
+   "lieu": "",
+   "son": "",
+   "duree": 0,
+   "decor": "bureau avec fond neutre, chaise ergonomique, étagère avec des livres, écran d'ordinateur allumé"
+  }
+ ],
+ "studio": {
+  "moment": "jour",
+  "lieux": [
+   "rue",
+   "salon"
+  ],
+  "costumes": {
+   "presentateur": {
+    "haut": "tshirt",
+    "c_haut": "bleu",
+    "motif": "uni",
+    "bas": "jean",
+    "chaussures": "baskets",
+    "details": [
+     "stylos",
+     "montre",
+     "barbe_courte"
+    ]
+   },
+   "invite": {
+    "haut": "chemise",
+    "c_haut": "blanc",
+    "motif": "rayures",
+    "bas": "pantalon",
+    "chaussures": "ville",
+    "details": [
+     "lunettes_vue",
+     "bracelet"
+    ]
+   },
+   "envoyee": {
+    "haut": "pull",
+    "c_haut": "rouge",
+    "motif": "uni",
+    "bas": "jupe",
+    "chaussures": "ballerines",
+    "details": [
+     "boucles_oreilles",
+     "sac_bandouliere"
+    ]
+   }
+  },
+  "personnages": [
+   {
+    "genre": "h",
+    "age": 35,
+    "taille": 1,
+    "corpulence": 0.7,
+    "cheveux": "court_texture",
+    "c_cheveux": "brun",
+    "barbe": "trois_jours"
+   },
+   {
+    "genre": "f",
+    "age": 30,
+    "taille": 0.9,
+    "corpulence": 0.6,
+    "cheveux": "long",
+    "c_cheveux": "blond",
+    "barbe": "rien"
+   },
+   {
+    "genre": "f",
+    "age": 28,
+    "taille": 0.9,
+    "corpulence": 0.6,
+    "cheveux": "ondulé",
+    "c_cheveux": "châtain",
+    "barbe": "rien"
+   }
+  ],
+  "lieux_separes": {},
+  "figurants": [
+   {
+    "avec": "presentateur",
+    "description": "ordinateur portable avec un écran affichant un bug",
+    "genre": "aucun",
+    "age": 0,
+    "geste": "affichage",
+    "haut": "aucun",
+    "c_haut": "aucun",
+    "bas": "aucun",
+    "chapeau": "aucun",
+    "details": []
+   }
+  ],
+  "gags": [
+   "Bug temporel détecté : 2025",
+   "Mot de passe : 01-02-2025 (ou pas ?)",
+   "Connexion instable : Veuillez réessayer dans 10 ans"
+  ],
+  "ambiances": [
+   "neon"
+  ],
+  "cadence": "rapide",
+  "plans": [
+   {
+    "replique": 0,
+    "plan": "moyen",
+    "mouvement": "fixe",
+    "geste": "telephone",
+    "reaction": "neutre"
+   },
+   {
+    "replique": 1,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "explique",
+    "reaction": "gratte_tete"
+   },
+   {
+    "replique": 2,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "pointe_g",
+    "reaction": "sceptique"
+   },
+   {
+    "replique": 3,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "chuchote",
+    "reaction": "choc"
+   },
+   {
+    "replique": 4,
+    "plan": "tres_serre",
+    "mouvement": "zoom_choc",
+    "geste": "facepalm",
+    "reaction": "panique"
+   },
+   {
+    "replique": 5,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "telephone",
+    "reaction": "confused"
+   },
+   {
+    "replique": 6,
+    "plan": "moyen",
+    "mouvement": "recul",
+    "geste": "desespoir",
+    "reaction": "colere"
+   },
+   {
+    "replique": 7,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "pointe_d",
+    "reaction": "sceptique"
+   },
+   {
+    "replique": 8,
+    "plan": "moyen",
+    "mouvement": "fixe",
+    "geste": "idee",
+    "reaction": "neutre"
+   },
+   {
+    "replique": 9,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "poches",
+    "reaction": "annoyed"
+   },
+   {
+    "replique": 10,
+    "plan": "large",
+    "mouvement": "fixe",
+    "geste": "bras_ouverts",
+    "reaction": "joie"
+   },
+   {
+    "replique": 11,
+    "plan": "tres_serre",
+    "mouvement": "zoom_choc",
+    "geste": "choc",
+    "reaction": "choc"
+   },
+   {
+    "replique": 12,
+    "reaction": "sceptique"
+   }
+  ],
+  "objets": [
+   {
+    "replique": 1,
+    "objet": "telephone"
+   },
+   {
+    "replique": 2,
+    "objet": "ordinateur"
+   },
+   {
+    "replique": 11,
+    "objet": "tablette"
+   }
+  ],
+  "decors_vus": {
+   "presentateur": "bureau en bois clair, ordinateur portable ouvert affichant un écran de connexion, clavier mécanique, téléphone portable sur la table, fond beige avec une fenêtre",
+   "invite": "bureau en bois clair, écran d'ordinateur affichant un message bizarre, fond violet, clavier et souris",
+   "envoyee": "bureau avec fond neutre, chaise ergonomique, étagère avec des livres, écran d'ordinateur allumé"
+  },
+  "lieux_de": {
+   "presentateur": "rue",
+   "envoyee": "salon"
+  }
+ },
+ "doublage": {
+  "piste": "/tmp/tmp2krgrbqn/piste.wav",
+  "duree": 60.58,
+  "source": "https://www.tiktok.com/@yan_animation0/video/7672450890929851681",
+  "auteur": "yan_animation0",
+  "contexte": "Deux amis discutent par téléphone, mais la connexion est très mauvaise. L'un demande un mot de passe pour accéder à un ordinateur, tandis que l'autre tente de le lui communiquer malgré les interférences.",
+  "evenements": [],
+  "visuel": {
+   "gestes": [
+    [
+     12.53,
+     0.36,
+     0.34
+    ],
+    [
+     13.53,
+     0.49,
+     0.71
+    ],
+    [
+     14.53,
+     0.49,
+     0.73
+    ],
+    [
+     16.03,
+     0.34,
+     0.49
+    ],
+    [
+     18.54,
+     0.36,
+     1.0
+    ],
+    [
+     21.54,
+     0.49,
+     0.45
+    ],
+    [
+     22.55,
+     0.49,
+     0.46
+    ],
+    [
+     24.05,
+     0.35,
+     0.45
+    ],
+    [
+     25.05,
+     0.35,
+     0.45
+    ],
+    [
+     26.05,
+     0.35,
+     0.45
+    ],
+    [
+     27.06,
+     0.34,
+     0.45
+    ],
+    [
+     28.06,
+     0.49,
+     0.49
+    ],
+    [
+     29.06,
+     0.49,
+     0.5
+    ],
+    [
+     37.58,
+     0.49,
+     0.72
+    ],
+    [
+     38.58,
+     0.49,
+     0.73
+    ],
+    [
+     39.58,
+     0.49,
+     0.72
+    ],
+    [
+     41.08,
+     0.35,
+     0.66
+    ],
+    [
+     42.09,
+     0.36,
+     0.65
+    ],
+    [
+     43.09,
+     0.35,
+     0.49
+    ],
+    [
+     55.61,
+     0.35,
+     0.57
+    ],
+    [
+     56.62,
+     0.36,
+     0.57
+    ],
+    [
+     57.62,
+     0.35,
+     0.57
+    ],
+    [
+     58.62,
+     0.35,
+     0.57
+    ],
+    [
+     59.62,
+     0.34,
+     0.58
+    ]
+   ],
+   "duree": 60.6,
+   "nb_plans": 18,
+   "duree_plan": 3.37,
+   "coupes": [
+    3.01,
+    4.51,
+    6.51,
+    11.02,
+    13.03,
+    15.53,
+    16.53,
+    18.04,
+    21.04,
+    23.55,
+    27.56,
+    30.06,
+    34.57,
+    40.58,
+    44.59,
+    47.1,
+    50.6
+   ],
+   "plans": {
+    "tres_serre": 0.0,
+    "serre": 0.521,
+    "moyen": 0.347,
+    "large": 0.132
+   },
+   "camera": {
+    "fixe": 0.981,
+    "avance": 0.0,
+    "recul": 0.019,
+    "travelling": 0.0,
+    "epaule": 0.0
+   },
+   "nb_personnes": 1,
+   "personnes": [
+    {
+     "place": "gauche",
+     "presence": 0.521,
+     "habit": [
+      242,
+      188,
+      104
+     ],
+     "cheveux": [
+      9,
+      7,
+      9
+     ],
+     "sourire": 0.0,
+     "taille": 0.181,
+     "tete_penchee": 4.3,
+     "regard_cote": 0.159
+    },
+    {
+     "place": "centre",
+     "presence": 0.347,
+     "habit": [
+      153,
+      137,
+      147
+     ],
+     "cheveux": [
+      48,
+      30,
+      28
+     ],
+     "sourire": 0.0,
+     "taille": 0.12,
+     "tete_penchee": 0.7,
+     "regard_cote": 0.0
+    }
+   ],
+   "visages": true,
+   "sourires": 0.0,
+   "energie": 0.151,
+   "mur": [
+    189,
+    175,
+    168
+   ],
+   "palette": [
+    [
+     196,
+     187,
+     177,
+     0.427
+    ],
+    [
+     153,
+     141,
+     159,
+     0.152
+    ],
+    [
+     112,
+     89,
+     90,
+     0.116
+    ],
+    [
+     234,
+     173,
+     101,
+     0.114
+    ],
+    [
+     32,
+     23,
+     27,
+     0.106
+    ],
+    [
+     245,
+     242,
+     247,
+     0.085
+    ]
+   ],
+   "lumiere": {
+    "luminosite": 172.5,
+    "chaleur": 25.5,
+    "saturation": 49.8
+   },
+   "moment": "jour"
+  },
+  "audio": {
+   "duree": 60.6,
+   "nb_voix": 3,
+   "voix": [
+    {
+     "hz": 182,
+     "genre": "?",
+     "part": 0.22
+    },
+    {
+     "hz": 183,
+     "genre": "?",
+     "part": 0.48
+    },
+    {
+     "hz": 259,
+     "genre": "f",
+     "part": 0.3
+    }
+   ],
+   "debit": 4.29,
+   "blanc_moyen": 2.07,
+   "coupes": 0,
+   "dynamique_db": 34.2,
+   "cris": 0.033,
+   "musique": null,
+   "impacts": 0,
+   "impacts_10s": 0.0,
+   "graves": 0,
+   "aigus": 0,
+   "sur_vanne": 0,
+   "evenements": {},
+   "emotions": {
+    "neutre": 3,
+    "annoyed": 2,
+    "sceptique": 2,
+    "choc": 2,
+    "confused": 1,
+    "sarcastic": 1,
+    "panique": 1,
+    "idee": 1
+   }
+  },
+  "video_origine": "/tmp/tmp2krgrbqn/src.mp4"
+ },
+ "fiche": {
+  "note": 0,
+  "decision": "vidéo manuelle (bande son d'une vidéo TikTok)",
+  "decoupage": [
+   {
+    "scene": "1",
+    "repliques": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 0.0,
+    "decor": "bureau avec ordinateur portable ouvert, clavier, téléphone portable sur la table, fond beige clair avec une fenêtre",
+    "titre": "L'Appel Téléphonique Catastrophique"
+   },
+   {
+    "scene": "2",
+    "repliques": [
+     11,
+     12
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 0.0,
+    "decor": "bureau avec écran d'ordinateur affichant un message bizarre, fond violet, clavier et souris",
+    "titre": "Le Bug du Temps"
+   }
+  ]
+ },
+ "_monte": true,
+ "_separes": true,
+ "_voix_hz": {
+  "presentateur": 182,
+  "invite": 174,
+  "envoyee": 259
+ },
+ "_voix_genre": {
+  "presentateur": "h",
+  "invite": "h",
+  "envoyee": "f"
+ },
+ "realisation": {
+  "moment": "jour",
+  "lieux": [
+   "rue",
+   "salon"
+  ],
+  "gags": [
+   "Bug temporel détecté : 2025",
+   "Mot de passe : 01-02-2025 (ou pas ?)",
+   "Connexion instable : Veuillez réessayer dans 10 ans"
+  ],
+  "ambiances": [
+   "neon"
+  ],
+  "source": "auteur+image",
+  "tenues": {
+   "presentateur": "tshirt",
+   "envoyee": "pull",
+   "invite": "chemise"
+  },
+  "plans": [
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe"
+  ]
+ }
+}

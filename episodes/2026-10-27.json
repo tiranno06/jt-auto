@@ -1,199 +1,133 @@
 {
- "titre": "FLEMME ET MENSONGES",
- "sujet": "FLEMME ET MENSONGES",
- "ecran": "FLEMME ET MENS",
+ "titre": "BUG ET CONFUSION",
+ "sujet": "BUG ET CONFUSION",
+ "ecran": "BUG ET CONFUSI",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "POV : Quand tu inventes des excuses pour évite",
- "question": "Comment inventer une excuse convaincante pour éviter une soirée ?",
+ "titre_accroche": "POV : Quand ton téléphone te joue des tours",
+ "question": "Comment gérer un bug de connexion qui vous fait remonter le temps ?",
  "running_gag": "",
  "verite": "",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "Oh, j'ai oublié, ce soir, j'ai le resto avec les potes.",
+   "t": "{'replique': 0, 'texte': 'Ouais, dis-moi, je vais prendre des billets pour la Grèce, là.'}",
    "_deb": 0.0,
-   "_fin": 1.92,
-   "d": "['[annoyed]', \"Oh, j'ai oublié, ce soir, j'ai le resto avec les potes.\"]",
+   "_fin": 2.84,
+   "d": "{'replique': 0, 'texte': '[neutre] Ouais, dis-moi, je vais prendre des billets pour la Grèce, là.'}",
    "objet": "telephone"
   },
   {
    "p": "presentateur",
-   "t": "J'ai la flemme d'y aller.",
-   "_deb": 2.4,
-   "_fin": 3.84,
-   "d": "['[blase]', \"J'ai la flemme d'y aller.\"]",
+   "t": "{'replique': 1, 'texte': \"J'ai pris ton ordi, il me faudrait juste ton mot de passe, s'il te plaît.\"}",
+   "_deb": 3.12,
+   "_fin": 5.44,
+   "d": "{'replique': 1, 'texte': \"[neutre] J'ai pris ton ordi, il me faudrait juste ton mot de passe, s'il te plaît.\"}",
    "objet": "telephone"
   },
   {
    "p": "envoyee",
-   "t": "Eh ben, envoie-leur un message, mon amour.",
-   "_deb": 3.9,
-   "_fin": 5.24,
-   "d": "['[encouraging]', 'Eh ben, envoie-leur un message, mon amour.']",
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Mais tu sais, ça suffira pas, ils vont me traquer jusqu'à ce que je vienne, c'est un enfer avec eux.",
-   "_deb": 5.34,
-   "_fin": 8.54,
-   "d": "['[panicked]', \"Mais tu sais, ça suffira pas, ils vont me traquer jusqu'à ce que je vienne, c'est un enfer avec eux.\"]",
+   "t": "Bah écoute, c 'est facile, Anthony. Le mot de passe, c 'est le jour de notre...",
+   "_deb": 6.74,
+   "_fin": 10.2,
    "objet": "telephone"
   },
   {
    "p": "envoyee",
-   "t": "Tu veux ronger ça à deux?",
-   "_deb": 8.66,
-   "_fin": 9.62,
-   "d": "['[sarcastic]', 'Tu veux ronger ça à deux?']",
+   "t": "C 'est bon?",
+   "_deb": 15.03,
+   "_fin": 16.17,
    "objet": "telephone"
   },
   {
    "p": "presentateur",
-   "t": "Ça te dérange pas?",
-   "_deb": 9.9,
-   "_fin": 10.7,
-   "d": "['[neutral]', 'Ça te dérange pas?']",
+   "t": "{'replique': 4, 'texte': \"Allô ? Je t'entends super mal, là.\"}",
+   "_deb": 18.32,
+   "_fin": 20.48,
+   "d": "{'replique': 4, 'texte': \"[confused] Allô ? Je t'entends super mal, là.\"}",
    "objet": "telephone"
   },
   {
    "p": "envoyee",
-   "t": "Non, t'inquiète, quel sujet?",
-   "_deb": 10.86,
-   "_fin": 12.52,
-   "d": "['[neutral]', \"Non, t'inquiète, quel sujet?\"]",
+   "t": "{'replique': 5, 'texte': \"Tu m'entends, là ?\"}",
+   "_deb": 21.6,
+   "_fin": 22.98,
+   "d": "{'replique': 5, 'texte': \"[sarcastic] Tu m'entends, là ?\"}",
    "objet": "telephone"
   },
   {
    "p": "presentateur",
-   "t": "Euh, ménage.",
-   "_deb": 12.74,
-   "_fin": 13.88,
-   "d": "['[hesitant]', 'Euh, ménage.']",
+   "t": "{'replique': 6, 'texte': \"Allô ? Putain, ça bug de fou. Je t'entends pas du tout, là.\"}",
+   "_deb": 24.5,
+   "_fin": 27.02,
+   "d": "{'replique': 6, 'texte': \"[panique] Allô ? Putain, ça bug de fou. Je t'entends pas du tout, là.\"}",
    "objet": "telephone"
   },
   {
    "p": "envoyee",
-   "t": "Ouais, ok, nickel. Bah, tu l'appelles, je me mets dans le couloir, tu me fais signe pour le top.",
-   "_deb": 14.26,
-   "_fin": 16.94,
-   "d": "['[excited]', \"Ouais, ok, nickel. Bah, tu l'appelles, je me mets dans le couloir, tu me fais signe pour le top.\"]",
+   "t": "{'replique': 7, 'texte': \"Et là, c'est mieux, là ?\"}",
+   "_deb": 27.62,
+   "_fin": 29.38,
+   "d": "{'replique': 7, 'texte': \"[sceptique] Et là, c'est mieux, là ?\"}",
    "objet": "telephone"
   },
   {
    "p": "presentateur",
-   "t": "Ok, trop bien, merci.",
-   "_deb": 17.06,
-   "_fin": 18.1,
-   "d": "['[relieved]', 'Ok, trop bien, merci.']",
+   "t": "{'replique': 8, 'texte': 'Tu sais quoi ? Au pire, envoie-le-moi en message.'}",
+   "_deb": 31.4,
+   "_fin": 34.46,
+   "d": "{'replique': 8, 'texte': '[idee] Tu sais quoi ? Au pire, envoie-le-moi en message.'}",
    "objet": "telephone"
   },
   {
    "p": "presentateur",
-   "t": "Ouais, allô, ça va? Ouais, c'était pour te dire, je pense que ce soir, je pourrais pas venir au final.",
-   "_deb": 23.06,
-   "_fin": 27.26,
-   "d": "['[lying]', \"Ouais, allô, ça va? Ouais, c'était pour te dire, je pense que ce soir, je pourrais pas venir au final.\"]",
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Ouais, je sais, non, mais vraiment, je pourrais pas venir.",
-   "_deb": 27.74,
-   "_fin": 29.28,
-   "d": "['[insistent]', 'Ouais, je sais, non, mais vraiment, je pourrais pas venir.']",
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Mais en fait, je me suis embrouillé avec ma femme.",
-   "_deb": 29.22,
-   "_fin": 30.52,
-   "d": "['[whispering]', 'Mais en fait, je me suis embrouillé avec ma femme.']",
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Et puis, c'est que... C'est une embrouille un peu coûteuse.",
-   "_deb": 30.62,
-   "_fin": 34.92,
-   "d": "['[nervous]', \"Et puis, c'est que... C'est une embrouille un peu coûteuse.\"]",
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Je vais raccrocher parce qu'on ne s'entend plus.",
-   "_deb": 35.08,
-   "_fin": 39.7,
-   "d": "['[serious]', \"Je vais raccrocher parce qu'on ne s'entend plus.\"]",
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Allez, ciao. Encore désolé.",
-   "_deb": 40.56,
-   "_fin": 41.68,
-   "d": "['[goodbye]', 'Allez, ciao. Encore désolé.']",
+   "t": "{'replique': 9, 'texte': \"Et comme ça, c'est fait, parce que je t'entends plus du tout, là.\"}",
+   "_deb": 34.76,
+   "_fin": 37.06,
+   "d": "{'replique': 9, 'texte': \"[annoyed] Et comme ça, c'est fait, parce que je t'entends plus du tout, là.\"}",
    "objet": "telephone"
   },
   {
    "p": "envoyee",
-   "t": "Ciao, bis.",
-   "_deb": 41.68,
-   "_fin": 42.2,
-   "d": "['[goodbye]', 'Ciao, bis.']",
+   "t": "{'replique': 10, 'texte': \"Bon, ok, d'accord, je te l'envoie, c'est bon.\"}",
+   "_deb": 37.5,
+   "_fin": 39.42,
+   "d": "{'replique': 10, 'texte': \"[neutre] Bon, ok, d'accord, je te l'envoie, c'est bon.\"}",
    "objet": "telephone"
   },
   {
-   "p": "envoyee",
-   "t": "Nickel, merci.",
-   "_deb": 44.24,
-   "_fin": 44.94,
-   "d": "['[relieved]', 'Nickel, merci.']",
-   "objet": "telephone"
+   "p": "invite",
+   "t": "01 -02 -2025?",
+   "_deb": 47.66,
+   "_fin": 49.68,
+   "objet": "tablette"
   },
   {
-   "p": "envoyee",
-   "t": "Par contre, dis-moi, à force, tes collègues ne vont pas me prendre pour une connasse?",
-   "_deb": 45.9,
-   "_fin": 48.94,
-   "d": "['[worried]', 'Par contre, dis-moi, à force, tes collègues ne vont pas me prendre pour une connasse?']",
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Mais non!",
-   "_deb": 49.62,
-   "_fin": 50.44,
-   "d": "['[reassuring]', 'Mais non!']",
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Sous -titrage ST' 501",
-   "_deb": 59.22,
-   "_fin": 60.0,
+   "p": "invite",
+   "t": "{'replique': 12, 'texte': \"On s'est rencontrés en 2025 ? Mais j'ai aucun souvenir !\"}",
+   "_deb": 51.71,
+   "_fin": 56.75,
+   "d": "{'replique': 12, 'texte': \"[choc] On s'est rencontrés en 2025 ? Mais j'ai aucun souvenir !\"}",
    "chute": true,
    "objet": "telephone"
   }
  ],
  "bandeau": [],
  "gag": null,
- "legende": "Un homme et une femme complice inventent une excuse pour éviter une soirée entre amis.",
+ "legende": "Deux amis tentent désespérément de communiquer malgré les interférences.",
  "hashtags": [
   "petitsdramas",
-  "flemme",
-  "excuses",
-  "amitie",
-  "cuisine",
-  "humour",
-  "complicite"
+  "bugtemporel",
+  "connexionmauvaise",
+  "povtech",
+  "humourgeek",
+  "amisenligne",
+  "drametelephonique"
  ],
  "sources": [
-  "https://www.tiktok.com/@vignianimation/video/7678042028785143073"
+  "https://www.tiktok.com/@yan_animation0/video/7672450890929851681"
  ],
  "decoupage": [
   {
@@ -201,43 +135,35 @@
    "repliques": [
     0,
     1,
-    3,
-    5,
-    7,
-    9,
-    10,
-    11,
-    12,
-    13,
-    14,
-    15,
-    19,
-    20
+    4,
+    6,
+    8,
+    9
    ],
    "lieu": "",
    "son": "",
    "duree": 0,
-   "decor": "cuisine moderne avec un plan de travail en marbre, une casserole en inox, une bouteille de vin rouge vide, un téléphone portable sur le comptoir, une plante ver"
+   "decor": "bureau en bois clair, ordinateur portable ouvert affichant un écran de connexion, clavier mécanique, téléphone portable sur la table, fond beige avec une fenêtr"
   },
   {
    "scene": "2",
    "repliques": [
     2,
-    4,
-    6,
-    8,
-    16,
-    17,
-    18
+    3,
+    5,
+    7,
+    10,
+    11,
+    12
    ],
    "lieu": "",
    "son": "",
    "duree": 0,
-   "decor": "couloir avec un mur bleu clair, une porte entrouverte donnant sur la cuisine, des traces de pas sur le sol et une lumière tamisée."
+   "decor": "bureau avec fond neutre, chaise ergonomique, étagère avec des livres, écran d'ordinateur allumé"
   }
  ],
  "studio": {
-  "moment": "soir",
+  "moment": "jour",
   "lieux": [
    "rue",
    "salon"
@@ -245,44 +171,37 @@
   "costumes": {
    "presentateur": {
     "haut": "tshirt",
-    "c_haut": "bleu marine",
+    "c_haut": "bleu",
     "motif": "uni",
     "bas": "jean",
     "chaussures": "baskets",
     "details": [
-     "barbe_courte",
-     "moustache"
-    ],
-    "chapeau": null,
-    "cheveux": "court",
-    "c_cheveux": "brun"
+     "stylos",
+     "montre",
+     "barbe_courte"
+    ]
    },
-   "envoyee": {
+   "invite": {
     "haut": "chemise",
-    "c_haut": "rouge",
-    "motif": "uni",
+    "c_haut": "blanc",
+    "motif": "rayures",
     "bas": "pantalon",
     "chaussures": "ville",
     "details": [
      "lunettes_vue",
-     "bracelets"
-    ],
-    "chapeau": null,
-    "cheveux": "long",
-    "c_cheveux": "châtain"
+     "bracelet"
+    ]
    },
-   "invite": {
+   "envoyee": {
     "haut": "pull",
-    "c_haut": "vert",
+    "c_haut": "rouge",
     "motif": "uni",
-    "bas": "pantalon",
-    "chaussures": "baskets",
+    "bas": "jupe",
+    "chaussures": "ballerines",
     "details": [
+     "boucles_oreilles",
      "sac_bandouliere"
-    ],
-    "chapeau": null,
-    "cheveux": "boucles",
-    "c_cheveux": "blond"
+    ]
    }
   },
   "personnages": [
@@ -290,203 +209,162 @@
     "genre": "h",
     "age": 35,
     "taille": 1,
-    "corpulence": 0.8,
-    "cheveux": "court",
+    "corpulence": 0.7,
+    "cheveux": "court_texture",
+    "c_cheveux": "brun",
     "barbe": "trois_jours"
    },
    {
     "genre": "f",
-    "age": 32,
-    "taille": 1,
+    "age": 30,
+    "taille": 0.9,
     "corpulence": 0.6,
     "cheveux": "long",
+    "c_cheveux": "blond",
     "barbe": "rien"
    },
    {
     "genre": "f",
     "age": 28,
     "taille": 0.9,
-    "corpulence": 0.7,
-    "cheveux": "boucles",
+    "corpulence": 0.6,
+    "cheveux": "ondulé",
+    "c_cheveux": "châtain",
     "barbe": "rien"
    }
   ],
-  "gags": [
-   "Ménage = Synonyme de galère",
-   "Équipe = Synonyme de complicité",
-   "Flemme = Sport olympique"
+  "lieux_separes": {},
+  "figurants": [
+   {
+    "avec": "presentateur",
+    "description": "ordinateur portable avec un écran affichant un bug",
+    "genre": "aucun",
+    "age": 0,
+    "geste": "affichage",
+    "haut": "aucun",
+    "c_haut": "aucun",
+    "bas": "aucun",
+    "chapeau": "aucun",
+    "details": []
+   }
   ],
-  "cadence": "rapide",
+  "gags": [
+   "Bug temporel détecté : 2025",
+   "Mot de passe : 01-02-2025 (ou pas ?)",
+   "Connexion instable : Veuillez réessayer dans 10 ans"
+  ],
   "ambiances": [
    "neon"
   ],
+  "cadence": "rapide",
   "plans": [
    {
     "replique": 0,
     "plan": "moyen",
     "mouvement": "fixe",
-    "geste": "gratte_tete",
-    "reaction": "aucune"
+    "geste": "telephone",
+    "reaction": "neutre"
    },
    {
     "replique": 1,
     "plan": "serre",
     "mouvement": "fixe",
-    "geste": "mains_hanches",
-    "reaction": "regard_camera"
+    "geste": "explique",
+    "reaction": "gratte_tete"
    },
    {
     "replique": 2,
-    "plan": "moyen",
-    "mouvement": "epaule",
-    "geste": "bras_ouverts",
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "pointe_g",
     "reaction": "sceptique"
    },
    {
     "replique": 3,
-    "plan": "large",
-    "mouvement": "zoom_choc",
-    "geste": "pointe_d",
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "chuchote",
     "reaction": "choc"
    },
    {
     "replique": 4,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "pointe_g",
-    "reaction": "gene"
+    "plan": "tres_serre",
+    "mouvement": "zoom_choc",
+    "geste": "facepalm",
+    "reaction": "panique"
    },
    {
     "replique": 5,
-    "plan": "moyen",
+    "plan": "serre",
     "mouvement": "fixe",
-    "geste": "haussement",
-    "reaction": "aucune"
+    "geste": "telephone",
+    "reaction": "confused"
    },
    {
     "replique": 6,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "gratte_tete",
-    "reaction": "soupir"
+    "plan": "moyen",
+    "mouvement": "recul",
+    "geste": "desespoir",
+    "reaction": "colere"
    },
    {
     "replique": 7,
-    "plan": "moyen",
-    "mouvement": "epaule",
+    "plan": "serre",
+    "mouvement": "fixe",
     "geste": "pointe_d",
-    "reaction": "joie"
+    "reaction": "sceptique"
    },
    {
     "replique": 8,
-    "plan": "large",
-    "mouvement": "travelling",
-    "geste": "bras_ouverts",
-    "reaction": "choc"
+    "plan": "moyen",
+    "mouvement": "fixe",
+    "geste": "idee",
+    "reaction": "neutre"
    },
    {
     "replique": 9,
     "plan": "serre",
     "mouvement": "fixe",
-    "geste": "pouce",
-    "reaction": "aucune"
+    "geste": "poches",
+    "reaction": "annoyed"
    },
    {
     "replique": 10,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "telephone",
-    "reaction": "aucune"
-   },
-   {
-    "replique": 11,
-    "plan": "moyen",
-    "mouvement": "fixe",
-    "geste": "insiste",
-    "reaction": "regard_camera"
-   },
-   {
-    "replique": 12,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "chuchote",
-    "reaction": "aucune"
-   },
-   {
-    "replique": 13,
     "plan": "large",
-    "mouvement": "zoom_choc",
-    "geste": "pointe_d",
-    "reaction": "choc"
-   },
-   {
-    "replique": 14,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "serious",
-    "reaction": "soupir"
-   },
-   {
-    "replique": 15,
-    "plan": "moyen",
-    "mouvement": "epaule",
-    "geste": "facepalm",
-    "reaction": "aucune"
-   },
-   {
-    "replique": 16,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "goodbye",
-    "reaction": "aucune"
-   },
-   {
-    "replique": 17,
-    "plan": "moyen",
     "mouvement": "fixe",
     "geste": "bras_ouverts",
     "reaction": "joie"
    },
    {
-    "replique": 18,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "gratte_tete",
-    "reaction": "sceptique"
+    "replique": 11,
+    "plan": "tres_serre",
+    "mouvement": "zoom_choc",
+    "geste": "choc",
+    "reaction": "choc"
    },
    {
-    "replique": 19,
-    "plan": "large",
-    "mouvement": "zoom_choc",
-    "geste": "reassuring",
-    "reaction": "choc"
+    "replique": 12,
+    "reaction": "sceptique"
    }
   ],
   "objets": [
    {
-    "replique": 0,
+    "replique": 1,
     "objet": "telephone"
    },
    {
     "replique": 2,
-    "objet": "telephone"
+    "objet": "ordinateur"
    },
    {
-    "replique": 7,
-    "objet": "telephone"
-   },
-   {
-    "replique": 10,
-    "objet": "telephone"
-   },
-   {
-    "replique": 12,
-    "objet": "telephone"
+    "replique": 11,
+    "objet": "tablette"
    }
   ],
   "decors_vus": {
-   "presentateur": "cuisine moderne avec un plan de travail en marbre, une casserole en inox, une bouteille de vin rouge vide, un téléphone portable sur le comptoir, une plante verte et des étagères remplies de vaisselle colorée, lumière artificielle douce.",
-   "envoyee": "couloir avec un mur bleu clair, une porte entrouverte donnant sur la cuisine, des traces de pas sur le sol et une lumière tamisée."
+   "presentateur": "bureau en bois clair, ordinateur portable ouvert affichant un écran de connexion, clavier mécanique, téléphone portable sur la table, fond beige avec une fenêtre",
+   "invite": "bureau en bois clair, écran d'ordinateur affichant un message bizarre, fond violet, clavier et souris",
+   "envoyee": "bureau avec fond neutre, chaise ergonomique, étagère avec des livres, écran d'ordinateur allumé"
   },
   "lieux_de": {
    "presentateur": "rue",
@@ -494,197 +372,287 @@
   }
  },
  "doublage": {
-  "piste": "/tmp/tmp8vi_u9hg/piste.wav",
-  "duree": 60.02,
-  "source": "https://www.tiktok.com/@vignianimation/video/7678042028785143073",
-  "auteur": "vignianimation",
-  "contexte": "Deux personnes discutent dans une cuisine. Le presentateur, un homme stressé, essaie de se soustraire à une soirée avec ses amis en prétendant avoir un problème avec sa femme. L'envoyee, une femme complice, l'aide à trouver une excuse pour éviter la soirée.",
+  "piste": "/tmp/tmp2krgrbqn/piste.wav",
+  "duree": 60.58,
+  "source": "https://www.tiktok.com/@yan_animation0/video/7672450890929851681",
+  "auteur": "yan_animation0",
+  "contexte": "Deux amis discutent par téléphone, mais la connexion est très mauvaise. L'un demande un mot de passe pour accéder à un ordinateur, tandis que l'autre tente de le lui communiquer malgré les interférences.",
   "evenements": [],
   "visuel": {
    "gestes": [
     [
-     30.0,
-     0.25,
-     0.68
+     12.53,
+     0.36,
+     0.34
     ],
     [
-     47.0,
-     0.58,
+     13.53,
+     0.49,
+     0.71
+    ],
+    [
+     14.53,
+     0.49,
+     0.73
+    ],
+    [
+     16.03,
+     0.34,
+     0.49
+    ],
+    [
+     18.54,
+     0.36,
      1.0
     ],
     [
-     53.0,
-     0.58,
-     0.52
+     21.54,
+     0.49,
+     0.45
     ],
     [
-     56.0,
-     0.26,
-     1.0
+     22.55,
+     0.49,
+     0.46
     ],
     [
-     57.0,
-     0.26,
-     1.0
+     24.05,
+     0.35,
+     0.45
     ],
     [
-     58.0,
-     0.27,
-     1.0
+     25.05,
+     0.35,
+     0.45
     ],
     [
-     59.0,
-     0.27,
-     1.0
+     26.05,
+     0.35,
+     0.45
+    ],
+    [
+     27.06,
+     0.34,
+     0.45
+    ],
+    [
+     28.06,
+     0.49,
+     0.49
+    ],
+    [
+     29.06,
+     0.49,
+     0.5
+    ],
+    [
+     37.58,
+     0.49,
+     0.72
+    ],
+    [
+     38.58,
+     0.49,
+     0.73
+    ],
+    [
+     39.58,
+     0.49,
+     0.72
+    ],
+    [
+     41.08,
+     0.35,
+     0.66
+    ],
+    [
+     42.09,
+     0.36,
+     0.65
+    ],
+    [
+     43.09,
+     0.35,
+     0.49
+    ],
+    [
+     55.61,
+     0.35,
+     0.57
+    ],
+    [
+     56.62,
+     0.36,
+     0.57
+    ],
+    [
+     57.62,
+     0.35,
+     0.57
+    ],
+    [
+     58.62,
+     0.35,
+     0.57
+    ],
+    [
+     59.62,
+     0.34,
+     0.58
     ]
    ],
-   "duree": 60.0,
+   "duree": 60.6,
    "nb_plans": 18,
-   "duree_plan": 3.33,
+   "duree_plan": 3.37,
    "coupes": [
-    2.0,
-    2.5,
-    4.0,
-    8.5,
-    9.5,
-    10.5,
-    13.0,
-    14.5,
-    17.0,
-    18.5,
-    19.0,
-    44.0,
-    44.5,
-    45.0,
-    49.0,
-    50.5,
-    54.5
+    3.01,
+    4.51,
+    6.51,
+    11.02,
+    13.03,
+    15.53,
+    16.53,
+    18.04,
+    21.04,
+    23.55,
+    27.56,
+    30.06,
+    34.57,
+    40.58,
+    44.59,
+    47.1,
+    50.6
    ],
    "plans": {
     "tres_serre": 0.0,
-    "serre": 0.0,
-    "moyen": 0.558,
-    "large": 0.442
+    "serre": 0.521,
+    "moyen": 0.347,
+    "large": 0.132
    },
    "camera": {
-    "fixe": 0.902,
-    "avance": 0.078,
-    "recul": 0.0,
+    "fixe": 0.981,
+    "avance": 0.0,
+    "recul": 0.019,
     "travelling": 0.0,
-    "epaule": 0.02
+    "epaule": 0.0
    },
    "nb_personnes": 1,
    "personnes": [
     {
      "place": "gauche",
-     "presence": 0.3,
+     "presence": 0.521,
      "habit": [
-      226,
-      152,
-      35
+      242,
+      188,
+      104
      ],
      "cheveux": [
-      27,
-      27,
-      27
+      9,
+      7,
+      9
      ],
      "sourire": 0.0,
-     "taille": 0.113,
-     "tete_penchee": 0.5,
-     "regard_cote": 0.083
+     "taille": 0.181,
+     "tete_penchee": 4.3,
+     "regard_cote": 0.159
     },
     {
      "place": "centre",
-     "presence": 0.258,
+     "presence": 0.347,
      "habit": [
-      184,
-      28,
-      146
+      153,
+      137,
+      147
      ],
      "cheveux": [
-      246,
-      246,
-      247
+      48,
+      30,
+      28
      ],
      "sourire": 0.0,
-     "taille": 0.111,
-     "tete_penchee": 3.0,
-     "regard_cote": 1.0
+     "taille": 0.12,
+     "tete_penchee": 0.7,
+     "regard_cote": 0.0
     }
    ],
    "visages": true,
    "sourires": 0.0,
-   "energie": 0.219,
+   "energie": 0.151,
    "mur": [
-    208,
-    160,
-    97
+    189,
+    175,
+    168
    ],
    "palette": [
     [
-     139,
-     203,
-     204,
-     0.262
+     196,
+     187,
+     177,
+     0.427
     ],
     [
-     249,
-     239,
-     208,
-     0.231
+     153,
+     141,
+     159,
+     0.152
     ],
     [
-     230,
-     183,
-     111,
-     0.194
+     112,
+     89,
+     90,
+     0.116
     ],
     [
-     28,
-     21,
-     15,
-     0.135
+     234,
+     173,
+     101,
+     0.114
     ],
     [
-     181,
-     121,
-     67,
-     0.102
+     32,
+     23,
+     27,
+     0.106
     ],
     [
-     96,
-     116,
-     111,
-     0.076
+     245,
+     242,
+     247,
+     0.085
     ]
    ],
    "lumiere": {
-    "luminosite": 191.1,
-    "chaleur": 27.0,
-    "saturation": 97.4
+    "luminosite": 172.5,
+    "chaleur": 25.5,
+    "saturation": 49.8
    },
    "moment": "jour"
   },
   "audio": {
-   "duree": 60.0,
-   "nb_voix": 2,
+   "duree": 60.6,
+   "nb_voix": 3,
    "voix": [
     {
-     "hz": 128,
-     "genre": "h",
-     "part": 0.72
+     "hz": 182,
+     "genre": "?",
+     "part": 0.22
     },
     {
-     "hz": 225,
+     "hz": 183,
+     "genre": "?",
+     "part": 0.48
+    },
+    {
+     "hz": 259,
      "genre": "f",
-     "part": 0.28
+     "part": 0.3
     }
    ],
-   "debit": 4.7,
-   "blanc_moyen": 1.16,
-   "coupes": 1,
-   "dynamique_db": 24.8,
-   "cris": 0.012,
+   "debit": 4.29,
+   "blanc_moyen": 2.07,
+   "coupes": 0,
+   "dynamique_db": 34.2,
+   "cris": 0.033,
    "musique": null,
    "impacts": 0,
    "impacts_10s": 0.0,
@@ -693,17 +661,17 @@
    "sur_vanne": 0,
    "evenements": {},
    "emotions": {
-    "'[neutral": 2,
-    "'[relieved": 2,
-    "'[goodbye": 2,
-    "'[annoyed": 1,
-    "'[blase": 1,
-    "'[encouraging": 1,
-    "'[panicked": 1,
-    "'[sarcastic": 1
+    "neutre": 3,
+    "annoyed": 2,
+    "sceptique": 2,
+    "choc": 2,
+    "confused": 1,
+    "sarcastic": 1,
+    "panique": 1,
+    "idee": 1
    }
   },
-  "video_origine": "/tmp/tmp8vi_u9hg/src.mp4"
+  "video_origine": "/tmp/tmp2krgrbqn/src.mp4"
  },
  "fiche": {
   "note": 0,
@@ -721,75 +689,62 @@
      6,
      7,
      8,
-     9
+     9,
+     10
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "cuisine moderne avec un plan de travail en marbre, une casserole en inox, une bouteille de vin rouge, un téléphone portable, une plante verte et des étagères re",
-    "titre": "Scène 1 : La discussion dans la cuisine"
+    "decor": "bureau avec ordinateur portable ouvert, clavier, téléphone portable sur la table, fond beige clair avec une fenêtre",
+    "titre": "L'Appel Téléphonique Catastrophique"
    },
    {
     "scene": "2",
     "repliques": [
-     10,
      11,
-     12,
-     13,
-     14,
-     15,
-     16,
-     17,
-     18,
-     19
+     12
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "cuisine avec un téléphone portable, une tasse de café, une bouteille vide et une plante verte, vue depuis le couloir.",
-    "titre": "Scène 2 : L'appel téléphonique et la complicité"
+    "decor": "bureau avec écran d'ordinateur affichant un message bizarre, fond violet, clavier et souris",
+    "titre": "Le Bug du Temps"
    }
   ]
  },
  "_monte": true,
  "_separes": true,
  "_voix_hz": {
-  "presentateur": 133,
-  "envoyee": 218
+  "presentateur": 182,
+  "invite": 174,
+  "envoyee": 259
  },
  "_voix_genre": {
   "presentateur": "h",
+  "invite": "h",
   "envoyee": "f"
  },
  "realisation": {
-  "moment": "soir",
+  "moment": "jour",
   "lieux": [
    "rue",
    "salon"
   ],
   "gags": [
-   "Ménage = Synonyme de galère",
-   "Équipe = Synonyme de complicité",
-   "Flemme = Sport olympique"
+   "Bug temporel détecté : 2025",
+   "Mot de passe : 01-02-2025 (ou pas ?)",
+   "Connexion instable : Veuillez réessayer dans 10 ans"
   ],
   "ambiances": [
-   "neon",
-   "poussiere"
+   "neon"
   ],
   "source": "auteur+image",
   "tenues": {
    "presentateur": "tshirt",
-   "envoyee": "chemise"
+   "envoyee": "pull",
+   "invite": "chemise"
   },
   "plans": [
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
    "large/fixe",
    "large/fixe",
    "large/fixe",
