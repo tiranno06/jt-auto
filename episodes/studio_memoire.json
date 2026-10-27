@@ -4029,5 +4029,38 @@
    "son": true
   },
   "cadence": "rapide"
+ },
+ {
+  "moment": "jour",
+  "lieux": [
+   "salon"
+  ],
+  "source": "robot+image",
+  "duree": 76.0,
+  "plans": {
+   "large": 25
+  },
+  "mouvements": {
+   "fixe": 25
+  },
+  "costumes": {
+   "envoyee": "pull",
+   "presentateur": "tshirt"
+  },
+  "figurants": 0,
+  "ambiances": [],
+  "controle": "Humoriste 8.6/10 : 71.7 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 6.6/10 : montage trop lent : 0.1 plans toutes les 10 s (il en faudrait ~2.8); 0.0 s pas assez de plans ",
+  "fichier": "2026-10-27_02h55_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": true,
+   "tiers": true,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": true,
+   "reflets": true,
+   "son": true
+  },
+  "cadence": null
  }
 ]

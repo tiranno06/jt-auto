@@ -1,133 +1,179 @@
 {
- "titre": "BUG ET CONFUSION",
- "sujet": "BUG ET CONFUSION",
- "ecran": "BUG ET CONFUSI",
+ "titre": "CELLE -J 'AI PÉTÉ LÀ, VOUS DEU",
+ "sujet": "CELLE -J 'AI PÉTÉ LÀ, VOUS DEU",
+ "ecran": "CELLE -J 'AI P",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "POV : Quand ton téléphone te joue des tours",
- "question": "Comment gérer un bug de connexion qui vous fait remonter le temps ?",
+ "titre_accroche": "",
+ "question": "",
  "running_gag": "",
  "verite": "",
  "repliques": [
   {
-   "p": "presentateur",
-   "t": "{'replique': 0, 'texte': 'Ouais, dis-moi, je vais prendre des billets pour la Grèce, là.'}",
+   "p": "envoyee",
+   "t": "Celle -J 'ai pété là, vous deux là, je vais vous demander de la fermer pendant 60 secondes, genre vraiment vous parlez pas pendant une minute, fermez -la,",
    "_deb": 0.0,
-   "_fin": 2.84,
-   "d": "{'replique': 0, 'texte': '[neutre] Ouais, dis-moi, je vais prendre des billets pour la Grèce, là.'}",
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "{'replique': 1, 'texte': \"J'ai pris ton ordi, il me faudrait juste ton mot de passe, s'il te plaît.\"}",
-   "_deb": 3.12,
-   "_fin": 5.44,
-   "d": "{'replique': 1, 'texte': \"[neutre] J'ai pris ton ordi, il me faudrait juste ton mot de passe, s'il te plaît.\"}",
-   "objet": "telephone"
+   "_fin": 5.62
   },
   {
    "p": "envoyee",
-   "t": "Bah écoute, c 'est facile, Anthony. Le mot de passe, c 'est le jour de notre...",
-   "_deb": 6.74,
-   "_fin": 10.2,
-   "objet": "telephone"
-  },
-  {
-   "p": "envoyee",
-   "t": "C 'est bon?",
-   "_deb": 15.03,
-   "_fin": 16.17,
-   "objet": "telephone"
+   "t": "d 'accord, ok?",
+   "_deb": 5.62,
+   "_fin": 6.78
   },
   {
    "p": "presentateur",
-   "t": "{'replique': 4, 'texte': \"Allô ? Je t'entends super mal, là.\"}",
-   "_deb": 18.32,
-   "_fin": 20.48,
-   "d": "{'replique': 4, 'texte': \"[confused] Allô ? Je t'entends super mal, là.\"}",
-   "objet": "telephone"
+   "t": "D 'accord Je me tais complètement, je l 'en...",
+   "_deb": 7.14,
+   "_fin": 9.88
   },
   {
    "p": "envoyee",
-   "t": "{'replique': 5, 'texte': \"Tu m'entends, là ?\"}",
-   "_deb": 21.6,
-   "_fin": 22.98,
-   "d": "{'replique': 5, 'texte': \"[sarcastic] Tu m'entends, là ?\"}",
-   "objet": "telephone"
+   "t": "Chut, ferme -la!",
+   "_deb": 9.94,
+   "_fin": 11.7
   },
   {
    "p": "presentateur",
-   "t": "{'replique': 6, 'texte': \"Allô ? Putain, ça bug de fou. Je t'entends pas du tout, là.\"}",
-   "_deb": 24.5,
-   "_fin": 27.02,
-   "d": "{'replique': 6, 'texte': \"[panique] Allô ? Putain, ça bug de fou. Je t'entends pas du tout, là.\"}",
-   "objet": "telephone"
+   "t": "Je me tais...",
+   "_deb": 12.16,
+   "_fin": 12.96
   },
   {
    "p": "envoyee",
-   "t": "{'replique': 7, 'texte': \"Et là, c'est mieux, là ?\"}",
-   "_deb": 27.62,
-   "_fin": 29.38,
-   "d": "{'replique': 7, 'texte': \"[sceptique] Et là, c'est mieux, là ?\"}",
-   "objet": "telephone"
+   "t": "Je t 'ai dit de la... Mais putain, mais ferme -la!",
+   "_deb": 13.02,
+   "_fin": 15.26
   },
   {
    "p": "presentateur",
-   "t": "{'replique': 8, 'texte': 'Tu sais quoi ? Au pire, envoie-le-moi en message.'}",
-   "_deb": 31.4,
-   "_fin": 34.46,
-   "d": "{'replique': 8, 'texte': '[idee] Tu sais quoi ? Au pire, envoie-le-moi en message.'}",
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "{'replique': 9, 'texte': \"Et comme ça, c'est fait, parce que je t'entends plus du tout, là.\"}",
-   "_deb": 34.76,
-   "_fin": 37.06,
-   "d": "{'replique': 9, 'texte': \"[annoyed] Et comme ça, c'est fait, parce que je t'entends plus du tout, là.\"}",
-   "objet": "telephone"
+   "t": "Oups, ok, compris...",
+   "_deb": 18.58,
+   "_fin": 21.46
   },
   {
    "p": "envoyee",
-   "t": "{'replique': 10, 'texte': \"Bon, ok, d'accord, je te l'envoie, c'est bon.\"}",
-   "_deb": 37.5,
-   "_fin": 39.42,
-   "d": "{'replique': 10, 'texte': \"[neutre] Bon, ok, d'accord, je te l'envoie, c'est bon.\"}",
-   "objet": "telephone"
+   "t": "Les gars, je vous ai dit de la fermer, c 'est comment là?",
+   "_deb": 21.62,
+   "_fin": 24.72
   },
   {
-   "p": "invite",
-   "t": "01 -02 -2025?",
-   "_deb": 47.66,
-   "_fin": 49.68,
-   "objet": "tablette"
+   "p": "envoyee",
+   "t": "Tu comprends pas quoi en vrai? Vous comprenez pas quoi?",
+   "_deb": 24.72,
+   "_fin": 26.92
   },
   {
-   "p": "invite",
-   "t": "{'replique': 12, 'texte': \"On s'est rencontrés en 2025 ? Mais j'ai aucun souvenir !\"}",
-   "_deb": 51.71,
-   "_fin": 56.75,
-   "d": "{'replique': 12, 'texte': \"[choc] On s'est rencontrés en 2025 ? Mais j'ai aucun souvenir !\"}",
-   "chute": true,
-   "objet": "telephone"
+   "p": "presentateur",
+   "t": "Je me sens très bien... Allez, c 'est bon, j 'écoute",
+   "_deb": 27.64,
+   "_fin": 31.0
+  },
+  {
+   "p": "envoyee",
+   "t": "Oh, oh, oh, fermez vos gueules, en vrai, je comprends pas, là",
+   "_deb": 31.68,
+   "_fin": 34.5
+  },
+  {
+   "p": "presentateur",
+   "t": "Je suis vraiment désolée si j 'ai cassé l 'ambiance",
+   "_deb": 35.82,
+   "_fin": 38.02
+  },
+  {
+   "p": "envoyee",
+   "t": "Mais tu caches pas l 'ambiance, je t 'ai dit de la fermer Arrête de me répondre, arrête de me répondre, ferme -la Je comprends pas, enfin, vous",
+   "_deb": 38.34,
+   "_fin": 43.3
+  },
+  {
+   "p": "envoyee",
+   "t": "comprenez pas quoi, en fait C 'est pas moi qui comprend pas, c 'est vous",
+   "_deb": 43.3,
+   "_fin": 45.2
+  },
+  {
+   "p": "presentateur",
+   "t": "Je ne dis plus rien",
+   "_deb": 46.4,
+   "_fin": 47.46
+  },
+  {
+   "p": "envoyee",
+   "t": "Wesh, je t 'ai dit, toi, toi, tu commences à me faire chier, toi",
+   "_deb": 47.62,
+   "_fin": 50.44
+  },
+  {
+   "p": "presentateur",
+   "t": "Je vais me taire Et je suis là pour m 'adapter Si tu veux qu 'on recommence",
+   "_deb": 51.56,
+   "_fin": 55.6
+  },
+  {
+   "p": "envoyee",
+   "t": "Je t 'ai dit de la fermer C",
+   "_deb": 55.8,
+   "_fin": 59.1
+  },
+  {
+   "p": "presentateur",
+   "t": "'est notre...",
+   "_deb": 59.1,
+   "_fin": 59.5
+  },
+  {
+   "p": "envoyee",
+   "t": "Oh là là! Fais pas sa gueule! C 'est dingue!",
+   "_deb": 59.58,
+   "_fin": 62.02
+  },
+  {
+   "p": "envoyee",
+   "t": "Fermez -la! Vous comprenez pas quoi? Je comprends pas là!",
+   "_deb": 62.06,
+   "_fin": 63.94
+  },
+  {
+   "p": "envoyee",
+   "t": "C 'est quoi là? C 'est quoi vos problèmes à bout d 'eux là?",
+   "_deb": 63.98,
+   "_fin": 66.38
+  },
+  {
+   "p": "presentateur",
+   "t": "Je suis vraiment désolé si je t 'ai resté... C 'est pas possible!",
+   "_deb": 66.72,
+   "_fin": 68.92
+  },
+  {
+   "p": "envoyee",
+   "t": "C 'est pas possible! C 'est pas possible! C 'est pas possible!",
+   "_deb": 68.92,
+   "_fin": 71.6
+  },
+  {
+   "p": "envoyee",
+   "t": "C 'est pas possible!",
+   "_deb": 71.74,
+   "_fin": 72.38,
+   "chute": true
   }
  ],
  "bandeau": [],
  "gag": null,
- "legende": "Deux amis tentent désespérément de communiquer malgré les interférences.",
+ "legende": "Celle -J 'ai pété là, vous deux là, je vais vous demander de la fermer pendant 60 secondes, genre vraiment vous parlez p",
  "hashtags": [
   "petitsdramas",
-  "bugtemporel",
-  "connexionmauvaise",
-  "povtech",
-  "humourgeek",
-  "amisenligne",
-  "drametelephonique"
+  "humour",
+  "doublage",
+  "pov"
  ],
  "sources": [
-  "https://www.tiktok.com/@yan_animation0/video/7672450890929851681"
+  "https://www.tiktok.com/@vignianimation/video/7687714049555008801"
  ],
  "decoupage": [
   {
@@ -135,524 +181,137 @@
    "repliques": [
     0,
     1,
-    4,
-    6,
-    8,
-    9
-   ],
-   "lieu": "",
-   "son": "",
-   "duree": 0,
-   "decor": "bureau en bois clair, ordinateur portable ouvert affichant un écran de connexion, clavier mécanique, téléphone portable sur la table, fond beige avec une fenêtr"
-  },
-  {
-   "scene": "2",
-   "repliques": [
     2,
     3,
+    4,
     5,
+    6,
     7,
+    8,
+    9,
     10,
     11,
-    12
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24
    ],
    "lieu": "",
    "son": "",
    "duree": 0,
-   "decor": "bureau avec fond neutre, chaise ergonomique, étagère avec des livres, écran d'ordinateur allumé"
+   "decor": ""
   }
  ],
- "studio": {
-  "moment": "jour",
-  "lieux": [
-   "rue",
-   "salon"
-  ],
-  "costumes": {
-   "presentateur": {
-    "haut": "tshirt",
-    "c_haut": "bleu",
-    "motif": "uni",
-    "bas": "jean",
-    "chaussures": "baskets",
-    "details": [
-     "stylos",
-     "montre",
-     "barbe_courte"
-    ]
-   },
-   "invite": {
-    "haut": "chemise",
-    "c_haut": "blanc",
-    "motif": "rayures",
-    "bas": "pantalon",
-    "chaussures": "ville",
-    "details": [
-     "lunettes_vue",
-     "bracelet"
-    ]
-   },
-   "envoyee": {
-    "haut": "pull",
-    "c_haut": "rouge",
-    "motif": "uni",
-    "bas": "jupe",
-    "chaussures": "ballerines",
-    "details": [
-     "boucles_oreilles",
-     "sac_bandouliere"
-    ]
-   }
-  },
-  "personnages": [
-   {
-    "genre": "h",
-    "age": 35,
-    "taille": 1,
-    "corpulence": 0.7,
-    "cheveux": "court_texture",
-    "c_cheveux": "brun",
-    "barbe": "trois_jours"
-   },
-   {
-    "genre": "f",
-    "age": 30,
-    "taille": 0.9,
-    "corpulence": 0.6,
-    "cheveux": "long",
-    "c_cheveux": "blond",
-    "barbe": "rien"
-   },
-   {
-    "genre": "f",
-    "age": 28,
-    "taille": 0.9,
-    "corpulence": 0.6,
-    "cheveux": "ondulé",
-    "c_cheveux": "châtain",
-    "barbe": "rien"
-   }
-  ],
-  "lieux_separes": {},
-  "figurants": [
-   {
-    "avec": "presentateur",
-    "description": "ordinateur portable avec un écran affichant un bug",
-    "genre": "aucun",
-    "age": 0,
-    "geste": "affichage",
-    "haut": "aucun",
-    "c_haut": "aucun",
-    "bas": "aucun",
-    "chapeau": "aucun",
-    "details": []
-   }
-  ],
-  "gags": [
-   "Bug temporel détecté : 2025",
-   "Mot de passe : 01-02-2025 (ou pas ?)",
-   "Connexion instable : Veuillez réessayer dans 10 ans"
-  ],
-  "ambiances": [
-   "neon"
-  ],
-  "cadence": "rapide",
-  "plans": [
-   {
-    "replique": 0,
-    "plan": "moyen",
-    "mouvement": "fixe",
-    "geste": "telephone",
-    "reaction": "neutre"
-   },
-   {
-    "replique": 1,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "explique",
-    "reaction": "gratte_tete"
-   },
-   {
-    "replique": 2,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "pointe_g",
-    "reaction": "sceptique"
-   },
-   {
-    "replique": 3,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "chuchote",
-    "reaction": "choc"
-   },
-   {
-    "replique": 4,
-    "plan": "tres_serre",
-    "mouvement": "zoom_choc",
-    "geste": "facepalm",
-    "reaction": "panique"
-   },
-   {
-    "replique": 5,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "telephone",
-    "reaction": "confused"
-   },
-   {
-    "replique": 6,
-    "plan": "moyen",
-    "mouvement": "recul",
-    "geste": "desespoir",
-    "reaction": "colere"
-   },
-   {
-    "replique": 7,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "pointe_d",
-    "reaction": "sceptique"
-   },
-   {
-    "replique": 8,
-    "plan": "moyen",
-    "mouvement": "fixe",
-    "geste": "idee",
-    "reaction": "neutre"
-   },
-   {
-    "replique": 9,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "poches",
-    "reaction": "annoyed"
-   },
-   {
-    "replique": 10,
-    "plan": "large",
-    "mouvement": "fixe",
-    "geste": "bras_ouverts",
-    "reaction": "joie"
-   },
-   {
-    "replique": 11,
-    "plan": "tres_serre",
-    "mouvement": "zoom_choc",
-    "geste": "choc",
-    "reaction": "choc"
-   },
-   {
-    "replique": 12,
-    "reaction": "sceptique"
-   }
-  ],
-  "objets": [
-   {
-    "replique": 1,
-    "objet": "telephone"
-   },
-   {
-    "replique": 2,
-    "objet": "ordinateur"
-   },
-   {
-    "replique": 11,
-    "objet": "tablette"
-   }
-  ],
-  "decors_vus": {
-   "presentateur": "bureau en bois clair, ordinateur portable ouvert affichant un écran de connexion, clavier mécanique, téléphone portable sur la table, fond beige avec une fenêtre",
-   "invite": "bureau en bois clair, écran d'ordinateur affichant un message bizarre, fond violet, clavier et souris",
-   "envoyee": "bureau avec fond neutre, chaise ergonomique, étagère avec des livres, écran d'ordinateur allumé"
-  },
-  "lieux_de": {
-   "presentateur": "rue",
-   "envoyee": "salon"
-  }
- },
  "doublage": {
-  "piste": "/tmp/tmp2krgrbqn/piste.wav",
-  "duree": 60.58,
-  "source": "https://www.tiktok.com/@yan_animation0/video/7672450890929851681",
-  "auteur": "yan_animation0",
-  "contexte": "Deux amis discutent par téléphone, mais la connexion est très mauvaise. L'un demande un mot de passe pour accéder à un ordinateur, tandis que l'autre tente de le lui communiquer malgré les interférences.",
+  "piste": "/tmp/tmpht2jx7wh/piste.wav",
+  "duree": 72.66,
+  "source": "https://www.tiktok.com/@vignianimation/video/7687714049555008801",
+  "auteur": "vignianimation",
+  "contexte": "",
   "evenements": [],
   "visuel": {
-   "gestes": [
-    [
-     12.53,
-     0.36,
-     0.34
-    ],
-    [
-     13.53,
-     0.49,
-     0.71
-    ],
-    [
-     14.53,
-     0.49,
-     0.73
-    ],
-    [
-     16.03,
-     0.34,
-     0.49
-    ],
-    [
-     18.54,
-     0.36,
-     1.0
-    ],
-    [
-     21.54,
-     0.49,
-     0.45
-    ],
-    [
-     22.55,
-     0.49,
-     0.46
-    ],
-    [
-     24.05,
-     0.35,
-     0.45
-    ],
-    [
-     25.05,
-     0.35,
-     0.45
-    ],
-    [
-     26.05,
-     0.35,
-     0.45
-    ],
-    [
-     27.06,
-     0.34,
-     0.45
-    ],
-    [
-     28.06,
-     0.49,
-     0.49
-    ],
-    [
-     29.06,
-     0.49,
-     0.5
-    ],
-    [
-     37.58,
-     0.49,
-     0.72
-    ],
-    [
-     38.58,
-     0.49,
-     0.73
-    ],
-    [
-     39.58,
-     0.49,
-     0.72
-    ],
-    [
-     41.08,
-     0.35,
-     0.66
-    ],
-    [
-     42.09,
-     0.36,
-     0.65
-    ],
-    [
-     43.09,
-     0.35,
-     0.49
-    ],
-    [
-     55.61,
-     0.35,
-     0.57
-    ],
-    [
-     56.62,
-     0.36,
-     0.57
-    ],
-    [
-     57.62,
-     0.35,
-     0.57
-    ],
-    [
-     58.62,
-     0.35,
-     0.57
-    ],
-    [
-     59.62,
-     0.34,
-     0.58
-    ]
-   ],
-   "duree": 60.6,
-   "nb_plans": 18,
-   "duree_plan": 3.37,
-   "coupes": [
-    3.01,
-    4.51,
-    6.51,
-    11.02,
-    13.03,
-    15.53,
-    16.53,
-    18.04,
-    21.04,
-    23.55,
-    27.56,
-    30.06,
-    34.57,
-    40.58,
-    44.59,
-    47.1,
-    50.6
-   ],
+   "gestes": [],
+   "duree": 73.0,
+   "nb_plans": 1,
+   "duree_plan": 73.0,
+   "coupes": [],
    "plans": {
     "tres_serre": 0.0,
-    "serre": 0.521,
-    "moyen": 0.347,
-    "large": 0.132
+    "serre": 0.0,
+    "moyen": 0.0,
+    "large": 1.0
    },
    "camera": {
-    "fixe": 0.981,
+    "fixe": 1.0,
     "avance": 0.0,
-    "recul": 0.019,
+    "recul": 0.0,
     "travelling": 0.0,
     "epaule": 0.0
    },
-   "nb_personnes": 1,
-   "personnes": [
-    {
-     "place": "gauche",
-     "presence": 0.521,
-     "habit": [
-      242,
-      188,
-      104
-     ],
-     "cheveux": [
-      9,
-      7,
-      9
-     ],
-     "sourire": 0.0,
-     "taille": 0.181,
-     "tete_penchee": 4.3,
-     "regard_cote": 0.159
-    },
-    {
-     "place": "centre",
-     "presence": 0.347,
-     "habit": [
-      153,
-      137,
-      147
-     ],
-     "cheveux": [
-      48,
-      30,
-      28
-     ],
-     "sourire": 0.0,
-     "taille": 0.12,
-     "tete_penchee": 0.7,
-     "regard_cote": 0.0
-    }
-   ],
-   "visages": true,
+   "nb_personnes": 0,
+   "personnes": [],
+   "visages": false,
    "sourires": 0.0,
-   "energie": 0.151,
+   "energie": 0.096,
    "mur": [
-    189,
-    175,
-    168
+    215,
+    153,
+    99
    ],
    "palette": [
     [
-     196,
-     187,
-     177,
-     0.427
+     217,
+     154,
+     98,
+     0.283
     ],
     [
-     153,
-     141,
-     159,
-     0.152
+     136,
+     195,
+     210,
+     0.221
     ],
     [
-     112,
-     89,
-     90,
-     0.116
+     96,
+     81,
+     76,
+     0.194
     ],
     [
-     234,
-     173,
-     101,
-     0.114
+     103,
+     133,
+     143,
+     0.193
     ],
     [
-     32,
-     23,
-     27,
-     0.106
+     20,
+     16,
+     16,
+     0.059
     ],
     [
-     245,
-     242,
-     247,
-     0.085
+     223,
+     237,
+     241,
+     0.05
     ]
    ],
    "lumiere": {
-    "luminosite": 172.5,
-    "chaleur": 25.5,
-    "saturation": 49.8
+    "luminosite": 171.2,
+    "chaleur": 13.5,
+    "saturation": 99.8
    },
    "moment": "jour"
   },
   "audio": {
-   "duree": 60.6,
-   "nb_voix": 3,
+   "duree": 72.7,
+   "nb_voix": 2,
    "voix": [
-    {
-     "hz": 182,
-     "genre": "?",
-     "part": 0.22
-    },
-    {
-     "hz": 183,
-     "genre": "?",
-     "part": 0.48
-    },
     {
      "hz": 259,
      "genre": "f",
-     "part": 0.3
+     "part": 0.68
+    },
+    {
+     "hz": 172,
+     "genre": "?",
+     "part": 0.32
     }
    ],
-   "debit": 4.29,
-   "blanc_moyen": 2.07,
-   "coupes": 0,
-   "dynamique_db": 34.2,
-   "cris": 0.033,
+   "debit": 4.35,
+   "blanc_moyen": 0.57,
+   "coupes": 2,
+   "dynamique_db": 14.7,
+   "cris": 0.047,
    "musique": null,
    "impacts": 0,
    "impacts_10s": 0.0,
@@ -660,18 +319,9 @@
    "aigus": 0,
    "sur_vanne": 0,
    "evenements": {},
-   "emotions": {
-    "neutre": 3,
-    "annoyed": 2,
-    "sceptique": 2,
-    "choc": 2,
-    "confused": 1,
-    "sarcastic": 1,
-    "panique": 1,
-    "idee": 1
-   }
+   "emotions": {}
   },
-  "video_origine": "/tmp/tmp2krgrbqn/src.mp4"
+  "video_origine": "/tmp/tmpht2jx7wh/src.mp4"
  },
  "fiche": {
   "note": 0,
@@ -690,61 +340,63 @@
      7,
      8,
      9,
-     10
-    ],
-    "lieu": "",
-    "son": "",
-    "duree": 0.0,
-    "decor": "bureau avec ordinateur portable ouvert, clavier, téléphone portable sur la table, fond beige clair avec une fenêtre",
-    "titre": "L'Appel Téléphonique Catastrophique"
-   },
-   {
-    "scene": "2",
-    "repliques": [
+     10,
      11,
-     12
+     12,
+     13,
+     14,
+     15,
+     16,
+     17,
+     18,
+     19,
+     20,
+     21,
+     22,
+     23,
+     24
     ],
     "lieu": "",
     "son": "",
-    "duree": 0.0,
-    "decor": "bureau avec écran d'ordinateur affichant un message bizarre, fond violet, clavier et souris",
-    "titre": "Le Bug du Temps"
+    "duree": 0,
+    "decor": ""
    }
   ]
  },
  "_monte": true,
- "_separes": true,
  "_voix_hz": {
-  "presentateur": 182,
-  "invite": 174,
-  "envoyee": 259
+  "envoyee": 256,
+  "presentateur": 171
  },
  "_voix_genre": {
-  "presentateur": "h",
-  "invite": "h",
-  "envoyee": "f"
+  "envoyee": "f",
+  "presentateur": "h"
  },
  "realisation": {
   "moment": "jour",
   "lieux": [
-   "rue",
    "salon"
   ],
-  "gags": [
-   "Bug temporel détecté : 2025",
-   "Mot de passe : 01-02-2025 (ou pas ?)",
-   "Connexion instable : Veuillez réessayer dans 10 ans"
-  ],
-  "ambiances": [
-   "neon"
-  ],
-  "source": "auteur+image",
+  "gags": [],
+  "ambiances": [],
+  "source": "robot+image",
   "tenues": {
-   "presentateur": "tshirt",
    "envoyee": "pull",
-   "invite": "chemise"
+   "presentateur": "tshirt"
   },
   "plans": [
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
    "large/fixe",
    "large/fixe",
    "large/fixe",
