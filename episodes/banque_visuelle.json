@@ -24669,5 +24669,268 @@
    ]
   },
   "video": "2026-10-27_02h55_emission.mp4"
+ },
+ {
+  "date": "2026-10-27",
+  "source": "https://www.tiktok.com/@charly.bse/video/7661267540756286753",
+  "auteur": "charly.bse",
+  "visuel": {
+   "gestes": [],
+   "duree": 62.5,
+   "nb_plans": 1,
+   "duree_plan": 62.5,
+   "coupes": [],
+   "plans": {
+    "tres_serre": 0.024,
+    "serre": 0.0,
+    "moyen": 0.0,
+    "large": 0.976
+   },
+   "camera": {
+    "fixe": 1.0,
+    "avance": 0.0,
+    "recul": 0.0,
+    "travelling": 0.0,
+    "epaule": 0.0
+   },
+   "nb_personnes": 1,
+   "personnes": [],
+   "visages": true,
+   "sourires": 0.0,
+   "energie": 0.099,
+   "mur": [
+    130,
+    172,
+    188
+   ],
+   "palette": [
+    [
+     130,
+     172,
+     189,
+     0.482
+    ],
+    [
+     246,
+     205,
+     164,
+     0.172
+    ],
+    [
+     74,
+     116,
+     147,
+     0.128
+    ],
+    [
+     6,
+     6,
+     9,
+     0.124
+    ],
+    [
+     120,
+     81,
+     61,
+     0.068
+    ],
+    [
+     2,
+     94,
+     189,
+     0.026
+    ]
+   ],
+   "lumiere": {
+    "luminosite": 166.5,
+    "chaleur": -23.9,
+    "saturation": 98.7
+   },
+   "moment": "jour"
+  },
+  "audio": {
+   "duree": 62.2,
+   "nb_voix": 2,
+   "voix": [
+    {
+     "hz": 256,
+     "genre": "f",
+     "part": 0.45
+    },
+    {
+     "hz": 163,
+     "genre": "h",
+     "part": 0.55
+    }
+   ],
+   "debit": 4.32,
+   "blanc_moyen": 0.44,
+   "coupes": 2,
+   "dynamique_db": 22.2,
+   "cris": 0.023,
+   "musique": null,
+   "impacts": 0,
+   "impacts_10s": 0.0,
+   "graves": 0,
+   "aigus": 0,
+   "sur_vanne": 0,
+   "evenements": {},
+   "emotions": {
+    "'[professionnel": 1,
+    "'[confus": 1,
+    "'[ironique": 1,
+    "'[ferme": 1,
+    "'[sceptique": 1,
+    "'[inquiet": 1,
+    "'[agace": 1,
+    "'[determine": 1
+   }
+  },
+  "claude": {
+   "lieux": [
+    "rue",
+    "salon"
+   ],
+   "moment": "jour",
+   "costumes": {
+    "presentateur": {
+     "haut": "chemise",
+     "c_haut": "bleu marine",
+     "motif": "uni",
+     "bas": "pantalon",
+     "chaussures": "ville",
+     "details": [
+      "cravate",
+      "lunettes_vue",
+      "montre"
+     ]
+    },
+    "invite": {
+     "haut": "tshirt",
+     "c_haut": "rouge",
+     "motif": "uni",
+     "bas": "jeans",
+     "chaussures": "baskets",
+     "details": [
+      "barbe_courte",
+      "bracelets"
+     ]
+    }
+   },
+   "objets": [
+    {
+     "replique": 0,
+     "objet": "telephone"
+    },
+    {
+     "replique": 1,
+     "objet": "telephone"
+    },
+    {
+     "replique": 3,
+     "objet": "billet"
+    },
+    {
+     "replique": 10,
+     "objet": "telephone"
+    },
+    {
+     "replique": 12,
+     "objet": "tablette"
+    }
+   ],
+   "gags": [
+    "Mot du jour : Économies = Liberté ?",
+    "Affiche : 'Victoria’s Secret : Réservation obligatoire (et motif)'",
+    "Post-it : '9500 € : Trop ou pas assez ?'"
+   ],
+   "ambiances": [
+    "neon"
+   ],
+   "plans": [
+    {
+     "replique": 0,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "explique",
+     "reaction": "neutre"
+    },
+    {
+     "replique": 1,
+     "plan": "moyen",
+     "mouvement": "fixe",
+     "geste": "gratte_tete",
+     "reaction": "confused"
+    },
+    {
+     "replique": 4,
+     "plan": "serre",
+     "mouvement": "zoom_choc",
+     "geste": "pointe_d",
+     "reaction": "choc"
+    },
+    {
+     "replique": 7,
+     "plan": "large",
+     "mouvement": "travelling",
+     "geste": "bras_ouverts",
+     "reaction": "determine"
+    },
+    {
+     "replique": 11,
+     "plan": "tres_serre",
+     "mouvement": "fixe",
+     "geste": "poches",
+     "reaction": "sceptique"
+    },
+    {
+     "replique": 16,
+     "plan": "contre_plongee",
+     "mouvement": "fixe",
+     "geste": "desespoir",
+     "reaction": "hallucine"
+    }
+   ]
+  },
+  "realisation": {
+   "moment": "jour",
+   "lieux": [
+    "rue",
+    "salon"
+   ],
+   "gags": [
+    "Mot du jour : Économies = Liberté ?",
+    "Affiche : 'Victoria’s Secret : Réservation obligatoire (et motif)'",
+    "Post-it : '9500 € : Trop ou pas assez ?'"
+   ],
+   "ambiances": [
+    "neon"
+   ],
+   "source": "auteur+image",
+   "tenues": {
+    "presentateur": "chemise",
+    "invite": "tshirt"
+   },
+   "plans": [
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe"
+   ]
+  },
+  "video": "2026-10-27_03h25_emission.mp4"
  }
 ]

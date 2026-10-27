@@ -2,16 +2,19 @@ Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, ElevenLabs epuise — IA utilisée : mistral
 Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @motiontoonz, @same_same53, @charly.bse, @kodanimation, @vignianimation, @vincedessine
-Profil TikTok @vignianimation : 31 vidéo(s) jamais utilisée(s)
-Profil TikTok @same_same53 : 33 vidéo(s) jamais utilisée(s)
+Profil TikTok @charly.bse : 31 vidéo(s) jamais utilisée(s)
 Profil TikTok @yan_animation0 : 25 vidéo(s) jamais utilisée(s)
-Vidéo depuis TikTok : https://www.tiktok.com/@vignianimation/video/7700306335237246241
+Profil TikTok @kodanimation : 22 vidéo(s) jamais utilisée(s)
+Vidéo depuis TikTok : https://www.tiktok.com/@charly.bse/video/7661267540756286753
   son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 78.0 s, compte d'origine @vignianimation
-[ WARN:0@18.493] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
-  image de la vidéo : 1 plans (≈ 78.0 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 46 %, large 53 % ; caméra : fixe 100 % ; 1 personne(s) à l'écran : centre (habit [220, 202, 149], cheveux [27, 26, 26], sourit 0 %) ; agitation 0.088 ; lumière jour ; fond [134, 157, 137]
+  son récupéré : 62.2 s, compte d'origine @charly.bse
+[ WARN:0@14.458] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  image de la vidéo : 1 plans (≈ 62.5 s chacun) ; cadrages : très serré 2 %, serré 0 %, moyen 0 %, large 97 % ; caméra : fixe 100 % ; 1 personne(s) à l'écran : aucun visage repéré ; agitation 0.099 ; lumière jour ; fond [130, 172, 188]
   isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
   transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
+  Whisper indisponible (Whisper : TimeoutError ) : contrôle simplifié
+[0;93m2026-10-27 02:23:42.839296562 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+  transcription gratuite (Whisper sur la machine) : 236 mots
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/core/io.py:48: UserWarning: 
 torchcodec is not installed correctly so built-in audio decoding will fail. Solutions are:
 * use audio preloaded in-memory as a {'waveform': (channel, time) torch.Tensor, 'sample_rate': int} dictionary;
@@ -19,63 +22,40 @@ torchcodec is not installed correctly so built-in audio decoding will fail. Solu
 
 Could not load this library: /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/torchcodec/libtorchcodec_image.so
   warnings.warn(
-[0;93m2026-10-27 01:44:44.238087007 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1913.)
   std = sequences.std(dim=-1, correction=1)
-  voix séparées par pyannote : 2 voix, 3 tours de parole
+  voix séparées par pyannote : 2 voix, 19 tours de parole
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-  voix trop proches (ressemblance 0.85) : vérification mot par mot laissée de côté
-  relecture du dialogue par l'IA : 41/41 phrases (A : un manager (ou patron), B : un employé qui refuse de faire des heures supplé)
-  contrôle questions-réponses (avec relecture de l'IA) : 41 phrases, 267 mot(s) changé(s) de voix
-  42 répliques, voix : {'speaker_0': 240, 'speaker_1': 206}
-  son de la vidéo : 2 voix [240 Hz (f, 48 %), 206 Hz (f, 52 %)], 6.88 mots/s, blancs 0.04 s, 28 coupure(s) de parole, dynamique 17.5 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
+  voix vérifiées mot par mot : 17 mot(s) remis sur la bonne voix
+  17 répliques, voix : {'speaker_0': 256, 'speaker_1': 163}
+  son de la vidéo : 2 voix [256 Hz (f, 45 %), 163 Hz (h, 55 %)], 4.32 mots/s, blancs 0.44 s, 2 coupure(s) de parole, dynamique 22.2 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
   IA gemini indisponible (gemini 429 : [{
   "error": {
     "code": 429,
     "message": "You exceeded your current quota, please check your plan an) : on passe à la suivante
-  scène reconstituée : Deux collègues, un présentateur stressé et un invité détendu, débattent dans un bureau après les heures de travail. Le présentateur reproche à l'invité de partir à 17h pile sans tenir compte des besoins de l'équipe, tandis que l'invité défend ses horaires stricts.
+  scène reconstituée : Un échange téléphonique tendu entre un conseiller bancaire (presentateur) et un client (invite) qui souhaite retirer une somme importante d'argent sans justification claire, dans un bureau d'administration bancaire.
   casting : speaker_0 → Jojo, speaker_1 → Kévin
-  sous-titres : 6 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
-  voix trop proches dans https://www.tiktok.com/@vignianimation/video/7700306335237246241 (ressemblance 0.85) : on cherche une vidéo aux voix bien différentes
-Vidéo depuis TikTok : https://www.tiktok.com/@vignianimation/video/7687714049555008801
-  son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 72.7 s, compte d'origine @vignianimation
-[ WARN:0@330.640] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
-  image de la vidéo : 1 plans (≈ 73.0 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 0 %, large 100 % ; caméra : fixe 100 % ; 0 personne(s) à l'écran : aucun visage repéré ; agitation 0.096 ; lumière jour ; fond [215, 153, 99]
-  isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
-  transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
-/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1913.)
-  std = sequences.std(dim=-1, correction=1)
-  voix séparées par pyannote : 2 voix, 26 tours de parole
-  voix vérifiées mot par mot : 33 mot(s) remis sur la bonne voix
-  25 répliques, voix : {'speaker_0': 259, 'speaker_1': 172}
-  son de la vidéo : 2 voix [259 Hz (f, 68 %), 172 Hz (?, 32 %)], 4.35 mots/s, blancs 0.57 s, 2 coupure(s) de parole, dynamique 14.7 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
-  réponse coupée (limite de 8000 jetons atteinte) pour doublage
-  casting : speaker_0 → Lila, speaker_1 → Jojo
-Sketch : « CELLE -J 'AI PÉTÉ LÀ, VOUS DEU », 25 répliques
-montage : 1 plans (0.0:large>env/coupe)
-studio : jour, lieux ['salon'], tenues envoyee=pull, presentateur=tshirt, 0 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 76.0 s, 25 répliques, 1 scène(s), personnages ['envoyee', 'presentateur']
-montage : 1 plans (0.0:large>env/coupe)
-studio : jour, lieux ['salon'], tenues envoyee=pull, presentateur=tshirt, 0 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 76.0 s, 25 répliques, 1 scène(s), personnages ['envoyee', 'presentateur']
-  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~1139 images)
-  morceau 1140–2279 reçu d'une machine d'aide
-  morceau 2279–3418 reçu d'une machine d'aide
-  morceau 3418–4558 reçu d'une machine d'aide
-  dessin partagé terminé en 8.8 min
+Sketch : « RETRAIT BANCAIRE ABSURDE », 17 répliques
+Lieux séparés : chaque personnage a son propre décor (appel, visio, l'un ailleurs)
+  décor 0 (lieu ressemblant de la banque, budget Modal du mois atteint) : bureau administration avec un ordinateur allumé, un téléphon
+  décor 1 : bureau administration avec une vue sur la ville, un tableau blanc avec
+montage : 10 plans (0.0:large>pre/coupe 5.8:large>inv/coupe 12.1:large>pre/coupe 16.0:large>inv/coupe 18.4:large>pre/coupe 25.6:large>inv/coupe 32.3:large>pre/coupe 38.4:large>inv/coupe 51.2:large>pre/coupe 55.5:large>inv/coupe)
+studio : jour, lieux ['rue', 'salon'], tenues presentateur=chemise, invite=tshirt, 2 figurant(s), ambiances ['neon'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+appel : 4 écran(s) partagé(s), 3 plan(s) d'écoute
+cartoon : durée 64.6 s, 17 répliques, 2 scène(s), personnages ['presentateur', 'invite']
+montage : 10 plans (0.0:large>pre/coupe 5.8:large>inv/coupe 12.1:large>pre/coupe 16.0:large>inv/coupe 18.4:large>pre/coupe 25.6:large>inv/coupe 32.3:large>pre/coupe 38.4:large>inv/coupe 51.2:large>pre/coupe 55.5:large>inv/coupe)
+studio : jour, lieux ['rue', 'salon'], tenues presentateur=chemise, invite=tshirt, 2 figurant(s), ambiances ['neon'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+appel : 4 écran(s) partagé(s), 3 plan(s) d'écoute
+cartoon : durée 64.6 s, 17 répliques, 2 scène(s), personnages ['presentateur', 'invite']
+  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~969 images)
+  morceau 969–1938 reçu d'une machine d'aide
+  morceau 2907–3876 reçu d'une machine d'aide
+  morceau 1938–2907 reçu d'une machine d'aide
+  dessin partagé terminé en 4.6 min
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury qualité (gratuit) : 8.9/10 — Humoriste 8.6/10 : 71.7 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 6.6/10 : montage trop lent : 0.1 plans toutes les 10 s (il en faudrait ~2.8); 0.0 s pas assez de plans de réaction de celui qui écoute | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.1/10 : 0.0 s sous-titres trop rapides à lire
-Corrections du jury (tour 1) : réaction « sceptique » à la réplique 1
-montage : 1 plans (0.0:large>env/coupe)
-studio : jour, lieux ['salon'], tenues envoyee=pull, presentateur=tshirt, 0 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 76.0 s, 25 répliques, 1 scène(s), personnages ['envoyee', 'presentateur']
-  redessin partiel : 480/4558 images à redessiner (1 passage(s)), le reste repris tel quel
-Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury qualité (gratuit) : 8.9/10 — Humoriste 8.6/10 : 71.7 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 6.6/10 : montage trop lent : 0.1 plans toutes les 10 s (il en faudrait ~2.8); 0.0 s pas assez de plans de réaction de celui qui écoute | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.1/10 : 0.0 s sous-titres trop rapides à lire
-La version corrigée n'est pas meilleure : on garde la première.
+Jury qualité (gratuit) : 9.0/10 — Humoriste 8.6/10 : 57.8 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 7.3/10 : montage trop lent : 1.5 plans toutes les 10 s (il en faudrait ~2.8); caméra peu vivante : presque toujours le même mouvement | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.1/10 : 5.8 s sous-titres trop rapides à lire
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = gemini ×1, mistral ×4, voix = tiktok, decors = dessines, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 52231, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0}
-Quota de l'API GitHub : 4952 appels restants
-OK : sortie/2026-10-27_02h55_emission.mp4 (76 s)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = mistral ×2, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 20966, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 26}
+Quota de l'API GitHub : 4895 appels restants
+OK : sortie/2026-10-27_03h25_emission.mp4 (65 s)
