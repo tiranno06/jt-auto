@@ -1,13 +1,16 @@
 Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, ElevenLabs epuise — IA utilisée : mistral
-Vidéo depuis TikTok : https://vm.tiktok.com/ZN8D3mtbS/
+Vidéo depuis TikTok : https://vm.tiktok.com/ZN8DwPjkG/
   son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 62.7 s, compte d'origine @motiontoonz
-[ WARN:0@41.352] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
-  image de la vidéo : 32 plans (≈ 1.97 s chacun) ; cadrages : très serré 1 %, serré 0 %, moyen 0 %, large 98 % ; caméra : fixe 58 %, avance 2 %, epaule 39 % ; 1 personne(s) à l'écran : aucun visage repéré ; agitation 0.254 ; lumière soir ; fond [187, 161, 128]
+  son récupéré : 24.2 s, compte d'origine @elo77m
+[ WARN:0@10.683] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  image de la vidéo : 1 plans (≈ 24.57 s chacun) ; cadrages : très serré 8 %, serré 65 %, moyen 14 %, large 12 % ; caméra : fixe 62 %, avance 4 %, recul 10 %, travelling 4 %, epaule 18 % ; 1 personne(s) à l'écran : centre (habit [70, 55, 90], cheveux [128, 96, 117], sourit 0 %) ; agitation 0.654 ; lumière jour ; fond [84, 85, 125]
   isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
   transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
+  Whisper indisponible (Whisper : TimeoutError ) : contrôle simplifié
+[0;93m2026-10-27 17:57:25.575300791 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+  transcription gratuite (Whisper sur la machine) : 77 mots
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/core/io.py:48: UserWarning: 
 torchcodec is not installed correctly so built-in audio decoding will fail. Solutions are:
 * use audio preloaded in-memory as a {'waveform': (channel, time) torch.Tensor, 'sample_rate': int} dictionary;
@@ -15,35 +18,34 @@ torchcodec is not installed correctly so built-in audio decoding will fail. Solu
 
 Could not load this library: /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/torchcodec/libtorchcodec_image.so
   warnings.warn(
-[0;93m2026-10-27 15:06:59.616510560 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1913.)
   std = sequences.std(dim=-1, correction=1)
-  voix séparées par pyannote : 2 voix, 42 tours de parole
+  voix séparées par pyannote : 2 voix, 12 tours de parole
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-  voix vérifiées mot par mot : 26 mot(s) remis sur la bonne voix
-  26 répliques, voix : {'speaker_0': 159, 'speaker_1': 227}
-  son de la vidéo : 2 voix [159 Hz (h, 72 %), 227 Hz (f, 28 %)], 4.23 mots/s, blancs 0.29 s, 2 coupure(s) de parole, dynamique 23.8 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
-  scène reconstituée : Un père confronte le petit ami de sa fille dans le salon familial lors d'une discussion gênante et surréaliste.
+  10 répliques, voix : {'speaker_0': 184, 'speaker_1': 218}
+  son de la vidéo : 2 voix [184 Hz (?, 36 %), 218 Hz (f, 64 %)], 5.18 mots/s, blancs 2.14 s, 4 coupure(s) de parole, dynamique 33.9 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
+  scène reconstituée : Une femme et un homme discutent à la maison, la femme mentionnant une vidéo pour enfant avant qu'un malentendu comique n'éclate.
   casting : speaker_0 → Jojo, speaker_1 → Kévin
-  sous-titres : 20 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
-Sketch : « LE BEAU-PÈRE CASH », 26 répliques
-  décor 0 (lieu ressemblant de la banque, budget Modal du mois atteint) : living room with white walls, sofa, TV unit, window, and hou
+  sous-titres : 2 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
+Sketch : « MALENTENDU LITTLE ANGEL », 10 répliques
+  décor 0 : bedroom with blue walls, wooden dresser, colorful small toys, floor la
 montage : 1 plans (0.0:large>pre/coupe)
-studio : jour, lieux ['salon'], tenues presentateur=redingote, invite=robe, 0 figurant(s), ambiances ['neige'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 66.2 s, 26 répliques, 1 scène(s), personnages ['presentateur', 'invite']
+studio : jour, lieux ['chambre'], tenues presentateur=col_roule, invite=pull, 0 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 27.0 s, 10 répliques, 1 scène(s), personnages ['presentateur', 'invite']
 montage : 1 plans (0.0:large>pre/coupe)
-studio : jour, lieux ['salon'], tenues presentateur=redingote, invite=robe, 0 figurant(s), ambiances ['neige'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 66.2 s, 26 répliques, 1 scène(s), personnages ['presentateur', 'invite']
-  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~993 images)
-  morceau 993–1986 reçu d'une machine d'aide
-  morceau 1986–2979 reçu d'une machine d'aide
-  morceau 2979–3972 reçu d'une machine d'aide
-  dessin partagé terminé en 4.6 min
+studio : jour, lieux ['chambre'], tenues presentateur=col_roule, invite=pull, 0 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 27.0 s, 10 répliques, 1 scène(s), personnages ['presentateur', 'invite']
+  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~405 images)
+  morceau 811–1216 reçu d'une machine d'aide
+  morceau 1216–1622 reçu d'une machine d'aide
+  morceau 406–811 reçu d'une machine d'aide
+  dessin partagé terminé en 6.3 min
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury qualité (ia) : 5.0/10 — Humoriste 5.0/10 : 65.6 s La chute finale manque d'un zoom choc percutant pour appuyer le gag. | Réalisateur 4.0/10 : 22.6 s Rythme trop mou, pas assez de variété de plans et manque flagrant de plans de réaction. | Directeur artistique 5.0/10 : 3.1 s Le design et les vêtements de la fille ne correspondent pas à l'original (t-shirt rouge / jean). | Ingénieur du son 6.0/10 : 65.6 s Absence de bruitage impactant sur la chute finale. | Spectateur TikTok 5.0/10 : 0.4 s Accroche un peu molle dans la première seconde, sous-titres un peu rapides à lire.
-Manque par rapport à la vidéo d'origine : Le personnage de la fille est représenté par une petite fille en robe rose au lieu d'une jeune femme en t-shirt rouge et jean comme dans l'original. ; Le père a un design complètement différent (costume bleu/casquette) au lieu du père en polo bleu.
+  IA gemini indisponible (The read operation timed out) : on passe à la suivante
+Jury qualité (ia) : 5.8/10 — Humoriste 6.0/10 : 0.4 s La chute finale manque de punch. Le moment où l’invité dit 'Alors...' mérite un effet visuel plus fort pour marquer les esprits, comme un zoom choc ou un changement de décor abrupt.; 18.4 s Les vannes pourraient être plus percutantes. Par exemple, le moment où l’invité demande 'Mon amour, il y a quoi d’autre ?' pourrait être renforcé par un bruitage ou une réaction exagérée du présentate; 23.3 s Ajouter un regard caméra ou un geste brusque du personnage principal au moment de la chute finale pour capter l’attention et renforcer le côté humoristique. | Réalisateur 5.0/10 : 0.4 s Montage trop lent. Il faudrait environ 3,5 plans par seconde pour dynamiser la vidéo. Par exemple, des plans serrés sur les réactions des personnages pourraient être ajoutés aux moments clés.; 10.8 s Manque de plans de réaction de celui qui écoute. Ajouter des réactions comme des regards s
+Manque par rapport à la vidéo d'origine : Personnage secondaire masculin absent dans la vidéo originale (l’invité semble seul dans certains moments). ; Gestes plus expressifs et naturels dans l’original, notamment au niveau des mains et des expressions faciales.
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = gemini ×2, voix = tiktok, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 21811, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0}
-Quota de l'API GitHub : 4961 appels restants
-OK : sortie/2026-10-27_16h09_emission.mp4 (66 s)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = gemini ×2, mistral ×1, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 19872, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 58}
+Quota de l'API GitHub : 4849 appels restants
+OK : sortie/2026-10-27_18h59_emission.mp4 (27 s)

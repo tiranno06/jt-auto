@@ -26053,5 +26053,266 @@
    ]
   },
   "video": "2026-10-27_16h09_emission.mp4"
+ },
+ {
+  "date": "2026-10-27",
+  "source": "https://www.tiktok.com/@elo77m/video/7697238760127352096?_r=1&_t=ZN-9AuVdweluPW",
+  "auteur": "elo77m",
+  "visuel": {
+   "gestes": [
+    [
+     8.02,
+     0.5,
+     0.39
+    ],
+    [
+     9.02,
+     0.57,
+     0.37
+    ]
+   ],
+   "duree": 24.6,
+   "nb_plans": 1,
+   "duree_plan": 24.57,
+   "coupes": [],
+   "plans": {
+    "tres_serre": 0.082,
+    "serre": 0.653,
+    "moyen": 0.143,
+    "large": 0.122
+   },
+   "camera": {
+    "fixe": 0.625,
+    "avance": 0.042,
+    "recul": 0.104,
+    "travelling": 0.042,
+    "epaule": 0.188
+   },
+   "nb_personnes": 1,
+   "personnes": [
+    {
+     "place": "centre",
+     "presence": 0.857,
+     "habit": [
+      70,
+      55,
+      90
+     ],
+     "cheveux": [
+      128,
+      96,
+      117
+     ],
+     "sourire": 0.0,
+     "taille": 0.211,
+     "tete_penchee": 3.9,
+     "regard_cote": 0.31
+    }
+   ],
+   "visages": true,
+   "sourires": 0.0,
+   "energie": 0.654,
+   "mur": [
+    84,
+    85,
+    125
+   ],
+   "palette": [
+    [
+     83,
+     83,
+     124,
+     0.301
+    ],
+    [
+     67,
+     54,
+     90,
+     0.29
+    ],
+    [
+     132,
+     140,
+     165,
+     0.123
+    ],
+    [
+     242,
+     212,
+     183,
+     0.123
+    ],
+    [
+     211,
+     173,
+     148,
+     0.095
+    ],
+    [
+     165,
+     124,
+     120,
+     0.068
+    ]
+   ],
+   "lumiere": {
+    "luminosite": 145.4,
+    "chaleur": -6.2,
+    "saturation": 82.8
+   },
+   "moment": "jour"
+  },
+  "audio": {
+   "duree": 24.2,
+   "nb_voix": 2,
+   "voix": [
+    {
+     "hz": 184,
+     "genre": "?",
+     "part": 0.36
+    },
+    {
+     "hz": 218,
+     "genre": "f",
+     "part": 0.64
+    }
+   ],
+   "debit": 5.18,
+   "blanc_moyen": 2.14,
+   "coupes": 4,
+   "dynamique_db": 33.9,
+   "cris": 0.002,
+   "musique": null,
+   "impacts": 0,
+   "impacts_10s": 0.0,
+   "graves": 0,
+   "aigus": 0,
+   "sur_vanne": 0,
+   "evenements": {},
+   "emotions": {
+    "neutral": 3,
+    "confused": 2,
+    "shocked": 1,
+    "hesitant": 1,
+    "suspicious": 1,
+    "defensive": 1,
+    "relieved": 1
+   }
+  },
+  "claude": {
+   "lieux": [
+    "chambre"
+   ],
+   "moment": "jour",
+   "costumes": {
+    "presentateur": {
+     "bas": "pantalon",
+     "c_bas": "beige",
+     "c_haut": "noir",
+     "chaussures": "baskets",
+     "cheveux": "court",
+     "c_cheveux": "chatain",
+     "details": [
+      "ceinture"
+     ],
+     "haut": "col_roule"
+    },
+    "invite": {
+     "bas": "jean",
+     "c_bas": "bleu",
+     "c_haut": "blanc",
+     "chaussures": "baskets",
+     "cheveux": "long",
+     "c_cheveux": "blond",
+     "details": [],
+     "haut": "pull"
+    }
+   },
+   "objets": [],
+   "gags": [
+    "Un petit jouet sur la commode a l'air surpris"
+   ],
+   "ambiances": [],
+   "plans": [
+    {
+     "mouvement": "fixe",
+     "plan": "moyen",
+     "replique": 0
+    },
+    {
+     "replique": 1,
+     "mouvement": "fixe",
+     "plan": "serre"
+    },
+    {
+     "plan": "tres_serre",
+     "replique": 2,
+     "mouvement": "zoom_choc"
+    },
+    {
+     "mouvement": "fixe",
+     "replique": 3,
+     "plan": "moyen"
+    },
+    {
+     "plan": "serre",
+     "replique": 4,
+     "mouvement": "fixe"
+    },
+    {
+     "mouvement": "fixe",
+     "plan": "moyen",
+     "replique": 5
+    },
+    {
+     "plan": "serre",
+     "mouvement": "fixe",
+     "replique": 6
+    },
+    {
+     "replique": 7,
+     "mouvement": "avanc",
+     "plan": "serre"
+    },
+    {
+     "mouvement": "fixe",
+     "plan": "moyen",
+     "replique": 8
+    },
+    {
+     "plan": "serre",
+     "replique": 9,
+     "mouvement": "fixe"
+    }
+   ]
+  },
+  "realisation": {
+   "moment": "jour",
+   "lieux": [
+    "chambre"
+   ],
+   "gags": [
+    "Un petit jouet sur la commode a l'air surpris"
+   ],
+   "ambiances": [],
+   "source": "auteur+image",
+   "tenues": {
+    "presentateur": "col_roule",
+    "invite": "pull"
+   },
+   "plans": [
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe"
+   ]
+  },
+  "video": "2026-10-27_18h59_emission.mp4"
  }
 ]
