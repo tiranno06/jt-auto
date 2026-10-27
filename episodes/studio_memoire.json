@@ -4211,36 +4211,41 @@
   "cadence": "rapide"
  },
  {
-  "moment": "jour",
+  "moment": "matin",
   "lieux": [
-   "chambre"
+   "cuisine",
+   "cuisine"
   ],
   "source": "auteur+image",
-  "duree": 27.0,
+  "duree": 35.3,
   "plans": {
-   "large": 10
+   "large": 18
   },
   "mouvements": {
-   "fixe": 10
+   "fixe": 18
   },
   "costumes": {
-   "presentateur": "col_roule",
-   "invite": "pull"
+   "envoyee": "polo",
+   "presentateur": "tshirt"
   },
   "figurants": 0,
-  "ambiances": [],
-  "controle": "Humoriste 6.0/10 : 0.4 s La chute finale manque de punch. Le moment où l’invité dit 'Alors...' mérite un effet visuel plus fort pour marquer les esprits, comme un zoom choc ou un changement de décor a",
-  "fichier": "2026-10-27_18h59_emission.mp4",
+  "ambiances": [
+   "pluie",
+   "poussiere",
+   "vapeur"
+  ],
+  "controle": "Humoriste 8.6/10 : 31.4 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 6.6/10 : montage trop lent : 0.6 plans toutes les 10 s (il en faudrait ~1.1); 8.0 s pas assez de plans ",
+  "fichier": "2026-10-27_19h32_emission.mp4",
   "cine": {
    "focus": false,
    "vertige": true,
-   "tiers": true,
+   "tiers": false,
    "etalonnage": true,
-   "profondeur": false,
-   "grain": false,
-   "reflets": false,
+   "profondeur": true,
+   "grain": true,
+   "reflets": true,
    "son": true
   },
-  "cadence": "normal"
+  "cadence": "rapide"
  }
 ]

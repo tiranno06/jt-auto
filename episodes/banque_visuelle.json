@@ -26056,132 +26056,165 @@
  },
  {
   "date": "2026-10-27",
-  "source": "https://www.tiktok.com/@elo77m/video/7697238760127352096?_r=1&_t=ZN-9AuVdweluPW",
-  "auteur": "elo77m",
+  "source": "https://www.tiktok.com/@jennywelling1/video/7700640449182059808?_r=1&_t=ZN-9AuW4ETUkkQ",
+  "auteur": "jennywelling1",
   "visuel": {
    "gestes": [
     [
-     8.02,
-     0.5,
+     21.04,
+     0.73,
+     0.5
+    ],
+    [
+     22.05,
+     0.59,
+     0.47
+    ],
+    [
+     30.06,
+     0.73,
      0.39
     ],
     [
-     9.02,
-     0.57,
-     0.37
+     31.57,
+     0.62,
+     0.48
     ]
    ],
-   "duree": 24.6,
-   "nb_plans": 1,
-   "duree_plan": 24.57,
-   "coupes": [],
+   "duree": 32.1,
+   "nb_plans": 5,
+   "duree_plan": 6.41,
+   "coupes": [
+    9.02,
+    9.52,
+    19.04,
+    19.54
+   ],
    "plans": {
-    "tres_serre": 0.082,
-    "serre": 0.653,
-    "moyen": 0.143,
-    "large": 0.122
+    "tres_serre": 0.969,
+    "serre": 0.0,
+    "moyen": 0.0,
+    "large": 0.031
    },
    "camera": {
-    "fixe": 0.625,
-    "avance": 0.042,
-    "recul": 0.104,
-    "travelling": 0.042,
-    "epaule": 0.188
+    "fixe": 1.0,
+    "avance": 0.0,
+    "recul": 0.0,
+    "travelling": 0.0,
+    "epaule": 0.0
    },
    "nb_personnes": 1,
    "personnes": [
     {
      "place": "centre",
-     "presence": 0.857,
+     "presence": 0.703,
      "habit": [
-      70,
-      55,
-      90
+      0,
+      0,
+      0
      ],
      "cheveux": [
-      128,
-      96,
-      117
+      38,
+      31,
+      32
      ],
      "sourire": 0.0,
-     "taille": 0.211,
-     "tete_penchee": 3.9,
-     "regard_cote": 0.31
+     "taille": 0.464,
+     "tete_penchee": 2.3,
+     "regard_cote": 0.511
+    },
+    {
+     "place": "droite",
+     "presence": 0.234,
+     "habit": [
+      0,
+      0,
+      0
+     ],
+     "cheveux": [
+      51,
+      41,
+      37
+     ],
+     "sourire": 0.0,
+     "taille": 0.425,
+     "tete_penchee": 4.1,
+     "regard_cote": 0.533
     }
    ],
    "visages": true,
    "sourires": 0.0,
-   "energie": 0.654,
+   "energie": 0.378,
    "mur": [
-    84,
-    85,
-    125
+    0,
+    0,
+    0
    ],
    "palette": [
     [
-     83,
-     83,
-     124,
-     0.301
+     1,
+     0,
+     1,
+     0.445
     ],
     [
-     67,
-     54,
-     90,
-     0.29
+     136,
+     114,
+     109,
+     0.153
     ],
     [
-     132,
-     140,
-     165,
-     0.123
+     46,
+     36,
+     37,
+     0.136
     ],
     [
-     242,
-     212,
-     183,
-     0.123
+     96,
+     72,
+     70,
+     0.119
     ],
     [
-     211,
-     173,
-     148,
-     0.095
+     207,
+     153,
+     145,
+     0.119
     ],
     [
-     165,
-     124,
-     120,
-     0.068
+     244,
+     244,
+     244,
+     0.028
     ]
    ],
    "lumiere": {
-    "luminosite": 145.4,
-    "chaleur": -6.2,
-    "saturation": 82.8
+    "luminosite": 71.5,
+    "chaleur": 16.0,
+    "saturation": 42.7
    },
    "moment": "jour"
   },
   "audio": {
-   "duree": 24.2,
+   "duree": 31.7,
    "nb_voix": 2,
    "voix": [
     {
-     "hz": 184,
-     "genre": "?",
-     "part": 0.36
+     "hz": 205,
+     "genre": "f",
+     "part": 0.52
     },
     {
-     "hz": 218,
-     "genre": "f",
-     "part": 0.64
+     "hz": 124,
+     "genre": "h",
+     "part": 0.48
     }
    ],
-   "debit": 5.18,
-   "blanc_moyen": 2.14,
-   "coupes": 4,
-   "dynamique_db": 33.9,
-   "cris": 0.002,
+   "debit": 7.0,
+   "blanc_moyen": 0.66,
+   "coupes": 6,
+   "dynamique_db": 19.6,
+   "cris": 0.034,
    "musique": null,
    "impacts": 0,
    "impacts_10s": 0.0,
@@ -26190,117 +26223,149 @@
    "sur_vanne": 0,
    "evenements": {},
    "emotions": {
-    "neutral": 3,
-    "confused": 2,
-    "shocked": 1,
-    "hesitant": 1,
-    "suspicious": 1,
-    "defensive": 1,
-    "relieved": 1
+    "'[sarcastique": 2,
+    "'[confus": 2,
+    "'[sûre": 1,
+    "'[surpris": 1,
+    "'[indignée": 1,
+    "'[défensif": 1,
+    "'[insistant": 1,
+    "'[réfléchi": 1
    }
   },
   "claude": {
    "lieux": [
-    "chambre"
+    "cuisine"
    ],
-   "moment": "jour",
+   "moment": "matin",
    "costumes": {
     "presentateur": {
+     "haut": "tshirt",
+     "c_haut": "rouge",
+     "motif": "uni",
      "bas": "pantalon",
-     "c_bas": "beige",
-     "c_haut": "noir",
      "chaussures": "baskets",
-     "cheveux": "court",
-     "c_cheveux": "chatain",
      "details": [
-      "ceinture"
-     ],
-     "haut": "col_roule"
+      "barbe_courte",
+      "bracelets"
+     ]
     },
     "invite": {
-     "bas": "jean",
-     "c_bas": "bleu",
-     "c_haut": "blanc",
+     "haut": "chemise",
+     "c_haut": "bleu",
+     "motif": "uni",
+     "bas": "jeans",
      "chaussures": "baskets",
-     "cheveux": "long",
-     "c_cheveux": "blond",
-     "details": [],
-     "haut": "pull"
+     "details": [
+      "moustache",
+      "montrer"
+     ]
     }
    },
-   "objets": [],
-   "gags": [
-    "Un petit jouet sur la commode a l'air surpris"
+   "objets": [
+    {
+     "replique": 10,
+     "objet": "sandwich"
+    },
+    {
+     "replique": 16,
+     "objet": "telephone"
+    },
+    {
+     "replique": 17,
+     "objet": "corde"
+    }
    ],
-   "ambiances": [],
+   "gags": [
+    "Je dors jamais, c'est un super pouvoir.",
+    "Cannibalisme ? Plutôt sandwichalisme.",
+    "Mon ex ? Elle nage avec les poissons maintenant."
+   ],
+   "ambiances": [
+    "vapeur"
+   ],
    "plans": [
     {
+     "replique": 0,
+     "plan": "tres_serre",
      "mouvement": "fixe",
-     "plan": "moyen",
-     "replique": 0
+     "geste": "pointe_d",
+     "reaction": "aucune"
     },
     {
      "replique": 1,
-     "mouvement": "fixe",
-     "plan": "serre"
+     "plan": "serre",
+     "mouvement": "zoom_choc",
+     "geste": "haussement",
+     "reaction": "choc"
     },
     {
-     "plan": "tres_serre",
      "replique": 2,
-     "mouvement": "zoom_choc"
-    },
-    {
-     "mouvement": "fixe",
-     "replique": 3,
-     "plan": "moyen"
-    },
-    {
-     "plan": "serre",
-     "replique": 4,
-     "mouvement": "fixe"
-    },
-    {
-     "mouvement": "fixe",
      "plan": "moyen",
-     "replique": 5
+     "mouvement": "fixe",
+     "geste": "poings",
+     "reaction": "sceptique"
     },
     {
-     "plan": "serre",
+     "replique": 3,
+     "plan": "tres_serre",
      "mouvement": "fixe",
-     "replique": 6
+     "geste": "desespoir",
+     "reaction": "colere"
     },
     {
      "replique": 7,
-     "mouvement": "avanc",
-     "plan": "serre"
+     "plan": "large",
+     "mouvement": "travelling",
+     "geste": "bras_ouverts",
+     "reaction": "gene"
     },
     {
-     "mouvement": "fixe",
-     "plan": "moyen",
-     "replique": 8
-    },
-    {
+     "replique": 12,
      "plan": "serre",
-     "replique": 9,
-     "mouvement": "fixe"
+     "mouvement": "fixe",
+     "geste": "pointe_g",
+     "reaction": "panique"
+    },
+    {
+     "replique": 16,
+     "plan": "epaule",
+     "mouvement": "zoom_choc",
+     "geste": "gratte_tete",
+     "reaction": "choc"
     }
    ]
   },
   "realisation": {
-   "moment": "jour",
+   "moment": "matin",
    "lieux": [
-    "chambre"
+    "cuisine",
+    "cuisine"
    ],
    "gags": [
-    "Un petit jouet sur la commode a l'air surpris"
+    "Je dors jamais, c'est un super pouvoir.",
+    "Cannibalisme ? Plutôt sandwichalisme.",
+    "Mon ex ? Elle nage avec les poissons maintenant."
    ],
-   "ambiances": [],
+   "ambiances": [
+    "pluie",
+    "poussiere",
+    "vapeur"
+   ],
    "source": "auteur+image",
    "tenues": {
-    "presentateur": "col_roule",
-    "invite": "pull"
+    "envoyee": "polo",
+    "presentateur": "tshirt"
    },
    "plans": [
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
     "large/fixe",
     "large/fixe",
     "large/fixe",
@@ -26313,6 +26378,6 @@
     "large/fixe"
    ]
   },
-  "video": "2026-10-27_18h59_emission.mp4"
+  "video": "2026-10-27_19h32_emission.mp4"
  }
 ]
