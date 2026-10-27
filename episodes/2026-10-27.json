@@ -1,315 +1,310 @@
 {
- "titre": "VIE QUI BASCULE",
- "sujet": "VIE QUI BASCULE",
- "ecran": "VIE QUI BASCUL",
+ "titre": "DÎNER CATASTROPHE",
+ "sujet": "DÎNER CATASTROPHE",
+ "ecran": "DÎNER CATASTRO",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "Quand ta vie bascule",
- "question": "Comment gérer une nouvelle aussi bouleversante ?",
+ "titre_accroche": "POV : Quand ton ami veut te faire manger de la",
+ "question": "Comment gérer un dîner où les choix alimentaires deviennent un sujet de dispute?",
  "running_gag": "",
  "verite": "",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "Ça va depuis?",
-   "_deb": 1.26,
-   "_fin": 2.26,
-   "d": "[neutre] Ça va depuis?"
+   "t": "{'texte': \"T'es une gourmande, toi, non?\"}",
+   "_deb": 0.0,
+   "_fin": 0.9,
+   "d": "{'texte': \"[confused] T'es une gourmande, toi, non?\"}"
   },
   {
    "p": "envoyee",
-   "t": "[confused] Ça va bien, et toi?",
-   "_deb": 2.26,
-   "_fin": 3.02,
-   "d": "[confused] Ça va bien, et toi?"
+   "t": "{'texte': 'Pardon?'}",
+   "_deb": 1.02,
+   "_fin": 1.32,
+   "d": "{'texte': '[sceptique] Pardon?'}"
   },
   {
    "p": "presentateur",
-   "t": "Je suis enceinte. J'ai fait du VTT le week-end dernier.",
-   "_deb": 3.48,
-   "_fin": 5.24,
-   "d": "[choc] Je suis enceinte. J'ai fait du VTT le week-end dernier.",
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "De quoi?",
-   "_deb": 8.0,
-   "_fin": 8.52,
-   "d": "[annoyed] De quoi?"
+   "t": "{'texte': 'Euh, je... Attends deux secondes.'}",
+   "_deb": 2.22,
+   "_fin": 3.38,
+   "d": "{'texte': '[neutre] Euh, je... Attends deux secondes.'}"
   },
   {
    "p": "envoyee",
-   "t": "Du VTT le week-end dernier? Ou ça?",
-   "_deb": 8.52,
-   "_fin": 9.88,
-   "d": "[sceptique] Du VTT le week-end dernier? Ou ça?"
+   "t": "{'texte': 'Ouais, ouais, ouais.'}",
+   "_deb": 3.68,
+   "_fin": 4.44,
+   "d": "{'texte': '[annoyed] Ouais, ouais, ouais.'}"
   },
   {
    "p": "presentateur",
-   "t": "Tu m'as dit quoi juste avant là? J'ai pas compris.",
-   "_deb": 9.88,
-   "_fin": 12.1,
-   "d": "[panique] Tu m'as dit quoi juste avant là? J'ai pas compris."
+   "t": "{'texte': \"Ah, mais j'y suis, là. Ah, c'est pas Belouchi, mais enfin, ça va, quoi.\"}",
+   "_deb": 4.98,
+   "_fin": 8.78,
+   "d": "{'texte': \"[neutre] Ah, mais j'y suis, là. Ah, c'est pas Belouchi, mais enfin, ça va, quoi.\"}"
+  },
+  {
+   "p": "presentateur",
+   "t": "{'texte': 'Ouais.'}",
+   "_deb": 9.24,
+   "_fin": 9.78,
+   "d": "{'texte': '[neutre] Ouais.'}"
+  },
+  {
+   "p": "presentateur",
+   "t": "{'texte': 'Non, non, écoute, on graille ensemble, on passe chez elle vite fait, et puis ensuite, je vous retrouve.'}",
+   "_deb": 11.36,
+   "_fin": 15.06,
+   "d": "{'texte': '[excited] Non, non, écoute, on graille ensemble, on passe chez elle vite fait, et puis ensuite, je vous retrouve.'}"
+  },
+  {
+   "p": "presentateur",
+   "t": "{'texte': 'Voilà, exactement.'}",
+   "_deb": 15.74,
+   "_fin": 17.04,
+   "d": "{'texte': '[neutre] Voilà, exactement.'}"
+  },
+  {
+   "p": "presentateur",
+   "t": "Puis je vous retrouve après.",
+   "_deb": 18.2,
+   "_fin": 19.04
   },
   {
    "p": "envoyee",
-   "t": "Demandez comment tu allais? Non après. Où est-ce que tu faisais du VTT?",
-   "_deb": 12.18,
-   "_fin": 14.92,
-   "d": "[colere] Demandez comment tu allais? Non après. Où est-ce que tu faisais du VTT?"
+   "t": "Après quoi?",
+   "_deb": 19.08,
+   "_fin": 19.68
   },
   {
    "p": "presentateur",
-   "t": "Non avant.",
-   "_deb": 14.92,
-   "_fin": 15.16,
-   "d": "[choc] Non avant."
+   "t": "Chut, je suis de la tête. Voilà, whisky -cocat, très bien.",
+   "_deb": 19.72,
+   "_fin": 22.38
+  },
+  {
+   "p": "presentateur",
+   "t": "Ouais, bah, parfait, bah, je te fais un Lydia. Ok, ça marche.",
+   "_deb": 22.62,
+   "_fin": 25.7
+  },
+  {
+   "p": "presentateur",
+   "t": "À toute ma couille.",
+   "_deb": 25.86,
+   "_fin": 27.14
   },
   {
    "p": "envoyee",
-   "t": "Oui, je suis enceinte.",
-   "_deb": 16.24,
-   "_fin": 19.08,
-   "d": "[confused] Oui, je suis enceinte."
+   "t": "Vous me disiez quoi?",
+   "_deb": 26.5,
+   "_fin": 30.18
   },
   {
    "p": "presentateur",
-   "t": "D'accord.",
-   "_deb": 20.16,
-   "_fin": 20.48,
-   "d": "[neutre] D'accord."
+   "t": "On va commander, j 'ai faim moi, t 'as pas faim?",
+   "_deb": 30.88,
+   "_fin": 32.14
   },
   {
    "p": "presentateur",
-   "t": "Et... Je veux dire... Il est de... De toi. De moi.",
-   "_deb": 22.02,
-   "_fin": 25.48,
-   "d": "[reflechit] Et... Je veux dire... Il est de... De toi. De moi."
+   "t": "Non, ça va Mais si arrête, t 'as faim, ça se voit que tu manges Alors on va vous prendre tous les deux le tourne -deux de biches",
+   "_deb": 32.64,
+   "_fin": 37.16
   },
   {
    "p": "presentateur",
-   "t": "Ok.",
-   "_deb": 26.38,
-   "_fin": 26.52,
-   "d": "[choc] Ok."
+   "t": "ou trois purées, tu vas voir, tu vas adorer",
+   "_deb": 37.16,
+   "_fin": 38.18
   },
   {
    "p": "envoyee",
-   "t": "Je ne savais pas trop comment l'annoncer mais...",
-   "_deb": 27.62,
-   "_fin": 29.58,
-   "d": "[gene] Je ne savais pas trop comment l'annoncer mais..."
+   "t": "Alors non, je suis désolé, je vais pas prendre ça Ah non",
+   "_deb": 38.34,
+   "_fin": 40.3
   },
   {
    "p": "presentateur",
-   "t": "Mais je... Enfin, je ne comprends pas. On avait dû viser une capote donc...",
-   "_deb": 29.58,
-   "_fin": 34.22,
-   "d": "[colere] Mais je... Enfin, je ne comprends pas. On avait dû viser une capote donc..."
-  },
-  {
-   "p": "presentateur",
-   "t": "Je ne comprends pas la...",
-   "_deb": 34.22,
-   "_fin": 34.92,
-   "d": "[colere] Je ne comprends pas la..."
+   "t": "mais si si, crois -moi, il faut absolument que tu goûtes ce plat, fais -moi qu 'on passe Deux tourne -deux, s 'il te plaît Non,",
+   "_deb": 40.3,
+   "_fin": 43.38
   },
   {
    "p": "envoyee",
-   "t": "Tu sais, ce n'est pas viable à 100%. Il y a des rares cas où il y en a un qui passe.",
-   "_deb": 34.92,
-   "_fin": 38.52,
-   "d": "[calme] Tu sais, ce n'est pas viable à 100%. Il y a des rares cas où il y en a un qui passe.",
-   "objet": "bouteille"
+   "t": "non, non, je mange pas de viande",
+   "_deb": 43.38,
+   "_fin": 44.96
   },
   {
    "p": "envoyee",
-   "t": "Comment tu te sens?",
-   "_deb": 42.9,
-   "_fin": 43.86,
-   "d": "[gene] Comment tu te sens?"
+   "t": "Sérieux?",
+   "_deb": 46.6,
+   "_fin": 47.08
   },
   {
    "p": "presentateur",
-   "t": "Mal. Enfin... Plutôt mal, je t'avoue.",
-   "_deb": 43.86,
-   "_fin": 46.5,
-   "d": "[triste] Mal. Enfin... Plutôt mal, je t'avoue."
+   "t": "Ouais, sérieux",
+   "_deb": 47.34,
+   "_fin": 48.0
   },
   {
    "p": "presentateur",
-   "t": "Qu'est-ce que tu comptes faire?",
-   "_deb": 47.52,
-   "_fin": 48.94,
-   "d": "[sceptique] Qu'est-ce que tu comptes faire?"
+   "t": "Ok, ben je sais pas, alors, madame, mange pas de viande",
+   "_deb": 49.58,
+   "_fin": 51.4
   },
   {
    "p": "envoyee",
-   "t": "Je ne sais pas du tout.",
-   "_deb": 48.94,
-   "_fin": 49.56,
-   "d": "[desespoir] Je ne sais pas du tout."
+   "t": "Je vais vous prendre un gaspacho, moi, s 'il vous plaît Bon, bref",
+   "_deb": 51.94,
+   "_fin": 54.9
+  },
+  {
+   "p": "presentateur",
+   "t": "Non, non, non, non, qu 'est -ce que tu fais?",
+   "_deb": 55.56,
+   "_fin": 58.3
+  },
+  {
+   "p": "presentateur",
+   "t": "J 'achète ça.",
+   "_deb": 58.4,
+   "_fin": 59.18
   },
   {
    "p": "envoyee",
-   "t": "C'est pour ça que je voulais qu'on soit.",
-   "_deb": 50.5,
-   "_fin": 51.64,
-   "d": "[neutre] C'est pour ça que je voulais qu'on soit."
+   "t": "T 'es sérieux, là?",
+   "_deb": 59.64,
+   "_fin": 60.26
+  },
+  {
+   "p": "presentateur",
+   "t": "Tu me reverseras plus tard. Crois -moi, c 'est mauvais pour ta santé, cette merde.",
+   "_deb": 60.28,
+   "_fin": 62.78
+  },
+  {
+   "p": "presentateur",
+   "t": "Mange.",
+   "_deb": 63.18,
+   "_fin": 63.52
   },
   {
    "p": "envoyee",
-   "t": "Parce que je pense que ça te concerne aussi.",
-   "_deb": 51.74,
-   "_fin": 53.76,
-   "d": "[neutre] Parce que je pense que ça te concerne aussi."
+   "t": "Eh bien, je crois que tu m 'as coupé l 'appétit, en fait.",
+   "_deb": 63.6,
+   "_fin": 65.34
   },
   {
    "p": "presentateur",
-   "t": "Non mais... T'as bien fait mais après moi je t'avoue que...",
-   "_deb": 53.88,
-   "_fin": 56.5,
-   "d": "[colere] Non mais... T'as bien fait mais après moi je t'avoue que..."
+   "t": "Bah, force -toi un petit peu. On a du sport, après, quand même.",
+   "_deb": 65.36,
+   "_fin": 67.3
   },
   {
    "p": "presentateur",
-   "t": "Ça ne fait pas du tout partie de mes plans.",
-   "_deb": 57.88,
-   "_fin": 59.36,
-   "d": "[colere] Ça ne fait pas du tout partie de mes plans."
+   "t": "D 'ailleurs, j 'ai pas de capote. Tu prends la pilule?",
+   "_deb": 67.4,
+   "_fin": 69.64
   },
   {
    "p": "envoyee",
-   "t": "Donc toi, tu ne veux pas le garder?",
-   "_deb": 59.48,
-   "_fin": 60.56,
-   "d": "[choc] Donc toi, tu ne veux pas le garder?"
+   "t": "Ah, wow.",
+   "_deb": 69.74,
+   "_fin": 70.06
   },
   {
    "p": "presentateur",
-   "t": "Non. Vraiment pas.",
-   "_deb": 60.56,
-   "_fin": 62.06,
-   "d": "[colere] Non. Vraiment pas."
-  },
-  {
-   "p": "presentateur",
-   "t": "Il y a moins de quelque chose.",
-   "_deb": 64.12,
-   "_fin": 64.98,
-   "d": "[triste] Il y a moins de quelque chose."
-  },
-  {
-   "p": "presentateur",
-   "t": "Comment tu vois les choses toi?",
-   "_deb": 67.1,
-   "_fin": 68.14,
-   "d": "[reflechit] Comment tu vois les choses toi?"
+   "t": "Non, mais t 'inquiète, pas grave, au pire.",
+   "_deb": 70.12,
+   "_fin": 71.2
   },
   {
    "p": "envoyee",
-   "t": "Je ne sais pas trop. Je... Je pensais que... Enfin, je ne sais pas.",
-   "_deb": 68.14,
-   "_fin": 72.08,
-   "d": "[gene] Je ne sais pas trop. Je... Je pensais que... Enfin, je ne sais pas."
+   "t": "Bon, bah, moi, je vais y aller, je crois.",
+   "_deb": 71.26,
+   "_fin": 72.84
   },
   {
    "p": "presentateur",
-   "t": "Tu veux le garder?",
-   "_deb": 72.82,
-   "_fin": 73.5,
-   "d": "[sceptique] Tu veux le garder?"
+   "t": "Ok, on bouge. Alors, on fait comment pour l 'addition?",
+   "_deb": 72.86,
+   "_fin": 74.92
+  },
+  {
+   "p": "presentateur",
+   "t": "50 -50?",
+   "_deb": 75.02,
+   "_fin": 75.58
   },
   {
    "p": "envoyee",
-   "t": "Je n'en sais rien, je...",
-   "_deb": 73.5,
-   "_fin": 74.52,
-   "d": "[gene] Je n'en sais rien, je..."
+   "t": "Ouais, si tu veux, oui.",
+   "_deb": 75.64,
+   "_fin": 76.18
   },
   {
    "p": "presentateur",
-   "t": "Mais d'accord, mais il faudrait que tu saches là parce que...",
-   "_deb": 74.52,
-   "_fin": 76.6,
-   "d": "[colere] Mais d'accord, mais il faudrait que tu saches là parce que..."
+   "t": "Ou alors, je peux te proposer un deal. Je paye l 'addition.",
+   "_deb": 76.18,
+   "_fin": 78.56
+  },
+  {
+   "p": "presentateur",
+   "t": "Mais dans ce cas -là, on va chez toi juste après.",
+   "_deb": 78.66,
+   "_fin": 79.84
   },
   {
    "p": "envoyee",
-   "t": "Oui, peut-être.",
-   "_deb": 76.6,
-   "_fin": 77.16,
-   "d": "[soupir] Oui, peut-être."
+   "t": "Ah, mais t 'es vraiment sérieux, en fait.",
+   "_deb": 80.0,
+   "_fin": 81.26
   },
   {
    "p": "presentateur",
-   "t": "Oui, peut-être.",
-   "_deb": 77.54,
-   "_fin": 78.06,
-   "d": "[soupir] Oui, peut-être."
+   "t": "Bah, attends, c 'est moi qui paye toute l 'addition.",
+   "_deb": 81.3,
+   "_fin": 82.68
   },
   {
    "p": "presentateur",
-   "t": "Peut-être quoi, genre... Tu veux le garder?",
-   "_deb": 79.16,
-   "_fin": 80.84,
-   "d": "[colere] Peut-être quoi, genre... Tu veux le garder?"
+   "t": "Normal que derrière, je croque.",
+   "_deb": 82.68,
+   "_fin": 83.8
   },
   {
    "p": "envoyee",
-   "t": "Peut-être, oui.",
-   "_deb": 80.84,
-   "_fin": 81.28,
-   "d": "[choc] Peut-être, oui."
+   "t": "Je me casse.",
+   "_deb": 83.94,
+   "_fin": 84.58
   },
   {
    "p": "presentateur",
-   "t": "Ah non, putain, ce n'est pas possible.",
-   "_deb": 81.44,
-   "_fin": 82.66,
-   "d": "[colere] Ah non, putain, ce n'est pas possible.",
-   "objet": "verre"
-  },
-  {
-   "p": "envoyee",
-   "t": "Non mais attends, je ne te demande rien. Si tu ne veux pas faire partie de sa vie, c'est d'accord, c'est toi qui vois.",
-   "_deb": 83.32,
-   "_fin": 86.72,
-   "d": "[colere] Non mais attends, je ne te demande rien. Si tu ne veux pas faire partie de sa vie, c'est d'accord, c'est toi qui vois."
-  },
-  {
-   "p": "presentateur",
-   "t": "Donc tu serais prête à l'élever toute seule?",
-   "_deb": 86.74,
-   "_fin": 88.0,
-   "d": "[sceptique] Donc tu serais prête à l'élever toute seule?"
-  },
-  {
-   "p": "envoyee",
-   "t": "Si je n'ai pas le choix...",
-   "_deb": 88.0,
-   "_fin": 89.22,
-   "d": "[desespoir] Si je n'ai pas le choix...",
+   "t": "Psss, les consesses, quoi. Toujours, elles en veulent plus.",
+   "_deb": 85.56,
+   "_fin": 90.18,
    "chute": true
   }
  ],
  "bandeau": [],
  "gag": null,
- "legende": "Une révélation inattendue change tout entre deux amis.",
+ "legende": "Un dîner qui tourne au vinaigre entre gourmandise et convictions.",
  "hashtags": [
   "petitsdramas",
-  "vieinsolite",
-  "surpriseinattendue",
+  "diner",
+  "humour",
+  "vegetarien",
   "amitie",
-  "dilemme",
-  "revelation",
-  "emotions"
+  "gourmandise",
+  "comedie"
  ],
  "sources": [
-  "https://www.tiktok.com/@eliotlehanneur/video/7684678704580136224"
+  "https://www.tiktok.com/@eliotlehanneur/video/7687274653861023009"
  ],
  "decoupage": [
   {
@@ -323,18 +318,18 @@
     5,
     6,
     7,
-    8,
-    9
+    8
    ],
    "lieu": "",
    "son": "",
    "duree": 0.0,
-   "decor": "salons cosy avec canapé bleu, table basse en bois clair, vase rempli de fleurs, tapis persan, étagères remplies de livres",
-   "titre": "Scène 1 : L'annonce"
+   "decor": "restaurant, table en bois, chaises en métal, nappe à carreaux rouges et blancs, assiettes vides, bouteilles de vin, bougies allumées, menu ouvert",
+   "titre": "Scène 1 : Le Débat Culinaire"
   },
   {
    "scene": "2",
    "repliques": [
+    9,
     10,
     11,
     12,
@@ -350,21 +345,21 @@
     22,
     23,
     24,
-    25
+    25,
+    26,
+    27,
+    28,
+    29
    ],
    "lieu": "",
    "son": "",
    "duree": 0.0,
-   "decor": "même salon, mais avec une ambiance plus tendue, lumière tamisée",
-   "titre": "Scène 2 : La réaction"
+   "decor": "restaurant, même décor, mais avec des plats servis, fourchettes et couteaux posés, serveur en arrière-plan",
+   "titre": "Scène 2 : La Persuasion"
   },
   {
    "scene": "3",
    "repliques": [
-    26,
-    27,
-    28,
-    29,
     30,
     31,
     32,
@@ -374,460 +369,360 @@
     36,
     37,
     38,
-    39
+    39,
+    40,
+    41,
+    42,
+    43,
+    44
    ],
    "lieu": "",
    "son": "",
    "duree": 0.0,
-   "decor": "même salon, mais avec une atmosphère plus dramatique, une bouteille de vin vide sur la table",
-   "titre": "Scène 3 : La décision"
+   "decor": "restaurant, table avec addition, portefeuille ouvert, téléphones posés, serveur qui s'éloigne",
+   "titre": "Scène 3 : La Fin du Dîner"
   }
  ],
  "studio": {
   "moment": "soir",
   "lieux": [
-   "salons cosy"
+   "restaurant"
   ],
   "costumes": {
    "presentateur": {
     "haut": "tshirt",
-    "c_haut": "bleu",
+    "c_haut": "bleu marine",
     "motif": "uni",
     "bas": "jean",
     "chaussures": "baskets",
     "details": [
      "barbe_courte",
      "bracelets"
-    ]
+    ],
+    "chapeau": null,
+    "cheveux": "court",
+    "c_cheveux": "brun"
    },
    "invite": {
     "haut": "chemise",
     "c_haut": "blanc",
-    "motif": "rayures",
+    "motif": "uni",
     "bas": "pantalon",
     "chaussures": "ville",
     "details": [
      "lunettes_vue",
-     "ceinture"
-    ]
+     "montre"
+    ],
+    "chapeau": null,
+    "cheveux": "court_texture",
+    "c_cheveux": "roux"
    },
    "envoyee": {
-    "haut": "debardeur",
-    "c_haut": "rose",
-    "motif": "fleurs",
-    "bas": "short",
+    "haut": "robe",
+    "c_haut": "blanc",
+    "motif": "uni",
+    "bas": null,
     "chaussures": "ballerines",
     "details": [
-     "boucles_oreilles",
-     "collier"
-    ]
-   }
-  },
-  "personnages": [
-   {
-    "genre": "h",
-    "age": 35,
-    "taille": 1,
-    "corpulence": 0.7,
-    "cheveux": "court_texture",
-    "barbe": "trois_jours"
-   },
-   {
-    "genre": "f",
-    "age": 30,
-    "taille": 0.95,
-    "corpulence": 0.6,
+     "collier",
+     "boucles_oreilles"
+    ],
+    "chapeau": null,
     "cheveux": "long",
-    "barbe": "rien"
-   },
-   {
-    "genre": "f",
-    "age": 32,
-    "taille": 0.9,
-    "corpulence": 0.5,
-    "cheveux": "boucles",
-    "barbe": "rien"
+    "c_cheveux": "blond"
    }
-  ],
-  "gags": [
-   "Avis de recherche : capote disparue, récompense si retrouvée.",
-   "Post-it sur le frigo : 'Ne pas oublier la capote...' (raturé)",
-   "Affiche : 'VTT : Sport extrême, mais pas pour les surprises !'"
-  ],
-  "cadence": "rapide",
-  "ambiances": [
-   "vapeur"
-  ],
-  "plans": [
-   {
-    "replique": 0,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "gratte_tete",
-    "reaction": "choc"
-   },
-   {
-    "replique": 2,
-    "plan": "tres_serre",
-    "mouvement": "zoom_choc",
-    "geste": "pointe_g",
-    "reaction": "choc"
-   },
-   {
-    "replique": 5,
-    "plan": "serre",
-    "mouvement": "epaule",
-    "geste": "facepalm",
-    "reaction": "sceptique"
-   },
-   {
-    "replique": 10,
-    "plan": "moyen",
-    "mouvement": "fixe",
-    "geste": "bras_ouverts",
-    "reaction": "neutre"
-   },
-   {
-    "replique": 13,
-    "plan": "tres_serre",
-    "mouvement": "zoom_choc",
-    "geste": "poing",
-    "reaction": "colere"
-   },
-   {
-    "replique": 22,
-    "plan": "large",
-    "mouvement": "travelling",
-    "geste": "mains_hanches",
-    "reaction": "colere"
-   },
-   {
-    "replique": 25,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "pointe_d",
-    "reaction": "choc"
-   },
-   {
-    "replique": 36,
-    "plan": "contre_plongee",
-    "mouvement": "fixe",
-    "geste": "desespoir",
-    "reaction": "panique"
-   },
-   {
-    "replique": 39,
-    "plan": "serre",
-    "mouvement": "zoom_choc",
-    "geste": "poches",
-    "reaction": "desespoir"
-   }
-  ],
-  "objets": [
-   {
-    "replique": 2,
-    "objet": "telephone"
-   },
-   {
-    "replique": 15,
-    "objet": "bouteille"
-   },
-   {
-    "replique": 36,
-    "objet": "verre"
-   }
-  ],
-  "decors_vus": {
-   "presentateur": "salons cosy avec canapé bleu, table basse en bois clair remplie de livres, vase avec fleurs, étagères remplies de livres et une lampe de table",
-   "invite": "même salon, mais avec une bouteille de vin vide sur la table basse et une tasse de café à moitié vide",
-   "envoyee": "même salon, avec une couverture pliée sur le canapé et un coussin décoratif à motifs floraux"
   }
  },
  "doublage": {
-  "piste": "/tmp/tmpdj4jcj7n/piste.wav",
-  "duree": 95.23,
-  "source": "https://www.tiktok.com/@eliotlehanneur/video/7684678704580136224",
+  "piste": "/tmp/tmpdu886sof/piste.wav",
+  "duree": 92.9,
+  "source": "https://www.tiktok.com/@eliotlehanneur/video/7687274653861023009",
   "auteur": "eliotlehanneur",
-  "contexte": "Deux amis discutent dans un salon cosy d'un appartement, où une révélation inattendue bouleverse leur conversation. L'un apprend qu'il va devenir père malgré les précautions prises.",
+  "contexte": "Un dîner entre amis tourne au vinaigre dans un restaurant. Le presentateur, Jojo, tente de convaincre son amie Lila, végétarienne, de goûter un plat à base de viande, tandis que Kévin, l'invité, observe la scène avec amusement et scepticisme.",
   "evenements": [],
   "visuel": {
    "gestes": [
     [
-     5.0,
-     0.38,
-     0.49
-    ],
-    [
-     6.5,
-     0.38,
-     0.34
-    ],
-    [
      9.5,
-     0.53,
-     0.44
-    ],
-    [
-     13.0,
-     0.48,
-     1.0
-    ],
-    [
-     14.5,
-     0.56,
-     1.0
-    ],
-    [
-     17.0,
      0.57,
-     0.43
+     0.52
     ],
     [
-     28.5,
-     0.61,
-     0.51
-    ],
-    [
-     32.0,
-     0.58,
-     0.42
-    ],
-    [
-     35.5,
-     0.61,
-     0.4
-    ],
-    [
-     38.5,
-     0.58,
-     0.36
-    ],
-    [
-     55.5,
-     0.33,
-     0.4
-    ],
-    [
-     58.0,
-     0.53,
+     22.0,
+     0.67,
      0.41
     ],
     [
-     72.0,
-     0.59,
-     0.42
+     23.0,
+     0.46,
+     0.63
     ],
     [
-     74.5,
-     0.59,
+     25.5,
+     0.57,
+     0.46
+    ],
+    [
+     26.5,
+     0.76,
+     0.62
+    ],
+    [
+     30.0,
+     0.53,
+     0.54
+    ],
+    [
+     34.0,
+     0.41,
+     0.78
+    ],
+    [
+     36.5,
+     0.7,
+     0.38
+    ],
+    [
+     38.0,
+     0.57,
+     0.81
+    ],
+    [
+     39.5,
+     0.51,
+     0.5
+    ],
+    [
+     42.5,
+     0.61,
+     0.61
+    ],
+    [
+     44.0,
+     0.55,
+     0.5
+    ],
+    [
+     45.0,
+     0.62,
+     0.34
+    ],
+    [
+     58.5,
+     0.67,
+     0.87
+    ],
+    [
+     61.5,
+     0.51,
+     0.79
+    ],
+    [
+     78.5,
+     0.49,
      0.35
     ],
     [
-     83.5,
-     0.44,
-     0.45
-    ],
-    [
-     86.0,
-     0.64,
-     0.39
+     85.0,
+     0.58,
+     0.57
     ],
     [
      87.5,
-     0.5,
-     0.74
+     0.64,
+     0.57
     ]
    ],
-   "duree": 95.5,
-   "nb_plans": 63,
-   "duree_plan": 1.52,
+   "duree": 93.0,
+   "nb_plans": 67,
+   "duree_plan": 1.39,
    "coupes": [
-    0.5,
     1.0,
-    2.0,
+    1.5,
     2.5,
+    3.0,
     3.5,
     4.0,
     4.5,
-    9.0,
-    10.0,
-    12.5,
+    5.5,
+    6.0,
+    6.5,
+    8.5,
+    10.5,
     13.5,
-    14.0,
+    14.5,
     15.0,
-    15.5,
-    17.5,
-    18.5,
-    19.5,
-    21.0,
-    22.5,
+    16.0,
+    19.0,
+    20.0,
+    20.5,
+    21.5,
     25.0,
-    25.5,
-    28.0,
-    29.0,
-    29.5,
-    30.0,
+    27.5,
     30.5,
+    31.0,
     32.5,
+    33.5,
     35.0,
     36.0,
     37.0,
-    39.0,
-    39.5,
+    37.5,
+    38.5,
     40.5,
+    41.0,
     42.0,
-    44.0,
-    46.5,
-    47.0,
-    49.5,
-    50.5,
-    51.5,
-    54.0,
-    56.5,
+    43.5,
+    45.5,
+    47.5,
+    48.5,
+    53.0,
+    54.5,
+    55.5,
+    56.0,
+    57.0,
     57.5,
-    60.0,
+    58.0,
+    59.0,
+    59.5,
     61.0,
-    62.5,
-    64.5,
-    68.5,
-    72.5,
-    74.0,
-    75.0,
-    76.5,
-    77.5,
-    81.0,
-    81.5,
-    82.0,
-    84.0,
-    87.0,
-    88.5,
-    90.5
+    62.0,
+    63.5,
+    64.0,
+    66.0,
+    70.0,
+    70.5,
+    71.5,
+    73.5,
+    76.0,
+    77.0,
+    80.0,
+    82.0
    ],
    "plans": {
-    "tres_serre": 0.969,
-    "serre": 0.0,
+    "tres_serre": 0.839,
+    "serre": 0.118,
     "moyen": 0.0,
-    "large": 0.031
+    "large": 0.043
    },
    "camera": {
-    "fixe": 0.405,
-    "avance": 0.087,
-    "recul": 0.032,
-    "travelling": 0.119,
-    "epaule": 0.357
+    "fixe": 0.13,
+    "avance": 0.191,
+    "recul": 0.139,
+    "travelling": 0.209,
+    "epaule": 0.33
    },
    "nb_personnes": 1,
    "personnes": [
     {
      "place": "centre",
-     "presence": 0.806,
+     "presence": 0.737,
      "habit": [
-      39,
-      32,
-      33
+      47,
+      34,
+      32
      ],
      "cheveux": [
-      66,
-      47,
-      31
+      71,
+      50,
+      37
      ],
-     "sourire": 0.0,
-     "taille": 0.35,
-     "tete_penchee": 6.2,
-     "regard_cote": 0.662
+     "sourire": 0.036,
+     "taille": 0.33,
+     "tete_penchee": 6.7,
+     "regard_cote": 0.496
     },
     {
      "place": "droite",
-     "presence": 0.089,
+     "presence": 0.215,
      "habit": [
-      158,
-      94,
-      59
+      156,
+      118,
+      96
      ],
      "cheveux": [
-      50,
-      33,
-      26
+      72,
+      52,
+      42
      ],
      "sourire": 0.0,
-     "taille": 0.341,
-     "tete_penchee": 3.0,
-     "regard_cote": 1.0
+     "taille": 0.311,
+     "tete_penchee": 8.8,
+     "regard_cote": 0.65
     }
    ],
    "visages": true,
-   "sourires": 0.005,
-   "energie": 0.274,
+   "sourires": 0.028,
+   "energie": 0.569,
    "mur": [
-    162,
-    177,
-    176
+    183,
+    178,
+    168
    ],
    "palette": [
     [
-     37,
-     27,
-     24,
-     0.299
-    ],
-    [
-     93,
-     62,
-     46,
-     0.186
-    ],
-    [
-     159,
-     94,
-     62,
-     0.174
-    ],
-    [
-     171,
      182,
-     182,
-     0.165
+     181,
+     176,
+     0.196
     ],
     [
-     227,
-     222,
-     208,
-     0.095
+     26,
+     18,
+     17,
+     0.189
     ],
     [
-     135,
-     133,
-     123,
-     0.082
+     252,
+     251,
+     249,
+     0.161
+    ],
+    [
+     172,
+     129,
+     105,
+     0.158
+    ],
+    [
+     129,
+     89,
+     67,
+     0.155
+    ],
+    [
+     65,
+     45,
+     38,
+     0.141
     ]
    ],
    "lumiere": {
-    "luminosite": 122.2,
-    "chaleur": 29.8,
-    "saturation": 87.1
+    "luminosite": 139.3,
+    "chaleur": 27.1,
+    "saturation": 66.8
    },
    "moment": "soir"
   },
   "audio": {
-   "duree": 95.2,
+   "duree": 92.9,
    "nb_voix": 2,
    "voix": [
     {
-     "hz": 118,
+     "hz": 150,
      "genre": "h",
-     "part": 0.53
+     "part": 0.75
     },
     {
-     "hz": 220,
+     "hz": 208,
      "genre": "f",
-     "part": 0.47
+     "part": 0.25
     }
    ],
-   "debit": 5.28,
-   "blanc_moyen": 1.06,
-   "coupes": 16,
-   "dynamique_db": 22.6,
-   "cris": 0.002,
+   "debit": 4.95,
+   "blanc_moyen": 0.4,
+   "coupes": 10,
+   "dynamique_db": 19.5,
+   "cris": 0.031,
    "musique": null,
    "impacts": 0,
    "impacts_10s": 0.0,
@@ -836,17 +731,17 @@
    "sur_vanne": 0,
    "evenements": {},
    "emotions": {
-    "colere": 10,
-    "choc": 5,
-    "neutre": 4,
-    "sceptique": 4,
-    "gene": 4,
+    "neutre": 21,
+    "annoyed": 3,
+    "colere": 3,
+    "choc": 3,
     "confused": 2,
-    "reflechit": 2,
-    "triste": 2
+    "sceptique": 2,
+    "persuasive": 2,
+    "excited": 1
    }
   },
-  "video_origine": "/tmp/tmpdj4jcj7n/src.mp4"
+  "video_origine": "/tmp/tmpdu886sof/src.mp4"
  },
  "fiche": {
   "note": 0,
@@ -863,18 +758,18 @@
      5,
      6,
      7,
-     8,
-     9
+     8
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "salons cosy avec canapé bleu, table basse en bois clair, vase rempli de fleurs, tapis persan, étagères remplies de livres",
-    "titre": "Scène 1 : L'annonce"
+    "decor": "restaurant, table en bois, chaises en métal, nappe à carreaux rouges et blancs, assiettes vides, bouteilles de vin, bougies allumées, menu ouvert",
+    "titre": "Scène 1 : Le Débat Culinaire"
    },
    {
     "scene": "2",
     "repliques": [
+     9,
      10,
      11,
      12,
@@ -890,21 +785,21 @@
      22,
      23,
      24,
-     25
+     25,
+     26,
+     27,
+     28,
+     29
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "même salon, mais avec une ambiance plus tendue, lumière tamisée",
-    "titre": "Scène 2 : La réaction"
+    "decor": "restaurant, même décor, mais avec des plats servis, fourchettes et couteaux posés, serveur en arrière-plan",
+    "titre": "Scène 2 : La Persuasion"
    },
    {
     "scene": "3",
     "repliques": [
-     26,
-     27,
-     28,
-     29,
      30,
      31,
      32,
@@ -914,37 +809,38 @@
      36,
      37,
      38,
-     39
+     39,
+     40,
+     41,
+     42,
+     43,
+     44
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "même salon, mais avec une atmosphère plus dramatique, une bouteille de vin vide sur la table",
-    "titre": "Scène 3 : La décision"
+    "decor": "restaurant, table avec addition, portefeuille ouvert, téléphones posés, serveur qui s'éloigne",
+    "titre": "Scène 3 : La Fin du Dîner"
    }
   ]
  },
  "_monte": true,
  "_voix_hz": {
-  "presentateur": 115,
-  "envoyee": 208
+  "presentateur": 151,
+  "envoyee": 210
  },
  "_voix_genre": {
   "presentateur": "h",
-  "envoyee": "f"
+  "envoyee": "h"
  },
  "realisation": {
   "moment": "soir",
   "lieux": [
-   "salon",
-   "salon",
-   "salon"
+   "restaurant",
+   "restaurant",
+   "restaurant"
   ],
-  "gags": [
-   "Avis de recherche : capote disparue, récompense si retrouvée.",
-   "Post-it sur le frigo : 'Ne pas oublier la capote...' (raturé)",
-   "Affiche : 'VTT : Sport extrême, mais pas pour les surprises !'"
-  ],
+  "gags": [],
   "ambiances": [
    "poussiere",
    "vapeur"
@@ -952,9 +848,14 @@
   "source": "auteur+image",
   "tenues": {
    "presentateur": "tshirt",
-   "envoyee": "debardeur"
+   "envoyee": "robe"
   },
   "plans": [
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
    "large/fixe",
    "large/fixe",
    "large/fixe",
