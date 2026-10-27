@@ -1,466 +1,833 @@
 {
- "titre": "RETRAIT BANCAIRE ABSURDE",
- "sujet": "RETRAIT BANCAIRE ABSURDE",
- "ecran": "RETRAIT BANCAI",
+ "titre": "VIE QUI BASCULE",
+ "sujet": "VIE QUI BASCULE",
+ "ecran": "VIE QUI BASCUL",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "POV : Votre banquier doute de vos intentions",
- "question": "Pourquoi un retrait de 9500 euros soulève-t-il autant de questions ?",
+ "titre_accroche": "Quand ta vie bascule",
+ "question": "Comment gérer une nouvelle aussi bouleversante ?",
  "running_gag": "",
  "verite": "",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "Bonjour Monsieur Chou, je me permets de vous téléphoner pour savoir pour votre retrait que vous avez fait il y a quelques jours.",
-   "_deb": 0.0,
-   "_fin": 5.58,
-   "d": "['[professionnel]', 'Bonjour Monsieur Chou, je me permets de vous téléphoner pour savoir pour votre retrait que vous avez fait il y a quelques jours.']",
-   "objet": "telephone"
+   "t": "Ça va depuis?",
+   "_deb": 1.26,
+   "_fin": 2.26,
+   "d": "[neutre] Ça va depuis?"
   },
   {
-   "p": "invite",
-   "t": "Oui, j 'ai fait une demande de retrait pour une certaine somme et on m 'a dit que je devais avoir votre accord ou je ne sais pas",
-   "_deb": 5.82,
-   "_fin": 10.48,
-   "objet": "telephone"
+   "p": "envoyee",
+   "t": "[confused] Ça va bien, et toi?",
+   "_deb": 2.26,
+   "_fin": 3.02,
+   "d": "[confused] Ça va bien, et toi?"
   },
   {
-   "p": "invite",
-   "t": "quoi, je n 'ai pas tout compris.",
-   "_deb": 10.48,
-   "_fin": 11.18,
+   "p": "presentateur",
+   "t": "Je suis enceinte. J'ai fait du VTT le week-end dernier.",
+   "_deb": 3.48,
+   "_fin": 5.24,
+   "d": "[choc] Je suis enceinte. J'ai fait du VTT le week-end dernier.",
    "objet": "telephone"
   },
   {
    "p": "presentateur",
-   "t": "Bien sûr, vous avez vu le montant et en plus vous souhaitez ça dans la semaine.",
-   "_deb": 12.12,
-   "_fin": 15.4,
-   "objet": "billet"
+   "t": "De quoi?",
+   "_deb": 8.0,
+   "_fin": 8.52,
+   "d": "[annoyed] De quoi?"
   },
   {
-   "p": "invite",
-   "t": "Oui, c 'est mon argent.",
-   "_deb": 15.98,
-   "_fin": 17.18,
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Oui, mais ça nous paraît bizarre. On ne prend pas 9500 euros comme ça dans la semaine.",
-   "_deb": 18.42,
-   "_fin": 24.34,
-   "objet": "telephone"
+   "p": "envoyee",
+   "t": "Du VTT le week-end dernier? Ou ça?",
+   "_deb": 8.52,
+   "_fin": 9.88,
+   "d": "[sceptique] Du VTT le week-end dernier? Ou ça?"
   },
   {
    "p": "presentateur",
-   "t": "Quelle est la raison?",
-   "_deb": 24.48,
-   "_fin": 25.56,
-   "objet": "telephone"
+   "t": "Tu m'as dit quoi juste avant là? J'ai pas compris.",
+   "_deb": 9.88,
+   "_fin": 12.1,
+   "d": "[panique] Tu m'as dit quoi juste avant là? J'ai pas compris."
   },
   {
-   "p": "invite",
-   "t": "Oui, j 'en fais ce que je veux. C 'est mon argent.",
-   "_deb": 25.56,
-   "_fin": 27.7,
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "Je vais me demander de le retirer de la banque parce que j 'ai économisé et aujourd 'hui je veux le retirer.",
-   "_deb": 27.86,
-   "_fin": 31.88,
-   "objet": "telephone"
+   "p": "envoyee",
+   "t": "Demandez comment tu allais? Non après. Où est-ce que tu faisais du VTT?",
+   "_deb": 12.18,
+   "_fin": 14.92,
+   "d": "[colere] Demandez comment tu allais? Non après. Où est-ce que tu faisais du VTT?"
   },
   {
    "p": "presentateur",
-   "t": "C 'est simple, non? Non, je suis désolée. Il nous faudra vraiment le motif.",
-   "_deb": 32.32,
-   "_fin": 37.08,
-   "objet": "telephone"
+   "t": "Non avant.",
+   "_deb": 14.92,
+   "_fin": 15.16,
+   "d": "[choc] Non avant."
   },
   {
-   "p": "invite",
-   "t": "Le motif? J 'ai envie d 'aller à la jonquera.",
-   "_deb": 38.4,
-   "_fin": 41.4,
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "J 'ai envie de me taper, j 'ai envie d 'aller voir des mannequins Victoria Secret.",
-   "_deb": 41.68,
-   "_fin": 44.96,
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "Il a eu le souci. Il faut quoi une justification de ce qu 'elles vont me faire?",
-   "_deb": 45.14,
-   "_fin": 51.2,
-   "objet": "tablette"
+   "p": "envoyee",
+   "t": "Oui, je suis enceinte.",
+   "_deb": 16.24,
+   "_fin": 19.08,
+   "d": "[confused] Oui, je suis enceinte."
   },
   {
    "p": "presentateur",
-   "t": "Non, mais autant d 'argent. J 'ai du mal à croire.",
-   "_deb": 51.2,
-   "_fin": 53.6,
-   "objet": "telephone"
+   "t": "D'accord.",
+   "_deb": 20.16,
+   "_fin": 20.48,
+   "d": "[neutre] D'accord."
   },
   {
    "p": "presentateur",
-   "t": "Je ne pense pas que vos intentions soient bonnes.",
-   "_deb": 53.68,
-   "_fin": 55.42,
-   "objet": "telephone"
+   "t": "Et... Je veux dire... Il est de... De toi. De moi.",
+   "_deb": 22.02,
+   "_fin": 25.48,
+   "d": "[reflechit] Et... Je veux dire... Il est de... De toi. De moi."
   },
   {
-   "p": "invite",
-   "t": "J 'en prends plusieurs. J 'en prends plusieurs. Je ne fais rien.",
-   "_deb": 55.48,
-   "_fin": 57.76,
-   "objet": "telephone"
+   "p": "presentateur",
+   "t": "Ok.",
+   "_deb": 26.38,
+   "_fin": 26.52,
+   "d": "[choc] Ok."
   },
   {
-   "p": "invite",
-   "t": "Un gangbang à 8. Il a eu le souci.",
-   "_deb": 57.82,
-   "_fin": 60.4,
-   "chute": true,
-   "objet": "telephone"
+   "p": "envoyee",
+   "t": "Je ne savais pas trop comment l'annoncer mais...",
+   "_deb": 27.62,
+   "_fin": 29.58,
+   "d": "[gene] Je ne savais pas trop comment l'annoncer mais..."
+  },
+  {
+   "p": "presentateur",
+   "t": "Mais je... Enfin, je ne comprends pas. On avait dû viser une capote donc...",
+   "_deb": 29.58,
+   "_fin": 34.22,
+   "d": "[colere] Mais je... Enfin, je ne comprends pas. On avait dû viser une capote donc..."
+  },
+  {
+   "p": "presentateur",
+   "t": "Je ne comprends pas la...",
+   "_deb": 34.22,
+   "_fin": 34.92,
+   "d": "[colere] Je ne comprends pas la..."
+  },
+  {
+   "p": "envoyee",
+   "t": "Tu sais, ce n'est pas viable à 100%. Il y a des rares cas où il y en a un qui passe.",
+   "_deb": 34.92,
+   "_fin": 38.52,
+   "d": "[calme] Tu sais, ce n'est pas viable à 100%. Il y a des rares cas où il y en a un qui passe.",
+   "objet": "bouteille"
+  },
+  {
+   "p": "envoyee",
+   "t": "Comment tu te sens?",
+   "_deb": 42.9,
+   "_fin": 43.86,
+   "d": "[gene] Comment tu te sens?"
+  },
+  {
+   "p": "presentateur",
+   "t": "Mal. Enfin... Plutôt mal, je t'avoue.",
+   "_deb": 43.86,
+   "_fin": 46.5,
+   "d": "[triste] Mal. Enfin... Plutôt mal, je t'avoue."
+  },
+  {
+   "p": "presentateur",
+   "t": "Qu'est-ce que tu comptes faire?",
+   "_deb": 47.52,
+   "_fin": 48.94,
+   "d": "[sceptique] Qu'est-ce que tu comptes faire?"
+  },
+  {
+   "p": "envoyee",
+   "t": "Je ne sais pas du tout.",
+   "_deb": 48.94,
+   "_fin": 49.56,
+   "d": "[desespoir] Je ne sais pas du tout."
+  },
+  {
+   "p": "envoyee",
+   "t": "C'est pour ça que je voulais qu'on soit.",
+   "_deb": 50.5,
+   "_fin": 51.64,
+   "d": "[neutre] C'est pour ça que je voulais qu'on soit."
+  },
+  {
+   "p": "envoyee",
+   "t": "Parce que je pense que ça te concerne aussi.",
+   "_deb": 51.74,
+   "_fin": 53.76,
+   "d": "[neutre] Parce que je pense que ça te concerne aussi."
+  },
+  {
+   "p": "presentateur",
+   "t": "Non mais... T'as bien fait mais après moi je t'avoue que...",
+   "_deb": 53.88,
+   "_fin": 56.5,
+   "d": "[colere] Non mais... T'as bien fait mais après moi je t'avoue que..."
+  },
+  {
+   "p": "presentateur",
+   "t": "Ça ne fait pas du tout partie de mes plans.",
+   "_deb": 57.88,
+   "_fin": 59.36,
+   "d": "[colere] Ça ne fait pas du tout partie de mes plans."
+  },
+  {
+   "p": "envoyee",
+   "t": "Donc toi, tu ne veux pas le garder?",
+   "_deb": 59.48,
+   "_fin": 60.56,
+   "d": "[choc] Donc toi, tu ne veux pas le garder?"
+  },
+  {
+   "p": "presentateur",
+   "t": "Non. Vraiment pas.",
+   "_deb": 60.56,
+   "_fin": 62.06,
+   "d": "[colere] Non. Vraiment pas."
+  },
+  {
+   "p": "presentateur",
+   "t": "Il y a moins de quelque chose.",
+   "_deb": 64.12,
+   "_fin": 64.98,
+   "d": "[triste] Il y a moins de quelque chose."
+  },
+  {
+   "p": "presentateur",
+   "t": "Comment tu vois les choses toi?",
+   "_deb": 67.1,
+   "_fin": 68.14,
+   "d": "[reflechit] Comment tu vois les choses toi?"
+  },
+  {
+   "p": "envoyee",
+   "t": "Je ne sais pas trop. Je... Je pensais que... Enfin, je ne sais pas.",
+   "_deb": 68.14,
+   "_fin": 72.08,
+   "d": "[gene] Je ne sais pas trop. Je... Je pensais que... Enfin, je ne sais pas."
+  },
+  {
+   "p": "presentateur",
+   "t": "Tu veux le garder?",
+   "_deb": 72.82,
+   "_fin": 73.5,
+   "d": "[sceptique] Tu veux le garder?"
+  },
+  {
+   "p": "envoyee",
+   "t": "Je n'en sais rien, je...",
+   "_deb": 73.5,
+   "_fin": 74.52,
+   "d": "[gene] Je n'en sais rien, je..."
+  },
+  {
+   "p": "presentateur",
+   "t": "Mais d'accord, mais il faudrait que tu saches là parce que...",
+   "_deb": 74.52,
+   "_fin": 76.6,
+   "d": "[colere] Mais d'accord, mais il faudrait que tu saches là parce que..."
+  },
+  {
+   "p": "envoyee",
+   "t": "Oui, peut-être.",
+   "_deb": 76.6,
+   "_fin": 77.16,
+   "d": "[soupir] Oui, peut-être."
+  },
+  {
+   "p": "presentateur",
+   "t": "Oui, peut-être.",
+   "_deb": 77.54,
+   "_fin": 78.06,
+   "d": "[soupir] Oui, peut-être."
+  },
+  {
+   "p": "presentateur",
+   "t": "Peut-être quoi, genre... Tu veux le garder?",
+   "_deb": 79.16,
+   "_fin": 80.84,
+   "d": "[colere] Peut-être quoi, genre... Tu veux le garder?"
+  },
+  {
+   "p": "envoyee",
+   "t": "Peut-être, oui.",
+   "_deb": 80.84,
+   "_fin": 81.28,
+   "d": "[choc] Peut-être, oui."
+  },
+  {
+   "p": "presentateur",
+   "t": "Ah non, putain, ce n'est pas possible.",
+   "_deb": 81.44,
+   "_fin": 82.66,
+   "d": "[colere] Ah non, putain, ce n'est pas possible.",
+   "objet": "verre"
+  },
+  {
+   "p": "envoyee",
+   "t": "Non mais attends, je ne te demande rien. Si tu ne veux pas faire partie de sa vie, c'est d'accord, c'est toi qui vois.",
+   "_deb": 83.32,
+   "_fin": 86.72,
+   "d": "[colere] Non mais attends, je ne te demande rien. Si tu ne veux pas faire partie de sa vie, c'est d'accord, c'est toi qui vois."
+  },
+  {
+   "p": "presentateur",
+   "t": "Donc tu serais prête à l'élever toute seule?",
+   "_deb": 86.74,
+   "_fin": 88.0,
+   "d": "[sceptique] Donc tu serais prête à l'élever toute seule?"
+  },
+  {
+   "p": "envoyee",
+   "t": "Si je n'ai pas le choix...",
+   "_deb": 88.0,
+   "_fin": 89.22,
+   "d": "[desespoir] Si je n'ai pas le choix...",
+   "chute": true
   }
  ],
  "bandeau": [],
  "gag": null,
- "legende": "Un client veut retirer son argent pour des raisons... très personnelles.",
+ "legende": "Une révélation inattendue change tout entre deux amis.",
  "hashtags": [
   "petitsdramas",
-  "banque",
-  "argent",
-  "humour",
-  "absurde",
-  "retrait",
-  "client"
+  "vieinsolite",
+  "surpriseinattendue",
+  "amitie",
+  "dilemme",
+  "revelation",
+  "emotions"
  ],
  "sources": [
-  "https://www.tiktok.com/@charly.bse/video/7661267540756286753"
+  "https://www.tiktok.com/@eliotlehanneur/video/7684678704580136224"
  ],
  "decoupage": [
   {
    "scene": "1",
    "repliques": [
     0,
+    1,
+    2,
     3,
+    4,
     5,
     6,
-    9,
-    13,
-    14
+    7,
+    8,
+    9
    ],
    "lieu": "",
    "son": "",
-   "duree": 0,
-   "decor": "bureau administration avec un ordinateur allumé, un téléphone fixe, des dossiers rouges et verts, une tasse de café à moitié vide, une lampe de bureau allumée, "
+   "duree": 0.0,
+   "decor": "salons cosy avec canapé bleu, table basse en bois clair, vase rempli de fleurs, tapis persan, étagères remplies de livres",
+   "titre": "Scène 1 : L'annonce"
   },
   {
    "scene": "2",
    "repliques": [
-    1,
-    2,
-    4,
-    7,
-    8,
     10,
     11,
     12,
+    13,
+    14,
     15,
-    16
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25
    ],
    "lieu": "",
    "son": "",
-   "duree": 0,
-   "decor": "bureau administration avec une vue sur la ville, un tableau blanc avec des chiffres écrits, un téléphone portable rouge posé sur le bureau."
+   "duree": 0.0,
+   "decor": "même salon, mais avec une ambiance plus tendue, lumière tamisée",
+   "titre": "Scène 2 : La réaction"
+  },
+  {
+   "scene": "3",
+   "repliques": [
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39
+   ],
+   "lieu": "",
+   "son": "",
+   "duree": 0.0,
+   "decor": "même salon, mais avec une atmosphère plus dramatique, une bouteille de vin vide sur la table",
+   "titre": "Scène 3 : La décision"
   }
  ],
  "studio": {
-  "moment": "jour",
+  "moment": "soir",
   "lieux": [
-   "rue",
-   "salon"
+   "salons cosy"
   ],
   "costumes": {
    "presentateur": {
-    "haut": "chemise",
-    "c_haut": "bleu marine",
-    "motif": "uni",
-    "bas": "pantalon",
-    "chaussures": "ville",
-    "details": [
-     "cravate",
-     "lunettes_vue",
-     "montre"
-    ]
-   },
-   "invite": {
     "haut": "tshirt",
-    "c_haut": "rouge",
+    "c_haut": "bleu",
     "motif": "uni",
-    "bas": "jeans",
+    "bas": "jean",
     "chaussures": "baskets",
     "details": [
      "barbe_courte",
      "bracelets"
     ]
+   },
+   "invite": {
+    "haut": "chemise",
+    "c_haut": "blanc",
+    "motif": "rayures",
+    "bas": "pantalon",
+    "chaussures": "ville",
+    "details": [
+     "lunettes_vue",
+     "ceinture"
+    ]
+   },
+   "envoyee": {
+    "haut": "debardeur",
+    "c_haut": "rose",
+    "motif": "fleurs",
+    "bas": "short",
+    "chaussures": "ballerines",
+    "details": [
+     "boucles_oreilles",
+     "collier"
+    ]
    }
   },
   "personnages": [
    {
-    "role": "presentateur",
-    "genre": "f",
-    "age": 45,
-    "taille": 1,
-    "corpulence": 0.5,
-    "cheveux": "long",
-    "c_cheveux": "brun",
-    "barbe": "rien"
-   },
-   {
-    "role": "invite",
     "genre": "h",
     "age": 35,
     "taille": 1,
     "corpulence": 0.7,
-    "cheveux": "court",
-    "c_cheveux": "roux",
+    "cheveux": "court_texture",
     "barbe": "trois_jours"
-   }
-  ],
-  "decors_vus": {
-   "presentateur": "bureau administration avec un ordinateur allumé, un téléphone fixe, des dossiers rouges et verts, une tasse de café à moitié vide, une lampe de bureau allumée, et un calendrier mural.",
-   "invite": "bureau administration avec une vue sur la ville, un tableau blanc avec des chiffres écrits, un téléphone portable rouge posé sur le bureau."
-  },
-  "objets": [
-   {
-    "replique": 0,
-    "objet": "telephone"
    },
    {
-    "replique": 1,
-    "objet": "telephone"
+    "genre": "f",
+    "age": 30,
+    "taille": 0.95,
+    "corpulence": 0.6,
+    "cheveux": "long",
+    "barbe": "rien"
    },
    {
-    "replique": 3,
-    "objet": "billet"
-   },
-   {
-    "replique": 10,
-    "objet": "telephone"
-   },
-   {
-    "replique": 12,
-    "objet": "tablette"
+    "genre": "f",
+    "age": 32,
+    "taille": 0.9,
+    "corpulence": 0.5,
+    "cheveux": "boucles",
+    "barbe": "rien"
    }
   ],
   "gags": [
-   "Mot du jour : Économies = Liberté ?",
-   "Affiche : 'Victoria’s Secret : Réservation obligatoire (et motif)'",
-   "Post-it : '9500 € : Trop ou pas assez ?'"
-  ],
-  "ambiances": [
-   "neon"
+   "Avis de recherche : capote disparue, récompense si retrouvée.",
+   "Post-it sur le frigo : 'Ne pas oublier la capote...' (raturé)",
+   "Affiche : 'VTT : Sport extrême, mais pas pour les surprises !'"
   ],
   "cadence": "rapide",
+  "ambiances": [
+   "vapeur"
+  ],
   "plans": [
    {
     "replique": 0,
     "plan": "serre",
     "mouvement": "fixe",
-    "geste": "explique",
+    "geste": "gratte_tete",
+    "reaction": "choc"
+   },
+   {
+    "replique": 2,
+    "plan": "tres_serre",
+    "mouvement": "zoom_choc",
+    "geste": "pointe_g",
+    "reaction": "choc"
+   },
+   {
+    "replique": 5,
+    "plan": "serre",
+    "mouvement": "epaule",
+    "geste": "facepalm",
+    "reaction": "sceptique"
+   },
+   {
+    "replique": 10,
+    "plan": "moyen",
+    "mouvement": "fixe",
+    "geste": "bras_ouverts",
     "reaction": "neutre"
    },
    {
-    "replique": 1,
-    "plan": "moyen",
-    "mouvement": "fixe",
-    "geste": "gratte_tete",
-    "reaction": "confused"
+    "replique": 13,
+    "plan": "tres_serre",
+    "mouvement": "zoom_choc",
+    "geste": "poing",
+    "reaction": "colere"
    },
    {
-    "replique": 4,
+    "replique": 22,
+    "plan": "large",
+    "mouvement": "travelling",
+    "geste": "mains_hanches",
+    "reaction": "colere"
+   },
+   {
+    "replique": 25,
     "plan": "serre",
-    "mouvement": "zoom_choc",
+    "mouvement": "fixe",
     "geste": "pointe_d",
     "reaction": "choc"
    },
    {
-    "replique": 7,
-    "plan": "large",
-    "mouvement": "travelling",
-    "geste": "bras_ouverts",
-    "reaction": "determine"
-   },
-   {
-    "replique": 11,
-    "plan": "tres_serre",
-    "mouvement": "fixe",
-    "geste": "poches",
-    "reaction": "sceptique"
-   },
-   {
-    "replique": 16,
+    "replique": 36,
     "plan": "contre_plongee",
     "mouvement": "fixe",
     "geste": "desespoir",
-    "reaction": "hallucine"
-   }
-  ],
-  "jeu": [
-   {
-    "replique": 0,
-    "emotion": "professionnel",
-    "geste": "explique",
-    "intensite": 1
+    "reaction": "panique"
    },
    {
-    "replique": 1,
-    "emotion": "confus",
-    "geste": "gratte_tete",
-    "intensite": 2
-   },
-   {
-    "replique": 4,
-    "emotion": "ferme",
-    "geste": "pointe_d",
-    "intensite": 3
-   },
-   {
-    "replique": 7,
-    "emotion": "determine",
-    "geste": "bras_ouverts",
-    "intensite": 3
-   },
-   {
-    "replique": 11,
-    "emotion": "provocateur",
+    "replique": 39,
+    "plan": "serre",
+    "mouvement": "zoom_choc",
     "geste": "poches",
-    "intensite": 3
-   },
-   {
-    "replique": 16,
-    "emotion": "hallucine",
-    "geste": "desespoir",
-    "intensite": 3
+    "reaction": "desespoir"
    }
   ],
-  "lieux_de": {
-   "presentateur": "rue",
-   "invite": "salon"
+  "objets": [
+   {
+    "replique": 2,
+    "objet": "telephone"
+   },
+   {
+    "replique": 15,
+    "objet": "bouteille"
+   },
+   {
+    "replique": 36,
+    "objet": "verre"
+   }
+  ],
+  "decors_vus": {
+   "presentateur": "salons cosy avec canapé bleu, table basse en bois clair remplie de livres, vase avec fleurs, étagères remplies de livres et une lampe de table",
+   "invite": "même salon, mais avec une bouteille de vin vide sur la table basse et une tasse de café à moitié vide",
+   "envoyee": "même salon, avec une couverture pliée sur le canapé et un coussin décoratif à motifs floraux"
   }
  },
  "doublage": {
-  "piste": "/tmp/tmpmv2a78sq/piste.wav",
-  "duree": 62.21,
-  "source": "https://www.tiktok.com/@charly.bse/video/7661267540756286753",
-  "auteur": "charly.bse",
-  "contexte": "Un échange téléphonique tendu entre un conseiller bancaire (presentateur) et un client (invite) qui souhaite retirer une somme importante d'argent sans justification claire, dans un bureau d'administration bancaire.",
+  "piste": "/tmp/tmpdj4jcj7n/piste.wav",
+  "duree": 95.23,
+  "source": "https://www.tiktok.com/@eliotlehanneur/video/7684678704580136224",
+  "auteur": "eliotlehanneur",
+  "contexte": "Deux amis discutent dans un salon cosy d'un appartement, où une révélation inattendue bouleverse leur conversation. L'un apprend qu'il va devenir père malgré les précautions prises.",
   "evenements": [],
   "visuel": {
-   "gestes": [],
-   "duree": 62.5,
-   "nb_plans": 1,
-   "duree_plan": 62.5,
-   "coupes": [],
+   "gestes": [
+    [
+     5.0,
+     0.38,
+     0.49
+    ],
+    [
+     6.5,
+     0.38,
+     0.34
+    ],
+    [
+     9.5,
+     0.53,
+     0.44
+    ],
+    [
+     13.0,
+     0.48,
+     1.0
+    ],
+    [
+     14.5,
+     0.56,
+     1.0
+    ],
+    [
+     17.0,
+     0.57,
+     0.43
+    ],
+    [
+     28.5,
+     0.61,
+     0.51
+    ],
+    [
+     32.0,
+     0.58,
+     0.42
+    ],
+    [
+     35.5,
+     0.61,
+     0.4
+    ],
+    [
+     38.5,
+     0.58,
+     0.36
+    ],
+    [
+     55.5,
+     0.33,
+     0.4
+    ],
+    [
+     58.0,
+     0.53,
+     0.41
+    ],
+    [
+     72.0,
+     0.59,
+     0.42
+    ],
+    [
+     74.5,
+     0.59,
+     0.35
+    ],
+    [
+     83.5,
+     0.44,
+     0.45
+    ],
+    [
+     86.0,
+     0.64,
+     0.39
+    ],
+    [
+     87.5,
+     0.5,
+     0.74
+    ]
+   ],
+   "duree": 95.5,
+   "nb_plans": 63,
+   "duree_plan": 1.52,
+   "coupes": [
+    0.5,
+    1.0,
+    2.0,
+    2.5,
+    3.5,
+    4.0,
+    4.5,
+    9.0,
+    10.0,
+    12.5,
+    13.5,
+    14.0,
+    15.0,
+    15.5,
+    17.5,
+    18.5,
+    19.5,
+    21.0,
+    22.5,
+    25.0,
+    25.5,
+    28.0,
+    29.0,
+    29.5,
+    30.0,
+    30.5,
+    32.5,
+    35.0,
+    36.0,
+    37.0,
+    39.0,
+    39.5,
+    40.5,
+    42.0,
+    44.0,
+    46.5,
+    47.0,
+    49.5,
+    50.5,
+    51.5,
+    54.0,
+    56.5,
+    57.5,
+    60.0,
+    61.0,
+    62.5,
+    64.5,
+    68.5,
+    72.5,
+    74.0,
+    75.0,
+    76.5,
+    77.5,
+    81.0,
+    81.5,
+    82.0,
+    84.0,
+    87.0,
+    88.5,
+    90.5
+   ],
    "plans": {
-    "tres_serre": 0.024,
+    "tres_serre": 0.969,
     "serre": 0.0,
     "moyen": 0.0,
-    "large": 0.976
+    "large": 0.031
    },
    "camera": {
-    "fixe": 1.0,
-    "avance": 0.0,
-    "recul": 0.0,
-    "travelling": 0.0,
-    "epaule": 0.0
+    "fixe": 0.405,
+    "avance": 0.087,
+    "recul": 0.032,
+    "travelling": 0.119,
+    "epaule": 0.357
    },
    "nb_personnes": 1,
-   "personnes": [],
+   "personnes": [
+    {
+     "place": "centre",
+     "presence": 0.806,
+     "habit": [
+      39,
+      32,
+      33
+     ],
+     "cheveux": [
+      66,
+      47,
+      31
+     ],
+     "sourire": 0.0,
+     "taille": 0.35,
+     "tete_penchee": 6.2,
+     "regard_cote": 0.662
+    },
+    {
+     "place": "droite",
+     "presence": 0.089,
+     "habit": [
+      158,
+      94,
+      59
+     ],
+     "cheveux": [
+      50,
+      33,
+      26
+     ],
+     "sourire": 0.0,
+     "taille": 0.341,
+     "tete_penchee": 3.0,
+     "regard_cote": 1.0
+    }
+   ],
    "visages": true,
-   "sourires": 0.0,
-   "energie": 0.099,
+   "sourires": 0.005,
+   "energie": 0.274,
    "mur": [
-    130,
-    172,
-    188
+    162,
+    177,
+    176
    ],
    "palette": [
     [
-     130,
-     172,
-     189,
-     0.482
+     37,
+     27,
+     24,
+     0.299
     ],
     [
-     246,
-     205,
-     164,
-     0.172
+     93,
+     62,
+     46,
+     0.186
     ],
     [
-     74,
-     116,
-     147,
-     0.128
-    ],
-    [
-     6,
-     6,
-     9,
-     0.124
-    ],
-    [
-     120,
-     81,
-     61,
-     0.068
-    ],
-    [
-     2,
+     159,
      94,
-     189,
-     0.026
+     62,
+     0.174
+    ],
+    [
+     171,
+     182,
+     182,
+     0.165
+    ],
+    [
+     227,
+     222,
+     208,
+     0.095
+    ],
+    [
+     135,
+     133,
+     123,
+     0.082
     ]
    ],
    "lumiere": {
-    "luminosite": 166.5,
-    "chaleur": -23.9,
-    "saturation": 98.7
+    "luminosite": 122.2,
+    "chaleur": 29.8,
+    "saturation": 87.1
    },
-   "moment": "jour"
+   "moment": "soir"
   },
   "audio": {
-   "duree": 62.2,
+   "duree": 95.2,
    "nb_voix": 2,
    "voix": [
     {
-     "hz": 256,
-     "genre": "f",
-     "part": 0.45
+     "hz": 118,
+     "genre": "h",
+     "part": 0.53
     },
     {
-     "hz": 163,
-     "genre": "h",
-     "part": 0.55
+     "hz": 220,
+     "genre": "f",
+     "part": 0.47
     }
    ],
-   "debit": 4.32,
-   "blanc_moyen": 0.44,
-   "coupes": 2,
-   "dynamique_db": 22.2,
-   "cris": 0.023,
+   "debit": 5.28,
+   "blanc_moyen": 1.06,
+   "coupes": 16,
+   "dynamique_db": 22.6,
+   "cris": 0.002,
    "musique": null,
    "impacts": 0,
    "impacts_10s": 0.0,
@@ -469,17 +836,17 @@
    "sur_vanne": 0,
    "evenements": {},
    "emotions": {
-    "'[professionnel": 1,
-    "'[confus": 1,
-    "'[ironique": 1,
-    "'[ferme": 1,
-    "'[sceptique": 1,
-    "'[inquiet": 1,
-    "'[agace": 1,
-    "'[determine": 1
+    "colere": 10,
+    "choc": 5,
+    "neutre": 4,
+    "sceptique": 4,
+    "gene": 4,
+    "confused": 2,
+    "reflechit": 2,
+    "triste": 2
    }
   },
-  "video_origine": "/tmp/tmpmv2a78sq/src.mp4"
+  "video_origine": "/tmp/tmpdj4jcj7n/src.mp4"
  },
  "fiche": {
   "note": 0,
@@ -502,8 +869,8 @@
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "bureau administration avec un grand bureau en bois, un ordinateur, une lampe de bureau, des dossiers empilés, un téléphone fixe et un calendrier mural.",
-    "titre": "Scène 1 : Le bureau bancaire"
+    "decor": "salons cosy avec canapé bleu, table basse en bois clair, vase rempli de fleurs, tapis persan, étagères remplies de livres",
+    "titre": "Scène 1 : L'annonce"
    },
    {
     "scene": "2",
@@ -514,46 +881,103 @@
      13,
      14,
      15,
-     16
+     16,
+     17,
+     18,
+     19,
+     20,
+     21,
+     22,
+     23,
+     24,
+     25
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "bureau administration avec un fond de ville visible à travers la fenêtre, un tableau blanc avec des chiffres, un téléphone portable posé sur le bureau.",
-    "titre": "Scène 2 : L'escalade"
+    "decor": "même salon, mais avec une ambiance plus tendue, lumière tamisée",
+    "titre": "Scène 2 : La réaction"
+   },
+   {
+    "scene": "3",
+    "repliques": [
+     26,
+     27,
+     28,
+     29,
+     30,
+     31,
+     32,
+     33,
+     34,
+     35,
+     36,
+     37,
+     38,
+     39
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 0.0,
+    "decor": "même salon, mais avec une atmosphère plus dramatique, une bouteille de vin vide sur la table",
+    "titre": "Scène 3 : La décision"
    }
   ]
  },
  "_monte": true,
- "_separes": true,
  "_voix_hz": {
-  "presentateur": 259,
-  "invite": 162
+  "presentateur": 115,
+  "envoyee": 208
  },
  "_voix_genre": {
-  "presentateur": "f",
-  "invite": "h"
+  "presentateur": "h",
+  "envoyee": "f"
  },
  "realisation": {
-  "moment": "jour",
+  "moment": "soir",
   "lieux": [
-   "rue",
+   "salon",
+   "salon",
    "salon"
   ],
   "gags": [
-   "Mot du jour : Économies = Liberté ?",
-   "Affiche : 'Victoria’s Secret : Réservation obligatoire (et motif)'",
-   "Post-it : '9500 € : Trop ou pas assez ?'"
+   "Avis de recherche : capote disparue, récompense si retrouvée.",
+   "Post-it sur le frigo : 'Ne pas oublier la capote...' (raturé)",
+   "Affiche : 'VTT : Sport extrême, mais pas pour les surprises !'"
   ],
   "ambiances": [
-   "neon"
+   "poussiere",
+   "vapeur"
   ],
   "source": "auteur+image",
   "tenues": {
-   "presentateur": "chemise",
-   "invite": "tshirt"
+   "presentateur": "tshirt",
+   "envoyee": "debardeur"
   },
   "plans": [
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
    "large/fixe",
    "large/fixe",
    "large/fixe",
