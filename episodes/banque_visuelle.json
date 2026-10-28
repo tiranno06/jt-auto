@@ -29180,5 +29180,213 @@
    ]
   },
   "video": "2026-10-28_22h16_emission.mp4"
+ },
+ {
+  "date": "2026-10-28",
+  "source": "https://www.tiktok.com/@lescromatoons/video/7701726674148183328?_r=1&_t=ZN-9AwV98UQ6kA",
+  "auteur": "lescromatoons",
+  "visuel": {
+   "gestes": [],
+   "duree": 10.5,
+   "nb_plans": 1,
+   "duree_plan": 10.5,
+   "coupes": [],
+   "plans": {
+    "tres_serre": 0.0,
+    "serre": 0.0,
+    "moyen": 0.0,
+    "large": 1.0
+   },
+   "camera": {
+    "fixe": 1.0,
+    "avance": 0.0,
+    "recul": 0.0,
+    "travelling": 0.0,
+    "epaule": 0.0
+   },
+   "nb_personnes": 0,
+   "personnes": [],
+   "visages": false,
+   "sourires": 0.0,
+   "energie": 0.122,
+   "mur": [
+    252,
+    252,
+    249
+   ],
+   "palette": [
+    [
+     252,
+     252,
+     250,
+     0.851
+    ],
+    [
+     63,
+     50,
+     40,
+     0.041
+    ],
+    [
+     117,
+     87,
+     63,
+     0.033
+    ],
+    [
+     23,
+     16,
+     12,
+     0.031
+    ],
+    [
+     166,
+     135,
+     103,
+     0.028
+    ],
+    [
+     198,
+     196,
+     194,
+     0.016
+    ]
+   ],
+   "lumiere": {
+    "luminosite": 230.1,
+    "chaleur": 7.0,
+    "saturation": 15.2
+   },
+   "moment": "jour"
+  },
+  "audio": {
+   "duree": 10.5,
+   "nb_voix": 1,
+   "voix": [
+    {
+     "hz": 130,
+     "genre": "h",
+     "part": 1.0
+    }
+   ],
+   "debit": 3.18,
+   "blanc_moyen": 0.78,
+   "coupes": 0,
+   "dynamique_db": 17.5,
+   "cris": 0.069,
+   "musique": null,
+   "impacts": 0,
+   "impacts_10s": 0.0,
+   "graves": 0,
+   "aigus": 0,
+   "sur_vanne": 0,
+   "evenements": {},
+   "emotions": {
+    "enthousiaste": 1,
+    "malicieux": 1
+   }
+  },
+  "claude": {
+   "lieux": [
+    "caverne"
+   ],
+   "moment": "soir",
+   "costumes": {
+    "presentateur": {
+     "haut": "tunique",
+     "c_haut": "brun",
+     "motif": "taches",
+     "bas": "pantalon",
+     "chaussures": "bottes",
+     "details": [
+      "barbe_courte",
+      "collier"
+     ],
+     "chapeau": null,
+     "cheveux": "herisse",
+     "c_cheveux": "brun"
+    },
+    "invite": {
+     "haut": "tunique",
+     "c_haut": "orange",
+     "motif": "rayures",
+     "bas": "short",
+     "chaussures": "bottes",
+     "details": [
+      "barbe_pleine",
+      "bracelets"
+     ],
+     "chapeau": null,
+     "cheveux": "long",
+     "c_cheveux": "roux"
+    }
+   },
+   "objets": [
+    {
+     "replique": 0,
+     "objet": "fleur"
+    },
+    {
+     "replique": 1,
+     "objet": "cadeau"
+    }
+   ],
+   "gags": [
+    "Abonnez-vous et recevez des fruits séchés gratuits !",
+    "Le feu de camp : notre meilleure source d'abonnés.",
+    "Attention : les gestes du cœur ne sont pas remboursables."
+   ],
+   "ambiances": [
+    "vapeur"
+   ],
+   "plans": [
+    {
+     "replique": 0,
+     "plan": "moyen",
+     "mouvement": "fixe",
+     "geste": "bras_ouverts",
+     "reaction": "regard_camera"
+    },
+    {
+     "replique": 0,
+     "plan": "serre",
+     "mouvement": "zoom_choc",
+     "geste": "pointe_d",
+     "reaction": "joie"
+    },
+    {
+     "replique": 1,
+     "plan": "large",
+     "mouvement": "fixe",
+     "geste": "poches",
+     "reaction": "sceptique"
+    }
+   ]
+  },
+  "realisation": {
+   "moment": "soir",
+   "lieux": [
+    "caverne"
+   ],
+   "gags": [
+    "Abonnez-vous et recevez des fruits séchés gratuits !",
+    "Le feu de camp : notre meilleure source d'abonnés.",
+    "Attention : les gestes du cœur ne sont pas remboursables."
+   ],
+   "ambiances": [
+    "poussiere",
+    "vapeur"
+   ],
+   "source": "auteur+image",
+   "tenues": {
+    "presentateur": "tunique",
+    "invite": "tunique"
+   },
+   "plans": [
+    "large/fixe",
+    "large/fixe"
+   ]
+  },
+  "video": "2026-10-28_22h54_emission.mp4"
  }
 ]
