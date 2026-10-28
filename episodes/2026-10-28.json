@@ -1,424 +1,374 @@
 {
- "titre": "FILS ÉLU PAR UN ANGE",
- "sujet": "FILS ÉLU PAR UN ANGE",
- "ecran": "FILS ÉLU PAR U",
+ "titre": "PETIT-DÉJEUNER VOLÉ",
+ "sujet": "PETIT-DÉJEUNER VOLÉ",
+ "ecran": "PETIT-DÉJEUNER",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "POV : Quand ton fils devient un élu",
- "question": "Comment réagiriez-vous si votre enfant vous annonçait avoir été choisi par un ange ?",
+ "titre_accroche": "POV : Client en colère à l'hôtel",
+ "question": "Comment gérer un client insatisfait avec humour et professionnalisme ?",
  "running_gag": "",
  "verite": "",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "Mais qu'est-ce qu'il a, il a vu la Vierge?",
-   "_deb": 2.51,
-   "_fin": 4.05
+   "t": "{'texte': \"Je ne vois pas où est la salle de petit-déjeuner, vous pouvez me l'indiquer ?\"}",
+   "_deb": 0.0,
+   "_fin": 3.08,
+   "d": "{'texte': \"[confused] Je ne vois pas où est la salle de petit-déjeuner, vous pouvez me l'indiquer ?\"}",
+   "objet": "telephone"
   },
   {
    "p": "invite",
-   "t": "Oh non,",
-   "_deb": 4.05,
-   "_fin": 4.55
-  },
-  {
-   "p": "invite",
-   "t": "c 'était un ange. Père,",
-   "_deb": 5.85,
-   "_fin": 7.11
-  },
-  {
-   "p": "invite",
-   "t": "mère, oui mon fils, aujourd 'hui j 'ai goûté au paradis.",
-   "_deb": 8.57,
-   "_fin": 11.39
-  },
-  {
-   "p": "invite",
-   "t": "Il est donc temps pour moi d 'aller répondre la joie dans ce monde.",
-   "_deb": 12.77,
-   "_fin": 15.41
-  },
-  {
-   "p": "invite",
-   "t": "Dame, salaud, tu m 'étonnes. Tu es un des élus désormais.",
-   "_deb": 15.67,
-   "_fin": 19.19
-  },
-  {
-   "p": "invite",
-   "t": "L 'ange t 'a choisi.",
-   "_deb": 19.87,
-   "_fin": 20.87
+   "t": "{'texte': 'Il est 11h30, le petit-déjeuner termine à 10h.'}",
+   "_deb": 3.38,
+   "_fin": 6.06,
+   "objet": "telephone"
   },
   {
    "p": "presentateur",
-   "t": "Qu 'est -ce qui se passe là, je ne comprends rien.",
-   "_deb": 20.93,
-   "_fin": 21.97
+   "t": "{'texte': \"D'accord, mais dans ma formule, il y a un petit-déjeuner inclus.\"}",
+   "_deb": 7.28,
+   "_fin": 10.16,
+   "objet": "telephone"
   },
   {
    "p": "invite",
-   "t": "Mère,",
-   "_deb": 22.11,
-   "_fin": 22.41
+   "t": "{'texte': \"Certes, mais comme on vous l'a dit hier lors d'une check-in, si vous vous levez trop tard, il n'y a pas de petit-déjeuner.\"}",
+   "_deb": 11.3,
+   "_fin": 15.66,
+   "objet": "telephone"
   },
   {
    "p": "invite",
-   "t": "un ange m 'a ouvert les cuillets et les bras.",
-   "_deb": 23.69,
-   "_fin": 25.71
+   "t": "{'texte': 'Là, on prépare le déjeuner.'}",
+   "_deb": 15.94,
+   "_fin": 16.74,
+   "d": "{'texte': '[sarcastic] Là, on prépare le déjeuner.'}",
+   "objet": "telephone"
   },
   {
    "p": "presentateur",
-   "t": "Mais tu mets la ganja du jardin ou quoi?",
-   "_deb": 26.03,
-   "_fin": 27.51
+   "t": "{'texte': \"Ok, moi je vais me lever, j'avais un petit-déjeuner.\"}",
+   "_deb": 18.7,
+   "_fin": 20.74,
+   "objet": "telephone"
   },
   {
    "p": "invite",
-   "t": "Désormais, je me sens capable de sauver des montagnes, d 'éradiquer la faim dans le monde, de trouver des vaccins contre le cancer, je me sens",
-   "_deb": 27.51,
-   "_fin": 33.23
-  },
-  {
-   "p": "invite",
-   "t": "inarrêtable. Je te l 'avais dit mon fils, cet ange exauce les voeux pour qui a la chance d 'être choisi.",
-   "_deb": 34.74,
-   "_fin": 40.74
-  },
-  {
-   "p": "invite",
-   "t": "Merci père,",
-   "_deb": 40.82,
-   "_fin": 41.44
-  },
-  {
-   "p": "invite",
-   "t": "ma vie ne sera plus jamais la même à présent, elle m 'a donné la force.",
-   "_deb": 42.44,
-   "_fin": 44.92
-  },
-  {
-   "p": "invite",
-   "t": "Désormais, je sais qui je suis.",
-   "_deb": 46.42,
-   "_fin": 47.56
+   "t": "{'texte': \"Vous savez qu'à aller en ville, il fait super beau, je peux vous recommander des super adresses si vous voulez.\"}",
+   "_deb": 22.38,
+   "_fin": 26.16,
+   "objet": "carte"
   },
   {
    "p": "presentateur",
-   "t": "Elle? Mais de qui on parle là -haut?",
-   "_deb": 47.7,
-   "_fin": 49.08
+   "t": "{'texte': \"Non, attendez, je n'ai pas envie de payer dehors ce que j'ai déjà payé ici.\"}",
+   "_deb": 26.16,
+   "_fin": 29.86,
+   "d": "{'texte': \"[determined] Non, attendez, je n'ai pas envie de payer dehors ce que j'ai déjà payé ici.\"}",
+   "objet": "telephone"
   },
   {
    "p": "presentateur",
-   "t": "Dis quelque chose toi!",
-   "_deb": 49.08,
-   "_fin": 49.82
+   "t": "{'texte': 'Alors, comment on fait ?'}",
+   "_deb": 33.3,
+   "_fin": 34.48,
+   "d": "{'texte': '[frustrated] Alors, comment on fait ?'}",
+   "objet": "telephone"
   },
   {
    "p": "invite",
-   "t": "J 'ai jamais été aussi fier de toi mon fils.",
-   "_deb": 49.82,
-   "_fin": 51.4
+   "t": "{'texte': 'Comment ça, comment on fait ? Vous voulez que je vous **serve** le petit-déjeuner ?'}",
+   "_deb": 34.48,
+   "_fin": 37.98,
+   "objet": "telephone"
   },
   {
    "p": "presentateur",
-   "t": "Oh là là!",
-   "_deb": 51.48,
-   "_fin": 52.04
+   "t": "{'texte': 'Mais comment vous me parlez là ?'}",
+   "_deb": 37.98,
+   "_fin": 39.08,
+   "d": "{'texte': '[shocked] Mais comment vous me parlez là ?'}",
+   "objet": "telephone"
   },
   {
    "p": "invite",
-   "t": "Tu fais partie des grands de ce monde à présent.",
-   "_deb": 52.04,
-   "_fin": 53.68
+   "t": "{'texte': \"Écoutez, vous n'avez qu'à pas rentrer à 5h du matin complètement ivre-mort si vous voulez vous lever dans les temps.\"}",
+   "_deb": 39.08,
+   "_fin": 42.26,
+   "d": "{'texte': \"[aggressive] Écoutez, vous n'avez qu'à pas rentrer à 5h du matin complètement ivre-mort si vous voulez vous lever dans les temps.\"}",
+   "objet": "telephone"
   },
   {
    "p": "invite",
-   "t": "Les dieux te réserveront une place à leur table, sois -en sûr.",
-   "_deb": 54.54,
-   "_fin": 57.18
-  },
-  {
-   "p": "invite",
-   "t": "D 'avancer au foutant, tu",
-   "_deb": 58.56,
-   "_fin": 59.52
-  },
-  {
-   "p": "invite",
-   "t": "es un fils.",
-   "_deb": 62.36,
-   "_fin": 62.56
+   "t": "{'texte': \"C'est aussi simple que ça.\"}",
+   "_deb": 42.4,
+   "_fin": 43.34,
+   "d": "{'texte': \"[sarcastic] C'est aussi simple que ça.\"}",
+   "objet": "telephone"
   },
   {
    "p": "presentateur",
-   "t": "Dites qui s 'ils ont tous les deux, bordel?",
-   "_deb": 62.62,
-   "_fin": 63.74
+   "t": "{'texte': 'Je fais ce que je veux, je suis client. Elle est très bien avant plus.'}",
+   "_deb": 43.76,
+   "_fin": 46.36,
+   "d": "{'texte': '[defiant] Je fais ce que je veux, je suis client. Elle est très bien avant plus.'}",
+   "objet": "telephone"
   },
   {
    "p": "invite",
-   "t": "Je dois désormais prendre la route, aller découvrir le monde et répandre la joie et le bonheur tout autour de moi.",
-   "_deb": 63.74,
-   "_fin": 69.48
+   "t": "{'texte': \"Écoutez, même si vous étiez le pape ou Madonna, pas de petit-déjeuner après 10h, c'est la règle de la maison.\"}",
+   "_deb": 46.94,
+   "_fin": 50.62,
+   "objet": "telephone"
   },
   {
    "p": "invite",
-   "t": "C 'est la mission qu 'elle m 'a confiée. Va à mon fils, un élu n 'a nul besoin de se justifier, tu as été choisi.",
-   "_deb": 71.02,
-   "_fin": 75.94
+   "t": "{'texte': \"C'est comme ça.\"}",
+   "_deb": 50.7,
+   "_fin": 51.12,
+   "d": "{'texte': \"[firm] C'est comme ça.\"}",
+   "objet": "telephone"
   },
   {
    "p": "presentateur",
-   "t": "Mais il va où là? Mon fils va nulle part, je vous le dis tout de suite.",
-   "_deb": 77.28,
-   "_fin": 79.16
+   "t": "{'texte': 'Ok, il faut que vous trouviez une solution.'}",
+   "_deb": 51.46,
+   "_fin": 52.9,
+   "d": "{'texte': '[demanding] Ok, il faut que vous trouviez une solution.'}",
+   "objet": "telephone"
+  },
+  {
+   "p": "invite",
+   "t": "{'texte': 'Il y a des super poubelles dehors avec probablement des restes si vous voulez.'}",
+   "_deb": 54.38,
+   "_fin": 57.08,
+   "d": "{'texte': '[mocking] Il y a des super poubelles dehors avec probablement des restes si vous voulez.'}",
+   "objet": "telephone"
   },
   {
    "p": "presentateur",
-   "t": "En plus j 'ai préparé une dope pour ce soir, on doit être trois pour la bouffer.",
-   "_deb": 79.24,
-   "_fin": 81.52,
-   "objet": "bouteille"
+   "t": "{'texte': 'Ok, appelez-moi votre responsable.'}",
+   "_deb": 58.0,
+   "_fin": 59.22,
+   "d": "{'texte': '[angry] Ok, appelez-moi votre responsable.'}",
+   "objet": "telephone"
   },
   {
    "p": "invite",
-   "t": "Chut",
-   "_deb": 81.84,
-   "_fin": 82.16
-  },
-  {
-   "p": "invite",
-   "t": "! Nous ne sommes plus son égal à présent.",
-   "_deb": 83.89,
-   "_fin": 85.67
-  },
-  {
-   "p": "invite",
-   "t": "Il flirte avec le divin. Je reviendrai mère, ne t 'en fais pas.",
-   "_deb": 86.93,
-   "_fin": 90.85
+   "t": "{'texte': 'On va, on est arrivé là.'}",
+   "_deb": 59.3,
+   "_fin": 60.18,
+   "d": "{'texte': '[sarcastic] On va, on est arrivé là.'}",
+   "objet": "telephone"
   },
   {
    "p": "presentateur",
-   "t": "Bah il va où lui?",
-   "_deb": 91.97,
-   "_fin": 92.73
+   "t": "{'texte': 'Appelez-le.'}",
+   "_deb": 61.48,
+   "_fin": 61.9,
+   "d": "{'texte': '[order] Appelez-le.'}",
+   "objet": "telephone"
   },
   {
    "p": "invite",
-   "t": "Père, où vas -tu?",
-   "_deb": 92.73,
-   "_fin": 93.93
+   "t": "{'texte': \"Très bien, je l'appelle.\"}",
+   "_deb": 62.98,
+   "_fin": 64.26,
+   "d": "{'texte': \"[calling] Très bien, je l'appelle.\"}",
+   "objet": "telephone"
   },
   {
    "p": "invite",
-   "t": "Je vais faire un tour au parking de Leclerc, on ne sait jamais.",
-   "_deb": 96.01,
-   "_fin": 97.87
+   "t": "{'texte': \"Oui, allo, j'ai une situation avec un client là.\"}",
+   "_deb": 69.93,
+   "_fin": 72.21,
+   "d": "{'texte': \"[on_phone] Oui, allo, j'ai une situation avec un client là.\"}",
+   "objet": "telephone"
   },
   {
    "p": "invite",
-   "t": "C 'est inutile père.",
-   "_deb": 98.23,
-   "_fin": 99.23
+   "t": "{'texte': 'Oui, il va à tout prix manger le petit-déjeuner maintenant.'}",
+   "_deb": 72.31,
+   "_fin": 74.43,
+   "d": "{'texte': '[on_phone] Oui, il va à tout prix manger le petit-déjeuner maintenant.'}",
+   "objet": "telephone"
   },
   {
    "p": "invite",
-   "t": "L 'ange s 'est envolé, il ne reviendra pas. C 'était à prévoir.",
-   "_deb": 100.19,
-   "_fin": 102.53
+   "t": "Oui.",
+   "_deb": 75.61,
+   "_fin": 75.89,
+   "objet": "telephone"
   },
   {
    "p": "invite",
-   "t": "Chut! Il faut être choisi.",
-   "_deb": 103.85,
-   "_fin": 105.01
-  },
-  {
-   "p": "invite",
-   "t": "Plus tu la chercheras et plus tu t 'en éloigneras.",
-   "_deb": 105.93,
-   "_fin": 108.09
+   "t": "{'texte': 'Oui, je sais, très bien.'}",
+   "_deb": 77.55,
+   "_fin": 78.55,
+   "d": "{'texte': '[on_phone] Oui, je sais, très bien.'}",
+   "objet": "telephone"
   },
   {
    "p": "presentateur",
-   "t": "Bon allez, vous m 'avez saoulé tous les deux, rappelez -moi quand vous serez redescendus.",
-   "_deb": 108.19,
-   "_fin": 110.35
+   "t": "{'texte': 'Merci.'}",
+   "_deb": 79.25,
+   "_fin": 79.53,
+   "d": "{'texte': '[relieved] Merci.'}",
+   "objet": "telephone"
   },
   {
    "p": "invite",
-   "t": "Ne t 'en fais pas mon fils.",
-   "_deb": 110.77,
-   "_fin": 112.05
-  },
-  {
-   "p": "invite",
-   "t": "Un jour elle comprendra.",
-   "_deb": 113.45,
-   "_fin": 114.63
-  },
-  {
-   "p": "invite",
-   "t": "Je vais désormais aller ouvrir le mail que tu m 'as envoyé.",
-   "_deb": 115.81,
-   "_fin": 118.11,
-   "objet": "tablette"
-  },
-  {
-   "p": "invite",
-   "t": "Enjoy. Compte sur moi.",
-   "_deb": 118.49,
-   "_fin": 119.51,
-   "chute": true
+   "t": "{'texte': \"Il a dit que si vous n'étiez pas content, vous pouvez y aller vous faire foutre.\"}",
+   "_deb": 85.46,
+   "_fin": 87.52,
+   "d": "{'texte': \"[hostile] Il a dit que si vous n'étiez pas content, vous pouvez y aller vous faire foutre.\"}",
+   "chute": true,
+   "objet": "telephone"
   }
  ],
  "bandeau": [],
  "gag": null,
- "legende": "Un fils, transformé par une rencontre divine, annonce sa nouvelle mission à une famille incrédule.",
+ "legende": "Quand le petit-déjeuner n'est pas inclus dans votre réveil à temps.",
  "hashtags": [
   "petitsdramas",
-  "rencontredivine",
-  "missionange",
-  "familledrole",
-  "elus",
-  "humoursacre",
-  "toons"
+  "hoteldrama",
+  "petitdejperdu",
+  "clientencolere",
+  "humourtiktok",
+  "voyagecomique",
+  "checkinchaos"
  ],
  "sources": [
-  "https://www.tiktok.com/@kelly_toon_18/video/7681687756409539873?_r=1&_t=ZN-9AwCrHZTK1W"
+  "https://www.tiktok.com/@motiontoonz/video/7700608532478971168"
  ],
  "decoupage": [
   {
    "scene": "1",
    "repliques": [
     0,
-    1,
     2,
-    3,
-    4,
     5,
-    6,
     7,
     8,
-    9,
     10,
-    11,
-    12,
     13,
-    14,
-    15
+    16,
+    18,
+    20,
+    26
    ],
    "lieu": "",
    "son": "",
-   "duree": 0.0,
-   "decor": "salon familial avec un canapé, une table basse, un téléviseur, une bouteille de soda, des coussins et une lampe.",
-   "titre": "La Révélation"
+   "duree": 0,
+   "decor": "hall de l'hôtel avec un bureau de réception en bois sombre, des clés accrochées au mur doré, une plante verte et une grande fenêtre donnant sur une cour intérie"
   },
   {
    "scene": "2",
    "repliques": [
-    16,
+    1,
+    3,
+    4,
+    6,
+    9,
+    11,
+    12,
+    14,
+    15,
     17,
-    18,
     19,
-    20,
     21,
     22,
     23,
     24,
     25,
-    26,
-    27,
-    28,
-    29,
-    30,
-    31,
-    32,
-    33,
-    34,
-    35,
-    36,
-    37,
-    38,
-    39,
-    40,
-    41,
-    42
+    27
    ],
    "lieu": "",
    "son": "",
-   "duree": 0.0,
-   "decor": "la même pièce, mais avec une tablette ouverte sur la table basse et un micro posé à côté.",
-   "titre": "La Mission"
+   "duree": 0,
+   "decor": "le même hall avec une horloge murale, des chaises en velours rouge et une porte de sortie."
   }
  ],
  "studio": {
-  "moment": "soir",
+  "moment": "jour",
   "lieux": [
-   "salon"
+   "rue",
+   "rue"
   ],
   "costumes": {
    "presentateur": {
-    "haut": "tshirt",
-    "c_haut": "bleu",
+    "haut": "costume",
+    "c_haut": "bleu marine",
     "motif": "uni",
     "bas": "pantalon",
-    "chaussures": "baskets",
+    "chaussures": "ville",
     "details": [
-     "barbe_courte",
-     "lunettes_soleil"
-    ],
-    "chapeau": null,
-    "cheveux": "court",
-    "c_cheveux": "brun"
+     "cravate",
+     "montre",
+     "barbe_courte"
+    ]
    },
    "invite": {
     "haut": "chemise",
     "c_haut": "blanc",
-    "motif": "rayures",
-    "bas": "jeans",
-    "chaussures": "ville",
+    "motif": "uni",
+    "bas": "jupe",
+    "chaussures": "ballerines",
     "details": [
      "cravate",
-     "lunettes_vue"
-    ],
-    "chapeau": null,
-    "cheveux": "long",
-    "c_cheveux": "châtain"
+     "lunettes_vue",
+     "bracelets"
+    ]
    }
   },
-  "personnages": [
-   {
+  "personnages": {
+   "presentateur": {
     "genre": "h",
-    "age": 50,
+    "age": 45,
     "taille": 1,
-    "corpulence": 0.8,
+    "corpulence": 0.6,
     "cheveux": "court",
+    "c_cheveux": "brun",
     "barbe": "trois_jours"
    },
-   {
-    "genre": "h",
-    "age": 25,
+   "invite": {
+    "genre": "f",
+    "age": 35,
     "taille": 0.9,
-    "corpulence": 0.7,
+    "corpulence": 0.5,
     "cheveux": "long",
-    "barbe": null
+    "c_cheveux": "châtain",
+    "barbe": "rien"
+   }
+  },
+  "objets": [
+   {
+    "replique": 0,
+    "objet": "telephone"
+   },
+   {
+    "replique": 6,
+    "objet": "carte"
+   },
+   {
+    "replique": 18,
+    "objet": "telephone"
+   },
+   {
+    "replique": 21,
+    "objet": "telephone"
    }
   ],
   "gags": [
-   "« Parking Leclerc : Mission acceptée » écrit sur une affiche accrochée au mur.",
-   "« Ganja du jardin : 0% efficace contre les anges » sur un post-it.",
-   "« Mail à ouvrir : Urgent (divin) » sur la tablette."
+   "Petit-déjeuner inclus : seulement avant 10h",
+   "Poubelles : Solution alternative",
+   "Responsable : À vos souhaits !"
   ],
   "ambiances": [
-   "vapeur"
+   "neon"
   ],
   "cadence": "rapide",
   "plans": [
@@ -427,167 +377,185 @@
     "plan": "serre",
     "mouvement": "fixe",
     "geste": "gratte_tete",
-    "reaction": "choc"
+    "reaction": "regard_camera"
    },
    {
     "replique": 1,
-    "plan": "moyen",
+    "plan": "serre",
     "mouvement": "fixe",
-    "geste": "haussement",
-    "reaction": "sceptique"
-   },
-   {
-    "replique": 3,
-    "plan": "large",
-    "mouvement": "travelling",
-    "geste": "bras_ouverts",
-    "reaction": "joie"
-   },
-   {
-    "replique": 11,
-    "plan": "tres_serre",
-    "mouvement": "zoom_choc",
     "geste": "pointe_d",
     "reaction": "choc"
    },
    {
-    "replique": 25,
-    "plan": "contre_plongee",
-    "mouvement": "fixe",
-    "geste": "pointe_g",
+    "replique": 3,
+    "plan": "moyen",
+    "mouvement": "epaule",
+    "geste": "bras_ouverts",
     "reaction": "sceptique"
    },
    {
-    "replique": 28,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "poches",
+    "replique": 9,
+    "plan": "tres_serre",
+    "mouvement": "zoom_choc",
+    "geste": "poing",
     "reaction": "colere"
    },
    {
-    "replique": 42,
-    "plan": "epaule",
-    "mouvement": "zoom",
-    "geste": "pianôte",
-    "reaction": "idee"
-   }
-  ],
-  "objets": [
-   {
-    "replique": 28,
-    "objet": "bouteille"
+    "replique": 11,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "facepalm",
+    "reaction": "soupir"
    },
    {
-    "replique": 42,
-    "objet": "tablette"
+    "replique": 18,
+    "plan": "serre",
+    "mouvement": "avance",
+    "geste": "telephone",
+    "reaction": "panique"
+   },
+   {
+    "replique": 27,
+    "plan": "large",
+    "mouvement": "recul",
+    "geste": "mains_hanches",
+    "reaction": "blase"
    }
   ],
   "decors_vus": {
-   "presentateur": "salon avec un canapé marron, une table basse en bois avec une bouteille de soda vide, un téléviseur éteint, une lampe allumée, des coussins colorés et une affiche de parking Leclerc accrochée au mur.",
-   "invite": "la même pièce, mais avec une tablette ouverte sur la table basse affichant un écran bleu et un micro posé à côté."
+   "presentateur": "hall de l'hôtel avec un bureau de réception en bois sombre, des clés accrochées au mur doré, une plante verte et une grande fenêtre donnant sur une cour intérieure avec des chaises en velours rouge.",
+   "invite": "le même hall avec une horloge murale, des chaises en velours rouge et une porte de sortie."
+  },
+  "lieux_de": {
+   "presentateur": "rue",
+   "invite": "rue"
   }
  },
  "doublage": {
-  "piste": "/tmp/tmpr7qms0py/piste.wav",
-  "duree": 120.03,
-  "source": "https://www.tiktok.com/@kelly_toon_18/video/7681687756409539873?_r=1&_t=ZN-9AwCrHZTK1W",
-  "auteur": "kelly_toon_18",
-  "contexte": "Un fils, récemment transformé par une rencontre divine, annonce à sa famille son nouveau destin exceptionnel. La scène se déroule dans un salon familial, entre incompréhension, humour et émotion.",
+  "piste": "/tmp/tmpsmh7fmuq/piste.wav",
+  "duree": 87.84,
+  "source": "https://www.tiktok.com/@motiontoonz/video/7700608532478971168",
+  "auteur": "motiontoonz",
+  "contexte": "Un client mécontent dans un hôtel de luxe se heurte à une réceptionniste inflexible lors d'une dispute sur l'absence de petit-déjeuner en dehors des horaires prévus.",
   "evenements": [],
   "visuel": {
    "gestes": [],
-   "duree": 120.0,
-   "nb_plans": 1,
-   "duree_plan": 120.0,
-   "coupes": [],
+   "duree": 88.0,
+   "nb_plans": 24,
+   "duree_plan": 3.67,
+   "coupes": [
+    3.5,
+    6.5,
+    10.5,
+    17.0,
+    21.0,
+    26.5,
+    31.5,
+    33.0,
+    34.5,
+    38.5,
+    39.5,
+    43.5,
+    46.5,
+    51.5,
+    53.5,
+    57.5,
+    60.0,
+    61.0,
+    62.5,
+    69.0,
+    70.5,
+    82.0,
+    85.5
+   ],
    "plans": {
     "tres_serre": 0.0,
-    "serre": 0.0,
+    "serre": 0.028,
     "moyen": 0.0,
-    "large": 1.0
+    "large": 0.972
    },
    "camera": {
-    "fixe": 1.0,
-    "avance": 0.0,
-    "recul": 0.0,
+    "fixe": 0.612,
+    "avance": 0.013,
+    "recul": 0.007,
     "travelling": 0.0,
-    "epaule": 0.0
+    "epaule": 0.368
    },
-   "nb_personnes": 0,
+   "nb_personnes": 1,
    "personnes": [],
-   "visages": false,
+   "visages": true,
    "sourires": 0.0,
-   "energie": 0.208,
+   "energie": 0.298,
    "mur": [
-    251,
-    248,
-    243
+    66,
+    35,
+    19
    ],
    "palette": [
+    [
+     46,
+     31,
+     22,
+     0.283
+    ],
+    [
+     93,
+     44,
+     18,
+     0.271
+    ],
+    [
+     215,
+     207,
+     200,
+     0.121
+    ],
+    [
+     141,
+     100,
+     61,
+     0.12
+    ],
     [
      250,
      249,
      248,
-     0.458
+     0.104
     ],
     [
-     0,
-     0,
-     0,
-     0.449
-    ],
-    [
-     12,
-     169,
-     204,
-     0.03
-    ],
-    [
-     248,
-     227,
-     157,
-     0.027
-    ],
-    [
-     74,
-     69,
-     66,
-     0.019
-    ],
-    [
-     146,
-     146,
-     143,
-     0.018
+     192,
+     162,
+     120,
+     0.102
     ]
    ],
    "lumiere": {
-    "luminosite": 132.8,
-    "chaleur": -2.7,
-    "saturation": 19.2
+    "luminosite": 126.5,
+    "chaleur": 46.2,
+    "saturation": 121.9
    },
-   "moment": "jour"
+   "moment": "soir"
   },
   "audio": {
-   "duree": 120.0,
+   "duree": 87.8,
    "nb_voix": 2,
    "voix": [
     {
-     "hz": 220,
+     "hz": 188,
      "genre": "f",
-     "part": 0.18
+     "part": 0.36
     },
     {
-     "hz": 103,
-     "genre": "h",
-     "part": 0.82
+     "hz": 165,
+     "genre": "?",
+     "part": 0.64
     }
    ],
-   "debit": 5.19,
-   "blanc_moyen": 0.91,
-   "coupes": 6,
-   "dynamique_db": 18.7,
-   "cris": 0.002,
+   "debit": 5.46,
+   "blanc_moyen": 1.38,
+   "coupes": 4,
+   "dynamique_db": 26.8,
+   "cris": 0.001,
    "musique": null,
    "impacts": 0,
    "impacts_10s": 0.0,
@@ -596,17 +564,17 @@
    "sur_vanne": 0,
    "evenements": {},
    "emotions": {
-    "whispered": 4,
-    "soft": 4,
-    "angry": 4,
-    "confused": 3,
-    "serious": 3,
-    "excited": 3,
-    "inspired": 2,
-    "proud": 2
+    "on_phone": 4,
+    "firm": 3,
+    "sarcastic": 3,
+    "angry": 2,
+    "confused": 1,
+    "irritated": 1,
+    "annoyed": 1,
+    "resigned": 1
    }
   },
-  "video_origine": "/tmp/tmpr7qms0py/src.mp4"
+  "video_origine": "/tmp/tmpsmh7fmuq/src.mp4"
  },
  "fiche": {
   "note": 0,
@@ -619,7 +587,17 @@
      1,
      2,
      3,
-     4,
+     4
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 0.0,
+    "decor": "hall de l'hôtel avec un bureau de réception en bois sombre, des clés accrochées au mur, une plante verte et une grande fenêtre donnant sur une cour intérieure.",
+    "titre": "Check-in et petite dispute"
+   },
+   {
+    "scene": "2",
+    "repliques": [
      5,
      6,
      7,
@@ -627,20 +605,19 @@
      9,
      10,
      11,
-     12,
-     13,
-     14,
-     15
+     12
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "salon familial avec un canapé, une table basse, un téléviseur, une bouteille de soda, des coussins et une lampe.",
-    "titre": "La Révélation"
+    "decor": "le même hall de l'hôtel, avec le client et la réceptionniste derrière le bureau, des chaises en velours rouge et une horloge murale."
    },
    {
-    "scene": "2",
+    "scene": "3",
     "repliques": [
+     13,
+     14,
+     15,
      16,
      17,
      18,
@@ -652,76 +629,45 @@
      24,
      25,
      26,
-     27,
-     28,
-     29,
-     30,
-     31,
-     32,
-     33,
-     34,
-     35,
-     36,
-     37,
-     38,
-     39,
-     40,
-     41,
-     42
+     27
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "la même pièce, mais avec une tablette ouverte sur la table basse et un micro posé à côté.",
-    "titre": "La Mission"
+    "decor": "le même hall, mais avec un téléphone sur le bureau et une porte de sortie visible, pour montrer l'appel au responsable."
    }
   ]
  },
  "_monte": true,
+ "_separes": true,
  "_voix_hz": {
-  "presentateur": 218,
-  "invite": 104
+  "presentateur": 139,
+  "invite": 141
  },
  "_voix_genre": {
+  "presentateur": "h",
   "invite": "h"
  },
  "realisation": {
-  "moment": "soir",
+  "moment": "jour",
   "lieux": [
-   "salon",
+   "rue",
    "rue"
   ],
   "gags": [
-   "« Parking Leclerc : Mission acceptée » écrit sur une affiche accrochée au mur.",
-   "« Ganja du jardin : 0% efficace contre les anges » sur un post-it.",
-   "« Mail à ouvrir : Urgent (divin) » sur la tablette."
+   "Petit-déjeuner inclus : seulement avant 10h",
+   "Poubelles : Solution alternative",
+   "Responsable : À vos souhaits !"
   ],
   "ambiances": [
-   "poussiere",
-   "vapeur"
+   "neon"
   ],
   "source": "auteur+image",
   "tenues": {
-   "presentateur": "tshirt",
+   "presentateur": "costume",
    "invite": "chemise"
   },
   "plans": [
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
    "large/fixe",
    "large/fixe",
    "large/fixe",

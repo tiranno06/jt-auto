@@ -27211,102 +27211,159 @@
  },
  {
   "date": "2026-10-28",
-  "source": "https://www.tiktok.com/@kelly_toon_18/video/7681687756409539873?_r=1&_t=ZN-9AwCrHZTK1W",
-  "auteur": "kelly_toon_18",
+  "source": "https://www.tiktok.com/@motiontoonz/video/7690914113639206176",
+  "auteur": "motiontoonz",
   "visuel": {
-   "gestes": [],
-   "duree": 120.0,
-   "nb_plans": 1,
-   "duree_plan": 120.0,
-   "coupes": [],
+   "gestes": [
+    [
+     79.0,
+     0.47,
+     0.48
+    ]
+   ],
+   "duree": 84.0,
+   "nb_plans": 32,
+   "duree_plan": 2.62,
+   "coupes": [
+    3.0,
+    5.5,
+    7.5,
+    10.5,
+    12.5,
+    13.5,
+    16.0,
+    19.0,
+    21.0,
+    23.5,
+    26.0,
+    26.5,
+    30.0,
+    32.5,
+    33.5,
+    38.5,
+    40.0,
+    41.5,
+    43.0,
+    45.0,
+    47.5,
+    50.0,
+    53.0,
+    54.0,
+    56.5,
+    59.5,
+    68.5,
+    70.5,
+    75.5,
+    77.5,
+    80.5
+   ],
    "plans": {
     "tres_serre": 0.0,
-    "serre": 0.0,
-    "moyen": 0.0,
-    "large": 1.0
+    "serre": 0.125,
+    "moyen": 0.006,
+    "large": 0.869
    },
    "camera": {
-    "fixe": 1.0,
+    "fixe": 0.64,
     "avance": 0.0,
-    "recul": 0.0,
+    "recul": 0.007,
     "travelling": 0.0,
-    "epaule": 0.0
+    "epaule": 0.353
    },
-   "nb_personnes": 0,
-   "personnes": [],
-   "visages": false,
+   "nb_personnes": 1,
+   "personnes": [
+    {
+     "place": "centre",
+     "presence": 0.131,
+     "habit": [
+      51,
+      120,
+      173
+     ],
+     "cheveux": [
+      251,
+      250,
+      250
+     ],
+     "sourire": 0.0,
+     "taille": 0.195,
+     "tete_penchee": 4.2,
+     "regard_cote": 0.0
+    }
+   ],
+   "visages": true,
    "sourires": 0.0,
-   "energie": 0.208,
+   "energie": 0.29,
    "mur": [
-    251,
-    248,
-    243
+    230,
+    220,
+    209
    ],
    "palette": [
     [
-     250,
-     249,
-     248,
-     0.458
+     239,
+     233,
+     226,
+     0.264
     ],
     [
-     0,
-     0,
-     0,
-     0.449
+     168,
+     120,
+     77,
+     0.216
     ],
     [
-     12,
-     169,
-     204,
-     0.03
+     219,
+     205,
+     192,
+     0.17
     ],
     [
-     248,
-     227,
-     157,
-     0.027
+     62,
+     125,
+     160,
+     0.137
     ],
     [
-     74,
-     69,
-     66,
-     0.019
+     208,
+     166,
+     123,
+     0.109
     ],
     [
-     146,
-     146,
-     143,
-     0.018
+     53,
+     50,
+     46,
+     0.105
     ]
    ],
    "lumiere": {
-    "luminosite": 132.8,
-    "chaleur": -2.7,
-    "saturation": 19.2
+    "luminosite": 190.1,
+    "chaleur": 25.3,
+    "saturation": 82.4
    },
    "moment": "jour"
   },
   "audio": {
-   "duree": 120.0,
+   "duree": 83.7,
    "nb_voix": 2,
    "voix": [
     {
-     "hz": 220,
-     "genre": "f",
-     "part": 0.18
+     "hz": 165,
+     "genre": "?",
+     "part": 0.4
     },
     {
-     "hz": 103,
-     "genre": "h",
-     "part": 0.82
+     "hz": 167,
+     "genre": "?",
+     "part": 0.6
     }
    ],
-   "debit": 5.19,
-   "blanc_moyen": 0.91,
-   "coupes": 6,
-   "dynamique_db": 18.7,
-   "cris": 0.002,
+   "debit": 5.03,
+   "blanc_moyen": 0.96,
+   "coupes": 24,
+   "dynamique_db": 25.2,
+   "cris": 0.008,
    "musique": null,
    "impacts": 0,
    "impacts_10s": 0.0,
@@ -27315,19 +27372,21 @@
    "sur_vanne": 0,
    "evenements": {},
    "emotions": {
-    "whispered": 4,
-    "soft": 4,
-    "angry": 4,
-    "confused": 3,
-    "serious": 3,
     "excited": 3,
-    "inspired": 2,
-    "proud": 2
+    "angry": 2,
+    "laughing": 2,
+    "sarcastic": 2,
+    "agreeing": 2,
+    "confused": 2,
+    "eager": 2,
+    "annoyed": 1
    }
   },
   "claude": {
    "lieux": [
-    "salon"
+    "salons cosy",
+    "chambre avec douche",
+    "fauteuil de grand-mère"
    ],
    "moment": "soir",
    "costumes": {
@@ -27335,7 +27394,7 @@
      "haut": "tshirt",
      "c_haut": "bleu",
      "motif": "uni",
-     "bas": "pantalon",
+     "bas": "jeans",
      "chaussures": "baskets",
      "details": [
       "barbe_courte",
@@ -27346,87 +27405,99 @@
      "c_cheveux": "brun"
     },
     "invite": {
-     "haut": "chemise",
-     "c_haut": "blanc",
-     "motif": "rayures",
-     "bas": "jeans",
-     "chaussures": "ville",
+     "haut": "veste_jean",
+     "c_haut": "noir",
+     "motif": "taches",
+     "bas": "pantalon",
+     "chaussures": "baskets",
      "details": [
-      "cravate",
+      "ailes_de_moustique",
       "lunettes_vue"
      ],
      "chapeau": null,
-     "cheveux": "long",
-     "c_cheveux": "châtain"
+     "cheveux": "court",
+     "c_cheveux": "brun"
     }
    },
    "objets": [
     {
-     "replique": 28,
+     "replique": 0,
+     "objet": "telephone"
+    },
+    {
+     "replique": 13,
      "objet": "bouteille"
     },
     {
-     "replique": 42,
-     "objet": "tablette"
+     "replique": 17,
+     "objet": "telecommande"
+    },
+    {
+     "replique": 27,
+     "objet": "seringue"
+    },
+    {
+     "replique": 30,
+     "objet": "telephone"
     }
    ],
    "gags": [
-    "« Parking Leclerc : Mission acceptée » écrit sur une affiche accrochée au mur.",
-    "« Ganja du jardin : 0% efficace contre les anges » sur un post-it.",
-    "« Mail à ouvrir : Urgent (divin) » sur la tablette."
+    "Affiche : 'Moustique Fit : Abonnez-vous !'",
+    "Post-it sur la douche : 'Interdit aux moustiques !'",
+    "Tableau noir : 'Liste des personnes à piquer : ~~Daron~~ → Voisine du 54'"
    ],
    "ambiances": [
-    "vapeur"
+    "neon"
    ],
    "plans": [
     {
      "replique": 0,
      "plan": "serre",
      "mouvement": "fixe",
-     "geste": "gratte_tete",
+     "geste": "poing",
      "reaction": "choc"
     },
     {
      "replique": 1,
      "plan": "moyen",
      "mouvement": "fixe",
-     "geste": "haussement",
+     "geste": "bras_ouverts",
      "reaction": "sceptique"
     },
     {
      "replique": 3,
+     "plan": "tres_serre",
+     "mouvement": "zoom_choc",
+     "geste": "pointe_d",
+     "reaction": "colere"
+    },
+    {
+     "replique": 8,
+     "plan": "epaule",
+     "mouvement": "recul",
+     "geste": "gratte_tete",
+     "reaction": "confused"
+    },
+    {
+     "replique": 17,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "pointe_g",
+     "reaction": "choc"
+    },
+    {
+     "replique": 27,
      "plan": "large",
      "mouvement": "travelling",
      "geste": "bras_ouverts",
      "reaction": "joie"
     },
     {
-     "replique": 11,
+     "replique": 30,
      "plan": "tres_serre",
      "mouvement": "zoom_choc",
-     "geste": "pointe_d",
-     "reaction": "choc"
-    },
-    {
-     "replique": 25,
-     "plan": "contre_plongee",
-     "mouvement": "fixe",
-     "geste": "pointe_g",
-     "reaction": "sceptique"
-    },
-    {
-     "replique": 28,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "poches",
-     "reaction": "colere"
-    },
-    {
-     "replique": 42,
-     "plan": "epaule",
-     "mouvement": "zoom",
-     "geste": "pianôte",
-     "reaction": "idee"
+     "geste": "facepalm",
+     "reaction": "panique"
     }
    ]
   },
@@ -27434,34 +27505,25 @@
    "moment": "soir",
    "lieux": [
     "salon",
-    "rue"
+    "salon",
+    "salon",
+    "salon"
    ],
    "gags": [
-    "« Parking Leclerc : Mission acceptée » écrit sur une affiche accrochée au mur.",
-    "« Ganja du jardin : 0% efficace contre les anges » sur un post-it.",
-    "« Mail à ouvrir : Urgent (divin) » sur la tablette."
+    "Affiche : 'Moustique Fit : Abonnez-vous !'",
+    "Post-it sur la douche : 'Interdit aux moustiques !'",
+    "Tableau noir : 'Liste des personnes à piquer : ~~Daron~~ → Voisine du 54'"
    ],
    "ambiances": [
-    "poussiere",
-    "vapeur"
+    "neon",
+    "poussiere"
    ],
    "source": "auteur+image",
    "tenues": {
     "presentateur": "tshirt",
-    "invite": "chemise"
+    "invite": "veste_jean"
    },
    "plans": [
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
     "large/fixe",
     "large/fixe",
     "large/fixe",
@@ -27497,6 +27559,308 @@
     "large/fixe"
    ]
   },
-  "video": "2026-10-28_19h31_emission.mp4"
+  "video": "2026-10-28_18h57_emission.mp4"
+ },
+ {
+  "date": "2026-10-28",
+  "source": "https://www.tiktok.com/@motiontoonz/video/7700608532478971168",
+  "auteur": "motiontoonz",
+  "visuel": {
+   "gestes": [],
+   "duree": 88.0,
+   "nb_plans": 24,
+   "duree_plan": 3.67,
+   "coupes": [
+    3.5,
+    6.5,
+    10.5,
+    17.0,
+    21.0,
+    26.5,
+    31.5,
+    33.0,
+    34.5,
+    38.5,
+    39.5,
+    43.5,
+    46.5,
+    51.5,
+    53.5,
+    57.5,
+    60.0,
+    61.0,
+    62.5,
+    69.0,
+    70.5,
+    82.0,
+    85.5
+   ],
+   "plans": {
+    "tres_serre": 0.0,
+    "serre": 0.028,
+    "moyen": 0.0,
+    "large": 0.972
+   },
+   "camera": {
+    "fixe": 0.612,
+    "avance": 0.013,
+    "recul": 0.007,
+    "travelling": 0.0,
+    "epaule": 0.368
+   },
+   "nb_personnes": 1,
+   "personnes": [],
+   "visages": true,
+   "sourires": 0.0,
+   "energie": 0.298,
+   "mur": [
+    66,
+    35,
+    19
+   ],
+   "palette": [
+    [
+     46,
+     31,
+     22,
+     0.283
+    ],
+    [
+     93,
+     44,
+     18,
+     0.271
+    ],
+    [
+     215,
+     207,
+     200,
+     0.121
+    ],
+    [
+     141,
+     100,
+     61,
+     0.12
+    ],
+    [
+     250,
+     249,
+     248,
+     0.104
+    ],
+    [
+     192,
+     162,
+     120,
+     0.102
+    ]
+   ],
+   "lumiere": {
+    "luminosite": 126.5,
+    "chaleur": 46.2,
+    "saturation": 121.9
+   },
+   "moment": "soir"
+  },
+  "audio": {
+   "duree": 87.8,
+   "nb_voix": 2,
+   "voix": [
+    {
+     "hz": 188,
+     "genre": "f",
+     "part": 0.36
+    },
+    {
+     "hz": 165,
+     "genre": "?",
+     "part": 0.64
+    }
+   ],
+   "debit": 5.46,
+   "blanc_moyen": 1.38,
+   "coupes": 4,
+   "dynamique_db": 26.8,
+   "cris": 0.001,
+   "musique": null,
+   "impacts": 0,
+   "impacts_10s": 0.0,
+   "graves": 0,
+   "aigus": 0,
+   "sur_vanne": 0,
+   "evenements": {},
+   "emotions": {
+    "on_phone": 4,
+    "firm": 3,
+    "sarcastic": 3,
+    "angry": 2,
+    "confused": 1,
+    "irritated": 1,
+    "annoyed": 1,
+    "resigned": 1
+   }
+  },
+  "claude": {
+   "lieux": [
+    "rue",
+    "rue"
+   ],
+   "moment": "jour",
+   "costumes": {
+    "presentateur": {
+     "haut": "costume",
+     "c_haut": "bleu marine",
+     "motif": "uni",
+     "bas": "pantalon",
+     "chaussures": "ville",
+     "details": [
+      "cravate",
+      "montre",
+      "barbe_courte"
+     ]
+    },
+    "invite": {
+     "haut": "chemise",
+     "c_haut": "blanc",
+     "motif": "uni",
+     "bas": "jupe",
+     "chaussures": "ballerines",
+     "details": [
+      "cravate",
+      "lunettes_vue",
+      "bracelets"
+     ]
+    }
+   },
+   "objets": [
+    {
+     "replique": 0,
+     "objet": "telephone"
+    },
+    {
+     "replique": 6,
+     "objet": "carte"
+    },
+    {
+     "replique": 18,
+     "objet": "telephone"
+    },
+    {
+     "replique": 21,
+     "objet": "telephone"
+    }
+   ],
+   "gags": [
+    "Petit-déjeuner inclus : seulement avant 10h",
+    "Poubelles : Solution alternative",
+    "Responsable : À vos souhaits !"
+   ],
+   "ambiances": [
+    "neon"
+   ],
+   "plans": [
+    {
+     "replique": 0,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "gratte_tete",
+     "reaction": "regard_camera"
+    },
+    {
+     "replique": 1,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "pointe_d",
+     "reaction": "choc"
+    },
+    {
+     "replique": 3,
+     "plan": "moyen",
+     "mouvement": "epaule",
+     "geste": "bras_ouverts",
+     "reaction": "sceptique"
+    },
+    {
+     "replique": 9,
+     "plan": "tres_serre",
+     "mouvement": "zoom_choc",
+     "geste": "poing",
+     "reaction": "colere"
+    },
+    {
+     "replique": 11,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "facepalm",
+     "reaction": "soupir"
+    },
+    {
+     "replique": 18,
+     "plan": "serre",
+     "mouvement": "avance",
+     "geste": "telephone",
+     "reaction": "panique"
+    },
+    {
+     "replique": 27,
+     "plan": "large",
+     "mouvement": "recul",
+     "geste": "mains_hanches",
+     "reaction": "blase"
+    }
+   ]
+  },
+  "realisation": {
+   "moment": "jour",
+   "lieux": [
+    "rue",
+    "rue"
+   ],
+   "gags": [
+    "Petit-déjeuner inclus : seulement avant 10h",
+    "Poubelles : Solution alternative",
+    "Responsable : À vos souhaits !"
+   ],
+   "ambiances": [
+    "neon"
+   ],
+   "source": "auteur+image",
+   "tenues": {
+    "presentateur": "costume",
+    "invite": "chemise"
+   },
+   "plans": [
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe"
+   ]
+  },
+  "video": "2026-10-28_20h14_emission.mp4"
  }
 ]

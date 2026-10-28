@@ -4359,35 +4359,73 @@
   "moment": "soir",
   "lieux": [
    "salon",
-   "rue"
+   "salon",
+   "salon",
+   "salon"
   ],
   "source": "auteur+image",
-  "duree": 123.1,
+  "duree": 87.2,
   "plans": {
-   "large": 44
+   "large": 33
   },
   "mouvements": {
-   "fixe": 44
+   "fixe": 33
   },
   "costumes": {
    "presentateur": "tshirt",
-   "invite": "chemise"
+   "invite": "veste_jean"
   },
-  "figurants": 2,
+  "figurants": 1,
   "ambiances": [
-   "poussiere",
-   "vapeur"
+   "neon",
+   "poussiere"
   ],
-  "controle": "Humoriste 6.0/10 : 2.5 s La première parole arrive trop tard, le spectateur a déjà commencé à scroller.; 113.5 s La chute finale manque de punch et n'est pas assez mise en valeur.; 100.2 s Manque de r",
-  "fichier": "2026-10-28_19h31_emission.mp4",
+  "controle": "Humoriste 7.0/10 : 1.9 s La première vanne arrive trop tôt sans accroche visuelle ou sonore pour capter l'attention immédiatement.; 68.1 s La chute finale manque de réactions exagérées pour renforcer ",
+  "fichier": "2026-10-28_18h57_emission.mp4",
   "cine": {
    "focus": false,
    "vertige": false,
-   "tiers": true,
+   "tiers": false,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": false,
+   "reflets": false,
+   "son": true
+  },
+  "cadence": "rapide"
+ },
+ {
+  "moment": "jour",
+  "lieux": [
+   "rue",
+   "rue"
+  ],
+  "source": "auteur+image",
+  "duree": 91.1,
+  "plans": {
+   "large": 28
+  },
+  "mouvements": {
+   "fixe": 28
+  },
+  "costumes": {
+   "presentateur": "costume",
+   "invite": "chemise"
+  },
+  "figurants": 4,
+  "ambiances": [
+   "neon"
+  ],
+  "controle": "Humoriste 7.0/10 : 0.4 s La chute finale est trop longue et dilue l'humour. La vanne sur le responsable pourrait être plus percutante avec un zoom choc.; 42.9 s Manque de réactions exagérées du présen",
+  "fichier": "2026-10-28_20h14_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": true,
+   "tiers": false,
    "etalonnage": true,
    "profondeur": false,
    "grain": true,
-   "reflets": false,
+   "reflets": true,
    "son": true
   },
   "cadence": "rapide"
