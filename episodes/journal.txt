@@ -2,19 +2,19 @@ Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, ElevenLabs epuise — IA utilisée : mistral
 Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @motiontoonz, @same_same53, @charly.bse, @kodanimation, @vignianimation, @vincedessine
-Profil TikTok @yan_animation0 : 25 vidéo(s) jamais utilisée(s)
-Profil TikTok @vignianimation : 31 vidéo(s) jamais utilisée(s)
-Profil TikTok @same_same53 : 32 vidéo(s) jamais utilisée(s)
-Vidéo depuis TikTok : https://www.tiktok.com/@yan_animation0/video/7692145611671342369
+Profil TikTok @motiontoonz : 35 vidéo(s) jamais utilisée(s)
+Profil TikTok @eliotlehanneur : 30 vidéo(s) jamais utilisée(s)
+Profil TikTok @yan_animation0 : 24 vidéo(s) jamais utilisée(s)
+Vidéo depuis TikTok : https://www.tiktok.com/@motiontoonz/video/7696064794150964513
   son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 106.6 s, compte d'origine @yan_animation0
-[ WARN:0@38.592] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
-  image de la vidéo : 1 plans (≈ 107.0 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 98 %, large 1 % ; caméra : fixe 100 % ; 2 personne(s) à l'écran : gauche (habit [21, 23, 24], cheveux [19, 13, 12], sourit 0 %); droite (habit [8, 3, 4], cheveux [25, 14, 8], sourit 0 %); centre (habit [8, 9, 9], cheveux [19, 13, 12], sourit 0 %) ; agitation 0.168 ; lumière nuit ; fond [1, 1, 1]
+  son récupéré : 82.9 s, compte d'origine @motiontoonz
+[ WARN:0@24.426] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  image de la vidéo : 24 plans (≈ 3.46 s chacun) ; cadrages : très serré 0 %, serré 30 %, moyen 2 %, large 67 % ; caméra : fixe 56 %, avance 0 %, recul 1 %, epaule 40 % ; 1 personne(s) à l'écran : centre (habit [239, 230, 217], cheveux [35, 34, 34], sourit 0 %) ; agitation 0.359 ; lumière jour ; fond [193, 160, 126]
   isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
   transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
   Whisper indisponible (Whisper : TimeoutError ) : contrôle simplifié
-[0;93m2026-10-28 15:54:31.243632431 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
-  transcription gratuite (Whisper sur la machine) : 400 mots
+[0;93m2026-10-28 16:16:28.039160830 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+  transcription gratuite (Whisper sur la machine) : 434 mots
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/core/io.py:48: UserWarning: 
 torchcodec is not installed correctly so built-in audio decoding will fail. Solutions are:
 * use audio preloaded in-memory as a {'waveform': (channel, time) torch.Tensor, 'sample_rate': int} dictionary;
@@ -24,36 +24,62 @@ Could not load this library: /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3
   warnings.warn(
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1927.)
   std = sequences.std(dim=-1, correction=1)
-  voix séparées par pyannote : 2 voix, 67 tours de parole
+  voix séparées par pyannote : 2 voix, 4 tours de parole
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-  voix vérifiées mot par mot : 47 mot(s) remis sur la bonne voix
-  29 répliques, voix : {'speaker_0': 283, 'speaker_1': 227}
-  son de la vidéo : 2 voix [283 Hz (f, 38 %), 227 Hz (f, 62 %)], 4.84 mots/s, blancs 2.4 s, 11 coupure(s) de parole, dynamique 23.1 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
-  scène reconstituée : Dans une voiture, un homme et une femme discutent. Elle lui annonce qu'elle a offert la PS5 qu'elle a gagnée à son collègue de travail, ce qui déclenche une dispute délirante.
+  voix trop proches (ressemblance 0.76) : vérification mot par mot laissée de côté
+  relecture du dialogue par l'IA : 32/32 phrases (A : le conseiller d'orientation, B : l'élève / le jeune)
+  contrôle questions-réponses (avec relecture de l'IA) : 32 phrases, 330 mot(s) changé(s) de voix
+  33 répliques, voix : {'speaker_0': 204, 'speaker_1': 210}
+  son de la vidéo : 2 voix [204 Hz (f, 24 %), 210 Hz (f, 76 %)], 5.4 mots/s, blancs 0.11 s, 10 coupure(s) de parole, dynamique 16.4 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
+  scène reconstituée : Un lycéen discute avec sa conseillère d'orientation et lui explique qu'il préfère s'orienter vers un bac professionnel plutôt que vers des études générales ou longues.
   casting : speaker_0 → Jojo, speaker_1 → Kévin
-Sketch : « OFFRIR LA PS5 AU COLLÈGUE », 29 répliques
-  décor 0 : car interior steering wheel dashboard seats windows, night, dark blue 
-Pré-jury impossible (boolean index did not match indexed array along axis 0; size of axis is 5 but size of corresponding boolean axis is 4)
-Traceback (most recent call last):
-  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 408, in main
-    try: duree = cartoon.rendre(sk, base + ".mp4", audios, mots=mots, decors=decors, mini=fmt == "mini", limite=limite_job(), deja=(S or {}).get("faits"))
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/jt-auto/jt-auto/moteur/cartoon.py", line 392, in rendre
-    if r["p"] == role and i < len(f0s): TON[i] = studio.intonation(f0s[i], ref)
-                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/jt-auto/jt-auto/moteur/studio.py", line 91, in intonation
-    zv = z[v]; fin = float(np.mean(zv[-6:]) - np.mean(zv[max(0, len(zv) - 18):max(1, len(zv) - 6)])) if len(zv) >= 12 else 0.0
-         ~^^^
-IndexError: boolean index did not match indexed array along axis 0; size of axis is 5 but size of corresponding boolean axis is 4
-Moteur cartoon en échec (boolean index did not match indexed array along axis 0; size of axis is 5 but size of corresponding boolean axis is 4) : nouvel essai en rendu simple, sans décor IA.
-cartoon : durée 110.2 s, 29 répliques, 1 scène(s), personnages ['presentateur', 'invite']
-  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~1652 images)
-  morceau 1652–3304 reçu d'une machine d'aide
-  morceau 3304–4957 reçu d'une machine d'aide
-  morceau 4957–6609 reçu d'une machine d'aide
-  dessin partagé terminé en 4.1 min
+  voix trop proches dans https://www.tiktok.com/@motiontoonz/video/7696064794150964513 (ressemblance 0.76) : on cherche une vidéo aux voix bien différentes
+Vidéo depuis TikTok : https://www.tiktok.com/@motiontoonz/video/7687993169127935264
+  son téléchargé (yt-dlp --impersonate chrome)
+  son récupéré : 84.3 s, compte d'origine @motiontoonz
+[ WARN:0@796.541] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  image de la vidéo : 27 plans (≈ 3.13 s chacun) ; cadrages : très serré 0 %, serré 4 %, moyen 0 %, large 94 % ; caméra : fixe 58 %, avance 3 %, epaule 38 % ; 1 personne(s) à l'écran : aucun visage repéré ; agitation 0.4 ; lumière jour ; fond [32, 34, 21]
+  isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
+  transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
+  Whisper indisponible (Whisper en panne) : contrôle simplifié
+  transcription gratuite (Whisper sur la machine) : 309 mots
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1927.)
+  std = sequences.std(dim=-1, correction=1)
+  voix séparées par pyannote : 2 voix, 51 tours de parole
+  voix vérifiées mot par mot : 23 mot(s) remis sur la bonne voix
+  32 répliques, voix : {'speaker_0': 159, 'speaker_1': 223}
+  son de la vidéo : 2 voix [159 Hz (h, 64 %), 223 Hz (f, 36 %)], 5.35 mots/s, blancs 0.98 s, 2 coupure(s) de parole, dynamique 19.9 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
+  IA gemini indisponible (The read operation timed out) : on passe à la suivante
+  scène reconstituée : Un serveur de café discute avec un client musclé en terrasse à Paris et critique son manque de romantisme lors d'un premier date.
+  casting : speaker_0 → Jojo, speaker_1 → Kévin
+  sous-titres : 18 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
+Sketch : « PREMIER DATE RADIN », 32 répliques
+  décor 0 (lieu ressemblant de la banque, budget Modal du mois atteint) : Parisian café terrace with green awning, street lamp and lim
+montage : 1 plans (0.0:large>pre/coupe)
+studio : jour, lieux ['restaurant'], tenues presentateur=tablier, invite=chemise, 2 figurant(s), ambiances ['poussiere', 'vapeur'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 87.9 s, 32 répliques, 1 scène(s), personnages ['presentateur', 'invite']
+montage : 1 plans (0.0:large>pre/coupe)
+studio : jour, lieux ['restaurant'], tenues presentateur=tablier, invite=chemise, 2 figurant(s), ambiances ['poussiere', 'vapeur'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 87.9 s, 32 répliques, 1 scène(s), personnages ['presentateur', 'invite']
+  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~1317 images)
+  morceau 3953–5271 reçu d'une machine d'aide
+  morceau 1318–2636 reçu d'une machine d'aide
+  morceau 2636–3953 reçu d'une machine d'aide
+  dessin partagé terminé en 6.9 min
+Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
+  IA gemini indisponible (Remote end closed connection without response) : on passe à la suivante
+Jury qualité (ia) : 7.8/10 — Humoriste 7.0/10 : 0.4 s La chute finale manque de punch. Elle est dite sans emphase et sans réaction visuelle forte.; 64.9 s Les vannes sur la galanterie et le romantisme pourraient être renforcées par des regards caméra ou des réactions exagérées.; 87.3 s Le gag final sur 'je peux le gosser' est sous-exploité. Un bruitage ou une musique comique renforcerait l'effet. | Réalisateur 6.6/10 : montage trop lent : 0.1 plans toutes les 10 s (il en faudrait ~3.0); 23.2 s pas assez de plans de réaction de celui qui écoute | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 6.0/10 : 0.4 s Accroche lente. Les sous-titres apparaissent trop rapidement et sont difficiles à lire.; 45.2 s Moment d'ennui lors de la discussion sur l'égalité homme-femme. Peu de dynamisme.; 88 s Fin abrupte sans temps pour digérer la chute. Un plan supplémentaire pour souligner le gag aurai
+Corrections du jury (tour 1) : réaction « sceptique » à la réplique 11
+montage : 1 plans (0.0:large>pre/coupe)
+studio : jour, lieux ['restaurant'], tenues presentateur=tablier, invite=chemise, 2 figurant(s), ambiances ['poussiere', 'vapeur'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 87.9 s, 32 répliques, 1 scène(s), personnages ['presentateur', 'invite']
+  redessin partiel : 360/5271 images à redessiner (1 passage(s)), le reste repris tel quel
+Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
+  IA gemini indisponible (The read operation timed out) : on passe à la suivante
+Jury qualité (ia) : 5.8/10 — Humoriste 6.0/10 : 0.4 s La chute finale manque de réactivité visuelle. Le zoom choc sur celui qui dit 'Merci' est absent, ce qui réduit l'impact comique.; 45.2 s Les vannes sur le maquillage et les vêtements sont un peu longues et pourraient être plus percutantes avec des réactions exagérées.; 80.1 s Le moment où le présentateur dit qu'il peut 'le gosser' manque d'une réaction visuelle forte de la part de l'invitée. | Réalisateur 5.0/10 : 0 s Le montage est trop lent. Il manque des plans serrés ou des réactions pour dynamiser les échanges.; 17.5 s Les réactions de l'invitée sont trop discrètes. Il faudrait des expressions faciales plus marquées.; 64.9 s Le passage où l'invitée accepte de payer manque de rythme. Un faux raccord ou un changement de plan pourrait renforcer le gag. | Directeur artistique 7.0/10 : 0 s Les personnages manquent de cohérence vestimentaire avec l'histoire. Le pr
+La version corrigée n'est pas meilleure : on garde la première.
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = gemini ×1, voix = tiktok, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 9508, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 54}
-Quota de l'API GitHub : 4890 appels restants
-OK : sortie/2026-10-28_16h57_emission.mp4 (110 s)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = gemini ×3, mistral ×3, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 54777, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0}
+Quota de l'API GitHub : 4952 appels restants
+OK : sortie/2026-10-28_17h26_emission.mp4 (88 s)
