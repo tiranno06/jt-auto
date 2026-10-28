@@ -4359,36 +4359,34 @@
   "moment": "soir",
   "lieux": [
    "salon",
-   "salon",
-   "salon",
-   "salon"
+   "rue"
   ],
   "source": "auteur+image",
-  "duree": 87.2,
+  "duree": 123.1,
   "plans": {
-   "large": 33
+   "large": 44
   },
   "mouvements": {
-   "fixe": 33
+   "fixe": 44
   },
   "costumes": {
    "presentateur": "tshirt",
-   "invite": "veste_jean"
+   "invite": "chemise"
   },
-  "figurants": 1,
+  "figurants": 2,
   "ambiances": [
-   "neon",
-   "poussiere"
+   "poussiere",
+   "vapeur"
   ],
-  "controle": "Humoriste 7.0/10 : 1.9 s La première vanne arrive trop tôt sans accroche visuelle ou sonore pour capter l'attention immédiatement.; 68.1 s La chute finale manque de réactions exagérées pour renforcer ",
-  "fichier": "2026-10-28_18h57_emission.mp4",
+  "controle": "Humoriste 6.0/10 : 2.5 s La première parole arrive trop tard, le spectateur a déjà commencé à scroller.; 113.5 s La chute finale manque de punch et n'est pas assez mise en valeur.; 100.2 s Manque de r",
+  "fichier": "2026-10-28_19h31_emission.mp4",
   "cine": {
    "focus": false,
    "vertige": false,
-   "tiers": false,
+   "tiers": true,
    "etalonnage": true,
    "profondeur": false,
-   "grain": false,
+   "grain": true,
    "reflets": false,
    "son": true
   },
