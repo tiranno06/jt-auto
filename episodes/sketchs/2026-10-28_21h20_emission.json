@@ -1,0 +1,536 @@
+{
+ "titre": "SORTIE DE PRISON ET ÉCRITURE",
+ "sujet": "SORTIE DE PRISON ET ÉCRITURE",
+ "ecran": "SORTIE DE PRIS",
+ "invite_nom": "Hubert Rustine",
+ "invite_role": "Expert (fictif)",
+ "invite_look": "chauve",
+ "lieu_direct": "Assemblée",
+ "titre_accroche": "POV : Écrire depuis les barreaux",
+ "question": "Comment vivre une telle expérience et en faire un livre en si peu de temps ?",
+ "running_gag": "",
+ "verite": "",
+ "repliques": [
+  {
+   "p": "presentateur",
+   "t": "Vous sortez votre livre qui s'appelle Le Journal d'un prisonnier.",
+   "_deb": 0.0,
+   "_fin": 2.6,
+   "d": "['[determined]', \"Vous sortez votre livre qui s'appelle Le Journal d'un prisonnier.\"]",
+   "objet": "livre"
+  },
+  {
+   "p": "presentateur",
+   "t": "Pourquoi avez-vous eu besoin d'écrire un livre et que ça sorte en 21 jours ?",
+   "_deb": 2.76,
+   "_fin": 6.18,
+   "d": "['[curieux]', \"Pourquoi avez-vous eu besoin d'écrire un livre et que ça sorte en 21 jours ?\"]"
+  },
+  {
+   "p": "invite",
+   "t": "21.",
+   "_deb": 6.18,
+   "_fin": 6.52,
+   "d": "['[sarcastique]', '21.']"
+  },
+  {
+   "p": "presentateur",
+   "t": "21 ?",
+   "_deb": 6.94,
+   "_fin": 8.04,
+   "d": "['[confus]', '21 ?']"
+  },
+  {
+   "p": "invite",
+   "t": "Bon, d 'abord, quand je suis rentré dans ma cellule et que les surveillants ont fermé la porte, et l 'enfermer n 'est pas un mot, la porte",
+   "_deb": 8.04,
+   "_fin": 17.66
+  },
+  {
+   "p": "invite",
+   "t": "de ma cellule était fermée.",
+   "_deb": 17.66,
+   "_fin": 18.88,
+   "objet": "stylo"
+  },
+  {
+   "p": "invite",
+   "t": "Et donc, 5 minutes après être rentré en cellule, le titre m 'est venu tout de suite et j 'ai commencé à écrire.",
+   "_deb": 21.29,
+   "_fin": 27.75
+  },
+  {
+   "p": "presentateur",
+   "t": "Vous allez sortir de prison au bout de 20 jours.",
+   "_deb": 28.11,
+   "_fin": 30.73
+  },
+  {
+   "p": "invite",
+   "t": "21 ?",
+   "_deb": 31.35,
+   "_fin": 31.79,
+   "d": "['[confus]', '21 ?']"
+  },
+  {
+   "p": "presentateur",
+   "t": "21?",
+   "_deb": 32.39,
+   "_fin": 32.79
+  },
+  {
+   "p": "invite",
+   "t": "Et d 'ailleurs, je ressens une grande fatigue, car la prison, non sur du compte, ça fatigue.",
+   "_deb": 32.79,
+   "_fin": 38.95
+  },
+  {
+   "p": "presentateur",
+   "t": "Quelle est la première chose que vous faites en sortant?",
+   "_deb": 42.3,
+   "_fin": 44.52
+  },
+  {
+   "p": "invite",
+   "t": "Je réallume mon portable et j 'ai 332 messages en attente.",
+   "_deb": 44.52,
+   "_fin": 49.9,
+   "objet": "telephone"
+  },
+  {
+   "p": "invite",
+   "t": "Je suis tellement persuadé que c 'est normal que l 'on m 'aime et je crains, hélas,",
+   "_deb": 50.82,
+   "_fin": 55.36
+  },
+  {
+   "p": "invite",
+   "t": "avoir trop confiance en moi.",
+   "_deb": 56.44,
+   "_fin": 57.62,
+   "chute": true
+  }
+ ],
+ "bandeau": [],
+ "gag": null,
+ "legende": "Un invité partage son expérience unique d'écriture en prison et son retour à la vie quotidienne.",
+ "hashtags": [
+  "petitsdramas",
+  "ecriture",
+  "prison",
+  "experience",
+  "livre",
+  "emotion",
+  "retour"
+ ],
+ "sources": [
+  "https://www.tiktok.com/@vincedessine/video/7619001770169568534"
+ ],
+ "decoupage": [
+  {
+   "scene": "1",
+   "repliques": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "lieu": "",
+   "son": "",
+   "duree": 0.0,
+   "decor": "studio d'émission avec un fond bleu et des logos d'antenne, micro sur pied, bureau avec un livre ouvert, chaise pour l'invité.",
+   "titre": "L'expérience carcérale"
+  },
+  {
+   "scene": "2",
+   "repliques": [
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "lieu": "",
+   "son": "",
+   "duree": 0.0,
+   "decor": "même décor, mais avec une lumière tamisée pour évoquer une ambiance plus intime.",
+   "titre": "L'écriture en prison"
+  },
+  {
+   "scene": "3",
+   "repliques": [
+    11,
+    12,
+    13
+   ],
+   "lieu": "",
+   "son": "",
+   "duree": 0.0,
+   "decor": "studio avec un fond plus lumineux, téléphone portable posé sur le bureau, écran géant affichant des messages.",
+   "titre": "Retour à la vie normale"
+  }
+ ],
+ "studio": {
+  "moment": "jour",
+  "lieux": [
+   "studio d'émission"
+  ],
+  "costumes": {
+   "presentateur": {
+    "haut": "chemise",
+    "c_haut": "bleu marine",
+    "bas": "pantalon",
+    "chaussures": "ville",
+    "details": [
+     "cravate",
+     "lunettes_vue"
+    ]
+   },
+   "invite": {
+    "haut": "pull",
+    "c_haut": "gris",
+    "bas": "jean",
+    "chaussures": "baskets",
+    "details": [
+     "barbe_courte"
+    ]
+   }
+  },
+  "personnages": {
+   "presentateur": {
+    "genre": "h",
+    "age": 45,
+    "taille": 1,
+    "corpulence": 0.7,
+    "cheveux": "court",
+    "c_cheveux": "brun",
+    "barbe": "trois_jours"
+   },
+   "invite": {
+    "genre": "h",
+    "age": 35,
+    "taille": 1,
+    "corpulence": 0.8,
+    "cheveux": "court",
+    "c_cheveux": "brun",
+    "barbe": "trois_jours"
+   }
+  },
+  "objets": [
+   {
+    "replique": 0,
+    "objet": "livre"
+   },
+   {
+    "replique": 5,
+    "objet": "stylo"
+   },
+   {
+    "replique": 12,
+    "objet": "telephone"
+   }
+  ],
+  "gags": [
+   "« 21 jours, 21 chapitres »",
+   "« 332 messages : qui a le temps de tous les lire ? »",
+   "« L'enfer, c'est les autres... et les surveillants. »"
+  ],
+  "ambiances": [
+   "neon"
+  ],
+  "cadence": "normal",
+  "plans": [
+   {
+    "replique": 0,
+    "plan": "large",
+    "mouvement": "fixe",
+    "geste": "bras_ouverts",
+    "reaction": "aucune"
+   },
+   {
+    "replique": 1,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "gratte_tete",
+    "reaction": "regard_camera"
+   },
+   {
+    "replique": 2,
+    "plan": "moyen",
+    "mouvement": "fixe",
+    "geste": "pointe_d",
+    "reaction": "sceptique"
+   },
+   {
+    "replique": 4,
+    "plan": "serre",
+    "mouvement": "zoom_choc",
+    "geste": "poches",
+    "reaction": "choc"
+   },
+   {
+    "replique": 5,
+    "plan": "contre_plongee",
+    "mouvement": "fixe",
+    "geste": "explique",
+    "reaction": "reflechit"
+   },
+   {
+    "replique": 7,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "pointe_g",
+    "reaction": "soupir"
+   },
+   {
+    "replique": 12,
+    "plan": "tres_serre",
+    "mouvement": "zoom_choc",
+    "geste": "telephone",
+    "reaction": "joie"
+   }
+  ]
+ },
+ "doublage": {
+  "piste": "/tmp/tmp5p_vkkoi/piste.wav",
+  "duree": 60.77,
+  "source": "https://www.tiktok.com/@vincedessine/video/7619001770169568534",
+  "auteur": "vincedessine",
+  "contexte": "Un présentateur interview un invité qui vient de sortir de prison après 21 jours d'emprisonnement. Ils discutent dans un studio d'émission, où l'invité partage son expérience et ses émotions.",
+  "evenements": [],
+  "visuel": {
+   "gestes": [],
+   "duree": 61.1,
+   "nb_plans": 21,
+   "duree_plan": 2.91,
+   "coupes": [
+    3.39,
+    4.85,
+    8.24,
+    9.69,
+    12.6,
+    19.39,
+    20.84,
+    25.2,
+    27.14,
+    29.56,
+    31.5,
+    32.96,
+    35.86,
+    39.74,
+    41.68,
+    42.65,
+    45.56,
+    50.89,
+    54.76,
+    59.61
+   ],
+   "plans": {
+    "tres_serre": 0.0,
+    "serre": 0.0,
+    "moyen": 0.0,
+    "large": 1.0
+   },
+   "camera": {
+    "fixe": 1.0,
+    "avance": 0.0,
+    "recul": 0.0,
+    "travelling": 0.0,
+    "epaule": 0.0
+   },
+   "nb_personnes": 0,
+   "personnes": [],
+   "visages": false,
+   "sourires": 0.0,
+   "energie": 0.035,
+   "mur": [
+    252,
+    241,
+    229
+   ],
+   "palette": [
+    [
+     253,
+     253,
+     253,
+     0.296
+    ],
+    [
+     172,
+     209,
+     245,
+     0.246
+    ],
+    [
+     125,
+     91,
+     79,
+     0.156
+    ],
+    [
+     10,
+     7,
+     8,
+     0.142
+    ],
+    [
+     249,
+     212,
+     173,
+     0.125
+    ],
+    [
+     59,
+     152,
+     236,
+     0.034
+    ]
+   ],
+   "lumiere": {
+    "luminosite": 196.3,
+    "chaleur": -7.0,
+    "saturation": 64.2
+   },
+   "moment": "jour"
+  },
+  "audio": {
+   "duree": 60.8,
+   "nb_voix": 2,
+   "voix": [
+    {
+     "hz": 142,
+     "genre": "h",
+     "part": 0.26
+    },
+    {
+     "hz": 103,
+     "genre": "h",
+     "part": 0.74
+    }
+   ],
+   "debit": 3.4,
+   "blanc_moyen": 1.1,
+   "coupes": 4,
+   "dynamique_db": 17.2,
+   "cris": 0.037,
+   "musique": null,
+   "impacts": 0,
+   "impacts_10s": 0.0,
+   "graves": 0,
+   "aigus": 0,
+   "sur_vanne": 0,
+   "evenements": {},
+   "emotions": {
+    "'[sarcastique": 2,
+    "'[confus": 2,
+    "'[émouvant": 2,
+    "'[neutre": 2,
+    "'[determined": 1,
+    "'[curieux": 1,
+    "'[passionné": 1,
+    "'[fatigué": 1
+   }
+  },
+  "video_origine": "/tmp/tmp5p_vkkoi/src.mp4"
+ },
+ "fiche": {
+  "note": 0,
+  "decision": "vidéo manuelle (bande son d'une vidéo TikTok)",
+  "decoupage": [
+   {
+    "scene": "1",
+    "repliques": [
+     0,
+     1,
+     2,
+     3,
+     4
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 0.0,
+    "decor": "studio d'émission avec un fond bleu et des logos d'antenne, micro sur pied, bureau avec un livre ouvert, chaise pour l'invité.",
+    "titre": "L'expérience carcérale"
+   },
+   {
+    "scene": "2",
+    "repliques": [
+     5,
+     6,
+     7,
+     8,
+     9,
+     10
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 0.0,
+    "decor": "même décor, mais avec une lumière tamisée pour évoquer une ambiance plus intime.",
+    "titre": "L'écriture en prison"
+   },
+   {
+    "scene": "3",
+    "repliques": [
+     11,
+     12,
+     13
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 0.0,
+    "decor": "studio avec un fond plus lumineux, téléphone portable posé sur le bureau, écran géant affichant des messages.",
+    "titre": "Retour à la vie normale"
+   }
+  ]
+ },
+ "_monte": true,
+ "_voix_hz": {
+  "presentateur": 143,
+  "invite": 110
+ },
+ "_voix_genre": {
+  "presentateur": "h",
+  "invite": "h"
+ },
+ "realisation": {
+  "moment": "jour",
+  "lieux": [
+   "bureau",
+   "rue",
+   "bureau"
+  ],
+  "gags": [
+   "« 21 jours, 21 chapitres »",
+   "« 332 messages : qui a le temps de tous les lire ? »",
+   "« L'enfer, c'est les autres... et les surveillants. »"
+  ],
+  "ambiances": [
+   "neon",
+   "pluie"
+  ],
+  "source": "auteur+image",
+  "tenues": {
+   "presentateur": "chemise",
+   "invite": "pull"
+  },
+  "plans": [
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe"
+  ]
+ }
+}
