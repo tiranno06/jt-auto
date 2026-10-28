@@ -4504,5 +4504,42 @@
    "son": true
   },
   "cadence": "normal"
+ },
+ {
+  "moment": "soir",
+  "lieux": [
+   "restaurant",
+   "hall"
+  ],
+  "source": "auteur+image",
+  "duree": 13.7,
+  "plans": {
+   "large": 2
+  },
+  "mouvements": {
+   "fixe": 2
+  },
+  "costumes": {
+   "presentateur": "costume",
+   "invite": "robe"
+  },
+  "figurants": 2,
+  "ambiances": [
+   "poussiere",
+   "vapeur"
+  ],
+  "controle": "Humoriste 8.6/10 : 5.4 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 8.2/10 : montage trop lent : 1.5 plans toutes les 10 s (il en faudrait ~3.6) | Directeur artistique 10.0",
+  "fichier": "2026-10-28_21h55_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": true,
+   "tiers": true,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": true,
+   "reflets": false,
+   "son": true
+  },
+  "cadence": null
  }
 ]

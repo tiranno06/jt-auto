@@ -28685,5 +28685,251 @@
    ]
   },
   "video": "2026-10-28_21h20_emission.mp4"
+ },
+ {
+  "date": "2026-10-28",
+  "source": "https://www.tiktok.com/@yan_animation0/video/7651974316715674913",
+  "auteur": "yan_animation0",
+  "visuel": {
+   "gestes": [
+    [
+     9.0,
+     0.55,
+     0.69
+    ],
+    [
+     10.0,
+     0.54,
+     0.68
+    ],
+    [
+     11.0,
+     0.54,
+     0.7
+    ]
+   ],
+   "duree": 15.0,
+   "nb_plans": 6,
+   "duree_plan": 2.5,
+   "coupes": [
+    3.0,
+    4.5,
+    6.0,
+    8.5,
+    14.5
+   ],
+   "plans": {
+    "tres_serre": 0.0,
+    "serre": 0.7,
+    "moyen": 0.3,
+    "large": 0.0
+   },
+   "camera": {
+    "fixe": 0.75,
+    "avance": 0.0,
+    "recul": 0.25,
+    "travelling": 0.0,
+    "epaule": 0.0
+   },
+   "nb_personnes": 1,
+   "personnes": [
+    {
+     "place": "centre",
+     "presence": 0.8,
+     "habit": [
+      34,
+      30,
+      29
+     ],
+     "cheveux": [
+      1,
+      0,
+      0
+     ],
+     "sourire": 0.0,
+     "taille": 0.191,
+     "tete_penchee": 4.0,
+     "regard_cote": 0.0
+    },
+    {
+     "place": "gauche",
+     "presence": 0.2,
+     "habit": [
+      30,
+      29,
+      29
+     ],
+     "cheveux": [
+      1,
+      1,
+      0
+     ],
+     "sourire": 0.0,
+     "taille": 0.119,
+     "tete_penchee": 0.6,
+     "regard_cote": 0.0
+    },
+    {
+     "place": "droite",
+     "presence": 0.167,
+     "habit": [
+      164,
+      125,
+      91
+     ],
+     "cheveux": [
+      30,
+      20,
+      20
+     ],
+     "sourire": 0.0,
+     "taille": 0.116,
+     "tete_penchee": 16.4,
+     "regard_cote": 1.0
+    }
+   ],
+   "visages": true,
+   "sourires": 0.0,
+   "energie": 0.191,
+   "mur": [
+    107,
+    95,
+    94
+   ],
+   "palette": [
+    [
+     94,
+     87,
+     91,
+     0.29
+    ],
+    [
+     72,
+     50,
+     58,
+     0.209
+    ],
+    [
+     149,
+     116,
+     87,
+     0.201
+    ],
+    [
+     26,
+     22,
+     21,
+     0.141
+    ],
+    [
+     157,
+     149,
+     145,
+     0.129
+    ],
+    [
+     252,
+     251,
+     251,
+     0.029
+    ]
+   ],
+   "lumiere": {
+    "luminosite": 108.9,
+    "chaleur": 18.6,
+    "saturation": 70.2
+   },
+   "moment": "soir"
+  },
+  "audio": {
+   "duree": 15.0,
+   "nb_voix": 2,
+   "voix": [
+    {
+     "hz": 102,
+     "genre": "h",
+     "part": 0.6
+    },
+    {
+     "hz": 185,
+     "genre": "?",
+     "part": 0.4
+    }
+   ],
+   "debit": 3.51,
+   "blanc_moyen": 2.72,
+   "coupes": 0,
+   "dynamique_db": 20.0,
+   "cris": 0.005,
+   "musique": null,
+   "impacts": 0,
+   "impacts_10s": 0.0,
+   "graves": 0,
+   "aigus": 0,
+   "sur_vanne": 0,
+   "evenements": {},
+   "emotions": {
+    "'[suspense": 1,
+    "révélation_nerveux": 1
+   }
+  },
+  "claude": {
+   "lieux": [
+    "restaurant"
+   ],
+   "moment": "soir",
+   "costumes": {
+    "presentateur": {
+     "haut": "costume",
+     "c_haut": "noir",
+     "motif": "uni",
+     "bas": "pantalon",
+     "chaussures": "ville",
+     "details": [
+      "cravate",
+      "montre"
+     ],
+     "chapeau": null,
+     "cheveux": "court",
+     "c_cheveux": "noir"
+    },
+    "invite": {
+     "haut": "robe",
+     "c_haut": "bleu marine",
+     "motif": "uni",
+     "bas": "jupe",
+     "chaussures": "ballerines",
+     "details": [
+      "collier",
+      "boucles_oreilles"
+     ],
+     "chapeau": null,
+     "cheveux": "long",
+     "c_cheveux": "brun"
+    }
+   }
+  },
+  "realisation": {
+   "moment": "soir",
+   "lieux": [
+    "restaurant",
+    "hall"
+   ],
+   "gags": [],
+   "ambiances": [
+    "poussiere",
+    "vapeur"
+   ],
+   "source": "auteur+image",
+   "tenues": {
+    "presentateur": "costume",
+    "invite": "robe"
+   },
+   "plans": [
+    "large/fixe",
+    "large/fixe"
+   ]
+  },
+  "video": "2026-10-28_21h55_emission.mp4"
  }
 ]
