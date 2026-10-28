@@ -2,19 +2,19 @@ Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, ElevenLabs epuise — IA utilisée : mistral
 Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @motiontoonz, @same_same53, @charly.bse, @kodanimation, @vignianimation, @vincedessine
-Profil TikTok @motiontoonz : 35 vidéo(s) jamais utilisée(s)
-Profil TikTok @eliotlehanneur : 30 vidéo(s) jamais utilisée(s)
+Profil TikTok @vincedessine : 31 vidéo(s) jamais utilisée(s)
+Profil TikTok @charly.bse : 30 vidéo(s) jamais utilisée(s)
 Profil TikTok @yan_animation0 : 24 vidéo(s) jamais utilisée(s)
-Vidéo depuis TikTok : https://www.tiktok.com/@motiontoonz/video/7696064794150964513
+Vidéo depuis TikTok : https://www.tiktok.com/@vincedessine/video/7616687446234877206
   son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 82.9 s, compte d'origine @motiontoonz
-[ WARN:0@24.426] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
-  image de la vidéo : 24 plans (≈ 3.46 s chacun) ; cadrages : très serré 0 %, serré 30 %, moyen 2 %, large 67 % ; caméra : fixe 56 %, avance 0 %, recul 1 %, epaule 40 % ; 1 personne(s) à l'écran : centre (habit [239, 230, 217], cheveux [35, 34, 34], sourit 0 %) ; agitation 0.359 ; lumière jour ; fond [193, 160, 126]
+  son récupéré : 60.5 s, compte d'origine @vincedessine
+[ WARN:0@37.125] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  image de la vidéo : 18 plans (≈ 3.38 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 0 %, large 100 % ; caméra : fixe 85 %, avance 1 %, recul 5 %, travelling 3 %, epaule 3 % ; 0 personne(s) à l'écran : aucun visage repéré ; agitation 0.211 ; lumière jour ; fond [250, 249, 249]
   isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
   transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
   Whisper indisponible (Whisper : TimeoutError ) : contrôle simplifié
-[0;93m2026-10-28 16:16:28.039160830 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
-  transcription gratuite (Whisper sur la machine) : 434 mots
+[0;93m2026-10-28 16:58:30.762555693 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+  transcription gratuite (Whisper sur la machine) : 332 mots
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/core/io.py:48: UserWarning: 
 torchcodec is not installed correctly so built-in audio decoding will fail. Solutions are:
 * use audio preloaded in-memory as a {'waveform': (channel, time) torch.Tensor, 'sample_rate': int} dictionary;
@@ -24,62 +24,64 @@ Could not load this library: /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3
   warnings.warn(
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1927.)
   std = sequences.std(dim=-1, correction=1)
-  voix séparées par pyannote : 2 voix, 4 tours de parole
+  voix séparées par pyannote : 2 voix, 26 tours de parole
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-  voix trop proches (ressemblance 0.76) : vérification mot par mot laissée de côté
-  relecture du dialogue par l'IA : 32/32 phrases (A : le conseiller d'orientation, B : l'élève / le jeune)
-  contrôle questions-réponses (avec relecture de l'IA) : 32 phrases, 330 mot(s) changé(s) de voix
-  33 répliques, voix : {'speaker_0': 204, 'speaker_1': 210}
-  son de la vidéo : 2 voix [204 Hz (f, 24 %), 210 Hz (f, 76 %)], 5.4 mots/s, blancs 0.11 s, 10 coupure(s) de parole, dynamique 16.4 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
-  scène reconstituée : Un lycéen discute avec sa conseillère d'orientation et lui explique qu'il préfère s'orienter vers un bac professionnel plutôt que vers des études générales ou longues.
+  voix vérifiées mot par mot : 45 mot(s) remis sur la bonne voix
+  27 répliques, voix : {'speaker_0': 181, 'speaker_1': 128}
+  son de la vidéo : 2 voix [181 Hz (?, 46 %), 128 Hz (h, 54 %)], 6.3 mots/s, blancs 0.36 s, 8 coupure(s) de parole, dynamique 20.6 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
+  scène reconstituée : Une femme révèle à son nouveau partenaire qu'elle a un enfant de sept ans, le petit Aaron, dont il ignorait totalement l'existence.
   casting : speaker_0 → Jojo, speaker_1 → Kévin
-  voix trop proches dans https://www.tiktok.com/@motiontoonz/video/7696064794150964513 (ressemblance 0.76) : on cherche une vidéo aux voix bien différentes
-Vidéo depuis TikTok : https://www.tiktok.com/@motiontoonz/video/7687993169127935264
-  son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 84.3 s, compte d'origine @motiontoonz
-[ WARN:0@796.541] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
-  image de la vidéo : 27 plans (≈ 3.13 s chacun) ; cadrages : très serré 0 %, serré 4 %, moyen 0 %, large 94 % ; caméra : fixe 58 %, avance 3 %, epaule 38 % ; 1 personne(s) à l'écran : aucun visage repéré ; agitation 0.4 ; lumière jour ; fond [32, 34, 21]
-  isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
-  transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
-  Whisper indisponible (Whisper en panne) : contrôle simplifié
-  transcription gratuite (Whisper sur la machine) : 309 mots
-/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1927.)
-  std = sequences.std(dim=-1, correction=1)
-  voix séparées par pyannote : 2 voix, 51 tours de parole
-  voix vérifiées mot par mot : 23 mot(s) remis sur la bonne voix
-  32 répliques, voix : {'speaker_0': 159, 'speaker_1': 223}
-  son de la vidéo : 2 voix [159 Hz (h, 64 %), 223 Hz (f, 36 %)], 5.35 mots/s, blancs 0.98 s, 2 coupure(s) de parole, dynamique 19.9 dB, pas de mesure, 0 bruitage(s) (0 graves, 0 aigus, 0 sur une fin de réplique), événements {}, émotions {}
-  IA gemini indisponible (The read operation timed out) : on passe à la suivante
-  scène reconstituée : Un serveur de café discute avec un client musclé en terrasse à Paris et critique son manque de romantisme lors d'un premier date.
-  casting : speaker_0 → Jojo, speaker_1 → Kévin
-  sous-titres : 18 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
-Sketch : « PREMIER DATE RADIN », 32 répliques
-  décor 0 (lieu ressemblant de la banque, budget Modal du mois atteint) : Parisian café terrace with green awning, street lamp and lim
-montage : 1 plans (0.0:large>pre/coupe)
-studio : jour, lieux ['restaurant'], tenues presentateur=tablier, invite=chemise, 2 figurant(s), ambiances ['poussiere', 'vapeur'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 87.9 s, 32 répliques, 1 scène(s), personnages ['presentateur', 'invite']
-montage : 1 plans (0.0:large>pre/coupe)
-studio : jour, lieux ['restaurant'], tenues presentateur=tablier, invite=chemise, 2 figurant(s), ambiances ['poussiere', 'vapeur'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 87.9 s, 32 répliques, 1 scène(s), personnages ['presentateur', 'invite']
-  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~1317 images)
-  morceau 3953–5271 reçu d'une machine d'aide
-  morceau 1318–2636 reçu d'une machine d'aide
-  morceau 2636–3953 reçu d'une machine d'aide
-  dessin partagé terminé en 6.9 min
+  sous-titres : 24 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
+Sketch : « UN SECRET DE FAMILLE INATTENDU », 27 répliques
+  décor 0 (lieu ressemblant de la banque, budget Modal du mois atteint) : White living room with minimalist floor and a small toy pyra
+  décor 1 (lieu ressemblant de la banque, budget Modal du mois atteint) : Living room with pink sofa, children toys and a picture on t
+montage : 2 plans (0.0:large>pre/coupe 14.1:large>inv/coupe)
+studio : jour, lieux ['salon', 'salon'], tenues presentateur=robe, invite=chemise, 0 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 62.9 s, 27 répliques, 2 scène(s), personnages ['presentateur', 'invite']
+Contrôle image : 1 défaut(s) — 14.25 s tete_coupee (presentateur)
+montage : 2 plans (0.0:large>pre/coupe 14.1:large>inv/coupe)
+studio : jour, lieux ['salon', 'salon'], tenues presentateur=robe, invite=chemise, 0 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 62.9 s, 27 répliques, 2 scène(s), personnages ['presentateur', 'invite']
+Contrôle image : 1 défaut(s) — 14.25 s tete_coupee (presentateur)
+  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~944 images)
+  morceau 944–1888 reçu d'une machine d'aide
+  morceau 1888–2832 reçu d'une machine d'aide
+  morceau 2832–3776 reçu d'une machine d'aide
+  dessin partagé terminé en 5.0 min
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-  IA gemini indisponible (Remote end closed connection without response) : on passe à la suivante
-Jury qualité (ia) : 7.8/10 — Humoriste 7.0/10 : 0.4 s La chute finale manque de punch. Elle est dite sans emphase et sans réaction visuelle forte.; 64.9 s Les vannes sur la galanterie et le romantisme pourraient être renforcées par des regards caméra ou des réactions exagérées.; 87.3 s Le gag final sur 'je peux le gosser' est sous-exploité. Un bruitage ou une musique comique renforcerait l'effet. | Réalisateur 6.6/10 : montage trop lent : 0.1 plans toutes les 10 s (il en faudrait ~3.0); 23.2 s pas assez de plans de réaction de celui qui écoute | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 6.0/10 : 0.4 s Accroche lente. Les sous-titres apparaissent trop rapidement et sont difficiles à lire.; 45.2 s Moment d'ennui lors de la discussion sur l'égalité homme-femme. Peu de dynamisme.; 88 s Fin abrupte sans temps pour digérer la chute. Un plan supplémentaire pour souligner le gag aurai
-Corrections du jury (tour 1) : réaction « sceptique » à la réplique 11
-montage : 1 plans (0.0:large>pre/coupe)
-studio : jour, lieux ['restaurant'], tenues presentateur=tablier, invite=chemise, 2 figurant(s), ambiances ['poussiere', 'vapeur'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 87.9 s, 32 répliques, 1 scène(s), personnages ['presentateur', 'invite']
-  redessin partiel : 360/5271 images à redessiner (1 passage(s)), le reste repris tel quel
+  IA gemini indisponible (gemini 429 : [{
+  "error": {
+    "code": 429,
+    "message": "You exceeded your current quota, please check your plan an) : on passe à la suivante
+Jury qualité (ia) : 7.0/10 — Humoriste 7.0/10 : 0.4 s Les vannes initiales sont bien placées mais manquent de punch. La chute finale n'est pas assez exploitée pour un effet maximal.; 31.8 s Le moment où l'invite dit 'I'm not your father' pourrait être plus marquant avec une réaction visuelle plus forte.; 55.1 s La chute pourrait être encore plus drôle si elle était accompagnée d'un bruitage ou d'un effet visuel comme un flash ou un son de caisse. | Réalisateur 6.0/10 : 0.4 s Le rythme des plans est trop lent et manque de dynamisme. Il faudrait environ 2.7 plans par 10 secondes pour garder l'attention.; 25.2 s Manque de plans de réaction de l'invite, surtout lors des répliques fortes.; 36.3 s Tête du présentateur coupée par le bord de l'image dans certains plans serrés.; 14.2 s tête de presentateur coupée par le bord de l'image (large) | Directeur artistique 7.0/10 : 14.7 s L'invite est dessiné comme un adulte mais e
+Manque par rapport à la vidéo d'origine : Le personnage de l'enfant (Aaron) est absent dans la vidéo actuelle. ; Réactions visuelles plus marquées comme des regards caméra ou des expressions faciales exagérées. ; Un bruitage ou effet visuel lors de la chute finale (ex: flash ou son de caisse). ; Des plans de réaction de l'invite lors des répliques clés. ; Un enfant dessiné dans le décor pour renforcer l'histoire (ex: un enfant jouant dans le salon).
+Corrections tirées des remarques du jury : lieux_separes
+Corrections du jury (tour 1) : casting de invite : age 15 ; un décor pour chaque personnage (lieux séparés)
+  décor 0 (lieu ressemblant de la banque, budget Modal du mois atteint) : cozy living room, sofa, posters on the wall, coffee table, l
+  décor 1 (lieu ressemblant de la banque, budget Modal du mois atteint) : quiet city street at dusk, parked car at the curb, sidewalk,
+montage : 19 plans (0.0:large>pre/coupe 1.6:large>inv/coupe 6.0:large>pre/coupe 8.7:large>inv/coupe 12.4:large>pre/coupe 14.1:large>inv/coupe 15.1:large>pre/coupe 21.6:large>inv/coupe 26.1:large>pre/coupe 28.9:large>inv/coupe 35.2:large>pre/coupe 37.6:large>inv/coupe 38.1:large>pre/coupe 40.4:large>inv/coupe 45.1:large>pre/coupe 46.1:large>inv/coupe 48.5:large>pre/coupe 49.8:large>inv/coupe 53.1:large>pre/coupe)
+studio : jour, lieux ['salon', 'rue'], tenues presentateur=robe, invite=chemise, 2 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+appel : 6 écran(s) partagé(s), 4 plan(s) d'écoute
+cartoon : durée 62.9 s, 27 répliques, 2 scène(s), personnages ['presentateur', 'invite']
+Contrôle image : 1 défaut(s) — 1.75 s tete_coupee (invite)
+  image 300/3776 (4 processeurs)
+  image 600/3776
+  image 900/3776
+  image 1200/3776
+  image 1500/3776
+  image 1800/3776
+  image 2100/3776
+  image 2400/3776
+  image 2700/3776
+  image 3000/3776
+  image 3300/3776
+  image 3600/3776
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-  IA gemini indisponible (The read operation timed out) : on passe à la suivante
-Jury qualité (ia) : 5.8/10 — Humoriste 6.0/10 : 0.4 s La chute finale manque de réactivité visuelle. Le zoom choc sur celui qui dit 'Merci' est absent, ce qui réduit l'impact comique.; 45.2 s Les vannes sur le maquillage et les vêtements sont un peu longues et pourraient être plus percutantes avec des réactions exagérées.; 80.1 s Le moment où le présentateur dit qu'il peut 'le gosser' manque d'une réaction visuelle forte de la part de l'invitée. | Réalisateur 5.0/10 : 0 s Le montage est trop lent. Il manque des plans serrés ou des réactions pour dynamiser les échanges.; 17.5 s Les réactions de l'invitée sont trop discrètes. Il faudrait des expressions faciales plus marquées.; 64.9 s Le passage où l'invitée accepte de payer manque de rythme. Un faux raccord ou un changement de plan pourrait renforcer le gag. | Directeur artistique 7.0/10 : 0 s Les personnages manquent de cohérence vestimentaire avec l'histoire. Le pr
-La version corrigée n'est pas meilleure : on garde la première.
+Jury qualité (ia) : 7.1/10 — Humoriste 8.0/10 : 21.6 s Réaction de l'invité manque de spontanéité quand il découvre l'histoire du présentateur.; 44.1 s Le gag sur les 7 ans aurait pu être mieux préparé avec des indices visuels.; 51.4 s Manque de sous-titres ou d'indices visuels pour souligner l'ironie de la situation. | Réalisateur 6.0/10 : 0 s Montage trop lent au début, manque de dynamisme dans les transitions.; 10.5 s Tête de l'invité coupée par le bord de l'image dans plusieurs plans.; 20.1 s Caméra peu dynamique, mouvements trop statiques.; 1.8 s tête de invite coupée par le bord de l'image (large) | Directeur artistique 8.0/10 : 0 s Le personnage du fils n'est pas visible assez tôt dans l'histoire, ce qui crée une incohérence.; 15.1 s L'âge et l'apparence du personnage 'fiston' ne sont pas assez clairs (taille, allure).; 47.3 s  | Ingénieur du son 6.0/10 : 10.5 s Synchronisation labiale peu précise pour certai
+Manque par rapport à la vidéo d'origine : Le personnage du fils n'est pas visible dès le début comme dans l'original. ; L'ambiance de la soirée et le lieu où l'erreur a été commise ne sont pas clairement illustrés. ; Les réactions spontanées et exagérées des personnages dans l'original (ex. : regard caméra, gestes) manquent parfois. ; Les bruitages et effets sonores sont moins présents que dans l'original. ; Les décors changent moins souvent pour refléter les changements de lieu ou de temps.
+Version corrigée gardée : 7.0 → 7.1/10
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = gemini ×3, mistral ×3, voix = tiktok, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 54777, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0}
-Quota de l'API GitHub : 4952 appels restants
-OK : sortie/2026-10-28_17h26_emission.mp4 (88 s)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = gemini ×1, mistral ×2, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 43393, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0}
+Quota de l'API GitHub : 4983 appels restants
+OK : sortie/2026-10-28_18h01_emission.mp4 (63 s)
