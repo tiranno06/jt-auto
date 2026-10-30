@@ -767,6 +767,8 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
         if recule:                                                         # recul face à quelqu'un qui crie
             xa = position(scene, q["p"])[0]; u_r = _ressort((tm - t_r) / 0.35) * (1 - _ease((tm - q["fin"] - 0.1) / 0.3))
             p["x"] += (-1 if xa > x else 1) * 26 * s * u_r; p["tilt"] += (-1 if xa > x else 1) * 6 * u_r
+            if CROQUIS and 0 <= tm - t_r < 0.42:                           # sursaut : petit bond, corps étiré puis écrasé (dessin animé)
+                v_ = (tm - t_r) / 0.42; p["y"] -= 34 * s * math.sin(math.pi * v_); p["sq"] = max(p.get("sq", 0.0), 0.12 * math.sin(math.pi * v_) - (0.1 if v_ > 0.85 else 0))
         if not parle:                                                      # celui qui écoute garde la bouche fermée : il ne doit
             p["forme"] = BOUCHE_ECOUTE.get(p.get("forme"), p.get("forme"))  # jamais avoir l'air de parler avec la voix d'un autre
             p["bouche"] = 0.0; p.pop("viseme", None)
@@ -842,7 +844,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
                 per = 1.6 - 0.7 * float(((B or {}).get("rythme") or {}).get("energie", 0.3))   # vidéo d'origine agitée : gestes plus fréquents
                 if TOON: per = 3.2 - 0.8 * float(((B or {}).get("rythme") or {}).get("energie", 0.3))   # toon : gestes tenus, comme dans les vidéos
                 k_ = int((tm - q["deb"]) / per + q["i"] * 7); trans = 0.7 if TOON else 0.55
-                u = (_ease if TOON else _ressort)(((tm - q["deb"]) % per) / trans); elan = 0.0 if TOON else u - _ease(((tm - q["deb"]) % per) / 0.55)
+                u = (_ressort if (CROQUIS or not TOON) else _ease)(((tm - q["deb"]) % per) / trans)   # croquis : élan puis léger dépassement; elan = 0.0 if TOON else u - _ease(((tm - q["deb"]) % per) / 0.55)
                 g_o = [t_ for t_ in GESTES_ORIG if q["deb"] - 0.2 <= t_ <= tm]       # P4 : le geste change quand l'acteur de l'original bouge
                 if TOON and g_o and len([t_ for t_ in GESTES_ORIG if q["deb"] - 0.2 <= t_ <= q["fin"]]) >= 1:
                     k_ = len(g_o) + q["i"] * 7; u = _ease((tm - g_o[-1]) / trans)

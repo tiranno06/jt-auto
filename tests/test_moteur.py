@@ -1565,3 +1565,37 @@ class TestStyleCroquis(unittest.TestCase):
     def test_style_par_defaut(self):
         src = open(os.path.join(ICI, "..", "moteur", "humain.py"), encoding="utf-8").read()
         self.assertIn('os.environ.get("STYLE_PERSO") or "croquis"', src)
+
+
+class TestListeCroquis(unittest.TestCase):
+    """Liste de l'auteur créée avec le style croquis : 39 lieux, 45 métiers, tenues, accessoires, assis, micro-expressions."""
+
+    def test_lieux(self):
+        import decor_dessin as D, decor_lieux as DL
+        self.assertEqual(len(DL.LIEUX), 39)
+        for l in DL.LIEUX:
+            r = D.dessiner(l, {"moment": "jour"}, 3); self.assertEqual(r["fond"].shape, (1920, 1080, 3))
+            if r.get("avant") is not None: self.assertGreater(r["avant"][..., 3][:1300].mean(), -1)
+        self.assertEqual(D.lieu_de("on se retrouve à la plage"), "plage"); self.assertEqual(D.lieu_de("on est aux urgences"), "urgences")
+        self.assertEqual(D.lieu_de("maman, t'as vu le film à la télé ?"), "salon")    # les anciens lieux gagnent à égalité
+
+    def test_metiers_et_tenues(self):
+        import humain as HU, marionnette as M, metiers as MT, perso_croquis as P, studio
+        self.assertGreaterEqual(len(MT.CATALOGUE), 82)
+        for m in ("pirate", "pere_noel", "zombie", "super_heros", "maitre_nageur"):
+            F = HU.creer(4); img = np.full((1920, 1080, 3), 200, np.uint8)
+            P.dessiner(img, F, HU._pose(F, dict(M.pose_neutre(), costume=MT.costume(m, {}, "h"))))
+            self.assertTrue((img != 200).any())
+        self.assertEqual(MT.qui_fait({"repliques": [{"p": "presentateur", "t": "Je suis pirate !"}]}), {"presentateur": "pirate"})
+        sk = {"repliques": [{"p": "presentateur", "t": "Allez, on va bronzer à la plage avec ta valise !"}, {"p": "invite", "t": "Ok."}],
+              "decoupage": [{"scene": "1", "repliques": [0, 1], "decor": ""}], "doublage": None}
+        B = studio.bible(sk, ["presentateur", "invite"])
+        self.assertEqual(B["lieux"][0], "plage"); self.assertEqual(B["costumes"]["presentateur"].get("tenue"), "maillot_bain")
+        self.assertEqual(sk["repliques"][0].get("objet"), "valise")
+
+    def test_assis_et_micro(self):
+        import humain as HU, marionnette as M, perso_croquis as P
+        F = HU.creer(5); img = np.full((1920, 1080, 3), 200, np.uint8)
+        p = dict(M.pose_neutre(), assis=True, emo="gene", t=1.0)
+        self.assertEqual(P._fx(p, "honteux").get("micro"), "mord")
+        P.dessiner(img, F, HU._pose(F, p)); self.assertTrue((img != 200).any())

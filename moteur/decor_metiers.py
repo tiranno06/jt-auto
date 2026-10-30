@@ -23,7 +23,13 @@ COULEURS_MUR = {"caserne": (196, 70, 60), "garage": (150, 160, 170), "boulangeri
                 "tribunal": (196, 160, 120), "labo": (230, 240, 244), "cockpit": (70, 76, 90), "espace": (20, 24, 48), "coiffeur": (246, 214, 222)}
 LIEUX = tuple(GAGS)
 METIER_LIEU = {"pompier": "caserne", "mecanicien": "garage", "boulanger": "boulangerie", "agriculteur": "ferme", "juge": "tribunal",
-               "avocat": "tribunal", "scientifique": "labo", "pilote": "cockpit", "hotesse": "cockpit", "astronaute": "espace", "coiffeur": "coiffeur"}
+               "avocat": "tribunal", "scientifique": "labo", "pilote": "cockpit", "hotesse": "cockpit", "astronaute": "espace", "coiffeur": "coiffeur",
+               "pharmacien": "pharmacie", "ambulancier": "urgences", "maitre_nageur": "piscine", "footballeur": "stade", "chanteur": "concert",
+               "dj": "boite_nuit", "presentateur_tele": "plateau_tele", "journaliste": "plateau_tele", "conducteur_train": "gare", "controleur": "gare",
+               "chauffeur_bus": "arret_bus", "gendarme": "commissariat", "douanier": "aeroport", "youtubeur": "salle_jeux", "patissier": "boulangerie",
+               "boucher": "magasin", "poissonnier": "magasin", "fleuriste": "magasin", "vendeur": "magasin", "barista": "restaurant",
+               "livreur_pizza": "rue", "chauffeur_vtc": "voiture", "agent_entretien": "hall", "demenageur": "hall", "baby_sitter": "salon",
+               "psychologue": "bureau", "kine": "cabinet_medical", "opticien": "magasin", "sage_femme": "hopital", "pere_noel": "salon"}
 REGLES = [("espace", r"dans l'espace|cosmos|station spatiale|en orbite|apesanteur|astronautes?|fus[ée]es?\b|space ?station|outer space|spaceship"),
           ("cockpit", r"cockpit|poste de pilotage|commandant de bord|copilote|pilote de ligne|airplane cockpit"),
           ("caserne", r"caserne|fire station|firehouse|camion de pompiers?|grande [ée]chelle|sapeurs?[- ]pompiers?"),

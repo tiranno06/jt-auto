@@ -883,7 +883,7 @@ def _accessoire(img, t, rx, ry, s, p, P):
 OBJETS = ("telephone", "billet", "portefeuille", "micro", "verre", "cafe", "livre", "cles", "carte", "facture", "bouteille", "haltere",
           "seringue", "parapluie", "telecommande", "fleur", "cadeau", "pizza", "croissant", "tablette", "lettre", "journal", "stylo", "valise",
           "lance", "talkie", "porte_bloc", "poele", "baguettes", "plans", "marteau", "tournevis", "cle_molette", "fourche", "arrosoir", "palette",   # outils des métiers
-          "guitare", "plateau", "eprouvette", "ordinateur", "colis", "ciseaux", "marteau_juge", "baguette_magique")
+          "guitare", "plateau", "eprouvette", "ordinateur", "colis", "ciseaux", "marteau_juge", "baguette_magique", "sac_main", "casque_moto")
 
 def objet(nom, s=1.0):
     """Petit accessoire dessiné (calque RGBA) à tenir en main (liste OBJETS)."""

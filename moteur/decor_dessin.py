@@ -579,7 +579,8 @@ def lieu_de(texte_, defaut="salon"):
               ("rue", r"street|\brue\b|outside|dehors|trottoir|sidewalk|parking|arr[êe]t de bus|bus stop|city|ville|parc\b|park"),
               ("salon", r"living room|apartment|salon|canap[ée]|sofa|t[ée]l[ée]\b|\btv\b|maison|home|ch[ée]ri|cl[ée]s|famille|maman|papa|coloc|appart")]
     import decor_metiers as DM
-    regles = DM.REGLES + regles                                            # lieux des métiers (caserne, garage, ferme…) d'abord
+    import decor_lieux as DL
+    regles = DM.REGLES + regles + DL.REGLES                                # métiers d'abord ; les 39 lieux ajoutés en dernier (à égalité, les anciens gagnent)
     scores = {lieu: len(re.findall(motif, t)) for lieu, motif in regles}      # le lieu le plus souvent évoqué (à égalité : le 1er de la liste)
     if re.search(r"parking|car park|\bcar\b|voiture garée|devant le magasin", t): scores["rue"] += 2   # un parking est dehors
     meilleur = max(regles, key=lambda r: scores[r[0]])[0]
@@ -587,3 +588,4 @@ def lieu_de(texte_, defaut="salon"):
 
 
 import decor_metiers  # noqa: E402,F401  (décors des métiers : inscrits dans LIEUX, GAGS, COULEURS_MUR)
+import decor_lieux  # noqa: E402,F401  (39 lieux de plus : salle de bain, plage, hôpital, gare…)
