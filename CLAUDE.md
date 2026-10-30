@@ -218,12 +218,19 @@
 - **Description TikTok** (`moteur/legende.py`, demande de l'auteur) : description de la vidéo + question + « 🎧 Son original :
   @compte » **sans aucun lien**, puis ~15 hashtags liés à la vidéo (ceux de l'IA, sujet : famille / école / couple / travail…,
   métiers, émotions, puis #petitsdramas et la niche ; NB_HASHTAGS) ; `publier.py` nettoie aussi les anciennes légendes à l'envoi.
-- **Style « croquis » EN ATTENTE DE VALIDATION** (`maquettes/croquis/`, rien n'est branché au robot tant que l'auteur ne dit pas
-  « on le met en place ») : d'après ses images de référence (`maquettes/croquis/references`, faites par lui avec une IA), il doit
-  REMPLACER le style actuel. Choix déjà faits : les DEUX silhouettes (le petit à grosse tête et le grand stickman), pour enfants, ados,
+- **Style « croquis » = STYLE PAR DÉFAUT (validé par l'auteur le 30 octobre 2026)** : `moteur/croquis.py` (dessin) +
+  `moteur/perso_croquis.py` (traduit la pose du moteur : bras en angles -> coude et main, émotion -> expression, bouche ouverte selon la
+  voix en gardant l'expression, forme des lèvres par son, regard, larmes / sueur / rougeur, costume, métier, chapeau, lunettes, barbe
+  mal rasée) ; STYLE_PERSO=croquis (défaut ; « toon » et « ancien » restent au choix) ; silhouette tirée par personnage, le PETIT ou
+  le GRAND pour tous les âges (SILHOUETTE = petit / grand / les_deux) ; tête et pieds aux mêmes places que l'ancien style (cadrages,
+  objets tenus, contrôle image inchangés) ; toujours debout (assis = jambes à travers les meubles) ; décors dessinés ou IA passés à
+  l'encre + aquarelle sur papier (`croquis.croquifier`, DECOR_CROQUIS=0 pour couper). Vitesse : chaque personnage dessiné dans un petit
+  cadre, aquarelle / hachures / flous calculés seulement dans la zone peinte (sinon 10 fois plus lent) ; une ombre ne déborde jamais
+  d'une forme (sur la toile « vide » du super-échantillonnage, un débord devient une tache noire). Maquettes et références :
+  `maquettes/croquis/` (images de l'auteur, faites par lui avec une IA). Choix déjà faits : les DEUX silhouettes (le petit à grosse tête et le grand stickman), pour enfants, ados,
   adultes et seniors ; visuels 1-5 validés « pour le moment » ; animation BEAUCOUP plus fluide (poses fondues et adoucies, bouche
   qui s'ouvre selon la voix en gardant l'expression, expressions en fondu, clignements doux, 30 i/s ou plus, jamais saccadé).
-  **À créer APRÈS la validation finale du style croquis, directement dans ce style (liste gardée à la demande de l'auteur)** :
+  **À créer maintenant que le style est validé, directement dans ce style (liste gardée à la demande de l'auteur)** :
   lieux : salle de bain, jardin, balcon, garage de maison, grenier, salle à manger, cour de récré, cantine, bureau du proviseur,
   bibliothèque, amphi, arrêt de bus, métro, gare, aéroport, parking de supermarché, fast-food, kebab, cinéma, plage, piscine, parc,
   camping, montagne / ski, stade de foot, salle de concert, boîte de nuit, hôpital (chambre, urgences), pharmacie, commissariat,

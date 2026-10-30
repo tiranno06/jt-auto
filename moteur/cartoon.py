@@ -56,7 +56,7 @@ REMB_ON = (os.environ.get("REMBOBINAGE") or "1") != "0"                  # « re
 OMBRES = (os.environ.get("OMBRES") or "1") != "0"                         # ombres portées des personnages (sol, mur le soir)
 DECOR_VIVANT = (os.environ.get("DECOR_VIVANT") or "1") != "0"             # le décor vit (horloge, tasse, chat…) ; voitures qui passent : VOITURE_PASSE=1
 CHUTE_KO = os.environ.get("CHUTE_KO", "0") == "1"                          # choix de l'auteur : plus de personnage qui tombe à la renverse à la fin
-CEL = (os.environ.get("CEL") or ("0" if (os.environ.get("STYLE_PERSO") or "toon").lower() == "toon" else "1")) != "0"   # ombrage en aplat + contour épais
+CEL = (os.environ.get("CEL") or ("0" if (os.environ.get("STYLE_PERSO") or "croquis").lower() in ("toon", "croquis") else "1")) != "0"   # ombrage en aplat + contour épais
 # (coupé par défaut avec le nouveau style « toon » : trait fin et ombres déjà dessinés comme la référence)
 LUMIERES_VIVES = (os.environ.get("LUMIERES_VIVES") or "1") != "0"
 MANGA = (os.environ.get("MANGA") or "1") != "0"                           # effets manga : fond qui explose, traits de vitesse
@@ -108,9 +108,11 @@ GESTES = [((-20, 10), (100, -40)), ((-100, 40), (20, -10)), ((-110, -30), (110, 
 MAINS_CONV = [("ouverte", "paume"), ("paume", "ouverte"), ("paume", "paume"), ("ouverte", "index"), ("ouverte", "ouverte")]   # mains des gestes de conversation
 # poses expressives (bras gauche, bras droit) : angles épaule / coude en degrés, 0 = vers le bas — catalogue complet dans studio.GESTES
 POSES = studio.POSES
-TEL_OREILLE = (105, 120) if (os.environ.get("STYLE_PERSO") or "toon").lower() == "toon" else (140, 95)   # téléphone contre l'oreille (bord de la tête)
+TEL_OREILLE = (105, 120) if (os.environ.get("STYLE_PERSO") or "croquis").lower() in ("toon", "croquis") else (140, 95)   # téléphone contre l'oreille (bord de la tête)
 NEUTRE_BRAS = ((-18, 8), (18, -8))
-TOON = (os.environ.get("STYLE_PERSO") or "toon").lower() == "toon"
+STYLE_P = (os.environ.get("STYLE_PERSO") or "croquis").lower()            # croquis (défaut, validé par l'auteur) | toon | ancien
+TOON = STYLE_P in ("toon", "croquis")                                       # gestes naturels, teint, larmes : communs aux deux styles
+CROQUIS = STYLE_P == "croquis"
 # style toon : gestes de conversation NATURELS (copiés sur les vidéos de référence) — un bras qui explique, coude près du
 # corps, l'autre au repos ; gestes tenus 2,5 à 3,5 s (pas de bras qui moulinent) ; amplitude bornée
 GESTES_TOON = [((-12, 6), (14, 100)), ((-14, -100), (12, -6)), ((-22, -88), (22, 88)), ((-12, 6), (12, -6)), ((-12, 6), (24, 112)), ((-24, -112), (12, -6))]
@@ -520,6 +522,19 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
             if dd.get("avant") is not None: AVANT[sc_] = dd["avant"]          # premier plan (comptoir, bureau, guichet) : aussi devant un décor IA
             if sc_ in decors: continue                                     # décor IA (mode payant) : gardé tel quel
             decors[sc_] = dd["fond"]; INFOS[sc_] = dd
+        if CROQUIS and os.environ.get("DECOR_CROQUIS", "1") != "0":       # style croquis : décors (dessinés ou IA) en encre + aquarelle sur papier
+            try:
+                import croquis as CQ
+                for sc_ in list(decors):
+                    d_ = decors[sc_]
+                    if d_ is not None and getattr(d_, "ndim", 0) == 3:
+                        decors[sc_] = CQ.croquifier(d_[..., :3], CQ.papier(d_.shape[1], d_.shape[0], 40 + sc_), graine=sc_)
+                for sc_ in list(AVANT):
+                    a_ = AVANT[sc_]
+                    if a_ is not None and a_.shape[2] == 4:
+                        AVANT[sc_] = np.dstack([CQ.croquifier(a_[..., :3], CQ.papier(a_.shape[1], a_.shape[0], 60 + sc_), graine=sc_), a_[..., 3]])
+                print("style croquis : décors passés à l'encre et à l'aquarelle", flush=True)
+            except Exception as e: print(f"décors croquis impossibles ({str(e)[:120]}) : décors gardés tels quels", flush=True)
         try:
             import vehicules as VH
             for sc_ in places:
@@ -728,7 +743,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
                 elif rc in ("facepalm", "bras_croises"): reac_geste = "facepalm" if rc == "facepalm" else "croises"
                 elif rc in ("sceptique", "choc", "rire", "gene", "soupir"): emo = rc
         yeux, sour, forme, bg, bd, eff, roug, trem = STYLE.get(emo, STYLE["neutre"])
-        p.update(yeux=yeux, sourcils=sour, forme=forme, effets=eff, rougeur=roug, tremble=trem, joues=emo in ("rire", "joie"))
+        p.update(yeux=yeux, sourcils=sour, forme=forme, effets=eff, rougeur=roug, tremble=trem, joues=emo in ("rire", "joie"), emo=emo)
         if B:                                                              # rendu détaillé : costume, lumière, visage, mains
             p.update(costume=B["costumes"].get(role), reflets=True, lumiere=B["lumiere"], ombre=B["ombre"], mains=True,
                      balance=0.7 * math.sin(tm * 2.3 + len(role)) + (0.5 * math.sin(tm * 9) if emo in ("rire", "joie", "cri") else 0))

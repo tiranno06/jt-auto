@@ -1543,3 +1543,25 @@ class TestLegende(unittest.TestCase):
         import legende
         t = legende.completer("Super vidéo\n\n🎧 Son original : @x — https://www.tiktok.com/@x/video/1")
         self.assertNotIn("http", t); self.assertIn("#petitsdramas", t)
+
+
+class TestStyleCroquis(unittest.TestCase):
+    """Style croquis (défaut, validé par l'auteur) : personnage dessiné, tête au même endroit, petit et grand, rapide."""
+
+    def test_dessin_et_reperes(self):
+        import time, humain as HU, marionnette as M, perso_croquis as P
+        vus = set()
+        for g in range(12):
+            F = HU.creer(g); vus.add(P.silhouette(F))
+            img = np.full((1920, 1080, 3), 200, np.uint8)
+            p = dict(M.pose_neutre(), x=540, y=1500, s=1.0, emo="joie", bouche=0.6, viseme="O", costume={"haut": "capuche", "c_haut": (90, 130, 190), "chapeau": "casquette"})
+            t = time.time(); (tx, ty), (rx, ry) = P.dessiner(img, F, HU._pose(F, p))
+            self.assertLess(time.time() - t, 1.5)                                      # rapide (petit cadre autour du personnage)
+            self.assertTrue((img != 200).any())
+            (hx, hy), _, mains = P.reperes(F, HU._pose(F, p)); self.assertAlmostEqual(hx, tx); self.assertEqual(len(mains), 2)
+            self.assertLess(hy, 1500)
+        self.assertEqual(vus, {"petit", "grand"})                                      # les deux silhouettes (choix de l'auteur)
+
+    def test_style_par_defaut(self):
+        src = open(os.path.join(ICI, "..", "moteur", "humain.py"), encoding="utf-8").read()
+        self.assertIn('os.environ.get("STYLE_PERSO") or "croquis"', src)
