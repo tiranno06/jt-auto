@@ -370,6 +370,24 @@ class TestPlanning(unittest.TestCase):
             planning._api = anc[0]; planning._MOI.clear(); os.environ.clear(); os.environ.update(anc[1])
 
 
+class TestPublicationAuto(unittest.TestCase):
+    def test_une_video_cochee_par_jour(self):
+        """Vidéos cochées dans l'onglet TikTok : la plus ancienne cochée non publiée part chaque jour à l'heure choisie (via Buffer)."""
+        import datetime as dt, publication_auto as P
+        from zoneinfo import ZoneInfo
+        hist = [{"fichier": "a.mp4", "publie": True}, {"fichier": "b.mp4"}, {"fichier": "c.mp4", "publie": False}, {"fichier": "d.mp4"}]
+        reg = {"PUBLI_AUTO": "1", "PUBLI_HEURE": "18:30", "PUBLI_FILE": "c.mp4\na.mp4\nd.mp4\nb.mp4\ninconnue.mp4\n-"}
+        self.assertEqual(P.file_attente(reg["PUBLI_FILE"], hist), ["d.mp4", "b.mp4"])      # publiée / en échec / inconnue : sautées
+        a = lambda h, mi: dt.datetime(2026, 10, 30, h, mi, tzinfo=ZoneInfo("Europe/Paris"))
+        self.assertIsNone(P.decision(a(17, 0), reg, hist, False)[0])                    # trop tôt
+        self.assertEqual(P.decision(a(18, 0), reg, hist, False)[:2], ("d.mp4", "2026-10-30T18:30"))   # demandée pour l'heure exacte
+        self.assertEqual(P.decision(a(21, 0), reg, hist, False)[:2], ("d.mp4", ""))     # heure passée (réveil en retard) : tout de suite
+        self.assertIsNone(P.decision(a(18, 25), reg, hist, True)[0])                    # déjà fait aujourd'hui
+        self.assertIsNone(P.decision(a(18, 25), dict(reg, PUBLI_AUTO="0"), hist, False)[0])
+        self.assertIsNone(P.decision(a(18, 25), dict(reg, PUBLI_FILE="a.mp4"), hist, False)[0])   # rien en attente
+        self.assertEqual(P.heure("7h05"), (7, 5)); self.assertEqual(P.heure("n'importe"), (18, 0))
+
+
 class TestRendu(unittest.TestCase):
     def test_sous_titres_cales_sur_whisper(self):
         try: import jt

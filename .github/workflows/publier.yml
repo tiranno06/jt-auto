@@ -1,4 +1,5 @@
 name: Publier une vidéo
+run-name: "${{ inputs.auto == '1' && format('Publication automatique : {0}', inputs.fichier) || format('Publication : {0}', inputs.fichier) }}"
 
 # Lancé par le bouton « Publier sur TikTok » du site (ou à la main : Actions → Publier une vidéo → Run workflow).
 on:
@@ -13,6 +14,10 @@ on:
         default: "non"
       quand:
         description: "Facultatif : date et heure de publication, heure de Paris (ex. 2026-10-12T18:30). Vide = tout de suite."
+        required: false
+        default: ""
+      auto:
+        description: "1 = publication automatique du jour (vidéos cochées dans l'onglet TikTok, moteur/publication_auto.py)"
         required: false
         default: ""
 

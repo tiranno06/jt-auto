@@ -194,6 +194,9 @@ input,textarea{flex:1;min-width:0;font:inherit;font-size:15px;padding:11px;borde
 .carte:active{transform:scale(.99)}.carte.choisie{border-color:var(--jaune)}
 .croix{position:absolute;top:8px;right:8px;width:34px;height:34px;border-radius:50%;border:none;background:rgba(0,0,0,.35);color:#fff;font-size:18px;line-height:34px;cursor:pointer;padding:0}
 .croix:hover{background:#d33}.carte.supprimee{opacity:.35;pointer-events:none}
+.apub{margin-top:8px;display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;border:2px solid var(--ligne);background:transparent;color:inherit;font-size:14px;font-weight:700;cursor:pointer;max-width:100%}
+.apub.on{background:var(--jaune);border-color:var(--jaune);color:#111}
+label.coche{display:flex;align-items:center;gap:10px;padding:8px 0;font-size:16px}label.coche input{width:22px;height:22px;flex:none;margin:0}
 .carte img{width:84px;height:150px;object-fit:cover;border-radius:10px;flex:none;background:#000}
 .carte.petite{padding:8px;margin:8px 0}.carte.petite img{width:54px;height:96px;border-radius:8px}
 .infos{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px;padding-right:30px}
@@ -356,6 +359,11 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <div class="auto"><div class="txt"><b>Activées</b><small>Une vidéo sur un son des profils à chaque heure ci-dessous.</small></div><button class="inter" data-var="FREQUENCE_TIKTOK" data-def="0" data-bascule="1"></button></div>
     <label>Heures (séparées par « ; »)<div class="jeton"><input data-var="HEURE_TIKTOK" data-def="14:00" data-texte="1" maxlength="60" placeholder="ex. 14:00 ; 21:30"><button class="second" data-enr="HEURE_TIKTOK" style="flex:none;padding:10px 14px">OK</button></div></label>
     <p class="note">Vidéo prête 20 à 40 min après l'heure. S'il n'y a aucun son utilisable, pas de vidéo cette fois (jamais de sketch à la place).</p></section>
+  <section class="panneau" id="pubAuto"><h2>📤 Publication automatique</h2>
+    <p class="note">Cochez « À publier » sur les vidéos que vous avez vérifiées : chaque jour à l'heure choisie, le robot publie sur TikTok la plus ancienne vidéo cochée pas encore publiée (dans l'ordre où vous les avez cochées).</p>
+    <div class="auto"><div class="txt"><b>Activée</b><small>Une vidéo cochée publiée par jour, même appli fermée.</small></div><button class="inter" data-var="PUBLI_AUTO" data-def="0" data-bascule="1"></button></div>
+    <label>Heure de publication (heure de Paris)<div class="jeton"><input data-var="PUBLI_HEURE" data-def="18:00" data-texte="1" maxlength="5" type="time" placeholder="18:00"><button class="second" data-enr="PUBLI_HEURE" style="flex:none;padding:10px 14px">OK</button></div></label>
+    <p class="note" id="pubResume"></p></section>
   <section class="panneau"><h2>🎬 Mes vidéos TikTok</h2><div id="listeTk"></div></section>
  </div>
  <!-- ======================================================== STATISTIQUES -->
@@ -368,6 +376,12 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <div class="jeton"><input id="jeton2" type="password" placeholder="github_pat_…" autocomplete="off"><button class="second" id="garder2" style="flex:none;padding:10px 14px">Connecter</button></div>
   </section>
   <p class="note" id="cfgEtat"></p>
+  <details class="groupe" open><summary>🗂️ Onglets affichés</summary>
+    <p class="note">Décochez les onglets que vous n'utilisez pas (sur tous vos appareils). 🎵 TikTok et ⚙️ Réglages restent toujours là.</p>
+    <label class="coche"><input type="checkbox" data-onglet-vu="accueil"> 🏠 Accueil</label>
+    <label class="coche"><input type="checkbox" data-onglet-vu="videos"> 🎬 Vidéos (sketchs)</label>
+    <label class="coche"><input type="checkbox" data-onglet-vu="stats"> 📊 Stats</label>
+  </details>
 
   <details class="groupe" open><summary>💳 Crédits et outils <span id="resumeOutils"></span></summary>
     <p class="note" id="outilsDate"></p>
@@ -742,8 +756,34 @@ function rendreTk(){                                                       // on
   const L=$("#listeTk"); L.innerHTML="";
   const vis=DATA.map((v,i)=>[v,i]).filter(([v])=>v.origine==="tiktok"&&!v.essai).sort(recentsDabord);
   if(!vis.length){L.innerHTML='<p class="vide">Aucune vidéo sur un son TikTok pour l\'instant.</p>';return}
+  const file=filePubli();
   vis.forEach(([v,i])=>{const c=carte(v,i,false); c.onclick=()=>{allerOnglet("videos","tiktok"); choisir(i)};
-    c.querySelector(".croix").onclick=(ev)=>{ev.stopPropagation(); supprimer(i,c)}; L.appendChild(c)});   // ✕ : supprimer aussi depuis cet onglet
+    c.querySelector(".croix").onclick=(ev)=>{ev.stopPropagation(); supprimer(i,c)};   // ✕ : supprimer aussi depuis cet onglet
+    if(v.publie!==true){const b=document.createElement("button"), k=file.indexOf(v.fichier); b.className="apub"+(k>=0?" on":"");
+      b.textContent=k<0?"☐ À publier":v.publie===false?"⚠ Échec : sautée (republiez depuis la fiche)":`✅ À publier (n° ${attentePubli(file).indexOf(v.fichier)+1})`; b.onclick=(ev)=>{ev.stopPropagation(); basculerPubli(v.fichier,b)};
+      c.querySelector(".infos").appendChild(b)}
+    L.appendChild(c)});
+  resumePubli();
+}
+// ------------------------------------------------ publication automatique : une vidéo cochée par jour (moteur/publication_auto.py)
+const filePubli=()=>String((VARS&&VARS.PUBLI_FILE)||"").split(/\n+/).map(x=>x.trim()).filter(Boolean);
+const attentePubli=f=>f.filter(n=>{const v=DATA.find(x=>x.fichier===n); return v&&v.publie==null});   // cochées, pas encore publiées (échec : sautée)
+async function basculerPubli(nom,b){
+  if(!lireJeton()){toast("Connectez d'abord la régie (onglet Réglages)");allerOnglet("config");return}
+  b.disabled=true; let f=filePubli(); const on=f.includes(nom);
+  f=on?f.filter(x=>x!==nom):[...f,nom];
+  f=f.filter(n=>DATA.some(x=>x.fichier===n&&x.publie!==true));                // la liste ne garde que les vidéos à venir
+  try{await ecrireVar("PUBLI_FILE",f.join("\n")||"-"); VARS.PUBLI_FILE=f.join("\n"); toast(on?"Retirée de la publication automatique":"Ajoutée à la publication automatique ✓"); rendreTk()}
+  catch(e){toast("Impossible : "+e.message); b.disabled=false}
+}
+function resumePubli(){
+  const z=$("#pubResume"); if(!z) return;
+  if(!lireJeton()){z.textContent="Connectez la régie pour choisir les vidéos à publier.";return}
+  const a=attentePubli(filePubli()), on=String((VARS&&VARS.PUBLI_AUTO)||"0")==="1", h=(VARS&&VARS.PUBLI_HEURE)||"18:00";
+  if(!a.length){z.textContent=on?"Aucune vidéo cochée en attente : rien ne sera publié tant que vous n'en cochez pas.":"Aucune vidéo cochée.";return}
+  const v=DATA.find(x=>x.fichier===a[0]), [hh,mm]=h.split(":").map(Number), d=new Date(); const jour=(d.getHours()*60+d.getMinutes()<hh*60+mm)?"aujourd'hui":"demain";
+  z.textContent=on?`${a.length} vidéo${a.length>1?"s":""} en attente. Prochaine : « ${v?v.titre:a[0]} », ${jour} à ${h} (une par jour).`
+                  :`${a.length} vidéo${a.length>1?"s":""} cochée${a.length>1?"s":""}. Activez la publication automatique pour lancer l'envoi quotidien.`;
 }
 $("#retourTk").onclick=()=>allerOnglet("tiktok");
 const CONNUS=(CONF.profils_connus||[]).map(p=>"@"+p);
@@ -897,6 +937,21 @@ $("#montrerQR").onclick=async()=>{
 $("#cacherQR").onclick=()=>{$("#qr").style.display="none";$("#qrImg").innerHTML="";$("#montrerQR").style.display=""};
 $("#copierLien").onclick=async()=>{try{await navigator.clipboard.writeText(lienConnexion());toast("Lien copié : ouvrez-le sur l'autre appareil")}catch(e){prompt("Lien de connexion :",lienConnexion())}};
 // ------------------------------------------------ onglets (Accueil, Vidéos, Statistiques, Réglages) et filtre des vidéos
+// ------------------------------------------------ onglets affichés (Réglages) : variable ONGLETS_MASQUES, gardée aussi sur l'appareil
+const MASQUABLES=["accueil","videos","stats"];
+function appliquerOnglets(brut){
+  const m=new Set(String(brut||"").split(",").map(x=>x.trim()).filter(x=>MASQUABLES.includes(x)));
+  try{localStorage.setItem("onglets_masques",[...m].join(","))}catch(e){}
+  document.querySelectorAll(".onglet").forEach(b=>b.style.display=m.has(b.dataset.o)?"none":"");
+  document.querySelectorAll("[data-onglet-vu]").forEach(c=>c.checked=!m.has(c.dataset.ongletVu));
+  const act=document.querySelector(".onglet.actif"); if(act&&m.has(act.dataset.o)) allerOnglet("tiktok");   // onglet caché : TikTok à la place
+}
+document.querySelectorAll("[data-onglet-vu]").forEach(c=>c.onchange=async()=>{
+  const m=[...document.querySelectorAll("[data-onglet-vu]")].filter(x=>!x.checked).map(x=>x.dataset.ongletVu).join(",");
+  appliquerOnglets(m);
+  if(!lireJeton()){toast("Enregistré sur cet appareil (connectez la régie pour tous vos appareils)");return}
+  try{await ecrireVar("ONGLETS_MASQUES",m||"-"); VARS.ONGLETS_MASQUES=m; toast("Onglets enregistrés ✓")}catch(e){toast("Impossible : "+e.message)}
+});
 function allerOnglet(o,f){
   document.querySelectorAll(".onglet").forEach(x=>x.classList.toggle("actif",x.dataset.o===o));
   if(f) choisirFiltre(f);
@@ -990,6 +1045,7 @@ async function chargerReglages(){
     champs().forEach(c=>{const val=(c.dataset.var in v)?v[c.dataset.var]:c.dataset.def;
       if(c.dataset.bascule) c.classList.toggle("on",String(val)!=="0"); else c.value=val;});
     chargerPerso(v); activer(true); majConnus(); $("#cfgEtat").textContent="Régie connectée ✓ — chaque changement est enregistré tout de suite.";
+    appliquerOnglets(v.ONGLETS_MASQUES||""); if($("#o-tiktok").style.display!=="none") rendreTk();
     nettoyerAbos(v);
   }catch(e){$("#cfgEtat").textContent="Erreur : "+e.message+" — vérifiez la clé (droits Actions et Variables).";activer(false);
     if(/jeton refusé/.test(e.message)) $("#cfgConnexion").style.display=""}
@@ -999,14 +1055,14 @@ champs().forEach(c=>{
   const ev=c.dataset.bascule?"click":"change";
   c.addEventListener(ev,async()=>{
     const val=c.dataset.bascule?(c.classList.contains("on")?"0":"1"):c.value; c.disabled=true;
-    try{await ecrireVar(c.dataset.var,val); if(c.dataset.bascule) c.classList.toggle("on",val==="1"); toast("Réglage enregistré ✓")}
+    try{await ecrireVar(c.dataset.var,val); VARS[c.dataset.var]=val; if(c.dataset.bascule) c.classList.toggle("on",val==="1"); toast("Réglage enregistré ✓"); resumePubli()}
     catch(e){toast("Impossible : "+e.message); chargerReglages()}
     c.disabled=false;
   });
 });
 document.querySelectorAll("[data-enr]").forEach(b=>b.onclick=async()=>{
   const c=document.querySelector(`[data-var="${b.dataset.enr}"]`); const val=c.value.trim(); if(!val)return;
-  try{await ecrireVar(b.dataset.enr,val);toast("Enregistré ✓ (visible dès la prochaine vidéo)")}catch(e){toast("Impossible : "+e.message)}
+  try{await ecrireVar(b.dataset.enr,val); VARS[b.dataset.enr]=val; toast("Enregistré ✓ (visible dès la prochaine vidéo)"); resumePubli()}catch(e){toast("Impossible : "+e.message)}
 });
 async function lancerFlux(fichier,bouton,texte,inputs,zone,fini){
   bouton.disabled=true; const s=zone||$("#suiviCfg"); const depart=new Date(Date.now()-5000);
@@ -1245,6 +1301,8 @@ window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();invite=e;$(
 $("#installer").onclick=async()=>{if(!invite)return;invite.prompt();await invite.userChoice.catch(()=>{});invite=null;$("#installer").style.display="none"};
 window.addEventListener("appinstalled",()=>{$("#installer").style.display="none";toast("Application installée ✓")});
 rendre(); rendreRecents(); rendreOutils(); afficherAuto(); lireAuto(); majBoutons(); majBandeau(); verifierEnCours(); majPointTk(); $("#barre").style.display="none";
+try{appliquerOnglets(localStorage.getItem("onglets_masques")||"")}catch(e){}
+if(lireJeton()) chargerReglages();                                        // onglets cachés et vidéos cochées : réglages de tous les appareils
 if(!CONF.depot) $("#autoAide").textContent="Site de test : boutons du robot inactifs.";
 </script></body></html>
 """

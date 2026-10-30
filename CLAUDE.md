@@ -163,6 +163,12 @@
   changer un numéro = le tester d'abord) ; musiques d'ambiance en MP3 ; essai complet appel + pause + reprise dans les tests
   (`TestVideoComplete.test_appel_pause_et_reprise`) ; aucun nom de réglage de `cartoon.rendre` réutilisé dans la fonction
   (test `test_rendre_garde_ses_parametres`) ; site sans connexion limité par GitHub : message « suivi en pause » au lieu d'une barre figée.
+- **L'auteur n'utilise que la filière Sons TikTok (30 octobre 2026)** : priorité à cette partie. Réglages → « 🗂️ Onglets affichés »
+  (Accueil, Vidéos, Stats masquables ; TikTok et Réglages toujours là ; variable ONGLETS_MASQUES, copie sur l'appareil ; onglet caché
+  → TikTok). **Publication automatique** (onglet TikTok, `moteur/publication_auto.py` lancé par garde.yml) : case « À publier » sur
+  chaque vidéo (variable PUBLI_FILE, ordre de coche), PUBLI_AUTO + PUBLI_HEURE (Paris) : une vidéo par jour, la plus ancienne cochée
+  non publiée, envoyée à Buffer pour l'heure exacte (publier.yml auto=1, run « Publication automatique : … » = journée faite) ; une
+  vidéo en échec est sautée.
 - **Bonne voix sur le bon personnage (sons TikTok)** : `locuteurs.affiner` vérifie qui parle MOT PAR MOT (empreinte vocale ECAPA
   autour de chaque mot, comparée à chaque voix, fil le plus probable façon Viterbi, 2-3 tours ; une « voix » presque muette est
   rattachée à la plus proche) puis `caler_sur_phrases` met chaque changement de personne sur la fin de phrase la plus proche
