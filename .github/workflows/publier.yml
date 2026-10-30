@@ -70,7 +70,7 @@ jobs:
         if: always() && steps.video.outputs.video != ''
         continue-on-error: true
         run: |
-          pip install -q cryptography
+          pip install -q cryptography -c contraintes.txt
           if [ "${{ job.status }}" = "success" ]; then
             if [ -n "$QUAND" ]; then M="programmée pour le $QUAND"; else M="envoyée à TikTok"; fi
             python moteur/alerte.py "✅ Vidéo $M" "$FICHIER"

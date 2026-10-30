@@ -24,7 +24,7 @@ jobs:
           python-version: "3.12"
       - name: Déployer et tester
         run: |
-          pip install -q "modal>=0.73"
+          pip install -q modal -c contraintes.txt
           set +e
           {
             echo "=== voix (Chatterbox) ==="; modal deploy moteur/voix_modal.py 2>&1 | tail -40; echo "code: ${PIPESTATUS[0]}"

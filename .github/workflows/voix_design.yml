@@ -29,7 +29,7 @@ jobs:
       - name: Outils
         run: |
           sudo apt-get install -y -q ffmpeg || true
-          pip install -r requirements.txt
+          pip install -r requirements.txt -c contraintes.txt
       - name: Créer les voix (Voice Design ElevenLabs)
         run: |
           set -o pipefail

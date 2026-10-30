@@ -1,0 +1,18 @@
+# Versions des bibliothèques qui marchent (relevées sur les fabrications du 25 octobre 2026). Une nouvelle version d'un outil
+# ne peut plus casser le robot du jour au lendemain : on la teste d'abord, puis on change le numéro ici.
+# (yt-dlp n'est PAS figé : TikTok change souvent, il doit rester à jour.)
+numpy==2.5.4
+opencv-python-headless==5.0.0.93
+pillow==13.0.0
+anthropic~=2.3
+modal~=1.6
+huggingface_hub~=2.3
+pyarrow==26.0.0
+scipy==1.18.1
+cryptography==50.0.2
+faster-whisper~=1.2.1
+ctranslate2~=4.8
+speechbrain~=1.1.2
+pyannote.audio~=4.0.7
+torch<3
+torchaudio<3

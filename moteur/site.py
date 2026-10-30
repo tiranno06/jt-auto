@@ -1071,10 +1071,13 @@ const SUIVI={runs:{},site:null,durees:{emission:25*60,site:5*60},maj:0,anonyme:0
 // sans la clé de la régie (autre appareil, PC) : lecture publique du dépôt, plus espacée (GitHub : 60 lectures/heure)
 async function ghLire(chemin){
   if(lireJeton()) return gh(chemin);
-  const r=await fetch(API+chemin,{headers:{"Accept":"application/vnd.github+json"}}); if(!r.ok) throw new Error("lecture "+r.status); return r}
+  const r=await fetch(API+chemin,{headers:{"Accept":"application/vnd.github+json"}});
+  if(r.status===403||r.status===429){const z=+r.headers.get("x-ratelimit-reset")||0; SUIVI.bloque=z?z*1000:Date.now()+15*60000; dessinerSuivi()}   // limite de GitHub sans clé
+  if(!r.ok) throw new Error("lecture "+r.status); return r}
+const sansCleBloque=()=>!lireJeton()&&(SUIVI.bloque||0)>Date.now();
 const fmtReste=s=>s<=20?"quelques secondes":s<90?"≈ "+Math.round(s)+" s":"≈ "+Math.floor(s/60)+" min"+(s<600&&s%60>=10?" "+String(Math.round(s%60)).padStart(2,"0")+" s":"");
 async function suiviLent(){                                                // toutes les 20 s : fabrications en cours, étape, durées habituelles
-  if(!CONF.depot||document.hidden) return;
+  if(!CONF.depot||document.hidden||sansCleBloque()) return;
   if(!lireJeton()){if(Date.now()-SUIVI.anonyme<110000) return; SUIVI.anonyme=Date.now()}   // sans clé : toutes les 2 min
   try{
     if(Date.now()-SUIVI.maj>600000){SUIVI.maj=Date.now();
@@ -1101,7 +1104,7 @@ async function suiviLent(){                                                // to
   dessinerSuivi();
 }
 async function suiviRapide(){                                              // toutes les 5 s : l'avancement publié par le robot
-  if(document.hidden||(!lireJeton()&&Date.now()-(SUIVI.anoRapide||0)<110000)) return;
+  if(document.hidden||sansCleBloque()||(!lireJeton()&&Date.now()-(SUIVI.anoRapide||0)<110000)) return;
   if(!lireJeton()) SUIVI.anoRapide=Date.now();
   for(const s of Object.values(SUIVI.runs)){
     if(s.statut==="completed"&&s.lu) continue;
@@ -1139,6 +1142,7 @@ function dessinerSuivi(){                                                  // ch
   }
   if(SUIVI.site){const u=Math.min(0.97,(now-SUIVI.site.debut)/(SUIVI.durees.site*1000)), r=Math.max(0,SUIVI.durees.site-(now-SUIVI.site.debut)/1000);
     lignes.push(`<div class="prog"><div class="haut"><span>🌐 Mise en ligne sur le site</span><span>${Math.floor(u*100)} %</span></div><div class="barre"><div class="plein" style="width:${(u*100).toFixed(1)}%"></div></div><div class="bas"><span>La vidéo apparaîtra dans l'appli à la fin</span><span>${fmtReste(r)} restantes</span></div></div>`)}
+  if(sansCleBloque()) lignes.unshift(`<p class="note">⏸️ Suivi en direct en pause : sans connexion, GitHub limite les lectures (reprise vers ${new Date(SUIVI.bloque).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"})}). Connectez la régie (⚙️ Réglages) pour un suivi sans limite.</p>`);
   const html=lignes.length?lignes.join(""):'<p class="note">Aucune fabrication en cours.</p>';
   zones.forEach(z=>{if(z.innerHTML!==html) z.innerHTML=html});
   const m=$("#mSuivi"); if(m&&m.dataset.libre==="1") m.style.display=lignes.length?"none":"";

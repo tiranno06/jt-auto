@@ -41,7 +41,7 @@ jobs:
             sudo cp /tmp/ffmpeg-master-latest-linux64-gpl/bin/ff* /usr/local/bin/
           fi
           ffmpeg -version | head -1
-          pip install pillow numpy opencv-python-headless
+          pip install pillow numpy opencv-python-headless -c contraintes.txt
       - name: Versions légères des vidéos (gardées d'une mise à jour à l'autre)
         uses: actions/cache@v6
         with:
@@ -85,6 +85,6 @@ jobs:
           VAPID_PUBLIQUE: ${{ vars.VAPID_PUBLIQUE }}
           PUSH_ABONNEMENTS: ${{ vars.PUSH_ABONNEMENTS }}
         run: |
-          pip install -q cryptography
+          pip install -q cryptography -c contraintes.txt
           python moteur/alerte.py "⚠️ Site pas à jour" "La dernière vidéo n'apparaît pas sur le site malgré deux mises en ligne. Elle est quand même visible dans l'appli (lue depuis les archives)." || true
           exit 1

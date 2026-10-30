@@ -49,7 +49,14 @@ def bibliotheque(par_humeur: int = 3):
     m = Musique()
     for humeur in STYLES:
         for k in range(par_humeur):
-            chemin = os.path.join(dossier, f"{humeur}_{k}.wav")
-            if os.path.exists(chemin): continue
+            chemin = os.path.join(dossier, f"{humeur}_{k}.wav"); mp3 = chemin[:-4] + ".mp3"
+            if os.path.exists(chemin) or os.path.exists(mp3): continue
             o = m.boucle.remote(humeur, 45.0, 100 + k)
-            if o: open(chemin, "wb").write(o); print("musique :", chemin)
+            if not o: continue
+            open(chemin, "wb").write(o)
+            import subprocess                                              # MP3 : 15 fois plus léger que le WAV dans le dépôt
+            try:
+                if subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", chemin, "-c:a", "libmp3lame", "-q:a", "2", mp3]).returncode == 0:
+                    os.remove(chemin); chemin = mp3
+            except OSError: pass                                           # pas de ffmpeg : on garde le WAV (lu pareil)
+            print("musique :", chemin)

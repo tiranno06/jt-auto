@@ -344,6 +344,31 @@ class TestPlanning(unittest.TestCase):
         self.assertFalse(planning.decision()[0])
         os.environ.pop("FREQUENCE"); os.environ.pop("EVENEMENT")
 
+    def test_creneau_de_la_demande_et_doublons(self):
+        """Une vidéo qui a attendu son tour garde son créneau ; une 2e demande pour le même créneau ne part pas (doublon)."""
+        import datetime as dt
+        from zoneinfo import ZoneInfo
+        auj = dt.datetime.now(ZoneInfo("Europe/Paris")).date()
+        utc = lambda h, mi: dt.datetime.combine(auj, dt.time(h, mi), ZoneInfo("Europe/Paris")).astimezone(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+        moi = {"id": 2, "created_at": utc(8, 1), "display_title": "Créneau son TikTok", "status": "in_progress"}
+        autres = [{"id": 1, "created_at": utc(7, 31), "display_title": "Créneau son TikTok", "status": "queued", "html_url": "u1"},   # avant le créneau
+                  {"id": 3, "created_at": utc(8, 20), "display_title": "Créneau son TikTok", "status": "queued"}]                      # après nous
+        api = lambda c: moi if c.endswith("/runs/2") else {"workflow_runs": [moi] + autres}
+        anc = planning._api, dict(os.environ)
+        planning._api = api; planning._MOI.clear()
+        os.environ.update(EVENEMENT="schedule", FREQUENCE="1", HEURE="08:00", FILIERE="tiktok", GITHUB_RUN_ID="2", ESSAIS_MAX="99")
+        try:
+            from unittest import mock
+            with mock.patch.object(planning, "_hist", return_value=[]):
+                self.assertEqual(planning.moment().strftime("%H:%M"), "08:01")       # heure de la demande, même 3 h plus tard
+                self.assertTrue(planning.decision()[0])                              # rien avant nous pour ce créneau
+                autres[0]["created_at"] = utc(8, 0)                                  # une demande du même créneau, avant nous
+                go, raison = planning.decision()
+                self.assertFalse(go); self.assertIn("déjà en file", raison)
+                self.assertTrue(planning.decision(file=False)[0])                    # au départ de la fabrication : on y va
+        finally:
+            planning._api = anc[0]; planning._MOI.clear(); os.environ.clear(); os.environ.update(anc[1])
+
 
 class TestRendu(unittest.TestCase):
     def test_sous_titres_cales_sur_whisper(self):
@@ -380,6 +405,9 @@ class TestPetitsDramas(unittest.TestCase):
         import fusion
         m = fusion.fusion_historique([{"fichier": "a"}, {"fichier": "b"}], [{"fichier": "a", "vues": 3}, {"fichier": "c"}])
         self.assertEqual([x["fichier"] for x in m], ["a", "c", "b"]); self.assertEqual(m[0]["vues"], 3)
+        # « d » supprimée sur le site pendant la fabrication (dans le point de départ, plus dans la version distante) : ne revient pas
+        m = fusion.fusion_historique([{"fichier": "a"}, {"fichier": "d"}, {"fichier": "e"}], [{"fichier": "a"}], [{"fichier": "a"}, {"fichier": "d"}])
+        self.assertEqual([x["fichier"] for x in m], ["a", "e"])
 
     def test_serie(self):
         import serie
@@ -628,6 +656,45 @@ class TestVideoComplete(unittest.TestCase):
         r = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "stream=codec_type", "-of", "csv=p=0", sortie], capture_output=True, text=True)
         self.assertIn("video", r.stdout); self.assertIn("audio", r.stdout)
 
+    def test_appel_pause_et_reprise(self):
+        """Fumée de bout en bout : un appel téléphonique (lieux séparés, écran partagé), une pause faute de temps, puis une reprise
+        avec les blocs d'images déjà dessinés (c'est ce chemin qui plantait le 25 octobre)."""
+        import shutil
+        if not shutil.which("ffmpeg"): self.skipTest("ffmpeg absent")
+        sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "moteur"))
+        import cartoon, studio, copy, time as _t
+        lignes = [("presentateur", "Allô, t'es où là ?"), ("invite", "Je suis dans la rue, j'arrive bientôt !"), ("presentateur", "Tu dis ça depuis une heure."),
+                  ("invite", "Promis, je suis au coin de la rue, je vois ta fenêtre."), ("presentateur", "Ah oui ? Elle est de quelle couleur ?"),
+                  ("invite", "Euh… bleue ?"), ("presentateur", "Je vis au dixième étage, sans fenêtre.")]
+        sk = {"titre_accroche": "Essai", "sujet": "Essai", "repliques": [{"p": p, "t": t} for p, t in lignes],
+              "studio": {"lieux_separes": {"presentateur": "a cozy living room", "invite": "a city street"}, "moyen": "telephone"},
+              "decoupage": [{"scene": "1", "repliques": list(range(len(lignes))), "decor": "a cozy living room"}]}
+        sk["repliques"][-1]["chute"] = True
+        self.assertTrue(studio.separer_lieux(sk))
+        auds = [(0.3 * np.sin(np.arange(int(22050 * 1.6)) / 22050 * 2 * np.pi * 150) * (np.sin(np.arange(int(22050 * 1.6)) / 22050 * 16) > -0.3)).astype(np.float32) for _ in lignes]
+        anc = {k: os.environ.get(k) for k in ("BLOC_IMAGES", "DESSIN_PARTAGE", "REDESSIN_PARTIEL")}
+        os.environ.update(BLOC_IMAGES="60", DESSIN_PARTAGE="0")
+        dossier = tempfile.mkdtemp(); gardes = []
+        def garder(a_, b_, c_):
+            copie = os.path.join(dossier, f"b_{a_}_{b_}.mp4"); shutil.copy(c_, copie); gardes.append((a_, b_, copie))
+        try:
+            with self.assertRaises(cartoon.TempsDepasse):                 # plus le temps : pause avant le 1er bloc
+                cartoon.rendre(copy.deepcopy(sk), os.path.join(dossier, "p.mp4"), auds, mini=True, limite=_t.time() - 1)
+            cartoon.APRES_BLOC[0] = garder
+            import contextlib, io
+            journal = io.StringIO()
+            with contextlib.redirect_stdout(journal): d1 = cartoon.rendre(copy.deepcopy(sk), os.path.join(dossier, "v1.mp4"), auds, mini=True)
+            cartoon.APRES_BLOC[0] = None
+            self.assertRegex(journal.getvalue(), r"appel : [1-9]\d* écran\(s\) partagé")   # l'écran partagé de l'appel est bien là
+            self.assertGreaterEqual(len(gardes), 2)
+            d2 = cartoon.rendre(copy.deepcopy(sk), os.path.join(dossier, "v2.mp4"), auds, mini=True, deja=gardes[:-1])   # reprise
+            self.assertAlmostEqual(d1, d2, places=2); self.assertTrue(os.path.getsize(os.path.join(dossier, "v2.mp4")) > 50000)
+        finally:
+            cartoon.APRES_BLOC[0] = None
+            for k, v in anc.items():
+                if v is None: os.environ.pop(k, None)
+                else: os.environ[k] = v
+
 class TestTiktokGratuit(unittest.TestCase):
     def test_voix_separees_par_hauteur(self):
         sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "moteur"))
@@ -816,7 +883,7 @@ class TestVoixProches(unittest.TestCase):
         import ast
         arbre = ast.parse(open(os.path.join(os.path.dirname(__file__), "..", "moteur", "cartoon.py"), encoding="utf-8").read())
         f = next(n for n in arbre.body if isinstance(n, ast.FunctionDef) and n.name == "rendre")
-        proteges = {"deja", "limite", "plage", "reprise", "plans_seuls", "apercu"}
+        proteges = {"deja", "limite", "plage", "reprise", "plans_seuls", "apercu", "mots", "audios", "sortie", "mini"}
         ecrits = {c.id for n in ast.walk(f) for c in ([n.target] if isinstance(n, (ast.AugAssign, ast.AnnAssign, ast.For)) else getattr(n, "targets", []))
                   for c in ast.walk(c) if isinstance(c, ast.Name) and isinstance(c.ctx, ast.Store)}
         self.assertFalse(ecrits & proteges, ecrits & proteges)

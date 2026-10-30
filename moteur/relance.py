@@ -37,7 +37,9 @@ def a_relancer(runs, maintenant, annule):
 def main():
     runs = DP._req("GET", f"{DP.API}/repos/{DP._depot()}/actions/workflows/emission.yml/runs?per_page=30").get("workflow_runs") or []
     for i in a_relancer(runs, time.time(), annule_par_github):
-        r = subprocess.run(["gh", "run", "rerun", str(i), "-R", DP._depot(), "--failed"], capture_output=True, text=True)
+        # relance COMPLÈTE (planning + file d'attente + fabrication) : la vidéo attend son tour dans la file (jusqu'à 340 min)
+        # au lieu d'attendre dans la fabrication elle-même (100 min, puis vidéo perdue)
+        r = subprocess.run(["gh", "run", "rerun", str(i), "-R", DP._depot()], capture_output=True, text=True)
         print(f"Fabrication {i} relancée (coupée en route)." if r.returncode == 0 else f"Relance de {i} impossible : {r.stderr[:200]}", flush=True)
 
 
