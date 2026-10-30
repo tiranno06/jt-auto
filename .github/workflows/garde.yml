@@ -24,6 +24,7 @@ jobs:
             moteur/stats.py
             moteur/relance.py
             moteur/dessin_partage.py
+            moteur/publication_auto.py
             episodes
       - id: p
         env:
@@ -68,6 +69,14 @@ jobs:
           if [ "$(date -u +%H)" = "03" ] && [ "$(date -u +%M)" -lt 30 ]; then
             gh workflow run supprimer.yml -R "$GITHUB_REPOSITORY" -f fichier=ESSAIS && echo "Ménage des essais lancé."
           fi
+
+      - name: Publication automatique (une vidéo cochée par jour, à l'heure choisie dans l'onglet TikTok)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PUBLI_AUTO: ${{ vars.PUBLI_AUTO }}
+          PUBLI_HEURE: ${{ vars.PUBLI_HEURE }}
+          PUBLI_FILE: ${{ vars.PUBLI_FILE }}
+        run: python3 moteur/publication_auto.py || true
 
       - name: Relancer une fabrication coupée par GitHub (machine arrêtée en pleine vidéo)
         env:
