@@ -553,7 +553,7 @@ function lireJeton(){try{return localStorage.getItem("jt_jeton")||""}catch(e){re
 function ecrireJeton(v){try{v?localStorage.setItem("jt_jeton",v):localStorage.removeItem("jt_jeton")}catch(e){window._jeton=v}}
 async function gh(chemin, opts={}){
   const j=lireJeton(); if(!j) throw new Error("régie non connectée");
-  const r=await fetch(API+chemin,{...opts,headers:{"Authorization":"Bearer "+j,"Accept":"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28",...(opts.body?{"Content-Type":"application/json"}:{}),...(opts.headers||{})}});
+  const r=await fetch(API+chemin,{cache:"no-store",...opts,headers:{"Authorization":"Bearer "+j,"Accept":"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28",...(opts.body?{"Content-Type":"application/json"}:{}),...(opts.headers||{})}});
   if(r.status===401) throw new Error("jeton refusé (expiré ou incorrect)");
   if(r.status===403) throw new Error("droits du jeton insuffisants");
   return r;
@@ -939,16 +939,17 @@ $("#copierLien").onclick=async()=>{try{await navigator.clipboard.writeText(lienC
 // ------------------------------------------------ onglets (Accueil, Vidéos, Statistiques, Réglages) et filtre des vidéos
 // ------------------------------------------------ onglets affichés (Réglages) : variable ONGLETS_MASQUES, gardée aussi sur l'appareil
 const MASQUABLES=["accueil","videos","stats"];
-function appliquerOnglets(brut){
+function appliquerOnglets(brut,local){
+  try{if(!local&&Date.now()-(+localStorage.getItem("onglets_masques_t")||0)<5*60000) brut=localStorage.getItem("onglets_masques")}catch(e){}   // choix tout juste fait ici : prioritaire
   const m=new Set(String(brut||"").split(",").map(x=>x.trim()).filter(x=>MASQUABLES.includes(x)));
-  try{localStorage.setItem("onglets_masques",[...m].join(","))}catch(e){}
+  try{localStorage.setItem("onglets_masques",[...m].join(",")); if(local) localStorage.setItem("onglets_masques_t",String(Date.now()))}catch(e){}
   document.querySelectorAll(".onglet").forEach(b=>b.style.display=m.has(b.dataset.o)?"none":"");
   document.querySelectorAll("[data-onglet-vu]").forEach(c=>c.checked=!m.has(c.dataset.ongletVu));
   const act=document.querySelector(".onglet.actif"); if(act&&m.has(act.dataset.o)) allerOnglet("tiktok");   // onglet caché : TikTok à la place
 }
 document.querySelectorAll("[data-onglet-vu]").forEach(c=>c.onchange=async()=>{
   const m=[...document.querySelectorAll("[data-onglet-vu]")].filter(x=>!x.checked).map(x=>x.dataset.ongletVu).join(",");
-  appliquerOnglets(m);
+  appliquerOnglets(m,true);
   if(!lireJeton()){toast("Enregistré sur cet appareil (connectez la régie pour tous vos appareils)");return}
   try{await ecrireVar("ONGLETS_MASQUES",m||"-"); VARS.ONGLETS_MASQUES=m; toast("Onglets enregistrés ✓")}catch(e){toast("Impossible : "+e.message)}
 });
@@ -1127,7 +1128,7 @@ const SUIVI={runs:{},site:null,durees:{emission:25*60,site:5*60},maj:0,anonyme:0
 // sans la clé de la régie (autre appareil, PC) : lecture publique du dépôt, plus espacée (GitHub : 60 lectures/heure)
 async function ghLire(chemin){
   if(lireJeton()) return gh(chemin);
-  const r=await fetch(API+chemin,{headers:{"Accept":"application/vnd.github+json"}});
+  const r=await fetch(API+chemin,{cache:"no-store",headers:{"Accept":"application/vnd.github+json"}});
   if(r.status===403||r.status===429){const z=+r.headers.get("x-ratelimit-reset")||0; SUIVI.bloque=z?z*1000:Date.now()+15*60000; dessinerSuivi()}   // limite de GitHub sans clé
   if(!r.ok) throw new Error("lecture "+r.status); return r}
 const sansCleBloque=()=>!lireJeton()&&(SUIVI.bloque||0)>Date.now();
