@@ -215,6 +215,24 @@
   l'original** (lecteur TikTok à côté de la nôtre) et **🗣️ Corriger qui parle** (personnage de chaque réplique -> Refaire
   « fichier|qui|0=invite;3=presentateur » : même son d'origine re-téléchargé, mêmes instants : `doublage.depuis_sketch`, mots gardés
   dans le sketch « _mots ») ; le bouton Refaire retrouve enfin le sketch gardé (nom sans « .mp4 »).
+- **Style « croquis » EN ATTENTE DE VALIDATION** (`maquettes/croquis/`, rien n'est branché au robot tant que l'auteur ne dit pas
+  « on le met en place ») : d'après ses images de référence (`maquettes/croquis/references`, faites par lui avec une IA), il doit
+  REMPLACER le style actuel. Choix déjà faits : les DEUX silhouettes (le petit à grosse tête et le grand stickman), pour enfants, ados,
+  adultes et seniors ; visuels 1-5 validés « pour le moment » ; animation BEAUCOUP plus fluide (poses fondues et adoucies, bouche
+  qui s'ouvre selon la voix en gardant l'expression, expressions en fondu, clignements doux, 30 i/s ou plus, jamais saccadé).
+  **À créer APRÈS la validation finale du style croquis, directement dans ce style (liste gardée à la demande de l'auteur)** :
+  lieux : salle de bain, jardin, balcon, garage de maison, grenier, salle à manger, cour de récré, cantine, bureau du proviseur,
+  bibliothèque, amphi, arrêt de bus, métro, gare, aéroport, parking de supermarché, fast-food, kebab, cinéma, plage, piscine, parc,
+  camping, montagne / ski, stade de foot, salle de concert, boîte de nuit, hôpital (chambre, urgences), pharmacie, commissariat,
+  prison, banque, poste, mariage, église, plateau télé, studio radio, salle de jeux vidéo ; métiers : ambulancier, sage-femme, kiné,
+  opticien, pharmacien, psychologue, vendeur, fleuriste, boucher, poissonnier, pâtissier, barista, livreur de pizza, chauffeur de
+  bus, chauffeur VTC / taxi, conducteur de train, capitaine de bateau, contrôleur, militaire, gendarme, douanier, garde du corps,
+  maître-nageur, journaliste, présentateur télé, youtubeur / streamer, chanteur, DJ, magicien, clown, footballeur, maçon, menuisier,
+  peintre en bâtiment, agent d'entretien, baby-sitter, déménageur, pirate, chevalier, super-héros, père Noël, vampire, zombie, momie,
+  extraterrestre ; tenues : pyjama, peignoir, maillot de bain, tenue de sport, survêtement, costume-cravate, robe de soirée, robe de
+  mariée, doudoune, imperméable, déguisements (Halloween, fêtes : sorcière, citrouille, lapin), uniforme scolaire, gilet jaune ;
+  accessoires : sac à main, valise, parapluie, écharpe, gants, lunettes de ski, montre, casque de moto. Et tout l'existant
+  (25 lieux, 37 métiers, 20 outils, 28 hauts, 21 coiffures, 21 chapeaux, 44 objets, véhicules) redessiné en croquis.
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.
