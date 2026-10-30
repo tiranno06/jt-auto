@@ -122,6 +122,7 @@ jobs:
       AZURE_SPEECH_REGION: ${{ secrets.AZURE_SPEECH_REGION }}
       ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
       HF_TOKEN: ${{ secrets.HF_TOKEN }}                 # facultatif : clé Hugging Face gratuite → séparation des voix par pyannote
+      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}         # facultatif : clé Groq gratuite → transcription Whisper en quelques secondes
       ELEVENLABS_MODELE: ${{ vars.ELEVENLABS_MODELE }}
       ELEVENLABS: ${{ vars.ELEVENLABS }}
       BUFFER_API_KEY: ${{ secrets.BUFFER_API_KEY }}
@@ -233,18 +234,27 @@ jobs:
         run: pip install -r requirements.txt -c contraintes.txt      # versions qui marchent (contraintes.txt)
 
       - name: Modèles de reconnaissance vocale et d'empreinte en cache (Whisper large-v3-turbo, ECAPA)
-        if: startsWith(inputs.theme, 'TIKTOK::') || inputs.filiere == 'tiktok'
+        if: startsWith(inputs.theme, 'TIKTOK::') || inputs.filiere == 'tiktok' || contains(inputs.refaire, '|qui|')
         uses: actions/cache@v6
         with:
-          path: ~/.cache/huggingface
-          key: hf-whisper-turbo-v1
+          path: |
+            ~/.cache/huggingface
+            ~/.cache/torch
+            outils/emotion_voix
+            outils/pose_landmarker_lite.task
+          key: hf-ecoute-v2
+          restore-keys: hf-whisper-turbo-v1
 
       - name: Lecteur TikTok (vidéo depuis une bande son)
-        if: startsWith(inputs.theme, 'TIKTOK::') || inputs.filiere == 'tiktok'
+        if: startsWith(inputs.theme, 'TIKTOK::') || inputs.filiere == 'tiktok' || contains(inputs.refaire, '|qui|')
         run: |
           pip install -q -U "yt-dlp[default,curl-cffi]" faster-whisper -c contraintes.txt   # Whisper gratuit : repli si ElevenLabs et Modal manquent de crédit
           (pip install -q torch torchaudio -c contraintes.txt --index-url https://download.pytorch.org/whl/cpu && pip install -q speechbrain -c contraintes.txt) || echo "empreinte vocale ECAPA indisponible : timbre MFCC"
           if [ -n "$HF_TOKEN" ]; then pip install -q pyannote.audio -c contraintes.txt || echo "pyannote indisponible : empreinte ECAPA seule"; fi   # séparation des voix (clé Hugging Face gratuite)
+          # écoute gratuite (moteur/ecoute.py, postures.py) : Demucs, calage des mots, émotion de la voix, bruits (CLAP), postures (MediaPipe)
+          pip install -q demucs transformers -c contraintes.txt || echo "Demucs / transformers indisponibles : sans eux"
+          pip install -q --no-deps mediapipe absl-py flatbuffers sounddevice -c contraintes.txt && pip install -q matplotlib -c contraintes.txt || echo "MediaPipe indisponible : postures de l'original non lues"
+          sudo apt-get install -y -q libegl1 libgles2 >/dev/null 2>&1 || true
 
       - name: Déployer les voix (Chatterbox), la banque de voix et les décors sur Modal
         if: env.MODAL_TOKEN_ID != ''
@@ -252,6 +262,7 @@ jobs:
           modal deploy moteur/voix_modal.py || echo "Deploiement voix echoue, voix de secours"
           modal deploy moteur/banque_modal.py || echo "Deploiement banque de voix echoue, chaine de secours"
           modal deploy moteur/decor_modal.py || echo "Deploiement decors echoue, fonds unis"
+          modal deploy moteur/ecoute_modal.py || echo "Deploiement ecoute (NeMo, Florence-2) echoue : pyannote / ECAPA et IA seules"
 
       - name: Fabriquer l'émission
         id: run

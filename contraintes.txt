@@ -16,3 +16,7 @@ speechbrain~=1.1.2
 pyannote.audio~=4.0.7
 torch<3
 torchaudio<3
+# écoute gratuite (30 octobre 2026) : Demucs, calage des mots, CLAP, MediaPipe
+demucs==4.1.0
+transformers==5.22.1
+mediapipe==1.2.0

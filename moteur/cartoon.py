@@ -531,7 +531,15 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
                     l_ = 820; im_ = VH.voiture(VH.couleur_du_texte(tx_), 1 if xr_ > W / 2 else -1, l_)
                     X0 = (W * 0.06 if xr_ > W / 2 else W * 0.94 - im_.shape[1]); Y0 = 1335 - VH.sol(l_)   # garée derrière, de l'autre côté
                     VOIT[sc_] = (im_, X0, Y0)
-            if VOIT: print(f"objets de l'histoire : voiture garée dans {len(VOIT)} décor(s)", flush=True)
+                mets_ = [B["costumes"].get(r2, {}).get("metier") for r2 in places[sc_] if r2 in B.get("costumes", {})]
+                nom_v = VH.vehicule_de(tx_, [m_ for m_ in mets_ if m_], lieu_)   # idée 18 : véhicule du métier (police, pompiers…)
+                if nom_v and os.environ.get("VEHICULES_METIERS", "1") != "0":
+                    qui_ = [r2 for r2 in places[sc_] if r2 != "narrateur"]
+                    xr_ = position(sc_, qui_[0])[0] if qui_ else W / 2
+                    l_ = {"tracteur": 640, "fusee": 300}.get(nom_v, 820); im_ = VH.VEHICULES[nom_v](1 if xr_ > W / 2 else -1, l_)
+                    X0 = (W * 0.04 if xr_ > W / 2 else W * 0.96 - im_.shape[1]); Y0 = 1335 - VH.hauteur_sol(nom_v, l_)
+                    VOIT[sc_] = (im_, X0, Y0)                              # remplace la voiture ordinaire
+            if VOIT: print(f"objets de l'histoire : véhicule dans {len(VOIT)} décor(s)", flush=True)
             for sc_ in places:                                             # décor vivant : une voiture passe au loin de temps en temps
                 if B["lieux"][min(sc_, len(B["lieux"]) - 1)] == "rue" and DECOR_VIVANT and os.environ.get("VOITURE_PASSE", "0") == "1":   # choix de l'auteur : coupée
                     col_ = [(200, 50, 50), (60, 100, 190), (240, 200, 60), (235, 235, 238)][sc_ % 4]

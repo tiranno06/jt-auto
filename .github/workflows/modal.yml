@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ["moteur/voix_modal.py", "moteur/banque_modal.py", "moteur/decor_modal.py"]
+    paths: ["moteur/voix_modal.py", "moteur/banque_modal.py", "moteur/decor_modal.py", "moteur/ecoute_modal.py"]
 
 permissions:
   contents: write
@@ -25,11 +25,14 @@ jobs:
       - name: Déployer et tester
         run: |
           pip install -q modal -c contraintes.txt
+          sudo apt-get install -y -q ffmpeg >/dev/null 2>&1 || true                    # essai de l'écoute (son du dialogue)
           set +e
           {
             echo "=== voix (Chatterbox) ==="; modal deploy moteur/voix_modal.py 2>&1 | tail -40; echo "code: ${PIPESTATUS[0]}"
             echo "=== banque de voix (Kyutai, Zonos, Whisper) ==="; modal deploy moteur/banque_modal.py 2>&1 | tail -60; echo "code: ${PIPESTATUS[0]}"
             echo "=== decors (Stable Diffusion XL) ==="; modal deploy moteur/decor_modal.py 2>&1 | tail -40; echo "code: ${PIPESTATUS[0]}"
+            echo "=== ecoute (NeMo, Florence-2) ==="; modal deploy moteur/ecoute_modal.py 2>&1 | tail -40; echo "code: ${PIPESTATUS[0]}"
+            echo "=== essai de l'ecoute (NeMo, Florence-2) ==="; pip install -q numpy scipy -c contraintes.txt; timeout 1500 python moteur/essai_ecoute.py 2>&1 | tail -20
             echo "=== essai des decors (premier lancement : telechargement du modele) ==="; timeout 3400 python moteur/essai_decor.py 2>&1 | tail -20
           } > episodes/deploiement.txt
           cat episodes/deploiement.txt

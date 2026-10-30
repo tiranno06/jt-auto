@@ -1470,3 +1470,56 @@ class TestIdeesTiktok(unittest.TestCase):
     def test_partage_depuis_tiktok(self):
         src = open(os.path.join(ICI, "..", "moteur", "site.py"), encoding="utf-8").read()
         self.assertIn("share_target", src); self.assertIn("partage=1", src)
+
+
+class TestIdeesTiktok2(unittest.TestCase):
+    """Idées 5, 6, 17, 18, 23-31 : outils d'écoute, postures, décors et véhicules des métiers, corriger qui parle."""
+
+    def test_jeu_entendu_et_ponctuation(self):
+        import ecoute
+        reps = [{"t": "Mais t'es fou ?"}, {"t": "Ha ha ha"}, {"t": "Bon.", "d": "[sigh] Bon."}]
+        segs = [{"deb": 0, "fin": 1}, {"deb": 1.2, "fin": 2}, {"deb": 2.5, "fin": 3}]
+        ecoute.jeu_entendu(reps, segs, {0: "angry"}, [(1.3, 1.9, "laughter")])
+        self.assertEqual(reps[0]["d"], "[angry] Mais t'es fou ?"); self.assertTrue(reps[1]["d"].startswith("[laughing]"))
+        self.assertEqual(reps[2]["d"], "[sigh] Bon.")                      # l'indication de l'IA n'est jamais remplacée
+        m = ecoute.ponctuer([{"w": "salut"}, {"w": "ça"}, {"w": "va"}], [{"text": " Salut, ça va ?"}])
+        self.assertEqual([x["w"] for x in m], ["Salut,", "ça", "va"])
+
+    def test_postures(self):
+        import postures as P
+        p = np.zeros((33, 2)); p[0] = [.5, .2]; p[9] = [.48, .25]; p[10] = [.52, .25]; p[7] = [.58, .2]; p[8] = [.42, .2]
+        p[11] = [.6, .35]; p[12] = [.4, .35]; p[23] = [.57, .65]; p[24] = [.43, .65]; p[13] = [.63, .5]; p[14] = [.37, .5]
+        p[15] = [.45, .47]; p[16] = [.55, .47]
+        self.assertEqual(P.classer(p), "croises")
+        p[15] = [.63, .62]; p[16] = [.43, .21]; self.assertEqual(P.classer(p), "telephone")
+        self.assertEqual(P.geste_pendant([[1.0, 3.0, 0.5, "croises"]], 1.2, 2.8), "croises")
+        self.assertIsNone(P.geste_pendant([[1.0, 1.2, 0.5, "croises"]], 0, 5))
+
+    def test_decors_des_metiers(self):
+        import decor_dessin as D, decor_metiers as DM
+        for l in DM.LIEUX:
+            self.assertIn(l, D.LIEUX)
+            r = D.dessiner(l, {"moment": "soir"}, 5); self.assertEqual(r["fond"].shape, (1920, 1080, 3)); self.assertEqual(r["lieu"], l)
+        self.assertEqual(D.lieu_de("on est à la caserne des sapeurs-pompiers"), "caserne")
+        self.assertEqual(D.lieu_de("oh la ferme toi"), "salon")            # « la ferme ! » n'est pas une ferme
+
+    def test_vehicules_des_metiers(self):
+        import vehicules as V
+        for n in V.VEHICULES:
+            im = V.VEHICULES[n](1, 400); self.assertEqual(im.shape[2], 4); self.assertGreater(im[..., 3].mean(), 10)
+        self.assertEqual(V.vehicule_de("appelle la police"), "police")
+        self.assertEqual(V.vehicule_de("bonjour", ["agriculteur"], "ferme"), "tracteur")
+        self.assertIsNone(V.vehicule_de("appelle la police", lieu="salon"))  # jamais dans un intérieur
+
+    def test_metier_choisit_le_lieu(self):
+        import studio
+        sk = {"repliques": [{"p": "presentateur", "t": "Bonjour, je suis pompier."}, {"p": "invite", "t": "Ah bon ?"}],
+              "decoupage": [{"scene": "1", "repliques": [0, 1], "decor": ""}], "doublage": None}
+        B = studio.bible(sk, ["presentateur", "invite"])
+        self.assertEqual(B["lieux"][0], "caserne")
+
+    def test_corriger_qui_parle_site(self):
+        src = open(os.path.join(ICI, "..", "moteur", "site.py"), encoding="utf-8").read()
+        self.assertIn("|qui|", src); self.assertIn("tiktok.com/embed/v2", src)
+        p = open(os.path.join(ICI, "..", "moteur", "principal.py"), encoding="utf-8").read()
+        self.assertIn('os.path.splitext(_f)[0] + ".json"', p)              # le sketch gardé est bien retrouvé (Refaire)

@@ -292,7 +292,7 @@ def bible(sk, roles):
         else:
             deja = memoire_recente("moment")
             choix = [m for m in ("jour", "jour", "soir", "matin") if m != deja] or ["jour"]; moment = choix[int(rng.integers(len(choix)))]
-    lieux = []
+    lieux, devines = [], []                                                # devines : lieu pris faute d'indice (le métier peut le choisir)
     for k, sc in enumerate(dec):
         l = None
         if isinstance(S.get("lieux"), list) and k < len(S["lieux"]) and S["lieux"][k] in DD.LIEUX: l = S["lieux"][k]
@@ -300,6 +300,7 @@ def bible(sk, roles):
         lignes_sc = [sk["repliques"][i]["t"] for i in sc.get("repliques", []) if i < len(sk.get("repliques", []))]
         texte_sc = " ".join(lignes_sc[:max(1, len(lignes_sc) // 2)] * 2 + lignes_sc[max(1, len(lignes_sc) // 2):])   # le début de la scène pose le lieu
         lieux.append(l or DD.lieu_de(decor_sc, "") or DD.lieu_de(texte_sc, "") or DD.lieu_de(t_low, "salon"))
+        devines.append(not l and not DD.lieu_de(decor_sc, "") and not DD.lieu_de(texte_sc, ""))
     gags = [str(g)[:80] for g in (S.get("gags") or []) if str(g).strip() and gag_dans_le_sujet(sk, str(g))][:4]
     # effets « cinéma » de l'épisode : tirés au hasard (graine de l'épisode) pour varier d'une vidéo à l'autre, mêlés au style d'avant
     cine = {k: bool(rng.random() < p_) for k, p_ in proba_cine().items()}  # les effets des vidéos qui marchent reviennent plus souvent
@@ -330,6 +331,13 @@ def bible(sk, roles):
         if role in costumes and not (isinstance(S.get("costumes"), dict) and (S.get("costumes") or {}).get(role)):
             P0 = S.get("personnages") if isinstance(S.get("personnages"), dict) else {}
             costumes[role] = MT_.costume(met, costumes[role], genre_voix(sk, role, P0.get(role) if isinstance(P0.get(role), dict) else {}))
+    import decor_metiers as DMT                                            # idée 17 : le métier entendu choisit le lieu (caserne, garage…)
+    for k_, l_ in enumerate(lieux):                                         # quand rien d'autre ne dit où l'on est
+        if not devines[k_] or os.environ.get("LIEU_METIER", "1") == "0": continue
+        reps_k = dec[k_].get("repliques", []) if k_ < len(dec) else []
+        ici = [sk["repliques"][i]["p"] for i in reps_k if i < len(sk.get("repliques", []))] or roles
+        met_ = next((costumes[r].get("metier") for r in sorted(set(ici), key=ici.count, reverse=True) if r in costumes and costumes[r].get("metier") in DMT.METIER_LIEU), None)
+        if met_: lieux[k_] = DMT.METIER_LIEU[met_]
     # les personnes de la vidéo d'origine habillent nos personnages : la plus présente à l'image joue la voix la plus présente
     if V.get("personnes"):
         mots = {r: sum(len(x.get("t", "").split()) for x in sk.get("repliques", []) if x.get("p") == r) for r in roles}
@@ -376,7 +384,8 @@ def bible(sk, roles):
                 source=("auteur" if S else "robot") + ("+image" if V else ""), c_mur=c_mur, rythme=rythme, fiches=fiches,
                 cadence=S.get("cadence") if S.get("cadence") in CADENCES else None, assis=assis, cine=cine, decoupe=_decoupe_claude(S, roles),
                 coupes_origine=[float(c) for c in (V.get("coupes") or []) if isinstance(c, (int, float))] if sk.get("doublage") else [],
-                gestes_origine=[float(g[0]) for g in (V.get("gestes") or []) if isinstance(g, (list, tuple)) and g] if sk.get("doublage") else [])
+                gestes_origine=[float(g[0]) for g in (V.get("gestes") or []) if isinstance(g, (list, tuple)) and g] if sk.get("doublage") else [],
+                postures_origine=[g for g in (V.get("postures") or []) if isinstance(g, (list, tuple)) and len(g) == 4] if sk.get("doublage") else [])
 
 def _humain():
     import humain
@@ -520,6 +529,10 @@ def realiser(ph, places, B):
         jq = jeux.get(q["i"]) or {}                                         # jeu d'acteur copié sur la vidéo d'origine (IA)
         if jq.get("emotion") in EMOTIONS_JEU: q["emo"] = jq["emotion"]
         if jq.get("geste") in GESTES: q["geste"] = jq["geste"]
+        elif not a.get("geste") and B.get("postures_origine"):            # idée 29 : la posture tenue dans l'original (MediaPipe)
+            import postures
+            g_o = postures.geste_pendant(B["postures_origine"], q["deb"], q["fin"])
+            if g_o in GESTES: q["geste"] = g_o
         try: q["intensite"] = max(1, min(3, int(jq.get("intensite") or 0))) if jq.get("intensite") else (2 if q["emo"] in VIVES else 1)
         except (TypeError, ValueError): q["intensite"] = 2 if q["emo"] in VIVES else 1
         q["plan"], q["mouvement"], q["reaction"] = plan, mouv, reaction
@@ -578,6 +591,7 @@ DECOR_EN = {"rue": "quiet city street at dusk, parked car at the curb, sidewalk,
             "salon": "cozy living room, sofa, posters on the wall, coffee table, lamp, television",
             "bureau": "open space office, desks, computer screens, plants", "bar": "cosy bar, counter, bottles on shelves, stools",
             "restaurant": "small restaurant, tables with checkered cloths, menu board", "magasin": "shop interior, shelves full of products, counter"}
+DECOR_EN.update(__import__("decor_metiers").DECOR_EN)                   # décors des métiers (caserne, garage, ferme…)
 
 TIERS = r"\b(la dame|cette dame|une dame|l'inconnue|une inconnue|cette (femme|fille|meuf|nana)|une (femme|fille|meuf|nana)|la (meuf|nana|fille))\b"
 
@@ -728,7 +742,7 @@ def compagnons(sk, dec, lieux, moment, graine):
                         fiche=fiche, description=str(f.get("description") or "")[:120]))
     return out
 
-LIEUX_ASSIS = ("bureau", "salon", "restaurant", "administration", "classe", "bar", "cabinet_medical", "palais", "voiture")
+LIEUX_ASSIS = ("bureau", "salon", "restaurant", "administration", "classe", "bar", "cabinet_medical", "palais", "voiture", "cockpit", "coiffeur")
 # gestes à deux, déclenchés par les mots de la réplique (le personnage s'approche, sa main atteint vraiment l'autre)
 GESTES_DUO = [("tope", r"\b(tope|bravo|yes|trop bien|on l'a fait|g[ée]nial|check|bien jou[ée])\b"),
               ("epaule", r"\b(calme-toi|t'inqui[eè]te|courage|d[ée]sol[ée]e?|mon pote|ma belle|mon grand|ça va aller|pas grave)\b"),
