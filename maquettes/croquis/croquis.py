@@ -122,7 +122,8 @@ def oeil(img, c, r, regard=(0, 0), ferme=None, rng=None, ep=2.2, forme="rond", h
         encre(img, [(c[0] - r, c[1] - r * haut * 0.2), (c[0] + r, c[1] - r * haut * 0.35)], ep * 1.1)
 
 
-def visage(img, c, R, expr="neutre", regard=(0, 0), rng=None, profil=0.0, nez_vu=True, ouv=None, cligne=0.0):
+def visage(img, c, R, expr="neutre", regard=(0, 0), rng=None, profil=0.0, nez_vu=True, ouv=None, cligne=0.0, fx=None):
+    fx = fx or {}
     """Yeux, sourcils, nez, bouche, joues pour une expression. profil : -1..1 (tourné)."""
     ep = R * 0.045; dx = profil * R * 0.18
     ex, ey, er = R * 0.42, R * 0.0, R * 0.23                              # écart, hauteur, rayon des yeux
@@ -140,6 +141,7 @@ def visage(img, c, R, expr="neutre", regard=(0, 0), rng=None, profil=0.0, nez_vu
     if cligne > 0.85 and ferme is None: ferme = "doux"
     rg = {"triste": (0, 0.5), "culpabilite": (0.3, 0.7), "solitude": (0, 0.6), "honteux": (0.2, 0.6), "soucieux": (0.6, 0.2), "reveur": (0.5, -0.7),
           "espoir": (0.2, -0.8), "douteux": (0.6, 0.1), "malicieux": (-0.5, 0.1), "inquiet": (0.5, 0.2)}.get(E, regard)
+    if fx.get("regard") is not None: rg = fx["regard"]                     # regard dirigé (vers celui qui parle, au ciel, au sol)
     er2 = er * (1.18 if E in ("surpris", "etonne", "peur", "stress") else 1.0)
     for sg, o in ((-1, oL), (1, oR)):
         if E == "malicieux" and sg == 1: oeil(img, o, er, ferme="joie", rng=rng, ep=ep); continue
@@ -151,6 +153,7 @@ def visage(img, c, R, expr="neutre", regard=(0, 0), rng=None, profil=0.0, nez_vu
         for sg, o in ((-1, oL), (1, oR)):
             if E == "douteux" and sg == -1: inc, h = (-0.1, -0.08)
             else: inc, h = sourc
+            h = h - fx.get("leve", 0.0) * 0.25                             # sourcils qui montent sur un mot appuyé
             y0 = o[1] - er * (1.55 - h * 2.2)
             a = (o[0] - sg * er * 0.85, y0 + inc * er * 0.9); b = (o[0] + sg * er * 0.85, y0 - inc * er * 0.9)
             if E in ("colere", "fache", "frustration"): a, b = (a[0], a[1] + er * 0.55), (b[0], b[1] + er * 0.55)
@@ -171,9 +174,31 @@ def visage(img, c, R, expr="neutre", regard=(0, 0), rng=None, profil=0.0, nez_vu
             d_ = np.zeros_like(mm); cv2.rectangle(d_, _pts([(bouche[0] - w, bouche[1] - h)])[0], _pts([(bouche[0] + w, bouche[1] + h * 0.02)])[0], 255, -1, AA, 2)
             z = cv2.bitwise_and(d_, mm); img[z > 0] = (252, 252, 250)
         encre(img, pts, ep * 1.1, ferme=True, rng=rng)
-    if ouv is not None and ouv > 0.04:                                     # il parle : bouche plus ou moins ouverte selon la voix
+    son = fx.get("son", "a"); micro = fx.get("micro")
+    if micro == "mord":                                                    # lèvre mordue (gêne)
+        encre(img, courbe((bouche[0] - bw * 0.7, bouche[1]), (bouche[0], bouche[1] - R * 0.05), (bouche[0] + bw * 0.7, bouche[1])), ep * 1.2, rng=rng)
+        cv2.rectangle(img, _pts([(bouche[0] - bw * 0.3, bouche[1] - R * 0.01)])[0], _pts([(bouche[0] + bw * 0.3, bouche[1] + R * 0.07)])[0], (252, 252, 250), -1, AA, 2)
+        encre(img, [(bouche[0] - bw * 0.3, bouche[1] + R * 0.07), (bouche[0] + bw * 0.3, bouche[1] + R * 0.07)], ep * 0.8)
+        for kk in (-1, 0, 1): encre(img, [(bouche[0] + kk * bw * 0.15, bouche[1]), (bouche[0] + kk * bw * 0.15, bouche[1] + R * 0.07)], ep * 0.4, effile=False)
+    elif micro == "joues":                                                 # joues gonflées (soupir retenu)
+        for sg in (-1, 1):
+            m = np.zeros(img.shape[:2], np.uint8); cv2.circle(m, _pts([(bouche[0] + sg * bw * 1.25, bouche[1] - R * 0.05)])[0], int(R * 0.2 * 4), 255, -1, AA, 2)
+            lavis(img, m, (240, 170, 170), 0.35, bord=False); encre(img, cercle_pts((bouche[0] + sg * bw * 1.25, bouche[1] - R * 0.05), R * 0.2, a0=90 - sg * 70, a1=270 - sg * 70, n=14), ep * 0.8)
+        cv2.ellipse(img, _pts([bouche])[0], (int(bw * 0.18 * 4), int(R * 0.05 * 4)), 0, 0, 360, (95, 35, 40), -1, AA, 2)
+    elif micro == "rictus":
+        encre(img, [(bouche[0] - bw * 0.8, bouche[1] + R * 0.02), (bouche[0] + bw * 0.2, bouche[1]), (bouche[0] + bw * 0.85, bouche[1] - R * 0.1)], ep * 1.2, rng=rng)
+    elif ouv is not None and (ouv > 0.04 or son == "m"):                  # il parle : forme de la bouche selon le son, ouverture selon la voix
         rieur = E in ("heureux", "joie", "excitation", "malicieux", "fierte")
-        ouverte(bw * (0.55 + 0.45 * ouv + (0.3 if rieur else 0)), R * (0.06 + 0.3 * ouv), rire=rieur, dents=ouv > 0.35, langue=ouv > 0.5)
+        if son == "m":                                                     # m, b, p : lèvres fermées
+            encre(img, courbe((bouche[0] - bw * 0.55, bouche[1]), (bouche[0], bouche[1] + R * 0.03), (bouche[0] + bw * 0.55, bouche[1])), ep * 1.4, rng=rng)
+        elif son == "o":                                                   # o, ou, u : bouche ronde
+            ww, hh = bw * (0.28 + 0.12 * ouv), R * (0.08 + 0.18 * ouv)
+            cv2.ellipse(img, _pts([(bouche[0], bouche[1] + hh * 0.3)])[0], (int(ww * 4), int(hh * 4)), 0, 0, 360, (95, 35, 40), -1, AA, 2)
+            encre(img, cercle_pts((bouche[0], bouche[1] + hh * 0.3), ww, hh), ep, ferme=True)
+        elif son == "i":                                                   # i, é : bouche large et fine, dents
+            ouverte(bw * (0.95 + 0.25 * ouv), R * (0.04 + 0.12 * ouv), rire=True, dents=True, langue=False)
+        else:
+            ouverte(bw * (0.55 + 0.45 * ouv + (0.3 if rieur else 0)), R * (0.06 + 0.3 * ouv), rire=rieur, dents=ouv > 0.35, langue=ouv > 0.5)
     elif E in ("heureux", "joie", "excitation"): ouverte(bw * (1.15 if E == "heureux" else 1.35), R * (0.42 if E == "heureux" else 0.5))
     elif E in ("surpris",): ouverte(bw * 0.45, R * 0.16, rire=False, dents=False, langue=E == "surpris") if False else (
         cv2.ellipse(img, _pts([bouche])[0], (int(bw * 0.45 * 4), int(R * 0.15 * 4)), 0, 0, 360, (95, 35, 40), -1, AA, 2),
@@ -223,9 +248,9 @@ def visage(img, c, R, expr="neutre", regard=(0, 0), rng=None, profil=0.0, nez_vu
         k_ = {"neutre": 0.6, "reveur": 0.4, "espoir": 0.3, "fierte": 1.1, "satisfait": 1.0, "serein": 0.7, "amour": 0.9, "gratitude": 0.8}.get(E, 0.7)
         encre(img, courbe((bouche[0] - bw * 1.05, bouche[1] - R * 0.03), (bouche[0], bouche[1] + R * 0.13 * k_), (bouche[0] + bw * 1.05, bouche[1] - R * 0.03)), ep * 1.25, rng=rng)
     # -- joues roses hachurées
-    rose = E in ("neutre", "heureux", "joie", "honteux", "amour", "excitation", "satisfait", "serein", "fierte", "gratitude", "reveur", "malicieux", "espoir", "parle")
+    rose = E in ("neutre", "heureux", "joie", "honteux", "amour", "excitation", "satisfait", "serein", "fierte", "gratitude", "reveur", "malicieux", "espoir", "parle") or fx.get("rouge", 0) > 0.05
     if rose:
-        f = 0.75 if E in ("honteux", "amour") else 0.45
+        f = (0.75 if E in ("honteux", "amour") else 0.45) + 1.1 * fx.get("rouge", 0.0)   # rougissement qui monte en douceur
         for o in (oL, oR):
             jc = (o[0] + (o[0] - c[0]) * 0.55, o[1] + er * 1.35)
             m = np.zeros(img.shape[:2], np.uint8); cv2.ellipse(m, _pts([jc])[0], (int(er * 0.95 * 4), int(er * 0.5 * 4)), 0, 0, 360, 255, -1, AA, 2)
@@ -235,7 +260,16 @@ def visage(img, c, R, expr="neutre", regard=(0, 0), rng=None, profil=0.0, nez_vu
     if E in ("triste", "solitude", "culpabilite", "peur", "frustration"):
         if E in ("pleure",):
             for o in (oL, oR): goutte(img, (o[0] + er * 0.3, o[1] + er * 1.5), er * 0.4, ep)
-    if E in ("anxiete", "stress", "soucieux", "peur", "honteux", "inquiet"): goutte(img, (c[0] + R * 0.78, c[1] - R * 0.35), R * 0.08, ep)
+    if E in ("anxiete", "stress", "soucieux", "peur", "honteux", "inquiet") and "sueur" not in fx: goutte(img, (c[0] + R * 0.78, c[1] - R * 0.35), R * 0.08, ep)
+    if fx.get("sueur", 0) > 0.05:                                          # sueur qui perle puis coule (dosée 0..1)
+        su = fx["sueur"]; goutte(img, (c[0] + R * 0.78, c[1] - R * 0.45 + R * 0.3 * su), R * 0.1 * min(1, su * 1.5), ep)
+        if su > 0.5: goutte(img, (c[0] - R * 0.72, c[1] - R * 0.5 + R * 0.2 * su), R * 0.07, ep)
+    if fx.get("larmes", 0) > 0.05:                                         # larmes (de rire ou de tristesse) qui coulent
+        la = fx["larmes"]
+        for o in (oL, oR):
+            x_ = o[0] + (o[0] - c[0]) * 0.35                                  # au coin extérieur de l'œil
+            m = np.zeros(img.shape[:2], np.uint8); cv2.line(m, _pts([(x_, o[1] + er * 0.8)])[0], _pts([(x_ + er * 0.08, o[1] + er * (0.9 + 1.6 * la))])[0], 255, int(er * 0.16 * 4), AA, 2)
+            lavis(img, m, (120, 185, 240), 0.5, bord=False); goutte(img, (x_ + er * 0.08, o[1] + er * (1.0 + 1.6 * la)), er * 0.2, ep * 0.6)
     if E == "degout":                                                      # teint verdâtre
         pass
     if E == "colere":
@@ -254,7 +288,7 @@ def veine(img, c, r, ep):
         encre(img, courbe((c[0] + r * 0.3 * math.cos(t), c[1] + r * 0.3 * math.sin(t)), (p[0] + r * 0.2, p[1] - r * 0.2), p), ep * 0.9, coul=(180, 30, 30))
 
 
-def tete(img, c, R, expr="neutre", teint=None, regard=(0, 0), graine=0, profil=0.0, cheveux=None, ombre=True, nez=True, ouv=None, cligne=0.0):
+def tete(img, c, R, expr="neutre", teint=None, regard=(0, 0), graine=0, profil=0.0, cheveux=None, ombre=True, nez=True, ouv=None, cligne=0.0, fx=None):
     """Tête ronde : blanc cassé, ombre aquarelle grise en bas à gauche + hachures croisées, contour d'encre épais."""
     rng = np.random.default_rng(graine)
     pts = cercle_pts(c, R, R * 0.99, n=96)
@@ -270,7 +304,7 @@ def tete(img, c, R, expr="neutre", teint=None, regard=(0, 0), graine=0, profil=0
         m = np.zeros(img.shape[:2], np.uint8); cv2.circle(m, _pts([(c[0], c[1] - R * 0.25)])[0], int(R * 0.75 * 4), 255, -1, AA, 2)
         lavis(img, cv2.bitwise_and(m, masque(img.shape, pts)), (205, 70, 60), 0.3, bord=False)
         hachures(img, croissant(img.shape, c, R, (-0.6, 0.5), 0.3), -50, R * 0.07, R * 0.02, (170, 50, 45), 0.5)
-    visage(img, c, R, expr, regard, rng, profil, nez_vu=nez, ouv=ouv, cligne=cligne)
+    visage(img, c, R, expr, regard, rng, profil, nez_vu=nez, ouv=ouv, cligne=cligne, fx=fx)
     if cheveux: cheveux_(img, c, R, cheveux, rng)
     encre(img, pts, R * 0.05, ferme=True, rng=rng)                         # contour épais
     # marques de mouvement / d'émotion autour
@@ -349,15 +383,19 @@ VISAGE_MAIN = {"bouche": (0.02, 0.42), "menton": (0.12, 0.88), "joues": (0.92, 0
 
 def bonhomme(img, x, sol, R, expr="neutre", bras=("ballants", "ballants"), jambes=("debout", "debout"), taille="chibi", graine=0,
              haut="tshirt", c_haut=(120, 160, 210), bas="pantalon", c_bas=(70, 95, 150), chaussures=(55, 52, 58), cheveux=None,
-             rayures=None, teint=None, profil=0.0, extras=(), objet=None, chapeau=None, ouv=None, cligne=0.0, penche=0.0):
+             rayures=None, teint=None, profil=0.0, extras=(), objet=None, chapeau=None, ouv=None, cligne=0.0, penche=0.0, fx=None, sens=1, ecrase=1.0):
     """Personnage complet. taille 'grand' : stickman géant (longues jambes fines, petit maillot, slip) ; 'chibi' : grosse tête, petit
     corps habillé (t-shirt à manches courtes, pantalon de couleur), comme les planches Émotions et Métiers."""
     rng = np.random.default_rng(graine)
     G = taille == "grand"
     ep = R * (0.028 if G else 0.035)
-    L_j = R * (2.3 if G else 1.25); L_b = R * (1.2 if G else 0.95); h_tr = R * (1.2 if G else 0.95); l_tr = R * (0.38 if G else 0.5)
+    L_j = R * (2.3 if G else 1.25) * ecrase; L_b = R * (1.2 if G else 0.95); h_tr = R * (1.2 if G else 0.95) * ecrase; l_tr = R * (0.38 if G else 0.5) / ecrase ** 0.5
     w_j = R * (0.045 if G else 0.13); w_b = R * (0.04 if G else 0.05)
-    def _nom(p): return p if isinstance(p, str) else (p[1] if p[2] >= 0.5 else p[0])
+    def _nom(p):
+        if isinstance(p, str): return p
+        if p[0] == "cible": return "cible"
+        q = p[1] if p[2] >= 0.5 else p[0]
+        return q if isinstance(q, str) else "cible"
     def _haut(n): return (L_j * (0.12 if n == "accroupi" else 0.55 if n == "assis" else 1.0)) + (R * 0.3 if n == "saut" else 0)
     j0 = jambes[0]
     hy_ = _haut(j0) if isinstance(j0, str) else _haut(j0[0]) + (_haut(j0[1]) - _haut(j0[0])) * j0[2]
@@ -372,8 +410,8 @@ def bonhomme(img, x, sol, R, expr="neutre", bras=("ballants", "ballants"), jambe
         k_, f_ = POSES_JAMBES[nom]
         h = (x + sg * l_tr * (0.3 if nom == "accroupi" else 0.22), hanche_y)
         abs_ = nom in ("assis", "course_av", "course_ar", "replie", "a_genoux", "marche_av", "marche_ar")
-        g = (h[0] + (k_[0] if abs_ else sg * k_[0]) * L_j, h[1] + k_[1] * L_j)
-        f = (h[0] + (f_[0] if abs_ else sg * f_[0]) * L_j, h[1] + f_[1] * L_j)
+        g = (h[0] + (sens * k_[0] if abs_ else sg * k_[0]) * L_j, h[1] + k_[1] * L_j)   # sens : vers où il marche / court
+        f = (h[0] + (sens * f_[0] if abs_ else sg * f_[0]) * L_j, h[1] + f_[1] * L_j)
         return h, g, f
      for sg, jp in zip((-1, 1), jambes):
         if isinstance(jp, str): h, g, f = _jambe(sg, jp)
@@ -390,6 +428,11 @@ def bonhomme(img, x, sol, R, expr="neutre", bras=("ballants", "ballants"), jambe
     epaules = [(x - l_tr * (0.42 if not G else 0.5), cou_y + R * 0.1), (x + l_tr * (0.42 if not G else 0.5), cou_y + R * 0.1)]
     mains = []
     def _bras(i, nom):
+        if not isinstance(nom, str):                                       # ("cible", (x, y)) : la main va à un point précis (toucher l'autre)
+            mn = nom[1]; e_ = epaules[i]; d_ = max(1.0, math.hypot(mn[0] - e_[0], mn[1] - e_[1]))
+            mid = ((e_[0] + mn[0]) / 2, (e_[1] + mn[1]) / 2); pl = max(0.0, (L_b * 2 - d_)) * 0.35
+            sg_ = -1 if i == 0 else 1
+            return (mid[0] + sg_ * pl * 0.3, mid[1] + pl), mn
         k_, m_ = POSES_BRAS[nom]
         if i == 0: co = (epaules[0][0] + k_[0] * L_b, epaules[0][1] + k_[1] * L_b); mn = (epaules[0][0] + m_[0] * L_b, epaules[0][1] + m_[1] * L_b)
         else:      co = (epaules[1][0] - k_[0] * L_b, epaules[1][1] + k_[1] * L_b); mn = (epaules[1][0] - m_[0] * L_b, epaules[1][1] + m_[1] * L_b)
@@ -448,7 +491,7 @@ def bonhomme(img, x, sol, R, expr="neutre", bras=("ballants", "ballants"), jambe
         if nom in VISAGE_MAIN: continue
         ang = math.degrees(math.atan2(mn[1] - co[1], mn[0] - co[0])) - 90
         main(img, mn, R * (0.085 if G else 0.11), ang, "poing" if nom in ("poing",) else "ouverte", ep * (1.0 if G else 0.8), (235, 140, 130) if (expr in ("colere", "frustration") and nom == "poing") else (252, 252, 250))
-    tete(img, tc, R, expr, teint, graine=graine, profil=profil, cheveux=cheveux, ouv=ouv, cligne=cligne)
+    tete(img, tc, R, expr, teint, graine=graine, profil=profil, cheveux=cheveux, ouv=ouv, cligne=cligne, fx=fx)
     if chapeau: chapeau(img, tc, R)
     for ex in extras: ex(img, tc, R)
     for (e_, co, mn), nom in zip(mains, bras):                             # main sur le visage : l'avant-bras passe devant la tête
