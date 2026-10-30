@@ -43,7 +43,8 @@ COSTUMES_DEFAUT = {
 }
 
 HAUTS = ("tshirt", "chemise", "blouse", "costume", "capuche", "survetement", "tablier", "pyjama", "pull", "debardeur", "robe", "polo", "gilet",
-         "col_roule", "doudoune", "blouson", "redingote", "uniforme", "tunique", "hawai", "veste_jean", "maillot")
+         "col_roule", "doudoune", "blouson", "redingote", "uniforme", "tunique", "hawai", "veste_jean", "maillot",
+         "veste_chef", "veste_pompier", "salopette", "kimono", "combinaison", "tunique_med")      # métiers (moteur/metiers.py)
 MOTIFS = ("uni", "rayures", "carreaux", "pois") + GR.MOTIFS
 BAS = ("jean", "pantalon", "jogging", "short", "jupe")
 CHAUSSURES = ("baskets", "ville", "ballerines", "bottes", "chaussons")
@@ -880,7 +881,9 @@ def _accessoire(img, t, rx, ry, s, p, P):
 
 # ------------------------------------------------------------------ objets tenus en main
 OBJETS = ("telephone", "billet", "portefeuille", "micro", "verre", "cafe", "livre", "cles", "carte", "facture", "bouteille", "haltere",
-          "seringue", "parapluie", "telecommande", "fleur", "cadeau", "pizza", "croissant", "tablette", "lettre", "journal", "stylo", "valise")
+          "seringue", "parapluie", "telecommande", "fleur", "cadeau", "pizza", "croissant", "tablette", "lettre", "journal", "stylo", "valise",
+          "lance", "talkie", "porte_bloc", "poele", "baguettes", "plans", "marteau", "tournevis", "cle_molette", "fourche", "arrosoir", "palette",   # outils des métiers
+          "guitare", "plateau", "eprouvette", "ordinateur", "colis", "ciseaux", "marteau_juge", "baguette_magique")
 
 def objet(nom, s=1.0):
     """Petit accessoire dessiné (calque RGBA) à tenir en main (liste OBJETS)."""
@@ -956,8 +959,12 @@ def objet(nom, s=1.0):
     elif nom == "valise":
         rc(10, 55, 130, 160, (120, 80, 50)); lig((50, 55), (50, 35), TRAIT, 8); lig((90, 55), (90, 35), TRAIT, 8); lig((50, 35), (90, 35), TRAIT, 8)
         r(10*k, 100*k, 130*k, 110*k, (90, 60, 35))
-    else:
-        return None
+    else:                                                                  # outils des métiers (moteur/metiers.py)
+        try:
+            import metiers
+            return metiers.outil(nom, s)
+        except Exception:
+            return None
     return im
 
 # ------------------------------------------------------------------ effets

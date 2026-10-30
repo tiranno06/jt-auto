@@ -317,7 +317,7 @@ def _outil():
                 "hashtags": {"type": "array", "items": {"type": "string"}},
                 "studio": {"type": "object", "properties": {
                     "moment": {"type": "string"}, "lieux": {"type": "array", "items": {"type": "string"}},
-                    "costumes": {"type": "object"}, "personnages": {"type": "object"}, "gags": {"type": "array", "items": {"type": "string"}},
+                    "costumes": {"type": "object"}, "metiers": {"type": "object"}, "personnages": {"type": "object"}, "gags": {"type": "array", "items": {"type": "string"}},
                     "cadence": {"type": "string", "enum": ["rapide", "normal", "pose"]},
                     "ambiances": {"type": "array", "items": {"type": "string"}},
                     "plans": {"type": "array", "items": ecrire._schema({"replique": {"type": "integer"}, "plan": {"type": "string"}, "mouvement": {"type": "string"},

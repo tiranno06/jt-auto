@@ -11,7 +11,8 @@ import marionnette as M
 COIFFURES = ("ondule", "frange", "afro", "herisse", "raie", "rase", "tresses", "anglaises", "banane", "court_texture", "degarni")
 ARRIERE = ("ondule", "frange", "afro", "herisse", "tresses", "anglaises")
 BARBES = ("barbe_courte", "barbe_pleine", "bouc", "favoris")
-CHAPEAUX = ("bonnet", "casquette", "beret", "chapeau", "melon", "tricorne", "casque_chantier", "toque", "bob", "couronne", "bandana", "serre_tete")
+CHAPEAUX = ("bonnet", "casquette", "beret", "chapeau", "melon", "tricorne", "casque_chantier", "toque", "bob", "couronne", "bandana", "serre_tete",
+            "casque_pompier", "casquette_officier", "calot_infirmier", "calot", "charlotte", "chapeau_paille", "casque_astronaute", "chapeau_cowboy", "chapeau_sorcier")
 MOTIFS = ("fleurs", "palmiers", "taches", "losanges", "chevrons", "etoiles")
 
 
@@ -235,11 +236,69 @@ def chapeau(img, t, rx, ry, s, p, nom, col):
         cap = _calotte(cx, cy, rx * 1.05, ry * 1.08, R, 1.0, 0.3)
         _masse(img, cap, (250, 200, 40), ep); M._ligne(img, R(cx, cy - ry * 1.12), R(cx, cy - ry * 0.5), (220, 170, 20), 14 * s)
         _masse(img, [R(cx - rx * 1.25, cy - ry * 0.42), R(cx + rx * 1.25, cy - ry * 0.42), R(cx + rx * 1.2, cy - ry * 0.3), R(cx - rx * 1.2, cy - ry * 0.3)], (240, 190, 30), ep)
-    elif nom == "toque":                                                   # toque de cuisinier
-        _masse(img, [R(cx - rx * 0.8, cy - ry * 0.5), R(cx + rx * 0.8, cy - ry * 0.5), R(cx + rx * 0.82, cy - ry * 0.9), R(cx - rx * 0.82, cy - ry * 0.9)], (250, 250, 250), ep)
-        for k in range(3): M._ellipse(img, R(cx + (k - 1) * rx * 0.55, cy - ry * 1.25), (rx * 0.42 + ep, ry * 0.45 + ep), 0, M.TRAIT)
-        for k in range(3): M._ellipse(img, R(cx + (k - 1) * rx * 0.55, cy - ry * 1.25), (rx * 0.42, ry * 0.45), 0, (250, 250, 250))
-        M._poly(img, [R(cx - rx * 0.78, cy - ry * 0.95), R(cx + rx * 0.78, cy - ry * 0.95), R(cx + rx * 0.78, cy - ry * 0.88), R(cx - rx * 0.78, cy - ry * 0.88)], (250, 250, 250))
+    elif nom == "toque":                                                   # toque de cuisinier : bandeau plissé + champignon bouffant
+        bl = (250, 250, 250); gr = (215, 218, 225)
+        for k in (-1, 1, 0): M._ellipse(img, R(cx + k * rx * 0.42, cy - ry * (1.38 if k == 0 else 1.28)), (rx * 0.55 + ep, ry * 0.5 + ep), 0, M.TRAIT)
+        for k in (-1, 1, 0): M._ellipse(img, R(cx + k * rx * 0.42, cy - ry * (1.38 if k == 0 else 1.28)), (rx * 0.55, ry * 0.5), 0, bl)
+        for k in (-1, 1): M._arc(img, R(cx + k * rx * 0.42, cy - ry * 1.28), (rx * 0.4, ry * 0.32), p["tilt"], 20, 160, gr, 3 * s)
+        band = [R(cx - rx * 0.88, cy - ry * 0.5), R(cx + rx * 0.88, cy - ry * 0.5), R(cx + rx * 0.84, cy - ry * 1.02), R(cx - rx * 0.84, cy - ry * 1.02)]
+        _masse(img, band, bl, ep)
+        for k in range(-3, 4): M._ligne(img, R(cx + k * rx * 0.22, cy - ry * 0.56), R(cx + k * rx * 0.21, cy - ry * 0.96), gr, 3 * s)
+    elif nom == "casque_pompier":                                          # casque de pompier rouge : crête, large bord arrière, écusson doré
+        rouge = col if col != (60, 60, 70) else (205, 35, 35)
+        brd = [R(cx - rx * 1.25, cy - ry * 0.42), R(cx - rx * 0.9, cy - ry * 0.62), R(cx + rx * 0.9, cy - ry * 0.62), R(cx + rx * 1.4, cy - ry * 0.3), R(cx + rx * 1.2, cy - ry * 0.22), R(cx - rx * 1.15, cy - ry * 0.3)]
+        _masse(img, brd, M._fonce(rouge, 0.8), ep)
+        _masse(img, _calotte(cx, cy, rx * 1.02, ry * 1.12, R, 1.0, 0.45), rouge, ep)
+        M._ligne(img, R(cx - rx * 0.1, cy - ry * 1.18), R(cx + rx * 0.35, cy - ry * 0.55), M.TRAIT, 16 * s); M._ligne(img, R(cx - rx * 0.1, cy - ry * 1.18), R(cx + rx * 0.35, cy - ry * 0.55), M._clair(rouge, 0.25), 9 * s)
+        ec = [R(cx - rx * 0.32, cy - ry * 0.98), R(cx + rx * 0.05, cy - ry * 1.05), R(cx + rx * 0.08, cy - ry * 0.6), R(cx - rx * 0.12, cy - ry * 0.5), R(cx - rx * 0.36, cy - ry * 0.62)]
+        _masse(img, ec, (240, 200, 70), ep * 0.7); M._ellipse(img, R(cx - rx * 0.14, cy - ry * 0.78), (9 * s, 9 * s), 0, (205, 35, 35))
+        M._arc(img, R(cx + rx * 0.45, cy - ry * 0.9), (rx * 0.25, ry * 0.15), p["tilt"], 200, 300, (255, 140, 140), 5 * s)
+    elif nom == "casquette_officier":                                      # casquette de policier / pilote : plateau, bandeau, visière vernie, insigne
+        c0 = col if col != (60, 60, 70) else (35, 50, 95)
+        M._ellipse(img, R(cx, cy - ry * 1.08), (rx * 1.12 + ep, ry * 0.3 + ep), p["tilt"], M.TRAIT); M._ellipse(img, R(cx, cy - ry * 1.08), (rx * 1.12, ry * 0.3), p["tilt"], c0)
+        corps = [R(cx - rx * 0.92, cy - ry * 1.02), R(cx + rx * 0.92, cy - ry * 1.02), R(cx + rx * 0.86, cy - ry * 0.55), R(cx - rx * 0.86, cy - ry * 0.55)]
+        _masse(img, corps, c0, ep)
+        M._poly(img, [R(cx - rx * 0.86, cy - ry * 0.72), R(cx + rx * 0.86, cy - ry * 0.72), R(cx + rx * 0.86, cy - ry * 0.56), R(cx - rx * 0.86, cy - ry * 0.56)], (25, 25, 30))
+        vis = [R(cx - rx * 0.8, cy - ry * 0.56), R(cx + rx * 0.8, cy - ry * 0.56), R(cx + rx * 0.55, cy - ry * 0.38), R(cx - rx * 0.55, cy - ry * 0.38)]
+        _masse(img, vis, (20, 20, 25), ep * 0.8); M._ligne(img, R(cx - rx * 0.4, cy - ry * 0.48), R(cx + rx * 0.1, cy - ry * 0.48), (110, 110, 120), 3 * s)
+        M._ellipse(img, R(cx, cy - ry * 0.85), (16 * s + ep, 14 * s + ep), 0, M.TRAIT); M._ellipse(img, R(cx, cy - ry * 0.85), (16 * s, 14 * s), 0, (235, 195, 70))
+    elif nom in ("calot_infirmier", "calot"):                              # calot blanc (boulanger), à croix rouge (infirmière)
+        cal = [R(cx - rx * 0.62, cy - ry * 0.78), R(cx + rx * 0.62, cy - ry * 0.78), R(cx + rx * 0.5, cy - ry * 1.18), R(cx - rx * 0.5, cy - ry * 1.18)]
+        _masse(img, cal, (250, 250, 250), ep); M._ligne(img, R(cx - rx * 0.6, cy - ry * 0.88), R(cx + rx * 0.6, cy - ry * 0.88), (215, 218, 225), 4 * s)
+        for a_, b_ in ((((-0.12, -1.05), (0.12, -1.05)), ((0, -1.15), (0, -0.95))) if nom == "calot_infirmier" else ()): M._ligne(img, R(cx + rx * a_[0], cy + ry * a_[1]), R(cx + rx * b_[0], cy + ry * b_[1]), (215, 40, 50), 9 * s)
+    elif nom == "charlotte":                                               # charlotte de chirurgien : bonnet bouffant, élastique
+        c0 = col if col != (60, 60, 70) else (110, 170, 200)
+        _masse(img, _calotte(cx, cy, rx * 1.12, ry * 1.18, R, 1.0, 0.36), c0, ep)
+        for k in range(-3, 4): M._arc(img, R(cx + k * rx * 0.25, cy - ry * 0.8), (rx * 0.16, ry * 0.2), p["tilt"], 200, 340, M._fonce(c0, 0.8), 3 * s)
+        M._arc(img, R(cx, cy - ry * 0.36), (rx * 1.1, ry * 0.12), p["tilt"], 180, 360, M._fonce(c0, 0.7), 5 * s)
+    elif nom == "chapeau_paille":                                          # chapeau de paille (agriculteur, jardinier) : large bord, ruban
+        pa = (225, 190, 110); fo = M._fonce(pa, 0.78)
+        brd = [R(cx + rx * 1.55 * math.cos(math.pi * j / 12), cy - ry * 0.48 + ry * 0.2 * math.sin(math.pi * j / 12)) for j in range(13)] + \
+              [R(cx + rx * 1.55 * math.cos(math.pi * j / 12), cy - ry * 0.48 - ry * 0.16 * math.sin(math.pi * j / 12)) for j in range(12, -1, -1)]
+        _masse(img, brd, pa, ep)
+        cal = [R(cx - rx * 0.78, cy - ry * 0.5), R(cx - rx * 0.7, cy - ry * 1.15), R(cx, cy - ry * 1.25), R(cx + rx * 0.7, cy - ry * 1.15), R(cx + rx * 0.78, cy - ry * 0.5)]
+        _masse(img, cal, pa, ep); M._poly(img, [R(cx - rx * 0.77, cy - ry * 0.72), R(cx + rx * 0.77, cy - ry * 0.72), R(cx + rx * 0.78, cy - ry * 0.55), R(cx - rx * 0.78, cy - ry * 0.55)], col if col != (60, 60, 70) else (200, 70, 50))
+        for k in range(-4, 5): M._ligne(img, R(cx + k * rx * 0.3, cy - ry * 0.52), R(cx + k * rx * 0.33, cy - ry * 0.4), fo, 2.5 * s)
+        for k in range(-2, 3): M._ligne(img, R(cx + k * rx * 0.28, cy - ry * 0.78), R(cx + k * rx * 0.24, cy - ry * 1.1), fo, 2.5 * s)
+    elif nom == "casque_astronaute":                                       # casque d'astronaute : bulle (bord épais), reflet, collier
+        c0 = R(cx, cy - ry * 0.12)
+        for e_, c_ in ((ep * 2 + 22 * s, M.TRAIT), (22 * s, (235, 238, 245))): M._arc(img, c0, (rx * 1.42, ry * 1.32), p["tilt"], 0, 360, c_, e_)
+        M._arc(img, c0, (rx * 1.42, ry * 1.32), p["tilt"], 0, 360, (190, 195, 205), 4 * s)
+        M._arc(img, R(cx - rx * 0.3, cy - ry * 0.45), (rx * 0.85, ry * 0.8), p["tilt"], 200, 250, (250, 252, 255), 10 * s)
+        M._ellipse(img, R(cx - rx * 1.25, cy - ry * 0.05), (12 * s, 22 * s), 0, (200, 60, 60))
+    elif nom == "chapeau_cowboy":                                          # chapeau de cow-boy : calotte creusée, bord relevé
+        c0 = col if col != (60, 60, 70) else (150, 100, 55)
+        brd = [R(cx - rx * 1.62, cy - ry * 0.86), R(cx - rx * 1.3, cy - ry * 0.62), R(cx, cy - ry * 0.56), R(cx + rx * 1.3, cy - ry * 0.62), R(cx + rx * 1.62, cy - ry * 0.86),
+               R(cx + rx * 1.58, cy - ry * 0.62), R(cx + rx * 1.25, cy - ry * 0.4), R(cx, cy - ry * 0.3), R(cx - rx * 1.25, cy - ry * 0.4), R(cx - rx * 1.58, cy - ry * 0.62)]
+        _masse(img, brd, M._fonce(c0, 0.9), ep)
+        cal = [R(cx - rx * 0.8, cy - ry * 0.48), R(cx - rx * 0.75, cy - ry * 1.25), R(cx - rx * 0.2, cy - ry * 1.12), R(cx, cy - ry * 1.3), R(cx + rx * 0.2, cy - ry * 1.12),
+               R(cx + rx * 0.75, cy - ry * 1.25), R(cx + rx * 0.8, cy - ry * 0.48)]
+        _masse(img, cal, c0, ep); M._poly(img, [R(cx - rx * 0.79, cy - ry * 0.68), R(cx + rx * 0.79, cy - ry * 0.68), R(cx + rx * 0.8, cy - ry * 0.52), R(cx - rx * 0.8, cy - ry * 0.52)], (60, 40, 25))
+    elif nom == "chapeau_sorcier":                                         # chapeau pointu de sorcier / magicien, étoiles
+        c0 = col if col != (60, 60, 70) else (80, 50, 150)
+        _masse(img, [R(cx - rx * 1.45, cy - ry * 0.5), R(cx + rx * 1.45, cy - ry * 0.5), R(cx + rx * 1.1, cy - ry * 0.32), R(cx - rx * 1.1, cy - ry * 0.32)], c0, ep)
+        _masse(img, [R(cx - rx * 0.85, cy - ry * 0.5), R(cx + rx * 0.85, cy - ry * 0.5), R(cx + rx * 0.35, cy - ry * 1.6), R(cx + rx * 0.9, cy - ry * 2.05), R(cx - rx * 0.05, cy - ry * 1.75)], c0, ep)
+        for (u, v) in ((-0.3, -0.85), (0.25, -1.2), (0.1, -0.65)): M._ellipse(img, R(cx + rx * u, cy + ry * v), (9 * s, 9 * s), 45, (250, 215, 70))
     elif nom == "couronne":
         pts = [R(cx - rx * 0.7, cy - ry * 0.7), R(cx + rx * 0.7, cy - ry * 0.7), R(cx + rx * 0.8, cy - ry * 1.3), R(cx + rx * 0.4, cy - ry * 1.0), R(cx, cy - ry * 1.4),
                R(cx - rx * 0.4, cy - ry * 1.0), R(cx - rx * 0.8, cy - ry * 1.3)]

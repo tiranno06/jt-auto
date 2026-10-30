@@ -323,13 +323,20 @@ def bible(sk, roles):
             if isinstance(S.get("costumes"), dict) and (S.get("costumes") or {}).get(role): continue
             P0 = S.get("personnages") if isinstance(S.get("personnages"), dict) else {}
             costumes[role] = appliquer_theme(costumes[role], T, genre_voix(sk, role, P0.get(role) if isinstance(P0.get(role), dict) else {}), k == 0)
+    # métiers entendus (« je suis pompier », « docteur, … ») ou choisis par l'IA : costume et outil du métier (moteur/metiers.py)
+    import metiers as MT_
+    m_ia = {r: str(m_).lower() for r, m_ in (S.get("metiers") or {}).items() if str(m_).lower() in MT_.CATALOGUE} if isinstance(S.get("metiers"), dict) else {}
+    for role, met in {**MT_.qui_fait(sk), **m_ia}.items():
+        if role in costumes and not (isinstance(S.get("costumes"), dict) and (S.get("costumes") or {}).get(role)):
+            P0 = S.get("personnages") if isinstance(S.get("personnages"), dict) else {}
+            costumes[role] = MT_.costume(met, costumes[role], genre_voix(sk, role, P0.get(role) if isinstance(P0.get(role), dict) else {}))
     # les personnes de la vidéo d'origine habillent nos personnages : la plus présente à l'image joue la voix la plus présente
     if V.get("personnes"):
         mots = {r: sum(len(x.get("t", "").split()) for x in sk.get("repliques", []) if x.get("p") == r) for r in roles}
         demande = (S.get("costumes") or {}) if isinstance(S.get("costumes"), dict) else {}
         for role, pers in zip(sorted(roles, key=lambda r: -mots.get(r, 0)), V["personnes"]):
             c = costumes[role] = dict(costumes[role])
-            if pers.get("habit") and "c_haut" not in (demande.get(role) or {}):
+            if pers.get("habit") and "c_haut" not in (demande.get(role) or {}) and not c.get("metier"):   # un costume de métier garde ses couleurs
                 c["c_haut"] = tuple(int(v) for v in pers["habit"]); c["c_motif"] = M._fonce(c["c_haut"], 0.72)
             if pers.get("cheveux") and "c_cheveux" not in (demande.get(role) or {}): c["c_cheveux"] = tuple(int(v) for v in pers["cheveux"])
     figurants = []
@@ -760,6 +767,9 @@ def consigne_studio():
   époque ou métier évident : habille-les en conséquence (préhistoire : tunique motif taches + barbe + cheveux herisse ; roi, reine,
   Versailles : redingote ou robe + anglaises + tricorne ou couronne ; police : uniforme + casquette ; chantier : casque_chantier ;
   cuisinier : tablier + toque ; plage : hawai motif fleurs + bob…) ;
+  "metiers" = (facultatif) pour un rôle dont on ENTEND le métier (il le dit, on l'appelle « docteur », on lui demande « t'es
+  plombier ? »), son métier parmi {L(__import__("metiers").CATALOGUE)} : le moteur l'habille du costume complet et lui met son outil
+  en main (pompier : veste à bandes + casque rouge + lance ; médecin : blouse + stéthoscope…) ; jamais pour un métier juste cité ;
   "personnages" = pour chaque rôle dessiné, la personne qui le joue (casting libre, différent à chaque vidéo) : "genre" (h ou f),
   "age" (nombre), "taille" (1 = adulte moyen ; ado ≈ 0.8 ; enfant ≈ 0.65), "corpulence" (0 = mince à 1 = fort),
   "cheveux" parmi {L(sorted(set(H_.COIFFURES_H + H_.COIFFURES_F + M.GR.COIFFURES)))}, "barbe" parmi trois_jours, moustache, bouc ou rien (JAMAIS de grosse barbe : une barbe mal rasée au plus).
