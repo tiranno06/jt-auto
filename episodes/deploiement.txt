@@ -10,8 +10,8 @@ code: 0
 ✓ Created objects.
 ├── ✓ Uploaded /home/runner/work/jt-auto/jt-auto/moteur/banque_modal.py
 ├── ✓ Created Function Kyutai.*.
-├── ✓ Created Function Kokoro.*.
 ├── ✓ Created Function Whisper.*.
+├── ✓ Created Function Kokoro.*.
 └── ✓ Created Function Zonos.*.
 ✓ Deployment skipped: no changes detected! ⏭️
 
@@ -32,17 +32,10 @@ code: 0
 ╰──────────────────────────────────────────────────────────────────────────────╯
 code: 1
 === essai de l'ecoute (NeMo, Florence-2) ===
-Traceback (most recent call last):
-  File "/home/runner/work/jt-auto/jt-auto/moteur/essai_ecoute.py", line 7, in <module>
-    subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", "voix/presentateur.wav", "-i", "voix/invite.wav", "-i", "voix/presentateur.wav",
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/subprocess.py", line 548, in run
-    with Popen(*popenargs, **kwargs) as process:
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/subprocess.py", line 1026, in __init__
-    self._execute_child(args, executable, preexec_fn, close_fds,
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/subprocess.py", line 1955, in _execute_child
-    raise child_exception_type(errno_num, err_msg, err_filename)
-FileNotFoundError: [Errno 2] No such file or directory: 'ffmpeg'
+  NeMo indisponible (Lookup failed for Cls 'Nemo' from the 'jt-ecoute' app: App 'jt-ecoute' not found in environment 'main'.)
+NeMo : aucun résultat
+  Florence-2 indisponible (Lookup failed for Cls 'Florence' from the 'jt-ecoute' app: App 'jt-ecoute' not found in environment 'main'.)
+Florence-2 : []
 === essai des decors (premier lancement : telechargement du modele) ===
 ÉCHEC : ResourceExhaustedError Function call failed: workspace billing cycle spend limit reached
 durée 0 s
