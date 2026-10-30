@@ -125,9 +125,14 @@ def transcrire(chemin, mono):
         EVENEMENTS[:] = [(float(x["start"]), float(x["end"]), str(x.get("text", "")).strip("() ").lower())       # rires, applaudissements…
                          for x in r.get("words", []) if x.get("type") == "audio_event" and x.get("start") is not None]
         if mots:
-            journal(f"  transcription ElevenLabs : {len(mots)} mots, {len({m['voix'] for m in mots})} voix, langue {r.get('language_code')}"); return mots
+            journal(f"  transcription ElevenLabs : {len(mots)} mots, {len({m['voix'] for m in mots})} voix, langue {r.get('language_code')}")
+            SOURCE_MOTS[0] = "elevenlabs"; return mots
     except Exception as e:
         journal(f"  transcription ElevenLabs impossible ({str(e)[:150]}) : Whisper")
+    SOURCE_MOTS[0] = "whisper"
+    import ecoute
+    mots = ecoute.groq(chemin)                                             # Groq : Whisper gratuit en quelques secondes (clé GROQ_API_KEY)
+    if mots: return mots
     import voix_banque
     e_ = (voix_banque.ecouter([mono]) or [None])[0] or {}
     mots = [{"w": w, "s": float(s), "e": float(f), "voix": "speaker_0"} for w, s, f in (e_.get("mots") or [])]
@@ -175,6 +180,7 @@ def separer_voix(mots, sig):
     return mots
 
 EVENEMENTS = []                                                            # événements sonores repérés par Scribe : (début, fin, nom)
+SOURCE_MOTS = [""]                                                         # qui a transcrit : elevenlabs (mots déjà précis) ou whisper
 
 def segments(mots):
     """Répliques : mots consécutifs d'une même voix, coupés aux longs silences et aux fins de phrase quand la réplique s'allonge."""
@@ -400,12 +406,18 @@ def preparer(url):
         journal("  image de la vidéo : " + analyse_video.texte(visuel))
     except Exception as e: journal(f"  analyse de l'image impossible ({str(e)[:150]}) : mise en scène d'après le son seul")
     voix_sig, chemin_voix = isoler(tmp)
+    import ecoute
+    if voix_sig is None:                                                   # plus de crédit ElevenLabs : Demucs, gratuit sur la machine
+        v_, c_ = ecoute.demucs(tmp)
+        if v_ is not None: voix_sig, chemin_voix = v_, c_
     sig = voix_sig if voix_sig is not None and len(voix_sig) >= len(mono) * 0.9 else mono
     mots = transcrire(chemin_voix, mono)
+    if SOURCE_MOTS[0] != "elevenlabs": mots = ecoute.aligner(mots, sig)    # chaque mot recalé sur la voix (lèvres, sous-titres)
+    if not EVENEMENTS: EVENEMENTS[:] = ecoute.bruits(mono)                 # rires, cris, sirène, aboiement… entendus dans l'original
     try:                                                                   # pyannote (si la clé Hugging Face gratuite est réglée) :
         import locuteurs                                                   # meilleure séparation des voix que la transcription gratuite
-        if len({m["voix"] for m in mots}) == 1:
-            p_ = locuteurs.pyannote(mots, sig)
+        if len({m["voix"] for m in mots}) == 1:                            # NeMo (Modal) d'abord, puis pyannote
+            p_ = ecoute.nemo(mots, sig) or locuteurs.pyannote(mots, sig)
             if p_: mots = p_
     except Exception as e: journal(f"  pyannote impossible ({str(e)[:120]})")
     try:                                                                   # voix proches confondues : on les re-sépare par leur empreinte
@@ -424,6 +436,7 @@ def preparer(url):
     except Exception as e: journal(f"  contrôle questions-réponses impossible ({str(e)[:120]})")
     segs = segments(mots)
     hz = hauteurs(sig, segs)
+    emo_voix = ecoute.emotions(sig, segs)                                  # colère, joie, tristesse entendues dans la voix
     journal(f"  {len(segs)} répliques, voix : {hz}")
     audio = {}
     try:                                                                   # le son de la vidéo : voix, débit, musique, bruitages… (banque)
@@ -444,6 +457,10 @@ def preparer(url):
             import marionnette as M_
             contenu += IMAGES.format(mesures=analyse_video.texte(visuel), banque=banque_visuelle.consigne(), coiffures=", ".join(M_.COIFFURES),
                                      coupes=", ".join(f"{c:.1f} s" for c in (visuel.get("coupes") or [])[:40]) or "aucune coupe repérée")
+            o_ = __import__("reseau").ordre_ia(True)
+            if cles and "claude" not in o_ and "gemini" not in o_:         # personne pour bien regarder les images : Florence-2 les décrit
+                desc = ecoute.decrire(cles[:6])
+                if desc: contenu += "\nCe que montrent les images clés (description automatique, en anglais) :\n" + "\n".join(f"- image {k + 1} : {t}" for k, t in enumerate(desc)) + "\n"
             contenu = [{"type": "image", "source": {"type": "base64", "media_type": "image/jpeg", "data": base64.b64encode(j).decode()}} for j in cles[:6]] \
                       + [{"type": "text", "text": contenu}]
         m = ecrire._appel(__import__('reseau').claude(), None, [{"role": "user", "content": contenu}], _outil(), max_tokens=8000)
@@ -476,6 +493,7 @@ def preparer(url):
         except (AttributeError, TypeError, ValueError): pass
     if corr: journal(f"  Claude a réattribué {corr} réplique(s) à la bonne personne (voix proches)")
     if refus: journal(f"  {refus} réattribution(s) de l'IA refusée(s) : la voix de ces répliques est reconnue avec certitude")
+    ecoute.jeu_entendu(reps, segs, emo_voix, EVENEMENTS)                   # sans indication de l'IA : le jeu entendu dans le son
     if all(r["p"] == "narrateur" for r in reps): reps[0]["p"] = "presentateur"   # au moins un personnage à l'image
     reps[-1]["chute"] = True
     brut = {"sujet": m.get("sujet") or segs[0]["t"][:30], "repliques": [dict(r) for r in reps[:16]], "legende": m.get("legende") or segs[0]["t"][:120],
@@ -516,7 +534,24 @@ def preparer(url):
         a0, a1 = int(s["deb"] * SR), max(int(s["fin"] * SR) + int(0.05 * SR), int(s["deb"] * SR) + int(0.2 * SR))
         audios.append(np.asarray(sig[a0:a1], np.float32))
         mots.append([(x["w"], float(x["s"] - s["deb"]), float(x["e"] - s["deb"])) for x in s["mots"]])
+    for r, m_ in zip(sk["repliques"], mots): r["_mots"] = [[w, round(a, 3), round(b, 3)] for w, a, b in m_]   # gardés : « Corriger qui parle »
     return sk, audios, mots
+
+
+def depuis_sketch(sk):
+    """« Corriger qui parle » (idée 6) : refait le son d'une vidéo TikTok déjà fabriquée, avec les MÊMES répliques (instants gardés
+    dans le sketch) : le son d'origine est re-téléchargé et recoupé réplique par réplique. Renvoie (audios, mots) comme preparer."""
+    d = sk.get("doublage") or {}
+    tmp = tempfile.mkdtemp(); info, piste, mono = telecharger(d.get("source") or (sk.get("sources") or [""])[0], tmp)
+    d["piste"] = piste; sk["doublage"] = d
+    audios, mots = [], []
+    for r in sk["repliques"]:
+        deb, fin = float(r.get("_deb", 0)), float(r.get("_fin", 0))
+        a0, a1 = int(deb * SR), max(int(fin * SR) + int(0.05 * SR), int(deb * SR) + int(0.2 * SR))
+        audios.append(np.asarray(mono[a0:a1], np.float32))
+        mots.append([(str(w), float(a), float(b)) for w, a, b in r["_mots"]] if r.get("_mots") else None)
+    journal(f"  son d'origine repris pour {len(audios)} répliques (mêmes instants)")
+    return audios, mots
 
 def credit(sk):
     d = sk.get("doublage") or {}

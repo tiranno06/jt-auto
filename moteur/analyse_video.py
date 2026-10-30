@@ -176,6 +176,10 @@ def analyser(chemin, duree_max=200):
                   energie=round(float(np.clip(np.mean(energie) * 12, 0, 1)) if energie else 0.0, 3),
                   mur=_dominante(fp, 4) if len(fp) else None, palette=_palette(np.concatenate(pal_px)),
                   lumiere=dict(luminosite=round(L, 1), chaleur=round(Ch, 1), saturation=round(float(np.mean(sat)), 1)), moment=moment)
+    try:                                                                   # idée 29 : postures tenues (bras croisés, téléphone…) par MediaPipe
+        import postures
+        resume["postures"] = postures.lire(ech)
+    except Exception as e: print(f"  postures de l'original indisponibles ({str(e)[:120]})", flush=True)
     # images clés : le milieu de chaque plan (8 au plus), pour Claude
     bornes = debut_plan + [len(ech)]; cles = []
     for a, b in zip(bornes[:-1], bornes[1:]):
@@ -191,4 +195,5 @@ def texte(resume):
     pers = "; ".join(f"{x['place']} (habit {x['habit']}, cheveux {x['cheveux']}, sourit {int(100 * x['sourire'])} %)" for x in resume["personnes"]) or "aucun visage repéré"
     return (f"{resume['nb_plans']} plans (≈ {resume['duree_plan']} s chacun) ; cadrages : très serré {int(100 * p['tres_serre'])} %, serré {int(100 * p['serre'])} %, "
             f"moyen {int(100 * p['moyen'])} %, large {int(100 * p['large'])} % ; caméra : " + ", ".join(f"{k} {int(100 * v)} %" for k, v in c.items() if v) +
-            f" ; {resume['nb_personnes']} personne(s) à l'écran : {pers} ; agitation {resume['energie']} ; lumière {resume['moment']} ; fond {resume['mur']}")
+            f" ; {resume['nb_personnes']} personne(s) à l'écran : {pers} ; agitation {resume['energie']} ; lumière {resume['moment']} ; fond {resume['mur']}"
+            + (" ; postures : " + ", ".join(f"{g} ({a:.1f}–{b:.1f} s)" for a, b, _, g in resume["postures"][:12]) if resume.get("postures") else ""))

@@ -53,6 +53,15 @@ def origine(e):
     manuelle = e.get("manuel") or theme or str(e.get("decision") or "").startswith("vidéo manuelle")
     return "texte" if manuelle else "auto"
 
+def repliques_de(e):
+    """Répliques d'une vidéo TikTok (personnage, texte) pour « Corriger qui parle » : lues dans le sketch gardé de la vidéo."""
+    if origine(e) != "tiktok": return []
+    f = os.path.join(RACINE, "episodes", "sketchs", os.path.splitext(e["fichier"])[0] + ".json")
+    try: sk = json.load(open(f, encoding="utf-8"))
+    except (OSError, ValueError): return []
+    return [[str(r.get("p", "")), str(r.get("t", ""))[:110]] for r in (sk.get("repliques") or [])][:60]
+
+
 def construire():
     hist = json.load(open(os.path.join(RACINE, "episodes", "historique.json"), encoding="utf-8")) \
         if os.path.exists(os.path.join(RACINE, "episodes", "historique.json")) else []
@@ -79,7 +88,8 @@ def construire():
                           format=e.get("format", ""), manuel=bool(e.get("manuel")), avis=e.get("avis", 0), note=e.get("note"), note_auteur=e.get("note_auteur"),
                           programmee=e.get("programmee"), couts=e.get("couts") or {}, duree=e.get("duree"),
                           likes=e.get("likes"), commentaires=e.get("commentaires"), partages=e.get("partages"),
-                          voix_secours=("piper" in str(e.get("voix", "")).lower())))
+                          voix_secours=("piper" in str(e.get("voix", "")).lower()),
+                          source=e.get("source_audio") or "", reps=repliques_de(e)))
     faites = [h for h in hist if h.get("fichier")]
     vraies = [e for e in faites if not e.get("betisier")]                  # le bêtisier n'utilise aucun outil : il ne compte pas
     derniere = vraies[-1] if vraies else {}                                # voyants des outils payants : d'après la dernière vidéo
@@ -136,7 +146,7 @@ def application(nom):
 
 # Service worker : l'appli s'ouvre même hors connexion (dernière version de la page), sans jamais mettre en cache
 # les vidéos (trop lourdes) ni les appels à GitHub.
-SW = r"""const CACHE = "regie-v25";
+SW = r"""const CACHE = "regie-v26";
 const COQUILLE = ["./", "manifest.webmanifest", "logo-192.png", "logo-512.png", "poppins-500.ttf", "poppins-700.ttf"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(COQUILLE))); self.skipWaiting(); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(k => Promise.all(k.filter(x => x !== CACHE).map(x => caches.delete(x))))); self.clients.claim(); });
@@ -230,6 +240,12 @@ button{font:inherit;border:0;border-radius:14px;cursor:pointer}
 .second{flex:1;padding:11px 6px;font-size:13px;background:var(--carte);color:var(--texte);border:1px solid var(--ligne)}
 .second:disabled{opacity:.4}
 #suivi{font-size:13px;margin-top:8px;min-height:18px;color:var(--doux)}
+#cote{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:30;overflow:auto}
+.cote-int{display:flex;gap:10px;padding:46px 10px 16px;justify-content:center;flex-wrap:wrap}
+.cote-col{flex:1 1 300px;max-width:420px;color:#fff;text-align:center}.cote-col iframe,.cote-col video{width:100%;aspect-ratio:9/16;border:0;border-radius:12px;background:#000;margin-top:6px}
+#coteFermer{position:fixed;top:10px;right:12px;z-index:31;width:auto;padding:6px 12px}
+.qui{display:flex;gap:8px;align-items:center;margin:5px 0;font-size:.92em}.qui select{flex:0 0 auto;width:auto;margin:0}.qui span{flex:1;min-width:0}
+.qui.change span{font-weight:700}
 #toast{position:fixed;top:16px;left:50%;transform:translateX(-50%);background:var(--jaune);color:#111;font-weight:700;padding:10px 16px;border-radius:12px;display:none;z-index:20;max-width:90vw;text-align:center}
 .onglets{position:sticky;top:0;z-index:5;display:flex;gap:6px;max-width:560px;margin:0 auto;padding:8px 12px;background:var(--bg)}
 .onglet{flex:1;min-width:0;padding:6px 2px;font-size:min(13px,3.3vw);line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:700;background:var(--carte);color:var(--doux);border:1px solid var(--ligne);display:flex;flex-direction:column;align-items:center;gap:2px}
@@ -538,10 +554,22 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <label>Refaire cette vidéo<select id="refaireQuoi"><option value="texte">Nouvelle version du sketch (même sujet)</option><option value="voix">Mêmes répliques, nouvelles voix</option><option value="decors">Mêmes répliques, nouveaux décors</option></select></label>
     <button class="second" id="refaire" disabled style="width:100%;margin-top:6px">🔁 Refaire (15 à 40 min)</button>
     <div style="display:flex;gap:6px;margin-top:6px"><button class="second" id="refaireVoix" disabled style="flex:1">🎙️ Juste la voix</button><button class="second" id="refaireDecor" disabled style="flex:1">🖼️ Juste le décor</button></div>
+    <div id="quiBloc" style="display:none;margin-top:10px">
+      <b>🗣️ Corriger qui parle</b>
+      <p class="note">Chaque réplique avec son personnage : changez ceux qui sont faux, puis « Refaire ». Même son, mêmes décors : seul le personnage qui parle change.</p>
+      <div id="quiListe"></div>
+      <button class="second" id="quiOk" disabled style="width:100%;margin-top:6px">🔁 Refaire avec ces personnages</button>
+    </div>
   </details>
+  <button class="second" id="comparer" style="display:none;width:100%;margin-top:6px">📺 Comparer avec l'original</button>
   <div id="suivi"></div>
 </div></div>
 <div id="toast"></div>
+<div id="cote" style="display:none"><div class="cote-int">
+  <button id="coteFermer" aria-label="Fermer" title="Fermer">✕</button>
+  <div class="cote-col"><b>Original</b><div id="coteOrig"></div></div>
+  <div class="cote-col"><b>Notre version</b><video id="coteNous" controls playsinline></video></div>
+</div></div>
 <script>
 var VARS={};
 const DATA = __DATA__, CONF = __CONF__;
@@ -850,7 +878,37 @@ function choisir(i){
   document.querySelectorAll("#liste .carte").forEach(c=>c.classList.toggle("choisie",+c.dataset.i===i));
   $("#choix").textContent="Sélection : "+v.titre; ["#copier","#voir","#manuel"].forEach(s=>$(s).disabled=false);
   const a=$("#apercu"); a.src=srcDe(v); a.style.display="block"; $("#suivi").textContent=""; majBoutons(); ajusterBas();
+  $("#comparer").style.display=v.source?"block":"none"; afficherQui(v);
 }
+// ------------------------------------------------ idée 5 : l'original et notre version côte à côte
+$("#comparer").onclick=()=>{
+  const v=DATA[choisie]; if(!v||!v.source)return;
+  const id=(v.source.match(/\/video\/(\d+)/)||[])[1];
+  if(!id){window.open(v.source,"_blank","noopener");return}            // lien court (vm.tiktok.com) : ouvert dans TikTok
+  $("#coteOrig").innerHTML=`<iframe src="https://www.tiktok.com/embed/v2/${id}" allow="encrypted-media; fullscreen" allowfullscreen></iframe>`;
+  $("#coteNous").src=srcDe(v); $("#cote").style.display="block"; $("#apercu").pause();
+};
+$("#coteFermer").onclick=()=>{$("#cote").style.display="none"; $("#coteOrig").innerHTML=""; $("#coteNous").pause()};
+// ------------------------------------------------ idée 6 : corriger qui parle (réplique par réplique)
+const PERSOS={presentateur:"Personnage 1",invite:"Personnage 2",envoyee:"Personnage 3",narrateur:"Voix off"};
+function afficherQui(v){
+  const b=$("#quiBloc"), l=$("#quiListe"); l.innerHTML="";
+  if(!v.reps||!v.reps.length){b.style.display="none";return}
+  b.style.display="block"; $("#quiOk").disabled=true;
+  const presents=[...new Set(v.reps.map(r=>r[0]).filter(p=>PERSOS[p]))]; if(presents.length<2) presents.push(["presentateur","invite"].find(p=>!presents.includes(p)));
+  v.reps.forEach(([p,t],k)=>{
+    const d=document.createElement("div"); d.className="qui";
+    const sel=document.createElement("select"); sel.dataset.k=k; sel.dataset.p=p;
+    presents.forEach(x=>{const o=document.createElement("option"); o.value=x; o.textContent=PERSOS[x]; if(x===p)o.selected=true; sel.appendChild(o)});
+    sel.onchange=()=>{d.classList.toggle("change",sel.value!==sel.dataset.p); $("#quiOk").disabled=!lireJeton()||!l.querySelector(".change")};
+    const sp=document.createElement("span"); sp.textContent=t; d.append(sel,sp); l.appendChild(d);
+  });
+}
+$("#quiOk").onclick=()=>{
+  const v=DATA[choisie]; const ch=[...$("#quiListe").querySelectorAll("select")].filter(s=>s.value!==s.dataset.p).map(s=>s.dataset.k+"="+s.value);
+  if(!ch.length)return;
+  lancerFlux("emission.yml",$("#quiOk"),`🗣️ ${ch.length} réplique(s) rendue(s) au bon personnage : la nouvelle version apparaîtra à côté de l'ancienne.`,{refaire:v.fichier+"|qui|"+ch.join(";")},$("#suivi"));
+};
 // ------------------------------------------------ publication en un bouton (workflow publier.yml)
 $("#publier").onclick=async()=>{
   if(choisie===null)return; const v=DATA[choisie], p=$("#publier");

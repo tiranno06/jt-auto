@@ -200,6 +200,21 @@
   durée 20-70 s) ; **profils pondérés par nos vues** (`profils_tiktok.poids_profils`) ; **heure de publication par les stats**
   (case « Heure choisie par les statistiques », PUBLI_HEURE_AUTO, `stats.meilleure_heure_publication` ; l'heure fixe reste au
   choix) ; **partage direct depuis l'appli TikTok** (site installé = cible de partage : `?partage=1` remplit le lien de l'onglet TikTok).
+- **Idées choisies par l'auteur (30 octobre 2026, 2e partie)** : **écoute gratuite** (`moteur/ecoute.py`) : Demucs (voix sans la
+  musique quand l'isolation ElevenLabs manque, DEMUCS=0), Groq (Whisper en quelques secondes, secret GROQ_API_KEY gratuit, avant le
+  Whisper de Modal et de la machine), calage de chaque mot sur la voix façon WhisperX (wav2vec2 français Apache 2.0 + alignement forcé
+  torchaudio, ALIGNEMENT=0), émotion de la voix (SpeechBrain, EMOTION_VOIX=0) et rires / cris / bruits de l'original (CLAP, seuils
+  réglés sur ESC-50, CLAP=0) -> indications de jeu sur les répliques sans indication de l'IA (`ecoute.jeu_entendu`, jamais le texte) ;
+  **Modal** (`moteur/ecoute_modal.py`, app jt-ecoute) : NeMo (qui parle quand, avant pyannote, quand une seule voix est trouvée) et
+  Florence-2 (décrit les images clés quand ni Claude ni Gemini ne peuvent les regarder ; ECOUTE_MODAL=0) ; **postures** de l'original
+  par MediaPipe (`moteur/postures.py` : bras croisés, mains sur les hanches, menton, téléphone, main sur la bouche, bras levés / ouverts,
+  doigt pointé -> geste de la réplique, POSTURES=0) ; **décors des métiers** (`moteur/decor_metiers.py` : caserne, garage, boulangerie,
+  ferme, tribunal, labo, cockpit, espace, coiffeur ; choisis par les mots ou par le métier reconnu quand rien d'autre ne dit le lieu,
+  LIEU_METIER=0) ; **véhicules des métiers** (`vehicules.py` : police, ambulance, camion de pompiers, tracteur, fusée ; dehors
+  seulement, quand on en parle ou que le métier est là, VEHICULES_METIERS=0) ; fiche d'une vidéo TikTok : **📺 Comparer avec
+  l'original** (lecteur TikTok à côté de la nôtre) et **🗣️ Corriger qui parle** (personnage de chaque réplique -> Refaire
+  « fichier|qui|0=invite;3=presentateur » : même son d'origine re-téléchargé, mêmes instants : `doublage.depuis_sketch`, mots gardés
+  dans le sketch « _mots ») ; le bouton Refaire retrouve enfin le sketch gardé (nom sans « .mp4 »).
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.

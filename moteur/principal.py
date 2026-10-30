@@ -20,15 +20,21 @@ if AUTO:                                                                  # nouv
 LOT = (os.environ.get("SERIE_LOT") or "").strip() == "1"                 # série d'un seul jet : tous les épisodes à la suite
 if LOT: os.environ["EPISODES"] = "serie"
 THEME = (os.environ.get("THEME") or "").strip()[:2000]                 # création manuelle depuis l'onglet « Manuel » de la régie
-REFAIRE = (os.environ.get("REFAIRE") or "").strip()                      # « fichier.mp4|texte|voix|decors » : bouton Refaire de la régie
+REFAIRE = (os.environ.get("REFAIRE") or "").strip()                      # « fichier.mp4|texte|voix|decors|qui » : bouton Refaire de la régie
+QUI = {}                                                                   # « Corriger qui parle » (idée 6) : n° de réplique -> personnage
 ANCIEN, SK_ANCIEN = None, None
 if REFAIRE:
     _f, _, _mode = REFAIRE.partition("|"); _mode = _mode or "texte"
+    _mode, _, _qui = _mode.partition("|")                                  # « qui|0=invite;3=presentateur »
+    for _x in _qui.split(";"):
+        _k, _, _r = _x.partition("=")
+        if _k.strip().isdigit() and _r.strip(): QUI[int(_k)] = _r.strip()
     ANCIEN = next((h for h in _hist if h.get("fichier") == _f), None)
-    _p = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "episodes", "sketchs", _f + ".json")
-    SK_ANCIEN = json.load(open(_p, encoding="utf-8")) if os.path.exists(_p) else None
+    _d = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "episodes", "sketchs")
+    _p = next((x for x in (os.path.join(_d, os.path.splitext(_f)[0] + ".json"), os.path.join(_d, _f + ".json")) if os.path.exists(x)), "")
+    SK_ANCIEN = json.load(open(_p, encoding="utf-8")) if _p else None     # (le sketch est rangé sans « .mp4 » dans son nom)
     if ANCIEN: os.environ["FORMAT"] = ANCIEN.get("format") if ANCIEN.get("format") in ("mini", "libre") else "mini"
-    if _mode in ("voix", "decors") and SK_ANCIEN is None:
+    if _mode in ("voix", "decors", "qui") and SK_ANCIEN is None:
         print("Sketch d'origine non conservé (vidéo plus ancienne) : on refait une nouvelle version du texte.", flush=True); _mode = "texte"
     REFAIRE_MODE = _mode
     if _mode == "voix": os.environ["VOIX_NOUVELLES"] = "1"              # « juste la voix » : d'autres voix de la banque que la dernière fois
@@ -229,8 +235,14 @@ def main():
     if S:                                                                  # reprise : sketch, son et format déjà prêts
         import doublage
         sk, DOUB, fmt = S["sk"], S["DOUB"], S["fmt"]
-    elif REFAIRE_MODE in ("voix", "decors"):                               # mêmes répliques : on refait seulement les voix / les décors
+    elif REFAIRE_MODE in ("voix", "decors", "qui"):                        # mêmes répliques : on refait seulement les voix / les décors
         sk = SK_ANCIEN; sk["_monte"] = True
+        for k_, r_ in QUI.items():                                         # « Corriger qui parle » : chaque réplique au bon personnage
+            if 0 <= k_ < len(sk.get("repliques") or []) and r_ in ("presentateur", "invite", "envoyee", "narrateur"): sk["repliques"][k_]["p"] = r_
+        if QUI: print(f"Corriger qui parle : {len(QUI)} réplique(s) rendue(s) au bon personnage", flush=True)
+        if sk.get("doublage") and REFAIRE_MODE == "qui":                  # son TikTok : on garde la bande son d'origine
+            import doublage
+            DOUB = list(doublage.depuis_sketch(sk)); fmt = "libre" if sk["doublage"].get("duree", 0) >= 60 else "mini"
         print(f"Refaire ({REFAIRE_MODE}) : « {sk.get('sujet')} », mêmes répliques", flush=True)
     elif tiktok:
         import doublage
