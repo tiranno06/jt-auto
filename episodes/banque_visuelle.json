@@ -30365,5 +30365,281 @@
    ]
   },
   "video": "2026-10-30_21h59_emission.mp4"
+ },
+ {
+  "date": "2026-10-30",
+  "source": "https://www.tiktok.com/@vignianimation/video/7701033955058896160",
+  "auteur": "vignianimation",
+  "visuel": {
+   "gestes": [
+    [
+     54.5,
+     0.39,
+     0.81
+    ]
+   ],
+   "duree": 60.5,
+   "nb_plans": 1,
+   "duree_plan": 60.5,
+   "coupes": [],
+   "plans": {
+    "tres_serre": 0.0,
+    "serre": 0.0,
+    "moyen": 0.248,
+    "large": 0.752
+   },
+   "camera": {
+    "fixe": 0.867,
+    "avance": 0.125,
+    "recul": 0.0,
+    "travelling": 0.0,
+    "epaule": 0.008
+   },
+   "nb_personnes": 1,
+   "personnes": [
+    {
+     "place": "gauche",
+     "presence": 0.248,
+     "habit": [
+      184,
+      160,
+      125
+     ],
+     "cheveux": [
+      55,
+      91,
+      68
+     ],
+     "sourire": 0.0,
+     "taille": 0.094,
+     "tete_penchee": 0.6,
+     "regard_cote": 1.0
+    }
+   ],
+   "visages": true,
+   "sourires": 0.0,
+   "energie": 0.174,
+   "mur": [
+    215,
+    175,
+    135
+   ],
+   "palette": [
+    [
+     217,
+     177,
+     137,
+     0.485
+    ],
+    [
+     167,
+     133,
+     105,
+     0.161
+    ],
+    [
+     55,
+     58,
+     49,
+     0.121
+    ],
+    [
+     20,
+     19,
+     20,
+     0.108
+    ],
+    [
+     128,
+     82,
+     38,
+     0.093
+    ],
+    [
+     247,
+     246,
+     244,
+     0.032
+    ]
+   ],
+   "lumiere": {
+    "luminosite": 164.8,
+    "chaleur": 57.8,
+    "saturation": 107.2
+   },
+   "moment": "soir",
+   "postures": []
+  },
+  "audio": {
+   "duree": 60.2,
+   "nb_voix": 2,
+   "voix": [
+    {
+     "hz": 195,
+     "genre": "f",
+     "part": 0.48
+    },
+    {
+     "hz": 223,
+     "genre": "f",
+     "part": 0.52
+    }
+   ],
+   "debit": 5.86,
+   "blanc_moyen": 0.47,
+   "coupes": 3,
+   "dynamique_db": 22.6,
+   "cris": 0.002,
+   "musique": 0.41,
+   "impacts": 23,
+   "impacts_10s": 3.82,
+   "graves": 0,
+   "aigus": 23,
+   "sur_vanne": 11,
+   "evenements": {},
+   "emotions": {
+    "friendly": 4,
+    "confused": 3,
+    "smug": 3,
+    "calm": 2,
+    "amused": 2,
+    "neutral": 1,
+    "confident": 1,
+    "proud": 1
+   }
+  },
+  "claude": {
+   "lieux": [
+    "rue",
+    "salon"
+   ],
+   "moment": "soir",
+   "costumes": {
+    "presentateur": {
+     "haut": "tshirt",
+     "c_haut": "jaune",
+     "motif": "uni",
+     "bas": "short",
+     "chaussures": "chaussons",
+     "chapeau": "casquette",
+     "c_chapeau": "vert",
+     "cheveux": "court",
+     "c_cheveux": "noir",
+     "details": [
+      "montre"
+     ]
+    },
+    "invite": {
+     "haut": "sweat",
+     "c_haut": "gris",
+     "motif": "uni",
+     "bas": "jogging",
+     "chaussures": "chaussons",
+     "cheveux": "court",
+     "c_cheveux": "brun",
+     "details": [
+      "tatouage"
+     ]
+    }
+   },
+   "objets": [
+    {
+     "objet": "telephone",
+     "replique": 0
+    },
+    {
+     "replique": 8,
+     "objet": "telephone"
+    },
+    {
+     "replique": 20,
+     "objet": "telephone"
+    }
+   ],
+   "gags": [
+    "Affiche: Guide pratique du parfait squatteur"
+   ],
+   "ambiances": [
+    "neon"
+   ],
+   "plans": [
+    {
+     "replique": 0,
+     "geste": "telephone",
+     "reaction": "aucune",
+     "mouvement": "fixe",
+     "plan": "large"
+    },
+    {
+     "plan": "moyen",
+     "replique": 7,
+     "mouvement": "zoom_choc",
+     "geste": "bras_ouverts",
+     "reaction": "choc"
+    },
+    {
+     "plan": "serre",
+     "mouvement": "fixe",
+     "reaction": "sceptique",
+     "geste": "mains_hanches",
+     "replique": 11
+    },
+    {
+     "reaction": "regard_camera",
+     "geste": "haussement",
+     "replique": 23,
+     "plan": "large",
+     "mouvement": "recul"
+    }
+   ]
+  },
+  "realisation": {
+   "moment": "soir",
+   "lieux": [
+    "rue",
+    "salon"
+   ],
+   "gags": [
+    "Affiche: Guide pratique du parfait squatteur"
+   ],
+   "ambiances": [
+    "neon",
+    "poussiere"
+   ],
+   "source": "auteur+image",
+   "tenues": {
+    "presentateur": "tshirt",
+    "invite": "pull"
+   },
+   "plans": [
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe"
+   ]
+  },
+  "video": "2026-10-30_22h24_emission.mp4"
  }
 ]

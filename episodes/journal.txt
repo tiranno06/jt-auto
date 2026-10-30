@@ -2,29 +2,30 @@ Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, ElevenLabs epuise — IA utilisée : mistral
 Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @motiontoonz, @same_same53, @charly.bse, @kodanimation, @vignianimation, @vincedessine
-Profil TikTok @charly.bse (poids 1.2) : 30 vidéo(s) jamais utilisée(s), meilleur potentiel 95/100
-Profil TikTok @vignianimation (poids 1.3) : 31 vidéo(s) jamais utilisée(s), meilleur potentiel 78/100
-Profil TikTok @same_same53 (poids 1.8) : 32 vidéo(s) jamais utilisée(s), meilleur potentiel 65/100
-Vidéo depuis TikTok : https://www.tiktok.com/@charly.bse/video/7695004315047562528
+Profil TikTok @vignianimation (poids 1.3) : 31 vidéo(s) jamais utilisée(s), meilleur potentiel 81/100
+Profil TikTok @same_same53 (poids 1.8) : 32 vidéo(s) jamais utilisée(s), meilleur potentiel 64/100
+Profil TikTok @yan_animation0 (poids 1.3) : 23 vidéo(s) jamais utilisée(s), meilleur potentiel 87/100
+Vidéo depuis TikTok : https://www.tiktok.com/@vignianimation/video/7701033955058896160
   son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 65.9 s, compte d'origine @charly.bse
-[ WARN:0@16.486] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  son récupéré : 60.2 s, compte d'origine @vignianimation
+[ WARN:0@19.433] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
 INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
 WARNING: Logging before InitGoogle() is written to STDERR
-W0000 00:00:1793393532.148731    4160 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
-W0000 00:00:1793393532.166068    4161 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
-  image de la vidéo : 13 plans (≈ 5.08 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 0 %, large 99 % ; caméra : fixe 91 %, epaule 8 % ; 1 personne(s) à l'écran : aucun visage repéré ; agitation 0.231 ; lumière jour ; fond [211, 202, 183]
+W0000 00:00:1793395043.723545    4214 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1793395043.745753    4214 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1793395043.774609    4215 landmark_projection_calculator.cc:81] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX.
+  image de la vidéo : 1 plans (≈ 60.5 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 24 %, large 75 % ; caméra : fixe 86 %, avance 12 %, epaule 0 % ; 1 personne(s) à l'écran : gauche (habit [184, 160, 125], cheveux [55, 91, 68], sourit 0 %) ; agitation 0.174 ; lumière soir ; fond [215, 175, 135]
   isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
-  voix isolées gratuitement (Demucs, 30 s)
+  voix isolées gratuitement (Demucs, 38 s)
   transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
   transcription Groq impossible (HTTP Error 403: Forbidden)
   Whisper indisponible (Whisper : ResourceExhaustedError Function call failed: workspace billing cycle spend limit reached) : contrôle simplifié
-[0;93m2026-10-30 20:53:00.592078376 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
-  transcription gratuite (Whisper sur la machine) : 224 mots
-Loading weights:   0%|          | 0/424 [00:00<?, ?it/s]Loading weights: 100%|██████████| 424/424 [00:00<00:00, 24509.84it/s]
-  mots recalés sur la voix (194 mots, écart moyen 116 ms, 10 s)
-Loading weights:   0%|          | 0/447 [00:00<?, ?it/s]Loading weights: 100%|██████████| 447/447 [00:00<00:00, 16110.87it/s]
-  bruits de l'original (CLAP, 7 s) : scream
+[0;93m2026-10-30 21:18:09.636750653 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+  transcription gratuite (Whisper sur la machine) : 234 mots
+Loading weights:   0%|          | 0/424 [00:00<?, ?it/s]Loading weights: 100%|██████████| 424/424 [00:00<00:00, 16062.44it/s]
+  mots recalés sur la voix (225 mots, écart moyen 77 ms, 15 s)
+Loading weights:   0%|          | 0/447 [00:00<?, ?it/s]Loading weights: 100%|██████████| 447/447 [00:00<00:00, 14728.30it/s]
+  bruits de l'original (CLAP, 8 s) : aucun
   NeMo indisponible (Lookup failed for Cls 'Nemo' from the 'jt-ecoute' app: App 'jt-ecoute' not found in environment 'main'.)
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/core/io.py:48: UserWarning: 
 torchcodec is not installed correctly so built-in audio decoding will fail. Solutions are:
@@ -35,13 +36,11 @@ Could not load this library: /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3
   warnings.warn(
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1927.)
   std = sequences.std(dim=-1, correction=1)
-  voix séparées par pyannote : 2 voix, 30 tours de parole
-Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-  voix re-séparées par leur empreinte (ECAPA) : 2 voix (netteté 0.12)
-  voix vérifiées mot par mot : 3 mot(s) remis sur la bonne voix
+  voix séparées par pyannote : 2 voix, 23 tours de parole
+  voix vérifiées mot par mot : 67 mot(s) remis sur la bonne voix
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/importlib/__init__.py:90: UserWarning: Module 'speechbrain.lobes.models.huggingface_transformers' was deprecated, redirecting to 'speechbrain.integrations.huggingface'. Please update your script.
   return _bootstrap._gcd_import(name[level:], package, level)
-Loading weights:   0%|          | 0/211 [00:00<?, ?it/s]Loading weights: 100%|██████████| 211/211 [00:00<00:00, 12344.28it/s]
+Loading weights:   0%|          | 0/211 [00:00<?, ?it/s]Loading weights: 100%|██████████| 211/211 [00:00<00:00, 14559.24it/s]
 [transformers] [1mWav2Vec2Model LOAD REPORT[0m from: facebook/wav2vec2-base
 Key                          | Status     |  | 
 -----------------------------+------------+--+-
@@ -57,44 +56,39 @@ Notes:
 - UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
 speechbrain.integrations.huggingface.huggingface - Wav2Vec2Model is frozen.
 CategoricalEncoder.expect_len was never called: assuming category count of 4 to be correct! Sanity check your encoder using `.expect_len`. Ensure that downstream code also uses the correct size. If you are sure this does not apply to you, use `.ignore_len`.
-  émotions entendues dans la voix : 0 réplique(s) (3 s)
-  22 répliques, voix : {'speaker_0': 259, 'speaker_1': 233}
-  son de la vidéo : 2 voix [259 Hz (f, 62 %), 233 Hz (f, 38 %)], 4.32 mots/s, blancs 1.02 s, 4 coupure(s) de parole, dynamique 15.0 dB, musique de fond, 18 bruitage(s) (1 graves, 17 aigus, 6 sur une fin de réplique), événements {'scream': 1}, émotions {}
-  scène reconstituée : Un jeune de 26 ans se fait interroger par un adolescent abasourdi d'apprendre comment on vivait avant l'apparition de ChatGPT, Netflix et du streaming.
-  casting : speaker_0 → Lila, speaker_1 → Kévin
-  sous-titres : 16 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
-  événements sonores : scream
-Sketch : « COUP DE VIEUX À 26 ANS », 22 répliques
-  décors nets indisponibles (ResourceExhaustedError Function call failed: workspace billing cycle spend limit reached) : décors simples
-Décors indisponibles (ResourceExhaustedError Function call failed: workspace billing cycle spend limit reached) : fonds unis.
-montage : 1 plans (0.2:large>env/coupe)
+  émotions entendues dans la voix : 0 réplique(s) (5 s)
+  26 répliques, voix : {'speaker_0': 195, 'speaker_1': 223}
+  son de la vidéo : 2 voix [195 Hz (f, 48 %), 223 Hz (f, 52 %)], 5.86 mots/s, blancs 0.47 s, 3 coupure(s) de parole, dynamique 22.6 dB, musique de fond, 23 bruitage(s) (0 graves, 23 aigus, 11 sur une fin de réplique), événements {}, émotions {}
+  scène reconstituée : Un propriétaire reçoit un appel de son locataire qui lui annonce calmement qu'il arrête de payer le loyer et devient squatteur légal.
+  casting : speaker_0 → Jojo, speaker_1 → Kévin
+  sous-titres : 15 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
+Sketch : « SQUATTEUR POLI », 26 répliques
+Lieux séparés : chaque personnage a son propre décor (appel, visio, l'un ailleurs)
+  décor 0 (lieu déjà connu) : quiet city street at dusk, parked car at the curb, sidewalk, street la
+  décor 1 (lieu déjà connu) : cozy living room, sofa, posters on the wall, coffee table, lamp, telev
+montage : 19 plans (0.7:large>pre/coupe 1.0:large>inv/coupe 2.6:large>pre/coupe 3.8:large>inv/coupe 6.7:large>pre/coupe 8.3:large>inv/coupe 9.5:large>pre/coupe 11.7:large>inv/coupe 13.5:large>pre/coupe 16.1:large>inv/coupe 19.8:large>pre/coupe 21.9:large>inv/coupe 26.2:large>pre/coupe 29.0:large>inv/coupe 32.5:large>pre/coupe 33.2:large>inv/coupe 36.8:large>pre/coupe 37.5:large>inv/coupe 40.0:large>pre/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-studio : jour, lieux ['hall'], tenues envoyee=capuche, invite=tshirt, 0 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 69.5 s, 22 répliques, 1 scène(s), personnages ['envoyee', 'invite']
-montage : 1 plans (0.2:large>env/coupe)
+objets de l'histoire : véhicule dans 1 décor(s)
+studio : soir, lieux ['rue', 'salon'], tenues presentateur=tshirt, invite=pull, 0 figurant(s), ambiances ['neon', 'poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+appel : 5 écran(s) partagé(s), 4 plan(s) d'écoute
+cartoon : durée 58.4 s, 26 répliques, 2 scène(s), personnages ['presentateur', 'invite']
+montage : 19 plans (0.7:large>pre/coupe 1.0:large>inv/coupe 2.6:large>pre/coupe 3.8:large>inv/coupe 6.7:large>pre/coupe 8.3:large>inv/coupe 9.5:large>pre/coupe 11.7:large>inv/coupe 13.5:large>pre/coupe 16.1:large>inv/coupe 19.8:large>pre/coupe 21.9:large>inv/coupe 26.2:large>pre/coupe 29.0:large>inv/coupe 32.5:large>pre/coupe 33.2:large>inv/coupe 36.8:large>pre/coupe 37.5:large>inv/coupe 40.0:large>pre/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-studio : jour, lieux ['hall'], tenues envoyee=capuche, invite=tshirt, 0 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 69.5 s, 22 répliques, 1 scène(s), personnages ['envoyee', 'invite']
-  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~1042 images)
-  morceau 3126–4168 reçu d'une machine d'aide
-  morceau 2084–3126 reçu d'une machine d'aide
-  morceau 1042–2084 reçu d'une machine d'aide
-  dessin partagé terminé en 5.0 min
+objets de l'histoire : véhicule dans 1 décor(s)
+studio : soir, lieux ['rue', 'salon'], tenues presentateur=tshirt, invite=pull, 0 figurant(s), ambiances ['neon', 'poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+appel : 5 écran(s) partagé(s), 4 plan(s) d'écoute
+cartoon : durée 58.4 s, 26 répliques, 2 scène(s), personnages ['presentateur', 'invite']
+  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~875 images)
+  morceau 1750–2626 reçu d'une machine d'aide
+  morceau 2626–3501 reçu d'une machine d'aide
+  morceau 875–1750 reçu d'une machine d'aide
+  dessin partagé terminé en 4.5 min
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury qualité (gratuit) : 8.9/10 — Humoriste 8.6/10 : 64.0 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 6.6/10 : montage trop lent : 0.1 plans toutes les 10 s (il en faudrait ~1.7); 43.8 s pas assez de plans de réaction de celui qui écoute | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.1/10 : 7.7 s sous-titres trop rapides à lire
-Corrections du jury (tour 1) : réaction « sceptique » à la réplique 15
-montage : 1 plans (0.2:large>env/coupe)
-style croquis : décors passés à l'encre et à l'aquarelle
-studio : jour, lieux ['hall'], tenues envoyee=capuche, invite=tshirt, 0 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 69.5 s, 22 répliques, 1 scène(s), personnages ['envoyee', 'invite']
-  redessin partiel : 480/4168 images à redessiner (1 passage(s)), le reste repris tel quel
-Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury qualité (ia) : 4.7/10 — Humoriste 6.0/10 : 68.9 s La chute finale manque d'un impact visuel fort avec un zoom choc sur le personnage qui réagit. | Réalisateur 5.0/10 : 18.1 s Le rythme des plans est trop lent, il manque de variété de cadrage et de plans de coupe pour dynamiser la conversation.; 46.4 s Manque de plans de réaction serrés sur l'interlocuteur pendant les explications. | Directeur artistique 4.0/10 : 0.4 s Le style visuel et les tenues s'éloignent trop de la simplicité efficace de la référence originale (sweat noir sur fond neutre).; 1.5 s Le décor de hall d'immeuble surchargé nuit à la lisibilité par rapport au salon épuré de l'original. | Ingénieur du son 3.0/10 : 68.9 s Absence totale de bruitages pour ponctuer les punchlines et renforcer l'humour. | Spectateur TikTok 5.0/10 : 0.4 s L'accroche visuelle de la première seconde est trop confuse avec le texte et les éléments de décor.; 68.9 s La fin 
-Manque par rapport à la vidéo d'origine : Le salon minimaliste avec la commode et la plante en fond de l'original est remplacé par un hall d'immeuble. ; Le style des personnages avec la grosse tête ronde unie est moins épuré que dans la référence.
-La version corrigée n'est pas meilleure : on garde la première.
+Jury qualité (ia) : 5.1/10 — Humoriste 5.0/10 : 51.5 s Chute finale plate sans accentuation comique visuelle.; 50 s Manque d'ironie marquée sur la conclusion. | Réalisateur 5.0/10 : 32.5 s Plans moyens extérieurs trop répétitifs et statiques.; 41.1 s Absence de dynamisme sur la bascule de naïveté. | Directeur artistique 6.0/10 : 0.4 s Le propriétaire dans la rue devant une voiture de police nuit à l'intimité de l'appel.; 17.9 s Posture assise du locataire un peu raide comparée au décor. | Ingénieur du son 4.0/10 : 11.7 s Aucun effet sonore pour marquer les révélations absurdes.; 44.7 s Raccrochage et chute dépourvus d'impact audio. | Spectateur TikTok 5.0/10 : 0.4 s Accroche visuelle confuse avec double texte sous le bandeau titre.; 24.1 s Passages en champ-contrechamp un peu longs au milieu.
+Manque par rapport à la vidéo d'origine : Dans l'original, le personnage est seul dans un salon luxueux et tient son téléphone, rendant la discussion plus absurde et épurée. ; Gesticulation et poses dynamiques du personnage original absentes chez notre présentateur statique dans la rue.
 fin en boucle : la dernière image se raccorde à la première (0.35 s de fondu)
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = gemini ×3, voix = tiktok, decors = dessines, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 29027, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 1}
-Quota de l'API GitHub : 4944 appels restants
-OK : sortie/2026-10-30_21h59_emission.mp4 (70 s)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = gemini ×2, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 17066, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0}
+Quota de l'API GitHub : 4967 appels restants
+OK : sortie/2026-10-30_22h24_emission.mp4 (59 s)
