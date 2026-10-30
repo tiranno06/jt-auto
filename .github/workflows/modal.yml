@@ -25,6 +25,7 @@ jobs:
       - name: Déployer et tester
         run: |
           pip install -q modal -c contraintes.txt
+          sudo apt-get install -y -q ffmpeg >/dev/null 2>&1 || true                    # essai de l'écoute (son du dialogue)
           set +e
           {
             echo "=== voix (Chatterbox) ==="; modal deploy moteur/voix_modal.py 2>&1 | tail -40; echo "code: ${PIPESTATUS[0]}"
