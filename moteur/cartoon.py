@@ -490,8 +490,8 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
                 for (x_, y_, w_, h_) in rects:
                     txt = str(gags_[k_g % len(gags_)]); k_g += 1
                     for taille in range(int(h_ * 0.42), 12, -2):           # plus grande taille qui tient dans le panneau
-                        f_ = ImageFont.truetype(FB, taille); mots = txt.split(); lignes, cur = [], ""
-                        for m_ in mots:
+                        f_ = ImageFont.truetype(FB, taille); mots_g = txt.split(); lignes, cur = [], ""
+                        for m_ in mots_g:
                             essai = (cur + " " + m_).strip()
                             if dr.textlength(essai, font=f_) <= w_ * 0.9: cur = essai
                             else: lignes.append(cur); cur = m_

@@ -3,9 +3,9 @@ name: Tests
 on:                                   # avant chaque mise à jour du robot : chaque demande de fusion et chaque envoi sur main
   push:
     branches: [main]
-    paths: ["moteur/**", "tests/**"]
+    paths: ["moteur/**", "tests/**", "contraintes.txt", "requirements.txt"]
   pull_request:
-    paths: ["moteur/**", "tests/**", ".github/workflows/**"]
+    paths: ["moteur/**", "tests/**", ".github/workflows/**", "contraintes.txt", "requirements.txt"]
   workflow_dispatch:
 
 permissions:
@@ -21,7 +21,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Bibliothèques
-        run: pip install -q -r requirements.txt
+        run: pip install -q -r requirements.txt -c contraintes.txt
       - name: "ffmpeg (miroir apt lent, repli sur la version statique)"
         timeout-minutes: 8
         run: |

@@ -29,7 +29,7 @@ jobs:
           python-version: "3.12"
       - name: Tester chaque outil
         run: |
-          pip install -q anthropic modal
+          pip install -q anthropic modal -c contraintes.txt
           python -u moteur/credits.py
       - name: Enregistrer
         run: |

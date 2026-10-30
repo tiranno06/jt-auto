@@ -41,18 +41,60 @@ def _hist():
     try: return json.load(open(h, encoding="utf-8"))
     except (OSError, ValueError): return []
 
-def decision():
-    """(go, raison) — voir decision_complete pour le type de vidéo du créneau."""
-    return decision_complete()[:2]
+EN_COURS = ("queued", "in_progress", "waiting", "pending", "requested")
 
-def decision_complete():
-    """(go, raison, type de vidéo du créneau ou None)."""
+def _api(chemin):
+    import urllib.request
+    jeton, depot = os.environ.get("GH_TOKEN") or os.environ.get("GITHUB_TOKEN"), os.environ.get("GITHUB_REPOSITORY")
+    if not jeton or not depot: return None
+    req = urllib.request.Request(f"https://api.github.com/repos/{depot}{chemin}", headers={"Authorization": f"Bearer {jeton}",
+                                 "Accept": "application/vnd.github+json", "User-Agent": "petitsdramas-robot"})
+    return json.loads(urllib.request.urlopen(req, timeout=20).read() or b"{}")
+
+_MOI = {}
+def ce_run():
+    """Notre fabrication telle que GitHub la voit (heure de CRÉATION : la même pour une relance) ; {} sans jeton (essais)."""
+    if "r" not in _MOI:
+        try: _MOI["r"] = (_api(f"/actions/runs/{os.environ['GITHUB_RUN_ID']}") or {}) if os.environ.get("GITHUB_RUN_ID") else {}
+        except Exception: _MOI["r"] = {}
+    return _MOI["r"]
+
+def _utc(iso): return datetime.datetime.strptime(iso, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=datetime.timezone.utc)
+
+def moment():
+    """L'heure qui décide du créneau : celle de la DEMANDE (création de la fabrication), pas celle du départ. Une vidéo qui a
+    attendu son tour dans la file (ou relancée par le Réveil de secours) garde son créneau au lieu d'être abandonnée."""
+    c = ce_run().get("created_at")
+    try: return _utc(c).astimezone(ZoneInfo("Europe/Paris")) if c else datetime.datetime.now(ZoneInfo("Europe/Paris"))
+    except ValueError: return datetime.datetime.now(ZoneInfo("Europe/Paris"))
+
+def deja_en_file(debut_creneau):
+    """Une fabrication du MÊME créneau (même nom : créneau sketch / créneau son TikTok) est-elle déjà en file d'attente ou en cours,
+    demandée avant la nôtre ? Alors pas de doublon (le robot se réveille toutes les 30 min tant que la vidéo n'est pas faite)."""
+    moi = ce_run()
+    if not moi.get("id"): return None
+    try: runs = (_api("/actions/workflows/emission.yml/runs?per_page=40") or {}).get("workflow_runs") or []
+    except Exception: return None
+    for r in runs:
+        if r.get("id") == moi["id"] or r.get("status") not in EN_COURS or r.get("display_title") != moi.get("display_title"): continue
+        try:
+            if debut_creneau <= _utc(r["created_at"]) < _utc(moi["created_at"]): return r
+        except (KeyError, ValueError): continue
+    return None
+
+def decision(file=True):
+    """(go, raison) — voir decision_complete pour le type de vidéo du créneau."""
+    return decision_complete(file)[:2]
+
+def decision_complete(file=True):
+    """(go, raison, type de vidéo du créneau ou None). file=False : sans chercher de doublon dans la file d'attente (nouvelle
+    vérification au départ de la fabrication, quand notre tour est venu)."""
     if os.environ.get("EVENEMENT") != "schedule": return True, "lancement manuel", None
     f_ = (os.environ.get("FREQUENCE") or "1").strip()
     try: freq = 1 if f_ == "2x" else int(f_)
     except ValueError: freq = 1
     if freq <= 0: return False, "robot en pause", None
-    maintenant = datetime.datetime.now(ZoneInfo("Europe/Paris")); jour = maintenant.date()
+    maintenant = moment(); jour = maintenant.date()
     creneaux, jours = horaires()
     if maintenant.isoweekday() not in jours: return False, "jour sans émission (réglage des jours)", None
     if jour.toordinal() % freq: return False, f"jour de repos (une émission tous les {freq} jours)", None
@@ -91,6 +133,10 @@ def decision_complete():
     except ValueError: essais_max = 3
     if rates >= essais_max:
         return False, f"créneau de {m // 60}:{m % 60:02d} : {rates} essai(s) sans sketch assez bon, limite atteinte (réglage ⚙️ Écriture)", None
+    if file:
+        debut = datetime.datetime.combine(jour, datetime.time(m // 60, m % 60), ZoneInfo("Europe/Paris")).astimezone(datetime.timezone.utc)
+        autre = deja_en_file(debut)
+        if autre: return False, f"créneau de {m // 60}:{m % 60:02d} déjà en file d'attente ({autre.get('html_url', autre.get('id'))})", None
     return True, f"créneau de {m // 60}:{m % 60:02d}" + (f", nouvel essai ({rates + 1}/{essais_max})" if rates else ""), fmt
 
 if __name__ == "__main__":

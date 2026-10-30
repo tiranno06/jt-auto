@@ -26,4 +26,4 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
-      - run: pip install -q cryptography && python moteur/alerte.py "$TITRE" "$TEXTE"
+      - run: pip install -q cryptography -c contraintes.txt && python moteur/alerte.py "$TITRE" "$TEXTE"

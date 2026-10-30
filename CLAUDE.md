@@ -154,6 +154,15 @@
   PRE_JURY=0 pour couper) ; quota de l'API GitHub surveillé (`moteur/quota.py` : barre et file ralentissent, voyant sur la barre) ;
   vidéos d'essai rangées à part (filtre « 🧪 Essais », historique "essai") et effacées au bout de 3 jours (garde → supprimer.yml ESSAIS).
   Réglages → notifications : « Activer » et « Désactiver sur cet appareil » (retire l'appareil de PUSH_ABONNEMENTS).
+- **Corrections de l'audit (25 octobre 2026)** : le créneau d'une vidéo du planning est celui de sa DEMANDE (`planning.moment` : heure de
+  création du run) : une vidéo qui a attendu son tour ou qui est relancée garde son créneau (plus d'abandon « rien à faire ») ; une
+  2e demande pour le même créneau ne part pas (`planning.deja_en_file`, nom du run « Émission du jour (créneau) » / « Créneau son
+  TikTok ») ; le Réveil de secours relance la fabrication EN ENTIER (elle attend dans la file, 340 min, plus dans la fabrication) ;
+  une vidéo supprimée pendant une fabrication ne revient plus (`fusion.fusion_historique` avec le point de départ commun) ;
+  versions des bibliothèques figées dans `contraintes.txt` (`pip … -c contraintes.txt` partout, sauf yt-dlp toujours à jour ;
+  changer un numéro = le tester d'abord) ; musiques d'ambiance en MP3 ; essai complet appel + pause + reprise dans les tests
+  (`TestVideoComplete.test_appel_pause_et_reprise`) ; aucun nom de réglage de `cartoon.rendre` réutilisé dans la fonction
+  (test `test_rendre_garde_ses_parametres`) ; site sans connexion limité par GitHub : message « suivi en pause » au lieu d'une barre figée.
 - **Bonne voix sur le bon personnage (sons TikTok)** : `locuteurs.affiner` vérifie qui parle MOT PAR MOT (empreinte vocale ECAPA
   autour de chaque mot, comparée à chaque voix, fil le plus probable façon Viterbi, 2-3 tours ; une « voix » presque muette est
   rattachée à la plus proche) puis `caler_sur_phrases` met chaque changement de personne sur la fin de phrase la plus proche

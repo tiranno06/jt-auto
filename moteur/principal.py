@@ -15,7 +15,7 @@ FILIERE = "tiktok" if (os.environ.get("FILIERE") or "").strip() == "tiktok" else
 AUTO = os.environ.get("EVENEMENT") == "schedule"                         # fabrication déclenchée par le planning (pas un bouton)
 if AUTO:                                                                  # nouvelle vérification au démarrage : évite un doublon si deux réveils se suivent
     import planning
-    _go, _raison = planning.decision()
+    _go, _raison = planning.decision(file=False)                          # (créneau de la DEMANDE : une vidéo qui a attendu son tour le garde)
     if not _go: print(f"Planning : rien à faire ({_raison})"); sys.exit(0)
 LOT = (os.environ.get("SERIE_LOT") or "").strip() == "1"                 # série d'un seul jet : tous les épisodes à la suite
 if LOT: os.environ["EPISODES"] = "serie"

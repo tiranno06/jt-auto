@@ -305,10 +305,11 @@ ACCORDS = {"joie": [(0, 4, 7), (5, 9, 12), (7, 11, 14), (0, 4, 7)], "triste": [(
            "tension": [(0, 3, 6), (1, 4, 7), (0, 3, 6), (-1, 2, 5)], "neutre": [(0, 4, 7), (-3, 0, 4), (5, 9, 12), (7, 11, 14)]}
 
 def _bibliotheque(duree, humeur, graine):
-    """Boucle de la bibliothèque générée par IA (sons/musique/<humeur>_<n>.wav, ACE-Step Apache 2.0), ou None."""
+    """Boucle de la bibliothèque générée par IA (sons/musique/<humeur>_<n>.mp3, ACE-Step Apache 2.0), ou None."""
     import glob, wave
     racine = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "sons", "musique")
-    fichiers = sorted(glob.glob(os.path.join(racine, f"{humeur}_*.wav"))) or sorted(glob.glob(os.path.join(racine, "neutre_*.wav")))
+    tous = lambda h: sorted(glob.glob(os.path.join(racine, f"{h}_*.mp3")) + glob.glob(os.path.join(racine, f"{h}_*.wav")))
+    fichiers = tous(humeur) or tous("neutre")
     if not fichiers or os.environ.get("MUSIQUE_IA", "1") == "0": return None
     try:
         import subprocess, tempfile

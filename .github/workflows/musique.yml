@@ -17,7 +17,7 @@ jobs:
           MODAL_TOKEN_ID: ${{ secrets.MODAL_TOKEN_ID }}
           MODAL_TOKEN_SECRET: ${{ secrets.MODAL_TOKEN_SECRET }}
         run: |
-          pip install -q modal
+          pip install -q modal -c contraintes.txt
           modal run moteur/musique_modal.py 2>&1 | tail -40
       - name: Enregistrer
         if: always()

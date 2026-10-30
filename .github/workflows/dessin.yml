@@ -47,7 +47,7 @@ jobs:
           fi
 
       - name: Bibliothèques Python
-        run: pip install -r requirements.txt
+        run: pip install -r requirements.txt -c contraintes.txt      # mêmes versions que la machine principale (dessin identique)
 
       - name: Dessiner le morceau
         run: python moteur/dessin_aide.py "${{ inputs.paquet }}" "${{ matrix.plage[0] }}" "${{ matrix.plage[1] }}"

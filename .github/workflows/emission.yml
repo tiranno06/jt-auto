@@ -1,5 +1,6 @@
 name: Émission du jour
-run-name: ${{ startsWith(inputs.chaine, 'suite:') && 'Reprise d''une fabrication en pause' || 'Émission du jour' }}
+# le nom dit aussi s'il s'agit d'un créneau du planning (sketch ou son TikTok) : sert à éviter deux fabrications pour le même créneau
+run-name: ${{ startsWith(inputs.chaine, 'suite:') && 'Reprise d''une fabrication en pause' || ((github.event_name == 'schedule' || inputs.auto == '1') && (inputs.filiere == 'tiktok' && 'Créneau son TikTok' || 'Émission du jour (créneau)')) || (inputs.filiere == 'tiktok' && 'Son TikTok' || 'Émission du jour') }}
 
 on:
   schedule:
@@ -70,6 +71,7 @@ jobs:
             episodes
       - id: p
         env:
+          GH_TOKEN: ${{ github.token }}                 # heure de la demande et doublons du même créneau (moteur/planning.py)
           EVENEMENT: ${{ inputs.auto == '1' && 'schedule' || github.event_name }}
           FILIERE: ${{ inputs.filiere }}
           FREQUENCE: ${{ inputs.filiere == 'tiktok' && (vars.FREQUENCE_TIKTOK || '0') || vars.FREQUENCE }}
@@ -189,6 +191,7 @@ jobs:
 
       - name: Vérifier son tour (fabrication relancée par le garde)
         timeout-minutes: 100
+        continue-on-error: true      # attente trop longue : on fabrique quand même plutôt que de perdre la vidéo
         env:
           GH_TOKEN: ${{ github.token }}
           TYPE_VIDEO: ${{ (inputs.filiere == 'tiktok' || startsWith(inputs.theme, 'TIKTOK::')) && 'tiktok' || 'sketch' }}
@@ -227,7 +230,7 @@ jobs:
           done
 
       - name: Bibliothèques Python
-        run: pip install -r requirements.txt
+        run: pip install -r requirements.txt -c contraintes.txt      # versions qui marchent (contraintes.txt)
 
       - name: Modèles de reconnaissance vocale et d'empreinte en cache (Whisper large-v3-turbo, ECAPA)
         if: startsWith(inputs.theme, 'TIKTOK::') || inputs.filiere == 'tiktok'
@@ -239,9 +242,9 @@ jobs:
       - name: Lecteur TikTok (vidéo depuis une bande son)
         if: startsWith(inputs.theme, 'TIKTOK::') || inputs.filiere == 'tiktok'
         run: |
-          pip install -q -U "yt-dlp[default,curl-cffi]" faster-whisper   # Whisper gratuit : repli si ElevenLabs et Modal manquent de crédit
-          (pip install -q torch torchaudio --index-url https://download.pytorch.org/whl/cpu && pip install -q speechbrain) || echo "empreinte vocale ECAPA indisponible : timbre MFCC"
-          if [ -n "$HF_TOKEN" ]; then pip install -q pyannote.audio || echo "pyannote indisponible : empreinte ECAPA seule"; fi   # séparation des voix (clé Hugging Face gratuite)
+          pip install -q -U "yt-dlp[default,curl-cffi]" faster-whisper -c contraintes.txt   # Whisper gratuit : repli si ElevenLabs et Modal manquent de crédit
+          (pip install -q torch torchaudio -c contraintes.txt --index-url https://download.pytorch.org/whl/cpu && pip install -q speechbrain -c contraintes.txt) || echo "empreinte vocale ECAPA indisponible : timbre MFCC"
+          if [ -n "$HF_TOKEN" ]; then pip install -q pyannote.audio -c contraintes.txt || echo "pyannote indisponible : empreinte ECAPA seule"; fi   # séparation des voix (clé Hugging Face gratuite)
 
       - name: Déployer les voix (Chatterbox), la banque de voix et les décors sur Modal
         if: env.MODAL_TOKEN_ID != ''

@@ -9,13 +9,16 @@ def git(*a, ok=False):
     if r.returncode and not ok: raise RuntimeError(f"git {' '.join(a)} : {r.stderr.decode()[:300]}")
     return r
 
-def fusion_historique(nous, eux):
+def fusion_historique(nous, eux, base=None):
+    """Historique distant (eux) + nos vidéos. base = l'historique de départ commun : une vidéo qui y était et que la version
+    distante n'a plus a été SUPPRIMÉE entre-temps (bouton Supprimer) : elle ne revient pas."""
     vus = {h.get("fichier") for h in eux}
+    supprimees = {h.get("fichier") for h in (base or []) if h.get("fichier")} - vus
     for h in eux:                                                          # même vidéo des deux côtés : on complète
         n = next((x for x in nous if x.get("fichier") and x.get("fichier") == h.get("fichier")), None)
         if n:
             for k, v in n.items(): h.setdefault(k, v)
-    return eux + [h for h in nous if h.get("fichier") not in vus]
+    return eux + [h for h in nous if h.get("fichier") not in vus and h.get("fichier") not in supprimees]
 
 def rejouer(commande, message):
     """Conflit : on repart de la version distante et on refait l'action (suppression, marquage « publiée »…)."""
@@ -40,6 +43,9 @@ def main():
         for f in fichiers:
             r = git("show", f"HEAD:{f}", ok=True); contenus[f] = r.stdout if r.returncode == 0 else None
         nous = json.loads(contenus.get("episodes/historique.json") or b"[]")
+        r_b = git("show", f"{base}:episodes/historique.json", ok=True)     # point de départ commun (vidéos supprimées entre-temps)
+        try: ancien = json.loads(r_b.stdout) if r_b.returncode == 0 else []
+        except ValueError: ancien = []
         git("reset", "-q", "--hard", distant)
         for f, c in contenus.items():
             if f == "episodes/historique.json": continue
@@ -48,7 +54,7 @@ def main():
         if "episodes/historique.json" in contenus:
             try: eux = json.load(open("episodes/historique.json", encoding="utf-8"))
             except (OSError, ValueError): eux = []
-            json.dump(fusion_historique(nous, eux)[-200:], open("episodes/historique.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+            json.dump(fusion_historique(nous, eux, ancien)[-200:], open("episodes/historique.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
         git("add", "-A", *contenus.keys(), ok=True)
         git("commit", "-q", "-m", "Émission (historique fusionné)", ok=True)
         if git("push", ok=True).returncode == 0: print("Historique fusionné et envoyé."); return 0
