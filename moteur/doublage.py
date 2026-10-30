@@ -555,4 +555,4 @@ def depuis_sketch(sk):
 
 def credit(sk):
     d = sk.get("doublage") or {}
-    return f"🎧 Son original : @{d['auteur']} — {d['source']}" if d.get("auteur") else f"🎧 Son original : {d.get('source', '')}"
+    return f"🎧 Son original : @{d['auteur']}" if d.get("auteur") else "🎧 Son original : TikTok"   # jamais de lien (choix de l'auteur)

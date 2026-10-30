@@ -206,6 +206,8 @@ if __name__ == "__main__":
         if e_.get("couverture_ms"): os.environ.setdefault("COUVERTURE_MS", str(int(e_["couverture_ms"])))
     except Exception: pass
     legende = open(legende_txt, encoding="utf-8").read().split("\n\nSources :")[0].strip()
+    try: legende = __import__("legende").completer(legende, video)        # jamais de lien ; hashtags ajoutés aux anciennes vidéos
+    except Exception as e: print(f"légende gardée telle quelle ({str(e)[:120]})")
     ok, erreur = False, None
     try:
         ok = publier(video, legende, url) is not None

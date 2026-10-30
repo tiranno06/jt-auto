@@ -495,7 +495,7 @@ def main():
     if libre:                                                              # signature de la chaîne dans les hashtags
         sk["hashtags"] = list(dict.fromkeys(["petitsdramas"] + [h for h in sk["hashtags"] if h != "petitsdramas"]))[:7]
     if num: sk["legende"] = f"Épisode {num} · {sk['serie_titre']} — {sk['legende']}"
-    legende = f"{sk['legende']}" + (f"\n\n{sk['question']}" if sk.get("question") else "") + (f"\n\n{doublage.credit(sk)}" if DOUB else "")   # crédit du son d'origine + "\n\n" + " ".join("#" + h for h in sk["hashtags"]) + "\n\nContenu généré par IA."     # outils et crédits : seulement dans l'historique, jamais dans la légende
+    legende = __import__("legende").composer(sk, doublage.credit(sk) if DOUB else "")   # texte, question, source du son SANS lien, hashtags
     open(base + ".txt", "w", encoding="utf-8").write(legende + "\n\nSources :\n" + "\n".join(sk["sources"]) + "\n")
     os.makedirs("episodes", exist_ok=True)
     json.dump(sk, open(f"episodes/{jour}.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)

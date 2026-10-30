@@ -1523,3 +1523,23 @@ class TestIdeesTiktok2(unittest.TestCase):
         self.assertIn("|qui|", src); self.assertIn("tiktok.com/embed/v2", src)
         p = open(os.path.join(ICI, "..", "moteur", "principal.py"), encoding="utf-8").read()
         self.assertIn('os.path.splitext(_f)[0] + ".json"', p)              # le sketch gardé est bien retrouvé (Refaire)
+
+
+class TestLegende(unittest.TestCase):
+    """Description TikTok : source du son sans lien, beaucoup de hashtags liés à la vidéo."""
+
+    def test_sans_lien_et_hashtags(self):
+        import legende, doublage
+        sk = {"legende": "Quand ton père voit ta note", "question": "Et vous ?", "hashtags": ["pov", "École"],
+              "repliques": [{"p": "presentateur", "t": "Ma puce, c'est quoi cette note ?"}, {"p": "invite", "t": "Bah… deux, papa."}],
+              "doublage": {"auteur": "compte", "source": "https://www.tiktok.com/@compte/video/123"}}
+        c = doublage.credit(sk); self.assertNotIn("http", c); self.assertIn("@compte", c)
+        t = legende.composer(sk, c)
+        self.assertNotIn("http", t); self.assertIn("#petitsdramas", t); self.assertIn("#famille", t); self.assertIn("#ecole", t)
+        self.assertGreaterEqual(t.count("#"), 10)
+        self.assertEqual(legende.sans_lien("Son : @a — https://vm.tiktok.com/xyz"), "Son : @a")
+
+    def test_ancienne_legende_completee(self):
+        import legende
+        t = legende.completer("Super vidéo\n\n🎧 Son original : @x — https://www.tiktok.com/@x/video/1")
+        self.assertNotIn("http", t); self.assertIn("#petitsdramas", t)
