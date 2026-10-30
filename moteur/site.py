@@ -146,7 +146,7 @@ def application(nom):
 
 # Service worker : l'appli s'ouvre même hors connexion (dernière version de la page), sans jamais mettre en cache
 # les vidéos (trop lourdes) ni les appels à GitHub.
-SW = r"""const CACHE = "regie-v26";
+SW = r"""const CACHE = "regie-v27";
 const COQUILLE = ["./", "manifest.webmanifest", "logo-192.png", "logo-512.png", "poppins-500.ttf", "poppins-700.ttf"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(COQUILLE))); self.skipWaiting(); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(k => Promise.all(k.filter(x => x !== CACHE).map(x => caches.delete(x))))); self.clients.claim(); });
@@ -360,6 +360,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
   <section class="panneau"><h2>⏳ Fabrication en cours</h2><div class="progressions"><p class="note">Aucune fabrication en cours.</p></div></section>
   <section class="panneau"><h2>🔗 Une vidéo sur un son TikTok</h2>
     <label>Lien de la vidéo TikTok<input id="tkLien" type="url" inputmode="url" placeholder="https://www.tiktok.com/@compte/video/…"></label>
+    <button class="second" id="tkColler" style="width:100%;margin:6px 0">📋 Coller le lien TikTok (copié dans l'appli TikTok)</button>
     <p class="note">3 min au plus. Nos personnages rejouent le son ; le compte d'origine est crédité. ⚠️ Sans accord du créateur, TikTok peut couper le son : privilégiez vos vidéos ou des sons libres.</p>
     <button class="gros lancer" id="tkCreer">🎬 Fabriquer sur ce son</button>
     <div id="tkSuivi" class="note"></div></section>
@@ -1366,6 +1367,14 @@ $("#installer").onclick=async()=>{if(!invite)return;invite.prompt();await invite
 window.addEventListener("appinstalled",()=>{$("#installer").style.display="none";toast("Application installée ✓")});
 rendre(); rendreRecents(); rendreOutils(); afficherAuto(); lireAuto(); majBoutons(); majBandeau(); verifierEnCours(); majPointTk(); $("#barre").style.display="none";
 try{appliquerOnglets(localStorage.getItem("onglets_masques")||"")}catch(e){}
+$("#tkColler").onclick=async()=>{                                          // dans TikTok : « Copier le lien », puis ce bouton
+  try{
+    const t=await navigator.clipboard.readText();
+    const m=(t||"").match(/https?:\/\/([a-z0-9-]+\.)*tiktok\.com\/\S+/i);
+    if(!m){toast("Aucun lien TikTok copié. Dans TikTok : Partager → Copier le lien, puis réessayez.");return}
+    $("#tkLien").value=m[0]; $("#tkCreer").classList.add("pulse"); toast("Lien collé ✔ Touchez « Fabriquer sur ce son ».");
+  }catch(e){toast("Le téléphone refuse l'accès au presse-papiers : appuyez longuement dans la case du lien puis « Coller ».")}
+};
 (function partageRecu(){                                                   // lien partagé depuis l'appli TikTok (Web Share Target)
   const q=new URLSearchParams(location.search); if(!q.get("partage")) return;
   const m=((q.get("lien")||"")+" "+(q.get("texte")||"")+" "+(q.get("titre")||"")).match(/https?:\/\/([a-z0-9-]+\.)*tiktok\.com\/\S+/i);
