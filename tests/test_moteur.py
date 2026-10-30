@@ -1430,3 +1430,43 @@ class TestProfilsTiktok(unittest.TestCase):
             for k, v in anc.items():
                 if v is None: os.environ.pop(k, None)
                 else: os.environ[k] = v
+
+
+class TestIdeesTiktok(unittest.TestCase):
+    """Idées 1, 3, 4, 11, 20, 21, 32 de la liste choisie par l'auteur."""
+
+    def test_potentiel_et_sons_qui_montent(self):
+        import profils_tiktok as P
+        t = 1_000_000_000
+        fort = {"vues": 2_000_000, "date": t - 86400, "duree": 35}
+        vieux = {"vues": 2_000_000, "date": t - 400 * 86400, "duree": 35}
+        long_ = {"vues": 2_000_000, "date": t - 86400, "duree": 140}
+        self.assertGreater(P.potentiel(fort, t), P.potentiel(vieux, t))
+        self.assertGreater(P.potentiel(fort, t), P.potentiel(long_, t))
+        self.assertTrue(0 <= P.potentiel({}, t) <= 100)
+
+    def test_poids_des_profils(self):
+        import profils_tiktok as P
+        stats = {"videos": [{"vues": 9000, "description": "son de @star"}, {"vues": 100, "description": "son de @flop"},
+                            {"vues": 500, "description": "rien"}]}
+        w = P.poids_profils(["star", "flop", "inconnu"], stats)
+        self.assertGreater(w["star"], 1); self.assertLess(w["flop"], 1); self.assertEqual(w["inconnu"], 1.0)
+
+    def test_heure_auto_garde_l_heure_fixe(self):
+        import datetime, publication_auto as PA
+        from zoneinfo import ZoneInfo
+        m = datetime.datetime(2026, 10, 30, 6, 0, tzinfo=ZoneInfo("Europe/Paris"))
+        hist = [{"fichier": "a.mp4", "publie": None}]
+        r = {"PUBLI_AUTO": "1", "PUBLI_HEURE": "05:30", "PUBLI_FILE": "a.mp4", "PUBLI_HEURE_AUTO": "0"}
+        self.assertEqual(PA.decision(m, r, hist, False)[0], "a.mp4")         # heure fixe choisie par l'auteur
+
+    def test_fin_en_boucle(self):
+        import subprocess, boucle
+        d = tempfile.mkdtemp(); f = os.path.join(d, "v.mp4")
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "lavfi", "-i", "testsrc=s=160x284:r=24:d=4", "-f", "lavfi",
+                        "-i", "sine=d=4", "-shortest", "-pix_fmt", "yuv420p", f], check=True)
+        self.assertGreaterEqual(boucle.boucler(f), 3.9)
+
+    def test_partage_depuis_tiktok(self):
+        src = open(os.path.join(ICI, "..", "moteur", "site.py"), encoding="utf-8").read()
+        self.assertIn("share_target", src); self.assertIn("partage=1", src)

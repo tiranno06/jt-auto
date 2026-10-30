@@ -73,7 +73,8 @@ def _ytdlp(pseudo, n=40):
         for e in d.get("entries") or []:
             vid = str(e.get("id") or ""); lien = e.get("url") or e.get("webpage_url") or ""
             if not vid and lien: vid = (re.search(r"/video/(\d+)", lien) or [None, ""])[1]
-            if vid: out.append(dict(id=vid, url=f"https://www.tiktok.com/@{pseudo}/video/{vid}", duree=e.get("duration")))
+            if vid: out.append(dict(id=vid, url=f"https://www.tiktok.com/@{pseudo}/video/{vid}", duree=e.get("duration"),
+                                    vues=e.get("view_count"), date=e.get("timestamp") or e.get("release_timestamp")))
         if out: return out
     return []
 
@@ -83,8 +84,8 @@ def _tikwm(pseudo, n=35):
     ua = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36"}
     req = urllib.request.Request("https://www.tikwm.com/api/user/posts?" + urllib.parse.urlencode({"unique_id": pseudo, "count": n, "cursor": 0}), headers=ua)
     d = (json.loads(reseau.ouvrir(req, timeout=60)) or {}).get("data") or {}
-    return [dict(id=str(v.get("video_id")), url=f"https://www.tiktok.com/@{pseudo}/video/{v.get('video_id')}", duree=v.get("duration"))
-            for v in d.get("videos") or [] if v.get("video_id")]
+    return [dict(id=str(v.get("video_id")), url=f"https://www.tiktok.com/@{pseudo}/video/{v.get('video_id')}", duree=v.get("duration"),
+                 vues=v.get("play_count"), date=v.get("create_time")) for v in d.get("videos") or [] if v.get("video_id")]
 
 
 def videos(pseudo, journal=print):
@@ -101,15 +102,54 @@ def videos(pseudo, journal=print):
     return []
 
 
+def vitesse(v, maintenant=None):
+    """Sons qui montent (idée 4) : vues par jour depuis la mise en ligne (une vidéo récente qui démarre fort passe devant)."""
+    import time
+    if not v.get("vues"): return 0.0
+    age = max(0.5, ((maintenant or time.time()) - float(v.get("date") or 0)) / 86400) if v.get("date") else 30.0
+    return float(v["vues"]) / age ** 0.8
+
+
+def potentiel(v, maintenant=None):
+    """Note de potentiel d'un son AVANT de le fabriquer (idée 3), de 0 à 100 : vitesse des vues (sons qui montent) et durée
+    idéale pour TikTok (20 à 70 s). Après l'écoute, principal.py ajoute ce que dit le son (voix bien différentes, échanges)."""
+    import math
+    d = float(v.get("duree") or 40)
+    duree = 1.0 if 20 <= d <= 70 else 0.6 if 12 <= d <= 100 else 0.3
+    vi = vitesse(v, maintenant); el = min(1.0, math.log10(1 + vi) / 5) if vi else 0.35   # 100 000 vues/jour = au maximum
+    return round(100 * (0.65 * el + 0.35 * duree))
+
+
+def poids_profils(profils, stats=None):
+    """Profils classés par vues (idée 21) : un profil dont les vidéos reprises font des vues chez nous est tiré plus souvent.
+    Poids = moyenne de nos vues sur ses sons / moyenne générale (borné 0,4 à 3) ; profil jamais repris = 1."""
+    if stats is None:
+        try: stats = json.load(open(os.path.join(RACINE, "episodes", "stats.json"), encoding="utf-8"))
+        except (OSError, ValueError): stats = {}
+    vids = [v for v in stats.get("videos") or [] if v.get("vues") is not None]
+    if not vids: return {p: 1.0 for p in profils}
+    moy = sum(v["vues"] for v in vids) / len(vids) or 1
+    out = {}
+    for p in profils:
+        m = [v["vues"] for v in vids if re.search(r"@" + re.escape(p) + r"\b", str(v.get("description") or ""), re.I)]
+        out[p] = max(0.4, min(3.0, (sum(m) / len(m)) / moy)) if m else 1.0
+    return out
+
+
 def choisir(historique, journal=print, graine=None, essais=4):
-    """Liens de vidéos à essayer (au hasard, jamais déjà utilisées, durée raisonnable), dans l'ordre : on prend la première
-    dont le son passe. Liste vide si aucun profil n'est réglé ou ne répond."""
+    """Liens de vidéos à essayer (jamais déjà utilisées, durée raisonnable), les plus prometteuses d'abord : profils tirés au
+    hasard mais pondérés par les vues qu'ils nous rapportent (idée 21), et dans chaque profil les sons qui montent et à bon
+    potentiel d'abord (idées 3 et 4), avec un peu de hasard pour varier. On prend la première dont le son passe."""
     profils = liste()
     if not profils: return []
-    rng = random.Random(graine); rng.shuffle(profils); deja = deja_utilisees(historique); out = []
+    rng = random.Random(graine); deja = deja_utilisees(historique); out = []
+    pw = poids_profils(profils)
+    profils = sorted(profils, key=lambda p: -pw[p] * rng.random() ** 0.5)  # tirage pondéré (un bon profil sort plus souvent)
     for p in profils[:6]:
         vs = [v for v in videos(p, journal) if v["id"] not in deja and (v.get("duree") is None or DUREE_MIN <= float(v["duree"]) <= DUREE_MAX)]
-        journal(f"Profil TikTok @{p} : {len(vs)} vidéo(s) jamais utilisée(s)")
-        rng.shuffle(vs); out += [v["url"] for v in vs[:max(2, essais // len(profils))]]
+        for v in vs: v["potentiel"] = potentiel(v)
+        vs.sort(key=lambda v: -(v["potentiel"] + rng.uniform(0, 25)))
+        journal(f"Profil TikTok @{p} (poids {pw[p]:.1f}) : {len(vs)} vidéo(s) jamais utilisée(s)" + (f", meilleur potentiel {vs[0]['potentiel']}/100" if vs else ""))
+        out += [v["url"] for v in vs[:max(2, essais // len(profils))]]
         if len(out) >= essais: break
     return out[:essais]

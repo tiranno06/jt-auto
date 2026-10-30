@@ -54,7 +54,8 @@ SSAA = (os.environ.get("SSAA") or "1") != "0"                             # pers
 APPEL_ON = (os.environ.get("APPEL_PARTAGE") or "1") != "0"               # appels : écran partagé, plans d'écoute, voix au téléphone
 REMB_ON = (os.environ.get("REMBOBINAGE") or "1") != "0"                  # « revenons 5 minutes avant » : rembobinage façon cassette
 OMBRES = (os.environ.get("OMBRES") or "1") != "0"                         # ombres portées des personnages (sol, mur le soir)
-DECOR_VIVANT = (os.environ.get("DECOR_VIVANT") or "1") != "0"             # la rue vit : voitures qui passent au loin
+DECOR_VIVANT = (os.environ.get("DECOR_VIVANT") or "1") != "0"             # le décor vit (horloge, tasse, chat…) ; voitures qui passent : VOITURE_PASSE=1
+CHUTE_KO = os.environ.get("CHUTE_KO", "0") == "1"                          # choix de l'auteur : plus de personnage qui tombe à la renverse à la fin
 CEL = (os.environ.get("CEL") or ("0" if (os.environ.get("STYLE_PERSO") or "toon").lower() == "toon" else "1")) != "0"   # ombrage en aplat + contour épais
 # (coupé par défaut avec le nouveau style « toon » : trait fin et ombres déjà dessinés comme la référence)
 LUMIERES_VIVES = (os.environ.get("LUMIERES_VIVES") or "1") != "0"
@@ -532,7 +533,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
                     VOIT[sc_] = (im_, X0, Y0)
             if VOIT: print(f"objets de l'histoire : voiture garée dans {len(VOIT)} décor(s)", flush=True)
             for sc_ in places:                                             # décor vivant : une voiture passe au loin de temps en temps
-                if B["lieux"][min(sc_, len(B["lieux"]) - 1)] == "rue" and DECOR_VIVANT:
+                if B["lieux"][min(sc_, len(B["lieux"]) - 1)] == "rue" and DECOR_VIVANT and os.environ.get("VOITURE_PASSE", "0") == "1":   # choix de l'auteur : coupée
                     col_ = [(200, 50, 50), (60, 100, 190), (240, 200, 60), (235, 235, 238)][sc_ % 4]
                     PASSE[sc_] = (VH.voiture(col_, 1, 340), VH.voiture(col_, -1, 340), VH.sol(340))
         except Exception as e: print(f"voiture impossible : {e}", flush=True)
@@ -1124,7 +1125,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
         """Sur la chute finale, celui qui l'encaisse s'effondre, KO : il s'affaisse en penchant vers l'extérieur, étoiles autour
         de la tête (renvoie (angle, avancement 0→1) ; il reste dans le cadre et ne cache jamais les autres)."""
         z = ph[-1]
-        if scene != z["scene"] or role == z["p"] or tm < z["fin"] + 0.25: return 0.0, 0.0
+        if not CHUTE_KO or scene != z["scene"] or role == z["p"] or tm < z["fin"] + 0.25: return 0.0, 0.0
         victime = next((r2 for r2 in places[scene] if r2 != z["p"]), None)
         if role != victime: return 0.0, 0.0
         u = (tm - z["fin"] - 0.25) / 0.3; sens = -1 if position(scene, role)[0] < W / 2 else 1
@@ -1636,7 +1637,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
         d_m = len(SM.son("montee")) / SRM
         ajoute("montee", ph[-1]["deb"] - d_m, 0.5)                        # tension juste avant la chute finale
         ajoute("boom_fin", ph[-1]["fin"] + 0.02, 1.0)                     # gros impact sur la chute finale
-        if len(places[ph[-1]["scene"]]) > 1: ajoute("boom_leger", ph[-1]["fin"] + 0.57, 0.5)   # celui qui encaisse tombe à la renverse
+        if CHUTE_KO and len(places[ph[-1]["scene"]]) > 1: ajoute("boom_leger", ph[-1]["fin"] + 0.57, 0.5)   # celui qui encaisse tombe à la renverse
     amb = np.zeros((n, 2))                                                 # son « cinéma » : ambiance du lieu, pas, whoosh, musique
     def ajoute_x(x, t_, g, piste):
         s0 = int(max(0, t_) * SRM); e = min(n, s0 + len(x))

@@ -90,6 +90,7 @@ def construire():
     conf = {"depot": os.environ.get("GITHUB_REPOSITORY", ""), "branche": os.environ.get("GITHUB_REF_NAME") or "main"}
     try:
         import profils_tiktok; conf["profils_connus"] = profils_tiktok.connus()   # liste de départ de l'onglet TikTok
+        conf["heure_stats"] = __import__("stats").meilleure_heure_publication()   # heure de publication conseillée par les vues
         conf["abos_morts"] = sorted(__import__("alerte").morts())         # appareils qui ne reçoivent plus les alertes (empreintes)
     except Exception: conf["profils_connus"] = []
     try: st = json.load(open(os.path.join(RACINE, "episodes", "stats.json"), encoding="utf-8"))
@@ -126,6 +127,8 @@ def application(nom):
     manifeste = {"name": f"{nom} — régie", "short_name": nom, "lang": "fr", "start_url": "./", "scope": "./", "id": "./?petits-dramas",
                  "display": "standalone", "orientation": "portrait", "background_color": "#0e0f17", "theme_color": "#ffd028",
                  "description": "Vérifier et publier les vidéos Petits.Dramas sur TikTok.",
+                 # idée 1 : dans l'appli TikTok, « Partager » → Petits.Dramas : le lien arrive dans l'onglet TikTok, prêt à fabriquer
+                 "share_target": {"action": "./?partage=1", "method": "GET", "params": {"title": "titre", "text": "texte", "url": "lien"}},
                  "icons": [{"src": f"logo-{t}.png", "sizes": f"{t}x{t}", "type": "image/png", "purpose": "any"} for t in (192, 512)] +
                           [{"src": f"logo-{t}-maskable.png", "sizes": f"{t}x{t}", "type": "image/png", "purpose": "maskable"} for t in (192, 512)]}
     json.dump(manifeste, open(os.path.join(SITE, "manifest.webmanifest"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
@@ -133,7 +136,7 @@ def application(nom):
 
 # Service worker : l'appli s'ouvre même hors connexion (dernière version de la page), sans jamais mettre en cache
 # les vidéos (trop lourdes) ni les appels à GitHub.
-SW = r"""const CACHE = "regie-v24";
+SW = r"""const CACHE = "regie-v25";
 const COQUILLE = ["./", "manifest.webmanifest", "logo-192.png", "logo-512.png", "poppins-500.ttf", "poppins-700.ttf"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(COQUILLE))); self.skipWaiting(); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(k => Promise.all(k.filter(x => x !== CACHE).map(x => caches.delete(x))))); self.clients.claim(); });
@@ -196,6 +199,7 @@ input,textarea{flex:1;min-width:0;font:inherit;font-size:15px;padding:11px;borde
 .croix:hover{background:#d33}.carte.supprimee{opacity:.35;pointer-events:none}
 .apub{margin-top:8px;display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;border:2px solid var(--ligne);background:transparent;color:inherit;font-size:14px;font-weight:700;cursor:pointer;max-width:100%}
 .apub.on{background:var(--jaune);border-color:var(--jaune);color:#111}
+.pulse{animation:pulse 1.2s ease-in-out 4}@keyframes pulse{50%{transform:scale(1.04);box-shadow:0 0 0 6px rgba(255,208,40,.35)}}
 label.coche{display:flex;align-items:center;gap:10px;padding:8px 0;font-size:16px}label.coche input{width:22px;height:22px;flex:none;margin:0}
 .carte img{width:84px;height:150px;object-fit:cover;border-radius:10px;flex:none;background:#000}
 .carte.petite{padding:8px;margin:8px 0}.carte.petite img{width:54px;height:96px;border-radius:8px}
@@ -362,6 +366,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
   <section class="panneau" id="pubAuto"><h2>📤 Publication automatique</h2>
     <p class="note">Cochez « À publier » sur les vidéos que vous avez vérifiées : chaque jour à l'heure choisie, le robot publie sur TikTok la plus ancienne vidéo cochée pas encore publiée (dans l'ordre où vous les avez cochées).</p>
     <div class="auto"><div class="txt"><b>Activée</b><small>Une vidéo cochée publiée par jour, même appli fermée.</small></div><button class="inter" data-var="PUBLI_AUTO" data-def="0" data-bascule="1"></button></div>
+    <div class="auto"><div class="txt"><b>Heure choisie par les statistiques</b><small>L'heure où vos vidéos font le plus de vues (sinon l'heure fixe ci-dessous).</small></div><button class="inter" data-var="PUBLI_HEURE_AUTO" data-def="0" data-bascule="1"></button></div>
     <label>Heure de publication (heure de Paris)<div class="jeton"><input data-var="PUBLI_HEURE" data-def="18:00" data-texte="1" maxlength="5" type="time" placeholder="18:00"><button class="second" data-enr="PUBLI_HEURE" style="flex:none;padding:10px 14px">OK</button></div></label>
     <p class="note" id="pubResume"></p></section>
   <section class="panneau"><h2>🎬 Mes vidéos TikTok</h2><div id="listeTk"></div></section>
@@ -779,7 +784,7 @@ async function basculerPubli(nom,b){
 function resumePubli(){
   const z=$("#pubResume"); if(!z) return;
   if(!lireJeton()){z.textContent="Connectez la régie pour choisir les vidéos à publier.";return}
-  const a=attentePubli(filePubli()), on=String((VARS&&VARS.PUBLI_AUTO)||"0")==="1", h=(VARS&&VARS.PUBLI_HEURE)||"18:00";
+  const a=attentePubli(filePubli()), on=String((VARS&&VARS.PUBLI_AUTO)||"0")==="1", auto=String((VARS&&VARS.PUBLI_HEURE_AUTO)||"0")==="1", h=auto?(String(CONF.heure_stats??18).padStart(2,"0")+":00"):((VARS&&VARS.PUBLI_HEURE)||"18:00");
   if(!a.length){z.textContent=on?"Aucune vidéo cochée en attente : rien ne sera publié tant que vous n'en cochez pas.":"Aucune vidéo cochée.";return}
   const v=DATA.find(x=>x.fichier===a[0]), [hh,mm]=h.split(":").map(Number), d=new Date(); const jour=(d.getHours()*60+d.getMinutes()<hh*60+mm)?"aujourd'hui":"demain";
   z.textContent=on?`${a.length} vidéo${a.length>1?"s":""} en attente. Prochaine : « ${v?v.titre:a[0]} », ${jour} à ${h} (une par jour).`
@@ -1303,6 +1308,15 @@ $("#installer").onclick=async()=>{if(!invite)return;invite.prompt();await invite
 window.addEventListener("appinstalled",()=>{$("#installer").style.display="none";toast("Application installée ✓")});
 rendre(); rendreRecents(); rendreOutils(); afficherAuto(); lireAuto(); majBoutons(); majBandeau(); verifierEnCours(); majPointTk(); $("#barre").style.display="none";
 try{appliquerOnglets(localStorage.getItem("onglets_masques")||"")}catch(e){}
+(function partageRecu(){                                                   // lien partagé depuis l'appli TikTok (Web Share Target)
+  const q=new URLSearchParams(location.search); if(!q.get("partage")) return;
+  const m=((q.get("lien")||"")+" "+(q.get("texte")||"")+" "+(q.get("titre")||"")).match(/https?:\/\/([a-z0-9-]+\.)*tiktok\.com\/\S+/i);
+  history.replaceState(null,"",location.pathname);
+  allerOnglet("tiktok");
+  if(!m){toast("Le partage ne contenait pas de lien TikTok");return}
+  $("#tkLien").value=m[0].replace(/[).,;]+$/,""); $("#tkLien").scrollIntoView({behavior:"smooth",block:"center"});
+  $("#tkCreer").classList.add("pulse"); toast("Lien TikTok reçu ✓ Touchez « Fabriquer sur ce son »");
+})();
 if(lireJeton()) chargerReglages();                                        // onglets cachés et vidéos cochées : réglages de tous les appareils
 if(!CONF.depot) $("#autoAide").textContent="Site de test : boutons du robot inactifs.";
 </script></body></html>

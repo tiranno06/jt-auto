@@ -34,6 +34,9 @@ def decision(maintenant, reglages, historique, deja_aujourdhui):
     """(fichier à publier ou None, « quand » pour Buffer (heure de Paris, ISO) ou "" = tout de suite, raison)."""
     if str(reglages.get("PUBLI_AUTO") or "0").strip() != "1": return None, "", "publication automatique coupée"
     h, m = heure(reglages.get("PUBLI_HEURE"))
+    if str(reglages.get("PUBLI_HEURE_AUTO") or "0").strip() == "1":       # idée 20 : l'heure où nos vidéos font le plus de vues
+        try: h, m = __import__("stats").meilleure_heure_publication(h), 0
+        except Exception: pass
     cible = maintenant.replace(hour=h, minute=m, second=0, microsecond=0)
     if maintenant < cible - datetime.timedelta(minutes=AVANCE): return None, "", f"pas encore l'heure ({h:02d}:{m:02d})"
     if deja_aujourdhui: return None, "", "vidéo du jour déjà envoyée"
@@ -61,7 +64,7 @@ def deja_aujourdhui(maintenant):
 
 def main():
     maintenant = datetime.datetime.now(PARIS)
-    reglages = {k: os.environ.get(k, "") for k in ("PUBLI_AUTO", "PUBLI_HEURE", "PUBLI_FILE")}
+    reglages = {k: os.environ.get(k, "") for k in ("PUBLI_AUTO", "PUBLI_HEURE", "PUBLI_FILE", "PUBLI_HEURE_AUTO")}
     if reglages["PUBLI_AUTO"].strip() != "1": print("Publication automatique coupée."); return
     try: hist = json.load(open(os.path.join(RACINE, "episodes", "historique.json"), encoding="utf-8"))
     except (OSError, ValueError): hist = []

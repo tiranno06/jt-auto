@@ -75,6 +75,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           PUBLI_AUTO: ${{ vars.PUBLI_AUTO }}
           PUBLI_HEURE: ${{ vars.PUBLI_HEURE }}
+          PUBLI_HEURE_AUTO: ${{ vars.PUBLI_HEURE_AUTO }}
           PUBLI_FILE: ${{ vars.PUBLI_FILE }}
         run: python3 moteur/publication_auto.py || true
 
