@@ -188,7 +188,8 @@ MOTS = [("camion_pompier", r"camion (de|des) pompiers?|grande [ée]chelle|camion
         ("ambulance", r"ambulance|\bsamu\b|ambulanci"),
         ("tracteur", r"tracteurs?"),
         ("fusee", r"fus[ée]es?\b")]
-METIER_VEHICULE = {"pompier": "camion_pompier", "policier": "police", "agriculteur": "tracteur", "astronaute": "fusee"}
+METIER_VEHICULE = {"pompier": "camion_pompier", "policier": "police", "agriculteur": "tracteur", "astronaute": "fusee", "ambulancier": "ambulance",
+                   "gendarme": "police"}
 
 
 def vehicule_de(texte, metiers=(), lieu="rue"):

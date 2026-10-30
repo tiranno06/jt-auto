@@ -16,7 +16,7 @@ TRAIT = (25, 25, 30)
 CATALOGUE = {
     "pompier": dict(mots=r"pompiers?|sapeurs?[- ]pompiers?|soldat du feu", outil="lance",
                     costume=dict(haut="veste_pompier", c_haut=(200, 70, 40), bas="pantalon", c_bas=(200, 70, 40), chaussures="bottes", c_chaussures=(30, 30, 32), chapeau="casque_pompier", c_chapeau=(205, 35, 35))),
-    "policier": dict(mots=r"polici[eè]re?s?|flics?|gendarmes?|keufs?|agent de police|lieutenant|commissaire|brigadier|monsieur l'agent", outil="talkie",
+    "policier": dict(mots=r"polici[eè]re?s?|flics?|keufs?|agent de police|lieutenant|commissaire|brigadier|monsieur l'agent", outil="talkie",
                      costume=dict(haut="uniforme", c_haut=(40, 55, 100), bas="pantalon", c_bas=(40, 55, 100), chaussures="ville", c_chaussures=(20, 20, 20), chapeau="casquette_officier", c_chapeau=(35, 50, 95), details=("badge",))),
     "medecin": dict(mots=r"m[ée]decins?|docteurs?|toubibs?|doc\b|g[ée]n[ée]raliste", outil="porte_bloc",
                     costume=dict(haut="blouse", c_haut=(250, 250, 250), c_dessous=(150, 190, 225), bas="pantalon", c_bas=(80, 95, 120), chaussures="ville", c_chaussures=(240, 240, 240), details=("stethoscope", "badge"))),
@@ -30,7 +30,7 @@ CATALOGUE = {
                         costume=dict(haut="blouse", c_haut=(250, 250, 250), c_dessous=(110, 170, 120), bas="pantalon", c_bas=(70, 90, 110), chaussures="ville", details=("stethoscope",))),
     "enseignant": dict(mots=r"profs?|professeure?s?|ma[iî]tresse|instit(?:utrice|uteur)?|enseignante?s?|directeur d'[ée]cole|directrice", outil="livre",
                        costume=dict(haut="gilet", c_haut=(150, 110, 80), c_dessous=(240, 240, 235), bas="pantalon", c_bas=(110, 100, 90), chaussures="ville", c_chaussures=(80, 50, 30), details=("lunettes_vue",))),
-    "cuisinier": dict(mots=r"chef cuisinier|cuisini[eè]re?s?|top chef|cuistots?|p[âa]tissi[eè]re?", outil="poele",
+    "cuisinier": dict(mots=r"chef cuisinier|cuisini[eè]re?s?|top chef|cuistots?", outil="poele",
                       costume=dict(haut="veste_chef", c_haut=(250, 250, 250), bas="pantalon", c_bas=(50, 50, 55), chaussures="ville", c_chaussures=(30, 30, 30), chapeau="toque")),
     "boulanger": dict(mots=r"boulang(?:er|[eè]re|erie)s?", outil="baguettes",
                       costume=dict(haut="tablier", c_haut=(250, 250, 250), c_tablier=(235, 215, 175), bas="pantalon", c_bas=(240, 240, 235), chaussures="ville", chapeau="calot")),
@@ -38,7 +38,7 @@ CATALOGUE = {
                     costume=dict(haut="gilet", c_haut=(30, 30, 36), c_dessous=(250, 250, 250), bas="pantalon", c_bas=(30, 30, 36), chaussures="ville", c_chaussures=(20, 20, 20), details=("noeud_pap",))),
     "ingenieur": dict(mots=r"ing[ée]nieure?s?|architectes?|chef de chantier", outil="plans",
                       costume=dict(haut="chemise", c_haut=(170, 200, 230), bas="pantalon", c_bas=(60, 70, 90), chaussures="ville", chapeau="casque_chantier")),
-    "ouvrier": dict(mots=r"ma[çc]ons?|ouvri[eè]re?s? du b[âa]timent|chantier|btp", outil="marteau",
+    "ouvrier": dict(mots=r"ouvri[eè]re?s? du b[âa]timent|chantier|btp", outil="marteau",
                     costume=dict(haut="tshirt", c_haut=(240, 140, 40), bas="jean", c_bas=(70, 90, 120), chaussures="bottes", c_chaussures=(90, 60, 40), chapeau="casque_chantier")),
     "electricien": dict(mots=r"[ée]lectriciens?", outil="tournevis",
                         costume=dict(haut="salopette", c_haut=(80, 120, 170), c_salopette=(50, 70, 110), bas="pantalon", c_bas=(50, 70, 110), chaussures="bottes", c_chaussures=(60, 45, 35), chapeau="casque_chantier")),
@@ -52,7 +52,7 @@ CATALOGUE = {
                       costume=dict(haut="salopette", c_haut=(240, 220, 170), c_salopette=(70, 130, 80), bas="pantalon", c_bas=(70, 130, 80), chaussures="bottes", c_chaussures=(60, 45, 35), chapeau="chapeau_paille")),
     "artiste": dict(mots=r"peintres?|artistes?|dessinat(?:eur|rice)", outil="palette",
                     costume=dict(haut="tablier", c_haut=(70, 110, 170), c_tablier=(240, 235, 220), taches_peinture=True, bas="pantalon", c_bas=(60, 60, 70), chaussures="ville", chapeau="beret", c_chapeau=(40, 60, 140))),
-    "musicien": dict(mots=r"musiciens?|guitaristes?|chanteu(?:r|se)s?|rappeu(?:r|se)s?|dj\b", outil="guitare",
+    "musicien": dict(mots=r"musiciens?|guitaristes?|rappeu(?:r|se)s?", outil="guitare",
                      costume=dict(haut="tshirt", c_haut=(60, 60, 70), bas="jean", c_bas=(50, 60, 90), chaussures="baskets", details=("chaine",))),
     "pilote": dict(mots=r"pilotes?|commandant de bord", outil=None,
                    costume=dict(haut="uniforme", c_haut=(30, 40, 75), bas="pantalon", c_bas=(30, 40, 75), chaussures="ville", c_chaussures=(20, 20, 20), chapeau="casquette_officier", c_chapeau=(30, 40, 75), details=("lunettes_soleil", "cravate"), c_cravate=(30, 30, 40))),
@@ -74,24 +74,80 @@ CATALOGUE = {
                     costume=dict(haut="polo", c_haut=(250, 210, 50), bas="pantalon", c_bas=(40, 60, 120), chaussures="ville", chapeau="casquette", c_chapeau=(40, 60, 120))),
     "coiffeur": dict(mots=r"coiffeu(?:r|se)s?|barbiers?", outil="ciseaux",
                      costume=dict(haut="tablier", c_haut=(40, 40, 46), c_tablier=(25, 25, 30), bas="pantalon", c_bas=(30, 30, 36), chaussures="ville")),
-    "caissier": dict(mots=r"caissi[eè]re?s?|vendeu(?:r|se)s?", outil=None,
+    "caissier": dict(mots=r"caissi[eè]re?s?", outil=None,
                      costume=dict(haut="polo", c_haut=(210, 50, 50), bas="pantalon", c_bas=(50, 55, 70), chaussures="baskets", details=("badge",))),
-    "vigile": dict(mots=r"vigiles?|agents? de s[ée]curit[ée]|videurs?|bodyguard|garde du corps", outil="talkie",
+    "vigile": dict(mots=r"vigiles?|agents? de s[ée]curit[ée]|videurs?", outil="talkie",
                    costume=dict(haut="polo", c_haut=(25, 25, 30), bas="pantalon", c_bas=(25, 25, 30), chaussures="ville", details=("badge", "ecouteurs"))),
     "karateka": dict(mots=r"karat[ée]|judo|judoka|ceinture noire|sensei", outil=None,
                      costume=dict(haut="kimono", c_haut=(250, 250, 250), bas="pantalon", c_bas=(250, 250, 250), chaussures="", c_ceinture=(25, 25, 28))),
-    "sportif": dict(mots=r"coach sportif|entra[iî]neu(?:r|se)|footballeu(?:r|se)|basketteu(?:r|se)|sportifs?|athl[èe]tes?", outil=None,
+    "sportif": dict(mots=r"coach sportif|entra[iî]neu(?:r|se)|basketteu(?:r|se)|sportifs?|athl[èe]tes?", outil=None,
                     costume=dict(haut="maillot", c_haut=(40, 90, 200), bas="short", c_bas=(250, 250, 250), chaussures="baskets")),
     "cowboy": dict(mots=r"cow-?boys?|sh[ée]rif|far ?west", outil=None,
                    costume=dict(haut="chemise", c_haut=(180, 70, 60), motif="carreaux", bas="jean", c_bas=(60, 80, 120), chaussures="bottes", c_chaussures=(110, 70, 40), chapeau="chapeau_cowboy", details=("ceinture",))),
-    "sorcier": dict(mots=r"sorci[eè]re?s?|magiciens?|magicienne", outil="baguette_magique",
+    "sorcier": dict(mots=r"sorci[eè]re?s?", outil="baguette_magique",
                     costume=dict(haut="robe", c_haut=(80, 50, 150), bas="pantalon", c_bas=(60, 40, 110), chaussures="ville", chapeau="chapeau_sorcier", c_chapeau=(80, 50, 150))),
     "agent_secret": dict(mots=r"agent secret|espions?|james bond|mission secr[eè]te", outil=None,
                          costume=dict(haut="costume", c_haut=(20, 20, 24), bas="pantalon", c_bas=(20, 20, 24), chaussures="ville", c_chaussures=(10, 10, 10), details=("lunettes_soleil", "cravate", "ecouteurs"), c_cravate=(20, 20, 24))),
 }
 
+# 45 métiers de plus (liste gardée par l'auteur, créée avec le style croquis le 30 octobre 2026)
+def _m(mots, haut, ch, bas="pantalon", cb=None, chapeau=None, cc=None, outil=None, details=(), **x):
+    c = dict(haut=haut, c_haut=ch, bas=bas, c_bas=cb or ch, chaussures="ville")
+    if chapeau: c["chapeau"] = chapeau
+    if cc: c["c_chapeau"] = cc
+    if details: c["details"] = tuple(details)
+    c.update(x)
+    return dict(mots=mots, outil=outil, costume=c)
+CATALOGUE.update({
+    "ambulancier": _m(r"ambulanci[eè]re?s?|secouristes?", "polo", (250, 250, 250), cb=(40, 60, 110), details=("bandes", "badge"), outil="porte_bloc"),
+    "sage_femme": _m(r"sages?-femmes?|maïeuticien", "tunique_med", (230, 150, 190), outil="porte_bloc"),
+    "kine": _m(r"kin[ée]s?\b|kin[ée]sith[ée]rapeutes?|ost[ée]opathes?", "polo", (250, 250, 250), cb=(60, 70, 90), details=("badge",)),
+    "opticien": _m(r"opticien(?:ne)?s?", "blouse", (250, 250, 250), cb=(60, 70, 90), details=("lunettes_vue",)),
+    "pharmacien": _m(r"pharmacien(?:ne)?s?", "blouse", (250, 250, 250), cb=(60, 120, 80), details=("badge", "lunettes_vue")),
+    "psychologue": _m(r"psys?\b|psychologues?|psychiatres?|th[ée]rapeutes?", "gilet", (120, 100, 80), cb=(80, 70, 60), details=("lunettes_vue",), outil="porte_bloc"),
+    "vendeur": _m(r"vendeu(?:r|se)s?", "polo", (60, 120, 200), cb=(50, 55, 70), details=("badge",)),
+    "fleuriste": _m(r"fleuristes?", "tablier", (120, 170, 110), outil="fleur", c_tablier=(120, 170, 110)),
+    "boucher": _m(r"bouch(?:er|[eè]re)s?|boucherie", "tablier", (250, 250, 250), cb=(70, 70, 80), c_tablier=(250, 250, 250), chapeau="calot"),
+    "poissonnier": _m(r"poissonni(?:er|[eè]re)s?", "tablier", (90, 140, 200), c_tablier=(90, 140, 200), chapeau="bob", cc=(90, 140, 200)),
+    "patissier": _m(r"p[âa]tissi(?:er|[eè]re)s?|p[âa]tisserie", "veste_chef", (250, 250, 250), cb=(240, 180, 200), chapeau="toque"),
+    "barista": _m(r"baristas?|serveu(?:r|se) de caf[ée]", "tablier", (60, 50, 45), c_tablier=(60, 50, 45), outil="cafe", chapeau="casquette", cc=(60, 50, 45)),
+    "livreur_pizza": _m(r"livreu(?:r|se)s? de pizzas?|pizza ?boy", "polo", (220, 50, 50), cb=(50, 55, 70), chapeau="casquette", cc=(220, 50, 50), outil="pizza"),
+    "chauffeur_bus": _m(r"chauffeu(?:r|se)s? de bus|conducteu(?:r|se)s? de bus|machiniste", "chemise", (170, 200, 230), cb=(40, 50, 80), details=("cravate",), c_cravate=(40, 50, 80)),
+    "chauffeur_vtc": _m(r"chauffeu(?:r|se)s?|vtc|uber\b|taxis?", "costume", (30, 30, 36), details=("cravate",), c_cravate=(30, 30, 36)),
+    "conducteur_train": _m(r"conducteu(?:r|se)s? de trains?|cheminots?|aiguilleu(?:r|se)", "uniforme", (40, 60, 110), chapeau="casquette_officier", cc=(40, 60, 110)),
+    "capitaine": _m(r"capitaines?|marins?|matelots?|bateau", "uniforme", (250, 250, 250), cb=(250, 250, 250), chapeau="casquette_officier", cc=(250, 250, 250), details=("boutons_or",)),
+    "controleur": _m(r"contr[ôo]leu(?:r|se)s?|billets?,? s'il vous pla[iî]t", "uniforme", (40, 60, 110), chapeau="casquette_officier", cc=(40, 60, 110), outil="billet"),
+    "militaire": _m(r"militaires?|soldats?|sergent|l'arm[ée]e|caporal", "uniforme", (90, 110, 70), chapeau="beret", cc=(80, 100, 60), motif="camouflage"),
+    "gendarme": _m(r"gendarmes?|gendarmerie", "uniforme", (40, 55, 100), chapeau="casquette_officier", cc=(30, 40, 80), details=("badge",), outil="talkie"),
+    "douanier": _m(r"douani(?:er|[eè]re)s?|douane", "uniforme", (50, 70, 90), chapeau="casquette_officier", cc=(50, 70, 90), details=("badge",)),
+    "garde_du_corps": _m(r"gardes? du corps|bodyguards?", "costume", (20, 20, 24), details=("lunettes_soleil", "cravate", "ecouteurs"), c_cravate=(20, 20, 24)),
+    "maitre_nageur": _m(r"ma[iî]tres?[- ]nageu(?:r|se)s?|surveillant de baignade", "debardeur", (220, 50, 50), bas="short", cb=(220, 50, 50), details=("sifflet",)),
+    "journaliste": _m(r"journalistes?|reporters?|reportage", "chemise", (200, 210, 230), cb=(60, 70, 90), outil="micro"),
+    "presentateur_tele": _m(r"pr[ée]sentat(?:eur|rice) t[ée]l[ée]|animat(?:eur|rice) t[ée]l[ée]|bonsoir et bienvenue", "costume", (60, 40, 100), details=("cravate",), c_cravate=(220, 180, 40), outil="micro"),
+    "youtubeur": _m(r"youtubeu(?:r|se)s?|streameu(?:r|se)s?|influenceu(?:r|se)s?|twitch|abonnez-vous", "capuche", (240, 70, 70), bas="jean", cb=(50, 60, 90), details=("ecouteurs",), outil="telephone"),
+    "chanteur": _m(r"chanteu(?:r|se)s?|star de la chanson", "veste_jean", (60, 90, 160), bas="jean", cb=(30, 30, 40), outil="micro", details=("chaine",)),
+    "dj": _m(r"\bdj\b|disc[- ]jockey|platines", "tshirt", (30, 30, 36), bas="jean", cb=(30, 30, 40), chapeau="casque_audio"),
+    "magicien": _m(r"magicien(?:ne)?s?|tour de magie|abracadabra", "costume", (30, 30, 40), chapeau="chapeau", cc=(25, 25, 30), details=("cape", "noeud_pap"), outil="baguette_magique"),
+    "clown": _m(r"clowns?|cirque", "chemise", (250, 220, 60), cb=(60, 120, 220), motif="pois", details=("nez_rouge", "noeud_pap"), chapeau="chapeau", cc=(220, 60, 60)),
+    "footballeur": _m(r"footballeu(?:r|se)s?|joueu(?:r|se) de foot|attaquant|gardien de but", "maillot", (30, 80, 200), bas="short", cb=(250, 250, 250)),
+    "macon": _m(r"ma[çc]ons?|ma[çc]onnerie", "tshirt", (240, 140, 40), bas="jean", cb=(110, 100, 90), chapeau="casque_chantier", outil="marteau"),
+    "menuisier": _m(r"menuisi(?:er|[eè]re)s?|charpenti(?:er|[eè]re)s?|[ée]b[ée]nistes?", "salopette", (200, 170, 130), c_salopette=(120, 90, 60), outil="marteau"),
+    "peintre_batiment": _m(r"peintres? en b[âa]timent|repeindre le mur|rouleau de peinture", "salopette", (250, 250, 250), c_salopette=(250, 250, 250), taches_peinture=True, chapeau="casquette", cc=(250, 250, 250)),
+    "agent_entretien": _m(r"femme de m[ée]nage|homme de m[ée]nage|agent d'entretien|concierge|balayeu(?:r|se)", "blouse", (110, 170, 200), cb=(60, 80, 110)),
+    "baby_sitter": _m(r"baby-?sitt(?:er|eur|euse|ing)|nounou", "pull", (240, 170, 190), bas="jean", cb=(60, 80, 130)),
+    "demenageur": _m(r"d[ée]m[ée]nageu(?:r|se)s?|d[ée]m[ée]nagement|cartons", "tshirt", (90, 90, 100), bas="jean", cb=(60, 70, 90), outil="colis"),
+    "pirate": _m(r"pirates?|corsaires?|capitaine crochet|tr[ée]sor", "chemise", (250, 250, 250), cb=(40, 40, 50), motif="rayures", c_motif=(200, 40, 40), chapeau="tricorne", cc=(30, 30, 34), details=("cache_oeil",)),
+    "chevalier": _m(r"chevaliers?|armure|[ée]p[ée]e|roi arthur", "tunique", (170, 175, 185), cb=(140, 145, 155), chapeau="casque_chevalier", cc=(170, 175, 185)),
+    "super_heros": _m(r"super-?h[ée]ros|superman|batman|spider-?man|super-?pouvoirs?", "combinaison", (40, 80, 200), cb=(40, 80, 200), details=("cape", "logo")),
+    "pere_noel": _m(r"p[èe]re no[ëe]l|ho ho ho|tra[iî]neau|lutins?", "doudoune", (210, 40, 40), cb=(210, 40, 40), chapeau="bonnet_noel", details=("ceinture",), barbe_blanche=True),
+    "vampire": _m(r"vampires?|dracula", "costume", (25, 20, 30), details=("cape", "crocs"), teint=(232, 232, 240)),
+    "zombie": _m(r"zombies?|mort-vivant|morts-vivants", "tshirt", (110, 110, 100), bas="jean", cb=(70, 80, 90), details=("dechire",), teint=(170, 205, 150)),
+    "momie": _m(r"momies?|pharaon", "tunique", (230, 220, 190), cb=(230, 220, 190), details=("bandelettes",), teint=(236, 228, 200)),
+    "extraterrestre": _m(r"extra-?terrestres?|aliens?|martiens?|ovni", "combinaison", (160, 170, 190), details=("antennes",), teint=(150, 220, 130)),
+})
+
 OUTILS = ("lance", "talkie", "porte_bloc", "poele", "baguettes", "plans", "marteau", "tournevis", "cle_molette", "fourche", "arrosoir", "palette",
-          "guitare", "plateau", "eprouvette", "ordinateur", "colis", "ciseaux", "marteau_juge", "baguette_magique")
+          "guitare", "plateau", "eprouvette", "ordinateur", "colis", "ciseaux", "marteau_juge", "baguette_magique", "sac_main", "casque_moto")
 
 
 # ------------------------------------------------------------------ qui exerce quel métier (d'après les répliques)
@@ -234,4 +290,10 @@ def outil(nom, s=1.0):
     elif nom == "baguette_magique":
         tige((45, 190), (45, 50), (30, 30, 35), 9); lig((45, 50), (45, 32), (250, 250, 250), 9)
         for j in range(6): a = j * math.pi / 3; lig((45, 30), (45 + 22 * math.cos(a), 30 + 22 * math.sin(a)), (250, 215, 70), 4)
+    elif nom == "sac_main":                                                # sac à main (anse + rabat + fermoir doré)
+        cv2.ellipse(im, (int(75 * k), int(70 * k)), (int(38 * k), int(40 * k)), 0, 180, 360, TRAIT + (255,), int(9 * k), AA)
+        poly([(25, 70), (125, 70), (135, 150), (15, 150)], (180, 60, 90)); poly([(25, 70), (125, 70), (110, 105), (40, 105)], (150, 45, 75)); cer(75, 103, 7, (240, 200, 70), 3)
+    elif nom == "casque_moto":                                             # casque de moto (visière teintée)
+        cv2.ellipse(im, (int(75 * k), int(95 * k)), (int(62 * k), int(60 * k)), 0, 0, 360, (210, 50, 50, 255), -1, AA); cv2.ellipse(im, (int(75 * k), int(95 * k)), (int(62 * k), int(60 * k)), 0, 0, 360, TRAIT + (255,), int(6 * k), AA)
+        poly([(40, 80), (130, 80), (130, 115), (45, 115)], (40, 50, 70)); lig((48, 88), (90, 88), (150, 170, 200), 5)
     return im

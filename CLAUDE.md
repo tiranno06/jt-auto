@@ -230,7 +230,20 @@
   `maquettes/croquis/` (images de l'auteur, faites par lui avec une IA). Choix déjà faits : les DEUX silhouettes (le petit à grosse tête et le grand stickman), pour enfants, ados,
   adultes et seniors ; visuels 1-5 validés « pour le moment » ; animation BEAUCOUP plus fluide (poses fondues et adoucies, bouche
   qui s'ouvre selon la voix en gardant l'expression, expressions en fondu, clignements doux, 30 i/s ou plus, jamais saccadé).
-  **À créer maintenant que le style est validé, directement dans ce style (liste gardée à la demande de l'auteur)** :
+  **Créé le 30 octobre 2026 (feu vert de l'auteur)** : mouvements dans le robot (micro-expressions quand il se tait : lèvre mordue si gêne,
+  joues gonflées si soupir, rictus si sceptique ; rire qui secoue le corps + larmes de rire ; sursaut étiré / écrasé quand l'autre crie ;
+  gestes avec élan et léger dépassement `_ressort`) ; position assise vue de face sur une chaise croquis (`croquis.chaise_face`,
+  jambes « assis_face ») ; 39 lieux (`moteur/decor_lieux.py`, mots dans `REGLES`, ajoutés en dernier dans `lieu_de` : à égalité les
+  anciens lieux gagnent) ; 45 métiers (`metiers.CATALOGUE`, 82 en tout ; mots retirés des anciens métiers quand un nouveau les prend :
+  DJ, chanteur, maçon, footballeur, magicien, vendeur, gendarme, pâtissier, garde du corps) avec lieu (`decor_metiers.METIER_LIEU`) et
+  véhicule ; tenues du contexte (`studio.habiller_contexte` : pyjama, peignoir, maillot de bain, doudoune + écharpe + gants, imperméable,
+  survêtement, gilet jaune, uniforme, robe de mariée / de soirée, costume-cravate, déguisements d'Halloween ; clé costume « tenue »,
+  jamais sur un costume imposé ou de métier, jamais repeinte par les couleurs de l'original) ; accessoires (montre, lunettes de ski,
+  écharpe, gants) ; objets tenus d'après les mots (`studio.OBJETS_MOTS` : valise, parapluie, sac à main, casque de moto…). Croquis :
+  chapeaux tricorne, bob, bandana, couronne, bonnet de père Noël, casque de chevalier, oreilles de lapin ; détails cravate, cape, logo,
+  bandelettes, antennes, crocs, nez rouge, cache-œil, sifflet, boutons dorés, ceinture, barbe blanche (déguisement) ; teint du
+  costume (zombie, extraterrestre, vampire) ; robe / jupe. Vitesse : flous sur entiers, grand flou de l'ombre de la tête calculé
+  réduit (sinon 2 fois plus lent). **Liste d'origine (pour mémoire)** :
   lieux : salle de bain, jardin, balcon, garage de maison, grenier, salle à manger, cour de récré, cantine, bureau du proviseur,
   bibliothèque, amphi, arrêt de bus, métro, gare, aéroport, parking de supermarché, fast-food, kebab, cinéma, plage, piscine, parc,
   camping, montagne / ski, stade de foot, salle de concert, boîte de nuit, hôpital (chambre, urgences), pharmacie, commissariat,

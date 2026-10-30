@@ -12,7 +12,7 @@ COIFFURES = ("ondule", "frange", "afro", "herisse", "raie", "rase", "tresses", "
 ARRIERE = ("ondule", "frange", "afro", "herisse", "tresses", "anglaises")
 BARBES = ("barbe_courte", "barbe_pleine", "bouc", "favoris")
 CHAPEAUX = ("bonnet", "casquette", "beret", "chapeau", "melon", "tricorne", "casque_chantier", "toque", "bob", "couronne", "bandana", "serre_tete",
-            "casque_pompier", "casquette_officier", "calot_infirmier", "calot", "charlotte", "chapeau_paille", "casque_astronaute", "chapeau_cowboy", "chapeau_sorcier")
+            "casque_pompier", "casquette_officier", "calot_infirmier", "calot", "charlotte", "chapeau_paille", "casque_astronaute", "chapeau_cowboy", "chapeau_sorcier", "casque_audio", "bonnet_noel", "casque_chevalier", "oreilles_lapin")
 MOTIFS = ("fleurs", "palmiers", "taches", "losanges", "chevrons", "etoiles")
 
 

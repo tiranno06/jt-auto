@@ -24,11 +24,16 @@ FORME = {"dents": "colere", "triste": "triste", "grand_sourire": "heureux", "o":
 SON = {"M": "m", "O": "o", "U": "o", "I": "i", "E": "i", "S": "i"}
 COURT = ("tshirt", "t_shirt", "debardeur", "maillot", "maillot_foot", "polo", "tunique_med", "salopette", "kimono")
 CHAPEAUX = {"casque_pompier", "casquette_officier", "casquette", "toque", "calot", "calot_infirmier", "beret", "casque_chantier",
-            "chapeau_paille", "casque_audio", "casque_astronaute", "bonnet", "chapeau_cowboy", "chapeau", "melon", "chapeau_sorcier", "charlotte"}
+            "chapeau_paille", "casque_audio", "casque_astronaute", "bonnet", "chapeau_cowboy", "chapeau", "melon", "chapeau_sorcier", "charlotte",
+            "tricorne", "bob", "bandana", "couronne", "bonnet_noel", "casque_chevalier", "oreilles_lapin"}
 COIFF = {"court": "courts", "raie": "courts", "rase": "courts", "court_texture": "courts", "banane": "courts", "frange": "carre",
          "degarni": "courts", "nuque": "courts", "meches": "courts", "herisse": "herisse", "boucles": "boucles", "afro": "afro",
          "long": "longs", "ondule": "longs", "tresses": "longs", "mi_long": "carre", "carre": "carre", "queue": "queue", "chignon": "chignon"}
-DECO = {"stethoscope": "stetho", "badge": "badge", "noeud_pap": "noeud", "veste_pompier": "bandes", "salopette": "salopette", "blouse": "blouse"}
+DECO = {"stethoscope": "stetho", "badge": "badge", "noeud_pap": "noeud", "veste_pompier": "bandes", "salopette": "salopette", "blouse": "blouse",
+        "bandes": "bandes", "cravate": "cravate", "cape": "cape", "logo": "logo", "bandelettes": "bandelettes", "antennes": "antennes",
+        "crocs": "crocs", "nez_rouge": "nez_rouge", "cache_oeil": "cache_oeil", "sifflet": "sifflet", "boutons_or": "boutons_or",
+        "ceinture": "ceinture", "dechire": "dechire", "barbe_blanche": "barbe_blanche", "gilet_jaune": "bandes", "costume": "cravate",
+        "echarpe": "echarpe"}
 
 
 def silhouette(F):
@@ -48,7 +53,7 @@ def _geom(F, p):
     ec = 1.0 + 0.8 * float(p.get("sq") or 0.0)                               # étiré / écrasé (dessin animé)
     L_j = R * (2.3 if G else 1.25) * ec; h_tr = R * (1.2 if G else 0.95) * ec; l_tr = R * (0.38 if G else 0.5) / ec ** 0.5
     L_b = R * (1.2 if G else 0.95)
-    hanche = p["y"] - L_j; cou = hanche - h_tr
+    hanche = p["y"] - L_j * (0.55 if p.get("assis") else 1.0); cou = hanche - h_tr   # assis : vu de face, sur sa chaise
     penche = float(p.get("penche") or 0.0) * 0.12 + math.sin(math.radians(float(p.get("tilt") or 0.0))) * 0.25
     x = K["x"]; tc = (x + penche * R, cou - R * (0.9 if G else 0.86))
     eps = [(x - l_tr * (0.5 if G else 0.42), cou + R * 0.1), (x + l_tr * (0.5 if G else 0.42), cou + R * 0.1)]
@@ -57,7 +62,7 @@ def _geom(F, p):
         a1, a2 = math.radians(ang[0]), math.radians(ang[0] + ang[1])
         c = (e[0] + math.sin(a1) * seg, e[1] + math.cos(a1) * seg); m = (c[0] + math.sin(a2) * seg, c[1] + math.cos(a2) * seg)
         bras.append((e, c, m))
-    return dict(G=G, R=R, x=x, tc=tc, bras=bras, ecrase=ec, penche=penche)
+    return dict(G=G, R=R, x=x, tc=tc, bras=bras, ecrase=ec, penche=penche, L_j=L_j, l_tr=l_tr)
 
 
 def reperes(F, p):
@@ -87,16 +92,28 @@ def _fx(p, e):
     if ef & {"sueur", "goutte"}: fx["sueur"] = 0.8
     r = max(float(p.get("gene") or 0.0), float(p.get("rougeur") or 0.0) * (0.0 if e == "colere" else 0.6))
     if r > 0.05: fx["rouge"] = min(1.0, r)
+    t = float(p.get("t") or 0.0); emo = p.get("emo")
+    if float(p.get("bouche") or 0) <= 0.04:                                 # micro-expressions quand il se tait
+        if emo == "gene": fx["micro"] = "mord"                             # se mord la lèvre
+        elif emo in ("soupir", "blase") and (t % 3.2) < 1.1: fx["micro"] = "joues"   # soupir : joues gonflées
+        elif emo == "sceptique": fx["micro"] = "rictus"
+    if emo == "rire": fx["larmes"] = max(fx.get("larmes", 0), 0.45)        # larmes de rire
     return fx
 
 
 def _tenue(F, C_):
     """Costume du casting / du métier -> haut, bas, chapeau, détails dans le style croquis."""
-    haut = str(C_.get("haut") or "tshirt"); det = set(C_.get("details") or ())
+    haut = str(C_.get("haut") or "tshirt"); det = set(C_.get("details") or ()); tenue = str(C_.get("tenue") or "")
     h = "tshirt" if haut in COURT else "pull"
     bas = "short" if C_.get("bas") in ("short",) else "pantalon"
+    if tenue in ("robe_mariee", "robe_soiree") or (haut == "robe" and tenue not in ("peignoir",) and not C_.get("metier")) or C_.get("bas") == "jupe": bas = "robe"
+    if tenue == "maillot_bain":                                            # torse nu, short de bain : aucun détail de buste
+        h = None; bas = "short"; det = {d for d in det if d in ("lunettes_vue", "lunettes_soleil", "montre")}
+    det |= {"pyjama": set(), "peignoir": {"ceinture"}, "impermeable": {"boutons_or"}, "doudoune": {"echarpe"}, "uniforme": {"cravate"},
+            "costume": {"cravate"}}.get(tenue, set())
     extras = [C.deco_buste(DECO[haut])] if haut in DECO else []
-    extras += [C.deco_buste(DECO[d]) for d in det if d in DECO and d != haut]
+    extras += [C.deco_buste(DECO[d], tuple(C_["c_cravate"]) if d == "cravate" and C_.get("c_cravate") else None) for d in det if d in DECO and d != haut]
+    if C_.get("barbe_blanche"): extras.append(C.deco_buste("barbe_blanche"))
     st = COIFF.get(str(F.get("cheveux") or ""), None)
     col = tuple(F.get("c_cheveux") or (70, 50, 40))
     if F.get("age", 30) >= 62 and st in ("courts", "carre"): st = "blancs"; col = (225, 225, 228)
@@ -107,13 +124,18 @@ def _tenue(F, C_):
     if F.get("barbe") == "moustache": coif.append(C.moustache)
     elif F.get("barbe") in ("trois_jours", "barbe", "bouc") and F.get("age", 30) >= 16: coif.append(C.mal_rase)
     lun = []
+    if "lunettes_ski" in det: lun.append(C.chapeau("lunettes_ski"))
     if "lunettes_soleil" in det: lun.append(C.chapeau("lunettes_soleil"))
     elif F.get("lunettes") or "lunettes_vue" in det: lun.append(C.chapeau("lunettes"))
     ch = C_.get("chapeau")
     chap = C.chapeau({"calot_infirmier": "calot_croix"}.get(ch, ch), tuple(C_["c_chapeau"]) if C_.get("c_chapeau") else None) if ch in CHAPEAUX else None
     return dict(haut=h, c_haut=tuple(C_.get("c_haut") or (120, 160, 210)), bas=bas, c_bas=tuple(C_.get("c_bas") or (60, 80, 130)),
                 chaussures=tuple(C_.get("c_chaussures") or (55, 52, 58)), extras=coif + lun + extras, chapeau=chap,
-                rayures=((240, 240, 240), tuple(C_.get("c_motif") or (200, 60, 60))) if C_.get("motif") == "rayures" else None,
+                rayures=((240, 240, 240), tuple(C_.get("c_motif") or (200, 60, 60))) if C_.get("motif") == "rayures" else
+                        ((250, 250, 250), tuple(C_.get("c_haut") or (150, 180, 230))) if tenue == "pyjama" else
+                        (tuple(int(v * 0.85) for v in (C_.get("c_haut") or (220, 60, 60))), tuple(C_.get("c_haut") or (220, 60, 60))) if tenue == "doudoune" else None,
+                c_mains=(200, 50, 60) if "gants" in det else None, montre="montre" in det,
+                teint=tuple(C_["teint"]) if C_.get("teint") else None,
                 cheveux="herisse" if st == "herisse" else None)
 
 
@@ -133,11 +155,15 @@ def dessiner(img, F, p):
         bras.append(("pts", dec(c_), dec(m_), devant))
     ouv = float(p.get("bouche") or 0.0)
     cl = 1.0 if p.get("yeux") in ("fermes",) else float(p.get("paupiere") or 0.0) * 0.6
-    peau = tuple(p["peau"]) if p.get("peau") else None
+    peau = T.get("teint") or (tuple(p["peau"]) if p.get("peau") else None)   # zombie, extraterrestre, vampire : teint du costume
     if p.get("paleur"): peau = tuple(int(v * (1 - 0.15 * p["paleur"]) + 230 * 0.15 * p["paleur"]) for v in (peau or C.PEAU))
-    C.bonhomme(zone, g["x"] - x0, p["y"] - y0, R, e, bras=tuple(bras), jambes=("debout", "debout"),   # croquis : toujours debout (assis = longues jambes à travers les meubles)
+    if p.get("assis"):                                                     # chaise vue de face, sous le personnage
+        C.chaise_face(zone, g["x"] - x0, p["y"] - y0, R, g["L_j"] * 0.55, g["l_tr"] * 2.6, tuple(p.get("c_chaise") or (160, 110, 70)))
+    secousse = abs(math.sin(float(p.get("t") or 0) * 16)) * R * 0.05 if p.get("emo") == "rire" else 0.0   # le rire secoue le corps
+    C.bonhomme(zone, g["x"] - x0, p["y"] - y0 - secousse, R, e, bras=tuple(bras), jambes=("assis_face", "assis_face") if p.get("assis") else ("debout", "debout"),
                taille="grand" if G else "chibi", graine=int(F.get("age", 30)) + len(str(F.get("cheveux"))),
                haut=T["haut"], c_haut=T["c_haut"], bas=T["bas"], c_bas=T["c_bas"], chaussures=T["chaussures"], cheveux=T["cheveux"],
                rayures=T["rayures"], teint=peau, profil=float(p.get("tq") or 0.0) * 0.6, extras=T["extras"], chapeau=T["chapeau"],
-               ouv=ouv if ouv > 0.04 else None, cligne=min(1.0, cl), penche=g["penche"], fx=_fx(p, e), ecrase=g["ecrase"])
+               ouv=ouv if ouv > 0.04 else None, cligne=min(1.0, cl), penche=g["penche"], fx=_fx(p, e), ecrase=g["ecrase"],
+               c_mains=T["c_mains"], montre=T["montre"])
     return tc, (R, R)

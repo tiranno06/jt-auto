@@ -338,13 +338,15 @@ def bible(sk, roles):
         ici = [sk["repliques"][i]["p"] for i in reps_k if i < len(sk.get("repliques", []))] or roles
         met_ = next((costumes[r].get("metier") for r in sorted(set(ici), key=ici.count, reverse=True) if r in costumes and costumes[r].get("metier") in DMT.METIER_LIEU), None)
         if met_: lieux[k_] = DMT.METIER_LIEU[met_]
+    try: habiller_contexte(sk, roles, costumes, lieux, moment, t_low, S)   # tenues et accessoires selon le lieu et les paroles
+    except Exception as e: print(f"  tenues du contexte impossibles ({str(e)[:100]})", flush=True)
     # les personnes de la vidéo d'origine habillent nos personnages : la plus présente à l'image joue la voix la plus présente
     if V.get("personnes"):
         mots = {r: sum(len(x.get("t", "").split()) for x in sk.get("repliques", []) if x.get("p") == r) for r in roles}
         demande = (S.get("costumes") or {}) if isinstance(S.get("costumes"), dict) else {}
         for role, pers in zip(sorted(roles, key=lambda r: -mots.get(r, 0)), V["personnes"]):
             c = costumes[role] = dict(costumes[role])
-            if pers.get("habit") and "c_haut" not in (demande.get(role) or {}) and not c.get("metier"):   # un costume de métier garde ses couleurs
+            if pers.get("habit") and "c_haut" not in (demande.get(role) or {}) and not c.get("metier") and not c.get("tenue"):   # un costume de métier garde ses couleurs
                 c["c_haut"] = tuple(int(v) for v in pers["habit"]); c["c_motif"] = M._fonce(c["c_haut"], 0.72)
             if pers.get("cheveux") and "c_cheveux" not in (demande.get(role) or {}): c["c_cheveux"] = tuple(int(v) for v in pers["cheveux"])
     figurants = []
@@ -386,6 +388,68 @@ def bible(sk, roles):
                 coupes_origine=[float(c) for c in (V.get("coupes") or []) if isinstance(c, (int, float))] if sk.get("doublage") else [],
                 gestes_origine=[float(g[0]) for g in (V.get("gestes") or []) if isinstance(g, (list, tuple)) and g] if sk.get("doublage") else [],
                 postures_origine=[g for g in (V.get("postures") or []) if isinstance(g, (list, tuple)) and len(g) == 4] if sk.get("doublage") else [])
+
+# ------------------------------------------------------------------ tenues et accessoires du contexte (liste de l'auteur, 30/10/2026)
+TENUES = [  # (motif dans les paroles, lieux, tenue) — tenue : (haut, couleur, bas, couleur bas, tenue croquis, détails)
+    (r"pyjama|en train de dormir|je dors|au lit|réveill[ée]", ("chambre",), ("pyjama", (150, 180, 230), "pantalon", (150, 180, 230), "pyjama", ())),
+    (r"peignoir|sortir de la douche|sous la douche", ("salle_de_bain",), ("robe", (250, 250, 250), "pantalon", (250, 250, 250), "peignoir", ("ceinture",))),
+    (r"maillot de bain|bronzer|nager|baignade", ("plage", "piscine"), ("debardeur", (240, 90, 120), "short", (60, 140, 220), "maillot_bain", ())),
+    (r"\bski\b|skier|il fait froid|neige|hiver|gel[ée]", ("montagne",), ("doudoune", (220, 60, 60), "pantalon", (40, 50, 70), "doudoune", ("echarpe", "gants"))),
+    (r"imperméable|il pleut|sous la pluie|averse", (), ("blouson", (250, 210, 50), "pantalon", (60, 70, 90), "impermeable", ())),
+    (r"jogging|footing|survêt|course à pied|entraînement", ("salle_sport", "stade"), ("survetement", (60, 80, 160), "pantalon", (60, 80, 160), "survetement", ("bandes",))),
+    (r"gilet jaune", (), ("tshirt", (250, 220, 40), "jean", (60, 70, 90), "gilet_jaune", ("bandes",))),
+    (r"uniforme scolaire|uniforme de l'école", (), ("polo", (250, 250, 250), "pantalon", (40, 50, 90), "uniforme", ("cravate",))),
+]
+SOIREE = r"soirée chic|gala|tenue de soirée|smoking|robe de soirée|dîner chic|cérémonie"
+DEGUISEMENTS = [("sorciere", ("robe", (40, 30, 50)), "chapeau_sorcier"), ("citrouille", ("tshirt", (240, 130, 30)), None), ("lapin", ("pull", (240, 240, 240)), "oreilles_lapin")]
+OBJETS_MOTS = [(r"\bvalises?\b|bagages?", "valise"), (r"parapluie", "parapluie"), (r"sac à main|mon sac\b|ton sac\b", "sac_main"),
+               (r"casque de moto|ma moto|en moto|mon scooter|en scooter", "casque_moto"), (r"bouquet|des fleurs|une fleur|une rose", "fleur"),
+               (r"un cadeau|ton cadeau|mon cadeau", "cadeau"), (r"\bpizzas?\b", "pizza"), (r"un café|mon café|ton café", "cafe"), (r"mes clés|les clés|tes clés", "cles"),
+               (r"\bbillets?\b|\bthunes?\b|de l'argent", "billet"), (r"une lettre|cette lettre|courrier", "lettre"), (r"bouteille", "bouteille")]
+
+
+def habiller_contexte(sk, roles, costumes, lieux, moment, t_low, S):
+    """Tenues selon le lieu et les paroles (pyjama la nuit, maillot à la plage, doudoune et écharpe à la montagne, costume et robe au
+    mariage, robe de soirée, déguisements d'Halloween…), accessoires (montre, écharpe, gants, lunettes de ski), objets tenus d'après les
+    mots (valise, parapluie, sac à main, casque de moto…). Jamais par-dessus un costume imposé ou un costume de métier."""
+    impose = (S.get("costumes") or {}) if isinstance(S.get("costumes"), dict) else {}
+    P0 = S.get("personnages") if isinstance(S.get("personnages"), dict) else {}
+    libres = [r for r in roles if r in costumes and not impose.get(r) and not costumes[r].get("metier")]
+    def habille(r, haut, ch, bas, cb, tenue_c, det=()):
+        c = dict(costumes[r]); c.update(haut=haut, c_haut=tuple(ch), bas=bas, c_bas=tuple(cb), tenue=tenue_c)
+        c["details"] = tuple(dict.fromkeys(tuple(c.get("details") or ()) + tuple(det))); c.pop("motif", None); costumes[r] = c
+    for motif, lieux_t, (haut, ch, bas, cb, tc, det) in TENUES:
+        if re.search(motif, t_low) or any(l in lieux_t for l in lieux):
+            if tc == "pyjama" and not (re.search(motif, t_low) or moment == "nuit"): continue   # chambre en plein jour : pas forcément en pyjama
+            for r in libres: habille(r, haut, ch, bas, cb, tc, det)
+            break
+    else:
+        if "mariage" in lieux or re.search(r"\bmariage\b|marié", t_low):          # mariage : robe blanche pour une femme, costume pour un homme
+            for k, r in enumerate(libres):
+                g = genre_voix(sk, r, P0.get(r) if isinstance(P0.get(r), dict) else {})
+                if g == "f": habille(r, "robe", (252, 252, 250), "pantalon", (252, 252, 250), "robe_mariee" if k == 0 else "robe_soiree")
+                else: habille(r, "costume", (30, 30, 36), "pantalon", (30, 30, 36), "costume", ("cravate",))
+        elif "boite_nuit" in lieux or re.search(SOIREE, t_low):
+            for r in libres:
+                g = genre_voix(sk, r, P0.get(r) if isinstance(P0.get(r), dict) else {})
+                if g == "f": habille(r, "robe", (170, 30, 70), "pantalon", (170, 30, 70), "robe_soiree")
+                else: habille(r, "costume", (30, 30, 36), "pantalon", (30, 30, 36), "costume", ("cravate",))
+        elif re.search(r"halloween|déguis", t_low):
+            for k, r in enumerate(libres):
+                nom, (haut, ch), chap = DEGUISEMENTS[k % len(DEGUISEMENTS)]
+                habille(r, haut, ch, "pantalon", (40, 30, 50), "deguisement_" + nom)
+                if chap: costumes[r]["chapeau"] = chap
+    if re.search(r"l'heure|en retard|ta montre|ma montre|quelle heure", t_low):    # il regarde sa montre
+        for r in roles[:1]:
+            if r in costumes: costumes[r] = dict(costumes[r], details=tuple(costumes[r].get("details") or ()) + ("montre",))
+    if "montagne" in lieux:
+        for r in libres: costumes[r] = dict(costumes[r], details=tuple(dict.fromkeys(tuple(costumes[r].get("details") or ()) + ("lunettes_ski",))))
+    for rep_ in sk.get("repliques") or []:                                  # objets tenus d'après les mots (sans IA)
+        if rep_.get("objet") or rep_.get("p") == "narrateur": continue
+        t_ = str(rep_.get("t") or "").lower()
+        for motif, obj in OBJETS_MOTS:
+            if re.search(motif, t_): rep_["objet"] = obj; break
+
 
 def _humain():
     import humain
@@ -592,6 +656,7 @@ DECOR_EN = {"rue": "quiet city street at dusk, parked car at the curb, sidewalk,
             "bureau": "open space office, desks, computer screens, plants", "bar": "cosy bar, counter, bottles on shelves, stools",
             "restaurant": "small restaurant, tables with checkered cloths, menu board", "magasin": "shop interior, shelves full of products, counter"}
 DECOR_EN.update(__import__("decor_metiers").DECOR_EN)                   # décors des métiers (caserne, garage, ferme…)
+DECOR_EN.update(__import__("decor_lieux").DECOR_EN)                     # 39 lieux de plus (plage, gare, hôpital…)
 
 TIERS = r"\b(la dame|cette dame|une dame|l'inconnue|une inconnue|cette (femme|fille|meuf|nana)|une (femme|fille|meuf|nana)|la (meuf|nana|fille))\b"
 
