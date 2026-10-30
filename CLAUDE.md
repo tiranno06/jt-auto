@@ -169,6 +169,16 @@
   chaque vidéo (variable PUBLI_FILE, ordre de coche), PUBLI_AUTO + PUBLI_HEURE (Paris) : une vidéo par jour, la plus ancienne cochée
   non publiée, envoyée à Buffer pour l'heure exacte (publier.yml auto=1, run « Publication automatique : … » = journée faite) ; une
   vidéo en échec est sautée.
+- **Métiers (30 octobre 2026, planches de référence de l'auteur)** : `moteur/metiers.py` : ~38 métiers et univers (pompier, policier,
+  médecin, infirmier, chirurgien, dentiste, vétérinaire, prof, cuisinier, boulanger, serveur, ingénieur, ouvrier, électricien, plombier,
+  mécanicien, agriculteur, jardinier, peintre, musicien, pilote, hôtesse, scientifique, informaticien, avocat, juge, astronaute,
+  livreur, facteur, coiffeur, caissier, vigile, karatéka, sportif, cow-boy, sorcier, agent secret…) : costume complet (tenues toon
+  `toon.metier_buste` : tablier, veste_chef, veste_pompier, salopette, kimono, combinaison, tunique_med, stéthoscope, nœud pap ;
+  chapeaux `garde_robe.chapeau` : casque_pompier, casquette_officier, calot(_infirmier), charlotte, chapeau_paille,
+  casque_astronaute, chapeau_cowboy, chapeau_sorcier, toque refaite) + outil en main (`metiers.outil`, tenu main gauche quand
+  aucun autre objet). `qui_fait` : « je suis… » = celui qui parle ; « t'es… ? », « bonjour docteur », « monsieur l'agent » =
+  l'autre ; un métier juste cité n'habille personne ; l'IA peut aussi choisir (studio → "metiers"). Les couleurs de la vidéo
+  d'origine ne repeignent jamais un costume de métier.
 - **Bonne voix sur le bon personnage (sons TikTok)** : `locuteurs.affiner` vérifie qui parle MOT PAR MOT (empreinte vocale ECAPA
   autour de chaque mot, comparée à chaque voix, fil le plus probable façon Viterbi, 2-3 tours ; une « voix » presque muette est
   rattachée à la plus proche) puis `caler_sur_phrases` met chaque changement de personne sur la fin de phrase la plus proche

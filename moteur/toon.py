@@ -872,6 +872,70 @@ def bonnet(img, t, rxe, R, tilt, col, ep):
     degrade(img, calotte, T(-rxe * 0.3, -R * 0.95), rxe * 1.6, _fonce(col, 0.8), 0.4, 0.6)
 
 
+def metier_buste(img, haut, C, det, x, fx, y_cou, y_ourlet, R, c_haut, ep, tourne):
+    """Tenues de métier dessinées sur le buste (d'après les planches de référence de l'auteur) : tablier, veste de chef, de pompier,
+    salopette, kimono, combinaison, tunique médicale ; stéthoscope et nœud papillon."""
+    h_ = y_ourlet - y_cou
+    if haut == "tablier":                                                  # tablier : bavette + pan jusqu'aux cuisses, lien au cou et à la taille
+        ct = tuple(C.get("c_tablier") or (250, 250, 250))
+        tab = lisse([(fx - 0.42 * R, y_cou + 0.45 * R), (fx + 0.42 * R, y_cou + 0.45 * R), (fx + 0.5 * R, y_cou + 0.55 * h_), (fx + 0.82 * R, y_cou + 0.62 * h_),
+                     (fx + 0.78 * R, y_ourlet + 1.35 * R), (fx - 0.78 * R, y_ourlet + 1.35 * R), (fx - 0.82 * R, y_cou + 0.62 * h_), (fx - 0.5 * R, y_cou + 0.55 * h_)], n=3)
+        forme(img, tab, ct, ep)
+        if C.get("taches_peinture"):                                       # tablier de peintre : taches de couleurs
+            for k_, cc in enumerate(((220, 60, 60), (60, 120, 220), (250, 200, 50), (80, 170, 90), (200, 90, 200))):
+                _ellipse(img, (fx + (k_ * 0.37 % 1.0 - 0.5) * 1.1 * R, y_cou + (0.75 + 0.33 * k_) * R), (0.1 * R, 0.08 * R), 20 * k_, cc)
+        for sg in (-1, 1): _trait(img, [(fx + sg * 0.38 * R, y_cou + 0.47 * R), (fx + sg * 0.3 * R, y_cou + 0.02 * R)], ep * 1.4, _fonce(ct, 0.7))   # lien au cou
+        _trait(img, [(fx - 0.8 * R, y_cou + 0.62 * h_), (fx + 0.8 * R, y_cou + 0.62 * h_)], ep * 0.8, _fonce(ct, 0.75))
+        forme(img, [(fx - 0.3 * R, y_cou + 0.75 * h_), (fx + 0.3 * R, y_cou + 0.75 * h_), (fx + 0.28 * R, y_ourlet + 0.35 * R), (fx - 0.28 * R, y_ourlet + 0.35 * R)], _fonce(ct, 0.94), ep * 0.7)   # poche
+    elif haut == "veste_chef":                                             # veste de chef : col officier, double rangée de boutons
+        forme(img, [(fx - 0.36 * R, y_cou - 0.06 * R), (fx + 0.36 * R, y_cou - 0.06 * R), (fx + 0.38 * R, y_cou + 0.2 * R), (fx - 0.38 * R, y_cou + 0.2 * R)], c_haut, ep)
+        _trait(img, [(fx - 0.38 * R, y_cou + 0.2 * R), (fx + 0.42 * R, y_cou + 0.75 * R), (fx + 0.42 * R, y_ourlet)], ep * 0.8)
+        for k in range(4):
+            for sg in (-1, 1): _ellipse(img, (fx + sg * 0.25 * R + 0.08 * R, y_cou + (0.55 + 0.5 * k) * R), (0.06 * R, 0.06 * R), 0, (60, 60, 70))
+    elif haut == "veste_pompier":                                          # veste de pompier : bandes jaunes réfléchissantes, fermeture à crochets
+        for yb in (y_cou + 0.95 * R, y_ourlet - 0.55 * R):
+            band = [tourne(x - 0.98 * R, yb - 0.14 * R), tourne(x + 0.98 * R, yb - 0.14 * R), tourne(x + 0.98 * R, yb + 0.14 * R), tourne(x - 0.98 * R, yb + 0.14 * R)]
+            _poly(img, band, (250, 215, 50)); _ligne(img, tourne(x - 0.96 * R, yb), tourne(x + 0.96 * R, yb), (215, 220, 225), 0.08 * R); _poly(img, band, TRAIT, True, ep * 0.7)
+        _ligne(img, (fx, y_cou + 0.1 * R), (fx, y_ourlet), TRAIT, ep)
+        for k in range(4): _ligne(img, (fx - 0.1 * R, y_cou + (0.45 + 0.5 * k) * R), (fx + 0.1 * R, y_cou + (0.45 + 0.5 * k) * R), (40, 40, 45), ep * 1.6)
+        forme(img, [(fx - 0.42 * R, y_cou - 0.08 * R), (fx + 0.42 * R, y_cou - 0.08 * R), (fx + 0.46 * R, y_cou + 0.22 * R), (fx - 0.46 * R, y_cou + 0.22 * R)], _fonce(c_haut, 0.85), ep)
+    elif haut == "salopette":                                              # salopette : bavette, bretelles, boutons, poche
+        cs = tuple(C.get("c_salopette") or C.get("c_bas") or (60, 90, 150))
+        for sg in (-1, 1): _ligne(img, tourne(x + sg * 0.5 * R, y_cou + 0.02 * R), (fx + sg * 0.42 * R, y_cou + 0.92 * R), TRAIT, 0.17 * R + 2 * ep); _ligne(img, tourne(x + sg * 0.5 * R, y_cou + 0.02 * R), (fx + sg * 0.42 * R, y_cou + 0.92 * R), cs, 0.17 * R)
+        bav = [(fx - 0.55 * R, y_cou + 0.85 * R), (fx + 0.55 * R, y_cou + 0.85 * R), (fx + 0.62 * R, y_ourlet + 0.1 * R), (fx - 0.62 * R, y_ourlet + 0.1 * R)]
+        forme(img, bav, cs, ep)
+        for sg in (-1, 1): _ellipse(img, (fx + sg * 0.42 * R, y_cou + 0.95 * R), (0.07 * R, 0.07 * R), 0, (225, 185, 80)); _ellipse(img, (fx + sg * 0.42 * R, y_cou + 0.95 * R), (0.07 * R, 0.07 * R), 0, TRAIT, ep * 0.6)
+        forme(img, [(fx - 0.28 * R, y_cou + 1.25 * R), (fx + 0.28 * R, y_cou + 1.25 * R), (fx + 0.26 * R, y_cou + 1.75 * R), (fx - 0.26 * R, y_cou + 1.75 * R)], _fonce(cs, 0.9), ep * 0.7)
+        _ligne(img, (fx - 0.26 * R, y_cou + 1.35 * R), (fx + 0.26 * R, y_cou + 1.35 * R), _clair(cs, 0.4), ep * 0.5)
+    elif haut == "kimono":                                                 # kimono : col croisé, ceinture nouée (noire par défaut)
+        cc = tuple(C.get("c_ceinture") or (25, 25, 28))
+        _trait(img, [(fx - 0.34 * R, y_cou), (fx + 0.12 * R, y_cou + 0.9 * R), (fx + 0.5 * R, y_ourlet - 0.3 * R)], ep * 2.4)
+        _trait(img, [(fx - 0.34 * R, y_cou), (fx + 0.12 * R, y_cou + 0.9 * R), (fx + 0.5 * R, y_ourlet - 0.3 * R)], ep * 0.9, _fonce(c_haut, 0.8))
+        _trait(img, [(fx + 0.34 * R, y_cou), (fx + 0.05 * R, y_cou + 0.55 * R)], ep * 1.2)
+        ce = [tourne(x - 0.98 * R, y_ourlet - 0.42 * R), tourne(x + 0.98 * R, y_ourlet - 0.42 * R), tourne(x + 0.98 * R, y_ourlet - 0.15 * R), tourne(x - 0.98 * R, y_ourlet - 0.15 * R)]
+        forme(img, ce, cc, ep * 0.8); _ellipse(img, (fx + 0.15 * R, y_ourlet - 0.28 * R), (0.13 * R, 0.11 * R), 0, cc); _ellipse(img, (fx + 0.15 * R, y_ourlet - 0.28 * R), (0.13 * R, 0.11 * R), 0, TRAIT, ep * 0.7)
+        for k_ in (-1, 1): forme(img, [(fx + 0.1 * R, y_ourlet - 0.2 * R), (fx + 0.2 * R, y_ourlet - 0.2 * R), (fx + 0.15 * R + k_ * 0.25 * R, y_ourlet + 0.55 * R), (fx + 0.05 * R + k_ * 0.25 * R, y_ourlet + 0.55 * R)], cc, ep * 0.7)
+    elif haut == "combinaison":                                            # combinaison (astronaute, garagiste) : fermeture éclair, écusson, ceinture
+        _ligne(img, (fx, y_cou + 0.1 * R), (fx, y_ourlet + 0.3 * R), _fonce(c_haut, 0.6), ep * 1.2)
+        forme(img, [(fx + 0.3 * R, y_cou + 0.55 * R), (fx + 0.75 * R, y_cou + 0.55 * R), (fx + 0.75 * R, y_cou + 0.85 * R), (fx + 0.3 * R, y_cou + 0.85 * R)], tuple(C.get("c_ecusson") or (60, 90, 180)), ep * 0.7)
+        _ellipse(img, (fx - 0.45 * R, y_cou + 0.75 * R), (0.16 * R, 0.16 * R), 0, (200, 60, 60)); _ellipse(img, (fx - 0.45 * R, y_cou + 0.75 * R), (0.16 * R, 0.16 * R), 0, TRAIT, ep * 0.7)
+        forme(img, [tourne(x - 0.98 * R, y_ourlet - 0.3 * R), tourne(x + 0.98 * R, y_ourlet - 0.3 * R), tourne(x + 0.98 * R, y_ourlet - 0.08 * R), tourne(x - 0.98 * R, y_ourlet - 0.08 * R)], _fonce(c_haut, 0.8), ep * 0.7)
+    elif haut == "tunique_med":                                            # tunique d'hôpital : col en V, poche poitrine avec stylo
+        _poly(img, [(fx - 0.3 * R, y_cou), (fx + 0.3 * R, y_cou), (fx, y_cou + 0.55 * R)], _clair(c_haut, 0.55)); _trait(img, [(fx - 0.32 * R, y_cou), (fx, y_cou + 0.58 * R), (fx + 0.32 * R, y_cou)], ep)
+        forme(img, [(fx + 0.3 * R, y_cou + 0.75 * R), (fx + 0.7 * R, y_cou + 0.75 * R), (fx + 0.68 * R, y_cou + 1.1 * R), (fx + 0.32 * R, y_cou + 1.1 * R)], _fonce(c_haut, 0.92), ep * 0.7)
+        _ligne(img, (fx + 0.45 * R, y_cou + 0.6 * R), (fx + 0.45 * R, y_cou + 0.82 * R), (40, 60, 160), ep * 1.6)
+    if "stethoscope" in det:                                               # stéthoscope autour du cou
+        gris = (70, 75, 85)
+        for sg, bout in ((-1, (fx - 0.2 * R, y_cou + 1.15 * R)), (1, (fx + 0.12 * R, y_cou + 1.35 * R))):
+            pts_ = [(fx + sg * 0.4 * R, y_cou + 0.02 * R), (fx + sg * 0.42 * R, y_cou + 0.6 * R), bout]
+            _trait(img, pts_, ep * 3.2); _trait(img, pts_, ep * 1.8, gris)
+        _ellipse(img, (fx + 0.12 * R, y_cou + 1.45 * R), (0.14 * R + ep, 0.14 * R + ep), 0, TRAIT); _ellipse(img, (fx + 0.12 * R, y_cou + 1.45 * R), (0.14 * R, 0.14 * R), 0, (205, 210, 215))
+    if "noeud_pap" in det:                                                 # nœud papillon bien visible
+        cn = tuple(C.get("c_noeud") or (25, 25, 30)); yn = y_cou + 0.12 * R
+        for sg in (-1, 1): forme(img, [(fx, yn), (fx + sg * 0.3 * R, yn - 0.14 * R), (fx + sg * 0.3 * R, yn + 0.14 * R)], cn, ep * 0.8)
+        _ellipse(img, (fx, yn), (0.07 * R, 0.07 * R), 0, cn); _ellipse(img, (fx, yn), (0.07 * R, 0.07 * R), 0, TRAIT, ep * 0.6)
+
+
 def dessiner(img, P, p):
     """Même interface que marionnette.dessiner (P = personnage, p = pose). Renvoie (tête, (rx, ry))."""
     C = dict(p.get("costume") or {})
@@ -892,7 +956,7 @@ def dessiner(img, P, p):
     haut = C.get("haut") or "tshirt"; c_haut = tuple(C.get("c_haut") or (90, 140, 200)); c_haut_o = _fonce(c_haut, 0.88)
     bas = C.get("bas") or "jean"; c_bas = tuple(C.get("c_bas") or (60, 80, 130)); c_bas_o = _fonce(c_bas, 0.90)
     robe = haut in ("robe", "tunique") or bas == "jupe"
-    courte = haut in ("tshirt", "polo", "debardeur", "hawai", "maillot")
+    courte = haut in ("tshirt", "polo", "debardeur", "hawai", "maillot", "tunique_med", "salopette")
     det = tuple(C.get("details") or ())
     def tourne(px, py):                                                    # trois-quarts : le côté fuyant (vers d) se resserre
         dx = px - x; k = (0.86 if dx * d > 0 else 1.04) if k34 else 1.0
@@ -1085,6 +1149,7 @@ def dessiner(img, P, p):
     if haut == "doudoune":
         for k in range(1, 5): _trait(img, [tourne(x - 0.98 * R, y_cou + k * 0.48 * R), tourne(x, y_cou + k * 0.48 * R + 0.06 * R), tourne(x + 0.98 * R, y_cou + k * 0.48 * R)], ep * 0.8)
     if haut in ("survetement", "doudoune", "blouson"): _ligne(img, (fx, y_cou + 0.1 * R), (fx, y_ourlet - 0.05 * R), TRAIT, ep * 0.8)
+    if not dos: metier_buste(img, haut, C, det, x, fx, y_cou, y_ourlet, R, c_haut, ep, tourne)   # tenues de métier (moteur/metiers.py)
     if "cravate" in det:
         cr = tuple(C.get("c_cravate") or (180, 40, 50))
         forme(img, [(fx - 0.1 * R, y_cou + 0.08 * R), (fx + 0.1 * R, y_cou + 0.08 * R), (fx + 0.16 * R, y_cou + 1.1 * R), (fx, y_cou + 1.3 * R), (fx - 0.16 * R, y_cou + 1.1 * R)], cr, ep * 0.8)

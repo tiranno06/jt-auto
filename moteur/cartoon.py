@@ -883,6 +883,12 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
             if o is None: o = objets[("telephone", round(s, 2))] = M.objet("telephone", s * ((0.8 if TOON else 0.5) if FICHES else 1.0))
             if o is not None: p["main_d"] = o
             p["regard"] = (0.15 * (p.get("tq") or 0), 0.7)
+        # outil du métier (moteur/metiers.py) : tenu dans la main gauche quand aucun autre objet n'est en main
+        c_m = (B["costumes"].get(role) or {}) if B else {}
+        if c_m.get("outil") and p.get("main_g") is None and p.get("main_d") is None and not (mien and mien.get("objet") and tm <= mien["fin"] + 0.3):
+            o = objets.get((c_m["outil"], round(s, 2)))
+            if o is None: o = objets[(c_m["outil"], round(s, 2))] = M.objet(c_m["outil"], s * ((0.8 if TOON else 0.5) if FICHES else 1.0))
+            if o is not None: p["main_g"] = o; p["main_forme_g"] = "poing"
         # objet en main pendant la réplique
         if mien and mien.get("objet") and tm <= mien["fin"] + 0.3:
             o = objets.get((mien["objet"], round(s, 2)))

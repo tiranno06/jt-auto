@@ -370,6 +370,30 @@ class TestPlanning(unittest.TestCase):
             planning._api = anc[0]; planning._MOI.clear(); os.environ.clear(); os.environ.update(anc[1])
 
 
+class TestMetiers(unittest.TestCase):
+    def test_metier_entendu_habille_le_bon_personnage(self):
+        """« Je suis pompier » : lui ; « t'es plombier ? », « bonjour docteur » : l'autre ; un métier juste cité n'habille personne."""
+        import metiers as MT, studio, marionnette as M
+        q = lambda *l: MT.qui_fait({"repliques": [{"p": p, "t": t} for p, t in l]})
+        self.assertEqual(q(("presentateur", "Bonjour docteur, j'ai mal au ventre."), ("invite", "Asseyez-vous.")), {"invite": "medecin"})
+        self.assertEqual(q(("presentateur", "Je suis pompier depuis dix ans."), ("invite", "Ah ouais ?")), {"presentateur": "pompier"})
+        self.assertEqual(q(("presentateur", "T'es plombier toi ?"), ("invite", "Ouais.")), {"invite": "plombier"})
+        self.assertEqual(q(("presentateur", "Monsieur l'agent, je roulais pas vite."), ("invite", "Vos papiers.")), {"invite": "policier"})
+        self.assertEqual(q(("presentateur", "Moi je suis prof, et toi ?"), ("invite", "Moi je suis infirmière.")), {"presentateur": "enseignant", "invite": "infirmier"})
+        self.assertEqual(q(("presentateur", "Mon père est plombier."), ("invite", "Les pompiers arrivent !")), {})
+        for nom, m in MT.CATALOGUE.items():                               # tout ce que le catalogue demande sait être dessiné
+            c = m["costume"]
+            self.assertIn(c["haut"], M.HAUTS, nom); self.assertTrue(not c.get("chapeau") or c["chapeau"] in M.CHAPEAUX, nom)
+            if m.get("outil"):
+                o = M.objet(m["outil"], 0.8); self.assertIsNotNone(o, nom); self.assertGreater(int(o[..., 3].max()), 0, nom)
+        sk = {"repliques": [{"p": "presentateur", "t": "Je suis pompier, reculez !"}, {"p": "invite", "t": "Mais c'est ma maison qui brûle !"}],
+              "decoupage": [{"scene": "1", "repliques": [0, 1], "decor": "a street"}]}
+        B = studio.bible(sk, ["presentateur", "invite"])
+        c = B["costumes"]["presentateur"]
+        self.assertEqual((c["haut"], c["chapeau"], c["outil"]), ("veste_pompier", "casque_pompier", "lance"))
+        self.assertNotEqual(B["costumes"]["invite"].get("metier"), "pompier")
+
+
 class TestPublicationAuto(unittest.TestCase):
     def test_une_video_cochee_par_jour(self):
         """Vidéos cochées dans l'onglet TikTok : la plus ancienne cochée non publiée part chaque jour à l'heure choisie (via Buffer)."""

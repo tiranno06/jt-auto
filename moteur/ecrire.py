@@ -403,7 +403,9 @@ def _sources(proposees, liens):
 
 EFFETS = ("pluie_billets", "tremblement")
 OBJETS = ("telephone", "billet", "portefeuille", "micro", "verre", "cafe", "livre", "cles", "carte", "facture", "bouteille", "haltere",   # = marionnette.OBJETS
-          "seringue", "parapluie", "telecommande", "fleur", "cadeau", "pizza", "croissant", "tablette", "lettre", "journal", "stylo", "valise")
+          "seringue", "parapluie", "telecommande", "fleur", "cadeau", "pizza", "croissant", "tablette", "lettre", "journal", "stylo", "valise",
+          "lance", "talkie", "porte_bloc", "poele", "baguettes", "plans", "marteau", "tournevis", "cle_molette", "fourche", "arrosoir", "palette",   # = metiers.OUTILS
+          "guitare", "plateau", "eprouvette", "ordinateur", "colis", "ciseaux", "marteau_juge", "baguette_magique")
 SONS_DISPONIBLES = ("rimshot", "xylo_descente", "trombone_triste", "dun_dun", "woosh", "reconstitution")
 def _decoupage(dec, n):
     """Découpage scène par scène, normalisé pour le moteur vidéo :
