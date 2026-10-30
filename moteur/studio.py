@@ -340,7 +340,7 @@ def bible(sk, roles):
                 c["c_haut"] = tuple(int(v) for v in pers["habit"]); c["c_motif"] = M._fonce(c["c_haut"], 0.72)
             if pers.get("cheveux") and "c_cheveux" not in (demande.get(role) or {}): c["c_cheveux"] = tuple(int(v) for v in pers["cheveux"])
     figurants = []
-    if os.environ.get("FIGURANTS", "1") != "0":
+    if os.environ.get("FIGURANTS", "0") == "1":                            # choix de l'auteur : plus de figurants inutiles au fond (FIGURANTS=1 pour revenir)
         for k, l in enumerate(lieux):
             n = {"bar": 2, "restaurant": 2, "bureau": 1, "magasin": 1, "rue": 2, "salle_sport": 1, "classe": 0, "administration": 2, "palais": 1}.get(l, 0)
             for j in range(n):

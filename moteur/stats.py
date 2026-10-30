@@ -152,6 +152,18 @@ def meilleure_heure(defaut=17):
     if not bonnes: return defaut
     return (max(bonnes, key=bonnes.get) - 1) % 24                         # la fabrication prend environ 30 min
 
+def meilleure_heure_publication(defaut=18):
+    """Heure de publication (Paris) où nos vidéos TikTok font le plus de vues en moyenne (au moins 2 vidéos à cette heure) ;
+    défaut tant qu'il y a moins de 8 vidéos publiées."""
+    from zoneinfo import ZoneInfo
+    vids = [v for v in lire().get("videos", []) if v.get("date")]
+    if len(vids) < 8: return defaut
+    par_h = {}
+    for v in vids:
+        h = datetime.datetime.fromtimestamp(v["date"], ZoneInfo("Europe/Paris")).hour; par_h.setdefault(h, []).append(v.get("vues", 0))
+    bonnes = {h: sum(x) / len(x) for h, x in par_h.items() if len(x) >= 2}
+    return max(bonnes, key=bonnes.get) if bonnes else defaut
+
 def pseudos_libres(noms):
     """Vérifie si des pseudos TikTok sont déjà pris (une chaîne publique existe à cette adresse)."""
     for n in noms:

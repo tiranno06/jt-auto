@@ -193,6 +193,13 @@
   **Tirage au hasard des sons TikTok** : le robot préfère les vidéos aux voix bien différentes (ressemblance ≤ 0,6, réglage
   VOIX_DIFFERENTES ; 1 = sans tri) : jusqu'à 6 vidéos écoutées (25 min au plus), sinon celle aux voix les plus nettes. Un lien collé
   à la main n'est jamais refusé (le contrôle questions-réponses s'en charge).
+- **Idées choisies par l'auteur (30 octobre 2026, 1re partie)** : plus de figurants inutiles en arrière-plan (FIGURANTS=1 pour les
+  remettre ; les compagnons dont on parle restent), plus de voiture qui passe au hasard (VOITURE_PASSE=1), plus de chute en arrière
+  à la fin (CHUTE_KO=1) ; **fin en boucle** (`moteur/boucle.py` : la dernière image glisse vers la première, BOUCLE=0 pour couper) ;
+  **note de potentiel** des sons avant fabrication + **sons qui montent** (`profils_tiktok.potentiel` / `vitesse` : vues par jour,
+  durée 20-70 s) ; **profils pondérés par nos vues** (`profils_tiktok.poids_profils`) ; **heure de publication par les stats**
+  (case « Heure choisie par les statistiques », PUBLI_HEURE_AUTO, `stats.meilleure_heure_publication` ; l'heure fixe reste au
+  choix) ; **partage direct depuis l'appli TikTok** (site installé = cible de partage : `?partage=1` remplit le lien de l'onglet TikTok).
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.

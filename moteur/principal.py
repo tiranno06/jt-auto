@@ -475,6 +475,9 @@ def main():
             import cartoon
             cartoon.DETAIL = False                                         # secours : bonshommes simples, plans simples (la vidéo sort quand même)
             duree = cartoon.rendre(sk, base + ".mp4", audios, mots=mots, decors={}, mini=fmt == "mini")
+    if (os.environ.get("APERCU_RAPIDE") or "") != "1":                     # fin en boucle : la dernière image se raccorde à la première
+        try: duree = __import__("boucle").boucler(base + ".mp4")
+        except Exception as e: print(f"fin en boucle impossible ({str(e)[:120]})", flush=True)
     credit = "Voix : " + " ; ".join(credits_voix) + "."
     if decors: credit += " Décors générés avec Stable Diffusion XL (CreativeML Open RAIL++-M)."
     if libre:                                                              # signature de la chaîne dans les hashtags
