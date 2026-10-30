@@ -2,29 +2,29 @@ Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, ElevenLabs epuise — IA utilisée : mistral
 Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @motiontoonz, @same_same53, @charly.bse, @kodanimation, @vignianimation, @vincedessine
-Profil TikTok @vignianimation (poids 1.3) : 31 vidéo(s) jamais utilisée(s), meilleur potentiel 81/100
-Profil TikTok @same_same53 (poids 1.8) : 32 vidéo(s) jamais utilisée(s), meilleur potentiel 64/100
 Profil TikTok @yan_animation0 (poids 1.3) : 23 vidéo(s) jamais utilisée(s), meilleur potentiel 87/100
-Vidéo depuis TikTok : https://www.tiktok.com/@vignianimation/video/7701033955058896160
+Profil TikTok @same_same53 (poids 1.8) : 32 vidéo(s) jamais utilisée(s), meilleur potentiel 68/100
+Profil TikTok @kodanimation (poids 1.0) : 23 vidéo(s) jamais utilisée(s), meilleur potentiel 100/100
+Vidéo depuis TikTok : https://www.tiktok.com/@yan_animation0/video/7676197049360010529
   son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 60.2 s, compte d'origine @vignianimation
-[ WARN:0@19.433] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  son récupéré : 63.7 s, compte d'origine @yan_animation0
+[ WARN:0@18.180] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
 INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
 WARNING: Logging before InitGoogle() is written to STDERR
-W0000 00:00:1793395043.723545    4214 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
-W0000 00:00:1793395043.745753    4214 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
-W0000 00:00:1793395043.774609    4215 landmark_projection_calculator.cc:81] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX.
-  image de la vidéo : 1 plans (≈ 60.5 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 24 %, large 75 % ; caméra : fixe 86 %, avance 12 %, epaule 0 % ; 1 personne(s) à l'écran : gauche (habit [184, 160, 125], cheveux [55, 91, 68], sourit 0 %) ; agitation 0.174 ; lumière soir ; fond [215, 175, 135]
+W0000 00:00:1793396438.945773    4298 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1793396438.966970    4299 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1793396438.994210    4300 landmark_projection_calculator.cc:81] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX.
+  image de la vidéo : 1 plans (≈ 64.0 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 100 %, large 0 % ; caméra : fixe 100 % ; 2 personne(s) à l'écran : gauche (habit [129, 68, 64], cheveux [42, 30, 22], sourit 0 %); droite (habit [74, 66, 65], cheveux [16, 20, 9], sourit 0 %); centre (habit [155, 169, 183], cheveux [215, 153, 90], sourit 0 %) ; agitation 0.173 ; lumière nuit ; fond [0, 0, 0]
   isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
-  voix isolées gratuitement (Demucs, 38 s)
+  voix isolées gratuitement (Demucs, 36 s)
   transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
   transcription Groq impossible (HTTP Error 403: Forbidden)
   Whisper indisponible (Whisper : ResourceExhaustedError Function call failed: workspace billing cycle spend limit reached) : contrôle simplifié
-[0;93m2026-10-30 21:18:09.636750653 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
-  transcription gratuite (Whisper sur la machine) : 234 mots
-Loading weights:   0%|          | 0/424 [00:00<?, ?it/s]Loading weights: 100%|██████████| 424/424 [00:00<00:00, 16062.44it/s]
-  mots recalés sur la voix (225 mots, écart moyen 77 ms, 15 s)
-Loading weights:   0%|          | 0/447 [00:00<?, ?it/s]Loading weights: 100%|██████████| 447/447 [00:00<00:00, 14728.30it/s]
+[0;93m2026-10-30 21:41:25.263158935 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+  transcription gratuite (Whisper sur la machine) : 314 mots
+Loading weights:   0%|          | 0/424 [00:00<?, ?it/s]Loading weights: 100%|██████████| 424/424 [00:00<00:00, 18936.51it/s]
+  mots recalés sur la voix (309 mots, écart moyen 87 ms, 17 s)
+Loading weights:   0%|          | 0/447 [00:00<?, ?it/s]Loading weights: 100%|██████████| 447/447 [00:00<00:00, 9688.92it/s]
   bruits de l'original (CLAP, 8 s) : aucun
   NeMo indisponible (Lookup failed for Cls 'Nemo' from the 'jt-ecoute' app: App 'jt-ecoute' not found in environment 'main'.)
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/core/io.py:48: UserWarning: 
@@ -36,11 +36,11 @@ Could not load this library: /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3
   warnings.warn(
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1927.)
   std = sequences.std(dim=-1, correction=1)
-  voix séparées par pyannote : 2 voix, 23 tours de parole
-  voix vérifiées mot par mot : 67 mot(s) remis sur la bonne voix
+  voix séparées par pyannote : 2 voix, 26 tours de parole
+  voix vérifiées mot par mot : 25 mot(s) remis sur la bonne voix
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/importlib/__init__.py:90: UserWarning: Module 'speechbrain.lobes.models.huggingface_transformers' was deprecated, redirecting to 'speechbrain.integrations.huggingface'. Please update your script.
   return _bootstrap._gcd_import(name[level:], package, level)
-Loading weights:   0%|          | 0/211 [00:00<?, ?it/s]Loading weights: 100%|██████████| 211/211 [00:00<00:00, 14559.24it/s]
+Loading weights:   0%|          | 0/211 [00:00<?, ?it/s]Loading weights: 100%|██████████| 211/211 [00:00<00:00, 13368.15it/s]
 [transformers] [1mWav2Vec2Model LOAD REPORT[0m from: facebook/wav2vec2-base
 Key                          | Status     |  | 
 -----------------------------+------------+--+-
@@ -56,39 +56,40 @@ Notes:
 - UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
 speechbrain.integrations.huggingface.huggingface - Wav2Vec2Model is frozen.
 CategoricalEncoder.expect_len was never called: assuming category count of 4 to be correct! Sanity check your encoder using `.expect_len`. Ensure that downstream code also uses the correct size. If you are sure this does not apply to you, use `.ignore_len`.
-  émotions entendues dans la voix : 0 réplique(s) (5 s)
-  26 répliques, voix : {'speaker_0': 195, 'speaker_1': 223}
-  son de la vidéo : 2 voix [195 Hz (f, 48 %), 223 Hz (f, 52 %)], 5.86 mots/s, blancs 0.47 s, 3 coupure(s) de parole, dynamique 22.6 dB, musique de fond, 23 bruitage(s) (0 graves, 23 aigus, 11 sur une fin de réplique), événements {}, émotions {}
-  scène reconstituée : Un propriétaire reçoit un appel de son locataire qui lui annonce calmement qu'il arrête de payer le loyer et devient squatteur légal.
-  casting : speaker_0 → Jojo, speaker_1 → Kévin
-  sous-titres : 15 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
-Sketch : « SQUATTEUR POLI », 26 répliques
-Lieux séparés : chaque personnage a son propre décor (appel, visio, l'un ailleurs)
-  décor 0 (lieu déjà connu) : quiet city street at dusk, parked car at the curb, sidewalk, street la
-  décor 1 (lieu déjà connu) : cozy living room, sofa, posters on the wall, coffee table, lamp, telev
-montage : 19 plans (0.7:large>pre/coupe 1.0:large>inv/coupe 2.6:large>pre/coupe 3.8:large>inv/coupe 6.7:large>pre/coupe 8.3:large>inv/coupe 9.5:large>pre/coupe 11.7:large>inv/coupe 13.5:large>pre/coupe 16.1:large>inv/coupe 19.8:large>pre/coupe 21.9:large>inv/coupe 26.2:large>pre/coupe 29.0:large>inv/coupe 32.5:large>pre/coupe 33.2:large>inv/coupe 36.8:large>pre/coupe 37.5:large>inv/coupe 40.0:large>pre/coupe)
+  émotions entendues dans la voix : 0 réplique(s) (6 s)
+  27 répliques, voix : {'speaker_0': 144, 'speaker_1': 237}
+  son de la vidéo : 2 voix [144 Hz (h, 71 %), 237 Hz (f, 28 %)], 5.75 mots/s, blancs 0.31 s, 5 coupure(s) de parole, dynamique 20.2 dB, musique de fond, 42 bruitage(s) (10 graves, 32 aigus, 14 sur une fin de réplique), événements {}, émotions {}
+  réponse coupée (limite de 8000 jetons atteinte) pour doublage
+  IA gemini indisponible (The read operation timed out) : on passe à la suivante
+  scène reconstituée : Une discussion humoristique et décalée entre un présentateur sceptique et une invitée ouverte d'esprit sur le thème de l'identité d'un futur bébé, dans un décor futuriste et minimaliste évoquant une consultation médicale ou un salon d'experts.
+  casting : speaker_0 → Jojo, speaker_1 → Lila
+  sous-titres : 11 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
+  Claude a réattribué 1 réplique(s) à la bonne personne (voix proches)
+  5 réattribution(s) de l'IA refusée(s) : la voix de ces répliques est reconnue avec certitude
+Sketch : « LES PARENTS EN 2026 », 27 répliques
+  décors nets indisponibles (ResourceExhaustedError Function call failed: workspace billing cycle spend limit reached) : décors simples
+Décors indisponibles (ResourceExhaustedError Function call failed: workspace billing cycle spend limit reached) : fonds unis.
+montage : 2 plans (0.1:large>pre/coupe 42.2:large>pre/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-objets de l'histoire : véhicule dans 1 décor(s)
-studio : soir, lieux ['rue', 'salon'], tenues presentateur=tshirt, invite=pull, 0 figurant(s), ambiances ['neon', 'poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-appel : 5 écran(s) partagé(s), 4 plan(s) d'écoute
-cartoon : durée 58.4 s, 26 répliques, 2 scène(s), personnages ['presentateur', 'invite']
-montage : 19 plans (0.7:large>pre/coupe 1.0:large>inv/coupe 2.6:large>pre/coupe 3.8:large>inv/coupe 6.7:large>pre/coupe 8.3:large>inv/coupe 9.5:large>pre/coupe 11.7:large>inv/coupe 13.5:large>pre/coupe 16.1:large>inv/coupe 19.8:large>pre/coupe 21.9:large>inv/coupe 26.2:large>pre/coupe 29.0:large>inv/coupe 32.5:large>pre/coupe 33.2:large>inv/coupe 36.8:large>pre/coupe 37.5:large>inv/coupe 40.0:large>pre/coupe)
+studio : soir, lieux ['cabinet_medical', 'salon'], tenues presentateur=chemise, envoyee=blouse, invite=blouse, 1 figurant(s), ambiances ['neon', 'poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 66.1 s, 27 répliques, 2 scène(s), personnages ['presentateur', 'envoyee', 'invite']
+Contrôle image : 2 défaut(s) — 42.25 s tete_coupee (envoyee), 42.25 s chevauchement (envoyee+invite)
+montage : 2 plans (0.1:large>pre/coupe 42.2:large>pre/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-objets de l'histoire : véhicule dans 1 décor(s)
-studio : soir, lieux ['rue', 'salon'], tenues presentateur=tshirt, invite=pull, 0 figurant(s), ambiances ['neon', 'poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-appel : 5 écran(s) partagé(s), 4 plan(s) d'écoute
-cartoon : durée 58.4 s, 26 répliques, 2 scène(s), personnages ['presentateur', 'invite']
-  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~875 images)
-  morceau 1750–2626 reçu d'une machine d'aide
-  morceau 2626–3501 reçu d'une machine d'aide
-  morceau 875–1750 reçu d'une machine d'aide
-  dessin partagé terminé en 4.5 min
+studio : soir, lieux ['cabinet_medical', 'salon'], tenues presentateur=chemise, envoyee=blouse, invite=blouse, 1 figurant(s), ambiances ['neon', 'poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 66.1 s, 27 répliques, 2 scène(s), personnages ['presentateur', 'envoyee', 'invite']
+Contrôle image : 2 défaut(s) — 42.25 s tete_coupee (envoyee), 42.25 s chevauchement (envoyee+invite)
+  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~992 images)
+  morceau 992–1984 reçu d'une machine d'aide
+  morceau 2976–3968 reçu d'une machine d'aide
+  morceau 1984–2976 reçu d'une machine d'aide
+  dessin partagé terminé en 5.5 min
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury qualité (ia) : 5.1/10 — Humoriste 5.0/10 : 51.5 s Chute finale plate sans accentuation comique visuelle.; 50 s Manque d'ironie marquée sur la conclusion. | Réalisateur 5.0/10 : 32.5 s Plans moyens extérieurs trop répétitifs et statiques.; 41.1 s Absence de dynamisme sur la bascule de naïveté. | Directeur artistique 6.0/10 : 0.4 s Le propriétaire dans la rue devant une voiture de police nuit à l'intimité de l'appel.; 17.9 s Posture assise du locataire un peu raide comparée au décor. | Ingénieur du son 4.0/10 : 11.7 s Aucun effet sonore pour marquer les révélations absurdes.; 44.7 s Raccrochage et chute dépourvus d'impact audio. | Spectateur TikTok 5.0/10 : 0.4 s Accroche visuelle confuse avec double texte sous le bandeau titre.; 24.1 s Passages en champ-contrechamp un peu longs au milieu.
-Manque par rapport à la vidéo d'origine : Dans l'original, le personnage est seul dans un salon luxueux et tient son téléphone, rendant la discussion plus absurde et épurée. ; Gesticulation et poses dynamiques du personnage original absentes chez notre présentateur statique dans la rue.
+Jury qualité (ia) : 6.0/10 — Humoriste 6.0/10 : 60 s La chute finale manque d'impact comique.; 60 s Pas de zoom choc sur la dernière réplique. | Réalisateur 5.0/10 : 0 s Montage trop lent avec seulement 2 plans sur toute la vidéo.; 12 s Manque de plans de réaction pour dynamiser la discussion.; 42.2 s tête de envoyee coupée par le bord de l'image (large) | Directeur artistique 6.0/10 : 2 s Superposition de personnages entre l'envoyée et l'invité.; 0 s Tenues et proportions des personnages parfois inadaptées.; 42.2 s deux personnages l'un sur l'autre (envoyee+invite) | Ingénieur du son 7.0/10 : 28 s Absence de bruitages comiques sur les punchlines de la chèvre. | Spectateur TikTok 6.0/10 : 0 s Sous-titres un peu trop denses et rapides à lire.
+Manque par rapport à la vidéo d'origine : Le décor de l'hôpital d'origine avec le matériel médical et l'ambiance verte. ; Les poses spécifiques des parents sur les chaises d'examen comme dans la vidéo originale.
 fin en boucle : la dernière image se raccorde à la première (0.35 s de fondu)
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = gemini ×2, voix = tiktok, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 17066, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0}
-Quota de l'API GitHub : 4967 appels restants
-OK : sortie/2026-10-30_22h24_emission.mp4 (59 s)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = gemini ×2, mistral ×1, voix = tiktok, decors = dessines, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 15670, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 2}
+Quota de l'API GitHub : 4913 appels restants
+OK : sortie/2026-10-30_22h49_emission.mp4 (67 s)

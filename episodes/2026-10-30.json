@@ -1,1331 +1,22 @@
 {
- "titre": "SQUATTEUR POLI",
- "sujet": "SQUATTEUR POLI",
- "ecran": "SQUATTEUR POLI",
+ "titre": "LES PARENTS EN 2026",
+ "sujet": "LES PARENTS EN 2026",
+ "ecran": "LES PARENTS EN",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "POV : Ton locataire devient squatteur",
- "question": "Vous auriez réagi comment à sa place ?",
+ "titre_accroche": "POV : Quand l'identité de bébé est un mystère",
+ "question": "Et vous, seriez-vous prêt à attendre que votre enfant choisisse son identité ?",
  "running_gag": "",
  "verite": "",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "Allô ?",
-   "_deb": 0.661,
-   "_fin": 0.99,
-   "d": "[neutral] Allô ?",
+   "t": "C'est un garçon.",
+   "_deb": 0.06,
+   "_fin": 0.501,
    "objet": "telephone",
-   "_mots": [
-    [
-     "Allô",
-     0.0,
-     0.201
-    ],
-    [
-     "?",
-     0.229,
-     0.329
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Oui, bonjour, c'est votre locataire.",
-   "_deb": 1.042,
-   "_fin": 2.428,
-   "d": "[confident] Oui, bonjour, c'est votre locataire.",
-   "_mots": [
-    [
-     "Oui,",
-     0.0,
-     0.081
-    ],
-    [
-     "bonjour,",
-     0.241,
-     0.502
-    ],
-    [
-     "c",
-     0.563,
-     0.583
-    ],
-    [
-     "'est",
-     0.603,
-     0.683
-    ],
-    [
-     "votre",
-     0.703,
-     0.864
-    ],
-    [
-     "locataire.",
-     0.944,
-     1.386
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Ah bonjour, tout va bien ?",
-   "_deb": 2.608,
-   "_fin": 3.69,
-   "d": "[friendly] Ah bonjour, tout va bien ?",
-   "_mots": [
-    [
-     "Ah",
-     0.0,
-     0.06
-    ],
-    [
-     "bonjour,",
-     0.201,
-     0.542
-    ],
-    [
-     "tout",
-     0.643,
-     0.743
-    ],
-    [
-     "va",
-     0.743,
-     0.783
-    ],
-    [
-     "bien",
-     0.783,
-     0.862
-    ],
-    [
-     "?",
-     0.862,
-     1.082
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "Oui, tout va bien, c'était juste pour vous prévenir que j'allais arrêter de payer le loyer.",
-   "_deb": 3.773,
-   "_fin": 6.545,
-   "d": "[calm] Oui, tout va bien, c'était juste pour vous prévenir que j'allais arrêter de payer le loyer.",
-   "_mots": [
-    [
-     "Oui,",
-     0.0,
-     0.08
-    ],
-    [
-     "tout",
-     0.241,
-     0.341
-    ],
-    [
-     "va",
-     0.361,
-     0.441
-    ],
-    [
-     "bien,",
-     0.502,
-     0.602
-    ],
-    [
-     "c",
-     0.682,
-     0.702
-    ],
-    [
-     "'était",
-     0.742,
-     0.903
-    ],
-    [
-     "juste",
-     0.943,
-     1.084
-    ],
-    [
-     "pour",
-     1.104,
-     1.204
-    ],
-    [
-     "vous",
-     1.224,
-     1.325
-    ],
-    [
-     "prévenir",
-     1.345,
-     1.606
-    ],
-    [
-     "que",
-     1.646,
-     1.748
-    ],
-    [
-     "j",
-     1.748,
-     1.768
-    ],
-    [
-     "'allais",
-     1.788,
-     1.949
-    ],
-    [
-     "arrêter",
-     1.949,
-     2.19
-    ],
-    [
-     "de",
-     2.21,
-     2.25
-    ],
-    [
-     "payer",
-     2.27,
-     2.451
-    ],
-    [
-     "le",
-     2.451,
-     2.491
-    ],
-    [
-     "loyer.",
-     2.491,
-     2.772
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Ah mince, vous voulez quitter l'appartement ?",
-   "_deb": 6.706,
-   "_fin": 8.17,
-   "d": "[confused] Ah mince, vous voulez quitter l'appartement ?",
-   "_mots": [
-    [
-     "Ah",
-     0.0,
-     0.04
-    ],
-    [
-     "mince,",
-     0.08,
-     0.341
-    ],
-    [
-     "vous",
-     0.381,
-     0.482
-    ],
-    [
-     "voulez",
-     0.482,
-     0.662
-    ],
-    [
-     "quitter",
-     0.662,
-     0.863
-    ],
-    [
-     "l",
-     0.883,
-     0.923
-    ],
-    [
-     "'appartement",
-     0.943,
-     1.284
-    ],
-    [
-     "?",
-     1.284,
-     1.464
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "Ah non, non, je reste dedans.",
-   "_deb": 8.332,
-   "_fin": 9.316,
-   "d": "[amused] Ah non, non, je reste dedans.",
-   "_mots": [
-    [
-     "Ah",
-     0.0,
-     0.06
-    ],
-    [
-     "non,",
-     0.121,
-     0.221
-    ],
-    [
-     "non,",
-     0.261,
-     0.341
-    ],
-    [
-     "je",
-     0.422,
-     0.502
-    ],
-    [
-     "reste",
-     0.542,
-     0.703
-    ],
-    [
-     "dedans.",
-     0.743,
-     0.984
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Je comprends pas, si vous payez plus, vous êtes plus locataire.",
-   "_deb": 9.497,
-   "_fin": 11.397,
-   "d": "[confused] Je comprends pas, si vous payez plus, vous êtes plus locataire.",
-   "_mots": [
-    [
-     "Je",
-     0.0,
-     0.04
-    ],
-    [
-     "comprends",
-     0.08,
-     0.321
-    ],
-    [
-     "pas,",
-     0.341,
-     0.562
-    ],
-    [
-     "si",
-     0.702,
-     0.722
-    ],
-    [
-     "vous",
-     0.626,
-     0.768
-    ],
-    [
-     "payez",
-     0.788,
-     0.99
-    ],
-    [
-     "plus,",
-     1.031,
-     1.172
-    ],
-    [
-     "vous",
-     1.193,
-     1.294
-    ],
-    [
-     "êtes",
-     1.294,
-     1.415
-    ],
-    [
-     "plus",
-     1.435,
-     1.516
-    ],
-    [
-     "locataire.",
-     1.536,
-     1.9
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "Exactement, je deviens squatteur.",
-   "_deb": 11.66,
-   "_fin": 13.186,
-   "d": "[proud] Exactement, je deviens squatteur.",
-   "_mots": [
-    [
-     "Exactement,",
-     0.0,
-     0.502
-    ],
-    [
-     "je",
-     0.662,
-     0.723
-    ],
-    [
-     "deviens",
-     0.803,
-     1.084
-    ],
-    [
-     "squatteur.",
-     1.124,
-     1.526
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Si vous êtes squatteur, je vais appeler la police et ils vont vous déloger tout simplement.",
-   "_deb": 13.527,
-   "_fin": 15.996,
-   "d": "[annoyed] Si vous êtes squatteur, je vais appeler la police et ils vont vous déloger tout simplement.",
-   "objet": "telephone",
-   "_mots": [
-    [
-     "Si",
-     0.0,
-     0.08
-    ],
-    [
-     "vous",
-     0.12,
-     0.221
-    ],
-    [
-     "êtes",
-     0.261,
-     0.361
-    ],
-    [
-     "squatteur,",
-     0.381,
-     0.642
-    ],
-    [
-     "je",
-     0.642,
-     0.682
-    ],
-    [
-     "vais",
-     0.682,
-     0.763
-    ],
-    [
-     "appeler",
-     0.763,
-     0.943
-    ],
-    [
-     "la",
-     1.004,
-     1.044
-    ],
-    [
-     "police",
-     1.104,
-     1.365
-    ],
-    [
-     "et",
-     1.385,
-     1.425
-    ],
-    [
-     "ils",
-     1.425,
-     1.485
-    ],
-    [
-     "vont",
-     1.485,
-     1.586
-    ],
-    [
-     "vous",
-     1.626,
-     1.706
-    ],
-    [
-     "déloger",
-     1.726,
-     2.027
-    ],
-    [
-     "tout",
-     2.068,
-     2.148
-    ],
-    [
-     "simplement.",
-     2.168,
-     2.469
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Alors non, parce que j'ai changé les serrures et mis les factures à mon nom, donc ils peuvent rien faire.",
-   "_deb": 16.137,
-   "_fin": 19.594,
-   "d": "[smug] Alors non, parce que j'ai changé les serrures et mis les factures à mon nom, donc ils peuvent rien faire.",
-   "_mots": [
-    [
-     "Alors",
-     0.0,
-     0.22
-    ],
-    [
-     "non,",
-     0.26,
-     0.341
-    ],
-    [
-     "parce",
-     0.401,
-     0.542
-    ],
-    [
-     "que",
-     0.542,
-     0.602
-    ],
-    [
-     "j",
-     0.782,
-     0.802
-    ],
-    [
-     "'ai",
-     0.704,
-     0.744
-    ],
-    [
-     "changé",
-     0.785,
-     1.006
-    ],
-    [
-     "les",
-     1.106,
-     1.186
-    ],
-    [
-     "serrures",
-     1.247,
-     1.568
-    ],
-    [
-     "et",
-     1.628,
-     1.669
-    ],
-    [
-     "mis",
-     1.689,
-     1.789
-    ],
-    [
-     "les",
-     1.829,
-     1.91
-    ],
-    [
-     "factures",
-     1.93,
-     2.231
-    ],
-    [
-     "à",
-     2.271,
-     2.292
-    ],
-    [
-     "mon",
-     2.352,
-     2.432
-    ],
-    [
-     "nom,",
-     2.472,
-     2.553
-    ],
-    [
-     "donc",
-     2.693,
-     2.774
-    ],
-    [
-     "ils",
-     2.854,
-     2.914
-    ],
-    [
-     "peuvent",
-     2.914,
-     3.095
-    ],
-    [
-     "rien",
-     3.095,
-     3.216
-    ],
-    [
-     "faire.",
-     3.276,
-     3.457
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Et bah s'ils peuvent rien faire, c'est moi qui vais venir pour vous dégager.",
-   "_deb": 19.755,
-   "_fin": 21.685,
-   "d": "[angry] Et bah s'ils peuvent rien faire, c'est moi qui vais venir pour vous dégager.",
-   "_mots": [
-    [
-     "Et",
-     0.0,
-     0.06
-    ],
-    [
-     "bah",
-     0.08,
-     0.201
-    ],
-    [
-     "s",
-     0.261,
-     0.281
-    ],
-    [
-     "'ils",
-     0.321,
-     0.381
-    ],
-    [
-     "peuvent",
-     0.381,
-     0.542
-    ],
-    [
-     "rien",
-     0.542,
-     0.643
-    ],
-    [
-     "faire,",
-     0.683,
-     0.803
-    ],
-    [
-     "c",
-     0.844,
-     0.864
-    ],
-    [
-     "'est",
-     0.884,
-     0.946
-    ],
-    [
-     "moi",
-     0.946,
-     1.006
-    ],
-    [
-     "qui",
-     1.006,
-     1.087
-    ],
-    [
-     "vais",
-     1.087,
-     1.207
-    ],
-    [
-     "venir",
-     1.247,
-     1.388
-    ],
-    [
-     "pour",
-     1.388,
-     1.488
-    ],
-    [
-     "vous",
-     1.508,
-     1.609
-    ],
-    [
-     "dégager.",
-     1.629,
-     1.93
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "Alors là, c'est illégal. Si je porte plainte, vous risquez 30 000 euros d'amende et 3 ans de prison.",
-   "_deb": 21.906,
-   "_fin": 26.205,
-   "d": "[smug] Alors là, c'est illégal. Si je porte plainte, vous risquez 30 000 euros d'amende et 3 ans de prison.",
-   "_mots": [
-    [
-     "Alors",
-     0.0,
-     0.201
-    ],
-    [
-     "là,",
-     0.221,
-     0.301
-    ],
-    [
-     "c",
-     0.341,
-     0.361
-    ],
-    [
-     "'est",
-     0.421,
-     0.522
-    ],
-    [
-     "illégal.",
-     0.582,
-     0.943
-    ],
-    [
-     "Si",
-     1.144,
-     1.205
-    ],
-    [
-     "je",
-     1.245,
-     1.325
-    ],
-    [
-     "porte",
-     1.405,
-     1.626
-    ],
-    [
-     "plainte,",
-     1.727,
-     1.927
-    ],
-    [
-     "vous",
-     1.947,
-     2.048
-    ],
-    [
-     "risquez",
-     2.068,
-     2.284
-    ],
-    [
-     "30",
-     2.284,
-     2.444
-    ],
-    [
-     "000",
-     2.444,
-     2.464
-    ],
-    [
-     "euros",
-     2.409,
-     2.871
-    ],
-    [
-     "d",
-     2.911,
-     2.931
-    ],
-    [
-     "'amende",
-     2.971,
-     3.172
-    ],
-    [
-     "et",
-     3.232,
-     3.252
-    ],
-    [
-     "3",
-     3.244,
-     3.404
-    ],
-    [
-     "ans",
-     4.018,
-     4.078
-    ],
-    [
-     "de",
-     4.098,
-     4.138
-    ],
-    [
-     "prison.",
-     4.138,
-     4.299
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Ah ouais, quand même. Et comment je peux faire pour récupérer mon appart du coup, moi ?",
-   "_deb": 26.205,
-   "_fin": 28.95,
-   "d": "[shocked] Ah ouais, quand même. Et comment je peux faire pour récupérer mon appart du coup, moi ?",
-   "_mots": [
-    [
-     "Ah",
-     0.0,
-     0.04
-    ],
-    [
-     "ouais,",
-     0.04,
-     0.161
-    ],
-    [
-     "quand",
-     0.161,
-     0.261
-    ],
-    [
-     "même.",
-     0.281,
-     0.783
-    ],
-    [
-     "Et",
-     0.803,
-     0.843
-    ],
-    [
-     "comment",
-     0.864,
-     1.044
-    ],
-    [
-     "je",
-     1.044,
-     1.125
-    ],
-    [
-     "peux",
-     1.125,
-     1.225
-    ],
-    [
-     "faire",
-     1.225,
-     1.366
-    ],
-    [
-     "pour",
-     1.366,
-     1.466
-    ],
-    [
-     "récupérer",
-     1.486,
-     1.868
-    ],
-    [
-     "mon",
-     1.888,
-     1.968
-    ],
-    [
-     "appart",
-     2.028,
-     2.229
-    ],
-    [
-     "du",
-     2.31,
-     2.37
-    ],
-    [
-     "coup,",
-     2.43,
-     2.551
-    ],
-    [
-     "moi",
-     2.571,
-     2.625
-    ],
-    [
-     "?",
-     2.625,
-     2.745
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "Ah bah ça va vous prendre des années et vous coûter une blinde en frais d'avocat.",
-   "_deb": 28.957,
-   "_fin": 31.65,
-   "d": "[calm] Ah bah ça va vous prendre des années et vous coûter une blinde en frais d'avocat.",
-   "_mots": [
-    [
-     "Ah",
-     0.0,
-     0.04
-    ],
-    [
-     "bah",
-     0.04,
-     0.1
-    ],
-    [
-     "ça",
-     0.1,
-     0.14
-    ],
-    [
-     "va",
-     0.14,
-     0.2
-    ],
-    [
-     "vous",
-     0.401,
-     0.644
-    ],
-    [
-     "prendre",
-     0.644,
-     0.825
-    ],
-    [
-     "des",
-     0.885,
-     0.986
-    ],
-    [
-     "années",
-     1.046,
-     1.267
-    ],
-    [
-     "et",
-     1.287,
-     1.327
-    ],
-    [
-     "vous",
-     1.347,
-     1.468
-    ],
-    [
-     "coûtez",
-     1.468,
-     1.608
-    ],
-    [
-     "une",
-     1.729,
-     1.809
-    ],
-    [
-     "blinde",
-     1.849,
-     2.03
-    ],
-    [
-     "en",
-     2.07,
-     2.111
-    ],
-    [
-     "frais",
-     2.131,
-     2.251
-    ],
-    [
-     "d",
-     2.291,
-     2.311
-    ],
-    [
-     "'avocat.",
-     2.352,
-     2.693
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "Vous êtes pressé ?",
-   "_deb": 31.791,
-   "_fin": 32.41,
-   "d": "[curious] Vous êtes pressé ?",
-   "_mots": [
-    [
-     "Vous",
-     0.0,
-     0.1
-    ],
-    [
-     "êtes",
-     0.12,
-     0.241
-    ],
-    [
-     "pressé",
-     0.261,
-     0.482
-    ],
-    [
-     "?",
-     0.519,
-     0.619
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Bah un peu quand même.",
-   "_deb": 32.473,
-   "_fin": 33.217,
-   "d": "[hesitant] Bah un peu quand même.",
-   "_mots": [
-    [
-     "Bah",
-     0.0,
-     0.161
-    ],
-    [
-     "un",
-     0.181,
-     0.241
-    ],
-    [
-     "peu",
-     0.282,
-     0.382
-    ],
-    [
-     "quand",
-     0.382,
-     0.503
-    ],
-    [
-     "même.",
-     0.523,
-     0.744
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "Est-ce que je...",
-   "_deb": 33.237,
-   "_fin": 33.92,
-   "d": "[thinking] Est-ce que je...",
-   "_mots": [
-    [
-     "Est",
-     0.0,
-     0.281
-    ],
-    [
-     "-ce",
-     0.281,
-     0.381
-    ],
-    [
-     "que",
-     0.401,
-     0.462
-    ],
-    [
-     "je",
-     0.522,
-     0.683
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "...mens ?",
-   "_deb": 36.733,
-   "_fin": 36.68,
-   "_mots": [
-    [
-     "...mens",
-     0.0,
-     0.02
-    ],
-    [
-     "?",
-     -0.253,
-     -0.053
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Ah ouais, pas bête.",
-   "_deb": 36.833,
-   "_fin": 37.335,
-   "d": "[relieved] Ah ouais, pas bête.",
-   "_mots": [
-    [
-     "Ah",
-     0.0,
-     0.04
-    ],
-    [
-     "ouais,",
-     0.04,
-     0.161
-    ],
-    [
-     "pas",
-     0.181,
-     0.281
-    ],
-    [
-     "bête.",
-     0.301,
-     0.502
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "Et comme je vous aime bien, je fais passer votre dossier en priorité.",
-   "_deb": 37.536,
-   "_fin": 39.765,
-   "d": "[friendly] Et comme je vous aime bien, je fais passer votre dossier en priorité.",
-   "_mots": [
-    [
-     "Et",
-     0.0,
-     0.06
-    ],
-    [
-     "comme",
-     0.1,
-     0.261
-    ],
-    [
-     "je",
-     0.281,
-     0.321
-    ],
-    [
-     "vous",
-     0.361,
-     0.462
-    ],
-    [
-     "aime",
-     0.502,
-     0.622
-    ],
-    [
-     "bien,",
-     0.643,
-     0.783
-    ],
-    [
-     "je",
-     0.884,
-     0.924
-    ],
-    [
-     "fais",
-     0.964,
-     1.064
-    ],
-    [
-     "passer",
-     1.084,
-     1.305
-    ],
-    [
-     "votre",
-     1.345,
-     1.506
-    ],
-    [
-     "dossier",
-     1.526,
-     1.747
-    ],
-    [
-     "en",
-     1.767,
-     1.807
-    ],
-    [
-     "priorité.",
-     1.827,
-     2.229
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Ah bah c'est gentil ça, merci. Vous me sortez d'une galère là.",
-   "_deb": 39.966,
-   "_fin": 42.224,
-   "d": "[happy] Ah bah c'est gentil ça, merci. Vous me sortez d'une galère là.",
-   "objet": "telephone",
-   "_mots": [
-    [
-     "Ah",
-     0.0,
-     0.06
-    ],
-    [
-     "bah",
-     0.08,
-     0.201
-    ],
-    [
-     "c'est",
-     0.241,
-     0.261
-    ],
-    [
-     "gentil",
-     0.281,
-     0.341
-    ],
-    [
-     "ça,",
-     0.361,
-     0.622
-    ],
-    [
-     "merci.",
-     0.703,
-     0.743
-    ],
-    [
-     "Vous",
-     0.907,
-     1.149
-    ],
-    [
-     "me",
-     1.592,
-     1.794
-    ],
-    [
-     "sortez",
-     1.814,
-     1.854
-    ],
-    [
-     "d'une",
-     1.875,
-     1.975
-    ],
-    [
-     "galère",
-     1.996,
-     2.217
-    ],
-    [
-     "là.",
-     2.217,
-     2.258
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Allez,",
-   "_deb": 42.264,
-   "_fin": 42.405,
-   "d": "[friendly] Allez,",
-   "_mots": [
-    [
-     "Allez,",
-     0.0,
-     0.141
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "bonne soirée.",
-   "_deb": 44.736,
-   "_fin": 45.125,
-   "d": "[friendly] bonne soirée.",
-   "_mots": [
-    [
-     "bonne",
-     0.0,
-     0.143
-    ],
-    [
-     "soirée.",
-     0.143,
-     0.389
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "C'est vrai, je viens d'avoir le locataire. Enfin, le nouveau proprio.",
-   "_deb": 46.573,
-   "_fin": 48.949,
-   "d": "[confused] C'est vrai, je viens d'avoir le locataire. Enfin, le nouveau proprio.",
    "_mots": [
     [
      "C",
@@ -1334,429 +25,2347 @@
     ],
     [
      "'est",
-     0.04,
-     0.101
+     0.02,
+     0.12
     ],
     [
-     "vrai,",
-     0.101,
-     0.222
+     "un",
+     0.14,
+     0.181
     ],
     [
-     "je",
-     0.242,
-     0.302
+     "garçon.",
+     0.221,
+     0.441
+    ]
+   ]
+  },
+  {
+   "p": "envoyee",
+   "t": "Ça, on peut pas vraiment savoir si c'est un garçon ou une fille.",
+   "_deb": 0.642,
+   "_fin": 2.787,
+   "_mots": [
+    [
+     "Ça,",
+     0.0,
+     0.06
     ],
     [
-     "viens",
-     0.322,
-     0.423
+     "on",
+     0.14,
+     0.18
+    ],
+    [
+     "peut",
+     0.22,
+     0.3
+    ],
+    [
+     "pas",
+     0.34,
+     0.4
+    ],
+    [
+     "vraiment",
+     0.441,
+     0.661
+    ],
+    [
+     "savoir",
+     0.721,
+     1.002
+    ],
+    [
+     "si",
+     1.082,
+     1.142
+    ],
+    [
+     "c",
+     1.182,
+     1.202
+    ],
+    [
+     "'est",
+     1.222,
+     1.283
+    ],
+    [
+     "un",
+     1.323,
+     1.363
+    ],
+    [
+     "garçon",
+     1.403,
+     1.683
+    ],
+    [
+     "ou",
+     1.724,
+     1.764
+    ],
+    [
+     "une",
+     1.804,
+     1.904
+    ],
+    [
+     "fille.",
+     1.944,
+     2.145
+    ]
+   ]
+  },
+  {
+   "p": "envoyee",
+   "t": "Ce sera à lui... Ou à elle. Ou à elle, absolument, de choisir plus tard ce qu'il ou elle a envie d'être.",
+   "_deb": 2.887,
+   "_fin": 7.522,
+   "_mots": [
+    [
+     "Ce",
+     0.0,
+     0.06
+    ],
+    [
+     "sera",
+     0.12,
+     0.24
+    ],
+    [
+     "à",
+     0.341,
+     0.361
+    ],
+    [
+     "lui...",
+     0.461,
+     0.581
+    ],
+    [
+     "Ou",
+     0.742,
+     0.782
+    ],
+    [
+     "à",
+     0.842,
+     0.862
+    ],
+    [
+     "elle.",
+     0.862,
+     1.264
+    ],
+    [
+     "Ou",
+     1.264,
+     1.324
+    ],
+    [
+     "à",
+     1.364,
+     1.384
+    ],
+    [
+     "elle,",
+     1.505,
+     1.665
+    ],
+    [
+     "absolument,",
+     1.746,
+     2.247
+    ],
+    [
+     "de",
+     2.327,
+     2.368
+    ],
+    [
+     "choisir",
+     2.448,
+     2.729
+    ],
+    [
+     "plus",
+     2.829,
+     2.949
+    ],
+    [
+     "tard",
+     3.01,
+     3.21
+    ],
+    [
+     "ce",
+     3.271,
+     3.331
+    ],
+    [
+     "qu",
+     3.411,
+     3.451
+    ],
+    [
+     "'il",
+     3.491,
+     3.612
+    ],
+    [
+     "ou",
+     3.672,
+     3.712
+    ],
+    [
+     "elle",
+     3.812,
+     3.973
+    ],
+    [
+     "a",
+     4.033,
+     4.053
+    ],
+    [
+     "envie",
+     4.113,
+     4.334
     ],
     [
      "d",
-     0.423,
-     0.443
+     4.374,
+     4.414
     ],
     [
-     "'avoir",
-     0.463,
-     0.584
-    ],
-    [
-     "le",
-     0.604,
-     0.685
-    ],
-    [
-     "locataire.",
-     0.725,
-     1.168
-    ],
-    [
-     "Enfin,",
-     1.349,
-     1.49
-    ],
-    [
-     "le",
-     1.551,
-     1.611
-    ],
-    [
-     "nouveau",
-     1.812,
-     2.014
-    ],
-    [
-     "proprio.",
-     2.074,
-     2.376
+     "'être.",
+     4.474,
+     4.635
     ]
-   ],
-   "objet": "telephone"
+   ]
   },
   {
    "p": "presentateur",
-   "t": "Sympa le gars.",
-   "_deb": 49.855,
-   "_fin": 50.467,
-   "d": "[amused] Sympa le gars.",
+   "t": "D'accord, mais enfin, là, il y a un pénis, quand même.",
+   "_deb": 7.983,
+   "_fin": 10.715,
    "_mots": [
     [
-     "Sympa",
+     "D",
      0.0,
-     0.245
+     0.021
     ],
     [
-     "le",
-     0.306,
-     0.367
+     "'accord,",
+     0.061,
+     0.382
     ],
     [
-     "gars.",
-     0.428,
-     0.612
+     "mais",
+     0.502,
+     0.582
+    ],
+    [
+     "enfin,",
+     0.582,
+     0.743
+    ],
+    [
+     "là,",
+     1.244,
+     1.365
+    ],
+    [
+     "il",
+     1.505,
+     1.586
+    ],
+    [
+     "y",
+     1.586,
+     1.606
+    ],
+    [
+     "a",
+     1.686,
+     1.706
+    ],
+    [
+     "un",
+     2.049,
+     2.19
+    ],
+    [
+     "pénis,",
+     2.23,
+     2.511
+    ],
+    [
+     "quand",
+     2.551,
+     2.652
+    ],
+    [
+     "même.",
+     2.652,
+     2.732
     ]
-   ],
-   "objet": "telephone"
+   ]
   },
   {
    "p": "presentateur",
-   "t": "Vraiment cool.",
-   "_deb": 51.537,
-   "_fin": 51.905,
-   "d": "[satisfied] Vraiment cool.",
+   "t": "Excusez-moi, docteur, mais nous ne croyons pas au modèle patriarcal qui discerne le sexe de l'enfant à partir de son appareil reproducteur.",
+   "_deb": 10.735,
+   "_fin": 15.074,
+   "_mots": [
+    [
+     "Excusez",
+     0.0,
+     0.141
+    ],
+    [
+     "-moi,",
+     0.141,
+     0.221
+    ],
+    [
+     "docteur,",
+     0.221,
+     0.402
+    ],
+    [
+     "mais",
+     0.442,
+     0.522
+    ],
+    [
+     "nous",
+     0.542,
+     0.643
+    ],
+    [
+     "ne",
+     0.663,
+     0.703
+    ],
+    [
+     "croyons",
+     0.723,
+     0.944
+    ],
+    [
+     "pas",
+     0.964,
+     1.044
+    ],
+    [
+     "au",
+     1.064,
+     1.105
+    ],
+    [
+     "modèle",
+     1.125,
+     1.325
+    ],
+    [
+     "patriarcal",
+     1.366,
+     1.848
+    ],
+    [
+     "qui",
+     1.908,
+     1.988
+    ],
+    [
+     "discerne",
+     2.048,
+     2.33
+    ],
+    [
+     "le",
+     2.39,
+     2.43
+    ],
+    [
+     "sexe",
+     2.49,
+     2.671
+    ],
+    [
+     "de",
+     2.691,
+     2.731
+    ],
+    [
+     "l",
+     2.771,
+     2.792
+    ],
+    [
+     "'enfant",
+     2.852,
+     3.012
+    ],
+    [
+     "à",
+     3.033,
+     3.093
+    ],
+    [
+     "partir",
+     3.153,
+     3.354
+    ],
+    [
+     "de",
+     3.394,
+     3.456
+    ],
+    [
+     "son",
+     3.456,
+     3.556
+    ],
+    [
+     "appareil",
+     3.616,
+     3.817
+    ],
+    [
+     "reproducteur.",
+     3.837,
+     4.339
+    ]
+   ]
+  },
+  {
+   "p": "envoyee",
+   "t": "Je pense qu'on est un peu plus ouvert que ça.",
+   "_deb": 15.395,
+   "_fin": 16.819,
+   "_mots": [
+    [
+     "Je",
+     0.0,
+     0.04
+    ],
+    [
+     "pense",
+     0.1,
+     0.22
+    ],
+    [
+     "qu",
+     0.24,
+     0.281
+    ],
+    [
+     "'on",
+     0.301,
+     0.381
+    ],
+    [
+     "est",
+     0.401,
+     0.481
+    ],
+    [
+     "un",
+     0.541,
+     0.602
+    ],
+    [
+     "peu",
+     0.622,
+     0.702
+    ],
+    [
+     "plus",
+     0.762,
+     0.882
+    ],
+    [
+     "ouvert",
+     0.943,
+     1.163
+    ],
+    [
+     "que",
+     1.224,
+     1.304
+    ],
+    [
+     "ça.",
+     1.364,
+     1.424
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Ouais, mais enfin, là, pour l'instant, en tout cas, l'enfant que vous portez en vous, c'est un garçon.",
+   "_deb": 17.361,
+   "_fin": 22.103,
+   "_mots": [
+    [
+     "Ouais,",
+     0.0,
+     0.16
+    ],
+    [
+     "mais",
+     0.622,
+     0.722
+    ],
+    [
+     "enfin,",
+     0.842,
+     1.043
+    ],
+    [
+     "là,",
+     1.244,
+     1.324
+    ],
+    [
+     "pour",
+     1.585,
+     1.705
+    ],
+    [
+     "l",
+     1.725,
+     1.745
+    ],
+    [
+     "'instant,",
+     1.785,
+     2.046
+    ],
+    [
+     "en",
+     2.046,
+     2.146
+    ],
+    [
+     "tout",
+     2.167,
+     2.287
+    ],
+    [
+     "cas,",
+     2.327,
+     2.467
+    ],
+    [
+     "l",
+     2.668,
+     2.688
+    ],
+    [
+     "'enfant",
+     2.771,
+     2.972
+    ],
+    [
+     "que",
+     3.012,
+     3.133
+    ],
+    [
+     "vous",
+     3.133,
+     3.254
+    ],
+    [
+     "portez",
+     3.274,
+     3.495
+    ],
+    [
+     "en",
+     3.555,
+     3.596
+    ],
+    [
+     "vous,",
+     3.656,
+     3.837
+    ],
+    [
+     "c",
+     4.239,
+     4.26
+    ],
+    [
+     "'est",
+     4.3,
+     4.38
+    ],
+    [
+     "un",
+     4.421,
+     4.461
+    ],
+    [
+     "garçon.",
+     4.501,
+     4.742
+    ]
+   ]
+  },
+  {
+   "p": "envoyee",
+   "t": "Non.",
+   "_deb": 22.305,
+   "_fin": 22.445,
+   "_mots": [
+    [
+     "Non.",
+     0.0,
+     0.14
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Non. Donc quoi, c'est une fille ? Non plus.",
+   "_deb": 22.868,
+   "_fin": 25.24,
+   "_mots": [
+    [
+     "Non.",
+     0.0,
+     0.121
+    ],
+    [
+     "Donc",
+     0.904,
+     1.005
+    ],
+    [
+     "quoi,",
+     1.065,
+     1.145
+    ],
+    [
+     "c",
+     1.186,
+     1.206
+    ],
+    [
+     "'est",
+     1.286,
+     1.688
+    ],
+    [
+     "une",
+     1.708,
+     1.789
+    ],
+    [
+     "fille",
+     1.809,
+     1.912
+    ],
+    [
+     "?",
+     1.912,
+     2.032
+    ],
+    [
+     "Non",
+     2.09,
+     2.171
+    ],
+    [
+     "plus.",
+     2.211,
+     2.372
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "À l'heure actuelle, personne ne peut savoir.",
+   "_deb": 25.561,
+   "_fin": 27.089,
+   "_mots": [
+    [
+     "À",
+     0.0,
+     0.02
+    ],
+    [
+     "l",
+     0.081,
+     0.101
+    ],
+    [
+     "'heure",
+     0.101,
+     0.221
+    ],
+    [
+     "actuelle,",
+     0.241,
+     0.523
+    ],
+    [
+     "personne",
+     0.583,
+     0.985
+    ],
+    [
+     "ne",
+     1.025,
+     1.066
+    ],
+    [
+     "peut",
+     1.126,
+     1.226
+    ],
+    [
+     "savoir.",
+     1.267,
+     1.528
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "C'est peut-être une chèvre aussi, on ne sait pas.",
+   "_deb": 28.29,
+   "_fin": 29.777,
+   "_mots": [
+    [
+     "C",
+     0.0,
+     0.021
+    ],
+    [
+     "'est",
+     0.061,
+     0.422
+    ],
+    [
+     "peut",
+     0.422,
+     0.523
+    ],
+    [
+     "-être",
+     0.523,
+     0.664
+    ],
+    [
+     "une",
+     0.684,
+     0.744
+    ],
+    [
+     "chèvre",
+     0.784,
+     0.985
+    ],
+    [
+     "aussi,",
+     1.005,
+     1.146
+    ],
+    [
+     "on",
+     1.166,
+     1.226
+    ],
+    [
+     "ne",
+     1.246,
+     1.306
+    ],
+    [
+     "sait",
+     1.306,
+     1.387
+    ],
+    [
+     "pas.",
+     1.387,
+     1.487
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Peut-être. Non, non, je peux vous assurer que ce n'est pas une chèvre.",
+   "_deb": 30.239,
+   "_fin": 32.411,
+   "_mots": [
+    [
+     "Peut",
+     0.0,
+     0.081
+    ],
+    [
+     "-être.",
+     0.081,
+     0.181
+    ],
+    [
+     "Non,",
+     0.242,
+     0.442
+    ],
+    [
+     "non,",
+     0.824,
+     1.005
+    ],
+    [
+     "je",
+     1.126,
+     1.186
+    ],
+    [
+     "peux",
+     1.226,
+     1.327
+    ],
+    [
+     "vous",
+     1.347,
+     1.447
+    ],
+    [
+     "assurer",
+     1.487,
+     1.728
+    ],
+    [
+     "que",
+     1.749,
+     1.809
+    ],
+    [
+     "ce",
+     1.929,
+     1.97
+    ],
+    [
+     "n",
+     1.97,
+     2.01
+    ],
+    [
+     "'est",
+     2.05,
+     2.15
+    ],
+    [
+     "pas",
+     2.15,
+     2.211
+    ],
+    [
+     "une",
+     2.211,
+     2.231
+    ],
+    [
+     "chèvre.",
+     2.052,
+     2.172
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Excusez -moi, mais vous êtes si intimement persuadé que l 'enfant qui pousse dans le ventre de ma femme n 'est pas une chèvre, que vous avez l",
+   "_deb": 32.431,
+   "_fin": 38.033,
+   "_mots": [
+    [
+     "Excusez",
+     0.0,
+     0.141
+    ],
+    [
+     "-moi,",
+     0.141,
+     0.221
+    ],
+    [
+     "mais",
+     0.261,
+     0.342
+    ],
+    [
+     "vous",
+     0.422,
+     0.522
+    ],
+    [
+     "êtes",
+     0.563,
+     0.703
+    ],
+    [
+     "si",
+     0.783,
+     0.884
+    ],
+    [
+     "intimement",
+     1.125,
+     1.727
+    ],
+    [
+     "persuadé",
+     1.867,
+     2.309
+    ],
+    [
+     "que",
+     2.389,
+     2.47
+    ],
+    [
+     "l",
+     2.51,
+     2.53
+    ],
+    [
+     "'enfant",
+     2.59,
+     2.791
+    ],
+    [
+     "qui",
+     2.851,
+     2.931
+    ],
+    [
+     "pousse",
+     3.052,
+     3.232
+    ],
+    [
+     "dans",
+     3.232,
+     3.333
+    ],
+    [
+     "le",
+     3.353,
+     3.413
+    ],
+    [
+     "ventre",
+     3.453,
+     3.634
+    ],
+    [
+     "de",
+     3.694,
+     3.734
+    ],
+    [
+     "ma",
+     3.794,
+     3.835
+    ],
+    [
+     "femme",
+     3.915,
+     4.075
+    ],
+    [
+     "n",
+     4.075,
+     4.116
+    ],
+    [
+     "'est",
+     4.136,
+     4.216
+    ],
+    [
+     "pas",
+     4.236,
+     4.336
+    ],
+    [
+     "une",
+     4.397,
+     4.477
+    ],
+    [
+     "chèvre,",
+     4.557,
+     4.838
+    ],
+    [
+     "que",
+     5.181,
+     5.261
+    ],
+    [
+     "vous",
+     5.281,
+     5.402
+    ],
+    [
+     "avez",
+     5.422,
+     5.562
+    ],
+    [
+     "l",
+     5.582,
+     5.602
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "'audace de nous affirmer avec la plus grande certitude que notre enfant n 'est pas une chèvre?",
+   "_deb": 38.114,
+   "_fin": 42.0,
+   "_mots": [
+    [
+     "'audace",
+     0.0,
+     0.281
+    ],
+    [
+     "de",
+     0.321,
+     0.361
+    ],
+    [
+     "nous",
+     0.421,
+     0.521
+    ],
+    [
+     "affirmer",
+     0.582,
+     0.903
+    ],
+    [
+     "avec",
+     0.903,
+     1.043
+    ],
+    [
+     "la",
+     1.063,
+     1.104
+    ],
+    [
+     "plus",
+     1.164,
+     1.264
+    ],
+    [
+     "grande",
+     1.284,
+     1.485
+    ],
+    [
+     "certitude",
+     1.686,
+     2.388
+    ],
+    [
+     "que",
+     2.428,
+     2.509
+    ],
+    [
+     "notre",
+     2.529,
+     2.689
+    ],
+    [
+     "enfant",
+     2.729,
+     2.91
+    ],
+    [
+     "n",
+     2.93,
+     2.97
+    ],
+    [
+     "'est",
+     2.99,
+     3.07
+    ],
+    [
+     "pas",
+     3.111,
+     3.211
+    ],
+    [
+     "une",
+     3.271,
+     3.372
+    ],
+    [
+     "chèvre",
+     3.412,
+     3.646
+    ],
+    [
+     "?",
+     3.646,
+     3.886
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Vous trouvez pas qu 'il y a un problème de pédagogie quelque part?",
+   "_deb": 42.208,
+   "_fin": 43.86,
+   "objet": "bouteille",
+   "_mots": [
+    [
+     "Vous",
+     0.0,
+     0.101
+    ],
+    [
+     "trouvez",
+     0.101,
+     0.442
+    ],
+    [
+     "pas",
+     0.442,
+     0.462
+    ],
+    [
+     "qu",
+     0.022,
+     0.082
+    ],
+    [
+     "'il",
+     0.082,
+     0.122
+    ],
+    [
+     "y",
+     0.122,
+     0.143
+    ],
+    [
+     "a",
+     0.143,
+     0.163
+    ],
+    [
+     "un",
+     0.163,
+     0.203
+    ],
+    [
+     "problème",
+     0.223,
+     0.665
+    ],
+    [
+     "de",
+     0.705,
+     0.745
+    ],
+    [
+     "pédagogie",
+     0.806,
+     1.288
+    ],
+    [
+     "quelque",
+     1.328,
+     1.529
+    ],
+    [
+     "part",
+     1.589,
+     1.632
+    ],
+    [
+     "?",
+     1.632,
+     1.652
+    ]
+   ]
+  },
+  {
+   "p": "envoyee",
+   "t": "N 'hésite pas à être une chèvre si tu en as envie.",
+   "_deb": 43.898,
+   "_fin": 46.209,
+   "_mots": [
+    [
+     "N",
+     0.0,
+     0.02
+    ],
+    [
+     "'hésite",
+     0.02,
+     0.241
+    ],
+    [
+     "pas",
+     0.301,
+     0.362
+    ],
+    [
+     "à",
+     0.382,
+     0.402
+    ],
+    [
+     "être",
+     0.442,
+     0.583
+    ],
+    [
+     "une",
+     0.643,
+     0.723
+    ],
+    [
+     "chèvre",
+     0.824,
+     1.266
+    ],
+    [
+     "si",
+     1.407,
+     1.507
+    ],
+    [
+     "tu",
+     1.547,
+     1.608
+    ],
+    [
+     "en",
+     1.708,
+     1.748
+    ],
+    [
+     "as",
+     1.929,
+     1.989
+    ],
+    [
+     "envie.",
+     2.17,
+     2.311
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Ou un Bernard Lermite, tu en as le droit aussi.",
+   "_deb": 46.289,
+   "_fin": 47.979,
+   "_mots": [
+    [
+     "Ou",
+     0.0,
+     0.041
+    ],
+    [
+     "un",
+     0.061,
+     0.081
+    ],
+    [
+     "Bernard",
+     -0.158,
+     0.143
+    ],
+    [
+     "Lermite,",
+     0.143,
+     0.525
+    ],
+    [
+     "tu",
+     0.887,
+     0.927
+    ],
+    [
+     "en",
+     0.987,
+     1.047
+    ],
+    [
+     "as",
+     1.088,
+     1.148
+    ],
+    [
+     "le",
+     1.148,
+     1.208
+    ],
+    [
+     "droit",
+     1.228,
+     1.409
+    ],
+    [
+     "aussi.",
+     1.509,
+     1.69
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Donc pour le prénom, je ne vous demande pas non plus.",
+   "_deb": 48.06,
+   "_fin": 49.305,
+   "_mots": [
+    [
+     "Donc",
+     0.0,
+     0.12
+    ],
+    [
+     "pour",
+     0.16,
+     0.241
+    ],
+    [
+     "le",
+     0.281,
+     0.321
+    ],
+    [
+     "prénom,",
+     0.361,
+     0.562
+    ],
+    [
+     "je",
+     0.562,
+     0.602
+    ],
+    [
+     "ne",
+     0.602,
+     0.642
+    ],
+    [
+     "vous",
+     0.642,
+     0.743
+    ],
+    [
+     "demande",
+     0.763,
+     0.944
+    ],
+    [
+     "pas",
+     0.944,
+     1.024
+    ],
+    [
+     "non",
+     1.044,
+     1.125
+    ],
+    [
+     "plus.",
+     1.165,
+     1.245
+    ]
+   ]
+  },
+  {
+   "p": "envoyee",
+   "t": "Quand il aura l 'âge, il choisira lui -même son prénom.",
+   "_deb": 49.305,
+   "_fin": 51.659,
+   "_mots": [
+    [
+     "Quand",
+     0.0,
+     0.141
+    ],
+    [
+     "il",
+     0.161,
+     0.241
+    ],
+    [
+     "aura",
+     0.301,
+     0.422
+    ],
+    [
+     "l",
+     0.502,
+     0.522
+    ],
+    [
+     "'âge,",
+     0.583,
+     0.844
+    ],
+    [
+     "il",
+     1.005,
+     1.025
+    ],
+    [
+     "choisira",
+     0.907,
+     1.248
+    ],
+    [
+     "lui",
+     1.349,
+     1.47
+    ],
+    [
+     "-même",
+     1.51,
+     1.751
+    ],
+    [
+     "son",
+     1.811,
+     1.912
+    ],
+    [
+     "prénom.",
+     1.952,
+     2.354
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Évidemment. Attention ma chérie, tu as dit il...",
+   "_deb": 51.699,
+   "_fin": 53.187,
+   "_mots": [
+    [
+     "Évidemment.",
+     0.0,
+     0.302
+    ],
+    [
+     "Attention",
+     0.362,
+     0.583
+    ],
+    [
+     "ma",
+     0.644,
+     0.684
+    ],
+    [
+     "chérie,",
+     0.744,
+     0.945
+    ],
+    [
+     "tu",
+     0.965,
+     1.006
+    ],
+    [
+     "as",
+     1.086,
+     1.126
+    ],
+    [
+     "dit",
+     1.146,
+     1.267
+    ],
+    [
+     "il...",
+     1.388,
+     1.488
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Ah,",
+   "_deb": 53.187,
+   "_fin": 53.227,
+   "objet": "tablette",
+   "_mots": [
+    [
+     "Ah,",
+     0.0,
+     0.04
+    ]
+   ]
+  },
+  {
+   "p": "envoyee",
+   "t": "où avais -je la tête?",
+   "_deb": 54.333,
+   "_fin": 55.46,
+   "_mots": [
+    [
+     "où",
+     0.0,
+     0.04
+    ],
+    [
+     "avais",
+     0.1,
+     0.261
+    ],
+    [
+     "-je",
+     0.261,
+     0.341
+    ],
+    [
+     "la",
+     0.402,
+     0.462
+    ],
+    [
+     "tête",
+     0.562,
+     0.787
+    ],
+    [
+     "?",
+     0.787,
+     1.127
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "En tout cas, on a hâte.",
+   "_deb": 55.659,
+   "_fin": 56.342,
+   "_mots": [
+    [
+     "En",
+     0.0,
+     0.04
+    ],
+    [
+     "tout",
+     0.04,
+     0.141
+    ],
+    [
+     "cas,",
+     0.161,
+     0.241
+    ],
+    [
+     "on",
+     0.261,
+     0.302
+    ],
+    [
+     "a",
+     0.382,
+     0.402
+    ],
+    [
+     "hâte.",
+     0.482,
+     0.683
+    ]
+   ]
+  },
+  {
+   "p": "envoyee",
+   "t": "Oh oui, qu 'est -ce qu 'on a hâte?",
+   "_deb": 56.403,
+   "_fin": 57.4,
+   "_mots": [
+    [
+     "Oh",
+     0.0,
+     0.04
+    ],
+    [
+     "oui,",
+     0.06,
+     0.221
+    ],
+    [
+     "qu",
+     0.341,
+     0.382
+    ],
+    [
+     "'est",
+     0.382,
+     0.442
+    ],
+    [
+     "-ce",
+     0.442,
+     0.502
+    ],
+    [
+     "qu",
+     0.502,
+     0.562
+    ],
+    [
+     "'on",
+     0.583,
+     0.623
+    ],
+    [
+     "a",
+     0.683,
+     0.703
+    ],
+    [
+     "hâte",
+     0.783,
+     0.897
+    ],
+    [
+     "?",
+     0.897,
+     0.997
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Ah bah oui, j 'imagine, un petit garçon c 'est un chamboulement.",
+   "_deb": 57.408,
+   "_fin": 59.368,
+   "_mots": [
+    [
+     "Ah",
+     0.0,
+     0.04
+    ],
+    [
+     "bah",
+     0.08,
+     0.18
+    ],
+    [
+     "oui,",
+     0.18,
+     0.324
+    ],
+    [
+     "j",
+     0.324,
+     0.344
+    ],
+    [
+     "'imagine,",
+     0.405,
+     0.708
+    ],
+    [
+     "un",
+     0.829,
+     0.89
+    ],
+    [
+     "petit",
+     0.89,
+     1.031
+    ],
+    [
+     "garçon",
+     1.051,
+     1.293
+    ],
+    [
+     "c",
+     1.354,
+     1.394
+    ],
+    [
+     "'est",
+     1.415,
+     1.495
+    ],
+    [
+     "un",
+     1.495,
+     1.556
+    ],
+    [
+     "chamboulement.",
+     1.576,
+     1.96
+    ]
+   ]
+  },
+  {
+   "p": "envoyee",
+   "t": "Il ne comprend pas.",
+   "_deb": 60.614,
+   "_fin": 61.139,
+   "_mots": [
+    [
+     "Il",
+     0.0,
+     0.06
+    ],
+    [
+     "ne",
+     0.06,
+     0.101
+    ],
+    [
+     "comprend",
+     0.101,
+     0.343
+    ],
+    [
+     "pas.",
+     0.424,
+     0.525
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Non, je pense qu 'il ne comprend pas.",
+   "_deb": 61.22,
+   "_fin": 62.088,
    "chute": true,
    "_mots": [
     [
-     "Vraiment",
+     "Non,",
      0.0,
-     0.225
+     0.08
     ],
     [
-     "cool.",
-     0.225,
-     0.368
+     "je",
+     0.101,
+     0.161
+    ],
+    [
+     "pense",
+     0.222,
+     0.343
+    ],
+    [
+     "qu",
+     0.343,
+     0.403
+    ],
+    [
+     "'il",
+     0.403,
+     0.444
+    ],
+    [
+     "ne",
+     0.444,
+     0.545
+    ],
+    [
+     "comprend",
+     0.545,
+     0.747
+    ],
+    [
+     "pas.",
+     0.787,
+     0.868
     ]
-   ],
-   "objet": "telephone"
+   ]
   }
  ],
  "bandeau": [],
  "gag": null,
- "legende": "Quand ton locataire t'annonce calmement qu'il devient squatteur officiel.",
+ "legende": "Un débat décalé sur l'identité et le genre futuriste des enfants.",
  "hashtags": [
   "petitsdramas",
-  "immobilier",
-  "squat",
-  "humour",
-  "loyer",
-  "proprietaire"
+  "parentalite2026",
+  "genrefutur",
+  "bebemystere",
+  "humourdecale",
+  "identitelibre",
+  "parentsmodernes"
  ],
  "sources": [
-  "https://www.tiktok.com/@vignianimation/video/7701033955058896160"
+  "https://www.tiktok.com/@yan_animation0/video/7676197049360010529"
  ],
  "decoupage": [
   {
    "scene": "1",
    "repliques": [
     0,
+    1,
     2,
+    3,
     4,
+    5,
     6,
+    7,
     8,
+    9,
     10,
+    11,
     12,
-    15,
-    18,
-    20,
-    21,
-    22,
-    23,
-    24,
-    25
+    13
    ],
    "lieu": "",
    "son": "",
-   "duree": 0,
-   "decor": "quiet city street at dusk, parked car at the curb, sidewalk, street lamps, shop fronts"
+   "duree": 0.0,
+   "decor": "cabinet_medical_futuriste vert pâle avec un écran holographique affichant des symboles abstraits, une table d'examen futuriste, un stéthoscope flottant et une p",
+   "titre": "Le Débat du Futur"
   },
   {
    "scene": "2",
    "repliques": [
-    1,
-    3,
-    5,
-    7,
-    9,
-    11,
-    13,
     14,
+    15,
     16,
     17,
-    19
+    18,
+    19,
+    20,
+    21,
+    22,
+    23
    ],
    "lieu": "",
    "son": "",
-   "duree": 0,
-   "decor": "cozy living room, sofa, posters on the wall, coffee table, lamp, television"
+   "duree": 0.0,
+   "decor": "salon_moderne avec un canapé futuriste, une table basse holographique, des écrans muraux affichant des motifs psychédéliques et une tasse de thé flottante.",
+   "titre": "La Décision Parentale"
   }
  ],
  "studio": {
-  "plans": [
+  "moment": "soir",
+  "lieux": [
+   "cabinet_medical_futuriste",
+   "salon_moderne"
+  ],
+  "costumes": {
+   "presentateur": {
+    "haut": "chemise",
+    "c_haut": "bleu marine",
+    "motif": "uni",
+    "bas": "pantalon",
+    "chaussures": "ville",
+    "details": [
+     "cravate",
+     "lunettes_vue",
+     "barbe_courte"
+    ]
+   },
+   "invite": {
+    "haut": "blouse",
+    "c_haut": "blanc",
+    "motif": "uni",
+    "bas": "jupe",
+    "chaussures": "ballerines",
+    "details": [
+     "stethoscope",
+     "collier",
+     "boucles_oreilles"
+    ]
+   },
+   "envoyee": {
+    "haut": "blouse",
+    "c_haut": "blanc",
+    "motif": "uni",
+    "bas": "pantalon",
+    "chaussures": "ville",
+    "details": [
+     "stethoscope",
+     "bracelet",
+     "lunettes_soleil"
+    ]
+   }
+  },
+  "metiers": {
+   "invite": "sage_femme",
+   "envoyee": "psychologue"
+  },
+  "personnages": [
+   {
+    "genre": "h",
+    "age": 45,
+    "taille": 1,
+    "corpulence": 0.6,
+    "cheveux": "court_texture",
+    "barbe": "trois_jours"
+   },
+   {
+    "genre": "f",
+    "age": 38,
+    "taille": 0.95,
+    "corpulence": 0.4,
+    "cheveux": "long",
+    "barbe": "rien"
+   },
+   {
+    "genre": "f",
+    "age": 35,
+    "taille": 0.9,
+    "corpulence": 0.5,
+    "cheveux": "boucles",
+    "barbe": "rien"
+   }
+  ],
+  "objets": [
    {
     "replique": 0,
-    "geste": "telephone",
-    "reaction": "aucune",
-    "mouvement": "fixe",
-    "plan": "large"
+    "objet": "telephone"
    },
    {
-    "plan": "moyen",
-    "replique": 7,
-    "mouvement": "zoom_choc",
-    "geste": "bras_ouverts",
-    "reaction": "choc"
+    "replique": 14,
+    "objet": "bouteille"
    },
    {
-    "plan": "serre",
-    "mouvement": "fixe",
-    "reaction": "sceptique",
-    "geste": "mains_hanches",
-    "replique": 11
-   },
-   {
-    "reaction": "regard_camera",
-    "geste": "haussement",
-    "replique": 23,
-    "plan": "large",
-    "mouvement": "recul"
+    "replique": 20,
+    "objet": "tablette"
    }
+  ],
+  "gags": [
+   "\"Diagnostic : Enfant Humain (probablement)\"",
+   "\"Prénom suggéré : Zéphyr ou Chèvre\"",
+   "\"Spécialiste des identités fluides et des chèvres métamorphosées\""
   ],
   "ambiances": [
    "neon"
   ],
-  "costumes": {
-   "presentateur": {
-    "haut": "tshirt",
-    "c_haut": "jaune",
-    "motif": "uni",
-    "bas": "short",
-    "chaussures": "chaussons",
-    "chapeau": "casquette",
-    "c_chapeau": "vert",
-    "cheveux": "court",
-    "c_cheveux": "noir",
-    "details": [
-     "montre"
-    ]
-   },
-   "invite": {
-    "haut": "sweat",
-    "c_haut": "gris",
-    "motif": "uni",
-    "bas": "jogging",
-    "chaussures": "chaussons",
-    "cheveux": "court",
-    "c_cheveux": "brun",
-    "details": [
-     "tatouage"
-    ]
-   }
-  },
-  "objets": [
+  "cadence": "rapide",
+  "plans": [
    {
-    "objet": "telephone",
-    "replique": 0
+    "replique": 0,
+    "plan": "moyen",
+    "mouvement": "fixe",
+    "geste": "gratte_tete",
+    "reaction": "regard_camera"
    },
    {
-    "replique": 8,
-    "objet": "telephone"
+    "replique": 1,
+    "plan": "serre",
+    "mouvement": "zoom_choc",
+    "geste": "pointe_g",
+    "reaction": "choc"
+   },
+   {
+    "replique": 2,
+    "plan": "large",
+    "mouvement": "travelling",
+    "geste": "bras_ouverts",
+    "reaction": "réfléchit"
+   },
+   {
+    "replique": 3,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "pointe_d",
+    "reaction": "colère"
+   },
+   {
+    "replique": 4,
+    "plan": "contre_plongée",
+    "mouvement": "fixe",
+    "geste": "mains_hanches",
+    "reaction": "sceptique"
+   },
+   {
+    "replique": 5,
+    "plan": "serre",
+    "mouvement": "zoom_choc",
+    "geste": "sourire",
+    "reaction": "joie"
+   },
+   {
+    "replique": 6,
+    "plan": "moyen",
+    "mouvement": "avance",
+    "geste": "pointe_d",
+    "reaction": "panique"
+   },
+   {
+    "replique": 7,
+    "plan": "tres_serre",
+    "mouvement": "fixe",
+    "geste": "poing",
+    "reaction": "choc"
+   },
+   {
+    "replique": 14,
+    "plan": "large",
+    "mouvement": "fixe",
+    "geste": "bras_ouverts",
+    "reaction": "rire"
    },
    {
     "replique": 20,
-    "objet": "telephone"
+    "plan": "epaule",
+    "mouvement": "glissé",
+    "geste": "pouce",
+    "reaction": "joie"
    }
   ],
-  "personnages": {
-   "presentateur": {
-    "genre": "h",
-    "age": 32,
-    "taille": 1,
-    "corpulence": 0.6,
-    "cheveux": "court",
-    "barbe": "trois_jours"
-   },
-   "invite": {
-    "genre": "h",
-    "age": 28,
-    "taille": 1,
-    "corpulence": 0.5,
-    "cheveux": "court",
-    "barbe": "rien"
+  "decoupe": [
+   {
+    "replique": 12,
+    "plans": [
+     {
+      "debut": 0.3,
+      "plan": "serre",
+      "cible": "presentateur",
+      "mouvement": "zoom_choc",
+      "passage": "glissé"
+     },
+     {
+      "debut": 0.7,
+      "plan": "large",
+      "cible": "invite",
+      "mouvement": "travelling",
+      "passage": "coupe"
+     }
+    ]
    }
-  },
-  "moment": "soir",
-  "cadence": "normal",
-  "metiers": {},
-  "gags": [
-   "Affiche: Guide pratique du parfait squatteur"
-  ],
-  "lieux": [
-   "rue",
-   "salon"
-  ],
-  "lieux_de": {
-   "presentateur": "rue",
-   "invite": "salon"
-  }
+  ]
  },
  "doublage": {
-  "piste": "/tmp/tmpdrrg64ti/piste.wav",
-  "duree": 60.16,
-  "source": "https://www.tiktok.com/@vignianimation/video/7701033955058896160",
-  "auteur": "vignianimation",
-  "contexte": "Un propriétaire reçoit un appel de son locataire qui lui annonce calmement qu'il arrête de payer le loyer et devient squatteur légal.",
+  "piste": "/tmp/tmpidoy20px/piste.wav",
+  "duree": 63.74,
+  "source": "https://www.tiktok.com/@yan_animation0/video/7676197049360010529",
+  "auteur": "yan_animation0",
+  "contexte": "Une discussion humoristique et décalée entre un présentateur sceptique et une invitée ouverte d'esprit sur le thème de l'identité d'un futur bébé, dans un décor futuriste et minimaliste évoquant une consultation médicale ou un salon d'experts.",
   "evenements": [],
   "visuel": {
    "gestes": [
     [
-     54.5,
-     0.39,
-     0.81
+     1.0,
+     0.68,
+     1.0
+    ],
+    [
+     2.5,
+     0.52,
+     1.0
+    ],
+    [
+     3.5,
+     0.68,
+     1.0
+    ],
+    [
+     8.0,
+     0.52,
+     1.0
+    ],
+    [
+     9.5,
+     0.51,
+     1.0
+    ],
+    [
+     10.5,
+     0.51,
+     1.0
+    ],
+    [
+     17.5,
+     0.52,
+     1.0
+    ],
+    [
+     19.0,
+     0.51,
+     1.0
+    ],
+    [
+     21.0,
+     0.52,
+     1.0
+    ],
+    [
+     22.5,
+     0.28,
+     1.0
+    ],
+    [
+     25.0,
+     0.28,
+     1.0
+    ],
+    [
+     28.0,
+     0.52,
+     1.0
+    ],
+    [
+     29.0,
+     0.52,
+     0.67
+    ],
+    [
+     30.0,
+     0.68,
+     1.0
+    ],
+    [
+     32.5,
+     0.28,
+     1.0
+    ],
+    [
+     38.0,
+     0.52,
+     1.0
+    ],
+    [
+     39.0,
+     0.68,
+     1.0
+    ],
+    [
+     42.0,
+     0.52,
+     1.0
+    ],
+    [
+     44.0,
+     0.28,
+     0.38
+    ],
+    [
+     45.0,
+     0.28,
+     0.46
+    ],
+    [
+     46.0,
+     0.28,
+     0.39
+    ],
+    [
+     48.5,
+     0.52,
+     1.0
+    ],
+    [
+     49.5,
+     0.28,
+     1.0
+    ],
+    [
+     52.0,
+     0.52,
+     1.0
+    ],
+    [
+     57.5,
+     0.51,
+     1.0
+    ],
+    [
+     60.0,
+     0.68,
+     1.0
+    ],
+    [
+     63.0,
+     0.52,
+     1.0
     ]
    ],
-   "duree": 60.5,
+   "duree": 64.0,
    "nb_plans": 1,
-   "duree_plan": 60.5,
+   "duree_plan": 64.0,
    "coupes": [],
    "plans": {
     "tres_serre": 0.0,
     "serre": 0.0,
-    "moyen": 0.248,
-    "large": 0.752
+    "moyen": 1.0,
+    "large": 0.0
    },
    "camera": {
-    "fixe": 0.867,
-    "avance": 0.125,
+    "fixe": 1.0,
+    "avance": 0.0,
     "recul": 0.0,
     "travelling": 0.0,
-    "epaule": 0.008
+    "epaule": 0.0
    },
-   "nb_personnes": 1,
+   "nb_personnes": 2,
    "personnes": [
     {
      "place": "gauche",
-     "presence": 0.248,
+     "presence": 0.648,
      "habit": [
-      184,
-      160,
-      125
+      129,
+      68,
+      64
      ],
      "cheveux": [
-      55,
-      91,
-      68
+      42,
+      30,
+      22
      ],
      "sourire": 0.0,
-     "taille": 0.094,
+     "taille": 0.069,
+     "tete_penchee": 1.8,
+     "regard_cote": 0.024
+    },
+    {
+     "place": "droite",
+     "presence": 0.648,
+     "habit": [
+      74,
+      66,
+      65
+     ],
+     "cheveux": [
+      16,
+      20,
+      9
+     ],
+     "sourire": 0.0,
+     "taille": 0.083,
      "tete_penchee": 0.6,
-     "regard_cote": 1.0
+     "regard_cote": 0.0
+    },
+    {
+     "place": "centre",
+     "presence": 0.352,
+     "habit": [
+      155,
+      169,
+      183
+     ],
+     "cheveux": [
+      215,
+      153,
+      90
+     ],
+     "sourire": 0.0,
+     "taille": 0.116,
+     "tete_penchee": 1.8,
+     "regard_cote": 0.0
     }
    ],
    "visages": true,
    "sourires": 0.0,
-   "energie": 0.174,
+   "energie": 0.173,
    "mur": [
-    215,
-    175,
-    135
+    0,
+    0,
+    0
    ],
    "palette": [
     [
-     217,
-     177,
-     137,
-     0.485
+     0,
+     0,
+     0,
+     0.689
     ],
     [
-     167,
-     133,
-     105,
-     0.161
+     172,
+     178,
+     145,
+     0.179
     ],
     [
+     108,
+     99,
+     102,
+     0.054
+    ],
+    [
+     68,
+     57,
      55,
-     58,
-     49,
-     0.121
+     0.038
     ],
     [
-     20,
-     19,
-     20,
-     0.108
+     223,
+     156,
+     97,
+     0.023
     ],
     [
-     128,
-     82,
-     38,
-     0.093
-    ],
-    [
-     247,
-     246,
-     244,
-     0.032
+     232,
+     234,
+     229,
+     0.017
     ]
    ],
    "lumiere": {
-    "luminosite": 164.8,
-    "chaleur": 57.8,
-    "saturation": 107.2
+    "luminosite": 51.9,
+    "chaleur": 8.9,
+    "saturation": 21.0
    },
-   "moment": "soir",
+   "moment": "nuit",
    "postures": []
   },
   "audio": {
-   "duree": 60.2,
+   "duree": 63.7,
    "nb_voix": 2,
    "voix": [
     {
-     "hz": 195,
-     "genre": "f",
-     "part": 0.48
+     "hz": 144,
+     "genre": "h",
+     "part": 0.71
     },
     {
-     "hz": 223,
+     "hz": 237,
      "genre": "f",
-     "part": 0.52
+     "part": 0.29
     }
    ],
-   "debit": 5.86,
-   "blanc_moyen": 0.47,
-   "coupes": 3,
-   "dynamique_db": 22.6,
-   "cris": 0.002,
+   "debit": 5.75,
+   "blanc_moyen": 0.31,
+   "coupes": 5,
+   "dynamique_db": 20.2,
+   "cris": 0.003,
    "musique": 0.41,
-   "impacts": 23,
-   "impacts_10s": 3.82,
-   "graves": 0,
-   "aigus": 23,
-   "sur_vanne": 11,
+   "impacts": 42,
+   "impacts_10s": 6.59,
+   "graves": 10,
+   "aigus": 32,
+   "sur_vanne": 14,
    "evenements": {},
    "emotions": {
-    "friendly": 4,
-    "confused": 3,
-    "smug": 3,
-    "calm": 2,
-    "amused": 2,
-    "neutral": 1,
-    "confident": 1,
-    "proud": 1
+    "ironique": 2,
+    "réfléchi": 2,
+    "douteux": 2,
+    "confused": 1,
+    "sceptique": 1,
+    "calme": 1,
+    "annoyed": 1,
+    "persuadé": 1
    }
   },
-  "video_origine": "/tmp/tmpdrrg64ti/src.mp4"
+  "video_origine": "/tmp/tmpidoy20px/src.mp4"
  },
  "fiche": {
   "note": 0,
@@ -1778,7 +2387,17 @@
      10,
      11,
      12,
-     13,
+     13
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 0.0,
+    "decor": "cabinet_medical_futuriste vert pâle avec un écran holographique affichant des symboles abstraits, une table d'examen futuriste, un stéthoscope flottant et une p",
+    "titre": "Le Débat du Futur"
+   },
+   {
+    "scene": "2",
+    "repliques": [
      14,
      15,
      16,
@@ -1788,36 +2407,35 @@
      20,
      21,
      22,
-     23,
-     24,
-     25
+     23
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "Spacious modern luxury living room, large television on wooden wall panel, indoor green plants, tiled floor.",
-    "titre": "Squat de luxe"
+    "decor": "salon_moderne avec un canapé futuriste, une table basse holographique, des écrans muraux affichant des motifs psychédéliques et une tasse de thé flottante.",
+    "titre": "La Décision Parentale"
    }
   ]
  },
  "_monte": true,
- "_separes": true,
  "_voix_hz": {
-  "presentateur": 172,
-  "invite": 232
+  "presentateur": 140,
+  "envoyee": 225
  },
  "_voix_genre": {
   "presentateur": "h",
-  "invite": "f"
+  "envoyee": "f"
  },
  "realisation": {
   "moment": "soir",
   "lieux": [
-   "rue",
+   "cabinet_medical",
    "salon"
   ],
   "gags": [
-   "Affiche: Guide pratique du parfait squatteur"
+   "\"Diagnostic : Enfant Humain (probablement)\"",
+   "\"Prénom suggéré : Zéphyr ou Chèvre\"",
+   "\"Spécialiste des identités fluides et des chèvres métamorphosées\""
   ],
   "ambiances": [
    "neon",
@@ -1825,10 +2443,12 @@
   ],
   "source": "auteur+image",
   "tenues": {
-   "presentateur": "tshirt",
-   "invite": "pull"
+   "presentateur": "chemise",
+   "envoyee": "blouse",
+   "invite": "blouse"
   },
   "plans": [
+   "large/fixe",
    "large/fixe",
    "large/fixe",
    "large/fixe",
