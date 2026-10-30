@@ -215,6 +215,9 @@
   l'original** (lecteur TikTok à côté de la nôtre) et **🗣️ Corriger qui parle** (personnage de chaque réplique -> Refaire
   « fichier|qui|0=invite;3=presentateur » : même son d'origine re-téléchargé, mêmes instants : `doublage.depuis_sketch`, mots gardés
   dans le sketch « _mots ») ; le bouton Refaire retrouve enfin le sketch gardé (nom sans « .mp4 »).
+- **Description TikTok** (`moteur/legende.py`, demande de l'auteur) : description de la vidéo + question + « 🎧 Son original :
+  @compte » **sans aucun lien**, puis ~15 hashtags liés à la vidéo (ceux de l'IA, sujet : famille / école / couple / travail…,
+  métiers, émotions, puis #petitsdramas et la niche ; NB_HASHTAGS) ; `publier.py` nettoie aussi les anciennes légendes à l'envoi.
 - **Style « croquis » EN ATTENTE DE VALIDATION** (`maquettes/croquis/`, rien n'est branché au robot tant que l'auteur ne dit pas
   « on le met en place ») : d'après ses images de référence (`maquettes/croquis/references`, faites par lui avec une IA), il doit
   REMPLACER le style actuel. Choix déjà faits : les DEUX silhouettes (le petit à grosse tête et le grand stickman), pour enfants, ados,
