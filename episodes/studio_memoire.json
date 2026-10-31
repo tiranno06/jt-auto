@@ -5408,36 +5408,34 @@
  {
   "moment": "jour",
   "lieux": [
-   "cuisine"
+   "banque"
   ],
   "source": "auteur+image",
-  "duree": 64.5,
+  "duree": 65.8,
   "plans": {
-   "large": 25
+   "large": 16
   },
   "mouvements": {
-   "fixe": 25
+   "fixe": 16
   },
   "costumes": {
-   "presentateur": "tshirt",
-   "invite": "tshirt"
+   "presentateur": "veste_jean",
+   "invite": "chemise"
   },
   "figurants": 0,
-  "ambiances": [
-   "vapeur"
-  ],
-  "controle": "Humoriste 5.0/10 : 43 s Les blagues liées à la cuisson (\"saignant\", \"cuit\") n'ont plus aucun sens logique avec des personnages humains debout dans une cuisine. | Réalisateur 4.0/10 : 20 s Zéro coupe, ",
-  "fichier": "2026-10-31_15h21_emission.mp4",
+  "ambiances": [],
+  "controle": "Humoriste 8.6/10 : 57.9 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 6.6/10 : montage trop lent : 0.2 plans toutes les 10 s (il en faudrait ~2.8); 18.6 s pas assez de plans",
+  "fichier": "2026-10-31_15h34_emission.mp4",
   "cine": {
-   "focus": false,
+   "focus": true,
    "vertige": true,
    "tiers": true,
    "etalonnage": true,
    "profondeur": false,
-   "grain": false,
+   "grain": true,
    "reflets": true,
    "son": true
   },
-  "cadence": "normal"
+  "cadence": "rapide"
  }
 ]
