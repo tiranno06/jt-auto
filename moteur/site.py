@@ -572,6 +572,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
   <div id="choix">Sélectionnez une vidéo pour la vérifier</div>
   <div id="cadreVideo"><video id="apercu" controls playsinline preload="metadata"></video>
     <button id="fermer" aria-label="Fermer la vidéo" title="Fermer">✕</button></div>
+  <button id="aPublier" class="apub" style="display:none;width:100%;justify-content:center;margin:0 0 8px">☐ À publier</button>
   <button id="publier" disabled>Publier sur TikTok</button>
   <div class="ligne2"><button class="second" id="voir" disabled>Aperçu</button><button class="second" id="copier" disabled>Copier la légende</button><button class="second" id="manuel" disabled>Partage manuel</button></div>
   <details id="plus"><summary>⋯ Plus d'actions sur cette vidéo</summary>
@@ -840,6 +841,7 @@ function rendre(){
   if(!vis.length){L.innerHTML='<p class="vide">'+VIDE[FILTRE]+'</p>';return}
   vis.forEach(([v,i])=>{
     const c=carte(v,i,false); c.onclick=()=>choisir(i);
+    if(v.origine==="tiktok"&&v.publie!==true) c.querySelector(".infos").appendChild(boutonPubli(v));   // cochée ou non, et le bouton
     c.querySelector(".croix").onclick=(ev)=>{ev.stopPropagation(); supprimer(i,c)}; L.appendChild(c);
   });
 }
@@ -890,9 +892,7 @@ function rendreTk(){                                                       // on
   const file=filePubli();
   vis.forEach(([v,i])=>{const c=carte(v,i,false); c.onclick=()=>{allerOnglet("videos","tiktok"); choisir(i)};
     c.querySelector(".croix").onclick=(ev)=>{ev.stopPropagation(); supprimer(i,c)};   // ✕ : supprimer aussi depuis cet onglet
-    if(v.publie!==true){const b=document.createElement("button"), k=file.indexOf(v.fichier); b.className="apub"+(k>=0?" on":"");
-      b.textContent=k<0?"☐ À publier":v.publie===false?"⚠ Échec : sautée (republiez depuis la fiche)":`✅ À publier (n° ${attentePubli(file).indexOf(v.fichier)+1})`; b.onclick=(ev)=>{ev.stopPropagation(); basculerPubli(v.fichier,b)};
-      c.querySelector(".infos").appendChild(b)}
+    if(v.publie!==true) c.querySelector(".infos").appendChild(boutonPubli(v));
     c.querySelector(".infos").insertAdjacentHTML("beforeend",badgeConf(v));
     if(v.publie!==true&&(v.a_verifier||[]).length){                        // feu rouge : les points que le robot n'a pas pu corriger seul
       const d=document.createElement("details"); d.className="averif"; d.onclick=ev=>ev.stopPropagation();
@@ -902,6 +902,16 @@ function rendreTk(){                                                       // on
   resumePubli();
 }
 // ------------------------------------------------ publication automatique : une vidéo cochée par jour (moteur/publication_auto.py)
+function textePubli(v){const f=filePubli(), k=f.indexOf(v.fichier);       // ☐ / ✅ n° / échec : même bouton partout (listes et vidéo ouverte)
+  return k<0?"☐ À publier":v.publie===false?"⚠ Échec : sautée (republiez depuis la fiche)":`✅ À publier (n° ${attentePubli(f).indexOf(v.fichier)+1})`}
+function boutonPubli(v){const b=document.createElement("button"); b.className="apub"+(filePubli().includes(v.fichier)?" on":"");
+  b.textContent=textePubli(v); b.onclick=ev=>{ev.stopPropagation(); basculerPubli(v.fichier,b)}; return b}
+function majPubliPartout(){                                                // listes et vidéo ouverte à jour d'un coup
+  const o=document.body.dataset.onglet; if(o==="tiktok") rendreTk(); else if(o==="videos"){rendre(); if(choisie!==null) document.querySelectorAll("#liste .carte").forEach(c=>c.classList.toggle("choisie",+c.dataset.i===choisie))}
+  resumePubli(); majBoutonPubliFiche()}
+function majBoutonPubliFiche(){const b=$("#aPublier"); if(!b) return; const v=choisie!==null?DATA[choisie]:null;
+  if(!v||v.origine!=="tiktok"||v.publie===true){b.style.display="none";return}
+  b.style.display=""; b.disabled=!lireJeton(); b.textContent=textePubli(v); b.classList.toggle("on",filePubli().includes(v.fichier))}
 const filePubli=()=>String((VARS&&VARS.PUBLI_FILE)||"").split(/\n+/).map(x=>x.trim()).filter(Boolean);
 const attentePubli=f=>f.filter(n=>{const v=DATA.find(x=>x.fichier===n); return v&&v.publie==null});   // cochées, pas encore publiées (échec : sautée)
 async function basculerPubli(nom,b){
@@ -911,9 +921,9 @@ async function basculerPubli(nom,b){
   b.disabled=true;
   f=on?f.filter(x=>x!==nom):[...f,nom];
   f=f.filter(n=>DATA.some(x=>x.fichier===n&&x.publie!==true));                // la liste ne garde que les vidéos à venir
-  VARS.PUBLI_FILE=f.join("\n"); rendreTk();                               // l'écran change tout de suite
-  try{await ecrireVar("PUBLI_FILE",f.join("\n")||"-"); toast(on?"Retirée de la publication automatique":"Ajoutée à la publication automatique ✓")}
-  catch(e){VARS.PUBLI_FILE=avant; rendreTk(); toast("❌ Pas enregistré ("+e.message+") : retour en arrière")}
+  VARS.PUBLI_FILE=f.join("\n"); majPubliPartout();                        // l'écran change tout de suite
+  try{await ecrireVar("PUBLI_FILE",f.join("\n")||"-"); toast(on?"Retirée de la publication automatique":"Ajoutée à la publication automatique ✓"); majBoutonPubliFiche()}
+  catch(e){VARS.PUBLI_FILE=avant; majPubliPartout(); toast("❌ Pas enregistré ("+e.message+") : retour en arrière")}
 }
 function rendreCalendrier(){                                               // les prochains jours de publication, dans l'ordre de la file
   const z=$("#calendrier"); if(!z) return; z.innerHTML="";
@@ -1043,6 +1053,7 @@ async function supprimer(i,c){
   }
 }
 async function supprimerSansQuestion(v,c){const i=DATA.indexOf(v); if(i<0) return; const ok=window.confirm; window.confirm=()=>true; try{await supprimer(i,c)}finally{window.confirm=ok}}
+$("#aPublier").onclick=()=>{if(choisie!==null) basculerPubli(DATA[choisie].fichier,$("#aPublier"))};
 function majBoutons(){
   const p=$("#publier"); armer=null; p.classList.remove("confirmer");
   if(choisie===null){p.disabled=true;p.textContent="Publier sur TikTok";return}
@@ -1057,7 +1068,7 @@ function choisir(i){
   document.querySelectorAll("#liste .carte").forEach(c=>c.classList.toggle("choisie",+c.dataset.i===i));
   $("#choix").textContent="Sélection : "+v.titre; ["#copier","#voir","#manuel"].forEach(s=>$(s).disabled=false);
   const a=$("#apercu"); a.src=srcDe(v); a.style.display="block"; $("#suivi").textContent=""; majBoutons(); ajusterBas();
-  $("#comparer").style.display=v.source?"block":"none"; afficherQui(v);
+  $("#comparer").style.display=v.source?"block":"none"; afficherQui(v); majBoutonPubliFiche();
 }
 // ------------------------------------------------ idée 5 : l'original et notre version côte à côte
 $("#comparer").onclick=()=>{
@@ -1119,7 +1130,7 @@ async function suivre(depart, v){
 const peutPartager = !!(navigator.canShare && navigator.canShare({files:[new File([""],"t.mp4",{type:"video/mp4"})]}));
 function fermerVideo(){
   const a=$("#apercu"); a.pause(); a.removeAttribute("src"); a.load(); a.style.display="none";
-  choisie=null; fichier=null; document.querySelectorAll(".carte").forEach(c=>c.classList.remove("choisie")); document.body.classList.remove("lecture");
+  choisie=null; fichier=null; document.querySelectorAll(".carte").forEach(c=>c.classList.remove("choisie")); document.body.classList.remove("lecture"); majBoutonPubliFiche();
   $("#choix").textContent="Sélectionnez une vidéo pour la vérifier"; ["#copier","#voir","#manuel"].forEach(s=>$(s).disabled=true);
   $("#suivi").textContent=""; majBoutons(); ajusterBas();
 }

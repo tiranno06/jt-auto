@@ -136,7 +136,10 @@
   doublon à la fin (sortie/.suivante_lancee)) ; **machines d'aide selon la durée** (`dessin_partage.nb_aides` : ~1 000 images par
   machine, 1 à 5 ; AIDES=n impose) ; **nouvelles poses croquis** (meubles `B["meubles"]` → p["meuble"] : malade au lit sous la
   couette dans sa chambre, canapé au salon, volant en voiture, accoudé au comptoir au bar / resto / magasin ; `croquis.lit_face`,
-  `couette`, `canape_face`, `comptoir` ; couleurs en BGR).
+  `couette`, `canape_face`, `comptoir` ; couleurs en BGR). **Appels : écran coupé en deux du début à la fin** (chacun dans son décor,
+  aucun changement de plan ; APPEL_CONTINU=0 pour l'ancien montage alterné). **Bouton « À publier » partout** : sur la vidéo ouverte
+  (#aPublier) et sur les vidéos TikTok de la page Vidéos (état « ✅ À publier (n° k) » visible), même bouton que l'onglet TikTok
+  (`boutonPubli`, `majPubliPartout`).
 - **Barre de progression en temps réel** (accueil + onglet TikTok, PC et mobile) : le robot publie son avancement toutes les 8 s
   (`moteur/progression.py` → statut « progression-<run> » du commit : %, type, étape, heure de fin ; dessin des images = vitesse
   réelle) ; le site le relit toutes les 5 s, fait avancer barre et compte à rebours chaque seconde, montre la file d'attente et la

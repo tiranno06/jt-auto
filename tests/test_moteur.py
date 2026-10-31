@@ -727,7 +727,7 @@ class TestVideoComplete(unittest.TestCase):
             journal = io.StringIO()
             with contextlib.redirect_stdout(journal): d1 = cartoon.rendre(copy.deepcopy(sk), os.path.join(dossier, "v1.mp4"), auds, mini=True)
             cartoon.APRES_BLOC[0] = None
-            self.assertRegex(journal.getvalue(), r"appel : [1-9]\d* écran\(s\) partagé")   # l'écran partagé de l'appel est bien là
+            self.assertIn("appel : écran partagé du début à la fin", journal.getvalue())   # l'écran partagé de l'appel tient tout du long
             self.assertGreaterEqual(len(gardes), 2)
             d2 = cartoon.rendre(copy.deepcopy(sk), os.path.join(dossier, "v2.mp4"), auds, mini=True, deja=gardes[:-1])   # reprise
             self.assertAlmostEqual(d1, d2, places=2); self.assertTrue(os.path.getsize(os.path.join(dossier, "v2.mp4")) > 50000)
@@ -1144,7 +1144,11 @@ class TestVoixEtScenesTiktok(unittest.TestCase):
         self.assertEqual(V.confiance([], []), 100)                         # 4 : note de confiance
         self.assertLess(V.confiance([{"ok": False, "revoir": True}], [{"grave": True}], {"note": 4}), 75)
         src = open(os.path.join(ici, "..", "moteur", "site.py"), encoding="utf-8").read()
-        for m in ("badgeConf", "filtrerTk", 'id="fTexte"', 'id="fProfil"', "rendreCalendrier", "deplacerPubli", "ondrop"):   # 4, 6, 7
+        for m in ("badgeConf", "filtrerTk", 'id="fTexte"', 'id="fProfil"', "rendreCalendrier", "deplacerPubli", "ondrop",   # 4, 6, 7
+                  'id="aPublier"', "majBoutonPubliFiche", 'c.querySelector(".infos").appendChild(boutonPubli(v))'):   # « À publier » partout
+            self.assertIn(m, src)
+        self.assertIn('APPEL.append((-1.0, 1e9, "partage"', open(os.path.join(ici, "..", "moteur", "cartoon.py"), encoding="utf-8").read())   # appel : écran partagé continu
+        for m in ():
             self.assertIn(m, src)
         img = np.full((1920, 1080, 3), 235, np.uint8)                      # 14 : lit, canapé, comptoir, volant
         for meuble, assis in (("lit", True), ("canape", True), ("comptoir", False), ("volant", True)):
