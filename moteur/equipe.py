@@ -102,8 +102,8 @@ def scripte(sk, segs, hz, B):
     if S.get("lieux_separes") and not studio.appel_devine(sk):
         B.note("scripte", "appel seulement si le son en parle", False, "lieux séparés de l'IA refusés"); S.pop("lieux_separes", None)
     tel = [k for k, r in enumerate(reps) if r.get("objet") == "telephone" and not re.search(r"t[ée]l[ée]phone|portable|appel|allô|allo|message|photo|insta|snap", r.get("t", "").lower())]
-    for k in tel:
-        if not studio.appel_devine(sk): reps[k].pop("objet", None)
+    if studio.appel_devine(sk): tel = []                                   # un appel : le téléphone a toute sa place
+    for k in tel: reps[k].pop("objet", None)
     B.note("scripte", "téléphone en main seulement s'il en est question", not tel, f"retiré sur {len(tel)} réplique(s)" if tel else "")
     nb_voix = len({s["voix"] for s in segs}); nb_roles = len({r["p"] for r in reps if r["p"] != "narrateur"})
     B.note("scripte", "autant de personnages que de voix", nb_roles >= min(nb_voix, 3), f"{nb_voix} voix, {nb_roles} personnage(s)")

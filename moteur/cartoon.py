@@ -1716,7 +1716,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
                                 bruitages=list(BRUITAGES), lieux=list((B or {}).get("lieux") or []), compagnons=sum(len(v) for v in COMP.values()),
                                 decors_ia=bool(decors), coupes_origine=list((B or {}).get("coupes_origine") or []),
                                 xs={k: {r: position(k, r)[0] for r in v} for k, v in places.items()}, tetes_y=TETES_Y,   # contrôle final (verif_finale)
-                                transitions=[(float(x[0]), float(x[1])) for x in transitions])
+                                transitions=[(float(x[0]), float(x[1])) for x in transitions] + [(float(a[0]), float(a[1])) for a in APPEL])   # écrans partagés / écoute : coupes voulues
     try:                                                                   # empreintes : redessin partiel d'une 2e version (jury)
         RENDU.update(fps=FPS, nf=nf, sig_plans=[(x["t0"], x["t1"], _sig(x)) for x in DECOUPE], sig_ph=[(q["deb"], q["fin"], _sig(q)) for q in ph],
                      sig_parts={k: _sig(v) for k, v in {"fiches": FICHES, "places": places, "comp": COMP, "transitions": transitions, **{"B." + k: v for k, v in (B or {}).items()}}.items()},

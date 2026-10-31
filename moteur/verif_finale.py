@@ -199,9 +199,11 @@ def liste_ia(video, sk, R):
     for d in ecrire._liste(r.get("defauts")):
         try:
             n = int(d.get("image")) - 1
-            if 0 <= n < len(instants): out.append(_defaut(instants[n], "contrôle IA", str(d.get("probleme") or ""), grave=False))
+            pb = str(d.get("probleme") or "")
+            if re.search(r"expression|posture|émotion|emotion|attitude|pas assez|manque d", pb, re.I): continue   # avis de goût, pas une erreur
+            if 0 <= n < len(instants): out.append(_defaut(instants[n], "contrôle IA", pb, grave=False))
         except (AttributeError, TypeError, ValueError): pass
-    return out[:10]
+    return out[:6]
 
 
 # ------------------------------------------------------------------ ensemble

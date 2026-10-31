@@ -497,6 +497,16 @@ def main():
             import cartoon as _ct, verif_finale
             if _ct.RENDU: A_VERIFIER = verif_finale.verifier(base + ".mp4", sk, _ct.RENDU)
         except Exception as e: print(f"contrôle de la vidéo finie impossible ({str(e)[:120]})", flush=True)
+    WEB = False                                                            # version légère (720p) + couverture, rangées dans les archives :
+    try:                                                                   # l'appli les lit directement, le site n'a plus rien à recalculer
+        import subprocess as _sp
+        r_ = _sp.run(["ffmpeg", "-y", "-loglevel", "error", "-i", base + ".mp4", "-vf", "scale=720:-2,fps=30", "-c:v", "libx264", "-preset", "veryfast",
+                      "-crf", "27", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "96k", "-movflags", "+faststart", base + "_web.mp4"], capture_output=True, text=True)
+        t_c = (getattr(sys.modules.get("cartoon"), "COUVERTURE", None) or 2.5)
+        _sp.run(["ffmpeg", "-y", "-loglevel", "error", "-ss", f"{float(t_c):.2f}", "-i", base + ".mp4", "-frames:v", "1", "-vf", "scale=360:-2", "-q:v", "4", base + ".jpg"],
+                capture_output=True)
+        WEB = r_.returncode == 0 and os.path.exists(base + "_web.mp4") and os.path.exists(base + ".jpg")
+    except Exception as e: print(f"version légère impossible ({str(e)[:100]}) : le site la fera", flush=True)
     credit = "Voix : " + " ; ".join(credits_voix) + "."
     if decors: credit += " Décors générés avec Stable Diffusion XL (CreativeML Open RAIL++-M)."
     if libre:                                                              # signature de la chaîne dans les hashtags
@@ -532,6 +542,7 @@ def main():
     if AUTO: historique[-1]["auto"] = True
     if test or (os.environ.get("APERCU_RAPIDE") or "") == "1" or (os.environ.get("RENDU") or "") == "essai_pause":
         historique[-1]["essai"] = True                                     # essai : rangé à part sur le site, effacé au bout de 3 jours
+    if WEB: historique[-1]["web"] = True                                    # base_web.mp4 + base.jpg dans les archives du mois
     if A_VERIFIER: historique[-1]["a_verifier"] = A_VERIFIER               # ⚠️ sur le site : points à regarder avant de publier
     if sk.get("equipe"): historique[-1]["equipe"] = f"{sum(1 for l in sk['equipe'] if l.get('ok'))}/{len(sk['equipe'])} contrôles bons"
     if DOUB: historique[-1]["filiere"] = "tiktok"                         # vidéo sur un son TikTok : rangée à part des sketchs

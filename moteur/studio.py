@@ -623,6 +623,7 @@ APPEL = r"\b(all[ôo]|je t'appelle|tu m'appelles|au t[ée]l[ée]phone|tu m'enten
         r"je suis (au|à la|à l'|devant|sur le|chez)|je te rappelle|en visio|ça capte|r[ée]seau|ma batterie)\b"
 
 CONTEXTE_APPEL = r"\b(appel\w*|t[ée]l[ée]phon\w*|visio\w*|au bout du fil|par message|[àa] distance|facetime)\b"
+MALADE = r"\b(je suis malade|j'?ai (de )?la (fi[èe]vre|grippe|gastro|crève)|clou[ée] au lit|dans mon lit|au lit|sous la couette|arr[êe]t maladie|je tousse|j'?suis malade)\b"
 DEHORS = r"\b(voiture|parking|rue|dehors|trottoir|arr[êe]t de bus|en ville|devant chez)\b"
 
 def appel_devine(sk):
@@ -643,6 +644,7 @@ def lieux_devines(sk, roles):
     out = {}
     for r in roles:
         autres = " ".join(v for k, v in lignes.items() if k != r)
+        if re.search(MALADE, lignes[r]): out[r] = "chambre"; continue          # « je suis malade, cloué au lit » : au lit, dans sa chambre
         if re.search(r"\bje suis (dans la rue|dehors|en ville|au parking|sur le parking|devant)", lignes[r]): out[r] = "rue"
         elif re.search(r"\b(fiston|mon fils|ma fille|ma puce)\b", autres): out[r] = "rue"          # l'enfant qui appelle : dehors
         elif re.search(r"\b(fiston|mon fils|ma fille|ma puce)\b", lignes[r]) or re.search(r"(papa|maman)\s*[,!?]", autres): out[r] = "salon"
@@ -654,7 +656,8 @@ def lieux_devines(sk, roles):
 DECOR_EN = {"rue": "quiet city street at dusk, parked car at the curb, sidewalk, street lamps, shop fronts",
             "salon": "cozy living room, sofa, posters on the wall, coffee table, lamp, television",
             "bureau": "open space office, desks, computer screens, plants", "bar": "cosy bar, counter, bottles on shelves, stools",
-            "restaurant": "small restaurant, tables with checkered cloths, menu board", "magasin": "shop interior, shelves full of products, counter"}
+            "restaurant": "small restaurant, tables with checkered cloths, menu board", "magasin": "shop interior, shelves full of products, counter",
+            "chambre": "messy bedroom, unmade bed with duvet and pillows, bedside table with tissues and medicine, curtains drawn"}
 DECOR_EN.update(__import__("decor_metiers").DECOR_EN)                   # décors des métiers (caserne, garage, ferme…)
 DECOR_EN.update(__import__("decor_lieux").DECOR_EN)                     # 39 lieux de plus (plage, gare, hôpital…)
 
@@ -778,10 +781,15 @@ def separer_lieux(sk):
         sep = {r: "" for r in parlants[:2]}; moyen = moyen or "telephone"            # repli gratuit : un appel deviné aux mots
         S["lieux_de"] = {**lieux_devines(sk, parlants[:2]), **(S.get("lieux_de") if isinstance(S.get("lieux_de"), dict) else {})}
     if len(sep) < 2: return False
+    if not moyen and re.search(r"t[ée]l[ée]phon|appel|all[ôo]\b|au bout du fil", texte + " " + str((sk.get("doublage") or {}).get("contexte") or "").lower()):
+        moyen = "telephone"                                                # un appel : chacun son téléphone en main (même si l'IA ne l'a pas dit)
     ordre = list(sep); scene_de = {r: k for k, r in enumerate(ordre)}
     lieux_role0 = S.get("lieux_de") if isinstance(S.get("lieux_de"), dict) else {}
     vus = S.get("decors_vus") if isinstance(S.get("decors_vus"), dict) else {}  # décor vu derrière chacun dans la vidéo d'origine (IA)
     sep = {r: (sep[r] or str(vus.get(r) or "")) for r in sep}
+    for r in sep:                                                          # le malade au téléphone est au lit, dans sa chambre
+        if re.search(MALADE, " ".join(x.get("t", "") for x in reps if x.get("p") == r).lower() + " " + str(sep[r]).lower()):
+            lieux_role0 = dict(lieux_role0, **{r: "chambre"}); S["lieux_de"] = lieux_role0; sep[r] = DECOR_EN["chambre"]
     dec = [{"scene": str(k + 1), "repliques": [], "lieu": "", "son": "", "duree": 0,
             "decor": re.sub(r"[^\w\s,.'-]", "", sep[r] or DECOR_EN.get(lieux_role0.get(r), ""))[:160]} for k, r in enumerate(ordre)]
     k_prec = 0

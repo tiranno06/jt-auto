@@ -115,6 +115,17 @@
   (au-delà : vidéo lue depuis les Releases) ; après chaque mise en ligne, `moteur/verif_site.py` vérifie que la dernière vidéo est
   visible sur le site en ligne (sinon 2e mise en ligne puis alerte téléphone) ; l'appli relit l'historique à chaque retour
   (page jamais servie depuis un cache périmé) ; nouvelle vidéo TikTok = point rouge sur l'onglet 🎵 TikTok + message dans l'accueil.
+- **Site et appli rapides (choix de l'auteur, 31 octobre 2026 : A 1-2-3-6, B 7-11, C 12-15, D 16-17)** : **suppression directe** depuis
+  l'appli (API GitHub : historique.json modifié par l'appli avec 3 essais si le robot écrit en même temps, fichiers des archives
+  effacés : vidéo, légende, _web.mp4, .jpg ; vérifiée, « ✅ Supprimée pour de bon » ou « ❌ Réessayer » ; mémorisée sur l'appareil
+  « jt_supprimees » : jamais réaffichée ; sans droit d'écriture du jeton : supprimer.yml, sans ffmpeg) ; le robot fabrique lui-même
+  la **version légère 720p (_web.mp4) et la couverture (.jpg)** rangées dans les archives (historique "web") : l'appli les lit
+  directement, le site ne garde que les 6 pleines qualités pour le partage ; **site reconstruit seulement pour une nouvelle vidéo**
+  (plus après suppression, publication, régie) ; ouverture instantanée (service worker : copie gardée tout de suite, version en ligne
+  pour la fois suivante ; dernier historique gardé « jt_historique ») ; **tirer vers le bas / bouton 🔄** ; rafraîchissement dès
+  qu'une fabrication finit ; lectures conditionnelles (ETag / 304, quota ménagé) ; **nouvelle version détectée** (version.txt =
+  empreinte du code, bouton « ✨ Nouvelle version ») ; boutons à réponse immédiate avec retour en arrière si GitHub refuse ; voyant
+  de connexion dans l'en-tête (🟢 à jour il y a… / 🟠 hors connexion / 🔴 clé expirée).
 - **Barre de progression en temps réel** (accueil + onglet TikTok, PC et mobile) : le robot publie son avancement toutes les 8 s
   (`moteur/progression.py` → statut « progression-<run> » du commit : %, type, étape, heure de fin ; dessin des images = vitesse
   réelle) ; le site le relit toutes les 5 s, fait avancer barre et compte à rebours chaque seconde, montre la file d'attente et la

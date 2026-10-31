@@ -62,6 +62,21 @@ def repliques_de(e):
     return [[str(r.get("p", "")), str(r.get("t", ""))[:110]] for r in (sk.get("repliques") or [])][:60]
 
 
+DEPOT = os.environ.get("GITHUB_REPOSITORY", "")
+
+
+def fiche(e):
+    """Ce que l'appli sait d'une vidéo."""
+    return dict(titre=e.get("titre", ""), date=e.get("date", ""), fichier=e["fichier"], origine=origine(e), tag=e.get("tag"),
+                essai=bool(e.get("essai")) or str(e.get("titre", "")).startswith("👀 Aperçu"),
+                legende=e.get("legende", ""), publie=e.get("publie"), vues=e.get("vues"),
+                format=e.get("format", ""), manuel=bool(e.get("manuel")), avis=e.get("avis", 0), note=e.get("note"), note_auteur=e.get("note_auteur"),
+                programmee=e.get("programmee"), couts=e.get("couts") or {}, duree=e.get("duree"), a_verifier=e.get("a_verifier") or [],
+                likes=e.get("likes"), commentaires=e.get("commentaires"), partages=e.get("partages"),
+                voix_secours=("piper" in str(e.get("voix", "")).lower()),
+                source=e.get("source_audio") or "", reps=repliques_de(e))
+
+
 def construire():
     hist = json.load(open(os.path.join(RACINE, "episodes", "historique.json"), encoding="utf-8")) \
         if os.path.exists(os.path.join(RACINE, "episodes", "historique.json")) else []
@@ -72,6 +87,15 @@ def construire():
         cat = "tiktok" if origine(e) == "tiktok" else "manuel" if e.get("manuel") else "court" if e.get("format") == "mini" else "long"
         if comptes.get(cat, 0) >= NB: continue                             # jusqu'à NB vidéos par onglet
         dest = os.path.join(SITE, "videos", e["fichier"])
+        extra = {}
+        if e.get("web") and DEPOT:                                         # lue depuis les archives (version légère + couverture faites par
+            rel = f"https://github.com/{DEPOT}/releases/download/{e.get('tag') or 'emissions-' + e['fichier'][:7]}/"   # le robot) : rien à recalculer
+            extra = dict(src=rel + e["fichier"].replace(".mp4", "_web.mp4"), poster_url=rel + e["fichier"].replace(".mp4", ".jpg"))
+            if pleines < PLEINES and recuperer(e, dest) and total + os.path.getsize(dest) <= PLAFOND_PLEINES:   # copie pour le partage manuel
+                total += os.path.getsize(dest); pleines += 1; extra["plein"] = "videos/" + e["fichier"]
+            elif os.path.exists(dest): os.remove(dest)
+            comptes[cat] = comptes.get(cat, 0) + 1
+            liste.append(dict(fiche(e), poster="", **extra)); continue
         ok = False
         if pleines < PLEINES and recuperer(e, dest):                       # les plus récentes : pleine qualité (si le poids le permet)
             if total + os.path.getsize(dest) <= PLAFOND_PLEINES: ok = True; pleines += 1
@@ -82,14 +106,7 @@ def construire():
             os.remove(dest); print(f"  {e['fichier']} : site plein, lue depuis les Releases"); continue   # visible (lue depuis les Releases)
         total += os.path.getsize(dest); comptes[cat] = comptes.get(cat, 0) + 1
         poster = e["fichier"].replace(".mp4", ".jpg"); affiche(dest, os.path.join(SITE, "videos", poster), (e.get("couverture_ms") or 4000) / 1000)
-        liste.append(dict(titre=e.get("titre", ""), date=e.get("date", ""), fichier=e["fichier"], poster=poster, origine=origine(e),
-                          essai=bool(e.get("essai")) or str(e.get("titre", "")).startswith("👀 Aperçu"),
-                          legende=e.get("legende", ""), publie=e.get("publie"), vues=e.get("vues"),
-                          format=e.get("format", ""), manuel=bool(e.get("manuel")), avis=e.get("avis", 0), note=e.get("note"), note_auteur=e.get("note_auteur"),
-                          programmee=e.get("programmee"), couts=e.get("couts") or {}, duree=e.get("duree"), a_verifier=e.get("a_verifier") or [],
-                          likes=e.get("likes"), commentaires=e.get("commentaires"), partages=e.get("partages"),
-                          voix_secours=("piper" in str(e.get("voix", "")).lower()),
-                          source=e.get("source_audio") or "", reps=repliques_de(e)))
+        liste.append(dict(fiche(e), poster=poster))
     faites = [h for h in hist if h.get("fichier")]
     vraies = [e for e in faites if not e.get("betisier")]                  # le bêtisier n'utilise aucun outil : il ne compte pas
     derniere = vraies[-1] if vraies else {}                                # voyants des outils payants : d'après la dernière vidéo
@@ -110,7 +127,10 @@ def construire():
     resume = {"compte": st.get("compte", ""), "maj": st.get("maj", ""), "videos": len(st.get("videos", [])),
               "vues": sum(v.get("vues", 0) for v in st.get("videos", [])), "liees": sum(1 for v in st.get("videos", []) if v.get("fichier")),
               "abonnes": st.get("abonnes"), "abonnes_hist": (st.get("abonnes_hist") or [])[-24 * 8:]}
-    page = (PAGE.replace("__NOM__", html.escape(nom)).replace("__CONF__", json.dumps(conf)).replace("__STATS__", json.dumps(resume, ensure_ascii=False))
+    import hashlib
+    version = hashlib.sha1((PAGE + SW).encode()).hexdigest()[:12]          # change seulement quand le code de l'appli change
+    open(os.path.join(SITE, "version.txt"), "w").write(version + "\n")
+    page = (PAGE.replace("__VERSION__", version).replace("__NOM__", html.escape(nom)).replace("__CONF__", json.dumps(conf)).replace("__STATS__", json.dumps(resume, ensure_ascii=False))
             .replace("__OUTILS__", json.dumps(outils, ensure_ascii=False).replace("</", "<\\/"))
             .replace("__ALERTES__", json.dumps(alertes, ensure_ascii=False).replace("</", "<\\/"))
             .replace("__DATA__", json.dumps(liste, ensure_ascii=False).replace("</", "<\\/")))
@@ -146,7 +166,7 @@ def application(nom):
 
 # Service worker : l'appli s'ouvre même hors connexion (dernière version de la page), sans jamais mettre en cache
 # les vidéos (trop lourdes) ni les appels à GitHub.
-SW = r"""const CACHE = "regie-v26";
+SW = r"""const CACHE = "regie-v27";
 const COQUILLE = ["./", "manifest.webmanifest", "logo-192.png", "logo-512.png", "poppins-500.ttf", "poppins-700.ttf"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(COQUILLE))); self.skipWaiting(); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(k => Promise.all(k.filter(x => x !== CACHE).map(x => caches.delete(x))))); self.clients.claim(); });
@@ -163,13 +183,11 @@ self.addEventListener("fetch", e => {
   const u = new URL(e.request.url);
   if (e.request.method !== "GET" || u.origin !== location.origin || /\.(mp4|json|txt)$/.test(u.pathname)) return;
   if (e.request.mode === "navigate" || u.pathname.endsWith("/") || u.pathname.endsWith(".html")) {
-    // page : toujours la plus récente si le réseau répond en moins de 3 s, sinon la copie gardée (ouverture instantanée hors ligne)
-    e.respondWith(new Promise(ok => {
-      let fini = false; const copie = () => caches.match(e.request).then(r => r || caches.match("./"));
-      const minuteur = setTimeout(() => copie().then(r => { if (r && !fini) { fini = true; ok(r); } }), 6000);
-      fetch(e.request, { cache: "no-store" }).then(r => { garder(e.request, r); if (!fini) { fini = true; clearTimeout(minuteur); ok(r); } })
-        .catch(() => copie().then(r => { if (!fini) { fini = true; clearTimeout(minuteur); ok(r || Response.error()); } }));
-    }));
+        // ouverture instantanée : la copie gardée tout de suite, la version en ligne rangée pour la fois suivante (l'appli signale une
+    // nouvelle version et se recharge proprement) ; sans copie : le réseau
+    const reseau = fetch(e.request, { cache: "no-store" }).then(r => garder(e.request, r));
+    e.respondWith(caches.match(e.request).then(r => r || caches.match("./")).then(r => r || reseau).catch(() => reseau));
+    e.waitUntil(reseau.catch(() => null));
     return;
   }
   // images, polices, icônes : copie gardée tout de suite, mise à jour en arrière-plan
@@ -312,7 +330,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
 }
 @media (max-width:380px){.opts.deux{grid-template-columns:1fr}}
 </style></head><body data-onglet="accueil">
-<header><h1><img src="logo-192.png" alt="" style="width:44px;height:44px;border-radius:12px;vertical-align:-10px;margin-right:10px">__NOM__</h1><div class="sous">Régie de la chaîne</div>
+<header><h1><img src="logo-192.png" alt="" style="width:44px;height:44px;border-radius:12px;vertical-align:-10px;margin-right:10px">__NOM__</h1><div class="sous">Régie de la chaîne · <span id="cnx">⚪ …</span> <button id="rafraichir" title="Rafraîchir" aria-label="Rafraîchir" style="padding:2px 9px;font-size:15px;background:transparent;border:1px solid var(--ligne);color:inherit;border-radius:999px;cursor:pointer">🔄</button></div><div id="tirer" style="display:none;text-align:center;font-size:14px;padding:6px">↓ Relâchez pour rafraîchir</div>
 <button id="installer" style="display:none;margin-top:10px;padding:9px 16px;font-size:14px;font-weight:700;background:var(--jaune);color:#111">📲 Installer l'application</button></header>
 <nav class="onglets"><button class="onglet actif" data-o="accueil"><span class="ic">🏠</span><span class="nom">Accueil</span></button><button class="onglet" data-o="videos"><span class="ic">🎬</span><span class="nom">Vidéos</span></button><button class="onglet" data-o="tiktok"><span class="ic">🎵</span><span class="nom">TikTok</span></button><button class="onglet" data-o="stats"><span class="ic">📊</span><span class="nom">Stats</span></button><button class="onglet" data-o="config"><span class="ic">⚙️</span><span class="nom">Réglages</span></button></nav>
 <main>
@@ -574,6 +592,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
 <script>
 var VARS={};
 const DATA = __DATA__, CONF = __CONF__;
+{const s_=lireSuppr(); for(let i=DATA.length-1;i>=0;i--) if(s_[DATA[i].fichier]) DATA.splice(i,1)}   // supprimées sur cet appareil : jamais réaffichées
 let OUTILS = __OUTILS__;
 const API = "https://api.github.com/repos/" + CONF.depot;
 const $ = s => document.querySelector(s);
@@ -585,13 +604,31 @@ function quand(v){const m=/(\d{4}-\d{2}-\d{2})_(\d{2})h(\d{2})/.exec(v.fichier||
 const recentsDabord=(a,b)=>quand(b[0]).localeCompare(quand(a[0]));    // du plus récent au plus ancien
 function lireJeton(){try{return localStorage.getItem("jt_jeton")||""}catch(e){return window._jeton||""}}
 function ecrireJeton(v){try{v?localStorage.setItem("jt_jeton",v):localStorage.removeItem("jt_jeton")}catch(e){window._jeton=v}}
+// lectures « conditionnelles » : GitHub répond « rien de neuf » (304) sans compter dans le quota quand rien n'a changé
+const ETAGS=new Map(); const CNX={etat:"",maj:0};
+function marquerCnx(e){CNX.etat=e; if(e==="ok") CNX.maj=Date.now(); dessinerCnx()}
 async function gh(chemin, opts={}){
   const j=lireJeton(); if(!j) throw new Error("régie non connectée");
-  const r=await fetch(API+chemin,{cache:"no-store",...opts,headers:{"Authorization":"Bearer "+j,"Accept":"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28",...(opts.body?{"Content-Type":"application/json"}:{}),...(opts.headers||{})}});
-  if(r.status===401) throw new Error("jeton refusé (expiré ou incorrect)");
+  const lire=!opts.method||opts.method==="GET", cle=chemin.replace(/[?&]t=\d+/,"")+"|"+((opts.headers||{}).Accept||"");
+  const memo=lire?ETAGS.get(cle):null;
+  let r;
+  try{r=await fetch(API+chemin,{cache:"no-store",...opts,headers:{"Authorization":"Bearer "+j,"Accept":"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28",...(opts.body?{"Content-Type":"application/json"}:{}),...(memo?{"If-None-Match":memo.etag}:{}),...(opts.headers||{})}})}
+  catch(e){marquerCnx("horsligne"); throw e}
+  if(r.status===401){marquerCnx("cle"); throw new Error("jeton refusé (expiré ou incorrect)")}
   if(r.status===403) throw new Error("droits du jeton insuffisants");
+  marquerCnx("ok");
+  if(r.status===304&&memo) return new Response(memo.corps,{status:200,headers:{"Content-Type":memo.type}});
+  if(lire&&r.ok&&r.headers.get("ETag")){try{const corps=await r.clone().text(); if(corps.length<4e6) ETAGS.set(cle,{etag:r.headers.get("ETag"),corps,type:r.headers.get("Content-Type")||""})}catch(e){}}
   return r;
 }
+function dessinerCnx(){                                                    // voyant : à jour / hors connexion / clé expirée
+  const z=document.getElementById("cnx"); if(!z) return;
+  const s=CNX.maj?Math.round((Date.now()-CNX.maj)/1000):null;
+  const [c,t]=!navigator.onLine||CNX.etat==="horsligne"?["🟠","hors connexion"]:CNX.etat==="cle"?["🔴","clé GitHub expirée (Réglages)"]
+    :!lireJeton()?["⚪","régie non connectée"]:s==null?["⚪","…"]:["🟢","à jour "+(s<60?"il y a "+s+" s":"il y a "+Math.round(s/60)+" min")];
+  const h=`${c} ${t}`; if(z.textContent!==h) z.textContent=h;
+}
+setInterval(dessinerCnx,5000); addEventListener("online",dessinerCnx); addEventListener("offline",()=>marquerCnx("horsligne"));
 function majBandeau(){$("#bandeauCnx").style.display=lireJeton()?"none":""; $("#oublier").style.display=lireJeton()?"":"none"}
 // ------------------------------------------------ interrupteur publication automatique (Réglages → Publication)
 let auto = null;
@@ -688,7 +725,9 @@ async function actualiserStats(){
     const [h,st,cr]=await Promise.all([lireEpisode("historique.json").catch(()=>null),lireEpisode("stats.json").catch(()=>null),lireEpisode("credits.json").catch(()=>null)]);
     if(cr&&cr.date){CRED=cr; rendreOutils()}
     if(Array.isArray(h)){const par={}; h.forEach(e=>{if(e.fichier)par[e.fichier]=e});
-      DATA.forEach(v=>{const e=par[v.fichier]; if(!e)return; ["vues","likes","commentaires","partages","publie","couts"].forEach(k=>{if(e[k]!==undefined)v[k]=e[k]})});
+      try{const K=["fichier","titre","date","tag","web","filiere","source_audio","theme","manuel","legende","publie","vues","format","avis","note","note_auteur","programmee","duree","likes","commentaires","partages","a_verifier"];
+        localStorage.setItem("jt_historique",JSON.stringify(h.filter(e=>e.fichier).map(e=>Object.fromEntries(K.filter(k=>e[k]!==undefined).map(k=>[k,e[k]])))))}catch(e){}   // copie légère pour la prochaine ouverture
+      DATA.forEach(v=>{const e=par[v.fichier]; if(!e)return; ["vues","likes","commentaires","partages","publie","couts","programmee","a_verifier"].forEach(k=>{if(e[k]!==undefined)v[k]=e[k]})});
       ajouterNouvelles(h);
       const faites=h.filter(e=>e.fichier), der=faites[faites.length-1];
       if(der){OUTILS={outils:(der.outils&&typeof der.outils==="object")?der.outils:null,date:der.date||"",titre:der.titre||""}; rendreOutils()}}
@@ -707,9 +746,10 @@ async function actualiserStats(){
 // lue directement depuis les Releases GitHub où le robot l'archive toujours ; supprimée : elle disparaît de la liste
 function ajouterNouvelles(h){
   const connus=new Set(DATA.map(v=>v.fichier)), vivants=new Set(h.filter(e=>e.fichier).map(e=>e.fichier));
-  const avant=DATA.length; if(choisie===null) for(let i=DATA.length-1;i>=0;i--) if(!vivants.has(DATA[i].fichier)) DATA.splice(i,1);
-  const neuves=h.filter(e=>e.fichier&&!connus.has(e.fichier)).slice(-15).map(e=>({titre:e.titre||"",date:e.date||"",fichier:e.fichier,poster:"",
-    src:`https://github.com/${CONF.depot}/releases/download/${e.tag||"emissions-"+e.fichier.slice(0,7)}/${e.fichier}`,
+  const avant=DATA.length; if(choisie===null) for(let i=DATA.length-1;i>=0;i--) if(!vivants.has(DATA[i].fichier)||lireSuppr()[DATA[i].fichier]) DATA.splice(i,1);
+  const sup=lireSuppr(), rel=e=>`https://github.com/${CONF.depot}/releases/download/${e.tag||"emissions-"+e.fichier.slice(0,7)}/`;
+  const neuves=h.filter(e=>e.fichier&&!connus.has(e.fichier)&&!sup[e.fichier]).slice(-15).map(e=>({titre:e.titre||"",date:e.date||"",fichier:e.fichier,poster:"",
+    src:rel(e)+(e.web?e.fichier.replace(".mp4","_web.mp4"):e.fichier), src_plein:rel(e)+e.fichier, tag:e.tag, poster_url:e.web?rel(e)+e.fichier.replace(".mp4",".jpg"):"",
     origine:(e.filiere==="tiktok"||e.source_audio||String(e.theme||"").startsWith("Bande son")||String(e.theme||"").startsWith("TIKTOK::"))?"tiktok":(e.manuel||e.theme)?"texte":"auto",
     legende:e.legende||"",publie:e.publie,vues:e.vues,format:e.format||"",manuel:!!e.manuel,avis:e.avis||0,note:e.note,note_auteur:e.note_auteur,programmee:e.programmee,
     couts:e.couts||{},duree:e.duree,likes:e.likes,commentaires:e.commentaires,partages:e.partages,a_verifier:e.a_verifier||[]}));
@@ -717,9 +757,27 @@ function ajouterNouvelles(h){
   DATA.unshift(...neuves.reverse());
   if(choisie!==null) choisie+=neuves.length;                              // la vidéo ouverte garde sa place
 }
-const srcDe=v=>v.src||"videos/"+v.fichier;
-setTimeout(actualiserStats,1500); setInterval(actualiserStats,3600*1000);
-document.addEventListener("visibilitychange",()=>{if(!document.hidden&&Date.now()-DERNIERE_MAJ>20*1000) actualiserStats()});   // à chaque retour dans l'appli
+const srcDe=v=>v.src||"videos/"+v.fichier;                                 // lecture (version légère des archives si elle existe)
+const pleinDe=v=>v.plein||v.src_plein||srcDe(v);                             // partage / téléchargement : la pleine qualité
+const posterDe=v=>v.poster_url||(v.poster?"videos/"+v.poster:"logo-192.png");
+async function toutRafraichir(){const b=document.getElementById("rafraichir"); if(b) b.textContent="⏳";
+  try{await Promise.all([actualiserStats(),suiviLent().then(suiviRapide),verifierVersion()])}catch(e){} if(b) b.textContent="🔄"; toast("À jour ✓")}
+document.getElementById("rafraichir").onclick=toutRafraichir;
+(function(){let y0=null, pret=false; const z=document.getElementById("tirer");           // tirer vers le bas pour rafraîchir
+  addEventListener("touchstart",e=>{y0=scrollY<=0?e.touches[0].clientY:null; pret=false},{passive:true});
+  addEventListener("touchmove",e=>{if(y0==null) return; const d=e.touches[0].clientY-y0; pret=d>90&&scrollY<=0; z.style.display=d>30&&scrollY<=0?"":"none"; z.textContent=pret?"↻ Relâchez pour rafraîchir":"↓ Tirez pour rafraîchir"},{passive:true});
+  addEventListener("touchend",()=>{z.style.display="none"; if(pret) toutRafraichir(); y0=null; pret=false},{passive:true});})();
+// ouverture instantanée : le dernier historique connu s'affiche tout de suite (même hors connexion), le réseau met à jour ensuite
+try{const h0=JSON.parse(localStorage.getItem("jt_historique")||"null"); if(Array.isArray(h0)) ajouterNouvelles(h0)}catch(e){}
+// nouvelle version du site : l'appli le voit et se recharge proprement (copies gardées effacées)
+const VERSION="__VERSION__";
+async function verifierVersion(){try{const r=await fetch("version.txt?t="+Date.now(),{cache:"no-store"}); if(!r.ok) return; const v=(await r.text()).trim();
+  if(v&&v!==VERSION&&!document.getElementById("majVersion")){const b=document.createElement("button"); b.id="majVersion"; b.textContent="✨ Nouvelle version de l'appli : toucher pour l'installer";
+    b.style.cssText="position:fixed;left:12px;right:12px;bottom:84px;z-index:99;padding:12px;font-weight:700;background:var(--jaune);color:#111;border:0;border-radius:14px";
+    b.onclick=async()=>{try{const k=await caches.keys(); await Promise.all(k.map(x=>caches.delete(x)))}catch(e){} location.reload()}; document.body.appendChild(b)}}catch(e){}}
+setTimeout(verifierVersion,4000); setInterval(verifierVersion,300000);
+setTimeout(actualiserStats,800); setInterval(actualiserStats,3600*1000);
+document.addEventListener("visibilitychange",()=>{if(!document.hidden){if(Date.now()-DERNIERE_MAJ>20*1000) actualiserStats(); verifierVersion()}});   // à chaque retour dans l'appli
 // nouveaux abonnés depuis une date : total actuel moins le dernier relevé d'avant cette date (ou le plus ancien connu)
 function gainAbonnes(hist,depuis){
   if(!hist||!hist.length) return null; const n=hist[hist.length-1].n;
@@ -760,7 +818,7 @@ const VIDE={essais:"Aucun essai en ce moment (les aperçus et essais s'effacent 
   texte:"Aucune vidéo faite depuis votre texte pour l'instant."};
 function carte(v,i,petite){
   const c=document.createElement("div");c.className="carte"+(petite?" petite":"");c.dataset.i=i;
-  c.innerHTML=`<img loading="lazy" src="${v.poster?"videos/"+v.poster:"logo-192.png"}" alt=""><div class="infos"><div class="titre"></div><div class="date">${dateFr(v.date)}${heureDe(v)}${v.vues!=null?` · 👁 ${Number(v.vues).toLocaleString("fr-FR")} vues`:""}</div>${badge(v)}${v.voix_secours?'<div class="date" style="color:#c0392b">⚠ voix de secours (robotique)</div>':""}<div class="etat"></div></div>`+(petite?"":`<button class="croix" title="Supprimer cette vidéo" aria-label="Supprimer">✕</button>`);
+  c.innerHTML=`<img loading="lazy" decoding="async" src="${posterDe(v)}" alt=""><div class="infos"><div class="titre"></div><div class="date">${dateFr(v.date)}${heureDe(v)}${v.vues!=null?` · 👁 ${Number(v.vues).toLocaleString("fr-FR")} vues`:""}</div>${badge(v)}${v.voix_secours?'<div class="date" style="color:#c0392b">⚠ voix de secours (robotique)</div>':""}<div class="etat"></div></div>`+(petite?"":`<button class="croix" title="Supprimer cette vidéo" aria-label="Supprimer">✕</button>`);
   c.querySelector(".titre").textContent=v.titre; return c;
 }
 function rendre(){
@@ -808,13 +866,14 @@ const filePubli=()=>String((VARS&&VARS.PUBLI_FILE)||"").split(/\n+/).map(x=>x.tr
 const attentePubli=f=>f.filter(n=>{const v=DATA.find(x=>x.fichier===n); return v&&v.publie==null});   // cochées, pas encore publiées (échec : sautée)
 async function basculerPubli(nom,b){
   if(!lireJeton()){toast("Connectez d'abord la régie (onglet Réglages)");allerOnglet("config");return}
-  let f=filePubli(); const on=f.includes(nom), v_=DATA.find(x=>x.fichier===nom);
+  let f=filePubli(); const on=f.includes(nom), v_=DATA.find(x=>x.fichier===nom), avant=VARS.PUBLI_FILE;
   if(!on&&v_&&(v_.a_verifier||[]).length&&!confirm(`Cette vidéo a ${v_.a_verifier.length} point(s) à vérifier :\n`+v_.a_verifier.slice(0,8).map(p=>"• "+(p.t!=null?p.t+" s : ":"")+p.quoi).join("\n")+"\n\nVous l'avez regardée et elle vous convient : la mettre en publication ?")) return;
   b.disabled=true;
   f=on?f.filter(x=>x!==nom):[...f,nom];
   f=f.filter(n=>DATA.some(x=>x.fichier===n&&x.publie!==true));                // la liste ne garde que les vidéos à venir
-  try{await ecrireVar("PUBLI_FILE",f.join("\n")||"-"); VARS.PUBLI_FILE=f.join("\n"); toast(on?"Retirée de la publication automatique":"Ajoutée à la publication automatique ✓"); rendreTk()}
-  catch(e){toast("Impossible : "+e.message); b.disabled=false}
+  VARS.PUBLI_FILE=f.join("\n"); rendreTk();                               // l'écran change tout de suite
+  try{await ecrireVar("PUBLI_FILE",f.join("\n")||"-"); toast(on?"Retirée de la publication automatique":"Ajoutée à la publication automatique ✓")}
+  catch(e){VARS.PUBLI_FILE=avant; rendreTk(); toast("❌ Pas enregistré ("+e.message+") : retour en arrière")}
 }
 function resumePubli(){
   const z=$("#pubResume"); if(!z) return;
@@ -858,19 +917,66 @@ $("#tkSerie").onclick=()=>{                                                // pl
   lancerFlux("emission.yml",$("#tkSerie"),`🎲 ${n} vidéo${n>1?"s":""} à la chaîne : la 1re est en fabrication, chaque vidéo finie lance la suivante (barre « vidéo 1/${n} », « 2/${n} »…). Elles apparaîtront dans cet onglet.`,{filiere:"tiktok",chaine:"1/"+n},$("#tkSuiviS"));
   setTimeout(()=>{$("#tkSerie").disabled=false},8000);
 };
+// suppression : directement par GitHub depuis l'appli (2-3 s, sans machine), mémorisée sur l'appareil (la vidéo ne revient jamais),
+// vérifiée, avec nouvel essai ; le site n'a pas besoin d'être reconstruit. Sans les droits : l'ancienne méthode (workflow).
+function lireSuppr(){try{return JSON.parse(localStorage.getItem("jt_supprimees")||"{}")}catch(e){return {}}}
+function noterSuppr(f,on){try{const s=lireSuppr(); if(on) s[f]=Date.now(); else delete s[f];
+  for(const k in s) if(Date.now()-s[k]>7*86400000) delete s[k]; localStorage.setItem("jt_supprimees",JSON.stringify(s))}catch(e){}}
+const b64Texte=b=>new TextDecoder().decode(Uint8Array.from(atob(String(b).replace(/\s/g,"")),c=>c.charCodeAt(0)));
+function texteB64(t){const o=new TextEncoder().encode(t); let s=""; for(let k=0;k<o.length;k+=0x8000) s+=String.fromCharCode.apply(null,o.subarray(k,k+0x8000)); return btoa(s)}
+async function lireHistorique(){                                           // (contenu, sha) de episodes/historique.json
+  const d=await (await gh(`/contents/episodes/historique.json?ref=${CONF.branche}&t=${Date.now()}`)).json();
+  if(!d.sha) throw new Error("historique illisible");
+  let txt=d.content?b64Texte(d.content):"";
+  if(!txt){const r=await gh(`/contents/episodes/historique.json?ref=${CONF.branche}&t=${Date.now()}`,{headers:{"Accept":"application/vnd.github.raw+json"}}); txt=await r.text()}
+  return [JSON.parse(txt),d.sha];
+}
+async function retirerHistorique(nom){                                     // 3 essais : le robot peut écrire l'historique au même moment
+  for(let k=0;k<3;k++){
+    const [h,sha]=await lireHistorique(); if(!h.some(e=>e.fichier===nom)) return true;
+    const reste=h.filter(e=>e.fichier!==nom);
+    const r=await gh(`/contents/episodes/historique.json`,{method:"PUT",body:JSON.stringify({message:"Suppression : "+nom,branch:CONF.branche,sha,content:texteB64(JSON.stringify(reste,null,1)+"\n")})});
+    if(r.ok) return true;
+    if(r.status!==409&&r.status!==422) throw new Error("GitHub a répondu "+r.status);
+    await new Promise(z=>setTimeout(z,1500));
+  }
+  throw new Error("historique occupé, réessayez");
+}
+async function effacerArchives(v){                                         // la vidéo, sa légende, sa version légère et sa couverture
+  const tag=v.tag||"emissions-"+v.fichier.slice(0,7), b=v.fichier.replace(".mp4","");
+  const noms=new Set([v.fichier,b+".txt",b+"_web.mp4",b+".jpg"]);
+  const rel=await (await gh(`/releases/tags/${tag}`)).json(); if(!rel.id) return 0; let n=0;
+  for(let p=1;p<=10;p++){
+    const l=await (await gh(`/releases/${rel.id}/assets?per_page=100&page=${p}`)).json(); if(!Array.isArray(l)||!l.length) break;
+    for(const a of l) if(noms.has(a.name)){await gh(`/releases/assets/${a.id}`,{method:"DELETE"}); n++}
+    if(l.length<100) break;
+  }
+  return n;
+}
 async function supprimer(i,c){
   const v=DATA[i];
   if(!lireJeton()){toast("Connectez la régie (onglet Réglages) pour supprimer");return}
   if(!confirm(`Supprimer définitivement « ${v.titre} » (${dateFr(v.date)}${heureDe(v)}) ?\n\nLa vidéo sera effacée de l'application et des archives. Cette action est irréversible.`)) return;
-  c.classList.add("supprimee"); c.querySelector(".etat").textContent="Suppression en cours…";
+  c.classList.add("supprimee"); const etat=c.querySelector(".etat"); etat.textContent="Suppression en cours…";
+  noterSuppr(v.fichier,true); if(choisie===i) fermerVideo();               // ne revient plus jamais à l'écran, même si on recharge
   try{
-    const r=await gh("/actions/workflows/supprimer.yml/dispatches",{method:"POST",body:JSON.stringify({ref:CONF.branche,inputs:{fichier:v.fichier}})});
-    if(r.status!==204) throw new Error("GitHub a répondu "+r.status);
-    toast("Vidéo supprimée. L'application se met à jour dans une ou deux minutes.");
-    c.querySelector(".etat").textContent="Supprimée";
-    if(choisie===i) fermerVideo();
-  }catch(e){c.classList.remove("supprimee"); c.querySelector(".etat").textContent=""; toast("Impossible : "+e.message)}
+    await retirerHistorique(v.fichier);
+    try{await effacerArchives(v)}catch(e){}                                // fichiers des archives : jamais bloquant (ménage possible plus tard)
+    const [h]=await lireHistorique();                                      // vérification : elle n'est plus dans l'historique
+    if(h.some(e=>e.fichier===v.fichier)) throw new Error("pas encore enregistrée");
+    etat.textContent="✅ Supprimée pour de bon"; toast("✅ Vidéo supprimée pour de bon");
+    const k=DATA.indexOf(v); if(k>=0){DATA.splice(k,1); if(choisie!==null&&choisie>k) choisie--}
+    setTimeout(()=>{c.remove(); const o=document.body.dataset.onglet; if(o==="tiktok") rendreTk(); else if(o==="videos") rendre(); else if(o==="accueil") rendreRecents()},900);
+  }catch(e){
+    if(/droits|403/.test(e.message)){                                      // jeton sans droit d'écriture : l'ancienne méthode
+      try{const r=await gh("/actions/workflows/supprimer.yml/dispatches",{method:"POST",body:JSON.stringify({ref:CONF.branche,inputs:{fichier:v.fichier}})});
+        if(r.status===204){etat.textContent="Suppression lancée (1 à 2 min)"; return}}catch(e2){}}
+    noterSuppr(v.fichier,false); c.classList.remove("supprimee");
+    etat.innerHTML=`❌ Échec (${String(e.message).replace(/[<>&]/g,"")}) <button class="second" style="padding:4px 10px">Réessayer</button>`;
+    etat.querySelector("button").onclick=ev=>{ev.stopPropagation(); supprimerSansQuestion(v,c)};
+  }
 }
+async function supprimerSansQuestion(v,c){const i=DATA.indexOf(v); if(i<0) return; const ok=window.confirm; window.confirm=()=>true; try{await supprimer(i,c)}finally{window.confirm=ok}}
 function majBoutons(){
   const p=$("#publier"); armer=null; p.classList.remove("confirmer");
   if(choisie===null){p.disabled=true;p.textContent="Publier sur TikTok";return}
@@ -953,15 +1059,18 @@ function fermerVideo(){
 }
 $("#fermer").onclick=fermerVideo;
 // ------------------------------------------------ actions sur la vidéo choisie
-function action(a,valeur,msg){
+function action(a,valeur,msg,annuler){                                     // l'écran change tout de suite ; si GitHub refuse : retour en arrière
   if(choisie===null)return; const v=DATA[choisie];
-  lancerFlux("regie.yml",$("#legOk"),msg,{action:a,fichier:v.fichier,valeur:String(valeur)},$("#suivi"));
+  lancerFlux("regie.yml",$("#legOk"),msg,{action:a,fichier:v.fichier,valeur:String(valeur)},$("#suivi"),null,()=>{if(annuler) annuler(); toast("❌ Pas enregistré : retour en arrière")});
 }
-$("#pouce").onclick=()=>{const v=DATA[choisie];v.avis=v.avis===1?0:1;$("#pouce").classList.toggle("actif",v.avis===1);$("#bof").classList.remove("actif");action("avis",v.avis,"👍 Noté : le robot s'en servira comme exemple.")};
-$("#bof").onclick=()=>{const v=DATA[choisie];v.avis=v.avis===-1?0:-1;$("#bof").classList.toggle("actif",v.avis===-1);$("#pouce").classList.remove("actif");action("avis",v.avis,"👎 Noté : le robot évitera ce genre de sketch.")};
+function avis(val,msg){const v=DATA[choisie], avant=v.avis; v.avis=v.avis===val?0:val; const maj=()=>{if(DATA[choisie]===v){$("#pouce").classList.toggle("actif",v.avis===1);$("#bof").classList.toggle("actif",v.avis===-1)}};
+  maj(); action("avis",v.avis,msg,()=>{v.avis=avant; maj()})}
+$("#pouce").onclick=()=>avis(1,"👍 Noté : le robot s'en servira comme exemple.");
+$("#bof").onclick=()=>avis(-1,"👎 Noté : le robot évitera ce genre de sketch.");
 $("#remOk").onclick=()=>{const n=$("#noteAuteur").value, t=$("#remAuteur").value.trim(); if(!n&&!t){toast("Mettez une note ou une remarque");return}
   action("remarque",(n||"")+"|"+t,"🎬 Merci ! Le jury s'en servira pour les prochaines vidéos."); $("#remAuteur").value=""};
-$("#legOk").onclick=()=>{const t=$("#legEdit").value.trim(); if(!t){toast("Légende vide");return} DATA[choisie].legende=t; action("legende",t,"✏️ Légende enregistrée (le site se met à jour dans 2 à 3 min).")};
+$("#legOk").onclick=()=>{const t=$("#legEdit").value.trim(); if(!t){toast("Légende vide");return} const v=DATA[choisie], avant=v.legende; v.legende=t;
+  action("legende",t,"✏️ Légende enregistrée.",()=>{v.legende=avant; if(DATA[choisie]===v) $("#legEdit").value=avant||""})};
 $("#programmer").onclick=()=>{
   const q=$("#quand").value; if(!q){toast("Choisissez la date et l'heure");return}
   if(new Date(q)<new Date(Date.now()+10*60000)){toast("Choisissez une heure dans au moins 10 minutes");return}
@@ -979,13 +1088,13 @@ $("#copier").onclick=async()=>{const t=DATA[choisie].legende||"";try{await navig
 $("#manuel").onclick=async()=>{
   const v=DATA[choisie]; navigator.clipboard && navigator.clipboard.writeText(v.legende||"").catch(()=>{});
   if(!peutPartager){
-    const a=document.createElement("a");a.href=srcDe(v);a.download=v.fichier;document.body.appendChild(a);a.click();a.remove();
+    const a=document.createElement("a");a.href=pleinDe(v);a.download=v.fichier;document.body.appendChild(a);a.click();a.remove();
     window.open("https://www.tiktok.com/tiktokstudio/upload","_blank");toast("Légende copiée · vidéo téléchargée");return;
   }
   const b=$("#manuel");
   if(!fichier){b.textContent="Préparation…";const jeton=charge={};
-    try{const r=await fetch(srcDe(v));if(!r.ok)throw new Error(r.status);const blob=await r.blob();if(charge!==jeton)return;fichier=new File([blob],v.fichier,{type:"video/mp4"});
-      b.textContent="Touchez pour partager";}catch(e){b.textContent="Partage manuel";if(v.src){window.open(v.src,"_blank");toast("Vidéo toute neuve : téléchargée depuis GitHub, partagez-la depuis vos fichiers")}else toast("Chargement impossible")}
+    try{const r=await fetch(pleinDe(v));if(!r.ok)throw new Error(r.status);const blob=await r.blob();if(charge!==jeton)return;fichier=new File([blob],v.fichier,{type:"video/mp4"});
+      b.textContent="Touchez pour partager";}catch(e){b.textContent="Partage manuel";if(v.src){window.open(pleinDe(v),"_blank");toast("Vidéo toute neuve : téléchargée depuis GitHub, partagez-la depuis vos fichiers")}else toast("Chargement impossible")}
     return;}
   try{await navigator.share({files:[fichier],title:v.titre});toast("Choisissez TikTok, collez la légende, activez « Contenu IA »")}
   catch(e){if(e.name!=="AbortError")toast("Partage impossible : "+e.message)}
@@ -1135,7 +1244,7 @@ document.querySelectorAll("[data-enr]").forEach(b=>b.onclick=async()=>{
   const c=document.querySelector(`[data-var="${b.dataset.enr}"]`); const val=c.value.trim(); if(!val)return;
   try{await ecrireVar(b.dataset.enr,val); VARS[b.dataset.enr]=val; toast("Enregistré ✓ (visible dès la prochaine vidéo)"); resumePubli()}catch(e){toast("Impossible : "+e.message)}
 });
-async function lancerFlux(fichier,bouton,texte,inputs,zone,fini){
+async function lancerFlux(fichier,bouton,texte,inputs,zone,fini,annuler){
   bouton.disabled=true; const s=zone||$("#suiviCfg"); const depart=new Date(Date.now()-5000);
   try{
     const r=await gh(`/actions/workflows/${fichier}/dispatches`,{method:"POST",body:JSON.stringify(inputs?{ref:CONF.branche,inputs}:{ref:CONF.branche})});
@@ -1149,10 +1258,11 @@ async function lancerFlux(fichier,bouton,texte,inputs,zone,fini){
       const run=(d.workflow_runs||[]).find(x=>new Date(x.created_at)>=depart); if(!run) continue;
       if(run.status!=="completed"){s.textContent=texte+" ("+(run.status==="queued"?"en file d'attente":"en cours")+")";continue}
       s.innerHTML=run.conclusion==="success"?(fini?"✅ Terminé.":"✅ Terminé. Rouvrez l'application dans une minute pour voir le résultat."):`❌ Échec. <a style="color:var(--bleu)" href="${run.html_url}" target="_blank" rel="noopener">Voir le détail</a>`;
+      if(run.conclusion!=="success"&&annuler){try{annuler()}catch(e){}}
       if(fini){try{await fini(run.conclusion==="success")}catch(e){}}
       break;
     }
-  }catch(e){s.textContent="Impossible : "+(/failed to fetch|load failed|network/i.test(e.message)?"pas de connexion internet (réessayez)":e.message)}
+  }catch(e){s.textContent="Impossible : "+(/failed to fetch|load failed|network/i.test(e.message)?"pas de connexion internet (réessayez)":e.message); if(annuler){try{annuler()}catch(e2){}}}
   bouton.disabled=false;
 }
 // ------------------------------------------------ Accueil : « Créer une vidéo » (lien TikTok, mon texte ou idée automatique ; court ou long)
@@ -1225,6 +1335,9 @@ async function suiviLent(){                                                // to
       if(s.fabrique) vus.add(String(r.id));
     }
     Object.keys(SUIVI.runs).forEach(k=>{if(!vus.has(k)) delete SUIVI.runs[k]});
+    const enCours=new Set((d.workflow_runs||[]).filter(r=>r.status!=="completed").map(r=>String(r.id)));   // une fabrication vient de finir :
+    if([...(SUIVI.enCours||[])].some(k=>!enCours.has(k))){actualiserStats(); setTimeout(actualiserStats,25000)}   // la nouvelle vidéo tout de suite
+    SUIVI.enCours=enCours;
     const sd=await (await ghLire("/actions/workflows/site.yml/runs?per_page=1")).json(); const r=(sd.workflow_runs||[])[0];
     SUIVI.site=r&&r.status!=="completed"?{debut:new Date(r.run_started_at||r.created_at).getTime(),url:r.html_url}:null;
   }catch(e){}

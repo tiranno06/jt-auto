@@ -1435,9 +1435,41 @@ class TestModeEco(unittest.TestCase):
     def test_site_reglage_et_videos_neuves(self):
         src = open(os.path.join(os.path.dirname(__file__), "..", "moteur", "site.py"), encoding="utf-8").read()
         self.assertIn('data-var="MODE_ECO"', src); self.assertIn("ajouterNouvelles(h)", src)
-        for wf in ("emission", "publier", "supprimer", "regie"):                # une seule file de mise en ligne du site
+        for wf in ("emission",):                                            # une seule file de mise en ligne du site (nouvelles vidéos seulement :
+            # suppression, publication et actions de la régie se voient dans l'appli sans reconstruire le site)
             y = open(os.path.join(os.path.dirname(__file__), "..", ".github", "workflows", wf + ".yml"), encoding="utf-8").read()
             self.assertIn("gh workflow run site.yml", y); self.assertNotIn("deploy-pages", y)
+
+
+class TestSiteRapide(unittest.TestCase):
+    """Site et appli plus rapides (choix de l'auteur du 31 octobre 2026 : A 1-2-3-6, B 7-11, C 12-15, D 16-17)."""
+    def test_suppression_directe_et_rafraichissement(self):
+        ici = os.path.dirname(__file__)
+        src = open(os.path.join(ici, "..", "moteur", "site.py"), encoding="utf-8").read()
+        for morceau in ("async function retirerHistorique", "effacerArchives", "noterSuppr(v.fichier,true)", "Supprimée pour de bon",   # A 1-3
+                        "If-None-Match", "touchstart", "toutRafraichir", "SUIVI.enCours", "verifierVersion", "version.txt",             # C 12-15
+                        "jt_historique", "pleinDe", "posterDe", "_web.mp4", "dessinerCnx", "retour en arrière"):                     # B, D
+            self.assertIn(morceau, src)
+        for wf in ("supprimer", "publier", "regie"):                       # plus de reconstruction du site (A6, B9)
+            self.assertNotIn("site.yml", open(os.path.join(ici, "..", ".github", "workflows", wf + ".yml"), encoding="utf-8").read())
+        self.assertNotIn("ffmpeg", open(os.path.join(ici, "..", ".github", "workflows", "supprimer.yml"), encoding="utf-8").read())
+        self.assertIn("_web.mp4", open(os.path.join(ici, "..", ".github", "workflows", "emission.yml"), encoding="utf-8").read())
+        self.assertIn('nom.replace(".mp4", "_web.mp4")', open(os.path.join(ici, "..", "moteur", "supprimer.py"), encoding="utf-8").read())
+        sys.path.insert(0, os.path.join(ici, "..", "moteur"))
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("site_appli", os.path.join(ici, "..", "moteur", "site.py")); m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+        f = m.fiche({"fichier": "2026-10-31_10h03_emission.mp4", "tag": "emissions-2026-10", "titre": "T", "a_verifier": [{"t": 1.0, "quoi": "x"}]})
+        self.assertEqual(f["tag"], "emissions-2026-10"); self.assertEqual(len(f["a_verifier"]), 1)
+
+    def test_malade_au_lit_et_appel_avec_telephone(self):
+        sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "moteur"))
+        import studio
+        reps = [{"p": "envoyee", "t": "Allô ? Tu viens pas aujourd'hui ?"}, {"p": "invite", "t": "Non je suis malade, je suis cloué au lit."}]
+        sk = {"repliques": reps, "doublage": {"contexte": "un employé au téléphone"},
+              "studio": {"lieux_separes": {"envoyee": "office", "invite": "cozy living room"}, "lieux_de": {"envoyee": "bureau", "invite": "salon"}}}
+        self.assertTrue(studio.separer_lieux(sk))
+        self.assertEqual(sk["studio"]["lieux"], ["bureau", "chambre"]); self.assertIn("bed", sk["decoupage"][1]["decor"])
+        self.assertTrue(all(r.get("objet") == "telephone" for r in reps))  # un appel : téléphone en main, même si l'IA n'a pas dit « telephone »
 
 
 class TestAccroches(unittest.TestCase):
