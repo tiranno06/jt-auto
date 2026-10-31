@@ -5153,5 +5153,40 @@
    "son": true
   },
   "cadence": "rapide"
+ },
+ {
+  "moment": "soir",
+  "lieux": [
+   "classe"
+  ],
+  "source": "robot+image",
+  "duree": 76.0,
+  "plans": {
+   "large": 42
+  },
+  "mouvements": {
+   "fixe": 42
+  },
+  "costumes": {
+   "envoyee": "gilet",
+   "presentateur": "chemise"
+  },
+  "figurants": 0,
+  "ambiances": [
+   "poussiere"
+  ],
+  "controle": "Humoriste 6.0/10 : 0.4 s La chute finale manque de punch. La réplique 'Bonne continuation, hein? Et merde pour le bac' n'est pas assez soulignée.; 14.9 s Les vannes sur les lacunes scolaires pourraien",
+  "fichier": "2026-10-31_04h41_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": true,
+   "tiers": true,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": true,
+   "reflets": false,
+   "son": true
+  },
+  "cadence": null
  }
 ]
