@@ -309,6 +309,15 @@ def bible(sk, roles):
     for k_, l_ in enumerate(lieux):
         presents = [r for r in roles if any(i < len(sk.get("repliques", [])) and sk["repliques"][i]["p"] == r for i in (dec[k_].get("repliques", []) if k_ < len(dec) else []))] or roles
         if l_ in LIEUX_ASSIS and (len(roles) >= 2 or sk.get("_separes")) and rng.random() < 0.55: assis[k_] = presents[int(rng.integers(len(presents)))]
+        malade = [r for r in presents if re.search(MALADE, " ".join(x.get("t", "") for x in sk.get("repliques", []) if x.get("p") == r).lower())]
+        if l_ == "chambre" and malade: assis[k_] = malade[0]               # le malade est dans son lit
+    meubles = {}                                                           # nouvelles poses (choix de l'auteur) : lit, canapé, volant, comptoir
+    for k_, l_ in enumerate(lieux):
+        r_ = assis.get(k_)
+        if r_: meubles[k_] = {r_: {"chambre": "lit", "salon": "canape", "voiture": "volant"}.get(l_, "chaise")}
+        elif l_ in ("bar", "restaurant", "magasin", "boulangerie", "pharmacie", "banque", "poste", "fast_food", "kebab") and rng.random() < 0.6:
+            pres = [r for r in roles if any(i < len(sk.get("repliques", [])) and sk["repliques"][i]["p"] == r for i in (dec[k_].get("repliques", []) if k_ < len(dec) else []))] or roles
+            meubles[k_] = {pres[-1]: "comptoir"}                            # accoudé au comptoir
     # qui mène chaque scène (le « métier » du lieu) : celui qui parle le plus de questions / le premier à parler
     costumes = {}
     for k, role in enumerate(roles):
@@ -384,7 +393,7 @@ def bible(sk, roles):
                 style_ia=STYLES_IA[moment], plans=S.get("plans") if isinstance(S.get("plans"), list) else [],
                 jeu=[x for x in (S.get("jeu") or []) if isinstance(x, dict)] if isinstance(S.get("jeu"), list) else [],
                 source=("auteur" if S else "robot") + ("+image" if V else ""), c_mur=c_mur, rythme=rythme, fiches=fiches,
-                cadence=S.get("cadence") if S.get("cadence") in CADENCES else None, assis=assis, cine=cine, decoupe=_decoupe_claude(S, roles),
+                cadence=S.get("cadence") if S.get("cadence") in CADENCES else None, assis=assis, meubles=meubles, cine=cine, decoupe=_decoupe_claude(S, roles),
                 coupes_origine=[float(c) for c in (V.get("coupes") or []) if isinstance(c, (int, float))] if sk.get("doublage") else [],
                 gestes_origine=[float(g[0]) for g in (V.get("gestes") or []) if isinstance(g, (list, tuple)) and g] if sk.get("doublage") else [],
                 postures_origine=[g for g in (V.get("postures") or []) if isinstance(g, (list, tuple)) and len(g) == 4] if sk.get("doublage") else [])

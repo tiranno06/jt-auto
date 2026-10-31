@@ -807,6 +807,39 @@ def chaise_face(img, x, sol, R, h_assise, large, coul=(160, 110, 70), ep=None):
     _forme(img, [(x - large * 0.72, ys - R * 0.04), (x + large * 0.72, ys - R * 0.04), (x + large * 0.78, ys + R * 0.14), (x - large * 0.78, ys + R * 0.14)], coul, ep, 0.95)
 
 
+def canape_face(img, x, sol, R, h_assise, large, coul=(110, 130, 170), ep=None):
+    """Canapé vu de face (dessiné avant le personnage assis) : dossier rembourré, accoudoirs, coussin d'assise, petits pieds."""
+    ep = ep or R * 0.035; ys = sol - h_assise; L = large * 1.25
+    _forme(img, [(x - L, ys - R * 1.7), (x + L, ys - R * 1.7), (x + L * 1.02, ys), (x - L * 1.02, ys)], coul, ep, 0.8)
+    for k in (-1, 1):                                                      # accoudoirs
+        _forme(img, [(x + k * L, ys - R * 0.9), (x + k * L * 1.28, ys - R * 0.9), (x + k * L * 1.28, sol - R * 0.12), (x + k * L, sol - R * 0.12)], coul, ep, 0.9)
+    _forme(img, [(x - L, ys - R * 0.08), (x + L, ys - R * 0.08), (x + L, ys + R * 0.3), (x - L, ys + R * 0.3)], tuple(min(255, int(c * 1.08)) for c in coul), ep, 0.95)
+    for k in (-0.95, 0.95): encre(img, [(x + k * L * 1.15, sol - R * 0.12), (x + k * L * 1.15, sol)], ep * 2.2, effile=False)
+
+
+def lit_face(img, x, sol, R, h_assise, large, coul=(90, 120, 150), ep=None):   # couleurs en BGR (bois)
+    """Lit vu de face, tête de lit et gros oreiller derrière la personne (dessinés avant elle) ; la couette vient après (couette)."""
+    ep = ep or R * 0.035; ys = sol - h_assise; L = large * 1.5
+    _forme(img, [(x - L, ys - R * 2.6), (x + L, ys - R * 2.6), (x + L, sol), (x - L, sol)], coul, ep, 0.75)          # tête de lit
+    _forme(img, [(x - L * 0.75, ys - R * 2.0), (x + L * 0.75, ys - R * 2.0), (x + L * 0.8, ys - R * 0.9), (x - L * 0.8, ys - R * 0.9)], (245, 245, 240), ep, 0.9)   # oreiller
+
+
+def couette(img, x, sol, R, h_assise, large, coul=(235, 200, 170), ep=None):    # bleu ciel
+    """Couette remontée jusqu'à la taille (dessinée après la personne assise dans son lit) : on ne voit plus ses jambes."""
+    ep = ep or R * 0.035; ys = sol - h_assise; L = large * 1.55
+    pts = [(x - L, ys - R * 0.35), (x - L * 0.3, ys - R * 0.55), (x + L * 0.35, ys - R * 0.45), (x + L, ys - R * 0.3), (x + L * 1.02, sol + R * 0.2), (x - L * 1.02, sol + R * 0.2)]   # pieds cachés
+    _forme(img, pts, coul, ep, 0.95)
+    for k in (-0.45, 0.1, 0.55): encre(img, [(x + k * L, ys - R * 0.3), (x + (k + 0.08) * L, sol - R * 0.2)], ep * 0.8)   # plis
+
+
+def comptoir(img, x, sol, R, large, h_hanche, coul=(70, 105, 150), ep=None):     # bois
+    """Comptoir au premier plan, juste au-dessus des hanches (dessiné après la personne accoudée) : plateau et façade en bois."""
+    ep = ep or R * 0.035; yh = sol - h_hanche * 1.08; L = large * 1.4
+    _forme(img, [(x - L, yh + R * 0.2), (x + L, yh + R * 0.2), (x + L, sol + R * 0.2), (x - L, sol + R * 0.2)], coul, ep, 0.9)
+    _forme(img, [(x - L * 1.08, yh), (x + L * 1.08, yh), (x + L * 1.08, yh + R * 0.22), (x - L * 1.08, yh + R * 0.22)], tuple(max(0, int(c * 0.8)) for c in coul), ep, 0.95)
+    for k in (-0.5, 0.0, 0.5): encre(img, [(x + k * L, yh + R * 0.45), (x + k * L, sol - R * 0.1)], ep * 0.7)
+
+
 def mal_rase(img, c, R):
     """Barbe de trois jours : petits points d'encre sur le bas du visage (jamais de grosse barbe, consigne de l'auteur)."""
     rng = np.random.default_rng(int(c[0]) % 97)

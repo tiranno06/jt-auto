@@ -157,8 +157,12 @@ def dessiner(img, F, p):
     cl = 1.0 if p.get("yeux") in ("fermes",) else float(p.get("paupiere") or 0.0) * 0.6
     peau = T.get("teint") or (tuple(p["peau"]) if p.get("peau") else None)   # zombie, extraterrestre, vampire : teint du costume
     if p.get("paleur"): peau = tuple(int(v * (1 - 0.15 * p["paleur"]) + 230 * 0.15 * p["paleur"]) for v in (peau or C.PEAU))
-    if p.get("assis"):                                                     # chaise vue de face, sous le personnage
-        C.chaise_face(zone, g["x"] - x0, p["y"] - y0, R, g["L_j"] * 0.55, g["l_tr"] * 2.6, tuple(p.get("c_chaise") or (160, 110, 70)))
+    meuble = p.get("meuble") or ("chaise" if p.get("assis") else None)    # chaise, canapé, lit (sous la couette), volant, comptoir
+    if p.get("assis"):                                                     # siège vu de face, sous le personnage
+        args_ = (zone, g["x"] - x0, p["y"] - y0, R, g["L_j"] * 0.55, g["l_tr"] * 2.6)
+        if meuble == "canape": C.canape_face(*args_)
+        elif meuble == "lit": C.lit_face(*args_)
+        elif meuble != "volant": C.chaise_face(*args_, tuple(p.get("c_chaise") or (160, 110, 70)))
     secousse = abs(math.sin(float(p.get("t") or 0) * 16)) * R * 0.05 if p.get("emo") == "rire" else 0.0   # le rire secoue le corps
     C.bonhomme(zone, g["x"] - x0, p["y"] - y0 - secousse, R, e, bras=tuple(bras), jambes=("assis_face", "assis_face") if p.get("assis") else ("debout", "debout"),
                taille="grand" if G else "chibi", graine=int(F.get("age", 30)) + len(str(F.get("cheveux"))),
@@ -166,4 +170,6 @@ def dessiner(img, F, p):
                rayures=T["rayures"], teint=peau, profil=float(p.get("tq") or 0.0) * 0.6, extras=T["extras"], chapeau=T["chapeau"],
                ouv=ouv if ouv > 0.04 else None, cligne=min(1.0, cl), penche=g["penche"], fx=_fx(p, e), ecrase=g["ecrase"],
                c_mains=T["c_mains"], montre=T["montre"])
+    if p.get("assis") and meuble == "lit": C.couette(zone, g["x"] - x0, p["y"] - y0, R, g["L_j"] * 0.55, g["l_tr"] * 2.6)
+    if meuble == "comptoir" and not p.get("assis"): C.comptoir(zone, g["x"] - x0, p["y"] - y0, R, g["l_tr"] * 2.6, g["L_j"])   # accoudé au comptoir
     return tc, (R, R)

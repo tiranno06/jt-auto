@@ -44,7 +44,18 @@ def devant(runs, moi, jobs_de):
     return [r for r in avant if bloque(jobs_de(r["id"]))]
 
 
-def attendre():
+def prepa_parallele():
+    """Chaîne de vidéos TikTok (« 2/10 »…) : la vidéo suivante est lancée quand la précédente commence à dessiner ; elle prépare son
+    écoute (son, transcription, voix, IA, décors) EN MÊME TEMPS, puis attend son tour juste avant de dessiner (principal.py)."""
+    c = os.environ.get("CHAINE") or ""
+    if os.environ.get("PREPA_PARALLELE", "1") == "0" or c.startswith("suite:") or "/" not in c: return False
+    k = c.split("/")[0]
+    return k.isdigit() and int(k) > 1
+
+
+def attendre(avant_dessin=False):
+    if prepa_parallele() and not avant_dessin:
+        print("Chaîne : préparation en parallèle de la vidéo précédente ; le tour sera attendu juste avant de dessiner", flush=True); return
     moi = int(os.environ.get("GITHUB_RUN_ID") or 0)
     if not moi or not (os.environ.get("GH_TOKEN") or os.environ.get("GITHUB_TOKEN")): return
     progression.TYPE[0] = os.environ.get("TYPE_VIDEO") or "sketch"

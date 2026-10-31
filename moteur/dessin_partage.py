@@ -4,7 +4,7 @@ recollés sans réencodage (mêmes réglages x264). Échanges par une release Gi
 morceaux finis), vidée au fur et à mesure.
 
 Sécurité : une aide en retard ou en échec n'est jamais bloquante, la machine principale redessine elle-même le morceau manquant.
-Réglages : DESSIN_PARTAGE=0 pour couper, AIDES (3 par défaut), PARTAGE_MIN_IMAGES (1 200 : en dessous, une seule machine suffit)."""
+Réglages : DESSIN_PARTAGE=0 pour couper, AIDES (selon la durée : 1 à 5, `nb_aides`), PARTAGE_MIN_IMAGES (1 200 : en dessous, une seule machine suffit)."""
 import gzip, io, json, os, pickle, subprocess, tarfile, time, urllib.request
 
 TAG = "dessins-temp"
@@ -141,11 +141,18 @@ def decouper(nf, n):
     return [(bornes[k], bornes[k + 1]) for k in range(n) if bornes[k + 1] > bornes[k]]
 
 
+def nb_aides(nf):
+    """Machines d'aide selon la durée (choix de l'auteur, 31 octobre 2026) : environ 1 000 images par machine, de 1 aide (vidéo
+    courte) à 5 (vidéo longue) ; une vidéo plus courte n'attend pas inutilement le démarrage de machines en trop. AIDES=n impose n."""
+    if os.environ.get("AIDES"): return max(1, min(8, int(os.environ["AIDES"])))
+    return max(1, min(5, round(nf / 1000) - 1))
+
+
 def dessiner(nf, args, dessiner_plage, journal=print, progres=None):
     """Dessine les images 0..nf-1 avec l'aide d'autres machines. dessiner_plage(a, b, chemin) dessine localement (vidéo seule).
     Renvoie la liste ordonnée des morceaux vidéo (fichiers mp4) à recoller, ou None si le partage est impossible."""
     import tempfile
-    n_aides = max(1, min(8, int(os.environ.get("AIDES") or 3)))
+    n_aides = nb_aides(nf)
     morceaux = decouper(nf, n_aides + 1)
     a_moi, aux_aides = morceaux[0], morceaux[1:]
     run = os.environ.get("GITHUB_RUN_ID", "0"); nom = f"d{run}_{int(time.time()) % 100000}"

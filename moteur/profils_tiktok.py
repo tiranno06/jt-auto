@@ -55,6 +55,7 @@ def deja_utilisees(historique):
         for s in (h.get("sources") or []) + [h.get("source_audio") or ""]:
             m = re.search(r"/video/(\d+)", str(s))
             if m: ids.add(m.group(1))
+    ids.update(x for x in (os.environ.get("EVITER") or "").replace(",", " ").split() if x.isdigit())   # chaîne : sons des vidéos encore en fabrication
     return ids
 
 
