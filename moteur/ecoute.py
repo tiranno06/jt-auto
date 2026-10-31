@@ -67,15 +67,18 @@ def groq(chemin, langue="fr"):
         corps += (f"--{bord}\r\nContent-Disposition: form-data; name=\"file\"; filename=\"son.mp3\"\r\nContent-Type: audio/mpeg\r\n\r\n").encode() \
                  + open(mp3, "rb").read() + f"\r\n--{bord}--\r\n".encode()
         req = urllib.request.Request("https://api.groq.com/openai/v1/audio/transcriptions", data=corps, method="POST",
-                                     headers={"Authorization": f"Bearer {cle}", "Content-Type": f"multipart/form-data; boundary={bord}"})
-        r = json.loads(reseau.ouvrir(req, timeout=180, essais=2).read())
+                                     headers={"Authorization": f"Bearer {cle}", "Content-Type": f"multipart/form-data; boundary={bord}",
+                                              "User-Agent": "petitsdramas-robot/1.0"})   # sans nom : refusé (403) par le pare-feu de Groq
+        r = json.loads(reseau.ouvrir(req, timeout=180, essais=2))
         mots = [{"w": str(x.get("word", "")).strip(), "s": float(x["start"]), "e": float(x["end"]), "voix": "speaker_0"}
                 for x in r.get("words") or [] if str(x.get("word", "")).strip()]
         mots = ponctuer(mots, r.get("segments") or [])
         if mots: journal(f"  transcription Groq (Whisper, gratuit) : {len(mots)} mots")
         return mots
     except Exception as e:
-        journal(f"  transcription Groq impossible ({str(e)[:150]})"); return []
+        try: detail = e.read().decode("utf-8", "replace")[:200] if hasattr(e, "read") else ""
+        except Exception: detail = ""
+        journal(f"  transcription Groq impossible ({str(e)[:150]} {detail})"); return []
 
 
 def ponctuer(mots, segs):

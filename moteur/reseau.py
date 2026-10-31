@@ -163,19 +163,20 @@ def ia_disponible():
 
 
 class _Messages:
-    def __init__(self, raisonner=False): self._client = None; self.raisonner = raisonner   # une seule connexion Claude par client
+    def __init__(self, raisonner=False, exclure=()):
+        self._client = None; self.raisonner = raisonner; self.exclure = set(exclure or ()); self.dernier = None   # une seule connexion Claude par client
 
     def create(self, **kw):
         images = self.raisonner or any(isinstance(b, dict) and b.get("type") == "image" for m in kw.get("messages") or [] if isinstance(m.get("content"), list) for b in m["content"])
         erreurs = []
-        for f in ordre_ia(images):
+        for f in [f for f in ordre_ia(images) if f not in self.exclure]:
             try:
                 if f == "claude":
                     if self._client is None: self._client = _anthropic()
-                    r = self._client.messages.create(**kw); UTILISES["claude"] = UTILISES.get("claude", 0) + 1; return r
+                    r = self._client.messages.create(**kw); UTILISES["claude"] = UTILISES.get("claude", 0) + 1; self.dernier = f; return r
                 kw2 = {k: v for k, v in kw.items() if k != "tools"}; kw2["tools"] = [t for t in (kw.get("tools") or []) if "input_schema" in t]
                 if kw.get("tools") and not kw2["tools"]: raise RuntimeError("seulement un outil web (propre à Claude)")
-                return _appel_openai(f, kw2)
+                r = _appel_openai(f, kw2); self.dernier = f; return r
             except Exception as e:
                 import secours
                 txt = str(e).lower()
@@ -187,13 +188,13 @@ class _Messages:
 
 
 class _IA:
-    def __init__(self, raisonner=False): self.messages = _Messages(raisonner)
+    def __init__(self, raisonner=False, exclure=()): self.messages = _Messages(raisonner, exclure)
 
 
-def claude(raisonner=False):
+def claude(raisonner=False, exclure=()):
     """Client « façon Claude » : Claude si possible, sinon Mistral puis Gemini (bascule automatique, quotas épuisés évités).
     raisonner=True : Gemini avant Mistral (comme pour les images), pour les tâches de logique (qui dit quoi dans un dialogue)."""
-    return _IA(raisonner)
+    return _IA(raisonner, exclure)   # exclure : fournisseurs à ne pas utiliser (2e avis indépendant d'une autre IA)
 
 
 # ------------------------------------------------------------------ mode économique (réglage du site)

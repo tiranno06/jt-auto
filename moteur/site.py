@@ -86,7 +86,7 @@ def construire():
                           essai=bool(e.get("essai")) or str(e.get("titre", "")).startswith("👀 Aperçu"),
                           legende=e.get("legende", ""), publie=e.get("publie"), vues=e.get("vues"),
                           format=e.get("format", ""), manuel=bool(e.get("manuel")), avis=e.get("avis", 0), note=e.get("note"), note_auteur=e.get("note_auteur"),
-                          programmee=e.get("programmee"), couts=e.get("couts") or {}, duree=e.get("duree"),
+                          programmee=e.get("programmee"), couts=e.get("couts") or {}, duree=e.get("duree"), a_verifier=e.get("a_verifier") or [],
                           likes=e.get("likes"), commentaires=e.get("commentaires"), partages=e.get("partages"),
                           voix_secours=("piper" in str(e.get("voix", "")).lower()),
                           source=e.get("source_audio") or "", reps=repliques_de(e)))
@@ -209,6 +209,7 @@ input,textarea{flex:1;min-width:0;font:inherit;font-size:15px;padding:11px;borde
 .croix:hover{background:#d33}.carte.supprimee{opacity:.35;pointer-events:none}
 .apub{margin-top:8px;display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;border:2px solid var(--ligne);background:transparent;color:inherit;font-size:14px;font-weight:700;cursor:pointer;max-width:100%}
 .apub.on{background:var(--jaune);border-color:var(--jaune);color:#111}
+.averif{margin-top:8px;font-size:13px;max-width:100%}.averif summary{cursor:pointer;font-weight:700;color:#e8590c}.averif ul{margin:6px 0 0;padding-left:18px}.averif li{margin:3px 0;overflow-wrap:anywhere}
 .pulse{animation:pulse 1.2s ease-in-out 4}@keyframes pulse{50%{transform:scale(1.04);box-shadow:0 0 0 6px rgba(255,208,40,.35)}}
 label.coche{display:flex;align-items:center;gap:10px;padding:8px 0;font-size:16px}label.coche input{width:22px;height:22px;flex:none;margin:0}
 .carte img{width:84px;height:150px;object-fit:cover;border-radius:10px;flex:none;background:#000}
@@ -711,7 +712,7 @@ function ajouterNouvelles(h){
     src:`https://github.com/${CONF.depot}/releases/download/${e.tag||"emissions-"+e.fichier.slice(0,7)}/${e.fichier}`,
     origine:(e.filiere==="tiktok"||e.source_audio||String(e.theme||"").startsWith("Bande son")||String(e.theme||"").startsWith("TIKTOK::"))?"tiktok":(e.manuel||e.theme)?"texte":"auto",
     legende:e.legende||"",publie:e.publie,vues:e.vues,format:e.format||"",manuel:!!e.manuel,avis:e.avis||0,note:e.note,note_auteur:e.note_auteur,programmee:e.programmee,
-    couts:e.couts||{},duree:e.duree,likes:e.likes,commentaires:e.commentaires,partages:e.partages}));
+    couts:e.couts||{},duree:e.duree,likes:e.likes,commentaires:e.commentaires,partages:e.partages,a_verifier:e.a_verifier||[]}));
   if(!neuves.length&&DATA.length===avant) return;
   DATA.unshift(...neuves.reverse());
   if(choisie!==null) choisie+=neuves.length;                              // la vidéo ouverte garde sa place
@@ -795,6 +796,10 @@ function rendreTk(){                                                       // on
     if(v.publie!==true){const b=document.createElement("button"), k=file.indexOf(v.fichier); b.className="apub"+(k>=0?" on":"");
       b.textContent=k<0?"☐ À publier":v.publie===false?"⚠ Échec : sautée (republiez depuis la fiche)":`✅ À publier (n° ${attentePubli(file).indexOf(v.fichier)+1})`; b.onclick=(ev)=>{ev.stopPropagation(); basculerPubli(v.fichier,b)};
       c.querySelector(".infos").appendChild(b)}
+    if(v.publie!==true&&(v.a_verifier||[]).length){                        // feu rouge : les points que le robot n'a pas pu corriger seul
+      const d=document.createElement("details"); d.className="averif"; d.onclick=ev=>ev.stopPropagation();
+      d.innerHTML=`<summary>⚠️ À vérifier (${v.a_verifier.length})</summary><ul>`+v.a_verifier.map(p=>`<li>${p.t!=null?"<b>"+p.t+" s</b> · ":""}${String(p.quoi||"").replace(/[<>&]/g,"")}</li>`).join("")+"</ul>";
+      c.querySelector(".infos").appendChild(d)}
     L.appendChild(c)});
   resumePubli();
 }
@@ -803,7 +808,9 @@ const filePubli=()=>String((VARS&&VARS.PUBLI_FILE)||"").split(/\n+/).map(x=>x.tr
 const attentePubli=f=>f.filter(n=>{const v=DATA.find(x=>x.fichier===n); return v&&v.publie==null});   // cochées, pas encore publiées (échec : sautée)
 async function basculerPubli(nom,b){
   if(!lireJeton()){toast("Connectez d'abord la régie (onglet Réglages)");allerOnglet("config");return}
-  b.disabled=true; let f=filePubli(); const on=f.includes(nom);
+  let f=filePubli(); const on=f.includes(nom), v_=DATA.find(x=>x.fichier===nom);
+  if(!on&&v_&&(v_.a_verifier||[]).length&&!confirm(`Cette vidéo a ${v_.a_verifier.length} point(s) à vérifier :\n`+v_.a_verifier.slice(0,8).map(p=>"• "+(p.t!=null?p.t+" s : ":"")+p.quoi).join("\n")+"\n\nVous l'avez regardée et elle vous convient : la mettre en publication ?")) return;
+  b.disabled=true;
   f=on?f.filter(x=>x!==nom):[...f,nom];
   f=f.filter(n=>DATA.some(x=>x.fichier===n&&x.publie!==true));                // la liste ne garde que les vidéos à venir
   try{await ecrireVar("PUBLI_FILE",f.join("\n")||"-"); VARS.PUBLI_FILE=f.join("\n"); toast(on?"Retirée de la publication automatique":"Ajoutée à la publication automatique ✓"); rendreTk()}

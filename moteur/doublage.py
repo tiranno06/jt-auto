@@ -132,7 +132,7 @@ def transcrire(chemin, mono):
     SOURCE_MOTS[0] = "whisper"
     import ecoute
     mots = ecoute.groq(chemin)                                             # Groq : Whisper gratuit en quelques secondes (clé GROQ_API_KEY)
-    if mots: return mots
+    if mots: SOURCE_MOTS[0] = "groq"; return mots
     import voix_banque
     e_ = (voix_banque.ecouter([mono]) or [None])[0] or {}
     mots = [{"w": w, "s": float(s), "e": float(f), "voix": "speaker_0"} for w, s, f in (e_.get("mots") or [])]
@@ -188,7 +188,8 @@ def segments(mots):
     for m in mots:
         c = out[-1] if out else None
         nouvelle = (c is None or m["voix"] != c["voix"] or m["s"] - c["mots"][-1]["e"] > 0.9
-                    or (len(c["mots"]) >= 10 and re.search(r"[.!?…]$", c["mots"][-1]["w"])) or len(c["mots"]) >= 28)
+                    or (len(c["mots"]) >= 10 and re.search(r"[.!?…]$", c["mots"][-1]["w"])) or len(c["mots"]) >= 28
+                    or c["mots"][-1]["w"].endswith("?"))                   # après une question : nouvelle réplique (souvent l'autre répond)
         if nouvelle: out.append({"voix": m["voix"], "mots": [m]})
         else: c["mots"].append(m)
     for s in out:
@@ -231,22 +232,39 @@ def relire_dialogue(mots, une_voix=False):
              "input_schema": ecrire._schema({"personnes": {"type": "string"}, "nombre": {"type": "integer"},
                                              "phrases": {"type": "array", "items": ecrire._schema({"n": {"type": "integer"}, "qui": {"type": "string", "enum": ["A", "B"]}}, ["n", "qui"])}},
                                             ["phrases"])}
-    try:
-        r = ecrire._appel(reseau.claude(raisonner=True), None, [{"role": "user", "content": RELIRE.format(lignes=lignes)}], outil, max_tokens=4000)
-    except Exception as e:
-        journal(f"  relecture du dialogue par l'IA impossible ({str(e)[:120]})"); return None
-    ia = [None] * len(ph)
-    for x in ecrire._liste(r.get("phrases")):
-        try:
-            n = int(x.get("n"))
-            if 0 <= n < len(ph) and x.get("qui") in ("A", "B"): ia[n] = 0 if x["qui"] == "A" else 1
-        except (AttributeError, TypeError, ValueError): pass
-    if sum(x is not None for x in ia) < len(ph) / 2: return None
-    try: seul = int(r.get("nombre") or 2) == 1
-    except (TypeError, ValueError): seul = False
+    def lecture(client):
+        """Une IA lit le dialogue : (liste 0/1/None par phrase, monologue ?, qui est qui) ou None."""
+        try: r = ecrire._appel(client, None, [{"role": "user", "content": RELIRE.format(lignes=lignes)}], outil, max_tokens=4000)
+        except Exception as e:
+            journal(f"  relecture du dialogue par l'IA impossible ({str(e)[:120]})"); return None
+        ia = [None] * len(ph)
+        for x in ecrire._liste(r.get("phrases")):
+            try:
+                n = int(x.get("n"))
+                if 0 <= n < len(ph) and x.get("qui") in ("A", "B"): ia[n] = 0 if x["qui"] == "A" else 1
+            except (AttributeError, TypeError, ValueError): pass
+        if sum(x is not None for x in ia) < len(ph) / 2: return None
+        try: seul = int(r.get("nombre") or 2) == 1
+        except (TypeError, ValueError): seul = False
+        return ia, seul, str(r.get("personnes") or "")[:80]
+    c1 = reseau.claude(raisonner=True); l1 = lecture(c1)
+    if not l1: return None
+    ia, seul, qui = l1
     if une_voix and (seul or len({x for x in ia if x is not None}) < 2):   # une seule voix ET l'IA lit un monologue : on n'invente personne
         journal("  relecture du dialogue par l'IA : une seule personne parle"); return None
-    journal(f"  relecture du dialogue par l'IA : {sum(x is not None for x in ia)}/{len(ph)} phrases ({str(r.get('personnes') or '')[:80]})")
+    l2 = None                                                              # 2e avis : une AUTRE IA, sans voir la 1re réponse
+    if os.environ.get("DEUX_AVIS", "1") != "0" and getattr(c1.messages, "dernier", None):
+        try:
+            c2 = reseau.claude(raisonner=True, exclure={c1.messages.dernier})
+            if reseau.ordre_ia(True) and [f for f in reseau.ordre_ia(True) if f != c1.messages.dernier]: l2 = lecture(c2)
+        except Exception as e: journal(f"  2e avis impossible ({str(e)[:100]})")
+    if l2:
+        ia2 = locuteurs._aligner(ia, l2[0])                                # mêmes lettres A / B pour les deux IA
+        accord = [a for a, b in zip(ia, ia2) if a is not None and b is not None]
+        d_ = sum(1 for a, b in zip(ia, ia2) if a is not None and b is not None and a != b)
+        ia = [a if (b is None or a == b) else None for a, b in zip(ia, ia2)]   # désaccord : ni l'une ni l'autre, le son et l'image tranchent
+        journal(f"  deux IA ont relu le dialogue ({c1.messages.dernier} et {c2.messages.dernier}) : d'accord sur {len(accord) - d_}/{len(accord)} phrases")
+    journal(f"  relecture du dialogue par l'IA : {sum(x is not None for x in ia)}/{len(ph)} phrases ({qui})")
     return ia
 
 def hauteurs(voix_sig, segs):
@@ -396,6 +414,32 @@ def casting_unique(casting, segs, hz):
             res[v] = libres[0]
     return res
 
+def scinder_voix_dominante(mots, part=0.7):
+    """Deux voix trouvées, mais l'une dit plus de 70 % du texte : souvent DEUX personnes jouées par la même voix (« Fierté familiale » :
+    les deux copains ont la même voix, seuls les vieux qu'on montre ont une voix aiguë). L'IA relit les phrases de la voix dominante ;
+    si c'est un vrai dialogue (pas un monologue), elles sont réparties entre deux personnes, la petite voix devient une 3e personne."""
+    import locuteurs
+    from collections import Counter
+    n = Counter(m["voix"] for m in mots)
+    if len(n) != 2 or len(mots) < 30: return mots
+    dom, nb = n.most_common(1)[0]
+    if nb < part * len(mots): return mots
+    sous = [m for m in mots if m["voix"] == dom]
+    ia = relire_dialogue(sous, une_voix=True)
+    if not ia: return mots
+    petite = next(v for v in n if v != dom)
+    for m in mots:
+        if m["voix"] == petite: m["voix"] = "speaker_x"
+    for m in sous: m["voix"] = "speaker_0"
+    locuteurs.fil_dialogue(sous, ia)                                       # (modifie les mots de la voix dominante sur place)
+    if len({m["voix"] for m in sous}) < 2:                                 # finalement une seule personne : on remet comme avant
+        for m in mots: m["voix"] = dom if m["voix"] != "speaker_x" else petite
+        return mots
+    for m in mots:
+        if m["voix"] == "speaker_x": m["voix"] = "speaker_2"
+    journal("  voix dominante partagée entre deux personnes (même voix, dialogue) ; l'autre voix devient une 3e personne")
+    return mots
+
 def preparer(url):
     import ecrire
     tmp = tempfile.mkdtemp()
@@ -417,8 +461,14 @@ def preparer(url):
         v_, c_ = ecoute.demucs(tmp)
         if v_ is not None: voix_sig, chemin_voix = v_, c_
     sig = voix_sig if voix_sig is not None and len(voix_sig) >= len(mono) * 0.9 else mono
-    mots = transcrire(chemin_voix, mono)
-    if SOURCE_MOTS[0] != "elevenlabs":
+    import equipe
+    B = equipe.Bulletin()                                                  # l'équipe : chaque poste contrôlé avant le suivant
+    mots = equipe.inge_son(transcrire(chemin_voix, mono), B)
+    if SOURCE_MOTS[0] != "elevenlabs":                                    # 2e transcription par un autre outil, comparée mot à mot
+        try:
+            autre = whisper_local(mono) if SOURCE_MOTS[0] == "groq" else ecoute.groq(chemin_voix)
+            if autre: mots = equipe.deux_transcriptions(mots, autre, B)
+        except Exception as e: journal(f"  2e transcription impossible ({str(e)[:120]})")
         mots = ecoute.aligner(mots, sig)                                   # chaque mot recalé sur la voix (lèvres, sous-titres)
         __import__("locuteurs").fins_de_phrase(mots)                       # points oubliés par Whisper (« …rouge Mais pourquoi… »)
     if not EVENEMENTS: EVENEMENTS[:] = ecoute.bruits(mono)                 # rires, cris, sirène, aboiement… entendus dans l'original
@@ -435,15 +485,9 @@ def preparer(url):
     try:                                                                   # qui parle, mot par mot (la voix ne saute plus d'un perso à l'autre)
         import locuteurs; mots = locuteurs.affiner(mots, sig)
     except Exception as e: journal(f"  vérification mot par mot impossible ({str(e)[:120]})")
-    try:                                                                   # voix proches (ou une seule voix trouvée) : contrôle questions-réponses
-        import locuteurs                                                   # (texte + IA), le son ne suffit pas à dire qui parle
-        r_ = locuteurs.ETAT.get("ressemblance"); seule = len({m["voix"] for m in mots}) == 1
-        if seule or (r_ is not None and r_ > locuteurs.DOUTE):
-            ia = relire_dialogue(mots, une_voix=seule)
-            if ia:                                                         # voix « un peu » proches : le son garde du poids
-                mots = locuteurs.fil_dialogue(mots, ia, avis=None if seule or r_ > locuteurs.PROCHES else 1.2)
-            elif seule: journal("  une seule voix entendue et pas de relecture du dialogue : un seul personnage parle")
-    except Exception as e: journal(f"  contrôle questions-réponses impossible ({str(e)[:120]})")
+    try:                                                                   # casting voix : le son, le texte et l'image votent
+        mots = equipe.casting_voix(mots, info.get("_fichier") or "", B, relire_dialogue, scinder_voix_dominante)
+    except Exception as e: journal(f"  contrôle du casting des voix impossible ({str(e)[:120]})")
     segs = segments(mots)
     hz = hauteurs(sig, segs)
     emo_voix = ecoute.emotions(sig, segs)                                  # colère, joie, tristesse entendues dans la voix
@@ -481,7 +525,7 @@ def preparer(url):
     except Exception as e:
         journal(f"  mise en scène automatique impossible ({str(e)[:150]}) : une seule scène, casting par la hauteur des voix")
     journal("  casting : " + ", ".join(f"{v} → {NOMS[r]}" for v, r in casting.items()))
-    d = [str(x) for x in ecrire._liste(m.get("d"))]
+    d = [" ".join(map(str, x)) if isinstance(x, list) else str(x) for x in ecrire._liste(m.get("d"))]   # l'IA gratuite met parfois [["…"]]
     corrige = corriger_textes(segs, [str(x) for x in ecrire._liste(m.get("texte"))])   # sous-titres sans fautes de reconnaissance
     reps = []
     for k, s in enumerate(segs):
@@ -516,6 +560,11 @@ def preparer(url):
                       [{"scene": "1", "repliques": list(range(len(reps))), "lieu": "", "son": "", "duree": 0,
                         "decor": "" if os.environ.get("RENDU_DETAILLE", "1") != "0" else "cozy living room, sofa, coffee table, lamp"}]   # sans Claude : le studio devine le lieu
     if isinstance(m.get("studio"), dict):
+        P_ = m["studio"].get("personnages")
+        if isinstance(P_, list):                                           # l'IA gratuite donne parfois une liste sans les rôles :
+            C_ = m["studio"].get("costumes")                               # même ordre que ses costumes (sinon ordre d'apparition)
+            ordre = [r for r in (C_ if isinstance(C_, dict) else {}) if r in ROLES] or list(dict.fromkeys(r["p"] for r in reps if r["p"] != "narrateur"))
+            m["studio"]["personnages"] = {r: f for r, f in zip(ordre, P_) if isinstance(f, dict)}
         sk["studio"] = m["studio"]                                         # direction artistique de Claude (vérifiée par studio.bible)
         try:
             import studio as _st
@@ -545,6 +594,11 @@ def preparer(url):
         audios.append(np.asarray(sig[a0:a1], np.float32))
         mots.append([(x["w"], float(x["s"] - s["deb"]), float(x["e"] - s["deb"])) for x in s["mots"]])
     for r, m_ in zip(sk["repliques"], mots): r["_mots"] = [[w, round(a, 3), round(b, 3)] for w, a, b in m_]   # gardés : « Corriger qui parle »
+    try:                                                                   # scripte (cohérence) et monteur (synchronisation)
+        equipe.scripte(sk, segs, hz, B); equipe.monteur(sk, duree, B)
+    except Exception as e: journal(f"  contrôles de l'équipe impossibles ({str(e)[:120]})")
+    sk["equipe"] = B.lignes
+    journal(f"  bulletin de l'équipe : {B.resume()}")
     return sk, audios, mots
 
 

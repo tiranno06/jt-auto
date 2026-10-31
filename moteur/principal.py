@@ -491,6 +491,12 @@ def main():
     if (os.environ.get("APERCU_RAPIDE") or "") != "1":                     # fin en boucle : la dernière image se raccorde à la première
         try: duree = __import__("boucle").boucler(base + ".mp4")
         except Exception as e: print(f"fin en boucle impossible ({str(e)[:120]})", flush=True)
+    A_VERIFIER = []                                                        # contrôle de la vidéo FINIE (synchro, sous-titres, IA, technique)
+    if libre and not REALISTE and not test and (os.environ.get("APERCU_RAPIDE") or "") != "1":
+        try:
+            import cartoon as _ct, verif_finale
+            if _ct.RENDU: A_VERIFIER = verif_finale.verifier(base + ".mp4", sk, _ct.RENDU)
+        except Exception as e: print(f"contrôle de la vidéo finie impossible ({str(e)[:120]})", flush=True)
     credit = "Voix : " + " ; ".join(credits_voix) + "."
     if decors: credit += " Décors générés avec Stable Diffusion XL (CreativeML Open RAIL++-M)."
     if libre:                                                              # signature de la chaîne dans les hashtags
@@ -526,6 +532,8 @@ def main():
     if AUTO: historique[-1]["auto"] = True
     if test or (os.environ.get("APERCU_RAPIDE") or "") == "1" or (os.environ.get("RENDU") or "") == "essai_pause":
         historique[-1]["essai"] = True                                     # essai : rangé à part sur le site, effacé au bout de 3 jours
+    if A_VERIFIER: historique[-1]["a_verifier"] = A_VERIFIER               # ⚠️ sur le site : points à regarder avant de publier
+    if sk.get("equipe"): historique[-1]["equipe"] = f"{sum(1 for l in sk['equipe'] if l.get('ok'))}/{len(sk['equipe'])} contrôles bons"
     if DOUB: historique[-1]["filiere"] = "tiktok"                         # vidéo sur un son TikTok : rangée à part des sketchs
     if DOUB: historique[-1]["source_audio"] = sk["doublage"]["source"]; historique[-1]["theme"] = "Bande son : " + sk["doublage"]["source"]
     historique[-1]["couts"] = couts(); print(f"Dépenses : {historique[-1]['couts']}", flush=True)
