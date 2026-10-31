@@ -132,7 +132,7 @@ def transcrire(chemin, mono):
     SOURCE_MOTS[0] = "whisper"
     import ecoute
     mots = ecoute.groq(chemin)                                             # Groq : Whisper gratuit en quelques secondes (clé GROQ_API_KEY)
-    if mots: return mots
+    if mots: SOURCE_MOTS[0] = "groq"; return mots
     import voix_banque
     e_ = (voix_banque.ecouter([mono]) or [None])[0] or {}
     mots = [{"w": w, "s": float(s), "e": float(f), "voix": "speaker_0"} for w, s, f in (e_.get("mots") or [])]
@@ -232,22 +232,39 @@ def relire_dialogue(mots, une_voix=False):
              "input_schema": ecrire._schema({"personnes": {"type": "string"}, "nombre": {"type": "integer"},
                                              "phrases": {"type": "array", "items": ecrire._schema({"n": {"type": "integer"}, "qui": {"type": "string", "enum": ["A", "B"]}}, ["n", "qui"])}},
                                             ["phrases"])}
-    try:
-        r = ecrire._appel(reseau.claude(raisonner=True), None, [{"role": "user", "content": RELIRE.format(lignes=lignes)}], outil, max_tokens=4000)
-    except Exception as e:
-        journal(f"  relecture du dialogue par l'IA impossible ({str(e)[:120]})"); return None
-    ia = [None] * len(ph)
-    for x in ecrire._liste(r.get("phrases")):
-        try:
-            n = int(x.get("n"))
-            if 0 <= n < len(ph) and x.get("qui") in ("A", "B"): ia[n] = 0 if x["qui"] == "A" else 1
-        except (AttributeError, TypeError, ValueError): pass
-    if sum(x is not None for x in ia) < len(ph) / 2: return None
-    try: seul = int(r.get("nombre") or 2) == 1
-    except (TypeError, ValueError): seul = False
+    def lecture(client):
+        """Une IA lit le dialogue : (liste 0/1/None par phrase, monologue ?, qui est qui) ou None."""
+        try: r = ecrire._appel(client, None, [{"role": "user", "content": RELIRE.format(lignes=lignes)}], outil, max_tokens=4000)
+        except Exception as e:
+            journal(f"  relecture du dialogue par l'IA impossible ({str(e)[:120]})"); return None
+        ia = [None] * len(ph)
+        for x in ecrire._liste(r.get("phrases")):
+            try:
+                n = int(x.get("n"))
+                if 0 <= n < len(ph) and x.get("qui") in ("A", "B"): ia[n] = 0 if x["qui"] == "A" else 1
+            except (AttributeError, TypeError, ValueError): pass
+        if sum(x is not None for x in ia) < len(ph) / 2: return None
+        try: seul = int(r.get("nombre") or 2) == 1
+        except (TypeError, ValueError): seul = False
+        return ia, seul, str(r.get("personnes") or "")[:80]
+    c1 = reseau.claude(raisonner=True); l1 = lecture(c1)
+    if not l1: return None
+    ia, seul, qui = l1
     if une_voix and (seul or len({x for x in ia if x is not None}) < 2):   # une seule voix ET l'IA lit un monologue : on n'invente personne
         journal("  relecture du dialogue par l'IA : une seule personne parle"); return None
-    journal(f"  relecture du dialogue par l'IA : {sum(x is not None for x in ia)}/{len(ph)} phrases ({str(r.get('personnes') or '')[:80]})")
+    l2 = None                                                              # 2e avis : une AUTRE IA, sans voir la 1re réponse
+    if os.environ.get("DEUX_AVIS", "1") != "0" and getattr(c1.messages, "dernier", None):
+        try:
+            c2 = reseau.claude(raisonner=True, exclure={c1.messages.dernier})
+            if reseau.ordre_ia(True) and [f for f in reseau.ordre_ia(True) if f != c1.messages.dernier]: l2 = lecture(c2)
+        except Exception as e: journal(f"  2e avis impossible ({str(e)[:100]})")
+    if l2:
+        ia2 = locuteurs._aligner(ia, l2[0])                                # mêmes lettres A / B pour les deux IA
+        accord = [a for a, b in zip(ia, ia2) if a is not None and b is not None]
+        d_ = sum(1 for a, b in zip(ia, ia2) if a is not None and b is not None and a != b)
+        ia = [a if (b is None or a == b) else None for a, b in zip(ia, ia2)]   # désaccord : ni l'une ni l'autre, le son et l'image tranchent
+        journal(f"  deux IA ont relu le dialogue ({c1.messages.dernier} et {c2.messages.dernier}) : d'accord sur {len(accord) - d_}/{len(accord)} phrases")
+    journal(f"  relecture du dialogue par l'IA : {sum(x is not None for x in ia)}/{len(ph)} phrases ({qui})")
     return ia
 
 def hauteurs(voix_sig, segs):
@@ -447,7 +464,11 @@ def preparer(url):
     import equipe
     B = equipe.Bulletin()                                                  # l'équipe : chaque poste contrôlé avant le suivant
     mots = equipe.inge_son(transcrire(chemin_voix, mono), B)
-    if SOURCE_MOTS[0] != "elevenlabs":
+    if SOURCE_MOTS[0] != "elevenlabs":                                    # 2e transcription par un autre outil, comparée mot à mot
+        try:
+            autre = whisper_local(mono) if SOURCE_MOTS[0] == "groq" else ecoute.groq(chemin_voix)
+            if autre: mots = equipe.deux_transcriptions(mots, autre, B)
+        except Exception as e: journal(f"  2e transcription impossible ({str(e)[:120]})")
         mots = ecoute.aligner(mots, sig)                                   # chaque mot recalé sur la voix (lèvres, sous-titres)
         __import__("locuteurs").fins_de_phrase(mots)                       # points oubliés par Whisper (« …rouge Mais pourquoi… »)
     if not EVENEMENTS: EVENEMENTS[:] = ecoute.bruits(mono)                 # rires, cris, sirène, aboiement… entendus dans l'original

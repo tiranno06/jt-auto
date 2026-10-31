@@ -22,8 +22,9 @@ def journal(m): print(m, flush=True)
 
 class Bulletin:
     def __init__(self): self.lignes = []
-    def note(self, poste, controle, ok, detail=""):
-        self.lignes.append({"poste": poste, "controle": controle, "ok": bool(ok), "detail": str(detail)[:200]})
+    def note(self, poste, controle, ok, detail="", revoir=False):
+        """revoir=True : un défaut que le contrôleur n'a pas pu corriger seul -> « ⚠️ à vérifier » sur le site."""
+        self.lignes.append({"poste": poste, "controle": controle, "ok": bool(ok), "detail": str(detail)[:200], "revoir": bool(revoir and not ok)})
         journal(f"  [équipe · {poste}] {'✔' if ok else '✘'} {controle}{' : ' + str(detail) if detail else ''}")
     def resume(self):
         ko = [l for l in self.lignes if not l["ok"]]
@@ -76,7 +77,7 @@ def casting_voix(mots, video, B, relire, scinder):
             avis = None if seule or (r_ is not None and r_ > locuteurs.PROCHES) else 1.2
             mots = locuteurs.fil_dialogue(mots, ia, avis=avis, vue=vue)
             B.note("casting voix", "fil du dialogue repris (son + texte + image)", True, raison)
-        elif seule: B.note("casting voix", "deux personnes trouvées", False, "une seule voix et pas de relecture possible : un seul personnage parle")
+        elif seule: B.note("casting voix", "deux personnes trouvées", False, "une seule voix et pas de relecture possible : un seul personnage parle", revoir=True)
     elif len(voix) == 2:
         n0 = Counter(m["voix"] for m in mots)
         mots = scinder(mots)
@@ -87,7 +88,7 @@ def casting_voix(mots, video, B, relire, scinder):
     B.note("casting voix", "parole répartie entre les personnages", len(n) > 1 or questions < 2,
            f"{len(n)} voix, la plus bavarde dit {round(100 * part)} %")
     if len(n) > 1 and part > VOIX_SEULE_MAX and questions >= 3:
-        B.note("casting voix", "dialogue équilibré", False, f"une voix dit {round(100 * part)} % d'un dialogue à {questions} questions")
+        B.note("casting voix", "dialogue équilibré", False, f"une voix dit {round(100 * part)} % d'un dialogue à {questions} questions", revoir=True)
     return mots
 
 
@@ -96,7 +97,7 @@ def scripte(sk, segs, hz, B):
     import studio
     reps = sk.get("repliques") or []
     dbl = [k for k, s in enumerate(segs) if re.search(r"\?\s+\S", s.get("t", "")) and not (s.get("mots") and all(m.get("sure", 0) >= 0.5 for m in s["mots"]))]
-    B.note("scripte", "une réplique = une seule personne", not dbl, f"répliques {dbl[:6]} : question et réponse ensemble" if dbl else "")
+    B.note("scripte", "une réplique = une seule personne", not dbl, f"répliques {dbl[:6]} : question et réponse ensemble" if dbl else "", revoir=True)
     S = sk.get("studio") if isinstance(sk.get("studio"), dict) else {}
     if S.get("lieux_separes") and not studio.appel_devine(sk):
         B.note("scripte", "appel seulement si le son en parle", False, "lieux séparés de l'IA refusés"); S.pop("lieux_separes", None)
@@ -118,9 +119,54 @@ def monteur(sk, duree, B):
     for k in vides: reps[k]["_fin"] = round(float(reps[k]["_deb"]) + 0.25, 3)
     B.note("monteur", "chaque réplique a une durée", not vides, f"{len(vides)} corrigée(s)" if vides else "")
     chev = [k for k in range(1, len(reps)) if reps[k]["p"] == reps[k - 1]["p"] and float(reps[k]["_deb"]) < float(reps[k - 1]["_fin"]) - 0.05]
-    B.note("monteur", "un personnage ne parle jamais deux fois en même temps", not chev, f"répliques {chev[:6]}" if chev else "")
+    B.note("monteur", "un personnage ne parle jamais deux fois en même temps", not chev, f"répliques {chev[:6]}" if chev else "", revoir=True)
     hors = [k for k, r in enumerate(reps) if duree and float(r["_fin"]) > duree + 0.5]
     B.note("monteur", "rien après la fin du son", not hors, f"{len(hors)} réplique(s)" if hors else "")
     mal = [k for k, r in enumerate(reps) for w in (r.get("_mots") or []) if w[1] < -0.05 or w[2] > float(r["_fin"]) - float(r["_deb"]) + 0.3][:6]
     B.note("monteur", "chaque mot dans sa réplique (lèvres et sous-titres calés)", not mal, f"répliques {sorted(set(mal))}" if mal else "")
     return sk
+
+
+def deux_transcriptions(mots, autre, B):
+    """Ingé son : le même son transcrit par deux outils (Groq et le Whisper de la machine). Là où ils entendent un mot différent, l'IA
+    choisit d'après le sens de la phrase (sinon on garde le premier) ; les instants des mots ne changent pas. Taux d'accord noté."""
+    import difflib
+    nu = lambda w: re.sub(r"[^\w'’-]", "", str(w).lower())
+    a, b = [nu(m["w"]) for m in mots], [nu(m["w"]) for m in autre]
+    sm = difflib.SequenceMatcher(None, a, b, autojunk=False)
+    egaux = sum(bl.size for bl in sm.get_matching_blocks()); accord = egaux / max(1, len(a))
+    doutes = []                                                            # (indices dans mots, mots de l'autre transcription)
+    for op, i1, i2, j1, j2 in sm.get_opcodes():
+        if op == "replace" and i2 - i1 == j2 - j1 and i2 - i1 <= 4: doutes.append((list(range(i1, i2)), [autre[j]["w"] for j in range(j1, j2)]))
+    choix = _arbitrer(mots, doutes) if doutes else {}
+    for k, (idx, alt) in enumerate(doutes):
+        if choix.get(k) == "B":
+            for i, w in zip(idx, alt):                                     # le mot de B, avec la ponctuation de A
+                fin = re.search(r"[.,!?…;:]*$", mots[i]["w"]).group()
+                mots[i] = dict(mots[i], w=re.sub(r"[.,!?…;:]+$", "", w.strip()) + fin)
+    B.note("ingé son", "deux transcriptions d'accord", accord >= 0.85,
+           f"{round(100 * accord)} % de mots identiques, {len(doutes)} doute(s), {sum(1 for v in choix.values() if v == 'B')} corrigé(s)")
+    return mots
+
+
+def _arbitrer(mots, doutes):
+    """L'IA choisit, pour chaque doute, la version qui a du sens dans la phrase : {n° du doute: "A" | "B"}."""
+    import ecrire, reseau
+    if not reseau.ia_disponible(): return {}
+    lignes = []
+    for k, (idx, alt) in enumerate(doutes[:40]):
+        g, d = max(0, idx[0] - 8), min(len(mots), idx[-1] + 9)
+        avant = " ".join(m["w"] for m in mots[g:idx[0]]); apres = " ".join(m["w"] for m in mots[idx[-1] + 1:d])
+        lignes.append(f"{k}. …{avant} [A : {' '.join(mots[i]['w'] for i in idx)} | B : {' '.join(alt)}] {apres}…")
+    outil = {"name": "choix", "description": "La bonne version de chaque passage.",
+             "input_schema": ecrire._schema({"choix": {"type": "array", "items": ecrire._schema({"n": {"type": "integer"}, "version": {"type": "string", "enum": ["A", "B"]}}, ["n", "version"])}}, ["choix"])}
+    txt = ("Deux logiciels ont transcrit le même dialogue en français (sketch TikTok, langage parlé, argot). Pour chaque passage, "
+           "dis quelle version (A ou B) est la bonne, d'après le sens de la phrase :\n\n" + "\n".join(lignes))
+    try: r = ecrire._appel(reseau.claude(raisonner=True), None, [{"role": "user", "content": txt}], outil, max_tokens=2000)
+    except Exception as e: journal(f"  arbitrage des deux transcriptions impossible ({str(e)[:100]})"); return {}
+    out = {}
+    for x in ecrire._liste(r.get("choix")):
+        try:
+            if x.get("version") in ("A", "B"): out[int(x.get("n"))] = x["version"]
+        except (AttributeError, TypeError, ValueError): pass
+    return out

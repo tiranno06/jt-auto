@@ -1714,7 +1714,9 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
                                 fiches={r: {k: f.get(k) for k in ("genre", "age", "taille", "barbe", "cheveux")} for r, f in (FICHES or {}).items()},
                                 places={k: list(v) for k, v in places.items()}, total=total, doublage=bool(DOUB), mini=mini, separes=SEPARES,
                                 bruitages=list(BRUITAGES), lieux=list((B or {}).get("lieux") or []), compagnons=sum(len(v) for v in COMP.values()),
-                                decors_ia=bool(decors), coupes_origine=list((B or {}).get("coupes_origine") or []))
+                                decors_ia=bool(decors), coupes_origine=list((B or {}).get("coupes_origine") or []),
+                                xs={k: {r: position(k, r)[0] for r in v} for k, v in places.items()}, tetes_y=TETES_Y,   # contrôle final (verif_finale)
+                                transitions=[(float(x[0]), float(x[1])) for x in transitions])
     try:                                                                   # empreintes : redessin partiel d'une 2e version (jury)
         RENDU.update(fps=FPS, nf=nf, sig_plans=[(x["t0"], x["t1"], _sig(x)) for x in DECOUPE], sig_ph=[(q["deb"], q["fin"], _sig(q)) for q in ph],
                      sig_parts={k: _sig(v) for k, v in {"fiches": FICHES, "places": places, "comp": COMP, "transitions": transitions, **{"B." + k: v for k, v in (B or {}).items()}}.items()},

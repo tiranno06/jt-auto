@@ -213,6 +213,16 @@
   personne, appel seulement si le son en parle, téléphone seulement s'il en est question, autant de personnages que de voix) ;
   monteur (ordre, durées, chevauchements, mots dans leur réplique, rien après la fin du son). Puis pré-jury, contrôle image et jury.
   Essai « Fierté familiale » (même voix pour les deux copains) : la parole passe de 85 % / 15 % à un vrai dialogue 57 % / 43 %.
+  **Contrôles renforcés (choix de l'auteur 1, 2, 3, 4, 6, 7, 8, 9)** : deux transcriptions comparées (Groq + Whisper de la machine,
+  `equipe.deux_transcriptions` : l'IA tranche les mots en désaccord, instants inchangés) ; deux IA relisent le dialogue chacune de
+  leur côté (`relire_dialogue` : 2e avis par `reseau.claude(exclure=…)`, désaccord = la phrase est laissée au son et à l'image ;
+  DEUX_AVIS=0) ; témoin image : plans larges = gauche / droite, gros plans = COULEURS de ce qui bouge (`regard.signature`, k-moyennes) ;
+  **vidéo finie contrôlée** (`moteur/verif_finale.py`, VERIF_FINALE=0) : synchro des bouches (pendant chaque réplique c'est le bon
+  personnage qui bouge ; positions `cartoon.RENDU["xs"]`) et décalage son / image mesuré puis corrigé au-delà de 0,12 s (son recalé,
+  `recaler`) ; sous-titres vérifiés à l'oreille (son de la vidéo finie retranscrit, comparé réplique par réplique, voix sans
+  sous-titre) ; technique (sauts d'image hors coupes prévues, clignotements, contrôle image du dessin) ; liste de contrôle par l'IA
+  (une image toutes les 2 s, 6 questions fixes) ; **feu rouge** : points non corrigés -> historique "a_verifier" -> badge
+  « ⚠️ À vérifier (n) » + moments sur l'onglet TikTok, et cocher « À publier » demande confirmation.
   **Tirage au hasard des sons TikTok** : le robot préfère les vidéos aux voix bien différentes (ressemblance ≤ 0,6, réglage
   VOIX_DIFFERENTES ; 1 = sans tri) : jusqu'à 6 vidéos écoutées (25 min au plus), sinon celle aux voix les plus nettes. Un lien collé
   à la main n'est jamais refusé (le contrôle questions-réponses s'en charge).

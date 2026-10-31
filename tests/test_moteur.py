@@ -1054,12 +1054,14 @@ class TestVoixEtScenesTiktok(unittest.TestCase):
             for w in ph.split(): mots.append({"w": w, "s": t, "e": t + 0.3, "voix": "speaker_0", "_q": q}); t += 0.35
             t += 0.5
         fps = 10.0; fr = []
+        teintes = np.zeros((regard.HAUTEUR, regard.LARGEUR, 3), np.uint8); teintes[..., 1:] = 200
+        teintes[:, :90, 0] = 20; teintes[:, 90:, 0] = 120                 # habit orange à gauche, bleu à droite
         for k in range(int(t * fps) + 2):
             f = np.zeros((regard.HAUTEUR, regard.LARGEUR), np.int16); tm = k / fps
             q = next((m["_q"] for m in mots if m["s"] <= tm <= m["e"] + 0.05), None)
             if q is not None and k % 2:
                 x0 = 20 if q == 0 else 120; f[95:125, x0:x0 + 40] = 200
-            fr.append(f)
+            fr.append((f, teintes))
         anc = regard.images; regard.images = lambda c: (fr, fps)
         try:
             B = equipe.Bulletin(); res = equipe.casting_voix([dict(m) for m in mots], "x.mp4", B, lambda m, une_voix=False: None, lambda m: m)
@@ -1073,6 +1075,51 @@ class TestVoixEtScenesTiktok(unittest.TestCase):
         self.assertIn("chaque réplique a une durée", ko); self.assertIn("une réplique = une seule personne", ko)
         self.assertNotIn("objet", sk["repliques"][0])                     # téléphone sans raison : retiré
         self.assertGreater(sk["repliques"][1]["_fin"], sk["repliques"][1]["_deb"])
+
+    def test_verif_finale_synchro_et_technique(self):
+        import numpy as np, verif_finale as V
+        fps, sr = 30.0, 16000; n = 300
+        ph = [{"p": "presentateur", "deb": 1.0, "fin": 3.0, "texte": "Salut toi", "scene": 0, "plan": "large"},
+              {"p": "invite", "deb": 4.0, "fin": 6.0, "texte": "Salut", "scene": 0, "plan": "large"},
+              {"p": "presentateur", "deb": 7.0, "fin": 9.0, "texte": "Ça va", "scene": 0, "plan": "large"}]
+        R = {"ph": ph, "xs": {0: {"presentateur": 285, "invite": 795}}, "tetes_y": {}, "plans": [{"t0": 0}], "transitions": [], "total": 10}
+        def video(qui_bouge, retard=0.0):
+            fr = []
+            for i in range(n):
+                f = np.zeros((V.H_, V.L), np.int16); t = i / fps - retard
+                q = next((q for q in ph if q["deb"] <= t <= q["fin"]), None)
+                if q and i % 2:
+                    x = int(qui_bouge(q["p"]) * V.L / 1080); f[150:200, x - 20:x + 20] = 200
+                fr.append(f)
+            sig = np.zeros(int(n / fps * sr), np.float32)
+            for q in ph: sig[int(q["deb"] * sr):int(q["fin"] * sr)] = 0.3 * np.sin(np.arange(int((q["fin"] - q["deb"]) * sr)) * 0.05)
+            return fr, (sig, sr)
+        bon = {"presentateur": 285, "invite": 795}
+        fr, son = video(lambda p: bon[p]); d, dec = V.synchro("x", R, fr, fps, son)
+        self.assertEqual(d, []); self.assertEqual(dec, 0.0)
+        fr, son = video(lambda p: bon["invite" if p == "presentateur" else "presentateur"]); d, _ = V.synchro("x", R, fr, fps, son)
+        self.assertEqual(len(d), 3)                                        # c'est toujours l'autre qui bouge
+        fr, son = video(lambda p: bon[p], retard=0.3); _, dec = V.synchro("x", R, fr, fps, son)
+        self.assertGreaterEqual(dec, 0.2)                                  # image en retard : le son sera recalé
+        fr = [np.zeros((V.H_, V.L), np.int16) for _ in range(n)]; fr[150] = fr[150] + 250
+        self.assertTrue(any("clignotement" in x["quoi"] or "saut" in x["quoi"] for x in V.technique("x", R, fr, fps)))
+
+    def test_deux_avis_et_deux_transcriptions(self):
+        import doublage as D, ecrire, reseau, equipe
+        mots = [{"w": w, "s": 0.4 * i, "e": 0.4 * i + 0.3, "voix": "speaker_0"} for i, w in enumerate("Tu viens ? Oui. Et lui ? Non. Pourquoi ? Malade.".split())]
+        reponses = [{"nombre": 2, "phrases": [{"n": i, "qui": "AB"[i % 2]} for i in range(6)]},
+                    {"nombre": 2, "phrases": [{"n": i, "qui": "BA"[i % 2] if i < 5 else "B"} for i in range(6)]}]   # 2e IA : lettres inversées, 1 désaccord
+        appels = []
+        class Faux:
+            def __init__(self, nom): self.messages = type("M", (), {"dernier": nom})()
+        anc = ecrire._appel, reseau.ia_disponible, reseau.claude, reseau.ordre_ia
+        ecrire._appel = lambda client, *a, **k: (appels.append(client.messages.dernier), reponses[len(appels) - 1])[1]
+        reseau.ia_disponible = lambda: True; reseau.ordre_ia = lambda images=False: ["gemini", "mistral"]
+        reseau.claude = lambda raisonner=False, exclure=(): Faux("mistral" if exclure else "gemini")
+        try: ia = D.relire_dialogue(mots)
+        finally: ecrire._appel, reseau.ia_disponible, reseau.claude, reseau.ordre_ia = anc
+        self.assertEqual(appels, ["gemini", "mistral"])                    # deux IA différentes
+        self.assertEqual(ia, [0, 1, 0, 1, 0, None])                        # d'accord sauf la dernière phrase : laissée au son et à l'image
 
     def test_une_seule_scene_pour_un_son_tiktok(self):
         import studio
