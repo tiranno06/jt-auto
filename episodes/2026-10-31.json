@@ -1,746 +1,1292 @@
 {
- "titre": "ASSURANCE VÉHICULE PREMIUM",
- "sujet": "ASSURANCE VÉHICULE PREMIUM",
- "ecran": "ASSURANCE VÉHI",
+ "titre": "SORTIE DU PLACARD INATTENDUE",
+ "sujet": "SORTIE DU PLACARD INATTENDUE",
+ "ecran": "SORTIE DU PLAC",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "POV : Quand l'assurance a des conditions caché",
- "question": "Jusqu'où seriez-vous prêt à accepter les conditions d'une assurance pour votre véhicule ?",
+ "titre_accroche": "Quand tu sors du placard sans le savoir",
+ "question": "À quel indice vous auriez compris vous ?",
  "running_gag": "",
  "verite": "",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "Oui, ce serait pour assurer mon véhicule.",
-   "_deb": 0.06,
-   "_fin": 1.523,
+   "t": "Est-ce que tu veux m'épouser ?",
+   "_deb": 0.04,
+   "_fin": 0.82,
+   "d": "[hopeful] Est-ce que tu veux m'épouser ?",
    "_mots": [
     [
-     "Oui,",
-     0.0,
-     0.08
-    ],
-    [
-     "ce",
-     0.16,
-     0.221
-    ],
-    [
-     "serait",
-     0.281,
-     0.461
-    ],
-    [
-     "pour",
-     0.481,
-     0.621
-    ],
-    [
-     "assurer",
-     0.621,
-     0.902
-    ],
-    [
-     "mon",
-     0.942,
-     1.042
-    ],
-    [
-     "véhicule.",
-     1.062,
-     1.463
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Et vous avez frappé à la bonne porte, parce que justement, on a une nouvelle offre qui est la formule premium touriste, qui vous couvre, quel que soit",
-   "_deb": 1.683,
-   "_fin": 7.617,
-   "_mots": [
-    [
-     "Et",
-     0.0,
-     0.041
-    ],
-    [
-     "vous",
-     0.061,
-     0.181
-    ],
-    [
-     "avez",
-     0.201,
-     0.361
-    ],
-    [
-     "frappé",
-     0.361,
-     0.602
-    ],
-    [
-     "à",
-     0.642,
-     0.702
-    ],
-    [
-     "la",
-     0.722,
-     0.762
-    ],
-    [
-     "bonne",
-     0.802,
-     0.962
-    ],
-    [
-     "porte,",
-     1.043,
-     1.263
-    ],
-    [
-     "parce",
-     1.323,
-     1.443
-    ],
-    [
-     "que",
-     1.484,
-     1.564
-    ],
-    [
-     "justement,",
-     1.604,
-     1.945
-    ],
-    [
-     "on",
-     1.985,
-     2.025
-    ],
-    [
-     "a",
-     2.045,
-     2.085
-    ],
-    [
-     "une",
-     2.125,
-     2.205
-    ],
-    [
-     "nouvelle",
-     2.225,
-     2.506
-    ],
-    [
-     "offre",
-     2.566,
-     2.726
-    ],
-    [
-     "qui",
-     2.766,
-     2.866
-    ],
-    [
-     "est",
-     2.987,
-     3.007
-    ],
-    [
-     "la",
-     2.948,
-     2.988
-    ],
-    [
-     "formule",
-     3.068,
-     3.389
-    ],
-    [
-     "premium",
-     3.449,
-     3.79
-    ],
-    [
-     "touriste,",
-     3.87,
-     4.291
-    ],
-    [
-     "qui",
-     4.571,
-     4.652
-    ],
-    [
-     "vous",
-     4.732,
-     4.852
-    ],
-    [
-     "couvre,",
-     4.912,
-     5.153
-    ],
-    [
-     "quel",
-     5.453,
-     5.614
-    ],
-    [
-     "que",
-     5.654,
-     5.754
-    ],
-    [
-     "soit",
-     5.814,
-     5.934
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "le type de dommage, accident, vol, incendie, bris de glace, panne, peu importe, vous êtes couvert.",
-   "_deb": 7.658,
-   "_fin": 12.99,
-   "_mots": [
-    [
-     "le",
-     0.0,
-     0.04
-    ],
-    [
-     "type",
-     0.06,
-     0.22
-    ],
-    [
-     "de",
-     0.26,
-     0.3
-    ],
-    [
-     "dommage,",
-     0.36,
-     0.701
-    ],
-    [
-     "accident,",
-     1.122,
-     1.603
-    ],
-    [
-     "vol,",
-     1.744,
-     1.944
-    ],
-    [
-     "incendie,",
-     2.124,
-     2.626
-    ],
-    [
-     "bride,",
-     2.686,
-     2.926
-    ],
-    [
-     "glace,",
-     2.966,
-     3.267
-    ],
-    [
-     "panne,",
-     3.327,
-     3.568
-    ],
-    [
-     "peu",
-     3.648,
-     3.748
-    ],
-    [
-     "importe,",
-     3.828,
-     4.209
-    ],
-    [
-     "vous",
-     4.43,
-     4.59
-    ],
-    [
-     "êtes",
-     4.67,
-     4.851
-    ],
-    [
-     "couvert.",
-     4.991,
-     5.332
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Donc si j'ai un accident, vous prenez tout en charge?",
-   "_deb": 13.051,
-   "_fin": 14.92,
-   "objet": "telephone",
-   "_mots": [
-    [
-     "Donc",
-     0.0,
-     0.141
-    ],
-    [
-     "si",
-     0.201,
-     0.261
-    ],
-    [
-     "j",
-     0.321,
-     0.341
-    ],
-    [
-     "'ai",
-     0.361,
-     0.402
-    ],
-    [
-     "un",
-     0.462,
-     0.502
-    ],
-    [
-     "accident,",
-     0.562,
-     0.923
-    ],
-    [
-     "vous",
-     0.964,
-     1.064
-    ],
-    [
-     "prenez",
-     1.104,
-     1.305
-    ],
-    [
-     "tout",
-     1.325,
-     1.425
-    ],
-    [
-     "en",
-     1.465,
-     1.506
-    ],
-    [
-     "charge",
-     1.546,
-     1.729
-    ],
-    [
-     "?",
-     1.729,
-     1.869
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Sous réserve que votre responsabilité ne soit pas engagée.",
-   "_deb": 14.998,
-   "_fin": 17.186,
-   "_mots": [
-    [
-     "Sous",
-     0.0,
-     0.121
-    ],
-    [
-     "réserve",
-     0.181,
-     0.602
-    ],
-    [
-     "que",
-     0.663,
-     0.743
-    ],
-    [
-     "votre",
-     0.763,
-     0.944
-    ],
-    [
-     "responsabilité",
-     0.944,
-     1.506
-    ],
-    [
-     "ne",
-     1.566,
-     1.606
-    ],
-    [
-     "soit",
-     1.626,
-     1.767
-    ],
-    [
-     "pas",
-     1.787,
-     1.867
-    ],
-    [
-     "engagée.",
-     1.907,
-     2.188
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Oui, c 'est normal.",
-   "_deb": 17.467,
-   "_fin": 18.049,
-   "_mots": [
-    [
-     "Oui,",
-     0.0,
-     0.081
-    ],
-    [
-     "c",
-     0.181,
-     0.221
-    ],
-    [
-     "'est",
-     0.241,
-     0.301
-    ],
-    [
-     "normal.",
-     0.321,
-     0.582
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Et que l'autre conducteur soit bien assuré.",
-   "_deb": 18.291,
-   "_fin": 19.816,
-   "_mots": [
-    [
-     "Et",
-     0.0,
-     0.04
-    ],
-    [
-     "que",
-     0.08,
-     0.161
-    ],
-    [
-     "l",
-     0.201,
-     0.221
-    ],
-    [
-     "'autre",
-     0.261,
-     0.421
-    ],
-    [
-     "conducteur",
-     0.522,
-     0.923
-    ],
-    [
-     "soit",
-     0.983,
-     1.123
-    ],
-    [
-     "bien",
-     1.144,
-     1.244
-    ],
-    [
-     "assuré.",
-     1.304,
-     1.525
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "D 'accord.",
-   "_deb": 20.177,
-   "_fin": 20.578,
-   "_mots": [
-    [
-     "D",
-     0.0,
-     0.02
-    ],
-    [
-     "'accord.",
-     0.06,
-     0.401
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Que le sinistre survienne à moins de 50 km de votre domicile.",
-   "_deb": 20.779,
-   "_fin": 23.667,
-   "_mots": [
-    [
-     "Que",
-     0.0,
-     0.1
-    ],
-    [
-     "le",
-     0.14,
-     0.2
-    ],
-    [
-     "sinistre",
-     0.321,
-     0.662
-    ],
-    [
-     "survienne",
-     0.762,
-     1.083
-    ],
-    [
-     "à",
-     1.123,
-     1.143
-    ],
-    [
-     "moins",
-     1.163,
-     1.504
-    ],
-    [
-     "de",
-     1.605,
-     1.625
-    ],
-    [
-     "50",
-     1.301,
-     1.601
-    ],
-    [
-     "km",
-     1.705,
-     1.946
-    ],
-    [
-     "de",
-     2.106,
-     2.146
-    ],
-    [
-     "votre",
-     2.186,
-     2.327
-    ],
-    [
-     "domicile.",
-     2.367,
-     2.888
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Ah bon?",
-   "_deb": 23.928,
-   "_fin": 24.24,
-   "_mots": [
-    [
-     "Ah",
-     0.0,
-     0.04
-    ],
-    [
-     "bon",
-     0.121,
-     0.172
-    ],
-    [
-     "?",
-     0.172,
-     0.312
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "En agglomération, un jour de semaine entre 9h et 18h.",
-   "_deb": 24.335,
-   "_fin": 27.235,
-   "_mots": [
-    [
-     "En",
-     0.0,
-     0.041
-    ],
-    [
-     "agglomération,",
-     0.162,
-     0.913
-    ],
-    [
-     "un",
-     1.436,
-     1.496
-    ],
-    [
-     "jour",
-     1.556,
-     1.677
-    ],
-    [
-     "de",
-     1.737,
-     1.797
-    ],
-    [
-     "semaine",
-     1.857,
-     2.098
-    ],
-    [
-     "entre",
-     2.138,
-     2.399
-    ],
-    [
-     "9h",
-     2.479,
-     2.519
-    ],
-    [
-     "et",
-     2.519,
-     2.72
-    ],
-    [
-     "18h.",
-     2.88,
-     2.9
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Ah, quand même!",
-   "_deb": 27.757,
-   "_fin": 28.38,
-   "_mots": [
-    [
-     "Ah,",
+     "Est",
      0.0,
      0.06
     ],
     [
-     "quand",
-     0.16,
-     0.28
-    ],
-    [
-     "même",
-     0.3,
-     0.423
-    ],
-    [
-     "!",
-     0.423,
-     0.623
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Hors jours fériés, et que les conditions météorologiques soient favorables.",
-   "_deb": 28.579,
-   "_fin": 31.888,
-   "_mots": [
-    [
-     "Hors",
-     0.0,
-     0.18
-    ],
-    [
-     "jours",
-     0.22,
-     0.421
-    ],
-    [
-     "fériés,",
-     0.481,
-     0.902
-    ],
-    [
-     "et",
-     1.283,
-     1.344
+     "-ce",
+     0.06,
+     0.141
     ],
     [
      "que",
-     1.384,
-     1.484
+     0.141,
+     0.221
     ],
     [
-     "les",
-     1.544,
-     1.604
+     "tu",
+     0.221,
+     0.281
     ],
     [
-     "conditions",
-     1.644,
-     2.005
+     "veux",
+     0.281,
+     0.382
     ],
     [
-     "météorologiques",
-     2.046,
-     2.687
+     "m",
+     0.382,
+     0.422
     ],
     [
-     "soient",
-     2.707,
-     2.868
+     "'épouser",
+     0.462,
+     0.683
     ],
     [
-     "favorables.",
-     2.888,
-     3.309
+     "?",
+     0.7,
+     0.78
     ]
-   ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "envoyee",
+   "t": "C'est une blague ? Je suis sûre que non.",
+   "_deb": 0.843,
+   "_fin": 2.189,
+   "d": "[skeptical] C'est une blague ? Je suis sûre que non.",
+   "_mots": [
+    [
+     "C",
+     0.0,
+     0.021
+    ],
+    [
+     "'est",
+     0.021,
+     0.101
+    ],
+    [
+     "une",
+     0.101,
+     0.201
+    ],
+    [
+     "blague",
+     0.282,
+     0.497
+    ],
+    [
+     "?",
+     0.497,
+     0.817
+    ],
+    [
+     "Je",
+     0.944,
+     1.005
+    ],
+    [
+     "suis",
+     1.005,
+     1.105
+    ],
+    [
+     "sûr",
+     1.125,
+     1.185
+    ],
+    [
+     "que",
+     1.185,
+     1.246
+    ],
+    [
+     "non.",
+     1.286,
+     1.346
+    ]
+   ],
+   "objet": "telephone"
   },
   {
    "p": "presentateur",
-   "t": "C'est-à-dire?",
-   "_deb": 32.049,
-   "_fin": 32.72,
+   "t": "Waouh, violent. Je suis pas sûr d'encaisser, mais je suis debout.",
+   "_deb": 2.756,
+   "_fin": 5.58,
+   "d": "[hurt] Waouh, violent. Je suis pas sûr d'encaisser, mais je suis debout.",
+   "_mots": [
+    [
+     "Waouh,",
+     0.0,
+     0.225
+    ],
+    [
+     "violent.",
+     0.225,
+     0.45
+    ],
+    [
+     "Je",
+     1.096,
+     1.156
+    ],
+    [
+     "suis",
+     1.156,
+     1.256
+    ],
+    [
+     "pas",
+     1.256,
+     1.317
+    ],
+    [
+     "sûr",
+     1.337,
+     1.397
+    ],
+    [
+     "d",
+     1.437,
+     1.457
+    ],
+    [
+     "'encaisser,",
+     1.457,
+     1.759
+    ],
+    [
+     "mais",
+     1.839,
+     1.94
+    ],
+    [
+     "je",
+     2.522,
+     2.563
+    ],
+    [
+     "suis",
+     2.563,
+     2.643
+    ],
+    [
+     "debout.",
+     2.663,
+     2.824
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "envoyee",
+   "t": "Non mais c'est pas ça, c'est juste que t'es complètement gay.",
+   "_deb": 5.6,
+   "_fin": 7.308,
+   "d": "[explaining] Non mais c'est pas ça, c'est juste que t'es complètement gay.",
+   "_mots": [
+    [
+     "Non",
+     0.0,
+     0.06
+    ],
+    [
+     "mais",
+     0.1,
+     0.181
+    ],
+    [
+     "c",
+     0.201,
+     0.221
+    ],
+    [
+     "'est",
+     0.221,
+     0.281
+    ],
+    [
+     "pas",
+     0.301,
+     0.402
+    ],
+    [
+     "ça,",
+     0.442,
+     0.482
+    ],
+    [
+     "c",
+     0.623,
+     0.643
+    ],
+    [
+     "'est",
+     0.663,
+     0.723
+    ],
+    [
+     "juste",
+     0.743,
+     0.884
+    ],
+    [
+     "que",
+     0.904,
+     0.985
+    ],
+    [
+     "t",
+     1.005,
+     1.025
+    ],
+    [
+     "'es",
+     1.045,
+     1.085
+    ],
+    [
+     "complètement",
+     1.165,
+     1.567
+    ],
+    [
+     "gay.",
+     1.628,
+     1.708
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "De quoi ? Je suis pas gay !",
+   "_deb": 7.429,
+   "_fin": 8.7,
+   "d": "[defensive] De quoi ? Je suis pas gay !",
+   "_mots": [
+    [
+     "De",
+     0.0,
+     0.04
+    ],
+    [
+     "quoi",
+     0.082,
+     0.171
+    ],
+    [
+     "?",
+     0.171,
+     0.651
+    ],
+    [
+     "Je",
+     0.785,
+     0.825
+    ],
+    [
+     "suis",
+     0.845,
+     0.946
+    ],
+    [
+     "pas",
+     0.986,
+     1.066
+    ],
+    [
+     "gay",
+     1.086,
+     1.171
+    ],
+    [
+     "!",
+     1.171,
+     1.271
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "envoyee",
+   "t": "Bah si, t'es gay. Bah non. T'es pas gay ?",
+   "_deb": 8.716,
+   "_fin": 10.704,
+   "d": "[ironic] Bah si, t'es gay. Bah non ? T'es pas gay ?",
+   "_mots": [
+    [
+     "Bah",
+     0.0,
+     0.121
+    ],
+    [
+     "si,",
+     0.583,
+     0.663
+    ],
+    [
+     "t",
+     0.844,
+     0.864
+    ],
+    [
+     "'es",
+     0.864,
+     0.904
+    ],
+    [
+     "gay.",
+     0.944,
+     1.024
+    ],
+    [
+     "Bah",
+     1.125,
+     1.245
+    ],
+    [
+     "non.",
+     1.326,
+     1.426
+    ],
+    [
+     "T",
+     1.547,
+     1.567
+    ],
+    [
+     "'es",
+     1.567,
+     1.607
+    ],
+    [
+     "pas",
+     1.647,
+     1.727
+    ],
+    [
+     "gay.",
+     1.747,
+     1.988
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "envoyee",
+   "t": "Bah non ! Donc prendre une douche avec ton pote Vincent, c'est pour quoi ?",
+   "_deb": 10.704,
+   "_fin": 13.32,
+   "d": "[mocking] Bah non ! Donc prendre une douche avec ton pote Vincent, c'est pour quoi ?",
+   "_mots": [
+    [
+     "Bah",
+     0.0,
+     0.081
+    ],
+    [
+     "non",
+     0.121,
+     0.241
+    ],
+    [
+     "!",
+     0.256,
+     0.456
+    ],
+    [
+     "Donc",
+     0.502,
+     0.623
+    ],
+    [
+     "prendre",
+     0.683,
+     0.844
+    ],
+    [
+     "une",
+     0.904,
+     0.964
+    ],
+    [
+     "douche",
+     1.005,
+     1.188
+    ],
+    [
+     "avec",
+     1.188,
+     1.328
+    ],
+    [
+     "ton",
+     1.389,
+     1.469
+    ],
+    [
+     "pote",
+     1.509,
+     1.67
+    ],
+    [
+     "Vincent,",
+     1.69,
+     1.931
+    ],
+    [
+     "c",
+     1.971,
+     1.991
+    ],
+    [
+     "'est",
+     1.991,
+     2.072
+    ],
+    [
+     "pour",
+     2.072,
+     2.172
+    ],
+    [
+     "quoi",
+     2.213,
+     2.313
+    ],
+    [
+     "?",
+     2.316,
+     2.616
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "envoyee",
+   "t": "Planète attitude pour économiser l'eau ?",
+   "_deb": 13.399,
+   "_fin": 14.645,
+   "d": "[sarcastic] Planète attitude pour économiser l'eau ?",
+   "_mots": [
+    [
+     "Pas",
+     0.0,
+     0.08
+    ],
+    [
+     "nette",
+     0.1,
+     0.281
+    ],
+    [
+     "attitude",
+     0.281,
+     0.603
+    ],
+    [
+     "pour",
+     0.643,
+     0.764
+    ],
+    [
+     "économiser",
+     0.784,
+     1.146
+    ],
+    [
+     "l",
+     1.166,
+     1.186
+    ],
+    [
+     "'eau",
+     1.186,
+     1.221
+    ],
+    [
+     "?",
+     1.221,
+     1.246
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Mais qu'est-ce que tu racontes, c'est jamais arrivé !",
+   "_deb": 14.645,
+   "_fin": 15.94,
+   "d": "[denying] Mais qu'est-ce que tu racontes, c'est jamais arrivé !",
+   "_mots": [
+    [
+     "Mais",
+     0.0,
+     0.08
+    ],
+    [
+     "qu",
+     0.08,
+     0.121
+    ],
+    [
+     "'est",
+     0.121,
+     0.181
+    ],
+    [
+     "-ce",
+     0.181,
+     0.261
+    ],
+    [
+     "que",
+     0.301,
+     0.382
+    ],
+    [
+     "tu",
+     0.382,
+     0.422
+    ],
+    [
+     "racontes,",
+     0.422,
+     1.005
+    ],
+    [
+     "c",
+     1.005,
+     1.025
+    ],
+    [
+     "'est",
+     0.646,
+     0.786
+    ],
+    [
+     "jamais",
+     0.806,
+     1.007
+    ],
+    [
+     "arrivé",
+     1.007,
+     1.195
+    ],
+    [
+     "?",
+     1.195,
+     1.295
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "envoyee",
+   "t": "Je vous ai vus hier, Harry.",
+   "_deb": 15.954,
+   "_fin": 16.798,
+   "d": "[deadpan] Je vous ai vus hier, Harry.",
+   "_mots": [
+    [
+     "Je",
+     0.0,
+     0.04
+    ],
+    [
+     "vous",
+     0.04,
+     0.12
+    ],
+    [
+     "ai",
+     0.141,
+     0.241
+    ],
+    [
+     "vus",
+     0.301,
+     0.342
+    ],
+    [
+     "hier,",
+     0.342,
+     0.522
+    ],
+    [
+     "Harry.",
+     0.522,
+     0.844
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Ok, c'est arrivé une fois, mais...",
+   "_deb": 16.818,
+   "_fin": 17.662,
+   "d": "[embarrassed] Ok, c'est arrivé une fois, mais...",
+   "_mots": [
+    [
+     "Ok,",
+     0.0,
+     0.06
+    ],
+    [
+     "c",
+     0.06,
+     0.08
+    ],
+    [
+     "'est",
+     0.101,
+     0.221
+    ],
+    [
+     "arrivé",
+     0.221,
+     0.402
+    ],
+    [
+     "une",
+     0.442,
+     0.523
+    ],
+    [
+     "fois,",
+     0.543,
+     0.643
+    ],
+    [
+     "mais...",
+     0.744,
+     0.844
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "envoyee",
+   "t": "Vous étiez à poil.",
+   "_deb": 17.763,
+   "_fin": 18.285,
+   "d": "[blunt] Vous étiez à poil.",
+   "_mots": [
+    [
+     "Vous",
+     0.0,
+     0.08
+    ],
+    [
+     "étiez",
+     0.1,
+     0.261
+    ],
+    [
+     "à",
+     0.301,
+     0.321
+    ],
+    [
+     "poil.",
+     0.361,
+     0.522
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Je crois, je sais plus, peut-être.",
+   "_deb": 18.567,
+   "_fin": 19.533,
+   "d": "[hesitant] Je crois, je sais plus, peut-être.",
+   "_mots": [
+    [
+     "Je",
+     0.0,
+     0.06
+    ],
+    [
+     "crois,",
+     0.08,
+     0.221
+    ],
+    [
+     "je",
+     0.341,
+     0.382
+    ],
+    [
+     "sais",
+     0.402,
+     0.422
+    ],
+    [
+     "plus,",
+     0.404,
+     0.545
+    ],
+    [
+     "peut",
+     0.705,
+     0.826
+    ],
+    [
+     "-être.",
+     0.826,
+     0.966
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "envoyee",
+   "t": "Vous vous êtes savonnés.",
+   "_deb": 19.533,
+   "_fin": 20.136,
+   "d": "[insisting] Vous vous êtes savonnés.",
+   "_mots": [
+    [
+     "Vous",
+     0.0,
+     0.081
+    ],
+    [
+     "vous",
+     0.081,
+     0.181
+    ],
+    [
+     "êtes",
+     0.201,
+     0.322
+    ],
+    [
+     "savonnés.",
+     0.342,
+     0.603
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Ah oui, sous la douche, on se savonne, oui.",
+   "_deb": 20.196,
+   "_fin": 21.582,
+   "d": "[flustered] Ah oui, sous la douche, on se savonne, oui.",
+   "_mots": [
+    [
+     "Ah",
+     0.0,
+     0.241
+    ],
+    [
+     "oui,",
+     0.241,
+     0.322
+    ],
+    [
+     "sous",
+     0.422,
+     0.542
+    ],
+    [
+     "la",
+     0.542,
+     0.623
+    ],
+    [
+     "douche,",
+     0.643,
+     0.824
+    ],
+    [
+     "on",
+     0.884,
+     0.924
+    ],
+    [
+     "se",
+     0.964,
+     1.004
+    ],
+    [
+     "savonne,",
+     1.004,
+     1.286
+    ],
+    [
+     "oui.",
+     1.306,
+     1.386
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "envoyee",
+   "t": "Deux mecs qui prennent leur douche ensemble en se savonnant, ça fait très très gay.",
+   "_deb": 21.763,
+   "_fin": 24.637,
+   "d": "[teasing] Deux mecs qui prennent leur douche ensemble en se savonnant, ça fait très très gay.",
+   "_mots": [
+    [
+     "Deux",
+     0.0,
+     0.1
+    ],
+    [
+     "mecs",
+     0.14,
+     0.321
+    ],
+    [
+     "qui",
+     0.341,
+     0.402
+    ],
+    [
+     "prennent",
+     0.462,
+     0.683
+    ],
+    [
+     "leur",
+     0.683,
+     0.783
+    ],
+    [
+     "douche",
+     0.803,
+     1.004
+    ],
+    [
+     "ensemble",
+     1.125,
+     1.406
+    ],
+    [
+     "en",
+     1.546,
+     1.627
+    ],
+    [
+     "se",
+     1.627,
+     1.647
+    ],
+    [
+     "savonnant,",
+     1.428,
+     1.729
+    ],
+    [
+     "ça",
+     1.77,
+     1.85
+    ],
+    [
+     "fait",
+     1.89,
+     2.011
+    ],
+    [
+     "très",
+     2.292,
+     2.553
+    ],
+    [
+     "très",
+     2.593,
+     2.774
+    ],
+    [
+     "gay.",
+     2.794,
+     2.874
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Le ballon d'eau chaude était vide, donc oui, on a partagé l'eau chaude.",
+   "_deb": 24.858,
+   "_fin": 27.128,
+   "d": "[justifying] Le ballon d'eau chaude était vide, donc oui, on a partagé l'eau chaude.",
+   "_mots": [
+    [
+     "Le",
+     0.0,
+     0.06
+    ],
+    [
+     "ballon",
+     0.121,
+     0.281
+    ],
+    [
+     "d",
+     0.321,
+     0.341
+    ],
+    [
+     "'eau",
+     0.341,
+     0.422
+    ],
+    [
+     "chaude",
+     0.442,
+     0.603
+    ],
+    [
+     "était",
+     0.643,
+     0.803
+    ],
+    [
+     "vide,",
+     0.844,
+     1.004
+    ],
+    [
+     "donc",
+     1.044,
+     1.185
+    ],
+    [
+     "oui,",
+     1.306,
+     1.386
+    ],
+    [
+     "on",
+     1.466,
+     1.547
+    ],
+    [
+     "a",
+     1.587,
+     1.607
+    ],
+    [
+     "partagé",
+     1.667,
+     1.948
+    ],
+    [
+     "l",
+     1.988,
+     2.029
+    ],
+    [
+     "'eau",
+     2.029,
+     2.089
+    ],
+    [
+     "chaude.",
+     2.109,
+     2.27
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Mais ça veut pas dire que je suis gay.",
+   "_deb": 27.128,
+   "_fin": 28.115,
+   "d": "[stubborn] Mais ça veut pas dire que je suis gay.",
+   "_mots": [
+    [
+     "Mais",
+     0.0,
+     0.08
+    ],
+    [
+     "ça",
+     0.1,
+     0.18
+    ],
+    [
+     "veut",
+     0.18,
+     0.281
+    ],
+    [
+     "pas",
+     0.281,
+     0.381
+    ],
+    [
+     "dire",
+     0.384,
+     0.504
+    ],
+    [
+     "que",
+     0.524,
+     0.605
+    ],
+    [
+     "je",
+     0.625,
+     0.665
+    ],
+    [
+     "suis",
+     0.665,
+     0.846
+    ],
+    [
+     "gay.",
+     0.866,
+     0.987
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "envoyee",
+   "t": "Y a un poster de qui dans ta chambre ?",
+   "_deb": 28.195,
+   "_fin": 29.26,
+   "d": "[probing] Y a un poster de qui dans ta chambre ?",
+   "_mots": [
+    [
+     "Y",
+     0.0,
+     0.02
+    ],
+    [
+     "a",
+     0.04,
+     0.06
+    ],
+    [
+     "un",
+     0.141,
+     0.181
+    ],
+    [
+     "poster",
+     0.201,
+     0.422
+    ],
+    [
+     "de",
+     0.462,
+     0.503
+    ],
+    [
+     "qui",
+     0.543,
+     0.603
+    ],
+    [
+     "dans",
+     0.704,
+     0.784
+    ],
+    [
+     "ta",
+     0.804,
+     0.864
+    ],
+    [
+     "chambre",
+     0.885,
+     1.025
+    ],
+    [
+     "?",
+     1.025,
+     1.065
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Céline Dion, j'adore. Mais ça veut rien dire.",
+   "_deb": 29.301,
+   "_fin": 30.728,
+   "d": "[proud] Céline Dion, j'adore. Mais ça veut rien dire.",
+   "_mots": [
+    [
+     "Céline",
+     0.0,
+     0.201
+    ],
+    [
+     "Dion,",
+     0.201,
+     0.362
+    ],
+    [
+     "j",
+     0.502,
+     0.522
+    ],
+    [
+     "'adore.",
+     0.543,
+     0.764
+    ],
+    [
+     "Mais",
+     0.864,
+     0.945
+    ],
+    [
+     "ça",
+     0.945,
+     0.985
+    ],
+    [
+     "veut",
+     1.025,
+     1.105
+    ],
+    [
+     "rien",
+     1.146,
+     1.226
+    ],
+    [
+     "dire.",
+     1.286,
+     1.427
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "envoyee",
+   "t": "Et de qui d'autre ?",
+   "_deb": 30.808,
+   "_fin": 31.24,
+   "d": "[smug] Et de qui d'autre ?",
+   "_mots": [
+    [
+     "Et",
+     0.0,
+     0.061
+    ],
+    [
+     "de",
+     0.083,
+     0.144
+    ],
+    [
+     "qui",
+     0.184,
+     0.244
+    ],
+    [
+     "d",
+     0.284,
+     0.305
+    ],
+    [
+     "'autre",
+     0.305,
+     0.372
+    ],
+    [
+     "?",
+     0.372,
+     0.432
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Ricky Martin, mais j'adore l'artiste, c'est tout.",
+   "_deb": 31.273,
+   "_fin": 32.721,
+   "d": "[defensive] Ricky Martin, mais j'adore l'artiste, c'est tout.",
+   "_mots": [
+    [
+     "Ricky",
+     0.0,
+     0.181
+    ],
+    [
+     "Martin,",
+     0.221,
+     0.463
+    ],
+    [
+     "mais",
+     0.503,
+     0.583
+    ],
+    [
+     "j",
+     0.583,
+     0.603
+    ],
+    [
+     "'adore",
+     0.644,
+     0.804
+    ],
+    [
+     "l",
+     0.804,
+     0.845
+    ],
+    [
+     "'artiste,",
+     0.885,
+     1.166
+    ],
+    [
+     "c",
+     1.227,
+     1.267
+    ],
+    [
+     "'est",
+     1.267,
+     1.347
+    ],
+    [
+     "tout.",
+     1.367,
+     1.448
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "C'est hyper réducteur ta façon de penser, je trouve.",
+   "_deb": 32.741,
+   "_fin": 34.389,
+   "d": "[annoyed] C'est hyper réducteur ta façon de penser, je trouve.",
    "_mots": [
     [
      "C",
@@ -749,1376 +1295,1483 @@
     ],
     [
      "'est",
-     0.06,
-     0.16
+     0.02,
+     0.1
     ],
     [
-     "-à",
-     0.16,
-     0.22
-    ],
-    [
-     "-dire",
-     0.262,
-     0.391
-    ],
-    [
-     "?",
-     0.391,
-     0.671
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Ah bah peu importe, pluie, neige, verglas, brouillard, vent de plus de 20 km/heure.",
-   "_deb": 32.832,
-   "_fin": 37.825,
-   "_mots": [
-    [
-     "Ah",
-     0.0,
-     0.06
-    ],
-    [
-     "bah",
-     0.06,
-     0.18
-    ],
-    [
-     "peu",
-     0.18,
-     0.281
-    ],
-    [
-     "importe,",
-     0.341,
-     0.702
-    ],
-    [
-     "pluie,",
-     1.043,
-     1.524
-    ],
-    [
-     "neige,",
-     1.684,
-     2.105
-    ],
-    [
-     "verglas,",
-     2.286,
-     2.787
-    ],
-    [
-     "brouillard,",
-     2.867,
-     3.429
-    ],
-    [
-     "vent",
-     3.73,
-     3.85
-    ],
-    [
-     "de",
-     3.85,
-     3.89
-    ],
-    [
-     "plus",
-     3.97,
-     4.07
-    ],
-    [
-     "de",
-     4.07,
-     4.108
-    ],
-    [
-     "20",
-     4.108,
-     4.248
-    ],
-    [
-     "km",
-     4.271,
-     4.512
-    ],
-    [
-     "heure.",
-     4.652,
-     4.993
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Et si toutes ces conditions sont réunies, là vous me remboursez?",
-   "_deb": 38.146,
-   "_fin": 40.3,
-   "_mots": [
-    [
-     "Et",
-     0.0,
-     0.06
-    ],
-    [
-     "si",
+     "hyper",
      0.12,
-     0.18
+     0.362
     ],
     [
-     "toutes",
-     0.22,
-     0.401
-    ],
-    [
-     "ces",
-     0.441,
-     0.521
-    ],
-    [
-     "conditions",
-     0.541,
-     0.902
-    ],
-    [
-     "sont",
-     0.962,
-     1.082
-    ],
-    [
-     "réunies,",
-     1.102,
-     1.383
-    ],
-    [
-     "là",
-     1.403,
-     1.483
-    ],
-    [
-     "vous",
-     1.485,
-     1.585
-    ],
-    [
-     "me",
-     1.605,
-     1.645
-    ],
-    [
-     "remboursez",
-     1.665,
-     2.026
-    ],
-    [
-     "?",
-     2.034,
-     2.154
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Ah oui, là par contre, on vous rembourse intégralement, à hauteur d'un tiers du montant des réparations, monsieur.",
-   "_deb": 40.353,
-   "_fin": 46.588,
-   "_mots": [
-    [
-     "Ah",
-     0.0,
-     0.06
-    ],
-    [
-     "oui,",
-     0.1,
-     0.18
-    ],
-    [
-     "là",
-     0.441,
-     0.481
-    ],
-    [
-     "par",
-     0.601,
-     0.701
-    ],
-    [
-     "contre,",
-     0.761,
-     0.982
-    ],
-    [
-     "on",
-     0.982,
-     1.062
-    ],
-    [
-     "vous",
-     1.062,
-     1.162
-    ],
-    [
-     "rembourse",
-     1.203,
-     1.644
-    ],
-    [
-     "intégralement,",
-     2.065,
-     2.706
-    ],
-    [
-     "à",
-     2.807,
-     2.827
-    ],
-    [
-     "hauteur",
-     3.488,
-     3.849
-    ],
-    [
-     "d",
-     3.95,
-     3.97
-    ],
-    [
-     "'un",
-     3.99,
-     4.391
-    ],
-    [
-     "tiers",
-     4.471,
-     4.732
-    ],
-    [
-     "du",
-     4.792,
-     4.872
-    ],
-    [
-     "montant",
-     4.932,
-     5.173
-    ],
-    [
-     "des",
-     5.233,
-     5.313
-    ],
-    [
-     "réparations,",
-     5.353,
-     5.895
-    ],
-    [
-     "monsieur.",
-     5.955,
-     6.235
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Un tiers? Mais vous m'avez dit 100 %?",
-   "_deb": 46.729,
-   "_fin": 48.24,
-   "_mots": [
-    [
-     "Un",
-     0.0,
-     0.06
-    ],
-    [
-     "tiers",
-     0.12,
-     0.251
-    ],
-    [
-     "?",
-     0.251,
-     0.342
-    ],
-    [
-     "Mais",
-     0.342,
-     0.462
-    ],
-    [
-     "vous",
-     0.462,
-     0.563
-    ],
-    [
-     "m",
-     0.563,
-     0.603
-    ],
-    [
-     "'aviez",
-     0.623,
-     0.783
-    ],
-    [
-     "dit",
-     0.823,
-     0.891
-    ],
-    [
-     "100",
-     0.891,
-     1.111
-    ],
-    [
-     "%",
-     1.111,
-     1.311
-    ],
-    [
-     "?",
-     1.311,
-     1.511
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "100 % du tiers indemnisable, bien sûr. Ensuite, vous payez simplement la franchise qui reste, et puis c'est bon.",
-   "_deb": 48.24,
-   "_fin": 54.032,
-   "_mots": [
-    [
-     "100",
-     0.0,
-     0.34
-    ],
-    [
-     "%",
-     0.34,
-     0.72
-    ],
-    [
-     "du",
-     0.837,
-     0.897
-    ],
-    [
-     "tiers",
-     0.977,
-     1.178
-    ],
-    [
-     "indemnisable,",
-     1.238,
-     1.96
-    ],
-    [
-     "bien",
-     2.341,
-     2.481
-    ],
-    [
-     "sûr.",
-     2.561,
-     2.802
-    ],
-    [
-     "Ensuite,",
-     3.223,
-     3.484
-    ],
-    [
-     "vous",
-     3.484,
-     3.604
-    ],
-    [
-     "payez",
-     3.624,
-     3.805
-    ],
-    [
-     "simplement",
-     3.845,
-     4.226
-    ],
-    [
-     "la",
-     4.286,
-     4.346
-    ],
-    [
-     "franchise",
-     4.407,
-     4.828
-    ],
-    [
-     "qui",
-     4.888,
-     4.968
-    ],
-    [
-     "reste,",
-     5.048,
-     5.289
-    ],
-    [
-     "et",
-     5.349,
-     5.409
-    ],
-    [
-     "puis",
-     5.411,
-     5.531
-    ],
-    [
-     "c",
-     5.551,
-     5.572
-    ],
-    [
-     "'est",
-     5.592,
-     5.652
-    ],
-    [
-     "bon.",
-     5.692,
-     5.792
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Et elle est à combien?",
-   "_deb": 54.253,
-   "_fin": 55.16,
-   "_mots": [
-    [
-     "Et",
-     0.0,
-     0.04
-    ],
-    [
-     "elle",
-     0.08,
-     0.221
-    ],
-    [
-     "est",
-     0.241,
-     0.301
-    ],
-    [
-     "à",
-     0.301,
-     0.321
-    ],
-    [
-     "combien",
-     0.402,
-     0.567
-    ],
-    [
-     "?",
-     0.567,
-     0.907
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Environ deux tiers du montant des réparations.",
-   "_deb": 55.277,
-   "_fin": 57.525,
-   "_mots": [
-    [
-     "Environ",
-     0.0,
-     0.281
-    ],
-    [
-     "deux",
-     0.401,
-     0.542
-    ],
-    [
-     "tiers",
-     0.602,
-     0.843
-    ],
-    [
-     "du",
-     1.124,
-     1.184
-    ],
-    [
-     "montant",
-     1.264,
-     1.545
-    ],
-    [
-     "des",
-     1.605,
-     1.686
-    ],
-    [
-     "réparations.",
-     1.726,
-     2.248
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Mais si je paye tout tout seul, quel intérêt?",
-   "_deb": 57.745,
-   "_fin": 59.38,
-   "_mots": [
-    [
-     "Mais",
-     0.0,
-     0.101
-    ],
-    [
-     "si",
-     0.161,
-     0.221
-    ],
-    [
-     "je",
-     0.281,
-     0.342
-    ],
-    [
-     "paye",
+     "réducteur",
      0.422,
-     0.562
+     0.824
     ],
     [
-     "tout",
-     0.582,
-     0.703
+     "ta",
+     0.864,
+     0.924
     ],
     [
-     "tout",
-     0.723,
-     0.823
-    ],
-    [
-     "seul,",
-     0.883,
-     0.984
-    ],
-    [
-     "quel",
-     1.024,
-     1.164
-    ],
-    [
-     "intérêt",
-     1.206,
-     1.475
-    ],
-    [
-     "?",
-     1.475,
-     1.635
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Bah, la tranquillité de vous dire, je suis assuré.",
-   "_deb": 59.413,
-   "_fin": 61.94,
-   "_mots": [
-    [
-     "Bah,",
-     0.0,
-     0.06
-    ],
-    [
-     "la",
-     0.28,
-     0.361
-    ],
-    [
-     "tranquillité",
-     0.441,
-     1.003
+     "façon",
+     0.965,
+     1.105
     ],
     [
      "de",
-     1.103,
-     1.143
+     1.146,
+     1.186
     ],
     [
-     "vous",
-     1.203,
-     1.324
-    ],
-    [
-     "dire,",
-     1.344,
-     1.564
+     "penser,",
+     1.226,
+     1.387
     ],
     [
      "je",
-     1.805,
-     1.885
+     1.427,
+     1.487
     ],
     [
-     "suis",
-     1.986,
-     2.166
-    ],
-    [
-     "assuré.",
-     2.226,
-     2.527
+     "trouve.",
+     1.507,
+     1.648
     ]
-   ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "envoyee",
+   "t": "D'accord, si tu le dis. Mais il serait peut-être temps de sortir du placard, là.",
+   "_deb": 34.431,
+   "_fin": 36.783,
+   "d": "[condescending] D'accord, si tu le dis. Mais il serait peut-être temps de sortir du placard, là.",
+   "_mots": [
+    [
+     "D",
+     0.0,
+     0.021
+    ],
+    [
+     "'accord,",
+     0.041,
+     0.282
+    ],
+    [
+     "si",
+     0.302,
+     0.342
+    ],
+    [
+     "tu",
+     0.342,
+     0.423
+    ],
+    [
+     "le",
+     0.423,
+     0.463
+    ],
+    [
+     "dis.",
+     0.483,
+     0.664
+    ],
+    [
+     "Mais",
+     0.925,
+     1.005
+    ],
+    [
+     "il",
+     1.026,
+     1.066
+    ],
+    [
+     "serait",
+     1.126,
+     1.247
+    ],
+    [
+     "peut",
+     1.247,
+     1.327
+    ],
+    [
+     "-être",
+     1.327,
+     1.448
+    ],
+    [
+     "temps",
+     1.468,
+     1.568
+    ],
+    [
+     "de",
+     1.588,
+     1.629
+    ],
+    [
+     "sortir",
+     1.629,
+     1.85
+    ],
+    [
+     "du",
+     1.89,
+     1.95
+    ],
+    [
+     "placard,",
+     1.99,
+     2.272
+    ],
+    [
+     "là.",
+     2.312,
+     2.352
+    ]
+   ],
+   "objet": "telephone"
   },
   {
    "p": "presentateur",
-   "t": "Enfin, ça n'a pas de prix,",
-   "_deb": 62.081,
-   "_fin": 62.983,
+   "t": "Mais arrête, je te dis que je suis pas gay, je le sais quand même.",
+   "_deb": 36.864,
+   "_fin": 38.935,
+   "d": "[denying] Mais arrête, je te dis que je suis pas gay, je le sais quand même.",
    "_mots": [
     [
-     "Enfin,",
+     "Mais",
      0.0,
      0.1
     ],
     [
-     "ça",
-     0.12,
-     0.18
+     "arrête,",
+     0.181,
+     0.442
     ],
     [
-     "n",
-     0.28,
-     0.301
+     "je",
+     0.502,
+     0.583
     ],
     [
-     "'a",
-     0.341,
-     0.361
+     "te",
+     0.583,
+     0.623
+    ],
+    [
+     "dis",
+     0.623,
+     0.723
+    ],
+    [
+     "que",
+     0.743,
+     0.824
+    ],
+    [
+     "je",
+     0.884,
+     0.985
+    ],
+    [
+     "suis",
+     1.065,
+     1.085
     ],
     [
      "pas",
-     0.401,
-     0.501
+     1.067,
+     1.168
     ],
     [
-     "de",
-     0.521,
-     0.581
+     "gay,",
+     1.188,
+     1.288
     ],
     [
-     "prix,",
-     0.622,
-     0.902
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "ça, monsieur, quand même.",
-   "_deb": 63.104,
-   "_fin": 63.886,
-   "_mots": [
-    [
-     "ça,",
-     0.0,
-     0.04
+     "je",
+     1.389,
+     1.449
     ],
     [
-     "monsieur,",
-     0.04,
-     0.321
+     "le",
+     1.509,
+     1.549
+    ],
+    [
+     "sais",
+     1.61,
+     1.73
     ],
     [
      "quand",
-     0.381,
-     0.501
+     1.77,
+     1.891
     ],
     [
      "même.",
-     0.541,
-     0.782
+     1.931,
+     2.071
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "envoyee",
+   "t": "Ok, alors viens on couche ensemble, là, tout de suite, maintenant.",
+   "_deb": 39.016,
+   "_fin": 40.984,
+   "d": "[challenging] Ok, alors viens on couche ensemble, là, tout de suite, maintenant.",
+   "_mots": [
+    [
+     "Ok,",
+     0.0,
+     0.1
+    ],
+    [
+     "alors",
+     0.662,
+     0.823
+    ],
+    [
+     "viens",
+     0.843,
+     0.984
+    ],
+    [
+     "on",
+     0.984,
+     1.024
+    ],
+    [
+     "couche",
+     1.024,
+     1.164
+    ],
+    [
+     "ensemble,",
+     1.205,
+     1.426
+    ],
+    [
+     "là,",
+     1.426,
+     1.466
+    ],
+    [
+     "tout",
+     1.506,
+     1.586
+    ],
+    [
+     "de",
+     1.586,
+     1.626
+    ],
+    [
+     "suite,",
+     1.626,
+     1.747
+    ],
+    [
+     "maintenant.",
+     1.747,
+     1.968
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Mais quoi, maintenant, là ? J'ai une tendinite.",
+   "_deb": 41.004,
+   "_fin": 42.672,
+   "d": "[panicked] Mais quoi, maintenant, là ? J'ai une tendinite.",
+   "_mots": [
+    [
+     "Mais",
+     0.0,
+     0.14
+    ],
+    [
+     "que,",
+     0.14,
+     0.221
+    ],
+    [
+     "maintenant,",
+     0.542,
+     0.763
+    ],
+    [
+     "là",
+     0.803,
+     0.843
+    ],
+    [
+     "?",
+     0.856,
+     0.996
+    ],
+    [
+     "J",
+     1.185,
+     1.205
+    ],
+    [
+     "'ai",
+     1.386,
+     1.406
+    ],
+    [
+     "une",
+     1.207,
+     1.287
+    ],
+    [
+     "tendinite.",
+     1.327,
+     1.668
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "envoyee",
+   "t": "Ça, c'est pas vraiment la réponse d'un hétéro célibataire.",
+   "_deb": 42.793,
+   "_fin": 44.84,
+   "d": "[amused] Ça, c'est pas vraiment la réponse d'un hétéro célibataire.",
+   "_mots": [
+    [
+     "Ça,",
+     0.0,
+     0.08
+    ],
+    [
+     "c",
+     0.14,
+     0.16
+    ],
+    [
+     "'est",
+     0.18,
+     0.261
+    ],
+    [
+     "pas",
+     0.441,
+     0.541
+    ],
+    [
+     "vraiment",
+     0.582,
+     0.822
+    ],
+    [
+     "la",
+     0.863,
+     0.923
+    ],
+    [
+     "réponse",
+     0.963,
+     1.204
+    ],
+    [
+     "d",
+     1.204,
+     1.244
+    ],
+    [
+     "'un",
+     1.264,
+     1.304
+    ],
+    [
+     "hétéro",
+     1.344,
+     1.585
+    ],
+    [
+     "-célibataire.",
+     1.625,
+     2.047
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Quoi, comment ça, les hétéro célibataires, ils sont forcément...",
+   "_deb": 44.84,
+   "_fin": 46.786,
+   "d": "[confused] Quoi, comment ça, les hétéro célibataires, ils sont forcément...",
+   "_mots": [
+    [
+     "Quoi,",
+     0.0,
+     0.12
+    ],
+    [
+     "comment",
+     0.12,
+     0.301
+    ],
+    [
+     "ça,",
+     0.361,
+     0.401
+    ],
+    [
+     "les",
+     0.481,
+     0.541
+    ],
+    [
+     "hétéro",
+     0.581,
+     0.802
+    ],
+    [
+     "célibataires,",
+     0.842,
+     1.324
+    ],
+    [
+     "ils",
+     1.324,
+     1.384
+    ],
+    [
+     "sont",
+     1.404,
+     1.505
+    ],
+    [
+     "forcément...",
+     1.545,
+     1.946
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "envoyee",
+   "t": "En chien, ouais. Des vrais chacals !",
+   "_deb": 46.806,
+   "_fin": 48.52,
+   "d": "[cynical] En chien, ouais. Des vrais chacals !",
+   "_mots": [
+    [
+     "En",
+     0.0,
+     0.201
+    ],
+    [
+     "chien,",
+     0.642,
+     0.743
+    ],
+    [
+     "ouais.",
+     0.823,
+     1.144
+    ],
+    [
+     "Des",
+     1.149,
+     1.231
+    ],
+    [
+     "vraies,",
+     1.231,
+     1.373
+    ],
+    [
+     "t",
+     1.394,
+     1.414
+    ],
+    [
+     "'es",
+     1.435,
+     1.475
+    ],
+    [
+     "quel",
+     1.516,
+     1.614
+    ],
+    [
+     "?",
+     1.614,
+     1.714
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "C'est pas faux.",
+   "_deb": 50.513,
+   "_fin": 50.815,
+   "d": "[defeated] C'est pas faux.",
+   "_mots": [
+    [
+     "C",
+     0.0,
+     0.02
+    ],
+    [
+     "'est",
+     0.041,
+     0.101
+    ],
+    [
+     "pas",
+     0.101,
+     0.181
+    ],
+    [
+     "faux.",
+     0.201,
+     0.302
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "envoyee",
+   "t": "Rappelle-moi, comment tu gagnes ta vie ?",
+   "_deb": 50.915,
+   "_fin": 52.04,
+   "d": "[questioning] Rappelle-moi, comment tu gagnes ta vie ?",
+   "_mots": [
+    [
+     "Rappelle",
+     0.0,
+     0.242
+    ],
+    [
+     "-moi,",
+     0.242,
+     0.342
+    ],
+    [
+     "comment",
+     0.402,
+     0.603
+    ],
+    [
+     "tu",
+     0.684,
+     0.724
+    ],
+    [
+     "gagnes",
+     0.764,
+     0.925
+    ],
+    [
+     "ta",
+     0.945,
+     1.005
+    ],
+    [
+     "vie",
+     1.046,
+     1.066
+    ],
+    [
+     "?",
+     1.065,
+     1.125
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Bah, je suis drag queen aux Lapins Roses, tu le sais bien.",
+   "_deb": 52.041,
+   "_fin": 53.448,
+   "d": "[matter_of_fact] Bah, je suis drag queen aux Lapins Roses, tu le sais bien.",
+   "_mots": [
+    [
+     "Bah,",
+     0.0,
+     0.08
+    ],
+    [
+     "je",
+     0.08,
+     0.121
+    ],
+    [
+     "suis",
+     0.121,
+     0.201
+    ],
+    [
+     "drag",
+     0.201,
+     0.342
+    ],
+    [
+     "queen",
+     0.402,
+     0.543
+    ],
+    [
+     "aux",
+     0.563,
+     0.643
+    ],
+    [
+     "Lapins",
+     0.663,
+     0.864
+    ],
+    [
+     "Roses,",
+     0.885,
+     1.065
+    ],
+    [
+     "tu",
+     1.065,
+     1.146
+    ],
+    [
+     "le",
+     1.166,
+     1.206
+    ],
+    [
+     "sais",
+     1.206,
+     1.287
+    ],
+    [
+     "bien.",
+     1.307,
+     1.407
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "envoyee",
+   "t": "Ah oui, voilà. T'es une queen ? Bah ouais.",
+   "_deb": 53.529,
+   "_fin": 55.455,
+   "d": "[satisfied] Ah oui, voilà. T'es une queen ? Bah ouais.",
+   "_mots": [
+    [
+     "Ah",
+     0.0,
+     0.02
+    ],
+    [
+     "oui,",
+     -0.157,
+     0.027
+    ],
+    [
+     "voilà.",
+     0.171,
+     0.315
+    ],
+    [
+     "T",
+     1.142,
+     1.163
+    ],
+    [
+     "'es",
+     1.183,
+     1.223
+    ],
+    [
+     "une",
+     1.263,
+     1.323
+    ],
+    [
+     "queen",
+     1.363,
+     1.491
+    ],
+    [
+     "?",
+     1.491,
+     1.631
+    ],
+    [
+     "Bah",
+     1.644,
+     1.705
+    ],
+    [
+     "ouais.",
+     1.705,
+     1.926
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "envoyee",
+   "t": "Bah ouais.",
+   "_deb": 55.595,
+   "_fin": 55.816,
+   "d": "[confirming] Bah ouais.",
+   "_mots": [
+    [
+     "Bah",
+     0.0,
+     0.101
+    ],
+    [
+     "ouais.",
+     0.101,
+     0.221
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Ah ouais. Et ouais. Putain, je l'avais pas vue venir, celle-là.",
+   "_deb": 56.097,
+   "_fin": 58.928,
+   "d": "[epiphany] Ah ouais. Et ouais. Putain, je l'avais pas vue venir, celle-là.",
+   "_mots": [
+    [
+     "Ah",
+     0.0,
+     0.08
+    ],
+    [
+     "ouais.",
+     0.321,
+     0.502
+    ],
+    [
+     "Et",
+     0.864,
+     0.944
+    ],
+    [
+     "ouais.",
+     1.165,
+     1.386
+    ],
+    [
+     "Putain,",
+     1.426,
+     1.827
+    ],
+    [
+     "je",
+     1.847,
+     1.908
+    ],
+    [
+     "l",
+     1.928,
+     1.948
+    ],
+    [
+     "'avais",
+     1.948,
+     2.088
+    ],
+    [
+     "pas",
+     2.088,
+     2.169
+    ],
+    [
+     "vue",
+     2.169,
+     2.289
+    ],
+    [
+     "venir,",
+     2.309,
+     2.45
+    ],
+    [
+     "celle",
+     2.51,
+     2.671
+    ],
+    [
+     "-là.",
+     2.771,
+     2.831
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "envoyee",
+   "t": "Tu veux qu'on appelle Vincent ?",
+   "_deb": 58.928,
+   "_fin": 60.14,
+   "d": "[helpful] Tu veux qu'on appelle Vincent ?",
+   "objet": "telephone",
+   "_mots": [
+    [
+     "Tu",
+     0.0,
+     0.041
+    ],
+    [
+     "veux",
+     0.041,
+     0.121
+    ],
+    [
+     "qu",
+     0.121,
+     0.164
+    ],
+    [
+     "'on",
+     0.164,
+     0.245
+    ],
+    [
+     "appelle",
+     0.265,
+     0.467
+    ],
+    [
+     "Vincent",
+     0.467,
+     0.672
+    ],
+    [
+     "?",
+     0.672,
+     1.212
     ]
    ]
   },
   {
    "p": "presentateur",
-   "t": "Mais vous assurez quoi, du coup?",
-   "_deb": 63.966,
-   "_fin": 65.52,
+   "t": "Je veux bien, ouais.",
+   "_deb": 60.444,
+   "_fin": 61.11,
+   "d": "[resigned] Je veux bien, ouais.",
+   "chute": true,
    "_mots": [
     [
-     "Mais",
-     0.0,
-     0.361
-    ],
-    [
-     "vous",
-     0.482,
-     0.582
-    ],
-    [
-     "assurez",
-     0.642,
-     0.963
-    ],
-    [
-     "quoi,",
-     0.985,
-     1.106
-    ],
-    [
-     "du",
-     1.186,
-     1.246
-    ],
-    [
-     "coup",
-     1.306,
-     1.414
-    ],
-    [
-     "?",
-     1.414,
-     1.554
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Ah bah on va s'assurer que les prélèvements passent bien tous les mois, oui.",
-   "_deb": 65.593,
-   "_fin": 68.183,
-   "_mots": [
-    [
-     "Ah",
+     "Je",
      0.0,
      0.041
     ],
     [
-     "bah",
+     "veux",
      0.041,
-     0.101
+     0.141
     ],
     [
-     "on",
-     0.121,
-     0.161
+     "bien,",
+     0.162,
+     0.283
     ],
     [
-     "va",
-     0.221,
-     0.282
-    ],
-    [
-     "s",
-     0.382,
-     0.402
-    ],
-    [
-     "'assurer",
-     0.442,
-     0.763
-    ],
-    [
-     "que",
-     0.824,
-     0.884
-    ],
-    [
-     "les",
-     0.944,
-     1.024
-    ],
-    [
-     "prélèvements",
-     1.044,
-     1.526
-    ],
-    [
-     "passent",
-     1.566,
-     1.807
-    ],
-    [
-     "bien",
-     1.827,
-     1.948
-    ],
-    [
-     "tous",
-     2.008,
-     2.128
-    ],
-    [
-     "les",
-     2.149,
-     2.229
-    ],
-    [
-     "mois,",
-     2.269,
-     2.41
-    ],
-    [
-     "oui.",
-     2.51,
-     2.59
+     "ouais.",
+     0.323,
+     0.666
     ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Ça, par contre, on vous le garantit.",
-   "_deb": 68.364,
-   "_fin": 70.226,
-   "chute": true,
-   "_mots": [
-    [
-     "Ça,",
-     0.0,
-     0.06
-    ],
-    [
-     "par",
-     0.181,
-     0.281
-    ],
-    [
-     "contre,",
-     0.361,
-     0.622
-    ],
-    [
-     "on",
-     1.124,
-     1.164
-    ],
-    [
-     "vous",
-     1.224,
-     1.325
-    ],
-    [
-     "le",
-     1.345,
-     1.392
-    ],
-    [
-     "garantit.",
-     1.392,
-     1.862
-    ]
-   ]
+   ],
+   "objet": "telephone"
   }
  ],
  "bandeau": [],
  "gag": null,
- "legende": "Un client découvre les subtilités de son contrat d'assurance avec un conseiller peu transparent.",
+ "legende": "Quand elle te prouve par A + B que tu n'es pas vraiment fait pour elle.",
  "hashtags": [
   "petitsdramas",
-  "assurance",
-  "vehicule",
-  "contrat",
   "humour",
-  "scepticisme",
-  "argent"
+  "comingout",
+  "dragqueen",
+  "revelation"
  ],
  "sources": [
-  "https://www.tiktok.com/@vignianimation/video/7695489464012934433"
+  "https://www.tiktok.com/@eliotlehanneur/video/7694995607332670742"
  ],
  "decoupage": [
   {
    "scene": "1",
    "repliques": [
     0,
-    1,
     2,
-    3,
     4,
-    5,
-    6,
-    7,
-    8
+    8,
+    10,
+    12,
+    14,
+    16,
+    17,
+    19,
+    21,
+    22,
+    24,
+    26,
+    28,
+    30,
+    32,
+    35,
+    37
    ],
    "lieu": "",
    "son": "",
-   "duree": 0.0,
-   "decor": "bureau_assurance avec affiche 'Assurance Véhicules', bureau en bois, chaise, ordinateur, étagères avec dossiers, lampe de bureau, plante verte.",
-   "titre": "La formule premium"
+   "duree": 0,
+   "decor": "quiet city street at dusk, parked car at the curb, sidewalk, street lamps, shop fronts"
   },
   {
    "scene": "2",
    "repliques": [
+    1,
+    3,
+    5,
+    6,
+    7,
     9,
-    10,
     11,
-    12,
     13,
-    14,
     15,
-    16,
-    17,
     18,
-    19,
     20,
-    21,
-    22,
     23,
-    24,
     25,
-    26
+    27,
+    29,
+    31,
+    33,
+    34,
+    36
    ],
    "lieu": "",
    "son": "",
-   "duree": 0.0,
-   "decor": "même bureau_assurance, mais avec un tableau noir et des calculs écrits, une tasse de café sur le bureau, un téléphone et une calculatrice.",
-   "titre": "Les détails cachés"
+   "duree": 0,
+   "decor": "cozy living room, sofa, posters on the wall, coffee table, lamp, television"
   }
  ],
  "studio": {
-  "moment": "jour",
-  "lieux": [
-   "bureau"
-  ],
-  "costumes": {
-   "presentateur": {
-    "haut": "costume",
-    "c_haut": "bleu marine",
-    "motif": "uni",
-    "bas": "pantalon",
-    "chaussures": "ville",
-    "details": [
-     "cravate",
-     "montre",
-     "lunettes_vue"
-    ]
-   },
-   "invite": {
-    "haut": "chemise",
-    "c_haut": "blanc",
-    "motif": "uni",
-    "bas": "pantalon",
-    "chaussures": "ville",
-    "details": [
-     "cravate",
-     "stylos",
-     "montre"
-    ]
-   }
-  },
-  "metiers": {
-   "invite": "conseiller_assurance"
-  },
-  "personnages": [
-   {
-    "role": "presentateur",
-    "genre": "h",
-    "age": 45,
-    "taille": 1,
-    "corpulence": 0.6,
-    "cheveux": "court",
-    "c_cheveux": "brun",
-    "barbe": "trois_jours"
-   },
-   {
-    "role": "invite",
-    "genre": "f",
-    "age": 38,
-    "taille": 0.95,
-    "corpulence": 0.5,
-    "cheveux": "long",
-    "c_cheveux": "blond",
-    "barbe": "rien"
-   }
-  ],
   "objets": [
    {
-    "replique": 1,
-    "objet": "affiche_assurance"
-   },
-   {
-    "replique": 3,
-    "objet": "telephone"
-   },
-   {
-    "replique": 19,
-    "objet": "calculatrice"
+    "objet": "telephone",
+    "replique": 36
    }
-  ],
-  "gags": [
-   "Assurance : 100% de votre tranquillité... à 33%!",
-   "Conditions : 2/3 du montant des réparations = votre franchise.",
-   "Prélèvements automatiques : Parce que rien ne doit échapper à notre vigilance."
   ],
   "ambiances": [
    "neon"
   ],
-  "cadence": "rapide",
+  "costumes": {
+   "presentateur": {
+    "haut": "pull",
+    "c_haut": "gris",
+    "motif": "uni",
+    "bas": "jean",
+    "chaussures": "baskets",
+    "details": [
+     "barbe_courte"
+    ],
+    "cheveux": "court",
+    "c_cheveux": "roux"
+   },
+   "envoyee": {
+    "haut": "debardeur",
+    "c_haut": "noir",
+    "motif": "uni",
+    "bas": "pantalon",
+    "chaussures": "ville",
+    "details": [
+     "boucles_oreilles",
+     "bracelets",
+     "rouge_levres"
+    ],
+    "cheveux": "queue",
+    "c_cheveux": "brun"
+   }
+  },
   "plans": [
    {
-    "replique": 0,
-    "plan": "moyen",
+    "plan": "serre",
+    "geste": "menton",
+    "reaction": "sceptique",
     "mouvement": "fixe",
-    "geste": "bras_ouverts",
-    "reaction": "regard_camera"
+    "replique": 0
    },
    {
-    "replique": 1,
     "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "pointe_d",
-    "reaction": "aucune"
+    "mouvement": "travelling",
+    "geste": "gratte_tete",
+    "reaction": "yeux_au_ciel",
+    "replique": 4
    },
    {
-    "replique": 3,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "sceptique",
-    "reaction": "aucune"
-   },
-   {
-    "replique": 15,
-    "plan": "serre",
     "mouvement": "zoom_choc",
-    "geste": "pointe_g",
+    "geste": "facepalm",
+    "replique": 26,
+    "plan": "tres_serre",
     "reaction": "choc"
    },
    {
-    "replique": 17,
-    "plan": "large",
-    "mouvement": "travelling",
-    "geste": "facepalm",
-    "reaction": "sceptique"
-   },
-   {
-    "replique": 25,
-    "plan": "serre",
     "mouvement": "fixe",
-    "geste": "gratte_tete",
-    "reaction": "confus"
+    "plan": "serre",
+    "geste": "bras_ouverts",
+    "replique": 35,
+    "reaction": "regard_camera"
    }
   ],
-  "decors_vus": {
-   "presentateur": "bureau_assurance avec affiche 'Assurance Véhicules UERGLA' en fond, étagères remplies de dossiers, un ordinateur allumé, une plante verte sur la table, une lampe de bureau allumée.",
-   "invite": "même bureau_assurance, mais avec un tableau noir à côté, une tasse de café posée sur le bureau, une calculatrice et un téléphone à portée de main."
+  "moment": "soir",
+  "personnages": {
+   "presentateur": {
+    "genre": "h",
+    "age": 28,
+    "taille": 1.0,
+    "corpulence": 0.5,
+    "cheveux": "court",
+    "barbe": "trois_jours"
+   },
+   "envoyee": {
+    "genre": "f",
+    "age": 26,
+    "taille": 0.95,
+    "corpulence": 0.4,
+    "cheveux": "queue",
+    "barbe": "rien"
+   }
+  },
+  "lieux": [
+   "rue",
+   "salon"
+  ],
+  "gags": [
+   "Affiche Drag Show",
+   "Flacon de gel douche XXL"
+  ],
+  "cadence": "rapide",
+  "lieux_separes": {
+   "presentateur": "",
+   "envoyee": ""
+  },
+  "moyen": "telephone",
+  "lieux_de": {
+   "presentateur": "rue",
+   "envoyee": "salon"
   }
  },
  "doublage": {
-  "piste": "/tmp/tmpqu4i7h52/piste.wav",
-  "duree": 70.8,
-  "source": "https://www.tiktok.com/@vignianimation/video/7695489464012934433",
-  "auteur": "vignianimation",
-  "contexte": "Un client sceptique (presentateur) discute avec un conseiller en assurance (invite) dans un bureau d'assurance, où ce dernier lui explique les détails de la formule premium touriste avec des conditions très spécifiques.",
-  "evenements": [],
+  "piste": "/tmp/tmpdz9syybo/piste.wav",
+  "duree": 64.48,
+  "source": "https://www.tiktok.com/@eliotlehanneur/video/7694995607332670742",
+  "auteur": "eliotlehanneur",
+  "contexte": "Une demande en mariage tourne court quand l'amie démontre au prétendant qu'il est en réalité gay.",
+  "evenements": [
+   [
+    48.0,
+    51.0,
+    "laughter"
+   ]
+  ],
   "visuel": {
    "gestes": [
     [
-     2.0,
-     0.67,
+     4.0,
+     0.49,
+     0.33
+    ],
+    [
+     6.5,
+     0.62,
+     0.51
+    ],
+    [
+     12.0,
+     0.65,
      1.0
     ],
     [
-     3.0,
-     0.67,
+     13.5,
+     0.61,
+     0.39
+    ],
+    [
+     23.0,
+     0.59,
      0.37
     ],
     [
-     8.0,
-     0.47,
-     1.0
-    ],
-    [
-     9.0,
-     0.67,
-     1.0
-    ],
-    [
-     12.5,
-     0.67,
-     0.42
-    ],
-    [
-     15.0,
-     0.67,
-     1.0
-    ],
-    [
-     18.0,
-     0.67,
-     1.0
-    ],
-    [
-     20.0,
-     0.48,
-     1.0
-    ],
-    [
-     21.0,
-     0.68,
-     1.0
-    ],
-    [
-     24.0,
-     0.47,
-     1.0
-    ],
-    [
-     27.5,
-     0.48,
-     1.0
-    ],
-    [
-     28.5,
-     0.67,
-     1.0
-    ],
-    [
-     32.5,
-     0.68,
-     1.0
-    ],
-    [
-     38.0,
-     0.48,
-     1.0
-    ],
-    [
-     40.5,
-     0.67,
-     1.0
-    ],
-    [
-     42.0,
-     0.47,
-     1.0
-    ],
-    [
-     44.0,
-     0.67,
-     1.0
-    ],
-    [
-     45.0,
-     0.67,
+     24.5,
+     0.57,
      0.41
     ],
     [
-     48.0,
-     0.67,
-     1.0
+     35.5,
+     0.71,
+     0.96
     ],
     [
-     49.0,
-     0.67,
-     0.42
-    ],
-    [
-     50.0,
-     0.47,
-     1.0
-    ],
-    [
-     51.0,
-     0.67,
-     1.0
-    ],
-    [
-     55.5,
-     0.67,
-     1.0
-    ],
-    [
-     59.5,
-     0.67,
-     1.0
-    ],
-    [
-     65.5,
-     0.67,
-     1.0
-    ],
-    [
-     68.0,
-     0.67,
+     36.5,
+     0.64,
      0.49
     ],
     [
-     69.0,
-     0.47,
+     40.0,
+     0.72,
      1.0
     ],
     [
-     70.5,
-     0.47,
-     1.0
+     42.5,
+     0.27,
+     0.85
+    ],
+    [
+     55.0,
+     0.64,
+     0.51
     ]
    ],
-   "duree": 71.0,
-   "nb_plans": 1,
-   "duree_plan": 71.0,
-   "coupes": [],
+   "duree": 64.5,
+   "nb_plans": 48,
+   "duree_plan": 1.34,
+   "coupes": [
+    1.0,
+    2.5,
+    3.5,
+    4.5,
+    6.0,
+    7.5,
+    9.0,
+    10.0,
+    10.5,
+    11.0,
+    11.5,
+    12.5,
+    13.0,
+    15.0,
+    16.5,
+    17.0,
+    18.0,
+    18.5,
+    20.0,
+    20.5,
+    22.5,
+    23.5,
+    24.0,
+    25.5,
+    28.5,
+    29.5,
+    31.0,
+    31.5,
+    35.0,
+    37.5,
+    39.5,
+    41.5,
+    43.0,
+    45.5,
+    47.5,
+    49.0,
+    51.5,
+    52.5,
+    54.0,
+    55.5,
+    56.0,
+    56.5,
+    57.5,
+    58.0,
+    59.0,
+    60.0,
+    61.5
+   ],
    "plans": {
-    "tres_serre": 0.0,
-    "serre": 0.0,
-    "moyen": 0.852,
-    "large": 0.148
+    "tres_serre": 0.574,
+    "serre": 0.38,
+    "moyen": 0.0,
+    "large": 0.047
    },
    "camera": {
-    "fixe": 0.787,
-    "avance": 0.05,
-    "recul": 0.135,
-    "travelling": 0.014,
-    "epaule": 0.014
+    "fixe": 0.355,
+    "avance": 0.039,
+    "recul": 0.039,
+    "travelling": 0.053,
+    "epaule": 0.513
    },
    "nb_personnes": 1,
    "personnes": [
     {
-     "place": "droite",
-     "presence": 0.669,
+     "place": "centre",
+     "presence": 0.512,
      "habit": [
-      42,
-      14,
-      22
+      44,
+      29,
+      28
      ],
      "cheveux": [
-      47,
-      47,
-      47
+      73,
+      27,
+      16
      ],
-     "sourire": 0.0,
-     "taille": 0.116,
-     "tete_penchee": 0.8,
-     "regard_cote": 0.147
+     "sourire": 0.015,
+     "taille": 0.323,
+     "tete_penchee": 9.1,
+     "regard_cote": 0.606
     },
     {
-     "place": "centre",
-     "presence": 0.183,
+     "place": "droite",
+     "presence": 0.287,
      "habit": [
-      214,
-      157,
-      114
+      28,
+      9,
+      6
      ],
      "cheveux": [
-      245,
-      245,
-      245
+      27,
+      15,
+      12
      ],
      "sourire": 0.0,
-     "taille": 0.085,
-     "tete_penchee": 2.0,
-     "regard_cote": 0.577
+     "taille": 0.284,
+     "tete_penchee": 6.3,
+     "regard_cote": 0.189
+    },
+    {
+     "place": "gauche",
+     "presence": 0.155,
+     "habit": [
+      44,
+      29,
+      27
+     ],
+     "cheveux": [
+      74,
+      29,
+      17
+     ],
+     "sourire": 0.0,
+     "taille": 0.338,
+     "tete_penchee": 10.8,
+     "regard_cote": 0.95
     }
    ],
    "visages": true,
-   "sourires": 0.0,
-   "energie": 0.674,
+   "sourires": 0.008,
+   "energie": 0.291,
    "mur": [
-    205,
-    143,
-    99
+    18,
+    6,
+    4
    ],
    "palette": [
     [
-     205,
-     142,
-     97,
-     0.411
-    ],
-    [
-     227,
-     194,
-     162,
-     0.21
-    ],
-    [
-     144,
-     87,
      50,
-     0.122
+     29,
+     25,
+     0.307
     ],
     [
-     248,
-     242,
-     235,
-     0.09
+     21,
+     7,
+     5,
+     0.224
     ],
     [
-     71,
-     57,
-     48,
-     0.089
+     159,
+     97,
+     70,
+     0.134
     ],
     [
-     28,
-     15,
-     9,
-     0.078
+     101,
+     64,
+     52,
+     0.133
+    ],
+    [
+     121,
+     103,
+     98,
+     0.123
+    ],
+    [
+     175,
+     146,
+     131,
+     0.08
     ]
    ],
    "lumiere": {
-    "luminosite": 182.2,
-    "chaleur": 74.2,
-    "saturation": 115.8
+    "luminosite": 84.2,
+    "chaleur": 36.2,
+    "saturation": 117.6
    },
-   "moment": "jour",
-   "postures": []
+   "moment": "soir",
+   "postures": [
+    [
+     0.0,
+     1.0,
+     0.37,
+     "telephone"
+    ],
+    [
+     2.5,
+     3.5,
+     0.4,
+     "telephone"
+    ],
+    [
+     15.0,
+     16.0,
+     0.34,
+     "telephone"
+    ],
+    [
+     17.0,
+     18.0,
+     0.35,
+     "telephone"
+    ],
+    [
+     19.0,
+     21.5,
+     0.37,
+     "telephone"
+    ],
+    [
+     22.5,
+     25.5,
+     0.52,
+     "menton"
+    ],
+    [
+     28.5,
+     30.0,
+     0.55,
+     "menton"
+    ],
+    [
+     30.0,
+     31.0,
+     0.39,
+     "telephone"
+    ],
+    [
+     32.0,
+     33.5,
+     0.37,
+     "menton"
+    ],
+    [
+     36.5,
+     37.5,
+     0.54,
+     "menton"
+    ],
+    [
+     37.5,
+     38.5,
+     0.3,
+     "menton"
+    ],
+    [
+     42.0,
+     43.0,
+     0.35,
+     "menton"
+    ],
+    [
+     49.0,
+     51.5,
+     0.36,
+     "telephone"
+    ],
+    [
+     51.5,
+     52.5,
+     0.53,
+     "menton"
+    ],
+    [
+     52.5,
+     53.5,
+     0.42,
+     "telephone"
+    ],
+    [
+     53.5,
+     55.5,
+     0.42,
+     "menton"
+    ],
+    [
+     55.5,
+     58.5,
+     0.4,
+     "telephone"
+    ],
+    [
+     60.0,
+     61.5,
+     0.42,
+     "telephone"
+    ]
+   ]
   },
   "audio": {
-   "duree": 70.8,
+   "duree": 64.5,
    "nb_voix": 2,
    "voix": [
     {
-     "hz": 264,
-     "genre": "f",
-     "part": 0.22
+     "hz": 143,
+     "genre": "h",
+     "part": 0.5
     },
     {
-     "hz": 159,
-     "genre": "h",
-     "part": 0.78
+     "hz": 237,
+     "genre": "f",
+     "part": 0.5
     }
    ],
-   "debit": 4.23,
+   "debit": 6.46,
    "blanc_moyen": 0.17,
-   "coupes": 2,
-   "dynamique_db": 18.9,
-   "cris": 0.005,
+   "coupes": 15,
+   "dynamique_db": 23.4,
+   "cris": 0.004,
    "musique": 0.41,
-   "impacts": 48,
-   "impacts_10s": 6.78,
-   "graves": 13,
-   "aigus": 35,
-   "sur_vanne": 18,
-   "evenements": {},
+   "impacts": 51,
+   "impacts_10s": 7.91,
+   "graves": 5,
+   "aigus": 46,
+   "sur_vanne": 29,
+   "evenements": {
+    "laughter": 1
+   },
    "emotions": {
-    "précis": 5,
-    "agacé": 3,
-    "sarcastique": 2,
-    "méfiant": 2,
-    "ironique": 2,
-    "confused": 1,
-    "enthousiaste": 1,
-    "sûr": 1
+    "defensive": 2,
+    "denying": 2,
+    "hopeful": 1,
+    "skeptical": 1,
+    "hurt": 1,
+    "explaining": 1,
+    "ironic": 1,
+    "mocking": 1
    }
   },
-  "video_origine": "/tmp/tmpqu4i7h52/src.mp4"
+  "video_origine": "/tmp/tmpdz9syybo/src.mp4"
  },
  "fiche": {
   "note": 0,
@@ -2135,17 +2788,7 @@
      5,
      6,
      7,
-     8
-    ],
-    "lieu": "",
-    "son": "",
-    "duree": 0.0,
-    "decor": "bureau_assurance avec affiche 'Assurance Véhicules', bureau en bois, chaise, ordinateur, étagères avec dossiers, lampe de bureau, plante verte.",
-    "titre": "La formule premium"
-   },
-   {
-    "scene": "2",
-    "repliques": [
+     8,
      9,
      10,
      11,
@@ -2163,47 +2806,67 @@
      23,
      24,
      25,
-     26
+     26,
+     27,
+     28,
+     29,
+     30,
+     31,
+     32,
+     33,
+     34,
+     35,
+     36,
+     37
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "même bureau_assurance, mais avec un tableau noir et des calculs écrits, une tasse de café sur le bureau, un téléphone et une calculatrice.",
-    "titre": "Les détails cachés"
+    "decor": "Cozy living room, warm lamp light, dark leather couch, patterned wallpaper.",
+    "titre": "Le placard"
    }
   ]
  },
  "_monte": true,
  "_voix_hz": {
-  "presentateur": 248,
-  "invite": 156
+  "presentateur": 143,
+  "envoyee": 235
  },
  "_voix_genre": {
-  "presentateur": "f",
-  "invite": "h"
+  "presentateur": "h",
+  "envoyee": "f"
  },
+ "_separes": true,
  "realisation": {
-  "moment": "jour",
+  "moment": "soir",
   "lieux": [
-   "bureau",
-   "bureau"
+   "rue",
+   "salon"
   ],
   "gags": [
-   "Assurance : 100% de votre tranquillité... à 33%!",
-   "Conditions : 2/3 du montant des réparations = votre franchise.",
-   "Prélèvements automatiques : Parce que rien ne doit échapper à notre vigilance."
+   "Affiche Drag Show",
+   "Flacon de gel douche XXL"
   ],
   "ambiances": [
-   "neige",
    "neon",
-   "pluie"
+   "poussiere"
   ],
   "source": "auteur+image",
   "tenues": {
-   "presentateur": "costume",
-   "invite": "chemise"
+   "presentateur": "pull",
+   "envoyee": "debardeur"
   },
   "plans": [
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
    "large/fixe",
    "large/fixe",
    "large/fixe",
