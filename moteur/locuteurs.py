@@ -238,6 +238,31 @@ def _frontiere(mots, p):
     return 1 if mots[p]["s"] - mots[p - 1]["e"] > 0.35 else 0
 
 
+DEBUTS = set("""ouais oui non nan bah ben euh hum mais ah oh eh hé hein et alors donc bon voilà ok okay attends attendez écoute écoutez
+quoi quand pourquoi comment combien qui que qu où il elle ils elles on je j tu t vous nous moi toi lui c ça ce cette ces y le la l les un une
+des mon ma mes ton ta tes son sa ses notre votre vas va allez arrête arrêtez putain wesh tiens franchement sérieux sérieusement sinon enfin
+parce puis là ici excuse excusez désolé désolée merci salut bonjour bonsoir pardon d s n m regarde regardez dis dites faut est
+avec pour sans si""".split())
+
+
+def fins_de_phrase(mots):
+    """La transcription gratuite (Groq / Whisper) oublie souvent les points : « …un poisson rouge Mais pourquoi… ». Un mot courant qui
+    commence par une majuscule au milieu du texte (Mais, Ouais, Il, C'…) ouvre une nouvelle phrase : on remet un point sur le mot
+    d'avant. Les noms propres (Chloé, Pomme Dauphine) ne sont pas dans la liste : rien ne change pour eux."""
+    for i in range(1, len(mots)):
+        w, av = str(mots[i]["w"]).strip(), str(mots[i - 1]["w"]).strip()
+        if not w or not w[0].isupper() or not av or re.search(r"[.!?…,;:]$", av): continue
+        tete = re.split(r"['’ -]", re.sub(r"[^\w'’ -]", "", w).lower())[0]
+        if tete in DEBUTS: mots[i - 1]["w"] = av + "."
+    return mots
+
+
+def _minuscule(w):
+    """Le mot commence par une minuscule : la phrase continue (Whisper met une majuscule à chaque nouvelle phrase)."""
+    w = re.sub(r"^[^\w]+", "", str(w))
+    return bool(w) and w[0].islower()
+
+
 def caler_sur_phrases(mots, lab, portee=3):
     """Les changements de personne tombent sur une fin de phrase (sinon une pause) : l'empreinte vocale glisse souvent d'un ou deux
     mots (« Je m'en bats | les couilles »). Un changement ailleurs est déplacé sur la fin de phrase la plus proche (3 mots au plus)."""
@@ -246,10 +271,12 @@ def caler_sur_phrases(mots, lab, portee=3):
         if lab[p] == lab[p - 1]: continue
         niv = _frontiere(mots, p)
         if niv == 2: continue
-        for voulu in ((2,) if niv == 1 else (2, 1)):
+        suite = _minuscule(mots[p]["w"])                                   # « J'ai un peu dépassé | l'objectif fixé. » : même personne
+        if suite: niv = 0
+        for voulu in ((2,) if niv == 1 or suite else (2, 1)):
             ecart = lambda q: sum(1 for r in range(min(p, q), max(p, q)) if not re.match(r"^['’-]", mots[r]["w"]))   # « m 'en » = un mot
-            cands = sorted((q for q in range(max(1, p - 2 * portee), min(n, p + 2 * portee + 1))
-                            if q != p and _frontiere(mots, q) >= voulu and ecart(q) <= portee), key=lambda q: (ecart(q), q))
+            cands = sorted((q for q in range(max(1, p - 4 * portee), min(n, p + 4 * portee + 1))
+                            if q != p and _frontiere(mots, q) >= voulu and ecart(q) <= (2 * portee if suite else portee)), key=lambda q: (ecart(q), q))
             fait = False
             for q in cands:
                 a_, b_ = min(p, q), max(p, q)
@@ -379,8 +406,9 @@ def pyannote(mots, sig, sr=SR):
 
 
 SUITE = re.compile(r"^(et|donc|puis|parce|alors|enfin|sinon|ou|que|qui)\b", re.I)
-_Q = {"change": 0.0, "fini": 1.5, "question": 2.0, "reponse": 1.0, "suite": 1.5, "echo": 1.0, "ia": 2.0, "avis": 0.3}   # fil du dialogue
+_Q = {"change": 0.0, "fini": 1.5, "question": 2.0, "reponse": 1.0, "suite": 1.5, "echo": 1.0, "ia": 2.0, "avis": 0.3, "minuscule": 2.5}   # fil du dialogue
 PROCHES = 0.7                                                              # ressemblance des 2 voix au-delà de laquelle le son ne tranche plus
+DOUTE = 0.55                                                               # entre DOUTE et PROCHES : le son aide, le dialogue décide avec lui
 ETAT = {"ressemblance": None}                                              # dernière mesure (affiner)
 
 
@@ -415,6 +443,7 @@ def indices_dialogue(mots, ph):
         if not re.search(r"[.!?…]$", fin) or fin.endswith(","):           # phrase pas finie (coupée par une pause)
             s -= _Q["suite"] * (1.0 if pause < 0.8 else 0.5)
         if SUITE.search(debut) and not fin.endswith("?"): s -= 0.5 * _Q["suite"]
+        if _minuscule(debut) and not re.search(r"[.!?]$", fin): s -= _Q["minuscule"]   # « …dépassé » / « l'objectif fixé. » : la suite
         a, b = _mots_txt(mots, ph[j - 1])[-4:], _mots_txt(mots, ph[j])[:4]
         if len([w for w in b if w and w in a]) >= 2: s += _Q["echo"]       # reprend les mots de l'autre
         out.append(s)
@@ -435,7 +464,7 @@ def _viterbi2(em, tr):
     return lab[::-1]
 
 
-def fil_dialogue(mots, ia=None):
+def fil_dialogue(mots, ia=None, avis=None):
     """Contrôle « questions-réponses » quand les deux voix se ressemblent trop pour que le son tranche (même personne qui fait les
     deux voix) : qui dit chaque PHRASE, d'après la logique du dialogue (indices_dialogue), l'avis de l'IA qui a lu le dialogue
     phrase par phrase (ia = liste 0/1 par phrase, ou None) et, un peu, les voix trouvées avant. Deux personnes seulement."""
@@ -447,7 +476,8 @@ def fil_dialogue(mots, ia=None):
     ia = [x if x in (0, 1) else None for x in (ia or [])][:len(ph)] + [None] * max(0, len(ph) - len(ia or []))
     connus = [(a, b) for a, b in zip(avant, ia) if b is not None]
     if connus and sum(a == b for a, b in connus) < len(connus) / 2: ia = [None if b is None else 1 - b for b in ia]   # mêmes numéros
-    em = [tuple(_Q["avis"] * (a == q) + (_Q["ia"] * (b == q) if b is not None else 0.0) for q in (0, 1)) for a, b in zip(avant, ia)]
+    avis = _Q["avis"] if avis is None else avis                            # poids des voix trouvées avant (le son)
+    em = [tuple(avis * (a == q) + (_Q["ia"] * (b == q) if b is not None else 0.0) for q in (0, 1)) for a, b in zip(avant, ia)]
     tr = [_Q["change"] + s for s in indices_dialogue(mots, ph)]
     lab = _viterbi2(em, tr)
     if len(set(lab)) < 2: return mots

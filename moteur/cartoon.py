@@ -590,6 +590,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
     for q in ph: DEBUT_SCENE.setdefault(q["scene"], q["deb"] - 0.1)
     COUVERTURE_MS[0] = int(max(0.5, ph[-1]["deb"] + 0.4) * 1000)           # image de couverture TikTok : la chute finale
     SANS_ENTREE = {ph[0]["scene"]}                                         # 1re scène : déjà là dès la première image (l'accroche compte)
+    if DOUB: SANS_ENTREE = {q["scene"] for q in ph}                        # son TikTok : tout le monde est déjà là (ni entrée ni pas)
     # appel (lieux séparés) : écran partagé sur une réplique sur trois, plan d'écoute (on voit celui qui écoute, la voix sort
     # du téléphone) sur la fin des longues répliques (idées 16 et 21)
     APPEL = []                                                             # (t0, t1, "partage" | "ecoute", scène de l'autre)

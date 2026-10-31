@@ -963,6 +963,52 @@ class TestVoixProches(unittest.TestCase):
         self.assertEqual(L.fil_dialogue([dict(m) for m in mal], None)[0]["voix"], "speaker_0")   # sans IA : le texte seul, sans planter
 
 
+class TestVoixEtScenesTiktok(unittest.TestCase):
+    """Remarques de l'auteur (31 octobre 2026) : voix restées sur un seul personnage, scène qui « se recharge » (toc toc toc)."""
+    def setUp(self): sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "moteur"))
+
+    def test_points_oublies_par_whisper(self):
+        import locuteurs as L
+        txt = "Euh ouais j'avais un poisson rouge Mais pourquoi t'avais un poisson rouge ? Il s'appelait Pomme Dauphine Ok"
+        mots = [{"w": w, "s": 0.3 * i, "e": 0.3 * i + 0.25, "voix": "speaker_0"} for i, w in enumerate(txt.split())]
+        L.fins_de_phrase(mots)
+        self.assertEqual(" ".join(m["w"] for m in mots), "Euh ouais j'avais un poisson rouge. Mais pourquoi t'avais un poisson rouge ? Il s'appelait Pomme Dauphine. Ok")
+        self.assertEqual(len(L.phrases(mots)), 4)                          # « Pomme Dauphine » (nom propre) ne coupe pas la phrase
+
+    def test_phrase_qui_continue_en_minuscule(self):
+        import locuteurs as L
+        txt = "J'ai un peu dépassé l'objectif fixé. Ah bon ?"
+        mots = [{"w": w, "s": 0.3 * i + (0.6 if i >= 4 else 0), "e": 0.3 * i + 0.25 + (0.6 if i >= 4 else 0)} for i, w in enumerate(txt.split())]
+        lab = L.caler_sur_phrases(mots, [0, 0, 0, 0, 1, 1, 1, 1])           # changement après « dépassé » (pause) : la suite reste à A
+        self.assertEqual(lab, [0, 0, 0, 0, 0, 0, 1, 1])
+        ph = L.phrases(mots)
+        self.assertLess(L.indices_dialogue(mots, ph)[1], 0)
+
+    def test_une_seule_voix_relue_par_l_ia(self):
+        import doublage as D, ecrire, reseau
+        mots = [{"w": w, "s": 0.4 * i, "e": 0.4 * i + 0.3, "voix": "speaker_0"} for i, w in enumerate("T'as des animaux ? Oui, un poisson. Il s'appelle comment ? Bubulle.".split())]
+        anc = ecrire._appel, reseau.ia_disponible
+        reseau.ia_disponible = lambda: True
+        try:
+            ecrire._appel = lambda *a, **k: {"nombre": 1, "phrases": [{"n": i, "qui": "A"} for i in range(4)]}
+            self.assertIsNone(D.relire_dialogue(mots, une_voix=True))      # monologue : personne n'est inventé
+            ecrire._appel = lambda *a, **k: {"nombre": 2, "phrases": [{"n": i, "qui": "AB"[i % 2]} for i in range(4)]}
+            self.assertEqual(D.relire_dialogue(mots, une_voix=True), [0, 1, 0, 1])
+        finally: ecrire._appel, reseau.ia_disponible = anc
+
+    def test_une_seule_scene_pour_un_son_tiktok(self):
+        import studio
+        sk = {"repliques": [{"p": "presentateur", "t": "a"}] * 5, "doublage": {"duree": 10},
+              "decoupage": [{"scene": "1", "repliques": [0, 1], "decor": "garden"}, {"scene": "2", "repliques": [2, 3, 4], "decor": "garden, aquarium"}],
+              "studio": {"lieux": ["jardin", "salon"]}}
+        self.assertTrue(studio.une_scene(sk))
+        self.assertEqual(sk["decoupage"], [{"scene": "1", "repliques": [0, 1, 2, 3, 4], "decor": "garden, aquarium"}])
+        self.assertEqual(sk["studio"]["lieux"], ["salon"])
+        self.assertFalse(studio.une_scene({"repliques": [], "_separes": True, "decoupage": [{"repliques": [0]}, {"repliques": [1]}]}))   # appel : un décor chacun
+        src = open(os.path.join(os.path.dirname(__file__), "..", "moteur", "cartoon.py"), encoding="utf-8").read()
+        self.assertIn('if DOUB: SANS_ENTREE = {q["scene"] for q in ph}', src)   # ni entrée en marchant ni bruits de pas
+
+
 class TestFileAttente(unittest.TestCase):
     def test_une_video_a_la_fois_dans_l_ordre(self):
         sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "moteur"))

@@ -210,13 +210,15 @@ phrase 0). Raisonne sur le fil du dialogue, comme un scénariste :
 - qui s'adresse à qui : « papa », « maman » sont dits par l'enfant, « fiston », « ma fille » par le parent ; « vous » / « nous » ;
 - chacun garde son point de vue du début à la fin (celui qui défend une idée continue de la défendre, celui qui ne comprend pas
   continue de poser des questions) ;
-- une même personne peut dire plusieurs phrases de suite (phrase coupée, « et… », « donc… », tirade).
-Dis aussi en quelques mots qui est A et qui est B (ex. « A : le père, B : le fils »).
+- une même personne peut dire plusieurs phrases de suite (phrase coupée, « et… », « donc… », tirade) ; une phrase qui commence
+  par une minuscule est la suite de la phrase d'avant (même personne).
+Dis aussi en quelques mots qui est A et qui est B (ex. « A : le père, B : le fils »), et combien de personnes parlent vraiment
+("nombre" : 1 si c'est un monologue, une seule personne du début à la fin ; sinon 2).
 
 {lignes}
 """
 
-def relire_dialogue(mots):
+def relire_dialogue(mots, une_voix=False):
     """Contrôle « questions-réponses » par l'IA (Gemini d'abord, gratuit) quand les voix se ressemblent trop : elle lit le dialogue
     PHRASE PAR PHRASE (phrases de locuteurs.phrases) et dit qui dit chaque phrase. Renvoie une liste 0/1 (0 = A), ou None."""
     import ecrire, locuteurs, reseau
@@ -226,7 +228,7 @@ def relire_dialogue(mots):
     txt = [re.sub(r"\s+([,.!?…'’-])", r"\1", " ".join(mots[i]["w"] for i in p)) for p in ph]   # « j 'ai » -> « j'ai »
     lignes = "\n".join(f"{k}. {t}" for k, t in enumerate(txt))
     outil = {"name": "dialogue", "description": "Qui dit chaque phrase du dialogue.",
-             "input_schema": ecrire._schema({"personnes": {"type": "string"},
+             "input_schema": ecrire._schema({"personnes": {"type": "string"}, "nombre": {"type": "integer"},
                                              "phrases": {"type": "array", "items": ecrire._schema({"n": {"type": "integer"}, "qui": {"type": "string", "enum": ["A", "B"]}}, ["n", "qui"])}},
                                             ["phrases"])}
     try:
@@ -240,6 +242,10 @@ def relire_dialogue(mots):
             if 0 <= n < len(ph) and x.get("qui") in ("A", "B"): ia[n] = 0 if x["qui"] == "A" else 1
         except (AttributeError, TypeError, ValueError): pass
     if sum(x is not None for x in ia) < len(ph) / 2: return None
+    try: seul = int(r.get("nombre") or 2) == 1
+    except (TypeError, ValueError): seul = False
+    if une_voix and (seul or len({x for x in ia if x is not None}) < 2):   # une seule voix ET l'IA lit un monologue : on n'invente personne
+        journal("  relecture du dialogue par l'IA : une seule personne parle"); return None
     journal(f"  relecture du dialogue par l'IA : {sum(x is not None for x in ia)}/{len(ph)} phrases ({str(r.get('personnes') or '')[:80]})")
     return ia
 
@@ -412,7 +418,9 @@ def preparer(url):
         if v_ is not None: voix_sig, chemin_voix = v_, c_
     sig = voix_sig if voix_sig is not None and len(voix_sig) >= len(mono) * 0.9 else mono
     mots = transcrire(chemin_voix, mono)
-    if SOURCE_MOTS[0] != "elevenlabs": mots = ecoute.aligner(mots, sig)    # chaque mot recalé sur la voix (lèvres, sous-titres)
+    if SOURCE_MOTS[0] != "elevenlabs":
+        mots = ecoute.aligner(mots, sig)                                   # chaque mot recalé sur la voix (lèvres, sous-titres)
+        __import__("locuteurs").fins_de_phrase(mots)                       # points oubliés par Whisper (« …rouge Mais pourquoi… »)
     if not EVENEMENTS: EVENEMENTS[:] = ecoute.bruits(mono)                 # rires, cris, sirène, aboiement… entendus dans l'original
     try:                                                                   # pyannote (si la clé Hugging Face gratuite est réglée) :
         import locuteurs                                                   # meilleure séparation des voix que la transcription gratuite
@@ -427,12 +435,14 @@ def preparer(url):
     try:                                                                   # qui parle, mot par mot (la voix ne saute plus d'un perso à l'autre)
         import locuteurs; mots = locuteurs.affiner(mots, sig)
     except Exception as e: journal(f"  vérification mot par mot impossible ({str(e)[:120]})")
-    try:                                                                   # voix trop proches : contrôle questions-réponses (texte + IA)
-        import locuteurs
-        r_ = locuteurs.ETAT.get("ressemblance")
-        if r_ is not None and r_ > locuteurs.PROCHES:
-            ia = relire_dialogue(mots)
-            if ia: mots = locuteurs.fil_dialogue(mots, ia)
+    try:                                                                   # voix proches (ou une seule voix trouvée) : contrôle questions-réponses
+        import locuteurs                                                   # (texte + IA), le son ne suffit pas à dire qui parle
+        r_ = locuteurs.ETAT.get("ressemblance"); seule = len({m["voix"] for m in mots}) == 1
+        if seule or (r_ is not None and r_ > locuteurs.DOUTE):
+            ia = relire_dialogue(mots, une_voix=seule)
+            if ia:                                                         # voix « un peu » proches : le son garde du poids
+                mots = locuteurs.fil_dialogue(mots, ia, avis=None if seule or r_ > locuteurs.PROCHES else 1.2)
+            elif seule: journal("  une seule voix entendue et pas de relecture du dialogue : un seul personnage parle")
     except Exception as e: journal(f"  contrôle questions-réponses impossible ({str(e)[:120]})")
     segs = segments(mots)
     hz = hauteurs(sig, segs)

@@ -355,6 +355,7 @@ def main():
         try:
             import cartoon, decors as decors_mod, studio as _st
             if not S and _st.separer_lieux(sk): print("Lieux séparés : chaque personnage a son propre décor (appel, visio, l'un ailleurs)", flush=True)
+            elif not S and sk.get("doublage") and _st.une_scene(sk): print("Son TikTok : une seule scène, un seul décor (pas de changement inutile)", flush=True)
             if S: decors = S["decors"]                                     # reprise : décors déjà faits
             elif modal_ok and os.environ.get("DECORS", "1") != "0":
                 lum = ""; plans_dec = None
