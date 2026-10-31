@@ -2,30 +2,30 @@ Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, ElevenLabs epuise — IA utilisée : mistral
 Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @motiontoonz, @same_same53, @charly.bse, @kodanimation, @vignianimation, @vincedessine
-Profil TikTok @kodanimation (poids 1.0) : 22 vidéo(s) jamais utilisée(s), meilleur potentiel 81/100
-Profil TikTok @same_same53 (poids 1.0) : 32 vidéo(s) jamais utilisée(s), meilleur potentiel 74/100
-Profil TikTok @yan_animation0 (poids 1.0) : 13 vidéo(s) jamais utilisée(s), meilleur potentiel 93/100
-Vidéo depuis TikTok : https://www.tiktok.com/@kodanimation/video/7689636875266526496
+Profil TikTok @same_same53 (poids 1.0) : 32 vidéo(s) jamais utilisée(s), meilleur potentiel 68/100
+Profil TikTok @yan_animation0 (poids 1.0) : 18 vidéo(s) jamais utilisée(s), meilleur potentiel 81/100
+Profil TikTok @motiontoonz (poids 1.0) : 33 vidéo(s) jamais utilisée(s), meilleur potentiel 100/100
+Vidéo depuis TikTok : https://www.tiktok.com/@same_same53/video/7695008472684875040
   son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 70.8 s, compte d'origine @kodanimation
-[ WARN:0@19.844] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  son récupéré : 62.5 s, compte d'origine @same_same53
+[ WARN:0@16.462] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
 INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
 WARNING: Logging before InitGoogle() is written to STDERR
-W0000 00:00:1793414157.691183    4207 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
-W0000 00:00:1793414157.711307    4207 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
-W0000 00:00:1793414157.981717    4209 landmark_projection_calculator.cc:81] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX.
-  image de la vidéo : 1 plans (≈ 71.0 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 0 %, large 100 % ; caméra : fixe 72 %, avance 9 %, recul 13 %, travelling 3 %, epaule 1 % ; 0 personne(s) à l'écran : aucun visage repéré ; agitation 0.965 ; lumière jour ; fond [253, 253, 250]
+W0000 00:00:1793415555.191432    4015 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1793415555.208835    4015 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1793415555.278635    4017 landmark_projection_calculator.cc:81] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX.
+  image de la vidéo : 1 plans (≈ 62.5 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 11 %, large 88 % ; caméra : fixe 99 %, epaule 0 % ; 1 personne(s) à l'écran : centre (habit [4, 3, 3], cheveux [35, 35, 35], sourit 0 %) ; agitation 0.15 ; lumière jour ; fond [0, 0, 0]
   isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
-  voix isolées gratuitement (Demucs, 37 s)
+  voix isolées gratuitement (Demucs, 31 s)
   transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
   transcription Groq impossible (HTTP Error 403: Forbidden)
   Whisper indisponible (Whisper : ResourceExhaustedError Function call failed: workspace billing cycle spend limit reached) : contrôle simplifié
-[0;93m2026-10-31 02:36:42.018534898 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
-  transcription gratuite (Whisper sur la machine) : 335 mots
-Loading weights:   0%|          | 0/424 [00:00<?, ?it/s]Loading weights: 100%|██████████| 424/424 [00:00<00:00, 31871.27it/s]
-  mots recalés sur la voix (322 mots, écart moyen 72 ms, 12 s)
-Loading weights:   0%|          | 0/447 [00:00<?, ?it/s]Loading weights: 100%|██████████| 447/447 [00:00<00:00, 16375.99it/s]
-  bruits de l'original (CLAP, 8 s) : crying
+[0;93m2026-10-31 02:59:53.587177073 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+  transcription gratuite (Whisper sur la machine) : 345 mots
+Loading weights:   0%|          | 0/424 [00:00<?, ?it/s]Loading weights: 100%|██████████| 424/424 [00:00<00:00, 14179.89it/s]
+  mots recalés sur la voix (332 mots, écart moyen 109 ms, 13 s)
+Loading weights:   0%|          | 0/447 [00:00<?, ?it/s]Loading weights: 100%|██████████| 447/447 [00:00<00:00, 21502.84it/s]
+  bruits de l'original (CLAP, 6 s) : crying, laughter
   NeMo indisponible (Lookup failed for Cls 'Nemo' from the 'jt-ecoute' app: App 'jt-ecoute' not found in environment 'main'.)
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/core/io.py:48: UserWarning: 
 torchcodec is not installed correctly so built-in audio decoding will fail. Solutions are:
@@ -36,11 +36,14 @@ Could not load this library: /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3
   warnings.warn(
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1927.)
   std = sequences.std(dim=-1, correction=1)
-  voix séparées par pyannote : 2 voix, 40 tours de parole
-  voix vérifiées mot par mot : 14 mot(s) remis sur la bonne voix
+  voix séparées par pyannote : 2 voix, 13 tours de parole
+  voix trop proches : répliques réparties d'après le fil du dialogue (questions, réponses)
+  voix trop proches (ressemblance 0.74) : vérification mot par mot laissée de côté
+  relecture du dialogue par l'IA : 43/43 phrases (A : le client furieux (qui attend son colis), B : le livreur (de mauvaise foi))
+  contrôle questions-réponses (avec relecture de l'IA) : 43 phrases, 200 mot(s) changé(s) de voix
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/importlib/__init__.py:90: UserWarning: Module 'speechbrain.lobes.models.huggingface_transformers' was deprecated, redirecting to 'speechbrain.integrations.huggingface'. Please update your script.
   return _bootstrap._gcd_import(name[level:], package, level)
-Loading weights:   0%|          | 0/211 [00:00<?, ?it/s]Loading weights: 100%|██████████| 211/211 [00:00<00:00, 16757.52it/s]
+Loading weights:   0%|          | 0/211 [00:00<?, ?it/s]Loading weights: 100%|██████████| 211/211 [00:00<00:00, 27362.90it/s]
 [transformers] [1mWav2Vec2Model LOAD REPORT[0m from: facebook/wav2vec2-base
 Key                          | Status     |  | 
 -----------------------------+------------+--+-
@@ -56,49 +59,204 @@ Notes:
 - UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
 speechbrain.integrations.huggingface.huggingface - Wav2Vec2Model is frozen.
 CategoricalEncoder.expect_len was never called: assuming category count of 4 to be correct! Sanity check your encoder using `.expect_len`. Ensure that downstream code also uses the correct size. If you are sure this does not apply to you, use `.ignore_len`.
-  émotions entendues dans la voix : 0 réplique(s) (4 s)
-  34 répliques, voix : {'speaker_0': 225, 'speaker_1': 149}
-  son de la vidéo : 2 voix [225 Hz (f, 37 %), 149 Hz (h, 63 %)], 6.01 mots/s, blancs 0.51 s, 3 coupure(s) de parole, dynamique 26.5 dB, musique de fond, 46 bruitage(s) (20 graves, 26 aigus, 13 sur une fin de réplique), événements {'crying': 1}, émotions {}
+  émotions entendues dans la voix : 0 réplique(s) (5 s)
+  36 répliques, voix : {'speaker_0': 227, 'speaker_1': 179}
+  son de la vidéo : 2 voix [227 Hz (f, 56 %), 179 Hz (?, 44 %)], 7.23 mots/s, blancs 0.54 s, 19 coupure(s) de parole, dynamique 15.5 dB, musique de fond, 62 bruitage(s) (8 graves, 54 aigus, 25 sur une fin de réplique), événements {'laughter': 3, 'crying': 1}, émotions {}
   IA gemini indisponible (gemini 429 : [{
   "error": {
     "code": 429,
     "message": "You exceeded your current quota, please check your plan an) : on passe à la suivante
-  scène reconstituée : Deux amis se disputent joyeusement autour d'un repas raté dans une cuisine, où l'un a préparé un plat et l'autre critique sans pitié. L'ambiance est décalée et pleine d'humour.
+  scène reconstituée : Un client énervé (presentateur) attend son colis à domicile et discute avec une livreuse (envoyee) qui semble avoir des difficultés à comprendre la situation. La scène se déroule devant la porte d'un appartement, avec des objets liés à la livraison et des détails du quotidien.
+  casting : speaker_0 → Jojo, speaker_1 → Lila
+  sous-titres : 19 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
+  jeu d'acteur entendu dans le son : 8 réplique(s) (émotion de la voix, rires, cris)
+  événements sonores : crying, laughter
+  voix trop proches dans https://www.tiktok.com/@same_same53/video/7695008472684875040 (ressemblance 0.74) : on cherche une vidéo aux voix bien différentes
+Vidéo depuis TikTok : https://www.tiktok.com/@same_same53/video/7700586484876840225
+  son téléchargé (yt-dlp --impersonate chrome)
+  son récupéré : 65.0 s, compte d'origine @same_same53
+[ WARN:0@300.581] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+W0000 00:00:1793415837.858840    4223 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1793415837.874840    4224 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+  image de la vidéo : 27 plans (≈ 2.41 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 0 %, large 100 % ; caméra : fixe 100 % ; 0 personne(s) à l'écran : aucun visage repéré ; agitation 0.009 ; lumière jour ; fond [249, 248, 248]
+  isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
+  voix isolées gratuitement (Demucs, 32 s)
+  transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
+  transcription Groq impossible (HTTP Error 403: Forbidden)
+  Whisper indisponible (Whisper en panne) : contrôle simplifié
+  transcription gratuite (Whisper sur la machine) : 239 mots
+  mots recalés sur la voix (220 mots, écart moyen 120 ms, 15 s)
+  bruits de l'original (CLAP, 7 s) : aucun
+  NeMo indisponible (Lookup failed for Cls 'Nemo' from the 'jt-ecoute' app: App 'jt-ecoute' not found in environment 'main'.)
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1927.)
+  std = sequences.std(dim=-1, correction=1)
+  voix séparées par pyannote : 1 voix, 9 tours de parole
+  voix trop proches : répliques réparties d'après le fil du dialogue (questions, réponses)
+  voix trop proches (ressemblance 0.72) : vérification mot par mot laissée de côté
+  relecture du dialogue par l'IA : 30/31 phrases (A : l'homme (probablement le mari ou le conjoint) qui décrit sa femme disparue ;)
+  contrôle questions-réponses (avec relecture de l'IA) : 31 phrases, 74 mot(s) changé(s) de voix
+  émotions entendues dans la voix : 0 réplique(s) (5 s)
+  25 répliques, voix : {'speaker_0': 197, 'speaker_1': 162}
+  son de la vidéo : 2 voix [197 Hz (f, 70 %), 162 Hz (h, 30 %)], 4.49 mots/s, blancs 0.48 s, 2 coupure(s) de parole, dynamique 20.9 dB, musique de fond, 45 bruitage(s) (5 graves, 40 aigus, 17 sur une fin de réplique), événements {}, émotions {}
+  Florence-2 indisponible (Lookup failed for Cls 'Florence' from the 'jt-ecoute' app: App 'jt-ecoute' not found in environment 'main'.)
+  scène reconstituée : Un homme désespéré décrit sa femme disparue à un agent de police dans un commissariat. L'agent pose des questions précises pour retrouver la voiture de l'homme, qui semble être bien plus importante que sa femme.
+  casting : speaker_0 → Jojo, speaker_1 → Kévin
+  sous-titres : 5 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
+  Claude a réattribué 2 réplique(s) à la bonne personne (voix proches)
+  voix trop proches dans https://www.tiktok.com/@same_same53/video/7700586484876840225 (ressemblance 0.72) : on cherche une vidéo aux voix bien différentes
+Vidéo depuis TikTok : https://www.tiktok.com/@yan_animation0/video/7678076893253422368
+  son téléchargé (yt-dlp --impersonate chrome)
+  son récupéré : 60.2 s, compte d'origine @yan_animation0
+[ WARN:0@513.551] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+W0000 00:00:1793416050.938016    4325 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1793416050.953201    4324 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+  image de la vidéo : 14 plans (≈ 4.32 s chacun) ; cadrages : très serré 32 %, serré 21 %, moyen 0 %, large 45 % ; caméra : fixe 55 %, avance 24 %, recul 4 %, travelling 1 %, epaule 14 % ; 1 personne(s) à l'écran : centre (habit [54, 50, 52], cheveux [10, 3, 2], sourit 0 %); gauche (habit [51, 49, 51], cheveux [10, 3, 2], sourit 0 %) ; agitation 0.626 ; lumière jour ; fond [134, 134, 139]
+  isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
+  voix isolées gratuitement (Demucs, 31 s)
+  transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
+  transcription Groq impossible (HTTP Error 403: Forbidden)
+  Whisper indisponible (Whisper en panne) : contrôle simplifié
+  transcription gratuite (Whisper sur la machine) : 284 mots
+  mots recalés sur la voix (252 mots, écart moyen 151 ms, 12 s)
+  bruits de l'original (CLAP, 6 s) : crying, glass, kiss, laughter, scream, thunder
+  NeMo indisponible (Lookup failed for Cls 'Nemo' from the 'jt-ecoute' app: App 'jt-ecoute' not found in environment 'main'.)
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1927.)
+  std = sequences.std(dim=-1, correction=1)
+  voix séparées par pyannote : 1 voix, 16 tours de parole
+  voix trop proches : répliques réparties d'après le fil du dialogue (questions, réponses)
+  voix trop proches (ressemblance 0.73) : vérification mot par mot laissée de côté
+  relecture du dialogue par l'IA : 35/35 phrases (A : la personne qui pose des questions et semble sceptique ou agacée (probableme)
+  contrôle questions-réponses (avec relecture de l'IA) : 35 phrases, 165 mot(s) changé(s) de voix
+  émotions entendues dans la voix : 0 réplique(s) (4 s)
+  32 répliques, voix : {'speaker_0': 261, 'speaker_1': 259}
+  son de la vidéo : 2 voix [261 Hz (f, 56 %), 259 Hz (f, 44 %)], 7.15 mots/s, blancs 0.58 s, 9 coupure(s) de parole, dynamique 32.0 dB, musique de fond, 39 bruitage(s) (6 graves, 33 aigus, 21 sur une fin de réplique), événements {'scream': 4, 'laughter': 3, 'crying': 1, 'thunder': 1, 'kiss': 1, 'glass': 1}, émotions {}
+  Florence-2 indisponible (Lookup failed for Cls 'Florence' from the 'jt-ecoute' app: App 'jt-ecoute' not found in environment 'main'.)
+  scène reconstituée : Deux personnages sont coincés dans une voiture embouteillée. L'un, énervé, demande sans cesse ce qu'il se passe, tandis que l'autre, agacé, répond qu'il n'y a rien, créant une dispute comique et absurde.
+  casting : speaker_0 → Jojo, speaker_1 → Kévin
+  sous-titres : 14 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
+  jeu d'acteur entendu dans le son : 4 réplique(s) (émotion de la voix, rires, cris)
+  événements sonores : crying, glass, kiss, laughter, scream, thunder
+  voix trop proches dans https://www.tiktok.com/@yan_animation0/video/7678076893253422368 (ressemblance 0.73) : on cherche une vidéo aux voix bien différentes
+Vidéo depuis TikTok : https://www.tiktok.com/@yan_animation0/video/7636012232404454659
+  son téléchargé (yt-dlp --impersonate chrome)
+  son récupéré : 68.9 s, compte d'origine @yan_animation0
+[ WARN:0@771.908] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+W0000 00:00:1793416310.266405    4485 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1793416310.274591    4484 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+  image de la vidéo : 1 plans (≈ 69.0 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 82 %, large 17 % ; caméra : fixe 94 %, epaule 5 % ; 1 personne(s) à l'écran : gauche (habit [91, 38, 41], cheveux [165, 123, 84], sourit 0 %) ; agitation 0.152 ; lumière soir ; fond [169, 160, 143]
+  isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
+  voix isolées gratuitement (Demucs, 32 s)
+  transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
+  transcription Groq impossible (HTTP Error 403: Forbidden)
+  Whisper indisponible (Whisper en panne) : contrôle simplifié
+  transcription gratuite (Whisper sur la machine) : 315 mots
+  mots recalés sur la voix (290 mots, écart moyen 89 ms, 16 s)
+  bruits de l'original (CLAP, 7 s) : crying, glass, laughter, scream
+  NeMo indisponible (Lookup failed for Cls 'Nemo' from the 'jt-ecoute' app: App 'jt-ecoute' not found in environment 'main'.)
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1927.)
+  std = sequences.std(dim=-1, correction=1)
+  voix séparées par pyannote : 2 voix, 14 tours de parole
+  voix trop proches : répliques réparties d'après le fil du dialogue (questions, réponses)
+  voix trop proches (ressemblance 0.82) : vérification mot par mot laissée de côté
+  relecture du dialogue par l'IA : 42/42 phrases (A : le père (Yanis), B : le ravisseur)
+  contrôle questions-réponses (avec relecture de l'IA) : 42 phrases, 160 mot(s) changé(s) de voix
+  émotions entendues dans la voix : 0 réplique(s) (5 s)
+  40 répliques, voix : {'speaker_0': 272, 'speaker_1': 279}
+  son de la vidéo : 2 voix [272 Hz (f, 56 %), 279 Hz (f, 44 %)], 5.6 mots/s, blancs 0.29 s, 14 coupure(s) de parole, dynamique 19.6 dB, musique de fond, 69 bruitage(s) (4 graves, 65 aigus, 32 sur une fin de réplique), événements {'crying': 3, 'glass': 1, 'scream': 1, 'laughter': 1}, émotions {}
+  Florence-2 indisponible (Lookup failed for Cls 'Florence' from the 'jt-ecoute' app: App 'jt-ecoute' not found in environment 'main'.)
+  réponse coupée (limite de 8000 jetons atteinte) pour doublage
+  scène reconstituée : Un homme paniqué appelle quelqu'un qu'il croit être un ravisseur, pensant avoir kidnappé son fils Yanis. En réalité, il s'agit d'une conversation absurde où l'invité joue le rôle du ravisseur avec un détachement total, révélant que Yanis est déjà parti de la maison et qu'il n'a pas besoin d'être 'libéré'.
+  casting : speaker_0 → Jojo, speaker_1 → Kévin
+  sous-titres : 1 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
+  jeu d'acteur entendu dans le son : 7 réplique(s) (émotion de la voix, rires, cris)
+  événements sonores : crying, glass, laughter, scream
+  voix trop proches dans https://www.tiktok.com/@yan_animation0/video/7636012232404454659 (ressemblance 0.82) : on cherche une vidéo aux voix bien différentes
+Vidéo depuis TikTok : https://www.tiktok.com/@motiontoonz/video/7702415967602724129
+  son téléchargé (yt-dlp --impersonate chrome)
+  son récupéré : 41.0 s, compte d'origine @motiontoonz
+[ WARN:0@1081.197] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+W0000 00:00:1793416618.242962    4586 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1793416618.259870    4586 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+  image de la vidéo : 25 plans (≈ 1.64 s chacun) ; cadrages : très serré 0 %, serré 4 %, moyen 0 %, large 95 % ; caméra : fixe 52 %, avance 3 %, recul 1 %, travelling 1 %, epaule 40 % ; 1 personne(s) à l'écran : aucun visage repéré ; agitation 0.531 ; lumière jour ; fond [216, 203, 187]
+  isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
+  voix isolées gratuitement (Demucs, 23 s)
+  transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
+  transcription Groq impossible (HTTP Error 403: Forbidden)
+  Whisper indisponible (Whisper en panne) : contrôle simplifié
+  transcription gratuite (Whisper sur la machine) : 180 mots
+  mots recalés sur la voix (172 mots, écart moyen 79 ms, 10 s)
+  bruits de l'original (CLAP, 4 s) : aucun
+  NeMo indisponible (Lookup failed for Cls 'Nemo' from the 'jt-ecoute' app: App 'jt-ecoute' not found in environment 'main'.)
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1927.)
+  std = sequences.std(dim=-1, correction=1)
+  voix séparées par pyannote : 1 voix, 4 tours de parole
+  voix trop proches : répliques réparties d'après le fil du dialogue (questions, réponses)
+  voix trop proches (ressemblance 0.88) : vérification mot par mot laissée de côté
+  relecture du dialogue par l'IA : 29/29 phrases (A : la personne qui demande à faire un nouveau passeport (probablement un adulte)
+  contrôle questions-réponses (avec relecture de l'IA) : 29 phrases, 79 mot(s) changé(s) de voix
+  émotions entendues dans la voix : 0 réplique(s) (3 s)
+  26 répliques, voix : {'speaker_0': 174, 'speaker_1': 168}
+  son de la vidéo : 2 voix [174 Hz (?, 47 %), 168 Hz (?, 53 %)], 5.27 mots/s, blancs 0.22 s, 0 coupure(s) de parole, dynamique 19.8 dB, musique de fond, 32 bruitage(s) (10 graves, 22 aigus, 18 sur une fin de réplique), événements {}, émotions {}
+  Florence-2 indisponible (Lookup failed for Cls 'Florence' from the 'jt-ecoute' app: App 'jt-ecoute' not found in environment 'main'.)
+  scène reconstituée : Un citoyen demande à renouveler son passeport dans une administration française. L'agent administratif explique les démarches nécessaires, mais le citoyen refuse de rendre son passeport actuel en raison des tampons qu'il contient.
+  casting : speaker_0 → Jojo, speaker_1 → Kévin
+  sous-titres : 8 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
+  voix trop proches dans https://www.tiktok.com/@motiontoonz/video/7702415967602724129 (ressemblance 0.88) : on cherche une vidéo aux voix bien différentes
+Vidéo depuis TikTok : https://www.tiktok.com/@motiontoonz/video/7701715758258375968
+  son téléchargé (yt-dlp --impersonate chrome)
+  son récupéré : 48.5 s, compte d'origine @motiontoonz
+[ WARN:0@1237.521] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+W0000 00:00:1793416775.025194    4668 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1793416775.033232    4669 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+  image de la vidéo : 1 plans (≈ 48.5 s chacun) ; cadrages : très serré 0 %, serré 5 %, moyen 0 %, large 94 % ; caméra : fixe 28 %, avance 18 %, recul 11 %, travelling 3 %, epaule 38 % ; 1 personne(s) à l'écran : aucun visage repéré ; agitation 1.0 ; lumière jour ; fond [245, 243, 242]
+  isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
+  voix isolées gratuitement (Demucs, 25 s)
+  transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
+  transcription Groq impossible (HTTP Error 403: Forbidden)
+  Whisper indisponible (Whisper en panne) : contrôle simplifié
+  transcription gratuite (Whisper sur la machine) : 204 mots
+  mots recalés sur la voix (175 mots, écart moyen 87 ms, 11 s)
+  bruits de l'original (CLAP, 5 s) : aucun
+  NeMo indisponible (Lookup failed for Cls 'Nemo' from the 'jt-ecoute' app: App 'jt-ecoute' not found in environment 'main'.)
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1927.)
+  std = sequences.std(dim=-1, correction=1)
+  voix séparées par pyannote : 1 voix, 11 tours de parole
+  voix trop proches : répliques réparties d'après le fil du dialogue (questions, réponses)
+  voix trop proches (ressemblance 0.85) : vérification mot par mot laissée de côté
+  relecture du dialogue par l'IA : 33/33 phrases (A : le client (probablement un jeune adulte ou un parent), B : le vendeur (ou un)
+  contrôle questions-réponses (avec relecture de l'IA) : 33 phrases, 104 mot(s) changé(s) de voix
+  émotions entendues dans la voix : 0 réplique(s) (4 s)
+  27 répliques, voix : {'speaker_0': 147, 'speaker_1': 147}
+  son de la vidéo : 2 voix [147 Hz (h, 47 %), 147 Hz (h, 53 %)], 5.04 mots/s, blancs 0.26 s, 3 coupure(s) de parole, dynamique 24.5 dB, musique de fond, 34 bruitage(s) (7 graves, 27 aigus, 16 sur une fin de réplique), événements {}, émotions {}
+  Florence-2 indisponible (Lookup failed for Cls 'Florence' from the 'jt-ecoute' app: App 'jt-ecoute' not found in environment 'main'.)
+  scène reconstituée : Deux hommes discutent dans un magasin d'électronique spécialisé dans les téléphones. L'un joue le rôle du client hésitant (presentateur), et l'autre celui du vendeur (invite) qui tente de lui expliquer les options disponibles.
   casting : speaker_0 → Jojo, speaker_1 → Kévin
   sous-titres : 26 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
-  jeu d'acteur entendu dans le son : 3 réplique(s) (émotion de la voix, rires, cris)
-  événements sonores : crying
-Sketch : « DUEL CULINAIRE », 34 répliques
+  voix trop proches dans https://www.tiktok.com/@motiontoonz/video/7701715758258375968 (ressemblance 0.85) : on cherche une vidéo aux voix bien différentes
+  aucune vidéo aux voix bien différentes : on garde https://www.tiktok.com/@same_same53/video/7700586484876840225 (ressemblance 0.72)
+Sketch : « DISPARITION DE FEMME », 25 répliques
 Son TikTok : une seule scène, un seul décor (pas de changement inutile)
-  décor 0 (lieu ressemblant de la banque, budget Modal du mois atteint) : cuisine, table en bois avec assiette, couverts, plat de riz 
-montage : 1 plans (0.1:large>pre/coupe)
+  décor 0 (lieu ressemblant de la banque, budget Modal du mois atteint) : commissariat, bureau de police avec écrans d'ordinateur, tab
+montage : 1 plans (0.2:large>pre/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-studio : soir, lieux ['cuisine'], tenues presentateur=tshirt, invite=chemise, 0 figurant(s), ambiances ['poussiere', 'vapeur'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 74.4 s, 34 répliques, 1 scène(s), personnages ['presentateur', 'invite']
-montage : 1 plans (0.1:large>pre/coupe)
+studio : jour, lieux ['commissariat'], tenues presentateur=chemise, invite=uniforme, 0 figurant(s), ambiances ['neon'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 68.6 s, 25 répliques, 1 scène(s), personnages ['presentateur', 'invite']
+montage : 1 plans (0.2:large>pre/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-studio : soir, lieux ['cuisine'], tenues presentateur=tshirt, invite=chemise, 0 figurant(s), ambiances ['poussiere', 'vapeur'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 74.4 s, 34 répliques, 1 scène(s), personnages ['presentateur', 'invite']
-  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~1115 images)
-  morceau 1116–2232 reçu d'une machine d'aide
-  morceau 2232–3347 reçu d'une machine d'aide
-  morceau 3347–4463 reçu d'une machine d'aide
-  dessin partagé terminé en 4.2 min
+studio : jour, lieux ['commissariat'], tenues presentateur=chemise, invite=uniforme, 0 figurant(s), ambiances ['neon'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 68.6 s, 25 répliques, 1 scène(s), personnages ['presentateur', 'invite']
+  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~1028 images)
+  lecture des morceaux impossible (HTTP Error 404: Not Found), nouvel essai
+  morceau 1029–2058 reçu d'une machine d'aide
+  morceau 3086–4115 reçu d'une machine d'aide
+  morceau 2058–3086 reçu d'une machine d'aide
+  dessin partagé terminé en 6.2 min
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury qualité (gratuit) : 8.9/10 — Humoriste 8.6/10 : 68.5 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 6.6/10 : montage trop lent : 0.1 plans toutes les 10 s (il en faudrait ~2.8); 21.0 s pas assez de plans de réaction de celui qui écoute | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.1/10 : 1.7 s sous-titres trop rapides à lire
-Corrections du jury (tour 1) : réaction « sceptique » à la réplique 15
-montage : 1 plans (0.1:large>pre/coupe)
-style croquis : décors passés à l'encre et à l'aquarelle
-studio : soir, lieux ['cuisine'], tenues presentateur=tshirt, invite=chemise, 0 figurant(s), ambiances ['poussiere', 'vapeur'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 74.4 s, 34 répliques, 1 scène(s), personnages ['presentateur', 'invite']
-  redessin partiel : 600/4463 images à redessiner (1 passage(s)), le reste repris tel quel
-Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury qualité (ia) : 6.8/10 — Humoriste 8.6/10 : 68.5 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 6.6/10 : montage trop lent : 0.1 plans toutes les 10 s (il en faudrait ~2.8); 21.0 s pas assez de plans de réaction de celui qui écoute | Directeur artistique 8.0/10 : 0 s Les personnages manquent de détails dans leurs tenues et expressions. Par exemple, les cheveux de l'invité pourraient être plus stylisés pour correspondre à l'univers humoristique.; 16 s Le décor de la cuisine est trop générique. Ajouter des éléments spécifiques comme des épices ou des ustensiles de cuisine pourrait renforcer l'immersion. | Ingénieur du son 5.0/10 : 0 s Aucun bruitage ou fond sonore n'est présent pour accompagner les répliques, ce qui rend la vidéo plate.; 47.6 s La synchronisation des lèvres avec la voix est parfois décalée, notamment pour les répliques rapides.; 66.8 s Aucun effet sonore pour marquer la r
-Manque par rapport à la vidéo d'origine : Les personnages originaux ont des interactions plus dynamiques et des réactions spontanées (ex. : image 12, l'invité a un geste exagéré). ; Les bruitages et les effets sonores originaux renforcent l'humour et l'immersion (ex. : rires, sons de mastication). ; Les décors originaux incluent des éléments comiques absents dans notre version (ex. : une assiette avec une portion démesurée ou des objets déformés).
-La version corrigée n'est pas meilleure : on garde la première.
+Jury qualité (ia) : 5.8/10 — Humoriste 6.0/10 : 0.4 s La chute finale manque de punch et n'est pas assez mise en valeur. Le moment où le présentateur évoque la 'rigueur de 16,3 cm' pourrait être souligné par un zoom choc ou un effet visuel pour renforcer; 26.8 s Les détails techniques sur la voiture sont trop rapides et peu drôles. Ajouter des réactions exagérées de l'invité ou des bruitages pour briser la monotonie. | Réalisateur 5.0/10 : 0 s Montage trop lent avec seulement 1 plan toutes les 10 secondes environ. Il faudrait accélérer le rythme pour maintenir l'attention.; 10.1 s Manque de plans de réaction de l'invité, ce qui rend la dynamique moins engageante.; 61.5 s Faux raccord entre les plans 15 et 16. Le changement de décor et de style visuel doit être fluide. | Directeur artistique 7.0/10 : 0 s Les personnages secondaires (comme l'invité) pourraient être mieux stylisés pour renforcer l'humour visuel. Par ex
+Manque par rapport à la vidéo d'origine : Les réactions exagérées de l'invité dans l'original (ex : plans où il rit ou semble choqué) manquent dans notre version. ; Les changements de lieux (ex : alternance entre le commissariat et un lieu extérieur) sont moins marqués dans notre vidéo. ; Les détails visuels comme les accessoires comiques (ex : lunettes de l'invité) sont absents. ; Les faux raccords et transitions rapides entre les plans sont moins dynamiques dans notre version.
 fin en boucle : la dernière image se raccorde à la première (0.35 s de fondu)
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = mistral ×3, voix = tiktok, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 40939, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0}
-Quota de l'API GitHub : 4924 appels restants
-OK : sortie/2026-10-31_03h40_emission.mp4 (75 s)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = gemini ×1, mistral ×12, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 94032, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0}
+Quota de l'API GitHub : 4994 appels restants
+OK : sortie/2026-10-31_04h22_emission.mp4 (69 s)
