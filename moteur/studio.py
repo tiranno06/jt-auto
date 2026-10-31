@@ -924,7 +924,8 @@ def consigne_studio():
   "age" (nombre), "taille" (1 = adulte moyen ; ado ≈ 0.8 ; enfant ≈ 0.65), "corpulence" (0 = mince à 1 = fort),
   "cheveux" parmi {L(sorted(set(H_.COIFFURES_H + H_.COIFFURES_F + M.GR.COIFFURES)))}, "barbe" parmi trois_jours, moustache, bouc ou rien (JAMAIS de grosse barbe : une barbe mal rasée au plus),
   "espece" SEULEMENT si ce personnage n'est PAS un humain dans la vidéo d'origine (un animal ou un objet qui parle) : chat, chien,
-  steak, pizza, oeuf, banane, ou "objet:<nom>" pour un autre objet (le moteur le dessine avec un visage, des pattes ou de petits bras).
+  lapin, souris, oiseau, poisson, steak, pizza, oeuf, banane, voiture, frigo, telephone, verre, croissant, ou "objet:<nom>" pour un
+  autre objet (le moteur le dessine avec un visage, des pattes ou de petits bras).
   L'ÂGE, le genre et la taille doivent coller au DIALOGUE, à la voix et à la vidéo : celui qu'on appelle « fiston », « mon fils »,
   « ma puce », ou qui dit « papa, … », « maman, … » est un ADO (13-16 ans : plus petit, cheveux courts de son âge, JAMAIS de barbe)
   ou un enfant si le contexte le dit ; ses parents sont plus âgés ; un patron, un client, un prof… ont l'âge du rôle ;

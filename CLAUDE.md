@@ -269,6 +269,14 @@
   mieux ; BOUCHES_CORRIGEES=0) ; **animaux et objets qui parlent** (`moteur/animaux.py`, style croquis : chat, chien, steak, pizza, œuf,
   banane, objet quelconque ; même visage et bouche que nos personnages ; fiche "espece" de l'IA ou `animaux.qui_est` d'après le dialogue :
   « je suis un chat » = lui, « mon chat, t'es… », « sale chien » = l'autre ; plus petits ; ESPECES=0).
+  **Liste du 1er novembre (choix 4, 5, 6, 11)** : animaux et objets en plus (lapin, souris, oiseau, poisson qui flotte, voiture sur ses
+  roues, frigo, téléphone, verre d'eau, croissant ; « je suis au téléphone » ne compte jamais ; un mot doux ou une insulte seuls
+  (« mon lapin », « sale chien ») ne suffisent plus : il faut « je suis un… », un 2e indice ou l'IA) ; accessoires des animaux et objets
+  (chapeau du costume ou du métier, lunettes, collier à médaille pour chat et chien, petit nœud pour une voix de femme) ; **deuxième
+  chance** (`moteur/deuxieme_chance.py`) : vidéo TikTok à confiance < CONFIANCE_MIN (40) refaite une fois sur le même son (emission.yml
+  theme « TIKTOK::lien##2e:fichier »), la moins sûre des deux supprimée (jamais une vidéo publiée ou cochée « À publier » : alors les
+  deux restent ; DEUXIEME_CHANCE=0) ; **jamais deux sons du même profil d'affilée** à la publication (`publication_auto.alterner`,
+  même ordre dans le calendrier du site : `alternerPubli`).
   **Tirage au hasard des sons TikTok** : le robot préfère les vidéos aux voix bien différentes (ressemblance ≤ 0,6, réglage
   VOIX_DIFFERENTES ; 1 = sans tri) : jusqu'à 6 vidéos écoutées (25 min au plus), sinon celle aux voix les plus nettes. Un lien collé
   à la main n'est jamais refusé (le contrôle questions-réponses s'en charge).

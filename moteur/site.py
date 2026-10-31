@@ -414,7 +414,8 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <div class="auto"><div class="txt"><b>Heure choisie par les statistiques</b><small>L'heure où vos vidéos font le plus de vues (sinon l'heure fixe ci-dessous).</small></div><button class="inter" data-var="PUBLI_HEURE_AUTO" data-def="0" data-bascule="1"></button></div>
     <label>Heure de publication (heure de Paris)<div class="jeton"><input data-var="PUBLI_HEURE" data-def="18:00" data-texte="1" maxlength="5" type="time" placeholder="18:00"><button class="second" data-enr="PUBLI_HEURE" style="flex:none;padding:10px 14px">OK</button></div></label>
     <p class="note" id="pubResume"></p>
-    <h3 style="margin:14px 0 6px">🗓️ Calendrier de publication</h3><div id="calendrier"></div></section>
+    <h3 style="margin:14px 0 6px">🗓️ Calendrier de publication</h3><div id="calendrier"></div>
+    <p class="note">Jamais deux sons du même profil d'affilée : le robot alterne les comptes d'origine (l'ordre ci-dessus en tient compte).</p></section>
   <section class="panneau"><h2>🎬 Mes vidéos TikTok</h2>
     <div class="filtresTk"><input id="fTexte" type="search" placeholder="🔎 Rechercher (titre, légende)">
       <select id="fEtat"><option value="">Toutes</option><option value="verifier">⚠️ À vérifier</option><option value="cochees">✅ À publier</option><option value="publiees">📤 Publiées</option><option value="non">Non publiées</option></select>
@@ -938,7 +939,13 @@ function majBoutonPubliFiche(){const b=$("#aPublier"); if(!b) return; const v=ch
   if(!v||v.origine!=="tiktok"||v.publie===true){b.style.display="none";return}
   b.style.display=""; b.disabled=!lireJeton(); b.textContent=textePubli(v); b.classList.toggle("on",filePubli().includes(v.fichier))}
 const filePubli=()=>String((VARS&&VARS.PUBLI_FILE)||"").split(/\n+/).map(x=>x.trim()).filter(Boolean);
-const attentePubli=f=>f.filter(n=>{const v=DATA.find(x=>x.fichier===n); return v&&v.publie==null});   // cochées, pas encore publiées (échec : sautée)
+const attentePubli=f=>alternerPubli(f.filter(n=>{const v=DATA.find(x=>x.fichier===n); return v&&v.publie==null}));   // cochées, pas encore publiées (échec : sautée)
+function alternerPubli(f){                                                 // jamais deux sons du même profil d'affilée (moteur/publication_auto.py)
+  const pr=n=>{const v=DATA.find(x=>x.fichier===n); return v?profilDe(v):""};
+  const pub=DATA.filter(v=>v.publie===true).sort((a,b)=>String(a.programmee||a.fichier||"").localeCompare(String(b.programmee||b.fichier||"")));
+  let prec=pub.length?profilDe(pub[pub.length-1]):""; const reste=[...f], out=[];
+  while(reste.length){let k=reste.findIndex(n=>!prec||pr(n)!==prec); if(k<0) k=0; const [n]=reste.splice(k,1); out.push(n); prec=pr(n)}
+  return out}
 async function basculerPubli(nom,b){
   if(!lireJeton()){toast("Connectez d'abord la régie (onglet Réglages)");allerOnglet("config");return}
   let f=filePubli(); const on=f.includes(nom), v_=DATA.find(x=>x.fichier===nom), avant=VARS.PUBLI_FILE;

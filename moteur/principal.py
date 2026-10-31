@@ -20,6 +20,8 @@ if AUTO:                                                                  # nouv
 LOT = (os.environ.get("SERIE_LOT") or "").strip() == "1"                 # série d'un seul jet : tous les épisodes à la suite
 if LOT: os.environ["EPISODES"] = "serie"
 THEME = (os.environ.get("THEME") or "").strip()[:2000]                 # création manuelle depuis l'onglet « Manuel » de la régie
+import deuxieme_chance as DC
+THEME, DEUXIEME = DC.separer(THEME)                                        # « TIKTOK::lien##2e:fichier » : 2e chance d'une vidéo peu sûre
 REFAIRE = (os.environ.get("REFAIRE") or "").strip()                      # « fichier.mp4|texte|voix|decors|qui » : bouton Refaire de la régie
 QUI = {}                                                                   # « Corriger qui parle » (idée 6) : n° de réplique -> personnage
 ANCIEN, SK_ANCIEN = None, None
@@ -588,7 +590,7 @@ def main():
                                       corrigees=QUALITE["corrigees"][:10], manques=Q_.get("manques_origine") or [])
     print("Outils utilisés : " + ", ".join(f"{k} = {v}" for k, v in historique[-1]["outils"].items()), flush=True)
     json.dump(historique[-200:], open("episodes/historique.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
-    if THEME and not REFAIRE: historique[-1]["manuel"] = True; historique[-1]["theme"] = THEME[:300]
+    if THEME and not REFAIRE and not DEUXIEME: historique[-1]["manuel"] = True; historique[-1]["theme"] = THEME[:300]
     if REFAIRE:
         historique[-1]["refait_de"] = REFAIRE.split("|")[0]
         if ANCIEN and ANCIEN.get("manuel"): historique[-1]["manuel"] = True
@@ -609,6 +611,13 @@ def main():
             import cartoon as _c; historique[-1]["couverture_ms"] = _c.COUVERTURE_MS[0]
         except Exception: pass
     if sk.get("titre_accroche"): historique[-1]["titre_affiche"] = sk["titre_accroche"]
+    if DOUB and not test:                                                  # deuxième chance : vidéo peu sûre refaite une fois, la plus sûre gardée
+        try:
+            quoi_, val_ = DC.decider(historique, historique[-1], sk["doublage"].get("source") or tiktok, DEUXIEME)
+            if quoi_:
+                os.makedirs("sortie", exist_ok=True)
+                open("sortie/.deuxieme_chance" if quoi_ == "relancer" else "sortie/.perdante", "w", encoding="utf-8").write(val_)
+        except Exception as e: print(f"deuxième chance impossible ({str(e)[:120]})", flush=True)
     os.makedirs("episodes/sketchs", exist_ok=True)                         # le sketch de chaque vidéo : « Refaire », exemples 👍
     json.dump(sk, open(f"episodes/sketchs/{os.path.basename(base)}.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     json.dump(historique[-200:], open("episodes/historique.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
