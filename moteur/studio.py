@@ -767,6 +767,20 @@ def separer_lieux(sk):
     if S: sk["studio"] = S
     return True
 
+def une_scene(sk):
+    """Son TikTok (demande de l'auteur, 31 octobre 2026) : la vidéo d'origine se passe dans UN seul lieu. L'IA découpait parfois le son
+    en plusieurs scènes : changement de décor inutile, personnages qui ressortaient et rentraient en marchant (bruits de pas « toc toc
+    toc »). Toutes les répliques restent dans la scène la plus longue (son décor) ; seuls les lieux séparés (appel, visio) gardent
+    un décor par personnage. UNE_SCENE=0 pour garder le découpage de l'IA. Renvoie True si le découpage a changé."""
+    dec = [d for d in (sk.get("decoupage") or []) if isinstance(d, dict) and d.get("repliques")]
+    if len(dec) < 2 or sk.get("_separes") or os.environ.get("UNE_SCENE", "1") == "0": return False
+    k = max(range(len(dec)), key=lambda j: len(dec[j]["repliques"]))
+    sk["decoupage"] = [dict(dec[k], scene="1", repliques=list(range(len(sk.get("repliques") or []))))]
+    S = sk.get("studio") if isinstance(sk.get("studio"), dict) else {}
+    if isinstance(S.get("lieux"), list) and len(S["lieux"]) > k: S["lieux"] = [S["lieux"][k]]
+    if isinstance(sk.get("fiche"), dict) and "decoupage" in sk["fiche"]: sk["fiche"]["decoupage"] = sk["decoupage"]
+    return True
+
 def compagnons(sk, dec, lieux, moment, graine):
     """Personnages muets qui jouent dans la scène (vus dans la vidéo ou suggérés par l'histoire) : « une femme très apprêtée lui
     fait signe à côté de sa voiture »… Claude : studio → "figurants" : [{"avec": rôle, "genre", "age", "geste": coucou / signe /

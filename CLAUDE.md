@@ -190,6 +190,12 @@
   par phrase (`locuteurs.fil_dialogue`) : logique du texte (`indices_dialogue` : après une question l'autre répond, « oui / bah /
   mais » = réponse, reprise des mots de l'autre, phrase coupée = la suite) + relecture du dialogue par l'IA, Gemini d'abord
   (`doublage.relire_dialogue`, `reseau.claude(raisonner=True)`, RELIRE_DIALOGUE=0 pour couper). « Battle d'aura » : 68 % → 97 %.
+  **Corrections du 31 octobre 2026 (remarques de l'auteur)** : points oubliés par la transcription gratuite remis
+  (`locuteurs.fins_de_phrase` : « …rouge Mais pourquoi… » -> nouvelle phrase ; jamais sur un nom propre) ; une phrase qui repart en
+  minuscule reste à la même personne (`caler_sur_phrases`, `indices_dialogue`) ; contrôle questions-réponses aussi quand les voix se
+  ressemblent « un peu » (ressemblance > 0,55 : `locuteurs.DOUTE`, le son garde du poids) et quand une seule voix est trouvée (l'IA dit
+  si c'est un vrai monologue : jamais de personne inventée). **Un seul décor par son TikTok** (`studio.une_scene`, UNE_SCENE=0 pour
+  couper ; appels et visios gardent un décor chacun) et personne n'entre en marchant (plus de bruits de pas « toc toc toc »).
   **Tirage au hasard des sons TikTok** : le robot préfère les vidéos aux voix bien différentes (ressemblance ≤ 0,6, réglage
   VOIX_DIFFERENTES ; 1 = sans tri) : jusqu'à 6 vidéos écoutées (25 min au plus), sinon celle aux voix les plus nettes. Un lien collé
   à la main n'est jamais refusé (le contrôle questions-réponses s'en charge).
