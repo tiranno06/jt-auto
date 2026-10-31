@@ -1,718 +1,1216 @@
 {
- "titre": "APPEL MATINAL FRANCE TRAVAIL",
- "sujet": "APPEL MATINAL FRANCE TRAVAIL",
- "ecran": "APPEL MATINAL ",
+ "titre": "VANNEMICROONDE",
+ "sujet": "VANNEMICROONDE",
+ "ecran": "VANNEMICROONDE",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "POV : France Travail te réveille",
- "question": "Tu réponds aux appels le matin ?",
+ "titre_accroche": "POV : Votre viande fait des blagues",
+ "question": "Qui va gagner cette partie de dupe entre le présentateur et l'invitée ?",
  "running_gag": "",
  "verite": "",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "Bonjour, c'est France Travail à l'appareil. Bonjour, je vous appelle pour faire votre bilan en ligne et je vais vous poser quelques questions. Êtes-vous prêt ?",
-   "_deb": 0.721,
-   "_fin": 9.188,
-   "d": "[polite] Bonjour, c'est France Travail à l'appareil. Bonjour, je vous appelle pour faire votre bilan en ligne et je vais vous poser quelques questions. Êtes-vous prêt ?",
-   "objet": "telephone",
+   "t": "{'texte': 'Attends, je vais faire des bruits, comme ça il va croire que je vais être chaud.'}",
+   "_deb": 0.16,
+   "_fin": 2.968,
+   "d": "{'texte': '[excited] Attends, je vais faire des bruits, comme ça il va croire que je vais être chaud.'}",
+   "objet": "micro",
    "_mots": [
     [
-     "bonjour",
+     "Attends,",
      0.0,
-     0.34
-    ],
-    [
-     "c",
-     0.361,
      0.381
     ],
     [
-     "'est",
-     0.381,
-     0.481
-    ],
-    [
-     "france",
-     0.521,
-     0.721
-    ],
-    [
-     "travail",
-     0.741,
-     1.002
-    ],
-    [
-     "à",
-     1.002,
-     1.022
-    ],
-    [
-     "l",
-     1.042,
-     1.062
-    ],
-    [
-     "'appareil",
-     1.082,
-     1.343
-    ],
-    [
-     "bonjour",
-     2.025,
-     2.346
-    ],
-    [
      "je",
-     2.349,
-     3.609
-    ],
-    [
-     "vous",
-     3.709,
-     3.809
-    ],
-    [
-     "appelle",
-     3.85,
-     4.07
-    ],
-    [
-     "pour",
-     4.11,
-     4.211
-    ],
-    [
-     "faire",
-     4.231,
-     4.411
-    ],
-    [
-     "votre",
-     4.431,
-     4.612
-    ],
-    [
-     "bilan",
-     4.732,
-     4.892
-    ],
-    [
-     "en",
-     4.993,
-     5.033
-    ],
-    [
-     "ligne",
-     5.073,
-     5.253
-    ],
-    [
-     "et",
-     5.895,
-     5.955
-    ],
-    [
-     "je",
-     5.995,
-     6.055
+     0.402,
+     0.462
     ],
     [
      "vais",
-     6.136,
-     6.256
+     0.462,
+     0.602
     ],
     [
-     "vous",
-     6.296,
-     6.436
+     "faire",
+     0.602,
+     0.722
     ],
     [
-     "poser",
-     6.456,
-     6.657
+     "des",
+     0.763,
+     0.843
     ],
     [
-     "quelques",
-     6.657,
-     6.938
+     "bruits,",
+     0.863,
+     1.083
     ],
     [
-     "questions",
-     6.978,
-     6.999
+     "comme",
+     1.204,
+     1.344
     ],
     [
-     "êtes",
-     6.999,
-     8.146
+     "ça",
+     1.364,
+     1.404
     ],
     [
-     "vous",
-     8.166,
-     8.286
+     "il",
+     1.484,
+     1.525
     ],
     [
-     "prêt",
-     8.306,
-     8.467
+     "va",
+     1.545,
+     1.585
+    ],
+    [
+     "croire",
+     1.645,
+     1.825
+    ],
+    [
+     "que",
+     1.866,
+     1.966
+    ],
+    [
+     "je",
+     2.146,
+     2.206
+    ],
+    [
+     "vais",
+     2.267,
+     2.347
+    ],
+    [
+     "être",
+     2.367,
+     2.447
+    ],
+    [
+     "chaud.",
+     2.467,
+     2.808
     ]
    ]
   },
   {
-   "p": "invite",
-   "t": "Oui, oui.",
-   "_deb": 9.772,
-   "_fin": 9.973,
-   "d": "[sleepy] Oui, oui.",
-   "objet": "telephone",
+   "p": "presentateur",
+   "t": "{'texte': 'Ça va chauffer.'}",
+   "_deb": 2.968,
+   "_fin": 3.409,
+   "d": "{'texte': '[confident] Ça va chauffer.'}",
    "_mots": [
     [
-     "Oui,",
+     "Ça",
      0.0,
-     0.1
+     0.04
     ],
     [
-     "oui.",
+     "va",
      0.1,
-     0.201
+     0.14
+    ],
+    [
+     "chauffer.",
+     0.201,
+     0.441
     ]
    ]
   },
   {
-   "p": "invite",
-   "t": "pour",
-   "_deb": 14.222,
-   "_fin": 15.46,
-   "d": "[shouting] pour",
+   "p": "presentateur",
+   "t": "{'texte': 'Alors,'}",
+   "_deb": 6.343,
+   "_fin": 6.486,
+   "d": "{'texte': '[neutral] Alors,'}",
    "_mots": [
     [
-     "pour",
+     "Alors,",
      0.0,
-     1.238
+     0.143
     ]
-   ],
-   "objet": "telephone"
+   ]
   },
   {
    "p": "presentateur",
-   "t": "Chercher du travail ?",
-   "_deb": 17.302,
-   "_fin": 17.966,
-   "d": "[laughing] Chercher du travail ?",
+   "t": "{'texte': 'je suis chaud?'}",
+   "_deb": 13.781,
+   "_fin": 14.47,
+   "d": "{'texte': '[playful] je suis chaud?'}",
    "_mots": [
     [
-     "chercher",
+     "{'texte':",
      0.0,
-     0.241
+     0.06
     ],
     [
-     "du",
-     0.282,
-     0.342
+     "'je",
+     0.08,
+     0.261
     ],
     [
-     "travail",
-     0.382,
-     0.664
+     "suis",
+     0.322,
+     0.429
+    ],
+    [
+     "chaud?'}",
+     0.429,
+     0.689
     ]
-   ],
-   "objet": "telephone"
+   ]
   },
   {
-   "p": "invite",
-   "t": "Oui... non.",
-   "_deb": 18.811,
-   "_fin": 20.32,
-   "d": "[hesitant] Oui... non.",
+   "p": "envoyee",
+   "t": "{'texte': 'Touche-moi?'}",
+   "_deb": 14.727,
+   "_fin": 15.05,
+   "d": "{'texte': '[sarcastic] Touche-moi?'}",
    "_mots": [
     [
-     "Oui...",
+     "Touche",
      0.0,
-     0.121
+     0.162
     ],
     [
-     "non.",
-     0.121,
-     1.509
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Non ?",
-   "_deb": 26.774,
-   "_fin": 28.32,
-   "d": "[neutral] Non ?",
-   "_mots": [
-    [
-     "non",
-     0.0,
-     1.546
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "Non.",
-   "_deb": 29.365,
-   "_fin": 29.505,
-   "d": "[tired] Non.",
-   "_mots": [
-    [
-     "Non.",
-     0.0,
-     0.14
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Non ?",
-   "_deb": 33.35,
-   "_fin": 33.431,
-   "d": "[neutral] Non ?",
-   "_mots": [
-    [
-     "non",
-     0.0,
-     0.081
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "Souvent.",
-   "_deb": 34.96,
-   "_fin": 36.04,
-   "d": "[mumbling] Souvent.",
-   "_mots": [
-    [
-     "Souvent.",
-     0.0,
-     1.08
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "Souvent... comment ?",
-   "_deb": 40.031,
-   "_fin": 40.659,
-   "d": "[sluggish] Souvent... comment ?",
-   "_mots": [
-    [
-     "souvent",
-     0.0,
-     0.284
-    ],
-    [
-     "comment",
-     0.365,
-     0.628
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Comment évaluez-vous l'accompagnement de votre conseiller ?",
-   "_deb": 44.364,
-   "_fin": 46.439,
-   "d": "[formal] Comment évaluez-vous l'accompagnement de votre conseiller ?",
-   "_mots": [
-    [
-     "Comment",
-     0.0,
-     0.423
-    ],
-    [
-     "évaluez-vous",
-     0.463,
-     0.584
-    ],
-    [
-     "l'accompagnement",
-     0.705,
-     0.745
-    ],
-    [
-     "de",
-     0.765,
-     1.289
-    ],
-    [
-     "votre",
-     1.349,
-     1.39
-    ],
-    [
-     "conseiller",
-     1.45,
-     1.631
+     "-moi",
+     0.162,
+     0.282
     ],
     [
      "?",
-     1.712,
-     2.075
+     0.283,
+     0.323
     ]
-   ],
-   "objet": "telephone"
+   ]
   },
   {
-   "p": "invite",
-   "t": "Zéro. Au...",
-   "_deb": 53.509,
-   "_fin": 53.691,
-   "d": "[abrupt] Zéro. Au...",
+   "p": "presentateur",
+   "t": "{'texte': 'Eh non, je suis froid.'}",
+   "_deb": 15.05,
+   "_fin": 16.299,
+   "d": "{'texte': '[mocking] Eh non, je suis froid.'}",
    "_mots": [
     [
-     "Zéro.",
+     "Eh",
+     0.0,
+     0.322
+    ],
+    [
+     "non,",
+     0.503,
+     0.564
+    ],
+    [
+     "je",
+     0.584,
+     0.644
+    ],
+    [
+     "suis",
+     0.765,
+     0.886
+    ],
+    [
+     "froid.",
+     0.906,
+     1.249
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "{'texte': \"Je t'ai bien eu, espèce de débile. Allez, remets-moi dedans.\"}",
+   "_deb": 17.562,
+   "_fin": 20.435,
+   "d": "{'texte': \"[laughing] Je t'ai bien eu, espèce de débile. Allez, remets-moi dedans.\"}",
+   "objet": "telephone",
+   "_mots": [
+    [
+     "Je",
+     0.0,
+     0.06
+    ],
+    [
+     "t",
+     0.081,
+     0.101
+    ],
+    [
+     "'ai",
+     0.141,
+     0.181
+    ],
+    [
+     "bien",
+     0.221,
+     0.322
+    ],
+    [
+     "eu,",
+     0.402,
+     0.442
+    ],
+    [
+     "espèce",
+     0.623,
+     0.945
+    ],
+    [
+     "de",
+     1.005,
+     1.065
+    ],
+    [
+     "débile.",
+     1.186,
+     1.728
+    ],
+    [
+     "Allez,",
+     2.11,
+     2.371
+    ],
+    [
+     "remets",
+     2.371,
+     2.552
+    ],
+    [
+     "-moi",
+     2.552,
+     2.632
+    ],
+    [
+     "dedans.",
+     2.673,
+     2.873
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "{'texte': \"Allez, c'est parti.\"}",
+   "_deb": 20.636,
+   "_fin": 21.219,
+   "d": "{'texte': \"[cheerful] Allez, c'est parti.\"}",
+   "_mots": [
+    [
+     "{'texte':",
+     0.0,
+     0.181
+    ],
+    [
+     "\"Allez,",
+     0.201,
+     0.221
+    ],
+    [
+     "c'est",
+     0.221,
+     0.362
+    ],
+    [
+     "parti.\"}",
+     0.362,
+     0.583
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "{'texte': 'Je refais.'}",
+   "_deb": 23.436,
+   "_fin": 23.764,
+   "d": "{'texte': '[neutral] Je refais.'}",
+   "_mots": [
+    [
+     "Je",
+     0.0,
+     0.062
+    ],
+    [
+     "refais.",
+     0.062,
+     0.328
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "T 'as",
+   "_deb": 26.152,
+   "_fin": 26.845,
+   "_mots": [
+    [
+     "T",
+     0.0,
+     0.02
+    ],
+    [
+     "'as",
+     0.631,
+     0.693
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "{'texte': 'dit, touche-moi? Eh non, je suis encore froid.'}",
+   "_deb": 32.741,
+   "_fin": 34.509,
+   "d": "{'texte': '[playful] dit, touche-moi? Eh non, je suis encore froid.'}",
+   "_mots": [
+    [
+     "dit,",
      0.0,
      0.101
     ],
     [
-     "Au...",
+     "touche",
      0.141,
-     0.182
+     0.261
+    ],
+    [
+     "-moi",
+     0.261,
+     0.342
+    ],
+    [
+     "?",
+     0.349,
+     0.369
+    ],
+    [
+     "Eh",
+     0.362,
+     0.683
+    ],
+    [
+     "non,",
+     0.844,
+     1.045
+    ],
+    [
+     "je",
+     1.165,
+     1.246
+    ],
+    [
+     "suis",
+     1.246,
+     1.346
+    ],
+    [
+     "encore",
+     1.346,
+     1.527
+    ],
+    [
+     "froid.",
+     1.547,
+     1.768
     ]
-   ],
-   "objet": "telephone"
+   ]
   },
   {
-   "p": "invite",
-   "t": "revoir, bonne journée.",
-   "_deb": 57.003,
-   "_fin": 57.958,
-   "d": "[relieved] revoir, bonne journée.",
+   "p": "presentateur",
+   "t": "{'texte': \"Touche l'assiette. Elle est bouillante.\"}",
+   "_deb": 34.971,
+   "_fin": 36.859,
+   "d": "{'texte': \"[annoyed] Touche l'assiette. Elle est bouillante.\"}",
+   "_mots": [
+    [
+     "{'texte':",
+     0.0,
+     0.14
+    ],
+    [
+     "\"Touche",
+     0.161,
+     0.181
+    ],
+    [
+     "l'assiette.",
+     0.221,
+     0.522
+    ],
+    [
+     "Elle",
+     1.004,
+     1.165
+    ],
+    [
+     "est",
+     1.245,
+     1.326
+    ],
+    [
+     "bouillante.\"}",
+     1.346,
+     1.888
+    ]
+   ]
+  },
+  {
+   "p": "envoyee",
+   "t": "{'texte': 'Espèce de con.'}",
+   "_deb": 38.663,
+   "_fin": 39.558,
+   "d": "{'texte': '[angry] Espèce de con.'}",
+   "_mots": [
+    [
+     "Espèce",
+     0.0,
+     0.427
+    ],
+    [
+     "de",
+     0.427,
+     0.508
+    ],
+    [
+     "con.",
+     0.63,
+     0.895
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "{'texte': \"C'est la meilleure vanne du monde. À chaque fois que je la fais, je me plie en deux, frère.\"}",
+   "_deb": 41.282,
+   "_fin": 44.519,
+   "d": "{'texte': \"[laughing] C'est la meilleure vanne du monde. À chaque fois que je la fais, je me plie en deux, frère.\"}",
+   "_mots": [
+    [
+     "{'texte':",
+     0.0,
+     0.021
+    ],
+    [
+     "\"C'est",
+     0.061,
+     0.141
+    ],
+    [
+     "la",
+     0.161,
+     0.222
+    ],
+    [
+     "meilleure",
+     0.282,
+     0.543
+    ],
+    [
+     "vanne",
+     0.563,
+     0.805
+    ],
+    [
+     "du",
+     0.805,
+     0.865
+    ],
+    [
+     "monde.",
+     0.905,
+     1.086
+    ],
+    [
+     "À",
+     1.086,
+     1.106
+    ],
+    [
+     "chaque",
+     1.146,
+     1.287
+    ],
+    [
+     "fois",
+     1.287,
+     1.368
+    ],
+    [
+     "que",
+     1.368,
+     1.428
+    ],
+    [
+     "je",
+     1.448,
+     1.488
+    ],
+    [
+     "la",
+     1.528,
+     1.569
+    ],
+    [
+     "fais,",
+     1.649,
+     1.83
+    ],
+    [
+     "je",
+     2.111,
+     2.152
+    ],
+    [
+     "me",
+     2.212,
+     2.292
+    ],
+    [
+     "plie",
+     2.413,
+     2.594
+    ],
+    [
+     "en",
+     2.674,
+     2.715
+    ],
+    [
+     "deux,",
+     2.775,
+     2.896
+    ],
+    [
+     "frère.\"}",
+     2.956,
+     3.237
+    ]
+   ]
+  },
+  {
+   "p": "envoyee",
+   "t": "{'texte': 'Ah, je suis cuit. Enfin, je suis cuit.'}",
+   "_deb": 45.184,
+   "_fin": 46.513,
+   "d": "{'texte': '[sarcastic] Ah, je suis cuit. Enfin, je suis cuit.'}",
+   "_mots": [
+    [
+     "Ah,",
+     0.0,
+     0.06
+    ],
+    [
+     "je",
+     0.141,
+     0.201
+    ],
+    [
+     "suis",
+     0.201,
+     0.302
+    ],
+    [
+     "cuit.",
+     0.342,
+     0.523
+    ],
+    [
+     "Enfin,",
+     0.866,
+     1.027
+    ],
+    [
+     "je",
+     1.047,
+     1.087
+    ],
+    [
+     "suis",
+     1.087,
+     1.168
+    ],
+    [
+     "cuit.",
+     1.168,
+     1.329
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "{'texte': 'Non, je ne suis pas cuit.'}",
+   "_deb": 46.755,
+   "_fin": 47.319,
+   "d": "{'texte': '[neutral] Non, je ne suis pas cuit.'}",
+   "_mots": [
+    [
+     "Non,",
+     0.0,
+     0.1
+    ],
+    [
+     "je",
+     0.12,
+     0.161
+    ],
+    [
+     "ne",
+     0.161,
+     0.201
+    ],
+    [
+     "suis",
+     0.201,
+     0.282
+    ],
+    [
+     "pas",
+     0.282,
+     0.362
+    ],
+    [
+     "cuit.",
+     0.382,
+     0.564
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "{'texte': 'Je suis encore tout saignant.'}",
+   "_deb": 48.347,
+   "_fin": 49.057,
+   "d": "{'texte': '[playful] Je suis encore tout saignant.'}",
+   "_mots": [
+    [
+     "Je",
+     0.0,
+     0.041
+    ],
+    [
+     "suis",
+     0.041,
+     0.122
+    ],
+    [
+     "encore",
+     0.122,
+     0.284
+    ],
+    [
+     "tout",
+     0.284,
+     0.406
+    ],
+    [
+     "saignant.",
+     0.426,
+     0.71
+    ]
+   ]
+  },
+  {
+   "p": "envoyee",
+   "t": "{'texte': 'Tout frais.'}",
+   "_deb": 49.869,
+   "_fin": 50.46,
+   "d": "{'texte': '[smug] Tout frais.'}",
+   "_mots": [
+    [
+     "Tout",
+     0.0,
+     0.081
+    ],
+    [
+     "frais.",
+     0.143,
+     0.591
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "{'texte': \"Vas-y, remets-moi. Je vais cuire, c'est bon.\"}",
+   "_deb": 52.403,
+   "_fin": 54.378,
+   "d": "{'texte': \"[excited] Vas-y, remets-moi. Je vais cuire, c'est bon.\"}",
+   "_mots": [
+    [
+     "Vas",
+     0.0,
+     0.121
+    ],
+    [
+     "-y,",
+     0.121,
+     0.162
+    ],
+    [
+     "remets",
+     0.182,
+     0.524
+    ],
+    [
+     "-moi.",
+     0.544,
+     0.947
+    ],
+    [
+     "Je",
+     0.988,
+     1.028
+    ],
+    [
+     "vais",
+     1.129,
+     1.31
+    ],
+    [
+     "cuire,",
+     1.33,
+     1.471
+    ],
+    [
+     "c",
+     1.633,
+     1.653
+    ],
+    [
+     "'est",
+     1.754,
+     1.854
+    ],
+    [
+     "bon.",
+     1.895,
+     1.975
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Je rigole. Je suis vraiment chaud, là. Je commence à être chaud, là.",
+   "_deb": 56.58,
+   "_fin": 59.865,
+   "_mots": [
+    [
+     "Je",
+     0.0,
+     0.061
+    ],
+    [
+     "rigole.",
+     0.061,
+     0.53
+    ],
+    [
+     "Je",
+     0.951,
+     0.992
+    ],
+    [
+     "suis",
+     1.032,
+     1.293
+    ],
+    [
+     "vraiment",
+     1.293,
+     1.535
+    ],
+    [
+     "chaud,",
+     1.575,
+     1.897
+    ],
+    [
+     "là.",
+     1.917,
+     2.038
+    ],
+    [
+     "Je",
+     2.178,
+     2.239
+    ],
+    [
+     "commence",
+     2.239,
+     2.46
+    ],
+    [
+     "à",
+     2.46,
+     2.48
+    ],
+    [
+     "être",
+     2.5,
+     2.621
+    ],
+    [
+     "chaud,",
+     2.621,
+     2.782
+    ],
+    [
+     "là.",
+     2.782,
+     3.285
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "C 'est un peu chaud, là -dedans, d 'ailleurs.",
+   "_deb": 59.865,
+   "_fin": 60.81,
    "chute": true,
    "_mots": [
     [
-     "revoir,",
+     "C",
      0.0,
-     0.264
+     0.02
     ],
     [
-     "bonne",
-     0.468,
-     0.65
+     "'est",
+     0.02,
+     0.1
     ],
     [
-     "journée.",
-     0.671,
-     0.955
+     "un",
+     0.1,
+     0.161
+    ],
+    [
+     "peu",
+     0.161,
+     0.241
+    ],
+    [
+     "chaud,",
+     0.241,
+     0.382
+    ],
+    [
+     "là",
+     0.402,
+     0.442
+    ],
+    [
+     "-dedans,",
+     0.442,
+     0.583
+    ],
+    [
+     "d",
+     0.583,
+     0.603
+    ],
+    [
+     "'ailleurs.",
+     0.643,
+     0.945
     ]
-   ],
-   "objet": "telephone"
+   ]
   }
  ],
  "bandeau": [],
  "gag": null,
- "legende": "Quand France Travail t'appelle à 9h du matin au saut du lit.",
+ "legende": "Quand la viande devient le star du micro-ondes.",
  "hashtags": [
   "petitsdramas",
-  "francetravail",
-  "chomage",
-  "humour",
-  "pov"
+  "microondedrole",
+  "vanneculinaire",
+  "blaguefood",
+  "amisespiegles",
+  "farcemaison",
+  "humourcuisine"
  ],
  "sources": [
-  "https://www.tiktok.com/@yan_animation0/video/7640012811355163937"
+  "https://www.tiktok.com/@yan_animation0/video/7696516142185172257"
  ],
  "decoupage": [
   {
    "scene": "1",
    "repliques": [
     0,
+    1,
+    2,
     3,
+    4,
     5,
+    6,
     7,
-    10
+    8
    ],
    "lieu": "",
    "son": "",
-   "duree": 0,
-   "decor": "quiet city street at dusk, parked car at the curb, sidewalk, street lamps, shop fronts"
+   "duree": 0.0,
+   "decor": "cuisine, micro-ondes ouvert, assiette avec viande, téléphone portable sur le plan de travail, bouteille d'eau, couteau",
+   "titre": "La Farce Culinaire"
   },
   {
    "scene": "2",
    "repliques": [
-    1,
-    2,
-    4,
-    6,
-    8,
     9,
+    10,
     11,
-    12
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
    ],
    "lieu": "",
    "son": "",
-   "duree": 0,
-   "decor": "cozy living room, sofa, posters on the wall, coffee table, lamp, television"
+   "duree": 0.0,
+   "decor": "cuisine, micro-ondes ouvert, assiette avec viande, main qui touche la viande, assiette chaude, téléphone portable, verre d'eau"
   }
  ],
  "studio": {
-  "cadence": "normal",
-  "plans": [
-   {
-    "replique": 0,
-    "geste": "telephone",
-    "plan": "plongee",
-    "mouvement": "fixe",
-    "reaction": "fatigue"
-   },
-   {
-    "plan": "serre",
-    "geste": "desespoir",
-    "replique": 11,
-    "mouvement": "zoom_choc",
-    "reaction": "facepalm"
-   }
+  "moment": "soir",
+  "lieux": [
+   "cuisine"
   ],
-  "moment": "matin",
-  "personnages": {
+  "costumes": {
    "presentateur": {
+    "haut": "tshirt",
+    "c_haut": "rouge",
+    "motif": "rayures",
+    "bas": "jeans",
+    "chaussures": "baskets",
+    "details": [
+     "barbe_courte",
+     "lunettes_soleil",
+     "bracelets"
+    ]
+   },
+   "invite": {
+    "haut": "chemise",
+    "c_haut": "blanc",
+    "motif": "uni",
+    "bas": "pantalon",
+    "chaussures": "ville",
+    "details": [
+     "collier",
+     "montre",
+     "cheveux_long"
+    ]
+   },
+   "envoyee": {
+    "haut": "tabliers",
+    "c_haut": "bleu",
+    "motif": "carreaux",
+    "bas": "short",
+    "chaussures": "baskets",
+    "details": [
+     "casquette",
+     "stylos"
+    ]
+   }
+  },
+  "metiers": {},
+  "personnages": [
+   {
     "genre": "h",
-    "age": 40,
+    "age": 30,
     "taille": 1,
-    "corpulence": 0.5,
+    "corpulence": 0.7,
     "cheveux": "court",
     "barbe": "trois_jours"
    },
-   "invite": {
+   {
+    "genre": "f",
+    "age": 28,
+    "taille": 0.95,
+    "corpulence": 0.6,
+    "cheveux": "long",
+    "barbe": "rien"
+   },
+   {
     "genre": "h",
-    "age": 22,
-    "taille": 1,
-    "corpulence": 0.3,
-    "cheveux": "afro",
+    "age": 25,
+    "taille": 0.85,
+    "corpulence": 0.5,
+    "cheveux": "court_texture",
     "barbe": "rien"
    }
-  },
-  "metiers": {
-   "presentateur": ""
-  },
+  ],
   "objets": [
    {
     "replique": 0,
+    "objet": "micro"
+   },
+   {
+    "replique": 6,
     "objet": "telephone"
    },
    {
-    "replique": 1,
-    "objet": "telephone"
+    "replique": 11,
+    "objet": "assiette"
+   },
+   {
+    "replique": 18,
+    "objet": "couteau"
    }
   ],
   "gags": [
-   "Affiche: Dormir plus pour chercher moins"
+   "Micro-ondes : Meilleur acteur 2024",
+   "Viande : Star des blagues culinaires",
+   "Ne jamais doubler un présentateur espiègle"
   ],
   "ambiances": [
    "vapeur"
   ],
-  "costumes": {
-   "presentateur": {
-    "haut": "chemise",
-    "c_haut": "bleu",
-    "motif": "uni",
-    "bas": "pantalon",
-    "chaussures": "ville",
-    "cheveux": "court",
-    "c_cheveux": "brun",
-    "details": [
-     "cravate",
-     "lunettes_vue"
-    ]
+  "cadence": "rapide",
+  "plans": [
+   {
+    "replique": 0,
+    "plan": "serré",
+    "mouvement": "fixe",
+    "geste": "pointe_d",
+    "reaction": "choc"
    },
-   "invite": {
-    "haut": "debardeur",
-    "c_haut": "blanc",
-    "motif": "uni",
-    "bas": "jogging",
-    "chaussures": "chaussons",
-    "cheveux": "afro",
-    "c_cheveux": "noir",
-    "details": []
+   {
+    "replique": 4,
+    "plan": "serré",
+    "mouvement": "fixe",
+    "geste": "pointe_g",
+    "reaction": "sceptique"
+   },
+   {
+    "replique": 6,
+    "plan": "moyen",
+    "mouvement": "zoom_choc",
+    "geste": "bras_ouverts",
+    "reaction": "rire"
+   },
+   {
+    "replique": 12,
+    "plan": "serré",
+    "mouvement": "fixe",
+    "geste": "facepalm",
+    "reaction": "colere"
+   },
+   {
+    "replique": 13,
+    "plan": "large",
+    "mouvement": "travelling",
+    "geste": "gratte_tete",
+    "reaction": "joie"
+   },
+   {
+    "replique": 19,
+    "plan": "tres_serre",
+    "mouvement": "zoom_choc",
+    "geste": "mains_hanches",
+    "reaction": "pleurs"
    }
-  },
-  "lieux": [
-   "rue",
-   "salon"
   ],
-  "lieux_de": {
-   "presentateur": "rue",
-   "invite": "salon"
-  }
+  "decoupe": [
+   {
+    "repliques": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "plans": [
+     {
+      "debut": 0,
+      "plan": "serré",
+      "cible": "presentateur",
+      "mouvement": "fixe"
+     },
+     {
+      "debut": 0.5,
+      "plan": "serré",
+      "cible": "invite",
+      "mouvement": "fixe",
+      "passage": "glisse"
+     },
+     {
+      "debut": 0.8,
+      "plan": "serré",
+      "cible": "presentateur",
+      "mouvement": "fixe"
+     },
+     {
+      "debut": 0.9,
+      "plan": "moyen",
+      "cible": "micro-ondes",
+      "mouvement": "zoom_choc",
+      "passage": "coupe"
+     }
+    ]
+   }
+  ]
  },
  "doublage": {
-  "piste": "/tmp/tmpvtf95mre/piste.wav",
-  "duree": 60.49,
-  "source": "https://www.tiktok.com/@yan_animation0/video/7640012811355163937",
+  "piste": "/tmp/tmp1pf8dd0g/piste.wav",
+  "duree": 61.14,
+  "source": "https://www.tiktok.com/@yan_animation0/video/7696516142185172257",
   "auteur": "yan_animation0",
-  "contexte": "Un agent France Travail appelle un demandeur d'emploi complètement épuisé encore affalé dans son lit.",
+  "contexte": "Deux amis, un présentateur espiègle et une invitée sceptique, jouent avec une pièce de viande dans un micro-ondes en cuisine, faisant semblant qu'elle réagit comme un être vivant. Le présentateur tente de tromper l'invitée en imitant des réactions de chaleur.",
   "evenements": [
    [
-    0.0,
-    3.0,
-    "scream"
-   ],
-   [
-    2.0,
-    4.0,
-    "laughter"
-   ],
-   [
-    3.0,
-    10.0,
-    "scream"
-   ],
-   [
+    5.0,
     9.0,
-    11.0,
-    "laughter"
+    "dog"
    ],
    [
+    8.0,
     10.0,
-    12.0,
-    "crying"
-   ],
-   [
-    11.0,
-    15.0,
-    "scream"
-   ],
-   [
-    14.0,
-    16.0,
     "laughter"
    ],
    [
-    15.0,
-    17.0,
-    "scream"
-   ],
-   [
-    16.0,
-    18.0,
-    "crying"
-   ],
-   [
-    17.0,
-    20.0,
-    "laughter"
-   ],
-   [
-    19.0,
-    21.0,
-    "crying"
-   ],
-   [
-    20.0,
-    22.0,
-    "scream"
-   ],
-   [
-    21.0,
-    26.0,
-    "crying"
-   ],
-   [
-    25.0,
-    30.0,
-    "scream"
-   ],
-   [
-    30.0,
-    32.0,
-    "crying"
-   ],
-   [
-    31.0,
-    34.0,
-    "scream"
-   ],
-   [
-    33.0,
-    35.0,
-    "crying"
-   ],
-   [
-    34.0,
-    36.0,
-    "siren"
-   ],
-   [
-    35.0,
-    40.0,
-    "scream"
-   ],
-   [
-    39.0,
-    43.0,
-    "laughter"
-   ],
-   [
+    37.0,
     42.0,
-    47.0,
-    "scream"
-   ],
-   [
-    46.0,
-    48.0,
-    "crying"
-   ],
-   [
-    47.0,
-    49.0,
     "laughter"
    ],
    [
-    48.0,
     50.0,
-    "scream"
-   ],
-   [
-    49.0,
-    51.0,
-    "crying"
-   ],
-   [
-    50.0,
-    54.0,
-    "scream"
-   ],
-   [
-    54.0,
-    57.0,
-    "crying"
-   ],
-   [
-    56.0,
-    59.0,
+    53.0,
     "laughter"
-   ],
-   [
-    58.0,
-    60.0,
-    "door"
    ]
   ],
   "visuel": {
    "gestes": [],
-   "duree": 60.5,
-   "nb_plans": 1,
-   "duree_plan": 60.5,
-   "coupes": [],
+   "duree": 61.5,
+   "nb_plans": 13,
+   "duree_plan": 4.73,
+   "coupes": [
+    3.0,
+    4.0,
+    13.0,
+    13.5,
+    21.5,
+    23.5,
+    32.0,
+    33.0,
+    37.5,
+    39.0,
+    51.5,
+    52.5
+   ],
    "plans": {
     "tres_serre": 0.0,
-    "serre": 0.0,
-    "moyen": 0.0,
-    "large": 1.0
+    "serre": 0.081,
+    "moyen": 0.033,
+    "large": 0.886
    },
    "camera": {
     "fixe": 1.0,
@@ -721,107 +1219,123 @@
     "travelling": 0.0,
     "epaule": 0.0
    },
-   "nb_personnes": 0,
-   "personnes": [],
-   "visages": false,
+   "nb_personnes": 1,
+   "personnes": [
+    {
+     "place": "centre",
+     "presence": 0.114,
+     "habit": [
+      0,
+      0,
+      0
+     ],
+     "cheveux": [
+      241,
+      157,
+      79
+     ],
+     "sourire": 0.0,
+     "taille": 0.161,
+     "tete_penchee": 1.4,
+     "regard_cote": 0.0
+    }
+   ],
+   "visages": true,
    "sourires": 0.0,
-   "energie": 0.1,
+   "energie": 0.076,
    "mur": [
-    150,
-    114,
-    105
+    0,
+    0,
+    0
    ],
    "palette": [
     [
-     178,
-     164,
-     164,
-     0.264
+     0,
+     0,
+     0,
+     0.674
     ],
     [
-     138,
-     95,
-     97,
-     0.218
+     181,
+     171,
+     165,
+     0.113
     ],
     [
-     102,
-     68,
-     49,
-     0.189
+     135,
+     129,
+     126,
+     0.105
     ],
     [
-     11,
-     8,
-     8,
-     0.155
-    ],
-    [
-     164,
-     132,
-     105,
-     0.13
-    ],
-    [
-     218,
-     222,
-     232,
+     87,
+     46,
+     41,
      0.043
+    ],
+    [
+     237,
+     224,
+     219,
+     0.035
+    ],
+    [
+     100,
+     96,
+     93,
+     0.029
     ]
    ],
    "lumiere": {
-    "luminosite": 130.8,
-    "chaleur": 30.3,
-    "saturation": 68.6
+    "luminosite": 50.4,
+    "chaleur": 5.9,
+    "saturation": 12.3
    },
-   "moment": "soir",
+   "moment": "nuit",
    "postures": []
   },
   "audio": {
-   "duree": 60.5,
+   "duree": 61.1,
    "nb_voix": 2,
    "voix": [
     {
-     "hz": null,
-     "genre": null,
-     "part": 0.68
+     "hz": 158,
+     "genre": "h",
+     "part": 0.89
     },
     {
-     "hz": 126,
-     "genre": "h",
-     "part": 0.32
+     "hz": 195,
+     "genre": "f",
+     "part": 0.11
     }
    ],
-   "debit": 2.88,
-   "blanc_moyen": 3.21,
-   "coupes": 0,
-   "dynamique_db": 17.4,
-   "cris": 0.012,
-   "musique": 0.4,
-   "impacts": 39,
-   "impacts_10s": 6.45,
-   "graves": 2,
-   "aigus": 37,
-   "sur_vanne": 4,
+   "debit": 5.27,
+   "blanc_moyen": 1.96,
+   "coupes": 1,
+   "dynamique_db": 35.0,
+   "cris": 0.014,
+   "musique": 0.41,
+   "impacts": 52,
+   "impacts_10s": 8.51,
+   "graves": 7,
+   "aigus": 45,
+   "sur_vanne": 18,
    "evenements": {
-    "scream": 11,
-    "crying": 9,
-    "laughter": 7,
-    "siren": 1,
-    "door": 1
+    "laughter": 3,
+    "dog": 1
    },
    "emotions": {
-    "neutral": 2,
-    "polite": 1,
-    "sleepy": 1,
-    "confused": 1,
-    "serious": 1,
-    "hesitant": 1,
-    "tired": 1,
-    "mumbling": 1
+    "neutral": 3,
+    "playful": 3,
+    "laughing": 3,
+    "excited": 2,
+    "sarcastic": 2,
+    "confident": 1,
+    "mocking": 1,
+    "cheerful": 1
    }
   },
-  "video_origine": "/tmp/tmpvtf95mre/src.mp4"
+  "video_origine": "/tmp/tmp1pf8dd0g/src.mp4"
  },
  "fiche": {
   "note": 0,
@@ -838,38 +1352,55 @@
      5,
      6,
      7,
-     8,
-     9,
-     10,
-     11,
-     12
+     8
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "Messy bedroom with bed, pillow, crumpled tissues and smartphone on sheet",
-    "titre": "Le réveil France Travail"
+    "decor": "cuisine, micro-ondes ouvert, assiette avec viande, téléphone portable sur le plan de travail, bouteille d'eau, couteau",
+    "titre": "La Farce Culinaire"
+   },
+   {
+    "scene": "2",
+    "repliques": [
+     9,
+     10,
+     11,
+     12,
+     13,
+     14,
+     15,
+     16,
+     17,
+     18,
+     19
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 0.0,
+    "decor": "cuisine, micro-ondes ouvert, assiette avec viande, main qui touche la viande, assiette chaude, téléphone portable, verre d'eau"
    }
   ]
  },
  "_monte": true,
- "_separes": true,
  "_voix_hz": {
-  "presentateur": 334,
-  "invite": 122
+  "presentateur": 158,
+  "envoyee": 180
  },
  "_voix_genre": {
-  "presentateur": "f",
-  "invite": "h"
+  "presentateur": "h",
+  "envoyee": "h"
  },
  "realisation": {
-  "moment": "matin",
+  "moment": "soir",
   "lieux": [
-   "rue",
-   "salon"
+   "cuisine",
+   "cuisine"
   ],
   "gags": [
-   "Affiche: Dormir plus pour chercher moins"
+   "Micro-ondes : Meilleur acteur 2024",
+   "Viande : Star des blagues culinaires",
+   "Ne jamais doubler un présentateur espiègle"
   ],
   "ambiances": [
    "poussiere",
@@ -877,10 +1408,18 @@
   ],
   "source": "auteur+image",
   "tenues": {
-   "presentateur": "chemise",
-   "invite": "debardeur"
+   "presentateur": "tshirt",
+   "envoyee": "veste_jean"
   },
   "plans": [
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
    "large/fixe",
    "large/fixe",
    "large/fixe",
