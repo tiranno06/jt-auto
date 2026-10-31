@@ -172,6 +172,9 @@ jobs:
       CONTROLE_VIDEO: ${{ vars.CONTROLE_VIDEO }}
       TIKTOK_COMPTE: ${{ vars.TIKTOK_COMPTE }}
       PROFILS_TIKTOK: ${{ vars.PROFILS_TIKTOK }}
+      PUBLI_FILE: ${{ vars.PUBLI_FILE }}
+      CONFIANCE_MIN: ${{ vars.CONFIANCE_MIN }}
+      DEUXIEME_CHANCE: ${{ vars.DEUXIEME_CHANCE }}
       GH_TOKEN: ${{ github.token }}
       EVENEMENT: ${{ inputs.auto == '1' && 'schedule' || github.event_name }}
       FILIERE: ${{ inputs.filiere }}
@@ -314,6 +317,19 @@ jobs:
           git add episodes voix decors sons_eleven
           git commit -m "Émission : ${{ steps.run.outputs.titre }}" || echo "rien à enregistrer"
           python moteur/fusion.py      # plusieurs fabrications en parallèle : l'historique est fusionné, jamais écrasé
+
+      - name: Deuxième chance (vidéo peu sûre refaite une fois, la plus sûre des deux est gardée)
+        if: always()
+        run: |
+          if [ -s sortie/.perdante ]; then
+            F="$(cat sortie/.perdante)"
+            FICHIER="$F" python moteur/supprimer.py
+            git add episodes; git commit -m "Deuxième chance : $F retirée (moins sûre)" || echo "rien à enregistrer"
+            FICHIER="$F" REJOUER="python moteur/supprimer.py" MESSAGE="Deuxième chance" python moteur/fusion.py
+          fi
+          if [ -s sortie/.deuxieme_chance ]; then
+            gh workflow run emission.yml --ref main -f filiere=tiktok -f theme="$(cat sortie/.deuxieme_chance)" && echo "2e chance lancée"
+          fi
 
       - name: Mettre le site à jour (une seule file d'attente pour tout le robot, aucune vidéo oubliée)
         if: always()

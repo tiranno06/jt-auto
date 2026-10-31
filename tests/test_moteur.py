@@ -1953,3 +1953,50 @@ class TestListe31Soir(unittest.TestCase):
     def test_voyant_ia_du_site(self):
         src = open(os.path.join(os.path.dirname(__file__), "..", "moteur", "site.py"), encoding="utf-8").read()
         self.assertIn('id="tkIA"', src); self.assertIn("function rendreQuotaIA", src)
+
+
+class TestListe4_5_6_11(unittest.TestCase):
+    """Choix de l'auteur : 4 (plus d'animaux et d'objets), 5 (accessoires), 6 (deuxième chance), 11 (alternance des profils)."""
+    def setUp(self): sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "moteur"))
+
+    def test_especes_et_mots(self):
+        import animaux as AN
+        q = lambda t: AN.qui_est({"repliques": [{"p": "presentateur", "t": t}, {"p": "invite", "t": "Ouais."}]})
+        self.assertEqual(q("Je suis un téléphone, laisse-moi charger"), {"presentateur": "telephone"})
+        self.assertEqual(q("Je suis au téléphone avec ma mère"), {})        # « au téléphone » : un humain
+        self.assertEqual(q("Oh mon lapin, t'es où ?"), {})                 # mot doux seul : pas assez
+        for e in ("lapin", "souris", "oiseau", "poisson", "voiture", "frigo", "telephone", "verre", "croissant"): self.assertIn(e, AN.ESPECES)
+
+    def test_accessoires(self):
+        import numpy as np, perso_croquis as PC, marionnette as M, humain as HU, croquis as C
+        for cos in ({"chapeau": "toque"}, {"details": ["lunettes_soleil"]}):
+            img = C.papier(400, 700); F = dict(HU.creer(2, genre="f", age=30), espece="chat")
+            p = M.pose_neutre(); p.update(x=200, y=650, s=1.0, t=0.0, emo="joie", costume=cos); PC.dessiner(img, F, p)
+
+    def test_deuxieme_chance(self):
+        import deuxieme_chance as DC
+        anc = {k: os.environ.pop(k, None) for k in ("PUBLI_FILE", "CONFIANCE_MIN", "DEUXIEME_CHANCE")}
+        try:
+            h1 = {"fichier": "a.mp4", "confiance": 30}
+            quoi, val = DC.decider([h1], h1, "https://www.tiktok.com/@x/video/1")
+            self.assertEqual(quoi, "relancer"); self.assertEqual(DC.separer(val), ("TIKTOK::https://www.tiktok.com/@x/video/1", "a.mp4"))
+            h2 = {"fichier": "b.mp4", "confiance": 70}
+            self.assertEqual(DC.decider([h1, h2], h2, "u", "a.mp4"), ("supprimer", "a.mp4"))
+            h3 = {"fichier": "c.mp4", "confiance": 10}
+            self.assertEqual(DC.decider([h1, h3], h3, "u", "a.mp4"), ("supprimer", "c.mp4"))
+            os.environ["PUBLI_FILE"] = "a.mp4"; self.assertEqual(DC.decider([h1, h2], h2, "u", "a.mp4"), (None, ""))   # cochée : on garde les deux
+            self.assertEqual(DC.decider([h2], dict(h2), "u")[0], None)       # assez sûre : rien
+        finally:
+            for k, v in anc.items():
+                os.environ.pop(k, None)
+                if v is not None: os.environ[k] = v
+        wf = open(os.path.join(os.path.dirname(__file__), "..", ".github", "workflows", "emission.yml"), encoding="utf-8").read()
+        self.assertIn("sortie/.deuxieme_chance", wf); self.assertIn("sortie/.perdante", wf)
+
+    def test_alterner_profils(self):
+        import publication_auto as PA
+        src = lambda c: {"source_audio": f"https://www.tiktok.com/@{c}/video/1"}
+        hist = [dict(src("a"), fichier="p.mp4", publie=True, programmee="2026-10-30T18:00"),
+                dict(src("a"), fichier="1.mp4"), dict(src("a"), fichier="2.mp4"), dict(src("b"), fichier="3.mp4"), dict(src("c"), fichier="4.mp4")]
+        self.assertEqual(PA.alterner(["1.mp4", "2.mp4", "3.mp4", "4.mp4"], hist), ["3.mp4", "1.mp4", "4.mp4", "2.mp4"])
+        self.assertIn("function alternerPubli", open(os.path.join(os.path.dirname(__file__), "..", "moteur", "site.py"), encoding="utf-8").read())

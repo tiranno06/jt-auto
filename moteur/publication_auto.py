@@ -23,6 +23,26 @@ def file_attente(brut, historique):
     return out
 
 
+def profil(h):
+    """Compte TikTok d'origine du son (@compte), ou "" pour un sketch."""
+    import re
+    m = re.search(r"tiktok\.com/@([\w.\-]+)", str((h or {}).get("source_audio") or " ".join((h or {}).get("sources") or [])))
+    return "@" + m.group(1).lower() if m else ""
+
+
+def alterner(file_, historique):
+    """Jamais deux sons du même profil d'origine d'affilée (choix de l'auteur) : on part du profil de la dernière vidéo publiée et
+    chaque vidéo suivante est la 1re de la file qui vient d'un AUTRE profil (sinon la 1re de la file)."""
+    connues = {h.get("fichier"): h for h in historique if h.get("fichier")}
+    pub = [h for h in historique if h.get("publie") is True]
+    prec = profil(max(pub, key=lambda h: str(h.get("programmee") or h.get("fichier") or ""))) if pub else ""
+    reste, out = list(file_), []
+    while reste:
+        n = next((x for x in reste if not prec or profil(connues.get(x)) != prec), reste[0])
+        reste.remove(n); out.append(n); prec = profil(connues.get(n))
+    return out
+
+
 def heure(brut):
     try:
         h, m = str(brut or "18:00").strip().replace("h", ":").split(":")[:2]; h, m = int(h), int(m or 0)
@@ -40,7 +60,7 @@ def decision(maintenant, reglages, historique, deja_aujourdhui):
     cible = maintenant.replace(hour=h, minute=m, second=0, microsecond=0)
     if maintenant < cible - datetime.timedelta(minutes=AVANCE): return None, "", f"pas encore l'heure ({h:02d}:{m:02d})"
     if deja_aujourdhui: return None, "", "vidéo du jour déjà envoyée"
-    f = file_attente(reglages.get("PUBLI_FILE"), historique)
+    f = alterner(file_attente(reglages.get("PUBLI_FILE"), historique), historique)
     if not f: return None, "", "aucune vidéo cochée en attente"
     quand = cible.strftime("%Y-%m-%dT%H:%M") if cible > maintenant + datetime.timedelta(minutes=6) else ""
     return f[0], quand, f"{len(f)} vidéo(s) en attente"

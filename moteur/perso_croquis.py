@@ -129,7 +129,7 @@ def _tenue(F, C_):
     elif F.get("lunettes") or "lunettes_vue" in det: lun.append(C.chapeau("lunettes"))
     ch = C_.get("chapeau")
     chap = C.chapeau({"calot_infirmier": "calot_croix"}.get(ch, ch), tuple(C_["c_chapeau"]) if C_.get("c_chapeau") else None) if ch in CHAPEAUX else None
-    return dict(haut=h, c_haut=tuple(C_.get("c_haut") or (120, 160, 210)), bas=bas, c_bas=tuple(C_.get("c_bas") or (60, 80, 130)),
+    return dict(lunettes=lun, haut=h, c_haut=tuple(C_.get("c_haut") or (120, 160, 210)), bas=bas, c_bas=tuple(C_.get("c_bas") or (60, 80, 130)),
                 chaussures=tuple(C_.get("c_chaussures") or (55, 52, 58)), extras=coif + lun + extras, chapeau=chap,
                 rayures=((240, 240, 240), tuple(C_.get("c_motif") or (200, 60, 60))) if C_.get("motif") == "rayures" else
                         ((250, 250, 250), tuple(C_.get("c_haut") or (150, 180, 230))) if tenue == "pyjama" else
@@ -160,7 +160,8 @@ def dessiner(img, F, p):
     if F.get("espece"):                                                    # animal ou objet qui parle (moteur/animaux.py)
         import animaux
         animaux.dessiner(zone, F["espece"], g["x"] - x0, p["y"] - y0, dec(tc), R, [(dec(e_), dec(c_), dec(m_)) for e_, c_, m_ in g["bras"]],
-                         e, ouv if ouv > 0.04 else None, min(1.0, cl), _fx(p, e), int(F.get("age", 30)), F.get("c_poil"))
+                         e, ouv if ouv > 0.04 else None, min(1.0, cl), _fx(p, e), int(F.get("age", 30)), F.get("c_poil"),
+                         chapeau=T["chapeau"], lunettes=T["lunettes"], fille=F.get("genre") == "f")
         return tc, (R, R)
     meuble = p.get("meuble") or ("chaise" if p.get("assis") else None)    # chaise, canapé, lit (sous la couette), volant, comptoir
     if p.get("assis"):                                                     # siège vu de face, sous le personnage
