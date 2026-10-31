@@ -41,7 +41,3 @@ jobs:
           git add episodes
           git commit -m "Régie : $ACTION sur $FICHIER" || echo "rien à enregistrer"
           REJOUER="python moteur/regie_action.py" MESSAGE="Régie : $ACTION" python moteur/fusion.py
-      - name: Mettre le site à jour (une seule file d'attente pour tout le robot, aucune vidéo oubliée)
-        if: always()
-        run: |
-          gh workflow run site.yml --ref main || echo "Mise à jour du site impossible à lancer : relancez « Mettre à jour le site »"

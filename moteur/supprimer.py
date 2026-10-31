@@ -29,7 +29,7 @@ def main():
     e = next((h for h in hist if h.get("fichier") == nom), None)
     if not e: print(f"{nom} introuvable dans l'historique (déjà supprimée ?)"); return 0
     tag = e.get("tag") or f"emissions-{nom[:7]}"
-    for f in (nom, nom.replace(".mp4", ".txt")):
+    for f in (nom, nom.replace(".mp4", ".txt"), nom.replace(".mp4", "_web.mp4"), nom.replace(".mp4", ".jpg")):
         r = subprocess.run(["gh", "release", "delete-asset", tag, f, "-y"], capture_output=True, text=True)
         print(f"  {f} : {'effacé' if r.returncode == 0 else 'absent ou déjà effacé'}")
     hist = [h for h in hist if h.get("fichier") != nom]                    # l'empreinte du sujet part aussi : il pourra être refait

@@ -275,7 +275,9 @@ jobs:
         run: |
           TAG="emissions-${{ steps.run.outputs.mois }}"
           gh release view "$TAG" >/dev/null 2>&1 || gh release create "$TAG" --title "Émissions ${{ steps.run.outputs.mois }}" --notes "Vidéos fabriquées par le robot."
-          gh release upload "$TAG" "${{ steps.run.outputs.video }}" "${{ steps.run.outputs.legende }}" --clobber
+          V="${{ steps.run.outputs.video }}"; B="${V%.mp4}"; F=("$V" "${{ steps.run.outputs.legende }}")
+          [ -f "${B}_web.mp4" ] && F+=("${B}_web.mp4"); [ -f "$B.jpg" ] && F+=("$B.jpg")   # version légère + couverture : lues par l'appli
+          gh release upload "$TAG" "${F[@]}" --clobber
 
       - name: Prévenir le téléphone (vidéo prête)
         if: steps.run.outputs.video != ''
