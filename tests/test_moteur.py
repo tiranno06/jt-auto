@@ -996,6 +996,55 @@ class TestVoixEtScenesTiktok(unittest.TestCase):
             self.assertEqual(D.relire_dialogue(mots, une_voix=True), [0, 1, 0, 1])
         finally: ecrire._appel, reseau.ia_disponible = anc
 
+    def test_boucle_de_whisper_retiree(self):
+        import locuteurs as L
+        txt = "Coup de sa mère. Oh mais non je suis sale. Oh mais non je suis sale. Oh mais non je suis sale"
+        mots, t = [], 0.0
+        for i, w in enumerate(txt.split()):
+            d = 0.3 if i < 4 else 0.07; mots.append({"w": w, "s": t, "e": t + d}); t += d
+        self.assertEqual(" ".join(m["w"] for m in L.sans_boucles(mots)), "Coup de sa mère. Oh mais non je suis sale.")
+        vrai = [{"w": w, "s": 0.4 * i, "e": 0.4 * i + 0.35} for i, w in enumerate("non mais non mais non mais".split())]
+        self.assertEqual(len(L.sans_boucles(vrai)), 6)                     # dit à vitesse normale : on garde
+
+    def test_famille_presentee_dessinee(self):
+        import studio
+        sk = {"repliques": [{"p": "presentateur", "t": "Donc là je te présente mon père et mon grand-père."},
+                            {"p": "invite", "t": "T'as de la chance, mon père est au travail."},
+                            {"p": "presentateur", "t": "Et y'a mon arrière-grand-père qui est là-bas."}]}
+        f = studio.famille_presentee(sk)
+        self.assertEqual([(x["avec"], x["age"]) for x in f], [("presentateur", 55), ("presentateur", 80), ("presentateur", 99)])
+
+    def test_pas_d_appel_invente_par_l_ia(self):
+        import studio
+        reps = [{"p": "presentateur", "t": "Est-ce que tu veux m'épouser ?", "objet": "telephone"}, {"p": "envoyee", "t": "C'est une blague ?"}]
+        sk = {"repliques": reps, "doublage": {"contexte": "Une demande en mariage tourne court.", "visuel": {"nb_personnes": 1}},
+              "studio": {"lieux_separes": {"presentateur": "", "envoyee": ""}, "moyen": "telephone", "lieux": ["rue", "salon"]},
+              "decoupage": [{"scene": "1", "repliques": [0, 1], "decor": "living room"}]}
+        self.assertFalse(studio.separer_lieux(sk))
+        self.assertNotIn("objet", reps[0]); self.assertEqual(sk["studio"]["lieux"], ["rue"])
+        sk2 = {"repliques": [{"p": "presentateur", "t": "Allô ? T'es où ?"}, {"p": "envoyee", "t": "Je suis dehors, allô ?"}],
+               "doublage": {"contexte": "un appel"}, "studio": {"lieux_separes": {"presentateur": "", "envoyee": ""}, "moyen": "telephone"}}
+        self.assertTrue(studio.separer_lieux(sk2))                         # un vrai appel reste un appel
+
+    def test_voix_dominante_partagee(self):
+        import doublage as D, ecrire, reseau
+        lignes = [("T'as de la chance d'avoir tes grands-parents.", "A"), ("Oui c'est vrai, on est chanceux.", "B"), ("Tenez-vous !", "C"),
+                  ("Et il a quel âge ?", "A"), ("Cent dix-huit ans.", "B"), ("Mais c'est un record du monde ?", "A"), ("Ouais, carrément.", "B"),
+                  ("Les amours !", "C"), ("Ça me fait de la peine quand même.", "A"), ("Bah non, il va très bien.", "B")]
+        mots, t = [], 0.0
+        for ph, qui in lignes:
+            for w in ph.split(): mots.append({"w": w, "s": t, "e": t + 0.25, "voix": "speaker_1" if qui == "C" else "speaker_0", "_q": qui}); t += 0.3
+            t += 0.5
+        dom = [l for l in lignes if l[1] != "C"]
+        anc = ecrire._appel, reseau.ia_disponible
+        reseau.ia_disponible = lambda: True
+        ecrire._appel = lambda *a, **k: {"nombre": 2, "phrases": [{"n": i, "qui": "A" if q == "A" else "B"} for i, (_, q) in enumerate(dom)]}
+        try: res = D.scinder_voix_dominante(mots)
+        finally: ecrire._appel, reseau.ia_disponible = anc
+        par = {}
+        for m in res: par.setdefault(m["_q"], set()).add(m["voix"])
+        self.assertEqual(par, {"A": {"speaker_0"}, "B": {"speaker_1"}, "C": {"speaker_2"}})
+
     def test_une_seule_scene_pour_un_son_tiktok(self):
         import studio
         sk = {"repliques": [{"p": "presentateur", "t": "a"}] * 5, "doublage": {"duree": 10},

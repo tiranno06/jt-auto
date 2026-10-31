@@ -257,6 +257,26 @@ def fins_de_phrase(mots):
     return mots
 
 
+def sans_boucles(mots, n_min=3, duree_max=0.12):
+    """Whisper (gratuit) tourne parfois en boucle à la fin d'un son : « Oh mais non je suis sale. Oh mais non je suis sale. Oh mais
+    non… », trois fois en une seconde. Un bloc de 3 mots ou plus répété juste après lui-même, dit à une vitesse impossible (moins de
+    0,12 s par mot), n'est gardé qu'une fois. Une vraie répétition (« non non non », dite à vitesse normale) reste."""
+    nu = lambda m: re.sub(r"[^\w'’-]", "", str(m["w"]).lower())
+    out = list(mots); i = 0
+    while i < len(out):
+        fait = False
+        for n in range(min(12, (len(out) - i) // 2), n_min - 1, -1):
+            a, b = out[i:i + n], out[i + n:i + 2 * n]
+            if [nu(m) for m in a] != [nu(m) for m in b]: continue
+            if (b[-1]["e"] - b[0]["s"]) / n >= duree_max: continue
+            j = i + 2 * n
+            while [nu(m) for m in out[j:j + n]] == [nu(m) for m in a]: j += n
+            del out[i + n:j]; fait = True; break
+        if not fait: i += 1
+    if len(out) < len(mots): print(f"  transcription : {len(mots) - len(out)} mot(s) répété(s) en boucle retiré(s)", flush=True)
+    return out
+
+
 def _minuscule(w):
     """Le mot commence par une minuscule : la phrase continue (Whisper met une majuscule à chaque nouvelle phrase)."""
     w = re.sub(r"^[^\w]+", "", str(w))

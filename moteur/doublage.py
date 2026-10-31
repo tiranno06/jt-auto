@@ -396,6 +396,32 @@ def casting_unique(casting, segs, hz):
             res[v] = libres[0]
     return res
 
+def scinder_voix_dominante(mots, part=0.7):
+    """Deux voix trouvées, mais l'une dit plus de 70 % du texte : souvent DEUX personnes jouées par la même voix (« Fierté familiale » :
+    les deux copains ont la même voix, seuls les vieux qu'on montre ont une voix aiguë). L'IA relit les phrases de la voix dominante ;
+    si c'est un vrai dialogue (pas un monologue), elles sont réparties entre deux personnes, la petite voix devient une 3e personne."""
+    import locuteurs
+    from collections import Counter
+    n = Counter(m["voix"] for m in mots)
+    if len(n) != 2 or len(mots) < 30: return mots
+    dom, nb = n.most_common(1)[0]
+    if nb < part * len(mots): return mots
+    sous = [m for m in mots if m["voix"] == dom]
+    ia = relire_dialogue(sous, une_voix=True)
+    if not ia: return mots
+    petite = next(v for v in n if v != dom)
+    for m in mots:
+        if m["voix"] == petite: m["voix"] = "speaker_x"
+    for m in sous: m["voix"] = "speaker_0"
+    locuteurs.fil_dialogue(sous, ia)                                       # (modifie les mots de la voix dominante sur place)
+    if len({m["voix"] for m in sous}) < 2:                                 # finalement une seule personne : on remet comme avant
+        for m in mots: m["voix"] = dom if m["voix"] != "speaker_x" else petite
+        return mots
+    for m in mots:
+        if m["voix"] == "speaker_x": m["voix"] = "speaker_2"
+    journal("  voix dominante partagée entre deux personnes (même voix, dialogue) ; l'autre voix devient une 3e personne")
+    return mots
+
 def preparer(url):
     import ecrire
     tmp = tempfile.mkdtemp()
@@ -420,6 +446,7 @@ def preparer(url):
     mots = transcrire(chemin_voix, mono)
     if SOURCE_MOTS[0] != "elevenlabs":
         mots = ecoute.aligner(mots, sig)                                   # chaque mot recalé sur la voix (lèvres, sous-titres)
+        mots = __import__("locuteurs").sans_boucles(mots)                  # Whisper qui tourne en boucle sur la fin du son
         __import__("locuteurs").fins_de_phrase(mots)                       # points oubliés par Whisper (« …rouge Mais pourquoi… »)
     if not EVENEMENTS: EVENEMENTS[:] = ecoute.bruits(mono)                 # rires, cris, sirène, aboiement… entendus dans l'original
     try:                                                                   # pyannote (si la clé Hugging Face gratuite est réglée) :
@@ -438,11 +465,13 @@ def preparer(url):
     try:                                                                   # voix proches (ou une seule voix trouvée) : contrôle questions-réponses
         import locuteurs                                                   # (texte + IA), le son ne suffit pas à dire qui parle
         r_ = locuteurs.ETAT.get("ressemblance"); seule = len({m["voix"] for m in mots}) == 1
+        if r_ is not None: journal(f"  ressemblance des deux voix : {r_:.2f} (au-delà de {locuteurs.DOUTE} : le dialogue décide avec le son)")
         if seule or (r_ is not None and r_ > locuteurs.DOUTE):
             ia = relire_dialogue(mots, une_voix=seule)
             if ia:                                                         # voix « un peu » proches : le son garde du poids
                 mots = locuteurs.fil_dialogue(mots, ia, avis=None if seule or r_ > locuteurs.PROCHES else 1.2)
             elif seule: journal("  une seule voix entendue et pas de relecture du dialogue : un seul personnage parle")
+        else: mots = scinder_voix_dominante(mots)                          # deux personnes à la même voix + une 3e bien différente
     except Exception as e: journal(f"  contrôle questions-réponses impossible ({str(e)[:120]})")
     segs = segments(mots)
     hz = hauteurs(sig, segs)
@@ -481,7 +510,7 @@ def preparer(url):
     except Exception as e:
         journal(f"  mise en scène automatique impossible ({str(e)[:150]}) : une seule scène, casting par la hauteur des voix")
     journal("  casting : " + ", ".join(f"{v} → {NOMS[r]}" for v, r in casting.items()))
-    d = [str(x) for x in ecrire._liste(m.get("d"))]
+    d = [" ".join(map(str, x)) if isinstance(x, list) else str(x) for x in ecrire._liste(m.get("d"))]   # l'IA gratuite met parfois [["…"]]
     corrige = corriger_textes(segs, [str(x) for x in ecrire._liste(m.get("texte"))])   # sous-titres sans fautes de reconnaissance
     reps = []
     for k, s in enumerate(segs):
@@ -516,6 +545,11 @@ def preparer(url):
                       [{"scene": "1", "repliques": list(range(len(reps))), "lieu": "", "son": "", "duree": 0,
                         "decor": "" if os.environ.get("RENDU_DETAILLE", "1") != "0" else "cozy living room, sofa, coffee table, lamp"}]   # sans Claude : le studio devine le lieu
     if isinstance(m.get("studio"), dict):
+        P_ = m["studio"].get("personnages")
+        if isinstance(P_, list):                                           # l'IA gratuite donne parfois une liste sans les rôles :
+            C_ = m["studio"].get("costumes")                               # même ordre que ses costumes (sinon ordre d'apparition)
+            ordre = [r for r in (C_ if isinstance(C_, dict) else {}) if r in ROLES] or list(dict.fromkeys(r["p"] for r in reps if r["p"] != "narrateur"))
+            m["studio"]["personnages"] = {r: f for r, f in zip(ordre, P_) if isinstance(f, dict)}
         sk["studio"] = m["studio"]                                         # direction artistique de Claude (vérifiée par studio.bible)
         try:
             import studio as _st

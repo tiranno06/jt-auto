@@ -660,6 +660,33 @@ DECOR_EN.update(__import__("decor_lieux").DECOR_EN)                     # 39 lie
 
 TIERS = r"\b(la dame|cette dame|une dame|l'inconnue|une inconnue|cette (femme|fille|meuf|nana)|une (femme|fille|meuf|nana)|la (meuf|nana|fille))\b"
 
+FAMILLE = [  # (mot, genre, âge) : un proche présenté ou montré (« je te présente mon père », « mon grand-père qui est là-bas »)
+    (r"arri[eè]re[- ](?:arri[eè]re[- ])*grand[- ]p[eè]re", "h", 99), (r"arri[eè]re[- ](?:arri[eè]re[- ])*grand[- ]m[eè]re", "f", 97),
+    (r"grand[- ]p[eè]re|papi|papy", "h", 80), (r"grand[- ]m[eè]re|mamie|mamy", "f", 78), (r"p[eè]re|daron|papa", "h", 55),
+    (r"m[eè]re|daronne|maman", "f", 52), (r"fr[eè]re|frangin", "h", 20), (r"s[oœ]eur|frangine", "f", 19),
+    (r"fils", "h", 10), (r"fille", "f", 10), (r"copine|femme", "f", 30), (r"copain|mari", "h", 32)]
+_PROCHE = r"(?:mon|ma|son|sa|ton|ta|notre|votre)\s+((?:arri[eè]re[- ])*(?:grand[- ])?[\w-]+)"
+
+
+def famille_presentee(sk):
+    """Les proches qu'un personnage présente ou montre (« je te présente mon père et mon grand-père », « mon arrière-grand-père qui
+    est là-bas », « son père qui est là ») : ils sont dans la pièce mais ne parlent pas -> compagnons dessinés à côté de lui."""
+    vus, out = [], []
+    for x in [x for x in sk.get("repliques") or [] if x.get("p") != "narrateur"]:
+        t = x.get("t", "").lower()
+        for ph in re.split(r"[.!?…]", t):
+            if not re.search(r"\b(pr[ée]sente|qui est l[àa]|qui sont l[àa]|qui est ici|est l[àa][- ]bas|voici|voil[àa])\b", ph): continue
+            for nom in re.findall(_PROCHE, ph):
+                for motif, genre, age in FAMILLE:
+                    if re.fullmatch(motif, nom):
+                        cle = re.sub(r"[- ]", "", nom)
+                        if cle not in vus:
+                            vus.append(cle); out.append({"avec": x["p"], "genre": genre, "age": age, "geste": "attend",
+                                                         "description": f"{nom} (présenté, muet, à côté)"})
+                        break
+    return out[:3]
+
+
 def figurants_devines(sk):
     """Sans Claude : une personne muette dont un personnage parle (« la dame », « une inconnue », « cette fille »…) est dessinée
     à côté de celui qui la voit, et lui fait signe."""
@@ -741,6 +768,12 @@ def separer_lieux(sk):
     sep = {r: (v.get("decor") if isinstance(v, dict) else str(v or "")) for r, v in sep.items() if r in parlants}
     moyen = str(S.get("moyen") or "").lower()
     texte = " ".join(x.get("t", "") for x in reps).lower()
+    if sep and sk.get("doublage") and not appel_devine(sk):               # son TikTok : l'IA gratuite voyait un appel partout (« Est-ce
+        print("  lieux séparés proposés par l'IA refusés : rien dans le son ne dit qu'ils se parlent à distance", flush=True)
+        sep = {}; S.pop("lieux_separes", None); S.pop("moyen", None); S.pop("lieux_de", None)   # que tu veux m'épouser ? » au téléphone)
+        if isinstance(S.get("lieux"), list): S["lieux"] = S["lieux"][:1]
+        for x in reps:
+            if x.get("objet") == "telephone" and not re.search(r"t[ée]l[ée]phone|portable|appel|message|photo", x.get("t", "").lower()): x.pop("objet")
     if len(sep) < 2 and not S.get("lieux_separes") and len(parlants) >= 2 and appel_devine(sk):
         sep = {r: "" for r in parlants[:2]}; moyen = moyen or "telephone"            # repli gratuit : un appel deviné aux mots
         S["lieux_de"] = {**lieux_devines(sk, parlants[:2]), **(S.get("lieux_de") if isinstance(S.get("lieux_de"), dict) else {})}
@@ -787,7 +820,7 @@ def compagnons(sk, dec, lieux, moment, graine):
     danse / attend / telephone / rit / boit, "haut", "c_haut", "description"}]. Dessinés près du personnage, à sa taille."""
     S = sk.get("studio") if isinstance(sk.get("studio"), dict) else {}
     out = []
-    liste = [f for f in (S.get("figurants") or []) if isinstance(f, dict)] or figurants_devines(sk)
+    liste = [f for f in (S.get("figurants") or []) if isinstance(f, dict)] or famille_presentee(sk) or figurants_devines(sk)
     for k, f in enumerate(liste[:3]):
         avec = f.get("avec"); reps = sk.get("repliques") or []
         sc = next((j for j, d in enumerate(dec) if any(i < len(reps) and reps[i]["p"] == avec for i in d.get("repliques", []))), None)

@@ -196,6 +196,13 @@
   ressemblent « un peu » (ressemblance > 0,55 : `locuteurs.DOUTE`, le son garde du poids) et quand une seule voix est trouvée (l'IA dit
   si c'est un vrai monologue : jamais de personne inventée). **Un seul décor par son TikTok** (`studio.une_scene`, UNE_SCENE=0 pour
   couper ; appels et visios gardent un décor chacun) et personne n'entre en marchant (plus de bruits de pas « toc toc toc »).
+  **Analyse des vidéos du 31 octobre (2e passe)** : l'IA gratuite ne peut plus inventer un appel (`separer_lieux` : lieux séparés
+  refusés si rien dans le son ne parle d'appel ; téléphone en main retiré) ; proches présentés ou montrés (« je te présente mon
+  père », « mon arrière-grand-père qui est là-bas ») dessinés à côté (`studio.famille_presentee`) ; Whisper qui tourne en boucle
+  (« Oh mais non je suis sale » ×3 en 1 s) nettoyé (`locuteurs.sans_boucles`) ; une voix qui dit plus de 70 % du texte = souvent deux
+  personnes à la même voix : l'IA la partage, l'autre voix devient une 3e personne (`doublage.scinder_voix_dominante`) ; réponses de
+  l'IA gratuite remises en forme (indications de jeu en liste, personnages sans rôle) ; Groq réparé (refusé sans nom de robot,
+  réponse mal lue) ; ressemblance des voix toujours notée dans le journal.
   **Tirage au hasard des sons TikTok** : le robot préfère les vidéos aux voix bien différentes (ressemblance ≤ 0,6, réglage
   VOIX_DIFFERENTES ; 1 = sans tri) : jusqu'à 6 vidéos écoutées (25 min au plus), sinon celle aux voix les plus nettes. Un lien collé
   à la main n'est jamais refusé (le contrôle questions-réponses s'en charge).
