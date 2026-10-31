@@ -834,7 +834,7 @@ def couette(img, x, sol, R, h_assise, large, coul=(235, 200, 170), ep=None):    
 
 def comptoir(img, x, sol, R, large, h_hanche, coul=(70, 105, 150), ep=None):     # bois
     """Comptoir au premier plan, juste au-dessus des hanches (dessiné après la personne accoudée) : plateau et façade en bois."""
-    ep = ep or R * 0.035; yh = sol - h_hanche * 1.08; L = large * 1.4
+    ep = ep or R * 0.035; yh = sol - h_hanche * 1.08; L = large * 0.8    # étroit : devant celui qui est derrière le comptoir seulement
     _forme(img, [(x - L, yh + R * 0.2), (x + L, yh + R * 0.2), (x + L, sol + R * 0.2), (x - L, sol + R * 0.2)], coul, ep, 0.9)
     _forme(img, [(x - L * 1.08, yh), (x + L * 1.08, yh), (x + L * 1.08, yh + R * 0.22), (x - L * 1.08, yh + R * 0.22)], tuple(max(0, int(c * 0.8)) for c in coul), ep, 0.95)
     for k in (-0.5, 0.0, 0.5): encre(img, [(x + k * L, yh + R * 0.45), (x + k * L, sol - R * 0.1)], ep * 0.7)

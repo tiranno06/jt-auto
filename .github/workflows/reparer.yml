@@ -1,0 +1,26 @@
+name: Réparer une vidéo
+
+# Remet le son d'une vidéo archivée à sa place (moteur/reparer.py) : pleine qualité remuxée, version légère refaite.
+on:
+  workflow_dispatch:
+    inputs:
+      fichier:
+        description: "Nom de la vidéo (ex. 2026-10-31_15h34_emission.mp4)"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  reparer:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+      FICHIER: ${{ inputs.fichier }}
+    steps:
+      - uses: actions/checkout@v7
+      - name: Installer ffmpeg
+        run: sudo apt-get install -y -q ffmpeg
+      - name: Réparer
+        run: python3 moteur/reparer.py

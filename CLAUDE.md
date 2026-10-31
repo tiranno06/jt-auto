@@ -248,6 +248,10 @@
   sous-titre) ; technique (sauts d'image hors coupes prévues, clignotements, contrôle image du dessin) ; liste de contrôle par l'IA
   (une image toutes les 2 s, 6 questions fixes) ; **feu rouge** : points non corrigés -> historique "a_verifier" -> badge
   « ⚠️ À vérifier (n) » + moments sur l'onglet TikTok, et cocher « À publier » demande confirmation.
+  **Leçons de la chaîne du 31 octobre** : le décalage son / image est seulement MESURÉ (jamais corrigé : le son et l'image sortent du même
+  calcul, un « recalage » de +0,28 s avait décalé une vidéo juste ; `moteur/reparer.py` + workflow reparer.yml remettent le son d'une
+  vidéo archivée à 0) ; l'IA de contrôle ne juge plus les sous-titres (vérifiés à l'oreille) ; fin d'une réplique = fin de son mot le
+  plus tardif (`doublage.segments`).
   **Tirage au hasard des sons TikTok** : le robot préfère les vidéos aux voix bien différentes (ressemblance ≤ 0,6, réglage
   VOIX_DIFFERENTES ; 1 = sans tri) : jusqu'à 6 vidéos écoutées (25 min au plus), sinon celle aux voix les plus nettes. Un lien collé
   à la main n'est jamais refusé (le contrôle questions-réponses s'en charge).

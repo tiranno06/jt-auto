@@ -194,7 +194,7 @@ def segments(mots):
         else: c["mots"].append(m)
     for s in out:
         s["t"] = re.sub(r"\s+([,.!?…])", r"\1", " ".join(m["w"] for m in s["mots"])).strip()
-        s["deb"], s["fin"] = s["mots"][0]["s"], s["mots"][-1]["e"]
+        s["deb"], s["fin"] = min(m["s"] for m in s["mots"]), max(m["e"] for m in s["mots"])   # un mot recalé peut déborder de son voisin
     return out
 
 def voix_sure(seg, seuil=0.5):

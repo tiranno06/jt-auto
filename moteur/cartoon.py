@@ -687,7 +687,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
         if u <= 0.01: return
         x0, y0, s0 = position(scene, role); xo, yo, so = position(scene, autre); sens = 1 if xo > x0 else -1
         t_ = FICHES[role]["taille"] if FICHES and role in FICHES else 1.0; seff = s0 * t_
-        portee = 230 * seff; ecart = abs(xo - x0)
+        portee = (400 if CROQUIS else 230) * seff; ecart = abs(xo - x0)     # croquis : grosses têtes, elles ne se chevauchent jamais
         symetrique = nom in ("tope", "donne")
         if parle or symetrique:                                            # il s'approche (à deux pour « tope » et « donner »)
             app = max(0.0, ecart - portee) * (0.5 if symetrique else 1.0) * min(1.0, u)
