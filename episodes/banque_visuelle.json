@@ -37167,5 +37167,278 @@
    ]
   },
   "video": "2026-10-31_06h44_emission.mp4"
+ },
+ {
+  "date": "2026-10-31",
+  "source": "https://www.tiktok.com/@vignianimation/video/7677317232023588129",
+  "auteur": "vignianimation",
+  "visuel": {
+   "gestes": [],
+   "duree": 65.5,
+   "nb_plans": 1,
+   "duree_plan": 65.5,
+   "coupes": [],
+   "plans": {
+    "tres_serre": 0.0,
+    "serre": 0.0,
+    "moyen": 0.061,
+    "large": 0.939
+   },
+   "camera": {
+    "fixe": 1.0,
+    "avance": 0.0,
+    "recul": 0.0,
+    "travelling": 0.0,
+    "epaule": 0.0
+   },
+   "nb_personnes": 1,
+   "personnes": [],
+   "visages": true,
+   "sourires": 0.0,
+   "energie": 0.07,
+   "mur": [
+    220,
+    174,
+    127
+   ],
+   "palette": [
+    [
+     225,
+     177,
+     125,
+     0.38
+    ],
+    [
+     180,
+     209,
+     236,
+     0.218
+    ],
+    [
+     19,
+     16,
+     18,
+     0.131
+    ],
+    [
+     165,
+     131,
+     121,
+     0.131
+    ],
+    [
+     156,
+     174,
+     192,
+     0.102
+    ],
+    [
+     252,
+     252,
+     252,
+     0.038
+    ]
+   ],
+   "lumiere": {
+    "luminosite": 191.3,
+    "chaleur": 27.6,
+    "saturation": 85.9
+   },
+   "moment": "jour",
+   "postures": [
+    [
+     33.5,
+     34.5,
+     0.78,
+     "pointe_g"
+    ],
+    [
+     38.0,
+     39.0,
+     0.78,
+     "pointe_g"
+    ],
+    [
+     43.0,
+     44.0,
+     0.79,
+     "pointe_g"
+    ],
+    [
+     49.5,
+     50.5,
+     0.79,
+     "pointe_g"
+    ]
+   ]
+  },
+  "audio": {
+   "duree": 65.4,
+   "nb_voix": 2,
+   "voix": [
+    {
+     "hz": 218,
+     "genre": "f",
+     "part": 0.38
+    },
+    {
+     "hz": 156,
+     "genre": "h",
+     "part": 0.62
+    }
+   ],
+   "debit": 4.91,
+   "blanc_moyen": 0.45,
+   "coupes": 1,
+   "dynamique_db": 17.6,
+   "cris": 0.005,
+   "musique": 0.41,
+   "impacts": 40,
+   "impacts_10s": 6.12,
+   "graves": 2,
+   "aigus": 38,
+   "sur_vanne": 12,
+   "evenements": {},
+   "emotions": {
+    "annoyed": 2,
+    "sick": 2,
+    "weak": 1,
+    "angry": 1,
+    "scoffing": 1,
+    "exhausted": 1,
+    "groaning": 1,
+    "whining": 1
+   }
+  },
+  "claude": {
+   "lieux": [
+    "rue",
+    "salon"
+   ],
+   "moment": "matin",
+   "costumes": {
+    "invite": {
+     "haut": "tshirt",
+     "c_haut": "orange",
+     "motif": "uni",
+     "bas": "pantalon",
+     "chaussures": "chaussons",
+     "cheveux": "court",
+     "c_cheveux": "noir"
+    },
+    "envoyee": {
+     "haut": "chemise",
+     "c_haut": "blanc",
+     "motif": "uni",
+     "bas": "pantalon",
+     "chaussures": "ville",
+     "cheveux": "chignon",
+     "c_cheveux": "chatain",
+     "details": [
+      "montre"
+     ]
+    }
+   },
+   "objets": [
+    {
+     "objet": "telephone",
+     "replique": 0
+    },
+    {
+     "replique": 1,
+     "objet": "telephone"
+    },
+    {
+     "objet": "telephone",
+     "replique": 11
+    },
+    {
+     "replique": 20,
+     "objet": "telephone"
+    }
+   ],
+   "gags": [
+    "Boîte de mouchoirs vide débordante de papier",
+    "Thermomètre bloqué sur 42°C"
+   ],
+   "ambiances": [
+    "neon"
+   ],
+   "plans": [
+    {
+     "plan": "moyen",
+     "replique": 0,
+     "geste": "telephone",
+     "mouvement": "fixe",
+     "reaction": "yeux_au_ciel"
+    },
+    {
+     "reaction": "soupir",
+     "plan": "serre",
+     "replique": 1,
+     "mouvement": "zoom_choc",
+     "geste": "telephone"
+    },
+    {
+     "mouvement": "avance",
+     "replique": 11,
+     "plan": "moyen",
+     "geste": "explique",
+     "reaction": "sceptique"
+    },
+    {
+     "mouvement": "zoom_choc",
+     "geste": "desespoir",
+     "plan": "tres_serre",
+     "reaction": "choc",
+     "replique": 21
+    }
+   ]
+  },
+  "realisation": {
+   "moment": "matin",
+   "lieux": [
+    "rue",
+    "salon"
+   ],
+   "gags": [
+    "Boîte de mouchoirs vide débordante de papier",
+    "Thermomètre bloqué sur 42°C"
+   ],
+   "ambiances": [
+    "neon",
+    "poussiere"
+   ],
+   "source": "auteur+image",
+   "tenues": {
+    "envoyee": "chemise",
+    "invite": "tshirt"
+   },
+   "plans": [
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe"
+   ]
+  },
+  "video": "2026-10-31_10h03_emission.mp4"
  }
 ]
