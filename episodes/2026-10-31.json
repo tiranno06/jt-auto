@@ -1,1260 +1,1730 @@
 {
- "titre": "RETRAIT BANCAIRE 2026",
- "sujet": "RETRAIT BANCAIRE 2026",
- "ecran": "RETRAIT BANCAI",
+ "titre": "OH MAURICE, MON CHAT T'ES TROP",
+ "sujet": "OH MAURICE, MON CHAT T'ES TROP",
+ "ecran": "OH MAURICE, MO",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "Quand tu veux retirer de l'argent en 2026",
- "question": "Quel motif donneriez-vous pour votre propre argent ?",
+ "titre_accroche": "",
+ "question": "",
  "running_gag": "",
  "verite": "",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "Bonjour Monsieur Chou, je me permets de vous téléphoner pour savoir pour votre retrait que vous avez fait il y a quelques jours.",
-   "_deb": 0.02,
-   "_fin": 5.428,
-   "d": "[neutral] Bonjour Monsieur Chou, je me permets de vous téléphoner pour savoir pour votre retrait que vous avez fait il y a quelques jours.",
-   "objet": "telephone",
+   "t": "Oh Maurice, mon chat t'es trop mignon, fais moi un bisou.",
+   "_deb": 1.611,
+   "_fin": 4.178,
    "_mots": [
     [
-     "Bonjour",
+     "Oh",
      0.0,
-     0.24
+     0.04
     ],
     [
-     "Monsieur",
-     0.26,
-     0.481
-    ],
-    [
-     "Chou,",
-     0.521,
-     0.681
-    ],
-    [
-     "je",
-     0.741,
-     0.781
-    ],
-    [
-     "me",
-     0.821,
-     0.881
-    ],
-    [
-     "permets",
-     0.942,
-     1.122
-    ],
-    [
-     "de",
-     1.122,
-     1.182
-    ],
-    [
-     "vous",
-     1.202,
-     1.282
-    ],
-    [
-     "téléphoner",
-     1.322,
-     1.763
-    ],
-    [
-     "pour",
-     1.823,
-     1.963
-    ],
-    [
-     "savoir",
-     2.043,
-     2.324
-    ],
-    [
-     "pour",
-     2.424,
-     2.584
-    ],
-    [
-     "votre",
-     2.744,
-     2.965
-    ],
-    [
-     "retrait",
-     3.165,
-     3.546
-    ],
-    [
-     "que",
-     4.367,
-     4.427
-    ],
-    [
-     "vous",
-     4.507,
-     4.627
-    ],
-    [
-     "avez",
-     4.667,
-     4.808
-    ],
-    [
-     "fait",
-     4.828,
-     4.948
-    ],
-    [
-     "il",
-     4.948,
-     4.988
-    ],
-    [
-     "y",
-     4.988,
-     5.008
-    ],
-    [
-     "a",
-     5.008,
-     5.028
-    ],
-    [
-     "quelques",
-     5.048,
-     5.228
-    ],
-    [
-     "jours.",
-     5.248,
-     5.408
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Oui, j'ai fait une demande de retrait pour une certaine somme et on m'a dit que je devais avoir votre accord ou je ne sais pas quoi, je",
-   "_deb": 5.489,
-   "_fin": 10.572,
-   "d": "[annoyed] Oui, j'ai fait une demande de retrait pour une certaine somme et on m'a dit que je devais avoir votre accord ou je ne sais pas quoi, je",
-   "_mots": [
-    [
-     "Oui,",
-     0.0,
-     0.06
-    ],
-    [
-     "j'ai",
-     0.1,
-     0.662
-    ],
-    [
-     "fait",
-     0.662,
-     0.762
-    ],
-    [
-     "une",
-     0.783,
-     0.843
-    ],
-    [
-     "demande",
-     0.863,
-     1.064
-    ],
-    [
-     "de",
-     1.084,
-     1.204
-    ],
-    [
-     "retrait",
-     1.264,
-     1.546
-    ],
-    [
-     "pour",
-     1.746,
-     1.867
-    ],
-    [
-     "une",
-     1.927,
-     2.007
-    ],
-    [
-     "certaine",
-     2.048,
-     2.329
-    ],
-    [
-     "somme",
-     2.389,
-     2.65
-    ],
-    [
-     "et",
-     3.152,
-     3.212
-    ],
-    [
-     "on",
-     3.252,
-     3.292
-    ],
-    [
-     "m'a",
-     3.333,
-     3.393
-    ],
-    [
-     "dit",
-     3.413,
-     3.493
-    ],
-    [
-     "que",
-     3.513,
-     3.594
-    ],
-    [
-     "je",
-     3.614,
-     3.654
-    ],
-    [
-     "devais",
-     3.674,
-     3.835
-    ],
-    [
-     "avoir",
-     3.835,
-     3.975
-    ],
-    [
-     "votre",
-     4.035,
-     4.196
-    ],
-    [
-     "accord",
-     4.276,
-     4.618
-    ],
-    [
-     "ou",
-     4.678,
-     4.718
-    ],
-    [
-     "je",
-     4.778,
-     4.818
-    ],
-    [
-     "ne",
-     4.818,
-     4.879
-    ],
-    [
-     "sais",
-     4.919,
-     5.18
-    ],
-    [
-     "pas",
-     5.3,
-     5.361
-    ],
-    [
-     "quoi,",
-     5.381,
-     5.401
-    ],
-    [
-     "je",
-     5.042,
-     5.083
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "n'ai pas tout compris.",
-   "_deb": 10.592,
-   "_fin": 11.264,
-   "d": "[annoyed] n'ai pas tout compris.",
-   "_mots": [
-    [
-     "n'ai",
-     0.0,
-     0.123
-    ],
-    [
-     "pas",
-     0.184,
-     0.265
-    ],
-    [
-     "tout",
-     0.265,
-     0.387
-    ],
-    [
-     "compris.",
-     0.408,
-     0.672
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Bien sûr, vous avez vu le montant et en plus vous souhaitez ça dans la semaine.",
-   "_deb": 12.452,
-   "_fin": 15.843,
-   "d": "[neutral] Bien sûr, vous avez vu le montant et en plus vous souhaitez ça dans la semaine.",
-   "_mots": [
-    [
-     "Bien",
-     0.0,
-     0.12
-    ],
-    [
-     "sûr,",
-     0.18,
-     0.321
-    ],
-    [
-     "vous",
-     0.381,
-     0.502
-    ],
-    [
-     "avez",
-     0.542,
-     0.702
-    ],
-    [
-     "vu",
-     0.742,
-     0.823
-    ],
-    [
-     "le",
-     0.883,
-     0.923
-    ],
-    [
-     "montant",
-     0.963,
-     1.244
-    ],
-    [
-     "et",
-     1.304,
-     1.344
-    ],
-    [
-     "en",
-     1.405,
-     1.445
-    ],
-    [
-     "plus",
-     1.505,
-     1.645
-    ],
-    [
-     "vous",
-     1.726,
-     1.826
-    ],
-    [
-     "souhaitez",
-     1.846,
-     2.147
-    ],
-    [
-     "ça",
-     2.187,
-     2.247
-    ],
-    [
-     "dans",
-     2.328,
-     2.428
-    ],
-    [
-     "la",
-     2.468,
-     2.508
-    ],
-    [
-     "semaine.",
-     2.609,
-     3.391
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Oui, c'est mon argent.",
-   "_deb": 16.405,
-   "_fin": 17.248,
-   "d": "[annoyed] Oui, c'est mon argent.",
-   "_mots": [
-    [
-     "Oui,",
-     0.0,
-     0.1
-    ],
-    [
-     "c'est",
-     0.241,
-     0.381
+     "Maurice,",
+     0.301,
+     0.822
     ],
     [
      "mon",
-     0.401,
-     0.502
+     0.883,
+     1.003
     ],
     [
-     "argent.",
-     0.602,
-     0.843
+     "chat",
+     1.103,
+     1.264
+    ],
+    [
+     "t'es",
+     1.284,
+     1.404
+    ],
+    [
+     "trop",
+     1.464,
+     1.705
+    ],
+    [
+     "mignon,",
+     1.765,
+     2.006
+    ],
+    [
+     "fais",
+     2.006,
+     2.106
+    ],
+    [
+     "moi",
+     2.126,
+     2.186
+    ],
+    [
+     "un",
+     2.186,
+     2.226
+    ],
+    [
+     "bisou.",
+     2.307,
+     2.567
     ]
    ]
   },
   {
-   "p": "presentateur",
-   "t": "Oui, mais ça nous paraît bizarre. On ne prend pas 9500 euros comme ça dans la semaine.",
-   "_deb": 18.611,
-   "_fin": 24.364,
-   "d": "[sceptique] Oui, mais ça nous paraît bizarre. On ne prend pas 9500 euros comme ça dans la semaine.",
+   "p": "invite",
+   "t": "Eh vas-y tu vois pas, j'dors là. Et arrête de m'appeler Maurice, j'm'appelle Boilem, j't'ai déjà dit.",
+   "_deb": 4.219,
+   "_fin": 8.614,
    "_mots": [
     [
-     "Oui,",
+     "Eh",
      0.0,
      0.08
     ],
     [
-     "mais",
-     0.16,
-     0.24
+     "vas-y",
+     0.3,
+     0.541
     ],
     [
-     "ça",
-     0.28,
-     0.34
+     "tu",
+     0.621,
+     0.681
     ],
     [
-     "nous",
-     0.421,
-     0.521
+     "vois",
+     0.742,
+     0.862
     ],
     [
-     "paraît",
-     0.561,
-     0.761
+     "pas,",
+     0.942,
+     1.043
     ],
     [
-     "bizarre.",
-     0.802,
-     1.162
-    ],
-    [
-     "On",
-     1.343,
+     "j'dors",
+     1.083,
      1.383
     ],
     [
-     "ne",
-     1.463,
-     1.563
+     "là.",
+     1.404,
+     1.484
     ],
     [
-     "prend",
-     1.984,
-     2.004
+     "Et",
+     1.805,
+     1.865
     ],
     [
-     "pas",
-     1.889,
-     2.089
+     "arrête",
+     1.925,
+     2.146
     ],
     [
-     "9500",
-     2.089,
-     3.669
+     "de",
+     2.186,
+     2.246
     ],
     [
-     "euros",
-     3.989,
-     4.31
+     "m'appeler",
+     2.306,
+     2.587
     ],
     [
-     "comme",
-     4.43,
-     4.631
+     "Maurice,",
+     2.627,
+     2.968
     ],
     [
-     "ça",
-     4.711,
-     4.791
+     "j'm'appelle",
+     2.988,
+     3.309
     ],
     [
-     "dans",
-     5.092,
-     5.212
+     "Boilem,",
+     3.349,
+     3.571
     ],
     [
-     "la",
-     5.252,
-     5.312
+     "j't'ai",
+     3.571,
+     3.772
     ],
     [
-     "semaine.",
-     5.412,
-     5.753
+     "déjà",
+     3.812,
+     4.073
+    ],
+    [
+     "dit.",
+     4.194,
+     4.395
     ]
    ]
   },
   {
    "p": "presentateur",
-   "t": "Quelle est la raison.",
-   "_deb": 24.504,
-   "_fin": 25.186,
-   "d": "[colere] Quelle est la raison.",
+   "t": "Ça y est, j'ai le droit de te faire un bisou frère.",
+   "_deb": 8.674,
+   "_fin": 10.301,
    "_mots": [
     [
-     "Quelle",
+     "Ça",
      0.0,
-     0.261
+     0.04
     ],
     [
-     "est",
+     "y",
+     0.08,
+     0.1
+    ],
+    [
+     "est,",
+     0.1,
+     0.181
+    ],
+    [
+     "j'ai",
+     0.201,
+     0.281
+    ],
+    [
+     "le",
+     0.301,
+     0.341
+    ],
+    [
+     "droit",
      0.341,
-     0.401
+     0.462
     ],
     [
-     "la",
-     0.421,
-     0.502
+     "de",
+     0.502,
+     0.542
     ],
     [
-     "raison.",
+     "te",
      0.542,
-     0.682
+     0.582
+    ],
+    [
+     "faire",
+     0.623,
+     0.743
+    ],
+    [
+     "un",
+     0.783,
+     0.844
+    ],
+    [
+     "bisou",
+     0.864,
+     1.065
+    ],
+    [
+     "frère.",
+     1.125,
+     1.627
     ]
    ]
   },
   {
    "p": "invite",
-   "t": "Mais j'en fais ce que je veux. C'est mon argent.",
-   "_deb": 25.627,
-   "_fin": 27.755,
-   "d": "[colere] Mais j'en fais ce que je veux. C'est mon argent.",
+   "t": "Vas-y, il est 15h du matin, tu t'es même pas lavé les dents, vas-y calme.",
+   "_deb": 10.321,
+   "_fin": 13.335,
+   "_mots": [
+    [
+     "Vas-y,",
+     0.0,
+     0.502
+    ],
+    [
+     "il",
+     0.542,
+     0.643
+    ],
+    [
+     "est",
+     0.643,
+     0.723
+    ],
+    [
+     "15h",
+     0.723,
+     0.743
+    ],
+    [
+     "du",
+     0.904,
+     0.964
+    ],
+    [
+     "matin,",
+     1.024,
+     1.265
+    ],
+    [
+     "tu",
+     1.346,
+     1.426
+    ],
+    [
+     "t'es",
+     1.486,
+     1.587
+    ],
+    [
+     "même",
+     1.627,
+     1.788
+    ],
+    [
+     "pas",
+     1.848,
+     1.928
+    ],
+    [
+     "lavé",
+     1.95,
+     2.171
+    ],
+    [
+     "les",
+     2.251,
+     2.351
+    ],
+    [
+     "dents,",
+     2.412,
+     2.572
+    ],
+    [
+     "vas-y",
+     2.592,
+     2.793
+    ],
+    [
+     "calme.",
+     2.853,
+     3.014
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Ah comment t'as pas qu'à clavier à 15h aussi toi.",
+   "_deb": 13.335,
+   "_fin": 14.92,
+   "_mots": [
+    [
+     "Ah",
+     0.0,
+     0.04
+    ],
+    [
+     "comment",
+     0.04,
+     0.26
+    ],
+    [
+     "t'as",
+     0.321,
+     0.401
+    ],
+    [
+     "pas",
+     0.421,
+     0.501
+    ],
+    [
+     "qu'à",
+     0.521,
+     0.581
+    ],
+    [
+     "clavier",
+     0.622,
+     1.183
+    ],
+    [
+     "à",
+     1.203,
+     1.223
+    ],
+    [
+     "15h",
+     1.223,
+     1.244
+    ],
+    [
+     "aussi",
+     1.244,
+     1.404
+    ],
+    [
+     "toi.",
+     1.444,
+     1.585
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Ah ouais, tu t'es levé à quelle heure toi",
+   "_deb": 15.14,
+   "_fin": 16.585,
+   "_mots": [
+    [
+     "Ah",
+     0.0,
+     0.101
+    ],
+    [
+     "ouais,",
+     0.101,
+     0.241
+    ],
+    [
+     "tu",
+     0.422,
+     0.462
+    ],
+    [
+     "t'es",
+     0.462,
+     0.562
+    ],
+    [
+     "levé",
+     0.622,
+     0.743
+    ],
+    [
+     "à",
+     0.823,
+     0.863
+    ],
+    [
+     "quelle",
+     0.903,
+     1.084
+    ],
+    [
+     "heure",
+     1.124,
+     1.265
+    ],
+    [
+     "toi",
+     1.325,
+     1.445
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "14h.",
+   "_deb": 18.07,
+   "_fin": 18.09,
+   "_mots": [
+    [
+     "14h.",
+     0.0,
+     0.02
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "T'es au courant que t'as l'hygiène des vies d'un chat ou pas.",
+   "_deb": 17.991,
+   "_fin": 20.101,
+   "_mots": [
+    [
+     "T'es",
+     0.0,
+     0.121
+    ],
+    [
+     "au",
+     0.161,
+     0.201
+    ],
+    [
+     "courant",
+     0.281,
+     0.522
+    ],
+    [
+     "que",
+     0.583,
+     0.643
+    ],
+    [
+     "t'as",
+     0.643,
+     0.723
+    ],
+    [
+     "l'hygiène",
+     0.764,
+     1.105
+    ],
+    [
+     "des",
+     1.145,
+     1.266
+    ],
+    [
+     "vies",
+     1.306,
+     1.447
+    ],
+    [
+     "d'un",
+     1.447,
+     1.567
+    ],
+    [
+     "chat",
+     1.648,
+     1.768
+    ],
+    [
+     "ou",
+     1.869,
+     1.909
+    ],
+    [
+     "pas.",
+     1.969,
+     2.11
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Ça n'a rien à voir, moi j'suis influenceur frère, j'ai le droit.",
+   "_deb": 20.141,
+   "_fin": 22.17,
+   "_mots": [
+    [
+     "Ça",
+     0.0,
+     0.06
+    ],
+    [
+     "n'a",
+     0.06,
+     0.1
+    ],
+    [
+     "rien",
+     0.1,
+     0.241
+    ],
+    [
+     "à",
+     0.321,
+     0.341
+    ],
+    [
+     "voir,",
+     0.361,
+     0.482
+    ],
+    [
+     "moi",
+     0.522,
+     0.602
+    ],
+    [
+     "j'suis",
+     0.602,
+     0.703
+    ],
+    [
+     "influenceur",
+     0.723,
+     1.165
+    ],
+    [
+     "frère,",
+     1.165,
+     1.286
+    ],
+    [
+     "j'ai",
+     1.667,
+     1.768
+    ],
+    [
+     "le",
+     1.808,
+     1.848
+    ],
+    [
+     "droit.",
+     1.848,
+     2.029
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Eh vas-y, sale casso, s'arrête de parler avec moi c't'est vrai.",
+   "_deb": 22.17,
+   "_fin": 24.26,
+   "_mots": [
+    [
+     "Eh",
+     0.0,
+     0.02
+    ],
+    [
+     "vas-y,",
+     -0.119,
+     0.082
+    ],
+    [
+     "sale",
+     0.142,
+     0.363
+    ],
+    [
+     "casso,",
+     0.383,
+     0.624
+    ],
+    [
+     "s'arrête",
+     0.725,
+     1.006
+    ],
+    [
+     "de",
+     1.046,
+     1.127
+    ],
+    [
+     "parler",
+     1.187,
+     1.428
+    ],
+    [
+     "avec",
+     1.468,
+     1.629
+    ],
+    [
+     "moi",
+     1.689,
+     1.769
+    ],
+    [
+     "c't'est",
+     1.769,
+     1.95
+    ],
+    [
+     "vrai.",
+     1.95,
+     2.09
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Mais toi, tu faisais moins le malin quand je suis venu chercher à la SPA.",
+   "_deb": 24.26,
+   "_fin": 26.59,
    "_mots": [
     [
      "Mais",
      0.0,
-     0.12
+     0.181
     ],
     [
-     "j'en",
-     0.642,
-     0.742
+     "toi,",
+     0.181,
+     0.262
     ],
     [
-     "fais",
-     0.802,
-     0.902
+     "tu",
+     0.262,
+     0.342
     ],
     [
-     "ce",
-     0.942,
-     1.002
+     "faisais",
+     0.362,
+     0.523
     ],
     [
-     "que",
-     1.064,
-     1.145
+     "moins",
+     0.543,
+     0.663
+    ],
+    [
+     "le",
+     0.683,
+     0.723
+    ],
+    [
+     "malin",
+     0.743,
+     0.864
+    ],
+    [
+     "quand",
+     0.984,
+     1.085
     ],
     [
      "je",
-     1.205,
-     1.265
+     1.105,
+     1.165
     ],
     [
-     "veux.",
-     1.345,
-     1.466
+     "suis",
+     1.165,
+     1.246
     ],
     [
-     "C'est",
-     1.506,
-     1.646
+     "venu",
+     1.246,
+     1.326
     ],
     [
-     "mon",
-     1.666,
-     1.767
+     "chercher",
+     1.326,
+     1.567
     ],
     [
-     "argent.",
-     1.887,
-     2.128
+     "à",
+     1.567,
+     1.607
+    ],
+    [
+     "la",
+     1.627,
+     1.687
+    ],
+    [
+     "SPA.",
+     1.768,
+     2.33
     ]
    ]
   },
   {
    "p": "invite",
-   "t": "Je viens demander de le retirer de la banque parce que j'ai économisé et aujourd'hui, je veux le retirer.",
-   "_deb": 27.836,
-   "_fin": 31.876,
-   "d": "[colere] Je vais me demandais de le retirer de la banque parce que j'ai économisé et aujourd'hui, je veux le retirer.",
+   "t": "Prenez-moi, prenez-moi, j'ai failli.",
+   "_deb": 27.052,
+   "_fin": 29.057,
    "_mots": [
     [
-     "Je",
+     "Prenez-moi,",
      0.0,
-     0.04
+     0.561
     ],
     [
-     "vais",
-     0.1,
-     0.2
-    ],
-    [
-     "me",
-     0.2,
-     0.24
-    ],
-    [
-     "demandais",
-     0.24,
-     0.501
-    ],
-    [
-     "de",
-     0.521,
-     0.562
-    ],
-    [
-     "le",
-     0.622,
-     0.662
-    ],
-    [
-     "retirer",
-     0.762,
-     1.084
-    ],
-    [
-     "de",
-     1.104,
-     1.164
-    ],
-    [
-     "la",
-     1.224,
-     1.264
-    ],
-    [
-     "banque",
-     1.345,
-     1.545
-    ],
-    [
-     "parce",
-     1.545,
-     1.686
-    ],
-    [
-     "que",
-     1.686,
-     1.766
+     "prenez-moi,",
+     0.782,
+     1.323
     ],
     [
      "j'ai",
-     1.786,
-     1.867
+     1.443,
+     1.544
     ],
     [
-     "économisé",
-     1.927,
-     2.429
-    ],
-    [
-     "et",
-     2.91,
-     2.971
-    ],
-    [
-     "aujourd'hui,",
-     3.011,
-     3.312
-    ],
-    [
-     "je",
-     3.352,
-     3.412
-    ],
-    [
-     "veux",
-     3.473,
-     3.573
-    ],
-    [
-     "le",
-     3.593,
-     3.657
-    ],
-    [
-     "retirer.",
-     3.657,
-     4.04
+     "failli.",
+     1.664,
+     2.005
     ]
    ]
   },
   {
    "p": "presentateur",
-   "t": "C'est simple, non. Non, je suis désolée. Il nous faudra vraiment le motif.",
-   "_deb": 32.502,
-   "_fin": 37.046,
-   "d": "[neutral] C'est simple, non. Non, je suis désolée. Il nous faudra vraiment le motif.",
+   "t": "Mais qu'est-ce que tu racontes.",
+   "_deb": 29.157,
+   "_fin": 30.22,
+   "_mots": [
+    [
+     "Mais",
+     0.0,
+     0.1
+    ],
+    [
+     "qu'est-ce",
+     0.141,
+     0.401
+    ],
+    [
+     "que",
+     0.401,
+     0.461
+    ],
+    [
+     "tu",
+     0.461,
+     0.522
+    ],
+    [
+     "racontes.",
+     0.642,
+     1.063
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "C'est toi, tu m'as adopté parce que ta meuf, elle venait de te quitter, gros bouffon.",
+   "_deb": 30.26,
+   "_fin": 33.669,
    "_mots": [
     [
      "C'est",
      0.0,
-     0.141
+     0.12
     ],
     [
-     "simple,",
-     0.181,
-     0.464
+     "toi,",
+     0.16,
+     0.241
     ],
     [
-     "non.",
-     0.504,
-     0.928
+     "tu",
+     0.361,
+     0.421
     ],
     [
-     "Non,",
-     1.65,
-     1.75
-    ],
-    [
-     "je",
-     1.971,
-     2.072
-    ],
-    [
-     "suis",
-     2.293,
-     2.433
-    ],
-    [
-     "désolée.",
-     2.454,
-     2.795
-    ],
-    [
-     "Il",
-     2.795,
-     2.836
-    ],
-    [
-     "nous",
-     2.856,
-     2.936
-    ],
-    [
-     "faudra",
-     2.976,
-     3.197
-    ],
-    [
-     "vraiment",
-     3.318,
-     3.7
-    ],
-    [
-     "le",
-     3.881,
-     3.961
-    ],
-    [
-     "motif.",
-     4.162,
-     4.544
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Le motif. Le motif. J'ai envie d'aller à la Jonquera.",
-   "_deb": 38.631,
-   "_fin": 41.439,
-   "d": "[colere] Le motif. Le motif. J'ai envie d'aller à la Jonquera.",
-   "_mots": [
-    [
-     "Le",
-     0.0,
-     0.04
-    ],
-    [
-     "motif.",
-     0.101,
-     0.401
-    ],
-    [
-     "Le",
-     0.522,
+     "m'as",
+     0.481,
      0.582
     ],
     [
-     "motif.",
-     0.609,
-     1.926
+     "adopté",
+     0.642,
+     0.983
     ],
     [
-     "J'ai",
-     1.926,
-     2.006
+     "parce",
+     1.103,
+     1.263
     ],
     [
-     "envie",
-     2.026,
+     "que",
+     1.303,
+     1.404
+    ],
+    [
+     "ta",
+     1.464,
+     1.524
+    ],
+    [
+     "meuf,",
+     1.624,
+     1.745
+    ],
+    [
+     "elle",
+     1.745,
+     1.865
+    ],
+    [
+     "venait",
+     1.925,
      2.126
     ],
     [
-     "d'aller",
-     2.146,
-     2.307
+     "de",
+     2.126,
+     2.186
     ],
     [
-     "à",
-     2.307,
-     2.347
+     "te",
+     2.226,
+     2.286
     ],
     [
-     "la",
-     2.347,
-     2.407
+     "quitter,",
+     2.386,
+     2.707
     ],
     [
-     "Jonquera.",
-     2.447,
-     2.808
+     "gros",
+     2.787,
+     2.988
+    ],
+    [
+     "bouffon.",
+     3.068,
+     3.409
     ]
    ]
   },
   {
-   "p": "invite",
-   "t": "J'ai envie de me taper j'ai envie d'aller voir des mannequins Victoria's Secret.",
-   "_deb": 41.66,
-   "_fin": 45.049,
-   "d": "[colere] J'ai envie de me taper j 'ai envie d'aller voir des mannequins Victoria's Secret.",
+   "p": "presentateur",
+   "t": "Ah ouais.",
+   "_deb": 33.831,
+   "_fin": 34.072,
    "_mots": [
     [
-     "J'ai",
+     "Ah",
      0.0,
      0.06
     ],
     [
-     "envie",
-     0.341,
-     0.461
-    ],
-    [
-     "de",
-     0.461,
-     0.501
-    ],
-    [
-     "me",
-     0.501,
-     0.561
-    ],
-    [
-     "taper",
-     0.621,
-     0.962
-    ],
-    [
-     "j",
-     1.062,
-     1.083
-    ],
-    [
-     "'ai",
-     1.083,
-     1.123
-    ],
-    [
-     "envie",
-     1.143,
-     1.283
-    ],
-    [
-     "d'aller",
-     1.283,
-     1.444
-    ],
-    [
-     "voir",
-     1.464,
-     1.564
-    ],
-    [
-     "des",
-     1.604,
-     1.704
-    ],
-    [
-     "mannequins",
-     2.206,
-     2.506
-    ],
-    [
-     "Victoria's",
-     2.707,
-     3.068
-    ],
-    [
-     "Secret.",
-     3.088,
-     3.389
+     "ouais.",
+     0.12,
+     0.241
     ]
    ]
   },
   {
    "p": "invite",
-   "t": "Il y a eu le souci. Il faut quoi. Une justification de ce qu'elles vont me faire.",
-   "_deb": 45.169,
-   "_fin": 50.53,
-   "d": "[colere] Il a eu le souci. Il faut quoi. Une justification de ce qu'elles vont me faire.",
+   "t": "Bah tu sais quoi.",
+   "_deb": 34.232,
+   "_fin": 34.554,
    "_mots": [
     [
-     "Il",
+     "Bah",
      0.0,
-     0.102
+     0.101
     ],
     [
-     "a",
-     0.102,
-     0.122
+     "tu",
+     0.101,
+     0.141
     ],
     [
-     "eu",
-     0.142,
-     0.202
-    ],
-    [
-     "le",
-     0.202,
-     0.243
-    ],
-    [
-     "souci.",
-     0.243,
-     0.443
-    ],
-    [
-     "Il",
-     0.664,
-     0.704
-    ],
-    [
-     "faut",
-     1.146,
-     1.447
+     "sais",
+     0.141,
+     0.221
     ],
     [
      "quoi.",
-     1.527,
-     1.668
-    ],
-    [
-     "Une",
-     1.728,
-     1.771
-    ],
-    [
-     "justification",
-     1.771,
-     3.011
-    ],
-    [
-     "de",
-     3.354,
-     3.414
-    ],
-    [
-     "ce",
-     3.454,
-     4.137
-    ],
-    [
-     "qu'elles",
-     4.357,
-     4.598
-    ],
-    [
-     "vont",
-     4.618,
-     4.739
-    ],
-    [
-     "me",
-     4.759,
-     4.799
-    ],
-    [
-     "faire.",
-     4.819,
-     5.361
+     0.241,
+     0.322
     ]
    ]
   },
   {
    "p": "presentateur",
-   "t": "Non, mais autant d'argent. J'ai du mal à croire. Je ne pense pas que mes intentions soient bonnes.",
-   "_deb": 51.13,
-   "_fin": 56.005,
+   "t": "Va manger ta pâtée dégueu pendant que moi je mange mes pâtes boulot.",
+   "_deb": 34.594,
+   "_fin": 36.742,
    "_mots": [
     [
-     "Non,",
+     "Va",
      0.0,
-     0.301
+     0.06
     ],
     [
-     "mais",
-     0.321,
-     0.422
+     "manger",
+     0.1,
+     0.281
     ],
     [
-     "autant",
-     0.542,
-     0.742
+     "ta",
+     0.281,
+     0.341
     ],
     [
-     "d'argent.",
-     0.783,
-     1.164
+     "pâtée",
+     0.462,
+     0.642
     ],
     [
-     "J'ai",
-     1.565,
-     1.705
+     "dégueu",
+     0.702,
+     0.983
     ],
     [
-     "du",
-     1.786,
-     1.866
-    ],
-    [
-     "mal",
-     1.926,
-     2.066
-    ],
-    [
-     "à",
-     2.187,
-     2.207
-    ],
-    [
-     "croire.",
-     2.267,
-     2.508
-    ],
-    [
-     "Je",
-     2.668,
-     2.728
-    ],
-    [
-     "ne",
-     2.728,
-     2.769
-    ],
-    [
-     "pense",
-     2.769,
-     2.909
-    ],
-    [
-     "pas",
-     2.949,
-     3.069
+     "pendant",
+     1.104,
+     1.264
     ],
     [
      "que",
-     3.19,
-     3.27
+     1.264,
+     1.325
+    ],
+    [
+     "moi",
+     1.325,
+     1.385
+    ],
+    [
+     "je",
+     1.425,
+     1.485
+    ],
+    [
+     "mange",
+     1.485,
+     1.646
     ],
     [
      "mes",
-     3.31,
-     3.39
+     1.646,
+     1.746
     ],
     [
-     "intentions",
-     3.511,
-     3.872
+     "pâtes",
+     1.786,
+     1.947
     ],
     [
-     "soient",
-     3.932,
-     4.393
-    ],
-    [
-     "bonnes.",
-     4.413,
-     4.875
+     "boulot.",
+     1.947,
+     2.148
     ]
    ]
   },
   {
    "p": "invite",
-   "t": "J'en prends plusieurs. J'en prends plusieurs. Je ne vais rien faire.",
-   "_deb": 56.085,
-   "_fin": 57.813,
-   "d": "[colere] J'en prends plusieurs. J'en prends plusieurs. Je ne vais faire rien.",
+   "t": "Je peux pas, c'est pas halal.",
+   "_deb": 37.163,
+   "_fin": 38.428,
    "_mots": [
-    [
-     "J'en",
-     0.0,
-     0.12
-    ],
-    [
-     "prends",
-     0.161,
-     0.301
-    ],
-    [
-     "plusieurs.",
-     0.341,
-     0.742
-    ],
-    [
-     "J'en",
-     0.923,
-     1.003
-    ],
-    [
-     "prends",
-     1.023,
-     1.164
-    ],
-    [
-     "plusieurs.",
-     1.164,
-     1.404
-    ],
     [
      "Je",
-     1.505,
-     1.525
+     0.0,
+     0.081
     ],
     [
-     "ne",
-     1.145,
-     1.185
+     "peux",
+     0.141,
+     0.281
     ],
     [
-     "vais",
-     1.185,
-     1.366
+     "pas,",
+     0.342,
+     0.462
     ],
     [
-     "rien",
-     1.467,
-     1.587
+     "c'est",
+     0.542,
+     0.683
     ],
     [
-     "faire.",
-     1.587,
-     1.728
+     "pas",
+     0.743,
+     0.843
+    ],
+    [
+     "halal.",
+     0.884,
+     1.265
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Tu manges halal.",
+   "_deb": 38.851,
+   "_fin": 39.313,
+   "_mots": [
+    [
+     "Tu",
+     0.0,
+     0.04
+    ],
+    [
+     "manges",
+     0.04,
+     0.201
+    ],
+    [
+     "halal.",
+     0.201,
+     0.462
     ]
    ]
   },
   {
    "p": "invite",
-   "t": "Un gangbang à 8. Il est où le souci",
-   "_deb": 57.854,
-   "_fin": 60.428,
-   "d": "[colere] Un gangbang à 8. Il est où le souci",
-   "chute": true,
+   "t": "Eh mec, je suis un chat égyptien, bien sûr que je mange halal.",
+   "_deb": 39.614,
+   "_fin": 42.283,
    "_mots": [
     [
-     "Un",
+     "Eh",
      0.0,
      0.08
     ],
     [
-     "gangbang",
-     0.1,
-     0.543
+     "mec,",
+     0.281,
+     0.461
     ],
     [
-     "à",
-     1.025,
-     1.045
+     "je",
+     0.502,
+     0.562
     ],
     [
-     "8.",
-     1.106,
-     1.468
+     "suis",
+     0.582,
+     0.682
     ],
     [
-     "Il",
-     1.468,
-     2.031
+     "un",
+     0.682,
+     0.722
     ],
     [
-     "est",
-     2.031,
-     2.091
+     "chat",
+     0.823,
+     0.943
     ],
     [
-     "où",
-     2.152,
-     2.192
+     "égyptien,",
+     1.043,
+     1.545
     ],
     [
-     "le",
-     2.252,
-     2.292
+     "bien",
+     1.645,
+     1.786
     ],
     [
-     "souci",
-     2.333,
-     2.574
+     "sûr",
+     1.886,
+     2.007
+    ],
+    [
+     "que",
+     2.087,
+     2.167
+    ],
+    [
+     "je",
+     2.227,
+     2.288
+    ],
+    [
+     "mange",
+     2.328,
+     2.508
+    ],
+    [
+     "halal.",
+     2.529,
+     2.669
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Ah, c'est pour ça que tu finis jamais ton acier.",
+   "_deb": 42.323,
+   "_fin": 44.913,
+   "_mots": [
+    [
+     "Ah,",
+     0.0,
+     0.121
+    ],
+    [
+     "c'est",
+     0.522,
+     0.642
+    ],
+    [
+     "pour",
+     0.703,
+     0.803
+    ],
+    [
+     "ça",
+     0.863,
+     0.923
+    ],
+    [
+     "que",
+     0.963,
+     1.024
+    ],
+    [
+     "tu",
+     1.024,
+     1.104
+    ],
+    [
+     "finis",
+     1.164,
+     1.365
+    ],
+    [
+     "jamais",
+     1.385,
+     1.586
+    ],
+    [
+     "ton",
+     1.626,
+     1.706
+    ],
+    [
+     "acier.",
+     2.47,
+     2.59
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Bah ouais, bon vas-y, casse-toi maintenant, je fais ma toilette, dégage.",
+   "_deb": 44.913,
+   "_fin": 47.321,
+   "_mots": [
+    [
+     "Bah",
+     0.0,
+     0.081
+    ],
+    [
+     "ouais,",
+     0.081,
+     0.301
+    ],
+    [
+     "bon",
+     0.301,
+     0.402
+    ],
+    [
+     "vas-y,",
+     0.442,
+     0.662
+    ],
+    [
+     "casse-toi",
+     0.743,
+     1.044
+    ],
+    [
+     "maintenant,",
+     1.104,
+     1.385
+    ],
+    [
+     "je",
+     1.425,
+     1.485
+    ],
+    [
+     "fais",
+     1.505,
+     1.605
+    ],
+    [
+     "ma",
+     1.665,
+     1.726
+    ],
+    [
+     "toilette,",
+     1.806,
+     2.167
+    ],
+    [
+     "dégage.",
+     2.187,
+     2.408
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Pourquoi tu la fais maintenant.",
+   "_deb": 47.401,
+   "_fin": 48.183,
+   "_mots": [
+    [
+     "Pourquoi",
+     0.0,
+     0.181
+    ],
+    [
+     "tu",
+     0.221,
+     0.261
+    ],
+    [
+     "la",
+     0.281,
+     0.341
+    ],
+    [
+     "fais",
+     0.401,
+     0.502
+    ],
+    [
+     "maintenant.",
+     0.502,
+     0.782
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Ah, je vais voir ma raclie.",
+   "_deb": 48.404,
+   "_fin": 49.668,
+   "_mots": [
+    [
+     "Ah,",
+     0.0,
+     0.08
+    ],
+    [
+     "je",
+     0.301,
+     0.361
+    ],
+    [
+     "vais",
+     0.401,
+     0.502
+    ],
+    [
+     "voir",
+     0.542,
+     0.642
+    ],
+    [
+     "ma",
+     0.722,
+     0.782
+    ],
+    [
+     "raclie.",
+     0.863,
+     1.264
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "T'es une raclie.",
+   "_deb": 49.668,
+   "_fin": 50.873,
+   "_mots": [
+    [
+     "T'es",
+     0.0,
+     0.06
+    ],
+    [
+     "une",
+     0.241,
+     0.301
+    ],
+    [
+     "raclie.",
+     0.924,
+     1.205
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Ouais, la renoi du deuxième.",
+   "_deb": 50.873,
+   "_fin": 52.397,
+   "_mots": [
+    [
+     "Ouais,",
+     0.0,
+     0.381
+    ],
+    [
+     "la",
+     0.401,
+     0.461
+    ],
+    [
+     "renoi",
+     0.582,
+     0.822
+    ],
+    [
+     "du",
+     0.963,
+     1.023
+    ],
+    [
+     "deuxième.",
+     1.103,
+     1.524
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Ouais, mais les chats noirs, ça porte mal vers ça, non.",
+   "_deb": 52.498,
+   "_fin": 54.183,
+   "_mots": [
+    [
+     "Ouais,",
+     0.0,
+     0.26
+    ],
+    [
+     "mais",
+     0.26,
+     0.361
+    ],
+    [
+     "les",
+     0.401,
+     0.501
+    ],
+    [
+     "chats",
+     0.521,
+     0.642
+    ],
+    [
+     "noirs,",
+     0.642,
+     0.742
+    ],
+    [
+     "ça",
+     0.742,
+     0.782
+    ],
+    [
+     "porte",
+     0.782,
+     0.882
+    ],
+    [
+     "mal",
+     0.882,
+     0.942
+    ],
+    [
+     "vers",
+     0.942,
+     1.023
+    ],
+    [
+     "ça,",
+     1.023,
+     1.123
+    ],
+    [
+     "non.",
+     1.624,
+     1.685
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Ouais, mais quand il s'agit de zouké, toi-même, tu sais, là, tonton, là, tonton, moi, là.",
+   "_deb": 54.183,
+   "_fin": 58.498,
+   "_mots": [
+    [
+     "Ouais,",
+     0.0,
+     0.12
+    ],
+    [
+     "mais",
+     0.421,
+     0.541
+    ],
+    [
+     "quand",
+     0.601,
+     0.722
+    ],
+    [
+     "il",
+     0.782,
+     0.842
+    ],
+    [
+     "s'agit",
+     0.922,
+     1.243
+    ],
+    [
+     "de",
+     1.283,
+     1.323
+    ],
+    [
+     "zouké,",
+     1.384,
+     1.725
+    ],
+    [
+     "toi-même,",
+     1.845,
+     2.268
+    ],
+    [
+     "tu",
+     2.268,
+     2.348
+    ],
+    [
+     "sais,",
+     2.469,
+     2.569
+    ],
+    [
+     "là,",
+     2.669,
+     2.75
+    ],
+    [
+     "tonton,",
+     2.85,
+     3.252
+    ],
+    [
+     "là,",
+     3.352,
+     3.432
+    ],
+    [
+     "tonton,",
+     3.533,
+     3.894
+    ],
+    [
+     "moi,",
+     3.934,
+     4.155
+    ],
+    [
+     "là.",
+     4.235,
+     4.315
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Eh, je vais capté.",
+   "_deb": 58.599,
+   "_fin": 59.081,
+   "_mots": [
+    [
+     "Eh,",
+     0.0,
+     0.14
+    ],
+    [
+     "je",
+     0.14,
+     0.18
+    ],
+    [
+     "vais",
+     0.201,
+     0.281
+    ],
+    [
+     "capté.",
+     0.321,
+     0.482
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Tu veux dire quoi.",
+   "_deb": 59.081,
+   "_fin": 59.964,
+   "_mots": [
+    [
+     "Tu",
+     0.0,
+     0.04
+    ],
+    [
+     "veux",
+     0.04,
+     0.14
+    ],
+    [
+     "dire",
+     0.14,
+     0.261
+    ],
+    [
+     "quoi.",
+     0.341,
+     0.883
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Tu vois ce que je veux dire, les Caraïbes, tout ça, là.",
+   "_deb": 59.984,
+   "_fin": 61.891,
+   "_mots": [
+    [
+     "Tu",
+     0.0,
+     0.06
+    ],
+    [
+     "vois",
+     0.08,
+     0.181
+    ],
+    [
+     "ce",
+     0.241,
+     0.281
+    ],
+    [
+     "que",
+     0.281,
+     0.381
+    ],
+    [
+     "je",
+     0.401,
+     0.462
+    ],
+    [
+     "veux",
+     0.502,
+     0.622
+    ],
+    [
+     "dire,",
+     0.662,
+     0.823
+    ],
+    [
+     "les",
+     0.883,
+     0.963
+    ],
+    [
+     "Caraïbes,",
+     1.024,
+     1.446
+    ],
+    [
+     "tout",
+     1.446,
+     1.566
+    ],
+    [
+     "ça,",
+     1.627,
+     1.727
+    ],
+    [
+     "là.",
+     1.847,
+     1.907
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Eh, Enzo, eh, Enzo, eh, Enzo, eh, Enzo, eh, Enzo, eh.",
+   "_deb": 62.171,
+   "_fin": 67.177,
+   "chute": true,
+   "_mots": [
+    [
+     "Eh,",
+     0.0,
+     0.18
+    ],
+    [
+     "Enzo,",
+     0.24,
+     0.561
+    ],
+    [
+     "eh,",
+     0.961,
+     1.161
+    ],
+    [
+     "Enzo,",
+     1.202,
+     1.542
+    ],
+    [
+     "eh,",
+     1.902,
+     1.982
+    ],
+    [
+     "Enzo,",
+     2.143,
+     2.483
+    ],
+    [
+     "eh,",
+     2.983,
+     3.164
+    ],
+    [
+     "Enzo,",
+     3.204,
+     3.544
+    ],
+    [
+     "eh,",
+     3.945,
+     4.145
+    ],
+    [
+     "Enzo,",
+     4.185,
+     4.525
+    ],
+    [
+     "eh.",
+     4.846,
+     5.006
     ]
    ]
   }
  ],
  "bandeau": [],
  "gag": null,
- "legende": "Quand tu veux retirer ton propre argent en 2026.",
+ "legende": "Oh Maurice, mon chat t'es trop mignon, fais moi un bisou.",
  "hashtags": [
   "petitsdramas",
   "humour",
-  "banque",
-  "skit",
-  "2026",
-  "drole"
+  "doublage",
+  "pov"
  ],
  "sources": [
-  "https://www.tiktok.com/@same_same53/video/7679435303769132321"
+  "https://www.tiktok.com/@vignianimation/video/7684423825840147745"
  ],
  "decoupage": [
   {
@@ -1275,179 +1745,237 @@
     12,
     13,
     14,
-    15
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31
    ],
    "lieu": "",
    "son": "",
-   "duree": 0.0,
-   "decor": "banque",
-   "titre": "Le retrait de 2026"
+   "duree": 0,
+   "decor": ""
   }
  ],
- "studio": {
-  "costumes": {},
-  "metiers": {},
-  "objets": [
-   {
-    "objet": "carte",
-    "replique": 0
-   },
-   {
-    "objet": "telephone",
-    "replique": 0
-   }
-  ],
-  "plans": [
-   {
-    "plan": "large",
-    "replique": 0,
-    "mouvement": "fixe"
-   },
-   {
-    "mouvement": "fixe",
-    "plan": "moyen",
-    "replique": 3
-   },
-   {
-    "replique": 10,
-    "plan": "serre",
-    "mouvement": "fixe"
-   }
-  ],
-  "cadence": "rapide",
-  "ambiances": [
-   "neons"
-  ],
-  "personnages": {},
-  "lieux": [
-   "banque"
-  ]
- },
  "doublage": {
-  "piste": "/tmp/tmprh9uzlfu/piste.wav",
-  "duree": 63.42,
-  "source": "https://www.tiktok.com/@same_same53/video/7679435303769132321",
-  "auteur": "same_same53",
-  "contexte": "Un client tente de retirer 9500 euros à sa banque en 2026, mais la conseillère exige un motif absurde pour valider la transaction.",
-  "evenements": [
-   [
-    61.0,
-    63.0,
-    "kiss"
-   ]
-  ],
+  "piste": "/tmp/tmph6q6s_q5/piste.wav",
+  "duree": 67.18,
+  "source": "https://www.tiktok.com/@vignianimation/video/7684423825840147745",
+  "auteur": "vignianimation",
+  "contexte": "",
+  "evenements": [],
   "visuel": {
-   "gestes": [],
-   "duree": 63.5,
+   "gestes": [
+    [
+     0.5,
+     0.63,
+     1.0
+    ],
+    [
+     1.5,
+     0.61,
+     0.74
+    ],
+    [
+     8.5,
+     0.61,
+     1.0
+    ],
+    [
+     13.5,
+     0.62,
+     1.0
+    ],
+    [
+     17.0,
+     0.62,
+     1.0
+    ],
+    [
+     20.0,
+     0.61,
+     1.0
+    ],
+    [
+     24.0,
+     0.61,
+     1.0
+    ],
+    [
+     34.0,
+     0.61,
+     1.0
+    ],
+    [
+     39.0,
+     0.61,
+     1.0
+    ],
+    [
+     43.0,
+     0.61,
+     1.0
+    ],
+    [
+     47.5,
+     0.61,
+     1.0
+    ],
+    [
+     50.0,
+     0.61,
+     1.0
+    ],
+    [
+     52.5,
+     0.61,
+     1.0
+    ],
+    [
+     57.5,
+     0.62,
+     1.0
+    ],
+    [
+     59.5,
+     0.62,
+     1.0
+    ]
+   ],
+   "duree": 67.5,
    "nb_plans": 1,
-   "duree_plan": 63.5,
+   "duree_plan": 67.5,
    "coupes": [],
    "plans": {
     "tres_serre": 0.0,
     "serre": 0.0,
-    "moyen": 0.024,
-    "large": 0.976
+    "moyen": 0.341,
+    "large": 0.659
    },
    "camera": {
-    "fixe": 1.0,
-    "avance": 0.0,
-    "recul": 0.0,
-    "travelling": 0.0,
-    "epaule": 0.0
+    "fixe": 0.806,
+    "avance": 0.097,
+    "recul": 0.082,
+    "travelling": 0.007,
+    "epaule": 0.007
    },
    "nb_personnes": 1,
-   "personnes": [],
+   "personnes": [
+    {
+     "place": "droite",
+     "presence": 0.341,
+     "habit": [
+      205,
+      167,
+      131
+     ],
+     "cheveux": [
+      12,
+      12,
+      13
+     ],
+     "sourire": 0.0,
+     "taille": 0.107,
+     "tete_penchee": 1.2,
+     "regard_cote": 0.478
+    }
+   ],
    "visages": true,
    "sourires": 0.0,
-   "energie": 0.009,
+   "energie": 0.264,
    "mur": [
-    0,
-    0,
-    0
+    207,
+    152,
+    98
    ],
    "palette": [
     [
-     0,
-     0,
-     0,
-     0.593
+     207,
+     151,
+     97,
+     0.807
     ],
     [
-     253,
-     253,
-     253,
-     0.296
+     215,
+     193,
+     167,
+     0.104
     ],
     [
-     45,
-     45,
-     45,
-     0.043
+     24,
+     15,
+     13,
+     0.034
     ],
     [
-     139,
-     132,
-     128,
-     0.028
+     116,
+     87,
+     71,
+     0.026
     ],
     [
-     75,
-     80,
-     88,
-     0.023
+     249,
+     245,
+     240,
+     0.022
     ],
     [
-     219,
-     219,
-     219,
-     0.018
+     26,
+     129,
+     161,
+     0.007
     ]
    ],
    "lumiere": {
-    "luminosite": 86.2,
-    "chaleur": 0.0,
-    "saturation": 3.3
+    "luminosite": 199.8,
+    "chaleur": 93.7,
+    "saturation": 122.3
    },
    "moment": "jour",
    "postures": []
   },
   "audio": {
-   "duree": 63.4,
+   "duree": 67.2,
    "nb_voix": 2,
    "voix": [
     {
-     "hz": 261,
+     "hz": 193,
      "genre": "f",
-     "part": 0.46
+     "part": 0.43
     },
     {
-     "hz": 163,
-     "genre": "h",
-     "part": 0.54
+     "hz": 181,
+     "genre": "?",
+     "part": 0.57
     }
    ],
-   "debit": 4.07,
-   "blanc_moyen": 0.48,
-   "coupes": 0,
-   "dynamique_db": 21.9,
-   "cris": 0.024,
+   "debit": 4.75,
+   "blanc_moyen": 0.22,
+   "coupes": 16,
+   "dynamique_db": 18.9,
+   "cris": 0.001,
    "musique": 0.41,
-   "impacts": 51,
-   "impacts_10s": 8.04,
-   "graves": 6,
-   "aigus": 45,
-   "sur_vanne": 8,
-   "evenements": {
-    "kiss": 1
-   },
-   "emotions": {
-    "colere": 9,
-    "neutral": 3,
-    "annoyed": 3,
-    "sceptique": 1
-   }
+   "impacts": 34,
+   "impacts_10s": 5.06,
+   "graves": 8,
+   "aigus": 26,
+   "sur_vanne": 13,
+   "evenements": {},
+   "emotions": {}
   },
-  "video_origine": "/tmp/tmprh9uzlfu/src.mp4"
+  "video_origine": "/tmp/tmph6q6s_q5/src.mp4"
  },
  "fiche": {
   "note": 0,
@@ -1471,13 +1999,28 @@
      12,
      13,
      14,
-     15
+     15,
+     16,
+     17,
+     18,
+     19,
+     20,
+     21,
+     22,
+     23,
+     24,
+     25,
+     26,
+     27,
+     28,
+     29,
+     30,
+     31
     ],
     "lieu": "",
     "son": "",
-    "duree": 0.0,
-    "decor": "banque",
-    "titre": "Le retrait de 2026"
+    "duree": 0,
+    "decor": ""
    }
   ]
  },
@@ -1494,7 +2037,7 @@
    "poste": "ingé son",
    "controle": "mots à une vitesse possible",
    "ok": true,
-   "detail": "1 mot(s) trop courts",
+   "detail": "4 mot(s) trop courts",
    "revoir": false
   },
   {
@@ -1508,28 +2051,35 @@
    "poste": "ingé son",
    "controle": "deux transcriptions d'accord",
    "ok": false,
-   "detail": "79 % de mots identiques, 5 doute(s), 3 corrigé(s)",
+   "detail": "75 % de mots identiques, 11 doute(s), 1 corrigé(s)",
    "revoir": false
   },
   {
    "poste": "casting voix",
    "controle": "témoin image (qui bouge dans l'original)",
    "ok": true,
-   "detail": "26/36 phrases lisibles",
+   "detail": "32/42 phrases lisibles",
    "revoir": false
   },
   {
    "poste": "casting voix",
    "controle": "le son et l'image sont d'accord",
+   "ok": false,
+   "detail": "47 % de désaccord",
+   "revoir": false
+  },
+  {
+   "poste": "casting voix",
+   "controle": "fil du dialogue repris (son + texte + image)",
    "ok": true,
-   "detail": "23 % de désaccord",
+   "detail": "l'image contredit le son sur 47 % des phrases",
    "revoir": false
   },
   {
    "poste": "casting voix",
    "controle": "parole répartie entre les personnages",
    "ok": true,
-   "detail": "2 voix, la plus bavarde dit 58 %",
+   "detail": "2 voix, la plus bavarde dit 56 %",
    "revoir": false
   },
   {
@@ -1556,7 +2106,7 @@
   {
    "poste": "monteur",
    "controle": "répliques dans l'ordre du son",
-   "ok": true,
+   "ok": false,
    "detail": "",
    "revoir": false
   },
@@ -1585,31 +2135,57 @@
    "poste": "monteur",
    "controle": "chaque mot dans sa réplique (lèvres et sous-titres calés)",
    "ok": false,
-   "detail": "répliques [1]",
+   "detail": "répliques [9]",
    "revoir": false
   }
  ],
  "_voix_hz": {
-  "presentateur": 256,
-  "invite": 165
+  "presentateur": 185,
+  "invite": 178
  },
  "_voix_genre": {
-  "presentateur": "f",
+  "presentateur": "h",
   "invite": "h"
  },
+ "studio": {
+  "plans": [
+   {
+    "replique": 31,
+    "reaction": "sceptique"
+   }
+  ]
+ },
  "realisation": {
-  "moment": "jour",
+  "moment": "matin",
   "lieux": [
-   "banque"
+   "bureau"
   ],
   "gags": [],
-  "ambiances": [],
+  "ambiances": [
+   "poussiere"
+  ],
   "source": "auteur+image",
   "tenues": {
-   "presentateur": "veste_jean",
+   "presentateur": "capuche",
    "invite": "chemise"
   },
   "plans": [
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
    "large/fixe",
    "large/fixe",
    "large/fixe",

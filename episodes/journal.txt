@@ -2,32 +2,33 @@ Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, ElevenLabs epuise — IA utilisée : mistral
 Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @motiontoonz, @same_same53, @charly.bse, @kodanimation, @vignianimation, @vincedessine
-Profil TikTok @same_same53 (poids 1.7) : 31 vidéo(s) jamais utilisée(s), meilleur potentiel 68/100
-Profil TikTok @vignianimation (poids 1.6) : 27 vidéo(s) jamais utilisée(s), meilleur potentiel 73/100
-Profil TikTok @yan_animation0 (poids 1.2) : 20 vidéo(s) jamais utilisée(s), meilleur potentiel 93/100
-Vidéo depuis TikTok : https://www.tiktok.com/@same_same53/video/7694285566984195360
+Profil TikTok @vignianimation (poids 1.6) : 27 vidéo(s) jamais utilisée(s), meilleur potentiel 74/100
+Profil TikTok @same_same53 (poids 1.7) : 30 vidéo(s) jamais utilisée(s), meilleur potentiel 68/100
+Profil TikTok @kodanimation (poids 1.0) : 19 vidéo(s) jamais utilisée(s), meilleur potentiel 83/100
+Vidéo depuis TikTok : https://www.tiktok.com/@vignianimation/video/7684423825840147745
   son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 69.4 s, compte d'origine @same_same53
-[ WARN:0@17.100] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  son récupéré : 67.2 s, compte d'origine @vignianimation
+[ WARN:0@17.119] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
 INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
 WARNING: Logging before InitGoogle() is written to STDERR
-W0000 00:00:1793456745.025936    4205 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
-W0000 00:00:1793456745.047261    4206 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
-  image de la vidéo : 1 plans (≈ 69.5 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 0 %, large 100 % ; caméra : fixe 100 % ; 0 personne(s) à l'écran : aucun visage repéré ; agitation 0.062 ; lumière jour ; fond [0, 0, 0]
+W0000 00:00:1793457574.706725    4252 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1793457574.727896    4252 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1793457574.769553    4252 landmark_projection_calculator.cc:81] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX.
+  image de la vidéo : 1 plans (≈ 67.5 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 34 %, large 65 % ; caméra : fixe 80 %, avance 9 %, recul 8 %, travelling 0 %, epaule 0 % ; 1 personne(s) à l'écran : droite (habit [205, 167, 131], cheveux [12, 12, 13], sourit 0 %) ; agitation 0.264 ; lumière jour ; fond [207, 152, 98]
   isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
-  voix isolées gratuitement (Demucs, 38 s)
+  voix isolées gratuitement (Demucs, 39 s)
   transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
-  transcription Groq (Whisper, gratuit) : 392 mots
+  transcription Groq (Whisper, gratuit) : 289 mots
   [équipe · ingé son] ✔ pas de phrase répétée en boucle
-  [équipe · ingé son] ✔ mots à une vitesse possible : 7 mot(s) trop courts
+  [équipe · ingé son] ✔ mots à une vitesse possible : 4 mot(s) trop courts
   [équipe · ingé son] ✔ pas de long passage sans texte
-[0;93m2026-10-31 14:26:30.989546521 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
-  transcription gratuite (Whisper sur la machine) : 439 mots
-  [équipe · ingé son] ✔ deux transcriptions d'accord : 87 % de mots identiques, 2 doute(s), 2 corrigé(s)
-Loading weights:   0%|          | 0/424 [00:00<?, ?it/s]Loading weights: 100%|██████████| 424/424 [00:00<00:00, 13297.03it/s]
-  mots recalés sur la voix (392 mots, écart moyen 64 ms, 19 s)
-Loading weights:   0%|          | 0/447 [00:00<?, ?it/s]Loading weights: 100%|██████████| 447/447 [00:00<00:00, 15423.66it/s]
-  bruits de l'original (CLAP, 8 s) : laughter, scream
+[0;93m2026-10-31 14:40:22.032174828 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+  transcription gratuite (Whisper sur la machine) : 342 mots
+  [équipe · ingé son] ✘ deux transcriptions d'accord : 75 % de mots identiques, 11 doute(s), 1 corrigé(s)
+Loading weights:   0%|          | 0/424 [00:00<?, ?it/s]Loading weights: 100%|██████████| 424/424 [00:00<00:00, 14160.13it/s]
+  mots recalés sur la voix (289 mots, écart moyen 105 ms, 18 s)
+Loading weights:   0%|          | 0/447 [00:00<?, ?it/s]Loading weights: 100%|██████████| 447/447 [00:00<00:00, 12664.77it/s]
+  bruits de l'original (CLAP, 8 s) : aucun
   NeMo indisponible (Lookup failed for Cls 'Nemo' from the 'jt-ecoute' app: App 'jt-ecoute' not found in environment 'main'.)
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/core/io.py:48: UserWarning: 
 torchcodec is not installed correctly so built-in audio decoding will fail. Solutions are:
@@ -38,19 +39,20 @@ Could not load this library: /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3
   warnings.warn(
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1927.)
   std = sequences.std(dim=-1, correction=1)
-  voix séparées par pyannote : 1 voix, 4 tours de parole
-  voix trop proches : répliques réparties d'après le fil du dialogue (questions, réponses)
-  voix trop proches (ressemblance 0.79) : vérification mot par mot laissée de côté
-  [équipe · casting voix] ✔ témoin image (qui bouge dans l'original) : 35/38 phrases lisibles
-  ressemblance des deux voix : 0.79 (au-delà de 0.55 : le dialogue décide avec le son)
-  deux IA ont relu le dialogue (gemini et mistral) : d'accord sur 33/38 phrases
-  relecture du dialogue par l'IA : 33/38 phrases (A : l'ancien employeur (ou représentant de l'entreprise), B : Eliott (l'ancien e)
-  contrôle questions-réponses (avec relecture de l'IA, avec le témoin image) : 38 phrases, 224 mot(s) changé(s) de voix
-  [équipe · casting voix] ✔ fil du dialogue repris (son + texte + image) : voix proches (0.79)
-  [équipe · casting voix] ✔ parole répartie entre les personnages : 2 voix, la plus bavarde dit 60 %
+  voix séparées par pyannote : 2 voix, 15 tours de parole
+  voix re-séparées par leur empreinte (ECAPA) : 2 voix (netteté 0.15)
+  voix vérifiées mot par mot : 8 mot(s) remis sur la bonne voix
+  [équipe · casting voix] ✔ témoin image (qui bouge dans l'original) : 32/42 phrases lisibles
+  ressemblance des deux voix : 0.42 (au-delà de 0.55 : le dialogue décide avec le son)
+  [équipe · casting voix] ✘ le son et l'image sont d'accord : 47 % de désaccord
+  deux IA ont relu le dialogue (gemini et mistral) : d'accord sur 28/42 phrases
+  relecture du dialogue par l'IA : 28/42 phrases (A : le propriétaire / l'humain, B : le chat (Maurice/Boilem))
+  contrôle questions-réponses (avec relecture de l'IA, avec le témoin image) : 42 phrases, 28 mot(s) changé(s) de voix
+  [équipe · casting voix] ✔ fil du dialogue repris (son + texte + image) : l'image contredit le son sur 47 % des phrases
+  [équipe · casting voix] ✔ parole répartie entre les personnages : 2 voix, la plus bavarde dit 56 %
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/importlib/__init__.py:90: UserWarning: Module 'speechbrain.lobes.models.huggingface_transformers' was deprecated, redirecting to 'speechbrain.integrations.huggingface'. Please update your script.
   return _bootstrap._gcd_import(name[level:], package, level)
-Loading weights:   0%|          | 0/211 [00:00<?, ?it/s]Loading weights: 100%|██████████| 211/211 [00:00<00:00, 9891.89it/s]
+Loading weights:   0%|          | 0/211 [00:00<?, ?it/s]Loading weights: 100%|██████████| 211/211 [00:00<00:00, 14261.28it/s]
 [transformers] [1mWav2Vec2Model LOAD REPORT[0m from: facebook/wav2vec2-base
 Key                          | Status     |  | 
 -----------------------------+------------+--+-
@@ -67,110 +69,60 @@ Notes:
 speechbrain.integrations.huggingface.huggingface - Wav2Vec2Model is frozen.
 CategoricalEncoder.expect_len was never called: assuming category count of 4 to be correct! Sanity check your encoder using `.expect_len`. Ensure that downstream code also uses the correct size. If you are sure this does not apply to you, use `.ignore_len`.
   émotions entendues dans la voix : 0 réplique(s) (7 s)
-  34 répliques, voix : {'speaker_0': 218, 'speaker_1': 200}
-  son de la vidéo : 2 voix [218 Hz (f, 38 %), 200 Hz (f, 62 %)], 6.3 mots/s, blancs 0.23 s, 10 coupure(s) de parole, dynamique 16.5 dB, musique de fond, 67 bruitage(s) (8 graves, 59 aigus, 28 sur une fin de réplique), événements {'scream': 1, 'laughter': 1}, émotions {}
-  scène reconstituée : Un ancien employé refuse catégoriquement de rembourser un trop-perçu versé par erreur à son ancien patron, déclenchant une dispute téléphonique houleuse.
-  casting : speaker_0 → Jojo, speaker_1 → Kévin
-  événements sonores : laughter, scream
-  [équipe · scripte] ✔ une réplique = une seule personne
-  [équipe · scripte] ✔ téléphone en main seulement s'il en est question
-  [équipe · scripte] ✔ autant de personnages que de voix : 2 voix, 2 personnage(s)
-  [équipe · monteur] ✘ répliques dans l'ordre du son
-  [équipe · monteur] ✘ chaque réplique a une durée : 1 corrigée(s)
-  [équipe · monteur] ✔ un personnage ne parle jamais deux fois en même temps
-  [équipe · monteur] ✔ rien après la fin du son
-  [équipe · monteur] ✘ chaque mot dans sa réplique (lèvres et sous-titres calés) : répliques [2]
-  bulletin de l'équipe : 12/15 contrôles bons ; à revoir : répliques dans l'ordre du son, chaque réplique a une durée, chaque mot dans sa réplique (lèvres et sous-titres calés)
-  voix trop proches dans https://www.tiktok.com/@same_same53/video/7694285566984195360 (ressemblance 0.79) : on cherche une vidéo aux voix bien différentes
-Vidéo depuis TikTok : https://www.tiktok.com/@same_same53/video/7679435303769132321
-  son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 63.4 s, compte d'origine @same_same53
-[ WARN:0@307.393] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
-W0000 00:00:1793457033.936201    4423 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
-W0000 00:00:1793457033.955008    4422 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
-  image de la vidéo : 1 plans (≈ 63.5 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 2 %, large 97 % ; caméra : fixe 100 % ; 1 personne(s) à l'écran : aucun visage repéré ; agitation 0.009 ; lumière jour ; fond [0, 0, 0]
-  isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
-  voix isolées gratuitement (Demucs, 35 s)
-  transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
-  transcription Groq (Whisper, gratuit) : 217 mots
-  [équipe · ingé son] ✔ pas de phrase répétée en boucle
-  [équipe · ingé son] ✔ mots à une vitesse possible : 1 mot(s) trop courts
-  [équipe · ingé son] ✔ pas de long passage sans texte
-  transcription gratuite (Whisper sur la machine) : 231 mots
-  [équipe · ingé son] ✘ deux transcriptions d'accord : 79 % de mots identiques, 5 doute(s), 3 corrigé(s)
-  mots recalés sur la voix (212 mots, écart moyen 142 ms, 16 s)
-  bruits de l'original (CLAP, 7 s) : kiss
-  NeMo indisponible (Lookup failed for Cls 'Nemo' from the 'jt-ecoute' app: App 'jt-ecoute' not found in environment 'main'.)
-/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1927.)
-  std = sequences.std(dim=-1, correction=1)
-  voix séparées par pyannote : 2 voix, 22 tours de parole
-  voix vérifiées mot par mot : 12 mot(s) remis sur la bonne voix
-  [équipe · casting voix] ✔ témoin image (qui bouge dans l'original) : 26/36 phrases lisibles
-  ressemblance des deux voix : 0.32 (au-delà de 0.55 : le dialogue décide avec le son)
-  [équipe · casting voix] ✔ le son et l'image sont d'accord : 23 % de désaccord
-  [équipe · casting voix] ✔ parole répartie entre les personnages : 2 voix, la plus bavarde dit 58 %
-  émotions entendues dans la voix : 0 réplique(s) (5 s)
-  16 répliques, voix : {'speaker_0': 261, 'speaker_1': 163}
-  son de la vidéo : 2 voix [261 Hz (f, 46 %), 163 Hz (h, 54 %)], 4.07 mots/s, blancs 0.48 s, 0 coupure(s) de parole, dynamique 21.9 dB, musique de fond, 51 bruitage(s) (6 graves, 45 aigus, 8 sur une fin de réplique), événements {'kiss': 1}, émotions {}
-  scène reconstituée : Un client tente de retirer 9500 euros à sa banque en 2026, mais la conseillère exige un motif absurde pour valider la transaction.
-  casting : speaker_0 → Jojo, speaker_1 → Kévin
-  sous-titres : 4 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
-  événements sonores : kiss
-  [équipe · scripte] ✔ une réplique = une seule personne
-  [équipe · scripte] ✔ téléphone en main seulement s'il en est question
-  [équipe · scripte] ✔ autant de personnages que de voix : 2 voix, 2 personnage(s)
-  [équipe · monteur] ✔ répliques dans l'ordre du son
-  [équipe · monteur] ✔ chaque réplique a une durée
-  [équipe · monteur] ✔ un personnage ne parle jamais deux fois en même temps
-  [équipe · monteur] ✔ rien après la fin du son
-  [équipe · monteur] ✘ chaque mot dans sa réplique (lèvres et sous-titres calés) : répliques [1]
-  bulletin de l'équipe : 13/15 contrôles bons ; à revoir : deux transcriptions d'accord, chaque mot dans sa réplique (lèvres et sous-titres calés)
-Sketch : « RETRAIT BANCAIRE 2026 », 16 répliques
-  décors nets indisponibles (ResourceExhaustedError Function call failed: workspace billing cycle spend limit reached) : décors simples
-Décors indisponibles (ResourceExhaustedError Function call failed: workspace billing cycle spend limit reached) : fonds unis.
-montage : 1 plans (0.0:large>pre/coupe)
-style croquis : décors passés à l'encre et à l'aquarelle
-studio : jour, lieux ['banque'], tenues presentateur=veste_jean, invite=chemise, 0 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 65.8 s, 16 répliques, 1 scène(s), personnages ['presentateur', 'invite']
-Contrôle image : 4 défaut(s) — 33.75 s chevauchement (presentateur+invite), 34.25 s chevauchement (presentateur+invite), 34.75 s chevauchement (presentateur+invite), 35.25 s chevauchement (presentateur+invite)
-File d'attente : aucune autre fabrication en cours, on y va
-Chaîne : vidéo 3/3 lancée (elle prépare son écoute pendant ce dessin)
-montage : 1 plans (0.0:large>pre/coupe)
-style croquis : décors passés à l'encre et à l'aquarelle
-studio : jour, lieux ['banque'], tenues presentateur=veste_jean, invite=chemise, 0 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 65.8 s, 16 répliques, 1 scène(s), personnages ['presentateur', 'invite']
-Contrôle image : 4 défaut(s) — 33.75 s chevauchement (presentateur+invite), 34.25 s chevauchement (presentateur+invite), 34.75 s chevauchement (presentateur+invite), 35.25 s chevauchement (presentateur+invite)
-  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~987 images)
-  morceau 987–1974 reçu d'une machine d'aide
-  morceau 1974–2962 reçu d'une machine d'aide
-  morceau 2962–3949 reçu d'une machine d'aide
-  dessin partagé terminé en 5.1 min
-Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
+  32 répliques, voix : {'speaker_0': 193, 'speaker_1': 181}
+  son de la vidéo : 2 voix [193 Hz (f, 43 %), 181 Hz (?, 56 %)], 4.75 mots/s, blancs 0.22 s, 16 coupure(s) de parole, dynamique 18.9 dB, musique de fond, 34 bruitage(s) (8 graves, 26 aigus, 13 sur une fin de réplique), événements {}, émotions {}
   IA gemini indisponible (gemini 429 : [{
   "error": {
     "code": 429,
     "message": "You exceeded your current quota, please check your plan an) : on passe à la suivante
-Jury qualité (gratuit) : 8.4/10 — Humoriste 8.6/10 : 57.9 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 6.6/10 : montage trop lent : 0.2 plans toutes les 10 s (il en faudrait ~2.8); 18.6 s pas assez de plans de réaction de celui qui écoute | Directeur artistique 7.8/10 : 33.8 s deux personnages l'un sur l'autre (presentateur+invite) | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.1/10 : 5.5 s sous-titres trop rapides à lire
-Corrections du jury (tour 1) : réaction « sceptique » à la réplique 6
-montage : 1 plans (0.0:large>pre/coupe)
+  mise en scène automatique impossible (réponse inexploitable) : une seule scène, casting par la hauteur des voix
+  casting : speaker_0 → Jojo, speaker_1 → Kévin
+  [équipe · scripte] ✔ une réplique = une seule personne
+  [équipe · scripte] ✔ téléphone en main seulement s'il en est question
+  [équipe · scripte] ✔ autant de personnages que de voix : 2 voix, 2 personnage(s)
+  [équipe · monteur] ✘ répliques dans l'ordre du son
+  [équipe · monteur] ✔ chaque réplique a une durée
+  [équipe · monteur] ✔ un personnage ne parle jamais deux fois en même temps
+  [équipe · monteur] ✔ rien après la fin du son
+  [équipe · monteur] ✘ chaque mot dans sa réplique (lèvres et sous-titres calés) : répliques [9]
+  bulletin de l'équipe : 12/16 contrôles bons ; à revoir : deux transcriptions d'accord, le son et l'image sont d'accord, répliques dans l'ordre du son, chaque mot dans sa réplique (lèvres et sous-titres calés)
+Sketch : « OH MAURICE, MON CHAT T'ES TROP », 32 répliques
+montage : 1 plans (1.6:large>pre/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-studio : jour, lieux ['banque'], tenues presentateur=veste_jean, invite=chemise, 0 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 65.8 s, 16 répliques, 1 scène(s), personnages ['presentateur', 'invite']
-Contrôle image : 4 défaut(s) — 33.75 s chevauchement (presentateur+invite), 34.25 s chevauchement (presentateur+invite), 34.75 s chevauchement (presentateur+invite), 35.25 s chevauchement (presentateur+invite)
-  redessin partiel : 600/3949 images à redessiner (1 passage(s)), le reste repris tel quel
+studio : matin, lieux ['bureau'], tenues presentateur=capuche, invite=chemise, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 70.7 s, 32 répliques, 1 scène(s), personnages ['presentateur', 'invite']
+File d'attente : 1 fabrication(s) avant la nôtre : https://github.com/tiranno06/jt-auto/actions/runs/41209808628
+File d'attente : à nous ! (attente 8 min)
+montage : 1 plans (1.6:large>pre/coupe)
+style croquis : décors passés à l'encre et à l'aquarelle
+studio : matin, lieux ['bureau'], tenues presentateur=capuche, invite=chemise, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 70.7 s, 32 répliques, 1 scène(s), personnages ['presentateur', 'invite']
+  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~1060 images)
+  morceau 1061–2122 reçu d'une machine d'aide
+  morceau 3182–4243 reçu d'une machine d'aide
+  morceau 2122–3182 reçu d'une machine d'aide
+  dessin partagé terminé en 4.6 min
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury qualité (gratuit) : 8.4/10 — Humoriste 8.6/10 : 57.9 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 6.6/10 : montage trop lent : 0.2 plans toutes les 10 s (il en faudrait ~2.8); 18.6 s pas assez de plans de réaction de celui qui écoute | Directeur artistique 7.8/10 : 33.8 s deux personnages l'un sur l'autre (presentateur+invite) | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.1/10 : 5.5 s sous-titres trop rapides à lire
-La version corrigée n'est pas meilleure : on garde la première.
+Jury qualité (ia) : 7.9/10 — Humoriste 6.0/10 : 4.2 s La réplique 'Et arrête de m'appeler Maurice' manque d'un effet comique renforcé par une réaction visuelle ou un bruitage.; 29.2 s La chute 'Mais qu'est-ce que tu racontes' tombe à plat car il n'y a pas de zoom choc ou de changement de plan pour marquer l'importance de la réplique.; 58.6 s La chute finale 'Tu veux dire quoi' est trop longue à venir et manque d'un moment de suspense ou d'un bruitage pour capter l'attention. | Réalisateur 6.6/10 : montage trop lent : 0.1 plans toutes les 10 s (il en faudrait ~2.8); 62.2 s pas assez de plans de réaction de celui qui écoute | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 7.3/10 : 0.0 s la première parole arrive à 1.6 s : on scrolle avant; 8.7 s sous-titres trop rapides à lire
+Manque par rapport à la vidéo d'origine : Les personnages de l'original ont des expressions faciales plus exagérées et des gestes qui renforcent l'humour (ex. : chat levant une patte à 2.0 s). ; L'ambiance sonore originale inclut des bruitages comme des miaulements ou des rires naturels qui manquent ici. ; Les décors originaux intègrent des détails comme des objets du quotidien (ex. : une assiette de nourriture pour le gag sur l'hygiène).
+Corrections du jury (tour 1) : réaction « sceptique » à la réplique 32
+montage : 1 plans (1.6:large>pre/coupe)
+style croquis : décors passés à l'encre et à l'aquarelle
+studio : matin, lieux ['bureau'], tenues presentateur=capuche, invite=chemise, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 70.7 s, 32 répliques, 1 scène(s), personnages ['presentateur', 'invite']
+  redessin partiel : 480/4243 images à redessiner (1 passage(s)), le reste repris tel quel
+Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
+Jury qualité (gratuit) : 8.5/10 — Humoriste 8.6/10 : 62.2 s la chute finale mérite un zoom choc sur celui qui la dit | Réalisateur 6.6/10 : montage trop lent : 0.1 plans toutes les 10 s (il en faudrait ~2.8); 62.2 s pas assez de plans de réaction de celui qui écoute | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 7.3/10 : 0.0 s la première parole arrive à 1.6 s : on scrolle avant; 8.7 s sous-titres trop rapides à lire
+Version corrigée gardée : 7.9 → 8.5/10
 fin en boucle : la dernière image se raccorde à la première (0.35 s de fondu)
-  [vidéo finie · synchro] son recalé de +0.28 s sur l'image
-  [vidéo finie · synchro] ✔ bouches du bon personnage
-  [vidéo finie · technique] ✔ sauts, clignotements, personnages (4 remarque(s))
-  transcription Groq (Whisper, gratuit) : 219 mots
-  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 89 %)
+  [vidéo finie · synchro] ✘ bouches du bon personnage : 1 réplique(s) à revoir
+  [vidéo finie · technique] ✔ sauts, clignotements, personnages (0 remarque(s))
+  transcription Groq (Whisper, gratuit) : 247 mots
+  [vidéo finie · sous-titres] ✘ sous-titres vérifiés à l'oreille (accord 58 %)
   [vidéo finie · contrôle IA] 6 remarque(s)
-Contrôle de la vidéo finie : 10 point(s) à vérifier — 1.0 s Le sous-titre affiché ne correspond pas au texte attendu (le ; 3.0 s Le sous-titre affiché ne correspond pas au texte attendu (le ; 5.0 s Le sous-titre affiché ne correspond pas au texte attendu (le ; 11.0 s Le sous-titre affiché ne correspond pas exactement au texte  ; 13.0 s Le sous-titre affiché ne correspond pas au texte attendu (in ; 15.0 s Le sous-titre affiché ne correspond pas au texte attendu (in
+Contrôle de la vidéo finie : 15 point(s) à vérifier — 24.3 s sous-titre « Mais toi, tu faisais moins le malin quand je su ; 27.1 s sous-titre « Prenez-moi, prenez-moi, j'ai failli. » mais on  ; 29.2 s sous-titre « Mais qu'est-ce que tu racontes. » mais on enten ; 38.9 s sous-titre « Tu manges halal. » mais on entend « manges à l' ; 44.9 s pendant la réplique de invite (« Bah ouais, bon vas-y, casse ; 49.7 s sous-titre « T'es une raclie. » mais on entend « tu es une r
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = gemini ×5, mistral ×4, voix = tiktok, decors = dessines, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 63887, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 1}
-Quota de l'API GitHub : 4973 appels restants
-OK : sortie/2026-10-31_15h34_emission.mp4 (66 s)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, ia = gemini ×3, mistral ×5, voix = tiktok, decors = dessines, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 56967, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0}
+Quota de l'API GitHub : 4903 appels restants
+OK : sortie/2026-10-31_15h45_emission.mp4 (71 s)
