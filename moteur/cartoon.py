@@ -595,7 +595,10 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
     # du téléphone) sur la fin des longues répliques (idées 16 et 21)
     APPEL = []                                                             # (t0, t1, "partage" | "ecoute", scène de l'autre)
     sc_parl = sorted({z2["scene"] for z2 in ph if z2["p"] != "narrateur"})
-    if SEPARES and APPEL_ON and len(sc_parl) >= 2:
+    if SEPARES and APPEL_ON and len(sc_parl) >= 2 and os.environ.get("APPEL_CONTINU", "1") != "0":
+        APPEL.append((-1.0, 1e9, "partage", sc_parl[1]))                  # demande de l'auteur : écran coupé en deux pendant TOUT l'appel,
+        print("appel : écran partagé du début à la fin (chacun dans son décor, aucun changement de plan)", flush=True)   # sans changement de plan
+    elif SEPARES and APPEL_ON and len(sc_parl) >= 2:
         for j, q in enumerate(ph):
             if q["p"] == "narrateur" or j == 0 or q is ph[-1]: continue
             autre_sc = next((s_ for s_ in sc_parl if s_ != q["scene"]), None)
@@ -888,6 +891,8 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
             p["sourcils_h"] = p.get("sourcils_h", 0.0) + 0.1 * math.sin(tm * 2.7 + len(role) * 2) + 0.05 * math.sin(tm * 6.1)
             if FICHES and ASSIS.get(scene) == role:                        # assis : il reste sur sa chaise
                 p.update(assis=True, x=x + 4 * s * math.sin(tm * 0.6), y=y, hanche=0.0, marche=None)
+            m_ = ((B.get("meubles") or {}).get(scene) or {}).get(role)      # lit, canapé, volant, comptoir (croquis)
+            if m_: p["meuble"] = m_
         # regard vers celui qui parle (ou vers celui à qui on parle), petites saccades, clignements
         autre = q["p"] if q["p"] != role else next((r2 for r2 in places[scene] if r2 != role), None)
         if autre and autre in places[scene]:

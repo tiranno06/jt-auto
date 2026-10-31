@@ -126,6 +126,17 @@
   qu'une fabrication finit ; lectures conditionnelles (ETag / 304, quota ménagé) ; **nouvelle version détectée** (version.txt =
   empreinte du code, bouton « ✨ Nouvelle version ») ; boutons à réponse immédiate avec retour en arrière si GitHub refuse ; voyant
   de connexion dans l'en-tête (🟢 à jour il y a… / 🟠 hors connexion / 🔴 clé expirée).
+- **Liste du 31 octobre 2026 (choix de l'auteur 4, 6, 7, 9, 12, 14)** : **note de confiance** de chaque vidéo (`verif_finale.confiance` :
+  100 moins les points à vérifier et contrôles ratés, jury < 6/10 ; historique "confiance", badge 🛡️ et tri « plus sûres d'abord ») ;
+  **recherche et filtres** de l'onglet TikTok (texte, ⚠️ à vérifier, à publier, publiées, profil d'origine, date ; gardés sur
+  l'appareil « jt_filtres ») ; **calendrier de publication** (prochains jours d'après PUBLI_FILE et l'heure, ▲▼ ou glisser pour
+  changer le jour, vidéos programmées) ; **chaîne en parallèle** (PREPA_PARALLELE=1 : la vidéo k/n lance k+1 quand elle commence à
+  dessiner (`principal.tour_de_dessiner`), k+1 prépare son écoute puis attend son tour avant de dessiner (`file_attente.prepa_parallele`,
+  `attendre(avant_dessin=True)`) ; son déjà pris passé en entrée « eviter » (EVITER) ; nom du run « Son TikTok (k/n) », pas de
+  doublon à la fin (sortie/.suivante_lancee)) ; **machines d'aide selon la durée** (`dessin_partage.nb_aides` : ~1 000 images par
+  machine, 1 à 5 ; AIDES=n impose) ; **nouvelles poses croquis** (meubles `B["meubles"]` → p["meuble"] : malade au lit sous la
+  couette dans sa chambre, canapé au salon, volant en voiture, accoudé au comptoir au bar / resto / magasin ; `croquis.lit_face`,
+  `couette`, `canape_face`, `comptoir` ; couleurs en BGR).
 - **Barre de progression en temps réel** (accueil + onglet TikTok, PC et mobile) : le robot publie son avancement toutes les 8 s
   (`moteur/progression.py` → statut « progression-<run> » du commit : %, type, étape, heure de fin ; dessin des images = vitesse
   réelle) ; le site le relit toutes les 5 s, fait avancer barre et compte à rebours chaque seconde, montre la file d'attente et la

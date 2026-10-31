@@ -99,6 +99,30 @@ def decaler(sk, pos):
 def lire(p, d):
     return json.load(open(p, encoding="utf-8")) if os.path.exists(p) else d
 
+def tour_de_dessiner(sk):
+    """Chaîne de vidéos TikTok (choix de l'auteur) : la vidéo « k/n » a préparé son écoute pendant que la précédente se dessinait ;
+    elle attend ici son tour (une seule vidéo dessinée à la fois), puis lance tout de suite la vidéo suivante, qui préparera la sienne
+    pendant ce dessin (son déjà pris : passé en « eviter »). PREPA_PARALLELE=0 pour revenir à une vidéo après l'autre."""
+    import file_attente, re as _re, subprocess as _sp
+    if file_attente.prepa_parallele():
+        try: file_attente.attendre(avant_dessin=True)
+        except Exception as e: print(f"attente du tour impossible ({str(e)[:100]}) : on dessine", flush=True)
+    c = os.environ.get("CHAINE") or ""
+    if os.environ.get("PREPA_PARALLELE", "1") == "0" or c.startswith("suite:") or not os.environ.get("GH_TOKEN"): return
+    m = _re.fullmatch(r"(\d+)/(\d+)", c)
+    if not m or int(m.group(1)) >= int(m.group(2)): return
+    ids = [x for x in (os.environ.get("EVITER") or "").split(",") if x]
+    s_ = str((sk.get("doublage") or {}).get("source") or "")
+    m2 = _re.search(r"/video/(\d+)", s_)
+    if m2: ids.append(m2.group(1))
+    r = _sp.run(["gh", "workflow", "run", "emission.yml", "--ref", "main", "-f", "filiere=tiktok", "-f", f"chaine={int(m.group(1)) + 1}/{m.group(2)}",
+                 "-f", "eviter=" + ",".join(ids[-12:])], capture_output=True, text=True)
+    if r.returncode == 0:
+        os.makedirs("sortie", exist_ok=True); open("sortie/.suivante_lancee", "w").write(c)
+        print(f"Chaîne : vidéo {int(m.group(1)) + 1}/{m.group(2)} lancée (elle prépare son écoute pendant ce dessin)", flush=True)
+    else: print(f"Chaîne : lancement anticipé impossible ({r.stderr[:120]}) : elle partira à la fin", flush=True)
+
+
 def limite_job():
     """Heure (secondes) à laquelle une 2e version du jury doit être finie : limite du job GitHub moins 25 min (vérification,
     archivage, site, historique). Sans DEBUT_JOB (essai sur un ordinateur) : pas de limite."""
@@ -416,6 +440,7 @@ def main():
                         faites_ = qualite.corriger(sk, corr_) if corr_ else []
                         if faites_: print("Pré-jury (avant de dessiner) : " + " ; ".join(faites_), flush=True); QUALITE["corrigees"] += faites_
                     except Exception as e: print(f"Pré-jury impossible ({str(e)[:120]})", flush=True)
+                if not S: tour_de_dessiner(sk)                             # chaîne : attendre son tour, puis lancer la préparation de la suivante
                 sk_avant, dec_avant = copy.deepcopy(sk), copy.deepcopy(decors)
                 point("v1", sk=sk_avant, decors=dec_avant)
                 try: duree = cartoon.rendre(sk, base + ".mp4", audios, mots=mots, decors=decors, mini=fmt == "mini", limite=limite_job(), deja=(S or {}).get("faits"))
@@ -544,6 +569,9 @@ def main():
         historique[-1]["essai"] = True                                     # essai : rangé à part sur le site, effacé au bout de 3 jours
     if WEB: historique[-1]["web"] = True                                    # base_web.mp4 + base.jpg dans les archives du mois
     if A_VERIFIER: historique[-1]["a_verifier"] = A_VERIFIER               # ⚠️ sur le site : points à regarder avant de publier
+    if libre and not REALISTE:                                             # note de confiance (tri « les plus sûres d'abord »)
+        try: historique[-1]["confiance"] = __import__("verif_finale").confiance(sk.get("equipe"), A_VERIFIER, QUALITE["Q"])
+        except Exception: pass
     if sk.get("equipe"): historique[-1]["equipe"] = f"{sum(1 for l in sk['equipe'] if l.get('ok'))}/{len(sk['equipe'])} contrôles bons"
     if DOUB: historique[-1]["filiere"] = "tiktok"                         # vidéo sur un son TikTok : rangée à part des sketchs
     if DOUB: historique[-1]["source_audio"] = sk["doublage"]["source"]; historique[-1]["theme"] = "Bande son : " + sk["doublage"]["source"]

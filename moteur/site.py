@@ -74,7 +74,7 @@ def fiche(e):
                 programmee=e.get("programmee"), couts=e.get("couts") or {}, duree=e.get("duree"), a_verifier=e.get("a_verifier") or [],
                 likes=e.get("likes"), commentaires=e.get("commentaires"), partages=e.get("partages"),
                 voix_secours=("piper" in str(e.get("voix", "")).lower()),
-                source=e.get("source_audio") or "", reps=repliques_de(e))
+                source=e.get("source_audio") or "", reps=repliques_de(e), confiance=e.get("confiance"))
 
 
 def construire():
@@ -227,6 +227,12 @@ input,textarea{flex:1;min-width:0;font:inherit;font-size:15px;padding:11px;borde
 .croix:hover{background:#d33}.carte.supprimee{opacity:.35;pointer-events:none}
 .apub{margin-top:8px;display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;border:2px solid var(--ligne);background:transparent;color:inherit;font-size:14px;font-weight:700;cursor:pointer;max-width:100%}
 .apub.on{background:var(--jaune);border-color:var(--jaune);color:#111}
+.filtresTk{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}.filtresTk input,.filtresTk select{flex:1 1 140px;min-width:0;padding:8px;border-radius:10px;border:1px solid var(--ligne);background:transparent;color:inherit;font-size:14px}
+.filtresTk select option{color:#111}.conf{display:inline-block;margin-top:6px;padding:2px 9px;border-radius:999px;font-size:13px;font-weight:700}
+.conf.v{background:#d3f9d8;color:#2b8a3e}.conf.o{background:#fff3bf;color:#e67700}.conf.r{background:#ffe3e3;color:#c92a2a}
+.cal{display:flex;align-items:center;gap:8px;padding:8px;border:1px solid var(--ligne);border-radius:12px;margin:6px 0;background:transparent}
+.cal.glisse{opacity:.5}.cal .j{flex:none;width:92px;font-weight:700;font-size:13px}.cal .t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px}
+.cal button{flex:none;padding:4px 9px;border-radius:8px;border:1px solid var(--ligne);background:transparent;color:inherit;cursor:pointer}
 .averif{margin-top:8px;font-size:13px;max-width:100%}.averif summary{cursor:pointer;font-weight:700;color:#e8590c}.averif ul{margin:6px 0 0;padding-left:18px}.averif li{margin:3px 0;overflow-wrap:anywhere}
 .pulse{animation:pulse 1.2s ease-in-out 4}@keyframes pulse{50%{transform:scale(1.04);box-shadow:0 0 0 6px rgba(255,208,40,.35)}}
 label.coche{display:flex;align-items:center;gap:10px;padding:8px 0;font-size:16px}label.coche input{width:22px;height:22px;flex:none;margin:0}
@@ -403,8 +409,15 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <div class="auto"><div class="txt"><b>Activée</b><small>Une vidéo cochée publiée par jour, même appli fermée.</small></div><button class="inter" data-var="PUBLI_AUTO" data-def="0" data-bascule="1"></button></div>
     <div class="auto"><div class="txt"><b>Heure choisie par les statistiques</b><small>L'heure où vos vidéos font le plus de vues (sinon l'heure fixe ci-dessous).</small></div><button class="inter" data-var="PUBLI_HEURE_AUTO" data-def="0" data-bascule="1"></button></div>
     <label>Heure de publication (heure de Paris)<div class="jeton"><input data-var="PUBLI_HEURE" data-def="18:00" data-texte="1" maxlength="5" type="time" placeholder="18:00"><button class="second" data-enr="PUBLI_HEURE" style="flex:none;padding:10px 14px">OK</button></div></label>
-    <p class="note" id="pubResume"></p></section>
-  <section class="panneau"><h2>🎬 Mes vidéos TikTok</h2><div id="listeTk"></div></section>
+    <p class="note" id="pubResume"></p>
+    <h3 style="margin:14px 0 6px">🗓️ Calendrier de publication</h3><div id="calendrier"></div></section>
+  <section class="panneau"><h2>🎬 Mes vidéos TikTok</h2>
+    <div class="filtresTk"><input id="fTexte" type="search" placeholder="🔎 Rechercher (titre, légende)">
+      <select id="fEtat"><option value="">Toutes</option><option value="verifier">⚠️ À vérifier</option><option value="cochees">✅ À publier</option><option value="publiees">📤 Publiées</option><option value="non">Non publiées</option></select>
+      <select id="fProfil"><option value="">Tous les profils</option></select>
+      <select id="fDate"><option value="">Toutes les dates</option><option value="1">Aujourd'hui</option><option value="7">7 derniers jours</option><option value="30">30 derniers jours</option></select>
+      <select id="fTri"><option value="">Plus récentes d'abord</option><option value="sures">🛡️ Plus sûres d'abord</option></select></div>
+    <div id="listeTk"></div></section>
  </div>
  <!-- ======================================================== STATISTIQUES -->
  <div id="o-stats" style="display:none"></div>
@@ -725,9 +738,9 @@ async function actualiserStats(){
     const [h,st,cr]=await Promise.all([lireEpisode("historique.json").catch(()=>null),lireEpisode("stats.json").catch(()=>null),lireEpisode("credits.json").catch(()=>null)]);
     if(cr&&cr.date){CRED=cr; rendreOutils()}
     if(Array.isArray(h)){const par={}; h.forEach(e=>{if(e.fichier)par[e.fichier]=e});
-      try{const K=["fichier","titre","date","tag","web","filiere","source_audio","theme","manuel","legende","publie","vues","format","avis","note","note_auteur","programmee","duree","likes","commentaires","partages","a_verifier"];
+      try{const K=["fichier","titre","date","tag","web","filiere","source_audio","theme","manuel","legende","publie","vues","format","avis","note","note_auteur","programmee","duree","likes","commentaires","partages","a_verifier","confiance"];
         localStorage.setItem("jt_historique",JSON.stringify(h.filter(e=>e.fichier).map(e=>Object.fromEntries(K.filter(k=>e[k]!==undefined).map(k=>[k,e[k]])))))}catch(e){}   // copie légère pour la prochaine ouverture
-      DATA.forEach(v=>{const e=par[v.fichier]; if(!e)return; ["vues","likes","commentaires","partages","publie","couts","programmee","a_verifier"].forEach(k=>{if(e[k]!==undefined)v[k]=e[k]})});
+      DATA.forEach(v=>{const e=par[v.fichier]; if(!e)return; ["vues","likes","commentaires","partages","publie","couts","programmee","a_verifier","confiance"].forEach(k=>{if(e[k]!==undefined)v[k]=e[k]})});
       ajouterNouvelles(h);
       const faites=h.filter(e=>e.fichier), der=faites[faites.length-1];
       if(der){OUTILS={outils:(der.outils&&typeof der.outils==="object")?der.outils:null,date:der.date||"",titre:der.titre||""}; rendreOutils()}}
@@ -749,7 +762,7 @@ function ajouterNouvelles(h){
   const avant=DATA.length; if(choisie===null) for(let i=DATA.length-1;i>=0;i--) if(!vivants.has(DATA[i].fichier)||lireSuppr()[DATA[i].fichier]) DATA.splice(i,1);
   const sup=lireSuppr(), rel=e=>`https://github.com/${CONF.depot}/releases/download/${e.tag||"emissions-"+e.fichier.slice(0,7)}/`;
   const neuves=h.filter(e=>e.fichier&&!connus.has(e.fichier)&&!sup[e.fichier]).slice(-15).map(e=>({titre:e.titre||"",date:e.date||"",fichier:e.fichier,poster:"",
-    src:rel(e)+(e.web?e.fichier.replace(".mp4","_web.mp4"):e.fichier), src_plein:rel(e)+e.fichier, tag:e.tag, poster_url:e.web?rel(e)+e.fichier.replace(".mp4",".jpg"):"",
+    src:rel(e)+(e.web?e.fichier.replace(".mp4","_web.mp4"):e.fichier), src_plein:rel(e)+e.fichier, tag:e.tag, source:e.source_audio||"", confiance:e.confiance, poster_url:e.web?rel(e)+e.fichier.replace(".mp4",".jpg"):"",
     origine:(e.filiere==="tiktok"||e.source_audio||String(e.theme||"").startsWith("Bande son")||String(e.theme||"").startsWith("TIKTOK::"))?"tiktok":(e.manuel||e.theme)?"texte":"auto",
     legende:e.legende||"",publie:e.publie,vues:e.vues,format:e.format||"",manuel:!!e.manuel,avis:e.avis||0,note:e.note,note_auteur:e.note_auteur,programmee:e.programmee,
     couts:e.couts||{},duree:e.duree,likes:e.likes,commentaires:e.commentaires,partages:e.partages,a_verifier:e.a_verifier||[]}));
@@ -844,16 +857,43 @@ function majPointTk(){                                                     // no
   const z=$("#nouveauTk"); if(z){z.style.display=neuves.length?"":"none"; z.innerHTML=neuves.length?`🎵 <b>${neuves.length} nouvelle${neuves.length>1?"s":""} vidéo${neuves.length>1?"s":""} TikTok</b> prête${neuves.length>1?"s":""} : « ${neuves[0].titre.replace(/[<>&]/g,"")} » <button class="second" style="flex:none;padding:8px 12px" onclick="allerOnglet('tiktok')">Voir</button>`:""}
 }
 function marquerVusTk(){try{const vus=lireVus(); DATA.filter(v=>v.origine==="tiktok").forEach(v=>vus.add(v.fichier)); localStorage.setItem("tk_vus",JSON.stringify([...vus].slice(-300)))}catch(e){} majPointTk()}
+// note de confiance (choix de l'auteur) : calculée par le robot (bulletin de l'équipe, contrôles de la vidéo finie, jury) ;
+// anciennes vidéos : d'après les points à vérifier
+function confiance(v){if(typeof v.confiance==="number") return v.confiance; const a=v.a_verifier||[];
+  return Math.max(0,Math.min(100,100-12*a.filter(p=>p.grave).length-4*a.filter(p=>!p.grave).length))}
+const badgeConf=v=>{const c=confiance(v); return `<span class="conf ${c>=75?"v":c>=50?"o":"r"}" title="Note de confiance : contrôles de l'équipe et de la vidéo finie">🛡️ ${c}</span>`};
+// recherche et filtres (choix de l'auteur) : gardés sur l'appareil
+const FTK=(()=>{try{return JSON.parse(localStorage.getItem("jt_filtres")||"{}")}catch(e){return {}}})();
+const profilDe=v=>{const m=/tiktok\.com\/@([\w.\-]+)/.exec(v.source||""); return m?"@"+m[1]:""};
+function garderFiltres(){try{localStorage.setItem("jt_filtres",JSON.stringify(FTK))}catch(e){}}
+function filtrerTk(vis){
+  const file=filePubli(), t=(FTK.texte||"").toLowerCase(), j=+FTK.date||0, lim=j?Date.now()-j*86400000:0;
+  let l=vis.filter(([v])=>(!t||(String(v.titre)+" "+String(v.legende||"")).toLowerCase().includes(t))
+    &&(!FTK.profil||profilDe(v)===FTK.profil)&&(!j||(j===1?quand(v).slice(0,10)===new Date().toLocaleDateString("sv-SE"):new Date(quand(v).replace(" ","T")).getTime()>=lim))
+    &&(FTK.etat!=="verifier"||(v.publie!==true&&(v.a_verifier||[]).length))&&(FTK.etat!=="cochees"||file.includes(v.fichier))
+    &&(FTK.etat!=="publiees"||v.publie===true)&&(FTK.etat!=="non"||v.publie!==true));
+  if(FTK.tri==="sures") l.sort((a,b)=>confiance(b[0])-confiance(a[0])||recentsDabord(a,b));
+  return l;
+}
+function initFiltres(){
+  const prof=[...new Set(DATA.filter(v=>v.origine==="tiktok").map(profilDe).filter(Boolean))].sort(), sel=$("#fProfil");
+  const h='<option value="">Tous les profils</option>'+prof.map(p=>`<option>${p.replace(/[<>&]/g,"")}</option>`).join(""); if(sel.innerHTML!==h) sel.innerHTML=h;
+  [["#fTexte","texte"],["#fEtat","etat"],["#fProfil","profil"],["#fDate","date"],["#fTri","tri"]].forEach(([s_,k])=>{const e=$(s_); if(e.value!==(FTK[k]||"")) e.value=FTK[k]||"";
+    e.oninput=e.onchange=()=>{FTK[k]=e.value; garderFiltres(); rendreTk()}});
+}
 function rendreTk(){                                                       // onglet TikTok : ses vidéos à lui
   const L=$("#listeTk"); L.innerHTML="";
-  const vis=DATA.map((v,i)=>[v,i]).filter(([v])=>v.origine==="tiktok"&&!v.essai).sort(recentsDabord);
-  if(!vis.length){L.innerHTML='<p class="vide">Aucune vidéo sur un son TikTok pour l\'instant.</p>';return}
+  initFiltres();
+  const tout=DATA.map((v,i)=>[v,i]).filter(([v])=>v.origine==="tiktok"&&!v.essai).sort(recentsDabord), vis=filtrerTk(tout);
+  if(!tout.length){L.innerHTML='<p class="vide">Aucune vidéo sur un son TikTok pour l\'instant.</p>';resumePubli();return}
+  if(!vis.length){L.innerHTML='<p class="vide">Aucune vidéo ne correspond à la recherche.</p>';resumePubli();return}
   const file=filePubli();
   vis.forEach(([v,i])=>{const c=carte(v,i,false); c.onclick=()=>{allerOnglet("videos","tiktok"); choisir(i)};
     c.querySelector(".croix").onclick=(ev)=>{ev.stopPropagation(); supprimer(i,c)};   // ✕ : supprimer aussi depuis cet onglet
     if(v.publie!==true){const b=document.createElement("button"), k=file.indexOf(v.fichier); b.className="apub"+(k>=0?" on":"");
       b.textContent=k<0?"☐ À publier":v.publie===false?"⚠ Échec : sautée (republiez depuis la fiche)":`✅ À publier (n° ${attentePubli(file).indexOf(v.fichier)+1})`; b.onclick=(ev)=>{ev.stopPropagation(); basculerPubli(v.fichier,b)};
       c.querySelector(".infos").appendChild(b)}
+    c.querySelector(".infos").insertAdjacentHTML("beforeend",badgeConf(v));
     if(v.publie!==true&&(v.a_verifier||[]).length){                        // feu rouge : les points que le robot n'a pas pu corriger seul
       const d=document.createElement("details"); d.className="averif"; d.onclick=ev=>ev.stopPropagation();
       d.innerHTML=`<summary>⚠️ À vérifier (${v.a_verifier.length})</summary><ul>`+v.a_verifier.map(p=>`<li>${p.t!=null?"<b>"+p.t+" s</b> · ":""}${String(p.quoi||"").replace(/[<>&]/g,"")}</li>`).join("")+"</ul>";
@@ -875,7 +915,33 @@ async function basculerPubli(nom,b){
   try{await ecrireVar("PUBLI_FILE",f.join("\n")||"-"); toast(on?"Retirée de la publication automatique":"Ajoutée à la publication automatique ✓")}
   catch(e){VARS.PUBLI_FILE=avant; rendreTk(); toast("❌ Pas enregistré ("+e.message+") : retour en arrière")}
 }
+function rendreCalendrier(){                                               // les prochains jours de publication, dans l'ordre de la file
+  const z=$("#calendrier"); if(!z) return; z.innerHTML="";
+  const a=attentePubli(filePubli()), auto=String((VARS&&VARS.PUBLI_HEURE_AUTO)||"0")==="1", h=auto?(String(CONF.heure_stats??18).padStart(2,"0")+":00"):((VARS&&VARS.PUBLI_HEURE)||"18:00");
+  const [hh,mm]=h.split(":").map(Number), d0=new Date(); if(d0.getHours()*60+d0.getMinutes()>=hh*60+mm) d0.setDate(d0.getDate()+1);
+  const prog=DATA.filter(v=>v.programmee&&new Date(v.programmee)>new Date()).map(v=>[new Date(v.programmee),v]);
+  if(!a.length&&!prog.length){z.innerHTML='<p class="note">Rien de prévu : cochez « À publier » sur des vidéos.</p>';return}
+  const jour=d=>d.toLocaleDateString("fr-FR",{weekday:"short",day:"numeric",month:"short"});
+  prog.sort((x,y)=>x[0]-y[0]).forEach(([d,v])=>z.insertAdjacentHTML("beforeend",`<div class="cal"><span class="j">${jour(d)} ${d.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"})}</span><span class="t">🗓️ ${String(v.titre).replace(/[<>&]/g,"")} (programmée)</span></div>`));
+  a.forEach((nom,k)=>{const v=DATA.find(x=>x.fichier===nom); const d=new Date(d0); d.setDate(d0.getDate()+k);
+    const el=document.createElement("div"); el.className="cal"; el.draggable=true; el.dataset.k=k;
+    el.innerHTML=`<span class="j">${jour(d)} ${h}</span><span class="t">${String(v?v.titre:nom).replace(/[<>&]/g,"")}</span><button title="Plus tôt">▲</button><button title="Plus tard">▼</button>`;
+    const [hautB,basB]=el.querySelectorAll("button"); hautB.disabled=k===0; basB.disabled=k===a.length-1;
+    hautB.onclick=()=>deplacerPubli(k,k-1); basB.onclick=()=>deplacerPubli(k,k+1);
+    el.ondragstart=e=>{e.dataTransfer.setData("text/plain",String(k)); el.classList.add("glisse")}; el.ondragend=()=>el.classList.remove("glisse");
+    el.ondragover=e=>e.preventDefault(); el.ondrop=e=>{e.preventDefault(); deplacerPubli(+e.dataTransfer.getData("text/plain"),k)};
+    z.appendChild(el)});
+}
+async function deplacerPubli(de,vers){                                     // glisser / ▲▼ : change le jour de publication (ordre de la file)
+  if(!lireJeton()){toast("Connectez d'abord la régie (onglet Réglages)");return}
+  const a=attentePubli(filePubli()); if(vers<0||vers>=a.length||de===vers) return;
+  const avant=VARS.PUBLI_FILE, [x]=a.splice(de,1); a.splice(vers,0,x);
+  const f=[...a,...filePubli().filter(n=>!a.includes(n))]; VARS.PUBLI_FILE=f.join("\n"); rendreCalendrier(); resumePubli();
+  try{await ecrireVar("PUBLI_FILE",f.join("\n")||"-"); toast("🗓️ Calendrier mis à jour")}
+  catch(e){VARS.PUBLI_FILE=avant; rendreCalendrier(); resumePubli(); toast("❌ Pas enregistré ("+e.message+") : retour en arrière")}
+}
 function resumePubli(){
+  rendreCalendrier();
   const z=$("#pubResume"); if(!z) return;
   if(!lireJeton()){z.textContent="Connectez la régie pour choisir les vidéos à publier.";return}
   const a=attentePubli(filePubli()), on=String((VARS&&VARS.PUBLI_AUTO)||"0")==="1", auto=String((VARS&&VARS.PUBLI_HEURE_AUTO)||"0")==="1", h=auto?(String(CONF.heure_stats??18).padStart(2,"0")+":00"):((VARS&&VARS.PUBLI_HEURE)||"18:00");

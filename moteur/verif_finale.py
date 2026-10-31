@@ -236,3 +236,15 @@ def verifier(video, sk, R):
     points.sort(key=lambda d: (not d["grave"], d["t"] if d["t"] is not None else -1))
     journal(f"Contrôle de la vidéo finie : {len(points)} point(s) à vérifier" + (" — " + " ; ".join(f"{d['t']} s {d['quoi'][:60]}" for d in points[:6]) if points else ""))
     return points[:20]
+
+
+def confiance(equipe, points, Q=None):
+    """Note de confiance de la vidéo (0-100, choix de l'auteur) : 100 moins les défauts que personne n'a pu corriger (points à
+    vérifier graves 12, autres 4 ; contrôles de l'équipe « à revoir » 8, autres ratés 2) et, si le jury note sous 6/10, 5 par point
+    manquant. Sert au tri « les plus sûres d'abord » de l'onglet TikTok."""
+    n = 100 - 12 * sum(1 for d in points or [] if d.get("grave")) - 4 * sum(1 for d in points or [] if not d.get("grave"))
+    n -= sum(8 if l.get("revoir") else 2 for l in equipe or [] if not l.get("ok"))
+    try:
+        if Q and float(Q.get("note") or 10) < 6: n -= int((6 - float(Q["note"])) * 5)
+    except (TypeError, ValueError): pass
+    return max(0, min(100, int(n)))

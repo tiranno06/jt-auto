@@ -1121,6 +1121,41 @@ class TestVoixEtScenesTiktok(unittest.TestCase):
         self.assertEqual(appels, ["gemini", "mistral"])                    # deux IA différentes
         self.assertEqual(ia, [0, 1, 0, 1, 0, None])                        # d'accord sauf la dernière phrase : laissée au son et à l'image
 
+    def test_liste_4_6_7_9_12_14(self):
+        ici = os.path.dirname(__file__); sys.path.insert(0, os.path.join(ici, "..", "moteur"))
+        import dessin_partage as DP, file_attente as FA, profils_tiktok as PT, verif_finale as V, studio, numpy as np
+        import humain as HU, marionnette as M, perso_croquis as P
+        anc = os.environ.pop("AIDES", None)                                # 12 : machines d'aide selon la durée
+        try: self.assertEqual([DP.nb_aides(n) for n in (1300, 3900, 7000, 20000)], [1, 3, 5, 5])
+        finally:
+            if anc is not None: os.environ["AIDES"] = anc
+        env = dict(os.environ)                                             # 9 : chaîne en parallèle
+        try:
+            os.environ.update(CHAINE="3/10", PREPA_PARALLELE="1"); self.assertTrue(FA.prepa_parallele())
+            os.environ["CHAINE"] = "1/10"; self.assertFalse(FA.prepa_parallele())
+            os.environ["CHAINE"] = "suite:x|3/10"; self.assertFalse(FA.prepa_parallele())
+            os.environ.update(CHAINE="3/10", PREPA_PARALLELE="0"); self.assertFalse(FA.prepa_parallele())
+            os.environ["EVITER"] = "7677317232023588129"
+            self.assertIn("7677317232023588129", PT.deja_utilisees([]))      # son pris par la vidéo encore en fabrication
+        finally: os.environ.clear(); os.environ.update(env)
+        y = open(os.path.join(ici, "..", ".github", "workflows", "emission.yml"), encoding="utf-8").read()
+        self.assertIn("sortie/.suivante_lancee", y); self.assertIn("eviter:", y)
+        self.assertIn("tour_de_dessiner(sk)", open(os.path.join(ici, "..", "moteur", "principal.py"), encoding="utf-8").read())
+        self.assertEqual(V.confiance([], []), 100)                         # 4 : note de confiance
+        self.assertLess(V.confiance([{"ok": False, "revoir": True}], [{"grave": True}], {"note": 4}), 75)
+        src = open(os.path.join(ici, "..", "moteur", "site.py"), encoding="utf-8").read()
+        for m in ("badgeConf", "filtrerTk", 'id="fTexte"', 'id="fProfil"', "rendreCalendrier", "deplacerPubli", "ondrop"):   # 4, 6, 7
+            self.assertIn(m, src)
+        img = np.full((1920, 1080, 3), 235, np.uint8)                      # 14 : lit, canapé, comptoir, volant
+        for meuble, assis in (("lit", True), ("canape", True), ("comptoir", False), ("volant", True)):
+            F = HU.creer(3); p = dict(M.pose_neutre(), x=540, y=1500, s=1.0, emo="neutre", assis=assis, meuble=meuble, costume={"haut": "tshirt"})
+            P.dessiner(img, F, HU._pose(F, p))
+        reps = [{"p": "envoyee", "t": "Allô ? Tu viens ?"}, {"p": "invite", "t": "Non je suis malade, cloué au lit."}]
+        sk = {"repliques": reps, "doublage": {"contexte": "au téléphone"}, "decoupage": [{"scene": "1", "repliques": [0, 1], "decor": "bedroom"}],
+              "studio": {"lieux": ["chambre"]}}
+        B = studio.bible(sk, ["envoyee", "invite"])
+        self.assertEqual(B["meubles"].get(0), {"invite": "lit"})            # le malade est dans son lit
+
     def test_une_seule_scene_pour_un_son_tiktok(self):
         import studio
         sk = {"repliques": [{"p": "presentateur", "t": "a"}] * 5, "doublage": {"duree": 10},
