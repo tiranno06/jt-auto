@@ -118,7 +118,7 @@ def sous_titres(video, R, son=None):
         att, ent = _nu(q["texte"]), _nu(" ".join(mots[i]["w"] for i in idx))
         if len(att) < 3: continue
         r = difflib.SequenceMatcher(None, att, ent).ratio(); scores.append(r)
-        if r < 0.5: out.append(_defaut(q["deb"], "sous-titres", f"sous-titre « {str(q['texte'])[:50]} » mais on entend « {' '.join(ent)[:50]} »"))
+        if r < 0.5: out.append(_defaut(q["deb"], "sous-titres", f"sous-titre « {str(q['texte'])[:50]} » mais on entend « {' '.join(ent)[:50]} »", grave=bool(ent)))
     seuls, bloc = [], []
     for i, m in enumerate(mots):                                           # voix entendue sans sous-titre (3 mots ou plus d'affilée)
         if i in vus or m["s"] > (R.get("total") or 1e9) - 0.5:
@@ -201,6 +201,7 @@ def liste_ia(video, sk, R):
             n = int(d.get("image")) - 1
             pb = str(d.get("probleme") or "")
             if re.search(r"expression|posture|émotion|emotion|attitude|pas assez|manque d", pb, re.I): continue   # avis de goût, pas une erreur
+            if re.search(r"sous-titre|subtitle", pb, re.I): continue      # les sous-titres défilent par groupes : vérifiés à l'oreille, pas par l'IA
             if 0 <= n < len(instants): out.append(_defaut(instants[n], "contrôle IA", pb, grave=False))
         except (AttributeError, TypeError, ValueError): pass
     return out[:6]
@@ -214,8 +215,9 @@ def verifier(video, sk, R):
     try:
         fr, fps = _images(video); son = _son(video)
         d1, dec = synchro(video, R, fr, fps, son)
-        if dec and recaler(video, dec):
-            journal(f"  [vidéo finie · synchro] son recalé de {dec:+.2f} s sur l'image"); son = _son(video)
+        if dec:                                                            # le son et l'image sortent du même calcul : un vrai décalage est
+            journal(f"  [vidéo finie · synchro] décalage mesuré {dec:+.2f} s (mesure seulement : le son n'est jamais déplacé)")   # impossible ;
+            # le 31 octobre, un « recalage » de +0,28 s sur une vidéo juste avait créé le décalage : on ne touche plus au son
         points += d1
         journal(f"  [vidéo finie · synchro] {'✔' if not d1 else '✘'} bouches du bon personnage" + (f" : {len(d1)} réplique(s) à revoir" if d1 else ""))
         d8 = technique(video, R, fr, fps); points += d8
