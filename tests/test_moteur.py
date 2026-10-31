@@ -967,6 +967,18 @@ class TestVoixEtScenesTiktok(unittest.TestCase):
     """Remarques de l'auteur (31 octobre 2026) : voix restées sur un seul personnage, scène qui « se recharge » (toc toc toc)."""
     def setUp(self): sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "moteur"))
 
+    def test_reponse_json_dans_le_texte(self):
+        """Mise en scène ratée sur la vidéo 3/3 du 31 octobre : l'IA gratuite répond sans l'outil ; son JSON dans le texte suffit."""
+        from types import SimpleNamespace as NS
+        class Faux:
+            def __init__(self): self.n = 0; self.messages = self
+            def create(self, **kw):
+                self.n += 1
+                t = "Voici : pas de JSON" if self.n == 1 else 'Réponse : {"casting": [], "contexte": "un chat"}'
+                return NS(content=[NS(type="text", text=t)], usage=None, stop_reason="end_turn")
+        out = ecrire._appel(Faux(), None, [{"role": "user", "content": "x"}], {"name": "outil", "input_schema": {}}, max_tokens=100)
+        self.assertEqual(out["contexte"], "un chat")
+
     def test_points_oublies_par_whisper(self):
         import locuteurs as L
         txt = "Euh ouais j'avais un poisson rouge Mais pourquoi t'avais un poisson rouge ? Il s'appelait Pomme Dauphine Ok"

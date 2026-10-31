@@ -481,7 +481,10 @@ def _appel(client, systeme, messages, outil=OUTIL, web=False, max_tokens=12000, 
                                     {"role": "user", "content": f"Rends maintenant ta réponse avec l'outil {outil['name']}."}]))
         for b in r2.content:
             if getattr(b, "type", "") == "tool_use": return b.input
-        raise ValueError("réponse inexploitable")
+        brut2 = "".join(getattr(b, "text", "") or "" for b in r2.content if getattr(b, "type", "") == "text")
+        try: return _json(brut2)                                           # l'IA gratuite répond parfois en JSON dans le texte
+        except Exception: pass
+        raise ValueError(f"réponse inexploitable : « {(brut2 or brut).strip()[:80]} »")
 
 SPECIAL_DEMAIN = """- ÉPISODE SPÉCIAL DU DIMANCHE « LES INFOS DE DEMAIN » : après l'accroche, le présentateur annonce 3 ou 4 fausses brèves du futur (« Dans un an… », « En 2030… »), toutes sur CE sujet, chacune poussant la situation un cran plus loin dans l'absurde, avec une chute par brève ; l'envoyée ou l'invité peuvent réagir. L'écran du plateau affiche « EN 2030 »."""
 

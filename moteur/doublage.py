@@ -517,7 +517,11 @@ def preparer(url):
                 if desc: contenu += "\nCe que montrent les images clés (description automatique, en anglais) :\n" + "\n".join(f"- image {k + 1} : {t}" for k, t in enumerate(desc)) + "\n"
             contenu = [{"type": "image", "source": {"type": "base64", "media_type": "image/jpeg", "data": base64.b64encode(j).decode()}} for j in cles[:6]] \
                       + [{"type": "text", "text": contenu}]
-        m = ecrire._appel(__import__('reseau').claude(), None, [{"role": "user", "content": contenu}], _outil(), max_tokens=8000)
+        try: m = ecrire._appel(__import__('reseau').claude(), None, [{"role": "user", "content": contenu}], _outil(), max_tokens=8000)
+        except Exception as e1:                                            # réponse inexploitable (IA gratuite) : 2e essai sans les images
+            if not isinstance(contenu, list): raise
+            journal(f"  mise en scène : 1er essai raté ({str(e1)[:120]}), nouvel essai sans les images")
+            m = ecrire._appel(__import__('reseau').claude(), None, [{"role": "user", "content": contenu[-1]["text"]}], _outil(), max_tokens=8000)
         for c in ecrire._liste(m.get("casting")):
             if isinstance(c, dict) and c.get("voix") in hz and c.get("role") in ROLES: casting[c["voix"]] = c["role"]
         if m.get("contexte"): journal(f"  scène reconstituée : {m['contexte']}")
