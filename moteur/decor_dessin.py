@@ -561,6 +561,13 @@ def dessiner(lieu, bible=None, graine=7):
 
 def lieu_de(texte_, defaut="salon"):
     """Lieu du catalogue d'après une description (anglais ou français) : « doctor's office », « au bureau »… (le plus cité gagne)."""
+    scores, regles = scores_lieux(texte_)
+    meilleur = max(regles, key=lambda r: scores[r[0]])[0]
+    return meilleur if scores[meilleur] else defaut
+
+
+def scores_lieux(texte_):
+    """Nombre d'indices de chaque lieu dans le texte (et la liste des règles, dans l'ordre de priorité)."""
     t = (texte_ or "").lower()
     regles = [("voiture", r"inside (a|the) car|in the car|car interior|driver seat|steering wheel|dans (la|sa|ma|ta) (voiture|caisse|bagnole)|au volant|en voiture|conduit|conduire|driving|road trip|embouteillage|traffic jam|passager"),
               ("caverne", r"pr[ée]histo|caverne|grotte|mammouth|cro-?magnon|n[ée]andert|homme des cavernes"),
@@ -575,16 +582,15 @@ def lieu_de(texte_, defaut="salon"):
               ("bureau", r"office|bureau|boss|patron|chef de|r[ée]union|meeting|coll[èe]gue|entreprise|open ?space|boulot|travail|job|manager|stagiaire"),
               ("classe", r"class|[ée]cole|school|prof|teacher|[ée]l[èe]ve|lyc[ée]e|coll[èe]ge|cours|devoir|interro|exam"),
               ("magasin", r"shop|store|magasin|supermarket|supermarch|caisse|cashier|courses|boutique|vendeu|achat|soldes"),
-              ("chambre", r"bedroom|chambre|\blit\b|\bbed\b|dormir|sleep|r[ée]veil|alarm|sieste|nuit blanche"),
+              ("chambre", r"bedroom|chambre|\blit\b|\bbed\b|dormir|j'?\s?dors\b|sleep|r[ée]veil|alarm|sieste|nuit blanche"),
               ("rue", r"street|\brue\b|outside|dehors|trottoir|sidewalk|parking|arr[êe]t de bus|bus stop|city|ville|parc\b|park"),
-              ("salon", r"living room|apartment|salon|canap[ée]|sofa|t[ée]l[ée]\b|\btv\b|maison|home|ch[ée]ri|cl[ée]s|famille|maman|papa|coloc|appart")]
+              ("salon", r"living room|apartment|salon|canap[ée]|sofa|t[ée]l[ée]\b|\btv\b|maison|home|ch[ée]ri|cl[ée]s|famille|maman|papa|coloc|appart|\bchats?\b|chaton|\bchien|p[âa]t[ée]e|croquettes|liti[èe]re|caresse")]   # un animal de compagnie : à la maison
     import decor_metiers as DM
     import decor_lieux as DL
     regles = DM.REGLES + regles + DL.REGLES                                # métiers d'abord ; les 39 lieux ajoutés en dernier (à égalité, les anciens gagnent)
     scores = {lieu: len(re.findall(motif, t)) for lieu, motif in regles}      # le lieu le plus souvent évoqué (à égalité : le 1er de la liste)
     if re.search(r"parking|car park|\bcar\b|voiture garée|devant le magasin", t): scores["rue"] += 2   # un parking est dehors
-    meilleur = max(regles, key=lambda r: scores[r[0]])[0]
-    return meilleur if scores[meilleur] else defaut
+    return scores, regles
 
 
 import decor_metiers  # noqa: E402,F401  (décors des métiers : inscrits dans LIEUX, GAGS, COULEURS_MUR)

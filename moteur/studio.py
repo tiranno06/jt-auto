@@ -488,6 +488,8 @@ def casting(sk, roles, costumes, S, graine):
     P_ = S.get("personnages") if isinstance(S.get("personnages"), dict) else {}
     lignes = {r: " ".join(x.get("t", "") for x in sk.get("repliques", []) if x.get("p") == r).lower() for r in roles}
     tout = " ".join(lignes.values())
+    import animaux as AN_
+    especes = AN_.qui_est(sk)
     out = {}
     for k, role in enumerate(roles):
         d = P_.get(role) if isinstance(P_.get(role), dict) else {}
@@ -521,6 +523,11 @@ def casting(sk, roles, costumes, S, graine):
         try:                                                               # taille vue dans la vidéo ou décidée par Claude (1 = adulte moyen)
             if d.get("taille"): fiche["taille"] = float(np.clip(float(d["taille"]), 0.55, 1.25)) * (1.04 if fiche["genre"] == "h" else 0.97)
         except (TypeError, ValueError): pass
+        esp = AN_.espece_valide(d.get("espece")) or especes.get(role)       # animal ou objet qui parle (chat, chien, steak…)
+        if esp:
+            fiche["espece"] = esp; fiche["c_poil"] = AN_.couleur(esp, lignes[role] + " " + autres)
+            fiche["barbe"] = None; fiche["lunettes"] = None
+            if not d.get("taille"): fiche["taille"] = 0.72 if esp in AN_.ANIMAUX else 0.85   # un chat est plus petit qu'un humain
         out[role] = fiche
     return out
 
@@ -915,7 +922,9 @@ def consigne_studio():
   en main (pompier : veste à bandes + casque rouge + lance ; médecin : blouse + stéthoscope…) ; jamais pour un métier juste cité ;
   "personnages" = pour chaque rôle dessiné, la personne qui le joue (casting libre, différent à chaque vidéo) : "genre" (h ou f),
   "age" (nombre), "taille" (1 = adulte moyen ; ado ≈ 0.8 ; enfant ≈ 0.65), "corpulence" (0 = mince à 1 = fort),
-  "cheveux" parmi {L(sorted(set(H_.COIFFURES_H + H_.COIFFURES_F + M.GR.COIFFURES)))}, "barbe" parmi trois_jours, moustache, bouc ou rien (JAMAIS de grosse barbe : une barbe mal rasée au plus).
+  "cheveux" parmi {L(sorted(set(H_.COIFFURES_H + H_.COIFFURES_F + M.GR.COIFFURES)))}, "barbe" parmi trois_jours, moustache, bouc ou rien (JAMAIS de grosse barbe : une barbe mal rasée au plus),
+  "espece" SEULEMENT si ce personnage n'est PAS un humain dans la vidéo d'origine (un animal ou un objet qui parle) : chat, chien,
+  steak, pizza, oeuf, banane, ou "objet:<nom>" pour un autre objet (le moteur le dessine avec un visage, des pattes ou de petits bras).
   L'ÂGE, le genre et la taille doivent coller au DIALOGUE, à la voix et à la vidéo : celui qu'on appelle « fiston », « mon fils »,
   « ma puce », ou qui dit « papa, … », « maman, … » est un ADO (13-16 ans : plus petit, cheveux courts de son âge, JAMAIS de barbe)
   ou un enfant si le contexte le dit ; ses parents sont plus âgés ; un patron, un client, un prof… ont l'âge du rôle ;

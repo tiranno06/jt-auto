@@ -111,23 +111,64 @@ def scripte(sk, segs, hz, B):
 
 
 # ------------------------------------------------------------------ 4. monteur
-def monteur(sk, duree, B):
+def monteur(sk, duree, B, segs=None):
+    """Monteur : vérifie ET corrige la synchronisation avant le dessin (segs = segments du son, même ordre que les répliques) :
+    mots hors de leur réplique (la réplique s'élargit), rien après la fin du son, répliques remises dans l'ordre du son (découpage
+    renuméroté), un personnage qui se chevauche lui-même (la 1re réplique s'arrête où commence la suivante)."""
     reps = sk.get("repliques") or []
-    ordre = all(float(a["_deb"]) <= float(b["_deb"]) + 1e-3 for a, b in zip(reps, reps[1:]))
-    B.note("monteur", "répliques dans l'ordre du son", ordre)
+    S_ = segs if segs is not None and len(segs) == len(reps) else None
+    def caler(k, deb=None, fin=None):
+        if deb is not None:
+            reps[k]["_deb"] = round(float(deb), 3)
+            if S_: S_[k]["deb"] = float(deb)
+        if fin is not None:
+            reps[k]["_fin"] = round(float(fin), 3)
+            if S_: S_[k]["fin"] = float(fin)
+    # 1) chaque mot dans sa réplique
+    mal = []
+    for k, r in enumerate(reps):
+        if S_ and S_[k].get("mots"):
+            a, b = min(float(m["s"]) for m in S_[k]["mots"]), max(float(m["e"]) for m in S_[k]["mots"])
+        elif r.get("_mots"):
+            a, b = float(r["_deb"]) + min(w[1] for w in r["_mots"]), float(r["_deb"]) + max(w[2] for w in r["_mots"])
+        else: continue
+        if a < float(r["_deb"]) - 0.05 or b > float(r["_fin"]) + 0.3:
+            mal.append(k); caler(k, deb=min(a, float(r["_deb"])), fin=max(b, float(r["_fin"])))
+    B.note("monteur", "chaque mot dans sa réplique (lèvres et sous-titres calés)", True, f"{len(mal)} réplique(s) élargie(s) autour de leurs mots" if mal else "")
+    # 2) durée et fin du son
     vides = [k for k, r in enumerate(reps) if float(r["_fin"]) <= float(r["_deb"])]
-    for k in vides: reps[k]["_fin"] = round(float(reps[k]["_deb"]) + 0.25, 3)
-    B.note("monteur", "chaque réplique a une durée", not vides, f"{len(vides)} corrigée(s)" if vides else "")
-    chev = [k for k in range(1, len(reps)) if reps[k]["p"] == reps[k - 1]["p"] and float(reps[k]["_deb"]) < float(reps[k - 1]["_fin"]) - 0.05]
-    B.note("monteur", "un personnage ne parle jamais deux fois en même temps", not chev, f"répliques {chev[:6]}" if chev else "", revoir=True)
+    for k in vides: caler(k, fin=float(reps[k]["_deb"]) + 0.25)
+    B.note("monteur", "chaque réplique a une durée", True, f"{len(vides)} corrigée(s)" if vides else "")
     hors = [k for k, r in enumerate(reps) if duree and float(r["_fin"]) > duree + 0.5]
-    B.note("monteur", "rien après la fin du son", not hors, f"{len(hors)} réplique(s)" if hors else "")
-    mal = [k for k, r in enumerate(reps) for w in (r.get("_mots") or []) if w[1] < -0.05 or w[2] > float(r["_fin"]) - float(r["_deb"]) + 0.3][:6]
-    B.note("monteur", "chaque mot dans sa réplique (lèvres et sous-titres calés)", not mal, f"répliques {sorted(set(mal))}" if mal else "")
+    for k in hors: caler(k, fin=max(float(reps[k]["_deb"]) + 0.2, float(duree)))
+    B.note("monteur", "rien après la fin du son", True, f"{len(hors)} réplique(s) raccourcie(s)" if hors else "")
+    # 3) ordre du son
+    ordre = sorted(range(len(reps)), key=lambda k: (float(reps[k]["_deb"]), k))
+    if ordre != list(range(len(reps))):
+        chute = any(r.get("chute") for r in reps)
+        nouveau = {old: new for new, old in enumerate(ordre)}
+        reps[:] = [reps[k] for k in ordre]
+        if S_: S_[:] = [S_[k] for k in ordre]
+        for r in reps: r.pop("chute", None)
+        if chute and reps: reps[-1]["chute"] = True
+        for sc in sk.get("decoupage") or []:
+            sc["repliques"] = sorted(nouveau[i] for i in sc.get("repliques") or [] if i in nouveau)
+        n_dep = sum(1 for k, o in enumerate(ordre) if k != o)
+        B.note("monteur", "répliques dans l'ordre du son", True, f"{n_dep} réplique(s) remise(s) à leur place")
+    else: B.note("monteur", "répliques dans l'ordre du son", True)
+    # 4) un personnage ne parle jamais deux fois en même temps
+    chev, reste = [], []
+    for k in range(1, len(reps)):
+        p_ = next((j for j in range(k - 1, -1, -1) if reps[j]["p"] == reps[k]["p"]), None)
+        if p_ is None or float(reps[k]["_deb"]) >= float(reps[p_]["_fin"]) - 0.05: continue
+        if float(reps[k]["_deb"]) - 0.02 - float(reps[p_]["_deb"]) >= 0.15: chev.append(k); caler(p_, fin=float(reps[k]["_deb"]) - 0.02)
+        else: reste.append(k)
+    B.note("monteur", "un personnage ne parle jamais deux fois en même temps", not reste,
+           (f"{len(chev)} corrigé(s)" if chev else "") + (f" ; répliques {reste[:6]} à revoir" if reste else ""), revoir=True)
     return sk
 
 
-def deux_transcriptions(mots, autre, B):
+def deux_transcriptions(mots, autre, B, troisieme=None):
     """Ingé son : le même son transcrit par deux outils (Groq et le Whisper de la machine). Là où ils entendent un mot différent, l'IA
     choisit d'après le sens de la phrase (sinon on garde le premier) ; les instants des mots ne changent pas. Taux d'accord noté."""
     import difflib
@@ -138,14 +179,33 @@ def deux_transcriptions(mots, autre, B):
     doutes = []                                                            # (indices dans mots, mots de l'autre transcription)
     for op, i1, i2, j1, j2 in sm.get_opcodes():
         if op == "replace" and i2 - i1 == j2 - j1 and i2 - i1 <= 4: doutes.append((list(range(i1, i2)), [autre[j]["w"] for j in range(j1, j2)]))
-    choix = _arbitrer(mots, doutes) if doutes else {}
+    choix, votes = {}, 0
+    if doutes and troisieme:                                               # 3e écoute : la majorité tranche, l'IA seulement pour le reste
+        try: c = troisieme() or []
+        except Exception: c = []
+        if c:
+            cw = [nu(m["w"]) for m in c]; vu = {}
+            for op, i1, i2, j1, j2 in difflib.SequenceMatcher(None, a, cw, autojunk=False).get_opcodes():
+                if op == "equal" or (op == "replace" and i2 - i1 == j2 - j1):
+                    for i, j in zip(range(i1, i2), range(j1, j2)): vu[i] = cw[j]
+            for k, (idx, alt) in enumerate(doutes):
+                if not all(i in vu for i in idx): continue
+                trois = [vu[i] for i in idx]
+                if trois == [nu(w) for w in alt]: choix[k] = "B"; votes += 1
+                elif trois == [a[i] for i in idx]: choix[k] = "A"; votes += 1
+    reste = [k for k in range(len(doutes)) if k not in choix]
+    if reste:
+        ia = _arbitrer(mots, [doutes[k] for k in reste])
+        for n_, k in enumerate(reste):
+            if n_ in ia: choix[k] = ia[n_]
     for k, (idx, alt) in enumerate(doutes):
         if choix.get(k) == "B":
             for i, w in zip(idx, alt):                                     # le mot de B, avec la ponctuation de A
                 fin = re.search(r"[.,!?…;:]*$", mots[i]["w"]).group()
                 mots[i] = dict(mots[i], w=re.sub(r"[.,!?…;:]+$", "", w.strip()) + fin)
     B.note("ingé son", "deux transcriptions d'accord", accord >= 0.85,
-           f"{round(100 * accord)} % de mots identiques, {len(doutes)} doute(s), {sum(1 for v in choix.values() if v == 'B')} corrigé(s)")
+           f"{round(100 * accord)} % de mots identiques, {len(doutes)} doute(s)" + (f", {votes} tranché(s) par une 3e écoute" if votes else "")
+           + f", {sum(1 for v in choix.values() if v == 'B')} corrigé(s)")
     return mots
 
 
