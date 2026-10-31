@@ -233,6 +233,9 @@ input,textarea{flex:1;min-width:0;font:inherit;font-size:15px;padding:11px;borde
 .cal{display:flex;align-items:center;gap:8px;padding:8px;border:1px solid var(--ligne);border-radius:12px;margin:6px 0;background:transparent}
 .cal.glisse{opacity:.5}.cal .j{flex:none;width:92px;font-weight:700;font-size:13px}.cal .t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px}
 .cal button{flex:none;padding:4px 9px;border-radius:8px;border:1px solid var(--ligne);background:transparent;color:inherit;cursor:pointer}
+.quotaIA{margin:10px 0;font-size:14px;line-height:1.5}.quotaIA:empty{display:none}.quotaIA .t{font-weight:700;margin-bottom:4px}
+.quotaIA>div:not(.t){display:flex;gap:8px;align-items:center;flex-wrap:wrap;overflow-wrap:anywhere}.quotaIA .point{display:inline-block;width:10px;height:10px}
+.quotaIA .avert{color:var(--rouge);font-weight:700;margin-top:4px}
 .averif{margin-top:8px;font-size:13px;max-width:100%}.averif summary{cursor:pointer;font-weight:700;color:#e8590c}.averif ul{margin:6px 0 0;padding-left:18px}.averif li{margin:3px 0;overflow-wrap:anywhere}
 .pulse{animation:pulse 1.2s ease-in-out 4}@keyframes pulse{50%{transform:scale(1.04);box-shadow:0 0 0 6px rgba(255,208,40,.35)}}
 label.coche{display:flex;align-items:center;gap:10px;padding:8px 0;font-size:16px}label.coche input{width:22px;height:22px;flex:none;margin:0}
@@ -398,6 +401,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <div class="jeton" style="align-items:center"><button class="action" id="tkSerie" style="margin:0">🎲 Plusieurs vidéos à la chaîne</button>
       <input id="tkNb" type="number" min="1" max="10" value="3" inputmode="numeric" aria-label="Nombre de vidéos à la chaîne" style="flex:none;width:72px;text-align:center;font-size:17px;font-weight:700"></div>
     <p class="note">Choisissez le nombre (1 à 10) puis touchez le bouton : le robot fabrique ces vidéos l'une après l'autre, chacune sur un son différent pris au hasard dans vos profils. Inutile d'attendre la fin d'une vidéo.</p>
+    <div id="tkIA" class="quotaIA"></div>
     <div id="tkSuiviS" class="note"></div></section>
   <section class="panneau"><h2>⏰ Vidéos TikTok automatiques</h2>
     <p class="note">Planning à part : il ne touche jamais au planning des sketchs.</p>
@@ -439,7 +443,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
   <details class="groupe" open><summary>💳 Crédits et outils <span id="resumeOutils"></span></summary>
     <p class="note" id="outilsDate"></p>
     <div id="voyants"></div>
-    <button class="action" id="verifCredits">🔍 Vérifier maintenant (Claude, Mistral, Gemini, ElevenLabs, Modal)</button>
+    <button class="action" id="verifCredits">🔍 Vérifier maintenant (Claude, Mistral, Gemini, Groq, ElevenLabs, Modal)</button>
     <p class="note" id="suiviCredits"></p>
     <div class="auto"><div class="txt"><b>💰 Mode économique</b><small>Garde Claude, ElevenLabs et les décors IA, mais dépense environ 3 à 5 fois moins de crédit Claude : Sonnet au lieu d'Opus, 1 premier jet, 2 réécritures au plus, sans public test ni tendances.</small></div><button class="inter" data-var="MODE_ECO" data-def="0" data-bascule="1"></button></div>
     <div class="auto"><div class="txt"><b>Voix ElevenLabs</b><small>Voix réalistes (rires, colère). Coupé : voix gratuites.</small></div><button class="inter" data-var="ELEVENLABS" data-def="1" data-bascule="1"></button></div>
@@ -672,13 +676,13 @@ $("#inter").onclick=async()=>{
 };
 $("#oublier").onclick=()=>{ecrireJeton(""); auto=null; afficherAuto(); majBoutons(); majBandeau(); chargerReglages(); toast("Régie déconnectée")};
 // ------------------------------------------------ voyants des outils payants (d'après la dernière vidéo de l'historique)
-const RECHARGE={claude:"https://console.anthropic.com/settings/billing",mistral:"https://console.mistral.ai/usage",gemini:"https://aistudio.google.com/rate-limit",
+const RECHARGE={claude:"https://console.anthropic.com/settings/billing",mistral:"https://console.mistral.ai/usage",gemini:"https://aistudio.google.com/rate-limit",groq:"https://console.groq.com/settings/limits",
   voix:"https://elevenlabs.io/app/subscription",decors:"https://modal.com/settings/usage"};
 let CRED=null;                                                             // contrôle en direct (episodes/credits.json : bouton « Vérifier maintenant » et chaque vidéo)
 const ETATS={ok:["vert","OK"],epuise:["rouge","quota ou crédit épuisé"],cle:["rouge","clé refusée"],erreur:["rouge","ne répond pas"],limite:["orange","limite par minute atteinte (compte à vérifier)"],absent:["gris","pas de clé"],secours:["rouge","crédit épuisé"]};
 function voyantsDirect(){
   const c=CRED, e=(k,nom,quoi)=>{const x=ETATS[c[k]]||["gris","pas encore vérifié"]; return [k,x[0],`${nom} : ${x[1]}${quoi&&c[k]==="ok"?" — "+quoi:""}`]};
-  const l=[e("claude","Claude","écriture et doublage"),e("mistral","Mistral (gratuit)","relais de Claude pour l'écriture"),e("gemini","Gemini (gratuit)","relais de Claude pour les images et le contrôle")];
+  const l=[e("claude","Claude","écriture et doublage"),e("mistral","Mistral (gratuit)","relais de Claude pour l'écriture"),e("gemini","Gemini (gratuit)","relais de Claude pour les images et le contrôle"),e("groq","Groq (gratuit)","écoute des voix et relecture du dialogue")];
   const v=c.elevenlabs; l.push(["voix",(ETATS[v]||["gris"])[0],"ElevenLabs : "+((ETATS[v]||[0,"pas encore vérifié"])[1])+(v==="epuise"?", le robot utilise les voix gratuites":"")]);
   const m=c.modal; l.push(["decors",(ETATS[m]||["gris"])[0],"Modal : "+((ETATS[m]||[0,"pas encore vérifié"])[1])+(m==="ok"?" (décors IA)":"")]);
   if(c.ia==="aucune") l.unshift(["claude","rouge","Aucune IA ne répond : le robot utilise les sketchs de secours"]);
@@ -703,7 +707,7 @@ function voyants(){
 }
 function rendreOutils(){
   const l=voyants();
-  $("#voyants").innerHTML=l.map(([k,coul,t])=>`<div class="voyant"><span class="point ${coul}"></span><span class="t">${t}</span><a href="${RECHARGE[k]}" target="_blank" rel="noopener">${k==="mistral"||k==="gemini"?"Quotas ↗":"Recharger ↗"}</a></div>`).join("");
+  $("#voyants").innerHTML=l.map(([k,coul,t])=>`<div class="voyant"><span class="point ${coul}"></span><span class="t">${t}</span><a href="${RECHARGE[k]}" target="_blank" rel="noopener">${k==="mistral"||k==="gemini"||k==="groq"?"Quotas ↗":"Recharger ↗"}</a></div>`).join("");
   $("#outilsDate").textContent=CRED&&CRED.date?"Vérifié le "+new Date(CRED.date).toLocaleString("fr-FR",{dateStyle:"short",timeStyle:"short"})+".":
     OUTILS&&OUTILS.outils&&OUTILS.date?"D'après la dernière vidéo ("+dateFr(OUTILS.date)+").":"Les voyants s'allument après la prochaine vidéo.";
   const rouges=l.filter(x=>x[1]==="rouge");
@@ -737,7 +741,7 @@ async function actualiserStats(){
   if(!CONF.depot) return;
   try{
     const [h,st,cr]=await Promise.all([lireEpisode("historique.json").catch(()=>null),lireEpisode("stats.json").catch(()=>null),lireEpisode("credits.json").catch(()=>null)]);
-    if(cr&&cr.date){CRED=cr; rendreOutils()}
+    if(cr&&cr.date){CRED=cr; rendreOutils(); rendreQuotaIA()}
     if(Array.isArray(h)){const par={}; h.forEach(e=>{if(e.fichier)par[e.fichier]=e});
       try{const K=["fichier","titre","date","tag","web","filiere","source_audio","theme","manuel","legende","publie","vues","format","avis","note","note_auteur","programmee","duree","likes","commentaires","partages","a_verifier","confiance"];
         localStorage.setItem("jt_historique",JSON.stringify(h.filter(e=>e.fichier).map(e=>Object.fromEntries(K.filter(k=>e[k]!==undefined).map(k=>[k,e[k]])))))}catch(e){}   // copie légère pour la prochaine ouverture
@@ -883,9 +887,30 @@ function initFiltres(){
   [["#fTexte","texte"],["#fEtat","etat"],["#fProfil","profil"],["#fDate","date"],["#fTri","tri"]].forEach(([s_,k])=>{const e=$(s_); if(e.value!==(FTK[k]||"")) e.value=FTK[k]||"";
     e.oninput=e.onchange=()=>{FTK[k]=e.value; garderFiltres(); rendreTk()}});
 }
+// IA gratuites aujourd'hui (choix de l'auteur) : appels des vidéos du jour, IA épuisées, ce qu'il reste quand l'IA le dit (Groq, Mistral)
+function rendreQuotaIA(){
+  const z=$("#tkIA"); if(!z) return;
+  const auj=new Date().toLocaleDateString("sv-SE",{timeZone:"Europe/Paris"}), du=DATA.filter(v=>quand(v).slice(0,10)===auj&&v.outils);
+  const appels={}, ep=new Set(); let q={};
+  du.forEach(v=>{const o=v.outils; Object.entries(o.appels||{}).forEach(([k,n])=>appels[k]=(appels[k]||0)+(+n||0)); (o.epuisees||[]).forEach(k=>ep.add(k))});
+  const der=du.slice().sort((a,b)=>quand(b).localeCompare(quand(a)))[0];
+  if(der&&der.outils.quota) q=der.outils.quota;
+  if(CRED&&CRED.quota&&CRED.date&&(!der||new Date(CRED.date)>=new Date(quand(der).replace(" ","T")))) q=CRED.quota;
+  const credAuj=k=>CRED&&CRED.date&&new Date(CRED.date).toLocaleDateString("sv-SE",{timeZone:"Europe/Paris"})===auj&&(CRED[k]==="epuise"||CRED[k]==="cle");
+  const nb=Math.max(1,du.length), lig=[["gemini","Gemini","regarde les images","repart vers 9 h"],["mistral","Mistral","écrit et relit","repart chaque minute"],["groq","Groq","relit le dialogue","repart dans la journée"]].map(([k,nom,role,rep])=>{
+    if(CRED&&CRED[k]==="absent") return `<div><span class="point gris"></span><b>${nom}</b> : pas de clé</div>`;
+    const vide=ep.has(k)||credAuj(k), Q=q[k]||{}, n=appels[k]||0;
+    let reste=""; if(Q.reste_jour!=null){const parVid=n/nb; reste=` · reste ${Q.reste_jour}${Q.limite_jour?"/"+Q.limite_jour:""} demandes aujourd'hui`+(parVid>0?` (≈ ${Math.floor(Q.reste_jour/parVid)} vidéo(s))`:"")}
+    else if(Q.jetons_mois!=null) reste=` · reste ${Math.round(Q.jetons_mois/1000)} k jetons ce mois`;
+    const coul=vide?"rouge":(Q.reste_jour!=null&&Q.limite_jour&&Q.reste_jour<Q.limite_jour*0.15)?"orange":"vert";
+    return `<div><span class="point ${coul}"></span><b>${nom}</b> (${role}) : ${vide?"épuisé aujourd'hui, "+rep:n+" appel(s) aujourd'hui"}${reste}</div>`});
+  const tous=["gemini","mistral","groq"].every(k=>ep.has(k)||credAuj(k)||(CRED&&CRED[k]==="absent"));
+  z.innerHTML=`<div class="t">🤖 IA gratuites aujourd'hui${du.length?" ("+du.length+" vidéo"+(du.length>1?"s":"")+")":""}</div>`+lig.join("")
+    +(tous?'<div class="avert">Toutes les IA gratuites sont à court : les prochaines vidéos partiront en mode simple (sans mise en scène).</div>':"");
+}
 function rendreTk(){                                                       // onglet TikTok : ses vidéos à lui
   const L=$("#listeTk"); L.innerHTML="";
-  initFiltres();
+  initFiltres(); rendreQuotaIA();
   const tout=DATA.map((v,i)=>[v,i]).filter(([v])=>v.origine==="tiktok"&&!v.essai).sort(recentsDabord), vis=filtrerTk(tout);
   if(!tout.length){L.innerHTML='<p class="vide">Aucune vidéo sur un son TikTok pour l\'instant.</p>';resumePubli();return}
   if(!vis.length){L.innerHTML='<p class="vide">Aucune vidéo ne correspond à la recherche.</p>';resumePubli();return}

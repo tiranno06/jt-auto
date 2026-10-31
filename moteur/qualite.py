@@ -33,6 +33,32 @@ def _mots(t): return re.findall(r"[\wÀ-ÿ'-]+", t or "")
 
 
 # ------------------------------------------------------------------ jury gratuit : règles sur le montage réel
+HORS_LARGE = {"chute_sans_zoom", "montage_lent", "parle_hors_champ", "plans_courts", "plans_repetes", "peu_de_reactions", "camera_monotone"}
+LARGE_TXT = r"(zoom|gros plan|plans? (serr|de r[ée]action|large|fixe)|changements? de plan|rythme des plans|montage (trop )?(lent|statique|plat)|" \
+            r"cam[ée]ra|travelling|cadrage|recadr|coupes?\b|plus de plans|un seul plan|statique)"
+CONSIGNE_LARGE = """
+MONTAGE VOULU PAR L'AUTEUR : un seul plan large et FIXE par scène (personnages toujours à l'image, aucun zoom, aucun mouvement de caméra,
+aucune coupe). Ne reproche JAMAIS le rythme des plans, l'absence de zoom, de gros plan, de plan de réaction ou de mouvement de caméra,
+et ne propose aucune correction « plan » : juge le reste (jeu, vannes, son, personnages, décors, image)."""
+
+
+def plan_large():
+    return (os.environ.get("MONTAGE") or "large") == "large"
+
+
+def sans_reproches_large(jury):
+    """Mode « plan large » : retire des avis de l'IA les remarques sur les plans / zooms / caméra (choix de l'auteur) ; chaque remarque
+    retirée rend 0,8 point au critique qui l'avait faite."""
+    if not plan_large(): return 0
+    n = 0
+    for k, v in jury.items():
+        garde = [r_ for r_ in v["remarques"] if not (re.search(LARGE_TXT, str(r_.get("probleme", "")).lower())
+                                                     or (isinstance(r_.get("correction"), dict) and r_["correction"].get("type") == "plan"))]
+        retire = len(v["remarques"]) - len(garde)
+        if retire: v["remarques"] = garde; v["note"] = round(min(10.0, v["note"] + 0.8 * retire), 1); n += retire
+    return n
+
+
 def jury_gratuit(R, sk, rapport_tech=""):
     """R = cartoon.RENDU (répliques minutées, plans, fiches, bruitages…). Renvoie {critique: {"note", "remarques"}}."""
     import studio, decor_dessin as DD
@@ -157,6 +183,7 @@ def jury_gratuit(R, sk, rapport_tech=""):
         if len(q["texte"]) / d_ > 24: rq.append(_rq("spectateur", q["deb"], "sous-titres trop rapides à lire", None, 0.5, "sous_titres_rapides")); break
     if mini and total > 30: rq.append(_rq("spectateur", None, f"{total:.0f} s pour un gag éclair : trop long", None, 0.8, "trop_long"))
     if not mini and not doub and total < 40: rq.append(_rq("spectateur", None, f"{total:.0f} s pour un sketch long : trop court", None, 0.5, "trop_court"))
+    if plan_large(): rq = [x for x in rq if x["categorie"] not in HORS_LARGE]   # montage « plan large » voulu par l'auteur : jamais reproché
     jury = {}
     for c in CRITIQUES:
         l = sorted([x for x in rq if x["critique"] == c], key=lambda x: -x["poids"])
@@ -231,7 +258,7 @@ def jury_claude(video, R, sk, gratuit):
         gr = "; ".join(f"{NOMS[c]} : {x['probleme']}" for c in CRITIQUES for x in gratuit[c]["remarques"])[:1500] or "aucune"
         contenu.append({"type": "text", "text": PROMPT.format(origine=origine, texte=texte, mesures=mesures, gratuit=gr, consigne_origine=consigne_o, auteur="",
                                                               plans=", ".join(studio.PLANS), mouvements=", ".join(studio.MOUVEMENTS), reactions=", ".join(studio.REACTIONS),
-                                                              sons=", ".join(bruitages.CATALOGUE), lieux=", ".join(DD.LIEUX)) + regles_apprises()})
+                                                              sons=", ".join(bruitages.CATALOGUE), lieux=", ".join(DD.LIEUX)) + (CONSIGNE_LARGE if plan_large() else "") + regles_apprises()})
         r = __import__("reseau").claude().messages.create(model=MODELE, max_tokens=4000, tools=[OUTIL], tool_choice={"type": "tool", "name": "jury"},
                                                          messages=[{"role": "user", "content": contenu}])
         res = next((b.input for b in r.content if getattr(b, "type", "") == "tool_use"), None)
@@ -262,12 +289,15 @@ def evaluer(video, R, sk, rapport_tech=""):
                 jury[x["critique"]] = {"note": round(min(10.0, max(0.0, note)), 1), "remarques": rem}
         for k in CRITIQUES:                                                # un critique oublié par Claude : l'avis gratuit
             jury.setdefault(k, g[k])
+        n_ = sans_reproches_large(jury)
+        if n_: print(f"Jury : {n_} remarque(s) sur les plans / zooms retirée(s) (montage « plan large » voulu)", flush=True)
         for k in CRITIQUES:                                                # les corrections sûres des règles gratuites restent proposées
             deja = {json.dumps(r_.get("correction"), sort_keys=True) for r_ in jury[k]["remarques"]}
             for r_ in g[k]["remarques"]:
                 if r_.get("correction") and r_["poids"] >= 1.2 and json.dumps(r_["correction"], sort_keys=True) not in deja: jury[k]["remarques"].append(r_)
         graves = [d for d in c.get("defauts") or [] if isinstance(d, dict) and "grave" in str(d.get("gravite", "")).lower()]
-        manques = [str(m)[:160] for m in (c.get("manques_origine") or []) if not re.search(r"rires? (enregistr|du public|en bo[iî]te)|laugh", str(m).lower())][:8]   # jamais de rires enregistrés
+        manques = [str(m)[:160] for m in (c.get("manques_origine") or []) if not re.search(r"rires? (enregistr|du public|en bo[iî]te)|laugh", str(m).lower())
+                   and not (plan_large() and re.search(LARGE_TXT, str(m).lower()))][:8]   # jamais de rires enregistrés ; plan large voulu
     P = poids_critiques()
     note = round(sum(jury[k]["note"] * P.get(k, 1.0) for k in CRITIQUES) / sum(P.get(k, 1.0) for k in CRITIQUES), 1)
     corrections = [r_["correction"] for k in CRITIQUES for r_ in jury[k]["remarques"] if isinstance(r_.get("correction"), dict) and r_["correction"].get("type") in TYPES]

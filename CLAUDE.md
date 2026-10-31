@@ -253,6 +253,22 @@
   vidéo archivée à 0) ; l'IA de contrôle ne juge plus les sous-titres (vérifiés à l'oreille) ; fin d'une réplique = fin de son mot le
   plus tardif (`doublage.segments`). Mise en scène par l'IA gratuite : JSON lu aussi dans le texte (`ecrire._appel`), 2e essai sans les images
   (`doublage`) avant de retomber sur « une seule scène, casting par la hauteur des voix ».
+  **Liste du 31 octobre au soir (choix de l'auteur 1, 3, 4, 5, 6, 7, 9, 11, 12, 16)** : jury jamais contre le montage « plan large »
+  (`qualite.HORS_LARGE`, `sans_reproches_large` : remarques sur plans / zooms / caméra retirées, +0,8 point chacune ; consigne à l'IA) ;
+  titre jamais coupé au milieu (`ecrire.titre_net`) ; lieu quand l'IA n'a pas fait la mise en scène : regardé sur 2 images de l'original
+  par l'IA, sinon d'après les mots (2 indices au moins : `doublage.lieu_vu`, `decor_dessin.scores_lieux` ; animal de compagnie = salon ;
+  LIEU_VU=0) ; le monteur CORRIGE (réplique élargie autour de ses mots, ordre du son avec découpage renuméroté, fin du son, un
+  personnage qui se chevauche : `equipe.monteur(sk, duree, B, segs)`, avant le calcul des voix) ; 3e écoute (Whisper large-v3 de Groq)
+  qui départage les deux transcriptions à la majorité, l'IA seulement pour le reste ; silence du début retiré (`doublage.debut_parole`
+  sur la voix isolée, > 0,8 s : son, voix et vidéo d'origine coupés au même instant, `couper_debut`, sk["doublage"]["debut"] repris par
+  « Corriger qui parle » ; DEBUT_COURT=0) ; IA gratuites : Groq = 3e IA (llama-3.3-70b…, vision llama-4), ordre texte Mistral → Groq →
+  Gemini (quota de Gemini gardé pour les images), logique d'un dialogue Groq → Gemini → Mistral, quotas du jour lus dans les en-têtes
+  (`reseau.QUOTA`, historique outils "appels" / "epuisees" / "quota") ; **voyant « 🤖 IA gratuites aujourd'hui »** sous le bouton de la
+  chaîne (onglet TikTok, `rendreQuotaIA`) ; bouches corrigées : réplique où un autre bouge plus que celui qui parle (`verif_finale.synchro`
+  → "i") redessinée avec celui qui écoute calme (`_calme` → ph "calme" dans `cartoon.pose`, redessin partiel, gardée seulement si
+  mieux ; BOUCHES_CORRIGEES=0) ; **animaux et objets qui parlent** (`moteur/animaux.py`, style croquis : chat, chien, steak, pizza, œuf,
+  banane, objet quelconque ; même visage et bouche que nos personnages ; fiche "espece" de l'IA ou `animaux.qui_est` d'après le dialogue :
+  « je suis un chat » = lui, « mon chat, t'es… », « sale chien » = l'autre ; plus petits ; ESPECES=0).
   **Tirage au hasard des sons TikTok** : le robot préfère les vidéos aux voix bien différentes (ressemblance ≤ 0,6, réglage
   VOIX_DIFFERENTES ; 1 = sans tri) : jusqu'à 6 vidéos écoutées (25 min au plus), sinon celle aux voix les plus nettes. Un lien collé
   à la main n'est jamais refusé (le contrôle questions-réponses s'en charge).

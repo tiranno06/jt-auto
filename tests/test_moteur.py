@@ -1084,9 +1084,21 @@ class TestVoixEtScenesTiktok(unittest.TestCase):
                             {"p": "presentateur", "t": "Oui.", "_deb": 0.5, "_fin": 0.5, "_mots": []}], "doublage": {}}
         B = equipe.Bulletin(); equipe.monteur(sk, 2.0, B); equipe.scripte(sk, [{"voix": "speaker_0", "t": "Tu viens ? Oui.", "mots": []}], {}, B)
         ko = {l["controle"] for l in B.lignes if not l["ok"]}
-        self.assertIn("chaque réplique a une durée", ko); self.assertIn("une réplique = une seule personne", ko)
+        self.assertNotIn("chaque réplique a une durée", ko); self.assertIn("une réplique = une seule personne", ko)   # le monteur corrige
         self.assertNotIn("objet", sk["repliques"][0])                     # téléphone sans raison : retiré
         self.assertGreater(sk["repliques"][1]["_fin"], sk["repliques"][1]["_deb"])
+        self.assertLessEqual(sk["repliques"][0]["_fin"], sk["repliques"][1]["_deb"])   # il ne se chevauche plus lui-même
+
+    def test_monteur_corrige_ordre_et_mots(self):
+        import equipe
+        segs = [{"deb": 2.0, "fin": 3.0, "mots": [{"w": "b", "s": 1.8, "e": 3.4}]}, {"deb": 0.0, "fin": 1.0, "mots": [{"w": "a", "s": 0.0, "e": 0.9}]}]
+        sk = {"repliques": [{"p": "invite", "t": "b", "_deb": 2.0, "_fin": 3.0, "chute": True}, {"p": "presentateur", "t": "a", "_deb": 0.0, "_fin": 1.0}],
+              "decoupage": [{"repliques": [0, 1]}]}
+        B = equipe.Bulletin(); equipe.monteur(sk, 10.0, B, segs)
+        self.assertEqual([r["t"] for r in sk["repliques"]], ["a", "b"]); self.assertEqual([s["mots"][0]["w"] for s in segs], ["a", "b"])
+        self.assertTrue(sk["repliques"][-1].get("chute")); self.assertNotIn("chute", sk["repliques"][0])
+        self.assertAlmostEqual(sk["repliques"][1]["_deb"], 1.8); self.assertAlmostEqual(segs[1]["fin"], 3.4)   # la réplique couvre ses mots
+        self.assertTrue(all(l["ok"] for l in B.lignes))
 
     def test_verif_finale_synchro_et_technique(self):
         import numpy as np, verif_finale as V
@@ -1853,3 +1865,91 @@ class TestListeCroquis(unittest.TestCase):
         p = dict(M.pose_neutre(), assis=True, emo="gene", t=1.0)
         self.assertEqual(P._fx(p, "honteux").get("micro"), "mord")
         P.dessiner(img, F, HU._pose(F, p)); self.assertTrue((img != 200).any())
+
+
+class TestListe31Soir(unittest.TestCase):
+    """Choix de l'auteur du 31 octobre au soir : 1, 3, 4, 5, 6, 7, 9, 11, 12, 16."""
+    def setUp(self): sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "moteur"))
+
+    def test_jury_plan_large(self):
+        import qualite
+        jury = {"realisateur": {"note": 6.0, "remarques": [{"probleme": "montage trop lent : il faut plus de plans", "correction": None},
+                                                             {"probleme": "le personnage est coupé", "correction": None}]},
+                "humoriste": {"note": 7.0, "remarques": [{"probleme": "la chute mérite un zoom choc", "correction": {"type": "plan"}}]}}
+        anc = os.environ.pop("MONTAGE", None)
+        try:
+            self.assertEqual(qualite.sans_reproches_large(jury), 2)
+            self.assertEqual(len(jury["realisateur"]["remarques"]), 1); self.assertEqual(jury["realisateur"]["note"], 6.8)
+            os.environ["MONTAGE"] = "dynamique"; self.assertEqual(qualite.sans_reproches_large(jury), 0)
+        finally:
+            os.environ.pop("MONTAGE", None)
+            if anc is not None: os.environ["MONTAGE"] = anc
+
+    def test_titre_net(self):
+        self.assertEqual(ecrire.titre_net("Oh Maurice, mon chat t'es trop mignon, fais moi un bisou").upper(), "OH MAURICE")
+        self.assertEqual(ecrire.titre_net("Le retrait bancaire de 2026 est vraiment fou"), "Le retrait bancaire de 2026")
+        self.assertEqual(ecrire.titre_net("STEAK AU MICRO-ONDES"), "STEAK AU MICRO-ONDES")
+
+    def test_lieu_sans_ia(self):
+        import doublage, decor_dessin as DD
+        t = "Oh mon chat, j'dors là. Va manger ta pâtée pendant que je mange mes pâtes boulot."
+        self.assertEqual(doublage.lieu_vu([], t), "salon")
+        self.assertIsNone(doublage.lieu_vu([], "Il est 15h, vas-y calme, je mange mes pâtes boulot."))   # un seul mot : pas de lieu imposé
+        self.assertEqual(DD.scores_lieux("au bureau avec mon patron")[0]["bureau"], 2)
+
+    def test_trois_ecoutes(self):
+        import equipe, reseau
+        anc = reseau.ia_disponible; reseau.ia_disponible = lambda: False
+        try:
+            A = [{"w": w, "s": i, "e": i + 0.5} for i, w in enumerate("tu manges halal ou pas".split())]
+            B = equipe.Bulletin()
+            out = equipe.deux_transcriptions(A, [{"w": w} for w in "tu manges hallal ou pas".split()], B,
+                                             troisieme=lambda: [{"w": w} for w in "tu manges hallal ou pas".split()])
+        finally: reseau.ia_disponible = anc
+        self.assertEqual(out[2]["w"], "hallal"); self.assertIn("3e écoute", B.lignes[-1]["detail"])
+
+    def test_debut_parole(self):
+        import numpy as np, doublage
+        sr = doublage.SR; x = np.zeros(sr * 5, np.float32); a, b = int(1.6 * sr), int(3 * sr)
+        x[a:b] = 0.3 * np.sin(np.arange(b - a) / 5); x[int(0.3 * sr):int(0.33 * sr)] = 0.5   # un clic isolé ne compte pas
+        self.assertTrue(1.3 < doublage.debut_parole(x) < 1.7)
+
+    def test_ordre_des_ia(self):
+        import reseau
+        cles = {k: os.environ.get(k) for k in ("MISTRAL_API_KEY", "GEMINI_API_KEY", "GROQ_API_KEY", "CLAUDE_INDISPONIBLE")}
+        try:
+            for k in ("MISTRAL_API_KEY", "GEMINI_API_KEY", "GROQ_API_KEY"): os.environ[k] = "x"
+            os.environ["CLAUDE_INDISPONIBLE"] = "1"; reseau.HORS_SERVICE.clear(); reseau.EN_PAUSE.clear()
+            self.assertEqual(reseau.ordre_ia(), ["mistral", "groq", "gemini"])             # texte : Gemini gardé pour les images
+            self.assertEqual(reseau.ordre_ia(True)[0], "gemini")
+            self.assertEqual(reseau.ordre_ia(False, True)[0], "groq")
+            class H(dict):
+                def get(self, k, d=None): return dict.get(self, k, d)
+            reseau._noter_quota("groq", H({"x-ratelimit-remaining-requests": "900", "x-ratelimit-limit-requests": "1000"}))
+            self.assertEqual(reseau.QUOTA["groq"]["reste_jour"], 900)
+        finally:
+            for k, v in cles.items():
+                if v is None: os.environ.pop(k, None)
+                else: os.environ[k] = v
+
+    def test_animaux(self):
+        import numpy as np, animaux as AN, perso_croquis as PC, marionnette as M, humain as HU, croquis as C
+        sk = {"repliques": [{"p": "presentateur", "t": "Oh Maurice, mon chat t'es trop mignon."}, {"p": "invite", "t": "Eh, je suis un chat égyptien."},
+                            {"p": "presentateur", "t": "J'ai donné à manger à mon chat."}]}
+        self.assertEqual(AN.qui_est(sk), {"invite": "chat"})
+        self.assertEqual(AN.espece_valide("objet:steak"), "steak"); self.assertIsNone(AN.espece_valide("humain"))
+        for e in AN.ESPECES:
+            img = C.papier(400, 700); F = dict(HU.creer(1, genre="h", age=30), espece=e)
+            p = M.pose_neutre(); p.update(x=200, y=650, s=1.0, t=0.0, bouche=0.4, emo="joie")
+            tc, _ = PC.dessiner(img, F, p)
+            self.assertLess(float(img.mean()), float(C.papier(400, 700).mean()) - 0.5)   # quelque chose est dessiné
+            self.assertTrue(0 < tc[1] < 650)
+
+    def test_bouches_calmes(self):
+        src = open(os.path.join(os.path.dirname(__file__), "..", "moteur", "cartoon.py"), encoding="utf-8").read()
+        self.assertIn('{"calme": True} if r.get("_calme")', src); self.assertIn("not calme and prev", src)
+        self.assertIn("BOUCHES_CORRIGEES", open(os.path.join(os.path.dirname(__file__), "..", "moteur", "principal.py"), encoding="utf-8").read())
+
+    def test_voyant_ia_du_site(self):
+        src = open(os.path.join(os.path.dirname(__file__), "..", "moteur", "site.py"), encoding="utf-8").read()
+        self.assertIn('id="tkIA"', src); self.assertIn("function rendreQuotaIA", src)

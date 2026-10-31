@@ -157,6 +157,11 @@ def dessiner(img, F, p):
     cl = 1.0 if p.get("yeux") in ("fermes",) else float(p.get("paupiere") or 0.0) * 0.6
     peau = T.get("teint") or (tuple(p["peau"]) if p.get("peau") else None)   # zombie, extraterrestre, vampire : teint du costume
     if p.get("paleur"): peau = tuple(int(v * (1 - 0.15 * p["paleur"]) + 230 * 0.15 * p["paleur"]) for v in (peau or C.PEAU))
+    if F.get("espece"):                                                    # animal ou objet qui parle (moteur/animaux.py)
+        import animaux
+        animaux.dessiner(zone, F["espece"], g["x"] - x0, p["y"] - y0, dec(tc), R, [(dec(e_), dec(c_), dec(m_)) for e_, c_, m_ in g["bras"]],
+                         e, ouv if ouv > 0.04 else None, min(1.0, cl), _fx(p, e), int(F.get("age", 30)), F.get("c_poil"))
+        return tc, (R, R)
     meuble = p.get("meuble") or ("chaise" if p.get("assis") else None)    # chaise, canapé, lit (sous la couette), volant, comptoir
     if p.get("assis"):                                                     # siège vu de face, sous le personnage
         args_ = (zone, g["x"] - x0, p["y"] - y0, R, g["L_j"] * 0.55, g["l_tr"] * 2.6)

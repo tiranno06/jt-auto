@@ -495,6 +495,31 @@ def main():
                         if os.path.exists(base + "_v2.mp4"): os.remove(base + "_v2.mp4")
                         for k_, v_ in etat.items(): setattr(cartoon, k_, v_)
                         print("La version corrigée n'est pas meilleure : on garde la première.", flush=True); break
+                if DOUB and os.environ.get("BOUCHES_CORRIGEES", "1") != "0":   # bouches : pendant une réplique, c'est celui qui parle qui bouge
+                    etat3 = {k_: copy.copy(getattr(cartoon, k_)) for k_ in ("MINUTAGE", "PH", "BRUITAGES", "RENDU", "COUVERTURE", "COUVERTURE_MS")}
+                    try:
+                        import verif_finale
+                        d_s, _ = verif_finale.synchro(base + ".mp4", cartoon.RENDU)
+                        idx = sorted({d_["i"] for d_ in d_s if d_.get("i") is not None and d_["i"] < len(sk.get("repliques") or [])})
+                        if idx:
+                            sk3 = copy.deepcopy(sk)
+                            for i_ in idx: sk3["repliques"][i_]["_calme"] = True
+                            print(f"Bouches : {len(idx)} réplique(s) où un autre personnage bougeait plus que celui qui parle "
+                                  f"({', '.join(str(i_ + 1) for i_ in idx[:8])}) : redessinées (celui qui écoute reste calme)", flush=True)
+                            PR.etape(97, "Correction des bouches", forcer=True); cartoon.APRES_BLOC[0] = None   # (pas de point de reprise)
+                            d3 = cartoon.rendre(sk3, base + "_b.mp4", audios, mots=mots, decors=decors, mini=fmt == "mini",
+                                                reprise={"video": base + ".mp4", "rendu": copy.deepcopy(etat3["RENDU"])}, limite=limite_job())
+                            t3_ok, _r3 = controle.technique(base + "_b.mp4", d3, cartoon.MINUTAGE[-1][1] if cartoon.MINUTAGE else None)
+                            d_s2, _ = verif_finale.synchro(base + "_b.mp4", cartoon.RENDU)
+                            if t3_ok and len(d_s2) < len(d_s):
+                                os.replace(base + "_b.mp4", base + ".mp4"); sk.clear(); sk.update(sk3); duree = d3
+                                print(f"Bouches corrigées : {len(d_s)} → {len(d_s2)} réplique(s) à revoir", flush=True)
+                            else:
+                                raise RuntimeError(f"pas mieux ({len(d_s)} → {len(d_s2)})")
+                    except Exception as e:                                 # (même la limite de temps : on garde la vidéo telle quelle)
+                        if os.path.exists(base + "_b.mp4"): os.remove(base + "_b.mp4")
+                        for k_, v_ in etat3.items(): setattr(cartoon, k_, v_)
+                        print(f"Correction des bouches non gardée ({str(e)[:120]})", flush=True)
                 qualite.memoriser(Q, os.path.basename(base) + ".mp4", QUALITE["corrigees"])
             if not tech_ok: video_ok = False; rapport_video = (rapport_tech + " ; " + rapport_video).strip(" ;")
             B_ = sk.pop("_bible", None)
@@ -550,7 +575,10 @@ def main():
                            fichier=os.path.basename(base) + ".mp4", tag=f"emissions-{jour[:7]}", legende=legende, publie=None,
                            style_accroche=style_acc, couverture_ms=int((getattr(sys.modules.get("cartoon"), "COUVERTURE", None) or 2.5) * 1000),
                            outils=dict(claude=("secours" if SECOURS else CREDITS["claude"]), mistral=CREDITS.get("mistral", "absent"),
-                                       gemini=CREDITS.get("gemini", "absent"), ia=", ".join(f"{k} ×{v}" for k, v in __import__("reseau").UTILISES.items()) or "aucune",
+                                       gemini=CREDITS.get("gemini", "absent"), groq=CREDITS.get("groq", "absent"),
+                                       ia=", ".join(f"{k} ×{v}" for k, v in __import__("reseau").UTILISES.items()) or "aucune",
+                                       appels=dict(__import__("reseau").UTILISES), epuisees=sorted(__import__("reseau").HORS_SERVICE),
+                                       quota={k: dict(v) for k, v in __import__("reseau").QUOTA.items()},
                                        voix=("tiktok" if DOUB else "elevenlabs" if "eleven" in str(moteur).lower() else "chatterbox" if "chatterbox" in str(moteur).lower() else "piper"),
                                        decors=("ia" if decors else "dessines"), eco=ECO)))
     if QUALITE["Q"]:                                                       # fiche du jury : notes, remarques, corrections faites

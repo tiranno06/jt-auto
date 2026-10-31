@@ -325,6 +325,26 @@ def _json(texte):
 
 def _court(s, n): return str(s or "").strip()[:n]
 
+FAIBLES = {"de", "du", "des", "le", "la", "les", "l", "un", "une", "et", "ou", "a", "à", "au", "aux", "en", "pour", "par", "sur", "dans",
+           "avec", "sans", "mon", "ma", "mes", "ton", "ta", "tes", "son", "sa", "ses", "ce", "cette", "ces", "que", "qui", "trop", "très",
+           "tres", "plus", "si", "pas", "ne", "je", "tu", "il", "elle", "on", "t'es", "c'est", "j'ai", "t'as", "est", "es", "suis", "mais",
+           "d", "qu", "j", "t", "s", "c", "n", "m", "y", "vraiment", "super", "tellement", "aussi", "comme"}
+
+def titre_net(s, n=30):
+    """Titre court qui ne s'arrête jamais au milieu d'une idée (« OH MAURICE, MON CHAT T'ES TROP » -> « OH MAURICE ») : 1re phrase si elle
+    tient, sinon coupé sur une virgule, sinon sur un mot ; jamais terminé par un petit mot (de, mon, trop, t'es…)."""
+    t = re.sub(r"\s+", " ", str(s or "")).strip()
+    if len(t) <= n: return t.rstrip(" ,;:-")
+    phrase = re.split(r"(?<=[.!?…])\s", t)[0]
+    if len(phrase) <= n: return phrase.rstrip(" ,;:-")
+    mots = t[:n + 1].split(" ")
+    if len(t) > n and not t[n:n + 1].isspace(): mots = mots[:-1]           # dernier mot coupé : on l'enlève
+    cand = " ".join(mots)
+    if "," in cand and cand.rfind(",") >= 8: cand = cand[:cand.rfind(",")]  # une virgule : l'idée s'arrête là
+    m = cand.split(" ")
+    while len(m) > 1 and re.sub(r"[^\w'’]", "", m[-1].lower()).replace("’", "'") in FAIBLES: m.pop()
+    return " ".join(m).rstrip(" ,;:-'’") or t[:n]
+
 def _role(p, sk):
     """Rôle normalisé : accepte « Présentateur », « envoyée spéciale », le nom fictif de l'invité…"""
     x = unicodedata.normalize("NFKD", str(p or "").lower()).encode("ascii", "ignore").decode()
@@ -373,8 +393,8 @@ def valider(sk, liens, libre=False, minimum=None):
     except (TypeError, ValueError):
         pass
     look = sk.get("invite_look") if sk.get("invite_look") in LOOKS else LOOKS[0]
-    return {"titre": _court(sk.get("sujet"), 30).upper() or "L'ACTU", "sujet": _court(sk.get("sujet"), 30).upper() or "L'ACTU",
-            "ecran": _court(sk.get("ecran") or sk.get("sujet"), 14).upper(),
+    return {"titre": titre_net(sk.get("sujet"), 30).upper() or "L'ACTU", "sujet": titre_net(sk.get("sujet"), 30).upper() or "L'ACTU",
+            "ecran": titre_net(sk.get("ecran") or sk.get("sujet"), 14).upper(),
             "invite_nom": _court(sk.get("invite_nom"), 26) or "Hubert Rustine",
             "invite_role": _court(sk.get("invite_role"), 36) or "Expert (fictif)", "invite_look": look,
             "lieu_direct": _court(sk.get("lieu_direct"), 28) or "Assemblée",
@@ -684,7 +704,7 @@ def mettre_en_scene(texte):
     for m_ in mots:
         if len(sujet) + len(m_) + 1 > 30: break
         sujet = (sujet + " " + m_).strip()
-    brut = {"sujet": sujet or reps[0]["t"][:30], "repliques": [dict(r) for r in reps], "legende": reps[0]["t"][:120], "hashtags": ["humour", "pov", "sketch"],
+    brut = {"sujet": sujet or reps[0]["t"], "repliques": [dict(r) for r in reps], "legende": reps[0]["t"][:120], "hashtags": ["humour", "pov", "sketch"],
             "decoupage": [{"scene": "1", "repliques": list(range(len(reps))), "decor": "plain"}], "titre_accroche": ""}
     try:
         import anthropic

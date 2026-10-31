@@ -52,8 +52,9 @@ def demucs(tmp, delai=900):
 
 
 # ------------------------------------------------------------------ 31 : Groq (Whisper ultra-rapide, gratuit)
-def groq(chemin, langue="fr"):
-    """Mots [{"w", "s", "e", "voix"}] par Whisper large-v3-turbo chez Groq (clé gratuite GROQ_API_KEY) ; [] si impossible."""
+def groq(chemin, langue="fr", modele="whisper-large-v3-turbo"):
+    """Mots [{"w", "s", "e", "voix"}] par Whisper large-v3-turbo chez Groq (clé gratuite GROQ_API_KEY) ; [] si impossible.
+    modele="whisper-large-v3" : l'autre Whisper de Groq (3e écoute qui départage deux transcriptions)."""
     cle = os.environ.get("GROQ_API_KEY")
     if not cle: return []
     try:
@@ -61,7 +62,7 @@ def groq(chemin, langue="fr"):
         tmp = tempfile.mkdtemp(); mp3 = os.path.join(tmp, "son.mp3")            # 25 Mo au plus chez Groq : MP3 léger
         subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", chemin, "-ac", "1", "-ar", "16000", "-b:a", "64k", mp3], check=True)
         bord = uuid.uuid4().hex; corps = b""
-        for k, v in (("model", "whisper-large-v3-turbo"), ("language", langue), ("response_format", "verbose_json"),
+        for k, v in (("model", modele), ("language", langue), ("response_format", "verbose_json"),
                      ("timestamp_granularities[]", "word"), ("timestamp_granularities[]", "segment"), ("temperature", "0")):
             corps += f"--{bord}\r\nContent-Disposition: form-data; name=\"{k}\"\r\n\r\n{v}\r\n".encode()
         corps += (f"--{bord}\r\nContent-Disposition: form-data; name=\"file\"; filename=\"son.mp3\"\r\nContent-Type: audio/mpeg\r\n\r\n").encode() \
@@ -73,7 +74,7 @@ def groq(chemin, langue="fr"):
         mots = [{"w": str(x.get("word", "")).strip(), "s": float(x["start"]), "e": float(x["end"]), "voix": "speaker_0"}
                 for x in r.get("words") or [] if str(x.get("word", "")).strip()]
         mots = ponctuer(mots, r.get("segments") or [])
-        if mots: journal(f"  transcription Groq (Whisper, gratuit) : {len(mots)} mots")
+        if mots: journal(f"  transcription Groq ({'Whisper' if modele.endswith('turbo') else modele}, gratuit) : {len(mots)} mots")
         return mots
     except Exception as e:
         try: detail = e.read().decode("utf-8", "replace")[:200] if hasattr(e, "read") else ""

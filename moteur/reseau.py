@@ -34,8 +34,26 @@ FOURNISSEURS = {
     "gemini": dict(cle="GEMINI_API_KEY", url="https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
                    texte=("gemini-flash-lite-latest", "gemini-2.5-flash-lite", "gemini-flash-latest"),
                    images=("gemini-flash-latest", "gemini-2.5-flash", "gemini-flash-lite-latest")),
+    # Groq (clé gratuite GROQ_API_KEY, déjà utilisée pour Whisper) : 3e IA pour le texte, pour garder le quota de Gemini aux images
+    "groq": dict(cle="GROQ_API_KEY", url="https://api.groq.com/openai/v1/chat/completions",
+                 texte=("llama-3.3-70b-versatile", "openai/gpt-oss-120b", "llama-3.1-8b-instant"),
+                 images=("meta-llama/llama-4-scout-17b-16e-instruct", "meta-llama/llama-4-maverick-17b-128e-instruct")),
 }
+EPUISE = (" 401", " 403", "quota", "exhausted", "billing", "per day", "(tpd)", "(rpd)")   # fournisseur à court pour la journée
 HORS_SERVICE = set()                                                       # fournisseurs épuisés pendant cette fabrication
+QUOTA = {}                                                                 # ce qu'il reste chez chaque IA gratuite (en-têtes des réponses)
+
+
+def _noter_quota(fourn, h):
+    """Groq donne les demandes restantes du jour, Mistral les jetons restants du mois (en-têtes x-ratelimit-*) ; Gemini ne dit rien."""
+    try:
+        q = {}
+        for cle, nom in (("x-ratelimit-remaining-requests", "reste_jour"), ("x-ratelimit-limit-requests", "limite_jour"),
+                         ("x-ratelimit-remaining-tokens-month", "jetons_mois"), ("x-ratelimit-limit-tokens-month", "limite_jetons_mois")):
+            v = h.get(cle) if h is not None else None
+            if v not in (None, ""): q[nom] = int(float(v))
+        if q: QUOTA[fourn] = dict(QUOTA.get(fourn, {}), **q)
+    except Exception: pass
 UTILISES = {}                                                              # nombre d'appels réussis par fournisseur (fiche de la vidéo)
 
 
@@ -98,9 +116,10 @@ def _appel_openai(fourn, kw):
         for essai in range(4):
             _attendre(fourn)
             req = urllib.request.Request(F["url"], data=json.dumps(corps).encode(), method="POST",
-                                         headers={"Authorization": f"Bearer {cle}", "Content-Type": "application/json"})
+                                         headers={"Authorization": f"Bearer {cle}", "Content-Type": "application/json",
+                                                  "User-Agent": "petitsdramas-robot/1.0"})   # Groq refuse les appels sans nom (403)
             try:
-                d = json.loads(urllib.request.urlopen(req, timeout=240).read()); break
+                rep_ = urllib.request.urlopen(req, timeout=240); d = json.loads(rep_.read()); _noter_quota(fourn, rep_.headers); break
             except urllib.error.HTTPError as e:
                 derniere = e; corps_err = e.read()[:300].decode("utf-8", "ignore"); bas = corps_err.lower()
                 if e.code in (404, 400) and "model" in bas: d = "suivant"; break            # modèle inconnu : le suivant
@@ -108,7 +127,9 @@ def _appel_openai(fourn, kw):
                 if e.code == 429 and str(getattr(e, "headers", None) and e.headers.get("x-ratelimit-limit-req-minute")) == "0":
                     d = "suivant"; break                                                # modèle fermé à l'offre gratuite (0 / minute) : le suivant
                 if e.code == 403 and "tier" in bas: d = "suivant"; break                  # modèle réservé aux offres payantes : le suivant
-                if e.code == 429 and not any(m in bas for m in ("quota", "exhausted", "billing")):
+                if e.code == 429 and any(m in bas for m in ("per day", "(tpd)", "(rpd)")) and modele != modeles[-1]:
+                    d = "suivant"; break                                    # quota du jour de CE modèle (Groq) : le modèle suivant a le sien
+                if e.code == 429 and not any(m in bas for m in ("quota", "exhausted", "billing", "per day", "(tpd)", "(rpd)")):
                     if modele != modeles[-1]: d = "suivant"; break                     # limite à la minute : d'abord le modèle suivant
                     if essai < 2:                                                       # trop de demandes à la minute : on patiente
                         try: att = float(e.headers.get("Retry-After") or 0)
@@ -141,7 +162,7 @@ def _appel_openai(fourn, kw):
 
 _DERNIER = {}
 EN_PAUSE = {}                                                               # fournisseur limité à la minute : sauté jusqu'à cette heure
-PAUSE_MIN = {"mistral": 2.1, "gemini": 0.5}                                 # Mistral gratuit : ministral-14b = 30 demandes / minute
+PAUSE_MIN = {"mistral": 2.1, "gemini": 0.5, "groq": 2.1}                   # Mistral gratuit : ministral-14b = 30 demandes / minute ; Groq 30 / min
 
 
 def _attendre(fourn):
@@ -150,10 +171,12 @@ def _attendre(fourn):
     _DERNIER[fourn] = time.time()
 
 
-def ordre_ia(images=False):
-    """Ordre de passage : Claude (s'il a du crédit), puis Mistral et Gemini (Gemini d'abord pour regarder des images)."""
+def ordre_ia(images=False, raisonner=False):
+    """Ordre de passage : Claude (s'il a du crédit), puis les IA gratuites. Images : Gemini d'abord (il voit le mieux), puis Mistral et
+    Groq. Texte : Mistral, Groq, et Gemini en dernier (son quota du jour est gardé pour les images). Logique d'un dialogue
+    (raisonner) : Groq (gros modèle), Gemini, Mistral."""
     o = [] if os.environ.get("CLAUDE_INDISPONIBLE") == "1" else ["claude"]
-    autres = ["gemini", "mistral"] if images else ["mistral", "gemini"]
+    autres = ["gemini", "mistral", "groq"] if images else (["groq", "gemini", "mistral"] if raisonner else ["mistral", "groq", "gemini"])
     o += [f for f in autres if os.environ.get(FOURNISSEURS[f]["cle"]) and f not in HORS_SERVICE]
     return [f for f in o if f not in HORS_SERVICE and EN_PAUSE.get(f, 0) <= time.time()] or [f for f in o if f not in HORS_SERVICE]
 
@@ -167,9 +190,9 @@ class _Messages:
         self._client = None; self.raisonner = raisonner; self.exclure = set(exclure or ()); self.dernier = None   # une seule connexion Claude par client
 
     def create(self, **kw):
-        images = self.raisonner or any(isinstance(b, dict) and b.get("type") == "image" for m in kw.get("messages") or [] if isinstance(m.get("content"), list) for b in m["content"])
+        images = any(isinstance(b, dict) and b.get("type") == "image" for m in kw.get("messages") or [] if isinstance(m.get("content"), list) for b in m["content"])
         erreurs = []
-        for f in [f for f in ordre_ia(images) if f not in self.exclure]:
+        for f in [f for f in ordre_ia(images, self.raisonner) if f not in self.exclure]:
             try:
                 if f == "claude":
                     if self._client is None: self._client = _anthropic()
@@ -181,7 +204,7 @@ class _Messages:
                 import secours
                 txt = str(e).lower()
                 if f == "claude" and not secours.claude_indisponible(e): raise         # erreur de Claude qui n'est pas un manque de crédit
-                if any(m in txt for m in (" 401", " 403", "quota", "exhausted", "billing")): HORS_SERVICE.add(f)   # vraiment épuisé / refusé
+                if any(m in txt for m in EPUISE): HORS_SERVICE.add(f)        # vraiment épuisé / refusé
                 erreurs.append(f"{f} : {str(e)[:120]}")
                 print(f"  IA {f} indisponible ({str(e)[:120]}) : on passe à la suivante", flush=True)
         raise RuntimeError("credit balance : aucune IA disponible (" + " | ".join(erreurs) + ")")
@@ -193,7 +216,7 @@ class _IA:
 
 def claude(raisonner=False, exclure=()):
     """Client « façon Claude » : Claude si possible, sinon Mistral puis Gemini (bascule automatique, quotas épuisés évités).
-    raisonner=True : Gemini avant Mistral (comme pour les images), pour les tâches de logique (qui dit quoi dans un dialogue)."""
+    raisonner=True : Groq puis Gemini avant Mistral, pour les tâches de logique (qui dit quoi dans un dialogue)."""
     return _IA(raisonner, exclure)   # exclure : fournisseurs à ne pas utiliser (2e avis indépendant d'une autre IA)
 
 
@@ -235,12 +258,13 @@ def verifier_credits():
         try:
             _appel_openai(f, {"messages": [{"role": "user", "content": "Réponds juste : ok"}], "max_tokens": 5}); etat[f] = "ok"
         except Exception as e:
-            t = str(e).lower(); etat[f] = ("epuise" if ("quota" in t or "exhausted" in t or "billing" in t) else "cle" if (" 401" in t or " 403" in t)
+            t = str(e).lower(); etat[f] = ("epuise" if any(m in t for m in ("quota", "exhausted", "billing", "per day", "(tpd)", "(rpd)")) else "cle" if (" 401" in t or " 403" in t)
                                          else "limite" if "limite 429" in t else "erreur")
             if etat[f] in ("epuise", "cle"): HORS_SERVICE.add(f)                    # erreur passagère : on retentera pendant la fabrication
             print(f"  {f} : {str(e)[:160]}", flush=True)
     UTILISES.clear()
     etat["ia"] = "ok" if ia_disponible() else "aucune"
+    if QUOTA: etat["quota"] = {k: dict(v) for k, v in QUOTA.items()}
     cle = os.environ.get("ELEVENLABS_API_KEY")
     if not cle: etat["elevenlabs"] = "absent"
     else:
@@ -251,6 +275,6 @@ def verifier_credits():
             if etat["elevenlabs"] == "epuise": os.environ["ELEVENLABS"] = "0"
         except Exception as e:
             etat["elevenlabs"] = "ok"                                      # lecture du solde impossible : on tentera quand même
-    print(f"Crédits au départ : Claude {etat['claude']}, Mistral {etat['mistral']}, Gemini {etat['gemini']}, ElevenLabs {etat['elevenlabs']}"
+    print(f"Crédits au départ : Claude {etat['claude']}, Mistral {etat['mistral']}, Gemini {etat['gemini']}, Groq {etat.get('groq')}, ElevenLabs {etat['elevenlabs']}"
           f" — IA utilisée : {(ordre_ia() or ['aucune (sketchs de secours)'])[0]}", flush=True)
     return etat

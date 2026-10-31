@@ -60,6 +60,38 @@ def _tikwm(url, tmp):
     journal("  son téléchargé (tikwm)")
     return {"uploader": a.get("unique_id"), "channel": a.get("nickname"), "duration": d.get("duration"), "webpage_url": url}, f"{tmp}/src.mp4"
 
+def debut_parole(sig, seuil=0.8):
+    """Instant (s) où la voix commence vraiment (voix isolée : énergie par tranches de 20 ms, 0,2 s de suite au-dessus du seuil)."""
+    x = np.asarray(sig, np.float32); n = int(0.02 * SR)
+    if len(x) < n * 20: return 0.0
+    rms = np.sqrt(np.mean(x[:len(x) // n * n].reshape(-1, n) ** 2, axis=1))
+    thr = max(0.01, 0.12 * float(np.percentile(rms, 95)))
+    haut = (rms > thr).astype(int); fen = np.convolve(haut, np.ones(10, int), "valid")
+    k = int(np.argmax(fen >= 6)) if (fen >= 6).any() else 0
+    return k * 0.02
+
+
+def couper_debut(tmp, info, t0, chemin_voix=None):
+    """Silence du début retiré (vidéo d'origine, piste, son mono et voix isolée coupés au MÊME instant : rien ne se décale).
+    Renvoie (piste, mono, voix_sig ou None)."""
+    src = info.get("_fichier") or ""
+    if src and os.path.exists(src):
+        dst = f"{tmp}/src_coupe.mp4"
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-ss", f"{t0:.3f}", "-i", src, "-c:v", "libx264", "-preset", "veryfast", "-crf", "18",
+                        "-c:a", "aac", dst], check=True)
+        info["_fichier"] = dst
+    piste = f"{tmp}/piste.wav"
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-ss", f"{t0:.3f}", "-i", piste,
+                    "-ac", "2", "-ar", str(SRM), f"{tmp}/piste_c.wav"], check=True)
+    os.replace(f"{tmp}/piste_c.wav", piste)
+    mono = _vers_mono(piste, f"{tmp}/mono.wav"); voix = None
+    if chemin_voix and os.path.exists(chemin_voix):
+        c2 = chemin_voix.rsplit(".", 1)[0] + "_c.wav"
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-ss", f"{t0:.3f}", "-i", chemin_voix, "-ac", "1", "-ar", str(SR), c2], check=True)
+        os.replace(c2, chemin_voix); voix = _lire_wav(chemin_voix)
+    return piste, mono, voix
+
+
 def telecharger(url, tmp):
     """Son de la vidéo -> (infos, piste stéréo 44,1 kHz pour le montage, piste mono 22 kHz pour l'analyse)."""
     url = (url or "").strip()
@@ -256,7 +288,7 @@ def relire_dialogue(mots, une_voix=False):
     if os.environ.get("DEUX_AVIS", "1") != "0" and getattr(c1.messages, "dernier", None):
         try:
             c2 = reseau.claude(raisonner=True, exclure={c1.messages.dernier})
-            if reseau.ordre_ia(True) and [f for f in reseau.ordre_ia(True) if f != c1.messages.dernier]: l2 = lecture(c2)
+            if reseau.ordre_ia(False, True) and [f for f in reseau.ordre_ia(False, True) if f != c1.messages.dernier]: l2 = lecture(c2)
         except Exception as e: journal(f"  2e avis impossible ({str(e)[:100]})")
     if l2:
         ia2 = locuteurs._aligner(ia, l2[0])                                # mêmes lettres A / B pour les deux IA
@@ -440,6 +472,30 @@ def scinder_voix_dominante(mots, part=0.7):
     journal("  voix dominante partagée entre deux personnes (même voix, dialogue) ; l'autre voix devient une 3e personne")
     return mots
 
+def lieu_vu(cles, texte):
+    """Lieu de la scène quand la mise en scène de l'IA a échoué : une petite question à l'IA (2 images de l'original + le début du
+    texte, réponse = un lieu du catalogue), sinon les mots du dialogue (au moins 2 indices), sinon None (le studio garde son choix)."""
+    import decor_dessin as DD
+    if cles and os.environ.get("LIEU_VU", "1") != "0":
+        try:
+            if not __import__("reseau").ia_disponible(): raise RuntimeError("aucune IA")
+            q = ("Ces images viennent d'une vidéo TikTok animée. Dans quel lieu se passe la scène ? Réponds UNIQUEMENT en JSON "
+                 '{"lieu": "..."} avec un seul mot de cette liste : ' + ", ".join(DD.LIEUX) + ". Début du dialogue : " + texte[:400])
+            contenu = [{"type": "image", "source": {"type": "base64", "media_type": "image/jpeg", "data": base64.b64encode(j).decode()}}
+                       for j in cles[:2]] + [{"type": "text", "text": q}]
+            r = __import__("reseau").claude().messages.create(model=os.environ.get("MODELE_CLAUDE") or "claude-opus-5-5", max_tokens=200,
+                                                               messages=[{"role": "user", "content": contenu}])
+            brut = "".join(getattr(b, "text", "") or "" for b in r.content if getattr(b, "type", "") == "text").lower()
+            l_ = next((l for l in sorted(DD.LIEUX, key=len, reverse=True) if re.search(r"\b" + l + r"\b", brut)), None)
+            if l_:
+                journal(f"  lieu regardé sur l'image de l'original : {l_}"); return l_
+        except Exception as e: journal(f"  lieu sur l'image impossible ({str(e)[:100]})")
+    l_ = DD.lieu_de(texte, "")
+    if l_ and DD.scores_lieux(texte)[0][l_] >= 2:                         # un seul mot (« boulot ») ne suffit pas à poser le lieu
+        journal(f"  lieu deviné d'après les mots : {l_}"); return l_
+    return None
+
+
 def preparer(url):
     import ecrire
     tmp = tempfile.mkdtemp()
@@ -449,17 +505,27 @@ def preparer(url):
     lien = info.get("webpage_url") or url.strip()
     duree = len(mono) / SR
     journal(f"  son récupéré : {duree:.1f} s, compte d'origine @{auteur}")
+    voix_sig, chemin_voix = isoler(tmp)
+    import ecoute
+    if voix_sig is None:                                                   # plus de crédit ElevenLabs : Demucs, gratuit sur la machine
+        v_, c_ = ecoute.demucs(tmp)
+        if v_ is not None: voix_sig, chemin_voix = v_, c_
+    debut = 0.0
+    if voix_sig is not None and os.environ.get("DEBUT_COURT", "1") != "0":  # silence du début : on scrolle avant la 1re parole
+        t_ = debut_parole(voix_sig)
+        if t_ > 0.8:
+            try:
+                debut = round(t_ - 0.25, 3)
+                piste, mono, v2 = couper_debut(tmp, info, debut, chemin_voix if chemin_voix != f"{tmp}/mono.wav" else None)
+                voix_sig = v2 if v2 is not None else mono; duree = len(mono) / SR
+                journal(f"  silence du début retiré : {debut:.2f} s (la 1re parole arrivait à {t_:.1f} s)")
+            except Exception as e: journal(f"  silence du début gardé ({str(e)[:100]})"); debut = 0.0
     visuel, cles = {}, []
     try:                                                                   # l'image de la vidéo : cadrages, personnes, habits, couleurs, lumière
         import analyse_video
         visuel, cles = analyse_video.analyser(info.get("_fichier") or "")
         journal("  image de la vidéo : " + analyse_video.texte(visuel))
     except Exception as e: journal(f"  analyse de l'image impossible ({str(e)[:150]}) : mise en scène d'après le son seul")
-    voix_sig, chemin_voix = isoler(tmp)
-    import ecoute
-    if voix_sig is None:                                                   # plus de crédit ElevenLabs : Demucs, gratuit sur la machine
-        v_, c_ = ecoute.demucs(tmp)
-        if v_ is not None: voix_sig, chemin_voix = v_, c_
     sig = voix_sig if voix_sig is not None and len(voix_sig) >= len(mono) * 0.9 else mono
     import equipe
     B = equipe.Bulletin()                                                  # l'équipe : chaque poste contrôlé avant le suivant
@@ -467,7 +533,7 @@ def preparer(url):
     if SOURCE_MOTS[0] != "elevenlabs":                                    # 2e transcription par un autre outil, comparée mot à mot
         try:
             autre = whisper_local(mono) if SOURCE_MOTS[0] == "groq" else ecoute.groq(chemin_voix)
-            if autre: mots = equipe.deux_transcriptions(mots, autre, B)
+            if autre: mots = equipe.deux_transcriptions(mots, autre, B, troisieme=lambda: ecoute.groq(chemin_voix, modele="whisper-large-v3"))
         except Exception as e: journal(f"  2e transcription impossible ({str(e)[:120]})")
         mots = ecoute.aligner(mots, sig)                                   # chaque mot recalé sur la voix (lèvres, sous-titres)
         __import__("locuteurs").fins_de_phrase(mots)                       # points oubliés par Whisper (« …rouge Mais pourquoi… »)
@@ -554,7 +620,7 @@ def preparer(url):
     ecoute.jeu_entendu(reps, segs, emo_voix, EVENEMENTS)                   # sans indication de l'IA : le jeu entendu dans le son
     if all(r["p"] == "narrateur" for r in reps): reps[0]["p"] = "presentateur"   # au moins un personnage à l'image
     reps[-1]["chute"] = True
-    brut = {"sujet": m.get("sujet") or segs[0]["t"][:30], "repliques": [dict(r) for r in reps[:16]], "legende": m.get("legende") or segs[0]["t"][:120],
+    brut = {"sujet": m.get("sujet") or segs[0]["t"], "repliques": [dict(r) for r in reps[:16]], "legende": m.get("legende") or segs[0]["t"][:120],
             "hashtags": ecrire._liste(m.get("hashtags")) or ["humour", "doublage", "pov"], "titre_accroche": m.get("titre_accroche") or "",
             "question": m.get("question") or "", "sources": [lien], "decoupage": []}
     sk = ecrire.valider(brut, {lien}, libre=True, minimum=1)
@@ -581,16 +647,24 @@ def preparer(url):
                 v_ = next((vus[r] for r in sorted(set(qui), key=qui.count, reverse=True) if vus.get(r)), None)
                 if v_ and len(str(sc.get("decor") or "").split()) < 8: sc["decor"] = re.sub(r"[^\w\s,.'-]", "", str(v_))[:240]
         except Exception as e: journal(f"  accord des rôles impossible ({str(e)[:100]})")
+    if not dec and not (isinstance(sk.get("studio"), dict) and sk["studio"].get("lieux")):   # l'IA n'a pas dit le lieu : on le regarde
+        l_ = lieu_vu(cles, " ".join(r["t"] for r in reps))
+        if l_:
+            S_ = sk["studio"] if isinstance(sk.get("studio"), dict) else {}
+            S_["lieux"] = [l_]; sk["studio"] = S_
     sk["sources"] = [lien]
     sk["doublage"] = {"piste": piste, "duree": round(duree, 2), "source": lien, "auteur": auteur, "contexte": m.get("contexte", ""),
                       "evenements": [list(e) for e in EVENEMENTS][:60], "visuel": visuel, "audio": audio,
-                      "video_origine": info.get("_fichier") or ""}                    # (contrôle qualité : comparaison avec l'original)
+                      "video_origine": info.get("_fichier") or "", "debut": debut}    # (contrôle qualité : comparaison avec l'original)
     if audio:                                                              # émotions de jeu données par Claude
         from collections import Counter
         audio["emotions"] = dict(Counter(m.lower() for x in d for m in re.findall(r"\[([^\]]{2,25})\]", x)).most_common(8))
     if EVENEMENTS: journal(f"  événements sonores : {', '.join(sorted({e[2] for e in EVENEMENTS}))[:200]}")
     sk["fiche"] = {"note": 0, "decision": "vidéo manuelle (bande son d'une vidéo TikTok)", "decoupage": sk["decoupage"]}
     sk["_monte"] = True                                                    # pas de voix off de titre ni d'accroche rejouée : la bande son est imposée
+    try:                                                                   # scripte (cohérence) et monteur (synchronisation, corrigée)
+        equipe.scripte(sk, segs, hz, B); equipe.monteur(sk, duree, B, segs)
+    except Exception as e: journal(f"  contrôles de l'équipe impossibles ({str(e)[:120]})")
     # voix de chaque réplique (pour les bouches) et instants des mots, relatifs au début de la réplique
     audios, mots = [], []
     for s in segs:
@@ -598,9 +672,6 @@ def preparer(url):
         audios.append(np.asarray(sig[a0:a1], np.float32))
         mots.append([(x["w"], float(x["s"] - s["deb"]), float(x["e"] - s["deb"])) for x in s["mots"]])
     for r, m_ in zip(sk["repliques"], mots): r["_mots"] = [[w, round(a, 3), round(b, 3)] for w, a, b in m_]   # gardés : « Corriger qui parle »
-    try:                                                                   # scripte (cohérence) et monteur (synchronisation)
-        equipe.scripte(sk, segs, hz, B); equipe.monteur(sk, duree, B)
-    except Exception as e: journal(f"  contrôles de l'équipe impossibles ({str(e)[:120]})")
     sk["equipe"] = B.lignes
     journal(f"  bulletin de l'équipe : {B.resume()}")
     return sk, audios, mots
@@ -611,6 +682,7 @@ def depuis_sketch(sk):
     dans le sketch) : le son d'origine est re-téléchargé et recoupé réplique par réplique. Renvoie (audios, mots) comme preparer."""
     d = sk.get("doublage") or {}
     tmp = tempfile.mkdtemp(); info, piste, mono = telecharger(d.get("source") or (sk.get("sources") or [""])[0], tmp)
+    if float(d.get("debut") or 0) > 0: piste, mono, _v = couper_debut(tmp, info, float(d["debut"]))   # même silence retiré qu'à la 1re fois
     d["piste"] = piste; sk["doublage"] = d
     audios, mots = [], []
     for r in sk["repliques"]:

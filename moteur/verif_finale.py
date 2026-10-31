@@ -68,7 +68,7 @@ def synchro(video, R, fr=None, fps=None, son=None):
             y0, y1, x0, x1 = parle; S += float(d[y0:y1, x0:x1].sum())
             for (y0, y1, x0, x1) in autres: A += float(d[y0:y1, x0:x1].sum()) / len(autres)
         if A > 1.5 * S + 40 and (b - a) > fps * 0.5:
-            out.append(_defaut(q["deb"], "synchro", f"pendant la réplique de {p} (« {str(q.get('texte'))[:40]} »), c'est un autre personnage qui bouge"))
+            out.append(dict(_defaut(q["deb"], "synchro", f"pendant la réplique de {p} (« {str(q.get('texte'))[:40]} »), c'est un autre personnage qui bouge"), i=q.get("i")))
     for i in range(1, len(fr)):                                            # mouvement de tous les personnages (têtes, bustes)
         d = np.abs(fr[i] - fr[i - 1]) > 12
         if d.mean() <= 0.08: mouv[i] = float(d[int(H_ * 0.2):int(H_ * 0.65)].sum())

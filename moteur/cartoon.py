@@ -409,6 +409,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
             emo_q = emo_de(i, r)
             rires = any(re.search(r"laugh|rire|giggl|chuckl", str(e_[2])) and e_[0] < t + dur + 0.6 and e_[1] > t for e_ in (DOUB.get("evenements") or []))
             ph.append(dict(i=i, p=r["p"], deb=t, fin=t + dur, lv=lv, emo=emo_q, chute=bool(r.get("chute")) or i == len(reps) - 1, rires=rires,
+                           **({"calme": True} if r.get("_calme") else {}),
                            scene=sc, objet=r.get("objet"), teaser=False, texte=r["t"], geste=geste_texte(r["t"], emo_q, i),
                            groupes=minutage(r["t"], a, t, (mots or [None] * len(reps))[i])))
             ph[-1]["lev"] = levres.chronologie(ph[-1]["groupes"], (mots or [None] * len(reps))[i], t)   # lèvres calées sur chaque son
@@ -429,6 +430,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
             t = max(ph[-1]["deb"] + 0.45, ph[-1]["fin"] - 0.35)
         emo_q = emo_de(i, r)
         q = dict(i=i, p=r["p"], deb=t, fin=t + dur, lv=lv, emo=emo_q, chute=(bool(r.get("chute")) or i == len(reps) - 1) and not r.get("teaser"),
+                 **({"calme": True} if r.get("_calme") else {}),
                  scene=sc, objet=r.get("objet"), teaser=r.get("teaser") is not None, texte=r["t"], geste=geste_texte(r["t"], emo_q, i),
                  groupes=minutage(r["t"], a, t, (mots or [None] * len(reps))[i]))
         q["lev"] = levres.chronologie(q["groupes"], (mots or [None] * len(reps))[i], t)
@@ -726,13 +728,15 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
         emo = mien["emo"] if (mien and tm <= mien["fin"] + 0.6) else "neutre"
         # entrée et sortie en douceur de l'émotion (bras) : pas de saut d'une pose à l'autre
         u_emo = min(_ease((tm - mien["deb"] + 0.15) / 0.35), 1 - _ease((tm - mien["fin"] - 0.25) / 0.4)) if mien else 0.0
+        # synchro corrigée (vidéo finie) : pendant cette réplique, celui qui écoute reste calme (c'est celui qui parle qui doit bouger)
+        calme = (not parle) and q["p"] != role and bool(q.get("calme")) and q["deb"] - 0.3 <= tm <= q["fin"] + 0.4
         # réaction de celui qui écoute après une chute de l'autre
         prev = next((z for z in reversed(ph) if z["fin"] <= tm and z["p"] != role), None)
-        if not parle and prev and prev["chute"] and tm - prev["fin"] < 1.0 and (not mien or mien["fin"] < prev["deb"]):
+        if not parle and not calme and prev and prev["chute"] and tm - prev["fin"] < 1.0 and (not mien or mien["fin"] < prev["deb"]):
             emo = "choc" if (prev["i"] * 7 + len(role)) % 3 else "rire"
         # celui qui écoute réagit à l'émotion de celui qui parle, juste après le mot qui frappe
         recule = 0.0; t_r = t_reaction(q)
-        if not parle and q["p"] != role and q["p"] in places[scene] and t_r <= tm <= q["fin"] + 0.4 and emo == "neutre":
+        if not parle and not calme and q["p"] != role and q["p"] in places[scene] and t_r <= tm <= q["fin"] + 0.4 and emo == "neutre":
             if q["emo"] in ("cri", "colere"): emo = "panique" if (len(role) + q["i"]) % 2 else "choc"; recule = 1.0
             elif q["emo"] == "pleurs": emo = "blase"
             elif q["emo"] in ("rire", "joie") and (len(role) + q["i"]) % 2: emo = "rire"
@@ -740,7 +744,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
         reac_geste, cam_regard, roule = None, False, False
         if B and not parle and emo == "neutre":
             if any(a_ <= tm <= b_ and qui == role and sc2 == scene for a_, b_, qui, sc2 in SILENCES): cam_regard, emo = True, "blase"
-            elif q["p"] != role and q["p"] in places[scene] and q.get("reaction", "aucune") != "aucune" and t_r + 0.05 <= tm <= q["fin"] + 0.5:
+            elif not calme and q["p"] != role and q["p"] in places[scene] and q.get("reaction", "aucune") != "aucune" and t_r + 0.05 <= tm <= q["fin"] + 0.5:
                 rc = q["reaction"]
                 if rc == "regard_camera": cam_regard, emo = True, "blase"
                 elif rc == "yeux_au_ciel": roule = True
@@ -789,7 +793,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
                 elif v_ and lv < 0.12: p["bouche"] = max(p["bouche"], 0.18)    # un son prononcé doucement reste visible
             p["sq"] = 0.03 * lv + 0.008 * math.sin(tm * 7)
             if emo == "neutre" and lv > 0.72: p["sourcils"] = "hausses"         # sourcils qui appuient les mots forts
-            ix = 1 + 0.45 * (q.get("intensite", 1) - 1) * EXAGERE              # jeu marqué ou très exagéré : la tête bouge plus
+            ix = (1 + 0.45 * (q.get("intensite", 1) - 1) * EXAGERE) * (1.5 if q.get("calme") else 1.0)   # jeu marqué : la tête bouge plus
             p["tilt"] = (5 * math.sin(tm * 1.9 + len(role)) + 3 * lv) * ix + (8 * math.sin(tm * 15) if emo == "rire" else 0)
             k_p = max(0, k - int(0.17 * FPS)); lv_p = float(q["lv"][k_p]) if k_p < len(q["lv"]) else lv     # la tête 0,17 s plus tôt :
             t_p = (5 * math.sin((tm - 0.17) * 1.9 + len(role)) + 3 * lv_p) * ix              # cheveux, boucles d'oreilles, écharpe
@@ -816,7 +820,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
                 p["y"] += 7 * s * math.sin(math.pi * (tm - q["fin"] + 0.35) / 0.6)   # celui qui écoute acquiesce quand la phrase se pose
             p["bouche"] = 0.0 if emo not in ("choc", "panique") else 0.25
             p["sq"] = 0.012 * math.sin(tm * 2.4 + len(role))                  # respiration
-            p["tilt"] = 3 * math.sin(tm * 0.9 + len(role))
+            p["tilt"] = 3 * math.sin(tm * 0.9 + len(role)) * (0.4 if calme else 1.0)
         p["x"] += 7 * s * math.sin(tm * 1.1 + len(role) * 1.7)                # balancement continu : le personnage vit
         t_sc = DEBUT_SCENE.get(scene)                                      # entrée en scène : il arrive du bord en trottinant
         if t_sc is not None and scene not in SANS_ENTREE and tm < t_sc + 0.75:
