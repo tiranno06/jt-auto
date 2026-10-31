@@ -1,0 +1,126 @@
+"""L'équipe de fabrication des sons TikTok (demande de l'auteur, 31 octobre 2026) : chaque poste a son contrôleur, qui vérifie le
+travail AVANT de le passer au poste suivant, corrige ce qu'il peut tout seul et note le reste dans le bulletin de la vidéo
+(sk["equipe"], journal de fabrication). Puis viennent le pré-jury, le contrôle image par image et le jury (qualite.py).
+
+  1. Ingé son       : transcription complète (pas de boucle de Whisper, pas de mots impossibles, pas de voix sans texte).
+  2. Casting voix   : qui dit chaque phrase. Trois témoins votent : le SON (empreinte vocale), le TEXTE (questions / réponses,
+                      relu par l'IA) et l'IMAGE de la vidéo d'origine (qui bouge quand la phrase est dite, regard.py). Quand ils ne
+                      sont pas d'accord, le fil du dialogue est repris phrase par phrase avec les trois.
+  3. Scripte        : cohérence (une réplique = une seule personne, un appel seulement si le son en parle, téléphone en main
+                      seulement s'il en est question, voix de femme = personnage féminin, autant de personnages que de voix).
+  4. Monteur        : synchronisation (répliques dans l'ordre, sans chevauchement d'un même personnage, mots dans leur réplique,
+                      rien au-delà de la fin du son)."""
+import os, re
+from collections import Counter
+
+VOIX_SEULE_MAX = 0.85        # dans un dialogue, une voix qui dit plus de 85 % du texte : à revérifier
+DESACCORD_MAX = 0.3          # plus de 30 % des phrases où l'image contredit le son : on reprend le fil
+
+
+def journal(m): print(m, flush=True)
+
+
+class Bulletin:
+    def __init__(self): self.lignes = []
+    def note(self, poste, controle, ok, detail=""):
+        self.lignes.append({"poste": poste, "controle": controle, "ok": bool(ok), "detail": str(detail)[:200]})
+        journal(f"  [équipe · {poste}] {'✔' if ok else '✘'} {controle}{' : ' + str(detail) if detail else ''}")
+    def resume(self):
+        ko = [l for l in self.lignes if not l["ok"]]
+        return f"{len(self.lignes) - len(ko)}/{len(self.lignes)} contrôles bons" + (f" ; à revoir : {', '.join(l['controle'] for l in ko)}" if ko else "")
+
+
+# ------------------------------------------------------------------ 1. ingé son
+def inge_son(mots, B):
+    if not mots: B.note("ingé son", "transcription", False, "aucun mot"); return mots
+    import locuteurs
+    seuls = 0                                                              # « ? » ou « ... » isolés : collés au mot d'avant
+    for i in range(len(mots) - 1, 0, -1):
+        if not re.search(r"\w", mots[i]["w"]):
+            mots[i - 1] = dict(mots[i - 1], w=mots[i - 1]["w"] + mots[i]["w"].strip(), e=max(mots[i - 1]["e"], mots[i]["e"])); del mots[i]; seuls += 1
+    if seuls: journal(f"  [équipe · ingé son] {seuls} signe(s) de ponctuation isolé(s) recollé(s)")
+    n0 = len(mots); mots = locuteurs.sans_boucles(mots)
+    B.note("ingé son", "pas de phrase répétée en boucle", n0 == len(mots), f"{n0 - len(mots)} mot(s) retiré(s)" if n0 != len(mots) else "")
+    rapides = [m for m in mots if m["e"] - m["s"] < 0.03 and len(re.sub(r"\W", "", m["w"])) > 3]
+    B.note("ingé son", "mots à une vitesse possible", len(rapides) <= 0.05 * len(mots), f"{len(rapides)} mot(s) trop courts" if rapides else "")
+    trous = [(round(a["e"], 1), round(b["s"], 1)) for a, b in zip(mots, mots[1:]) if b["s"] - a["e"] > 6]
+    B.note("ingé son", "pas de long passage sans texte", not trous, f"blancs {trous[:3]}" if trous else "")
+    return mots
+
+
+# ------------------------------------------------------------------ 2. casting voix
+def casting_voix(mots, video, B, relire, scinder):
+    """Qui dit chaque phrase : le son a déjà parlé (pyannote, ECAPA, vérification mot par mot) ; le contrôleur fait voter le texte
+    et l'image et reprend le fil du dialogue quand ils contredisent le son. relire / scinder : fonctions de doublage.py."""
+    import locuteurs, regard
+    ph = locuteurs.phrases(mots)
+    voix = Counter(m["voix"] for m in mots); r_ = locuteurs.ETAT.get("ressemblance")
+    vue = None
+    try: vue = regard.temoin(video, mots, ph) if len(ph) >= 3 else None
+    except Exception as e: journal(f"  témoin image impossible ({str(e)[:100]})")
+    if vue: B.note("casting voix", "témoin image (qui bouge dans l'original)", True, f"{sum(1 for c, _ in vue if c is not None)}/{len(ph)} phrases lisibles")
+    seule = len(voix) == 1
+    if r_ is not None: journal(f"  ressemblance des deux voix : {r_:.2f} (au-delà de {locuteurs.DOUTE} : le dialogue décide avec le son)")
+    raison = None
+    if seule: raison = "une seule voix entendue"
+    elif r_ is not None and r_ > locuteurs.DOUTE: raison = f"voix proches ({r_:.2f})"
+    elif len(voix) == 2:
+        d = locuteurs.desaccord_image(mots, vue, ph)
+        if d > DESACCORD_MAX: raison = f"l'image contredit le son sur {round(100 * d)} % des phrases"
+        B.note("casting voix", "le son et l'image sont d'accord", d <= DESACCORD_MAX, f"{round(100 * d)} % de désaccord" if vue else "pas d'image lisible")
+    if raison:
+        ia = relire(mots, une_voix=seule)
+        cotes = Counter(c for c, w in (vue or []) if c is not None and w >= 0.15)
+        deux_a_l_image = len(cotes) == 2 and min(cotes.values()) >= 2      # sans IA : l'image montre deux personnes qui parlent tour à tour
+        if ia or (vue and (not seule or deux_a_l_image)):
+            avis = None if seule or (r_ is not None and r_ > locuteurs.PROCHES) else 1.2
+            mots = locuteurs.fil_dialogue(mots, ia, avis=avis, vue=vue)
+            B.note("casting voix", "fil du dialogue repris (son + texte + image)", True, raison)
+        elif seule: B.note("casting voix", "deux personnes trouvées", False, "une seule voix et pas de relecture possible : un seul personnage parle")
+    elif len(voix) == 2:
+        n0 = Counter(m["voix"] for m in mots)
+        mots = scinder(mots)
+        if Counter(m["voix"] for m in mots) != n0: B.note("casting voix", "voix dominante partagée (même voix pour deux personnes)", True)
+    n = Counter(m["voix"] for m in mots)
+    part = max(n.values()) / max(1, sum(n.values()))
+    questions = sum(1 for p in ph if mots[p[-1]]["w"].endswith("?"))
+    B.note("casting voix", "parole répartie entre les personnages", len(n) > 1 or questions < 2,
+           f"{len(n)} voix, la plus bavarde dit {round(100 * part)} %")
+    if len(n) > 1 and part > VOIX_SEULE_MAX and questions >= 3:
+        B.note("casting voix", "dialogue équilibré", False, f"une voix dit {round(100 * part)} % d'un dialogue à {questions} questions")
+    return mots
+
+
+# ------------------------------------------------------------------ 3. scripte
+def scripte(sk, segs, hz, B):
+    import studio
+    reps = sk.get("repliques") or []
+    dbl = [k for k, s in enumerate(segs) if re.search(r"\?\s+\S", s.get("t", "")) and not (s.get("mots") and all(m.get("sure", 0) >= 0.5 for m in s["mots"]))]
+    B.note("scripte", "une réplique = une seule personne", not dbl, f"répliques {dbl[:6]} : question et réponse ensemble" if dbl else "")
+    S = sk.get("studio") if isinstance(sk.get("studio"), dict) else {}
+    if S.get("lieux_separes") and not studio.appel_devine(sk):
+        B.note("scripte", "appel seulement si le son en parle", False, "lieux séparés de l'IA refusés"); S.pop("lieux_separes", None)
+    tel = [k for k, r in enumerate(reps) if r.get("objet") == "telephone" and not re.search(r"t[ée]l[ée]phone|portable|appel|allô|allo|message|photo|insta|snap", r.get("t", "").lower())]
+    for k in tel:
+        if not studio.appel_devine(sk): reps[k].pop("objet", None)
+    B.note("scripte", "téléphone en main seulement s'il en est question", not tel, f"retiré sur {len(tel)} réplique(s)" if tel else "")
+    nb_voix = len({s["voix"] for s in segs}); nb_roles = len({r["p"] for r in reps if r["p"] != "narrateur"})
+    B.note("scripte", "autant de personnages que de voix", nb_roles >= min(nb_voix, 3), f"{nb_voix} voix, {nb_roles} personnage(s)")
+    return sk
+
+
+# ------------------------------------------------------------------ 4. monteur
+def monteur(sk, duree, B):
+    reps = sk.get("repliques") or []
+    ordre = all(float(a["_deb"]) <= float(b["_deb"]) + 1e-3 for a, b in zip(reps, reps[1:]))
+    B.note("monteur", "répliques dans l'ordre du son", ordre)
+    vides = [k for k, r in enumerate(reps) if float(r["_fin"]) <= float(r["_deb"])]
+    for k in vides: reps[k]["_fin"] = round(float(reps[k]["_deb"]) + 0.25, 3)
+    B.note("monteur", "chaque réplique a une durée", not vides, f"{len(vides)} corrigée(s)" if vides else "")
+    chev = [k for k in range(1, len(reps)) if reps[k]["p"] == reps[k - 1]["p"] and float(reps[k]["_deb"]) < float(reps[k - 1]["_fin"]) - 0.05]
+    B.note("monteur", "un personnage ne parle jamais deux fois en même temps", not chev, f"répliques {chev[:6]}" if chev else "")
+    hors = [k for k, r in enumerate(reps) if duree and float(r["_fin"]) > duree + 0.5]
+    B.note("monteur", "rien après la fin du son", not hors, f"{len(hors)} réplique(s)" if hors else "")
+    mal = [k for k, r in enumerate(reps) for w in (r.get("_mots") or []) if w[1] < -0.05 or w[2] > float(r["_fin"]) - float(r["_deb"]) + 0.3][:6]
+    B.note("monteur", "chaque mot dans sa réplique (lèvres et sous-titres calés)", not mal, f"répliques {sorted(set(mal))}" if mal else "")
+    return sk

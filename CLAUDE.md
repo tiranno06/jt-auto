@@ -203,6 +203,16 @@
   personnes à la même voix : l'IA la partage, l'autre voix devient une 3e personne (`doublage.scinder_voix_dominante`) ; réponses de
   l'IA gratuite remises en forme (indications de jeu en liste, personnages sans rôle) ; Groq réparé (refusé sans nom de robot,
   réponse mal lue) ; ressemblance des voix toujours notée dans le journal.
+  **Équipe de fabrication contrôlée poste par poste (demande de l'auteur, 31 octobre 2026, `moteur/equipe.py`)** : chaque poste a
+  son contrôleur qui vérifie, corrige ce qu'il peut et note le reste dans le bulletin (sk["equipe"] + journal « [équipe · …] ») :
+  ingé son (boucles de Whisper, ponctuation isolée, mots impossibles, longs blancs) ; casting voix : TROIS témoins votent, le son
+  (empreinte), le texte (questions / réponses relues par l'IA) et l'IMAGE de l'original (`moteur/regard.py` : qui bouge, gauche ou
+  droite, quand la phrase est dite, images sans coupure seulement ; REGARD=0) ; si l'image contredit le son sur plus de 30 % des
+  phrases, le fil du dialogue est repris avec les trois (`locuteurs.fil_dialogue(vue=…)`) ; une seule voix + deux personnes qui
+  bougent à tour de rôle = deux personnages même sans IA ; une nouvelle réplique après chaque question ; scripte (une réplique = une
+  personne, appel seulement si le son en parle, téléphone seulement s'il en est question, autant de personnages que de voix) ;
+  monteur (ordre, durées, chevauchements, mots dans leur réplique, rien après la fin du son). Puis pré-jury, contrôle image et jury.
+  Essai « Fierté familiale » (même voix pour les deux copains) : la parole passe de 85 % / 15 % à un vrai dialogue 57 % / 43 %.
   **Tirage au hasard des sons TikTok** : le robot préfère les vidéos aux voix bien différentes (ressemblance ≤ 0,6, réglage
   VOIX_DIFFERENTES ; 1 = sans tri) : jusqu'à 6 vidéos écoutées (25 min au plus), sinon celle aux voix les plus nettes. Un lien collé
   à la main n'est jamais refusé (le contrôle questions-réponses s'en charge).

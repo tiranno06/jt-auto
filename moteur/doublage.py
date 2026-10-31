@@ -188,7 +188,8 @@ def segments(mots):
     for m in mots:
         c = out[-1] if out else None
         nouvelle = (c is None or m["voix"] != c["voix"] or m["s"] - c["mots"][-1]["e"] > 0.9
-                    or (len(c["mots"]) >= 10 and re.search(r"[.!?…]$", c["mots"][-1]["w"])) or len(c["mots"]) >= 28)
+                    or (len(c["mots"]) >= 10 and re.search(r"[.!?…]$", c["mots"][-1]["w"])) or len(c["mots"]) >= 28
+                    or c["mots"][-1]["w"].endswith("?"))                   # après une question : nouvelle réplique (souvent l'autre répond)
         if nouvelle: out.append({"voix": m["voix"], "mots": [m]})
         else: c["mots"].append(m)
     for s in out:
@@ -443,10 +444,11 @@ def preparer(url):
         v_, c_ = ecoute.demucs(tmp)
         if v_ is not None: voix_sig, chemin_voix = v_, c_
     sig = voix_sig if voix_sig is not None and len(voix_sig) >= len(mono) * 0.9 else mono
-    mots = transcrire(chemin_voix, mono)
+    import equipe
+    B = equipe.Bulletin()                                                  # l'équipe : chaque poste contrôlé avant le suivant
+    mots = equipe.inge_son(transcrire(chemin_voix, mono), B)
     if SOURCE_MOTS[0] != "elevenlabs":
         mots = ecoute.aligner(mots, sig)                                   # chaque mot recalé sur la voix (lèvres, sous-titres)
-        mots = __import__("locuteurs").sans_boucles(mots)                  # Whisper qui tourne en boucle sur la fin du son
         __import__("locuteurs").fins_de_phrase(mots)                       # points oubliés par Whisper (« …rouge Mais pourquoi… »)
     if not EVENEMENTS: EVENEMENTS[:] = ecoute.bruits(mono)                 # rires, cris, sirène, aboiement… entendus dans l'original
     try:                                                                   # pyannote (si la clé Hugging Face gratuite est réglée) :
@@ -462,17 +464,9 @@ def preparer(url):
     try:                                                                   # qui parle, mot par mot (la voix ne saute plus d'un perso à l'autre)
         import locuteurs; mots = locuteurs.affiner(mots, sig)
     except Exception as e: journal(f"  vérification mot par mot impossible ({str(e)[:120]})")
-    try:                                                                   # voix proches (ou une seule voix trouvée) : contrôle questions-réponses
-        import locuteurs                                                   # (texte + IA), le son ne suffit pas à dire qui parle
-        r_ = locuteurs.ETAT.get("ressemblance"); seule = len({m["voix"] for m in mots}) == 1
-        if r_ is not None: journal(f"  ressemblance des deux voix : {r_:.2f} (au-delà de {locuteurs.DOUTE} : le dialogue décide avec le son)")
-        if seule or (r_ is not None and r_ > locuteurs.DOUTE):
-            ia = relire_dialogue(mots, une_voix=seule)
-            if ia:                                                         # voix « un peu » proches : le son garde du poids
-                mots = locuteurs.fil_dialogue(mots, ia, avis=None if seule or r_ > locuteurs.PROCHES else 1.2)
-            elif seule: journal("  une seule voix entendue et pas de relecture du dialogue : un seul personnage parle")
-        else: mots = scinder_voix_dominante(mots)                          # deux personnes à la même voix + une 3e bien différente
-    except Exception as e: journal(f"  contrôle questions-réponses impossible ({str(e)[:120]})")
+    try:                                                                   # casting voix : le son, le texte et l'image votent
+        mots = equipe.casting_voix(mots, info.get("_fichier") or "", B, relire_dialogue, scinder_voix_dominante)
+    except Exception as e: journal(f"  contrôle du casting des voix impossible ({str(e)[:120]})")
     segs = segments(mots)
     hz = hauteurs(sig, segs)
     emo_voix = ecoute.emotions(sig, segs)                                  # colère, joie, tristesse entendues dans la voix
@@ -579,6 +573,11 @@ def preparer(url):
         audios.append(np.asarray(sig[a0:a1], np.float32))
         mots.append([(x["w"], float(x["s"] - s["deb"]), float(x["e"] - s["deb"])) for x in s["mots"]])
     for r, m_ in zip(sk["repliques"], mots): r["_mots"] = [[w, round(a, 3), round(b, 3)] for w, a, b in m_]   # gardés : « Corriger qui parle »
+    try:                                                                   # scripte (cohérence) et monteur (synchronisation)
+        equipe.scripte(sk, segs, hz, B); equipe.monteur(sk, duree, B)
+    except Exception as e: journal(f"  contrôles de l'équipe impossibles ({str(e)[:120]})")
+    sk["equipe"] = B.lignes
+    journal(f"  bulletin de l'équipe : {B.resume()}")
     return sk, audios, mots
 
 

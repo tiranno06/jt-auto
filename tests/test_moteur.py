@@ -1045,6 +1045,35 @@ class TestVoixEtScenesTiktok(unittest.TestCase):
         for m in res: par.setdefault(m["_q"], set()).add(m["voix"])
         self.assertEqual(par, {"A": {"speaker_0"}, "B": {"speaker_1"}, "C": {"speaker_2"}})
 
+    def test_equipe_temoin_image_et_controles(self):
+        import numpy as np, equipe, locuteurs as L, regard
+        # vidéo factice : la personne de gauche bouge pendant les phrases de A, celle de droite pendant celles de B
+        lignes = [("Tu viens ce soir ?", 0), ("Oui bien sûr.", 1), ("Et ta sœur aussi ?", 0), ("Non, elle travaille.", 1), ("Dommage.", 0), ("Ouais.", 1)]
+        mots, t = [], 0.0
+        for ph, q in lignes:
+            for w in ph.split(): mots.append({"w": w, "s": t, "e": t + 0.3, "voix": "speaker_0", "_q": q}); t += 0.35
+            t += 0.5
+        fps = 10.0; fr = []
+        for k in range(int(t * fps) + 2):
+            f = np.zeros((regard.HAUTEUR, regard.LARGEUR), np.int16); tm = k / fps
+            q = next((m["_q"] for m in mots if m["s"] <= tm <= m["e"] + 0.05), None)
+            if q is not None and k % 2:
+                x0 = 20 if q == 0 else 120; f[95:125, x0:x0 + 40] = 200
+            fr.append(f)
+        anc = regard.images; regard.images = lambda c: (fr, fps)
+        try:
+            B = equipe.Bulletin(); res = equipe.casting_voix([dict(m) for m in mots], "x.mp4", B, lambda m, une_voix=False: None, lambda m: m)
+        finally: regard.images = anc
+        lab = [int(m["voix"][-1]) for m in res]
+        self.assertEqual(lab if lab[0] == 0 else [1 - x for x in lab], [m["_q"] for m in mots])   # une seule voix : l'image tranche
+        sk = {"repliques": [{"p": "presentateur", "t": "Tu viens ?", "_deb": 0.0, "_fin": 1.0, "objet": "telephone", "_mots": [["Tu", 0, 0.3]]},
+                            {"p": "presentateur", "t": "Oui.", "_deb": 0.5, "_fin": 0.5, "_mots": []}], "doublage": {}}
+        B = equipe.Bulletin(); equipe.monteur(sk, 2.0, B); equipe.scripte(sk, [{"voix": "speaker_0", "t": "Tu viens ? Oui.", "mots": []}], {}, B)
+        ko = {l["controle"] for l in B.lignes if not l["ok"]}
+        self.assertIn("chaque réplique a une durée", ko); self.assertIn("une réplique = une seule personne", ko)
+        self.assertNotIn("objet", sk["repliques"][0])                     # téléphone sans raison : retiré
+        self.assertGreater(sk["repliques"][1]["_fin"], sk["repliques"][1]["_deb"])
+
     def test_une_seule_scene_pour_un_son_tiktok(self):
         import studio
         sk = {"repliques": [{"p": "presentateur", "t": "a"}] * 5, "doublage": {"duree": 10},

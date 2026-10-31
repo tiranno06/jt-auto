@@ -426,7 +426,7 @@ def pyannote(mots, sig, sr=SR):
 
 
 SUITE = re.compile(r"^(et|donc|puis|parce|alors|enfin|sinon|ou|que|qui)\b", re.I)
-_Q = {"change": 0.0, "fini": 1.5, "question": 2.0, "reponse": 1.0, "suite": 1.5, "echo": 1.0, "ia": 2.0, "avis": 0.3, "minuscule": 2.5}   # fil du dialogue
+_Q = {"change": 0.0, "fini": 1.5, "question": 2.0, "reponse": 1.0, "suite": 1.5, "echo": 1.0, "ia": 2.0, "avis": 0.3, "minuscule": 2.5, "image": 1.5}   # fil du dialogue
 PROCHES = 0.7                                                              # ressemblance des 2 voix au-delà de laquelle le son ne tranche plus
 DOUTE = 0.55                                                               # entre DOUTE et PROCHES : le son aide, le dialogue décide avec lui
 ETAT = {"ressemblance": None}                                              # dernière mesure (affiner)
@@ -484,7 +484,24 @@ def _viterbi2(em, tr):
     return lab[::-1]
 
 
-def fil_dialogue(mots, ia=None, avis=None):
+def _aligner(ref, lab):
+    """Les numéros 0/1 d'un témoin sont arbitraires : on les retourne s'ils s'accordent mieux ainsi avec ref."""
+    connus = [(a, b) for a, b in zip(ref, lab) if a is not None and b is not None]
+    if connus and sum(a == b for a, b in connus) < len(connus) / 2: return [None if b is None else 1 - b for b in lab]
+    return lab
+
+
+def desaccord_image(mots, vue, ph=None):
+    """Part des phrases (où l'image est sûre) dont la personne trouvée par le son n'est pas celle qui bouge à l'image."""
+    ph = ph or phrases(mots); voix0 = sorted({m["voix"] for m in mots})
+    if len(voix0) != 2 or not vue: return 0.0
+    avant = [int(np.argmax(np.bincount([voix0.index(mots[i]["voix"]) for i in p], minlength=2))) for p in ph]
+    cote = _aligner(avant, [c if w >= 0.15 else None for c, w in vue])
+    connus = [(a, b) for a, b in zip(avant, cote) if b is not None]
+    return 0.0 if len(connus) < 3 else sum(a != b for a, b in connus) / len(connus)
+
+
+def fil_dialogue(mots, ia=None, avis=None, vue=None):
     """Contrôle « questions-réponses » quand les deux voix se ressemblent trop pour que le son tranche (même personne qui fait les
     deux voix) : qui dit chaque PHRASE, d'après la logique du dialogue (indices_dialogue), l'avis de l'IA qui a lu le dialogue
     phrase par phrase (ia = liste 0/1 par phrase, ou None) et, un peu, les voix trouvées avant. Deux personnes seulement."""
@@ -498,6 +515,10 @@ def fil_dialogue(mots, ia=None, avis=None):
     if connus and sum(a == b for a, b in connus) < len(connus) / 2: ia = [None if b is None else 1 - b for b in ia]   # mêmes numéros
     avis = _Q["avis"] if avis is None else avis                            # poids des voix trouvées avant (le son)
     em = [tuple(avis * (a == q) + (_Q["ia"] * (b == q) if b is not None else 0.0) for q in (0, 1)) for a, b in zip(avant, ia)]
+    if vue and len(vue) == len(ph):                                        # témoin image : celui qui bouge quand la phrase est dite
+        ref = [b if b is not None else a for a, b in zip(avant, ia)]
+        cote = _aligner(ref, [c for c, _ in vue])
+        em = [tuple(e[q] + (_Q["image"] * (0.5 + vue[j][1]) * (cote[j] == q) if cote[j] is not None else 0.0) for q in (0, 1)) for j, e in enumerate(em)]
     tr = [_Q["change"] + s for s in indices_dialogue(mots, ph)]
     lab = _viterbi2(em, tr)
     if len(set(lab)) < 2: return mots
@@ -507,5 +528,5 @@ def fil_dialogue(mots, ia=None, avis=None):
     for j, p in enumerate(ph):
         for i in p: mots[i]["voix"] = noms[lab[j]]; mots[i]["sure"] = 0.0      # le son ne tranche pas : jamais « sûr »
     change = sum(1 for a, m in zip(av, mots) if a != m["voix"])
-    print(f"  contrôle questions-réponses ({'avec' if connus else 'sans'} relecture de l'IA) : {len(ph)} phrases, {change} mot(s) changé(s) de voix", flush=True)
+    print(f"  contrôle questions-réponses ({'avec' if connus else 'sans'} relecture de l'IA{', avec le témoin image' if vue else ''}) : {len(ph)} phrases, {change} mot(s) changé(s) de voix", flush=True)
     return mots
