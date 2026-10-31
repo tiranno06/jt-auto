@@ -1138,7 +1138,7 @@ class TestVoixEtScenesTiktok(unittest.TestCase):
             def __init__(self, nom): self.messages = type("M", (), {"dernier": nom})()
         anc = ecrire._appel, reseau.ia_disponible, reseau.claude, reseau.ordre_ia
         ecrire._appel = lambda client, *a, **k: (appels.append(client.messages.dernier), reponses[len(appels) - 1])[1]
-        reseau.ia_disponible = lambda: True; reseau.ordre_ia = lambda images=False: ["gemini", "mistral"]
+        reseau.ia_disponible = lambda: True; reseau.ordre_ia = lambda images=False, raisonner=False: ["gemini", "mistral"]
         reseau.claude = lambda raisonner=False, exclure=(): Faux("mistral" if exclure else "gemini")
         try: ia = D.relire_dialogue(mots)
         finally: ecrire._appel, reseau.ia_disponible, reseau.claude, reseau.ordre_ia = anc

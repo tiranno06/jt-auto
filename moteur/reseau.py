@@ -119,7 +119,7 @@ def _appel_openai(fourn, kw):
                                          headers={"Authorization": f"Bearer {cle}", "Content-Type": "application/json",
                                                   "User-Agent": "petitsdramas-robot/1.0"})   # Groq refuse les appels sans nom (403)
             try:
-                rep_ = urllib.request.urlopen(req, timeout=240); d = json.loads(rep_.read()); _noter_quota(fourn, rep_.headers); break
+                rep_ = urllib.request.urlopen(req, timeout=240); d = json.loads(rep_.read()); _noter_quota(fourn, getattr(rep_, "headers", None)); break
             except urllib.error.HTTPError as e:
                 derniere = e; corps_err = e.read()[:300].decode("utf-8", "ignore"); bas = corps_err.lower()
                 if e.code in (404, 400) and "model" in bas: d = "suivant"; break            # modèle inconnu : le suivant
