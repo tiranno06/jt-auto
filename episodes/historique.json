@@ -21915,5 +21915,156 @@
    "gpu_s": 0
   },
   "titre_affiche": "POV : Quand on veut éduquer mais qu’on reste u"
+ },
+ {
+  "date": "2026-11-02",
+  "format": "libre",
+  "titre": "CONFUSION PARENTALE",
+  "sources": [
+   "https://www.tiktok.com/@charly.bse/video/7649401581833588000"
+  ],
+  "note": 0,
+  "decision": "vidéo manuelle (bande son d'une vidéo TikTok)",
+  "accroche": "Toi t'es mon fils.",
+  "mots": [
+   "bande",
+   "tiktok"
+  ],
+  "empreinte": [
+   "alors",
+   "amael",
+   "appelle",
+   "confusi",
+   "fille",
+   "fils",
+   "frere",
+   "maman",
+   "mere",
+   "papa",
+   "pareil",
+   "parenta",
+   "pere",
+   "petit",
+   "suis"
+  ],
+  "voix": "bande son TikTok",
+  "gag": false,
+  "controle_video": "Humoriste 7.8/10 : 0.4 s Les vannes manquent parfois de réactions exagérées pour maximiser l'effet comique. Par exemple, le personnage enfant ne réagit pas assez fortement aux répliques du présentateur.; 60.3 s La dernière réplique 'Fils' est trop courte et manque d'une exagération comique pour clore la scène de manière mémorable. | Réalisateur 6.8/10 : 15.0 s Les personnages sont parfois mal synchronisés avec les sous-titres, ce qui peut nuire à la compréhension.; 69.9 s L'absence de bruitages ",
+  "running_gag": "",
+  "duree": 71.2,
+  "fichier": "2026-11-02_00h04_emission.mp4",
+  "tag": "emissions-2026-11",
+  "legende": "Quand les liens familiaux deviennent un casse-tête.\n\nQui est vraiment le fils de qui ?\n\n🎧 Son original : @charly.bse\n\n#petitsdramas #famille #confusion #humour #parente #comedie #enfant #parents #parentsvsenfants #freresoeur #drole #animation #dessinanime #cartoon #sketch",
+  "publie": null,
+  "style_accroche": null,
+  "couverture_ms": 67117,
+  "outils": {
+   "claude": "secours",
+   "mistral": "ok",
+   "gemini": "ok",
+   "groq": "ok",
+   "ia": "gemini ×1, mistral ×5",
+   "appels": {
+    "gemini": 1,
+    "mistral": 5
+   },
+   "epuisees": [
+    "gemini"
+   ],
+   "quota": {
+    "groq": {
+     "reste_jour": 998,
+     "limite_jour": 1000
+    }
+   },
+   "voix": "tiktok",
+   "decors": "ia",
+   "eco": false
+  },
+  "jury": {
+   "note": 7.2,
+   "source": "ia",
+   "notes": {
+    "humoriste": 7.8,
+    "realisateur": 6.8,
+    "directeur_artistique": 8.0,
+    "son": 6.0,
+    "spectateur": 7.0
+   },
+   "remarques": [
+    "Les vannes manquent parfois de réactions exagérées pour maximiser l'effet comique. Par exemple, le personnage enfant ne réagit pas assez for",
+    "La dernière réplique 'Fils' est trop courte et manque d'une exagération comique pour clore la scène de manière mémorable.",
+    "Les personnages sont parfois mal synchronisés avec les sous-titres, ce qui peut nuire à la compréhension.",
+    "L'absence de bruitages ou de sons ambiants rend certaines scènes moins immersives.",
+    "Les personnages ne reflètent pas toujours les âges ou les rôles attendus. Par exemple, le personnage enfant devrait avoir une apparence plus",
+    "L'absence de cohérence dans les décors entre les deux vidéos (chambre vs salon) peut désorienter le spectateur.",
+    "",
+    "La synchronisation labiale entre les personnages et les sous-titres est parfois approximative.",
+    "L'absence de bruitages ou de musique de fond rend certaines scènes moins dynamiques.",
+    "Le volume des voix n'est pas toujours équilibré, ce qui peut rendre certaines répliques moins audibles.",
+    "L'accroche dans les premières secondes est efficace, mais le rythme des répliques pourrait être légèrement accéléré pour maintenir l'attenti",
+    "Certaines scènes manquent de réactions visuelles ou de commentaires pour inciter le spectateur à partager la vidéo."
+   ],
+   "corrigees": [],
+   "manques": [
+    "Les personnages secondaires (comme les parents) ne sont pas présents visuellement dans notre version.",
+    "L'ambiance sonore (bruitages et musique) est absente dans notre version.",
+    "Les décors diffèrent (chambre vs salon), ce qui peut perturber la cohérence narrative.",
+    "Certains objets mentionnés (comme les jouets dans le salon original) manquent dans notre version."
+   ]
+  },
+  "web": true,
+  "a_verifier": [
+   {
+    "t": 68.2,
+    "poste": "technique",
+    "quoi": "saut d'image hors d'une coupe prévue",
+    "grave": true
+   },
+   {
+    "t": 7.0,
+    "poste": "sous-titres",
+    "quoi": "on entend « de papa. Papa c'est » sans sous-titre",
+    "grave": false
+   },
+   {
+    "t": 9.1,
+    "poste": "sous-titres",
+    "quoi": "sous-titre « Papa c'est ma fille. » mais on entend «  »",
+    "grave": false
+   },
+   {
+    "t": 23.0,
+    "poste": "contrôle IA",
+    "quoi": "Les personnages semblent légèrement décalés dans leur positionnement par rapport aux images précédentes, ce qui peut donner une impression de flottement.",
+    "grave": false
+   },
+   {
+    "t": 29.0,
+    "poste": "contrôle IA",
+    "quoi": "Le texte affiché est \"MAMAN ET MÈRE C'EST\", mais il manque la fin de la phrase \"pareil\" qui devrait apparaître à l'image 16.",
+    "grave": false
+   },
+   {
+    "t": 33.0,
+    "poste": "contrôle IA",
+    "quoi": "Les personnages semblent légèrement décalés ou flottants par rapport aux images précédentes.",
+    "grave": false
+   }
+  ],
+  "confiance": 66,
+  "equipe": "14/15 contrôles bons",
+  "filiere": "tiktok",
+  "source_audio": "https://www.tiktok.com/@charly.bse/video/7649401581833588000",
+  "theme": "Bande son : https://www.tiktok.com/@charly.bse/video/7649401581833588000",
+  "couts": {
+   "claude_usd": 0.0,
+   "claude_jetons": 51011,
+   "cache_lu": 0,
+   "eleven_caracteres": 0,
+   "gpu_s": 0
+  },
+  "titre_affiche": "POV : Expliquer la famille",
+  "deuxieme_chance_de": "2026-11-01_23h22_emission.mp4"
  }
 ]
