@@ -216,7 +216,7 @@ def generer(decoupage, graine=7, delai=1200, lumiere="", plans=None):  # 1re foi
 SEMI = set()                                                               # scènes dont le décor est semi-réaliste (dernier appel)
 
 def generer_semi(sk, graine=7, scenes=None, delai=1200):
-    """Décors « semi-réalistes » (moteur/semi_realiste.py, réglage STYLE_DECOR) : une peinture par lieu, cadrée pour que les pieds
+    """Décors « semi-réalistes » (moteur/semi_realiste.py, réglage STYLE_DECOR) : une peinture par lieu (3 tirages, le mieux cadré gagne), cadrée pour que les pieds
     des personnages soient sur le sol libre. Banque à part (descriptions « [semi] … », déjà cadrées) ; lieu ressemblant réutilisé ;
     budget mensuel DECORS_MOIS comme les autres décors. Renvoie {scène: image 1080x1920} ; une scène absente = décor dessiné (croquis)."""
     import semi_realiste as SR, studio
@@ -224,8 +224,8 @@ def generer_semi(sk, graine=7, scenes=None, delai=1200):
     dec = sk.get("decoupage") or []
     if not dec: return {}
     roles = [r for r in dict.fromkeys(x["p"] for x in sk.get("repliques", [])) if r != "narrateur"]
-    try: lieux = studio.bible(sk, roles)["lieux"]
-    except Exception: lieux = ["salon"]
+    try: B_ = studio.bible(sk, roles); lieux = B_["lieux"]; lum = B_.get("style_ia") or ""
+    except Exception: lieux, lum = ["salon"], ""
     reps = sk.get("repliques") or []
     demandes = []                                                          # (scène, description, personnages à l'image)
     for k, sc in enumerate(dec):
@@ -233,7 +233,7 @@ def generer_semi(sk, graine=7, scenes=None, delai=1200):
         lieu = lieux[min(k, len(lieux) - 1)] if lieux else "salon"
         if lieu == "voiture": continue                                     # intérieur de voiture : décor dessiné (volant au premier plan)
         n = len({reps[i]["p"] for i in sc.get("repliques", []) if 0 <= i < len(reps) and reps[i].get("p") != "narrateur"}) or len(roles) or 1
-        demandes.append((k, SR.description(lieu, sc.get("decor", "")), max(1, min(3, n))))
+        demandes.append((k, SR.description(lieu, sc.get("decor", ""), lum), max(1, min(3, n))))
     if not demandes: return {}
     out = {}
     def poser(k, im, prof):
@@ -259,7 +259,7 @@ def generer_semi(sk, graine=7, scenes=None, delai=1200):
     try:
         import modal
         D_ = modal.Cls.from_name("jt-decor", "Decor")()
-        res = D_.generer_semi.spawn([d.replace("[semi]", "").strip() for d in uniques], graine, 2).get(timeout=delai)
+        res = D_.generer_semi.spawn([d.replace("[semi]", "").strip() for d in uniques], graine, 3).get(timeout=delai)
     except Exception as e:
         print(f"Décors semi-réalistes indisponibles ({type(e).__name__} {str(e)[:150]}) : décors dessinés", flush=True); return out
     tirages = dict(zip(uniques, res))

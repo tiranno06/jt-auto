@@ -2159,6 +2159,8 @@ class TestDecorsSemiRealistes(unittest.TestCase):
             if avant is not None: os.environ["STYLE_DECOR"] = avant
         self.assertIn("[semi]", SR.description("salon")); self.assertIn("living room", SR.description("salon"))
         self.assertIn("pavement", SR.description("rue"))
+        self.assertNotIn("canapé", SR.description("salon", "salon avec un canapé beige"))   # français -> description anglaise du lieu
+        self.assertIn("evening", SR.description("salon", "", "warm golden evening light"))
         src = open(os.path.join(ICI, "..", "moteur", "site.py"), encoding="utf-8").read()
         self.assertIn('data-var="STYLE_DECOR" data-def="semi_realiste"', src); self.assertIn("Semi-réaliste", src)
         self.assertIn("STYLE_DECOR: ${{ vars.STYLE_DECOR }}", open(os.path.join(ICI, "..", ".github", "workflows", "emission.yml"), encoding="utf-8").read())
@@ -2201,7 +2203,7 @@ class TestDecorsSemiRealistes(unittest.TestCase):
             self.assertEqual(decors.generes_ce_mois(), 0)
             out = decors.generer_semi(sk)
             self.assertEqual(list(out), [0]); self.assertEqual(decors.SEMI, {0}); self.assertEqual(out[0].shape, (1920, 1080, 3))
-            self.assertEqual(len(appels), 1); self.assertEqual(appels[0][1], 2); self.assertNotIn("[semi]", appels[0][0][0])
+            self.assertEqual(len(appels), 1); self.assertEqual(appels[0][1], 3); self.assertNotIn("[semi]", appels[0][0][0])
             self.assertEqual(decors.generes_ce_mois(), 1)                 # compteur tenu à part (plus la date des fichiers)
             out2 = decors.generer_semi(sk); self.assertEqual(list(out2), [0]); self.assertEqual(len(appels), 1)   # repris de la banque
             self.assertIsNone(decors.voisin("cozy living room, sofa, posters on the wall, coffee table, lamp, television", 0.1))   # jamais pour un décor croquis
