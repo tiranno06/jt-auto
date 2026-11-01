@@ -292,7 +292,8 @@
   SONS_CALENDRIER=0) ; **« Dis ce qui ne va pas, le robot corrige »** (fiche d'une vidéo TikTok : remarque écrite ou dictée 🎤 ->
   refaire « fichier|remarque|texte » -> `moteur/remarque.py` : l'IA traduit en « qui dit quoi » + corrections du jury, règles simples
   sans IA ; même son, mêmes répliques ; remarque gardée pour le jury) ; **OpenRouter** = 4e IA gratuite (secret OPENROUTER_API_KEY,
-  modèles « :free ») ; **notre IA de secours sur Modal** (`moteur/ia_modal.py`, Qwen2.5-VL 7B Apache 2.0 sous vLLM, GPU L4, arrêt
+  modèles « :free » lus en direct sur openrouter.ai/api/v1/models par `reseau._openrouter_libres` : ils changent souvent) ;
+  **notre IA de secours sur Modal** (`moteur/ia_modal.py`, Qwen2.5-VL 7B Apache 2.0 sous vLLM, GPU L4, arrêt
   2 min après ; app jt-ia, workflow « IA de secours sur Modal » ; utilisée en tout dernier recours si elle est déployée :
   IA_MODAL_PRETE ; IA_MODAL=0).
   **Tirage au hasard des sons TikTok** : le robot préfère les vidéos aux voix bien différentes (ressemblance ≤ 0,6, réglage

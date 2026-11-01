@@ -41,8 +41,28 @@ FOURNISSEURS = {
 }
 FOURNISSEURS["openrouter"] = dict(                                         # 4e IA gratuite (clé gratuite OPENROUTER_API_KEY) : modèles « :free »
     cle="OPENROUTER_API_KEY", url="https://openrouter.ai/api/v1/chat/completions",
-    texte=("meta-llama/llama-3.3-70b-instruct:free", "deepseek/deepseek-chat-v3-0324:free", "mistralai/mistral-small-3.2-24b-instruct:free"),
-    images=("qwen/qwen2.5-vl-72b-instruct:free", "google/gemma-3-27b-it:free", "meta-llama/llama-4-maverick:free"))
+    texte=(), images=())                                                    # liste lue en direct (les modèles gratuits changent souvent)
+PREF_OPENROUTER = ("gemma-4-31b", "nemotron-3-ultra", "nemotron-3.5-super", "inkling:free", "gemma-4-26b", "inkling-small",
+                   "dots-3", "xing", "flint", "nemotron-3.5-lightning", "omni")
+_OR = {}
+
+
+def _openrouter_libres(images=False, outils=False):
+    """Modèles gratuits (« :free ») d'OpenRouter, lus une fois sur openrouter.ai/api/v1/models : les plus grands d'abord, ceux qui
+    voient les images si besoin, ceux qui savent remplir un outil si on en donne un. Jamais Cohere (usage commercial interdit) ni
+    les modèles de modération."""
+    if "liste" not in _OR:
+        try:
+            d = json.loads(ouvrir(urllib.request.Request("https://openrouter.ai/api/v1/models", headers={"User-Agent": "petitsdramas-robot/1.0"}), timeout=20, essais=2))
+            _OR["liste"] = [m for m in d.get("data") or [] if str(m.get("id", "")).endswith(":free")
+                            and not any(x in m["id"] for x in ("cohere", "content-safety", "guard"))]
+        except Exception: _OR["liste"] = []
+    def rang(m):
+        i = m["id"]; k = next((n for n, p in enumerate(PREF_OPENROUTER) if p in i), len(PREF_OPENROUTER))
+        return (k, -int(m.get("context_length") or 0))
+    L = [m for m in _OR["liste"] if (not images or "image" in ((m.get("architecture") or {}).get("input_modalities") or []))
+         and (not outils or "tools" in (m.get("supported_parameters") or []))]
+    return tuple(m["id"] for m in sorted(L, key=rang)[:4])
 EPUISE = (" 401", " 403", "quota", "exhausted", "billing", "per day", "(tpd)", "(rpd)")   # fournisseur à court pour la journée
 HORS_SERVICE = set()                                                       # fournisseurs épuisés pendant cette fabrication
 QUOTA = {}                                                                 # ce qu'il reste chez chaque IA gratuite (en-têtes des réponses)
@@ -114,7 +134,7 @@ def _appel_openai(fourn, kw):
         tc = kw.get("tool_choice") or {}
         corps["tool_choice"] = ("any" if fourn == "mistral" else "required") if (tc.get("type") in ("tool", "any") or len(outils) == 1) else "auto"
     derniere = None
-    modeles = F["images" if images else "texte"]
+    modeles = _openrouter_libres(images, bool(outils)) if fourn == "openrouter" else F["images" if images else "texte"]
     for modele in modeles:
         corps["model"] = modele; d = None
         for essai in range(4):
