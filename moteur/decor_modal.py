@@ -111,7 +111,8 @@ class Decor:
                     g = torch.Generator("cuda").manual_seed(graine + 101 * k + j)
                     im = self.pipe(STYLE_SEMI.format(decor=" ".join(str(d).split()[:40])), negative_prompt=NEGATIF_SEMI, height=1536, width=880,
                                    num_inference_steps=34, guidance_scale=6.5, generator=g).images[0]
-                    b = io.BytesIO(); self._net(im).save(b, format="PNG"); tirages.append((b.getvalue(), self._profondeur(im)))
+                    b = io.BytesIO(); im.resize((1100, 1920), Image.LANCZOS).save(b, format="PNG")   # pas l'agrandisseur « anime » : il donnait un style BD
+                    tirages.append((b.getvalue(), self._profondeur(im)))
                 except Exception as e:
                     print("decor semi:", e)
             out.append(tirages)

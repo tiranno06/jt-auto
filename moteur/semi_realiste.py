@@ -9,7 +9,7 @@ Les pieds doivent être VRAIMENT posés au sol (demande de l'auteur) :
 3. on cherche le cadrage 9:16 (zoom le plus faible) qui met les pieds de chaque personnage (places fixes du moteur, `PIEDS`) sur ce
    sol, sans aucun obstacle autour ni devant eux (`libre`, `cadrer`).
 Aucun cadrage possible -> décor dessiné habituel (passé en croquis) : jamais de pieds qui flottent ou de personnage debout sur un meuble."""
-import os
+import os, re
 import numpy as np, cv2
 
 W, H = 1080, 1920
@@ -25,16 +25,18 @@ DEHORS = {"rue", "parc", "plage", "jardin", "camping", "montagne", "stade", "par
           "piscine", "espace", "gare"}
 
 
-def description(lieu, decor=""):
+def description(lieu, decor="", lumiere=""):
     """Description anglaise du lieu pour la peinture : celle de la mise en scène, sinon celle du lieu reconnu (studio.DECOR_EN)."""
     d = (decor or "").strip()
+    if d and (re.search(r"[àâçéèêëîïôûùœ]", d.lower()) or not re.search(r"\b(with|the|and|a|an|of|on)\b", d.lower())):
+        d = ""                                                             # description en français : l'IA des décors la comprend mal
     if not d:
         try:
             import studio
             d = studio.DECOR_EN.get(lieu) or (lieu or "living room").replace("_", " ")
         except Exception: d = (lieu or "living room").replace("_", " ")
     sol = "large empty pavement in the foreground" if lieu in DEHORS else "large empty floor in the foreground"
-    return f"[semi] {d}, {sol}"
+    return f"[semi] {d}, {sol}" + (f", {lumiere}" if lumiere else "")
 
 
 def obstacles(prof, tol=None):

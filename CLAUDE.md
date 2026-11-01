@@ -375,7 +375,9 @@
   sans obstacle autour ; aucun cadrage possible / budget atteint / Modal absent -> décor dessiné en croquis (jamais de pieds qui
   flottent). Banque à part (descriptions « [semi] … », déjà cadrées, jamais mélangées aux décors croquis). Coût : ~3-10 centimes
   par lieu neuf, 60 lieux neufs par mois au plus (DECORS_MOIS). **Compteur du budget réparé** (`decors/compteur.json` : la date
-  des fichiers ne veut rien dire sur GitHub, le budget paraissait toujours atteint). Essais visuels : `maquettes/photo/`.
+  des fichiers ne veut rien dire sur GitHub, le budget paraissait toujours atteint). Essais visuels : `maquettes/photo/`. Leçons des 2 premières vidéos : description du lieu toujours en anglais
+  (`studio.DECOR_EN` quand la mise en scène l'écrit en français : l'IA comprenait mal), lumière du moment ajoutée, 3 tirages, pas
+  d'agrandisseur « anime » (il donnait un style BD : simple agrandissement doux).
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.
