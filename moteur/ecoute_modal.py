@@ -14,7 +14,8 @@ CONF = "https://raw.githubusercontent.com/NVIDIA/NeMo/v2.1.0/examples/speaker_ta
 
 img_nemo = (modal.Image.debian_slim(python_version="3.10").apt_install("ffmpeg", "libsndfile1", "build-essential", "wget")
             .pip_install("torch==2.5.1", "torchaudio==2.5.1", "Cython", "packaging")
-            .pip_install("nemo_toolkit[asr]==2.1.0").run_commands(f"wget -q -O /opt/diar.yaml {CONF}").env(ENV))
+            .pip_install("nemo_toolkit[asr]==2.1.0", "numpy<2")              # NeMo 2.1 utilise np.sctypes (retiré de NumPy 2)
+            .run_commands(f"wget -q -O /opt/diar.yaml {CONF}").env(ENV))
 img_florence = (modal.Image.debian_slim(python_version="3.11")
                 .pip_install("torch==2.5.1", "transformers==4.46.3", "accelerate", "einops", "timm", "pillow", "numpy<2").env(ENV))
 
