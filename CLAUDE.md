@@ -139,7 +139,10 @@
   `couette`, `canape_face`, `comptoir` ; couleurs en BGR). **Appels : écran coupé en deux du début à la fin** (chacun dans son décor,
   aucun changement de plan ; APPEL_CONTINU=0 pour l'ancien montage alterné). **Bouton « À publier » partout** : sur la vidéo ouverte
   (#aPublier) et sur les vidéos TikTok de la page Vidéos (état « ✅ À publier (n° k) » visible), même bouton que l'onglet TikTok
-  (`boutonPubli`, `majPubliPartout`).
+  (`boutonPubli`, `majPubliPartout`). **Onglet TikTok en menus déroulants** (demande de l'auteur, 1er novembre 2026) : chaque bloc
+  (lien, profils, lancer des vidéos, vidéos automatiques, publication automatique, mes vidéos) est un `details.groupe.repliTk`,
+  ouvert / fermé gardé sur l'appareil (« jt_replis ») ; « Lancer des vidéos » et « Mes vidéos TikTok » ouverts au départ ; la
+  recherche et les filtres dans « 🔎 Rechercher et filtrer » (ouvert si un filtre est actif) ; la fabrication en cours reste visible.
 - **Barre de progression en temps réel** (accueil + onglet TikTok, PC et mobile) : le robot publie son avancement toutes les 8 s
   (`moteur/progression.py` → statut « progression-<run> » du commit : %, type, étape, heure de fin ; dessin des images = vitesse
   réelle) ; le site le relit toutes les 5 s, fait avancer barre et compte à rebours chaque seconde, montre la file d'attente et la

@@ -2103,3 +2103,13 @@ class TestListe1Novembre(unittest.TestCase):
                 else: os.environ[k] = v
         import ia_modal
         self.assertEqual(ia_modal.APP, "jt-ia")
+
+
+class TestOngletTiktokReplie(unittest.TestCase):
+    def test_menus_deroulants(self):
+        """Demande de l'auteur (1er novembre 2026) : tout l'onglet TikTok en menus déroulants, ouverts / fermés gardés sur l'appareil."""
+        src = open(os.path.join(os.path.dirname(__file__), "..", "moteur", "site.py"), encoding="utf-8").read()
+        i = src.index('<div id="o-tiktok"'); j = src.index("STATISTIQUES -->", i); bloc = src[i:j]
+        self.assertGreaterEqual(bloc.count('class="groupe repliTk"'), 6)
+        self.assertEqual(bloc.count('<section class="panneau"'), 1)        # seule la fabrication en cours reste toujours visible
+        self.assertIn('id="filtresRepli"', bloc); self.assertIn("jt_replis", src)
