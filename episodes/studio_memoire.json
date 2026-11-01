@@ -5513,37 +5513,39 @@
  {
   "moment": "soir",
   "lieux": [
+   "rue",
    "salon"
   ],
   "source": "auteur+image",
-  "duree": 67.5,
+  "duree": 62.9,
   "plans": {
-   "large": 19
+   "large": 34
   },
   "mouvements": {
-   "fixe": 19
+   "fixe": 34
   },
   "costumes": {
    "presentateur": "tshirt",
-   "invite": "tshirt"
+   "invite": "chemise"
   },
   "figurants": 0,
   "ambiances": [
+   "pluie",
    "poussiere",
    "vapeur"
   ],
-  "controle": "Humoriste 7.0/10 : 1 s La chute finale est trop longue et la vanne se dilue.; 66.9 s Manque de réaction plus marquée de l'invite sur les sujets abordés en fin de vidéo.; 0.4 s L'humour pourrait être r",
-  "fichier": "2026-11-01_16h40_emission.mp4",
+  "controle": "Humoriste 8.6/10 : 23.3 s La chute concernant 'J'avais été sûr' est un peu trop longue et manque d'un bruitage pour marquer l'impact. Un 'vine_boom' ou un 'clavier' pourrait renforcer l'effet comique.",
+  "fichier": "2026-11-01_16h58_emission.mp4",
   "cine": {
    "focus": false,
-   "vertige": true,
-   "tiers": true,
-   "etalonnage": true,
+   "vertige": false,
+   "tiers": false,
+   "etalonnage": false,
    "profondeur": false,
    "grain": true,
    "reflets": false,
    "son": true
   },
-  "cadence": "rapide"
+  "cadence": "normal"
  }
 ]
