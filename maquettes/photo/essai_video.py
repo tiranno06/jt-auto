@@ -28,8 +28,12 @@ for r in sk["repliques"]:
     a0 = int(float(r["_deb"]) * doublage.SR); a1 = max(int(float(r["_fin"]) * doublage.SR) + int(0.05 * doublage.SR), a0 + int(0.2 * doublage.SR))
     audios.append(np.asarray(mono[a0:a1], np.float32))
     mots.append([(str(w), float(a), float(b)) for w, a, b in r["_mots"]] if r.get("_mots") else None)
-fond = cv2.cvtColor(cv2.imread(os.path.join(D, "peints", "peint_0.png")), cv2.COLOR_BGR2RGB)
-h, w = fond.shape[:2]; c = max(0, int(w - h * 1080 / 1920) // 2)
-fond = cv2.resize(fond[:, c:w - c], (1080, 1920), interpolation=cv2.INTER_LANCZOS4)
+fond = cv2.cvtColor(cv2.imread(os.path.join(D, "peints", os.environ.get("DECOR", "peint_0.png"))), cv2.COLOR_BGR2RGB)
+h, w = fond.shape[:2]
+if os.environ.get("CADRE"):                                                # « x0 » : fenêtre 9:16 collée en bas, de x0 au bord droit
+    x0 = int(os.environ["CADRE"]); ww = w - x0; hh = int(ww * 16 / 9); fond = fond[h - hh:, x0:]   # (pieds posés sur le parquet libre)
+else:
+    c = max(0, int(w - h * 1080 / 1920) // 2); fond = fond[:, c:w - c]
+fond = cv2.resize(fond, (1080, 1920), interpolation=cv2.INTER_LANCZOS4)
 duree = cartoon.rendre(sk, sortie, audios, mots=mots, decors={0: fond}, mini=True)
 print(f"vidéo d'essai : {sortie} ({duree:.1f} s)")
