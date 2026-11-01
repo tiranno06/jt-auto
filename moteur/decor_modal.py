@@ -17,6 +17,10 @@ STYLE = ("{decor}, detailed 2D cartoon background, empty scene, no people, clean
 NEGATIF = ("people, person, human, man, woman, child, character, face, animal, text, letters, words, logo, watermark, signature, "
            "photo, photorealistic, 3d render, realistic, noisy, hatching, grainy texture, gradient shading, dark, blurry, out of focus, depth of field, bokeh, "
            "writing, lettering, captions, gibberish text, signs with words, typography")
+STYLE_SEMI = ("{decor}, semi-realistic digital painting, animated movie background art, soft painterly brushstrokes, "
+              "slightly simplified shapes, warm soft lighting, low camera, furniture against the far wall, nothing in the foreground, empty scene, no people, sharp")
+NEGATIF_SEMI = ("people, person, human, face, animal, text, letters, words, logo, watermark, photo, photograph, photorealistic, hyperrealistic, "
+                "3d render, blurry, out of focus, bokeh, depth of field, fisheye, distorted, furniture in the foreground, table in the foreground")
 # agrandisseur IA (Real-ESRGAN « anime », licence BSD-3) : décor plus fin et plus net ; profondeur (Depth Anything V2 Small, Apache-2.0)
 AGRANDISSEUR = "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.2.4/RealESRGAN_x4plus_anime_6B.pth"
 PROFONDEUR = "depth-anything/Depth-Anything-V2-Small-hf"
@@ -90,6 +94,27 @@ class Decor:
                 b = io.BytesIO(); im.save(b, format="PNG"); out.append(b.getvalue())
             except Exception as e:
                 print("decor:", e); out.append(b"")
+        return out
+
+    @modal.method()
+    def generer_semi(self, decors: list, graine: int = 7, n: int = 2) -> list:
+        """Décors « semi-réalistes » (réglage STYLE_DECOR, choix de l'auteur du 1er novembre 2026) : peinture façon fond de film
+        d'animation, avec un grand sol libre devant (le robot y pose les pieds : moteur/semi_realiste.py). n tirages par décor ;
+        pour chaque décor : [(png net 1100x1920, png profondeur)]."""
+        import torch
+        from PIL import Image
+        out = []
+        for k, d in enumerate(decors):
+            tirages = []
+            for j in range(max(1, n)):
+                try:
+                    g = torch.Generator("cuda").manual_seed(graine + 101 * k + j)
+                    im = self.pipe(STYLE_SEMI.format(decor=" ".join(str(d).split()[:40])), negative_prompt=NEGATIF_SEMI, height=1536, width=880,
+                                   num_inference_steps=34, guidance_scale=6.5, generator=g).images[0]
+                    b = io.BytesIO(); self._net(im).save(b, format="PNG"); tirages.append((b.getvalue(), self._profondeur(im)))
+                except Exception as e:
+                    print("decor semi:", e)
+            out.append(tirages)
         return out
 
     @modal.method()

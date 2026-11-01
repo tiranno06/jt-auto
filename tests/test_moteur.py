@@ -2133,3 +2133,86 @@ class TestOngletTiktokReplie(unittest.TestCase):
         self.assertGreaterEqual(bloc.count('class="groupe repliTk"'), 6)
         self.assertEqual(bloc.count('<section class="panneau"'), 1)        # seule la fabrication en cours reste toujours visible
         self.assertIn('id="filtresRepli"', bloc); self.assertIn("jt_replis", src)
+
+
+class TestDecorsSemiRealistes(unittest.TestCase):
+    """Décors « semi-réalistes » (choix de l'auteur, 1er novembre 2026) : peinture, pieds posés sur le sol libre, réglage STYLE_DECOR."""
+
+    @staticmethod
+    def _decor(meuble=None):
+        """Faux décor 880x1536 : mur au fond (loin), sol en plan qui se rapproche vers le bas, un meuble éventuel (x0, x1, y0, y1)."""
+        h, w = 1536, 880; y = np.arange(h, dtype=np.float32)[:, None]
+        prof = np.where(y < 700, 40.0, 40 + (y - 700) / (h - 700) * 200).repeat(w, 1)
+        im = np.zeros((h, w, 3), np.uint8); im[:700] = (200, 190, 170); im[700:] = (180, 140, 100)
+        if meuble:
+            x0, x1, y0, y1 = meuble; prof[y0:y1, x0:x1] = prof[y1 - 1, x0] + 60; im[y0:y1, x0:x1] = (90, 90, 120)
+        return im, prof.astype(np.uint8)
+
+    def test_reglage_et_description(self):
+        import semi_realiste as SR
+        avant = os.environ.pop("STYLE_DECOR", None)
+        try:
+            self.assertTrue(SR.actif())                                    # semi-réaliste par défaut
+            os.environ["STYLE_DECOR"] = "croquis"; self.assertFalse(SR.actif())
+        finally:
+            os.environ.pop("STYLE_DECOR", None)
+            if avant is not None: os.environ["STYLE_DECOR"] = avant
+        self.assertIn("[semi]", SR.description("salon")); self.assertIn("living room", SR.description("salon"))
+        self.assertIn("pavement", SR.description("rue"))
+        src = open(os.path.join(ICI, "..", "moteur", "site.py"), encoding="utf-8").read()
+        self.assertIn('data-var="STYLE_DECOR" data-def="semi_realiste"', src); self.assertIn("Semi-réaliste", src)
+        self.assertIn("STYLE_DECOR: ${{ vars.STYLE_DECOR }}", open(os.path.join(ICI, "..", ".github", "workflows", "emission.yml"), encoding="utf-8").read())
+
+    def test_pieds_au_sol(self):
+        import semi_realiste as SR
+        im, prof = self._decor()
+        r = SR.cadrer(im, prof, 2); self.assertIsNotNone(r)
+        c, pr, z = r; self.assertEqual(c.shape, (1920, 1080, 3)); self.assertEqual(pr.shape, (1920, 1080))
+        self.assertTrue((c[SR.PIED_Y, 285] == (180, 140, 100)).all())     # les pieds tombent sur le sol, pas sur le mur
+        im, prof = self._decor(meuble=(300, 600, 1200, 1536))              # un meuble au milieu, jusqu'en bas : les pieds l'évitent
+        r = SR.cadrer(im, prof, 2)
+        if r is not None:
+            obs = SR.obstacles(prof); self.assertTrue(obs[1300, 450])
+            c = r[0]
+            for x in (285, 795): self.assertFalse((c[SR.PIED_Y, x] == (90, 90, 120)).all())
+        im, prof = self._decor(meuble=(0, 880, 1100, 1536))                # aucun sol libre : refusé (décor dessiné à la place)
+        self.assertIsNone(SR.cadrer(im, prof, 2))
+
+    def test_banque_et_budget(self):
+        """Fausse IA Modal : 2 tirages (un sans sol libre, un bon) -> le bon est cadré, rangé dans la banque à part, compté dans le
+        budget du mois ; la 2e fois, le lieu est repris de la banque sans rien demander à Modal."""
+        import decors, cv2 as _cv
+        dossier = tempfile.mkdtemp(); avant = decors.BANQUE, decors.COMPTEUR
+        decors.BANQUE = dossier; decors.COMPTEUR = os.path.join(dossier, "compteur.json")
+        def png(a): return _cv.imencode(".png", a[..., ::-1] if a.ndim == 3 else a)[1].tobytes()
+        mauvais = self._decor(meuble=(0, 880, 1100, 1536)); bon = self._decor()
+        appels = []
+        class _Rep:
+            def get(self, timeout=None): return [[(png(mauvais[0]), png(mauvais[1])), (png(bon[0]), png(bon[1]))]]
+        class _Methode:
+            def spawn(self, d, g, n): appels.append((d, n)); return _Rep()
+        class _Decor:
+            generer_semi = _Methode()
+        faux = types.SimpleNamespace(Cls=types.SimpleNamespace(from_name=lambda a, b: (lambda: _Decor())))
+        sk = {"repliques": [{"p": "presentateur", "t": "Salut"}, {"p": "invite", "t": "Ça va ?"}],
+              "decoupage": [{"repliques": [0, 1], "decor": ""}]}
+        anc = sys.modules.get("modal"); sys.modules["modal"] = faux
+        try:
+            self.assertEqual(decors.generes_ce_mois(), 0)
+            out = decors.generer_semi(sk)
+            self.assertEqual(list(out), [0]); self.assertEqual(decors.SEMI, {0}); self.assertEqual(out[0].shape, (1920, 1080, 3))
+            self.assertEqual(len(appels), 1); self.assertEqual(appels[0][1], 2); self.assertNotIn("[semi]", appels[0][0][0])
+            self.assertEqual(decors.generes_ce_mois(), 1)                 # compteur tenu à part (plus la date des fichiers)
+            out2 = decors.generer_semi(sk); self.assertEqual(list(out2), [0]); self.assertEqual(len(appels), 1)   # repris de la banque
+            self.assertIsNone(decors.voisin("cozy living room, sofa, posters on the wall, coffee table, lamp, television", 0.1))   # jamais pour un décor croquis
+        finally:
+            decors.BANQUE, decors.COMPTEUR = avant
+            if anc is None: sys.modules.pop("modal", None)
+            else: sys.modules["modal"] = anc
+
+    def test_moteur_garde_la_peinture(self):
+        src = open(os.path.join(ICI, "..", "moteur", "cartoon.py"), encoding="utf-8").read()
+        self.assertIn('SEMI_ = set(sk.get("_decors_semi") or [])', src); self.assertEqual(src.count("if sc_ in SEMI_: continue"), 2)
+        p = open(os.path.join(ICI, "..", "moteur", "principal.py"), encoding="utf-8").read()
+        self.assertIn("decors_mod.generer_semi(sk", p); self.assertIn('sk["_decors_semi"] = sorted(decors_mod.SEMI)', p)
+        self.assertIn("def generer_semi", open(os.path.join(ICI, "..", "moteur", "decor_modal.py"), encoding="utf-8").read())

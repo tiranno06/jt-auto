@@ -365,6 +365,17 @@
   mariée, doudoune, imperméable, déguisements (Halloween, fêtes : sorcière, citrouille, lapin), uniforme scolaire, gilet jaune ;
   accessoires : sac à main, valise, parapluie, écharpe, gants, lunettes de ski, montre, casque de moto. Et tout l'existant
   (25 lieux, 37 métiers, 20 outils, 28 hauts, 21 coiffures, 21 chapeaux, 44 objets, véhicules) redessiné en croquis.
+- **Décors « Semi-réaliste » = STYLE PAR DÉFAUT (choix de l'auteur, 1er novembre 2026, après essais vidéo)** : réglage « Style des
+  décors » (variable STYLE_DECOR : `semi_realiste` par défaut, `croquis` = décor dessiné à l'encre et à l'aquarelle) ; le décor est
+  une PEINTURE semi-réaliste façon fond de film d'animation (même IA : SDXL sur Modal, `decor_modal.generer_semi`, 2 tirages par lieu,
+  sans aplats ni aquarelle, rien de dessiné par-dessus : ni saison, ni premier plan, ni détails animés ; `cartoon` → `SEMI_`,
+  sk["_decors_semi"]) ; personnages toujours en croquis ; **pieds VRAIMENT posés au sol** (`moteur/semi_realiste.py`) : grand sol
+  libre demandé à l'IA, sol trouvé par la carte de profondeur (le sol = un plan mesuré en bas de l'image ; chaise, table, lit, mur
+  = obstacles), cadrage 9:16 au zoom le plus faible qui met les pieds de chacun (places fixes du moteur, ligne 1500) sur le sol
+  sans obstacle autour ; aucun cadrage possible / budget atteint / Modal absent -> décor dessiné en croquis (jamais de pieds qui
+  flottent). Banque à part (descriptions « [semi] … », déjà cadrées, jamais mélangées aux décors croquis). Coût : ~3-10 centimes
+  par lieu neuf, 60 lieux neufs par mois au plus (DECORS_MOIS). **Compteur du budget réparé** (`decors/compteur.json` : la date
+  des fichiers ne veut rien dire sur GitHub, le budget paraissait toujours atteint). Essais visuels : `maquettes/photo/`.
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.
