@@ -193,7 +193,9 @@
   → TikTok). **Publication automatique** (onglet TikTok, `moteur/publication_auto.py` lancé par garde.yml) : case « À publier » sur
   chaque vidéo (variable PUBLI_FILE, ordre de coche), PUBLI_AUTO + PUBLI_HEURE (Paris) : une vidéo par jour, la plus ancienne cochée
   non publiée, envoyée à Buffer pour l'heure exacte (publier.yml auto=1, run « Publication automatique : … » = journée faite) ; une
-  vidéo en échec est sautée.
+  vidéo en échec est sautée. **Deux vidéos par jour** (demande de l'auteur, 1er novembre 2026) : case « Deux vidéos par jour »
+  (PUBLI_DEUX) + 2e heure (PUBLI_HEURE2, 12:00 par défaut, au moins une heure d'écart) ; une vidéo par créneau
+  (`publication_auto.creneaux`, chaque publication automatique du jour compte pour un créneau) ; calendrier du site sur les deux heures.
 - **Métiers (30 octobre 2026, planches de référence de l'auteur)** : `moteur/metiers.py` : ~38 métiers et univers (pompier, policier,
   médecin, infirmier, chirurgien, dentiste, vétérinaire, prof, cuisinier, boulanger, serveur, ingénieur, ouvrier, électricien, plombier,
   mécanicien, agriculteur, jardinier, peintre, musicien, pilote, hôtesse, scientifique, informaticien, avocat, juge, astronaute,

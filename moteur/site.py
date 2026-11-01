@@ -410,9 +410,11 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <p class="note">Vidéo prête 20 à 40 min après l'heure. S'il n'y a aucun son utilisable, pas de vidéo cette fois (jamais de sketch à la place).</p></section>
   <section class="panneau" id="pubAuto"><h2>📤 Publication automatique</h2>
     <p class="note">Cochez « À publier » sur les vidéos que vous avez vérifiées : chaque jour à l'heure choisie, le robot publie sur TikTok la plus ancienne vidéo cochée pas encore publiée (dans l'ordre où vous les avez cochées).</p>
-    <div class="auto"><div class="txt"><b>Activée</b><small>Une vidéo cochée publiée par jour, même appli fermée.</small></div><button class="inter" data-var="PUBLI_AUTO" data-def="0" data-bascule="1"></button></div>
+    <div class="auto"><div class="txt"><b>Activée</b><small>Une vidéo cochée publiée par jour (ou deux), même appli fermée.</small></div><button class="inter" data-var="PUBLI_AUTO" data-def="0" data-bascule="1"></button></div>
     <div class="auto"><div class="txt"><b>Heure choisie par les statistiques</b><small>L'heure où vos vidéos font le plus de vues (sinon l'heure fixe ci-dessous).</small></div><button class="inter" data-var="PUBLI_HEURE_AUTO" data-def="0" data-bascule="1"></button></div>
     <label>Heure de publication (heure de Paris)<div class="jeton"><input data-var="PUBLI_HEURE" data-def="18:00" data-texte="1" maxlength="5" type="time" placeholder="18:00"><button class="second" data-enr="PUBLI_HEURE" style="flex:none;padding:10px 14px">OK</button></div></label>
+    <div class="auto"><div class="txt"><b>Deux vidéos par jour</b><small>Une 2e vidéo cochée publiée à la 2e heure ci-dessous (au moins une heure d'écart).</small></div><button class="inter" data-var="PUBLI_DEUX" data-def="0" data-bascule="1"></button></div>
+    <label>2e heure de publication (heure de Paris)<div class="jeton"><input data-var="PUBLI_HEURE2" data-def="12:00" data-texte="1" maxlength="5" type="time" placeholder="12:00"><button class="second" data-enr="PUBLI_HEURE2" style="flex:none;padding:10px 14px">OK</button></div></label>
     <p class="note" id="pubResume"></p>
     <h3 style="margin:14px 0 6px">🗓️ Calendrier de publication</h3><div id="calendrier"></div>
     <p class="note">Jamais deux sons du même profil d'affilée : le robot alterne les comptes d'origine (l'ordre ci-dessus en tient compte).</p></section>
@@ -963,17 +965,28 @@ async function basculerPubli(nom,b){
   try{await ecrireVar("PUBLI_FILE",f.join("\n")||"-"); toast(on?"Retirée de la publication automatique":"Ajoutée à la publication automatique ✓"); majBoutonPubliFiche()}
   catch(e){VARS.PUBLI_FILE=avant; majPubliPartout(); toast("❌ Pas enregistré ("+e.message+") : retour en arrière")}
 }
+function creneauxPubli(){                                                 // heures de publication du jour (1 ou 2), triées
+  const auto=String((VARS&&VARS.PUBLI_HEURE_AUTO)||"0")==="1", h=auto?(String(CONF.heure_stats??18).padStart(2,"0")+":00"):((VARS&&VARS.PUBLI_HEURE)||"18:00");
+  const l=[h], h2=String((VARS&&VARS.PUBLI_HEURE2)||"12:00").trim(), mn=x=>{const [a,b]=x.split(":").map(Number); return a*60+(b||0)};
+  if(String((VARS&&VARS.PUBLI_DEUX)||"0")==="1"&&/^\d{1,2}:\d{2}$/.test(h2)&&Math.abs(mn(h2)-mn(h))>=60) l.push(h2);
+  return l.sort((a,b)=>mn(a)-mn(b));
+}
+function prochainsCreneaux(n){                                             // [Date] des n prochaines publications
+  const hs=creneauxPubli(), out=[], d=new Date(); d.setSeconds(0,0);
+  for(let j=0;out.length<n&&j<400;j++) for(const h of hs){const [a,b]=h.split(":").map(Number), x=new Date(d); x.setDate(d.getDate()+j); x.setHours(a,b,0,0);
+    if(x>new Date()&&out.length<n) out.push(x)}
+  return out;
+}
 function rendreCalendrier(){                                               // les prochains jours de publication, dans l'ordre de la file
   const z=$("#calendrier"); if(!z) return; z.innerHTML="";
-  const a=attentePubli(filePubli()), auto=String((VARS&&VARS.PUBLI_HEURE_AUTO)||"0")==="1", h=auto?(String(CONF.heure_stats??18).padStart(2,"0")+":00"):((VARS&&VARS.PUBLI_HEURE)||"18:00");
-  const [hh,mm]=h.split(":").map(Number), d0=new Date(); if(d0.getHours()*60+d0.getMinutes()>=hh*60+mm) d0.setDate(d0.getDate()+1);
+  const a=attentePubli(filePubli()), dates=prochainsCreneaux(a.length);
   const prog=DATA.filter(v=>v.programmee&&new Date(v.programmee)>new Date()).map(v=>[new Date(v.programmee),v]);
   if(!a.length&&!prog.length){z.innerHTML='<p class="note">Rien de prévu : cochez « À publier » sur des vidéos.</p>';return}
   const jour=d=>d.toLocaleDateString("fr-FR",{weekday:"short",day:"numeric",month:"short"});
   prog.sort((x,y)=>x[0]-y[0]).forEach(([d,v])=>z.insertAdjacentHTML("beforeend",`<div class="cal"><span class="j">${jour(d)} ${d.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"})}</span><span class="t">🗓️ ${String(v.titre).replace(/[<>&]/g,"")} (programmée)</span></div>`));
-  a.forEach((nom,k)=>{const v=DATA.find(x=>x.fichier===nom); const d=new Date(d0); d.setDate(d0.getDate()+k);
+  a.forEach((nom,k)=>{const v=DATA.find(x=>x.fichier===nom); const d=dates[k]||new Date();
     const el=document.createElement("div"); el.className="cal"; el.draggable=true; el.dataset.k=k;
-    el.innerHTML=`<span class="j">${jour(d)} ${h}</span><span class="t">${String(v?v.titre:nom).replace(/[<>&]/g,"")}</span><button title="Plus tôt">▲</button><button title="Plus tard">▼</button>`;
+    el.innerHTML=`<span class="j">${jour(d)} ${d.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"})}</span><span class="t">${String(v?v.titre:nom).replace(/[<>&]/g,"")}</span><button title="Plus tôt">▲</button><button title="Plus tard">▼</button>`;
     const [hautB,basB]=el.querySelectorAll("button"); hautB.disabled=k===0; basB.disabled=k===a.length-1;
     hautB.onclick=()=>deplacerPubli(k,k-1); basB.onclick=()=>deplacerPubli(k,k+1);
     el.ondragstart=e=>{e.dataTransfer.setData("text/plain",String(k)); el.classList.add("glisse")}; el.ondragend=()=>el.classList.remove("glisse");
@@ -992,10 +1005,10 @@ function resumePubli(){
   rendreCalendrier();
   const z=$("#pubResume"); if(!z) return;
   if(!lireJeton()){z.textContent="Connectez la régie pour choisir les vidéos à publier.";return}
-  const a=attentePubli(filePubli()), on=String((VARS&&VARS.PUBLI_AUTO)||"0")==="1", auto=String((VARS&&VARS.PUBLI_HEURE_AUTO)||"0")==="1", h=auto?(String(CONF.heure_stats??18).padStart(2,"0")+":00"):((VARS&&VARS.PUBLI_HEURE)||"18:00");
+  const a=attentePubli(filePubli()), on=String((VARS&&VARS.PUBLI_AUTO)||"0")==="1", hs=creneauxPubli();
   if(!a.length){z.textContent=on?"Aucune vidéo cochée en attente : rien ne sera publié tant que vous n'en cochez pas.":"Aucune vidéo cochée.";return}
-  const v=DATA.find(x=>x.fichier===a[0]), [hh,mm]=h.split(":").map(Number), d=new Date(); const jour=(d.getHours()*60+d.getMinutes()<hh*60+mm)?"aujourd'hui":"demain";
-  z.textContent=on?`${a.length} vidéo${a.length>1?"s":""} en attente. Prochaine : « ${v?v.titre:a[0]} », ${jour} à ${h} (une par jour).`
+  const v=DATA.find(x=>x.fichier===a[0]), p=prochainsCreneaux(1)[0]||new Date(), auj=p.toDateString()===new Date().toDateString();
+  z.textContent=on?`${a.length} vidéo${a.length>1?"s":""} en attente. Prochaine : « ${v?v.titre:a[0]} », ${auj?"aujourd'hui":"demain"} à ${p.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"})} (${hs.length>1?"deux par jour : "+hs.join(" et "):"une par jour"}).`
                   :`${a.length} vidéo${a.length>1?"s":""} cochée${a.length>1?"s":""}. Activez la publication automatique pour lancer l'envoi quotidien.`;
 }
 $("#retourTk").onclick=()=>allerOnglet("tiktok");

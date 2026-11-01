@@ -411,6 +411,23 @@ class TestPublicationAuto(unittest.TestCase):
         self.assertIsNone(P.decision(a(18, 25), dict(reg, PUBLI_FILE="a.mp4"), hist, False)[0])   # rien en attente
         self.assertEqual(P.heure("7h05"), (7, 5)); self.assertEqual(P.heure("n'importe"), (18, 0))
 
+    def test_deux_videos_par_jour(self):
+        """2e heure de publication (choix de l'auteur, 1er novembre 2026) : une vidéo par créneau."""
+        import datetime as dt, publication_auto as P
+        from zoneinfo import ZoneInfo
+        hist = [{"fichier": "b.mp4"}, {"fichier": "d.mp4"}]
+        reg = {"PUBLI_AUTO": "1", "PUBLI_HEURE": "18:30", "PUBLI_DEUX": "1", "PUBLI_HEURE2": "12:00", "PUBLI_FILE": "d.mp4\nb.mp4"}
+        a = lambda h, mi: dt.datetime(2026, 11, 1, h, mi, tzinfo=ZoneInfo("Europe/Paris"))
+        self.assertEqual(P.creneaux(reg), [(12, 0), (18, 30)])
+        self.assertIsNone(P.decision(a(10, 0), reg, hist, 0)[0])                      # avant midi : rien
+        self.assertEqual(P.decision(a(11, 40), reg, hist, 0)[:2], ("d.mp4", "2026-11-01T12:00"))   # 1er créneau
+        self.assertIsNone(P.decision(a(14, 0), reg, hist, 1)[0])                      # midi fait, 18 h 30 pas encore
+        self.assertEqual(P.decision(a(18, 0), reg, hist, 1)[:2], ("d.mp4", "2026-11-01T18:30"))    # 2e créneau
+        self.assertIsNone(P.decision(a(20, 0), reg, hist, 2)[0])                      # les deux faits
+        self.assertEqual(P.creneaux(dict(reg, PUBLI_DEUX="0")), [(18, 30)])
+        self.assertEqual(P.creneaux(dict(reg, PUBLI_HEURE2="18:45")), [(18, 30)])     # moins d'une heure d'écart : un seul créneau
+        self.assertEqual(P.creneaux(dict(reg, PUBLI_HEURE2="")), [(12, 0), (18, 30)])
+
 
 class TestRendu(unittest.TestCase):
     def test_sous_titres_cales_sur_whisper(self):

@@ -3,8 +3,9 @@ PUBLI_FILE, une vidéo par ligne, dans l'ordre où il les a cochées) ; chaque j
 PUBLI_AUTO = 1, la plus ancienne vidéo cochée et pas encore publiée part sur TikTok (workflow publier.yml, via Buffer).
 
 Lancé par le Réveil de secours (garde.yml, toutes les 30 min) : dès qu'on est à moins de 35 min de l'heure (ou après), la
-publication est demandée à Buffer POUR l'heure exacte (ou tout de suite si l'heure est passée). Une seule par jour : une
-publication automatique déjà demandée aujourd'hui (réussie ou non) ferme la journée ; une vidéo en échec est sautée (la suivante part le lendemain)."""
+publication est demandée à Buffer POUR l'heure exacte (ou tout de suite si l'heure est passée). Une par créneau : chaque
+publication automatique déjà demandée aujourd'hui (réussie ou non) compte pour un créneau ; une vidéo en échec est sautée.
+Deuxième heure (choix de l'auteur, 1er novembre 2026) : PUBLI_DEUX = 1 et PUBLI_HEURE2 -> deux vidéos par jour."""
 import datetime, json, os, subprocess, sys
 from zoneinfo import ZoneInfo
 
@@ -50,20 +51,36 @@ def heure(brut):
     except ValueError: return (18, 0)
 
 
-def decision(maintenant, reglages, historique, deja_aujourdhui):
-    """(fichier à publier ou None, « quand » pour Buffer (heure de Paris, ISO) ou "" = tout de suite, raison)."""
-    if str(reglages.get("PUBLI_AUTO") or "0").strip() != "1": return None, "", "publication automatique coupée"
+def creneaux(reglages):
+    """Heures de publication du jour (heure de Paris) : PUBLI_HEURE (ou l'heure des statistiques) et, si PUBLI_DEUX = 1, la
+    deuxième heure PUBLI_HEURE2 (choix de l'auteur, 1er novembre 2026 : deux vidéos par jour). Triées, sans doublon."""
     h, m = heure(reglages.get("PUBLI_HEURE"))
     if str(reglages.get("PUBLI_HEURE_AUTO") or "0").strip() == "1":       # idée 20 : l'heure où nos vidéos font le plus de vues
         try: h, m = __import__("stats").meilleure_heure_publication(h), 0
         except Exception: pass
-    cible = maintenant.replace(hour=h, minute=m, second=0, microsecond=0)
-    if maintenant < cible - datetime.timedelta(minutes=AVANCE): return None, "", f"pas encore l'heure ({h:02d}:{m:02d})"
-    if deja_aujourdhui: return None, "", "vidéo du jour déjà envoyée"
+    out = [(h, m)]
+    if str(reglages.get("PUBLI_DEUX") or "0").strip() == "1":
+        h2 = heure(str(reglages.get("PUBLI_HEURE2") or "").strip() or "12:00")   # (même défaut que le site)
+        if abs((h2[0] * 60 + h2[1]) - (h * 60 + m)) >= 60: out.append(h2)    # au moins une heure d'écart
+    return sorted(out)
+
+
+def decision(maintenant, reglages, historique, deja_aujourdhui):
+    """(fichier à publier ou None, « quand » pour Buffer (heure de Paris, ISO) ou "" = tout de suite, raison).
+    deja_aujourdhui : nombre de publications automatiques déjà demandées aujourd'hui (True = 1). Une vidéo par créneau du jour."""
+    if str(reglages.get("PUBLI_AUTO") or "0").strip() != "1": return None, "", "publication automatique coupée"
+    cibles = [maintenant.replace(hour=h, minute=m, second=0, microsecond=0) for h, m in creneaux(reglages)]
+    atteints = [c for c in cibles if maintenant >= c - datetime.timedelta(minutes=AVANCE)]
+    if not atteints: return None, "", f"pas encore l'heure ({cibles[0].strftime('%H:%M')})"
+    n = int(deja_aujourdhui)
+    if n >= len(atteints):
+        return None, "", ("vidéo du jour déjà envoyée" if len(cibles) == 1 else f"{n} vidéo(s) déjà envoyée(s) aujourd'hui" +
+                          (f", la suivante à {cibles[n].strftime('%H:%M')}" if n < len(cibles) else ""))
     f = alterner(file_attente(reglages.get("PUBLI_FILE"), historique), historique)
     if not f: return None, "", "aucune vidéo cochée en attente"
+    cible = atteints[n]                                                    # le créneau suivant pas encore servi
     quand = cible.strftime("%Y-%m-%dT%H:%M") if cible > maintenant + datetime.timedelta(minutes=6) else ""
-    return f[0], quand, f"{len(f)} vidéo(s) en attente"
+    return f[0], quand, f"{len(f)} vidéo(s) en attente" + (f", créneau {n + 1}/{len(cibles)}" if len(cibles) > 1 else "")
 
 
 def _gh(*args):
@@ -71,20 +88,20 @@ def _gh(*args):
 
 
 def deja_aujourdhui(maintenant):
-    """Une publication automatique a-t-elle déjà été demandée aujourd'hui (heure de Paris) ?"""
+    """Nombre de publications automatiques déjà demandées aujourd'hui (heure de Paris)."""
     r = _gh("api", f"repos/{os.environ['GITHUB_REPOSITORY']}/actions/workflows/publier.yml/runs?per_page=30",
             "-q", '[.workflow_runs[] | select(.display_title | startswith("Publication automatique")) | .created_at]')
     if r.returncode: raise RuntimeError(r.stderr[:200])
-    jour = maintenant.date()
+    jour = maintenant.date(); n = 0
     for c in json.loads(r.stdout or "[]"):
         d = datetime.datetime.strptime(c, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=datetime.timezone.utc).astimezone(PARIS)
-        if d.date() == jour: return True
-    return False
+        if d.date() == jour: n += 1
+    return n
 
 
 def main():
     maintenant = datetime.datetime.now(PARIS)
-    reglages = {k: os.environ.get(k, "") for k in ("PUBLI_AUTO", "PUBLI_HEURE", "PUBLI_FILE", "PUBLI_HEURE_AUTO")}
+    reglages = {k: os.environ.get(k, "") for k in ("PUBLI_AUTO", "PUBLI_HEURE", "PUBLI_FILE", "PUBLI_HEURE_AUTO", "PUBLI_DEUX", "PUBLI_HEURE2")}
     if reglages["PUBLI_AUTO"].strip() != "1": print("Publication automatique coupée."); return
     try: hist = json.load(open(os.path.join(RACINE, "episodes", "historique.json"), encoding="utf-8"))
     except (OSError, ValueError): hist = []
