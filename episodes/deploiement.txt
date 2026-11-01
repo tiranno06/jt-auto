@@ -9,10 +9,10 @@ code: 0
 === banque de voix (Kyutai, Zonos, Whisper) ===
 ✓ Created objects.
 ├── ✓ Uploaded /home/runner/work/jt-auto/jt-auto/moteur/banque_modal.py
-├── ✓ Created Function Kyutai.*.
+├── ✓ Created Function Whisper.*.
 ├── ✓ Created Function Kokoro.*.
-├── ✓ Created Function Zonos.*.
-└── ✓ Created Function Whisper.*.
+├── ✓ Created Function Kyutai.*.
+└── ✓ Created Function Zonos.*.
 ✓ Deployment skipped: no changes detected! ⏭️
 
 View Deployment: 
@@ -22,56 +22,24 @@ code: 0
 ✓ Created objects.
 ├── ✓ Uploaded /home/runner/work/jt-auto/jt-auto/moteur/decor_modal.py
 └── ✓ Created Function Decor.*.
-✓ App deployed in 0.757s! 🎉
+✓ App deployed in 1.164s! 🎉
 
 View Deployment: https://modal.com/apps/tubbiolo-francois/main/deployed/jt-decor
 code: 0
 === ecoute (NeMo, Florence-2) ===
-Saving image...
-Image saved, took 14.03s
-
-Built image im-Ej2TogNTZPRvlhLt5rfClf in 94.08s
-
-
-Building image im-WLNVlZkB7PIwzfXVywJa8A
-
-=> Step 0: FROM base
-
-=> Step 1: RUN wget -q -O /opt/diar.yaml https://raw.githubusercontent.com/NVIDIA/NeMo/v2.1.0/examples/speaker_tasks/diarization/conf/inference/diar_infer_telephonic.yaml
-Saving image...
-Image saved, took 1.29s
-
-Built image im-WLNVlZkB7PIwzfXVywJa8A in 2.53s
-
-
-Building image im-1kC8E6Snaxt5TkmdbUPVh1
-
-=> Step 0: FROM base
-
-=> Step 1: ENV HF_HOME=/cache/hf
-
-=> Step 2: ENV TORCH_HOME=/cache/torch
-
-=> Step 3: ENV NEMO_CACHE_DIR=/cache/nemo
-Saving image...
-Image saved, took 1.95s
-
-Built image im-1kC8E6Snaxt5TkmdbUPVh1 in 3.22s
-
-
 ✓ Created objects.
 ├── ✓ Uploaded /home/runner/work/jt-auto/jt-auto/moteur/ecoute_modal.py
 ├── ✓ Created Function Florence.*.
 └── ✓ Created Function Nemo.*.
-✓ App deployed in 105.269s! 🎉
+✓ Deployment skipped: no changes detected! ⏭️
 
 View Deployment: 
 https://modal.com/apps/tubbiolo-francois/main/deployed/jt-ecoute
 code: 0
 === essai de l'ecoute (NeMo, Florence-2) ===
-  voix séparées par NeMo : 2 voix, 13 tours de parole (37 s)
+  voix séparées par NeMo : 2 voix, 13 tours de parole (36 s)
 NeMo : [(0.0, 'speaker_0'), (3.0, 'speaker_0'), (6.0, 'speaker_0'), (9.0, 'speaker_0'), (12.0, 'speaker_0'), (15.0, 'speaker_1'), (18.0, 'speaker_1'), (21.0, 'speaker_1'), (24.0, 'speaker_1'), (27.0, 'speaker_1'), (30.0, 'speaker_1'), (33.0, 'speaker_0'), (36.0, 'speaker_0'), (39.0, 'speaker_0'), (42.0, 'speaker_0'), (45.0, 'speaker_0')]
-  images de l'original décrites par Florence-2 (2 images, 18 s)
+  images de l'original décrites par Florence-2 (2 images, 14 s)
 Florence-2 : ['The image is an illustration of a street scene with three buildings on either side. The buildings are of different sizes and colors, with one building on the left being a light grey color, another in a beige color, and the third in a red color. The building in the middle has a blue sign that reads "STYLE" and there is a green bench on the sidewalk in front of it. The street is empty, with no cars or people visible. There is a street lamp on the right side of the image and a small potted plant on the pavement. The sky is blue and the overall color scheme is bright and cheerful.', 'The image is an illustration of a street scene with three buildings on either side. The buildings are of different sizes and colors, with the first building on the left being a beige building with a red sign that reads "Tkoik" and the second building in the middle being a blue building with white windows. The third building is a yellow building with blue windows and a red awning. There is a street lamp on the right side of the image and a green trash can on the sidewalk. In front of the buildings, there is a green bench. The sky is blue and the road is empty.']
 === essai des decors (premier lancement : telechargement du modele) ===
 décor 0 : 1544909 octets
