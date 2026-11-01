@@ -21092,5 +21092,134 @@
    "voix": "aucune",
    "decors": "aucun"
   }
+ },
+ {
+  "date": "2026-11-01",
+  "format": "libre",
+  "titre": "CONFUSION FAMILIALE",
+  "sources": [
+   "https://www.tiktok.com/@charly.bse/video/7649814657489800481"
+  ],
+  "note": 0,
+  "decision": "vidéo manuelle (bande son d'une vidéo TikTok)",
+  "accroche": "Toi t'es mon fils..",
+  "mots": [
+   "bande",
+   "profil",
+   "tiktok"
+  ],
+  "empreinte": [
+   "alors",
+   "amael",
+   "appelle",
+   "confusi",
+   "familia",
+   "fils",
+   "frere",
+   "maman",
+   "mere",
+   "papa",
+   "pareil",
+   "pere",
+   "petit",
+   "suis"
+  ],
+  "voix": "bande son TikTok",
+  "gag": false,
+  "controle_video": "Humoriste 10.0/10 :  | Réalisateur 10.0/10 :  | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.1/10 : 20.5 s sous-titres trop rapides à lire",
+  "running_gag": "",
+  "duree": 71.2,
+  "fichier": "2026-11-01_22h20_emission.mp4",
+  "tag": "emissions-2026-11",
+  "legende": "Une mère et son fils s'affrontent dans une dispute hilarante sur les rôles familiaux.\n\nQui a raison dans cette conversation absurde ?\n\n🎧 Son original : @charly.bse\n\n#petitsdramas #famille #humour #confusion #parentalite #debat #comique #parents #parentsvsenfants #freresoeur #drole #animation #dessinanime #cartoon #sketch",
+  "publie": null,
+  "style_accroche": null,
+  "couverture_ms": 67113,
+  "outils": {
+   "claude": "secours",
+   "mistral": "ok",
+   "gemini": "ok",
+   "groq": "ok",
+   "ia": "groq ×3, gemini ×5, mistral ×5",
+   "appels": {
+    "groq": 3,
+    "gemini": 5,
+    "mistral": 5
+   },
+   "epuisees": [
+    "gemini"
+   ],
+   "quota": {
+    "groq": {
+     "reste_jour": 999,
+     "limite_jour": 1000
+    }
+   },
+   "voix": "tiktok",
+   "decors": "ia",
+   "eco": false
+  },
+  "jury": {
+   "note": 9.8,
+   "source": "gratuit",
+   "notes": {
+    "humoriste": 10.0,
+    "realisateur": 10.0,
+    "directeur_artistique": 10.0,
+    "son": 10.0,
+    "spectateur": 9.1
+   },
+   "remarques": [
+    "sous-titres trop rapides à lire"
+   ],
+   "corrigees": [],
+   "manques": []
+  },
+  "web": true,
+  "a_verifier": [
+   {
+    "t": 15.9,
+    "poste": "sous-titres",
+    "quoi": "sous-titre « c'est ton père. Papa c'est » mais on entend « papa c'est mon fils »",
+    "grave": true
+   },
+   {
+    "t": 55.3,
+    "poste": "sous-titres",
+    "quoi": "sous-titre « Ton père, il s'appelle comment » mais on entend « s'appelle comment papa il »",
+    "grave": true
+   },
+   {
+    "t": 68.1,
+    "poste": "technique",
+    "quoi": "saut d'image hors d'une coupe prévue",
+    "grave": true
+   },
+   {
+    "t": 28.7,
+    "poste": "sous-titres",
+    "quoi": "on entend « Non c'est pas » sans sous-titre",
+    "grave": false
+   },
+   {
+    "t": 43.2,
+    "poste": "sous-titres",
+    "quoi": "sous-titre « Oui, c'est ton petit frère. » mais on entend «  »",
+    "grave": false
+   }
+  ],
+  "confiance": 52,
+  "equipe": "13/15 contrôles bons",
+  "filiere": "tiktok",
+  "source_audio": "https://www.tiktok.com/@charly.bse/video/7649814657489800481",
+  "theme": "Bande son : https://www.tiktok.com/@charly.bse/video/7649814657489800481",
+  "couts": {
+   "claude_usd": 0.0,
+   "claude_jetons": 66531,
+   "cache_lu": 0,
+   "eleven_caracteres": 0,
+   "gpu_s": 47
+  },
+  "titre_affiche": "POV : Quand ton fils te dit que tu es son père"
  }
 ]
