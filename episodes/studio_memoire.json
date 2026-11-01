@@ -5588,15 +5588,15 @@
  {
   "moment": "soir",
   "lieux": [
-   "voiture"
+   "cuisine"
   ],
   "source": "auteur+image",
-  "duree": 63.0,
+  "duree": 64.6,
   "plans": {
-   "large": 26
+   "large": 29
   },
   "mouvements": {
-   "fixe": 26
+   "fixe": 29
   },
   "costumes": {
    "presentateur": "tshirt",
@@ -5604,19 +5604,19 @@
   },
   "figurants": 0,
   "ambiances": [
-   "neon",
-   "poussiere"
+   "poussiere",
+   "vapeur"
   ],
-  "controle": "Humoriste 7.0/10 : 10.6 s La chute sur l'âge du fils (11 ans) et celui du père (25 ans) n'est pas assez soulignée. Les réactions des personnages pourraient être plus exagérées pour renforcer le gag.; ",
-  "fichier": "2026-11-01_20h46_emission.mp4",
+  "controle": "Humoriste 10.0/10 :  | Réalisateur 10.0/10 :  | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.1/10 : 0.2 s sous-titres trop rapides à lire",
+  "fichier": "2026-11-01_20h08_emission.mp4",
   "cine": {
    "focus": false,
-   "vertige": false,
+   "vertige": true,
    "tiers": false,
-   "etalonnage": false,
+   "etalonnage": true,
    "profondeur": false,
    "grain": true,
-   "reflets": true,
+   "reflets": false,
    "son": true
   },
   "cadence": "rapide"
@@ -5624,11 +5624,46 @@
  {
   "moment": "soir",
   "lieux": [
-   "salon",
-   "rue"
+   "cuisine"
   ],
   "source": "auteur+image",
-  "duree": 63.0,
+  "duree": 64.6,
+  "plans": {
+   "large": 29
+  },
+  "mouvements": {
+   "fixe": 29
+  },
+  "costumes": {
+   "presentateur": "tshirt",
+   "invite": "chemise"
+  },
+  "figurants": 0,
+  "ambiances": [
+   "poussiere",
+   "vapeur"
+  ],
+  "controle": "Humoriste 10.0/10 :  | Réalisateur 10.0/10 :  | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.1/10 : 0.2 s sous-titres trop rapides à lire",
+  "fichier": "2026-11-01_21h04_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": true,
+   "tiers": false,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": true,
+   "reflets": false,
+   "son": true
+  },
+  "cadence": "rapide"
+ },
+ {
+  "moment": "soir",
+  "lieux": [
+   "salon"
+  ],
+  "source": "auteur+image",
+  "duree": 64.6,
   "plans": {
    "large": 25
   },
@@ -5636,24 +5671,22 @@
    "fixe": 25
   },
   "costumes": {
-   "invite": "tshirt",
-   "envoyee": "tshirt",
-   "presentateur": "chemise"
+   "presentateur": "robe",
+   "invite": "debardeur"
   },
   "figurants": 0,
   "ambiances": [
-   "neon",
    "poussiere"
   ],
-  "controle": "Humoriste 7.8/10 : 16.6 s La chute sur l'âge du fils ('25 moins 11, ça fait 14') est un peu longue à comprendre. Un bruitage comme 'dun_dun' ou 'vine_boom' avant la révélation pourrait accentuer l'eff",
-  "fichier": "2026-11-01_21h41_emission.mp4",
+  "controle": "Humoriste 7.8/10 : 0.4 s La chute sur '10 millions d'euros' manque de réactions exagérées du personnage pour renforcer le côté absurde et drôle.; 20.2 s Le gag sur 'Hein' pourrait être plus drôle avec",
+  "fichier": "2026-11-01_21h38_emission.mp4",
   "cine": {
    "focus": false,
    "vertige": false,
    "tiers": false,
    "etalonnage": true,
    "profondeur": false,
-   "grain": false,
+   "grain": true,
    "reflets": false,
    "son": true
   },
