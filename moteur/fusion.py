@@ -20,6 +20,26 @@ def fusion_historique(nous, eux, base=None):
             for k, v in n.items(): h.setdefault(k, v)
     return eux + [h for h in nous if h.get("fichier") not in vus and h.get("fichier") not in supprimees]
 
+def _lignes(eux, nous, base):
+    """Fichier où l'on ne fait qu'ajouter des lignes (decors/index.tsv) : lignes distantes + nos lignes nouvelles."""
+    vues = set(eux.decode("utf-8", "replace").splitlines())
+    neuves = [l for l in nous.decode("utf-8", "replace").splitlines() if l and l not in vues]
+    t = eux.decode("utf-8", "replace")
+    return (t + ("" if not t or t.endswith("\n") else "\n") + "".join(l + "\n" for l in neuves)).encode()
+
+
+def _compteur(eux, nous, base):
+    """decors/compteur.json : décors neufs du mois des DEUX fabrications (distant + nous - départ commun)."""
+    def lire(b):
+        try: d = json.loads(b or b"{}"); return d if isinstance(d, dict) else {}
+        except ValueError: return {}
+    e, n, b = lire(eux), lire(nous), lire(base)
+    return json.dumps({m: int(e.get(m, 0)) + int(n.get(m, 0)) - int(b.get(m, 0)) for m in set(e) | set(n)}).encode()
+
+
+FUSIONNES = {"decors/index.tsv": _lignes, "decors/compteur.json": _compteur}
+
+
 def rejouer(commande, message):
     """Conflit : on repart de la version distante et on refait l'action (suppression, marquage « publiée »…)."""
     git("rebase", "--abort", ok=True); git("fetch", "-q", "origin"); git("reset", "-q", "--hard", "origin/main")
@@ -50,7 +70,11 @@ def main():
         for f, c in contenus.items():
             if f == "episodes/historique.json": continue
             if c is None: git("rm", "-q", "--ignore-unmatch", f, ok=True); continue
-            os.makedirs(os.path.dirname(f) or ".", exist_ok=True); open(f, "wb").write(c)
+            os.makedirs(os.path.dirname(f) or ".", exist_ok=True)
+            if f in FUSIONNES and os.path.exists(f):                       # banque des décors : on ajoute, on n'écrase pas l'autre fabrication
+                r_b = git("show", f"{base}:{f}", ok=True)
+                c = FUSIONNES[f](open(f, "rb").read(), c, r_b.stdout if r_b.returncode == 0 else b"")
+            open(f, "wb").write(c)
         if "episodes/historique.json" in contenus:
             try: eux = json.load(open("episodes/historique.json", encoding="utf-8"))
             except (OSError, ValueError): eux = []

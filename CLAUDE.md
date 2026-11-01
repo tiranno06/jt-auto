@@ -377,7 +377,11 @@
   par lieu neuf, 60 lieux neufs par mois au plus (DECORS_MOIS). **Compteur du budget réparé** (`decors/compteur.json` : la date
   des fichiers ne veut rien dire sur GitHub, le budget paraissait toujours atteint). Essais visuels : `maquettes/photo/`. Leçons des 2 premières vidéos : description du lieu toujours en anglais
   (`studio.DECOR_EN` quand la mise en scène l'écrit en français : l'IA comprenait mal), lumière du moment ajoutée, 3 tirages, pas
-  d'agrandisseur « anime » (il donnait un style BD : simple agrandissement doux).
+  d'agrandisseur « anime » (il donnait un style BD : simple agrandissement doux). Soir du 1er novembre : lieux sans description
+  anglaise complétés (`semi_realiste.LIEUX_EN` : cuisine, cabinet médical, salle de sport, classe…) ; deux fabrications qui finissent
+  en même temps ne s'écrasent plus la banque des décors (`fusion.FUSIONNES` : index.tsv = lignes ajoutées, compteur.json = somme) ;
+  « Dis ce qui ne va pas » et « Corriger qui parle » aussi sur les vidéos plus récentes que le site (`chargerRepliques` : répliques
+  lues en direct dans le sketch gardé).
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.

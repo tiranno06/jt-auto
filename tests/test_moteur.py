@@ -2218,3 +2218,26 @@ class TestDecorsSemiRealistes(unittest.TestCase):
         p = open(os.path.join(ICI, "..", "moteur", "principal.py"), encoding="utf-8").read()
         self.assertIn("decors_mod.generer_semi(sk", p); self.assertIn('sk["_decors_semi"] = sorted(decors_mod.SEMI)', p)
         self.assertIn("def generer_semi", open(os.path.join(ICI, "..", "moteur", "decor_modal.py"), encoding="utf-8").read())
+
+
+class TestCorrectionsSoir1Novembre(unittest.TestCase):
+    """Remarques de l'auteur du 1er novembre au soir : bloc « Dis ce qui ne va pas » absent sur les vidéos récentes ; banque des
+    décors écrasée quand deux fabrications finissent en même temps ; lieux sans description anglaise."""
+
+    def test_repliques_chargees_en_direct(self):
+        src = open(os.path.join(ICI, "..", "moteur", "site.py"), encoding="utf-8").read()
+        self.assertIn("async function chargerRepliques(v,i)", src)
+        self.assertIn('if(v.origine==="tiktok"&&!(v.reps&&v.reps.length)) chargerRepliques(v,i)', src)
+
+    def test_banque_fusionnee(self):
+        import fusion
+        base = b"a\tsalon\n"; eux = b"a\tsalon\nb\t[semi] cuisine\n"; nous = b"a\tsalon\nc\t[semi] salon\n"
+        self.assertEqual(fusion._lignes(eux, nous, base), b"a\tsalon\nb\t[semi] cuisine\nc\t[semi] salon\n")
+        self.assertEqual(json.loads(fusion._compteur(b'{"2026-11": 3}', b'{"2026-11": 3}', b'{"2026-11": 2}')), {"2026-11": 4})
+
+    def test_lieux_en_anglais(self):
+        import semi_realiste as SR, decor_dessin as DD
+        for l in DD.LIEUX:
+            if l == "voiture": continue
+            d = SR.description(l)
+            self.assertFalse(d.replace("[semi] ", "").startswith(l.replace("_", " ") + ","), l)
