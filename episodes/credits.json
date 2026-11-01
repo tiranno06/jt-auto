@@ -2,8 +2,17 @@
  "claude": "secours",
  "mistral": "ok",
  "gemini": "ok",
+ "groq": "ok",
+ "openrouter": "erreur",
+ "modal_ia": "absent",
  "ia": "ok",
+ "quota": {
+  "groq": {
+   "reste_jour": 999,
+   "limite_jour": 1000
+  }
+ },
  "elevenlabs": "epuise",
  "modal": "ok",
- "date": "2026-10-31T14:39:18+00:00"
+ "date": "2026-11-01T08:25:37+00:00"
 }
