@@ -1,5 +1,5 @@
 """Notre propre IA de secours sur Modal (choix de l'auteur, 1er novembre 2026, idée 15) : un modèle LIBRE qui lit le texte ET les
-images, Qwen2.5-VL 7B (Alibaba, licence Apache 2.0, usage commercial permis), servi par vLLM sur un GPU L4 de Modal.
+images, Qwen2.5-VL 7B (Alibaba, licence Apache 2.0, usage commercial permis), servi par vLLM sur un GPU L4 (ou A10G) de Modal.
 Il ne sert qu'en TOUT DERNIER recours, quand Claude, Mistral, Groq, Gemini et OpenRouter sont tous à court : la vidéo garde sa
 mise en scène au lieu de tomber en « mode simple ». Coût : la machine ne tourne que pendant l'appel (arrêt 2 min après), soit
 quelques centimes de crédit Modal par vidéo qui en a besoin. Poids du modèle gardés dans un volume (pas retéléchargés).
@@ -17,10 +17,10 @@ try:
     app = modal.App(APP)
     poids = modal.Volume.from_name("jt-ia-poids", create_if_missing=True)
     image = (modal.Image.debian_slim(python_version="3.12")
-             .pip_install("vllm==0.9.2", "transformers==4.53.2", "huggingface_hub<1.0", "qwen-vl-utils==0.0.11", "pillow")   # versions qui vont ensemble
+             .pip_install("vllm==0.9.2", "transformers==4.52.4", "huggingface_hub<1.0", "qwen-vl-utils==0.0.11", "pillow")   # versions qui vont ensemble
              .env({"HF_HOME": "/poids/hf", "VLLM_USE_V1": "1"}))
 
-    @app.cls(gpu="L4", image=image, volumes={"/poids": poids}, timeout=900, scaledown_window=120, max_containers=1)
+    @app.cls(gpu=["L4", "A10G"], image=image, volumes={"/poids": poids}, timeout=900, scaledown_window=120, max_containers=1)
     class IA:
         @modal.enter()
         def charger(self):
