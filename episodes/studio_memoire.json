@@ -5622,33 +5622,31 @@
   "cadence": "rapide"
  },
  {
-  "moment": "soir",
+  "moment": "jour",
   "lieux": [
-   "cuisine"
+   "rue",
+   "salon"
   ],
   "source": "auteur+image",
-  "duree": 64.6,
+  "duree": 63.6,
   "plans": {
-   "large": 29
+   "large": 21
   },
   "mouvements": {
-   "fixe": 29
+   "fixe": 21
   },
   "costumes": {
-   "presentateur": "tshirt",
-   "invite": "chemise"
+   "presentateur": "chemise",
+   "invite": "tshirt"
   },
   "figurants": 0,
-  "ambiances": [
-   "poussiere",
-   "vapeur"
-  ],
-  "controle": "Humoriste 10.0/10 :  | Réalisateur 10.0/10 :  | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.1/10 : 0.2 s sous-titres trop rapides à lire",
-  "fichier": "2026-11-01_21h04_emission.mp4",
+  "ambiances": [],
+  "controle": "Humoriste 10.0/10 :  | Réalisateur 10.0/10 :  | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.1/10 : 0.1 s sous-titres trop rapides à lire",
+  "fichier": "2026-11-01_20h55_emission.mp4",
   "cine": {
-   "focus": false,
+   "focus": true,
    "vertige": true,
-   "tiers": false,
+   "tiers": true,
    "etalonnage": true,
    "profondeur": false,
    "grain": true,
