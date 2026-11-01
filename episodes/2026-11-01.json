@@ -1,1097 +1,787 @@
 {
- "titre": "CONFUSION FAMILIALE",
- "sujet": "CONFUSION FAMILIALE",
- "ecran": "CONFUSION",
+ "titre": "PUNITION ET IMMATURITÉ",
+ "sujet": "PUNITION ET IMMATURITÉ",
+ "ecran": "PUNITION",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "POV : Quand on se demande qui est le fils de q",
- "question": "Qui est vraiment le fils de qui ?",
+ "titre_accroche": "POV : Quand on veut éduquer mais qu’on reste u",
+ "question": "Comment gérer une situation où l'autorité parentale se heurte à l'immaturité des parents ?",
  "running_gag": "",
  "verite": "",
  "repliques": [
   {
-   "p": "invite",
-   "t": "Toi t'es mon fils",
-   "_deb": 0.081,
-   "_fin": 0.908,
-   "_mots": [
-    [
-     "Toi",
-     0.0,
-     0.08
-    ],
-    [
-     "t'es",
-     0.161,
-     0.282
-    ],
-    [
-     "mon",
-     0.343,
-     0.484
-    ],
-    [
-     "fils",
-     0.605,
-     0.827
-    ]
-   ]
-  },
-  {
    "p": "presentateur",
-   "t": "Non, papa c'est mon fils",
-   "_deb": 1.751,
-   "_fin": 3.775,
-   "objet": "livre",
+   "t": "bon à",
+   "_deb": 0.411,
+   "_fin": 1.213,
    "_mots": [
     [
-     "Non,",
+     "bon",
      0.0,
-     0.18
-    ],
-    [
-     "papa",
-     0.841,
-     1.142
-    ],
-    [
-     "c'est",
-     1.282,
-     1.463
-    ],
-    [
-     "mon",
-     1.503,
-     1.643
-    ],
-    [
-     "fils",
-     1.823,
-     2.024
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Toi t'es le fils",
-   "_deb": 3.835,
-   "_fin": 5.378,
-   "_mots": [
-    [
-     "Toi",
-     0.0,
-     0.26
-    ],
-    [
-     "t'es",
-     0.741,
-     0.942
-    ],
-    [
-     "le",
-     1.102,
-     1.162
-    ],
-    [
-     "fils",
-     1.382,
-     1.543
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Non, papa c'est mon fils",
-   "_deb": 5.378,
-   "_fin": 6.38,
-   "_mots": [
-    [
-     "Non,",
-     0.0,
-     0.06
-    ],
-    [
-     "papa",
-     0.12,
-     0.3
-    ],
-    [
-     "c'est",
-     0.32,
-     0.441
-    ],
-    [
-     "mon",
-     0.521,
-     0.621
-    ],
-    [
-     "fils",
-     0.841,
-     1.002
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Toi t'es le fils",
-   "_deb": 6.38,
-   "_fin": 6.901,
-   "_mots": [
-    [
-     "Toi",
-     0.0,
-     0.2
-    ],
-    [
-     "t'es",
-     0.28,
-     0.42
-    ],
-    [
-     "le",
-     0.42,
-     0.521
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Papa",
-   "_deb": 8.063,
-   "_fin": 8.424,
-   "_mots": [
-    [
-     "Papa",
-     0.0,
-     0.361
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "fils de papa",
-   "_deb": 8.98,
-   "_fin": 9.38,
-   "_mots": [
-    [
-     "fils",
-     0.0,
-     0.14
-    ],
-    [
-     "de",
-     0.14,
-     0.38
-    ],
-    [
-     "papa",
-     0.38,
-     0.4
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "c'est mon fils. Mais non, papa c'est ton père. Papa c'est mon fils",
-   "_deb": 9.626,
-   "_fin": 13.927,
-   "_mots": [
-    [
-     "c'est",
-     0.314,
-     0.334
-    ],
-    [
-     "mon",
-     0.0,
-     0.14
-    ],
-    [
-     "fils.",
-     0.3,
-     0.561
-    ],
-    [
-     "Mais",
-     0.741,
-     2.184
-    ],
-    [
-     "non,",
-     2.187,
-     2.288
-    ],
-    [
-     "papa",
-     2.288,
-     2.389
-    ],
-    [
-     "c'est",
-     2.449,
-     2.57
-    ],
-    [
-     "ton",
-     2.61,
-     2.691
-    ],
-    [
-     "père.",
-     2.791,
-     3.033
-    ],
-    [
-     "Papa",
-     3.133,
-     3.556
-    ],
-    [
-     "c'est",
-     3.617,
-     3.758
-    ],
-    [
-     "mon",
-     3.798,
-     3.898
-    ],
-    [
-     "fils",
-     3.959,
-     4.301
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Non, papa c'est mon fils",
-   "_deb": 14.73,
-   "_fin": 17.338,
-   "_mots": [
-    [
-     "Non,",
-     0.0,
-     0.341
-    ],
-    [
-     "papa",
-     0.402,
-     1.104
-    ],
-    [
-     "c'est",
-     1.244,
-     1.665
-    ],
-    [
-     "mon",
-     1.725,
-     1.886
-    ],
-    [
-     "fils",
-     2.006,
-     2.608
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "No papa c'est ton père",
-   "_deb": 17.358,
-   "_fin": 18.3,
-   "_mots": [
-    [
-     "No",
-     0.0,
-     0.08
-    ],
-    [
-     "papa",
-     0.16,
-     0.321
-    ],
-    [
-     "c'est",
-     0.401,
-     0.481
-    ],
-    [
-     "ton",
-     0.521,
-     0.622
-    ],
-    [
-     "père",
-     0.682,
-     0.942
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Non, papa c'est mon fils",
-   "_deb": 18.381,
-   "_fin": 20.406,
-   "_mots": [
-    [
-     "Non,",
-     0.0,
-     0.14
-    ],
-    [
-     "papa",
-     0.341,
-     0.621
-    ],
-    [
-     "c'est",
-     0.742,
-     0.942
-    ],
-    [
-     "mon",
-     1.002,
-     1.263
-    ],
-    [
-     "fils",
-     1.504,
-     2.025
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Et moi je suis quoi alors",
-   "_deb": 20.527,
-   "_fin": 21.309,
-   "_mots": [
-    [
-     "Et",
-     0.0,
-     0.06
-    ],
-    [
-     "moi",
-     0.08,
      0.16
     ],
     [
-     "je",
-     0.24,
-     0.28
+     "à",
+     0.782,
+     0.802
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "à genoux non papa",
+   "_deb": 1.273,
+   "_fin": 2.055,
+   "d": "[firm] à genoux non papa",
+   "_mots": [
+    [
+     "genoux",
+     0.0,
+     0.301
     ],
     [
-     "suis",
-     0.28,
-     0.361
+     "non",
+     0.401,
+     0.601
     ],
     [
-     "quoi",
-     0.381,
-     0.481
-    ],
-    [
-     "alors",
-     0.561,
+     "papa",
+     0.642,
      0.782
     ]
    ]
   },
   {
-   "p": "invite",
-   "t": "Pour toi",
-   "_deb": 22.215,
-   "_fin": 22.499,
-   "_mots": [
-    [
-     "Pour",
-     0.0,
-     0.122
-    ],
-    [
-     "toi",
-     0.182,
-     0.284
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Je suis ta mère",
-   "_deb": 27.176,
-   "_fin": 28.026,
-   "_mots": [
-    [
-     "Je",
-     0.0,
-     0.04
-    ],
-    [
-     "suis",
-     0.04,
-     0.384
-    ],
-    [
-     "ta",
-     0.384,
-     0.506
-    ],
-    [
-     "mère",
-     0.607,
-     0.85
-    ]
-   ]
-  },
-  {
    "p": "presentateur",
-   "t": "Je suis ta mère. Pas ma mère",
-   "_deb": 29.272,
-   "_fin": 30.536,
+   "t": "s'il te plaît s'il te plaît pas s'il te plaît s'il te plaît",
+   "_deb": 2.135,
+   "_fin": 6.687,
+   "d": "[pleading] s'il te plaît s'il te plaît pas s'il te plaît s'il te plaît",
    "_mots": [
     [
-     "Je",
-     0.0,
-     0.462
-    ],
-    [
-     "suis",
-     0.582,
-     0.742
-    ],
-    [
-     "ta",
-     0.762,
-     0.802
-    ],
-    [
-     "mère.",
-     0.802,
-     0.883
-    ],
-    [
-     "Pas",
-     0.943,
-     1.083
-    ],
-    [
-     "ma",
-     1.083,
-     1.184
-    ],
-    [
-     "mère",
-     1.184,
-     1.264
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Maman et mère, c'est pareil",
-   "_deb": 31.157,
-   "_fin": 32.361,
-   "_mots": [
-    [
-     "Maman",
-     0.0,
-     0.301
-    ],
-    [
-     "et",
-     0.402,
-     0.462
-    ],
-    [
-     "mère,",
-     0.522,
-     0.742
-    ],
-    [
-     "c'est",
-     0.763,
-     0.883
-    ],
-    [
-     "pareil",
-     0.963,
-     1.204
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Non. Si. Ma mère",
-   "_deb": 32.421,
-   "_fin": 34.126,
-   "_mots": [
-    [
-     "Non.",
-     0.0,
-     0.622
-    ],
-    [
-     "Si.",
-     0.662,
-     0.742
-    ],
-    [
-     "Ma",
-     0.742,
-     1.384
-    ],
-    [
-     "mère",
-     1.404,
-     1.705
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Oui, je suis ta mère",
-   "_deb": 34.146,
-   "_fin": 35.068,
-   "_mots": [
-    [
-     "Oui,",
+     "s'il",
      0.0,
      0.1
     ],
     [
-     "je",
-     0.24,
-     0.3
-    ],
-    [
-     "suis",
-     0.341,
-     0.501
-    ],
-    [
-     "ta",
-     0.541,
-     0.601
-    ],
-    [
-     "mère",
-     0.802,
-     0.922
-    ]
-   ]
-  },
-  {
-   "p": "envoyee",
-   "t": "Ma mère",
-   "_deb": 35.068,
-   "_fin": 35.77,
-   "_mots": [
-    [
-     "Ma",
-     0.0,
-     0.04
-    ],
-    [
-     "mère",
-     0.04,
-     0.702
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Et t'es mon fils",
-   "_deb": 36.212,
-   "_fin": 36.935,
-   "_mots": [
-    [
-     "Et",
-     0.0,
-     0.06
-    ],
-    [
-     "t'es",
-     0.1,
-     0.2
-    ],
-    [
-     "mon",
-     0.281,
-     0.381
-    ],
-    [
-     "fils",
-     0.482,
-     0.723
-    ]
-   ]
-  },
-  {
-   "p": "envoyee",
-   "t": "Non. C'est papa mon fils",
-   "_deb": 37.357,
-   "_fin": 39.968,
-   "_mots": [
-    [
-     "Non.",
-     0.0,
-     0.043
-    ],
-    [
-     "C'est",
-     0.043,
-     1.463
-    ],
-    [
-     "papa",
-     1.607,
-     1.928
-    ],
-    [
-     "mon",
-     2.089,
-     2.229
-    ],
-    [
-     "fils",
-     2.35,
-     2.611
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Amael, c'est qui pour toi",
-   "_deb": 41.071,
-   "_fin": 41.873,
-   "_mots": [
-    [
-     "Amael,",
-     0.0,
-     0.26
-    ],
-    [
-     "c'est",
-     0.32,
-     0.441
-    ],
-    [
-     "qui",
-     0.441,
-     0.521
-    ],
-    [
-     "pour",
-     0.601,
-     0.701
-    ],
-    [
-     "toi",
-     0.721,
-     0.802
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Petit frère",
-   "_deb": 42.414,
-   "_fin": 42.895,
-   "_mots": [
-    [
-     "Petit",
-     0.0,
-     0.28
-    ],
-    [
-     "frère",
-     0.32,
-     0.481
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Oui, c'est ton petit frère. Et",
-   "_deb": 43.215,
-   "_fin": 44.959,
-   "_mots": [
-    [
-     "Oui,",
-     0.0,
-     0.101
-    ],
-    [
-     "c'est",
-     0.141,
-     0.261
-    ],
-    [
-     "ton",
-     0.281,
-     0.381
-    ],
-    [
-     "petit",
-     0.421,
-     0.622
-    ],
-    [
-     "frère.",
-     0.682,
-     0.922
-    ],
-    [
-     "Et",
-     1.664,
-     1.744
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "papa, c'est mon fils",
-   "_deb": 45.701,
-   "_fin": 46.803,
-   "_mots": [
-    [
-     "papa,",
-     0.0,
-     0.26
-    ],
-    [
-     "c'est",
-     0.38,
-     0.521
-    ],
-    [
-     "mon",
-     0.581,
-     0.701
-    ],
-    [
-     "fils",
-     0.861,
-     1.102
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Papa, c'est pas ton fils. Si",
-   "_deb": 47.464,
-   "_fin": 48.807,
-   "_mots": [
-    [
-     "Papa,",
-     0.0,
-     0.201
-    ],
-    [
-     "c'est",
-     0.321,
-     0.421
-    ],
-    [
-     "pas",
-     0.461,
-     0.542
-    ],
-    [
-     "ton",
-     0.562,
-     0.682
-    ],
-    [
-     "fils.",
-     0.742,
-     0.922
-    ],
-    [
-     "Si",
-     1.203,
-     1.343
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Papa, c'est mon fils",
-   "_deb": 49.388,
-   "_fin": 50.374,
-   "_mots": [
-    [
-     "Papa,",
-     0.0,
-     0.261
-    ],
-    [
-     "c'est",
-     0.381,
-     0.624
-    ],
-    [
-     "mon",
-     0.624,
-     0.765
-    ],
-    [
-     "fils",
-     0.886,
-     0.986
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Toi, tu es le fils de papa. Ton père, il s'appelle comment",
-   "_deb": 50.395,
-   "_fin": 52.708,
-   "objet": "stylo",
-   "_mots": [
-    [
-     "Toi,",
-     0.0,
-     0.08
-    ],
-    [
-     "tu",
-     0.16,
-     0.241
-    ],
-    [
-     "es",
-     0.261,
-     0.342
-    ],
-    [
-     "le",
-     0.362,
-     0.422
-    ],
-    [
-     "fils",
-     0.482,
-     0.623
-    ],
-    [
-     "de",
-     0.684,
-     0.724
-    ],
-    [
-     "papa.",
-     0.824,
-     1.046
-    ],
-    [
-     "Ton",
-     1.468,
-     1.549
-    ],
-    [
-     "père,",
-     1.589,
-     1.75
-    ],
-    [
-     "il",
-     1.77,
-     1.83
-    ],
-    [
-     "s'appelle",
-     1.83,
-     2.112
-    ],
-    [
-     "comment",
-     2.112,
-     2.313
-    ]
-   ],
-   "_calme": true
-  },
-  {
-   "p": "envoyee",
-   "t": "Mon fils",
-   "_deb": 53.952,
-   "_fin": 54.294,
-   "_mots": [
-    [
-     "Mon",
-     0.0,
-     0.261
-    ],
-    [
-     "fils",
-     0.261,
-     0.342
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Non, non. Ton père, il s'appelle comment Papa, il s'appelle comment",
-   "_deb": 54.495,
-   "_fin": 57.99,
-   "_mots": [
-    [
-     "Non,",
-     0.0,
-     0.1
-    ],
-    [
-     "non.",
-     0.361,
-     0.462
-    ],
-    [
-     "Ton",
-     0.803,
-     0.883
-    ],
-    [
-     "père,",
-     0.944,
-     1.104
-    ],
-    [
-     "il",
-     1.104,
-     1.165
-    ],
-    [
-     "s'appelle",
-     1.165,
-     1.486
-    ],
-    [
-     "comment",
-     1.526,
-     1.707
-    ],
-    [
-     "Papa,",
-     2.008,
-     2.169
-    ],
-    [
-     "il",
-     2.169,
-     2.25
-    ],
-    [
-     "s'appelle",
-     2.27,
-     2.511
-    ],
-    [
-     "comment",
-     2.551,
-     3.495
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Fils",
-   "_deb": 58.817,
-   "_fin": 59.47,
-   "d": "[crying] Fils",
-   "_mots": [
-    [
-     "Fils",
-     0.0,
-     0.653
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Maman s'appelle comment Maman. Et papa s'appelle comment",
-   "_deb": 61.692,
-   "_fin": 65.088,
-   "d": "[crying] Maman s'appelle comment Maman. Et papa s'appelle comment",
-   "_mots": [
-    [
-     "Maman",
-     0.0,
+     "te",
+     0.12,
      0.181
     ],
     [
-     "s'appelle",
-     0.221,
-     0.523
+     "plaît",
+     0.241,
+     0.361
     ],
     [
-     "comment",
-     0.523,
-     0.703
+     "s'il",
+     0.381,
+     0.501
     ],
     [
-     "Maman.",
-     1.266,
-     2.15
+     "te",
+     0.522,
+     0.582
     ],
     [
-     "Et",
-     2.19,
-     2.512
+     "plaît",
+     0.642,
+     0.802
     ],
     [
-     "papa",
-     2.713,
-     2.873
+     "pas",
+     0.862,
+     0.882
     ],
     [
-     "s'appelle",
-     2.974,
-     3.195
+     "s'il",
+     0.465,
+     2.765
     ],
     [
-     "comment",
-     3.195,
-     3.396
+     "te",
+     2.787,
+     2.848
+    ],
+    [
+     "plaît",
+     2.928,
+     3.128
+    ],
+    [
+     "s'il",
+     3.65,
+     3.73
+    ],
+    [
+     "te",
+     3.73,
+     3.77
+    ],
+    [
+     "plaît",
+     3.87,
+     4.552
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "ça fait pas plaisir de te frapper je te le dis tout de suite ça fait pas plaisir",
+   "_deb": 6.687,
+   "_fin": 9.509,
+   "d": "[serious] ça fait pas plaisir de te frapper je te le dis tout de suite ça fait pas plaisir",
+   "_mots": [
+    [
+     "ça",
+     0.0,
+     0.04
+    ],
+    [
+     "fait",
+     0.04,
+     0.16
+    ],
+    [
+     "pas",
+     0.2,
+     0.281
+    ],
+    [
+     "plaisir",
+     0.301,
+     0.541
+    ],
+    [
+     "de",
+     0.581,
+     0.642
+    ],
+    [
+     "te",
+     0.662,
+     0.702
+    ],
+    [
+     "frapper",
+     0.762,
+     1.023
+    ],
+    [
+     "je",
+     1.248,
+     1.308
+    ],
+    [
+     "te",
+     1.329,
+     1.389
+    ],
+    [
+     "le",
+     1.429,
+     1.47
+    ],
+    [
+     "dis",
+     1.51,
+     1.591
+    ],
+    [
+     "tout",
+     1.611,
+     1.712
+    ],
+    [
+     "de",
+     1.712,
+     1.752
+    ],
+    [
+     "suite",
+     1.773,
+     1.974
+    ],
+    [
+     "ça",
+     2.116,
+     2.176
+    ],
+    [
+     "fait",
+     2.277,
+     2.378
+    ],
+    [
+     "pas",
+     2.418,
+     2.499
+    ],
+    [
+     "plaisir",
+     2.56,
+     2.822
     ]
    ]
   },
   {
    "p": "presentateur",
-   "t": "Pisse",
-   "_deb": 66.737,
-   "_fin": 67.084,
-   "d": "[crying] Pisse",
+   "t": "pourquoi tu rigoles alors je rigole pas je rigole pas papa c'est à genoux d'un genou ça y est toi ça y est tu fais les bêtises à",
+   "_deb": 10.992,
+   "_fin": 20.153,
+   "_mots": [
+    [
+     "pourquoi",
+     0.0,
+     0.2
+    ],
+    [
+     "tu",
+     0.22,
+     0.301
+    ],
+    [
+     "rigoles",
+     0.341,
+     0.621
+    ],
+    [
+     "alors",
+     0.621,
+     0.822
+    ],
+    [
+     "je",
+     1.262,
+     1.343
+    ],
+    [
+     "rigole",
+     1.383,
+     1.623
+    ],
+    [
+     "pas",
+     1.663,
+     1.808
+    ],
+    [
+     "je",
+     1.808,
+     2.448
+    ],
+    [
+     "rigole",
+     2.448,
+     2.628
+    ],
+    [
+     "pas",
+     2.628,
+     4.508
+    ],
+    [
+     "papa",
+     5.15,
+     5.351
+    ],
+    [
+     "c'est",
+     5.431,
+     5.531
+    ],
+    [
+     "à",
+     5.551,
+     5.571
+    ],
+    [
+     "genoux",
+     5.631,
+     5.932
+    ],
+    [
+     "d'un",
+     6.192,
+     6.273
+    ],
+    [
+     "genou",
+     6.293,
+     6.533
+    ],
+    [
+     "ça",
+     6.593,
+     6.633
+    ],
+    [
+     "y",
+     6.653,
+     6.673
+    ],
+    [
+     "est",
+     6.734,
+     6.854
+    ],
+    [
+     "toi",
+     6.874,
+     6.974
+    ],
+    [
+     "ça",
+     7.295,
+     7.355
+    ],
+    [
+     "y",
+     7.355,
+     7.375
+    ],
+    [
+     "est",
+     7.475,
+     7.495
+    ],
+    [
+     "tu",
+     7.228,
+     8.628
+    ],
+    [
+     "fais",
+     8.637,
+     8.759
+    ],
+    [
+     "les",
+     8.759,
+     8.84
+    ],
+    [
+     "bêtises",
+     8.88,
+     9.101
+    ],
+    [
+     "à",
+     9.141,
+     9.161
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "l'école tu fais les bêtises à l'école c'était pas moi tu",
+   "_deb": 20.213,
+   "_fin": 23.566,
+   "_mots": [
+    [
+     "l'école",
+     0.0,
+     0.341
+    ],
+    [
+     "tu",
+     0.863,
+     0.903
+    ],
+    [
+     "fais",
+     0.903,
+     1.024
+    ],
+    [
+     "les",
+     1.064,
+     1.124
+    ],
+    [
+     "bêtises",
+     1.164,
+     1.425
+    ],
+    [
+     "à",
+     1.466,
+     1.486
+    ],
+    [
+     "l'école",
+     1.526,
+     1.887
+    ],
+    [
+     "c'était",
+     2.168,
+     2.851
+    ],
+    [
+     "pas",
+     2.891,
+     2.991
+    ],
+    [
+     "moi",
+     3.031,
+     3.172
+    ],
+    [
+     "tu",
+     3.272,
+     3.353
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "vas prendre moi",
+   "_deb": 24.108,
+   "_fin": 25.751,
+   "_mots": [
+    [
+     "vas",
+     0.0,
+     0.16
+    ],
+    [
+     "prendre",
+     0.18,
+     0.602
+    ],
+    [
+     "moi",
+     1.462,
+     1.643
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "j'ai pris un aussi j'ai pris dans ma jeunesse là laisse moi un peu tu fais un moment petit peu le moment quoi quand on va taper ta",
+   "_deb": 28.34,
+   "_fin": 50.634,
+   "objet": "bouteille",
+   "d": "[crying] j'ai pris un aussi j'ai pris dans ma jeunesse là laisse moi un peu tu fais un moment petit peu le moment quoi quand on va taper ta",
+   "_mots": [
+    [
+     "j'ai",
+     0.0,
+     11.8
+    ],
+    [
+     "pris",
+     11.8,
+     11.96
+    ],
+    [
+     "un",
+     11.96,
+     12.14
+    ],
+    [
+     "aussi",
+     12.14,
+     13.06
+    ],
+    [
+     "j'ai",
+     13.164,
+     13.264
+    ],
+    [
+     "pris",
+     13.304,
+     13.424
+    ],
+    [
+     "dans",
+     13.444,
+     13.544
+    ],
+    [
+     "ma",
+     13.584,
+     13.624
+    ],
+    [
+     "jeunesse",
+     13.704,
+     13.96
+    ],
+    [
+     "là",
+     13.96,
+     15.26
+    ],
+    [
+     "laisse",
+     15.686,
+     15.846
+    ],
+    [
+     "moi",
+     15.886,
+     15.986
+    ],
+    [
+     "un",
+     16.066,
+     16.126
+    ],
+    [
+     "peu",
+     16.166,
+     16.186
+    ],
+    [
+     "tu",
+     16.18,
+     17.34
+    ],
+    [
+     "fais",
+     17.407,
+     17.567
+    ],
+    [
+     "un",
+     17.908,
+     17.988
+    ],
+    [
+     "moment",
+     18.588,
+     18.828
+    ],
+    [
+     "petit",
+     18.848,
+     19.129
+    ],
+    [
+     "peu",
+     19.189,
+     19.269
+    ],
+    [
+     "le",
+     19.289,
+     19.349
+    ],
+    [
+     "moment",
+     19.389,
+     19.609
+    ],
+    [
+     "quoi",
+     19.689,
+     20.149
+    ],
+    [
+     "quand",
+     20.53,
+     20.67
+    ],
+    [
+     "on",
+     20.931,
+     20.991
+    ],
+    [
+     "va",
+     21.171,
+     21.232
+    ],
+    [
+     "taper",
+     21.412,
+     21.953
+    ],
+    [
+     "ta",
+     22.213,
+     22.294
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "joue là ça y est pleure pas j'ai pas commencé un peu parfois mon moment je ne pleurais pas avant de qu'à me taper allez baisse",
+   "_deb": 50.854,
+   "_fin": 62.76,
+   "_mots": [
+    [
+     "joue",
+     0.0,
+     0.18
+    ],
+    [
+     "là",
+     0.2,
+     0.28
+    ],
+    [
+     "ça",
+     0.306,
+     3.466
+    ],
+    [
+     "y",
+     3.607,
+     3.627
+    ],
+    [
+     "est",
+     3.767,
+     3.987
+    ],
+    [
+     "pleure",
+     3.987,
+     4.168
+    ],
+    [
+     "pas",
+     4.208,
+     4.528
+    ],
+    [
+     "j'ai",
+     4.528,
+     4.589
+    ],
+    [
+     "pas",
+     4.629,
+     4.709
+    ],
+    [
+     "commencé",
+     4.749,
+     5.046
+    ],
+    [
+     "un",
+     5.046,
+     6.346
+    ],
+    [
+     "peu",
+     6.392,
+     6.492
+    ],
+    [
+     "parfois",
+     6.492,
+     6.973
+    ],
+    [
+     "mon",
+     6.993,
+     7.053
+    ],
+    [
+     "moment",
+     7.113,
+     7.334
+    ],
+    [
+     "je",
+     7.394,
+     7.474
+    ],
+    [
+     "ne",
+     7.474,
+     7.594
+    ],
+    [
+     "pleurais",
+     7.614,
+     7.875
+    ],
+    [
+     "pas",
+     7.915,
+     8.015
+    ],
+    [
+     "avant",
+     8.075,
+     8.235
+    ],
+    [
+     "de",
+     8.275,
+     8.336
+    ],
+    [
+     "qu'à",
+     8.397,
+     8.458
+    ],
+    [
+     "me",
+     8.578,
+     8.638
+    ],
+    [
+     "taper",
+     8.719,
+     8.739
+    ],
+    [
+     "allez",
+     8.286,
+     10.586
+    ],
+    [
+     "baisse",
+     10.586,
+     11.906
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "ton pantalon",
+   "_deb": 62.827,
+   "_fin": 63.41,
    "chute": true,
    "_mots": [
     [
-     "Pisse",
+     "ton",
      0.0,
-     0.347
+     0.061
+    ],
+    [
+     "pantalon",
+     0.101,
+     0.583
     ]
    ]
   }
  ],
  "bandeau": [],
  "gag": null,
- "legende": "Une mère et son fils tentent désespérément de comprendre leur relation.",
+ "legende": "Un père tente désespérément de justifier ses méthodes éducatives immatures face à son fils.",
  "hashtags": [
   "petitsdramas",
-  "famille",
-  "humour",
-  "confusion",
-  "meme",
-  "parente",
-  "comedie"
+  "parentinghumour",
+  "punitiondrole",
+  "immaturiteparentale",
+  "generationgap",
+  "humourfamilial",
+  "education"
  ],
  "sources": [
-  "https://www.tiktok.com/@charly.bse/video/7649401581833588000"
+  "https://www.tiktok.com/@vignianimation/video/7680628231841631520"
  ],
  "decoupage": [
   {
@@ -1106,441 +796,439 @@
     6,
     7,
     8,
-    9,
-    10,
-    11,
-    12,
-    13,
-    14,
-    15,
-    16,
-    17,
-    18,
-    19,
-    20,
-    21,
-    22,
-    23,
-    24,
-    25,
-    26,
-    27,
-    28,
-    29,
-    30,
-    31,
-    32
+    9
    ],
    "lieu": "",
    "son": "",
    "duree": 0.0,
-   "decor": "same children's bedroom, with added emphasis on the book and crayon as the characters become more emotional"
+   "decor": "cuisine, sol en carrelage, réfrigérateur en inox, machine à laver, micro-ondes, lumière pendante",
+   "titre": "Le passé revu"
   }
  ],
  "studio": {
-  "moment": "jour",
+  "moment": "soir",
   "lieux": [
-   "chambre"
+   "cuisine"
   ],
   "costumes": {
    "presentateur": {
     "haut": "tshirt",
-    "c_haut": "bleu",
-    "motif": "uni",
-    "bas": "jeans",
-    "chaussures": "baskets",
-    "details": [
-     "barre_oreilles",
-     "lunettes_vue"
-    ]
-   },
-   "invite": {
-    "haut": "chemise",
-    "c_haut": "rose",
-    "motif": "uni",
-    "bas": "jupe",
-    "chaussures": "ballerines",
-    "details": [
-     "collier",
-     "boucles_oreilles"
-    ]
-   },
-   "envoyee": {
-    "haut": "pull",
-    "c_haut": "orange",
-    "motif": "uni",
+    "c_haut": "jaune",
     "bas": "pantalon",
     "chaussures": "baskets",
     "details": [
      "barbe_courte"
-    ]
+    ],
+    "chapeau": null,
+    "cheveux": "court_texture",
+    "c_cheveux": "brun"
+   },
+   "invite": {
+    "haut": "tshirt",
+    "c_haut": "rouge",
+    "bas": "short",
+    "chaussures": "baskets",
+    "details": [],
+    "chapeau": null,
+    "cheveux": "court",
+    "c_cheveux": "brun"
    }
   },
   "metiers": {},
   "personnages": {
    "presentateur": {
-    "genre": "f",
-    "age": 40,
+    "genre": "h",
+    "age": 45,
     "taille": 1,
-    "corpulence": 0.5,
-    "cheveux": "long",
-    "c_cheveux": "brun",
-    "barbe": "rien"
+    "corpulence": 0.7,
+    "cheveux": "court_texture",
+    "barbe": "trois_jours"
    },
    "invite": {
-    "genre": "m",
-    "age": 15,
+    "genre": "h",
+    "age": 14,
     "taille": 0.8,
-    "corpulence": 0.4,
+    "corpulence": 0.5,
     "cheveux": "court",
-    "c_cheveux": "blond",
-    "barbe": "rien"
-   },
-   "envoyee": {
-    "genre": "m",
-    "age": 2,
-    "taille": 0.65,
-    "corpulence": 0.3,
-    "cheveux": "carre",
-    "c_cheveux": "blond",
     "barbe": "rien"
    }
   },
-  "objets": [
-   {
-    "replique": 0,
-    "objet": "telephone"
-   },
-   {
-    "replique": 1,
-    "objet": "livre"
-   },
-   {
-    "replique": 23,
-    "objet": "crayon"
-   },
-   {
-    "replique": 27,
-    "objet": "stylo"
-   }
-  ],
   "gags": [
-   "Maman : 1 fils = Papa : 1 fils ?",
-   "La réponse est dans le livre... ou pas.",
-   "Papa : Mon fils ? Moi aussi !"
-  ],
-  "ambiances": [
-   "neutre"
+   "Frappe-moi si tu l'oses !",
+   "Les punitions, c'est comme les spaghetti, ça s'étire !",
+   "À genoux, c'est la nouvelle position yoga"
   ],
   "cadence": "rapide",
+  "ambiances": [
+   "neon"
+  ],
   "plans": [
    {
     "replique": 0,
-    "plan": "serre",
-    "mouvement": "fixe",
+    "plan": "moyen",
+    "mouvement": "avance",
     "geste": "pointe_d",
-    "reaction": "choc"
+    "reaction": "sceptique"
    },
    {
     "replique": 1,
     "plan": "serre",
     "mouvement": "fixe",
-    "geste": "poing",
-    "reaction": "colere"
+    "geste": "bras_ouverts",
+    "reaction": "choc"
    },
    {
     "replique": 2,
-    "plan": "moyen",
-    "mouvement": "fixe",
-    "geste": "gratte_tete",
-    "reaction": "confused"
+    "plan": "large",
+    "mouvement": "recul",
+    "geste": "mains_hanches",
+    "reaction": "gene"
    },
    {
     "replique": 3,
     "plan": "serre",
     "mouvement": "fixe",
     "geste": "pointe_g",
-    "reaction": "sceptique"
+    "reaction": "regard_camera"
    },
    {
     "replique": 4,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "interrupted",
-    "reaction": "choc"
+    "plan": "tres_serre",
+    "mouvement": "zoom_choc",
+    "geste": "facepalm",
+    "reaction": "rire"
    },
    {
     "replique": 5,
-    "plan": "serre",
+    "plan": "moyen",
+    "mouvement": "travelling",
+    "geste": "gratte_tete",
+    "reaction": "soupir"
+   },
+   {
+    "replique": 6,
+    "plan": "contre_plongee",
     "mouvement": "fixe",
-    "geste": "facepalm",
-    "reaction": "gene"
+    "geste": "desespoir",
+    "reaction": "pleurs"
    },
    {
     "replique": 7,
-    "plan": "large",
+    "plan": "plongee",
+    "mouvement": "fixe",
+    "geste": "poches",
+    "reaction": "reflechit"
+   },
+   {
+    "replique": 8,
+    "plan": "serre",
     "mouvement": "zoom_choc",
-    "geste": "desespoir",
-    "reaction": "panique"
+    "geste": "supplie",
+    "reaction": "choc"
+   }
+  ],
+  "objets": [
+   {
+    "replique": 0,
+    "objet": "téléphone"
    },
    {
-    "replique": 11,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "mains_hanches",
-    "reaction": "shocked"
+    "replique": 4,
+    "objet": "couteau"
    },
    {
-    "replique": 15,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "bras_ouverts",
-    "reaction": "fier"
-   },
-   {
-    "replique": 20,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "gratte_tete",
-    "reaction": "confused"
-   },
-   {
-    "replique": 27,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "pointe_d",
-    "reaction": "colere"
-   },
-   {
-    "replique": 32,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "facepalm",
-    "reaction": "gene"
+    "replique": 7,
+    "objet": "bouteille"
    }
   ],
   "decors_vus": {
-   "presentateur": "children's bedroom with a white crib, a blue and white patterned rug, a book on the floor, a stack of colorful rings, a crayon, and a window with curtains",
-   "invite": "same children's bedroom with emphasis on the book and crayon",
-   "envoyee": "same children's bedroom, focused on the baby's toys"
-  }
+   "presentateur": "cuisine avec une table en bois, chaises, machine à laver, frigo, fenêtre avec vue sur l'extérieur, planche à découper avec couteau, lumière douce",
+   "invite": "cuisine avec sol en carrelage, réfrigérateur en inox, machine à laver, micro-ondes, lumière pendante"
+  },
+  "lieux_separes": null
  },
  "doublage": {
-  "piste": "/tmp/tmpm4s1ghtg/piste.wav",
-  "duree": 67.08,
-  "source": "https://www.tiktok.com/@charly.bse/video/7649401581833588000",
-  "auteur": "charly.bse",
-  "contexte": "Une scène humoristique et confuse se déroule dans une chambre d'enfant, où une mère et son fils adolescent tentent de clarifier leur relation familiale. Les personnages s'interrogent sur qui est le fils de qui, créant une situation comique et absurde.",
+  "piste": "/tmp/tmp9hpqsfzd/piste.wav",
+  "duree": 66.94,
+  "source": "https://www.tiktok.com/@vignianimation/video/7680628231841631520",
+  "auteur": "vignianimation",
+  "contexte": "Une scène humoristique dans une cuisine où un père et son fils discutent de l'éducation et des punitions. Le père, immature malgré son rôle parental, tente de justifier son comportement devant son fils sceptique.",
   "evenements": [
    [
-    23.0,
-    26.0,
-    "baby"
+    3.0,
+    5.0,
+    "laughter"
    ],
    [
-    58.0,
-    60.0,
+    4.0,
+    6.0,
+    "crying"
+   ],
+   [
+    26.0,
+    29.0,
+    "crying"
+   ],
+   [
+    29.0,
+    31.0,
     "scream"
    ],
    [
-    59.0,
-    62.0,
+    30.0,
+    32.0,
     "crying"
    ],
    [
-    65.0,
-    67.0,
+    31.0,
+    34.0,
+    "glass"
+   ],
+   [
+    34.0,
+    37.0,
     "crying"
+   ],
+   [
+    62.0,
+    64.0,
+    "gunshot"
+   ],
+   [
+    64.0,
+    67.0,
+    "laughter"
    ]
   ],
   "visuel": {
    "gestes": [
     [
-     35.5,
-     0.5,
+     6.5,
+     0.66,
      1.0
     ],
     [
-     41.0,
-     0.5,
+     16.5,
+     0.67,
+     1.0
+    ],
+    [
+     18.5,
+     0.67,
+     1.0
+    ],
+    [
+     21.0,
+     0.67,
+     1.0
+    ],
+    [
+     28.5,
+     0.67,
+     1.0
+    ],
+    [
+     32.5,
+     0.66,
+     1.0
+    ],
+    [
+     35.5,
+     0.66,
+     1.0
+    ],
+    [
+     36.5,
+     0.66,
+     1.0
+    ],
+    [
+     38.5,
+     0.67,
+     1.0
+    ],
+    [
+     40.0,
+     0.66,
+     1.0
+    ],
+    [
+     41.5,
+     0.67,
+     1.0
+    ],
+    [
+     49.0,
+     0.67,
+     1.0
+    ],
+    [
+     50.5,
+     0.67,
+     1.0
+    ],
+    [
+     54.0,
+     0.67,
+     1.0
+    ],
+    [
+     61.0,
+     0.67,
+     1.0
+    ],
+    [
+     62.5,
+     0.66,
+     0.99
+    ],
+    [
+     65.0,
+     0.66,
      1.0
     ]
    ],
-   "duree": 67.5,
-   "nb_plans": 35,
-   "duree_plan": 1.93,
+   "duree": 67.0,
+   "nb_plans": 5,
+   "duree_plan": 13.4,
    "coupes": [
-    1.5,
-    4.0,
-    5.5,
-    6.5,
-    7.5,
-    9.0,
-    10.0,
-    11.5,
-    12.5,
-    14.5,
-    15.5,
-    17.5,
-    18.5,
-    20.5,
-    21.5,
-    22.5,
-    27.0,
-    29.0,
-    31.5,
-    32.5,
-    33.0,
-    45.0,
-    47.0,
-    49.0,
-    50.5,
-    53.0,
-    54.5,
-    57.5,
-    59.5,
-    60.5,
-    61.5,
-    63.0,
-    64.0,
-    65.5
+    13.5,
+    15.0,
+    30.0,
+    31.0
    ],
    "plans": {
     "tres_serre": 0.0,
-    "serre": 0.081,
-    "moyen": 0.0,
-    "large": 0.919
+    "serre": 0.0,
+    "moyen": 0.321,
+    "large": 0.679
    },
    "camera": {
-    "fixe": 0.87,
-    "avance": 0.03,
-    "recul": 0.09,
-    "travelling": 0.0,
-    "epaule": 0.01
+    "fixe": 0.69,
+    "avance": 0.202,
+    "recul": 0.093,
+    "travelling": 0.016,
+    "epaule": 0.0
    },
    "nb_personnes": 1,
    "personnes": [
     {
-     "place": "centre",
-     "presence": 0.081,
+     "place": "droite",
+     "presence": 0.321,
      "habit": [
-      227,
-      230,
-      239
+      222,
+      150,
+      39
      ],
      "cheveux": [
-      205,
-      191,
-      160
+      252,
+      251,
+      252
      ],
-     "sourire": 0.545,
-     "taille": 0.266,
-     "tete_penchee": 6.4,
+     "sourire": 0.0,
+     "taille": 0.095,
+     "tete_penchee": 0.8,
      "regard_cote": 0.0
     }
    ],
    "visages": true,
-   "sourires": 0.545,
-   "energie": 0.361,
+   "sourires": 0.0,
+   "energie": 0.695,
    "mur": [
-    217,
-    226,
-    238
+    213,
+    193,
+    176
    ],
    "palette": [
     [
-     225,
-     232,
-     241,
-     0.414
-    ],
-    [
-     179,
+     226,
      201,
-     222,
-     0.236
-    ],
-    [
-     134,
      180,
-     183,
-     0.163
+     0.407
     ],
     [
-     240,
-     198,
-     152,
-     0.089
+     190,
+     180,
+     172,
+     0.214
     ],
     [
-     18,
-     12,
-     9,
-     0.068
+     235,
+     236,
+     239,
+     0.113
     ],
     [
-     151,
-     54,
+     206,
+     143,
+     85,
+     0.094
+    ],
+    [
+     45,
+     32,
+     28,
+     0.091
+    ],
+    [
      116,
-     0.03
+     107,
+     102,
+     0.081
     ]
    ],
    "lumiere": {
-    "luminosite": 210.6,
-    "chaleur": -15.2,
-    "saturation": 53.9
+    "luminosite": 195.7,
+    "chaleur": 35.7,
+    "saturation": 55.0
    },
    "moment": "jour",
    "postures": []
   },
   "audio": {
-   "duree": 67.1,
-   "nb_voix": 3,
+   "duree": 66.9,
+   "nb_voix": 2,
    "voix": [
     {
-     "hz": 339,
+     "hz": 240,
      "genre": "f",
-     "part": 0.42
+     "part": 0.9
     },
     {
-     "hz": 220,
-     "genre": "f",
-     "part": 0.5
-    },
-    {
-     "hz": 311,
-     "genre": "f",
-     "part": 0.08
+     "hz": 146,
+     "genre": "h",
+     "part": 0.1
     }
    ],
-   "debit": 3.56,
-   "blanc_moyen": 0.85,
-   "coupes": 7,
-   "dynamique_db": 24.4,
-   "cris": 0.001,
+   "debit": 2.31,
+   "blanc_moyen": 0.64,
+   "coupes": 1,
+   "dynamique_db": 24.7,
+   "cris": 0.041,
    "musique": 0.41,
-   "impacts": 28,
-   "impacts_10s": 4.17,
-   "graves": 2,
-   "aigus": 26,
-   "sur_vanne": 9,
+   "impacts": 29,
+   "impacts_10s": 4.33,
+   "graves": 10,
+   "aigus": 19,
+   "sur_vanne": 4,
    "evenements": {
-    "crying": 2,
-    "baby": 1,
-    "scream": 1
+    "crying": 4,
+    "laughter": 2,
+    "scream": 1,
+    "glass": 1,
+    "gunshot": 1
    },
    "emotions": {
-    "neutral": 6,
-    "whispered": 5,
-    "annoyed": 4,
-    "confused": 4,
-    "insistent": 4,
-    "shocked": 2,
-    "frustrated": 2,
-    "interrupted": 1
+    "sarcastic": 2,
+    "annoyed": 1,
+    "firm": 1,
+    "pleading": 1,
+    "serious": 1,
+    "mocking": 1,
+    "nostalgic": 1
    }
   },
-  "video_origine": "/tmp/tmpm4s1ghtg/src.mp4",
+  "video_origine": "/tmp/tmp9hpqsfzd/src.mp4",
   "debut": 0.0
  },
  "fiche": {
@@ -1559,35 +1247,13 @@
      6,
      7,
      8,
-     9,
-     10,
-     11,
-     12,
-     13,
-     14,
-     15,
-     16,
-     17,
-     18,
-     19,
-     20,
-     21,
-     22,
-     23,
-     24,
-     25,
-     26,
-     27,
-     28,
-     29,
-     30,
-     31,
-     32
+     9
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "same children's bedroom, with added emphasis on the book and crayon as the characters become more emotional"
+    "decor": "cuisine, sol en carrelage, réfrigérateur en inox, machine à laver, micro-ondes, lumière pendante",
+    "titre": "Le passé revu"
    }
   ]
  },
@@ -1604,7 +1270,7 @@
    "poste": "ingé son",
    "controle": "mots à une vitesse possible",
    "ok": true,
-   "detail": "3 mot(s) trop courts",
+   "detail": "1 mot(s) trop courts",
    "revoir": false
   },
   {
@@ -1618,21 +1284,28 @@
    "poste": "ingé son",
    "controle": "deux transcriptions d'accord",
    "ok": false,
-   "detail": "74 % de mots identiques, 1 doute(s), 1 corrigé(s)",
+   "detail": "82 % de mots identiques, 1 doute(s), 1 tranché(s) par une 3e écoute, 0 corrigé(s)",
    "revoir": false
   },
   {
    "poste": "casting voix",
    "controle": "témoin image (qui parle dans l'original)",
    "ok": true,
-   "detail": "44/47 phrases lisibles (visages, mouvements)",
+   "detail": "11/13 phrases lisibles (mouvements)",
    "revoir": false
   },
   {
    "poste": "casting voix",
-   "controle": "plusieurs personnages joués par la même voix",
+   "controle": "fil du dialogue repris (son + texte + image)",
    "ok": true,
-   "detail": "3 personnages vus dans l'original",
+   "detail": "voix proches (0.59)",
+   "revoir": false
+  },
+  {
+   "poste": "casting voix",
+   "controle": "parole répartie entre les personnages",
+   "ok": true,
+   "detail": "2 voix, la plus bavarde dit 81 %",
    "revoir": false
   },
   {
@@ -1645,15 +1318,15 @@
   {
    "poste": "scripte",
    "controle": "téléphone en main seulement s'il en est question",
-   "ok": false,
-   "detail": "retiré sur 1 réplique(s)",
+   "ok": true,
+   "detail": "",
    "revoir": false
   },
   {
    "poste": "scripte",
    "controle": "autant de personnages que de voix",
    "ok": true,
-   "detail": "3 voix, 3 personnage(s)",
+   "detail": "2 voix, 2 personnage(s)",
    "revoir": false
   },
   {
@@ -1681,7 +1354,7 @@
    "poste": "monteur",
    "controle": "répliques dans l'ordre du son",
    "ok": true,
-   "detail": "2 réplique(s) remise(s) à leur place",
+   "detail": "",
    "revoir": false
   },
   {
@@ -1696,56 +1369,34 @@
   0
  ],
  "_voix_hz": {
-  "presentateur": 339,
-  "invite": 212,
-  "envoyee": 290
+  "presentateur": 235,
+  "invite": 144
  },
  "_voix_genre": {
   "presentateur": "f",
-  "invite": "f",
-  "envoyee": "f"
+  "invite": "h"
  },
  "realisation": {
-  "moment": "jour",
+  "moment": "soir",
   "lieux": [
-   "chambre"
+   "cuisine"
   ],
   "gags": [
-   "Maman : 1 fils = Papa : 1 fils ?",
-   "La réponse est dans le livre... ou pas.",
-   "Papa : Mon fils ? Moi aussi !"
+   "Frappe-moi si tu l'oses !",
+   "Les punitions, c'est comme les spaghetti, ça s'étire !",
+   "À genoux, c'est la nouvelle position yoga"
   ],
-  "ambiances": [],
+  "ambiances": [
+   "neon",
+   "poussiere",
+   "vapeur"
+  ],
   "source": "auteur+image",
   "tenues": {
-   "invite": "chemise",
    "presentateur": "tshirt",
-   "envoyee": "pull"
+   "invite": "tshirt"
   },
   "plans": [
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
    "large/fixe",
    "large/fixe",
    "large/fixe",
