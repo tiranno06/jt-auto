@@ -476,6 +476,10 @@ def lieu_vu(cles, texte):
     """Lieu de la scène quand la mise en scène de l'IA a échoué : une petite question à l'IA (2 images de l'original + le début du
     texte, réponse = un lieu du catalogue), sinon les mots du dialogue (au moins 2 indices), sinon None (le studio garde son choix)."""
     import decor_dessin as DD
+    try:                                                                   # Gemini a déjà regardé la vidéo entière
+        l_ = str(__import__("video_ia").DERNIER.get("lieu") or "").strip().lower()
+        if l_ in DD.LIEUX: journal(f"  lieu vu par Gemini dans la vidéo entière : {l_}"); return l_
+    except Exception: pass
     if cles and os.environ.get("LIEU_VU", "1") != "0":
         try:
             if not __import__("reseau").ia_disponible(): raise RuntimeError("aucune IA")
@@ -498,6 +502,7 @@ def lieu_vu(cles, texte):
 
 def preparer(url):
     import ecrire
+    __import__("video_ia").DERNIER.clear()                                 # (aucune analyse d'une autre vidéo ne doit rester)
     tmp = tempfile.mkdtemp()
     journal(f"Vidéo depuis TikTok : {url}")
     info, piste, mono = telecharger(url, tmp)
@@ -572,6 +577,7 @@ def preparer(url):
         vx = "\n".join(f"- {v} : {h or '?'} Hz, {sum(len(s['mots']) for s in segs if s['voix'] == v)} mots" for v, h in hz.items())
         contenu = consigne(vx, lignes)
         if audio: contenu += "\nMesures du son de la vidéo (gratuites) : " + __import__("analyse_audio").texte(audio) + "\n"
+        contenu += __import__("video_ia").texte()                          # ce que Gemini a vu dans la vidéo entière
         if visuel or cles:                                                 # Claude voit aussi la vidéo d'origine (images clés) et ses mesures
             import analyse_video, banque_visuelle
             import marionnette as M_
@@ -647,6 +653,16 @@ def preparer(url):
                 v_ = next((vus[r] for r in sorted(set(qui), key=qui.count, reverse=True) if vus.get(r)), None)
                 if v_ and len(str(sc.get("decor") or "").split()) < 8: sc["decor"] = re.sub(r"[^\w\s,.'-]", "", str(v_))[:240]
         except Exception as e: journal(f"  accord des rôles impossible ({str(e)[:100]})")
+    try:                                                                   # animal ou objet vu par Gemini dans la vidéo entière
+        import video_ia
+        for v_, e_ in video_ia.especes_par_voix([m_ for s_ in segs for m_ in s_["mots"]]).items():
+            r_ = casting.get(v_)
+            if not r_: continue
+            S_ = sk["studio"] if isinstance(sk.get("studio"), dict) else {}
+            P_ = S_.setdefault("personnages", {}) if isinstance(S_.get("personnages", {}), dict) else {}
+            if not (P_.get(r_) or {}).get("espece"):
+                P_.setdefault(r_, {})["espece"] = e_; sk["studio"] = S_; journal(f"  {NOMS.get(r_, r_)} est un(e) {e_} (vu dans la vidéo d'origine)")
+    except Exception as e: journal(f"  espèces vues impossibles ({str(e)[:100]})")
     if not dec and not (isinstance(sk.get("studio"), dict) and sk["studio"].get("lieux")):   # l'IA n'a pas dit le lieu : on le regarde
         l_ = lieu_vu(cles, " ".join(r["t"] for r in reps))
         if l_:

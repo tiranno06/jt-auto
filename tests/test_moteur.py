@@ -411,6 +411,23 @@ class TestPublicationAuto(unittest.TestCase):
         self.assertIsNone(P.decision(a(18, 25), dict(reg, PUBLI_FILE="a.mp4"), hist, False)[0])   # rien en attente
         self.assertEqual(P.heure("7h05"), (7, 5)); self.assertEqual(P.heure("n'importe"), (18, 0))
 
+    def test_deux_videos_par_jour(self):
+        """2e heure de publication (choix de l'auteur, 1er novembre 2026) : une vidéo par créneau."""
+        import datetime as dt, publication_auto as P
+        from zoneinfo import ZoneInfo
+        hist = [{"fichier": "b.mp4"}, {"fichier": "d.mp4"}]
+        reg = {"PUBLI_AUTO": "1", "PUBLI_HEURE": "18:30", "PUBLI_DEUX": "1", "PUBLI_HEURE2": "12:00", "PUBLI_FILE": "d.mp4\nb.mp4"}
+        a = lambda h, mi: dt.datetime(2026, 11, 1, h, mi, tzinfo=ZoneInfo("Europe/Paris"))
+        self.assertEqual(P.creneaux(reg), [(12, 0), (18, 30)])
+        self.assertIsNone(P.decision(a(10, 0), reg, hist, 0)[0])                      # avant midi : rien
+        self.assertEqual(P.decision(a(11, 40), reg, hist, 0)[:2], ("d.mp4", "2026-11-01T12:00"))   # 1er créneau
+        self.assertIsNone(P.decision(a(14, 0), reg, hist, 1)[0])                      # midi fait, 18 h 30 pas encore
+        self.assertEqual(P.decision(a(18, 0), reg, hist, 1)[:2], ("d.mp4", "2026-11-01T18:30"))    # 2e créneau
+        self.assertIsNone(P.decision(a(20, 0), reg, hist, 2)[0])                      # les deux faits
+        self.assertEqual(P.creneaux(dict(reg, PUBLI_DEUX="0")), [(18, 30)])
+        self.assertEqual(P.creneaux(dict(reg, PUBLI_HEURE2="18:45")), [(18, 30)])     # moins d'une heure d'écart : un seul créneau
+        self.assertEqual(P.creneaux(dict(reg, PUBLI_HEURE2="")), [(12, 0), (18, 30)])
+
 
 class TestRendu(unittest.TestCase):
     def test_sous_titres_cales_sur_whisper(self):
@@ -2000,3 +2017,89 @@ class TestListe4_5_6_11(unittest.TestCase):
                 dict(src("a"), fichier="1.mp4"), dict(src("a"), fichier="2.mp4"), dict(src("b"), fichier="3.mp4"), dict(src("c"), fichier="4.mp4")]
         self.assertEqual(PA.alterner(["1.mp4", "2.mp4", "3.mp4", "4.mp4"], hist), ["3.mp4", "1.mp4", "4.mp4", "2.mp4"])
         self.assertIn("function alternerPubli", open(os.path.join(os.path.dirname(__file__), "..", "moteur", "site.py"), encoding="utf-8").read())
+
+
+class TestListe1Novembre(unittest.TestCase):
+    """Choix de l'auteur du 1er novembre : 1, 2, 3 (même personne qui joue plusieurs personnages), 8, 11, 12, 14, 15."""
+    def setUp(self): sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "moteur"))
+
+    def test_gemini_video_lu(self):
+        import video_ia
+        res = {"personnages": [{"id": "A", "espece": "humain"}, {"id": "B", "espece": "chat"}], "meme_interprete": True, "lieu": "salon",
+               "phrases": [{"n": 0, "qui": "A", "sur": 0.9}, {"n": 1, "qui": "B"}, {"n": 2, "qui": "A"}, {"n": 3, "qui": "B", "sur": 0.4}],
+               "_ph": [(0, 1), (1.2, 2), (2.2, 3), (3.2, 4)], "resume": "Un chat parle."}
+        v, n = video_ia.vue(res, 4)
+        self.assertEqual([c for c, _ in v], [0, 1, 0, 1]); self.assertEqual(n, 2)
+        video_ia.DERNIER.clear(); video_ia.DERNIER.update(res)
+        mots = [{"w": "x", "s": s, "e": s + 0.5, "voix": "speaker_1" if s in (1.3, 3.3) else "speaker_0"} for s in (0.1, 1.3, 2.3, 3.3)]
+        self.assertEqual(video_ia.especes_par_voix(mots), {"speaker_1": "chat"})
+        self.assertIn("même personne joue plusieurs", video_ia.texte()); video_ia.DERNIER.clear()
+
+    def test_meme_personne_deux_personnages(self):
+        import numpy as np, visages
+        app = np.zeros(14); app[0] = 1; imgs = []; t = 0.0
+        for plan in range(6):                                              # même visage, même habit : tourné à gauche puis à droite
+            for k in range(16):
+                imgs.append((t, k == 0 and plan > 0, [dict(x=0.5, y=0.4, taille=0.3, bouche=0.3 + 0.25 * np.sin(k * 1.7), regard=-0.8 if plan % 2 == 0 else 0.8, app=app)]))
+                t += 1 / 8
+        anc = visages.lire; visages.lire = lambda c, duree_max=200: imgs
+        try:
+            mots = [{"w": "x.", "s": p * 2 + 0.1, "e": p * 2 + 1.8, "voix": "speaker_0"} for p in range(6)]
+            vue, n = visages.temoin("x", mots, [[i] for i in range(6)])
+        finally: visages.lire = anc
+        self.assertEqual(n, 2); lab = [c for c, _ in vue]
+        self.assertEqual(lab, [lab[0], 1 - lab[0]] * 3)                    # deux personnages qui alternent
+
+    def test_trois_temoins_et_trois_personnages(self):
+        import equipe
+        a = [(0, 0.9), (1, 0.9), (2, 0.8), (0, 0.7), (1, 0.7), (2, 0.7)]
+        b = [(2, 0.8), (0, 0.8), (1, 0.6), (2, 0.6), (0, 0.5), (None, 0)]   # mêmes personnes, autres numéros
+        v = equipe.combiner([("a", a, 1.0), ("b", b, 0.9)], 6)
+        self.assertEqual(len({c for c, _ in v}), 3)
+        self.assertEqual(v[0][0], v[3][0]); self.assertEqual(v[1][0], v[4][0])
+        mots = [{"w": "x.", "s": i, "e": i + 0.5, "voix": "speaker_0"} for i in range(6)]
+        out = equipe.trois_personnages(mots, [[i] for i in range(6)], v)
+        self.assertEqual(len({m["voix"] for m in out}), 3)
+
+    def test_saisons(self):
+        import datetime, numpy as np, saisons
+        anc = os.environ.pop("SAISON", None)
+        try:
+            self.assertEqual(saisons.saison(datetime.date(2026, 12, 20)), "noel"); self.assertEqual(saisons.saison(datetime.date(2026, 10, 25)), "halloween")
+            self.assertIsNone(saisons.saison(datetime.date(2026, 11, 5)))
+            os.environ["SAISON"] = "noel"; img = np.full((1920, 1080, 3), 200, np.uint8)
+            out = saisons.decorer(img, "salon", {"fenetre": (90, 330, 430, 760)})
+            self.assertFalse(np.array_equal(out, img)); self.assertTrue(np.array_equal(out[800:1100, 450:780], img[800:1100, 450:780]))   # rien au milieu
+            os.environ["SAISON"] = "0"; self.assertIs(saisons.decorer(img, "salon"), img)
+        finally:
+            os.environ.pop("SAISON", None)
+            if anc is not None: os.environ["SAISON"] = anc
+        import re
+        self.assertTrue(re.search(saisons.mots_du_moment(datetime.date(2026, 12, 20)), "le père noël arrive"))
+        self.assertIsNone(saisons.mots_du_moment(datetime.date(2026, 11, 5)))
+
+    def test_remarque_regles(self):
+        import remarque
+        sk = {"repliques": [{"p": "presentateur", "t": "Salut", "_deb": 0.0, "_fin": 2.0}, {"p": "invite", "t": "Ça va ?", "_deb": 11.0, "_fin": 13.0}],
+              "decoupage": [{"repliques": [0, 1]}]}
+        qui, corr = remarque.regles(sk, "À 12 s c'est l'autre qui parle, et elle devrait être dans une cuisine. En vrai c'est un chat.")
+        self.assertEqual(qui, {1: "presentateur"})
+        self.assertIn({"type": "lieu", "scene": 0, "lieu": "cuisine"}, corr); self.assertTrue(any(c.get("espece") == "chat" for c in corr))
+        src = open(os.path.join(os.path.dirname(__file__), "..", "moteur", "site.py"), encoding="utf-8").read()
+        self.assertIn('id="remBloc"', src); self.assertIn("|remarque|", src)
+        self.assertIn('"remarque"', open(os.path.join(os.path.dirname(__file__), "..", "moteur", "principal.py"), encoding="utf-8").read())
+
+    def test_openrouter_et_modal(self):
+        import reseau
+        cles = {k: os.environ.get(k) for k in ("MISTRAL_API_KEY", "GEMINI_API_KEY", "GROQ_API_KEY", "OPENROUTER_API_KEY", "CLAUDE_INDISPONIBLE", "IA_MODAL_PRETE")}
+        try:
+            for k in ("MISTRAL_API_KEY", "GEMINI_API_KEY", "GROQ_API_KEY", "OPENROUTER_API_KEY"): os.environ[k] = "x"
+            os.environ["CLAUDE_INDISPONIBLE"] = "1"; os.environ.pop("IA_MODAL_PRETE", None); reseau.HORS_SERVICE.clear(); reseau.EN_PAUSE.clear()
+            self.assertEqual(reseau.ordre_ia(), ["mistral", "groq", "gemini", "openrouter"])
+            os.environ["IA_MODAL_PRETE"] = "1"; self.assertEqual(reseau.ordre_ia()[-1], "modal")   # notre IA : tout dernier recours
+        finally:
+            for k, v in cles.items():
+                if v is None: os.environ.pop(k, None)
+                else: os.environ[k] = v
+        import ia_modal
+        self.assertEqual(ia_modal.APP, "jt-ia")

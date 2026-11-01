@@ -1,0 +1,27 @@
+name: IA de secours sur Modal
+# Déploie notre IA de secours (Qwen2.5-VL 7B, licence Apache 2.0) sur Modal et vérifie qu'elle répond (1er lancement : ~10 min,
+# le modèle est téléchargé une fois dans un volume). Elle ne sert ensuite qu'en tout dernier recours (moteur/ia_modal.py).
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ia:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      MODAL_TOKEN_ID: ${{ secrets.MODAL_TOKEN_ID }}
+      MODAL_TOKEN_SECRET: ${{ secrets.MODAL_TOKEN_SECRET }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Modal
+        run: pip install -q modal -c contraintes.txt
+      - name: Déployer
+        run: modal deploy moteur/ia_modal.py
+      - name: Essai (une petite question)
+        run: python moteur/ia_modal.py

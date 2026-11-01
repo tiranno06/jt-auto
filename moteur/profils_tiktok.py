@@ -75,7 +75,8 @@ def _ytdlp(pseudo, n=40):
             vid = str(e.get("id") or ""); lien = e.get("url") or e.get("webpage_url") or ""
             if not vid and lien: vid = (re.search(r"/video/(\d+)", lien) or [None, ""])[1]
             if vid: out.append(dict(id=vid, url=f"https://www.tiktok.com/@{pseudo}/video/{vid}", duree=e.get("duration"),
-                                    vues=e.get("view_count"), date=e.get("timestamp") or e.get("release_timestamp")))
+                                    vues=e.get("view_count"), date=e.get("timestamp") or e.get("release_timestamp"),
+                                    titre=str(e.get("title") or e.get("description") or "")[:300]))
         if out: return out
     return []
 
@@ -86,7 +87,7 @@ def _tikwm(pseudo, n=35):
     req = urllib.request.Request("https://www.tikwm.com/api/user/posts?" + urllib.parse.urlencode({"unique_id": pseudo, "count": n, "cursor": 0}), headers=ua)
     d = (json.loads(reseau.ouvrir(req, timeout=60)) or {}).get("data") or {}
     return [dict(id=str(v.get("video_id")), url=f"https://www.tiktok.com/@{pseudo}/video/{v.get('video_id')}", duree=v.get("duration"),
-                 vues=v.get("play_count"), date=v.get("create_time")) for v in d.get("videos") or [] if v.get("video_id")]
+                 vues=v.get("play_count"), date=v.get("create_time"), titre=str(v.get("title") or "")[:300]) for v in d.get("videos") or [] if v.get("video_id")]
 
 
 def videos(pseudo, journal=print):
@@ -146,9 +147,14 @@ def choisir(historique, journal=print, graine=None, essais=4):
     rng = random.Random(graine); deja = deja_utilisees(historique); out = []
     pw = poids_profils(profils)
     profils = sorted(profils, key=lambda p: -pw[p] * rng.random() ** 0.5)  # tirage pondéré (un bon profil sort plus souvent)
+    import saisons
+    moment = saisons.mots_du_moment()                                      # Noël, Saint-Valentin, rentrée… : sons sur ce thème d'abord
     for p in profils[:6]:
         vs = [v for v in videos(p, journal) if v["id"] not in deja and (v.get("duree") is None or DUREE_MIN <= float(v["duree"]) <= DUREE_MAX)]
-        for v in vs: v["potentiel"] = potentiel(v)
+        for v in vs:
+            v["potentiel"] = potentiel(v)
+            if moment and re.search(moment, str(v.get("titre") or "").lower()):
+                v["potentiel"] += 30; journal(f"  son du moment (calendrier) : {v['url']} « {str(v.get('titre'))[:60]} »")
         vs.sort(key=lambda v: -(v["potentiel"] + rng.uniform(0, 25)))
         journal(f"Profil TikTok @{p} (poids {pw[p]:.1f}) : {len(vs)} vidéo(s) jamais utilisée(s)" + (f", meilleur potentiel {vs[0]['potentiel']}/100" if vs else ""))
         out += [v["url"] for v in vs[:max(2, essais // len(profils))]]

@@ -193,7 +193,9 @@
   → TikTok). **Publication automatique** (onglet TikTok, `moteur/publication_auto.py` lancé par garde.yml) : case « À publier » sur
   chaque vidéo (variable PUBLI_FILE, ordre de coche), PUBLI_AUTO + PUBLI_HEURE (Paris) : une vidéo par jour, la plus ancienne cochée
   non publiée, envoyée à Buffer pour l'heure exacte (publier.yml auto=1, run « Publication automatique : … » = journée faite) ; une
-  vidéo en échec est sautée.
+  vidéo en échec est sautée. **Deux vidéos par jour** (demande de l'auteur, 1er novembre 2026) : case « Deux vidéos par jour »
+  (PUBLI_DEUX) + 2e heure (PUBLI_HEURE2, 12:00 par défaut, au moins une heure d'écart) ; une vidéo par créneau
+  (`publication_auto.creneaux`, chaque publication automatique du jour compte pour un créneau) ; calendrier du site sur les deux heures.
 - **Métiers (30 octobre 2026, planches de référence de l'auteur)** : `moteur/metiers.py` : ~38 métiers et univers (pompier, policier,
   médecin, infirmier, chirurgien, dentiste, vétérinaire, prof, cuisinier, boulanger, serveur, ingénieur, ouvrier, électricien, plombier,
   mécanicien, agriculteur, jardinier, peintre, musicien, pilote, hôtesse, scientifique, informaticien, avocat, juge, astronaute,
@@ -277,6 +279,22 @@
   theme « TIKTOK::lien##2e:fichier »), la moins sûre des deux supprimée (jamais une vidéo publiée ou cochée « À publier » : alors les
   deux restent ; DEUXIEME_CHANCE=0) ; **jamais deux sons du même profil d'affilée** à la publication (`publication_auto.alterner`,
   même ordre dans le calendrier du site : `alternerPubli`).
+  **Liste du 1er novembre (choix 1, 2, 3, 8, 11, 12, 14, 15)** : **Gemini regarde la vidéo d'origine EN ENTIER**, image + son
+  (`moteur/video_ia.py`, API native, vidéo réduite 360p ; personnages, lieu, résumé, qui dit chaque phrase ; consigne : une MÊME
+  personne peut jouer 2-3 personnages -> on compte les personnages ; VIDEO_IA=0) ; **témoin visages** (`moteur/visages.py`, MediaPipe
+  Face Landmarker : bouches qui bougent, pistes suivies dans chaque plan, personnages regroupés par apparence (haut, cheveux /
+  perruque) ET regard gauche / droite -> la même personne qui se tourne ou change de tenue = deux personnages ; jamais deux visages
+  vus ensemble dans le même personnage ; dessins animés : il se tait ; VISAGES=0) ; les trois témoins de l'image (Gemini 1, visages
+  0,9, mouvements 0,6) votent (`equipe.combiner`, numéros alignés) ; 3 personnages vus ou plus = chaque phrase au personnage vu
+  (`equipe.trois_personnages`) ; ce que Gemini a vu passe dans la mise en scène (lieu, espèce d'un animal / objet) ;
+  **décors de saison** (`moteur/saisons.py` : Noël, Halloween, Saint-Valentin, été, posés sur les bords ; SAISON=0 / noel…) ;
+  **sons du calendrier** (`saisons.mots_du_moment` : +30 au potentiel d'un son dont le titre parle de l'événement proche ;
+  SONS_CALENDRIER=0) ; **« Dis ce qui ne va pas, le robot corrige »** (fiche d'une vidéo TikTok : remarque écrite ou dictée 🎤 ->
+  refaire « fichier|remarque|texte » -> `moteur/remarque.py` : l'IA traduit en « qui dit quoi » + corrections du jury, règles simples
+  sans IA ; même son, mêmes répliques ; remarque gardée pour le jury) ; **OpenRouter** = 4e IA gratuite (secret OPENROUTER_API_KEY,
+  modèles « :free ») ; **notre IA de secours sur Modal** (`moteur/ia_modal.py`, Qwen2.5-VL 7B Apache 2.0 sous vLLM, GPU L4, arrêt
+  2 min après ; app jt-ia, workflow « IA de secours sur Modal » ; utilisée en tout dernier recours si elle est déployée :
+  IA_MODAL_PRETE ; IA_MODAL=0).
   **Tirage au hasard des sons TikTok** : le robot préfère les vidéos aux voix bien différentes (ressemblance ≤ 0,6, réglage
   VOIX_DIFFERENTES ; 1 = sans tri) : jusqu'à 6 vidéos écoutées (25 min au plus), sinon celle aux voix les plus nettes. Un lien collé
   à la main n'est jamais refusé (le contrôle questions-réponses s'en charge).

@@ -56,11 +56,33 @@ def casting_voix(mots, video, B, relire, scinder):
     import locuteurs, regard
     ph = locuteurs.phrases(mots)
     voix = Counter(m["voix"] for m in mots); r_ = locuteurs.ETAT.get("ressemblance")
-    vue = None
-    try: vue = regard.temoin(video, mots, ph) if len(ph) >= 3 else None
-    except Exception as e: journal(f"  témoin image impossible ({str(e)[:100]})")
-    if vue: B.note("casting voix", "témoin image (qui bouge dans l'original)", True, f"{sum(1 for c, _ in vue if c is not None)}/{len(ph)} phrases lisibles")
+    vue = None; sources = []; n_vus = 0
+    if len(ph) >= 3:
+        try:                                                               # 1) Gemini regarde la vidéo entière (image + son)
+            import video_ia
+            g_, n_g = video_ia.vue(video_ia.analyser(video, mots, ph), len(ph))
+            if g_: sources.append(("Gemini (vidéo entière)", g_, 1.0)); n_vus = max(n_vus, n_g)
+        except Exception as e: journal(f"  Gemini sur la vidéo impossible ({str(e)[:100]})")
+        try:                                                               # 2) les bouches des visages (vraies personnes)
+            import visages
+            v_, n_v = visages.temoin(video, mots, ph, k=n_vus if n_vus >= 2 else None)
+            if v_: sources.append(("visages", v_, 0.9)); n_vus = max(n_vus, n_v)
+        except Exception as e: journal(f"  témoin visages impossible ({str(e)[:100]})")
+        try:                                                               # 3) ce qui bouge (dessins animés, plans larges)
+            r_v = regard.temoin(video, mots, ph)
+            if r_v: sources.append(("mouvements", r_v, 0.6))
+        except Exception as e: journal(f"  témoin image impossible ({str(e)[:100]})")
+    if sources:
+        vue = combiner(sources, len(ph))
+        B.note("casting voix", "témoin image (qui parle dans l'original)", True,
+               f"{sum(1 for c, _ in vue if c is not None)}/{len(ph)} phrases lisibles ({', '.join(n for n, _, _ in sources)})")
     seule = len(voix) == 1
+    if vue and n_vus >= 3 and len({c for c, w in vue if c is not None and w >= 0.3}) >= 3:   # une personne qui joue 3 personnages (ou plus)
+        mots = trois_personnages(mots, ph, vue)
+        B.note("casting voix", "plusieurs personnages joués par la même voix", True, f"{n_vus} personnages vus dans l'original")
+        return mots
+    if vue and len({c for c, _ in vue if c is not None}) > 2:              # (le reste du contrôle compare deux personnes)
+        vue = [(c, w) if c in (0, 1) else (None, 0.0) for c, w in vue]
     if r_ is not None: journal(f"  ressemblance des deux voix : {r_:.2f} (au-delà de {locuteurs.DOUTE} : le dialogue décide avec le son)")
     raison = None
     if seule: raison = "une seule voix entendue"
@@ -89,6 +111,52 @@ def casting_voix(mots, video, B, relire, scinder):
            f"{len(n)} voix, la plus bavarde dit {round(100 * part)} %")
     if len(n) > 1 and part > VOIX_SEULE_MAX and questions >= 3:
         B.note("casting voix", "dialogue équilibré", False, f"une voix dit {round(100 * part)} % d'un dialogue à {questions} questions", revoir=True)
+    return mots
+
+
+def _aligner_n(ref, lab):
+    """Numéros d'un témoin remis sur ceux de la référence (meilleur appariement des personnages, plus de deux possibles)."""
+    import numpy as np
+    from scipy.optimize import linear_sum_assignment
+    a_ = sorted({x for x in ref if x is not None}); b_ = sorted({x for x in lab if x is not None})
+    if not a_ or not b_: return lab
+    M = np.zeros((len(b_), max(len(a_), len(b_))))
+    for x, y in zip(ref, lab):
+        if x is not None and y is not None: M[b_.index(y), a_.index(x)] += 1
+    ri, ci = linear_sum_assignment(-M)
+    libres = iter(range(max(a_) + 1, max(a_) + 1 + len(b_)))
+    nom = {b_[i]: (a_[j] if j < len(a_) else next(libres)) for i, j in zip(ri, ci)}
+    return [None if y is None else nom.get(y, y) for y in lab]
+
+
+def combiner(sources, n):
+    """Vote des témoins de l'image (Gemini, visages, mouvements), chacun avec son poids et sa certitude ; les numéros de chacun sont
+    d'abord remis sur ceux du témoin qui lit le plus de phrases. -> [(personnage ou None, certitude 0-1)]."""
+    sources = sorted(sources, key=lambda s: -sum(1 for c, _ in s[1] if c is not None) * s[2])
+    ref = [c for c, _ in sources[0][1]]
+    out = []
+    alig = [(_aligner_n(ref, [c for c, _ in v]), [w for _, w in v], p) for _, v, p in sources]
+    for j in range(n):
+        score = {}
+        for lab, ws, p in alig:
+            if j < len(lab) and lab[j] is not None: score[lab[j]] = score.get(lab[j], 0.0) + p * (0.3 + ws[j])
+        if not score: out.append((None, 0.0)); continue
+        tri = sorted(score.items(), key=lambda kv: -kv[1]); b = tri[0][1]; s_ = tri[1][1] if len(tri) > 1 else 0.0
+        out.append((tri[0][0], float(min(1.0, (b - s_) / (b + 1e-6) * min(1.0, b)))))
+    return out
+
+
+def trois_personnages(mots, ph, vue):
+    """Une même personne (ou un même doubleur) joue 3 personnages ou plus : chaque phrase va au personnage vu en train de la dire ;
+    une phrase illisible garde le personnage de la phrase d'avant (une réplique continue)."""
+    prec = None
+    for j, p in enumerate(ph):
+        c, w = vue[j] if j < len(vue) else (None, 0.0)
+        q = c if c is not None and w >= 0.15 else prec
+        if q is None: continue
+        for i in p: mots[i]["voix"] = f"speaker_{q}"; mots[i]["sure"] = 0.0
+        prec = q
+    journal(f"  {len({m['voix'] for m in mots})} personnages joués par la même voix : chaque phrase au personnage vu dans l'original")
     return mots
 
 
