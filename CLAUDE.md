@@ -294,7 +294,7 @@
   **sons du calendrier** (`saisons.mots_du_moment` : +30 au potentiel d'un son dont le titre parle de l'événement proche ;
   SONS_CALENDRIER=0) ; **« Dis ce qui ne va pas, le robot corrige »** (fiche d'une vidéo TikTok : remarque écrite ou dictée 🎤 ->
   refaire « fichier|remarque|texte » -> `moteur/remarque.py` : l'IA traduit en « qui dit quoi » + corrections du jury, règles simples
-  sans IA ; même son, mêmes répliques ; remarque gardée pour le jury) ; **OpenRouter** = 4e IA gratuite (secret OPENROUTER_API_KEY,
+  sans IA ; même son, mêmes répliques ; remarque gardée pour le jury) ; (leçon du 1er novembre) « Maurice est censé être un chat » = le personnage qu'on APPELLE Maurice devient un chat (`remarque.role_nomme`), l'IA ne peut plus changer qui dit les répliques si la remarque n'en parle pas (`parle_de_qui_parle`), et jamais de deuxième chance sur une vidéo refaite à la main ; **OpenRouter** = 4e IA gratuite (secret OPENROUTER_API_KEY,
   modèles « :free » lus en direct sur openrouter.ai/api/v1/models par `reseau._openrouter_libres` : ils changent souvent) ;
   **notre IA de secours sur Modal** (`moteur/ia_modal.py`, Qwen2.5-VL 7B Apache 2.0 sous vLLM, GPU L4, arrêt
   2 min après ; app jt-ia, workflow « IA de secours sur Modal » ; utilisée en tout dernier recours si elle est déployée :

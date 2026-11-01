@@ -618,7 +618,7 @@ def main():
             import cartoon as _c; historique[-1]["couverture_ms"] = _c.COUVERTURE_MS[0]
         except Exception: pass
     if sk.get("titre_accroche"): historique[-1]["titre_affiche"] = sk["titre_accroche"]
-    if DOUB and not test:                                                  # deuxième chance : vidéo peu sûre refaite une fois, la plus sûre gardée
+    if DOUB and not test and not REFAIRE:                                  # deuxième chance : vidéo peu sûre refaite une fois (jamais une vidéo refaite à la main)
         try:
             quoi_, val_ = DC.decider(historique, historique[-1], sk["doublage"].get("source") or tiktok, DEUXIEME)
             if quoi_:

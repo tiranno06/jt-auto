@@ -38,10 +38,36 @@ def regles(sk, texte):
     if m and re.search(r"devrai|doit|plut[ôo]t|pas dans|il faut|mettre|met", t):
         l_ = DD.lieu_de(m.group(1), "")
         if l_: corr += [{"type": "lieu", "scene": k, "lieu": l_} for k in range(max(1, len(sk.get("decoupage") or [])))]
-    for e, mm in animaux.MOTS.items():                                     # « c'est un chat », « le chien… »
-        if re.search(r"\b(c'est|est|sont|en)\s+(?:un|une|le|la)?\s*(?:" + mm + r")\b", t) and roles:
-            corr.append({"type": "casting", "role": roles[-1], "espece": e}); break
+    for e, mm in animaux.MOTS.items():                                     # « c'est un chat », « Maurice est censé être un chat »
+        if re.search(r"\b(c'est|est|sont|en|[êe]tre|devient|devenir)\s+(?:un|une|le|la)?\s*(?:" + mm + r")\b", t) and roles:
+            corr.append({"type": "casting", "role": role_nomme(sk, texte, roles), "espece": e}); break
     return qui, corr
+
+
+def role_nomme(sk, texte, roles):
+    """Le personnage dont la remarque dit le NOM (« Maurice est un chat ») : celui à qui les autres parlent (son nom est dit par
+    l'autre). Sans nom reconnu : le dernier rôle."""
+    reps = sk.get("repliques") or []
+    for nom in re.findall(r"\b([A-ZÉÈ][a-zéèêëàâîïôöûüç]{2,})\b", str(texte or "")):
+        n_ = re.escape(nom.lower()); score = {r: 0.0 for r in roles}; dit = {r: 0 for r in roles}
+        for x in reps:
+            t_, p_ = str(x.get("t", "")).lower(), x.get("p")
+            if p_ not in score or not re.search(r"\b" + n_ + r"\b", t_): continue
+            dit[p_] += 1
+            if re.search(r"(m'?appel\w*|je suis|moi c'est)\s+" + n_, t_): score[p_] += 2       # « arrête de m'appeler Maurice » : c'est lui
+            elif re.search(r"(^|[.!?…]\s*|\b(oh|h[ée]|eh|allez|viens)\s+)" + n_ + r"\b|" + n_ + r"\s*[,!?]", t_):   # « Oh Maurice, … » : on lui parle
+                for r in roles:
+                    if r != p_: score[r] += 1
+        if len(roles) >= 2 and sum(dit.values()):
+            if max(score.values()) > 0: return max(roles, key=lambda r: score[r])
+            return min(roles, key=lambda r: dit[r])                       # c'est l'autre qui l'appelle par son nom
+    return roles[-1] if roles else "invite"
+
+
+def parle_de_qui_parle(texte):
+    """La remarque parle-t-elle vraiment de QUI dit les répliques (instants, « l'autre », « inversé ») ?"""
+    t = str(texte or "").lower().replace("’", "'")
+    return bool(re.search(r"\d+\s*(s\b|sec)|l'autre|invers|pas (lui|elle)|mauvais (perso|personnage)|c'est (lui|elle) qui|qui dit|r[ée]plique", t))
 
 
 def interpreter(sk, texte):
@@ -74,8 +100,14 @@ def interpreter(sk, texte):
                 k = int(x.get("replique")); p_ = str(x.get("personnage"))
                 if 0 <= k < len(reps) and p_ in ROLES: qui[k] = p_
             except (AttributeError, TypeError, ValueError): pass
+        ia_qui = {k: v for k, v in qui.items() if v != reps[k].get("p")}
+        if ia_qui and not parle_de_qui_parle(texte) and len(ia_qui) > max(2, len(reps) // 3):   # « Maurice est un chat » ≠ tout inverser
+            print(f"Remarque : l'IA voulait changer qui dit {len(ia_qui)} réplique(s) alors que la remarque n'en parle pas : refusé", flush=True)
+            qui = dict(regles(sk, texte)[0])
         deja = {json.dumps(c, sort_keys=True) for c in corr}
-        corr += [c for c in ecrire._liste(r.get("corrections")) if isinstance(c, dict) and c.get("type") in qualite.TYPES and json.dumps(c, sort_keys=True) not in deja]
+        esp_regle = any(c.get("type") == "casting" and c.get("espece") for c in corr)   # espèce comprise par les règles : elle prime
+        corr += [c for c in ecrire._liste(r.get("corrections")) if isinstance(c, dict) and c.get("type") in qualite.TYPES and json.dumps(c, sort_keys=True) not in deja
+                 and not (esp_regle and c.get("type") == "casting" and c.get("espece"))]
         if r.get("compris"): print(f"Remarque comprise : {str(r['compris'])[:200]}", flush=True)
     except Exception as e: print(f"Remarque lue par les règles simples ({str(e)[:100]})", flush=True)
     print(f"Remarque de l'auteur : {len(qui)} réplique(s) à rendre à un autre personnage, {len(corr)} correction(s) : "
