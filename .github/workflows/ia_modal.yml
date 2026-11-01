@@ -24,4 +24,8 @@ jobs:
       - name: Déployer
         run: modal deploy moteur/ia_modal.py
       - name: Essai (une petite question)
-        run: python moteur/ia_modal.py
+        timeout-minutes: 25
+        run: IA_MODAL_ATTENTE=1200 python moteur/ia_modal.py
+      - name: Journal de Modal (si l'essai a raté)
+        if: failure() || cancelled()
+        run: timeout 60 modal app logs jt-ia || true
