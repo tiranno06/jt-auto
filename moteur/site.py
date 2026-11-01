@@ -386,29 +386,30 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
  <!-- ======================================================== SONS TIKTOK (à part des sketchs) -->
  <div id="o-tiktok" style="display:none">
   <section class="panneau"><h2>⏳ Fabrication en cours</h2><div class="progressions"><p class="note">Aucune fabrication en cours.</p></div></section>
-  <section class="panneau"><h2>🔗 Une vidéo sur un son TikTok</h2>
+  <details class="groupe repliTk" data-cle="lien"><summary>🔗 Une vidéo sur un son TikTok</summary>
     <label>Lien de la vidéo TikTok<input id="tkLien" type="url" inputmode="url" placeholder="https://www.tiktok.com/@compte/video/…"></label>
     <p class="note">3 min au plus. Nos personnages rejouent le son ; le compte d'origine est crédité. ⚠️ Sans accord du créateur, TikTok peut couper le son : privilégiez vos vidéos ou des sons libres.</p>
     <button class="gros lancer" id="tkCreer">🎬 Fabriquer sur ce son</button>
-    <div id="tkSuivi" class="note"></div></section>
-  <section class="panneau"><h2>🎵 Mes profils TikTok</h2>
+    <div id="tkSuivi" class="note"></div></details>
+  <details class="groupe repliTk" data-cle="profils"><summary>🎵 Mes profils TikTok</summary>
     <p class="note">Un profil par ligne (@pseudo ou lien du profil). Le robot y prend une vidéo au hasard, jamais déjà utilisée, et fabrique la vidéo sur son son.</p>
     <label>Profils<div class="jeton"><textarea data-var="PROFILS_TIKTOK" data-def="" data-texte="1" maxlength="3000" rows="5" placeholder="@profil1&#10;@profil2&#10;https://www.tiktok.com/@profil3"></textarea><button class="second" data-enr="PROFILS_TIKTOK" style="flex:none;padding:10px 14px">OK</button></div></label>
     <button class="second" id="tkConnus" style="width:100%;margin-bottom:6px">➕ Ajouter les profils déjà connus</button>
-    <p class="note" id="tkConnusNote"></p>
+    <p class="note" id="tkConnusNote"></p></details>
+  <details class="groupe repliTk" data-cle="lancer" open><summary>🎲 Lancer des vidéos (sons au hasard)</summary>
     <button class="action" id="tkHasard">🎲 Une vidéo maintenant (son au hasard des profils)</button>
     <div id="tkSuiviH" class="note"></div>
     <div class="jeton" style="align-items:center"><button class="action" id="tkSerie" style="margin:0">🎲 Plusieurs vidéos à la chaîne</button>
       <input id="tkNb" type="number" min="1" max="10" value="3" inputmode="numeric" aria-label="Nombre de vidéos à la chaîne" style="flex:none;width:72px;text-align:center;font-size:17px;font-weight:700"></div>
     <p class="note">Choisissez le nombre (1 à 10) puis touchez le bouton : le robot fabrique ces vidéos l'une après l'autre, chacune sur un son différent pris au hasard dans vos profils. Inutile d'attendre la fin d'une vidéo.</p>
     <div id="tkIA" class="quotaIA"></div>
-    <div id="tkSuiviS" class="note"></div></section>
-  <section class="panneau"><h2>⏰ Vidéos TikTok automatiques</h2>
+    <div id="tkSuiviS" class="note"></div></details>
+  <details class="groupe repliTk" data-cle="auto"><summary>⏰ Vidéos TikTok automatiques</summary>
     <p class="note">Planning à part : il ne touche jamais au planning des sketchs.</p>
     <div class="auto"><div class="txt"><b>Activées</b><small>Une vidéo sur un son des profils à chaque heure ci-dessous.</small></div><button class="inter" data-var="FREQUENCE_TIKTOK" data-def="0" data-bascule="1"></button></div>
     <label>Heures (séparées par « ; »)<div class="jeton"><input data-var="HEURE_TIKTOK" data-def="14:00" data-texte="1" maxlength="60" placeholder="ex. 14:00 ; 21:30"><button class="second" data-enr="HEURE_TIKTOK" style="flex:none;padding:10px 14px">OK</button></div></label>
-    <p class="note">Vidéo prête 20 à 40 min après l'heure. S'il n'y a aucun son utilisable, pas de vidéo cette fois (jamais de sketch à la place).</p></section>
-  <section class="panneau" id="pubAuto"><h2>📤 Publication automatique</h2>
+    <p class="note">Vidéo prête 20 à 40 min après l'heure. S'il n'y a aucun son utilisable, pas de vidéo cette fois (jamais de sketch à la place).</p></details>
+  <details class="groupe repliTk" data-cle="publi" id="pubAuto"><summary>📤 Publication automatique</summary>
     <p class="note">Cochez « À publier » sur les vidéos que vous avez vérifiées : chaque jour à l'heure choisie, le robot publie sur TikTok la plus ancienne vidéo cochée pas encore publiée (dans l'ordre où vous les avez cochées).</p>
     <div class="auto"><div class="txt"><b>Activée</b><small>Une vidéo cochée publiée par jour (ou deux), même appli fermée.</small></div><button class="inter" data-var="PUBLI_AUTO" data-def="0" data-bascule="1"></button></div>
     <div class="auto"><div class="txt"><b>Heure choisie par les statistiques</b><small>L'heure où vos vidéos font le plus de vues (sinon l'heure fixe ci-dessous).</small></div><button class="inter" data-var="PUBLI_HEURE_AUTO" data-def="0" data-bascule="1"></button></div>
@@ -417,14 +418,14 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <label>2e heure de publication (heure de Paris)<div class="jeton"><input data-var="PUBLI_HEURE2" data-def="12:00" data-texte="1" maxlength="5" type="time" placeholder="12:00"><button class="second" data-enr="PUBLI_HEURE2" style="flex:none;padding:10px 14px">OK</button></div></label>
     <p class="note" id="pubResume"></p>
     <h3 style="margin:14px 0 6px">🗓️ Calendrier de publication</h3><div id="calendrier"></div>
-    <p class="note">Jamais deux sons du même profil d'affilée : le robot alterne les comptes d'origine (l'ordre ci-dessus en tient compte).</p></section>
-  <section class="panneau"><h2>🎬 Mes vidéos TikTok</h2>
-    <div class="filtresTk"><input id="fTexte" type="search" placeholder="🔎 Rechercher (titre, légende)">
+    <p class="note">Jamais deux sons du même profil d'affilée : le robot alterne les comptes d'origine (l'ordre ci-dessus en tient compte).</p></details>
+  <details class="groupe repliTk" data-cle="videos" open><summary>🎬 Mes vidéos TikTok</summary>
+    <details id="filtresRepli"><summary>🔎 Rechercher et filtrer</summary><div class="filtresTk"><input id="fTexte" type="search" placeholder="🔎 Rechercher (titre, légende)">
       <select id="fEtat"><option value="">Toutes</option><option value="verifier">⚠️ À vérifier</option><option value="cochees">✅ À publier</option><option value="publiees">📤 Publiées</option><option value="non">Non publiées</option></select>
       <select id="fProfil"><option value="">Tous les profils</option></select>
       <select id="fDate"><option value="">Toutes les dates</option><option value="1">Aujourd'hui</option><option value="7">7 derniers jours</option><option value="30">30 derniers jours</option></select>
-      <select id="fTri"><option value="">Plus récentes d'abord</option><option value="sures">🛡️ Plus sûres d'abord</option></select></div>
-    <div id="listeTk"></div></section>
+      <select id="fTri"><option value="">Plus récentes d'abord</option><option value="sures">🛡️ Plus sûres d'abord</option></select></div></details>
+    <div id="listeTk"></div></details>
  </div>
  <!-- ======================================================== STATISTIQUES -->
  <div id="o-stats" style="display:none"></div>
@@ -891,6 +892,7 @@ function filtrerTk(vis){
   return l;
 }
 function initFiltres(){
+  if(Object.values(FTK).some(v=>v)) {const d_=$("#filtresRepli"); if(d_&&!d_.dataset.vu){d_.open=true; d_.dataset.vu=1}}   // filtres actifs : on les montre
   const prof=[...new Set(DATA.filter(v=>v.origine==="tiktok").map(profilDe).filter(Boolean))].sort(), sel=$("#fProfil");
   const h='<option value="">Tous les profils</option>'+prof.map(p=>`<option>${p.replace(/[<>&]/g,"")}</option>`).join(""); if(sel.innerHTML!==h) sel.innerHTML=h;
   [["#fTexte","texte"],["#fEtat","etat"],["#fProfil","profil"],["#fDate","date"],["#fTri","tri"]].forEach(([s_,k])=>{const e=$(s_); if(e.value!==(FTK[k]||"")) e.value=FTK[k]||"";
@@ -1150,6 +1152,10 @@ $("#quiOk").onclick=()=>{
   if(!ch.length)return;
   lancerFlux("emission.yml",$("#quiOk"),`🗣️ ${ch.length} réplique(s) rendue(s) au bon personnage : la nouvelle version apparaîtra à côté de l'ancienne.`,{refaire:v.fichier+"|qui|"+ch.join(";")},$("#suivi"));
 };
+// ------------------------------------------------ onglet TikTok : chaque bloc dans un menu déroulant, ouvert / fermé gardé sur l'appareil
+(()=>{let m={}; try{m=JSON.parse(localStorage.getItem("jt_replis")||"{}")}catch(e){}
+  document.querySelectorAll("details.repliTk").forEach(d=>{const k=d.dataset.cle; if(k in m) d.open=!!m[k];
+    d.addEventListener("toggle",()=>{m[k]=d.open; try{localStorage.setItem("jt_replis",JSON.stringify(m))}catch(e){}})})})();
 // ------------------------------------------------ « Dis ce qui ne va pas, le robot corrige » (moteur/remarque.py)
 function afficherRemarque(v){
   const b=$("#remBloc"); if(!b) return;
@@ -1638,6 +1644,7 @@ try{appliquerOnglets(localStorage.getItem("onglets_masques")||"")}catch(e){}
   history.replaceState(null,"",location.pathname);
   allerOnglet("tiktok");
   if(!m){toast("Le partage ne contenait pas de lien TikTok");return}
+  const d_=$("#tkLien").closest("details"); if(d_) d_.open=true;
   $("#tkLien").value=m[0].replace(/[).,;]+$/,""); $("#tkLien").scrollIntoView({behavior:"smooth",block:"center"});
   $("#tkCreer").classList.add("pulse"); toast("Lien TikTok reçu ✓ Touchez « Fabriquer sur ce son »");
 })();
