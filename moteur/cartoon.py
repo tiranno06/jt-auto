@@ -473,6 +473,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
                                or (j and ph[j - 1]["p"] == "narrateur")) else "serre"
     # studio : bible de l'épisode et storyboard (plans, mouvements, réactions), décors dessinés là où l'IA n'en a pas fourni
     B = studio.bible(sk, roles) if DETAIL else None
+    SEMI_ = set(sk.get("_decors_semi") or []) & set(decors)               # scènes au décor semi-réaliste (peinture, pieds calés au sol)
     AVANT, INFOS = {}, {}; FICHES = None; DECOUPE = []; ERREURS_ANIM = []; SC_COURANT = [0]; TETES_Y = {}
     PROF = {}                                                              # décors IA : profondeur (le premier plan glisse plus vite que le fond)
     if B and PARALLAXE:
@@ -521,13 +522,14 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
         for sc_ in places:
             lieu = B["lieux"][min(sc_, len(B["lieux"]) - 1)]
             dd = DD.dessiner(lieu, B, graine=B["graine"] % 9973 + sc_ + int(os.environ.get("DECOR_GRAINE") or 0))   # « juste le décor » : tirage neuf
-            if dd.get("avant") is not None: AVANT[sc_] = dd["avant"]          # premier plan (comptoir, bureau, guichet) : aussi devant un décor IA
+            if dd.get("avant") is not None and sc_ not in SEMI_: AVANT[sc_] = dd["avant"]   # premier plan (comptoir, bureau, guichet) : aussi devant un décor IA (pas devant une peinture)
             if sc_ in decors: continue                                     # décor IA (mode payant) : gardé tel quel
             decors[sc_] = dd["fond"]; INFOS[sc_] = dd
         try:                                                               # décors de saison (Noël, Halloween, Saint-Valentin, été)
             import saisons
             if saisons.saison():
                 for sc_ in list(decors):
+                    if sc_ in SEMI_: continue                              # décor semi-réaliste : rien de dessiné par-dessus
                     if decors[sc_] is not None and getattr(decors[sc_], "ndim", 0) == 3:
                         decors[sc_] = saisons.decorer(decors[sc_], B["lieux"][min(sc_, len(B["lieux"]) - 1)], INFOS.get(sc_), B.get("moment", "jour"))
                 print(f"décors de saison : {saisons.saison()}", flush=True)
@@ -537,6 +539,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
                 import croquis as CQ
                 for sc_ in list(decors):
                     d_ = decors[sc_]
+                    if sc_ in SEMI_: continue                              # décor semi-réaliste (réglage STYLE_DECOR) : la peinture reste telle quelle
                     if d_ is not None and getattr(d_, "ndim", 0) == 3:
                         decors[sc_] = CQ.croquifier(d_[..., :3], CQ.papier(d_.shape[1], d_.shape[0], 40 + sc_), graine=sc_)
                 for sc_ in list(AVANT):

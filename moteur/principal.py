@@ -389,7 +389,14 @@ def main():
             import cartoon, decors as decors_mod, studio as _st
             if not S and _st.separer_lieux(sk): print("Lieux séparés : chaque personnage a son propre décor (appel, visio, l'un ailleurs)", flush=True)
             elif not S and sk.get("doublage") and _st.une_scene(sk): print("Son TikTok : une seule scène, un seul décor (pas de changement inutile)", flush=True)
+            import semi_realiste as SR_
+            if not S: sk["_decors_semi"] = []                              # (un sketch refait garde sinon l'ancienne liste)
             if S: decors = S["decors"]                                     # reprise : décors déjà faits
+            elif modal_ok and os.environ.get("DECORS", "1") != "0" and SR_.actif():   # décors semi-réalistes (réglage, par défaut)
+                PR.etape(32, "Décors", forcer=True)
+                t_gpu = datetime.datetime.now()
+                decors = decors_mod.generer_semi(sk, graine=len(historique) + 7 + (datetime.datetime.now().microsecond % 997 if REFAIRE_MODE == "decors" else 0))
+                GPU["s"] += (datetime.datetime.now() - t_gpu).total_seconds(); sk["_decors_semi"] = sorted(decors_mod.SEMI)
             elif modal_ok and os.environ.get("DECORS", "1") != "0":
                 lum = ""; plans_dec = None
                 if cartoon.DETAIL:                                         # même lumière que la bible de l'épisode (heure, lampes)
@@ -479,9 +486,17 @@ def main():
                         n_sc = len(sk2.get("decoupage") or [])
                         if _st.separer_lieux(sk2) and len(sk2.get("decoupage") or []) != n_sc or sk2.get("decoupage") != sk.get("decoupage"):
                             dec2 = {}                                      # nouveaux lieux : nouveaux décors (IA si possible)
-                            if modal_ok and os.environ.get("DECORS", "1") != "0":
+                            if modal_ok and os.environ.get("DECORS", "1") != "0" and not SR_.actif():
                                 try: dec2 = decors_mod.generer(sk2.get("decoupage"), graine=len(historique) + 11)
                                 except Exception as e: print(f"Nouveaux décors IA impossibles ({e}) : décors dessinés", flush=True)
+                        if SR_.actif():                                    # décors semi-réalistes : les scènes à refaire sont repeintes
+                            semi_ = [k_ for k_ in sk2.get("_decors_semi") or [] if k_ in dec2]
+                            manq_ = [k_ for k_ in range(len(sk2.get("decoupage") or [])) if k_ not in dec2]
+                            if manq_ and modal_ok and os.environ.get("DECORS", "1") != "0":
+                                try:
+                                    dec2.update(decors_mod.generer_semi(sk2, graine=len(historique) + 11, scenes=set(manq_))); semi_ += sorted(decors_mod.SEMI)
+                                except Exception as e: print(f"Nouveaux décors semi-réalistes impossibles ({e}) : décors dessinés", flush=True)
+                            sk2["_decors_semi"] = sorted(set(semi_))
                         etat = {k_: copy.copy(getattr(cartoon, k_)) for k_ in ("MINUTAGE", "PH", "BRUITAGES", "RENDU", "COUVERTURE", "COUVERTURE_MS")}
                         deja2 = None
                     sk2_avant, dec2_avant = copy.deepcopy(sk2), copy.deepcopy(dec2)

@@ -160,6 +160,7 @@ jobs:
       RENDU_DETAILLE: ${{ vars.RENDU_DETAILLE }}
       PERSONNAGES: ${{ vars.PERSONNAGES }}
       MONTAGE: ${{ vars.MONTAGE }}
+      STYLE_DECOR: ${{ vars.STYLE_DECOR }}
       TON: ${{ vars.TON }}
       INFOS_DEMAIN: ${{ vars.INFOS_DEMAIN }}
       PERSONNALITES: ${{ vars.PERSONNALITES }}

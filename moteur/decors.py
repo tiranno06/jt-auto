@@ -27,6 +27,7 @@ def _ranger(d, im, prof=None):
         import json
         json.dump(_format.panneaux, open(os.path.join(BANQUE, k + "_panneaux.json"), "w"))
     with open(os.path.join(BANQUE, "index.tsv"), "a", encoding="utf-8") as f: f.write(f"{k}\t{d}\n")
+    _compter()
 
 LUMIERES = ("bright daylight", "warm golden evening light, lamps on", "night, dark blue ambience, warm lamp light", "lamps on", "daylight")
 VIDES = set("a an the with of and on in at to its their wall light".split())
@@ -48,7 +49,7 @@ def voisin(d, seuil):
     if not m0: return None
     for cle, desc in idx:
         f_ = os.path.join(BANQUE, cle + ".jpg")
-        if not os.path.exists(f_) or _lumiere(desc) != l0: continue
+        if not os.path.exists(f_) or _lumiere(desc) != l0 or ("[semi]" in desc) != ("[semi]" in d): continue   # même style de décor
         m1 = _mots(desc); s = len(m0 & m1) / max(1, len(m0 | m1))
         if best is None or s > best[0]: best = (s, cle)
     if best is None or best[0] < seuil: return None
@@ -63,13 +64,23 @@ def varier(im, d):
     hsv[..., 1] = np.clip(hsv[..., 1] * (0.92 + (h % 17) / 100), 0, 255)
     return cv2.cvtColor(hsv.astype(np.uint8), cv2.COLOR_HSV2RGB)
 
+COMPTEUR = os.path.join(BANQUE, "compteur.json")                         # {"2026-11": 12} : décors neufs fabriqués par mois
+
 def generes_ce_mois():
-    """Décors neufs fabriqués sur Modal ce mois-ci (fichiers de la banque datés du mois)."""
-    import datetime, glob
-    mois = datetime.date.today().strftime("%Y-%m"); n = 0
-    for f in glob.glob(os.path.join(BANQUE, "*.jpg")):
-        if datetime.date.fromtimestamp(os.path.getmtime(f)).strftime("%Y-%m") == mois: n += 1
-    return n
+    """Décors neufs fabriqués sur Modal ce mois-ci. Compteur tenu à part (decors/compteur.json) : la date des fichiers ne veut rien
+    dire sur GitHub (chaque fabrication repart d'une copie neuve du dépôt : tous les fichiers semblaient « de ce mois », le budget
+    paraissait toujours atteint et presque aucun décor neuf n'était fait)."""
+    import datetime, json
+    try: return int(json.load(open(COMPTEUR)).get(datetime.date.today().strftime("%Y-%m"), 0))
+    except (OSError, ValueError, AttributeError): return 0
+
+def _compter():
+    import datetime, json
+    try: c = json.load(open(COMPTEUR))
+    except (OSError, ValueError): c = {}
+    if not isinstance(c, dict): c = {}
+    m = datetime.date.today().strftime("%Y-%m"); c[m] = int(c.get(m, 0)) + 1
+    os.makedirs(BANQUE, exist_ok=True); json.dump(c, open(COMPTEUR, "w"))
 
 def _png(im):
     """Image RGB (plan du décor dessiné) -> PNG, ou b"" ."""
@@ -199,4 +210,72 @@ def generer(decoupage, graine=7, delai=1200, lumiere="", plans=None):  # 1re foi
                 if pr is not None: PROFONDEURS[k] = pr
                 if d not in faits: _ranger(d, out[k], pr); faits.add(d)
             except Exception as e: print(f"  décor {k} illisible : {e}", flush=True)
+    return out
+
+
+SEMI = set()                                                               # scènes dont le décor est semi-réaliste (dernier appel)
+
+def generer_semi(sk, graine=7, scenes=None, delai=1200):
+    """Décors « semi-réalistes » (moteur/semi_realiste.py, réglage STYLE_DECOR) : une peinture par lieu, cadrée pour que les pieds
+    des personnages soient sur le sol libre. Banque à part (descriptions « [semi] … », déjà cadrées) ; lieu ressemblant réutilisé ;
+    budget mensuel DECORS_MOIS comme les autres décors. Renvoie {scène: image 1080x1920} ; une scène absente = décor dessiné (croquis)."""
+    import semi_realiste as SR, studio
+    PROFONDEURS.clear(); PANNEAUX.clear(); SEMI.clear()
+    dec = sk.get("decoupage") or []
+    if not dec: return {}
+    roles = [r for r in dict.fromkeys(x["p"] for x in sk.get("repliques", [])) if r != "narrateur"]
+    try: lieux = studio.bible(sk, roles)["lieux"]
+    except Exception: lieux = ["salon"]
+    reps = sk.get("repliques") or []
+    demandes = []                                                          # (scène, description, personnages à l'image)
+    for k, sc in enumerate(dec):
+        if scenes is not None and k not in scenes: continue
+        lieu = lieux[min(k, len(lieux) - 1)] if lieux else "salon"
+        if lieu == "voiture": continue                                     # intérieur de voiture : décor dessiné (volant au premier plan)
+        n = len({reps[i]["p"] for i in sc.get("repliques", []) if 0 <= i < len(reps) and reps[i].get("p") != "narrateur"}) or len(roles) or 1
+        demandes.append((k, SR.description(lieu, sc.get("decor", "")), max(1, min(3, n))))
+    if not demandes: return {}
+    out = {}
+    def poser(k, im, prof):
+        out[k] = im; SEMI.add(k)
+        if prof is not None: PROFONDEURS[k] = cv2.GaussianBlur(prof, (0, 0), 6)
+    refaire = os.environ.get("REFAIRE", "").endswith("|decors")
+    budget_ok = generes_ce_mois() < int(os.environ.get("DECORS_MOIS") or 60)
+    a_faire = []
+    for k, d, n in demandes:
+        f_ = os.path.join(BANQUE, _cle(d) + ".jpg"); fp = os.path.join(BANQUE, _cle(d) + "_prof.png")
+        if not refaire and os.path.exists(f_):
+            prof = cv2.resize(cv2.imread(fp, 0), (W, H)) if os.path.exists(fp) else None
+            poser(k, cv2.cvtColor(cv2.imread(f_), cv2.COLOR_BGR2RGB), prof); print(f"  décor semi-réaliste {k} (lieu déjà connu) : {d[:70]}", flush=True); continue
+        proche = None if refaire else voisin(d, 0.55 if budget_ok else 0.25)
+        if proche is not None:                                             # (pas de miroir : le cadrage des pieds est gardé)
+            im, cle = proche; fp = os.path.join(BANQUE, cle + "_prof.png")
+            poser(k, im, cv2.resize(cv2.imread(fp, 0), (W, H)) if os.path.exists(fp) else None)
+            print(f"  décor semi-réaliste {k} (lieu ressemblant de la banque) : {d[:60]}", flush=True); continue
+        if budget_ok: a_faire.append((k, d, n))
+        else: print(f"  décor semi-réaliste {k} : budget Modal du mois atteint, décor dessiné", flush=True)
+    if not a_faire: return out
+    uniques = list(dict.fromkeys(d for _, d, _ in a_faire))
+    try:
+        import modal
+        D_ = modal.Cls.from_name("jt-decor", "Decor")()
+        res = D_.generer_semi.spawn([d.replace("[semi]", "").strip() for d in uniques], graine, 2).get(timeout=delai)
+    except Exception as e:
+        print(f"Décors semi-réalistes indisponibles ({type(e).__name__} {str(e)[:150]}) : décors dessinés", flush=True); return out
+    tirages = dict(zip(uniques, res))
+    for k, d, n in a_faire:
+        best = None
+        for png, ppng in tirages.get(d) or []:
+            try:
+                im = np.array(Image.open(io.BytesIO(png)).convert("RGB")); pr = np.array(Image.open(io.BytesIO(ppng)).convert("L")) if ppng else None
+                r = SR.cadrer(im, pr, n)
+                if r and (best is None or r[2] < best[2]): best = r
+            except Exception as e: print(f"  tirage illisible : {e}", flush=True)
+        if best is None:
+            print(f"  décor semi-réaliste {k} : aucun sol libre pour poser les pieds, décor dessiné : {d[:60]}", flush=True); continue
+        im, pr, z = best; im, pan = faux_textes(im)
+        if pan: PANNEAUX[k] = pan
+        poser(k, im, pr); print(f"  décor semi-réaliste {k} (cadré ×{z:.2f}, pieds au sol) : {d[:60]}", flush=True)
+        if not os.path.exists(os.path.join(BANQUE, _cle(d) + ".jpg")):
+            _format.panneaux = pan; _ranger(d, im, pr)
     return out
