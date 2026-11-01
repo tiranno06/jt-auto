@@ -2,34 +2,36 @@ Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, Groq ok, OpenRouter ok, IA Modal ok, ElevenLabs epuise — IA utilisée : mistral
 Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @motiontoonz, @same_same53, @charly.bse, @kodanimation, @vignianimation, @vincedessine
-Profil TikTok @same_same53 (poids 1.6) : 29 vidéo(s) jamais utilisée(s), meilleur potentiel 68/100
-Profil TikTok @charly.bse (poids 1.1) : 29 vidéo(s) jamais utilisée(s), meilleur potentiel 94/100
-Profil TikTok @yan_animation0 (poids 1.2) : 17 vidéo(s) jamais utilisée(s), meilleur potentiel 76/100
-Vidéo depuis TikTok : https://www.tiktok.com/@same_same53/video/7694285566984195360
+Profil TikTok @vignianimation (poids 1.6) : 23 vidéo(s) jamais utilisée(s), meilleur potentiel 77/100
+Profil TikTok @yan_animation0 (poids 1.2) : 17 vidéo(s) jamais utilisée(s), meilleur potentiel 82/100
+Profil TikTok @charly.bse (poids 1.1) : 28 vidéo(s) jamais utilisée(s), meilleur potentiel 86/100
+Vidéo depuis TikTok : https://www.tiktok.com/@vignianimation/video/7701771541142342945
   son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 69.4 s, compte d'origine @same_same53
+  son récupéré : 62.5 s, compte d'origine @vignianimation
   isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
-  voix isolées gratuitement (Demucs, 40 s)
-[ WARN:0@63.227] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+  voix isolées gratuitement (Demucs, 24 s)
+[ WARN:0@49.334] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
 INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
 WARNING: Logging before InitGoogle() is written to STDERR
-W0000 00:00:1793566710.019080    4287 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
-W0000 00:00:1793566710.040724    4288 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
-  image de la vidéo : 1 plans (≈ 69.5 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 0 %, large 100 % ; caméra : fixe 100 % ; 0 personne(s) à l'écran : aucun visage repéré ; agitation 0.065 ; lumière jour ; fond [0, 0, 0]
+W0000 00:00:1793568355.285958    4066 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1793568355.301167    4066 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1793568355.317891    4067 landmark_projection_calculator.cc:81] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX.
+  image de la vidéo : 1 plans (≈ 62.5 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 76 %, large 24 % ; caméra : fixe 57 %, avance 14 %, recul 25 %, travelling 2 % ; 1 personne(s) à l'écran : centre (habit [190, 112, 52], cheveux [11, 11, 10], sourit 0 %); droite (habit [155, 12, 9], cheveux [51, 30, 30], sourit 0 %) ; agitation 0.985 ; lumière soir ; fond [205, 132, 86]
   transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
-  transcription Groq (Whisper, gratuit) : 388 mots
-  [équipe · ingé son] ✔ pas de phrase répétée en boucle
-  [équipe · ingé son] ✔ mots à une vitesse possible : 7 mot(s) trop courts
+  transcription Groq (Whisper, gratuit) : 323 mots
+  transcription : 4 mot(s) répété(s) en boucle retiré(s)
+  [équipe · ingé son] ✘ pas de phrase répétée en boucle : 4 mot(s) retiré(s)
+  [équipe · ingé son] ✔ mots à une vitesse possible : 8 mot(s) trop courts
   [équipe · ingé son] ✔ pas de long passage sans texte
-[0;93m2026-11-01 20:58:37.694352496 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
-  transcription gratuite (Whisper sur la machine) : 439 mots
-  transcription Groq (whisper-large-v3, gratuit) : 387 mots
-  [équipe · ingé son] ✔ deux transcriptions d'accord : 88 % de mots identiques, 2 doute(s), 1 corrigé(s)
-Loading weights:   0%|          | 0/424 [00:00<?, ?it/s]Loading weights: 100%|██████████| 424/424 [00:00<00:00, 12835.32it/s]
-  mots recalés sur la voix (388 mots, écart moyen 63 ms, 20 s)
-Loading weights:   0%|          | 0/447 [00:00<?, ?it/s]Loading weights: 100%|██████████| 447/447 [00:00<00:00, 12664.77it/s]
-  bruits de l'original (CLAP, 8 s) : laughter, scream
-  voix séparées par NeMo : 1 voix, 6 tours de parole (35 s)
+[0;93m2026-11-01 21:26:01.408404924 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+  transcription gratuite (Whisper sur la machine) : 341 mots
+  transcription Groq (whisper-large-v3, gratuit) : 255 mots
+  [équipe · ingé son] ✘ deux transcriptions d'accord : 77 % de mots identiques, 8 doute(s), 4 tranché(s) par une 3e écoute, 3 corrigé(s)
+Loading weights:   0%|          | 0/424 [00:00<?, ?it/s]Loading weights: 100%|██████████| 424/424 [00:00<00:00, 29482.51it/s]
+  mots recalés sur la voix (318 mots, écart moyen 130 ms, 13 s)
+Loading weights:   0%|          | 0/447 [00:00<?, ?it/s]Loading weights: 100%|██████████| 447/447 [00:00<00:00, 33243.86it/s]
+  bruits de l'original (CLAP, 6 s) : aucun
+  voix séparées par NeMo : 1 voix, 1 tours de parole (37 s)
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/core/io.py:48: UserWarning: 
 torchcodec is not installed correctly so built-in audio decoding will fail. Solutions are:
 * use audio preloaded in-memory as a {'waveform': (channel, time) torch.Tensor, 'sample_rate': int} dictionary;
@@ -39,23 +41,24 @@ Could not load this library: /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3
   warnings.warn(
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1927.)
   std = sequences.std(dim=-1, correction=1)
-  voix séparées par pyannote : 1 voix, 4 tours de parole
-  voix re-séparées par leur empreinte (ECAPA) : 2 voix (netteté 0.14)
-  voix trop proches (ressemblance 0.76) : vérification mot par mot laissée de côté
-  Gemini a regardé la vidéo entière (gemini-flash-latest) : 2 personnage(s), une même personne en joue plusieurs, lieu « bureau »
-W0000 00:00:1793567141.080907    4477 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
-W0000 00:00:1793567141.087533    4480 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
-W0000 00:00:1793567141.102208    4481 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
-  [équipe · casting voix] ✔ témoin image (qui parle dans l'original) : 38/38 phrases lisibles (Gemini (vidéo entière), mouvements)
-  ressemblance des deux voix : 0.76 (au-delà de 0.55 : le dialogue décide avec le son)
-  deux IA ont relu le dialogue (groq et gemini) : d'accord sur 34/38 phrases
-  relecture du dialogue par l'IA : 34/38 phrases (A: le patron (celui qui réclame le remboursement), B: l'employé Eliott (qui refu)
-  contrôle questions-réponses (avec relecture de l'IA, avec le témoin image) : 38 phrases, 238 mot(s) changé(s) de voix
-  [équipe · casting voix] ✔ fil du dialogue repris (son + texte + image) : voix proches (0.76)
-  [équipe · casting voix] ✔ parole répartie entre les personnages : 2 voix, la plus bavarde dit 59 %
+  voix séparées par pyannote : 2 voix, 26 tours de parole
+  voix trop proches : répliques réparties d'après le fil du dialogue (questions, réponses)
+  voix trop proches (ressemblance 0.81) : vérification mot par mot laissée de côté
+  réseau : erreur 429 passagère, nouvel essai dans 2 s
+  Gemini a regardé la vidéo entière (gemini-flash-lite-latest) : 2 personnage(s), une même personne en joue plusieurs, lieu « chambre »
+W0000 00:00:1793568509.672282    4221 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+W0000 00:00:1793568509.676603    4224 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1793568509.685608    4225 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+  [équipe · casting voix] ✔ témoin image (qui parle dans l'original) : 44/44 phrases lisibles (Gemini (vidéo entière), mouvements)
+  ressemblance des deux voix : 0.81 (au-delà de 0.55 : le dialogue décide avec le son)
+  deux IA ont relu le dialogue (groq et gemini) : d'accord sur 27/44 phrases
+  relecture du dialogue par l'IA : 27/44 phrases (A = l'intrus / voleur, B = le résident / propriétaire)
+  contrôle questions-réponses (avec relecture de l'IA, avec le témoin image) : 44 phrases, 126 mot(s) changé(s) de voix
+  [équipe · casting voix] ✔ fil du dialogue repris (son + texte + image) : voix proches (0.81)
+  [équipe · casting voix] ✔ parole répartie entre les personnages : 2 voix, la plus bavarde dit 66 %
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/importlib/__init__.py:90: UserWarning: Module 'speechbrain.lobes.models.huggingface_transformers' was deprecated, redirecting to 'speechbrain.integrations.huggingface'. Please update your script.
   return _bootstrap._gcd_import(name[level:], package, level)
-Loading weights:   0%|          | 0/211 [00:00<?, ?it/s]Loading weights: 100%|██████████| 211/211 [00:00<00:00, 12397.71it/s]
+Loading weights:   0%|          | 0/211 [00:00<?, ?it/s]Loading weights: 100%|██████████| 211/211 [00:00<00:00, 20105.83it/s]
 [transformers] [1mWav2Vec2Model LOAD REPORT[0m from: facebook/wav2vec2-base
 Key                          | Status     |  | 
 -----------------------------+------------+--+-
@@ -71,71 +74,16 @@ Notes:
 - UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
 speechbrain.integrations.huggingface.huggingface - Wav2Vec2Model is frozen.
 CategoricalEncoder.expect_len was never called: assuming category count of 4 to be correct! Sanity check your encoder using `.expect_len`. Ensure that downstream code also uses the correct size. If you are sure this does not apply to you, use `.ignore_len`.
-  émotions entendues dans la voix : 0 réplique(s) (7 s)
-  33 répliques, voix : {'speaker_0': 219, 'speaker_1': 195}
-  son de la vidéo : 2 voix [219 Hz (f, 42 %), 195 Hz (f, 57 %)], 6.18 mots/s, blancs 0.25 s, 12 coupure(s) de parole, dynamique 16.5 dB, musique de fond, 68 bruitage(s) (8 graves, 60 aigus, 28 sur une fin de réplique), événements {'scream': 1, 'laughter': 1}, émotions {}
-  scène reconstituée : Un patron appelle son ex-employé Eliott pour réclamer un trop-perçu, mais ce dernier refuse catégoriquement et se moque de lui.
-  casting : speaker_0 → Jojo, speaker_1 → Kévin
-  sous-titres : 16 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
-  événements sonores : laughter, scream
-  [équipe · scripte] ✔ une réplique = une seule personne
-  [équipe · scripte] ✔ téléphone en main seulement s'il en est question
-  [équipe · scripte] ✔ autant de personnages que de voix : 2 voix, 2 personnage(s)
-  [équipe · monteur] ✔ chaque mot dans sa réplique (lèvres et sous-titres calés)
-  [équipe · monteur] ✔ chaque réplique a une durée
-  [équipe · monteur] ✔ rien après la fin du son
-  [équipe · monteur] ✔ répliques dans l'ordre du son
-  [équipe · monteur] ✔ un personnage ne parle jamais deux fois en même temps
-  bulletin de l'équipe : 15/15 contrôles bons
-  voix trop proches dans https://www.tiktok.com/@same_same53/video/7694285566984195360 (ressemblance 0.76) : on cherche une vidéo aux voix bien différentes
-Vidéo depuis TikTok : https://www.tiktok.com/@same_same53/video/7695008472684875040
-  son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 62.5 s, compte d'origine @same_same53
-  isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
-  voix isolées gratuitement (Demucs, 37 s)
-[ WARN:0@708.229] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
-W0000 00:00:1793567353.416602    4658 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
-W0000 00:00:1793567353.437875    4658 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
-W0000 00:00:1793567353.517965    4658 landmark_projection_calculator.cc:81] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX.
-  image de la vidéo : 1 plans (≈ 62.5 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 11 %, large 88 % ; caméra : fixe 100 % ; 1 personne(s) à l'écran : centre (habit [4, 3, 3], cheveux [36, 36, 36], sourit 0 %) ; agitation 0.149 ; lumière jour ; fond [0, 0, 0]
-  transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
-  transcription Groq (Whisper, gratuit) : 349 mots
-  [équipe · ingé son] ✔ pas de phrase répétée en boucle
-  [équipe · ingé son] ✔ mots à une vitesse possible : 5 mot(s) trop courts
-  [équipe · ingé son] ✔ pas de long passage sans texte
-  transcription gratuite (Whisper sur la machine) : 409 mots
-  transcription Groq (whisper-large-v3, gratuit) : 308 mots
-  [équipe · ingé son] ✔ deux transcriptions d'accord : 89 % de mots identiques, 1 doute(s), 1 tranché(s) par une 3e écoute, 1 corrigé(s)
-  mots recalés sur la voix (349 mots, écart moyen 100 ms, 17 s)
-  bruits de l'original (CLAP, 8 s) : crying, laughter
-  voix séparées par NeMo : 1 voix, 8 tours de parole (36 s)
-/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pyannote/audio/models/blocks/pooling.py:103: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/ReduceOps.cpp:1927.)
-  std = sequences.std(dim=-1, correction=1)
-  voix séparées par pyannote : 2 voix, 13 tours de parole
-  voix trop proches : répliques réparties d'après le fil du dialogue (questions, réponses)
-  voix trop proches (ressemblance 0.77) : vérification mot par mot laissée de côté
-  Gemini a regardé la vidéo entière (gemini-flash-latest) : 2 personnage(s), une même personne en joue plusieurs, lieu « bureau »
-W0000 00:00:1793567676.658279    4763 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
-W0000 00:00:1793567676.662485    4766 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
-W0000 00:00:1793567676.675169    4767 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
-  [équipe · casting voix] ✔ témoin image (qui parle dans l'original) : 43/43 phrases lisibles (Gemini (vidéo entière), mouvements)
-  ressemblance des deux voix : 0.77 (au-delà de 0.55 : le dialogue décide avec le son)
-  deux IA ont relu le dialogue (groq et gemini) : d'accord sur 35/43 phrases
-  relecture du dialogue par l'IA : 35/43 phrases (A : le client, B : le livreur)
-  contrôle questions-réponses (avec relecture de l'IA, avec le témoin image) : 43 phrases, 171 mot(s) changé(s) de voix
-  [équipe · casting voix] ✔ fil du dialogue repris (son + texte + image) : voix proches (0.77)
-  [équipe · casting voix] ✔ parole répartie entre les personnages : 2 voix, la plus bavarde dit 51 %
-  émotions entendues dans la voix : 0 réplique(s) (7 s)
-  36 répliques, voix : {'speaker_0': 225, 'speaker_1': 175}
-  son de la vidéo : 2 voix [225 Hz (f, 52 %), 175 Hz (?, 48 %)], 6.06 mots/s, blancs 0.16 s, 23 coupure(s) de parole, dynamique 15.6 dB, musique de fond, 63 bruitage(s) (9 graves, 54 aigus, 26 sur une fin de réplique), événements {'laughter': 3, 'crying': 1}, émotions {}
+  émotions entendues dans la voix : 0 réplique(s) (5 s)
+  37 répliques, voix : {'speaker_0': 175, 'speaker_1': 168}
+  son de la vidéo : 2 voix [175 Hz (?, 32 %), 168 Hz (?, 68 %)], 5.45 mots/s, blancs 0.16 s, 16 coupure(s) de parole, dynamique 16.6 dB, musique de fond, 22 bruitage(s) (1 graves, 21 aigus, 14 sur une fin de réplique), événements {}, émotions {}
   IA gemini indisponible (gemini 429 : [{
   "error": {
     "code": 429,
     "message": "You exceeded your current quota, please check your plan an) : on passe à la suivante
-  scène reconstituée : Un client en colère, resté chez lui toute la journée, appelle le service de livraison pour savoir où est passé son colis. L'envoyée, visiblement mal à l'aise, tente de justifier son absence de livraison tout en répète des phrases toutes faites.
-  casting : speaker_0 → Jojo, speaker_1 → Lila
-  Claude a réattribué 15 réplique(s) à la bonne personne (voix proches)
-  événements sonores : crying, laughter
+  scène reconstituée : Un homme enchaîné dans une chambre semble encourager des cambrioleurs à tout prendre chez lui, tout en minimisant la valeur des objets. La scène tourne à l'absurde quand ils découvrent qu'il possède un abonnement PS Plus.
+  casting : speaker_0 → Jojo, speaker_1 → Kévin
+  sous-titres : 3 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
   [équipe · scripte] ✔ une réplique = une seule personne
   [équipe · scripte] ✔ téléphone en main seulement s'il en est question
   [équipe · scripte] ✔ autant de personnages que de voix : 2 voix, 2 personnage(s)
@@ -144,82 +92,89 @@ W0000 00:00:1793567676.675169    4767 inference_feedback_manager.cc:121] Feedbac
   [équipe · monteur] ✔ rien après la fin du son
   [équipe · monteur] ✔ répliques dans l'ordre du son
   [équipe · monteur] ✔ un personnage ne parle jamais deux fois en même temps
-  bulletin de l'équipe : 15/15 contrôles bons
-  voix trop proches dans https://www.tiktok.com/@same_same53/video/7695008472684875040 (ressemblance 0.77) : on cherche une vidéo aux voix bien différentes
-Vidéo depuis TikTok : https://www.tiktok.com/@charly.bse/video/7649814657489800481
+  bulletin de l'équipe : 13/15 contrôles bons ; à revoir : pas de phrase répétée en boucle, deux transcriptions d'accord
+  voix trop proches dans https://www.tiktok.com/@vignianimation/video/7701771541142342945 (ressemblance 0.81) : on cherche une vidéo aux voix bien différentes
+Vidéo depuis TikTok : https://www.tiktok.com/@vignianimation/video/7701385041410084129
   son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 67.2 s, compte d'origine @charly.bse
+  son récupéré : 63.1 s, compte d'origine @vignianimation
   isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
-  voix isolées gratuitement (Demucs, 41 s)
-[ WARN:0@1161.454] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
-W0000 00:00:1793567807.323562    4842 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
-W0000 00:00:1793567807.333946    4844 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
-  image de la vidéo : 1 plans (≈ 67.5 s chacun) ; cadrages : très serré 1 %, serré 10 %, moyen 0 %, large 88 % ; caméra : fixe 66 %, avance 20 %, recul 11 %, travelling 0 % ; 1 personne(s) à l'écran : centre (habit [223, 198, 148], cheveux [136, 171, 166], sourit 68 %) ; agitation 0.826 ; lumière jour ; fond [230, 203, 159]
+  voix isolées gratuitement (Demucs, 24 s)
+[ WARN:0@346.760] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+W0000 00:00:1793568651.605142    4337 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1793568651.618030    4336 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+  image de la vidéo : 35 plans (≈ 1.81 s chacun) ; cadrages : très serré 0 %, serré 0 %, moyen 0 %, large 100 % ; caméra : fixe 85 %, avance 9 %, recul 4 % ; 0 personne(s) à l'écran : aucun visage repéré ; agitation 0.418 ; lumière jour ; fond [213, 165, 130] ; postures : desespoir (9.5–10.5 s)
   transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
-  transcription Groq (Whisper, gratuit) : 136 mots
+  transcription Groq (Whisper, gratuit) : 342 mots
+  [équipe · ingé son] 2 signe(s) de ponctuation isolé(s) recollé(s)
   [équipe · ingé son] ✔ pas de phrase répétée en boucle
-  [équipe · ingé son] ✔ mots à une vitesse possible
+  [équipe · ingé son] ✔ mots à une vitesse possible : 5 mot(s) trop courts
   [équipe · ingé son] ✔ pas de long passage sans texte
-  transcription gratuite (Whisper sur la machine) : 191 mots
-  [équipe · ingé son] ✘ deux transcriptions d'accord : 79 % de mots identiques, 0 doute(s), 0 corrigé(s)
-  mots recalés sur la voix (129 mots, écart moyen 147 ms, 15 s)
-  bruits de l'original (CLAP, 8 s) : baby, crying, scream
-  voix séparées par NeMo : 2 voix, 41 tours de parole (38 s)
-  voix vérifiées mot par mot : 28 mot(s) remis sur la bonne voix
-W0000 00:00:1793567944.670721    4882 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
-W0000 00:00:1793567944.674577    4884 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
-W0000 00:00:1793567944.685498    4886 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
-  témoin visages : 48 piste(s), 2 personnage(s) d'après l'apparence et le regard, 36/39 phrases lisibles
-  [équipe · casting voix] ✔ témoin image (qui parle dans l'original) : 36/39 phrases lisibles (visages, mouvements)
-  ressemblance des deux voix : 0.28 (au-delà de 0.55 : le dialogue décide avec le son)
-  [équipe · casting voix] ✔ le son et l'image sont d'accord : 17 % de désaccord
-  [équipe · casting voix] ✔ parole répartie entre les personnages : 2 voix, la plus bavarde dit 56 %
+  transcription gratuite (Whisper sur la machine) : 398 mots
+  [équipe · ingé son] ✔ deux transcriptions d'accord : 90 % de mots identiques, 0 doute(s), 0 corrigé(s)
+  mots recalés sur la voix (340 mots, écart moyen 75 ms, 13 s)
+  bruits de l'original (CLAP, 6 s) : aucun
+  voix séparées par NeMo : 2 voix, 26 tours de parole (41 s)
+  voix vérifiées mot par mot : 20 mot(s) remis sur la bonne voix
+W0000 00:00:1793568747.068693    4378 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+W0000 00:00:1793568747.071457    4381 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1793568747.080199    4380 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+  [équipe · casting voix] ✔ témoin image (qui parle dans l'original) : 44/54 phrases lisibles (mouvements)
+  ressemblance des deux voix : 0.31 (au-delà de 0.55 : le dialogue décide avec le son)
+  [équipe · casting voix] ✘ le son et l'image sont d'accord : 45 % de désaccord
+  deux IA ont relu le dialogue (groq et mistral) : d'accord sur 29/54 phrases
+  relecture du dialogue par l'IA : 29/54 phrases (A : la personne qui veut voir le téléphone, B : le propriétaire du téléphone (qu)
+  contrôle questions-réponses (avec relecture de l'IA, avec le témoin image) : 54 phrases, 107 mot(s) changé(s) de voix
+  [équipe · casting voix] ✔ fil du dialogue repris (son + texte + image) : l'image contredit le son sur 45 % des phrases
+  [équipe · casting voix] ✔ parole répartie entre les personnages : 2 voix, la plus bavarde dit 53 %
   émotions entendues dans la voix : 0 réplique(s) (4 s)
-  31 répliques, voix : {'speaker_0': 210, 'speaker_1': 339}
-  son de la vidéo : 2 voix [210 Hz (f, 42 %), 339 Hz (f, 57 %)], 3.55 mots/s, blancs 0.95 s, 3 coupure(s) de parole, dynamique 24.3 dB, musique de fond, 29 bruitage(s) (1 graves, 28 aigus, 5 sur une fin de réplique), événements {'crying': 2, 'baby': 1, 'scream': 1}, émotions {}
-  images de l'original décrites par Florence-2 (1 images, 13 s)
-  scène reconstituée : Une scène humoristique et absurde se déroule dans une chambre d'enfant, où une mère et son fils adolescent s'affrontent verbalement en mélangeant les rôles familiaux de manière confondante. Le fils, insistant sur le fait qu'il est le "papa", et la mère, tentant de rétablir l'ordre, créent une situation comique et répétitive.
+  45 répliques, voix : {'speaker_0': 179, 'speaker_1': 156}
+  son de la vidéo : 2 voix [179 Hz (?, 44 %), 156 Hz (h, 56 %)], 6.45 mots/s, blancs 0.21 s, 15 coupure(s) de parole, dynamique 23.9 dB, musique de fond, 41 bruitage(s) (18 graves, 23 aigus, 25 sur une fin de réplique), événements {}, émotions {}
+  images de l'original décrites par Florence-2 (6 images, 19 s)
+  scène reconstituée : Deux amis discutent dans un salon cosy d'un appartement moderne, où l'un tente de convaincre l'autre de lui montrer son téléphone, déclenchant une conversation humoristique et tendue sur l'intimité et les relations.
   casting : speaker_0 → Jojo, speaker_1 → Kévin
-  jeu d'acteur entendu dans le son : 3 réplique(s) (émotion de la voix, rires, cris)
-  événements sonores : baby, crying, scream
+  sous-titres : 12 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
   [équipe · scripte] ✔ une réplique = une seule personne
-  [équipe · scripte] ✘ téléphone en main seulement s'il en est question : retiré sur 1 réplique(s)
+  [équipe · scripte] ✔ téléphone en main seulement s'il en est question
   [équipe · scripte] ✔ autant de personnages que de voix : 2 voix, 2 personnage(s)
   [équipe · monteur] ✔ chaque mot dans sa réplique (lèvres et sous-titres calés)
   [équipe · monteur] ✔ chaque réplique a une durée
   [équipe · monteur] ✔ rien après la fin du son
   [équipe · monteur] ✔ répliques dans l'ordre du son
   [équipe · monteur] ✔ un personnage ne parle jamais deux fois en même temps
-  bulletin de l'équipe : 13/15 contrôles bons ; à revoir : deux transcriptions d'accord, téléphone en main seulement s'il en est question
-Sketch : « CONFUSION FAMILIALE », 31 répliques
-Son TikTok : une seule scène, un seul décor (pas de changement inutile)
-  décor semi-réaliste 0 (cadré ×1.50, pieds au sol) : [semi] messy bedroom, unmade bed with duvet and pillows, bed
-montage : 1 plans (0.1:large>pre/coupe)
+  bulletin de l'équipe : 15/16 contrôles bons ; à revoir : le son et l'image sont d'accord
+Sketch : « INTIMITÉ ET TÉLÉPHONES », 45 répliques
+Lieux séparés : chaque personnage a son propre décor (appel, visio, l'un ailleurs)
+  décor semi-réaliste 0 (lieu déjà connu) : [semi] quiet city street at dusk, parked car at the curb, sidewalk, st
+  décor semi-réaliste 1 (lieu déjà connu) : [semi] cozy living room, sofa, posters on the wall, coffee table, lamp
+montage : 45 plans (0.0:large>pre/coupe 1.4:large>inv/coupe 1.8:large>pre/coupe 2.1:large>inv/coupe 5.2:large>pre/coupe 5.9:large>inv/coupe 6.1:large>pre/coupe 7.4:large>inv/coupe 9.6:large>pre/coupe 10.3:large>inv/coupe 10.7:large>pre/coupe 11.5:large>inv/coupe 14.6:large>pre/coupe 17.7:large>inv/coupe 19.0:large>pre/coupe 19.5:large>inv/coupe 21.0:large>pre/coupe 22.0:large>inv/coupe 23.1:large>pre/coupe 25.4:large>inv/coupe 25.6:large>pre/coupe 26.8:large>inv/coupe 30.0:large>pre/coupe 31.8:large>inv/coupe 34.6:large>pre/coupe 36.1:large>inv/coupe 36.7:large>pre/coupe 37.7:large>inv/coupe 39.9:large>pre/coupe 41.9:large>inv/coupe 42.4:large>pre/coupe 42.9:large>inv/coupe 44.5:large>pre/coupe 45.6:large>inv/coupe 45.9:large>pre/coupe 46.6:large>inv/coupe 47.5:large>pre/coupe 48.0:large>inv/coupe 51.3:large>pre/coupe 51.9:large>inv/coupe 54.4:large>pre/coupe 56.7:large>inv/coupe 57.9:large>pre/coupe 58.4:large>inv/coupe 59.2:large>pre/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-studio : jour, lieux ['chambre'], tenues presentateur=tshirt, invite=tshirt, 0 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 70.5 s, 31 répliques, 1 scène(s), personnages ['presentateur', 'invite']
+studio : soir, lieux ['rue', 'salon'], tenues presentateur=tshirt, invite=chemise, 0 figurant(s), ambiances ['neon', 'pluie', 'poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+appel : écran partagé du début à la fin (chacun dans son décor, aucun changement de plan)
+cartoon : durée 65.5 s, 45 répliques, 2 scène(s), personnages ['presentateur', 'invite']
 File d'attente : aucune autre fabrication en cours, on y va
-Chaîne : vidéo 5/10 lancée (elle prépare son écoute pendant ce dessin)
-montage : 1 plans (0.1:large>pre/coupe)
+Chaîne : vidéo 6/10 lancée (elle prépare son écoute pendant ce dessin)
+montage : 45 plans (0.0:large>pre/coupe 1.4:large>inv/coupe 1.8:large>pre/coupe 2.1:large>inv/coupe 5.2:large>pre/coupe 5.9:large>inv/coupe 6.1:large>pre/coupe 7.4:large>inv/coupe 9.6:large>pre/coupe 10.3:large>inv/coupe 10.7:large>pre/coupe 11.5:large>inv/coupe 14.6:large>pre/coupe 17.7:large>inv/coupe 19.0:large>pre/coupe 19.5:large>inv/coupe 21.0:large>pre/coupe 22.0:large>inv/coupe 23.1:large>pre/coupe 25.4:large>inv/coupe 25.6:large>pre/coupe 26.8:large>inv/coupe 30.0:large>pre/coupe 31.8:large>inv/coupe 34.6:large>pre/coupe 36.1:large>inv/coupe 36.7:large>pre/coupe 37.7:large>inv/coupe 39.9:large>pre/coupe 41.9:large>inv/coupe 42.4:large>pre/coupe 42.9:large>inv/coupe 44.5:large>pre/coupe 45.6:large>inv/coupe 45.9:large>pre/coupe 46.6:large>inv/coupe 47.5:large>pre/coupe 48.0:large>inv/coupe 51.3:large>pre/coupe 51.9:large>inv/coupe 54.4:large>pre/coupe 56.7:large>inv/coupe 57.9:large>pre/coupe 58.4:large>inv/coupe 59.2:large>pre/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-studio : jour, lieux ['chambre'], tenues presentateur=tshirt, invite=tshirt, 0 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 70.5 s, 31 répliques, 1 scène(s), personnages ['presentateur', 'invite']
-  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~1057 images)
-  morceau 1058–2115 reçu d'une machine d'aide
-  morceau 2115–3172 reçu d'une machine d'aide
-  morceau 3172–4230 reçu d'une machine d'aide
-  dessin partagé terminé en 4.4 min
+studio : soir, lieux ['rue', 'salon'], tenues presentateur=tshirt, invite=chemise, 0 figurant(s), ambiances ['neon', 'pluie', 'poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+appel : écran partagé du début à la fin (chacun dans son décor, aucun changement de plan)
+cartoon : durée 65.5 s, 45 répliques, 2 scène(s), personnages ['presentateur', 'invite']
+  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~983 images)
+  morceau 983–1966 reçu d'une machine d'aide
+  morceau 2949–3932 reçu d'une machine d'aide
+  morceau 1966–2949 reçu d'une machine d'aide
+  dessin partagé terminé en 6.1 min
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury qualité (gratuit) : 9.8/10 — Humoriste 10.0/10 :  | Réalisateur 10.0/10 :  | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.1/10 : 20.5 s sous-titres trop rapides à lire
+Jury : 1 remarque(s) sur les plans / zooms retirée(s) (montage « plan large » voulu)
+Jury qualité (ia) : 6.7/10 — Humoriste 7.8/10 : 19.0 s La chute 'Bon bah voilà' tombe trop vite après la réplique précédente. Un silence ou un bruitage (ex. : 'dun_dun') pourrait améliorer le timing.; 34.6 s La réplique 'tu m'as saoulé' manque d'une réaction visuelle forte du personnage. Un geste exagéré (ex. : bras croisés, soupir) renforcerait l'humour. | Réalisateur 6.0/10 : 0.4 s Le texte 'POV : Ton téléphone, ton royaume' est illisible en raison de sa taille et de son placement. Il devrait être plus grand et centré pour une meilleure lisibilité.; 9.6 s Les sous-titres apparaissent trop rapidement, ce qui rend difficile leur lecture. Espacer les mots ou réduire la vitesse d'affichage améliorerait l'expérience.; 51.4 s Le passage de l'invite 'Un mec. Un mec qui est quelqu'un...' manque de clarté dans le ton. Un changement de ton ou une pause pourrait ajouter de l'humour. | Directeur artistique 8.0/10 : 0.0 s Les 
 fin en boucle : la dernière image se raccorde à la première (0.35 s de fondu)
   [vidéo finie · synchro] ✔ bouches du bon personnage
   [vidéo finie · technique] ✘ sauts, clignotements, personnages (1 remarque(s))
-  transcription Groq (Whisper, gratuit) : 136 mots
-  [vidéo finie · sous-titres] ✘ sous-titres vérifiés à l'oreille (accord 76 %)
-  [vidéo finie · contrôle IA] 0 remarque(s)
-Contrôle de la vidéo finie : 5 point(s) à vérifier — 15.9 s sous-titre « c'est ton père. Papa c'est » mais on entend « p ; 55.3 s sous-titre « Ton père, il s'appelle comment » mais on entend ; 68.1 s saut d'image hors d'une coupe prévue ; 28.7 s on entend « Non c'est pas » sans sous-titre ; 43.2 s sous-titre « Oui, c'est ton petit frère. » mais on entend « 
+  transcription Groq (Whisper, gratuit) : 345 mots
+  [vidéo finie · sous-titres] ✘ sous-titres vérifiés à l'oreille (accord 79 %)
+  [vidéo finie · contrôle IA] 6 remarque(s)
+Contrôle de la vidéo finie : 8 point(s) à vérifier — 57.9 s sous-titre « Un vieux pote. » mais on entend « ce mec vieux  ; 63.1 s saut d'image hors d'une coupe prévue ; 13.0 s Le texte affiché ('TU ME CACHES QUELQUE CHOSE') ne correspon ; 17.0 s Le texte affiché ('MONTE-MOI TACULOTTE') ne correspond pas a ; 27.0 s Le texte affiché ('MAIS PARCE') ne correspond pas au texte a ; 31.0 s Le texte affiché ('EN TRAIN DE DIRE') ne correspond pas au t
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, groq = ok, ia = groq ×3, gemini ×5, mistral ×5, appels = {'groq': 3, 'gemini': 5, 'mistral': 5}, epuisees = ['gemini'], quota = {'groq': {'reste_jour': 999, 'limite_jour': 1000}}, voix = tiktok, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 66531, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 47}
-Quota de l'API GitHub : 4837 appels restants
-OK : sortie/2026-11-01_22h20_emission.mp4 (71 s)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, groq = ok, ia = groq ×3, gemini ×2, mistral ×6, appels = {'groq': 3, 'gemini': 2, 'mistral': 6}, epuisees = ['gemini'], quota = {'groq': {'reste_jour': 999, 'limite_jour': 1000}}, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 59405, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0}
+Quota de l'API GitHub : 4994 appels restants
+OK : sortie/2026-11-01_22h36_emission.mp4 (66 s)
