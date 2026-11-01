@@ -2089,6 +2089,26 @@ class TestListe1Novembre(unittest.TestCase):
         self.assertIn('id="remBloc"', src); self.assertIn("|remarque|", src)
         self.assertIn('"remarque"', open(os.path.join(os.path.dirname(__file__), "..", "moteur", "principal.py"), encoding="utf-8").read())
 
+    def test_remarque_maurice_est_un_chat(self):
+        """Vidéo du 1er novembre : « Maurice est censé être un chat » = le personnage qu'on appelle Maurice devient un chat,
+        sans inverser les répliques (l'IA les avait toutes inversées) ; jamais de deuxième chance sur une vidéo refaite."""
+        import remarque, reseau, ecrire
+        sk = {"repliques": [{"p": "presentateur", "t": "Oh Maurice, mon chat t'es trop mignon.", "_deb": 0.0, "_fin": 2.0},
+                            {"p": "invite", "t": "Arrête de m'appeler Maurice, j'dors là.", "_deb": 2.0, "_fin": 4.0},
+                            {"p": "presentateur", "t": "T'es pas lavé.", "_deb": 4.0, "_fin": 5.0},
+                            {"p": "invite", "t": "Toi non plus.", "_deb": 5.0, "_fin": 6.0}], "decoupage": [{"repliques": [0, 1, 2, 3]}]}
+        t = "Maurice est censé etre un chat qui parle"
+        self.assertEqual(remarque.regles(sk, t), ({}, [{"type": "casting", "role": "invite", "espece": "chat"}]))
+        inverse = {"qui": [{"replique": k, "personnage": "invite" if r["p"] == "presentateur" else "presentateur"} for k, r in enumerate(sk["repliques"])],
+                   "corrections": [{"type": "casting", "role": "presentateur", "espece": "chat"}], "compris": "on inverse"}
+        avant = (reseau.ia_disponible, reseau.claude, ecrire._appel)
+        try:
+            reseau.ia_disponible = lambda: True; reseau.claude = lambda **k: None; ecrire._appel = lambda *a, **k: inverse
+            qui, corr = remarque.interpreter(sk, t)
+        finally: reseau.ia_disponible, reseau.claude, ecrire._appel = avant
+        self.assertEqual(qui, {}); self.assertEqual([c for c in corr if c.get("espece")], [{"type": "casting", "role": "invite", "espece": "chat"}])
+        self.assertIn("and not REFAIRE", open(os.path.join(os.path.dirname(__file__), "..", "moteur", "principal.py"), encoding="utf-8").read())
+
     def test_openrouter_et_modal(self):
         import reseau
         cles = {k: os.environ.get(k) for k in ("MISTRAL_API_KEY", "GEMINI_API_KEY", "GROQ_API_KEY", "OPENROUTER_API_KEY", "CLAUDE_INDISPONIBLE", "IA_MODAL_PRETE")}
