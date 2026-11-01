@@ -1,1420 +1,1097 @@
 {
- "titre": "FAMILLE EXCEPTIONNELLE",
- "sujet": "FAMILLE EXCEPTIONNELLE",
- "ecran": "FAMILLE",
+ "titre": "CONFUSION FAMILIALE",
+ "sujet": "CONFUSION FAMILIALE",
+ "ecran": "CONFUSION",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "POV : Tes arrière-arrière-grands-parents",
- "question": "Comment réagiriez-vous face à une famille aussi exceptionnelle ?",
+ "titre_accroche": "POV : Quand on se demande qui est le fils de q",
+ "question": "Qui est vraiment le fils de qui ?",
  "running_gag": "",
  "verite": "",
  "repliques": [
   {
-   "p": "presentateur",
-   "t": "Donc là je te présente mon père et mon grand-père.",
-   "_deb": 0.12,
-   "_fin": 2.385,
-   "d": "[excited] Donc là je te présente mon père et mon grand-père.",
-   "objet": "micro",
-   "_mots": [
-    [
-     "Donc",
-     0.0,
-     0.14
-    ],
-    [
-     "là",
-     0.14,
-     0.201
-    ],
-    [
-     "je",
-     0.221,
-     0.281
-    ],
-    [
-     "te",
-     0.301,
-     0.361
-    ],
-    [
-     "présente",
-     0.401,
-     0.661
-    ],
-    [
-     "mon",
-     0.722,
-     0.802
-    ],
-    [
-     "père",
-     0.882,
-     1.102
-    ],
-    [
-     "et",
-     1.663,
-     1.724
-    ],
-    [
-     "mon",
-     1.764,
-     1.824
-    ],
-    [
-     "grand-père.",
-     1.884,
-     2.265
-    ]
-   ]
-  },
-  {
    "p": "invite",
-   "t": "T'as vraiment de la chance d'avoir encore tes grands-parents.",
-   "_deb": 2.725,
-   "_fin": 4.208,
-   "d": "[envious] T'as vraiment de la chance d'avoir encore tes grands-parents.",
+   "t": "Toi t'es mon fils",
+   "_deb": 0.081,
+   "_fin": 0.908,
    "_mots": [
     [
-     "T'as",
-     0.0,
-     0.06
-    ],
-    [
-     "vraiment",
-     0.06,
-     0.261
-    ],
-    [
-     "de",
-     0.281,
-     0.321
-    ],
-    [
-     "la",
-     0.341,
-     0.381
-    ],
-    [
-     "chance",
-     0.401,
-     0.581
-    ],
-    [
-     "d'avoir",
-     0.581,
-     0.742
-    ],
-    [
-     "encore",
-     0.782,
-     0.942
-    ],
-    [
-     "tes",
-     0.942,
-     1.042
-    ],
-    [
-     "grands-parents.",
-     1.042,
-     1.483
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Les miens je les ai perdus j'avais je crois 13-14.",
-   "_deb": 4.368,
-   "_fin": 6.437,
-   "d": "[sad] Les miens je les ai perdus j'avais je crois 13-14.",
-   "_mots": [
-    [
-     "Les",
-     0.0,
-     0.081
-    ],
-    [
-     "miens",
-     0.101,
-     0.201
-    ],
-    [
-     "je",
-     0.201,
-     0.281
-    ],
-    [
-     "les",
-     0.301,
-     0.361
-    ],
-    [
-     "ai",
-     0.381,
-     0.421
-    ],
-    [
-     "perdus",
-     0.481,
-     0.663
-    ],
-    [
-     "j'avais",
-     0.663,
-     0.864
-    ],
-    [
-     "je",
-     1.005,
-     1.266
-    ],
-    [
-     "crois",
-     1.406,
-     2.049
-    ],
-    [
-     "13-14.",
-     2.049,
-     2.069
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "On est très chanceux en plus il y a encore mon arrière-grand-père qui est là-bas tu vois.",
-   "_deb": 6.457,
-   "_fin": 8.967,
-   "d": "[proud] On est très chanceux en plus il y a encore mon arrière-grand-père qui est là-bas tu vois.",
-   "_mots": [
-    [
-     "On",
-     0.0,
-     0.06
-    ],
-    [
-     "est",
-     0.08,
-     0.14
-    ],
-    [
-     "très",
-     0.161,
-     0.301
-    ],
-    [
-     "chanceux",
-     0.341,
-     0.642
-    ],
-    [
-     "en",
-     0.703,
-     0.743
-    ],
-    [
-     "plus",
-     0.763,
-     0.863
-    ],
-    [
-     "il",
-     0.863,
-     0.904
-    ],
-    [
-     "y",
-     0.904,
-     0.924
-    ],
-    [
-     "a",
-     0.924,
-     0.944
-    ],
-    [
-     "encore",
-     1.004,
-     1.185
-    ],
-    [
-     "mon",
-     1.185,
-     1.285
-    ],
-    [
-     "arrière-grand-père",
-     1.325,
-     1.908
-    ],
-    [
-     "qui",
-     1.968,
-     2.028
-    ],
-    [
-     "est",
-     2.068,
-     2.128
-    ],
-    [
-     "là-bas",
-     2.149,
-     2.389
-    ],
-    [
-     "tu",
-     2.389,
-     2.43
-    ],
-    [
-     "vois.",
-     2.43,
-     2.51
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Ah ouais",
-   "_deb": 8.967,
-   "_fin": 9.128,
-   "d": "[surprised] Ah ouais",
-   "_mots": [
-    [
-     "Ah",
-     0.0,
-     0.04
-    ],
-    [
-     "ouais",
-     0.04,
-     0.161
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Tenez-vous. Faut pas lui parler pendant les 12 coups de midi.",
-   "_deb": 10.111,
-   "_fin": 12.36,
-   "d": "[serious] Tenez-vous. Faut pas lui parler pendant les 12 coups de midi.",
-   "_mots": [
-    [
-     "Tenez-vous.",
-     0.0,
-     1.162
-    ],
-    [
-     "Faut",
-     1.463,
-     1.583
-    ],
-    [
-     "pas",
-     1.583,
-     1.663
-    ],
-    [
-     "lui",
-     1.684,
-     1.744
-    ],
-    [
-     "parler",
-     1.784,
-     1.964
-    ],
-    [
-     "pendant",
-     2.004,
-     2.165
-    ],
-    [
-     "les",
-     2.165,
-     2.249
-    ],
-    [
-     "12",
-     2.249,
-     2.369
-    ],
-    [
-     "coups",
-     2.425,
-     2.666
-    ],
-    [
-     "de",
-     2.686,
-     2.746
-    ],
-    [
-     "midi.",
-     2.806,
-     2.826
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "C'est son émission tu sais 98 ans.",
-   "_deb": 12.38,
-   "_fin": 16.505,
-   "d": "[proud] C'est son émission tu sais 98 ans.",
-   "_mots": [
-    [
-     "C'est",
-     0.0,
-     2.16
-    ],
-    [
-     "son",
-     2.221,
-     2.301
-    ],
-    [
-     "émission",
-     2.401,
-     2.642
-    ],
-    [
-     "tu",
-     2.662,
-     2.782
-    ],
-    [
-     "sais",
-     2.822,
-     3.04
-    ],
-    [
-     "98",
-     3.04,
-     3.965
-    ],
-    [
-     "ans.",
-     3.965,
-     4.125
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "C'est de la folie ça.",
-   "_deb": 16.606,
-   "_fin": 17.748,
-   "d": "[shocked] C'est de la folie ça.",
-   "_mots": [
-    [
-     "C'est",
-     0.0,
-     0.16
-    ],
-    [
-     "de",
-     0.2,
-     0.661
-    ],
-    [
-     "la",
-     0.741,
-     0.801
-    ],
-    [
-     "folie",
-     0.862,
-     1.102
-    ],
-    [
-     "ça.",
-     1.102,
-     1.142
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Et puis c'est pas fini t'as mon arrière-grand-père qui est là-bas là.",
-   "_deb": 17.748,
-   "_fin": 20.323,
-   "d": "[excited] Et puis c'est pas fini t'as mon arrière-grand-père qui est là-bas là.",
-   "_mots": [
-    [
-     "Et",
-     0.0,
-     0.04
-    ],
-    [
-     "puis",
-     0.04,
-     0.584
-    ],
-    [
-     "c'est",
-     0.584,
-     0.704
-    ],
-    [
-     "pas",
-     0.704,
-     0.805
-    ],
-    [
-     "fini",
-     0.825,
-     0.966
-    ],
-    [
-     "t'as",
-     1.026,
-     1.127
-    ],
-    [
-     "mon",
-     1.147,
-     1.247
-    ],
-    [
-     "arrière-grand-père",
-     1.328,
-     2.113
-    ],
-    [
-     "qui",
-     2.133,
-     2.193
-    ],
-    [
-     "est",
-     2.213,
-     2.273
-    ],
-    [
-     "là-bas",
-     2.294,
-     2.495
-    ],
-    [
-     "là.",
-     2.515,
-     2.575
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Attends comment ça c'est.",
-   "_deb": 20.323,
-   "_fin": 21.43,
-   "d": "[confused] Attends comment ça c'est.",
-   "_mots": [
-    [
-     "Attends",
-     0.0,
-     0.543
-    ],
-    [
-     "comment",
-     0.543,
-     0.724
-    ],
-    [
-     "ça",
-     0.724,
-     0.765
-    ],
-    [
-     "c'est.",
-     0.825,
-     1.107
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Attends mais il a quel âge 118 il a pas pu 118",
-   "_deb": 22.631,
-   "_fin": 25.98,
-   "objet": "tablette",
-   "_mots": [
-    [
-     "Attends",
-     0.0,
-     0.28
-    ],
-    [
-     "mais",
-     0.28,
-     0.401
-    ],
-    [
-     "il",
-     0.421,
-     0.461
-    ],
-    [
-     "a",
-     0.481,
-     0.501
-    ],
-    [
-     "quel",
-     0.541,
-     0.661
-    ],
-    [
-     "âge",
-     0.661,
-     0.681
-    ],
-    [
-     "118",
-     0.529,
-     2.109
-    ],
-    [
-     "il",
-     2.386,
-     2.706
-    ],
-    [
-     "a",
-     2.726,
-     2.747
-    ],
-    [
-     "pas",
-     2.767,
-     2.867
-    ],
-    [
-     "pu",
-     2.887,
-     2.949
-    ],
-    [
-     "118",
-     2.949,
-     3.349
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "ans 60 ans qu'il est à la retraite. Il aime beaucoup la vie.",
-   "_deb": 26.921,
-   "_fin": 29.93,
-   "_mots": [
-    [
-     "ans",
-     0.0,
-     0.079
-    ],
-    [
-     "60",
-     0.079,
-     0.739
-    ],
-    [
-     "ans",
-     1.143,
-     1.243
-    ],
-    [
-     "qu'il",
-     1.263,
-     1.404
-    ],
-    [
-     "est",
-     1.444,
-     1.504
-    ],
-    [
-     "à",
-     1.504,
-     1.524
-    ],
-    [
-     "la",
-     1.544,
-     1.584
-    ],
-    [
-     "retraite.",
-     1.664,
-     2.266
-    ],
-    [
-     "Il",
-     2.567,
-     2.627
-    ],
-    [
-     "aime",
-     2.667,
-     2.787
-    ],
-    [
-     "beaucoup",
-     2.787,
-     3.048
-    ],
-    [
-     "la",
-     3.068,
-     3.128
-    ],
-    [
-     "vie.",
-     3.188,
-     3.208
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Mais bon ce temps-ci. Il va pas très bien ce temps-ci.",
-   "_deb": 29.95,
-   "_fin": 32.497,
-   "_mots": [
-    [
-     "Mais",
-     0.0,
-     0.407
-    ],
-    [
-     "bon",
-     0.447,
-     0.549
-    ],
-    [
-     "ce",
-     0.61,
-     0.65
-    ],
-    [
-     "temps-ci.",
-     0.671,
-     0.996
-    ],
-    [
-     "Il",
-     1.561,
-     1.622
-    ],
-    [
-     "va",
-     1.662,
-     1.722
-    ],
-    [
-     "pas",
-     1.783,
-     1.883
-    ],
-    [
-     "très",
-     1.923,
-     2.044
-    ],
-    [
-     "bien",
-     2.084,
-     2.205
-    ],
-    [
-     "ce",
-     2.285,
-     2.366
-    ],
-    [
-     "temps-ci.",
-     2.386,
-     2.547
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Tu m'étonnes.",
-   "_deb": 32.517,
-   "_fin": 32.919,
-   "_mots": [
-    [
-     "Tu",
-     0.0,
-     0.06
-    ],
-    [
-     "m'étonnes.",
-     0.12,
-     0.402
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Non mais non mais t'as son père qui est là.",
-   "_deb": 32.919,
-   "_fin": 34.025,
-   "_mots": [
-    [
-     "Non",
-     0.0,
-     0.06
-    ],
-    [
-     "mais",
-     0.06,
-     0.14
-    ],
-    [
-     "non",
-     0.161,
-     0.221
-    ],
-    [
-     "mais",
-     0.281,
-     0.362
-    ],
-    [
-     "t'as",
-     0.362,
-     0.462
-    ],
-    [
-     "son",
-     0.502,
-     0.563
-    ],
-    [
-     "père",
-     0.603,
-     0.744
-    ],
-    [
-     "qui",
-     0.764,
-     0.844
-    ],
-    [
-     "est",
-     0.864,
-     0.945
-    ],
-    [
-     "là.",
-     1.045,
-     1.106
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Comment ça son père En arrière arrière arrière Grand-père là.",
-   "_deb": 34.105,
-   "_fin": 35.741,
-   "_mots": [
-    [
-     "Comment",
-     0.0,
-     0.523
-    ],
-    [
-     "ça",
-     0.523,
-     0.583
-    ],
-    [
-     "son",
-     0.583,
-     0.663
-    ],
-    [
-     "père",
-     0.663,
-     0.744
-    ],
-    [
-     "En",
-     0.764,
-     0.804
-    ],
-    [
-     "arrière",
-     0.804,
-     0.824
-    ],
-    [
-     "arrière",
-     0.546,
-     0.768
-    ],
-    [
-     "arrière",
-     0.808,
-     1.171
-    ],
-    [
-     "Grand-père",
-     1.293,
-     1.575
-    ],
-    [
-     "là.",
-     1.595,
-     1.636
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Quoi",
-   "_deb": 36.023,
-   "_fin": 36.205,
-   "_mots": [
-    [
-     "Quoi",
-     0.0,
-     0.182
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "142 je crois 142, 143.",
-   "_deb": 37.72,
-   "_fin": 40.28,
-   "_mots": [
-    [
-     "142",
-     0.0,
-     1.16
-    ],
-    [
-     "je",
-     1.315,
-     2.017
-    ],
-    [
-     "crois",
-     2.077,
-     2.097
-    ],
-    [
-     "142,",
-     1.24,
-     2.08
-    ],
-    [
-     "143.",
-     2.08,
-     2.56
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Vous vous rendez compte que c'est un record du monde en fait là.",
-   "_deb": 40.72,
-   "_fin": 42.406,
-   "_mots": [
-    [
-     "Vous",
-     0.0,
-     0.101
-    ],
-    [
-     "vous",
-     0.121,
-     0.221
-    ],
-    [
-     "rendez",
-     0.241,
-     0.422
-    ],
-    [
-     "compte",
-     0.462,
-     0.582
-    ],
-    [
-     "que",
-     0.622,
-     0.683
-    ],
-    [
-     "c'est",
-     0.723,
-     0.803
-    ],
-    [
-     "un",
-     0.803,
-     0.843
-    ],
-    [
-     "record",
-     0.883,
-     1.104
-    ],
-    [
-     "du",
-     1.124,
-     1.184
-    ],
-    [
-     "monde",
-     1.224,
-     1.345
-    ],
-    [
-     "en",
-     1.385,
-     1.425
-    ],
-    [
-     "fait",
-     1.465,
-     1.585
-    ],
-    [
-     "là.",
-     1.626,
-     1.686
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Ça me fait de la peine quoi.",
-   "_deb": 42.687,
-   "_fin": 43.509,
-   "_mots": [
-    [
-     "Ça",
-     0.0,
-     0.06
-    ],
-    [
-     "me",
-     0.14,
-     0.18
-    ],
-    [
-     "fait",
-     0.2,
-     0.301
-    ],
-    [
-     "de",
-     0.321,
-     0.361
-    ],
-    [
-     "la",
-     0.381,
-     0.441
-    ],
-    [
-     "peine",
-     0.481,
-     0.702
-    ],
-    [
-     "quoi.",
-     0.742,
-     0.822
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Non mais frérot Encore heureux il va pas bien. Il a 1000 ans.",
-   "_deb": 43.792,
-   "_fin": 45.501,
-   "_mots": [
-    [
-     "Non",
-     0.0,
-     0.06
-    ],
-    [
-     "mais",
-     0.12,
-     0.201
-    ],
-    [
-     "frérot",
-     0.201,
-     0.502
-    ],
-    [
-     "Encore",
-     0.583,
-     0.804
-    ],
-    [
-     "heureux",
-     0.844,
-     0.985
-    ],
-    [
-     "il",
-     0.985,
-     1.025
-    ],
-    [
-     "va",
-     1.045,
-     1.086
-    ],
-    [
-     "pas",
-     1.126,
-     1.226
-    ],
-    [
-     "bien.",
-     1.247,
-     1.347
-    ],
-    [
-     "Il",
-     1.387,
-     1.448
-    ],
-    [
-     "a",
-     1.488,
-     1.508
-    ],
-    [
-     "1000",
-     1.528,
-     1.548
-    ],
-    [
-     "ans.",
-     1.528,
-     1.709
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Les amours. Les amours. C'est plus un humain. C'est de la poussière là.",
-   "_deb": 45.561,
-   "_fin": 50.1,
-   "_mots": [
-    [
-     "Les",
-     0.0,
-     0.061
-    ],
-    [
-     "amours.",
-     0.081,
-     1.549
-    ],
-    [
-     "Les",
-     2.03,
-     2.191
-    ],
-    [
-     "amours.",
-     2.452,
-     3.154
-    ],
-    [
-     "C'est",
-     3.174,
-     3.275
-    ],
-    [
-     "plus",
-     3.295,
-     3.435
-    ],
-    [
-     "un",
-     3.435,
-     3.556
-    ],
-    [
-     "humain.",
-     3.576,
-     3.757
-    ],
-    [
-     "C'est",
-     3.777,
-     3.857
-    ],
-    [
-     "de",
-     3.857,
-     3.897
-    ],
-    [
-     "la",
-     3.937,
-     3.997
-    ],
-    [
-     "poussière",
-     4.037,
-     4.439
-    ],
-    [
-     "là.",
-     4.479,
-     4.539
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Tu sais qu'il a encore son père lui aussi.",
-   "_deb": 50.12,
-   "_fin": 51.405,
-   "_mots": [
-    [
-     "Tu",
-     0.0,
-     0.081
-    ],
-    [
-     "sais",
-     0.141,
-     0.241
-    ],
-    [
-     "qu'il",
-     0.261,
-     0.402
-    ],
-    [
-     "a",
-     0.442,
-     0.462
-    ],
-    [
-     "encore",
-     0.482,
-     0.683
-    ],
-    [
-     "son",
-     0.723,
-     0.803
-    ],
-    [
-     "père",
-     0.863,
-     1.024
-    ],
-    [
-     "lui",
-     1.044,
-     1.104
-    ],
-    [
-     "aussi.",
-     1.124,
-     1.285
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Non stop.",
-   "_deb": 51.666,
-   "_fin": 52.007,
-   "_mots": [
-    [
-     "Non",
+     "Toi",
      0.0,
      0.08
     ],
     [
-     "stop.",
-     0.08,
-     0.341
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Ah je plaisante. Je plaisante. Il est décédé il y a 2 ans.",
-   "_deb": 52.107,
-   "_fin": 54.707,
-   "objet": "fleur",
-   "_mots": [
-    [
-     "Ah",
-     0.0,
-     0.121
-    ],
-    [
-     "je",
+     "t'es",
      0.161,
-     0.221
-    ],
-    [
-     "plaisante.",
-     0.261,
-     0.281
-    ],
-    [
-     "Je",
-     0.147,
-     0.208
-    ],
-    [
-     "plaisante.",
-     0.249,
-     0.897
-    ],
-    [
-     "Il",
-     1.789,
-     1.849
-    ],
-    [
-     "est",
-     1.849,
-     1.91
-    ],
-    [
-     "décédé",
-     1.91,
-     2.154
-    ],
-    [
-     "il",
-     2.154,
-     2.215
-    ],
-    [
-     "y",
-     2.215,
-     2.235
-    ],
-    [
-     "a",
-     2.235,
-     2.255
-    ],
-    [
-     "2",
-     2.273,
-     2.413
-    ],
-    [
-     "ans.",
-     2.499,
-     2.6
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "C'était en pleine forme en plus.",
-   "_deb": 55.574,
-   "_fin": 57.128,
-   "_mots": [
-    [
-     "C'était",
-     0.0,
      0.282
     ],
     [
-     "en",
-     0.767,
-     0.807
+     "mon",
+     0.343,
+     0.484
     ],
     [
-     "pleine",
-     0.868,
-     1.05
-    ],
-    [
-     "forme",
-     1.09,
-     1.251
-    ],
-    [
-     "en",
-     1.312,
-     1.352
-    ],
-    [
-     "plus.",
-     1.393,
-     1.554
+     "fils",
+     0.605,
+     0.827
     ]
    ]
   },
   {
    "p": "presentateur",
-   "t": "Je suis de sa mère",
-   "_deb": 58.356,
-   "_fin": 58.926,
-   "chute": true,
+   "t": "Non, papa c'est mon fils",
+   "_deb": 1.751,
+   "_fin": 3.775,
+   "objet": "livre",
+   "_mots": [
+    [
+     "Non,",
+     0.0,
+     0.18
+    ],
+    [
+     "papa",
+     0.841,
+     1.142
+    ],
+    [
+     "c'est",
+     1.282,
+     1.463
+    ],
+    [
+     "mon",
+     1.503,
+     1.643
+    ],
+    [
+     "fils",
+     1.823,
+     2.024
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Toi t'es le fils",
+   "_deb": 3.835,
+   "_fin": 5.378,
+   "_mots": [
+    [
+     "Toi",
+     0.0,
+     0.26
+    ],
+    [
+     "t'es",
+     0.741,
+     0.942
+    ],
+    [
+     "le",
+     1.102,
+     1.162
+    ],
+    [
+     "fils",
+     1.382,
+     1.543
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Non, papa c'est mon fils",
+   "_deb": 5.378,
+   "_fin": 6.38,
+   "_mots": [
+    [
+     "Non,",
+     0.0,
+     0.06
+    ],
+    [
+     "papa",
+     0.12,
+     0.3
+    ],
+    [
+     "c'est",
+     0.32,
+     0.441
+    ],
+    [
+     "mon",
+     0.521,
+     0.621
+    ],
+    [
+     "fils",
+     0.841,
+     1.002
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Toi t'es le fils",
+   "_deb": 6.38,
+   "_fin": 6.901,
+   "_mots": [
+    [
+     "Toi",
+     0.0,
+     0.2
+    ],
+    [
+     "t'es",
+     0.28,
+     0.42
+    ],
+    [
+     "le",
+     0.42,
+     0.521
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Papa",
+   "_deb": 8.063,
+   "_fin": 8.424,
+   "_mots": [
+    [
+     "Papa",
+     0.0,
+     0.361
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "fils de papa",
+   "_deb": 8.98,
+   "_fin": 9.38,
+   "_mots": [
+    [
+     "fils",
+     0.0,
+     0.14
+    ],
+    [
+     "de",
+     0.14,
+     0.38
+    ],
+    [
+     "papa",
+     0.38,
+     0.4
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "c'est mon fils. Mais non, papa c'est ton père. Papa c'est mon fils",
+   "_deb": 9.626,
+   "_fin": 13.927,
+   "_mots": [
+    [
+     "c'est",
+     0.314,
+     0.334
+    ],
+    [
+     "mon",
+     0.0,
+     0.14
+    ],
+    [
+     "fils.",
+     0.3,
+     0.561
+    ],
+    [
+     "Mais",
+     0.741,
+     2.184
+    ],
+    [
+     "non,",
+     2.187,
+     2.288
+    ],
+    [
+     "papa",
+     2.288,
+     2.389
+    ],
+    [
+     "c'est",
+     2.449,
+     2.57
+    ],
+    [
+     "ton",
+     2.61,
+     2.691
+    ],
+    [
+     "père.",
+     2.791,
+     3.033
+    ],
+    [
+     "Papa",
+     3.133,
+     3.556
+    ],
+    [
+     "c'est",
+     3.617,
+     3.758
+    ],
+    [
+     "mon",
+     3.798,
+     3.898
+    ],
+    [
+     "fils",
+     3.959,
+     4.301
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Non, papa c'est mon fils",
+   "_deb": 14.73,
+   "_fin": 17.338,
+   "_mots": [
+    [
+     "Non,",
+     0.0,
+     0.341
+    ],
+    [
+     "papa",
+     0.402,
+     1.104
+    ],
+    [
+     "c'est",
+     1.244,
+     1.665
+    ],
+    [
+     "mon",
+     1.725,
+     1.886
+    ],
+    [
+     "fils",
+     2.006,
+     2.608
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "No papa c'est ton père",
+   "_deb": 17.358,
+   "_fin": 18.3,
+   "_mots": [
+    [
+     "No",
+     0.0,
+     0.08
+    ],
+    [
+     "papa",
+     0.16,
+     0.321
+    ],
+    [
+     "c'est",
+     0.401,
+     0.481
+    ],
+    [
+     "ton",
+     0.521,
+     0.622
+    ],
+    [
+     "père",
+     0.682,
+     0.942
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Non, papa c'est mon fils",
+   "_deb": 18.381,
+   "_fin": 20.406,
+   "_mots": [
+    [
+     "Non,",
+     0.0,
+     0.14
+    ],
+    [
+     "papa",
+     0.341,
+     0.621
+    ],
+    [
+     "c'est",
+     0.742,
+     0.942
+    ],
+    [
+     "mon",
+     1.002,
+     1.263
+    ],
+    [
+     "fils",
+     1.504,
+     2.025
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Et moi je suis quoi alors",
+   "_deb": 20.527,
+   "_fin": 21.309,
+   "_mots": [
+    [
+     "Et",
+     0.0,
+     0.06
+    ],
+    [
+     "moi",
+     0.08,
+     0.16
+    ],
+    [
+     "je",
+     0.24,
+     0.28
+    ],
+    [
+     "suis",
+     0.28,
+     0.361
+    ],
+    [
+     "quoi",
+     0.381,
+     0.481
+    ],
+    [
+     "alors",
+     0.561,
+     0.782
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Pour toi",
+   "_deb": 22.215,
+   "_fin": 22.499,
+   "_mots": [
+    [
+     "Pour",
+     0.0,
+     0.122
+    ],
+    [
+     "toi",
+     0.182,
+     0.284
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Je suis ta mère",
+   "_deb": 27.176,
+   "_fin": 28.026,
    "_mots": [
     [
      "Je",
      0.0,
-     0.061
+     0.04
     ],
     [
      "suis",
-     0.061,
-     0.203
+     0.04,
+     0.384
     ],
     [
-     "de",
-     0.203,
-     0.244
-    ],
-    [
-     "sa",
-     0.305,
-     0.346
+     "ta",
+     0.384,
+     0.506
     ],
     [
      "mère",
-     0.407,
-     0.57
+     0.607,
+     0.85
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Je suis ta mère. Pas ma mère",
+   "_deb": 29.272,
+   "_fin": 30.536,
+   "_mots": [
+    [
+     "Je",
+     0.0,
+     0.462
+    ],
+    [
+     "suis",
+     0.582,
+     0.742
+    ],
+    [
+     "ta",
+     0.762,
+     0.802
+    ],
+    [
+     "mère.",
+     0.802,
+     0.883
+    ],
+    [
+     "Pas",
+     0.943,
+     1.083
+    ],
+    [
+     "ma",
+     1.083,
+     1.184
+    ],
+    [
+     "mère",
+     1.184,
+     1.264
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Maman et mère, c'est pareil",
+   "_deb": 31.157,
+   "_fin": 32.361,
+   "_mots": [
+    [
+     "Maman",
+     0.0,
+     0.301
+    ],
+    [
+     "et",
+     0.402,
+     0.462
+    ],
+    [
+     "mère,",
+     0.522,
+     0.742
+    ],
+    [
+     "c'est",
+     0.763,
+     0.883
+    ],
+    [
+     "pareil",
+     0.963,
+     1.204
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Non. Si. Ma mère",
+   "_deb": 32.421,
+   "_fin": 34.126,
+   "_mots": [
+    [
+     "Non.",
+     0.0,
+     0.622
+    ],
+    [
+     "Si.",
+     0.662,
+     0.742
+    ],
+    [
+     "Ma",
+     0.742,
+     1.384
+    ],
+    [
+     "mère",
+     1.404,
+     1.705
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Oui, je suis ta mère",
+   "_deb": 34.146,
+   "_fin": 35.068,
+   "_mots": [
+    [
+     "Oui,",
+     0.0,
+     0.1
+    ],
+    [
+     "je",
+     0.24,
+     0.3
+    ],
+    [
+     "suis",
+     0.341,
+     0.501
+    ],
+    [
+     "ta",
+     0.541,
+     0.601
+    ],
+    [
+     "mère",
+     0.802,
+     0.922
+    ]
+   ]
+  },
+  {
+   "p": "envoyee",
+   "t": "Ma mère",
+   "_deb": 35.068,
+   "_fin": 35.77,
+   "_mots": [
+    [
+     "Ma",
+     0.0,
+     0.04
+    ],
+    [
+     "mère",
+     0.04,
+     0.702
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Et t'es mon fils",
+   "_deb": 36.212,
+   "_fin": 36.935,
+   "_mots": [
+    [
+     "Et",
+     0.0,
+     0.06
+    ],
+    [
+     "t'es",
+     0.1,
+     0.2
+    ],
+    [
+     "mon",
+     0.281,
+     0.381
+    ],
+    [
+     "fils",
+     0.482,
+     0.723
+    ]
+   ]
+  },
+  {
+   "p": "envoyee",
+   "t": "Non. C'est papa mon fils",
+   "_deb": 37.357,
+   "_fin": 39.968,
+   "_mots": [
+    [
+     "Non.",
+     0.0,
+     0.043
+    ],
+    [
+     "C'est",
+     0.043,
+     1.463
+    ],
+    [
+     "papa",
+     1.607,
+     1.928
+    ],
+    [
+     "mon",
+     2.089,
+     2.229
+    ],
+    [
+     "fils",
+     2.35,
+     2.611
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Amael, c'est qui pour toi",
+   "_deb": 41.071,
+   "_fin": 41.873,
+   "_mots": [
+    [
+     "Amael,",
+     0.0,
+     0.26
+    ],
+    [
+     "c'est",
+     0.32,
+     0.441
+    ],
+    [
+     "qui",
+     0.441,
+     0.521
+    ],
+    [
+     "pour",
+     0.601,
+     0.701
+    ],
+    [
+     "toi",
+     0.721,
+     0.802
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Petit frère",
+   "_deb": 42.414,
+   "_fin": 42.895,
+   "_mots": [
+    [
+     "Petit",
+     0.0,
+     0.28
+    ],
+    [
+     "frère",
+     0.32,
+     0.481
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Oui, c'est ton petit frère. Et",
+   "_deb": 43.215,
+   "_fin": 44.959,
+   "_mots": [
+    [
+     "Oui,",
+     0.0,
+     0.101
+    ],
+    [
+     "c'est",
+     0.141,
+     0.261
+    ],
+    [
+     "ton",
+     0.281,
+     0.381
+    ],
+    [
+     "petit",
+     0.421,
+     0.622
+    ],
+    [
+     "frère.",
+     0.682,
+     0.922
+    ],
+    [
+     "Et",
+     1.664,
+     1.744
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "papa, c'est mon fils",
+   "_deb": 45.701,
+   "_fin": 46.803,
+   "_mots": [
+    [
+     "papa,",
+     0.0,
+     0.26
+    ],
+    [
+     "c'est",
+     0.38,
+     0.521
+    ],
+    [
+     "mon",
+     0.581,
+     0.701
+    ],
+    [
+     "fils",
+     0.861,
+     1.102
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Papa, c'est pas ton fils. Si",
+   "_deb": 47.464,
+   "_fin": 48.807,
+   "_mots": [
+    [
+     "Papa,",
+     0.0,
+     0.201
+    ],
+    [
+     "c'est",
+     0.321,
+     0.421
+    ],
+    [
+     "pas",
+     0.461,
+     0.542
+    ],
+    [
+     "ton",
+     0.562,
+     0.682
+    ],
+    [
+     "fils.",
+     0.742,
+     0.922
+    ],
+    [
+     "Si",
+     1.203,
+     1.343
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Papa, c'est mon fils",
+   "_deb": 49.388,
+   "_fin": 50.374,
+   "_mots": [
+    [
+     "Papa,",
+     0.0,
+     0.261
+    ],
+    [
+     "c'est",
+     0.381,
+     0.624
+    ],
+    [
+     "mon",
+     0.624,
+     0.765
+    ],
+    [
+     "fils",
+     0.886,
+     0.986
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Toi, tu es le fils de papa. Ton père, il s'appelle comment",
+   "_deb": 50.395,
+   "_fin": 52.708,
+   "objet": "stylo",
+   "_mots": [
+    [
+     "Toi,",
+     0.0,
+     0.08
+    ],
+    [
+     "tu",
+     0.16,
+     0.241
+    ],
+    [
+     "es",
+     0.261,
+     0.342
+    ],
+    [
+     "le",
+     0.362,
+     0.422
+    ],
+    [
+     "fils",
+     0.482,
+     0.623
+    ],
+    [
+     "de",
+     0.684,
+     0.724
+    ],
+    [
+     "papa.",
+     0.824,
+     1.046
+    ],
+    [
+     "Ton",
+     1.468,
+     1.549
+    ],
+    [
+     "père,",
+     1.589,
+     1.75
+    ],
+    [
+     "il",
+     1.77,
+     1.83
+    ],
+    [
+     "s'appelle",
+     1.83,
+     2.112
+    ],
+    [
+     "comment",
+     2.112,
+     2.313
+    ]
+   ],
+   "_calme": true
+  },
+  {
+   "p": "envoyee",
+   "t": "Mon fils",
+   "_deb": 53.952,
+   "_fin": 54.294,
+   "_mots": [
+    [
+     "Mon",
+     0.0,
+     0.261
+    ],
+    [
+     "fils",
+     0.261,
+     0.342
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Non, non. Ton père, il s'appelle comment Papa, il s'appelle comment",
+   "_deb": 54.495,
+   "_fin": 57.99,
+   "_mots": [
+    [
+     "Non,",
+     0.0,
+     0.1
+    ],
+    [
+     "non.",
+     0.361,
+     0.462
+    ],
+    [
+     "Ton",
+     0.803,
+     0.883
+    ],
+    [
+     "père,",
+     0.944,
+     1.104
+    ],
+    [
+     "il",
+     1.104,
+     1.165
+    ],
+    [
+     "s'appelle",
+     1.165,
+     1.486
+    ],
+    [
+     "comment",
+     1.526,
+     1.707
+    ],
+    [
+     "Papa,",
+     2.008,
+     2.169
+    ],
+    [
+     "il",
+     2.169,
+     2.25
+    ],
+    [
+     "s'appelle",
+     2.27,
+     2.511
+    ],
+    [
+     "comment",
+     2.551,
+     3.495
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Fils",
+   "_deb": 58.817,
+   "_fin": 59.47,
+   "d": "[crying] Fils",
+   "_mots": [
+    [
+     "Fils",
+     0.0,
+     0.653
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Maman s'appelle comment Maman. Et papa s'appelle comment",
+   "_deb": 61.692,
+   "_fin": 65.088,
+   "d": "[crying] Maman s'appelle comment Maman. Et papa s'appelle comment",
+   "_mots": [
+    [
+     "Maman",
+     0.0,
+     0.181
+    ],
+    [
+     "s'appelle",
+     0.221,
+     0.523
+    ],
+    [
+     "comment",
+     0.523,
+     0.703
+    ],
+    [
+     "Maman.",
+     1.266,
+     2.15
+    ],
+    [
+     "Et",
+     2.19,
+     2.512
+    ],
+    [
+     "papa",
+     2.713,
+     2.873
+    ],
+    [
+     "s'appelle",
+     2.974,
+     3.195
+    ],
+    [
+     "comment",
+     3.195,
+     3.396
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Pisse",
+   "_deb": 66.737,
+   "_fin": 67.084,
+   "d": "[crying] Pisse",
+   "chute": true,
+   "_mots": [
+    [
+     "Pisse",
+     0.0,
+     0.347
     ]
    ]
   }
  ],
  "bandeau": [],
  "gag": null,
- "legende": "Découvrez une famille où la longévité dépasse l'entendement !",
+ "legende": "Une mère et son fils tentent désespérément de comprendre leur relation.",
  "hashtags": [
   "petitsdramas",
   "famille",
-  "longevite",
-  "record",
   "humour",
-  "surprise"
+  "confusion",
+  "meme",
+  "parente",
+  "comedie"
  ],
  "sources": [
-  "https://www.tiktok.com/@yan_animation0/video/7663894513974250785"
+  "https://www.tiktok.com/@charly.bse/video/7649401581833588000"
  ],
  "decoupage": [
   {
@@ -1446,732 +1123,424 @@
     23,
     24,
     25,
-    26
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32
    ],
    "lieu": "",
    "son": "",
    "duree": 0.0,
-   "decor": "salon avec un fauteuil en cuir, une étagère avec des photos de famille, une lampe de table et une plante en pot.",
-   "titre": "Les records de longévité"
+   "decor": "same children's bedroom, with added emphasis on the book and crayon as the characters become more emotional"
   }
  ],
  "studio": {
-  "moment": "soir",
+  "moment": "jour",
   "lieux": [
-   "salon"
+   "chambre"
   ],
   "costumes": {
    "presentateur": {
     "haut": "tshirt",
-    "c_haut": "jaune",
+    "c_haut": "bleu",
     "motif": "uni",
-    "bas": "pantalon",
+    "bas": "jeans",
     "chaussures": "baskets",
     "details": [
-     "barbe",
-     "lunettes_soleil"
+     "barre_oreilles",
+     "lunettes_vue"
     ]
    },
    "invite": {
     "haut": "chemise",
-    "c_haut": "gris",
+    "c_haut": "rose",
     "motif": "uni",
-    "bas": "short",
-    "chaussures": "baskets",
+    "bas": "jupe",
+    "chaussures": "ballerines",
     "details": [
-     "barbe_courte"
+     "collier",
+     "boucles_oreilles"
     ]
    },
    "envoyee": {
-    "haut": "chemise",
-    "c_haut": "gris",
+    "haut": "pull",
+    "c_haut": "orange",
     "motif": "uni",
-    "bas": "short",
+    "bas": "pantalon",
     "chaussures": "baskets",
     "details": [
-     "lunettes_vue"
+     "barbe_courte"
     ]
    }
   },
   "metiers": {},
   "personnages": {
    "presentateur": {
-    "genre": "h",
-    "age": 35,
+    "genre": "f",
+    "age": 40,
     "taille": 1,
-    "corpulence": 0.7,
-    "cheveux": "court_texture",
-    "barbe": "trois_jours",
-    "espece": ""
+    "corpulence": 0.5,
+    "cheveux": "long",
+    "c_cheveux": "brun",
+    "barbe": "rien"
    },
    "invite": {
-    "genre": "h",
-    "age": 30,
-    "taille": 0.95,
-    "corpulence": 0.6,
+    "genre": "m",
+    "age": 15,
+    "taille": 0.8,
+    "corpulence": 0.4,
     "cheveux": "court",
-    "barbe": "rien",
-    "espece": ""
+    "c_cheveux": "blond",
+    "barbe": "rien"
+   },
+   "envoyee": {
+    "genre": "m",
+    "age": 2,
+    "taille": 0.65,
+    "corpulence": 0.3,
+    "cheveux": "carre",
+    "c_cheveux": "blond",
+    "barbe": "rien"
    }
   },
   "objets": [
    {
     "replique": 0,
-    "objet": "micro"
+    "objet": "telephone"
    },
    {
-    "replique": 5,
-    "objet": "horloge"
+    "replique": 1,
+    "objet": "livre"
    },
    {
-    "replique": 10,
-    "objet": "tablette"
+    "replique": 23,
+    "objet": "crayon"
    },
    {
-    "replique": 24,
-    "objet": "fleur"
+    "replique": 27,
+    "objet": "stylo"
    }
   ],
   "gags": [
-   "Record du monde de longévité : 143 ans !",
-   "Interdiction de parler pendant les 12 coups de midi.",
-   "Émission spéciale : 98 ans et toujours en forme !"
+   "Maman : 1 fils = Papa : 1 fils ?",
+   "La réponse est dans le livre... ou pas.",
+   "Papa : Mon fils ? Moi aussi !"
   ],
   "ambiances": [
-   "poussiere"
+   "neutre"
   ],
   "cadence": "rapide",
   "plans": [
    {
     "replique": 0,
-    "plan": "moyen",
+    "plan": "serre",
     "mouvement": "fixe",
-    "geste": "bras_ouverts",
-    "reaction": "regard_camera"
+    "geste": "pointe_d",
+    "reaction": "choc"
    },
    {
     "replique": 1,
-    "plan": "serré",
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "poing",
+    "reaction": "colere"
+   },
+   {
+    "replique": 2,
+    "plan": "moyen",
+    "mouvement": "fixe",
+    "geste": "gratte_tete",
+    "reaction": "confused"
+   },
+   {
+    "replique": 3,
+    "plan": "serre",
     "mouvement": "fixe",
     "geste": "pointe_g",
     "reaction": "sceptique"
    },
    {
-    "replique": 2,
-    "plan": "serré",
+    "replique": 4,
+    "plan": "serre",
     "mouvement": "fixe",
-    "geste": "facepalm",
+    "geste": "interrupted",
     "reaction": "choc"
    },
    {
-    "replique": 3,
-    "plan": "large",
-    "mouvement": "travelling",
-    "geste": "bras_ouverts",
-    "reaction": "joie"
-   },
-   {
-    "replique": 4,
-    "plan": "serré",
-    "mouvement": "fixe",
-    "geste": "haussement",
-    "reaction": "regard_camera"
-   },
-   {
     "replique": 5,
-    "plan": "serré",
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "facepalm",
+    "reaction": "gene"
+   },
+   {
+    "replique": 7,
+    "plan": "large",
     "mouvement": "zoom_choc",
-    "geste": "pointe_d",
+    "geste": "desespoir",
     "reaction": "panique"
    },
    {
-    "replique": 6,
-    "plan": "moyen",
+    "replique": 11,
+    "plan": "serre",
     "mouvement": "fixe",
     "geste": "mains_hanches",
+    "reaction": "shocked"
+   },
+   {
+    "replique": 15,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "bras_ouverts",
     "reaction": "fier"
    },
    {
-    "replique": 7,
-    "plan": "serré",
-    "mouvement": "fixe",
-    "geste": "facepalm",
-    "reaction": "choc"
-   },
-   {
-    "replique": 8,
-    "plan": "large",
-    "mouvement": "avance",
-    "geste": "pointe_g",
-    "reaction": "joie"
-   },
-   {
-    "replique": 9,
-    "plan": "serré",
-    "mouvement": "fixe",
-    "geste": "gratte_tete",
-    "reaction": "confused"
-   },
-   {
-    "replique": 10,
-    "plan": "serré",
-    "mouvement": "zoom_choc",
-    "geste": "pointe_d",
-    "reaction": "choc"
-   },
-   {
-    "replique": 11,
-    "plan": "moyen",
-    "mouvement": "fixe",
-    "geste": "bras_ouverts",
-    "reaction": "sad"
-   },
-   {
-    "replique": 12,
-    "plan": "serré",
-    "mouvement": "fixe",
-    "geste": "facepalm",
-    "reaction": "agreeing"
-   },
-   {
-    "replique": 13,
-    "plan": "serré",
-    "mouvement": "fixe",
-    "geste": "pointe_g",
-    "reaction": "confused"
-   },
-   {
-    "replique": 14,
-    "plan": "serré",
-    "mouvement": "fixe",
-    "geste": "gratte_tete",
-    "reaction": "confused"
-   },
-   {
-    "replique": 15,
-    "plan": "serré",
-    "mouvement": "fixe",
-    "geste": "haussement",
-    "reaction": "shocked"
-   },
-   {
-    "replique": 16,
-    "plan": "serré",
-    "mouvement": "zoom_choc",
-    "geste": "pointe_d",
-    "reaction": "exaggerated"
-   },
-   {
-    "replique": 17,
-    "plan": "large",
-    "mouvement": "fixe",
-    "geste": "bras_ouverts",
-    "reaction": "shocked"
-   },
-   {
-    "replique": 18,
-    "plan": "moyen",
-    "mouvement": "fixe",
-    "geste": "pointe_g",
-    "reaction": "sad"
-   },
-   {
-    "replique": 19,
-    "plan": "serré",
-    "mouvement": "fixe",
-    "geste": "facepalm",
-    "reaction": "sarcastic"
-   },
-   {
     "replique": 20,
-    "plan": "serré",
-    "mouvement": "fixe",
-    "geste": "pointe_d",
-    "reaction": "dramatic"
-   },
-   {
-    "replique": 21,
-    "plan": "large",
-    "mouvement": "fixe",
-    "geste": "bras_ouverts",
-    "reaction": "dramatic"
-   },
-   {
-    "replique": 22,
-    "plan": "serré",
-    "mouvement": "fixe",
-    "geste": "pointe_g",
-    "reaction": "neutral"
-   },
-   {
-    "replique": 23,
-    "plan": "serré",
-    "mouvement": "fixe",
-    "geste": "facepalm",
-    "reaction": "shocked"
-   },
-   {
-    "replique": 24,
-    "plan": "serré",
-    "mouvement": "fixe",
-    "geste": "bras_ouverts",
-    "reaction": "joking"
-   },
-   {
-    "replique": 25,
-    "plan": "moyen",
-    "mouvement": "fixe",
-    "geste": "pointe_d",
-    "reaction": "neutral"
-   },
-   {
-    "replique": 26,
-    "plan": "serré",
+    "plan": "serre",
     "mouvement": "fixe",
     "geste": "gratte_tete",
-    "reaction": "neutral"
-   }
-  ],
-  "jeu": [
-   {
-    "replique": 0,
-    "emotion": "excited",
-    "geste": "bras_ouverts",
-    "intensite": 2
+    "reaction": "confused"
    },
    {
-    "replique": 1,
-    "emotion": "envious",
-    "geste": "pointe_g",
-    "intensite": 2
-   },
-   {
-    "replique": 2,
-    "emotion": "sad",
-    "geste": "facepalm",
-    "intensite": 3
-   },
-   {
-    "replique": 3,
-    "emotion": "proud",
-    "geste": "bras_ouverts",
-    "intensite": 3
-   },
-   {
-    "replique": 4,
-    "emotion": "surprised",
-    "geste": "haussement",
-    "intensite": 2
-   },
-   {
-    "replique": 5,
-    "emotion": "serious",
+    "replique": 27,
+    "plan": "serre",
+    "mouvement": "fixe",
     "geste": "pointe_d",
-    "intensite": 3
+    "reaction": "colere"
    },
    {
-    "replique": 6,
-    "emotion": "proud",
-    "geste": "mains_hanches",
-    "intensite": 2
-   },
-   {
-    "replique": 7,
-    "emotion": "shocked",
+    "replique": 32,
+    "plan": "serre",
+    "mouvement": "fixe",
     "geste": "facepalm",
-    "intensite": 3
-   },
-   {
-    "replique": 8,
-    "emotion": "excited",
-    "geste": "pointe_g",
-    "intensite": 3
-   },
-   {
-    "replique": 9,
-    "emotion": "confused",
-    "geste": "gratte_tete",
-    "intensite": 2
-   },
-   {
-    "replique": 10,
-    "emotion": "exaggerated",
-    "geste": "pointe_d",
-    "intensite": 3
-   },
-   {
-    "replique": 11,
-    "emotion": "sad",
-    "geste": "bras_ouverts",
-    "intensite": 2
-   },
-   {
-    "replique": 12,
-    "emotion": "agreeing",
-    "geste": "facepalm",
-    "intensite": 2
-   },
-   {
-    "replique": 13,
-    "emotion": "confused",
-    "geste": "pointe_g",
-    "intensite": 2
-   },
-   {
-    "replique": 14,
-    "emotion": "confused",
-    "geste": "gratte_tete",
-    "intensite": 2
-   },
-   {
-    "replique": 15,
-    "emotion": "shocked",
-    "geste": "haussement",
-    "intensite": 2
-   },
-   {
-    "replique": 16,
-    "emotion": "exaggerated",
-    "geste": "pointe_d",
-    "intensite": 3
-   },
-   {
-    "replique": 17,
-    "emotion": "shocked",
-    "geste": "bras_ouverts",
-    "intensite": 3
-   },
-   {
-    "replique": 18,
-    "emotion": "sad",
-    "geste": "pointe_g",
-    "intensite": 2
-   },
-   {
-    "replique": 19,
-    "emotion": "sarcastic",
-    "geste": "facepalm",
-    "intensite": 3
-   },
-   {
-    "replique": 20,
-    "emotion": "dramatic",
-    "geste": "pointe_d",
-    "intensite": 3
-   },
-   {
-    "replique": 21,
-    "emotion": "dramatic",
-    "geste": "bras_ouverts",
-    "intensite": 3
-   },
-   {
-    "replique": 22,
-    "emotion": "neutral",
-    "geste": "pointe_g",
-    "intensite": 1
-   },
-   {
-    "replique": 23,
-    "emotion": "shocked",
-    "geste": "facepalm",
-    "intensite": 2
-   },
-   {
-    "replique": 24,
-    "emotion": "joking",
-    "geste": "bras_ouverts",
-    "intensite": 2
-   },
-   {
-    "replique": 25,
-    "emotion": "neutral",
-    "geste": "pointe_d",
-    "intensite": 1
-   },
-   {
-    "replique": 26,
-    "emotion": "neutral",
-    "geste": "gratte_tete",
-    "intensite": 1
+    "reaction": "gene"
    }
   ],
   "decors_vus": {
-   "presentateur": "salon avec un canapé vert, une table basse en bois, une plante en pot, une horloge murale et un tableau avec écrit 'Ton trou de balle'.",
-   "invite": "salon avec un fauteuil en cuir, une étagère avec des photos de famille, une lampe de table et une plante en pot.",
-   "envoyee": "salon avec un tableau noir, une chaise en bois et une petite table avec une tasse de thé."
+   "presentateur": "children's bedroom with a white crib, a blue and white patterned rug, a book on the floor, a stack of colorful rings, a crayon, and a window with curtains",
+   "invite": "same children's bedroom with emphasis on the book and crayon",
+   "envoyee": "same children's bedroom, focused on the baby's toys"
   }
  },
  "doublage": {
-  "piste": "/tmp/tmp_wcu10sj/piste.wav",
-  "duree": 61.88,
-  "source": "https://www.tiktok.com/@yan_animation0/video/7663894513974250785",
-  "auteur": "yan_animation0",
-  "contexte": "Deux amis discutent dans une pièce avec des murs verts et un sol carrelé. L'un présente sa famille exceptionnelle, incluant un arrière-grand-père âgé de 98 ans et un autre arrière-grand-père de 142 ans. L'autre réagit avec stupéfaction et humour à ces révélations.",
-  "evenements": [],
+  "piste": "/tmp/tmpm4s1ghtg/piste.wav",
+  "duree": 67.08,
+  "source": "https://www.tiktok.com/@charly.bse/video/7649401581833588000",
+  "auteur": "charly.bse",
+  "contexte": "Une scène humoristique et confuse se déroule dans une chambre d'enfant, où une mère et son fils adolescent tentent de clarifier leur relation familiale. Les personnages s'interrogent sur qui est le fils de qui, créant une situation comique et absurde.",
+  "evenements": [
+   [
+    23.0,
+    26.0,
+    "baby"
+   ],
+   [
+    58.0,
+    60.0,
+    "scream"
+   ],
+   [
+    59.0,
+    62.0,
+    "crying"
+   ],
+   [
+    65.0,
+    67.0,
+    "crying"
+   ]
+  ],
   "visuel": {
    "gestes": [
     [
-     1.5,
-     0.7,
-     1.0
-    ],
-    [
-     2.51,
+     35.5,
      0.5,
      1.0
     ],
     [
-     6.01,
-     0.61,
-     1.0
-    ],
-    [
-     8.52,
-     0.62,
-     1.0
-    ],
-    [
-     9.52,
-     0.7,
-     1.0
-    ],
-    [
-     11.52,
+     41.0,
      0.5,
      1.0
-    ],
-    [
-     17.03,
-     0.7,
-     1.0
-    ],
-    [
-     19.04,
-     0.66,
-     0.59
-    ],
-    [
-     21.54,
-     0.48,
-     0.49
-    ],
-    [
-     23.05,
-     0.71,
-     0.38
-    ],
-    [
-     24.05,
-     0.72,
-     0.42
-    ],
-    [
-     26.55,
-     0.71,
-     0.64
-    ],
-    [
-     33.57,
-     0.51,
-     0.73
-    ],
-    [
-     35.57,
-     0.66,
-     1.0
-    ],
-    [
-     40.58,
-     0.7,
-     0.61
-    ],
-    [
-     50.6,
-     0.66,
-     0.95
-    ],
-    [
-     52.11,
-     0.75,
-     1.0
-    ],
-    [
-     58.62,
-     0.72,
-     0.77
     ]
    ],
-   "duree": 62.1,
-   "nb_plans": 21,
-   "duree_plan": 2.96,
+   "duree": 67.5,
+   "nb_plans": 35,
+   "duree_plan": 1.93,
    "coupes": [
-    1.0,
-    6.51,
-    7.52,
-    13.03,
-    14.53,
-    15.53,
-    16.53,
-    20.54,
-    22.55,
-    25.05,
-    25.55,
-    33.07,
-    34.57,
-    36.57,
-    39.58,
-    46.09,
-    49.1,
-    51.6,
-    59.12,
-    61.12
+    1.5,
+    4.0,
+    5.5,
+    6.5,
+    7.5,
+    9.0,
+    10.0,
+    11.5,
+    12.5,
+    14.5,
+    15.5,
+    17.5,
+    18.5,
+    20.5,
+    21.5,
+    22.5,
+    27.0,
+    29.0,
+    31.5,
+    32.5,
+    33.0,
+    45.0,
+    47.0,
+    49.0,
+    50.5,
+    53.0,
+    54.5,
+    57.5,
+    59.5,
+    60.5,
+    61.5,
+    63.0,
+    64.0,
+    65.5
    ],
    "plans": {
     "tres_serre": 0.0,
-    "serre": 0.121,
-    "moyen": 0.702,
-    "large": 0.177
+    "serre": 0.081,
+    "moyen": 0.0,
+    "large": 0.919
    },
    "camera": {
-    "fixe": 0.699,
-    "avance": 0.049,
-    "recul": 0.117,
-    "travelling": 0.039,
-    "epaule": 0.097
+    "fixe": 0.87,
+    "avance": 0.03,
+    "recul": 0.09,
+    "travelling": 0.0,
+    "epaule": 0.01
    },
    "nb_personnes": 1,
    "personnes": [
     {
-     "place": "droite",
-     "presence": 0.685,
-     "habit": [
-      72,
-      65,
-      64
-     ],
-     "cheveux": [
-      11,
-      3,
-      3
-     ],
-     "sourire": 0.0,
-     "taille": 0.122,
-     "tete_penchee": 1.3,
-     "regard_cote": 0.353
-    },
-    {
      "place": "centre",
-     "presence": 0.137,
+     "presence": 0.081,
      "habit": [
-      73,
-      67,
-      66
+      227,
+      230,
+      239
      ],
      "cheveux": [
-      142,
-      97,
-      62
+      205,
+      191,
+      160
      ],
-     "sourire": 0.0,
-     "taille": 0.181,
-     "tete_penchee": 3.3,
+     "sourire": 0.545,
+     "taille": 0.266,
+     "tete_penchee": 6.4,
      "regard_cote": 0.0
     }
    ],
    "visages": true,
-   "sourires": 0.0,
-   "energie": 0.388,
+   "sourires": 0.545,
+   "energie": 0.361,
    "mur": [
-    120,
-    114,
-    87
+    217,
+    226,
+    238
    ],
    "palette": [
     [
-     120,
-     114,
-     87,
-     0.431
+     225,
+     232,
+     241,
+     0.414
     ],
     [
-     73,
-     53,
-     43,
-     0.183
-    ],
-    [
-     177,
-     130,
-     70,
-     0.105
-    ],
-    [
-     165,
-     158,
-     155,
-     0.103
-    ],
-    [
+     179,
      201,
-     194,
-     193,
-     0.099
+     222,
+     0.236
     ],
     [
-     27,
-     17,
-     14,
-     0.079
+     134,
+     180,
+     183,
+     0.163
+    ],
+    [
+     240,
+     198,
+     152,
+     0.089
+    ],
+    [
+     18,
+     12,
+     9,
+     0.068
+    ],
+    [
+     151,
+     54,
+     116,
+     0.03
     ]
    ],
    "lumiere": {
-    "luminosite": 123.5,
-    "chaleur": 33.9,
-    "saturation": 79.4
+    "luminosite": 210.6,
+    "chaleur": -15.2,
+    "saturation": 53.9
    },
-   "moment": "soir",
+   "moment": "jour",
    "postures": []
   },
   "audio": {
-   "duree": 61.9,
-   "nb_voix": 2,
+   "duree": 67.1,
+   "nb_voix": 3,
    "voix": [
     {
-     "hz": 133,
-     "genre": "h",
-     "part": 0.72
+     "hz": 339,
+     "genre": "f",
+     "part": 0.42
     },
     {
-     "hz": 178,
-     "genre": "?",
-     "part": 0.28
+     "hz": 220,
+     "genre": "f",
+     "part": 0.5
+    },
+    {
+     "hz": 311,
+     "genre": "f",
+     "part": 0.08
     }
    ],
-   "debit": 4.61,
-   "blanc_moyen": 0.46,
-   "coupes": 6,
-   "dynamique_db": 22.4,
-   "cris": 0.005,
+   "debit": 3.56,
+   "blanc_moyen": 0.85,
+   "coupes": 7,
+   "dynamique_db": 24.4,
+   "cris": 0.001,
    "musique": 0.41,
-   "impacts": 38,
-   "impacts_10s": 6.14,
-   "graves": 8,
-   "aigus": 30,
+   "impacts": 28,
+   "impacts_10s": 4.17,
+   "graves": 2,
+   "aigus": 26,
    "sur_vanne": 9,
-   "evenements": {},
+   "evenements": {
+    "crying": 2,
+    "baby": 1,
+    "scream": 1
+   },
    "emotions": {
-    "shocked": 4,
-    "sad": 3,
-    "confused": 3,
-    "neutral": 3,
-    "excited": 2,
-    "proud": 2,
-    "exaggerated": 2,
-    "envious": 1
+    "neutral": 6,
+    "whispered": 5,
+    "annoyed": 4,
+    "confused": 4,
+    "insistent": 4,
+    "shocked": 2,
+    "frustrated": 2,
+    "interrupted": 1
    }
   },
-  "video_origine": "/tmp/tmp_wcu10sj/src.mp4",
+  "video_origine": "/tmp/tmpm4s1ghtg/src.mp4",
   "debut": 0.0
  },
  "fiche": {
@@ -2207,13 +1576,18 @@
      23,
      24,
      25,
-     26
+     26,
+     27,
+     28,
+     29,
+     30,
+     31,
+     32
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "salon avec un fauteuil en cuir, une étagère avec des photos de famille, une lampe de table et une plante en pot.",
-    "titre": "Les records de longévité"
+    "decor": "same children's bedroom, with added emphasis on the book and crayon as the characters become more emotional"
    }
   ]
  },
@@ -2230,7 +1604,7 @@
    "poste": "ingé son",
    "controle": "mots à une vitesse possible",
    "ok": true,
-   "detail": "1 mot(s) trop courts",
+   "detail": "3 mot(s) trop courts",
    "revoir": false
   },
   {
@@ -2244,28 +1618,21 @@
    "poste": "ingé son",
    "controle": "deux transcriptions d'accord",
    "ok": false,
-   "detail": "83 % de mots identiques, 3 doute(s), 2 tranché(s) par une 3e écoute, 1 corrigé(s)",
+   "detail": "74 % de mots identiques, 1 doute(s), 1 corrigé(s)",
    "revoir": false
   },
   {
    "poste": "casting voix",
    "controle": "témoin image (qui parle dans l'original)",
    "ok": true,
-   "detail": "36/39 phrases lisibles (visages, mouvements)",
+   "detail": "44/47 phrases lisibles (visages, mouvements)",
    "revoir": false
   },
   {
    "poste": "casting voix",
-   "controle": "fil du dialogue repris (son + texte + image)",
+   "controle": "plusieurs personnages joués par la même voix",
    "ok": true,
-   "detail": "voix proches (0.60)",
-   "revoir": false
-  },
-  {
-   "poste": "casting voix",
-   "controle": "parole répartie entre les personnages",
-   "ok": true,
-   "detail": "2 voix, la plus bavarde dit 69 %",
+   "detail": "3 personnages vus dans l'original",
    "revoir": false
   },
   {
@@ -2278,15 +1645,15 @@
   {
    "poste": "scripte",
    "controle": "téléphone en main seulement s'il en est question",
-   "ok": true,
-   "detail": "",
+   "ok": false,
+   "detail": "retiré sur 1 réplique(s)",
    "revoir": false
   },
   {
    "poste": "scripte",
    "controle": "autant de personnages que de voix",
    "ok": true,
-   "detail": "2 voix, 2 personnage(s)",
+   "detail": "3 voix, 3 personnage(s)",
    "revoir": false
   },
   {
@@ -2314,14 +1681,14 @@
    "poste": "monteur",
    "controle": "répliques dans l'ordre du son",
    "ok": true,
-   "detail": "",
+   "detail": "2 réplique(s) remise(s) à leur place",
    "revoir": false
   },
   {
    "poste": "monteur",
    "controle": "un personnage ne parle jamais deux fois en même temps",
    "ok": true,
-   "detail": "2 corrigé(s)",
+   "detail": "",
    "revoir": false
   }
  ],
@@ -2329,32 +1696,39 @@
   0
  ],
  "_voix_hz": {
-  "presentateur": 134,
-  "invite": 153
+  "presentateur": 339,
+  "invite": 212,
+  "envoyee": 290
  },
  "_voix_genre": {
-  "presentateur": "h",
-  "invite": "h"
+  "presentateur": "f",
+  "invite": "f",
+  "envoyee": "f"
  },
  "realisation": {
-  "moment": "soir",
+  "moment": "jour",
   "lieux": [
-   "salon"
+   "chambre"
   ],
   "gags": [
-   "Record du monde de longévité : 143 ans !",
-   "Interdiction de parler pendant les 12 coups de midi.",
-   "Émission spéciale : 98 ans et toujours en forme !"
+   "Maman : 1 fils = Papa : 1 fils ?",
+   "La réponse est dans le livre... ou pas.",
+   "Papa : Mon fils ? Moi aussi !"
   ],
-  "ambiances": [
-   "poussiere"
-  ],
+  "ambiances": [],
   "source": "auteur+image",
   "tenues": {
+   "invite": "chemise",
    "presentateur": "tshirt",
-   "invite": "chemise"
+   "envoyee": "pull"
   },
   "plans": [
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
    "large/fixe",
    "large/fixe",
    "large/fixe",
