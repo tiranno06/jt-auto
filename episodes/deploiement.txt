@@ -9,8 +9,8 @@ code: 0
 === banque de voix (Kyutai, Zonos, Whisper) ===
 ✓ Created objects.
 ├── ✓ Uploaded /home/runner/work/jt-auto/jt-auto/moteur/banque_modal.py
-├── ✓ Created Function Kyutai.*.
 ├── ✓ Created Function Whisper.*.
+├── ✓ Created Function Kyutai.*.
 ├── ✓ Created Function Kokoro.*.
 └── ✓ Created Function Zonos.*.
 ✓ Deployment skipped: no changes detected! ⏭️
@@ -22,20 +22,58 @@ code: 0
 ✓ Created objects.
 ├── ✓ Uploaded /home/runner/work/jt-auto/jt-auto/moteur/decor_modal.py
 └── ✓ Created Function Decor.*.
-✓ Deployment skipped: no changes detected! ⏭️
+✓ App deployed in 1.033s! 🎉
 
 View Deployment: https://modal.com/apps/tubbiolo-francois/main/deployed/jt-decor
 code: 0
 === ecoute (NeMo, Florence-2) ===
-╭─ Error ──────────────────────────────────────────────────────────────────────╮
-│ Workspace ac-JTr496Q74KTqNrls8nWRgE has exceeded its spend limit             │
-╰──────────────────────────────────────────────────────────────────────────────╯
-code: 1
+Saving image...
+Image saved, took 5.37s
+
+Built image im-jvOl2efTzxVMh4NcQ0mYQa in 74.17s
+
+
+Building image im-n8ZL4SUmv7y9r8mlhFTghB
+
+=> Step 0: FROM base
+
+=> Step 1: RUN wget -q -O /opt/diar.yaml https://raw.githubusercontent.com/NVIDIA/NeMo/v2.1.0/examples/speaker_tasks/diarization/conf/inference/diar_infer_telephonic.yaml
+Saving image...
+Image saved, took 902.14ms
+
+Built image im-n8ZL4SUmv7y9r8mlhFTghB in 4.40s
+
+
+Building image im-apzpuQjZDKFczxF1uPtulr
+
+=> Step 0: FROM base
+
+=> Step 1: ENV HF_HOME=/cache/hf
+
+=> Step 2: ENV TORCH_HOME=/cache/torch
+
+=> Step 3: ENV NEMO_CACHE_DIR=/cache/nemo
+Saving image...
+Image saved, took 1.39s
+
+Built image im-apzpuQjZDKFczxF1uPtulr in 2.55s
+
+
+✓ Created objects.
+├── ✓ Uploaded /home/runner/work/jt-auto/jt-auto/moteur/ecoute_modal.py
+├── ✓ Created Function Florence.*.
+└── ✓ Created Function Nemo.*.
+✓ App deployed in 172.983s! 🎉
+
+View Deployment: 
+https://modal.com/apps/tubbiolo-francois/main/deployed/jt-ecoute
+code: 0
 === essai de l'ecoute (NeMo, Florence-2) ===
-  NeMo indisponible (Lookup failed for Cls 'Nemo' from the 'jt-ecoute' app: App 'jt-ecoute' not found in environment 'main'.)
+  NeMo indisponible (`np.sctypes` was removed in the NumPy 2.0 release. Access dtypes explicitly instead.)
 NeMo : aucun résultat
-  Florence-2 indisponible (Lookup failed for Cls 'Florence' from the 'jt-ecoute' app: App 'jt-ecoute' not found in environment 'main'.)
-Florence-2 : []
+  images de l'original décrites par Florence-2 (2 images, 32 s)
+Florence-2 : ['The image is an illustration of a street scene with three buildings on either side. The buildings are of different sizes and colors, with one building on the left being a light grey color, another in a beige color, and the third in a red color. The building in the middle has a blue sign that reads "STYLE" and there is a green bench on the sidewalk in front of it. The street is empty, with no cars or people visible. There is a street lamp on the right side of the image and a small potted plant on the pavement. The sky is blue and the overall color scheme is bright and cheerful.', 'The image is an illustration of a street scene with three buildings on either side. The buildings are of different sizes and colors, with the first building on the left being a beige building with a red sign that reads "Tkoik" and the second building in the middle being a blue building with white windows. The third building is a yellow building with blue windows and a red awning. There is a street lamp on the right side of the image and a green trash can on the sidewalk. In front of the buildings, there is a green bench. The sky is blue and the road is empty.']
 === essai des decors (premier lancement : telechargement du modele) ===
-ÉCHEC : ResourceExhaustedError Function call failed: workspace billing cycle spend limit reached
-durée 0 s
+décor 0 : 1544909 octets
+décor 1 : 2187747 octets
+durée 33 s
