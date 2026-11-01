@@ -1123,6 +1123,15 @@ function choisir(i){
   $("#choix").textContent="Sélection : "+v.titre; ["#copier","#voir","#manuel"].forEach(s=>$(s).disabled=false);
   const a=$("#apercu"); a.src=srcDe(v); a.style.display="block"; $("#suivi").textContent=""; majBoutons(); ajusterBas();
   $("#comparer").style.display=v.source?"block":"none"; afficherQui(v); afficherRemarque(v); majBoutonPubliFiche();
+  if(v.origine==="tiktok"&&!(v.reps&&v.reps.length)) chargerRepliques(v,i);  // vidéo plus récente que le site : répliques lues en direct
+}
+// vidéo ajoutée depuis l'historique (plus récente que la dernière version du site) : ses répliques sont lues dans son sketch gardé,
+// pour que « Dis ce qui ne va pas » et « Corriger qui parle » soient là aussi
+async function chargerRepliques(v,i){
+  try{const sk=await lireEpisode("sketchs/"+v.fichier.replace(/\.mp4$/,"")+".json");
+    if(!sk||!Array.isArray(sk.repliques)) return;
+    v.reps=sk.repliques.slice(0,60).map(r=>[String(r.p||""),String(r.t||"").slice(0,110)]);
+    if(choisie===i){afficherQui(v); afficherRemarque(v)}}catch(e){}
 }
 // ------------------------------------------------ idée 5 : l'original et notre version côte à côte
 $("#comparer").onclick=()=>{

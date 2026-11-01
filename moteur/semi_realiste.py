@@ -25,6 +25,18 @@ DEHORS = {"rue", "parc", "plage", "jardin", "camping", "montagne", "stade", "par
           "piscine", "espace", "gare"}
 
 
+LIEUX_EN = {                                                               # lieux sans description anglaise dans studio.DECOR_EN
+    "cuisine": "cozy apartment kitchen, cabinets, fridge, stove, small table with chairs against the wall, window",
+    "cabinet_medical": "doctor's office, examination table against the wall, desk with computer, medical posters",
+    "salle_sport": "gym, weight machines and dumbbells along the walls, mirrors, rubber floor",
+    "classe": "school classroom, blackboard, rows of desks at the back, windows",
+    "administration": "administration office counter, waiting chairs along the wall, notice board",
+    "hall": "apartment building entrance hall, mailboxes, staircase, front door",
+    "caverne": "prehistoric cave, rocky walls, cave paintings, campfire in the back",
+    "palais": "royal palace hall, columns, red carpet, throne at the back, chandeliers",
+}
+
+
 def description(lieu, decor="", lumiere=""):
     """Description anglaise du lieu pour la peinture : celle de la mise en scène, sinon celle du lieu reconnu (studio.DECOR_EN)."""
     d = (decor or "").strip()
@@ -33,8 +45,8 @@ def description(lieu, decor="", lumiere=""):
     if not d:
         try:
             import studio
-            d = studio.DECOR_EN.get(lieu) or (lieu or "living room").replace("_", " ")
-        except Exception: d = (lieu or "living room").replace("_", " ")
+            d = studio.DECOR_EN.get(lieu) or LIEUX_EN.get(lieu) or (lieu or "living room").replace("_", " ")
+        except Exception: d = LIEUX_EN.get(lieu) or (lieu or "living room").replace("_", " ")
     sol = "large empty pavement in the foreground" if lieu in DEHORS else "large empty floor in the foreground"
     return f"[semi] {d}, {sol}" + (f", {lumiere}" if lumiere else "")
 
