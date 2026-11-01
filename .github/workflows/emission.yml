@@ -130,6 +130,7 @@ jobs:
       ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
       HF_TOKEN: ${{ secrets.HF_TOKEN }}                 # facultatif : clé Hugging Face gratuite → séparation des voix par pyannote
       GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}         # facultatif : clé Groq gratuite → transcription Whisper en quelques secondes
+      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}   # facultatif : 4e IA gratuite (modèles « :free » d'OpenRouter)
       ELEVENLABS_MODELE: ${{ vars.ELEVENLABS_MODELE }}
       ELEVENLABS: ${{ vars.ELEVENLABS }}
       BUFFER_API_KEY: ${{ secrets.BUFFER_API_KEY }}
@@ -244,7 +245,7 @@ jobs:
         run: pip install -r requirements.txt -c contraintes.txt      # versions qui marchent (contraintes.txt)
 
       - name: Modèles de reconnaissance vocale et d'empreinte en cache (Whisper large-v3-turbo, ECAPA)
-        if: startsWith(inputs.theme, 'TIKTOK::') || inputs.filiere == 'tiktok' || contains(inputs.refaire, '|qui|')
+        if: startsWith(inputs.theme, 'TIKTOK::') || inputs.filiere == 'tiktok' || contains(inputs.refaire, '|qui|') || contains(inputs.refaire, '|remarque|')
         uses: actions/cache@v6
         with:
           path: |
@@ -256,7 +257,7 @@ jobs:
           restore-keys: hf-whisper-turbo-v1
 
       - name: Lecteur TikTok (vidéo depuis une bande son)
-        if: startsWith(inputs.theme, 'TIKTOK::') || inputs.filiere == 'tiktok' || contains(inputs.refaire, '|qui|')
+        if: startsWith(inputs.theme, 'TIKTOK::') || inputs.filiere == 'tiktok' || contains(inputs.refaire, '|qui|') || contains(inputs.refaire, '|remarque|')
         run: |
           pip install -q -U "yt-dlp[default,curl-cffi]" faster-whisper -c contraintes.txt   # Whisper gratuit : repli si ElevenLabs et Modal manquent de crédit
           (pip install -q torch torchaudio -c contraintes.txt --index-url https://download.pytorch.org/whl/cpu && pip install -q speechbrain -c contraintes.txt) || echo "empreinte vocale ECAPA indisponible : timbre MFCC"
@@ -273,6 +274,7 @@ jobs:
           modal deploy moteur/banque_modal.py || echo "Deploiement banque de voix echoue, chaine de secours"
           modal deploy moteur/decor_modal.py || echo "Deploiement decors echoue, fonds unis"
           modal deploy moteur/ecoute_modal.py || echo "Deploiement ecoute (NeMo, Florence-2) echoue : pyannote / ECAPA et IA seules"
+          modal deploy moteur/ia_modal.py || echo "Deploiement de l'IA de secours (Qwen2.5-VL) echoue : sans elle"
 
       - name: Fabriquer l'émission
         id: run

@@ -39,6 +39,10 @@ FOURNISSEURS = {
                  texte=("llama-3.3-70b-versatile", "openai/gpt-oss-120b", "llama-3.1-8b-instant"),
                  images=("meta-llama/llama-4-scout-17b-16e-instruct", "meta-llama/llama-4-maverick-17b-128e-instruct")),
 }
+FOURNISSEURS["openrouter"] = dict(                                         # 4e IA gratuite (clé gratuite OPENROUTER_API_KEY) : modèles « :free »
+    cle="OPENROUTER_API_KEY", url="https://openrouter.ai/api/v1/chat/completions",
+    texte=("meta-llama/llama-3.3-70b-instruct:free", "deepseek/deepseek-chat-v3-0324:free", "mistralai/mistral-small-3.2-24b-instruct:free"),
+    images=("qwen/qwen2.5-vl-72b-instruct:free", "google/gemma-3-27b-it:free", "meta-llama/llama-4-maverick:free"))
 EPUISE = (" 401", " 403", "quota", "exhausted", "billing", "per day", "(tpd)", "(rpd)")   # fournisseur à court pour la journée
 HORS_SERVICE = set()                                                       # fournisseurs épuisés pendant cette fabrication
 QUOTA = {}                                                                 # ce qu'il reste chez chaque IA gratuite (en-têtes des réponses)
@@ -117,7 +121,7 @@ def _appel_openai(fourn, kw):
             _attendre(fourn)
             req = urllib.request.Request(F["url"], data=json.dumps(corps).encode(), method="POST",
                                          headers={"Authorization": f"Bearer {cle}", "Content-Type": "application/json",
-                                                  "User-Agent": "petitsdramas-robot/1.0"})   # Groq refuse les appels sans nom (403)
+                                                  "User-Agent": "petitsdramas-robot/1.0", "X-Title": "petitsdramas-robot"})   # Groq refuse les appels sans nom (403)
             try:
                 rep_ = urllib.request.urlopen(req, timeout=240); d = json.loads(rep_.read()); _noter_quota(fourn, getattr(rep_, "headers", None)); break
             except urllib.error.HTTPError as e:
@@ -162,7 +166,7 @@ def _appel_openai(fourn, kw):
 
 _DERNIER = {}
 EN_PAUSE = {}                                                               # fournisseur limité à la minute : sauté jusqu'à cette heure
-PAUSE_MIN = {"mistral": 2.1, "gemini": 0.5, "groq": 2.1}                   # Mistral gratuit : ministral-14b = 30 demandes / minute ; Groq 30 / min
+PAUSE_MIN = {"mistral": 2.1, "gemini": 0.5, "groq": 2.1, "openrouter": 3.1}   # OpenRouter gratuit : 20 / min                   # Mistral gratuit : ministral-14b = 30 demandes / minute ; Groq 30 / min
 
 
 def _attendre(fourn):
@@ -177,7 +181,9 @@ def ordre_ia(images=False, raisonner=False):
     (raisonner) : Groq (gros modèle), Gemini, Mistral."""
     o = [] if os.environ.get("CLAUDE_INDISPONIBLE") == "1" else ["claude"]
     autres = ["gemini", "mistral", "groq"] if images else (["groq", "gemini", "mistral"] if raisonner else ["mistral", "groq", "gemini"])
+    autres += ["openrouter"]                                               # 4e IA gratuite, quand les trois autres sont à court
     o += [f for f in autres if os.environ.get(FOURNISSEURS[f]["cle"]) and f not in HORS_SERVICE]
+    if os.environ.get("IA_MODAL_PRETE") == "1" and os.environ.get("IA_MODAL", "1") != "0": o.append("modal")   # notre IA sur Modal : tout dernier recours
     return [f for f in o if f not in HORS_SERVICE and EN_PAUSE.get(f, 0) <= time.time()] or [f for f in o if f not in HORS_SERVICE]
 
 
@@ -199,12 +205,12 @@ class _Messages:
                     r = self._client.messages.create(**kw); UTILISES["claude"] = UTILISES.get("claude", 0) + 1; self.dernier = f; return r
                 kw2 = {k: v for k, v in kw.items() if k != "tools"}; kw2["tools"] = [t for t in (kw.get("tools") or []) if "input_schema" in t]
                 if kw.get("tools") and not kw2["tools"]: raise RuntimeError("seulement un outil web (propre à Claude)")
-                r = _appel_openai(f, kw2); self.dernier = f; return r
+                r = (__import__("ia_modal").appeler(kw2) if f == "modal" else _appel_openai(f, kw2)); self.dernier = f; return r
             except Exception as e:
                 import secours
                 txt = str(e).lower()
                 if f == "claude" and not secours.claude_indisponible(e): raise         # erreur de Claude qui n'est pas un manque de crédit
-                if any(m in txt for m in EPUISE): HORS_SERVICE.add(f)        # vraiment épuisé / refusé
+                if any(m in txt for m in EPUISE) or f == "modal": HORS_SERVICE.add(f)   # vraiment épuisé / refusé (Modal : un seul essai)
                 erreurs.append(f"{f} : {str(e)[:120]}")
                 print(f"  IA {f} indisponible ({str(e)[:120]}) : on passe à la suivante", flush=True)
         raise RuntimeError("credit balance : aucune IA disponible (" + " | ".join(erreurs) + ")")
@@ -262,6 +268,11 @@ def verifier_credits():
                                          else "limite" if "limite 429" in t else "erreur")
             if etat[f] in ("epuise", "cle"): HORS_SERVICE.add(f)                    # erreur passagère : on retentera pendant la fabrication
             print(f"  {f} : {str(e)[:160]}", flush=True)
+    if os.environ.get("MODAL_TOKEN_ID") and os.environ.get("IA_MODAL", "1") != "0":   # notre IA de secours est-elle déployée sur Modal ?
+        try:
+            import modal
+            modal.Cls.from_name("jt-ia", "IA").hydrate(); os.environ["IA_MODAL_PRETE"] = "1"; etat["modal_ia"] = "ok"
+        except Exception as e: etat["modal_ia"] = "absent"; print(f"  IA de secours sur Modal non déployée ({str(e)[:100]})", flush=True)
     UTILISES.clear()
     etat["ia"] = "ok" if ia_disponible() else "aucune"
     if QUOTA: etat["quota"] = {k: dict(v) for k, v in QUOTA.items()}
@@ -275,6 +286,6 @@ def verifier_credits():
             if etat["elevenlabs"] == "epuise": os.environ["ELEVENLABS"] = "0"
         except Exception as e:
             etat["elevenlabs"] = "ok"                                      # lecture du solde impossible : on tentera quand même
-    print(f"Crédits au départ : Claude {etat['claude']}, Mistral {etat['mistral']}, Gemini {etat['gemini']}, Groq {etat.get('groq')}, ElevenLabs {etat['elevenlabs']}"
+    print(f"Crédits au départ : Claude {etat['claude']}, Mistral {etat['mistral']}, Gemini {etat['gemini']}, Groq {etat.get('groq')}, OpenRouter {etat.get('openrouter')}, IA Modal {etat.get('modal_ia', 'absent')}, ElevenLabs {etat['elevenlabs']}"
           f" — IA utilisée : {(ordre_ia() or ['aucune (sketchs de secours)'])[0]}", flush=True)
     return etat

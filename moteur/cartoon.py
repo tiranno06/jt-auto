@@ -524,6 +524,14 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
             if dd.get("avant") is not None: AVANT[sc_] = dd["avant"]          # premier plan (comptoir, bureau, guichet) : aussi devant un décor IA
             if sc_ in decors: continue                                     # décor IA (mode payant) : gardé tel quel
             decors[sc_] = dd["fond"]; INFOS[sc_] = dd
+        try:                                                               # décors de saison (Noël, Halloween, Saint-Valentin, été)
+            import saisons
+            if saisons.saison():
+                for sc_ in list(decors):
+                    if decors[sc_] is not None and getattr(decors[sc_], "ndim", 0) == 3:
+                        decors[sc_] = saisons.decorer(decors[sc_], B["lieux"][min(sc_, len(B["lieux"]) - 1)], INFOS.get(sc_), B.get("moment", "jour"))
+                print(f"décors de saison : {saisons.saison()}", flush=True)
+        except Exception as e: print(f"décors de saison impossibles ({str(e)[:100]})", flush=True)
         if CROQUIS and os.environ.get("DECOR_CROQUIS", "1") != "0":       # style croquis : décors (dessinés ou IA) en encre + aquarelle sur papier
             try:
                 import croquis as CQ

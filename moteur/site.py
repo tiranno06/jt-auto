@@ -598,6 +598,12 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
       <div id="quiListe"></div>
       <button class="second" id="quiOk" disabled style="width:100%;margin-top:6px">🔁 Refaire avec ces personnages</button>
     </div>
+    <div id="remBloc" style="display:none;margin-top:10px">
+      <b>💬 Dis ce qui ne va pas, le robot corrige</b>
+      <p class="note">Écris (ou dicte avec 🎤) ce qui ne va pas, comme à un monteur : « à 12 s c'est l'autre qui parle », « elle devrait être dans une cuisine », « le chat doit être noir ». Le robot comprend la remarque et refait la vidéo sur le même son.</p>
+      <div style="display:flex;gap:6px;align-items:flex-start"><textarea id="remCorr" rows="3" maxlength="600" style="flex:1" placeholder="Ce qui ne va pas…"></textarea><button class="second" id="remMicro" title="Dicter" style="flex:none;width:52px">🎤</button></div>
+      <button class="second" id="remCorrOk" disabled style="width:100%;margin-top:6px">🛠️ Corriger cette vidéo</button>
+    </div>
   </details>
   <button class="second" id="comparer" style="display:none;width:100%;margin-top:6px">📺 Comparer avec l'original</button>
   <div id="suivi"></div>
@@ -1100,7 +1106,7 @@ function choisir(i){
   document.querySelectorAll("#liste .carte").forEach(c=>c.classList.toggle("choisie",+c.dataset.i===i));
   $("#choix").textContent="Sélection : "+v.titre; ["#copier","#voir","#manuel"].forEach(s=>$(s).disabled=false);
   const a=$("#apercu"); a.src=srcDe(v); a.style.display="block"; $("#suivi").textContent=""; majBoutons(); ajusterBas();
-  $("#comparer").style.display=v.source?"block":"none"; afficherQui(v); majBoutonPubliFiche();
+  $("#comparer").style.display=v.source?"block":"none"; afficherQui(v); afficherRemarque(v); majBoutonPubliFiche();
 }
 // ------------------------------------------------ idée 5 : l'original et notre version côte à côte
 $("#comparer").onclick=()=>{
@@ -1130,6 +1136,24 @@ $("#quiOk").onclick=()=>{
   const v=DATA[choisie]; const ch=[...$("#quiListe").querySelectorAll("select")].filter(s=>s.value!==s.dataset.p).map(s=>s.dataset.k+"="+s.value);
   if(!ch.length)return;
   lancerFlux("emission.yml",$("#quiOk"),`🗣️ ${ch.length} réplique(s) rendue(s) au bon personnage : la nouvelle version apparaîtra à côté de l'ancienne.`,{refaire:v.fichier+"|qui|"+ch.join(";")},$("#suivi"));
+};
+// ------------------------------------------------ « Dis ce qui ne va pas, le robot corrige » (moteur/remarque.py)
+function afficherRemarque(v){
+  const b=$("#remBloc"); if(!b) return;
+  b.style.display=(v&&v.origine==="tiktok"&&v.reps&&v.reps.length)?"block":"none"; $("#remCorr").value=""; $("#remCorrOk").disabled=true;
+}
+$("#remCorr").oninput=()=>{$("#remCorrOk").disabled=!lireJeton()||$("#remCorr").value.trim().length<4};
+$("#remMicro").onclick=()=>{                                               // dictée : reconnaissance vocale du téléphone / du navigateur
+  const R=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!R){toast("La dictée n'est pas disponible sur cet appareil : écrivez la remarque");return}
+  const r=new R(); r.lang="fr-FR"; r.interimResults=false; r.maxAlternatives=1; $("#remMicro").textContent="⏺️";
+  r.onresult=e=>{const t=e.results[0][0].transcript; const z=$("#remCorr"); z.value=(z.value?z.value+" ":"")+t; z.oninput()};
+  r.onend=()=>{$("#remMicro").textContent="🎤"}; r.onerror=()=>{$("#remMicro").textContent="🎤"; toast("Dictée interrompue")};
+  try{r.start()}catch(e){$("#remMicro").textContent="🎤"}
+};
+$("#remCorrOk").onclick=()=>{
+  const v=DATA[choisie], t=$("#remCorr").value.replace(/[\r\n|]+/g," ").trim().slice(0,600); if(!v||t.length<4) return;
+  lancerFlux("emission.yml",$("#remCorrOk"),"🛠️ Remarque envoyée : le robot la comprend et refait la vidéo sur le même son (la nouvelle version apparaîtra à côté de l'ancienne).",{refaire:v.fichier+"|remarque|"+t},$("#suivi"));
 };
 // ------------------------------------------------ publication en un bouton (workflow publier.yml)
 $("#publier").onclick=async()=>{
