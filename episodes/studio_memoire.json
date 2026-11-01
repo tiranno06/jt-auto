@@ -5588,15 +5588,15 @@
  {
   "moment": "soir",
   "lieux": [
-   "cuisine"
+   "voiture"
   ],
   "source": "auteur+image",
-  "duree": 64.6,
+  "duree": 63.0,
   "plans": {
-   "large": 29
+   "large": 26
   },
   "mouvements": {
-   "fixe": 29
+   "fixe": 26
   },
   "costumes": {
    "presentateur": "tshirt",
@@ -5604,52 +5604,56 @@
   },
   "figurants": 0,
   "ambiances": [
-   "poussiere",
-   "vapeur"
+   "neon",
+   "poussiere"
   ],
-  "controle": "Humoriste 10.0/10 :  | Réalisateur 10.0/10 :  | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.1/10 : 0.2 s sous-titres trop rapides à lire",
-  "fichier": "2026-11-01_20h08_emission.mp4",
+  "controle": "Humoriste 7.0/10 : 10.6 s La chute sur l'âge du fils (11 ans) et celui du père (25 ans) n'est pas assez soulignée. Les réactions des personnages pourraient être plus exagérées pour renforcer le gag.; ",
+  "fichier": "2026-11-01_20h46_emission.mp4",
   "cine": {
    "focus": false,
-   "vertige": true,
+   "vertige": false,
    "tiers": false,
-   "etalonnage": true,
+   "etalonnage": false,
    "profondeur": false,
    "grain": true,
-   "reflets": false,
+   "reflets": true,
    "son": true
   },
   "cadence": "rapide"
  },
  {
-  "moment": "jour",
+  "moment": "soir",
   "lieux": [
-   "rue",
-   "salon"
+   "salon",
+   "rue"
   ],
   "source": "auteur+image",
-  "duree": 63.6,
+  "duree": 63.0,
   "plans": {
-   "large": 21
+   "large": 25
   },
   "mouvements": {
-   "fixe": 21
+   "fixe": 25
   },
   "costumes": {
-   "presentateur": "chemise",
-   "invite": "tshirt"
+   "invite": "tshirt",
+   "envoyee": "tshirt",
+   "presentateur": "chemise"
   },
   "figurants": 0,
-  "ambiances": [],
-  "controle": "Humoriste 10.0/10 :  | Réalisateur 10.0/10 :  | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.1/10 : 0.1 s sous-titres trop rapides à lire",
-  "fichier": "2026-11-01_20h55_emission.mp4",
+  "ambiances": [
+   "neon",
+   "poussiere"
+  ],
+  "controle": "Humoriste 7.8/10 : 16.6 s La chute sur l'âge du fils ('25 moins 11, ça fait 14') est un peu longue à comprendre. Un bruitage comme 'dun_dun' ou 'vine_boom' avant la révélation pourrait accentuer l'eff",
+  "fichier": "2026-11-01_21h41_emission.mp4",
   "cine": {
-   "focus": true,
-   "vertige": true,
-   "tiers": true,
+   "focus": false,
+   "vertige": false,
+   "tiers": false,
    "etalonnage": true,
    "profondeur": false,
-   "grain": true,
+   "grain": false,
    "reflets": false,
    "son": true
   },
