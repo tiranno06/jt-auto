@@ -1,9 +1,9 @@
-name: Essai décor peint sur plan (maquette, une seule fois)
+name: Essai décor peint sol libre (maquette, une seule fois)
 
 on:
   push:
     branches: [claude/contenu-tiktok-automatise-k1o5uj]
-    paths: ["maquettes/photo/peint_plan_modal.py"]
+    paths: ["maquettes/photo/peint_sol_modal.py"]
 
 permissions:
   contents: write
@@ -23,6 +23,6 @@ jobs:
           python-version: "3.12"
       - run: |
           pip install -q modal -c contraintes.txt
-          modal run maquettes/photo/peint_plan_modal.py
+          modal run maquettes/photo/peint_sol_modal.py
           git config user.name "robot-jt"; git config user.email "robot-jt@users.noreply.github.com"
-          git add maquettes/photo/peints && git commit -m "Essai décor peint sur plan : images" && git push
+          git add maquettes/photo/peints && git commit -m "Essai décor peint sol libre : images" && git push
