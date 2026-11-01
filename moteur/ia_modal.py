@@ -17,7 +17,7 @@ try:
     app = modal.App(APP)
     poids = modal.Volume.from_name("jt-ia-poids", create_if_missing=True)
     image = (modal.Image.debian_slim(python_version="3.12")
-             .pip_install("vllm==0.9.2", "qwen-vl-utils==0.0.11", "pillow")
+             .pip_install("vllm==0.9.2", "transformers==4.53.2", "huggingface_hub<1.0", "qwen-vl-utils==0.0.11", "pillow")   # versions qui vont ensemble
              .env({"HF_HOME": "/poids/hf", "VLLM_USE_V1": "1"}))
 
     @app.cls(gpu="L4", image=image, volumes={"/poids": poids}, timeout=900, scaledown_window=120, max_containers=1)
@@ -50,7 +50,12 @@ def appeler(kw):
         msgs.append({"role": "user", "content": f"Réponds UNIQUEMENT par un objet JSON valide qui respecte ce schéma (sans texte autour) : {sch}"})
     import modal as m_
     ia = m_.Cls.from_name(APP, "IA")()
-    txt = ia.repondre.remote(msgs, int(min(kw.get("max_tokens") or 2000, 4000)))
+    appel = ia.repondre.spawn(msgs, int(min(kw.get("max_tokens") or 2000, 4000)))
+    try: txt = appel.get(timeout=float(os.environ.get("IA_MODAL_ATTENTE") or 600))   # jamais de fabrication bloquée : 10 min au plus
+    except Exception:
+        try: appel.cancel()
+        except Exception: pass
+        raise
     reseau.UTILISES["modal"] = reseau.UTILISES.get("modal", 0) + 1
     print("  IA de secours sur Modal (Qwen2.5-VL) utilisée", flush=True)
     return NS(content=[NS(type="text", text=txt)], stop_reason="end_turn", model=f"modal:{MODELE}", gratuit=True,
