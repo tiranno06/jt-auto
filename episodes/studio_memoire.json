@@ -5942,41 +5942,73 @@
   "cadence": "rapide"
  },
  {
-  "moment": "soir",
+  "moment": "jour",
   "lieux": [
-   "voiture",
-   "mariage",
-   "eglise"
+   "rue",
+   "salon"
   ],
   "source": "auteur+image",
-  "duree": 75.6,
+  "duree": 72.4,
   "plans": {
-   "large": 27
+   "large": 34
   },
   "mouvements": {
-   "fixe": 27
+   "fixe": 34
   },
   "costumes": {
-   "presentateur": "tshirt",
-   "invite": "chemise",
-   "envoyee": "pull"
+   "presentateur": "costume",
+   "invite": "chemise"
   },
   "figurants": 0,
   "ambiances": [
-   "neon",
-   "pluie",
-   "poussiere"
+   "neon"
   ],
-  "controle": "Humoriste 7.8/10 : 15 s Les vannes entre l'invite et l'envoyee manquent de réactions exagérées pour renforcer le comique. Par exemple, le moment où l'envoyee dit 'Tu fais quoi, gros con' pourrait être",
-  "fichier": "2026-11-02_05h42_emission.mp4",
+  "controle": "Humoriste 8.8/10 : 2.7 s La réplique 'Même plus dans l'entreprise' manque d'une réaction visuelle plus marquée pour renforcer l'humour.; 44.4 s La chute 'T'es vraiment qu'une racleur de fond de chiott",
+  "fichier": "2026-11-02_05h38_emission.mp4",
   "cine": {
    "focus": true,
    "vertige": true,
    "tiers": true,
+   "etalonnage": false,
+   "profondeur": true,
+   "grain": true,
+   "reflets": true,
+   "son": true
+  },
+  "cadence": "rapide"
+ },
+ {
+  "moment": "soir",
+  "lieux": [
+   "salon"
+  ],
+  "source": "auteur+image",
+  "duree": 34.2,
+  "plans": {
+   "large": 16
+  },
+  "mouvements": {
+   "fixe": 16
+  },
+  "costumes": {
+   "presentateur": "tshirt",
+   "envoyee": "robe"
+  },
+  "figurants": 0,
+  "ambiances": [
+   "poussiere",
+   "vapeur"
+  ],
+  "controle": "Humoriste 7.8/10 : 6.3 s La réplique 'Non, mais ça n'a rien à voir' est trop passive. Un bruitage ou une mimique exagérée (ex : facepalm) renforcerait l'humour.; 27.1 s La chute 'Yes Yes' à 27.1 s est",
+  "fichier": "2026-11-02_06h15_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": true,
+   "tiers": true,
    "etalonnage": true,
    "profondeur": false,
-   "grain": false,
-   "reflets": false,
+   "grain": true,
+   "reflets": true,
    "son": true
   },
   "cadence": "rapide"
