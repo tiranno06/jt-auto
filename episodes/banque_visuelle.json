@@ -40082,7 +40082,7 @@
      "presence": 0.123,
      "habit": [
       224,
-      186,
+      187,
       97
      ],
      "cheveux": [
@@ -40100,9 +40100,9 @@
    "sourires": 0.778,
    "energie": 0.138,
    "mur": [
-    223,
-    200,
-    141
+    189,
+    161,
+    78
    ],
    "palette": [
     [
@@ -40124,10 +40124,10 @@
      0.161
     ],
     [
-     67,
-     78,
      66,
-     0.15
+     78,
+     65,
+     0.151
     ],
     [
      162,
@@ -40138,8 +40138,8 @@
     [
      12,
      10,
-     9,
-     0.1
+     8,
+     0.099
     ]
    ],
    "lumiere": {
@@ -40152,48 +40152,395 @@
   },
   "audio": {
    "duree": 72.6,
-   "nb_voix": 2,
+   "nb_voix": 3,
    "voix": [
     {
-     "hz": 147,
-     "genre": "h",
-     "part": 0.4
+     "hz": 170,
+     "genre": "?",
+     "part": 0.59
     },
     {
-     "hz": 202,
+     "hz": 155,
+     "genre": "h",
+     "part": 0.21
+    },
+    {
+     "hz": 201,
      "genre": "f",
-     "part": 0.6
+     "part": 0.2
     }
    ],
-   "debit": 5.16,
-   "blanc_moyen": 0.88,
+   "debit": 4.5,
+   "blanc_moyen": 0.97,
    "coupes": 1,
-   "dynamique_db": 35.7,
+   "dynamique_db": 35.8,
    "cris": 0.015,
    "musique": 0.42,
-   "impacts": 34,
-   "impacts_10s": 4.68,
+   "impacts": 33,
+   "impacts_10s": 4.54,
    "graves": 0,
-   "aigus": 34,
-   "sur_vanne": 14,
+   "aigus": 33,
+   "sur_vanne": 10,
    "evenements": {
     "laughter": 1
    },
    "emotions": {
-    "neutral": 16,
-    "angry": 4,
-    "excited": 3,
-    "happy": 3,
-    "annoyed": 3,
-    "surprised": 2,
-    "confused": 1,
-    "insulted": 1
+    "confus": 2,
+    "pressant": 2,
+    "colérique": 2,
+    "inquiet": 2,
+    "furieux": 2,
+    "surpris": 1,
+    "excité": 1,
+    "hésitant": 1
+   }
+  },
+  "claude": {
+   "moment": "soir",
+   "costumes": {
+    "presentateur": {
+     "haut": "tshirt",
+     "c_haut": "bleu",
+     "motif": "uni",
+     "bas": "jean",
+     "chaussures": "baskets",
+     "details": [
+      "barbe_courte",
+      "lunettes_soleil"
+     ]
+    },
+    "invite": {
+     "haut": "chemise",
+     "c_haut": "blanc",
+     "motif": "rayures",
+     "bas": "pantalon",
+     "chaussures": "ville",
+     "details": [
+      "moustache",
+      "montre"
+     ]
+    },
+    "envoyee": {
+     "haut": "pull",
+     "c_haut": "vert",
+     "motif": "uni",
+     "bas": "jogging",
+     "chaussures": "baskets",
+     "details": [
+      "boucles_oreilles",
+      "sac_bandouliere"
+     ]
+    }
+   },
+   "objets": [
+    {
+     "replique": 1,
+     "objet": "clé de voiture"
+    },
+    {
+     "replique": 5,
+     "objet": "telecommande"
+    },
+    {
+     "replique": 13,
+     "objet": "bible"
+    },
+    {
+     "replique": 18,
+     "objet": "telephone"
+    }
+   ],
+   "gags": [
+    "\"Paraguay ou mariage ?\" écrit sur un tableau noir dans l'église.",
+    "\"Baptême : 100% de chances de réussir\" sur une affiche dans la rue.",
+    "\"Police ? Non, juste un ami bizarre.\" sur un post-it collé sur le téléphone."
+   ],
+   "ambiances": [
+    "neon"
+   ],
+   "plans": [
+    {
+     "replique": 1,
+     "plan": "serre",
+     "mouvement": "avance",
+     "geste": "pointe_d",
+     "reaction": "choc"
+    },
+    {
+     "replique": 5,
+     "plan": "large",
+     "mouvement": "fixe",
+     "geste": "gratte_tete",
+     "reaction": "sceptique"
+    },
+    {
+     "replique": 13,
+     "plan": "serre",
+     "mouvement": "zoom_choc",
+     "geste": "mains_hanches",
+     "reaction": "joie"
+    },
+    {
+     "replique": 18,
+     "plan": "contre_plongee",
+     "mouvement": "fixe",
+     "geste": "poing",
+     "reaction": "colère"
+    },
+    {
+     "replique": 22,
+     "plan": "tres_serre",
+     "mouvement": "vertige",
+     "geste": "facepalm",
+     "reaction": "panique"
+    }
+   ]
+  },
+  "realisation": {
+   "moment": "soir",
+   "lieux": [
+    "voiture",
+    "mariage",
+    "eglise"
+   ],
+   "gags": [
+    "\"Paraguay ou mariage ?\" écrit sur un tableau noir dans l'église.",
+    "\"Baptême : 100% de chances de réussir\" sur une affiche dans la rue.",
+    "\"Police ? Non, juste un ami bizarre.\" sur un post-it collé sur le téléphone."
+   ],
+   "ambiances": [
+    "neon",
+    "pluie",
+    "poussiere"
+   ],
+   "source": "auteur+image",
+   "tenues": {
+    "presentateur": "tshirt",
+    "invite": "chemise",
+    "envoyee": "pull"
+   },
+   "plans": [
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe"
+   ]
+  },
+  "video": "2026-11-02_05h42_emission.mp4"
+ },
+ {
+  "date": "2026-11-02",
+  "source": "https://www.tiktok.com/@vignianimation/video/7691415822601932064",
+  "auteur": "vignianimation",
+  "visuel": {
+   "gestes": [
+    [
+     9.0,
+     0.39,
+     1.0
+    ],
+    [
+     40.0,
+     0.39,
+     1.0
+    ],
+    [
+     50.0,
+     0.39,
+     1.0
+    ]
+   ],
+   "duree": 61.5,
+   "nb_plans": 31,
+   "duree_plan": 1.98,
+   "coupes": [
+    1.5,
+    2.5,
+    3.5,
+    5.0,
+    6.5,
+    7.5,
+    8.5,
+    14.0,
+    14.5,
+    17.5,
+    18.5,
+    19.5,
+    25.0,
+    26.5,
+    27.0,
+    29.0,
+    30.0,
+    30.5,
+    34.0,
+    35.0,
+    35.5,
+    38.5,
+    39.0,
+    39.5,
+    47.5,
+    48.0,
+    49.5,
+    53.0,
+    54.5,
+    57.0
+   ],
+   "plans": {
+    "tres_serre": 0.0,
+    "serre": 0.0,
+    "moyen": 0.374,
+    "large": 0.626
+   },
+   "camera": {
+    "fixe": 0.957,
+    "avance": 0.033,
+    "recul": 0.0,
+    "travelling": 0.011,
+    "epaule": 0.0
+   },
+   "nb_personnes": 1,
+   "personnes": [
+    {
+     "place": "gauche",
+     "presence": 0.374,
+     "habit": [
+      69,
+      109,
+      124
+     ],
+     "cheveux": [
+      38,
+      38,
+      38
+     ],
+     "sourire": 0.0,
+     "taille": 0.102,
+     "tete_penchee": 0.8,
+     "regard_cote": 1.0
+    }
+   ],
+   "visages": true,
+   "sourires": 0.0,
+   "energie": 0.279,
+   "mur": [
+    129,
+    194,
+    90
+   ],
+   "palette": [
+    [
+     150,
+     221,
+     87,
+     0.291
+    ],
+    [
+     145,
+     195,
+     211,
+     0.181
+    ],
+    [
+     74,
+     158,
+     89,
+     0.174
+    ],
+    [
+     244,
+     247,
+     247,
+     0.164
+    ],
+    [
+     33,
+     43,
+     29,
+     0.121
+    ],
+    [
+     168,
+     124,
+     96,
+     0.069
+    ]
+   ],
+   "lumiere": {
+    "luminosite": 188.7,
+    "chaleur": 9.3,
+    "saturation": 105.3
+   },
+   "moment": "jour",
+   "postures": []
+  },
+  "audio": {
+   "duree": 61.5,
+   "nb_voix": 2,
+   "voix": [
+    {
+     "hz": 235,
+     "genre": "f",
+     "part": 0.63
+    },
+    {
+     "hz": 237,
+     "genre": "f",
+     "part": 0.37
+    }
+   ],
+   "debit": 5.44,
+   "blanc_moyen": 0.58,
+   "coupes": 5,
+   "dynamique_db": 20.6,
+   "cris": 0.006,
+   "musique": 0.41,
+   "impacts": 32,
+   "impacts_10s": 5.2,
+   "graves": 6,
+   "aigus": 26,
+   "sur_vanne": 15,
+   "evenements": {
+    "laughter": 1,
+    "kiss": 1,
+    "gunshot": 1
+   },
+   "emotions": {
+    "defensive": 3,
+    "confused": 2,
+    "neutral": 2,
+    "suggestive": 2,
+    "mocking": 2,
+    "excited": 1,
+    "sarcastic": 1,
+    "annoyed": 1
    }
   },
   "claude": {
    "lieux": [
-    "rue",
-    "salon"
+    "jardin"
    ],
    "moment": "jour",
    "costumes": {
@@ -40201,127 +40548,288 @@
      "haut": "tshirt",
      "c_haut": "bleu",
      "motif": "uni",
-     "bas": "jogging",
-     "chaussures": "chaussons",
-     "cheveux": "aucune",
-     "details": [
-      "barbe_courte"
-     ]
-    },
-    "envoyee": {
-     "haut": "capuche",
-     "c_haut": "noir",
-     "motif": "uni",
-     "bas": "jean",
+     "bas": "pantalon",
      "chaussures": "baskets",
-     "cheveux": "court",
-     "c_cheveux": "brun",
      "details": [
-      "tatouage"
-     ]
+      "barbe_courte",
+      "lunettes_soleil"
+     ],
+     "chapeau": null,
+     "cheveux": "court",
+     "c_cheveux": "brun"
+    },
+    "invite": {
+     "haut": "chemise",
+     "c_haut": "blanc",
+     "motif": "uni",
+     "bas": "jeans",
+     "chaussures": "baskets",
+     "details": [
+      "moustache",
+      "montre"
+     ],
+     "chapeau": null,
+     "cheveux": "court_texture",
+     "c_cheveux": "chatain"
     }
    },
    "objets": [
     {
      "replique": 0,
-     "objet": "telephone"
+     "objet": "bouteille"
     },
     {
-     "replique": 6,
-     "objet": "telephone"
+     "replique": 3,
+     "objet": "bouteille"
     },
     {
-     "objet": "telephone",
-     "replique": 11
+     "replique": 4,
+     "objet": "bouteille"
     },
     {
-     "objet": "telephone",
-     "replique": 17
+     "replique": 16,
+     "objet": "bouteille"
     },
     {
-     "objet": "telephone",
-     "replique": 24
+     "replique": 22,
+     "objet": "bouteille"
     }
    ],
    "gags": [
-    "Destination : Paraguay (ou le grec du coin)",
-    "Organisation des mecs : 0% réflexion, 100% action"
+    "Alcool = Solution à tous les problèmes",
+    "Baptême : Lieu de tous les excès",
+    "Attention : Risque de blagues lourdingues"
    ],
    "ambiances": [
-    "neon"
+    "soleil"
    ],
    "plans": [
     {
      "replique": 0,
      "plan": "moyen",
      "mouvement": "fixe",
-     "reaction": "aucune",
-     "geste": "telephone"
+     "geste": "bras_ouverts",
+     "reaction": "aucune"
     },
     {
+     "replique": 1,
      "plan": "serre",
-     "geste": "bras_ouverts",
+     "mouvement": "fixe",
+     "geste": "pointe_d",
+     "reaction": "choc"
+    },
+    {
+     "replique": 2,
+     "plan": "moyen",
+     "mouvement": "fixe",
+     "geste": "mains_hanches",
+     "reaction": "sceptique"
+    },
+    {
+     "replique": 3,
+     "plan": "large",
+     "mouvement": "travelling",
+     "geste": "pointe_g",
+     "reaction": "confused"
+    },
+    {
+     "replique": 4,
+     "plan": "serre",
      "mouvement": "zoom_choc",
-     "reaction": "yeux_au_ciel",
-     "replique": 2
+     "geste": "gratte_tete",
+     "reaction": "annoyed"
+    },
+    {
+     "replique": 5,
+     "plan": "moyen",
+     "mouvement": "fixe",
+     "geste": "haussement",
+     "reaction": "choc"
+    },
+    {
+     "replique": 6,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "pointe_d",
+     "reaction": "neutre"
+    },
+    {
+     "replique": 7,
+     "plan": "large",
+     "mouvement": "fixe",
+     "geste": "bras_ouverts",
+     "reaction": "confused"
+    },
+    {
+     "replique": 8,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "poing",
+     "reaction": "colere"
+    },
+    {
+     "replique": 9,
+     "plan": "moyen",
+     "mouvement": "fixe",
+     "geste": "mains_hanches",
+     "reaction": "shocked"
+    },
+    {
+     "replique": 10,
+     "plan": "serre",
+     "mouvement": "zoom_choc",
+     "geste": "pointe_g",
+     "reaction": "colere"
+    },
+    {
+     "replique": 11,
+     "plan": "large",
+     "mouvement": "fixe",
+     "geste": "facepalm",
+     "reaction": "gene"
     },
     {
      "replique": 12,
+     "plan": "moyen",
      "mouvement": "fixe",
-     "reaction": "sceptique",
-     "geste": "telephone",
-     "plan": "moyen"
+     "geste": "gratte_tete",
+     "reaction": "sceptique"
     },
     {
-     "geste": "volant",
-     "reaction": "choc",
+     "replique": 13,
      "plan": "serre",
-     "replique": 19,
-     "mouvement": "zoom_choc"
-    },
-    {
-     "reaction": "sceptique",
-     "plan": "contre_plongee",
-     "mouvement": "avance",
-     "replique": 30,
-     "geste": "poing"
-    },
-    {
-     "mouvement": "zoom_choc",
-     "replique": 36,
+     "mouvement": "fixe",
      "geste": "pointe_d",
-     "plan": "tres_serre",
-     "reaction": "facepalm"
+     "reaction": "neutre"
+    },
+    {
+     "replique": 14,
+     "plan": "large",
+     "mouvement": "travelling",
+     "geste": "bras_ouverts",
+     "reaction": "choc"
+    },
+    {
+     "replique": 15,
+     "plan": "serre",
+     "mouvement": "zoom_choc",
+     "geste": "pointe_g",
+     "reaction": "colere"
+    },
+    {
+     "replique": 16,
+     "plan": "moyen",
+     "mouvement": "fixe",
+     "geste": "mains_hanches",
+     "reaction": "joie"
+    },
+    {
+     "replique": 17,
+     "plan": "large",
+     "mouvement": "fixe",
+     "geste": "bras_ouverts",
+     "reaction": "flirty"
+    },
+    {
+     "replique": 18,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "pointe_d",
+     "reaction": "serious"
+    },
+    {
+     "replique": 19,
+     "plan": "moyen",
+     "mouvement": "fixe",
+     "geste": "facepalm",
+     "reaction": "mocking"
+    },
+    {
+     "replique": 20,
+     "plan": "large",
+     "mouvement": "travelling",
+     "geste": "gratte_tete",
+     "reaction": "confused"
+    },
+    {
+     "replique": 21,
+     "plan": "serre",
+     "mouvement": "zoom_choc",
+     "geste": "pointe_g",
+     "reaction": "explain"
+    },
+    {
+     "replique": 22,
+     "plan": "moyen",
+     "mouvement": "fixe",
+     "geste": "bras_ouverts",
+     "reaction": "drunk"
+    },
+    {
+     "replique": 23,
+     "plan": "large",
+     "mouvement": "fixe",
+     "geste": "pointe_d",
+     "reaction": "aggressive"
+    },
+    {
+     "replique": 24,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "pointe_g",
+     "reaction": "mocking"
+    },
+    {
+     "replique": 25,
+     "plan": "moyen",
+     "mouvement": "fixe",
+     "geste": "mains_hanches",
+     "reaction": "shocked"
+    },
+    {
+     "replique": 26,
+     "plan": "large",
+     "mouvement": "fixe",
+     "geste": "facepalm",
+     "reaction": "defensive"
+    },
+    {
+     "replique": 27,
+     "plan": "serre",
+     "mouvement": "zoom_choc",
+     "geste": "gratte_tete",
+     "reaction": "reflecting"
+    },
+    {
+     "replique": 28,
+     "plan": "moyen",
+     "mouvement": "fixe",
+     "geste": "bras_ouverts",
+     "reaction": "determined"
+    },
+    {
+     "replique": 29,
+     "reaction": "regard_camera"
     }
    ]
   },
   "realisation": {
    "moment": "jour",
    "lieux": [
-    "rue",
-    "salon"
+    "jardin"
    ],
    "gags": [
-    "Destination : Paraguay (ou le grec du coin)",
-    "Organisation des mecs : 0% réflexion, 100% action"
+    "Alcool = Solution à tous les problèmes",
+    "Baptême : Lieu de tous les excès",
+    "Attention : Risque de blagues lourdingues"
    ],
-   "ambiances": [
-    "neon",
-    "pluie"
-   ],
+   "ambiances": [],
    "source": "auteur+image",
    "tenues": {
     "presentateur": "tshirt",
-    "envoyee": "capuche"
+    "invite": "chemise"
    },
    "plans": [
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
     "large/fixe",
     "large/fixe",
     "large/fixe",
@@ -40354,6 +40862,6 @@
     "large/fixe"
    ]
   },
-  "video": "2026-11-02_06h38_emission.mp4"
+  "video": "2026-11-02_06h35_emission.mp4"
  }
 ]
