@@ -1,124 +1,64 @@
 Casting déjà fait.
-Type de vidéo : gag éclair (~15 s)
+Type de vidéo : sketch long (+1 min)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, Groq ok, OpenRouter ok, IA Modal ok, ElevenLabs epuise — IA utilisée : mistral
-Vidéo depuis TikTok : https://www.tiktok.com/@yan_animation0/video/7696516142185172257
+Recherche web : 0 requête(s) — le modèle n'a pas consulté le web, vérification sur les articles RSS uniquement
+Idée 0 : « POV : tu annonces ton déménagement à ta mère et elle te sort son 'je te l'avais dit' »
+Idée 1 : « Quand ton pote te dit qu'il a 'arrêté les réseaux sociaux' pour se reconnecter à la nature... mais qu'il passe »
+Idée 2 : « Quand tu demandes à ton collègue s'il a fini le dossier et qu'il te répond 'presque, j'y suis presque' »
+Idée 3 : « POV : tu réalises que ton chat a plus d'amis sur Instagram que toi »
+Idée 4 : « Quand tu demandes à ton père s'il peut garder ton enfant 10 minutes et qu'il te répond 'bien sûr, je suis un p »
+Idée 5 : « POV : tu réalises que ton voisin est un influenceur qui fait semblant d'être pauvre pour ses stories »
+Remarque comprise : Les personnages sont inversés, il faut échanger le présentateur et l'envoyée dans toutes les répliques.
+Remarque de l'auteur : 37 réplique(s) à rendre à un autre personnage, 0 correction(s) : 
+Remarque de l'auteur appliquée : réplique 1 -> envoyee, réplique 2 -> presentateur, réplique 3 -> envoyee, réplique 4 -> presentateur, réplique 8 -> presentateur, réplique 9 -> envoyee, réplique 10 -> presentateur, réplique 11 -> envoyee, réplique 12 -> presentateur, réplique 13 -> envoyee, réplique 15 -> envoyee, réplique 16 -> presentateur, réplique 17 -> envoyee, réplique 18 -> presentateur, réplique 24 -> presentateur, réplique 25 -> envoyee, réplique 26 -> presentateur, réplique 27 -> envoyee, réplique 28 -> presentateur, réplique 29 -> envoyee, réplique 30 -> presentateur, réplique 31 -> envoyee, réplique 32 -> presentateur, réplique 33 -> envoyee, réplique 34 -> presentateur, réplique 35 -> envoyee, réplique 36 -> presentateur, réplique 37 -> envoyee
   son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 61.1 s, compte d'origine @yan_animation0
-  isolation des voix impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : son complet utilisé
-  voix isolées gratuitement (Demucs, 35 s)
-[ WARN:0@51.672] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
-INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
-WARNING: Logging before InitGoogle() is written to STDERR
-W0000 00:00:1793602555.446744    4247 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
-W0000 00:00:1793602555.467992    4248 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
-W0000 00:00:1793602555.574924    4247 landmark_projection_calculator.cc:81] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX.
-  image de la vidéo : 13 plans (≈ 4.73 s chacun) ; cadrages : très serré 0 %, serré 8 %, moyen 3 %, large 88 % ; caméra : fixe 100 % ; 1 personne(s) à l'écran : centre (habit [0, 0, 0], cheveux [241, 157, 79], sourit 0 %) ; agitation 0.076 ; lumière nuit ; fond [0, 0, 0]
-  transcription ElevenLabs impossible (ElevenLabs 401 : b'{"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 131000. You have 1 credit) : Whisper
-  transcription Groq (Whisper, gratuit) : 134 mots
-  [équipe · ingé son] ✔ pas de phrase répétée en boucle
-  [équipe · ingé son] ✔ mots à une vitesse possible : 3 mot(s) trop courts
-  [équipe · ingé son] ✘ pas de long passage sans texte : blancs [(24.0, 30.6)]
-[0;93m2026-11-02 06:56:02.563104143 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
-  transcription gratuite (Whisper sur la machine) : 144 mots
-  transcription Groq (whisper-large-v3, gratuit) : 151 mots
-  [équipe · ingé son] ✘ deux transcriptions d'accord : 81 % de mots identiques, 2 doute(s), 1 tranché(s) par une 3e écoute, 1 corrigé(s)
-Loading weights:   0%|          | 0/424 [00:00<?, ?it/s]Loading weights: 100%|██████████| 424/424 [00:00<00:00, 15211.96it/s]
-  mots recalés sur la voix (132 mots, écart moyen 102 ms, 13 s)
-Loading weights:   0%|          | 0/447 [00:00<?, ?it/s]Loading weights: 100%|██████████| 447/447 [00:00<00:00, 10820.92it/s]
-  bruits de l'original (CLAP, 7 s) : dog, laughter
-  voix séparées par NeMo : 2 voix, 30 tours de parole (37 s)
-  voix vérifiées mot par mot : 8 mot(s) remis sur la bonne voix
-  réseau : erreur 429 passagère, nouvel essai dans 2 s
-  Gemini a regardé la vidéo entière (gemini-flash-lite-latest) : 2 personnage(s), lieu « cuisine »
-W0000 00:00:1793602680.541073    4397 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
-W0000 00:00:1793602680.546537    4400 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
-W0000 00:00:1793602680.560497    4401 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
-  [équipe · casting voix] ✔ témoin image (qui parle dans l'original) : 28/28 phrases lisibles (Gemini (vidéo entière), mouvements)
-  ressemblance des deux voix : 0.22 (au-delà de 0.55 : le dialogue décide avec le son)
-  [équipe · casting voix] ✔ le son et l'image sont d'accord : 7 % de désaccord
-  deux IA ont relu le dialogue (groq et gemini) : d'accord sur 14/26 phrases
-  relecture du dialogue par l'IA : 14/26 phrases (A : le premier comédien qui prétend être chaud ; B : le second comédien qui répo)
-  contrôle questions-réponses (avec relecture de l'IA) : 26 phrases, 55 mot(s) changé(s) de voix
-  voix dominante partagée entre deux personnes (même voix, dialogue) ; l'autre voix devient une 3e personne
-  [équipe · casting voix] ✔ voix dominante partagée (même voix pour deux personnes)
-  [équipe · casting voix] ✔ parole répartie entre les personnages : 3 voix, la plus bavarde dit 54 %
-/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/importlib/__init__.py:90: UserWarning: Module 'speechbrain.lobes.models.huggingface_transformers' was deprecated, redirecting to 'speechbrain.integrations.huggingface'. Please update your script.
-  return _bootstrap._gcd_import(name[level:], package, level)
-Loading weights:   0%|          | 0/211 [00:00<?, ?it/s]Loading weights: 100%|██████████| 211/211 [00:00<00:00, 16405.26it/s]
-[transformers] [1mWav2Vec2Model LOAD REPORT[0m from: facebook/wav2vec2-base
-Key                          | Status     |  | 
------------------------------+------------+--+-
-project_hid.weight           | UNEXPECTED |  | 
-project_q.weight             | UNEXPECTED |  | 
-quantizer.codevectors        | UNEXPECTED |  | 
-quantizer.weight_proj.bias   | UNEXPECTED |  | 
-project_q.bias               | UNEXPECTED |  | 
-quantizer.weight_proj.weight | UNEXPECTED |  | 
-project_hid.bias             | UNEXPECTED |  | 
-
-Notes:
-- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-speechbrain.integrations.huggingface.huggingface - Wav2Vec2Model is frozen.
-CategoricalEncoder.expect_len was never called: assuming category count of 4 to be correct! Sanity check your encoder using `.expect_len`. Ensure that downstream code also uses the correct size. If you are sure this does not apply to you, use `.ignore_len`.
-  émotions entendues dans la voix : 0 réplique(s) (5 s)
-  26 répliques, voix : {'speaker_2': 256, 'speaker_0': 160, 'speaker_1': 172}
-  son de la vidéo : 3 voix [256 Hz (f, 5 %), 160 Hz (h, 64 %), 172 Hz (?, 31 %)], 3.5 mots/s, blancs 1.02 s, 5 coupure(s) de parole, dynamique 35.0 dB, musique de fond, 52 bruitage(s) (7 graves, 45 aigus, 21 sur une fin de réplique), événements {'laughter': 3, 'dog': 1}, émotions {}
-  IA gemini indisponible (gemini 429 : [{
-  "error": {
-    "code": 429,
-    "message": "You exceeded your current quota, please check your plan an) : on passe à la suivante
-  scène reconstituée : Un steak haché anthropomorphe dans un micro-ondes joue des tours à un jeune homme en prétendant être chaud ou froid. Ils échangent des répliques humoristiques dans une cuisine.
-  casting : speaker_0 → Jojo, speaker_1 → Kévin, speaker_2 → voix off
-  sous-titres : 7 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
-  jeu d'acteur entendu dans le son : 5 réplique(s) (émotion de la voix, rires, cris)
-  Jojo est un(e) steak (vu dans la vidéo d'origine)
-  événements sonores : dog, laughter
-  [équipe · scripte] ✔ une réplique = une seule personne
-  [équipe · scripte] ✔ téléphone en main seulement s'il en est question
-  [équipe · scripte] ✘ autant de personnages que de voix : 3 voix, 2 personnage(s)
-  [équipe · monteur] ✔ chaque mot dans sa réplique (lèvres et sous-titres calés)
-  [équipe · monteur] ✔ chaque réplique a une durée
-  [équipe · monteur] ✔ rien après la fin du son
-  [équipe · monteur] ✔ répliques dans l'ordre du son
-  [équipe · monteur] ✔ un personnage ne parle jamais deux fois en même temps
-  bulletin de l'équipe : 13/16 contrôles bons ; à revoir : pas de long passage sans texte, deux transcriptions d'accord, autant de personnages que de voix
-Sketch : « STEAK QUI FAIT DES BLAGUES », 26 répliques
-Son TikTok : une seule scène, un seul décor (pas de changement inutile)
-  décor semi-réaliste 0 (lieu déjà connu) : [semi] cozy apartment kitchen, cabinets, fridge, stove, small table wi
-montage : 1 plans (0.2:large>pre/coupe)
+  son d'origine repris pour 37 répliques (mêmes instants)
+Refaire (remarque) : « LES PLANS ENTRE POTES », mêmes répliques
+Sketch : « LES PLANS ENTRE POTES », 37 répliques
+Lieux séparés : chaque personnage a son propre décor (appel, visio, l'un ailleurs)
+  décor semi-réaliste 0 (lieu déjà connu) : [semi] quiet city street at dusk, parked car at the curb, sidewalk, st
+  décor semi-réaliste 1 (lieu déjà connu) : [semi] cozy living room, sofa, posters on the wall, coffee table, lamp
+montage : 31 plans (0.2:large>env/coupe 1.9:large>pre/coupe 7.2:large>env/coupe 8.7:large>pre/coupe 12.6:large>pre/coupe 14.8:large>env/coupe 19.8:large>env/coupe 21.9:large>pre/coupe 23.0:large>env/coupe 24.2:large>pre/coupe 27.0:large>env/coupe 33.1:large>pre/coupe 35.1:large>env/coupe 36.3:large>pre/coupe 41.6:large>pre/coupe 44.2:large>env/coupe 45.9:large>pre/coupe 48.0:large>env/coupe 50.6:large>env/coupe 52.6:large>pre/coupe 54.1:large>env/coupe 55.6:large>pre/coupe 57.1:large>env/coupe 59.1:large>pre/coupe 60.8:large>env/coupe 63.0:large>pre/coupe 64.3:large>env/coupe 66.0:large>pre/coupe 68.9:large>env/coupe 70.1:large>pre/coupe 71.3:large>env/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-studio : soir, lieux ['cuisine'], tenues presentateur=tshirt, invite=tablier, 0 figurant(s), ambiances ['poussiere', 'vapeur'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 64.6 s, 26 répliques, 1 scène(s), personnages ['presentateur', 'invite']
-montage : 1 plans (0.2:large>pre/coupe)
+objets de l'histoire : véhicule dans 1 décor(s)
+studio : jour, lieux ['rue', 'salon'], tenues envoyee=capuche, presentateur=tshirt, 0 figurant(s), ambiances ['neon', 'pluie'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+appel : écran partagé du début à la fin (chacun dans son décor, aucun changement de plan)
+cartoon : durée 75.6 s, 37 répliques, 2 scène(s), personnages ['envoyee', 'presentateur']
+montage : 31 plans (0.2:large>env/coupe 1.9:large>pre/coupe 7.2:large>env/coupe 8.7:large>pre/coupe 12.6:large>pre/coupe 14.8:large>env/coupe 19.8:large>env/coupe 21.9:large>pre/coupe 23.0:large>env/coupe 24.2:large>pre/coupe 27.0:large>env/coupe 33.1:large>pre/coupe 35.1:large>env/coupe 36.3:large>pre/coupe 41.6:large>pre/coupe 44.2:large>env/coupe 45.9:large>pre/coupe 48.0:large>env/coupe 50.6:large>env/coupe 52.6:large>pre/coupe 54.1:large>env/coupe 55.6:large>pre/coupe 57.1:large>env/coupe 59.1:large>pre/coupe 60.8:large>env/coupe 63.0:large>pre/coupe 64.3:large>env/coupe 66.0:large>pre/coupe 68.9:large>env/coupe 70.1:large>pre/coupe 71.3:large>env/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-studio : soir, lieux ['cuisine'], tenues presentateur=tshirt, invite=tablier, 0 figurant(s), ambiances ['poussiere', 'vapeur'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 64.6 s, 26 répliques, 1 scène(s), personnages ['presentateur', 'invite']
-  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~969 images)
-  morceau 969–1938 reçu d'une machine d'aide
-  morceau 2907–3876 reçu d'une machine d'aide
-  morceau 1938–2907 reçu d'une machine d'aide
-  dessin partagé terminé en 4.2 min
+objets de l'histoire : véhicule dans 1 décor(s)
+studio : jour, lieux ['rue', 'salon'], tenues envoyee=capuche, presentateur=tshirt, 0 figurant(s), ambiances ['neon', 'pluie'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+appel : écran partagé du début à la fin (chacun dans son décor, aucun changement de plan)
+cartoon : durée 75.6 s, 37 répliques, 2 scène(s), personnages ['envoyee', 'presentateur']
+  dessin partagé : 4 machine(s) d'aide + celle-ci (5 morceaux de ~907 images)
+  morceau 908–1815 reçu d'une machine d'aide
+  morceau 2723–3630 reçu d'une machine d'aide
+  morceau 3630–4538 reçu d'une machine d'aide
+  morceau 1815–2723 reçu d'une machine d'aide
+  dessin partagé terminé en 8.2 min
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury : 3 remarque(s) sur les plans / zooms retirée(s) (montage « plan large » voulu)
-Jury qualité (ia) : 7.4/10 — Humoriste 7.8/10 : 15.9 s La réplique 'Je suis froid' manque de réaction exagérée du personnage du steak. Une réaction plus marquée (ex. : un geste de frisson ou un son comique) renforcerait l'humour.; 57.1 s La réplique 'Je rigole' manque de cohérence avec le ton général. Un geste ou une expression plus drôle (ex. : rire aux éclats) serait plus efficace. | Réalisateur 6.8/10 : 0.4 s Le texte 'Attends' est légèrement illisible en raison de l'arrière-plan. Un ajustement de la police ou de la couleur du texte serait utile.; 46.1 s Les sous-titres apparaissent trop rapidement pour être lus confortablement. Espacer les mots ou réduire légèrement la vitesse de défilement améliorerait la lisibilité. | Directeur artistique 8.0/10 : 0 s Les personnages ne correspondent pas parfaitement à la description initiale : le steak doit être clairement identifiable comme un steak haché dans un micro-ondes
-Bouches : 1 réplique(s) où un autre personnage bougeait plus que celui qui parle (4) : redessinées (celui qui écoute reste calme)
-montage : 1 plans (0.2:large>pre/coupe)
+Jury : 1 remarque(s) sur les plans / zooms retirée(s) (montage « plan large » voulu)
+Jury qualité (ia) : 6.6/10 — Humoriste 6.0/10 : 27 s Le personnage encaisse la proposition absurde trop calmement.; 52 s Il manque une réaction grimaçante sur cette réplique absurde. | Réalisateur 7.0/10 : 60 s Le jeu manque d'expressivité par rapport au ton hautain de la réplique. | Directeur artistique 7.0/10 : 1 s Le design des personnages reste un peu trop classique pour se démarquer. | Ingénieur du son 6.0/10 : 27 s Absence de bruitage d'impact sur la chute inattendue.; 60 s Manque d'effet sonore comique pour souligner le quiproquo. | Spectateur TikTok 6.8/10 : 
+Bouches : 1 réplique(s) où un autre personnage bougeait plus que celui qui parle (21) : redessinées (celui qui écoute reste calme)
+montage : 31 plans (0.2:large>env/coupe 1.9:large>pre/coupe 7.2:large>env/coupe 8.7:large>pre/coupe 12.6:large>pre/coupe 14.8:large>env/coupe 19.8:large>env/coupe 21.9:large>pre/coupe 23.0:large>env/coupe 24.2:large>pre/coupe 27.0:large>env/coupe 33.1:large>pre/coupe 35.1:large>env/coupe 36.3:large>pre/coupe 41.6:large>pre/coupe 44.2:large>env/coupe 45.9:large>pre/coupe 48.0:large>env/coupe 50.6:large>env/coupe 52.6:large>pre/coupe 54.1:large>env/coupe 55.6:large>pre/coupe 57.1:large>env/coupe 59.1:large>pre/coupe 60.8:large>env/coupe 63.0:large>pre/coupe 64.3:large>env/coupe 66.0:large>pre/coupe 68.9:large>env/coupe 70.1:large>pre/coupe 71.3:large>env/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-studio : soir, lieux ['cuisine'], tenues presentateur=tshirt, invite=tablier, 0 figurant(s), ambiances ['poussiere', 'vapeur'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 64.6 s, 26 répliques, 1 scène(s), personnages ['presentateur', 'invite']
-  redessin partiel : 360/3876 images à redessiner (1 passage(s)), le reste repris tel quel
+objets de l'histoire : véhicule dans 1 décor(s)
+studio : jour, lieux ['rue', 'salon'], tenues envoyee=capuche, presentateur=tshirt, 0 figurant(s), ambiances ['neon', 'pluie'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+appel : écran partagé du début à la fin (chacun dans son décor, aucun changement de plan)
+cartoon : durée 75.6 s, 37 répliques, 2 scène(s), personnages ['envoyee', 'presentateur']
+  redessin partiel : 308/4538 images à redessiner (1 passage(s)), le reste repris tel quel
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Bouches corrigées : 1 → 0 réplique(s) à revoir
+Correction des bouches non gardée (pas mieux (1 → 1))
 fin en boucle : la dernière image se raccorde à la première (0.35 s de fondu)
-  [vidéo finie · synchro] ✔ bouches du bon personnage
+  [vidéo finie · synchro] ✘ bouches du bon personnage : 1 réplique(s) à revoir
   [vidéo finie · technique] ✘ sauts, clignotements, personnages (1 remarque(s))
-  transcription Groq (Whisper, gratuit) : 151 mots
-  [vidéo finie · sous-titres] ✘ sous-titres vérifiés à l'oreille (accord 74 %)
-  [vidéo finie · contrôle IA] 4 remarque(s)
-Contrôle de la vidéo finie : 9 point(s) à vérifier — 30.7 s sous-titre « Pau, pu, toi... » mais on entend « pou pou pou  ; 32.7 s sous-titre « As-tu chaud, touche-moi. » mais on entend « as- ; 62.2 s saut d'image hors d'une coupe prévue ; 19.0 s Le personnage Jojo a l'allure correcte, mais le texte 'espèc ; 23.0 s Personne ne parle, mais il manque une indication visuelle ou ; 24.2 s on entend « Pou, pou, pou, pou, pou, pou, pou, pou, pou, pou
+  transcription Groq (Whisper, gratuit) : 210 mots
+  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 94 %)
+  IA gemini indisponible (The read operation timed out) : on passe à la suivante
+  [vidéo finie · contrôle IA] 0 remarque(s)
+Contrôle de la vidéo finie : 2 point(s) à vérifier — 44.2 s pendant la réplique de envoyee (« Tu veux ou pas. »), c'est  ; 73.2 s saut d'image hors d'une coupe prévue
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, groq = ok, ia = groq ×2, gemini ×2, mistral ×3, appels = {'groq': 2, 'gemini': 2, 'mistral': 3}, epuisees = ['gemini'], quota = {'groq': {'reste_jour': 999, 'limite_jour': 1000}}, voix = tiktok, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 43479, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0}
-Deuxième chance : la nouvelle version est plus sûre (0 → 34) : la 1re (2026-11-02_07h29_emission.mp4) est retirée
-Quota de l'API GitHub : 4938 appels restants
-OK : sortie/2026-11-02_07h59_emission.mp4 (65 s)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, groq = ok, ia = mistral ×2, groq ×1, gemini ×1, appels = {'mistral': 2, 'groq': 1, 'gemini': 1}, epuisees = [], quota = {'groq': {'reste_jour': 998, 'limite_jour': 1000}}, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 24648, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0}
+Quota de l'API GitHub : 4857 appels restants
+OK : sortie/2026-11-02_13h13_emission.mp4 (76 s)
