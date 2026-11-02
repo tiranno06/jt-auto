@@ -5942,69 +5942,74 @@
   "cadence": "rapide"
  },
  {
+  "moment": "soir",
+  "lieux": [
+   "voiture",
+   "mariage",
+   "eglise"
+  ],
+  "source": "auteur+image",
+  "duree": 75.6,
+  "plans": {
+   "large": 27
+  },
+  "mouvements": {
+   "fixe": 27
+  },
+  "costumes": {
+   "presentateur": "tshirt",
+   "invite": "chemise",
+   "envoyee": "pull"
+  },
+  "figurants": 0,
+  "ambiances": [
+   "neon",
+   "pluie",
+   "poussiere"
+  ],
+  "controle": "Humoriste 7.8/10 : 15 s Les vannes entre l'invite et l'envoyee manquent de réactions exagérées pour renforcer le comique. Par exemple, le moment où l'envoyee dit 'Tu fais quoi, gros con' pourrait être",
+  "fichier": "2026-11-02_05h42_emission.mp4",
+  "cine": {
+   "focus": true,
+   "vertige": true,
+   "tiers": true,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": false,
+   "reflets": false,
+   "son": true
+  },
+  "cadence": "rapide"
+ },
+ {
   "moment": "jour",
   "lieux": [
    "rue",
    "salon"
   ],
   "source": "auteur+image",
-  "duree": 72.4,
+  "duree": 75.6,
   "plans": {
-   "large": 34
+   "large": 37
   },
   "mouvements": {
-   "fixe": 34
-  },
-  "costumes": {
-   "presentateur": "costume",
-   "invite": "chemise"
-  },
-  "figurants": 0,
-  "ambiances": [
-   "neon"
-  ],
-  "controle": "Humoriste 8.8/10 : 2.7 s La réplique 'Même plus dans l'entreprise' manque d'une réaction visuelle plus marquée pour renforcer l'humour.; 44.4 s La chute 'T'es vraiment qu'une racleur de fond de chiott",
-  "fichier": "2026-11-02_05h38_emission.mp4",
-  "cine": {
-   "focus": true,
-   "vertige": true,
-   "tiers": true,
-   "etalonnage": false,
-   "profondeur": true,
-   "grain": true,
-   "reflets": true,
-   "son": true
-  },
-  "cadence": "rapide"
- },
- {
-  "moment": "soir",
-  "lieux": [
-   "salon"
-  ],
-  "source": "auteur+image",
-  "duree": 34.2,
-  "plans": {
-   "large": 16
-  },
-  "mouvements": {
-   "fixe": 16
+   "fixe": 37
   },
   "costumes": {
    "presentateur": "tshirt",
-   "envoyee": "robe"
+   "envoyee": "capuche"
   },
   "figurants": 0,
   "ambiances": [
-   "poussiere",
-   "vapeur"
+   "neon",
+   "pluie"
   ],
-  "controle": "Humoriste 7.8/10 : 6.3 s La réplique 'Non, mais ça n'a rien à voir' est trop passive. Un bruitage ou une mimique exagérée (ex : facepalm) renforcerait l'humour.; 27.1 s La chute 'Yes Yes' à 27.1 s est",
-  "fichier": "2026-11-02_06h15_emission.mp4",
+  "controle": "Humoriste 8.6/10 : 11.8 s La réplique 'Euh...' manque de réactivité comique. Le personnage devrait avoir une expression ou un geste plus marqué pour renforcer l'humour. | Réalisateur 6.0/10 : 0.4 s Le",
+  "fichier": "2026-11-02_06h38_emission.mp4",
   "cine": {
    "focus": false,
-   "vertige": true,
-   "tiers": true,
+   "vertige": false,
+   "tiers": false,
    "etalonnage": true,
    "profondeur": false,
    "grain": true,

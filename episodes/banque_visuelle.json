@@ -39787,7 +39787,7 @@
    "personnes": [],
    "visages": false,
    "sourires": 0.0,
-   "energie": 0.065,
+   "energie": 0.062,
    "mur": [
     0,
     0,
@@ -39802,37 +39802,37 @@
     ],
     [
      254,
-     253,
-     253,
+     254,
+     254,
      0.39
     ],
     [
      29,
      29,
      29,
-     0.014
+     0.013
     ],
     [
-     203,
-     203,
-     203,
+     204,
+     204,
+     204,
      0.01
     ],
     [
      101,
-     101,
-     101,
+     100,
+     100,
      0.005
     ],
     [
-     152,
-     152,
-     152,
+     151,
+     151,
+     151,
      0.004
     ]
    ],
    "lumiere": {
-    "luminosite": 101.9,
+    "luminosite": 102.0,
     "chaleur": 0.0,
     "saturation": 0.1
    },
@@ -39846,38 +39846,38 @@
     {
      "hz": 223,
      "genre": "f",
-     "part": 0.46
+     "part": 0.41
     },
     {
-     "hz": 184,
-     "genre": "?",
-     "part": 0.54
+     "hz": 192,
+     "genre": "f",
+     "part": 0.59
     }
    ],
-   "debit": 6.29,
-   "blanc_moyen": 0.24,
-   "coupes": 8,
+   "debit": 6.28,
+   "blanc_moyen": 0.28,
+   "coupes": 13,
    "dynamique_db": 16.5,
    "cris": 0.008,
    "musique": 0.41,
-   "impacts": 68,
-   "impacts_10s": 9.8,
+   "impacts": 66,
+   "impacts_10s": 9.51,
    "graves": 8,
-   "aigus": 60,
-   "sur_vanne": 28,
+   "aigus": 58,
+   "sur_vanne": 26,
    "evenements": {
     "scream": 1,
     "laughter": 1
    },
    "emotions": {
+    "defiant": 6,
+    "indifferent": 4,
+    "smug": 4,
     "angry": 3,
-    "furious": 3,
     "sarcastic": 3,
-    "annoyed": 2,
-    "accusing": 2,
-    "smug": 2,
+    "mocking": 3,
     "serious": 2,
-    "defensive": 1
+    "annoyed": 1
    }
   },
   "claude": {
@@ -39888,60 +39888,46 @@
    "moment": "jour",
    "costumes": {
     "presentateur": {
-     "haut": "costume",
+     "haut": "chemise",
      "c_haut": "bleu marine",
      "motif": "uni",
      "bas": "pantalon",
      "chaussures": "ville",
      "details": [
       "cravate",
-      "montre",
-      "lunettes_vue"
-     ],
-     "chapeau": null,
-     "cheveux": "court",
-     "c_cheveux": "brun"
+      "lunettes_vue",
+      "montre"
+     ]
     },
     "invite": {
-     "haut": "chemise",
-     "c_haut": "gris",
+     "haut": "tshirt",
+     "c_haut": "noir",
      "motif": "uni",
-     "bas": "pantalon",
+     "bas": "jeans",
      "chaussures": "baskets",
      "details": [
       "barbe_courte",
       "bracelet"
-     ],
-     "chapeau": null,
-     "cheveux": "court_texture",
-     "c_cheveux": "roux"
+     ]
     }
    },
    "objets": [
     {
-     "replique": 0,
-     "objet": "telephone"
-    },
-    {
-     "replique": 12,
+     "replique": 17,
      "objet": "billet"
     },
     {
-     "replique": 22,
-     "objet": "facture"
-    },
-    {
-     "replique": 26,
-     "objet": "stylo"
+     "replique": 24,
+     "objet": "telephone"
     }
    ],
    "gags": [
-    "\"Remboursez-moi mon café !\" écrit sur un gobelet de café renversé.",
-    "\"Trop-perçu = Trop de problèmes\" sur une affiche accrochée au mur.",
-    "\"L'argent ne fait pas le bonheur... mais ça aide !\" sur un post-it collé sur l'ordinateur."
+    "Trop-perçu : l'argent qui ne veut pas partir",
+    "Quand le patron devient mendiant",
+    "Démission = Vol ?"
    ],
    "ambiances": [
-    "neon"
+    "poussiere"
    ],
    "plans": [
     {
@@ -39956,231 +39942,49 @@
      "plan": "serre",
      "mouvement": "fixe",
      "geste": "bras_ouverts",
-     "reaction": "sceptique"
-    },
-    {
-     "replique": 2,
-     "plan": "tres_serre",
-     "mouvement": "zoom_choc",
-     "geste": "poing",
      "reaction": "choc"
     },
     {
      "replique": 3,
-     "plan": "moyen",
-     "mouvement": "fixe",
-     "geste": "gratte_tete",
-     "reaction": "annoyed"
-    },
-    {
-     "replique": 4,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "mains_hanches",
-     "reaction": "colere"
-    },
-    {
-     "replique": 5,
-     "plan": "contre_plongee",
-     "mouvement": "fixe",
-     "geste": "pointe_g",
-     "reaction": "facepalm"
-    },
-    {
-     "replique": 6,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "pointe_d",
-     "reaction": "soupir"
-    },
-    {
-     "replique": 7,
      "plan": "tres_serre",
      "mouvement": "zoom_choc",
      "geste": "poing",
      "reaction": "colere"
     },
     {
-     "replique": 8,
-     "plan": "large",
-     "mouvement": "travelling",
-     "geste": "bras_ouverts",
-     "reaction": "regard_camera"
-    },
-    {
-     "replique": 9,
+     "replique": 7,
      "plan": "serre",
      "mouvement": "fixe",
-     "geste": "sourire_sarcastique",
-     "reaction": "joie"
-    },
-    {
-     "replique": 10,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "pointe_d",
+     "geste": "mains_hanches",
      "reaction": "sceptique"
     },
     {
      "replique": 11,
-     "plan": "moyen",
-     "mouvement": "fixe",
-     "geste": "mains_poches",
-     "reaction": "annoyed"
-    },
-    {
-     "replique": 12,
-     "plan": "tres_serre",
-     "mouvement": "zoom_choc",
+     "plan": "epaule",
+     "mouvement": "avance",
      "geste": "pointe_g",
-     "reaction": "choc"
-    },
-    {
-     "replique": 13,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "mains_hanches",
-     "reaction": "colere"
-    },
-    {
-     "replique": 14,
-     "plan": "large",
-     "mouvement": "fixe",
-     "geste": "pointe_d",
      "reaction": "soupir"
-    },
-    {
-     "replique": 15,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "pointe_g",
-     "reaction": "sceptique"
-    },
-    {
-     "replique": 16,
-     "plan": "moyen",
-     "mouvement": "fixe",
-     "geste": "bras_ouverts",
-     "reaction": "colere"
     },
     {
      "replique": 17,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "pointe_d",
-     "reaction": "sourire_sarcastique"
-    },
-    {
-     "replique": 18,
-     "plan": "large",
-     "mouvement": "travelling",
-     "geste": "pointe_g",
-     "reaction": "regard_camera"
-    },
-    {
-     "replique": 19,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "mains_poches",
-     "reaction": "annoyed"
-    },
-    {
-     "replique": 20,
-     "plan": "tres_serre",
-     "mouvement": "zoom_choc",
-     "geste": "poing",
-     "reaction": "choc"
-    },
-    {
-     "replique": 21,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "pointe_g",
-     "reaction": "joie"
-    },
-    {
-     "replique": 22,
      "plan": "large",
      "mouvement": "fixe",
-     "geste": "pointe_d",
-     "reaction": "sceptique"
-    },
-    {
-     "replique": 23,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "bras_ouverts",
-     "reaction": "colere"
-    },
-    {
-     "replique": 24,
-     "plan": "moyen",
-     "mouvement": "fixe",
-     "geste": "pointe_g",
-     "reaction": "soupir"
-    },
-    {
-     "replique": 25,
-     "plan": "tres_serre",
-     "mouvement": "zoom_choc",
-     "geste": "poing",
-     "reaction": "colere"
+     "geste": "desespoir",
+     "reaction": "pleurs"
     },
     {
      "replique": 26,
      "plan": "serre",
      "mouvement": "fixe",
-     "geste": "pointe_d",
-     "reaction": "choc"
-    },
-    {
-     "replique": 27,
-     "plan": "moyen",
-     "mouvement": "fixe",
-     "geste": "bras_ouverts",
-     "reaction": "sourire_sarcastique"
-    },
-    {
-     "replique": 28,
-     "plan": "large",
-     "mouvement": "travelling",
-     "geste": "pointe_g",
-     "reaction": "regard_camera"
-    },
-    {
-     "replique": 29,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "pointe_d",
-     "reaction": "joie"
-    },
-    {
-     "replique": 30,
-     "plan": "moyen",
-     "mouvement": "fixe",
-     "geste": "pointe_g",
-     "reaction": "sceptique"
+     "geste": "facepalm",
+     "reaction": "rire"
     },
     {
      "replique": 31,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "pointe_d",
-     "reaction": "soupir"
-    },
-    {
-     "replique": 32,
      "plan": "tres_serre",
      "mouvement": "zoom_choc",
      "geste": "poing",
      "reaction": "colere"
-    },
-    {
-     "replique": 33,
-     "plan": "large",
-     "mouvement": "fixe",
-     "geste": "bras_ouverts",
-     "reaction": "resigned"
     }
    ]
   },
@@ -40191,17 +39995,17 @@
     "salon"
    ],
    "gags": [
-    "\"Remboursez-moi mon café !\" écrit sur un gobelet de café renversé.",
-    "\"Trop-perçu = Trop de problèmes\" sur une affiche accrochée au mur.",
-    "\"L'argent ne fait pas le bonheur... mais ça aide !\" sur un post-it collé sur l'o"
+    "Trop-perçu : l'argent qui ne veut pas partir",
+    "Quand le patron devient mendiant",
+    "Démission = Vol ?"
    ],
    "ambiances": [
-    "neon"
+    "poussiere"
    ],
    "source": "auteur+image",
    "tenues": {
-    "presentateur": "costume",
-    "invite": "chemise"
+    "presentateur": "chemise",
+    "invite": "tshirt"
    },
    "plans": [
     "large/fixe",
@@ -40240,235 +40044,298 @@
     "large/fixe"
    ]
   },
-  "video": "2026-11-02_05h38_emission.mp4"
+  "video": "2026-11-02_04h41_emission.mp4"
  },
  {
   "date": "2026-11-02",
-  "source": "https://www.tiktok.com/@kodanimation/video/7702272668740930849",
-  "auteur": "kodanimation",
+  "source": "https://www.tiktok.com/@charly.bse/video/7691643909306436897",
+  "auteur": "charly.bse",
   "visuel": {
    "gestes": [],
-   "duree": 31.0,
-   "nb_plans": 5,
-   "duree_plan": 6.2,
+   "duree": 73.0,
+   "nb_plans": 6,
+   "duree_plan": 12.17,
    "coupes": [
-    8.0,
-    8.5,
-    25.0,
-    30.0
+    15.0,
+    24.0,
+    36.0,
+    49.0,
+    50.0
    ],
    "plans": {
-    "tres_serre": 0.0,
-    "serre": 0.032,
-    "moyen": 0.016,
-    "large": 0.952
+    "tres_serre": 0.048,
+    "serre": 0.075,
+    "moyen": 0.0,
+    "large": 0.877
    },
    "camera": {
-    "fixe": 0.667,
-    "avance": 0.07,
-    "recul": 0.088,
-    "travelling": 0.123,
-    "epaule": 0.053
+    "fixe": 1.0,
+    "avance": 0.0,
+    "recul": 0.0,
+    "travelling": 0.0,
+    "epaule": 0.0
    },
    "nb_personnes": 1,
-   "personnes": [],
+   "personnes": [
+    {
+     "place": "centre",
+     "presence": 0.123,
+     "habit": [
+      224,
+      186,
+      97
+     ],
+     "cheveux": [
+      224,
+      199,
+      133
+     ],
+     "sourire": 0.778,
+     "taille": 0.295,
+     "tete_penchee": 3.0,
+     "regard_cote": 0.0
+    }
+   ],
    "visages": true,
-   "sourires": 0.25,
-   "energie": 0.45,
+   "sourires": 0.778,
+   "energie": 0.138,
    "mur": [
-    253,
-    253,
-    253
+    223,
+    200,
+    141
    ],
    "palette": [
     [
-     253,
-     253,
-     253,
-     0.799
+     239,
+     211,
+     172,
+     0.228
     ],
     [
-     214,
-     181,
-     181,
-     0.068
+     204,
+     185,
+     97,
+     0.221
     ],
     [
-     116,
-     68,
-     60,
-     0.047
+     115,
+     160,
+     184,
+     0.161
     ],
     [
-     15,
+     67,
+     78,
+     66,
+     0.15
+    ],
+    [
+     162,
+     119,
+     49,
+     0.141
+    ],
+    [
      12,
-     11,
-     0.042
-    ],
-    [
-     73,
-     110,
-     180,
-     0.026
-    ],
-    [
-     155,
-     133,
-     132,
-     0.017
+     10,
+     9,
+     0.1
     ]
    ],
    "lumiere": {
-    "luminosite": 233.0,
-    "chaleur": 3.0,
-    "saturation": 15.6
+    "luminosite": 169.4,
+    "chaleur": 44.4,
+    "saturation": 112.0
    },
    "moment": "jour",
    "postures": []
   },
   "audio": {
-   "duree": 30.7,
+   "duree": 72.6,
    "nb_voix": 2,
    "voix": [
     {
-     "hz": 162,
+     "hz": 147,
      "genre": "h",
-     "part": 0.62
+     "part": 0.4
     },
     {
-     "hz": 232,
+     "hz": 202,
      "genre": "f",
-     "part": 0.38
+     "part": 0.6
     }
    ],
-   "debit": 6.74,
-   "blanc_moyen": 1.03,
+   "debit": 5.16,
+   "blanc_moyen": 0.88,
    "coupes": 1,
-   "dynamique_db": 38.3,
-   "cris": 0.023,
-   "musique": 0.9,
-   "impacts": 0,
-   "impacts_10s": 0.0,
+   "dynamique_db": 35.7,
+   "cris": 0.015,
+   "musique": 0.42,
+   "impacts": 34,
+   "impacts_10s": 4.68,
    "graves": 0,
-   "aigus": 0,
-   "sur_vanne": 0,
+   "aigus": 34,
+   "sur_vanne": 14,
    "evenements": {
-    "crying": 1,
-    "glass": 1
+    "laughter": 1
    },
    "emotions": {
-    "sarcastic": 6,
-    "angry": 3,
-    "neutral": 2,
+    "neutral": 16,
+    "angry": 4,
+    "excited": 3,
+    "happy": 3,
+    "annoyed": 3,
+    "surprised": 2,
     "confused": 1,
-    "annoyed": 1,
-    "sad": 1,
-    "determined": 1
+    "insulted": 1
    }
   },
   "claude": {
    "lieux": [
+    "rue",
     "salon"
    ],
-   "moment": "soir",
+   "moment": "jour",
    "costumes": {
     "presentateur": {
      "haut": "tshirt",
      "c_haut": "bleu",
-     "bas": "pantalon",
-     "chaussures": "baskets",
+     "motif": "uni",
+     "bas": "jogging",
+     "chaussures": "chaussons",
+     "cheveux": "aucune",
      "details": [
-      "barbe_courte",
-      "lunettes_vue"
+      "barbe_courte"
      ]
     },
     "envoyee": {
-     "haut": "robe",
-     "c_haut": "rouge",
-     "bas": "jupe",
-     "chaussures": "ballerines",
+     "haut": "capuche",
+     "c_haut": "noir",
+     "motif": "uni",
+     "bas": "jean",
+     "chaussures": "baskets",
+     "cheveux": "court",
+     "c_cheveux": "brun",
      "details": [
-      "boucles_oreilles",
-      "sac_bandouliere"
+      "tatouage"
      ]
     }
    },
    "objets": [
     {
-     "replique": 7,
+     "replique": 0,
      "objet": "telephone"
     },
     {
-     "replique": 9,
-     "objet": "verre"
+     "replique": 6,
+     "objet": "telephone"
+    },
+    {
+     "objet": "telephone",
+     "replique": 11
+    },
+    {
+     "objet": "telephone",
+     "replique": 17
+    },
+    {
+     "objet": "telephone",
+     "replique": 24
     }
    ],
    "gags": [
-    "\"Le vin rend courage... et parfois plus bavard.\"",
-    "\"Attention : ce couple est sous surveillance médicale (pour le cœur).\"",
-    "\"Service après-vente : 100% de satisfaction garantie (ou presque).\""
+    "Destination : Paraguay (ou le grec du coin)",
+    "Organisation des mecs : 0% réflexion, 100% action"
    ],
    "ambiances": [
-    "vapeur"
+    "neon"
    ],
    "plans": [
     {
      "replique": 0,
      "plan": "moyen",
-     "mouvement": "avance",
-     "geste": "pointe_d",
-     "reaction": "regard_camera"
+     "mouvement": "fixe",
+     "reaction": "aucune",
+     "geste": "telephone"
     },
     {
-     "replique": 3,
      "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "poing",
-     "reaction": "choc"
-    },
-    {
-     "replique": 7,
-     "plan": "tres_serre",
-     "mouvement": "zoom_choc",
-     "geste": "telephone",
-     "reaction": "sceptique"
-    },
-    {
-     "replique": 8,
-     "plan": "contre_plongee",
-     "mouvement": "fixe",
-     "geste": "pointe_g",
-     "reaction": "colere"
-    },
-    {
-     "replique": 14,
-     "plan": "large",
-     "mouvement": "travelling",
      "geste": "bras_ouverts",
-     "reaction": "rire"
+     "mouvement": "zoom_choc",
+     "reaction": "yeux_au_ciel",
+     "replique": 2
+    },
+    {
+     "replique": 12,
+     "mouvement": "fixe",
+     "reaction": "sceptique",
+     "geste": "telephone",
+     "plan": "moyen"
+    },
+    {
+     "geste": "volant",
+     "reaction": "choc",
+     "plan": "serre",
+     "replique": 19,
+     "mouvement": "zoom_choc"
+    },
+    {
+     "reaction": "sceptique",
+     "plan": "contre_plongee",
+     "mouvement": "avance",
+     "replique": 30,
+     "geste": "poing"
+    },
+    {
+     "mouvement": "zoom_choc",
+     "replique": 36,
+     "geste": "pointe_d",
+     "plan": "tres_serre",
+     "reaction": "facepalm"
     }
    ]
   },
   "realisation": {
-   "moment": "soir",
+   "moment": "jour",
    "lieux": [
+    "rue",
     "salon"
    ],
    "gags": [
-    "\"Le vin rend courage... et parfois plus bavard.\"",
-    "\"Attention : ce couple est sous surveillance médicale (pour le cœur).\"",
-    "\"Service après-vente : 100% de satisfaction garantie (ou presque).\""
+    "Destination : Paraguay (ou le grec du coin)",
+    "Organisation des mecs : 0% réflexion, 100% action"
    ],
    "ambiances": [
-    "poussiere",
-    "vapeur"
+    "neon",
+    "pluie"
    ],
    "source": "auteur+image",
    "tenues": {
     "presentateur": "tshirt",
-    "envoyee": "robe"
+    "envoyee": "capuche"
    },
    "plans": [
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
     "large/fixe",
     "large/fixe",
     "large/fixe",
@@ -40487,6 +40354,6 @@
     "large/fixe"
    ]
   },
-  "video": "2026-11-02_06h15_emission.mp4"
+  "video": "2026-11-02_06h38_emission.mp4"
  }
 ]
