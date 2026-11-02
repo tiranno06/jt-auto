@@ -40087,28 +40087,28 @@
    ],
    "palette": [
     [
+     1,
      0,
      0,
-     0,
-     0.674
+     0.676
     ],
     [
-     181,
+     130,
+     125,
+     123,
+     0.122
+    ],
+    [
+     178,
      171,
-     165,
-     0.113
+     170,
+     0.108
     ],
     [
-     136,
-     129,
-     126,
-     0.105
-    ],
-    [
-     87,
-     47,
-     42,
-     0.044
+     89,
+     54,
+     50,
+     0.052
     ],
     [
      237,
@@ -40117,10 +40117,10 @@
      0.035
     ],
     [
-     102,
-     97,
-     95,
-     0.029
+     234,
+     156,
+     73,
+     0.007
     ]
    ],
    "lumiere": {
@@ -40133,91 +40133,103 @@
   },
   "audio": {
    "duree": 61.1,
-   "nb_voix": 2,
+   "nb_voix": 3,
    "voix": [
     {
-     "hz": 159,
-     "genre": "h",
-     "part": 0.65
+     "hz": 256,
+     "genre": "f",
+     "part": 0.05
     },
     {
-     "hz": 220,
-     "genre": "f",
-     "part": 0.35
+     "hz": 160,
+     "genre": "h",
+     "part": 0.64
+    },
+    {
+     "hz": 172,
+     "genre": "?",
+     "part": 0.31
     }
    ],
-   "debit": 3.19,
-   "blanc_moyen": 0.89,
-   "coupes": 4,
+   "debit": 3.5,
+   "blanc_moyen": 1.02,
+   "coupes": 5,
    "dynamique_db": 35.0,
    "cris": 0.014,
    "musique": 0.41,
-   "impacts": 53,
-   "impacts_10s": 8.67,
-   "graves": 9,
-   "aigus": 44,
-   "sur_vanne": 15,
+   "impacts": 52,
+   "impacts_10s": 8.51,
+   "graves": 7,
+   "aigus": 45,
+   "sur_vanne": 21,
    "evenements": {
     "laughter": 3,
     "dog": 1
    },
    "emotions": {
-    "playful": 3,
-    "mocking": 2,
-    "whispering": 2,
-    "annoyed": 2,
+    "mocking": 3,
+    "playful": 2,
+    "confused": 2,
     "laughing": 2,
-    "panicked": 2,
+    "burnt": 2,
+    "hot": 2,
     "excited": 1,
-    "energetic": 1
+    "sarcastic": 1
    }
   },
   "claude": {
    "lieux": [
-    "micro-ondes kitchen"
+    "cuisine"
    ],
    "moment": "soir",
    "costumes": {
     "presentateur": {
-     "haut": "steak",
-     "c_haut": "rouge",
-     "motif": "taches",
-     "bas": "aucun",
-     "chaussures": "aucun",
+     "haut": "tshirt",
+     "c_haut": "bleu",
+     "bas": "jean",
+     "chaussures": "baskets",
      "details": [
-      "yeux",
-      "bouche"
-     ]
+      "barbe_courte"
+     ],
+     "chapeau": null,
+     "cheveux": "court",
+     "c_cheveux": "brun"
     },
-    "envoyee": {
-     "haut": "aucune",
-     "c_haut": "aucun",
-     "motif": "aucun",
-     "bas": "aucun",
-     "chaussures": "aucun",
+    "invite": {
+     "haut": "tablier",
+     "c_haut": "blanc",
+     "bas": "pantalon",
+     "chaussures": "baskets",
      "details": [
-      "main"
-     ]
+      "moustache"
+     ],
+     "chapeau": null,
+     "cheveux": "court_texture",
+     "c_cheveux": "chatain"
     }
    },
    "objets": [
     {
-     "replique": 0,
-     "objet": "micro"
-    },
-    {
-     "replique": 6,
+     "replique": 1,
      "objet": "assiette"
     },
     {
-     "replique": 18,
-     "objet": "cuillères"
+     "replique": 9,
+     "objet": "fourchette"
+    },
+    {
+     "replique": 10,
+     "objet": "gants_de_cuisine"
+    },
+    {
+     "replique": 21,
+     "objet": "telecommande"
     }
    ],
    "gags": [
-    "Micro-ondes : Le seul endroit où la viande peut faire des blagues.",
-    "Attention : Ce steak est dangereux pour votre santé mentale.",
-    "POV : Vous êtes un steak qui ne veut pas être mangé."
+    "Micro-ondes : 1 - Steak : 0",
+    "Évitez les steaks trop futés",
+    "Cuisson : 3 minutes ou la mort ?"
    ],
    "ambiances": [
     "vapeur"
@@ -40225,157 +40237,157 @@
    "plans": [
     {
      "replique": 0,
-     "plan": "serre",
+     "plan": "large",
      "mouvement": "fixe",
      "geste": "pointe_d",
-     "reaction": "aucune"
+     "reaction": "regard_camera"
     },
     {
      "replique": 1,
-     "plan": "moyen",
+     "plan": "serre",
      "mouvement": "fixe",
      "geste": "bras_ouverts",
-     "reaction": "choc"
+     "reaction": "sceptique"
     },
     {
      "replique": 2,
      "plan": "serre",
-     "mouvement": "zoom_choc",
-     "geste": "pointe_g",
-     "reaction": "sceptique"
+     "mouvement": "fixe",
+     "geste": "facepalm",
+     "reaction": "choc"
     },
     {
      "replique": 3,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "mains_hanches",
-     "reaction": "gene"
-    },
-    {
-     "replique": 4,
-     "plan": "large",
-     "mouvement": "fixe",
-     "geste": "pointe_d",
+     "plan": "moyen",
+     "mouvement": "zoom_choc",
+     "geste": "poing",
      "reaction": "rire"
     },
     {
-     "replique": 5,
-     "plan": "serre",
+     "replique": 4,
+     "plan": "tres_serre",
      "mouvement": "fixe",
-     "geste": "pointe_g",
-     "reaction": "choc"
+     "geste": "explique",
+     "reaction": "aucune"
     },
     {
      "replique": 6,
      "plan": "serre",
      "mouvement": "fixe",
-     "geste": "pointe_d",
-     "reaction": "sceptique"
+     "geste": "gratte_tete",
+     "reaction": "confused"
     },
     {
      "replique": 7,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "facepalm",
-     "reaction": "soupir"
-    },
-    {
-     "replique": 8,
      "plan": "serre",
      "mouvement": "fixe",
      "geste": "pointe_g",
      "reaction": "choc"
     },
     {
+     "replique": 8,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "pointe_d",
+     "reaction": "sceptique"
+    },
+    {
      "replique": 9,
      "plan": "serre",
      "mouvement": "fixe",
-     "geste": "gratte_tete",
-     "reaction": "sceptique"
+     "geste": "pointe_g",
+     "reaction": "regard_camera"
     },
     {
      "replique": 10,
      "plan": "serre",
-     "mouvement": "zoom_choc",
-     "geste": "pointe_d",
-     "reaction": "rire"
+     "mouvement": "fixe",
+     "geste": "mains_hanches",
+     "reaction": "choc"
     },
     {
      "replique": 11,
-     "plan": "serre",
+     "plan": "large",
      "mouvement": "fixe",
-     "geste": "bras_ouverts",
-     "reaction": "joie"
+     "geste": "aucun",
+     "reaction": "aucune"
     },
     {
      "replique": 12,
      "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "facepalm",
-     "reaction": "soupir"
+     "mouvement": "zoom_choc",
+     "geste": "bras_ouverts",
+     "reaction": "rire"
     },
     {
      "replique": 13,
      "plan": "serre",
      "mouvement": "fixe",
-     "geste": "pointe_d",
-     "reaction": "confused"
+     "geste": "facepalm",
+     "reaction": "joie"
     },
     {
      "replique": 14,
      "plan": "serre",
      "mouvement": "fixe",
-     "geste": "pointe_g",
+     "geste": "pointe_d",
      "reaction": "choc"
     },
     {
      "replique": 15,
      "plan": "serre",
      "mouvement": "fixe",
-     "geste": "mains_hanches",
+     "geste": "pointe_g",
      "reaction": "sceptique"
     },
     {
-     "replique": 16,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "pointe_d",
-     "reaction": "soupir"
-    },
-    {
-     "replique": 17,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "pointe_g",
-     "reaction": "choc"
-    },
-    {
-     "replique": 18,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "pointe_d",
-     "reaction": "gene"
-    },
-    {
      "replique": 19,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "pointe_g",
-     "reaction": "soupir"
+     "plan": "large",
+     "mouvement": "travelling",
+     "geste": "pointe_d",
+     "reaction": "aucune"
     },
     {
      "replique": 20,
      "plan": "serre",
      "mouvement": "fixe",
-     "geste": "gratte_tete",
-     "reaction": "panique"
+     "geste": "bras_ouverts",
+     "reaction": "joie"
     },
     {
      "replique": 21,
-     "plan": "serre",
+     "plan": "tres_serre",
      "mouvement": "zoom_choc",
-     "geste": "bras_ouverts",
+     "geste": "poing",
      "reaction": "choc"
+    },
+    {
+     "replique": 22,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "facepalm",
+     "reaction": "rire"
+    },
+    {
+     "replique": 23,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "pointe_g",
+     "reaction": "choc"
+    },
+    {
+     "replique": 24,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "bras_ouverts",
+     "reaction": "joie"
+    },
+    {
+     "replique": 25,
+     "plan": "large",
+     "mouvement": "fixe",
+     "geste": "gratte_tete",
+     "reaction": "reflechit"
     }
    ]
   },
@@ -40385,9 +40397,9 @@
     "cuisine"
    ],
    "gags": [
-    "Micro-ondes : Le seul endroit où la viande peut faire des blagues.",
-    "Attention : Ce steak est dangereux pour votre santé mentale.",
-    "POV : Vous êtes un steak qui ne veut pas être mangé."
+    "Micro-ondes : 1 - Steak : 0",
+    "Évitez les steaks trop futés",
+    "Cuisson : 3 minutes ou la mort ?"
    ],
    "ambiances": [
     "poussiere",
@@ -40395,10 +40407,14 @@
    ],
    "source": "auteur+image",
    "tenues": {
-    "presentateur": "tablier",
-    "envoyee": "tshirt"
+    "presentateur": "tshirt",
+    "invite": "tablier"
    },
    "plans": [
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
     "large/fixe",
     "large/fixe",
     "large/fixe",
@@ -40423,6 +40439,6 @@
     "large/fixe"
    ]
   },
-  "video": "2026-11-02_07h29_emission.mp4"
+  "video": "2026-11-02_07h59_emission.mp4"
  }
 ]
