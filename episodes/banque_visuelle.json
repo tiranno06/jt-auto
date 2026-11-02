@@ -38936,30 +38936,30 @@
    "nb_voix": 3,
    "voix": [
     {
-     "hz": 146,
+     "hz": 148,
      "genre": "h",
-     "part": 0.24
+     "part": 0.23
     },
     {
-     "hz": 248,
+     "hz": 235,
      "genre": "f",
-     "part": 0.35
+     "part": 0.46
     },
     {
-     "hz": 237,
+     "hz": 253,
      "genre": "f",
-     "part": 0.41
+     "part": 0.32
     }
    ],
-   "debit": 3.98,
-   "blanc_moyen": 0.68,
-   "coupes": 2,
+   "debit": 4.1,
+   "blanc_moyen": 0.69,
+   "coupes": 1,
    "dynamique_db": 16.6,
    "cris": 0.006,
    "musique": 0.41,
-   "impacts": 59,
-   "impacts_10s": 7.25,
-   "graves": 9,
+   "impacts": 58,
+   "impacts_10s": 7.13,
+   "graves": 8,
    "aigus": 50,
    "sur_vanne": 11,
    "evenements": {
@@ -38969,17 +38969,63 @@
     "kiss": 1
    },
    "emotions": {
-    "neutral": 10,
-    "excited": 3,
-    "happy": 2,
-    "confused": 2,
-    "uncertain": 2,
-    "skeptical": 2,
-    "descriptive": 1,
-    "satisfied": 1
+    "neutral": 12,
+    "excited": 5,
+    "confused": 4,
+    "informative": 1,
+    "satisfied": 1,
+    "annoyed": 1,
+    "reassuring": 1,
+    "enthusiastic": 1
    }
   },
-  "claude": {},
+  "claude": {
+   "lieux": [
+    "chambre"
+   ],
+   "moment": "soir",
+   "costumes": {
+    "invite": {
+     "haut": "robe",
+     "c_haut": "blanc",
+     "motif": "fleurs_roses",
+     "bas": "escarpins",
+     "chaussures": "escarpins",
+     "details": [
+      "boucles_oreilles",
+      "collier"
+     ],
+     "chapeau": null,
+     "cheveux": "court",
+     "c_cheveux": "brun"
+    },
+    "presentateur": {
+     "haut": "debardeur",
+     "c_haut": "blanc",
+     "bas": "pantalon",
+     "chaussures": "baskets",
+     "details": [
+      "barreaux_cote"
+     ],
+     "chapeau": null,
+     "cheveux": "court_texture",
+     "c_cheveux": "noir"
+    },
+    "envoyee": {
+     "haut": "tshirt",
+     "c_haut": "bleu",
+     "bas": "pantalon",
+     "chaussures": "baskets",
+     "details": [
+      "lunettes_vue",
+      "bracelets"
+     ],
+     "chapeau": null,
+     "cheveux": "long",
+     "c_cheveux": "blond"
+    }
+   }
+  },
   "realisation": {
    "moment": "soir",
    "lieux": [
@@ -38989,11 +39035,11 @@
    "ambiances": [
     "poussiere"
    ],
-   "source": "robot+image",
+   "source": "auteur+image",
    "tenues": {
-    "invite": "pyjama",
-    "presentateur": "pyjama",
-    "envoyee": "pyjama"
+    "invite": "robe",
+    "presentateur": "debardeur",
+    "envoyee": "tshirt"
    },
    "plans": [
     "large/fixe",
@@ -39027,6 +39073,305 @@
     "large/fixe"
    ]
   },
-  "video": "2026-11-02_02h04_emission.mp4"
+  "video": "2026-11-02_00h31_emission.mp4"
+ },
+ {
+  "date": "2026-11-02",
+  "source": "https://www.tiktok.com/@vignianimation/video/7701771541142342945",
+  "auteur": "vignianimation",
+  "visuel": {
+   "gestes": [],
+   "duree": 62.5,
+   "nb_plans": 1,
+   "duree_plan": 62.5,
+   "coupes": [],
+   "plans": {
+    "tres_serre": 0.0,
+    "serre": 0.0,
+    "moyen": 0.76,
+    "large": 0.24
+   },
+   "camera": {
+    "fixe": 0.573,
+    "avance": 0.145,
+    "recul": 0.258,
+    "travelling": 0.024,
+    "epaule": 0.0
+   },
+   "nb_personnes": 1,
+   "personnes": [
+    {
+     "place": "centre",
+     "presence": 0.544,
+     "habit": [
+      191,
+      112,
+      52
+     ],
+     "cheveux": [
+      11,
+      11,
+      10
+     ],
+     "sourire": 0.0,
+     "taille": 0.1,
+     "tete_penchee": 1.8,
+     "regard_cote": 0.941
+    },
+    {
+     "place": "droite",
+     "presence": 0.216,
+     "habit": [
+      155,
+      12,
+      9
+     ],
+     "cheveux": [
+      51,
+      30,
+      30
+     ],
+     "sourire": 0.0,
+     "taille": 0.089,
+     "tete_penchee": 2.4,
+     "regard_cote": 0.111
+    }
+   ],
+   "visages": true,
+   "sourires": 0.0,
+   "energie": 0.985,
+   "mur": [
+    206,
+    132,
+    86
+   ],
+   "palette": [
+    [
+     200,
+     125,
+     81,
+     0.358
+    ],
+    [
+     92,
+     44,
+     27,
+     0.215
+    ],
+    [
+     147,
+     92,
+     64,
+     0.165
+    ],
+    [
+     27,
+     18,
+     20,
+     0.133
+    ],
+    [
+     228,
+     159,
+     108,
+     0.101
+    ],
+    [
+     246,
+     241,
+     237,
+     0.028
+    ]
+   ],
+   "lumiere": {
+    "luminosite": 151.8,
+    "chaleur": 83.9,
+    "saturation": 147.3
+   },
+   "moment": "soir",
+   "postures": []
+  },
+  "audio": {
+   "duree": 62.5,
+   "nb_voix": 2,
+   "voix": [
+    {
+     "hz": 179,
+     "genre": "?",
+     "part": 0.67
+    },
+    {
+     "hz": 167,
+     "genre": "?",
+     "part": 0.33
+    }
+   ],
+   "debit": 5.14,
+   "blanc_moyen": 0.44,
+   "coupes": 12,
+   "dynamique_db": 16.7,
+   "cris": 0.026,
+   "musique": 0.41,
+   "impacts": 23,
+   "impacts_10s": 3.68,
+   "graves": 1,
+   "aigus": 22,
+   "sur_vanne": 9,
+   "evenements": {},
+   "emotions": {
+    "détendu": 3,
+    "calme": 2,
+    "ironique": 2,
+    "indifférent": 2,
+    "réfléchi": 2,
+    "neutre": 2,
+    "d'accord": 2,
+    "décidé": 2
+   }
+  },
+  "claude": {
+   "lieux": [
+    "closet"
+   ],
+   "moment": "soir",
+   "costumes": {
+    "presentateur": {
+     "haut": "tshirt",
+     "c_haut": "orange",
+     "motif": "uni",
+     "bas": "pantalon",
+     "chaussures": "baskets",
+     "details": [
+      "chaîne autour du cou"
+     ],
+     "chapeau": null
+    },
+    "invite": {
+     "haut": "chemise",
+     "c_haut": "bleu marine",
+     "motif": "uni",
+     "bas": "pantalon",
+     "chaussures": "ville",
+     "details": [
+      "lunettes_soleil",
+      "ceinture"
+     ],
+     "chapeau": "casquette"
+    }
+   },
+   "objets": [
+    {
+     "replique": 5,
+     "objet": "imprimante"
+    },
+    {
+     "replique": 20,
+     "objet": "billet"
+    },
+    {
+     "replique": 27,
+     "objet": "telecommande"
+    }
+   ],
+   "gags": [
+    "\"Attention : Ne pas toucher aux chaînes, c'est décoratif\"",
+    "\"PS Plus : Abonnement valide même sans console\"",
+    "\"Télévision : En panne depuis 2012\""
+   ],
+   "ambiances": [
+    "poussiere"
+   ],
+   "plans": [
+    {
+     "replique": 0,
+     "plan": "moyen",
+     "mouvement": "fixe",
+     "geste": "gratte_tete",
+     "reaction": "neutre"
+    },
+    {
+     "replique": 3,
+     "plan": "serre",
+     "mouvement": "avance",
+     "geste": "pointe_g",
+     "reaction": "sceptique"
+    },
+    {
+     "replique": 8,
+     "plan": "moyen",
+     "mouvement": "fixe",
+     "geste": "bras_ouverts",
+     "reaction": "choc"
+    },
+    {
+     "replique": 21,
+     "plan": "serre",
+     "mouvement": "zoom_choc",
+     "geste": "poing",
+     "reaction": "joie"
+    },
+    {
+     "replique": 27,
+     "plan": "tres_serre",
+     "mouvement": "recul",
+     "geste": "pointe_d",
+     "reaction": "colere"
+    }
+   ]
+  },
+  "realisation": {
+   "moment": "soir",
+   "lieux": [
+    "salon"
+   ],
+   "gags": [
+    "\"Attention : Ne pas toucher aux chaînes, c'est décoratif\"",
+    "\"PS Plus : Abonnement valide même sans console\"",
+    "\"Télévision : En panne depuis 2012\""
+   ],
+   "ambiances": [
+    "pluie",
+    "poussiere"
+   ],
+   "source": "auteur+image",
+   "tenues": {
+    "presentateur": "tshirt",
+    "invite": "chemise"
+   },
+   "plans": [
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe"
+   ]
+  },
+  "video": "2026-11-02_02h43_emission.mp4"
  }
 ]
