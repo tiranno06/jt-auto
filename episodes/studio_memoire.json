@@ -6091,38 +6091,37 @@
   "cadence": "rapide"
  },
  {
-  "moment": "jour",
+  "moment": "nuit",
   "lieux": [
-   "rue",
-   "salon"
+   "chambre"
   ],
   "source": "auteur+image",
-  "duree": 75.6,
+  "duree": 63.1,
   "plans": {
-   "large": 37
+   "large": 22
   },
   "mouvements": {
-   "fixe": 37
+   "fixe": 22
   },
   "costumes": {
-   "envoyee": "capuche",
-   "presentateur": "tshirt"
+   "presentateur": "tshirt",
+   "invite": "pull"
   },
   "figurants": 0,
   "ambiances": [
-   "neon",
-   "pluie"
+   "pluie",
+   "vapeur"
   ],
-  "controle": "Humoriste 6.0/10 : 27 s Le personnage encaisse la proposition absurde trop calmement.; 52 s Il manque une réaction grimaçante sur cette réplique absurde. | Réalisateur 7.0/10 : 60 s Le jeu manque d'ex",
-  "fichier": "2026-11-02_13h13_emission.mp4",
+  "controle": "Humoriste 8.6/10 : 40.4 s La chute finale ('ÇA A EXPLOSÉ') est efficace, mais elle pourrait être encore plus drôle avec un bruitage plus impactant (ex : un 'BOOM' ou 'BOUM' explosif). | Réalisateur 6.",
+  "fichier": "2026-11-02_13h46_emission.mp4",
   "cine": {
    "focus": false,
-   "vertige": false,
-   "tiers": false,
+   "vertige": true,
+   "tiers": true,
    "etalonnage": true,
    "profondeur": false,
-   "grain": true,
-   "reflets": true,
+   "grain": false,
+   "reflets": false,
    "son": true
   },
   "cadence": "rapide"
