@@ -5942,37 +5942,41 @@
   "cadence": "rapide"
  },
  {
-  "moment": "jour",
+  "moment": "soir",
   "lieux": [
-   "rue",
-   "salon"
+   "voiture",
+   "mariage",
+   "eglise"
   ],
   "source": "auteur+image",
-  "duree": 72.4,
+  "duree": 75.6,
   "plans": {
-   "large": 34
+   "large": 27
   },
   "mouvements": {
-   "fixe": 34
+   "fixe": 27
   },
   "costumes": {
-   "presentateur": "costume",
-   "invite": "chemise"
+   "presentateur": "tshirt",
+   "invite": "chemise",
+   "envoyee": "pull"
   },
   "figurants": 0,
   "ambiances": [
-   "neon"
+   "neon",
+   "pluie",
+   "poussiere"
   ],
-  "controle": "Humoriste 8.8/10 : 2.7 s La réplique 'Même plus dans l'entreprise' manque d'une réaction visuelle plus marquée pour renforcer l'humour.; 44.4 s La chute 'T'es vraiment qu'une racleur de fond de chiott",
-  "fichier": "2026-11-02_05h38_emission.mp4",
+  "controle": "Humoriste 7.8/10 : 15 s Les vannes entre l'invite et l'envoyee manquent de réactions exagérées pour renforcer le comique. Par exemple, le moment où l'envoyee dit 'Tu fais quoi, gros con' pourrait être",
+  "fichier": "2026-11-02_05h42_emission.mp4",
   "cine": {
    "focus": true,
    "vertige": true,
    "tiers": true,
-   "etalonnage": false,
-   "profondeur": true,
-   "grain": true,
-   "reflets": true,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": false,
+   "reflets": false,
    "son": true
   },
   "cadence": "rapide"
