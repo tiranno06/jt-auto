@@ -5836,35 +5836,69 @@
  {
   "moment": "soir",
   "lieux": [
-   "salon"
+   "chambre"
   ],
-  "source": "auteur+image",
-  "duree": 65.8,
+  "source": "robot+image",
+  "duree": 84.7,
   "plans": {
-   "large": 31
+   "large": 29
   },
   "mouvements": {
-   "fixe": 31
+   "fixe": 29
   },
   "costumes": {
-   "presentateur": "tshirt",
-   "invite": "chemise"
+   "invite": "pyjama",
+   "presentateur": "pyjama",
+   "envoyee": "pyjama"
   },
   "figurants": 0,
   "ambiances": [
-   "pluie",
    "poussiere"
   ],
-  "controle": "Humoriste 8.6/10 : 0.4 s Les vannes sont claires mais certaines répliques manquent de réactions exagérées pour renforcer le côté humoristique. Par exemple, le personnage qui dit 'Si je comprends bien'",
-  "fichier": "2026-11-02_02h43_emission.mp4",
+  "controle": "Humoriste 7.0/10 : 17.4 s La réplique « Mais tu dors là ou tu m'écoutes » manque de réactions visuelles marquées des personnages. La chute humoristique est présente, mais elle pourrait être renforcée ",
+  "fichier": "2026-11-02_02h04_emission.mp4",
   "cine": {
-   "focus": true,
-   "vertige": false,
-   "tiers": false,
-   "etalonnage": true,
+   "focus": false,
+   "vertige": true,
+   "tiers": true,
+   "etalonnage": false,
    "profondeur": false,
    "grain": true,
    "reflets": true,
+   "son": true
+  },
+  "cadence": null
+ },
+ {
+  "moment": "jour",
+  "lieux": [
+   "voiture"
+  ],
+  "source": "auteur+image",
+  "duree": 69.3,
+  "plans": {
+   "large": 22
+  },
+  "mouvements": {
+   "fixe": 22
+  },
+  "costumes": {
+   "invite": "pull",
+   "envoyee": "chemise",
+   "presentateur": "polo"
+  },
+  "figurants": 0,
+  "ambiances": [],
+  "controle": "Humoriste 10.0/10 :  | Réalisateur 10.0/10 :  | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.1/10 : 0.2 s sous-titres trop rapides à lire",
+  "fichier": "2026-11-02_03h10_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": false,
+   "tiers": true,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": true,
+   "reflets": false,
    "son": true
   },
   "cadence": "rapide"
