@@ -1,2297 +1,1597 @@
 {
- "titre": "TROP-PERÇU ET CONFLIT",
- "sujet": "TROP-PERÇU ET CONFLIT",
- "ecran": "TROP-PERÇU",
+ "titre": "CONSULTATION CHAOTIQUE",
+ "sujet": "CONSULTATION CHAOTIQUE",
+ "ecran": "CONSULTATION",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "POV : Quand ton ex-employé te vole",
- "question": "Que feriez-vous si un employé gardait votre argent ?",
+ "titre_accroche": "POV : Vous êtes un patient incompris",
+ "question": "Comment gérer un patient aussi confus ?",
  "running_gag": "",
  "verite": "",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "{'texte': \"Eliott, faut que tu rembourses le trop-perçu qu'on t'a versé s'il te plaît.\"}",
-   "_deb": 0.1,
-   "_fin": 2.025,
-   "d": "{'texte': \"[annoyed] Eliott, faut que tu rembourses le trop-perçu qu'on t'a versé s'il te plaît.\"}",
+   "t": "Désolé de l'attente, monsieur. C'est quoi votre nom, déjà, votre nom.",
+   "_deb": 0.04,
+   "_fin": 2.684,
    "_mots": [
     [
-     "Eliott,",
+     "Désolé",
      0.0,
-     0.201
-    ],
-    [
-     "faut",
-     0.241,
-     0.321
-    ],
-    [
-     "que",
-     0.341,
-     0.421
-    ],
-    [
-     "tu",
-     0.421,
-     0.461
-    ],
-    [
-     "rembourses",
-     0.461,
-     0.722
-    ],
-    [
-     "le",
-     0.722,
-     0.802
-    ],
-    [
-     "trop-perçu",
-     0.802,
-     1.083
-    ],
-    [
-     "qu'on",
-     1.163,
-     1.243
-    ],
-    [
-     "t'a",
-     1.243,
-     1.324
-    ],
-    [
-     "versé",
-     1.364,
-     1.544
-    ],
-    [
-     "s'il",
-     1.544,
-     1.604
-    ],
-    [
-     "te",
-     1.624,
-     1.664
-    ],
-    [
-     "plaît.",
-     1.745,
-     1.925
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "{'texte': \"Je travaille même plus dans l'entreprise, de quoi tu me parles.\"}",
-   "_deb": 2.025,
-   "_fin": 3.709,
-   "d": "{'texte': \"[defiant] Je travaille même plus dans l'entreprise, de quoi tu me parles.\"}",
-   "_mots": [
-    [
-     "Je",
-     0.0,
-     0.04
-    ],
-    [
-     "travaille",
-     0.04,
-     0.261
-    ],
-    [
-     "même",
-     0.261,
-     0.381
-    ],
-    [
-     "plus",
-     0.401,
-     0.481
-    ],
-    [
-     "dans",
-     0.481,
-     0.582
-    ],
-    [
-     "l'entreprise,",
-     0.582,
-     0.983
+     0.281
     ],
     [
      "de",
-     1.003,
-     1.043
+     0.341,
+     0.381
+    ],
+    [
+     "l'attente,",
+     0.401,
+     0.701
+    ],
+    [
+     "monsieur.",
+     0.841,
+     1.102
+    ],
+    [
+     "C'est",
+     1.162,
+     1.282
     ],
     [
      "quoi",
-     1.063,
-     1.143
+     1.282,
+     1.382
     ],
     [
-     "tu",
-     1.163,
-     1.223
+     "votre",
+     1.402,
+     1.563
     ],
     [
-     "me",
-     1.243,
-     1.283
+     "nom,",
+     1.583,
+     1.663
     ],
     [
-     "parles.",
-     1.344,
-     1.684
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "{'texte': 'Et alors.'}",
-   "_deb": 3.43,
-   "_fin": 3.91,
-   "d": "{'texte': '[indifferent] Et alors.'}",
-   "_mots": [
-    [
-     "Et",
-     0.46,
-     0.48
+     "déjà,",
+     1.743,
+     1.883
     ],
     [
-     "alors.",
-     0.0,
-     0.241
+     "votre",
+     1.963,
+     2.124
+    ],
+    [
+     "nom.",
+     2.124,
+     2.644
     ]
    ],
    "objet": "telephone"
   },
   {
    "p": "invite",
-   "t": "{'texte': 'Alors vous pouvez tous crever la gueule ouverte, je vous rembourse rien du tout.'}",
-   "_deb": 3.731,
-   "_fin": 6.463,
-   "d": "{'texte': '[angry] Alors vous pouvez tous crever la gueule ouverte, je vous rembourse rien du tout.'}",
+   "t": "Comment je m'appelle.",
+   "_deb": 2.704,
+   "_fin": 3.245,
    "_mots": [
     [
-     "Alors",
+     "Comment",
      0.0,
-     0.221
-    ],
-    [
-     "vous",
-     0.342,
-     0.442
-    ],
-    [
-     "pouvez",
-     0.462,
-     0.623
-    ],
-    [
-     "tous",
-     0.683,
-     0.844
-    ],
-    [
-     "crever",
-     0.924,
-     1.145
-    ],
-    [
-     "la",
-     1.185,
-     1.245
-    ],
-    [
-     "gueule",
-     1.286,
-     1.426
-    ],
-    [
-     "ouverte,",
-     1.466,
-     1.727
+     0.181
     ],
     [
      "je",
-     1.727,
-     1.788
+     0.181,
+     0.261
     ],
     [
-     "vous",
-     1.828,
-     1.928
-    ],
-    [
-     "rembourse",
-     1.948,
-     2.25
-    ],
-    [
-     "rien",
-     2.31,
-     2.47
-    ],
-    [
-     "du",
-     2.511,
-     2.571
-    ],
-    [
-     "tout.",
-     2.631,
-     2.732
+     "m'appelle.",
+     0.261,
+     0.541
     ]
    ],
    "objet": "telephone"
   },
   {
    "p": "presentateur",
-   "t": "{'texte': 'Donc si je comprends bien, tu comptes nous voler.'}",
-   "_deb": 6.503,
-   "_fin": 7.848,
-   "d": "{'texte': '[accusatory] Donc si je comprends bien, tu comptes nous voler.'}",
+   "t": "Oui.",
+   "_deb": 3.586,
+   "_fin": 3.666,
    "_mots": [
     [
-     "Donc",
+     "Oui.",
+     0.0,
+     0.08
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "invite",
+   "t": "Allô.",
+   "_deb": 3.966,
+   "_fin": 4.127,
+   "_mots": [
+    [
+     "Allô.",
+     0.0,
+     0.161
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Oui, mon fils.",
+   "_deb": 4.227,
+   "_fin": 4.648,
+   "_mots": [
+    [
+     "Oui,",
+     0.0,
+     0.12
+    ],
+    [
+     "mon",
+     0.16,
+     0.24
+    ],
+    [
+     "fils.",
+     0.26,
+     0.421
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "invite",
+   "t": "Oui, là, il m'a dit comment je m'appelle.",
+   "_deb": 4.908,
+   "_fin": 6.392,
+   "_mots": [
+    [
+     "Oui,",
+     0.0,
+     0.14
+    ],
+    [
+     "là,",
+     0.2,
+     0.3
+    ],
+    [
+     "il",
+     0.361,
+     0.401
+    ],
+    [
+     "m'a",
+     0.421,
+     0.501
+    ],
+    [
+     "dit",
+     0.581,
+     0.821
+    ],
+    [
+     "comment",
+     0.821,
+     1.103
+    ],
+    [
+     "je",
+     1.103,
+     1.163
+    ],
+    [
+     "m'appelle.",
+     1.203,
+     1.484
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Ok, tu t'appelles Nas.",
+   "_deb": 6.492,
+   "_fin": 7.354,
+   "_mots": [
+    [
+     "Ok,",
      0.0,
      0.1
     ],
     [
-     "si",
-     0.14,
-     0.201
-    ],
-    [
-     "je",
-     0.241,
-     0.301
-    ],
-    [
-     "comprends",
-     0.321,
-     0.562
-    ],
-    [
-     "bien,",
-     0.562,
-     0.683
-    ],
-    [
      "tu",
-     0.723,
-     0.803
+     0.221,
+     0.261
     ],
     [
-     "comptes",
-     0.843,
-     1.024
+     "t'appelles",
+     0.301,
+     0.542
     ],
     [
-     "nous",
-     1.024,
-     1.124
-    ],
-    [
-     "voler.",
-     1.144,
-     1.345
+     "Nas.",
+     0.562,
+     0.862
     ]
    ],
    "objet": "telephone"
   },
   {
    "p": "invite",
-   "t": "{'texte': \"Je n'ai rien volé du tout, c'est vous qui me l'avez donné et puis surtout je travaille plus pour vous donc euh...\"}",
-   "_deb": 7.911,
-   "_fin": 11.768,
-   "d": "{'texte': \"[defiant] Je n'ai rien volé du tout, c'est vous qui me l'avez donné et puis surtout je travaille plus pour vous donc euh...\"}",
+   "t": "Tu t'appelles Nas.",
+   "_deb": 7.535,
+   "_fin": 8.136,
    "_mots": [
     [
-     "{'texte':",
-     0.038,
-     0.058
-    ],
-    [
-     "\"Je",
-     0.0,
-     0.02
-    ],
-    [
-     "n'ai",
-     0.16,
-     0.321
-    ],
-    [
-     "rien",
-     0.321,
-     0.401
-    ],
-    [
-     "volé",
-     0.401,
-     0.482
-    ],
-    [
-     "du",
-     0.482,
-     0.562
-    ],
-    [
-     "tout,",
-     0.622,
-     0.723
-    ],
-    [
-     "c'est",
-     0.783,
-     0.924
-    ],
-    [
-     "vous",
-     0.964,
-     1.125
-    ],
-    [
-     "qui",
-     1.165,
-     1.245
-    ],
-    [
-     "me",
-     1.285,
-     1.346
-    ],
-    [
-     "l'avez",
-     1.346,
-     1.546
-    ],
-    [
-     "donné",
-     1.567,
-     1.727
-    ],
-    [
-     "et",
-     1.727,
-     1.828
-    ],
-    [
-     "puis",
-     1.828,
-     1.928
-    ],
-    [
-     "surtout",
-     1.968,
-     2.169
-    ],
-    [
-     "je",
-     2.209,
-     2.27
-    ],
-    [
-     "travaille",
-     2.33,
-     2.591
-    ],
-    [
-     "plus",
-     2.651,
-     2.812
-    ],
-    [
-     "pour",
-     2.892,
-     3.033
-    ],
-    [
-     "vous",
-     3.133,
-     3.274
-    ],
-    [
-     "donc",
-     3.334,
-     3.475
-    ],
-    [
-     "euh...\"}",
-     3.535,
-     3.857
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "{'texte': 'Mais ça change rien ça.'}",
-   "_deb": 11.768,
-   "_fin": 12.472,
-   "d": "{'texte': '[sarcastic] Mais ça change rien ça.'}",
-   "_mots": [
-    [
-     "Mais",
+     "Tu",
      0.0,
      0.08
     ],
     [
-     "ça",
-     0.08,
-     0.14
+     "t'appelles",
+     0.1,
+     0.381
     ],
     [
-     "change",
-     0.2,
-     0.361
-    ],
-    [
-     "rien",
-     0.383,
-     0.544
-    ],
-    [
-     "ça.",
-     0.644,
-     0.704
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "{'texte': 'Ah bah si, ça change tout justement, donc le trop-perçu je le garde et au risque de me répéter vous pouvez tous aller vous faire enculer.'}",
-   "_deb": 12.633,
-   "_fin": 17.393,
-   "d": "{'texte': '[triumphant] Ah bah si, ça change tout justement, donc le trop-perçu je le garde et au risque de me répéter vous pouvez tous aller vous faire enculer.'}",
-   "_mots": [
-    [
-     "Ah",
-     0.0,
-     0.04
-    ],
-    [
-     "bah",
-     0.121,
-     0.221
-    ],
-    [
-     "si,",
-     0.261,
-     0.321
-    ],
-    [
-     "ça",
-     0.422,
-     0.482
-    ],
-    [
-     "change",
-     0.522,
-     0.703
-    ],
-    [
-     "tout",
-     0.723,
-     0.823
-    ],
-    [
-     "justement,",
-     0.883,
-     1.185
-    ],
-    [
-     "donc",
-     1.245,
-     1.345
-    ],
-    [
-     "le",
-     1.405,
-     1.466
-    ],
-    [
-     "trop-perçu",
-     1.506,
-     1.907
-    ],
-    [
-     "je",
-     1.968,
-     2.008
-    ],
-    [
-     "le",
-     2.048,
-     2.108
-    ],
-    [
-     "garde",
-     2.168,
-     2.429
-    ],
-    [
-     "et",
-     2.45,
-     2.51
-    ],
-    [
-     "au",
-     2.55,
-     2.59
-    ],
-    [
-     "risque",
-     2.63,
-     2.831
-    ],
-    [
-     "de",
-     2.871,
-     2.911
-    ],
-    [
-     "me",
-     2.951,
-     2.992
-    ],
-    [
-     "répéter",
-     3.012,
-     3.353
-    ],
-    [
-     "vous",
-     3.393,
-     3.494
-    ],
-    [
-     "pouvez",
-     3.514,
-     3.714
-    ],
-    [
-     "tous",
-     3.795,
-     3.995
-    ],
-    [
-     "aller",
-     4.076,
-     4.218
-    ],
-    [
-     "vous",
-     4.218,
-     4.319
-    ],
-    [
-     "faire",
-     4.319,
-     4.459
-    ],
-    [
-     "enculer.",
-     4.499,
-     4.76
+     "Nas.",
+     0.401,
+     0.601
     ]
    ],
    "objet": "telephone"
   },
   {
    "p": "presentateur",
-   "t": "{'texte': 'Tu veux que ça finisse au tribunal. Tu veux que ça finisse au tribunal.'}",
-   "_deb": 17.433,
-   "_fin": 19.863,
-   "d": "{'texte': '[threatening] Tu veux que ça finisse au tribunal. Tu veux que ça finisse au tribunal.'}",
+   "t": "Ok, vas-y.",
+   "_deb": 8.397,
+   "_fin": 9.079,
    "_mots": [
     [
-     "Tu",
+     "Ok,",
      0.0,
-     0.041
+     0.08
     ],
     [
-     "veux",
-     0.081,
-     0.161
-    ],
-    [
-     "que",
-     0.161,
-     0.221
-    ],
-    [
-     "ça",
-     0.241,
-     0.302
-    ],
-    [
-     "finisse",
-     0.342,
-     0.563
-    ],
-    [
-     "au",
-     0.583,
-     0.623
-    ],
-    [
-     "tribunal.",
-     0.643,
-     0.924
-    ],
-    [
-     "Tu",
-     1.145,
-     1.225
-    ],
-    [
-     "veux",
-     1.346,
-     1.486
-    ],
-    [
-     "que",
-     1.526,
-     1.587
-    ],
-    [
-     "ça",
-     1.607,
-     1.667
-    ],
-    [
-     "finisse",
-     1.747,
-     1.988
-    ],
-    [
-     "au",
-     2.028,
-     2.068
-    ],
-    [
-     "tribunal.",
-     2.109,
-     2.43
+     "vas-y.",
+     0.18,
+     0.682
     ]
    ],
    "objet": "telephone"
   },
   {
    "p": "invite",
-   "t": "{'texte': \"Avec plaisir, tu veux qu'on convoque les prud'hommes pour voir ce qu'ils en pensent.\"}",
-   "_deb": 20.084,
-   "_fin": 22.214,
-   "d": "{'texte': \"[mocking] Avec plaisir, tu veux qu'on convoque les prud'hommes pour voir ce qu'ils en pensent.\"}",
+   "t": "Non.",
+   "_deb": 9.46,
+   "_fin": 9.58,
    "_mots": [
     [
-     "Avec",
+     "Non.",
      0.0,
      0.12
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Ok, c'est bon.",
+   "_deb": 9.881,
+   "_fin": 10.783,
+   "_mots": [
+    [
+     "Ok,",
+     0.0,
+     0.08
     ],
     [
-     "plaisir,",
-     0.16,
+     "c'est",
+     0.381,
      0.461
     ],
     [
-     "tu",
-     0.522,
-     0.582
-    ],
-    [
-     "veux",
-     0.602,
-     0.702
-    ],
-    [
-     "qu'on",
-     0.722,
-     0.803
-    ],
-    [
-     "convoque",
-     0.843,
-     1.064
-    ],
-    [
-     "les",
-     1.084,
-     1.164
-    ],
-    [
-     "prud'hommes",
-     1.184,
-     1.204
-    ],
-    [
-     "pour",
-     1.186,
-     1.548
-    ],
-    [
-     "voir",
-     1.568,
-     1.648
-    ],
-    [
-     "ce",
-     1.668,
-     1.729
-    ],
-    [
-     "qu'ils",
-     1.729,
-     1.849
-    ],
-    [
-     "en",
-     1.869,
-     1.909
-    ],
-    [
-     "pensent.",
-     1.929,
-     2.13
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "{'texte': \"Tu m'as l'air bien sûr de toi pour un voleur.\"}",
-   "_deb": 22.234,
-   "_fin": 23.661,
-   "d": "{'texte': \"[sarcastic] Tu m'as l'air bien sûr de toi pour un voleur.\"}",
-   "_mots": [
-    [
-     "Tu",
-     0.0,
-     0.041
-    ],
-    [
-     "m'as",
-     0.061,
-     0.121
-    ],
-    [
-     "l'air",
-     0.141,
-     0.242
-    ],
-    [
-     "bien",
-     0.302,
-     0.422
-    ],
-    [
-     "sûr",
-     0.483,
-     0.583
-    ],
-    [
-     "de",
-     0.623,
-     0.684
-    ],
-    [
-     "toi",
-     0.724,
-     0.824
-    ],
-    [
-     "pour",
-     0.905,
-     1.005
-    ],
-    [
-     "un",
-     1.065,
-     1.106
-    ],
-    [
-     "voleur.",
-     1.146,
-     1.427
+     "bon.",
+     0.882,
+     0.902
     ]
    ],
    "objet": "telephone"
   },
   {
    "p": "invite",
-   "t": "{'texte': \"Alors une fois encore, j'ai rien volé, cet argent vous me l'avez donné vous-même, donc devant un juge, je suis clean.\"}",
-   "_deb": 23.741,
-   "_fin": 28.281,
-   "d": "{'texte': \"[defiant] Alors une fois encore, j'ai rien volé, cet argent vous me l'avez donné vous-même, donc devant un juge, je suis clean.\"}",
+   "t": "Moi, c'est Nas. Je m'appelle Nas.",
+   "_deb": 10.26,
+   "_fin": 12.387,
    "_mots": [
     [
-     "Alors",
+     "Moi,",
+     0.0,
+     0.84
+    ],
+    [
+     "c'est",
+     1.165,
+     1.265
+    ],
+    [
+     "Nas.",
+     1.325,
+     1.526
+    ],
+    [
+     "Je",
+     1.686,
+     1.726
+    ],
+    [
+     "m'appelle",
+     1.766,
+     1.987
+    ],
+    [
+     "Nas.",
+     2.007,
+     2.127
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Ok, ok, d'accord, enchanté. Et pourquoi, du coup, vous êtes là.",
+   "_deb": 12.387,
+   "_fin": 14.255,
+   "_mots": [
+    [
+     "Ok,",
+     0.0,
+     0.1
+    ],
+    [
+     "ok,",
+     0.12,
+     0.221
+    ],
+    [
+     "d'accord,",
+     0.221,
+     0.461
+    ],
+    [
+     "enchanté.",
+     0.501,
+     0.944
+    ],
+    [
+     "Et",
+     0.944,
+     0.984
+    ],
+    [
+     "pourquoi,",
+     1.025,
+     1.225
+    ],
+    [
+     "du",
+     1.286,
+     1.346
+    ],
+    [
+     "coup,",
+     1.386,
+     1.486
+    ],
+    [
+     "vous",
+     1.506,
+     1.607
+    ],
+    [
+     "êtes",
+     1.647,
+     1.788
+    ],
+    [
+     "là.",
+     1.808,
+     1.868
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Qu'est-ce qui vous arrive. Pourquoi vous êtes là, en fait.",
+   "_deb": 14.275,
+   "_fin": 15.681,
+   "_mots": [
+    [
+     "Qu'est-ce",
      0.0,
      0.201
     ],
     [
-     "une",
+     "qui",
      0.201,
-     0.262
+     0.281
     ],
     [
-     "fois",
-     0.302,
-     0.382
+     "vous",
+     0.281,
+     0.402
     ],
     [
-     "encore,",
+     "arrive.",
      0.442,
      0.663
     ],
     [
-     "j'ai",
-     0.704,
-     0.804
-    ],
-    [
-     "rien",
-     0.844,
-     0.965
-    ],
-    [
-     "volé,",
-     1.005,
-     1.166
-    ],
-    [
-     "cet",
-     1.367,
-     1.467
-    ],
-    [
-     "argent",
-     1.527,
-     1.708
+     "Pourquoi",
+     0.703,
+     0.864
     ],
     [
      "vous",
-     1.851,
-     1.991
+     0.864,
+     0.944
     ],
     [
-     "me",
-     2.011,
-     2.071
+     "êtes",
+     0.944,
+     1.064
     ],
     [
-     "l'avez",
-     2.091,
-     2.272
-    ],
-    [
-     "donné",
-     2.292,
-     2.453
-    ],
-    [
-     "vous-même,",
-     2.613,
-     2.975
-    ],
-    [
-     "donc",
-     3.015,
-     3.155
-    ],
-    [
-     "devant",
-     3.195,
-     3.376
-    ],
-    [
-     "un",
-     3.436,
-     3.476
-    ],
-    [
-     "juge,",
-     3.537,
-     3.757
-    ],
-    [
-     "je",
-     4.058,
-     4.139
-    ],
-    [
-     "suis",
-     4.219,
-     4.339
-    ],
-    [
-     "clean.",
-     4.36,
-     4.54
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "{'texte': \"Je regrette mais j'ai rien fait de mal.\"}",
-   "_deb": 28.442,
-   "_fin": 29.746,
-   "d": "{'texte': \"[defiant] Je regrette mais j'ai rien fait de mal.\"}",
-   "_mots": [
-    [
-     "Je",
-     0.0,
-     0.08
-    ],
-    [
-     "regrette",
-     0.12,
-     0.401
-    ],
-    [
-     "mais",
-     0.441,
-     0.522
-    ],
-    [
-     "j'ai",
-     0.522,
-     0.642
-    ],
-    [
-     "rien",
-     0.742,
-     0.943
-    ],
-    [
-     "fait",
-     1.003,
-     1.104
-    ],
-    [
-     "de",
-     1.124,
-     1.164
-    ],
-    [
-     "mal.",
-     1.184,
-     1.304
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "{'texte': \"Ouais enfin tu démissionnes juste après donc c'est un peu louche.\"}",
-   "_deb": 29.787,
-   "_fin": 31.455,
-   "d": "{'texte': \"[sarcastic] Ouais enfin tu démissionnes juste après donc c'est un peu louche.\"}",
-   "_mots": [
-    [
-     "Ouais",
-     0.0,
-     0.14
-    ],
-    [
-     "enfin",
-     0.16,
-     0.26
-    ],
-    [
-     "tu",
-     0.26,
-     0.321
-    ],
-    [
-     "démissionnes",
-     0.361,
-     0.682
-    ],
-    [
-     "juste",
-     0.682,
-     0.845
-    ],
-    [
-     "après",
-     0.845,
-     1.005
-    ],
-    [
-     "donc",
-     1.025,
-     1.166
-    ],
-    [
-     "c'est",
-     1.186,
-     1.267
-    ],
-    [
-     "un",
-     1.287,
-     1.327
-    ],
-    [
-     "peu",
-     1.347,
-     1.427
-    ],
-    [
-     "louche.",
-     1.447,
-     1.668
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "{'texte': \"T'avoueras.\"}",
-   "_deb": 31.817,
-   "_fin": 32.179,
-   "d": "{'texte': \"[indifferent] T'avoueras.\"}",
-   "_mots": [
-    [
-     "T'avoueras.",
-     0.0,
-     0.362
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "{'texte': 'Non je vois pas, je pouvais juste plus voir ta sale gueule tous les jours donc je me suis barré.'}",
-   "_deb": 32.279,
-   "_fin": 34.752,
-   "d": "{'texte': '[smug] Non je vois pas, je pouvais juste plus voir ta sale gueule tous les jours donc je me suis barré.'}",
-   "_mots": [
-    [
-     "Non",
-     0.0,
-     0.08
-    ],
-    [
-     "je",
-     0.181,
-     0.221
-    ],
-    [
-     "vois",
-     0.221,
-     0.301
-    ],
-    [
-     "pas,",
-     0.321,
-     0.422
-    ],
-    [
-     "je",
-     0.482,
-     0.522
-    ],
-    [
-     "pouvais",
-     0.542,
-     0.723
-    ],
-    [
-     "juste",
-     0.743,
-     0.904
-    ],
-    [
-     "plus",
-     0.924,
-     1.005
-    ],
-    [
-     "voir",
-     1.025,
+     "là,",
+     1.084,
      1.125
     ],
     [
-     "ta",
-     1.185,
-     1.226
+     "en",
+     1.205,
+     1.245
     ],
     [
-     "sale",
-     1.286,
-     1.426
-    ],
-    [
-     "gueule",
-     1.447,
-     1.587
-    ],
-    [
-     "tous",
-     1.607,
-     1.708
-    ],
-    [
-     "les",
-     1.728,
-     1.788
-    ],
-    [
-     "jours",
-     1.808,
-     1.929
-    ],
-    [
-     "donc",
-     1.949,
-     2.029
-    ],
-    [
-     "je",
-     2.049,
-     2.089
-    ],
-    [
-     "me",
-     2.13,
-     2.17
-    ],
-    [
-     "suis",
-     2.212,
-     2.313
-    ],
-    [
-     "barré.",
-     2.333,
-     2.473
+     "fait.",
+     1.285,
+     1.406
     ]
    ],
    "objet": "telephone"
   },
   {
    "p": "invite",
-   "t": "{'texte': \"Et c'est vrai que le pactole est tombé au bon moment.\"}",
-   "_deb": 34.873,
-   "_fin": 36.58,
-   "d": "{'texte': \"[smug] Et c'est vrai que le pactole est tombé au bon moment.\"}",
+   "t": "Pourquoi je suis là.",
+   "_deb": 15.841,
+   "_fin": 16.584,
    "_mots": [
     [
-     "Et",
+     "Pourquoi",
      0.0,
-     0.08
+     0.522
     ],
     [
-     "c'est",
-     0.14,
-     0.261
-    ],
-    [
-     "vrai",
-     0.301,
-     0.442
-    ],
-    [
-     "que",
+     "je",
      0.522,
-     0.582
+     0.563
     ],
     [
-     "le",
-     0.603,
-     0.663
+     "suis",
+     0.563,
+     0.683
     ],
     [
-     "pactole",
+     "là.",
      0.703,
-     1.004
-    ],
-    [
-     "est",
-     1.024,
-     1.105
-    ],
-    [
-     "tombé",
-     1.125,
-     1.245
-    ],
-    [
-     "au",
-     1.326,
-     1.386
-    ],
-    [
-     "bon",
-     1.406,
-     1.486
-    ],
-    [
-     "moment.",
-     1.527,
-     1.707
+     0.743
     ]
    ],
    "objet": "telephone"
   },
   {
    "p": "presentateur",
-   "t": "{'texte': \"Donc tu ne nous rendras pas l'argent Nope. Après tout ce qu'on a fait pour toi, c'est comme ça que tu nous remercies.\"}",
-   "_deb": 36.641,
-   "_fin": 39.978,
-   "d": "{'texte': \"[disappointed] Donc tu ne nous rendras pas l'argent Nope. Après tout ce qu'on a fait pour toi, c'est comme ça que tu nous remercies.\"}",
-   "objet": "billet",
+   "t": "Oui, oui, oui.",
+   "_deb": 16.685,
+   "_fin": 17.307,
    "_mots": [
     [
-     "Donc",
+     "Oui,",
      0.0,
-     0.12
+     0.08
     ],
     [
-     "tu",
-     0.14,
-     0.221
-    ],
-    [
-     "ne",
-     0.221,
-     0.261
-    ],
-    [
-     "nous",
+     "oui,",
      0.261,
      0.361
     ],
     [
-     "rendras",
-     0.361,
-     0.582
-    ],
-    [
-     "pas",
-     0.622,
-     0.703
-    ],
-    [
-     "l'argent",
-     0.723,
-     0.964
-    ],
-    [
-     "Nope.",
-     1.064,
-     1.285
-    ],
-    [
-     "Après",
-     1.345,
-     1.546
-    ],
-    [
-     "tout",
-     1.607,
-     1.747
-    ],
-    [
-     "ce",
-     1.767,
-     1.807
-    ],
-    [
-     "qu'on",
-     1.828,
-     1.988
-    ],
-    [
-     "a",
-     1.991,
-     2.011
-    ],
-    [
-     "fait",
-     2.051,
-     2.151
-    ],
-    [
-     "pour",
-     2.192,
-     2.292
-    ],
-    [
-     "toi,",
-     2.332,
-     2.413
-    ],
-    [
-     "c'est",
-     2.473,
-     2.593
-    ],
-    [
-     "comme",
-     2.593,
-     2.734
-    ],
-    [
-     "ça",
-     2.734,
-     2.774
-    ],
-    [
-     "que",
-     2.794,
-     2.875
-    ],
-    [
-     "tu",
-     2.875,
-     2.935
-    ],
-    [
-     "nous",
-     2.955,
-     3.036
-    ],
-    [
-     "remercies.",
-     3.036,
-     3.337
+     "oui.",
+     0.462,
+     0.622
     ]
-   ]
+   ],
+   "objet": "telephone"
   },
   {
    "p": "invite",
-   "t": "{'texte': 'Alors faudra juste que tu me rappelles ce que vous avez fait pour moi, mais sinon ouais, totalement.'}",
-   "_deb": 40.038,
-   "_fin": 43.235,
-   "d": "{'texte': '[defiant] Alors faudra juste que tu me rappelles ce que vous avez fait pour moi, mais sinon ouais, totalement.'}",
+   "t": "Allô.",
+   "_deb": 18.371,
+   "_fin": 18.532,
    "_mots": [
     [
-     "Alors",
+     "Allô.",
      0.0,
      0.161
-    ],
-    [
-     "faudra",
-     0.181,
-     0.342
-    ],
-    [
-     "juste",
-     0.402,
-     0.583
-    ],
-    [
-     "que",
-     0.603,
-     0.684
-    ],
-    [
-     "tu",
-     0.684,
-     0.764
-    ],
-    [
-     "me",
-     0.804,
-     0.844
-    ],
-    [
-     "rappelles",
-     0.885,
-     1.146
-    ],
-    [
-     "ce",
-     1.146,
-     1.206
-    ],
-    [
-     "que",
-     1.206,
-     1.286
-    ],
-    [
-     "vous",
-     1.286,
-     1.387
-    ],
-    [
-     "avez",
-     1.407,
-     1.548
-    ],
-    [
-     "fait",
-     1.568,
-     1.668
-    ],
-    [
-     "pour",
-     1.709,
-     1.809
-    ],
-    [
-     "moi,",
-     1.849,
-     1.97
-    ],
-    [
-     "mais",
-     2.213,
-     2.314
-    ],
-    [
-     "sinon",
-     2.434,
-     2.615
-    ],
-    [
-     "ouais,",
-     2.675,
-     2.836
-    ],
-    [
-     "totalement.",
-     2.896,
-     3.197
     ]
    ],
    "objet": "telephone"
   },
   {
    "p": "presentateur",
-   "t": "{'texte': \"T'es vraiment aucune racleur de fond de chiottes, tu le sais ça.\"}",
-   "_deb": 43.255,
-   "_fin": 45.465,
-   "d": "{'texte': \"[disgusted] T'es vraiment aucune racleur de fond de chiottes, tu le sais ça.\"}",
+   "t": "Oui, allô, oui.",
+   "_deb": 18.692,
+   "_fin": 19.294,
    "_mots": [
     [
-     "T'es",
+     "Oui,",
      0.0,
-     0.121
+     0.08
     ],
     [
-     "vraiment",
+     "allô,",
      0.181,
-     0.482
+     0.341
     ],
     [
-     "aucune",
+     "oui.",
      0.522,
-     0.703
-    ],
-    [
-     "racleur",
-     0.743,
-     1.065
-    ],
-    [
-     "de",
-     1.125,
-     1.165
-    ],
-    [
-     "fond",
-     1.225,
-     1.346
-    ],
-    [
-     "de",
-     1.366,
-     1.406
-    ],
-    [
-     "chiottes,",
-     1.507,
-     1.808
-    ],
-    [
-     "tu",
-     1.828,
-     1.888
-    ],
-    [
-     "le",
-     1.908,
-     1.948
-    ],
-    [
-     "sais",
-     1.989,
-     2.069
-    ],
-    [
-     "ça.",
-     2.149,
-     2.21
+     0.602
     ]
    ],
    "objet": "telephone"
   },
   {
    "p": "invite",
-   "t": "{'texte': \"Bon, disons que j'ai été à la bonne école.\"}",
-   "_deb": 45.545,
-   "_fin": 46.39,
-   "d": "{'texte': \"[smug] Bon, disons que j'ai été à la bonne école.\"}",
+   "t": "Là, il m'a dit pourquoi je suis là.",
+   "_deb": 19.635,
+   "_fin": 20.859,
    "_mots": [
     [
-     "Bon,",
-     0.0,
-     0.201
-    ],
-    [
-     "disons",
-     0.201,
-     0.321
-    ],
-    [
-     "que",
-     0.321,
-     0.381
-    ],
-    [
-     "j'ai",
-     0.381,
-     0.462
-    ],
-    [
-     "été",
-     0.502,
-     0.562
-    ],
-    [
-     "à",
-     0.602,
-     0.622
-    ],
-    [
-     "la",
-     0.622,
-     0.663
-    ],
-    [
-     "bonne",
-     0.663,
-     0.783
-    ],
-    [
-     "école.",
-     0.823,
-     0.845
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "{'texte': \"Bon, écoute, si tu ne rends pas l'argent, l'entreprise risque de déposer le bilan, c'est ça que tu veux.\"}",
-   "_deb": 46.39,
-   "_fin": 50.025,
-   "d": "{'texte': \"[serious] Bon, écoute, si tu ne rends pas l'argent, l'entreprise risque de déposer le bilan, c'est ça que tu veux.\"}",
-   "_mots": [
-    [
-     "Bon,",
-     0.0,
-     0.221
-    ],
-    [
-     "écoute,",
-     0.301,
-     0.482
-    ],
-    [
-     "si",
-     0.603,
-     0.683
-    ],
-    [
-     "tu",
-     0.723,
-     0.783
-    ],
-    [
-     "ne",
-     0.824,
-     0.864
-    ],
-    [
-     "rends",
-     0.904,
-     1.024
-    ],
-    [
-     "pas",
-     1.045,
-     1.165
-    ],
-    [
-     "l'argent,",
-     1.185,
-     1.486
-    ],
-    [
-     "l'entreprise",
-     1.587,
-     2.089
-    ],
-    [
-     "risque",
-     2.129,
-     2.33
-    ],
-    [
-     "de",
-     2.37,
-     2.43
-    ],
-    [
-     "déposer",
-     2.47,
-     2.752
-    ],
-    [
-     "le",
-     2.772,
-     2.832
-    ],
-    [
-     "bilan,",
-     2.852,
-     3.053
-    ],
-    [
-     "c'est",
-     3.093,
-     3.233
-    ],
-    [
-     "ça",
-     3.254,
-     3.314
-    ],
-    [
-     "que",
-     3.334,
-     3.394
-    ],
-    [
-     "tu",
-     3.394,
-     3.474
-    ],
-    [
-     "veux.",
-     3.515,
-     3.635
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "{'texte': \"Non, c'est pas vrai.\"}",
-   "_deb": 50.085,
-   "_fin": 50.527,
-   "d": "{'texte': \"[indifferent] Non, c'est pas vrai.\"}",
-   "_mots": [
-    [
-     "Non,",
+     "Là,",
      0.0,
      0.081
     ],
     [
-     "c'est",
-     0.141,
+     "il",
+     0.181,
      0.221
     ],
     [
-     "pas",
-     0.221,
-     0.302
+     "m'a",
+     0.241,
+     0.341
     ],
     [
-     "vrai.",
-     0.322,
-     0.442
+     "dit",
+     0.422,
+     0.562
+    ],
+    [
+     "pourquoi",
+     0.683,
+     0.963
+    ],
+    [
+     "je",
+     1.004,
+     1.064
+    ],
+    [
+     "suis",
+     1.064,
+     1.164
+    ],
+    [
+     "là.",
+     1.184,
+     1.224
     ]
    ],
    "objet": "telephone"
   },
   {
    "p": "presentateur",
-   "t": "{'texte': \"Si, c'est vrai.\"}",
-   "_deb": 50.708,
-   "_fin": 51.112,
-   "d": "{'texte': \"[serious] Si, c'est vrai.\"}",
+   "t": "C'est quoi les symptômes.",
+   "_deb": 20.94,
+   "_fin": 21.722,
    "_mots": [
     [
-     "Si,",
+     "C'est",
      0.0,
-     0.08
+     0.12
     ],
     [
-     "c'est",
-     0.181,
-     0.281
+     "quoi",
+     0.12,
+     0.2
     ],
     [
-     "vrai.",
-     0.283,
-     0.404
+     "les",
+     0.281,
+     0.341
+    ],
+    [
+     "symptômes.",
+     0.381,
+     0.782
     ]
    ],
    "objet": "telephone"
   },
   {
    "p": "invite",
-   "t": "{'texte': \"J'en ai rien à foutre. Ce serait une bonne chose pour tout le monde que cette boîte est fermée.\"}",
-   "_deb": 51.614,
-   "_fin": 53.986,
-   "d": "{'texte': \"[indifferent] J'en ai rien à foutre. Ce serait une bonne chose pour tout le monde que cette boîte est fermée.\"}",
-   "objet": "telephone",
+   "t": "Qu'est-ce qui m'arrive.",
+   "_deb": 21.722,
+   "_fin": 22.204,
    "_mots": [
     [
-     "J'en",
+     "Qu'est-ce",
+     0.0,
+     0.181
+    ],
+    [
+     "qui",
+     0.181,
+     0.261
+    ],
+    [
+     "m'arrive.",
+     0.261,
+     0.482
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Tu lui dis que tu as un peu mal à la tête.",
+   "_deb": 22.224,
+   "_fin": 24.595,
+   "_mots": [
+    [
+     "Tu",
+     0.0,
+     0.08
+    ],
+    [
+     "lui",
+     0.461,
+     0.562
+    ],
+    [
+     "dis",
+     0.642,
+     1.023
+    ],
+    [
+     "que",
+     1.084,
+     1.264
+    ],
+    [
+     "tu",
+     1.425,
+     1.465
+    ],
+    [
+     "as",
+     1.545,
+     1.587
+    ],
+    [
+     "un",
+     1.587,
+     1.627
+    ],
+    [
+     "peu",
+     1.668,
+     1.748
+    ],
+    [
+     "mal",
+     1.788,
+     1.909
+    ],
+    [
+     "à",
+     1.969,
+     1.989
+    ],
+    [
+     "la",
+     2.049,
+     2.109
+    ],
+    [
+     "tête.",
+     2.17,
+     2.371
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Et que tu as un peu mal au cœur.",
+   "_deb": 24.635,
+   "_fin": 25.418,
+   "_mots": [
+    [
+     "Et",
+     0.0,
+     0.04
+    ],
+    [
+     "que",
+     0.04,
+     0.1
+    ],
+    [
+     "tu",
+     0.1,
+     0.14
+    ],
+    [
+     "as",
+     0.14,
+     0.18
+    ],
+    [
+     "un",
+     0.201,
+     0.241
+    ],
+    [
+     "peu",
+     0.281,
+     0.381
+    ],
+    [
+     "dénausé.",
+     0.422,
+     0.783
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "invite",
+   "t": "Ok, en fait, j'ai un peu mal à la tête.",
+   "_deb": 25.679,
+   "_fin": 27.768,
+   "_mots": [
+    [
+     "Ok,",
+     0.0,
+     0.121
+    ],
+    [
+     "en",
+     0.161,
+     0.623
+    ],
+    [
+     "fait,",
+     0.663,
+     0.784
+    ],
+    [
+     "j'ai",
+     0.824,
+     1.306
+    ],
+    [
+     "un",
+     1.466,
+     1.507
+    ],
+    [
+     "peu",
+     1.527,
+     1.607
+    ],
+    [
+     "mal",
+     1.627,
+     1.728
+    ],
+    [
+     "à",
+     1.768,
+     1.808
+    ],
+    [
+     "la",
+     1.848,
+     1.888
+    ],
+    [
+     "tête.",
+     1.928,
+     2.089
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "C'est pas noté.",
+   "_deb": 27.788,
+   "_fin": 28.151,
+   "_mots": [
+    [
+     "C'est",
      0.0,
      0.101
     ],
     [
-     "ai",
-     0.161,
-     0.201
+     "pas",
+     0.121,
+     0.203
     ],
     [
-     "rien",
-     0.382,
-     0.503
+     "noté.",
+     0.203,
+     0.363
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "invite",
+   "t": "Et j'ai des nausées. J'ai mal au cœur.",
+   "_deb": 28.312,
+   "_fin": 30.337,
+   "_mots": [
+    [
+     "Et",
+     0.0,
+     0.06
+    ],
+    [
+     "j'ai",
+     0.22,
+     0.641
+    ],
+    [
+     "des",
+     0.982,
+     1.083
+    ],
+    [
+     "nausées.",
+     1.123,
+     1.384
+    ],
+    [
+     "J'ai",
+     1.584,
+     1.664
+    ],
+    [
+     "dénausé.",
+     1.704,
+     2.025
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "D'accord, ok. Je vois. Et ça, c'est depuis combien de temps à peu près ? Depuis combien de temps ? Depuis combien de temps.",
+   "_deb": 30.478,
+   "_fin": 35.339,
+   "_mots": [
+    [
+     "D'accord,",
+     0.0,
+     0.702
+    ],
+    [
+     "ok.",
+     0.762,
+     0.842
+    ],
+    [
+     "Je",
+     1.163,
+     1.223
+    ],
+    [
+     "vois.",
+     1.303,
+     1.424
+    ],
+    [
+     "Et",
+     1.484,
+     1.564
+    ],
+    [
+     "ça,",
+     1.624,
+     1.684
+    ],
+    [
+     "c'est",
+     1.745,
+     1.865
+    ],
+    [
+     "depuis",
+     1.885,
+     2.066
+    ],
+    [
+     "combien",
+     2.126,
+     2.326
+    ],
+    [
+     "de",
+     2.366,
+     2.427
+    ],
+    [
+     "temps",
+     2.467,
+     2.627
     ],
     [
      "à",
-     0.583,
-     0.603
+     2.667,
+     2.687
     ],
     [
-     "foutre.",
-     0.664,
-     0.824
+     "peu",
+     2.747,
+     2.828
     ],
     [
-     "Ce",
-     0.824,
-     0.885
+     "près",
+     2.888,
+     3.048
     ],
     [
-     "serait",
-     0.885,
-     1.025
+     "Depuis",
+     3.169,
+     3.389
     ],
     [
-     "une",
-     1.025,
-     1.086
+     "combien",
+     3.63,
+     3.81
     ],
     [
-     "bonne",
-     1.086,
-     1.206
+     "de",
+     3.83,
+     3.871
     ],
     [
-     "chose",
-     1.206,
-     1.367
+     "temps",
+     3.891,
+     4.031
     ],
     [
-     "pour",
-     1.367,
-     1.467
+     "Depuis",
+     4.255,
+     4.437
     ],
     [
-     "tout",
-     1.467,
-     1.568
+     "combien",
+     4.437,
+     4.619
     ],
     [
-     "le",
-     1.568,
-     1.608
+     "de",
+     4.639,
+     4.7
     ],
     [
-     "monde",
-     1.608,
-     1.729
+     "temps.",
+     4.7,
+     4.861
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "invite",
+   "t": "Ouais, ouais, ouais, allô ! Sur un fou ou quoi ?",
+   "_deb": 35.642,
+   "_fin": 38.296,
+   "_mots": [
+    [
+     "Ouais,",
+     0.0,
+     0.303
+    ],
+    [
+     "ouais,",
+     0.323,
+     0.465
+    ],
+    [
+     "ouais",
+     0.505,
+     0.828
+    ],
+    [
+     "Allô",
+     1.65,
+     1.83
+    ],
+    [
+     "Sur",
+     1.911,
+     2.051
+    ],
+    [
+     "un",
+     2.112,
+     2.172
+    ],
+    [
+     "fou",
+     2.252,
+     2.353
+    ],
+    [
+     "ou",
+     2.393,
+     2.533
+    ],
+    [
+     "quoi.",
+     2.533,
+     2.654
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Ouais, là, il me dit depuis combien de temps. Depuis combien de temps à peu près.",
+   "_deb": 38.437,
+   "_fin": 40.887,
+   "_mots": [
+    [
+     "Ouais,",
+     0.0,
+     0.12
+    ],
+    [
+     "là,",
+     0.321,
+     0.421
+    ],
+    [
+     "il",
+     0.482,
+     0.522
+    ],
+    [
+     "me",
+     0.562,
+     0.622
+    ],
+    [
+     "dit",
+     0.663,
+     0.763
+    ],
+    [
+     "depuis",
+     0.803,
+     1.004
+    ],
+    [
+     "combien",
+     1.044,
+     1.265
+    ],
+    [
+     "de",
+     1.325,
+     1.366
+    ],
+    [
+     "temps.",
+     1.406,
+     1.546
+    ],
+    [
+     "Depuis",
+     1.667,
+     1.808
+    ],
+    [
+     "combien",
+     1.808,
+     1.988
+    ],
+    [
+     "de",
+     2.008,
+     2.069
+    ],
+    [
+     "temps",
+     2.089,
+     2.189
+    ],
+    [
+     "à",
+     2.189,
+     2.209
+    ],
+    [
+     "peu",
+     2.209,
+     2.29
+    ],
+    [
+     "près.",
+     2.33,
+     2.45
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "invite",
+   "t": "Tu lui dis depuis deux semaines ! Depuis deux semaines, c'est bon.",
+   "_deb": 40.948,
+   "_fin": 42.875,
+   "_mots": [
+    [
+     "Tu",
+     0.0,
+     0.08
+    ],
+    [
+     "lui",
+     0.12,
+     0.18
+    ],
+    [
+     "dis",
+     0.241,
+     0.261
+    ],
+    [
+     "depuis",
+     0.222,
+     0.523
+    ],
+    [
+     "deux",
+     0.543,
+     0.664
+    ],
+    [
+     "semaines",
+     0.684,
+     0.964
+    ],
+    [
+     "Depuis",
+     1.045,
+     1.265
+    ],
+    [
+     "deux",
+     1.285,
+     1.406
+    ],
+    [
+     "semaines,",
+     1.446,
+     1.726
+    ],
+    [
+     "c'est",
+     1.746,
+     1.827
+    ],
+    [
+     "bon.",
+     1.847,
+     1.927
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Ok, ok, ouais, c'est bon.",
+   "_deb": 42.875,
+   "_fin": 43.918,
+   "_mots": [
+    [
+     "Ok,",
+     0.0,
+     0.04
+    ],
+    [
+     "ok,",
+     0.06,
+     0.461
+    ],
+    [
+     "ouais,",
+     0.642,
+     0.902
+    ],
+    [
+     "c'est",
+     0.902,
+     0.983
+    ],
+    [
+     "bon.",
+     0.983,
+     1.043
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "invite",
+   "t": "Ça marche, depuis deux semaines.",
+   "_deb": 43.938,
+   "_fin": 45.722,
+   "_mots": [
+    [
+     "Ça",
+     0.0,
+     0.06
+    ],
+    [
+     "marche,",
+     0.1,
+     0.28
+    ],
+    [
+     "depuis",
+     1.002,
+     1.283
+    ],
+    [
+     "deux",
+     1.363,
+     1.484
+    ],
+    [
+     "semaines.",
+     1.524,
+     1.784
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Ok d'accord, depuis deux semaines.",
+   "_deb": 45.883,
+   "_fin": 47.166,
+   "_mots": [
+    [
+     "Ok",
+     0.0,
+     0.16
+    ],
+    [
+     "d'accord,",
+     0.26,
+     0.561
+    ],
+    [
+     "depuis",
+     0.742,
+     0.962
+    ],
+    [
+     "deux",
+     1.063,
+     1.203
+    ],
+    [
+     "semaines.",
+     1.263,
+     1.283
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "invite",
+   "t": "Ça s'arrête pas. Ça s'arrête pas.",
+   "_deb": 46.88,
+   "_fin": 49.515,
+   "_mots": [
+    [
+     "Ça",
+     0.0,
+     0.76
+    ],
+    [
+     "s'arrête",
+     1.369,
+     1.389
+    ],
+    [
+     "pas.",
+     1.37,
+     1.571
+    ],
+    [
+     "Ça",
+     1.651,
+     1.692
+    ],
+    [
+     "s'arrête",
+     2.294,
+     2.514
+    ],
+    [
+     "pas.",
+     2.555,
+     2.635
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Ok ok d'accord.",
+   "_deb": 49.736,
+   "_fin": 50.478,
+   "_mots": [
+    [
+     "Ok",
+     0.0,
+     0.1
+    ],
+    [
+     "ok",
+     0.261,
+     0.341
+    ],
+    [
+     "d'accord.",
+     0.501,
+     0.742
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "invite",
+   "t": "Mais écoutez, on va vous ausculter.",
+   "_deb": 50.478,
+   "_fin": 51.582,
+   "_mots": [
+    [
+     "Mais",
+     0.0,
+     0.101
+    ],
+    [
+     "écoutez,",
+     0.141,
+     0.342
+    ],
+    [
+     "on",
+     0.382,
+     0.422
+    ],
+    [
+     "va",
+     0.442,
+     0.502
+    ],
+    [
+     "vous",
+     0.542,
+     0.622
+    ],
+    [
+     "ausculter.",
+     0.683,
+     1.104
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Est-ce que c'est bon pour vous ou pas.",
+   "_deb": 51.683,
+   "_fin": 52.827,
+   "_mots": [
+    [
+     "Est-ce",
+     0.0,
+     0.14
     ],
     [
      "que",
-     1.749,
-     1.829
+     0.16,
+     0.24
     ],
     [
-     "cette",
-     1.829,
-     1.97
+     "c'est",
+     0.281,
+     0.401
     ],
     [
-     "boîte",
-     1.99,
-     2.111
+     "bon",
+     0.421,
+     0.521
     ],
     [
-     "est",
-     2.151,
-     2.211
+     "pour",
+     0.582,
+     0.722
     ],
     [
-     "fermée.",
-     2.211,
-     2.372
+     "vous",
+     0.802,
+     0.943
+    ],
+    [
+     "ou",
+     0.963,
+     1.023
+    ],
+    [
+     "pas.",
+     1.023,
+     1.144
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "invite",
+   "t": "Là, il a dit qu'il allait m'ausculter.",
+   "_deb": 54.293,
+   "_fin": 55.547,
+   "_mots": [
+    [
+     "Là,",
+     0.0,
+     0.081
+    ],
+    [
+     "il",
+     0.162,
+     0.263
+    ],
+    [
+     "a",
+     0.284,
+     0.304
+    ],
+    [
+     "dit",
+     0.364,
+     0.506
+    ],
+    [
+     "qu'il",
+     0.567,
+     0.668
+    ],
+    [
+     "allait",
+     0.688,
+     0.89
+    ],
+    [
+     "m'ausculter.",
+     0.91,
+     1.254
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Ah, plus de batterie.",
+   "_deb": 56.573,
+   "_fin": 57.663,
+   "_mots": [
+    [
+     "Ah,",
+     0.0,
+     0.081
+    ],
+    [
+     "plus",
+     0.383,
+     0.747
+    ],
+    [
+     "de",
+     0.747,
+     0.807
+    ],
+    [
+     "batterie.",
+     0.807,
+     1.09
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "invite",
+   "t": "Vous savez, un chargeur.",
+   "_deb": 59.334,
+   "_fin": 59.981,
+   "objet": "telephone",
+   "_mots": [
+    [
+     "Vous",
+     0.0,
+     0.101
+    ],
+    [
+     "savez,",
+     0.121,
+     0.303
+    ],
+    [
+     "un",
+     0.303,
+     0.344
+    ],
+    [
+     "chargeur.",
+     0.344,
+     0.647
     ]
    ]
   },
   {
    "p": "presentateur",
-   "t": "{'texte': 'Je vais me retrouver à la rue à cause de toi, est-ce que tu te rends compte.'}",
-   "_deb": 54.006,
-   "_fin": 56.14,
-   "d": "{'texte': '[desperate] Je vais me retrouver à la rue à cause de toi, est-ce que tu te rends compte.'}",
-   "_mots": [
-    [
-     "Je",
-     0.0,
-     0.04
-    ],
-    [
-     "vais",
-     0.04,
-     0.121
-    ],
-    [
-     "me",
-     0.141,
-     0.181
-    ],
-    [
-     "retrouver",
-     0.221,
-     0.502
-    ],
-    [
-     "à",
-     0.543,
-     0.563
-    ],
-    [
-     "la",
-     0.585,
-     0.646
-    ],
-    [
-     "rue",
-     0.746,
-     0.867
-    ],
-    [
-     "à",
-     0.927,
-     0.947
-    ],
-    [
-     "cause",
-     1.008,
-     1.149
-    ],
-    [
-     "de",
-     1.169,
-     1.229
-    ],
-    [
-     "toi,",
-     1.269,
-     1.37
-    ],
-    [
-     "est-ce",
-     1.43,
-     1.551
-    ],
-    [
-     "que",
-     1.551,
-     1.631
-    ],
-    [
-     "tu",
-     1.631,
-     1.712
-    ],
-    [
-     "te",
-     1.712,
-     1.772
-    ],
-    [
-     "rends",
-     1.792,
-     1.913
-    ],
-    [
-     "compte.",
-     1.933,
-     2.134
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "{'texte': 'Arrête de me dire des choses qui me font plaisir comme ça, ça me fait des chatouilles.'}",
-   "_deb": 56.241,
-   "_fin": 58.174,
-   "d": "{'texte': '[mocking] Arrête de me dire des choses qui me font plaisir comme ça, ça me fait des chatouilles.'}",
-   "_mots": [
-    [
-     "Arrête",
-     0.0,
-     0.161
-    ],
-    [
-     "de",
-     0.181,
-     0.221
-    ],
-    [
-     "me",
-     0.221,
-     0.261
-    ],
-    [
-     "dire",
-     0.281,
-     0.362
-    ],
-    [
-     "des",
-     0.402,
-     0.462
-    ],
-    [
-     "choses",
-     0.462,
-     0.603
-    ],
-    [
-     "qui",
-     0.603,
-     0.684
-    ],
-    [
-     "me",
-     0.684,
-     0.744
-    ],
-    [
-     "font",
-     0.744,
-     0.845
-    ],
-    [
-     "plaisir",
-     0.865,
-     1.046
-    ],
-    [
-     "comme",
-     1.086,
-     1.247
-    ],
-    [
-     "ça,",
-     1.247,
-     1.307
-    ],
-    [
-     "ça",
-     1.347,
-     1.367
-    ],
-    [
-     "me",
-     1.129,
-     1.229
-    ],
-    [
-     "fait",
-     1.471,
-     1.571
-    ],
-    [
-     "des",
-     1.571,
-     1.652
-    ],
-    [
-     "chatouilles.",
-     1.672,
-     1.933
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "{'texte': \"Donc c'est décidé que tu nous saignes à blanc Exactement.\"}",
-   "_deb": 58.174,
-   "_fin": 59.862,
-   "d": "{'texte': \"[exasperated] Donc c'est décidé que tu nous saignes à blanc Exactement.\"}",
-   "_mots": [
-    [
-     "Donc",
-     0.0,
-     0.08
-    ],
-    [
-     "c'est",
-     0.1,
-     0.221
-    ],
-    [
-     "décidé",
-     0.241,
-     0.502
-    ],
-    [
-     "que",
-     0.563,
-     0.623
-    ],
-    [
-     "tu",
-     0.623,
-     0.683
-    ],
-    [
-     "nous",
-     0.723,
-     0.844
-    ],
-    [
-     "saignes",
-     0.884,
-     1.065
-    ],
-    [
-     "à",
-     1.105,
-     1.125
-    ],
-    [
-     "blanc",
-     1.145,
-     1.286
-    ],
-    [
-     "Exactement.",
-     1.367,
-     1.688
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "{'texte': 'Alors je vais te dire une bonne chose'}",
-   "_deb": 59.922,
-   "_fin": 61.329,
-   "d": "{'texte': '[smug] Alors je vais te dire une bonne chose'}",
-   "_mots": [
-    [
-     "Alors",
-     0.0,
-     0.161
-    ],
-    [
-     "je",
-     0.181,
-     0.242
-    ],
-    [
-     "vais",
-     0.262,
-     0.342
-    ],
-    [
-     "te",
-     0.342,
-     0.402
-    ],
-    [
-     "dire",
-     0.402,
-     0.543
-    ],
-    [
-     "une",
-     0.623,
-     0.704
-    ],
-    [
-     "bonne",
-     0.804,
-     1.025
-    ],
-    [
-     "chose",
-     1.146,
-     1.407
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Allo",
-   "_deb": 62.155,
-   "_fin": 62.338,
-   "_mots": [
-    [
-     "Allo",
-     0.0,
-     0.183
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "Allo.",
-   "_deb": 63.597,
-   "_fin": 63.78,
-   "d": "[shouting] Allo.",
-   "_mots": [
-    [
-     "Allo.",
-     0.0,
-     0.183
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "{'texte': \"Oh putain l'enculé.\"}",
-   "_deb": 64.836,
-   "_fin": 65.606,
-   "d": "{'texte': \"[angry] Oh putain l'enculé.\"}",
-   "_mots": [
-    [
-     "Oh",
-     0.0,
-     0.04
-    ],
-    [
-     "putain",
-     0.121,
-     0.385
-    ],
-    [
-     "l'enculé.",
-     0.405,
-     0.77
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "{'texte': 'Non bah non évidemment que non.'}",
-   "_deb": 67.113,
-   "_fin": 68.001,
-   "d": "{'texte': '[defiant] Non bah non évidemment que non.'}",
-   "_mots": [
-    [
-     "Non",
-     0.0,
-     0.101
-    ],
-    [
-     "bah",
-     0.222,
-     0.303
-    ],
-    [
-     "non",
-     0.323,
-     0.404
-    ],
-    [
-     "évidemment",
-     0.464,
-     0.747
-    ],
-    [
-     "que",
-     0.747,
-     0.827
-    ],
-    [
-     "non.",
-     0.827,
-     0.888
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "{'texte': \"Il nous rend pas l'argent non\"}",
-   "_deb": 68.001,
-   "_fin": 68.808,
-   "d": "{'texte': \"[angry] Il nous rend pas l'argent non\"}",
+   "t": "Hein ?",
+   "_deb": 60.042,
+   "_fin": 60.184,
    "chute": true,
    "_mots": [
     [
-     "Il",
+     "Hein",
      0.0,
-     0.06
-    ],
-    [
-     "nous",
-     0.06,
-     0.141
-    ],
-    [
-     "rend",
-     0.141,
-     0.262
-    ],
-    [
-     "pas",
-     0.262,
-     0.343
-    ],
-    [
-     "l'argent",
-     0.363,
-     0.645
-    ],
-    [
-     "non",
-     0.726,
-     0.807
+     0.142
     ]
    ],
    "objet": "telephone"
@@ -2299,18 +1599,18 @@
  ],
  "bandeau": [],
  "gag": null,
- "legende": "Un patron tente désespérément de récupérer un trop-perçu, mais l'ancien employé refuse catégoriquement.",
+ "legende": "Quand le patient ne sait pas ce qu'il a, mais que le pharmacien n'a pas le temps d'écouter.",
  "hashtags": [
   "petitsdramas",
-  "conflit",
-  "troppercu",
-  "employe",
-  "argent",
+  "consultation",
+  "pharmacien",
+  "patient",
+  "chaos",
   "humour",
-  "bureau"
+  "medecin"
  ],
  "sources": [
-  "https://www.tiktok.com/@same_same53/video/7694285566984195360"
+  "https://www.tiktok.com/@vignianimation/video/7694387304126811424"
  ],
  "decoupage": [
   {
@@ -2322,22 +1622,27 @@
     6,
     8,
     10,
+    12,
     13,
-    14,
+    15,
     17,
     19,
     21,
-    23,
-    25,
-    27,
-    29,
-    31,
-    33
+    22,
+    24,
+    26,
+    28,
+    30,
+    32,
+    34,
+    36,
+    38,
+    40
    ],
    "lieu": "",
    "son": "",
    "duree": 0,
-   "decor": "bureau avec table en bois, ordinateur allumé, dossier de dossiers gris, téléphone fixe, chaise en cuir usée, calendrier mural avec des dates surlignées, lampe d"
+   "decor": "cozy living room, sofa, posters on the wall, coffee table, lamp, television"
   },
   {
    "scene": "2",
@@ -2348,58 +1653,64 @@
     7,
     9,
     11,
-    12,
-    15,
+    14,
     16,
     18,
     20,
-    22,
-    24,
-    26,
-    28,
-    30,
-    32
+    23,
+    25,
+    27,
+    29,
+    31,
+    33,
+    35,
+    37,
+    39
    ],
    "lieu": "",
    "son": "",
    "duree": 0,
-   "decor": "même bureau, mais vu de dos avec un t-shirt noir et des baskets, il tient un billet de 50 euros dans sa main gauche."
+   "decor": "quiet city street at dusk, parked car at the curb, sidewalk, street lamps, shop fronts"
   }
  ],
  "studio": {
   "moment": "jour",
   "lieux": [
-   "rue",
-   "salon"
+   "salon",
+   "rue"
   ],
   "costumes": {
    "presentateur": {
-    "haut": "chemise",
-    "c_haut": "bleu marine",
+    "haut": "blouse",
+    "c_haut": "blanc",
     "motif": "uni",
     "bas": "pantalon",
-    "chaussures": "ville",
+    "chaussures": "baskets",
     "details": [
-     "cravate",
-     "lunettes_vue",
-     "montre"
-    ]
+     "stethoscope",
+     "lunettes_vue"
+    ],
+    "chapeau": {
+     "type": "calot_infirmier",
+     "c_chapeau": "blanc"
+    }
    },
    "invite": {
     "haut": "tshirt",
-    "c_haut": "noir",
+    "c_haut": "orange",
     "motif": "uni",
-    "bas": "jeans",
+    "bas": "short",
     "chaussures": "baskets",
     "details": [
-     "barbe_courte",
-     "bracelet"
-    ]
+     "bracelets",
+     "sac_bandouliere"
+    ],
+    "chapeau": null
    }
   },
   "metiers": {
-   "presentateur": "patron",
-   "invite": "ancien_employe"
+   "presentateur": "pharmacien",
+   "invite": null
   },
   "personnages": {
    "presentateur": {
@@ -2407,27 +1718,38 @@
     "age": 45,
     "taille": 1,
     "corpulence": 0.7,
-    "cheveux": "court_texture",
-    "c_cheveux": "brun",
-    "barbe": "trois_jours"
+    "cheveux": "court",
+    "c_cheveux": "noir",
+    "barbe": "trois_jours",
+    "espece": null
    },
    "invite": {
     "genre": "h",
-    "age": 32,
-    "taille": 1,
-    "corpulence": 0.8,
-    "cheveux": "court",
-    "c_cheveux": "roux",
-    "barbe": "barbe_courte"
+    "age": 25,
+    "taille": 0.8,
+    "corpulence": 0.6,
+    "cheveux": "court_texture",
+    "c_cheveux": "noir",
+    "barbe": null,
+    "espece": null
    }
   },
+  "objets": [
+   {
+    "replique": 38,
+    "objet": "chargeur"
+   },
+   {
+    "replique": 39,
+    "objet": "telephone"
+   }
+  ],
   "gags": [
-   "Trop-perçu : l'argent qui ne veut pas partir",
-   "Quand le patron devient mendiant",
-   "Démission = Vol ?"
+   "Chargeur introuvable ? Essayez le bon sens !",
+   "Symptômes : 'Ça s'arrête pas' — Depuis quand ? Depuis la préhistoire."
   ],
   "ambiances": [
-   "poussiere"
+   "neon"
   ],
   "cadence": "rapide",
   "plans": [
@@ -2435,213 +1757,317 @@
     "replique": 0,
     "plan": "moyen",
     "mouvement": "fixe",
-    "geste": "pointe_d",
+    "geste": "gratte_tete",
     "reaction": "regard_camera"
    },
    {
     "replique": 1,
     "plan": "serre",
     "mouvement": "fixe",
-    "geste": "bras_ouverts",
+    "geste": "pointe_g",
     "reaction": "choc"
    },
    {
     "replique": 3,
-    "plan": "tres_serre",
-    "mouvement": "zoom_choc",
-    "geste": "poing",
-    "reaction": "colere"
-   },
-   {
-    "replique": 7,
     "plan": "serre",
     "mouvement": "fixe",
-    "geste": "mains_hanches",
+    "geste": "telephone",
     "reaction": "sceptique"
    },
    {
+    "replique": 5,
+    "plan": "moyen",
+    "mouvement": "epaule",
+    "geste": "bras_ouverts",
+    "reaction": "gene"
+   },
+   {
     "replique": 11,
-    "plan": "epaule",
-    "mouvement": "avance",
-    "geste": "pointe_g",
-    "reaction": "soupir"
-   },
-   {
-    "replique": 17,
-    "plan": "large",
-    "mouvement": "fixe",
-    "geste": "desespoir",
-    "reaction": "pleurs"
-   },
-   {
-    "replique": 26,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "facepalm",
-    "reaction": "rire"
-   },
-   {
-    "replique": 31,
     "plan": "tres_serre",
     "mouvement": "zoom_choc",
     "geste": "poing",
     "reaction": "colere"
-   }
-  ],
-  "objets": [
-   {
-    "replique": 17,
-    "objet": "billet"
    },
    {
-    "replique": 24,
-    "objet": "telephone"
+    "replique": 23,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "facepalm",
+    "reaction": "soupir"
+   },
+   {
+    "replique": 25,
+    "plan": "moyen",
+    "mouvement": "fixe",
+    "geste": "gratte_tete",
+    "reaction": "confused"
+   },
+   {
+    "replique": 27,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "pointe_d",
+    "reaction": "colere"
+   },
+   {
+    "replique": 38,
+    "plan": "large",
+    "mouvement": "fixe",
+    "geste": "mains_hanches",
+    "reaction": "panique"
    }
   ],
-  "decors_vus": {
-   "presentateur": "bureau avec table en bois, ordinateur allumé, dossier de dossiers gris, téléphone fixe, chaise en cuir usée, calendrier mural avec des dates surlignées, lampe de bureau allumée, billet de 50 euros posé sur le bureau.",
-   "invite": "même bureau, mais vu de dos avec un t-shirt noir et des baskets, il tient un billet de 50 euros dans sa main gauche."
+  "decoupe": [
+   {
+    "replique": 0,
+    "plans": [
+     {
+      "debut": 0,
+      "plan": "moyen",
+      "cible": "presentateur",
+      "mouvement": "fixe",
+      "passage": "coupe"
+     },
+     {
+      "debut": 0.5,
+      "plan": "serre",
+      "cible": "invite",
+      "mouvement": "fixe",
+      "passage": "glisse"
+     }
+    ]
+   },
+   {
+    "replique": 38,
+    "plans": [
+     {
+      "debut": 0.7,
+      "plan": "large",
+      "cible": "presentateur",
+      "mouvement": "zoom_choc",
+      "passage": "file"
+     }
+    ]
+   }
+  ],
+  "cine": {
+   "vertige": false,
+   "etalonnage": "couleurs vives et contrastées pour accentuer l'agacement",
+   "grain": false
   },
   "lieux_de": {
-   "presentateur": "rue",
-   "invite": "salon"
+   "presentateur": "salon",
+   "invite": "rue"
   }
  },
  "doublage": {
-  "piste": "/tmp/tmpjyyps1dw/piste.wav",
-  "duree": 69.41,
-  "source": "https://www.tiktok.com/@same_same53/video/7694285566984195360",
-  "auteur": "same_same53",
-  "contexte": "Cette scène se déroule dans un bureau d'entreprise, où un patron (presentateur) tente de récupérer un trop-perçu d'argent auprès d'un ancien employé (invite) qui refuse catégoriquement de le rendre. L'ambiance est tendue et pleine de tensions.",
-  "evenements": [
-   [
-    63.0,
-    65.0,
-    "scream"
-   ],
-   [
-    65.0,
-    67.0,
-    "laughter"
-   ]
-  ],
+  "piste": "/tmp/tmps5ymgcnf/piste.wav",
+  "duree": 60.63,
+  "source": "https://www.tiktok.com/@vignianimation/video/7694387304126811424",
+  "auteur": "vignianimation",
+  "contexte": "Un patient, joué par un personnage exagérément exaspéré et maladroit, se rend dans une pharmacie tenue par un pharmacien pressé et agacé. Le dialogue tourne autour d'une consultation médicale absurde où le patient ne parvient pas à donner des informations claires sur son état de santé.",
+  "evenements": [],
   "visuel": {
-   "gestes": [],
-   "duree": 69.5,
-   "nb_plans": 1,
-   "duree_plan": 69.5,
-   "coupes": [],
+   "gestes": [
+    [
+     11.5,
+     0.36,
+     0.35
+    ],
+    [
+     26.0,
+     0.36,
+     0.74
+    ],
+    [
+     45.0,
+     0.35,
+     0.67
+    ]
+   ],
+   "duree": 61.0,
+   "nb_plans": 34,
+   "duree_plan": 1.79,
+   "coupes": [
+    3.0,
+    3.5,
+    4.0,
+    9.5,
+    10.0,
+    12.0,
+    13.0,
+    13.5,
+    16.0,
+    17.0,
+    17.5,
+    28.5,
+    29.0,
+    31.0,
+    35.0,
+    35.5,
+    36.5,
+    46.0,
+    46.5,
+    47.5,
+    48.0,
+    49.5,
+    53.0,
+    54.0,
+    54.5,
+    55.5,
+    56.5,
+    57.0,
+    58.0,
+    59.0,
+    59.5,
+    60.0,
+    60.5
+   ],
    "plans": {
     "tres_serre": 0.0,
     "serre": 0.0,
-    "moyen": 0.0,
-    "large": 1.0
+    "moyen": 0.967,
+    "large": 0.033
    },
    "camera": {
-    "fixe": 1.0,
+    "fixe": 0.943,
     "avance": 0.0,
     "recul": 0.0,
     "travelling": 0.0,
-    "epaule": 0.0
+    "epaule": 0.057
    },
-   "nb_personnes": 0,
-   "personnes": [],
-   "visages": false,
+   "nb_personnes": 1,
+   "personnes": [
+    {
+     "place": "gauche",
+     "presence": 0.648,
+     "habit": [
+      191,
+      199,
+      215
+     ],
+     "cheveux": [
+      41,
+      41,
+      41
+     ],
+     "sourire": 0.0,
+     "taille": 0.108,
+     "tete_penchee": 2.0,
+     "regard_cote": 0.975
+    },
+    {
+     "place": "droite",
+     "presence": 0.32,
+     "habit": [
+      206,
+      210,
+      218
+     ],
+     "cheveux": [
+      240,
+      238,
+      239
+     ],
+     "sourire": 0.0,
+     "taille": 0.122,
+     "tete_penchee": 1.7,
+     "regard_cote": 0.154
+    }
+   ],
+   "visages": true,
    "sourires": 0.0,
-   "energie": 0.062,
+   "energie": 0.135,
    "mur": [
-    0,
-    0,
-    0
+    177,
+    190,
+    215
    ],
    "palette": [
     [
-     0,
-     0,
-     0,
-     0.578
+     189,
+     200,
+     219,
+     0.481
     ],
     [
-     254,
-     254,
-     254,
-     0.39
+     163,
+     178,
+     210,
+     0.31
     ],
     [
-     29,
-     29,
-     29,
+     125,
+     130,
+     146,
+     0.083
+    ],
+    [
+     7,
+     8,
+     11,
+     0.074
+    ],
+    [
+     59,
+     65,
+     73,
+     0.04
+    ],
+    [
+     217,
+     117,
+     43,
      0.013
-    ],
-    [
-     204,
-     204,
-     204,
-     0.01
-    ],
-    [
-     101,
-     100,
-     100,
-     0.005
-    ],
-    [
-     151,
-     151,
-     151,
-     0.004
     ]
    ],
    "lumiere": {
-    "luminosite": 102.0,
-    "chaleur": 0.0,
-    "saturation": 0.1
+    "luminosite": 189.5,
+    "chaleur": -29.3,
+    "saturation": 50.4
    },
    "moment": "jour",
    "postures": []
   },
   "audio": {
-   "duree": 69.4,
+   "duree": 60.6,
    "nb_voix": 2,
    "voix": [
     {
-     "hz": 223,
+     "hz": 202,
      "genre": "f",
-     "part": 0.41
+     "part": 0.53
     },
     {
-     "hz": 192,
-     "genre": "f",
-     "part": 0.59
+     "hz": 166,
+     "genre": "?",
+     "part": 0.47
     }
    ],
-   "debit": 6.28,
-   "blanc_moyen": 0.28,
-   "coupes": 13,
-   "dynamique_db": 16.5,
-   "cris": 0.008,
+   "debit": 4.77,
+   "blanc_moyen": 0.3,
+   "coupes": 10,
+   "dynamique_db": 19.9,
+   "cris": 0.024,
    "musique": 0.41,
-   "impacts": 66,
-   "impacts_10s": 9.51,
-   "graves": 8,
-   "aigus": 58,
-   "sur_vanne": 26,
-   "evenements": {
-    "scream": 1,
-    "laughter": 1
-   },
+   "impacts": 52,
+   "impacts_10s": 8.58,
+   "graves": 3,
+   "aigus": 49,
+   "sur_vanne": 30,
+   "evenements": {},
    "emotions": {
-    "defiant": 6,
-    "indifferent": 4,
-    "smug": 4,
-    "angry": 3,
-    "sarcastic": 3,
-    "mocking": 3,
-    "serious": 2,
-    "annoyed": 1
+    "neutral": 11,
+    "loud": 11,
+    "annoyed": 8,
+    "confused": 4,
+    "whispered": 2,
+    "sarcastic": 1,
+    "sceptical": 1,
+    "denial": 1
    }
   },
-  "video_origine": "/tmp/tmpjyyps1dw/src.mp4",
+  "video_origine": "/tmp/tmps5ymgcnf/src.mp4",
   "debut": 0.0
  },
  "fiche": {
@@ -2662,7 +2088,17 @@
      8,
      9,
      10,
-     11,
+     11
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 0.0,
+    "decor": "pharmacie, comptoir en bois avec ordinateur, clavier, souris, étagères remplies de bouteilles et pots colorés.",
+    "titre": "L'arrivée du patient"
+   },
+   {
+    "scene": "2",
+    "repliques": [
      12,
      13,
      14,
@@ -2676,7 +2112,17 @@
      22,
      23,
      24,
-     25,
+     25
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 0.0,
+    "decor": "pharmacie, même décor, mais avec une lumière plus vive et des ombres exagérées pour montrer l'agacement.",
+    "titre": "Les symptômes"
+   },
+   {
+    "scene": "3",
+    "repliques": [
      26,
      27,
      28,
@@ -2684,13 +2130,33 @@
      30,
      31,
      32,
-     33
+     33,
+     34,
+     35,
+     36,
+     37,
+     38,
+     39,
+     40
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "bureau, table en bois avec ordinateur, dossier de dossiers, téléphone fixe, chaise en cuir, calendrier mural, lampe de bureau, billet de 50 euros",
-    "titre": "Conflit au bureau"
+    "decor": "pharmacie, même décor, mais avec un fond flou pour mettre en avant le dialogue final.",
+    "titre": "La fin de la consultation"
+   },
+   {
+    "scene": "4",
+    "repliques": [
+     38,
+     39,
+     40
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 0.0,
+    "decor": "pharmacie, comptoir avec un chargeur visible sur le comptoir, écran de l'ordinateur affichant une icône de batterie faible.",
+    "titre": "Problème technique"
    }
   ]
  },
@@ -2707,7 +2173,7 @@
    "poste": "ingé son",
    "controle": "mots à une vitesse possible",
    "ok": true,
-   "detail": "7 mot(s) trop courts",
+   "detail": "1 mot(s) trop courts",
    "revoir": false
   },
   {
@@ -2720,15 +2186,15 @@
   {
    "poste": "ingé son",
    "controle": "deux transcriptions d'accord",
-   "ok": true,
-   "detail": "88 % de mots identiques, 2 doute(s), 1 corrigé(s)",
+   "ok": false,
+   "detail": "70 % de mots identiques, 1 doute(s), 1 tranché(s) par une 3e écoute, 0 corrigé(s)",
    "revoir": false
   },
   {
    "poste": "casting voix",
    "controle": "témoin image (qui parle dans l'original)",
    "ok": true,
-   "detail": "34/37 phrases lisibles (mouvements)",
+   "detail": "44/55 phrases lisibles (mouvements)",
    "revoir": false
   },
   {
@@ -2742,7 +2208,7 @@
    "poste": "casting voix",
    "controle": "parole répartie entre les personnages",
    "ok": true,
-   "detail": "2 voix, la plus bavarde dit 59 %",
+   "detail": "2 voix, la plus bavarde dit 58 %",
    "revoir": false
   },
   {
@@ -2808,33 +2274,39 @@
   1
  ],
  "_voix_hz": {
-  "presentateur": 220,
-  "invite": 188
+  "presentateur": 193,
+  "invite": 165
  },
  "_voix_genre": {
-  "presentateur": "f",
+  "presentateur": "h",
   "invite": "h"
  },
  "realisation": {
   "moment": "jour",
   "lieux": [
-   "rue",
-   "salon"
+   "salon",
+   "rue"
   ],
   "gags": [
-   "Trop-perçu : l'argent qui ne veut pas partir",
-   "Quand le patron devient mendiant",
-   "Démission = Vol ?"
+   "Chargeur introuvable ? Essayez le bon sens !",
+   "Symptômes : 'Ça s'arrête pas' — Depuis quand ? Depuis la préhistoire."
   ],
   "ambiances": [
-   "poussiere"
+   "neon"
   ],
   "source": "auteur+image",
   "tenues": {
-   "presentateur": "chemise",
+   "presentateur": "blouse",
    "invite": "tshirt"
   },
   "plans": [
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
    "large/fixe",
    "large/fixe",
    "large/fixe",

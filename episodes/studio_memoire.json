@@ -5870,37 +5870,74 @@
   "cadence": "rapide"
  },
  {
-  "moment": "nuit",
+  "moment": "soir",
   "lieux": [
    "chambre"
   ],
   "source": "auteur+image",
-  "duree": 63.1,
+  "duree": 65.7,
   "plans": {
-   "large": 22
+   "large": 38
   },
   "mouvements": {
-   "fixe": 22
+   "fixe": 38
   },
   "costumes": {
    "presentateur": "tshirt",
-   "invite": "pull"
+   "invite": "chemise"
   },
   "figurants": 0,
   "ambiances": [
-   "pluie",
-   "vapeur"
+   "neon",
+   "poussiere"
   ],
-  "controle": "Humoriste 7.0/10 : 1 s Les vannes manquent de rythme et de réactivité. Le personnage ne réagit pas assez vite aux situations pour renforcer le côté comique.; 15 s La chute pourrait être plus surprenan",
-  "fichier": "2026-11-02_03h30_emission.mp4",
+  "controle": "Humoriste 7.8/10 : 1 s Les vannes manquent parfois de punch. Par exemple, 'Si je comprends bien' peut être plus drôle avec une réaction plus marquée du personnage.; 26 s Le gag sur le pistolet de camo",
+  "fichier": "2026-11-02_03h32_emission.mp4",
   "cine": {
    "focus": false,
-   "vertige": true,
+   "vertige": false,
    "tiers": true,
    "etalonnage": true,
    "profondeur": false,
-   "grain": false,
+   "grain": true,
    "reflets": false,
+   "son": true
+  },
+  "cadence": "rapide"
+ },
+ {
+  "moment": "soir",
+  "lieux": [
+   "bureau"
+  ],
+  "source": "auteur+image",
+  "duree": 38.7,
+  "plans": {
+   "large": 3
+  },
+  "mouvements": {
+   "fixe": 3
+  },
+  "costumes": {
+   "presentateur": "tshirt",
+   "invite": "chemise",
+   "envoyee": "blouse"
+  },
+  "figurants": 1,
+  "ambiances": [
+   "neon",
+   "poussiere"
+  ],
+  "controle": "Humoriste 6.8/10 : 0.4 s Le gag du sous-titrage initial manque de réactions visuelles marquées des personnages pour renforcer l'humour. Les expressions faciales restent trop neutres.; 25.2 s L'apparit",
+  "fichier": "2026-11-02_04h08_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": false,
+   "tiers": false,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": true,
+   "reflets": true,
    "son": true
   },
   "cadence": "rapide"
@@ -5908,35 +5945,35 @@
  {
   "moment": "jour",
   "lieux": [
-   "rue",
-   "salon"
+   "salon",
+   "rue"
   ],
   "source": "auteur+image",
-  "duree": 72.4,
+  "duree": 63.8,
   "plans": {
-   "large": 34
+   "large": 41
   },
   "mouvements": {
-   "fixe": 34
+   "fixe": 41
   },
   "costumes": {
-   "presentateur": "chemise",
+   "presentateur": "blouse",
    "invite": "tshirt"
   },
   "figurants": 0,
   "ambiances": [
-   "poussiere"
+   "neon"
   ],
-  "controle": "Humoriste 10.0/10 :  | Réalisateur 10.0/10 :  | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.1/10 : 0.1 s sous-titres trop rapides à lire",
-  "fichier": "2026-11-02_04h41_emission.mp4",
+  "controle": "Humoriste 7.8/10 : 28.0 s La vanne 'C’est pas noté' pourrait être plus drôle avec un bruitage ou une réaction visuelle plus marquée.; 57.1 s La chute sur 'Plus de batterie' est trop rapide et manque d",
+  "fichier": "2026-11-02_05h12_emission.mp4",
   "cine": {
    "focus": false,
    "vertige": false,
-   "tiers": false,
+   "tiers": true,
    "etalonnage": true,
-   "profondeur": false,
+   "profondeur": true,
    "grain": false,
-   "reflets": false,
+   "reflets": true,
    "son": true
   },
   "cadence": "rapide"
