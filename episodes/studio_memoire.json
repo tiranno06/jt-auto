@@ -6091,34 +6091,39 @@
   "cadence": "rapide"
  },
  {
-  "moment": "jour",
+  "moment": "soir",
   "lieux": [
-   "voiture"
+   "rue",
+   "salon"
   ],
   "source": "auteur+image",
-  "duree": 69.3,
+  "duree": 134.1,
   "plans": {
-   "large": 22
+   "large": 54
   },
   "mouvements": {
-   "fixe": 22
+   "fixe": 54
   },
   "costumes": {
-   "invite": "pull",
-   "presentateur": "chemise"
+   "presentateur": "tshirt",
+   "invite": "tshirt",
+   "envoyee": "robe"
   },
-  "figurants": 0,
-  "ambiances": [],
-  "controle": "Humoriste 7.0/10 : 28.3 s La chute sur l'idée d'avoir accouché dans une cour de récré n'est pas assez exploitée. Le public pourrait ne pas saisir l'humour absurde immédiatement.; 47.1 s La réplique '1",
-  "fichier": "2026-11-02_14h10_emission.mp4",
+  "figurants": 1,
+  "ambiances": [
+   "neon",
+   "poussiere"
+  ],
+  "controle": "Humoriste 7.0/10 : 54 s La confusion des prénoms s'enchaîne bien, mais on pourrait accentuer la gêne du personnage avec une animation plus marquée.; 116 s La chute arrive bien mais manque d'un petit t",
+  "fichier": "2026-11-02_14h37_emission.mp4",
   "cine": {
    "focus": false,
    "vertige": false,
-   "tiers": true,
-   "etalonnage": true,
+   "tiers": false,
+   "etalonnage": false,
    "profondeur": false,
-   "grain": false,
-   "reflets": false,
+   "grain": true,
+   "reflets": true,
    "son": true
   },
   "cadence": "rapide"
