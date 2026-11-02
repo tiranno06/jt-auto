@@ -6091,37 +6091,32 @@
   "cadence": "rapide"
  },
  {
-  "moment": "soir",
+  "moment": "jour",
   "lieux": [
-   "rue",
-   "salon"
+   "jardin"
   ],
   "source": "auteur+image",
-  "duree": 134.1,
+  "duree": 63.3,
   "plans": {
-   "large": 54
+   "large": 30
   },
   "mouvements": {
-   "fixe": 54
+   "fixe": 30
   },
   "costumes": {
    "presentateur": "tshirt",
-   "invite": "tshirt",
-   "envoyee": "robe"
+   "invite": "chemise"
   },
   "figurants": 1,
-  "ambiances": [
-   "neon",
-   "poussiere"
-  ],
-  "controle": "Humoriste 7.0/10 : 54 s La confusion des prénoms s'enchaîne bien, mais on pourrait accentuer la gêne du personnage avec une animation plus marquée.; 116 s La chute arrive bien mais manque d'un petit t",
-  "fichier": "2026-11-02_14h37_emission.mp4",
+  "ambiances": [],
+  "controle": "Humoriste 6.8/10 : 11.6 s La chute 'Tu prends de l'alcool partout où on va' est un peu longue à venir et manque d'impact.; 23.5 s L'humour sur 'avoue avec les filles quand il y a de l'alcool, c'est pl",
+  "fichier": "2026-11-02_15h10_emission.mp4",
   "cine": {
    "focus": false,
-   "vertige": false,
-   "tiers": false,
+   "vertige": true,
+   "tiers": true,
    "etalonnage": false,
-   "profondeur": false,
+   "profondeur": true,
    "grain": true,
    "reflets": true,
    "son": true
