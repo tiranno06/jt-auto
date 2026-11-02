@@ -1,997 +1,1918 @@
 {
- "titre": "MÈRE ET FILS DANS LA VOITURE",
- "sujet": "MÈRE ET FILS DANS LA VOITURE",
- "ecran": "MÈRE ET FILS",
+ "titre": "CAMBRIOLAGE ABSURDE",
+ "sujet": "CAMBRIOLAGE ABSURDE",
+ "ecran": "CAMBRIOLAGE",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "POV : Mère à 25 ans et fils à 11 ans",
- "question": "Comment réagiront-ils à cette révélation ?",
+ "titre_accroche": "POV : Vous êtes attaché pendant un cambriolage",
+ "question": "Et vous, vous auriez réagi comment ?",
  "running_gag": "",
  "verite": "",
  "repliques": [
   {
-   "p": "invite",
-   "t": "Moi je t'ai pas dit, j'ai un fils.",
-   "_deb": 0.18,
-   "_fin": 1.342,
+   "p": "presentateur",
+   "t": "Si je comprends bien là, vous m'avez digoté.",
+   "_deb": 0.06,
+   "_fin": 1.482,
    "_mots": [
     [
-     "Moi",
+     "Si",
      0.0,
      0.08
     ],
     [
      "je",
-     0.12,
-     0.181
+     0.14,
+     0.18
     ],
     [
-     "t'ai",
-     0.201,
-     0.281
+     "comprends",
+     0.24,
+     0.521
     ],
     [
-     "pas",
-     0.321,
-     0.421
+     "bien",
+     0.541,
+     0.641
     ],
     [
-     "dit,",
-     0.441,
-     0.541
-    ],
-    [
-     "j'ai",
+     "là,",
      0.641,
-     0.761
+     0.681
     ],
     [
-     "un",
-     0.842,
-     0.882
+     "vous",
+     0.701,
+     0.942
     ],
     [
-     "fils.",
-     0.942,
-     1.162
-    ]
-   ]
-  },
-  {
-   "p": "envoyee",
-   "t": "Ah ouais.",
-   "_deb": 1.863,
-   "_fin": 2.304,
-   "_mots": [
-    [
-     "Ah",
-     0.0,
-     0.04
+     "m'avez",
+     0.962,
+     1.102
     ],
     [
-     "ouais.",
-     0.06,
-     0.441
+     "digoté.",
+     1.142,
+     1.422
     ]
    ]
   },
   {
    "p": "invite",
-   "t": "Ouais.",
-   "_deb": 2.344,
-   "_fin": 2.464,
+   "t": "Oui d'accord, vous m'avez digoté là.",
+   "_deb": 1.723,
+   "_fin": 3.426,
    "_mots": [
     [
-     "Ouais.",
+     "Oui",
      0.0,
-     0.12
+     0.3
+    ],
+    [
+     "d'accord,",
+     0.4,
+     0.661
+    ],
+    [
+     "vous",
+     0.721,
+     0.901
+    ],
+    [
+     "m'avez",
+     1.001,
+     1.142
+    ],
+    [
+     "digoté",
+     1.162,
+     1.562
+    ],
+    [
+     "là.",
+     1.582,
+     1.703
     ]
    ]
   },
   {
    "p": "presentateur",
-   "t": "Il a quel âge.",
-   "_deb": 2.684,
-   "_fin": 3.125,
+   "t": "Vous allez me cambrioler Exactement, on va rien te laisser gros.",
+   "_deb": 3.426,
+   "_fin": 5.831,
    "_mots": [
     [
-     "Il",
+     "Vous",
      0.0,
      0.1
     ],
     [
-     "a",
+     "allez",
      0.1,
-     0.12
-    ],
-    [
-     "quel",
-     0.16,
-     0.281
-    ],
-    [
-     "âge.",
-     0.301,
-     0.441
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Il a 11 ans.",
-   "_deb": 3.405,
-   "_fin": 3.966,
-   "_mots": [
-    [
-     "Il",
-     0.0,
-     0.04
-    ],
-    [
-     "a",
-     0.06,
-     0.14
-    ],
-    [
-     "11",
-     0.155,
-     0.375
-    ],
-    [
-     "ans.",
-     0.461,
-     0.561
-    ]
-   ]
-  },
-  {
-   "p": "envoyee",
-   "t": "11 ans. Oui. Rappelle-moi ton âge, attends.",
-   "_deb": 4.4,
-   "_fin": 6.534,
-   "_mots": [
-    [
-     "11",
-     0.0,
-     0.16
-    ],
-    [
-     "ans.",
-     0.267,
-     0.367
-    ],
-    [
-     "Oui.",
-     0.608,
-     0.708
-    ],
-    [
-     "Rappelle-moi",
-     1.309,
-     1.609
-    ],
-    [
-     "ton",
-     1.629,
-     1.709
-    ],
-    [
-     "âge,",
-     1.769,
-     1.789
-    ],
-    [
-     "attends.",
-     1.65,
-     2.134
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Moi j'ai 25 ans.",
-   "_deb": 6.797,
-   "_fin": 8.008,
-   "_mots": [
-    [
-     "Moi",
-     0.0,
-     0.081
-    ],
-    [
-     "j'ai",
-     0.181,
-     0.383
-    ],
-    [
-     "25",
-     0.383,
-     0.883
-    ],
-    [
-     "ans.",
-     1.11,
-     1.211
-    ]
-   ]
-  },
-  {
-   "p": "envoyee",
-   "t": "Attends.",
-   "_deb": 12.778,
-   "_fin": 13.27,
-   "d": "[crying] Attends.",
-   "_mots": [
-    [
-     "Attends.",
-     0.0,
-     0.492
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Quoi.",
-   "_deb": 19.697,
-   "_fin": 19.84,
-   "d": "[crying] Quoi.",
-   "_mots": [
-    [
-     "Quoi.",
-     0.0,
-     0.143
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "T'étais dans la poussette en même temps que lui.",
-   "_deb": 21.014,
-   "_fin": 22.226,
-   "_mots": [
-    [
-     "T'étais",
-     0.0,
-     0.222
-    ],
-    [
-     "dans",
-     0.242,
-     0.343
-    ],
-    [
-     "la",
-     0.363,
-     0.424
-    ],
-    [
-     "poussette",
-     0.464,
-     0.707
-    ],
-    [
-     "en",
-     0.727,
-     0.788
-    ],
-    [
-     "même",
-     0.788,
-     0.929
-    ],
-    [
-     "temps",
-     0.929,
-     1.03
-    ],
-    [
-     "que",
-     1.03,
-     1.131
-    ],
-    [
-     "lui.",
-     1.131,
-     1.212
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Comment ça.",
-   "_deb": 23.317,
-   "_fin": 23.642,
-   "_mots": [
-    [
-     "Comment",
-     0.0,
-     0.224
-    ],
-    [
-     "ça.",
-     0.264,
-     0.325
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "T'as accouché dans une cour de récré.",
-   "_deb": 25.234,
-   "_fin": 26.245,
-   "_mots": [
-    [
-     "T'as",
-     0.0,
-     0.081
-    ],
-    [
-     "accouché",
-     0.101,
-     0.344
-    ],
-    [
-     "dans",
-     0.384,
-     0.485
-    ],
-    [
-     "une",
-     0.526,
-     0.607
-    ],
-    [
-     "cour",
-     0.607,
-     0.708
-    ],
-    [
-     "de",
-     0.728,
-     0.789
-    ],
-    [
-     "récré.",
-     0.809,
-     1.011
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Attends, j'ai pas compris là.",
-   "_deb": 27.855,
-   "_fin": 28.605,
-   "_mots": [
-    [
-     "Attends,",
-     0.0,
-     0.182
-    ],
-    [
-     "j'ai",
-     0.182,
-     0.263
-    ],
-    [
-     "pas",
-     0.284,
-     0.365
-    ],
-    [
-     "compris",
-     0.385,
-     0.649
-    ],
-    [
-     "là.",
-     0.689,
-     0.75
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "En fait, moi, pendant que je jouais au bi, toi tu faisais des déclarations de naissance.",
-   "_deb": 30.171,
-   "_fin": 35.188,
-   "_mots": [
-    [
-     "En",
-     0.0,
-     0.04
-    ],
-    [
-     "fait,",
-     0.542,
-     0.662
-    ],
-    [
-     "moi,",
-     0.723,
-     0.803
-    ],
-    [
-     "pendant",
-     1.284,
-     1.505
-    ],
-    [
-     "que",
-     1.525,
-     1.606
-    ],
-    [
-     "je",
-     1.626,
-     1.686
-    ],
-    [
-     "jouais",
-     1.746,
-     1.927
-    ],
-    [
-     "au",
-     1.947,
-     1.987
-    ],
-    [
-     "bi,",
-     2.027,
-     3.351
-    ],
-    [
-     "toi",
-     3.652,
-     3.753
-    ],
-    [
-     "tu",
-     3.813,
-     3.873
-    ],
-    [
-     "faisais",
-     3.933,
-     4.134
-    ],
-    [
-     "des",
-     4.134,
-     4.234
-    ],
-    [
-     "déclarations",
-     4.275,
-     4.676
-    ],
-    [
-     "de",
-     4.676,
-     4.716
-    ],
-    [
-     "naissance.",
-     4.716,
-     5.017
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Alors, ok, je sais que j'ai eu jeune, mais ça va.",
-   "_deb": 36.611,
-   "_fin": 39.522,
-   "_mots": [
-    [
-     "Alors,",
-     0.0,
-     0.281
-    ],
-    [
-     "ok,",
-     1.044,
-     1.084
-    ],
-    [
-     "je",
-     1.144,
-     1.225
-    ],
-    [
-     "sais",
-     1.285,
-     1.586
-    ],
-    [
-     "que",
-     1.666,
-     1.747
-    ],
-    [
-     "j'ai",
-     1.827,
-     1.987
-    ],
-    [
-     "eu",
-     2.028,
-     2.148
-    ],
-    [
-     "jeune,",
-     2.148,
-     2.369
-    ],
-    [
-     "mais",
-     2.429,
-     2.55
-    ],
-    [
-     "ça",
-     2.67,
-     2.75
-    ],
-    [
-     "va.",
-     2.831,
-     2.911
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Il y a quand même... ça va.",
-   "_deb": 39.883,
-   "_fin": 41.429,
-   "objet": "livre",
-   "_mots": [
-    [
-     "Il",
-     0.0,
-     0.04
-    ],
-    [
-     "y",
-     0.06,
-     0.081
-    ],
-    [
-     "a",
-     0.121,
-     0.141
-    ],
-    [
-     "quand",
-     0.341,
-     0.462
-    ],
-    [
-     "même...",
-     0.502,
-     0.683
-    ],
-    [
-     "ça",
-     1.345,
-     1.405
-    ],
-    [
-     "va.",
-     1.486,
-     1.546
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Mais attends, ça veut dire que tu l'as eu à quel âge ?",
-   "_deb": 43.131,
-   "_fin": 46.284,
-   "_mots": [
-    [
-     "Mais,",
-     0.0,
-     0.121
-    ],
-    [
-     "attends,",
-     0.149,
-     1.769
-    ],
-    [
-     "ça",
-     2.189,
-     2.229
-    ],
-    [
-     "veut",
-     2.289,
-     2.39
-    ],
-    [
-     "dire",
-     2.41,
-     2.51
-    ],
-    [
-     "que",
-     2.51,
-     2.571
-    ],
-    [
-     "tu",
-     2.571,
-     2.611
-    ],
-    [
-     "l'as",
-     2.611,
-     2.691
-    ],
-    [
-     "eu",
-     2.691,
-     2.751
-    ],
-    [
-     "à",
-     2.792,
-     2.812
-    ],
-    [
-     "quel",
-     2.812,
-     2.952
-    ],
-    [
-     "âge",
-     3.012,
-     3.153
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "14 ans.",
-   "_deb": 46.78,
-   "_fin": 47.469,
-   "_mots": [
-    [
-     "14",
-     0.0,
-     0.247
-    ],
-    [
-     "ans.",
-     0.247,
-     0.689
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "14 ans. Tu sais que même les sims, s'ils ne se plaisent pas à faire ça",
-   "_deb": 48.08,
-   "_fin": 50.968,
-   "_mots": [
-    [
-     "14",
-     0.0,
-     0.092
-    ],
-    [
-     "ans.",
-     0.092,
-     0.313
-    ],
-    [
-     "Tu",
-     1.017,
-     1.077
-    ],
-    [
-     "sais",
-     1.138,
-     1.238
-    ],
-    [
-     "que",
-     1.259,
-     1.339
-    ],
-    [
-     "même",
-     1.641,
-     1.822
-    ],
-    [
-     "les",
-     1.862,
-     1.962
-    ],
-    [
-     "sims,",
-     2.023,
-     2.204
-    ],
-    [
-     "s'ils",
-     2.224,
-     2.325
-    ],
-    [
-     "ne",
-     2.325,
-     2.365
-    ],
-    [
-     "se",
-     2.365,
-     2.405
-    ],
-    [
-     "plaisent",
-     2.405,
-     2.566
-    ],
-    [
-     "pas",
-     2.566,
-     2.646
-    ],
-    [
-     "à",
-     2.646,
-     2.666
-    ],
-    [
-     "faire",
-     2.666,
-     2.787
-    ],
-    [
-     "ça",
-     2.827,
-     2.888
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Sur le jeu, c'est interdit de faire ça.",
-   "_deb": 52.351,
-   "_fin": 53.816,
-   "_mots": [
-    [
-     "Sur",
-     0.0,
-     0.121
-    ],
-    [
-     "le",
-     0.121,
-     0.161
-    ],
-    [
-     "jeu,",
-     0.181,
-     0.281
-    ],
-    [
-     "c'est",
-     0.301,
-     0.482
-    ],
-    [
-     "interdit",
-     0.582,
-     0.923
-    ],
-    [
-     "de",
-     0.923,
-     0.963
-    ],
-    [
-     "faire",
-     0.983,
-     1.104
-    ],
-    [
-     "ça",
-     1.124,
-     1.184
-    ],
-    [
-     "sur",
-     1.244,
-     1.324
-    ],
-    [
-     "le",
-     1.365,
-     1.405
-    ],
-    [
-     "jeu.",
-     1.405,
-     1.465
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Bah écoute, c'est la vie. Moi après, je vois que tu me juges.",
-   "_deb": 54.478,
-   "_fin": 58.049,
-   "_mots": [
-    [
-     "Bah",
-     0.0,
-     0.14
-    ],
-    [
-     "écoute,",
-     0.16,
-     0.481
-    ],
-    [
-     "c'est",
-     0.702,
-     0.802
-    ],
-    [
-     "la",
-     0.802,
-     0.923
-    ],
-    [
-     "vie.",
-     0.963,
-     1.184
-    ],
-    [
-     "Moi",
-     1.464,
-     1.565
-    ],
-    [
-     "après,",
-     1.565,
-     1.745
-    ],
-    [
-     "je",
-     1.785,
-     1.826
-    ],
-    [
-     "vois",
-     2.167,
-     2.468
-    ],
-    [
-     "que",
-     2.648,
-     2.969
-    ],
-    [
-     "tu",
-     2.969,
-     3.029
+     0.24
     ],
     [
      "me",
-     3.11,
-     3.17
+     0.26,
+     0.32
     ],
     [
-     "juges.",
-     3.23,
-     3.571
+     "cambrioler",
+     0.36,
+     0.801
+    ],
+    [
+     "Exactement,",
+     0.981,
+     1.582
+    ],
+    [
+     "on",
+     1.602,
+     1.662
+    ],
+    [
+     "va",
+     1.682,
+     1.722
+    ],
+    [
+     "rien",
+     1.762,
+     1.903
+    ],
+    [
+     "te",
+     1.923,
+     1.983
+    ],
+    [
+     "laisser",
+     2.043,
+     2.303
+    ],
+    [
+     "gros.",
+     2.343,
+     2.405
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Oh point tu rigoles, point tu rigoles.",
+   "_deb": 5.831,
+   "_fin": 8.139,
+   "_mots": [
+    [
+     "Oh",
+     0.0,
+     1.284
+    ],
+    [
+     "point",
+     1.345,
+     1.505
+    ],
+    [
+     "tu",
+     1.525,
+     1.565
+    ],
+    [
+     "rigoles,",
+     1.585,
+     1.866
+    ],
+    [
+     "point",
+     1.866,
+     1.987
+    ],
+    [
+     "tu",
+     2.007,
+     2.047
+    ],
+    [
+     "rigoles.",
+     2.047,
+     2.308
     ]
    ]
   },
   {
    "p": "presentateur",
-   "t": "ça veut dire en fait mais tu l'as fait entre deux épisodes d'Odora l'exploratrice.",
-   "_deb": 60.071,
-   "_fin": 65.689,
-   "objet": "tablette",
-   "chute": true,
+   "t": "Non parce qu'en fait je suis pas matérialiste.",
+   "_deb": 8.199,
+   "_fin": 9.584,
    "_mots": [
     [
-     "ça",
+     "Non",
      0.0,
-     0.041
+     0.101
     ],
     [
-     "veut",
-     0.081,
-     0.181
+     "parce",
+     0.141,
+     0.241
     ],
     [
-     "dire",
-     0.201,
-     0.321
-    ],
-    [
-     "en",
-     0.342,
-     0.402
+     "qu'en",
+     0.261,
+     0.362
     ],
     [
      "fait",
      0.402,
-     0.422
+     0.502
     ],
     [
-     "mais",
-     0.049,
-     1.449
+     "je",
+     0.502,
+     0.542
+    ],
+    [
+     "suis",
+     0.542,
+     0.663
+    ],
+    [
+     "pas",
+     0.663,
+     0.763
+    ],
+    [
+     "matérialiste.",
+     0.803,
+     1.385
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Donc vraiment prenez ce que vous voulez, il y a la télé là si tu veux.",
+   "_deb": 9.625,
+   "_fin": 11.755,
+   "_mots": [
+    [
+     "Donc",
+     0.0,
+     0.18
+    ],
+    [
+     "vraiment",
+     0.18,
+     0.381
+    ],
+    [
+     "prenez",
+     0.441,
+     0.662
+    ],
+    [
+     "ce",
+     0.702,
+     0.742
+    ],
+    [
+     "que",
+     0.742,
+     0.823
+    ],
+    [
+     "vous",
+     0.823,
+     0.903
+    ],
+    [
+     "voulez,",
+     0.923,
+     1.084
+    ],
+    [
+     "il",
+     1.124,
+     1.284
+    ],
+    [
+     "y",
+     1.284,
+     1.304
+    ],
+    [
+     "a",
+     1.324,
+     1.344
+    ],
+    [
+     "la",
+     1.246,
+     1.326
+    ],
+    [
+     "télé",
+     1.387,
+     1.568
+    ],
+    [
+     "là",
+     1.648,
+     1.708
+    ],
+    [
+     "si",
+     1.768,
+     1.809
     ],
     [
      "tu",
-     1.449,
-     2.709
+     1.849,
+     1.929
     ],
     [
-     "l'as",
-     2.93,
-     3.05
+     "veux.",
+     1.989,
+     2.13
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Et il y a l'imprimante aussi là, n'hésite pas à la prendre.",
+   "_deb": 11.876,
+   "_fin": 13.744,
+   "_mots": [
+    [
+     "Et",
+     0.0,
+     0.1
     ],
     [
-     "fait",
-     3.07,
-     3.171
+     "il",
+     0.12,
+     0.16
     ],
     [
-     "entre",
-     3.211,
-     3.351
+     "y",
+     0.16,
+     0.18
     ],
     [
-     "deux",
-     3.451,
-     3.592
+     "a",
+     0.22,
+     0.241
     ],
     [
-     "épisodes",
-     3.933,
-     4.274
+     "l'imprimante",
+     0.281,
+     0.743
     ],
     [
-     "d'Odora",
-     4.294,
-     4.916
+     "aussi",
+     0.783,
+     0.964
     ],
     [
-     "l'exploratrice.",
-     4.976,
-     5.618
+     "là,",
+     0.984,
+     1.044
+    ],
+    [
+     "n'hésite",
+     1.165,
+     1.446
+    ],
+    [
+     "pas",
+     1.466,
+     1.526
+    ],
+    [
+     "à",
+     1.546,
+     1.566
+    ],
+    [
+     "la",
+     1.566,
+     1.627
+    ],
+    [
+     "prendre.",
+     1.667,
+     1.868
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Parce qu'il y a bientôt, je vais m'en débarrasser je te mens pas.",
+   "_deb": 13.764,
+   "_fin": 15.895,
+   "_mots": [
+    [
+     "Parce",
+     0.0,
+     0.261
+    ],
+    [
+     "qu'il",
+     0.281,
+     0.381
+    ],
+    [
+     "y",
+     0.422,
+     0.442
+    ],
+    [
+     "a",
+     0.442,
+     0.462
+    ],
+    [
+     "bientôt,",
+     0.462,
+     1.105
+    ],
+    [
+     "je",
+     1.105,
+     1.265
+    ],
+    [
+     "vais",
+     1.305,
+     1.325
+    ],
+    [
+     "m'en",
+     1.207,
+     1.287
+    ],
+    [
+     "débarrasser",
+     1.328,
+     1.709
+    ],
+    [
+     "je",
+     1.729,
+     1.789
+    ],
+    [
+     "te",
+     1.809,
+     1.85
+    ],
+    [
+     "mens",
+     1.89,
+     1.99
+    ],
+    [
+     "pas.",
+     2.03,
+     2.131
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Vas-y vas-y.",
+   "_deb": 16.015,
+   "_fin": 16.437,
+   "_mots": [
+    [
+     "Vas-y",
+     0.0,
+     0.201
+    ],
+    [
+     "vas-y.",
+     0.241,
+     0.422
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Toi je vois t'es venu, t'es armé comme sur BO2 Tranquille, y a rien, je vais pas bouger.",
+   "_deb": 16.477,
+   "_fin": 20.755,
+   "_mots": [
+    [
+     "Toi",
+     0.0,
+     0.08
+    ],
+    [
+     "je",
+     0.14,
+     0.181
+    ],
+    [
+     "vois",
+     0.201,
+     0.281
+    ],
+    [
+     "t'es",
+     0.301,
+     0.442
+    ],
+    [
+     "venu,",
+     0.462,
+     0.622
+    ],
+    [
+     "t'es",
+     0.783,
+     0.863
+    ],
+    [
+     "armé",
+     0.903,
+     1.024
+    ],
+    [
+     "comme",
+     1.124,
+     1.285
+    ],
+    [
+     "sur",
+     1.325,
+     1.425
+    ],
+    [
+     "BO2",
+     1.486,
+     1.546
+    ],
+    [
+     "Tranquille,",
+     1.546,
+     2.048
+    ],
+    [
+     "y",
+     2.108,
+     2.128
+    ],
+    [
+     "a",
+     2.148,
+     2.168
+    ],
+    [
+     "rien,",
+     2.188,
+     2.269
+    ],
+    [
+     "je",
+     2.289,
+     2.329
+    ],
+    [
+     "vais",
+     2.329,
+     2.55
+    ],
+    [
+     "pas",
+     3.032,
+     3.413
+    ],
+    [
+     "bouger.",
+     4.118,
+     4.278
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Je vois t'as une arme et tout, pistolet c'est ça.",
+   "_deb": 20.775,
+   "_fin": 22.622,
+   "_mots": [
+    [
+     "Je",
+     0.0,
+     0.041
+    ],
+    [
+     "vois",
+     0.061,
+     0.141
+    ],
+    [
+     "t'as",
+     0.141,
+     0.241
+    ],
+    [
+     "une",
+     0.322,
+     0.382
+    ],
+    [
+     "arme",
+     0.462,
+     0.583
+    ],
+    [
+     "et",
+     0.683,
+     0.743
+    ],
+    [
+     "tout,",
+     0.763,
+     0.904
+    ],
+    [
+     "pistolet",
+     1.004,
+     1.325
+    ],
+    [
+     "c'est",
+     1.506,
+     1.787
+    ],
+    [
+     "ça.",
+     1.787,
+     1.847
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Ouais c'est un nouveau celui-là, ça va t'aimes bien ou quoi.",
+   "_deb": 22.622,
+   "_fin": 24.148,
+   "_mots": [
+    [
+     "Ouais",
+     0.0,
+     0.221
+    ],
+    [
+     "c'est",
+     0.241,
+     0.342
+    ],
+    [
+     "un",
+     0.342,
+     0.382
+    ],
+    [
+     "nouveau",
+     0.402,
+     0.603
+    ],
+    [
+     "celui-là,",
+     0.663,
+     0.884
+    ],
+    [
+     "ça",
+     0.944,
+     0.984
+    ],
+    [
+     "va",
+     1.045,
+     1.085
+    ],
+    [
+     "t'aimes",
+     1.125,
+     1.285
+    ],
+    [
+     "bien",
+     1.285,
+     1.406
+    ],
+    [
+     "ou",
+     1.406,
+     1.446
+    ],
+    [
+     "quoi.",
+     1.446,
+     1.526
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Il passe bien le camouflage dessus, franchement j'aime bien.",
+   "_deb": 24.168,
+   "_fin": 25.816,
+   "_mots": [
+    [
+     "Il",
+     0.0,
+     0.041
+    ],
+    [
+     "passe",
+     0.041,
+     0.161
+    ],
+    [
+     "bien",
+     0.261,
+     0.281
+    ],
+    [
+     "le",
+     0.203,
+     0.243
+    ],
+    [
+     "camouflage",
+     0.263,
+     0.665
+    ],
+    [
+     "dessus,",
+     0.705,
+     0.886
+    ],
+    [
+     "franchement",
+     0.906,
+     1.167
+    ],
+    [
+     "j'aime",
+     1.207,
+     1.367
+    ],
+    [
+     "bien.",
+     1.468,
+     1.648
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Ouais c'est vrai.",
+   "_deb": 25.877,
+   "_fin": 26.72,
+   "_mots": [
+    [
+     "Ouais",
+     0.0,
+     0.18
+    ],
+    [
+     "c'est",
+     0.642,
+     0.742
+    ],
+    [
+     "vrai.",
+     0.742,
+     0.843
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Franchement les gars régalez-vous, moi je suis pas un mec tu vois, je vais pas te défendre.",
+   "_deb": 26.78,
+   "_fin": 29.732,
+   "_mots": [
+    [
+     "Franchement",
+     0.0,
+     0.301
+    ],
+    [
+     "les",
+     0.341,
+     0.401
+    ],
+    [
+     "gars",
+     0.441,
+     0.522
+    ],
+    [
+     "régalez-vous,",
+     0.562,
+     0.983
+    ],
+    [
+     "moi",
+     1.044,
+     1.124
+    ],
+    [
+     "je",
+     1.124,
+     1.204
+    ],
+    [
+     "suis",
+     1.204,
+     1.325
+    ],
+    [
+     "pas",
+     1.345,
+     1.405
+    ],
+    [
+     "un",
+     1.405,
+     1.465
+    ],
+    [
+     "mec",
+     1.586,
+     1.726
+    ],
+    [
+     "tu",
+     1.766,
+     1.806
+    ],
+    [
+     "vois,",
+     2.027,
+     2.288
+    ],
+    [
+     "je",
+     2.308,
+     2.368
+    ],
+    [
+     "vais",
+     2.408,
+     2.609
+    ],
+    [
+     "pas",
+     2.669,
+     2.79
+    ],
+    [
+     "te",
+     2.79,
+     2.81
+    ],
+    [
+     "défendre.",
+     2.37,
+     2.952
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "T'es un bon.",
+   "_deb": 29.772,
+   "_fin": 30.575,
+   "_mots": [
+    [
+     "T'es",
+     0.0,
+     0.241
+    ],
+    [
+     "un",
+     0.261,
+     0.402
+    ],
+    [
+     "bon.",
+     0.442,
+     0.803
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Ça c'est rien, voilà vous êtes venu armé et tout.",
+   "_deb": 30.575,
+   "_fin": 32.663,
+   "_mots": [
+    [
+     "Ça",
+     0.0,
+     0.04
+    ],
+    [
+     "c'est",
+     0.121,
+     0.341
+    ],
+    [
+     "rien,",
+     0.361,
+     0.502
+    ],
+    [
+     "voilà",
+     0.642,
+     0.783
+    ],
+    [
+     "vous",
+     0.843,
+     0.923
+    ],
+    [
+     "êtes",
+     0.964,
+     1.064
+    ],
+    [
+     "venu",
+     1.104,
+     1.245
+    ],
+    [
+     "armé",
+     1.445,
+     1.686
+    ],
+    [
+     "et",
+     1.726,
+     1.927
+    ],
+    [
+     "tout.",
+     1.947,
+     2.088
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Ouais c'est vrai.",
+   "_deb": 32.703,
+   "_fin": 33.285,
+   "_mots": [
+    [
+     "Ouais",
+     0.0,
+     0.341
+    ],
+    [
+     "c'est",
+     0.341,
+     0.421
+    ],
+    [
+     "vrai.",
+     0.441,
+     0.582
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Je suis bien, je suis bien.",
+   "_deb": 33.285,
+   "_fin": 34.67,
+   "_mots": [
+    [
+     "Je",
+     0.0,
+     0.04
+    ],
+    [
+     "suis",
+     0.04,
+     0.2
+    ],
+    [
+     "bien,",
+     0.221,
+     0.341
+    ],
+    [
+     "je",
+     0.983,
+     1.043
+    ],
+    [
+     "suis",
+     1.043,
+     1.144
+    ],
+    [
+     "bien.",
+     1.284,
+     1.385
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Il a raison les gars. Bah oui c'est vrai t'es bien là, t'es bien.",
+   "_deb": 34.551,
+   "_fin": 36.4,
+   "_mots": [
+    [
+     "Il",
+     0.119,
+     0.179
+    ],
+    [
+     "a",
+     0.199,
+     0.219
+    ],
+    [
+     "raison",
+     0.0,
+     0.141
+    ],
+    [
+     "les",
+     0.181,
+     0.261
+    ],
+    [
+     "gars.",
+     0.302,
+     0.462
+    ],
+    [
+     "Bah",
+     0.663,
+     0.764
+    ],
+    [
+     "oui",
+     0.824,
+     0.904
+    ],
+    [
+     "c'est",
+     0.904,
+     1.045
+    ],
+    [
+     "vrai",
+     1.045,
+     1.125
+    ],
+    [
+     "t'es",
+     1.145,
+     1.226
+    ],
+    [
+     "bien",
+     1.286,
+     1.427
+    ],
+    [
+     "là,",
+     1.467,
+     1.527
+    ],
+    [
+     "t'es",
+     1.628,
+     1.708
+    ],
+    [
+     "bien.",
+     1.748,
+     1.849
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "J'ai assis là, je suis bien. Donc prenez ce que vous voulez là, il y a de tout de toute façon.",
+   "_deb": 36.42,
+   "_fin": 39.235,
+   "_mots": [
+    [
+     "J'ai",
+     0.0,
+     0.06
+    ],
+    [
+     "assis",
+     0.12,
+     0.341
+    ],
+    [
+     "là,",
+     0.402,
+     0.462
+    ],
+    [
+     "je",
+     0.502,
+     0.582
+    ],
+    [
+     "suis",
+     0.582,
+     0.663
+    ],
+    [
+     "bien.",
+     0.663,
+     0.803
+    ],
+    [
+     "Donc",
+     0.803,
+     0.984
+    ],
+    [
+     "prenez",
+     0.984,
+     1.205
+    ],
+    [
+     "ce",
+     1.245,
+     1.286
+    ],
+    [
+     "que",
+     1.326,
+     1.406
+    ],
+    [
+     "vous",
+     1.426,
+     1.547
+    ],
+    [
+     "voulez",
+     1.567,
+     1.788
+    ],
+    [
+     "là,",
+     2.15,
+     2.17
+    ],
+    [
+     "il",
+     1.75,
+     1.79
+    ],
+    [
+     "y",
+     1.79,
+     1.81
+    ],
+    [
+     "a",
+     1.891,
+     1.911
+    ],
+    [
+     "de",
+     1.971,
+     2.011
+    ],
+    [
+     "tout",
+     2.031,
+     2.293
+    ],
+    [
+     "de",
+     2.313,
+     2.373
+    ],
+    [
+     "toute",
+     2.454,
+     2.594
+    ],
+    [
+     "façon.",
+     2.614,
+     2.815
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Il y a même un peu d'argent sur le comptoir là si vous voulez.",
+   "_deb": 39.577,
+   "_fin": 41.306,
+   "_mots": [
+    [
+     "Il",
+     0.0,
+     0.221
+    ],
+    [
+     "y",
+     0.221,
+     0.241
+    ],
+    [
+     "a",
+     0.241,
+     0.262
+    ],
+    [
+     "même",
+     0.282,
+     0.402
+    ],
+    [
+     "un",
+     0.442,
+     0.483
+    ],
+    [
+     "peu",
+     0.483,
+     0.563
+    ],
+    [
+     "d'argent",
+     0.603,
+     0.804
+    ],
+    [
+     "sur",
+     0.824,
+     0.945
+    ],
+    [
+     "le",
+     0.965,
+     1.005
+    ],
+    [
+     "comptoir",
+     1.046,
+     1.327
+    ],
+    [
+     "là",
+     1.367,
+     1.407
+    ],
+    [
+     "si",
+     1.427,
+     1.468
+    ],
+    [
+     "vous",
+     1.468,
+     1.608
+    ],
+    [
+     "voulez.",
+     1.608,
+     1.729
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Oh oh oh, t'as un bon, j'ai pas vu, t'es un bon.",
+   "_deb": 41.306,
+   "_fin": 43.778,
+   "_mots": [
+    [
+     "Oh",
+     0.0,
+     0.06
+    ],
+    [
+     "oh",
+     0.06,
+     0.101
+    ],
+    [
+     "oh,",
+     0.101,
+     0.261
+    ],
+    [
+     "t'as",
+     0.786,
+     0.866
+    ],
+    [
+     "un",
+     0.926,
+     0.987
+    ],
+    [
+     "bon,",
+     1.027,
+     1.127
+    ],
+    [
+     "j'ai",
+     1.629,
+     1.79
+    ],
+    [
+     "pas",
+     1.81,
+     1.91
+    ],
+    [
+     "vu,",
+     1.93,
+     2.011
+    ],
+    [
+     "t'es",
+     2.191,
+     2.252
+    ],
+    [
+     "un",
+     2.292,
+     2.332
+    ],
+    [
+     "bon.",
+     2.372,
+     2.472
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "T'es en bon.",
+   "_deb": 43.778,
+   "_fin": 44.019,
+   "_mots": [
+    [
+     "T'es",
+     0.0,
+     0.061
+    ],
+    [
+     "en",
+     0.121,
+     0.161
+    ],
+    [
+     "bon.",
+     0.161,
+     0.241
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "T'es rigole les gars Tranquille les gars Tranquille.",
+   "_deb": 44.059,
+   "_fin": 45.846,
+   "_mots": [
+    [
+     "T'es",
+     0.0,
+     0.081
+    ],
+    [
+     "rigole",
+     0.101,
+     0.362
+    ],
+    [
+     "les",
+     0.382,
+     0.482
+    ],
+    [
+     "gars",
+     0.502,
+     0.643
+    ],
+    [
+     "Tranquille",
+     0.824,
+     1.145
+    ],
+    [
+     "les",
+     1.145,
+     1.225
+    ],
+    [
+     "gars",
+     1.245,
+     1.366
+    ],
+    [
+     "Tranquille.",
+     1.386,
+     1.787
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Vas-y raconte pas ta liste.",
+   "_deb": 45.887,
+   "_fin": 46.67,
+   "_mots": [
+    [
+     "Vas-y",
+     0.0,
+     0.12
+    ],
+    [
+     "raconte",
+     0.2,
+     0.401
+    ],
+    [
+     "pas",
+     0.401,
+     0.481
+    ],
+    [
+     "ta",
+     0.501,
+     0.562
+    ],
+    [
+     "liste.",
+     0.602,
+     0.783
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Vas-y.",
+   "_deb": 46.711,
+   "_fin": 46.912,
+   "_mots": [
+    [
+     "Vas-y.",
+     0.0,
+     0.201
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Bon les gars 4-4-2 comme on a dit. On va commencer à prendre la play.",
+   "_deb": 47.032,
+   "_fin": 49.442,
+   "_mots": [
+    [
+     "Bon",
+     0.0,
+     0.081
+    ],
+    [
+     "les",
+     0.121,
+     0.201
+    ],
+    [
+     "gars",
+     0.241,
+     0.603
+    ],
+    [
+     "4-4-2",
+     0.623,
+     0.824
+    ],
+    [
+     "comme",
+     0.824,
+     0.964
+    ],
+    [
+     "on",
+     0.984,
+     1.025
+    ],
+    [
+     "a",
+     1.105,
+     1.125
+    ],
+    [
+     "dit.",
+     1.165,
+     1.306
+    ],
+    [
+     "On",
+     1.406,
+     1.446
+    ],
+    [
+     "va",
+     1.466,
+     1.527
+    ],
+    [
+     "commencer",
+     1.587,
+     1.848
+    ],
+    [
+     "à",
+     1.848,
+     1.868
+    ],
+    [
+     "prendre",
+     1.868,
+     2.189
+    ],
+    [
+     "la",
+     2.189,
+     2.229
+    ],
+    [
+     "play.",
+     2.29,
+     2.41
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Ok la play.",
+   "_deb": 49.603,
+   "_fin": 50.004,
+   "objet": "tablette",
+   "_mots": [
+    [
+     "Ok",
+     0.0,
+     0.08
+    ],
+    [
+     "la",
+     0.16,
+     0.261
+    ],
+    [
+     "play.",
+     0.281,
+     0.401
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "On prend la play. Et après on.",
+   "_deb": 50.326,
+   "_fin": 51.472,
+   "_mots": [
+    [
+     "On",
+     0.0,
+     0.04
+    ],
+    [
+     "prend",
+     0.06,
+     0.241
+    ],
+    [
+     "la",
+     0.261,
+     0.341
+    ],
+    [
+     "play.",
+     0.381,
+     0.562
+    ],
+    [
+     "Et",
+     0.622,
+     0.662
+    ],
+    [
+     "après",
+     0.722,
+     0.963
+    ],
+    [
+     "on.",
+     1.085,
+     1.146
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Attendez attendez.",
+   "_deb": 51.632,
+   "_fin": 53.016,
+   "_mots": [
+    [
+     "Attendez",
+     0.0,
+     0.842
+    ],
+    [
+     "attendez.",
+     0.883,
+     1.384
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Quoi.",
+   "_deb": 53.337,
+   "_fin": 53.457,
+   "_mots": [
+    [
+     "Quoi.",
+     0.0,
+     0.12
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Vous allez prendre quoi vous avez dit.",
+   "_deb": 53.678,
+   "_fin": 54.982,
+   "_mots": [
+    [
+     "Vous",
+     0.0,
+     0.08
+    ],
+    [
+     "allez",
+     0.12,
+     0.241
+    ],
+    [
+     "prendre",
+     0.281,
+     0.441
+    ],
+    [
+     "quoi",
+     0.461,
+     0.722
+    ],
+    [
+     "vous",
+     0.782,
+     1.123
+    ],
+    [
+     "avez",
+     1.123,
+     1.203
+    ],
+    [
+     "dit.",
+     1.243,
+     1.304
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "On va prendre la play.",
+   "_deb": 55.002,
+   "_fin": 55.383,
+   "_mots": [
+    [
+     "On",
+     0.0,
+     0.04
+    ],
+    [
+     "va",
+     0.04,
+     0.08
+    ],
+    [
+     "prendre",
+     0.08,
+     0.24
+    ],
+    [
+     "la",
+     0.26,
+     0.321
+    ],
+    [
+     "play.",
+     0.361,
+     0.381
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Vous allez prendre la play.",
+   "_deb": 55.02,
+   "_fin": 56.887,
+   "_mots": [
+    [
+     "Vous",
+     0.0,
+     1.04
+    ],
+    [
+     "allez",
+     1.245,
+     1.406
+    ],
+    [
+     "prendre",
+     1.426,
+     1.606
+    ],
+    [
+     "la",
+     1.646,
+     1.687
+    ],
+    [
+     "play.",
+     1.727,
+     1.867
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Ouais c'est ça ta play.",
+   "_deb": 57.128,
+   "_fin": 57.852,
+   "_mots": [
+    [
+     "Ouais",
+     0.0,
+     0.14
+    ],
+    [
+     "c'est",
+     0.18,
+     0.261
+    ],
+    [
+     "ça",
+     0.321,
+     0.361
+    ],
+    [
+     "ta",
+     0.481,
+     0.541
+    ],
+    [
+     "play.",
+     0.563,
+     0.724
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Les gars l'abonnement PS Plus. Il s'est renouvelé hier. Alors que wesh.",
+   "_deb": 58.193,
+   "_fin": 61.025,
+   "objet": "tablette",
+   "_mots": [
+    [
+     "Les",
+     0.0,
+     0.081
+    ],
+    [
+     "gars",
+     0.101,
+     0.241
+    ],
+    [
+     "l'abonnement",
+     0.241,
+     0.543
+    ],
+    [
+     "PS",
+     0.623,
+     0.804
+    ],
+    [
+     "Plus.",
+     0.924,
+     1.085
+    ],
+    [
+     "Il",
+     1.185,
+     1.225
+    ],
+    [
+     "s'est",
+     1.265,
+     1.366
+    ],
+    [
+     "renouvelé",
+     1.386,
+     1.627
+    ],
+    [
+     "hier.",
+     1.747,
+     1.988
+    ],
+    [
+     "Alors",
+     2.37,
+     2.571
+    ],
+    [
+     "que",
+     2.571,
+     2.651
+    ],
+    [
+     "wesh.",
+     2.651,
+     2.832
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Wesh wesh wesh",
+   "_deb": 61.165,
+   "_fin": 62.15,
+   "chute": true,
+   "_mots": [
+    [
+     "Wesh",
+     0.0,
+     0.181
+    ],
+    [
+     "wesh",
+     0.221,
+     0.422
+    ],
+    [
+     "wesh",
+     0.462,
+     0.985
     ]
    ]
   }
  ],
  "bandeau": [],
  "gag": null,
- "legende": "Une conversation qui révèle des vérités inattendues.",
+ "legende": "Quand le PS Plus vaut plus cher que tout le reste.",
  "hashtags": [
   "petitsdramas",
-  "merefils",
-  "conversationvoiture",
-  "revelation",
-  "humour",
-  "parentalite",
-  "surprise"
+  "cambriolage",
+  "humourabsurde",
+  "psplus",
+  "tiktokdrama",
+  "reaction",
+  "stealthis"
  ],
  "sources": [
-  "https://www.tiktok.com/@yan_animation0/video/7655759122461134112"
+  "https://www.tiktok.com/@vignianimation/video/7701771541142342945"
  ],
  "decoupage": [
   {
@@ -1018,513 +1939,309 @@
     18,
     19,
     20,
-    21
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37
    ],
    "lieu": "",
    "son": "",
    "duree": 0.0,
-   "decor": "car interior, front seat, black suit, surprised expressions, road outside",
-   "titre": "L'explication"
+   "decor": "chambre avec une chaise en bois, une télé allumée, une imprimante sur un bureau, des chaînes autour des poignets et des pieds de l'invite. Éclairage tamisé.",
+   "titre": "Le cambriolage absurde"
   }
  ],
  "studio": {
-  "moment": "jour",
+  "moment": "soir",
   "lieux": [
-   "voiture"
+   "chambre"
   ],
   "costumes": {
-   "invite": {
-    "haut": "red tank top",
-    "c_haut": "red",
-    "bas": "jeans",
-    "chaussures": "baskets",
-    "details": [
-     "bracelets"
-    ],
-    "chapeau": null,
-    "cheveux": "herisse",
-    "c_cheveux": "black"
-   },
    "presentateur": {
-    "haut": "black suit",
-    "c_haut": "black",
+    "haut": "tshirt",
+    "c_haut": "rouge",
+    "motif": "uni",
     "bas": "pantalon",
     "chaussures": "baskets",
     "details": [
-     "lunettes_soleil",
-     "montre"
+     "barbe_courte",
+     "lunettes_soleil"
     ],
     "chapeau": null,
     "cheveux": "court",
-    "c_cheveux": "black"
+    "c_cheveux": "brun"
    },
-   "envoyee": {
-    "haut": "red tank top",
-    "c_haut": "red",
-    "bas": "short",
-    "chaussures": "baskets",
+   "invite": {
+    "haut": "chemise",
+    "c_haut": "blanc",
+    "motif": "uni",
+    "bas": "pantalon",
+    "chaussures": "ville",
     "details": [
-     "bracelet"
+     "chaîne_autour_poignet",
+     "chaîne_autour_pied",
+     "sourire_forcé"
     ],
     "chapeau": null,
-    "cheveux": "tresses",
-    "c_cheveux": "black"
+    "cheveux": "long",
+    "c_cheveux": "blond"
    }
   },
   "metiers": {},
   "personnages": {
-   "invite": {
-    "genre": "f",
-    "age": 25,
-    "taille": 0.9,
-    "corpulence": 0.5,
-    "cheveux": "herisse",
-    "barbe": "rien"
-   },
    "presentateur": {
-    "genre": "m",
-    "age": 11,
-    "taille": 0.65,
-    "corpulence": 0.4,
+    "genre": "h",
+    "age": 35,
+    "taille": 1,
+    "corpulence": 0.7,
     "cheveux": "court",
-    "barbe": "rien"
+    "barbe": "trois_jours"
    },
-   "envoyee": {
-    "genre": "f",
-    "age": 30,
-    "taille": 0.9,
-    "corpulence": 0.5,
-    "cheveux": "tresses",
+   "invite": {
+    "genre": "h",
+    "age": 40,
+    "taille": 1,
+    "corpulence": 0.6,
+    "cheveux": "long",
     "barbe": "rien"
    }
   },
   "gags": [
-   "Accouchement en cour de récré : 10/10",
-   "Les Sims n'auraient pas approuvé",
-   "Odora l'exploratrice : témoin indirect"
+   "Abonnement PS Plus : La vraie fortune",
+   "Télé : Toujours allumée, jamais regardée",
+   "Imprimante : Dernière en date, jamais utilisée"
   ],
   "cadence": "rapide",
   "ambiances": [
-   "voiture"
+   "neon"
   ],
   "plans": [
    {
     "replique": 0,
-    "plan": "serre",
+    "plan": "moyen",
     "mouvement": "fixe",
     "geste": "pointe_d",
-    "reaction": "choc"
-   },
-   {
-    "replique": 1,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "gratte_tete",
-    "reaction": "sceptique"
-   },
-   {
-    "replique": 2,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "bras_ouverts",
-    "reaction": "confused"
+    "reaction": "regard_camera"
    },
    {
     "replique": 3,
     "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "pointe_g",
-    "reaction": "curious"
-   },
-   {
-    "replique": 4,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "menton",
-    "reaction": "calm"
-   },
-   {
-    "replique": 5,
-    "plan": "large",
-    "mouvement": "travelling",
-    "geste": "facepalm",
-    "reaction": "shocked"
-   },
-   {
-    "replique": 6,
-    "plan": "serre",
     "mouvement": "zoom_choc",
-    "geste": "poings",
-    "reaction": "annoyed"
-   },
-   {
-    "replique": 7,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "desespoir",
-    "reaction": "confused"
+    "geste": "facepalm",
+    "reaction": "choc"
    },
    {
     "replique": 8,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "pointe_d",
-    "reaction": "teasing"
+    "plan": "large",
+    "mouvement": "travelling",
+    "geste": "bras_ouverts",
+    "reaction": "aucune"
    },
    {
-    "replique": 9,
-    "plan": "serre",
+    "replique": 22,
+    "plan": "tres_serre",
     "mouvement": "fixe",
     "geste": "pointe_g",
     "reaction": "choc"
    },
    {
-    "replique": 10,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "bras_ouverts",
-    "reaction": "pleurs"
-   },
-   {
-    "replique": 11,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "rire",
-    "reaction": "joye"
-   },
-   {
-    "replique": 12,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "gratte_tete",
-    "reaction": "confused"
-   },
-   {
-    "replique": 13,
-    "plan": "large",
-    "mouvement": "travelling",
-    "geste": "pointe_d",
-    "reaction": "sarcastic"
-   },
-   {
-    "replique": 14,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "mains_hanches",
-    "reaction": "defensive"
-   },
-   {
-    "replique": 15,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "pointe_g",
-    "reaction": "embarrassed"
-   },
-   {
-    "replique": 16,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "gratte_tete",
-    "reaction": "skeptical"
-   },
-   {
-    "replique": 17,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "pointe_d",
-    "reaction": "shocked"
-   },
-   {
-    "replique": 18,
+    "replique": 36,
     "plan": "serre",
     "mouvement": "zoom_choc",
-    "geste": "facepalm",
-    "reaction": "choc"
-   },
-   {
-    "replique": 19,
-    "plan": "large",
-    "mouvement": "travelling",
-    "geste": "pointe_g",
-    "reaction": "mocking"
-   },
-   {
-    "replique": 20,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "mains_hanches",
-    "reaction": "defensive"
-   },
-   {
-    "replique": 21,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "bras_ouverts",
-    "reaction": "mocking"
+    "geste": "gratte_tete",
+    "reaction": "reflechit"
    }
   ],
   "objets": [
    {
-    "replique": 0,
-    "objet": "telephone"
+    "replique": 5,
+    "objet": "télécommande"
    },
    {
-    "replique": 10,
-    "objet": "clés"
+    "replique": 28,
+    "objet": "tablette"
    },
    {
-    "replique": 15,
-    "objet": "livre"
-   },
-   {
-    "replique": 21,
+    "replique": 36,
     "objet": "tablette"
    }
   ],
   "decors_vus": {
-   "invite": "car back seat, red tank top with black braids, car dashboard with GPS, two black hair clips on head.",
-   "presentateur": "car front seat, black suit with sunglasses, steering wheel, road outside.",
-   "envoyee": "car back seat, red tank top, black tresses, car seat belt."
+   "presentateur": "chambre avec une télé allumée sur un meuble en bois clair, une imprimante couleur noire posées sur un bureau en désordre, une chaise en bois avec des chaînes rouillées autour des poignets et des pieds de l'invite, une lampe de chevet rouge et une étagère remplie de livres et de gadgets électroniques.",
+   "invite": "même décor, mais avec un ordinateur portable ouvert affichant l'abonnement PS Plus, une télécommande à côté d'un verre vide et une chaîne reliant la chaise au radiateur."
   }
  },
  "doublage": {
-  "piste": "/tmp/tmpdsb5wt6a/piste.wav",
-  "duree": 66.16,
-  "source": "https://www.tiktok.com/@yan_animation0/video/7655759122461134112",
-  "auteur": "yan_animation0",
-  "contexte": "Une conversation humoristique et surprenante dans une voiture entre une mère de 25 ans et son fils de 11 ans, qui révèle des détails inattendus sur leur relation.",
-  "evenements": [
-   [
-    11.0,
-    13.0,
-    "horn"
-   ],
-   [
-    12.0,
-    14.0,
-    "crying"
-   ],
-   [
-    18.0,
-    21.0,
-    "crying"
-   ]
-  ],
+  "piste": "/tmp/tmp02e3zpzj/piste.wav",
+  "duree": 62.53,
+  "source": "https://www.tiktok.com/@vignianimation/video/7701771541142342945",
+  "auteur": "vignianimation",
+  "contexte": "Un homme attaché à une chaise dans une chambre est 'cambriolé' par des intrus qui finissent par réaliser qu'il n'a rien de valeur, sauf un abonnement PS Plus récemment renouvelé. L'humour repose sur l'absurdité de la situation et la réaction exagérée du 'victime' face à ce détail.",
+  "evenements": [],
   "visuel": {
-   "gestes": [
-    [
-     3.5,
-     0.47,
-     1.0
-    ],
-    [
-     4.5,
-     0.58,
-     1.0
-    ],
-    [
-     8.0,
-     0.79,
-     1.0
-    ],
-    [
-     12.5,
-     0.59,
-     0.41
-    ],
-    [
-     14.5,
-     0.52,
-     0.53
-    ],
-    [
-     30.5,
-     0.58,
-     0.36
-    ],
-    [
-     34.0,
-     0.59,
-     0.46
-    ],
-    [
-     43.5,
-     0.58,
-     0.45
-    ],
-    [
-     50.0,
-     0.58,
-     0.34
-    ],
-    [
-     52.5,
-     0.58,
-     0.47
-    ],
-    [
-     63.5,
-     0.59,
-     0.47
-    ]
-   ],
-   "duree": 66.5,
-   "nb_plans": 18,
-   "duree_plan": 3.69,
-   "coupes": [
-    1.5,
-    2.5,
-    3.0,
-    7.0,
-    8.5,
-    20.0,
-    21.0,
-    23.0,
-    25.0,
-    27.0,
-    30.0,
-    36.5,
-    42.0,
-    46.5,
-    48.0,
-    54.5,
-    58.5
-   ],
+   "gestes": [],
+   "duree": 62.5,
+   "nb_plans": 1,
+   "duree_plan": 62.5,
+   "coupes": [],
    "plans": {
     "tres_serre": 0.0,
-    "serre": 1.0,
-    "moyen": 0.0,
-    "large": 0.0
+    "serre": 0.0,
+    "moyen": 0.76,
+    "large": 0.24
    },
    "camera": {
-    "fixe": 1.0,
-    "avance": 0.0,
-    "recul": 0.0,
-    "travelling": 0.0,
+    "fixe": 0.573,
+    "avance": 0.145,
+    "recul": 0.258,
+    "travelling": 0.024,
     "epaule": 0.0
    },
    "nb_personnes": 1,
    "personnes": [
     {
      "place": "centre",
-     "presence": 0.992,
+     "presence": 0.544,
      "habit": [
-      49,
-      38,
-      36
+      190,
+      112,
+      52
      ],
      "cheveux": [
-      23,
-      13,
-      9
+      11,
+      11,
+      10
      ],
      "sourire": 0.0,
-     "taille": 0.22,
-     "tete_penchee": 5.9,
-     "regard_cote": 0.0
+     "taille": 0.1,
+     "tete_penchee": 1.8,
+     "regard_cote": 0.941
+    },
+    {
+     "place": "droite",
+     "presence": 0.216,
+     "habit": [
+      155,
+      12,
+      9
+     ],
+     "cheveux": [
+      51,
+      30,
+      30
+     ],
+     "sourire": 0.0,
+     "taille": 0.089,
+     "tete_penchee": 2.4,
+     "regard_cote": 0.111
     }
    ],
    "visages": true,
    "sourires": 0.0,
-   "energie": 0.173,
+   "energie": 0.985,
    "mur": [
-    155,
-    135,
-    120
+    205,
+    132,
+    86
    ],
    "palette": [
     [
-     41,
-     30,
-     27,
-     0.301
+     213,
+     139,
+     91,
+     0.335
     ],
     [
-     150,
-     127,
-     118,
-     0.273
+     177,
+     110,
+     72,
+     0.208
     ],
     [
-     102,
-     66,
-     57,
-     0.217
+     82,
+     42,
+     26,
+     0.182
     ],
     [
-     205,
-     140,
-     90,
-     0.073
+     130,
+     72,
+     49,
+     0.125
     ],
     [
-     225,
-     238,
-     240,
-     0.072
+     24,
+     17,
+     20,
+     0.121
     ],
     [
-     166,
-     191,
-     141,
-     0.063
+     245,
+     239,
+     235,
+     0.029
     ]
    ],
    "lumiere": {
-    "luminosite": 119.6,
-    "chaleur": 31.5,
-    "saturation": 85.2
+    "luminosite": 151.8,
+    "chaleur": 83.9,
+    "saturation": 147.3
    },
    "moment": "soir",
    "postures": []
   },
   "audio": {
-   "duree": 66.2,
-   "nb_voix": 3,
+   "duree": 62.5,
+   "nb_voix": 2,
    "voix": [
     {
-     "hz": 248,
-     "genre": "f",
-     "part": 0.08
+     "hz": 173,
+     "genre": "?",
+     "part": 0.33
     },
     {
-     "hz": 242,
-     "genre": "f",
-     "part": 0.35
-    },
-    {
-     "hz": 133,
-     "genre": "h",
-     "part": 0.56
+     "hz": 175,
+     "genre": "?",
+     "part": 0.67
     }
    ],
-   "debit": 4.26,
-   "blanc_moyen": 1.36,
-   "coupes": 1,
-   "dynamique_db": 25.3,
-   "cris": 0.012,
-   "musique": 0.87,
-   "impacts": 1,
-   "impacts_10s": 0.15,
-   "graves": 0,
-   "aigus": 1,
-   "sur_vanne": 0,
-   "evenements": {
-    "crying": 2,
-    "horn": 1
-   },
+   "debit": 5.34,
+   "blanc_moyen": 0.12,
+   "coupes": 19,
+   "dynamique_db": 16.6,
+   "cris": 0.026,
+   "musique": 0.41,
+   "impacts": 21,
+   "impacts_10s": 3.36,
+   "graves": 1,
+   "aigus": 20,
+   "sur_vanne": 10,
+   "evenements": {},
    "emotions": {
-    "confused": 3,
-    "defensive": 3,
-    "skeptical": 2,
-    "shocked": 2,
-    "surprised": 1,
-    "neutral": 1,
-    "curious": 1,
-    "calm": 1
+    "neutre": 10,
+    "indifferent": 3,
+    "colere": 2,
+    "blase": 2,
+    "approbateur": 2,
+    "panique": 2,
+    "confus": 2,
+    "sceptique": 1
    }
   },
-  "video_origine": "/tmp/tmpdsb5wt6a/src.mp4",
+  "video_origine": "/tmp/tmp02e3zpzj/src.mp4",
   "debut": 0.0
  },
  "fiche": {
@@ -1555,13 +2272,29 @@
      18,
      19,
      20,
-     21
+     21,
+     22,
+     23,
+     24,
+     25,
+     26,
+     27,
+     28,
+     29,
+     30,
+     31,
+     32,
+     33,
+     34,
+     35,
+     36,
+     37
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "car interior, front seat, black suit, surprised expressions, road outside",
-    "titre": "L'explication"
+    "decor": "chambre avec une chaise en bois, une télé allumée, une imprimante sur un bureau, des chaînes autour des poignets et des pieds de l'invite. Éclairage tamisé.",
+    "titre": "Le cambriolage absurde"
    }
   ]
  },
@@ -1578,35 +2311,42 @@
    "poste": "ingé son",
    "controle": "mots à une vitesse possible",
    "ok": true,
-   "detail": "2 mot(s) trop courts",
+   "detail": "8 mot(s) trop courts",
    "revoir": false
   },
   {
    "poste": "ingé son",
    "controle": "pas de long passage sans texte",
-   "ok": false,
-   "detail": "blancs [(13.0, 19.6)]",
+   "ok": true,
+   "detail": "",
    "revoir": false
   },
   {
    "poste": "ingé son",
    "controle": "deux transcriptions d'accord",
    "ok": false,
-   "detail": "83 % de mots identiques, 3 doute(s), 2 tranché(s) par une 3e écoute, 1 corrigé(s)",
+   "detail": "79 % de mots identiques, 1 doute(s), 0 corrigé(s)",
    "revoir": false
   },
   {
    "poste": "casting voix",
    "controle": "témoin image (qui parle dans l'original)",
    "ok": true,
-   "detail": "31/31 phrases lisibles (visages, mouvements)",
+   "detail": "51/51 phrases lisibles (Gemini (vidéo entière), mouvements)",
    "revoir": false
   },
   {
    "poste": "casting voix",
-   "controle": "plusieurs personnages joués par la même voix",
+   "controle": "fil du dialogue repris (son + texte + image)",
    "ok": true,
-   "detail": "3 personnages vus dans l'original",
+   "detail": "voix proches (0.85)",
+   "revoir": false
+  },
+  {
+   "poste": "casting voix",
+   "controle": "parole répartie entre les personnages",
+   "ok": true,
+   "detail": "2 voix, la plus bavarde dit 62 %",
    "revoir": false
   },
   {
@@ -1619,15 +2359,15 @@
   {
    "poste": "scripte",
    "controle": "téléphone en main seulement s'il en est question",
-   "ok": false,
-   "detail": "retiré sur 1 réplique(s)",
+   "ok": true,
+   "detail": "",
    "revoir": false
   },
   {
    "poste": "scripte",
    "controle": "autant de personnages que de voix",
    "ok": true,
-   "detail": "3 voix, 3 personnage(s)",
+   "detail": "2 voix, 2 personnage(s)",
    "revoir": false
   },
   {
@@ -1666,35 +2406,53 @@
    "revoir": false
   }
  ],
- "_decors_semi": [],
+ "_decors_semi": [
+  0
+ ],
  "_voix_hz": {
-  "envoyee": 238,
-  "invite": 220,
-  "presentateur": 133
+  "presentateur": 166,
+  "invite": 170
  },
  "_voix_genre": {
-  "envoyee": "f",
-  "invite": "f",
-  "presentateur": "h"
+  "presentateur": "h",
+  "invite": "h"
  },
  "realisation": {
-  "moment": "jour",
+  "moment": "soir",
   "lieux": [
-   "voiture"
+   "chambre"
   ],
   "gags": [
-   "Accouchement en cour de récré : 10/10",
-   "Les Sims n'auraient pas approuvé",
-   "Odora l'exploratrice : témoin indirect"
+   "Abonnement PS Plus : La vraie fortune",
+   "Télé : Toujours allumée, jamais regardée",
+   "Imprimante : Dernière en date, jamais utilisée"
   ],
-  "ambiances": [],
+  "ambiances": [
+   "neon",
+   "poussiere"
+  ],
   "source": "auteur+image",
   "tenues": {
-   "invite": "pull",
-   "envoyee": "chemise",
-   "presentateur": "polo"
+   "presentateur": "tshirt",
+   "invite": "chemise"
   },
   "plans": [
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
    "large/fixe",
    "large/fixe",
    "large/fixe",

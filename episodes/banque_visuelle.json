@@ -38936,30 +38936,30 @@
    "nb_voix": 3,
    "voix": [
     {
-     "hz": 146,
+     "hz": 148,
      "genre": "h",
-     "part": 0.24
+     "part": 0.23
     },
     {
-     "hz": 248,
+     "hz": 235,
      "genre": "f",
-     "part": 0.35
+     "part": 0.46
     },
     {
-     "hz": 237,
+     "hz": 253,
      "genre": "f",
-     "part": 0.41
+     "part": 0.32
     }
    ],
-   "debit": 3.98,
-   "blanc_moyen": 0.68,
-   "coupes": 2,
+   "debit": 4.1,
+   "blanc_moyen": 0.69,
+   "coupes": 1,
    "dynamique_db": 16.6,
    "cris": 0.006,
    "musique": 0.41,
-   "impacts": 59,
-   "impacts_10s": 7.25,
-   "graves": 9,
+   "impacts": 58,
+   "impacts_10s": 7.13,
+   "graves": 8,
    "aigus": 50,
    "sur_vanne": 11,
    "evenements": {
@@ -38969,17 +38969,63 @@
     "kiss": 1
    },
    "emotions": {
-    "neutral": 10,
-    "excited": 3,
-    "happy": 2,
-    "confused": 2,
-    "uncertain": 2,
-    "skeptical": 2,
-    "descriptive": 1,
-    "satisfied": 1
+    "neutral": 12,
+    "excited": 5,
+    "confused": 4,
+    "informative": 1,
+    "satisfied": 1,
+    "annoyed": 1,
+    "reassuring": 1,
+    "enthusiastic": 1
    }
   },
-  "claude": {},
+  "claude": {
+   "lieux": [
+    "chambre"
+   ],
+   "moment": "soir",
+   "costumes": {
+    "invite": {
+     "haut": "robe",
+     "c_haut": "blanc",
+     "motif": "fleurs_roses",
+     "bas": "escarpins",
+     "chaussures": "escarpins",
+     "details": [
+      "boucles_oreilles",
+      "collier"
+     ],
+     "chapeau": null,
+     "cheveux": "court",
+     "c_cheveux": "brun"
+    },
+    "presentateur": {
+     "haut": "debardeur",
+     "c_haut": "blanc",
+     "bas": "pantalon",
+     "chaussures": "baskets",
+     "details": [
+      "barreaux_cote"
+     ],
+     "chapeau": null,
+     "cheveux": "court_texture",
+     "c_cheveux": "noir"
+    },
+    "envoyee": {
+     "haut": "tshirt",
+     "c_haut": "bleu",
+     "bas": "pantalon",
+     "chaussures": "baskets",
+     "details": [
+      "lunettes_vue",
+      "bracelets"
+     ],
+     "chapeau": null,
+     "cheveux": "long",
+     "c_cheveux": "blond"
+    }
+   }
+  },
   "realisation": {
    "moment": "soir",
    "lieux": [
@@ -38989,11 +39035,11 @@
    "ambiances": [
     "poussiere"
    ],
-   "source": "robot+image",
+   "source": "auteur+image",
    "tenues": {
-    "invite": "pyjama",
-    "presentateur": "pyjama",
-    "envoyee": "pyjama"
+    "invite": "robe",
+    "presentateur": "debardeur",
+    "envoyee": "tshirt"
    },
    "plans": [
     "large/fixe",
@@ -39027,471 +39073,294 @@
     "large/fixe"
    ]
   },
-  "video": "2026-11-02_02h04_emission.mp4"
+  "video": "2026-11-02_00h31_emission.mp4"
  },
  {
   "date": "2026-11-02",
-  "source": "https://www.tiktok.com/@yan_animation0/video/7655759122461134112",
-  "auteur": "yan_animation0",
+  "source": "https://www.tiktok.com/@vignianimation/video/7701771541142342945",
+  "auteur": "vignianimation",
   "visuel": {
-   "gestes": [
-    [
-     3.5,
-     0.47,
-     1.0
-    ],
-    [
-     4.5,
-     0.58,
-     1.0
-    ],
-    [
-     8.0,
-     0.79,
-     1.0
-    ],
-    [
-     12.5,
-     0.59,
-     0.41
-    ],
-    [
-     14.5,
-     0.52,
-     0.53
-    ],
-    [
-     30.5,
-     0.58,
-     0.36
-    ],
-    [
-     34.0,
-     0.59,
-     0.46
-    ],
-    [
-     43.5,
-     0.58,
-     0.45
-    ],
-    [
-     50.0,
-     0.58,
-     0.34
-    ],
-    [
-     52.5,
-     0.58,
-     0.47
-    ],
-    [
-     63.5,
-     0.59,
-     0.47
-    ]
-   ],
-   "duree": 66.5,
-   "nb_plans": 18,
-   "duree_plan": 3.69,
-   "coupes": [
-    1.5,
-    2.5,
-    3.0,
-    7.0,
-    8.5,
-    20.0,
-    21.0,
-    23.0,
-    25.0,
-    27.0,
-    30.0,
-    36.5,
-    42.0,
-    46.5,
-    48.0,
-    54.5,
-    58.5
-   ],
+   "gestes": [],
+   "duree": 62.5,
+   "nb_plans": 1,
+   "duree_plan": 62.5,
+   "coupes": [],
    "plans": {
     "tres_serre": 0.0,
-    "serre": 1.0,
-    "moyen": 0.0,
-    "large": 0.0
+    "serre": 0.0,
+    "moyen": 0.76,
+    "large": 0.24
    },
    "camera": {
-    "fixe": 1.0,
-    "avance": 0.0,
-    "recul": 0.0,
-    "travelling": 0.0,
+    "fixe": 0.573,
+    "avance": 0.145,
+    "recul": 0.258,
+    "travelling": 0.024,
     "epaule": 0.0
    },
    "nb_personnes": 1,
    "personnes": [
     {
      "place": "centre",
-     "presence": 0.992,
+     "presence": 0.544,
      "habit": [
-      49,
-      38,
-      36
+      190,
+      112,
+      52
      ],
      "cheveux": [
-      23,
-      13,
-      9
+      11,
+      11,
+      10
      ],
      "sourire": 0.0,
-     "taille": 0.22,
-     "tete_penchee": 5.9,
-     "regard_cote": 0.0
+     "taille": 0.1,
+     "tete_penchee": 1.8,
+     "regard_cote": 0.941
+    },
+    {
+     "place": "droite",
+     "presence": 0.216,
+     "habit": [
+      155,
+      12,
+      9
+     ],
+     "cheveux": [
+      51,
+      30,
+      30
+     ],
+     "sourire": 0.0,
+     "taille": 0.089,
+     "tete_penchee": 2.4,
+     "regard_cote": 0.111
     }
    ],
    "visages": true,
    "sourires": 0.0,
-   "energie": 0.173,
+   "energie": 0.985,
    "mur": [
-    155,
-    135,
-    120
+    205,
+    132,
+    86
    ],
    "palette": [
     [
-     41,
-     30,
-     27,
-     0.301
+     213,
+     139,
+     91,
+     0.335
     ],
     [
-     150,
-     127,
-     118,
-     0.273
+     177,
+     110,
+     72,
+     0.208
     ],
     [
-     102,
-     66,
-     57,
-     0.217
+     82,
+     42,
+     26,
+     0.182
     ],
     [
-     205,
-     140,
-     90,
-     0.073
+     130,
+     72,
+     49,
+     0.125
     ],
     [
-     225,
-     238,
-     240,
-     0.072
+     24,
+     17,
+     20,
+     0.121
     ],
     [
-     166,
-     191,
-     141,
-     0.063
+     245,
+     239,
+     235,
+     0.029
     ]
    ],
    "lumiere": {
-    "luminosite": 119.6,
-    "chaleur": 31.5,
-    "saturation": 85.2
+    "luminosite": 151.8,
+    "chaleur": 83.9,
+    "saturation": 147.3
    },
    "moment": "soir",
    "postures": []
   },
   "audio": {
-   "duree": 66.2,
-   "nb_voix": 3,
+   "duree": 62.5,
+   "nb_voix": 2,
    "voix": [
     {
-     "hz": 248,
-     "genre": "f",
-     "part": 0.08
+     "hz": 173,
+     "genre": "?",
+     "part": 0.33
     },
     {
-     "hz": 242,
-     "genre": "f",
-     "part": 0.35
-    },
-    {
-     "hz": 133,
-     "genre": "h",
-     "part": 0.56
+     "hz": 175,
+     "genre": "?",
+     "part": 0.67
     }
    ],
-   "debit": 4.26,
-   "blanc_moyen": 1.36,
-   "coupes": 1,
-   "dynamique_db": 25.3,
-   "cris": 0.012,
-   "musique": 0.87,
-   "impacts": 1,
-   "impacts_10s": 0.15,
-   "graves": 0,
-   "aigus": 1,
-   "sur_vanne": 0,
-   "evenements": {
-    "crying": 2,
-    "horn": 1
-   },
+   "debit": 5.34,
+   "blanc_moyen": 0.12,
+   "coupes": 19,
+   "dynamique_db": 16.6,
+   "cris": 0.026,
+   "musique": 0.41,
+   "impacts": 21,
+   "impacts_10s": 3.36,
+   "graves": 1,
+   "aigus": 20,
+   "sur_vanne": 10,
+   "evenements": {},
    "emotions": {
-    "confused": 3,
-    "defensive": 3,
-    "skeptical": 2,
-    "shocked": 2,
-    "surprised": 1,
-    "neutral": 1,
-    "curious": 1,
-    "calm": 1
+    "neutre": 10,
+    "indifferent": 3,
+    "colere": 2,
+    "blase": 2,
+    "approbateur": 2,
+    "panique": 2,
+    "confus": 2,
+    "sceptique": 1
    }
   },
   "claude": {
    "lieux": [
-    "voiture"
+    "chambre"
    ],
-   "moment": "jour",
+   "moment": "soir",
    "costumes": {
-    "invite": {
-     "haut": "red tank top",
-     "c_haut": "red",
-     "bas": "jeans",
-     "chaussures": "baskets",
-     "details": [
-      "bracelets"
-     ],
-     "chapeau": null,
-     "cheveux": "herisse",
-     "c_cheveux": "black"
-    },
     "presentateur": {
-     "haut": "black suit",
-     "c_haut": "black",
+     "haut": "tshirt",
+     "c_haut": "rouge",
+     "motif": "uni",
      "bas": "pantalon",
      "chaussures": "baskets",
      "details": [
-      "lunettes_soleil",
-      "montre"
+      "barbe_courte",
+      "lunettes_soleil"
      ],
      "chapeau": null,
      "cheveux": "court",
-     "c_cheveux": "black"
+     "c_cheveux": "brun"
     },
-    "envoyee": {
-     "haut": "red tank top",
-     "c_haut": "red",
-     "bas": "short",
-     "chaussures": "baskets",
+    "invite": {
+     "haut": "chemise",
+     "c_haut": "blanc",
+     "motif": "uni",
+     "bas": "pantalon",
+     "chaussures": "ville",
      "details": [
-      "bracelet"
+      "chaîne_autour_poignet",
+      "chaîne_autour_pied",
+      "sourire_forcé"
      ],
      "chapeau": null,
-     "cheveux": "tresses",
-     "c_cheveux": "black"
+     "cheveux": "long",
+     "c_cheveux": "blond"
     }
    },
    "objets": [
     {
-     "replique": 0,
-     "objet": "telephone"
+     "replique": 5,
+     "objet": "télécommande"
     },
     {
-     "replique": 10,
-     "objet": "clés"
+     "replique": 28,
+     "objet": "tablette"
     },
     {
-     "replique": 15,
-     "objet": "livre"
-    },
-    {
-     "replique": 21,
+     "replique": 36,
      "objet": "tablette"
     }
    ],
    "gags": [
-    "Accouchement en cour de récré : 10/10",
-    "Les Sims n'auraient pas approuvé",
-    "Odora l'exploratrice : témoin indirect"
+    "Abonnement PS Plus : La vraie fortune",
+    "Télé : Toujours allumée, jamais regardée",
+    "Imprimante : Dernière en date, jamais utilisée"
    ],
    "ambiances": [
-    "voiture"
+    "neon"
    ],
    "plans": [
     {
      "replique": 0,
-     "plan": "serre",
+     "plan": "moyen",
      "mouvement": "fixe",
      "geste": "pointe_d",
-     "reaction": "choc"
-    },
-    {
-     "replique": 1,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "gratte_tete",
-     "reaction": "sceptique"
-    },
-    {
-     "replique": 2,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "bras_ouverts",
-     "reaction": "confused"
+     "reaction": "regard_camera"
     },
     {
      "replique": 3,
      "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "pointe_g",
-     "reaction": "curious"
-    },
-    {
-     "replique": 4,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "menton",
-     "reaction": "calm"
-    },
-    {
-     "replique": 5,
-     "plan": "large",
-     "mouvement": "travelling",
-     "geste": "facepalm",
-     "reaction": "shocked"
-    },
-    {
-     "replique": 6,
-     "plan": "serre",
      "mouvement": "zoom_choc",
-     "geste": "poings",
-     "reaction": "annoyed"
-    },
-    {
-     "replique": 7,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "desespoir",
-     "reaction": "confused"
+     "geste": "facepalm",
+     "reaction": "choc"
     },
     {
      "replique": 8,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "pointe_d",
-     "reaction": "teasing"
+     "plan": "large",
+     "mouvement": "travelling",
+     "geste": "bras_ouverts",
+     "reaction": "aucune"
     },
     {
-     "replique": 9,
-     "plan": "serre",
+     "replique": 22,
+     "plan": "tres_serre",
      "mouvement": "fixe",
      "geste": "pointe_g",
      "reaction": "choc"
     },
     {
-     "replique": 10,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "bras_ouverts",
-     "reaction": "pleurs"
-    },
-    {
-     "replique": 11,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "rire",
-     "reaction": "joye"
-    },
-    {
-     "replique": 12,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "gratte_tete",
-     "reaction": "confused"
-    },
-    {
-     "replique": 13,
-     "plan": "large",
-     "mouvement": "travelling",
-     "geste": "pointe_d",
-     "reaction": "sarcastic"
-    },
-    {
-     "replique": 14,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "mains_hanches",
-     "reaction": "defensive"
-    },
-    {
-     "replique": 15,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "pointe_g",
-     "reaction": "embarrassed"
-    },
-    {
-     "replique": 16,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "gratte_tete",
-     "reaction": "skeptical"
-    },
-    {
-     "replique": 17,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "pointe_d",
-     "reaction": "shocked"
-    },
-    {
-     "replique": 18,
+     "replique": 36,
      "plan": "serre",
      "mouvement": "zoom_choc",
-     "geste": "facepalm",
-     "reaction": "choc"
-    },
-    {
-     "replique": 19,
-     "plan": "large",
-     "mouvement": "travelling",
-     "geste": "pointe_g",
-     "reaction": "mocking"
-    },
-    {
-     "replique": 20,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "mains_hanches",
-     "reaction": "defensive"
-    },
-    {
-     "replique": 21,
-     "plan": "serre",
-     "mouvement": "fixe",
-     "geste": "bras_ouverts",
-     "reaction": "mocking"
+     "geste": "gratte_tete",
+     "reaction": "reflechit"
     }
    ]
   },
   "realisation": {
-   "moment": "jour",
+   "moment": "soir",
    "lieux": [
-    "voiture"
+    "chambre"
    ],
    "gags": [
-    "Accouchement en cour de récré : 10/10",
-    "Les Sims n'auraient pas approuvé",
-    "Odora l'exploratrice : témoin indirect"
+    "Abonnement PS Plus : La vraie fortune",
+    "Télé : Toujours allumée, jamais regardée",
+    "Imprimante : Dernière en date, jamais utilisée"
    ],
-   "ambiances": [],
+   "ambiances": [
+    "neon",
+    "poussiere"
+   ],
    "source": "auteur+image",
    "tenues": {
-    "invite": "pull",
-    "envoyee": "chemise",
-    "presentateur": "polo"
+    "presentateur": "tshirt",
+    "invite": "chemise"
    },
    "plans": [
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
     "large/fixe",
     "large/fixe",
     "large/fixe",
@@ -39516,6 +39385,6 @@
     "large/fixe"
    ]
   },
-  "video": "2026-11-02_03h10_emission.mp4"
+  "video": "2026-11-02_03h32_emission.mp4"
  }
 ]

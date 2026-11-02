@@ -5836,61 +5836,63 @@
  {
   "moment": "soir",
   "lieux": [
-   "chambre"
+   "salon"
   ],
-  "source": "robot+image",
-  "duree": 84.7,
+  "source": "auteur+image",
+  "duree": 65.8,
   "plans": {
-   "large": 29
+   "large": 31
   },
   "mouvements": {
-   "fixe": 29
+   "fixe": 31
   },
   "costumes": {
-   "invite": "pyjama",
-   "presentateur": "pyjama",
-   "envoyee": "pyjama"
+   "presentateur": "tshirt",
+   "invite": "chemise"
   },
   "figurants": 0,
   "ambiances": [
+   "pluie",
    "poussiere"
   ],
-  "controle": "Humoriste 7.0/10 : 17.4 s La réplique « Mais tu dors là ou tu m'écoutes » manque de réactions visuelles marquées des personnages. La chute humoristique est présente, mais elle pourrait être renforcée ",
-  "fichier": "2026-11-02_02h04_emission.mp4",
+  "controle": "Humoriste 8.6/10 : 0.4 s Les vannes sont claires mais certaines répliques manquent de réactions exagérées pour renforcer le côté humoristique. Par exemple, le personnage qui dit 'Si je comprends bien'",
+  "fichier": "2026-11-02_02h43_emission.mp4",
   "cine": {
-   "focus": false,
-   "vertige": true,
-   "tiers": true,
-   "etalonnage": false,
+   "focus": true,
+   "vertige": false,
+   "tiers": false,
+   "etalonnage": true,
    "profondeur": false,
    "grain": true,
    "reflets": true,
    "son": true
   },
-  "cadence": null
+  "cadence": "rapide"
  },
  {
-  "moment": "jour",
+  "moment": "soir",
   "lieux": [
-   "voiture"
+   "chambre"
   ],
   "source": "auteur+image",
-  "duree": 69.3,
+  "duree": 65.7,
   "plans": {
-   "large": 22
+   "large": 38
   },
   "mouvements": {
-   "fixe": 22
+   "fixe": 38
   },
   "costumes": {
-   "invite": "pull",
-   "envoyee": "chemise",
-   "presentateur": "polo"
+   "presentateur": "tshirt",
+   "invite": "chemise"
   },
   "figurants": 0,
-  "ambiances": [],
-  "controle": "Humoriste 10.0/10 :  | Réalisateur 10.0/10 :  | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.1/10 : 0.2 s sous-titres trop rapides à lire",
-  "fichier": "2026-11-02_03h10_emission.mp4",
+  "ambiances": [
+   "neon",
+   "poussiere"
+  ],
+  "controle": "Humoriste 7.8/10 : 1 s Les vannes manquent parfois de punch. Par exemple, 'Si je comprends bien' peut être plus drôle avec une réaction plus marquée du personnage.; 26 s Le gag sur le pistolet de camo",
+  "fichier": "2026-11-02_03h32_emission.mp4",
   "cine": {
    "focus": false,
    "vertige": false,
