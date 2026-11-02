@@ -5765,40 +5765,72 @@
   "cadence": "rapide"
  },
  {
-  "moment": "soir",
+  "moment": "jour",
   "lieux": [
-   "rue",
-   "salon"
+   "chambre"
   ],
   "source": "auteur+image",
-  "duree": 134.0,
+  "duree": 70.5,
   "plans": {
-   "large": 58
+   "large": 31
   },
   "mouvements": {
-   "fixe": 58
+   "fixe": 31
   },
   "costumes": {
-   "presentateur": "tshirt",
+   "presentateur": "pull",
    "invite": "tshirt"
   },
   "figurants": 0,
-  "ambiances": [
-   "neon",
-   "poussiere"
-  ],
-  "controle": "Humoriste 7.8/10 : 4.2 s La chute sur 'Là maintenant' (appeler Alain) manque de réactions exagérées ou de bruitages pour renforcer le côté absurde.; 33.3 s La vanne sur 'Hé frérot quelle soirée de fou",
-  "fichier": "2026-11-02_00h16_emission.mp4",
+  "ambiances": [],
+  "controle": "Humoriste 7.8/10 : 0.4 s Les vannes manquent parfois de réactions exagérées pour maximiser l'effet comique. Par exemple, le personnage enfant ne réagit pas assez fortement aux répliques du présentateu",
+  "fichier": "2026-11-02_00h04_emission.mp4",
   "cine": {
    "focus": false,
    "vertige": true,
    "tiers": true,
    "etalonnage": true,
-   "profondeur": true,
+   "profondeur": false,
+   "grain": true,
+   "reflets": false,
+   "son": true
+  },
+  "cadence": "rapide"
+ },
+ {
+  "moment": "soir",
+  "lieux": [
+   "chambre"
+  ],
+  "source": "auteur+image",
+  "duree": 84.7,
+  "plans": {
+   "large": 29
+  },
+  "mouvements": {
+   "fixe": 29
+  },
+  "costumes": {
+   "invite": "robe",
+   "presentateur": "debardeur",
+   "envoyee": "tshirt"
+  },
+  "figurants": 0,
+  "ambiances": [
+   "poussiere"
+  ],
+  "controle": "Humoriste 10.0/10 :  | Réalisateur 10.0/10 :  | Directeur artistique 7.8/10 : 19.8 s deux personnages l'un sur l'autre (presentateur+envoyee) | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.1/10 :",
+  "fichier": "2026-11-02_00h31_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": false,
+   "tiers": false,
+   "etalonnage": true,
+   "profondeur": false,
    "grain": true,
    "reflets": true,
    "son": true
   },
-  "cadence": "rapide"
+  "cadence": null
  }
 ]
