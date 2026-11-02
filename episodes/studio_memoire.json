@@ -5870,74 +5870,37 @@
   "cadence": "rapide"
  },
  {
-  "moment": "soir",
+  "moment": "nuit",
   "lieux": [
    "chambre"
   ],
   "source": "auteur+image",
-  "duree": 65.7,
+  "duree": 63.1,
   "plans": {
-   "large": 38
+   "large": 22
   },
   "mouvements": {
-   "fixe": 38
+   "fixe": 22
   },
   "costumes": {
    "presentateur": "tshirt",
-   "invite": "chemise"
+   "invite": "pull"
   },
   "figurants": 0,
   "ambiances": [
-   "neon",
-   "poussiere"
+   "pluie",
+   "vapeur"
   ],
-  "controle": "Humoriste 7.8/10 : 1 s Les vannes manquent parfois de punch. Par exemple, 'Si je comprends bien' peut être plus drôle avec une réaction plus marquée du personnage.; 26 s Le gag sur le pistolet de camo",
-  "fichier": "2026-11-02_03h32_emission.mp4",
+  "controle": "Humoriste 7.0/10 : 1 s Les vannes manquent de rythme et de réactivité. Le personnage ne réagit pas assez vite aux situations pour renforcer le côté comique.; 15 s La chute pourrait être plus surprenan",
+  "fichier": "2026-11-02_03h30_emission.mp4",
   "cine": {
    "focus": false,
-   "vertige": false,
+   "vertige": true,
    "tiers": true,
    "etalonnage": true,
    "profondeur": false,
-   "grain": true,
+   "grain": false,
    "reflets": false,
-   "son": true
-  },
-  "cadence": "rapide"
- },
- {
-  "moment": "soir",
-  "lieux": [
-   "bureau"
-  ],
-  "source": "auteur+image",
-  "duree": 38.7,
-  "plans": {
-   "large": 3
-  },
-  "mouvements": {
-   "fixe": 3
-  },
-  "costumes": {
-   "presentateur": "tshirt",
-   "invite": "chemise",
-   "envoyee": "blouse"
-  },
-  "figurants": 1,
-  "ambiances": [
-   "neon",
-   "poussiere"
-  ],
-  "controle": "Humoriste 6.8/10 : 0.4 s Le gag du sous-titrage initial manque de réactions visuelles marquées des personnages pour renforcer l'humour. Les expressions faciales restent trop neutres.; 25.2 s L'apparit",
-  "fichier": "2026-11-02_04h08_emission.mp4",
-  "cine": {
-   "focus": false,
-   "vertige": false,
-   "tiers": false,
-   "etalonnage": true,
-   "profondeur": false,
-   "grain": true,
-   "reflets": true,
    "son": true
   },
   "cadence": "rapide"
@@ -5945,34 +5908,70 @@
  {
   "moment": "jour",
   "lieux": [
-   "salon",
-   "rue"
+   "rue",
+   "salon"
   ],
   "source": "auteur+image",
-  "duree": 63.8,
+  "duree": 72.4,
   "plans": {
-   "large": 41
+   "large": 34
   },
   "mouvements": {
-   "fixe": 41
+   "fixe": 34
   },
   "costumes": {
-   "presentateur": "blouse",
+   "presentateur": "chemise",
    "invite": "tshirt"
+  },
+  "figurants": 0,
+  "ambiances": [
+   "poussiere"
+  ],
+  "controle": "Humoriste 10.0/10 :  | Réalisateur 10.0/10 :  | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.1/10 : 0.1 s sous-titres trop rapides à lire",
+  "fichier": "2026-11-02_04h41_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": false,
+   "tiers": false,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": false,
+   "reflets": false,
+   "son": true
+  },
+  "cadence": "rapide"
+ },
+ {
+  "moment": "jour",
+  "lieux": [
+   "rue",
+   "salon"
+  ],
+  "source": "auteur+image",
+  "duree": 72.4,
+  "plans": {
+   "large": 34
+  },
+  "mouvements": {
+   "fixe": 34
+  },
+  "costumes": {
+   "presentateur": "costume",
+   "invite": "chemise"
   },
   "figurants": 0,
   "ambiances": [
    "neon"
   ],
-  "controle": "Humoriste 7.8/10 : 28.0 s La vanne 'C’est pas noté' pourrait être plus drôle avec un bruitage ou une réaction visuelle plus marquée.; 57.1 s La chute sur 'Plus de batterie' est trop rapide et manque d",
-  "fichier": "2026-11-02_05h12_emission.mp4",
+  "controle": "Humoriste 8.8/10 : 2.7 s La réplique 'Même plus dans l'entreprise' manque d'une réaction visuelle plus marquée pour renforcer l'humour.; 44.4 s La chute 'T'es vraiment qu'une racleur de fond de chiott",
+  "fichier": "2026-11-02_05h38_emission.mp4",
   "cine": {
-   "focus": false,
-   "vertige": false,
+   "focus": true,
+   "vertige": true,
    "tiers": true,
-   "etalonnage": true,
+   "etalonnage": false,
    "profondeur": true,
-   "grain": false,
+   "grain": true,
    "reflets": true,
    "son": true
   },
