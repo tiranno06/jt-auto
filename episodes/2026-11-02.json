@@ -1,1000 +1,684 @@
 {
- "titre": "CAMBRIOLAGE ABSURDE",
- "sujet": "CAMBRIOLAGE ABSURDE",
- "ecran": "CAMBRIOLAGE",
+ "titre": "BOMBE NUCLÉAIRE ET TENTATION",
+ "sujet": "BOMBE NUCLÉAIRE ET TENTATION",
+ "ecran": "BOMBE",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "POV : Vous êtes attaché pendant un cambriolage",
- "question": "Et vous, vous auriez réagi comment ?",
+ "titre_accroche": "POV : Vous tenez une bombe nucléaire",
+ "question": "Que feriez-vous si vous teniez une bombe nucléaire ?",
  "running_gag": "",
  "verite": "",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "Si je comprends bien là, vous m'avez digoté.",
-   "_deb": 0.06,
-   "_fin": 1.482,
+   "t": "J'ai une bombe nucléaire sur moi, je fais quoi.",
+   "_deb": 0.542,
+   "_fin": 1.868,
    "_mots": [
     [
-     "Si",
+     "J'ai",
      0.0,
-     0.08
+     0.081
+    ],
+    [
+     "une",
+     0.101,
+     0.201
+    ],
+    [
+     "bombe",
+     0.201,
+     0.362
+    ],
+    [
+     "nucléaire",
+     0.382,
+     0.703
+    ],
+    [
+     "sur",
+     0.703,
+     0.824
+    ],
+    [
+     "moi,",
+     0.884,
+     0.964
     ],
     [
      "je",
-     0.14,
-     0.18
+     1.025,
+     1.065
     ],
     [
-     "comprends",
-     0.24,
-     0.521
+     "fais",
+     1.105,
+     1.205
     ],
     [
-     "bien",
-     0.541,
-     0.641
-    ],
-    [
-     "là,",
-     0.641,
-     0.681
-    ],
-    [
-     "vous",
-     0.701,
-     0.942
-    ],
-    [
-     "m'avez",
-     0.962,
-     1.102
-    ],
-    [
-     "digoté.",
-     1.142,
-     1.422
+     "quoi.",
+     1.246,
+     1.326
     ]
    ]
   },
   {
    "p": "invite",
-   "t": "Oui d'accord, vous m'avez digoté là.",
-   "_deb": 1.723,
-   "_fin": 3.426,
+   "t": "Quoi. Oh non.",
+   "_deb": 3.833,
+   "_fin": 6.21,
+   "d": "[crying] Quoi. Oh non.",
    "_mots": [
     [
-     "Oui",
+     "Quoi.",
      0.0,
-     0.3
+     0.141
     ],
     [
-     "d'accord,",
-     0.4,
-     0.661
+     "Oh",
+     1.027,
+     1.108
     ],
     [
-     "vous",
-     0.721,
-     0.901
+     "non.",
+     1.813,
+     2.377
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Oh non, non. S'il te plaît, ne touche plus à rien.",
+   "_deb": 7.191,
+   "_fin": 10.161,
+   "d": "[crying] Oh non, non. S'il te plaît, ne touche plus à rien.",
+   "_mots": [
+    [
+     "Oh",
+     0.0,
+     0.06
     ],
     [
-     "m'avez",
-     1.001,
-     1.142
+     "non,",
+     0.201,
+     0.361
     ],
     [
-     "digoté",
-     1.162,
-     1.562
+     "non.",
+     0.482,
+     0.883
     ],
     [
-     "là.",
-     1.582,
-     1.703
+     "S'il",
+     1.405,
+     1.525
+    ],
+    [
+     "te",
+     1.565,
+     1.625
+    ],
+    [
+     "plaît,",
+     1.726,
+     1.886
+    ],
+    [
+     "ne",
+     2.147,
+     2.207
+    ],
+    [
+     "touche",
+     2.288,
+     2.468
+    ],
+    [
+     "plus",
+     2.528,
+     2.649
+    ],
+    [
+     "à",
+     2.689,
+     2.709
+    ],
+    [
+     "rien.",
+     2.789,
+     2.97
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Rien du tout.",
+   "_deb": 10.903,
+   "_fin": 11.345,
+   "_mots": [
+    [
+     "Rien",
+     0.0,
+     0.141
+    ],
+    [
+     "du",
+     0.181,
+     0.241
+    ],
+    [
+     "tout.",
+     0.301,
+     0.442
     ]
    ]
   },
   {
    "p": "presentateur",
-   "t": "Vous allez me cambrioler Exactement, on va rien te laisser gros.",
-   "_deb": 3.426,
-   "_fin": 5.831,
+   "t": "Il y a un bouton, j'ai envie d'appuyer. Il y a un bouton, j'ai envie d'appuyer.",
+   "_deb": 11.625,
+   "_fin": 14.501,
+   "objet": "tablette",
    "_mots": [
     [
-     "Vous",
+     "Il",
      0.0,
-     0.1
+     0.061
     ],
     [
-     "allez",
+     "y",
+     0.081,
+     0.101
+    ],
+    [
+     "a",
+     0.141,
+     0.181
+    ],
+    [
+     "un",
+     0.201,
+     0.261
+    ],
+    [
+     "bouton,",
+     0.301,
+     0.542
+    ],
+    [
+     "j'ai",
+     0.582,
+     0.643
+    ],
+    [
+     "envie",
+     0.703,
+     0.863
+    ],
+    [
+     "d'appuyer.",
+     0.863,
+     1.244
+    ],
+    [
+     "Il",
+     1.908,
+     1.948
+    ],
+    [
+     "y",
+     1.948,
+     1.968
+    ],
+    [
+     "a",
+     1.968,
+     1.989
+    ],
+    [
+     "un",
+     2.009,
+     2.069
+    ],
+    [
+     "bouton,",
+     2.089,
+     2.291
+    ],
+    [
+     "j'ai",
+     2.331,
+     2.432
+    ],
+    [
+     "envie",
+     2.472,
+     2.614
+    ],
+    [
+     "d'appuyer.",
+     2.614,
+     2.876
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Je fais quoi. Ça fait bip.",
+   "_deb": 14.541,
+   "_fin": 15.367,
+   "_mots": [
+    [
+     "Je",
+     0.0,
+     0.04
+    ],
+    [
+     "fais",
+     0.04,
+     0.181
+    ],
+    [
+     "quoi.",
+     0.202,
+     0.282
+    ],
+    [
+     "Ça",
+     0.383,
+     0.423
+    ],
+    [
+     "fait",
+     0.464,
+     0.544
+    ],
+    [
+     "bip.",
+     0.564,
+     0.826
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Non, surtout pas. Regarde le loire, ok. Ne l'approche pas.",
+   "_deb": 16.633,
+   "_fin": 20.098,
+   "_mots": [
+    [
+     "Non,",
+     0.0,
+     0.122
+    ],
+    [
+     "surtout",
+     0.85,
+     1.113
+    ],
+    [
+     "pas.",
+     1.153,
+     1.255
+    ],
+    [
+     "Regarde",
+     1.838,
+     2.14
+    ],
+    [
+     "le",
+     2.18,
+     2.24
+    ],
+    [
+     "loire,",
+     2.26,
+     2.441
+    ],
+    [
+     "ok.",
+     2.501,
+     2.602
+    ],
+    [
+     "Ne",
+     2.923,
+     2.983
+    ],
+    [
+     "l'approche",
+     3.044,
+     3.325
+    ],
+    [
+     "pas.",
+     3.365,
+     3.465
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Ne l'approche pas.",
+   "_deb": 20.641,
+   "_fin": 21.223,
+   "_mots": [
+    [
+     "Ne",
+     0.0,
+     0.04
+    ],
+    [
+     "l'approche",
      0.1,
-     0.24
+     0.421
     ],
     [
-     "me",
-     0.26,
-     0.32
+     "pas.",
+     0.482,
+     0.582
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Il est dans ma main, le bouton.",
+   "_deb": 21.484,
+   "_fin": 22.408,
+   "objet": "tablette",
+   "_mots": [
+    [
+     "Il",
+     0.0,
+     0.061
     ],
     [
-     "cambrioler",
-     0.36,
-     0.801
+     "est",
+     0.081,
+     0.161
     ],
     [
-     "Exactement,",
-     0.981,
-     1.582
+     "dans",
+     0.181,
+     0.282
     ],
     [
-     "on",
-     1.602,
-     1.662
+     "ma",
+     0.302,
+     0.382
     ],
     [
-     "va",
-     1.682,
-     1.722
+     "main,",
+     0.442,
+     0.523
     ],
     [
-     "rien",
-     1.762,
-     1.903
+     "le",
+     0.603,
+     0.643
     ],
     [
-     "te",
-     1.923,
-     1.983
+     "bouton.",
+     0.663,
+     0.924
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Oh, ok. N'appuie pas. Ne serre pas. Reste immobile.",
+   "_deb": 23.951,
+   "_fin": 30.084,
+   "d": "[shouting] Oh, ok. N'appuie pas. Ne serre pas. Reste immobile.",
+   "_mots": [
+    [
+     "Oh,",
+     0.0,
+     0.06
     ],
     [
-     "laisser",
-     2.043,
-     2.303
+     "ok.",
+     0.129,
+     2.469
     ],
     [
-     "gros.",
-     2.343,
+     "N'appuie",
+     2.926,
+     3.227
+    ],
+    [
+     "pas.",
+     3.267,
+     3.367
+    ],
+    [
+     "Ne",
+     3.888,
+     3.988
+    ],
+    [
+     "serre",
+     4.65,
+     4.85
+    ],
+    [
+     "pas.",
+     4.93,
+     5.031
+    ],
+    [
+     "Reste",
+     5.532,
+     5.752
+    ],
+    [
+     "immobile.",
+     5.893,
+     6.133
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Je suis en train d'appuyer là. Mon doigt, il arrive sur le bouton.",
+   "_deb": 30.084,
+   "_fin": 32.489,
+   "_mots": [
+    [
+     "Je",
+     0.0,
+     0.04
+    ],
+    [
+     "suis",
+     0.04,
+     0.12
+    ],
+    [
+     "en",
+     0.12,
+     0.16
+    ],
+    [
+     "train",
+     0.16,
+     0.301
+    ],
+    [
+     "d'appuyer",
+     0.301,
+     0.641
+    ],
+    [
+     "là.",
+     0.682,
+     0.742
+    ],
+    [
+     "Mon",
+     1.383,
+     1.443
+    ],
+    [
+     "doigt,",
+     1.483,
+     1.644
+    ],
+    [
+     "il",
+     1.664,
+     1.724
+    ],
+    [
+     "arrive",
+     1.764,
+     1.944
+    ],
+    [
+     "sur",
+     1.964,
+     2.064
+    ],
+    [
+     "le",
+     2.085,
+     2.125
+    ],
+    [
+     "bouton.",
+     2.145,
      2.405
     ]
    ]
   },
   {
    "p": "invite",
-   "t": "Oh point tu rigoles, point tu rigoles.",
-   "_deb": 5.831,
-   "_fin": 8.139,
+   "t": "Ne presse pas, s'il te plaît.",
+   "_deb": 34.652,
+   "_fin": 36.646,
+   "d": "[laughing] Ne presse pas, s'il te plaît.",
    "_mots": [
     [
-     "Oh",
+     "Ne",
      0.0,
-     1.284
+     0.081
     ],
     [
-     "point",
-     1.345,
-     1.505
-    ],
-    [
-     "tu",
-     1.525,
-     1.565
-    ],
-    [
-     "rigoles,",
-     1.585,
-     1.866
-    ],
-    [
-     "point",
-     1.866,
-     1.987
-    ],
-    [
-     "tu",
-     2.007,
-     2.047
-    ],
-    [
-     "rigoles.",
-     2.047,
-     2.308
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Non parce qu'en fait je suis pas matérialiste.",
-   "_deb": 8.199,
-   "_fin": 9.584,
-   "_mots": [
-    [
-     "Non",
-     0.0,
-     0.101
-    ],
-    [
-     "parce",
+     "presse",
      0.141,
-     0.241
+     0.423
     ],
     [
-     "qu'en",
-     0.261,
-     0.362
+     "pas,",
+     0.504,
+     0.705
     ],
     [
-     "fait",
-     0.402,
-     0.502
-    ],
-    [
-     "je",
-     0.502,
-     0.542
-    ],
-    [
-     "suis",
-     0.542,
-     0.663
-    ],
-    [
-     "pas",
-     0.663,
-     0.763
-    ],
-    [
-     "matérialiste.",
-     0.803,
-     1.385
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Donc vraiment prenez ce que vous voulez, il y a la télé là si tu veux.",
-   "_deb": 9.625,
-   "_fin": 11.755,
-   "_mots": [
-    [
-     "Donc",
-     0.0,
-     0.18
-    ],
-    [
-     "vraiment",
-     0.18,
-     0.381
-    ],
-    [
-     "prenez",
-     0.441,
-     0.662
-    ],
-    [
-     "ce",
-     0.702,
-     0.742
-    ],
-    [
-     "que",
-     0.742,
-     0.823
-    ],
-    [
-     "vous",
-     0.823,
-     0.903
-    ],
-    [
-     "voulez,",
-     0.923,
-     1.084
-    ],
-    [
-     "il",
-     1.124,
-     1.284
-    ],
-    [
-     "y",
-     1.284,
-     1.304
-    ],
-    [
-     "a",
-     1.324,
-     1.344
-    ],
-    [
-     "la",
-     1.246,
-     1.326
-    ],
-    [
-     "télé",
-     1.387,
-     1.568
-    ],
-    [
-     "là",
-     1.648,
-     1.708
-    ],
-    [
-     "si",
-     1.768,
-     1.809
-    ],
-    [
-     "tu",
-     1.849,
-     1.929
-    ],
-    [
-     "veux.",
-     1.989,
-     2.13
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Et il y a l'imprimante aussi là, n'hésite pas à la prendre.",
-   "_deb": 11.876,
-   "_fin": 13.744,
-   "_mots": [
-    [
-     "Et",
-     0.0,
-     0.1
-    ],
-    [
-     "il",
-     0.12,
-     0.16
-    ],
-    [
-     "y",
-     0.16,
-     0.18
-    ],
-    [
-     "a",
-     0.22,
-     0.241
-    ],
-    [
-     "l'imprimante",
-     0.281,
-     0.743
-    ],
-    [
-     "aussi",
-     0.783,
-     0.964
-    ],
-    [
-     "là,",
-     0.984,
-     1.044
-    ],
-    [
-     "n'hésite",
-     1.165,
-     1.446
-    ],
-    [
-     "pas",
-     1.466,
-     1.526
-    ],
-    [
-     "à",
-     1.546,
-     1.566
-    ],
-    [
-     "la",
-     1.566,
-     1.627
-    ],
-    [
-     "prendre.",
-     1.667,
-     1.868
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Parce qu'il y a bientôt, je vais m'en débarrasser je te mens pas.",
-   "_deb": 13.764,
-   "_fin": 15.895,
-   "_mots": [
-    [
-     "Parce",
-     0.0,
-     0.261
-    ],
-    [
-     "qu'il",
-     0.281,
-     0.381
-    ],
-    [
-     "y",
-     0.422,
-     0.442
-    ],
-    [
-     "a",
-     0.442,
-     0.462
-    ],
-    [
-     "bientôt,",
-     0.462,
-     1.105
-    ],
-    [
-     "je",
-     1.105,
-     1.265
-    ],
-    [
-     "vais",
-     1.305,
-     1.325
-    ],
-    [
-     "m'en",
-     1.207,
-     1.287
-    ],
-    [
-     "débarrasser",
-     1.328,
-     1.709
-    ],
-    [
-     "je",
-     1.729,
-     1.789
+     "s'il",
+     1.47,
+     1.591
     ],
     [
      "te",
-     1.809,
-     1.85
+     1.672,
+     1.732
     ],
     [
-     "mens",
-     1.89,
-     1.99
-    ],
-    [
-     "pas.",
-     2.03,
-     2.131
+     "plaît.",
+     1.812,
+     1.994
     ]
    ]
   },
   {
    "p": "invite",
-   "t": "Vas-y vas-y.",
-   "_deb": 16.015,
-   "_fin": 16.437,
+   "t": "Non.",
+   "_deb": 37.939,
+   "_fin": 38.083,
+   "d": "[shouting] Non.",
    "_mots": [
     [
-     "Vas-y",
+     "Non.",
      0.0,
-     0.201
-    ],
-    [
-     "vas-y.",
-     0.241,
-     0.422
+     0.144
     ]
    ]
   },
   {
-   "p": "invite",
-   "t": "Toi je vois t'es venu, t'es armé comme sur BO2 Tranquille, y a rien, je vais pas bouger.",
-   "_deb": 16.477,
-   "_fin": 20.755,
-   "_mots": [
-    [
-     "Toi",
-     0.0,
-     0.08
-    ],
-    [
-     "je",
-     0.14,
-     0.181
-    ],
-    [
-     "vois",
-     0.201,
-     0.281
-    ],
-    [
-     "t'es",
-     0.301,
-     0.442
-    ],
-    [
-     "venu,",
-     0.462,
-     0.622
-    ],
-    [
-     "t'es",
-     0.783,
-     0.863
-    ],
-    [
-     "armé",
-     0.903,
-     1.024
-    ],
-    [
-     "comme",
-     1.124,
-     1.285
-    ],
-    [
-     "sur",
-     1.325,
-     1.425
-    ],
-    [
-     "BO2",
-     1.486,
-     1.546
-    ],
-    [
-     "Tranquille,",
-     1.546,
-     2.048
-    ],
-    [
-     "y",
-     2.108,
-     2.128
-    ],
-    [
-     "a",
-     2.148,
-     2.168
-    ],
-    [
-     "rien,",
-     2.188,
-     2.269
-    ],
-    [
-     "je",
-     2.289,
-     2.329
-    ],
-    [
-     "vais",
-     2.329,
-     2.55
-    ],
-    [
-     "pas",
-     3.032,
-     3.413
-    ],
-    [
-     "bouger.",
-     4.118,
-     4.278
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Je vois t'as une arme et tout, pistolet c'est ça.",
-   "_deb": 20.775,
-   "_fin": 22.622,
+   "p": "presentateur",
+   "t": "Je viens d'appuyer sur le bouton.",
+   "_deb": 39.212,
+   "_fin": 40.137,
+   "objet": "tablette",
    "_mots": [
     [
      "Je",
      0.0,
-     0.041
+     0.06
     ],
     [
-     "vois",
-     0.061,
-     0.141
+     "viens",
+     0.06,
+     0.181
     ],
     [
-     "t'as",
-     0.141,
-     0.241
+     "d'appuyer",
+     0.181,
+     0.463
     ],
     [
-     "une",
-     0.322,
-     0.382
-    ],
-    [
-     "arme",
-     0.462,
+     "sur",
+     0.503,
      0.583
     ],
     [
-     "et",
-     0.683,
-     0.743
-    ],
-    [
-     "tout,",
-     0.763,
-     0.904
-    ],
-    [
-     "pistolet",
-     1.004,
-     1.325
-    ],
-    [
-     "c'est",
-     1.506,
-     1.787
-    ],
-    [
-     "ça.",
-     1.787,
-     1.847
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Ouais c'est un nouveau celui-là, ça va t'aimes bien ou quoi.",
-   "_deb": 22.622,
-   "_fin": 24.148,
-   "_mots": [
-    [
-     "Ouais",
-     0.0,
-     0.221
-    ],
-    [
-     "c'est",
-     0.241,
-     0.342
-    ],
-    [
-     "un",
-     0.342,
-     0.382
-    ],
-    [
-     "nouveau",
-     0.402,
-     0.603
-    ],
-    [
-     "celui-là,",
-     0.663,
-     0.884
-    ],
-    [
-     "ça",
-     0.944,
-     0.984
-    ],
-    [
-     "va",
-     1.045,
-     1.085
-    ],
-    [
-     "t'aimes",
-     1.125,
-     1.285
-    ],
-    [
-     "bien",
-     1.285,
-     1.406
-    ],
-    [
-     "ou",
-     1.406,
-     1.446
-    ],
-    [
-     "quoi.",
-     1.446,
-     1.526
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Il passe bien le camouflage dessus, franchement j'aime bien.",
-   "_deb": 24.168,
-   "_fin": 25.816,
-   "_mots": [
-    [
-     "Il",
-     0.0,
-     0.041
-    ],
-    [
-     "passe",
-     0.041,
-     0.161
-    ],
-    [
-     "bien",
-     0.261,
-     0.281
-    ],
-    [
      "le",
-     0.203,
-     0.243
+     0.583,
+     0.684
     ],
     [
-     "camouflage",
-     0.263,
-     0.665
-    ],
-    [
-     "dessus,",
-     0.705,
-     0.886
-    ],
-    [
-     "franchement",
-     0.906,
-     1.167
-    ],
-    [
-     "j'aime",
-     1.207,
-     1.367
-    ],
-    [
-     "bien.",
-     1.468,
-     1.648
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Ouais c'est vrai.",
-   "_deb": 25.877,
-   "_fin": 26.72,
-   "_mots": [
-    [
-     "Ouais",
-     0.0,
-     0.18
-    ],
-    [
-     "c'est",
-     0.642,
-     0.742
-    ],
-    [
-     "vrai.",
-     0.742,
-     0.843
+     "bouton.",
+     0.744,
+     0.925
     ]
    ]
   },
   {
    "p": "invite",
-   "t": "Franchement les gars régalez-vous, moi je suis pas un mec tu vois, je vais pas te défendre.",
-   "_deb": 26.78,
-   "_fin": 29.732,
-   "_mots": [
-    [
-     "Franchement",
-     0.0,
-     0.301
-    ],
-    [
-     "les",
-     0.341,
-     0.401
-    ],
-    [
-     "gars",
-     0.441,
-     0.522
-    ],
-    [
-     "régalez-vous,",
-     0.562,
-     0.983
-    ],
-    [
-     "moi",
-     1.044,
-     1.124
-    ],
-    [
-     "je",
-     1.124,
-     1.204
-    ],
-    [
-     "suis",
-     1.204,
-     1.325
-    ],
-    [
-     "pas",
-     1.345,
-     1.405
-    ],
-    [
-     "un",
-     1.405,
-     1.465
-    ],
-    [
-     "mec",
-     1.586,
-     1.726
-    ],
-    [
-     "tu",
-     1.766,
-     1.806
-    ],
-    [
-     "vois,",
-     2.027,
-     2.288
-    ],
-    [
-     "je",
-     2.308,
-     2.368
-    ],
-    [
-     "vais",
-     2.408,
-     2.609
-    ],
-    [
-     "pas",
-     2.669,
-     2.79
-    ],
-    [
-     "te",
-     2.79,
-     2.81
-    ],
-    [
-     "défendre.",
-     2.37,
-     2.952
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "T'es un bon.",
-   "_deb": 29.772,
-   "_fin": 30.575,
-   "_mots": [
-    [
-     "T'es",
-     0.0,
-     0.241
-    ],
-    [
-     "un",
-     0.261,
-     0.402
-    ],
-    [
-     "bon.",
-     0.442,
-     0.803
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Ça c'est rien, voilà vous êtes venu armé et tout.",
-   "_deb": 30.575,
-   "_fin": 32.663,
+   "t": "Ça va mal finir.",
+   "_deb": 40.137,
+   "_fin": 40.56,
    "_mots": [
     [
      "Ça",
      0.0,
-     0.04
+     0.041
     ],
     [
-     "c'est",
-     0.121,
-     0.341
+     "va",
+     0.041,
+     0.081
     ],
     [
-     "rien,",
-     0.361,
-     0.502
+     "mal",
+     0.081,
+     0.141
     ],
     [
-     "voilà",
-     0.642,
-     0.783
-    ],
-    [
-     "vous",
-     0.843,
-     0.923
-    ],
-    [
-     "êtes",
-     0.964,
-     1.064
-    ],
-    [
-     "venu",
-     1.104,
-     1.245
-    ],
-    [
-     "armé",
-     1.445,
-     1.686
-    ],
-    [
-     "et",
-     1.726,
-     1.927
-    ],
-    [
-     "tout.",
-     1.947,
-     2.088
+     "finir.",
+     0.181,
+     0.423
     ]
    ]
   },
   {
    "p": "presentateur",
-   "t": "Ouais c'est vrai.",
-   "_deb": 32.703,
-   "_fin": 33.285,
-   "_mots": [
-    [
-     "Ouais",
-     0.0,
-     0.341
-    ],
-    [
-     "c'est",
-     0.341,
-     0.421
-    ],
-    [
-     "vrai.",
-     0.441,
-     0.582
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Je suis bien, je suis bien.",
-   "_deb": 33.285,
-   "_fin": 34.67,
+   "t": "Je viens d'appuyer sur le bouton, chat.",
+   "_deb": 41.063,
+   "_fin": 42.069,
    "_mots": [
     [
      "Je",
@@ -1002,917 +686,202 @@
      0.04
     ],
     [
-     "suis",
-     0.04,
-     0.2
+     "viens",
+     0.06,
+     0.161
     ],
     [
-     "bien,",
-     0.221,
-     0.341
-    ],
-    [
-     "je",
-     0.983,
-     1.043
-    ],
-    [
-     "suis",
-     1.043,
-     1.144
-    ],
-    [
-     "bien.",
-     1.284,
-     1.385
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Il a raison les gars. Bah oui c'est vrai t'es bien là, t'es bien.",
-   "_deb": 34.551,
-   "_fin": 36.4,
-   "_mots": [
-    [
-     "Il",
-     0.119,
-     0.179
-    ],
-    [
-     "a",
-     0.199,
-     0.219
-    ],
-    [
-     "raison",
-     0.0,
-     0.141
-    ],
-    [
-     "les",
-     0.181,
-     0.261
-    ],
-    [
-     "gars.",
-     0.302,
-     0.462
-    ],
-    [
-     "Bah",
-     0.663,
-     0.764
-    ],
-    [
-     "oui",
-     0.824,
-     0.904
-    ],
-    [
-     "c'est",
-     0.904,
-     1.045
-    ],
-    [
-     "vrai",
-     1.045,
-     1.125
-    ],
-    [
-     "t'es",
-     1.145,
-     1.226
-    ],
-    [
-     "bien",
-     1.286,
-     1.427
-    ],
-    [
-     "là,",
-     1.467,
-     1.527
-    ],
-    [
-     "t'es",
-     1.628,
-     1.708
-    ],
-    [
-     "bien.",
-     1.748,
-     1.849
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "J'ai assis là, je suis bien. Donc prenez ce que vous voulez là, il y a de tout de toute façon.",
-   "_deb": 36.42,
-   "_fin": 39.235,
-   "_mots": [
-    [
-     "J'ai",
-     0.0,
-     0.06
-    ],
-    [
-     "assis",
-     0.12,
-     0.341
-    ],
-    [
-     "là,",
-     0.402,
-     0.462
-    ],
-    [
-     "je",
-     0.502,
-     0.582
-    ],
-    [
-     "suis",
-     0.582,
-     0.663
-    ],
-    [
-     "bien.",
-     0.663,
-     0.803
-    ],
-    [
-     "Donc",
-     0.803,
-     0.984
-    ],
-    [
-     "prenez",
-     0.984,
-     1.205
-    ],
-    [
-     "ce",
-     1.245,
-     1.286
-    ],
-    [
-     "que",
-     1.326,
-     1.406
-    ],
-    [
-     "vous",
-     1.426,
-     1.547
-    ],
-    [
-     "voulez",
-     1.567,
-     1.788
-    ],
-    [
-     "là,",
-     2.15,
-     2.17
-    ],
-    [
-     "il",
-     1.75,
-     1.79
-    ],
-    [
-     "y",
-     1.79,
-     1.81
-    ],
-    [
-     "a",
-     1.891,
-     1.911
-    ],
-    [
-     "de",
-     1.971,
-     2.011
-    ],
-    [
-     "tout",
-     2.031,
-     2.293
-    ],
-    [
-     "de",
-     2.313,
-     2.373
-    ],
-    [
-     "toute",
-     2.454,
-     2.594
-    ],
-    [
-     "façon.",
-     2.614,
-     2.815
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Il y a même un peu d'argent sur le comptoir là si vous voulez.",
-   "_deb": 39.577,
-   "_fin": 41.306,
-   "_mots": [
-    [
-     "Il",
-     0.0,
-     0.221
-    ],
-    [
-     "y",
-     0.221,
-     0.241
-    ],
-    [
-     "a",
-     0.241,
-     0.262
-    ],
-    [
-     "même",
-     0.282,
+     "d'appuyer",
+     0.161,
      0.402
     ],
     [
-     "un",
-     0.442,
-     0.483
-    ],
-    [
-     "peu",
-     0.483,
-     0.563
-    ],
-    [
-     "d'argent",
-     0.603,
-     0.804
-    ],
-    [
      "sur",
-     0.824,
-     0.945
+     0.463,
+     0.543
     ],
     [
      "le",
-     0.965,
-     1.005
+     0.543,
+     0.583
     ],
     [
-     "comptoir",
-     1.046,
-     1.327
+     "bouton,",
+     0.583,
+     0.785
     ],
     [
-     "là",
-     1.367,
-     1.407
-    ],
-    [
-     "si",
-     1.427,
-     1.468
-    ],
-    [
-     "vous",
-     1.468,
-     1.608
-    ],
-    [
-     "voulez.",
-     1.608,
-     1.729
+     "chat.",
+     0.885,
+     1.006
     ]
    ]
   },
   {
    "p": "invite",
-   "t": "Oh oh oh, t'as un bon, j'ai pas vu, t'es un bon.",
-   "_deb": 41.306,
-   "_fin": 43.778,
+   "t": "Oh merde.",
+   "_deb": 43.817,
+   "_fin": 44.387,
    "_mots": [
     [
      "Oh",
      0.0,
-     0.06
+     0.061
     ],
     [
-     "oh",
-     0.06,
+     "merde.",
+     0.224,
+     0.57
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "T'es encore là. Ça a explosé.",
+   "_deb": 46.814,
+   "_fin": 48.71,
+   "_mots": [
+    [
+     "T'es",
+     0.0,
      0.101
     ],
     [
-     "oh,",
-     0.101,
-     0.261
+     "encore",
+     0.161,
+     0.363
     ],
     [
-     "t'as",
-     0.786,
-     0.866
+     "là.",
+     0.383,
+     0.444
     ],
     [
-     "un",
-     0.926,
-     0.987
+     "Ça",
+     1.069,
+     1.13
     ],
     [
-     "bon,",
-     1.027,
-     1.127
+     "a",
+     1.17,
+     1.19
     ],
     [
-     "j'ai",
-     1.629,
-     1.79
-    ],
-    [
-     "pas",
-     1.81,
-     1.91
-    ],
-    [
-     "vu,",
-     1.93,
-     2.011
-    ],
-    [
-     "t'es",
-     2.191,
-     2.252
-    ],
-    [
-     "un",
-     2.292,
-     2.332
-    ],
-    [
-     "bon.",
-     2.372,
-     2.472
+     "explosé.",
+     1.291,
+     1.896
     ]
    ]
   },
   {
    "p": "presentateur",
-   "t": "T'es en bon.",
-   "_deb": 43.778,
-   "_fin": 44.019,
+   "t": "Ça a explosé.",
+   "_deb": 49.615,
+   "_fin": 50.183,
+   "d": "[laughing] Ça a explosé.",
    "_mots": [
     [
-     "T'es",
+     "Ça",
+     0.0,
+     0.122
+    ],
+    [
+     "a",
+     0.162,
+     0.183
+    ],
+    [
+     "explosé.",
+     0.223,
+     0.568
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Il en sera tient.",
+   "_deb": 53.696,
+   "_fin": 54.71,
+   "_mots": [
+    [
+     "Il",
+     0.0,
+     0.101
+    ],
+    [
+     "en",
+     0.101,
+     0.304
+    ],
+    [
+     "sera",
+     0.345,
+     0.466
+    ],
+    [
+     "tient.",
+     0.547,
+     1.014
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Je suis mort, chat.",
+   "_deb": 56.795,
+   "_fin": 57.485,
+   "_mots": [
+    [
+     "Je",
      0.0,
      0.061
     ],
     [
-     "en",
-     0.121,
-     0.161
+     "suis",
+     0.081,
+     0.182
     ],
     [
-     "bon.",
-     0.161,
-     0.241
+     "mort,",
+     0.223,
+     0.426
+    ],
+    [
+     "chat.",
+     0.487,
+     0.69
     ]
    ]
   },
   {
    "p": "invite",
-   "t": "T'es rigole les gars Tranquille les gars Tranquille.",
-   "_deb": 44.059,
-   "_fin": 45.846,
-   "_mots": [
-    [
-     "T'es",
-     0.0,
-     0.081
-    ],
-    [
-     "rigole",
-     0.101,
-     0.362
-    ],
-    [
-     "les",
-     0.382,
-     0.482
-    ],
-    [
-     "gars",
-     0.502,
-     0.643
-    ],
-    [
-     "Tranquille",
-     0.824,
-     1.145
-    ],
-    [
-     "les",
-     1.145,
-     1.225
-    ],
-    [
-     "gars",
-     1.245,
-     1.366
-    ],
-    [
-     "Tranquille.",
-     1.386,
-     1.787
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Vas-y raconte pas ta liste.",
-   "_deb": 45.887,
-   "_fin": 46.67,
-   "_mots": [
-    [
-     "Vas-y",
-     0.0,
-     0.12
-    ],
-    [
-     "raconte",
-     0.2,
-     0.401
-    ],
-    [
-     "pas",
-     0.401,
-     0.481
-    ],
-    [
-     "ta",
-     0.501,
-     0.562
-    ],
-    [
-     "liste.",
-     0.602,
-     0.783
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Vas-y.",
-   "_deb": 46.711,
-   "_fin": 46.912,
-   "_mots": [
-    [
-     "Vas-y.",
-     0.0,
-     0.201
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Bon les gars 4-4-2 comme on a dit. On va commencer à prendre la play.",
-   "_deb": 47.032,
-   "_fin": 49.442,
-   "_mots": [
-    [
-     "Bon",
-     0.0,
-     0.081
-    ],
-    [
-     "les",
-     0.121,
-     0.201
-    ],
-    [
-     "gars",
-     0.241,
-     0.603
-    ],
-    [
-     "4-4-2",
-     0.623,
-     0.824
-    ],
-    [
-     "comme",
-     0.824,
-     0.964
-    ],
-    [
-     "on",
-     0.984,
-     1.025
-    ],
-    [
-     "a",
-     1.105,
-     1.125
-    ],
-    [
-     "dit.",
-     1.165,
-     1.306
-    ],
-    [
-     "On",
-     1.406,
-     1.446
-    ],
-    [
-     "va",
-     1.466,
-     1.527
-    ],
-    [
-     "commencer",
-     1.587,
-     1.848
-    ],
-    [
-     "à",
-     1.848,
-     1.868
-    ],
-    [
-     "prendre",
-     1.868,
-     2.189
-    ],
-    [
-     "la",
-     2.189,
-     2.229
-    ],
-    [
-     "play.",
-     2.29,
-     2.41
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Ok la play.",
-   "_deb": 49.603,
-   "_fin": 50.004,
-   "objet": "tablette",
-   "_mots": [
-    [
-     "Ok",
-     0.0,
-     0.08
-    ],
-    [
-     "la",
-     0.16,
-     0.261
-    ],
-    [
-     "play.",
-     0.281,
-     0.401
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "On prend la play. Et après on.",
-   "_deb": 50.326,
-   "_fin": 51.472,
-   "_mots": [
-    [
-     "On",
-     0.0,
-     0.04
-    ],
-    [
-     "prend",
-     0.06,
-     0.241
-    ],
-    [
-     "la",
-     0.261,
-     0.341
-    ],
-    [
-     "play.",
-     0.381,
-     0.562
-    ],
-    [
-     "Et",
-     0.622,
-     0.662
-    ],
-    [
-     "après",
-     0.722,
-     0.963
-    ],
-    [
-     "on.",
-     1.085,
-     1.146
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Attendez attendez.",
-   "_deb": 51.632,
-   "_fin": 53.016,
-   "_mots": [
-    [
-     "Attendez",
-     0.0,
-     0.842
-    ],
-    [
-     "attendez.",
-     0.883,
-     1.384
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Quoi.",
-   "_deb": 53.337,
-   "_fin": 53.457,
-   "_mots": [
-    [
-     "Quoi.",
-     0.0,
-     0.12
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Vous allez prendre quoi vous avez dit.",
-   "_deb": 53.678,
-   "_fin": 54.982,
-   "_mots": [
-    [
-     "Vous",
-     0.0,
-     0.08
-    ],
-    [
-     "allez",
-     0.12,
-     0.241
-    ],
-    [
-     "prendre",
-     0.281,
-     0.441
-    ],
-    [
-     "quoi",
-     0.461,
-     0.722
-    ],
-    [
-     "vous",
-     0.782,
-     1.123
-    ],
-    [
-     "avez",
-     1.123,
-     1.203
-    ],
-    [
-     "dit.",
-     1.243,
-     1.304
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "On va prendre la play.",
-   "_deb": 55.002,
-   "_fin": 55.383,
-   "_mots": [
-    [
-     "On",
-     0.0,
-     0.04
-    ],
-    [
-     "va",
-     0.04,
-     0.08
-    ],
-    [
-     "prendre",
-     0.08,
-     0.24
-    ],
-    [
-     "la",
-     0.26,
-     0.321
-    ],
-    [
-     "play.",
-     0.361,
-     0.381
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Vous allez prendre la play.",
-   "_deb": 55.02,
-   "_fin": 56.887,
-   "_mots": [
-    [
-     "Vous",
-     0.0,
-     1.04
-    ],
-    [
-     "allez",
-     1.245,
-     1.406
-    ],
-    [
-     "prendre",
-     1.426,
-     1.606
-    ],
-    [
-     "la",
-     1.646,
-     1.687
-    ],
-    [
-     "play.",
-     1.727,
-     1.867
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Ouais c'est ça ta play.",
-   "_deb": 57.128,
-   "_fin": 57.852,
-   "_mots": [
-    [
-     "Ouais",
-     0.0,
-     0.14
-    ],
-    [
-     "c'est",
-     0.18,
-     0.261
-    ],
-    [
-     "ça",
-     0.321,
-     0.361
-    ],
-    [
-     "ta",
-     0.481,
-     0.541
-    ],
-    [
-     "play.",
-     0.563,
-     0.724
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Les gars l'abonnement PS Plus. Il s'est renouvelé hier. Alors que wesh.",
-   "_deb": 58.193,
-   "_fin": 61.025,
-   "objet": "tablette",
-   "_mots": [
-    [
-     "Les",
-     0.0,
-     0.081
-    ],
-    [
-     "gars",
-     0.101,
-     0.241
-    ],
-    [
-     "l'abonnement",
-     0.241,
-     0.543
-    ],
-    [
-     "PS",
-     0.623,
-     0.804
-    ],
-    [
-     "Plus.",
-     0.924,
-     1.085
-    ],
-    [
-     "Il",
-     1.185,
-     1.225
-    ],
-    [
-     "s'est",
-     1.265,
-     1.366
-    ],
-    [
-     "renouvelé",
-     1.386,
-     1.627
-    ],
-    [
-     "hier.",
-     1.747,
-     1.988
-    ],
-    [
-     "Alors",
-     2.37,
-     2.571
-    ],
-    [
-     "que",
-     2.571,
-     2.651
-    ],
-    [
-     "wesh.",
-     2.651,
-     2.832
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Wesh wesh wesh",
-   "_deb": 61.165,
-   "_fin": 62.15,
+   "t": "Oui.",
+   "_deb": 59.338,
+   "_fin": 59.441,
    "chute": true,
    "_mots": [
     [
-     "Wesh",
+     "Oui.",
      0.0,
-     0.181
-    ],
-    [
-     "wesh",
-     0.221,
-     0.422
-    ],
-    [
-     "wesh",
-     0.462,
-     0.985
+     0.103
     ]
    ]
   }
  ],
  "bandeau": [],
  "gag": null,
- "legende": "Quand le PS Plus vaut plus cher que tout le reste.",
+ "legende": "Quand la tentation devient trop forte, même une bombe nucléaire peut causer des dégâts.",
  "hashtags": [
   "petitsdramas",
-  "cambriolage",
-  "humourabsurde",
-  "psplus",
-  "tiktokdrama",
-  "reaction",
-  "stealthis"
+  "bombenucleaire",
+  "tentation",
+  "humournoir",
+  "dramecomique",
+  "chatexplosif",
+  "panique"
  ],
  "sources": [
-  "https://www.tiktok.com/@vignianimation/video/7701771541142342945"
+  "https://www.tiktok.com/@kodanimation/video/7684997943513877793"
  ],
  "decoupage": [
   {
@@ -1939,61 +908,42 @@
     18,
     19,
     20,
-    21,
-    22,
-    23,
-    24,
-    25,
-    26,
-    27,
-    28,
-    29,
-    30,
-    31,
-    32,
-    33,
-    34,
-    35,
-    36,
-    37
+    21
    ],
    "lieu": "",
    "son": "",
    "duree": 0.0,
-   "decor": "chambre avec une chaise en bois, une télé allumée, une imprimante sur un bureau, des chaînes autour des poignets et des pieds de l'invite. Éclairage tamisé.",
-   "titre": "Le cambriolage absurde"
+   "decor": "même chambre, mais avec une tension accrue, la tablette maintenant tenue à bout de bras par le personnage allongé.",
+   "titre": "L'interdiction"
   }
  ],
  "studio": {
-  "moment": "soir",
+  "moment": "nuit",
   "lieux": [
    "chambre"
   ],
   "costumes": {
    "presentateur": {
     "haut": "tshirt",
-    "c_haut": "rouge",
+    "c_haut": "bleu",
+    "motif": "uni",
+    "bas": "pyjama",
+    "chaussures": "chaussons",
+    "details": [
+     "barbe_courte"
+    ],
+    "chapeau": null,
+    "cheveux": "herisse",
+    "c_cheveux": "brun"
+   },
+   "invite": {
+    "haut": "pull",
+    "c_haut": "vert",
     "motif": "uni",
     "bas": "pantalon",
     "chaussures": "baskets",
     "details": [
-     "barbe_courte",
-     "lunettes_soleil"
-    ],
-    "chapeau": null,
-    "cheveux": "court",
-    "c_cheveux": "brun"
-   },
-   "invite": {
-    "haut": "chemise",
-    "c_haut": "blanc",
-    "motif": "uni",
-    "bas": "pantalon",
-    "chaussures": "ville",
-    "details": [
-     "chaîne_autour_poignet",
-     "chaîne_autour_pied",
-     "sourire_forcé"
+     "lunettes_vue"
     ],
     "chapeau": null,
     "cheveux": "long",
@@ -2007,241 +957,385 @@
     "age": 35,
     "taille": 1,
     "corpulence": 0.7,
-    "cheveux": "court",
+    "cheveux": "herisse",
     "barbe": "trois_jours"
    },
    "invite": {
-    "genre": "h",
-    "age": 40,
-    "taille": 1,
+    "genre": "f",
+    "age": 30,
+    "taille": 0.95,
     "corpulence": 0.6,
     "cheveux": "long",
     "barbe": "rien"
    }
   },
   "gags": [
-   "Abonnement PS Plus : La vraie fortune",
-   "Télé : Toujours allumée, jamais regardée",
-   "Imprimante : Dernière en date, jamais utilisée"
+   "Appuyez ici pour gagner un million... ou pas.",
+   "Bouton rouge : danger (ou pas).",
+   "Chat inclus : 0% de chances de survie."
+  ],
+  "ambiances": [
+   "vapeur"
   ],
   "cadence": "rapide",
-  "ambiances": [
-   "neon"
-  ],
   "plans": [
    {
     "replique": 0,
-    "plan": "moyen",
-    "mouvement": "fixe",
-    "geste": "pointe_d",
-    "reaction": "regard_camera"
-   },
-   {
-    "replique": 3,
-    "plan": "serre",
-    "mouvement": "zoom_choc",
-    "geste": "facepalm",
-    "reaction": "choc"
-   },
-   {
-    "replique": 8,
     "plan": "large",
-    "mouvement": "travelling",
-    "geste": "bras_ouverts",
+    "mouvement": "fixe",
+    "geste": "gratte_tete",
     "reaction": "aucune"
    },
    {
-    "replique": 22,
-    "plan": "tres_serre",
+    "replique": 1,
+    "plan": "serré",
     "mouvement": "fixe",
     "geste": "pointe_g",
     "reaction": "choc"
    },
    {
-    "replique": 36,
-    "plan": "serre",
+    "replique": 2,
+    "plan": "moyen",
+    "mouvement": "fixe",
+    "geste": "bras_ouverts",
+    "reaction": "panique"
+   },
+   {
+    "replique": 3,
+    "plan": "serré",
     "mouvement": "zoom_choc",
-    "geste": "gratte_tete",
+    "geste": "pointe_d",
+    "reaction": "sceptique"
+   },
+   {
+    "replique": 4,
+    "plan": "tres_serre",
+    "mouvement": "fixe",
+    "geste": "appuye",
+    "reaction": "aucune"
+   },
+   {
+    "replique": 5,
+    "plan": "serré",
+    "mouvement": "fixe",
+    "geste": "facepalm",
+    "reaction": "choc"
+   },
+   {
+    "replique": 6,
+    "plan": "large",
+    "mouvement": "fixe",
+    "geste": "pointe_g",
+    "reaction": "panique"
+   },
+   {
+    "replique": 7,
+    "plan": "serré",
+    "mouvement": "fixe",
+    "geste": "supplie",
+    "reaction": "choc"
+   },
+   {
+    "replique": 8,
+    "plan": "tres_serre",
+    "mouvement": "zoom_choc",
+    "geste": "pointe_d",
+    "reaction": "aucune"
+   },
+   {
+    "replique": 9,
+    "plan": "moyen",
+    "mouvement": "fixe",
+    "geste": "mains_hanches",
     "reaction": "reflechit"
+   },
+   {
+    "replique": 10,
+    "plan": "serré",
+    "mouvement": "fixe",
+    "geste": "appuye",
+    "reaction": "panique"
+   },
+   {
+    "replique": 11,
+    "plan": "tres_serre",
+    "mouvement": "zoom_choc",
+    "geste": "supplie",
+    "reaction": "choc"
+   },
+   {
+    "replique": 12,
+    "plan": "serré",
+    "mouvement": "fixe",
+    "geste": "poing",
+    "reaction": "sceptique"
+   },
+   {
+    "replique": 13,
+    "plan": "serré",
+    "mouvement": "fixe",
+    "geste": "appuye",
+    "reaction": "choc"
+   },
+   {
+    "replique": 14,
+    "plan": "large",
+    "mouvement": "fixe",
+    "geste": "bras_ouverts",
+    "reaction": "panique"
+   },
+   {
+    "replique": 15,
+    "plan": "serré",
+    "mouvement": "fixe",
+    "geste": "pointe_d",
+    "reaction": "choc"
+   },
+   {
+    "replique": 16,
+    "plan": "tres_serre",
+    "mouvement": "zoom_choc",
+    "geste": "facepalm",
+    "reaction": "horrifié"
+   },
+   {
+    "replique": 17,
+    "plan": "large",
+    "mouvement": "fixe",
+    "geste": "desespoir",
+    "reaction": "aucune"
+   },
+   {
+    "replique": 18,
+    "plan": "serré",
+    "mouvement": "fixe",
+    "geste": "pointe_g",
+    "reaction": "choc"
+   },
+   {
+    "replique": 19,
+    "plan": "moyen",
+    "mouvement": "fixe",
+    "geste": "bras_ouverts",
+    "reaction": "sceptique"
+   },
+   {
+    "replique": 20,
+    "plan": "tres_serre",
+    "mouvement": "fixe",
+    "geste": "mains_hanches",
+    "reaction": "aucune"
+   },
+   {
+    "replique": 21,
+    "plan": "large",
+    "mouvement": "fixe",
+    "geste": "pointe_g",
+    "reaction": "sarcastique"
    }
   ],
   "objets": [
    {
-    "replique": 5,
-    "objet": "télécommande"
-   },
-   {
-    "replique": 28,
+    "replique": 4,
     "objet": "tablette"
    },
    {
-    "replique": 36,
+    "replique": 8,
+    "objet": "tablette"
+   },
+   {
+    "replique": 13,
     "objet": "tablette"
    }
   ],
   "decors_vus": {
-   "presentateur": "chambre avec une télé allumée sur un meuble en bois clair, une imprimante couleur noire posées sur un bureau en désordre, une chaise en bois avec des chaînes rouillées autour des poignets et des pieds de l'invite, une lampe de chevet rouge et une étagère remplie de livres et de gadgets électroniques.",
-   "invite": "même décor, mais avec un ordinateur portable ouvert affichant l'abonnement PS Plus, une télécommande à côté d'un verre vide et une chaîne reliant la chaise au radiateur."
+   "presentateur": "chambre avec un lit défait, une tablette bleue, un réveil rouge sur la table de chevet, une lampe de chevet allumée et un mur blanc.",
+   "invite": "même chambre vue depuis le côté du lit, avec un fond de mur blanc et une lumière tamisée."
   }
  },
  "doublage": {
-  "piste": "/tmp/tmp02e3zpzj/piste.wav",
-  "duree": 62.53,
-  "source": "https://www.tiktok.com/@vignianimation/video/7701771541142342945",
-  "auteur": "vignianimation",
-  "contexte": "Un homme attaché à une chaise dans une chambre est 'cambriolé' par des intrus qui finissent par réaliser qu'il n'a rien de valeur, sauf un abonnement PS Plus récemment renouvelé. L'humour repose sur l'absurdité de la situation et la réaction exagérée du 'victime' face à ce détail.",
-  "evenements": [],
+  "piste": "/tmp/tmpmuvta9as/piste.wav",
+  "duree": 60.35,
+  "source": "https://www.tiktok.com/@kodanimation/video/7684997943513877793",
+  "auteur": "kodanimation",
+  "contexte": "Deux personnages se trouvent dans une chambre, l'un allongé sur un lit avec une tablette, l'autre assis à côté de lui, tentant de l'empêcher d'appuyer sur un bouton imaginaire de bombe nucléaire.",
+  "evenements": [
+   [
+    2.0,
+    4.0,
+    "laughter"
+   ],
+   [
+    3.0,
+    8.0,
+    "crying"
+   ],
+   [
+    23.0,
+    25.0,
+    "laughter"
+   ],
+   [
+    24.0,
+    26.0,
+    "scream"
+   ],
+   [
+    33.0,
+    35.0,
+    "laughter"
+   ],
+   [
+    37.0,
+    39.0,
+    "scream"
+   ],
+   [
+    50.0,
+    52.0,
+    "laughter"
+   ],
+   [
+    51.0,
+    53.0,
+    "scream"
+   ],
+   [
+    55.0,
+    57.0,
+    "kiss"
+   ],
+   [
+    58.0,
+    60.0,
+    "dog"
+   ]
+  ],
   "visuel": {
    "gestes": [],
-   "duree": 62.5,
-   "nb_plans": 1,
-   "duree_plan": 62.5,
-   "coupes": [],
+   "duree": 60.5,
+   "nb_plans": 5,
+   "duree_plan": 12.1,
+   "coupes": [
+    28.0,
+    56.0,
+    56.5,
+    60.0
+   ],
    "plans": {
     "tres_serre": 0.0,
-    "serre": 0.0,
-    "moyen": 0.76,
-    "large": 0.24
+    "serre": 0.008,
+    "moyen": 0.0,
+    "large": 0.992
    },
    "camera": {
-    "fixe": 0.573,
-    "avance": 0.145,
-    "recul": 0.258,
-    "travelling": 0.024,
+    "fixe": 1.0,
+    "avance": 0.0,
+    "recul": 0.0,
+    "travelling": 0.0,
     "epaule": 0.0
    },
    "nb_personnes": 1,
-   "personnes": [
-    {
-     "place": "centre",
-     "presence": 0.544,
-     "habit": [
-      190,
-      112,
-      52
-     ],
-     "cheveux": [
-      11,
-      11,
-      10
-     ],
-     "sourire": 0.0,
-     "taille": 0.1,
-     "tete_penchee": 1.8,
-     "regard_cote": 0.941
-    },
-    {
-     "place": "droite",
-     "presence": 0.216,
-     "habit": [
-      155,
-      12,
-      9
-     ],
-     "cheveux": [
-      51,
-      30,
-      30
-     ],
-     "sourire": 0.0,
-     "taille": 0.089,
-     "tete_penchee": 2.4,
-     "regard_cote": 0.111
-    }
-   ],
+   "personnes": [],
    "visages": true,
    "sourires": 0.0,
-   "energie": 0.985,
+   "energie": 0.078,
    "mur": [
-    205,
-    132,
-    86
+    254,
+    254,
+    253
    ],
    "palette": [
     [
-     213,
-     139,
-     91,
-     0.335
+     253,
+     254,
+     253,
+     0.419
     ],
     [
-     177,
-     110,
-     72,
-     0.208
+     181,
+     208,
+     227,
+     0.238
     ],
     [
+     133,
+     185,
+     188,
+     0.114
+    ],
+    [
+     173,
+     140,
+     134,
+     0.098
+    ],
+    [
+     5,
+     6,
+     6,
+     0.097
+    ],
+    [
+     75,
      82,
-     42,
-     26,
-     0.182
-    ],
-    [
-     130,
-     72,
-     49,
-     0.125
-    ],
-    [
-     24,
-     17,
-     20,
-     0.121
-    ],
-    [
-     245,
-     239,
-     235,
-     0.029
+     87,
+     0.034
     ]
    ],
    "lumiere": {
-    "luminosite": 151.8,
-    "chaleur": 83.9,
-    "saturation": 147.3
+    "luminosite": 207.0,
+    "chaleur": -13.9,
+    "saturation": 40.2
    },
-   "moment": "soir",
+   "moment": "jour",
    "postures": []
   },
   "audio": {
-   "duree": 62.5,
+   "duree": 60.4,
    "nb_voix": 2,
    "voix": [
     {
-     "hz": 173,
-     "genre": "?",
-     "part": 0.33
+     "hz": 120,
+     "genre": "h",
+     "part": 0.34
     },
     {
-     "hz": 175,
-     "genre": "?",
-     "part": 0.67
+     "hz": 132,
+     "genre": "h",
+     "part": 0.66
     }
    ],
-   "debit": 5.34,
-   "blanc_moyen": 0.12,
-   "coupes": 19,
-   "dynamique_db": 16.6,
-   "cris": 0.026,
+   "debit": 3.98,
+   "blanc_moyen": 1.33,
+   "coupes": 2,
+   "dynamique_db": 34.1,
+   "cris": 0.075,
    "musique": 0.41,
-   "impacts": 21,
-   "impacts_10s": 3.36,
-   "graves": 1,
-   "aigus": 20,
-   "sur_vanne": 10,
-   "evenements": {},
+   "impacts": 38,
+   "impacts_10s": 6.3,
+   "graves": 5,
+   "aigus": 33,
+   "sur_vanne": 9,
+   "evenements": {
+    "laughter": 4,
+    "scream": 3,
+    "crying": 1,
+    "kiss": 1,
+    "dog": 1
+   },
    "emotions": {
-    "neutre": 10,
-    "indifferent": 3,
-    "colere": 2,
-    "blase": 2,
-    "approbateur": 2,
-    "panique": 2,
+    "paniqué": 3,
     "confus": 2,
-    "sceptique": 1
+    "inquiet": 1,
+    "affolé": 1,
+    "nerveux": 1,
+    "obsédé": 1,
+    "urgent": 1,
+    "désespéré": 1
    }
   },
-  "video_origine": "/tmp/tmp02e3zpzj/src.mp4",
+  "video_origine": "/tmp/tmpmuvta9as/src.mp4",
   "debut": 0.0
  },
  "fiche": {
@@ -2272,29 +1366,13 @@
      18,
      19,
      20,
-     21,
-     22,
-     23,
-     24,
-     25,
-     26,
-     27,
-     28,
-     29,
-     30,
-     31,
-     32,
-     33,
-     34,
-     35,
-     36,
-     37
+     21
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "chambre avec une chaise en bois, une télé allumée, une imprimante sur un bureau, des chaînes autour des poignets et des pieds de l'invite. Éclairage tamisé.",
-    "titre": "Le cambriolage absurde"
+    "decor": "même chambre, mais avec une tension accrue, la tablette maintenant tenue à bout de bras par le personnage allongé.",
+    "titre": "L'interdiction"
    }
   ]
  },
@@ -2311,7 +1389,7 @@
    "poste": "ingé son",
    "controle": "mots à une vitesse possible",
    "ok": true,
-   "detail": "8 mot(s) trop courts",
+   "detail": "3 mot(s) trop courts",
    "revoir": false
   },
   {
@@ -2324,29 +1402,29 @@
   {
    "poste": "ingé son",
    "controle": "deux transcriptions d'accord",
-   "ok": false,
-   "detail": "79 % de mots identiques, 1 doute(s), 0 corrigé(s)",
+   "ok": true,
+   "detail": "86 % de mots identiques, 1 doute(s), 1 corrigé(s)",
    "revoir": false
   },
   {
    "poste": "casting voix",
    "controle": "témoin image (qui parle dans l'original)",
    "ok": true,
-   "detail": "51/51 phrases lisibles (Gemini (vidéo entière), mouvements)",
+   "detail": "19/36 phrases lisibles (mouvements)",
    "revoir": false
   },
   {
    "poste": "casting voix",
-   "controle": "fil du dialogue repris (son + texte + image)",
+   "controle": "le son et l'image sont d'accord",
    "ok": true,
-   "detail": "voix proches (0.85)",
+   "detail": "11 % de désaccord",
    "revoir": false
   },
   {
    "poste": "casting voix",
    "controle": "parole répartie entre les personnages",
    "ok": true,
-   "detail": "2 voix, la plus bavarde dit 62 %",
+   "detail": "2 voix, la plus bavarde dit 53 %",
    "revoir": false
   },
   {
@@ -2410,49 +1488,33 @@
   0
  ],
  "_voix_hz": {
-  "presentateur": 166,
-  "invite": 170
+  "presentateur": 120,
+  "invite": 131
  },
  "_voix_genre": {
   "presentateur": "h",
   "invite": "h"
  },
  "realisation": {
-  "moment": "soir",
+  "moment": "nuit",
   "lieux": [
    "chambre"
   ],
   "gags": [
-   "Abonnement PS Plus : La vraie fortune",
-   "Télé : Toujours allumée, jamais regardée",
-   "Imprimante : Dernière en date, jamais utilisée"
+   "Appuyez ici pour gagner un million... ou pas.",
+   "Bouton rouge : danger (ou pas).",
+   "Chat inclus : 0% de chances de survie."
   ],
   "ambiances": [
-   "neon",
-   "poussiere"
+   "pluie",
+   "vapeur"
   ],
   "source": "auteur+image",
   "tenues": {
    "presentateur": "tshirt",
-   "invite": "chemise"
+   "invite": "pull"
   },
   "plans": [
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
    "large/fixe",
    "large/fixe",
    "large/fixe",
