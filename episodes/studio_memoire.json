@@ -5984,30 +5984,70 @@
  {
   "moment": "jour",
   "lieux": [
-   "jardin"
+   "rue",
+   "salon"
   ],
   "source": "auteur+image",
-  "duree": 63.3,
+  "duree": 75.6,
   "plans": {
-   "large": 30
+   "large": 37
   },
   "mouvements": {
-   "fixe": 30
+   "fixe": 37
   },
   "costumes": {
    "presentateur": "tshirt",
-   "invite": "chemise"
+   "envoyee": "capuche"
   },
-  "figurants": 1,
-  "ambiances": [],
-  "controle": "Humoriste 7.8/10 : 1.7 s La réplique 'Ben, valait bien que je ramène un truc' manque une réaction exagérée du personnage pour renforcer le côté absurde.; 32.4 s La vanne sur l'abus et le rétroviseur a",
-  "fichier": "2026-11-02_06h35_emission.mp4",
+  "figurants": 0,
+  "ambiances": [
+   "neon",
+   "pluie"
+  ],
+  "controle": "Humoriste 8.6/10 : 11.8 s La réplique 'Euh...' manque de réactivité comique. Le personnage devrait avoir une expression ou un geste plus marqué pour renforcer l'humour. | Réalisateur 6.0/10 : 0.4 s Le",
+  "fichier": "2026-11-02_06h38_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": false,
+   "tiers": false,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": true,
+   "reflets": true,
+   "son": true
+  },
+  "cadence": "rapide"
+ },
+ {
+  "moment": "soir",
+  "lieux": [
+   "cuisine"
+  ],
+  "source": "auteur+image",
+  "duree": 64.6,
+  "plans": {
+   "large": 22
+  },
+  "mouvements": {
+   "fixe": 22
+  },
+  "costumes": {
+   "presentateur": "tablier",
+   "envoyee": "tshirt"
+  },
+  "figurants": 0,
+  "ambiances": [
+   "poussiere",
+   "vapeur"
+  ],
+  "controle": "Humoriste 10.0/10 :  | Réalisateur 10.0/10 :  | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.1/10 : 0.2 s sous-titres trop rapides à lire",
+  "fichier": "2026-11-02_07h29_emission.mp4",
   "cine": {
    "focus": false,
    "vertige": true,
    "tiers": true,
    "etalonnage": false,
-   "profondeur": true,
+   "profondeur": false,
    "grain": true,
    "reflets": true,
    "son": true
