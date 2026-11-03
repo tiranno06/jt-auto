@@ -6124,38 +6124,40 @@
   "cadence": "rapide"
  },
  {
-  "moment": "jour",
+  "moment": "soir",
   "lieux": [
-   "bureau"
+   "salon"
   ],
   "source": "auteur+image",
-  "duree": 67.6,
+  "duree": 62.8,
   "plans": {
-   "large": 30
+   "large": 22
   },
   "mouvements": {
-   "fixe": 30
+   "fixe": 22
   },
   "costumes": {
-   "presentateur": "chemise",
-   "invite": "tshirt"
+   "invite": "tshirt",
+   "envoyee": "blouse",
+   "presentateur": "chemise"
   },
-  "figurants": 0,
+  "figurants": 1,
   "ambiances": [
-   "neon"
+   "pluie",
+   "poussiere"
   ],
-  "controle": "Humoriste 10.0/10 :  | Réalisateur 10.0/10 :  | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.1/10 : 0.0 s sous-titres trop rapides à lire",
-  "fichier": "2026-11-03_06h55_emission.mp4",
+  "controle": "Humoriste 7.0/10 : 0.4 s La vannes initiale ('Je suis une pute') est un peu trop directe et pourrait choquer certains spectateurs, surtout dans un format destiné à un jeune public.; 12.9 s La chute su",
+  "fichier": "2026-11-03_07h23_emission.mp4",
   "cine": {
-   "focus": true,
-   "vertige": true,
+   "focus": false,
+   "vertige": false,
    "tiers": true,
    "etalonnage": true,
    "profondeur": false,
    "grain": true,
-   "reflets": false,
+   "reflets": true,
    "son": true
   },
-  "cadence": "rapide"
+  "cadence": null
  }
 ]
