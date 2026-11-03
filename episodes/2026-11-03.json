@@ -1,879 +1,97 @@
 {
- "titre": "DÉBAT ABSURDE",
- "sujet": "DÉBAT ABSURDE",
- "ecran": "DÉBAT ABSURDE",
+ "titre": "COLIS PERDU OU CACHÉ ?",
+ "sujet": "COLIS PERDU OU CACHÉ ?",
+ "ecran": "COLIS PERDU OU",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "POV : Les hommes souffre",
- "question": "Pourquoi les hommes souffrent-ils de ces dialogues sans queue ni tête ?",
+ "titre_accroche": "POV : Votre colis est-il perdu ou juste oublié",
+ "question": "Comment gérer un client en colère sans perdre son calme ?",
  "running_gag": "",
  "verite": "",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "Qu'est-ce qu'il y a encore.",
-   "_deb": 5.091,
-   "_fin": 5.856,
-   "d": "[annoyed] Qu'est-ce qu'il y a encore.",
-   "objet": "bouteille",
+   "t": "Bonjour, je voulais savoir où est-ce que vous en étiez avec mon colis.",
+   "_deb": 0.12,
+   "_fin": 2.025,
+   "d": "[annoyed] Bonjour, je voulais savoir où est-ce que vous en étiez avec mon colis.",
+   "objet": "telephone",
    "_mots": [
     [
-     "Qu'est-ce",
+     "Bonjour,",
      0.0,
-     0.222
-    ],
-    [
-     "qu'il",
-     0.222,
-     0.343
-    ],
-    [
-     "y",
-     0.343,
-     0.383
-    ],
-    [
-     "a",
-     0.403,
-     0.423
-    ],
-    [
-     "encore.",
-     0.524,
-     0.765
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Y'a rien. Y'a rien du tout.",
-   "_deb": 6.037,
-   "_fin": 8.11,
-   "d": "[blase] Y'a rien. Y'a rien du tout.",
-   "_mots": [
-    [
-     "Y'a",
-     0.0,
-     0.121
-    ],
-    [
-     "rien.",
-     0.222,
-     0.443
-    ],
-    [
-     "Y'a",
-     0.966,
-     1.067
-    ],
-    [
-     "rien",
-     1.147,
-     1.349
-    ],
-    [
-     "du",
-     1.409,
-     1.53
-    ],
-    [
-     "tout.",
-     1.53,
-     2.073
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Ok.",
-   "_deb": 10.137,
-   "_fin": 10.239,
-   "d": "[neutre] Ok.",
-   "_mots": [
-    [
-     "Ok.",
-     0.0,
-     0.102
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Tu t'en fous de ma gueule toi en fait.",
-   "_deb": 11.272,
-   "_fin": 12.617,
-   "d": "[colere] Tu t'en fous de ma gueule toi en fait.",
-   "_mots": [
-    [
-     "Tu",
-     0.0,
-     0.06
-    ],
-    [
-     "t'en",
-     0.12,
-     0.24
-    ],
-    [
-     "fous",
-     0.281,
-     0.421
-    ],
-    [
-     "de",
-     0.461,
-     0.501
-    ],
-    [
-     "ma",
-     0.522,
-     0.582
-    ],
-    [
-     "gueule",
-     0.682,
-     0.823
-    ],
-    [
-     "toi",
-     0.863,
-     0.943
-    ],
-    [
-     "en",
-     1.084,
-     1.124
-    ],
-    [
-     "fait.",
-     1.224,
-     1.345
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Quoi.",
-   "_deb": 12.777,
-   "_fin": 12.918,
-   "d": "[confused] Quoi.",
-   "_mots": [
-    [
-     "Quoi.",
-     0.0,
-     0.141
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Qu'est-ce qu'il y a.",
-   "_deb": 13.32,
-   "_fin": 14.002,
-   "d": "[colere] Qu'est-ce qu'il y a.",
-   "objet": "verre",
-   "_mots": [
-    [
-     "Qu'est-ce",
-     0.0,
-     0.2
-    ],
-    [
-     "qu'il",
-     0.2,
-     0.321
-    ],
-    [
-     "y",
-     0.562,
-     0.582
-    ],
-    [
-     "a.",
-     0.662,
-     0.682
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Je te dis y'a rien et toi tu t'en fous.",
-   "_deb": 14.002,
-   "_fin": 15.247,
-   "d": "[sarcastic] Je te dis y'a rien et toi tu t'en fous.",
-   "_mots": [
-    [
-     "Je",
-     0.0,
-     0.081
-    ],
-    [
-     "te",
-     0.101,
-     0.141
-    ],
-    [
-     "dis",
-     0.161,
-     0.261
-    ],
-    [
-     "y'a",
-     0.281,
-     0.322
-    ],
-    [
-     "rien",
-     0.382,
-     0.502
-    ],
-    [
-     "et",
-     0.562,
-     0.623
-    ],
-    [
-     "toi",
-     0.643,
-     0.723
-    ],
-    [
-     "tu",
-     0.783,
-     0.823
-    ],
-    [
-     "t'en",
-     0.864,
-     0.984
-    ],
-    [
-     "fous.",
-     1.085,
-     1.245
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Hé hé hé hé hé hé hé.",
-   "_deb": 15.568,
-   "_fin": 17.607,
-   "d": "[rire] Hé hé hé hé hé hé hé.",
-   "_mots": [
-    [
-     "Hé",
-     0.0,
-     0.02
-    ],
-    [
-     "hé",
-     0.003,
-     0.124
-    ],
-    [
-     "hé",
-     0.164,
-     0.93
-    ],
-    [
-     "hé",
-     1.072,
-     1.293
-    ],
-    [
-     "hé",
-     1.293,
-     1.394
-    ],
-    [
-     "hé",
-     1.858,
-     1.959
-    ],
-    [
-     "hé.",
-     1.959,
-     2.039
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Je t'ai demandé qu'est-ce qu'il y a.",
-   "_deb": 18.712,
-   "_fin": 19.879,
-   "d": "[annoyed] Je t'ai demandé qu'est-ce qu'il y a.",
-   "_mots": [
-    [
-     "Je",
-     0.0,
-     0.04
-    ],
-    [
-     "t'ai",
-     0.06,
-     0.161
-    ],
-    [
-     "demandé",
-     0.201,
-     0.483
-    ],
-    [
-     "qu'est-ce",
-     0.684,
-     0.905
-    ],
-    [
-     "qu'il",
-     0.945,
-     1.066
-    ],
-    [
-     "y",
-     1.106,
-     1.127
-    ],
-    [
-     "a.",
-     1.147,
-     1.167
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Tu m'as dit y'a rien non.",
-   "_deb": 20.422,
-   "_fin": 21.247,
-   "d": "[sceptique] Tu m'as dit y'a rien non.",
-   "_mots": [
-    [
-     "Tu",
-     0.0,
-     0.04
-    ],
-    [
-     "m'as",
-     0.141,
-     0.242
-    ],
-    [
-     "dit",
-     0.262,
-     0.403
-    ],
-    [
-     "y'a",
-     0.403,
-     0.443
-    ],
-    [
-     "rien",
-     0.523,
-     0.684
-    ],
-    [
-     "non.",
-     0.745,
-     0.825
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Et ben ok. Parce qu'il y'a rien.",
-   "_deb": 22.371,
-   "_fin": 23.836,
-   "d": "[neutre] Et ben ok. Parce qu'il y'a rien.",
-   "_mots": [
-    [
-     "Et",
-     0.0,
-     0.08
-    ],
-    [
-     "ben",
-     0.141,
-     0.221
-    ],
-    [
-     "ok.",
-     0.281,
-     0.381
-    ],
-    [
-     "Parce",
-     0.843,
-     0.984
-    ],
-    [
-     "qu'il",
-     0.984,
-     1.104
-    ],
-    [
-     "y'a",
-     1.144,
-     1.204
-    ],
-    [
-     "rien.",
-     1.285,
-     1.465
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Mais en fait quand je te dis qu'il y'a rien c'est qu'il y'a quelque chose en fait.",
-   "_deb": 24.419,
-   "_fin": 26.887,
-   "d": "[idee] Mais en fait quand je te dis qu'il y'a rien c'est qu'il y'a quelque chose en fait.",
-   "_mots": [
-    [
-     "Mais",
-     0.0,
-     0.12
-    ],
-    [
-     "en",
-     0.18,
-     0.22
-    ],
-    [
-     "fait",
-     0.281,
-     0.401
-    ],
-    [
-     "quand",
-     0.461,
-     0.562
-    ],
-    [
-     "je",
-     0.562,
-     0.602
-    ],
-    [
-     "te",
-     0.622,
-     0.682
-    ],
-    [
-     "dis",
-     0.722,
-     0.822
-    ],
-    [
-     "qu'il",
-     0.863,
-     0.983
-    ],
-    [
-     "y'a",
-     0.983,
-     1.043
-    ],
-    [
-     "rien",
-     1.124,
-     1.264
-    ],
-    [
-     "c'est",
-     1.425,
-     1.505
-    ],
-    [
-     "qu'il",
-     1.525,
-     1.605
-    ],
-    [
-     "y'a",
-     1.605,
-     1.686
-    ],
-    [
-     "quelque",
-     1.726,
-     1.886
-    ],
-    [
-     "chose",
-     1.906,
-     2.067
-    ],
-    [
-     "en",
-     2.147,
-     2.187
-    ],
-    [
-     "fait.",
-     2.288,
-     2.468
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Alors pourquoi tu me dis pas.",
-   "_deb": 27.168,
-   "_fin": 28.675,
-   "d": "[colere] Alors pourquoi tu me dis pas.",
-   "_mots": [
-    [
-     "Alors",
-     0.0,
-     0.363
-    ],
-    [
-     "pourquoi",
-     0.363,
-     0.744
-    ],
-    [
-     "tu",
-     0.885,
-     0.945
-    ],
-    [
-     "me",
-     1.025,
-     1.085
-    ],
-    [
-     "dis",
-     1.146,
-     1.266
-    ],
-    [
-     "pas.",
-     1.346,
-     1.507
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "C'est qu'il y a quand je te demandais.",
-   "_deb": 29.316,
-   "_fin": 30.7,
-   "d": "[neutre] C'est qu'il y a quand je te demandais.",
-   "_mots": [
-    [
-     "C'est",
-     0.0,
-     0.121
-    ],
-    [
-     "qu'il",
-     0.161,
-     0.321
-    ],
-    [
-     "y",
-     0.402,
-     0.442
-    ],
-    [
-     "a",
-     0.482,
-     0.502
-    ],
-    [
-     "quand",
-     0.642,
-     0.763
-    ],
-    [
-     "je",
-     0.763,
-     0.803
-    ],
-    [
-     "te",
-     0.803,
-     0.843
-    ],
-    [
-     "demandais.",
-     0.863,
-     1.384
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Qu'est-ce qu'il y a au lieu de me dire.",
-   "_deb": 30.7,
-   "_fin": 32.847,
-   "d": "[colere] Qu'est-ce qu'il y a au lieu de me dire.",
-   "_mots": [
-    [
-     "Qu'est-ce",
-     0.0,
-     0.281
-    ],
-    [
-     "qu'il",
-     0.341,
-     0.562
-    ],
-    [
-     "y",
-     0.562,
-     0.582
-    ],
-    [
-     "a",
-     0.642,
-     0.662
-    ],
-    [
-     "au",
-     1.485,
-     1.525
-    ],
-    [
-     "lieu",
-     1.585,
-     1.685
-    ],
-    [
-     "de",
-     1.746,
-     1.786
-    ],
-    [
-     "me",
-     1.846,
-     1.886
-    ],
-    [
-     "dire.",
-     1.966,
-     2.147
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Y'a rien comme t'as l'habitude d'aboyer là.",
-   "_deb": 32.927,
-   "_fin": 35.175,
-   "d": "[blase] Y'a rien comme t'as l'habitude d'aboyer là.",
-   "_mots": [
-    [
-     "Y'a",
-     0.0,
-     0.1
-    ],
-    [
-     "rien",
-     0.201,
-     0.521
-    ],
-    [
-     "comme",
-     0.702,
-     0.804
-    ],
-    [
-     "t'as",
-     0.804,
-     0.944
-    ],
-    [
-     "l'habitude",
-     0.964,
-     1.345
-    ],
-    [
-     "d'aboyer",
-     1.386,
-     2.208
-    ],
-    [
-     "là.",
-     2.208,
-     2.248
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Parce que tu es censé le deviner tout ça.",
-   "_deb": 35.616,
-   "_fin": 37.001,
-   "d": "[sarcastic] Parce que tu es censé le deviner tout ça.",
-   "_mots": [
-    [
-     "Parce",
-     0.0,
-     0.161
-    ],
-    [
-     "que",
-     0.201,
-     0.281
-    ],
-    [
-     "tu",
-     0.321,
-     0.382
-    ],
-    [
-     "es",
-     0.462,
-     0.522
-    ],
-    [
-     "censé",
-     0.562,
-     0.763
-    ],
-    [
-     "le",
-     0.823,
-     0.883
-    ],
-    [
-     "deviner",
-     0.923,
-     1.144
-    ],
-    [
-     "tout",
-     1.184,
-     1.324
-    ],
-    [
-     "ça.",
-     1.324,
-     1.385
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Et je suis censé le deviner comment.",
-   "_deb": 37.663,
-   "_fin": 38.846,
-   "d": "[confused] Et je suis censé le deviner comment.",
-   "_mots": [
-    [
-     "Et",
-     0.0,
-     0.06
-    ],
-    [
-     "je",
-     0.08,
-     0.12
-    ],
-    [
-     "suis",
-     0.12,
-     0.26
-    ],
-    [
-     "censé",
-     0.281,
-     0.481
-    ],
-    [
-     "le",
-     0.541,
-     0.581
-    ],
-    [
-     "deviner",
-     0.622,
-     0.922
-    ],
-    [
-     "comment.",
-     0.963,
-     1.183
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Je suis qui moi.",
-   "_deb": 38.866,
-   "_fin": 39.448,
-   "d": "[neutre] Je suis qui moi.",
-   "_mots": [
-    [
-     "Je",
-     0.0,
-     0.04
-    ],
-    [
-     "suis",
-     0.101,
      0.241
     ],
     [
-     "qui",
-     0.261,
-     0.381
+     "je",
+     0.281,
+     0.341
     ],
     [
-     "moi.",
-     0.482,
-     0.582
+     "voulais",
+     0.341,
+     0.501
+    ],
+    [
+     "savoir",
+     0.522,
+     0.682
+    ],
+    [
+     "où",
+     0.702,
+     0.762
+    ],
+    [
+     "est-ce",
+     0.762,
+     0.902
+    ],
+    [
+     "que",
+     0.902,
+     0.983
+    ],
+    [
+     "vous",
+     0.983,
+     1.083
+    ],
+    [
+     "en",
+     1.103,
+     1.143
+    ],
+    [
+     "étiez",
+     1.183,
+     1.343
+    ],
+    [
+     "avec",
+     1.404,
+     1.524
+    ],
+    [
+     "mon",
+     1.584,
+     1.644
+    ],
+    [
+     "colis.",
+     1.684,
+     1.905
     ]
    ]
   },
   {
-   "p": "presentateur",
-   "t": "Je suis un maître Jedi.",
-   "_deb": 39.832,
-   "_fin": 40.596,
-   "d": "[fier] Je suis un maître Jedi.",
-   "_mots": [
-    [
-     "Je",
-     0.017,
-     0.037
-    ],
-    [
-     "suis",
-     0.0,
-     0.1
-    ],
-    [
-     "un",
-     0.14,
-     0.181
-    ],
-    [
-     "maître",
-     0.221,
-     0.422
-    ],
-    [
-     "Jedi.",
-     0.523,
-     0.764
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Je suis devin.",
-   "_deb": 41.019,
-   "_fin": 41.462,
-   "d": "[neutre] Je suis devin.",
+   "p": "envoyee",
+   "t": "Je suis passé, mais il n'y avait personne, donc je vais laisser un avis de passage, en fait, normal.",
+   "_deb": 2.025,
+   "_fin": 5.498,
+   "d": "[frustrated] Je suis passé, mais il n'y avait personne, donc je vais laisser un avis de passage, en fait, normal.",
    "_mots": [
     [
      "Je",
@@ -883,123 +101,1177 @@
     [
      "suis",
      0.04,
-     0.141
+     0.321
     ],
     [
-     "devin.",
-     0.181,
-     0.443
+     "passé,",
+     0.341,
+     0.521
+    ],
+    [
+     "mais",
+     0.561,
+     0.641
+    ],
+    [
+     "il",
+     0.641,
+     0.681
+    ],
+    [
+     "n'y",
+     0.681,
+     0.722
+    ],
+    [
+     "avait",
+     0.742,
+     0.862
+    ],
+    [
+     "personne,",
+     0.902,
+     1.243
+    ],
+    [
+     "donc",
+     1.283,
+     1.443
+    ],
+    [
+     "je",
+     1.704,
+     1.744
+    ],
+    [
+     "vais",
+     1.824,
+     1.964
+    ],
+    [
+     "laisser",
+     2.025,
+     2.045
+    ],
+    [
+     "un",
+     2.006,
+     2.087
+    ],
+    [
+     "avis",
+     2.107,
+     2.227
+    ],
+    [
+     "de",
+     2.268,
+     2.308
+    ],
+    [
+     "passage,",
+     2.328,
+     2.669
+    ],
+    [
+     "en",
+     2.73,
+     2.77
+    ],
+    [
+     "fait,",
+     2.79,
+     2.91
+    ],
+    [
+     "normal.",
+     2.991,
+     3.473
     ]
-   ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "envoyee",
+   "t": "Personne, je n'ai pas bougé de la journée.",
+   "_deb": 5.558,
+   "_fin": 6.723,
+   "d": "[confused] Personne, je n'ai pas bougé de la journée.",
+   "_mots": [
+    [
+     "Personne,",
+     0.0,
+     0.322
+    ],
+    [
+     "je",
+     0.322,
+     0.362
+    ],
+    [
+     "n'ai",
+     0.362,
+     0.442
+    ],
+    [
+     "pas",
+     0.462,
+     0.543
+    ],
+    [
+     "bougé",
+     0.563,
+     0.703
+    ],
+    [
+     "de",
+     0.764,
+     0.804
+    ],
+    [
+     "la",
+     0.844,
+     0.884
+    ],
+    [
+     "journée.",
+     0.924,
+     1.165
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "envoyee",
+   "t": "Quand je suis passé, il n'y avait personne.",
+   "_deb": 6.904,
+   "_fin": 7.929,
+   "d": "[neutral] Quand je suis passé, il n'y avait personne.",
+   "_mots": [
+    [
+     "Quand",
+     0.0,
+     0.101
+    ],
+    [
+     "je",
+     0.141,
+     0.181
+    ],
+    [
+     "suis",
+     0.181,
+     0.261
+    ],
+    [
+     "passé,",
+     0.261,
+     0.402
+    ],
+    [
+     "il",
+     0.402,
+     0.442
+    ],
+    [
+     "n'y",
+     0.442,
+     0.482
+    ],
+    [
+     "avait",
+     0.503,
+     0.643
+    ],
+    [
+     "personne.",
+     0.683,
+     1.025
+    ]
+   ],
+   "objet": "telephone"
   },
   {
    "p": "presentateur",
-   "t": "Je suis maître Yoda ou Mass Windu.",
-   "_deb": 41.965,
-   "_fin": 43.873,
-   "d": "[neutre] Je suis maître Yoda ou Mass Windu.",
+   "t": "Tu es un babouin ou quoi. Je t'ai dit que je n'ai pas bougué de chez moi, donc j'étais forcément là.",
+   "_deb": 7.971,
+   "_fin": 10.362,
+   "d": "[angry] Tu es un babouin ou quoi. Je t'ai dit que je n'ai pas bougé de chez moi, donc j'étais forcément là.",
+   "_mots": [
+    [
+     "Tu",
+     0.119,
+     0.159
+    ],
+    [
+     "es",
+     0.179,
+     0.199
+    ],
+    [
+     "un",
+     0.0,
+     0.061
+    ],
+    [
+     "babouin",
+     0.201,
+     0.462
+    ],
+    [
+     "ou",
+     0.543,
+     0.603
+    ],
+    [
+     "quoi.",
+     0.603,
+     0.684
+    ],
+    [
+     "Je",
+     0.724,
+     0.784
+    ],
+    [
+     "t'ai",
+     0.784,
+     0.844
+    ],
+    [
+     "dit",
+     0.864,
+     0.925
+    ],
+    [
+     "que",
+     0.925,
+     0.985
+    ],
+    [
+     "je",
+     0.985,
+     1.025
+    ],
+    [
+     "n'ai",
+     1.025,
+     1.085
+    ],
+    [
+     "pas",
+     1.085,
+     1.166
+    ],
+    [
+     "bougué",
+     1.186,
+     1.306
+    ],
+    [
+     "de",
+     1.347,
+     1.407
+    ],
+    [
+     "chez",
+     1.407,
+     1.507
+    ],
+    [
+     "moi,",
+     1.507,
+     1.588
+    ],
+    [
+     "donc",
+     1.608,
+     1.748
+    ],
+    [
+     "j'étais",
+     1.769,
+     1.97
+    ],
+    [
+     "forcément",
+     1.99,
+     2.311
+    ],
+    [
+     "là.",
+     2.331,
+     2.391
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "envoyee",
+   "t": "Je ne sais pas, j'ai sonné et tout. T'as rien fait du tout, espèce de poule.",
+   "_deb": 10.463,
+   "_fin": 14.121,
+   "d": "[sarcastic] Je ne sais pas, j'ai sonné et tout. T'as rien fait du tout, espèce de poule.",
    "_mots": [
     [
      "Je",
      0.0,
-     0.081
+     0.06
     ],
     [
-     "suis",
-     0.081,
-     0.161
+     "ne",
+     0.06,
+     0.1
     ],
     [
-     "maître",
-     0.161,
+     "sais",
+     0.1,
      0.342
     ],
     [
-     "Yoda",
-     0.403,
-     0.644
+     "pas,",
+     0.342,
+     0.743
     ],
     [
-     "ou",
-     1.306,
-     1.346
+     "j'ai",
+     0.764,
+     0.864
     ],
     [
-     "Mass",
-     1.406,
-     1.567
+     "sonné",
+     0.944,
+     1.168
     ],
     [
-     "Windu.",
-     1.627,
-     1.908
+     "et",
+     1.168,
+     1.288
+    ],
+    [
+     "tout.",
+     1.75,
+     1.931
+    ],
+    [
+     "T",
+     2.212,
+     2.232
+    ],
+    [
+     "'as",
+     2.292,
+     2.353
+    ],
+    [
+     "rien",
+     2.373,
+     2.513
+    ],
+    [
+     "fait",
+     2.513,
+     2.634
+    ],
+    [
+     "du",
+     2.674,
+     2.734
+    ],
+    [
+     "tout,",
+     2.794,
+     3.035
+    ],
+    [
+     "espèce",
+     3.035,
+     3.236
+    ],
+    [
+     "de",
+     3.276,
+     3.317
+    ],
+    [
+     "poule.",
+     3.417,
+     3.658
     ]
-   ]
+   ],
+   "objet": "telephone"
   },
   {
-   "p": "invite",
-   "t": "Oui oui oui.",
-   "_deb": 44.174,
-   "_fin": 45.097,
-   "d": "[rire] Oui oui oui.",
+   "p": "presentateur",
+   "t": "Donc maintenant, tu vas faire demi-tour et me livrer mon colis.",
+   "_deb": 14.242,
+   "_fin": 15.949,
+   "d": "[demanding] Donc maintenant, tu vas faire demi-tour et me livrer mon colis.",
    "_mots": [
     [
-     "Oui",
+     "Donc",
      0.0,
-     0.141
+     0.1
     ],
     [
-     "oui",
-     0.421,
-     0.542
+     "maintenant,",
+     0.14,
+     0.341
     ],
     [
-     "oui.",
-     0.823,
-     0.923
+     "tu",
+     0.361,
+     0.401
+    ],
+    [
+     "vas",
+     0.401,
+     0.462
+    ],
+    [
+     "faire",
+     0.482,
+     0.582
+    ],
+    [
+     "demi-tour",
+     0.642,
+     0.984
+    ],
+    [
+     "et",
+     1.024,
+     1.084
+    ],
+    [
+     "me",
+     1.104,
+     1.144
+    ],
+    [
+     "livrer",
+     1.164,
+     1.325
+    ],
+    [
+     "mon",
+     1.365,
+     1.446
+    ],
+    [
+     "colis.",
+     1.486,
+     1.707
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "envoyee",
+   "t": "Il y a quoi dans le colis.",
+   "_deb": 15.951,
+   "_fin": 16.435,
+   "d": "[curious] Il y a quoi dans le colis.",
+   "objet": "telephone",
+   "_mots": [
+    [
+     "Il",
+     0.018,
+     0.058
+    ],
+    [
+     "y",
+     0.098,
+     0.118
+    ],
+    [
+     "a",
+     0.279,
+     0.299
+    ],
+    [
+     "quoi",
+     0.0,
+     0.101
+    ],
+    [
+     "dans",
+     0.162,
+     0.262
+    ],
+    [
+     "le",
+     0.262,
+     0.323
+    ],
+    [
+     "colis.",
+     0.343,
+     0.484
     ]
    ]
   },
   {
    "p": "presentateur",
-   "t": "T'as acheté un savon laver.",
-   "_deb": 45.539,
-   "_fin": 46.341,
-   "d": "[colere] T'as acheté un savon laver.",
+   "t": "Une photo de ta soeur en string, c'est bon.",
+   "_deb": 16.435,
+   "_fin": 17.623,
+   "d": "[shocked] Une photo de ta soeur en string, c'est bon.",
    "_mots": [
     [
-     "T'as",
+     "Une",
      0.0,
-     0.1
+     0.08
     ],
     [
-     "acheté",
-     0.1,
-     0.26
+     "photo",
+     0.101,
+     0.242
+    ],
+    [
+     "de",
+     0.302,
+     0.342
+    ],
+    [
+     "ta",
+     0.383,
+     0.423
+    ],
+    [
+     "soeur",
+     0.483,
+     0.584
+    ],
+    [
+     "en",
+     0.584,
+     0.624
+    ],
+    [
+     "string,",
+     0.745,
+     0.946
+    ],
+    [
+     "c'est",
+     1.007,
+     1.108
+    ],
+    [
+     "bon.",
+     1.108,
+     1.188
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "envoyee",
+   "t": "Oh, sérieux.",
+   "_deb": 17.764,
+   "_fin": 18.268,
+   "d": "[skeptical] Oh, sérieux.",
+   "_mots": [
+    [
+     "Oh,",
+     0.0,
+     0.222
+    ],
+    [
+     "sérieux.",
+     0.242,
+     0.504
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Bon, écoutez, je voudrais juste récupérer mon colis.",
+   "_deb": 18.911,
+   "_fin": 20.578,
+   "d": "[calm] Bon, écoutez, je voudrais juste récupérer mon colis.",
+   "_mots": [
+    [
+     "Bon,",
+     0.0,
+     0.101
+    ],
+    [
+     "écoutez,",
+     0.201,
+     0.422
+    ],
+    [
+     "je",
+     0.542,
+     0.582
+    ],
+    [
+     "voudrais",
+     0.582,
+     0.743
+    ],
+    [
+     "juste",
+     0.763,
+     0.944
+    ],
+    [
+     "récupérer",
+     0.964,
+     1.386
+    ],
+    [
+     "mon",
+     1.426,
+     1.486
+    ],
+    [
+     "colis.",
+     1.546,
+     1.667
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "envoyee",
+   "t": "J'ai laissé un avis de passage, après moi je peux plus rien faire.",
+   "_deb": 20.578,
+   "_fin": 22.445,
+   "d": "[defensive] J'ai laissé un avis de passage, après moi je peux plus rien faire.",
+   "_mots": [
+    [
+     "J'ai",
+     0.0,
+     0.06
+    ],
+    [
+     "laissé",
+     0.06,
+     0.221
     ],
     [
      "un",
-     0.281,
-     0.321
+     0.602,
+     0.642
     ],
     [
-     "savon",
-     0.361,
-     0.521
+     "avis",
+     0.642,
+     0.723
     ],
     [
-     "laver.",
-     0.561,
-     0.802
+     "de",
+     0.723,
+     0.763
+    ],
+    [
+     "passage,",
+     0.763,
+     1.044
+    ],
+    [
+     "après",
+     1.104,
+     1.245
+    ],
+    [
+     "moi",
+     1.245,
+     1.345
+    ],
+    [
+     "je",
+     1.345,
+     1.425
+    ],
+    [
+     "peux",
+     1.425,
+     1.506
+    ],
+    [
+     "plus",
+     1.506,
+     1.606
+    ],
+    [
+     "rien",
+     1.606,
+     1.747
+    ],
+    [
+     "faire.",
+     1.767,
+     1.867
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Mais ta grand-mère en short, l'avis de passage, j'étais là, t'es passé quand.",
+   "_deb": 22.445,
+   "_fin": 25.198,
+   "d": "[mocking] Mais ta grand-mère en short, l'avis de passage, j'étais là, t'es passé quand.",
+   "_mots": [
+    [
+     "Mais",
+     0.0,
+     0.08
+    ],
+    [
+     "ta",
+     0.08,
+     0.121
+    ],
+    [
+     "grand-mère",
+     0.121,
+     1.024
+    ],
+    [
+     "en",
+     1.185,
+     1.205
+    ],
+    [
+     "short,",
+     1.006,
+     1.147
+    ],
+    [
+     "l'avis",
+     1.247,
+     1.388
+    ],
+    [
+     "de",
+     1.408,
+     1.448
+    ],
+    [
+     "passage,",
+     1.468,
+     1.789
+    ],
+    [
+     "j'étais",
+     1.809,
+     2.03
+    ],
+    [
+     "là,",
+     2.05,
+     2.131
+    ],
+    [
+     "t'es",
+     2.191,
+     2.331
+    ],
+    [
+     "passé",
+     2.372,
+     2.552
+    ],
+    [
+     "quand.",
+     2.592,
+     2.753
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "envoyee",
+   "t": "Bah là, là.",
+   "_deb": 25.218,
+   "_fin": 25.459,
+   "d": "[confused] Bah là, là.",
+   "_mots": [
+    [
+     "Bah",
+     0.0,
+     0.06
+    ],
+    [
+     "là,",
+     0.06,
+     0.101
+    ],
+    [
+     "là.",
+     0.101,
+     0.241
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Quoi.",
+   "_deb": 25.459,
+   "_fin": 25.58,
+   "d": "[annoyed] Quoi.",
+   "_mots": [
+    [
+     "Quoi.",
+     0.0,
+     0.121
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "envoyee",
+   "t": "Ça veut dire quoi, là, là. Bah là, dans la journée, avant le coucher du soleil.",
+   "_deb": 25.66,
+   "_fin": 28.737,
+   "d": "[exasperated] Ça veut dire quoi, là, là. Bah là, dans la journée, avant le coucher du soleil.",
+   "_mots": [
+    [
+     "Ça",
+     0.0,
+     0.04
+    ],
+    [
+     "veut",
+     0.221,
+     0.542
+    ],
+    [
+     "dire",
+     0.542,
+     0.622
+    ],
+    [
+     "quoi,",
+     0.683,
+     0.783
+    ],
+    [
+     "là,",
+     0.944,
+     1.024
+    ],
+    [
+     "là.",
+     1.165,
+     1.225
+    ],
+    [
+     "Bah",
+     1.265,
+     1.385
+    ],
+    [
+     "là,",
+     1.426,
+     1.486
+    ],
+    [
+     "dans",
+     1.626,
+     1.727
+    ],
+    [
+     "la",
+     1.747,
+     1.807
+    ],
+    [
+     "journée,",
+     1.867,
+     2.148
+    ],
+    [
+     "avant",
+     2.209,
+     2.332
+    ],
+    [
+     "le",
+     2.332,
+     2.392
+    ],
+    [
+     "coucher",
+     2.412,
+     2.634
+    ],
+    [
+     "du",
+     2.654,
+     2.714
+    ],
+    [
+     "soleil.",
+     2.795,
+     3.077
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Mais à quel moment de la journée.",
+   "_deb": 28.777,
+   "_fin": 29.763,
+   "d": "[demanding] Mais à quel moment de la journée.",
+   "_mots": [
+    [
+     "Mais",
+     0.0,
+     0.262
+    ],
+    [
+     "à",
+     0.262,
+     0.282
+    ],
+    [
+     "quel",
+     0.282,
+     0.362
+    ],
+    [
+     "moment",
+     0.362,
+     0.503
+    ],
+    [
+     "de",
+     0.503,
+     0.543
+    ],
+    [
+     "la",
+     0.584,
+     0.644
+    ],
+    [
+     "journée.",
+     0.704,
+     0.986
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "envoyee",
+   "t": "J'ai pas bougé.",
+   "_deb": 29.803,
+   "_fin": 30.347,
+   "d": "[neutral] J'ai pas bougé.",
+   "_mots": [
+    [
+     "J'ai",
+     0.0,
+     0.121
+    ],
+    [
+     "pas",
+     0.161,
+     0.262
+    ],
+    [
+     "bougé.",
+     0.302,
+     0.544
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Tu vas revenir me livrer mon colis, sinon je te flèche ton oncle.",
+   "_deb": 31.793,
+   "_fin": 34.021,
+   "d": "[threatening] Tu vas revenir me livrer mon colis, sinon je te flèche ton oncle.",
+   "_mots": [
+    [
+     "Tu",
+     0.0,
+     0.04
+    ],
+    [
+     "vas",
+     0.08,
+     0.16
+    ],
+    [
+     "revenir",
+     0.18,
+     0.421
+    ],
+    [
+     "me",
+     0.441,
+     0.501
+    ],
+    [
+     "livrer",
+     0.542,
+     0.702
+    ],
+    [
+     "mon",
+     0.722,
+     0.782
+    ],
+    [
+     "colis,",
+     0.843,
+     1.023
+    ],
+    [
+     "sinon",
+     1.043,
+     1.184
+    ],
+    [
+     "je",
+     1.244,
+     1.304
+    ],
+    [
+     "te",
+     1.324,
+     1.385
+    ],
+    [
+     "flèche",
+     1.505,
+     1.786
+    ],
+    [
+     "ton",
+     1.846,
+     1.927
+    ],
+    [
+     "oncle.",
+     2.027,
+     2.228
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "envoyee",
+   "t": "Je suis passé à 17h.",
+   "_deb": 34.241,
+   "_fin": 34.864,
+   "d": "[defensive] Je suis passé à 17h.",
+   "objet": "telephone",
+   "_mots": [
+    [
+     "Je",
+     0.0,
+     0.061
+    ],
+    [
+     "suis",
+     0.121,
+     0.281
+    ],
+    [
+     "passé",
+     0.321,
+     0.562
+    ],
+    [
+     "à",
+     0.582,
+     0.602
+    ],
+    [
+     "17h.",
+     0.602,
+     0.623
     ]
    ]
   },
   {
-   "p": "invite",
-   "t": "Tu penses que t'as travaillé dans la maison en rapportant sur un Jedi.",
-   "_deb": 46.422,
-   "_fin": 48.629,
-   "d": "[sarcastic] Tu penses que t'as travaillé dans la maison en rapportant sur un Jedi.",
+   "p": "presentateur",
+   "t": "Il est 16h30.",
+   "_deb": 34.864,
+   "_fin": 35.044,
+   "d": "[shocked] Il est 16h30.",
+   "_mots": [
+    [
+     "Il",
+     0.0,
+     0.04
+    ],
+    [
+     "est",
+     0.08,
+     0.16
+    ],
+    [
+     "16h30.",
+     0.16,
+     0.18
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "envoyee",
+   "t": "Ah merde, je suis passé à 15h.",
+   "_deb": 35.044,
+   "_fin": 36.732,
+   "d": "[panicked] Ah merde, je suis passé à 15h.",
+   "_mots": [
+    [
+     "Ah",
+     0.0,
+     0.121
+    ],
+    [
+     "merde,",
+     0.141,
+     0.542
+    ],
+    [
+     "je",
+     0.703,
+     0.783
+    ],
+    [
+     "suis",
+     1.506,
+     1.526
+    ],
+    [
+     "passé",
+     1.407,
+     1.568
+    ],
+    [
+     "à",
+     1.628,
+     1.648
+    ],
+    [
+     "15h.",
+     1.668,
+     1.688
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Tu te fous de ma gueule.",
+   "_deb": 36.752,
+   "_fin": 37.796,
+   "d": "[sarcastic] Tu te fous de ma gueule.",
    "_mots": [
     [
      "Tu",
@@ -1007,380 +1279,948 @@
      0.06
     ],
     [
-     "penses",
-     0.1,
-     0.341
+     "te",
+     0.12,
+     0.181
     ],
     [
-     "que",
+     "fous",
+     0.221,
+     0.381
+    ],
+    [
+     "de",
+     0.682,
+     0.723
+    ],
+    [
+     "ma",
+     0.743,
+     0.783
+    ],
+    [
+     "gueule.",
+     0.823,
+     1.044
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "envoyee",
+   "t": "Ah non, je me permettrai pas, monsieur. Notre entreprise propose un service de qualité hors norme.",
+   "_deb": 37.836,
+   "_fin": 40.927,
+   "d": "[annoyed] Ah non, je me permettrai pas, monsieur. Notre entreprise propose un service de qualité hors norme.",
+   "_mots": [
+    [
+     "Ah",
+     0.0,
+     0.06
+    ],
+    [
+     "non,",
+     0.06,
+     0.14
+    ],
+    [
+     "je",
+     0.161,
+     0.221
+    ],
+    [
+     "me",
+     0.241,
+     0.301
+    ],
+    [
+     "permettrai",
      0.341,
-     0.461
+     0.602
     ],
     [
-     "t'as",
-     0.461,
-     0.521
+     "pas,",
+     0.682,
+     0.763
     ],
     [
-     "travaillé",
-     0.541,
-     0.802
+     "monsieur.",
+     0.783,
+     1.024
     ],
     [
-     "dans",
-     0.842,
-     0.943
+     "Notre",
+     1.104,
+     1.265
     ],
     [
-     "la",
-     0.963,
-     1.023
+     "entreprise",
+     1.305,
+     1.666
     ],
     [
-     "maison",
-     1.063,
-     1.304
-    ],
-    [
-     "en",
-     1.384,
-     1.424
-    ],
-    [
-     "rapportant",
-     1.464,
-     1.806
-    ],
-    [
-     "sur",
-     1.806,
-     1.886
+     "propose",
+     1.686,
+     1.927
     ],
     [
      "un",
-     1.946,
-     1.986
+     1.967,
+     2.007
     ],
     [
-     "Jedi.",
-     2.006,
-     2.207
+     "service",
+     2.047,
+     2.268
+    ],
+    [
+     "de",
+     2.328,
+     2.368
+    ],
+    [
+     "qualité",
+     2.429,
+     2.71
+    ],
+    [
+     "hors",
+     2.89,
+     3.031
+    ],
+    [
+     "norme.",
+     3.071,
+     3.091
     ]
-   ]
+   ],
+   "objet": "telephone"
   },
   {
    "p": "presentateur",
-   "t": "Je suis un Jedi comme un bébé K-Dom là.",
-   "_deb": 48.47,
-   "_fin": 49.155,
-   "d": "[neutre] Je suis un Jedi comme un bébé K-Dom là.",
+   "t": "Ta gueule, ça va, moi je vous répète juste la phrase qu'ils nous ont demandé d'apprendre par coeur, c'est tout.",
+   "_deb": 40.891,
+   "_fin": 44.045,
+   "d": "[mocking] Ta gueule, ça va, moi je vous répète juste la phrase qu'ils nous ont demandé d'apprendre par coeur, c'est tout.",
    "_mots": [
     [
-     "Je",
-     0.219,
-     0.239
+     "Ta",
+     0.0,
+     0.16
+    ],
+    [
+     "gueule,",
+     0.201,
+     0.462
+    ],
+    [
+     "ça",
+     0.522,
+     0.582
+    ],
+    [
+     "va,",
+     0.622,
+     0.703
+    ],
+    [
+     "moi",
+     0.843,
+     0.924
+    ],
+    [
+     "je",
+     0.964,
+     1.004
+    ],
+    [
+     "vous",
+     1.024,
+     1.105
+    ],
+    [
+     "répète",
+     1.105,
+     1.346
+    ],
+    [
+     "juste",
+     1.346,
+     1.506
+    ],
+    [
+     "la",
+     1.547,
+     1.587
+    ],
+    [
+     "phrase",
+     1.607,
+     1.788
+    ],
+    [
+     "qu'ils",
+     1.808,
+     1.908
+    ],
+    [
+     "nous",
+     1.908,
+     1.988
+    ],
+    [
+     "ont",
+     1.988,
+     2.069
+    ],
+    [
+     "demandé",
+     2.069,
+     2.23
+    ],
+    [
+     "d'apprendre",
+     2.27,
+     2.531
+    ],
+    [
+     "par",
+     2.571,
+     2.671
+    ],
+    [
+     "coeur,",
+     2.712,
+     2.852
+    ],
+    [
+     "c'est",
+     2.933,
+     3.033
+    ],
+    [
+     "tout.",
+     3.053,
+     3.154
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "envoyee",
+   "t": "Ouais, vas-y, vas-y, de toi à moi. T'es passé ou pas ? Bien sûr que je suis passé, tu crois que je suis un mytho ou quoi.",
+   "_deb": 44.045,
+   "_fin": 48.428,
+   "d": "[frustrated] Ouais, vas-y, vas-y, de toi à moi. T'es passé ou pas ? Bien sûr que je suis passé, tu crois que je suis un mytho ou quoi.",
+   "_mots": [
+    [
+     "Ouais,",
+     0.0,
+     0.14
+    ],
+    [
+     "vas-y,",
+     0.14,
+     0.562
+    ],
+    [
+     "vas-y,",
+     0.562,
+     0.723
+    ],
+    [
+     "de",
+     0.743,
+     0.783
+    ],
+    [
+     "toi",
+     0.863,
+     0.964
+    ],
+    [
+     "à",
+     1.127,
+     1.147
+    ],
+    [
+     "moi.",
+     1.228,
+     1.328
+    ],
+    [
+     "T'es",
+     1.549,
+     1.65
+    ],
+    [
+     "passé",
+     1.71,
+     1.891
+    ],
+    [
+     "ou",
+     1.971,
+     2.011
+    ],
+    [
+     "pas",
+     2.092,
+     2.192
+    ],
+    [
+     "Bien",
+     2.333,
+     2.514
+    ],
+    [
+     "sûr",
+     2.554,
+     2.674
+    ],
+    [
+     "que",
+     2.674,
+     2.735
+    ],
+    [
+     "je",
+     2.735,
+     2.775
     ],
     [
      "suis",
+     2.775,
+     2.916
+    ],
+    [
+     "passé,",
+     2.916,
+     3.177
+    ],
+    [
+     "tu",
+     3.539,
+     3.599
+    ],
+    [
+     "crois",
+     3.639,
+     3.74
+    ],
+    [
+     "que",
+     3.74,
+     3.8
+    ],
+    [
+     "je",
+     3.8,
+     3.84
+    ],
+    [
+     "suis",
+     3.84,
+     3.92
+    ],
+    [
+     "un",
+     3.92,
+     3.961
+    ],
+    [
+     "mytho",
+     3.961,
+     4.162
+    ],
+    [
+     "ou",
+     4.242,
+     4.282
+    ],
+    [
+     "quoi.",
+     4.302,
+     4.383
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Il est de quelle couleur mon bâtiment.",
+   "_deb": 48.488,
+   "_fin": 49.354,
+   "d": "[confused] Il est de quelle couleur mon bâtiment.",
+   "_mots": [
+    [
+     "Il",
+     0.0,
+     0.12
+    ],
+    [
+     "est",
+     0.12,
+     0.181
+    ],
+    [
+     "de",
+     0.201,
+     0.241
+    ],
+    [
+     "quelle",
+     0.261,
+     0.281
+    ],
+    [
+     "couleur",
+     0.263,
+     0.464
+    ],
+    [
+     "mon",
+     0.484,
+     0.565
+    ],
+    [
+     "bâtiment.",
+     0.605,
+     0.866
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "envoyee",
+   "t": "Il est gris, comme un bâtiment.",
+   "_deb": 49.454,
+   "_fin": 50.519,
+   "d": "[neutral] Il est gris, comme un bâtiment.",
+   "_mots": [
+    [
+     "Il",
      0.0,
      0.101
     ],
     [
+     "est",
+     0.101,
+     0.161
+    ],
+    [
+     "gris,",
+     0.161,
+     0.382
+    ],
+    [
+     "comme",
+     0.482,
+     0.623
+    ],
+    [
      "un",
+     0.663,
+     0.703
+    ],
+    [
+     "bâtiment.",
+     0.723,
+     1.065
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Il est rouge, espèce de zboub, donc t'es pas passé du tout.",
+   "_deb": 50.619,
+   "_fin": 52.647,
+   "d": "[angry] Il est rouge, espèce de zboub, donc t'es pas passé du tout.",
+   "_mots": [
+    [
+     "Il",
+     0.0,
+     0.04
+    ],
+    [
+     "est",
+     0.06,
+     0.121
+    ],
+    [
+     "rouge,",
+     0.221,
+     0.382
+    ],
+    [
+     "espèce",
+     0.442,
+     0.663
+    ],
+    [
+     "de",
+     0.723,
+     0.783
+    ],
+    [
+     "zboub,",
+     0.843,
+     1.105
+    ],
+    [
+     "donc",
+     1.185,
+     1.285
+    ],
+    [
+     "t'es",
+     1.305,
+     1.386
+    ],
+    [
+     "pas",
+     1.446,
+     1.506
+    ],
+    [
+     "passé",
+     1.526,
+     1.707
+    ],
+    [
+     "du",
+     1.767,
+     1.848
+    ],
+    [
+     "tout.",
+     1.908,
+     2.028
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "envoyee",
+   "t": "Oh merde, je crois qu'il m'a grillé.",
+   "_deb": 52.667,
+   "_fin": 53.473,
+   "d": "[panicked] Oh merde, je crois qu'il m'a grillé.",
+   "_mots": [
+    [
+     "Oh",
+     0.0,
+     0.041
+    ],
+    [
+     "merde,",
+     0.041,
+     0.161
+    ],
+    [
+     "je",
+     0.161,
+     0.201
+    ],
+    [
+     "crois",
+     0.241,
+     0.261
+    ],
+    [
+     "qu'il",
+     0.223,
+     0.404
+    ],
+    [
+     "m'a",
+     0.464,
+     0.505
+    ],
+    [
+     "grillé.",
+     0.525,
+     0.806
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Je t'entends, espèce abruti.",
+   "_deb": 53.473,
+   "_fin": 54.437,
+   "d": "[angry] Je t'entends, espèce abruti.",
+   "_mots": [
+    [
+     "Je",
+     0.0,
+     0.04
+    ],
+    [
+     "t'entends,",
+     0.06,
+     0.382
+    ],
+    [
+     "espèce",
+     0.442,
+     0.602
+    ],
+    [
+     "abruti.",
+     0.602,
+     0.964
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "envoyee",
+   "t": "Euh, t'as entendu quoi.",
+   "_deb": 54.537,
+   "_fin": 55.461,
+   "d": "[confused] Euh, t'as entendu quoi.",
+   "_mots": [
+    [
+     "Euh,",
+     0.0,
+     0.503
+    ],
+    [
+     "t'as",
+     0.503,
+     0.563
+    ],
+    [
+     "entendu",
+     0.563,
+     0.824
+    ],
+    [
+     "quoi.",
+     0.844,
+     0.924
+    ]
+   ],
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Quand je t'avais grillé.",
+   "_deb": 55.461,
+   "_fin": 56.144,
+   "d": "[mocking] Quand je t'avais grillé.",
+   "_mots": [
+    [
+     "Quand",
+     0.0,
+     0.121
+    ],
+    [
+     "je",
      0.121,
      0.161
     ],
     [
-     "Jedi",
+     "t'avais",
      0.161,
-     0.242
+     0.362
     ],
     [
-     "comme",
-     0.242,
-     0.383
-    ],
-    [
-     "un",
-     0.383,
-     0.423
-    ],
-    [
-     "bébé",
-     0.423,
-     0.503
-    ],
-    [
-     "K",
-     0.524,
-     0.544
-    ],
-    [
-     "-Dom",
-     0.544,
-     0.624
-    ],
-    [
-     "là.",
-     0.624,
-     0.685
+     "grillé.",
+     0.362,
+     0.683
     ]
-   ]
+   ],
+   "objet": "telephone"
   },
   {
-   "p": "invite",
-   "t": "D'accord d'accord.",
-   "_deb": 49.155,
-   "_fin": 49.698,
-   "d": "[neutre] D'accord d'accord.",
+   "p": "envoyee",
+   "t": "Merde, du coup t'as compris que je me foutais de ta gueule.",
+   "_deb": 56.144,
+   "_fin": 57.47,
+   "d": "[panicked] Merde, du coup t'as compris que je me foutais de ta gueule.",
    "_mots": [
     [
-     "D'accord",
+     "Merde,",
      0.0,
-     0.201
+     0.161
     ],
     [
-     "d'accord.",
-     0.241,
-     0.543
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "D'accord.",
-   "_deb": 51.0,
-   "_fin": 51.14,
-   "d": "[neutre] D'accord.",
-   "_mots": [
-    [
-     "D'accord.",
-     0.0,
-     0.14
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Du coup je recommence.",
-   "_deb": 52.733,
-   "_fin": 53.767,
-   "d": "[neutre] Du coup je recommence.",
-   "_mots": [
-    [
-     "Du",
-     0.0,
-     0.102
+     "du",
+     0.181,
+     0.241
     ],
     [
      "coup",
-     0.162,
-     0.304
+     0.281,
+     0.362
+    ],
+    [
+     "t'as",
+     0.382,
+     0.522
+    ],
+    [
+     "compris",
+     0.543,
+     0.723
+    ],
+    [
+     "que",
+     0.743,
+     0.824
     ],
     [
      "je",
-     0.385,
-     0.487
+     0.824,
+     0.864
     ],
     [
-     "recommence.",
-     0.568,
-     1.034
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Y'a rien.",
-   "_deb": 55.391,
-   "_fin": 55.671,
-   "d": "[blase] Y'a rien.",
-   "_mots": [
-    [
-     "Y'a",
-     0.0,
-     0.08
+     "me",
+     0.864,
+     0.904
     ],
     [
-     "rien.",
-     0.1,
-     0.28
+     "foutais",
+     0.904,
+     1.266
+    ],
+    [
+     "de",
+     1.306,
+     1.326
+    ],
+    [
+     "ta",
+     0.866,
+     0.906
+    ],
+    [
+     "gueule.",
+     0.906,
+     1.309
     ]
-   ]
+   ],
+   "objet": "telephone"
   },
   {
    "p": "presentateur",
-   "t": "Y'a.",
-   "_deb": 55.731,
-   "_fin": 55.951,
-   "d": "[neutre] Y'a.",
+   "t": "Eh mais je vais t'encul...",
+   "_deb": 57.513,
+   "_fin": 58.639,
+   "d": "[furious] Eh mais je vais t'encul...",
    "_mots": [
     [
-     "Y'a.",
+     "Eh",
      0.0,
-     0.22
+     0.04
+    ],
+    [
+     "mais",
+     0.141,
+     0.282
+    ],
+    [
+     "je",
+     0.322,
+     0.382
+    ],
+    [
+     "vais",
+     0.422,
+     0.563
+    ],
+    [
+     "t'encul...",
+     0.664,
+     1.126
     ]
-   ]
+   ],
+   "objet": "telephone"
   },
   {
-   "p": "presentateur",
-   "t": "rien Sous-titrage Société Radio-Canada",
-   "_deb": 58.36,
-   "_fin": 62.141,
-   "d": "[shouting] rien Sous-titrage Société Radio-Canada",
+   "p": "envoyee",
+   "t": "Hop là, raccrochage au pif.",
+   "_deb": 58.7,
+   "_fin": 60.108,
+   "d": "[cut_off] Hop là, raccrochage au pif.",
    "chute": true,
    "_mots": [
     [
-     "rien",
+     "Hop",
      0.0,
-     0.32
+     0.121
     ],
     [
-     "Sous-titrage",
-     0.48,
-     30.38
+     "là,",
+     0.161,
+     0.241
     ],
     [
-     "Société",
-     30.38,
-     30.4
+     "raccrochage",
+     0.503,
+     1.026
     ],
     [
-     "Radio-Canada",
-     30.4,
-     30.42
+     "au",
+     1.086,
+     1.126
+    ],
+    [
+     "pif.",
+     1.187,
+     1.408
     ]
-   ]
+   ],
+   "objet": "telephone"
   }
  ],
  "bandeau": [],
  "gag": null,
- "legende": "Un échange absurde entre deux amis qui ne comprennent plus rien.",
+ "legende": "Un client et une employée du service client s'affrontent dans une dispute hilarante.",
  "hashtags": [
   "petitsdramas",
-  "humour",
-  "dialogueabsurde",
-  "souffrance",
-  "amisdanslebrouillard",
-  "pov",
-  "comedie"
+  "colisperdu",
+  "serviceclient",
+  "humourdramatique",
+  "tiktoklol",
+  "doublagefun",
+  "livraisonchaos"
  ],
  "sources": [
-  "https://www.tiktok.com/@same_same53/video/7699114462233644320"
+  "https://www.tiktok.com/@same_same53/video/7695008472684875040"
  ],
  "decoupage": [
   {
    "scene": "1",
    "repliques": [
     0,
-    1,
-    2,
-    3,
     4,
-    5,
     6,
-    7,
     8,
-    9,
     10,
-    11,
     12,
-    13,
     14,
-    15,
     16,
-    17,
     18,
-    19,
     20,
-    21,
     22,
-    23,
     24,
-    25,
     26,
-    27,
     28,
-    29,
     30,
-    31
+    32,
+    34
    ],
    "lieu": "",
    "son": "",
-   "duree": 0.0,
-   "decor": "salon avec un canapé gris, une table basse en bois, une lampe d'appoint, un tapis rouge, une télévision éteinte, une bouteille d'eau et deux verres vides.",
-   "titre": "Débat Absurde"
+   "duree": 0,
+   "decor": "salon avec un canapé gris, une table basse en bois clair, une grande fenêtre avec des rideaux blancs et une vue sur un bâtiment rouge."
+  },
+  {
+   "scene": "2",
+   "repliques": [
+    1,
+    2,
+    3,
+    5,
+    7,
+    9,
+    11,
+    13,
+    15,
+    17,
+    19,
+    21,
+    23,
+    25,
+    27,
+    29,
+    31,
+    33,
+    35
+   ],
+   "lieu": "",
+   "son": "",
+   "duree": 0,
+   "decor": "bureau_proviseur avec un bureau en métal, un ordinateur portable ouvert, un casque d'écouteur sur la tête, une horloge murale et des affiches publicitaires."
   }
  ],
  "studio": {
-  "moment": "soir",
+  "moment": "jour",
   "lieux": [
+   "rue",
    "salon"
   ],
   "costumes": {
    "presentateur": {
     "haut": "tshirt",
     "c_haut": "bleu",
+    "motif": "uni",
     "bas": "jean",
     "chaussures": "baskets",
     "details": [
      "barbe_courte",
-     "lunettes_soleil"
-    ],
-    "chapeau": null,
-    "cheveux": "court_texture",
-    "c_cheveux": "brun"
+     "lunettes_vue"
+    ]
    },
-   "invite": {
+   "envoyee": {
     "haut": "chemise",
-    "c_haut": "rouge",
+    "c_haut": "blanc",
+    "motif": "uni",
     "bas": "pantalon",
     "chaussures": "ville",
     "details": [
-     "moustache",
-     "cravate"
-    ],
-    "chapeau": null,
-    "cheveux": "long",
-    "c_cheveux": "roux"
+     "cravate",
+     "lunettes_soleil",
+     "stylos"
+    ]
    }
   },
-  "metiers": {},
+  "metiers": {
+   "envoyee": "employee_service_client"
+  },
   "personnages": {
    "presentateur": {
     "genre": "h",
-    "age": 35,
+    "age": 45,
     "taille": 1,
     "corpulence": 0.7,
     "cheveux": "court_texture",
+    "c_cheveux": "brun",
     "barbe": "trois_jours"
    },
-   "invite": {
+   "envoyee": {
     "genre": "f",
     "age": 30,
     "taille": 0.95,
     "corpulence": 0.6,
     "cheveux": "long",
+    "c_cheveux": "blond",
     "barbe": "rien"
    }
   },
   "objets": [
    {
     "replique": 0,
-    "objet": "bouteille"
+    "objet": "telephone"
    },
    {
-    "replique": 5,
-    "objet": "verre"
+    "replique": 7,
+    "objet": "telephone"
    },
    {
-    "replique": 15,
+    "replique": 19,
     "objet": "telephone"
    }
   ],
   "gags": [
-   "Je suis un Jedi comme un bébé K-Dom",
-   "T'as acheté un savon laver ?"
+   "Avis de passage : 'Je suis passé, mais personne n'a répondu... sauf mon ego.'",
+   "Service client : 'On vous propose un service de qualité... ou presque.'",
+   "Colis : 'Contenu sensible... ou pas.'"
   ],
   "ambiances": [
    "neon"
@@ -1389,146 +2229,117 @@
   "plans": [
    {
     "replique": 0,
-    "plan": "serre",
+    "plan": "moyen",
     "mouvement": "fixe",
+    "geste": "telephone",
+    "reaction": "aucune"
+   },
+   {
+    "replique": 4,
+    "plan": "serre",
+    "mouvement": "zoom_choc",
     "geste": "pointe_d",
     "reaction": "choc"
    },
    {
-    "replique": 1,
-    "plan": "moyen",
+    "replique": 7,
+    "plan": "serre",
     "mouvement": "fixe",
-    "geste": "bras_ouverts",
+    "geste": "gratte_tete",
     "reaction": "sceptique"
    },
    {
-    "replique": 3,
+    "replique": 18,
     "plan": "serre",
     "mouvement": "zoom_choc",
     "geste": "poing",
     "reaction": "colere"
    },
    {
-    "replique": 7,
-    "plan": "large",
-    "mouvement": "fixe",
-    "geste": "bras_ouverts",
-    "reaction": "rire"
-   },
-   {
-    "replique": 11,
+    "replique": 26,
     "plan": "serre",
-    "mouvement": "avance",
-    "geste": "gratte_tete",
-    "reaction": "idee"
+    "mouvement": "fixe",
+    "geste": "pointe_g",
+    "reaction": "confused"
    },
    {
-    "replique": 21,
+    "replique": 34,
     "plan": "tres_serre",
     "mouvement": "zoom_choc",
-    "geste": "pointe_g",
-    "reaction": "choc"
-   },
-   {
-    "replique": 23,
-    "plan": "moyen",
-    "mouvement": "fixe",
-    "geste": "facepalm",
-    "reaction": "gene"
-   },
-   {
-    "replique": 31,
-    "plan": "large",
-    "mouvement": "fixe",
-    "geste": "mains_hanches",
-    "reaction": "none"
+    "geste": "desespoir",
+    "reaction": "panique"
    }
   ],
   "decors_vus": {
-   "presentateur": "salon avec un canapé gris, une table basse en bois, une lampe d'appoint rouge, un tapis rouge, une télévision éteinte, une bouteille d'eau et deux verres vides.",
-   "invite": "même décor que le présentateur, mais avec un regard vers la caméra pour certaines répliques."
+   "presentateur": "salon avec un canapé gris, une table basse en bois clair, une grande fenêtre avec des rideaux blancs et une vue sur un bâtiment rouge.",
+   "envoyee": "bureau_proviseur avec un bureau en métal, un ordinateur portable ouvert, un casque d'écouteur sur la tête, une horloge murale et des affiches publicitaires."
+  },
+  "lieux_de": {
+   "presentateur": "rue",
+   "envoyee": "salon"
   }
  },
  "doublage": {
-  "piste": "/tmp/tmpleq4t2zu/piste.wav",
-  "duree": 62.14,
-  "source": "https://www.tiktok.com/@same_same53/video/7699114462233644320",
+  "piste": "/tmp/tmph7qneypb/piste.wav",
+  "duree": 62.49,
+  "source": "https://www.tiktok.com/@same_same53/video/7695008472684875040",
   "auteur": "same_same53",
-  "contexte": "Deux personnages, un présentateur et un invité, sont en pleine dispute dans un salon. Ils semblent discuter de manière absurde et répétitive, avec des sous-entendus humoristiques.",
+  "contexte": "Un client exaspéré appelle le service de livraison pour savoir où est son colis, tandis qu'une employée du service client, stressée et peu coopérative, tente de lui répondre. La scène se déroule dans un bureau standardisé, où le client est chez lui et l'employée semble être dans un centre d'appels.",
   "evenements": [
    [
-    0.0,
-    2.0,
-    "scream"
-   ],
-   [
-    1.0,
-    3.0,
-    "crying"
-   ],
-   [
-    2.0,
-    5.0,
-    "kiss"
-   ],
-   [
-    7.0,
-    9.0,
-    "scream"
-   ],
-   [
-    8.0,
-    10.0,
+    12.0,
+    14.0,
     "laughter"
    ],
    [
-    9.0,
-    11.0,
-    "scream"
-   ],
-   [
-    15.0,
     18.0,
+    20.0,
     "laughter"
    ],
    [
-    21.0,
-    23.0,
-    "scream"
-   ],
-   [
-    51.0,
-    53.0,
-    "laughter"
-   ],
-   [
-    54.0,
-    57.0,
-    "scream"
-   ],
-   [
-    57.0,
-    59.0,
-    "laughter"
-   ],
-   [
-    58.0,
-    60.0,
-    "scream"
-   ],
-   [
-    59.0,
-    61.0,
-    "kiss"
+    30.0,
+    32.0,
+    "crying"
    ],
    [
     60.0,
     62.0,
-    "glass"
+    "laughter"
    ]
   ],
   "visuel": {
-   "gestes": [],
+   "gestes": [
+    [
+     11.0,
+     0.59,
+     1.0
+    ],
+    [
+     36.5,
+     0.59,
+     1.0
+    ],
+    [
+     38.5,
+     0.59,
+     1.0
+    ],
+    [
+     47.0,
+     0.59,
+     1.0
+    ],
+    [
+     50.0,
+     0.59,
+     1.0
+    ],
+    [
+     55.0,
+     0.59,
+     1.0
+    ]
+   ],
    "duree": 62.5,
    "nb_plans": 1,
    "duree_plan": 62.5,
@@ -1536,118 +2347,134 @@
    "plans": {
     "tres_serre": 0.0,
     "serre": 0.0,
-    "moyen": 0.0,
-    "large": 1.0
+    "moyen": 0.112,
+    "large": 0.888
    },
    "camera": {
-    "fixe": 1.0,
+    "fixe": 0.992,
     "avance": 0.0,
     "recul": 0.0,
     "travelling": 0.0,
-    "epaule": 0.0
+    "epaule": 0.008
    },
-   "nb_personnes": 0,
-   "personnes": [],
-   "visages": false,
+   "nb_personnes": 1,
+   "personnes": [
+    {
+     "place": "centre",
+     "presence": 0.112,
+     "habit": [
+      4,
+      3,
+      3
+     ],
+     "cheveux": [
+      35,
+      35,
+      35
+     ],
+     "sourire": 0.0,
+     "taille": 0.128,
+     "tete_penchee": 1.1,
+     "regard_cote": 0.0
+    }
+   ],
+   "visages": true,
    "sourires": 0.0,
-   "energie": 0.172,
+   "energie": 0.15,
    "mur": [
-    1,
-    1,
-    1
+    0,
+    0,
+    0
    ],
    "palette": [
     [
      0,
      0,
      0,
-     0.588
+     0.6
     ],
     [
-     252,
-     252,
-     252,
-     0.362
+     253,
+     253,
+     253,
+     0.351
     ],
     [
-     48,
-     42,
-     40,
-     0.02
+     212,
+     211,
+     211,
+     0.03
     ],
     [
-     165,
-     165,
-     165,
-     0.019
+     107,
+     100,
+     96,
+     0.01
     ],
     [
-     232,
-     141,
-     32,
-     0.006
-    ],
-    [
-     6,
-     183,
-     110,
+     228,
+     11,
+     7,
      0.005
+    ],
+    [
+     237,
+     163,
+     55,
+     0.004
     ]
    ],
    "lumiere": {
-    "luminosite": 96.8,
-    "chaleur": 0.7,
-    "saturation": 4.9
+    "luminosite": 97.5,
+    "chaleur": 2.1,
+    "saturation": 2.6
    },
    "moment": "jour",
    "postures": []
   },
   "audio": {
-   "duree": 62.1,
+   "duree": 62.5,
    "nb_voix": 2,
    "voix": [
     {
-     "hz": 237,
+     "hz": 224,
      "genre": "f",
-     "part": 0.7
+     "part": 0.46
     },
     {
-     "hz": 286,
-     "genre": "f",
-     "part": 0.3
+     "hz": 184,
+     "genre": "?",
+     "part": 0.54
     }
    ],
-   "debit": 2.92,
-   "blanc_moyen": 0.69,
-   "coupes": 5,
-   "dynamique_db": 32.2,
-   "cris": 0.029,
-   "musique": 0.5,
-   "impacts": 40,
-   "impacts_10s": 6.44,
-   "graves": 3,
-   "aigus": 37,
-   "sur_vanne": 23,
+   "debit": 6.05,
+   "blanc_moyen": 0.16,
+   "coupes": 21,
+   "dynamique_db": 15.6,
+   "cris": 0.016,
+   "musique": 0.41,
+   "impacts": 64,
+   "impacts_10s": 10.24,
+   "graves": 8,
+   "aigus": 56,
+   "sur_vanne": 31,
    "evenements": {
-    "scream": 6,
-    "laughter": 4,
-    "kiss": 2,
-    "crying": 1,
-    "glass": 1
+    "laughter": 3,
+    "crying": 1
    },
    "emotions": {
-    "neutre": 12,
-    "colere": 5,
-    "blase": 3,
-    "sarcastic": 3,
-    "annoyed": 2,
-    "confused": 2,
-    "rire": 2,
-    "sceptique": 1
+    "confused": 4,
+    "annoyed": 3,
+    "neutral": 3,
+    "angry": 3,
+    "mocking": 3,
+    "panicked": 3,
+    "frustrated": 2,
+    "sarcastic": 2
    }
   },
-  "video_origine": "/tmp/tmpleq4t2zu/src_coupe.mp4",
-  "debut": 0.67
+  "video_origine": "/tmp/tmph7qneypb/src.mp4",
+  "debut": 0.0
  },
  "fiche": {
   "note": 0,
@@ -1665,7 +2492,17 @@
      6,
      7,
      8,
-     9,
+     9
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 0.0,
+    "decor": "bureau_proviseur with a desk, laptop, headset, and a clock on the wall",
+    "titre": "Le bureau du service client"
+   },
+   {
+    "scene": "2",
+    "repliques": [
      10,
      11,
      12,
@@ -1687,13 +2524,17 @@
      28,
      29,
      30,
-     31
+     31,
+     32,
+     33,
+     34,
+     35
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "salon avec un canapé gris, une table basse en bois, une lampe d'appoint, un tapis rouge, une télévision éteinte, une bouteille d'eau et deux verres vides.",
-    "titre": "Débat Absurde"
+    "decor": "salon with a couch, coffee table, and a large window showing the outside view",
+    "titre": "À domicile, le client en colère"
    }
   ]
  },
@@ -1710,7 +2551,7 @@
    "poste": "ingé son",
    "controle": "mots à une vitesse possible",
    "ok": true,
-   "detail": "3 mot(s) trop courts",
+   "detail": "4 mot(s) trop courts",
    "revoir": false
   },
   {
@@ -1723,29 +2564,29 @@
   {
    "poste": "ingé son",
    "controle": "deux transcriptions d'accord",
-   "ok": false,
-   "detail": "71 % de mots identiques, 2 doute(s), 1 tranché(s) par une 3e écoute, 1 corrigé(s)",
+   "ok": true,
+   "detail": "88 % de mots identiques, 3 doute(s), 2 tranché(s) par une 3e écoute, 1 corrigé(s)",
    "revoir": false
   },
   {
    "poste": "casting voix",
    "controle": "témoin image (qui parle dans l'original)",
    "ok": true,
-   "detail": "31/37 phrases lisibles (mouvements)",
+   "detail": "40/45 phrases lisibles (mouvements)",
    "revoir": false
   },
   {
    "poste": "casting voix",
    "controle": "fil du dialogue repris (son + texte + image)",
    "ok": true,
-   "detail": "voix proches (0.73)",
+   "detail": "voix proches (0.77)",
    "revoir": false
   },
   {
    "poste": "casting voix",
    "controle": "parole répartie entre les personnages",
    "ok": true,
-   "detail": "2 voix, la plus bavarde dit 53 %",
+   "detail": "2 voix, la plus bavarde dit 52 %",
    "revoir": false
   },
   {
@@ -1758,8 +2599,8 @@
   {
    "poste": "scripte",
    "controle": "téléphone en main seulement s'il en est question",
-   "ok": false,
-   "detail": "retiré sur 1 réplique(s)",
+   "ok": true,
+   "detail": "",
    "revoir": false
   },
   {
@@ -1787,7 +2628,7 @@
    "poste": "monteur",
    "controle": "rien après la fin du son",
    "ok": true,
-   "detail": "1 réplique(s) raccourcie(s)",
+   "detail": "",
    "revoir": false
   },
   {
@@ -1805,36 +2646,42 @@
    "revoir": false
   }
  ],
+ "_separes": true,
  "_decors_semi": [
-  0
+  0,
+  1
  ],
  "_voix_hz": {
-  "presentateur": 237,
-  "invite": 276
+  "presentateur": 218,
+  "envoyee": 182
  },
  "_voix_genre": {
-  "presentateur": "f",
-  "invite": "f"
+  "envoyee": "h"
  },
  "realisation": {
-  "moment": "soir",
+  "moment": "jour",
   "lieux": [
+   "rue",
    "salon"
   ],
   "gags": [
-   "Je suis un Jedi comme un bébé K-Dom",
-   "T'as acheté un savon laver ?"
+   "Avis de passage : 'Je suis passé, mais personne n'a répondu... sauf mon ego.'",
+   "Service client : 'On vous propose un service de qualité... ou presque.'",
+   "Colis : 'Contenu sensible... ou pas.'"
   ],
   "ambiances": [
-   "neon",
-   "poussiere"
+   "neon"
   ],
   "source": "auteur+image",
   "tenues": {
    "presentateur": "tshirt",
-   "invite": "chemise"
+   "envoyee": "chemise"
   },
   "plans": [
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
    "large/fixe",
    "large/fixe",
    "large/fixe",
