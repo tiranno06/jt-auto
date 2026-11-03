@@ -6124,30 +6124,64 @@
   "cadence": "rapide"
  },
  {
-  "moment": "soir",
+  "moment": "jour",
   "lieux": [
-   "salon"
+   "bureau"
   ],
   "source": "auteur+image",
-  "duree": 62.8,
+  "duree": 67.6,
   "plans": {
-   "large": 22
+   "large": 30
   },
   "mouvements": {
-   "fixe": 22
+   "fixe": 30
   },
   "costumes": {
-   "invite": "tshirt",
-   "envoyee": "blouse",
-   "presentateur": "chemise"
+   "presentateur": "chemise",
+   "invite": "tshirt"
   },
-  "figurants": 1,
+  "figurants": 0,
   "ambiances": [
-   "pluie",
-   "poussiere"
+   "neon"
   ],
-  "controle": "Humoriste 7.0/10 : 0.4 s La vannes initiale ('Je suis une pute') est un peu trop directe et pourrait choquer certains spectateurs, surtout dans un format destiné à un jeune public.; 12.9 s La chute su",
-  "fichier": "2026-11-03_07h23_emission.mp4",
+  "controle": "Humoriste 10.0/10 :  | Réalisateur 10.0/10 :  | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.1/10 : 0.0 s sous-titres trop rapides à lire",
+  "fichier": "2026-11-03_06h55_emission.mp4",
+  "cine": {
+   "focus": true,
+   "vertige": true,
+   "tiers": true,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": true,
+   "reflets": false,
+   "son": true
+  },
+  "cadence": "rapide"
+ },
+ {
+  "moment": "jour",
+  "lieux": [
+   "rue",
+   "rue"
+  ],
+  "source": "auteur+image",
+  "duree": 88.0,
+  "plans": {
+   "large": 40
+  },
+  "mouvements": {
+   "fixe": 40
+  },
+  "costumes": {
+   "presentateur": "tshirt",
+   "invite": "chemise"
+  },
+  "figurants": 0,
+  "ambiances": [
+   "neon"
+  ],
+  "controle": "Humoriste 7.8/10 : 19.1 s La chute sur la voiture 'Bugatti' est un peu longue à venir et manque d'un effet comique supplémentaire. Le public pourrait mieux rire si la réaction du personnage était plus",
+  "fichier": "2026-11-03_07h47_emission.mp4",
   "cine": {
    "focus": false,
    "vertige": false,
@@ -6158,6 +6192,6 @@
    "reflets": true,
    "son": true
   },
-  "cadence": null
+  "cadence": "rapide"
  }
 ]
