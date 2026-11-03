@@ -41396,9 +41396,9 @@
      "place": "gauche",
      "presence": 0.202,
      "habit": [
-      51,
-      49,
-      51
+      53,
+      50,
+      52
      ],
      "cheveux": [
       10,
@@ -41416,7 +41416,7 @@
    "energie": 0.605,
    "mur": [
     136,
-    134,
+    135,
     139
    ],
    "palette": [
@@ -41467,30 +41467,35 @@
   },
   "audio": {
    "duree": 59.4,
-   "nb_voix": 2,
+   "nb_voix": 3,
    "voix": [
     {
-     "hz": 255,
+     "hz": 237,
      "genre": "f",
-     "part": 0.35
+     "part": 0.08
     },
     {
-     "hz": 259,
+     "hz": 258,
      "genre": "f",
-     "part": 0.65
+     "part": 0.78
+    },
+    {
+     "hz": 253,
+     "genre": "f",
+     "part": 0.14
     }
    ],
-   "debit": 5.22,
-   "blanc_moyen": 0.72,
-   "coupes": 4,
-   "dynamique_db": 32.4,
+   "debit": 4.54,
+   "blanc_moyen": 0.79,
+   "coupes": 1,
+   "dynamique_db": 32.1,
    "cris": 0.025,
    "musique": 0.49,
-   "impacts": 39,
-   "impacts_10s": 6.57,
+   "impacts": 37,
+   "impacts_10s": 6.23,
    "graves": 1,
-   "aigus": 38,
-   "sur_vanne": 20,
+   "aigus": 36,
+   "sur_vanne": 14,
    "evenements": {
     "laughter": 4,
     "crying": 2,
@@ -41498,11 +41503,14 @@
     "kiss": 1
    },
    "emotions": {
-    "annoyed": 6,
-    "colere": 6,
-    "neutral": 5,
-    "sarcastic": 5,
-    "joyeux": 2
+    "angry": 7,
+    "sarcastic": 3,
+    "neutral": 2,
+    "annoyed": 1,
+    "blase": 1,
+    "confused": 1,
+    "playful": 1,
+    "laughter": 1
    }
   },
   "claude": {
@@ -41512,45 +41520,240 @@
    "moment": "jour",
    "costumes": {
     "presentateur": {
+     "haut": "chemise",
+     "c_haut": "bleu marine",
+     "motif": "uni",
      "bas": "pantalon",
-     "c_haut": "gris",
      "chaussures": "ville",
+     "details": [
+      "cravate",
+      "lunettes_soleil"
+     ],
+     "chapeau": null,
      "cheveux": "court",
-     "details": [],
-     "haut": "costume"
+     "c_cheveux": "brun"
     },
     "invite": {
-     "bas": "jean",
-     "c_haut": "rose",
+     "haut": "tshirt",
+     "c_haut": "rouge",
+     "motif": "uni",
+     "bas": "jeans",
      "chaussures": "baskets",
+     "details": [
+      "bracelets"
+     ],
+     "chapeau": null,
      "cheveux": "tresses",
-     "c_cheveux": "noir",
-     "details": [],
-     "haut": "debardeur"
+     "c_cheveux": "noir"
+    },
+    "envoyee": {
+     "haut": "chemise",
+     "c_haut": "blanc",
+     "motif": "uni",
+     "bas": "pantalon",
+     "chaussures": "ville",
+     "details": [
+      "montre"
+     ],
+     "chapeau": null,
+     "cheveux": "long",
+     "c_cheveux": "blond"
     }
-   },
-   "gags": [
-    "Le petit arbre qui sent bon accroché au rétro"
-   ],
-   "ambiances": []
+   }
   },
   "realisation": {
    "moment": "jour",
    "lieux": [
     "voiture"
    ],
-   "gags": [
-    "Le petit arbre qui sent bon accroché au rétro"
-   ],
+   "gags": [],
    "ambiances": [
     "pluie"
    ],
    "source": "auteur+image",
    "tenues": {
-    "presentateur": "costume",
-    "invite": "debardeur"
+    "presentateur": "chemise",
+    "invite": "tshirt",
+    "envoyee": "chemise"
    },
    "plans": [
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe"
+   ]
+  },
+  "video": "2026-11-03_08h27_emission.mp4"
+ },
+ {
+  "date": "2026-11-03",
+  "source": "https://www.tiktok.com/@same_same53/video/7703485812251348256",
+  "auteur": "same_same53",
+  "visuel": {
+   "gestes": [],
+   "duree": 62.5,
+   "nb_plans": 2,
+   "duree_plan": 31.25,
+   "coupes": [
+    20.5
+   ],
+   "plans": {
+    "tres_serre": 0.0,
+    "serre": 0.0,
+    "moyen": 0.0,
+    "large": 1.0
+   },
+   "camera": {
+    "fixe": 1.0,
+    "avance": 0.0,
+    "recul": 0.0,
+    "travelling": 0.0,
+    "epaule": 0.0
+   },
+   "nb_personnes": 0,
+   "personnes": [],
+   "visages": false,
+   "sourires": 0.0,
+   "energie": 0.43,
+   "mur": [
+    0,
+    0,
+    0
+   ],
+   "palette": [
+    [
+     0,
+     0,
+     0,
+     0.594
+    ],
+    [
+     251,
+     251,
+     251,
+     0.273
+    ],
+    [
+     51,
+     56,
+     66,
+     0.063
+    ],
+    [
+     158,
+     151,
+     142,
+     0.035
+    ],
+    [
+     214,
+     214,
+     212,
+     0.029
+    ],
+    [
+     183,
+     98,
+     10,
+     0.006
+    ]
+   ],
+   "lumiere": {
+    "luminosite": 85.5,
+    "chaleur": 0.6,
+    "saturation": 9.3
+   },
+   "moment": "jour",
+   "postures": []
+  },
+  "audio": {
+   "duree": 62.5,
+   "nb_voix": 2,
+   "voix": [
+    {
+     "hz": 212,
+     "genre": "f",
+     "part": 0.52
+    },
+    {
+     "hz": 193,
+     "genre": "f",
+     "part": 0.48
+    }
+   ],
+   "debit": 5.19,
+   "blanc_moyen": 0.26,
+   "coupes": 8,
+   "dynamique_db": 20.5,
+   "cris": 0.003,
+   "musique": 0.41,
+   "impacts": 47,
+   "impacts_10s": 7.52,
+   "graves": 19,
+   "aigus": 28,
+   "sur_vanne": 31,
+   "evenements": {
+    "laughter": 2
+   },
+   "emotions": {
+    "confused": 15,
+    "annoyed": 5,
+    "sarcastic": 4,
+    "serious": 4,
+    "explain": 3,
+    "neutral": 3,
+    "angry": 2,
+    "rambling": 2
+   }
+  },
+  "claude": {},
+  "realisation": {
+   "moment": "jour",
+   "lieux": [
+    "classe"
+   ],
+   "gags": [],
+   "ambiances": [],
+   "source": "robot+image",
+   "tenues": {
+    "presentateur": "uniforme",
+    "invite": "chemise"
+   },
+   "plans": [
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
     "large/fixe",
     "large/fixe",
     "large/fixe",
@@ -41577,6 +41780,6 @@
     "large/fixe"
    ]
   },
-  "video": "2026-11-03_09h23_emission.mp4"
+  "video": "2026-11-03_09h28_emission.mp4"
  }
 ]

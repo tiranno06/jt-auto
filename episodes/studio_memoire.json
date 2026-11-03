@@ -6199,36 +6199,34 @@
  {
   "moment": "jour",
   "lieux": [
-   "voiture"
+   "classe"
   ],
-  "source": "auteur+image",
-  "duree": 62.7,
+  "source": "robot+image",
+  "duree": 65.0,
   "plans": {
-   "large": 24
+   "large": 42
   },
   "mouvements": {
-   "fixe": 24
+   "fixe": 42
   },
   "costumes": {
-   "presentateur": "costume",
-   "invite": "debardeur"
+   "presentateur": "uniforme",
+   "invite": "chemise"
   },
   "figurants": 0,
-  "ambiances": [
-   "pluie"
-  ],
-  "controle": "Humoriste 6.0/10 : 5.1 s La vanne met trop de temps à démarrer, le spectateur scrolle avant la première réplique.; 5.5 s Le jeu d'acteur manque d'exagération pour marquer le début du clash. | Réalisat",
-  "fichier": "2026-11-03_09h23_emission.mp4",
+  "ambiances": [],
+  "controle": "Humoriste 8.8/10 : 12.3 s La chute 'Je vous-voie' est bien placée, mais un bruitage comme un 'boing' ou un 'dun dun' pourrait accentuer l'effet comique.; 49.0 s La réplique 'Mais t'es complètement con",
+  "fichier": "2026-11-03_09h28_emission.mp4",
   "cine": {
-   "focus": false,
-   "vertige": false,
+   "focus": true,
+   "vertige": true,
    "tiers": true,
    "etalonnage": true,
    "profondeur": false,
-   "grain": true,
+   "grain": false,
    "reflets": true,
    "son": true
   },
-  "cadence": "rapide"
+  "cadence": null
  }
 ]
