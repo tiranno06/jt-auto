@@ -6124,64 +6124,30 @@
   "cadence": "rapide"
  },
  {
-  "moment": "jour",
+  "moment": "soir",
   "lieux": [
-   "bureau"
+   "salon"
   ],
   "source": "auteur+image",
-  "duree": 67.6,
+  "duree": 62.8,
   "plans": {
-   "large": 30
+   "large": 22
   },
   "mouvements": {
-   "fixe": 30
+   "fixe": 22
   },
   "costumes": {
-   "presentateur": "chemise",
-   "invite": "tshirt"
+   "invite": "tshirt",
+   "envoyee": "blouse",
+   "presentateur": "chemise"
   },
-  "figurants": 0,
+  "figurants": 1,
   "ambiances": [
-   "neon"
+   "pluie",
+   "poussiere"
   ],
-  "controle": "Humoriste 10.0/10 :  | Réalisateur 10.0/10 :  | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.1/10 : 0.0 s sous-titres trop rapides à lire",
-  "fichier": "2026-11-03_06h55_emission.mp4",
-  "cine": {
-   "focus": true,
-   "vertige": true,
-   "tiers": true,
-   "etalonnage": true,
-   "profondeur": false,
-   "grain": true,
-   "reflets": false,
-   "son": true
-  },
-  "cadence": "rapide"
- },
- {
-  "moment": "jour",
-  "lieux": [
-   "rue",
-   "rue"
-  ],
-  "source": "auteur+image",
-  "duree": 88.0,
-  "plans": {
-   "large": 40
-  },
-  "mouvements": {
-   "fixe": 40
-  },
-  "costumes": {
-   "presentateur": "tshirt",
-   "invite": "chemise"
-  },
-  "figurants": 0,
-  "ambiances": [
-   "neon"
-  ],
-  "controle": "Humoriste 7.8/10 : 19.1 s La chute sur la voiture 'Bugatti' est un peu longue à venir et manque d'un effet comique supplémentaire. Le public pourrait mieux rire si la réaction du personnage était plus",
-  "fichier": "2026-11-03_07h47_emission.mp4",
+  "controle": "Humoriste 7.0/10 : 0.4 s La vannes initiale ('Je suis une pute') est un peu trop directe et pourrait choquer certains spectateurs, surtout dans un format destiné à un jeune public.; 12.9 s La chute su",
+  "fichier": "2026-11-03_07h23_emission.mp4",
   "cine": {
    "focus": false,
    "vertige": false,
@@ -6192,6 +6158,42 @@
    "reflets": true,
    "son": true
   },
-  "cadence": "rapide"
+  "cadence": null
+ },
+ {
+  "moment": "jour",
+  "lieux": [
+   "voiture"
+  ],
+  "source": "auteur+image",
+  "duree": 62.7,
+  "plans": {
+   "large": 20
+  },
+  "mouvements": {
+   "fixe": 20
+  },
+  "costumes": {
+   "presentateur": "chemise",
+   "invite": "tshirt",
+   "envoyee": "chemise"
+  },
+  "figurants": 0,
+  "ambiances": [
+   "pluie"
+  ],
+  "controle": "Humoriste 7.0/10 : 5.1 s La première réplique arrive trop tard et manque d'accroche immédiate. Le spectateur pourrait scroller avant.; 11.3 s La chute 'Tu te fous de ma gueule toi' pourrait être plus ",
+  "fichier": "2026-11-03_08h27_emission.mp4",
+  "cine": {
+   "focus": true,
+   "vertige": true,
+   "tiers": false,
+   "etalonnage": false,
+   "profondeur": false,
+   "grain": true,
+   "reflets": true,
+   "son": true
+  },
+  "cadence": null
  }
 ]

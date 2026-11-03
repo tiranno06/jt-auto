@@ -1,612 +1,126 @@
 {
- "titre": "ACCIDENTASSURANCECONFUSION",
- "sujet": "ACCIDENTASSURANCECONFUSION",
- "ecran": "ACCIDENTASSURA",
+ "titre": "EMBOUTEILLAGE MYSTÉRIEUX",
+ "sujet": "EMBOUTEILLAGE MYSTÉRIEUX",
+ "ecran": "EMBOUTEILLAGE",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "POV: Quand l'assurance devient un cauchemar",
- "question": "Comment gérer un accident quand on ne sait même pas de quelle voiture il s'agit ?",
+ "titre_accroche": "POV : Ton pote cache un secret",
+ "question": "Que cache vraiment l'invité ?",
  "running_gag": "",
  "verite": "",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "Ah, allô.",
-   "_deb": 0.334,
-   "_fin": 1.265,
-   "objet": "telephone",
+   "t": "Qu'est-ce qu'il y a encore.",
+   "_deb": 5.091,
+   "_fin": 5.856,
    "_mots": [
     [
-     "Ah,",
+     "Qu'est-ce",
      0.0,
-     0.101
+     0.222
     ],
     [
-     "allô.",
-     0.729,
-     0.931
+     "qu'il",
+     0.222,
+     0.343
+    ],
+    [
+     "y",
+     0.343,
+     0.383
+    ],
+    [
+     "a",
+     0.403,
+     0.423
+    ],
+    [
+     "encore.",
+     0.524,
+     0.765
     ]
    ]
   },
   {
    "p": "invite",
-   "t": "Oui, allô, Pierre de chez AXA France, dites-moi, je vous écoute.",
-   "_deb": 2.152,
-   "_fin": 4.02,
-   "objet": "micro",
+   "t": "Y'a rien. Y'a rien du tout.",
+   "_deb": 6.037,
+   "_fin": 8.15,
+   "d": "[laughing] Y'a rien. Y'a rien du tout.",
    "_mots": [
     [
-     "Oui,",
+     "Y'a",
      0.0,
-     0.08
+     0.121
     ],
     [
-     "allô,",
-     0.221,
-     0.361
+     "rien.",
+     0.222,
+     0.443
     ],
     [
-     "Pierre",
-     0.482,
-     0.683
-    ],
-    [
-     "de",
-     0.723,
-     0.763
-    ],
-    [
-     "chez",
-     0.823,
-     0.944
-    ],
-    [
-     "Axa",
-     0.984,
-     1.084
-    ],
-    [
-     "France,",
-     1.125,
-     1.326
-    ],
-    [
-     "dites",
-     1.326,
-     1.486
-    ],
-    [
-     "-moi",
-     1.506,
-     1.607
-    ],
-    [
-     "je",
-     1.647,
-     1.707
-    ],
-    [
-     "vous",
-     1.727,
-     1.808
-    ],
-    [
-     "écoute.",
-     1.848,
-     1.868
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Je viens d'avoir un...",
-   "_deb": 3.5,
-   "_fin": 5.446,
-   "_mots": [
-    [
-     "Je",
-     0.0,
-     1.06
-    ],
-    [
-     "viens",
-     1.424,
-     1.565
-    ],
-    [
-     "d'avoir",
-     1.605,
-     1.826
-    ],
-    [
-     "un...",
-     1.886,
-     1.946
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Un léger accrochage de rien du tout. C'était pour voir comment on pouvait faire avec l'assurance.",
-   "_deb": 7.676,
-   "_fin": 12.607,
-   "objet": "telephone",
-   "_mots": [
-    [
-     "Un...",
-     0.0,
-     0.06
-    ],
-    [
-     "Un",
-     0.302,
-     0.362
-    ],
-    [
-     "léger",
-     0.423,
-     0.644
-    ],
-    [
-     "accrochage",
-     0.704,
-     1.167
-    ],
-    [
-     "de",
-     1.429,
-     1.469
+     "Y'a",
+     0.966,
+     1.067
     ],
     [
      "rien",
-     1.509,
-     1.61
+     1.167,
+     1.368
     ],
     [
      "du",
-     1.67,
-     1.731
+     1.409,
+     1.529
     ],
     [
      "tout.",
-     1.771,
-     1.992
-    ],
-    [
-     "C'était",
-     2.876,
-     3.058
-    ],
-    [
-     "pour",
-     3.058,
-     3.138
-    ],
-    [
-     "voir",
-     3.158,
-     3.259
-    ],
-    [
-     "comment",
-     3.279,
-     3.481
-    ],
-    [
-     "on",
-     3.521,
-     3.561
-    ],
-    [
-     "pouvait",
-     3.581,
-     3.783
-    ],
-    [
-     "faire",
-     3.803,
-     3.944
-    ],
-    [
-     "avec",
-     4.045,
-     4.226
-    ],
-    [
-     "l'assurance.",
-     4.468,
-     4.931
+     1.529,
+     2.113
     ]
    ]
   },
   {
-   "p": "invite",
-   "t": "Oui, pas de problème, vous avez retenu quoi, monsieur.",
-   "_deb": 13.491,
-   "_fin": 14.715,
+   "p": "presentateur",
+   "t": "Ok.",
+   "_deb": 10.131,
+   "_fin": 10.252,
    "_mots": [
     [
-     "Oui,",
+     "Ok.",
+     0.0,
+     0.121
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Tu te fous de ma gueule toi en fait. Quoi.",
+   "_deb": 11.275,
+   "_fin": 12.921,
+   "_mots": [
+    [
+     "Tu",
      0.0,
      0.06
     ],
     [
-     "pas",
-     0.1,
-     0.181
-    ],
-    [
-     "de",
-     0.181,
-     0.221
-    ],
-    [
-     "problème,",
-     0.281,
-     0.462
-    ],
-    [
-     "vous",
-     0.462,
-     0.542
-    ],
-    [
-     "avez",
-     0.562,
-     0.682
-    ],
-    [
-     "retenu",
-     0.682,
-     0.823
-    ],
-    [
-     "quoi,",
-     0.823,
-     0.903
-    ],
-    [
-     "monsieur.",
-     0.983,
-     1.224
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Une biche.",
-   "_deb": 14.755,
-   "_fin": 15.117,
-   "_mots": [
-    [
-     "Une",
-     0.0,
-     0.081
-    ],
-    [
-     "biche.",
-     0.121,
-     0.362
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "Un piéton. Un véhicule.",
-   "_deb": 15.177,
-   "_fin": 16.14,
-   "_mots": [
-    [
-     "Un",
-     0.0,
-     0.04
-    ],
-    [
-     "piéton.",
-     0.08,
-     0.341
-    ],
-    [
-     "Un",
-     0.522,
-     0.562
-    ],
-    [
-     "véhicule.",
-     0.602,
-     0.963
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Un véhicule, un véhicule.",
-   "_deb": 16.361,
-   "_fin": 17.184,
-   "_mots": [
-    [
-     "Un",
-     0.0,
-     0.04
-    ],
-    [
-     "véhicule,",
-     0.08,
-     0.401
-    ],
-    [
-     "un",
-     0.441,
-     0.481
-    ],
-    [
-     "véhicule.",
-     0.522,
-     0.823
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "Quel genre de véhicule, monsieur ?",
-   "_deb": 17.886,
-   "_fin": 18.769,
-   "_mots": [
-    [
-     "Quel",
-     0.0,
-     0.12
-    ],
-    [
-     "genre",
-     0.16,
-     0.301
-    ],
-    [
-     "de",
-     0.321,
-     0.361
-    ],
-    [
-     "véhicule,",
-     0.381,
-     0.662
-    ],
-    [
-     "monsieur.",
-     0.682,
-     0.883
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Un camion.",
-   "_deb": 18.809,
-   "_fin": 19.252,
-   "_mots": [
-    [
-     "Un",
-     0.0,
-     0.102
-    ],
-    [
-     "camion.",
-     0.102,
-     0.443
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "Une moto.",
-   "_deb": 19.493,
-   "_fin": 19.954,
-   "_mots": [
-    [
-     "Une",
-     0.0,
-     0.12
-    ],
-    [
-     "moto.",
-     0.14,
-     0.461
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Un tricycle. J'en sais rien, une voiture.",
-   "_deb": 20.195,
-   "_fin": 21.399,
-   "_mots": [
-    [
-     "Un",
-     0.0,
-     0.04
-    ],
-    [
-     "tricycle.",
-     0.08,
-     0.642
-    ],
-    [
-     "J'en",
-     0.642,
-     0.743
-    ],
-    [
-     "sais",
-     0.743,
-     0.823
-    ],
-    [
-     "rien,",
-     0.823,
-     0.903
-    ],
-    [
-     "une",
-     0.903,
-     0.963
-    ],
-    [
-     "voiture.",
-     0.983,
-     1.204
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "Une voiture.",
-   "_deb": 21.921,
-   "_fin": 22.342,
-   "_mots": [
-    [
-     "Une",
-     0.0,
-     0.08
-    ],
-    [
-     "voiture.",
+     "te",
      0.12,
-     0.421
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Si on peut appeler ça une voiture, oui, une voiture.",
-   "_deb": 22.422,
-   "_fin": 24.409,
-   "_mots": [
-    [
-     "Si",
-     0.0,
-     0.041
-    ],
-    [
-     "on",
-     0.041,
-     0.101
-    ],
-    [
-     "peut",
-     0.161,
-     0.462
-    ],
-    [
-     "appeler",
-     0.582,
-     0.944
-    ],
-    [
-     "ça",
-     0.944,
-     0.984
-    ],
-    [
-     "une",
-     1.004,
-     1.064
-    ],
-    [
-     "voiture,",
-     1.104,
-     1.385
-    ],
-    [
-     "oui,",
-     1.445,
-     1.586
-    ],
-    [
-     "une",
-     1.586,
-     1.666
-    ],
-    [
-     "voiture.",
-     1.706,
-     1.987
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "C'est quoi la marque de la voiture, monsieur ?",
-   "_deb": 25.331,
-   "_fin": 26.295,
-   "_mots": [
-    [
-     "C'est",
-     0.0,
-     0.101
-    ],
-    [
-     "quoi",
-     0.121,
      0.201
     ],
     [
-     "la",
-     0.221,
-     0.302
-    ],
-    [
-     "marque",
-     0.322,
-     0.462
+     "fous",
+     0.281,
+     0.421
     ],
     [
      "de",
      0.462,
-     0.522
-    ],
-    [
-     "la",
-     0.542,
-     0.583
-    ],
-    [
-     "voiture,",
-     0.583,
-     0.783
-    ],
-    [
-     "monsieur",
-     0.783,
-     0.964
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Volkswagen, ma voiture.",
-   "_deb": 26.737,
-   "_fin": 27.681,
-   "objet": "telephone",
-   "_mots": [
-    [
-     "Volkswagen,",
-     0.0,
-     0.462
+     0.502
     ],
     [
      "ma",
@@ -614,1296 +128,1088 @@
      0.562
     ],
     [
-     "voiture.",
-     0.642,
-     0.944
+     "gueule",
+     0.662,
+     0.823
+    ],
+    [
+     "toi",
+     0.843,
+     0.963
+    ],
+    [
+     "en",
+     1.104,
+     1.144
+    ],
+    [
+     "fait.",
+     1.224,
+     1.365
+    ],
+    [
+     "Quoi.",
+     1.505,
+     1.646
     ]
    ]
   },
   {
-   "p": "invite",
-   "t": "Non, la marque de la voiture que vous avez effleurée, monsieur.",
-   "_deb": 27.741,
-   "_fin": 29.568,
-   "_mots": [
-    [
-     "Non,",
-     0.0,
-     0.1
-    ],
-    [
-     "la",
-     0.421,
-     0.462
-    ],
-    [
-     "marque",
-     0.522,
-     0.662
-    ],
-    [
-     "de",
-     0.662,
-     0.723
-    ],
-    [
-     "la",
-     0.743,
-     0.783
-    ],
-    [
-     "voiture",
-     0.803,
-     0.984
-    ],
-    [
-     "que",
-     0.984,
-     1.044
-    ],
-    [
-     "vous",
-     1.044,
-     1.124
-    ],
-    [
-     "avez",
-     1.124,
-     1.265
-    ],
-    [
-     "effleurée,",
-     1.285,
-     1.626
-    ],
-    [
-     "monsieur.",
-     1.646,
-     1.827
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
    "p": "presentateur",
-   "t": "fleurie monsieur à la marque de qui marque comment ça c'est qu'ils ont dit marc c'est à dire marque la marque de la voiture il y a quoi",
-   "_deb": 29.568,
-   "_fin": 38.836,
-   "d": "[laughing] fleurie monsieur à la marque de qui marque comment ça c'est qu'ils ont dit marc c'est à dire marque la marque de la voiture il y a quoi",
+   "t": "Qu'est-ce qu'il y a. Je te dis y'a rien et toi tu t'en fous.",
+   "_deb": 13.322,
+   "_fin": 15.249,
+   "d": "[laughing] Qu'est-ce qu'il y a. Je te dis y'a rien et toi tu t'en fous.",
    "_mots": [
     [
-     "fleurie",
+     "Qu'est-ce",
      0.0,
-     0.241
+     0.261
     ],
     [
-     "monsieur",
-     0.261,
-     0.462
-    ],
-    [
-     "à",
-     0.482,
-     0.502
-    ],
-    [
-     "la",
-     0.583,
-     0.643
-    ],
-    [
-     "marque",
-     0.724,
-     0.904
-    ],
-    [
-     "de",
-     0.944,
-     1.024
-    ],
-    [
-     "qui",
-     1.072,
-     4.412
-    ],
-    [
-     "marque",
-     4.572,
-     4.892
-    ],
-    [
-     "comment",
-     5.594,
-     5.794
-    ],
-    [
-     "ça",
-     5.854,
-     5.894
-    ],
-    [
-     "c'est",
-     5.955,
-     6.055
-    ],
-    [
-     "qu'ils",
-     6.055,
-     6.275
-    ],
-    [
-     "ont",
-     6.315,
-     6.416
-    ],
-    [
-     "dit",
-     6.456,
-     6.576
-    ],
-    [
-     "marc",
-     6.636,
-     6.776
-    ],
-    [
-     "c'est",
-     6.796,
-     6.937
-    ],
-    [
-     "à",
-     6.957,
-     6.977
-    ],
-    [
-     "dire",
-     7.037,
-     7.217
-    ],
-    [
-     "marque",
-     7.257,
-     7.498
-    ],
-    [
-     "la",
-     8.079,
-     8.139
-    ],
-    [
-     "marque",
-     8.259,
-     8.42
-    ],
-    [
-     "de",
-     8.44,
-     8.48
-    ],
-    [
-     "la",
-     8.52,
-     8.56
-    ],
-    [
-     "voiture",
-     8.58,
-     8.841
-    ],
-    [
-     "il",
-     8.861,
-     8.941
+     "qu'il",
+     0.522,
+     0.642
     ],
     [
      "y",
-     9.081,
-     9.101
+     0.642,
+     0.662
     ],
     [
-     "a",
-     9.181,
-     9.201
+     "a.",
+     0.662,
+     0.682
     ],
     [
-     "quoi",
-     9.242,
-     9.268
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "sur le logo monsieur",
-   "_deb": 38.836,
-   "_fin": 39.387,
-   "_mots": [
-    [
-     "sur",
-     0.0,
-     0.082
+     "Je",
+     0.682,
+     0.763
     ],
     [
-     "le",
-     0.102,
-     0.143
+     "te",
+     0.783,
+     0.823
     ],
     [
-     "logo",
-     0.163,
-     0.306
+     "dis",
+     0.843,
+     0.923
     ],
     [
-     "monsieur",
-     0.367,
-     0.551
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "monsieur bugatti",
-   "_deb": 41.42,
-   "_fin": 43.748,
-   "d": "[laughing] monsieur bugatti",
-   "_mots": [
-    [
-     "monsieur",
-     0.0,
-     1.48
+     "y'a",
+     0.963,
+     1.004
     ],
     [
-     "bugatti",
-     2.006,
-     2.328
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "bugatti comme dacia bugatti comme non comme la nomme Bugatti, les Italiens, quoi.",
-   "_deb": 45.42,
-   "_fin": 54.749,
-   "objet": "telephone",
-   "_mots": [
-    [
-     "bugatti",
-     0.0,
-     1.5
+     "rien",
+     1.064,
+     1.204
     ],
     [
-     "comme",
-     1.5,
-     3.8
+     "et",
+     1.244,
+     1.305
     ],
     [
-     "dacia",
-     4.159,
-     4.339
+     "toi",
+     1.325,
+     1.405
     ],
     [
-     "bugatti",
-     4.34,
-     5.68
+     "tu",
+     1.465,
+     1.525
     ],
     [
-     "comme",
-     5.862,
-     6.023
+     "t'en",
+     1.565,
+     1.666
     ],
     [
-     "non",
-     6.263,
-     6.363
-    ],
-    [
-     "comme",
-     6.524,
-     6.664
-    ],
-    [
-     "la",
-     6.664,
-     6.724
-    ],
-    [
-     "nomme",
-     6.844,
-     7.16
-    ],
-    [
-     "Bugatti,",
-     7.16,
-     8.04
-    ],
-    [
-     "les",
-     8.728,
-     8.788
-    ],
-    [
-     "Italiens,",
-     8.828,
-     9.229
-    ],
-    [
-     "quoi.",
-     9.249,
-     9.329
+     "fous.",
+     1.766,
+     1.927
     ]
    ]
   },
   {
    "p": "presentateur",
-   "t": "Bah, je suis foutu.",
-   "_deb": 55.971,
-   "_fin": 56.453,
+   "t": "Hé hé hé hé hé hé.",
+   "_deb": 15.553,
+   "_fin": 16.946,
+   "d": "[laughing] Hé hé hé hé hé hé.",
    "_mots": [
     [
-     "Bah,",
+     "Hé",
      0.0,
-     0.201
+     0.141
     ],
     [
-     "je",
-     0.201,
-     0.241
+     "hé",
+     0.181,
+     0.626
     ],
     [
-     "suis",
-     0.241,
-     0.322
+     "hé",
+     0.646,
+     0.888
     ],
     [
-     "foutu.",
-     0.322,
-     0.482
+     "hé",
+     0.928,
+     0.969
+    ],
+    [
+     "hé",
+     1.049,
+     1.09
+    ],
+    [
+     "hé.",
+     1.312,
+     1.393
     ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "Et c'était quoi, le modèle, monsieur.",
-   "_deb": 57.076,
-   "_fin": 58.503,
-   "_mots": [
-    [
-     "Et",
-     0.0,
-     0.061
-    ],
-    [
-     "c'était",
-     0.302,
-     0.483
-    ],
-    [
-     "quoi,",
-     0.483,
-     0.583
-    ],
-    [
-     "le",
-     0.583,
-     0.643
-    ],
-    [
-     "modèle,",
-     0.945,
-     1.166
-    ],
-    [
-     "monsieur.",
-     1.186,
-     1.427
-    ]
-   ],
-   "objet": "telephone"
+   ]
   },
   {
    "p": "presentateur",
-   "t": "Le modèle, oui.",
-   "_deb": 58.724,
-   "_fin": 59.166,
+   "t": "Je t'ai demandé qu'est-ce qu'il y a. Tu m'as dit y'a rien non.",
+   "_deb": 18.712,
+   "_fin": 21.268,
    "_mots": [
     [
-     "Le",
-     0.0,
-     0.06
-    ],
-    [
-     "modèle.",
-     0.121,
-     0.442
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "Le modèle, oui.",
-   "_deb": 60.613,
-   "_fin": 61.339,
-   "_mots": [
-    [
-     "Le",
+     "Je",
      0.0,
      0.04
     ],
     [
-     "modèle,",
-     0.081,
-     0.585
-    ],
-    [
-     "oui.",
-     0.605,
-     0.726
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "C'est la tourbillon, je crois.",
-   "_deb": 61.38,
-   "_fin": 62.53,
-   "_mots": [
-    [
-     "C'est",
-     0.0,
-     0.121
-    ],
-    [
-     "la",
-     0.141,
-     0.181
-    ],
-    [
-     "tourbillon,",
-     0.242,
-     0.585
-    ],
-    [
-     "je",
-     0.646,
-     0.706
-    ],
-    [
-     "crois.",
-     0.726,
-     1.15
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "Donc, vous voulez déclarer la guerre à l'assurance.",
-   "_deb": 63.211,
-   "_fin": 64.798,
-   "_mots": [
-    [
-     "Donc,",
-     0.0,
-     0.241
-    ],
-    [
-     "vous",
-     0.262,
-     0.402
-    ],
-    [
-     "voulez",
-     0.402,
-     0.563
-    ],
-    [
-     "déclarer",
-     0.643,
-     0.924
-    ],
-    [
-     "la",
-     0.924,
-     1.005
-    ],
-    [
-     "guerre",
-     1.025,
-     1.185
-    ],
-    [
-     "à",
-     1.185,
-     1.205
-    ],
-    [
-     "l'assurance.",
-     1.205,
-     1.587
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Il y a une voiture qui s'appelle tourbillon, et vous, vous dites, je vais lui rentrer dedans.",
-   "_deb": 64.838,
-   "_fin": 67.469,
-   "_mots": [
-    [
-     "Il",
-     0.0,
+     "t'ai",
+     0.06,
      0.161
     ],
     [
-     "y",
+     "demandé",
      0.201,
-     0.221
+     0.483
     ],
     [
-     "a",
-     0.221,
-     0.241
+     "qu'est-ce",
+     0.684,
+     0.905
     ],
     [
-     "une",
-     0.241,
-     0.362
+     "qu'il",
+     0.946,
+     1.066
     ],
     [
-     "voiture",
-     0.382,
-     0.563
+     "y",
+     1.107,
+     1.127
     ],
     [
-     "qui",
-     0.563,
-     0.643
+     "a.",
+     1.167,
+     1.187
     ],
     [
-     "s'appelle",
-     0.643,
-     0.884
+     "Tu",
+     1.71,
+     1.771
     ],
     [
-     "tourbillon,",
-     0.904,
-     1.386
-    ],
-    [
-     "et",
-     1.527,
-     1.567
-    ],
-    [
-     "vous,",
-     1.607,
-     1.707
-    ],
-    [
-     "vous",
-     1.727,
-     1.848
-    ],
-    [
-     "dites,",
-     1.868,
-     1.968
-    ],
-    [
-     "je",
-     1.968,
-     2.009
-    ],
-    [
-     "vais",
-     2.029,
-     2.109
-    ],
-    [
-     "lui",
-     2.109,
-     2.189
-    ],
-    [
-     "rentrer",
-     2.189,
-     2.41
-    ],
-    [
-     "dedans.",
-     2.45,
-     2.631
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "C'est sûr que...",
-   "_deb": 68.416,
-   "_fin": 68.843,
-   "_mots": [
-    [
-     "C'est",
-     0.0,
-     0.102
-    ],
-    [
-     "sûr",
-     0.142,
-     0.264
-    ],
-    [
-     "que...",
-     0.325,
-     0.427
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "C'est quoi ce délire, là.",
-   "_deb": 69.935,
-   "_fin": 70.93,
-   "_mots": [
-    [
-     "C'est",
-     0.0,
-     0.243
-    ],
-    [
-     "quoi",
-     0.264,
-     0.345
-    ],
-    [
-     "ce",
-     0.345,
-     0.406
-    ],
-    [
-     "délire,",
-     0.406,
-     0.792
-    ],
-    [
-     "là.",
-     0.914,
-     0.995
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Que dit comme ça. Et du coup, pour l'assurance, que j'avais pris l'assurance touriste...",
-   "_deb": 71.291,
-   "_fin": 74.944,
-   "_mots": [
-    [
-     "Que",
-     0.0,
-     0.1
+     "m'as",
+     1.851,
+     1.952
     ],
     [
      "dit",
-     0.161,
-     0.241
+     1.972,
+     2.113
     ],
     [
-     "comme",
-     0.301,
-     0.462
+     "y'a",
+     2.113,
+     2.173
     ],
     [
-     "ça.",
-     0.542,
-     0.602
+     "rien",
+     2.234,
+     2.415
     ],
+    [
+     "non.",
+     2.455,
+     2.556
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Et bah ok. Parce qu'il y'a rien. Mais en fait quand je te dis qu'il y'a rien c'est qu'il y'a quelque chose en fait.",
+   "_deb": 22.371,
+   "_fin": 26.907,
+   "_mots": [
     [
      "Et",
-     1.164,
+     0.0,
+     0.08
+    ],
+    [
+     "bah",
+     0.141,
+     0.281
+    ],
+    [
+     "ok.",
+     0.281,
+     0.381
+    ],
+    [
+     "Parce",
+     0.843,
+     0.984
+    ],
+    [
+     "qu'il",
+     1.004,
+     1.104
+    ],
+    [
+     "y'a",
+     1.144,
      1.224
     ],
     [
-     "du",
-     1.244,
-     1.284
-    ],
-    [
-     "coup,",
-     1.345,
+     "rien.",
+     1.305,
      1.465
     ],
     [
-     "pour",
-     2.027,
-     2.127
+     "Mais",
+     2.047,
+     2.168
     ],
     [
-     "l'assurance,",
-     2.147,
-     2.569
+     "en",
+     2.248,
+     2.288
     ],
     [
-     "que",
-     2.649,
-     2.709
+     "fait",
+     2.328,
+     2.449
     ],
     [
-     "j'avais",
-     2.77,
+     "quand",
+     2.509,
+     2.609
+    ],
+    [
+     "je",
+     2.609,
+     2.67
+    ],
+    [
+     "te",
+     2.69,
+     2.73
+    ],
+    [
+     "dis",
+     2.79,
+     2.89
+    ],
+    [
+     "qu'il",
+     2.911,
+     3.031
+    ],
+    [
+     "y'a",
+     3.051,
+     3.111
+    ],
+    [
+     "rien",
+     3.171,
+     3.372
+    ],
+    [
+     "c'est",
+     3.473,
+     3.573
+    ],
+    [
+     "qu'il",
+     3.593,
+     3.673
+    ],
+    [
+     "y'a",
+     3.673,
+     3.754
+    ],
+    [
+     "quelque",
+     3.794,
+     3.954
+    ],
+    [
+     "chose",
+     3.954,
+     4.115
+    ],
+    [
+     "en",
+     4.195,
+     4.235
+    ],
+    [
+     "fait.",
+     4.336,
+     4.536
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Alors pourquoi tu me dis pas. C'est qu'il y a quand je te demande.",
+   "_deb": 27.168,
+   "_fin": 30.5,
+   "_mots": [
+    [
+     "Alors",
+     0.0,
+     0.363
+    ],
+    [
+     "pourquoi",
+     0.363,
+     0.744
+    ],
+    [
+     "tu",
+     0.885,
+     0.945
+    ],
+    [
+     "me",
+     1.025,
+     1.085
+    ],
+    [
+     "dis",
+     1.146,
+     1.266
+    ],
+    [
+     "pas.",
+     1.346,
+     1.507
+    ],
+    [
+     "C'est",
+     2.149,
+     2.269
+    ],
+    [
+     "qu'il",
+     2.309,
+     2.47
+    ],
+    [
+     "y",
+     2.55,
+     2.59
+    ],
+    [
+     "a",
+     2.63,
+     2.65
+    ],
+    [
+     "quand",
+     2.791,
+     2.911
+    ],
+    [
+     "je",
+     2.911,
+     2.951
+    ],
+    [
+     "te",
+     2.951,
+     2.991
+    ],
+    [
+     "demande.",
+     3.011,
+     3.332
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Qu'est-ce qu'il y a au lieu de me dire. Y a rien comme tu as l'habitude d'aboyer.",
+   "_deb": 30.701,
+   "_fin": 35.136,
+   "_mots": [
+    [
+     "Qu'est-ce",
+     0.0,
+     0.301
+    ],
+    [
+     "qu'il",
+     0.341,
+     0.562
+    ],
+    [
+     "y",
+     0.562,
+     0.582
+    ],
+    [
+     "a",
+     0.642,
+     0.662
+    ],
+    [
+     "au",
+     1.484,
+     1.525
+    ],
+    [
+     "lieu",
+     1.585,
+     1.745
+    ],
+    [
+     "de",
+     1.745,
+     1.785
+    ],
+    [
+     "me",
+     1.846,
+     1.906
+    ],
+    [
+     "dire.",
+     1.966,
+     2.146
+    ],
+    [
+     "Y",
+     2.227,
+     2.247
+    ],
+    [
+     "a",
+     2.307,
+     2.327
+    ],
+    [
+     "rien",
+     2.427,
+     2.489
+    ],
+    [
+     "comme",
+     2.489,
+     2.73
+    ],
+    [
+     "tu",
+     2.91,
      2.95
     ],
     [
-     "pris",
+     "as",
      2.95,
      3.051
     ],
     [
-     "l'assurance",
-     3.071,
-     3.412
+     "l'habitude",
+     3.191,
+     3.572
     ],
     [
-     "touriste...",
-     3.432,
-     3.653
+     "d'aboyer.",
+     3.612,
+     4.435
     ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "Mais du coup, tu me parles d'assurance touriste.",
-   "_deb": 74.944,
-   "_fin": 76.128,
-   "_mots": [
-    [
-     "Mais",
-     0.0,
-     0.08
-    ],
-    [
-     "du",
-     0.1,
-     0.14
-    ],
-    [
-     "coup,",
-     0.16,
-     0.26
-    ],
-    [
-     "tu",
-     0.26,
-     0.361
-    ],
-    [
-     "me",
-     0.361,
-     0.401
-    ],
-    [
-     "parles",
-     0.421,
-     0.562
-    ],
-    [
-     "d'assurance",
-     0.582,
-     0.903
-    ],
-    [
-     "touriste.",
-     0.923,
-     1.184
-    ]
-   ],
-   "objet": "telephone"
+   ]
   },
   {
    "p": "presentateur",
-   "t": "T'as un baiser, toi. Tu crois vraiment que c'est un risque, ça, frérot.",
-   "_deb": 76.148,
-   "_fin": 77.819,
+   "t": "Parce que tu es censé le deviner tout ça. Et je suis censé le deviner comment.",
+   "_deb": 35.617,
+   "_fin": 38.847,
    "_mots": [
     [
-     "T'as",
+     "Parce",
      0.0,
-     0.06
-    ],
-    [
-     "un",
-     0.06,
-     0.1
-    ],
-    [
-     "baiser,",
-     0.12,
-     0.403
-    ],
-    [
-     "toi.",
-     0.403,
-     0.484
-    ],
-    [
-     "Tu",
-     0.484,
-     0.524
-    ],
-    [
-     "crois",
-     0.524,
-     0.625
-    ],
-    [
-     "vraiment",
-     0.625,
-     0.826
+     0.161
     ],
     [
      "que",
-     0.826,
-     0.886
-    ],
-    [
-     "c'est",
-     0.927,
-     1.007
-    ],
-    [
-     "un",
-     1.027,
-     1.068
-    ],
-    [
-     "risque,",
-     1.108,
-     1.309
-    ],
-    [
-     "ça,",
-     1.349,
-     1.39
-    ],
-    [
-     "frérot.",
-     1.51,
-     1.671
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "Moi, je m'en bats les couilles.",
-   "_deb": 77.819,
-   "_fin": 78.322,
-   "_mots": [
-    [
-     "Moi,",
-     0.0,
-     0.061
-    ],
-    [
-     "je",
-     0.081,
-     0.121
-    ],
-    [
-     "m'en",
-     0.121,
-     0.181
-    ],
-    [
-     "bats",
-     0.181,
-     0.262
-    ],
-    [
-     "les",
-     0.262,
-     0.322
-    ],
-    [
-     "couilles.",
-     0.322,
-     0.503
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Je vais faire comme si je n'avais jamais sur l'appel.",
-   "_deb": 78.322,
-   "_fin": 79.594,
-   "_mots": [
-    [
-     "Je",
-     0.0,
-     0.061
-    ],
-    [
-     "vais",
-     0.081,
-     0.161
-    ],
-    [
-     "faire",
-     0.161,
-     0.282
-    ],
-    [
-     "comme",
-     0.282,
-     0.423
-    ],
-    [
-     "si",
-     0.463,
-     0.504
-    ],
-    [
-     "je",
-     0.504,
-     0.544
-    ],
-    [
-     "n'avais",
-     0.544,
-     0.685
-    ],
-    [
-     "jamais",
-     0.725,
-     0.886
-    ],
-    [
-     "sur",
-     0.906,
-     1.007
-    ],
-    [
-     "l'appel.",
-     1.05,
-     1.272
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "Je ne suis pas payé au montage.",
-   "_deb": 79.654,
-   "_fin": 80.379,
-   "_mots": [
-    [
-     "Moi,",
-     0.0,
-     0.06
-    ],
-    [
-     "je",
-     0.06,
-     0.101
-    ],
-    [
-     "ne",
-     0.101,
-     0.141
-    ],
-    [
-     "suis",
-     0.141,
-     0.221
-    ],
-    [
-     "pas",
-     0.241,
-     0.302
-    ],
-    [
-     "payé",
-     0.322,
-     0.483
-    ],
-    [
-     "pour",
-     0.543,
-     0.624
-    ],
-    [
-     "ça.",
-     0.684,
-     0.725
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Je ne vais pas que ma boîte est cool.",
-   "_deb": 80.379,
-   "_fin": 80.962,
-   "_mots": [
-    [
-     "Je",
-     0.0,
-     0.04
-    ],
-    [
-     "ne",
-     0.04,
-     0.08
-    ],
-    [
-     "suis",
-     0.08,
-     0.161
-    ],
-    [
-     "pas",
-     0.161,
-     0.221
-    ],
-    [
-     "payé",
-     0.241,
-     0.322
-    ],
-    [
-     "au",
-     0.342,
-     0.382
-    ],
-    [
-     "montage.",
-     0.382,
-     0.583
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "Je ne vais pas que ma boîte est cool.",
-   "_deb": 80.983,
-   "_fin": 81.808,
-   "_mots": [
-    [
-     "Je",
-     0.0,
-     0.04
-    ],
-    [
-     "ne",
-     0.04,
-     0.08
-    ],
-    [
-     "vais",
-     0.08,
-     0.161
-    ],
-    [
-     "pas",
-     0.161,
-     0.221
-    ],
-    [
-     "que",
-     0.221,
+     0.201,
      0.281
     ],
     [
-     "ma",
-     0.322,
-     0.362
+     "tu",
+     0.321,
+     0.381
     ],
     [
-     "boîte",
-     0.402,
-     0.563
+     "es",
+     0.462,
+     0.522
     ],
     [
-     "est",
-     0.624,
-     0.684
+     "censé",
+     0.562,
+     0.762
     ],
     [
-     "cool.",
-     0.684,
-     0.825
+     "le",
+     0.843,
+     0.883
+    ],
+    [
+     "deviner",
+     0.923,
+     1.144
+    ],
+    [
+     "tout",
+     1.184,
+     1.264
+    ],
+    [
+     "ça.",
+     1.324,
+     1.364
+    ],
+    [
+     "Et",
+     1.786,
+     1.906
+    ],
+    [
+     "je",
+     2.006,
+     2.066
+    ],
+    [
+     "suis",
+     2.167,
+     2.307
+    ],
+    [
+     "censé",
+     2.327,
+     2.528
+    ],
+    [
+     "le",
+     2.588,
+     2.628
+    ],
+    [
+     "deviner",
+     2.668,
+     2.969
+    ],
+    [
+     "comment.",
+     3.009,
+     3.23
     ]
-   ],
-   "objet": "telephone"
+   ]
   },
   {
    "p": "presentateur",
-   "t": "Va te faire foutre, frérot.",
-   "_deb": 82.134,
-   "_fin": 82.801,
+   "t": "Je suis qui moi.",
+   "_deb": 38.867,
+   "_fin": 39.469,
    "_mots": [
     [
-     "Va",
+     "Je",
      0.0,
      0.04
     ],
     [
-     "te",
-     0.081,
-     0.141
+     "suis",
+     0.1,
+     0.241
     ],
     [
-     "faire",
-     0.162,
-     0.263
+     "qui",
+     0.261,
+     0.381
     ],
     [
-     "foutre,",
-     0.303,
-     0.485
-    ],
-    [
-     "frérot.",
-     0.485,
-     0.667
+     "moi.",
+     0.481,
+     0.602
     ]
-   ],
-   "objet": "telephone"
+   ]
   },
   {
    "p": "invite",
-   "t": "Va chez une autre.",
-   "_deb": 82.822,
-   "_fin": 83.287,
-   "chute": true,
+   "t": "Je suis un maître Jedi. Je suis devin. Je suis maître Yoda.",
+   "_deb": 39.831,
+   "_fin": 42.619,
    "_mots": [
     [
-     "Va",
+     "Je",
      0.0,
      0.04
     ],
     [
-     "chez",
-     0.081,
-     0.182
+     "suis",
+     0.04,
+     0.12
     ],
     [
-     "une",
-     0.222,
-     0.303
+     "un",
+     0.12,
+     0.181
     ],
     [
-     "autre.",
-     0.323,
-     0.465
+     "maître",
+     0.221,
+     0.421
+    ],
+    [
+     "Jedi.",
+     0.522,
+     0.722
+    ],
+    [
+     "Je",
+     0.742,
+     0.883
+    ],
+    [
+     "suis",
+     1.183,
+     1.364
+    ],
+    [
+     "devin.",
+     1.364,
+     1.625
+    ],
+    [
+     "Je",
+     2.146,
+     2.186
+    ],
+    [
+     "suis",
+     2.186,
+     2.266
+    ],
+    [
+     "maître",
+     2.286,
+     2.467
+    ],
+    [
+     "Yoda.",
+     2.527,
+     2.788
     ]
-   ],
-   "objet": "telephone"
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Ou maître Windu. Oui, oui, oui. Tu as acheté un savon laser et tu penses que tu as le",
+   "_deb": 43.281,
+   "_fin": 47.04,
+   "_mots": [
+    [
+     "Ou",
+     0.0,
+     0.04
+    ],
+    [
+     "maître",
+     0.1,
+     0.3
+    ],
+    [
+     "Windu.",
+     0.321,
+     0.601
+    ],
+    [
+     "Oui,",
+     0.902,
+     1.043
+    ],
+    [
+     "oui,",
+     1.343,
+     1.444
+    ],
+    [
+     "oui.",
+     1.724,
+     1.845
+    ],
+    [
+     "Tu",
+     2.266,
+     2.306
+    ],
+    [
+     "as",
+     2.326,
+     2.366
+    ],
+    [
+     "acheté",
+     2.366,
+     2.547
+    ],
+    [
+     "un",
+     2.547,
+     2.587
+    ],
+    [
+     "savon",
+     2.627,
+     2.787
+    ],
+    [
+     "laser",
+     2.807,
+     3.068
+    ],
+    [
+     "et",
+     3.068,
+     3.389
+    ],
+    [
+     "tu",
+     4.134,
+     4.174
+    ],
+    [
+     "penses",
+     4.214,
+     4.234
+    ],
+    [
+     "que",
+     3.259,
+     3.459
+    ],
+    [
+     "tu",
+     3.459,
+     3.499
+    ],
+    [
+     "as",
+     3.499,
+     3.539
+    ],
+    [
+     "le",
+     3.539,
+     3.759
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "train de",
+   "_deb": 47.06,
+   "_fin": 48.017,
+   "_mots": [
+    [
+     "train",
+     0.937,
+     0.957
+    ],
+    [
+     "de",
+     0.0,
+     0.14
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "travailler dans la maison En",
+   "_deb": 47.22,
+   "_fin": 48.157,
+   "_mots": [
+    [
+     "travailler",
+     0.917,
+     0.937
+    ],
+    [
+     "dans",
+     0.0,
+     0.1
+    ],
+    [
+     "la",
+     0.1,
+     0.16
+    ],
+    [
+     "maison",
+     0.16,
+     0.3
+    ],
+    [
+     "En",
+     0.48,
+     0.66
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "rapportant je suis un Jedi, comme un bébé K-Dom.",
+   "_deb": 48.78,
+   "_fin": 49.804,
+   "_mots": [
+    [
+     "rapportant",
+     0.0,
+     0.341
+    ],
+    [
+     "je",
+     0.341,
+     0.381
+    ],
+    [
+     "suis",
+     0.381,
+     0.462
+    ],
+    [
+     "un",
+     0.462,
+     0.502
+    ],
+    [
+     "Jedi,",
+     0.502,
+     0.582
+    ],
+    [
+     "comme",
+     0.602,
+     0.722
+    ],
+    [
+     "un",
+     0.722,
+     0.763
+    ],
+    [
+     "bébé",
+     0.763,
+     0.843
+    ],
+    [
+     "K-Dom.",
+     0.863,
+     1.024
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "D'accord, d'accord, d'accord",
+   "_deb": 49.804,
+   "_fin": 51.51,
+   "d": "[laughing] D'accord, d'accord, d'accord",
+   "_mots": [
+    [
+     "D'accord,",
+     0.0,
+     0.321
+    ],
+    [
+     "d'accord,",
+     0.341,
+     0.622
+    ],
+    [
+     "d'accord",
+     0.642,
+     1.706
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Du coup je recommence.",
+   "_deb": 52.754,
+   "_fin": 53.767,
+   "d": "[laughing] Du coup je recommence.",
+   "_mots": [
+    [
+     "Du",
+     0.0,
+     0.081
+    ],
+    [
+     "coup",
+     0.142,
+     0.283
+    ],
+    [
+     "je",
+     0.364,
+     0.466
+    ],
+    [
+     "recommence.",
+     0.547,
+     1.013
+    ]
+   ]
+  },
+  {
+   "p": "envoyee",
+   "t": "Y a rien Ha ha ha ha. Je suis là",
+   "_deb": 55.733,
+   "_fin": 59.11,
+   "d": "[laughing] Y a rien Ha ha ha ha. Je suis là",
+   "chute": true,
+   "_mots": [
+    [
+     "Y",
+     0.0,
+     0.02
+    ],
+    [
+     "a",
+     0.201,
+     0.221
+    ],
+    [
+     "rien",
+     0.221,
+     0.583
+    ],
+    [
+     "Ha",
+     0.724,
+     0.845
+    ],
+    [
+     "ha",
+     1.588,
+     1.669
+    ],
+    [
+     "ha",
+     1.769,
+     1.89
+    ],
+    [
+     "ha.",
+     1.99,
+     2.251
+    ],
+    [
+     "Je",
+     2.352,
+     2.553
+    ],
+    [
+     "suis",
+     2.633,
+     2.814
+    ],
+    [
+     "là",
+     2.854,
+     3.377
+    ]
+   ]
   }
  ],
  "bandeau": [],
  "gag": null,
- "legende": "Un appel à l'assurance qui tourne au délire total.",
+ "legende": "Deux amis coincés dans un embouteillage échangent des mots tendus.",
  "hashtags": [
   "petitsdramas",
-  "assurance",
-  "accident",
-  "confusion",
+  "embouteillage",
+  "secret",
   "humour",
-  "delire",
-  "pov"
+  "voiture",
+  "ami",
+  "mystere"
  ],
  "sources": [
-  "https://www.tiktok.com/@charly.bse/video/7703204376701193505"
+  "https://www.tiktok.com/@yan_animation0/video/7678076893253422368"
  ],
  "decoupage": [
   {
    "scene": "1",
    "repliques": [
     0,
+    1,
     2,
     3,
+    4,
     5,
+    6,
     7,
+    8,
     9,
+    10,
     11,
+    12,
     13,
+    14,
     15,
+    16,
     17,
     18,
-    19,
-    20,
-    21,
-    23,
-    25,
-    27,
-    28,
-    30,
-    32,
-    34,
-    36,
-    38
+    19
    ],
    "lieu": "",
    "son": "",
-   "duree": 0,
-   "decor": "street with a damaged blue car, a 'Tourbillon' sign, a phone booth, a tree, and a city skyline in the background."
-  },
-  {
-   "scene": "2",
-   "repliques": [
-    1,
-    4,
-    6,
-    8,
-    10,
-    12,
-    14,
-    16,
-    22,
-    24,
-    26,
-    29,
-    31,
-    33,
-    35,
-    37,
-    39
-   ],
-   "lieu": "",
-   "son": "",
-   "duree": 0,
-   "decor": "office with a desk, a computer, a phone, an 'AXA France' nameplate, and a calendar on the wall."
+   "duree": 0.0,
+   "decor": "interior of a car, traffic jam, city buildings, steering wheel, dashboard, road map, traffic lights",
+   "titre": "Le Mystère"
   }
  ],
  "studio": {
   "moment": "jour",
   "lieux": [
-   "rue",
-   "rue"
+   "voiture"
   ],
   "costumes": {
    "presentateur": {
-    "haut": "tshirt",
-    "c_haut": "bleu",
-    "bas": "jean",
-    "chaussures": "baskets",
+    "haut": "chemise",
+    "c_haut": "bleu marine",
+    "motif": "uni",
+    "bas": "pantalon",
+    "chaussures": "ville",
     "details": [
-     "barbe_courte",
+     "cravate",
      "lunettes_soleil"
     ],
     "chapeau": null,
@@ -1911,296 +1217,337 @@
     "c_cheveux": "brun"
    },
    "invite": {
+    "haut": "tshirt",
+    "c_haut": "rouge",
+    "motif": "uni",
+    "bas": "jeans",
+    "chaussures": "baskets",
+    "details": [
+     "bracelets"
+    ],
+    "chapeau": null,
+    "cheveux": "tresses",
+    "c_cheveux": "noir"
+   },
+   "envoyee": {
     "haut": "chemise",
     "c_haut": "blanc",
+    "motif": "uni",
     "bas": "pantalon",
     "chaussures": "ville",
     "details": [
-     "cravate",
-     "lunettes_vue"
+     "montre"
     ],
-    "chapeau": "casquette",
-    "c_chapeau": "noir",
-    "cheveux": "court_texture",
-    "c_cheveux": "châtain"
+    "chapeau": null,
+    "cheveux": "long",
+    "c_cheveux": "blond"
    }
-  },
-  "metiers": {
-   "invite": "agent_assurance"
-  },
-  "personnages": {
-   "presentateur": {
-    "genre": "h",
-    "age": 45,
-    "taille": 1,
-    "corpulence": 0.6,
-    "cheveux": "court_texture",
-    "barbe": "trois_jours"
-   },
-   "invite": {
-    "genre": "h",
-    "age": 35,
-    "taille": 0.95,
-    "corpulence": 0.7,
-    "cheveux": "court",
-    "barbe": null
-   }
-  },
-  "objets": [
-   {
-    "replique": 0,
-    "objet": "telephone"
-   },
-   {
-    "replique": 1,
-    "objet": "micro"
-   },
-   {
-    "replique": 3,
-    "objet": "telephone"
-   },
-   {
-    "replique": 15,
-    "objet": "telephone"
-   },
-   {
-    "replique": 20,
-    "objet": "telephone"
-   }
-  ],
-  "plans": [
-   {
-    "replique": 0,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "telephone",
-    "reaction": "neutre"
-   },
-   {
-    "replique": 1,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "micro",
-    "reaction": "annoyed"
-   },
-   {
-    "replique": 3,
-    "plan": "serre",
-    "mouvement": "avance",
-    "geste": "telephone",
-    "reaction": "panique"
-   },
-   {
-    "replique": 21,
-    "plan": "tres_serre",
-    "mouvement": "zoom_choc",
-    "geste": "facepalm",
-    "reaction": "choc"
-   },
-   {
-    "replique": 38,
-    "plan": "large",
-    "mouvement": "epaule",
-    "geste": "poing",
-    "reaction": "colere"
-   }
-  ],
-  "gags": [
-   "AXA : Depuis 1818, on vous embrouille encore.",
-   "Tourbillon : La voiture qui tourne en rond dans votre tête.",
-   "Assurance : Parce que la vie est déjà assez compliquée."
-  ],
-  "ambiances": [
-   "neon"
-  ],
-  "cadence": "rapide",
-  "decors_vus": {
-   "presentateur": "street with a damaged blue car, a 'Tourbillon' sign, a phone booth, a tree, and a city skyline in the background.",
-   "invite": "office with a desk, a computer, a phone, an 'AXA France' nameplate, and a calendar on the wall."
-  },
-  "lieux_de": {
-   "presentateur": "rue",
-   "invite": "rue"
   }
  },
  "doublage": {
-  "piste": "/tmp/tmp1tb3amud/piste.wav",
-  "duree": 85.61,
-  "source": "https://www.tiktok.com/@charly.bse/video/7703204376701193505",
-  "auteur": "charly.bse",
-  "contexte": "Deux hommes discutent au téléphone après un accident de voiture. L'un tente de déclarer un sinistre à l'assurance tout en étant confus et stressé, tandis que l'autre, représentant de l'assurance, tente de clarifier les détails avec impatience et exaspération.",
+  "piste": "/tmp/tmpp3591l9s/piste.wav",
+  "duree": 59.35,
+  "source": "https://www.tiktok.com/@yan_animation0/video/7678076893253422368",
+  "auteur": "yan_animation0",
+  "contexte": "Deux amis sont coincés dans un embouteillage en voiture en ville. L'un, énervé, pose des questions à l'autre qui prétend ne rien voir ou savoir, mais qui semble cacher quelque chose.",
   "evenements": [
    [
-    30.0,
-    33.0,
+    0.0,
+    3.0,
+    "crying"
+   ],
+   [
+    2.0,
+    5.0,
+    "kiss"
+   ],
+   [
+    6.0,
+    8.0,
     "scream"
    ],
    [
-    32.0,
-    34.0,
+    7.0,
+    9.0,
+    "crying"
+   ],
+   [
+    8.0,
+    10.0,
     "laughter"
    ],
    [
-    41.0,
-    43.0,
+    15.0,
+    18.0,
+    "laughter"
+   ],
+   [
+    51.0,
+    53.0,
+    "laughter"
+   ],
+   [
+    54.0,
+    57.0,
+    "scream"
+   ],
+   [
+    57.0,
+    59.0,
     "laughter"
    ]
   ],
   "visuel": {
    "gestes": [
     [
-     22.5,
-     0.48,
-     0.45
+     1.0,
+     0.32,
+     0.39
     ],
     [
-     59.0,
+     10.0,
+     0.52,
+     1.0
+    ],
+    [
+     11.5,
+     0.47,
+     1.0
+    ],
+    [
+     13.0,
+     0.48,
+     1.0
+    ],
+    [
+     14.0,
+     0.47,
+     1.0
+    ],
+    [
+     15.5,
+     0.48,
+     1.0
+    ],
+    [
+     19.5,
+     0.23,
+     1.0
+    ],
+    [
+     20.5,
+     0.18,
+     1.0
+    ],
+    [
+     21.5,
+     0.1,
+     1.0
+    ],
+    [
+     27.0,
+     0.48,
+     1.0
+    ],
+    [
+     37.5,
+     0.48,
+     1.0
+    ],
+    [
+     43.0,
      0.49,
-     0.75
+     1.0
+    ],
+    [
+     45.5,
+     0.47,
+     0.34
+    ],
+    [
+     50.0,
+     0.49,
+     1.0
+    ],
+    [
+     53.0,
+     0.32,
+     0.61
     ]
    ],
-   "duree": 86.0,
-   "nb_plans": 29,
-   "duree_plan": 2.97,
+   "duree": 59.5,
+   "nb_plans": 13,
+   "duree_plan": 4.58,
    "coupes": [
+    0.5,
     2.0,
-    2.5,
-    6.5,
-    7.0,
-    10.0,
-    10.5,
-    13.0,
-    13.5,
-    17.5,
-    18.0,
-    25.0,
-    25.5,
-    31.5,
+    4.5,
+    6.0,
+    9.0,
+    9.5,
+    19.0,
     32.0,
-    35.0,
     35.5,
-    40.0,
-    40.5,
-    44.5,
-    45.0,
-    47.5,
-    48.0,
-    50.5,
-    51.0,
-    60.0,
-    60.5,
-    62.5,
-    63.5
+    52.5,
+    56.0,
+    58.0
    ],
    "plans": {
-    "tres_serre": 0.0,
-    "serre": 0.041,
-    "moyen": 0.0,
-    "large": 0.959
+    "tres_serre": 0.336,
+    "serre": 0.227,
+    "moyen": 0.008,
+    "large": 0.429
    },
    "camera": {
-    "fixe": 0.636,
-    "avance": 0.112,
-    "recul": 0.021,
-    "travelling": 0.0,
-    "epaule": 0.231
+    "fixe": 0.575,
+    "avance": 0.208,
+    "recul": 0.066,
+    "travelling": 0.009,
+    "epaule": 0.142
    },
    "nb_personnes": 1,
-   "personnes": [],
+   "personnes": [
+    {
+     "place": "centre",
+     "presence": 0.361,
+     "habit": [
+      54,
+      50,
+      52
+     ],
+     "cheveux": [
+      10,
+      3,
+      2
+     ],
+     "sourire": 0.0,
+     "taille": 0.342,
+     "tete_penchee": 0.9,
+     "regard_cote": 0.256
+    },
+    {
+     "place": "gauche",
+     "presence": 0.202,
+     "habit": [
+      53,
+      50,
+      52
+     ],
+     "cheveux": [
+      10,
+      3,
+      2
+     ],
+     "sourire": 0.0,
+     "taille": 0.218,
+     "tete_penchee": 2.1,
+     "regard_cote": 0.167
+    }
+   ],
    "visages": true,
-   "sourires": 0.714,
-   "energie": 0.226,
+   "sourires": 0.0,
+   "energie": 0.605,
    "mur": [
-    193,
-    186,
-    167
+    136,
+    135,
+    139
    ],
    "palette": [
     [
-     37,
-     47,
-     49,
-     0.29
+     106,
+     89,
+     87,
+     0.336
     ],
     [
-     183,
-     164,
      147,
-     0.272
+     142,
+     145,
+     0.217
     ],
     [
-     102,
-     190,
-     214,
-     0.15
+     35,
+     29,
+     30,
+     0.191
     ],
     [
-     71,
-     137,
-     23,
-     0.149
+     98,
+     121,
+     149,
+     0.156
     ],
     [
-     247,
      213,
-     177,
-     0.094
+     146,
+     89,
+     0.058
     ],
     [
-     4,
-     95,
-     188,
-     0.045
+     217,
+     227,
+     235,
+     0.042
     ]
    ],
    "lumiere": {
-    "luminosite": 151.8,
-    "chaleur": -4.7,
-    "saturation": 118.0
+    "luminosite": 122.0,
+    "chaleur": 6.1,
+    "saturation": 60.5
    },
    "moment": "jour",
    "postures": []
   },
   "audio": {
-   "duree": 85.6,
-   "nb_voix": 2,
+   "duree": 59.4,
+   "nb_voix": 3,
    "voix": [
     {
-     "hz": 134,
-     "genre": "h",
-     "part": 0.74
+     "hz": 237,
+     "genre": "f",
+     "part": 0.08
     },
     {
-     "hz": 168,
-     "genre": "?",
-     "part": 0.26
+     "hz": 258,
+     "genre": "f",
+     "part": 0.78
+    },
+    {
+     "hz": 253,
+     "genre": "f",
+     "part": 0.14
     }
    ],
-   "debit": 4.43,
-   "blanc_moyen": 0.57,
-   "coupes": 13,
-   "dynamique_db": 27.5,
-   "cris": 0.067,
-   "musique": 0.36,
-   "impacts": 66,
-   "impacts_10s": 7.71,
-   "graves": 8,
-   "aigus": 58,
-   "sur_vanne": 31,
+   "debit": 4.54,
+   "blanc_moyen": 0.79,
+   "coupes": 1,
+   "dynamique_db": 32.1,
+   "cris": 0.025,
+   "musique": 0.49,
+   "impacts": 37,
+   "impacts_10s": 6.23,
+   "graves": 1,
+   "aigus": 36,
+   "sur_vanne": 14,
    "evenements": {
-    "laughter": 2,
-    "scream": 1
+    "laughter": 4,
+    "crying": 2,
+    "scream": 2,
+    "kiss": 1
    },
    "emotions": {
-    "panicked": 12,
-    "confused": 10,
-    "annoyed": 8,
-    "sarcastic": 8,
-    "neutral": 1
+    "angry": 7,
+    "sarcastic": 3,
+    "neutral": 2,
+    "annoyed": 1,
+    "blase": 1,
+    "confused": 1,
+    "playful": 1,
+    "laughter": 1
    }
   },
-  "video_origine": "/tmp/tmp1tb3amud/src_coupe.mp4",
-  "debut": 0.79
+  "video_origine": "/tmp/tmpp3591l9s/src_coupe.mp4",
+  "debut": 0.81
  },
  "fiche": {
   "note": 0,
@@ -2212,17 +1559,7 @@
      0,
      1,
      2,
-     3
-    ],
-    "lieu": "",
-    "son": "",
-    "duree": 0.0,
-    "decor": "rue with a city skyline background, a damaged blue car parked nearby, a street sign, a phone booth, and a tree.",
-    "titre": "Accident Scene"
-   },
-   {
-    "scene": "2",
-    "repliques": [
+     3,
      4,
      5,
      6,
@@ -2232,59 +1569,19 @@
      10,
      11,
      12,
-     13
-    ],
-    "lieu": "",
-    "son": "",
-    "duree": 0.0,
-    "decor": "office with a desk, a computer, a phone, a nameplate 'AXA France', and a calendar.",
-    "titre": "Insurance Office"
-   },
-   {
-    "scene": "3",
-    "repliques": [
+     13,
      14,
      15,
      16,
      17,
      18,
-     19,
-     20,
-     21
+     19
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "street with a blue car, a Bugatti logo on a distant vehicle, and a 'Tourbillon' sign.",
-    "titre": "Clarifying the Vehicle"
-   },
-   {
-    "scene": "4",
-    "repliques": [
-     22,
-     23,
-     24,
-     25,
-     26,
-     27,
-     28,
-     29,
-     30,
-     31,
-     32,
-     33,
-     34,
-     35,
-     36,
-     37,
-     38,
-     39
-    ],
-    "lieu": "",
-    "son": "",
-    "duree": 0.0,
-    "decor": "same street, now with a confused person holding a phone, surrounded by debris and a 'Tourbillon' model sign.",
-    "titre": "Final Argument"
+    "decor": "interior of a car, traffic jam, city buildings, steering wheel, dashboard, road map, traffic lights",
+    "titre": "Le Mystère"
    }
   ]
  },
@@ -2293,15 +1590,15 @@
   {
    "poste": "ingé son",
    "controle": "pas de phrase répétée en boucle",
-   "ok": true,
-   "detail": "",
+   "ok": false,
+   "detail": "4 mot(s) retiré(s)",
    "revoir": false
   },
   {
    "poste": "ingé son",
    "controle": "mots à une vitesse possible",
    "ok": true,
-   "detail": "9 mot(s) trop courts",
+   "detail": "3 mot(s) trop courts",
    "revoir": false
   },
   {
@@ -2315,28 +1612,21 @@
    "poste": "ingé son",
    "controle": "deux transcriptions d'accord",
    "ok": false,
-   "detail": "82 % de mots identiques, 5 doute(s), 2 corrigé(s)",
+   "detail": "74 % de mots identiques, 3 doute(s), 1 tranché(s) par une 3e écoute, 1 corrigé(s)",
    "revoir": false
   },
   {
    "poste": "casting voix",
    "controle": "témoin image (qui parle dans l'original)",
    "ok": true,
-   "detail": "42/53 phrases lisibles (visages, mouvements)",
+   "detail": "24/37 phrases lisibles (visages, mouvements)",
    "revoir": false
   },
   {
    "poste": "casting voix",
-   "controle": "fil du dialogue repris (son + texte + image)",
+   "controle": "plusieurs personnages joués par la même voix",
    "ok": true,
-   "detail": "voix proches (0.56)",
-   "revoir": false
-  },
-  {
-   "poste": "casting voix",
-   "controle": "parole répartie entre les personnages",
-   "ok": true,
-   "detail": "2 voix, la plus bavarde dit 62 %",
+   "detail": "3 personnages vus dans l'original",
    "revoir": false
   },
   {
@@ -2357,7 +1647,7 @@
    "poste": "scripte",
    "controle": "autant de personnages que de voix",
    "ok": true,
-   "detail": "2 voix, 2 personnage(s)",
+   "detail": "3 voix, 3 personnage(s)",
    "revoir": false
   },
   {
@@ -2391,64 +1681,38 @@
   {
    "poste": "monteur",
    "controle": "un personnage ne parle jamais deux fois en même temps",
-   "ok": true,
-   "detail": "",
-   "revoir": false
+   "ok": false,
+   "detail": "1 corrigé(s) ; répliques [15] à revoir",
+   "revoir": true
   }
  ],
- "_separes": true,
- "_decors_semi": [
-  0,
-  1
- ],
+ "_decors_semi": [],
  "_voix_hz": {
-  "presentateur": 140,
-  "invite": 189
+  "presentateur": 259,
+  "invite": 248,
+  "envoyee": 245
  },
  "_voix_genre": {
-  "presentateur": "h",
-  "invite": "h"
+  "presentateur": "f",
+  "invite": "f",
+  "envoyee": "f"
  },
  "realisation": {
   "moment": "jour",
   "lieux": [
-   "rue",
-   "rue"
+   "voiture"
   ],
-  "gags": [
-   "AXA : Depuis 1818, on vous embrouille encore.",
-   "Tourbillon : La voiture qui tourne en rond dans votre tête.",
-   "Assurance : Parce que la vie est déjà assez compliquée."
-  ],
+  "gags": [],
   "ambiances": [
-   "neon"
+   "pluie"
   ],
   "source": "auteur+image",
   "tenues": {
-   "presentateur": "tshirt",
-   "invite": "chemise"
+   "presentateur": "chemise",
+   "invite": "tshirt",
+   "envoyee": "chemise"
   },
   "plans": [
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
    "large/fixe",
    "large/fixe",
    "large/fixe",
