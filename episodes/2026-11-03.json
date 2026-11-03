@@ -1,22 +1,110 @@
 {
- "titre": "INTERROGATOIRE ABSURDE",
- "sujet": "INTERROGATOIRE ABSURDE",
- "ecran": "INTERROGATOIRE",
+ "titre": "DÉBAT ABSURDE",
+ "sujet": "DÉBAT ABSURDE",
+ "ecran": "DÉBAT ABSURDE",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "POV : Un suspect qui ne comprend rien",
- "question": "Qui a déjà vécu un interrogatoire aussi confus ?",
+ "titre_accroche": "POV : Les hommes souffre",
+ "question": "Pourquoi les hommes souffrent-ils de ces dialogues sans queue ni tête ?",
  "running_gag": "",
  "verite": "",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "{'text': 'Tu as buté un homme deux fois.'}",
-   "_deb": 0.301,
-   "_fin": 1.943,
-   "d": "{'text': '[aggressive] Tu as buté un homme deux fois.'}",
+   "t": "Qu'est-ce qu'il y a encore.",
+   "_deb": 5.091,
+   "_fin": 5.856,
+   "d": "[annoyed] Qu'est-ce qu'il y a encore.",
+   "objet": "bouteille",
+   "_mots": [
+    [
+     "Qu'est-ce",
+     0.0,
+     0.222
+    ],
+    [
+     "qu'il",
+     0.222,
+     0.343
+    ],
+    [
+     "y",
+     0.343,
+     0.383
+    ],
+    [
+     "a",
+     0.403,
+     0.423
+    ],
+    [
+     "encore.",
+     0.524,
+     0.765
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Y'a rien. Y'a rien du tout.",
+   "_deb": 6.037,
+   "_fin": 8.11,
+   "d": "[blase] Y'a rien. Y'a rien du tout.",
+   "_mots": [
+    [
+     "Y'a",
+     0.0,
+     0.121
+    ],
+    [
+     "rien.",
+     0.222,
+     0.443
+    ],
+    [
+     "Y'a",
+     0.966,
+     1.067
+    ],
+    [
+     "rien",
+     1.147,
+     1.349
+    ],
+    [
+     "du",
+     1.409,
+     1.53
+    ],
+    [
+     "tout.",
+     1.53,
+     2.073
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Ok.",
+   "_deb": 10.137,
+   "_fin": 10.239,
+   "d": "[neutre] Ok.",
+   "_mots": [
+    [
+     "Ok.",
+     0.0,
+     0.102
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Tu t'en fous de ma gueule toi en fait.",
+   "_deb": 11.272,
+   "_fin": 12.617,
+   "d": "[colere] Tu t'en fous de ma gueule toi en fait.",
    "_mots": [
     [
      "Tu",
@@ -24,389 +112,244 @@
      0.06
     ],
     [
-     "as",
+     "t'en",
      0.12,
-     0.2
+     0.24
     ],
     [
-     "buté",
-     0.28,
-     0.54
-    ],
-    [
-     "un",
-     0.781,
-     0.841
-    ],
-    [
-     "homme",
-     0.901,
-     1.141
-    ],
-    [
-     "deux",
-     1.322,
-     1.422
-    ],
-    [
-     "fois.",
-     1.482,
-     1.642
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "{'text': 'Deux fois. Bah non, juste une fois.'}",
-   "_deb": 2.164,
-   "_fin": 3.446,
-   "d": "{'text': '[confused] Deux fois. Bah non, juste une fois.'}",
-   "_mots": [
-    [
-     "Deux",
-     0.0,
-     0.12
-    ],
-    [
-     "fois.",
-     0.16,
-     0.32
-    ],
-    [
-     "Bah",
-     0.541,
-     0.641
-    ],
-    [
-     "non,",
-     0.701,
-     0.801
-    ],
-    [
-     "juste",
-     0.821,
-     0.981
-    ],
-    [
-     "une",
-     1.021,
-     1.102
-    ],
-    [
-     "fois.",
-     1.162,
-     1.282
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "{'text': \"Pourquoi t'as buté le père Édouard.\"}",
-   "_deb": 3.546,
-   "_fin": 4.828,
-   "d": "{'text': \"[annoyed] Pourquoi t'as buté le père Édouard.\"}",
-   "_mots": [
-    [
-     "Pourquoi",
-     0.0,
-     0.26
-    ],
-    [
-     "t'as",
-     0.3,
+     "fous",
+     0.281,
      0.421
     ],
     [
-     "buté",
-     0.421,
-     0.561
+     "de",
+     0.461,
+     0.501
     ],
     [
-     "le",
-     0.601,
-     0.641
+     "ma",
+     0.522,
+     0.582
     ],
     [
-     "père",
-     0.661,
-     0.801
+     "gueule",
+     0.682,
+     0.823
     ],
     [
-     "Édouard.",
-     0.801,
-     1.282
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "{'text': \"Il m'a dit j'aimerais que tu me tutoies.\"}",
-   "_deb": 4.848,
-   "_fin": 6.453,
-   "d": "{'text': \"[sarcastic] Il m'a dit j'aimerais que tu me tutoies.\"}",
-   "_mots": [
-    [
-     "Il",
-     0.0,
-     0.06
+     "toi",
+     0.863,
+     0.943
     ],
     [
-     "m'a",
-     0.12,
-     0.201
+     "en",
+     1.084,
+     1.124
     ],
     [
-     "dit",
-     0.281,
-     0.381
-    ],
-    [
-     "j'aimerais",
-     0.441,
-     0.741
-    ],
-    [
-     "que",
-     0.781,
-     0.862
-    ],
-    [
-     "tu",
-     0.903,
-     0.963
-    ],
-    [
-     "me",
-     1.043,
-     1.103
-    ],
-    [
-     "tutoies.",
-     1.184,
-     1.605
+     "fait.",
+     1.224,
+     1.345
     ]
    ]
   },
   {
    "p": "presentateur",
-   "t": "Mais il voulait dire tutoie -moi. Pas tue-moi toi.",
-   "_deb": 6.733,
-   "_fin": 8.759,
-   "_mots": [
-    [
-     "Mais",
-     0.0,
-     0.101
-    ],
-    [
-     "il",
-     0.141,
-     0.201
-    ],
-    [
-     "voulait",
-     0.241,
-     0.422
-    ],
-    [
-     "dire",
-     0.442,
-     0.562
-    ],
-    [
-     "tutoie",
-     0.582,
-     0.843
-    ],
-    [
-     "-moi.",
-     0.883,
-     1.003
-    ],
-    [
-     "Pas",
-     1.424,
-     1.525
-    ],
-    [
-     "tue-moi",
-     1.565,
-     1.805
-    ],
-    [
-     "toi.",
-     1.886,
-     2.026
-    ]
-   ]
-  },
-  {
-   "p": "invite",
    "t": "Quoi.",
-   "_deb": 9.14,
-   "_fin": 9.24,
+   "_deb": 12.777,
+   "_fin": 12.918,
+   "d": "[confused] Quoi.",
    "_mots": [
     [
      "Quoi.",
      0.0,
-     0.1
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Que tu le tutoies. L'inverse de vous-voie, tu vois.",
-   "_deb": 9.541,
-   "_fin": 11.747,
-   "_mots": [
-    [
-     "Que",
-     0.0,
-     0.08
-    ],
-    [
-     "tu",
-     0.16,
-     0.221
-    ],
-    [
-     "le",
-     0.301,
-     0.381
-    ],
-    [
-     "tutoies.",
-     0.461,
-     0.922
-    ],
-    [
-     "L'inverse",
-     1.163,
-     1.464
-    ],
-    [
-     "de",
-     1.504,
-     1.544
-    ],
-    [
-     "vous-voie,",
-     1.604,
-     1.905
-    ],
-    [
-     "tu",
-     1.965,
-     2.025
-    ],
-    [
-     "vois.",
-     2.086,
-     2.206
+     0.141
     ]
    ]
   },
   {
    "p": "invite",
-   "t": "Oui, je vous-voie.",
-   "_deb": 11.967,
-   "_fin": 12.589,
+   "t": "Qu'est-ce qu'il y a.",
+   "_deb": 13.32,
+   "_fin": 14.002,
+   "d": "[colere] Qu'est-ce qu'il y a.",
+   "objet": "verre",
    "_mots": [
     [
-     "Oui,",
+     "Qu'est-ce",
      0.0,
-     0.101
+     0.2
     ],
     [
-     "je",
-     0.261,
+     "qu'il",
+     0.2,
      0.321
     ],
     [
-     "vous-voie.",
-     0.381,
-     0.622
+     "y",
+     0.562,
+     0.582
+    ],
+    [
+     "a.",
+     0.662,
+     0.682
     ]
    ]
   },
   {
    "p": "presentateur",
-   "t": "Oui, tu vous-voie. Et lui voulait juste que vous ne vous voyiez plus.",
-   "_deb": 12.731,
-   "_fin": 15.445,
+   "t": "Je te dis y'a rien et toi tu t'en fous.",
+   "_deb": 14.002,
+   "_fin": 15.247,
+   "d": "[sarcastic] Je te dis y'a rien et toi tu t'en fous.",
    "_mots": [
     [
-     "Oui,",
+     "Je",
      0.0,
-     0.121
+     0.081
+    ],
+    [
+     "te",
+     0.101,
+     0.141
+    ],
+    [
+     "dis",
+     0.161,
+     0.261
+    ],
+    [
+     "y'a",
+     0.281,
+     0.322
+    ],
+    [
+     "rien",
+     0.382,
+     0.502
+    ],
+    [
+     "et",
+     0.562,
+     0.623
+    ],
+    [
+     "toi",
+     0.643,
+     0.723
     ],
     [
      "tu",
-     0.242,
-     0.302
+     0.783,
+     0.823
     ],
     [
-     "vous-voie.",
-     0.362,
-     0.644
+     "t'en",
+     0.864,
+     0.984
     ],
     [
-     "Et",
-     0.784,
-     0.845
-    ],
-    [
-     "lui",
-     0.905,
-     1.026
-    ],
-    [
-     "voulait",
-     1.106,
-     1.307
-    ],
-    [
-     "juste",
-     1.347,
-     1.548
-    ],
-    [
-     "que",
-     1.588,
-     1.649
-    ],
-    [
-     "vous",
-     1.689,
-     1.789
-    ],
-    [
-     "ne",
-     1.829,
-     1.87
-    ],
-    [
-     "vous",
-     1.95,
-     2.252
-    ],
-    [
-     "voyiez",
-     2.292,
-     2.493
-    ],
-    [
-     "plus.",
-     2.553,
-     2.714
+     "fous.",
+     1.085,
+     1.245
     ]
    ]
   },
   {
    "p": "invite",
-   "t": "Tu voulais plus me voir.",
-   "_deb": 15.606,
-   "_fin": 16.128,
+   "t": "Hé hé hé hé hé hé hé.",
+   "_deb": 15.568,
+   "_fin": 17.607,
+   "d": "[rire] Hé hé hé hé hé hé hé.",
+   "_mots": [
+    [
+     "Hé",
+     0.0,
+     0.02
+    ],
+    [
+     "hé",
+     0.003,
+     0.124
+    ],
+    [
+     "hé",
+     0.164,
+     0.93
+    ],
+    [
+     "hé",
+     1.072,
+     1.293
+    ],
+    [
+     "hé",
+     1.293,
+     1.394
+    ],
+    [
+     "hé",
+     1.858,
+     1.959
+    ],
+    [
+     "hé.",
+     1.959,
+     2.039
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Je t'ai demandé qu'est-ce qu'il y a.",
+   "_deb": 18.712,
+   "_fin": 19.879,
+   "d": "[annoyed] Je t'ai demandé qu'est-ce qu'il y a.",
+   "_mots": [
+    [
+     "Je",
+     0.0,
+     0.04
+    ],
+    [
+     "t'ai",
+     0.06,
+     0.161
+    ],
+    [
+     "demandé",
+     0.201,
+     0.483
+    ],
+    [
+     "qu'est-ce",
+     0.684,
+     0.905
+    ],
+    [
+     "qu'il",
+     0.945,
+     1.066
+    ],
+    [
+     "y",
+     1.106,
+     1.127
+    ],
+    [
+     "a.",
+     1.147,
+     1.167
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Tu m'as dit y'a rien non.",
+   "_deb": 20.422,
+   "_fin": 21.247,
+   "d": "[sceptique] Tu m'as dit y'a rien non.",
    "_mots": [
     [
      "Tu",
@@ -414,853 +357,215 @@
      0.04
     ],
     [
-     "voulais",
-     0.08,
-     0.241
+     "m'as",
+     0.141,
+     0.242
     ],
     [
-     "plus",
-     0.241,
-     0.341
+     "dit",
+     0.262,
+     0.403
     ],
     [
-     "me",
-     0.341,
-     0.382
+     "y'a",
+     0.403,
+     0.443
     ],
     [
-     "voir.",
-     0.402,
-     0.522
+     "rien",
+     0.523,
+     0.684
+    ],
+    [
+     "non.",
+     0.745,
+     0.825
     ]
    ]
   },
   {
    "p": "presentateur",
-   "t": "{'text': 'À la barre.'}",
-   "_deb": 16.911,
-   "_fin": 18.376,
-   "d": "{'text': '[confused] À la barre.'}",
+   "t": "Et ben ok. Parce qu'il y'a rien.",
+   "_deb": 22.371,
+   "_fin": 23.836,
+   "d": "[neutre] Et ben ok. Parce qu'il y'a rien.",
    "_mots": [
     [
-     "On",
+     "Et",
      0.0,
-     0.04
+     0.08
     ],
     [
-     "va",
-     0.06,
-     0.121
-    ],
-    [
-     "t'appeler",
+     "ben",
      0.141,
-     0.442
+     0.221
     ],
     [
-     "à",
-     1.064,
-     1.084
+     "ok.",
+     0.281,
+     0.381
     ],
     [
-     "la",
+     "Parce",
+     0.843,
+     0.984
+    ],
+    [
+     "qu'il",
+     0.984,
+     1.104
+    ],
+    [
+     "y'a",
      1.144,
      1.204
     ],
     [
-     "barre.",
-     1.244,
+     "rien.",
+     1.285,
      1.465
     ]
    ]
   },
   {
    "p": "invite",
-   "t": "À la barre.",
-   "_deb": 18.597,
-   "_fin": 18.958,
-   "_mots": [
-    [
-     "À",
-     0.0,
-     0.02
-    ],
-    [
-     "la",
-     0.08,
-     0.14
-    ],
-    [
-     "barre.",
-     0.18,
-     0.361
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "C'est un prénom arabe.",
-   "_deb": 18.958,
-   "_fin": 20.101,
-   "_mots": [
-    [
-     "C'est",
-     0.0,
-     0.281
-    ],
-    [
-     "un",
-     0.281,
-     0.341
-    ],
-    [
-     "prénom",
-     0.381,
-     0.582
-    ],
-    [
-     "arabe.",
-     0.582,
-     1.143
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Je joue pas au courant. Ça sonne arabe.",
-   "_deb": 20.121,
-   "_fin": 21.666,
-   "_mots": [
-    [
-     "Je",
-     0.0,
-     0.041
-    ],
-    [
-     "joue",
-     0.041,
-     0.141
-    ],
-    [
-     "pas",
-     0.181,
-     0.241
-    ],
-    [
-     "au",
-     0.281,
-     0.342
-    ],
-    [
-     "courant.",
-     0.342,
-     0.763
-    ],
-    [
-     "Ça",
-     0.903,
-     0.963
-    ],
-    [
-     "sonne",
-     1.044,
-     1.204
-    ],
-    [
-     "arabe.",
-     1.244,
-     1.545
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "On t'a proposé un avocat.",
-   "_deb": 21.887,
-   "_fin": 22.892,
-   "_mots": [
-    [
-     "On",
-     0.0,
-     0.04
-    ],
-    [
-     "t'a",
-     0.04,
-     0.141
-    ],
-    [
-     "proposé",
-     0.281,
-     0.562
-    ],
-    [
-     "un",
-     0.642,
-     0.682
-    ],
-    [
-     "avocat.",
-     0.724,
-     1.005
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Oui mais vraiment j'ai pas fait.",
-   "_deb": 23.073,
-   "_fin": 24.036,
-   "_mots": [
-    [
-     "Oui",
-     0.0,
-     0.1
-    ],
-    [
-     "mais",
-     0.16,
-     0.261
-    ],
-    [
-     "vraiment",
-     0.301,
-     0.542
-    ],
-    [
-     "j'ai",
-     0.582,
-     0.642
-    ],
-    [
-     "pas",
-     0.642,
-     0.722
-    ],
-    [
-     "fait.",
-     0.722,
-     0.963
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Un avocat de la défense connard.",
-   "_deb": 24.076,
-   "_fin": 25.642,
-   "_mots": [
-    [
-     "Un",
-     0.0,
-     0.04
-    ],
-    [
-     "avocat",
-     0.121,
-     0.442
-    ],
-    [
-     "de",
-     0.643,
-     0.683
-    ],
-    [
-     "la",
-     0.743,
-     0.783
-    ],
-    [
-     "défense",
-     0.863,
-     1.205
-    ],
-    [
-     "connard.",
-     1.285,
-     1.566
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Ils font des avocats la défense.",
-   "_deb": 25.762,
-   "_fin": 26.746,
-   "_mots": [
-    [
-     "Ils",
-     0.0,
-     0.061
-    ],
-    [
-     "font",
-     0.061,
-     0.141
-    ],
-    [
-     "des",
-     0.161,
-     0.261
-    ],
-    [
-     "avocats",
-     0.322,
-     0.623
-    ],
-    [
-     "la",
-     0.643,
-     0.703
-    ],
-    [
-     "défense.",
-     0.743,
-     0.984
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Je te parle d'un homme qui a le barreau.",
-   "_deb": 26.866,
-   "_fin": 28.274,
-   "_mots": [
-    [
-     "Je",
-     0.0,
-     0.061
-    ],
-    [
-     "te",
-     0.061,
-     0.101
-    ],
-    [
-     "parle",
-     0.161,
-     0.301
-    ],
-    [
-     "d'un",
-     0.342,
-     0.462
-    ],
-    [
-     "homme",
-     0.502,
-     0.663
-    ],
-    [
-     "qui",
-     0.703,
-     0.763
-    ],
-    [
-     "a",
-     0.785,
-     0.805
-    ],
-    [
-     "le",
-     0.845,
-     0.886
-    ],
-    [
-     "barreau.",
-     0.926,
-     1.408
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Mais alors je ne préfère pas voir un homme quand il a le barreau.",
-   "_deb": 28.274,
-   "_fin": 29.84,
+   "t": "Mais en fait quand je te dis qu'il y'a rien c'est qu'il y'a quelque chose en fait.",
+   "_deb": 24.419,
+   "_fin": 26.887,
+   "d": "[idee] Mais en fait quand je te dis qu'il y'a rien c'est qu'il y'a quelque chose en fait.",
    "_mots": [
     [
      "Mais",
      0.0,
-     0.1
-    ],
-    [
-     "alors",
-     0.1,
-     0.201
-    ],
-    [
-     "je",
-     0.201,
-     0.261
-    ],
-    [
-     "ne",
-     0.281,
-     0.321
-    ],
-    [
-     "préfère",
-     0.321,
-     0.562
-    ],
-    [
-     "pas",
-     0.562,
-     0.642
-    ],
-    [
-     "voir",
-     0.663,
-     0.783
-    ],
-    [
-     "un",
-     0.843,
-     0.883
-    ],
-    [
-     "homme",
-     0.904,
-     1.044
-    ],
-    [
-     "quand",
-     1.064,
-     1.165
-    ],
-    [
-     "il",
-     1.205,
-     1.245
-    ],
-    [
-     "a",
-     1.285,
-     1.305
-    ],
-    [
-     "le",
-     1.345,
-     1.386
-    ],
-    [
-     "barreau.",
-     1.406,
-     1.566
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Un homme qui porte la robe.",
-   "_deb": 30.543,
-   "_fin": 31.507,
-   "_mots": [
-    [
-     "Un",
-     0.0,
-     0.061
-    ],
-    [
-     "homme",
-     0.101,
-     0.281
-    ],
-    [
-     "qui",
-     0.322,
-     0.382
-    ],
-    [
-     "porte",
-     0.442,
-     0.603
-    ],
-    [
-     "la",
-     0.643,
-     0.703
-    ],
-    [
-     "robe.",
-     0.743,
-     0.964
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Il porte une robe Pas d'avocat",
-   "_deb": 31.668,
-   "_fin": 33.094,
-   "_mots": [
-    [
-     "Il",
-     0.0,
-     0.04
-    ],
-    [
-     "porte",
-     0.161,
-     0.323
-    ],
-    [
-     "une",
-     0.323,
-     0.403
-    ],
-    [
-     "robe",
-     0.463,
-     0.664
-    ],
-    [
-     "Pas",
-     0.825,
-     0.905
-    ],
-    [
-     "d'avocat",
-     0.945,
-     1.426
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Alabar.",
-   "_deb": 33.476,
-   "_fin": 33.977,
-   "_mots": [
-    [
-     "Alabar.",
-     0.0,
-     0.501
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Oui.",
-   "_deb": 33.977,
-   "_fin": 34.037,
-   "_mots": [
-    [
-     "Oui.",
-     0.0,
-     0.06
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Tu vas nous parler des faits.",
-   "_deb": 34.258,
-   "_fin": 35.0,
-   "_mots": [
-    [
-     "Tu",
-     0.0,
-     0.04
-    ],
-    [
-     "vas",
-     0.08,
-     0.16
-    ],
-    [
-     "nous",
-     0.16,
-     0.281
-    ],
-    [
-     "parler",
-     0.301,
-     0.461
-    ],
-    [
-     "des",
-     0.481,
-     0.582
-    ],
-    [
-     "faits.",
-     0.602,
-     0.742
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "{'text': 'Des faits oui.'}",
-   "_deb": 35.341,
-   "_fin": 36.124,
-   "d": "{'text': '[serious] Des faits oui.'}",
-   "_mots": [
-    [
-     "{'text':",
-     0.0,
-     0.101
-    ],
-    [
-     "'Des",
-     0.161,
-     0.281
-    ],
-    [
-     "faits",
-     0.442,
-     0.602
-    ],
-    [
-     "oui.'}",
-     0.662,
-     0.783
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Des faits oui.",
-   "_deb": 36.264,
-   "_fin": 36.806,
-   "_mots": [
-    [
-     "Des",
-     0.0,
-     0.1
-    ],
-    [
-     "faits",
-     0.161,
-     0.321
-    ],
-    [
-     "oui.",
-     0.442,
-     0.542
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Tu as buté un homme deux fois.",
-   "_deb": 37.247,
-   "_fin": 38.131,
-   "_mots": [
-    [
-     "Tu",
-     0.0,
-     0.04
-    ],
-    [
-     "as",
-     0.1,
-     0.161
-    ],
-    [
-     "buté",
-     0.201,
-     0.361
-    ],
-    [
-     "un",
-     0.442,
-     0.482
-    ],
-    [
-     "homme",
-     0.502,
-     0.622
-    ],
-    [
-     "deux",
-     0.642,
-     0.724
-    ],
-    [
-     "fois.",
-     0.724,
-     0.884
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Une fois.",
-   "_deb": 38.452,
-   "_fin": 38.914,
-   "_mots": [
-    [
-     "Une",
-     0.0,
-     0.161
-    ],
-    [
-     "fois.",
-     0.221,
-     0.462
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Vous avez jamais commis d'erreur vous.",
-   "_deb": 39.174,
-   "_fin": 40.338,
-   "_mots": [
-    [
-     "Vous",
-     0.0,
-     0.101
-    ],
-    [
-     "avez",
-     0.161,
-     0.281
-    ],
-    [
-     "jamais",
-     0.321,
-     0.502
-    ],
-    [
-     "commis",
-     0.542,
-     0.702
-    ],
-    [
-     "d'erreur",
-     0.723,
-     0.943
-    ],
-    [
-     "vous.",
-     1.023,
-     1.164
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Les erreurs t'es gentille. On parle d'Étienne.",
-   "_deb": 40.839,
-   "_fin": 42.083,
-   "_mots": [
-    [
-     "Les",
-     0.0,
-     0.081
-    ],
-    [
-     "erreurs",
-     0.121,
-     0.321
-    ],
-    [
-     "t'es",
-     0.341,
-     0.422
-    ],
-    [
-     "gentille.",
-     0.442,
-     0.702
-    ],
-    [
-     "On",
-     0.763,
-     0.803
-    ],
-    [
-     "parle",
-     0.843,
-     0.963
-    ],
-    [
-     "d'Étienne.",
-     1.003,
-     1.244
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "C'est qui Étienne.",
-   "_deb": 42.464,
-   "_fin": 42.966,
-   "_mots": [
-    [
-     "C'est",
-     0.0,
      0.12
     ],
     [
-     "qui",
-     0.141,
-     0.201
+     "en",
+     0.18,
+     0.22
     ],
     [
-     "Étienne.",
-     0.261,
-     0.502
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Tu te fous de moi. N'espère aucune clémence.",
-   "_deb": 43.186,
-   "_fin": 44.813,
-   "_mots": [
+     "fait",
+     0.281,
+     0.401
+    ],
     [
-     "Tu",
-     0.0,
-     0.06
+     "quand",
+     0.461,
+     0.562
+    ],
+    [
+     "je",
+     0.562,
+     0.602
     ],
     [
      "te",
-     0.121,
-     0.161
+     0.622,
+     0.682
     ],
     [
-     "fous",
-     0.201,
-     0.281
+     "dis",
+     0.722,
+     0.822
     ],
     [
-     "de",
-     0.301,
-     0.361
-    ],
-    [
-     "moi.",
-     0.381,
-     0.462
-    ],
-    [
-     "N'espère",
+     "qu'il",
      0.863,
-     1.125
+     0.983
     ],
     [
-     "aucune",
-     1.125,
-     1.306
+     "y'a",
+     0.983,
+     1.043
     ],
     [
-     "clémence.",
-     1.346,
-     1.627
+     "rien",
+     1.124,
+     1.264
+    ],
+    [
+     "c'est",
+     1.425,
+     1.505
+    ],
+    [
+     "qu'il",
+     1.525,
+     1.605
+    ],
+    [
+     "y'a",
+     1.605,
+     1.686
+    ],
+    [
+     "quelque",
+     1.726,
+     1.886
+    ],
+    [
+     "chose",
+     1.906,
+     2.067
+    ],
+    [
+     "en",
+     2.147,
+     2.187
+    ],
+    [
+     "fait.",
+     2.288,
+     2.468
     ]
    ]
   },
   {
    "p": "invite",
-   "t": "C'est qui Clémence.",
-   "_deb": 45.013,
-   "_fin": 45.616,
+   "t": "Alors pourquoi tu me dis pas.",
+   "_deb": 27.168,
+   "_fin": 28.675,
+   "d": "[colere] Alors pourquoi tu me dis pas.",
+   "_mots": [
+    [
+     "Alors",
+     0.0,
+     0.363
+    ],
+    [
+     "pourquoi",
+     0.363,
+     0.744
+    ],
+    [
+     "tu",
+     0.885,
+     0.945
+    ],
+    [
+     "me",
+     1.025,
+     1.085
+    ],
+    [
+     "dis",
+     1.146,
+     1.266
+    ],
+    [
+     "pas.",
+     1.346,
+     1.507
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "C'est qu'il y a quand je te demandais.",
+   "_deb": 29.316,
+   "_fin": 30.7,
+   "d": "[neutre] C'est qu'il y a quand je te demandais.",
    "_mots": [
     [
      "C'est",
@@ -1268,223 +573,487 @@
      0.121
     ],
     [
-     "qui",
-     0.141,
-     0.201
+     "qu'il",
+     0.161,
+     0.321
     ],
     [
-     "Clémence.",
-     0.281,
-     0.603
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "T'as pas peur des lois toi.",
-   "_deb": 46.157,
-   "_fin": 46.96,
-   "d": "[laughing] T'as pas peur des lois toi.",
-   "_mots": [
-    [
-     "T'as",
-     0.0,
-     0.101
-    ],
-    [
-     "pas",
-     0.141,
-     0.221
-    ],
-    [
-     "peur",
-     0.241,
-     0.362
-    ],
-    [
-     "des",
+     "y",
      0.402,
-     0.482
+     0.442
     ],
     [
-     "lois",
-     0.502,
-     0.622
+     "a",
+     0.482,
+     0.502
     ],
     [
-     "toi.",
-     0.703,
+     "quand",
+     0.642,
+     0.763
+    ],
+    [
+     "je",
+     0.763,
      0.803
+    ],
+    [
+     "te",
+     0.803,
+     0.843
+    ],
+    [
+     "demandais.",
+     0.863,
+     1.384
     ]
    ]
   },
   {
    "p": "invite",
-   "t": "Les lois. Ben non, il est mort.",
-   "_deb": 47.201,
-   "_fin": 48.264,
-   "d": "[laughing] Les lois. Ben non, il est mort.",
+   "t": "Qu'est-ce qu'il y a au lieu de me dire.",
+   "_deb": 30.7,
+   "_fin": 32.847,
+   "d": "[colere] Qu'est-ce qu'il y a au lieu de me dire.",
    "_mots": [
     [
-     "Les",
+     "Qu'est-ce",
      0.0,
-     0.06
+     0.281
     ],
     [
-     "lois.",
-     0.08,
-     0.261
+     "qu'il",
+     0.341,
+     0.562
     ],
     [
-     "Ben",
-     0.501,
+     "y",
+     0.562,
      0.582
     ],
     [
-     "non,",
-     0.622,
-     0.682
+     "a",
+     0.642,
+     0.662
     ],
     [
-     "il",
-     0.762,
-     0.802
+     "au",
+     1.485,
+     1.525
     ],
     [
-     "est",
-     0.843,
-     0.903
+     "lieu",
+     1.585,
+     1.685
     ],
     [
-     "mort.",
-     0.923,
-     1.063
+     "de",
+     1.746,
+     1.786
+    ],
+    [
+     "me",
+     1.846,
+     1.886
+    ],
+    [
+     "dire.",
+     1.966,
+     2.147
     ]
    ]
   },
   {
    "p": "presentateur",
-   "t": "Mais t'es complètement con ma parole.",
-   "_deb": 48.465,
-   "_fin": 49.388,
+   "t": "Y'a rien comme t'as l'habitude d'aboyer là.",
+   "_deb": 32.927,
+   "_fin": 35.175,
+   "d": "[blase] Y'a rien comme t'as l'habitude d'aboyer là.",
    "_mots": [
     [
-     "Mais",
+     "Y'a",
      0.0,
      0.1
     ],
     [
-     "t'es",
+     "rien",
+     0.201,
+     0.521
+    ],
+    [
+     "comme",
+     0.702,
+     0.804
+    ],
+    [
+     "t'as",
+     0.804,
+     0.944
+    ],
+    [
+     "l'habitude",
+     0.964,
+     1.345
+    ],
+    [
+     "d'aboyer",
+     1.386,
+     2.208
+    ],
+    [
+     "là.",
+     2.208,
+     2.248
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Parce que tu es censé le deviner tout ça.",
+   "_deb": 35.616,
+   "_fin": 37.001,
+   "d": "[sarcastic] Parce que tu es censé le deviner tout ça.",
+   "_mots": [
+    [
+     "Parce",
+     0.0,
+     0.161
+    ],
+    [
+     "que",
+     0.201,
+     0.281
+    ],
+    [
+     "tu",
+     0.321,
+     0.382
+    ],
+    [
+     "es",
+     0.462,
+     0.522
+    ],
+    [
+     "censé",
+     0.562,
+     0.763
+    ],
+    [
+     "le",
+     0.823,
+     0.883
+    ],
+    [
+     "deviner",
+     0.923,
+     1.144
+    ],
+    [
+     "tout",
+     1.184,
+     1.324
+    ],
+    [
+     "ça.",
+     1.324,
+     1.385
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Et je suis censé le deviner comment.",
+   "_deb": 37.663,
+   "_fin": 38.846,
+   "d": "[confused] Et je suis censé le deviner comment.",
+   "_mots": [
+    [
+     "Et",
+     0.0,
+     0.06
+    ],
+    [
+     "je",
+     0.08,
+     0.12
+    ],
+    [
+     "suis",
      0.12,
+     0.26
+    ],
+    [
+     "censé",
+     0.281,
+     0.481
+    ],
+    [
+     "le",
+     0.541,
+     0.581
+    ],
+    [
+     "deviner",
+     0.622,
+     0.922
+    ],
+    [
+     "comment.",
+     0.963,
+     1.183
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Je suis qui moi.",
+   "_deb": 38.866,
+   "_fin": 39.448,
+   "d": "[neutre] Je suis qui moi.",
+   "_mots": [
+    [
+     "Je",
+     0.0,
+     0.04
+    ],
+    [
+     "suis",
+     0.101,
+     0.241
+    ],
+    [
+     "qui",
+     0.261,
+     0.381
+    ],
+    [
+     "moi.",
+     0.482,
+     0.582
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Je suis un maître Jedi.",
+   "_deb": 39.832,
+   "_fin": 40.596,
+   "d": "[fier] Je suis un maître Jedi.",
+   "_mots": [
+    [
+     "Je",
+     0.017,
+     0.037
+    ],
+    [
+     "suis",
+     0.0,
+     0.1
+    ],
+    [
+     "un",
+     0.14,
      0.181
     ],
     [
-     "complètement",
+     "maître",
      0.221,
-     0.502
+     0.422
     ],
     [
-     "con",
-     0.542,
-     0.622
+     "Jedi.",
+     0.523,
+     0.764
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Je suis devin.",
+   "_deb": 41.019,
+   "_fin": 41.462,
+   "d": "[neutre] Je suis devin.",
+   "_mots": [
+    [
+     "Je",
+     0.0,
+     0.04
     ],
     [
-     "ma",
-     0.642,
-     0.722
+     "suis",
+     0.04,
+     0.141
     ],
     [
-     "parole.",
-     0.783,
+     "devin.",
+     0.181,
+     0.443
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Je suis maître Yoda ou Mass Windu.",
+   "_deb": 41.965,
+   "_fin": 43.873,
+   "d": "[neutre] Je suis maître Yoda ou Mass Windu.",
+   "_mots": [
+    [
+     "Je",
+     0.0,
+     0.081
+    ],
+    [
+     "suis",
+     0.081,
+     0.161
+    ],
+    [
+     "maître",
+     0.161,
+     0.342
+    ],
+    [
+     "Yoda",
+     0.403,
+     0.644
+    ],
+    [
+     "ou",
+     1.306,
+     1.346
+    ],
+    [
+     "Mass",
+     1.406,
+     1.567
+    ],
+    [
+     "Windu.",
+     1.627,
+     1.908
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Oui oui oui.",
+   "_deb": 44.174,
+   "_fin": 45.097,
+   "d": "[rire] Oui oui oui.",
+   "_mots": [
+    [
+     "Oui",
+     0.0,
+     0.141
+    ],
+    [
+     "oui",
+     0.421,
+     0.542
+    ],
+    [
+     "oui.",
+     0.823,
      0.923
     ]
    ]
   },
   {
-   "p": "invite",
-   "t": "Con.",
-   "_deb": 49.408,
-   "_fin": 49.529,
-   "_mots": [
-    [
-     "Con.",
-     0.0,
-     0.121
-    ]
-   ]
-  },
-  {
    "p": "presentateur",
-   "t": "Non, j'ai tout retenu.",
-   "_deb": 49.911,
-   "_fin": 50.694,
+   "t": "T'as acheté un savon laver.",
+   "_deb": 45.539,
+   "_fin": 46.341,
+   "d": "[colere] T'as acheté un savon laver.",
    "_mots": [
     [
-     "Non,",
+     "T'as",
      0.0,
-     0.121
+     0.1
     ],
     [
-     "j'ai",
-     0.362,
-     0.422
+     "acheté",
+     0.1,
+     0.26
     ],
     [
-     "tout",
-     0.462,
-     0.562
+     "un",
+     0.281,
+     0.321
     ],
     [
-     "retenu.",
-     0.562,
-     0.783
+     "savon",
+     0.361,
+     0.521
+    ],
+    [
+     "laver.",
+     0.561,
+     0.802
     ]
    ]
   },
   {
    "p": "invite",
-   "t": "Je m'appelle Alabar, c'est pas arabe. J'ai refugié un avocat de Boulogne, de la Défense, ainsi qu'un homme au robe qui avait le barreau.",
-   "_deb": 50.955,
-   "_fin": 56.113,
+   "t": "Tu penses que t'as travaillé dans la maison en rapportant sur un Jedi.",
+   "_deb": 46.422,
+   "_fin": 48.629,
+   "d": "[sarcastic] Tu penses que t'as travaillé dans la maison en rapportant sur un Jedi.",
    "_mots": [
     [
-     "Je",
+     "Tu",
      0.0,
      0.06
     ],
     [
-     "m'appelle",
-     0.08,
-     0.321
+     "penses",
+     0.1,
+     0.341
     ],
     [
-     "Alabar,",
-     0.381,
-     0.742
+     "que",
+     0.341,
+     0.461
     ],
     [
-     "c'est",
+     "t'as",
+     0.461,
+     0.521
+    ],
+    [
+     "travaillé",
+     0.541,
+     0.802
+    ],
+    [
+     "dans",
      0.842,
      0.943
     ],
     [
-     "pas",
-     0.983,
-     1.083
+     "la",
+     0.963,
+     1.023
     ],
     [
-     "arabe.",
-     1.123,
-     1.344
+     "maison",
+     1.063,
+     1.304
     ],
     [
-     "J'ai",
-     1.525,
-     1.625
+     "en",
+     1.384,
+     1.424
     ],
     [
-     "refugié",
-     1.645,
+     "rapportant",
+     1.464,
+     1.806
+    ],
+    [
+     "sur",
+     1.806,
      1.886
     ],
     [
@@ -1493,226 +1062,211 @@
      1.986
     ],
     [
-     "avocat",
-     2.046,
-     2.247
-    ],
-    [
-     "de",
-     2.287,
-     2.327
-    ],
-    [
-     "Boulogne,",
-     2.347,
-     2.608
-    ],
-    [
-     "de",
-     2.829,
-     2.889
-    ],
-    [
-     "la",
-     2.949,
-     2.989
-    ],
-    [
-     "Défense,",
-     3.049,
-     3.31
-    ],
-    [
-     "ainsi",
-     3.631,
-     3.772
-    ],
-    [
-     "qu'un",
-     3.812,
-     3.952
-    ],
-    [
-     "homme",
-     3.992,
-     4.153
-    ],
-    [
-     "au",
-     4.213,
-     4.253
-    ],
-    [
-     "robe",
-     4.293,
-     4.474
-    ],
-    [
-     "qui",
-     4.494,
-     4.514
-    ],
-    [
-     "avait",
-     4.335,
-     4.656
-    ],
-    [
-     "le",
-     4.676,
-     4.716
-    ],
-    [
-     "barreau.",
-     4.736,
-     5.158
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Je connais pas Étienne, pas Clémence, et nous allons parler de la fée Clochette, c'est la seule que je connaisse.",
-   "_deb": 56.113,
-   "_fin": 59.584,
-   "d": "[laughing] Je connais pas Étienne, pas Clémence, et nous allons parler de la fée Clochette, c'est la seule que je connaisse.",
-   "_mots": [
-    [
-     "Je",
-     0.0,
-     0.06
-    ],
-    [
-     "connais",
-     0.1,
-     0.301
-    ],
-    [
-     "pas",
-     0.341,
-     0.401
-    ],
-    [
-     "Étienne,",
-     0.461,
-     0.762
-    ],
-    [
-     "pas",
-     0.782,
-     0.903
-    ],
-    [
-     "Clémence,",
-     0.943,
-     1.324
-    ],
-    [
-     "et",
-     1.344,
-     1.424
-    ],
-    [
-     "nous",
-     1.444,
-     1.545
-    ],
-    [
-     "allons",
-     1.545,
-     1.745
-    ],
-    [
-     "parler",
-     1.766,
-     1.986
-    ],
-    [
-     "de",
+     "Jedi.",
      2.006,
-     2.066
-    ],
-    [
-     "la",
-     2.107,
-     2.167
-    ],
-    [
-     "fée",
-     2.267,
-     2.388
-    ],
-    [
-     "Clochette,",
-     2.408,
-     2.729
-    ],
-    [
-     "c'est",
-     2.749,
-     2.829
-    ],
-    [
-     "la",
-     2.849,
-     2.889
-    ],
-    [
-     "seule",
-     2.889,
-     3.05
-    ],
-    [
-     "que",
-     3.05,
-     3.13
-    ],
-    [
-     "je",
-     3.15,
-     3.19
-    ],
-    [
-     "connaisse.",
-     3.19,
-     3.471
+     2.207
     ]
    ]
   },
   {
    "p": "presentateur",
-   "t": "Ça marche.",
-   "_deb": 59.604,
-   "_fin": 61.43,
-   "d": "[laughing] Ça marche.",
+   "t": "Je suis un Jedi comme un bébé K-Dom là.",
+   "_deb": 48.47,
+   "_fin": 49.155,
+   "d": "[neutre] Je suis un Jedi comme un bébé K-Dom là.",
+   "_mots": [
+    [
+     "Je",
+     0.219,
+     0.239
+    ],
+    [
+     "suis",
+     0.0,
+     0.101
+    ],
+    [
+     "un",
+     0.121,
+     0.161
+    ],
+    [
+     "Jedi",
+     0.161,
+     0.242
+    ],
+    [
+     "comme",
+     0.242,
+     0.383
+    ],
+    [
+     "un",
+     0.383,
+     0.423
+    ],
+    [
+     "bébé",
+     0.423,
+     0.503
+    ],
+    [
+     "K",
+     0.524,
+     0.544
+    ],
+    [
+     "-Dom",
+     0.544,
+     0.624
+    ],
+    [
+     "là.",
+     0.624,
+     0.685
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "D'accord d'accord.",
+   "_deb": 49.155,
+   "_fin": 49.698,
+   "d": "[neutre] D'accord d'accord.",
+   "_mots": [
+    [
+     "D'accord",
+     0.0,
+     0.201
+    ],
+    [
+     "d'accord.",
+     0.241,
+     0.543
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "D'accord.",
+   "_deb": 51.0,
+   "_fin": 51.14,
+   "d": "[neutre] D'accord.",
+   "_mots": [
+    [
+     "D'accord.",
+     0.0,
+     0.14
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Du coup je recommence.",
+   "_deb": 52.733,
+   "_fin": 53.767,
+   "d": "[neutre] Du coup je recommence.",
+   "_mots": [
+    [
+     "Du",
+     0.0,
+     0.102
+    ],
+    [
+     "coup",
+     0.162,
+     0.304
+    ],
+    [
+     "je",
+     0.385,
+     0.487
+    ],
+    [
+     "recommence.",
+     0.568,
+     1.034
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Y'a rien.",
+   "_deb": 55.391,
+   "_fin": 55.671,
+   "d": "[blase] Y'a rien.",
+   "_mots": [
+    [
+     "Y'a",
+     0.0,
+     0.08
+    ],
+    [
+     "rien.",
+     0.1,
+     0.28
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Y'a.",
+   "_deb": 55.731,
+   "_fin": 55.951,
+   "d": "[neutre] Y'a.",
+   "_mots": [
+    [
+     "Y'a.",
+     0.0,
+     0.22
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "rien Sous-titrage Société Radio-Canada",
+   "_deb": 58.36,
+   "_fin": 62.141,
+   "d": "[shouting] rien Sous-titrage Société Radio-Canada",
    "chute": true,
    "_mots": [
     [
-     "Ça",
+     "rien",
      0.0,
-     0.903
+     0.32
     ],
     [
-     "marche.",
-     0.923,
-     1.826
+     "Sous-titrage",
+     0.48,
+     30.38
+    ],
+    [
+     "Société",
+     30.38,
+     30.4
+    ],
+    [
+     "Radio-Canada",
+     30.4,
+     30.42
     ]
    ]
   }
  ],
  "bandeau": [],
  "gag": null,
- "legende": "Quand l'interrogatoire tourne au jeu de mots absurde.",
+ "legende": "Un échange absurde entre deux amis qui ne comprennent plus rien.",
  "hashtags": [
   "petitsdramas",
-  "interrogatoire",
-  "absurde",
-  "comique",
-  "police",
-  "malentendu",
-  "humour"
+  "humour",
+  "dialogueabsurde",
+  "souffrance",
+  "amisdanslebrouillard",
+  "pov",
+  "comedie"
  ],
  "sources": [
-  "https://www.tiktok.com/@same_same53/video/7703485812251348256"
+  "https://www.tiktok.com/@same_same53/video/7699114462233644320"
  ],
  "decoupage": [
   {
@@ -1749,51 +1303,236 @@
     28,
     29,
     30,
-    31,
-    32,
-    33,
-    34,
-    35,
-    36,
-    37,
-    38,
-    39,
-    40,
-    41
+    31
    ],
    "lieu": "",
    "son": "",
    "duree": 0.0,
-   "decor": "commissariat with wooden desk, two chairs, computer monitor, files, police badge, coffee mug, and a map of the city on the wall.",
-   "titre": "Interrogation Absurde"
+   "decor": "salon avec un canapé gris, une table basse en bois, une lampe d'appoint, un tapis rouge, une télévision éteinte, une bouteille d'eau et deux verres vides.",
+   "titre": "Débat Absurde"
   }
  ],
+ "studio": {
+  "moment": "soir",
+  "lieux": [
+   "salon"
+  ],
+  "costumes": {
+   "presentateur": {
+    "haut": "tshirt",
+    "c_haut": "bleu",
+    "bas": "jean",
+    "chaussures": "baskets",
+    "details": [
+     "barbe_courte",
+     "lunettes_soleil"
+    ],
+    "chapeau": null,
+    "cheveux": "court_texture",
+    "c_cheveux": "brun"
+   },
+   "invite": {
+    "haut": "chemise",
+    "c_haut": "rouge",
+    "bas": "pantalon",
+    "chaussures": "ville",
+    "details": [
+     "moustache",
+     "cravate"
+    ],
+    "chapeau": null,
+    "cheveux": "long",
+    "c_cheveux": "roux"
+   }
+  },
+  "metiers": {},
+  "personnages": {
+   "presentateur": {
+    "genre": "h",
+    "age": 35,
+    "taille": 1,
+    "corpulence": 0.7,
+    "cheveux": "court_texture",
+    "barbe": "trois_jours"
+   },
+   "invite": {
+    "genre": "f",
+    "age": 30,
+    "taille": 0.95,
+    "corpulence": 0.6,
+    "cheveux": "long",
+    "barbe": "rien"
+   }
+  },
+  "objets": [
+   {
+    "replique": 0,
+    "objet": "bouteille"
+   },
+   {
+    "replique": 5,
+    "objet": "verre"
+   },
+   {
+    "replique": 15,
+    "objet": "telephone"
+   }
+  ],
+  "gags": [
+   "Je suis un Jedi comme un bébé K-Dom",
+   "T'as acheté un savon laver ?"
+  ],
+  "ambiances": [
+   "neon"
+  ],
+  "cadence": "rapide",
+  "plans": [
+   {
+    "replique": 0,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "pointe_d",
+    "reaction": "choc"
+   },
+   {
+    "replique": 1,
+    "plan": "moyen",
+    "mouvement": "fixe",
+    "geste": "bras_ouverts",
+    "reaction": "sceptique"
+   },
+   {
+    "replique": 3,
+    "plan": "serre",
+    "mouvement": "zoom_choc",
+    "geste": "poing",
+    "reaction": "colere"
+   },
+   {
+    "replique": 7,
+    "plan": "large",
+    "mouvement": "fixe",
+    "geste": "bras_ouverts",
+    "reaction": "rire"
+   },
+   {
+    "replique": 11,
+    "plan": "serre",
+    "mouvement": "avance",
+    "geste": "gratte_tete",
+    "reaction": "idee"
+   },
+   {
+    "replique": 21,
+    "plan": "tres_serre",
+    "mouvement": "zoom_choc",
+    "geste": "pointe_g",
+    "reaction": "choc"
+   },
+   {
+    "replique": 23,
+    "plan": "moyen",
+    "mouvement": "fixe",
+    "geste": "facepalm",
+    "reaction": "gene"
+   },
+   {
+    "replique": 31,
+    "plan": "large",
+    "mouvement": "fixe",
+    "geste": "mains_hanches",
+    "reaction": "none"
+   }
+  ],
+  "decors_vus": {
+   "presentateur": "salon avec un canapé gris, une table basse en bois, une lampe d'appoint rouge, un tapis rouge, une télévision éteinte, une bouteille d'eau et deux verres vides.",
+   "invite": "même décor que le présentateur, mais avec un regard vers la caméra pour certaines répliques."
+  }
+ },
  "doublage": {
-  "piste": "/tmp/tmp_up_wv6y/piste.wav",
-  "duree": 62.49,
-  "source": "https://www.tiktok.com/@same_same53/video/7703485812251348256",
+  "piste": "/tmp/tmpleq4t2zu/piste.wav",
+  "duree": 62.14,
+  "source": "https://www.tiktok.com/@same_same53/video/7699114462233644320",
   "auteur": "same_same53",
-  "contexte": "Un policier interroge un suspect nommé Alabar dans un commissariat pour un meurtre, mais l'échange dérape en une série de malentendus hilarants et de jeux de mots absurdes.",
+  "contexte": "Deux personnages, un présentateur et un invité, sont en pleine dispute dans un salon. Ils semblent discuter de manière absurde et répétitive, avec des sous-entendus humoristiques.",
   "evenements": [
    [
-    46.0,
-    48.0,
+    0.0,
+    2.0,
+    "scream"
+   ],
+   [
+    1.0,
+    3.0,
+    "crying"
+   ],
+   [
+    2.0,
+    5.0,
+    "kiss"
+   ],
+   [
+    7.0,
+    9.0,
+    "scream"
+   ],
+   [
+    8.0,
+    10.0,
     "laughter"
    ],
    [
-    59.0,
-    62.0,
+    9.0,
+    11.0,
+    "scream"
+   ],
+   [
+    15.0,
+    18.0,
     "laughter"
+   ],
+   [
+    21.0,
+    23.0,
+    "scream"
+   ],
+   [
+    51.0,
+    53.0,
+    "laughter"
+   ],
+   [
+    54.0,
+    57.0,
+    "scream"
+   ],
+   [
+    57.0,
+    59.0,
+    "laughter"
+   ],
+   [
+    58.0,
+    60.0,
+    "scream"
+   ],
+   [
+    59.0,
+    61.0,
+    "kiss"
+   ],
+   [
+    60.0,
+    62.0,
+    "glass"
    ]
   ],
   "visuel": {
    "gestes": [],
    "duree": 62.5,
-   "nb_plans": 2,
-   "duree_plan": 31.25,
-   "coupes": [
-    20.5
-   ],
+   "nb_plans": 1,
+   "duree_plan": 62.5,
+   "coupes": [],
    "plans": {
     "tres_serre": 0.0,
     "serre": 0.0,
@@ -1811,100 +1550,104 @@
    "personnes": [],
    "visages": false,
    "sourires": 0.0,
-   "energie": 0.43,
+   "energie": 0.172,
    "mur": [
-    0,
-    0,
-    0
+    1,
+    1,
+    1
    ],
    "palette": [
     [
      0,
      0,
      0,
-     0.594
+     0.588
     ],
     [
-     251,
-     251,
-     251,
-     0.273
+     252,
+     252,
+     252,
+     0.362
     ],
     [
-     51,
-     56,
-     66,
-     0.063
+     48,
+     42,
+     40,
+     0.02
     ],
     [
-     158,
-     151,
-     142,
-     0.035
+     165,
+     165,
+     165,
+     0.019
     ],
     [
-     214,
-     214,
-     212,
-     0.029
-    ],
-    [
-     183,
-     98,
-     10,
+     232,
+     141,
+     32,
      0.006
+    ],
+    [
+     6,
+     183,
+     110,
+     0.005
     ]
    ],
    "lumiere": {
-    "luminosite": 85.5,
-    "chaleur": 0.6,
-    "saturation": 9.3
+    "luminosite": 96.8,
+    "chaleur": 0.7,
+    "saturation": 4.9
    },
    "moment": "jour",
    "postures": []
   },
   "audio": {
-   "duree": 62.5,
+   "duree": 62.1,
    "nb_voix": 2,
    "voix": [
     {
-     "hz": 212,
+     "hz": 237,
      "genre": "f",
-     "part": 0.52
+     "part": 0.7
     },
     {
-     "hz": 193,
+     "hz": 286,
      "genre": "f",
-     "part": 0.48
+     "part": 0.3
     }
    ],
-   "debit": 5.19,
-   "blanc_moyen": 0.26,
-   "coupes": 8,
-   "dynamique_db": 20.5,
-   "cris": 0.003,
-   "musique": 0.41,
-   "impacts": 47,
-   "impacts_10s": 7.52,
-   "graves": 19,
-   "aigus": 28,
-   "sur_vanne": 31,
+   "debit": 2.92,
+   "blanc_moyen": 0.69,
+   "coupes": 5,
+   "dynamique_db": 32.2,
+   "cris": 0.029,
+   "musique": 0.5,
+   "impacts": 40,
+   "impacts_10s": 6.44,
+   "graves": 3,
+   "aigus": 37,
+   "sur_vanne": 23,
    "evenements": {
-    "laughter": 2
+    "scream": 6,
+    "laughter": 4,
+    "kiss": 2,
+    "crying": 1,
+    "glass": 1
    },
    "emotions": {
-    "confused": 15,
-    "annoyed": 5,
-    "sarcastic": 4,
-    "serious": 4,
-    "explain": 3,
-    "neutral": 3,
-    "angry": 2,
-    "rambling": 2
+    "neutre": 12,
+    "colere": 5,
+    "blase": 3,
+    "sarcastic": 3,
+    "annoyed": 2,
+    "confused": 2,
+    "rire": 2,
+    "sceptique": 1
    }
   },
-  "video_origine": "/tmp/tmp_up_wv6y/src.mp4",
-  "debut": 0.0
+  "video_origine": "/tmp/tmpleq4t2zu/src_coupe.mp4",
+  "debut": 0.67
  },
  "fiche": {
   "note": 0,
@@ -1944,23 +1687,13 @@
      28,
      29,
      30,
-     31,
-     32,
-     33,
-     34,
-     35,
-     36,
-     37,
-     38,
-     39,
-     40,
-     41
+     31
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "commissariat with wooden desk, two chairs, computer monitor, files, police badge, coffee mug, and a map of the city on the wall.",
-    "titre": "Interrogation Absurde"
+    "decor": "salon avec un canapé gris, une table basse en bois, une lampe d'appoint, un tapis rouge, une télévision éteinte, une bouteille d'eau et deux verres vides.",
+    "titre": "Débat Absurde"
    }
   ]
  },
@@ -1977,7 +1710,7 @@
    "poste": "ingé son",
    "controle": "mots à une vitesse possible",
    "ok": true,
-   "detail": "",
+   "detail": "3 mot(s) trop courts",
    "revoir": false
   },
   {
@@ -1990,22 +1723,22 @@
   {
    "poste": "ingé son",
    "controle": "deux transcriptions d'accord",
-   "ok": true,
-   "detail": "85 % de mots identiques, 5 doute(s), 3 tranché(s) par une 3e écoute, 4 corrigé(s)",
+   "ok": false,
+   "detail": "71 % de mots identiques, 2 doute(s), 1 tranché(s) par une 3e écoute, 1 corrigé(s)",
    "revoir": false
   },
   {
    "poste": "casting voix",
    "controle": "témoin image (qui parle dans l'original)",
    "ok": true,
-   "detail": "52/52 phrases lisibles (Gemini (vidéo entière), visages, mouvements)",
+   "detail": "31/37 phrases lisibles (mouvements)",
    "revoir": false
   },
   {
    "poste": "casting voix",
    "controle": "fil du dialogue repris (son + texte + image)",
    "ok": true,
-   "detail": "voix proches (0.80)",
+   "detail": "voix proches (0.73)",
    "revoir": false
   },
   {
@@ -2025,8 +1758,8 @@
   {
    "poste": "scripte",
    "controle": "téléphone en main seulement s'il en est question",
-   "ok": true,
-   "detail": "",
+   "ok": false,
+   "detail": "retiré sur 1 réplique(s)",
    "revoir": false
   },
   {
@@ -2054,7 +1787,7 @@
    "poste": "monteur",
    "controle": "rien après la fin du son",
    "ok": true,
-   "detail": "",
+   "detail": "1 réplique(s) raccourcie(s)",
    "revoir": false
   },
   {
@@ -2072,37 +1805,36 @@
    "revoir": false
   }
  ],
- "_decors_semi": [],
+ "_decors_semi": [
+  0
+ ],
  "_voix_hz": {
-  "presentateur": 204,
-  "invite": 190
+  "presentateur": 237,
+  "invite": 276
  },
  "_voix_genre": {
-  "invite": "h"
+  "presentateur": "f",
+  "invite": "f"
  },
  "realisation": {
-  "moment": "jour",
+  "moment": "soir",
   "lieux": [
-   "classe"
+   "salon"
   ],
-  "gags": [],
-  "ambiances": [],
-  "source": "robot+image",
+  "gags": [
+   "Je suis un Jedi comme un bébé K-Dom",
+   "T'as acheté un savon laver ?"
+  ],
+  "ambiances": [
+   "neon",
+   "poussiere"
+  ],
+  "source": "auteur+image",
   "tenues": {
-   "presentateur": "uniforme",
+   "presentateur": "tshirt",
    "invite": "chemise"
   },
   "plans": [
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
    "large/fixe",
    "large/fixe",
    "large/fixe",

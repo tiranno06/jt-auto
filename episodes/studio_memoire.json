@@ -6199,34 +6199,72 @@
  {
   "moment": "jour",
   "lieux": [
-   "classe"
+   "voiture"
   ],
-  "source": "robot+image",
-  "duree": 65.0,
+  "source": "auteur+image",
+  "duree": 62.7,
   "plans": {
-   "large": 42
+   "large": 24
   },
   "mouvements": {
-   "fixe": 42
+   "fixe": 24
   },
   "costumes": {
-   "presentateur": "uniforme",
-   "invite": "chemise"
+   "presentateur": "costume",
+   "invite": "debardeur"
   },
   "figurants": 0,
-  "ambiances": [],
-  "controle": "Humoriste 8.8/10 : 12.3 s La chute 'Je vous-voie' est bien placée, mais un bruitage comme un 'boing' ou un 'dun dun' pourrait accentuer l'effet comique.; 49.0 s La réplique 'Mais t'es complètement con",
-  "fichier": "2026-11-03_09h28_emission.mp4",
+  "ambiances": [
+   "pluie"
+  ],
+  "controle": "Humoriste 6.0/10 : 5.1 s La vanne met trop de temps à démarrer, le spectateur scrolle avant la première réplique.; 5.5 s Le jeu d'acteur manque d'exagération pour marquer le début du clash. | Réalisat",
+  "fichier": "2026-11-03_09h23_emission.mp4",
   "cine": {
-   "focus": true,
-   "vertige": true,
+   "focus": false,
+   "vertige": false,
    "tiers": true,
    "etalonnage": true,
    "profondeur": false,
-   "grain": false,
+   "grain": true,
    "reflets": true,
    "son": true
   },
-  "cadence": null
+  "cadence": "rapide"
+ },
+ {
+  "moment": "soir",
+  "lieux": [
+   "salon"
+  ],
+  "source": "auteur+image",
+  "duree": 65.7,
+  "plans": {
+   "large": 32
+  },
+  "mouvements": {
+   "fixe": 32
+  },
+  "costumes": {
+   "presentateur": "tshirt",
+   "invite": "chemise"
+  },
+  "figurants": 0,
+  "ambiances": [
+   "neon",
+   "poussiere"
+  ],
+  "controle": "Humoriste 7.8/10 : 12 s La vanne 'T’as acheté un savon' manque de réactions exagérées pour maximiser l’effet comique.; 16 s La chute avec 'Petits.Dramas' est trop rapide et manque d’un bruitage ou d’u",
+  "fichier": "2026-11-03_10h11_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": true,
+   "tiers": true,
+   "etalonnage": true,
+   "profondeur": true,
+   "grain": true,
+   "reflets": false,
+   "son": true
+  },
+  "cadence": "rapide"
  }
 ]
