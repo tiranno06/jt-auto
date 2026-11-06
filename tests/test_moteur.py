@@ -2317,3 +2317,17 @@ class TestAnalyse10Videos(unittest.TestCase):
         reseau._GQ["liste"] = ["meta-llama/llama-4-scout-17b-16e-instruct", "whisper-large-v3", "llama-3.3-70b-versatile"]
         self.assertEqual(reseau._groq_modeles(True), ("meta-llama/llama-4-scout-17b-16e-instruct",))
         reseau._GQ.clear()
+
+
+class TestPhraseAbonne(unittest.TestCase):
+    """Choix de l'auteur (6 novembre, proposition 5) : une phrase d'abonnement dans chaque description."""
+    def test_phrase(self):
+        import legende
+        d = legende.composer({"legende": "Texte.", "question": "Et toi ?"}, "🎧 Son original : @x")
+        self.assertIn(legende.ABONNE, d); self.assertLess(d.index(legende.ABONNE), d.index("🎧"))
+        v = legende.completer("Ancien texte\n\n🎧 Son original : @x\n\n#humour")
+        self.assertEqual(v.count("Abonne-toi"), 1); self.assertLess(v.index("Abonne-toi"), v.index("🎧"))
+        self.assertEqual(legende.completer(v).count("Abonne-toi"), 1)    # jamais deux fois
+        os.environ["PHRASE_ABONNE"] = "0"
+        try: self.assertNotIn("Abonne", legende.composer({"legende": "T."}))
+        finally: os.environ.pop("PHRASE_ABONNE", None)

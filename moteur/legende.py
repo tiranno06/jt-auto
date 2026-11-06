@@ -62,10 +62,20 @@ def hashtags(sk=None, texte="", n=None):
     return vus[:n]
 
 
+ABONNE = "🔔 Abonne-toi : une nouvelle histoire chaque jour !"           # choix de l'auteur (6 novembre, proposition 5 : peu d'abonnés)
+
+
+def phrase_abonne():
+    """Phrase d'abonnement de la description (réglage PHRASE_ABONNE : texte à la place, « 0 » pour l'enlever)."""
+    p = (os.environ.get("PHRASE_ABONNE") or "").strip()
+    return "" if p == "0" else (p or ABONNE)
+
+
 def composer(sk, credit=""):
-    """Description complète : texte, question, source du son (sans lien), hashtags."""
+    """Description complète : texte, question, appel à s'abonner, source du son (sans lien), hashtags."""
     corps = str(sk.get("legende") or "").strip()
     if sk.get("question"): corps += "\n\n" + str(sk["question"]).strip()
+    if phrase_abonne(): corps += "\n\n" + phrase_abonne()
     if credit: corps += "\n\n" + credit
     return sans_lien(corps) + "\n\n" + " ".join("#" + h for h in hashtags(sk))
 
@@ -73,6 +83,9 @@ def composer(sk, credit=""):
 def completer(legende, fichier=None):
     """Juste avant l'envoi : enlève les liens ; ajoute les hashtags s'il n'y en a pas (anciennes vidéos), d'après le sketch gardé."""
     t = sans_lien(legende)
+    if phrase_abonne() and "abonne" not in t.lower():                    # vidéos faites avant le 6 novembre : la phrase est ajoutée à l'envoi
+        i = t.find("#"); i = t.find("🎧") if "🎧" in t else i
+        t = (t[:i].rstrip() + "\n\n" + phrase_abonne() + "\n\n" + t[i:]) if i > 0 else (t + "\n\n" + phrase_abonne())
     if "#" in t: return t
     sk = {}
     if fichier:

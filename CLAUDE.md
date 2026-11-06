@@ -327,7 +327,9 @@
   dans le sketch « _mots ») ; le bouton Refaire retrouve enfin le sketch gardé (nom sans « .mp4 »).
 - **Description TikTok** (`moteur/legende.py`, demande de l'auteur) : description de la vidéo + question + « 🎧 Son original :
   @compte » **sans aucun lien**, puis ~15 hashtags liés à la vidéo (ceux de l'IA, sujet : famille / école / couple / travail…,
-  métiers, émotions, puis #petitsdramas et la niche ; NB_HASHTAGS) ; `publier.py` nettoie aussi les anciennes légendes à l'envoi.
+  métiers, émotions, puis #petitsdramas et la niche ; NB_HASHTAGS) ; `publier.py` nettoie aussi les anciennes légendes à l'envoi. **Phrase d'abonnement** (choix de l'auteur du 6 novembre, peu
+  d'abonnés malgré les vues) : « 🔔 Abonne-toi : une nouvelle histoire chaque jour ! » avant la source du son (`legende.phrase_abonne`,
+  réglage PHRASE_ABONNE = autre texte ou « 0 » ; ajoutée à l'envoi aux vidéos plus anciennes, jamais deux fois).
 - **Style « croquis » = STYLE PAR DÉFAUT (validé par l'auteur le 30 octobre 2026)** : `moteur/croquis.py` (dessin) +
   `moteur/perso_croquis.py` (traduit la pose du moteur : bras en angles -> coude et main, émotion -> expression, bouche ouverte selon la
   voix en gardant l'expression, forme des lèvres par son, regard, larmes / sueur / rougeur, costume, métier, chapeau, lunettes, barbe
