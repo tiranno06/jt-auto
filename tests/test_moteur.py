@@ -2338,10 +2338,11 @@ class TestGenreDeLaVoix(unittest.TestCase):
     décide d'abord ; la hauteur seule se trompait sur les voix d'homme aiguës (cris, voix de dessin animé accélérées)."""
 
     def test_timbre_des_voix_de_reference(self):
-        import studio, soundfile as sf
+        import studio, wave, numpy as np                                # wave : soundfile n'est pas installé pour les tests en ligne
         res = {}
         for r in ("presentateur", "invite", "envoyee"):
-            a, sr = sf.read(os.path.join(ICI, "..", "voix", r + ".wav")); a = a if a.ndim == 1 else a.mean(1)
+            with wave.open(os.path.join(ICI, "..", "voix", r + ".wav")) as f:
+                sr = f.getframerate(); a = np.frombuffer(f.readframes(f.getnframes()), np.int16).astype(np.float64) / 32768
             res[r] = studio.genre_timbre(studio.espacement_formants(a, sr))
         self.assertEqual(res, {"presentateur": "h", "invite": "h", "envoyee": "f"})
 
