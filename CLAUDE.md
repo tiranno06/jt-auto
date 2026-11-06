@@ -327,7 +327,9 @@
   dans le sketch « _mots ») ; le bouton Refaire retrouve enfin le sketch gardé (nom sans « .mp4 »).
 - **Description TikTok** (`moteur/legende.py`, demande de l'auteur) : description de la vidéo + question + « 🎧 Son original :
   @compte » **sans aucun lien**, puis ~15 hashtags liés à la vidéo (ceux de l'IA, sujet : famille / école / couple / travail…,
-  métiers, émotions, puis #petitsdramas et la niche ; NB_HASHTAGS) ; `publier.py` nettoie aussi les anciennes légendes à l'envoi.
+  métiers, émotions, puis #petitsdramas et la niche ; NB_HASHTAGS) ; `publier.py` nettoie aussi les anciennes légendes à l'envoi. **Phrase d'abonnement** (choix de l'auteur du 6 novembre, peu
+  d'abonnés malgré les vues) : « 🔔 Abonne-toi : une nouvelle histoire chaque jour ! » avant la source du son (`legende.phrase_abonne`,
+  réglage PHRASE_ABONNE = autre texte ou « 0 » ; ajoutée à l'envoi aux vidéos plus anciennes, jamais deux fois).
 - **Style « croquis » = STYLE PAR DÉFAUT (validé par l'auteur le 30 octobre 2026)** : `moteur/croquis.py` (dessin) +
   `moteur/perso_croquis.py` (traduit la pose du moteur : bras en angles -> coude et main, émotion -> expression, bouche ouverte selon la
   voix en gardant l'expression, forme des lèvres par son, regard, larmes / sueur / rougeur, costume, métier, chapeau, lunettes, barbe
@@ -396,6 +398,14 @@
   (le reste au journal) ; jury IA : la réponse en texte d'une IA de relais est lue (`ecrire._appel`, 2 essais) au lieu de retomber sur
   la note gratuite 9,8 ; Groq : modèles du jour lus en direct (`reseau._groq_modeles`, les « vision » changent) et outil mal formé
   -> réponse JSON en texte.
+- **Homme / femme d'après la voix (remarque de l'auteur du 6 novembre : voix de femme sur un physique d'homme et inversement)** :
+  `studio.genre_voix` décide dans cet ordre : 1. le TIMBRE (`studio.espacement_formants` : espacement des formants par LPC, longueur
+  du conduit vocal ; < 1060 Hz = homme, > 1100 Hz = femme, calculé par `cartoon` -> sk["_voix_timbre"], "_voix_timbre_genre") —
+  il ne bouge pas quand un homme crie ou quand la voix d'un dessin animé est accélérée (la hauteur seule avait mis des corps de
+  femme sur 3 voix d'homme aiguës les 2-3 novembre) ; 2. la hauteur nette (vote) si Gemini ne voit pas l'inverse ; 3. ce que Gemini
+  a vu dans l'original (`video_ia.genres_par_voix` -> personnages "genre_vu") ; 4. l'IA de mise en scène (« homme » / « femme »
+  compris) ; 5. la hauteur moyenne. Un personnage à voix d'homme n'est jamais en robe / jupe (sauf mariée), coiffures déjà gardées
+  par `humain.POUR_H / POUR_F`.
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.

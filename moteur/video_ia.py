@@ -116,6 +116,33 @@ def especes_par_voix(mots):
     return out
 
 
+def genres_par_voix(mots):
+    """{voix: « h » / « f »} : ce que Gemini a VU (homme / femme) pour le personnage qui dit le plus de phrases de cette voix."""
+    res = DERNIER
+    if not res: return {}
+    gen = {}
+    for p in res.get("personnages") or []:
+        if not isinstance(p, dict): continue
+        d = str(p.get("description") or "").lower()
+        f_ = re.search(r"\b(femme|fille|dame|m[èe]re|maman|s[œo]eur|grand-m[èe]re|mamie|copine|woman|girl|female|elle)\b", d)
+        h_ = re.search(r"\b(homme|gar[çc]on|monsieur|p[èe]re|papa|fr[èe]re|grand-p[èe]re|papi|copain|man|boy|male|il)\b", d)
+        if bool(f_) != bool(h_): gen[str(p.get("id", "")).upper()[:1]] = "f" if f_ else "h"
+    out = {}
+    for lettre, g in gen.items():
+        compte = {}
+        for x in res.get("phrases") or []:
+            try:
+                if str(x.get("qui", "")).upper()[:1] != lettre: continue
+                a, b = res["_ph"][int(x["n"])]
+            except (KeyError, IndexError, TypeError, ValueError): continue
+            for m in mots:
+                if a - 0.05 <= m["s"] <= b + 0.05: compte[m["voix"]] = compte.get(m["voix"], 0) + 1
+        if compte:
+            v = max(compte, key=compte.get)
+            if v not in out: out[v] = g
+    return out
+
+
 def texte():
     """Ce que Gemini a vu, pour la consigne de mise en scène."""
     r = DERNIER

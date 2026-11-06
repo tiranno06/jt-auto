@@ -60,6 +60,45 @@ def _h(*xs):
     return int(hashlib.md5("|".join(map(str, xs)).encode()).hexdigest()[:8], 16)
 
 # ------------------------------------------------------------------ intonation (hauteur et énergie de la voix)
+def espacement_formants(a, sr=22050):
+    """Timbre de la voix : espacement moyen des formants (Hz), lié à la longueur du conduit vocal ; ~930-1020 voix d'homme,
+    ~1130-1180 voix de femme, que la voix soit grave, aiguë ou criée (la HAUTEUR, elle, monte quand un homme crie ou quand la voix
+    d'un dessin animé est accélérée : c'est ce qui donnait un corps de femme à une voix d'homme). None si pas assez de voix."""
+    from scipy.linalg import solve_toeplitz
+    from scipy.signal import resample_poly, lfilter
+    a = np.asarray(a, np.float64)
+    if len(a) < sr * 0.8: return None
+    x = resample_poly(a, 10000, sr) if sr != 10000 else a; sr2 = 10000
+    x = lfilter([1, -0.63], [1], x)                                         # pré-accentuation
+    N, hop, p = 250, 100, 12
+    seuil = np.percentile(np.abs(x), 90) * 0.15
+    vals = []
+    for i in range(0, len(x) - N, hop):
+        f = x[i:i + N] * np.hamming(N)
+        if np.sqrt(np.mean(f ** 2)) < seuil: continue
+        r = np.correlate(f, f, "full")[N - 1:N + p]
+        if r[0] <= 0: continue
+        try: A = solve_toeplitz(r[:p], -r[1:p + 1])
+        except Exception: continue
+        rac = np.roots(np.concatenate([[1], A])); rac = rac[np.imag(rac) > 0]
+        fr = np.angle(rac) * sr2 / (2 * np.pi); bw = -sr2 / np.pi * np.log(np.abs(rac) + 1e-12)
+        F = np.sort(fr[(fr > 200) & (fr < 4500) & (bw < 500)])
+        if len(F) < 4: continue
+        d = float(np.median([F[k] / (k + 0.5) for k in range(4)]))
+        if 700 < d < 1600: vals.append(d)
+    return float(np.median(vals)) if len(vals) > 20 else None
+
+
+def genre_timbre(esp):
+    """Espacement des formants -> « h », « f » ou None (zone de doute 1060-1100 Hz). Réglé sur les voix des vidéos de la chaîne."""
+    if not esp: return None
+    return "h" if esp < 1060 else "f" if esp > 1100 else None
+
+
+GENRES_TXT = {"h": "h", "f": "f", "homme": "h", "m": "h", "male": "h", "man": "h", "garcon": "h", "garçon": "h",
+              "femme": "f", "female": "f", "woman": "f", "fille": "f", "w": "f"}
+
+
 def prosodie(a, sr=22050, fps=30):
     """Hauteur de la voix (Hz, 0 quand elle ne chante pas : consonnes, silences) et énergie, image par image (1/30 s)."""
     a = np.asarray(a, np.float32); hop = sr // fps; n = max(1, len(a) // hop); N = 1024
@@ -473,11 +512,18 @@ def genre_voix(sk, role, d=None):
     """Homme ou femme : TOUJOURS d'après la voix entendue. Sketch écrit : voix fixes des rôles (Jojo, Kévin : homme ; Lila : femme).
     Doublage : voix mesurée réplique par réplique quand elle est nette, sinon le choix de Claude, sinon la hauteur moyenne."""
     d = d or {}
-    if sk.get("doublage") is None: return GENRE_ROLE.get(role) or (d.get("genre") if d.get("genre") in ("h", "f") else None)
-    g = (sk.get("_voix_genre") or {}).get(role) or (d.get("genre") if d.get("genre") in ("h", "f") else None)
+    g_ia = GENRES_TXT.get(str(d.get("genre") or "").strip().lower())
+    if sk.get("doublage") is None: return GENRE_ROLE.get(role) or g_ia
+    g_t = (sk.get("_voix_timbre_genre") or {}).get(role)                    # 1. le TIMBRE de la voix (ne bouge pas quand on crie)
+    if g_t: return g_t
+    g_v = (sk.get("_voix_genre") or {}).get(role)                           # 2. la hauteur nette, si l'image de l'original ne la contredit pas
+    g_vu = GENRES_TXT.get(str(d.get("genre_vu") or "").strip().lower())     # (Gemini a vu un homme / une femme dire ces phrases)
+    if g_v and (not g_vu or g_vu == g_v): return g_v
+    if g_vu: return g_vu
+    if g_v: return g_v
     vh = (sk.get("_voix_hz") or {}).get(role) or 0
-    if not g and vh: g = "f" if vh > 210 else "h" if vh < 150 else None   # voix nette : elle décide ; entre les deux (ado, voix
-    return g or GENRE_ROLE.get(role)                                       # qui monte) : le rôle donné par le casting (mots + voix)
+    g = g_ia or (("f" if vh > 210 else "h" if vh < 150 else None) if vh else None)
+    return g or GENRE_ROLE.get(role)
 
 def casting(sk, roles, costumes, S, graine):
     """Casting libre : une fiche de personnage adulte par rôle, différente à chaque vidéo.

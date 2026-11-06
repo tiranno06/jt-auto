@@ -2317,3 +2317,43 @@ class TestAnalyse10Videos(unittest.TestCase):
         reseau._GQ["liste"] = ["meta-llama/llama-4-scout-17b-16e-instruct", "whisper-large-v3", "llama-3.3-70b-versatile"]
         self.assertEqual(reseau._groq_modeles(True), ("meta-llama/llama-4-scout-17b-16e-instruct",))
         reseau._GQ.clear()
+
+
+class TestPhraseAbonne(unittest.TestCase):
+    """Choix de l'auteur (6 novembre, proposition 5) : une phrase d'abonnement dans chaque description."""
+    def test_phrase(self):
+        import legende
+        d = legende.composer({"legende": "Texte.", "question": "Et toi ?"}, "🎧 Son original : @x")
+        self.assertIn(legende.ABONNE, d); self.assertLess(d.index(legende.ABONNE), d.index("🎧"))
+        v = legende.completer("Ancien texte\n\n🎧 Son original : @x\n\n#humour")
+        self.assertEqual(v.count("Abonne-toi"), 1); self.assertLess(v.index("Abonne-toi"), v.index("🎧"))
+        self.assertEqual(legende.completer(v).count("Abonne-toi"), 1)    # jamais deux fois
+        os.environ["PHRASE_ABONNE"] = "0"
+        try: self.assertNotIn("Abonne", legende.composer({"legende": "T."}))
+        finally: os.environ.pop("PHRASE_ABONNE", None)
+
+
+class TestGenreDeLaVoix(unittest.TestCase):
+    """Remarque de l'auteur (6 novembre) : une voix de femme sur un physique d'homme et inversement. Le TIMBRE de la voix (formants)
+    décide d'abord ; la hauteur seule se trompait sur les voix d'homme aiguës (cris, voix de dessin animé accélérées)."""
+
+    def test_timbre_des_voix_de_reference(self):
+        import studio, wave, numpy as np                                # wave : soundfile n'est pas installé pour les tests en ligne
+        res = {}
+        for r in ("presentateur", "invite", "envoyee"):
+            with wave.open(os.path.join(ICI, "..", "voix", r + ".wav")) as f:
+                sr = f.getframerate(); a = np.frombuffer(f.readframes(f.getnframes()), np.int16).astype(np.float64) / 32768
+            res[r] = studio.genre_timbre(studio.espacement_formants(a, sr))
+        self.assertEqual(res, {"presentateur": "h", "invite": "h", "envoyee": "f"})
+
+    def test_priorites(self):
+        import studio
+        sk = {"doublage": {}, "_voix_hz": {"invite": 250}, "_voix_genre": {"invite": "f"}, "_voix_timbre_genre": {"invite": "h"}}
+        self.assertEqual(studio.genre_voix(sk, "invite", {"genre": "f"}), "h")          # le timbre l'emporte sur une voix aiguë
+        sk.pop("_voix_timbre_genre")
+        self.assertEqual(studio.genre_voix(sk, "invite", {"genre_vu": "h"}), "h")       # hauteur contredite par l'image de l'original
+        self.assertEqual(studio.genre_voix(sk, "invite", {}), "f")
+        sk = {"doublage": {}, "_voix_hz": {"invite": 190}}
+        self.assertEqual(studio.genre_voix(sk, "invite", {"genre": "femme"}), "f")      # « femme » / « homme » de l'IA compris
+        src = open(os.path.join(ICI, "..", "moteur", "perso_croquis.py"), encoding="utf-8").read()
+        self.assertIn('F.get("genre") == "h" and tenue not in ("robe_mariee",): bas = "pantalon"', src)
