@@ -29,6 +29,11 @@ def main():
     import reseau
     etat = reseau.verifier_credits()
     etat["modal"] = modal()
+    try:                                                                   # vrai compteur des dépenses Modal (idée 48)
+        import budget_modal
+        d_ = budget_modal.depense_mois()
+        if d_ is not None: etat["modal_depense"] = d_; etat["modal_plafond"] = budget_modal.plafond()
+    except Exception: pass
     d = enregistrer(etat)
     print("Crédits : " + ", ".join(f"{k} = {v}" for k, v in d.items()), flush=True)
     return 0

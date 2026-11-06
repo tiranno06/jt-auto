@@ -75,6 +75,10 @@ def composer(sk, credit=""):
     """Description complète : texte, question, appel à s'abonner, source du son (sans lien), hashtags."""
     corps = str(sk.get("legende") or "").strip()
     if sk.get("question"): corps += "\n\n" + str(sk["question"]).strip()
+    try:
+        l_ = __import__("suites").ligne_legende(sk)                        # vidéo en plusieurs parties : la suite est annoncée
+        if l_: corps += "\n\n" + l_
+    except Exception: pass
     if phrase_abonne(): corps += "\n\n" + phrase_abonne()
     if credit: corps += "\n\n" + credit
     return sans_lien(corps) + "\n\n" + " ".join("#" + h for h in hashtags(sk))

@@ -34,11 +34,42 @@ def connus():
     return sorted(compte, key=lambda m: (-compte[m], m.lower()))
 
 
+def interdits():
+    """Liste noire (choix de l'auteur du 6 novembre, idée 27) : profils jamais repris (réglage PROFILS_INTERDITS, même format que
+    PROFILS_TIKTOK), plus les profils dont la bio interdit la reprise (« ne pas reprendre », « no repost », « tous droits réservés »…)."""
+    return {p.lower() for p in liste(os.environ.get("PROFILS_INTERDITS") or "")} | {p.lower() for p, v in _BIOS.items() if v}
+
+
+_BIOS = {}                                                                 # pseudo -> la bio interdit la reprise (lu une fois par fabrication)
+BIO_REFUS = re.compile(r"(ne\s+pas|pas\s+de|interdi\w*\s+de|merci\s+de\s+ne\s+pas|no|don'?t|do\s+not)\s+(re-?)?(prendre|poster|post|repost|"
+                       r"reupload|re-?upload|utiliser|copier|use|steal|voler)\b|tous\s+droits\s+r[ée]serv|all\s+rights\s+reserved|\bno\s+repost",
+                       re.I)
+
+
+def bio_refuse(pseudo, journal=print):
+    """La bio du profil interdit-elle la reprise ? (tikwm ; profil illisible = autorisé, comme avant)."""
+    p = pseudo.lower()
+    if p in _BIOS: return _BIOS[p]
+    bio = ""
+    try:
+        import urllib.parse, urllib.request, reseau
+        req = urllib.request.Request("https://www.tikwm.com/api/user/info?" + urllib.parse.urlencode({"unique_id": pseudo}),
+                                     headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/130.0 Safari/537.36"})
+        d = json.loads(reseau.ouvrir(req, timeout=30) or "{}").get("data") or {}
+        bio = str((d.get("user") or {}).get("signature") or "")
+    except Exception: pass
+    _BIOS[p] = bool(BIO_REFUS.search(bio))
+    if _BIOS[p]: journal(f"  profil @{pseudo} écarté : sa bio interdit la reprise (« {bio[:80]} »)")
+    return _BIOS[p]
+
+
 def liste(texte=None):
     """Pseudos (sans @) tirés du réglage PROFILS_TIKTOK : « @pseudo », « pseudo » ou lien https://www.tiktok.com/@pseudo…
-    Réglage vide : les profils déjà connus du robot (voir connus())."""
+    Réglage vide : les profils déjà connus du robot (voir connus()). Les profils de la liste noire sont retirés."""
     t = os.environ.get("PROFILS_TIKTOK", "") if texte is None else texte
-    if texte is None and not (t or "").strip(): return connus()
+    if texte is None:
+        noirs = interdits()
+        return [p for p in (connus() if not (t or "").strip() else liste(t)) if p.lower() not in noirs]
     out = []
     for morceau in re.split(r"[\n,;]+", t or ""):
         m = morceau.strip()
@@ -138,6 +169,36 @@ def poids_profils(profils, stats=None):
     return out
 
 
+GENERIQUES = {"fyp", "foryou", "foryoupage", "pourtoi", "pourtoii", "viral", "fy", "fypシ", "humour", "drole", "humor", "tiktok", "trend",
+              "france", "xyzbca", "explore", "capcut", "funny", "comedy", "pov", "sketch", "pourtoipage", "fypage", "tendance"}
+
+
+def _hashtags(t): return {h.lower() for h in re.findall(r"#([\wÀ-ÿ]{3,40})", str(t or ""))} - GENERIQUES
+
+
+def sujets_du_moment():
+    """Recherches qui montent en France aujourd'hui (Google Trends, flux public) : idée 23 (le Creative Center de TikTok refuse les
+    robots). SONS_TENDANCE=0 pour couper."""
+    if os.environ.get("SONS_TENDANCE", "1") == "0": return []
+    try:
+        import urllib.request, reseau, html
+        req = urllib.request.Request("https://trends.google.com/trending/rss?geo=FR", headers={"User-Agent": "Mozilla/5.0"})
+        x = reseau.ouvrir(req, timeout=20)
+        x = x.decode("utf-8", "ignore") if isinstance(x, bytes) else str(x)
+        return [html.unescape(t).strip().lower() for t in re.findall(r"<item>\s*<title>([^<]{3,60})</title>", x)][:30]
+    except Exception: return []
+
+
+def tendance(v, communs, sujets):
+    """Points de potentiel en plus pour un son dans l'air du temps : hashtag repris par plusieurs de nos créateurs cette semaine
+    (une tendance TikTok qui démarre) ou sujet qui monte en France (Google Trends)."""
+    if os.environ.get("SONS_TENDANCE", "1") == "0": return 0, ""
+    t = str(v.get("titre") or "").lower(); h = _hashtags(t) & communs
+    if h: return 20, "#" + sorted(h)[0]
+    s = next((x for x in sujets if len(x) >= 4 and re.search(r"(?<!\w)" + re.escape(x) + r"(?!\w)", t)), None)
+    return (15, s) if s else (0, "")
+
+
 def choisir(historique, journal=print, graine=None, essais=4):
     """Liens de vidéos à essayer (jamais déjà utilisées, durée raisonnable), les plus prometteuses d'abord : profils tirés au
     hasard mais pondérés par les vues qu'ils nous rapportent (idée 21), et dans chaque profil les sons qui montent et à bon
@@ -147,14 +208,35 @@ def choisir(historique, journal=print, graine=None, essais=4):
     rng = random.Random(graine); deja = deja_utilisees(historique); out = []
     pw = poids_profils(profils)
     profils = sorted(profils, key=lambda p: -pw[p] * rng.random() ** 0.5)  # tirage pondéré (un bon profil sort plus souvent)
-    import saisons
+    import saisons, suites
     moment = saisons.mots_du_moment()                                      # Noël, Saint-Valentin, rentrée… : sons sur ce thème d'abord
-    for p in profils[:6]:
-        vs = [v for v in videos(p, journal) if v["id"] not in deja and (v.get("duree") is None or DUREE_MIN <= float(v["duree"]) <= DUREE_MAX)]
+    profils = [p for p in profils[:8] if not bio_refuse(p, journal)][:5]   # liste noire : bio qui interdit la reprise
+    if not profils: return []
+    listes = {p: videos(p, journal) for p in profils}
+    import time as _t
+    vus = {}                                                               # tendance TikTok : hashtag récent chez plusieurs créateurs
+    for p, vs_ in listes.items():
+        for v in vs_:
+            if not v.get("date") or _t.time() - float(v["date"]) < 10 * 86400:
+                for h in _hashtags(v.get("titre")): vus.setdefault(h, set()).add(p)
+    communs = {h for h, ps in vus.items() if len(ps) >= 2}
+    sujets = sujets_du_moment()
+    if communs or sujets: journal(f"Tendances : {', '.join('#' + h for h in sorted(communs)[:8]) or 'aucun hashtag commun'} ; sujets qui montent en France : {', '.join(sujets[:6]) or '—'}")
+    parties = suites.faites(historique)                                     # parties déjà faites (la suite passe devant)
+    for p in profils:
+        vs = [v for v in listes[p] if v["id"] not in deja and (v.get("duree") is None or DUREE_MIN <= float(v["duree"]) <= DUREE_MAX)]
         for v in vs:
             v["potentiel"] = potentiel(v)
             if moment and re.search(moment, str(v.get("titre") or "").lower()):
                 v["potentiel"] += 30; journal(f"  son du moment (calendrier) : {v['url']} « {str(v.get('titre'))[:60]} »")
+            b_, pourquoi = tendance(v, communs, sujets)
+            if b_: v["potentiel"] += b_; journal(f"  son dans la tendance ({pourquoi}) : {v['url']}")
+            try:
+                b_ = __import__("recette").bonus_son(v)                     # idée 41 : la durée qui marche chez nous
+                if b_: v["potentiel"] += b_
+            except Exception: pass
+            b_ = suites.bonus(v, p, parties)
+            if b_: v["potentiel"] += b_; journal(f"  suite d'une vidéo déjà faite (partie {suites.num_partie(v.get('titre'))}) : {v['url']}")
         vs.sort(key=lambda v: -(v["potentiel"] + rng.uniform(0, 25)))
         journal(f"Profil TikTok @{p} (poids {pw[p]:.1f}) : {len(vs)} vidéo(s) jamais utilisée(s)" + (f", meilleur potentiel {vs[0]['potentiel']}/100" if vs else ""))
         out += [v["url"] for v in vs[:max(2, essais // len(profils))]]

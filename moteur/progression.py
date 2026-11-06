@@ -58,9 +58,53 @@ def _envoyer(pct, texte, fin=None, etat="pending"):
     except Exception as e: _signaler("vérification", e)
 
 
+TEMPS = {}                                                                 # temps passé par étape (secondes), gardé dans l'historique
+_COURANTE = [None, None]                                                   # étape en cours, heure de son début
+
+
+def _nom_etape(texte):
+    t = re.sub(r"\(.*?\)", "", str(texte).split(":")[0])
+    return re.sub(r"\s+", " ", re.sub(r"[\d/%]+", "", t)).strip()[:40] or "Autre"
+
+
+def chrono(texte, maintenant=None):
+    """Temps par étape (carte « ⏱️ Temps de fabrication » du site) : une nouvelle étape ferme la précédente. Le temps avant la
+    première étape (machine, installation des bibliothèques) est compté dans « Installation de la machine »."""
+    maintenant = maintenant or time.time()
+    if _COURANTE[0] is None:
+        try:
+            d = float(os.environ.get("DEBUT_JOB") or 0)
+            if 0 < maintenant - d < 3 * 3600: TEMPS["Installation de la machine"] = round(maintenant - d, 1)
+        except ValueError: pass
+    nom = _nom_etape(texte) if texte is not None else None
+    if nom == _COURANTE[0]: return
+    if _COURANTE[0] is not None:
+        TEMPS[_COURANTE[0]] = round(TEMPS.get(_COURANTE[0], 0) + maintenant - _COURANTE[1], 1)
+    _COURANTE[:] = [nom, maintenant]
+
+
+def temps():
+    """Temps par étape jusqu'à maintenant (l'étape en cours comprise), en secondes."""
+    t = dict(TEMPS)
+    if _COURANTE[0] is not None: t[_COURANTE[0]] = round(t.get(_COURANTE[0], 0) + time.time() - _COURANTE[1], 1)
+    return t
+
+
+def lents(t, anciens, facteur=2.0, mini=120):
+    """Étapes nettement plus lentes que d'habitude (médiane des vidéos précédentes) : [(étape, secondes, habituel)]."""
+    res = []
+    for k, v in (t or {}).items():
+        vals = sorted(float(a[k]) for a in anciens if isinstance(a, dict) and k in a)
+        if len(vals) < 3: continue
+        med = vals[len(vals) // 2]
+        if v > facteur * med and v - med > mini: res.append((k, round(v), round(med)))
+    return res
+
+
 def etape(pct, texte, reste_s=None, forcer=False):
     """Nouvelle étape (ou point d'avancement). reste_s : temps restant estimé en secondes (sinon le site l'estime)."""
     maintenant = time.time()
+    if forcer: chrono(texte, maintenant)
     import quota
     if not forcer and maintenant - _DERNIER[0] < (8 if not quota.econome() else 90): return   # temps réel : un point toutes les 8 s
     #                                                                        (toutes les 90 s quand le quota de l'API GitHub est presque épuisé)
@@ -77,5 +121,6 @@ def rendu(fi, nf, debut):
 
 
 def fini(ok=True, texte=None):
+    chrono(None)
     _envoyer(100 if ok else 0, texte or ("Vidéo prête, mise en ligne sur le site" if ok else "Pas de vidéo cette fois"), None,
              "success" if ok else "failure")

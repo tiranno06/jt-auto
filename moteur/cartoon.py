@@ -21,6 +21,7 @@ import numpy as np, cv2
 from PIL import Image, ImageDraw, ImageFont
 ICI = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, ICI)
 import marionnette as M, sons_modernes as SM, bruitages as BR, marque, studio, decor_dessin as DD, humain as HU, levres, decor_anime as DA
+import rapide as _RAPIDE                                                   # mélanges de couleur compilés (Numba), mêmes pixels
 from jt import minutage, carton, son, vers_mix, enveloppe, poser, pop, W, H, FPS, SR, SRM, FB
 
 CAP_Y = 1700
@@ -522,6 +523,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
     PASSE = {}                                                             # décor vivant : voiture qui passe au loin
     if B:
         studio.realiser(ph, places, B); sk["_bible"] = B
+        __import__("suites").garder(sk, B, roles)                          # personnages gardés pour une éventuelle partie suivante
         DECOUPE = studio.decouper(ph, places, B, FPS) if os.environ.get("MONTAGE") != "simple" else []   # plusieurs plans par réplique
         if PLAN_LARGE and DECOUPE:
             DECOUPE = studio.plans_larges(DECOUPE)
@@ -963,6 +965,13 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
     elif fortes: COUVERTURE = t_reaction(fortes[0]) + 0.15
     else: COUVERTURE = (ph[-1]["fin"] + 0.45) if ph else 1.0
     COUVERTURE = round(float(COUVERTURE), 2)
+    try:                                                                   # idée 45 : chute, réaction ou début, d'après les vues
+        import couverture as CV_
+        t_cv = CV_.choisir({"chute": ph[-1]["deb"] + 0.4 if ph else None, "reaction": COUVERTURE if fortes else None,
+                            "debut": ph[0]["deb"] + 0.6 if ph else None})
+        if t_cv is not None and not os.environ.get("COUVERTURE_MS_FIXE"):
+            COUVERTURE_MS[0] = int(max(0.5, min(t_cv, total - 0.5)) * 1000); sk["_type_couverture"] = CV_.DERNIER[0]
+    except Exception as e: print(f"couverture par les statistiques impossible ({str(e)[:100]})", flush=True)
     CARTES = {k: carte(tr[4]) for k, tr in enumerate(transitions) if tr[2] == "carton"}
     GELEE = {}
 
@@ -1245,6 +1254,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
         f_ = np.maximum(0.17 * (sol_ > 0.5), 0.11 * (mur_ > 0.5)).astype(np.float32)
         if not f_.any(): return
         f_ = cv2.resize(f_, (W, H), interpolation=cv2.INTER_LINEAR)[..., None]
+        if _RAPIDE.ASSOMBRIR is not None and f_.dtype == np.float32: _RAPIDE.ASSOMBRIR(img, f_); return   # (une passe compilée, mêmes pixels)
         img[:] = (img.astype(np.float32) * (1 - f_)).astype(np.uint8)
 
     def composer_ssaa(img, liste, sol_y=None):
@@ -1273,6 +1283,8 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
         if B and OMBRES:
             try: ombres_portees(img, a_c, (x0 // 2, y0 // 2, x1 // 2, y1 // 2), liste, sol_y)
             except Exception as e_: print(f"ombre portée impossible : {e_}", flush=True)
+        if _RAPIDE.COLLER is not None and a_o.dtype == a_c.dtype == coul.dtype == np.float32:   # une passe compilée, mêmes pixels
+            _RAPIDE.COLLER(img[y0 // 2:y1 // 2, x0 // 2:x1 // 2], a_o, a_c, coul); return
         Z = img[y0 // 2:y1 // 2, x0 // 2:x1 // 2].astype(np.float32)
         Z = Z * (1 - 0.2 * a_o)                                            # ombre au sol : le décor assombri de 20 %
         img[y0 // 2:y1 // 2, x0 // 2:x1 // 2] = np.clip(Z * (1 - a_c) + coul, 0, 255).astype(np.uint8)

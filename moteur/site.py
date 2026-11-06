@@ -159,6 +159,10 @@ def application(nom):
                  "description": "Vérifier et publier les vidéos Petits.Dramas sur TikTok.",
                  # idée 1 : dans l'appli TikTok, « Partager » → Petits.Dramas : le lien arrive dans l'onglet TikTok, prêt à fabriquer
                  "share_target": {"action": "./?partage=1", "method": "GET", "params": {"title": "titre", "text": "texte", "url": "lien"}},
+                 # raccourcis (appui long sur l'icône de l'appli, Android surtout) : lancer une vidéo, une chaîne, voir ses vidéos
+                 "shortcuts": [{"name": "🎲 Son au hasard", "short_name": "Son au hasard", "url": "./?raccourci=hasard", "icons": [{"src": "logo-192.png", "sizes": "192x192"}]},
+                               {"name": "🎲 Lancer 3 vidéos", "short_name": "3 vidéos", "url": "./?raccourci=chaine3", "icons": [{"src": "logo-192.png", "sizes": "192x192"}]},
+                               {"name": "🎬 Mes vidéos TikTok", "short_name": "Mes vidéos", "url": "./?raccourci=mes", "icons": [{"src": "logo-192.png", "sizes": "192x192"}]}],
                  "icons": [{"src": f"logo-{t}.png", "sizes": f"{t}x{t}", "type": "image/png", "purpose": "any"} for t in (192, 512)] +
                           [{"src": f"logo-{t}-maskable.png", "sizes": f"{t}x{t}", "type": "image/png", "purpose": "maskable"} for t in (192, 512)]}
     json.dump(manifeste, open(os.path.join(SITE, "manifest.webmanifest"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
@@ -341,6 +345,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
 </style></head><body data-onglet="accueil">
 <header><h1><img src="logo-192.png" alt="" style="width:44px;height:44px;border-radius:12px;vertical-align:-10px;margin-right:10px">__NOM__</h1><div class="sous">Régie de la chaîne · <span id="cnx">⚪ …</span> <button id="rafraichir" title="Rafraîchir" aria-label="Rafraîchir" style="padding:2px 9px;font-size:15px;background:transparent;border:1px solid var(--ligne);color:inherit;border-radius:999px;cursor:pointer">🔄</button></div><div id="tirer" style="display:none;text-align:center;font-size:14px;padding:6px">↓ Relâchez pour rafraîchir</div>
 <button id="installer" style="display:none;margin-top:10px;padding:9px 16px;font-size:14px;font-weight:700;background:var(--jaune);color:#111">📲 Installer l'application</button></header>
+<div id="panneGH" class="alerte" style="display:none;margin:8px 12px 0"></div>
 <nav class="onglets"><button class="onglet actif" data-o="accueil"><span class="ic">🏠</span><span class="nom">Accueil</span></button><button class="onglet" data-o="videos"><span class="ic">🎬</span><span class="nom">Vidéos</span></button><button class="onglet" data-o="tiktok"><span class="ic">🎵</span><span class="nom">TikTok</span></button><button class="onglet" data-o="stats"><span class="ic">📊</span><span class="nom">Stats</span></button><button class="onglet" data-o="config"><span class="ic">⚙️</span><span class="nom">Réglages</span></button></nav>
 <main>
  <!-- ======================================================== ACCUEIL -->
@@ -395,7 +400,9 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <p class="note">Un profil par ligne (@pseudo ou lien du profil). Le robot y prend une vidéo au hasard, jamais déjà utilisée, et fabrique la vidéo sur son son.</p>
     <label>Profils<div class="jeton"><textarea data-var="PROFILS_TIKTOK" data-def="" data-texte="1" maxlength="3000" rows="5" placeholder="@profil1&#10;@profil2&#10;https://www.tiktok.com/@profil3"></textarea><button class="second" data-enr="PROFILS_TIKTOK" style="flex:none;padding:10px 14px">OK</button></div></label>
     <button class="second" id="tkConnus" style="width:100%;margin-bottom:6px">➕ Ajouter les profils déjà connus</button>
-    <p class="note" id="tkConnusNote"></p></details>
+    <p class="note" id="tkConnusNote"></p>
+    <label>🚫 Profils à ne jamais reprendre (liste noire)<div class="jeton"><textarea data-var="PROFILS_INTERDITS" data-def="" data-texte="1" maxlength="2000" rows="2" placeholder="@profil_qui_a_reclame"></textarea><button class="second" data-enr="PROFILS_INTERDITS" style="flex:none;padding:10px 14px">OK</button></div></label>
+    <p class="note">Ces profils ne sont jamais tirés au hasard, même s'ils sont dans la liste ci-dessus. Les profils dont la bio interdit la reprise (« ne pas reprendre », « no repost »…) sont écartés tout seuls.</p></details>
   <details class="groupe repliTk" data-cle="lancer" open><summary>🎲 Lancer des vidéos (sons au hasard)</summary>
     <button class="action" id="tkHasard">🎲 Une vidéo maintenant (son au hasard des profils)</button>
     <div id="tkSuiviH" class="note"></div>
@@ -408,17 +415,22 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <p class="note">Planning à part : il ne touche jamais au planning des sketchs.</p>
     <div class="auto"><div class="txt"><b>Activées</b><small>Une vidéo sur un son des profils à chaque heure ci-dessous.</small></div><button class="inter" data-var="FREQUENCE_TIKTOK" data-def="0" data-bascule="1"></button></div>
     <label>Heures (séparées par « ; »)<div class="jeton"><input data-var="HEURE_TIKTOK" data-def="14:00" data-texte="1" maxlength="60" placeholder="ex. 14:00 ; 21:30"><button class="second" data-enr="HEURE_TIKTOK" style="flex:none;padding:10px 14px">OK</button></div></label>
-    <p class="note">Vidéo prête 20 à 40 min après l'heure. S'il n'y a aucun son utilisable, pas de vidéo cette fois (jamais de sketch à la place).</p></details>
+    <p class="note">Vidéo prête 20 à 40 min après l'heure. S'il n'y a aucun son utilisable, pas de vidéo cette fois (jamais de sketch à la place).</p>
+    <div class="auto"><div class="txt"><b>🌙 Pré-écoute la nuit</b><small>Vers 2 h, le robot écoute à l'avance un son par heure ci-dessus : la vidéo de la journée passe directement au dessin (plus rapide, sons ratés écartés la nuit).</small></div><button class="inter" data-var="PRE_ECOUTE" data-def="1" data-bascule="1"></button></div></details>
   <details class="groupe repliTk" data-cle="publi" id="pubAuto"><summary>📤 Publication automatique</summary>
     <p class="note">Cochez « À publier » sur les vidéos que vous avez vérifiées : chaque jour à l'heure choisie, le robot publie sur TikTok la plus ancienne vidéo cochée pas encore publiée (dans l'ordre où vous les avez cochées).</p>
     <div class="auto"><div class="txt"><b>Activée</b><small>Une vidéo cochée publiée par jour (ou deux), même appli fermée.</small></div><button class="inter" data-var="PUBLI_AUTO" data-def="0" data-bascule="1"></button></div>
     <div class="auto"><div class="txt"><b>Heure choisie par les statistiques</b><small>L'heure où vos vidéos font le plus de vues (sinon l'heure fixe ci-dessous).</small></div><button class="inter" data-var="PUBLI_HEURE_AUTO" data-def="0" data-bascule="1"></button></div>
     <label>Heure de publication (heure de Paris)<div class="jeton"><input data-var="PUBLI_HEURE" data-def="18:00" data-texte="1" maxlength="5" type="time" placeholder="18:00"><button class="second" data-enr="PUBLI_HEURE" style="flex:none;padding:10px 14px">OK</button></div></label>
     <div class="auto"><div class="txt"><b>Deux vidéos par jour</b><small>Une 2e vidéo cochée publiée à la 2e heure ci-dessous (au moins une heure d'écart).</small></div><button class="inter" data-var="PUBLI_DEUX" data-def="0" data-bascule="1"></button></div>
+    <div class="auto"><div class="txt"><b>♻️ Rediffusion</b><small>Quand aucune vidéo cochée n'attend, la vidéo d'il y a plus de 3 mois qui a fait le plus de vues repart (jamais deux fois en 3 mois).</small></div><button class="inter" data-var="REDIFFUSION" data-def="1" data-bascule="1"></button></div>
     <label>2e heure de publication (heure de Paris)<div class="jeton"><input data-var="PUBLI_HEURE2" data-def="12:00" data-texte="1" maxlength="5" type="time" placeholder="12:00"><button class="second" data-enr="PUBLI_HEURE2" style="flex:none;padding:10px 14px">OK</button></div></label>
     <p class="note" id="pubResume"></p>
     <h3 style="margin:14px 0 6px">🗓️ Calendrier de publication</h3><div id="calendrier"></div>
     <p class="note">Jamais deux sons du même profil d'affilée : le robot alterne les comptes d'origine (l'ordre ci-dessus en tient compte).</p></details>
+  <details class="groupe repliTk" data-cle="recette"><summary>📈 Ce qui marche (recette du succès)</summary>
+    <p class="note">Les vues de vos vidéos comparées selon ce qui les compose (profil du son, lieu, durée, animal, heure, couverture…). Mis à jour chaque jour avec les statistiques ; le robot s'en sert pour choisir ses sons.</p>
+    <div id="recette"><p class="note">Pas encore assez de vidéos avec des vues (3 par critère au moins).</p></div></details>
   <details class="groupe repliTk" data-cle="videos" open><summary>🎬 Mes vidéos TikTok</summary>
     <details id="filtresRepli"><summary>🔎 Rechercher et filtrer</summary><div class="filtresTk"><input id="fTexte" type="search" placeholder="🔎 Rechercher (titre, légende)">
       <select id="fEtat"><option value="">Toutes</option><option value="verifier">⚠️ À vérifier</option><option value="cochees">✅ À publier</option><option value="publiees">📤 Publiées</option><option value="non">Non publiées</option></select>
@@ -437,6 +449,8 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <div class="jeton"><input id="jeton2" type="password" placeholder="github_pat_…" autocomplete="off"><button class="second" id="garder2" style="flex:none;padding:10px 14px">Connecter</button></div>
   </section>
   <p class="note" id="cfgEtat"></p>
+  <details class="groupe"><summary>⏱️ Temps de fabrication <span id="resumeTemps"></span></summary>
+    <p class="note">Temps passé à chaque étape de la dernière vidéo (⚠️ = au moins deux fois plus lent que d'habitude).</p><div id="tempsFab" class="barres"><p class="note">Visible après la prochaine vidéo.</p></div></details>
   <details class="groupe" open><summary>🗂️ Onglets affichés</summary>
     <p class="note">Décochez les onglets que vous n'utilisez pas (sur tous vos appareils). 🎵 TikTok et ⚙️ Réglages restent toujours là.</p>
     <label class="coche"><input type="checkbox" data-onglet-vu="accueil"> 🏠 Accueil</label>
@@ -602,6 +616,12 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
       <div id="quiListe"></div>
       <button class="second" id="quiOk" disabled style="width:100%;margin-top:6px">🔁 Refaire avec ces personnages</button>
     </div>
+    <div id="castBloc" style="display:none;margin-top:10px">
+      <b>🎭 Changer les personnages</b>
+      <p class="note">Choisissez ce qui doit changer pour chaque personnage (le reste ne bouge pas), puis « Refaire ». Même son, mêmes répliques.</p>
+      <div id="castListe"></div>
+      <button class="second" id="castOk" disabled style="width:100%;margin-top:6px">🔁 Refaire avec ces personnages</button>
+    </div>
     <div id="remBloc" style="display:none;margin-top:10px">
       <b>💬 Dis ce qui ne va pas, le robot corrige</b>
       <p class="note">Écris (ou dicte avec 🎤) ce qui ne va pas, comme à un monteur : « à 12 s c'est l'autre qui parle », « elle devrait être dans une cuisine », « le chat doit être noir ». Le robot comprend la remarque et refait la vidéo sur le même son.</p>
@@ -657,6 +677,18 @@ function dessinerCnx(){                                                    // vo
     :!lireJeton()?["⚪","régie non connectée"]:s==null?["⚪","…"]:["🟢","à jour "+(s<60?"il y a "+s+" s":"il y a "+Math.round(s/60)+" min")];
   const h=`${c} ${t}`; if(z.textContent!==h) z.textContent=h;
 }
+// mode panne : GitHub (Actions, API, Pages) en panne -> bandeau clair au lieu d'une barre figée (githubstatus.com, toutes les 10 min)
+async function verifierPanne(){
+  try{
+    const r=await fetch("https://www.githubstatus.com/api/v2/components.json",{cache:"no-store"}); if(!r.ok) return;
+    const c=((await r.json()).components||[]).filter(x=>/^(Actions|API Requests|Pages)$/.test(x.name)&&x.status!=="operational");
+    const nom={"Actions":"les fabrications (GitHub Actions)","API Requests":"les boutons du site (API GitHub)","Pages":"la mise en ligne du site (GitHub Pages)"};
+    const z=$("#panneGH"); if(!z) return;
+    z.style.display=c.length?"":"none";
+    z.innerHTML=c.length?`🛠️ <b>Panne chez GitHub</b> en ce moment : ${c.map(x=>nom[x.name]||x.name).join(", ")} ${c.some(x=>x.status==="major_outage")?"ne marchent pas":"sont ralenti(e)s"}. Ce n'est pas le robot : les vidéos repartent toutes seules quand GitHub est réparé (aucune demande perdue). <a style="color:var(--bleu)" href="https://www.githubstatus.com" target="_blank" rel="noopener">Suivre la panne ↗</a>`:"";
+  }catch(e){}
+}
+setTimeout(verifierPanne,2500); setInterval(verifierPanne,600000);
 setInterval(dessinerCnx,5000); addEventListener("online",dessinerCnx); addEventListener("offline",()=>marquerCnx("horsligne"));
 function majBandeau(){$("#bandeauCnx").style.display=lireJeton()?"none":""; $("#oublier").style.display=lireJeton()?"":"none"}
 // ------------------------------------------------ interrupteur publication automatique (Réglages → Publication)
@@ -695,7 +727,9 @@ function voyantsDirect(){
   const c=CRED, e=(k,nom,quoi)=>{const x=ETATS[c[k]]||["gris","pas encore vérifié"]; return [k,x[0],`${nom} : ${x[1]}${quoi&&c[k]==="ok"?" — "+quoi:""}`]};
   const l=[e("claude","Claude","écriture et doublage"),e("mistral","Mistral (gratuit)","relais de Claude pour l'écriture"),e("gemini","Gemini (gratuit)","relais de Claude pour les images et le contrôle"),e("groq","Groq (gratuit)","écoute des voix et relecture du dialogue")];
   const v=c.elevenlabs; l.push(["voix",(ETATS[v]||["gris"])[0],"ElevenLabs : "+((ETATS[v]||[0,"pas encore vérifié"])[1])+(v==="epuise"?", le robot utilise les voix gratuites":"")]);
-  const m=c.modal; l.push(["decors",(ETATS[m]||["gris"])[0],"Modal : "+((ETATS[m]||[0,"pas encore vérifié"])[1])+(m==="ok"?" (décors IA)":"")]);
+  const m=c.modal, dep=typeof c.modal_depense==="number"?` — ${c.modal_depense.toFixed(2).replace(".",",")} $ dépensés ce mois sur ${Math.round(c.modal_plafond||30)} $`:"";
+  l.push(m==="budget"?["decors","orange","Modal : budget du mois presque atteint, coupé jusqu'au mois prochain (décors dessinés)"+dep]
+    :["decors",(ETATS[m]||["gris"])[0],"Modal : "+((ETATS[m]||[0,"pas encore vérifié"])[1])+(m==="ok"?" (décors IA)":"")+dep]);
   if(c.ia==="aucune") l.unshift(["claude","rouge","Aucune IA ne répond : le robot utilise les sketchs de secours"]);
   return l;
 }
@@ -715,6 +749,25 @@ function voyants(){
     :o.decors==="dessines"?["rouge","Modal : décors IA indisponibles ou coupés, le robot dessine les décors"]:g("Modal : pas encore d'information");
   if(o&&o.claude==="ok"&&o.eco) c[1]="Claude : OK (mode économique)";
   return [["claude",...c],["voix",...v],["decors",...d]];
+}
+// 📈 recette du succès (episodes/recette.json, moteur/recette.py)
+function rendreRecette(r){
+  const z=$("#recette"); if(!z) return;
+  const ligne=(x,bon)=>`<div><span style="flex:0 0 62%">${bon?"✅":"⚠️"} ${String(x.critere).replace(/</g,"&lt;")} : <b>${String(x.valeur).replace(/</g,"&lt;")}</b></span><span class="b" style="width:${Math.min(30,Math.round(x.fois*12))}%;${bon?"":"background:var(--rouge)"}"></span><b>×${String(x.fois).replace(".",",")}</b></div>`;
+  z.innerHTML=`<p class="note">${r.videos} vidéo(s) avec des vues, ${r.moyenne} vues en moyenne. « ×2 » = deux fois plus de vues que la moyenne.</p>`+
+    (r.plus.length?`<p class="note"><b>Ce qui marche</b></p><div class="barres">${r.plus.map(x=>ligne(x,true)).join("")}</div>`:"")+
+    (r.moins.length?`<p class="note"><b>Ce qui marche moins</b></p><div class="barres">${r.moins.map(x=>ligne(x,false)).join("")}</div>`:"")+
+    (!r.plus.length&&!r.moins.length?`<p class="note">Rien de net pour l'instant : il faut plus de vidéos.</p>`:"");
+}
+// ⏱️ temps par étape de la dernière vidéo (historique "temps", "temps_lents") et moyenne des 10 dernières
+function rendreTemps(h){
+  const avec=(h||[]).filter(e=>e.fichier&&e.temps&&typeof e.temps==="object"&&!e.essai); if(!avec.length||!$("#tempsFab")) return;
+  const d=avec[avec.length-1], lents=new Set(d.temps_lents||[]), tot=o=>Object.values(o).reduce((a,x)=>a+(+x||0),0);
+  const max=Math.max(...Object.values(d.temps).map(x=>+x||0),1), mn=x=>x>=60?Math.round(x/60)+" min":Math.round(x)+" s";
+  const dix=avec.slice(-10), moy=dix.reduce((a,e)=>a+tot(e.temps),0)/dix.length;
+  $("#tempsFab").innerHTML=`<p class="note">« ${String(d.titre||"").replace(/</g,"&lt;").slice(0,60)} » : <b>${mn(tot(d.temps))}</b> en tout (moyenne des ${dix.length} dernières : ${mn(moy)}).</p>`+
+    Object.entries(d.temps).map(([k,x])=>`<div><span style="flex:0 0 46%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${lents.has(k)?"⚠️ ":""}${k.replace(/</g,"&lt;")}</span><span class="b" style="width:${Math.max(2,Math.round(x/max*40))}%;${lents.has(k)?"background:var(--rouge)":""}"></span><b>${mn(x)}</b></div>`).join("");
+  $("#resumeTemps").textContent=lents.size?"⚠️":"";
 }
 function rendreOutils(){
   const l=voyants();
@@ -751,13 +804,14 @@ async function lireEpisode(nom){
 async function actualiserStats(){
   if(!CONF.depot) return;
   try{
-    const [h,st,cr]=await Promise.all([lireEpisode("historique.json").catch(()=>null),lireEpisode("stats.json").catch(()=>null),lireEpisode("credits.json").catch(()=>null)]);
+    const [h,st,cr,rc]=await Promise.all([lireEpisode("historique.json").catch(()=>null),lireEpisode("stats.json").catch(()=>null),lireEpisode("credits.json").catch(()=>null),lireEpisode("recette.json").catch(()=>null)]);
+    if(rc&&rc.videos) rendreRecette(rc);
     if(cr&&cr.date){CRED=cr; rendreOutils(); rendreQuotaIA()}
     if(Array.isArray(h)){const par={}; h.forEach(e=>{if(e.fichier)par[e.fichier]=e});
       try{const K=["fichier","titre","date","tag","web","filiere","source_audio","theme","manuel","legende","publie","vues","format","avis","note","note_auteur","programmee","duree","likes","commentaires","partages","a_verifier","confiance"];
         localStorage.setItem("jt_historique",JSON.stringify(h.filter(e=>e.fichier).map(e=>Object.fromEntries(K.filter(k=>e[k]!==undefined).map(k=>[k,e[k]])))))}catch(e){}   // copie légère pour la prochaine ouverture
       DATA.forEach(v=>{const e=par[v.fichier]; if(!e)return; ["vues","likes","commentaires","partages","publie","couts","programmee","a_verifier","confiance"].forEach(k=>{if(e[k]!==undefined)v[k]=e[k]})});
-      ajouterNouvelles(h);
+      ajouterNouvelles(h); rendreTemps(h);
       const faites=h.filter(e=>e.fichier), der=faites[faites.length-1];
       if(der){OUTILS={outils:(der.outils&&typeof der.outils==="object")?der.outils:null,date:der.date||"",titre:der.titre||""}; rendreOutils()}}
     if(st&&st.compte){const vids=st.videos||[]; STATS_LIVE={compte:st.compte,maj:st.maj||"",videos:vids.length,
@@ -1144,7 +1198,36 @@ $("#comparer").onclick=()=>{
 $("#coteFermer").onclick=()=>{$("#cote").style.display="none"; $("#coteOrig").innerHTML=""; $("#coteNous").pause()};
 // ------------------------------------------------ idée 6 : corriger qui parle (réplique par réplique)
 const PERSOS={presentateur:"Personnage 1",invite:"Personnage 2",envoyee:"Personnage 3",narrateur:"Voix off"};
+// ------------------------------------------------ idée 11 : menus « 🎭 Changer les personnages » (sans IA : refaire « casting|{json} »)
+const CAST_MENUS=[["genre","Homme / femme",[["h","Homme"],["f","Femme"]]],["age","Âge",[["enfant","Enfant"],["ado","Ado"],["adulte","Adulte"],["senior","Senior"]]],
+  ["silhouette","Silhouette",[["petit","Le petit (grosse tête)"],["grand","Le grand (bâton)"]]],
+  ["espece","Humain, animal ou objet",[["humain","Humain"],["chat","Chat"],["chien","Chien"],["lapin","Lapin"],["souris","Souris"],["oiseau","Oiseau"],["poisson","Poisson"],["steak","Steak"],["pizza","Pizza"],["oeuf","Œuf"],["banane","Banane"],["croissant","Croissant"],["voiture","Voiture"],["frigo","Frigo"],["telephone","Téléphone"]]],
+  ["cheveux","Coiffure",[["court","Courts"],["raie","Raie"],["rase","Rasés"],["boucles","Bouclés"],["herisse","Hérissés"],["afro","Afro"],["chauve","Chauve"],["long","Longs"],["carre","Carré"],["queue","Queue de cheval"],["chignon","Chignon"],["tresses","Tresses"],["frange","Frange"]]],
+  ["haut","Haut",[["tshirt","T-shirt"],["capuche","Sweat à capuche"],["chemise","Chemise"],["pull","Pull"],["costume","Costume"],["survetement","Survêtement"],["debardeur","Débardeur"],["polo","Polo"],["gilet","Gilet"],["robe","Robe"],["pyjama","Pyjama"]]],
+  ["c_haut","Couleur du haut",[["rouge","Rouge"],["bleu","Bleu"],["bleu marine","Bleu marine"],["vert","Vert"],["jaune","Jaune"],["noir","Noir"],["blanc","Blanc"],["gris","Gris"],["rose","Rose"],["violet","Violet"],["orange","Orange"],["marron","Marron"]]],
+  ["chapeau","Chapeau",[["aucun","Aucun"],["casquette","Casquette"],["bonnet","Bonnet"],["chapeau","Chapeau"],["beret","Béret"],["bob","Bob"],["couronne","Couronne"],["bandana","Bandana"]]],
+  ["lunettes","Lunettes",[["oui","Oui"],["non","Non"]]]];
+function afficherCasting(v){
+  const b=$("#castBloc"), l=$("#castListe"); l.innerHTML="";
+  if(!v.reps||!v.reps.length||!lireJeton()){b.style.display="none";return}
+  b.style.display="block"; $("#castOk").disabled=true;
+  const presents=[...new Set(v.reps.map(r=>r[0]).filter(p=>PERSOS[p]&&p!=="narrateur"))];
+  presents.forEach(p=>{
+    const g=document.createElement("details"); g.className="groupe"; g.innerHTML=`<summary>${PERSOS[p]} <small>« ${(v.reps.find(r=>r[0]===p)||["",""])[1].slice(0,40).replace(/</g,"&lt;")}… »</small></summary>`;
+    CAST_MENUS.forEach(([cle,nom,opts])=>{
+      const lab=document.createElement("label"); lab.textContent=nom; const s=document.createElement("select"); s.dataset.p=p; s.dataset.cle=cle;
+      s.innerHTML=`<option value="">— inchangé —</option>`+opts.map(([val,t])=>`<option value="${val}">${t}</option>`).join("");
+      s.onchange=()=>{$("#castOk").disabled=!lireJeton()||![...l.querySelectorAll("select")].some(x=>x.value)}; lab.appendChild(s); g.appendChild(lab)});
+    l.appendChild(g)});
+}
+$("#castOk").onclick=()=>{
+  const v=DATA[choisie], c={};
+  [...$("#castListe").querySelectorAll("select")].filter(s=>s.value).forEach(s=>{(c[s.dataset.p]=c[s.dataset.p]||{})[s.dataset.cle]=s.value});
+  if(!Object.keys(c).length) return;
+  lancerFlux("emission.yml",$("#castOk"),"🎭 Personnages changés : la nouvelle version apparaîtra à côté de l'ancienne (15 à 40 min).",{refaire:v.fichier+"|casting|"+JSON.stringify(c)},$("#suivi"));
+};
 function afficherQui(v){
+  afficherCasting(v);
   const b=$("#quiBloc"), l=$("#quiListe"); l.innerHTML="";
   if(!v.reps||!v.reps.length){b.style.display="none";return}
   b.style.display="block"; $("#quiOk").disabled=true;
@@ -1657,6 +1740,14 @@ try{appliquerOnglets(localStorage.getItem("onglets_masques")||"")}catch(e){}
   const d_=$("#tkLien").closest("details"); if(d_) d_.open=true;
   $("#tkLien").value=m[0].replace(/[).,;]+$/,""); $("#tkLien").scrollIntoView({behavior:"smooth",block:"center"});
   $("#tkCreer").classList.add("pulse"); toast("Lien TikTok reçu ✓ Touchez « Fabriquer sur ce son »");
+})();
+(function raccourciRecu(){                                                 // raccourcis de l'icône (manifeste « shortcuts »)
+  const r=new URLSearchParams(location.search).get("raccourci"); if(!r) return;
+  history.replaceState(null,"",location.pathname); allerOnglet("tiktok");
+  const ouvrir=cle=>{const d=document.querySelector(`details.repliTk[data-cle="${cle}"]`); if(d){d.open=true; d.scrollIntoView({behavior:"smooth",block:"start"})}};
+  if(r==="mes"){ouvrir("videos");return}
+  ouvrir("lancer");
+  setTimeout(()=>{ if(r==="hasard"){ if(confirm("Lancer une vidéo sur un son au hasard de vos profils ?")) $("#tkHasard").click() } else if(r==="chaine3"){$("#tkNb").value=3; $("#tkSerie").click()} },400);   // (confirmation demandée par le bouton)
 })();
 if(lireJeton()) chargerReglages();                                        // onglets cachés et vidéos cochées : réglages de tous les appareils
 if(!CONF.depot) $("#autoAide").textContent="Site de test : boutons du robot inactifs.";

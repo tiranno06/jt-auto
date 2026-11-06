@@ -406,6 +406,41 @@
   a vu dans l'original (`video_ia.genres_par_voix` -> personnages "genre_vu") ; 4. l'IA de mise en scène (« homme » / « femme »
   compris) ; 5. la hauteur moyenne. Un personnage à voix d'homme n'est jamais en robe / jupe (sauf mariée), coiffures déjà gardées
   par `humain.POUR_H / POUR_F`.
+- **Liste du 6 novembre 2026 (choix de l'auteur 1, 2, 3, 4, 5, 7, 11, 18, 21, 23, 26, 27, 37, 40, 41, 45, 46, 48, 50)** :
+  **machine toute prête** (1 + 2) : bibliothèques installées par `uv` (pip en repli) dans ~/venv, gardé en cache GitHub (clé = version
+  de Python + requirements.txt + contraintes.txt ; yt-dlp toujours mis à jour) ; gain mesuré modeste (~1 à 2 min, l'installation prenait
+  ~3 min sur 25) ; **pré-écoute la nuit** (3, option « 🌙 Pré-écoute la nuit » de l'onglet TikTok, PRE_ECOUTE=0 pour couper) :
+  vers 2 h (garde.yml → pre_ecoute.yml, seulement si les vidéos TikTok automatiques sont activées) le robot écoute à l'avance un son par
+  heure de HEURE_TIKTOK (STOCK_SONS, 1 à 4) et les range dans la release « sons-prets » (3 jours) ; la fabrication prend le plus ancien
+  son prêt (`pre_ecoute.prendre`, états de l'écoute remis : événements, analyse Gemini, ressemblance des voix) et passe au dessin ;
+  **dessin compilé** (4, `moteur/rapide.py`, Numba) : aquarelle, hachures, collage des personnages et ombre portée en une passe
+  compilée, EXACTEMENT les mêmes pixels (vérifié image par image : 111 s → 74 s sur la vidéo d'essai, −33 %) ; NUMBA=0 = NumPy ;
+  (5, personnage immobile gardé en mémoire : mesuré, rien à gagner, les personnages respirent et clignent à chaque image) ;
+  **⏱️ temps par étape** (7, `progression.chrono` → historique "temps", "temps_lents" si 2 fois plus lent que la médiane des 20
+  dernières ; carte « ⏱️ Temps de fabrication » des Réglages) ; **🎭 Changer les personnages** (11, fiche d'une vidéo TikTok : homme /
+  femme, âge, silhouette, animal ou objet, coiffure, haut, couleur, chapeau, lunettes → refaire « fichier|casting|{json} » →
+  sk["_casting_auteur"] → `studio.casting_auteur`, passe avant tout, sans IA) ; **raccourcis de l'icône** (18, manifeste « shortcuts » :
+  son au hasard, 3 vidéos, mes vidéos ; confirmation avant de lancer) ; **sous-titres de l'original** (21, `moteur/ocr.py`, RapidOCR,
+  une image / 0,6 s, OCR=0) : comparés LETTRE par LETTRE (la lecture colle les mots et perd les accents) ; si ≥ 60 % des lettres
+  entendues sont écrites : les mots différents passent à l'arbitrage de l'IA (`equipe._arbitrer`), et une couleur de sous-titre par
+  voix (≥ 75 %) remet les phrases mal rangées sur leur voix (jamais une voix sûre) ; **tendances** (23 ; le Creative Center de TikTok
+  refuse les robots) : hashtag récent chez 2 de nos créateurs au moins (+20) ou recherche qui monte en France (Google Trends, +15),
+  SONS_TENDANCE=0 ; **parties** (26 + 37, `moteur/suites.py`, SUITES=0) : « partie 2 / pt2 / épisode 3 / 2/3 » lu dans le titre de
+  l'original (sk["doublage"]["titre"] → historique "titre_source") ; la suite d'une vidéo déjà faite passe devant au tirage (+60) et
+  reprend les mêmes personnages (sk["_casting_final"] gardé dans chaque sketch, homme avec homme, femme avec femme) ; carte de fin
+  « Partie N+1 bientôt ! Abonne-toi » et ligne « ➡️ Partie N+1 bientôt sur la chaîne ! » dans la description ; **liste noire** (27,
+  PROFILS_INTERDITS + bio qui interdit la reprise lue par tikwm) ; **♻️ rediffusion** (40, REDIFFUSION, activée) : quand aucune vidéo
+  cochée n'attend, la vidéo publiée il y a plus de 3 mois qui a fait le plus de vues repart (publier.yml forcer + rediffusion=1,
+  « ♻️ On la remet pour ceux qui l'ont ratée 😂 », historique "rediffusee", jamais deux fois en 3 mois) ; **📈 recette du succès** (41,
+  `moteur/recette.py` après stats.py → episodes/recette.json, bloc « 📈 Ce qui marche » de l'onglet TikTok ; historique "recette" :
+  lieu, animal, personnages, partie ; la durée qui marche donne ±10 au potentiel d'un son, RECETTE=0) ; **couverture par les stats**
+  (45, `moteur/couverture.py` : chute, réaction ou début, alternées puis la meilleure à 70 % ; historique "type_couverture",
+  COUVERTURE_AUTO=0) ; **images de référence** (46, `moteur/references.py`, tests/references/*.png, TestImagesDeReference ; changement
+  VOULU du dessin : `python moteur/references.py --refaire` puis regarder les images) ; **vrai compteur Modal** (48,
+  `moteur/budget_modal.py` : `modal billing summary --json` au départ de chaque fabrication et dans credits.yml ; au-delà de
+  BUDGET_MODAL − 2 $ (30 $ par défaut) Modal est coupé pour la fabrication (replis gratuits), alerte une fois par jour, voyant orange
+  et montant sur le site) ; **mode panne** (50 : githubstatus.com lu toutes les 10 min, bandeau « 🛠️ Panne chez GitHub » si Actions,
+  API ou Pages ne marchent pas).
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.

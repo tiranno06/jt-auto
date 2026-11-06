@@ -29,6 +29,11 @@ if REFAIRE:
     _f, _, _mode = REFAIRE.partition("|"); _mode = _mode or "texte"
     _mode, _, _qui = _mode.partition("|")                                  # « qui|0=invite;3=presentateur » ou « remarque|texte »
     REMARQUE = _qui.strip() if _mode == "remarque" else ""
+    CASTING_AUTEUR = {}                                                    # « casting|{json} » : menus « 🎭 Changer les personnages »
+    if _mode == "casting":
+        try: CASTING_AUTEUR = json.loads(_qui) if _qui.strip().startswith("{") else {}
+        except ValueError: CASTING_AUTEUR = {}
+        _qui = ""
     if REMARQUE: _qui = ""
     for _x in _qui.split(";"):
         _k, _, _r = _x.partition("=")
@@ -38,7 +43,7 @@ if REFAIRE:
     _p = next((x for x in (os.path.join(_d, os.path.splitext(_f)[0] + ".json"), os.path.join(_d, _f + ".json")) if os.path.exists(x)), "")
     SK_ANCIEN = json.load(open(_p, encoding="utf-8")) if _p else None     # (le sketch est rangé sans « .mp4 » dans son nom)
     if ANCIEN: os.environ["FORMAT"] = ANCIEN.get("format") if ANCIEN.get("format") in ("mini", "libre") else "mini"
-    if _mode in ("voix", "decors", "qui", "remarque") and SK_ANCIEN is None:
+    if _mode in ("voix", "decors", "qui", "remarque", "casting") and SK_ANCIEN is None:
         print("Sketch d'origine non conservé (vidéo plus ancienne) : on refait une nouvelle version du texte.", flush=True); _mode = "texte"
     REFAIRE_MODE = _mode
     if _mode == "voix": os.environ["VOIX_NOUVELLES"] = "1"              # « juste la voix » : d'autres voix de la banque que la dernière fois
@@ -46,7 +51,7 @@ if REFAIRE:
     if ANCIEN and _mode == "texte" and not THEME:                        # nouvelle version : même sujet, écrit à neuf
         THEME = ((ANCIEN.get("titre_affiche") or "") + " " + (ANCIEN.get("titre") or "")).strip() + " — " + (ANCIEN.get("accroche") or "")
 else:
-    REFAIRE_MODE = ""; REMARQUE = ""
+    REFAIRE_MODE = ""; REMARQUE = ""; CASTING_AUTEUR = {}
 if THEME and (os.environ.get("FORMAT") or "") not in ("mini", "libre"): os.environ["FORMAT"] = "mini"
 os.environ["FORMAT"] = FORMAT = format_du_jour(os.environ.get("FORMAT"), _hist)
 if FORMAT == "mini": os.environ["LONGUEUR"] = "eclair"                    # gag éclair : ~15 s
@@ -159,6 +164,9 @@ def main():
             print(f"Reprise {SUITE_NOM} impossible ({str(e)[:160]}) : la vidéo est refaite entièrement", flush=True); S = None
     PR.etape(3, "Reprise de la fabrication" if S else "Démarrage du robot", forcer=True)
     historique = lire("episodes/historique.json", [])
+    DEP_MODAL = None                                                       # vrai compteur Modal : coupé avant le plafond (30 $)
+    try: DEP_MODAL = __import__("budget_modal").verifier()
+    except Exception as e: print(f"Dépense Modal non lue ({str(e)[:100]})", flush=True)
     modal_ok = bool(os.environ.get("MODAL_TOKEN_ID") and os.environ.get("MODAL_TOKEN_SECRET"))
     if modal_ok:
         try:
@@ -180,7 +188,9 @@ def main():
     script = None; tiktok = None; DOUB = None; SECOURS = False
     import reseau
     CREDITS = reseau.verifier_credits()                                    # crédits vérifiés AU DÉPART : payant si possible, sinon gratuit tout de suite
-    try: __import__("credits").enregistrer(dict(CREDITS, modal="ok" if modal_ok else "absent"))   # voyants du site à jour
+    if DEP_MODAL is not None:
+        import budget_modal as _BM; CREDITS["modal_depense"] = DEP_MODAL; CREDITS["modal_plafond"] = _BM.plafond()
+    try: __import__("credits").enregistrer(dict(CREDITS, modal="ok" if modal_ok else ("budget" if DEP_MODAL is not None else "absent")))   # voyants du site à jour
     except Exception: pass
     def passer_en_secours(e):                                              # Claude ne répond pas (crédit épuisé) : outils gratuits
         print(f"Claude indisponible ({str(e)[:160]}) : bascule automatique sur un sketch de secours (outils gratuits pour l'écriture).", flush=True)
@@ -197,7 +207,10 @@ def main():
         import locuteurs
         seuil_v = float(os.environ.get("VOIX_DIFFERENTES") or 0.6)          # au-delà : voix trop proches (même personne qui fait les deux)
         garde_v, t_v = None, time.time()
-        for url_ in profils_tiktok.choisir(historique, essais=6):
+        if not os.environ.get("SKETCH_TEST", "").strip():                  # pré-écoute de la nuit : un son déjà écouté, s'il en reste
+            try: PROFIL_PREP = __import__("pre_ecoute").prendre(historique)
+            except Exception as e: print(f"Pré-écoute indisponible ({str(e)[:120]})", flush=True)
+        for url_ in ([] if PROFIL_PREP else profils_tiktok.choisir(historique, essais=6)):
             locuteurs.ETAT["ressemblance"] = None
             try: prep_ = doublage.preparer(url_)
             except Exception as e: print(f"  son de {url_} impossible ({str(e)[:160]}) : vidéo suivante", flush=True); continue
@@ -263,8 +276,11 @@ def main():
     if S:                                                                  # reprise : sketch, son et format déjà prêts
         import doublage
         sk, DOUB, fmt = S["sk"], S["DOUB"], S["fmt"]
-    elif REFAIRE_MODE in ("voix", "decors", "qui", "remarque"):            # mêmes répliques : on refait seulement les voix / les décors
+    elif REFAIRE_MODE in ("voix", "decors", "qui", "remarque", "casting"):   # mêmes répliques : on refait seulement les voix / les décors
         sk = SK_ANCIEN; sk["_monte"] = True
+        if CASTING_AUTEUR:                                                 # « 🎭 Changer les personnages » : choix gardés dans le sketch
+            sk["_casting_auteur"] = {r: dict((sk.get("_casting_auteur") or {}).get(r) or {}, **c) for r, c in CASTING_AUTEUR.items() if isinstance(c, dict)}
+            print(f"Changer les personnages : {', '.join(f'{r} → {c}' for r, c in sk['_casting_auteur'].items())}", flush=True)
         if REMARQUE:                                                       # « Dis ce qui ne va pas, le robot corrige » (moteur/remarque.py)
             try:
                 faits_r = __import__("remarque").appliquer(sk, REMARQUE)
@@ -273,7 +289,7 @@ def main():
         for k_, r_ in QUI.items():                                         # « Corriger qui parle » : chaque réplique au bon personnage
             if 0 <= k_ < len(sk.get("repliques") or []) and r_ in ("presentateur", "invite", "envoyee", "narrateur"): sk["repliques"][k_]["p"] = r_
         if QUI: print(f"Corriger qui parle : {len(QUI)} réplique(s) rendue(s) au bon personnage", flush=True)
-        if sk.get("doublage") and REFAIRE_MODE in ("qui", "remarque"):    # son TikTok : on garde la bande son d'origine
+        if sk.get("doublage") and REFAIRE_MODE in ("qui", "remarque", "casting"):   # son TikTok : on garde la bande son d'origine
             import doublage
             DOUB = list(doublage.depuis_sketch(sk)); fmt = "libre" if sk["doublage"].get("duree", 0) >= 60 else "mini"
         print(f"Refaire ({REFAIRE_MODE}) : « {sk.get('sujet')} », mêmes répliques", flush=True)
@@ -281,6 +297,8 @@ def main():
         import doublage
         sk, *DOUB = PROFIL_PREP[1] if PROFIL_PREP else doublage.preparer(tiktok)   # (déjà préparé quand il vient d'un profil)
         fmt = "libre" if sk["doublage"]["duree"] >= 60 else "mini"         # rangée en vidéo longue au-delà d'une minute
+        try: __import__("suites").preparer(sk, historique)                 # partie 1, 2… : fin « à suivre », mêmes personnages
+        except Exception as e: print(f"Parties : {str(e)[:120]}", flush=True)
     elif script:                                                           # script tapé : les répliques restent mot pour mot
         sk = ecrire.mettre_en_scene(script)
     elif test:                                                             # sketch écrit à la main (essai d'un style)
@@ -550,6 +568,11 @@ def main():
             if B_:                                                         # direction artistique : fiche de l'épisode + mémoire du studio
                 import studio
                 sk["realisation"] = {k: B_[k] for k in ("moment", "lieux", "gags", "ambiances", "source")}
+                try:                                                       # recette du succès (idée 41) : ce qui compose la vidéo
+                    F_ = B_.get("fiches") or {}
+                    sk["_recette"] = {"lieu": (B_.get("lieux") or [""])[0], "animal": any((f or {}).get("espece") for f in F_.values()),
+                                      "persos": len(F_), "partie": bool(sk.get("_partie"))}
+                except Exception: pass
                 sk["realisation"]["tenues"] = {r: c.get("haut") for r, c in B_["costumes"].items()}
                 sk["realisation"]["plans"] = [f"{q.get('plan')}/{q.get('mouvement')}" for q in cartoon.PH]
                 studio.memoriser(B_, cartoon.PH, duree, rapport_video or ("ok" if video_ok else ""), fichier=os.path.basename(base) + ".mp4")
@@ -627,10 +650,21 @@ def main():
     if sk.get("equipe"): historique[-1]["equipe"] = f"{sum(1 for l in sk['equipe'] if l.get('ok'))}/{len(sk['equipe'])} contrôles bons"
     if DOUB: historique[-1]["filiere"] = "tiktok"                         # vidéo sur un son TikTok : rangée à part des sketchs
     if DOUB: historique[-1]["source_audio"] = sk["doublage"]["source"]; historique[-1]["theme"] = "Bande son : " + sk["doublage"]["source"]
+    if DOUB and sk["doublage"].get("titre"): historique[-1]["titre_source"] = str(sk["doublage"]["titre"])[:200]   # titre de l'original (parties 1, 2…)
     historique[-1]["couts"] = couts(); print(f"Dépenses : {historique[-1]['couts']}", flush=True)
+    try:                                                                   # ⏱️ temps par étape (carte du site) + étapes anormalement lentes
+        historique[-1]["temps"] = PR.temps()
+        lents_ = PR.lents(historique[-1]["temps"], [h.get("temps") for h in historique[-21:-1] if h.get("filiere") == historique[-1].get("filiere")])
+        if lents_:
+            historique[-1]["temps_lents"] = [k for k, _, _ in lents_]
+            print("⏱️ Étapes plus lentes que d'habitude : " + ", ".join(f"{k} {v // 60} min (d'habitude {m // 60} min)" for k, v, m in lents_), flush=True)
+        print("⏱️ Temps par étape : " + ", ".join(f"{k} {v / 60:.1f} min" for k, v in historique[-1]["temps"].items()), flush=True)
+    except Exception as e: print(f"Temps par étape non relevé ({e})", flush=True)
     if libre and duree:
         try:
             import cartoon as _c; historique[-1]["couverture_ms"] = _c.COUVERTURE_MS[0]
+            if sk.get("_type_couverture"): historique[-1]["type_couverture"] = sk["_type_couverture"]   # idée 45 (couverture.py)
+            if sk.get("_recette"): historique[-1]["recette"] = sk["_recette"]   # idée 41 (recette.py)
         except Exception: pass
     if sk.get("titre_accroche"): historique[-1]["titre_affiche"] = sk["titre_accroche"]
     if DOUB and not test and not REFAIRE:                                  # deuxième chance : vidéo peu sûre refaite une fois (jamais une vidéo refaite à la main)

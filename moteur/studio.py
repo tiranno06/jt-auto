@@ -408,6 +408,13 @@ def bible(sk, roles):
                 figurants.append(dict(scene=k, perso=perso, activite=act, x=(150, 930)[(j + graine) % 2] if n == 1 else (150, 930)[j],
                                       costume=tenue(perso, "client", l, moment, graine + 101 + j + 7 * k)))
     fiches = casting(sk, roles, costumes, S, graine)
+    try:                                                                   # menus « 🎭 Changer les personnages » du site (idée 11)
+        if casting_auteur(sk, fiches, costumes, roles, graine): print("Personnages choisis par l'auteur appliqués", flush=True)
+    except Exception as e: print(f"Choix des personnages de l'auteur non appliqués ({str(e)[:100]})", flush=True)
+    try:                                                                   # partie 2, 3… : les personnages de notre partie précédente
+        import suites
+        if suites.appliquer(sk, fiches, costumes, roles): print("Partie suivante : mêmes personnages que la partie précédente", flush=True)
+    except Exception as e: print(f"Personnages de la partie précédente non repris ({str(e)[:100]})", flush=True)
     for k, f_ in enumerate(figurants): f_["fiche"] = _humain().creer(graine + 500 + 7 * k)
     figurants += compagnons(sk, dec, lieux, moment, graine)                # personnages muets voulus par l'histoire (Claude)
     ambiances = set(a for a in (S.get("ambiances") or []) if a in ("vapeur", "poussiere", "pluie", "neige", "neon", "orage"))
@@ -524,6 +531,48 @@ def genre_voix(sk, role, d=None):
     vh = (sk.get("_voix_hz") or {}).get(role) or 0
     g = g_ia or (("f" if vh > 210 else "h" if vh < 150 else None) if vh else None)
     return g or GENRE_ROLE.get(role)
+
+AGES_AUTEUR = {"enfant": 8, "ado": 15, "adulte": 30, "senior": 70}
+
+
+def casting_auteur(sk, fiches, costumes, roles, graine):
+    """Menus « 🎭 Changer les personnages » du site (choix de l'auteur du 6 novembre, idée 11), sans IA :
+    sk["_casting_auteur"] = {rôle: {genre h/f, age enfant/ado/adulte/senior, silhouette petit/grand, espece (chat, chien… ou humain),
+    cheveux, haut, c_haut (nom de couleur), chapeau (ou aucun), lunettes oui/non}}. Ce que l'auteur choisit passe avant tout le reste."""
+    C_ = sk.get("_casting_auteur")
+    if not isinstance(C_, dict): return 0
+    import animaux as AN_
+    H_ = _humain(); n = 0
+    for k, role in enumerate(roles):
+        c = C_.get(role)
+        if not isinstance(c, dict) or role not in fiches: continue
+        F = dict(fiches[role]); n += 1
+        g = c.get("genre") if c.get("genre") in ("h", "f") else None
+        age = AGES_AUTEUR.get(str(c.get("age") or ""))
+        coiff = c.get("cheveux") if c.get("cheveux") in tuple(H_.COIFFURES_H) + tuple(H_.COIFFURES_F) else None
+        if g or age or coiff:                                              # nouveau personnage (même graine : il reste reconnaissable)
+            garde = {x: F[x] for x in ("taille", "espece", "c_poil", "silhouette") if x in F}
+            F = H_.creer(graine + 31 * k, genre=g or F.get("genre"), age=age or F.get("age"), cheveux=coiff or (F.get("cheveux") if not g else None),
+                         c_cheveux=F.get("c_cheveux"), corpulence=F.get("corpulence"))
+            F.update(garde)
+            if (age or 30) < 16: F["barbe"] = None                         # jamais d'enfant barbu
+        if c.get("silhouette") in ("petit", "grand"): F["silhouette"] = c["silhouette"]
+        if c.get("lunettes") in ("oui", "non"): F["lunettes"] = "rondes" if c["lunettes"] == "oui" else None
+        e = str(c.get("espece") or "")
+        if e == "humain": F.pop("espece", None); F.pop("c_poil", None)
+        elif AN_.espece_valide(e):
+            F["espece"] = AN_.espece_valide(e); F["c_poil"] = AN_.couleur(F["espece"], ""); F["barbe"] = None; F["lunettes"] = None
+        fiches[role] = F
+        co = dict(costumes.get(role) or {})
+        if c.get("haut") in M.HAUTS: co["haut"] = c["haut"]; co.pop("tenue", None)
+        if str(c.get("c_haut") or "").lower() in NOMS_COULEURS:
+            co["c_haut"] = NOMS_COULEURS[str(c["c_haut"]).lower()]; co["c_motif"] = M._fonce(co["c_haut"], 0.72)
+        if c.get("chapeau") == "aucun": co.pop("chapeau", None)
+        elif c.get("chapeau") in M.CHAPEAUX: co["chapeau"] = c["chapeau"]; co.setdefault("c_chapeau", (60, 60, 70))
+        if g == "h" and co.get("bas") in ("robe", "jupe"): co["bas"] = "pantalon"
+        costumes[role] = co
+    return n
+
 
 def casting(sk, roles, costumes, S, graine):
     """Casting libre : une fiche de personnage adulte par rôle, différente à chaque vidéo.

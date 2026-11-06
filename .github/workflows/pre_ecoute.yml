@@ -1,0 +1,96 @@
+name: Pré-écoute des sons TikTok
+# La nuit (lancé par le garde vers 2 h, heure de Paris) : quelques sons des profils sont écoutés à l'avance (son, voix, qui parle,
+# image de l'original, mise en scène par l'IA) et rangés dans la release « sons-prets ». Les fabrications de la journée les prennent
+# et passent directement au dessin (moteur/pre_ecoute.py). Option PRE_ECOUTE (Réglages du site) : 0 = coupée.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write              # release « sons-prets »
+  actions: read
+
+concurrency:
+  group: pre-ecoute
+  cancel-in-progress: false
+
+jobs:
+  pre_ecoute:
+    if: vars.PRE_ECOUTE != '0'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 150
+    env:
+      PYTHONHASHSEED: "0"
+      PRE_ECOUTE: ${{ vars.PRE_ECOUTE }}
+      STOCK_SONS: ${{ vars.STOCK_SONS }}
+      HEURE_TIKTOK: ${{ vars.HEURE_TIKTOK }}
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      MODAL_TOKEN_ID: ${{ secrets.MODAL_TOKEN_ID }}
+      MODAL_TOKEN_SECRET: ${{ secrets.MODAL_TOKEN_SECRET }}
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+      ELEVENLABS_MODELE: ${{ vars.ELEVENLABS_MODELE }}
+      ELEVENLABS: ${{ vars.ELEVENLABS }}
+      MODELE_CLAUDE: ${{ vars.MODELE_CLAUDE }}
+      PROFILS_TIKTOK: ${{ vars.PROFILS_TIKTOK }}
+      PROFILS_INTERDITS: ${{ vars.PROFILS_INTERDITS }}
+      TIKTOK_COMPTE: ${{ vars.TIKTOK_COMPTE }}
+      VOIX_DIFFERENTES: ${{ vars.VOIX_DIFFERENTES }}
+      FILIERE: tiktok
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        id: py
+        with:
+          python-version: "3.12"
+
+      - name: Installer ffmpeg
+        timeout-minutes: 10
+        run: |
+          if ! (timeout 240 sudo apt-get update -q && timeout 240 sudo apt-get install -y -q ffmpeg libegl1 libgles2); then
+            curl -sSL https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-linux64-gpl.tar.xz | tar xJ -C /tmp
+            sudo cp /tmp/ffmpeg-master-latest-linux64-gpl/bin/ff* /usr/local/bin/
+          fi
+
+      - name: Machine toute prête (mêmes bibliothèques que les fabrications, en cache)
+        id: venv
+        uses: actions/cache@v6
+        with:
+          path: ~/venv
+          key: venv-${{ steps.py.outputs.python-version }}-${{ hashFiles('requirements.txt', 'contraintes.txt') }}-ecoute-${{ env.HF_TOKEN != '' && 'hf' || 'sanshf' }}-v1
+
+      - name: Modèles d'écoute en cache
+        uses: actions/cache@v6
+        with:
+          path: |
+            ~/.cache/huggingface
+            ~/.cache/torch
+            outils/emotion_voix
+            outils/pose_landmarker_lite.task
+          key: hf-ecoute-v2
+          restore-keys: hf-whisper-turbo-v1
+
+      - name: Bibliothèques Python (installateur uv)
+        run: |
+          [ -x ~/venv/bin/python ] || python -m venv ~/venv
+          echo "$HOME/venv/bin" >> "$GITHUB_PATH"; export PATH="$HOME/venv/bin:$PATH" VIRTUAL_ENV="$HOME/venv"
+          python -m pip install -q uv || true
+          I() { python -m uv pip install -q "$@" || python -m pip install -q "$@"; }
+          I -U "yt-dlp[default,curl-cffi]"
+          if [ "${{ steps.venv.outputs.cache-hit }}" != "true" ]; then
+            I -r requirements.txt -c contraintes.txt
+            I faster-whisper -c contraintes.txt
+            (I torch torchaudio -c contraintes.txt --index-url https://download.pytorch.org/whl/cpu && I speechbrain -c contraintes.txt) || true
+            if [ -n "$HF_TOKEN" ]; then I pyannote.audio -c contraintes.txt || true; fi
+            I demucs transformers -c contraintes.txt || true
+            I rapidocr-onnxruntime -c contraintes.txt || true
+            I --no-deps mediapipe absl-py flatbuffers sounddevice -c contraintes.txt && I matplotlib -c contraintes.txt || true
+          fi
+
+      - name: Écouter les sons à l'avance
+        run: python moteur/pre_ecoute.py

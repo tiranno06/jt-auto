@@ -174,6 +174,9 @@ jobs:
       CONTROLE_VIDEO: ${{ vars.CONTROLE_VIDEO }}
       TIKTOK_COMPTE: ${{ vars.TIKTOK_COMPTE }}
       PROFILS_TIKTOK: ${{ vars.PROFILS_TIKTOK }}
+      PROFILS_INTERDITS: ${{ vars.PROFILS_INTERDITS }}  # liste noire : profils jamais repris (moteur/profils_tiktok.py)
+      PRE_ECOUTE: ${{ vars.PRE_ECOUTE }}                # pré-écoute de la nuit (moteur/pre_ecoute.py) : 0 = coupée
+      BUDGET_MODAL: ${{ vars.BUDGET_MODAL }}            # plafond des dépenses Modal du mois (30 $) : moteur/budget_modal.py
       PUBLI_FILE: ${{ vars.PUBLI_FILE }}
       CONFIANCE_MIN: ${{ vars.CONFIANCE_MIN }}
       DEUXIEME_CHANCE: ${{ vars.DEUXIEME_CHANCE }}
@@ -211,9 +214,16 @@ jobs:
         run: python3 moteur/file_attente.py
 
       - uses: actions/setup-python@v7
+        id: py
         with:
           python-version: "3.12"
-          cache: pip
+
+      - name: Machine toute prête (bibliothèques déjà installées, gardées en cache)
+        id: venv
+        uses: actions/cache@v6
+        with:
+          path: ~/venv
+          key: venv-${{ steps.py.outputs.python-version }}-${{ hashFiles('requirements.txt', 'contraintes.txt') }}-${{ (startsWith(inputs.theme, 'TIKTOK::') || inputs.filiere == 'tiktok' || contains(inputs.refaire, '|qui|') || contains(inputs.refaire, '|remarque|') || contains(inputs.refaire, '|casting|')) && 'ecoute' || 'base' }}-${{ env.HF_TOKEN != '' && 'hf' || 'sanshf' }}-v1
 
       - name: Installer ffmpeg
         timeout-minutes: 10
@@ -242,11 +252,17 @@ jobs:
             for e in onnx onnx.json; do curl -sSL -o "outils/voix/$(basename $v).$e" "https://huggingface.co/rhasspy/piper-voices/resolve/v1.0.0/fr/fr_FR/$v.$e" || true; done
           done
 
-      - name: Bibliothèques Python
-        run: pip install -r requirements.txt -c contraintes.txt      # versions qui marchent (contraintes.txt)
+      - name: Bibliothèques Python (installateur uv, rapide ; rien à installer si la machine toute prête est en cache)
+        run: |
+          [ -x ~/venv/bin/python ] || python -m venv ~/venv
+          echo "$HOME/venv/bin" >> "$GITHUB_PATH"; echo "VIRTUAL_ENV=$HOME/venv" >> "$GITHUB_ENV"
+          if [ "${{ steps.venv.outputs.cache-hit }}" != "true" ]; then
+            python -m pip install -q uv || true
+            python -m uv pip install --python ~/venv/bin/python -r requirements.txt -c contraintes.txt || ~/venv/bin/python -m pip install -r requirements.txt -c contraintes.txt   # versions qui marchent (contraintes.txt)
+          fi
 
       - name: Modèles de reconnaissance vocale et d'empreinte en cache (Whisper large-v3-turbo, ECAPA)
-        if: startsWith(inputs.theme, 'TIKTOK::') || inputs.filiere == 'tiktok' || contains(inputs.refaire, '|qui|') || contains(inputs.refaire, '|remarque|')
+        if: startsWith(inputs.theme, 'TIKTOK::') || inputs.filiere == 'tiktok' || contains(inputs.refaire, '|qui|') || contains(inputs.refaire, '|remarque|') || contains(inputs.refaire, '|casting|')
         uses: actions/cache@v6
         with:
           path: |
@@ -258,14 +274,20 @@ jobs:
           restore-keys: hf-whisper-turbo-v1
 
       - name: Lecteur TikTok (vidéo depuis une bande son)
-        if: startsWith(inputs.theme, 'TIKTOK::') || inputs.filiere == 'tiktok' || contains(inputs.refaire, '|qui|') || contains(inputs.refaire, '|remarque|')
+        if: startsWith(inputs.theme, 'TIKTOK::') || inputs.filiere == 'tiktok' || contains(inputs.refaire, '|qui|') || contains(inputs.refaire, '|remarque|') || contains(inputs.refaire, '|casting|')
         run: |
-          pip install -q -U "yt-dlp[default,curl-cffi]" faster-whisper -c contraintes.txt   # Whisper gratuit : repli si ElevenLabs et Modal manquent de crédit
-          (pip install -q torch torchaudio -c contraintes.txt --index-url https://download.pytorch.org/whl/cpu && pip install -q speechbrain -c contraintes.txt) || echo "empreinte vocale ECAPA indisponible : timbre MFCC"
-          if [ -n "$HF_TOKEN" ]; then pip install -q pyannote.audio -c contraintes.txt || echo "pyannote indisponible : empreinte ECAPA seule"; fi   # séparation des voix (clé Hugging Face gratuite)
-          # écoute gratuite (moteur/ecoute.py, postures.py) : Demucs, calage des mots, émotion de la voix, bruits (CLAP), postures (MediaPipe)
-          pip install -q demucs transformers -c contraintes.txt || echo "Demucs / transformers indisponibles : sans eux"
-          pip install -q --no-deps mediapipe absl-py flatbuffers sounddevice -c contraintes.txt && pip install -q matplotlib -c contraintes.txt || echo "MediaPipe indisponible : postures de l'original non lues"
+          python -m pip install -q uv || true
+          I() { python -m uv pip install -q "$@" || python -m pip install -q "$@"; }   # uv (10 à 50 fois plus rapide), pip en repli
+          I -U "yt-dlp[default,curl-cffi]"                                   # toujours à jour (TikTok change souvent), même en cache
+          if [ "${{ steps.venv.outputs.cache-hit }}" != "true" ]; then        # machine toute prête en cache : rien d'autre à installer
+            I faster-whisper -c contraintes.txt   # Whisper gratuit : repli si ElevenLabs et Modal manquent de crédit
+            (I torch torchaudio -c contraintes.txt --index-url https://download.pytorch.org/whl/cpu && I speechbrain -c contraintes.txt) || echo "empreinte vocale ECAPA indisponible : timbre MFCC"
+            if [ -n "$HF_TOKEN" ]; then I pyannote.audio -c contraintes.txt || echo "pyannote indisponible : empreinte ECAPA seule"; fi   # séparation des voix (clé Hugging Face gratuite)
+            # écoute gratuite (moteur/ecoute.py, postures.py) : Demucs, calage des mots, émotion de la voix, bruits (CLAP), postures (MediaPipe)
+            I demucs transformers -c contraintes.txt || echo "Demucs / transformers indisponibles : sans eux"
+            I rapidocr-onnxruntime -c contraintes.txt || echo "RapidOCR indisponible : sous-titres de l'original non lus"   # idée 21
+            I --no-deps mediapipe absl-py flatbuffers sounddevice -c contraintes.txt && I matplotlib -c contraintes.txt || echo "MediaPipe indisponible : postures de l'original non lues"
+          fi
           sudo apt-get install -y -q libegl1 libgles2 >/dev/null 2>&1 || true
 
       - name: Déployer les voix (Chatterbox), la banque de voix et les décors sur Modal

@@ -9,6 +9,12 @@ PEAU = (246, 244, 239)
 PAPIER = (238, 232, 216)
 
 
+# calculs accélérés (Numba, idée 4 du 6 novembre) : moteur/rapide.py (mêmes pixels, NumPy sans Numba)
+import rapide as _R
+_LAVIS_NB, _HACH_NB = _R.LAVIS, _R.HACHURES
+
+
+
 # ------------------------------------------------------------------ papier, encre, aquarelle, hachures
 def papier(w, h, graine=1):
     rng = np.random.default_rng(graine)
@@ -96,6 +102,9 @@ def lavis(img, m, coul, force=0.85, graine=0, bord=True):
     if bord:
         er = cv2.erode(m, np.ones((5, 5), np.uint8)); bb = cv2.GaussianBlur(cv2.subtract(m, er), (0, 0), 2).astype(np.float32) * (1 / 255)
         c2 = np.array(coul, np.float32) * 0.82
+    if _LAVIS_NB is not None and a.dtype == np.float32 and (not bord or (bb.dtype == np.float32 and c2.dtype == np.float32)):
+        _LAVIS_NB(zone, a, bb if bord else a, np.array(coul, np.float32), c2 if bord else np.zeros(3, np.float32), bool(bord))
+        return                                                             # (une seule passe compilée : mêmes pixels)
     a = np.clip(a, 0, 1)[..., None]
     out = zone.astype(np.float32) * (1 - a) + np.array(coul, np.float32) * a
     if bord: bb = np.clip(bb * 0.5, 0, 1)[..., None]; out = out * (1 - bb) + c2 * bb
@@ -115,6 +124,8 @@ def hachures(img, m, angle=-55, pas=7, ep=1.4, coul=(120, 115, 115), force=0.55,
         p0 = (cx - L * math.cos(a), cy - L * math.sin(a)); p1 = (cx + L * math.cos(a), cy + L * math.sin(a))
         cv2.line(cal, (int(p0[0] * 4), int(p0[1] * 4)), (int(p1[0] * 4), int(p1[1] * 4)), 255, max(1, int(ep + rng.normal(0, 0.3))), AA, 2)
     cal = (cal.astype(np.float32) / 255) * (m.astype(np.float32) / 255) * force
+    if _HACH_NB is not None and cal.dtype == np.float32:                  # une seule passe compilée (mêmes pixels)
+        _HACH_NB(zone, cal, np.array(coul, np.float32)); return
     out = zone.astype(np.float32) * (1 - cal[..., None]) + np.array(coul, np.float32) * cal[..., None]
     zone[:] = np.clip(out, 0, 255).astype(np.uint8)
 
