@@ -109,6 +109,8 @@ def sous_titres(video, R, son=None):
         from scipy.signal import resample_poly
         mots = doublage.whisper_local(resample_poly(sig, 441, 320).astype(np.float32))   # 16 kHz -> 22,05 kHz attendu
     if not mots: return out, None
+    import locuteurs
+    mots = locuteurs.sans_hallucinations(mots)                             # « Sous-titrage Société Radio-Canada » sur un silence…
     ph = R.get("ph") or []; vus = set(); scores = []
     for q in ph:
         if not q.get("texte") or q.get("p") == "narrateur": continue
@@ -118,7 +120,8 @@ def sous_titres(video, R, son=None):
         att, ent = _nu(q["texte"]), _nu(" ".join(mots[i]["w"] for i in idx))
         if len(att) < 3: continue
         r = difflib.SequenceMatcher(None, att, ent).ratio(); scores.append(r)
-        if r < 0.5: out.append(_defaut(q["deb"], "sous-titres", f"sous-titre « {str(q['texte'])[:50]} » mais on entend « {' '.join(ent)[:50]} »", grave=bool(ent)))
+        if r < 0.5: out.append(_defaut(q["deb"], "sous-titres", f"sous-titre « {str(q['texte'])[:50]} » mais on entend « {' '.join(ent)[:50]} »",
+                                       grave=len(ent) >= 3 and r < 0.25))   # (une 2e écoute qui entend un peu autre chose n'est pas une erreur sûre)
     seuls, bloc = [], []
     for i, m in enumerate(mots):                                           # voix entendue sans sous-titre (3 mots ou plus d'affilée)
         if i in vus or m["s"] > (R.get("total") or 1e9) - 0.5:
@@ -136,12 +139,13 @@ def technique(video, R, fr=None, fps=None):
     out = []
     if not fr: return out
     prevus = [float(x.get("t0") or 0) for x in R.get("plans") or []] + [t for tr in R.get("transitions") or [] for t in tr]
+    if R.get("fin_carte"): prevus.append(float(R["fin_carte"]))           # carton de fin « Abonne-toi » : voulu (signalé à tort jusqu'ici)
     fin = len(fr) / fps
     lum = np.array([float(f.mean()) for f in fr])
     sauts = []
     for i in range(1, len(fr)):
         t = i / fps
-        if t > fin - 2.0 or t < 0.2: continue                              # début (titre) et fin en boucle : voulus
+        if t > fin - 3.6 or t < 0.2: continue                              # début (titre), carton de fin et fin en boucle : voulus
         d = float(np.mean(np.abs(fr[i] - fr[i - 1]) > 30))
         if d > 0.35 and not any(abs(t - p) < 0.25 for p in prevus): sauts.append(t)
     for t in sauts[:4]: out.append(_defaut(t, "technique", "saut d'image hors d'une coupe prévue"))
@@ -202,6 +206,8 @@ def liste_ia(video, sk, R):
             pb = str(d.get("probleme") or "")
             if re.search(r"expression|posture|émotion|emotion|attitude|pas assez|manque d", pb, re.I): continue   # avis de goût, pas une erreur
             if re.search(r"sous-titre|subtitle", pb, re.I): continue      # les sous-titres défilent par groupes : vérifiés à l'oreille, pas par l'IA
+            if re.search(r"texte (affiché|attendu)|le texte|mot affiché|écrit à l'écran|titre|pov", pb, re.I): continue   # mots en grand, titre : voulus
+            if re.search(r"(semble|est|ce qui est|cela semble) (correct|cohérent|acceptable|normal)|personne ne parle|narrateur|voix off|silence", pb, re.I): continue
             if 0 <= n < len(instants): out.append(_defaut(instants[n], "contrôle IA", pb, grave=False))
         except (AttributeError, TypeError, ValueError): pass
     return out[:6]
@@ -236,8 +242,10 @@ def verifier(video, sk, R):
     for l in sk.get("equipe") or []:                                       # défauts de l'équipe que personne n'a pu corriger
         if l.get("revoir"): points.append(_defaut(None, l.get("poste", "équipe"), f"{l.get('controle')} : {l.get('detail')}"))
     points.sort(key=lambda d: (not d["grave"], d["t"] if d["t"] is not None else -1))
+    legers = [d for d in points if not d["grave"]]; points = [d for d in points if d["grave"]]   # demande de l'auteur (6 novembre) : la vidéo
+    if legers: journal(f"  {len(legers)} remarque(s) légère(s) gardée(s) au journal seulement : " + " ; ".join(f"{d['t']} s {d['quoi'][:50]}" for d in legers[:6]))
     journal(f"Contrôle de la vidéo finie : {len(points)} point(s) à vérifier" + (" — " + " ; ".join(f"{d['t']} s {d['quoi'][:60]}" for d in points[:6]) if points else ""))
-    return points[:20]
+    return points[:20]                                                     # sort propre : seuls les vrais défauts restent signalés
 
 
 def confiance(equipe, points, Q=None):

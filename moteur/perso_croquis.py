@@ -159,9 +159,12 @@ def dessiner(img, F, p):
     if p.get("paleur"): peau = tuple(int(v * (1 - 0.15 * p["paleur"]) + 230 * 0.15 * p["paleur"]) for v in (peau or C.PEAU))
     if F.get("espece"):                                                    # animal ou objet qui parle (moteur/animaux.py)
         import animaux
+        dans = F.get("dans") if F.get("dans") in animaux.CONTENANTS else None   # « un steak dans un micro-ondes » (remarque de l'auteur)
+        animaux.contenant_arriere(zone, dans, dec(tc), p["y"] - y0, R, float(p.get("t") or 0))
         animaux.dessiner(zone, F["espece"], g["x"] - x0, p["y"] - y0, dec(tc), R, [(dec(e_), dec(c_), dec(m_)) for e_, c_, m_ in g["bras"]],
                          e, ouv if ouv > 0.04 else None, min(1.0, cl), _fx(p, e), int(F.get("age", 30)), F.get("c_poil"),
                          chapeau=T["chapeau"], lunettes=T["lunettes"], fille=F.get("genre") == "f")
+        animaux.contenant_avant(zone, dans, dec(tc), p["y"] - y0, R, float(p.get("t") or 0))
         return tc, (R, R)
     meuble = p.get("meuble") or ("chaise" if p.get("assis") else None)    # chaise, canapé, lit (sous la couette), volant, comptoir
     if p.get("assis"):                                                     # siège vu de face, sous le personnage

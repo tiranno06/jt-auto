@@ -198,7 +198,8 @@
   non publiée, envoyée à Buffer pour l'heure exacte (publier.yml auto=1, run « Publication automatique : … » = journée faite) ; une
   vidéo en échec est sautée. **Deux vidéos par jour** (demande de l'auteur, 1er novembre 2026) : case « Deux vidéos par jour »
   (PUBLI_DEUX) + 2e heure (PUBLI_HEURE2, 12:00 par défaut, au moins une heure d'écart) ; une vidéo par créneau
-  (`publication_auto.creneaux`, chaque publication automatique du jour compte pour un créneau) ; calendrier du site sur les deux heures.
+  (`publication_auto.creneaux`, chaque publication automatique du jour compte pour un créneau) ; calendrier du site sur les deux heures. **Réparé le 6 novembre** : aucune publication automatique n'était jamais partie (`gh api` refusait
+  l'option « -R » ajoutée par `publication_auto._gh` : erreur avalée, journal « unknown shorthand flag »).
 - **Métiers (30 octobre 2026, planches de référence de l'auteur)** : `moteur/metiers.py` : ~38 métiers et univers (pompier, policier,
   médecin, infirmier, chirurgien, dentiste, vétérinaire, prof, cuisinier, boulanger, serveur, ingénieur, ouvrier, électricien, plombier,
   mécanicien, agriculteur, jardinier, peintre, musicien, pilote, hôtesse, scientifique, informaticien, avocat, juge, astronaute,
@@ -382,6 +383,19 @@
   en même temps ne s'écrasent plus la banque des décors (`fusion.FUSIONNES` : index.tsv = lignes ajoutées, compteur.json = somme) ;
   « Dis ce qui ne va pas » et « Corriger qui parle » aussi sur les vidéos plus récentes que le site (`chargerRepliques` : répliques
   lues en direct dans le sketch gardé).
+- **Analyse des 10 vidéos du 1er novembre (demande de l'auteur du 6 novembre : la vidéo doit sortir propre, sans points à vérifier
+  inutiles)** : remarque « un seul personnage » = toutes les répliques (même les bruits du narrateur) au même personnage
+  (`remarque` type "un_seul", champ IA `un_seul_personnage`) ; personnage DANS un objet (`animaux.CONTENANTS` : micro-ondes avec
+  vitre, plateau et minuteur, four, frigo, poêle qui fume, bocal, carton, cage ; `contenant_de`, fiche "dans", dessiné en deux fois :
+  fond avant le personnage, façade après) ; « il s'appelle comment » n'est plus un appel et un résumé « après une conversation
+  téléphonique » non plus quand deux personnes sont à l'image ensemble (`studio.appel_devine` : nb_personnes ≥ 2 ou Gemini qui voit
+  ≥ 2 personnages ensemble) ; phrases inventées par Whisper sur un silence (« Sous-titrage Société Radio-Canada », « Merci d'avoir
+  regardé »…) retirées (`locuteurs.sans_hallucinations`, ingé son + contrôle final) ; le carton de fin « Abonne-toi » n'est plus un
+  « saut d'image » (`RENDU["fin_carte"]`, 3,6 dernières s) ; l'IA de contrôle ne juge plus les textes affichés ni « personne ne parle » ;
+  sous-titre « entendu autrement » grave seulement si presque rien ne correspond ; **seuls les défauts graves restent « à vérifier »**
+  (le reste au journal) ; jury IA : la réponse en texte d'une IA de relais est lue (`ecrire._appel`, 2 essais) au lieu de retomber sur
+  la note gratuite 9,8 ; Groq : modèles du jour lus en direct (`reseau._groq_modeles`, les « vision » changent) et outil mal formé
+  -> réponse JSON en texte.
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.

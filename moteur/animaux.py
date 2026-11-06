@@ -316,3 +316,88 @@ def dessiner(img, espece, x, sol, tc, R, bras, expr="neutre", ouv=None, cligne=0
         _pattes(img, [_relatif((tc[0] + (ep_x if b_[0][0] > x else -ep_x), tc[1] + Rb * 0.15), b_, 0.75 * R / max(1.0, math.dist(b_[0], b_[1]) + math.dist(b_[1], b_[2])) * 1.6)
                       for b_ in bras], R * (0.12 if espece == "poisson" else 0.07), tuple(int(v * 0.8) for v in coul) if espece == "poisson" else (252, 252, 250),
                      ep, R, rond=espece == "poisson")
+
+
+# ------------------------------------------------------------------ contenants (remarque de l'auteur du 1er novembre : « un steak
+# haché dans un micro-ondes ») : le personnage est DANS un objet, dessiné en deux fois (le fond avant lui, la façade après lui)
+CONTENANTS = {"micro_ondes": r"micro[- ]?ondes?", "four": r"\bfour\b", "frigo": r"frigo|r[ée]frig[ée]rateur|frigidaire",
+              "poele": r"po[êe]le|casserole|marmite", "bocal": r"bocal|aquarium|verre", "carton": r"carton|bo[iî]te|caisse", "cage": r"\bcage\b"}
+
+
+def contenant_de(texte):
+    """« il est dans un micro-ondes », « dans la poêle », « coincé dans un carton » -> nom du contenant, ou None."""
+    t = str(texte or "").lower()
+    m = re.search(r"\b(?:dans|dedans|au fond d[eu']?|à l'int[ée]rieur d[eu'])\s*(?:un|une|le|la|l'|son|sa|ce|cette|des)?\s*([a-zéèêàâîïôûç' -]{3,30})", t)
+    if not m: return None
+    for nom, motif in CONTENANTS.items():
+        if re.search(motif, m.group(1)): return nom
+    return None
+
+
+def _cadre(tc, sol, R):
+    return int(tc[0] - R * 1.45), int(tc[1] - R * 1.45), int(tc[0] + R * 1.45), int(sol + R * 0.18)
+
+
+def contenant_arriere(img, nom, tc, sol, R, t=0.0):
+    """Fond du contenant, dessiné AVANT le personnage (intérieur, plateau tournant, eau du bocal…)."""
+    if not nom: return
+    x0, y0, x1, y1 = _cadre(tc, sol, R)
+    if nom in ("micro_ondes", "four", "frigo"):
+        fond = {"micro_ondes": (60, 62, 66), "four": (40, 42, 46), "frigo": (236, 240, 242)}[nom]
+        cv2.rectangle(img, (x0, y0), (x1, y1), fond, -1, AA)
+        lum = img[y0:y1, x0:x1].astype(np.float32); lum[..., :] = lum * 0.75 + np.array((120, 200, 240)) * 0.25 if nom != "frigo" else lum
+        img[y0:y1, x0:x1] = np.clip(lum, 0, 255).astype(np.uint8)       # lumière jaune de l'intérieur
+        if nom == "micro_ondes":                                           # plateau tournant en verre sous lui
+            cv2.ellipse(img, (int(tc[0]), int(sol)), (int(R * 1.2), int(R * 0.22)), 0, 0, 360, (210, 215, 220), -1, AA)
+            cv2.ellipse(img, (int(tc[0]), int(sol)), (int(R * 1.2), int(R * 0.22)), 0, 0, 360, C.ENCRE, 2, AA)
+        if nom == "four":                                                  # grille du four
+            cv2.line(img, (x0 + 6, int(sol) + 3), (x1 - 6, int(sol) + 3), (90, 90, 95), 3, AA)
+            for k in range(1, 8): xk = int(x0 + (x1 - x0) * k / 8); cv2.line(img, (xk, int(sol) + 3), (xk, int(sol + R * 0.12)), (90, 90, 95), 2, AA)
+    elif nom == "bocal":
+        m_ = np.zeros(img.shape[:2], np.uint8)                              # eau : seulement dans le bocal, sous la surface
+        cv2.ellipse(m_, (int(tc[0]), int((y0 + y1) / 2)), (int((x1 - x0) / 2), int((y1 - y0) / 2)), 0, 0, 360, 255, -1)
+        m_[:max(0, int(tc[1] - R * 0.2))] = 0; img[m_ > 0] = (img[m_ > 0] * 0.4 + np.array((230, 205, 160)) * 0.6).astype(np.uint8)
+    elif nom == "cage":
+        cv2.rectangle(img, (x0, int(sol)), (x1, y1), (60, 140, 200), -1, AA)              # paille
+
+
+def contenant_avant(img, nom, tc, sol, R, t=0.0):
+    """Façade du contenant, dessinée APRÈS le personnage : on le voit à travers la vitre / les barreaux, ou il dépasse du carton."""
+    if not nom: return
+    x0, y0, x1, y1 = _cadre(tc, sol, R); ep = max(2, int(R * 0.06))
+    if nom in ("micro_ondes", "four"):
+        m = int(R * 0.28); xd = x1 + int(R * 0.9)                            # carrosserie + tableau de commande à droite
+        coul = (225, 228, 232) if nom == "micro_ondes" else (70, 72, 78)
+        for (a, b, c, d) in ((x0 - m, y0 - m, xd, y0), (x0 - m, y1, xd, y1 + m), (x0 - m, y0, x0, y1), (x1, y0, xd, y1)):
+            cv2.rectangle(img, (a, b), (c, d), coul, -1, AA)
+        cv2.rectangle(img, (x0 - m, y0 - m), (xd, y1 + m), C.ENCRE, ep, AA); cv2.rectangle(img, (x0, y0), (x1, y1), C.ENCRE, ep, AA)
+        for k in range(3):                                                 # boutons + écran qui affiche le temps
+            cv2.circle(img, (int((x1 + xd) / 2), int(y0 + R * (0.9 + k * 0.55))), int(R * 0.14), (120, 120, 125), -1, AA)
+            cv2.circle(img, (int((x1 + xd) / 2), int(y0 + R * (0.9 + k * 0.55))), int(R * 0.14), C.ENCRE, max(1, ep // 2), AA)
+        cv2.rectangle(img, (x1 + int(R * 0.12), y0 + int(R * 0.12)), (xd - int(R * 0.12), y0 + int(R * 0.45)), (40, 70, 40), -1, AA)
+        cv2.putText(img, f"0:{max(0, 59 - int(t) % 60):02d}", (x1 + int(R * 0.16), y0 + int(R * 0.4)), cv2.FONT_HERSHEY_SIMPLEX, R * 0.009, (120, 255, 140), 2, AA)
+        vitre = img[y0:y1, x0:x1].astype(np.float32)                      # reflet de la vitre
+        vitre = vitre * 0.88 + 255 * 0.12; img[y0:y1, x0:x1] = vitre.astype(np.uint8)
+        cv2.line(img, (x0 + int(R * 0.2), y1 - int(R * 0.3)), (x0 + int(R * 0.9), y0 + int(R * 0.3)), (250, 250, 250), max(2, ep // 2), AA)
+    elif nom == "frigo":
+        cv2.rectangle(img, (x0 - 6, y0 - 6), (x1 + 6, y1 + 6), C.ENCRE, ep, AA)
+        for k in range(3): cv2.line(img, (x0, int(y0 + (y1 - y0) * (k + 1) / 4)), (x1, int(y0 + (y1 - y0) * (k + 1) / 4)), (180, 190, 200), 2, AA)
+    elif nom == "poele":
+        cx, cy = int(tc[0]), int(sol + R * 0.05)
+        cv2.ellipse(img, (cx, cy), (int(R * 1.4), int(R * 0.35)), 0, 0, 180, (50, 50, 55), -1, AA)
+        cv2.ellipse(img, (cx, cy), (int(R * 1.4), int(R * 0.35)), 0, 0, 180, C.ENCRE, ep, AA)
+        cv2.line(img, (cx + int(R * 1.35), cy), (cx + int(R * 2.6), cy - int(R * 0.25)), (40, 40, 45), int(R * 0.2), AA)
+        for k in range(3):                                                 # fumée qui monte : « ça cuit »
+            ph = t * 2 + k; xs = cx + int((k - 1) * R * 0.7)
+            pts = [(xs + R * 0.15 * math.sin(ph + j * 0.9), cy - R * (0.5 + j * 0.35) - (t * 20 % 10)) for j in range(5)]
+            C.encre(img, pts, max(1.5, R * 0.03), coul=(200, 200, 205))
+    elif nom == "bocal":
+        cv2.ellipse(img, (int(tc[0]), int((y0 + y1) / 2)), (int((x1 - x0) / 2), int((y1 - y0) / 2)), 0, 0, 360, C.ENCRE, ep, AA)
+        cv2.line(img, (x0 + int(R * 0.3), y0 + int(R * 0.6)), (x0 + int(R * 0.5), y0 + int(R * 1.4)), (250, 250, 250), 3, AA)
+    elif nom == "carton":
+        yb = int(sol - R * 0.9)
+        cv2.rectangle(img, (x0, yb), (x1, y1), (90, 160, 205), -1, AA); cv2.rectangle(img, (x0, yb), (x1, y1), C.ENCRE, ep, AA)
+        cv2.line(img, (x0, yb), (x0 - int(R * 0.35), yb - int(R * 0.45)), C.ENCRE, ep, AA); cv2.line(img, (x1, yb), (x1 + int(R * 0.35), yb - int(R * 0.45)), C.ENCRE, ep, AA)
+    elif nom == "cage":
+        for k in range(9): xk = int(x0 + (x1 - x0) * k / 8); cv2.line(img, (xk, y0), (xk, y1), (150, 150, 155), max(2, ep // 2), AA)
+        cv2.rectangle(img, (x0, y0), (x1, y1), C.ENCRE, ep, AA)

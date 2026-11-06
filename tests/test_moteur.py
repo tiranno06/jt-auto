@@ -2241,3 +2241,79 @@ class TestCorrectionsSoir1Novembre(unittest.TestCase):
             if l == "voiture": continue
             d = SR.description(l)
             self.assertFalse(d.replace("[semi] ", "").startswith(l.replace("_", " ") + ","), l)
+
+
+class TestPublicationAutoGh(unittest.TestCase):
+    """Les 2 créneaux de publication automatique ne partaient jamais : « gh api … -R dépôt » est refusé par gh."""
+    def test_pas_de_R_pour_gh_api(self):
+        import publication_auto as P
+        vus = []
+        avant = P.subprocess.run, os.environ.get("GITHUB_REPOSITORY")
+        try:
+            os.environ["GITHUB_REPOSITORY"] = "moi/depot"
+            P.subprocess.run = lambda cmd, **k: vus.append(cmd) or types.SimpleNamespace(returncode=0, stdout="[]", stderr="")
+            P._gh("api", "repos/moi/depot/actions/runs"); P._gh("workflow", "run", "publier.yml")
+        finally:
+            P.subprocess.run = avant[0]
+            if avant[1] is None: os.environ.pop("GITHUB_REPOSITORY", None)
+            else: os.environ["GITHUB_REPOSITORY"] = avant[1]
+        self.assertNotIn("-R", vus[0]); self.assertEqual(vus[1][-2:], ["-R", "moi/depot"])
+
+
+class TestAnalyse10Videos(unittest.TestCase):
+    """Leçons des 10 vidéos du 1er novembre (demande de l'auteur du 6 novembre)."""
+
+    def test_un_seul_steak_dans_le_micro_ondes(self):
+        import remarque, copy
+        sk = {"repliques": [{"p": "presentateur", "t": "Attends je vais faire des bruits.", "_deb": 0, "_fin": 2},
+                            {"p": "invite", "t": "Ça va chauffer.", "_deb": 2, "_fin": 3},
+                            {"p": "narrateur", "t": "POP-PI-POU.", "_deb": 3, "_fin": 4}], "decoupage": [{"repliques": [0, 1, 2]}]}
+        t = "les personnages sont censés être un seul personnage et le personnage unique est censé être un steak haché qui parle il est censé être dans un micro-ondes"
+        _, corr = remarque.regles(sk, t)
+        types = [c["type"] for c in corr]
+        self.assertIn("un_seul", types); self.assertIn("contenant", types)
+        import reseau
+        avant = reseau.ia_disponible
+        f = os.path.join(ICI, "..", "episodes", "remarques_auteur.json"); garde = open(f, "rb").read() if os.path.exists(f) else None
+        try:
+            reseau.ia_disponible = lambda: False
+            s2 = copy.deepcopy(sk); remarque.appliquer(s2, t)
+        finally:
+            reseau.ia_disponible = avant
+            if garde is not None: open(f, "wb").write(garde)               # (le test n'ajoute rien aux vraies remarques de l'auteur)
+        self.assertEqual({r["p"] for r in s2["repliques"]}, {"invite"})
+        self.assertEqual(s2["studio"]["personnages"]["invite"], {"espece": "steak", "dans": "micro_ondes"})
+
+    def test_contenant_dessine(self):
+        import animaux
+        self.assertEqual(animaux.contenant_de("il cuit dans un micro-ondes"), "micro_ondes")
+        self.assertEqual(animaux.contenant_de("il est dans la poêle"), "poele")
+        self.assertIsNone(animaux.contenant_de("il est dans la cuisine"))
+        img = np.full((700, 600, 3), 235, np.uint8)
+        animaux.contenant_arriere(img, "micro_ondes", (300, 300), 600, 100); animaux.contenant_avant(img, "micro_ondes", (300, 300), 600, 100, 3.0)
+        self.assertLess(img[400, 300].mean(), 200)                         # intérieur sombre / éclairé
+
+    def test_s_appelle_n_est_pas_un_appel(self):
+        import studio, video_ia
+        video_ia.DERNIER.clear()
+        sk = {"repliques": [{"p": "presentateur", "t": "Il s'appelle comment ton fils ?"}, {"p": "invite", "t": "Il s'appelle Enzo."}],
+              "doublage": {"contexte": "En voiture, après une conversation téléphonique étrange.", "visuel": {"nb_personnes": 2}}}
+        self.assertFalse(studio.appel_devine(sk))
+        sk["doublage"]["visuel"]["nb_personnes"] = 1
+        self.assertTrue(studio.appel_devine(sk))                          # une seule personne à l'image + contexte d'appel : oui
+
+    def test_hallucinations_et_faux_points(self):
+        import locuteurs
+        m = [{"w": w, "s": i, "e": i + 0.3} for i, w in enumerate("Bon à demain Sous-titrage Société Radio-Canada".split())]
+        self.assertEqual([x["w"] for x in locuteurs.sans_hallucinations(m)], ["Bon", "à", "demain"])
+        src = open(os.path.join(ICI, "..", "moteur", "verif_finale.py"), encoding="utf-8").read()
+        self.assertIn('R.get("fin_carte")', src); self.assertIn("fin - 3.6", src)
+        self.assertIn('points = [d for d in points if d["grave"]]', src)
+
+    def test_jury_lit_le_texte(self):
+        src = open(os.path.join(ICI, "..", "moteur", "qualite.py"), encoding="utf-8").read()
+        self.assertIn('ecrire._appel(reseau.claude(), None, [{"role": "user", "content": contenu}], OUTIL', src)
+        import reseau
+        reseau._GQ["liste"] = ["meta-llama/llama-4-scout-17b-16e-instruct", "whisper-large-v3", "llama-3.3-70b-versatile"]
+        self.assertEqual(reseau._groq_modeles(True), ("meta-llama/llama-4-scout-17b-16e-instruct",))
+        reseau._GQ.clear()

@@ -259,13 +259,16 @@ def jury_claude(video, R, sk, gratuit):
         contenu.append({"type": "text", "text": PROMPT.format(origine=origine, texte=texte, mesures=mesures, gratuit=gr, consigne_origine=consigne_o, auteur="",
                                                               plans=", ".join(studio.PLANS), mouvements=", ".join(studio.MOUVEMENTS), reactions=", ".join(studio.REACTIONS),
                                                               sons=", ".join(bruitages.CATALOGUE), lieux=", ".join(DD.LIEUX)) + (CONSIGNE_LARGE if plan_large() else "") + regles_apprises()})
-        r = __import__("reseau").claude().messages.create(model=MODELE, max_tokens=4000, tools=[OUTIL], tool_choice={"type": "tool", "name": "jury"},
-                                                         messages=[{"role": "user", "content": contenu}])
-        res = next((b.input for b in r.content if getattr(b, "type", "") == "tool_use"), None)
-        try:
-            import ecrire; ecrire.compter(r, MODELE)
-        except Exception: pass
-        return res
+        import ecrire, reseau
+        res = None
+        for _essai in range(2):                                            # l'IA de relais répond souvent en texte (JSON) : il est lu aussi
+            try:
+                res = ecrire._appel(reseau.claude(), None, [{"role": "user", "content": contenu}], OUTIL, max_tokens=4000)
+            except Exception as e:
+                print(f"  jury : réponse illisible ({str(e)[:100]}), nouvel essai avec l'IA suivante", flush=True); res = None
+            if isinstance(res, dict) and ecrire._liste(res.get("critiques")): return res
+        print("Jury IA sans réponse utilisable : jury gratuit seul (note non comptée comme un avis d'IA).", flush=True)
+        return None
     except Exception as e:
         print(f"Jury Claude indisponible ({str(e)[:140]}) : jury gratuit seul.", flush=True); return None
 
