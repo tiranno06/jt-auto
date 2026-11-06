@@ -1732,7 +1732,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
     RENDU.clear(); RENDU.update(defauts_image=defauts_img, ph=[{k: q.get(k) for k in ("i", "p", "deb", "fin", "texte", "emo", "chute", "scene", "plan", "mouvement", "reaction")} for q in ph],
                                 plans=[{k: x.get(k) for k in ("t0", "t1", "scene", "cible", "plan", "mouvement", "passage", "i")} for x in DECOUPE],
                                 fiches={r: {k: f.get(k) for k in ("genre", "age", "taille", "barbe", "cheveux")} for r, f in (FICHES or {}).items()},
-                                places={k: list(v) for k, v in places.items()}, total=total, doublage=bool(DOUB), mini=mini, separes=SEPARES,
+                                places={k: list(v) for k, v in places.items()}, total=total, fin_carte=FIN_CARTE, doublage=bool(DOUB), mini=mini, separes=SEPARES,
                                 bruitages=list(BRUITAGES), lieux=list((B or {}).get("lieux") or []), compagnons=sum(len(v) for v in COMP.values()),
                                 decors_ia=bool(decors), coupes_origine=list((B or {}).get("coupes_origine") or []),
                                 xs={k: {r: position(k, r)[0] for r in v} for k, v in places.items()}, tetes_y=TETES_Y,   # contrôle final (verif_finale)

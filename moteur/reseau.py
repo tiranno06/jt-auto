@@ -25,7 +25,7 @@ def _anthropic():
 # ------------------------------------------------------------------ plusieurs IA, une seule porte d'entrée
 # Claude d'abord (s'il a du crédit), sinon Mistral (humour en français) et Gemini (images), clés gratuites MISTRAL_API_KEY et
 # GEMINI_API_KEY (secrets GitHub). Le reste du robot ne voit qu'un client « façon Claude » : reseau.claude().messages.create(...).
-import json, os
+import json, os, re
 from types import SimpleNamespace as _NS
 
 FOURNISSEURS = {
@@ -63,6 +63,23 @@ def _openrouter_libres(images=False, outils=False):
     L = [m for m in _OR["liste"] if (not images or "image" in ((m.get("architecture") or {}).get("input_modalities") or []))
          and (not outils or "tools" in (m.get("supported_parameters") or []))]
     return tuple(m["id"] for m in sorted(L, key=rang)[:4])
+_GQ = {}
+
+
+def _groq_modeles(images=False):
+    """Modèles Groq disponibles aujourd'hui (lus une fois sur api.groq.com/openai/v1/models) : les modèles « vision » changent souvent
+    (404 « aucun modèle disponible » le 1er novembre). Images : Llama 4 / vision ; texte : les plus gros d'abord."""
+    if "liste" not in _GQ:
+        try:
+            cle = os.environ.get("GROQ_API_KEY", "")
+            req = urllib.request.Request("https://api.groq.com/openai/v1/models", headers={"Authorization": f"Bearer {cle}", "User-Agent": "petitsdramas-robot/1.0"})
+            _GQ["liste"] = [m.get("id", "") for m in json.loads(ouvrir(req, timeout=20, essais=2)).get("data") or [] if m.get("active", True)] if cle else []
+        except Exception: _GQ["liste"] = []
+    ids = [i for i in _GQ["liste"] if not re.search(r"whisper|guard|tts|orpheus|playai|distil", i)]
+    if images: return tuple(i for i in ids if re.search(r"llama-4|vision|scout|maverick", i))[:3]
+    return tuple(sorted(ids, key=lambda i: -int((re.search(r"(\d+)b", i) or [0, 0])[1] if re.search(r"(\d+)b", i) else 0)))[:3]
+
+
 EPUISE = (" 401", " 403", "quota", "exhausted", "billing", "per day", "(tpd)", "(rpd)")   # fournisseur à court pour la journée
 HORS_SERVICE = set()                                                       # fournisseurs épuisés pendant cette fabrication
 QUOTA = {}                                                                 # ce qu'il reste chez chaque IA gratuite (en-têtes des réponses)
@@ -135,6 +152,7 @@ def _appel_openai(fourn, kw):
         corps["tool_choice"] = ("any" if fourn == "mistral" else "required") if (tc.get("type") in ("tool", "any") or len(outils) == 1) else "auto"
     derniere = None
     modeles = _openrouter_libres(images, bool(outils)) if fourn == "openrouter" else F["images" if images else "texte"]
+    if fourn == "groq": modeles = tuple(dict.fromkeys(tuple(modeles) + _groq_modeles(images)))   # + les modèles du moment (ils changent)
     for modele in modeles:
         corps["model"] = modele; d = None
         for essai in range(4):
@@ -146,6 +164,11 @@ def _appel_openai(fourn, kw):
                 rep_ = urllib.request.urlopen(req, timeout=240); d = json.loads(rep_.read()); _noter_quota(fourn, getattr(rep_, "headers", None)); break
             except urllib.error.HTTPError as e:
                 derniere = e; corps_err = e.read()[:300].decode("utf-8", "ignore"); bas = corps_err.lower()
+                if e.code == 400 and corps.get("tools") and ("tool_use_failed" in bas or "failed to parse tool" in bas):
+                    corps.pop("tools", None); corps.pop("tool_choice", None)    # Groq : JSON de l'outil mal formé -> réponse en texte
+                    corps["messages"] = corps["messages"] + [{"role": "user", "content": "Réponds UNIQUEMENT par un objet JSON valide qui respecte ce schéma : "
+                                                              + json.dumps(outils[0]["input_schema"], ensure_ascii=False)[:5000]}]
+                    continue                                                    # (ecrire._appel lit le JSON dans le texte)
                 if e.code in (404, 400) and "model" in bas: d = "suivant"; break            # modèle inconnu : le suivant
                 if e.code == 400 and outils and "tool" in bas and "tool_choice" in corps: corps.pop("tool_choice", None); continue
                 if e.code == 429 and str(getattr(e, "headers", None) and e.headers.get("x-ratelimit-limit-req-minute")) == "0":

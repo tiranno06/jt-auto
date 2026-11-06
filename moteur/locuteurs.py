@@ -257,6 +257,25 @@ def fins_de_phrase(mots):
     return mots
 
 
+HALLUCINATIONS = (r"sous[- ]titrage (soci[ée]t[ée] )?radio[- ]canada|sous[- ]titres? r[ée]alis[ée]s? (par|para)|amara\.?org|"
+                  r"sous[- ]titrage st'? ?501|merci d'avoir regard[ée]|abonnez[- ]vous [àa] la cha[iî]ne|n'oubliez pas de vous abonner|"
+                  r"merci de votre attention|sous[- ]titrage fr|transcription par|www\.\w+\.(com|fr)")
+
+
+def sans_hallucinations(mots):
+    """Phrases que Whisper invente sur un silence ou une musique (apprises sur des sous-titres de télé) : « Sous-titrage Société
+    Radio-Canada », « Merci d'avoir regardé »… Les mots de ces phrases sont retirés (vidéo « Embauche humoristique », 1er novembre)."""
+    if not mots: return mots
+    txt, pos = "", []
+    for i, m in enumerate(mots):
+        a = len(txt); txt += str(m.get("w", "")).lower() + " "; pos.append((a, len(txt)))
+    jeter = set()
+    for mt in re.finditer(HALLUCINATIONS, txt):
+        jeter.update(i for i, (a, b) in enumerate(pos) if a < mt.end() and b > mt.start())
+    if jeter: print(f"  {len(jeter)} mot(s) inventé(s) par la reconnaissance vocale retiré(s) (« {txt[min(pos[i][0] for i in jeter):][:50].strip()} »)", flush=True)
+    return [m for i, m in enumerate(mots) if i not in jeter]
+
+
 def sans_boucles(mots, n_min=3, duree_max=0.12):
     """Whisper (gratuit) tourne parfois en boucle à la fin d'un son : « Oh mais non je suis sale. Oh mais non je suis sale. Oh mais
     non… », trois fois en une seconde. Un bloc de 3 mots ou plus répété juste après lui-même, dit à une vitesse impossible (moins de

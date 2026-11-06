@@ -528,6 +528,7 @@ def casting(sk, roles, costumes, S, graine):
             fiche["espece"] = esp; fiche["c_poil"] = AN_.couleur(esp, lignes[role] + " " + autres)
             fiche["barbe"] = None; fiche["lunettes"] = None
             if not d.get("taille"): fiche["taille"] = 0.72 if esp in AN_.ANIMAUX else 0.85   # un chat est plus petit qu'un humain
+            if d.get("dans") in AN_.CONTENANTS: fiche["dans"] = d["dans"]   # dans un micro-ondes, une poêle… (remarque de l'auteur)
         out[role] = fiche
     return out
 
@@ -649,7 +650,15 @@ def appel_devine(sk):
     texte = " ".join(x.get("t", "") for x in reps).lower()
     D = sk.get("doublage") or {}
     n = len(re.findall(APPEL, texte))
-    seul = ((D.get("visuel") or {}).get("nb_personnes") or 0) == 1
+    nb = (D.get("visuel") or {}).get("nb_personnes") or 0; seul = nb == 1
+    ensemble = nb >= 2                                                     # deux personnes à l'image en même temps : pas un appel
+    try:                                                                   # Gemini a regardé toute la vidéo : ils sont au même endroit ?
+        import video_ia
+        V = video_ia.DERNIER or {}
+        if len([p for p in V.get("personnages") or [] if isinstance(p, dict)]) >= 2 and not V.get("meme_interprete") \
+                and not re.search(CONTEXTE_APPEL, str(V.get("resume") or "").lower()): ensemble = True
+    except Exception: pass
+    if ensemble: return n >= 2                                             # (« conversation téléphonique » dans le résumé ne suffit plus)
     return n >= 2 or bool(re.search(CONTEXTE_APPEL, str(D.get("contexte") or "").lower())) or (n >= 1 and seul)
 
 def lieux_devines(sk, roles):

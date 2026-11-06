@@ -40,6 +40,8 @@ def inge_son(mots, B):
         if not re.search(r"\w", mots[i]["w"]):
             mots[i - 1] = dict(mots[i - 1], w=mots[i - 1]["w"] + mots[i]["w"].strip(), e=max(mots[i - 1]["e"], mots[i]["e"])); del mots[i]; seuls += 1
     if seuls: journal(f"  [équipe · ingé son] {seuls} signe(s) de ponctuation isolé(s) recollé(s)")
+    n_h = len(mots); mots = locuteurs.sans_hallucinations(mots)
+    B.note("ingé son", "aucune phrase inventée (« Sous-titrage Radio-Canada »…)", True, f"{n_h - len(mots)} mot(s) retiré(s)" if n_h != len(mots) else "")
     n0 = len(mots); mots = locuteurs.sans_boucles(mots)
     B.note("ingé son", "pas de phrase répétée en boucle", n0 == len(mots), f"{n0 - len(mots)} mot(s) retiré(s)" if n0 != len(mots) else "")
     rapides = [m for m in mots if m["e"] - m["s"] < 0.03 and len(re.sub(r"\W", "", m["w"])) > 3]

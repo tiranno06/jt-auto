@@ -41,7 +41,15 @@ def regles(sk, texte):
     for e, mm in animaux.MOTS.items():                                     # « c'est un chat », « Maurice est censé être un chat »
         if re.search(r"\b(c'est|est|sont|en|[êe]tre|devient|devenir)\s+(?:un|une|le|la)?\s*(?:" + mm + r")\b", t) and roles:
             corr.append({"type": "casting", "role": role_nomme(sk, texte, roles), "espece": e}); break
+    cible = next((c["role"] for c in corr if c.get("espece")), None) or (max(roles, key=lambda r: sum(1 for x in reps if x.get("p") == r)) if roles else None)
+    if cible and re.search(UN_SEUL, t): corr.append({"type": "un_seul", "role": cible})   # « c'est un seul personnage »
+    dans = animaux.contenant_de(t)
+    if cible and dans: corr.append({"type": "contenant", "role": cible, "dans": dans})  # « il est dans un micro-ondes »
     return qui, corr
+
+
+UN_SEUL = (r"\b(un seul|une seule|le m[êe]me|la m[êe]me)\s+(personnage|personne|perso)\b|qu'un seul\b|seul personnage|"
+           r"tous les personnages (sont|ne font)|les (deux )?personnages sont (cens[ée]s? )?[êe]tre (un seul|le m[êe]me)|il (est|parle) tout seul|monologue")
 
 
 def role_nomme(sk, texte, roles):
@@ -82,6 +90,7 @@ def interpreter(sk, texte):
         outil = {"name": "corrections", "description": "Corrections à faire sur la vidéo.", "input_schema": ecrire._schema({
             "qui": {"type": "array", "items": ecrire._schema({"replique": {"type": "integer"}, "personnage": {"type": "string", "enum": list(ROLES)}}, ["replique", "personnage"])},
             "corrections": {"type": "array", "items": {"type": "object"}},
+            "un_seul_personnage": {"type": "boolean"}, "dans": {"type": "string"},
             "compris": {"type": "string"}}, ["qui", "corrections", "compris"])}
         txt = (f"L'auteur d'une chaîne TikTok a regardé une de nos vidéos (dessin animé joué en play-back sur le son d'une vidéo TikTok) et "
                f"dit ce qui ne va pas :\n« {texte} »\n\nRépliques (numéro, instants, personnage qui la dit, texte) :\n{lignes}\n"
@@ -92,7 +101,10 @@ def interpreter(sk, texte):
                "casting {type:casting, role, age, genre (h/f), taille, cheveux, barbe, espece (chat, chien, lapin, souris, oiseau, poisson, steak, "
                "pizza, oeuf, banane, voiture, frigo, telephone, verre, croissant)}, costume {type:costume, role, haut, c_haut [r,g,b]}, "
                "reaction {type:reaction, replique, reaction}, bruitage {type:bruitage, replique, son}, jeu {type:jeu, replique, emotion, geste, intensite}, "
-               "figurant {type:figurant, avec, genre, age, geste}, lieux_separes {type:lieux_separes} ;\n- \"compris\" : en une phrase, ce que tu as compris.\n"
+               "figurant {type:figurant, avec, genre, age, geste}, lieux_separes {type:lieux_separes} ;\n"
+               "- \"un_seul_personnage\" : true si l'auteur dit que toutes les voix sont UN SEUL personnage ;\n"
+               "- \"dans\" : si le personnage est DANS un objet : micro_ondes, four, frigo, poele, bocal, carton ou cage (sinon vide) ;\n"
+               "- \"compris\" : en une phrase, ce que tu as compris.\n"
                "Réponds avec l'outil corrections.")
         r = ecrire._appel(reseau.claude(raisonner=True), None, [{"role": "user", "content": txt}], outil, max_tokens=1500)
         for x in ecrire._liste(r.get("qui")):
@@ -105,6 +117,13 @@ def interpreter(sk, texte):
             print(f"Remarque : l'IA voulait changer qui dit {len(ia_qui)} réplique(s) alors que la remarque n'en parle pas : refusé", flush=True)
             qui = dict(regles(sk, texte)[0])
         deja = {json.dumps(c, sort_keys=True) for c in corr}
+        cible_ = next((c["role"] for c in corr if c.get("espece")), None) or next((c["role"] for c in ecrire._liste(r.get("corrections"))
+                    if isinstance(c, dict) and c.get("espece") and c.get("role") in ROLES), None) or next((c["role"] for c in corr if c.get("role")), None)
+        if r.get("un_seul_personnage") is True and cible_ and not any(c.get("type") == "un_seul" for c in corr):
+            corr.append({"type": "un_seul", "role": cible_})
+        import animaux as AN_
+        if str(r.get("dans") or "") in AN_.CONTENANTS and cible_ and not any(c.get("type") == "contenant" for c in corr):
+            corr.append({"type": "contenant", "role": cible_, "dans": r["dans"]})
         esp_regle = any(c.get("type") == "casting" and c.get("espece") for c in corr)   # espèce comprise par les règles : elle prime
         corr += [c for c in ecrire._liste(r.get("corrections")) if isinstance(c, dict) and c.get("type") in qualite.TYPES and json.dumps(c, sort_keys=True) not in deja
                  and not (esp_regle and c.get("type") == "casting" and c.get("espece"))]
@@ -123,6 +142,17 @@ def appliquer(sk, texte):
     for k, r_ in qui.items():
         if 0 <= k < len(sk.get("repliques") or []) and sk["repliques"][k].get("p") != r_:
             sk["repliques"][k]["p"] = r_; faits.append(f"réplique {k + 1} -> {r_}")
+    S = sk.setdefault("studio", {}) if isinstance(sk.get("studio"), dict) or "studio" not in sk else {}
+    for c in corr:
+        if c.get("type") == "un_seul" and c.get("role"):                    # toutes les répliques (même les bruits) au même personnage
+            n_ = 0
+            for r in sk.get("repliques") or []:
+                if r.get("p") != c["role"]: r["p"] = c["role"]; n_ += 1
+            if isinstance(S, dict): S.pop("lieux_separes", None)
+            sk.pop("_separes", None); faits.append(f"un seul personnage ({c['role']}, {n_} réplique(s) rendue(s))")
+        if c.get("type") == "contenant" and c.get("role") and isinstance(S, dict):
+            S.setdefault("personnages", {}).setdefault(c["role"], {})["dans"] = c["dans"]; faits.append(f"{c['role']} dans : {c['dans']}")
+    corr = [c for c in corr if c.get("type") not in ("un_seul", "contenant")]
     for c in corr:                                                         # espèce : pas encore dans qualite.corriger
         if c.get("type") == "casting" and c.get("espece"):
             S = sk.setdefault("studio", {}) if isinstance(sk.get("studio"), dict) or "studio" not in sk else {}
