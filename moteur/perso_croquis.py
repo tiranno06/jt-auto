@@ -107,6 +107,7 @@ def _tenue(F, C_):
     h = "tshirt" if haut in COURT else "pull"
     bas = "short" if C_.get("bas") in ("short",) else "pantalon"
     if tenue in ("robe_mariee", "robe_soiree") or (haut == "robe" and tenue not in ("peignoir",) and not C_.get("metier")) or C_.get("bas") == "jupe": bas = "robe"
+    if bas == "robe" and F.get("genre") == "h" and tenue not in ("robe_mariee",): bas = "pantalon"   # voix d'homme : jamais en robe / jupe (remarque de l'auteur)
     if tenue == "maillot_bain":                                            # torse nu, short de bain : aucun détail de buste
         h = None; bas = "short"; det = {d for d in det if d in ("lunettes_vue", "lunettes_soleil", "montre")}
     det |= {"pyjama": set(), "peignoir": {"ceinture"}, "impermeable": {"boutons_or"}, "doudoune": {"echarpe"}, "uniforme": {"cravate"},

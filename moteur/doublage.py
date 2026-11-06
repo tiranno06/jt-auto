@@ -663,6 +663,15 @@ def preparer(url):
             if not (P_.get(r_) or {}).get("espece"):
                 P_.setdefault(r_, {})["espece"] = e_; sk["studio"] = S_; journal(f"  {NOMS.get(r_, r_)} est un(e) {e_} (vu dans la vidéo d'origine)")
     except Exception as e: journal(f"  espèces vues impossibles ({str(e)[:100]})")
+    try:                                                                   # homme / femme vu par Gemini, rangé à part (« genre_vu ») :
+        import video_ia                                                    # le casting le croise avec le timbre et la hauteur de la voix
+        for v_, g_ in video_ia.genres_par_voix([m_ for s_ in segs for m_ in s_["mots"]]).items():
+            r_ = casting.get(v_)
+            if not r_: continue
+            S_ = sk["studio"] if isinstance(sk.get("studio"), dict) else {}
+            P_ = S_.setdefault("personnages", {}) if isinstance(S_.get("personnages", {}), dict) else {}
+            P_.setdefault(r_, {})["genre_vu"] = g_; sk["studio"] = S_
+    except Exception as e: journal(f"  genres vus impossibles ({str(e)[:100]})")
     if not dec and not (isinstance(sk.get("studio"), dict) and sk["studio"].get("lieux")):   # l'IA n'a pas dit le lieu : on le regarde
         l_ = lieu_vu(cles, " ".join(r["t"] for r in reps))
         if l_:

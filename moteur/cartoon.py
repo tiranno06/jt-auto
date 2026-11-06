@@ -391,6 +391,15 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
                 elif m_ > 220: vote["f"] += len(v_)
             if sum(vote.values()) and max(vote.values()) >= 0.7 * sum(vote.values()):
                 sk.setdefault("_voix_genre", {})[role] = max(vote, key=vote.get)
+            if role != "narrateur":                                        # timbre (formants) : homme / femme, même voix criée ou accélérée
+                try:
+                    a_ = np.concatenate([np.asarray(audios[i], np.float32) for i, r in enumerate(reps) if r["p"] == role and i < len(audios)] or [np.zeros(1, np.float32)])
+                    esp_ = studio.espacement_formants(a_[:SR * 40], SR)
+                    if esp_: sk.setdefault("_voix_timbre", {})[role] = round(esp_)
+                    g_t = studio.genre_timbre(esp_)
+                    if g_t: sk.setdefault("_voix_timbre_genre", {})[role] = g_t
+                    else: sk.get("_voix_timbre_genre", {}).pop(role, None)
+                except Exception as e: print(f"timbre de la voix impossible ({str(e)[:80]})", flush=True)
             for i, r in enumerate(reps):
                 if r["p"] == role and i < len(f0s): TON[i] = studio.intonation(f0s[i], ref)
     def emo_de(i, r):

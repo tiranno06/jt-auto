@@ -2331,3 +2331,28 @@ class TestPhraseAbonne(unittest.TestCase):
         os.environ["PHRASE_ABONNE"] = "0"
         try: self.assertNotIn("Abonne", legende.composer({"legende": "T."}))
         finally: os.environ.pop("PHRASE_ABONNE", None)
+
+
+class TestGenreDeLaVoix(unittest.TestCase):
+    """Remarque de l'auteur (6 novembre) : une voix de femme sur un physique d'homme et inversement. Le TIMBRE de la voix (formants)
+    décide d'abord ; la hauteur seule se trompait sur les voix d'homme aiguës (cris, voix de dessin animé accélérées)."""
+
+    def test_timbre_des_voix_de_reference(self):
+        import studio, soundfile as sf
+        res = {}
+        for r in ("presentateur", "invite", "envoyee"):
+            a, sr = sf.read(os.path.join(ICI, "..", "voix", r + ".wav")); a = a if a.ndim == 1 else a.mean(1)
+            res[r] = studio.genre_timbre(studio.espacement_formants(a, sr))
+        self.assertEqual(res, {"presentateur": "h", "invite": "h", "envoyee": "f"})
+
+    def test_priorites(self):
+        import studio
+        sk = {"doublage": {}, "_voix_hz": {"invite": 250}, "_voix_genre": {"invite": "f"}, "_voix_timbre_genre": {"invite": "h"}}
+        self.assertEqual(studio.genre_voix(sk, "invite", {"genre": "f"}), "h")          # le timbre l'emporte sur une voix aiguë
+        sk.pop("_voix_timbre_genre")
+        self.assertEqual(studio.genre_voix(sk, "invite", {"genre_vu": "h"}), "h")       # hauteur contredite par l'image de l'original
+        self.assertEqual(studio.genre_voix(sk, "invite", {}), "f")
+        sk = {"doublage": {}, "_voix_hz": {"invite": 190}}
+        self.assertEqual(studio.genre_voix(sk, "invite", {"genre": "femme"}), "f")      # « femme » / « homme » de l'IA compris
+        src = open(os.path.join(ICI, "..", "moteur", "perso_croquis.py"), encoding="utf-8").read()
+        self.assertIn('F.get("genre") == "h" and tenue not in ("robe_mariee",): bas = "pantalon"', src)
