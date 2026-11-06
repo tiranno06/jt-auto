@@ -84,7 +84,10 @@ def decision(maintenant, reglages, historique, deja_aujourdhui):
 
 
 def _gh(*args):
-    return subprocess.run(["gh", *args, "-R", os.environ["GITHUB_REPOSITORY"]], capture_output=True, text=True)
+    """gh avec le dépôt : « -R » pour les commandes (workflow run…), mais JAMAIS pour « gh api », qui le refuse (le dépôt est déjà
+    dans l'adresse) : c'est ce « -R » qui faisait échouer toute publication automatique depuis le début."""
+    rep = [] if args and args[0] == "api" else ["-R", os.environ["GITHUB_REPOSITORY"]]
+    return subprocess.run(["gh", *args, *rep], capture_output=True, text=True)
 
 
 def deja_aujourdhui(maintenant):

@@ -2241,3 +2241,20 @@ class TestCorrectionsSoir1Novembre(unittest.TestCase):
             if l == "voiture": continue
             d = SR.description(l)
             self.assertFalse(d.replace("[semi] ", "").startswith(l.replace("_", " ") + ","), l)
+
+
+class TestPublicationAutoGh(unittest.TestCase):
+    """Les 2 créneaux de publication automatique ne partaient jamais : « gh api … -R dépôt » est refusé par gh."""
+    def test_pas_de_R_pour_gh_api(self):
+        import publication_auto as P
+        vus = []
+        avant = P.subprocess.run, os.environ.get("GITHUB_REPOSITORY")
+        try:
+            os.environ["GITHUB_REPOSITORY"] = "moi/depot"
+            P.subprocess.run = lambda cmd, **k: vus.append(cmd) or types.SimpleNamespace(returncode=0, stdout="[]", stderr="")
+            P._gh("api", "repos/moi/depot/actions/runs"); P._gh("workflow", "run", "publier.yml")
+        finally:
+            P.subprocess.run = avant[0]
+            if avant[1] is None: os.environ.pop("GITHUB_REPOSITORY", None)
+            else: os.environ["GITHUB_REPOSITORY"] = avant[1]
+        self.assertNotIn("-R", vus[0]); self.assertEqual(vus[1][-2:], ["-R", "moi/depot"])
