@@ -148,11 +148,16 @@ def preparer():
     if not os.path.exists(os.path.join("sortie", nom)): sys.exit(f"Vidéo introuvable dans la Release {e['tag']} : {r.stderr[:300]}")
     if e.get("legende") or not os.path.exists(os.path.join("sortie", txt)):   # la légende de l'historique fait foi (modifiable)
         open(os.path.join("sortie", txt), "w", encoding="utf-8").write(e.get("legende", ""))
+    if os.environ.get("REDIFFUSION_RUN") == "1":                             # rediffusion (idée 40) : la vidéo est présentée comme telle
+        t_ = open(os.path.join("sortie", txt), encoding="utf-8").read()
+        open(os.path.join("sortie", txt), "w", encoding="utf-8").write(REDIF + "\n\n" + t_)
     depot = os.environ.get("GITHUB_REPOSITORY"); serveur = os.environ.get("GITHUB_SERVER_URL", "https://github.com")
     url = f"{serveur}/{depot}/releases/download/{e['tag']}/{nom}"
     with open(os.environ["GITHUB_OUTPUT"], "a") as f:
         f.write(f"video=sortie/{nom}\nlegende=sortie/{txt}\nurl={url}\n")
     print(f"Vidéo prête : {url}")
+
+REDIF = "♻️ On la remet pour ceux qui l'ont ratée 😂"
 
 STATUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "sortie", "statut_publication.json")
 
@@ -171,6 +176,8 @@ def marquer(fichier=None, ok=None, erreur=None, legende=None):
                 e["publie"] = ok; e["erreur"] = erreur
                 if ok and legende: e["legende_publiee"] = legende[:300]               # texte réellement envoyé (sert aux statistiques)
                 if ok and os.environ.get("QUAND"): e["programmee"] = os.environ["QUAND"]
+                if ok and os.environ.get("REDIFFUSION_RUN") == "1":         # rediffusion : pas deux fois en 3 mois
+                    import datetime as _d; e["rediffusee"] = (os.environ.get("QUAND") or _d.date.today().isoformat())[:10]
         json.dump(hist, open(HIST, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 
 if __name__ == "__main__":

@@ -20,6 +20,10 @@ on:
         description: "1 = publication automatique du jour (vidéos cochées dans l'onglet TikTok, moteur/publication_auto.py)"
         required: false
         default: ""
+      rediffusion:
+        description: "1 = rediffusion d'une vidéo d'il y a plus de 3 mois (publication automatique, aucune vidéo cochée en attente)"
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -41,6 +45,7 @@ jobs:
       FICHIER: ${{ inputs.fichier }}
       FORCER: ${{ inputs.forcer }}
       QUAND: ${{ inputs.quand }}
+      REDIFFUSION_RUN: ${{ inputs.rediffusion }}
       PUBLIER_YOUTUBE: ${{ vars.PUBLIER_YOUTUBE }}
       PUBLIER_INSTAGRAM: ${{ vars.PUBLIER_INSTAGRAM }}
       VAPID_PRIVEE: ${{ vars.VAPID_PRIVEE }}

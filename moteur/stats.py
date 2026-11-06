@@ -101,6 +101,10 @@ def collecter():
     json.dump({"maj": datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="minutes"), "compte": nom, "videos": videos, **_suivi_abonnes(nom, lire())},
               open(FICHIER, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     if hist: json.dump(hist, open(HIST, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    try:                                                                   # la recette du succès (idée 41) : episodes/recette.json
+        r_ = __import__("recette").enregistrer(hist)
+        print("Recette du succès : " + (", ".join(f"{x['critere']} {x['valeur']} ×{x['fois']}" for x in r_["plus"]) or "pas encore assez de vidéos"), flush=True)
+    except Exception as e: print(f"Recette du succès impossible ({e})", flush=True)
     total = sum(v["vues"] for v in videos)
     print(f"Stats @{nom} : {len(videos)} vidéos, {total} vues au total, {lies} reliées aux vidéos du robot", flush=True)
     for v in sorted(videos, key=lambda x: -x["vues"])[:5]: print(f"  {v['vues']:>8} vues  {v['description'][:70]}", flush=True)

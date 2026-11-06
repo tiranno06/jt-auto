@@ -70,6 +70,15 @@ jobs:
             gh workflow run supprimer.yml -R "$GITHUB_REPOSITORY" -f fichier=ESSAIS && echo "Ménage des essais lancé."
           fi
 
+      - name: Pré-écoute de la nuit (sons TikTok écoutés à l'avance, vers 2 h à Paris)
+        if: vars.PRE_ECOUTE != '0' && vars.FREQUENCE_TIKTOK != '' && vars.FREQUENCE_TIKTOK != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ "$(TZ=Europe/Paris date +%H)" = "02" ] && [ "$(date -u +%M)" -lt 30 ]; then
+            gh workflow run pre_ecoute.yml -R "$GITHUB_REPOSITORY" && echo "Pré-écoute lancée."
+          fi
+
       - name: Publication automatique (une vidéo cochée par jour, à l'heure choisie dans l'onglet TikTok)
         env:
           GH_TOKEN: ${{ github.token }}
@@ -79,6 +88,7 @@ jobs:
           PUBLI_DEUX: ${{ vars.PUBLI_DEUX }}
           PUBLI_HEURE2: ${{ vars.PUBLI_HEURE2 }}
           PUBLI_FILE: ${{ vars.PUBLI_FILE }}
+          REDIFFUSION: ${{ vars.REDIFFUSION }}
         run: python3 moteur/publication_auto.py || true
 
       - name: Relancer une fabrication coupée par GitHub (machine arrêtée en pleine vidéo)

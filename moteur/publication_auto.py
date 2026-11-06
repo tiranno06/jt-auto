@@ -83,6 +83,17 @@ def decision(maintenant, reglages, historique, deja_aujourdhui):
     return f[0], quand, f"{len(f)} vidéo(s) en attente" + (f", créneau {n + 1}/{len(cibles)}" if len(cibles) > 1 else "")
 
 
+def a_rediffuser(historique, maintenant, jours=90):
+    """Rediffusion automatique (choix de l'auteur du 6 novembre, idée 40) : quand aucune vidéo cochée n'attend, la vidéo publiée il y a
+    plus de 3 mois qui a fait le plus de vues repart (jamais une vidéo déjà rediffusée ces 3 derniers mois). REDIFFUSION=0 pour couper."""
+    if os.environ.get("REDIFFUSION", "1") == "0": return None
+    limite = (maintenant - datetime.timedelta(days=jours)).date().isoformat()
+    ok = [h for h in historique if h.get("fichier") and h.get("publie") is True and not h.get("essai") and h.get("vues")
+          and str(h.get("programmee") or h.get("date") or "9999")[:10] <= limite
+          and str(h.get("rediffusee") or "0000")[:10] <= limite]
+    return max(ok, key=lambda h: int(h.get("vues") or 0))["fichier"] if ok else None
+
+
 def _gh(*args):
     """gh avec le dépôt : « -R » pour les commandes (workflow run…), mais JAMAIS pour « gh api », qui le refuse (le dépôt est déjà
     dans l'adresse) : c'est ce « -R » qui faisait échouer toute publication automatique depuis le début."""
@@ -109,8 +120,13 @@ def main():
     try: hist = json.load(open(os.path.join(RACINE, "episodes", "historique.json"), encoding="utf-8"))
     except (OSError, ValueError): hist = []
     fichier, quand, raison = decision(maintenant, reglages, hist, deja_aujourdhui(maintenant))
+    redif = False
+    if not fichier and raison == "aucune vidéo cochée en attente":          # idée 40 : la meilleure vidéo d'il y a 3 mois repart
+        fichier = a_rediffuser(hist, maintenant); redif = bool(fichier)
+        if redif: raison = "rediffusion (aucune vidéo cochée en attente)"
     if not fichier: print(f"Publication automatique : rien à faire ({raison})."); return
-    r = _gh("workflow", "run", "publier.yml", "-f", f"fichier={fichier}", "-f", f"quand={quand}", "-f", "auto=1")
+    r = _gh("workflow", "run", "publier.yml", "-f", f"fichier={fichier}", "-f", f"quand={quand}", "-f", "auto=1",
+            *(["-f", "forcer=oui", "-f", "rediffusion=1"] if redif else []))
     print(f"Publication automatique : {fichier} {'programmée à ' + quand if quand else 'envoyée tout de suite'} ({raison})."
           if r.returncode == 0 else f"Publication automatique impossible : {r.stderr[:200]}")
 

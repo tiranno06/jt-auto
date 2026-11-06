@@ -542,6 +542,12 @@ def preparer(url):
         except Exception as e: journal(f"  2e transcription impossible ({str(e)[:120]})")
         mots = ecoute.aligner(mots, sig)                                   # chaque mot recalé sur la voix (lèvres, sous-titres)
         __import__("locuteurs").fins_de_phrase(mots)                       # points oubliés par Whisper (« …rouge Mais pourquoi… »)
+    lignes_ocr = []                                                        # sous-titres écrits par le créateur (idée 21) : mots relus
+    try:
+        import ocr
+        lignes_ocr = ocr.lire(info.get("_fichier") or "")
+        if lignes_ocr: mots = ocr.corriger_mots(mots, lignes_ocr, B)
+    except Exception as e: journal(f"  sous-titres de l'original illisibles ({str(e)[:120]})")
     if not EVENEMENTS: EVENEMENTS[:] = ecoute.bruits(mono)                 # rires, cris, sirène, aboiement… entendus dans l'original
     try:                                                                   # pyannote (si la clé Hugging Face gratuite est réglée) :
         import locuteurs                                                   # meilleure séparation des voix que la transcription gratuite
@@ -559,6 +565,9 @@ def preparer(url):
     try:                                                                   # casting voix : le son, le texte et l'image votent
         mots = equipe.casting_voix(mots, info.get("_fichier") or "", B, relire_dialogue, scinder_voix_dominante)
     except Exception as e: journal(f"  contrôle du casting des voix impossible ({str(e)[:120]})")
+    try:                                                                   # une couleur de sous-titre par personnage (idée 21)
+        if lignes_ocr: mots = __import__("ocr").couleurs_voix(mots, lignes_ocr, B)
+    except Exception as e: journal(f"  couleurs des sous-titres non lues ({str(e)[:120]})")
     segs = segments(mots)
     hz = hauteurs(sig, segs)
     emo_voix = ecoute.emotions(sig, segs)                                  # colère, joie, tristesse entendues dans la voix
@@ -680,7 +689,8 @@ def preparer(url):
     sk["sources"] = [lien]
     sk["doublage"] = {"piste": piste, "duree": round(duree, 2), "source": lien, "auteur": auteur, "contexte": m.get("contexte", ""),
                       "evenements": [list(e) for e in EVENEMENTS][:60], "visuel": visuel, "audio": audio,
-                      "video_origine": info.get("_fichier") or "", "debut": debut}    # (contrôle qualité : comparaison avec l'original)
+                      "video_origine": info.get("_fichier") or "", "debut": debut,    # (contrôle qualité : comparaison avec l'original)
+                      "titre": str(info.get("title") or info.get("description") or "")[:300]}   # titre de l'original (parties 1, 2… : suites.py)
     if audio:                                                              # émotions de jeu données par Claude
         from collections import Counter
         audio["emotions"] = dict(Counter(m.lower() for x in d for m in re.findall(r"\[([^\]]{2,25})\]", x)).most_common(8))

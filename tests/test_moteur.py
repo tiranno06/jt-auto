@@ -2357,3 +2357,187 @@ class TestGenreDeLaVoix(unittest.TestCase):
         self.assertEqual(studio.genre_voix(sk, "invite", {"genre": "femme"}), "f")      # « femme » / « homme » de l'IA compris
         src = open(os.path.join(ICI, "..", "moteur", "perso_croquis.py"), encoding="utf-8").read()
         self.assertIn('F.get("genre") == "h" and tenue not in ("robe_mariee",): bas = "pantalon"', src)
+
+
+class TestDessinRapide(unittest.TestCase):
+    """Idée 4 (6 novembre) : les mélanges compilés par Numba donnent EXACTEMENT les mêmes pixels que le calcul NumPy d'avant."""
+
+    def test_memes_pixels(self):
+        import rapide, croquis as C
+        if rapide.LAVIS is None: self.skipTest("Numba absent")
+        rng = np.random.default_rng(3)
+        for k in range(12):
+            h, w = (int(x) for x in rng.integers(20, 200, 2))
+            img = (rng.random((h + 40, w + 40, 3)) * 255).astype(np.uint8); m = np.zeros((h + 40, w + 40), np.uint8)
+            m[20:20 + h, 20:20 + w] = (rng.random((h, w)) > 0.3) * 255; coul = tuple(int(x) for x in rng.integers(0, 255, 3))
+            a, b = img.copy(), img.copy()
+            C._LAVIS_NB, C._HACH_NB = rapide.LAVIS, rapide.HACHURES
+            C.lavis(a, m, coul, 0.85, k, bool(k % 2)); C.hachures(a, m, graine=k)
+            C._LAVIS_NB, C._HACH_NB = None, None
+            try: C.lavis(b, m, coul, 0.85, k, bool(k % 2)); C.hachures(b, m, graine=k)
+            finally: C._LAVIS_NB, C._HACH_NB = rapide.LAVIS, rapide.HACHURES
+            self.assertTrue(np.array_equal(a, b))
+        z = (rng.random((50, 60, 3)) * 255).astype(np.uint8); ao = rng.random((50, 60, 1)).astype(np.float32)
+        ac = rng.random((50, 60, 1)).astype(np.float32); co = (rng.random((50, 60, 3)) * 200).astype(np.float32)
+        ref = np.clip(z.astype(np.float32) * (1 - 0.2 * ao) * (1 - ac) + co, 0, 255).astype(np.uint8)
+        z2 = z.copy(); rapide.COLLER(z2, ao, ac, co); self.assertTrue(np.array_equal(z2, ref))
+        ref = (z.astype(np.float32) * (1 - ac)).astype(np.uint8); z3 = z.copy(); rapide.ASSOMBRIR(z3, ac); self.assertTrue(np.array_equal(z3, ref))
+
+
+class TestImagesDeReference(unittest.TestCase):
+    """Idée 46 : 10 images types du dessin comparées aux images validées (tests/references). Changement voulu du dessin :
+    python moteur/references.py --refaire (puis regarder les images)."""
+
+    def test_dessin_inchange(self):
+        import references as R
+        ims = R.images(); self.assertEqual(len(ims), 10)
+        for nom, im in ims.items():
+            ref = R.lire(nom); self.assertIsNotNone(ref, nom)
+            moy, part = R.ecart(im, ref)
+            self.assertLess(moy, 1.5, f"{nom} : dessin changé (écart moyen {moy:.2f})")
+            self.assertLess(part, 0.01, f"{nom} : dessin changé ({100 * part:.2f} % de pixels différents)")
+
+
+class TestListe6Novembre(unittest.TestCase):
+    """Choix de l'auteur du 6 novembre : 1, 2, 3, 4, 5, 7, 11, 18, 21, 23, 26, 27, 37, 40, 41, 45, 46, 48, 50."""
+
+    def test_temps_par_etape(self):
+        import progression as PR
+        PR.TEMPS.clear(); PR._COURANTE[:] = [None, None]
+        PR.chrono("Écoute du son TikTok", 100.0); PR.chrono("Dessin des images : 30/900", 160.0); PR.chrono("Dessin des images : 60/900", 200.0)
+        PR.chrono(None, 400.0)
+        self.assertEqual(PR.TEMPS["Écoute du son TikTok"], 60.0); self.assertEqual(PR.TEMPS["Dessin des images"], 240.0)
+        anciens = [{"Dessin des images": 100}, {"Dessin des images": 110}, {"Dessin des images": 90}]
+        self.assertEqual([k for k, _, _ in PR.lents({"Dessin des images": 600}, anciens)], ["Dessin des images"])
+        self.assertEqual(PR.lents({"Dessin des images": 150}, anciens), [])
+
+    def test_pre_ecoute(self):
+        import pre_ecoute as P, doublage, dessin_partage as DP
+        d = tempfile.mkdtemp(); anc = DP.LOCAL; DP.LOCAL = d
+        try:
+            t = tempfile.mkdtemp(); f = os.path.join(t, "piste.wav"); open(f, "wb").write(b"son")
+            sk = {"doublage": {"piste": f, "source": "https://www.tiktok.com/@x/video/123"}}
+            doublage.EVENEMENTS[:] = [(1, 2, "rire")]
+            P.deposer("https://www.tiktok.com/@x/video/123", (sk, [np.zeros(3)], [[("a", 0, 1)]]))
+            self.assertEqual(len(P.stock()), 1)
+            doublage.EVENEMENTS[:] = []
+            self.assertIsNone(P.prendre([{"source_audio": "https://www.tiktok.com/@x/video/123"}]))   # déjà repris : écarté
+            doublage.EVENEMENTS[:] = [(1, 2, "rire")]
+            P.deposer("https://www.tiktok.com/@x/video/123", (sk, [np.zeros(3)], [[("a", 0, 1)]]))
+            doublage.EVENEMENTS[:] = []
+            u, prep = P.prendre([])
+            self.assertTrue(u.endswith("/123")); self.assertEqual(open(prep[0]["doublage"]["piste"], "rb").read(), b"son")
+            self.assertEqual(doublage.EVENEMENTS, [(1, 2, "rire")]); self.assertEqual(P.stock(), [])
+        finally: DP.LOCAL = anc; doublage.EVENEMENTS[:] = []
+        env = dict(os.environ)
+        try:
+            os.environ["HEURE_TIKTOK"] = "14:00 ; 21:30"; os.environ.pop("STOCK_SONS", None); self.assertEqual(P.stock_voulu(), 2)
+            os.environ["PRE_ECOUTE"] = "0"; self.assertFalse(P.actif())
+        finally: os.environ.clear(); os.environ.update(env)
+        g = open(os.path.join(ICI, "..", ".github", "workflows", "garde.yml"), encoding="utf-8").read()
+        self.assertIn("pre_ecoute.yml", g)
+        self.assertIn("pre_ecoute\").prendre(historique)", open(os.path.join(ICI, "..", "moteur", "principal.py"), encoding="utf-8").read())
+
+    def test_machine_prete(self):
+        y = open(os.path.join(ICI, "..", ".github", "workflows", "emission.yml"), encoding="utf-8").read()
+        self.assertIn("path: ~/venv", y); self.assertIn("uv pip install", y)
+        self.assertIn('I -U "yt-dlp[default,curl-cffi]"', y)                        # yt-dlp toujours à jour, même en cache
+        self.assertIn("numba", open(os.path.join(ICI, "..", "requirements.txt")).read())
+
+    def test_parties_et_suite(self):
+        import suites
+        self.assertEqual([suites.num_partie(t) for t in ("Partie 2 😂", "pt3", "Episode 4", "ma vie 1/3", "le 12/10", "rien")], [2, 3, 4, 1, None, None])
+        hist = [{"fichier": "a.mp4", "titre_source": "La dispute partie 1", "source_audio": "https://www.tiktok.com/@zed/video/1"}]
+        self.assertEqual(suites.bonus({"titre": "La dispute partie 2"}, "Zed", suites.faites(hist)), 60)
+        self.assertEqual(suites.bonus({"titre": "La dispute partie 2"}, "autre", suites.faites(hist)), 0)
+        sk = {"doublage": {"titre": "La dispute partie 1"}}
+        suites.preparer(sk, []); self.assertEqual(sk["suite"], "Partie 2 bientôt ! Abonne-toi"); self.assertIn("Partie 2", suites.ligne_legende(sk))
+        sk = {"repliques": [{"p": "invite"}, {"p": "presentateur"}],
+              "_suite": {"presentateur": {"fiche": {"genre": "f", "age": 30, "visage": 7}, "costume": {"haut": "pull"}},
+                         "invite": {"fiche": {"genre": "h", "age": 40, "visage": 3}, "costume": {"haut": "chemise"}}}}
+        fiches = {"presentateur": {"genre": "h"}, "invite": {"genre": "f"}}; cost = {"presentateur": {}, "invite": {}}
+        self.assertEqual(suites.appliquer(sk, fiches, cost, ["presentateur", "invite"]), 2)
+        self.assertEqual(fiches["invite"]["visage"], 7); self.assertEqual(fiches["presentateur"]["visage"], 3)   # femme avec femme
+        self.assertEqual(cost["presentateur"]["haut"], "chemise")
+
+    def test_liste_noire_et_tendances(self):
+        import profils_tiktok as PT
+        env = dict(os.environ)
+        try:
+            os.environ.update(PROFILS_INTERDITS="@abc", PROFILS_TIKTOK="@abc, @ok")
+            self.assertEqual(PT.liste(), ["ok"])
+        finally: os.environ.clear(); os.environ.update(env)
+        self.assertTrue(PT.BIO_REFUS.search("Merci de ne pas reprendre mes vidéos")); self.assertFalse(PT.BIO_REFUS.search("Humour et sketchs"))
+        self.assertEqual(PT.tendance({"titre": "quand ta mère #rentree #fyp"}, {"rentree"}, []), (20, "#rentree"))
+        self.assertEqual(PT.tendance({"titre": "eva longoria au tel"}, set(), ["eva longoria"])[0], 15)
+
+    def test_sous_titres_de_l_original(self):
+        import ocr, equipe
+        dial = [("Salut Morisse tu vas bien ?", "A", "blanc"), ("Ouais trop la forme frérot", "B", "jaune"), ("Tu viens au parc ce soir ?", "A", "blanc"),
+                ("Grave je viens avec mon pote", "B", "jaune"), ("Il est trop drôle ton pote", "A", "blanc"), ("Ouais il fait des blagues", "B", "jaune"),
+                ("Il ramène des chips", "B", "jaune"), ("Bah non jsuis crevé moi", "A", "jaune")]
+        lignes = []
+        for k, (tx, _, c) in enumerate(dial):
+            t_ = tx.replace("Morisse", "Maurice").replace("frérot", "frerot").replace("crevé", "creve").replace("drôle", "drole").replace("ramène", "ramene")
+            lignes.append(dict(deb=k * 2.4, fin=k * 2.4 + 2.4, t=t_.replace(" ", "") if k == 0 else t_, n=3, couleur=c))
+        mots, t = [], 0.0
+        for k, (tx, v, _) in enumerate(dial):
+            t = k * 2.4
+            for w in tx.split(): mots.append(dict(w=w, s=t, e=t + 0.25, voix=v)); t += 0.4
+        anc = equipe._arbitrer; equipe._arbitrer = lambda m, d: {k: "B" for k in range(len(d))}
+        try: m2 = ocr.corriger_mots([dict(x) for x in mots], lignes)
+        finally: equipe._arbitrer = anc
+        self.assertEqual(m2[1]["w"], "Maurice"); self.assertEqual(m2[10]["w"], "frérot")   # accents perdus par la lecture : mot gardé
+        m3 = ocr.couleurs_voix([dict(x) for x in mots], lignes)
+        self.assertEqual({m["voix"] for m in m3[-5:]}, {"B"})                  # phrase jaune rangée sur A : rendue à B
+        self.assertEqual(m3[0]["voix"], "A")
+        self.assertEqual(ocr.couleur(np.full((10, 40, 3), 255, np.uint8)), "blanc")
+        self.assertEqual(ocr.corriger_mots([dict(x) for x in mots], [dict(deb=0, fin=9, t="Boulangerie Dupont", n=9)])[1]["w"], "Morisse")
+
+    def test_casting_de_l_auteur(self):
+        import studio
+        sk = {"_casting_auteur": {"invite": {"genre": "f", "age": "ado", "espece": "chat", "haut": "pull", "c_haut": "rouge", "chapeau": "aucun"}}}
+        fiches = {"invite": {"genre": "h", "age": 40, "barbe": "trois_jours"}}; cost = {"invite": {"haut": "chemise", "chapeau": "casquette", "bas": "robe"}}
+        self.assertEqual(studio.casting_auteur(sk, fiches, cost, ["invite"], 5), 1)
+        F = fiches["invite"]; self.assertEqual((F["genre"], F["age"], F["espece"]), ("f", 15, "chat")); self.assertIsNone(F.get("barbe"))
+        self.assertEqual(cost["invite"]["haut"], "pull"); self.assertEqual(cost["invite"]["c_haut"], studio.NOMS_COULEURS["rouge"])
+        self.assertNotIn("chapeau", cost["invite"])
+        src = open(os.path.join(ICI, "..", "moteur", "principal.py"), encoding="utf-8").read(); self.assertIn('_mode == "casting"', src)
+
+    def test_budget_modal(self):
+        import budget_modal as BM, subprocess
+        env = dict(os.environ); anc = subprocess.run
+        try:
+            os.environ.update(MODAL_TOKEN_ID="x", MODAL_TOKEN_SECRET="y", BUDGET_MODAL="30")
+            subprocess.run = lambda *a, **k: types.SimpleNamespace(returncode=0, stdout='{"metered_cost": "28.50", "billed_cost": "0"}')
+            self.assertEqual(BM.depense_mois(), 28.5)
+            import alerte; anc_a = alerte.alerter; alerte.alerter = lambda *a: None
+            try: self.assertEqual(BM.verifier(journal=lambda m: None), 28.5)
+            finally: alerte.alerter = anc_a
+            self.assertNotIn("MODAL_TOKEN_ID", os.environ)                    # plafond presque atteint : Modal coupé
+        finally:
+            subprocess.run = anc; os.environ.clear(); os.environ.update(env)
+            try: os.remove(os.path.join(ICI, "..", "episodes", "alerte_modal.txt"))
+            except OSError: pass
+
+    def test_rediffusion_recette_couverture(self):
+        import publication_auto as PA, recette, couverture, datetime as dt
+        m = dt.datetime(2026, 11, 6, 18, 0, tzinfo=PA.PARIS)
+        h = [{"fichier": "a.mp4", "publie": True, "vues": 900, "date": "2026-06-01"}, {"fichier": "b.mp4", "publie": True, "vues": 5000, "date": "2026-10-30"},
+             {"fichier": "c.mp4", "publie": True, "vues": 400, "date": "2026-05-01"}, {"fichier": "d.mp4", "publie": True, "vues": 9000, "date": "2026-05-01", "rediffusee": "2026-10-01"}]
+        self.assertEqual(PA.a_rediffuser(h, m), "a.mp4")                     # plus de 3 mois, jamais rediffusée ces 3 derniers mois
+        hist = [{"fichier": f"{k}.mp4", "vues": v, "duree": d, "source_audio": f"https://www.tiktok.com/@{p}/video/{k}"}
+                for k, (v, d, p) in enumerate([(100, 15, "a"), (120, 16, "a"), (90, 18, "a"), (1000, 50, "b"), (900, 55, "b"), (1100, 60, "b")])]
+        r = recette.analyser(hist)
+        self.assertEqual(r["plus"][0]["valeur"] in ("@b", "40 à 70 s"), True); self.assertTrue(r["moins"])
+        self.assertGreater(recette.bonus_son({"duree": 45}, r), 0); self.assertLess(recette.bonus_son({"duree": 12}, r), 0)
+        hc = [{"fichier": f"{k}.mp4", "type_couverture": t} for k, t in enumerate(["chute", "reaction", "debut"] * 3)]
+        vues = {f"{k}.mp4": (5000 if t == "reaction" else 100) for k, t in enumerate(["chute", "reaction", "debut"] * 3)}
+        self.assertEqual(couverture.choisir({"chute": 9.0, "reaction": 3.0, "debut": 0.6}, hc, vues, hasard=lambda: 0.9), 3.0)
+        self.assertEqual(couverture.DERNIER[0], "reaction")
+
+    def test_site(self):
+        src = open(os.path.join(ICI, "..", "moteur", "site.py"), encoding="utf-8").read()
+        for x in ('"shortcuts"', "raccourci=hasard", "githubstatus.com", 'id="castBloc"', 'id="tempsFab"', 'data-var="PRE_ECOUTE"',
+                  'data-var="PROFILS_INTERDITS"', 'data-var="REDIFFUSION"', 'id="recette"', "modal_depense"):
+            self.assertIn(x, src)

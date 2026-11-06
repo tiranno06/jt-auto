@@ -24,6 +24,7 @@ jobs:
       ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
       MODAL_TOKEN_ID: ${{ secrets.MODAL_TOKEN_ID }}
       MODAL_TOKEN_SECRET: ${{ secrets.MODAL_TOKEN_SECRET }}
+      BUDGET_MODAL: ${{ vars.BUDGET_MODAL }}
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v7
