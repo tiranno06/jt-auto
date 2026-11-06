@@ -2274,10 +2274,13 @@ class TestAnalyse10Videos(unittest.TestCase):
         self.assertIn("un_seul", types); self.assertIn("contenant", types)
         import reseau
         avant = reseau.ia_disponible
+        f = os.path.join(ICI, "..", "episodes", "remarques_auteur.json"); garde = open(f, "rb").read() if os.path.exists(f) else None
         try:
             reseau.ia_disponible = lambda: False
             s2 = copy.deepcopy(sk); remarque.appliquer(s2, t)
-        finally: reseau.ia_disponible = avant
+        finally:
+            reseau.ia_disponible = avant
+            if garde is not None: open(f, "wb").write(garde)               # (le test n'ajoute rien aux vraies remarques de l'auteur)
         self.assertEqual({r["p"] for r in s2["repliques"]}, {"invite"})
         self.assertEqual(s2["studio"]["personnages"]["invite"], {"espece": "steak", "dans": "micro_ondes"})
 
