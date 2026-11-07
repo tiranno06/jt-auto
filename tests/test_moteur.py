@@ -2583,3 +2583,28 @@ class TestNotesTikTok(unittest.TestCase):
         self.assertIn("accord >= 0.85 or (accord >= 0.6 and tranches)", src)
         v = open(os.path.join(ICI, "..", "moteur", "verif_finale.py"), encoding="utf-8").read()
         self.assertNotIn('"invite": "Kévin"', v)                                # prénoms internes trompaient l'IA de contrôle
+
+
+class TestCompteRendu(unittest.TestCase):
+    """Demande de l'auteur du 7 novembre : les problèmes du compte rendu de chaque vidéo sont corrigés tout de suite."""
+
+    def test_texte_du_compte_rendu(self):
+        import compte_rendu as CR
+        pts = [{"t": 12.3, "quoi": "pendant la réplique de invite, c'est un autre personnage qui bouge"},
+               {"t": 60.1, "quoi": "saut d'image hors d'une coupe prévue"}]
+        jury = {"directeur_artistique": {"remarques": [{"moment": 4.0, "probleme": "Aucun téléphone visible alors qu'elle appelle"},
+                                                       {"probleme": "Les personnages pourraient être plus expressifs"}]}}
+        t = CR.texte(pts, jury, [{"ok": False, "revoir": True, "controle": "dialogue équilibré", "detail": "une voix dit 90 %"}])
+        self.assertIn("à 12.3 s", t); self.assertIn("téléphone", t); self.assertIn("dialogue équilibré", t)
+        self.assertNotIn("saut d'image", t); self.assertNotIn("pourraient", t)       # technique / avis de goût : rien à corriger
+        h = {"a_verifier": pts, "jury": {"remarques": ["Le malade devrait être alité dans une chambre"]}}
+        self.assertIn("alité", CR.depuis_historique(h))
+        self.assertTrue(CR.meilleure(60, 72)); self.assertFalse(CR.meilleure(72, 60)); self.assertTrue(CR.meilleure(70, 70, 7.5, 8.1))
+
+    def test_branche_dans_la_fabrication(self):
+        src = open(os.path.join(ICI, "..", "moteur", "principal.py"), encoding="utf-8").read()
+        self.assertIn("corriger_compte_rendu(sk, base, audios, mots, decors, fmt, A_VERIFIER, modal_ok, QUALITE)", src)
+        self.assertIn('_mode == "compte_rendu"', src); self.assertIn('sortie/.perdante', src)
+        r = open(os.path.join(ICI, "..", "moteur", "remarque.py"), encoding="utf-8").read(); self.assertIn("def appliquer(sk, texte, memoriser=True)", r)
+        s = open(os.path.join(ICI, "..", "moteur", "site.py"), encoding="utf-8").read()
+        self.assertIn('|compte_rendu"', s); self.assertIn('id="tkCorrigerTout"', s)

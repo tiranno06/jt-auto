@@ -134,7 +134,7 @@ def interpreter(sk, texte):
     return qui, corr
 
 
-def appliquer(sk, texte):
+def appliquer(sk, texte, memoriser=True):
     """Applique la remarque au sketch (copie conseillée). Renvoie la liste lisible des changements."""
     import qualite
     qui, corr = interpreter(sk, texte)
@@ -158,6 +158,7 @@ def appliquer(sk, texte):
             S = sk.setdefault("studio", {}) if isinstance(sk.get("studio"), dict) or "studio" not in sk else {}
             if isinstance(S, dict): S.setdefault("personnages", {}).setdefault(c.get("role"), {})["espece"] = c["espece"]; faits.append(f"{c.get('role')} : {c['espece']}")
     faits += qualite.corriger(sk, [c for c in corr if not (c.get("type") == "casting" and set(c) <= {"type", "role", "espece"})])
+    if not memoriser: return faits                                         # (compte rendu du robot : pas une remarque de l'auteur)
     try:                                                                   # le jury la retient pour les prochaines vidéos
         import os
         f = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "episodes", "remarques_auteur.json")

@@ -43,7 +43,9 @@ if REFAIRE:
     _p = next((x for x in (os.path.join(_d, os.path.splitext(_f)[0] + ".json"), os.path.join(_d, _f + ".json")) if os.path.exists(x)), "")
     SK_ANCIEN = json.load(open(_p, encoding="utf-8")) if _p else None     # (le sketch est rangé sans « .mp4 » dans son nom)
     if ANCIEN: os.environ["FORMAT"] = ANCIEN.get("format") if ANCIEN.get("format") in ("mini", "libre") else "mini"
-    if _mode in ("voix", "decors", "qui", "remarque", "casting") and SK_ANCIEN is None:
+    if _mode == "compte_rendu":                                            # « 🛠️ Corriger d'après le compte rendu » (vidéo déjà faite)
+        REMARQUE = __import__("compte_rendu").depuis_historique(ANCIEN) or "rien de signalé"
+    if _mode in ("voix", "decors", "qui", "remarque", "casting", "compte_rendu") and SK_ANCIEN is None:
         print("Sketch d'origine non conservé (vidéo plus ancienne) : on refait une nouvelle version du texte.", flush=True); _mode = "texte"
     REFAIRE_MODE = _mode
     if _mode == "voix": os.environ["VOIX_NOUVELLES"] = "1"              # « juste la voix » : d'autres voix de la banque que la dernière fois
@@ -138,6 +140,59 @@ def limite_job():
     if (os.environ.get("RENDU") or "") == "essai_pause" and not EN_REPRISE[0]: return __import__("time").time() + 60   # essai : pause tout de suite
     try: return float(os.environ["DEBUT_JOB"]) + (float(os.environ.get("LIMITE_JOB_MIN") or 180) - 25) * 60
     except (KeyError, ValueError): return None
+
+
+def corriger_compte_rendu(sk, base, audios, mots, decors, fmt, points, modal_ok, QUALITE):
+    """Les problèmes du compte rendu (points à vérifier + remarques du jury) passent au correcteur de « Dis ce qui ne va pas »
+    (moteur/compte_rendu.py) ; seuls les passages touchés sont redessinés ; gardé seulement si la note de confiance monte."""
+    import compte_rendu as CR, verif_finale, remarque, qualite, controle, cartoon, copy, shutil
+    if not CR.actif() or not cartoon.RENDU or not os.path.exists(base + "_avant_boucle.mp4"): return points
+    Q = QUALITE["Q"] or {}
+    conf = verif_finale.confiance(sk.get("equipe"), points, Q)
+    for tour in range(CR.tours()):
+        txt = CR.texte(points, Q.get("jury"), sk.get("equipe"))
+        if not txt or conf >= 100: break
+        print(f"Compte rendu (tour {tour + 1}, confiance {conf}/100) : corrections demandées au robot :\n{txt}", flush=True)
+        sk4 = copy.deepcopy(sk); faits = remarque.appliquer(sk4, txt, memoriser=False)
+        if not faits: print("Compte rendu : rien que le robot sache corriger lui-même", flush=True); break
+        print("Compte rendu : " + " ; ".join(faits), flush=True)
+        dec4 = dict(decors or {})
+        for k_ in sk4.pop("_decors_a_refaire", []): dec4.pop(k_, None)
+        try:
+            import semi_realiste as SR_, decors as decors_mod
+            manq_ = [k_ for k_ in range(len(sk4.get("decoupage") or [])) if k_ not in dec4]
+            if manq_ and SR_.actif() and modal_ok and os.environ.get("DECORS", "1") != "0":
+                dec4.update(decors_mod.generer_semi(sk4, graine=17, scenes=set(manq_)))
+                sk4["_decors_semi"] = sorted(set(sk4.get("_decors_semi") or []) | set(decors_mod.SEMI))
+        except Exception as e: print(f"Compte rendu : nouveaux décors impossibles ({str(e)[:100]}) : décors dessinés", flush=True)
+        etat = {k_: copy.copy(getattr(cartoon, k_)) for k_ in ("MINUTAGE", "PH", "BRUITAGES", "RENDU", "COUVERTURE", "COUVERTURE_MS")}
+        try:
+            cartoon.APRES_BLOC[0] = None
+            d4 = cartoon.rendre(sk4, base + "_c.mp4", audios, mots=mots, decors=dec4, mini=fmt == "mini",
+                                reprise={"video": base + "_avant_boucle.mp4", "rendu": copy.deepcopy(etat["RENDU"])}, limite=limite_job())
+            t_ok, _r = controle.technique(base + "_c.mp4", d4, cartoon.MINUTAGE[-1][1] if cartoon.MINUTAGE else None)
+            if not t_ok: raise RuntimeError("contrôle technique raté")
+            shutil.copy(base + "_c.mp4", base + "_c_avant_boucle.mp4")
+            try: __import__("boucle").boucler(base + "_c.mp4")
+            except Exception: pass
+            pts4 = verif_finale.verifier(base + "_c.mp4", sk4, cartoon.RENDU)
+            Q4 = qualite.evaluer(base + "_c.mp4", cartoon.RENDU, sk4, "")
+            conf4 = verif_finale.confiance(sk4.get("equipe"), pts4, Q4)
+        except BaseException as e:                                         # (limite de temps comprise : on garde la vidéo telle quelle)
+            for k_, v_ in etat.items(): setattr(cartoon, k_, v_)
+            for f_ in (base + "_c.mp4", base + "_c_avant_boucle.mp4"):
+                if os.path.exists(f_): os.remove(f_)
+            print(f"Compte rendu : version corrigée impossible ({str(e)[:120]}) : on garde la vidéo", flush=True); break
+        if CR.meilleure(conf, conf4, Q.get("note"), Q4.get("note")):
+            os.replace(base + "_c.mp4", base + ".mp4"); os.replace(base + "_c_avant_boucle.mp4", base + "_avant_boucle.mp4")
+            sk.clear(); sk.update(sk4); decors = dec4; points = pts4; QUALITE["Q"] = Q = Q4; QUALITE["corrigees"] += faits
+            print(f"Compte rendu corrigé : confiance {conf} → {conf4}/100, jury {Q.get('note')}/10", flush=True); conf = conf4
+        else:
+            for k_, v_ in etat.items(): setattr(cartoon, k_, v_)
+            for f_ in (base + "_c.mp4", base + "_c_avant_boucle.mp4"):
+                if os.path.exists(f_): os.remove(f_)
+            print(f"Compte rendu : la version corrigée n'est pas meilleure ({conf} → {conf4}) : on garde la première", flush=True); break
+    return points
 
 
 EN_REPRISE = [False]                                                       # cette fabrication est la reprise d'une fabrication en pause
@@ -276,20 +331,20 @@ def main():
     if S:                                                                  # reprise : sketch, son et format déjà prêts
         import doublage
         sk, DOUB, fmt = S["sk"], S["DOUB"], S["fmt"]
-    elif REFAIRE_MODE in ("voix", "decors", "qui", "remarque", "casting"):   # mêmes répliques : on refait seulement les voix / les décors
+    elif REFAIRE_MODE in ("voix", "decors", "qui", "remarque", "casting", "compte_rendu"):   # mêmes répliques : on refait seulement les voix / les décors
         sk = SK_ANCIEN; sk["_monte"] = True
         if CASTING_AUTEUR:                                                 # « 🎭 Changer les personnages » : choix gardés dans le sketch
             sk["_casting_auteur"] = {r: dict((sk.get("_casting_auteur") or {}).get(r) or {}, **c) for r, c in CASTING_AUTEUR.items() if isinstance(c, dict)}
             print(f"Changer les personnages : {', '.join(f'{r} → {c}' for r, c in sk['_casting_auteur'].items())}", flush=True)
         if REMARQUE:                                                       # « Dis ce qui ne va pas, le robot corrige » (moteur/remarque.py)
             try:
-                faits_r = __import__("remarque").appliquer(sk, REMARQUE)
+                faits_r = __import__("remarque").appliquer(sk, REMARQUE, memoriser=REFAIRE_MODE == "remarque")
                 print(f"Remarque de l'auteur appliquée : {', '.join(faits_r) or 'rien de précis compris'}", flush=True)
             except Exception as e: print(f"remarque impossible à appliquer ({str(e)[:120]})", flush=True)
         for k_, r_ in QUI.items():                                         # « Corriger qui parle » : chaque réplique au bon personnage
             if 0 <= k_ < len(sk.get("repliques") or []) and r_ in ("presentateur", "invite", "envoyee", "narrateur"): sk["repliques"][k_]["p"] = r_
         if QUI: print(f"Corriger qui parle : {len(QUI)} réplique(s) rendue(s) au bon personnage", flush=True)
-        if sk.get("doublage") and REFAIRE_MODE in ("qui", "remarque", "casting"):   # son TikTok : on garde la bande son d'origine
+        if sk.get("doublage") and REFAIRE_MODE in ("qui", "remarque", "casting", "compte_rendu"):   # son TikTok : on garde la bande son d'origine
             import doublage
             DOUB = list(doublage.depuis_sketch(sk)); fmt = "libre" if sk["doublage"].get("duree", 0) >= 60 else "mini"
         print(f"Refaire ({REFAIRE_MODE}) : « {sk.get('sujet')} », mêmes répliques", flush=True)
@@ -586,6 +641,9 @@ def main():
             cartoon.DETAIL = False                                         # secours : bonshommes simples, plans simples (la vidéo sort quand même)
             duree = cartoon.rendre(sk, base + ".mp4", audios, mots=mots, decors={}, mini=fmt == "mini")
     if (os.environ.get("APERCU_RAPIDE") or "") != "1":                     # fin en boucle : la dernière image se raccorde à la première
+        try:
+            import shutil as _sh; _sh.copy(base + ".mp4", base + "_avant_boucle.mp4")   # (le compte rendu redessine à partir de celle-ci)
+        except Exception: pass
         try: duree = __import__("boucle").boucler(base + ".mp4")
         except Exception as e: print(f"fin en boucle impossible ({str(e)[:120]})", flush=True)
     A_VERIFIER = []                                                        # contrôle de la vidéo FINIE (synchro, sous-titres, IA, technique)
@@ -594,6 +652,11 @@ def main():
             import cartoon as _ct, verif_finale
             if _ct.RENDU: A_VERIFIER = verif_finale.verifier(base + ".mp4", sk, _ct.RENDU)
         except Exception as e: print(f"contrôle de la vidéo finie impossible ({str(e)[:120]})", flush=True)
+        if DOUB:                                                           # compte rendu corrigé tout de suite (demande du 7 novembre)
+            try: A_VERIFIER = corriger_compte_rendu(sk, base, audios, mots, decors, fmt, A_VERIFIER, modal_ok, QUALITE)
+            except Exception as e: print(f"compte rendu non corrigé ({str(e)[:160]})", flush=True)
+    try: os.remove(base + "_avant_boucle.mp4")
+    except OSError: pass
     WEB = False                                                            # version légère (720p) + couverture, rangées dans les archives :
     try:                                                                   # l'appli les lit directement, le site n'a plus rien à recalculer
         import subprocess as _sp
@@ -667,6 +730,15 @@ def main():
             if sk.get("_recette"): historique[-1]["recette"] = sk["_recette"]   # idée 41 (recette.py)
         except Exception: pass
     if sk.get("titre_accroche"): historique[-1]["titre_affiche"] = sk["titre_accroche"]
+    if REFAIRE_MODE == "compte_rendu" and ANCIEN and not test:            # corrigée d'après le compte rendu : la moins sûre des deux est retirée
+        try:
+            c1, c2 = ANCIEN.get("confiance"), historique[-1].get("confiance")
+            if not DC.protegee(ANCIEN) and isinstance(c2, (int, float)):
+                perd = ANCIEN["fichier"] if (not isinstance(c1, (int, float)) or c2 >= c1) else historique[-1]["fichier"]
+                print(f"Compte rendu : confiance {c1} → {c2} : {perd} est retirée (la plus sûre est gardée)", flush=True)
+                os.makedirs("sortie", exist_ok=True); open("sortie/.perdante", "w", encoding="utf-8").write(perd)
+            else: print("Compte rendu : l'ancienne version est publiée ou cochée « À publier » : les deux sont gardées", flush=True)
+        except Exception as e: print(f"comparaison des deux versions impossible ({str(e)[:100]})", flush=True)
     if DOUB and not test and not REFAIRE:                                  # deuxième chance : vidéo peu sûre refaite une fois (jamais une vidéo refaite à la main)
         try:
             quoi_, val_ = DC.decider(historique, historique[-1], sk["doublage"].get("source") or tiktok, DEUXIEME)
