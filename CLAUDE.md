@@ -441,6 +441,27 @@
   BUDGET_MODAL − 2 $ (30 $ par défaut) Modal est coupé pour la fabrication (replis gratuits), alerte une fois par jour, voyant orange
   et montant sur le site) ; **mode panne** (50 : githubstatus.com lu toutes les 10 min, bandeau « 🛠️ Panne chez GitHub » si Actions,
   API ou Pages ne marchent pas).
+- **Notes des vidéos TikTok au plus haut (demande de l'auteur du 7 novembre)** : deux notes : la **note de confiance** (/100,
+  `verif_finale.confiance` : points graves non corrigés et contrôles d'équipe ratés) et la **note du jury** (/10, `qualite.evaluer`).
+  Analyse des 40 dernières vidéos TikTok puis corrections : sous-titres lisibles même quand on parle vite (`jt.lisibles` : un groupe
+  affiché moins de 0,45 s est fusionné avec son voisin s'il tient sur une ligne, chaque groupe reste jusqu'au suivant ; règle du jury
+  par groupe affiché) ; début coupé au PREMIER MOT transcrit (`doublage.attente_premier_mot` : un bruit pris pour de la voix laissait
+  la 1re parole à 5 s) ; durée jamais reprochée sur un son imposé ; jury IA : `CONSIGNE_SON_IMPOSE` + `sans_reproches_son_impose`
+  (vannes, chute, rythme, voix, silences, volume = l'original : jamais reprochés, sauf correction « jeu » / « bruitage » possible ;
+  +0,8 par remarque retirée), style croquis et animaux / objets qui parlent annoncés comme voulus ; contrôle IA final : plus de prénoms
+  internes (« Kévin » faisait croire à un homme), « le personnage 1… » + espèce voulue, remarques « chat au lieu d'un humain » /
+  « même apparence » écartées ; équipe : un défaut CORRIGÉ par son contrôleur compte comme bon (boucles de Whisper, téléphone retiré,
+  appel refusé, désaccord son / image repris par le fil du dialogue, deux transcriptions dont chaque désaccord est tranché).
+  **Compte rendu corrigé tout de suite** (précision de l'auteur, 7 novembre : les problèmes signalés dans le compte rendu de chaque
+  vidéo doivent être réglés, pas seulement affichés ; `moteur/compte_rendu.py`) : pendant la fabrication d'un son TikTok, après le
+  contrôle de la vidéo finie, les points à vérifier + remarques du jury + contrôles « à revoir » sont écrits comme une remarque d'auteur
+  (`compte_rendu.texte`, sans les avis de goût ni les défauts techniques) et passent au correcteur de « Dis ce qui ne va pas »
+  (`remarque.appliquer(…, memoriser=False)`) ; seuls les passages touchés sont redessinés (depuis la copie « _avant_boucle »), la vidéo
+  est recontrôlée (verif_finale + jury) et gardée seulement si la confiance monte (à égalité : la note du jury) ; 2 tours au plus
+  (COMPTE_RENDU_TOURS), jamais au-delà de la limite de temps, COMPTE_RENDU=0 pour couper. Vidéos déjà faites : fiche d'une vidéo TikTok
+  « 🛠️ Corriger les n problèmes signalés » et onglet TikTok « 🛠️ Corriger les vidéos signalées » (non publiées, avec points à vérifier
+  ou confiance < 70, 10 au plus) -> refaire « fichier|compte_rendu » ; la moins sûre des deux versions est retirée (sortie/.perdante),
+  jamais une vidéo publiée ou cochée « À publier ».
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.

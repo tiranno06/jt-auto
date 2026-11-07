@@ -435,7 +435,7 @@ class TestRendu(unittest.TestCase):
         except Exception as e: self.skipTest(f"dépendances vidéo absentes : {e}")
         g = jt.minutage("Bonsoir. Le budget est perdu.", np.zeros(44100, np.float32), 10.0,
                         [("Bonsoir.", 0.0, 0.5), ("Le", 0.7, 0.8), ("budget", 0.8, 1.2), ("est", 1.2, 1.3), ("perdu.", 1.3, 1.8)])
-        self.assertEqual(g[0], ("Bonsoir.", 10.0, 10.5))
+        self.assertEqual(g[0], ("Bonsoir.", 10.0, 10.7))                    # reste affiché jusqu'au groupe suivant (jt.lisibles, 7 novembre)
         self.assertAlmostEqual(g[-1][2], 11.8)
 
 
@@ -2541,3 +2541,70 @@ class TestListe6Novembre(unittest.TestCase):
         for x in ('"shortcuts"', "raccourci=hasard", "githubstatus.com", 'id="castBloc"', 'id="tempsFab"', 'data-var="PRE_ECOUTE"',
                   'data-var="PROFILS_INTERDITS"', 'data-var="REDIFFUSION"', 'id="recette"', "modal_depense"):
             self.assertIn(x, src)
+
+
+class TestNotesTikTok(unittest.TestCase):
+    """Demande de l'auteur du 7 novembre : notes des vidéos sur les sons TikTok au plus haut (défauts réglés, reproches injustes retirés)."""
+
+    def test_sous_titres_lisibles(self):
+        import jt
+        t = "Mais qu est-ce que tu racontes là, t es complètement fou mon pote"
+        r = jt.minutage(t, None, 10, [(w, i * 0.15, i * 0.15 + 0.12) for i, w in enumerate(t.split())])
+        self.assertTrue(all(b - a + (0.2 if k == len(r) - 1 else 0) >= 0.3 for k, (_, a, b) in enumerate(r)))   # plus de groupe qui « clignote »
+        self.assertTrue(all(r[k][2] <= r[k + 1][1] + 1e-9 for k in range(len(r) - 1)))   # jamais deux groupes en même temps
+        self.assertEqual(" ".join(g for g, _, _ in r).split(), t.split())             # aucun mot perdu
+        self.assertEqual(jt.lisibles([("Bonjour à tous", 0.0, 1.0)]), [("Bonjour à tous", 0.0, 1.0)])
+
+    def test_debut_coupe_au_premier_mot(self):
+        import doublage
+        self.assertAlmostEqual(doublage.attente_premier_mot([{"s": 4.28, "e": 4.5}]), 3.98)
+        self.assertEqual(doublage.attente_premier_mot([{"s": 0.6, "e": 0.9}]), 0.0)
+        src = open(os.path.join(ICI, "..", "moteur", "doublage.py"), encoding="utf-8").read()
+        self.assertIn("extra = attente_premier_mot(mots)", src)
+
+    def test_son_impose_jamais_reproche(self):
+        import qualite
+        jury = {"humoriste": {"note": 6.4, "remarques": [{"probleme": "La chute finale manque de punch."},
+                                                         {"probleme": "Le chat devrait grimacer", "correction": {"type": "jeu"}}]},
+                "son": {"note": 7.0, "remarques": [{"probleme": "Ambiance sonore vide, aucun bruitage"}]},
+                "directeur_artistique": {"note": 8.0, "remarques": [{"probleme": "La chambre manque de détails"}]}}
+        self.assertEqual(qualite.sans_reproches_son_impose(jury), 2)
+        self.assertEqual(jury["humoriste"]["note"], 7.2); self.assertEqual(len(jury["humoriste"]["remarques"]), 1)
+        self.assertEqual(jury["directeur_artistique"]["note"], 8.0)
+        self.assertTrue(qualite.son_impose({"doublage": True}))
+        R = {"ph": [{"i": 0, "p": "presentateur", "deb": 0.2, "fin": 40, "texte": "x " * 50, "emo": "neutre", "scene": 0, "groupes": [("x x", 0.2, 0.8)]}],
+             "total": 45, "doublage": True, "mini": True, "plans": [], "fiches": {}}
+        cats = [r["categorie"] for v in qualite.jury_gratuit(R, {"repliques": []}).values() for r in v["remarques"]]
+        self.assertNotIn("trop_long", cats); self.assertNotIn("sous_titres_rapides", cats)   # durée imposée par le son, groupes lisibles
+
+    def test_corrige_compte_comme_bon(self):
+        src = open(os.path.join(ICI, "..", "moteur", "equipe.py"), encoding="utf-8").read()
+        self.assertIn('"téléphone en main seulement s\'il en est question", True', src)
+        self.assertIn("accord >= 0.85 or (accord >= 0.6 and tranches)", src)
+        v = open(os.path.join(ICI, "..", "moteur", "verif_finale.py"), encoding="utf-8").read()
+        self.assertNotIn('"invite": "Kévin"', v)                                # prénoms internes trompaient l'IA de contrôle
+
+
+class TestCompteRendu(unittest.TestCase):
+    """Demande de l'auteur du 7 novembre : les problèmes du compte rendu de chaque vidéo sont corrigés tout de suite."""
+
+    def test_texte_du_compte_rendu(self):
+        import compte_rendu as CR
+        pts = [{"t": 12.3, "quoi": "pendant la réplique de invite, c'est un autre personnage qui bouge"},
+               {"t": 60.1, "quoi": "saut d'image hors d'une coupe prévue"}]
+        jury = {"directeur_artistique": {"remarques": [{"moment": 4.0, "probleme": "Aucun téléphone visible alors qu'elle appelle"},
+                                                       {"probleme": "Les personnages pourraient être plus expressifs"}]}}
+        t = CR.texte(pts, jury, [{"ok": False, "revoir": True, "controle": "dialogue équilibré", "detail": "une voix dit 90 %"}])
+        self.assertIn("à 12.3 s", t); self.assertIn("téléphone", t); self.assertIn("dialogue équilibré", t)
+        self.assertNotIn("saut d'image", t); self.assertNotIn("pourraient", t)       # technique / avis de goût : rien à corriger
+        h = {"a_verifier": pts, "jury": {"remarques": ["Le malade devrait être alité dans une chambre"]}}
+        self.assertIn("alité", CR.depuis_historique(h))
+        self.assertTrue(CR.meilleure(60, 72)); self.assertFalse(CR.meilleure(72, 60)); self.assertTrue(CR.meilleure(70, 70, 7.5, 8.1))
+
+    def test_branche_dans_la_fabrication(self):
+        src = open(os.path.join(ICI, "..", "moteur", "principal.py"), encoding="utf-8").read()
+        self.assertIn("corriger_compte_rendu(sk, base, audios, mots, decors, fmt, A_VERIFIER, modal_ok, QUALITE)", src)
+        self.assertIn('_mode == "compte_rendu"', src); self.assertIn('sortie/.perdante', src)
+        r = open(os.path.join(ICI, "..", "moteur", "remarque.py"), encoding="utf-8").read(); self.assertIn("def appliquer(sk, texte, memoriser=True)", r)
+        s = open(os.path.join(ICI, "..", "moteur", "site.py"), encoding="utf-8").read()
+        self.assertIn('|compte_rendu"', s); self.assertIn('id="tkCorrigerTout"', s)

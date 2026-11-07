@@ -42,6 +42,31 @@ aucune coupe). Ne reproche JAMAIS le rythme des plans, l'absence de zoom, de gro
 et ne propose aucune correction « plan » : juge le reste (jeu, vannes, son, personnages, décors, image)."""
 
 
+SON_IMPOSE_TXT = r"(vanne|blague|chute|humour|dr[ôo]le|punch|rythme|r[ée]plique|dialogue|silence|blanc|trop long|trop court|trop rapide|lent|" \
+                 r"volume|audio|voix|son |sonore|bruitage|effet sonore|ponctuation|accroche|introduction|d[ée]marr|transition|fin manque|impact)"
+CONSIGNE_SON_IMPOSE = """
+SON IMPOSÉ (vidéo sur le son d'une vidéo TikTok) : le dialogue, les voix, les vannes, la chute, le rythme, les silences, la durée et le volume
+sont ceux de la vidéo d'origine : on ne peut PAS les changer. Ne les reproche jamais et ne les note pas : juge seulement ce que le robot
+dessine (personnages : âge, sexe, allure, un animal ou un objet qui parle est VOULU quand l'histoire le dit ; expressions et gestes au
+bon moment, réactions de celui qui écoute, décor, objets, lisibilité, défauts d'image). Les corrections « jeu » et « bruitage » restent
+possibles."""
+
+
+def son_impose(R): return bool((R or {}).get("doublage"))
+
+
+def sans_reproches_son_impose(jury):
+    """Son TikTok : retire les remarques sur ce qui vient de la bande son d'origine (vannes, chute, rythme, voix, silences…), sauf
+    celles qui proposent une correction que le robot sait faire (jeu, bruitage) ; +0,8 point par remarque retirée."""
+    n = 0
+    for k, v in jury.items():
+        garde = [r_ for r_ in v["remarques"] if not re.search(SON_IMPOSE_TXT, str(r_.get("probleme", "")).lower())
+                 or (isinstance(r_.get("correction"), dict) and r_["correction"].get("type") in ("jeu", "bruitage", "reaction"))]
+        retire = len(v["remarques"]) - len(garde)
+        if retire: v["remarques"] = garde; v["note"] = round(min(10.0, v["note"] + 0.8 * retire), 1); n += retire
+    return n
+
+
 def plan_large():
     return (os.environ.get("MONTAGE") or "large") == "large"
 
@@ -178,10 +203,15 @@ def jury_gratuit(R, sk, rapport_tech=""):
     if q0["deb"] > 0.8: rq.append(_rq("spectateur", 0, f"la première parole arrive à {q0['deb']:.1f} s : on scrolle avant", None, 1.0, "accroche_lente"))
     if not doub and len(_mots(q0["texte"])) > 14 and not q0["texte"].rstrip().endswith(("?", "!")):
         rq.append(_rq("spectateur", 0, "la première réplique est longue et plate : l'accroche doit piquer dès la 1re seconde", None, 0.9, "accroche_plate"))
-    for q in ph:
-        d_ = max(0.3, q["fin"] - q["deb"])
-        if len(q["texte"]) / d_ > 24: rq.append(_rq("spectateur", q["deb"], "sous-titres trop rapides à lire", None, 0.5, "sous_titres_rapides")); break
-    if mini and total > 30: rq.append(_rq("spectateur", None, f"{total:.0f} s pour un gag éclair : trop long", None, 0.8, "trop_long"))
+    gr = [g for q in ph for g in (q.get("groupes") or [])]                # sous-titres affichés groupe par groupe (jt.lisibles)
+    if gr:
+        vite = [g for g in gr if g[2] - g[1] < 0.3]
+        if len(vite) > 0.2 * len(gr): rq.append(_rq("spectateur", vite[0][1], "sous-titres trop rapides à lire", None, 0.5, "sous_titres_rapides"))
+    else:
+        for q in ph:
+            d_ = max(0.3, q["fin"] - q["deb"])
+            if len(q["texte"]) / d_ > 24: rq.append(_rq("spectateur", q["deb"], "sous-titres trop rapides à lire", None, 0.5, "sous_titres_rapides")); break
+    if mini and total > 30 and not doub: rq.append(_rq("spectateur", None, f"{total:.0f} s pour un gag éclair : trop long", None, 0.8, "trop_long"))
     if not mini and not doub and total < 40: rq.append(_rq("spectateur", None, f"{total:.0f} s pour un sketch long : trop court", None, 0.5, "trop_court"))
     if plan_large(): rq = [x for x in rq if x["categorie"] not in HORS_LARGE]   # montage « plan large » voulu par l'auteur : jamais reproché
     jury = {}
@@ -192,8 +222,8 @@ def jury_gratuit(R, sk, rapport_tech=""):
 
 
 # ------------------------------------------------------------------ jury IA (Claude, sinon Gemini / Mistral) : il regarde la vidéo (et l'original)
-PROMPT = """Tu es un jury de 5 critiques exigeants d'une chaîne TikTok d'humour en dessin animé (personnages « toons » : grosse tête ronde
-blanche, trait noir épais). Voici des images de NOTRE vidéo (numérotées, dans l'ordre, avec l'instant en secondes){origine}.
+PROMPT = """Tu es un jury de 5 critiques exigeants d'une chaîne TikTok d'humour en dessin animé (style « croquis » voulu : le petit à grosse tête
+ronde ou le grand en bâton, encre et aquarelle). Voici des images de NOTRE vidéo (numérotées, dans l'ordre, avec l'instant en secondes){origine}.
 Texte et minutage :
 {texte}
 Mesures du robot : {mesures}
@@ -253,12 +283,14 @@ def jury_claude(video, R, sk, gratuit):
             consigne_o = ("COMPARE avec l'original : liste dans \"manques_origine\" tout ce qu'on voit ou entend dans l'original et qui manque ou ne colle "
                           "pas chez nous (personnes, âge, sexe, lieux, objets, gestes, suite des plans, ambiance) et propose la correction qui le recrée.\n")
         texte = "\n".join(f"{q['deb']:.1f}–{q['fin']:.1f} s · {q['p']} : {q['texte']}" for q in ph)[:6000]
+        persos_ = ", ".join(f"{r}: " + (f"{F.get('espece')} qui parle (voulu)" if F.get("espece") else f"{F.get('genre')}/{F.get('age')} ans")
+                            for r, F in (R.get("fiches") or {}).items())
         mesures = f"durée {total:.0f} s, {len(R.get('plans') or [])} plans, bruitages {[(n, round(t, 1)) for n, t, _ in (R.get('bruitages') or [])][:20]}, " \
-                  f"personnages {{{', '.join(f'{r}: {F.get(chr(103) + 'enre')}/{F.get(chr(97) + 'ge')} ans' for r, F in (R.get('fiches') or {}).items())}}}, lieux {R.get('lieux')}"
+                  f"personnages {{{persos_}}}, lieux {R.get('lieux')}"
         gr = "; ".join(f"{NOMS[c]} : {x['probleme']}" for c in CRITIQUES for x in gratuit[c]["remarques"])[:1500] or "aucune"
         contenu.append({"type": "text", "text": PROMPT.format(origine=origine, texte=texte, mesures=mesures, gratuit=gr, consigne_origine=consigne_o, auteur="",
                                                               plans=", ".join(studio.PLANS), mouvements=", ".join(studio.MOUVEMENTS), reactions=", ".join(studio.REACTIONS),
-                                                              sons=", ".join(bruitages.CATALOGUE), lieux=", ".join(DD.LIEUX)) + (CONSIGNE_LARGE if plan_large() else "") + regles_apprises()})
+                                                              sons=", ".join(bruitages.CATALOGUE), lieux=", ".join(DD.LIEUX)) + (CONSIGNE_LARGE if plan_large() else "") + (CONSIGNE_SON_IMPOSE if son_impose(R) else "") + regles_apprises()})
         import ecrire, reseau
         res = None
         for _essai in range(2):                                            # l'IA de relais répond souvent en texte (JSON) : il est lu aussi
@@ -294,6 +326,9 @@ def evaluer(video, R, sk, rapport_tech=""):
             jury.setdefault(k, g[k])
         n_ = sans_reproches_large(jury)
         if n_: print(f"Jury : {n_} remarque(s) sur les plans / zooms retirée(s) (montage « plan large » voulu)", flush=True)
+        if son_impose(R):
+            n_ = sans_reproches_son_impose(jury)
+            if n_: print(f"Jury : {n_} remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)", flush=True)
         for k in CRITIQUES:                                                # les corrections sûres des règles gratuites restent proposées
             deja = {json.dumps(r_.get("correction"), sort_keys=True) for r_ in jury[k]["remarques"]}
             for r_ in g[k]["remarques"]:

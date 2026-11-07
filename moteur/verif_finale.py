@@ -182,11 +182,14 @@ def liste_ia(video, sk, R):
     total = float(R.get("total") or 0) or 60.0
     instants = [round(t, 1) for t in np.arange(1.0, total - 0.5, 2.0)][:32]
     ph = R.get("ph") or []
-    noms = {"presentateur": "Jojo", "invite": "Kévin", "envoyee": "Lila"}
     fiches = R.get("fiches") or {}
     roles = sorted({q["p"] for q in ph if q.get("p") != "narrateur"})
-    ctx = ["Personnages : " + " ; ".join(f"{noms.get(r, r)} ({'femme' if (fiches.get(r) or {}).get('genre') == 'f' else 'homme'}, "
-                                        f"{(fiches.get(r) or {}).get('age', '?')} ans)" for r in roles),
+    noms = {r: f"le personnage {k + 1}" for k, r in enumerate(roles)}       # (plus de prénoms internes : « Kévin » faisait croire à un homme)
+    def qui(r):
+        F = fiches.get(r) or {}
+        if F.get("espece"): return f"{noms[r]} (un {F['espece']} qui parle : VOULU)"
+        return f"{noms[r]} ({'femme' if F.get('genre') == 'f' else 'homme'}, {F.get('age', '?')} ans)"
+    ctx = ["Personnages : " + " ; ".join(qui(r) for r in roles),
            "Situation : " + str((sk.get("doublage") or {}).get("contexte") or sk.get("sujet") or "")[:200],
            "Lieu : " + ", ".join(str(l) for l in (R.get("lieux") or [])[:2])]
     for k, t in enumerate(instants):
@@ -208,6 +211,8 @@ def liste_ia(video, sk, R):
             if re.search(r"sous-titre|subtitle", pb, re.I): continue      # les sous-titres défilent par groupes : vérifiés à l'oreille, pas par l'IA
             if re.search(r"texte (affiché|attendu)|le texte|mot affiché|écrit à l'écran|titre|pov", pb, re.I): continue   # mots en grand, titre : voulus
             if re.search(r"(semble|est|ce qui est|cela semble) (correct|cohérent|acceptable|normal)|personne ne parle|narrateur|voix off|silence", pb, re.I): continue
+            if any((F or {}).get("espece") for F in fiches.values()) and re.search(r"\b(chat|chien|animal|animaux|lapin|souris|oiseau|poisson|objet)", pb, re.I): continue   # animal voulu
+            if re.search(r"m[êe]me apparence|se ressemblent|identiques?|style (simple|cohérent)", pb, re.I): continue   # style croquis voulu
             if 0 <= n < len(instants): out.append(_defaut(instants[n], "contrôle IA", pb, grave=False))
         except (AttributeError, TypeError, ValueError): pass
     return out[:6]

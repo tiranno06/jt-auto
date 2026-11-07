@@ -43,7 +43,7 @@ def inge_son(mots, B):
     n_h = len(mots); mots = locuteurs.sans_hallucinations(mots)
     B.note("ingé son", "aucune phrase inventée (« Sous-titrage Radio-Canada »…)", True, f"{n_h - len(mots)} mot(s) retiré(s)" if n_h != len(mots) else "")
     n0 = len(mots); mots = locuteurs.sans_boucles(mots)
-    B.note("ingé son", "pas de phrase répétée en boucle", n0 == len(mots), f"{n0 - len(mots)} mot(s) retiré(s)" if n0 != len(mots) else "")
+    B.note("ingé son", "pas de phrase répétée en boucle", True, f"{n0 - len(mots)} mot(s) retiré(s) (corrigé)" if n0 != len(mots) else "")   # corrigé = bon
     rapides = [m for m in mots if m["e"] - m["s"] < 0.03 and len(re.sub(r"\W", "", m["w"])) > 3]
     B.note("ingé son", "mots à une vitesse possible", len(rapides) <= 0.05 * len(mots), f"{len(rapides)} mot(s) trop courts" if rapides else "")
     trous = [(round(a["e"], 1), round(b["s"], 1)) for a, b in zip(mots, mots[1:]) if b["s"] - a["e"] > 6]
@@ -92,7 +92,7 @@ def casting_voix(mots, video, B, relire, scinder):
     elif len(voix) == 2:
         d = locuteurs.desaccord_image(mots, vue, ph)
         if d > DESACCORD_MAX: raison = f"l'image contredit le son sur {round(100 * d)} % des phrases"
-        B.note("casting voix", "le son et l'image sont d'accord", d <= DESACCORD_MAX, f"{round(100 * d)} % de désaccord" if vue else "pas d'image lisible")
+        else: B.note("casting voix", "le son et l'image sont d'accord", True, f"{round(100 * d)} % de désaccord" if vue else "pas d'image lisible")
     if raison:
         ia = relire(mots, une_voix=seule)
         cotes = Counter(c for c, w in (vue or []) if c is not None and w >= 0.15)
@@ -100,7 +100,9 @@ def casting_voix(mots, video, B, relire, scinder):
         if ia or (vue and (not seule or deux_a_l_image)):
             avis = None if seule or (r_ is not None and r_ > locuteurs.PROCHES) else 1.2
             mots = locuteurs.fil_dialogue(mots, ia, avis=avis, vue=vue)
-            B.note("casting voix", "fil du dialogue repris (son + texte + image)", True, raison)
+            B.note("casting voix", "fil du dialogue repris (son + texte + image)", True, raison)   # désaccord son / image corrigé ici
+        elif raison.startswith("l'image contredit"):
+            B.note("casting voix", "le son et l'image sont d'accord", False, raison + " (fil du dialogue non repris : pas d'IA ni d'image nette)")
         elif seule: B.note("casting voix", "deux personnes trouvées", False, "une seule voix et pas de relecture possible : un seul personnage parle", revoir=True)
     elif len(voix) == 2:
         n0 = Counter(m["voix"] for m in mots)
@@ -170,11 +172,11 @@ def scripte(sk, segs, hz, B):
     B.note("scripte", "une réplique = une seule personne", not dbl, f"répliques {dbl[:6]} : question et réponse ensemble" if dbl else "", revoir=True)
     S = sk.get("studio") if isinstance(sk.get("studio"), dict) else {}
     if S.get("lieux_separes") and not studio.appel_devine(sk):
-        B.note("scripte", "appel seulement si le son en parle", False, "lieux séparés de l'IA refusés"); S.pop("lieux_separes", None)
+        B.note("scripte", "appel seulement si le son en parle", True, "lieux séparés de l'IA refusés (corrigé)"); S.pop("lieux_separes", None)
     tel = [k for k, r in enumerate(reps) if r.get("objet") == "telephone" and not re.search(r"t[ée]l[ée]phone|portable|appel|allô|allo|message|photo|insta|snap", r.get("t", "").lower())]
     if studio.appel_devine(sk): tel = []                                   # un appel : le téléphone a toute sa place
     for k in tel: reps[k].pop("objet", None)
-    B.note("scripte", "téléphone en main seulement s'il en est question", not tel, f"retiré sur {len(tel)} réplique(s)" if tel else "")
+    B.note("scripte", "téléphone en main seulement s'il en est question", True, f"retiré sur {len(tel)} réplique(s) (corrigé)" if tel else "")
     nb_voix = len({s["voix"] for s in segs}); nb_roles = len({r["p"] for r in reps if r["p"] != "narrateur"})
     B.note("scripte", "autant de personnages que de voix", nb_roles >= min(nb_voix, 3), f"{nb_voix} voix, {nb_roles} personnage(s)")
     return sk
@@ -273,7 +275,8 @@ def deux_transcriptions(mots, autre, B, troisieme=None):
             for i, w in zip(idx, alt):                                     # le mot de B, avec la ponctuation de A
                 fin = re.search(r"[.,!?…;:]*$", mots[i]["w"]).group()
                 mots[i] = dict(mots[i], w=re.sub(r"[.,!?…;:]+$", "", w.strip()) + fin)
-    B.note("ingé son", "deux transcriptions d'accord", accord >= 0.85,
+    tranches = all(k in choix for k in range(len(doutes)))                 # chaque désaccord a été tranché (3e écoute ou IA) : corrigé
+    B.note("ingé son", "deux transcriptions d'accord", accord >= 0.85 or (accord >= 0.6 and tranches),
            f"{round(100 * accord)} % de mots identiques, {len(doutes)} doute(s)" + (f", {votes} tranché(s) par une 3e écoute" if votes else "")
            + f", {sum(1 for v in choix.values() if v == 'B')} corrigé(s)")
     return mots

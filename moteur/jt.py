@@ -93,6 +93,31 @@ def rgba(img): return np.array(img).astype(np.float32)
 def _syll(m):
     return max(1, len(re.findall(r"[aeiouyàâäéèêëîïôöùûüœæ]+", m.lower())) + 1.5 * len(re.findall(r"\d", m)))
 
+LECTURE_MIN = 0.45                                                         # s : un groupe de sous-titres plus court ne se lit pas
+
+
+def lisibles(res, mini=LECTURE_MIN, largeur=24):
+    """Sous-titres lisibles même quand on parle vite (notes du jury, 7 novembre : « sous-titres trop rapides ») : un groupe qui
+    resterait moins de `mini` s à l'écran est fusionné avec son voisin (si le texte tient sur une ligne : `largeur` caractères),
+    et chaque groupe reste affiché jusqu'à l'arrivée du suivant (0,5 s de plus au plus). Les instants de début ne bougent pas."""
+    res = list(res)
+    k = 0
+    while k < len(res) and len(res) > 1:
+        g, a, b = res[k]
+        if b - a >= mini: k += 1; continue
+        j = k + 1 if k + 1 < len(res) else k - 1                           # le suivant (ou le précédent pour le dernier)
+        x, y = (k, j) if j > k else (j, k)
+        t = res[x][0] + " " + res[y][0]
+        if len(t) > largeur: k += 1; continue
+        res[x:y + 1] = [(t, res[x][1], max(res[x][2], res[y][2]))]
+        k = max(0, x)
+    out = []
+    for k, (g, a, b) in enumerate(res):
+        suiv = res[k + 1][1] if k + 1 < len(res) else b                   # (le dernier : la vidéo le garde déjà 0,2 s de plus)
+        out.append((g, a, max(b, min(suiv, b + 0.5))))
+    return out
+
+
 def minutage(texte, a, t0, mots=None):
     """Horaires des groupes de mots, calés sur la voix réelle : les silences ne reçoivent aucun mot,
     et chaque fin de phrase (ponctuation) est accrochée à la pause correspondante dans l'audio."""
@@ -107,7 +132,7 @@ def minutage(texte, a, t0, mots=None):
             d0 = instant(c[k] + 1e-3, True) if k else mots[0][1]; d1 = instant(c[k + 1], False)
             res.append((g, t0 + d0, t0 + max(d1, d0 + 0.12)))
         for k in range(1, len(res)): res[k] = (res[k][0], max(res[k][1], res[k - 1][1] + 0.05), res[k][2])
-        return res
+        return lisibles(res)
     hop = int(0.01 * SR); nfr = max(1, len(a) // hop)
     e = np.array([np.sqrt(np.mean(a[k * hop:(k + 1) * hop] ** 2)) for k in range(nfr)])
     seuil = 0.1 * (np.percentile(e, 95) + 1e-9); v = e > seuil
@@ -131,7 +156,7 @@ def minutage(texte, a, t0, mots=None):
             p = min(pauses, key=lambda x: abs((x[0] + x[1]) / 2 - fin[k]))
             if abs((p[0] + p[1]) / 2 - fin[k]) < 0.45: fin[k], deb[k + 1] = p[0], p[1]
     for k in range(1, len(gs)): deb[k] = max(deb[k], deb[k - 1] + 0.05)
-    return [(g, t0 + deb[k], t0 + max(fin[k], deb[k] + 0.12)) for k, g in enumerate(gs)]
+    return lisibles([(g, t0 + deb[k], t0 + max(fin[k], deb[k] + 0.12)) for k, g in enumerate(gs)])
 
 # ------------------------------------------------------------------ sons (orchestre réel, CC0) et générique
 SONS = os.path.join(ICI, "..", "sons"); SRM = 44100; INTRO = 5.0; GEN_DUREE = 1.6

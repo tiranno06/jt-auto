@@ -406,6 +406,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
   <details class="groupe repliTk" data-cle="lancer" open><summary>🎲 Lancer des vidéos (sons au hasard)</summary>
     <button class="action" id="tkHasard">🎲 Une vidéo maintenant (son au hasard des profils)</button>
     <div id="tkSuiviH" class="note"></div>
+    <button class="second" id="tkCorrigerTout" style="width:100%;margin-bottom:6px">🛠️ Corriger les vidéos signalées (d'après leur compte rendu)</button>
     <div class="jeton" style="align-items:center"><button class="action" id="tkSerie" style="margin:0">🎲 Plusieurs vidéos à la chaîne</button>
       <input id="tkNb" type="number" min="1" max="10" value="3" inputmode="numeric" aria-label="Nombre de vidéos à la chaîne" style="flex:none;width:72px;text-align:center;font-size:17px;font-weight:700"></div>
     <p class="note">Choisissez le nombre (1 à 10) puis touchez le bouton : le robot fabrique ces vidéos l'une après l'autre, chacune sur un son différent pris au hasard dans vos profils. Inutile d'attendre la fin d'une vidéo.</p>
@@ -622,6 +623,11 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
       <div id="castListe"></div>
       <button class="second" id="castOk" disabled style="width:100%;margin-top:6px">🔁 Refaire avec ces personnages</button>
     </div>
+    <div id="crBloc" style="display:none;margin-top:10px">
+      <b>🛠️ Corriger d'après le compte rendu</b>
+      <p class="note" id="crNote">Le robot reprend les problèmes signalés pour cette vidéo (points à vérifier, remarques du jury), les corrige et refait la vidéo sur le même son. La plus sûre des deux versions est gardée (jamais une vidéo publiée ou cochée « À publier »).</p>
+      <button class="second" id="crOk" style="width:100%">🛠️ Corriger les problèmes signalés</button>
+    </div>
     <div id="remBloc" style="display:none;margin-top:10px">
       <b>💬 Dis ce qui ne va pas, le robot corrige</b>
       <p class="note">Écris (ou dicte avec 🎤) ce qui ne va pas, comme à un monteur : « à 12 s c'est l'autre qui parle », « elle devrait être dans une cuisine », « le chat doit être noir ». Le robot comprend la remarque et refait la vidéo sur le même son.</p>
@@ -810,7 +816,7 @@ async function actualiserStats(){
     if(Array.isArray(h)){const par={}; h.forEach(e=>{if(e.fichier)par[e.fichier]=e});
       try{const K=["fichier","titre","date","tag","web","filiere","source_audio","theme","manuel","legende","publie","vues","format","avis","note","note_auteur","programmee","duree","likes","commentaires","partages","a_verifier","confiance"];
         localStorage.setItem("jt_historique",JSON.stringify(h.filter(e=>e.fichier).map(e=>Object.fromEntries(K.filter(k=>e[k]!==undefined).map(k=>[k,e[k]])))))}catch(e){}   // copie légère pour la prochaine ouverture
-      DATA.forEach(v=>{const e=par[v.fichier]; if(!e)return; ["vues","likes","commentaires","partages","publie","couts","programmee","a_verifier","confiance"].forEach(k=>{if(e[k]!==undefined)v[k]=e[k]})});
+      DATA.forEach(v=>{const e=par[v.fichier]; if(!e)return; ["vues","likes","commentaires","partages","publie","couts","programmee","a_verifier","confiance","jury"].forEach(k=>{if(e[k]!==undefined)v[k]=e[k]})});
       ajouterNouvelles(h); rendreTemps(h);
       const faites=h.filter(e=>e.fichier), der=faites[faites.length-1];
       if(der){OUTILS={outils:(der.outils&&typeof der.outils==="object")?der.outils:null,date:der.date||"",titre:der.titre||""}; rendreOutils()}}
@@ -1250,7 +1256,10 @@ $("#quiOk").onclick=()=>{
   document.querySelectorAll("details.repliTk").forEach(d=>{const k=d.dataset.cle; if(k in m) d.open=!!m[k];
     d.addEventListener("toggle",()=>{m[k]=d.open; try{localStorage.setItem("jt_replis",JSON.stringify(m))}catch(e){}})})})();
 // ------------------------------------------------ « Dis ce qui ne va pas, le robot corrige » (moteur/remarque.py)
+const nbSignales=v=>(v.a_verifier||[]).length+((v.jury&&v.jury.remarques)||[]).length;
 function afficherRemarque(v){
+  const c=$("#crBloc"); if(c){const n=v?nbSignales(v):0; c.style.display=(v&&v.origine==="tiktok"&&n&&lireJeton())?"block":"none";
+    if(n) $("#crOk").textContent=`🛠️ Corriger les ${n} problème${n>1?"s":""} signalé${n>1?"s":""}`}
   const b=$("#remBloc"); if(!b) return;
   b.style.display=(v&&v.origine==="tiktok"&&v.reps&&v.reps.length)?"block":"none"; $("#remCorr").value=""; $("#remCorrOk").disabled=true;
 }
@@ -1262,6 +1271,19 @@ $("#remMicro").onclick=()=>{                                               // di
   r.onresult=e=>{const t=e.results[0][0].transcript; const z=$("#remCorr"); z.value=(z.value?z.value+" ":"")+t; z.oninput()};
   r.onend=()=>{$("#remMicro").textContent="🎤"}; r.onerror=()=>{$("#remMicro").textContent="🎤"; toast("Dictée interrompue")};
   try{r.start()}catch(e){$("#remMicro").textContent="🎤"}
+};
+$("#crOk").onclick=()=>{
+  const v=DATA[choisie]; if(!v) return;
+  lancerFlux("emission.yml",$("#crOk"),"🛠️ Le robot corrige les problèmes signalés et refait la vidéo sur le même son (15 à 40 min) ; la plus sûre des deux versions est gardée.",{refaire:v.fichier+"|compte_rendu"},$("#suivi"));
+};
+$("#tkCorrigerTout").onclick=async()=>{                                    // toutes les vidéos signalées (non publiées), 10 au plus
+  if(!lireJeton()){toast("Connectez d'abord la régie (onglet Réglages)");allerOnglet("config");return}
+  const l=DATA.filter(v=>v.origine==="tiktok"&&!v.essai&&v.publie!==true&&((v.a_verifier||[]).length||(typeof v.confiance==="number"&&v.confiance<70))).sort((a,b)=>(confiance(a)||0)-(confiance(b)||0)).slice(0,10);
+  if(!l.length){toast("Aucune vidéo non publiée avec des problèmes signalés ✓");return}
+  if(!confirm(`Corriger ${l.length} vidéo(s) d'après leur compte rendu ?\n\nElles seront refaites l'une après l'autre sur le même son (20 à 40 min chacune) ; pour chacune, la plus sûre des deux versions est gardée.`)) return;
+  const b=$("#tkCorrigerTout"); b.disabled=true; let ok=0;
+  for(const v of l){try{const r=await gh(`/actions/workflows/emission.yml/dispatches`,{method:"POST",body:JSON.stringify({ref:CONF.branche,inputs:{refaire:v.fichier+"|compte_rendu"}})}); if(r.ok) ok++}catch(e){}}
+  b.disabled=false; toast(ok?`🛠️ ${ok} vidéo(s) en correction (file d'attente)`:"❌ GitHub a refusé : réessayez");
 };
 $("#remCorrOk").onclick=()=>{
   const v=DATA[choisie], t=$("#remCorr").value.replace(/[\r\n|]+/g," ").trim().slice(0,600); if(!v||t.length<4) return;

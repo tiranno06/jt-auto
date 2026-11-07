@@ -71,6 +71,13 @@ def debut_parole(sig, seuil=0.8):
     return k * 0.02
 
 
+def attente_premier_mot(mots, limite=1.0, marge=0.3):
+    """Secondes à couper encore au début quand le premier mot transcrit arrive après `limite` (le spectateur scrolle avant)."""
+    if not mots: return 0.0
+    s0 = float(mots[0].get("s") or 0)
+    return round(s0 - marge, 3) if s0 > limite else 0.0
+
+
 def couper_debut(tmp, info, t0, chemin_voix=None):
     """Silence du début retiré (vidéo d'origine, piste, son mono et voix isolée coupés au MÊME instant : rien ne se décale).
     Renvoie (piste, mono, voix_sig ou None)."""
@@ -525,6 +532,19 @@ def preparer(url):
                 voix_sig = v2 if v2 is not None else mono; duree = len(mono) / SR
                 journal(f"  silence du début retiré : {debut:.2f} s (la 1re parole arrivait à {t_:.1f} s)")
             except Exception as e: journal(f"  silence du début gardé ({str(e)[:100]})"); debut = 0.0
+    import equipe
+    B = equipe.Bulletin()                                                  # l'équipe : chaque poste contrôlé avant le suivant
+    mots = equipe.inge_son(transcrire(chemin_voix, mono), B)
+    extra = attente_premier_mot(mots) if os.environ.get("DEBUT_COURT", "1") != "0" else 0.0
+    if extra > 0:                                                          # 2e coupe : un bruit (souffle, musique) avait été pris pour
+        try:                                                               # de la voix, la 1re parole arrivait encore à 5 s (notes du jury)
+            piste, mono, v2 = couper_debut(tmp, info, extra, chemin_voix if chemin_voix != f"{tmp}/mono.wav" else None)
+            if v2 is not None: voix_sig = v2
+            elif chemin_voix == f"{tmp}/mono.wav": voix_sig = None
+            duree = len(mono) / SR; debut = round(debut + extra, 3)
+            mots = [dict(m, s=round(float(m["s"]) - extra, 3), e=round(float(m["e"]) - extra, 3)) for m in mots]
+            journal(f"  début coupé au premier mot : {extra:.2f} s de plus (1re parole à {float(mots[0]['s']):.2f} s)")
+        except Exception as e: journal(f"  début gardé ({str(e)[:100]})")
     visuel, cles = {}, []
     try:                                                                   # l'image de la vidéo : cadrages, personnes, habits, couleurs, lumière
         import analyse_video
@@ -532,9 +552,6 @@ def preparer(url):
         journal("  image de la vidéo : " + analyse_video.texte(visuel))
     except Exception as e: journal(f"  analyse de l'image impossible ({str(e)[:150]}) : mise en scène d'après le son seul")
     sig = voix_sig if voix_sig is not None and len(voix_sig) >= len(mono) * 0.9 else mono
-    import equipe
-    B = equipe.Bulletin()                                                  # l'équipe : chaque poste contrôlé avant le suivant
-    mots = equipe.inge_son(transcrire(chemin_voix, mono), B)
     if SOURCE_MOTS[0] != "elevenlabs":                                    # 2e transcription par un autre outil, comparée mot à mot
         try:
             autre = whisper_local(mono) if SOURCE_MOTS[0] == "groq" else ecoute.groq(chemin_voix)

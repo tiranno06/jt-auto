@@ -223,7 +223,7 @@ jobs:
         uses: actions/cache@v6
         with:
           path: ~/venv
-          key: venv-${{ steps.py.outputs.python-version }}-${{ hashFiles('requirements.txt', 'contraintes.txt') }}-${{ (startsWith(inputs.theme, 'TIKTOK::') || inputs.filiere == 'tiktok' || contains(inputs.refaire, '|qui|') || contains(inputs.refaire, '|remarque|') || contains(inputs.refaire, '|casting|')) && 'ecoute' || 'base' }}-${{ env.HF_TOKEN != '' && 'hf' || 'sanshf' }}-v1
+          key: venv-${{ steps.py.outputs.python-version }}-${{ hashFiles('requirements.txt', 'contraintes.txt') }}-${{ (startsWith(inputs.theme, 'TIKTOK::') || inputs.filiere == 'tiktok' || contains(inputs.refaire, '|qui|') || contains(inputs.refaire, '|remarque|') || contains(inputs.refaire, '|casting|') || contains(inputs.refaire, '|compte_rendu')) && 'ecoute' || 'base' }}-${{ env.HF_TOKEN != '' && 'hf' || 'sanshf' }}-v1
 
       - name: Installer ffmpeg
         timeout-minutes: 10
@@ -262,7 +262,7 @@ jobs:
           fi
 
       - name: Modèles de reconnaissance vocale et d'empreinte en cache (Whisper large-v3-turbo, ECAPA)
-        if: startsWith(inputs.theme, 'TIKTOK::') || inputs.filiere == 'tiktok' || contains(inputs.refaire, '|qui|') || contains(inputs.refaire, '|remarque|') || contains(inputs.refaire, '|casting|')
+        if: startsWith(inputs.theme, 'TIKTOK::') || inputs.filiere == 'tiktok' || contains(inputs.refaire, '|qui|') || contains(inputs.refaire, '|remarque|') || contains(inputs.refaire, '|casting|') || contains(inputs.refaire, '|compte_rendu')
         uses: actions/cache@v6
         with:
           path: |
@@ -274,7 +274,7 @@ jobs:
           restore-keys: hf-whisper-turbo-v1
 
       - name: Lecteur TikTok (vidéo depuis une bande son)
-        if: startsWith(inputs.theme, 'TIKTOK::') || inputs.filiere == 'tiktok' || contains(inputs.refaire, '|qui|') || contains(inputs.refaire, '|remarque|') || contains(inputs.refaire, '|casting|')
+        if: startsWith(inputs.theme, 'TIKTOK::') || inputs.filiere == 'tiktok' || contains(inputs.refaire, '|qui|') || contains(inputs.refaire, '|remarque|') || contains(inputs.refaire, '|casting|') || contains(inputs.refaire, '|compte_rendu')
         run: |
           python -m pip install -q uv || true
           I() { python -m uv pip install -q "$@" || python -m pip install -q "$@"; }   # uv (10 à 50 fois plus rapide), pip en repli
