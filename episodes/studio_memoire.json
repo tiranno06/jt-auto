@@ -6408,31 +6408,71 @@
   "cadence": "rapide"
  },
  {
-  "moment": "jour",
+  "moment": "soir",
   "lieux": [
-   "parc"
+   "voiture"
   ],
   "source": "auteur+image",
-  "duree": 65.2,
+  "duree": 92.0,
   "plans": {
-   "large": 31
+   "large": 41
   },
   "mouvements": {
-   "fixe": 31
+   "fixe": 41
+  },
+  "costumes": {
+   "presentateur": "blouson",
+   "envoyee": "debardeur",
+   "invite": "tshirt"
+  },
+  "figurants": 1,
+  "ambiances": [
+   "neon",
+   "poussiere"
+  ],
+  "controle": "Humoriste 8.4/10 :  | Réalisateur 9.4/10 :  | Directeur artistique 5.8/10 : 24.7 s Le décor de la voiture manque de détails pour renforcer l’ambiance (ex. : objets ou éléments typiques d’une voiture).",
+  "fichier": "2026-11-11_12h06_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": false,
+   "tiers": false,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": false,
+   "reflets": false,
+   "son": true
+  },
+  "cadence": "normal"
+ },
+ {
+  "moment": "nuit",
+  "lieux": [
+   "voiture"
+  ],
+  "source": "auteur+image",
+  "duree": 80.4,
+  "plans": {
+   "large": 29
+  },
+  "mouvements": {
+   "fixe": 29
   },
   "costumes": {
    "presentateur": "tshirt",
-   "envoyee": "tshirt"
+   "envoyee": "robe",
+   "invite": "debardeur"
   },
   "figurants": 0,
-  "ambiances": [],
-  "controle": "Humoriste 9.4/10 :  | Réalisateur 10.0/10 :  | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.9/10 : ",
-  "fichier": "2026-11-11_12h03_emission.mp4",
+  "ambiances": [
+   "neon"
+  ],
+  "controle": "Humoriste 9.4/10 :  | Réalisateur 10.0/10 :  | Directeur artistique 6.8/10 : 1 s Le présentateur a une apparence trop neutre et manque de traits distinctifs pour le rendre mémorable.; 15 s Les décors ",
+  "fichier": "2026-11-11_12h49_emission.mp4",
   "cine": {
    "focus": false,
    "vertige": false,
    "tiers": true,
-   "etalonnage": false,
+   "etalonnage": true,
    "profondeur": false,
    "grain": false,
    "reflets": true,
