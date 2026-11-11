@@ -6344,31 +6344,67 @@
    "salon"
   ],
   "source": "auteur+image",
-  "duree": 81.2,
+  "duree": 62.8,
   "plans": {
-   "large": 23
+   "large": 32
   },
   "mouvements": {
-   "fixe": 23
+   "fixe": 32
   },
   "costumes": {
-   "envoyee": "chemise",
+   "envoyee": "tshirt",
    "invite": "tshirt"
   },
   "figurants": 0,
   "ambiances": [],
-  "controle": "Humoriste 9.4/10 :  | Réalisateur 7.6/10 : 62.1 s Le passage entre les décors (rue/salon) n'est pas fluide et manque de cohérence visuelle. | Directeur artistique 8.0/10 : 0 s Les personnages manquent",
-  "fichier": "2026-11-11_10h57_emission.mp4",
+  "controle": "Humoriste 6.3/10 : 12.3 s La gestuelle de la copine manque de mordant : dans l'original elle pointe du doigt avec autorité pour accentuer le ridicule de sa mauvaise foi. | Réalisateur 5.8/10 : 0.4 s L",
+  "fichier": "2026-11-11_10h45_emission.mp4",
   "cine": {
    "focus": false,
-   "vertige": true,
+   "vertige": false,
    "tiers": true,
    "etalonnage": true,
    "profondeur": false,
-   "grain": true,
+   "grain": false,
    "reflets": true,
    "son": true
   },
-  "cadence": "normal"
+  "cadence": "rapide"
+ },
+ {
+  "moment": "nuit",
+  "lieux": [
+   "voiture"
+  ],
+  "source": "auteur+image",
+  "duree": 92.0,
+  "plans": {
+   "large": 48
+  },
+  "mouvements": {
+   "fixe": 48
+  },
+  "costumes": {
+   "presentateur": "tshirt",
+   "invite": "chemise",
+   "envoyee": "tshirt"
+  },
+  "figurants": 1,
+  "ambiances": [
+   "neon"
+  ],
+  "controle": "Humoriste 9.4/10 :  | Réalisateur 6.8/10 : 5.4 s Les personnages ont des expressions faciales peu variées, ce qui rend les réactions moins dynamiques.; 18.8 s Les personnages pourraient avoir des gest",
+  "fichier": "2026-11-11_11h09_emission.mp4",
+  "cine": {
+   "focus": true,
+   "vertige": true,
+   "tiers": false,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": false,
+   "reflets": false,
+   "son": true
+  },
+  "cadence": "rapide"
  }
 ]
