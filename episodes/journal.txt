@@ -4,40 +4,47 @@ Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, Groq ok, OpenRouter ok, IA Modal ok, ElevenLabs ok — IA utilisée : mistral
 Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @motiontoonz, @same_same53, @charly.bse, @kodanimation, @vignianimation, @vincedessine
 Tendances : aucun hashtag commun ; sujets qui montent en France : leonardo dicaprio, france afrique du sud, kora, matveï safonov, boston, wanis honsor
-Profil TikTok @yan_animation0 (poids 1.1) : 11 vidéo(s) jamais utilisée(s), meilleur potentiel 76/100
-Profil TikTok @vincedessine (poids 0.8) : 27 vidéo(s) jamais utilisée(s), meilleur potentiel 57/100
-Profil TikTok @vignianimation (poids 1.1) : 14 vidéo(s) jamais utilisée(s), meilleur potentiel 69/100
-Vidéo depuis TikTok : https://www.tiktok.com/@yan_animation0/video/7666904208184053025
+Profil TikTok @eliotlehanneur (poids 0.9) : 31 vidéo(s) jamais utilisée(s), meilleur potentiel 94/100
+Profil TikTok @motiontoonz (poids 0.9) : 36 vidéo(s) jamais utilisée(s), meilleur potentiel 95/100
+Profil TikTok @yan_animation0 (poids 1.1) : 10 vidéo(s) jamais utilisée(s), meilleur potentiel 81/100
+Vidéo depuis TikTok : https://www.tiktok.com/@eliotlehanneur/video/7703876071766232353
   son téléchargé (yt-dlp --impersonate chrome)
-  son récupéré : 76.9 s, compte d'origine @yan_animation0
+  son récupéré : 70.1 s, compte d'origine @eliotlehanneur
   voix isolées (ElevenLabs)
-  transcription ElevenLabs : 270 mots, 3 voix, langue fra
-  [équipe · ingé son] 10 signe(s) de ponctuation isolé(s) recollé(s)
+  transcription ElevenLabs : 191 mots, 2 voix, langue fra
+  [équipe · ingé son] 7 signe(s) de ponctuation isolé(s) recollé(s)
   [équipe · ingé son] ✔ aucune phrase inventée (« Sous-titrage Radio-Canada »…)
   [équipe · ingé son] ✔ pas de phrase répétée en boucle
-  [équipe · ingé son] ✔ mots à une vitesse possible : 3 mot(s) trop courts
+  [équipe · ingé son] ✔ mots à une vitesse possible
   [équipe · ingé son] ✔ pas de long passage sans texte
-[ WARN:0@334.605] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+[ WARN:0@337.016] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
 INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
 WARNING: Logging before InitGoogle() is written to STDERR
-W0000 00:00:1794397346.692386    4185 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
-W0000 00:00:1794397346.712670    4185 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
-W0000 00:00:1794397346.758083    4185 landmark_projection_calculator.cc:81] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX.
-  image de la vidéo : 21 plans (≈ 3.67 s chacun) ; cadrages : très serré 0 %, serré 23 %, moyen 72 %, large 3 % ; caméra : fixe 95 %, avance 2 %, recul 1 %, travelling 0 % ; 2 personne(s) à l'écran : droite (habit [201, 134, 76], cheveux [189, 126, 70], sourit 0 %); gauche (habit [29, 23, 20], cheveux [3, 1, 1], sourit 0 %); centre (habit [145, 107, 17], cheveux [132, 87, 51], sourit 0 %) ; agitation 0.357 ; lumière soir ; fond [25, 18, 15]
-[0;93m2026-11-11 11:42:30.455652544 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
-  textes à l'écran de l'original : pas des sous-titres du dialogue (2 % de lettres en commun)
-  réseau : erreur 429 passagère, nouvel essai dans 2 s
-  Gemini a regardé la vidéo entière (gemini-flash-lite-latest) : 3 personnage(s), lieu « voiture »
-W0000 00:00:1794397478.868065    4266 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
-W0000 00:00:1794397478.873153    4269 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
-W0000 00:00:1794397478.882819    4269 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
-  témoin visages : 21 piste(s), 3 personnage(s) d'après l'apparence et le regard, 26/47 phrases lisibles
-  [équipe · casting voix] ✔ témoin image (qui parle dans l'original) : 47/47 phrases lisibles (Gemini (vidéo entière), visages, mouvements)
-  3 personnages joués par la même voix : chaque phrase au personnage vu dans l'original
-  [équipe · casting voix] ✔ plusieurs personnages joués par la même voix : 3 personnages vus dans l'original
+W0000 00:00:1794398310.075518    4140 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1794398310.095332    4140 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1794398310.125431    4139 landmark_projection_calculator.cc:81] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX.
+  image de la vidéo : 19 plans (≈ 3.71 s chacun) ; cadrages : très serré 5 %, serré 88 %, moyen 0 %, large 6 % ; caméra : fixe 100 % ; 1 personne(s) à l'écran : centre (habit [11, 7, 10], cheveux [43, 30, 26], sourit 13 %) ; agitation 0.189 ; lumière jour ; fond [8, 7, 8]
+[0;93m2026-11-11 11:58:34.142209723 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+  textes à l'écran de l'original : pas des sous-titres du dialogue (4 % de lettres en commun)
+Loading weights:   0%|          | 0/447 [00:00<?, ?it/s]Loading weights: 100%|██████████| 447/447 [00:00<00:00, 14562.42it/s]
+  bruits de l'original (CLAP, 9 s) : door, gunshot
+  voix vérifiées mot par mot : 6 mot(s) remis sur la bonne voix
+  réseau : coupure (The read operation timed out), nouvel essai dans 2 s
+  Gemini a regardé la vidéo entière (gemini-flash-lite-latest) : 2 personnage(s), une même personne en joue plusieurs, lieu « salon »
+W0000 00:00:1794398667.581448    4260 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+W0000 00:00:1794398667.597935    4262 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1794398667.610473    4262 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+  témoin visages : 19 piste(s), 2 personnage(s) d'après l'apparence et le regard, 24/29 phrases lisibles
+  [équipe · casting voix] ✔ témoin image (qui parle dans l'original) : 29/29 phrases lisibles (Gemini (vidéo entière), visages, mouvements)
+  ressemblance des deux voix : 0.67 (au-delà de 0.55 : le dialogue décide avec le son)
+  deux IA ont relu le dialogue (groq et gemini) : d'accord sur 28/29 phrases
+  relecture du dialogue par l'IA : 28/29 phrases (A : le sceptique (celui qui questionne), B : le fervent croyant (celui qui défen)
+  contrôle questions-réponses (avec relecture de l'IA, avec le témoin image) : 29 phrases, 14 mot(s) changé(s) de voix
+  [équipe · casting voix] ✔ fil du dialogue repris (son + texte + image) : voix proches (0.67)
+  [équipe · casting voix] ✔ parole répartie entre les personnages : 2 voix, la plus bavarde dit 65 %
 /opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/importlib/__init__.py:90: UserWarning: Module 'speechbrain.lobes.models.huggingface_transformers' was deprecated, redirecting to 'speechbrain.integrations.huggingface'. Please update your script.
   return _bootstrap._gcd_import(name[level:], package, level)
-Loading weights:   0%|          | 0/211 [00:00<?, ?it/s]Loading weights: 100%|██████████| 211/211 [00:00<00:00, 24279.78it/s]
+Loading weights:   0%|          | 0/211 [00:00<?, ?it/s]Loading weights: 100%|██████████| 211/211 [00:00<00:00, 11543.71it/s]
 [transformers] [1mWav2Vec2Model LOAD REPORT[0m from: facebook/wav2vec2-base
 Key                          | Status     |  | 
 -----------------------------+------------+--+-
@@ -53,117 +60,155 @@ Notes:
 - UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
 speechbrain.integrations.huggingface.huggingface - Wav2Vec2Model is frozen.
 CategoricalEncoder.expect_len was never called: assuming category count of 4 to be correct! Sanity check your encoder using `.expect_len`. Ensure that downstream code also uses the correct size. If you are sure this does not apply to you, use `.ignore_len`.
-  émotions entendues dans la voix : 0 réplique(s) (5 s)
-  29 répliques, voix : {'speaker_2': 283, 'speaker_0': 210, 'speaker_1': 252}
-  son de la vidéo : 3 voix [283 Hz (f, 59 %), 210 Hz (f, 21 %), 252 Hz (f, 20 %)], 4.15 mots/s, blancs 0.49 s, 0 coupure(s) de parole, dynamique 31.4 dB, musique de fond, 21 bruitage(s) (5 graves, 16 aigus, 9 sur une fin de réplique), événements {'[rire]': 1}, émotions {}
-  IA gemini indisponible (The read operation timed out) : on passe à la suivante
-  scène reconstituée : Deux amis dans une voiture découvrent que le frère dangereux et menaçant de l'une d'eux les observe et exige qu'ils fassent demi-tour. La tension monte rapidement.
-  casting : speaker_0 → Jojo, speaker_1 → Lila, speaker_2 → Kévin
-  sous-titres : 1 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
-  événements sonores : [rire]
+  émotions entendues dans la voix : 0 réplique(s) (4 s)
+  28 répliques, voix : {'speaker_0': 145, 'speaker_1': 100}
+  son de la vidéo : 2 voix [145 Hz (h, 32 %), 100 Hz (h, 68 %)], 3.9 mots/s, blancs 0.68 s, 9 coupure(s) de parole, dynamique 22.4 dB, musique de fond, 25 bruitage(s) (4 graves, 21 aigus, 6 sur une fin de réplique), événements {'gunshot': 1, 'door': 1}, émotions {}
+  IA gemini indisponible (gemini 429 : [{
+  "error": {
+    "code": 429,
+    "message": "You exceeded your current quota, please check your plan an) : on passe à la suivante
+  scène reconstituée : Deux amis discutent dans un salon breton d'une prophétie mystérieuse qui menace la Bretagne. Leur conversation mêle humour et gravité, évoquant une tradition locale où l'apéro est une réponse inattendue à une crise apocalyptique.
+  casting : speaker_0 → Jojo, speaker_1 → Kévin
+  Claude a réattribué 2 réplique(s) à la bonne personne (voix proches)
+  événements sonores : door, gunshot
   [équipe · scripte] ✔ une réplique = une seule personne
-  [équipe · scripte] ✔ téléphone en main seulement s'il en est question : retiré sur 3 réplique(s) (corrigé)
+  [équipe · scripte] ✔ téléphone en main seulement s'il en est question
+  [équipe · scripte] ✔ autant de personnages que de voix : 2 voix, 2 personnage(s)
+  [équipe · monteur] ✔ chaque mot dans sa réplique (lèvres et sous-titres calés)
+  [équipe · monteur] ✔ chaque réplique a une durée
+  [équipe · monteur] ✔ rien après la fin du son
+  [équipe · monteur] ✔ répliques dans l'ordre du son
+  [équipe · monteur] ✔ un personnage ne parle jamais deux fois en même temps
+  bulletin de l'équipe : 15/15 contrôles bons
+  voix trop proches dans https://www.tiktok.com/@eliotlehanneur/video/7703876071766232353 (ressemblance 0.67) : on cherche une vidéo aux voix bien différentes
+Vidéo depuis TikTok : https://www.tiktok.com/@eliotlehanneur/video/7706588138671476000
+  son téléchargé (yt-dlp --impersonate chrome)
+  son récupéré : 83.2 s, compte d'origine @eliotlehanneur
+  voix isolées (ElevenLabs)
+  transcription ElevenLabs : 490 mots, 2 voix, langue fra
+  [équipe · ingé son] 10 signe(s) de ponctuation isolé(s) recollé(s)
+  [équipe · ingé son] ✔ aucune phrase inventée (« Sous-titrage Radio-Canada »…)
+  [équipe · ingé son] ✔ pas de phrase répétée en boucle
+  [équipe · ingé son] ✔ mots à une vitesse possible
+  [équipe · ingé son] ✔ pas de long passage sans texte
+[ WARN:0@799.840] global net_impl_backend.cpp:345 setPreferableTarget Targets are not supported by the new graph engine for now
+W0000 00:00:1794398772.980070    4362 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1794398772.999858    4362 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+  image de la vidéo : 45 plans (≈ 1.86 s chacun) ; cadrages : très serré 98 %, serré 0 %, moyen 0 %, large 1 % ; caméra : fixe 29 %, avance 19 %, recul 16 %, travelling 9 %, epaule 24 % ; 1 personne(s) à l'écran : centre (habit [13, 13, 19], cheveux [55, 39, 30], sourit 0 %); droite (habit [11, 11, 16], cheveux [54, 37, 29], sourit 0 %) ; agitation 0.583 ; lumière soir ; fond [16, 15, 19]
+  textes à l'écran de l'original : pas des sous-titres du dialogue (2 % de lettres en commun)
+  bruits de l'original (CLAP, 10 s) : aucun
+  voix vérifiées mot par mot : 10 mot(s) remis sur la bonne voix
+W0000 00:00:1794398883.329582    4387 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+W0000 00:00:1794398883.333666    4389 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1794398883.344675    4390 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+  témoin visages : 45 piste(s), 2 personnage(s) d'après l'apparence et le regard, 49/56 phrases lisibles
+  [équipe · casting voix] ✔ témoin image (qui parle dans l'original) : 55/56 phrases lisibles (visages, mouvements)
+  ressemblance des deux voix : 0.26 (au-delà de 0.55 : le dialogue décide avec le son)
+  [équipe · casting voix] ✔ le son et l'image sont d'accord : 26 % de désaccord
+  deux IA ont relu le dialogue (groq et mistral) : d'accord sur 23/36 phrases
+  relecture du dialogue par l'IA : 23/36 phrases (A : le colocataire/ami qui vient habiter, B : le propriétaire/parent qui veut qu)
+  contrôle questions-réponses (avec relecture de l'IA) : 36 phrases, 220 mot(s) changé(s) de voix
+  voix dominante partagée entre deux personnes (même voix, dialogue) ; l'autre voix devient une 3e personne
+  [équipe · casting voix] ✔ voix dominante partagée (même voix pour deux personnes)
+  [équipe · casting voix] ✔ parole répartie entre les personnages : 3 voix, la plus bavarde dit 46 %
+  émotions entendues dans la voix : 0 réplique(s) (6 s)
+  54 répliques, voix : {'speaker_2': 220, 'speaker_0': 155, 'speaker_1': 146}
+  son de la vidéo : 3 voix [220 Hz (f, 28 %), 155 Hz (h, 26 %), 146 Hz (h, 46 %)], 6.15 mots/s, blancs 0.07 s, 30 coupure(s) de parole, dynamique 14.0 dB, musique de fond, 78 bruitage(s) (11 graves, 67 aigus, 44 sur une fin de réplique), événements {}, émotions {}
+  images de l'original décrites par Florence-2 (6 images, 22 s)
+  scène reconstituée : Une discussion tendue entre deux partenaires sur la question de savoir si l'un doit payer un loyer à l'autre alors qu'il emménage chez son compagnon. L'envoyée et le présentateur jouent les médiateurs ou observateurs, tandis que l'invité défend son point de vue avec insistance.
+  casting : speaker_2 → Kévin, speaker_0 → Jojo, speaker_1 → Lila
+  sous-titres : 5 réplique(s) corrigée(s) (mots mal entendus par la reconnaissance vocale)
+  [équipe · scripte] ✔ une réplique = une seule personne
+  [équipe · scripte] ✔ téléphone en main seulement s'il en est question : retiré sur 1 réplique(s) (corrigé)
   [équipe · scripte] ✔ autant de personnages que de voix : 3 voix, 3 personnage(s)
   [équipe · monteur] ✔ chaque mot dans sa réplique (lèvres et sous-titres calés)
   [équipe · monteur] ✔ chaque réplique a une durée
   [équipe · monteur] ✔ rien après la fin du son
   [équipe · monteur] ✔ répliques dans l'ordre du son
   [équipe · monteur] ✔ un personnage ne parle jamais deux fois en même temps
-  bulletin de l'équipe : 14/14 contrôles bons
-Sketch : « FRÈRE DANGEREUX EN VOITURE », 29 répliques
+  bulletin de l'équipe : 16/16 contrôles bons
+Sketch : « DÉBAT LOYER EN COUPLE », 54 répliques
 Son TikTok : une seule scène, un seul décor (pas de changement inutile)
-montage : 1 plans (0.5:large>pre/coupe)
+  décor semi-réaliste 0 (lieu déjà connu) : [semi] cozy apartment kitchen, cabinets, fridge, stove, small table wi
+montage : 1 plans (0.0:large>inv/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-studio : nuit, lieux ['voiture'], tenues presentateur=tshirt, envoyee=robe, invite=debardeur, 0 figurant(s), ambiances ['neon'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 80.4 s, 29 répliques, 1 scène(s), personnages ['presentateur', 'envoyee', 'invite']
-Contrôle image : 16 défaut(s) — 53.75 s chevauchement (envoyee+invite), 54.25 s chevauchement (envoyee+invite), 54.75 s chevauchement (envoyee+invite), 55.25 s chevauchement (envoyee+invite), 55.75 s chevauchement (envoyee+invite), 56.25 s chevauchement (envoyee+invite), 56.75 s chevauchement (envoyee+invite), 57.25 s chevauchement (envoyee+invite)
-File d'attente : aucune autre fabrication en cours, on y va
-Chaîne : vidéo 7/10 lancée (elle prépare son écoute pendant ce dessin)
-montage : 1 plans (0.5:large>pre/coupe)
+studio : soir, lieux ['cuisine'], tenues invite=tshirt, presentateur=pull, envoyee=chemise, 0 figurant(s), ambiances ['neon', 'poussiere', 'vapeur'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 85.5 s, 54 répliques, 1 scène(s), personnages ['invite', 'presentateur', 'envoyee']
+File d'attente : 1 fabrication(s) avant la nôtre : https://github.com/tiranno06/jt-auto/actions/runs/43013184693
+File d'attente : à nous ! (attente 2 min)
+Chaîne : vidéo 8/10 lancée (elle prépare son écoute pendant ce dessin)
+montage : 1 plans (0.0:large>inv/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-studio : nuit, lieux ['voiture'], tenues presentateur=tshirt, envoyee=robe, invite=debardeur, 0 figurant(s), ambiances ['neon'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 80.4 s, 29 répliques, 1 scène(s), personnages ['presentateur', 'envoyee', 'invite']
-Contrôle image : 16 défaut(s) — 53.75 s chevauchement (envoyee+invite), 54.25 s chevauchement (envoyee+invite), 54.75 s chevauchement (envoyee+invite), 55.25 s chevauchement (envoyee+invite), 55.75 s chevauchement (envoyee+invite), 56.25 s chevauchement (envoyee+invite), 56.75 s chevauchement (envoyee+invite), 57.25 s chevauchement (envoyee+invite)
-  dessin partagé : 4 machine(s) d'aide + celle-ci (5 morceaux de ~965 images)
-  morceau 2895–3860 reçu d'une machine d'aide
-  morceau 3860–4825 reçu d'une machine d'aide
-  morceau 965–1930 reçu d'une machine d'aide
-  morceau 1930–2895 reçu d'une machine d'aide
-  dessin partagé terminé en 4.0 min
+studio : soir, lieux ['cuisine'], tenues invite=tshirt, presentateur=pull, envoyee=chemise, 0 figurant(s), ambiances ['neon', 'poussiere', 'vapeur'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 85.5 s, 54 répliques, 1 scène(s), personnages ['invite', 'presentateur', 'envoyee']
+  dessin partagé : 4 machine(s) d'aide + celle-ci (5 morceaux de ~1026 images)
+  morceau 3080–4106 reçu d'une machine d'aide
+  morceau 4106–5133 reçu d'une machine d'aide
+  lecture des morceaux impossible (HTTP Error 404: Not Found), nouvel essai
+  morceau 1027–2053 reçu d'une machine d'aide
+  morceau 2053–3080 reçu d'une machine d'aide
+  dessin partagé terminé en 4.8 min
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-  IA gemini indisponible (gemini 429 : [{
-  "error": {
-    "code": 429,
-    "message": "You exceeded your current quota, please check your plan an) : on passe à la suivante
-Jury : 3 remarque(s) sur les plans / zooms retirée(s) (montage « plan large » voulu)
-Jury : 9 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
-Jury qualité (ia) : 8.6/10 — Humoriste 9.4/10 :  | Réalisateur 8.4/10 :  | Directeur artistique 6.8/10 : 0 s Les personnages ont des traits trop fins et peu expressifs pour un style humoristique en dessin animé.; 32.2 s Les décors manquent de détails pour renforcer l'univers comique (ex : écran de téléphone ou fond de voiture plus stylisé).; envoyee a une voix de femme mais il est dessiné en homme; invite a une voix de femme mais il est dessiné en homme; 53.8 s deux personnages l'un sur l'autre (envoyee+invite) | Ingénieur du son 10.0/10 :  | Spectateur TikTok 8.6/10 : 61.3 s La fin est longue et pourrait être raccourcie pour éviter l'ennui.
-Corrections du jury (tour 1) : casting de envoyee : genre f ; casting de invite : genre f
-montage : 1 plans (0.5:large>pre/coupe)
-style croquis : décors passés à l'encre et à l'aquarelle
-studio : nuit, lieux ['voiture'], tenues presentateur=tshirt, envoyee=robe, invite=debardeur, 0 figurant(s), ambiances ['neon'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 80.4 s, 29 répliques, 1 scène(s), personnages ['presentateur', 'envoyee', 'invite']
-Contrôle image : 16 défaut(s) — 53.75 s chevauchement (envoyee+invite), 54.25 s chevauchement (envoyee+invite), 54.75 s chevauchement (envoyee+invite), 55.25 s chevauchement (envoyee+invite), 55.75 s chevauchement (envoyee+invite), 56.25 s chevauchement (envoyee+invite), 56.75 s chevauchement (envoyee+invite), 57.25 s chevauchement (envoyee+invite)
-  redessin partiel : 0/4825 images à redessiner (0 passage(s)), le reste repris tel quel
-Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury : 10 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
-Jury qualité (ia) : 9.2/10 — Humoriste 9.4/10 :  | Réalisateur 10.0/10 :  | Directeur artistique 6.8/10 : 1 s Le présentateur a une apparence trop neutre et manque de traits distinctifs pour le rendre mémorable.; 15 s Les décors de voiture manquent de détails pour renforcer l’immersion dans l’univers.; envoyee a une voix de femme mais il est dessiné en homme; invite a une voix de femme mais il est dessiné en homme; 53.8 s deux personnages l'un sur l'autre (envoyee+invite) | Ingénieur du son 10.0/10 :  | Spectateur TikTok 10.0/10 : 
-Manque par rapport à la vidéo d'origine : Les personnages envoyée et invité devraient être féminins pour correspondre à leurs voix. ; Les décors intérieurs de la voiture manquent de détails réalistes (volant, sièges, etc.). ; Absence de réaction visuelle exagérée pour certaines répliques clés (ex : 'débrassé').
-Version corrigée gardée : 8.6 → 9.2/10
-Bouches : 1 réplique(s) où un autre personnage bougeait plus que celui qui parle (25) : redessinées (celui qui écoute reste calme)
-montage : 1 plans (0.5:large>pre/coupe)
-style croquis : décors passés à l'encre et à l'aquarelle
-studio : nuit, lieux ['voiture'], tenues presentateur=tshirt, envoyee=robe, invite=debardeur, 0 figurant(s), ambiances ['neon'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 80.4 s, 29 répliques, 1 scène(s), personnages ['presentateur', 'envoyee', 'invite']
-Contrôle image : 16 défaut(s) — 53.75 s chevauchement (envoyee+invite), 54.25 s chevauchement (envoyee+invite), 54.75 s chevauchement (envoyee+invite), 55.25 s chevauchement (envoyee+invite), 55.75 s chevauchement (envoyee+invite), 56.25 s chevauchement (envoyee+invite), 56.75 s chevauchement (envoyee+invite), 57.25 s chevauchement (envoyee+invite)
-  redessin partiel : 720/4825 images à redessiner (1 passage(s)), le reste repris tel quel
-Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Correction des bouches non gardée (pas mieux (1 → 1))
+Jury : 2 remarque(s) sur les plans / zooms retirée(s) (montage « plan large » voulu)
+Jury : 7 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
+Jury qualité (ia) : 8.6/10 — Humoriste 8.6/10 : 79.5 s L'expression 'Je suis choquée' n'est pas assez exagérée pour capter l'attention du spectateur. | Réalisateur 6.8/10 : 25.6 s Les personnages secondaires pourraient avoir des réactions plus visibles pour renforcer l'interaction.; 74.9 s La fin est un peu abrupte et manque d'un dernier plan ou d'une réaction finale pour conclure. | Directeur artistique 8.8/10 : 0 s Les personnages ont des traits et des proportions cohérents, mais les décors pourraient être plus détaillés pour renforcer l'immersion.; 79.5 s Les costumes des personnages sont simples et cohérents, mais pourraient être légèrement ajustés pour plus de personnalité. | Ingénieur du son 10.0/10 :  | Spectateur TikTok 8.6/10 : 85.0 s La fin est satisfaisante mais pourrait être améliorée avec un dernier plan mémorable.
+Manque par rapport à la vidéo d'origine : Les expressions faciales des personnages originaux sont plus variées et naturelles. ; Les décors originaux montrent des objets spécifiques (livres, cadre photo) qui renforcent l'immersion. ; Les gestes des personnages originaux sont plus expressifs et naturels, notamment lors des répliques clés.
 fin en boucle : la dernière image se raccorde à la première (0.35 s de fondu)
-  [vidéo finie · synchro] ✘ bouches du bon personnage : 1 réplique(s) à revoir
-  [vidéo finie · technique] ✔ sauts, clignotements, personnages (6 remarque(s))
-  transcription Groq (Whisper, gratuit) : 262 mots
-  [vidéo finie · sous-titres] ✘ sous-titres vérifiés à l'oreille (accord 69 %)
-  réponse coupée (limite de 2500 jetons atteinte) pour controle
-  [vidéo finie · contrôle IA] 0 remarque(s)
-  13 remarque(s) légère(s) gardée(s) au journal seulement : 14.2 s sous-titre « Ben oui, pourquoi? » mais on entend « ; 15.7 s sous-titre « Comment ça--, quoi? » mais on entend  ; 25.6 s sous-titre « Oh. Allez, venez, faites demi-tour. P ; 28.5 s sous-titre « Non, elle fait exprès, là. Mais c'est ; 30.4 s on entend « là Regarde Non non non » sans sous-tit ; 39.3 s sous-titre « Sale fils de pute. Il veut pas qu'on 
-Contrôle de la vidéo finie : 2 point(s) à vérifier — 13.0 s sous-titre « Qu'est-ce c'est que ça? » mais on entend « ton  ; 53.3 s pendant la réplique de invite (« C'est pas grave, ça m'empêc
-Compte rendu (tour 1, confiance 76/100) : corrections demandées au robot :
-- à 13.0 s : sous-titre « Qu'est-ce c'est que ça? » mais on entend « ton frère c'est citron bah »
-- à 53.3 s : pendant la réplique de invite (« C'est pas grave, ça m'empêchera pas de t »), c'est un autre personnage qui bouge
-- à 1.0 s : Le présentateur a une apparence trop neutre et manque de traits distinctifs pour le rendre mémorable.
-- à 15.0 s : Les décors de voiture manquent de détails pour renforcer l’immersion dans l’univers.
-- envoyee a une voix de femme mais il est dessiné en homme
-- invite a une voix de femme mais il est dessiné en homme
-- à 53.8 s : deux personnages l'un sur l'autre (envoyee+invite)
-  réponse coupée (limite de 1500 jetons atteinte) pour corrections
-Remarque comprise : L'auteur signale des problèmes de sous‑titre, de synchronisation des personnages, de design du présentateur, de détail du décor de voiture, et des incohérences de genre visuel pour envoyée et invite, 
-Remarque de l'auteur : 1 réplique(s) à rendre à un autre personnage, 6 correction(s) : reaction, lieu, casting, casting, casting, figurant
-Compte rendu : casting de presentateur :  ; casting de envoyee :  ; casting de invite :  ; personne ajoutée à côté de ['envoyee', 'invite'] (attend)
-montage : 1 plans (0.5:large>pre/coupe)
+  [vidéo finie · synchro] décalage mesuré -0.38 s (mesure seulement : le son n'est jamais déplacé)
+  [vidéo finie · synchro] ✔ bouches du bon personnage
+  [vidéo finie · technique] ✔ sauts, clignotements, personnages (0 remarque(s))
+  transcription Groq (Whisper, gratuit) : 460 mots
+  [vidéo finie · sous-titres] ✘ sous-titres vérifiés à l'oreille (accord 73 %)
+  [vidéo finie · contrôle IA] 2 remarque(s)
+  5 remarque(s) légère(s) gardée(s) au journal seulement : 1.0 s Le personnage 2 (femme) n'a pas l'allure visuelle  ; 5.5 s sous-titre « Bah, aux frais. » mais on entend « qu ; 13.0 s Le personnage 3 (homme, 35 ans) apparaît comme méd ; 42.9 s sous-titre « Je, je sais pas. » mais on entend « p ; 78.7 s sous-titre « Je suis choquée. » mais on entend « d
+Contrôle de la vidéo finie : 1 point(s) à vérifier — 49.7 s sous-titre « Attends, 'tends, 'tends. » mais on entend « ens
+Compte rendu (tour 1, confiance 88/100) : corrections demandées au robot :
+- à 49.7 s : sous-titre « Attends, 'tends, 'tends. » mais on entend « ensemble attends mais donc pour toi »
+- à 79.5 s : L'expression 'Je suis choquée' n'est pas assez exagérée pour capter l'attention du spectateur.
+- à 74.9 s : La fin est un peu abrupte et manque d'un dernier plan ou d'une réaction finale pour conclure.
+Remarque comprise : L'auteur signale trois problèmes : le sous‑titre à 49.7 s ne correspond pas à l’audio, l’expression « Je suis choquée » à 79.5 s manque d’exagération, et la fin à 74.9 s est trop abrupte.
+Remarque de l'auteur : 0 réplique(s) à rendre à un autre personnage, 3 correction(s) : reaction, jeu, reaction
+Compte rendu : jeu plus marqué à la réplique 50
+montage : 1 plans (0.0:large>inv/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-studio : nuit, lieux ['voiture'], tenues presentateur=tshirt, envoyee=robe, invite=debardeur, 0 figurant(s), ambiances ['neon'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 80.4 s, 29 répliques, 1 scène(s), personnages ['presentateur', 'envoyee', 'invite']
-Contrôle image : 16 défaut(s) — 53.75 s chevauchement (envoyee+invite), 54.25 s chevauchement (envoyee+invite), 54.75 s chevauchement (envoyee+invite), 55.25 s chevauchement (envoyee+invite), 55.75 s chevauchement (envoyee+invite), 56.25 s chevauchement (envoyee+invite), 56.75 s chevauchement (envoyee+invite), 57.25 s chevauchement (envoyee+invite)
-  redessin partiel : 0/4825 images à redessiner (0 passage(s)), le reste repris tel quel
+studio : soir, lieux ['cuisine'], tenues invite=tshirt, presentateur=pull, envoyee=chemise, 0 figurant(s), ambiances ['neon', 'poussiere', 'vapeur'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 85.5 s, 54 répliques, 1 scène(s), personnages ['invite', 'presentateur', 'envoyee']
+  image 300/5133 (4 processeurs)
+  image 600/5133
+  image 900/5133
+  image 1200/5133
+  image 1500/5133
+  image 1800/5133
+  image 2100/5133
+  image 2400/5133
+  image 2700/5133
+  image 3000/5133
+  image 3300/5133
+  image 3600/5133
+  image 3900/5133
+  image 4200/5133
+  image 4500/5133
+  image 4800/5133
+  image 5100/5133
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
 fin en boucle : la dernière image se raccorde à la première (0.35 s de fondu)
-  [vidéo finie · synchro] ✘ bouches du bon personnage : 1 réplique(s) à revoir
-  [vidéo finie · technique] ✔ sauts, clignotements, personnages (6 remarque(s))
-  transcription Groq (Whisper, gratuit) : 262 mots
-  [vidéo finie · sous-titres] ✘ sous-titres vérifiés à l'oreille (accord 69 %)
-  réponse coupée (limite de 2500 jetons atteinte) pour controle
-  [vidéo finie · contrôle IA] 0 remarque(s)
-  13 remarque(s) légère(s) gardée(s) au journal seulement : 14.2 s sous-titre « Ben oui, pourquoi? » mais on entend « ; 15.7 s sous-titre « Comment ça--, quoi? » mais on entend  ; 25.6 s sous-titre « Oh. Allez, venez, faites demi-tour. P ; 28.5 s sous-titre « Non, elle fait exprès, là. Mais c'est ; 30.4 s on entend « là Regarde Non non non » sans sous-tit ; 39.3 s sous-titre « Sale fils de pute. Il veut pas qu'on 
-Contrôle de la vidéo finie : 2 point(s) à vérifier — 13.0 s sous-titre « Qu'est-ce c'est que ça? » mais on entend « ton  ; 53.3 s pendant la réplique de invite (« C'est pas grave, ça m'empêc
-Jury : 12 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
-Jury qualité (ia) : 8.3/10 — Humoriste 9.4/10 :  | Réalisateur 6.8/10 : 14.6 s Les personnages sont parfois mal positionnés dans le cadre, ce qui donne une impression de désordre visuel.; 79.8 s Le dernier plan manque de clarté visuelle pour marquer la fin de la vidéo. Un fond plus distinctif ou un effet visuel pourrait renforcer la mémorisation. | Directeur artistique 7.6/10 : 11.4 s Les décors manquent de détails cohérents avec l'histoire (ex. : l'intérieur de la voiture semble trop générique).; envoyee a une voix de femme mais il est dessiné en homme; invite a une voix de femme mais il est dessiné en homme; 53.8 s deux personnages l'un sur l'autre (envoyee+invite) | Ingénieur du son 7.4/10 :  | Spectateur TikTok 10.0/10 : 
-Manque par rapport à la vidéo d'origine : Les personnages dans la vidéo originale ont des expressions faciales plus variées et des réactions physiques exagérées (ex. : les mains qui gesticulent pendant  ; Les décors dans la vidéo originale incluent des détails spécifiques comme des objets sur le tableau de bord de la voiture (ex. : un téléphone portable visible). ; Les personnages originaux ont des tenues plus détaillées (ex. : les vêtements sont plus réalistes et reflètent mieux leur personnalité).
-Compte rendu : la version corrigée n'est pas meilleure (76 → 76) : on garde la première
+  [vidéo finie · synchro] décalage mesuré -0.38 s (mesure seulement : le son n'est jamais déplacé)
+  [vidéo finie · synchro] ✔ bouches du bon personnage
+  [vidéo finie · technique] ✔ sauts, clignotements, personnages (0 remarque(s))
+  transcription Groq (Whisper, gratuit) : 460 mots
+  [vidéo finie · sous-titres] ✘ sous-titres vérifiés à l'oreille (accord 73 %)
+  [vidéo finie · contrôle IA] 1 remarque(s)
+  4 remarque(s) légère(s) gardée(s) au journal seulement : 5.5 s sous-titre « Bah, aux frais. » mais on entend « qu ; 13.0 s Le personnage 3 (homme) intervient sans distinctio ; 42.9 s sous-titre « Je, je sais pas. » mais on entend « p ; 78.7 s sous-titre « Je suis choquée. » mais on entend « d
+Contrôle de la vidéo finie : 1 point(s) à vérifier — 49.7 s sous-titre « Attends, 'tends, 'tends. » mais on entend « ens
+Jury : 1 remarque(s) sur les plans / zooms retirée(s) (montage « plan large » voulu)
+Jury : 8 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
+Jury qualité (ia) : 8.6/10 — Humoriste 9.4/10 :  | Réalisateur 6.8/10 : 40.4 s L'expression de confusion du personnage à 40.4 s ('quoi ?') manque de clarté.; 79.5 s Le personnage 'presentateur' pourrait avoir une réaction plus marquée à 'Je suis choquée' pour renforcer le côté dramatique. | Directeur artistique 8.0/10 : 0.0 s Les personnages manquent légèrement de détails dans leurs vêtements et expressions pour les rendre plus distinctifs.; 16.1 s Le décor de la cuisine pourrait inclure des objets plus spécifiques (comme une bouilloire ou une tasse) pour renforcer l'ambiance.; 74.9 s Le personnage 'envoyee' pourrait avoir une expression plus menaçante pour souligner 'T'as très bien compris'. | Ingénieur du son 10.0/10 :  | Spectateur TikTok 8.6/10 : 85.0 s La fin est satisfaisante, mais un appel à l'action (comme un 'Like' ou 'Abonnez-vous') pourrait renforcer l'engagement.
+Manque par rapport à la vidéo d'origine : Les expressions faciales des personnages originaux sont plus nuancées et variées (ex : sourires, clignements d'yeux, réactions spontanées). ; Les décors originaux incluent des détails réalistes comme des livres, des objets du quotidien (tasses, bouilloires), et une ambiance plus chaleureuse. ; Les personnages originaux ont des vêtements plus détaillés et adaptés à leur rôle (ex : écharpe négligée pour le présentateur, chemise à carreaux pour l'invité)
+Compte rendu : la version corrigée n'est pas meilleure (88 → 88) : on garde la première
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, groq = ok, ia = gemini ×1, mistral ×6, groq ×2, appels = {'gemini': 1, 'mistral': 6, 'groq': 2}, epuisees = ['gemini'], quota = {'groq': {'reste_jour': 997, 'limite_jour': 1000}}, voix = tiktok, decors = dessines, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 89645, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0}
-⏱️ Étapes plus lentes que d'habitude : Démarrage du robot 5 min (d'habitude 0 min)
-⏱️ Temps par étape : Installation de la machine 0.9 min, Démarrage du robot 5.2 min, Écoute du son TikTok 7.6 min, Décors 0.0 min, Dessin des images 6.7 min, Contrôle qualité par le jury 0.6 min, Nouvelle version corrigée par le jury 2.4 min, Correction des bouches 14.3 min
-Quota de l'API GitHub : 4978 appels restants
-OK : sortie/2026-11-11_12h49_emission.mp4 (81 s)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, groq = ok, ia = gemini ×2, groq ×3, mistral ×8, appels = {'gemini': 2, 'groq': 3, 'mistral': 8}, epuisees = ['gemini'], quota = {'groq': {'reste_jour': 998, 'limite_jour': 1000}}, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 98114, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0}
+⏱️ Étapes plus lentes que d'habitude : Démarrage du robot 5 min (d'habitude 0 min), Contrôle qualité par le jury 33 min (d'habitude 1 min)
+⏱️ Temps par étape : Installation de la machine 1.6 min, Démarrage du robot 5.2 min, Écoute du son TikTok 12.1 min, Décors 0.0 min, Dessin des images 1.2 min, En file d'attente 9.1 min, Contrôle qualité par le jury 33.9 min
+Quota de l'API GitHub : 4789 appels restants
+OK : sortie/2026-11-11_13h10_emission.mp4 (86 s)
