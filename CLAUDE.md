@@ -2,6 +2,12 @@
 
 À respecter pour toute modification du robot vidéo :
 
+## PRIORITÉ (décision de l'auteur du 11 novembre 2026)
+- **On ne travaille plus QUE sur la filière « Sons TikTok »** : reprise des sons et des voix des vidéos TikTok, profils TikTok,
+  création des vidéos à partir de ces voix (écoute, qui parle, casting, mise en scène, dessin, contrôle, publication). Tout le reste
+  (sketchs écrits par le robot, émissions, anciens styles de personnages toon / marionnettes, voix de synthèse des sketchs…) est mis de
+  côté : on n'y touche plus, sauf si une modification de la filière TikTok l'exige, et on ne le propose plus dans les listes d'idées.
+
 ## Budget et outils
 - **Outils payants activés par défaut** (Claude, ElevenLabs, décors et plans IA sur Modal, contrôle vidéo par Claude) : on vise
   toujours la meilleure qualité.
