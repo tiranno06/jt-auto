@@ -515,22 +515,43 @@ COIFFURES_HUMAINS = {"carre": "carre", "long": "long", "queue": "queue", "chigno
                      "meches": "court", "nuque": "court", "couronne": "chauve", "aucune": "chauve", "raie": "raie", "rase": "rase", "mi_long": "mi_long", "chauve": "chauve"}
 COIFFURES_HUMAINS.update({c: c for c in M.GR.COIFFURES})
 
-def genre_voix(sk, role, d=None):
-    """Homme ou femme : TOUJOURS d'après la voix entendue. Sketch écrit : voix fixes des rôles (Jojo, Kévin : homme ; Lila : femme).
-    Doublage : voix mesurée réplique par réplique quand elle est nette, sinon le choix de Claude, sinon la hauteur moyenne."""
+ACCORD_F = r"\bje suis (vraiment |trop |tellement |pas )?(choquée|désolée|sûre|prête|contente|fatiguée|enceinte|certaine|heureuse|amoureuse|" \
+           r"perdue|venue|allée|partie|tombée|énervée|vexée|jalouse|blessée|surprise|déçue|enrhumée|malade et seule)\b"
+ACCORD_H = r"\bje suis (vraiment |trop |tellement |pas )?(choqué|content|prêt|sûr|fatigué|certain|heureux|amoureux|venu|allé|parti|tombé|" \
+           r"énervé|vexé|jaloux|blessé|déçu)\b"
+
+
+def genre_voix(sk, role, d=None, detail=False):
+    """Homme ou femme. Sketch écrit : voix fixes des rôles (Jojo, Kévin : homme ; Lila : femme). Son TikTok : les témoins VOTENT
+    (analyse des vidéos du 11 novembre : le timbre seul, décisif depuis le 6 novembre, a dessiné en homme 6 femmes sur 11 vidéos ;
+    sur les dessins animés un seul doubleur fait souvent toutes les voix et le timbre ne les sépare plus) :
+    - ce que Gemini a VU dire ces phrases dans l'original : 2 voix ;
+    - le timbre (formants) : 1,5 s'il est net (< 980 Hz homme, > 1110 Hz femme), sinon 0,5 ;
+    - la hauteur nette (réplique par réplique) : 1 ; l'IA de mise en scène (images + histoire) : 1 ;
+    - les accords du texte (« je suis choquée » / « je suis content ») : 1.
+    À égalité : Gemini, puis le timbre, puis l'IA, puis la hauteur moyenne."""
     d = d or {}
     g_ia = GENRES_TXT.get(str(d.get("genre") or "").strip().lower())
     if sk.get("doublage") is None: return GENRE_ROLE.get(role) or g_ia
-    g_t = (sk.get("_voix_timbre_genre") or {}).get(role)                    # 1. le TIMBRE de la voix (ne bouge pas quand on crie)
-    if g_t: return g_t
-    g_v = (sk.get("_voix_genre") or {}).get(role)                           # 2. la hauteur nette, si l'image de l'original ne la contredit pas
-    g_vu = GENRES_TXT.get(str(d.get("genre_vu") or "").strip().lower())     # (Gemini a vu un homme / une femme dire ces phrases)
-    if g_v and (not g_vu or g_vu == g_v): return g_v
-    if g_vu: return g_vu
-    if g_v: return g_v
-    vh = (sk.get("_voix_hz") or {}).get(role) or 0
-    g = g_ia or (("f" if vh > 210 else "h" if vh < 150 else None) if vh else None)
-    return g or GENRE_ROLE.get(role)
+    votes = {"h": 0.0, "f": 0.0}
+    g_vu = GENRES_TXT.get(str(d.get("genre_vu") or "").strip().lower())
+    if g_vu: votes[g_vu] += 2
+    tb = (sk.get("_voix_timbre") or {}).get(role)
+    g_t = (sk.get("_voix_timbre_genre") or {}).get(role)
+    if g_t in votes:
+        net = isinstance(tb, (int, float)) and (tb < 980 or tb > 1110)
+        votes[g_t] += 1.5 if net or not isinstance(tb, (int, float)) else 0.5
+    g_v = (sk.get("_voix_genre") or {}).get(role)
+    if g_v in votes: votes[g_v] += 1
+    if g_ia in votes: votes[g_ia] += 1
+    lignes = " ".join(x.get("t", "") for x in sk.get("repliques") or [] if x.get("p") == role).lower()
+    nf, nh = len(re.findall(ACCORD_F, lignes)), len(re.findall(ACCORD_H, lignes))
+    if nf != nh: votes["f" if nf > nh else "h"] += 1
+    if votes["h"] != votes["f"]: g = "f" if votes["f"] > votes["h"] else "h"
+    else:
+        vh = (sk.get("_voix_hz") or {}).get(role) or 0
+        g = g_vu or g_t or g_ia or (("f" if vh > 210 else "h" if vh < 150 else None) if vh else None) or GENRE_ROLE.get(role)
+    return (g, votes) if detail else g
 
 AGES_AUTEUR = {"enfant": 8, "ado": 15, "adulte": 30, "senior": 70}
 
@@ -744,7 +765,9 @@ def appel_devine(sk):
     reps = sk.get("repliques") or []
     texte = " ".join(x.get("t", "") for x in reps).lower()
     D = sk.get("doublage") or {}
-    n = len(re.findall(APPEL, texte))
+    formes = {re.sub(r"\s+", " ", m.group(0)) for m in re.finditer(APPEL, texte)}   # formes différentes (« t'es où ? » répété 4 fois
+    n = len(formes)                                                        # dans une dispute = « tu dis n'importe quoi », pas un appel)
+    fortes = {f for f in formes if not re.fullmatch(r"(t'es|tu es) o[ùu]|je suis (au|à la|à l'|devant|sur le|chez)", f)}
     nb = (D.get("visuel") or {}).get("nb_personnes") or 0; seul = nb == 1
     ensemble = nb >= 2                                                     # deux personnes à l'image en même temps : pas un appel
     try:                                                                   # Gemini a regardé toute la vidéo : ils sont au même endroit ?
@@ -754,7 +777,7 @@ def appel_devine(sk):
                 and not re.search(CONTEXTE_APPEL, str(V.get("resume") or "").lower()): ensemble = True
     except Exception: pass
     if ensemble: return n >= 2                                             # (« conversation téléphonique » dans le résumé ne suffit plus)
-    return n >= 2 or bool(re.search(CONTEXTE_APPEL, str(D.get("contexte") or "").lower())) or (n >= 1 and seul)
+    return n >= 2 or bool(re.search(CONTEXTE_APPEL, str(D.get("contexte") or "").lower())) or (bool(fortes) and seul)
 
 def lieux_devines(sk, roles):
     """Où est chacun pendant l'appel : celui qui parle de la voiture, de la rue… est dehors ; le parent appelé est chez lui."""

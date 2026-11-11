@@ -2348,8 +2348,11 @@ class TestGenreDeLaVoix(unittest.TestCase):
 
     def test_priorites(self):
         import studio
-        sk = {"doublage": {}, "_voix_hz": {"invite": 250}, "_voix_genre": {"invite": "f"}, "_voix_timbre_genre": {"invite": "h"}}
-        self.assertEqual(studio.genre_voix(sk, "invite", {"genre": "f"}), "h")          # le timbre l'emporte sur une voix aiguë
+        sk = {"doublage": {}, "_voix_hz": {"invite": 250}, "_voix_genre": {"invite": "f"}, "_voix_timbre_genre": {"invite": "h"}, "_voix_timbre": {"invite": 940}}
+        self.assertEqual(studio.genre_voix(sk, "invite", {}), "h")                      # un timbre net l'emporte sur une voix aiguë
+        sk["_voix_timbre"]["invite"] = 997                                  # 11 novembre : timbre peu net, Gemini et l'IA voient une femme
+        self.assertEqual(studio.genre_voix(sk, "invite", {"genre": "f", "genre_vu": "f"}), "f")
+        sk["_voix_timbre"]["invite"] = 940
         sk.pop("_voix_timbre_genre")
         self.assertEqual(studio.genre_voix(sk, "invite", {"genre_vu": "h"}), "h")       # hauteur contredite par l'image de l'original
         self.assertEqual(studio.genre_voix(sk, "invite", {}), "f")
@@ -2791,6 +2794,19 @@ class TestPersonneEnTrop(unittest.TestCase):
         self.assertEqual(studio.compagnons(sk, [{"repliques": [0, 1]}], ["salon"], "jour", 1), [])
         sk = {"repliques": reps, "doublage": {"nb_vus": 3, "visuel": {"nb_personnes": 2}}}
         self.assertEqual(len(studio.compagnons(sk, [{"repliques": [0, 1]}], ["salon"], "jour", 1)), 1)
+
+    def test_t_es_ou_dans_une_dispute(self):
+        import studio
+        sk = {"repliques": [{"p": "envoyee", "t": "Mais t'es où ?"}, {"p": "invite", "t": "Quoi ?"}, {"p": "envoyee", "t": "T'es où ?"},
+                            {"p": "envoyee", "t": "Non mais t'es où ?"}], "doublage": {"contexte": "Dans la cuisine, une dispute.", "visuel": {"nb_personnes": 1}}}
+        self.assertFalse(studio.appel_devine(sk))
+        sk["repliques"].append({"p": "invite", "t": "Allô ?"})
+        self.assertTrue(studio.appel_devine(sk))
+
+    def test_accords_du_texte(self):
+        import studio
+        sk = {"doublage": {}, "repliques": [{"p": "invite", "t": "Je suis choquée."}], "_voix_genre": {"invite": "h"}}
+        self.assertEqual(studio.genre_voix(sk, "invite", {"genre": "f"}), "f")
 
     def test_texte_ia_en_dict(self):
         import doublage
