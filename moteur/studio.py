@@ -528,7 +528,8 @@ def genre_voix(sk, role, d=None, detail=False):
     - ce que Gemini a VU dire ces phrases dans l'original : 2 voix ;
     - le timbre (formants) : 1,5 s'il est net (< 980 Hz homme, > 1110 Hz femme), sinon 0,5 ;
     - la hauteur nette (réplique par réplique) : 1 ; l'IA de mise en scène (images + histoire) : 1 ;
-    - les accords du texte (« je suis choquée » / « je suis content ») : 1.
+    - les accords du texte (« je suis choquée » / « je suis content ») : 1 ;
+    - inaSpeechSegmenter (voix d'homme / de femme, entraîné sur la télé française) : 1,5 ; Praat (conduit vocal) : 1.
     À égalité : Gemini, puis le timbre, la hauteur nette, l'IA, la hauteur moyenne."""
     d = d or {}
     g_ia = GENRES_TXT.get(str(d.get("genre") or "").strip().lower())
@@ -544,6 +545,10 @@ def genre_voix(sk, role, d=None, detail=False):
     g_v = (sk.get("_voix_genre") or {}).get(role)
     if g_v in votes: votes[g_v] += 1
     if g_ia in votes: votes[g_ia] += 1
+    g_ina = (sk.get("_voix_ina") or {}).get(role)                           # inaSpeechSegmenter (entraîné sur la télé française)
+    if g_ina in votes: votes[g_ina] += 1.5
+    g_pr = (sk.get("_voix_vtl_genre") or {}).get(role)                      # Praat : longueur du conduit vocal
+    if g_pr in votes: votes[g_pr] += 1
     lignes = " ".join(x.get("t", "") for x in sk.get("repliques") or [] if x.get("p") == role).lower()
     nf, nh = len(re.findall(ACCORD_F, lignes)), len(re.findall(ACCORD_H, lignes))
     if nf != nh: votes["f" if nf > nh else "h"] += 1

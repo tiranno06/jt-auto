@@ -79,6 +79,10 @@ def lire(chemin, duree_max=200):
     if os.environ.get("MAINS", "1") != "0":
         try: mains = _detecteur_mains()
         except Exception as e: print(f"  gestes des mains indisponibles ({str(e)[:100]})", flush=True)
+    import plans_video as PV
+    try: tn_ = PV.coupes(chemin)
+    except Exception: tn_ = None
+    t_p = None
     try:
         while k < duree_max * fps:
             ok, f = cap.read()
@@ -88,6 +92,8 @@ def lire(chemin, duree_max=200):
             t = (k - 1) / fps
             petit = cv2.resize(f, (90, 160)).astype(np.int16)
             coupe = prec is not None and float(np.abs(petit - prec).mean()) > COUPE; prec = petit
+            if tn_ is not None: coupe = t_p is not None and PV.entre(tn_, t_p, t)    # TransNetV2 (idée 10)
+            t_p = t
             hgt = 640; img = cv2.resize(f, (int(f.shape[1] * hgt / f.shape[0]), hgt)); H, W = img.shape[:2]
             im_mp = mp.Image(image_format=mp.ImageFormat.SRGB, data=np.ascontiguousarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB)))
             r = det.detect(im_mp)

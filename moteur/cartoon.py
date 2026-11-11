@@ -397,6 +397,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
                     a_ = np.concatenate([np.asarray(audios[i], np.float32) for i, r in enumerate(reps) if r["p"] == role and i < len(audios)] or [np.zeros(1, np.float32)])
                     esp_ = studio.espacement_formants(a_[:SR * 40], SR)
                     if esp_: sk.setdefault("_voix_timbre", {})[role] = round(esp_)
+                    __import__("voix_genre").mesurer(sk, role, a_[:SR * 40], SR)   # inaSpeechSegmenter + Praat (idées 1, 2)
                     g_t = studio.genre_timbre(esp_)
                     if g_t: sk.setdefault("_voix_timbre_genre", {})[role] = g_t
                     else: sk.get("_voix_timbre_genre", {}).pop(role, None)
@@ -423,6 +424,8 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
                            scene=sc, objet=r.get("objet"), teaser=False, texte=r["t"], geste=geste_texte(r["t"], emo_q, i),
                            groupes=minutage(r["t"], a, t, (mots or [None] * len(reps))[i])))
             ph[-1]["lev"] = levres.chronologie(ph[-1]["groupes"], (mots or [None] * len(reps))[i], t)   # lèvres calées sur chaque son
+            r_h = __import__("rhubarb").chronologie(sk.get("_rhubarb"), t, t + dur)   # Rhubarb (idée 8) : la forme que fait vraiment la voix
+            if r_h: ph[-1]["lev"] = r_h
             continue
         if i == len(reps) - 1 and not att and i: att = 0.45                # un temps avant la chute finale
         t += att
@@ -1744,7 +1747,8 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
     brut, wav = f"{tmp}/mix.wav", f"{tmp}/mix_norm.wav"
     with wave.open(brut, "wb") as w:
         w.setnchannels(2); w.setsampwidth(2); w.setframerate(SRM); w.writeframes((mix * 32767).astype(np.int16).tobytes())
-    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", brut, "-af", "loudnorm=I=-14:TP=-1.5:LRA=11", "-ar", "48000", "-ac", "2", wav], check=True)
+    import jt as _jt
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", brut, "-af", _jt.filtre_volume(mix, SRM), "-ar", "48000", "-ac", "2", wav], check=True)
     defauts_img = []
     try:                                                                   # contrôle image par image (gratuit) : têtes coupées,
         SONDE["on"] = True                                                 # personnages qui se chevauchent, sous-titre sur un visage

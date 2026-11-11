@@ -189,3 +189,20 @@ def vers_mix(a):
     """Voix 22 050 Hz mono → 44 100 Hz stéréo."""
     from scipy.signal import resample_poly
     b = resample_poly(a, 2, 1).astype(np.float32); return np.stack([b, b], 1)
+
+
+def filtre_volume(mix, sr, cible=-14.0):
+    """Volume final au niveau conseillé par TikTok (-14 LUFS). pyloudnorm (MIT, idée 7 du 11 novembre) mesure le volume de toute la
+    vidéo et applique UN SEUL réglage (le son d'origine garde ses nuances : pas de « pompage » quand on passe d'un murmure à un cri),
+    puis un limiteur évite la saturation (-1 dB). Sans pyloudnorm (ou VOLUME_STATIQUE=0) : loudnorm de ffmpeg, comme avant."""
+    if os.environ.get("VOLUME_STATIQUE", "1") != "0":
+        try:
+            import pyloudnorm as pyln
+            x = np.asarray(mix, np.float64)
+            if len(x) > sr * 0.5:
+                l = pyln.Meter(sr).integrated_loudness(x)
+                if np.isfinite(l) and l > -70:
+                    g = float(np.clip(cible - l, -20.0, 20.0))
+                    return f"volume={g:.2f}dB,alimiter=limit=0.89:level=false"
+        except Exception as e: print(f"  volume (pyloudnorm) impossible ({str(e)[:80]}) : loudnorm", flush=True)
+    return "loudnorm=I=-14:TP=-1.5:LRA=11"

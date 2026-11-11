@@ -74,8 +74,11 @@ jobs:
             outils/pose_landmarker_lite.task
             outils/face_landmarker.task
             outils/gesture_recognizer.task
-          key: hf-ecoute-v3
+            outils/rhubarb
+            outils/wespeaker
+          key: hf-ecoute-v4
           restore-keys: |
+            hf-ecoute-v3
             hf-ecoute-v2
             hf-whisper-turbo-v1
 
@@ -94,6 +97,15 @@ jobs:
             I demucs transformers -c contraintes.txt || true
             I rapidocr-onnxruntime -c contraintes.txt || true
             I --no-deps mediapipe absl-py flatbuffers sounddevice -c contraintes.txt && I matplotlib -c contraintes.txt || true
+            # outils libres du 11 novembre (idées 1, 3, 6, 10, 11, 12) : Silero, TransNetV2, emotion2vec, inaSpeechSegmenter, SAM 2 / Grounding DINO
+            I torchvision -c contraintes.txt --index-url https://download.pytorch.org/whl/cpu || echo "torchvision indisponible : SAM 2 sans lui"
+            I silero-vad transnetv2-pytorch -c contraintes.txt || echo "Silero / TransNetV2 indisponibles : anciennes détections"
+            I funasr -c contraintes.txt || echo "emotion2vec indisponible : émotions par SpeechBrain"
+            (I tensorflow-cpu -c contraintes.txt && I --no-deps inaSpeechSegmenter -c contraintes.txt && I scikit-image pytextgrid pandas soundfile -c contraintes.txt) || echo "inaSpeechSegmenter indisponible : homme / femme sans lui"
+          fi
+          if ! ls outils/rhubarb/*/rhubarb >/dev/null 2>&1; then           # Rhubarb Lip Sync (idée 8, MIT) : bouches d'après la voix
+            mkdir -p outils/rhubarb && curl -sSL -o /tmp/rh.zip https://github.com/DanielSWolf/rhubarb-lip-sync/releases/download/v1.14.0/Rhubarb-Lip-Sync-1.14.0-Linux.zip \
+              && unzip -q -o /tmp/rh.zip -d outils/rhubarb || echo "Rhubarb indisponible : bouches d'après le texte"
           fi
 
       - name: Écouter les sons à l'avance

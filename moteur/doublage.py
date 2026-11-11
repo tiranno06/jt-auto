@@ -61,7 +61,12 @@ def _tikwm(url, tmp):
     return {"uploader": a.get("unique_id"), "channel": a.get("nickname"), "duration": d.get("duration"), "webpage_url": url}, f"{tmp}/src.mp4"
 
 def debut_parole(sig, seuil=0.8):
-    """Instant (s) où la voix commence vraiment (voix isolée : énergie par tranches de 20 ms, 0,2 s de suite au-dessus du seuil)."""
+    """Instant (s) où la voix commence vraiment. Silero VAD d'abord (idée 3 : une vraie voix, pas un souffle ni la musique), sinon
+    l'énergie de la voix isolée par tranches de 20 ms (0,2 s de suite au-dessus du seuil)."""
+    try:
+        z_ = __import__("ecoute").parole(sig, SR)
+        if z_: return float(next((a for a, b in z_ if b - a >= 0.25), z_[0][0]))
+    except Exception: pass
     x = np.asarray(sig, np.float32); n = int(0.02 * SR)
     if len(x) < n * 20: return 0.0
     rms = np.sqrt(np.mean(x[:len(x) // n * n].reshape(-1, n) ** 2, axis=1))
@@ -545,6 +550,12 @@ def preparer(url):
     import equipe
     B = equipe.Bulletin()                                                  # l'équipe : chaque poste contrôlé avant le suivant
     mots = equipe.inge_son(transcrire(chemin_voix, mono), B)
+    try:                                                                   # mots écrits là où personne ne parle (Silero VAD, idée 3)
+        z_ = ecoute.parole(voix_sig if voix_sig is not None else mono, SR)
+        if z_:
+            mots, n_ = ecoute.mots_sans_voix(mots, z_)
+            B.note("ingé son", "pas de mots là où personne ne parle (Silero)", True, f"{n_} mot(s) inventé(s) retiré(s) (corrigé)" if n_ else "")
+    except Exception as e: journal(f"  contrôle Silero impossible ({str(e)[:100]})")
     extra = attente_premier_mot(mots) if os.environ.get("DEBUT_COURT", "1") != "0" else 0.0
     if extra > 0:                                                          # 2e coupe : un bruit (souffle, musique) avait été pris pour
         try:                                                               # de la voix, la 1re parole arrivait encore à 5 s (notes du jury)
@@ -640,6 +651,8 @@ def preparer(url):
     journal("  casting : " + ", ".join(f"{v} → {NOMS[r]}" for v, r in casting.items()))
     d = [" ".join(map(str, x)) if isinstance(x, list) else str(x) for x in ecrire._liste(m.get("d"))]   # l'IA gratuite met parfois [["…"]]
     corrige = corriger_textes(segs, [texte_ia(x) for x in ecrire._liste(m.get("texte"))])   # sous-titres sans fautes de reconnaissance
+    try: corrige, _n_o = __import__("orthographe").corriger_lignes(corrige)   # LanguageTool (idée 15) : accents, accords muets
+    except Exception as e: journal(f"  orthographe non vérifiée ({str(e)[:100]})")
     reps = []
     for k, s in enumerate(segs):
         r = {"p": casting.get(s["voix"], "presentateur"), "t": corrige[k], "_deb": round(float(s["deb"]), 3), "_fin": round(float(s["fin"]), 3)}
@@ -724,7 +737,7 @@ def preparer(url):
                       "video_origine": info.get("_fichier") or "", "debut": debut,    # (contrôle qualité : comparaison avec l'original)
                       "titre": str(info.get("title") or info.get("description") or "")[:300]}   # titre de l'original (parties 1, 2… : suites.py)
     try:                                                                   # personnes VUES à l'image par Gemini (une voix au téléphone exclue)
-        n_v = __import__("video_ia").visibles()
+        n_v = __import__("video_ia").visibles() or __import__("personnes_vues").nombre(info.get("_fichier") or "")
         if n_v: sk["doublage"]["nb_vus"] = int(n_v)
     except Exception: pass
     if audio:                                                              # émotions de jeu données par Claude
@@ -747,6 +760,10 @@ def preparer(url):
         j_ = __import__("jeu_original").extraire(info.get("_fichier") or "", sk["repliques"])
         if j_: sk["_jeu_original"] = j_
     except Exception as e: journal(f"  jeu de l'original illisible ({str(e)[:120]})")
+    try:                                                                   # bouches de dessin animé d'après la voix (Rhubarb, idée 8)
+        rh_ = __import__("rhubarb").analyser(sig, SR)
+        if rh_: sk["_rhubarb"] = rh_; journal(f"  Rhubarb : {len(rh_)} formes de bouche lues dans la voix")
+    except Exception as e: journal(f"  Rhubarb impossible ({str(e)[:100]})")
     try: __import__("objets_vus").appliquer(info.get("_fichier") or "", sk["repliques"])   # objets vus dans l'original (idée 4)
     except Exception as e: journal(f"  objets de l'original non cherchés ({str(e)[:120]})")
     sk["equipe"] = B.lignes
