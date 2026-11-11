@@ -2671,3 +2671,67 @@ class TestJeuOriginal(unittest.TestCase):
         finally: os.environ.clear(); os.environ.update(env)
         src = open(os.path.join(ICI, "..", "moteur", "cartoon.py"), encoding="utf-8").read()
         self.assertIn("FIL_Y = 215", src); self.assertNotIn("FILIGRANE, 28, 118", src)
+
+
+class TestListe11NovembreBis(unittest.TestCase):
+    """Choix de l'auteur du 11 novembre (2e liste) : 7, 8, 9, 14, 15, 20."""
+
+    def test_hashtags_a_risque(self):
+        import legende as L
+        self.assertEqual([h for h in ("charmeur", "armee", "sangria", "famille") if not L.hashtag_sur(h)], [])
+        self.assertTrue(all(not L.hashtag_sur(h) for h in ("sexy", "porno", "drogue", "f4f", "followforfollow")))
+        self.assertEqual(L.sans_risque("Trop drôle #famille #sexy #humour"), "Trop drôle #famille #humour")
+        self.assertNotIn("weed", L.hashtags({"hashtags": ["weed", "couple"], "legende": "x"}))
+
+    def test_variete_du_fil(self):
+        import publication_auto as PA
+        h = [{"fichier": "p.mp4", "publie": True, "programmee": "2026-11-10T18:00", "source_audio": "https://www.tiktok.com/@a/video/1", "recette": {"lieu": "salon"}},
+             {"fichier": "x.mp4", "source_audio": "https://www.tiktok.com/@b/video/2", "recette": {"lieu": "salon"}},
+             {"fichier": "y.mp4", "source_audio": "https://www.tiktok.com/@c/video/3", "recette": {"lieu": "bureau"}},
+             {"fichier": "z.mp4", "source_audio": "https://www.tiktok.com/@a/video/4", "recette": {"lieu": "rue"}}]
+        self.assertEqual(PA.alterner(["x.mp4", "y.mp4", "z.mp4"], h), ["y.mp4", "x.mp4", "z.mp4"])   # autre profil ET autre lieu d'abord
+
+    def test_decouverte(self):
+        import decouverte as D, time
+        self.assertEqual(D.mentions(["duo avec @Enzolefrere !", "merci @enzolefrere et @a_b.c", "rien"]), {"enzolefrere": 2, "a_b.c": 1})
+        t = time.time()
+        bons = [{"url": f"u{k}", "duree": 40, "vues": 20000, "date": t - 86400 * k, "titre": "x"} for k in range(10)]
+        self.assertEqual(D.verifier("zz", bons)["vues_mediane"], 20000)
+        self.assertIsNone(D.verifier("zz", bons[:5]))                                     # trop peu de vidéos
+        self.assertIsNone(D.verifier("zz", [dict(v, vues=100) for v in bons]))             # pas de vues
+        self.assertIsNone(D.verifier("zz", [dict(v, date=t - 90 * 86400) for v in bons]))  # plus rien depuis 30 jours
+
+    def test_paliers(self):
+        import paliers as P
+        self.assertEqual(P.nouveaux(361, {}, premier=True), ([], []))
+        self.assertEqual(P.nouveaux(1020, {"500": {}}, premier=False), ([1000], [1000]))
+        self.assertEqual(P.nouveaux(5100, {"500": {}}, premier=False)[0], [5000])       # plusieurs d'un coup : le plus haut
+        self.assertEqual(P.nouveaux(1020, {"500": {}}, premier=True), ([], [1000]))     # 1er passage : rien de fêté après coup
+        self.assertIn("1 000", P.script(1000)); self.assertTrue(P.script(1000).startswith("Jojo : "))
+
+    def test_vitrine(self):
+        import vitrine as V
+        h = [{"fichier": f"{k}.mp4", "publie": True, "vues": v, "titre": t, "source_audio": f"https://www.tiktok.com/@{p}/video/{k}"}
+             for k, (v, t, p) in enumerate([(900, "A", "x"), (800, "B", "x"), (700, "C", "y"), (600, "D", "z")])]
+        self.assertEqual([e["titre"] for e in V.epingles(h)], ["A", "C", "D"])            # jamais deux du même créateur
+        self.assertTrue(all(len(b) <= 80 for b in V.BIOS_SECOURS))
+
+    def test_registre_des_pannes(self):
+        import pannes
+        j = ("début\n  isolation des voix impossible (ElevenLabs 401 : quota of 10000)\n  isolation des voix impossible (ElevenLabs 402 : quota of 20000)\n"
+             "  [équipe · ingé son] ✔ deux transcriptions d'accord\n  aucune erreur\n  Décors IA impossibles (Modal 500) : décors dessinés\n")
+        l = pannes.lire_journal(j)
+        self.assertEqual(len(l), 2)                                           # la même panne avec d'autres chiffres = une seule
+        f = os.path.join(tempfile.mkdtemp(), "p.json")
+        pannes.ajouter(j, "2026-11-10", f); R = pannes.ajouter(j, "2026-11-11", f)
+        self.assertEqual(sorted(e["n"] for e in R.values()), [2, 2])
+        m = json.loads(pannes.fusionner(json.dumps(R).encode(), json.dumps(R).encode(), b"{}"))
+        self.assertEqual(sorted(e["n"] for e in m.values()), [4, 4])         # deux fabrications en même temps : additionnées
+
+    def test_site_et_workflows(self):
+        s = open(os.path.join(ICI, "..", "moteur", "site.py"), encoding="utf-8").read()
+        for x in ('id="decouvertes"', 'id="vitrine"', 'id="pannes"', "rendreDecouvertes", "precL"):
+            self.assertIn(x, s)
+        e = open(os.path.join(ICI, "..", ".github", "workflows", "emission.yml"), encoding="utf-8").read(); self.assertIn("moteur/pannes.py", e)
+        st = open(os.path.join(ICI, "..", ".github", "workflows", "stats.yml"), encoding="utf-8").read(); self.assertIn("moteur/paliers.py", st)
+        self.assertTrue(os.path.exists(os.path.join(ICI, "..", ".github", "workflows", "vitrine.yml")))

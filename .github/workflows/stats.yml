@@ -12,6 +12,7 @@ on:
 
 permissions:
   contents: write
+  actions: write               # paliers d'abonnés : la vidéo « merci » est lancée (moteur/paliers.py)
 
 concurrency:
   group: historique
@@ -33,6 +34,17 @@ jobs:
         run: |
           pip install -q -U yt-dlp
           python -u moteur/stats.py 2>&1 | tee episodes/stats.txt
+      - name: Paliers d'abonnés fêtés (vidéo « merci » à 500, 1 000, 2 000… abonnés)
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PALIERS: ${{ vars.PALIERS }}
+          VAPID_PRIVEE: ${{ vars.VAPID_PRIVEE }}
+          VAPID_PUBLIQUE: ${{ vars.VAPID_PUBLIQUE }}
+          PUSH_ABONNEMENTS: ${{ vars.PUSH_ABONNEMENTS }}
+        run: |
+          pip install -q cryptography -c contraintes.txt || true
+          python moteur/paliers.py
       - name: Enregistrer
         run: |
           git config user.name "robot-jt"

@@ -41,6 +41,29 @@ def sans_lien(t):
     return re.sub(r"[ \t]+\n", "\n", re.sub(r"\n{3,}", "\n\n", t)).strip()
 
 
+# Hashtags à risque (choix de l'auteur du 11 novembre, idée 7) : ceux que TikTok bloque ou qui font baisser la diffusion (contenu
+# adulte, drogue, violence, automutilation, tendances « spam »). Jamais dans nos descriptions ; réglage HASHTAGS_INTERDITS pour en ajouter.
+RISQUES = re.compile(r"porn|nsfw|onlyfans|cannabis|cocaine|suicide|selfharm|automutil|terroris|followforfollow|follow4follow|like4like|"
+                     r"likeforlike|gainfollowers|freefollowers|^(sex|sexe|sexy|nude|nudes|xxx|boobs|hotgirl|hotboy|drogue|drogues|drug|drugs|"
+                     r"weed|coke|beuh|shit|kill|tuer|arme|armes|gun|guns|nazi|hitler|gore|blood|sang|f4f|l4l|suivezmoi|abonnetoi)$")
+
+
+def interdits():
+    return {_propre(h) for h in re.split(r"[\s,;#]+", os.environ.get("HASHTAGS_INTERDITS") or "") if h.strip()}
+
+
+def hashtag_sur(h):
+    """Ce hashtag peut-il être publié sans risque pour la diffusion du compte ?"""
+    h = _propre(h)
+    return bool(h) and not RISQUES.search(h) and h not in interdits()
+
+
+def sans_risque(texte):
+    """Retire d'un texte les hashtags à risque (descriptions déjà écrites, envoyées à TikTok)."""
+    t = re.sub(r"(?<!\w)#([\wÀ-ÿ]+)", lambda m: m.group(0) if hashtag_sur(m.group(1)) else "", str(texte or ""))
+    return re.sub(r"[ \t]{2,}", " ", t).strip()
+
+
 def hashtags(sk=None, texte="", n=None):
     """Hashtags de la vidéo : ceux de l'IA, puis ceux du sujet (famille, école, couple, travail…), des métiers reconnus, des
     émotions, puis la chaîne et la niche ; sans doublon, sans accent, NB_HASHTAGS au plus (15 par défaut)."""
@@ -58,7 +81,7 @@ def hashtags(sk=None, texte="", n=None):
     vus = []
     for h in out:
         h = _propre(h)
-        if h and h not in vus and len(h) > 1: vus.append(h)
+        if h and h not in vus and len(h) > 1 and hashtag_sur(h): vus.append(h)   # (jamais un hashtag à risque)
     return vus[:n]
 
 
@@ -90,7 +113,7 @@ def completer(legende, fichier=None):
     if phrase_abonne() and "abonne" not in t.lower():                    # vidéos faites avant le 6 novembre : la phrase est ajoutée à l'envoi
         i = t.find("#"); i = t.find("🎧") if "🎧" in t else i
         t = (t[:i].rstrip() + "\n\n" + phrase_abonne() + "\n\n" + t[i:]) if i > 0 else (t + "\n\n" + phrase_abonne())
-    if "#" in t: return t
+    if "#" in t: return sans_risque(t)                                    # (hashtags à risque retirés, même des anciennes descriptions)
     sk = {}
     if fichier:
         try: sk = json.load(open(os.path.join(RACINE, "episodes", "sketchs", os.path.splitext(os.path.basename(fichier))[0] + ".json"), encoding="utf-8"))

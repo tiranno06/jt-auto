@@ -479,8 +479,26 @@
   l'ordinateur de bureau), vus sur 2 images au moins, donnés au personnage qui parle à ce moment si sa réplique n'a pas d'objet ;
   marche aussi sur les dessins animés ; le téléphone caché par la main à l'oreille n'est pas vu. Cache des modèles : hf-ecoute-v3.
   **Nom du compte** (9) : le petit logo existait mais il était caché par la barre du haut de l'appli TikTok (y = 118) et disait
-  « Petits.Dramas » : il affiche maintenant le compte (`marque.compte`, TIKTOK_COMPTE, sinon @petits.dramas), à y = 215 (FIL_Y), et
+  « Petits.Dramas » : il affiche maintenant le compte (`marque.compte`, TIKTOK_COMPTE, sinon @petitsdramas), à y = 215 (FIL_Y), et
   n'apparaît qu'après le titre (jamais par-dessus).
+- **Liste du 11 novembre 2026, 2e partie (choix de l'auteur 7, 8, 9, 14, 15, 20)** : **hashtags à risque** (7, `legende.RISQUES`,
+  `hashtag_sur`, `sans_risque` ; contenu adulte, drogue, violence, automutilation, « follow4follow »… ; mots courts comparés en entier :
+  « charmeur » ou « armée » restent ; HASHTAGS_INTERDITS pour en ajouter ; aussi retirés des anciennes descriptions à l'envoi) ;
+  **variété du fil** (8, `publication_auto.alterner` + `alternerPubli` du site : changer de créateur ET de lieu d'une publication à
+  l'autre, sinon au moins de créateur ; lieu = historique "recette", sinon la réalisation du sketch) ; **nouveaux créateurs** (9,
+  `moteur/decouverte.py`, workflow vitrine.yml chaque lundi) : comptes cités « @… » dans les titres de vos créateurs et des originaux
+  (la recherche par hashtag est cassée dans yt-dlp et tikwm refuse les robots), 30 vérifiés au plus (8 vidéos de 8 à 150 s, publié
+  ces 30 jours, médiane ≥ 5 000 vues), 6 proposés (episodes/decouvertes.json ; site : « ➕ » / « 🚫 » dans « Mes profils ») ; essai
+  du 11 novembre : @enzolefrere, @aguerin30, @42malek, @brutuslerobuste, @jawedyoussef ; **paliers d'abonnés** (14, `moteur/paliers.py`
+  après chaque relevé de stats.yml : 500, 1 000, 2 000… -> vidéo « merci » sur un script, vidéo manuelle jamais publiée seule, alerte ;
+  episodes/paliers.json ; paliers déjà passés au 1er passage jamais fêtés après coup ; PALIERS=0) ; **vitrine du profil** (15,
+  `moteur/vitrine.py`, chaque lundi : 3 bios de 80 caractères au plus par l'IA gratuite, sinon toutes prêtes ; 3 vidéos à épingler,
+  les plus vues de créateurs différents ; logo à télécharger ; episodes/vitrine.json ; site : « 🏪 Vitrine du profil ») ; **registre
+  des pannes** (20, `moteur/pannes.py` à la fin de chaque fabrication : lignes d'erreur / de repli du journal ramenées à leur forme
+  (sans chiffres, liens, chemins, citations), comptées par jour, oubliées après 90 jours ; episodes/pannes.json, additionné par
+  `fusion.FUSIONNES` ; site : Réglages → « 🧯 Registre des pannes », 30 derniers jours). Compte réel de la chaîne : **@petitsdramas**
+  (`marque.COMPTE`, le logo disait « @petits.dramas »). NB du 11 novembre : le journal montre le crédit ElevenLabs épuisé (isolation et
+  transcription passent par les outils gratuits).
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.

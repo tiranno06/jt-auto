@@ -31,16 +31,36 @@ def profil(h):
     return "@" + m.group(1).lower() if m else ""
 
 
+_LIEUX = {}
+
+
+def lieu(h):
+    """Lieu de la vidéo (recette du succès, sinon la réalisation gardée dans son sketch), "" si inconnu."""
+    if not h: return ""
+    l = (h.get("recette") or {}).get("lieu")
+    if l: return str(l)
+    f = str(h.get("fichier") or "")
+    if f not in _LIEUX:
+        try: _LIEUX[f] = str(((json.load(open(os.path.join(RACINE, "episodes", "sketchs", f.replace(".mp4", "") + ".json"), encoding="utf-8"))
+                               .get("realisation") or {}).get("lieux") or [""])[0] or "")
+        except (OSError, ValueError, IndexError): _LIEUX[f] = ""
+    return _LIEUX[f]
+
+
 def alterner(file_, historique):
-    """Jamais deux sons du même profil d'origine d'affilée (choix de l'auteur) : on part du profil de la dernière vidéo publiée et
-    chaque vidéo suivante est la 1re de la file qui vient d'un AUTRE profil (sinon la 1re de la file)."""
+    """Variété du fil (choix de l'auteur) : jamais deux sons du même profil d'origine d'affilée, et (idée 8 du 11 novembre) si
+    possible jamais deux fois le même lieu de suite. On part de la dernière vidéo publiée ; chaque vidéo suivante est la 1re de la
+    file qui change de profil ET de lieu, sinon la 1re qui change de profil, sinon la 1re de la file."""
     connues = {h.get("fichier"): h for h in historique if h.get("fichier")}
     pub = [h for h in historique if h.get("publie") is True]
-    prec = profil(max(pub, key=lambda h: str(h.get("programmee") or h.get("fichier") or ""))) if pub else ""
+    dern = max(pub, key=lambda h: str(h.get("programmee") or h.get("fichier") or "")) if pub else None
+    prec, prec_l = profil(dern), lieu(dern)
     reste, out = list(file_), []
     while reste:
-        n = next((x for x in reste if not prec or profil(connues.get(x)) != prec), reste[0])
-        reste.remove(n); out.append(n); prec = profil(connues.get(n))
+        autre = lambda x: not prec or profil(connues.get(x)) != prec
+        n = next((x for x in reste if autre(x) and (not prec_l or lieu(connues.get(x)) != prec_l)), None) \
+            or next((x for x in reste if autre(x)), reste[0])
+        reste.remove(n); out.append(n); prec, prec_l = profil(connues.get(n)), lieu(connues.get(n))
     return out
 
 

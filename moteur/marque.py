@@ -9,7 +9,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 ICI = os.path.dirname(os.path.abspath(__file__))
 NOM = "Petits.Dramas"
-COMPTE = "@petits.dramas"
+COMPTE = "@petitsdramas"                                                   # adresse réelle de la chaîne (TikTok)
 POLICE = os.path.join(ICI, "..", "polices", "Poppins-Bold.ttf")      # police unique de la chaîne
 JAUNE, JAUNE_FONCE, ENCRE, BLANC, CORAIL = (255, 208, 40), (255, 190, 10), (20, 20, 24), (255, 255, 255), (240, 90, 80)
 

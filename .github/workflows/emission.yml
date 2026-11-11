@@ -343,6 +343,7 @@ jobs:
         run: |
           git config user.name "robot-jt"
           git config user.email "robot-jt@users.noreply.github.com"
+          python3 moteur/pannes.py episodes/journal.txt || true      # registre des pannes (erreurs qui reviennent, moteur/pannes.py)
           git add episodes voix decors sons_eleven
           git commit -m "Émission : ${{ steps.run.outputs.titre }}" || echo "rien à enregistrer"
           python moteur/fusion.py      # plusieurs fabrications en parallèle : l'historique est fusionné, jamais écrasé
