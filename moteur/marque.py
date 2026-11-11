@@ -9,7 +9,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 ICI = os.path.dirname(os.path.abspath(__file__))
 NOM = "Petits.Dramas"
-COMPTE = "@petits.dramas"
+COMPTE = "@petitsdramas"                                                   # adresse réelle de la chaîne (TikTok)
 POLICE = os.path.join(ICI, "..", "polices", "Poppins-Bold.ttf")      # police unique de la chaîne
 JAUNE, JAUNE_FONCE, ENCRE, BLANC, CORAIL = (255, 208, 40), (255, 190, 10), (20, 20, 24), (255, 255, 255), (240, 90, 80)
 
@@ -67,12 +67,19 @@ def signature(W, H, sous_titre="Abonne-toi pour la suite !"):
         d.text(((W - w2) / 2, H * 0.69), sous_titre, font=f2, fill=JAUNE)
     return np.array(img)
 
+def compte():
+    """Nom du compte TikTok de la chaîne (réglage TIKTOK_COMPTE, sinon @petits.dramas) : on le retrouve si la vidéo est repartagée."""
+    c = (os.environ.get("TIKTOK_COMPTE") or "").strip().lstrip("@")
+    return "@" + c if c else COMPTE
+
+
 def filigrane(hauteur=58):
-    """Petit logo + nom en haut à gauche pendant la vidéo (RGBA float32, prêt pour jt.poser)."""
+    """Petit logo + nom du COMPTE en haut à gauche pendant la vidéo (RGBA float32, prêt pour jt.poser)."""
     f = ImageFont.truetype(POLICE, int(hauteur * 0.62)); d0 = ImageDraw.Draw(Image.new("RGB", (1, 1)))
-    w = int(d0.textlength(NOM, font=f)) + hauteur + 30
+    NOM_ = compte()
+    w = int(d0.textlength(NOM_, font=f)) + hauteur + 30
     img = Image.new("RGBA", (w, hauteur), (0, 0, 0, 0)); d = ImageDraw.Draw(img)
     d.rounded_rectangle((0, 0, w - 1, hauteur - 1), hauteur // 2, fill=(255, 255, 255, 170))
     t = tete(hauteur - 6); img.paste(t, (4, 3), t)
-    d.text((hauteur + 6, hauteur * 0.14), NOM, font=f, fill=(20, 20, 24, 230))
+    d.text((hauteur + 6, hauteur * 0.14), NOM_, font=f, fill=(20, 20, 24, 230))
     return np.array(img).astype(np.float32)

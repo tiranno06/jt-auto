@@ -1,0 +1,50 @@
+name: Vitrine et nouveaux créateurs
+# Chaque lundi : nouveaux créateurs proposés (moteur/decouverte.py) et vitrine du profil TikTok (moteur/vitrine.py : bios, vidéos à
+# épingler, photo). Résultats dans episodes/, montrés par le site (onglet TikTok). Bouton « Run workflow » pour le faire tout de suite.
+on:
+  schedule:
+    - cron: "41 5 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: historique
+  cancel-in-progress: false
+
+jobs:
+  vitrine:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    env:
+      PROFILS_TIKTOK: ${{ vars.PROFILS_TIKTOK }}
+      PROFILS_INTERDITS: ${{ vars.PROFILS_INTERDITS }}
+      TIKTOK_COMPTE: ${{ vars.TIKTOK_COMPTE }}
+      DECOUVERTE: ${{ vars.DECOUVERTE }}
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+      MODELE_CLAUDE: ${{ vars.MODELE_CLAUDE }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Outils
+        run: pip install -q -U "yt-dlp[default,curl-cffi]" && pip install -q anthropic -c contraintes.txt
+      - name: Nouveaux créateurs proposés
+        continue-on-error: true
+        run: python -u moteur/decouverte.py
+      - name: Vitrine du profil
+        continue-on-error: true
+        run: python -u moteur/vitrine.py
+      - name: Enregistrer
+        run: |
+          git config user.name "robot-jt"
+          git config user.email "robot-jt@users.noreply.github.com"
+          git add episodes
+          git commit -m "Vitrine et nouveaux créateurs" || echo "rien à enregistrer"
+          python moteur/fusion.py

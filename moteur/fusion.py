@@ -37,7 +37,12 @@ def _compteur(eux, nous, base):
     return json.dumps({m: int(e.get(m, 0)) + int(n.get(m, 0)) - int(b.get(m, 0)) for m in set(e) | set(n)}).encode()
 
 
-FUSIONNES = {"decors/index.tsv": _lignes, "decors/compteur.json": _compteur}
+def _pannes(eux, nous, base):
+    import pannes
+    return pannes.fusionner(eux, nous, base)
+
+
+FUSIONNES = {"decors/index.tsv": _lignes, "decors/compteur.json": _compteur, "episodes/pannes.json": _pannes}
 
 
 def rejouer(commande, message):

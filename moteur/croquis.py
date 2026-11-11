@@ -388,7 +388,13 @@ def main(img, c, r, ang=0, forme="ouverte", ep=2.0, coul=(252, 252, 250)):
         for a_, L in ((-32, 1.15), (-11, 1.3), (10, 1.28), (30, 1.08)):
             t = math.radians(a_ + 90); caps.append((rot(0, r * 0.2), rot(L * r * math.cos(t), L * r * math.sin(t)), r * 0.2))
         caps.append((rot(-r * 0.2, -r * 0.1), rot(-r * 0.95, r * 0.25), r * 0.21))   # pouce
-    else: caps = [(rot(0, 0), rot(0, r * 0.25), r * 0.72)]                  # poing fermé
+    else:
+        caps = [(rot(0, 0), rot(0, r * 0.25), r * 0.72)]                  # poing fermé
+        if forme in ("index", "deux"):                                     # gestes des doigts copiés sur l'original (jeu_original.py)
+            for a_ in ((0,) if forme == "index" else (-11, 11)):
+                t = math.radians(a_ + 90); caps.append((rot(0, r * 0.5), rot(1.55 * r * math.cos(t), 1.55 * r * math.sin(t)), r * 0.2))
+        elif forme in ("pouce", "pouce_bas"):                              # pouce levé / baissé : vers le haut / le bas de l'image
+            s_ = -1 if forme == "pouce" else 1; caps.append(((c[0], c[1] + s_ * r * 0.3), (c[0], c[1] + s_ * r * 1.35), r * 0.24))
     for e_, coul in ((r * 0.0 + ep * 2, ENCRE), (0, coul)):
         for a_, b_, w in caps:
             cv2.line(img, _pts([a_])[0], _pts([b_])[0], coul, max(1, int((w * 2 + e_) * 1)), AA, 2) if a_ != b_ else None
@@ -437,7 +443,7 @@ VISAGE_MAIN = _Devant(VISAGE_MAIN)
 def bonhomme(img, x, sol, R, expr="neutre", bras=("ballants", "ballants"), jambes=("debout", "debout"), taille="chibi", graine=0,
              haut="tshirt", c_haut=(120, 160, 210), bas="pantalon", c_bas=(70, 95, 150), chaussures=(55, 52, 58), cheveux=None,
              rayures=None, teint=None, profil=0.0, extras=(), objet=None, chapeau=None, ouv=None, cligne=0.0, penche=0.0, fx=None, sens=1, ecrase=1.0,
-             c_mains=None, montre=False):
+             c_mains=None, montre=False, formes=(None, None)):
     """Personnage complet. taille 'grand' : stickman géant (longues jambes fines, petit maillot, slip) ; 'chibi' : grosse tête, petit
     corps habillé (t-shirt à manches courtes, pantalon de couleur), comme les planches Émotions et Métiers."""
     rng = np.random.default_rng(graine)
@@ -546,10 +552,11 @@ def bonhomme(img, x, sol, R, expr="neutre", bras=("ballants", "ballants"), jambe
     if accr: dessine_jambes()
     # --- objet tenu, mains
     if objet and bras[1] not in VISAGE_MAIN: objet(img, mains[1][2], R)
-    for (e_, co, mn), nom in zip(mains, bras):
+    for i_m, ((e_, co, mn), nom) in enumerate(zip(mains, bras)):
         if nom in VISAGE_MAIN: continue
         ang = math.degrees(math.atan2(mn[1] - co[1], mn[0] - co[0])) - 90
-        main(img, mn, R * (0.085 if G else 0.11), ang, "poing" if nom in ("poing",) else "ouverte", ep * (1.0 if G else 0.8), (235, 140, 130) if (expr in ("colere", "frustration") and nom == "poing") else (c_mains or (252, 252, 250)))
+        f_m = (formes or (None, None))[i_m] if i_m < len(formes or ()) else None   # geste des doigts copié sur l'original
+        main(img, mn, R * (0.085 if G else 0.11), ang, f_m if f_m in ("index", "deux", "pouce", "pouce_bas", "poing") else ("poing" if nom in ("poing",) else "ouverte"), ep * (1.0 if G else 0.8), (235, 140, 130) if (expr in ("colere", "frustration") and nom == "poing") else (c_mains or (252, 252, 250)))
     if montre:                                                             # montre au poignet gauche
         e_, co, mn = mains[0]; w_ = (co[0] + (mn[0] - co[0]) * 0.78, co[1] + (mn[1] - co[1]) * 0.78)
         _forme(img, cercle_pts(w_, R * 0.07), (240, 240, 245), ep * 0.7, 0.3); encre(img, [(w_[0], w_[1] - R * 0.04), (w_[0], w_[1])], ep * 0.5)

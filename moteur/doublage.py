@@ -724,6 +724,12 @@ def preparer(url):
         audios.append(np.asarray(sig[a0:a1], np.float32))
         mots.append([(x["w"], float(x["s"] - s["deb"]), float(x["e"] - s["deb"])) for x in s["mots"]])
     for r, m_ in zip(sk["repliques"], mots): r["_mots"] = [[w, round(a, 3), round(b, 3)] for w, a, b in m_]   # gardés : « Corriger qui parle »
+    try:                                                                   # jeu copié sur l'original : expressions, tête, doigts (idées 1, 3)
+        j_ = __import__("jeu_original").extraire(info.get("_fichier") or "", sk["repliques"])
+        if j_: sk["_jeu_original"] = j_
+    except Exception as e: journal(f"  jeu de l'original illisible ({str(e)[:120]})")
+    try: __import__("objets_vus").appliquer(info.get("_fichier") or "", sk["repliques"])   # objets vus dans l'original (idée 4)
+    except Exception as e: journal(f"  objets de l'original non cherchés ({str(e)[:120]})")
     sk["equipe"] = B.lignes
     journal(f"  bulletin de l'équipe : {B.resume()}")
     return sk, audios, mots

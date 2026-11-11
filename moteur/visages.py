@@ -17,6 +17,12 @@ import numpy as np
 MODELE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "outils", "face_landmarker.task")
 URL = "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/latest/face_landmarker.task"
 IPS, COUPE = 8.0, 28.0                                                     # images lues par seconde ; écart moyen = changement de plan
+MODELE_MAINS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "outils", "gesture_recognizer.task")
+URL_MAINS = "https://storage.googleapis.com/mediapipe-models/gesture_recognizer/gesture_recognizer/float16/latest/gesture_recognizer.task"
+EXPRESSIONS = ("mouthSmileLeft", "mouthSmileRight", "browInnerUp", "browOuterUpLeft", "browOuterUpRight", "browDownLeft", "browDownRight",
+               "eyeSquintLeft", "eyeSquintRight", "eyeWideLeft", "eyeWideRight", "jawOpen", "mouthFrownLeft", "mouthFrownRight", "cheekPuff",
+               "mouthPucker")                                              # expressions gardées (jeu copié sur l'original : jeu_original.py)
+_MEMO = {}                                                                 # (lecture faite une seule fois par vidéo : témoin + jeu)
 
 
 def _detecteur():
@@ -26,6 +32,23 @@ def _detecteur():
     return vision.FaceLandmarker.create_from_options(vision.FaceLandmarkerOptions(
         base_options=BaseOptions(model_asset_path=MODELE), running_mode=vision.RunningMode.IMAGE, num_faces=3,
         output_face_blendshapes=True, min_face_detection_confidence=0.5))
+
+
+def _detecteur_mains():
+    """Gestes des mains (MediaPipe Gesture Recognizer, Apache 2.0, 8 Mo) : index levé, pouce levé / baissé, V, main ouverte, poing."""
+    if not os.path.exists(MODELE_MAINS):
+        os.makedirs(os.path.dirname(MODELE_MAINS), exist_ok=True); urllib.request.urlretrieve(URL_MAINS, MODELE_MAINS)
+    from mediapipe.tasks.python import BaseOptions, vision
+    return vision.GestureRecognizer.create_from_options(vision.GestureRecognizerOptions(
+        base_options=BaseOptions(model_asset_path=MODELE_MAINS), running_mode=vision.RunningMode.IMAGE, num_hands=4))
+
+
+def _plat(img, x0, y0, x1, y1):
+    """Part du visage peinte en aplat (dessin animé : proche de 1 ; vraie peau, grain, ombres : bien plus bas)."""
+    import cv2
+    z = cv2.cvtColor(img[max(0, y0):max(0, y1), max(0, x0):max(0, x1)], cv2.COLOR_BGR2GRAY)
+    if z.size < 400: return 1.0
+    return round(float((cv2.absdiff(z, cv2.medianBlur(z, 5)) <= 1).mean()), 3)
 
 
 def _apparence(hsv, x0, y0, x1, y1):
@@ -42,13 +65,20 @@ def _apparence(hsv, x0, y0, x1, y1):
 
 
 def lire(chemin, duree_max=200):
-    """[(instant, coupe_avant, [visage…])] ; visage = dict(x, y, taille, bouche, regard (-1 gauche … 1 droite), app)."""
+    """[(instant, coupe_avant, [visage…])] ; visage = dict(x, y, taille, bouche, regard (-1 gauche … 1 droite), app, expressions
+    (« bs »), inclinaison (« roll », degrés), tête levée / baissée (« pitch »), geste de la main la plus proche (« main »))."""
     if os.environ.get("VISAGES", "1") == "0" or not chemin or not os.path.exists(chemin): return []
+    cle = (os.path.abspath(chemin), os.path.getsize(chemin), duree_max)
+    if cle in _MEMO: return _MEMO[cle]
     import cv2, mediapipe as mp
     cap = cv2.VideoCapture(chemin)
     if not cap.isOpened(): return []
     fps = cap.get(cv2.CAP_PROP_FPS) or 30.0; pas = max(1, int(round(fps / IPS)))
     det = _detecteur(); out, k, prec = [], 0, None
+    mains = None
+    if os.environ.get("MAINS", "1") != "0":
+        try: mains = _detecteur_mains()
+        except Exception as e: print(f"  gestes des mains indisponibles ({str(e)[:100]})", flush=True)
     try:
         while k < duree_max * fps:
             ok, f = cap.read()
@@ -59,7 +89,8 @@ def lire(chemin, duree_max=200):
             petit = cv2.resize(f, (90, 160)).astype(np.int16)
             coupe = prec is not None and float(np.abs(petit - prec).mean()) > COUPE; prec = petit
             hgt = 640; img = cv2.resize(f, (int(f.shape[1] * hgt / f.shape[0]), hgt)); H, W = img.shape[:2]
-            r = det.detect(mp.Image(image_format=mp.ImageFormat.SRGB, data=np.ascontiguousarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))))
+            im_mp = mp.Image(image_format=mp.ImageFormat.SRGB, data=np.ascontiguousarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB)))
+            r = det.detect(im_mp)
             hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV); vis = []
             for j, lm in enumerate(r.face_landmarks or []):
                 P = np.array([[q.x, q.y] for q in lm])
@@ -69,11 +100,27 @@ def lire(chemin, duree_max=200):
                 if not bs:                                                 # (sans « blendshapes » : écart des lèvres / hauteur du visage)
                     ouv = float(abs(P[14, 1] - P[13, 1]) / max(1e-6, P[:, 1].max() - P[:, 1].min()))
                 yeux = (P[33, 0] + P[263, 0]) / 2; l_ = abs(P[263, 0] - P[33, 0]) + 1e-6
+                ey = (P[33, 1] + P[263, 1]) / 2; hv = max(1e-6, P[152, 1] - ey)
                 vis.append(dict(x=float(P[:, 0].mean()), y=float(P[:, 1].mean()), taille=float(P[:, 1].max() - P[:, 1].min()),
-                                bouche=float(ouv), regard=float(np.clip((P[1, 0] - yeux) / l_ * 3, -1, 1)), app=_apparence(hsv, x0, y0, x1, y1)))
+                                bouche=float(ouv), regard=float(np.clip((P[1, 0] - yeux) / l_ * 3, -1, 1)), app=_apparence(hsv, x0, y0, x1, y1),
+                                bs={n: round(float(bs[n]), 3) for n in EXPRESSIONS if n in bs},
+                                roll=float(np.degrees(np.arctan2((P[263, 1] - P[33, 1]) * H, (P[263, 0] - P[33, 0]) * W))),
+                                pitch=float((P[1, 1] - ey) / hv), main=None, plat=_plat(img, x0, y0, x1, y1)))
+            if mains is not None and vis:                                  # chaque main va au visage le plus proche (sa personne)
+                try:
+                    g = mains.recognize(im_mp)
+                    for j, lm in enumerate(g.hand_landmarks or []):
+                        cat = (g.gestures[j][0] if g.gestures and j < len(g.gestures) and g.gestures[j] else None)
+                        if cat is None or cat.category_name in ("None", "") or cat.score < 0.55: continue
+                        wx, wy = lm[0].x, lm[0].y
+                        f_ = min(vis, key=lambda v: abs(v["x"] - wx) + 0.5 * abs(v["y"] + 0.15 - wy))
+                        if abs(f_["x"] - wx) < 0.35: f_["main"] = cat.category_name
+                except Exception: pass
             out.append((t, coupe, vis))
     finally:
         det.close(); cap.release()
+        if mains is not None: mains.close()
+    _MEMO[cle] = out
     return out
 
 

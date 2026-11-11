@@ -402,7 +402,13 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <button class="second" id="tkConnus" style="width:100%;margin-bottom:6px">➕ Ajouter les profils déjà connus</button>
     <p class="note" id="tkConnusNote"></p>
     <label>🚫 Profils à ne jamais reprendre (liste noire)<div class="jeton"><textarea data-var="PROFILS_INTERDITS" data-def="" data-texte="1" maxlength="2000" rows="2" placeholder="@profil_qui_a_reclame"></textarea><button class="second" data-enr="PROFILS_INTERDITS" style="flex:none;padding:10px 14px">OK</button></div></label>
-    <p class="note">Ces profils ne sont jamais tirés au hasard, même s'ils sont dans la liste ci-dessus. Les profils dont la bio interdit la reprise (« ne pas reprendre », « no repost »…) sont écartés tout seuls.</p></details>
+    <p class="note">Ces profils ne sont jamais tirés au hasard, même s'ils sont dans la liste ci-dessus. Les profils dont la bio interdit la reprise (« ne pas reprendre », « no repost »…) sont écartés tout seuls.</p>
+    <b>🔍 Nouveaux créateurs proposés</b>
+    <p class="note">Chaque lundi, le robot cherche des comptes cités par vos créateurs et vérifie qu'ils publient des sketchs qui font des vues. « ➕ » l'ajoute à votre liste, « 🚫 » à la liste noire (puis touchez OK).</p>
+    <div id="decouvertes"><p class="note">Pas encore de proposition (prochaine recherche lundi).</p></div></details>
+  <details class="groupe repliTk" data-cle="vitrine"><summary>🏪 Vitrine du profil</summary>
+    <p class="note">À appliquer vous-même dans l'appli TikTok (Profil → Modifier le profil ; appui long sur une vidéo → Épingler). Mis à jour chaque lundi.</p>
+    <div id="vitrine"><p class="note">Prête lundi prochain (ou lancez « Vitrine et nouveaux créateurs » dans GitHub).</p></div></details>
   <details class="groupe repliTk" data-cle="lancer" open><summary>🎲 Lancer des vidéos (sons au hasard)</summary>
     <button class="action" id="tkHasard">🎲 Une vidéo maintenant (son au hasard des profils)</button>
     <div id="tkSuiviH" class="note"></div>
@@ -450,6 +456,9 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <div class="jeton"><input id="jeton2" type="password" placeholder="github_pat_…" autocomplete="off"><button class="second" id="garder2" style="flex:none;padding:10px 14px">Connecter</button></div>
   </section>
   <p class="note" id="cfgEtat"></p>
+  <details class="groupe"><summary>🧯 Registre des pannes <span id="resumePannes"></span></summary>
+    <p class="note">Les erreurs et replis des fabrications, regroupés : celles qui reviennent le plus ces 30 derniers jours en premier.</p>
+    <div id="pannes"><p class="note">Rien de noté pour l'instant.</p></div></details>
   <details class="groupe"><summary>⏱️ Temps de fabrication <span id="resumeTemps"></span></summary>
     <p class="note">Temps passé à chaque étape de la dernière vidéo (⚠️ = au moins deux fois plus lent que d'habitude).</p><div id="tempsFab" class="barres"><p class="note">Visible après la prochaine vidéo.</p></div></details>
   <details class="groupe" open><summary>🗂️ Onglets affichés</summary>
@@ -756,6 +765,33 @@ function voyants(){
   if(o&&o.claude==="ok"&&o.eco) c[1]="Claude : OK (mode économique)";
   return [["claude",...c],["voix",...v],["decors",...d]];
 }
+const esc=t=>String(t??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+// 🔍 nouveaux créateurs proposés (episodes/decouvertes.json, moteur/decouverte.py)
+function rendreDecouvertes(d){
+  const z=$("#decouvertes"); if(!z) return;
+  if(!d.profils.length){z.innerHTML=`<p class="note">Aucun nouveau créateur trouvé le ${esc(d.date)}.</p>`;return}
+  z.innerHTML=d.profils.map(f=>`<div class="auto"><div class="txt"><b>@${esc(f.profil)}</b><small>${Number(f.vues_mediane).toLocaleString("fr-FR")} vues par vidéo (médiane) · ${f.recentes_30j} vidéo(s) ce mois-ci${f.exemple?` · <a style="color:var(--bleu)" href="${esc(f.exemple)}" target="_blank" rel="noopener">voir une vidéo ↗</a>`:""}</small></div>
+    <button class="second" data-ajout="${esc(f.profil)}" style="flex:none;padding:8px 12px">➕</button><button class="second" data-jamais="${esc(f.profil)}" style="flex:none;padding:8px 12px">🚫</button></div>`).join("");
+  const ajoute=(sel,p)=>{const t=document.querySelector(`[data-var="${sel}"]`); if(!t) return; if(!new RegExp("@?"+p.replace(/[.\-]/g,"\\$&")+"\\b","i").test(t.value)) t.value=(t.value.trim()?t.value.trim()+"\n":"")+"@"+p; t.scrollIntoView({behavior:"smooth",block:"center"}); toast("@"+p+" ajouté : touchez OK pour enregistrer")};
+  z.querySelectorAll("[data-ajout]").forEach(b=>b.onclick=()=>ajoute("PROFILS_TIKTOK",b.dataset.ajout));
+  z.querySelectorAll("[data-jamais]").forEach(b=>b.onclick=()=>ajoute("PROFILS_INTERDITS",b.dataset.jamais));
+}
+// 🏪 vitrine du profil (episodes/vitrine.json, moteur/vitrine.py)
+function rendreVitrine(v){
+  const z=$("#vitrine"); if(!z) return;
+  z.innerHTML=`<p class="note"><b>Bio</b> (80 caractères au plus) :</p>`+v.bios.map((b,k)=>`<div class="auto"><div class="txt"><small>${esc(b)}</small></div><button class="second" data-bio="${k}" style="flex:none;padding:8px 12px">📋 Copier</button></div>`).join("")+
+    (v.epingles&&v.epingles.length?`<p class="note"><b>Vidéos à épingler</b> (les plus vues, 3 histoires différentes) :</p>`+v.epingles.map(e=>`<div><small>📌 ${esc(e.titre)} · ${Number(e.vues).toLocaleString("fr-FR")} vues ${e.url?`<a style="color:var(--bleu)" href="${esc(e.url)}" target="_blank" rel="noopener">ouvrir ↗</a>`:""}</small></div>`).join(""):"")+
+    `<p class="note"><b>Photo de profil</b> : <a style="color:var(--bleu)" href="${esc(v.photo||"logo-512.png")}" download>télécharger le logo ⬇</a></p><p class="note">Préparé le ${esc(v.date)}.</p>`;
+  z.querySelectorAll("[data-bio]").forEach(b=>b.onclick=async()=>{try{await navigator.clipboard.writeText(v.bios[+b.dataset.bio]); toast("Bio copiée ✓ : collez-la dans TikTok")}catch(e){toast("Copie impossible : sélectionnez le texte")}});
+}
+// 🧯 registre des pannes (episodes/pannes.json, moteur/pannes.py)
+function rendrePannes(p){
+  const z=$("#pannes"); if(!z) return;
+  const lim=new Date(Date.now()-30*864e5).toISOString().slice(0,10);
+  const l=Object.entries(p).map(([f,e])=>[f,e,Object.entries(e.jours||{}).filter(([d])=>d>=lim).reduce((a,[,c])=>a+c,0)]).filter(x=>x[2]>0).sort((a,b)=>b[2]-a[2]).slice(0,12);
+  $("#resumePannes").textContent=l.length?`(${l.length})`:"";
+  z.innerHTML=l.length?l.map(([f,e,n])=>`<div class="alerte"><b>${n} fois</b> en 30 jours${e.etape?" · "+esc(e.etape):""} · dernière le ${esc(e.derniere)}<br><small>${esc(e.exemple).slice(0,200)}</small></div>`).join(""):`<p class="note">Aucune panne ces 30 derniers jours ✓</p>`;
+}
 // 📈 recette du succès (episodes/recette.json, moteur/recette.py)
 function rendreRecette(r){
   const z=$("#recette"); if(!z) return;
@@ -810,13 +846,17 @@ async function lireEpisode(nom){
 async function actualiserStats(){
   if(!CONF.depot) return;
   try{
-    const [h,st,cr,rc]=await Promise.all([lireEpisode("historique.json").catch(()=>null),lireEpisode("stats.json").catch(()=>null),lireEpisode("credits.json").catch(()=>null),lireEpisode("recette.json").catch(()=>null)]);
+    const [h,st,cr,rc,dc,vt,pn]=await Promise.all([lireEpisode("historique.json").catch(()=>null),lireEpisode("stats.json").catch(()=>null),lireEpisode("credits.json").catch(()=>null),lireEpisode("recette.json").catch(()=>null),
+      lireEpisode("decouvertes.json").catch(()=>null),lireEpisode("vitrine.json").catch(()=>null),lireEpisode("pannes.json").catch(()=>null)]);
     if(rc&&rc.videos) rendreRecette(rc);
+    if(dc&&Array.isArray(dc.profils)) rendreDecouvertes(dc);
+    if(vt&&Array.isArray(vt.bios)) rendreVitrine(vt);
+    if(pn&&typeof pn==="object") rendrePannes(pn);
     if(cr&&cr.date){CRED=cr; rendreOutils(); rendreQuotaIA()}
     if(Array.isArray(h)){const par={}; h.forEach(e=>{if(e.fichier)par[e.fichier]=e});
-      try{const K=["fichier","titre","date","tag","web","filiere","source_audio","theme","manuel","legende","publie","vues","format","avis","note","note_auteur","programmee","duree","likes","commentaires","partages","a_verifier","confiance"];
+      try{const K=["fichier","titre","date","tag","web","filiere","source_audio","theme","manuel","legende","publie","vues","format","avis","note","note_auteur","programmee","duree","likes","commentaires","partages","a_verifier","confiance","recette"];
         localStorage.setItem("jt_historique",JSON.stringify(h.filter(e=>e.fichier).map(e=>Object.fromEntries(K.filter(k=>e[k]!==undefined).map(k=>[k,e[k]])))))}catch(e){}   // copie légère pour la prochaine ouverture
-      DATA.forEach(v=>{const e=par[v.fichier]; if(!e)return; ["vues","likes","commentaires","partages","publie","couts","programmee","a_verifier","confiance","jury"].forEach(k=>{if(e[k]!==undefined)v[k]=e[k]})});
+      DATA.forEach(v=>{const e=par[v.fichier]; if(!e)return; ["vues","likes","commentaires","partages","publie","couts","programmee","a_verifier","confiance","jury","recette"].forEach(k=>{if(e[k]!==undefined)v[k]=e[k]})});
       ajouterNouvelles(h); rendreTemps(h);
       const faites=h.filter(e=>e.fichier), der=faites[faites.length-1];
       if(der){OUTILS={outils:(der.outils&&typeof der.outils==="object")?der.outils:null,date:der.date||"",titre:der.titre||""}; rendreOutils()}}
@@ -1014,8 +1054,10 @@ const attentePubli=f=>alternerPubli(f.filter(n=>{const v=DATA.find(x=>x.fichier=
 function alternerPubli(f){                                                 // jamais deux sons du même profil d'affilée (moteur/publication_auto.py)
   const pr=n=>{const v=DATA.find(x=>x.fichier===n); return v?profilDe(v):""};
   const pub=DATA.filter(v=>v.publie===true).sort((a,b)=>String(a.programmee||a.fichier||"").localeCompare(String(b.programmee||b.fichier||"")));
-  let prec=pub.length?profilDe(pub[pub.length-1]):""; const reste=[...f], out=[];
-  while(reste.length){let k=reste.findIndex(n=>!prec||pr(n)!==prec); if(k<0) k=0; const [n]=reste.splice(k,1); out.push(n); prec=pr(n)}
+  const li=n=>{const v=DATA.find(x=>x.fichier===n); return (v&&v.recette&&v.recette.lieu)||""};   // variété du fil : jamais 2 fois le même lieu de suite
+  let prec=pub.length?profilDe(pub[pub.length-1]):"", precL=pub.length?((pub[pub.length-1].recette||{}).lieu||""):""; const reste=[...f], out=[];
+  while(reste.length){let k=reste.findIndex(n=>(!prec||pr(n)!==prec)&&(!precL||li(n)!==precL)); if(k<0) k=reste.findIndex(n=>!prec||pr(n)!==prec); if(k<0) k=0;
+    const [n]=reste.splice(k,1); out.push(n); prec=pr(n); precL=li(n)}
   return out}
 async function basculerPubli(nom,b){
   if(!lireJeton()){toast("Connectez d'abord la régie (onglet Réglages)");allerOnglet("config");return}
