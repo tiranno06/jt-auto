@@ -1,348 +1,797 @@
 {
- "titre": "OUAIS MAMAN",
- "sujet": "OUAIS MAMAN",
- "ecran": "OUAIS MAMAN",
+ "titre": "ROBIN, IL FAUT QUE JE TE DISE",
+ "sujet": "ROBIN, IL FAUT QUE JE TE DISE",
+ "ecran": "ROBIN, IL FAUT",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
  "titre_accroche": "",
- "question": "",
+ "question": "Comment gérer une révélation aussi explosive avec humour et sarcasme ?",
  "running_gag": "",
  "verite": "",
  "repliques": [
   {
-   "p": "presentateur",
-   "t": "Ouais maman, je t'appelle juste pour te prévenir que je viens d'arriver là.",
-   "_deb": 0.12,
-   "_fin": 2.44,
-   "d": "[confused] Ouais maman, je t'appelle juste pour te prévenir que je viens d'arriver là.",
-   "objet": "telephone",
+   "p": "envoyee",
+   "t": "{'texte': 'Robin, il faut que je te dise un truc.'}",
+   "_deb": 0.22,
+   "_fin": 1.26,
+   "d": "{'texte': '[sûre] Robin, il faut que je te dise un truc.'}",
    "_mots": [
     [
-     "Ouais",
+     "Robin,",
      0.0,
-     0.12
+     0.22
     ],
     [
-     "maman,",
-     0.16,
+     "il",
+     0.28,
      0.32
     ],
     [
+     "faut",
+     0.34,
+     0.4
+    ],
+    [
+     "que",
+     0.42,
+     0.44
+    ],
+    [
      "je",
+     0.46,
+     0.48
+    ],
+    [
+     "te",
+     0.5,
+     0.54
+    ],
+    [
+     "dise",
+     0.54,
+     0.66
+    ],
+    [
+     "un",
+     0.68,
+     0.74
+    ],
+    [
+     "truc.",
+     0.78,
+     1.04
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Quoi?",
+   "_deb": 1.46,
+   "_fin": 1.62,
+   "_mots": [
+    [
+     "Quoi?",
+     0.0,
+     0.16
+    ]
+   ]
+  },
+  {
+   "p": "envoyee",
+   "t": "{'texte': \"Ben voilà, je t'ai trompé avec ton pote.\"}",
+   "_deb": 2.74,
+   "_fin": 4.46,
+   "_mots": [
+    [
+     "{'texte':",
+     0.0,
+     0.1
+    ],
+    [
+     "\"Ben",
+     0.12,
+     0.26
+    ],
+    [
+     "voilà,",
+     0.32,
+     0.34
+    ],
+    [
+     "je",
+     0.52,
+     0.58
+    ],
+    [
+     "t'ai",
+     0.68,
+     0.76
+    ],
+    [
+     "trompé",
+     0.8,
+     1.06
+    ],
+    [
+     "avec",
+     1.22,
+     1.34
+    ],
+    [
+     "ton",
+     1.38,
+     1.46
+    ],
+    [
+     "pote.\"}",
+     1.5,
+     1.72
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Quoi?",
+   "_deb": 5.14,
+   "_fin": 5.54,
+   "_mots": [
+    [
+     "Quoi?",
+     0.0,
+     0.4
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "{'texte': 'Avec qui?'}",
+   "_deb": 5.58,
+   "_fin": 5.9,
+   "d": "{'texte': '[sûre] Avec qui?'}",
+   "_mots": [
+    [
+     "Avec",
+     0.0,
+     0.14
+    ],
+    [
+     "qui?",
+     0.18,
+     0.32
+    ]
+   ]
+  },
+  {
+   "p": "envoyee",
+   "t": "{'texte': \"Avec Enzo. Je suis désolée, c'est ton pote...\"}",
+   "_deb": 6.12,
+   "_fin": 7.82,
+   "_mots": [
+    [
+     "{'texte':",
+     0.0,
+     0.14
+    ],
+    [
+     "\"Avec",
+     0.18,
+     0.48
+    ],
+    [
+     "Enzo.",
+     0.68,
+     0.72
+    ],
+    [
+     "Je",
+     0.72,
+     0.8
+    ],
+    [
+     "suis",
+     0.82,
+     1.08
+    ],
+    [
+     "désolée,",
+     1.14,
+     1.24
+    ],
+    [
+     "c'est",
+     1.3,
+     1.4
+    ],
+    [
+     "ton",
+     1.44,
+     1.52
+    ],
+    [
+     "pote...\"}",
+     1.58,
+     1.7
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "{'texte': \"C'était qui le mieux?\"}",
+   "_deb": 8.24,
+   "_fin": 8.8,
+   "d": "{'texte': \"[sûre] C'était qui le mieux?\"}",
+   "_mots": [
+    [
+     "C'était",
+     0.0,
+     0.2
+    ],
+    [
+     "qui",
+     0.24,
+     0.32
+    ],
+    [
+     "le",
      0.36,
      0.4
     ],
     [
-     "t'appelle",
+     "mieux?",
+     0.42,
+     0.56
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Quoi?",
+   "_deb": 9.68,
+   "_fin": 9.84,
+   "_mots": [
+    [
+     "Quoi?",
+     0.0,
+     0.16
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "{'texte': \"C'est avec qui c'était le mieux?\"}",
+   "_deb": 10.18,
+   "_fin": 11.08,
+   "d": "{'texte': \"[sûre] C'est avec qui c'était le mieux?\"}",
+   "_mots": [
+    [
+     "C'est",
+     0.0,
+     0.12
+    ],
+    [
+     "avec",
+     0.16,
+     0.3
+    ],
+    [
+     "qui",
+     0.34,
+     0.42
+    ],
+    [
+     "c'était",
      0.44,
-     0.7
+     0.58
     ],
     [
-     "juste",
-     0.8,
-     0.94
+     "le",
+     0.6,
+     0.64
     ],
     [
-     "pour",
-     0.98,
-     1.1
+     "mieux?",
+     0.68,
+     0.9
+    ]
+   ]
+  },
+  {
+   "p": "envoyee",
+   "t": "{'texte': 'Avec toi.'}",
+   "_deb": 13.12,
+   "_fin": 13.54,
+   "d": "{'texte': '[sarcastique] Avec toi.'}",
+   "_mots": [
+    [
+     "Avec",
+     0.0,
+     0.18
     ],
     [
-     "te",
-     1.12,
-     1.22
-    ],
-    [
-     "prévenir",
-     1.26,
-     1.54
-    ],
-    [
-     "que",
-     1.58,
-     1.66
-    ],
-    [
-     "je",
-     1.68,
-     1.72
-    ],
-    [
-     "viens",
-     1.74,
-     1.84
-    ],
-    [
-     "d'arriver",
-     1.86,
-     2.2
-    ],
-    [
-     "là.",
-     2.24,
-     2.32
+     "toi.",
+     0.24,
+     0.42
     ]
    ]
   },
   {
    "p": "presentateur",
-   "t": "Je suis à Gare de Lyon.",
-   "_deb": 2.66,
-   "_fin": 3.32,
-   "d": "[sure] Je suis à Gare de Lyon.",
+   "t": "{'texte': 'Voilà!'}",
+   "_deb": 14.1,
+   "_fin": 14.76,
+   "d": "{'texte': '[sarcastique] Voilà!'}",
    "_mots": [
     [
-     "Je",
+     "Voilà!",
      0.0,
-     0.02
-    ],
-    [
-     "suis",
-     0.02,
-     0.12
-    ],
-    [
-     "à",
-     0.16,
-     0.2
-    ],
-    [
-     "Gare",
-     0.22,
-     0.36
-    ],
-    [
-     "de",
-     0.4,
-     0.44
-    ],
-    [
-     "Lyon.",
-     0.48,
      0.66
     ]
-   ],
-   "objet": "telephone"
+   ]
   },
   {
    "p": "invite",
-   "t": "Qu'est-ce que tu fais à Lyon?",
-   "_deb": 4.66,
-   "_fin": 5.48,
-   "d": "[confused] Qu'est-ce que tu fais à Lyon?",
+   "t": "{'texte': \"Alors, on ferme sa gueule maintenant. Je sais que tu as baisé ma meuf, mais t'es trop nul\"}",
+   "_deb": 16.02,
+   "_fin": 19.52,
+   "d": "{'texte': \"[colère] Alors, on ferme sa gueule maintenant. Je sais que tu as baisé ma meuf, mais t'es trop nul\"}",
    "_mots": [
     [
-     "Qu'est-ce",
+     "Alors,",
      0.0,
-     0.14
+     0.4
     ],
     [
-     "que",
-     0.14,
-     0.26
-    ],
-    [
-     "tu",
-     0.26,
-     0.26
-    ],
-    [
-     "fais",
-     0.3,
-     0.38
-    ],
-    [
-     "à",
-     0.42,
-     0.46
-    ],
-    [
-     "Lyon?",
-     0.5,
-     0.82
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Comment ça, qu'est-ce que je fais à Lyon?",
-   "_deb": 7.04,
-   "_fin": 7.9,
-   "d": "[annoyed] Comment ça, qu'est-ce que je fais à Lyon?",
-   "_mots": [
-    [
-     "Comment",
-     0.0,
-     0.12
-    ],
-    [
-     "ça,",
-     0.16,
-     0.22
-    ],
-    [
-     "qu'est-ce",
-     0.28,
-     0.42
-    ],
-    [
-     "que",
+     "on",
      0.44,
      0.5
     ],
     [
-     "je",
-     0.52,
-     0.56
+     "ferme",
+     0.56,
+     0.74
     ],
     [
-     "fais",
-     0.6,
-     0.66
+     "sa",
+     0.8,
+     0.88
     ],
     [
-     "à",
-     0.68,
-     0.7
+     "gueule",
+     0.98,
+     1.18
     ],
     [
-     "Lyon?",
-     0.72,
-     0.86
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Je suis pas à Lyon, là.",
-   "_deb": 7.92,
-   "_fin": 8.46,
-   "d": "[sure] Je suis pas à Lyon, là.",
-   "_mots": [
+     "maintenant.",
+     1.22,
+     1.64
+    ],
     [
      "Je",
-     0.0,
-     0.02
+     1.74,
+     1.78
     ],
     [
-     "suis",
-     0.02,
-     0.08
+     "sais",
+     1.78,
+     1.86
     ],
     [
-     "pas",
-     0.1,
-     0.16
-    ],
-    [
-     "à",
-     0.199,
-     0.22
-    ],
-    [
-     "Lyon,",
-     0.24,
-     0.38
-    ],
-    [
-     "là.",
-     0.42,
-     0.54
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "Mais tu devais pas aller sur Paris?",
-   "_deb": 10.08,
-   "_fin": 11.44,
-   "d": "[confused] Mais tu devais pas aller sur Paris?",
-   "_mots": [
-    [
-     "Mais",
-     0.0,
-     0.08
+     "que",
+     1.88,
+     1.92
     ],
     [
      "tu",
-     0.12,
-     0.22
+     1.94,
+     1.98
     ],
     [
-     "devais",
-     0.24,
-     0.46
+     "as",
+     1.98,
+     2.04
     ],
     [
-     "pas",
-     0.58,
-     0.64
+     "baisé",
+     2.08,
+     2.28
     ],
     [
-     "aller",
-     0.66,
-     0.78
+     "ma",
+     2.32,
+     2.4
     ],
     [
-     "sur",
-     0.84,
-     0.92
+     "meuf,",
+     2.46,
+     2.62
     ],
     [
-     "Paris?",
-     1.0,
-     1.36
+     "mais",
+     2.66,
+     2.78
+    ],
+    [
+     "t'es",
+     2.82,
+     2.98
+    ],
+    [
+     "trop",
+     3.02,
+     3.28
+    ],
+    [
+     "nul",
+     3.36,
+     3.5
     ]
-   ],
-   "objet": "telephone"
+   ]
   },
   {
    "p": "presentateur",
-   "t": "Bah si, je viens de te dire, je viens d'arriver à Gare de Lyon.",
-   "_deb": 12.32,
-   "_fin": 14.14,
-   "d": "[sure] Bah si, je viens de te dire, je viens d'arriver à Gare de Lyon.",
-   "objet": "billet",
+   "t": "{'texte': 'mon frère.'}",
+   "_deb": 19.58,
+   "_fin": 20.06,
+   "d": "{'texte': '[sarcastique] mon frère.'}",
    "_mots": [
     [
-     "Bah",
+     "mon",
      0.0,
-     0.12
+     0.14
     ],
     [
-     "si,",
-     0.16,
-     0.24
+     "frère.",
+     0.18,
+     0.48
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "{'texte': \"Eh frère, elle a dit que c'était moi le meilleur.\"}",
+   "_deb": 20.18,
+   "_fin": 21.6,
+   "d": "{'texte': \"[colère] Eh frère, elle a dit que c'était moi le meilleur.\"}",
+   "_mots": [
+    [
+     "Eh",
+     0.0,
+     0.06
     ],
     [
-     "je",
-     0.28,
-     0.32
+     "frère,",
+     0.12,
+     0.28
     ],
     [
-     "viens",
-     0.34,
-     0.4
+     "elle",
+     0.38,
+     0.46
     ],
     [
-     "de",
-     0.4,
-     0.44
-    ],
-    [
-     "te",
+     "a",
      0.48,
      0.54
     ],
     [
-     "dire,",
-     0.56,
-     0.68
+     "dit",
+     0.6,
+     0.7
+    ],
+    [
+     "que",
+     0.7,
+     0.7
+    ],
+    [
+     "c'était",
+     0.74,
+     0.9
+    ],
+    [
+     "moi",
+     0.94,
+     1.02
+    ],
+    [
+     "le",
+     1.04,
+     1.08
+    ],
+    [
+     "meilleur.",
+     1.12,
+     1.42
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "{'texte': 'Alors dégage, bouffon.'}",
+   "_deb": 21.7,
+   "_fin": 22.76,
+   "d": "{'texte': '[colère] Alors dégage, bouffon.'}",
+   "_mots": [
+    [
+     "Alors",
+     0.0,
+     0.16
+    ],
+    [
+     "dégage,",
+     0.28,
+     0.62
+    ],
+    [
+     "bouffon.",
+     0.68,
+     1.06
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "{'texte': 'Enfin moi, Robin.'}",
+   "_deb": 23.44,
+   "_fin": 25.02,
+   "d": "{'texte': '[sarcastique] Enfin moi, Robin.'}",
+   "_mots": [
+    [
+     "Enfin",
+     0.0,
+     0.12
+    ],
+    [
+     "moi,",
+     0.2,
+     0.3
+    ],
+    [
+     "Robin.",
+     0.54,
+     1.58
+    ]
+   ]
+  },
+  {
+   "p": "envoyee",
+   "t": "{'texte': 'Ro-Robin.'}",
+   "_deb": 25.56,
+   "_fin": 26.1,
+   "d": "{'texte': '[sûre] Ro-Robin.'}",
+   "_mots": [
+    [
+     "Ro-Robin.",
+     0.0,
+     0.54
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "{'texte': \"Voilà! T'as baisé ma meuf, ou bien—Ah ben eh.\"}",
+   "_deb": 26.32,
+   "_fin": 29.92,
+   "_mots": [
+    [
+     "{'texte':",
+     0.0,
+     0.82
+    ],
+    [
+     "\"Voilà!",
+     1.52,
+     1.84
+    ],
+    [
+     "T'as",
+     1.88,
+     2.06
+    ],
+    [
+     "baisé",
+     2.1,
+     2.16
+    ],
+    [
+     "ma",
+     2.2,
+     2.38
+    ],
+    [
+     "meuf,",
+     2.46,
+     2.46
+    ],
+    [
+     "ou",
+     2.5,
+     2.64
+    ],
+    [
+     "bien—Ah",
+     2.96,
+     3.1
+    ],
+    [
+     "ben",
+     3.14,
+     3.28
+    ],
+    [
+     "eh.\"}",
+     3.46,
+     3.6
+    ]
+   ]
+  },
+  {
+   "p": "envoyee",
+   "t": "Quoi?",
+   "_deb": 30.22,
+   "_fin": 30.42,
+   "_mots": [
+    [
+     "Quoi?",
+     0.0,
+     0.2
+    ]
+   ]
+  },
+  {
+   "p": "envoyee",
+   "t": "{'texte': 'Non, mais ça va pas ou quoi?'}",
+   "_deb": 30.78,
+   "_fin": 31.64,
+   "d": "{'texte': '[colère] Non, mais ça va pas ou quoi?'}",
+   "_mots": [
+    [
+     "Non,",
+     0.0,
+     0.16
+    ],
+    [
+     "mais",
+     0.2,
+     0.28
+    ],
+    [
+     "ça",
+     0.34,
+     0.42
+    ],
+    [
+     "va",
+     0.5,
+     0.5
+    ],
+    [
+     "pas",
+     0.52,
+     0.64
+    ],
+    [
+     "ou",
+     0.72,
+     0.74
+    ],
+    [
+     "quoi?",
+     0.74,
+     0.86
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "{'texte': 'Bouffon va.'}",
+   "_deb": 31.94,
+   "_fin": 32.8,
+   "d": "{'texte': '[sarcastique] Bouffon va.'}",
+   "_mots": [
+    [
+     "Bouffon",
+     0.0,
+     0.56
+    ],
+    [
+     "va.",
+     0.62,
+     0.86
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "{'texte': 'Oh comment il ferme sa gueule maintenant.'}",
+   "_deb": 33.7,
+   "_fin": 35.56,
+   "d": "{'texte': '[joie] Oh comment il ferme sa gueule maintenant.'}",
+   "_mots": [
+    [
+     "Oh",
+     0.0,
+     0.08
+    ],
+    [
+     "comment",
+     0.14,
+     0.32
+    ],
+    [
+     "il",
+     0.34,
+     0.44
+    ],
+    [
+     "ferme",
+     0.54,
+     0.78
+    ],
+    [
+     "sa",
+     0.86,
+     0.96
+    ],
+    [
+     "gueule",
+     1.12,
+     1.36
+    ],
+    [
+     "maintenant.",
+     1.42,
+     1.86
+    ]
+   ]
+  },
+  {
+   "p": "envoyee",
+   "t": "{'texte': \"T'es pas fâché?\"}",
+   "_deb": 35.96,
+   "_fin": 36.52,
+   "d": "{'texte': \"[sûre] T'es pas fâché?\"}",
+   "_mots": [
+    [
+     "T'es",
+     0.0,
+     0.08
+    ],
+    [
+     "pas",
+     0.12,
+     0.2
+    ],
+    [
+     "fâché?",
+     0.24,
+     0.56
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "{'texte': 'Non Manon, pourquoi je serais fâché?'}",
+   "_deb": 37.1,
+   "_fin": 38.44,
+   "d": "{'texte': '[sarcastique] Non Manon, pourquoi je serais fâché?'}",
+   "_mots": [
+    [
+     "Non",
+     0.0,
+     0.18
+    ],
+    [
+     "Manon,",
+     0.22,
+     0.46
+    ],
+    [
+     "pourquoi",
+     0.52,
+     0.7
     ],
     [
      "je",
@@ -350,845 +799,486 @@
      0.76
     ],
     [
-     "viens",
-     0.78,
-     0.86
-    ],
-    [
-     "d'arriver",
-     0.88,
-     1.2
-    ],
-    [
-     "à",
-     1.24,
-     1.28
-    ],
-    [
-     "Gare",
-     1.32,
-     1.44
-    ],
-    [
-     "de",
-     1.46,
-     1.52
-    ],
-    [
-     "Lyon.",
-     1.54,
-     1.82
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Qu'est-ce que tu fais à la gare de Lyon?",
-   "_deb": 15.76,
-   "_fin": 17.14,
-   "d": "[confused] Qu'est-ce que tu fais à la gare de Lyon?",
-   "_mots": [
-    [
-     "Qu'est-ce",
-     0.0,
-     0.14
-    ],
-    [
-     "que",
-     0.16,
-     0.28
-    ],
-    [
-     "tu",
-     0.28,
-     0.28
-    ],
-    [
-     "fais",
-     0.34,
-     0.5
-    ],
-    [
-     "à",
-     0.58,
-     0.6
-    ],
-    [
-     "la",
-     0.66,
-     0.72
-    ],
-    [
-     "gare",
-     0.78,
-     0.92
-    ],
-    [
-     "de",
-     0.98,
-     1.08
-    ],
-    [
-     "Lyon?",
-     1.12,
-     1.38
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Bah, je viens d'arriver sur Paris.",
-   "_deb": 17.78,
-   "_fin": 18.88,
-   "d": "[exasperated] Bah, je viens d'arriver sur Paris.",
-   "_mots": [
-    [
-     "Bah,",
-     0.0,
-     0.06
-    ],
-    [
-     "je",
-     0.12,
-     0.16
-    ],
-    [
-     "viens",
-     0.18,
-     0.28
-    ],
-    [
-     "d'arriver",
-     0.3,
-     0.58
-    ],
-    [
-     "sur",
-     0.62,
-     0.74
-    ],
-    [
-     "Paris.",
-     0.78,
-     1.1
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "Pourquoi tu me parles de Lyon alors?",
-   "_deb": 20.6,
-   "_fin": 22.06,
-   "d": "[annoyed] Pourquoi tu me parles de Lyon alors?",
-   "_mots": [
-    [
-     "Pourquoi",
-     0.0,
-     0.24
-    ],
-    [
-     "tu",
-     0.28,
-     0.36
-    ],
-    [
-     "me",
-     0.4,
-     0.44
-    ],
-    [
-     "parles",
-     0.5,
-     0.66
-    ],
-    [
-     "de",
-     0.7,
-     0.78
-    ],
-    [
-     "Lyon",
-     0.82,
-     1.02
-    ],
-    [
-     "alors?",
-     1.1,
-     1.46
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Mais je suis pas à Lyon, je suis à Paris, là.",
-   "_deb": 22.96,
-   "_fin": 24.56,
-   "d": "[sure] Mais je suis pas à Lyon, je suis à Paris, là.",
-   "_mots": [
-    [
-     "Mais",
-     0.0,
-     0.1
-    ],
-    [
-     "je",
-     0.12,
-     0.14
-    ],
-    [
-     "suis",
-     0.16,
-     0.28
-    ],
-    [
-     "pas",
-     0.34,
-     0.4
-    ],
-    [
-     "à",
-     0.46,
-     0.48
-    ],
-    [
-     "Lyon,",
-     0.5,
-     0.68
-    ],
-    [
-     "je",
-     0.72,
-     0.74
-    ],
-    [
-     "suis",
+     "serais",
      0.76,
-     0.84
+     0.9
     ],
     [
-     "à",
-     0.9,
-     0.96
-    ],
-    [
-     "Paris,",
-     1.02,
+     "fâché?",
+     0.92,
      1.34
-    ],
-    [
-     "là.",
-     1.4,
-     1.6
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "Bah, arrête de me parler de la gare de Lyon.",
-   "_deb": 26.46,
-   "_fin": 28.28,
-   "d": "[annoyed] Bah, arrête de me parler de la gare de Lyon.",
-   "_mots": [
-    [
-     "Bah,",
-     0.0,
-     0.16
-    ],
-    [
-     "arrête",
-     0.22,
-     0.5
-    ],
-    [
-     "de",
-     0.54,
-     0.6
-    ],
-    [
-     "me",
-     0.64,
-     0.7
-    ],
-    [
-     "parler",
-     0.76,
-     1.0
-    ],
-    [
-     "de",
-     1.04,
-     1.12
-    ],
-    [
-     "la",
-     1.16,
-     1.22
-    ],
-    [
-     "gare",
-     1.26,
-     1.4
-    ],
-    [
-     "de",
-     1.46,
-     1.54
-    ],
-    [
-     "Lyon.",
-     1.56,
-     1.82
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Mais parce que la gare de Paris, elle s'appelle Paris Gare de Lyon.",
-   "_deb": 28.94,
-   "_fin": 31.44,
-   "d": "[explaining] Mais parce que la gare de Paris, elle s'appelle Paris Gare de Lyon.",
-   "objet": "carte",
-   "_mots": [
-    [
-     "Mais",
-     0.0,
-     0.12
-    ],
-    [
-     "parce",
-     0.16,
-     0.3
-    ],
-    [
-     "que",
-     0.32,
-     0.38
-    ],
-    [
-     "la",
-     0.42,
-     0.5
-    ],
-    [
-     "gare",
-     0.54,
-     0.68
-    ],
-    [
-     "de",
-     0.74,
-     0.84
-    ],
-    [
-     "Paris,",
-     0.88,
-     1.12
-    ],
-    [
-     "elle",
-     1.18,
-     1.24
-    ],
-    [
-     "s'appelle",
-     1.28,
-     1.52
-    ],
-    [
-     "Paris",
-     1.7,
-     1.92
-    ],
-    [
-     "Gare",
-     1.96,
-     2.06
-    ],
-    [
-     "de",
-     2.1,
-     2.16
-    ],
-    [
-     "Lyon.",
-     2.18,
-     2.5
     ]
    ]
   },
   {
    "p": "invite",
-   "t": "Mais du coup, t'es pas à Lyon.",
-   "_deb": 33.38,
-   "_fin": 34.94,
-   "d": "[confused] Mais du coup, t'es pas à Lyon.",
+   "t": "{'texte': \"Encore un truc où je suis mieux que lui. Putain, je t'aime tellement.\"}",
+   "_deb": 38.8,
+   "_fin": 41.2,
+   "d": "{'texte': \"[joie] Encore un truc où je suis mieux que lui. Putain, je t'aime tellement.\"}",
    "_mots": [
     [
-     "Mais",
-     0.0,
-     0.1
-    ],
-    [
-     "du",
-     0.14,
-     0.22
-    ],
-    [
-     "coup,",
-     0.28,
-     0.42
-    ],
-    [
-     "t'es",
-     0.48,
-     0.6
-    ],
-    [
-     "pas",
-     0.66,
-     0.74
-    ],
-    [
-     "à",
-     0.8,
-     0.82
-    ],
-    [
-     "Lyon.",
-     0.88,
-     1.56
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Non, je suis à Paris.",
-   "_deb": 35.0,
-   "_fin": 35.74,
-   "d": "[sure] Non, je suis à Paris.",
-   "_mots": [
-    [
-     "Non,",
-     0.0,
-     0.1
-    ],
-    [
-     "je",
-     0.14,
-     0.14
-    ],
-    [
-     "suis",
-     0.16,
-     0.24
-    ],
-    [
-     "à",
-     0.28,
-     0.3
-    ],
-    [
-     "Paris.",
-     0.34,
-     0.74
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "Elle s'appelle comment la gare de Paris?",
-   "_deb": 37.5,
-   "_fin": 39.5,
-   "d": "[confused] Elle s'appelle comment la gare de Paris?",
-   "_mots": [
-    [
-     "Elle",
-     0.0,
-     0.06
-    ],
-    [
-     "s'appelle",
-     0.12,
-     0.4
-    ],
-    [
-     "comment",
-     0.48,
-     0.68
-    ],
-    [
-     "la",
-     0.72,
-     0.78
-    ],
-    [
-     "gare",
-     0.82,
-     0.92
-    ],
-    [
-     "de",
-     0.98,
-     1.06
-    ],
-    [
-     "Paris?",
-     1.9,
-     2.0
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Paris Gare de Lyon.",
-   "_deb": 39.54,
-   "_fin": 40.36,
-   "d": "[sure] Paris Gare de Lyon.",
-   "_mots": [
-    [
-     "Paris",
-     0.0,
-     0.26
-    ],
-    [
-     "Gare",
-     0.3,
-     0.44
-    ],
-    [
-     "de",
-     0.48,
-     0.54
-    ],
-    [
-     "Lyon.",
-     0.58,
-     0.82
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "Donc t'es où, là?",
-   "_deb": 42.24,
-   "_fin": 43.16,
-   "d": "[confused] Donc t'es où, là?",
-   "_mots": [
-    [
-     "Donc",
+     "Encore",
      0.0,
      0.2
     ],
     [
-     "t'es",
-     0.26,
+     "un",
+     0.24,
+     0.26
+    ],
+    [
+     "truc",
+     0.3,
      0.4
     ],
     [
-     "où,",
+     "où",
      0.44,
-     0.6
+     0.5
     ],
     [
-     "là?",
-     0.72,
-     0.92
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Je suis à Paris.",
-   "_deb": 43.68,
-   "_fin": 44.32,
-   "d": "[sure] Je suis à Paris.",
-   "_mots": [
-    [
-     "Je",
-     0.0,
-     0.02
+     "je",
+     0.52,
+     0.52
     ],
     [
      "suis",
-     0.04,
-     0.14
-    ],
-    [
-     "à",
-     0.18,
-     0.22
-    ],
-    [
-     "Paris.",
-     0.26,
+     0.56,
      0.64
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "T'es pas à Lyon?",
-   "_deb": 46.22,
-   "_fin": 47.08,
-   "d": "[confused] T'es pas à Lyon?",
-   "_mots": [
-    [
-     "T'es",
-     0.0,
-     0.1
     ],
     [
-     "pas",
-     0.14,
-     0.22
+     "mieux",
+     0.68,
+     0.8
     ],
     [
-     "à",
-     0.3,
-     0.3
-    ],
-    [
-     "Lyon?",
-     0.38,
-     0.86
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "presentateur",
-   "t": "Non, je suis à Paris.",
-   "_deb": 47.12,
-   "_fin": 49.34,
-   "d": "[sure] Non, je suis à Paris.",
-   "_mots": [
-    [
-     "Non,",
-     0.0,
-     0.1
-    ],
-    [
-     "je",
-     0.14,
-     0.16
-    ],
-    [
-     "suis",
-     0.18,
-     0.26
-    ],
-    [
-     "à",
-     0.3,
-     0.32
-    ],
-    [
-     "Paris.",
-     0.36,
-     2.22
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "Bon tu m'embrouilles, je comprends plus rien.",
-   "_deb": 49.4,
-   "_fin": 50.96,
-   "d": "[frustrated] Bon tu m'embrouilles, je comprends plus rien.",
-   "_mots": [
-    [
-     "Bon",
-     0.0,
-     0.14
-    ],
-    [
-     "tu",
-     0.2,
-     0.26
-    ],
-    [
-     "m'embrouilles,",
-     0.3,
-     0.78
-    ],
-    [
-     "je",
+     "que",
      0.82,
      0.86
     ],
     [
-     "comprends",
-     0.88,
-     1.14
+     "lui.",
+     0.9,
+     1.08
     ],
     [
-     "plus",
-     1.22,
-     1.34
+     "Putain,",
+     1.34,
+     1.6
     ],
     [
-     "rien.",
-     1.42,
-     1.56
+     "je",
+     1.64,
+     1.68
+    ],
+    [
+     "t'aime",
+     1.72,
+     1.96
+    ],
+    [
+     "tellement.",
+     2.02,
+     2.4
     ]
-   ],
-   "objet": "telephone"
+   ]
   },
   {
    "p": "presentateur",
-   "t": "Bah, c'est simple en plus hein. Je suis à Paris.",
-   "_deb": 51.28,
-   "_fin": 52.92,
-   "d": "[exasperated] Bah, c'est simple en plus hein. Je suis à Paris.",
+   "t": "{'texte': 'Oh là là là là.'}",
+   "_deb": 41.62,
+   "_fin": 42.86,
+   "d": "{'texte': '[sarcastique] Oh là là là là.'}",
    "_mots": [
     [
-     "Bah,",
+     "Oh",
      0.0,
-     0.12
+     0.16
     ],
     [
-     "c'est",
-     0.16,
+     "là",
+     0.24,
+     0.36
+    ],
+    [
+     "là",
+     0.46,
+     0.56
+    ],
+    [
+     "là",
+     0.7,
+     0.84
+    ],
+    [
+     "là.",
+     0.96,
+     1.24
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "{'texte': 'Dans sa gueule!'}",
+   "_deb": 44.2,
+   "_fin": 45.0,
+   "d": "{'texte': '[colère] Dans sa gueule!'}",
+   "_mots": [
+    [
+     "Dans",
+     0.0,
+     0.1
+    ],
+    [
+     "sa",
+     0.18,
      0.28
     ],
     [
-     "simple",
-     0.34,
-     0.54
+     "gueule!",
+     0.4,
+     0.8
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Yes!",
+   "_deb": 46.02,
+   "_fin": 46.28,
+   "_mots": [
+    [
+     "Yes!",
+     0.0,
+     0.26
+    ]
+   ]
+  },
+  {
+   "p": "envoyee",
+   "t": "{'texte': 'Ben tant mieux alors.'}",
+   "_deb": 46.84,
+   "_fin": 47.54,
+   "d": "{'texte': '[neutre] Ben tant mieux alors.'}",
+   "_mots": [
+    [
+     "Ben",
+     0.0,
+     0.08
     ],
     [
-     "en",
-     0.56,
+     "tant",
+     0.12,
+     0.22
+    ],
+    [
+     "mieux",
+     0.26,
+     0.46
+    ],
+    [
+     "alors.",
+     0.48,
+     0.7
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "{'texte': \"Je t'aime.\"}",
+   "_deb": 48.1,
+   "_fin": 48.52,
+   "d": "{'texte': \"[amour] Je t'aime.\"}",
+   "_mots": [
+    [
+     "Je",
+     0.0,
+     0.1
+    ],
+    [
+     "t'aime.",
+     0.18,
+     0.42
+    ]
+   ]
+  },
+  {
+   "p": "envoyee",
+   "t": "{'texte': 'Moi aussi.'}",
+   "_deb": 49.24,
+   "_fin": 49.76,
+   "d": "{'texte': '[neutre] Moi aussi.'}",
+   "_mots": [
+    [
+     "Moi",
+     0.0,
+     0.18
+    ],
+    [
+     "aussi.",
+     0.22,
+     0.52
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "{'texte': 'Merci.'}",
+   "_deb": 50.08,
+   "_fin": 50.46,
+   "d": "{'texte': '[neutre] Merci.'}",
+   "_mots": [
+    [
+     "Merci.",
+     0.0,
+     0.38
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "{'texte': \"Mais maman, tu sais que Manon elle m'a trompé et qu'apparemment, je suis meilleur qu'Enzo.\"}",
+   "_deb": 53.3,
+   "_fin": 56.2,
+   "d": "{'texte': \"[neutre] Mais maman, tu sais que Manon elle m'a trompé et qu'apparemment, je suis meilleur qu'Enzo.\"}",
+   "_mots": [
+    [
+     "Mais",
+     0.0,
+     0.08
+    ],
+    [
+     "maman,",
+     0.12,
+     0.3
+    ],
+    [
+     "tu",
+     0.38,
+     0.46
+    ],
+    [
+     "sais",
+     0.5,
      0.62
     ],
     [
-     "plus",
+     "que",
      0.66,
      0.82
     ],
     [
-     "hein.",
-     0.84,
-     0.98
+     "Manon",
+     0.86,
+     1.04
     ],
     [
-     "Je",
-     1.18,
-     1.22
+     "elle",
+     1.08,
+     1.12
+    ],
+    [
+     "m'a",
+     1.16,
+     1.24
+    ],
+    [
+     "trompé",
+     1.28,
+     1.6
+    ],
+    [
+     "et",
+     1.74,
+     1.8
+    ],
+    [
+     "qu'apparemment,",
+     1.82,
+     2.22
+    ],
+    [
+     "je",
+     2.28,
+     2.3
     ],
     [
      "suis",
-     1.24,
-     1.28
+     2.32,
+     2.38
     ],
     [
-     "à",
-     1.32,
-     1.36
+     "meilleur",
+     2.42,
+     2.58
     ],
     [
-     "Paris.",
-     1.4,
-     1.64
+     "qu'Enzo.",
+     2.62,
+     2.9
     ]
-   ],
-   "objet": "telephone"
+   ]
   },
   {
-   "p": "presentateur",
-   "t": "Paris Gare de Lyon.",
-   "_deb": 53.46,
-   "_fin": 54.28,
-   "d": "[sure] Paris Gare de Lyon.",
+   "p": "envoyee",
+   "t": "{'texte': \"Eh ben, je vais appeler sa mère pour lui dire que t'es meilleur qu'Enzo.\"}",
+   "_deb": 57.38,
+   "_fin": 59.74,
+   "d": "{'texte': \"[neutre] Eh ben, je vais appeler sa mère pour lui dire que t'es meilleur qu'Enzo.\"}",
    "_mots": [
     [
-     "Paris",
+     "Eh",
      0.0,
-     0.26
+     0.08
     ],
     [
-     "Gare",
-     0.3,
+     "ben,",
+     0.12,
+     0.22
+    ],
+    [
+     "je",
+     0.26,
+     0.32
+    ],
+    [
+     "vais",
+     0.34,
      0.44
     ],
     [
-     "de",
+     "appeler",
      0.48,
-     0.56
+     0.74
     ],
     [
-     "Lyon.",
-     0.6,
-     0.82
-    ]
-   ],
-   "objet": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "Qu'est-ce que tu fais à Lyon?",
-   "_deb": 57.7,
-   "_fin": 58.54,
-   "d": "[confused] Qu'est-ce que tu fais à Lyon?",
-   "chute": true,
-   "_mots": [
+     "sa",
+     0.82,
+     0.94
+    ],
     [
-     "Qu'est-ce",
-     0.0,
-     0.14
+     "mère",
+     0.98,
+     1.22
+    ],
+    [
+     "pour",
+     1.26,
+     1.34
+    ],
+    [
+     "lui",
+     1.38,
+     1.46
+    ],
+    [
+     "dire",
+     1.5,
+     1.62
     ],
     [
      "que",
-     0.14,
-     0.24
+     1.66,
+     1.72
     ],
     [
-     "tu",
-     0.26,
-     0.26
+     "t'es",
+     1.74,
+     1.86
     ],
     [
-     "fais",
-     0.3,
-     0.38
+     "meilleur",
+     2.04,
+     2.3
     ],
     [
-     "à",
-     0.42,
-     0.46
-    ],
-    [
-     "Lyon?",
-     0.52,
-     0.84
+     "qu'Enzo.",
+     2.32,
+     2.36
     ]
-   ],
-   "objet": "telephone"
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "{'texte': 'Voilà, voilà. Et elle va bien fermer sa gueule cette bonne.'}",
+   "_deb": 59.8,
+   "_fin": 62.04,
+   "d": "{'texte': '[joie] Voilà, voilà. Et elle va bien fermer sa gueule cette bonne.'}",
+   "chute": true,
+   "_mots": [
+    [
+     "Voilà,",
+     0.0,
+     0.3
+    ],
+    [
+     "voilà.",
+     0.48,
+     0.88
+    ],
+    [
+     "Et",
+     0.9,
+     0.94
+    ],
+    [
+     "elle",
+     0.96,
+     1.0
+    ],
+    [
+     "va",
+     1.04,
+     1.1
+    ],
+    [
+     "bien",
+     1.14,
+     1.24
+    ],
+    [
+     "fermer",
+     1.28,
+     1.48
+    ],
+    [
+     "sa",
+     1.52,
+     1.62
+    ],
+    [
+     "gueule",
+     1.64,
+     1.8
+    ],
+    [
+     "cette",
+     1.86,
+     2.02
+    ],
+    [
+     "bonne.",
+     2.04,
+     2.24
+    ]
+   ]
   }
  ],
  "bandeau": [],
  "gag": null,
- "legende": "Ouais maman, je t'appelle juste pour te prévenir que je viens d'arriver là.",
+ "legende": "Une scène de dispute hilarante où la trahison devient une compétition.",
  "hashtags": [
   "petitsdramas",
+  "drames",
   "humour",
-  "doublage",
-  "pov"
+  "trahison",
+  "amour",
+  "sarcasme",
+  "tiktok"
  ],
  "sources": [
-  "https://www.tiktok.com/@charly.bse/video/7643036062348086560"
+  "https://www.tiktok.com/@yan_animation0/video/7654140155598523680"
  ],
  "decoupage": [
   {
@@ -1196,122 +1286,154 @@
    "repliques": [
     0,
     1,
+    2,
     3,
     4,
-    6,
-    8,
-    10,
-    12,
-    14,
-    16,
-    18,
-    20,
-    22,
-    23
-   ],
-   "lieu": "",
-   "son": "",
-   "duree": 0,
-   "decor": "quiet city street at dusk, parked car at the curb, sidewalk, street lamps, shop fronts"
-  },
-  {
-   "scene": "2",
-   "repliques": [
-    2,
     5,
+    6,
     7,
+    8,
     9,
+    10,
     11,
+    12,
     13,
+    14,
     15,
+    16,
     17,
+    18,
     19,
+    20,
     21,
-    24
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34
    ],
    "lieu": "",
    "son": "",
-   "duree": 0,
-   "decor": "cozy living room, sofa, posters on the wall, coffee table, lamp, television"
+   "duree": 0.0,
+   "decor": "same living room, but with more chaotic energy, the phone on the table, and a tense atmosphere.",
+   "titre": "Salon : La Réplique"
   }
  ],
  "studio": {
   "moment": "soir",
   "lieux": [
-   "rue",
    "salon"
   ],
   "costumes": {
    "presentateur": {
-    "haut": "tshirt",
-    "c_haut": "rouge",
+    "haut": "chemise_formelle",
+    "c_haut": [
+     200,
+     200,
+     200
+    ],
+    "motif": "uni",
+    "bas": "pantalon",
+    "chaussures": "baskets",
+    "details": [
+     "barbe_courte",
+     "bracelets"
+    ]
+   },
+   "invite": {
+    "haut": "t_shirt_casual",
+    "c_haut": [
+     50,
+     120,
+     200
+    ],
     "motif": "uni",
     "bas": "jeans",
     "chaussures": "baskets",
     "details": [
-     "casquette",
-     "bonnet",
-     "ecouteurs"
-    ],
-    "chapeau": {
-     "type": "bonnet",
-     "c_chapeau": "gris"
-    },
-    "cheveux": "court",
-    "c_cheveux": "brun"
+     "barbe_pleine",
+     "bracelet"
+    ]
    },
-   "invite": {
-    "haut": "chemise",
-    "c_haut": "blanc",
+   "envoyee": {
+    "haut": "robe_courte",
+    "c_haut": [
+     220,
+     80,
+     120
+    ],
     "motif": "uni",
     "bas": "jupe",
-    "chaussures": "ville",
+    "chaussures": "baskets",
     "details": [
-     "lunettes_vue",
+     "boucles_oreilles",
      "collier"
-    ],
-    "chapeau": null,
-    "cheveux": "long",
-    "c_cheveux": "brun"
+    ]
    }
   },
   "metiers": {},
   "personnages": {
    "presentateur": {
-    "genre": "h",
-    "age": 25,
+    "genre": "f",
+    "age": 35,
     "taille": 1,
-    "corpulence": 0.5,
+    "corpulence": 0.7,
     "cheveux": "court",
-    "barbe": "rien",
-    "genre_vu": "h"
+    "c_cheveux": "noir",
+    "barbe": "barbe_courte"
    },
    "invite": {
-    "genre": "f",
-    "age": 50,
-    "taille": 0.95,
+    "genre": "h",
+    "age": 30,
+    "taille": 1,
     "corpulence": 0.6,
-    "cheveux": "long",
-    "barbe": "rien"
+    "cheveux": "court_texture",
+    "c_cheveux": "brun",
+    "barbe": "barbe_pleine"
+   },
+   "envoyee": {
+    "genre": "f",
+    "age": 28,
+    "taille": 0.9,
+    "corpulence": 0.5,
+    "cheveux": "tresses",
+    "c_cheveux": "noir"
    }
   },
   "objets": [
    {
-    "replique": 0,
+    "replique": 1,
     "objet": "telephone"
    },
    {
-    "replique": 6,
-    "objet": "billet"
+    "replique": 11,
+    "objet": "telephone"
    },
    {
-    "replique": 12,
-    "objet": "carte"
+    "replique": 14,
+    "objet": "telephone"
+   },
+   {
+    "replique": 26,
+    "objet": "telephone"
    }
   ],
+  "decors_vus": {
+   "presentateur": "living room with a yellow couch, a large clock on the wall, and a coffee table with a phone.",
+   "invite": "same living room with a yellow couch, a large clock on the wall, and a coffee table.",
+   "envoyee": "same living room with a yellow couch, a large clock on the wall, and a coffee table."
+  },
   "gags": [
-   "\"Attention, gare à la confusion !\" sur un panneau",
-   "\"Paris ou Lyon ? Ici, c'est Paris !\" sur un autre panneau"
+   "\"Le meilleur, c'est moi !\" - Enzo",
+   "\"Trompé et fier !\" - Robin"
   ],
   "ambiances": [
    "neon"
@@ -1322,190 +1444,323 @@
     "replique": 0,
     "plan": "serre",
     "mouvement": "fixe",
-    "geste": "telephone",
-    "reaction": "aucune"
+    "geste": "pointe_d",
+    "reaction": "regard_camera"
+   },
+   {
+    "replique": 1,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "haussement",
+    "reaction": "choc"
    },
    {
     "replique": 2,
-    "plan": "serre",
+    "plan": "moyen",
     "mouvement": "fixe",
     "geste": "gratte_tete",
     "reaction": "sceptique"
    },
    {
-    "replique": 6,
+    "replique": 11,
     "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "pointe_d",
-    "reaction": "choc"
+    "mouvement": "zoom_choc",
+    "geste": "poing",
+    "reaction": "colere"
    },
    {
-    "replique": 12,
+    "replique": 26,
     "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "explique",
-    "reaction": "gene"
-   },
-   {
-    "replique": 21,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "facepalm",
-    "reaction": "soupir"
+    "mouvement": "avance",
+    "geste": "pointe_g",
+    "reaction": "joie"
    }
   ],
-  "lieux_de": {
-   "invite": "salon",
-   "presentateur": "rue"
-  }
+  "bruitages": [
+   {
+    "replique": 11,
+    "son": "klaxon_clown"
+   },
+   {
+    "replique": 26,
+    "son": "vine_boom"
+   }
+  ]
  },
  "doublage": {
-  "piste": "/tmp/tmpmm5giw6b/piste.wav",
-  "duree": 60.3,
-  "source": "https://www.tiktok.com/@charly.bse/video/7643036062348086560",
-  "auteur": "charly.bse",
-  "contexte": "Un jeune adulte appelle sa mère depuis la gare pour lui annoncer son arrivée à Paris Gare de Lyon, mais un quiproquo s'installe car elle croit qu'il est à Lyon. La scène se déroule dans un décor de gare, avec un mélange de confusion et d'humour.",
-  "evenements": [],
+  "piste": "/tmp/tmpganjl4y1/piste.wav",
+  "duree": 62.25,
+  "source": "https://www.tiktok.com/@yan_animation0/video/7654140155598523680",
+  "auteur": "yan_animation0",
+  "contexte": "Une scène de dispute et de révélations tendues entre trois personnages dans un salon. L'un des hommes découvre qu'il a été trompé avec son meilleur ami, tandis que les autres tentent de gérer la situation avec humour et sarcasme.",
+  "evenements": [
+   [
+    14.8,
+    15.96,
+    "[rire]"
+   ],
+   [
+    42.86,
+    44.16,
+    "[rire]"
+   ]
+  ],
   "visuel": {
-   "gestes": [],
-   "duree": 60.5,
-   "nb_plans": 1,
-   "duree_plan": 60.5,
-   "coupes": [],
+   "gestes": [
+    [
+     5.0,
+     0.63,
+     1.0
+    ],
+    [
+     6.5,
+     0.69,
+     1.0
+    ],
+    [
+     7.5,
+     0.68,
+     0.59
+    ],
+    [
+     10.5,
+     0.56,
+     1.0
+    ],
+    [
+     11.5,
+     0.59,
+     1.0
+    ],
+    [
+     12.5,
+     0.61,
+     1.0
+    ],
+    [
+     13.5,
+     0.64,
+     1.0
+    ],
+    [
+     18.0,
+     0.31,
+     1.0
+    ],
+    [
+     46.0,
+     0.62,
+     1.0
+    ],
+    [
+     52.0,
+     0.67,
+     0.89
+    ],
+    [
+     53.0,
+     0.7,
+     0.9
+    ]
+   ],
+   "duree": 62.5,
+   "nb_plans": 4,
+   "duree_plan": 15.62,
+   "coupes": [
+    10.0,
+    35.5,
+    53.5
+   ],
    "plans": {
-    "tres_serre": 0.066,
-    "serre": 0.413,
-    "moyen": 0.0,
-    "large": 0.521
+    "tres_serre": 0.0,
+    "serre": 0.016,
+    "moyen": 0.8,
+    "large": 0.184
    },
    "camera": {
-    "fixe": 1.0,
-    "avance": 0.0,
-    "recul": 0.0,
-    "travelling": 0.0,
-    "epaule": 0.0
+    "fixe": 0.744,
+    "avance": 0.083,
+    "recul": 0.099,
+    "travelling": 0.017,
+    "epaule": 0.058
    },
-   "nb_personnes": 1,
+   "nb_personnes": 2,
    "personnes": [
     {
-     "place": "centre",
-     "presence": 0.479,
+     "place": "droite",
+     "presence": 0.672,
      "habit": [
-      128,
-      127,
-      120
+      43,
+      35,
+      31
      ],
      "cheveux": [
-      106,
-      100,
-      94
+      17,
+      10,
+      9
      ],
-     "sourire": 0.172,
-     "taille": 0.266,
+     "sourire": 0.0,
+     "taille": 0.105,
      "tete_penchee": 1.8,
-     "regard_cote": 0.0
+     "regard_cote": 0.333
+    },
+    {
+     "place": "gauche",
+     "presence": 0.664,
+     "habit": [
+      187,
+      135,
+      84
+     ],
+     "cheveux": [
+      61,
+      42,
+      41
+     ],
+     "sourire": 0.0,
+     "taille": 0.103,
+     "tete_penchee": 2.6,
+     "regard_cote": 0.952
+    },
+    {
+     "place": "centre",
+     "presence": 0.088,
+     "habit": [
+      42,
+      34,
+      30
+     ],
+     "cheveux": [
+      17,
+      10,
+      9
+     ],
+     "sourire": 0.0,
+     "taille": 0.142,
+     "tete_penchee": 0.8,
+     "regard_cote": 0.091
     }
    ],
    "visages": true,
-   "sourires": 0.172,
-   "energie": 0.202,
+   "sourires": 0.0,
+   "energie": 0.323,
    "mur": [
-    118,
-    121,
-    117
+    200,
+    175,
+    144
    ],
    "palette": [
     [
-     122,
-     125,
-     120,
-     0.355
+     200,
+     180,
+     150,
+     0.34
     ],
     [
-     65,
-     71,
-     55,
-     0.212
-    ],
-    [
-     234,
-     199,
-     160,
-     0.139
-    ],
-    [
-     11,
-     13,
-     10,
-     0.119
-    ],
-    [
-     172,
-     136,
-     76,
-     0.115
+     153,
+     105,
+     54,
+     0.202
     ],
     [
      186,
-     47,
-     49,
-     0.06
+     141,
+     99,
+     0.149
+    ],
+    [
+     43,
+     32,
+     29,
+     0.148
+    ],
+    [
+     95,
+     73,
+     78,
+     0.117
+    ],
+    [
+     218,
+     243,
+     248,
+     0.044
     ]
    ],
    "lumiere": {
-    "luminosite": 128.3,
-    "chaleur": 32.6,
-    "saturation": 80.6
+    "luminosite": 157.7,
+    "chaleur": 52.8,
+    "saturation": 98.3
    },
    "moment": "soir",
    "postures": [
     [
-     24.5,
-     27.5,
-     0.25,
-     "desespoir"
+     0.0,
+     2.0,
+     0.69,
+     "menton"
+    ],
+    [
+     36.5,
+     38.0,
+     0.68,
+     "menton"
+    ],
+    [
+     48.5,
+     52.0,
+     0.67,
+     "menton"
     ]
    ]
   },
   "audio": {
-   "duree": 60.3,
-   "nb_voix": 2,
+   "duree": 62.3,
+   "nb_voix": 3,
    "voix": [
     {
-     "hz": 167,
-     "genre": "?",
-     "part": 0.56
+     "hz": 272,
+     "genre": "f",
+     "part": 0.21
     },
     {
-     "hz": 285,
+     "hz": 256,
      "genre": "f",
-     "part": 0.44
+     "part": 0.27
+    },
+    {
+     "hz": 248,
+     "genre": "f",
+     "part": 0.52
     }
    ],
-   "debit": 5.57,
-   "blanc_moyen": 1.07,
-   "coupes": 2,
-   "dynamique_db": 30.1,
-   "cris": 0.013,
-   "musique": 1.0,
-   "impacts": 44,
-   "impacts_10s": 7.3,
-   "graves": 2,
-   "aigus": 42,
-   "sur_vanne": 11,
-   "evenements": {},
+   "debit": 4.71,
+   "blanc_moyen": 0.64,
+   "coupes": 0,
+   "dynamique_db": 26.9,
+   "cris": 0.002,
+   "musique": 1.33,
+   "impacts": 37,
+   "impacts_10s": 5.94,
+   "graves": 8,
+   "aigus": 29,
+   "sur_vanne": 19,
+   "evenements": {
+    "[rire]": 2
+   },
    "emotions": {
-    "confused": 9,
-    "sure": 9,
-    "annoyed": 3,
-    "exasperated": 2,
-    "explaining": 1,
-    "frustrated": 1
+    "sûre": 11,
+    "sarcastique": 7,
+    "colère": 6,
+    "neutre": 5,
+    "joie": 4,
+    "choc": 1,
+    "amour": 1
    }
   },
-  "video_origine": "/tmp/tmpmm5giw6b/src.mp4",
+  "video_origine": "/tmp/tmpganjl4y1/src.mp4",
   "debut": 0.0,
-  "titre": "Elle a toujours pas compris où il était 🤣 Audio: @AGUERIN30  #humour ..."
+  "titre": "Titre : c’est qui le meilleur ? #tiktokfrance🇨🇵 #debloquemesvues #tro..."
  },
  "fiche": {
   "note": 0,
@@ -1538,13 +1793,23 @@
      21,
      22,
      23,
-     24
+     24,
+     25,
+     26,
+     27,
+     28,
+     29,
+     30,
+     31,
+     32,
+     33,
+     34
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "gare avec panneaux indicateurs, horloge, bancs en bois, affiches de trains, valises et sacs à dos éparpillés",
-    "titre": "Quiproquo à la gare"
+    "decor": "same living room, but with more chaotic energy, the phone on the table, and a tense atmosphere.",
+    "titre": "Salon : La Réplique"
    }
   ]
  },
@@ -1579,31 +1844,17 @@
    "revoir": false
   },
   {
-   "poste": "ingé son",
-   "controle": "sous-titres écrits par le créateur relus",
-   "ok": true,
-   "detail": "95 % des lettres entendues écrites à l'écran, 2 doute(s), 0 mot(s) corrigé(s)",
-   "revoir": false
-  },
-  {
    "poste": "casting voix",
    "controle": "témoin image (qui parle dans l'original)",
    "ok": true,
-   "detail": "27/27 phrases lisibles (Gemini (vidéo entière), visages, mouvements)",
-   "revoir": false
-  },
-  {
-   "poste": "casting voix",
-   "controle": "le son et l'image sont d'accord",
-   "ok": true,
-   "detail": "4 % de désaccord",
+   "detail": "31/39 phrases lisibles (visages, mouvements)",
    "revoir": false
   },
   {
    "poste": "casting voix",
    "controle": "parole répartie entre les personnages",
    "ok": true,
-   "detail": "2 voix, la plus bavarde dit 60 %",
+   "detail": "3 voix, la plus bavarde dit 55 %",
    "revoir": false
   },
   {
@@ -1617,14 +1868,14 @@
    "poste": "scripte",
    "controle": "téléphone en main seulement s'il en est question",
    "ok": true,
-   "detail": "",
+   "detail": "retiré sur 4 réplique(s) (corrigé)",
    "revoir": false
   },
   {
    "poste": "scripte",
    "controle": "autant de personnages que de voix",
    "ok": true,
-   "detail": "2 voix, 2 personnage(s)",
+   "detail": "3 voix, 3 personnage(s)",
    "revoir": false
   },
   {
@@ -1663,104 +1914,38 @@
    "revoir": false
   }
  ],
- "_separes": true,
  "_decors_semi": [
-  0,
-  1
+  0
  ],
  "_voix_hz": {
-  "presentateur": 166,
-  "invite": 290
+  "envoyee": 229,
+  "invite": 214,
+  "presentateur": 266
  },
  "_voix_genre": {
-  "presentateur": "h",
-  "invite": "f"
+  "envoyee": "f",
+  "presentateur": "f"
  },
  "_voix_timbre": {
-  "presentateur": 979,
-  "invite": 1089
+  "envoyee": 1076,
+  "invite": 1023,
+  "presentateur": 1018
  },
  "_voix_timbre_genre": {
+  "invite": "h",
   "presentateur": "h"
  },
  "_casting_final": {
-  "presentateur": {
-   "fiche": {
-    "genre": "h",
-    "age": 25,
-    "corpulence": 0.5,
-    "taille": 1.04,
-    "peau": [
-     246,
-     205,
-     172
-    ],
-    "visage": "carre",
-    "iris": [
-     80,
-     50,
-     30
-    ],
-    "yeux": 1.0643793849943948,
-    "nez": "droit",
-    "levres": 1.108450765552265,
-    "sourcils": 1.3909265281530852,
-    "cheveux": "court",
-    "c_cheveux": [
-     70,
-     45,
-     32
-    ],
-    "barbe": "",
-    "lunettes": "",
-    "maquillage": false
-   },
-   "costume": {
-    "haut": "tshirt",
-    "c_haut": [
-     220,
-     60,
-     60
-    ],
-    "motif": "uni",
-    "bas": "jean",
-    "c_bas": [
-     70,
-     100,
-     150
-    ],
-    "chaussures": "baskets",
-    "c_chaussures": [
-     240,
-     240,
-     240
-    ],
-    "details": [
-     "ecouteurs"
-    ],
-    "c_motif": [
-     158,
-     43,
-     43
-    ],
-    "cheveux": "court",
-    "c_cheveux": [
-     70,
-     45,
-     32
-    ]
-   }
-  },
-  "invite": {
+  "envoyee": {
    "fiche": {
     "genre": "f",
-    "age": 50,
-    "corpulence": 0.6,
-    "taille": 0.9215,
+    "age": 28,
+    "corpulence": 0.5,
+    "taille": 0.873,
     "peau": [
-     255,
-     226,
-     200
+     214,
+     160,
+     118
     ],
     "visage": "rond",
     "iris": [
@@ -1768,68 +1953,199 @@
      130,
      90
     ],
-    "yeux": 0.9243293898340208,
-    "nez": "fin",
-    "levres": 1.1745781923639693,
-    "sourcils": 0.9388257942864627,
-    "cheveux": "long",
+    "yeux": 0.9509122660724112,
+    "nez": "droit",
+    "levres": 1.0660780120161817,
+    "sourcils": 1.1285656489510276,
+    "cheveux": "tresses",
     "c_cheveux": [
-     70,
-     45,
-     32
+     61,
+     42,
+     41
     ],
     "barbe": "",
-    "lunettes": "rondes",
+    "lunettes": "",
     "maquillage": true
    },
    "costume": {
-    "haut": "chemise",
+    "haut": "pull",
     "c_haut": [
-     246,
-     246,
-     246
+     200,
+     200,
+     205
     ],
     "motif": "uni",
+    "c_motif": [
+     144,
+     144,
+     147
+    ],
     "bas": "jupe",
     "c_bas": [
      70,
      100,
      150
     ],
-    "chaussures": "ville",
+    "chaussures": "ballerines",
     "c_chaussures": [
-     240,
-     240,
-     240
+     90,
+     160,
+     110
     ],
     "details": [
-     "lunettes_vue",
+     "montre",
      "collier"
     ],
-    "c_motif": [
-     177,
-     177,
-     177
-    ],
-    "cheveux": "long",
     "c_cheveux": [
+     61,
+     42,
+     41
+    ]
+   }
+  },
+  "invite": {
+   "fiche": {
+    "genre": "h",
+    "age": 30,
+    "corpulence": 0.6,
+    "taille": 1.04,
+    "peau": [
+     214,
+     160,
+     118
+    ],
+    "visage": "rond",
+    "iris": [
+     80,
+     50,
+     30
+    ],
+    "yeux": 0.9896660117979128,
+    "nez": "droit",
+    "levres": 1.1548692549979207,
+    "sourcils": 1.0213448930281894,
+    "cheveux": "court_texture",
+    "c_cheveux": [
+     17,
+     10,
+     9
+    ],
+    "barbe": "trois_jours",
+    "lunettes": "",
+    "maquillage": false
+   },
+   "costume": {
+    "haut": "veste_jean",
+    "c_haut": [
+     150,
+     175,
+     205
+    ],
+    "motif": "uni",
+    "c_motif": [
+     108,
+     126,
+     147
+    ],
+    "bas": "jean",
+    "c_bas": [
+     120,
+     100,
+     80
+    ],
+    "chaussures": "baskets",
+    "c_chaussures": [
+     90,
+     160,
+     110
+    ],
+    "details": [],
+    "c_dessous": [
+     245,
+     245,
+     245
+    ],
+    "c_cheveux": [
+     17,
+     10,
+     9
+    ]
+   }
+  },
+  "presentateur": {
+   "fiche": {
+    "genre": "h",
+    "age": 35,
+    "corpulence": 0.7,
+    "taille": 1.04,
+    "peau": [
+     234,
+     186,
+     146
+    ],
+    "visage": "ovale",
+    "iris": [
+     110,
+     75,
+     45
+    ],
+    "yeux": 1.021636882405316,
+    "nez": "rond",
+    "levres": 1.0988938890960447,
+    "sourcils": 1.0129717870428878,
+    "cheveux": "court",
+    "c_cheveux": [
+     17,
+     10,
+     9
+    ],
+    "barbe": "trois_jours",
+    "lunettes": "",
+    "maquillage": false
+   },
+   "costume": {
+    "haut": "pull",
+    "c_haut": [
+     60,
      70,
-     45,
-     32
+     100
+    ],
+    "motif": "fleurs",
+    "c_motif": [
+     43,
+     50,
+     72
+    ],
+    "bas": "pantalon",
+    "c_bas": [
+     50,
+     55,
+     70
+    ],
+    "chaussures": "baskets",
+    "c_chaussures": [
+     230,
+     140,
+     170
+    ],
+    "details": [],
+    "c_cheveux": [
+     17,
+     10,
+     9
     ]
    }
   }
  },
- "_type_couverture": "reaction",
+ "_type_couverture": "debut",
  "realisation": {
   "moment": "soir",
   "lieux": [
-   "rue",
    "salon"
   ],
   "gags": [
-   "\"Attention, gare à la confusion !\" sur un panneau",
-   "\"Paris ou Lyon ? Ici, c'est Paris !\" sur un autre panneau"
+   "\"Le meilleur, c'est moi !\" - Enzo",
+   "\"Trompé et fier !\" - Robin"
   ],
   "ambiances": [
    "neon",
@@ -1837,10 +2153,21 @@
   ],
   "source": "auteur+image",
   "tenues": {
-   "presentateur": "tshirt",
-   "invite": "chemise"
+   "envoyee": "robe",
+   "invite": "tshirt",
+   "presentateur": "tshirt"
   },
   "plans": [
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
    "large/fixe",
    "large/fixe",
    "large/fixe",
@@ -1869,9 +2196,352 @@
   ]
  },
  "_recette": {
-  "lieu": "rue",
+  "lieu": "salon",
   "animal": false,
-  "persos": 2,
+  "persos": 3,
   "partie": false
+ },
+ "_bible": {
+  "graine": 1503313368,
+  "moment": "soir",
+  "lieux": [
+   "salon"
+  ],
+  "gags": [
+   "\"Le meilleur, c'est moi !\" - Enzo",
+   "\"Trompé et fier !\" - Robin"
+  ],
+  "costumes": {
+   "envoyee": {
+    "haut": "pull",
+    "c_haut": [
+     200,
+     200,
+     205
+    ],
+    "motif": "uni",
+    "c_motif": [
+     144,
+     144,
+     147
+    ],
+    "bas": "jupe",
+    "c_bas": [
+     70,
+     100,
+     150
+    ],
+    "chaussures": "ballerines",
+    "c_chaussures": [
+     90,
+     160,
+     110
+    ],
+    "details": [
+     "montre",
+     "collier"
+    ],
+    "c_cheveux": [
+     61,
+     42,
+     41
+    ]
+   },
+   "invite": {
+    "haut": "veste_jean",
+    "c_haut": [
+     150,
+     175,
+     205
+    ],
+    "motif": "uni",
+    "c_motif": [
+     108,
+     126,
+     147
+    ],
+    "bas": "jean",
+    "c_bas": [
+     120,
+     100,
+     80
+    ],
+    "chaussures": "baskets",
+    "c_chaussures": [
+     90,
+     160,
+     110
+    ],
+    "details": [],
+    "c_dessous": [
+     245,
+     245,
+     245
+    ],
+    "c_cheveux": [
+     17,
+     10,
+     9
+    ]
+   },
+   "presentateur": {
+    "haut": "pull",
+    "c_haut": [
+     60,
+     70,
+     100
+    ],
+    "motif": "fleurs",
+    "c_motif": [
+     43,
+     50,
+     72
+    ],
+    "bas": "pantalon",
+    "c_bas": [
+     50,
+     55,
+     70
+    ],
+    "chaussures": "baskets",
+    "c_chaussures": [
+     230,
+     140,
+     170
+    ],
+    "details": [],
+    "c_cheveux": [
+     17,
+     10,
+     9
+    ]
+   }
+  },
+  "figurants": [],
+  "ambiances": [
+   "neon",
+   "poussiere"
+  ],
+  "lumiere": -1,
+  "ombre": 0.24,
+  "etalonnage": [
+   1.03,
+   0.99,
+   0.94
+  ],
+  "heure": [
+   19,
+   40
+  ],
+  "style_ia": "warm golden evening light, lamps on",
+  "plans": [
+   {
+    "replique": 0,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "pointe_d",
+    "reaction": "regard_camera"
+   },
+   {
+    "replique": 1,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "haussement",
+    "reaction": "choc"
+   },
+   {
+    "replique": 2,
+    "plan": "moyen",
+    "mouvement": "fixe",
+    "geste": "gratte_tete",
+    "reaction": "sceptique"
+   },
+   {
+    "replique": 11,
+    "plan": "serre",
+    "mouvement": "zoom_choc",
+    "geste": "poing",
+    "reaction": "colere"
+   },
+   {
+    "replique": 26,
+    "plan": "serre",
+    "mouvement": "avance",
+    "geste": "pointe_g",
+    "reaction": "joie"
+   }
+  ],
+  "jeu": [],
+  "source": "auteur+image",
+  "c_mur": [
+   222,
+   203,
+   181
+  ],
+  "rythme": {
+   "serre": 0.016,
+   "large": 0.184,
+   "tres_serre": 0.0,
+   "camera": {
+    "fixe": 0.744,
+    "avance": 0.083,
+    "recul": 0.099,
+    "travelling": 0.017,
+    "epaule": 0.058
+   },
+   "energie": 0.323,
+   "sourires": 0.0,
+   "duree_plan": 15.62
+  },
+  "fiches": {
+   "envoyee": {
+    "genre": "f",
+    "age": 28,
+    "corpulence": 0.5,
+    "taille": 0.873,
+    "peau": [
+     214,
+     160,
+     118
+    ],
+    "visage": "rond",
+    "iris": [
+     80,
+     130,
+     90
+    ],
+    "yeux": 0.9509122660724112,
+    "nez": "droit",
+    "levres": 1.0660780120161817,
+    "sourcils": 1.1285656489510276,
+    "cheveux": "tresses",
+    "c_cheveux": [
+     61,
+     42,
+     41
+    ],
+    "barbe": "",
+    "lunettes": "",
+    "maquillage": true
+   },
+   "invite": {
+    "genre": "h",
+    "age": 30,
+    "corpulence": 0.6,
+    "taille": 1.04,
+    "peau": [
+     214,
+     160,
+     118
+    ],
+    "visage": "rond",
+    "iris": [
+     80,
+     50,
+     30
+    ],
+    "yeux": 0.9896660117979128,
+    "nez": "droit",
+    "levres": 1.1548692549979207,
+    "sourcils": 1.0213448930281894,
+    "cheveux": "court_texture",
+    "c_cheveux": [
+     17,
+     10,
+     9
+    ],
+    "barbe": "trois_jours",
+    "lunettes": "",
+    "maquillage": false
+   },
+   "presentateur": {
+    "genre": "h",
+    "age": 35,
+    "corpulence": 0.7,
+    "taille": 1.04,
+    "peau": [
+     234,
+     186,
+     146
+    ],
+    "visage": "ovale",
+    "iris": [
+     110,
+     75,
+     45
+    ],
+    "yeux": 1.021636882405316,
+    "nez": "rond",
+    "levres": 1.0988938890960447,
+    "sourcils": 1.0129717870428878,
+    "cheveux": "court",
+    "c_cheveux": [
+     17,
+     10,
+     9
+    ],
+    "barbe": "trois_jours",
+    "lunettes": "",
+    "maquillage": false
+   }
+  },
+  "cadence": "rapide",
+  "assis": {
+   "0": "invite"
+  },
+  "meubles": {
+   "0": {
+    "invite": "canape"
+   }
+  },
+  "cine": {
+   "focus": false,
+   "vertige": true,
+   "tiers": true,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": false,
+   "reflets": false,
+   "son": true
+  },
+  "decoupe": {},
+  "coupes_origine": [
+   10.0,
+   35.5,
+   53.5
+  ],
+  "gestes_origine": [
+   5.0,
+   6.5,
+   7.5,
+   10.5,
+   11.5,
+   12.5,
+   13.5,
+   18.0,
+   46.0,
+   52.0,
+   53.0
+  ],
+  "postures_origine": [
+   [
+    0.0,
+    2.0,
+    0.69,
+    "menton"
+   ],
+   [
+    36.5,
+    38.0,
+    0.68,
+    "menton"
+   ],
+   [
+    48.5,
+    52.0,
+    0.67,
+    "menton"
+   ]
+  ]
  }
 }
