@@ -499,6 +499,18 @@
   `fusion.FUSIONNES` ; site : Réglages → « 🧯 Registre des pannes », 30 derniers jours). Compte réel de la chaîne : **@petitsdramas**
   (`marque.COMPTE`, le logo disait « @petits.dramas »). NB du 11 novembre : le journal montre le crédit ElevenLabs épuisé (isolation et
   transcription passent par les outils gratuits).
+- **Pas de personnage en trop (remarque de l'auteur du 11 novembre : 3 personnages au lieu de 2 quand on parle d'une personne absente)** :
+  analyse des vidéos « grand frère » (yan_animation0) et « Débat loyer » : la séparation des voix trouvait 3 voix (doubleur qui change
+  sa voix, ou message vocal du frère) -> 3 personnages, alors que l'original n'en montre que 2 ; et « Voilà, voilà mon frère » était
+  pris pour une présentation (frère dessiné à côté). Corrections : Gemini dit qui est VISIBLE (`video_ia` : "visible", `visibles`,
+  `voix_hors_champ` ; une personne dont on parle n'est pas un personnage) ; `equipe.presents` (fin du casting voix, PRESENTS=0) :
+  plus de voix que de personnes à l'image (Gemini, sinon `nb_personnes` des mouvements ; jamais quand une seule personne est vue)
+  -> la voix d'un message vocal / appel (Gemini, ou voix qui n'arrive qu'après « il m'a envoyé un vocal », « écoute ça »…) reste
+  entendue et sous-titrée mais n'est pas dessinée (réplique "narrateur" + "_hors_champ" : sans carton de titre) ; sinon ses phrases
+  retournent aux personnes à l'image, tour à tour ; « voilà » ne présente plus personne et jamais un absent (vocal, appel, pas là) ;
+  son TikTok : jamais plus de personnes dessinées (qui parlent + muets) que dans l'original (`studio.compagnons`, sk["doublage"]["nb_vus"]).
+  Aussi : textes de l'IA rendus en `{'texte': …}` (sous-titres « {'texte': 'Avec toi.'} » de « Robin, il faut que je te dise »)
+  remis en texte (`doublage.texte_ia`).
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.

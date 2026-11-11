@@ -419,6 +419,16 @@ def _casting_defaut(segs, hz):
         else: res[v] = next((r for r in hommes if r not in res.values()), "presentateur")
     return res
 
+def texte_ia(x):
+    """Une ligne de texte rendue par l'IA : l'IA gratuite renvoie parfois {"texte": "…"} au lieu du texte (vidéo du 11 novembre :
+    sous-titres « {'texte': 'Avec toi.'} »)."""
+    if isinstance(x, dict): x = next((x[k] for k in ("texte", "t", "text", "phrase", "replique") if isinstance(x.get(k), str)), "")
+    elif isinstance(x, list): x = " ".join(map(str, x))
+    x = str(x)
+    m = re.fullmatch(r"\s*\{\s*['\"](?:texte|t|text)['\"]\s*:\s*['\"](.*)['\"]\s*\}\s*", x, re.S)
+    return m.group(1) if m else x
+
+
 def corriger_textes(segs, textes):
     """Texte de chaque réplique corrigé par l'IA (mots mal entendus par la reconnaissance vocale), accepté seulement s'il reste très
     proche de ce qui a été entendu (pas de réécriture) ; quand le nombre de mots est le même, les mots minutés (bouches) suivent."""
@@ -580,7 +590,8 @@ def preparer(url):
         import locuteurs; mots = locuteurs.affiner(mots, sig)
     except Exception as e: journal(f"  vérification mot par mot impossible ({str(e)[:120]})")
     try:                                                                   # casting voix : le son, le texte et l'image votent
-        mots = equipe.casting_voix(mots, info.get("_fichier") or "", B, relire_dialogue, scinder_voix_dominante)
+        mots = equipe.casting_voix(mots, info.get("_fichier") or "", B, relire_dialogue, scinder_voix_dominante,
+                                   nb_ecran=(visuel or {}).get("nb_personnes"))
     except Exception as e: journal(f"  contrôle du casting des voix impossible ({str(e)[:120]})")
     try:                                                                   # une couleur de sous-titre par personnage (idée 21)
         if lignes_ocr: mots = __import__("ocr").couleurs_voix(mots, lignes_ocr, B)
@@ -628,7 +639,7 @@ def preparer(url):
         journal(f"  mise en scène automatique impossible ({str(e)[:150]}) : une seule scène, casting par la hauteur des voix")
     journal("  casting : " + ", ".join(f"{v} → {NOMS[r]}" for v, r in casting.items()))
     d = [" ".join(map(str, x)) if isinstance(x, list) else str(x) for x in ecrire._liste(m.get("d"))]   # l'IA gratuite met parfois [["…"]]
-    corrige = corriger_textes(segs, [str(x) for x in ecrire._liste(m.get("texte"))])   # sous-titres sans fautes de reconnaissance
+    corrige = corriger_textes(segs, [texte_ia(x) for x in ecrire._liste(m.get("texte"))])   # sous-titres sans fautes de reconnaissance
     reps = []
     for k, s in enumerate(segs):
         r = {"p": casting.get(s["voix"], "presentateur"), "t": corrige[k], "_deb": round(float(s["deb"]), 3), "_fin": round(float(s["fin"]), 3)}
@@ -647,6 +658,10 @@ def preparer(url):
                 if voix_sure(segs[k_r]): refus += 1; continue              # la voix est reconnue : l'IA (qui lit le texte) ne la déplace pas
                 reps[k_r]["p"] = x["role"]; corr += 1
         except (AttributeError, TypeError, ValueError): pass
+    hc = {v for v in equipe.HORS_CHAMP if v in {s_["voix"] for s_ in segs}}  # voix d'un message vocal / d'un appel : entendue, pas dessinée
+    for k, s_ in enumerate(segs):
+        if s_["voix"] in hc: reps[k]["p"] = "narrateur"; reps[k]["_hors_champ"] = True
+    if hc: journal(f"  {sum(1 for r in reps if r.get('_hors_champ'))} réplique(s) entendue(s) hors champ (message vocal / appel) : personne en plus à l'image")
     if corr: journal(f"  Claude a réattribué {corr} réplique(s) à la bonne personne (voix proches)")
     if refus: journal(f"  {refus} réattribution(s) de l'IA refusée(s) : la voix de ces répliques est reconnue avec certitude")
     ecoute.jeu_entendu(reps, segs, emo_voix, EVENEMENTS)                   # sans indication de l'IA : le jeu entendu dans le son
@@ -708,6 +723,10 @@ def preparer(url):
                       "evenements": [list(e) for e in EVENEMENTS][:60], "visuel": visuel, "audio": audio,
                       "video_origine": info.get("_fichier") or "", "debut": debut,    # (contrôle qualité : comparaison avec l'original)
                       "titre": str(info.get("title") or info.get("description") or "")[:300]}   # titre de l'original (parties 1, 2… : suites.py)
+    try:                                                                   # personnes VUES à l'image par Gemini (une voix au téléphone exclue)
+        n_v = __import__("video_ia").visibles()
+        if n_v: sk["doublage"]["nb_vus"] = int(n_v)
+    except Exception: pass
     if audio:                                                              # émotions de jeu données par Claude
         from collections import Counter
         audio["emotions"] = dict(Counter(m.lower() for x in d for m in re.findall(r"\[([^\]]{2,25})\]", x)).most_common(8))

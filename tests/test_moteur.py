@@ -2735,3 +2735,65 @@ class TestListe11NovembreBis(unittest.TestCase):
         e = open(os.path.join(ICI, "..", ".github", "workflows", "emission.yml"), encoding="utf-8").read(); self.assertIn("moteur/pannes.py", e)
         st = open(os.path.join(ICI, "..", ".github", "workflows", "stats.yml"), encoding="utf-8").read(); self.assertIn("moteur/paliers.py", st)
         self.assertTrue(os.path.exists(os.path.join(ICI, "..", ".github", "workflows", "vitrine.yml")))
+
+
+class TestPersonneEnTrop(unittest.TestCase):
+    """Remarque de l'auteur du 11 novembre : 3 personnages dessinés alors que l'original n'en montre que 2 (on parle d'une 3e
+    personne absente : le grand frère et son message vocal, « voilà mon frère »)."""
+
+    def _mots(self, lignes):
+        mots, t = [], 0.0
+        for ph, v in lignes:
+            for w in ph.split(): mots.append({"w": w, "s": t, "e": t + 0.3, "voix": v, "sure": 1.0}); t += 0.35
+            t += 0.6
+        return mots
+
+    def setUp(self):
+        import video_ia; video_ia.DERNIER.clear()
+
+    def test_message_vocal_hors_champ(self):
+        import equipe
+        m = self._mots([("T'as vu là-bas ?", "a"), ("Mon frère m'a envoyé un vocal.", "b"), ("Rentre tout de suite !", "c"),
+                        ("C'est quoi ça ?", "a"), ("C'est mon grand frère.", "b"), ("Je vais te retrouver.", "c"), ("Il est fou.", "a")])
+        B = equipe.Bulletin(); res = equipe.presents(m, 2, B)
+        self.assertEqual(equipe.HORS_CHAMP, {"c"})
+        self.assertEqual({x["voix"] for x in res}, {"a", "b", "c"})        # la voix reste (entendue), mais n'est pas dessinée
+
+    def test_voix_en_trop_rendue(self):
+        import equipe
+        m = self._mots([("Tu payes pas de loyer ?", "a"), ("Non.", "b"), ("Pourquoi ?", "c"), ("C'est ta maison.", "b"),
+                        ("Et alors ?", "a"), ("Bah non.", "b"), ("D'accord.", "c")])
+        res = equipe.presents(m, 2, equipe.Bulletin())
+        self.assertEqual(equipe.HORS_CHAMP, set())
+        self.assertEqual({x["voix"] for x in res}, {"a", "b"})
+        ph = __import__("locuteurs").phrases(res)
+        self.assertEqual(res[ph[2][0]]["voix"], "a")                       # après une phrase de b, c'est l'autre qui parle
+
+    def test_trois_personnes_vues(self):
+        import equipe
+        m = self._mots([("Salut.", "a"), ("Bonjour.", "b"), ("Coucou.", "c")])
+        res = equipe.presents(m, 3, equipe.Bulletin())
+        self.assertEqual({x["voix"] for x in res}, {"a", "b", "c"}); self.assertEqual(equipe.HORS_CHAMP, set())
+        res = equipe.presents(self._mots([("Salut.", "a"), ("Bonjour.", "b"), ("Coucou.", "c")]), 1, equipe.Bulletin())
+        self.assertEqual({x["voix"] for x in res}, {"a", "b", "c"})        # une seule personne vue : un acteur qui joue tout, on ne touche à rien
+
+    def test_voila_mon_frere(self):
+        import studio
+        sk = {"repliques": [{"p": "envoyee", "t": "Voilà, voilà mon frère, voilà."}, {"p": "presentateur", "t": "Mon frère m'a envoyé un vocal, voici mon frère."}]}
+        self.assertEqual(studio.famille_presentee(sk), [])
+        sk = {"repliques": [{"p": "envoyee", "t": "Je te présente mon père."}]}
+        self.assertEqual(len(studio.famille_presentee(sk)), 1)
+
+    def test_pas_plus_de_monde_que_l_original(self):
+        import studio
+        reps = [{"p": "presentateur", "t": "Je te présente mon père."}, {"p": "envoyee", "t": "Bonjour."}]
+        sk = {"repliques": reps, "doublage": {"visuel": {"nb_personnes": 2}}}
+        self.assertEqual(studio.compagnons(sk, [{"repliques": [0, 1]}], ["salon"], "jour", 1), [])
+        sk = {"repliques": reps, "doublage": {"nb_vus": 3, "visuel": {"nb_personnes": 2}}}
+        self.assertEqual(len(studio.compagnons(sk, [{"repliques": [0, 1]}], ["salon"], "jour", 1)), 1)
+
+    def test_texte_ia_en_dict(self):
+        import doublage
+        self.assertEqual(doublage.texte_ia({"texte": "Avec toi."}), "Avec toi.")
+        self.assertEqual(doublage.texte_ia("{'texte': 'Bouffon va.'}"), "Bouffon va.")
+        self.assertEqual(doublage.texte_ia("Quoi ?"), "Quoi ?")

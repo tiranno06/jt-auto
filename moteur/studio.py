@@ -798,7 +798,8 @@ def famille_presentee(sk):
     for x in [x for x in sk.get("repliques") or [] if x.get("p") != "narrateur"]:
         t = x.get("t", "").lower()
         for ph in re.split(r"[.!?…]", t):
-            if not re.search(r"\b(pr[ée]sente|qui est l[àa]|qui sont l[àa]|qui est ici|est l[àa][- ]bas|voici|voil[àa])\b", ph): continue
+            if not re.search(r"\b(pr[ée]sente|qui est l[àa]|qui sont l[àa]|qui est ici|est l[àa][- ]bas|voici)\b", ph): continue
+            if re.search(r"\b(vocal|message|appel|t[ée]l[ée]phone|portable|pas l[àa]|absent|chez lui|chez elle)\b", ph): continue   # il n'est pas là
             for nom in re.findall(_PROCHE, ph):
                 for motif, genre, age in FAMILLE:
                     if re.fullmatch(motif, nom):
@@ -949,6 +950,13 @@ def compagnons(sk, dec, lieux, moment, graine):
     S = sk.get("studio") if isinstance(sk.get("studio"), dict) else {}
     out = []
     liste = [f for f in (S.get("figurants") or []) if isinstance(f, dict)] or famille_presentee(sk) or figurants_devines(sk)
+    if liste and sk.get("doublage"):                                       # son TikTok : jamais plus de monde que dans l'original
+        D = sk["doublage"]; V = D.get("visuel") if isinstance(D.get("visuel"), dict) else {}
+        n_max = D.get("nb_vus") or V.get("nb_personnes")
+        parl = {x["p"] for x in sk.get("repliques") or [] if x.get("p") != "narrateur"}
+        if isinstance(n_max, (int, float)) and n_max >= 1 and len(parl) + len(liste) > n_max:
+            print(f"  personne muette en plus non dessinée : {int(n_max)} personne(s) à l'image dans l'original, {len(parl)} qui parlent", flush=True)
+            liste = liste[:max(0, int(n_max) - len(parl))]
     for k, f in enumerate(liste[:3]):
         avec = f.get("avec"); reps = sk.get("repliques") or []
         sc = next((j for j, d in enumerate(dec) if any(i < len(reps) and reps[i]["p"] == avec for i in d.get("repliques", []))), None)

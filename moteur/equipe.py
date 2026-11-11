@@ -20,6 +20,11 @@ DESACCORD_MAX = 0.3          # plus de 30 % des phrases où l'image contredit le
 def journal(m): print(m, flush=True)
 
 
+HORS_CHAMP = set()           # voix qu'on ENTEND sans voir la personne (message vocal, téléphone) : rôle non dessiné
+MESSAGE = re.compile(r"\b(vocal|vocaux|message|r[ée]pondeur|t[ée]l[ée]phone|portable|il m'appelle|elle m'appelle|haut[- ]parleur|"
+                     r"[ée]coute[sz]? (ça|ca|bien)|la t[ée]l[ée]|radio|en visio|facetime)\b", re.I)
+
+
 class Bulletin:
     def __init__(self): self.lignes = []
     def note(self, poste, controle, ok, detail="", revoir=False):
@@ -52,7 +57,7 @@ def inge_son(mots, B):
 
 
 # ------------------------------------------------------------------ 2. casting voix
-def casting_voix(mots, video, B, relire, scinder):
+def casting_voix(mots, video, B, relire, scinder, nb_ecran=None):
     """Qui dit chaque phrase : le son a déjà parlé (pyannote, ECAPA, vérification mot par mot) ; le contrôleur fait voter le texte
     et l'image et reprend le fil du dialogue quand ils contredisent le son. relire / scinder : fonctions de doublage.py."""
     import locuteurs, regard
@@ -108,6 +113,7 @@ def casting_voix(mots, video, B, relire, scinder):
         n0 = Counter(m["voix"] for m in mots)
         mots = scinder(mots)
         if Counter(m["voix"] for m in mots) != n0: B.note("casting voix", "voix dominante partagée (même voix pour deux personnes)", True)
+    mots = presents(mots, nb_ecran, B)                                    # pas de personnage en trop (tiers dont on parle, vocal)
     n = Counter(m["voix"] for m in mots)
     part = max(n.values()) / max(1, sum(n.values()))
     questions = sum(1 for p in ph if mots[p[-1]]["w"].endswith("?"))
@@ -115,6 +121,56 @@ def casting_voix(mots, video, B, relire, scinder):
            f"{len(n)} voix, la plus bavarde dit {round(100 * part)} %")
     if len(n) > 1 and part > VOIX_SEULE_MAX and questions >= 3:
         B.note("casting voix", "dialogue équilibré", False, f"une voix dit {round(100 * part)} % d'un dialogue à {questions} questions", revoir=True)
+    return mots
+
+
+def presents(mots, nb_ecran, B):
+    """Remarque de l'auteur (11 novembre) : 3 personnages dessinés alors que l'original n'en montre que 2, parce que les deux parlent
+    d'une 3e personne absente (le grand frère…). Plus de voix trouvées que de personnes à l'image (Gemini, sinon les mouvements) :
+    - la voix d'un MESSAGE VOCAL / d'un appel (Gemini la dit « invisible », ou elle ne parle qu'après « il m'a envoyé un vocal »,
+      « écoute ça »…) reste, mais hors champ : entendue avec ses sous-titres, jamais dessinée (HORS_CHAMP) ;
+    - sinon c'est la même personne coupée en deux par la séparation des voix (doubleur qui change sa voix) : ses phrases
+      retournent aux personnes à l'image, tour à tour (après une phrase de l'un, c'est l'autre qui parle ; une phrase qui repart en
+      minuscule reste à la même personne). PRESENTS=0 pour couper."""
+    import locuteurs
+    HORS_CHAMP.clear()
+    voix = Counter(m["voix"] for m in mots)
+    if os.environ.get("PRESENTS", "1") == "0" or len(voix) < 3: return mots
+    try:
+        import video_ia; g_ = video_ia.visibles(); caches = video_ia.voix_hors_champ(mots)
+    except Exception: g_, caches = None, set()
+    limite = g_ or (int(nb_ecran) if isinstance(nb_ecran, (int, float)) and nb_ecran >= 1 else None)
+    if not limite or limite < 2 or len(voix) <= limite:                    # (une seule personne vue : souvent un acteur qui joue tout)
+        if limite and limite >= 2: B.note("casting voix", "autant de personnages que de personnes à l'image", True, f"{len(voix)} voix, {limite} à l'image")
+        return mots
+    ph = locuteurs.phrases(mots)
+    qui = [Counter(mots[i]["voix"] for i in p).most_common(1)[0][0] for p in ph]
+    texte = [" ".join(mots[i]["w"] for i in p) for p in ph]
+    debut = {v: min(j for j, q in enumerate(qui) if q == v) for v in set(qui)}
+    hors = [v for v in caches if v in voix]
+    m0 = next((j for j, t in enumerate(texte) if MESSAGE.search(t)), None)
+    if not hors and m0 is not None:                                        # elle n'arrive qu'après « il m'a envoyé un vocal »
+        tard = [v for v in voix if debut.get(v, 0) > m0 and v != qui[m0]]
+        if tard: hors = [min(tard, key=lambda v: voix[v])]
+    hors = sorted(hors, key=lambda v: voix[v])[:len(voix) - limite]
+    gardes = [v for v, _ in voix.most_common() if v not in hors]
+    fusion = gardes[limite:] if limite >= 2 else []
+    gardes = gardes[:limite]
+    if not hors and not fusion: return mots
+    prec = None
+    for j, p in enumerate(ph):
+        if qui[j] in fusion:
+            suite = mots[p[0]]["w"][:1].islower() and prec is not None
+            autre = [v for v in gardes if v != prec]
+            q = prec if suite or not autre else autre[0]
+            for i in p: mots[i]["voix"] = q; mots[i]["sure"] = 0.0
+            qui[j] = q
+        prec = qui[j] if qui[j] in gardes else prec
+    HORS_CHAMP.update(hors)
+    d_ = ([f"{len(hors)} voix entendue(s) seulement (message vocal / appel) : non dessinée(s)"] if hors else []) \
+         + ([f"{len(fusion)} voix en trop rendue(s) aux personnes à l'image"] if fusion else [])
+    journal(f"  personnages à l'image : {limite} pour {len(voix)} voix ; " + " ; ".join(d_ or ["rien à changer"]))
+    B.note("casting voix", "autant de personnages que de personnes à l'image", True, " ; ".join(d_) + " (corrigé)")
     return mots
 
 
@@ -177,7 +233,7 @@ def scripte(sk, segs, hz, B):
     if studio.appel_devine(sk): tel = []                                   # un appel : le téléphone a toute sa place
     for k in tel: reps[k].pop("objet", None)
     B.note("scripte", "téléphone en main seulement s'il en est question", True, f"retiré sur {len(tel)} réplique(s) (corrigé)" if tel else "")
-    nb_voix = len({s["voix"] for s in segs}); nb_roles = len({r["p"] for r in reps if r["p"] != "narrateur"})
+    nb_voix = len({s["voix"] for s in segs}); nb_roles = len({r["p"] for r in reps if r["p"] != "narrateur" or r.get("_hors_champ")})
     B.note("scripte", "autant de personnages que de voix", nb_roles >= min(nb_voix, 3), f"{nb_voix} voix, {nb_roles} personnage(s)")
     return sk
 

@@ -28,7 +28,9 @@ numérotées, avec leurs instants :
 Dis-moi :
 - "personnages" : chaque PERSONNAGE qui parle ou qu'on voit, avec une lettre (A, B, C…) : "description" (âge, genre, allure,
   vêtements, couleur des cheveux), "cote" (gauche, droite, centre ou varie), "espece" (humain, ou chat, chien, lapin, souris,
-  oiseau, poisson, steak, pizza, oeuf, banane, voiture, frigo, telephone, verre, croissant, ou "objet:<nom>").
+  oiseau, poisson, steak, pizza, oeuf, banane, voiture, frigo, telephone, verre, croissant, ou "objet:<nom>"), "visible" (false
+  si on ne fait que l'ENTENDRE sans jamais le voir à l'image : message vocal, téléphone, télé, radio, voix derrière une porte ;
+  une personne dont on PARLE sans l'entendre n'est PAS un personnage).
   ATTENTION : une MÊME personne (ou un même doubleur) joue souvent 2 ou 3 personnages : autre vêtement, perruque, accessoire,
   voix déguisée, côté de l'écran, regard tourné à gauche puis à droite, coupes qui alternent. Ce sont alors des PERSONNAGES
   DIFFÉRENTS : compte les personnages, pas les acteurs ;
@@ -37,7 +39,7 @@ Dis-moi :
   l'on voit parler ; dans un dessin animé, le personnage dont la bouche est animée), et "sur" de 0 à 1 (ta certitude) ;
 - "lieu" : un mot parmi {lieux} ;
 - "resume" : l'histoire en 2 phrases (qui fait quoi, la chute).
-Réponds UNIQUEMENT en JSON : {{"personnages": [{{"id": "A", "description": "...", "cote": "...", "espece": "..."}}], "meme_interprete": false,
+Réponds UNIQUEMENT en JSON : {{"personnages": [{{"id": "A", "description": "...", "cote": "...", "espece": "...", "visible": true}}], "meme_interprete": false,
 "phrases": [{{"n": 0, "qui": "A", "sur": 0.9}}], "lieu": "...", "resume": "..."}}"""
 
 
@@ -67,7 +69,7 @@ def analyser(chemin, mots, ph):
                 reseau.UTILISES["gemini"] = reseau.UTILISES.get("gemini", 0) + 1
                 res["_ph"] = [(mots[p[0]]["s"], mots[p[-1]]["e"]) for p in ph]
                 DERNIER.update(res)
-                n_p = len([p for p in res.get("personnages") or [] if isinstance(p, dict)])
+                n_p = len([p for p in res.get("personnages") or [] if isinstance(p, dict) and p.get("visible") is not False])
                 print(f"  Gemini a regardé la vidéo entière ({modele}) : {n_p} personnage(s)"
                       + (", une même personne en joue plusieurs" if res.get("meme_interprete") else "") + f", lieu « {res.get('lieu', '?')} »", flush=True)
                 return res
@@ -90,7 +92,31 @@ def vue(res, n_ph):
         except (TypeError, ValueError, AttributeError): continue
         if 0 <= n < n_ph and q.isalpha():
             lettres.setdefault(q, len(lettres)); out[n] = (lettres[q], max(0.0, min(1.0, s)))
-    return (out if sum(1 for c, _ in out if c is not None) >= 3 else None), len(lettres)
+    caches = {str(p.get("id", "")).upper()[:1] for p in res.get("personnages") or [] if isinstance(p, dict) and p.get("visible") is False}
+    return (out if sum(1 for c, _ in out if c is not None) >= 3 else None), len([q for q in lettres if q not in caches])
+
+
+def visibles():
+    """Nombre de personnages que Gemini VOIT à l'image (ceux qu'on entend seulement sont exclus), ou None."""
+    P = [p for p in (DERNIER.get("personnages") or []) if isinstance(p, dict)] if DERNIER else []
+    return len([p for p in P if p.get("visible") is not False]) or None if P else None
+
+
+def voix_hors_champ(mots):
+    """Voix dont les phrases sont dites, d'après Gemini, par un personnage qu'on ENTEND seulement (message vocal, téléphone…)."""
+    res = DERNIER
+    if not res: return set()
+    caches = {str(p.get("id", "")).upper()[:1] for p in res.get("personnages") or [] if isinstance(p, dict) and p.get("visible") is False}
+    if not caches: return set()
+    from collections import Counter
+    import locuteurs
+    ph = locuteurs.phrases(mots); dans, tout = Counter(), Counter(m["voix"] for m in mots)
+    for x in res.get("phrases") or []:
+        try: n = int(x.get("n")); q = str(x.get("qui") or "").strip().upper()[:1]
+        except (TypeError, ValueError, AttributeError): continue
+        if 0 <= n < len(ph) and q in caches:
+            for i in ph[n]: dans[mots[i]["voix"]] += 1
+    return {v for v, k in dans.items() if k >= 0.6 * tout[v]}
 
 
 def especes_par_voix(mots):
