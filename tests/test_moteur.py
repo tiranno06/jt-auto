@@ -2608,3 +2608,66 @@ class TestCompteRendu(unittest.TestCase):
         r = open(os.path.join(ICI, "..", "moteur", "remarque.py"), encoding="utf-8").read(); self.assertIn("def appliquer(sk, texte, memoriser=True)", r)
         s = open(os.path.join(ICI, "..", "moteur", "site.py"), encoding="utf-8").read()
         self.assertIn('|compte_rendu"', s); self.assertIn('id="tkCorrigerTout"', s)
+
+
+class TestJeuOriginal(unittest.TestCase):
+    """Choix de l'auteur du 11 novembre : expressions, tête et doigts de l'original (1, 3), objets vus (4), nom du compte (9)."""
+
+    def _piste(self, t0, t1, bouche, plan=0, x=0.3, **bs):
+        ech = []
+        for k, t in enumerate(np.arange(t0, t1, 0.125)):
+            ech.append((float(t), dict(x=x, y=0.4, bouche=bouche(k), regard=0.0, roll=3.0, pitch=0.0, main=None, plat=0.6,
+                                       bs=dict(mouthSmileLeft=bs.get("sourire", 0.0), mouthSmileRight=bs.get("sourire", 0.0)))))
+        return {"ech": ech, "plan": plan}
+
+    def test_qui_est_qui(self):
+        import jeu_original as J
+        reps = [{"p": "presentateur", "_deb": 0.0, "_fin": 2.0}, {"p": "invite", "_deb": 2.0, "_fin": 4.0}]
+        parle = lambda k: 0.5 * (k % 2); muet = lambda k: 0.1
+        P = [self._piste(0, 2, parle, x=0.3), self._piste(0, 2, muet, x=0.7)]
+        self.assertEqual(J.roles_des_pistes(P, reps), ["presentateur", "invite"])   # la piste muette vue en même temps = l'autre
+
+    def test_application_douce(self):
+        import jeu_original as J
+        d = {"expr": {"invite": [[t, 0.8, 0.1, 0, 0, 0, 0, 0, 0, 0.1, 6.0, 0.0] for t in np.arange(0, 3, 0.25)]},
+             "mains": {"invite": [[1.0, 2.0, "pouce"]]}}
+        j = J.Jeu(d)
+        p = {"emo": "neutre", "tilt": 0.0, "tq": 0.0, "regard": (0.0, 0.0), "bras_d": (0, 0)}
+        J.appliquer(p, j, "invite", 1.5, parle=False)
+        self.assertEqual(p["emo"], "joie"); self.assertEqual(p["doigts_d"], "pouce"); self.assertEqual(tuple(p["bras_d"]), J.BRAS_DOIGTS["pouce"])
+        p2 = {"emo": "colere", "bras_d": (0, 0)}; J.appliquer(p2, j, "invite", 1.5, parle=True); self.assertEqual(p2["emo"], "colere")   # jeu fort gardé
+        p3 = {"emo": "neutre"}; J.appliquer(p3, j, "presentateur", 1.5, parle=False); self.assertEqual(p3, {"emo": "neutre"})   # rien lu : rien
+        self.assertIsNone(j.valeurs("invite", 9.0))                           # personne à l'image à cet instant dans l'original
+
+    def test_dessin_anime_ignore(self):
+        import jeu_original as J, visages
+        anc = visages.lire
+        visages.lire = lambda v, duree_max=200: [(t, False, [dict(x=0.5, y=0.4, bouche=0.1, regard=0, roll=0, pitch=0, plat=0.9, bs={})]) for t in np.arange(0, 3, 0.125)]
+        try:
+            f = tempfile.NamedTemporaryFile(suffix=".mp4", delete=False); f.close()
+            self.assertEqual(J.extraire(f.name, [{"p": "presentateur", "_deb": 0, "_fin": 3}], journal=lambda m: None), {})
+        finally: visages.lire = anc
+
+    def test_doigts_dessines(self):
+        import croquis as C
+        for forme in ("index", "deux", "pouce", "pouce_bas", "poing", "ouverte"):
+            img = np.full((200, 200, 3), 240, np.uint8); C.main(img, (100, 100), 20, 0, forme)
+            self.assertTrue((img < 200).any(), forme)
+
+    def test_objets_vus(self):
+        import objets_vus as O
+        reps = [{"p": "presentateur", "_deb": 0.0, "_fin": 3.0}, {"p": "invite", "_deb": 3.0, "_fin": 6.0, "objet": "verre"}]
+        vus = [(1.0, "telephone", 0.3), (2.5, "telephone", 0.25), (4.0, "pizza", 0.4), (4.5, "pizza", 0.3), (5.0, "guitare", 0.5)]
+        O.attribuer(reps, vus, journal=lambda m: None)
+        self.assertEqual(reps[0]["objet"], "telephone"); self.assertEqual(reps[1]["objet"], "verre")   # objet déjà choisi : gardé
+        self.assertNotIn("ordinateur", O.CHERCHES)                            # un écran sur un bureau n'est pas un objet tenu
+
+    def test_nom_du_compte(self):
+        import marque
+        env = dict(os.environ)
+        try:
+            os.environ["TIKTOK_COMPTE"] = "petitsdramas"; self.assertEqual(marque.compte(), "@petitsdramas")
+            os.environ.pop("TIKTOK_COMPTE"); self.assertEqual(marque.compte(), marque.COMPTE)
+        finally: os.environ.clear(); os.environ.update(env)
+        src = open(os.path.join(ICI, "..", "moteur", "cartoon.py"), encoding="utf-8").read()
+        self.assertIn("FIL_Y = 215", src); self.assertNotIn("FILIGRANE, 28, 118", src)

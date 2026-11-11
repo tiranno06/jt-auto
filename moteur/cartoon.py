@@ -641,6 +641,9 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
     if REMB: print(f"rembobinage : {len(REMB)} fois", flush=True)
     TITRE_FIXE = titre(sk.get("titre_accroche")) if not mini else None
     FILIGRANE = marque.filigrane(52)
+    FIL_Y = 215                                                            # sous la barre du haut de l'appli TikTok (« Abonnements | Pour toi »)
+    import jeu_original                                                    # jeu copié sur l'original (expressions, tête, doigts)
+    JEU_O = jeu_original.Jeu(sk.get("_jeu_original")) if (sk.get("_jeu_original") and jeu_original.actif()) else None
     TRAITS_VITESSE = []                                                    # traits de vitesse (manga) : du bord vers le centre
     for k_t in range(2):
         tv = np.zeros((H, W, 3), np.uint8); rg_t = np.random.default_rng(40 + k_t)
@@ -957,6 +960,9 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
                 else:
                     p["main_d"] = o; p["main_forme_d"] = "poing"
                     p["bras_d"] = TEL_OREILLE if mien["objet"] == "telephone" else (120, -100)   # téléphone : tenu à l'oreille
+        if JEU_O is not None:                                              # nuances de jeu de la vraie personne au même instant
+            try: jeu_original.appliquer(p, JEU_O, role, tm, parle, EXAGERE)
+            except Exception: pass
         return p
 
     global COUVERTURE                                                      # couverture : titre visible et visage le plus expressif
@@ -1593,14 +1599,12 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
         if q["p"] == "narrateur" and tm <= q["fin"] + 0.3:                 # voix off : le titre en grand au centre à l'ouverture,
             V = VOIX_OFF[q["i"]]; a2 = pop(V, (tm - q["deb"] + 0.2) / 0.3)   # en haut de l'image ensuite (jamais sur les têtes)
             poser(fr, a2, (W - a2.shape[1]) / 2, (H * 0.36 - a2.shape[0] / 2) if q is ph[0] else 300)
-            if q is not ph[0]: poser(fr, FILIGRANE, 28, 118)
+            if q is not ph[0]: poser(fr, FILIGRANE, 28, FIL_Y)
             return np.clip(fr, 0, 255).astype(np.uint8)
-        if SIGNATURE and tm < 0.75:                                        # signature de la chaîne : le logo « pop » puis file dans le coin
-            u_s = _ease(max(0.0, tm - 0.25) / 0.5); k_s = 2.4 - 1.4 * u_s
-            Fg = cv2.resize(FILIGRANE, (max(1, int(FILIGRANE.shape[1] * k_s)), max(1, int(FILIGRANE.shape[0] * k_s))), interpolation=cv2.INTER_AREA)
-            poser(fr, pop(Fg, (tm + 0.05) / 0.2), (W - Fg.shape[1]) / 2 * (1 - u_s) + 28 * u_s, 300 * (1 - u_s) + 118 * u_s)
-        else: poser(fr, FILIGRANE, 28, 118)                               # signature discrète de la chaîne
         T = TITRES.get(sc) if mini else TITRE_FIXE
+        t_fil = (min(z2["deb"] for z2 in ph if z2["scene"] == sc) if mini else 0) + (3.2 if mini else 4.5)   # fin du titre
+        if T is None or tm >= t_fil:                                       # signature de la chaîne (nom du compte), jamais sur le titre,
+            poser(fr, pop(FILIGRANE, (tm - t_fil + 0.05) / 0.25) if T is not None and tm < t_fil + 0.3 else FILIGRANE, 28, FIL_Y)   # sous la barre de TikTok
         if T is not None:
             t0 = min(z2["deb"] for z2 in ph if z2["scene"] == sc) if mini else 0
             d_t = tm - t0

@@ -462,6 +462,25 @@
   « 🛠️ Corriger les n problèmes signalés » et onglet TikTok « 🛠️ Corriger les vidéos signalées » (non publiées, avec points à vérifier
   ou confiance < 70, 10 au plus) -> refaire « fichier|compte_rendu » ; la moins sûre des deux versions est retirée (sortie/.perdante),
   jamais une vidéo publiée ou cochée « À publier ».
+- **Liste du 11 novembre 2026 (choix de l'auteur 1, 3, 4, 9)** : **jeu copié sur l'original** (1 + 3, `moteur/jeu_original.py`,
+  JEU_ORIGINAL=0) : `visages.lire` (MediaPipe, 8 images/s, lecture gardée en mémoire pour le témoin et le jeu) note pour chaque visage
+  ses expressions (sourire, sourcils levés / froncés, yeux plissés / écarquillés, bouche bée, moue), l'inclinaison et les mouvements
+  de la tête, et le geste de la main la plus proche (Gesture Recognizer : index, pouce levé / baissé, V, main ouverte, poing ; MAINS=0) ;
+  chaque visage suivi est rendu au rôle qui dit ses répliques (bouche qui bouge ; piste muette vue en même temps = l'autre rôle) ;
+  sk["_jeu_original"] (4 valeurs / s) -> `cartoon.pose` -> `jeu_original.appliquer` : émotion lue seulement si rien de fort n'est déjà
+  joué, sourcils et yeux d'après l'ÉCART au visage habituel de la personne, tête penchée / tournée / baissée d'après ses MOUVEMENTS,
+  geste des doigts sur la main droite libre, bras tendu sur le côté à hauteur de poitrine (`BRAS_DOIGTS` : une main levée passait
+  devant la grosse tête), doigts dessinés par `croquis.main` (formes index, deux, pouce, pouce_bas, poing ; p["doigts_d"]).
+  **Dessins animés ignorés** : visage peint en aplat (`visages._plat` : dessin 0,84-0,92, vraie peau 0,58-0,74 ; PLAT_MAX 0,78) ou
+  visages vus moins d'un quart du temps de parole -> rien de recopié. NB : la plupart des sons repris viennent de chaînes de dessins
+  animés (vignianimation, yan_animation0, kodanimation…) : le jeu copié ne sert que pour les vidéos avec de vraies personnes.
+  **Objets vus dans l'original** (4, `moteur/objets_vus.py`, OWL-ViT de Google, Apache 2.0, une image / 1,5 s, ~30 s par vidéo,
+  OBJETS_VUS=0) : objets tenus seulement (téléphone, verre, tasse, livre, sac, parapluie, fleurs, cadeau, pizza, micro…, jamais
+  l'ordinateur de bureau), vus sur 2 images au moins, donnés au personnage qui parle à ce moment si sa réplique n'a pas d'objet ;
+  marche aussi sur les dessins animés ; le téléphone caché par la main à l'oreille n'est pas vu. Cache des modèles : hf-ecoute-v3.
+  **Nom du compte** (9) : le petit logo existait mais il était caché par la barre du haut de l'appli TikTok (y = 118) et disait
+  « Petits.Dramas » : il affiche maintenant le compte (`marque.compte`, TIKTOK_COMPTE, sinon @petits.dramas), à y = 215 (FIL_Y), et
+  n'apparaît qu'après le titre (jamais par-dessus).
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.

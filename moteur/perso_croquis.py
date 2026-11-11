@@ -179,7 +179,7 @@ def dessiner(img, F, p):
                haut=T["haut"], c_haut=T["c_haut"], bas=T["bas"], c_bas=T["c_bas"], chaussures=T["chaussures"], cheveux=T["cheveux"],
                rayures=T["rayures"], teint=peau, profil=float(p.get("tq") or 0.0) * 0.6, extras=T["extras"], chapeau=T["chapeau"],
                ouv=ouv if ouv > 0.04 else None, cligne=min(1.0, cl), penche=g["penche"], fx=_fx(p, e), ecrase=g["ecrase"],
-               c_mains=T["c_mains"], montre=T["montre"])
+               c_mains=T["c_mains"], montre=T["montre"], formes=(p.get("doigts_g"), p.get("doigts_d")))
     if p.get("assis") and meuble == "lit": C.couette(zone, g["x"] - x0, p["y"] - y0, R, g["L_j"] * 0.55, g["l_tr"] * 2.6)
     if meuble == "comptoir" and not p.get("assis"): C.comptoir(zone, g["x"] - x0, p["y"] - y0, R, g["l_tr"] * 2.6, g["L_j"])   # accoudé au comptoir
     return tc, (R, R)

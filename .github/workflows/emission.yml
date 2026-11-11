@@ -270,8 +270,12 @@ jobs:
             ~/.cache/torch
             outils/emotion_voix
             outils/pose_landmarker_lite.task
-          key: hf-ecoute-v2
-          restore-keys: hf-whisper-turbo-v1
+            outils/face_landmarker.task
+            outils/gesture_recognizer.task
+          key: hf-ecoute-v3
+          restore-keys: |
+            hf-ecoute-v2
+            hf-whisper-turbo-v1
 
       - name: Lecteur TikTok (vidéo depuis une bande son)
         if: startsWith(inputs.theme, 'TIKTOK::') || inputs.filiere == 'tiktok' || contains(inputs.refaire, '|qui|') || contains(inputs.refaire, '|remarque|') || contains(inputs.refaire, '|casting|') || contains(inputs.refaire, '|compte_rendu')
