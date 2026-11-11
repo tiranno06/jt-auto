@@ -6408,40 +6408,36 @@
   "cadence": "rapide"
  },
  {
-  "moment": "soir",
+  "moment": "jour",
   "lieux": [
-   "voiture"
+   "parc"
   ],
   "source": "auteur+image",
-  "duree": 92.0,
+  "duree": 65.2,
   "plans": {
-   "large": 41
+   "large": 31
   },
   "mouvements": {
-   "fixe": 41
+   "fixe": 31
   },
   "costumes": {
-   "presentateur": "blouson",
-   "envoyee": "debardeur",
-   "invite": "tshirt"
+   "presentateur": "tshirt",
+   "envoyee": "tshirt"
   },
-  "figurants": 1,
-  "ambiances": [
-   "neon",
-   "poussiere"
-  ],
-  "controle": "Humoriste 8.4/10 :  | Réalisateur 9.4/10 :  | Directeur artistique 5.8/10 : 24.7 s Le décor de la voiture manque de détails pour renforcer l’ambiance (ex. : objets ou éléments typiques d’une voiture).",
-  "fichier": "2026-11-11_12h06_emission.mp4",
+  "figurants": 0,
+  "ambiances": [],
+  "controle": "Humoriste 9.4/10 :  | Réalisateur 10.0/10 :  | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.9/10 : ",
+  "fichier": "2026-11-11_12h03_emission.mp4",
   "cine": {
    "focus": false,
    "vertige": false,
-   "tiers": false,
-   "etalonnage": true,
+   "tiers": true,
+   "etalonnage": false,
    "profondeur": false,
    "grain": false,
-   "reflets": false,
+   "reflets": true,
    "son": true
   },
-  "cadence": "normal"
+  "cadence": "rapide"
  }
 ]

@@ -1,303 +1,1398 @@
 {
- "titre": "LE GRAND FRÈRE MENAÇANT",
- "sujet": "LE GRAND FRÈRE MENAÇANT",
- "ecran": "LE GRAND FRÈRE",
+ "titre": "APPROCHE RATÉE AU PARC",
+ "sujet": "APPROCHE RATÉE AU PARC",
+ "ecran": "APPROCHE RATÉE",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "POV : Son grand frère est dangereux",
- "question": "Tu aurais répondu au grand frère ou tu serais rentré direct ?",
+ "titre_accroche": "POV : Quand ton amie te sauve... mal",
+ "question": "Comment gérer une situation aussi gênante avec humour ?",
  "running_gag": "",
  "verite": "",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "Voilà, mais bon ma brave, t'as, t'as vu là-bas là?",
-   "_deb": 0.04,
-   "_fin": 1.84,
-   "d": "[confident] Voilà, mais bon ma brave, t'as, t'as vu là-bas là?",
+   "t": "Je t'ai vue là-bas, je te trouve vraiment belle. Il y a pas moyen d'avoir ton Snap, un truc comme ça genre.",
+   "_deb": 0.12,
+   "_fin": 3.44,
+   "objet": "telephone",
    "_mots": [
     [
-     "Voilà,",
+     "Je",
      0.0,
-     0.16
+     0.06
     ],
     [
-     "mais",
-     0.22,
-     0.3
+     "t'ai",
+     0.1,
+     0.22
     ],
     [
-     "bon",
-     0.32,
-     0.4
+     "vue",
+     0.24,
+     0.34
     ],
     [
-     "ma",
-     0.44,
-     0.5
+     "là-bas,",
+     0.38,
+     0.62
     ],
     [
-     "brave,",
-     0.54,
-     0.72
+     "je",
+     0.66,
+     0.74
     ],
     [
-     "t'as,",
+     "te",
+     0.74,
+     0.78
+    ],
+    [
+     "trouve",
      0.78,
-     0.86
+     0.96
     ],
     [
-     "t'as",
-     0.9,
-     1.0
-    ],
-    [
-     "vu",
-     1.02,
-     1.08
-    ],
-    [
-     "là-bas",
+     "vraiment",
      1.12,
-     1.36
+     1.24
     ],
     [
-     "là?",
-     1.4,
-     1.8
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Tu sais, il y a-",
-   "_deb": 1.86,
-   "_fin": 2.12,
-   "d": "[curious] Tu sais, il y a-",
-   "_mots": [
-    [
-     "Tu",
-     0.0,
-     0.02
+     "belle.",
+     1.28,
+     1.48
     ],
     [
-     "sais,",
-     0.04,
-     0.12
-    ],
-    [
-     "il",
-     0.16,
-     0.18
+     "Il",
+     1.52,
+     1.54
     ],
     [
      "y",
-     0.2,
-     0.2
+     1.56,
+     1.58
     ],
     [
-     "a-",
-     0.24,
-     0.26
+     "a",
+     1.6,
+     1.64
+    ],
+    [
+     "pas",
+     1.68,
+     1.78
+    ],
+    [
+     "moyen",
+     1.8,
+     1.92
+    ],
+    [
+     "d'avoir",
+     1.94,
+     2.12
+    ],
+    [
+     "ton",
+     2.16,
+     2.24
+    ],
+    [
+     "Snap,",
+     2.28,
+     2.52
+    ],
+    [
+     "un",
+     2.56,
+     2.6
+    ],
+    [
+     "truc",
+     2.64,
+     2.74
+    ],
+    [
+     "comme",
+     2.76,
+     2.88
+    ],
+    [
+     "ça",
+     2.94,
+     3.0
+    ],
+    [
+     "genre.",
+     3.12,
+     3.32
     ]
    ]
   },
   {
    "p": "envoyee",
-   "t": "Mon frère, il m'a envoyé un vocal.",
-   "_deb": 2.56,
-   "_fin": 3.86,
-   "d": "[worried] Mon frère, il m'a envoyé un vocal.",
+   "t": "Désolé, mais elle est pas intéressée, elle donne pas son Snap.",
+   "_deb": 3.72,
+   "_fin": 5.36,
    "_mots": [
     [
-     "Mon",
+     "Désolé,",
+     0.0,
+     0.22
+    ],
+    [
+     "mais",
+     0.28,
+     0.32
+    ],
+    [
+     "elle",
+     0.339,
+     0.4
+    ],
+    [
+     "est",
+     0.42,
+     0.5
+    ],
+    [
+     "pas",
+     0.52,
+     0.58
+    ],
+    [
+     "intéressée,",
+     0.62,
+     0.98
+    ],
+    [
+     "elle",
+     1.02,
+     1.02
+    ],
+    [
+     "donne",
+     1.02,
+     1.14
+    ],
+    [
+     "pas",
+     1.16,
+     1.24
+    ],
+    [
+     "son",
+     1.28,
+     1.34
+    ],
+    [
+     "Snap.",
+     1.38,
+     1.64
+    ]
+   ]
+  },
+  {
+   "p": "envoyee",
+   "t": "Pardon?",
+   "_deb": 5.56,
+   "_fin": 6.04,
+   "_mots": [
+    [
+     "Pardon?",
+     0.0,
+     0.48
+    ]
+   ]
+  },
+  {
+   "p": "envoyee",
+   "t": "Elle est pas intéressée, elle donne pas son Snap.",
+   "_deb": 6.08,
+   "_fin": 7.34,
+   "_mots": [
+    [
+     "Elle",
+     0.0,
+     0.06
+    ],
+    [
+     "est",
+     0.08,
+     0.14
+    ],
+    [
+     "pas",
+     0.16,
+     0.2
+    ],
+    [
+     "intéressée,",
+     0.22,
+     0.56
+    ],
+    [
+     "elle",
+     0.58,
+     0.6
+    ],
+    [
+     "donne",
+     0.62,
+     0.72
+    ],
+    [
+     "pas",
+     0.74,
+     0.82
+    ],
+    [
+     "son",
+     0.86,
+     0.92
+    ],
+    [
+     "Snap.",
+     0.98,
+     1.26
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Je crois t'as pas compris, je parle pas à toi, je parle à elle genre.",
+   "_deb": 7.5,
+   "_fin": 9.7,
+   "_mots": [
+    [
+     "Je",
+     0.0,
+     0.02
+    ],
+    [
+     "crois",
+     0.06,
+     0.14
+    ],
+    [
+     "t'as",
+     0.18,
+     0.28
+    ],
+    [
+     "pas",
+     0.3,
+     0.38
+    ],
+    [
+     "compris,",
+     0.42,
+     0.64
+    ],
+    [
+     "je",
+     0.66,
+     0.74
+    ],
+    [
+     "parle",
+     0.76,
+     0.94
+    ],
+    [
+     "pas",
+     0.98,
+     1.06
+    ],
+    [
+     "à",
+     1.1,
+     1.14
+    ],
+    [
+     "toi,",
+     1.2,
+     1.34
+    ],
+    [
+     "je",
+     1.4,
+     1.46
+    ],
+    [
+     "parle",
+     1.5,
+     1.58
+    ],
+    [
+     "à",
+     1.68,
+     1.74
+    ],
+    [
+     "elle",
+     1.8,
+     1.94
+    ],
+    [
+     "genre.",
+     1.98,
+     2.2
+    ]
+   ]
+  },
+  {
+   "p": "envoyee",
+   "t": "Ouais, mais je parle à ta place et je fais ce que je veux.",
+   "_deb": 9.74,
+   "_fin": 11.5,
+   "_mots": [
+    [
+     "Ouais,",
      0.0,
      0.1
     ],
     [
-     "frère,",
+     "mais",
+     0.14,
+     0.2
+    ],
+    [
+     "je",
+     0.28,
+     0.34
+    ],
+    [
+     "parle",
+     0.38,
+     0.5
+    ],
+    [
+     "à",
+     0.58,
+     0.6
+    ],
+    [
+     "ta",
+     0.64,
+     0.78
+    ],
+    [
+     "place",
+     0.8,
+     0.96
+    ],
+    [
+     "et",
+     1.06,
+     1.24
+    ],
+    [
+     "je",
+     1.28,
+     1.32
+    ],
+    [
+     "fais",
+     1.36,
+     1.44
+    ],
+    [
+     "ce",
+     1.46,
+     1.5
+    ],
+    [
+     "que",
+     1.52,
+     1.6
+    ],
+    [
+     "je",
+     1.62,
+     1.68
+    ],
+    [
+     "veux.",
+     1.7,
+     1.76
+    ]
+   ]
+  },
+  {
+   "p": "envoyee",
+   "t": "Donc maintenant, casse-toi s'il te plaît, merci.",
+   "_deb": 11.54,
+   "_fin": 12.66,
+   "_mots": [
+    [
+     "Donc",
+     0.0,
+     0.1
+    ],
+    [
+     "maintenant,",
      0.12,
      0.28
     ],
     [
-     "il",
+     "casse-toi",
      0.32,
+     0.54
+    ],
+    [
+     "s'il",
+     0.58,
+     0.62
+    ],
+    [
+     "te",
+     0.62,
+     0.7
+    ],
+    [
+     "plaît,",
+     0.72,
+     0.82
+    ],
+    [
+     "merci.",
+     0.86,
+     1.12
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Mais enfin, je crois il y a un problème là.",
+   "_deb": 12.88,
+   "_fin": 14.66,
+   "_mots": [
+    [
+     "Mais",
+     0.0,
+     0.08
+    ],
+    [
+     "enfin,",
+     0.14,
      0.36
     ],
     [
-     "m'a",
-     0.38,
-     0.44
+     "je",
+     0.44,
+     0.5
     ],
     [
-     "envoyé",
-     0.48,
-     0.6
+     "crois",
+     0.52,
+     0.62
     ],
     [
-     "un",
+     "il",
      0.64,
      0.68
     ],
     [
-     "vocal.",
-     0.7,
-     1.3
+     "y",
+     0.72,
+     0.72
+    ],
+    [
+     "a",
+     0.74,
+     0.78
+    ],
+    [
+     "un",
+     1.2,
+     1.26
+    ],
+    [
+     "problème",
+     1.3,
+     1.62
+    ],
+    [
+     "là.",
+     1.66,
+     1.78
     ]
    ]
   },
   {
    "p": "presentateur",
-   "t": "Attends, t'inquiète, écoute hein, ouais, t'inquiète. Voilà, t'es pas à la maison.",
-   "_deb": 3.94,
-   "_fin": 6.7,
-   "d": "[angry] Attends, t'inquiète, écoute hein, ouais, t'inquiète. Voilà, t'es pas à la maison.",
+   "t": "On est d'accord, il y a un problème là.",
+   "_deb": 15.08,
+   "_fin": 16.079,
    "_mots": [
     [
-     "Attends,",
+     "On",
      0.0,
-     0.28
+     0.04
     ],
     [
-     "t'inquiète,",
-     0.34,
-     0.6
+     "est",
+     0.08,
+     0.14
     ],
     [
-     "écoute",
-     0.66,
+     "d'accord,",
+     0.16,
+     0.36
+    ],
+    [
+     "il",
+     0.4,
+     0.44
+    ],
+    [
+     "y",
+     0.44,
+     0.44
+    ],
+    [
+     "a",
+     0.46,
+     0.46
+    ],
+    [
+     "un",
+     0.5,
+     0.56
+    ],
+    [
+     "problème",
+     0.58,
      0.86
     ],
     [
-     "hein,",
-     0.88,
-     0.96
+     "là.",
+     0.9,
+     0.999
+    ]
+   ]
+  },
+  {
+   "p": "envoyee",
+   "t": "Non, mais elle parle pas aux hommes. Genre euh, ça sert à rien de demander.",
+   "_deb": 16.379,
+   "_fin": 18.98,
+   "_mots": [
+    [
+     "Non,",
+     0.0,
+     0.101
     ],
     [
-     "ouais,",
-     1.0,
-     1.08
+     "mais",
+     0.141,
+     0.181
     ],
     [
-     "t'inquiète.",
-     1.12,
-     1.76
+     "elle",
+     0.181,
+     0.241
     ],
     [
-     "Voilà,",
-     1.82,
-     1.96
-    ],
-    [
-     "t'es",
-     2.02,
-     2.12
+     "parle",
+     0.281,
+     0.401
     ],
     [
      "pas",
-     2.18,
-     2.28
+     0.441,
+     0.541
+    ],
+    [
+     "aux",
+     0.561,
+     0.701
+    ],
+    [
+     "hommes.",
+     0.721,
+     1.101
+    ],
+    [
+     "Genre",
+     1.141,
+     1.341
+    ],
+    [
+     "euh,",
+     1.381,
+     1.601
+    ],
+    [
+     "ça",
+     1.741,
+     1.801
+    ],
+    [
+     "sert",
+     1.821,
+     1.921
     ],
     [
      "à",
-     2.3,
-     2.3
+     1.921,
+     1.921
     ],
     [
-     "la",
-     2.32,
-     2.4
-    ],
-    [
-     "maison.",
-     2.44,
-     2.76
-    ]
-   ],
-   "_calme": true
-  },
-  {
-   "p": "invite",
-   "t": "J'vais t'enculer. Rentre tout de suite, j'vais t'enculer.",
-   "_deb": 7.4,
-   "_fin": 10.82,
-   "d": "[furious] J'vais t'enculer. Rentre tout de suite, j'vais t'enculer.",
-   "_mots": [
-    [
-     "J'vais",
-     0.0,
-     0.3
-    ],
-    [
-     "t'enculer.",
-     0.34,
-     0.98
-    ],
-    [
-     "Rentre",
-     1.38,
-     1.68
-    ],
-    [
-     "tout",
-     1.68,
-     1.8
+     "rien",
+     1.941,
+     2.041
     ],
     [
      "de",
-     1.82,
-     1.86
+     2.121,
+     2.201
     ],
     [
-     "suite,",
-     1.9,
-     2.16
-    ],
-    [
-     "j'vais",
-     2.5,
-     2.8
-    ],
-    [
-     "t'enculer.",
-     2.86,
-     3.42
+     "demander.",
+     2.241,
+     2.601
     ]
-   ],
-   "_calme": true
+   ]
   },
   {
    "p": "presentateur",
-   "t": "C'est quoi ça?",
-   "_deb": 11.4,
-   "_fin": 11.84,
-   "d": "[shocked] C'est quoi ça?",
+   "t": "Qu'est-ce t'en sais, en fait?",
+   "_deb": 19.24,
+   "_fin": 20.2,
    "_mots": [
     [
-     "C'est",
+     "Qu'est-ce",
+     0.0,
+     0.14
+    ],
+    [
+     "t'en",
+     0.16,
+     0.3
+    ],
+    [
+     "sais,",
+     0.38,
+     0.48
+    ],
+    [
+     "en",
+     0.52,
+     0.58
+    ],
+    [
+     "fait?",
+     0.64,
+     0.96
+    ]
+   ]
+  },
+  {
+   "p": "envoyee",
+   "t": "Mais parce que je sais, c'est ma copine.",
+   "_deb": 20.24,
+   "_fin": 21.46,
+   "_mots": [
+    [
+     "Mais",
+     0.0,
+     0.08
+    ],
+    [
+     "parce",
+     0.1,
+     0.22
+    ],
+    [
+     "que",
+     0.24,
+     0.3
+    ],
+    [
+     "je",
+     0.32,
+     0.34
+    ],
+    [
+     "sais,",
+     0.36,
+     0.52
+    ],
+    [
+     "c'est",
+     0.58,
+     0.66
+    ],
+    [
+     "ma",
+     0.68,
+     0.76
+    ],
+    [
+     "copine.",
+     0.8,
+     1.22
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Et alors?",
+   "_deb": 21.82,
+   "_fin": 22.16,
+   "_mots": [
+    [
+     "Et",
+     0.0,
+     0.06
+    ],
+    [
+     "alors?",
+     0.1,
+     0.34
+    ]
+   ]
+  },
+  {
+   "p": "envoyee",
+   "t": "Genre c'est comme si tu parlais à moi.",
+   "_deb": 22.48,
+   "_fin": 23.42,
+   "_mots": [
+    [
+     "Genre",
+     0.0,
+     0.08
+    ],
+    [
+     "c'est",
+     0.12,
+     0.18
+    ],
+    [
+     "comme",
+     0.18,
+     0.26
+    ],
+    [
+     "si",
+     0.3,
+     0.34
+    ],
+    [
+     "tu",
+     0.36,
+     0.42
+    ],
+    [
+     "parlais",
+     0.46,
+     0.62
+    ],
+    [
+     "à",
+     0.66,
+     0.68
+    ],
+    [
+     "moi.",
+     0.74,
+     0.94
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Donc euh, elle est- Non, non, par contre non. Toi, tu m'intéresses pas du tout.",
+   "_deb": 23.48,
+   "_fin": 26.86,
+   "_mots": [
+    [
+     "Donc",
+     0.0,
+     0.14
+    ],
+    [
+     "euh,",
+     0.22,
+     0.48
+    ],
+    [
+     "elle",
+     0.54,
+     1.48
+    ],
+    [
+     "est-",
+     1.48,
+     1.52
+    ],
+    [
+     "Non,",
+     1.58,
+     1.66
+    ],
+    [
+     "non,",
+     1.7,
+     1.8
+    ],
+    [
+     "par",
+     1.84,
+     1.9
+    ],
+    [
+     "contre",
+     1.94,
+     2.14
+    ],
+    [
+     "non.",
+     2.18,
+     2.32
+    ],
+    [
+     "Toi,",
+     2.36,
+     2.56
+    ],
+    [
+     "tu",
+     2.6,
+     2.66
+    ],
+    [
+     "m'intéresses",
+     2.7,
+     3.02
+    ],
+    [
+     "pas",
+     3.04,
+     3.1
+    ],
+    [
+     "du",
+     3.14,
+     3.22
+    ],
+    [
+     "tout.",
+     3.24,
+     3.38
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Toi, j'en ai rien à foutre de toi. Donc s'il te plaît, mets-toi sur le côté et je vais parler avec ta copine maintenant.",
+   "_deb": 26.9,
+   "_fin": 30.7,
+   "_mots": [
+    [
+     "Toi,",
+     0.0,
+     0.18
+    ],
+    [
+     "j'en",
+     0.22,
+     0.32
+    ],
+    [
+     "ai",
+     0.34,
+     0.4
+    ],
+    [
+     "rien",
+     0.44,
+     0.54
+    ],
+    [
+     "à",
+     0.6,
+     0.62
+    ],
+    [
+     "foutre",
+     0.66,
+     0.78
+    ],
+    [
+     "de",
+     0.82,
+     0.9
+    ],
+    [
+     "toi.",
+     0.94,
+     1.1
+    ],
+    [
+     "Donc",
+     1.34,
+     1.44
+    ],
+    [
+     "s'il",
+     1.46,
+     1.52
+    ],
+    [
+     "te",
+     1.54,
+     1.6
+    ],
+    [
+     "plaît,",
+     1.64,
+     1.72
+    ],
+    [
+     "mets-toi",
+     1.78,
+     1.94
+    ],
+    [
+     "sur",
+     1.98,
+     2.04
+    ],
+    [
+     "le",
+     2.06,
+     2.1
+    ],
+    [
+     "côté",
+     2.14,
+     2.4
+    ],
+    [
+     "et",
+     2.66,
+     2.72
+    ],
+    [
+     "je",
+     2.74,
+     2.76
+    ],
+    [
+     "vais",
+     2.78,
+     2.84
+    ],
+    [
+     "parler",
+     2.88,
+     3.0
+    ],
+    [
+     "avec",
+     3.0,
+     3.08
+    ],
+    [
+     "ta",
+     3.12,
+     3.2
+    ],
+    [
+     "copine",
+     3.24,
+     3.48
+    ],
+    [
+     "maintenant.",
+     3.52,
+     3.8
+    ]
+   ]
+  },
+  {
+   "p": "envoyee",
+   "t": "Mais moi aussi, je m'en fous de toi, en fait.",
+   "_deb": 30.74,
+   "_fin": 32.28,
+   "_mots": [
+    [
+     "Mais",
      0.0,
      0.1
     ],
     [
-     "quoi",
+     "moi",
      0.14,
-     0.28
+     0.22
     ],
     [
-     "ça?",
-     0.34,
-     0.44
+     "aussi,",
+     0.24,
+     0.4
+    ],
+    [
+     "je",
+     0.46,
+     0.5
+    ],
+    [
+     "m'en",
+     0.54,
+     0.66
+    ],
+    [
+     "fous",
+     0.7,
+     0.78
+    ],
+    [
+     "de",
+     0.84,
+     0.94
+    ],
+    [
+     "toi,",
+     0.98,
+     1.06
+    ],
+    [
+     "en",
+     1.1,
+     1.18
+    ],
+    [
+     "fait.",
+     1.22,
+     1.54
     ]
    ]
   },
   {
    "p": "presentateur",
-   "t": "Comment il parle là?",
-   "_deb": 12.12,
-   "_fin": 12.78,
-   "d": "[annoyed] Comment il parle là?",
+   "t": "Je m'en fous.",
+   "_deb": 32.94,
+   "_fin": 33.1,
+   "_mots": [
+    [
+     "Je",
+     0.0,
+     0.04
+    ],
+    [
+     "m'en",
+     0.08,
+     0.14
+    ],
+    [
+     "fous.",
+     0.14,
+     0.16
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Tant mieux, tu t'en fous de moi, tant mieux. Mais encore heureux.",
+   "_deb": 34.26,
+   "_fin": 36.54,
+   "_mots": [
+    [
+     "Tant",
+     0.0,
+     0.1
+    ],
+    [
+     "mieux,",
+     0.14,
+     0.24
+    ],
+    [
+     "tu",
+     0.28,
+     0.34
+    ],
+    [
+     "t'en",
+     0.36,
+     0.44
+    ],
+    [
+     "fous",
+     0.48,
+     0.54
+    ],
+    [
+     "de",
+     0.58,
+     0.66
+    ],
+    [
+     "moi,",
+     0.7,
+     0.78
+    ],
+    [
+     "tant",
+     0.84,
+     0.94
+    ],
+    [
+     "mieux.",
+     0.98,
+     1.1
+    ],
+    [
+     "Mais",
+     1.12,
+     1.22
+    ],
+    [
+     "encore",
+     1.64,
+     1.86
+    ],
+    [
+     "heureux.",
+     1.9,
+     2.28
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Encore heureux, frérot. Maintenant, laisse-moi parler avec ta copine. C'est ta copine que je veux, c'est pas toi, frérot.",
+   "_deb": 36.6,
+   "_fin": 39.86,
+   "_mots": [
+    [
+     "Encore",
+     0.0,
+     0.26
+    ],
+    [
+     "heureux,",
+     0.28,
+     0.46
+    ],
+    [
+     "frérot.",
+     0.5,
+     0.7
+    ],
+    [
+     "Maintenant,",
+     0.72,
+     0.88
+    ],
+    [
+     "laisse-moi",
+     0.92,
+     1.12
+    ],
+    [
+     "parler",
+     1.16,
+     1.26
+    ],
+    [
+     "avec",
+     1.28,
+     1.34
+    ],
+    [
+     "ta",
+     1.38,
+     1.42
+    ],
+    [
+     "copine.",
+     1.5,
+     1.76
+    ],
+    [
+     "C'est",
+     1.8,
+     1.88
+    ],
+    [
+     "ta",
+     1.9,
+     2.0
+    ],
+    [
+     "copine",
+     2.04,
+     2.24
+    ],
+    [
+     "que",
+     2.26,
+     2.34
+    ],
+    [
+     "je",
+     2.38,
+     2.4
+    ],
+    [
+     "veux,",
+     2.44,
+     2.5
+    ],
+    [
+     "c'est",
+     2.54,
+     2.64
+    ],
+    [
+     "pas",
+     2.68,
+     2.78
+    ],
+    [
+     "toi,",
+     2.82,
+     2.92
+    ],
+    [
+     "frérot.",
+     2.96,
+     3.26
+    ]
+   ]
+  },
+  {
+   "p": "envoyee",
+   "t": "Mais ouais, mais elle te veut pas. En fait, on te veut pas, en fait.",
+   "_deb": 40.16,
+   "_fin": 42.52,
+   "_mots": [
+    [
+     "Mais",
+     0.0,
+     0.1
+    ],
+    [
+     "ouais,",
+     0.12,
+     0.22
+    ],
+    [
+     "mais",
+     0.28,
+     0.4
+    ],
+    [
+     "elle",
+     0.46,
+     0.54
+    ],
+    [
+     "te",
+     0.62,
+     0.76
+    ],
+    [
+     "veut",
+     0.82,
+     1.0
+    ],
+    [
+     "pas.",
+     1.04,
+     1.18
+    ],
+    [
+     "En",
+     1.22,
+     1.26
+    ],
+    [
+     "fait,",
+     1.3,
+     1.42
+    ],
+    [
+     "on",
+     1.46,
+     1.5
+    ],
+    [
+     "te",
+     1.56,
+     1.64
+    ],
+    [
+     "veut",
+     1.68,
+     1.8
+    ],
+    [
+     "pas,",
+     1.84,
+     1.9
+    ],
+    [
+     "en",
+     1.94,
+     1.98
+    ],
+    [
+     "fait.",
+     2.04,
+     2.36
+    ]
+   ]
+  },
+  {
+   "p": "envoyee",
+   "t": "On n'a pas envie de toi.",
+   "_deb": 42.56,
+   "_fin": 43.28,
+   "_mots": [
+    [
+     "On",
+     0.0,
+     0.02
+    ],
+    [
+     "n'a",
+     0.04,
+     0.12
+    ],
+    [
+     "pas",
+     0.16,
+     0.2
+    ],
+    [
+     "envie",
+     0.24,
+     0.38
+    ],
+    [
+     "de",
+     0.42,
+     0.52
+    ],
+    [
+     "toi.",
+     0.56,
+     0.72
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Comment ça, on frérot?",
+   "_deb": 43.62,
+   "_fin": 44.54,
    "_mots": [
     [
      "Comment",
@@ -305,855 +1400,279 @@
      0.14
     ],
     [
-     "il",
+     "ça,",
      0.18,
-     0.26
+     0.22
     ],
     [
-     "parle",
-     0.32,
-     0.5
-    ],
-    [
-     "là?",
-     0.54,
-     0.66
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "C'est quoi ça là?",
-   "_deb": 12.82,
-   "_fin": 13.34,
-   "d": "[indignant] C'est quoi ça là?",
-   "_mots": [
-    [
-     "C'est",
-     0.0,
-     0.06
-    ],
-    [
-     "quoi",
-     0.08,
-     0.18
-    ],
-    [
-     "ça",
-     0.26,
-     0.34
-    ],
-    [
-     "là?",
+     "on",
      0.38,
-     0.52
-    ]
-   ]
-  },
-  {
-   "p": "envoyee",
-   "t": "C'est mon grand frère, je sais pas ce qu'il veut.",
-   "_deb": 13.4,
-   "_fin": 14.8,
-   "d": "[resigned] C'est mon grand frère, je sais pas ce qu'il veut.",
-   "_mots": [
-    [
-     "C'est",
-     0.0,
-     0.1
-    ],
-    [
-     "mon",
-     0.16,
-     0.26
-    ],
-    [
-     "grand",
-     0.3,
-     0.44
-    ],
-    [
-     "frère,",
-     0.48,
-     0.66
-    ],
-    [
-     "je",
-     0.7,
-     0.72
-    ],
-    [
-     "sais",
-     0.74,
-     0.86
-    ],
-    [
-     "pas",
-     0.9,
-     1.0
-    ],
-    [
-     "ce",
-     1.04,
-     1.1
-    ],
-    [
-     "qu'il",
-     1.12,
-     1.26
-    ],
-    [
-     "veut.",
-     1.3,
-     1.4
-    ]
-   ]
-  },
-  {
-   "p": "envoyee",
-   "t": "Il m'empêche toujours de sortir. Y a personne qui lui dit rien.",
-   "_deb": 14.82,
-   "_fin": 16.8,
-   "d": "[complaining] Il m'empêche toujours de sortir. Y a personne qui lui dit rien.",
-   "_mots": [
-    [
-     "Il",
-     0.0,
-     0.0
-    ],
-    [
-     "m'empêche",
-     0.04,
-     0.32
-    ],
-    [
-     "toujours",
-     0.36,
-     0.54
-    ],
-    [
-     "de",
-     0.58,
-     0.62
-    ],
-    [
-     "sortir.",
-     0.66,
-     0.98
-    ],
-    [
-     "Y",
-     1.02,
-     1.04
-    ],
-    [
-     "a",
-     1.06,
-     1.14
-    ],
-    [
-     "personne",
-     1.18,
-     1.44
-    ],
-    [
-     "qui",
-     1.46,
-     1.54
-    ],
-    [
-     "lui",
-     1.58,
-     1.66
-    ],
-    [
-     "dit",
-     1.7,
-     1.8
-    ],
-    [
-     "rien.",
-     1.82,
-     1.98
-    ]
-   ]
-  },
-  {
-   "p": "envoyee",
-   "t": "Y a tout le monde qui a peur de lui.",
-   "_deb": 16.84,
-   "_fin": 17.68,
-   "d": "[scared] Y a tout le monde qui a peur de lui.",
-   "_mots": [
-    [
-     "Y",
-     0.0,
-     0.0
-    ],
-    [
-     "a",
-     0.02,
-     0.08
-    ],
-    [
-     "tout",
-     0.1,
-     0.18
-    ],
-    [
-     "le",
-     0.18,
-     0.2
-    ],
-    [
-     "monde",
-     0.22,
-     0.28
-    ],
-    [
-     "qui",
-     0.32,
-     0.36
-    ],
-    [
-     "a",
-     0.38,
-     0.42
-    ],
-    [
-     "peur",
-     0.46,
-     0.56
-    ],
-    [
-     "de",
-     0.6,
-     0.68
-    ],
-    [
-     "lui.",
-     0.72,
-     0.84
-    ]
-   ]
-  },
-  {
-   "p": "envoyee",
-   "t": "Ça me saoule.",
-   "_deb": 17.74,
-   "_fin": 18.18,
-   "d": "[exhausted] Ça me saoule.",
-   "_mots": [
-    [
-     "Ça",
-     0.0,
-     0.06
-    ],
-    [
-     "me",
-     0.08,
-     0.18
-    ],
-    [
-     "saoule.",
-     0.34,
-     0.44
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "C'est un malade comme il parle là. Attends, attends, attends je t'explique là.",
-   "_deb": 18.28,
-   "_fin": 20.76,
-   "d": "[cocky] C'est un malade comme il parle là. Attends, attends, attends je t'explique là.",
-   "_mots": [
-    [
-     "C'est",
-     0.0,
-     0.06
-    ],
-    [
-     "un",
-     0.16,
-     0.2
-    ],
-    [
-     "malade",
-     0.22,
-     0.5
-    ],
-    [
-     "comme",
-     0.52,
-     0.64
-    ],
-    [
-     "il",
-     0.66,
-     0.76
-    ],
-    [
-     "parle",
-     0.8,
-     0.96
-    ],
-    [
-     "là.",
-     0.96,
-     1.02
-    ],
-    [
-     "Attends,",
-     1.06,
-     1.44
-    ],
-    [
-     "attends,",
-     1.44,
-     1.58
-    ],
-    [
-     "attends",
-     1.68,
-     1.82
-    ],
-    [
-     "je",
-     1.98,
-     2.0
-    ],
-    [
-     "t'explique",
-     2.04,
-     2.34
-    ],
-    [
-     "là.",
-     2.36,
-     2.48
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "J'ai réservé une chambre, tu sais combien elle m'a coûté?",
-   "_deb": 21.24,
-   "_fin": 22.96,
-   "d": "[irritated] J'ai réservé une chambre, tu sais combien elle m'a coûté?",
-   "_mots": [
-    [
-     "J'ai",
-     0.0,
-     0.08
-    ],
-    [
-     "réservé",
-     0.12,
-     0.4
-    ],
-    [
-     "une",
-     0.42,
      0.48
     ],
     [
-     "chambre,",
+     "frérot?",
      0.52,
-     0.66
-    ],
-    [
-     "tu",
-     0.7,
-     0.76
-    ],
-    [
-     "sais",
-     0.78,
-     0.88
-    ],
-    [
-     "combien",
-     0.9,
-     1.06
-    ],
-    [
-     "elle",
-     1.06,
-     1.1
-    ],
-    [
-     "m'a",
-     1.14,
-     1.2
-    ],
-    [
-     "coûté?",
-     1.24,
-     1.72
+     0.92
     ]
    ]
   },
   {
    "p": "envoyee",
-   "t": "Ouais, je sais.",
-   "_deb": 23.02,
-   "_fin": 23.56,
-   "d": "[neutral] Ouais, je sais.",
+   "t": "On veut pas de toi parce qu'en fait, quand elle est en couple, moi aussi, je suis en couple.",
+   "_deb": 44.58,
+   "_fin": 46.64,
    "_mots": [
     [
-     "Ouais,",
+     "On",
      0.0,
-     0.12
+     0.04
     ],
     [
-     "je",
-     0.16,
-     0.18
-    ],
-    [
-     "sais.",
-     0.32,
-     0.54
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Tu vas pas niquer de la journée, lui, il va rien niquer du tout là hein.",
-   "_deb": 23.6,
-   "_fin": 25.76,
-   "d": "[determined] Tu vas pas niquer de la journée, lui, il va rien niquer du tout là hein.",
-   "_mots": [
-    [
-     "Tu",
-     0.0,
-     0.08
-    ],
-    [
-     "vas",
-     0.12,
-     0.26
+     "veut",
+     0.06,
+     0.14
     ],
     [
      "pas",
-     0.3,
-     0.38
-    ],
-    [
-     "niquer",
-     0.42,
-     0.62
+     0.18,
+     0.24
     ],
     [
      "de",
-     0.64,
-     0.66
-    ],
-    [
-     "la",
-     0.68,
-     0.74
-    ],
-    [
-     "journée,",
-     0.78,
-     1.02
-    ],
-    [
-     "lui,",
-     1.04,
-     1.12
-    ],
-    [
-     "il",
-     1.14,
-     1.14
-    ],
-    [
-     "va",
-     1.16,
-     1.22
-    ],
-    [
-     "rien",
-     1.28,
-     1.44
-    ],
-    [
-     "niquer",
-     1.46,
-     1.64
-    ],
-    [
-     "du",
-     1.66,
-     1.76
-    ],
-    [
-     "tout",
-     1.8,
-     1.9
-    ],
-    [
-     "là",
-     1.94,
-     2.02
-    ],
-    [
-     "hein.",
-     2.04,
-     2.16
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Attends, tends, tends-moi ton téléphone là. C'est quoi ce-- Oh frérot, comment tu parles à ta sœur?",
-   "_deb": 26.0,
-   "_fin": 29.7,
-   "d": "[arrogant] Attends, tends, tends-moi ton téléphone là. C'est quoi ce-- Oh frérot, comment tu parles à ta sœur?",
-   "objet": "telephone",
-   "_mots": [
-    [
-     "Attends,",
-     0.0,
-     0.2
-    ],
-    [
-     "tends,",
      0.26,
      0.3
     ],
     [
-     "tends",
-     0.34,
-     0.4
-    ],
-    [
-     "moi",
-     0.44,
-     0.5
-    ],
-    [
-     "ton",
-     0.52,
-     0.6
-    ],
-    [
-     "téléphone",
-     0.64,
-     0.9
-    ],
-    [
-     "là.",
-     0.94,
-     0.98
-    ],
-    [
-     "C'est",
-     1.02,
-     1.08
-    ],
-    [
-     "quoi",
-     1.1,
-     1.2
-    ],
-    [
-     "ce--",
-     1.26,
-     1.32
-    ],
-    [
-     "Oh",
-     2.18,
-     2.22
-    ],
-    [
-     "frérot,",
-     2.26,
-     2.5
-    ],
-    [
-     "comment",
-     2.54,
-     2.7
-    ],
-    [
-     "tu",
-     2.72,
-     2.8
-    ],
-    [
-     "parles",
-     2.84,
-     2.96
-    ],
-    [
-     "à",
-     3.0,
-     3.02
-    ],
-    [
-     "ta",
-     3.06,
-     3.14
-    ],
-    [
-     "sœur?",
-     3.18,
-     3.7
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Oh t'es une vraie salope toi hein. Viens dire ça à un homme.",
-   "_deb": 29.74,
-   "_fin": 32.1,
-   "d": "[aggressive] Oh t'es une vraie salope toi hein. Viens dire ça à un homme.",
-   "_mots": [
-    [
-     "Oh",
-     0.0,
-     0.06
-    ],
-    [
-     "t'es",
-     0.1,
-     0.18
-    ],
-    [
-     "une",
-     0.18,
-     0.26
-    ],
-    [
-     "vraie",
-     0.3,
-     0.56
-    ],
-    [
-     "salope",
-     0.62,
-     0.92
-    ],
-    [
      "toi",
-     0.98,
-     1.1
+     0.34,
+     0.42
     ],
     [
-     "hein.",
-     1.1,
-     1.56
-    ],
-    [
-     "Viens",
-     1.58,
-     1.72
-    ],
-    [
-     "dire",
-     1.76,
-     1.9
-    ],
-    [
-     "ça",
-     1.96,
-     2.02
-    ],
-    [
-     "à",
-     2.08,
-     2.1
-    ],
-    [
-     "un",
-     2.12,
-     2.16
-    ],
-    [
-     "homme.",
-     2.2,
-     2.36
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Vas-y viens, viens me dire ça à moi. Toi, tu parles comme ça à ta sœur, à une femme.",
-   "_deb": 32.38,
-   "_fin": 35.38,
-   "d": "[provocative] Vas-y viens, viens me dire ça à moi. Toi, tu parles comme ça à ta sœur, à une femme.",
-   "_mots": [
-    [
-     "Vas-y",
-     0.0,
-     0.22
-    ],
-    [
-     "viens,",
-     0.239,
-     0.4
-    ],
-    [
-     "viens",
-     0.56,
-     0.64
-    ],
-    [
-     "me",
-     0.68,
-     0.72
-    ],
-    [
-     "dire",
-     0.76,
-     0.88
-    ],
-    [
-     "ça",
-     0.94,
-     1.02
-    ],
-    [
-     "à",
-     1.04,
-     1.06
-    ],
-    [
-     "moi.",
-     1.1,
-     1.36
-    ],
-    [
-     "Toi,",
-     1.56,
-     1.68
-    ],
-    [
-     "tu",
-     1.72,
-     1.82
-    ],
-    [
-     "parles",
-     1.84,
-     1.96
-    ],
-    [
-     "comme",
-     1.98,
-     2.08
-    ],
-    [
-     "ça",
-     2.14,
-     2.22
-    ],
-    [
-     "à",
-     2.22,
-     2.24
-    ],
-    [
-     "ta",
-     2.28,
-     2.36
-    ],
-    [
-     "sœur,",
-     2.42,
-     2.52
-    ],
-    [
-     "à",
-     2.58,
-     2.6
-    ],
-    [
-     "une",
-     2.64,
-     2.72
-    ],
-    [
-     "femme.",
-     2.78,
-     3.0
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Sale salope que t'es va.",
-   "_deb": 35.78,
-   "_fin": 36.76,
-   "d": "[insulting] Sale salope que t'es va.",
-   "_mots": [
-    [
-     "Sale",
-     0.0,
-     0.14
-    ],
-    [
-     "salope",
-     0.22,
-     0.44
-    ],
-    [
-     "que",
+     "parce",
      0.48,
-     0.58
+     0.66
     ],
     [
-     "t'es",
-     0.64,
+     "qu'en",
+     0.68,
      0.78
     ],
     [
-     "va.",
+     "fait,",
      0.82,
-     0.98
+     0.92
+    ],
+    [
+     "quand",
+     0.96,
+     1.04
+    ],
+    [
+     "elle",
+     1.08,
+     1.12
+    ],
+    [
+     "est",
+     1.14,
+     1.18
+    ],
+    [
+     "en",
+     1.2,
+     1.24
+    ],
+    [
+     "couple,",
+     1.28,
+     1.38
+    ],
+    [
+     "moi",
+     1.4,
+     1.44
+    ],
+    [
+     "aussi,",
+     1.46,
+     1.56
+    ],
+    [
+     "je",
+     1.6,
+     1.62
+    ],
+    [
+     "suis",
+     1.64,
+     1.7
+    ],
+    [
+     "en",
+     1.72,
+     1.8
+    ],
+    [
+     "couple.",
+     1.84,
+     2.06
     ]
    ]
   },
   {
-   "p": "presentateur",
-   "t": "C'est quoi ça là?",
-   "_deb": 37.88,
-   "_fin": 38.74,
-   "d": "[disgusted] C'est quoi ça là?",
+   "p": "envoyee",
+   "t": "Donc je dois valider ce mec aussi.",
+   "_deb": 46.68,
+   "_fin": 47.84,
    "_mots": [
     [
-     "C'est",
+     "Donc",
      0.0,
      0.1
     ],
     [
-     "quoi",
-     0.14,
-     0.26
+     "je",
+     0.12,
+     0.18
     ],
     [
-     "ça",
+     "dois",
+     0.22,
+     0.3
+    ],
+    [
+     "valider",
      0.32,
-     0.4
+     0.6
     ],
     [
-     "là?",
-     0.44,
+     "ce",
+     0.64,
+     0.72
+    ],
+    [
+     "mec",
+     0.76,
      0.86
+    ],
+    [
+     "aussi.",
+     0.92,
+     1.16
     ]
    ]
   },
   {
    "p": "presentateur",
-   "t": "Et dans ton entourage, y a personne qui te dit rien.",
-   "_deb": 38.78,
-   "_fin": 40.16,
-   "d": "[incredulous] Et dans ton entourage, y a personne qui te dit rien.",
+   "t": "Donc en fait, je me moque mais qu'elle, on a un couple genre.",
+   "_deb": 47.98,
+   "_fin": 49.72,
+   "_mots": [
+    [
+     "Donc",
+     0.0,
+     0.08
+    ],
+    [
+     "en",
+     0.14,
+     0.2
+    ],
+    [
+     "fait,",
+     0.22,
+     0.4
+    ],
+    [
+     "je",
+     0.42,
+     0.46
+    ],
+    [
+     "me",
+     0.5,
+     0.58
+    ],
+    [
+     "moque",
+     0.6,
+     0.74
+    ],
+    [
+     "mais",
+     0.76,
+     0.86
+    ],
+    [
+     "qu'elle,",
+     0.88,
+     1.02
+    ],
+    [
+     "on",
+     1.06,
+     1.1
+    ],
+    [
+     "a",
+     1.16,
+     1.18
+    ],
+    [
+     "un",
+     1.2,
+     1.26
+    ],
+    [
+     "couple",
+     1.3,
+     1.5
+    ],
+    [
+     "genre.",
+     1.52,
+     1.74
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Allez, essaie de monter toi.",
+   "_deb": 50.0,
+   "_fin": 50.8,
+   "_mots": [
+    [
+     "Allez,",
+     0.0,
+     0.12
+    ],
+    [
+     "essaie",
+     0.2,
+     0.34
+    ],
+    [
+     "de",
+     0.36,
+     0.4
+    ],
+    [
+     "monter",
+     0.42,
+     0.62
+    ],
+    [
+     "toi.",
+     0.64,
+     0.8
+    ]
+   ]
+  },
+  {
+   "p": "envoyee",
+   "t": "Et t'es pas notre style, en fait. Mais en plus, t'es, t'es grave moche genre euh...",
+   "_deb": 50.86,
+   "_fin": 53.78,
    "_mots": [
     [
      "Et",
@@ -1161,1024 +1680,272 @@
      0.04
     ],
     [
-     "dans",
+     "t'es",
      0.08,
      0.16
     ],
     [
-     "ton",
-     0.18,
-     0.3
+     "pas",
+     0.2,
+     0.26
     ],
     [
-     "entourage,",
+     "notre",
      0.32,
-     0.58
+     0.52
     ],
     [
-     "y",
+     "style,",
      0.6,
-     0.62
-    ],
-    [
-     "a",
-     0.64,
-     0.68
-    ],
-    [
-     "personne",
-     0.7,
-     0.92
-    ],
-    [
-     "qui",
-     0.94,
-     1.02
-    ],
-    [
-     "te",
-     1.04,
-     1.06
-    ],
-    [
-     "dit",
-     1.08,
-     1.14
-    ],
-    [
-     "rien.",
-     1.18,
-     1.38
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Il te parle comme ça, il te laisse pas sortir.",
-   "_deb": 40.36,
-   "_fin": 41.7,
-   "d": "[agitated] Il te parle comme ça, il te laisse pas sortir.",
-   "_mots": [
-    [
-     "Il",
-     0.0,
-     0.06
-    ],
-    [
-     "te",
-     0.06,
-     0.12
-    ],
-    [
-     "parle",
-     0.14,
-     0.28
-    ],
-    [
-     "comme",
-     0.32,
-     0.46
-    ],
-    [
-     "ça,",
-     0.52,
-     0.6
-    ],
-    [
-     "il",
-     0.66,
-     0.7
-    ],
-    [
-     "te",
-     0.74,
      0.76
     ],
     [
-     "laisse",
-     0.78,
-     0.9
-    ],
-    [
-     "pas",
-     0.94,
-     1.02
-    ],
-    [
-     "sortir.",
-     1.06,
-     1.34
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Y a personne qui te dirait dans ton entourage.",
-   "_deb": 41.72,
-   "_fin": 42.86,
-   "d": "[baffled] Y a personne qui te dirait dans ton entourage.",
-   "_mots": [
-    [
-     "Y",
-     0.0,
-     0.04
-    ],
-    [
-     "a",
-     0.04,
-     0.06
-    ],
-    [
-     "personne",
-     0.08,
-     0.24
-    ],
-    [
-     "qui",
-     0.26,
-     0.34
-    ],
-    [
-     "te",
-     0.36,
-     0.36
-    ],
-    [
-     "dirait",
-     0.38,
-     0.52
-    ],
-    [
-     "dans",
-     0.56,
-     0.62
-    ],
-    [
-     "ton",
-     0.66,
-     0.74
-    ],
-    [
-     "entourage.",
-     0.78,
-     1.14
-    ]
-   ]
-  },
-  {
-   "p": "envoyee",
-   "t": "Ça me saoule, je t'ai dit. Y a toute ma famille qui a peur de ce trou.",
-   "_deb": 43.02,
-   "_fin": 45.04,
-   "d": "[stressed] Ça me saoule, je t'ai dit. Y a toute ma famille qui a peur de ce trou.",
-   "_mots": [
-    [
-     "Ça",
-     0.0,
-     0.06
-    ],
-    [
-     "me",
-     0.08,
-     0.14
-    ],
-    [
-     "saoule,",
-     0.18,
-     0.32
-    ],
-    [
-     "je",
-     0.32,
-     0.34
-    ],
-    [
-     "t'ai",
-     0.38,
-     0.68
-    ],
-    [
-     "dit.",
-     0.72,
-     0.74
-    ],
-    [
-     "Y",
-     0.76,
-     0.8
-    ],
-    [
-     "a",
+     "en",
      0.8,
-     0.82
+     0.84
     ],
     [
-     "toute",
+     "fait.",
      0.88,
-     0.96
-    ],
-    [
-     "ma",
-     0.98,
      1.06
     ],
     [
-     "famille",
-     1.1,
-     1.28
+     "Mais",
+     1.12,
+     1.22
     ],
     [
-     "qui",
-     1.32,
-     1.36
+     "en",
+     1.26,
+     1.3
     ],
     [
-     "a",
-     1.4,
+     "plus,",
+     1.34,
      1.44
     ],
     [
-     "peur",
-     1.46,
-     1.56
+     "t'es,",
+     1.48,
+     1.6
     ],
     [
-     "de",
-     1.58,
-     1.62
-    ],
-    [
-     "Citro.",
-     1.62,
-     2.02
-    ]
-   ]
-  },
-  {
-   "p": "envoyee",
-   "t": "Ça me saoule.",
-   "_deb": 45.1,
-   "_fin": 45.74,
-   "d": "[depressed] Ça me saoule.",
-   "_mots": [
-    [
-     "Ça",
-     0.0,
-     0.06
-    ],
-    [
-     "me",
-     0.1,
-     0.2
-    ],
-    [
-     "saoule.",
-     0.28,
-     0.64
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "T'as dit quoi?",
-   "_deb": 47.24,
-   "_fin": 48.34,
-   "d": "[confused] T'as dit quoi?",
-   "_mots": [
-    [
-     "T'as",
-     0.0,
-     0.06
-    ],
-    [
-     "dit",
-     0.08,
-     0.14
-    ],
-    [
-     "quoi?",
-     0.16,
-     1.1
-    ]
-   ]
-  },
-  {
-   "p": "envoyee",
-   "t": "Euh toute ma famille qui a peur de mon frère.",
-   "_deb": 48.42,
-   "_fin": 50.42,
-   "d": "[nervous] Euh toute ma famille qui a peur de mon frère.",
-   "_mots": [
-    [
-     "Euh",
-     0.0,
-     0.2
-    ],
-    [
-     "toute",
-     0.24,
-     0.36
-    ],
-    [
-     "ma",
-     0.4,
-     0.48
-    ],
-    [
-     "famille",
-     0.54,
-     1.02
-    ],
-    [
-     "qui",
-     1.22,
-     1.28
-    ],
-    [
-     "a",
-     1.3,
-     1.36
-    ],
-    [
-     "peur",
-     1.4,
-     1.5
-    ],
-    [
-     "de",
-     1.52,
-     1.52
-    ],
-    [
-     "mon",
-     1.56,
-     1.66
-    ],
-    [
-     "frère.",
-     1.7,
-     2.0
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Y a toute- Mais oh!",
-   "_deb": 50.54,
-   "_fin": 51.64,
-   "d": "[outraged] Y a toute- Mais oh!",
-   "_mots": [
-    [
-     "Y",
-     0.0,
-     0.04
-    ],
-    [
-     "a",
-     0.06,
-     0.1
-    ],
-    [
-     "toute-",
-     0.14,
-     0.52
-    ],
-    [
-     "Mais",
-     0.56,
-     0.7
-    ],
-    [
-     "oh!",
-     0.76,
-     1.1
-    ]
-   ]
-  },
-  {
-   "p": "envoyee",
-   "t": "Bah oui.",
-   "_deb": 51.68,
-   "_fin": 52.06,
-   "d": "[blunt] Bah oui.",
-   "_mots": [
-    [
-     "Bah",
-     0.0,
-     0.14
-    ],
-    [
-     "oui.",
-     0.18,
-     0.38
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Mais tends tends tends-moi ton téléphone, il faut que je regarde mon vocal là.",
-   "_deb": 52.08,
-   "_fin": 54.32,
-   "d": "[impatient] Mais tends tends tends-moi ton téléphone, il faut que je regarde mon vocal là.",
-   "objet": "telephone",
-   "_mots": [
-    [
-     "Mais",
-     0.0,
-     0.06
-    ],
-    [
-     "tends",
-     0.1,
-     0.18
-    ],
-    [
-     "tends",
-     0.22,
-     0.3
-    ],
-    [
-     "tends",
-     0.34,
-     0.42
-    ],
-    [
-     "moi",
-     0.44,
-     0.52
-    ],
-    [
-     "ton",
-     0.56,
-     0.62
-    ],
-    [
-     "téléphone,",
-     0.64,
-     0.82
-    ],
-    [
-     "il",
-     0.86,
-     0.86
-    ],
-    [
-     "faut",
-     0.88,
-     0.96
-    ],
-    [
-     "que",
-     0.98,
-     1.08
-    ],
-    [
-     "je",
-     1.1,
-     1.12
-    ],
-    [
-     "regarde",
-     1.16,
-     1.24
-    ],
-    [
-     "mon",
-     1.26,
-     1.34
-    ],
-    [
-     "vocal",
-     1.36,
-     1.66
-    ],
-    [
-     "là.",
-     1.7,
-     2.24
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "C'est quoi ce--",
-   "_deb": 54.36,
-   "_fin": 54.68,
-   "d": "[tense] C'est quoi ce--",
-   "_mots": [
-    [
-     "C'est",
-     0.0,
-     0.08
-    ],
-    [
-     "quoi",
-     0.1,
-     0.2
-    ],
-    [
-     "ce--",
-     0.28,
-     0.32
-    ]
-   ]
-  },
-  {
-   "p": "presentateur",
-   "t": "Il a répondu?",
-   "_deb": 57.2,
-   "_fin": 57.8,
-   "d": "[anxious] Il a répondu?",
-   "_mots": [
-    [
-     "Il",
-     0.0,
-     0.06
-    ],
-    [
-     "a",
-     0.08,
-     0.1
-    ],
-    [
-     "répondu?",
-     0.14,
-     0.6
-    ]
-   ]
-  },
-  {
-   "p": "envoyee",
-   "t": "Bah ouais, tu verras.",
-   "_deb": 57.84,
-   "_fin": 58.96,
-   "d": "[grim] Bah ouais, tu verras.",
-   "_mots": [
-    [
-     "Bah",
-     0.0,
-     0.36
-    ],
-    [
-     "ouais,",
-     0.36,
-     0.5
-    ],
-    [
-     "tu",
-     0.58,
-     0.68
-    ],
-    [
-     "verras.",
-     0.72,
-     1.12
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "T'es avec ma sœur et en plus, tu me menaces.",
-   "_deb": 60.72,
-   "_fin": 63.8,
-   "d": "[sinister] T'es avec ma sœur et en plus, tu me menaces.",
-   "_mots": [
-    [
-     "T'es",
-     0.0,
-     0.14
-    ],
-    [
-     "avec",
-     0.22,
-     0.48
-    ],
-    [
-     "ma",
-     0.52,
-     0.68
-    ],
-    [
-     "sœur",
-     0.74,
-     1.08
-    ],
-    [
-     "et",
+     "t'es",
      1.8,
      1.88
     ],
     [
-     "en",
-     1.94,
-     2.02
+     "grave",
+     1.92,
+     2.12
     ],
     [
-     "plus,",
-     2.06,
-     2.26
+     "moche",
+     2.2,
+     2.4
     ],
     [
-     "tu",
-     2.32,
-     2.42
-    ],
-    [
-     "me",
-     2.5,
-     2.52
-    ],
-    [
-     "menaces.",
-     2.52,
-     3.08
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Mohamed, j'ai reconnu ta voix, sale fils de pute.",
-   "_deb": 64.5,
-   "_fin": 68.4,
-   "d": "[threatening] Mohamed, j'ai reconnu ta voix, sale fils de pute.",
-   "_mots": [
-    [
-     "Mohamed,",
-     0.0,
-     0.5
-    ],
-    [
-     "j'ai",
-     1.3,
-     1.48
-    ],
-    [
-     "reconnu",
-     1.9,
-     2.02
-    ],
-    [
-     "ta",
-     2.08,
-     2.22
-    ],
-    [
-     "voix,",
-     2.28,
+     "genre",
+     2.42,
      2.58
     ],
     [
-     "sale",
-     3.16,
-     3.26
-    ],
-    [
-     "fils",
-     3.4,
-     3.76
-    ],
-    [
-     "de",
-     3.76,
-     3.76
-    ],
-    [
-     "pute.",
-     3.76,
-     3.9
+     "euh...",
+     2.78,
+     2.92
     ]
    ]
   },
   {
-   "p": "invite",
-   "t": "Que les couilles de violeurs sortent aussi de ce trou.",
-   "_deb": 69.56,
-   "_fin": 71.16,
-   "d": "[creepy] Que les couilles de violeurs sortent aussi de ce trou.",
+   "p": "presentateur",
+   "t": "Là, tu me critiques là?",
+   "_deb": 54.66,
+   "_fin": 55.56,
    "_mots": [
     [
-     "Que",
+     "Là,",
      0.0,
      0.08
     ],
     [
-     "les",
-     0.12,
-     0.24
+     "tu",
+     0.14,
+     0.2
     ],
     [
-     "couilles",
-     0.28,
-     0.44
+     "me",
+     0.22,
+     0.28
     ],
     [
-     "de",
-     0.46,
-     0.52
+     "critiques",
+     0.32,
+     0.56
     ],
     [
-     "violeurs",
-     0.56,
-     0.62
+     "là?",
+     0.6,
+     0.9
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Ouais. Frérot, tu ressembles à Big Mom dans One Piece, mon gars.",
+   "_deb": 55.64,
+   "_fin": 57.64,
+   "_mots": [
+    [
+     "Ouais.",
+     0.0,
+     0.18
     ],
     [
-     "sortent",
-     0.66,
+     "Frérot,",
+     0.2,
+     0.46
+    ],
+    [
+     "tu",
+     0.52,
+     0.56
+    ],
+    [
+     "ressembles",
+     0.6,
+     0.8
+    ],
+    [
+     "à",
+     0.84,
      0.88
     ],
     [
-     "aussi",
-     0.94,
-     1.08
+     "Big",
+     0.92,
+     1.04
     ],
     [
-     "de",
-     1.12,
-     1.28
+     "Mom",
+     1.08,
+     1.22
     ],
     [
-     "ce",
-     1.28,
-     1.3
+     "dans",
+     1.24,
+     1.32
     ],
     [
-     "trou.",
-     1.34,
-     1.6
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Qu'en plus, tu me menaces. Je préfère que tu parles.",
-   "_deb": 71.48,
-   "_fin": 74.56,
-   "d": "[chilling] Qu'en plus, tu me menaces. Je préfère que tu parles.",
-   "_mots": [
-    [
-     "Qu'en",
-     0.0,
-     0.22
+     "One",
+     1.36,
+     1.52
     ],
     [
-     "plus,",
-     0.26,
-     0.4
-    ],
-    [
-     "tu",
-     0.46,
-     0.54
-    ],
-    [
-     "me",
-     0.6,
-     0.62
-    ],
-    [
-     "menaces.",
-     0.62,
-     1.68
-    ],
-    [
-     "Je",
-     1.96,
-     2.02
-    ],
-    [
-     "préfère",
-     2.06,
-     2.48
-    ],
-    [
-     "que",
-     2.54,
-     2.6
-    ],
-    [
-     "tu",
-     2.64,
-     2.66
-    ],
-    [
-     "parles.",
-     2.72,
-     3.08
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Oui, ça, ça me plaît. Je vais juste permettre que tu parles comme ça, pour pas que tu souffres.",
-   "_deb": 74.9,
-   "_fin": 78.96,
-   "d": "[dark] Oui, ça, ça me plaît. Je vais juste permettre que tu parles comme ça, pour pas que tu souffres.",
-   "_mots": [
-    [
-     "Oui,",
-     0.0,
-     0.16
-    ],
-    [
-     "ça,",
-     0.22,
-     0.3
-    ],
-    [
-     "ça",
-     0.38,
-     0.44
-    ],
-    [
-     "me",
-     0.48,
-     0.54
-    ],
-    [
-     "plaît.",
-     0.58,
-     0.82
-    ],
-    [
-     "Je",
-     1.1,
-     1.18
-    ],
-    [
-     "vais",
-     1.2,
-     1.36
-    ],
-    [
-     "juste",
-     1.42,
-     1.58
-    ],
-    [
-     "permettre",
-     1.62,
-     1.98
-    ],
-    [
-     "que",
-     2.22,
-     2.24
-    ],
-    [
-     "tu",
-     2.24,
-     2.24
-    ],
-    [
-     "parles",
-     2.24,
-     2.86
-    ],
-    [
-     "comme",
-     3.1,
-     3.16
-    ],
-    [
-     "ça,",
-     3.16,
-     3.2
-    ],
-    [
-     "pour",
-     3.26,
-     3.38
-    ],
-    [
-     "pas",
-     3.44,
-     3.54
-    ],
-    [
-     "que",
-     3.58,
-     3.68
-    ],
-    [
-     "tu",
-     3.68,
-     3.68
-    ],
-    [
-     "souffres.",
-     3.74,
-     4.06
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Mais toi, toi, tu auras une mort lente et douloureuse.",
-   "_deb": 79.28,
-   "_fin": 84.4,
-   "d": "[terrifying] Mais toi, toi, tu auras une mort lente et douloureuse.",
-   "_mots": [
-    [
-     "Mais",
-     0.0,
-     0.14
-    ],
-    [
-     "toi,",
-     0.2,
-     1.02
-    ],
-    [
-     "toi,",
-     1.1,
-     1.56
-    ],
-    [
-     "tu",
-     1.96,
-     2.0
-    ],
-    [
-     "auras",
-     2.12,
-     2.18
-    ],
-    [
-     "une",
-     2.22,
-     2.3
-    ],
-    [
-     "mort",
-     2.44,
-     2.68
-    ],
-    [
-     "lente",
-     3.14,
-     3.22
-    ],
-    [
-     "et",
-     3.64,
-     3.82
-    ],
-    [
-     "douloureuse.",
-     3.88,
-     5.12
-    ]
-   ]
-  },
-  {
-   "p": "envoyee",
-   "t": "Voilà, voilà mon frère, voilà.",
-   "_deb": 86.14,
-   "_fin": 87.6,
-   "d": "[traumatized] Voilà, voilà mon frère, voilà.",
-   "chute": true,
-   "_mots": [
-    [
-     "Voilà,",
-     0.0,
-     0.26
-    ],
-    [
-     "voilà",
-     0.44,
-     0.62
+     "Piece,",
+     1.56,
+     1.7
     ],
     [
      "mon",
-     0.68,
-     0.78
+     1.76,
+     1.84
     ],
     [
-     "frère,",
-     0.82,
-     1.14
+     "gars.",
+     1.86,
+     2.0
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "T'es grave laid, genre vraiment, t'es grave-- n'ouvre pas ta gueule, en fait.",
+   "_deb": 57.68,
+   "_fin": 59.94,
+   "chute": true,
+   "_mots": [
+    [
+     "T'es",
+     0.0,
+     0.08
     ],
     [
-     "voilà.",
-     1.2,
-     1.46
+     "grave",
+     0.14,
+     0.28
+    ],
+    [
+     "laid,",
+     0.3,
+     0.34
+    ],
+    [
+     "genre",
+     0.48,
+     0.64
+    ],
+    [
+     "vraiment,",
+     0.8,
+     0.96
+    ],
+    [
+     "t'es",
+     1.02,
+     1.1
+    ],
+    [
+     "grave--",
+     1.14,
+     1.28
+    ],
+    [
+     "n'ouvre",
+     1.36,
+     1.5
+    ],
+    [
+     "pas",
+     1.54,
+     1.62
+    ],
+    [
+     "ta",
+     1.66,
+     1.74
+    ],
+    [
+     "gueule,",
+     1.84,
+     1.96
+    ],
+    [
+     "en",
+     2.0,
+     2.06
+    ],
+    [
+     "fait.",
+     2.1,
+     2.26
     ]
    ]
   }
  ],
  "bandeau": [],
  "gag": null,
- "legende": "Il a voulu faire le bonhomme face au grand frère... grosse erreur !",
+ "legende": "Une tentative d'approche qui tourne au fiasco grâce à une amie très... directe.",
  "hashtags": [
   "petitsdramas",
+  "approche",
   "humour",
-  "couple",
-  "pov",
-  "animation",
-  "tiktok"
+  "genant",
+  "amies",
+  "parc",
+  "replique"
  ],
  "sources": [
-  "https://www.tiktok.com/@yan_animation0/video/7630831879918193942"
+  "https://www.tiktok.com/@vignianimation/video/7705159226645155104"
  ],
  "decoupage": [
   {
@@ -2214,442 +1981,604 @@
     27,
     28,
     29,
-    30,
-    31,
-    32,
-    33,
-    34,
-    35,
-    36,
-    37,
-    38,
-    39,
-    40
+    30
    ],
    "lieu": "",
    "son": "",
    "duree": 0.0,
-   "decor": "car interior at dusk, steering wheel, dashboard, rearview mirror with hanging car air freshener, cactus desert visible through windshield",
-   "titre": "En voiture"
+   "decor": "parc avec bancs en bois, fontaine, arbres et pelouses vertes",
+   "titre": "Répliques cinglantes"
   }
  ],
  "studio": {
-  "objets": [
-   {
-    "objet": "telephone",
-    "replique": 2
-   },
-   {
-    "objet": "telephone",
-    "replique": 16
-   },
-   {
-    "replique": 30,
-    "objet": "telephone"
-   }
+  "moment": "jour",
+  "lieux": [
+   "parc"
   ],
   "costumes": {
    "presentateur": {
-    "haut": "blouson",
-    "c_haut": "noir",
+    "haut": "tshirt",
+    "c_haut": "jaune",
     "motif": "uni",
-    "bas": "pantalon",
-    "chaussures": "ville",
+    "bas": "jean",
+    "chaussures": "baskets",
     "details": [
-     "lunettes_vue"
+     "casquette",
+     "moustache"
     ],
-    "cheveux": "court",
-    "c_cheveux": "noir"
+    "chapeau": {
+     "type": "casquette",
+     "c_chapeau": "vert"
+    }
    },
    "envoyee": {
-    "haut": "debardeur",
+    "haut": "tshirt",
     "c_haut": "bordeaux",
     "motif": "uni",
-    "bas": "pantalon",
-    "chaussures": "baskets",
-    "details": [],
-    "cheveux": "tresses",
-    "c_cheveux": "brun"
-   },
-   "invite": {
-    "haut": "tshirt",
-    "c_haut": "noir",
-    "motif": "uni",
-    "bas": "jogging",
+    "bas": "jean",
     "chaussures": "baskets",
     "details": [
-     "tatouage"
+     "boucles_oreilles"
     ],
-    "cheveux": "rase",
-    "c_cheveux": "noir"
+    "chapeau": null
    }
   },
   "personnages": {
    "presentateur": {
     "genre": "h",
-    "age": 24,
+    "age": 25,
     "taille": 1,
-    "corpulence": 0.5,
-    "cheveux": "court",
+    "corpulence": 0.7,
+    "cheveux": "court_texture",
+    "c_cheveux": "brun",
     "barbe": "trois_jours",
     "genre_vu": "h"
    },
    "envoyee": {
     "genre": "f",
-    "age": 22,
+    "age": 24,
     "taille": 0.95,
-    "corpulence": 0.5,
-    "cheveux": "tresses",
-    "barbe": null,
+    "corpulence": 0.6,
+    "cheveux": "chignon",
+    "c_cheveux": "noir",
+    "barbe": "rien",
     "genre_vu": "f"
-   },
-   "invite": {
-    "genre": "f",
-    "age": 28,
-    "taille": 1.1,
-    "corpulence": 0.8,
-    "cheveux": "rase",
-    "barbe": "bouc"
    }
   },
-  "metiers": {},
-  "cadence": "normal",
-  "moment": "soir",
+  "objets": [
+   {
+    "replique": 0,
+    "objet": "telephone"
+   },
+   {
+    "replique": 27,
+    "objet": "telephone"
+   }
+  ],
+  "gags": [
+   "Attention : Approche interdite sans Snap",
+   "Les amis sont là pour ça... enfin, presque.",
+   "One Piece : 0/10, Réussite sociale : 0/10"
+  ],
+  "ambiances": [
+   "soleil"
+  ],
+  "cadence": "rapide",
   "plans": [
    {
-    "mouvement": "fixe",
-    "geste": "volant",
     "replique": 0,
     "plan": "moyen",
+    "mouvement": "fixe",
+    "geste": "bras_ouverts",
+    "reaction": "regard_camera"
+   },
+   {
+    "replique": 1,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "pointe_d",
+    "reaction": "choc"
+   },
+   {
+    "replique": 2,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "confused",
+    "reaction": "sceptique"
+   },
+   {
+    "replique": 3,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "pointe_g",
+    "reaction": "choc"
+   },
+   {
+    "replique": 4,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "annoyed",
+    "reaction": "colere"
+   },
+   {
+    "replique": 5,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "pointe_d",
+    "reaction": "colere"
+   },
+   {
+    "replique": 6,
+    "plan": "large",
+    "mouvement": "recule",
+    "geste": "mains_hanches",
     "reaction": "aucune"
    },
    {
+    "replique": 7,
     "plan": "serre",
-    "geste": "telephone",
-    "mouvement": "avance",
-    "reaction": "choc",
-    "replique": 4
+    "mouvement": "fixe",
+    "geste": "gratte_tete",
+    "reaction": "confused"
    },
    {
-    "mouvement": "avance",
-    "geste": "poing",
+    "replique": 8,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "pointe_g",
+    "reaction": "choc"
+   },
+   {
+    "replique": 9,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "bras_ouverts",
+    "reaction": "colere"
+   },
+   {
+    "replique": 10,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "sceptique",
+    "reaction": "choc"
+   },
+   {
+    "replique": 11,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "pointe_d",
+    "reaction": "colere"
+   },
+   {
+    "replique": 12,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "neutral",
+    "reaction": "aucune"
+   },
+   {
+    "replique": 13,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "annoyed",
+    "reaction": "choc"
+   },
+   {
+    "replique": 14,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "pointe_g",
+    "reaction": "colere"
+   },
+   {
+    "replique": 15,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "bras_ouverts",
+    "reaction": "colere"
+   },
+   {
+    "replique": 16,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "blase",
+    "reaction": "sceptique"
+   },
+   {
+    "replique": 17,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "joie",
+    "reaction": "choc"
+   },
+   {
     "replique": 18,
     "plan": "serre",
-    "reaction": "gene"
+    "mouvement": "fixe",
+    "geste": "mocking",
+    "reaction": "colere"
    },
    {
-    "plan": "moyen",
-    "reaction": "sceptique",
+    "replique": 19,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "pointe_d",
+    "reaction": "colere"
+   },
+   {
+    "replique": 20,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "annoyed",
+    "reaction": "choc"
+   },
+   {
+    "replique": 21,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "pointe_g",
+    "reaction": "colere"
+   },
+   {
+    "replique": 22,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "confused",
+    "reaction": "sceptique"
+   },
+   {
+    "replique": 23,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "bras_ouverts",
+    "reaction": "colere"
+   },
+   {
+    "replique": 24,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "pointe_d",
+    "reaction": "choc"
+   },
+   {
+    "replique": 25,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "mocking",
+    "reaction": "colere"
+   },
+   {
+    "replique": 26,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "pointe_g",
+    "reaction": "choc"
+   },
+   {
+    "replique": 27,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "annoyed",
+    "reaction": "colere"
+   },
+   {
+    "replique": 28,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "pointe_d",
+    "reaction": "choc"
+   },
+   {
+    "replique": 29,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "mocking",
+    "reaction": "colere"
+   },
+   {
     "replique": 30,
-    "geste": "telephone",
-    "mouvement": "recul"
-   },
-   {
-    "reaction": "choc",
-    "geste": "desespoir",
-    "mouvement": "zoom_choc",
-    "replique": 39,
-    "plan": "tres_serre"
+    "reaction": "regard_camera"
    }
   ],
-  "lieux": [
-   "voiture"
-  ],
-  "ambiances": [
-   "neon"
-  ],
-  "gags": [
-   "Désodorisant en forme de doigt d'honneur suspendu au rétroviseur"
-  ]
+  "decors_vus": {
+   "presentateur": "parc avec bancs en bois peints en vert, fontaine centrale avec jets d'eau, arbres fruitiers, pelouse bien entretenue, chemin pavé et lampadaires dorés",
+   "envoyee": "parc avec bancs en bois peints en vert, fontaine centrale avec jets d'eau, arbres fruitiers, pelouse bien entretenue, chemin pavé et lampadaires dorés"
+  }
  },
  "doublage": {
-  "piste": "/tmp/tmpmvlwu8uk/piste.wav",
-  "duree": 89.61,
-  "source": "https://www.tiktok.com/@yan_animation0/video/7630831879918193942",
-  "auteur": "yan_animation0",
-  "contexte": "Un couple est en voiture quand la jeune femme fait écouter le vocal ultra menaçant de son grand frère possessif. Le petit ami décide de jouer les durs et de lui répondre par message vocal, avant de le regretter immédiatement.",
+  "piste": "/tmp/tmpy_36uvk6/piste.wav",
+  "duree": 62.81,
+  "source": "https://www.tiktok.com/@vignianimation/video/7705159226645155104",
+  "auteur": "vignianimation",
+  "contexte": "Dans un parc ensoleillé, un jeune homme tente d'aborder une jeune femme, mais son amie intervient constamment pour le rabrouer et défendre sa copine. La scène devient de plus en plus tendue, avec des répliques cinglantes et des sous-entendus humoristiques.",
   "evenements": [
    [
-    8.0,
-    14.0,
-    "crying"
-   ],
-   [
-    27.0,
-    29.0,
-    "crying"
-   ],
-   [
-    37.0,
-    39.0,
-    "crying"
-   ],
-   [
-    43.0,
-    45.0,
-    "scream"
-   ],
-   [
-    45.0,
-    47.0,
-    "kiss"
-   ],
-   [
-    46.0,
-    55.0,
-    "crying"
-   ],
-   [
-    54.0,
-    56.0,
-    "kiss"
-   ],
-   [
-    55.0,
-    57.0,
-    "phone"
-   ],
-   [
-    56.0,
-    58.0,
-    "laughter"
-   ],
-   [
-    60.0,
-    66.0,
-    "scream"
-   ],
-   [
-    73.0,
-    75.0,
-    "scream"
-   ],
-   [
-    84.0,
-    86.0,
-    "crying"
+    53.78,
+    54.62,
+    "[rire]"
    ]
   ],
   "visuel": {
    "gestes": [
     [
-     2.0,
-     0.23,
-     0.65
+     4.0,
+     0.3,
+     1.0
     ],
     [
      5.5,
-     0.23,
-     0.39
+     0.69,
+     1.0
     ],
     [
-     12.0,
-     0.23,
-     0.58
+     7.5,
+     0.69,
+     1.0
     ],
     [
-     23.0,
-     0.72,
-     0.4
+     10.0,
+     0.3,
+     1.0
     ],
     [
-     27.5,
+     13.5,
+     0.69,
+     1.0
+    ],
+    [
+     14.5,
      0.7,
-     0.67
+     0.73
     ],
     [
-     37.5,
-     0.72,
-     0.55
+     16.5,
+     0.3,
+     1.0
+    ],
+    [
+     19.5,
+     0.69,
+     1.0
+    ],
+    [
+     20.5,
+     0.29,
+     1.0
+    ],
+    [
+     21.5,
+     0.71,
+     1.0
+    ],
+    [
+     22.5,
+     0.3,
+     1.0
+    ],
+    [
+     24.5,
+     0.69,
+     1.0
+    ],
+    [
+     31.0,
+     0.3,
+     1.0
+    ],
+    [
+     32.5,
+     0.7,
+     1.0
+    ],
+    [
+     34.5,
+     0.69,
+     1.0
     ],
     [
      40.0,
-     0.7,
-     0.39
+     0.3,
+     1.0
     ],
     [
-     46.5,
-     0.72,
-     0.37
+     43.5,
+     0.71,
+     1.0
     ],
     [
-     53.0,
-     0.7,
-     0.46
+     44.5,
+     0.3,
+     1.0
     ],
     [
-     54.5,
-     0.7,
-     0.35
+     48.0,
+     0.69,
+     1.0
     ],
     [
-     65.0,
-     0.7,
-     0.49
+     50.0,
+     0.3,
+     1.0
+    ],
+    [
+     51.0,
+     0.29,
+     1.0
+    ],
+    [
+     53.5,
+     0.69,
+     1.0
+    ],
+    [
+     55.5,
+     0.3,
+     1.0
+    ],
+    [
+     58.5,
+     0.68,
+     0.85
+    ],
+    [
+     60.0,
+     0.61,
+     1.0
     ]
    ],
-   "duree": 90.0,
+   "duree": 63.0,
    "nb_plans": 1,
-   "duree_plan": 90.0,
+   "duree_plan": 63.0,
    "coupes": [],
    "plans": {
     "tres_serre": 0.0,
     "serre": 0.0,
-    "moyen": 0.989,
-    "large": 0.011
+    "moyen": 0.944,
+    "large": 0.056
    },
    "camera": {
-    "fixe": 1.0,
-    "avance": 0.0,
-    "recul": 0.0,
-    "travelling": 0.0,
+    "fixe": 0.824,
+    "avance": 0.08,
+    "recul": 0.088,
+    "travelling": 0.008,
     "epaule": 0.0
    },
-   "nb_personnes": 2,
+   "nb_personnes": 1,
    "personnes": [
     {
-     "place": "gauche",
-     "presence": 1.0,
+     "place": "droite",
+     "presence": 0.698,
      "habit": [
-      55,
-      43,
-      43
+      211,
+      180,
+      144
      ],
      "cheveux": [
-      50,
-      35,
+      40,
+      123,
+      39
+     ],
+     "sourire": 0.0,
+     "taille": 0.106,
+     "tete_penchee": 0.5,
+     "regard_cote": 0.443
+    },
+    {
+     "place": "gauche",
+     "presence": 0.46,
+     "habit": [
+      27,
+      75,
+      130
+     ],
+     "cheveux": [
+      32,
+      32,
       32
      ],
      "sourire": 0.0,
-     "taille": 0.072,
-     "tete_penchee": 0.4,
-     "regard_cote": 0.0
-    },
-    {
-     "place": "droite",
-     "presence": 0.883,
-     "habit": [
-      68,
-      60,
-      58
-     ],
-     "cheveux": [
-      9,
-      7,
-      8
-     ],
-     "sourire": 0.013,
-     "taille": 0.075,
-     "tete_penchee": 1.0,
-     "regard_cote": 0.78
+     "taille": 0.1,
+     "tete_penchee": 1.9,
+     "regard_cote": 0.828
     }
    ],
    "visages": true,
-   "sourires": 0.006,
-   "energie": 0.027,
+   "sourires": 0.0,
+   "energie": 0.697,
    "mur": [
-    0,
-    0,
-    0
+    205,
+    171,
+    138
    ],
    "palette": [
     [
-     0,
-     0,
-     0,
-     0.665
+     206,
+     172,
+     137,
+     0.495
     ],
     [
-     66,
-     57,
-     56,
-     0.115
+     67,
+     88,
+     51,
+     0.154
     ],
     [
-     41,
-     34,
-     34,
-     0.082
+     138,
+     133,
+     77,
+     0.119
     ],
     [
-     184,
-     135,
-     112,
-     0.066
+     19,
+     29,
+     12,
+     0.105
     ],
     [
-     113,
-     97,
-     89,
-     0.058
+     236,
+     243,
+     246,
+     0.064
     ],
     [
-     233,
-     232,
-     232,
-     0.014
+     92,
+     189,
+     241,
+     0.063
     ]
    ],
    "lumiere": {
-    "luminosite": 32.6,
-    "chaleur": 7.8,
-    "saturation": 18.9
+    "luminosite": 170.3,
+    "chaleur": 34.7,
+    "saturation": 102.6
    },
-   "moment": "nuit",
+   "moment": "jour",
    "postures": []
   },
   "audio": {
-   "duree": 89.6,
-   "nb_voix": 3,
+   "duree": 62.8,
+   "nb_voix": 2,
    "voix": [
     {
-     "hz": 298,
-     "genre": "f",
-     "part": 0.38
+     "hz": 149,
+     "genre": "h",
+     "part": 0.59
     },
     {
-     "hz": 215,
+     "hz": 269,
      "genre": "f",
-     "part": 0.42
-    },
-    {
-     "hz": 279,
-     "genre": "f",
-     "part": 0.2
+     "part": 0.41
     }
    ],
-   "debit": 4.99,
-   "blanc_moyen": 0.41,
+   "debit": 6.32,
+   "blanc_moyen": 0.23,
    "coupes": 4,
-   "dynamique_db": 27.5,
-   "cris": 0.0,
-   "musique": 1.35,
-   "impacts": 59,
-   "impacts_10s": 6.58,
-   "graves": 14,
-   "aigus": 45,
-   "sur_vanne": 24,
+   "dynamique_db": 23.3,
+   "cris": 0.014,
+   "musique": 1.43,
+   "impacts": 53,
+   "impacts_10s": 8.44,
+   "graves": 7,
+   "aigus": 46,
+   "sur_vanne": 22,
    "evenements": {
-    "crying": 5,
-    "scream": 3,
-    "kiss": 2,
-    "phone": 1,
-    "laughter": 1
+    "[rire]": 1
    },
    "emotions": {
+    "angry": 13,
+    "defiant": 5,
+    "mocking": 5,
+    "sarcastic": 3,
+    "frustrated": 2,
+    "neutral": 2,
     "confident": 1,
-    "curious": 1,
-    "worried": 1,
-    "angry": 1,
-    "furious": 1,
-    "shocked": 1,
-    "annoyed": 1,
-    "indignant": 1
+    "confused": 1
    }
   },
-  "video_origine": "/tmp/tmpmvlwu8uk/src.mp4",
+  "video_origine": "/tmp/tmpy_36uvk6/src.mp4",
   "debut": 0.0,
-  "titre": "Titre : il ne savait pas qu'elle avait un frère dangereux 😂#animation..."
+  "titre": "La pote moche qui parle à la place de sa copine : @zóba #humour "
  },
  "fiche": {
   "note": 0,
@@ -2688,23 +2617,13 @@
      27,
      28,
      29,
-     30,
-     31,
-     32,
-     33,
-     34,
-     35,
-     36,
-     37,
-     38,
-     39,
-     40
+     30
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "car interior at dusk, steering wheel, dashboard, rearview mirror with hanging car air freshener, cactus desert visible through windshield",
-    "titre": "En voiture"
+    "decor": "parc avec bancs en bois, fontaine, arbres et pelouses vertes",
+    "titre": "Répliques cinglantes"
    }
   ]
  },
@@ -2721,14 +2640,14 @@
    "poste": "ingé son",
    "controle": "pas de phrase répétée en boucle",
    "ok": true,
-   "detail": "",
+   "detail": "3 mot(s) retiré(s) (corrigé)",
    "revoir": false
   },
   {
    "poste": "ingé son",
    "controle": "mots à une vitesse possible",
    "ok": true,
-   "detail": "",
+   "detail": "3 mot(s) trop courts",
    "revoir": false
   },
   {
@@ -2742,14 +2661,21 @@
    "poste": "casting voix",
    "controle": "témoin image (qui parle dans l'original)",
    "ok": true,
-   "detail": "59/59 phrases lisibles (Gemini (vidéo entière), mouvements)",
+   "detail": "43/43 phrases lisibles (Gemini (vidéo entière), mouvements)",
+   "revoir": false
+  },
+  {
+   "poste": "casting voix",
+   "controle": "le son et l'image sont d'accord",
+   "ok": true,
+   "detail": "5 % de désaccord",
    "revoir": false
   },
   {
    "poste": "casting voix",
    "controle": "parole répartie entre les personnages",
    "ok": true,
-   "detail": "3 voix, la plus bavarde dit 51 %",
+   "detail": "2 voix, la plus bavarde dit 56 %",
    "revoir": false
   },
   {
@@ -2770,7 +2696,7 @@
    "poste": "scripte",
    "controle": "autant de personnages que de voix",
    "ok": true,
-   "detail": "3 voix, 3 personnage(s)",
+   "detail": "2 voix, 2 personnage(s)",
    "revoir": false
   },
   {
@@ -2809,37 +2735,101 @@
    "revoir": false
   }
  ],
- "_decors_semi": [],
+ "_decors_semi": [
+  0
+ ],
  "_voix_hz": {
-  "presentateur": 208,
-  "invite": 311,
-  "envoyee": 253
- },
- "_voix_timbre": {
-  "presentateur": 1025,
-  "invite": 1027,
-  "envoyee": 1030
- },
- "_voix_timbre_genre": {
-  "presentateur": "h",
-  "invite": "h",
-  "envoyee": "h"
+  "presentateur": 146,
+  "envoyee": 266
  },
  "_voix_genre": {
-  "invite": "f",
+  "presentateur": "h",
   "envoyee": "f"
+ },
+ "_voix_timbre": {
+  "presentateur": 909,
+  "envoyee": 1084
+ },
+ "_voix_timbre_genre": {
+  "presentateur": "h"
  },
  "_casting_final": {
   "presentateur": {
    "fiche": {
     "genre": "h",
-    "age": 15,
-    "corpulence": 0.45,
+    "age": 25,
+    "corpulence": 0.7,
     "taille": 1.04,
     "peau": [
+     130,
+     86,
+     58
+    ],
+    "visage": "long",
+    "iris": [
+     60,
+     110,
+     150
+    ],
+    "yeux": 1.1139506793692107,
+    "nez": "droit",
+    "levres": 1.0331719840742,
+    "sourcils": 1.403436835511286,
+    "cheveux": "court_texture",
+    "c_cheveux": [
+     40,
+     123,
+     39
+    ],
+    "barbe": "moustache",
+    "lunettes": "",
+    "maquillage": false
+   },
+   "costume": {
+    "haut": "tshirt",
+    "c_haut": [
+     245,
+     200,
+     60
+    ],
+    "motif": "uni",
+    "bas": "jean",
+    "c_bas": [
+     70,
+     100,
+     150
+    ],
+    "chaussures": "baskets",
+    "c_chaussures": [
+     240,
+     240,
+     240
+    ],
+    "details": [
+     "moustache"
+    ],
+    "c_motif": [
      176,
-     118,
-     82
+     144,
+     43
+    ],
+    "c_cheveux": [
+     40,
+     123,
+     39
+    ]
+   }
+  },
+  "envoyee": {
+   "fiche": {
+    "genre": "f",
+    "age": 24,
+    "corpulence": 0.6,
+    "taille": 0.9215,
+    "peau": [
+     130,
+     86,
+     58
     ],
     "visage": "long",
     "iris": [
@@ -2847,161 +2837,29 @@
      120,
      110
     ],
-    "yeux": 0.9625020266089636,
-    "nez": "fin",
-    "levres": 1.0738385614601624,
-    "sourcils": 1.4786276435268189,
-    "cheveux": "court",
+    "yeux": 1.1101384444708438,
+    "nez": "fort",
+    "levres": 1.387579318880877,
+    "sourcils": 0.8042453485050645,
+    "cheveux": "chignon",
     "c_cheveux": [
-     40,
-     40,
-     46
-    ],
-    "barbe": "",
-    "lunettes": "rondes",
-    "maquillage": false
-   },
-   "costume": {
-    "haut": "blouson",
-    "c_haut": [
-     40,
-     40,
-     46
-    ],
-    "motif": "uni",
-    "bas": "pantalon",
-    "c_bas": [
-     70,
-     100,
-     150
-    ],
-    "chaussures": "ville",
-    "c_chaussures": [
-     240,
-     240,
-     240
-    ],
-    "details": [
-     "lunettes_vue"
-    ],
-    "c_motif": [
-     28,
-     28,
-     33
-    ],
-    "cheveux": "court",
-    "c_cheveux": [
-     40,
-     40,
-     46
-    ]
-   }
-  },
-  "envoyee": {
-   "fiche": {
-    "genre": "h",
-    "age": 22,
-    "corpulence": 0.5,
-    "taille": 0.988,
-    "peau": [
-     214,
-     160,
-     118
-    ],
-    "visage": "ovale",
-    "iris": [
-     60,
-     110,
-     150
-    ],
-    "yeux": 0.9541986127598705,
-    "nez": "rond",
-    "levres": 1.0461970222548198,
-    "sourcils": 1.3824557694084414,
-    "cheveux": "court_texture",
-    "c_cheveux": [
-     70,
-     45,
+     32,
+     32,
      32
     ],
     "barbe": "",
-    "lunettes": "",
+    "lunettes": "rectangle",
     "maquillage": false
    },
    "costume": {
-    "haut": "debardeur",
+    "haut": "tshirt",
     "c_haut": [
      130,
      40,
      60
     ],
     "motif": "uni",
-    "bas": "pantalon",
-    "c_bas": [
-     70,
-     100,
-     150
-    ],
-    "chaussures": "baskets",
-    "c_chaussures": [
-     240,
-     240,
-     240
-    ],
-    "details": [],
-    "c_motif": [
-     93,
-     28,
-     43
-    ],
-    "cheveux": "tresses",
-    "c_cheveux": [
-     70,
-     45,
-     32
-    ]
-   }
-  },
-  "invite": {
-   "fiche": {
-    "genre": "h",
-    "age": 15,
-    "corpulence": 0.45,
-    "taille": 1.1440000000000001,
-    "peau": [
-     214,
-     160,
-     118
-    ],
-    "visage": "ovale",
-    "iris": [
-     60,
-     110,
-     150
-    ],
-    "yeux": 1.0090224221039008,
-    "nez": "droit",
-    "levres": 1.143513920161509,
-    "sourcils": 1.1100439315806696,
-    "cheveux": "herisse",
-    "c_cheveux": [
-     40,
-     40,
-     46
-    ],
-    "barbe": "",
-    "lunettes": "",
-    "maquillage": false
-   },
-   "costume": {
-    "haut": "tshirt",
-    "c_haut": [
-     40,
-     40,
-     46
-    ],
-    "motif": "uni",
-    "bas": "jogging",
+    "bas": "jean",
     "c_bas": [
      70,
      100,
@@ -3014,52 +2872,39 @@
      240
     ],
     "details": [
-     "tatouage"
+     "boucles_oreilles"
     ],
     "c_motif": [
+     93,
      28,
-     28,
-     33
+     43
     ],
-    "cheveux": "rase",
     "c_cheveux": [
-     40,
-     40,
-     46
+     32,
+     32,
+     32
     ]
    }
   }
  },
  "_type_couverture": "chute",
  "realisation": {
-  "moment": "soir",
+  "moment": "jour",
   "lieux": [
-   "voiture"
+   "parc"
   ],
   "gags": [
-   "Désodorisant en forme de doigt d'honneur suspendu au rétroviseur"
+   "Attention : Approche interdite sans Snap",
+   "Les amis sont là pour ça... enfin, presque.",
+   "One Piece : 0/10, Réussite sociale : 0/10"
   ],
-  "ambiances": [
-   "neon",
-   "poussiere"
-  ],
+  "ambiances": [],
   "source": "auteur+image",
   "tenues": {
-   "presentateur": "blouson",
-   "envoyee": "debardeur",
-   "invite": "tshirt"
+   "presentateur": "tshirt",
+   "envoyee": "tshirt"
   },
   "plans": [
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
    "large/fixe",
    "large/fixe",
    "large/fixe",
@@ -3094,393 +2939,9 @@
   ]
  },
  "_recette": {
-  "lieu": "voiture",
+  "lieu": "parc",
   "animal": false,
-  "persos": 3,
+  "persos": 2,
   "partie": false
- },
- "_bible": {
-  "graine": 2731885796,
-  "moment": "soir",
-  "lieux": [
-   "voiture"
-  ],
-  "gags": [
-   "Désodorisant en forme de doigt d'honneur suspendu au rétroviseur"
-  ],
-  "costumes": {
-   "presentateur": {
-    "haut": "blouson",
-    "c_haut": [
-     40,
-     40,
-     46
-    ],
-    "motif": "uni",
-    "bas": "pantalon",
-    "c_bas": [
-     70,
-     100,
-     150
-    ],
-    "chaussures": "ville",
-    "c_chaussures": [
-     240,
-     240,
-     240
-    ],
-    "details": [
-     "lunettes_vue"
-    ],
-    "c_motif": [
-     28,
-     28,
-     33
-    ],
-    "cheveux": "court",
-    "c_cheveux": [
-     40,
-     40,
-     46
-    ]
-   },
-   "envoyee": {
-    "haut": "debardeur",
-    "c_haut": [
-     130,
-     40,
-     60
-    ],
-    "motif": "uni",
-    "bas": "pantalon",
-    "c_bas": [
-     70,
-     100,
-     150
-    ],
-    "chaussures": "baskets",
-    "c_chaussures": [
-     240,
-     240,
-     240
-    ],
-    "details": [],
-    "c_motif": [
-     93,
-     28,
-     43
-    ],
-    "cheveux": "tresses",
-    "c_cheveux": [
-     70,
-     45,
-     32
-    ]
-   },
-   "invite": {
-    "haut": "tshirt",
-    "c_haut": [
-     40,
-     40,
-     46
-    ],
-    "motif": "uni",
-    "bas": "jogging",
-    "c_bas": [
-     70,
-     100,
-     150
-    ],
-    "chaussures": "baskets",
-    "c_chaussures": [
-     240,
-     240,
-     240
-    ],
-    "details": [
-     "tatouage"
-    ],
-    "c_motif": [
-     28,
-     28,
-     33
-    ],
-    "cheveux": "rase",
-    "c_cheveux": [
-     40,
-     40,
-     46
-    ]
-   }
-  },
-  "figurants": [
-   {
-    "scene": 0,
-    "avec": "envoyee",
-    "activite": "attend",
-    "compagnon": true,
-    "costume": {
-     "haut": "tshirt",
-     "c_haut": [
-      240,
-      180,
-      60
-     ],
-     "motif": "uni",
-     "c_motif": [
-      172,
-      129,
-      43
-     ],
-     "bas": "jean",
-     "c_bas": [
-      150,
-      130,
-      100
-     ],
-     "chaussures": "baskets",
-     "c_chaussures": [
-      120,
-      90,
-      60
-     ],
-     "details": [
-      "chaine"
-     ]
-    },
-    "perso": "meche",
-    "x": 0,
-    "fiche": {
-     "genre": "h",
-     "age": 20,
-     "corpulence": 0.5227898062107464,
-     "taille": 1.034278557773794,
-     "peau": [
-      214,
-      160,
-      118
-     ],
-     "visage": "rond",
-     "iris": [
-      110,
-      75,
-      45
-     ],
-     "yeux": 0.9413880962536141,
-     "nez": "fin",
-     "levres": 0.9103167288406998,
-     "sourcils": 1.2782429568510596,
-     "cheveux": "court",
-     "c_cheveux": [
-      62,
-      42,
-      30
-     ],
-     "barbe": "",
-     "lunettes": "",
-     "maquillage": false
-    },
-    "description": "frère (présenté, muet, à côté)",
-    "_x": 890,
-    "_y": 1500,
-    "_s": 0.817
-   }
-  ],
-  "ambiances": [
-   "neon",
-   "poussiere"
-  ],
-  "lumiere": -1,
-  "ombre": 0.24,
-  "etalonnage": [
-   1.03,
-   0.99,
-   0.94
-  ],
-  "heure": [
-   19,
-   40
-  ],
-  "style_ia": "warm golden evening light, lamps on",
-  "plans": [
-   {
-    "mouvement": "fixe",
-    "geste": "volant",
-    "replique": 0,
-    "plan": "moyen",
-    "reaction": "aucune"
-   },
-   {
-    "plan": "serre",
-    "geste": "telephone",
-    "mouvement": "avance",
-    "reaction": "choc",
-    "replique": 4
-   },
-   {
-    "mouvement": "avance",
-    "geste": "poing",
-    "replique": 18,
-    "plan": "serre",
-    "reaction": "gene"
-   },
-   {
-    "plan": "moyen",
-    "reaction": "sceptique",
-    "replique": 30,
-    "geste": "telephone",
-    "mouvement": "recul"
-   },
-   {
-    "reaction": "choc",
-    "geste": "desespoir",
-    "mouvement": "zoom_choc",
-    "replique": 39,
-    "plan": "tres_serre"
-   }
-  ],
-  "jeu": [],
-  "source": "auteur+image",
-  "c_mur": [
-   74,
-   75,
-   79
-  ],
-  "rythme": {
-   "serre": 0.0,
-   "large": 0.011,
-   "tres_serre": 0.0,
-   "camera": {
-    "fixe": 1.0,
-    "avance": 0.0,
-    "recul": 0.0,
-    "travelling": 0.0,
-    "epaule": 0.0
-   },
-   "energie": 0.027,
-   "sourires": 0.006,
-   "duree_plan": 90.0
-  },
-  "fiches": {
-   "presentateur": {
-    "genre": "h",
-    "age": 15,
-    "corpulence": 0.45,
-    "taille": 1.04,
-    "peau": [
-     176,
-     118,
-     82
-    ],
-    "visage": "long",
-    "iris": [
-     120,
-     120,
-     110
-    ],
-    "yeux": 0.9625020266089636,
-    "nez": "fin",
-    "levres": 1.0738385614601624,
-    "sourcils": 1.4786276435268189,
-    "cheveux": "court",
-    "c_cheveux": [
-     40,
-     40,
-     46
-    ],
-    "barbe": "",
-    "lunettes": "rondes",
-    "maquillage": false
-   },
-   "envoyee": {
-    "genre": "h",
-    "age": 22,
-    "corpulence": 0.5,
-    "taille": 0.988,
-    "peau": [
-     214,
-     160,
-     118
-    ],
-    "visage": "ovale",
-    "iris": [
-     60,
-     110,
-     150
-    ],
-    "yeux": 0.9541986127598705,
-    "nez": "rond",
-    "levres": 1.0461970222548198,
-    "sourcils": 1.3824557694084414,
-    "cheveux": "court_texture",
-    "c_cheveux": [
-     70,
-     45,
-     32
-    ],
-    "barbe": "",
-    "lunettes": "",
-    "maquillage": false
-   },
-   "invite": {
-    "genre": "h",
-    "age": 15,
-    "corpulence": 0.45,
-    "taille": 1.1440000000000001,
-    "peau": [
-     214,
-     160,
-     118
-    ],
-    "visage": "ovale",
-    "iris": [
-     60,
-     110,
-     150
-    ],
-    "yeux": 1.0090224221039008,
-    "nez": "droit",
-    "levres": 1.143513920161509,
-    "sourcils": 1.1100439315806696,
-    "cheveux": "herisse",
-    "c_cheveux": [
-     40,
-     40,
-     46
-    ],
-    "barbe": "",
-    "lunettes": "",
-    "maquillage": false
-   }
-  },
-  "cadence": "normal",
-  "assis": {},
-  "meubles": {},
-  "cine": {
-   "focus": false,
-   "vertige": false,
-   "tiers": false,
-   "etalonnage": true,
-   "profondeur": false,
-   "grain": false,
-   "reflets": false,
-   "son": true
-  },
-  "decoupe": {},
-  "coupes_origine": [],
-  "gestes_origine": [
-   2.0,
-   5.5,
-   12.0,
-   23.0,
-   27.5,
-   37.5,
-   40.0,
-   46.5,
-   53.0,
-   54.5,
-   65.0
-  ],
-  "postures_origine": []
  }
 }
