@@ -42353,5 +42353,289 @@
    ]
   },
   "video": "2026-11-03_11h51_emission.mp4"
+ },
+ {
+  "date": "2026-11-11",
+  "source": "https://www.tiktok.com/@charly.bse/video/7654540654504217888",
+  "auteur": "charly.bse",
+  "visuel": {
+   "gestes": [
+    [
+     58.5,
+     0.49,
+     1.0
+    ]
+   ],
+   "duree": 60.5,
+   "nb_plans": 25,
+   "duree_plan": 2.42,
+   "coupes": [
+    4.0,
+    5.5,
+    10.0,
+    11.5,
+    12.0,
+    16.5,
+    18.0,
+    23.0,
+    24.5,
+    26.0,
+    26.5,
+    28.5,
+    29.5,
+    32.5,
+    35.0,
+    42.0,
+    45.0,
+    50.0,
+    51.0,
+    52.5,
+    54.5,
+    56.0,
+    57.0,
+    58.0
+   ],
+   "plans": {
+    "tres_serre": 0.0,
+    "serre": 0.066,
+    "moyen": 0.0,
+    "large": 0.934
+   },
+   "camera": {
+    "fixe": 0.969,
+    "avance": 0.0,
+    "recul": 0.0,
+    "travelling": 0.0,
+    "epaule": 0.031
+   },
+   "nb_personnes": 1,
+   "personnes": [],
+   "visages": true,
+   "sourires": 1.0,
+   "energie": 0.158,
+   "mur": [
+    216,
+    186,
+    129
+   ],
+   "palette": [
+    [
+     216,
+     186,
+     129,
+     0.465
+    ],
+    [
+     153,
+     113,
+     62,
+     0.244
+    ],
+    [
+     21,
+     13,
+     9,
+     0.107
+    ],
+    [
+     80,
+     74,
+     61,
+     0.106
+    ],
+    [
+     226,
+     233,
+     229,
+     0.049
+    ],
+    [
+     240,
+     47,
+     95,
+     0.028
+    ]
+   ],
+   "lumiere": {
+    "luminosite": 168.4,
+    "chaleur": 69.9,
+    "saturation": 122.5
+   },
+   "moment": "jour",
+   "postures": []
+  },
+  "audio": {
+   "duree": 60.1,
+   "nb_voix": 2,
+   "voix": [
+    {
+     "hz": 272,
+     "genre": "f",
+     "part": 0.69
+    },
+    {
+     "hz": 161,
+     "genre": "h",
+     "part": 0.31
+    }
+   ],
+   "debit": 5.33,
+   "blanc_moyen": 0.38,
+   "coupes": 5,
+   "dynamique_db": 26.2,
+   "cris": 0.002,
+   "musique": 1.46,
+   "impacts": 55,
+   "impacts_10s": 9.16,
+   "graves": 16,
+   "aigus": 39,
+   "sur_vanne": 29,
+   "evenements": {
+    "[rire]": 1
+   },
+   "emotions": {
+    "confused": 8,
+    "angry": 7,
+    "annoyed": 6,
+    "screaming": 2,
+    "mocking": 2,
+    "blase": 2,
+    "explaining": 2,
+    "sarcastic": 1
+   }
+  },
+  "claude": {
+   "lieux": [
+    "rue",
+    "salon"
+   ],
+   "moment": "jour",
+   "costumes": {
+    "envoyee": {
+     "haut": "tshirt",
+     "c_haut": "rose",
+     "motif": "uni",
+     "bas": "pantalon",
+     "chaussures": "ballerines",
+     "cheveux": "carre",
+     "c_cheveux": "noir",
+     "details": [
+      "rouge_levres"
+     ]
+    },
+    "invite": {
+     "haut": "tshirt",
+     "c_haut": "bleu",
+     "motif": "uni",
+     "bas": "pantalon",
+     "chaussures": "baskets",
+     "cheveux": "aucune",
+     "c_cheveux": "chatain",
+     "details": []
+    }
+   },
+   "objets": [],
+   "gags": [
+    "Post-it frigo : Ne pas nourrir la bête",
+    "Horloge arrêtée sur l'heure du repas"
+   ],
+   "ambiances": [],
+   "plans": [
+    {
+     "plan": "moyen",
+     "reaction": "sceptique",
+     "geste": "mains_hanches",
+     "mouvement": "fixe",
+     "replique": 0
+    },
+    {
+     "geste": "bras_ouverts",
+     "replique": 1,
+     "plan": "moyen",
+     "reaction": "yeux_au_ciel",
+     "mouvement": "fixe"
+    },
+    {
+     "geste": "desespoir",
+     "mouvement": "zoom_choc",
+     "reaction": "choc",
+     "replique": 2,
+     "plan": "serre"
+    },
+    {
+     "replique": 7,
+     "plan": "moyen",
+     "geste": "gratte_tete",
+     "reaction": "blase",
+     "mouvement": "fixe"
+    },
+    {
+     "replique": 18,
+     "plan": "serre",
+     "geste": "facepalm",
+     "mouvement": "fixe",
+     "reaction": "gene"
+    },
+    {
+     "plan": "serre",
+     "reaction": "regard_camera",
+     "mouvement": "zoom_choc",
+     "replique": 31,
+     "geste": "haussement"
+    }
+   ]
+  },
+  "realisation": {
+   "moment": "jour",
+   "lieux": [
+    "rue",
+    "salon"
+   ],
+   "gags": [
+    "Post-it frigo : Ne pas nourrir la bête",
+    "Horloge arrêtée sur l'heure du repas"
+   ],
+   "ambiances": [],
+   "source": "auteur+image",
+   "tenues": {
+    "envoyee": "tshirt",
+    "invite": "tshirt"
+   },
+   "plans": [
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe"
+   ]
+  },
+  "video": "2026-11-11_10h45_emission.mp4"
  }
 ]
