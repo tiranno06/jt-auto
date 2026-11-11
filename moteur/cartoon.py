@@ -653,7 +653,8 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
             cv2.line(tv, p0, p1, (235, 235, 235), int(rg_t.integers(2, 6)), cv2.LINE_AA)
         TRAITS_VITESSE.append(tv)
     TITRES = {k: titre(sc.get("titre")) for k, sc in enumerate(dec) if sc.get("titre")}
-    VOIX_OFF = {q["i"]: carte_titre(reps[q["i"]]["t"]) for q in ph if q["p"] == "narrateur"}
+    HORS_C = {i for i, r in enumerate(reps) if r.get("_hors_champ")}       # message vocal / appel : entendu et sous-titré, pas dessiné
+    VOIX_OFF = {q["i"]: carte_titre(reps[q["i"]]["t"]) for q in ph if q["p"] == "narrateur" and q["i"] not in HORS_C}
     objets = {}
     print(f"cartoon : durée {total:.1f} s, {len(ph)} répliques, {len(places)} scène(s), personnages {roles}", flush=True)
 
@@ -1519,7 +1520,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
                     else: K_ = M.squelette(p); (hx, hy), hrx, hry = K_["tete"], K_["rx"], K_["ry"]
                     SONDE["res"].append(dict(t=round(tm, 2), role=role, x=float(hx), y=float(hy), rx=float(hrx), ry=float(hry),
                                              plan=plan_courant, seul=cible_seule, parle=(role == q["p"]), i=q["i"],
-                                             sous_titre=bool(q["deb"] <= tm < q["fin"] + 0.2 and q["p"] != "narrateur")))
+                                             sous_titre=bool(q["deb"] <= tm < q["fin"] + 0.2 and (q["p"] != "narrateur" or q["i"] in HORS_C))))
                 except Exception: pass
             flou_p = 0.0
             if B and CINE.get("focus") and len(places[sc]) > 1 and plan_courant in ("moyen", "large") and not ang and q["p"] in places[sc] and role != q["p"]:
@@ -1596,7 +1597,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
     def habiller(img, tm, q, sc):
         """Textes par-dessus l'image : titre, voix off, signature de la chaîne, sous-titres de la réplique en cours."""
         fr = img.astype(np.float32)
-        if q["p"] == "narrateur" and tm <= q["fin"] + 0.3:                 # voix off : le titre en grand au centre à l'ouverture,
+        if q["p"] == "narrateur" and q["i"] in VOIX_OFF and tm <= q["fin"] + 0.3:   # voix off : le titre en grand au centre à l'ouverture,
             V = VOIX_OFF[q["i"]]; a2 = pop(V, (tm - q["deb"] + 0.2) / 0.3)   # en haut de l'image ensuite (jamais sur les têtes)
             poser(fr, a2, (W - a2.shape[1]) / 2, (H * 0.36 - a2.shape[0] / 2) if q is ph[0] else 300)
             if q is not ph[0]: poser(fr, FILIGRANE, 28, FIL_Y)

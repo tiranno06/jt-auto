@@ -167,6 +167,13 @@ def jury_gratuit(R, sk, rapport_tech=""):
         if F.get("age", 30) < 16 and F.get("barbe"):
             rq.append(_rq("directeur_artistique", None, f"{r} est un enfant : jamais de barbe", {"type": "casting", "role": r, "barbe": ""}, 1.3, "barbe_enfant"))
         vg = (sk.get("_voix_genre") or {}).get(r)
+        if sk.get("doublage") is not None:                                 # son TikTok : le même vote que le casting (voix, image, texte),
+            try:                                                           # jamais la hauteur seule (voix de dessin animé accélérées)
+                import studio as _st
+                P_ = (sk.get("studio") or {}).get("personnages") if isinstance(sk.get("studio"), dict) else {}
+                g_, v_ = _st.genre_voix(sk, r, (P_ or {}).get(r) if isinstance((P_ or {}).get(r), dict) else {}, detail=True)
+                vg = g_ if abs(v_["h"] - v_["f"]) >= 1.5 else None         # vote net seulement
+            except Exception: vg = None
         if vg and F.get("genre") and vg != F["genre"]:
             rq.append(_rq("directeur_artistique", None, f"{r} a une voix {'de femme' if vg == 'f' else 'd’homme'} mais il est dessiné {'en homme' if vg == 'f' else 'en femme'}",
                           {"type": "casting", "role": r, "genre": vg}, 1.5, "genre_incoherent"))

@@ -406,6 +406,11 @@
   a vu dans l'original (`video_ia.genres_par_voix` -> personnages "genre_vu") ; 4. l'IA de mise en scène (« homme » / « femme »
   compris) ; 5. la hauteur moyenne. Un personnage à voix d'homme n'est jamais en robe / jupe (sauf mariée), coiffures déjà gardées
   par `humain.POUR_H / POUR_F`.
+  **Revu le 11 novembre (analyse des 11 vidéos du jour : 6 femmes dessinées en homme)** : le timbre seul se trompait sur les dessins
+  animés (un seul doubleur pour toutes les voix : 997-1045 Hz pour tout le monde). `genre_voix` fait maintenant VOTER les témoins :
+  Gemini (ce qu'il a vu) 2, timbre 1,5 s'il est net (< 980 / > 1110 Hz) sinon 0,5, hauteur nette 1, IA de mise en scène 1, accords
+  du texte (« je suis choquée » / « je suis content » : `ACCORD_F` / `ACCORD_H`) 1 ; à égalité Gemini, puis timbre, hauteur nette, IA.
+  Le jury (`qualite`, « voix de femme mais dessiné en homme ») utilise le même vote (net seulement), plus la hauteur seule.
 - **Liste du 6 novembre 2026 (choix de l'auteur 1, 2, 3, 4, 5, 7, 11, 18, 21, 23, 26, 27, 37, 40, 41, 45, 46, 48, 50)** :
   **machine toute prête** (1 + 2) : bibliothèques installées par `uv` (pip en repli) dans ~/venv, gardé en cache GitHub (clé = version
   de Python + requirements.txt + contraintes.txt ; yt-dlp toujours mis à jour) ; gain mesuré modeste (~1 à 2 min, l'installation prenait
@@ -499,6 +504,21 @@
   `fusion.FUSIONNES` ; site : Réglages → « 🧯 Registre des pannes », 30 derniers jours). Compte réel de la chaîne : **@petitsdramas**
   (`marque.COMPTE`, le logo disait « @petits.dramas »). NB du 11 novembre : le journal montre le crédit ElevenLabs épuisé (isolation et
   transcription passent par les outils gratuits).
+- **Pas de personnage en trop (remarque de l'auteur du 11 novembre : 3 personnages au lieu de 2 quand on parle d'une personne absente)** :
+  analyse des vidéos « grand frère » (yan_animation0) et « Débat loyer » : la séparation des voix trouvait 3 voix (doubleur qui change
+  sa voix, ou message vocal du frère) -> 3 personnages, alors que l'original n'en montre que 2 ; et « Voilà, voilà mon frère » était
+  pris pour une présentation (frère dessiné à côté). Corrections : Gemini dit qui est VISIBLE (`video_ia` : "visible", `visibles`,
+  `voix_hors_champ` ; une personne dont on parle n'est pas un personnage) ; `equipe.presents` (fin du casting voix, PRESENTS=0) :
+  plus de voix que de personnes à l'image (Gemini, sinon `nb_personnes` des mouvements ; jamais quand une seule personne est vue)
+  -> la voix d'un message vocal / appel (Gemini, ou voix qui n'arrive qu'après « il m'a envoyé un vocal », « écoute ça »…) reste
+  entendue et sous-titrée mais n'est pas dessinée (réplique "narrateur" + "_hors_champ" : sans carton de titre) ; sinon ses phrases
+  retournent aux personnes à l'image, tour à tour ; « voilà » ne présente plus personne et jamais un absent (vocal, appel, pas là) ;
+  son TikTok : jamais plus de personnes dessinées (qui parlent + muets) que dans l'original (`studio.compagnons`, sk["doublage"]["nb_vus"]).
+  Aussi : textes de l'IA rendus en `{'texte': …}` (sous-titres « {'texte': 'Avec toi.'} » de « Robin, il faut que je te dise »)
+  remis en texte (`doublage.texte_ia`).
+  Même analyse : « Mais t'es où ? » répété dans une dispute (= « tu dis n'importe quoi ») faisait croire à un appel (écran coupé en
+  deux) : `studio.appel_devine` compte les FORMES différentes des mots de l'appel, et avec une seule personne à l'image (créateur qui
+  joue les deux rôles) « t'es où » / « je suis au… » seuls ne suffisent plus.
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.
