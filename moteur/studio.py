@@ -529,7 +529,7 @@ def genre_voix(sk, role, d=None, detail=False):
     - le timbre (formants) : 1,5 s'il est net (< 980 Hz homme, > 1110 Hz femme), sinon 0,5 ;
     - la hauteur nette (réplique par réplique) : 1 ; l'IA de mise en scène (images + histoire) : 1 ;
     - les accords du texte (« je suis choquée » / « je suis content ») : 1.
-    À égalité : Gemini, puis le timbre, puis l'IA, puis la hauteur moyenne."""
+    À égalité : Gemini, puis le timbre, la hauteur nette, l'IA, la hauteur moyenne."""
     d = d or {}
     g_ia = GENRES_TXT.get(str(d.get("genre") or "").strip().lower())
     if sk.get("doublage") is None: return GENRE_ROLE.get(role) or g_ia
@@ -550,7 +550,7 @@ def genre_voix(sk, role, d=None, detail=False):
     if votes["h"] != votes["f"]: g = "f" if votes["f"] > votes["h"] else "h"
     else:
         vh = (sk.get("_voix_hz") or {}).get(role) or 0
-        g = g_vu or g_t or g_ia or (("f" if vh > 210 else "h" if vh < 150 else None) if vh else None) or GENRE_ROLE.get(role)
+        g = g_vu or g_t or g_v or g_ia or (("f" if vh > 210 else "h" if vh < 150 else None) if vh else None) or GENRE_ROLE.get(role)
     return (g, votes) if detail else g
 
 AGES_AUTEUR = {"enfant": 8, "ado": 15, "adulte": 30, "senior": 70}
@@ -977,7 +977,8 @@ def compagnons(sk, dec, lieux, moment, graine):
         D = sk["doublage"]; V = D.get("visuel") if isinstance(D.get("visuel"), dict) else {}
         n_max = D.get("nb_vus") or V.get("nb_personnes")
         parl = {x["p"] for x in sk.get("repliques") or [] if x.get("p") != "narrateur"}
-        if isinstance(n_max, (int, float)) and n_max >= 1 and len(parl) + len(liste) > n_max:
+        if isinstance(n_max, (int, float)) and n_max >= len(parl) and len(parl) + len(liste) > n_max and not sk.get("_separes"):   # (appel :
+                                                                           # une personne par image ; moins de monde vu que de voix : compte peu sûr)
             print(f"  personne muette en plus non dessinée : {int(n_max)} personne(s) à l'image dans l'original, {len(parl)} qui parlent", flush=True)
             liste = liste[:max(0, int(n_max) - len(parl))]
     for k, f in enumerate(liste[:3]):

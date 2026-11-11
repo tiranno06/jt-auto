@@ -409,7 +409,7 @@
   **Revu le 11 novembre (analyse des 11 vidéos du jour : 6 femmes dessinées en homme)** : le timbre seul se trompait sur les dessins
   animés (un seul doubleur pour toutes les voix : 997-1045 Hz pour tout le monde). `genre_voix` fait maintenant VOTER les témoins :
   Gemini (ce qu'il a vu) 2, timbre 1,5 s'il est net (< 980 / > 1110 Hz) sinon 0,5, hauteur nette 1, IA de mise en scène 1, accords
-  du texte (« je suis choquée » / « je suis content » : `ACCORD_F` / `ACCORD_H`) 1 ; à égalité Gemini, puis timbre, IA, hauteur.
+  du texte (« je suis choquée » / « je suis content » : `ACCORD_F` / `ACCORD_H`) 1 ; à égalité Gemini, puis timbre, hauteur nette, IA.
   Le jury (`qualite`, « voix de femme mais dessiné en homme ») utilise le même vote (net seulement), plus la hauteur seule.
 - **Liste du 6 novembre 2026 (choix de l'auteur 1, 2, 3, 4, 5, 7, 11, 18, 21, 23, 26, 27, 37, 40, 41, 45, 46, 48, 50)** :
   **machine toute prête** (1 + 2) : bibliothèques installées par `uv` (pip en repli) dans ~/venv, gardé en cache GitHub (clé = version
