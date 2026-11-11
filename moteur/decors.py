@@ -264,13 +264,16 @@ def generer_semi(sk, graine=7, scenes=None, delai=1200):
         print(f"Décors semi-réalistes indisponibles ({type(e).__name__} {str(e)[:150]}) : décors dessinés", flush=True); return out
     tirages = dict(zip(uniques, res))
     for k, d, n in a_faire:
-        best = None
+        cands = []
         for png, ppng in tirages.get(d) or []:
             try:
                 im = np.array(Image.open(io.BytesIO(png)).convert("RGB")); pr = np.array(Image.open(io.BytesIO(ppng)).convert("L")) if ppng else None
                 r = SR.cadrer(im, pr, n)
-                if r and (best is None or r[2] < best[2]): best = r
+                if r: cands.append((r[2], __import__("beaute").note(r[0]), r))   # note de beauté (idée 13)
             except Exception as e: print(f"  tirage illisible : {e}", flush=True)
+        best = __import__("beaute").choisir(cands)
+        if len(cands) > 1 and all(c[1] is not None for c in cands):
+            print(f"  décor {k} : notes de beauté des tirages {[c[1] for c in cands]}", flush=True)
         if best is None:
             print(f"  décor semi-réaliste {k} : aucun sol libre pour poser les pieds, décor dessiné : {d[:60]}", flush=True); continue
         im, pr, z = best; im, pan = faux_textes(im)

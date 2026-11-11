@@ -75,6 +75,11 @@ def casting_voix(mots, video, B, relire, scinder, nb_ecran=None):
             v_, n_v = visages.temoin(video, mots, ph, k=n_vus if n_vus >= 2 else None)
             if v_: sources.append(("visages", v_, 0.9)); n_vus = max(n_vus, n_v)
         except Exception as e: journal(f"  témoin visages impossible ({str(e)[:100]})")
+        try:                                                               # 2 bis) ce qui bouge DANS chaque silhouette (Grounding DINO + SAM 2)
+            import personnes_vues
+            s_ = personnes_vues.temoin(video, mots, ph)
+            if s_: sources.append(("silhouettes (SAM 2)", s_, 0.8))
+        except Exception as e: journal(f"  témoin SAM 2 impossible ({str(e)[:100]})")
         try:                                                               # 3) ce qui bouge (dessins animés, plans larges)
             r_v = regard.temoin(video, mots, ph)
             if r_v: sources.append(("mouvements", r_v, 0.6))
@@ -113,7 +118,7 @@ def casting_voix(mots, video, B, relire, scinder, nb_ecran=None):
         n0 = Counter(m["voix"] for m in mots)
         mots = scinder(mots)
         if Counter(m["voix"] for m in mots) != n0: B.note("casting voix", "voix dominante partagée (même voix pour deux personnes)", True)
-    mots = presents(mots, nb_ecran, B)                                    # pas de personnage en trop (tiers dont on parle, vocal)
+    mots = presents(mots, nb_ecran, B, video)                             # pas de personnage en trop (tiers dont on parle, vocal)
     n = Counter(m["voix"] for m in mots)
     part = max(n.values()) / max(1, sum(n.values()))
     questions = sum(1 for p in ph if mots[p[-1]]["w"].endswith("?"))
@@ -124,9 +129,10 @@ def casting_voix(mots, video, B, relire, scinder, nb_ecran=None):
     return mots
 
 
-def presents(mots, nb_ecran, B):
+def presents(mots, nb_ecran, B, video=None):
     """Remarque de l'auteur (11 novembre) : 3 personnages dessinés alors que l'original n'en montre que 2, parce que les deux parlent
-    d'une 3e personne absente (le grand frère…). Plus de voix trouvées que de personnes à l'image (Gemini, sinon les mouvements) :
+    d'une 3e personne absente (le grand frère…). Plus de voix trouvées que de personnes à l'image (Gemini, sinon Grounding DINO,
+    sinon les mouvements) :
     - la voix d'un MESSAGE VOCAL / d'un appel (Gemini la dit « invisible », ou elle ne parle qu'après « il m'a envoyé un vocal »,
       « écoute ça »…) reste, mais hors champ : entendue avec ses sous-titres, jamais dessinée (HORS_CHAMP) ;
     - sinon c'est la même personne coupée en deux par la séparation des voix (doubleur qui change sa voix) : ses phrases
@@ -139,6 +145,9 @@ def presents(mots, nb_ecran, B):
     try:
         import video_ia; g_ = video_ia.visibles(); caches = video_ia.voix_hors_champ(mots)
     except Exception: g_, caches = None, set()
+    if not g_ and video:                                                   # Grounding DINO : personnes vues ensemble (idée 12)
+        try: g_ = __import__("personnes_vues").nombre(video)
+        except Exception: g_ = None
     limite = g_ or (int(nb_ecran) if isinstance(nb_ecran, (int, float)) and nb_ecran >= 1 else None)
     if not limite or limite < 2 or len(voix) <= limite:                    # (une seule personne vue : souvent un acteur qui joue tout)
         if limite and limite >= 2: B.note("casting voix", "autant de personnages que de personnes à l'image", True, f"{len(voix)} voix, {limite} à l'image")

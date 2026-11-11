@@ -5,7 +5,9 @@ personnages savent tenir (téléphone, verre, tasse, livre, ordinateur, sac, val
 Marche aussi sur les dessins animés (la plupart des sons repris en sont). Un objet vu sur au moins 2 images est donné au personnage
 qui parle à ce moment-là (réplique sans objet seulement : ce que l'IA ou le texte a choisi n'est jamais remplacé). Pas d'objets du
 décor (ordinateur de bureau, meubles) : l'essai du 11 novembre donnait un écran posé sur un bureau à tenir en main.
-Sans l'IA de mise en scène, ou quand elle oublie un objet, la vidéo le montre quand même. OBJETS_VUS=0 pour couper."""
+Sans l'IA de mise en scène, ou quand elle oublie un objet, la vidéo le montre quand même. OBJETS_VUS=0 pour couper.
+Depuis le 11 novembre (idée 12) : Grounding DINO cherche d'abord (moteur/personnes_vues.py, même passe que les personnes) ;
+OWL-ViT reste en repli."""
 import os
 
 MODELE = "google/owlvit-base-patch32"
@@ -72,6 +74,10 @@ def attribuer(reps, vus, journal=print):
 
 def appliquer(video, reps, journal=print):
     if not actif() or not video or not os.path.exists(video): return []
+    try:                                                                   # Grounding DINO (idée 12, une passe avec les personnes)
+        vus = __import__("personnes_vues").objets(video)
+        if vus is not None: return attribuer(reps, vus, journal)
+    except Exception as e: journal(f"  objets par Grounding DINO impossibles ({str(e)[:100]}) : OWL-ViT")
     try: vus = chercher(video)
     except Exception as e:
         journal(f"  objets de l'original non cherchés ({str(e)[:120]})"); return []

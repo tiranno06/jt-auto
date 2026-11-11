@@ -34,6 +34,42 @@ def _r16(sig, sr=SR):
     return resample_poly(np.asarray(sig, np.float32), 16000 // g, sr // g).astype(np.float32)
 
 
+# ------------------------------------------------------------------ Silero VAD (MIT, choix de l'auteur du 11 novembre, idée 3)
+_VAD = {}
+
+
+def parole(sig, sr=SR):
+    """Moments où quelqu'un parle vraiment : [(début, fin)] en secondes (Silero VAD, petit réseau sur la machine, quelques secondes
+    par vidéo), ou None si l'outil manque. VAD=0 pour couper."""
+    if os.environ.get("VAD", "1") == "0" or sig is None or len(sig) < sr * 0.5 or _VAD.get("echec"): return None
+    try:
+        import torch
+        from silero_vad import load_silero_vad, get_speech_timestamps
+        if "m" not in _VAD: _VAD["m"] = load_silero_vad()
+        x = torch.from_numpy(_r16(sig, sr))
+        ts = get_speech_timestamps(x, _VAD["m"], sampling_rate=16000, min_speech_duration_ms=150, min_silence_duration_ms=120, speech_pad_ms=40)
+        return [(round(t["start"] / 16000, 3), round(t["end"] / 16000, 3)) for t in ts]
+    except Exception as e:
+        journal(f"  Silero VAD indisponible ({str(e)[:100]})"); _VAD["echec"] = True
+        return None
+
+
+def mots_sans_voix(mots, zones, marge=0.3, n_min=3):
+    """Mots que la transcription a écrits là où personne ne parle (silence, musique : phrases inventées par Whisper) : retirés quand
+    ils forment un bloc de n_min mots de suite ou plus, tous hors des zones de parole (± marge). Un mot isolé reste (doute)."""
+    if not zones or not mots: return mots, 0
+    dans = lambda m: any(a - marge <= float(m["e"]) and float(m["s"]) <= b + marge for a, b in zones)
+    hors = [not dans(m) for m in mots]
+    jeter, i = set(), 0
+    while i < len(mots):
+        if not hors[i]: i += 1; continue
+        j = i
+        while j < len(mots) and hors[j]: j += 1
+        if j - i >= n_min: jeter.update(range(i, j))
+        i = j
+    return [m for k, m in enumerate(mots) if k not in jeter], len(jeter)
+
+
 # ------------------------------------------------------------------ 23 : Demucs (voix sans la musique)
 def demucs(tmp, delai=900):
     """Voix seules par Demucs (htdemucs, deux pistes : voix / reste) à partir de tmp/mono.wav. Renvoie (signal, chemin) ou (None, None)."""
@@ -155,9 +191,43 @@ def aligner(mots, sig, sr=SR, marge=0.25):
 # ------------------------------------------------------------------ 26 : émotion entendue dans la voix
 EMO_VOIX = {"ang": "angry", "hap": "happy", "sad": "sigh"}                 # étiquettes lues par cartoon.emotion
 _EMO = {}
+E2V = {"angry": "angry", "happy": "happy", "sad": "sigh", "surprised": "surprised", "fearful": "scared"}   # emotion2vec -> cartoon.EMOTIONS
+def emotion2vec(sig, segs, sr=SR, seuil=0.6):
+    """emotion2vec+ (FunASR, Alibaba ; choix de l'auteur du 11 novembre, idée 6) : colère, joie, tristesse, SURPRISE et PEUR
+    entendues dans la voix (SpeechBrain ne connaît que les trois premières). None si l'outil manque (repli : SpeechBrain).
+    EMOTION2VEC=0 pour couper. Modèle emotion2vec/emotion2vec_plus_base (licence du modèle FunASR : usage libre, auteur cité)."""
+    if os.environ.get("EMOTION2VEC", "1") == "0" or _EMO.get("e2v_echec"): return None
+    try:
+        if "e2v" not in _EMO:
+            import contextlib, io
+            from funasr import AutoModel
+            with contextlib.redirect_stdout(io.StringIO()):
+                _EMO["e2v"] = AutoModel(model="emotion2vec/emotion2vec_plus_base", hub="hf", disable_update=True)
+        m = _EMO["e2v"]; a16 = _r16(sig, sr); out = {}; t0 = time.time()
+        d = tempfile.mkdtemp()
+        for k, s in enumerate(segs):
+            bout = a16[int(s["deb"] * 16000):int(s["fin"] * 16000)]
+            if len(bout) < 8000: continue
+            f = _wav(bout[:16000 * 12], 16000, os.path.join(d, f"{k}.wav"))
+            r = m.generate(f, granularity="utterance", extract_embedding=False, disable_pbar=True)
+            r = r[0] if isinstance(r, list) and r else r
+            labs, sc = r.get("labels") or [], r.get("scores") or []
+            if not labs: continue
+            j = int(np.argmax(sc)); nom = str(labs[j]).split("/")[-1].strip().lower()
+            if nom in E2V and float(sc[j]) >= seuil: out[k] = E2V[nom]
+        journal(f"  émotions entendues dans la voix (emotion2vec) : {len(out)} réplique(s) ({time.time() - t0:.0f} s)" + (f" {sorted(set(out.values()))}" if out else ""))
+        return out
+    except Exception as e:
+        journal(f"  emotion2vec indisponible ({str(e)[:150]}) : SpeechBrain"); _EMO["e2v_echec"] = True
+        return None
+
+
 def emotions(sig, segs, sr=SR, seuil=0.75):
-    """{n° de réplique: étiquette} pour les répliques où la voix exprime nettement une émotion (colère, joie, tristesse)."""
+    """{n° de réplique: étiquette} pour les répliques où la voix exprime nettement une émotion (colère, joie, tristesse ; avec
+    emotion2vec aussi surprise et peur)."""
     if os.environ.get("EMOTION_VOIX", "1") == "0" or not segs: return {}
+    r_ = emotion2vec(sig, segs, sr)
+    if r_ is not None: return r_
     try:
         import torch
         if "c" not in _EMO:

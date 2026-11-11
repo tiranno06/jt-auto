@@ -519,6 +519,30 @@
   Même analyse : « Mais t'es où ? » répété dans une dispute (= « tu dis n'importe quoi ») faisait croire à un appel (écran coupé en
   deux) : `studio.appel_devine` compte les FORMES différentes des mots de l'appel, et avec une seule personne à l'image (créateur qui
   joue les deux rôles) « t'es où » / « je suis au… » seuls ne suffisent plus.
+- **Outils libres du 11 novembre 2026 (choix de l'auteur 1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15)** : chaque outil a son
+  interrupteur (réglage `=0`) et un repli sur l'ancien fonctionnement ; aucun appel payant. **Homme / femme** : inaSpeechSegmenter
+  (INA, MIT, tensorflow-cpu installé à part ; `voix_genre.ina`, vote 1,5, INA_GENRE=0) et Praat (parselmouth, GPL ; longueur du conduit
+  vocal sur F3/F4, réglée sur Jojo / Kévin / Lila : homme ≥ 16,35 cm, femme ≤ 16,2 ; `voix_genre.vtl`, vote 1, PRAAT=0), mesurés par
+  `cartoon` (sk "_voix_ina", "_voix_vtl", "_voix_vtl_genre", une fois par rôle) et comptés dans `studio.genre_voix`. NB : une voix
+  d'homme accélérée (dessin animé) sonne « femme » pour ina : Gemini (vote 2) reste le premier témoin. **Silero VAD** (MIT,
+  `ecoute.parole`, VAD=0) : début de la parole (`doublage.debut_parole`) et mots écrits là où personne ne parle retirés (3 de suite au
+  moins : `ecoute.mots_sans_voix`, ingé son). **WeSpeaker** (ResNet34 ONNX, CC-BY 4.0, `moteur/wespeaker.py`, outils/wespeaker,
+  WESPEAKER=0) : 2e empreinte mise bout à bout avec ECAPA dans `locuteurs.rediariser` (`_avec_wespeaker` ; même voix ≈ 0,6, voix
+  différentes ≈ 0,1). **emotion2vec+** (FunASR, `ecoute.emotion2vec`, EMOTION2VEC=0) : colère, joie, tristesse, SURPRISE, PEUR
+  entendues (repli SpeechBrain). **pyloudnorm** (MIT, `jt.filtre_volume`, VOLUME_STATIQUE=0) : un seul réglage de volume pour toute la
+  vidéo (-14 LUFS) + limiteur, au lieu du loudnorm dynamique. **Rhubarb Lip Sync** (MIT, `moteur/rhubarb.py`, outils/rhubarb téléchargé
+  par emission.yml / pre_ecoute.yml, RHUBARB=0) : formes de bouche lues dans la voix (sk "_rhubarb"), elles remplacent celles du texte
+  pour les sons TikTok (~2 s pour 10 s de voix). **TransNetV2** (MIT, `moteur/plans_video.py`, TRANSNET=0) : vraies coupes de
+  l'original pour analyse_video et le témoin visages. **Grounding DINO + SAM 2** (Apache 2.0, `moteur/personnes_vues.py`,
+  PERSONNES_VUES=0) : une image / 1,5 s, personnes (vraies ou dessinées) et objets tenus en une passe ; nombre de personnes vues
+  ensemble -> `equipe.presents` et sk["doublage"]["nb_vus"] quand Gemini manque ; objets -> `objets_vus` (OWL-ViT en repli) ;
+  silhouettes SAM 2 au début de chaque plan puis mouvement DANS chaque silhouette (décor et caméra retirés) -> témoin « qui parle »
+  (poids 0,8). **Note de beauté** (prédicteur LAION v1, `moteur/beaute.py`, BEAUTE=0) : parmi les 3 décors semi-réalistes, le plus
+  beau des cadrages pas plus de 25 % plus zoomés que le meilleur. **LanguageTool** (service public gratuit, `moteur/orthographe.py`,
+  ORTHOGRAPHE=0) : sous-titres et description, seulement ce qui ne s'entend pas (accents, terminaisons muettes ajoutées) ; « J'sais
+  pas » et les noms propres ne bougent jamais. **Pas fait** : RIFE (9) et LaMa (14) : leurs poids ne se trouvent que sur des copies non
+  officielles, dans un format qui peut cacher du code (refusé par sécurité). Cache des modèles : hf-ecoute-v4 (+ outils/rhubarb,
+  outils/wespeaker) ; venv refait une fois (contraintes.txt). Tests : ces outils sont coupés par défaut (`TestOutilsLibres`).
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.

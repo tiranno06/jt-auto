@@ -83,6 +83,9 @@ def analyser(chemin, duree_max=200):
     corps_mvt = []                                                         # P4 : ce qui bouge sous les visages (bras, mains) image par image
     lum, chal, sat = [], [], []
     prec_hist = prec_gris = None; debut_plan = [0]; difs = []
+    try: tn_ = __import__("plans_video").coupes(chemin)                    # TransNetV2 (idée 10) : les vraies coupes du montage
+    except Exception: tn_ = None
+    t_prec = None
     for j, (t, im) in enumerate(ech):
         hsv = cv2.cvtColor(im, cv2.COLOR_RGB2HSV); gris = cv2.cvtColor(im, cv2.COLOR_RGB2GRAY)
         hist = cv2.calcHist([hsv], [0, 1, 2], None, [8, 8, 4], [0, 180, 0, 256, 0, 256]); cv2.normalize(hist, hist)
@@ -93,6 +96,8 @@ def analyser(chemin, duree_max=200):
             coupe = cor < 0.55 or (dif > max(20.0, 3 * habituel) and cor < 0.95)
             difs.append(dif)
         else: coupe = False
+        if tn_ is not None: coupe = t_prec is not None and __import__("plans_video").entre(tn_, t_prec, t)
+        t_prec = t
         if coupe: coupes.append(round(t, 2)); debut_plan.append(j)
         elif prec_gris is not None:
             m = _mouvement(prec_gris, gris)

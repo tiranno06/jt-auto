@@ -6,6 +6,8 @@ import numpy as np
 ICI = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(ICI, "..", "moteur"))
 os.environ.setdefault("LONGUEUR", "pro")
+for _k in ("ORTHOGRAPHE", "PERSONNES_VUES", "TRANSNET", "RHUBARB", "INA_GENRE", "EMOTION2VEC", "WESPEAKER", "BEAUTE", "VAD"):
+    os.environ.setdefault(_k, "0")                 # outils libres du 11 novembre : ni réseau ni gros modèle pendant les tests
 import actu, ecrire, voix_banque, planning  # noqa: E402
 os.environ.setdefault("FORCER_FABRICATION", "1")   # les anciens tests vérifient l'écriture, pas le seuil de fabrication
 
@@ -2813,3 +2815,78 @@ class TestPersonneEnTrop(unittest.TestCase):
         self.assertEqual(doublage.texte_ia({"texte": "Avec toi."}), "Avec toi.")
         self.assertEqual(doublage.texte_ia("{'texte': 'Bouffon va.'}"), "Bouffon va.")
         self.assertEqual(doublage.texte_ia("Quoi ?"), "Quoi ?")
+
+
+class TestOutilsLibres(unittest.TestCase):
+    """Outils open source choisis par l'auteur le 11 novembre (idées 1-4, 6-8, 10-13, 15) : la logique autour de chaque outil."""
+
+    def test_ina_et_praat(self):
+        import voix_genre, studio
+        self.assertEqual(voix_genre.decision_ina([("female", 0, 3.0), ("male", 3, 3.5)]), "f")
+        self.assertIsNone(voix_genre.decision_ina([("female", 0, 2.0), ("male", 2, 4.0)]))
+        self.assertEqual(voix_genre.genre_vtl(17.2), "h"); self.assertEqual(voix_genre.genre_vtl(15.8), "f"); self.assertIsNone(voix_genre.genre_vtl(16.3))
+        sk = {"doublage": {}, "_voix_timbre_genre": {"envoyee": "h"}, "_voix_timbre": {"envoyee": 1010}, "_voix_ina": {"envoyee": "f"}}
+        self.assertEqual(studio.genre_voix(sk, "envoyee", {}), "f")      # ina (1,5) l'emporte sur un timbre peu net (0,5)
+
+    def test_silero_mots_sans_voix(self):
+        import ecoute
+        mots = [{"w": w, "s": s, "e": s + 0.3} for w, s in [("Merci", 0.1), ("d'avoir", 0.4), ("regardé", 0.7), ("Salut", 3.0), ("toi", 3.3)]]
+        res, n = ecoute.mots_sans_voix(mots, [(2.9, 4.0)])
+        self.assertEqual(n, 3); self.assertEqual([m["w"] for m in res], ["Salut", "toi"])
+        res, n = ecoute.mots_sans_voix(mots[:2] + mots[3:], [(2.9, 4.0)])
+        self.assertEqual(n, 0)                                             # deux mots seulement : doute, on garde
+
+    def test_volume(self):
+        import jt
+        t = np.arange(48000 * 3) / 48000; m = np.stack([0.05 * np.sin(2 * np.pi * 220 * t)] * 2, 1)
+        f = jt.filtre_volume(m, 48000)
+        self.assertTrue(f.startswith("volume=") or f.startswith("loudnorm"))
+
+    def test_rhubarb(self):
+        import rhubarb
+        rh = rhubarb.cues({"mouthCues": [{"start": 0.0, "end": 0.2, "value": "X"}, {"start": 0.2, "end": 0.5, "value": "D"},
+                                         {"start": 0.5, "end": 0.7, "value": "A"}, {"start": 0.7, "end": 1.0, "value": "F"}]})
+        self.assertEqual(rh[1][2], "A"); self.assertEqual(rh[2][2], "M"); self.assertIsNone(rh[0][2])
+        self.assertEqual(rhubarb.chronologie(rh, 0.3, 0.9), [(0.3, 0.5, "A"), (0.5, 0.7, "M"), (0.7, 0.9, "U")])
+        self.assertIsNone(rhubarb.chronologie(rh, 0.0, 0.2))
+
+    def test_transnet_instants(self):
+        import plans_video
+        p = np.zeros(300); p[89:91] = 0.9; p[180] = 0.7
+        self.assertEqual(plans_video.instants(p, 30.0), [2.98, 6.02])
+        self.assertTrue(plans_video.entre([3.0], 2.5, 3.5)); self.assertFalse(plans_video.entre([3.0], 3.0, 3.5))
+
+    def test_personnes_vues(self):
+        import personnes_vues as PV
+        b = PV.sans_doublons([(0.9, [0, 0, 100, 200]), (0.6, [5, 5, 100, 200]), (0.8, [150, 0, 250, 200])])
+        self.assertEqual(len(b), 2)
+        anc_a, anc_m = PV.actif, PV.mouvements
+        PV.actif = lambda: True
+        E = np.array([[5.0, 0.5]] * 10 + [[0.4, 6.0]] * 10)
+        PV.mouvements = lambda v: {0: (0.0, 4.0, [0.1 + 0.2 * k for k in range(20)], E)}
+        try:
+            mots = [{"w": "a", "s": s, "e": s + 0.3} for s in (0.2, 1.2, 2.4, 3.2)]
+            self.assertEqual([c for c, _ in PV.temoin("x.mp4", mots, [[0], [1], [2], [3]])], [0, 0, 1, 1])
+        finally: PV.actif, PV.mouvements = anc_a, anc_m
+
+    def test_beaute_choisir(self):
+        import beaute
+        self.assertEqual(beaute.choisir([(1.0, 5.0, "a"), (1.1, 6.0, "b"), (1.6, 9.0, "c")]), "b")   # « c » trop zoomé
+        self.assertEqual(beaute.choisir([(1.2, None, "a"), (1.0, None, "b")]), "b")                  # sans notes : le moins zoomé
+
+    def test_orthographe(self):
+        import orthographe as O
+        self.assertTrue(O.acceptable("Ils mange", "Ils mangent")); self.assertTrue(O.acceptable("a", "à"))
+        self.assertFalse(O.acceptable("J'sais", "Je ne sais")); self.assertFalse(O.acceptable("es", "sois"))
+        self.assertFalse(O.acceptable("Kevin", "Kevins"))
+        rep = {"matches": [{"offset": 0, "length": 9, "replacements": [{"value": "Il mange"}, {"value": "Ils mangent"}]},
+                           {"offset": 21, "length": 1, "replacements": [{"value": "à"}]}]}
+        anc = os.environ.get("ORTHOGRAPHE"); os.environ["ORTHOGRAPHE"] = "1"
+        try: out, n = O.corriger_lignes(["Ils mange.", "Va a la"], demander=lambda t: dict(rep, matches=[rep["matches"][0], dict(rep["matches"][1], offset=15)]))
+        finally: os.environ["ORTHOGRAPHE"] = anc or "0"
+        self.assertEqual(out, ["Ils mangent.", "Va à la"]); self.assertEqual(n, 2)
+
+    def test_wespeaker_fbank(self):
+        import wespeaker
+        F = wespeaker.fbank(np.random.default_rng(0).normal(0, 0.1, 16000).astype(np.float32))
+        self.assertEqual(F.shape[1], 80); self.assertAlmostEqual(float(np.abs(F.mean(0)).max()), 0.0, places=3)

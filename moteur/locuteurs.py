@@ -76,13 +76,29 @@ def _empreintes(ch, s16):
                 if len(seg) < 4000: continue
                 with torch.no_grad(): e = enc.encode_batch(torch.tensor(seg, dtype=torch.float32)[None]).squeeze().numpy()
                 E.append(e / (np.linalg.norm(e) + 1e-9)); ok.append(c)
-            if len(ok) >= 4: return ok, np.array(E), "ECAPA"
+            if len(ok) >= 4: return _avec_wespeaker(ok, np.array(E), s16, "ECAPA")
         except Exception as e: print(f"  empreinte ECAPA impossible ({str(e)[:100]}) : timbre MFCC", flush=True)
+    ok, X, m_ = _avec_wespeaker([c for c in ch if c["fin"] - c["deb"] >= 0.25], None, s16, "")
+    if m_: return ok, X, m_
     E, ok = [], []
     for c in ch:
         e = empreinte_mfcc(s16[int(c["deb"] * 16000):int(c["fin"] * 16000) + 1600])
         if e is not None: E.append(e); ok.append(c)
     return ok, (np.array(E)[:, list(range(19)) + [38, 39, 40]] if E else np.zeros((0, 22))), "timbre MFCC"   # timbre moyen + hauteur + brillance
+
+
+def _avec_wespeaker(ok, X, s16, methode):
+    """2e empreinte (WeSpeaker, idée 4 du 11 novembre) mise bout à bout avec ECAPA (chacune pèse moitié : la ressemblance de deux
+    morceaux devient la moyenne des deux) ; seule si ECAPA manque. Rien ne change si WeSpeaker est absent ou rate un morceau."""
+    try:
+        import wespeaker
+        W = [wespeaker.empreinte(s16[int(c["deb"] * 16000):int(c["fin"] * 16000) + 1600]) for c in ok]
+    except Exception: W = [None]
+    if not W or any(w is None for w in W):
+        return (ok, X, methode) if X is not None else (ok, None, "")
+    W = np.array(W)
+    if X is None: return (ok, W, "WeSpeaker") if len(ok) >= 4 else (ok, None, "")
+    return ok, np.concatenate([X, W], axis=1) / np.sqrt(2), methode + "+WeSpeaker"
 
 
 def morceaux(mots, ecart=0.25, max_d=4.0):
@@ -143,7 +159,7 @@ def rediariser(mots, sig, sr=SR):
     s16 = resample_poly(np.asarray(sig, np.float32), 320, 441) if sr == 22050 else np.asarray(sig, np.float32)
     ok, X, methode = _empreintes(ch, s16)
     if len(ok) < 4: return mots
-    if methode != "ECAPA": X = (X - X.mean(0)) / (X.std(0) + 1e-6)         # MFCC : mesures remises à la même échelle (ECAPA : telles quelles)
+    if not methode.startswith(("ECAPA", "WeSpeaker")): X = (X - X.mean(0)) / (X.std(0) + 1e-6)   # MFCC : même échelle (empreintes : telles quelles)
     bonus = 0.04 if _echange(ok) >= 2 else 0.0
     lab, k, sc = regrouper(X, 3, bonus, [c["fin"] - c["deb"] for c in ok])
     if k <= 1 and len(voix0) == 1 and _echange(ok) >= 3:                 # le son ne tranche pas (même voix ?) mais c'est un dialogue :
