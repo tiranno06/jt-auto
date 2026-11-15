@@ -1168,13 +1168,16 @@ class TestVoixEtScenesTiktok(unittest.TestCase):
         ici = os.path.dirname(__file__); sys.path.insert(0, os.path.join(ici, "..", "moteur"))
         import dessin_partage as DP, file_attente as FA, profils_tiktok as PT, verif_finale as V, studio, numpy as np
         import humain as HU, marionnette as M, perso_croquis as P
-        anc = os.environ.pop("AIDES", None)                                # 12 : machines d'aide selon la durée
+        anc = os.environ.pop("AIDES", None); anc_n = os.environ.get("EN_MEME_TEMPS")   # 12 : machines d'aide selon la durée
+        os.environ["EN_MEME_TEMPS"] = "1"                                  # (une vidéo à la fois : jusqu'à 5 aides)
         try: self.assertEqual([DP.nb_aides(n) for n in (1300, 3900, 7000, 20000)], [1, 3, 5, 5])
         finally:
             if anc is not None: os.environ["AIDES"] = anc
+            if anc_n is None: os.environ.pop("EN_MEME_TEMPS", None)
+            else: os.environ["EN_MEME_TEMPS"] = anc_n
         env = dict(os.environ)                                             # 9 : chaîne en parallèle
         try:
-            os.environ.update(CHAINE="3/10", PREPA_PARALLELE="1"); self.assertTrue(FA.prepa_parallele())
+            os.environ.update(CHAINE="3/10", PREPA_PARALLELE="1", EN_MEME_TEMPS="1"); self.assertTrue(FA.prepa_parallele())
             os.environ["CHAINE"] = "1/10"; self.assertFalse(FA.prepa_parallele())
             os.environ["CHAINE"] = "suite:x|3/10"; self.assertFalse(FA.prepa_parallele())
             os.environ.update(CHAINE="3/10", PREPA_PARALLELE="0"); self.assertFalse(FA.prepa_parallele())
@@ -3035,3 +3038,24 @@ class TestHeureStatsAffichee(unittest.TestCase):
         src = open(os.path.join(ICI, "..", "moteur", "site.py"), encoding="utf-8").read()
         i = src.index('data-var="PUBLI_HEURE_AUTO"'); self.assertIn('id="heureStats"', src[i:i + 800])
         self.assertIn("function heuresStats(vids)", src); self.assertIn("HEURES_LIVE=H_", src)
+
+
+class TestPlusieursEnMemeTemps(unittest.TestCase):
+    """Demande de l'auteur du 15 novembre : plusieurs vidéos fabriquées en même temps (EN_MEME_TEMPS, 2 par défaut)."""
+    def test_places_et_aides(self):
+        import file_attente as F, dessin_partage as DP
+        env = dict(os.environ)
+        try:
+            os.environ.pop("AIDES", None); os.environ.pop("EN_MEME_TEMPS", None)
+            self.assertEqual(F.en_meme_temps(), 2)
+            self.assertEqual(F.bloquants([1]), []); self.assertEqual(F.bloquants([1, 2]), [2]); self.assertEqual(F.bloquants([1, 2, 3], 3), [3])
+            self.assertEqual(F.bloquants([1], 1), [1])                     # 1 = l'une après l'autre (comme avant)
+            os.environ["CHAINE"] = "3/10"; self.assertFalse(F.prepa_parallele())   # plusieurs à la fois : chaque vidéo a sa place entière
+            self.assertEqual(DP.nb_aides(7000), 3)                         # 2 à la fois : 3 aides au plus chacune
+            os.environ["EN_MEME_TEMPS"] = "5"; self.assertEqual(DP.nb_aides(7000), 0)   # 5 et plus : chacune dessine seule
+            os.environ["EN_MEME_TEMPS"] = "99"; self.assertEqual(F.en_meme_temps(), 8)
+        finally: os.environ.clear(); os.environ.update(env)
+        src = open(os.path.join(ICI, "..", "moteur", "site.py"), encoding="utf-8").read()
+        self.assertIn('data-var="EN_MEME_TEMPS" data-def="2"', src)
+        y = open(os.path.join(ICI, "..", ".github", "workflows", "emission.yml"), encoding="utf-8").read()
+        self.assertEqual(y.count("EN_MEME_TEMPS: ${{ vars.EN_MEME_TEMPS || '2' }}"), 2)

@@ -102,6 +102,7 @@ jobs:
           TYPE_VIDEO: ${{ (inputs.filiere == 'tiktok' || startsWith(inputs.theme, 'TIKTOK::')) && 'tiktok' || 'sketch' }}
           CHAINE: ${{ inputs.chaine }}
           PREPA_PARALLELE: ${{ vars.PREPA_PARALLELE || '1' }}
+          EN_MEME_TEMPS: ${{ vars.EN_MEME_TEMPS || '2' }}
         run: python3 moteur/file_attente.py
 
   emission:
@@ -118,6 +119,7 @@ jobs:
       ENTREES: ${{ toJSON(inputs) }}                    # réglages de lancement (repris tels quels si la fabrication est mise en pause)
       CHAINE: ${{ inputs.chaine }}                      # vidéos TikTok à la chaîne : « 2/3 » affiché sur la barre du site
       PREPA_PARALLELE: ${{ vars.PREPA_PARALLELE || '1' }}  # chaîne : la vidéo suivante prépare son écoute pendant que celle-ci se dessine
+      EN_MEME_TEMPS: ${{ vars.EN_MEME_TEMPS || '2' }}     # vidéos fabriquées en même temps (réglage du site, 2 par défaut)
       EVITER: ${{ inputs.eviter }}
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}

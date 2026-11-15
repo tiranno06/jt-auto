@@ -429,7 +429,11 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <button class="second" id="tkCorrigerTout" style="width:100%;margin-bottom:6px">🛠️ Corriger les vidéos signalées (d'après leur compte rendu)</button>
     <div class="jeton" style="align-items:center"><button class="action" id="tkSerie" style="margin:0">🎲 Plusieurs vidéos à la chaîne</button>
       <input id="tkNb" type="number" min="1" max="10" value="3" inputmode="numeric" aria-label="Nombre de vidéos à la chaîne" style="flex:none;width:72px;text-align:center;font-size:17px;font-weight:700"></div>
-    <p class="note">Choisissez le nombre (1 à 10) puis touchez le bouton : le robot fabrique ces vidéos l'une après l'autre, chacune sur un son différent pris au hasard dans vos profils. Inutile d'attendre la fin d'une vidéo.</p>
+    <p class="note">Choisissez le nombre (1 à 10) puis touchez le bouton : le robot fabrique ces vidéos (plusieurs à la fois, selon le réglage ci-dessous), chacune sur un son différent pris au hasard dans vos profils. Inutile d'attendre la fin : vous pouvez fermer l'appli.</p>
+    <label>⚡ Vidéos fabriquées en même temps<select data-var="EN_MEME_TEMPS" data-def="2">
+      <option value="1">1 (l'une après l'autre)</option><option value="2">2 (recommandé)</option><option value="3">3</option>
+      <option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="8">8</option></select></label>
+    <p class="note">Plus il y en a en même temps, plus la salve finit vite. Mais les IA gratuites s'épuisent plus vite (le robot passe alors à une autre IA, parfois moins bonne), et chaque vidéo a moins de machines d'aide pour le dessin (au-delà de 4, chacune dessine seule).</p>
     <div id="tkIA" class="quotaIA"></div>
     <div id="tkSuiviS" class="note"></div></details>
   <details class="groupe repliTk" data-cle="auto"><summary>⏰ Vidéos TikTok automatiques</summary>

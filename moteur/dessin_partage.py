@@ -145,7 +145,10 @@ def nb_aides(nf):
     """Machines d'aide selon la durée (choix de l'auteur, 31 octobre 2026) : environ 1 000 images par machine, de 1 aide (vidéo
     courte) à 5 (vidéo longue) ; une vidéo plus courte n'attend pas inutilement le démarrage de machines en trop. AIDES=n impose n."""
     if os.environ.get("AIDES"): return max(1, min(8, int(os.environ["AIDES"])))
-    return max(1, min(5, round(nf / 1000) - 1))
+    try: N = max(1, int(os.environ.get("EN_MEME_TEMPS") or 2))
+    except ValueError: N = 2
+    plafond = {1: 5, 2: 3, 3: 2, 4: 1}.get(N, 0)                          # plusieurs vidéos à la fois : moins d'aides chacune (GitHub : 20
+    return max(0 if plafond == 0 else 1, min(plafond, round(nf / 1000) - 1))   # machines en même temps au plus pour le compte)
 
 
 def dessiner(nf, args, dessiner_plage, journal=print, progres=None):
@@ -153,6 +156,7 @@ def dessiner(nf, args, dessiner_plage, journal=print, progres=None):
     Renvoie la liste ordonnée des morceaux vidéo (fichiers mp4) à recoller, ou None si le partage est impossible."""
     import tempfile
     n_aides = nb_aides(nf)
+    if n_aides < 1: return None                                            # beaucoup de vidéos à la fois : chacune dessine seule
     morceaux = decouper(nf, n_aides + 1)
     a_moi, aux_aides = morceaux[0], morceaux[1:]
     run = os.environ.get("GITHUB_RUN_ID", "0"); nom = f"d{run}_{int(time.time()) % 100000}"

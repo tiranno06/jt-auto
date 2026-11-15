@@ -107,6 +107,13 @@ def _remplacer(x, local):
     return x
 
 
+def reserver(asset):
+    """Retire l'asset du stock ; False s'il n'y était déjà plus (plusieurs vidéos fabriquées en même temps : un son pour une seule)."""
+    if DP.LOCAL: DP.effacer(asset); return True
+    try: DP._req("DELETE", asset["url"]); return True
+    except Exception: return False
+
+
 def prendre(historique, journal=print):
     """Le plus ancien son prêt jamais utilisé : (url, prep) avec ses fichiers téléchargés, ou None. Il est retiré du stock."""
     if not actif(): return None
@@ -119,7 +126,7 @@ def prendre(historique, journal=print):
                 for b in parts: DP.effacer(b)
                 continue
             tmp = tempfile.mkdtemp(); DP.telecharger(s["asset"], f"{tmp}/etat.pkl.gz")
-            DP.effacer(s["asset"])                                         # réservé : une autre fabrication ne le prendra pas
+            if not reserver(s["asset"]): continue                          # une autre fabrication (en même temps) l'a pris juste avant
             with gzip.open(f"{tmp}/etat.pkl.gz", "rb") as f: d = pickle.load(f)
             dispo = {b["name"]: b for b in parts}; local = {}
             for chemin, n in d["fichiers"].items():

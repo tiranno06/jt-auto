@@ -119,6 +119,15 @@
   Onglet TikTok : bouton « 🎲 Plusieurs vidéos à la chaîne » + nombre (1 à 10) → emission.yml chaine=« 1/n » ; chaque vidéo finie
   (même ratée) lance la suivante (« 2/n »…, dernière étape d'emission.yml, pas de doublon si le garde relance) ; la barre affiche
   « vidéo 2/n : … ». Le robot publie son avancement toutes les 8 s et la file regarde de moins en moins souvent (quota de l'API GitHub).
+- **Plusieurs vidéos fabriquées en même temps (demande de l'auteur du 15 novembre 2026)** : réglage « ⚡ Vidéos fabriquées en même temps »
+  (onglet TikTok, « Lancer des vidéos » ; variable EN_MEME_TEMPS, 2 par défaut, 1 à 8 ; 1 = l'ancien fonctionnement, une après l'autre
+  avec la préparation de la suivante pendant le dessin). `file_attente.en_meme_temps` / `bloquants` : une fabrication n'attend que s'il
+  y a déjà N fabrications lancées avant elle et pas finies. Chaîne « k/n » : avec N ≥ 2, la vidéo k lance k+1 dès que son son est choisi
+  (`principal.lancer_suivante`, son passé en « eviter » : jamais deux fois le même), k+1 attend une place libre ; avec N = 1, lancement
+  au moment de dessiner (`tour_de_dessiner`). Machines d'aide au dessin par vidéo selon N (`dessin_partage.nb_aides` : 5 / 3 / 2 / 1 /
+  aucune au-delà de 4 ; GitHub : 20 machines à la fois pour le compte ; dépôt public = minutes gratuites). Pré-écoute : un son prêt n'est
+  pris que par une seule fabrication (`pre_ecoute.reserver`). Limites : quotas à la minute des IA gratuites plus vite atteints (repli
+  sur l'IA suivante), budget Modal inchangé au total.
 - **Vitesse de fabrication** (octobre 2026) : dessin accéléré sans changer un pixel (toile des personnages remise à zéro seulement là où
   on a dessiné, comparaisons de couleurs par OpenCV, dégradés et barbe sans grille, grain de barbe calculé une fois) ; 2e version
   du jury = **redessin partiel** (`cartoon.images_a_refaire` : empreinte de chaque plan et réplique ; seules les images autour de ce
