@@ -2133,7 +2133,7 @@ class TestOngletTiktokReplie(unittest.TestCase):
         src = open(os.path.join(os.path.dirname(__file__), "..", "moteur", "site.py"), encoding="utf-8").read()
         i = src.index('<div id="o-tiktok"'); j = src.index("STATISTIQUES -->", i); bloc = src[i:j]
         self.assertGreaterEqual(bloc.count('class="groupe repliTk"'), 6)
-        self.assertEqual(bloc.count('<section class="panneau"'), 1)        # seule la fabrication en cours reste toujours visible
+        self.assertEqual(bloc.count('<section class="panneau">'), 1)        # seule la fabrication en cours reste toujours visible
         self.assertIn('id="filtresRepli"', bloc); self.assertIn("jt_replis", src)
 
 

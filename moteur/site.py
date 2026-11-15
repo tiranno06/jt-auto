@@ -143,7 +143,7 @@ def construire():
 
 # ------------------------------------------------------------------ application installable (PWA)
 def icone(taille, marge=0.0):
-    """Icône de l'appli = logo de la chaîne (tête de Jojo en plein petit drame, fond jaune à rayons)."""
+    """Icône de l'appli = logo de la chaîne (deux personnages croquis en plein petit drame, fond jaune à rayons)."""
     import marque
     return marque.logo(taille, marge=marge)
 
@@ -170,7 +170,7 @@ def application(nom):
 
 # Service worker : l'appli s'ouvre même hors connexion (dernière version de la page), sans jamais mettre en cache
 # les vidéos (trop lourdes) ni les appels à GitHub.
-SW = r"""const CACHE = "regie-v27";
+SW = r"""const CACHE = "regie-v28";
 const COQUILLE = ["./", "manifest.webmanifest", "logo-192.png", "logo-512.png", "poppins-500.ttf", "poppins-700.ttf"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(COQUILLE))); self.skipWaiting(); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(k => Promise.all(k.filter(x => x !== CACHE).map(x => caches.delete(x))))); self.clients.claim(); });

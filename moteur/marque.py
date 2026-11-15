@@ -1,7 +1,8 @@
 """Charte graphique de la chaîne « Petits.Dramas » : nom, couleurs, logo, signature de fin de vidéo, filigrane.
 
-Le logo reprend le physique de nos personnages (marionnette.py) : la grosse tête ronde blanche de Jojo, bonnet orange,
-en plein « petit drame » (grands yeux, larme, bouche en O) sur le fond jaune à rayons des cartons de transition.
+Logo (nouveau, 15 novembre 2026, demande de l'auteur : plus de Jojo) : deux personnages dans le style croquis des vidéos sur les
+sons TikTok, en plein « petit drame » (elle en colère, lui choqué, une goutte de sueur), dans un médaillon rond sur papier, sur le
+fond jaune à rayons de la chaîne. L'ancienne tête de Jojo (marionnette.py) reste dans `tete_jojo`, plus utilisée.
 Tout est dessiné par le code : aucune image externe, aucun droit à payer."""
 import os
 import numpy as np, cv2
@@ -19,8 +20,38 @@ def _rayons(img, cx, cy, n=24, r=4000):
         a = k * 2 * math.pi / n
         d.polygon([(cx, cy), (cx + r * math.cos(a), cy + r * math.sin(a)), (cx + r * math.cos(a + math.pi / n * 0.55), cy + r * math.sin(a + math.pi / n * 0.55))], fill=JAUNE_FONCE)
 
+_DUO = {}
+
+
+def duo():
+    """Les deux personnages du logo (style croquis), médaillon rond RGBA 1024 px, dessiné une fois puis gardé."""
+    if "m" in _DUO: return _DUO["m"]
+    import marionnette as M, humain as HU, croquis as C, perso_croquis as P
+    img = C.papier(1100, 1100, graine=5)
+    Ff = dict(HU.creer(7, genre="f", age=28, cheveux="queue"), silhouette="petit")
+    Fh = dict(HU.creer(2, genre="h", age=28), silhouette="petit")
+    pf = dict(M.pose_neutre(), x=330, y=1380, s=1.0, t=0.0, emo="colere", bouche=0.8, viseme="A",
+              costume={"haut": "tshirt", "c_haut": (240, 90, 80)}, regard=(0.6, 0.0))
+    ph = dict(M.pose_neutre(), x=770, y=1380, s=1.0, t=0.0, emo="choc", bouche=0.8, viseme="O",
+              costume={"haut": "capuche", "c_haut": (60, 120, 220)}, effets=("sueur",), regard=(-0.6, 0.0))
+    P.dessiner(img, Ff, HU._pose(Ff, pf)); P.dessiner(img, Fh, HU._pose(Fh, ph))
+    x0, y0, c = 60, 270, 980                                                   # les deux têtes au centre du médaillon
+    carre = Image.fromarray(np.ascontiguousarray(img[y0:y0 + c, x0:x0 + c])).resize((1024, 1024), Image.LANCZOS).convert("RGBA")
+    S = 1024; ep = 34
+    masque = Image.new("L", (S, S), 0); ImageDraw.Draw(masque).ellipse((ep, ep, S - 1 - ep, S - 1 - ep), fill=255)
+    m = Image.new("RGBA", (S, S), (0, 0, 0, 0)); ImageDraw.Draw(m).ellipse((0, 0, S - 1, S - 1), fill=ENCRE + (255,))
+    m.paste(carre, (0, 0), masque)
+    _DUO["m"] = m
+    return m
+
+
 def tete(taille, t=0.0, larme=0.35):
-    """Tête de Jojo en « petit drame », sur fond transparent (RGBA, carré `taille`)."""
+    """Image du logo sur fond transparent (RGBA, carré `taille`) : le médaillon des deux personnages (voir `duo`)."""
+    return duo().resize((taille, taille), Image.LANCZOS)
+
+
+def tete_jojo(taille, t=0.0, larme=0.35):
+    """ANCIEN logo (mis de côté le 15 novembre 2026) : tête de Jojo en « petit drame », sur fond transparent."""
     import marionnette as M
     S = 1024; img = np.full((1500, S, 3), 255, np.uint8); img[:] = (1, 2, 3)        # couleur clé pour la transparence
     p = M.pose_neutre(); p.update(x=S / 2, y=1420, s=2.05, yeux="grands", sourcils="triste", forme="o", bouche=0.0,
@@ -40,9 +71,9 @@ def tete(taille, t=0.0, larme=0.35):
     return Image.fromarray(rgba, "RGBA").resize((taille, taille), Image.LANCZOS)
 
 def logo(taille, marge=0.0, rond=True):
-    """Icône carrée de l'appli / photo de profil : fond jaune à rayons + tête de Jojo."""
-    S = 1024; img = Image.new("RGB", (S, S), JAUNE); _rayons(img, S / 2, S * 0.62)
-    m = int(S * (marge + 0.11)); t = tete(S - 2 * m)
+    """Icône carrée de l'appli / photo de profil : fond jaune à rayons + médaillon des deux personnages."""
+    S = 1024; img = Image.new("RGB", (S, S), JAUNE); _rayons(img, S / 2, S / 2)
+    m = int(S * (marge + 0.09)); t = tete(S - 2 * m)
     img.paste(t, (m, m), t)
     if rond and not marge:
         masque = Image.new("L", (S, S), 0); ImageDraw.Draw(masque).rounded_rectangle((0, 0, S - 1, S - 1), int(S * 0.22), fill=255)
@@ -53,7 +84,7 @@ def _texte_contour(d, xy, txt, f, couleur=BLANC, contour=ENCRE, ep=10):
     d.text(xy, txt, font=f, fill=couleur, stroke_width=ep, stroke_fill=contour)
 
 def signature(W, H, sous_titre="Abonne-toi pour la suite !"):
-    """Carton de fin identique sur toutes les vidéos (charte) : rayons jaunes, tête de Jojo, nom de la chaîne, appel à s'abonner."""
+    """Carton de fin identique sur toutes les vidéos (charte) : rayons jaunes, médaillon du logo, nom de la chaîne, appel à s'abonner."""
     img = Image.new("RGB", (W, H), JAUNE); _rayons(img, W / 2, H * 0.4)
     t = tete(int(W * 0.62)); img.paste(t, (int(W * 0.19), int(H * 0.14)), t)
     d = ImageDraw.Draw(img); f = ImageFont.truetype(POLICE, 118); f2 = ImageFont.truetype(POLICE, 64)

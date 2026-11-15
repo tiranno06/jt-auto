@@ -14,7 +14,10 @@
   planning des sketchs, voix des personnages, mode réaliste, ma voix, bêtisier cachés ; « Refaire » ne propose que « nouveaux décors ».
   Mécanisme : classe CSS `ancien` + `body.tiktok-seul` (`site.modeSite`, `tiktokSeul`) ; variable GitHub SITE_COMPLET=1 pour tout
   réafficher. Les anciennes consignes (sketchs, style toon, marionnettes, voix de synthèse, montage dynamique…) sont rangées dans
-  `docs/archives_sketchs.md` (à relire seulement si l'auteur reprend les sketchs). Le logo de la chaîne (tête de Jojo) n'a pas changé.
+  `docs/archives_sketchs.md` (à relire seulement si l'auteur reprend les sketchs).
+- **Nouveau logo (15 novembre 2026, demande de l'auteur : plus de Jojo)** : `marque.duo` : deux personnages croquis (elle en colère,
+  lui choqué avec une goutte de sueur) dans un médaillon rond sur papier, sur le fond jaune à rayons ; sert partout (`marque.logo` :
+  icône de l'appli et photo de profil, `filigrane` en haut des vidéos, `signature` = carton de fin). Ancienne tête : `marque.tete_jojo`.
 
 ## Budget et outils
 - **Outils payants activés par défaut** (Claude, ElevenLabs, décors et plans IA sur Modal, contrôle vidéo par Claude) : on vise
