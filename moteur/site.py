@@ -418,7 +418,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <b>🔍 Nouveaux créateurs proposés</b>
     <p class="note">Chaque lundi, le robot cherche des comptes cités par vos créateurs et vérifie qu'ils publient des sketchs qui font des vues. « ➕ » l'ajoute à votre liste, « 🚫 » à la liste noire (puis touchez OK).</p>
     <div id="decouvertes"><p class="note">Pas encore de proposition (prochaine recherche lundi).</p></div></details>
-  <details class="groupe repliTk" data-cle="vitrine"><summary>🏪 Vitrine du profil</summary>
+  <details class="groupe repliTk ancien" data-cle="vitrine"><summary>🏪 Vitrine du profil</summary>
     <p class="note">À appliquer vous-même dans l'appli TikTok (Profil → Modifier le profil ; appui long sur une vidéo → Épingler). Mis à jour chaque lundi.</p>
     <div id="vitrine"><p class="note">Prête lundi prochain (ou lancez « Vitrine et nouveaux créateurs » dans GitHub).</p></div></details>
   <details class="groupe repliTk" data-cle="lancer" open><summary>🎲 Lancer des vidéos (sons au hasard)</summary>
