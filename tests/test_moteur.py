@@ -2133,7 +2133,7 @@ class TestOngletTiktokReplie(unittest.TestCase):
         src = open(os.path.join(os.path.dirname(__file__), "..", "moteur", "site.py"), encoding="utf-8").read()
         i = src.index('<div id="o-tiktok"'); j = src.index("STATISTIQUES -->", i); bloc = src[i:j]
         self.assertGreaterEqual(bloc.count('class="groupe repliTk"'), 6)
-        self.assertEqual(bloc.count('<section class="panneau"'), 1)        # seule la fabrication en cours reste toujours visible
+        self.assertEqual(bloc.count('<section class="panneau">'), 1)        # seule la fabrication en cours reste toujours visible
         self.assertIn('id="filtresRepli"', bloc); self.assertIn("jt_replis", src)
 
 
@@ -2890,3 +2890,33 @@ class TestOutilsLibres(unittest.TestCase):
         import wespeaker
         F = wespeaker.fbank(np.random.default_rng(0).normal(0, 0.1, 16000).astype(np.float32))
         self.assertEqual(F.shape[1], 80); self.assertAlmostEqual(float(np.abs(F.mean(0)).max()), 0.0, places=3)
+
+
+class TestStockPublication(unittest.TestCase):
+    def test_compteur_au_dessus_de_la_fabrication(self):
+        src = open(os.path.join(ICI, "..", "moteur", "site.py"), encoding="utf-8").read()
+        for o in ("o-tiktok", "o-accueil"):
+            k = src.index('id="%s"' % o) if 'id="%s"' % o in src else 0
+            bloc = src[k:k + 4000]
+            if "Fabrication en cours" in bloc:
+                self.assertLess(bloc.index("stockPubli"), bloc.index("Fabrication en cours"))
+        self.assertIn("function rendreStock()", src); self.assertIn("attentePubli(filePubli())", src)
+
+
+class TestSiteTikTokSeul(unittest.TestCase):
+    """Grand ménage du 15 novembre : sketchs et Jojo / Kévin / Lila masqués sur le site (pas effacés)."""
+    def test_masque_pas_efface(self):
+        src = open(os.path.join(ICI, "..", "moteur", "site.py"), encoding="utf-8").read()
+        self.assertIn('class="tiktok-seul"', src); self.assertIn("body.tiktok-seul .ancien{display:none!important}", src)
+        self.assertIn('<button class="onglet ancien" data-o="accueil">', src); self.assertIn('<button class="onglet ancien" data-o="videos">', src)
+        self.assertIn('<details class="groupe ancien"><summary>✍️ Écriture</summary>', src)
+        self.assertIn('data-var="PERSO_JOJO"', src)                       # toujours là, juste caché
+        self.assertIn("SITE_COMPLET", src)
+        self.assertTrue(os.path.exists(os.path.join(ICI, "..", "docs", "archives_sketchs.md")))
+
+
+class TestChargerVersion(unittest.TestCase):
+    def test_bouton_charger_la_derniere_version(self):
+        src = open(os.path.join(ICI, "..", "moteur", "site.py"), encoding="utf-8").read()
+        self.assertIn('id="chargerVersion"', src); self.assertIn("async function rechargerPropre()", src)
+        self.assertNotIn('class="action" id="chargerVersion"', src)        # jamais grisé : marche même sans la clé de la régie
