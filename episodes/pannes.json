@@ -20,33 +20,33 @@
   }
  },
  "IN N:N:N N port.cc:N] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off erro": {
-  "n": 1,
+  "n": 2,
   "premiere": "2026-11-15",
   "derniere": "2026-11-15",
   "exemple": "I0000 00:00:1794776552.486665    4253 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environ",
   "etape": "ingé son",
   "jours": {
-   "2026-11-15": 1
+   "2026-11-15": 2
   }
  },
  "réseau : erreur N passagère, nouvel essai dans N s": {
-  "n": 1,
+  "n": 2,
   "premiere": "2026-11-15",
   "derniere": "2026-11-15",
   "exemple": "réseau : erreur 503 passagère, nouvel essai dans 2 s",
   "etape": "ingé son",
   "jours": {
-   "2026-11-15": 1
+   "2026-11-15": 2
   }
  },
  "[transformers] You are using a model of type `samN_video` to instantiate a model of type `samN`. This may be expected if you are loading a c": {
-  "n": 1,
+  "n": 2,
   "premiere": "2026-11-15",
   "derniere": "2026-11-15",
   "exemple": "[transformers] You are using a model of type `sam2_video` to instantiate a model of type `sam2`. This may be expected if you are loading a checkpoint that shares a subset of the architecture (e.g., loading a `sam2_video` checkpoint into `Sa",
   "etape": "ingé son",
   "jours": {
-   "2026-11-15": 1
+   "2026-11-15": 2
   }
  },
  "liste de contrôle par l'IA impossible (réponse inexploitable : «…»)": {
@@ -54,6 +54,26 @@
   "premiere": "2026-11-15",
   "derniere": "2026-11-15",
   "exemple": "liste de contrôle par l'IA impossible (réponse inexploitable : «  »)",
+  "etape": "monteur",
+  "jours": {
+   "2026-11-15": 1
+  }
+ },
+ "Jury qualité (ia) : N/N — Humoriste N/N : N s Le personnage masculin n«…»POV«…»instant N alors qu«…»envoyée est censée être une maman de N a": {
+  "n": 1,
+  "premiere": "2026-11-15",
+  "derniere": "2026-11-15",
+  "exemple": "Jury qualité (ia) : 6.0/10 — Humoriste 6.6/10 : 23.6 s Le personnage masculin n'exprime pas assez la panique totale face à la situation. | Réalisateur 6.3/10 : 5.2 s Le bandeau contextuel 'POV' disparaît brutalement à partir de l'instant 3 ",
+  "etape": "monteur",
+  "jours": {
+   "2026-11-15": 1
+  }
+ },
+ "à N s : Le texte dans le GPS «…» est minuscule, flou et quasi illisible pour un format smartphone.": {
+  "n": 1,
+  "premiere": "2026-11-15",
+  "derniere": "2026-11-15",
+  "exemple": "- à 0.4 s : Le texte dans le GPS 'GPS indiquant: Destination droit dans le mur' est minuscule, flou et quasi illisible pour un format smartphone.",
   "etape": "monteur",
   "jours": {
    "2026-11-15": 1
