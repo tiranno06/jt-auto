@@ -292,6 +292,7 @@ label .jeton{margin-top:6px}
 .note{font-size:12.5px;color:var(--doux);line-height:1.45}
 .stockPubli{display:flex;align-items:center;gap:14px}.stockPubli .nb{font-size:40px;font-weight:800;line-height:1;min-width:56px;text-align:center}
 .stockPubli .txt{font-size:14px;line-height:1.4}.stockPubli .txt b{font-size:15px}.stockPubli.vert .nb{color:#2e9e5b}.stockPubli.orange .nb{color:#e08a00}.stockPubli.rouge .nb{color:#d64545}
+body.tiktok-seul .ancien{display:none!important}
 .prog{margin:10px 0 4px}.prog .haut{display:flex;justify-content:space-between;gap:8px;font-size:13.5px;font-weight:600}
 .prog .barre{height:14px;border-radius:8px;background:var(--ligne);overflow:hidden;margin:6px 0 4px}
 .prog .plein{height:100%;border-radius:8px;background:linear-gradient(90deg,#25f4ee,#fe2c55);transition:width 1s linear}
@@ -344,16 +345,14 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
   body:not(.lecture) #fermer{display:none}
 }
 @media (max-width:380px){.opts.deux{grid-template-columns:1fr}}
-</style></head><body data-onglet="accueil">
+</style></head><body data-onglet="tiktok" class="tiktok-seul">
 <header><h1><img src="logo-192.png" alt="" style="width:44px;height:44px;border-radius:12px;vertical-align:-10px;margin-right:10px">__NOM__</h1><div class="sous">Régie de la chaîne · <span id="cnx">⚪ …</span> <button id="rafraichir" title="Rafraîchir" aria-label="Rafraîchir" style="padding:2px 9px;font-size:15px;background:transparent;border:1px solid var(--ligne);color:inherit;border-radius:999px;cursor:pointer">🔄</button></div><div id="tirer" style="display:none;text-align:center;font-size:14px;padding:6px">↓ Relâchez pour rafraîchir</div>
 <button id="installer" style="display:none;margin-top:10px;padding:9px 16px;font-size:14px;font-weight:700;background:var(--jaune);color:#111">📲 Installer l'application</button></header>
 <div id="panneGH" class="alerte" style="display:none;margin:8px 12px 0"></div>
-<nav class="onglets"><button class="onglet actif" data-o="accueil"><span class="ic">🏠</span><span class="nom">Accueil</span></button><button class="onglet" data-o="videos"><span class="ic">🎬</span><span class="nom">Vidéos</span></button><button class="onglet" data-o="tiktok"><span class="ic">🎵</span><span class="nom">TikTok</span></button><button class="onglet" data-o="stats"><span class="ic">📊</span><span class="nom">Stats</span></button><button class="onglet" data-o="config"><span class="ic">⚙️</span><span class="nom">Réglages</span></button></nav>
+<nav class="onglets"><button class="onglet ancien" data-o="accueil"><span class="ic">🏠</span><span class="nom">Accueil</span></button><button class="onglet ancien" data-o="videos"><span class="ic">🎬</span><span class="nom">Vidéos</span></button><button class="onglet actif" data-o="tiktok"><span class="ic">🎵</span><span class="nom">TikTok</span></button><button class="onglet" data-o="stats"><span class="ic">📊</span><span class="nom">Stats</span></button><button class="onglet" data-o="config"><span class="ic">⚙️</span><span class="nom">Réglages</span></button></nav>
 <main>
  <!-- ======================================================== ACCUEIL -->
- <div id="o-accueil">
-  <section class="panneau" id="bandeauCnx" style="display:none"><span class="note">🔑 Connectez la régie une fois pour lancer et publier des vidéos.</span><button class="second" id="allerCnx" style="flex:none;padding:10px 14px">Connecter</button></section>
-  <div id="alerteCredit"></div>
+ <div id="o-accueil" style="display:none">
   <section class="panneau" id="nouveauTk" style="display:none"></section>
   <button class="gros" id="creerBtn">➕ Créer une vidéo</button>
   <section class="panneau" id="creer" style="display:none">
@@ -385,14 +384,16 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
  </div>
  <!-- ======================================================== VIDÉOS -->
  <div id="o-videos" style="display:none">
-  <div class="filtres" id="filtres">
+  <div class="filtres ancien" id="filtres">
     <button class="chip on" data-f="tout">Toutes</button><button class="chip" data-f="court">⚡ Courtes</button><button class="chip" data-f="long">🎭 Longues</button>
     <button class="chip" data-f="texte">✍️ Depuis un texte</button><button class="chip" data-f="essais" title="Aperçus et essais : effacés tout seuls au bout de 3 jours">🧪 Essais</button></div>
   <div id="enteteTk" style="display:none" class="panneau"><b>🎵 Vidéos sur des sons TikTok</b> <button class="second" id="retourTk" style="flex:none;padding:8px 12px">← Onglet TikTok</button></div>
   <div id="liste"></div>
  </div>
  <!-- ======================================================== SONS TIKTOK (à part des sketchs) -->
- <div id="o-tiktok" style="display:none">
+ <div id="o-tiktok">
+  <section class="panneau" id="bandeauCnx" style="display:none"><span class="note">🔑 Connectez la régie une fois pour lancer et publier des vidéos.</span><button class="second" id="allerCnx" style="flex:none;padding:10px 14px">Connecter</button></section>
+  <div id="alerteCredit"></div>
   <section class="panneau stockPubli"></section>
   <section class="panneau"><h2>⏳ Fabrication en cours</h2><div class="progressions"><p class="note">Aucune fabrication en cours.</p></div></section>
   <details class="groupe repliTk" data-cle="lien"><summary>🔗 Une vidéo sur un son TikTok</summary>
@@ -467,8 +468,8 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <p class="note">Temps passé à chaque étape de la dernière vidéo (⚠️ = au moins deux fois plus lent que d'habitude).</p><div id="tempsFab" class="barres"><p class="note">Visible après la prochaine vidéo.</p></div></details>
   <details class="groupe" open><summary>🗂️ Onglets affichés</summary>
     <p class="note">Décochez les onglets que vous n'utilisez pas (sur tous vos appareils). 🎵 TikTok et ⚙️ Réglages restent toujours là.</p>
-    <label class="coche"><input type="checkbox" data-onglet-vu="accueil"> 🏠 Accueil</label>
-    <label class="coche"><input type="checkbox" data-onglet-vu="videos"> 🎬 Vidéos (sketchs)</label>
+    <label class="coche ancien"><input type="checkbox" data-onglet-vu="accueil"> 🏠 Accueil</label>
+    <label class="coche ancien"><input type="checkbox" data-onglet-vu="videos"> 🎬 Vidéos (sketchs)</label>
     <label class="coche"><input type="checkbox" data-onglet-vu="stats"> 📊 Stats</label>
   </details>
 
@@ -477,7 +478,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <div id="voyants"></div>
     <button class="action" id="verifCredits">🔍 Vérifier maintenant (Claude, Mistral, Gemini, Groq, ElevenLabs, Modal)</button>
     <p class="note" id="suiviCredits"></p>
-    <div class="auto"><div class="txt"><b>💰 Mode économique</b><small>Garde Claude, ElevenLabs et les décors IA, mais dépense environ 3 à 5 fois moins de crédit Claude : Sonnet au lieu d'Opus, 1 premier jet, 2 réécritures au plus, sans public test ni tendances.</small></div><button class="inter" data-var="MODE_ECO" data-def="0" data-bascule="1"></button></div>
+    <div class="auto ancien"><div class="txt"><b>💰 Mode économique</b><small>Garde Claude, ElevenLabs et les décors IA, mais dépense environ 3 à 5 fois moins de crédit Claude : Sonnet au lieu d'Opus, 1 premier jet, 2 réécritures au plus, sans public test ni tendances.</small></div><button class="inter" data-var="MODE_ECO" data-def="0" data-bascule="1"></button></div>
     <div class="auto"><div class="txt"><b>Voix ElevenLabs</b><small>Voix réalistes (rires, colère). Coupé : voix gratuites.</small></div><button class="inter" data-var="ELEVENLABS" data-def="1" data-bascule="1"></button></div>
     <div class="auto"><div class="txt"><b>Décors générés par IA</b><small>Un décor par scène (Modal). Coupé : décors dessinés.</small></div><button class="inter" data-var="DECORS" data-def="1" data-bascule="1"></button></div>
     <div class="auto"><div class="txt"><b>Contrôle de la vidéo finie</b><small>Claude regarde la vidéo avant publication ; défaut grave = pas de publication auto.</small></div><button class="inter" data-var="CONTROLE_VIDEO" data-def="1" data-bascule="1"></button></div>
@@ -485,10 +486,11 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
   </details>
 
   <details class="groupe"><summary>📤 Publication</summary>
-    <div class="auto">
+    <div class="auto ancien">
       <div class="txt"><b id="autoTitre">Publication automatique</b><small id="autoAide">Connectez la régie pour utiliser ce réglage.</small></div>
       <button class="inter" id="inter" aria-label="Publication automatique" disabled></button>
     </div>
+    <div class="ancien">
     <h3>Programme</h3>
     <label>Type des vidéos automatiques<select id="selFormat" class="perso">
       <option value="cycle">⭐ Cycle : 3 gags éclair puis 1 sketch long</option>
@@ -510,6 +512,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <div class="ligne2"><button class="second perso" id="ajCreneau">+ Un créneau</button><button class="second perso" id="ajAuto">+ Créneau 📊 auto</button></div>
     <button class="action perso" id="planEnr">Enregistrer le planning</button>
     <p class="note">Vidéo prête 20 à 40 min après l'heure. « 📊 auto » : l'heure qui fait le plus de vues.</p>
+    </div>
     <h3>Plateformes</h3>
     <p class="note">TikTok toujours. Les autres : connectez d'abord le compte dans Buffer.</p>
     <div class="auto"><div class="txt"><b>YouTube Shorts</b><small>Publie aussi sur YouTube.</small></div><button class="inter" data-var="PUBLIER_YOUTUBE" data-def="0" data-bascule="1"></button></div>
@@ -519,17 +522,17 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
   </details>
 
   <details class="groupe"><summary>🎨 Style</summary>
-    <label>Personnages<select data-var="PERSONNAGES" data-def="humains"><option value="humains">Adultes style toons, différents à chaque vidéo (recommandé)</option><option value="marionnettes">Anciennes marionnettes de la chaîne</option></select></label>
+    <label class="ancien">Personnages<select data-var="PERSONNAGES" data-def="humains"><option value="humains">Adultes style toons, différents à chaque vidéo (recommandé)</option><option value="marionnettes">Anciennes marionnettes de la chaîne</option></select></label>
     <label>Style des décors<select data-var="STYLE_DECOR" data-def="semi_realiste"><option value="semi_realiste">Semi-réaliste : peinture d'un vrai lieu, pieds posés au sol (recommandé)</option><option value="croquis">Croquis : décor dessiné à l'encre et à l'aquarelle</option></select></label>
     <label>Montage<select data-var="MONTAGE" data-def="large"><option value="large">Plan large : les personnages toujours à l'image, caméra fixe (recommandé)</option><option value="dynamique">Dynamique : beaucoup de plans, zooms et caméra vivante</option><option value="simple">Simple : un plan par réplique</option></select></label>
     <div class="auto"><div class="txt"><b>Rendu détaillé</b><small>Tenues, visages, décors et plans soignés (gratuit).</small></div><button class="inter" data-var="RENDU_DETAILLE" data-def="1" data-bascule="1"></button></div>
-    <div class="auto"><div class="txt"><b>Accroche choc en ouverture</b><small>La réplique la plus intrigante dès la 1re seconde.</small></div><button class="inter" data-var="ACCROCHE" data-def="0" data-bascule="1"></button></div>
-    <label>Voix des personnages<select data-var="VOIX_PERSOS" data-def="bibliotheque"><option value="bibliotheque">Voix de la bibliothèque ElevenLabs</option><option value="sur_mesure">🎙️ Voix sur mesure de la chaîne</option></select></label>
-    <label>Prononciation (mots mal lus)<div class="jeton"><textarea data-var="PRONONCIATION" data-def="" data-texte="1" maxlength="1500" rows="2" placeholder="Ex. : Kévin=Kévinne ; Lidl=Lidle"></textarea><button class="second" data-enr="PRONONCIATION" style="flex:none;padding:10px 14px">OK</button></div></label>
-    <p class="note">Une règle « mot=comment il se dit », séparées par « ; ».</p>
+    <div class="auto ancien"><div class="txt"><b>Accroche choc en ouverture</b><small>La réplique la plus intrigante dès la 1re seconde.</small></div><button class="inter" data-var="ACCROCHE" data-def="0" data-bascule="1"></button></div>
+    <label class="ancien">Voix des personnages<select data-var="VOIX_PERSOS" data-def="bibliotheque"><option value="bibliotheque">Voix de la bibliothèque ElevenLabs</option><option value="sur_mesure">🎙️ Voix sur mesure de la chaîne</option></select></label>
+    <label class="ancien">Prononciation (mots mal lus)<div class="jeton"><textarea data-var="PRONONCIATION" data-def="" data-texte="1" maxlength="1500" rows="2" placeholder="Ex. : Kévin=Kévinne ; Lidl=Lidle"></textarea><button class="second" data-enr="PRONONCIATION" style="flex:none;padding:10px 14px">OK</button></div></label>
+    <p class="note ancien">Une règle « mot=comment il se dit », séparées par « ; ».</p>
   </details>
 
-  <details class="groupe"><summary>✍️ Écriture</summary>
+  <details class="groupe ancien"><summary>✍️ Écriture</summary>
     <label>Ton de l'humour<select data-var="TON" data-def="clash"><option value="clash">Clash, mauvaise foi assumée (recommandé)</option><option value="farfelu">Farfelu et ironique</option><option value="piquant">Satire piquante</option><option value="absurde">Absurde total</option></select></label>
     <label>Auteur (modèle Claude)<select data-var="MODELE_CLAUDE" data-def="claude-opus-5-5"><option value="claude-opus-5-5">Opus (le plus drôle, recommandé)</option><option value="claude-sonnet-5-5">Sonnet (économique)</option></select></label>
     <label>Note minimale pour fabriquer<select data-var="QUALITE_MIN" data-def="85"><option value="90">90/100</option><option value="85">85/100 (recommandé)</option><option value="80">80/100</option><option value="75">75/100</option><option value="70">70/100</option><option value="0">Toujours fabriquer</option></select></label>
@@ -556,14 +559,17 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
   </details>
 
   <details class="groupe"><summary>🛠️ Avancé</summary>
+    <div class="ancien">
     <h3>Seuils de qualité</h3>
     <label>Note minimale pour publier tout seul<select data-var="SEUIL_PUBLICATION" data-def="80"><option value="90">90/100</option><option value="85">85/100</option><option value="80">80/100 (recommandé)</option><option value="75">75/100</option><option value="70">70/100</option></select></label>
     <label>Objectif d'écriture (réécrit jusqu'à cette note)<select data-var="SEUIL_QUALITE" data-def="90"><option value="95">95/100 (très rare)</option><option value="90">90/100 (recommandé)</option><option value="85">85/100</option><option value="80">80/100</option><option value="75">75/100</option></select></label>
     <label>Sujets essayés au plus<select data-var="SUJETS_MAX" data-def="3"><option value="2">2 (économique)</option><option value="3">3 (recommandé)</option><option value="4">4</option><option value="5">5 (le plus exigeant)</option></select></label>
     <label>Essais par créneau si la note manque<select data-var="ESSAIS_MAX" data-def="3"><option value="1">1 (pas de nouvel essai)</option><option value="2">2</option><option value="3">3 (recommandé)</option><option value="4">4</option></select></label>
+    </div>
     <h3>Budget</h3>
     <label>Plafond Claude par mois, en $ (vide = aucun)<div class="jeton"><input data-var="BUDGET_MOIS" data-def="" data-texte="1" maxlength="8" inputmode="decimal" placeholder="ex. 30"><button class="second" data-enr="BUDGET_MOIS" style="flex:none;padding:10px 14px">OK</button></div></label>
     <p class="note">Plafond atteint : plus de vidéos automatiques jusqu'au mois suivant.</p>
+    <div class="ancien">
     <h3>Mode réaliste (Veo, coûteux)</h3>
     <p class="note">Vidéo filmée par une IA (Veo 3.1 via ElevenLabs) au lieu du dessin animé. Consomme beaucoup de crédits ElevenLabs.</p>
     <div class="auto"><div class="txt"><b>Vidéos automatiques en réaliste</b><small>Coupé : dessin animé.</small></div><button class="inter" data-var="REALISTE_AUTO" data-def="0" data-bascule="1"></button></div>
@@ -582,6 +588,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <p class="note">Chaque dimanche, les ratés relevés par le jury sont montés en une vidéo d'environ 15 s (jamais publiée toute seule).</p>
     <button class="action" id="betLancer">🎬 Le fabriquer maintenant</button>
     <div id="suiviBet" class="note"></div>
+    </div>
     <h3>Notifications</h3>
     <p class="note">Prévenu quand une vidéo est prête ou publiée. Sur iPhone : installez d'abord l'appli.</p>
     <button class="action" id="activerNotifs">🔔 Activer sur cet appareil</button>
@@ -623,7 +630,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <button class="second" id="programmer" disabled style="width:100%;margin-top:6px">🗓️ Programmer sur TikTok</button>
     <label>Refaire cette vidéo<select id="refaireQuoi"><option value="texte">Nouvelle version du sketch (même sujet)</option><option value="voix">Mêmes répliques, nouvelles voix</option><option value="decors">Mêmes répliques, nouveaux décors</option></select></label>
     <button class="second" id="refaire" disabled style="width:100%;margin-top:6px">🔁 Refaire (15 à 40 min)</button>
-    <div style="display:flex;gap:6px;margin-top:6px"><button class="second" id="refaireVoix" disabled style="flex:1">🎙️ Juste la voix</button><button class="second" id="refaireDecor" disabled style="flex:1">🖼️ Juste le décor</button></div>
+    <div style="display:flex;gap:6px;margin-top:6px"><button class="second ancien" id="refaireVoix" disabled style="flex:1">🎙️ Juste la voix</button><button class="second" id="refaireDecor" disabled style="flex:1">🖼️ Juste le décor</button></div>
     <div id="quiBloc" style="display:none;margin-top:10px">
       <b>🗣️ Corriger qui parle</b>
       <p class="note">Chaque réplique avec son personnage : changez ceux qui sont faux, puis « Refaire ». Même son, mêmes décors : seul le personnage qui parle change.</p>
@@ -1457,6 +1464,15 @@ $("#copierLien").onclick=async()=>{try{await navigator.clipboard.writeText(lienC
 // ------------------------------------------------ onglets (Accueil, Vidéos, Statistiques, Réglages) et filtre des vidéos
 // ------------------------------------------------ onglets affichés (Réglages) : variable ONGLETS_MASQUES, gardée aussi sur l'appareil
 const MASQUABLES=["accueil","videos","stats"];
+// ------------------------------------------------ site « sons TikTok seulement » (décision de l'auteur du 15 novembre 2026)
+// Les sketchs, Jojo / Kévin / Lila et leurs réglages sont MASQUÉS (classe « ancien »), pas effacés. SITE_COMPLET=1 les réaffiche.
+function tiktokSeul(){return document.body.classList.contains("tiktok-seul")}
+function modeSite(){
+  let complet=false; try{complet=String((VARS&&VARS.SITE_COMPLET)||localStorage.getItem("jt_site_complet")||"0")==="1"}catch(e){}
+  document.body.classList.toggle("tiktok-seul",!complet);
+  const q=$("#refaireQuoi");                                               // refaire une vidéo TikTok : ni « nouveau sketch » ni « nouvelles voix »
+  if(q){[...q.options].forEach(o=>{o.hidden=!complet&&o.value!=="decors"; o.disabled=!complet&&o.value!=="decors"}); if(!complet) q.value="decors"}
+}
 function appliquerOnglets(brut,local){
   try{if(!local&&Date.now()-(+localStorage.getItem("onglets_masques_t")||0)<5*60000) brut=localStorage.getItem("onglets_masques")}catch(e){}   // choix tout juste fait ici : prioritaire
   const m=new Set(String(brut||"").split(",").map(x=>x.trim()).filter(x=>MASQUABLES.includes(x)));
@@ -1472,8 +1488,9 @@ document.querySelectorAll("[data-onglet-vu]").forEach(c=>c.onchange=async()=>{
   try{await ecrireVar("ONGLETS_MASQUES",m||"-"); VARS.ONGLETS_MASQUES=m; toast("Onglets enregistrés ✓")}catch(e){toast("Impossible : "+e.message)}
 });
 function allerOnglet(o,f){
-  document.querySelectorAll(".onglet").forEach(x=>x.classList.toggle("actif",x.dataset.o===o));
   if(f) choisirFiltre(f);
+  if(tiktokSeul()&&(o==="accueil"||(o==="videos"&&FILTRE!=="tiktok"))){o="tiktok"; f=null}   // sketchs mis de côté : tout passe par l'onglet TikTok
+  document.querySelectorAll(".onglet").forEach(x=>x.classList.toggle("actif",x.dataset.o===o));
   ["accueil","videos","tiktok","stats","config"].forEach(k=>$("#o-"+k).style.display=k===o?"":"none");
   document.querySelectorAll(".onglet").forEach(x=>x.classList.toggle("actif",x.dataset.o===(o==="videos"&&FILTRE==="tiktok"?"tiktok":o)));
   $("#filtres").style.display=(o==="videos"&&FILTRE==="tiktok")?"none":""; $("#enteteTk").style.display=(o==="videos"&&FILTRE==="tiktok")?"":"none";
@@ -1564,6 +1581,7 @@ async function chargerReglages(){
     champs().forEach(c=>{const val=(c.dataset.var in v)?v[c.dataset.var]:c.dataset.def;
       if(c.dataset.bascule) c.classList.toggle("on",String(val)!=="0"); else c.value=val;});
     chargerPerso(v); activer(true); majConnus(); $("#cfgEtat").textContent="Régie connectée ✓ — chaque changement est enregistré tout de suite.";
+    try{localStorage.setItem("jt_site_complet",v.SITE_COMPLET==="1"?"1":"0")}catch(e){} modeSite();
     appliquerOnglets(v.ONGLETS_MASQUES||""); if($("#o-tiktok").style.display!=="none") rendreTk(); rendreStock();
     nettoyerAbos(v);
   }catch(e){$("#cfgEtat").textContent="Erreur : "+e.message+" — vérifiez la clé (droits Actions et Variables).";activer(false);
@@ -1825,6 +1843,7 @@ $("#installer").onclick=async()=>{if(!invite)return;invite.prompt();await invite
 window.addEventListener("appinstalled",()=>{$("#installer").style.display="none";toast("Application installée ✓")});
 rendre(); rendreRecents(); rendreOutils(); afficherAuto(); lireAuto(); majBoutons(); majBandeau(); verifierEnCours(); majPointTk(); $("#barre").style.display="none";
 try{appliquerOnglets(localStorage.getItem("onglets_masques")||"")}catch(e){}
+modeSite(); allerOnglet(tiktokSeul()?"tiktok":"accueil");
 (function partageRecu(){                                                   // lien partagé depuis l'appli TikTok (Web Share Target)
   const q=new URLSearchParams(location.search); if(!q.get("partage")) return;
   const m=((q.get("lien")||"")+" "+(q.get("texte")||"")+" "+(q.get("titre")||"")).match(/https?:\/\/([a-z0-9-]+\.)*tiktok\.com\/\S+/i);

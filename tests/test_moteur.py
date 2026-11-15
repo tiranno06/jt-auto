@@ -2901,3 +2901,15 @@ class TestStockPublication(unittest.TestCase):
             if "Fabrication en cours" in bloc:
                 self.assertLess(bloc.index("stockPubli"), bloc.index("Fabrication en cours"))
         self.assertIn("function rendreStock()", src); self.assertIn("attentePubli(filePubli())", src)
+
+
+class TestSiteTikTokSeul(unittest.TestCase):
+    """Grand ménage du 15 novembre : sketchs et Jojo / Kévin / Lila masqués sur le site (pas effacés)."""
+    def test_masque_pas_efface(self):
+        src = open(os.path.join(ICI, "..", "moteur", "site.py"), encoding="utf-8").read()
+        self.assertIn('class="tiktok-seul"', src); self.assertIn("body.tiktok-seul .ancien{display:none!important}", src)
+        self.assertIn('<button class="onglet ancien" data-o="accueil">', src); self.assertIn('<button class="onglet ancien" data-o="videos">', src)
+        self.assertIn('<details class="groupe ancien"><summary>✍️ Écriture</summary>', src)
+        self.assertIn('data-var="PERSO_JOJO"', src)                       # toujours là, juste caché
+        self.assertIn("SITE_COMPLET", src)
+        self.assertTrue(os.path.exists(os.path.join(ICI, "..", "docs", "archives_sketchs.md")))
