@@ -396,6 +396,13 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
   <div id="alerteCredit"></div>
   <section class="panneau stockPubli"></section>
   <section class="panneau"><h2>⏳ Fabrication en cours</h2><div class="progressions"><p class="note">Aucune fabrication en cours.</p></div></section>
+  <details class="groupe repliTk" data-cle="videos" open><summary>🎬 Mes vidéos TikTok</summary>
+    <details id="filtresRepli"><summary>🔎 Rechercher et filtrer</summary><div class="filtresTk"><input id="fTexte" type="search" placeholder="🔎 Rechercher (titre, légende)">
+      <select id="fEtat"><option value="">Toutes</option><option value="verifier">⚠️ À vérifier</option><option value="cochees">✅ À publier</option><option value="publiees">📤 Publiées</option><option value="non">Non publiées</option></select>
+      <select id="fProfil"><option value="">Tous les profils</option></select>
+      <select id="fDate"><option value="">Toutes les dates</option><option value="1">Aujourd'hui</option><option value="7">7 derniers jours</option><option value="30">30 derniers jours</option></select>
+      <select id="fTri"><option value="">Plus récentes d'abord</option><option value="sures">🛡️ Plus sûres d'abord</option></select></div></details>
+    <div id="listeTk"></div></details>
   <details class="groupe repliTk" data-cle="lien"><summary>🔗 Une vidéo sur un son TikTok</summary>
     <label>Lien de la vidéo TikTok<input id="tkLien" type="url" inputmode="url" placeholder="https://www.tiktok.com/@compte/video/…"></label>
     <p class="note">3 min au plus. Nos personnages rejouent le son ; le compte d'origine est crédité. ⚠️ Sans accord du créateur, TikTok peut couper le son : privilégiez vos vidéos ou des sons libres.</p>
@@ -443,13 +450,6 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
   <details class="groupe repliTk" data-cle="recette"><summary>📈 Ce qui marche (recette du succès)</summary>
     <p class="note">Les vues de vos vidéos comparées selon ce qui les compose (profil du son, lieu, durée, animal, heure, couverture…). Mis à jour chaque jour avec les statistiques ; le robot s'en sert pour choisir ses sons.</p>
     <div id="recette"><p class="note">Pas encore assez de vidéos avec des vues (3 par critère au moins).</p></div></details>
-  <details class="groupe repliTk" data-cle="videos" open><summary>🎬 Mes vidéos TikTok</summary>
-    <details id="filtresRepli"><summary>🔎 Rechercher et filtrer</summary><div class="filtresTk"><input id="fTexte" type="search" placeholder="🔎 Rechercher (titre, légende)">
-      <select id="fEtat"><option value="">Toutes</option><option value="verifier">⚠️ À vérifier</option><option value="cochees">✅ À publier</option><option value="publiees">📤 Publiées</option><option value="non">Non publiées</option></select>
-      <select id="fProfil"><option value="">Tous les profils</option></select>
-      <select id="fDate"><option value="">Toutes les dates</option><option value="1">Aujourd'hui</option><option value="7">7 derniers jours</option><option value="30">30 derniers jours</option></select>
-      <select id="fTri"><option value="">Plus récentes d'abord</option><option value="sures">🛡️ Plus sûres d'abord</option></select></div></details>
-    <div id="listeTk"></div></details>
  </div>
  <!-- ======================================================== STATISTIQUES -->
  <div id="o-stats" style="display:none"></div>
