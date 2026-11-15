@@ -134,6 +134,17 @@ def tour_de_dessiner(sk):
     else: print(f"Chaîne : lancement anticipé impossible ({r.stderr[:120]}) : elle partira à la fin", flush=True)
 
 
+def resume_alerte(h, fiche=None):
+    """Texte de la notification « vidéo prête » : confiance, jury et points à vérifier pour un son TikTok ; note pour un sketch."""
+    if h.get("filiere") == "tiktok" or h.get("source_audio") or h.get("confiance") is not None:
+        j = (h.get("jury") or {}).get("note") if isinstance(h.get("jury"), dict) else None
+        n = len(h.get("a_verifier") or [])
+        return " · ".join(x for x in (f"confiance {h['confiance']}/100" if h.get("confiance") is not None else "",
+                                      f"jury {j}/10" if j is not None else "",
+                                      f"⚠️ {n} point(s) à vérifier" if n else "✅ rien à vérifier") if x)
+    return f"note {round((fiche or {}).get('note') or 0)}/100"
+
+
 def limite_job():
     """Heure (secondes) à laquelle une 2e version du jury doit être finie : limite du job GitHub moins 25 min (vérification,
     archivage, site, historique). Sans DEBUT_JOB (essai sur un ordinateur) : pas de limite."""
@@ -650,9 +661,11 @@ def main():
     if libre and not REALISTE and not test and (os.environ.get("APERCU_RAPIDE") or "") != "1":
         try:
             import cartoon as _ct, verif_finale
+            PR.etape(97, "Contrôle de la vidéo finie", forcer=True)        # (temps par étape : plus compté dans « jury »)
             if _ct.RENDU: A_VERIFIER = verif_finale.verifier(base + ".mp4", sk, _ct.RENDU)
         except Exception as e: print(f"contrôle de la vidéo finie impossible ({str(e)[:120]})", flush=True)
         if DOUB:                                                           # compte rendu corrigé tout de suite (demande du 7 novembre)
+            PR.etape(98, "Corrections du compte rendu", forcer=True)
             try: A_VERIFIER = corriger_compte_rendu(sk, base, audios, mots, decors, fmt, A_VERIFIER, modal_ok, QUALITE)
             except Exception as e: print(f"compte rendu non corrigé ({str(e)[:160]})", flush=True)
     try: os.remove(base + "_avant_boucle.mp4")
@@ -764,6 +777,11 @@ def main():
         with open(sortie, "a") as f:
             f.write(f"video={base}.mp4\nlegende={base}.txt\nnom={os.path.basename(base)}.mp4\nmois={jour[:7]}\ntitre={sk['sujet']}\n"
                     f"qualite={'ok' if video_ok and (not fiche or (fiche.get('note') or 0) >= SEUIL_PUB) and not REFAIRE else 'faible'}\nnote={round(fiche.get('note') or 0)}\n")
+    if sortie:                                                             # notification « vidéo prête » : les VRAIES notes d'un son TikTok
+        try:                                                               # (« note 0/100 » s'affichait : c'est la note d'écriture des sketchs)
+            h_ = next((x for x in reversed(historique) if x.get("fichier") == os.path.basename(base) + ".mp4"), {})
+        except Exception: h_ = {}
+        with open(sortie, "a") as f: f.write("resume=" + resume_alerte(h_, fiche) + "\n")
     if sortie:
         with open(sortie, "a") as f: f.write(f"chaine={os.environ.get('CHAINE', '')}\n")
     for t_ in RP.ENVOIS: t_.join(timeout=300)                              # sauvegardes en cours terminées, puis effacées (vidéo finie)

@@ -99,6 +99,11 @@
   (accueil et onglet TikTok), `site.rendreStock` : nombre de vidéos qui restent à envoyer sur TikTok (cochées « À publier » pas encore
   publiées + déjà programmées), jusqu'à quel jour elles tiennent (créneaux 1 ou 2 par jour) et un conseil en couleur (🔴 ≤ 2 jours :
   lancer une nouvelle salve, 🟠 ≤ 5 jours, 🟢 sinon) ; avertit si la publication automatique est coupée ; relu toutes les 30 s.
+- **Vitrine du profil retirée (demande de l'auteur du 15 novembre 2026)** : cadre « 🏪 Vitrine du profil » masqué (classe `ancien`) et
+  plus préparée chaque lundi (vitrine.yml : seulement si la variable VITRINE=1) ; les nouveaux créateurs proposés restent.
+- **Ordre de l'onglet TikTok (demande de l'auteur du 15 novembre 2026)** : compteur des vidéos à publier, « ⏳ Fabrication en cours »,
+  puis tout de suite « 🎬 Mes vidéos TikTok » (repliable comme les autres blocs), puis profils, « 🔗 Une vidéo sur un son TikTok » juste
+  au-dessus de « 🎲 Lancer des vidéos », puis vidéos automatiques, publication…
 - **Bouton « ⚡ Charger la dernière version maintenant »** (Réglages → Avancé → Application, demande de l'auteur du 15 novembre 2026) :
   version.txt relu sans cache ; nouvelle version -> copies gardées effacées et page rechargée (`rechargerPropre`) ; site en cours de
   reconstruction (site.yml) -> l'appli attend et se recharge toute seule dès que la nouvelle version est en ligne.
@@ -502,6 +507,14 @@
   pas » et les noms propres ne bougent jamais. **Pas fait** : RIFE (9) et LaMa (14) : leurs poids ne se trouvent que sur des copies non
   officielles, dans un format qui peut cacher du code (refusé par sécurité). Cache des modèles : hf-ecoute-v4 (+ outils/rhubarb,
   outils/wespeaker) ; venv refait une fois (contraintes.txt). Tests : ces outils sont coupés par défaut (`TestOutilsLibres`).
+- **Registre des pannes du 15 novembre 2026 (demande de l'auteur : régler ce qui revient)** : Gemini « quota dépassé » (429) coupait
+  Gemini pour toute la vidéo dès le 1er modèle : chaque modèle gratuit a SON quota -> modèle suivant ; limite « à la minute » -> attente
+  du délai demandé (60 s au plus) ; « réponse trop lente » (timeout) -> 2e essai puis modèle suivant (`reseau._appel_openai`, texte de
+  l'erreur gardé pour reconnaître un vrai quota épuisé). Aussi relevé dans le journal : corrections du compte rendu coupées à 1 500
+  jetons (`remarque`, 4 000 maintenant) ; notification « vidéo prête » qui disait « note 0/100 » (note d'écriture des sketchs) ->
+  confiance, jury et points à vérifier (`principal.resume_alerte`, sortie « resume » d'emission.yml) ; temps par étape faussés (contrôle
+  de la vidéo finie et corrections du compte rendu comptés dans « jury » : étapes à part ; pas d'alerte « plus lent » sur une étape
+  d'habitude < 1 min ni sur l'attente dans la file : `progression.lents`).
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.

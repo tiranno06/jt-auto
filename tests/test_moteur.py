@@ -2920,3 +2920,38 @@ class TestChargerVersion(unittest.TestCase):
         src = open(os.path.join(ICI, "..", "moteur", "site.py"), encoding="utf-8").read()
         self.assertIn('id="chargerVersion"', src); self.assertIn("async function rechargerPropre()", src)
         self.assertNotIn('class="action" id="chargerVersion"', src)        # jamais grisé : marche même sans la clé de la régie
+
+
+class TestRegistreDesPannes15Nov(unittest.TestCase):
+    """Registre des pannes du 15 novembre : Gemini « quota dépassé » / « trop lent » coupait Gemini pour toute la vidéo."""
+
+    def _faux(self, reponses):
+        import urllib.error
+        vus = []
+        def urlopen(req, timeout=None):
+            corps = json.loads(req.data.decode()); vus.append(corps["model"])
+            r = reponses.pop(0)
+            if isinstance(r, Exception): raise r
+            o = io.BytesIO(json.dumps(r).encode()); o.headers = {}; return o
+        return urlopen, vus
+
+    def test_gemini_quota_d_un_modele_passe_au_suivant(self):
+        import reseau, urllib.error, urllib.request
+        q = urllib.error.HTTPError("u", 429, "Too Many", {}, io.BytesIO(b'{"error":{"message":"You exceeded your current quota","details":[{"quotaId":"GenerateRequestsPerDayPerProjectPerModel-FreeTier"}]}}'))
+        lent = TimeoutError("The read operation timed out")
+        ok = {"choices": [{"message": {"content": "bonjour"}}]}
+        f, vus = self._faux([q, lent, lent, ok])
+        anc, anc_a = urllib.request.urlopen, reseau._attendre
+        urllib.request.urlopen = f; reseau._attendre = lambda x: None
+        os.environ.setdefault("GEMINI_API_KEY", "x")
+        try: r = reseau._appel_openai("gemini", {"messages": [{"role": "user", "content": "salut"}], "max_tokens": 50})
+        finally: urllib.request.urlopen, reseau._attendre = anc, anc_a
+        self.assertEqual(r.content[0].text, "bonjour")
+        m = reseau.FOURNISSEURS["gemini"]["texte"]
+        self.assertEqual(vus, [m[0], m[1], m[1], m[2]])                    # quota du 1er -> 2e ; 2e trop lent deux fois -> 3e
+
+    def test_notification_avec_les_vraies_notes(self):
+        import principal
+        self.assertEqual(principal.resume_alerte({"filiere": "tiktok", "confiance": 76, "jury": {"note": 8.6}, "a_verifier": [1, 2]}),
+                         "confiance 76/100 · jury 8.6/10 · ⚠️ 2 point(s) à vérifier")
+        self.assertEqual(principal.resume_alerte({}, {"note": 88}), "note 88/100")

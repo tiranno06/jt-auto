@@ -38,7 +38,8 @@ jobs:
       - name: Nouveaux créateurs proposés
         continue-on-error: true
         run: python -u moteur/decouverte.py
-      - name: Vitrine du profil
+      - name: Vitrine du profil (retirée par l'auteur le 15 novembre 2026 : VITRINE=1 pour la refaire)
+        if: vars.VITRINE == '1'
         continue-on-error: true
         run: python -u moteur/vitrine.py
       - name: Enregistrer
