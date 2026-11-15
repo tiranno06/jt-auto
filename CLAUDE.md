@@ -102,7 +102,8 @@
 - **Vitrine du profil retirée (demande de l'auteur du 15 novembre 2026)** : cadre « 🏪 Vitrine du profil » masqué (classe `ancien`) et
   plus préparée chaque lundi (vitrine.yml : seulement si la variable VITRINE=1) ; les nouveaux créateurs proposés restent.
 - **Ordre de l'onglet TikTok (demande de l'auteur du 15 novembre 2026)** : compteur des vidéos à publier, « ⏳ Fabrication en cours »,
-  puis tout de suite « 🎬 Mes vidéos TikTok » (repliable comme les autres blocs), puis lien, profils, lancer, automatiques…
+  puis tout de suite « 🎬 Mes vidéos TikTok » (repliable comme les autres blocs), puis profils, « 🔗 Une vidéo sur un son TikTok » juste
+  au-dessus de « 🎲 Lancer des vidéos », puis vidéos automatiques, publication…
 - **Bouton « ⚡ Charger la dernière version maintenant »** (Réglages → Avancé → Application, demande de l'auteur du 15 novembre 2026) :
   version.txt relu sans cache ; nouvelle version -> copies gardées effacées et page rechargée (`rechargerPropre`) ; site en cours de
   reconstruction (site.yml) -> l'appli attend et se recharge toute seule dès que la nouvelle version est en ligne.

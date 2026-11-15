@@ -403,11 +403,6 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
       <select id="fDate"><option value="">Toutes les dates</option><option value="1">Aujourd'hui</option><option value="7">7 derniers jours</option><option value="30">30 derniers jours</option></select>
       <select id="fTri"><option value="">Plus récentes d'abord</option><option value="sures">🛡️ Plus sûres d'abord</option></select></div></details>
     <div id="listeTk"></div></details>
-  <details class="groupe repliTk" data-cle="lien"><summary>🔗 Une vidéo sur un son TikTok</summary>
-    <label>Lien de la vidéo TikTok<input id="tkLien" type="url" inputmode="url" placeholder="https://www.tiktok.com/@compte/video/…"></label>
-    <p class="note">3 min au plus. Nos personnages rejouent le son ; le compte d'origine est crédité. ⚠️ Sans accord du créateur, TikTok peut couper le son : privilégiez vos vidéos ou des sons libres.</p>
-    <button class="gros lancer" id="tkCreer">🎬 Fabriquer sur ce son</button>
-    <div id="tkSuivi" class="note"></div></details>
   <details class="groupe repliTk" data-cle="profils"><summary>🎵 Mes profils TikTok</summary>
     <p class="note">Un profil par ligne (@pseudo ou lien du profil). Le robot y prend une vidéo au hasard, jamais déjà utilisée, et fabrique la vidéo sur son son.</p>
     <label>Profils<div class="jeton"><textarea data-var="PROFILS_TIKTOK" data-def="" data-texte="1" maxlength="3000" rows="5" placeholder="@profil1&#10;@profil2&#10;https://www.tiktok.com/@profil3"></textarea><button class="second" data-enr="PROFILS_TIKTOK" style="flex:none;padding:10px 14px">OK</button></div></label>
@@ -421,6 +416,11 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
   <details class="groupe repliTk ancien" data-cle="vitrine"><summary>🏪 Vitrine du profil</summary>
     <p class="note">À appliquer vous-même dans l'appli TikTok (Profil → Modifier le profil ; appui long sur une vidéo → Épingler). Mis à jour chaque lundi.</p>
     <div id="vitrine"><p class="note">Prête lundi prochain (ou lancez « Vitrine et nouveaux créateurs » dans GitHub).</p></div></details>
+  <details class="groupe repliTk" data-cle="lien"><summary>🔗 Une vidéo sur un son TikTok</summary>
+    <label>Lien de la vidéo TikTok<input id="tkLien" type="url" inputmode="url" placeholder="https://www.tiktok.com/@compte/video/…"></label>
+    <p class="note">3 min au plus. Nos personnages rejouent le son ; le compte d'origine est crédité. ⚠️ Sans accord du créateur, TikTok peut couper le son : privilégiez vos vidéos ou des sons libres.</p>
+    <button class="gros lancer" id="tkCreer">🎬 Fabriquer sur ce son</button>
+    <div id="tkSuivi" class="note"></div></details>
   <details class="groupe repliTk" data-cle="lancer" open><summary>🎲 Lancer des vidéos (sons au hasard)</summary>
     <button class="action" id="tkHasard">🎲 Une vidéo maintenant (son au hasard des profils)</button>
     <div id="tkSuiviH" class="note"></div>
