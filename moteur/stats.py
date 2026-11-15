@@ -101,6 +101,8 @@ def collecter():
     json.dump({"maj": datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="minutes"), "compte": nom, "videos": videos, **_suivi_abonnes(nom, lire())},
               open(FICHIER, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     if hist: json.dump(hist, open(HIST, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    try: noter_courbes(videos)                                             # courbe des vues des 48 premières heures (idée 14)
+    except Exception as e: print(f"Courbes des vues impossibles ({e})", flush=True)
     try:                                                                   # la recette du succès (idée 41) : episodes/recette.json
         r_ = __import__("recette").enregistrer(hist)
         print("Recette du succès : " + (", ".join(f"{x['critere']} {x['valeur']} ×{x['fois']}" for x in r_["plus"]) or "pas encore assez de vidéos"), flush=True)
@@ -156,17 +158,54 @@ def meilleure_heure(defaut=17):
     if not bonnes: return defaut
     return (max(bonnes, key=bonnes.get) - 1) % 24                         # la fabrication prend environ 30 min
 
-def meilleure_heure_publication(defaut=18):
+def meilleure_heure_publication(defaut=18, jour=None, videos=None):
     """Heure de publication (Paris) où nos vidéos TikTok font le plus de vues en moyenne (au moins 2 vidéos à cette heure) ;
-    défaut tant qu'il y a moins de 8 vidéos publiées."""
+    défaut tant qu'il y a moins de 8 vidéos publiées. jour (0 = lundi … 6 = dimanche, idée 17 du 15 novembre) : l'heure qui marche
+    CE jour-là quand on a assez de vidéos publiées ce jour (6 au moins, 2 par heure), sinon l'heure de toute la semaine."""
     from zoneinfo import ZoneInfo
-    vids = [v for v in lire().get("videos", []) if v.get("date")]
+    vids = [v for v in (videos if videos is not None else lire().get("videos", [])) if v.get("date")]
     if len(vids) < 8: return defaut
-    par_h = {}
-    for v in vids:
-        h = datetime.datetime.fromtimestamp(v["date"], ZoneInfo("Europe/Paris")).hour; par_h.setdefault(h, []).append(v.get("vues", 0))
-    bonnes = {h: sum(x) / len(x) for h, x in par_h.items() if len(x) >= 2}
-    return max(bonnes, key=bonnes.get) if bonnes else defaut
+    def meilleure(liste):
+        par_h = {}
+        for v in liste:
+            h = datetime.datetime.fromtimestamp(v["date"], ZoneInfo("Europe/Paris")).hour; par_h.setdefault(h, []).append(v.get("vues", 0))
+        bonnes = {h: sum(x) / len(x) for h, x in par_h.items() if len(x) >= 2}
+        return max(bonnes, key=bonnes.get) if bonnes else None
+    g = meilleure(vids)
+    if jour is not None:
+        du_jour = [v for v in vids if datetime.datetime.fromtimestamp(v["date"], ZoneInfo("Europe/Paris")).weekday() == int(jour)]
+        if len(du_jour) >= 6:
+            j = meilleure(du_jour)
+            if j is not None: return j
+    return g if g is not None else defaut
+
+
+def heures_par_jour(defaut=18):
+    """{0..6: heure} pour le site (calendrier) : la meilleure heure de chaque jour de la semaine."""
+    v = lire().get("videos", [])
+    return {j: meilleure_heure_publication(defaut, j, v) for j in range(7)}
+
+
+COURBES = os.path.join(os.path.dirname(FICHIER), "courbes.json")
+
+
+def noter_courbes(videos, maintenant=None, fichier=None):
+    """Courbe des vues des premières heures (idée 14 du 15 novembre) : à chaque relevé (toutes les heures), un point
+    [heures depuis la publication, vues] pour chaque vidéo publiée il y a moins de 72 h ; gardé 45 jours (episodes/courbes.json)."""
+    fichier = fichier or COURBES
+    maintenant = maintenant or datetime.datetime.now(datetime.timezone.utc).timestamp()
+    try: C = json.load(open(fichier, encoding="utf-8"))
+    except (OSError, ValueError): C = {}
+    for v in videos:
+        if not v.get("date") or v.get("vues") is None: continue
+        age = (maintenant - float(v["date"])) / 3600
+        if not 0 <= age <= 72: continue
+        k = v.get("fichier") or str(v.get("id"))
+        e = C.setdefault(k, {"date": v["date"], "id": v.get("id"), "p": []})
+        if not e["p"] or age - e["p"][-1][0] >= 0.5: e["p"].append([round(age, 1), int(v["vues"])])
+    C = {k: e for k, e in C.items() if maintenant - float(e.get("date") or 0) < 45 * 86400}
+    json.dump(C, open(fichier, "w", encoding="utf-8"), ensure_ascii=False)
+    return C
 
 def pseudos_libres(noms):
     """Vérifie si des pseudos TikTok sont déjà pris (une chaîne publique existe à cette adresse)."""

@@ -161,6 +161,8 @@ jobs:
       PERSONNAGES: ${{ vars.PERSONNAGES }}
       MONTAGE: ${{ vars.MONTAGE }}
       STYLE_DECOR: ${{ vars.STYLE_DECOR }}
+      KARAOKE: ${{ vars.KARAOKE }}
+      SILENCES_COURTS: ${{ vars.SILENCES_COURTS }}
       TON: ${{ vars.TON }}
       INFOS_DEMAIN: ${{ vars.INFOS_DEMAIN }}
       PERSONNALITES: ${{ vars.PERSONNALITES }}

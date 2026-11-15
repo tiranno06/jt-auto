@@ -118,6 +118,7 @@ def construire():
     try:
         import profils_tiktok; conf["profils_connus"] = profils_tiktok.connus()   # liste de départ de l'onglet TikTok
         conf["heure_stats"] = __import__("stats").meilleure_heure_publication()   # heure de publication conseillée par les vues
+        conf["heures_jours"] = __import__("stats").heures_par_jour(conf["heure_stats"])   # idée 17 : la meilleure heure de chaque jour
         conf["abos_morts"] = sorted(__import__("alerte").morts())         # appareils qui ne reçoivent plus les alertes (empreintes)
     except Exception: conf["profils_connus"] = []
     try: st = json.load(open(os.path.join(RACINE, "episodes", "stats.json"), encoding="utf-8"))
@@ -406,6 +407,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
   <details class="groupe repliTk" data-cle="profils"><summary>🎵 Mes profils TikTok</summary>
     <p class="note">Un profil par ligne (@pseudo ou lien du profil). Le robot y prend une vidéo au hasard, jamais déjà utilisée, et fabrique la vidéo sur son son.</p>
     <label>Profils<div class="jeton"><textarea data-var="PROFILS_TIKTOK" data-def="" data-texte="1" maxlength="3000" rows="5" placeholder="@profil1&#10;@profil2&#10;https://www.tiktok.com/@profil3"></textarea><button class="second" data-enr="PROFILS_TIKTOK" style="flex:none;padding:10px 14px">OK</button></div></label>
+    <div id="profilsEtat"></div>
     <button class="second" id="tkConnus" style="width:100%;margin-bottom:6px">➕ Ajouter les profils déjà connus</button>
     <p class="note" id="tkConnusNote"></p>
     <label>🚫 Profils à ne jamais reprendre (liste noire)<div class="jeton"><textarea data-var="PROFILS_INTERDITS" data-def="" data-texte="1" maxlength="2000" rows="2" placeholder="@profil_qui_a_reclame"></textarea><button class="second" data-enr="PROFILS_INTERDITS" style="flex:none;padding:10px 14px">OK</button></div></label>
@@ -440,6 +442,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <p class="note">Cochez « À publier » sur les vidéos que vous avez vérifiées : chaque jour à l'heure choisie, le robot publie sur TikTok la plus ancienne vidéo cochée pas encore publiée (dans l'ordre où vous les avez cochées).</p>
     <div class="auto"><div class="txt"><b>Activée</b><small>Une vidéo cochée publiée par jour (ou deux), même appli fermée.</small></div><button class="inter" data-var="PUBLI_AUTO" data-def="0" data-bascule="1"></button></div>
     <div class="auto"><div class="txt"><b>Heure choisie par les statistiques</b><small>L'heure où vos vidéos font le plus de vues (sinon l'heure fixe ci-dessous).</small></div><button class="inter" data-var="PUBLI_HEURE_AUTO" data-def="0" data-bascule="1"></button></div>
+    <div id="heureStats" class="note" style="margin:-2px 0 8px"></div>
     <label>Heure de publication (heure de Paris)<div class="jeton"><input data-var="PUBLI_HEURE" data-def="18:00" data-texte="1" maxlength="5" type="time" placeholder="18:00"><button class="second" data-enr="PUBLI_HEURE" style="flex:none;padding:10px 14px">OK</button></div></label>
     <div class="auto"><div class="txt"><b>Deux vidéos par jour</b><small>Une 2e vidéo cochée publiée à la 2e heure ci-dessous (au moins une heure d'écart).</small></div><button class="inter" data-var="PUBLI_DEUX" data-def="0" data-bascule="1"></button></div>
     <div class="auto"><div class="txt"><b>♻️ Rediffusion</b><small>Quand aucune vidéo cochée n'attend, la vidéo d'il y a plus de 3 mois qui a fait le plus de vues repart (jamais deux fois en 3 mois).</small></div><button class="inter" data-var="REDIFFUSION" data-def="1" data-bascule="1"></button></div>
@@ -525,6 +528,8 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <label class="ancien">Personnages<select data-var="PERSONNAGES" data-def="humains"><option value="humains">Adultes style toons, différents à chaque vidéo (recommandé)</option><option value="marionnettes">Anciennes marionnettes de la chaîne</option></select></label>
     <label>Style des décors<select data-var="STYLE_DECOR" data-def="semi_realiste"><option value="semi_realiste">Semi-réaliste : peinture d'un vrai lieu, pieds posés au sol (recommandé)</option><option value="croquis">Croquis : décor dessiné à l'encre et à l'aquarelle</option></select></label>
     <label>Montage<select data-var="MONTAGE" data-def="large"><option value="large">Plan large : les personnages toujours à l'image, caméra fixe (recommandé)</option><option value="dynamique">Dynamique : beaucoup de plans, zooms et caméra vivante</option><option value="simple">Simple : un plan par réplique</option></select></label>
+    <div class="auto"><div class="txt"><b>Sous-titres karaoké</b><small>Le mot dit passe en jaune, au moment exact où on l'entend (contrôlé mot par mot ; une réplique douteuse garde les sous-titres normaux).</small></div><button class="inter" data-var="KARAOKE" data-def="1" data-bascule="1"></button></div>
+    <div class="auto"><div class="txt"><b>Raccourcir les longs silences</b><small>Les blancs de plus d'1 s de l'original sont ramenés à ½ s (jamais un rire ni un souffle).</small></div><button class="inter" data-var="SILENCES_COURTS" data-def="1" data-bascule="1"></button></div>
     <div class="auto"><div class="txt"><b>Rendu détaillé</b><small>Tenues, visages, décors et plans soignés (gratuit).</small></div><button class="inter" data-var="RENDU_DETAILLE" data-def="1" data-bascule="1"></button></div>
     <div class="auto ancien"><div class="txt"><b>Accroche choc en ouverture</b><small>La réplique la plus intrigante dès la 1re seconde.</small></div><button class="inter" data-var="ACCROCHE" data-def="0" data-bascule="1"></button></div>
     <label class="ancien">Voix des personnages<select data-var="VOIX_PERSOS" data-def="bibliotheque"><option value="bibliotheque">Voix de la bibliothèque ElevenLabs</option><option value="sur_mesure">🎙️ Voix sur mesure de la chaîne</option></select></label>
@@ -618,6 +623,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
   <div id="choix">Sélectionnez une vidéo pour la vérifier</div>
   <div id="cadreVideo"><video id="apercu" controls playsinline preload="metadata"></video>
     <button id="fermer" aria-label="Fermer la vidéo" title="Fermer">✕</button></div>
+  <div id="courbe" style="display:none;margin:0 0 8px"></div>
   <button id="aPublier" class="apub" style="display:none;width:100%;justify-content:center;margin:0 0 8px">☐ À publier</button>
   <button id="publier" disabled>Publier sur TikTok</button>
   <div class="ligne2"><button class="second" id="voir" disabled>Aperçu</button><button class="second" id="copier" disabled>Copier la légende</button><button class="second" id="manuel" disabled>Partage manuel</button></div>
@@ -805,6 +811,42 @@ function rendrePannes(p){
   $("#resumePannes").textContent=l.length?`(${l.length})`:"";
   z.innerHTML=l.length?l.map(([f,e,n])=>`<div class="alerte"><b>${n} fois</b> en 30 jours${e.etape?" · "+esc(e.etape):""} · dernière le ${esc(e.derniere)}<br><small>${esc(e.exemple).slice(0,200)}</small></div>`).join(""):`<p class="note">Aucune panne ces 30 derniers jours ✓</p>`;
 }
+// 🎵 profils en difficulté (episodes/profils_etat.json, profils_tiktok.surveiller ; idée 8 du 15 novembre)
+function rendreProfilsEtat(E){
+  const z=$("#profilsEtat"); if(!z) return;
+  const mal=Object.entries((E&&E.profils)||{}).filter(([,a])=>a.etat&&a.etat!=="ok");
+  if(!mal.length){z.innerHTML=E&&E.date?`<p class="note">✅ Tous vos profils publient encore (vérifié le ${dateFr(E.date)}).</p>`:"";return}
+  z.innerHTML=mal.map(([p,a])=>`<div class="alerte" style="margin:4px 0;display:flex;gap:8px;align-items:center"><span style="flex:1">${a.etat==="introuvable"?"⚠️ <b>@"+esc(p)+"</b> introuvable (compte supprimé, privé ou bloqué)":"💤 <b>@"+esc(p)+"</b> : rien publié depuis "+(a.jours||"30+")+" jours"}</span><button class="second" data-retirer="${esc(p)}" style="flex:none;padding:6px 10px">Retirer</button></div>`).join("");
+  z.querySelectorAll("[data-retirer]").forEach(b=>b.onclick=()=>{const t=document.querySelector('[data-var="PROFILS_TIKTOK"]'); if(!t) return;
+    const p=b.dataset.retirer.toLowerCase(); t.value=t.value.split(/\n/).filter(l=>!new RegExp("@?"+p.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"\\b","i").test(l.trim())).join("\n");
+    const e_=document.querySelector('[data-enr="PROFILS_TIKTOK"]'); if(e_) e_.click(); b.closest(".alerte").remove()});
+}
+// 📈 courbe des vues des 48 premières heures (episodes/courbes.json, stats.noter_courbes ; idée 14 du 15 novembre)
+let COURBES={};
+function vuesA(p,h){                                                       // vues à l'heure h (interpolées), ou null si pas encore là
+  if(!p||!p.length||p[p.length-1][0]<h) return null;
+  if(h<=p[0][0]) return p[0][1]*h/Math.max(0.5,p[0][0]);
+  for(let k=1;k<p.length;k++) if(p[k][0]>=h){const [a,va]=p[k-1],[b,vb]=p[k]; return va+(vb-va)*(h-a)/Math.max(0.01,b-a)}
+  return null;
+}
+function rendreCourbe(v){
+  const z=$("#courbe"); if(!z) return; const e=COURBES[v.fichier];
+  if(!e||!e.p||e.p.length<2){z.style.display="none";return}
+  const H=[...Array(49).keys()], moi=H.map(h=>vuesA(e.p,h)), autres=Object.entries(COURBES).filter(([k])=>k!==v.fichier).map(([,x])=>x.p);
+  const moy=H.map(h=>{const l=autres.map(p=>vuesA(p,h)).filter(x=>x!=null).sort((a,b)=>a-b); return l.length>=2?l[Math.floor(l.length/2)]:null});
+  const max=Math.max(1,...moi.filter(x=>x!=null),...moy.filter(x=>x!=null)), W_=320, H_=110;
+  const pts=l=>l.map((y,h)=>y==null?null:`${(h/48*W_).toFixed(1)},${(H_-y/max*H_).toFixed(1)}`).filter(Boolean).join(" ");
+  const der=e.p[e.p.length-1], hd=Math.min(48,Math.floor(der[0])), m_=moy[hd];
+  const fois=m_?der[1]/Math.max(1,m_):null;
+  z.innerHTML=`<p class="note" style="margin:0 0 4px"><b>📈 Vues des 48 premières heures</b> · ${der[1].toLocaleString("fr-FR")} vues à ${String(der[0]).replace(".",",")} h`+
+    (fois?` · <b>×${fois.toFixed(1).replace(".",",")}</b> la moyenne (${Math.round(m_).toLocaleString("fr-FR")})`:"")+`</p>`+
+    `<svg viewBox="-2 -4 ${W_+4} ${H_+18}" style="width:100%;height:auto;background:var(--carte);border-radius:10px">`+
+    `<polyline points="${pts(moy)}" fill="none" stroke="#888" stroke-width="2" stroke-dasharray="5 4"/>`+
+    `<polyline points="${pts(moi)}" fill="none" stroke="var(--jaune)" stroke-width="3"/>`+
+    [0,12,24,36,48].map(h=>`<text x="${h/48*W_}" y="${H_+14}" font-size="10" fill="#888" text-anchor="middle">${h} h</text>`).join("")+`</svg>`+
+    `<p class="note" style="margin:2px 0 0">Jaune : cette vidéo · pointillés : vos vidéos en moyenne</p>`;
+  z.style.display="";
+}
 // 📈 recette du succès (episodes/recette.json, moteur/recette.py)
 function rendreRecette(r){
   const z=$("#recette"); if(!z) return;
@@ -861,6 +903,8 @@ async function actualiserStats(){
   try{
     const [h,st,cr,rc,dc,vt,pn]=await Promise.all([lireEpisode("historique.json").catch(()=>null),lireEpisode("stats.json").catch(()=>null),lireEpisode("credits.json").catch(()=>null),lireEpisode("recette.json").catch(()=>null),
       lireEpisode("decouvertes.json").catch(()=>null),lireEpisode("vitrine.json").catch(()=>null),lireEpisode("pannes.json").catch(()=>null)]);
+    lireEpisode("profils_etat.json").then(rendreProfilsEtat).catch(()=>{});
+    lireEpisode("courbes.json").then(c=>{if(c&&typeof c==="object"){COURBES=c; if(choisie!==null&&DATA[choisie]) rendreCourbe(DATA[choisie])}}).catch(()=>{});
     if(rc&&rc.videos) rendreRecette(rc);
     if(dc&&Array.isArray(dc.profils)) rendreDecouvertes(dc);
     if(vt&&Array.isArray(vt.bios)) rendreVitrine(vt);
@@ -873,6 +917,7 @@ async function actualiserStats(){
       ajouterNouvelles(h); rendreTemps(h);
       const faites=h.filter(e=>e.fichier), der=faites[faites.length-1];
       if(der){OUTILS={outils:(der.outils&&typeof der.outils==="object")?der.outils:null,date:der.date||"",titre:der.titre||""}; rendreOutils()}}
+    if(st&&Array.isArray(st.videos)){const H_=heuresStats(st.videos); if(H_){HEURES_LIVE=H_; resumePubli()}}   // heure des stats à jour toute seule
     if(st&&st.compte){const vids=st.videos||[]; STATS_LIVE={compte:st.compte,maj:st.maj||"",videos:vids.length,
       vues:vids.reduce((a,x)=>a+(x.vues||0),0),liees:vids.filter(x=>x.fichier).length,abonnes:st.abonnes,abonnes_hist:st.abonnes_hist||[]}}
     DERNIERE_MAJ=Date.now();
@@ -1106,16 +1151,40 @@ async function basculerPubli(nom,b){
   try{await ecrireVar("PUBLI_FILE",f.join("\n")||"-"); toast(on?"Retirée de la publication automatique":"Ajoutée à la publication automatique ✓"); majBoutonPubliFiche()}
   catch(e){VARS.PUBLI_FILE=avant; majPubliPartout(); toast("❌ Pas enregistré ("+e.message+") : retour en arrière")}
 }
-function creneauxPubli(){                                                 // heures de publication du jour (1 ou 2), triées
-  const auto=String((VARS&&VARS.PUBLI_HEURE_AUTO)||"0")==="1", h=auto?(String(CONF.heure_stats??18).padStart(2,"0")+":00"):((VARS&&VARS.PUBLI_HEURE)||"18:00");
+// 📊 heure choisie par les statistiques, recalculée dans l'appli à chaque relevé des vues (même calcul que stats.meilleure_heure_publication)
+let HEURES_LIVE=null;
+function heuresStats(vids){                                                // {global, jours:[0..6]} ou null (moins de 8 vidéos publiées)
+  const v=(vids||[]).filter(x=>x.date); if(v.length<8) return null;
+  const FMT=new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/Paris",weekday:"short",hour:"2-digit",hourCycle:"h23"});
+  const hp=x=>{const p=Object.fromEntries(FMT.formatToParts(new Date(x.date*1000)).map(o=>[o.type,o.value])); return {h:+p.hour%24, j:["Mon","Tue","Wed","Thu","Fri","Sat","Sun"].indexOf(p.weekday)}};
+  const meilleure=l=>{const p={}; l.forEach(x=>{const h=hp(x).h; (p[h]=p[h]||[]).push(x.vues||0)});
+    const b=Object.entries(p).filter(([,a])=>a.length>=2).map(([h,a])=>[+h,a.reduce((s,y)=>s+y,0)/a.length]); return b.length?b.sort((a,c)=>c[1]-a[1])[0][0]:null};
+  const g=meilleure(v); if(g==null) return null;
+  const jours=[...Array(7).keys()].map(j=>{const l=v.filter(x=>hp(x).j===j); return l.length>=6?(meilleure(l)??g):g});
+  return {global:g,jours};
+}
+function rendreHeureStats(){
+  const z=$("#heureStats"); if(!z) return;
+  const on=String((VARS&&VARS.PUBLI_HEURE_AUTO)||"0")==="1", H=HEURES_LIVE||(CONF.heures_jours?{global:CONF.heure_stats??18,jours:[...Array(7).keys()].map(j=>CONF.heures_jours[j]??CONF.heure_stats??18)}:null);
+  if(!H){z.textContent="📊 Pas encore assez de vidéos publiées (8 au moins) : l'heure fixe ci-dessous est utilisée.";return}
+  const auj=(new Date().getDay()+6)%7, dem=(auj+1)%7, nom=["lundi","mardi","mercredi","jeudi","vendredi","samedi","dimanche"], f=h=>String(h).padStart(2,"0")+" h";
+  const varie=new Set(H.jours).size>1;
+  z.innerHTML=(on?"✅ <b>Heure utilisée</b>":"📊 <b>Heure conseillée</b>")+` : aujourd'hui (${nom[auj]}) <b>${f(H.jours[auj])}</b>, demain (${nom[dem]}) <b>${f(H.jours[dem])}</b>`+
+    (varie?`<br><span style="font-size:12px">${H.jours.map((h,j)=>nom[j].slice(0,3)+" "+f(h)).join(" · ")}</span>`:"")+
+    `<br><span style="font-size:12px">Recalculée toute seule à chaque relevé de vos vues (toutes les heures)${on?"":" ; cochez la case pour l'utiliser"}.</span>`;
+}
+function creneauxPubli(d){                                                // heures de publication du jour d (1 ou 2), triées
+  const H_=HEURES_LIVE||(CONF.heures_jours?{global:CONF.heure_stats??18,jours:[...Array(7).keys()].map(j=>CONF.heures_jours[j]??CONF.heure_stats??18)}:null);
+  const jj=d?((d.getDay()+6)%7):null, hj=H_?(jj!=null?H_.jours[jj]:H_.global):(CONF.heure_stats??18);   // idée 17 : selon le jour
+  const auto=String((VARS&&VARS.PUBLI_HEURE_AUTO)||"0")==="1", h=auto?(String(hj).padStart(2,"0")+":00"):((VARS&&VARS.PUBLI_HEURE)||"18:00");
   const l=[h], h2=String((VARS&&VARS.PUBLI_HEURE2)||"12:00").trim(), mn=x=>{const [a,b]=x.split(":").map(Number); return a*60+(b||0)};
   if(String((VARS&&VARS.PUBLI_DEUX)||"0")==="1"&&/^\d{1,2}:\d{2}$/.test(h2)&&Math.abs(mn(h2)-mn(h))>=60) l.push(h2);
   return l.sort((a,b)=>mn(a)-mn(b));
 }
 function prochainsCreneaux(n){                                             // [Date] des n prochaines publications
   const hs=creneauxPubli(), out=[], d=new Date(); d.setSeconds(0,0);
-  for(let j=0;out.length<n&&j<400;j++) for(const h of hs){const [a,b]=h.split(":").map(Number), x=new Date(d); x.setDate(d.getDate()+j); x.setHours(a,b,0,0);
-    if(x>new Date()&&out.length<n) out.push(x)}
+  for(let j=0;out.length<n&&j<400;j++){const jour_=new Date(d); jour_.setDate(d.getDate()+j); for(const h of creneauxPubli(jour_)){const [a,b]=h.split(":").map(Number), x=new Date(d); x.setDate(d.getDate()+j); x.setHours(a,b,0,0);
+    if(x>new Date()&&out.length<n) out.push(x)}}
   return out;
 }
 function rendreCalendrier(){                                               // les prochains jours de publication, dans l'ordre de la file
@@ -1168,7 +1237,7 @@ function rendreStock(){                                                   // com
   zs.forEach(z=>{z.classList.remove("vert","orange","rouge"); if(cls) z.classList.add(cls); if(z.innerHTML!==html) z.innerHTML=html});
 }
 function resumePubli(){
-  rendreStock();
+  rendreStock(); rendreHeureStats();
   rendreCalendrier();
   const z=$("#pubResume"); if(!z) return;
   if(!lireJeton()){z.textContent="Connectez la régie pour choisir les vidéos à publier.";return}
@@ -1285,7 +1354,7 @@ function choisir(i){
   $("#pouce").classList.toggle("actif",v.avis===1); $("#bof").classList.toggle("actif",v.avis===-1);
   document.querySelectorAll("#liste .carte").forEach(c=>c.classList.toggle("choisie",+c.dataset.i===i));
   $("#choix").textContent="Sélection : "+v.titre; ["#copier","#voir","#manuel"].forEach(s=>$(s).disabled=false);
-  const a=$("#apercu"); a.src=srcDe(v); a.style.display="block"; $("#suivi").textContent=""; majBoutons(); ajusterBas();
+  const a=$("#apercu"); a.src=srcDe(v); a.style.display="block"; $("#suivi").textContent=""; majBoutons(); ajusterBas(); rendreCourbe(v);
   $("#comparer").style.display=v.source?"block":"none"; afficherQui(v); afficherRemarque(v); majBoutonPubliFiche();
   if(v.origine==="tiktok"&&!(v.reps&&v.reps.length)) chargerRepliques(v,i);  // vidéo plus récente que le site : répliques lues en direct
 }

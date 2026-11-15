@@ -122,6 +122,7 @@ def sous_titres(video, R, son=None):
         r = difflib.SequenceMatcher(None, att, ent).ratio(); scores.append(r)
         if r < 0.5: out.append(_defaut(q["deb"], "sous-titres", f"sous-titre « {str(q['texte'])[:50]} » mais on entend « {' '.join(ent)[:50]} »",
                                        grave=len(ent) >= 3 and r < 0.25))   # (une 2e écoute qui entend un peu autre chose n'est pas une erreur sûre)
+    out += controle_karaoke(ph, mots)                                      # le mot en jaune = le mot entendu, au même instant
     seuls, bloc = [], []
     for i, m in enumerate(mots):                                           # voix entendue sans sous-titre (3 mots ou plus d'affilée)
         if i in vus or m["s"] > (R.get("total") or 1e9) - 0.5:
@@ -131,6 +132,31 @@ def sous_titres(video, R, son=None):
     if len(bloc) >= 3: seuls.append(bloc)
     for bl in seuls[:4]: out.append(_defaut(bl[0]["s"], "sous-titres", f"on entend « {' '.join(m['w'] for m in bl)[:50]} » sans sous-titre", grave=False))
     return out, (round(float(np.mean(scores)), 2) if scores else None)
+
+
+def controle_karaoke(ph, mots, seuil=0.3):
+    """Vrai contrôle du karaoké (demande de l'auteur du 15 novembre) : le son de la vidéo FINIE est réécouté ; chaque mot surligné est
+    retrouvé parmi les mots entendus (même mot, dans la réplique) et on mesure l'écart entre l'instant où il passe en jaune et
+    l'instant où on l'entend. Écart médian > 0,3 s sur la vidéo = point grave (« karaoké décalé ») ; sur une seule réplique = remarque."""
+    import jt
+    out, tous = [], []
+    for q in ph:
+        k = q.get("kara")
+        if not k or not q.get("texte"): continue
+        aff = [jt._nu_mot(w) for w in str(q["texte"]).split()]
+        ent = [(jt._nu_mot(m["w"]), float(m["s"])) for m in mots if float(q["deb"]) - 0.5 <= float(m["s"]) <= float(q["fin"]) + 0.5]
+        ecarts = []
+        for op, i1, i2, j1, j2 in difflib.SequenceMatcher(None, aff, [w for w, _ in ent], autojunk=False).get_opcodes():
+            if op != "equal": continue
+            for d in range(i2 - i1):
+                if aff[i1 + d] and i1 + d < len(k): ecarts.append(abs(float(k[i1 + d][0]) - ent[j1 + d][1]))
+        if len(ecarts) >= 3:
+            med = float(np.median(ecarts)); tous += ecarts
+            if med > seuil + 0.1: out.append(_defaut(q["deb"], "sous-titres", f"karaoké décalé de {med:.2f} s sur « {str(q['texte'])[:40]} »", grave=False))
+    if len(tous) >= 8 and float(np.median(tous)) > seuil:
+        out.append(_defaut(None, "sous-titres", f"karaoké décalé de {float(np.median(tous)):.2f} s en moyenne (mot en jaune ≠ mot entendu)"))
+    elif tous: journal(f"  karaoké contrôlé à l'oreille : {len(tous)} mots, écart médian {float(np.median(tous)):.2f} s")
+    return out
 
 
 # ------------------------------------------------------------------ 8. technique image par image

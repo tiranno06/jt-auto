@@ -23,6 +23,7 @@ jobs:
       PRE_ECOUTE: ${{ vars.PRE_ECOUTE }}
       STOCK_SONS: ${{ vars.STOCK_SONS }}
       HEURE_TIKTOK: ${{ vars.HEURE_TIKTOK }}
+      SILENCES_COURTS: ${{ vars.SILENCES_COURTS }}
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}

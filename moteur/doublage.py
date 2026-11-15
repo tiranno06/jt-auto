@@ -104,6 +104,53 @@ def couper_debut(tmp, info, t0, chemin_voix=None):
     return piste, mono, voix
 
 
+def silences_a_couper(mots, zones=None, voix=None, seuil=1.0, garde=0.45):
+    """Longs silences de l'original à raccourcir (choix de l'auteur du 15 novembre 2026, idée 4) : un blanc de plus de `seuil` s
+    entre deux mots, où personne ne parle (Silero) et où la voix isolée reste calme (un rire ou un souffle compte : on ne coupe
+    pas), est ramené à `garde` s. Renvoie [(début, fin)] des morceaux à retirer (jamais avant le 1er mot ni après le dernier)."""
+    out = []
+    for m0, m1 in zip(mots, mots[1:]):
+        a, b = float(m0["e"]), float(m1["s"])
+        if b - a <= seuil: continue
+        if zones and any(za < b - 0.05 and zb > a + 0.05 for za, zb in zones): continue   # Silero entend de la voix dans le blanc
+        if voix is not None:
+            x = np.asarray(voix[int(a * SR):int(b * SR)], np.float32); ref = np.asarray(voix, np.float32)
+            if len(x) and np.sqrt(np.mean(x ** 2)) > 0.25 * np.sqrt(np.mean(ref ** 2) + 1e-12): continue   # rire, souffle : gardé
+        out.append((round(a + garde / 2, 3), round(b - garde / 2, 3)))
+    return out
+
+
+def decaler(t, coupes):
+    """Instant t après le retrait des morceaux `coupes` (un instant DANS un morceau retiré va à son début)."""
+    d = 0.0
+    for a, b in coupes:
+        if t >= b: d += b - a
+        elif t > a: return a - d
+    return t - d
+
+
+def couper_silences(tmp, info, coupes, chemin_voix=None):
+    """Retire les mêmes morceaux de la vidéo d'origine, de la piste, du son mono et de la voix isolée. Renvoie (piste, mono, voix)."""
+    garde = "+".join(f"between(t,{a:.3f},{b:.3f})" for a, b in coupes)
+    src = info.get("_fichier") or ""
+    if src and os.path.exists(src):
+        dst = f"{tmp}/src_silences.mp4"
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", src, "-vf", f"select='not({garde})',setpts=N/FRAME_RATE/TB",
+                        "-af", f"aselect='not({garde})',asetpts=N/SR/TB", "-c:v", "libx264", "-preset", "veryfast", "-crf", "18", "-c:a", "aac", dst], check=True)
+        info["_fichier"] = dst
+    piste = f"{tmp}/piste.wav"
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", piste, "-af", f"aselect='not({garde})',asetpts=N/SR/TB",
+                    "-ac", "2", "-ar", str(SRM), f"{tmp}/piste_s.wav"], check=True)
+    os.replace(f"{tmp}/piste_s.wav", piste)
+    mono = _vers_mono(piste, f"{tmp}/mono.wav"); voix = None
+    if chemin_voix and os.path.exists(chemin_voix) and chemin_voix != f"{tmp}/mono.wav":
+        c2 = chemin_voix.rsplit(".", 1)[0] + "_s.wav"
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", chemin_voix, "-af", f"aselect='not({garde})',asetpts=N/SR/TB",
+                        "-ac", "1", "-ar", str(SR), c2], check=True)
+        os.replace(c2, chemin_voix); voix = _lire_wav(chemin_voix)
+    return piste, mono, voix
+
+
 def telecharger(url, tmp):
     """Son de la vidéo -> (infos, piste stéréo 44,1 kHz pour le montage, piste mono 22 kHz pour l'analyse)."""
     url = (url or "").strip()
@@ -566,6 +613,18 @@ def preparer(url):
             mots = [dict(m, s=round(float(m["s"]) - extra, 3), e=round(float(m["e"]) - extra, 3)) for m in mots]
             journal(f"  début coupé au premier mot : {extra:.2f} s de plus (1re parole à {float(mots[0]['s']):.2f} s)")
         except Exception as e: journal(f"  début gardé ({str(e)[:100]})")
+    coupes = []
+    if os.environ.get("SILENCES_COURTS", "1") != "0" and mots:              # longs blancs de l'original raccourcis (idée 4)
+        try:
+            z_ = ecoute.parole(voix_sig if voix_sig is not None else mono, SR)
+            coupes = silences_a_couper(mots, z_, voix_sig)
+            if coupes:
+                piste, mono, v2 = couper_silences(tmp, info, coupes, chemin_voix if chemin_voix != f"{tmp}/mono.wav" else None)
+                voix_sig = v2 if v2 is not None else (mono if chemin_voix == f"{tmp}/mono.wav" else voix_sig)
+                duree = len(mono) / SR
+                mots = [dict(m, s=round(decaler(float(m["s"]), coupes), 3), e=round(decaler(float(m["e"]), coupes), 3)) for m in mots]
+                journal(f"  {len(coupes)} long(s) silence(s) raccourci(s) : {sum(b - a for a, b in coupes):.1f} s de moins")
+        except Exception as e: journal(f"  silences gardés ({str(e)[:120]})"); coupes = []
     visuel, cles = {}, []
     try:                                                                   # l'image de la vidéo : cadrages, personnes, habits, couleurs, lumière
         import analyse_video
@@ -733,7 +792,7 @@ def preparer(url):
             S_["lieux"] = [l_]; sk["studio"] = S_
     sk["sources"] = [lien]
     sk["doublage"] = {"piste": piste, "duree": round(duree, 2), "source": lien, "auteur": auteur, "contexte": m.get("contexte", ""),
-                      "evenements": [list(e) for e in EVENEMENTS][:60], "visuel": visuel, "audio": audio,
+                      "evenements": [list(e) for e in EVENEMENTS][:60], "visuel": visuel, "audio": audio, "silences": coupes,
                       "video_origine": info.get("_fichier") or "", "debut": debut,    # (contrôle qualité : comparaison avec l'original)
                       "titre": str(info.get("title") or info.get("description") or "")[:300]}   # titre de l'original (parties 1, 2… : suites.py)
     try:                                                                   # personnes VUES à l'image par Gemini (une voix au téléphone exclue)
@@ -777,6 +836,7 @@ def depuis_sketch(sk):
     d = sk.get("doublage") or {}
     tmp = tempfile.mkdtemp(); info, piste, mono = telecharger(d.get("source") or (sk.get("sources") or [""])[0], tmp)
     if float(d.get("debut") or 0) > 0: piste, mono, _v = couper_debut(tmp, info, float(d["debut"]))   # même silence retiré qu'à la 1re fois
+    if d.get("silences"): piste, mono, _v = couper_silences(tmp, info, [tuple(x) for x in d["silences"]])   # mêmes blancs raccourcis
     d["piste"] = piste; sk["doublage"] = d
     audios, mots = [], []
     for r in sk["repliques"]:

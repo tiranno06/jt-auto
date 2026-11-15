@@ -45,6 +45,15 @@ jobs:
         run: |
           pip install -q cryptography -c contraintes.txt || true
           python moteur/paliers.py
+      - name: Veille des profils TikTok (disparus ou inactifs, une fois par jour)
+        continue-on-error: true
+        env:
+          PROFILS_TIKTOK: ${{ vars.PROFILS_TIKTOK }}
+          PROFILS_VEILLE: ${{ vars.PROFILS_VEILLE }}
+          VAPID_PRIVEE: ${{ vars.VAPID_PRIVEE }}
+          VAPID_PUBLIQUE: ${{ vars.VAPID_PUBLIQUE }}
+          PUSH_ABONNEMENTS: ${{ vars.PUSH_ABONNEMENTS }}
+        run: python -c "import sys; sys.path.insert(0, 'moteur'); import profils_tiktok as P; P.surveiller()"
       - name: Enregistrer
         run: |
           git config user.name "robot-jt"
