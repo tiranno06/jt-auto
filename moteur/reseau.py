@@ -163,7 +163,8 @@ def _appel_openai(fourn, kw):
             try:
                 rep_ = urllib.request.urlopen(req, timeout=240); d = json.loads(rep_.read()); _noter_quota(fourn, getattr(rep_, "headers", None)); break
             except urllib.error.HTTPError as e:
-                derniere = e; corps_err = e.read()[:300].decode("utf-8", "ignore"); bas = corps_err.lower()
+                corps_err = e.read()[:3000].decode("utf-8", "ignore"); bas = corps_err.lower()
+                derniere = f"{e.code} : {corps_err[:300]}"                 # (le texte dit si c'est un quota épuisé : fournisseur sauté ensuite)
                 if e.code == 400 and corps.get("tools") and ("tool_use_failed" in bas or "failed to parse tool" in bas):
                     corps.pop("tools", None); corps.pop("tool_choice", None)    # Groq : JSON de l'outil mal formé -> réponse en texte
                     corps["messages"] = corps["messages"] + [{"role": "user", "content": "Réponds UNIQUEMENT par un objet JSON valide qui respecte ce schéma : "
@@ -174,6 +175,11 @@ def _appel_openai(fourn, kw):
                 if e.code == 429 and str(getattr(e, "headers", None) and e.headers.get("x-ratelimit-limit-req-minute")) == "0":
                     d = "suivant"; break                                                # modèle fermé à l'offre gratuite (0 / minute) : le suivant
                 if e.code == 403 and "tier" in bas: d = "suivant"; break                  # modèle réservé aux offres payantes : le suivant
+                if e.code == 429 and fourn == "gemini":                    # Gemini gratuit : chaque modèle a SON quota (registre des pannes,
+                    if "perminute" in bas.replace(" ", "") and essai < 2:  # 11 novembre : « quota dépassé » sur le 1er modèle = Gemini coupé)
+                        m_ = re.search(r'retrydelay"\s*:\s*"(\d+)', bas)    # limite à la minute : on attend ce qu'il demande (60 s au plus)
+                        time.sleep(min(60.0, float(m_.group(1)) + 1 if m_ else 20.0)); continue
+                    if modele != modeles[-1]: d = "suivant"; break          # quota du jour de CE modèle : le modèle suivant a le sien
                 if e.code == 429 and any(m in bas for m in ("per day", "(tpd)", "(rpd)")) and modele != modeles[-1]:
                     d = "suivant"; break                                    # quota du jour de CE modèle (Groq) : le modèle suivant a le sien
                 if e.code == 429 and not any(m in bas for m in ("quota", "exhausted", "billing", "per day", "(tpd)", "(rpd)")):
@@ -187,6 +193,10 @@ def _appel_openai(fourn, kw):
                 if e.code in (500, 502, 503, 504) and essai < 2: time.sleep(3.0 * (essai + 1)); continue   # serveur saturé un instant
                 if e.code in (500, 502, 503, 504): d = "suivant"; break                  # toujours saturé : modèle suivant
                 raise RuntimeError(f"{fourn} {e.code} : {corps_err}")
+            except (TimeoutError, OSError) as e:                       # réponse trop lente (« The read operation timed out », gros envoi
+                derniere = e                                            # d'images) : un 2e essai, puis le modèle suivant (plus léger)
+                if essai < 1: continue
+                d = "suivant"; break
         if d == "suivant" or d is None: continue
         msg = (d.get("choices") or [{}])[0].get("message") or {}
         blocs = []

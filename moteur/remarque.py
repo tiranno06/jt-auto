@@ -106,7 +106,7 @@ def interpreter(sk, texte):
                "- \"dans\" : si le personnage est DANS un objet : micro_ondes, four, frigo, poele, bocal, carton ou cage (sinon vide) ;\n"
                "- \"compris\" : en une phrase, ce que tu as compris.\n"
                "Réponds avec l'outil corrections.")
-        r = ecrire._appel(reseau.claude(raisonner=True), None, [{"role": "user", "content": txt}], outil, max_tokens=1500)
+        r = ecrire._appel(reseau.claude(raisonner=True), None, [{"role": "user", "content": txt}], outil, max_tokens=4000)
         for x in ecrire._liste(r.get("qui")):
             try:
                 k = int(x.get("replique")); p_ = str(x.get("personnage"))

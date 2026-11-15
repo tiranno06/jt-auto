@@ -502,6 +502,14 @@
   pas » et les noms propres ne bougent jamais. **Pas fait** : RIFE (9) et LaMa (14) : leurs poids ne se trouvent que sur des copies non
   officielles, dans un format qui peut cacher du code (refusé par sécurité). Cache des modèles : hf-ecoute-v4 (+ outils/rhubarb,
   outils/wespeaker) ; venv refait une fois (contraintes.txt). Tests : ces outils sont coupés par défaut (`TestOutilsLibres`).
+- **Registre des pannes du 15 novembre 2026 (demande de l'auteur : régler ce qui revient)** : Gemini « quota dépassé » (429) coupait
+  Gemini pour toute la vidéo dès le 1er modèle : chaque modèle gratuit a SON quota -> modèle suivant ; limite « à la minute » -> attente
+  du délai demandé (60 s au plus) ; « réponse trop lente » (timeout) -> 2e essai puis modèle suivant (`reseau._appel_openai`, texte de
+  l'erreur gardé pour reconnaître un vrai quota épuisé). Aussi relevé dans le journal : corrections du compte rendu coupées à 1 500
+  jetons (`remarque`, 4 000 maintenant) ; notification « vidéo prête » qui disait « note 0/100 » (note d'écriture des sketchs) ->
+  confiance, jury et points à vérifier (`principal.resume_alerte`, sortie « resume » d'emission.yml) ; temps par étape faussés (contrôle
+  de la vidéo finie et corrections du compte rendu comptés dans « jury » : étapes à part ; pas d'alerte « plus lent » sur une étape
+  d'habitude < 1 min ni sur l'attente dans la file : `progression.lents`).
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.

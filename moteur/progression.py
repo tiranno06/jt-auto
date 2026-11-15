@@ -97,6 +97,7 @@ def lents(t, anciens, facteur=2.0, mini=120):
         vals = sorted(float(a[k]) for a in anciens if isinstance(a, dict) and k in a)
         if len(vals) < 3: continue
         med = vals[len(vals) // 2]
+        if med < 60 or k == "En file d'attente": continue                 # étape d'habitude très courte, ou attente : pas de fausse alerte
         if v > facteur * med and v - med > mini: res.append((k, round(v), round(med)))
     return res
 

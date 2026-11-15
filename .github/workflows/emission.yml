@@ -336,7 +336,8 @@ jobs:
         env:
           TITRE_VIDEO: ${{ steps.run.outputs.titre }}
           NOTE: ${{ steps.run.outputs.note }}
-        run: python moteur/alerte.py "🎬 Nouvelle vidéo prête" "« $TITRE_VIDEO » — note $NOTE/100. À vérifier dans l'appli."
+          RESUME: ${{ steps.run.outputs.resume }}
+        run: python moteur/alerte.py "🎬 Nouvelle vidéo prête" "« $TITRE_VIDEO » — ${RESUME:-note $NOTE/100}. À vérifier dans l'appli."
 
       - name: Prévenir le téléphone (échec)
         if: failure()
