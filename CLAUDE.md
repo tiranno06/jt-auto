@@ -99,6 +99,9 @@
   (accueil et onglet TikTok), `site.rendreStock` : nombre de vidéos qui restent à envoyer sur TikTok (cochées « À publier » pas encore
   publiées + déjà programmées), jusqu'à quel jour elles tiennent (créneaux 1 ou 2 par jour) et un conseil en couleur (🔴 ≤ 2 jours :
   lancer une nouvelle salve, 🟠 ≤ 5 jours, 🟢 sinon) ; avertit si la publication automatique est coupée ; relu toutes les 30 s.
+- **Bouton « ⚡ Charger la dernière version maintenant »** (Réglages → Avancé → Application, demande de l'auteur du 15 novembre 2026) :
+  version.txt relu sans cache ; nouvelle version -> copies gardées effacées et page rechargée (`rechargerPropre`) ; site en cours de
+  reconstruction (site.yml) -> l'appli attend et se recharge toute seule dès que la nouvelle version est en ligne.
 - **Barre de progression en temps réel** (accueil + onglet TikTok, PC et mobile) : le robot publie son avancement toutes les 8 s
   (`moteur/progression.py` → statut « progression-<run> » du commit : %, type, étape, heure de fin ; dessin des images = vitesse
   réelle) ; le site le relit toutes les 5 s, fait avancer barre et compte à rebours chaque seconde, montre la file d'attente et la

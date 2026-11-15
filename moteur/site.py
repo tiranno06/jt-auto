@@ -602,6 +602,8 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
         <button class="action" id="copierLien">Copier le lien de connexion</button><button class="action" id="cacherQR">Masquer</button></div>
     </section>
     <h3>Application</h3>
+    <button class="second" id="chargerVersion" style="width:100%;padding:12px;margin:6px 0">⚡ Charger la dernière version maintenant</button>
+    <p class="note">Recharge tout de suite l'appli avec la dernière version en ligne (sans attendre le bouton « ✨ Nouvelle version »). Si le robot est encore en train de mettre le site à jour, l'appli attend et se recharge toute seule dès qu'il a fini.</p>
     <button class="action" id="majsite">🔄 Mettre à jour l'application</button>
     <div id="suiviCfg" class="note"></div>
     <button class="second" id="oublier" style="width:100%;padding:12px">Déconnecter ce navigateur</button>
@@ -916,6 +918,29 @@ async function verifierVersion(){try{const r=await fetch("version.txt?t="+Date.n
     b.style.cssText="position:fixed;left:12px;right:12px;bottom:84px;z-index:99;padding:12px;font-weight:700;background:var(--jaune);color:#111;border:0;border-radius:14px";
     b.onclick=async()=>{try{const k=await caches.keys(); await Promise.all(k.map(x=>caches.delete(x)))}catch(e){} location.reload()}; document.body.appendChild(b)}}catch(e){}}
 setTimeout(verifierVersion,4000); setInterval(verifierVersion,300000);
+async function versionEnLigne(){try{const r=await fetch("version.txt?t="+Date.now(),{cache:"no-store"}); return r.ok?(await r.text()).trim():""}catch(e){return ""}}
+async function rechargerPropre(){                                          // copies gardées par l'appli effacées, puis page neuve
+  try{const k=await caches.keys(); await Promise.all(k.map(x=>caches.delete(x)))}catch(e){}
+  try{const regs=await navigator.serviceWorker.getRegistrations(); await Promise.all(regs.map(r=>r.update().catch(()=>{})))}catch(e){}
+  location.replace(location.pathname+"?v="+Date.now());
+}
+async function siteEnMiseAJour(){                                          // le robot reconstruit-il le site en ce moment ?
+  if(!lireJeton()) return false;
+  try{const d=await (await gh("/actions/workflows/site.yml/runs?per_page=3")).json(); return (d.workflow_runs||[]).some(r=>r.status!=="completed")}catch(e){return false}
+}
+$("#chargerVersion").onclick=async()=>{
+  const b=$("#chargerVersion"), z=$("#suiviCfg"); b.disabled=true;
+  const v=await versionEnLigne();
+  if(v&&v!==VERSION){z.textContent="⚡ Nouvelle version trouvée : rechargement…"; rechargerPropre(); return}
+  if(await siteEnMiseAJour()){
+    z.textContent="⏳ Le robot met le site à jour : l'appli se rechargera toute seule dès que c'est prêt (2 à 3 min).";
+    for(let k=0;k<60;k++){await new Promise(r=>setTimeout(r,10000)); const w=await versionEnLigne();
+      if(w&&w!==VERSION){z.textContent="⚡ Prête : rechargement…"; rechargerPropre(); return}
+      if(k>6&&!(await siteEnMiseAJour())) break}
+  }
+  z.textContent="✅ Vous avez déjà la dernière version en ligne. (Pour forcer une reconstruction du site : « 🔄 Mettre à jour l'application ».)";
+  b.disabled=false;
+};
 setTimeout(actualiserStats,800); setInterval(actualiserStats,3600*1000);
 document.addEventListener("visibilitychange",()=>{if(!document.hidden){if(Date.now()-DERNIERE_MAJ>20*1000) actualiserStats(); verifierVersion()}});   // à chaque retour dans l'appli
 // nouveaux abonnés depuis une date : total actuel moins le dernier relevé d'avant cette date (ou le plus ancien connu)

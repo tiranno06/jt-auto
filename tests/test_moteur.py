@@ -2913,3 +2913,10 @@ class TestSiteTikTokSeul(unittest.TestCase):
         self.assertIn('data-var="PERSO_JOJO"', src)                       # toujours là, juste caché
         self.assertIn("SITE_COMPLET", src)
         self.assertTrue(os.path.exists(os.path.join(ICI, "..", "docs", "archives_sketchs.md")))
+
+
+class TestChargerVersion(unittest.TestCase):
+    def test_bouton_charger_la_derniere_version(self):
+        src = open(os.path.join(ICI, "..", "moteur", "site.py"), encoding="utf-8").read()
+        self.assertIn('id="chargerVersion"', src); self.assertIn("async function rechargerPropre()", src)
+        self.assertNotIn('class="action" id="chargerVersion"', src)        # jamais grisé : marche même sans la clé de la régie
