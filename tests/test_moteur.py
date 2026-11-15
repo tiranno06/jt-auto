@@ -2890,3 +2890,14 @@ class TestOutilsLibres(unittest.TestCase):
         import wespeaker
         F = wespeaker.fbank(np.random.default_rng(0).normal(0, 0.1, 16000).astype(np.float32))
         self.assertEqual(F.shape[1], 80); self.assertAlmostEqual(float(np.abs(F.mean(0)).max()), 0.0, places=3)
+
+
+class TestStockPublication(unittest.TestCase):
+    def test_compteur_au_dessus_de_la_fabrication(self):
+        src = open(os.path.join(ICI, "..", "moteur", "site.py"), encoding="utf-8").read()
+        for o in ("o-tiktok", "o-accueil"):
+            k = src.index('id="%s"' % o) if 'id="%s"' % o in src else 0
+            bloc = src[k:k + 4000]
+            if "Fabrication en cours" in bloc:
+                self.assertLess(bloc.index("stockPubli"), bloc.index("Fabrication en cours"))
+        self.assertIn("function rendreStock()", src); self.assertIn("attentePubli(filePubli())", src)

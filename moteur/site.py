@@ -290,6 +290,8 @@ label>input,label>select,label>textarea{display:block;width:100%;box-sizing:bord
 select{display:block;width:100%;margin-top:6px;font:inherit;font-size:15px;padding:11px;border-radius:10px;border:1px solid var(--ligne);background:#0e0f17;color:var(--texte)}
 label .jeton{margin-top:6px}
 .note{font-size:12.5px;color:var(--doux);line-height:1.45}
+.stockPubli{display:flex;align-items:center;gap:14px}.stockPubli .nb{font-size:40px;font-weight:800;line-height:1;min-width:56px;text-align:center}
+.stockPubli .txt{font-size:14px;line-height:1.4}.stockPubli .txt b{font-size:15px}.stockPubli.vert .nb{color:#2e9e5b}.stockPubli.orange .nb{color:#e08a00}.stockPubli.rouge .nb{color:#d64545}
 .prog{margin:10px 0 4px}.prog .haut{display:flex;justify-content:space-between;gap:8px;font-size:13.5px;font-weight:600}
 .prog .barre{height:14px;border-radius:8px;background:var(--ligne);overflow:hidden;margin:6px 0 4px}
 .prog .plein{height:100%;border-radius:8px;background:linear-gradient(90deg,#25f4ee,#fe2c55);transition:width 1s linear}
@@ -376,6 +378,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <label class="ligne"><input type="checkbox" id="mApercu"> Aperçu rapide (10 secondes, environ 8 min) : pour juger le style avant la vraie vidéo</label>
     <button class="gros lancer" id="mCreer">🎬 Lancer la fabrication</button>
   </section>
+  <section class="panneau stockPubli"></section>
   <section class="panneau"><h2>⏳ Fabrication en cours</h2><div class="progressions"></div><div id="mSuivi" class="note" data-libre="1">Aucune fabrication lancée depuis cet appareil.</div></section>
   <section class="panneau"><h2>🆕 Dernières vidéos</h2><div id="recents"></div>
     <button class="second" id="toutVoir" style="width:100%;margin-top:4px">Voir toutes les vidéos</button></section>
@@ -390,6 +393,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
  </div>
  <!-- ======================================================== SONS TIKTOK (à part des sketchs) -->
  <div id="o-tiktok" style="display:none">
+  <section class="panneau stockPubli"></section>
   <section class="panneau"><h2>⏳ Fabrication en cours</h2><div class="progressions"><p class="note">Aucune fabrication en cours.</p></div></section>
   <details class="groupe repliTk" data-cle="lien"><summary>🔗 Une vidéo sur un son TikTok</summary>
     <label>Lien de la vidéo TikTok<input id="tkLien" type="url" inputmode="url" placeholder="https://www.tiktok.com/@compte/video/…"></label>
@@ -1106,7 +1110,33 @@ async function deplacerPubli(de,vers){                                     // gl
   try{await ecrireVar("PUBLI_FILE",f.join("\n")||"-"); toast("🗓️ Calendrier mis à jour")}
   catch(e){VARS.PUBLI_FILE=avant; rendreCalendrier(); resumePubli(); toast("❌ Pas enregistré ("+e.message+") : retour en arrière")}
 }
+function rendreStock(){                                                   // compteur des vidéos qui restent à publier (au-dessus de la fabrication)
+  const zs=document.querySelectorAll(".stockPubli"); if(!zs.length) return;
+  let html, cls="";
+  if(!lireJeton()) html='<div class="txt">📅 Connectez la régie (⚙️ Réglages) pour voir combien de vidéos restent à publier sur TikTok.</div>';
+  else{
+    const a=attentePubli(filePubli()), maint=new Date();
+    const prog=DATA.filter(v=>v.programmee&&new Date(v.programmee)>maint).map(v=>new Date(v.programmee));
+    const n=a.length+prog.length, on=String((VARS&&VARS.PUBLI_AUTO)||"0")==="1";
+    const fins=[...prog, ...(on?prochainsCreneaux(a.length):[])];
+    const fin=fins.length?new Date(Math.max(...fins.map(d=>+d))):null;
+    const jours=fin?Math.max(0,Math.ceil((fin-maint)/86400000)):0, parJour=creneauxPubli().length;
+    cls=!n||jours<=2?"rouge":jours<=5?"orange":"vert";
+    const jour=d=>d.toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long"});
+    const conseil=!n?"🔴 Plus rien à publier : lancez une nouvelle salve de vidéos."
+      :cls==="rouge"?"🔴 Bientôt plus rien : c'est le moment de lancer une nouvelle salve."
+      :cls==="orange"?"🟠 Encore quelques jours : pensez à préparer la prochaine salve."
+      :"🟢 Assez de vidéos pour le moment.";
+    html=`<div class="nb">${n}</div><div class="txt"><b>vidéo${n>1?"s":""} à publier sur TikTok</b>`
+      +(prog.length?` (dont ${prog.length} déjà programmée${prog.length>1?"s":""})`:"")
+      +(on&&fin?`<br>Jusqu'au ${jour(fin)} (${parJour>1?"2 par jour":"1 par jour"})`:"")
+      +(!on&&a.length?"<br>⚠️ Publication automatique désactivée (onglet TikTok)":"")
+      +`<br>${conseil}</div>`;
+  }
+  zs.forEach(z=>{z.classList.remove("vert","orange","rouge"); if(cls) z.classList.add(cls); if(z.innerHTML!==html) z.innerHTML=html});
+}
 function resumePubli(){
+  rendreStock();
   rendreCalendrier();
   const z=$("#pubResume"); if(!z) return;
   if(!lireJeton()){z.textContent="Connectez la régie pour choisir les vidéos à publier.";return}
@@ -1534,7 +1564,7 @@ async function chargerReglages(){
     champs().forEach(c=>{const val=(c.dataset.var in v)?v[c.dataset.var]:c.dataset.def;
       if(c.dataset.bascule) c.classList.toggle("on",String(val)!=="0"); else c.value=val;});
     chargerPerso(v); activer(true); majConnus(); $("#cfgEtat").textContent="Régie connectée ✓ — chaque changement est enregistré tout de suite.";
-    appliquerOnglets(v.ONGLETS_MASQUES||""); if($("#o-tiktok").style.display!=="none") rendreTk();
+    appliquerOnglets(v.ONGLETS_MASQUES||""); if($("#o-tiktok").style.display!=="none") rendreTk(); rendreStock();
     nettoyerAbos(v);
   }catch(e){$("#cfgEtat").textContent="Erreur : "+e.message+" — vérifiez la clé (droits Actions et Variables).";activer(false);
     if(/jeton refusé/.test(e.message)) $("#cfgConnexion").style.display=""}
@@ -1696,7 +1726,7 @@ function dessinerSuivi(){                                                  // ch
   zones.forEach(z=>{if(z.innerHTML!==html) z.innerHTML=html});
   const m=$("#mSuivi"); if(m&&m.dataset.libre==="1") m.style.display=lignes.length?"none":"";
 }
-setInterval(suiviLent,20000); setInterval(suiviRapide,5000); setInterval(dessinerSuivi,1000);
+setInterval(suiviLent,20000); setInterval(suiviRapide,5000); setInterval(dessinerSuivi,1000); setInterval(rendreStock,30000); setTimeout(rendreStock,800);
 document.addEventListener("visibilitychange",()=>{if(!document.hidden){suiviLent().then(suiviRapide)}});
 async function verifierEnCours(){
   suiviLent().then(suiviRapide);
