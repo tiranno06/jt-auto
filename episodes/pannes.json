@@ -18,5 +18,45 @@
   "jours": {
    "2026-11-11": 1
   }
+ },
+ "IN N:N:N N port.cc:N] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off erro": {
+  "n": 1,
+  "premiere": "2026-11-15",
+  "derniere": "2026-11-15",
+  "exemple": "I0000 00:00:1794776552.486665    4253 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environ",
+  "etape": "ingé son",
+  "jours": {
+   "2026-11-15": 1
+  }
+ },
+ "réseau : erreur N passagère, nouvel essai dans N s": {
+  "n": 1,
+  "premiere": "2026-11-15",
+  "derniere": "2026-11-15",
+  "exemple": "réseau : erreur 503 passagère, nouvel essai dans 2 s",
+  "etape": "ingé son",
+  "jours": {
+   "2026-11-15": 1
+  }
+ },
+ "[transformers] You are using a model of type `samN_video` to instantiate a model of type `samN`. This may be expected if you are loading a c": {
+  "n": 1,
+  "premiere": "2026-11-15",
+  "derniere": "2026-11-15",
+  "exemple": "[transformers] You are using a model of type `sam2_video` to instantiate a model of type `sam2`. This may be expected if you are loading a checkpoint that shares a subset of the architecture (e.g., loading a `sam2_video` checkpoint into `Sa",
+  "etape": "ingé son",
+  "jours": {
+   "2026-11-15": 1
+  }
+ },
+ "liste de contrôle par l'IA impossible (réponse inexploitable : «…»)": {
+  "n": 1,
+  "premiere": "2026-11-15",
+  "derniere": "2026-11-15",
+  "exemple": "liste de contrôle par l'IA impossible (réponse inexploitable : «  »)",
+  "etape": "monteur",
+  "jours": {
+   "2026-11-15": 1
+  }
  }
 }
