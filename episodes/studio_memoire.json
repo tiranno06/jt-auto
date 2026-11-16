@@ -6592,21 +6592,91 @@
   "cadence": "normal"
  },
  {
-  "moment": "soir",
+  "moment": "jour",
+  "lieux": [
+   "jardin"
+  ],
+  "source": "auteur+image",
+  "duree": 67.8,
+  "plans": {
+   "large": 42
+  },
+  "mouvements": {
+   "fixe": 42
+  },
+  "costumes": {
+   "presentateur": "tshirt",
+   "invite": "tshirt",
+   "envoyee": "chemise"
+  },
+  "figurants": 0,
+  "ambiances": [
+   "neige",
+   "neon"
+  ],
+  "controle": "Humoriste 6.6/10 : 34.8 s Réaction visuelle trop neutre lors de l'attaque sur l'argent. | Réalisateur 6.3/10 : 13.5 s Absence d'animation gestuelle pour appuyer les échanges tendus. | Directeur artist",
+  "fichier": "2026-11-15_22h22_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": false,
+   "tiers": false,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": false,
+   "reflets": false,
+   "son": true
+  },
+  "cadence": "rapide"
+ },
+ {
+  "moment": "jour",
   "lieux": [
    "voiture"
   ],
   "source": "auteur+image",
-  "duree": 117.8,
+  "duree": 92.0,
   "plans": {
-   "large": 48
+   "large": 42
   },
   "mouvements": {
-   "fixe": 48
+   "fixe": 42
   },
   "costumes": {
-   "envoyee": "debardeur",
-   "presentateur": "costume"
+   "presentateur": "tshirt",
+   "invite": "debardeur"
+  },
+  "figurants": 0,
+  "ambiances": [],
+  "controle": "Humoriste 7.0/10 : 6 s La colère arrive un peu trop tôt par rapport au ton de l'original.; 51 s Manque un petit effet comique sur le nom Citroën. | Réalisateur 8.8/10 :  | Directeur artistique 7.8/10 ",
+  "fichier": "2026-11-15_23h22_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": true,
+   "tiers": true,
+   "etalonnage": false,
+   "profondeur": true,
+   "grain": true,
+   "reflets": false,
+   "son": true
+  },
+  "cadence": "normal"
+ },
+ {
+  "moment": "soir",
+  "lieux": [
+   "salon"
+  ],
+  "source": "auteur+image",
+  "duree": 71.3,
+  "plans": {
+   "large": 39
+  },
+  "mouvements": {
+   "fixe": 39
+  },
+  "costumes": {
+   "envoyee": "veste_jean",
+   "invite": "capuche"
   },
   "figurants": 0,
   "ambiances": [
@@ -6614,16 +6684,16 @@
    "pluie",
    "poussiere"
   ],
-  "controle": "Humoriste 6.6/10 : 23.6 s Le personnage masculin n'exprime pas assez la panique totale face à la situation. | Réalisateur 6.3/10 : 5.2 s Le bandeau contextuel 'POV' disparaît brutalement à partir de l",
-  "fichier": "2026-11-15_22h43_emission.mp4",
+  "controle": "Humoriste 7.0/10 : 32 s Manque une réaction outrée plus visible du personnage féminin à ce moment précis.; 33 s La réaction au malaise pourrait être amplifiée pour plus d'effet comique. | Réalisateur ",
+  "fichier": "2026-11-16_01h20_emission.mp4",
   "cine": {
    "focus": false,
-   "vertige": true,
-   "tiers": false,
+   "vertige": false,
+   "tiers": true,
    "etalonnage": true,
    "profondeur": false,
    "grain": true,
-   "reflets": false,
+   "reflets": true,
    "son": true
   },
   "cadence": "rapide"
@@ -6635,69 +6705,34 @@
    "salon"
   ],
   "source": "auteur+image",
-  "duree": 66.5,
+  "duree": 60.4,
   "plans": {
-   "large": 27
+   "large": 39
   },
   "mouvements": {
-   "fixe": 27
+   "fixe": 39
   },
   "costumes": {
-   "presentateur": "chemise",
-   "invite": "tshirt"
+   "presentateur": "debardeur",
+   "invite": "doudoune"
   },
   "figurants": 0,
   "ambiances": [
+   "pluie",
    "poussiere"
   ],
-  "controle": "Humoriste 8.6/10 :  | Réalisateur 9.6/10 :  | Directeur artistique 6.0/10 : 1 s Le décor de rue avec les masques rouges contraste trop avec l'ambiance intimiste d'un appel pro tardif (voir original en",
-  "fichier": "2026-11-16_00h19_emission.mp4",
+  "controle": "Humoriste 8.6/10 :  | Réalisateur 8.0/10 : 0 s Le montage fixe respecte les consignes voulues par l'auteur. | Directeur artistique 6.0/10 : 0 s L'apparence des personnages diffère de l'original (bâton",
+  "fichier": "2026-11-16_02h27_emission.mp4",
   "cine": {
    "focus": false,
    "vertige": true,
    "tiers": true,
-   "etalonnage": true,
-   "profondeur": false,
-   "grain": true,
-   "reflets": true,
-   "son": true
-  },
-  "cadence": "normal"
- },
- {
-  "moment": "jour",
-  "lieux": [
-   "bureau"
-  ],
-  "source": "auteur+image",
-  "duree": 68.5,
-  "plans": {
-   "large": 33
-  },
-  "mouvements": {
-   "fixe": 33
-  },
-  "costumes": {
-   "envoyee": "chemise",
-   "presentateur": "chemise"
-  },
-  "figurants": 0,
-  "ambiances": [
-   "neon",
-   "pluie"
-  ],
-  "controle": "Humoriste 7.0/10 : 1.7 s Le présentateur devrait réagir de manière plus détachée face à l'agacement. | Réalisateur 8.8/10 :  | Directeur artistique 8.0/10 : 0.4 s Le design et les proportions des pers",
-  "fichier": "2026-11-16_01h56_emission.mp4",
-  "cine": {
-   "focus": true,
-   "vertige": false,
-   "tiers": true,
-   "etalonnage": true,
+   "etalonnage": false,
    "profondeur": false,
    "grain": true,
    "reflets": false,
    "son": true
   },
-  "cadence": "rapide"
+  "cadence": "normal"
  }
 ]
