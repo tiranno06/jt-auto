@@ -1,1833 +1,93 @@
 {
- "titre": "ACTION OU VÉRITÉ AU DATE",
- "sujet": "ACTION OU VÉRITÉ AU DATE",
- "ecran": "ACTION",
+ "titre": "LA MANAGER TOXIQUE",
+ "sujet": "LA MANAGER TOXIQUE",
+ "ecran": "LA MANAGER",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "Quand ton date dérape en 30 secondes",
- "question": "Vous auriez bu le cocktail ou vous seriez partis direct ?",
+ "titre_accroche": "POV : Ta manager toxique après 19h",
+ "question": "Vous répondez aux appels du taf après 19h vous ?",
  "running_gag": "",
  "verite": "",
  "repliques": [
   {
    "p": "envoyee",
-   "t": "Eh viens, on fait un action ou vérité.",
-   "_deb": 0.2,
-   "_fin": 1.42,
-   "d": "[cheerful] Eh viens, on fait un action ou vérité.",
+   "t": "Eliott, pourquoi tu n'étais pas joignable hier soir ?",
+   "_deb": 0.0,
+   "_fin": 1.52,
+   "d": "[annoyed] Eliott, pourquoi tu n'étais pas joignable hier soir ?",
    "_mots": [
     [
-     "Eh",
+     "Eliott,",
      0.0,
-     0.06
-    ],
-    [
-     "viens,",
-     0.1,
-     0.24
-    ],
-    [
-     "on",
-     0.3,
-     0.3
-    ],
-    [
-     "fait",
-     0.32,
-     0.4
-    ],
-    [
-     "un",
-     0.42,
-     0.48
-    ],
-    [
-     "action",
-     0.56,
-     0.74
-    ],
-    [
-     "ou",
-     0.76,
-     0.8
-    ],
-    [
-     "vérité.",
-     0.84,
-     1.22
-    ]
-   ],
-   "objet": "casque_moto"
-  },
-  {
-   "p": "invite",
-   "t": "Vas-y, mais si on joue, on joue pour de vrai hein.",
-   "_deb": 1.72,
-   "_fin": 3.36,
-   "d": "[confident] Vas-y, mais si on joue, on joue pour de vrai hein.",
-   "_mots": [
-    [
-     "Vas-y,",
-     0.0,
-     0.26
-    ],
-    [
-     "mais",
-     0.32,
-     0.42
-    ],
-    [
-     "si",
-     0.48,
-     0.54
-    ],
-    [
-     "on",
-     0.56,
-     0.66
-    ],
-    [
-     "joue,",
-     0.7,
-     0.78
-    ],
-    [
-     "on",
-     0.82,
-     0.86
-    ],
-    [
-     "joue",
-     0.92,
-     1.04
-    ],
-    [
-     "pour",
-     1.06,
-     1.18
-    ],
-    [
-     "de",
-     1.24,
-     1.32
-    ],
-    [
-     "vrai",
-     1.36,
-     1.5
-    ],
-    [
-     "hein.",
-     1.54,
-     1.64
-    ]
-   ],
-   "objet": "casque_moto"
-  },
-  {
-   "p": "invite",
-   "t": "Sinon moi, je joue pas.",
-   "_deb": 3.4,
-   "_fin": 4.08,
-   "d": "[serious] Sinon moi, je joue pas.",
-   "_mots": [
-    [
-     "Sinon",
-     0.0,
-     0.16
-    ],
-    [
-     "moi,",
-     0.2,
-     0.28
-    ],
-    [
-     "je",
-     0.32,
-     0.36
-    ],
-    [
-     "joue",
-     0.4,
-     0.52
-    ],
-    [
-     "pas.",
-     0.56,
-     0.68
-    ]
-   ]
-  },
-  {
-   "p": "envoyee",
-   "t": "Ouais, ouais pour de vrai. Genre les actions, on fait les actions, vérité, on dit la vérité.",
-   "_deb": 4.24,
-   "_fin": 7.26,
-   "d": "[enthusiastic] Ouais, ouais pour de vrai. Genre les actions, on fait les actions, vérité, on dit la vérité.",
-   "_mots": [
-    [
-     "Ouais,",
-     0.0,
-     0.12
-    ],
-    [
-     "ouais",
-     0.12,
      0.22
     ],
     [
-     "pour",
-     0.24,
-     0.34
-    ],
-    [
-     "de",
+     "pourquoi",
      0.38,
-     0.44
-    ],
-    [
-     "vrai.",
-     0.48,
-     0.62
-    ],
-    [
-     "Genre",
-     0.66,
-     0.76
-    ],
-    [
-     "les",
-     0.8,
-     0.9
-    ],
-    [
-     "actions,",
-     0.96,
-     1.14
-    ],
-    [
-     "on",
-     1.18,
-     1.18
-    ],
-    [
-     "fait",
-     1.2,
-     1.26
-    ],
-    [
-     "les",
-     1.28,
-     1.38
-    ],
-    [
-     "actions,",
-     1.46,
-     1.72
-    ],
-    [
-     "vérité,",
-     1.86,
-     2.14
-    ],
-    [
-     "on",
-     2.2,
-     2.28
-    ],
-    [
-     "dit",
-     2.36,
-     2.46
-    ],
-    [
-     "la",
-     2.5,
-     2.58
-    ],
-    [
-     "vérité.",
-     2.62,
-     3.02
-    ]
-   ],
-   "objet": "casque_moto"
-  },
-  {
-   "p": "invite",
-   "t": "Ok, bah, tu sais quoi ?",
-   "_deb": 7.56,
-   "_fin": 8.2,
-   "d": "[curious] Ok, bah, tu sais quoi ?",
-   "_mots": [
-    [
-     "Ok,",
-     0.0,
-     0.2
-    ],
-    [
-     "bah,",
-     0.24,
-     0.32
-    ],
-    [
-     "tu",
-     0.34,
-     0.38
-    ],
-    [
-     "sais",
-     0.4,
-     0.5
-    ],
-    [
-     "quoi?",
-     0.52,
-     0.64
-    ]
-   ],
-   "objet": "casque_moto"
-  },
-  {
-   "p": "invite",
-   "t": "J'ai une idée. Hier, j'ai trempé des clopes dans de l'eau, ça a fait un cocktail bien dégueulasse.",
-   "_deb": 8.24,
-   "_fin": 12.18,
-   "d": "[amused] J'ai une idée. Hier, j'ai trempé des clopes dans de l'eau, ça a fait un cocktail bien dégueulasse.",
-   "_mots": [
-    [
-     "J'ai",
-     0.0,
-     0.1
-    ],
-    [
-     "une",
-     0.14,
-     0.24
-    ],
-    [
-     "idée.",
-     0.3,
-     0.56
-    ],
-    [
-     "Hier,",
-     0.6,
-     0.76
-    ],
-    [
-     "j'ai",
-     0.82,
-     0.92
-    ],
-    [
-     "trempé",
-     0.96,
-     1.28
-    ],
-    [
-     "des",
-     1.34,
-     1.48
-    ],
-    [
-     "clopes",
-     1.52,
-     1.76
-    ],
-    [
-     "dans",
-     1.8,
-     1.92
-    ],
-    [
-     "de",
-     1.96,
-     2.0
-    ],
-    [
-     "l'eau,",
-     2.04,
-     2.14
-    ],
-    [
-     "ça",
-     2.22,
-     2.28
-    ],
-    [
-     "a",
-     2.32,
-     2.4
-    ],
-    [
-     "fait",
-     2.44,
-     2.52
-    ],
-    [
-     "un",
-     2.54,
-     2.62
-    ],
-    [
-     "cocktail",
-     2.66,
-     3.06
-    ],
-    [
-     "bien",
-     3.12,
-     3.3
-    ],
-    [
-     "dégueulasse.",
-     3.36,
-     3.94
-    ]
-   ],
-   "objet": "casque_moto"
-  },
-  {
-   "p": "invite",
-   "t": "Comme ça, si on n'a pas envie de faire une action ou on n'a pas envie de dire une vérité, on est obligé de boire le cocktail.",
-   "_deb": 12.22,
-   "_fin": 15.92,
-   "d": "[explaining] Comme ça, si on n'a pas envie de faire une action ou on n'a pas envie de dire une vérité, on est obligé de boire le cocktail.",
-   "objet": "verre",
-   "_mots": [
-    [
-     "Comme",
-     0.0,
-     0.16
-    ],
-    [
-     "ça,",
-     0.22,
-     0.3
-    ],
-    [
-     "si",
-     0.38,
-     0.42
-    ],
-    [
-     "on",
-     0.44,
-     0.48
-    ],
-    [
-     "n'a",
-     0.52,
-     0.62
-    ],
-    [
-     "pas",
-     0.64,
-     0.72
-    ],
-    [
-     "envie",
-     0.74,
-     0.88
-    ],
-    [
-     "de",
-     0.92,
-     0.96
-    ],
-    [
-     "faire",
-     1.0,
-     1.1
-    ],
-    [
-     "une",
-     1.14,
-     1.22
-    ],
-    [
-     "action",
-     1.28,
-     1.54
-    ],
-    [
-     "ou",
-     1.58,
-     1.6
-    ],
-    [
-     "on",
-     1.62,
-     1.66
-    ],
-    [
-     "n'a",
-     1.68,
-     1.76
-    ],
-    [
-     "pas",
-     1.82,
-     1.86
-    ],
-    [
-     "envie",
-     1.88,
-     2.02
-    ],
-    [
-     "de",
-     2.06,
-     2.1
-    ],
-    [
-     "dire",
-     2.12,
-     2.24
-    ],
-    [
-     "une",
-     2.28,
-     2.36
-    ],
-    [
-     "vérité,",
-     2.4,
-     2.76
-    ],
-    [
-     "on",
-     2.88,
-     2.92
-    ],
-    [
-     "est",
-     2.96,
-     3.0
-    ],
-    [
-     "obligé",
-     3.0,
-     3.16
-    ],
-    [
-     "de",
-     3.18,
-     3.22
-    ],
-    [
-     "boire",
-     3.24,
-     3.34
-    ],
-    [
-     "le",
-     3.36,
-     3.44
-    ],
-    [
-     "cocktail.",
-     3.48,
-     3.7
-    ]
-   ]
-  },
-  {
-   "p": "envoyee",
-   "t": "Vas-y, vas-y. C'est l'un ou l'autre. Vas-y, c'est bon.",
-   "_deb": 15.94,
-   "_fin": 17.66,
-   "d": "[accepting] Vas-y, vas-y. C'est l'un ou l'autre. Vas-y, c'est bon.",
-   "_mots": [
-    [
-     "Vas-y,",
-     0.0,
-     0.279
-    ],
-    [
-     "vas-y.",
-     0.32,
-     0.42
-    ],
-    [
-     "C'est",
-     0.439,
      0.52
     ],
     [
-     "l'un",
+     "tu",
      0.54,
-     0.62
+     0.56
     ],
     [
-     "ou",
-     0.66,
+     "n'étais",
+     0.58,
      0.7
     ],
     [
-     "l'autre.",
-     0.74,
-     1.08
-    ],
-    [
-     "Vas-y,",
-     1.14,
-     1.32
-    ],
-    [
-     "c'est",
-     1.36,
-     1.46
-    ],
-    [
-     "bon.",
-     1.5,
-     1.72
-    ]
-   ],
-   "objet": "poele"
-  },
-  {
-   "p": "invite",
-   "t": "Vas-y, commence à me dire si tu veux.",
-   "_deb": 17.74,
-   "_fin": 19.36,
-   "d": "[inviting] Vas-y, commence à me dire si tu veux.",
-   "_mots": [
-    [
-     "Vas-y,",
-     0.0,
-     0.22
-    ],
-    [
-     "commence",
-     0.46,
-     0.72
-    ],
-    [
-     "à",
-     0.78,
-     0.82
-    ],
-    [
-     "me",
-     0.84,
-     0.92
-    ],
-    [
-     "dire",
-     0.96,
-     1.1
-    ],
-    [
-     "si",
-     1.16,
-     1.16
-    ],
-    [
-     "tu",
-     1.16,
-     1.24
-    ],
-    [
-     "veux.",
-     1.28,
-     1.62
-    ]
-   ],
-   "objet": "verre"
-  },
-  {
-   "p": "envoyee",
-   "t": "Euh action ou vérité ?",
-   "_deb": 19.44,
-   "_fin": 20.68,
-   "d": "[thinking] Euh action ou vérité ?",
-   "_mots": [
-    [
-     "Euh",
-     0.0,
-     0.36
-    ],
-    [
-     "action",
-     0.44,
-     0.68
-    ],
-    [
-     "ou",
-     0.74,
-     0.78
-    ],
-    [
-     "vérité?",
-     0.82,
-     1.24
-    ]
-   ],
-   "objet": "casque_moto"
-  },
-  {
-   "p": "invite",
-   "t": "Vérité.",
-   "_deb": 21.32,
-   "_fin": 21.74,
-   "d": "[neutral] Vérité.",
-   "_mots": [
-    [
-     "Vérité.",
-     0.0,
-     0.42
-    ]
-   ],
-   "objet": "casque_moto"
-  },
-  {
-   "p": "envoyee",
-   "t": "Vérité, c'est quoi ta couleur préférée ?",
-   "_deb": 22.1,
-   "_fin": 23.98,
-   "d": "[curious] Vérité, c'est quoi ta couleur préférée ?",
-   "_mots": [
-    [
-     "Vérité,",
-     0.0,
-     0.5
-    ],
-    [
-     "c'est",
-     0.86,
-     0.94
-    ],
-    [
-     "quoi",
-     0.98,
-     1.06
-    ],
-    [
-     "ta",
-     1.1,
-     1.18
-    ],
-    [
-     "couleur",
-     1.2,
-     1.36
-    ],
-    [
-     "préférée?",
-     1.4,
-     1.88
-    ]
-   ],
-   "objet": "casque_moto"
-  },
-  {
-   "p": "invite",
-   "t": "En habit gris, sinon bleu.",
-   "_deb": 24.74,
-   "_fin": 26.84,
-   "d": "[casual] En habit gris, sinon bleu.",
-   "_mots": [
-    [
-     "En",
-     0.0,
-     0.08
-    ],
-    [
-     "habit",
-     0.16,
-     0.48
-    ],
-    [
-     "gris,",
-     0.56,
-     0.98
-    ],
-    [
-     "sinon",
-     1.54,
-     1.84
-    ],
-    [
-     "bleu.",
-     1.9,
-     2.1
-    ]
-   ],
-   "objet": "casque_moto"
-  },
-  {
-   "p": "envoyee",
-   "t": "Ok, vas-y à toi.",
-   "_deb": 27.22,
-   "_fin": 28.44,
-   "d": "[playful] Ok, vas-y à toi.",
-   "_mots": [
-    [
-     "Ok,",
-     0.0,
-     0.3
-    ],
-    [
-     "vas-y",
-     0.6,
-     0.84
-    ],
-    [
-     "à",
-     0.9,
-     0.94
-    ],
-    [
-     "toi.",
-     1.0,
-     1.22
-    ]
-   ],
-   "objet": "casque_moto"
-  },
-  {
-   "p": "invite",
-   "t": "Ok, action ou vérité ?",
-   "_deb": 28.8,
-   "_fin": 30.08,
-   "d": "[challenging] Ok, action ou vérité ?",
-   "_mots": [
-    [
-     "Ok,",
-     0.0,
-     0.2
-    ],
-    [
-     "action",
-     0.28,
-     0.5
-    ],
-    [
-     "ou",
-     0.52,
-     0.56
-    ],
-    [
-     "vérité?",
-     0.6,
-     1.28
-    ]
-   ],
-   "objet": "casque_moto"
-  },
-  {
-   "p": "envoyee",
-   "t": "Vas-y, je vais jouer le jeu, action.",
-   "_deb": 30.74,
-   "_fin": 31.96,
-   "d": "[bold] Vas-y, je vais jouer le jeu, action.",
-   "_mots": [
-    [
-     "Vas-y,",
-     0.0,
-     0.24
-    ],
-    [
-     "je",
-     0.26,
-     0.3
-    ],
-    [
-     "vais",
-     0.3,
-     0.38
-    ],
-    [
-     "jouer",
-     0.42,
-     0.56
-    ],
-    [
-     "le",
-     0.58,
-     0.62
-    ],
-    [
-     "jeu,",
-     0.66,
-     0.78
-    ],
-    [
-     "action.",
-     0.88,
-     1.22
-    ]
-   ],
-   "objet": "casque_moto"
-  },
-  {
-   "p": "invite",
-   "t": "Suce-moi.",
-   "_deb": 32.24,
-   "_fin": 32.72,
-   "d": "[deadpan] Suce-moi.",
-   "_mots": [
-    [
-     "Suce-moi.",
-     0.0,
-     0.48
-    ]
-   ]
-  },
-  {
-   "p": "envoyee",
-   "t": "Ah, t'es sérieux là ?",
-   "_deb": 32.82,
-   "_fin": 34.04,
-   "d": "[shocked] Ah, t'es sérieux là ?",
-   "_mots": [
-    [
-     "Ah,",
-     0.0,
-     0.06
-    ],
-    [
-     "t'es",
-     0.66,
-     0.76
-    ],
-    [
-     "sérieux",
-     0.8,
-     1.0
-    ],
-    [
-     "là?",
-     1.04,
-     1.22
-    ]
-   ],
-   "objet": "casque_moto"
-  },
-  {
-   "p": "invite",
-   "t": "Bah quoi ?",
-   "_deb": 34.68,
-   "_fin": 35.04,
-   "d": "[innocent] Bah quoi ?",
-   "_mots": [
-    [
-     "Bah",
-     0.0,
-     0.12
-    ],
-    [
-     "quoi?",
-     0.16,
-     0.36
-    ]
-   ],
-   "objet": "casque_moto"
-  },
-  {
-   "p": "invite",
-   "t": "C'est le jeu.",
-   "_deb": 35.3,
-   "_fin": 35.62,
-   "d": "[shrugging] C'est le jeu.",
-   "_mots": [
-    [
-     "C'est",
-     0.0,
-     0.1
-    ],
-    [
-     "le",
-     0.1,
-     0.14
-    ],
-    [
-     "jeu.",
-     0.18,
-     0.32
-    ]
-   ]
-  },
-  {
-   "p": "envoyee",
-   "t": "T'es en train de me parler sérieux là où tu rigoles ?",
-   "_deb": 35.76,
-   "_fin": 37.16,
-   "d": "[disgusted] T'es en train de me parler sérieux là ou tu rigoles ?",
-   "_mots": [
-    [
-     "T'es",
-     0.0,
-     0.06
-    ],
-    [
-     "en",
-     0.08,
-     0.1
-    ],
-    [
-     "train",
-     0.14,
-     0.22
-    ],
-    [
-     "de",
-     0.22,
-     0.22
-    ],
-    [
-     "me",
-     0.26,
-     0.32
-    ],
-    [
-     "parler",
-     0.36,
-     0.54
-    ],
-    [
-     "sérieux",
-     0.58,
-     0.76
-    ],
-    [
-     "là",
-     0.8,
-     0.86
-    ],
-    [
-     "ou",
-     0.88,
-     0.94
-    ],
-    [
-     "tu",
-     0.96,
-     1.06
-    ],
-    [
-     "rigoles?",
-     1.08,
-     1.4
-    ]
-   ],
-   "objet": "casque_moto"
-  },
-  {
-   "p": "invite",
-   "t": "Bah quoi ?",
-   "_deb": 37.6,
-   "_fin": 37.98,
-   "d": "[defensive] Bah quoi ?",
-   "_mots": [
-    [
-     "Bah",
-     0.0,
-     0.12
-    ],
-    [
-     "quoi?",
-     0.22,
-     0.38
-    ]
-   ],
-   "objet": "casque_moto"
-  },
-  {
-   "p": "invite",
-   "t": "Suce-moi, c'est ça l'action.",
-   "_deb": 38.14,
-   "_fin": 39.14,
-   "d": "[insisting] Suce-moi, c'est ça l'action.",
-   "_mots": [
-    [
-     "Suce-moi,",
-     0.0,
-     0.32
-    ],
-    [
-     "c'est",
-     0.38,
-     0.46
-    ],
-    [
-     "ça",
-     0.52,
-     0.58
-    ],
-    [
-     "l'action.",
-     0.6,
-     1.0
-    ]
-   ],
-   "objet": "casque_moto"
-  },
-  {
-   "p": "envoyee",
-   "t": "Mais, mais t'es un gros crasseux toi en fait. Comment tu me dis suce-moi ?",
-   "_deb": 39.5,
-   "_fin": 42.0,
-   "d": "[furious] Mais, mais t'es un gros crasseux toi en fait. Comment tu me dis suce-moi ?",
-   "_mots": [
-    [
-     "Mais,",
-     0.0,
-     0.16
-    ],
-    [
-     "mais",
-     0.34,
-     0.44
-    ],
-    [
-     "t'es",
-     0.46,
-     0.56
-    ],
-    [
-     "un",
-     0.58,
-     0.64
-    ],
-    [
-     "gros",
-     0.68,
+     "pas",
+     0.72,
      0.8
     ],
     [
-     "crasseux",
+     "joignable",
      0.84,
-     1.18
+     1.12
     ],
     [
-     "toi",
-     1.24,
-     1.32
+     "hier",
+     1.16,
+     1.28
     ],
     [
-     "en",
+     "soir?",
      1.34,
-     1.4
-    ],
-    [
-     "fait.",
-     1.44,
-     1.56
-    ],
+     1.52
+    ]
+   ],
+   "objet": "telecommande"
+  },
+  {
+   "p": "presentateur",
+   "t": "Comment ça ?",
+   "_deb": 1.56,
+   "_fin": 1.86,
+   "d": "[neutral] Comment ça ?",
+   "_mots": [
     [
      "Comment",
-     1.6,
-     1.8
-    ],
-    [
-     "tu",
-     1.84,
-     1.9
-    ],
-    [
-     "me",
-     1.94,
-     1.98
-    ],
-    [
-     "dis",
-     2.02,
-     2.14
-    ],
-    [
-     "suce-moi?",
-     2.2,
-     2.5
-    ]
-   ],
-   "objet": "casque_moto"
-  },
-  {
-   "p": "envoyee",
-   "t": "On est en train de faire un action ou vérité pour apprendre à se connaître.",
-   "_deb": 42.02,
-   "_fin": 43.88,
-   "d": "[angry] On est en train de faire un action ou vérité pour apprendre à se connaître.",
-   "_mots": [
-    [
-     "On",
-     0.0,
-     0.06
-    ],
-    [
-     "est",
-     0.1,
-     0.14
-    ],
-    [
-     "en",
-     0.16,
-     0.22
-    ],
-    [
-     "train",
-     0.24,
-     0.34
-    ],
-    [
-     "de",
-     0.38,
-     0.4
-    ],
-    [
-     "faire",
-     0.46,
-     0.56
-    ],
-    [
-     "un",
-     0.6,
-     0.66
-    ],
-    [
-     "action",
-     0.72,
-     0.86
-    ],
-    [
-     "ou",
-     0.88,
-     0.9
-    ],
-    [
-     "vérité",
-     0.94,
-     1.14
-    ],
-    [
-     "pour",
-     1.18,
-     1.26
-    ],
-    [
-     "apprendre",
-     1.32,
-     1.5
-    ],
-    [
-     "à",
-     1.56,
-     1.58
-    ],
-    [
-     "se",
-     1.6,
-     1.64
-    ],
-    [
-     "connaître.",
-     1.68,
-     1.86
-    ]
-   ],
-   "objet": "casque_moto"
-  },
-  {
-   "p": "envoyee",
-   "t": "Tu me dis suce-moi ?",
-   "_deb": 43.92,
-   "_fin": 44.54,
-   "d": "[outraged] Tu me dis suce-moi ?",
-   "_mots": [
-    [
-     "Tu",
-     0.0,
-     0.04
-    ],
-    [
-     "me",
-     0.08,
-     0.12
-    ],
-    [
-     "dis",
-     0.16,
-     0.26
-    ],
-    [
-     "suce-moi?",
-     0.32,
-     0.62
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Eh, c'est le jeu. T'as vu, c'est soit tu bois le cocktail, tu-",
-   "_deb": 45.02,
-   "_fin": 47.0,
-   "d": "[arguing] Eh, c'est le jeu. T'as vu, c'est soit tu bois le cocktail, tu-",
-   "objet": "verre",
-   "_mots": [
-    [
-     "Eh,",
-     0.0,
-     0.1
-    ],
-    [
-     "c'est",
-     0.16,
-     0.26
-    ],
-    [
-     "le",
-     0.3,
-     0.36
-    ],
-    [
-     "jeu.",
-     0.4,
-     0.52
-    ],
-    [
-     "T'as",
-     0.56,
-     0.64
-    ],
-    [
-     "vu,",
-     0.66,
-     0.72
-    ],
-    [
-     "c'est",
-     0.76,
-     0.86
-    ],
-    [
-     "soit",
-     0.92,
-     1.08
-    ],
-    [
-     "tu",
-     1.14,
-     1.22
-    ],
-    [
-     "bois",
-     1.26,
-     1.34
-    ],
-    [
-     "le",
-     1.38,
-     1.42
-    ],
-    [
-     "cocktail,",
-     1.46,
-     1.86
-    ],
-    [
-     "tu-",
-     1.94,
-     1.98
-    ]
-   ]
-  },
-  {
-   "p": "envoyee",
-   "t": "Mais va là-bas avec ton cocktail en fait. T'es un fou ou quoi, toi ?",
-   "_deb": 47.06,
-   "_fin": 49.4,
-   "d": "[screaming] Mais va là-bas avec ton cocktail en fait. T'es un fou ou quoi, toi ?",
-   "_mots": [
-    [
-     "Mais",
      0.0,
      0.12
     ],
     [
-     "va",
-     0.16,
-     0.22
-    ],
-    [
-     "là-bas",
-     0.26,
-     0.46
-    ],
-    [
-     "avec",
-     0.48,
-     0.56
-    ],
-    [
-     "ton",
-     0.6,
-     0.72
-    ],
-    [
-     "cocktail",
-     0.76,
-     1.06
-    ],
-    [
-     "en",
-     1.1,
-     1.18
-    ],
-    [
-     "fait.",
-     1.22,
-     1.36
-    ],
-    [
-     "T'es",
-     1.4,
-     1.48
-    ],
-    [
-     "un",
-     1.52,
-     1.62
-    ],
-    [
-     "fou",
-     1.66,
-     1.76
-    ],
-    [
-     "ou",
-     1.8,
-     1.86
-    ],
-    [
-     "quoi,",
-     1.9,
-     2.02
-    ],
-    [
-     "toi?",
-     2.1,
-     2.34
-    ]
-   ],
-   "objet": "casque_moto"
-  },
-  {
-   "p": "invite",
-   "t": "Mais quoi frère ?",
-   "_deb": 49.86,
-   "_fin": 50.44,
-   "d": "[confused] Mais quoi frère ?",
-   "_mots": [
-    [
-     "Mais",
-     0.0,
-     0.12
-    ],
-    [
-     "quoi",
-     0.18,
-     0.38
-    ],
-    [
-     "frère?",
-     0.44,
-     0.58
-    ]
-   ],
-   "objet": "casque_moto"
-  },
-  {
-   "p": "invite",
-   "t": "Tu veux pas jouer le jeu wesh, t'es sérieuse ou quoi ?",
-   "_deb": 50.46,
-   "_fin": 51.92,
-   "d": "[annoyed] Tu veux pas jouer le jeu wesh, t'es sérieuse ou quoi ?",
-   "_mots": [
-    [
-     "Tu",
-     0.0,
-     0.04
-    ],
-    [
-     "veux",
-     0.12,
-     0.22
-    ],
-    [
-     "pas",
-     0.24,
-     0.32
-    ],
-    [
-     "jouer",
-     0.36,
-     0.48
-    ],
-    [
-     "le",
-     0.52,
-     0.54
-    ],
-    [
-     "jeu",
-     0.6,
-     0.7
-    ],
-    [
-     "wesh,",
-     0.76,
-     0.88
-    ],
-    [
-     "t'es",
-     0.92,
-     1.0
-    ],
-    [
-     "sérieuse",
-     1.04,
-     1.28
-    ],
-    [
-     "ou",
-     1.3,
-     1.34
-    ],
-    [
-     "quoi?",
-     1.38,
-     1.46
-    ]
-   ],
-   "objet": "casque_moto"
-  },
-  {
-   "p": "envoyee",
-   "t": "Mais t'es en train de me dire suce-moi, mais tu crois que je suis une pute ou quoi ?",
-   "_deb": 51.94,
-   "_fin": 54.14,
-   "d": "[explosive] Mais t'es en train de me dire suce-moi, mais tu crois que je suis une pute ou quoi ?",
-   "_mots": [
-    [
-     "Mais",
-     0.0,
-     0.08
-    ],
-    [
-     "t'es",
-     0.1,
-     0.16
-    ],
-    [
-     "en",
-     0.16,
-     0.22
-    ],
-    [
-     "train",
-     0.26,
-     0.36
-    ],
-    [
-     "de",
-     0.38,
-     0.38
-    ],
-    [
-     "me",
-     0.42,
-     0.48
-    ],
-    [
-     "dire",
-     0.54,
-     0.68
-    ],
-    [
-     "suce-moi,",
-     0.78,
-     1.18
-    ],
-    [
-     "mais",
-     1.22,
-     1.3
-    ],
-    [
-     "tu",
-     1.32,
-     1.36
-    ],
-    [
-     "crois",
-     1.38,
-     1.5
-    ],
-    [
-     "que",
-     1.52,
-     1.52
-    ],
-    [
-     "je",
-     1.52,
-     1.56
-    ],
-    [
-     "suis",
-     1.56,
-     1.64
-    ],
-    [
-     "une",
-     1.66,
-     1.76
-    ],
-    [
-     "pute",
-     1.78,
-     1.94
-    ],
-    [
-     "ou",
-     1.98,
-     2.04
-    ],
-    [
-     "quoi?",
-     2.06,
-     2.2
-    ]
-   ],
-   "objet": "casque_moto"
-  },
-  {
-   "p": "envoyee",
-   "t": "Bah bois le cocktail ou- Mais vas-y, mais va là-bas avec ton cocktail de merde.",
-   "_deb": 54.18,
-   "_fin": 57.06,
-   "d": "[enraged] Bah bois le cocktail ou... Mais vas-y, mais va là-bas avec ton cocktail de merde.",
-   "objet": "verre",
-   "_mots": [
-    [
-     "Bah",
-     0.0,
-     0.12
-    ],
-    [
-     "bois",
-     0.16,
-     0.26
-    ],
-    [
-     "le",
-     0.3,
-     0.36
-    ],
-    [
-     "cocktail",
-     0.4,
-     0.86
-    ],
-    [
-     "ou-",
-     0.88,
-     0.92
-    ],
-    [
-     "Mais",
-     0.98,
-     1.06
-    ],
-    [
-     "vas-y,",
-     1.1,
-     1.36
-    ],
-    [
-     "mais",
-     1.4,
-     1.5
-    ],
-    [
-     "va",
-     1.54,
-     1.6
-    ],
-    [
-     "là-bas",
-     1.66,
-     1.84
-    ],
-    [
-     "avec",
-     1.86,
-     1.98
-    ],
-    [
-     "ton",
-     2.02,
-     2.12
-    ],
-    [
-     "cocktail",
-     2.16,
-     2.48
-    ],
-    [
-     "de",
-     2.52,
-     2.64
-    ],
-    [
-     "merde.",
-     2.68,
-     2.88
-    ]
-   ]
-  },
-  {
-   "p": "envoyee",
-   "t": "Là, tu crois que je vais te ro-- mais vas-y toi, gros crasseux que tu es va.",
-   "_deb": 57.1,
-   "_fin": 59.64,
-   "d": "[angry] Là, tu crois que je vais te ro-- mais vas-y toi, gros crasseux que tu es va.",
-   "_mots": [
-    [
-     "Là,",
-     0.0,
-     0.08
-    ],
-    [
-     "tu",
-     0.12,
-     0.16
-    ],
-    [
-     "crois",
-     0.18,
-     0.28
-    ],
-    [
-     "que",
-     0.3,
+     "ça?",
+     0.2,
      0.3
-    ],
-    [
-     "je",
-     0.32,
-     0.36
-    ],
-    [
-     "vais",
-     0.38,
-     0.46
-    ],
-    [
-     "te",
-     0.48,
-     0.52
-    ],
-    [
-     "ro--",
-     0.56,
-     0.64
-    ],
-    [
-     "mais",
-     0.74,
-     0.84
-    ],
-    [
-     "vas-y",
-     0.88,
-     1.18
-    ],
-    [
-     "toi,",
-     1.22,
-     1.38
-    ],
-    [
-     "gros",
-     1.52,
-     1.68
-    ],
-    [
-     "crasseux",
-     1.74,
-     2.1
-    ],
-    [
-     "que",
-     2.12,
-     2.16
-    ],
-    [
-     "tu",
-     2.22,
-     2.24
-    ],
-    [
-     "es",
-     2.26,
-     2.36
-    ],
-    [
-     "va.",
-     2.42,
-     2.54
     ]
    ],
-   "objet": "verre"
+   "objet": "telecommande"
   },
   {
    "p": "envoyee",
-   "t": "Vas-y, je me barre moi.",
-   "_deb": 59.66,
-   "_fin": 60.66,
-   "d": "[fed up] Vas-y, je me barre moi.",
-   "_mots": [
-    [
-     "Vas-y,",
-     0.0,
-     0.14
-    ],
-    [
-     "je",
-     0.22,
-     0.26
-    ],
-    [
-     "me",
-     0.28,
-     0.42
-    ],
-    [
-     "barre",
-     0.44,
-     0.56
-    ],
-    [
-     "moi.",
-     0.92,
-     1.0
-    ]
-   ],
-   "objet": "casque_moto"
-  },
-  {
-   "p": "invite",
-   "t": "Je rigolais.",
-   "_deb": 60.7,
-   "_fin": 61.22,
-   "d": "[nervous] Je rigolais.",
+   "t": "Je t'ai appelé au moins dix fois hier soir pour que tu me remplisses un dossier, j'ai pas eu de réponse.",
+   "_deb": 1.88,
+   "_fin": 4.86,
+   "d": "[angry] Je t'ai appelé au moins dix fois hier soir pour que tu me remplisses un dossier, j'ai pas eu de réponse.",
+   "objet": "facture",
    "_mots": [
     [
      "Je",
@@ -1835,18 +95,718 @@
      0.04
     ],
     [
-     "rigolais.",
+     "t'ai",
+     0.08,
+     0.14
+    ],
+    [
+     "appelé",
+     0.16,
+     0.34
+    ],
+    [
+     "au",
+     0.38,
+     0.4
+    ],
+    [
+     "moins",
+     0.46,
+     0.56
+    ],
+    [
+     "dix",
+     0.6,
+     0.8
+    ],
+    [
+     "fois",
+     0.84,
+     0.94
+    ],
+    [
+     "hier",
+     0.98,
+     1.12
+    ],
+    [
+     "soir",
+     1.18,
+     1.36
+    ],
+    [
+     "pour",
+     1.42,
+     1.48
+    ],
+    [
+     "que",
+     1.5,
+     1.56
+    ],
+    [
+     "tu",
+     1.58,
+     1.64
+    ],
+    [
+     "me",
+     1.66,
+     1.72
+    ],
+    [
+     "remplisses",
+     1.74,
+     2.0
+    ],
+    [
+     "un",
+     2.02,
+     2.06
+    ],
+    [
+     "dossier,",
+     2.1,
+     2.4
+    ],
+    [
+     "j'ai",
+     2.44,
+     2.54
+    ],
+    [
+     "pas",
+     2.56,
+     2.62
+    ],
+    [
+     "eu",
+     2.64,
+     2.68
+    ],
+    [
+     "de",
+     2.7,
+     2.72
+    ],
+    [
+     "réponse.",
+     2.74,
+     2.98
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Ah, mais ça, c'est normal. C'est parce qu'après dix-neuf heures, je suis plus ta chienne.",
+   "_deb": 4.94,
+   "_fin": 7.58,
+   "d": "[sarcastic] Ah, mais ça, c'est normal. C'est parce qu'après dix-neuf heures, je suis plus ta chienne.",
+   "_mots": [
+    [
+     "Ah,",
+     0.0,
+     0.1
+    ],
+    [
+     "mais",
+     0.14,
+     0.22
+    ],
+    [
+     "ça,",
+     0.26,
+     0.32
+    ],
+    [
+     "c'est",
+     0.38,
+     0.46
+    ],
+    [
+     "normal.",
+     0.48,
+     0.74
+    ],
+    [
+     "C'est",
+     0.76,
+     0.82
+    ],
+    [
+     "parce",
+     0.84,
+     0.94
+    ],
+    [
+     "qu'après",
+     0.96,
+     1.5
+    ],
+    [
+     "dix-neuf",
+     1.54,
+     1.82
+    ],
+    [
+     "heures,",
+     1.84,
+     1.94
+    ],
+    [
+     "je",
+     2.0,
+     2.02
+    ],
+    [
+     "suis",
+     2.02,
+     2.12
+    ],
+    [
+     "plus",
+     2.14,
+     2.22
+    ],
+    [
+     "ta",
+     2.26,
+     2.36
+    ],
+    [
+     "chienne.",
+     2.38,
+     2.64
+    ]
+   ],
+   "objet": "casque_moto"
+  },
+  {
+   "p": "envoyee",
+   "t": "Pardon ?",
+   "_deb": 7.64,
+   "_fin": 7.92,
+   "d": "[shocked] Pardon ?",
+   "_mots": [
+    [
+     "Pardon?",
+     0.0,
+     0.28
+    ]
+   ],
+   "objet": "ciseaux"
+  },
+  {
+   "p": "presentateur",
+   "t": "En dehors des heures de travail, t'as rien à me demander.",
+   "_deb": 7.96,
+   "_fin": 10.06,
+   "d": "[firm] En dehors des heures de travail, t'as rien à me demander.",
+   "_mots": [
+    [
+     "En",
+     0.0,
+     0.04
+    ],
+    [
+     "dehors",
+     0.12,
+     0.34
+    ],
+    [
+     "des",
+     0.38,
+     0.5
+    ],
+    [
+     "heures",
+     0.52,
+     0.6
+    ],
+    [
+     "de",
+     0.62,
+     0.7
+    ],
+    [
+     "travail,",
+     0.74,
+     1.1
+    ],
+    [
+     "t'as",
+     1.2,
+     1.34
+    ],
+    [
+     "rien",
+     1.42,
+     1.66
+    ],
+    [
+     "à",
+     1.7,
+     1.72
+    ],
+    [
+     "me",
+     1.76,
+     1.8
+    ],
+    [
+     "demander.",
+     1.84,
+     2.1
+    ]
+   ],
+   "objet": "casque_moto"
+  },
+  {
+   "p": "envoyee",
+   "t": "Ah donc attends, si je comprends bien, hier, t'as vu que je t'appelais, t'aurais pu répondre, mais tu as décidé de pas le faire.",
+   "_deb": 10.1,
+   "_fin": 14.28,
+   "d": "[annoyed] Ah donc attends, si je comprends bien, hier, t'as vu que je t'appelais, t'aurais pu répondre, mais tu as décidé de pas le faire.",
+   "_mots": [
+    [
+     "Ah",
+     0.0,
+     0.04
+    ],
+    [
+     "donc",
      0.06,
-     0.52
+     0.18
+    ],
+    [
+     "attends,",
+     0.22,
+     0.36
+    ],
+    [
+     "si",
+     0.42,
+     0.48
+    ],
+    [
+     "je",
+     0.5,
+     0.56
+    ],
+    [
+     "comprends",
+     0.58,
+     0.78
+    ],
+    [
+     "bien,",
+     0.82,
+     0.92
+    ],
+    [
+     "hier,",
+     1.02,
+     1.2
+    ],
+    [
+     "t'as",
+     1.26,
+     1.36
+    ],
+    [
+     "vu",
+     1.42,
+     1.5
+    ],
+    [
+     "que",
+     1.54,
+     1.62
+    ],
+    [
+     "je",
+     1.64,
+     1.7
+    ],
+    [
+     "t'appelais,",
+     1.72,
+     2.04
+    ],
+    [
+     "t'aurais",
+     2.14,
+     2.34
+    ],
+    [
+     "pu",
+     2.44,
+     2.52
+    ],
+    [
+     "répondre,",
+     2.56,
+     2.9
+    ],
+    [
+     "mais",
+     2.96,
+     3.02
+    ],
+    [
+     "tu",
+     3.08,
+     3.18
+    ],
+    [
+     "as",
+     3.22,
+     3.26
+    ],
+    [
+     "décidé",
+     3.38,
+     3.7
+    ],
+    [
+     "de",
+     3.74,
+     3.8
+    ],
+    [
+     "pas",
+     3.84,
+     3.9
+    ],
+    [
+     "le",
+     3.92,
+     4.0
+    ],
+    [
+     "faire.",
+     4.04,
+     4.18
+    ]
+   ],
+   "objet": "ciseaux"
+  },
+  {
+   "p": "presentateur",
+   "t": "Bah évidemment. T'as tellement appelé hier soir que ma meuf, elle pensait que je m'étais acheté un vibro.",
+   "_deb": 14.3,
+   "_fin": 17.36,
+   "d": "[smug] Bah évidemment. T'as tellement appelé hier soir que ma meuf, elle pensait que je m'étais acheté un vibro.",
+   "objet": "telephone",
+   "_mots": [
+    [
+     "Bah",
+     0.0,
+     0.08
+    ],
+    [
+     "évidemment.",
+     0.16,
+     0.62
+    ],
+    [
+     "T'as",
+     0.76,
+     0.82
+    ],
+    [
+     "tellement",
+     0.88,
+     1.08
+    ],
+    [
+     "appelé",
+     1.12,
+     1.32
+    ],
+    [
+     "hier",
+     1.34,
+     1.48
+    ],
+    [
+     "soir",
+     1.54,
+     1.66
+    ],
+    [
+     "que",
+     1.7,
+     1.759
+    ],
+    [
+     "ma",
+     1.8,
+     1.86
+    ],
+    [
+     "meuf,",
+     1.9,
+     2.0
+    ],
+    [
+     "elle",
+     2.04,
+     2.1
+    ],
+    [
+     "pensait",
+     2.12,
+     2.3
+    ],
+    [
+     "que",
+     2.32,
+     2.36
+    ],
+    [
+     "je",
+     2.36,
+     2.38
+    ],
+    [
+     "m'étais",
+     2.4,
+     2.54
+    ],
+    [
+     "acheté",
+     2.56,
+     2.72
+    ],
+    [
+     "un",
+     2.76,
+     2.82
+    ],
+    [
+     "vibro.",
+     2.84,
+     3.06
     ]
    ]
   },
   {
    "p": "envoyee",
-   "t": "Mais humour de quoi ?",
-   "_deb": 61.28,
-   "_fin": 61.96,
-   "d": "[scornful] Mais humour de quoi ?",
+   "t": "Eliott, quand je t'appelle, tu réponds, c'est clair ?",
+   "_deb": 17.4,
+   "_fin": 19.46,
+   "d": "[angry] Eliott, quand je t'appelle, tu réponds, c'est clair ?",
+   "_mots": [
+    [
+     "Eliott,",
+     0.0,
+     0.26
+    ],
+    [
+     "quand",
+     0.4,
+     0.46
+    ],
+    [
+     "je",
+     0.48,
+     0.52
+    ],
+    [
+     "t'appelle,",
+     0.62,
+     0.98
+    ],
+    [
+     "tu",
+     1.1,
+     1.22
+    ],
+    [
+     "réponds,",
+     1.28,
+     1.66
+    ],
+    [
+     "c'est",
+     1.74,
+     1.82
+    ],
+    [
+     "clair?",
+     1.86,
+     2.06
+    ]
+   ],
+   "objet": "telecommande"
+  },
+  {
+   "p": "presentateur",
+   "t": "Bah faut appeler avant dix-neuf heures alors.",
+   "_deb": 19.5,
+   "_fin": 20.58,
+   "d": "[deadpan] Bah faut appeler avant dix-neuf heures alors.",
+   "_mots": [
+    [
+     "Bah",
+     0.0,
+     0.08
+    ],
+    [
+     "faut",
+     0.12,
+     0.18
+    ],
+    [
+     "appeler",
+     0.2,
+     0.36
+    ],
+    [
+     "avant",
+     0.38,
+     0.52
+    ],
+    [
+     "dix-neuf",
+     0.54,
+     0.78
+    ],
+    [
+     "heures",
+     0.8,
+     0.94
+    ],
+    [
+     "alors.",
+     0.98,
+     1.08
+    ]
+   ],
+   "objet": "casque_moto"
+  },
+  {
+   "p": "envoyee",
+   "t": "Même si c'est après dix-neuf heures, tu réponds.",
+   "_deb": 20.6,
+   "_fin": 22.3,
+   "d": "[furious] Même si c'est après dix-neuf heures, tu réponds.",
+   "_mots": [
+    [
+     "Même",
+     0.0,
+     0.06
+    ],
+    [
+     "si",
+     0.1,
+     0.16
+    ],
+    [
+     "c'est",
+     0.22,
+     0.28
+    ],
+    [
+     "après",
+     0.28,
+     0.48
+    ],
+    [
+     "dix-neuf",
+     0.52,
+     0.78
+    ],
+    [
+     "heures,",
+     0.8,
+     0.94
+    ],
+    [
+     "tu",
+     1.06,
+     1.18
+    ],
+    [
+     "réponds.",
+     1.24,
+     1.7
+    ]
+   ],
+   "objet": "ciseaux"
+  },
+  {
+   "p": "presentateur",
+   "t": "Qu'est-ce qui te prend ?",
+   "_deb": 23.08,
+   "_fin": 23.56,
+   "d": "[bored] Qu'est-ce qui te prend ?",
+   "_mots": [
+    [
+     "Qu'est-ce",
+     0.0,
+     0.1
+    ],
+    [
+     "qui",
+     0.12,
+     0.14
+    ],
+    [
+     "te",
+     0.18,
+     0.24
+    ],
+    [
+     "prend?",
+     0.26,
+     0.48
+    ]
+   ],
+   "objet": "casque_moto"
+  },
+  {
+   "p": "envoyee",
+   "t": "Pardon, c'était pas une blague ?",
+   "_deb": 23.94,
+   "_fin": 24.68,
+   "d": "[disbelief] Pardon, c'était pas une blague ?",
+   "_mots": [
+    [
+     "Pardon,",
+     0.0,
+     0.2
+    ],
+    [
+     "c'était",
+     0.24,
+     0.36
+    ],
+    [
+     "pas",
+     0.38,
+     0.44
+    ],
+    [
+     "une",
+     0.46,
+     0.52
+    ],
+    [
+     "blague?",
+     0.54,
+     0.74
+    ]
+   ],
+   "objet": "casque_moto"
+  },
+  {
+   "p": "presentateur",
+   "t": "Mais bien sûr que non, je répondrai pas.",
+   "_deb": 24.98,
+   "_fin": 26.34,
+   "d": "[stubborn] Mais bien sûr que non, je répondrai pas.",
    "_mots": [
     [
      "Mais",
@@ -1854,29 +814,1201 @@
      0.1
     ],
     [
-     "humour",
-     0.12,
-     0.36
+     "bien",
+     0.14,
+     0.26
     ],
     [
-     "de",
-     0.4,
-     0.52
+     "sûr",
+     0.3,
+     0.42
     ],
     [
-     "quoi?",
-     0.56,
-     0.68
+     "que",
+     0.48,
+     0.58
+    ],
+    [
+     "non,",
+     0.64,
+     0.7
+    ],
+    [
+     "je",
+     0.76,
+     0.8
+    ],
+    [
+     "répondrai",
+     0.82,
+     1.18
+    ],
+    [
+     "pas.",
+     1.22,
+     1.36
     ]
    ],
    "objet": "casque_moto"
   },
   {
    "p": "envoyee",
-   "t": "Tu me dis suce-moi, on est en train de faire action ou vérité.",
-   "_deb": 62.0,
-   "_fin": 64.08,
-   "d": "[scolding] Tu me dis suce-moi, on est en train de faire action ou vérité.",
+   "t": "Alors, écoute-moi bien. Tu sais que je peux faire de ta vie un vrai cauchemar.",
+   "_deb": 26.4,
+   "_fin": 28.98,
+   "d": "[threatening] Alors, écoute-moi bien. Tu sais que je peux faire de ta vie un vrai cauchemar.",
+   "_mots": [
+    [
+     "Alors,",
+     0.0,
+     0.1
+    ],
+    [
+     "écoute-moi",
+     0.16,
+     0.48
+    ],
+    [
+     "bien.",
+     0.52,
+     0.66
+    ],
+    [
+     "Tu",
+     0.7,
+     0.76
+    ],
+    [
+     "sais",
+     0.82,
+     0.92
+    ],
+    [
+     "que",
+     0.96,
+     1.02
+    ],
+    [
+     "je",
+     1.06,
+     1.16
+    ],
+    [
+     "peux",
+     1.18,
+     1.28
+    ],
+    [
+     "faire",
+     1.3,
+     1.4
+    ],
+    [
+     "de",
+     1.42,
+     1.48
+    ],
+    [
+     "ta",
+     1.54,
+     1.64
+    ],
+    [
+     "vie",
+     1.68,
+     1.82
+    ],
+    [
+     "un",
+     1.88,
+     1.98
+    ],
+    [
+     "vrai",
+     2.04,
+     2.2
+    ],
+    [
+     "cauchemar.",
+     2.28,
+     2.58
+    ]
+   ],
+   "objet": "ciseaux"
+  },
+  {
+   "p": "presentateur",
+   "t": "C'est déjà le cas. Depuis que je te connais, mon espérance de vie a baissé de moitié, j'ai mes premiers cheveux blancs et dès que je te vois",
+   "_deb": 29.02,
+   "_fin": 32.94,
+   "d": "[resigned] C'est déjà le cas. Depuis que je te connais, mon espérance de vie a baissé de moitié, j'ai mes premiers cheveux blancs et dès que je te vois",
+   "_mots": [
+    [
+     "C'est",
+     0.0,
+     0.08
+    ],
+    [
+     "déjà",
+     0.12,
+     0.26
+    ],
+    [
+     "le",
+     0.3,
+     0.34
+    ],
+    [
+     "cas.",
+     0.38,
+     0.48
+    ],
+    [
+     "Depuis",
+     0.52,
+     0.7
+    ],
+    [
+     "que",
+     0.72,
+     0.78
+    ],
+    [
+     "je",
+     0.82,
+     0.86
+    ],
+    [
+     "te",
+     0.86,
+     0.98
+    ],
+    [
+     "connais,",
+     1.02,
+     1.18
+    ],
+    [
+     "mon",
+     1.22,
+     1.28
+    ],
+    [
+     "espérance",
+     1.34,
+     1.68
+    ],
+    [
+     "de",
+     1.7,
+     1.78
+    ],
+    [
+     "vie",
+     1.82,
+     1.88
+    ],
+    [
+     "a",
+     1.92,
+     1.94
+    ],
+    [
+     "baissé",
+     1.98,
+     2.16
+    ],
+    [
+     "de",
+     2.2,
+     2.28
+    ],
+    [
+     "moitié,",
+     2.32,
+     2.6
+    ],
+    [
+     "j'ai",
+     2.68,
+     2.76
+    ],
+    [
+     "mes",
+     2.78,
+     2.86
+    ],
+    [
+     "premiers",
+     2.88,
+     3.08
+    ],
+    [
+     "cheveux",
+     3.099,
+     3.26
+    ],
+    [
+     "blancs",
+     3.279,
+     3.419
+    ],
+    [
+     "et",
+     3.459,
+     3.52
+    ],
+    [
+     "dès",
+     3.54,
+     3.62
+    ],
+    [
+     "que",
+     3.639,
+     3.68
+    ],
+    [
+     "je",
+     3.72,
+     3.76
+    ],
+    [
+     "te",
+     3.78,
+     3.86
+    ],
+    [
+     "vois",
+     3.86,
+     3.92
+    ]
+   ],
+   "objet": "casque_moto"
+  },
+  {
+   "p": "presentateur",
+   "t": "Arriver tous les matins avec ta gueule de fion, je suis même plus certain d'être hétéro.",
+   "_deb": 32.96,
+   "_fin": 35.58,
+   "d": "[disgusted] arriver tous les matins avec ta gueule de fion, je suis même plus certain d'être hétéro.",
+   "_mots": [
+    [
+     "arriver",
+     0.0,
+     0.2
+    ],
+    [
+     "tous",
+     0.24,
+     0.3
+    ],
+    [
+     "les",
+     0.32,
+     0.38
+    ],
+    [
+     "matins",
+     0.42,
+     0.64
+    ],
+    [
+     "avec",
+     0.68,
+     0.8
+    ],
+    [
+     "ta",
+     0.84,
+     0.92
+    ],
+    [
+     "gueule",
+     0.94,
+     1.1
+    ],
+    [
+     "de",
+     1.14,
+     1.24
+    ],
+    [
+     "fion,",
+     1.42,
+     1.66
+    ],
+    [
+     "je",
+     1.72,
+     1.74
+    ],
+    [
+     "suis",
+     1.74,
+     1.8
+    ],
+    [
+     "même",
+     1.82,
+     1.92
+    ],
+    [
+     "plus",
+     1.94,
+     2.02
+    ],
+    [
+     "certain",
+     2.04,
+     2.22
+    ],
+    [
+     "d'être",
+     2.24,
+     2.38
+    ],
+    [
+     "hétéro.",
+     2.4,
+     2.62
+    ]
+   ],
+   "objet": "casque_moto"
+  },
+  {
+   "p": "envoyee",
+   "t": "Waouh.",
+   "_deb": 35.62,
+   "_fin": 35.84,
+   "d": "[stunned] Waouh.",
+   "_mots": [
+    [
+     "Waouh.",
+     0.0,
+     0.22
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Exactement. Donc, j'ai peut-être perdu goût à la vie à force de côtoyer Satan, mais aujourd'hui, il y a plus grand-chose qui m'atteint.",
+   "_deb": 35.86,
+   "_fin": 40.1,
+   "d": "[blunt] Exactement. Donc, j'ai peut-être perdu goût à la vie à force de côtoyer Satan, mais aujourd'hui, il y a plus grand-chose qui m'atteint.",
+   "_mots": [
+    [
+     "Exactement.",
+     0.0,
+     0.42
+    ],
+    [
+     "Donc,",
+     0.46,
+     0.54
+    ],
+    [
+     "j'ai",
+     0.58,
+     0.66
+    ],
+    [
+     "peut-être",
+     0.68,
+     0.9
+    ],
+    [
+     "perdu",
+     0.94,
+     1.16
+    ],
+    [
+     "goût",
+     1.2,
+     1.3
+    ],
+    [
+     "à",
+     1.36,
+     1.38
+    ],
+    [
+     "la",
+     1.42,
+     1.5
+    ],
+    [
+     "vie",
+     1.56,
+     1.66
+    ],
+    [
+     "à",
+     1.7,
+     1.72
+    ],
+    [
+     "force",
+     1.8,
+     1.92
+    ],
+    [
+     "de",
+     1.94,
+     2.02
+    ],
+    [
+     "côtoyer",
+     2.06,
+     2.38
+    ],
+    [
+     "Satan,",
+     2.42,
+     2.68
+    ],
+    [
+     "mais",
+     2.72,
+     2.84
+    ],
+    [
+     "aujourd'hui,",
+     2.88,
+     3.16
+    ],
+    [
+     "il",
+     3.2,
+     3.22
+    ],
+    [
+     "y",
+     3.24,
+     3.26
+    ],
+    [
+     "a",
+     3.26,
+     3.28
+    ],
+    [
+     "plus",
+     3.36,
+     3.48
+    ],
+    [
+     "grand-chose",
+     3.52,
+     3.9
+    ],
+    [
+     "qui",
+     3.92,
+     3.98
+    ],
+    [
+     "m'atteint.",
+     4.02,
+     4.24
+    ]
+   ],
+   "objet": "casque_moto"
+  },
+  {
+   "p": "envoyee",
+   "t": "T'es en train de me dire que je t'ai vidé comme une truite ?",
+   "_deb": 40.12,
+   "_fin": 41.52,
+   "d": "[skeptical] T'es en train de me dire que je t'ai vidé comme une truite ?",
+   "_mots": [
+    [
+     "T'es",
+     0.0,
+     0.02
+    ],
+    [
+     "en",
+     0.04,
+     0.1
+    ],
+    [
+     "train",
+     0.12,
+     0.2
+    ],
+    [
+     "de",
+     0.22,
+     0.26
+    ],
+    [
+     "me",
+     0.26,
+     0.32
+    ],
+    [
+     "dire",
+     0.36,
+     0.46
+    ],
+    [
+     "que",
+     0.48,
+     0.56
+    ],
+    [
+     "je",
+     0.58,
+     0.62
+    ],
+    [
+     "t'ai",
+     0.64,
+     0.72
+    ],
+    [
+     "vidé",
+     0.76,
+     0.94
+    ],
+    [
+     "comme",
+     0.98,
+     1.06
+    ],
+    [
+     "une",
+     1.1,
+     1.18
+    ],
+    [
+     "truite?",
+     1.2,
+     1.4
+    ]
+   ],
+   "objet": "ciseaux"
+  },
+  {
+   "p": "presentateur",
+   "t": "Hum hum. Y a plus rien à tirer de moi.",
+   "_deb": 41.56,
+   "_fin": 42.88,
+   "d": "[cynical] Hum hum. Y a plus rien à tirer de moi.",
+   "_mots": [
+    [
+     "Hum",
+     0.0,
+     0.08
+    ],
+    [
+     "hum.",
+     0.1,
+     0.2
+    ],
+    [
+     "Y",
+     0.44,
+     0.48
+    ],
+    [
+     "a",
+     0.5,
+     0.52
+    ],
+    [
+     "plus",
+     0.58,
+     0.68
+    ],
+    [
+     "rien",
+     0.7,
+     0.82
+    ],
+    [
+     "à",
+     0.86,
+     0.9
+    ],
+    [
+     "tirer",
+     0.94,
+     1.1
+    ],
+    [
+     "de",
+     1.12,
+     1.16
+    ],
+    [
+     "moi.",
+     1.2,
+     1.32
+    ]
+   ],
+   "objet": "casque_moto"
+  },
+  {
+   "p": "envoyee",
+   "t": "Merde.",
+   "_deb": 43.04,
+   "_fin": 43.3,
+   "d": "[frustrated] Merde.",
+   "_mots": [
+    [
+     "Merde.",
+     0.0,
+     0.26
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Mais après, t'en fais pas, hein. Regarde Philippe là-bas.",
+   "_deb": 43.38,
+   "_fin": 45.06,
+   "d": "[insinuating] Mais après, t'en fais pas, hein. Regarde Philippe là-bas.",
+   "_mots": [
+    [
+     "Mais",
+     0.0,
+     0.06
+    ],
+    [
+     "après,",
+     0.1,
+     0.24
+    ],
+    [
+     "t'en",
+     0.28,
+     0.38
+    ],
+    [
+     "fais",
+     0.4,
+     0.52
+    ],
+    [
+     "pas,",
+     0.56,
+     0.66
+    ],
+    [
+     "hein.",
+     0.7,
+     0.8
+    ],
+    [
+     "Regarde",
+     0.88,
+     1.08
+    ],
+    [
+     "Philippe",
+     1.1,
+     1.36
+    ],
+    [
+     "là-bas.",
+     1.4,
+     1.68
+    ]
+   ],
+   "objet": "casque_moto"
+  },
+  {
+   "p": "envoyee",
+   "t": "Ouais ?",
+   "_deb": 45.08,
+   "_fin": 45.38,
+   "d": "[curious] Ouais ?",
+   "_mots": [
+    [
+     "Ouais?",
+     0.0,
+     0.3
+    ]
+   ],
+   "objet": "casque_moto"
+  },
+  {
+   "p": "presentateur",
+   "t": "Il est arrivé ce matin en stage de comptabilité, le pauvre.",
+   "_deb": 45.42,
+   "_fin": 47.28,
+   "d": "[pitying] Il est arrivé ce matin en stage de comptabilité, le pauvre.",
+   "_mots": [
+    [
+     "Il",
+     0.0,
+     0.02
+    ],
+    [
+     "est",
+     0.04,
+     0.08
+    ],
+    [
+     "arrivé",
+     0.1,
+     0.3
+    ],
+    [
+     "ce",
+     0.34,
+     0.4
+    ],
+    [
+     "matin",
+     0.44,
+     0.64
+    ],
+    [
+     "en",
+     0.66,
+     0.7
+    ],
+    [
+     "stage",
+     0.74,
+     0.88
+    ],
+    [
+     "de",
+     0.9,
+     0.96
+    ],
+    [
+     "comptabilité,",
+     1.0,
+     1.48
+    ],
+    [
+     "le",
+     1.54,
+     1.64
+    ],
+    [
+     "pauvre.",
+     1.66,
+     1.86
+    ]
+   ],
+   "objet": "casque_moto"
+  },
+  {
+   "p": "presentateur",
+   "t": "C'est un fruit bien mûr qui a pas la moindre idée du merdier dans lequel il vient de mettre les pieds.",
+   "_deb": 47.38,
+   "_fin": 50.84,
+   "d": "[mocking] C'est un fruit bien mûr qui a pas la moindre idée du merdier dans lequel il vient de mettre les pieds.",
+   "_mots": [
+    [
+     "C'est",
+     0.0,
+     0.1
+    ],
+    [
+     "un",
+     0.12,
+     0.18
+    ],
+    [
+     "fruit",
+     0.22,
+     0.4
+    ],
+    [
+     "bien",
+     0.42,
+     0.6
+    ],
+    [
+     "mûr",
+     0.64,
+     0.76
+    ],
+    [
+     "qui",
+     0.82,
+     0.86
+    ],
+    [
+     "a",
+     0.9,
+     0.96
+    ],
+    [
+     "pas",
+     0.98,
+     1.06
+    ],
+    [
+     "la",
+     1.1,
+     1.22
+    ],
+    [
+     "moindre",
+     1.28,
+     1.68
+    ],
+    [
+     "idée",
+     1.74,
+     1.92
+    ],
+    [
+     "du",
+     1.98,
+     2.08
+    ],
+    [
+     "merdier",
+     2.14,
+     2.46
+    ],
+    [
+     "dans",
+     2.5,
+     2.56
+    ],
+    [
+     "lequel",
+     2.58,
+     2.76
+    ],
+    [
+     "il",
+     2.78,
+     2.82
+    ],
+    [
+     "vient",
+     2.84,
+     2.92
+    ],
+    [
+     "de",
+     2.94,
+     2.98
+    ],
+    [
+     "mettre",
+     3.0,
+     3.12
+    ],
+    [
+     "les",
+     3.14,
+     3.24
+    ],
+    [
+     "pieds.",
+     3.26,
+     3.46
+    ]
+   ],
+   "objet": "casque_moto"
+  },
+  {
+   "p": "presentateur",
+   "t": "Et tu sais quoi ?",
+   "_deb": 50.9,
+   "_fin": 51.4,
+   "d": "[grinning] Et tu sais quoi ?",
+   "_mots": [
+    [
+     "Et",
+     0.0,
+     0.06
+    ],
+    [
+     "tu",
+     0.08,
+     0.14
+    ],
+    [
+     "sais",
+     0.18,
+     0.28
+    ],
+    [
+     "quoi?",
+     0.3,
+     0.5
+    ]
+   ],
+   "objet": "casque_moto"
+  },
+  {
+   "p": "presentateur",
+   "t": "Sa manager, c'est toi.",
+   "_deb": 51.76,
+   "_fin": 52.52,
+   "d": "[wicked] Sa manager, c'est toi.",
+   "_mots": [
+    [
+     "Sa",
+     0.0,
+     0.06
+    ],
+    [
+     "manager,",
+     0.08,
+     0.38
+    ],
+    [
+     "c'est",
+     0.42,
+     0.52
+    ],
+    [
+     "toi.",
+     0.56,
+     0.76
+    ]
+   ]
+  },
+  {
+   "p": "envoyee",
+   "t": "Oh, le cadeau.",
+   "_deb": 53.08,
+   "_fin": 53.7,
+   "d": "[evil_joy] Oh, le cadeau.",
+   "_mots": [
+    [
+     "Oh,",
+     0.0,
+     0.08
+    ],
+    [
+     "le",
+     0.14,
+     0.28
+    ],
+    [
+     "cadeau.",
+     0.32,
+     0.62
+    ]
+   ],
+   "objet": "ciseaux"
+  },
+  {
+   "p": "presentateur",
+   "t": "Je vais faire un smoothie coco du petit bambin. Allez, va t'amuser, sale pourriture dénuée d'âme.",
+   "_deb": 53.74,
+   "_fin": 57.48,
+   "d": "[sarcastic] Je vais faire un smoothie coco du petit bambin. Allez, va t'amuser, sale pourriture dénuée d'âme.",
+   "_mots": [
+    [
+     "Je",
+     0.0,
+     0.02
+    ],
+    [
+     "vais",
+     0.04,
+     0.2
+    ],
+    [
+     "faire",
+     0.24,
+     0.32
+    ],
+    [
+     "un",
+     0.34,
+     0.4
+    ],
+    [
+     "smoothie",
+     0.46,
+     0.7
+    ],
+    [
+     "coco",
+     0.74,
+     0.96
+    ],
+    [
+     "du",
+     0.98,
+     1.06
+    ],
+    [
+     "petit",
+     1.1,
+     1.2
+    ],
+    [
+     "bambin.",
+     1.24,
+     1.4
+    ],
+    [
+     "Allez,",
+     1.6,
+     1.78
+    ],
+    [
+     "va",
+     1.82,
+     1.9
+    ],
+    [
+     "t'amuser,",
+     1.94,
+     2.32
+    ],
+    [
+     "sale",
+     2.38,
+     2.6
+    ],
+    [
+     "pourriture",
+     2.66,
+     3.12
+    ],
+    [
+     "dénuée",
+     3.16,
+     3.42
+    ],
+    [
+     "d'âme.",
+     3.46,
+     3.74
+    ]
+   ],
+   "objet": "casque_moto"
+  },
+  {
+   "p": "envoyee",
+   "t": "Par contre, je t'ai pas oublié, hein. T'as trente minutes pour me remplir ce dossier et le déposer dans mon bureau.",
+   "_deb": 57.5,
+   "_fin": 60.3,
+   "d": "[bossy] Par contre, je t'ai pas oublié, hein. T'as trente minutes pour me remplir ce dossier et le déposer dans mon bureau.",
+   "objet": "facture",
+   "_mots": [
+    [
+     "Par",
+     0.0,
+     0.08
+    ],
+    [
+     "contre,",
+     0.1,
+     0.16
+    ],
+    [
+     "je",
+     0.2,
+     0.22
+    ],
+    [
+     "t'ai",
+     0.24,
+     0.32
+    ],
+    [
+     "pas",
+     0.36,
+     0.4
+    ],
+    [
+     "oublié,",
+     0.44,
+     0.6
+    ],
+    [
+     "hein.",
+     0.7,
+     0.74
+    ],
+    [
+     "T'as",
+     0.78,
+     0.86
+    ],
+    [
+     "trente",
+     0.9,
+     1.04
+    ],
+    [
+     "minutes",
+     1.08,
+     1.24
+    ],
+    [
+     "pour",
+     1.26,
+     1.34
+    ],
+    [
+     "me",
+     1.36,
+     1.42
+    ],
+    [
+     "remplir",
+     1.46,
+     1.66
+    ],
+    [
+     "ce",
+     1.7,
+     1.78
+    ],
+    [
+     "dossier",
+     1.8,
+     2.02
+    ],
+    [
+     "et",
+     2.04,
+     2.06
+    ],
+    [
+     "le",
+     2.06,
+     2.1
+    ],
+    [
+     "déposer",
+     2.12,
+     2.36
+    ],
+    [
+     "dans",
+     2.38,
+     2.44
+    ],
+    [
+     "mon",
+     2.48,
+     2.54
+    ],
+    [
+     "bureau.",
+     2.58,
+     2.8
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Tu sais que depuis que je te connais, j'ai perdu ma capacité à avoir des enfants ?",
+   "_deb": 60.32,
+   "_fin": 63.48,
+   "d": "[deadpan] Tu sais que depuis que je te connais, j'ai perdu ma capacité à avoir des enfants ?",
    "_mots": [
     [
      "Tu",
@@ -1884,198 +2016,116 @@
      0.08
     ],
     [
-     "me",
-     0.1,
-     0.16
+     "sais",
+     0.12,
+     0.22
     ],
     [
-     "dis",
-     0.2,
-     0.3
+     "que",
+     0.24,
+     0.32
     ],
     [
-     "suce-moi,",
-     0.34,
+     "depuis",
+     0.36,
+     0.56
+    ],
+    [
+     "que",
+     0.58,
      0.66
     ],
     [
-     "on",
-     0.72,
-     0.78
+     "je",
+     0.7,
+     0.74
     ],
     [
-     "est",
-     0.82,
-     0.88
+     "te",
+     0.76,
+     0.86
     ],
     [
-     "en",
-     0.92,
-     0.98
+     "connais,",
+     0.9,
+     1.1
     ],
     [
-     "train",
-     1.04,
-     1.12
-    ],
-    [
-     "de",
-     1.2,
+     "j'ai",
+     1.14,
      1.24
     ],
     [
-     "faire",
+     "perdu",
      1.28,
-     1.38
+     1.46
     ],
     [
-     "action",
-     1.42,
-     1.6
+     "ma",
+     1.5,
+     1.58
     ],
     [
-     "ou",
+     "capacité",
      1.62,
-     1.66
+     2.08
     ],
     [
-     "vérité.",
-     1.68,
-     2.08
+     "à",
+     2.12,
+     2.12
+    ],
+    [
+     "avoir",
+     2.14,
+     2.28
+    ],
+    [
+     "des",
+     2.32,
+     2.42
+    ],
+    [
+     "enfants?",
+     2.48,
+     3.16
     ]
    ],
    "objet": "casque_moto"
   },
   {
    "p": "envoyee",
-   "t": "Vas-y, je me barre.",
-   "_deb": 64.12,
-   "_fin": 64.8,
-   "d": "[slamming] Vas-y, je me barre.",
-   "_mots": [
-    [
-     "Vas-y,",
-     0.0,
-     0.16
-    ],
-    [
-     "je",
-     0.24,
-     0.28
-    ],
-    [
-     "me",
-     0.32,
-     0.42
-    ],
-    [
-     "barre.",
-     0.46,
-     0.68
-    ]
-   ],
-   "objet": "casque_moto"
-  },
-  {
-   "p": "invite",
-   "t": "Wesh, la vie de ma mère, je savais pas que j'avais mal fait les choses.",
-   "_deb": 65.099,
-   "_fin": 67.7,
-   "d": "[bewildered] Wesh, la vie de ma mère, je savais pas que j'avais mal fait les choses.",
+   "t": "Je sais.",
+   "_deb": 63.56,
+   "_fin": 64.28,
+   "d": "[cold] Je sais.",
    "chute": true,
    "_mots": [
     [
-     "Wesh,",
+     "Je",
      0.0,
-     0.301
+     0.04
     ],
     [
-     "la",
-     0.36,
-     0.461
-    ],
-    [
-     "vie",
-     0.501,
-     0.581
-    ],
-    [
-     "de",
-     0.581,
-     0.601
-    ],
-    [
-     "ma",
-     0.621,
-     0.701
-    ],
-    [
-     "mère,",
-     0.741,
-     0.861
-    ],
-    [
-     "je",
-     0.901,
-     0.981
-    ],
-    [
-     "savais",
-     1.001,
-     1.541
-    ],
-    [
-     "pas",
-     1.561,
-     1.621
-    ],
-    [
-     "que",
-     1.641,
-     1.661
-    ],
-    [
-     "j'avais",
-     1.681,
-     1.861
-    ],
-    [
-     "mal",
-     1.901,
-     2.041
-    ],
-    [
-     "fait",
-     2.081,
-     2.161
-    ],
-    [
-     "les",
-     2.201,
-     2.281
-    ],
-    [
-     "choses.",
-     2.341,
-     2.601
+     "sais.",
+     0.24,
+     0.72
     ]
-   ],
-   "objet": "casque_moto"
+   ]
   }
  ],
  "bandeau": [],
  "gag": null,
- "legende": "Le premier date le plus catastrophique de l'histoire du jeu action ou vérité...",
+ "legende": "Quand ton manager pense que tu lui appartiens h24.",
  "hashtags": [
   "petitsdramas",
-  "actionouverite",
-  "premierdate",
-  "malaise",
-  "humour",
-  "couple"
+  "managertoxique",
+  "humourbureau",
+  "viedebureau",
+  "travail"
  ],
  "sources": [
-  "https://www.tiktok.com/@vincedessine/video/7680602821250616608"
+  "https://www.tiktok.com/@same_same53/video/7703938767630896416"
  ],
  "decoupage": [
   {
@@ -2113,225 +2163,148 @@
     29,
     30,
     31,
-    32,
-    33,
-    34,
-    35,
-    36,
-    37,
-    38
+    32
    ],
    "lieu": "",
    "son": "",
    "duree": 0.0,
-   "decor": "Cozy modern living room with white minimalist background, a purple floor mat, and a giant plush unicorn beanbag chair",
-   "titre": "Premier date"
+   "decor": "Corporate modern open-space office with minimalist white desks and computer screens",
+   "titre": "Au bureau"
   }
  ],
  "studio": {
-  "ambiances": [
-   "neon"
-  ],
-  "moment": "soir",
-  "personnages": {
-   "envoyee": {
-    "genre": "f",
-    "age": 22,
-    "taille": 0.95,
-    "corpulence": 0.3,
-    "cheveux": "court",
-    "barbe": "rien",
-    "genre_vu": "f"
+  "costumes": {
+   "presentateur": {
+    "haut": "chemise",
+    "c_haut": "gris",
+    "bas": "pantalon",
+    "chaussures": "ville",
+    "cheveux": "herisse",
+    "c_cheveux": "orange",
+    "details": [
+     "cravate"
+    ]
    },
-   "invite": {
-    "genre": "h",
-    "age": 22,
-    "taille": 1.0,
-    "corpulence": 0.4,
-    "cheveux": "court",
-    "barbe": "trois_jours",
-    "genre_vu": "h"
+   "envoyee": {
+    "haut": "chemise",
+    "c_haut": "vert",
+    "bas": "jupe",
+    "chaussures": "ballerines",
+    "cheveux": "chignon",
+    "c_cheveux": "brun",
+    "details": [
+     "rouge_levres"
+    ]
    }
   },
-  "lieux": [
-   "salon"
-  ],
-  "cadence": "rapide",
+  "personnages": {
+   "presentateur": {
+    "genre": "h",
+    "age": 28,
+    "taille": 1,
+    "corpulence": 0.3,
+    "cheveux": "herisse",
+    "barbe": "rien",
+    "genre_vu": "h"
+   },
+   "envoyee": {
+    "genre": "f",
+    "age": 42,
+    "taille": 1,
+    "corpulence": 0.4,
+    "cheveux": "chignon",
+    "barbe": "rien",
+    "genre_vu": "f"
+   }
+  },
   "gags": [
-   "Cocktail de mégots maison 100% toxique",
-   "Tuto : comment ruiner un date en 3 secondes"
+   "Objectif du mois : survivre",
+   "Le droit à la déconnexion n'existe pas ici"
   ],
   "plans": [
    {
-    "geste": "mains_hanches",
-    "plan": "moyen",
-    "mouvement": "fixe",
-    "replique": 0,
-    "reaction": "aucune"
-   },
-   {
-    "geste": "croises",
-    "plan": "moyen",
-    "mouvement": "fixe",
-    "reaction": "aucune",
-    "replique": 1
-   },
-   {
-    "plan": "serre",
     "reaction": "sceptique",
-    "mouvement": "avance",
-    "replique": 5,
-    "geste": "explique"
-   },
-   {
-    "reaction": "aucune",
-    "geste": "croises",
-    "replique": 12,
     "plan": "moyen",
+    "geste": "mains_hanches",
+    "replique": 0,
     "mouvement": "fixe"
    },
    {
     "mouvement": "fixe",
-    "plan": "moyen",
-    "geste": "pouce",
-    "reaction": "aucune",
-    "replique": 15
-   },
-   {
-    "plan": "tres_serre",
-    "replique": 16,
     "reaction": "choc",
-    "geste": "neutre",
-    "mouvement": "zoom_choc"
-   },
-   {
     "plan": "serre",
-    "mouvement": "avance",
-    "geste": "bras_ouverts",
-    "reaction": "regard_camera",
-    "replique": 17
+    "geste": "haussement",
+    "replique": 3
    },
    {
-    "mouvement": "avance",
+    "replique": 14,
     "geste": "poing",
-    "plan": "contre_plongee",
-    "reaction": "gene",
-    "replique": 23
+    "reaction": "yeux_au_ciel",
+    "plan": "serre",
+    "mouvement": "avance"
    },
    {
-    "plan": "serre",
-    "reaction": "blase",
+    "geste": "pointe_d",
     "mouvement": "fixe",
-    "replique": 30,
-    "geste": "desespoir"
+    "replique": 22,
+    "plan": "moyen",
+    "reaction": "sceptique"
    },
    {
-    "mouvement": "recul",
-    "plan": "large",
-    "reaction": "aucune",
-    "geste": "stop",
-    "replique": 33
-   },
-   {
-    "geste": "facepalm",
-    "plan": "serre",
-    "reaction": "regard_camera",
     "mouvement": "zoom_choc",
-    "replique": 38
+    "replique": 28,
+    "geste": "bras_ouverts",
+    "reaction": "soupir",
+    "plan": "serre"
    }
   ],
+  "lieux": [
+   "bureau"
+  ],
+  "ambiances": [
+   "neon"
+  ],
+  "cadence": "rapide",
+  "moment": "jour",
   "objets": [
    {
-    "replique": 6,
-    "objet": "verre"
+    "objet": "facture",
+    "replique": 2
    },
    {
-    "objet": "verre",
-    "replique": 26
+    "objet": "telephone",
+    "replique": 7
    },
    {
-    "objet": "verre",
-    "replique": 31
+    "objet": "facture",
+    "replique": 30
    }
-  ],
-  "costumes": {
-   "envoyee": {
-    "haut": "peignoir",
-    "c_haut": "blanc",
-    "motif": "uni",
-    "bas": "short",
-    "chaussures": "chaussons",
-    "chapeau": "bonnet",
-    "c_chapeau": "blanc",
-    "cheveux": "court",
-    "c_cheveux": "brun",
-    "details": []
-   },
-   "invite": {
-    "haut": "capuche",
-    "c_haut": "gris",
-    "motif": "uni",
-    "bas": "pantalon",
-    "chaussures": "baskets",
-    "cheveux": "court",
-    "c_cheveux": "brun",
-    "details": []
-   }
-  }
+  ]
  },
  "doublage": {
-  "piste": "/tmp/tmprir4tu08/piste.wav",
-  "duree": 68.11,
-  "source": "https://www.tiktok.com/@vincedessine/video/7680602821250616608",
-  "auteur": "vincedessine",
-  "contexte": "Lors d'un premier rendez-vous dans le salon, une fille et un garçon jouent à action ou vérité avec un cocktail infâme comme gage, mais la demande osée du garçon fait exploser la soirée.",
+  "piste": "/tmp/tmp1yjx5h2y/piste.wav",
+  "duree": 66.11,
+  "source": "https://www.tiktok.com/@same_same53/video/7703938767630896416",
+  "auteur": "same_same53",
+  "contexte": "Dans un bureau, une manager toxique confronte un employé blasé pour ne pas avoir répondu après 19h.",
   "evenements": [
    [
-    23.0,
-    26.0,
-    "laughter"
-   ],
-   [
-    30.0,
-    32.0,
-    "crying"
-   ],
-   [
-    44.0,
-    46.0,
-    "crying"
+    22.32,
+    23.04,
+    "[rire]"
    ]
   ],
   "visuel": {
    "gestes": [],
-   "duree": 68.5,
-   "nb_plans": 19,
-   "duree_plan": 3.61,
-   "coupes": [
-    1.48,
-    4.44,
-    7.89,
-    16.27,
-    18.73,
-    20.71,
-    24.65,
-    25.64,
-    28.59,
-    34.02,
-    35.99,
-    39.93,
-    42.4,
-    47.33,
-    49.79,
-    55.21,
-    57.68,
-    65.07
-   ],
+   "duree": 66.5,
+   "nb_plans": 1,
+   "duree_plan": 66.5,
+   "coupes": [],
    "plans": {
     "tres_serre": 0.0,
-    "serre": 0.014,
+    "serre": 0.0,
     "moyen": 0.0,
-    "large": 0.986
+    "large": 1.0
    },
    "camera": {
     "fixe": 1.0,
@@ -2340,106 +2313,105 @@
     "travelling": 0.0,
     "epaule": 0.0
    },
-   "nb_personnes": 1,
+   "nb_personnes": 0,
    "personnes": [],
-   "visages": true,
+   "visages": false,
    "sourires": 0.0,
-   "energie": 0.4,
+   "energie": 0.114,
    "mur": [
-    251,
-    251,
-    250
+    1,
+    1,
+    1
    ],
    "palette": [
     [
-     251,
-     251,
-     250,
-     0.713
+     0,
+     0,
+     0,
+     0.609
     ],
     [
-     15,
-     10,
-     10,
-     0.103
+     254,
+     254,
+     254,
+     0.356
     ],
     [
-     248,
-     193,
-     164,
-     0.067
+     54,
+     48,
+     45,
+     0.016
     ],
     [
-     158,
-     158,
-     190,
-     0.061
+     191,
+     191,
+     191,
+     0.01
     ],
     [
-     121,
-     95,
-     81,
-     0.043
+     243,
+     166,
+     50,
+     0.005
     ],
     [
-     188,
-     40,
-     9,
-     0.013
+     7,
+     186,
+     112,
+     0.003
     ]
    ],
    "lumiere": {
-    "luminosite": 216.5,
-    "chaleur": 8.7,
-    "saturation": 27.0
+    "luminosite": 96.6,
+    "chaleur": 0.7,
+    "saturation": 3.6
    },
    "moment": "jour",
    "postures": []
   },
   "audio": {
-   "duree": 68.1,
+   "duree": 66.1,
    "nb_voix": 2,
    "voix": [
     {
-     "hz": 237,
+     "hz": 226,
      "genre": "f",
-     "part": 0.57
+     "part": 0.37
     },
     {
-     "hz": 142,
+     "hz": 160,
      "genre": "h",
-     "part": 0.43
+     "part": 0.63
     }
    ],
-   "debit": 5.62,
-   "blanc_moyen": 0.22,
-   "coupes": 3,
-   "dynamique_db": 19.6,
-   "cris": 0.007,
-   "musique": 0.41,
-   "impacts": 43,
-   "impacts_10s": 6.31,
-   "graves": 23,
-   "aigus": 20,
-   "sur_vanne": 16,
+   "debit": 5.85,
+   "blanc_moyen": 0.11,
+   "coupes": 18,
+   "dynamique_db": 16.4,
+   "cris": 0.012,
+   "musique": 0.42,
+   "impacts": 58,
+   "impacts_10s": 8.77,
+   "graves": 14,
+   "aigus": 44,
+   "sur_vanne": 23,
    "evenements": {
-    "crying": 2,
-    "laughter": 1
+    "[rire]": 1
    },
    "emotions": {
-    "curious": 2,
-    "cheerful": 1,
-    "confident": 1,
-    "serious": 1,
-    "enthusiastic": 1,
-    "amused": 1,
-    "explaining": 1,
-    "accepting": 1
+    "annoyed": 2,
+    "angry": 2,
+    "sarcastic": 2,
+    "deadpan": 2,
+    "neutral": 1,
+    "shocked": 1,
+    "firm": 1,
+    "smug": 1
    }
   },
-  "video_origine": "/tmp/tmprir4tu08/src.mp4",
+  "video_origine": "/tmp/tmp1yjx5h2y/src.mp4",
   "debut": 0.0,
-  "titre": "Action ou vérité au premier date #animation #videoanimation #sketch #...",
+  "titre": "La manager toxique 😀@ELIOT LEHANNEUR #sketch #drole #pourtoi #rire ",
   "nb_vus": 2
  },
  "fiche": {
@@ -2481,19 +2453,13 @@
      29,
      30,
      31,
-     32,
-     33,
-     34,
-     35,
-     36,
-     37,
-     38
+     32
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "Cozy modern living room with white minimalist background, a purple floor mat, and a giant plush unicorn beanbag chair",
-    "titre": "Premier date"
+    "decor": "Corporate modern open-space office with minimalist white desks and computer screens",
+    "titre": "Au bureau"
    }
   ]
  },
@@ -2501,108 +2467,148 @@
  "_rhubarb": [
   [
    0.0,
-   0.13,
-   null
-  ],
-  [
-   0.13,
-   0.18,
+   0.26,
    "T"
   ],
   [
-   0.18,
-   0.23,
-   "E"
-  ],
-  [
-   0.23,
-   0.31,
+   0.26,
+   0.34,
    "M"
   ],
   [
-   0.31,
+   0.34,
+   0.41,
+   "O"
+  ],
+  [
+   0.41,
    0.48,
-   "T"
+   "U"
   ],
   [
    0.48,
    0.55,
+   "T"
+  ],
+  [
+   0.55,
+   0.67,
+   "M"
+  ],
+  [
+   0.67,
+   0.76,
+   "E"
+  ],
+  [
+   0.76,
+   0.9,
+   "T"
+  ],
+  [
+   0.9,
+   1.04,
+   "E"
+  ],
+  [
+   1.04,
+   1.13,
+   "M"
+  ],
+  [
+   1.13,
+   1.34,
+   "T"
+  ],
+  [
+   1.34,
+   1.41,
+   "T"
+  ],
+  [
+   1.41,
+   1.48,
+   "E"
+  ],
+  [
+   1.48,
+   1.55,
+   "O"
+  ],
+  [
+   1.55,
+   1.62,
+   "U"
+  ],
+  [
+   1.62,
+   1.9,
+   "T"
+  ],
+  [
+   1.9,
+   1.97,
    "F"
   ],
   [
-   0.55,
-   0.62,
-   "U"
-  ],
-  [
-   0.62,
-   0.7,
-   "M"
-  ],
-  [
-   0.7,
-   0.74,
+   1.97,
+   2.04,
    "E"
   ],
   [
-   0.74,
-   0.92,
+   2.04,
+   2.11,
    "T"
   ],
   [
-   0.92,
-   1.04,
+   2.11,
+   2.19,
    "M"
   ],
   [
-   1.04,
-   1.2,
-   "T"
+   2.19,
+   2.23,
+   "O"
   ],
   [
-   1.2,
-   1.34,
-   "E"
-  ],
-  [
-   1.34,
-   1.64,
-   "T"
-  ],
-  [
-   1.64,
-   1.76,
+   2.23,
+   2.27,
    "U"
   ],
   [
-   1.76,
-   1.83,
-   "E"
-  ],
-  [
-   1.83,
-   2.25,
-   "T"
-  ],
-  [
-   2.25,
-   2.32,
-   "U"
-  ],
-  [
-   2.32,
-   2.67,
-   "T"
-  ],
-  [
-   2.67,
-   2.79,
+   2.27,
+   2.39,
    "M"
   ],
   [
-   2.79,
+   2.39,
+   2.49,
+   "E"
+  ],
+  [
+   2.49,
+   2.63,
+   "T"
+  ],
+  [
+   2.63,
+   2.7,
+   "F"
+  ],
+  [
+   2.7,
+   2.77,
+   "O"
+  ],
+  [
+   2.77,
+   2.84,
+   "T"
+  ],
+  [
+   2.84,
    2.98,
-   "U"
+   "E"
   ],
   [
    2.98,
@@ -2611,2187 +2617,2222 @@
   ],
   [
    3.05,
-   3.12,
+   3.19,
    "T"
   ],
   [
-   3.12,
+   3.19,
    3.26,
-   "E"
+   "O"
   ],
   [
    3.26,
-   3.33,
-   "T"
-  ],
-  [
-   3.33,
-   3.4,
-   "T"
-  ],
-  [
-   3.4,
-   3.48,
-   "M"
-  ],
-  [
-   3.48,
-   3.53,
-   "T"
-  ],
-  [
-   3.53,
-   3.65,
+   3.47,
    "U"
   ],
   [
-   3.65,
+   3.47,
+   3.55,
+   "M"
+  ],
+  [
+   3.55,
+   3.69,
+   "O"
+  ],
+  [
+   3.69,
    3.79,
-   "T"
+   "M"
   ],
   [
    3.79,
-   3.87,
-   "M"
+   4.4,
+   "T"
   ],
   [
-   3.87,
-   4.01,
+   4.4,
+   4.54,
+   "U"
+  ],
+  [
+   4.54,
+   4.75,
+   "T"
+  ],
+  [
+   4.75,
+   4.96,
+   "E"
+  ],
+  [
+   4.96,
+   5.03,
    "O"
   ],
   [
-   4.01,
-   4.24,
-   "M"
+   5.03,
+   5.17,
+   "E"
   ],
   [
-   4.24,
-   4.31,
-   "U"
-  ],
-  [
-   4.31,
-   4.38,
+   5.17,
+   5.45,
    "T"
   ],
   [
-   4.38,
-   4.44,
+   5.45,
+   5.53,
    "M"
   ],
   [
-   4.44,
-   4.5,
-   "U"
+   5.53,
+   5.61,
+   "E"
   ],
   [
-   4.5,
-   4.58,
-   "M"
-  ],
-  [
-   4.58,
-   4.66,
-   "U"
-  ],
-  [
-   4.66,
-   4.94,
+   5.61,
+   5.75,
    "T"
   ],
   [
-   4.94,
-   5.01,
+   5.75,
+   5.82,
+   "E"
+  ],
+  [
+   5.82,
+   5.89,
+   "U"
+  ],
+  [
+   5.89,
+   5.96,
+   "T"
+  ],
+  [
+   5.96,
+   6.06,
    "A"
   ],
   [
-   5.01,
-   5.15,
-   "T"
-  ],
-  [
-   5.15,
-   5.22,
+   6.06,
+   6.1,
    "E"
   ],
   [
-   5.22,
-   5.36,
+   6.1,
+   6.33,
+   "M"
+  ],
+  [
+   6.33,
+   6.62,
    "T"
   ],
   [
-   5.36,
-   5.43,
+   6.62,
+   6.69,
+   "O"
+  ],
+  [
+   6.69,
+   6.76,
    "F"
   ],
   [
-   5.43,
-   5.64,
-   "T"
-  ],
-  [
-   5.64,
-   5.71,
+   6.76,
+   6.9,
    "E"
   ],
   [
-   5.71,
-   5.85,
+   6.9,
+   6.97,
+   "U"
+  ],
+  [
+   6.97,
+   7.05,
+   "M"
+  ],
+  [
+   7.05,
+   7.41,
    "T"
   ],
   [
-   5.85,
-   5.92,
+   7.41,
+   7.48,
+   "E"
+  ],
+  [
+   7.48,
+   7.55,
+   "U"
+  ],
+  [
+   7.55,
+   7.62,
+   "T"
+  ],
+  [
+   7.62,
+   7.7,
+   "M"
+  ],
+  [
+   7.7,
+   7.9,
+   "O"
+  ],
+  [
+   7.9,
+   8.18,
+   "U"
+  ],
+  [
+   8.18,
+   8.25,
+   "O"
+  ],
+  [
+   8.25,
+   8.32,
+   "U"
+  ],
+  [
+   8.32,
+   8.39,
+   "T"
+  ],
+  [
+   8.39,
+   8.6,
+   "U"
+  ],
+  [
+   8.6,
+   8.68,
+   "M"
+  ],
+  [
+   8.68,
+   8.75,
+   "T"
+  ],
+  [
+   8.75,
+   8.82,
+   "M"
+  ],
+  [
+   8.82,
+   8.94,
+   "E"
+  ],
+  [
+   8.94,
+   9.64,
+   "T"
+  ],
+  [
+   9.64,
+   9.85,
+   "M"
+  ],
+  [
+   9.85,
+   9.93,
+   "O"
+  ],
+  [
+   9.93,
+   10.07,
+   "U"
+  ],
+  [
+   10.07,
+   10.14,
+   "T"
+  ],
+  [
+   10.14,
+   10.21,
+   "E"
+  ],
+  [
+   10.21,
+   10.63,
+   "T"
+  ],
+  [
+   10.63,
+   10.91,
+   "U"
+  ],
+  [
+   10.91,
+   10.98,
+   "E"
+  ],
+  [
+   10.98,
+   11.05,
+   "T"
+  ],
+  [
+   11.05,
+   11.26,
+   "E"
+  ],
+  [
+   11.26,
+   11.4,
+   "T"
+  ],
+  [
+   11.4,
+   11.75,
+   "U"
+  ],
+  [
+   11.75,
+   11.89,
+   "T"
+  ],
+  [
+   11.89,
+   11.97,
+   "M"
+  ],
+  [
+   11.97,
+   12.03,
+   "T"
+  ],
+  [
+   12.03,
+   12.15,
+   "E"
+  ],
+  [
+   12.15,
+   12.22,
+   "T"
+  ],
+  [
+   12.22,
+   12.29,
+   "O"
+  ],
+  [
+   12.29,
+   12.64,
+   "U"
+  ],
+  [
+   12.64,
+   12.78,
+   "T"
+  ],
+  [
+   12.78,
+   12.92,
+   "U"
+  ],
+  [
+   12.92,
+   12.99,
+   "T"
+  ],
+  [
+   12.99,
+   13.07,
+   "M"
+  ],
+  [
+   13.07,
+   13.23,
+   "T"
+  ],
+  [
+   13.23,
+   13.3,
+   "E"
+  ],
+  [
+   13.3,
+   13.79,
+   "T"
+  ],
+  [
+   13.79,
+   13.86,
+   "E"
+  ],
+  [
+   13.86,
+   13.94,
+   "M"
+  ],
+  [
+   13.94,
+   14.01,
    "A"
   ],
   [
-   5.92,
-   6.0,
-   "M"
-  ],
-  [
-   6.0,
-   6.37,
+   14.01,
+   14.63,
    "T"
   ],
   [
-   6.37,
-   6.44,
+   14.63,
+   14.7,
    "E"
   ],
   [
-   6.44,
-   6.51,
+   14.7,
+   14.78,
+   "M"
+  ],
+  [
+   14.78,
+   14.88,
    "U"
   ],
   [
-   6.51,
-   6.65,
-   "T"
+   14.88,
+   14.97,
+   "M"
   ],
   [
-   6.65,
-   6.79,
+   14.97,
+   15.05,
    "E"
   ],
   [
-   6.79,
-   7.0,
-   "T"
-  ],
-  [
-   7.0,
-   7.08,
+   15.05,
+   15.13,
    "M"
   ],
   [
-   7.08,
-   7.3,
-   "T"
-  ],
-  [
-   7.3,
-   7.44,
-   null
-  ],
-  [
-   7.44,
-   7.71,
-   "T"
-  ],
-  [
-   7.71,
-   7.81,
-   "M"
-  ],
-  [
-   7.81,
-   7.96,
-   "T"
-  ],
-  [
-   7.96,
-   8.17,
-   "O"
-  ],
-  [
-   8.17,
-   8.52,
-   "T"
-  ],
-  [
-   8.52,
-   8.6,
-   "M"
-  ],
-  [
-   8.6,
-   8.81,
-   "T"
-  ],
-  [
-   8.81,
-   8.95,
-   "E"
-  ],
-  [
-   8.95,
-   9.23,
-   "T"
-  ],
-  [
-   9.23,
-   9.3,
-   "F"
-  ],
-  [
-   9.3,
-   9.36,
-   "M"
-  ],
-  [
-   9.36,
-   9.42,
-   "T"
-  ],
-  [
-   9.42,
-   9.5,
-   "M"
-  ],
-  [
-   9.5,
-   9.66,
-   "T"
-  ],
-  [
-   9.66,
-   9.87,
+   15.13,
+   15.36,
    "U"
   ],
   [
-   9.87,
-   10.08,
-   "F"
+   15.36,
+   15.44,
+   "M"
   ],
   [
-   10.08,
-   10.15,
+   15.44,
+   15.64,
+   "T"
+  ],
+  [
+   15.64,
+   15.78,
+   "E"
+  ],
+  [
+   15.78,
+   15.85,
+   "T"
+  ],
+  [
+   15.85,
+   15.92,
+   "O"
+  ],
+  [
+   15.92,
+   16.03,
+   "M"
+  ],
+  [
+   16.03,
+   16.08,
+   "T"
+  ],
+  [
+   16.08,
+   16.13,
    "U"
   ],
   [
-   10.15,
-   10.29,
-   "M"
-  ],
-  [
-   10.29,
-   10.35,
-   "O"
-  ],
-  [
-   10.35,
-   10.48,
-   "T"
-  ],
-  [
-   10.48,
-   10.55,
-   "E"
-  ],
-  [
-   10.55,
-   10.62,
-   "O"
-  ],
-  [
-   10.62,
-   10.76,
-   "F"
-  ],
-  [
-   10.76,
-   10.83,
-   "T"
-  ],
-  [
-   10.83,
-   10.91,
-   "M"
-  ],
-  [
-   10.91,
-   11.16,
-   "E"
-  ],
-  [
-   11.16,
-   11.23,
-   "O"
-  ],
-  [
-   11.23,
-   11.37,
-   "E"
-  ],
-  [
-   11.37,
-   11.44,
-   "O"
-  ],
-  [
-   11.44,
-   11.52,
-   "M"
-  ],
-  [
-   11.52,
-   11.64,
-   "T"
-  ],
-  [
-   11.64,
-   11.85,
-   "U"
-  ],
-  [
-   11.85,
-   11.92,
-   "T"
-  ],
-  [
-   11.92,
-   12.06,
-   "E"
-  ],
-  [
-   12.06,
-   12.34,
-   "U"
-  ],
-  [
-   12.34,
-   12.41,
-   "T"
-  ],
-  [
-   12.41,
-   12.48,
-   "E"
-  ],
-  [
-   12.48,
-   12.55,
-   "T"
-  ],
-  [
-   12.55,
-   12.62,
-   "E"
-  ],
-  [
-   12.62,
-   12.69,
-   "M"
-  ],
-  [
-   12.69,
-   12.76,
-   "T"
-  ],
-  [
-   12.76,
-   12.82,
-   "M"
-  ],
-  [
-   12.82,
-   12.99,
-   "O"
-  ],
-  [
-   12.99,
-   13.06,
-   "U"
-  ],
-  [
-   13.06,
-   13.13,
-   "T"
-  ],
-  [
-   13.13,
-   13.2,
-   "F"
-  ],
-  [
-   13.2,
-   13.27,
-   "E"
-  ],
-  [
-   13.27,
-   13.34,
-   "O"
-  ],
-  [
-   13.34,
-   13.48,
-   "E"
-  ],
-  [
-   13.48,
-   13.62,
-   "T"
-  ],
-  [
-   13.62,
-   13.69,
-   "E"
-  ],
-  [
-   13.69,
-   13.83,
-   "O"
-  ],
-  [
-   13.83,
-   13.9,
-   "F"
-  ],
-  [
-   13.9,
-   13.97,
-   "E"
-  ],
-  [
-   13.97,
-   14.04,
-   "F"
-  ],
-  [
-   14.04,
-   14.11,
-   "O"
-  ],
-  [
-   14.11,
-   14.18,
-   "F"
-  ],
-  [
-   14.18,
-   14.39,
-   "T"
-  ],
-  [
-   14.39,
-   14.46,
-   "F"
-  ],
-  [
-   14.46,
-   14.53,
-   "T"
-  ],
-  [
-   14.53,
-   14.6,
-   "F"
-  ],
-  [
-   14.6,
-   14.74,
-   "T"
-  ],
-  [
-   14.74,
-   14.82,
-   "M"
-  ],
-  [
-   14.82,
-   15.1,
-   "T"
-  ],
-  [
-   15.1,
-   15.17,
-   "E"
-  ],
-  [
-   15.17,
-   15.29,
-   "M"
-  ],
-  [
-   15.29,
-   15.33,
-   "T"
-  ],
-  [
-   15.33,
-   15.41,
-   "M"
-  ],
-  [
-   15.41,
-   15.49,
-   "O"
-  ],
-  [
-   15.49,
-   15.57,
-   "M"
-  ],
-  [
-   15.57,
-   16.0,
-   "O"
-  ],
-  [
-   16.0,
+   16.13,
    16.21,
-   "T"
+   "M"
   ],
   [
    16.21,
-   16.35,
-   "O"
-  ],
-  [
-   16.35,
-   16.49,
-   "T"
-  ],
-  [
-   16.49,
-   16.56,
-   "O"
-  ],
-  [
-   16.56,
-   16.77,
+   16.25,
    "U"
   ],
   [
-   16.77,
-   17.02,
+   16.25,
+   16.29,
+   "F"
+  ],
+  [
+   16.29,
+   16.37,
+   "M"
+  ],
+  [
+   16.37,
+   16.62,
    "T"
   ],
   [
-   17.02,
+   16.62,
+   16.71,
+   "M"
+  ],
+  [
+   16.71,
+   16.8,
+   "T"
+  ],
+  [
+   16.8,
+   16.87,
+   "E"
+  ],
+  [
+   16.87,
+   17.01,
+   "T"
+  ],
+  [
+   17.01,
    17.08,
-   "M"
+   "O"
   ],
   [
    17.08,
-   17.19,
+   17.29,
    "U"
   ],
   [
-   17.19,
-   17.47,
-   "T"
-  ],
-  [
-   17.47,
-   17.49,
-   "M"
-  ],
-  [
-   17.49,
-   17.55,
-   "T"
-  ],
-  [
-   17.55,
-   17.61,
-   "M"
-  ],
-  [
-   17.61,
-   17.75,
-   "U"
-  ],
-  [
-   17.75,
-   18.1,
-   "T"
-  ],
-  [
-   18.1,
-   18.38,
-   "U"
-  ],
-  [
-   18.38,
-   18.45,
-   "T"
-  ],
-  [
-   18.45,
-   18.59,
-   "E"
-  ],
-  [
-   18.59,
-   19.37,
-   "T"
-  ],
-  [
-   19.37,
-   19.47,
-   "M"
-  ],
-  [
-   19.47,
-   19.66,
-   "U"
-  ],
-  [
-   19.66,
-   19.71,
+   17.29,
+   17.36,
    "O"
   ],
   [
-   19.71,
-   19.89,
-   "E"
-  ],
-  [
-   19.89,
-   20.1,
+   17.36,
+   17.88,
    "T"
   ],
   [
-   20.1,
-   20.17,
+   17.88,
+   18.09,
+   "E"
+  ],
+  [
+   18.09,
+   18.23,
+   "T"
+  ],
+  [
+   18.23,
+   18.3,
+   "E"
+  ],
+  [
+   18.3,
+   18.46,
+   "M"
+  ],
+  [
+   18.46,
+   18.64,
+   "T"
+  ],
+  [
+   18.64,
+   18.71,
+   "F"
+  ],
+  [
+   18.71,
+   18.78,
+   "T"
+  ],
+  [
+   18.78,
+   18.92,
    "O"
   ],
   [
-   20.17,
-   20.24,
+   18.92,
+   18.99,
    "U"
   ],
   [
-   20.24,
-   20.38,
+   18.99,
+   19.13,
+   "T"
+  ],
+  [
+   19.13,
+   19.21,
+   "M"
+  ],
+  [
+   19.21,
+   19.46,
    "E"
   ],
   [
-   20.38,
-   20.52,
+   19.46,
+   19.53,
    "T"
   ],
   [
-   20.52,
-   20.66,
+   19.53,
+   19.67,
+   "F"
+  ],
+  [
+   19.67,
+   19.74,
    "E"
   ],
   [
-   20.66,
-   20.87,
+   19.74,
+   19.81,
    "T"
   ],
   [
-   20.87,
-   21.23,
-   null
+   19.81,
+   19.88,
+   "E"
   ],
   [
-   21.23,
-   21.29,
+   19.88,
+   19.95,
+   "U"
+  ],
+  [
+   19.95,
+   20.02,
+   "F"
+  ],
+  [
+   20.02,
+   20.23,
    "T"
   ],
   [
-   21.29,
+   20.23,
+   20.3,
+   "F"
+  ],
+  [
+   20.3,
+   20.37,
+   "O"
+  ],
+  [
+   20.37,
+   20.79,
+   "T"
+  ],
+  [
+   20.79,
+   20.86,
+   "E"
+  ],
+  [
+   20.86,
+   20.93,
+   "T"
+  ],
+  [
+   20.93,
+   21.01,
+   "M"
+  ],
+  [
+   21.01,
    21.42,
-   "E"
+   "T"
   ],
   [
    21.42,
    21.49,
-   "T"
+   "F"
   ],
   [
    21.49,
+   21.56,
+   "T"
+  ],
+  [
+   21.56,
    21.77,
    "U"
   ],
   [
    21.77,
-   22.0,
-   "T"
-  ],
-  [
-   22.0,
-   22.06,
-   "M"
-  ],
-  [
-   22.06,
-   22.38,
-   "T"
-  ],
-  [
-   22.38,
-   22.66,
+   21.91,
    "E"
   ],
   [
-   22.66,
-   23.01,
-   "T"
-  ],
-  [
-   23.01,
-   23.22,
-   "U"
-  ],
-  [
-   23.22,
-   23.29,
-   "T"
-  ],
-  [
-   23.29,
-   23.37,
+   21.91,
+   21.99,
    "M"
   ],
   [
-   23.37,
+   21.99,
+   22.11,
+   "O"
+  ],
+  [
+   22.11,
+   22.25,
+   "T"
+  ],
+  [
+   22.25,
+   22.32,
+   "E"
+  ],
+  [
+   22.32,
+   22.39,
+   "T"
+  ],
+  [
+   22.39,
+   22.67,
+   "E"
+  ],
+  [
+   22.67,
+   22.81,
+   "M"
+  ],
+  [
+   22.81,
+   23.17,
+   "T"
+  ],
+  [
+   23.17,
+   23.31,
+   "E"
+  ],
+  [
+   23.31,
+   23.38,
+   "U"
+  ],
+  [
+   23.38,
    23.45,
    "E"
   ],
   [
    23.45,
    23.52,
-   "T"
+   "F"
   ],
   [
    23.52,
-   23.66,
-   "F"
-  ],
-  [
-   23.66,
-   23.73,
-   "T"
-  ],
-  [
-   23.73,
    23.8,
    "E"
   ],
   [
    23.8,
-   23.94,
-   "T"
+   23.88,
+   "M"
   ],
   [
-   23.94,
-   24.26,
-   null
+   23.88,
+   24.04,
+   "A"
   ],
   [
-   24.26,
-   24.64,
-   "T"
-  ],
-  [
-   24.64,
-   24.71,
+   24.04,
+   24.11,
    "O"
   ],
   [
-   24.71,
-   24.79,
+   24.11,
+   24.39,
+   "T"
+  ],
+  [
+   24.39,
+   24.6,
+   "E"
+  ],
+  [
+   24.6,
+   24.74,
+   "U"
+  ],
+  [
+   24.74,
+   24.88,
+   "T"
+  ],
+  [
+   24.88,
+   25.01,
    "M"
   ],
   [
-   24.79,
-   24.87,
-   "E"
-  ],
-  [
-   24.87,
-   25.06,
-   "M"
-  ],
-  [
-   25.06,
-   25.14,
+   25.01,
+   25.07,
    "T"
   ],
   [
-   25.14,
-   25.35,
+   25.07,
+   25.19,
    "E"
   ],
   [
-   25.35,
-   25.63,
+   25.19,
+   25.33,
    "T"
   ],
   [
-   25.63,
-   25.7,
-   "E"
-  ],
-  [
-   25.7,
-   25.84,
-   "T"
-  ],
-  [
-   25.84,
-   26.07,
-   null
-  ],
-  [
-   26.07,
-   26.26,
-   "T"
-  ],
-  [
-   26.26,
-   26.33,
-   "E"
-  ],
-  [
-   26.33,
-   26.47,
+   25.33,
+   25.4,
    "O"
   ],
   [
-   26.47,
-   26.54,
-   "U"
-  ],
-  [
-   26.54,
-   26.65,
-   "M"
-  ],
-  [
-   26.65,
-   26.72,
+   25.4,
+   25.54,
    "T"
   ],
   [
-   26.72,
-   26.86,
-   "U"
-  ],
-  [
-   26.86,
-   27.05,
-   "T"
-  ],
-  [
-   27.05,
-   27.2,
-   "U"
-  ],
-  [
-   27.2,
-   27.62,
-   "T"
-  ],
-  [
-   27.62,
-   27.82,
-   "M"
-  ],
-  [
-   27.82,
-   27.91,
-   "E"
-  ],
-  [
-   27.91,
-   27.98,
-   "T"
-  ],
-  [
-   27.98,
-   28.12,
-   "E"
-  ],
-  [
-   28.12,
-   28.19,
-   "T"
-  ],
-  [
-   28.19,
-   28.33,
-   "O"
-  ],
-  [
-   28.33,
-   28.49,
-   "M"
-  ],
-  [
-   28.49,
-   28.77,
-   "T"
-  ],
-  [
-   28.77,
-   28.84,
+   25.54,
+   25.61,
    "F"
   ],
   [
-   28.84,
-   28.98,
-   "T"
+   25.61,
+   25.68,
+   "O"
   ],
   [
-   28.98,
-   29.12,
-   "E"
-  ],
-  [
-   29.12,
-   29.26,
-   "T"
-  ],
-  [
-   29.26,
-   29.33,
+   25.68,
+   25.75,
    "U"
   ],
   [
-   29.33,
-   29.89,
-   "T"
-  ],
-  [
-   29.89,
-   30.04,
-   null
-  ],
-  [
-   30.04,
-   30.66,
-   "T"
-  ],
-  [
-   30.66,
-   30.74,
+   25.75,
+   25.94,
    "M"
   ],
   [
-   30.74,
-   30.85,
+   25.94,
+   26.1,
+   "U"
+  ],
+  [
+   26.1,
+   26.24,
+   "O"
+  ],
+  [
+   26.24,
+   26.32,
+   "M"
+  ],
+  [
+   26.32,
+   26.52,
    "E"
   ],
   [
-   30.85,
-   30.92,
+   26.52,
+   26.59,
    "T"
   ],
   [
-   30.92,
+   26.59,
+   26.67,
+   "M"
+  ],
+  [
+   26.67,
+   26.72,
+   "F"
+  ],
+  [
+   26.72,
+   26.83,
+   "U"
+  ],
+  [
+   26.83,
+   26.9,
+   "T"
+  ],
+  [
+   26.9,
+   27.04,
+   "E"
+  ],
+  [
+   27.04,
+   27.25,
+   "T"
+  ],
+  [
+   27.25,
+   27.32,
+   "E"
+  ],
+  [
+   27.32,
+   27.46,
+   "T"
+  ],
+  [
+   27.46,
+   27.54,
+   "M"
+  ],
+  [
+   27.54,
+   27.64,
+   "U"
+  ],
+  [
+   27.64,
+   27.71,
+   "F"
+  ],
+  [
+   27.71,
+   27.85,
+   "T"
+  ],
+  [
+   27.85,
+   27.99,
+   "E"
+  ],
+  [
+   27.99,
+   28.2,
+   "T"
+  ],
+  [
+   28.2,
+   28.27,
+   "E"
+  ],
+  [
+   28.27,
+   28.34,
+   "O"
+  ],
+  [
+   28.34,
+   28.41,
+   "T"
+  ],
+  [
+   28.41,
+   28.48,
+   "E"
+  ],
+  [
+   28.48,
+   28.55,
+   "T"
+  ],
+  [
+   28.55,
+   28.69,
+   "O"
+  ],
+  [
+   28.69,
+   28.76,
+   "U"
+  ],
+  [
+   28.76,
+   28.83,
+   "T"
+  ],
+  [
+   28.83,
+   28.97,
+   "A"
+  ],
+  [
+   28.97,
+   29.39,
+   "T"
+  ],
+  [
+   29.39,
+   29.46,
+   "E"
+  ],
+  [
+   29.46,
+   29.53,
+   "U"
+  ],
+  [
+   29.53,
+   29.61,
+   "M"
+  ],
+  [
+   29.61,
+   30.02,
+   "U"
+  ],
+  [
+   30.02,
+   30.16,
+   "T"
+  ],
+  [
+   30.16,
+   30.23,
+   "E"
+  ],
+  [
+   30.23,
+   30.51,
+   "T"
+  ],
+  [
+   30.51,
+   30.65,
+   "O"
+  ],
+  [
+   30.65,
+   30.72,
+   "F"
+  ],
+  [
+   30.72,
+   30.93,
+   "T"
+  ],
+  [
+   30.93,
    31.0,
-   "M"
+   "E"
   ],
   [
    31.0,
-   31.11,
+   31.07,
    "T"
   ],
   [
-   31.11,
-   31.25,
+   31.07,
+   31.42,
    "U"
   ],
   [
-   31.25,
-   31.39,
-   "T"
-  ],
-  [
-   31.39,
-   31.53,
+   31.42,
+   31.49,
    "E"
   ],
   [
-   31.53,
-   32.02,
+   31.49,
+   31.84,
    "T"
   ],
   [
-   32.02,
-   32.15,
-   null
-  ],
-  [
-   32.15,
-   32.2,
-   "T"
-  ],
-  [
-   32.2,
-   32.39,
-   "U"
-  ],
-  [
-   32.39,
-   32.43,
+   31.84,
+   31.97,
    "M"
   ],
   [
-   32.43,
-   32.51,
+   31.97,
+   32.01,
+   "F"
+  ],
+  [
+   32.01,
+   32.19,
+   "T"
+  ],
+  [
+   32.19,
+   32.26,
+   "E"
+  ],
+  [
+   32.26,
+   32.47,
+   "O"
+  ],
+  [
+   32.47,
+   32.54,
+   "T"
+  ],
+  [
+   32.54,
+   32.89,
    "U"
   ],
   [
-   32.51,
-   32.59,
+   32.89,
+   32.96,
+   "O"
+  ],
+  [
+   32.96,
+   33.04,
    "M"
   ],
   [
-   32.59,
-   32.86,
-   "E"
-  ],
-  [
-   32.86,
-   33.07,
+   33.04,
+   33.11,
    "T"
   ],
   [
-   33.07,
-   33.44,
-   null
+   33.11,
+   33.31,
+   "U"
   ],
   [
-   33.44,
-   33.64,
+   33.31,
+   33.39,
+   "M"
+  ],
+  [
+   33.39,
+   33.57,
    "T"
   ],
   [
-   33.64,
-   33.71,
-   "E"
-  ],
-  [
-   33.71,
+   33.57,
    33.85,
-   "U"
+   "E"
   ],
   [
    33.85,
-   34.06,
+   33.99,
    "T"
   ],
   [
-   34.06,
-   34.6,
-   null
+   33.99,
+   34.13,
+   "F"
   ],
   [
-   34.6,
-   34.66,
-   "T"
-  ],
-  [
-   34.66,
-   35.0,
+   34.13,
+   34.2,
    "U"
   ],
   [
-   35.0,
-   35.35,
-   "T"
+   34.2,
+   34.41,
+   "F"
   ],
   [
-   35.35,
-   35.63,
+   34.41,
+   34.75,
    "U"
   ],
   [
-   35.63,
-   35.77,
-   "T"
-  ],
-  [
-   35.77,
-   35.84,
+   34.75,
+   34.82,
    "E"
   ],
   [
-   35.84,
-   35.98,
+   34.82,
+   35.03,
    "T"
   ],
   [
-   35.98,
-   36.06,
+   35.03,
+   35.1,
+   "E"
+  ],
+  [
+   35.1,
+   35.31,
+   "T"
+  ],
+  [
+   35.31,
+   35.39,
    "M"
   ],
   [
-   36.06,
-   36.2,
-   "E"
-  ],
-  [
-   36.2,
-   36.34,
-   "T"
-  ],
-  [
-   36.34,
-   36.41,
-   "E"
-  ],
-  [
-   36.41,
-   36.62,
-   "T"
-  ],
-  [
-   36.62,
-   36.69,
+   35.39,
+   35.65,
    "U"
   ],
   [
-   36.69,
-   36.83,
-   "T"
-  ],
-  [
-   36.83,
-   36.9,
-   "T"
-  ],
-  [
-   36.9,
-   37.18,
+   35.65,
+   35.72,
    "E"
   ],
   [
-   37.18,
-   37.49,
-   null
+   35.72,
+   35.79,
+   "O"
   ],
   [
-   37.49,
+   35.79,
+   35.86,
+   "E"
+  ],
+  [
+   35.86,
+   35.93,
+   "F"
+  ],
+  [
+   35.93,
+   36.0,
+   "E"
+  ],
+  [
+   36.0,
+   36.14,
+   "T"
+  ],
+  [
+   36.14,
+   36.21,
+   "U"
+  ],
+  [
+   36.21,
+   36.28,
+   "T"
+  ],
+  [
+   36.28,
+   36.35,
+   "E"
+  ],
+  [
+   36.35,
+   36.49,
+   "T"
+  ],
+  [
+   36.49,
+   36.56,
+   "F"
+  ],
+  [
+   36.56,
+   36.7,
+   "T"
+  ],
+  [
+   36.7,
+   36.81,
+   "M"
+  ],
+  [
+   36.81,
+   36.87,
+   "T"
+  ],
+  [
+   36.87,
+   36.93,
+   "F"
+  ],
+  [
+   36.93,
+   37.0,
+   "U"
+  ],
+  [
+   37.0,
+   37.07,
+   "T"
+  ],
+  [
+   37.07,
+   37.21,
+   "U"
+  ],
+  [
+   37.21,
+   37.28,
+   "T"
+  ],
+  [
+   37.28,
+   37.35,
+   "E"
+  ],
+  [
+   37.35,
    37.56,
    "T"
   ],
   [
    37.56,
-   37.62,
-   "M"
-  ],
-  [
-   37.62,
-   37.68,
-   "E"
-  ],
-  [
-   37.68,
-   37.94,
-   "U"
-  ],
-  [
-   37.94,
-   38.08,
-   "E"
-  ],
-  [
-   38.08,
-   38.29,
-   "U"
-  ],
-  [
-   38.29,
-   38.37,
-   "M"
-  ],
-  [
-   38.37,
-   38.41,
+   37.7,
    "O"
   ],
   [
-   38.41,
-   38.66,
-   "U"
-  ],
-  [
-   38.66,
-   38.74,
-   "M"
-  ],
-  [
-   38.74,
-   39.13,
-   "U"
-  ],
-  [
-   39.13,
-   39.36,
-   null
-  ],
-  [
-   39.36,
-   39.85,
-   "T"
-  ],
-  [
-   39.85,
-   40.06,
-   "O"
-  ],
-  [
-   40.06,
-   40.14,
-   "M"
-  ],
-  [
-   40.14,
-   40.25,
-   "O"
-  ],
-  [
-   40.25,
-   40.51,
-   "E"
-  ],
-  [
-   40.51,
-   40.56,
-   "O"
-  ],
-  [
-   40.56,
-   40.74,
-   "U"
-  ],
-  [
-   40.74,
-   40.84,
-   "A"
-  ],
-  [
-   40.84,
-   40.88,
-   "E"
-  ],
-  [
-   40.88,
-   40.95,
+   37.7,
+   37.77,
    "F"
   ],
   [
-   40.95,
-   41.03,
-   "M"
-  ],
-  [
-   41.03,
-   41.15,
-   "E"
-  ],
-  [
-   41.15,
-   41.23,
-   "M"
-  ],
-  [
-   41.23,
-   41.37,
+   37.77,
+   37.91,
    "U"
   ],
   [
-   41.37,
-   41.46,
+   37.91,
+   37.99,
    "M"
   ],
   [
-   41.46,
-   41.65,
+   37.99,
+   38.1,
+   "U"
+  ],
+  [
+   38.1,
+   38.38,
    "T"
   ],
   [
-   41.65,
-   41.93,
+   38.38,
+   38.45,
+   "F"
+  ],
+  [
+   38.45,
+   38.52,
+   "A"
+  ],
+  [
+   38.52,
+   38.6,
+   "M"
+  ],
+  [
+   38.6,
+   38.66,
+   "E"
+  ],
+  [
+   38.66,
+   38.71,
    "U"
   ],
   [
-   41.93,
-   42.0,
+   38.71,
+   38.78,
+   "T"
+  ],
+  [
+   38.78,
+   38.85,
+   "F"
+  ],
+  [
+   38.85,
+   39.06,
+   "T"
+  ],
+  [
+   39.06,
+   39.14,
+   "M"
+  ],
+  [
+   39.14,
+   39.29,
+   "T"
+  ],
+  [
+   39.29,
+   39.5,
    "O"
   ],
   [
-   42.0,
-   42.07,
+   39.5,
+   39.78,
    "U"
   ],
   [
-   42.07,
-   42.21,
-   "A"
-  ],
-  [
-   42.21,
-   42.28,
-   "E"
-  ],
-  [
-   42.28,
-   42.36,
+   39.78,
+   39.85,
    "M"
   ],
   [
-   42.36,
-   42.47,
-   "A"
+   39.85,
+   39.92,
+   "E"
   ],
   [
-   42.47,
-   42.55,
+   39.92,
+   40.01,
    "M"
   ],
   [
-   42.55,
-   42.61,
-   "E"
-  ],
-  [
-   42.61,
-   42.67,
+   40.01,
+   40.08,
    "T"
   ],
   [
-   42.67,
-   42.74,
-   "E"
+   40.08,
+   40.14,
+   "A"
   ],
   [
-   42.74,
-   42.81,
+   40.14,
+   40.23,
+   "M"
+  ],
+  [
+   40.23,
+   40.31,
    "T"
   ],
   [
-   42.81,
-   42.95,
+   40.31,
+   40.39,
+   "M"
+  ],
+  [
+   40.39,
+   40.86,
+   "T"
+  ],
+  [
+   40.86,
+   40.94,
+   "M"
+  ],
+  [
+   40.94,
+   41.13,
+   "T"
+  ],
+  [
+   41.13,
+   41.2,
+   "F"
+  ],
+  [
+   41.2,
+   41.83,
+   "T"
+  ],
+  [
+   41.83,
+   41.96,
+   "F"
+  ],
+  [
+   41.96,
+   42.12,
+   "T"
+  ],
+  [
+   42.12,
+   42.19,
+   "F"
+  ],
+  [
+   42.19,
+   42.26,
+   "U"
+  ],
+  [
+   42.26,
+   42.47,
    "E"
   ],
   [
-   42.95,
+   42.47,
+   42.68,
+   "T"
+  ],
+  [
+   42.68,
+   42.76,
+   "M"
+  ],
+  [
+   42.76,
+   42.89,
+   "O"
+  ],
+  [
+   42.89,
    43.03,
-   "M"
+   "E"
   ],
   [
    43.03,
-   43.13,
+   43.31,
    "T"
   ],
   [
-   43.13,
-   43.2,
-   "F"
+   43.31,
+   43.45,
+   "E"
   ],
   [
-   43.2,
-   43.27,
+   43.45,
+   43.52,
+   "O"
+  ],
+  [
+   43.52,
+   43.59,
+   "T"
+  ],
+  [
+   43.59,
+   43.66,
+   "E"
+  ],
+  [
+   43.66,
+   43.73,
+   "O"
+  ],
+  [
+   43.73,
+   43.8,
+   "T"
+  ],
+  [
+   43.8,
+   43.88,
+   "M"
+  ],
+  [
+   43.88,
+   44.13,
    "A"
   ],
   [
-   43.27,
-   43.35,
-   "M"
+   44.13,
+   44.2,
+   "O"
   ],
   [
-   43.35,
-   43.6,
+   44.2,
+   44.27,
+   "U"
+  ],
+  [
+   44.27,
+   44.41,
    "E"
   ],
   [
-   43.6,
-   43.74,
+   44.41,
+   44.48,
    "T"
   ],
   [
-   43.74,
-   43.95,
+   44.48,
+   44.62,
    "U"
   ],
   [
-   43.95,
-   44.3,
-   "T"
-  ],
-  [
-   44.3,
-   44.58,
-   "U"
-  ],
-  [
-   44.58,
-   44.94,
-   null
-  ],
-  [
-   44.94,
-   45.03,
-   "T"
-  ],
-  [
-   45.03,
-   45.59,
-   "U"
-  ],
-  [
-   45.59,
-   45.73,
-   "T"
-  ],
-  [
-   45.73,
-   45.87,
-   "U"
-  ],
-  [
-   45.87,
-   45.95,
-   "M"
-  ],
-  [
-   45.95,
-   46.02,
-   "O"
-  ],
-  [
-   46.02,
-   46.09,
+   44.62,
+   44.76,
    "F"
   ],
   [
-   46.09,
-   46.16,
+   44.76,
+   44.83,
    "T"
   ],
   [
-   46.16,
-   46.27,
-   "M"
+   44.83,
+   44.9,
+   "F"
   ],
   [
-   46.27,
-   46.35,
-   "T"
+   44.9,
+   44.97,
+   "O"
   ],
   [
-   46.35,
-   46.52,
-   "M"
-  ],
-  [
-   46.52,
-   46.68,
-   "T"
-  ],
-  [
-   46.68,
-   46.96,
+   44.97,
+   45.11,
    "U"
   ],
   [
-   46.96,
-   47.03,
-   "M"
-  ],
-  [
-   47.03,
-   47.1,
-   "T"
-  ],
-  [
-   47.1,
-   47.16,
-   "M"
-  ],
-  [
-   47.16,
-   47.35,
+   45.11,
+   45.32,
    "E"
   ],
   [
-   47.35,
-   47.42,
-   "U"
-  ],
-  [
-   47.42,
-   47.49,
+   45.32,
+   45.46,
    "T"
   ],
   [
-   47.49,
-   48.12,
-   "U"
+   45.46,
+   45.53,
+   "A"
   ],
   [
-   48.12,
-   48.19,
-   "O"
+   45.53,
+   45.61,
+   "M"
   ],
   [
-   48.19,
-   48.26,
+   45.61,
+   45.78,
+   "T"
+  ],
+  [
+   45.78,
+   45.86,
+   "M"
+  ],
+  [
+   45.86,
+   45.9,
+   "T"
+  ],
+  [
+   45.9,
+   45.94,
    "F"
   ],
   [
-   48.26,
-   48.4,
-   "U"
-  ],
-  [
-   48.4,
-   48.47,
+   45.94,
+   46.01,
    "T"
   ],
   [
-   48.47,
-   48.54,
+   46.01,
+   46.08,
+   "U"
+  ],
+  [
+   46.08,
+   46.22,
+   "T"
+  ],
+  [
+   46.22,
+   46.29,
+   "F"
+  ],
+  [
+   46.29,
+   46.57,
+   "U"
+  ],
+  [
+   46.57,
+   46.64,
+   "F"
+  ],
+  [
+   46.64,
+   46.85,
+   "T"
+  ],
+  [
+   46.85,
+   47.13,
+   "U"
+  ],
+  [
+   47.13,
+   47.27,
+   "O"
+  ],
+  [
+   47.27,
+   47.41,
+   "U"
+  ],
+  [
+   47.41,
+   47.9,
+   "T"
+  ],
+  [
+   47.9,
+   47.97,
    "E"
   ],
   [
-   48.54,
-   48.61,
-   "O"
-  ],
-  [
-   48.61,
-   48.75,
-   "F"
-  ],
-  [
-   48.75,
-   48.82,
+   47.97,
+   48.25,
    "T"
   ],
   [
-   48.82,
-   49.03,
-   "U"
+   48.25,
+   48.39,
+   "E"
   ],
   [
-   49.03,
-   49.38,
+   48.39,
+   48.46,
+   "T"
+  ],
+  [
+   48.46,
+   48.53,
+   "E"
+  ],
+  [
+   48.53,
+   48.76,
+   "M"
+  ],
+  [
+   48.76,
+   48.9,
    "O"
   ],
   [
-   49.38,
+   48.9,
+   49.32,
+   "T"
+  ],
+  [
+   49.32,
+   49.46,
+   "U"
+  ],
+  [
+   49.46,
+   49.54,
+   "M"
+  ],
+  [
+   49.54,
+   49.61,
+   "E"
+  ],
+  [
+   49.61,
    49.81,
-   null
+   "T"
   ],
   [
    49.81,
-   49.93,
-   "T"
-  ],
-  [
-   49.93,
-   50.12,
-   "U"
-  ],
-  [
-   50.12,
-   50.17,
+   49.88,
    "O"
   ],
   [
-   50.17,
-   50.42,
-   "E"
-  ],
-  [
-   50.42,
-   50.56,
-   "T"
-  ],
-  [
-   50.56,
-   50.64,
-   "M"
-  ],
-  [
-   50.64,
-   50.8,
-   "E"
-  ],
-  [
-   50.8,
-   50.94,
+   49.88,
+   50.16,
    "U"
   ],
   [
-   50.94,
-   51.08,
-   "T"
-  ],
-  [
-   51.08,
-   51.22,
-   "O"
-  ],
-  [
-   51.22,
-   51.43,
-   "U"
-  ],
-  [
-   51.43,
-   51.5,
-   "T"
-  ],
-  [
-   51.5,
-   51.57,
+   50.16,
+   50.3,
    "E"
   ],
   [
-   51.57,
-   51.78,
-   "U"
-  ],
-  [
-   51.78,
-   51.85,
-   "T"
-  ],
-  [
-   51.85,
-   51.93,
+   50.3,
+   50.38,
    "M"
   ],
   [
-   51.93,
-   52.06,
+   50.38,
+   50.58,
    "T"
   ],
   [
-   52.06,
-   52.14,
-   "M"
-  ],
-  [
-   52.14,
-   52.28,
-   "U"
-  ],
-  [
-   52.28,
-   52.36,
-   "M"
-  ],
-  [
-   52.36,
-   52.43,
-   "T"
-  ],
-  [
-   52.43,
-   52.56,
-   "E"
-  ],
-  [
-   52.56,
-   52.7,
-   "T"
-  ],
-  [
-   52.7,
-   52.84,
-   "E"
-  ],
-  [
-   52.84,
-   52.91,
-   "T"
-  ],
-  [
-   52.91,
-   52.98,
-   "O"
-  ],
-  [
-   52.98,
-   53.05,
-   "T"
-  ],
-  [
-   53.05,
-   53.47,
-   "U"
-  ],
-  [
-   53.47,
-   53.54,
-   "T"
-  ],
-  [
-   53.54,
-   53.62,
-   "M"
-  ],
-  [
-   53.62,
-   53.81,
-   "T"
-  ],
-  [
-   53.81,
-   54.02,
-   "O"
-  ],
-  [
-   54.02,
-   54.16,
-   "U"
-  ],
-  [
-   54.16,
-   54.24,
-   "M"
-  ],
-  [
-   54.24,
-   54.38,
-   "O"
-  ],
-  [
-   54.38,
-   54.45,
-   "U"
-  ],
-  [
-   54.45,
-   54.66,
-   "O"
-  ],
-  [
-   54.66,
-   54.94,
-   "E"
-  ],
-  [
-   54.94,
-   55.01,
-   "M"
-  ],
-  [
-   55.01,
-   55.08,
-   "U"
-  ],
-  [
-   55.08,
-   55.15,
-   "M"
-  ],
-  [
-   55.15,
-   55.22,
-   "T"
-  ],
-  [
-   55.22,
-   55.36,
-   "E"
-  ],
-  [
-   55.36,
-   55.57,
-   "T"
-  ],
-  [
-   55.57,
-   55.65,
-   "M"
-  ],
-  [
-   55.65,
-   55.87,
-   "E"
-  ],
-  [
-   55.87,
-   56.15,
-   "T"
-  ],
-  [
-   56.15,
-   56.22,
+   50.58,
+   50.65,
    "F"
   ],
   [
-   56.22,
-   56.43,
-   "U"
-  ],
-  [
-   56.43,
-   56.64,
+   50.65,
+   51.21,
    "T"
   ],
   [
-   56.64,
-   56.85,
-   "U"
-  ],
-  [
-   56.85,
-   56.99,
+   51.21,
+   51.28,
    "T"
   ],
   [
-   56.99,
-   57.09,
+   51.28,
+   51.7,
    "M"
   ],
   [
-   57.09,
-   57.15,
+   51.7,
+   51.79,
+   "T"
+  ],
+  [
+   51.79,
+   51.87,
+   "M"
+  ],
+  [
+   51.87,
+   51.99,
    "E"
   ],
   [
-   57.15,
-   57.21,
+   51.99,
+   52.27,
    "T"
   ],
   [
-   57.21,
-   57.42,
+   52.27,
+   52.41,
    "U"
   ],
   [
-   57.42,
-   57.63,
+   52.41,
+   53.04,
    "T"
   ],
   [
-   57.63,
-   57.7,
-   "U"
-  ],
-  [
-   57.7,
-   57.78,
-   "M"
-  ],
-  [
-   57.78,
-   57.88,
-   "T"
-  ],
-  [
-   57.88,
-   58.16,
-   "U"
-  ],
-  [
-   58.16,
-   58.23,
-   "T"
-  ],
-  [
-   58.23,
-   58.72,
-   "O"
-  ],
-  [
-   58.72,
-   59.0,
+   53.04,
+   53.14,
    "A"
   ],
   [
-   59.0,
-   59.14,
-   "T"
-  ],
-  [
-   59.14,
-   59.35,
-   "U"
-  ],
-  [
-   59.35,
-   59.43,
-   "M"
-  ],
-  [
-   59.43,
-   59.54,
+   53.14,
+   53.18,
    "E"
   ],
   [
-   59.54,
-   59.62,
+   53.18,
+   53.26,
    "M"
   ],
   [
-   59.62,
-   59.84,
-   "T"
-  ],
-  [
-   59.84,
-   60.05,
+   53.26,
+   53.5,
    "O"
   ],
   [
-   60.05,
-   60.12,
-   "U"
-  ],
-  [
-   60.12,
-   60.19,
-   "E"
-  ],
-  [
-   60.19,
-   60.26,
-   "O"
-  ],
-  [
-   60.26,
-   60.58,
-   "M"
-  ],
-  [
-   60.58,
-   60.64,
-   "O"
-  ],
-  [
-   60.64,
-   60.7,
+   53.5,
+   53.57,
    "F"
   ],
   [
-   60.7,
-   60.77,
-   "T"
-  ],
-  [
-   60.77,
-   60.98,
+   53.57,
+   53.78,
    "U"
   ],
   [
-   60.98,
-   61.12,
-   "E"
-  ],
-  [
-   61.12,
-   61.19,
-   "T"
-  ],
-  [
-   61.19,
-   61.28,
+   53.78,
+   53.86,
    "M"
   ],
   [
-   61.28,
-   61.43,
-   "T"
-  ],
-  [
-   61.43,
-   62.06,
+   53.86,
+   53.93,
    "U"
   ],
   [
-   62.06,
-   62.14,
-   "M"
+   53.93,
+   54.0,
+   "F"
   ],
   [
-   62.14,
-   62.27,
-   "T"
-  ],
-  [
-   62.27,
-   62.74,
-   "U"
-  ],
-  [
-   62.74,
-   62.79,
-   "O"
-  ],
-  [
-   62.79,
-   62.97,
-   "E"
-  ],
-  [
-   62.97,
-   63.18,
+   54.0,
+   54.07,
    "A"
   ],
   [
-   63.18,
-   63.25,
-   "T"
-  ],
-  [
-   63.25,
-   63.39,
-   "E"
-  ],
-  [
-   63.39,
-   63.46,
-   "T"
-  ],
-  [
-   63.46,
-   63.53,
+   54.07,
+   54.14,
    "F"
   ],
   [
-   63.53,
-   63.61,
-   "M"
-  ],
-  [
-   63.61,
-   63.97,
+   54.14,
+   54.21,
    "T"
   ],
   [
-   63.97,
-   64.04,
-   "U"
-  ],
-  [
-   64.04,
-   64.18,
-   "E"
-  ],
-  [
-   64.18,
-   64.32,
-   "U"
-  ],
-  [
-   64.32,
-   64.4,
+   54.21,
+   54.29,
    "M"
   ],
   [
-   64.4,
-   64.47,
-   "E"
+   54.29,
+   54.72,
+   "U"
   ],
   [
-   64.47,
-   64.54,
+   54.72,
+   54.86,
+   "T"
+  ],
+  [
+   54.86,
+   54.94,
    "M"
   ],
   [
-   64.54,
-   64.67,
+   54.94,
+   55.04,
    "O"
   ],
   [
-   64.67,
-   64.75,
-   "M"
-  ],
-  [
-   64.75,
-   64.95,
-   "T"
-  ],
-  [
-   64.95,
-   65.02,
-   "F"
-  ],
-  [
-   65.02,
-   65.09,
+   55.04,
+   55.18,
    "U"
   ],
   [
-   65.09,
-   65.44,
-   "T"
-  ],
-  [
-   65.44,
-   65.51,
-   "F"
-  ],
-  [
-   65.51,
-   65.58,
-   "T"
-  ],
-  [
-   65.58,
-   65.93,
+   55.18,
+   55.25,
    "E"
   ],
   [
-   65.93,
-   66.56,
+   55.25,
+   55.46,
    "T"
   ],
   [
-   66.56,
-   66.76,
-   "M"
-  ],
-  [
-   66.76,
-   66.81,
+   55.46,
+   55.6,
    "F"
   ],
   [
-   66.81,
-   66.92,
+   55.6,
+   55.74,
+   "T"
+  ],
+  [
+   55.74,
+   55.81,
+   "F"
+  ],
+  [
+   55.81,
+   56.23,
+   "T"
+  ],
+  [
+   56.23,
+   56.35,
+   "M"
+  ],
+  [
+   56.35,
+   56.4,
+   "E"
+  ],
+  [
+   56.4,
+   56.44,
+   "O"
+  ],
+  [
+   56.44,
+   56.58,
    "U"
   ],
   [
-   66.92,
-   67.12,
-   "M"
-  ],
-  [
-   67.12,
-   67.2,
+   56.58,
+   56.65,
    "T"
   ],
   [
-   67.2,
-   67.57,
+   56.65,
+   56.79,
+   "U"
+  ],
+  [
+   56.79,
+   56.87,
    "M"
   ],
   [
-   67.57,
-   67.65,
+   56.87,
+   56.93,
+   "E"
+  ],
+  [
+   56.93,
+   56.98,
    "T"
   ],
   [
-   67.65,
-   68.1,
+   56.98,
+   57.12,
+   "E"
+  ],
+  [
+   57.12,
+   57.19,
+   "T"
+  ],
+  [
+   57.19,
+   57.26,
+   "E"
+  ],
+  [
+   57.26,
+   57.34,
+   "M"
+  ],
+  [
+   57.34,
+   57.49,
+   "A"
+  ],
+  [
+   57.49,
+   57.53,
+   "E"
+  ],
+  [
+   57.53,
+   57.72,
+   "T"
+  ],
+  [
+   57.72,
+   57.8,
+   "M"
+  ],
+  [
+   57.8,
+   58.02,
+   "U"
+  ],
+  [
+   58.02,
+   58.16,
+   "E"
+  ],
+  [
+   58.16,
+   58.3,
+   "U"
+  ],
+  [
+   58.3,
+   58.4,
+   "M"
+  ],
+  [
+   58.4,
+   58.48,
+   "T"
+  ],
+  [
+   58.48,
+   58.59,
+   "M"
+  ],
+  [
+   58.59,
+   58.66,
+   "T"
+  ],
+  [
+   58.66,
+   58.8,
+   "O"
+  ],
+  [
+   58.8,
+   58.88,
+   "M"
+  ],
+  [
+   58.88,
+   59.22,
+   "T"
+  ],
+  [
+   59.22,
+   59.36,
+   "E"
+  ],
+  [
+   59.36,
+   59.5,
+   "T"
+  ],
+  [
+   59.5,
+   59.64,
+   "U"
+  ],
+  [
+   59.64,
+   59.92,
+   "T"
+  ],
+  [
+   59.92,
+   59.99,
+   "F"
+  ],
+  [
+   59.99,
+   60.2,
+   "O"
+  ],
+  [
+   60.2,
+   60.28,
+   "M"
+  ],
+  [
+   60.28,
+   60.35,
+   "U"
+  ],
+  [
+   60.35,
+   60.49,
+   "T"
+  ],
+  [
+   60.49,
+   60.77,
+   "U"
+  ],
+  [
+   60.77,
+   61.05,
+   "T"
+  ],
+  [
+   61.05,
+   61.19,
+   "O"
+  ],
+  [
+   61.19,
+   61.26,
+   "T"
+  ],
+  [
+   61.26,
+   61.34,
+   "M"
+  ],
+  [
+   61.34,
+   61.41,
+   "E"
+  ],
+  [
+   61.41,
+   61.54,
+   "T"
+  ],
+  [
+   61.54,
+   61.61,
+   "E"
+  ],
+  [
+   61.61,
+   61.75,
+   "T"
+  ],
+  [
+   61.75,
+   61.83,
+   "M"
+  ],
+  [
+   61.83,
+   61.97,
+   "T"
+  ],
+  [
+   61.97,
+   62.11,
+   "E"
+  ],
+  [
+   62.11,
+   62.39,
+   "T"
+  ],
+  [
+   62.39,
+   62.46,
+   "E"
+  ],
+  [
+   62.46,
+   62.6,
+   "O"
+  ],
+  [
+   62.6,
+   62.67,
+   "T"
+  ],
+  [
+   62.67,
+   63.16,
+   "O"
+  ],
+  [
+   63.16,
+   63.42,
+   "E"
+  ],
+  [
+   63.42,
+   63.56,
+   "T"
+  ],
+  [
+   63.56,
+   63.7,
+   "E"
+  ],
+  [
+   63.7,
+   63.84,
+   "T"
+  ],
+  [
+   63.84,
+   63.98,
+   "E"
+  ],
+  [
+   63.98,
+   64.12,
+   "A"
+  ],
+  [
+   64.12,
+   64.19,
+   "T"
+  ],
+  [
+   64.19,
+   64.39,
+   "M"
+  ],
+  [
+   64.39,
+   66.1,
    null
   ]
  ],
@@ -4832,31 +4873,24 @@
    "revoir": false
   },
   {
-   "poste": "ingé son",
-   "controle": "sous-titres écrits par le créateur relus",
-   "ok": true,
-   "detail": "76 % des lettres entendues écrites à l'écran, 1 doute(s), 0 mot(s) corrigé(s)",
-   "revoir": false
-  },
-  {
    "poste": "casting voix",
    "controle": "témoin image (qui parle dans l'original)",
    "ok": true,
-   "detail": "49/49 phrases lisibles (Gemini (vidéo entière), visages, mouvements)",
+   "detail": "41/41 phrases lisibles (Gemini (vidéo entière), visages, mouvements)",
    "revoir": false
   },
   {
    "poste": "casting voix",
-   "controle": "le son et l'image sont d'accord",
+   "controle": "fil du dialogue repris (son + texte + image)",
    "ok": true,
-   "detail": "10 % de désaccord",
+   "detail": "voix proches (0.73)",
    "revoir": false
   },
   {
    "poste": "casting voix",
    "controle": "parole répartie entre les personnages",
    "ok": true,
-   "detail": "2 voix, la plus bavarde dit 58 %",
+   "detail": "2 voix, la plus bavarde dit 63 %",
    "revoir": false
   },
   {
@@ -4920,138 +4954,137 @@
   0
  ],
  "_voix_hz": {
-  "envoyee": 237,
-  "invite": 146
- },
- "_voix_genre": {
-  "envoyee": "f",
-  "invite": "h"
+  "envoyee": 216,
+  "presentateur": 160
  },
  "_voix_timbre": {
-  "envoyee": 1028,
-  "invite": 1001
+  "envoyee": 1018,
+  "presentateur": 1005
  },
  "_voix_mesuree": [
   "envoyee",
-  "invite"
+  "presentateur"
  ],
  "_voix_ina": {
-  "envoyee": "f",
-  "invite": "h"
+  "envoyee": "h",
+  "presentateur": "h"
  },
  "_voix_vtl": {
-  "envoyee": 17.33,
-  "invite": 17.36
+  "envoyee": 17.34,
+  "presentateur": 17.46
  },
  "_voix_vtl_genre": {
   "envoyee": "h",
-  "invite": "h"
+  "presentateur": "h"
  },
  "_voix_timbre_genre": {
   "envoyee": "h",
-  "invite": "h"
+  "presentateur": "h"
+ },
+ "_voix_genre": {
+  "presentateur": "h"
  },
  "_casting_final": {
   "envoyee": {
    "fiche": {
     "genre": "f",
-    "age": 22,
-    "corpulence": 0.3,
-    "taille": 0.9215,
-    "peau": [
-     130,
-     86,
-     58
-    ],
-    "visage": "rond",
-    "iris": [
-     60,
-     110,
-     150
-    ],
-    "yeux": 1.0298281070588389,
-    "nez": "rond",
-    "levres": 1.1457544607556134,
-    "sourcils": 0.9156239827796515,
-    "cheveux": "carre",
-    "c_cheveux": [
-     170,
-     70,
-     40
-    ],
-    "barbe": "",
-    "lunettes": "",
-    "maquillage": true
-   },
-   "costume": {
-    "haut": "veste_jean",
-    "c_haut": [
-     90,
-     130,
-     180
-    ],
-    "motif": "uni",
-    "c_motif": [
-     64,
-     93,
-     129
-    ],
-    "bas": "jean",
-    "c_bas": [
-     90,
-     90,
-     100
-    ],
-    "chaussures": "baskets",
-    "c_chaussures": [
-     70,
-     120,
-     190
-    ],
-    "details": [
-     "boucles_oreilles",
-     "collier"
-    ],
-    "c_dessous": [
-     245,
-     245,
-     245
-    ]
-   }
-  },
-  "invite": {
-   "fiche": {
-    "genre": "h",
-    "age": 22,
+    "age": 42,
     "corpulence": 0.4,
-    "taille": 1.04,
+    "taille": 0.97,
     "peau": [
-     246,
-     205,
-     172
+     234,
+     186,
+     146
     ],
-    "visage": "rond",
+    "visage": "carre",
     "iris": [
-     80,
-     50,
-     30
+     110,
+     75,
+     45
     ],
-    "yeux": 1.0305627426772899,
+    "yeux": 1.032189849524325,
     "nez": "droit",
-    "levres": 1.212957197701658,
-    "sourcils": 1.162634061300418,
-    "cheveux": "court",
+    "levres": 1.2448326793851354,
+    "sourcils": 0.879010095713211,
+    "cheveux": "chignon",
     "c_cheveux": [
      70,
      45,
      32
     ],
-    "barbe": "trois_jours",
-    "lunettes": "rectangle",
+    "barbe": "",
+    "lunettes": "",
     "maquillage": false
    },
    "costume": {
-    "haut": "capuche",
+    "haut": "chemise",
+    "c_haut": [
+     80,
+     160,
+     100
+    ],
+    "motif": "uni",
+    "bas": "jupe",
+    "c_bas": [
+     70,
+     100,
+     150
+    ],
+    "chaussures": "ballerines",
+    "c_chaussures": [
+     240,
+     240,
+     240
+    ],
+    "details": [
+     "rouge_levres"
+    ],
+    "c_motif": [
+     57,
+     115,
+     72
+    ],
+    "cheveux": "chignon",
+    "c_cheveux": [
+     70,
+     45,
+     32
+    ]
+   }
+  },
+  "presentateur": {
+   "fiche": {
+    "genre": "h",
+    "age": 28,
+    "corpulence": 0.3,
+    "taille": 1.04,
+    "peau": [
+     255,
+     226,
+     200
+    ],
+    "visage": "long",
+    "iris": [
+     80,
+     50,
+     30
+    ],
+    "yeux": 1.0112689882678165,
+    "nez": "droit",
+    "levres": 0.9147321492717138,
+    "sourcils": 1.4865256391578325,
+    "cheveux": "herisse",
+    "c_cheveux": [
+     240,
+     130,
+     60
+    ],
+    "barbe": "",
+    "lunettes": "",
+    "maquillage": false
+   },
+   "costume": {
+    "haut": "chemise",
     "c_haut": [
      150,
      150,
@@ -5064,54 +5097,49 @@
      100,
      150
     ],
-    "chaussures": "baskets",
+    "chaussures": "ville",
     "c_chaussures": [
      240,
      240,
      240
     ],
-    "details": [],
+    "details": [
+     "cravate"
+    ],
     "c_motif": [
      108,
      108,
      113
     ],
-    "cheveux": "court",
+    "cheveux": "herisse",
     "c_cheveux": [
-     70,
-     45,
-     32
+     240,
+     130,
+     60
     ]
    }
   }
  },
- "_type_couverture": "chute",
+ "_type_couverture": "reaction",
  "realisation": {
-  "moment": "soir",
+  "moment": "jour",
   "lieux": [
-   "salon"
+   "bureau"
   ],
   "gags": [
-   "Cocktail de mégots maison 100% toxique",
-   "Tuto : comment ruiner un date en 3 secondes"
+   "Objectif du mois : survivre",
+   "Le droit à la déconnexion n'existe pas ici"
   ],
   "ambiances": [
    "neon",
-   "pluie",
-   "poussiere"
+   "pluie"
   ],
   "source": "auteur+image",
   "tenues": {
-   "envoyee": "veste_jean",
-   "invite": "capuche"
+   "envoyee": "chemise",
+   "presentateur": "chemise"
   },
   "plans": [
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
    "large/fixe",
    "large/fixe",
    "large/fixe",
@@ -5148,7 +5176,7 @@
   ]
  },
  "_recette": {
-  "lieu": "salon",
+  "lieu": "bureau",
   "animal": false,
   "persos": 2,
   "partie": false
