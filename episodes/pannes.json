@@ -20,36 +20,36 @@
   }
  },
  "IN N:N:N N port.cc:N] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off erro": {
-  "n": 6,
+  "n": 7,
   "premiere": "2026-11-15",
   "derniere": "2026-11-16",
   "exemple": "I0000 00:00:1794776552.486665    4253 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environ",
   "etape": "ingé son",
   "jours": {
    "2026-11-15": 2,
-   "2026-11-16": 4
+   "2026-11-16": 5
   }
  },
  "réseau : erreur N passagère, nouvel essai dans N s": {
-  "n": 7,
+  "n": 8,
   "premiere": "2026-11-15",
   "derniere": "2026-11-16",
   "exemple": "réseau : erreur 503 passagère, nouvel essai dans 2 s",
   "etape": "ingé son",
   "jours": {
    "2026-11-15": 2,
-   "2026-11-16": 5
+   "2026-11-16": 6
   }
  },
  "[transformers] You are using a model of type `samN_video` to instantiate a model of type `samN`. This may be expected if you are loading a c": {
-  "n": 9,
+  "n": 10,
   "premiere": "2026-11-15",
   "derniere": "2026-11-16",
   "exemple": "[transformers] You are using a model of type `sam2_video` to instantiate a model of type `sam2`. This may be expected if you are loading a checkpoint that shares a subset of the architecture (e.g., loading a `sam2_video` checkpoint into `Sa",
   "etape": "ingé son",
   "jours": {
    "2026-11-15": 2,
-   "2026-11-16": 7
+   "2026-11-16": 8
   }
  },
  "liste de contrôle par l'IA impossible (réponse inexploitable : «…»)": {
@@ -103,13 +103,13 @@
   }
  },
  "lieux séparés proposés par l«…»ils se parlent à distance": {
-  "n": 3,
+  "n": 4,
   "premiere": "2026-11-16",
   "derniere": "2026-11-16",
   "exemple": "lieux séparés proposés par l'IA refusés : rien dans le son ne dit qu'ils se parlent à distance",
   "etape": "monteur",
   "jours": {
-   "2026-11-16": 3
+   "2026-11-16": 4
   }
  },
  "scène reconstituée : Une manager appelle son employé en dehors de ses horaires de travail pour un dossier urgent. L'employé, tranquillement ": {
@@ -153,31 +153,61 @@
   }
  },
  "isolation des voix impossible (ElevenLabs N : b'{«…»:{«…»:«…»,«…»:«…»,«…»:\"This request exceeds your quota of N. You have N credits) : son c": {
-  "n": 2,
+  "n": 3,
   "premiere": "2026-11-16",
   "derniere": "2026-11-16",
   "exemple": "isolation des voix impossible (ElevenLabs 401 : b'{\"detail\":{\"type\":\"invalid_request\",\"code\":\"quota_exceeded\",\"message\":\"This request exceeds your quota of 10000. You have 9 credits) : son complet utilisé",
   "etape": "monteur",
   "jours": {
-   "2026-11-16": 2
+   "2026-11-16": 3
   }
  },
  "transcription ElevenLabs impossible (ElevenLabs N : b'{«…»:{«…»:«…»,«…»:«…»,«…»:\"This request exceeds your quota of N. You have N credits) :": {
-  "n": 2,
+  "n": 3,
   "premiere": "2026-11-16",
   "derniere": "2026-11-16",
   "exemple": "transcription ElevenLabs impossible (ElevenLabs 401 : b'{\"detail\":{\"type\":\"invalid_request\",\"code\":\"quota_exceeded\",\"message\":\"This request exceeds your quota of 10000. You have 9 credits) : Whisper",
   "etape": "monteur",
   "jours": {
-   "2026-11-16": 2
+   "2026-11-16": 3
   }
  },
  "* fix torchcodec installation. Error message was": {
-  "n": 1,
+  "n": 2,
   "premiere": "2026-11-16",
   "derniere": "2026-11-16",
   "exemple": "* fix torchcodec installation. Error message was:",
   "etape": "ingé son",
+  "jours": {
+   "2026-11-16": 2
+  }
+ },
+ "scène reconstituée : Un homme refuse l«…»un ami à aller manger dehors sous prétexte qu«…»avis quand son ami lui propose de payer.": {
+  "n": 1,
+  "premiere": "2026-11-16",
+  "derniere": "2026-11-16",
+  "exemple": "scène reconstituée : Un homme refuse l'invitation d'un ami à aller manger dehors sous prétexte qu'il fait attention à sa ligne, mais change immédiatement d'avis quand son ami lui propose de payer.",
+  "etape": "casting voix",
+  "jours": {
+   "2026-11-16": 1
+  }
+ },
+ "Manque par rapport à la vidéo d«…»original est seul sur son canapé avec son téléphone portable à l«…»ici les deux personnages sont dans la m": {
+  "n": 1,
+  "premiere": "2026-11-16",
+  "derniere": "2026-11-16",
+  "exemple": "Manque par rapport à la vidéo d'origine : Le personnage dans l'original est seul sur son canapé avec son téléphone portable à l'oreille, alors qu'ici les deux personnages sont dans la même pièce. ; Le cadre au mur et la plante verte de l'or",
+  "etape": "monteur",
+  "jours": {
+   "2026-11-16": 1
+  }
+ },
+ "Jury qualité (ia) : N/N — Humoriste N/N : | Réalisateur N/N : N s L«…»interlocuteur manque d«…»ils sont au téléphone (erreur par rapport à l": {
+  "n": 1,
+  "premiere": "2026-11-16",
+  "derniere": "2026-11-16",
+  "exemple": "Jury qualité (ia) : 8.1/10 — Humoriste 8.6/10 :  | Réalisateur 8.8/10 : 25.2 s L'écoute de l'interlocuteur manque d'un léger hochement de tête pour plus de vie. | Directeur artistique 6.0/10 : 0.4 s Les deux personnages sont dans le même sa",
+  "etape": "monteur",
   "jours": {
    "2026-11-16": 1
   }
