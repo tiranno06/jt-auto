@@ -6592,71 +6592,74 @@
   "cadence": "normal"
  },
  {
-  "moment": "jour",
+  "moment": "soir",
   "lieux": [
-   "jardin"
+   "voiture"
   ],
   "source": "auteur+image",
-  "duree": 67.8,
+  "duree": 117.8,
   "plans": {
-   "large": 42
+   "large": 48
   },
   "mouvements": {
-   "fixe": 42
+   "fixe": 48
   },
   "costumes": {
-   "presentateur": "tshirt",
-   "invite": "tshirt",
-   "envoyee": "chemise"
+   "envoyee": "debardeur",
+   "presentateur": "costume"
   },
   "figurants": 0,
   "ambiances": [
-   "neige",
-   "neon"
+   "neon",
+   "pluie",
+   "poussiere"
   ],
-  "controle": "Humoriste 6.6/10 : 34.8 s Réaction visuelle trop neutre lors de l'attaque sur l'argent. | Réalisateur 6.3/10 : 13.5 s Absence d'animation gestuelle pour appuyer les échanges tendus. | Directeur artist",
-  "fichier": "2026-11-15_22h22_emission.mp4",
+  "controle": "Humoriste 6.6/10 : 23.6 s Le personnage masculin n'exprime pas assez la panique totale face à la situation. | Réalisateur 6.3/10 : 5.2 s Le bandeau contextuel 'POV' disparaît brutalement à partir de l",
+  "fichier": "2026-11-15_22h43_emission.mp4",
   "cine": {
    "focus": false,
-   "vertige": false,
+   "vertige": true,
    "tiers": false,
    "etalonnage": true,
    "profondeur": false,
-   "grain": false,
+   "grain": true,
    "reflets": false,
    "son": true
   },
   "cadence": "rapide"
  },
  {
-  "moment": "jour",
+  "moment": "soir",
   "lieux": [
-   "voiture"
+   "rue",
+   "salon"
   ],
   "source": "auteur+image",
-  "duree": 92.0,
+  "duree": 66.5,
   "plans": {
-   "large": 42
+   "large": 27
   },
   "mouvements": {
-   "fixe": 42
+   "fixe": 27
   },
   "costumes": {
-   "presentateur": "tshirt",
-   "invite": "debardeur"
+   "presentateur": "chemise",
+   "invite": "tshirt"
   },
   "figurants": 0,
-  "ambiances": [],
-  "controle": "Humoriste 7.0/10 : 6 s La colère arrive un peu trop tôt par rapport au ton de l'original.; 51 s Manque un petit effet comique sur le nom Citroën. | Réalisateur 8.8/10 :  | Directeur artistique 7.8/10 ",
-  "fichier": "2026-11-15_23h22_emission.mp4",
+  "ambiances": [
+   "poussiere"
+  ],
+  "controle": "Humoriste 8.6/10 :  | Réalisateur 9.6/10 :  | Directeur artistique 6.0/10 : 1 s Le décor de rue avec les masques rouges contraste trop avec l'ambiance intimiste d'un appel pro tardif (voir original en",
+  "fichier": "2026-11-16_00h19_emission.mp4",
   "cine": {
    "focus": false,
    "vertige": true,
    "tiers": true,
-   "etalonnage": false,
-   "profondeur": true,
+   "etalonnage": true,
+   "profondeur": false,
    "grain": true,
-   "reflets": false,
+   "reflets": true,
    "son": true
   },
   "cadence": "normal"
