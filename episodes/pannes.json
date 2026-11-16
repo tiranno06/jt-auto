@@ -31,25 +31,25 @@
   }
  },
  "réseau : erreur N passagère, nouvel essai dans N s": {
-  "n": 5,
+  "n": 6,
   "premiere": "2026-11-15",
   "derniere": "2026-11-16",
   "exemple": "réseau : erreur 503 passagère, nouvel essai dans 2 s",
   "etape": "ingé son",
   "jours": {
    "2026-11-15": 2,
-   "2026-11-16": 3
+   "2026-11-16": 4
   }
  },
  "[transformers] You are using a model of type `samN_video` to instantiate a model of type `samN`. This may be expected if you are loading a c": {
-  "n": 7,
+  "n": 8,
   "premiere": "2026-11-15",
   "derniere": "2026-11-16",
   "exemple": "[transformers] You are using a model of type `sam2_video` to instantiate a model of type `sam2`. This may be expected if you are loading a checkpoint that shares a subset of the architecture (e.g., loading a `sam2_video` checkpoint into `Sa",
   "etape": "ingé son",
   "jours": {
    "2026-11-15": 2,
-   "2026-11-16": 5
+   "2026-11-16": 6
   }
  },
  "liste de contrôle par l'IA impossible (réponse inexploitable : «…»)": {
@@ -103,13 +103,13 @@
   }
  },
  "lieux séparés proposés par l«…»ils se parlent à distance": {
-  "n": 2,
+  "n": 3,
   "premiere": "2026-11-16",
   "derniere": "2026-11-16",
   "exemple": "lieux séparés proposés par l'IA refusés : rien dans le son ne dit qu'ils se parlent à distance",
   "etape": "monteur",
   "jours": {
-   "2026-11-16": 2
+   "2026-11-16": 3
   }
  },
  "scène reconstituée : Une manager appelle son employé en dehors de ses horaires de travail pour un dossier urgent. L'employé, tranquillement ": {
@@ -133,13 +133,43 @@
   }
  },
  "isolation des voix impossible (ElevenLabs N : b'{«…»:{«…»:«…»,«…»:«…»,«…»:\"This request exceeds your quota of N. You have N credit) : son co": {
-  "n": 3,
+  "n": 4,
   "premiere": "2026-11-16",
   "derniere": "2026-11-16",
   "exemple": "isolation des voix impossible (ElevenLabs 401 : b'{\"detail\":{\"type\":\"invalid_request\",\"code\":\"quota_exceeded\",\"message\":\"This request exceeds your quota of 10000. You have 92 credit) : son complet utilisé",
   "etape": "",
   "jours": {
-   "2026-11-16": 3
+   "2026-11-16": 4
+  }
+ },
+ "scène reconstituée : Un citoyen se rend à la mairie pour refuser de rendre son ancien passeport malgré son expiration, avant d'envisager de ": {
+  "n": 1,
+  "premiere": "2026-11-16",
+  "derniere": "2026-11-16",
+  "exemple": "scène reconstituée : Un citoyen se rend à la mairie pour refuser de rendre son ancien passeport malgré son expiration, avant d'envisager de mentir dans une autre mairie.",
+  "etape": "casting voix",
+  "jours": {
+   "2026-11-16": 1
+  }
+ },
+ "isolation des voix impossible (ElevenLabs N : b'{«…»:{«…»:«…»,«…»:«…»,«…»:\"This request exceeds your quota of N. You have N credits) : son c": {
+  "n": 1,
+  "premiere": "2026-11-16",
+  "derniere": "2026-11-16",
+  "exemple": "isolation des voix impossible (ElevenLabs 401 : b'{\"detail\":{\"type\":\"invalid_request\",\"code\":\"quota_exceeded\",\"message\":\"This request exceeds your quota of 10000. You have 9 credits) : son complet utilisé",
+  "etape": "monteur",
+  "jours": {
+   "2026-11-16": 1
+  }
+ },
+ "transcription ElevenLabs impossible (ElevenLabs N : b'{«…»:{«…»:«…»,«…»:«…»,«…»:\"This request exceeds your quota of N. You have N credits) :": {
+  "n": 1,
+  "premiere": "2026-11-16",
+  "derniere": "2026-11-16",
+  "exemple": "transcription ElevenLabs impossible (ElevenLabs 401 : b'{\"detail\":{\"type\":\"invalid_request\",\"code\":\"quota_exceeded\",\"message\":\"This request exceeds your quota of 10000. You have 9 credits) : Whisper",
+  "etape": "monteur",
+  "jours": {
+   "2026-11-16": 1
   }
  }
 }
