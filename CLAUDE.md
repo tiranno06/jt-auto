@@ -119,6 +119,15 @@
   Onglet TikTok : bouton « 🎲 Plusieurs vidéos à la chaîne » + nombre (1 à 10) → emission.yml chaine=« 1/n » ; chaque vidéo finie
   (même ratée) lance la suivante (« 2/n »…, dernière étape d'emission.yml, pas de doublon si le garde relance) ; la barre affiche
   « vidéo 2/n : … ». Le robot publie son avancement toutes les 8 s et la file regarde de moins en moins souvent (quota de l'API GitHub).
+- **Plusieurs vidéos fabriquées en même temps (demande de l'auteur du 15 novembre 2026)** : réglage « ⚡ Vidéos fabriquées en même temps »
+  (onglet TikTok, « Lancer des vidéos » ; variable EN_MEME_TEMPS, 2 par défaut, 1 à 8 ; 1 = l'ancien fonctionnement, une après l'autre
+  avec la préparation de la suivante pendant le dessin). `file_attente.en_meme_temps` / `bloquants` : une fabrication n'attend que s'il
+  y a déjà N fabrications lancées avant elle et pas finies. Chaîne « k/n » : avec N ≥ 2, la vidéo k lance k+1 dès que son son est choisi
+  (`principal.lancer_suivante`, son passé en « eviter » : jamais deux fois le même), k+1 attend une place libre ; avec N = 1, lancement
+  au moment de dessiner (`tour_de_dessiner`). Machines d'aide au dessin par vidéo selon N (`dessin_partage.nb_aides` : 5 / 3 / 2 / 1 /
+  aucune au-delà de 4 ; GitHub : 20 machines à la fois pour le compte ; dépôt public = minutes gratuites). Pré-écoute : un son prêt n'est
+  pris que par une seule fabrication (`pre_ecoute.reserver`). Limites : quotas à la minute des IA gratuites plus vite atteints (repli
+  sur l'IA suivante), budget Modal inchangé au total.
 - **Vitesse de fabrication** (octobre 2026) : dessin accéléré sans changer un pixel (toile des personnages remise à zéro seulement là où
   on a dessiné, comparaisons de couleurs par OpenCV, dégradés et barbe sans grille, grain de barbe calculé une fois) ; 2e version
   du jury = **redessin partiel** (`cartoon.images_a_refaire` : empreinte de chaque plan et réplique ; seules les images autour de ce
@@ -515,6 +524,25 @@
   confiance, jury et points à vérifier (`principal.resume_alerte`, sortie « resume » d'emission.yml) ; temps par étape faussés (contrôle
   de la vidéo finie et corrections du compte rendu comptés dans « jury » : étapes à part ; pas d'alerte « plus lent » sur une étape
   d'habitude < 1 min ni sur l'attente dans la file : `progression.lents`).
+- **Liste du 15 novembre 2026 (choix de l'auteur 1, 4, 8, 14, 17, 18)** : **sous-titres karaoké avec un VRAI contrôle des paroles** (1,
+  `jt.karaoke`, KARAOKE=0) : le mot dit passe en jaune à l'instant où on l'entend (instants des mots calés sur la voix) ; un mot affiché
+  n'a un instant que s'il est retrouvé dans le son (même mot, ou corrigé à la même place avec le même début) ; moins de 85 % retrouvés
+  ou ordre impossible -> sous-titres normaux pour cette réplique ; après la vidéo, le son de la vidéo FINIE est réécouté et l'écart
+  mot jaune / mot entendu mesuré (`verif_finale.controle_karaoke` : > 0,3 s en médiane = point grave « karaoké décalé » ; le compte
+  rendu retire alors le karaoké : sk["_sans_karaoke"]) ; **longs silences raccourcis** (4, `doublage.silences_a_couper` /
+  `couper_silences` / `decaler`, SILENCES_COURTS=0) : blanc > 1 s sans voix (Silero) ni rire / souffle (voix isolée) ramené à 0,45 s,
+  coupé au même instant dans la vidéo d'origine, la piste, le son mono et la voix ; sk["doublage"]["silences"] rejoué par « Corriger qui
+  parle » ; **profils disparus** (8, `profils_tiktok.surveiller`, stats.yml une fois par jour, PROFILS_VEILLE=0) : introuvable deux jours
+  de suite ou rien publié depuis 30 jours -> episodes/profils_etat.json, alerte téléphone, bandeau + « Retirer » dans « Mes profils » ;
+  **courbe des vues des 48 premières heures** (14, `stats.noter_courbes` -> episodes/courbes.json, un point par relevé pendant 72 h,
+  gardé 45 jours ; fiche d'une vidéo publiée : sa courbe en jaune, la médiane des autres en pointillés, « ×n la moyenne ») ;
+  **meilleure heure selon le jour** (17, `stats.meilleure_heure_publication(jour=…)` : 6 vidéos au moins ce jour-là, sinon l'heure de
+  la semaine ; `publication_auto.creneaux(…, jour)`, CONF["heures_jours"] et calendrier du site) ; **sujets qui marchent** (18,
+  `recette.mots_gagnants` / `bonus_sujet` : mots et hashtags du titre des sons repris, 3 vidéos au moins, ±15 au potentiel d'un son ;
+  créateurs et durée étaient déjà pris en compte). Réglages (Style) : cases « Sous-titres karaoké » et « Raccourcir les longs silences ».
+  **Heure des statistiques affichée** (demande de l'auteur du 15 novembre) : sous la case « Heure choisie par les statistiques »
+  (`#heureStats`, `site.heuresStats` = même calcul que `stats.meilleure_heure_publication`, refait dans l'appli à chaque relevé des vues :
+  l'affichage et le calendrier suivent tout seuls quand l'heure change) : heure d'aujourd'hui et de demain, et de chaque jour.
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.

@@ -235,6 +235,10 @@ def choisir(historique, journal=print, graine=None, essais=4):
                 b_ = __import__("recette").bonus_son(v)                     # idée 41 : la durée qui marche chez nous
                 if b_: v["potentiel"] += b_
             except Exception: pass
+            try:
+                b_, mots_ = __import__("recette").bonus_sujet(v)           # idée 18 : les sujets qui marchent chez nous
+                if b_: v["potentiel"] += b_; journal(f"  sujet {'qui marche' if b_ > 0 else 'qui marche moins'} chez nous ({', '.join(mots_[:4])}, {b_:+d}) : {v['url']}")
+            except Exception: pass
             b_ = suites.bonus(v, p, parties)
             if b_: v["potentiel"] += b_; journal(f"  suite d'une vidéo déjà faite (partie {suites.num_partie(v.get('titre'))}) : {v['url']}")
         vs.sort(key=lambda v: -(v["potentiel"] + rng.uniform(0, 25)))
@@ -242,3 +246,44 @@ def choisir(historique, journal=print, graine=None, essais=4):
         out += [v["url"] for v in vs[:max(2, essais // len(profils))]]
         if len(out) >= essais: break
     return out[:essais]
+
+
+ETAT = os.path.join(RACINE, "episodes", "profils_etat.json")
+
+
+def surveiller(journal=print, maintenant=None, lister=None):
+    """Créateurs disparus ou inactifs (choix de l'auteur du 15 novembre 2026, idée 8), une fois par jour (après les statistiques) :
+    pour chaque profil de la liste, introuvable (supprimé, privé, ou bloqué) deux jours de suite = « introuvable » ; dernière
+    vidéo il y a plus de 30 jours = « inactif ». episodes/profils_etat.json (site : « Mes profils TikTok ») ; alerte téléphone pour
+    chaque NOUVEAU profil en difficulté. PROFILS_VEILLE=0 pour couper. Renvoie l'état."""
+    import datetime, time as _t
+    if os.environ.get("PROFILS_VEILLE", "1") == "0": return None
+    maintenant = maintenant or _t.time()
+    try: E = json.load(open(ETAT, encoding="utf-8"))
+    except (OSError, ValueError): E = {}
+    jour = datetime.date.fromtimestamp(maintenant).isoformat()
+    if E.get("date") == jour: return E                                     # déjà fait aujourd'hui
+    anciens = E.get("profils") or {}; nouveaux = {}; alertes = []
+    for p in liste():
+        vs = (lister or videos)(p, journal=lambda m: None)
+        a = dict(anciens.get(p) or {})
+        if not vs:
+            a["echecs"] = int(a.get("echecs") or 0) + 1
+            etat = "introuvable" if a["echecs"] >= 2 else (a.get("etat") or "ok")
+        else:
+            a["echecs"] = 0
+            dates = [float(v["date"]) for v in vs if v.get("date")]
+            jours = int((maintenant - max(dates)) / 86400) if dates else None
+            a["jours"] = jours; etat = "inactif" if jours is not None and jours > 30 else "ok"
+        if etat != "ok" and (anciens.get(p) or {}).get("etat") != etat: alertes.append((p, etat, a.get("jours")))
+        a["etat"] = etat; nouveaux[p] = a
+    E = {"date": jour, "profils": nouveaux}
+    os.makedirs(os.path.dirname(ETAT), exist_ok=True)
+    json.dump(E, open(ETAT, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    for p, etat, j in alertes:
+        m = f"@{p} est introuvable (compte supprimé, privé ou bloqué)" if etat == "introuvable" else f"@{p} n'a rien publié depuis {j} jours"
+        journal("Profil en difficulté : " + m)
+        try: __import__("alerte").alerter("🎵 Profil TikTok à revoir", m + " : retirez-le de « Mes profils » si besoin.")
+        except Exception: pass
+    journal(f"Veille des profils : {sum(1 for a in nouveaux.values() if a['etat'] == 'ok')}/{len(nouveaux)} en forme")
+    return E

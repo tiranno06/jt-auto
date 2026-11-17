@@ -110,28 +110,34 @@ def decaler(sk, pos):
 def lire(p, d):
     return json.load(open(p, encoding="utf-8")) if os.path.exists(p) else d
 
+def lancer_suivante(source):
+    """Chaîne « k/n » : lance la vidéo k+1 (son déjà pris passé en « eviter » : jamais deux fois le même son). Renvoie True si lancée."""
+    import re as _re, subprocess as _sp
+    c = os.environ.get("CHAINE") or ""
+    if c.startswith("suite:") or not os.environ.get("GH_TOKEN") or os.path.exists("sortie/.suivante_lancee"): return False
+    m = _re.fullmatch(r"(\d+)/(\d+)", c)
+    if not m or int(m.group(1)) >= int(m.group(2)): return False
+    ids = [x for x in (os.environ.get("EVITER") or "").split(",") if x]
+    m2 = _re.search(r"/video/(\d+)", str(source or ""))
+    if m2: ids.append(m2.group(1))
+    r = _sp.run(["gh", "workflow", "run", "emission.yml", "--ref", "main", "-f", "filiere=tiktok", "-f", f"chaine={int(m.group(1)) + 1}/{m.group(2)}",
+                 "-f", "eviter=" + ",".join(ids[-20:])], capture_output=True, text=True)
+    if r.returncode == 0:
+        os.makedirs("sortie", exist_ok=True); open("sortie/.suivante_lancee", "w").write(c)
+        print(f"Chaîne : vidéo {int(m.group(1)) + 1}/{m.group(2)} lancée", flush=True); return True
+    print(f"Chaîne : lancement anticipé impossible ({r.stderr[:120]}) : elle partira à la fin", flush=True); return False
+
+
 def tour_de_dessiner(sk):
     """Chaîne de vidéos TikTok (choix de l'auteur) : la vidéo « k/n » a préparé son écoute pendant que la précédente se dessinait ;
     elle attend ici son tour (une seule vidéo dessinée à la fois), puis lance tout de suite la vidéo suivante, qui préparera la sienne
     pendant ce dessin (son déjà pris : passé en « eviter »). PREPA_PARALLELE=0 pour revenir à une vidéo après l'autre."""
-    import file_attente, re as _re, subprocess as _sp
+    import file_attente
     if file_attente.prepa_parallele():
         try: file_attente.attendre(avant_dessin=True)
         except Exception as e: print(f"attente du tour impossible ({str(e)[:100]}) : on dessine", flush=True)
-    c = os.environ.get("CHAINE") or ""
-    if os.environ.get("PREPA_PARALLELE", "1") == "0" or c.startswith("suite:") or not os.environ.get("GH_TOKEN"): return
-    m = _re.fullmatch(r"(\d+)/(\d+)", c)
-    if not m or int(m.group(1)) >= int(m.group(2)): return
-    ids = [x for x in (os.environ.get("EVITER") or "").split(",") if x]
-    s_ = str((sk.get("doublage") or {}).get("source") or "")
-    m2 = _re.search(r"/video/(\d+)", s_)
-    if m2: ids.append(m2.group(1))
-    r = _sp.run(["gh", "workflow", "run", "emission.yml", "--ref", "main", "-f", "filiere=tiktok", "-f", f"chaine={int(m.group(1)) + 1}/{m.group(2)}",
-                 "-f", "eviter=" + ",".join(ids[-12:])], capture_output=True, text=True)
-    if r.returncode == 0:
-        os.makedirs("sortie", exist_ok=True); open("sortie/.suivante_lancee", "w").write(c)
-        print(f"Chaîne : vidéo {int(m.group(1)) + 1}/{m.group(2)} lancée (elle prépare son écoute pendant ce dessin)", flush=True)
-    else: print(f"Chaîne : lancement anticipé impossible ({r.stderr[:120]}) : elle partira à la fin", flush=True)
+    if os.environ.get("PREPA_PARALLELE", "1") == "0": return
+    lancer_suivante((sk.get("doublage") or {}).get("source"))
 
 
 def resume_alerte(h, fiche=None):
@@ -288,6 +294,8 @@ def main():
             if time.time() - t_v > 25 * 60: break                          # pas plus de 25 min de recherche
         if PROFIL_PREP is None and garde_v:                                # que des voix proches : la plus nette (contrôle questions-réponses)
             PROFIL_PREP = garde_v[1:]; print(f"  aucune vidéo aux voix bien différentes : on garde {garde_v[1]} (ressemblance {garde_v[0]:.2f})", flush=True)
+        if PROFIL_PREP is not None and __import__("file_attente").en_meme_temps() > 1:   # plusieurs vidéos à la fois : la suivante part
+            lancer_suivante(PROFIL_PREP[0])                                # dès que notre son est choisi (elle attend une place libre)
         if PROFIL_PREP is None:                                            # jamais de sketch à la place : les deux filières sont séparées
             print("Sons TikTok : aucune vidéo des profils utilisable cette fois (pas de vidéo).", flush=True)
             PR.fini(False, "Aucun son TikTok utilisable cette fois")

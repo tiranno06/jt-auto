@@ -71,12 +71,12 @@ def heure(brut):
     except ValueError: return (18, 0)
 
 
-def creneaux(reglages):
+def creneaux(reglages, jour=None):
     """Heures de publication du jour (heure de Paris) : PUBLI_HEURE (ou l'heure des statistiques) et, si PUBLI_DEUX = 1, la
     deuxième heure PUBLI_HEURE2 (choix de l'auteur, 1er novembre 2026 : deux vidéos par jour). Triées, sans doublon."""
     h, m = heure(reglages.get("PUBLI_HEURE"))
     if str(reglages.get("PUBLI_HEURE_AUTO") or "0").strip() == "1":       # idée 20 : l'heure où nos vidéos font le plus de vues
-        try: h, m = __import__("stats").meilleure_heure_publication(h), 0
+        try: h, m = __import__("stats").meilleure_heure_publication(h, jour), 0   # (idée 17 : l'heure qui marche CE jour de la semaine)
         except Exception: pass
     out = [(h, m)]
     if str(reglages.get("PUBLI_DEUX") or "0").strip() == "1":
@@ -89,7 +89,7 @@ def decision(maintenant, reglages, historique, deja_aujourdhui):
     """(fichier à publier ou None, « quand » pour Buffer (heure de Paris, ISO) ou "" = tout de suite, raison).
     deja_aujourdhui : nombre de publications automatiques déjà demandées aujourd'hui (True = 1). Une vidéo par créneau du jour."""
     if str(reglages.get("PUBLI_AUTO") or "0").strip() != "1": return None, "", "publication automatique coupée"
-    cibles = [maintenant.replace(hour=h, minute=m, second=0, microsecond=0) for h, m in creneaux(reglages)]
+    cibles = [maintenant.replace(hour=h, minute=m, second=0, microsecond=0) for h, m in creneaux(reglages, maintenant.weekday())]
     atteints = [c for c in cibles if maintenant >= c - datetime.timedelta(minutes=AVANCE)]
     if not atteints: return None, "", f"pas encore l'heure ({cibles[0].strftime('%H:%M')})"
     n = int(deja_aujourdhui)

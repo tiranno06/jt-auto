@@ -139,6 +139,8 @@ def appliquer(sk, texte, memoriser=True):
     import qualite
     qui, corr = interpreter(sk, texte)
     faits = []
+    if re.search(r"karaok[ée]", str(texte), re.I) and re.search(r"d[ée]cal|pas cal|faux|retard|avance|enl[eè]ve|sans", str(texte), re.I):
+        sk["_sans_karaoke"] = True; faits.append("karaoké retiré (sous-titres normaux)")   # jamais un mot jaune au mauvais moment
     for k, r_ in qui.items():
         if 0 <= k < len(sk.get("repliques") or []) and sk["repliques"][k].get("p") != r_:
             sk["repliques"][k]["p"] = r_; faits.append(f"réplique {k + 1} -> {r_}")

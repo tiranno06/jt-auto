@@ -426,6 +426,9 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
             ph[-1]["lev"] = levres.chronologie(ph[-1]["groupes"], (mots or [None] * len(reps))[i], t)   # lèvres calées sur chaque son
             r_h = __import__("rhubarb").chronologie(sk.get("_rhubarb"), t, t + dur)   # Rhubarb (idée 8) : la forme que fait vraiment la voix
             if r_h: ph[-1]["lev"] = r_h
+            m_k = (mots or [None] * len(reps))[i]                        # karaoké : mot dit = mot en jaune (contrôlé mot par mot)
+            k_ = __import__("jt").karaoke(r["t"], m_k, t) if m_k and not sk.get("_sans_karaoke") else None
+            if k_ and sum(len(g_[0].split()) for g_ in ph[-1]["groupes"]) == len(k_): ph[-1]["kara"] = k_
             continue
         if i == len(reps) - 1 and not att and i: att = 0.45                # un temps avant la chute finale
         t += att
@@ -1619,7 +1622,12 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
                 poser(fr, a2, (W - a2.shape[1]) / 2, 190)
         g = next((x for x in q["groupes"] if x[1] <= tm < x[2] + (0.2 if x is q["groupes"][-1] else 0)), None)
         if g and q["deb"] <= tm < q["fin"] + 0.2:
-            age = tm - g[1]; cc = pop(carton(g[0]), age / 0.12)
+            act_ = None
+            if q.get("kara"):                                              # karaoké : le mot dit à cet instant passe en jaune
+                gi_ = q["groupes"].index(g); d_ = sum(len(x[0].split()) for x in q["groupes"][:gi_])
+                act_ = __import__("jt").mot_actif(q["kara"], d_, len(g[0].split()), tm)
+                if act_ is None: act_ = -1                                 # avant le 1er mot du groupe : aucun mot en jaune
+            age = tm - g[1]; cc = pop(carton(g[0], act_), age / 0.12)
             if B and 0.12 < age < 0.42:                                    # sous-titre animé : petit rebond à l'apparition
                 k_r = 1 + 0.07 * math.sin(math.pi * (age - 0.12) / 0.3); cc = cv2.resize(cc, (int(cc.shape[1] * k_r), int(cc.shape[0] * k_r)))
             dx_c = 5 * math.sin(tm * 47) if (B and q["emo"] in ("cri", "colere")) else 0          # il tremble quand on crie
@@ -1759,7 +1767,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
     except Exception as e: print(f"contrôle image impossible : {e}", flush=True)
     finally: SONDE["on"] = False
     if defauts_img: print(f"Contrôle image : {len(defauts_img)} défaut(s) — " + ", ".join(f"{d['t']} s {d['type']} ({d['role']})" for d in defauts_img[:8]), flush=True)
-    RENDU.clear(); RENDU.update(defauts_image=defauts_img, ph=[{k: q.get(k) for k in ("i", "p", "deb", "fin", "texte", "emo", "chute", "scene", "plan", "mouvement", "reaction")} for q in ph],
+    RENDU.clear(); RENDU.update(defauts_image=defauts_img, ph=[{k: q.get(k) for k in ("i", "p", "deb", "fin", "texte", "emo", "chute", "scene", "plan", "mouvement", "reaction", "kara")} for q in ph],
                                 plans=[{k: x.get(k) for k in ("t0", "t1", "scene", "cible", "plan", "mouvement", "passage", "i")} for x in DECOUPE],
                                 fiches={r: {k: f.get(k) for k in ("genre", "age", "taille", "barbe", "cheveux")} for r, f in (FICHES or {}).items()},
                                 places={k: list(v) for k, v in places.items()}, total=total, fin_carte=FIN_CARTE, doublage=bool(DOUB), mini=mini, separes=SEPARES,

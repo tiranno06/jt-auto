@@ -69,18 +69,20 @@ def _regrouper(jetons):
     return res
 
 F_CAP = ImageFont.truetype(FB, 100); _cache = {}
-def carton(txt):
-    if txt in _cache: return _cache[txt]
+def carton(txt, actif=None):
+    """Sous-titre : mot le plus long en jaune ; en karaoké (actif = n° du mot dit à cet instant), c'est CE mot qui est en jaune."""
+    if (txt, actif) in _cache: return _cache[(txt, actif)]
     mots = txt.upper().split()
     cle = max(range(len(mots)), key=lambda i: len(re.sub(r"\W", "", mots[i])))
     if len(re.sub(r"\W", "", mots[cle])) < 5 and not re.search(r"\d", txt): cle = -1
+    if actif is not None: cle = actif
     tmp = Image.new("RGBA", (2400, 200), (0, 0, 0, 0)); d = ImageDraw.Draw(tmp); x = 20
     for i, m in enumerate(mots):
         d.text((x, 20), m, font=F_CAP, fill=(255, 214, 40) if i == cle else (255, 255, 255), stroke_width=10, stroke_fill=(0, 0, 0))
         x += d.textlength(m + " ", font=F_CAP)
     tmp = tmp.crop(tmp.getbbox()); w = min(1000, int(tmp.width * 0.82))
     tmp = tmp.resize((w, int(tmp.height * min(1, 1000 / (tmp.width * 0.82)))), Image.LANCZOS)
-    _cache[txt] = np.array(tmp).astype(np.float32); return _cache[txt]
+    _cache[(txt, actif)] = np.array(tmp).astype(np.float32); return _cache[(txt, actif)]
 
 def pop(a, k):
     if k >= 1: return a
@@ -92,6 +94,54 @@ def rgba(img): return np.array(img).astype(np.float32)
 # ------------------------------------------------------------------ sous-titres calés sur la voix
 def _syll(m):
     return max(1, len(re.findall(r"[aeiouyàâäéèêëîïôöùûüœæ]+", m.lower())) + 1.5 * len(re.findall(r"\d", m)))
+
+def _nu_mot(m):
+    import unicodedata
+    m = unicodedata.normalize("NFD", str(m).lower().replace("’", "'"))
+    return re.sub(r"[^a-z0-9']", "", "".join(c for c in m if unicodedata.category(c) != "Mn"))
+
+
+KARAOKE_MIN = 0.85                                                         # part des mots affichés retrouvés dans le son
+
+
+def karaoke(texte, mots, t0=0.0):
+    """Sous-titres karaoké (choix de l'auteur du 15 novembre 2026, idée 1, avec un VRAI contrôle des paroles) : instant (début, fin)
+    de chaque mot AFFICHÉ (texte coupé aux espaces, comme les groupes), pris sur les mots minutés de la voix (Whisper + calage
+    wav2vec2), ou None. Un mot affiché n'a un instant que s'il est retrouvé dans le son : même mot (accents et ponctuation à part) ;
+    ou mot corrigé à la même place (« mange » -> « mangent »). Si moins de 85 % des mots affichés sont retrouvés, ou si l'ordre ne
+    colle pas, PAS de karaoké pour cette réplique (sous-titres normaux) : jamais un mot surligné au mauvais moment. KARAOKE=0 coupe."""
+    import difflib
+    if os.environ.get("KARAOKE", "1") == "0" or not mots: return None
+    aff = texte.replace("\u00a0", " ").replace("\u202f", " ").split()
+    if not aff: return None
+    A = [_nu_mot(w) for w in aff]; M = [_nu_mot(w) for w, _, _ in mots]
+    t = [None] * len(aff); sur = 0
+    for op, i1, i2, j1, j2 in difflib.SequenceMatcher(None, A, M, autojunk=False).get_opcodes():
+        if op == "equal" or (op == "replace" and i2 - i1 == j2 - j1):
+            for k in range(i2 - i1):
+                if not A[i1 + k]: continue
+                if op == "replace" and not (A[i1 + k][:3] == M[j1 + k][:3]): continue   # mot corrigé : même début de mot, sinon on ne sait pas
+                w_, a_, b_ = mots[j1 + k]; t[i1 + k] = (t0 + float(a_), t0 + float(b_)); sur += 1
+    lettres = [k for k, x in enumerate(A) if x]
+    if not lettres or sur < KARAOKE_MIN * len(lettres): return None
+    debuts = [x[0] for x in t if x]
+    if any(b < a - 0.02 for a, b in zip(debuts, debuts[1:])): return None   # ordre impossible : on ne s'y fie pas
+    for k in range(len(t)):                                                # ponctuation seule et mots non retrouvés : collés au voisin
+        if t[k] is None:
+            av = next((t[j] for j in range(k - 1, -1, -1) if t[j]), None); ap = next((t[j] for j in range(k + 1, len(t)) if t[j]), None)
+            t[k] = (av[1], (ap or av)[0] if ap else av[1]) if av else ((ap[0], ap[0]) if ap else (t0, t0))
+    return [(round(a, 3), round(max(a, b), 3)) for a, b in t]
+
+
+def mot_actif(kara, debut_groupe, n_mots, tm):
+    """N° (dans le groupe) du mot dit à l'instant tm : le dernier mot du groupe déjà commencé ; None avant le 1er mot."""
+    if not kara: return None
+    k = None
+    for j in range(n_mots):
+        i = debut_groupe + j
+        if i < len(kara) and kara[i][0] <= tm + 0.02: k = j
+    return k
+
 
 LECTURE_MIN = 0.45                                                         # s : un groupe de sous-titres plus court ne se lit pas
 

@@ -4,7 +4,8 @@ Chaque jour (après les statistiques TikTok, stats.py), le robot compare les vue
 d'origine du son, lieu, durée, animal ou objet qui parle, nombre de personnages, heure de publication, type de couverture, style du
 titre, vidéo en plusieurs parties. Un critère n'est retenu qu'avec 3 vidéos au moins. Résultat : episodes/recette.json, affiché sur
 le site (onglet TikTok, « 📈 Ce qui marche »), et utilisé au tirage des sons (`bonus_son` : la durée qui marche le mieux passe
-devant ; le profil l'était déjà par profils_tiktok.poids_profils). RECETTE=0 pour couper le bonus."""
+devant ; le profil l'était déjà par profils_tiktok.poids_profils ; depuis le 15 novembre aussi les SUJETS qui marchent : `bonus_sujet`).
+RECETTE=0 pour couper le bonus."""
 import datetime, json, os, re
 
 RACINE = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
@@ -56,8 +57,46 @@ def analyser(historique, mini=3):
     return {"moyenne": round(moy), "videos": len(vids), "plus": [f(x) for x in plus], "moins": [f(x) for x in moins], "par": par}
 
 
+VIDES = set("""avec dans pour sans plus moins tout tous toute toutes cette cette comme quand alors parce mais elle elles ils nous vous leur
+leurs être avoir fait faire petit petite grand grande trop très bien encore juste aussi vraiment titre partie video vidéo tiktok pourtoi
+fyp foryou foryoupage viral humour drole drôle sketch animation dessin dessinanime avait savait était etait allait voulait
+pouvait faisait disait quelqu""".split())
+
+
+def mots_titre(t):
+    """Sujets d'un titre de son TikTok : hashtags et mots de 5 lettres ou plus (sans les mots vides ni les hashtags génériques)."""
+    t = str(t or "").lower()
+    m = set(re.findall(r"#([\wà-ÿ]{4,30})", t)) | set(re.findall(r"\b([a-zà-ÿ]{5,20})\b", re.sub(r"#[\wà-ÿ]+", " ", t)))
+    return {x for x in m if x not in VIDES and not x.isdigit()}
+
+
+def mots_gagnants(historique, mini=3):
+    """Idée 18 du 15 novembre : les SUJETS qui marchent chez nous (mots et hashtags du titre du son repris, 3 vidéos au moins) :
+    {mot: ×vues par rapport à la moyenne}."""
+    vids = [h for h in historique if h.get("vues") is not None and h.get("titre_source") and not h.get("essai")]
+    if len(vids) < 6: return {}
+    moy = sum(int(h["vues"]) for h in vids) / len(vids) or 1
+    acc = {}
+    for h in vids:
+        for w in mots_titre(h["titre_source"]): acc.setdefault(w, []).append(int(h["vues"]))
+    return {w: round(sum(l) / len(l) / moy, 2) for w, l in acc.items() if len(l) >= mini and len(l) < 0.8 * len(vids)}
+
+
+def bonus_sujet(v, recette=None):
+    """Points de potentiel (±15) pour un son dont le titre parle d'un sujet qui marche (ou qui ne marche pas) chez nous."""
+    if os.environ.get("RECETTE", "1") == "0": return 0, []
+    if recette is None:
+        try: recette = json.load(open(FICHIER, encoding="utf-8"))
+        except (OSError, ValueError): return 0, []
+    M = recette.get("mots") or {}
+    vus = [w for w in mots_titre(v.get("titre")) if w in M]
+    if not vus: return 0, []
+    return int(max(-15, min(15, round(sum((M[w] - 1) * 12 for w in vus))))), vus
+
+
 def enregistrer(historique):
     r = analyser(historique); r["maj"] = datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="minutes")
+    r["mots"] = mots_gagnants(historique)
     os.makedirs(os.path.dirname(FICHIER), exist_ok=True)
     json.dump(r, open(FICHIER, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     return r

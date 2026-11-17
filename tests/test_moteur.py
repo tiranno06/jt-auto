@@ -1168,13 +1168,16 @@ class TestVoixEtScenesTiktok(unittest.TestCase):
         ici = os.path.dirname(__file__); sys.path.insert(0, os.path.join(ici, "..", "moteur"))
         import dessin_partage as DP, file_attente as FA, profils_tiktok as PT, verif_finale as V, studio, numpy as np
         import humain as HU, marionnette as M, perso_croquis as P
-        anc = os.environ.pop("AIDES", None)                                # 12 : machines d'aide selon la durée
+        anc = os.environ.pop("AIDES", None); anc_n = os.environ.get("EN_MEME_TEMPS")   # 12 : machines d'aide selon la durée
+        os.environ["EN_MEME_TEMPS"] = "1"                                  # (une vidéo à la fois : jusqu'à 5 aides)
         try: self.assertEqual([DP.nb_aides(n) for n in (1300, 3900, 7000, 20000)], [1, 3, 5, 5])
         finally:
             if anc is not None: os.environ["AIDES"] = anc
+            if anc_n is None: os.environ.pop("EN_MEME_TEMPS", None)
+            else: os.environ["EN_MEME_TEMPS"] = anc_n
         env = dict(os.environ)                                             # 9 : chaîne en parallèle
         try:
-            os.environ.update(CHAINE="3/10", PREPA_PARALLELE="1"); self.assertTrue(FA.prepa_parallele())
+            os.environ.update(CHAINE="3/10", PREPA_PARALLELE="1", EN_MEME_TEMPS="1"); self.assertTrue(FA.prepa_parallele())
             os.environ["CHAINE"] = "1/10"; self.assertFalse(FA.prepa_parallele())
             os.environ["CHAINE"] = "suite:x|3/10"; self.assertFalse(FA.prepa_parallele())
             os.environ.update(CHAINE="3/10", PREPA_PARALLELE="0"); self.assertFalse(FA.prepa_parallele())
@@ -2955,3 +2958,104 @@ class TestRegistreDesPannes15Nov(unittest.TestCase):
         self.assertEqual(principal.resume_alerte({"filiere": "tiktok", "confiance": 76, "jury": {"note": 8.6}, "a_verifier": [1, 2]}),
                          "confiance 76/100 · jury 8.6/10 · ⚠️ 2 point(s) à vérifier")
         self.assertEqual(principal.resume_alerte({}, {"note": 88}), "note 88/100")
+
+
+class TestListe15Novembre(unittest.TestCase):
+    """Choix de l'auteur du 15 novembre : 1 (karaoké contrôlé), 4 (silences), 8 (profils), 14 (courbe 48 h), 17 (heure du jour), 18 (sujets)."""
+
+    def test_karaoke_controle(self):
+        import jt
+        mots = [("Ils", 0.0, 0.2), ("mange", 0.25, 0.5), ("des", 0.55, 0.65), ("pommes", 0.7, 1.0)]
+        k = jt.karaoke("Ils mangent des pommes !", mots, 10.0)
+        self.assertEqual(k[1], (10.25, 10.5)); self.assertEqual(len(k), 5)  # « mangent » = « mange » à la même place
+        self.assertIsNone(jt.karaoke("Rien à voir avec le son entendu", mots, 10.0))   # paroles différentes : pas de karaoké
+        self.assertIsNone(jt.karaoke("pommes des mange Ils", mots, 10.0))  # ordre impossible
+        self.assertEqual(jt.mot_actif(k, 0, 5, 10.3), 1); self.assertIsNone(jt.mot_actif(k, 0, 5, 9.0))
+
+    def test_karaoke_reecoute(self):
+        import verif_finale as VF
+        ph = [{"deb": 0.0, "fin": 2.0, "texte": "un deux trois quatre", "kara": [(0.0, 0.3), (0.5, 0.8), (1.0, 1.3), (1.5, 1.8)]}]
+        juste = [{"w": w, "s": s, "e": s + 0.3} for w, s in (("un", 0.02), ("deux", 0.52), ("trois", 1.0), ("quatre", 1.5))]
+        self.assertEqual(VF.controle_karaoke(ph, juste), [])
+        ph2 = [dict(ph[0], deb=d, fin=d + 2, kara=[(a + d, b + d) for a, b in ph[0]["kara"]]) for d in (0, 3, 6)]
+        decale = [{"w": w, "s": s + d + 0.6, "e": s + d + 0.9} for d in (0, 3, 6) for w, s in (("un", 0.0), ("deux", 0.5), ("trois", 1.0), ("quatre", 1.5))]
+        self.assertTrue(any("karaoké décalé" in p["quoi"] and p["grave"] for p in VF.controle_karaoke(ph2, decale)))
+
+    def test_silences(self):
+        import doublage as D
+        mots = [{"w": "a", "s": 0.2, "e": 0.6}, {"w": "b", "s": 3.0, "e": 3.4}, {"w": "c", "s": 3.6, "e": 4.0}]
+        c = D.silences_a_couper(mots)
+        self.assertEqual(len(c), 1); self.assertAlmostEqual(D.decaler(3.0, c), 3.0 - (c[0][1] - c[0][0]), places=3)
+        self.assertEqual(D.silences_a_couper(mots, zones=[(1.0, 2.0)]), [])   # Silero entend quelqu'un dans le blanc : gardé
+
+    def test_profils_disparus(self):
+        import profils_tiktok as P
+        anc_e, anc_l = P.ETAT, os.environ.get("PROFILS_TIKTOK")
+        P.ETAT = os.path.join(tempfile.mkdtemp(), "e.json"); os.environ["PROFILS_TIKTOK"] = "@vivant\n@parti\n@endormi"
+        import time as _t
+        t0 = _t.time()
+        lister = lambda p, journal=None: {"vivant": [{"date": t0 - 86400}], "parti": [], "endormi": [{"date": t0 - 60 * 86400}]}[p]
+        try:
+            E = P.surveiller(journal=lambda m: None, maintenant=t0, lister=lister)
+            self.assertEqual(E["profils"]["parti"]["etat"], "ok")           # un seul échec : peut-être passager
+            self.assertEqual(E["profils"]["endormi"]["etat"], "inactif")
+            E = P.surveiller(journal=lambda m: None, maintenant=t0 + 86400, lister=lister)
+            self.assertEqual(E["profils"]["parti"]["etat"], "introuvable"); self.assertEqual(E["profils"]["vivant"]["etat"], "ok")
+        finally:
+            P.ETAT = anc_e
+            if anc_l is None: os.environ.pop("PROFILS_TIKTOK", None)
+            else: os.environ["PROFILS_TIKTOK"] = anc_l
+
+    def test_courbes_et_heure_du_jour(self):
+        import stats, datetime
+        from zoneinfo import ZoneInfo
+        f = os.path.join(tempfile.mkdtemp(), "c.json"); t0 = 1_800_000_000
+        stats.noter_courbes([{"id": 1, "fichier": "a.mp4", "date": t0, "vues": 100}], t0 + 3600, f)
+        C = stats.noter_courbes([{"id": 1, "fichier": "a.mp4", "date": t0, "vues": 300}], t0 + 3 * 3600, f)
+        self.assertEqual(C["a.mp4"]["p"], [[1.0, 100], [3.0, 300]])
+        def v(jour, h, vues):                                              # une vidéo publiée tel jour de la semaine à telle heure
+            d = datetime.datetime(2026, 11, 2, h, tzinfo=ZoneInfo("Europe/Paris")) + datetime.timedelta(days=jour)
+            return {"date": d.timestamp(), "vues": vues}
+        vids = [v(5, 12, 900), v(5, 12, 800), v(5, 18, 100), v(5, 18, 120), v(5, 12, 700), v(5, 18, 90)] + [v(1, 18, 500), v(1, 18, 600), v(2, 12, 50), v(2, 12, 60)]
+        self.assertEqual(stats.meilleure_heure_publication(18, 5, vids), 12)   # le samedi : midi
+        self.assertEqual(stats.meilleure_heure_publication(18, 1, vids), stats.meilleure_heure_publication(18, None, vids))   # le mardi : trop peu -> l'heure de la semaine
+        vids2 = vids + [v(1, 18, 700), v(1, 18, 650), v(1, 12, 10), v(1, 12, 20)]
+        self.assertEqual(stats.meilleure_heure_publication(12, 1, vids2), 18)   # assez de mardis : 18 h ce jour-là
+        import publication_auto as PA
+        self.assertEqual(PA.creneaux({"PUBLI_HEURE": "19:00"}, 3), [(19, 0)])
+
+    def test_sujets_qui_marchent(self):
+        import recette as R
+        h = [{"vues": 1000, "titre_source": "mon frère dangereux #frere"}] * 3 + [{"vues": 100, "titre_source": "la cantine #ecole"}] * 4
+        M = R.mots_gagnants(h)
+        self.assertGreater(M["dangereux"], 1); self.assertLess(M["cantine"], 1)
+        b, mots = R.bonus_sujet({"titre": "Encore un frère dangereux"}, {"mots": M})
+        self.assertGreater(b, 0); self.assertIn("dangereux", mots)
+
+
+class TestHeureStatsAffichee(unittest.TestCase):
+    def test_heure_des_stats_sous_la_case(self):
+        src = open(os.path.join(ICI, "..", "moteur", "site.py"), encoding="utf-8").read()
+        i = src.index('data-var="PUBLI_HEURE_AUTO"'); self.assertIn('id="heureStats"', src[i:i + 800])
+        self.assertIn("function heuresStats(vids)", src); self.assertIn("HEURES_LIVE=H_", src)
+
+
+class TestPlusieursEnMemeTemps(unittest.TestCase):
+    """Demande de l'auteur du 15 novembre : plusieurs vidéos fabriquées en même temps (EN_MEME_TEMPS, 2 par défaut)."""
+    def test_places_et_aides(self):
+        import file_attente as F, dessin_partage as DP
+        env = dict(os.environ)
+        try:
+            os.environ.pop("AIDES", None); os.environ.pop("EN_MEME_TEMPS", None)
+            self.assertEqual(F.en_meme_temps(), 2)
+            self.assertEqual(F.bloquants([1]), []); self.assertEqual(F.bloquants([1, 2]), [2]); self.assertEqual(F.bloquants([1, 2, 3], 3), [3])
+            self.assertEqual(F.bloquants([1], 1), [1])                     # 1 = l'une après l'autre (comme avant)
+            os.environ["CHAINE"] = "3/10"; self.assertFalse(F.prepa_parallele())   # plusieurs à la fois : chaque vidéo a sa place entière
+            self.assertEqual(DP.nb_aides(7000), 3)                         # 2 à la fois : 3 aides au plus chacune
+            os.environ["EN_MEME_TEMPS"] = "5"; self.assertEqual(DP.nb_aides(7000), 0)   # 5 et plus : chacune dessine seule
+            os.environ["EN_MEME_TEMPS"] = "99"; self.assertEqual(F.en_meme_temps(), 8)
+        finally: os.environ.clear(); os.environ.update(env)
+        src = open(os.path.join(ICI, "..", "moteur", "site.py"), encoding="utf-8").read()
+        self.assertIn('data-var="EN_MEME_TEMPS" data-def="2"', src)
+        y = open(os.path.join(ICI, "..", ".github", "workflows", "emission.yml"), encoding="utf-8").read()
+        self.assertEqual(y.count("EN_MEME_TEMPS: ${{ vars.EN_MEME_TEMPS || '2' }}"), 2)

@@ -1,4 +1,5 @@
-"""File d'attente des fabrications : une seule vidéo fabriquée à la fois, dans l'ordre des demandes, aucune demande perdue.
+"""File d'attente des fabrications : N vidéos fabriquées à la fois (EN_MEME_TEMPS, 2 par défaut ; 1 = une après l'autre), dans
+l'ordre des demandes, aucune demande perdue.
 
 GitHub ne garde qu'UNE fabrication en attente par file (une 3e demande annule celle qui attendait) : on ne s'en sert donc pas pour
 la file. À la place, chaque fabrication (sketch, son TikTok, vidéo manuelle, refaire, aperçu, série, réveil de secours) commence
@@ -44,10 +45,25 @@ def devant(runs, moi, jobs_de):
     return [r for r in avant if bloque(jobs_de(r["id"]))]
 
 
+def en_meme_temps():
+    """Vidéos fabriquées EN MÊME TEMPS (choix de l'auteur du 15 novembre 2026 : réglage EN_MEME_TEMPS du site, 2 par défaut, 1 à 8).
+    Chaque fabrication attend seulement qu'il y ait moins de N fabrications lancées avant elle et pas encore finies."""
+    try: return max(1, min(8, int(os.environ.get("EN_MEME_TEMPS") or 2)))
+    except ValueError: return 2
+
+
+def bloquants(avant, N=None):
+    """Parmi les fabrications lancées avant nous et pas finies (les plus anciennes d'abord), celles qui nous font attendre : aucune
+    s'il y en a moins de N ; sinon celles au-delà des N-1 premières (« n vidéo(s) avant » sur la barre)."""
+    N = N or en_meme_temps()
+    return avant[N - 1:] if len(avant) >= N else []
+
+
 def prepa_parallele():
     """Chaîne de vidéos TikTok (« 2/10 »…) : la vidéo suivante est lancée quand la précédente commence à dessiner ; elle prépare son
     écoute (son, transcription, voix, IA, décors) EN MÊME TEMPS, puis attend son tour juste avant de dessiner (principal.py)."""
     c = os.environ.get("CHAINE") or ""
+    if en_meme_temps() > 1: return False                                   # plusieurs à la fois : chaque vidéo prend une place entière
     if os.environ.get("PREPA_PARALLELE", "1") == "0" or c.startswith("suite:") or "/" not in c: return False
     k = c.split("/")[0]
     return k.isdigit() and int(k) > 1
@@ -71,6 +87,7 @@ def attendre(avant_dessin=False):
                 if "emission" in noms or "file" in noms: verdict[i] = bloque(j)
                 return j
             d = devant(runs, nous, jobs_de)
+            d = bloquants(d)                                               # N places : on attend seulement s'il y en a N avant nous
         except Exception as e:
             print(f"File d'attente : lecture impossible ({str(e)[:120]}), nouvel essai", flush=True); time.sleep(PAUSE); continue
         if not d:
