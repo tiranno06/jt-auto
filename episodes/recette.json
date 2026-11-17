@@ -1,14 +1,36 @@
 {
- "moyenne": 447,
- "videos": 57,
- "plus": [],
+ "moyenne": 443,
+ "videos": 58,
+ "plus": [
+  {
+   "critere": "Heure de publication",
+   "valeur": "après-midi",
+   "vues": 535,
+   "n": 4,
+   "fois": 1.21
+  }
+ ],
  "moins": [
   {
    "critere": "Personnages",
    "valeur": "3 personnages",
-   "vues": 261,
+   "vues": 262,
    "n": 3,
    "fois": 0.59
+  },
+  {
+   "critere": "Couverture",
+   "valeur": "la chute",
+   "vues": 266,
+   "n": 4,
+   "fois": 0.6
+  },
+  {
+   "critere": "Personnages",
+   "valeur": "2 personnages",
+   "vues": 272,
+   "n": 6,
+   "fois": 0.61
   },
   {
    "critere": "Heure de publication",
@@ -16,54 +38,47 @@
    "vues": 281,
    "n": 6,
    "fois": 0.63
-  },
-  {
-   "critere": "Personnages",
-   "valeur": "2 personnages",
-   "vues": 280,
-   "n": 5,
-   "fois": 0.63
   }
  ],
  "par": {
   "duree": [
    [
-    "20 à 40 s",
+    "plus de 70 s",
     469,
-    6,
-    1.05
+    26,
+    1.06
    ],
    [
-    "plus de 70 s",
-    468,
-    26,
-    1.05
+    "20 à 40 s",
+    434,
+    7,
+    0.98
    ],
    [
     "40 à 70 s",
     425,
     22,
-    0.95
+    0.96
    ],
    [
     "moins de 20 s",
     375,
     3,
-    0.84
+    0.85
    ]
   ],
   "heure": [
    [
     "après-midi",
-    534,
+    535,
     4,
-    1.19
+    1.21
    ],
    [
     "matin",
     444,
     16,
-    0.99
+    1.0
    ],
    [
     "soir",
@@ -77,36 +92,36 @@
     "@same_same53",
     509,
     6,
-    1.14
+    1.15
    ],
    [
     "@vignianimation",
     474,
     10,
-    1.06
+    1.07
    ],
    [
     "@yan_animation0",
     420,
     8,
-    0.94
+    0.95
    ],
    [
     "@eliotlehanneur",
-    406,
+    407,
     6,
-    0.91
+    0.92
+   ],
+   [
+    "@charly.bse",
+    406,
+    5,
+    0.92
    ],
    [
     "@motiontoonz",
     405,
     4,
-    0.91
-   ],
-   [
-    "@charly.bse",
-    405,
-    5,
     0.91
    ]
   ],
@@ -115,56 +130,62 @@
     "« POV : … »",
     592,
     4,
-    1.33
+    1.34
    ]
   ],
   "lieu": [
    [
     "rue",
-    283,
+    285,
     4,
-    0.63
+    0.64
    ]
   ],
   "animal": [
    [
     "non",
-    273,
-    8,
+    269,
+    9,
     0.61
    ]
   ],
   "persos": [
    [
     "2 personnages",
-    280,
-    5,
-    0.63
+    272,
+    6,
+    0.61
    ],
    [
     "3 personnages",
-    261,
+    262,
     3,
     0.59
    ]
   ],
   "couverture": [
    [
+    "la réaction",
+    280,
+    3,
+    0.63
+   ],
+   [
     "la chute",
-    264,
+    266,
     4,
-    0.59
+    0.6
    ]
   ],
   "partie": [
    [
     "non",
-    273,
-    8,
+    269,
+    9,
     0.61
    ]
   ]
  },
- "maj": "2026-11-17T14:41+00:00",
+ "maj": "2026-11-17T23:00+00:00",
  "mots": {}
 }
