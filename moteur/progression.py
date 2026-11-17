@@ -22,7 +22,7 @@ def _api(methode, chemin, corps):
                                           "User-Agent": "petitsdramas-robot", "Content-Type": "application/json"})
     r = urllib.request.urlopen(req, timeout=10)
     try: __import__("quota").noter(r.headers)                               # appels restants (quota de l'API GitHub)
-    except Exception: pass
+    except Exception as _e: __import__("pannes").avale(_e)
     return json.loads(r.read() or b"{}")
 
 
@@ -30,7 +30,7 @@ def _signaler(voie, e):
     if voie in _ERREUR: return
     detail = ""
     try: detail = e.read().decode()[:200]
-    except Exception: pass
+    except Exception as _e: __import__("pannes").avale(_e)
     _ERREUR[voie] = True
     print(f"Barre de progression du site ({voie}) : envoi impossible ({str(e)[:120]} {detail})", flush=True)
 
@@ -43,7 +43,7 @@ def _envoyer(pct, texte, fin=None, etat="pending"):
     if re.match(r"^\d+/\d+$", os.environ.get("CHAINE") or ""): texte = f"vidéo {os.environ['CHAINE']} : {texte}"   # vidéos à la chaîne
     try:
         if __import__("quota").econome(): texte += " (suivi ralenti : quota GitHub presque épuisé)"   # voyant sur la barre du site
-    except Exception: pass
+    except Exception as _e: __import__("pannes").avale(_e)
     desc = f"{int(max(0, min(100, pct)))}|{TYPE[0]}|{texte}|{int(fin) if fin else ''}"[:140]
     if "statut" not in _ERREUR:
         try: _api("POST", f"/statuses/{sha}", {"state": etat, "context": f"progression-{run}", "description": desc}); return

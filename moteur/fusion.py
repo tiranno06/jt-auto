@@ -42,7 +42,7 @@ def _pannes(eux, nous, base):
     return pannes.fusionner(eux, nous, base)
 
 
-FUSIONNES = {"decors/index.tsv": _lignes, "decors/compteur.json": _compteur, "episodes/pannes.json": _pannes}
+FUSIONNES = {"decors/index.tsv": _lignes, "decors/utilises.tsv": _lignes, "decors/compteur.json": _compteur, "episodes/pannes.json": _pannes}
 
 
 def rejouer(commande, message):

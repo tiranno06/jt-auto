@@ -78,3 +78,20 @@ if __name__ == "__main__":
     try: R = ajouter(open(j, encoding="utf-8", errors="replace").read())
     except OSError: R = {}
     print(f"Registre des pannes : {len(R)} forme(s) de panne suivie(s)")
+
+
+_AVALEES = set()
+
+
+def avale(e):
+    """Erreur sans gravité rattrapée (audit du 17 novembre 2026, idée 21 : 51 « except Exception: pass » ne laissaient aucune trace).
+    Le robot continue comme avant, mais une ligne « erreur avalée dans fichier.fonction » est écrite au journal (une seule fois par
+    endroit et par type d'erreur, même dans une boucle) : le registre des pannes la compte et le site la montre si elle revient."""
+    try:
+        f = sys._getframe(1)
+        ou = f"{os.path.basename(f.f_code.co_filename)[:-3]}.{f.f_code.co_name}"
+        cle = (ou, type(e).__name__)
+        if cle in _AVALEES: return
+        _AVALEES.add(cle)
+        print(f"  erreur avalée dans {ou} : {type(e).__name__} « {str(e)[:100]} »", flush=True)
+    except Exception: return

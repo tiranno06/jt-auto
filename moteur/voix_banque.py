@@ -245,7 +245,7 @@ def _distant(app, cls, methode, *args, delai=600):
     except Exception as e:
         EN_PANNE.add(cls)
         try: f.cancel()
-        except Exception: pass
+        except Exception as _e: __import__("pannes").avale(_e)
         raise RuntimeError(f"{cls} : {type(e).__name__} {str(e)[:120]}")
 
 EMOTIONS = {"rire": ("laugh", "giggl", "chuckl"), "colere": ("angry", "shout", "yell", "furious", "frustrat"),
@@ -596,7 +596,7 @@ def generer(repliques):
                 for i, o in zip(manque, synthese(choix, [dits[i] for i in manque])):
                     try:
                         if o: audios[i] = nettoyer(o, f"{tmp}/{i}_ultime", True); utilises.add("elevenlabs")
-                    except Exception: pass
+                    except Exception as _e: __import__("pannes").avale(_e)
                 if all(audios[i] is not None for i in manque): journal(f"  {role} : répliques gardées en ElevenLabs malgré le contrôle (français garanti)")
         if any(audios[i] is None for i in idx):
             return None                                                    # le robot basculera sur la chaîne de secours

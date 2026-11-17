@@ -66,7 +66,7 @@ def debut_parole(sig, seuil=0.8):
     try:
         z_ = __import__("ecoute").parole(sig, SR)
         if z_: return float(next((a for a, b in z_ if b - a >= 0.25), z_[0][0]))
-    except Exception: pass
+    except Exception as _e: __import__("pannes").avale(_e)
     x = np.asarray(sig, np.float32); n = int(0.02 * SR)
     if len(x) < n * 20: return 0.0
     rms = np.sqrt(np.mean(x[:len(x) // n * n].reshape(-1, n) ** 2, axis=1))
@@ -399,7 +399,8 @@ Avec l'outil doublage :
 - "decoupage" : 1 à 4 scènes (indices des répliques, toutes couvertes, dans l'ordre ; "decor" EN ANGLAIS sans personnage : lieu précis + 2 ou 3 objets,
   cohérent avec ce qui est dit ; "titre" = carton court seulement si la scène change de moment ou de lieu) ;
 - "sujet" (30 caractères max), "titre_accroche" (« POV : … » ou « Quand … », 40 caractères max), "legende" (1 phrase en français),
-  "question" (pour les commentaires), "hashtags" (4 à 6, sans #) ;
+  "question" (pour les commentaires), "commentaire" (une AUTRE question courte, à épingler en 1er commentaire : un choix à faire
+  « Team … ou team … ? », « Vous auriez fait quoi ? », avec un emoji), "hashtags" (4 à 6, sans #) ;
 {studio}"""
 
 IMAGES = """
@@ -435,7 +436,7 @@ def _outil():
                 "decoupage": {"type": "array", "items": ecrire._schema({"repliques": {"type": "array", "items": {"type": "integer"}},
                                                                        "decor": {"type": "string"}, "titre": {"type": "string"}}, ["repliques"])},
                 "sujet": {"type": "string"}, "titre_accroche": {"type": "string"}, "legende": {"type": "string"}, "question": {"type": "string"},
-                "hashtags": {"type": "array", "items": {"type": "string"}},
+                "commentaire": {"type": "string"}, "hashtags": {"type": "array", "items": {"type": "string"}},
                 "studio": {"type": "object", "properties": {
                     "moment": {"type": "string"}, "lieux": {"type": "array", "items": {"type": "string"}},
                     "costumes": {"type": "object"}, "metiers": {"type": "object"}, "personnages": {"type": "object"}, "gags": {"type": "array", "items": {"type": "string"}},
@@ -548,7 +549,7 @@ def lieu_vu(cles, texte):
     try:                                                                   # Gemini a déjà regardé la vidéo entière
         l_ = str(__import__("video_ia").DERNIER.get("lieu") or "").strip().lower()
         if l_ in DD.LIEUX: journal(f"  lieu vu par Gemini dans la vidéo entière : {l_}"); return l_
-    except Exception: pass
+    except Exception as _e: __import__("pannes").avale(_e)
     if cles and os.environ.get("LIEU_VU", "1") != "0":
         try:
             if not __import__("reseau").ia_disponible(): raise RuntimeError("aucune IA")
@@ -635,7 +636,8 @@ def preparer(url):
     if SOURCE_MOTS[0] != "elevenlabs":                                    # 2e transcription par un autre outil, comparée mot à mot
         try:
             autre = whisper_local(mono) if SOURCE_MOTS[0] == "groq" else ecoute.groq(chemin_voix)
-            if autre: mots = equipe.deux_transcriptions(mots, autre, B, troisieme=lambda: ecoute.groq(chemin_voix, modele="whisper-large-v3"))
+            if autre: mots = equipe.deux_transcriptions(mots, autre, B, troisieme=lambda: ecoute.groq(chemin_voix, modele="whisper-large-v3"),
+                                                          ecouter=lambda ps: __import__("video_ia").ecouter(chemin_voix, ps))
         except Exception as e: journal(f"  2e transcription impossible ({str(e)[:120]})")
         mots = ecoute.aligner(mots, sig)                                   # chaque mot recalé sur la voix (lèvres, sous-titres)
         __import__("locuteurs").fins_de_phrase(mots)                       # points oubliés par Whisper (« …rouge Mais pourquoi… »)
@@ -743,6 +745,7 @@ def preparer(url):
             "hashtags": ecrire._liste(m.get("hashtags")) or ["humour", "doublage", "pov"], "titre_accroche": m.get("titre_accroche") or "",
             "question": m.get("question") or "", "sources": [lien], "decoupage": []}
     sk = ecrire.valider(brut, {lien}, libre=True, minimum=1)
+    if isinstance(m.get("commentaire"), str): sk["commentaire"] = m["commentaire"].strip()[:150]
     sk["repliques"] = reps                                                 # toutes les répliques, texte complet (pas de limite de longueur)
     dec = [x for x in ecrire._liste(m.get("decoupage")) if isinstance(x, dict)]
     sk["decoupage"] = [dict(sc, scene=str(k + 1)) for k, sc in enumerate(ecrire._decoupage(dec, len(reps)))] or \
@@ -798,7 +801,7 @@ def preparer(url):
     try:                                                                   # personnes VUES à l'image par Gemini (une voix au téléphone exclue)
         n_v = __import__("video_ia").visibles() or __import__("personnes_vues").nombre(info.get("_fichier") or "")
         if n_v: sk["doublage"]["nb_vus"] = int(n_v)
-    except Exception: pass
+    except Exception as _e: __import__("pannes").avale(_e)
     if audio:                                                              # émotions de jeu données par Claude
         from collections import Counter
         audio["emotions"] = dict(Counter(m.lower() for x in d for m in re.findall(r"\[([^\]]{2,25})\]", x)).most_common(8))

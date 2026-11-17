@@ -74,7 +74,7 @@ def fiche(e):
                 programmee=e.get("programmee"), couts=e.get("couts") or {}, duree=e.get("duree"), a_verifier=e.get("a_verifier") or [],
                 likes=e.get("likes"), commentaires=e.get("commentaires"), partages=e.get("partages"),
                 voix_secours=("piper" in str(e.get("voix", "")).lower()),
-                source=e.get("source_audio") or "", reps=repliques_de(e), confiance=e.get("confiance"))
+                source=e.get("source_audio") or "", reps=repliques_de(e), confiance=e.get("confiance"), commentaire=e.get("commentaire") or "")
 
 
 def construire():
@@ -127,7 +127,7 @@ def construire():
     except (OSError, ValueError): alertes = []
     resume = {"compte": st.get("compte", ""), "maj": st.get("maj", ""), "videos": len(st.get("videos", [])),
               "vues": sum(v.get("vues", 0) for v in st.get("videos", [])), "liees": sum(1 for v in st.get("videos", []) if v.get("fichier")),
-              "abonnes": st.get("abonnes"), "abonnes_hist": (st.get("abonnes_hist") or [])[-24 * 8:]}
+              "abonnes": st.get("abonnes"), "abonnes_hist": (st.get("abonnes_hist") or [])[-24 * 8:], "vues_hist": (st.get("vues_hist") or [])[-24 * 8:]}
     import hashlib
     version = hashlib.sha1((PAGE + SW).encode()).hexdigest()[:12]          # change seulement quand le code de l'appli change
     open(os.path.join(SITE, "version.txt"), "w").write(version + "\n")
@@ -171,7 +171,7 @@ def application(nom):
 
 # Service worker : l'appli s'ouvre même hors connexion (dernière version de la page), sans jamais mettre en cache
 # les vidéos (trop lourdes) ni les appels à GitHub.
-SW = r"""const CACHE = "regie-v28";
+SW = r"""const CACHE = "regie-v29";
 const COQUILLE = ["./", "manifest.webmanifest", "logo-192.png", "logo-512.png", "poppins-500.ttf", "poppins-700.ttf"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(COQUILLE))); self.skipWaiting(); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(k => Promise.all(k.filter(x => x !== CACHE).map(x => caches.delete(x))))); self.clients.claim(); });
@@ -350,6 +350,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
 <header><h1><img src="logo-192.png" alt="" style="width:44px;height:44px;border-radius:12px;vertical-align:-10px;margin-right:10px">__NOM__</h1><div class="sous">Régie de la chaîne · <span id="cnx">⚪ …</span> <button id="rafraichir" title="Rafraîchir" aria-label="Rafraîchir" style="padding:2px 9px;font-size:15px;background:transparent;border:1px solid var(--ligne);color:inherit;border-radius:999px;cursor:pointer">🔄</button></div><div id="tirer" style="display:none;text-align:center;font-size:14px;padding:6px">↓ Relâchez pour rafraîchir</div>
 <button id="installer" style="display:none;margin-top:10px;padding:9px 16px;font-size:14px;font-weight:700;background:var(--jaune);color:#111">📲 Installer l'application</button></header>
 <div id="panneGH" class="alerte" style="display:none;margin:8px 12px 0"></div>
+<div id="cleRappel" class="alerte" style="display:none;margin:8px 12px 0"></div>
 <nav class="onglets"><button class="onglet ancien" data-o="accueil"><span class="ic">🏠</span><span class="nom">Accueil</span></button><button class="onglet ancien" data-o="videos"><span class="ic">🎬</span><span class="nom">Vidéos</span></button><button class="onglet actif" data-o="tiktok"><span class="ic">🎵</span><span class="nom">TikTok</span></button><button class="onglet" data-o="stats"><span class="ic">📊</span><span class="nom">Stats</span></button><button class="onglet" data-o="config"><span class="ic">⚙️</span><span class="nom">Réglages</span></button></nav>
 <main>
  <!-- ======================================================== ACCUEIL -->
@@ -454,6 +455,8 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <p class="note" id="pubResume"></p>
     <h3 style="margin:14px 0 6px">🗓️ Calendrier de publication</h3><div id="calendrier"></div>
     <p class="note">Jamais deux sons du même profil d'affilée : le robot alterne les comptes d'origine (l'ordre ci-dessus en tient compte).</p></details>
+  <details class="groupe repliTk" data-cle="semaine"><summary>📅 Ma semaine (7 derniers jours)</summary>
+    <div id="semaine"><p class="note">Chargement…</p></div></details>
   <details class="groupe repliTk" data-cle="recette"><summary>📈 Ce qui marche (recette du succès)</summary>
     <p class="note">Les vues de vos vidéos comparées selon ce qui les compose (profil du son, lieu, durée, animal, heure, couverture…). Mis à jour chaque jour avec les statistiques ; le robot s'en sert pour choisir ses sons.</p>
     <div id="recette"><p class="note">Pas encore assez de vidéos avec des vues (3 par critère au moins).</p></div></details>
@@ -466,6 +469,8 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <p class="note">À faire une seule fois par appareil : collez votre clé GitHub de régie (elle reste dans ce navigateur).
     Pas de clé ? <a style="color:var(--bleu)" href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">Créer la clé</a> : dépôt <b>jt-auto</b>, droits <b>Actions</b> et <b>Variables</b> en « Read and write ».</p>
     <div class="jeton"><input id="jeton2" type="password" placeholder="github_pat_…" autocomplete="off"><button class="second" id="garder2" style="flex:none;padding:10px 14px">Connecter</button></div>
+    <label class="note" style="display:block;margin-top:8px">📅 Date d'expiration de la clé (écrite par GitHub à sa création) : <input id="cleExpire" type="date" style="margin-left:6px"></label>
+    <p class="note" id="cleExpireEtat"></p>
   </section>
   <p class="note" id="cfgEtat"></p>
   <details class="groupe"><summary>🧯 Registre des pannes <span id="resumePannes"></span></summary>
@@ -631,6 +636,8 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
   <button id="aPublier" class="apub" style="display:none;width:100%;justify-content:center;margin:0 0 8px">☐ À publier</button>
   <button id="publier" disabled>Publier sur TikTok</button>
   <div class="ligne2"><button class="second" id="voir" disabled>Aperçu</button><button class="second" id="copier" disabled>Copier la légende</button><button class="second" id="manuel" disabled>Partage manuel</button></div>
+  <div id="commentaireBox" style="display:none;margin:6px 0;padding:8px;border-radius:10px;background:rgba(255,255,255,.06)"><div style="font-size:.85em;opacity:.8">💬 Commentaire à épingler (postez-le sous la vidéo puis « Épingler ») :</div><div id="commentaireTxt" style="margin:4px 0;font-weight:600"></div><button class="second" id="copierCom" style="width:100%">📋 Copier le commentaire</button></div>
+  <p class="note" id="coutFiche" style="display:none;margin:4px 0"></p>
   <details id="plus"><summary>⋯ Plus d'actions sur cette vidéo</summary>
     <div class="ligne2"><button class="second" id="pouce" disabled>👍 J'aime</button><button class="second" id="bof" disabled>👎 Bof</button></div>
     <label>Ma note pour le jury<select id="noteAuteur"><option value="">—</option><option value="10">10/10</option><option value="9">9/10</option><option value="8">8/10</option><option value="7">7/10</option><option value="6">6/10</option><option value="5">5/10</option><option value="4">4/10</option><option value="3">3/10</option><option value="2">2/10</option><option value="1">1/10</option></select></label>
@@ -704,9 +711,26 @@ async function gh(chemin, opts={}){
   if(r.status===401){marquerCnx("cle"); throw new Error("jeton refusé (expiré ou incorrect)")}
   if(r.status===403) throw new Error("droits du jeton insuffisants");
   marquerCnx("ok");
+  try{const x=r.headers.get("github-authentication-token-expiration"); if(x){const d=x.slice(0,10); if(/^\d{4}-\d{2}-\d{2}$/.test(d)&&d!==lireExpire()){ecrireExpire(d); rappelCle()}}}catch(e){}
   if(r.status===304&&memo) return new Response(memo.corps,{status:200,headers:{"Content-Type":memo.type}});
   if(lire&&r.ok&&r.headers.get("ETag")){try{const corps=await r.clone().text(); if(corps.length<4e6) ETAGS.set(cle,{etag:r.headers.get("ETag"),corps,type:r.headers.get("Content-Type")||""})}catch(e){}}
   return r;
+}
+// rappel avant l'expiration de la clé GitHub de l'appli (audit du 17 novembre, idée 16) : date lue dans la réponse de GitHub
+// quand il la donne, sinon écrite par l'auteur dans Réglages ; bandeau 14 jours avant, rouge les 3 derniers jours
+function lireExpire(){try{return localStorage.getItem("jt_cle_expire")||""}catch(e){return ""}}
+function ecrireExpire(v){try{v?localStorage.setItem("jt_cle_expire",v):localStorage.removeItem("jt_cle_expire")}catch(e){}}
+function joursAvantExpire(d,maintenant){if(!d) return null; const t=Date.parse(d+"T23:59:59"); if(isNaN(t)) return null; return Math.floor((t-(maintenant||Date.now()))/86400000)}
+function rappelCle(){
+  const d=lireExpire(), j=joursAvantExpire(d), z=document.getElementById("cleRappel"), e=document.getElementById("cleExpireEtat"), i=document.getElementById("cleExpire");
+  if(i&&document.activeElement!==i) i.value=d;
+  const date=d?new Date(d+"T12:00:00").toLocaleDateString("fr-FR",{day:"numeric",month:"long",year:"numeric"}):"";
+  if(e) e.textContent=j==null?"Indiquez la date pour être prévenu 14 jours avant.":j<0?"🔴 Clé expirée le "+date+".":"Clé valable jusqu'au "+date+" ("+j+" jour"+(j>1?"s":"")+").";
+  if(!z) return;
+  if(j==null||j>14||!lireJeton()){z.style.display="none";return}
+  z.style.display="block";
+  z.innerHTML=(j<0?"🔴 Votre clé GitHub a expiré le "+date+" : ":(j<=3?"🔴":"🟠")+" Votre clé GitHub expire "+(j===0?"aujourd'hui":j===1?"demain":"dans "+j+" jours")+" ("+date+") : ")
+    +'<a style="color:inherit;text-decoration:underline" href="https://github.com/settings/personal-access-tokens" target="_blank" rel="noopener">la prolonger ou en créer une</a>, puis la coller dans Réglages.';
 }
 function dessinerCnx(){                                                    // voyant : à jour / hors connexion / clé expirée
   const z=document.getElementById("cnx"); if(!z) return;
@@ -833,6 +857,32 @@ function vuesA(p,h){                                                       // vu
   for(let k=1;k<p.length;k++) if(p[k][0]>=h){const [a,va]=p[k-1],[b,vb]=p[k]; return va+(vb-va)*(h-a)/Math.max(0.01,b-a)}
   return null;
 }
+function afficherCommentaire(v){            // commentaire de relance préparé par le robot (audit du 17 novembre, idée 14)
+  const b=$("#commentaireBox"); if(!b) return; const c=(v&&v.commentaire)||"";
+  b.style.display=c?"block":"none"; $("#commentaireTxt").textContent=c;
+  const z=$("#coutFiche"), k=(v&&v.couts)||{};                              // coût de la vidéo (idée 32)
+  if(z){const u=coutVideo(k); z.style.display=Object.keys(k).length?"block":"none";
+    z.textContent="💶 Coût de cette vidéo : "+(u<0.005?"0 €":"≈ "+(u*0.93).toFixed(2).replace(".",",")+" €")+" — Claude "+(k.claude_usd||0).toFixed(2)+" $, ElevenLabs "+(k.eleven_caracteres||0)+" caractères, GPU Modal "+(k.gpu_s||0)+" s"
+      +(k.modal_mesure_usd!=null?" (Modal mesuré : "+k.modal_mesure_usd.toFixed(2)+" $)":"")+" ; IA gratuites : 0 €"}
+}
+function coutVideo(k){k=k||{}; return k.total_usd!=null?+k.total_usd:(+(k.claude_usd||0)+(k.eleven_caracteres||0)*0.00022+(k.gpu_s||0)*0.00031)}
+// tableau de bord de la semaine (audit du 17 novembre, idée 29) : fabriquées, publiées, vues et abonnés gagnés, dépenses
+function rendreSemaine(st){
+  const z=$("#semaine"); if(!z) return;
+  const fr=n=>Number(n||0).toLocaleString("fr-FR"), il7=Date.now()-7*864e5, sem=new Date(il7);
+  const jourDe=v=>{const m=/^(\d{4}-\d{2}-\d{2})_(\d{2})h(\d{2})/.exec(v.fichier||""); return m?new Date(m[1]+"T"+m[2]+":"+m[3]+":00"):(v.date?new Date(v.date):null)};
+  const tk=DATA.filter(v=>v.origine==="tiktok"||v.filiere==="tiktok"||v.source), faites=tk.filter(v=>{const d=jourDe(v); return d&&d>=sem&&!v.essai});
+  const vids=(st&&st.videos)||[], pub=vids.filter(x=>x.date&&x.date*1000>=il7);
+  const S=STATS_LIVE||{}, gA=gainAbonnes(S.abonnes_hist,sem), gV=gainAbonnes(S.vues_hist,sem);
+  const premier=(S.vues_hist&&S.vues_hist.length)?new Date(S.vues_hist[0].t):null, partiel=premier&&premier>sem;
+  const dep=faites.reduce((a,v)=>a+coutVideo(v.couts),0), conf=faites.filter(v=>v.confiance!=null), mc=conf.length?Math.round(conf.reduce((a,v)=>a+v.confiance,0)/conf.length):null;
+  const sg=g=>g==null?"–":(g>0?"+":"")+fr(g);
+  z.innerHTML=`<div class="chiffres">
+    <div><b>${faites.length}</b>vidéos fabriquées</div><div><b>${pub.length}</b>vidéos publiées</div>
+    <div><b>${sg(gV)}</b>vues gagnées${partiel?" (depuis le "+premier.toLocaleDateString("fr-FR")+")":""}</div><div><b>${sg(gA)}</b>abonnés gagnés</div>
+    <div><b>${dep<0.005?"0 €":"≈ "+(dep*0.93).toFixed(2).replace(".",",")+" €"}</b>dépenses (Claude, ElevenLabs, Modal)</div><div><b>${mc==null?"–":mc+"/100"}</b>confiance moyenne</div></div>
+    <p class="note">${pub.length?"Meilleure vidéo publiée cette semaine : "+(()=>{const b=[...pub].sort((a,b)=>(b.vues||0)-(a.vues||0))[0]; return "« "+String(b.description||"").slice(0,50).replace(/</g,"&lt;")+" » ("+fr(b.vues)+" vues)"})():"Aucune vidéo publiée ces 7 derniers jours."} Les IA gratuites ne coûtent rien.</p>`;
+}
 function rendreCourbe(v){
   const z=$("#courbe"); if(!z) return; const e=COURBES[v.fichier];
   if(!e||!e.p||e.p.length<2){z.style.display="none";return}
@@ -915,15 +965,16 @@ async function actualiserStats(){
     if(pn&&typeof pn==="object") rendrePannes(pn);
     if(cr&&cr.date){CRED=cr; rendreOutils(); rendreQuotaIA()}
     if(Array.isArray(h)){const par={}; h.forEach(e=>{if(e.fichier)par[e.fichier]=e});
-      try{const K=["fichier","titre","date","tag","web","filiere","source_audio","theme","manuel","legende","publie","vues","format","avis","note","note_auteur","programmee","duree","likes","commentaires","partages","a_verifier","confiance","recette"];
+      try{const K=["fichier","titre","date","tag","web","filiere","source_audio","theme","manuel","legende","publie","vues","format","avis","note","note_auteur","programmee","duree","likes","commentaires","partages","a_verifier","confiance","recette","commentaire","couts"];
         localStorage.setItem("jt_historique",JSON.stringify(h.filter(e=>e.fichier).map(e=>Object.fromEntries(K.filter(k=>e[k]!==undefined).map(k=>[k,e[k]])))))}catch(e){}   // copie légère pour la prochaine ouverture
-      DATA.forEach(v=>{const e=par[v.fichier]; if(!e)return; ["vues","likes","commentaires","partages","publie","couts","programmee","a_verifier","confiance","jury","recette"].forEach(k=>{if(e[k]!==undefined)v[k]=e[k]})});
+      DATA.forEach(v=>{const e=par[v.fichier]; if(!e)return; ["vues","likes","commentaires","partages","publie","couts","programmee","a_verifier","confiance","jury","recette","commentaire"].forEach(k=>{if(e[k]!==undefined)v[k]=e[k]})});
       ajouterNouvelles(h); rendreTemps(h);
       const faites=h.filter(e=>e.fichier), der=faites[faites.length-1];
       if(der){OUTILS={outils:(der.outils&&typeof der.outils==="object")?der.outils:null,date:der.date||"",titre:der.titre||""}; rendreOutils()}}
     if(st&&Array.isArray(st.videos)){const H_=heuresStats(st.videos); if(H_){HEURES_LIVE=H_; resumePubli()}}   // heure des stats à jour toute seule
     if(st&&st.compte){const vids=st.videos||[]; STATS_LIVE={compte:st.compte,maj:st.maj||"",videos:vids.length,
-      vues:vids.reduce((a,x)=>a+(x.vues||0),0),liees:vids.filter(x=>x.fichier).length,abonnes:st.abonnes,abonnes_hist:st.abonnes_hist||[]}}
+      vues:vids.reduce((a,x)=>a+(x.vues||0),0),liees:vids.filter(x=>x.fichier).length,abonnes:st.abonnes,abonnes_hist:st.abonnes_hist||[],vues_hist:st.vues_hist||[]}}
+    try{rendreSemaine(st)}catch(e){}
     DERNIERE_MAJ=Date.now();
     const o=document.body.dataset.onglet;
     if(o==="stats") rendreStats();
@@ -1358,7 +1409,7 @@ function choisir(i){
   $("#pouce").classList.toggle("actif",v.avis===1); $("#bof").classList.toggle("actif",v.avis===-1);
   document.querySelectorAll("#liste .carte").forEach(c=>c.classList.toggle("choisie",+c.dataset.i===i));
   $("#choix").textContent="Sélection : "+v.titre; ["#copier","#voir","#manuel"].forEach(s=>$(s).disabled=false);
-  const a=$("#apercu"); a.src=srcDe(v); a.style.display="block"; $("#suivi").textContent=""; majBoutons(); ajusterBas(); rendreCourbe(v);
+  const a=$("#apercu"); a.src=srcDe(v); a.style.display="block"; $("#suivi").textContent=""; majBoutons(); ajusterBas(); rendreCourbe(v); afficherCommentaire(v);
   $("#comparer").style.display=v.source?"block":"none"; afficherQui(v); afficherRemarque(v); majBoutonPubliFiche();
   if(v.origine==="tiktok"&&!(v.reps&&v.reps.length)) chargerRepliques(v,i);  // vidéo plus récente que le site : répliques lues en direct
 }
@@ -1528,6 +1579,7 @@ $("#refaire").onclick=()=>{const v=DATA[choisie], q=$("#refaireQuoi").value;
   $(s).onclick=()=>{const v=DATA[choisie]; lancerFlux("emission.yml",$(s),m,{refaire:v.fichier+"|"+q},$("#suivi"))}});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&choisie!==null)fermerVideo()});
 $("#voir").onclick=()=>{const a=$("#apercu");a.style.display="block";a.play()};
+$("#copierCom").onclick=async()=>{const t=(DATA[choisie]||{}).commentaire||"";try{await navigator.clipboard.writeText(t);toast("Commentaire copié ✓ : collez-le sous la vidéo puis épinglez-le")}catch(e){prompt("Copiez le commentaire :",t)}};
 $("#copier").onclick=async()=>{const t=DATA[choisie].legende||"";try{await navigator.clipboard.writeText(t);toast("Légende copiée")}catch(e){prompt("Copiez la légende :",t)}};
 $("#manuel").onclick=async()=>{
   const v=DATA[choisie]; navigator.clipboard && navigator.clipboard.writeText(v.legende||"").catch(()=>{});
@@ -1668,7 +1720,9 @@ async function ecrireVar(nom,valeur){
 }
 const champs=()=>document.querySelectorAll("#o-config [data-var], #o-tiktok [data-var]");
 function activer(on){champs().forEach(c=>c.disabled=!on);document.querySelectorAll("#o-config .action,[data-enr],#o-config .perso").forEach(b=>b.disabled=!on)}
-$("#garder2").onclick=()=>{const v=$("#jeton2").value.trim(); if(!v)return; ecrireJeton(v); $("#jeton2").value=""; lireAuto(); majBoutons(); majBandeau(); chargerReglages(); verifierEnCours()};
+$("#cleExpire").onchange=()=>{ecrireExpire($("#cleExpire").value); rappelCle()};
+rappelCle(); setInterval(rappelCle,3600e3);
+$("#garder2").onclick=()=>{const v=$("#jeton2").value.trim(); if(!v)return; ecrireJeton(v); ecrireExpire(""); rappelCle(); $("#jeton2").value=""; lireAuto(); majBoutons(); majBandeau(); chargerReglages(); verifierEnCours()};
 async function chargerReglages(){
   $("#cfgConnexion").style.display=lireJeton()?"none":""; $("#appairage").style.display=lireJeton()?"":"none"; $("#oublier").style.display=lireJeton()?"":"none";
   if(!lireJeton()){activer(false);$("#cfgEtat").textContent="";return}

@@ -112,7 +112,7 @@ def police(sens=1, l=760):
         pil = Image.fromarray(im); dr = ImageDraw.Draw(pil)
         f = ImageFont.truetype(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "polices", "Poppins-Bold.ttf"), max(12, int(30 * k)))
         dr.text((min(a[0], b[0]) + 8 * k, min(a[1], b[1]) - 9 * k), "POLICE", font=f, fill=(255, 255, 255)); im = np.array(pil)
-    except Exception: pass
+    except Exception as _e: __import__("pannes").avale(_e)
     return _rgba(im)
 
 

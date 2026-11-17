@@ -23,7 +23,7 @@ YUNET = os.path.join(os.path.dirname(os.path.abspath(__file__)), "modeles", "fac
 def _yunet():
     try:
         if os.path.exists(YUNET) and hasattr(cv2, "FaceDetectorYN"): return cv2.FaceDetectorYN.create(YUNET, "", (320, 320), 0.75)
-    except Exception: pass
+    except Exception as _e: __import__("pannes").avale(_e)
     return None
 
 def _cascade(nom):

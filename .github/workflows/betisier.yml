@@ -36,7 +36,7 @@ jobs:
         id: run
         run: |
           pip install -q numpy pillow -c contraintes.txt
-          python moteur/betisier.py "${{ inputs.jours || '7' }}"
+          python moteur/sketchs/betisier.py "${{ inputs.jours || '7' }}"
       - name: Archiver la vidéo dans les Releases du mois
         if: steps.run.outputs.video != ''
         run: |

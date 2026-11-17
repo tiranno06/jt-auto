@@ -121,7 +121,7 @@ def lire(chemin, duree_max=200):
                         wx, wy = lm[0].x, lm[0].y
                         f_ = min(vis, key=lambda v: abs(v["x"] - wx) + 0.5 * abs(v["y"] + 0.15 - wy))
                         if abs(f_["x"] - wx) < 0.35: f_["main"] = cat.category_name
-                except Exception: pass
+                except Exception as _e: __import__("pannes").avale(_e)
             out.append((t, coupe, vis))
     finally:
         det.close(); cap.release()

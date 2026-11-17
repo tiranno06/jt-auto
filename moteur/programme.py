@@ -12,7 +12,7 @@ def format_du_jour(demande, historique):
             import planning
             _, _, du_creneau = planning.decision_complete()
             if du_creneau and du_creneau != "programme": return du_creneau
-        except Exception: pass
+        except Exception as _e: __import__("pannes").avale(_e)
     if f.startswith("seq:"):
         seq = [x.strip() for x in f[4:].split(",") if x.strip() in ("mini", "libre")]
         if seq:

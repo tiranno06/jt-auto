@@ -305,7 +305,7 @@ def monteur(sk, duree, B, segs=None):
     return sk
 
 
-def deux_transcriptions(mots, autre, B, troisieme=None):
+def deux_transcriptions(mots, autre, B, troisieme=None, ecouter=None):
     """Ingé son : le même son transcrit par deux outils (Groq et le Whisper de la machine). Là où ils entendent un mot différent, l'IA
     choisit d'après le sens de la phrase (sinon on garde le premier) ; les instants des mots ne changent pas. Taux d'accord noté."""
     import difflib
@@ -331,6 +331,14 @@ def deux_transcriptions(mots, autre, B, troisieme=None):
                 if trois == [nu(w) for w in alt]: choix[k] = "B"; votes += 1
                 elif trois == [a[i] for i in idx]: choix[k] = "A"; votes += 1
     reste = [k for k in range(len(doutes)) if k not in choix]
+    if reste and ecouter:                                                  # Gemini ÉCOUTE les passages encore en doute (audit, idée 2)
+        try:
+            ent = ecouter([(max(0.0, float(mots[doutes[k][0][0]]["s"]) - 0.6), float(mots[doutes[k][0][-1]]["e"]) + 0.6) for k in reste]) or {}
+        except Exception: ent = {}
+        for n_, k in enumerate(reste):
+            v = departager(ent.get(n_), [mots[i]["w"] for i in doutes[k][0]], doutes[k][1])
+            if v: choix[k] = v; votes += 1
+        reste = [k for k in range(len(doutes)) if k not in choix]
     if reste:
         ia = _arbitrer(mots, [doutes[k] for k in reste])
         for n_, k in enumerate(reste):
@@ -345,6 +353,21 @@ def deux_transcriptions(mots, autre, B, troisieme=None):
            f"{round(100 * accord)} % de mots identiques, {len(doutes)} doute(s)" + (f", {votes} tranché(s) par une 3e écoute" if votes else "")
            + f", {sum(1 for v in choix.values() if v == 'B')} corrigé(s)")
     return mots
+
+
+def departager(entendu, a, b):
+    """Texte entendu par Gemini autour d'un doute -> "A" ou "B" (la version dont les mots s'y retrouvent nettement mieux), ou None."""
+    if not entendu: return None
+    import difflib
+    nu = lambda w: re.sub(r"[^\w'’-]", "", str(w).lower())
+    e = [nu(w) for w in str(entendu).split()]
+    def score(v):
+        v = [nu(w) for w in v]
+        return sum(1.0 if w in e else 0.8 * max((difflib.SequenceMatcher(None, w, x).ratio() for x in e), default=0) for w in v) / max(1, len(v))
+    sa, sb = score(a), score(b)
+    if sb >= 0.8 and sb > sa + 0.15: return "B"
+    if sa >= 0.8 and sa > sb + 0.15: return "A"
+    return None
 
 
 def _arbitrer(mots, doutes):

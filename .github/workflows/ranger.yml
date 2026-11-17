@@ -1,0 +1,48 @@
+name: Ranger les gros fichiers dans les Releases
+
+# Audit du 17 novembre 2026 (idée 20) : les maquettes (62 Mo, jamais lues par le robot) et les anciens décors (style croquis
+# et fichiers sans ligne dans l'index, ~39 Mo) sont rangés dans la release « archives-fichiers » au lieu d'alourdir chaque
+# téléchargement du dépôt. Ils sont pris dans la version du dépôt d'AVANT leur retrait (entrée « ref »). Rien n'est perdu :
+# pour les remettre, télécharger maquettes.zip / decors_anciens.zip depuis la release et les dézipper à la racine du dépôt.
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Version du dépôt qui contient encore les fichiers"
+        default: "b5db68acb9612c2e83907d93a760db848712d6ae"
+
+permissions:
+  contents: write
+
+jobs:
+  ranger:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ inputs.ref }}
+      - name: Faire les archives
+        run: |
+          zip -qr maquettes.zip maquettes
+          python3 - <<'PY'
+          import os, zipfile
+          idx = [l.rstrip("\n").split("\t", 1) for l in open("decors/index.tsv", encoding="utf-8")]
+          semi = {k for k, d in idx if len(idx) and "[semi]" in d}
+          with zipfile.ZipFile("decors_anciens.zip", "w", zipfile.ZIP_DEFLATED) as z:
+              for f in sorted(os.listdir("decors")):
+                  k = f.split("_")[0].split(".")[0]
+                  if f in ("index.tsv", "compteur.json", "utilises.tsv") or k in semi: continue
+                  z.write(os.path.join("decors", f))
+          print("archives prêtes")
+          PY
+          ls -la *.zip
+      - name: Déposer dans la release « archives-fichiers »
+        run: |
+          gh release view archives-fichiers -R "$GITHUB_REPOSITORY" >/dev/null 2>&1 || \
+            gh release create archives-fichiers -R "$GITHUB_REPOSITORY" --title "Archives : maquettes et anciens décors" \
+              --notes "Fichiers retirés du dépôt pour l'alléger (audit du 17 novembre 2026). Dézipper à la racine du dépôt pour les remettre."
+          gh release upload archives-fichiers maquettes.zip decors_anciens.zip --clobber -R "$GITHUB_REPOSITORY"

@@ -41,14 +41,45 @@ def _lumiere(d):
     d = d.lower()
     return "nuit" if "night" in d else "soir" if "evening" in d or "dusk" in d else "jour"
 
-def voisin(d, seuil):
-    """Décor de la banque qui ressemble le plus au lieu demandé (mêmes mots-clés, même moment de la journée), ou None."""
+UTILISES = os.path.join(BANQUE, "utilises.tsv")                           # « date\tclé » : décors de la banque montrés (audit, idée 8)
+
+def recents(jours=7, aujourd_hui=None):
+    """Clés des décors déjà montrés ces `jours` derniers jours : un même lieu ne revient plus avec la même image dans la semaine."""
+    import datetime
+    if os.environ.get("DECORS_VARIES", "1") == "0": return set()
+    j0 = aujourd_hui or datetime.date.today(); out = set()
+    try:
+        for l in open(UTILISES, encoding="utf-8"):
+            try:
+                d, k = l.rstrip("\n").split("\t", 1)
+                if (j0 - datetime.date.fromisoformat(d)).days < jours: out.add(k)
+            except ValueError: pass
+    except OSError: pass
+    return out
+
+def noter_usage(cle):
+    import datetime
+    try:
+        os.makedirs(BANQUE, exist_ok=True)
+        with open(UTILISES, "a", encoding="utf-8") as f: f.write(f"{datetime.date.today().isoformat()}\t{cle}\n")
+    except OSError: pass
+
+def variante(d):
+    """Description d'un nouveau tirage pour un lieu déjà montré cette semaine (autre angle, autre ameublement)."""
+    try: n = sum(1 for l in open(os.path.join(BANQUE, "index.tsv"), encoding="utf-8") if l.rstrip("\n").split("\t", 1)[-1].startswith(d))
+    except OSError: n = 1
+    return f"{d}, another angle of the place, different furniture arrangement and colors (version {n + 1})"
+
+def voisin(d, seuil, exclure=()):
+    """Décor de la banque qui ressemble le plus au lieu demandé (mêmes mots-clés, même moment de la journée), ou None.
+    `exclure` : clés à ne pas reprendre (décors déjà montrés cette semaine)."""
     try: idx = [l.rstrip("\n").split("\t", 1) for l in open(os.path.join(BANQUE, "index.tsv"), encoding="utf-8")]
     except OSError: return None
     m0, l0, best = _mots(d), _lumiere(d), None
     if not m0: return None
     for cle, desc in idx:
         f_ = os.path.join(BANQUE, cle + ".jpg")
+        if cle in exclure: continue
         if not os.path.exists(f_) or _lumiere(desc) != l0 or ("[semi]" in desc) != ("[semi]" in d): continue   # même style de décor
         m1 = _mots(desc); s = len(m0 & m1) / max(1, len(m0 | m1))
         if best is None or s > best[0]: best = (s, cle)
@@ -172,8 +203,9 @@ def generer(decoupage, graine=7, delai=1200, lumiere="", plans=None):  # 1re foi
     if not os.environ.get("REFAIRE", "").endswith("|decors"):              # D2 : lieu ressemblant déjà dans la banque -> réutilisé
         budget_ok = generes_ce_mois() < int(os.environ.get("DECORS_MOIS") or 60)   # D1 : budget Modal (décors neufs par mois)
         for d in list(uniques):
-            proche = voisin(d, 0.55 if budget_ok else 0.25)
+            proche = voisin(d, 0.55 if budget_ok else 0.25, exclure=recents() if budget_ok else ())
             if proche is None: continue
+            noter_usage(proche[1])
             im, cle = proche; im = varier(im, d)
             for k, d_ in demandes:
                 if d_ == d:
@@ -242,14 +274,19 @@ def generer_semi(sk, graine=7, scenes=None, delai=1200):
     refaire = os.environ.get("REFAIRE", "").endswith("|decors")
     budget_ok = generes_ce_mois() < int(os.environ.get("DECORS_MOIS") or 60)
     a_faire = []
+    deja_vus = recents() if budget_ok else set()                          # décors montrés cette semaine (sans budget : on reprend quand même)
     for k, d, n in demandes:
         f_ = os.path.join(BANQUE, _cle(d) + ".jpg"); fp = os.path.join(BANQUE, _cle(d) + "_prof.png")
-        if not refaire and os.path.exists(f_):
+        if not refaire and os.path.exists(f_) and _cle(d) not in deja_vus:
             prof = cv2.resize(cv2.imread(fp, 0), (W, H)) if os.path.exists(fp) else None
+            noter_usage(_cle(d))
             poser(k, cv2.cvtColor(cv2.imread(f_), cv2.COLOR_BGR2RGB), prof); print(f"  décor semi-réaliste {k} (lieu déjà connu) : {d[:70]}", flush=True); continue
-        proche = None if refaire else voisin(d, 0.55 if budget_ok else 0.25)
+        proche = None if refaire else voisin(d, 0.55 if budget_ok else 0.25, exclure=deja_vus)
+        if proche is None and os.path.exists(f_) and budget_ok and not refaire:
+            print(f"  décor semi-réaliste {k} : lieu déjà montré cette semaine, nouveau tirage", flush=True)
+            d = variante(d)
         if proche is not None:                                             # (pas de miroir : le cadrage des pieds est gardé)
-            im, cle = proche; fp = os.path.join(BANQUE, cle + "_prof.png")
+            im, cle = proche; fp = os.path.join(BANQUE, cle + "_prof.png"); noter_usage(cle)
             poser(k, im, cv2.resize(cv2.imread(fp, 0), (W, H)) if os.path.exists(fp) else None)
             print(f"  décor semi-réaliste {k} (lieu ressemblant de la banque) : {d[:60]}", flush=True); continue
         if budget_ok: a_faire.append((k, d, n))
@@ -281,4 +318,5 @@ def generer_semi(sk, graine=7, scenes=None, delai=1200):
         poser(k, im, pr); print(f"  décor semi-réaliste {k} (cadré ×{z:.2f}, pieds au sol) : {d[:60]}", flush=True)
         if not os.path.exists(os.path.join(BANQUE, _cle(d) + ".jpg")):
             _format.panneaux = pan; _ranger(d, im, pr)
+        noter_usage(_cle(d))
     return out

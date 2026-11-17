@@ -167,5 +167,5 @@ def appliquer(sk, texte, memoriser=True):
         L = json.load(open(f, encoding="utf-8")) if os.path.exists(f) else []
         import datetime
         if isinstance(L, list): L.append({"date": datetime.date.today().isoformat(), "remarque": str(texte)[:600], "source": "corriger"}); json.dump(L[-200:], open(f, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
-    except Exception: pass
+    except Exception as _e: __import__("pannes").avale(_e)
     return faits

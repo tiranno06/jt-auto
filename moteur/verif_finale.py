@@ -111,7 +111,7 @@ def sous_titres(video, R, son=None):
     if not mots: return out, None
     import locuteurs
     mots = locuteurs.sans_hallucinations(mots)                             # « Sous-titrage Société Radio-Canada » sur un silence…
-    ph = R.get("ph") or []; vus = set(); scores = []
+    ph = R.get("ph") or []; vus = set(); scores = []; doutes = []
     for q in ph:
         if not q.get("texte") or q.get("p") == "narrateur": continue
         a, b = float(q["deb"]) - 0.35, float(q["fin"]) + 0.35
@@ -120,8 +120,18 @@ def sous_titres(video, R, son=None):
         att, ent = _nu(q["texte"]), _nu(" ".join(mots[i]["w"] for i in idx))
         if len(att) < 3: continue
         r = difflib.SequenceMatcher(None, att, ent).ratio(); scores.append(r)
-        if r < 0.5: out.append(_defaut(q["deb"], "sous-titres", f"sous-titre « {str(q['texte'])[:50]} » mais on entend « {' '.join(ent)[:50]} »",
-                                       grave=len(ent) >= 3 and r < 0.25))   # (une 2e écoute qui entend un peu autre chose n'est pas une erreur sûre)
+        if r < 0.5: doutes.append((q, ent, r))
+    ecoute_g = {}
+    if doutes:                                                             # Gemini réécoute les seules répliques en désaccord (audit, idée 2) :
+        try: ecoute_g = __import__("video_ia").ecouter(video, [(float(q["deb"]) - 0.3, float(q["fin"]) + 0.3) for q, _, _ in doutes]) or {}
+        except Exception: ecoute_g = {}
+    for k, (q, ent, r) in enumerate(doutes):
+        g = ecoute_g.get(k)
+        if g is not None and difflib.SequenceMatcher(None, _nu(q["texte"]), _nu(g)).ratio() >= 0.6:
+            journal(f"  sous-titre « {str(q['texte'])[:40]} » confirmé par Gemini (la 2e transcription s'était trompée)"); continue
+        sur = g is not None and len(_nu(g)) >= 3                           # Gemini entend lui aussi autre chose : défaut sûr
+        out.append(_defaut(q["deb"], "sous-titres", f"sous-titre « {str(q['texte'])[:50]} » mais on entend « {(g if sur else ' '.join(ent))[:50]} »",
+                           grave=(sur or g is None) and len(ent) >= 3 and r < 0.25))   # (une 2e écoute qui entend un peu autre chose n'est pas une erreur sûre)
     out += controle_karaoke(ph, mots)                                      # le mot en jaune = le mot entendu, au même instant
     seuls, bloc = [], []
     for i, m in enumerate(mots):                                           # voix entendue sans sous-titre (3 mots ou plus d'affilée)
@@ -202,6 +212,29 @@ OUTIL = {"name": "controle", "description": "Défauts relevés image par image."
              "required": ["defauts"]}}
 
 
+# Tri des remarques de l'IA de contrôle (audit du 17 novembre 2026 : 132 remarques relues, presque toutes fausses ou de goût).
+_IA_FAUSSES = [
+    r"expression|posture|émotion|emotion|attitude|pas assez|manque d|trop (neutre|calme|jeune|mature|enfantin)|devrait (montrer|avoir|tenir)",  # goût
+    r"sous-titre|subtitle|texte (affiché|attendu|est)|le texte|mot affiché|écrit à l'écran|titre|pov",   # sous-titres : vérifiés à l'oreille
+    r"(semble|est|ce qui est|cela semble|peut être) (correct|cohérent|acceptable|normal)|personne ne parle|aucun (personnage|texte|sous-titre|problème)",
+    r"narrateur|voix off|silence|pause",
+    r"m[êe]me apparence|se ressemblent|identiques?|style (simple|cohérent)|distinguer",                  # style croquis voulu
+    r"\b(jojo|k[ée]vin|lila)\b|allure|âge|ans\b|une femme|un homme|féminin|masculin",                  # âge / genre : décidés par le vote des voix
+    r"il manque (le|les|un|des) personnage|personnages? (absent|manqu)|devraient être présents|arrière-plan",   # personnes dont on parle
+    r"question \d|non validée|décalés?|flott|décor change|téléphone",
+]
+_IA_GRAVES = r"dupliqu|en double|en trop|deux têtes|coupée? en deux|tête coupée|déform|membres? (en trop|manquant)|bras (dupliqu|en trop)"
+
+
+def trier_ia(pb, fiches=None):
+    """Remarque de l'IA de contrôle -> True (vrai défaut du dessin : bras en double, tête coupée…), False (remarque légère, gardée
+    au journal), None (fausse alerte connue : sous-titres, goût, âge / genre, personnes absentes, animal voulu… écartée)."""
+    if re.search(_IA_GRAVES, pb, re.I): return True
+    if any(re.search(x, pb, re.I) for x in _IA_FAUSSES): return None
+    if any((F or {}).get("espece") for F in (fiches or {}).values()) and re.search(r"\b(chat|chien|animal|animaux|lapin|souris|oiseau|poisson|objet)", pb, re.I): return None
+    return False
+
+
 def liste_ia(video, sk, R):
     import base64, controle, ecrire, reseau
     if not reseau.ia_disponible(): return []
@@ -233,13 +266,9 @@ def liste_ia(video, sk, R):
         try:
             n = int(d.get("image")) - 1
             pb = str(d.get("probleme") or "")
-            if re.search(r"expression|posture|émotion|emotion|attitude|pas assez|manque d", pb, re.I): continue   # avis de goût, pas une erreur
-            if re.search(r"sous-titre|subtitle", pb, re.I): continue      # les sous-titres défilent par groupes : vérifiés à l'oreille, pas par l'IA
-            if re.search(r"texte (affiché|attendu)|le texte|mot affiché|écrit à l'écran|titre|pov", pb, re.I): continue   # mots en grand, titre : voulus
-            if re.search(r"(semble|est|ce qui est|cela semble) (correct|cohérent|acceptable|normal)|personne ne parle|narrateur|voix off|silence", pb, re.I): continue
-            if any((F or {}).get("espece") for F in fiches.values()) and re.search(r"\b(chat|chien|animal|animaux|lapin|souris|oiseau|poisson|objet)", pb, re.I): continue   # animal voulu
-            if re.search(r"m[êe]me apparence|se ressemblent|identiques?|style (simple|cohérent)", pb, re.I): continue   # style croquis voulu
-            if 0 <= n < len(instants): out.append(_defaut(instants[n], "contrôle IA", pb, grave=False))
+            g = trier_ia(pb, fiches)
+            if g is None: continue
+            if 0 <= n < len(instants): out.append(_defaut(instants[n], "contrôle IA", pb, grave=g))
         except (AttributeError, TypeError, ValueError): pass
     return out[:6]
 

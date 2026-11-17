@@ -54,7 +54,7 @@ def appeler(kw):
     try: txt = appel.get(timeout=float(os.environ.get("IA_MODAL_ATTENTE") or 600))   # jamais de fabrication bloquée : 10 min au plus
     except Exception:
         try: appel.cancel()
-        except Exception: pass
+        except Exception as _e: __import__("pannes").avale(_e)
         raise
     reseau.UTILISES["modal"] = reseau.UTILISES.get("modal", 0) + 1
     print("  IA de secours sur Modal (Qwen2.5-VL) utilisée", flush=True)

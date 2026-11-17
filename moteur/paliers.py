@@ -50,7 +50,7 @@ def main():
         try:
             import alerte
             alerte.alerter(f"🎉 {joli(p)} abonnés !", "Une petite vidéo « merci » est en fabrication : elle sera dans l'onglet Vidéos (jamais publiée toute seule).")
-        except Exception: pass
+        except Exception as _e: __import__("pannes").avale(_e)
     if premier: print(f"Paliers : {len(passes)} palier(s) déjà passé(s) notés ({n} abonnés), rien de fêté après coup", flush=True)
 
 

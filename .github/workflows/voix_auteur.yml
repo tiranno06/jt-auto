@@ -32,7 +32,7 @@ jobs:
           EMO: ${{ inputs.emotion }}
         run: |
           printf '%s' "$AUDIO" > /tmp/voix.b64
-          python3 moteur/voix_auteur.py "$ROLE" "$EMO" /tmp/voix.b64
+          python3 moteur/sketchs/voix_auteur.py "$ROLE" "$EMO" /tmp/voix.b64
       - name: Enregistrer dans le dépôt
         env:
           ROLE: ${{ inputs.role }}

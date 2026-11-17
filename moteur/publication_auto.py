@@ -64,6 +64,43 @@ def alterner(file_, historique):
     return out
 
 
+def _vues_a(points, h):
+    """Vues à l'âge h (heures) d'après la courbe [[âge, vues]…] (interpolation ; None si la courbe n'y arrive pas encore)."""
+    pts = sorted((float(a), float(v)) for a, v in points or [])
+    if not pts or pts[-1][0] < h * 0.8: return None
+    for (a0, v0), (a1, v1) in zip(pts, pts[1:]):
+        if a0 <= h <= a1: return v0 + (v1 - v0) * (h - a0) / max(1e-6, a1 - a0)
+    return pts[-1][1] if pts[-1][0] <= h else pts[0][1] * h / max(1e-6, pts[0][0])
+
+
+def decolle(historique, courbes, maintenant_ts, heures=6, facteur=2.0):
+    """Vidéo qui décolle (audit du 17 novembre 2026, idée 11) : publiée il y a moins de 48 h et plus de `facteur` fois la médiane
+    des vues des autres vidéos au même âge (`heures` après publication). Renvoie son entrée d'historique, ou None."""
+    if os.environ.get("DECOLLE", "1") == "0" or not courbes: return None
+    import statistics
+    connues = {h.get("fichier"): h for h in historique if h.get("fichier")}
+    ref = [v for v in (_vues_a(e.get("p"), heures) for e in courbes.values()) if v is not None]
+    if len(ref) < 4: return None
+    med = max(30.0, statistics.median(ref))
+    best = None
+    for k, e in courbes.items():
+        if k not in connues or maintenant_ts - float(e.get("date") or 0) > 48 * 3600: continue
+        pts = [p for p in e.get("p") or [] if float(p[0]) <= heures + 1]
+        if not pts or float(pts[-1][0]) < heures * 0.5: continue
+        v = float(pts[-1][1]) * heures / max(heures * 0.5, min(heures, float(pts[-1][0])))   # projeté à `heures` si encore jeune
+        if v > facteur * med and (best is None or v > best[0]): best = (v, connues[k])
+    return best[1] if best else None
+
+
+def avancer(file_, chaud, historique):
+    """La vidéo en attente du même créateur (sinon du même lieu) que la vidéo qui décolle passe en tête de la file."""
+    if not chaud or not file_: return file_
+    connues = {h.get("fichier"): h for h in historique if h.get("fichier")}
+    p, l = profil(chaud), lieu(chaud)
+    n = next((x for x in file_ if p and profil(connues.get(x)) == p), None) or next((x for x in file_ if l and lieu(connues.get(x)) == l), None)
+    return [n] + [x for x in file_ if x != n] if n else file_
+
+
 def heure(brut):
     try:
         h, m = str(brut or "18:00").strip().replace("h", ":").split(":")[:2]; h, m = int(h), int(m or 0)
@@ -77,7 +114,7 @@ def creneaux(reglages, jour=None):
     h, m = heure(reglages.get("PUBLI_HEURE"))
     if str(reglages.get("PUBLI_HEURE_AUTO") or "0").strip() == "1":       # idée 20 : l'heure où nos vidéos font le plus de vues
         try: h, m = __import__("stats").meilleure_heure_publication(h, jour), 0   # (idée 17 : l'heure qui marche CE jour de la semaine)
-        except Exception: pass
+        except Exception as _e: __import__("pannes").avale(_e)
     out = [(h, m)]
     if str(reglages.get("PUBLI_DEUX") or "0").strip() == "1":
         h2 = heure(str(reglages.get("PUBLI_HEURE2") or "").strip() or "12:00")   # (même défaut que le site)
@@ -85,7 +122,7 @@ def creneaux(reglages, jour=None):
     return sorted(out)
 
 
-def decision(maintenant, reglages, historique, deja_aujourdhui):
+def decision(maintenant, reglages, historique, deja_aujourdhui, courbes=None):
     """(fichier à publier ou None, « quand » pour Buffer (heure de Paris, ISO) ou "" = tout de suite, raison).
     deja_aujourdhui : nombre de publications automatiques déjà demandées aujourd'hui (True = 1). Une vidéo par créneau du jour."""
     if str(reglages.get("PUBLI_AUTO") or "0").strip() != "1": return None, "", "publication automatique coupée"
@@ -98,9 +135,17 @@ def decision(maintenant, reglages, historique, deja_aujourdhui):
                           (f", la suivante à {cibles[n].strftime('%H:%M')}" if n < len(cibles) else ""))
     f = alterner(file_attente(reglages.get("PUBLI_FILE"), historique), historique)
     if not f: return None, "", "aucune vidéo cochée en attente"
+    chaud = None
+    try:
+        C = json.load(open(os.path.join(RACINE, "episodes", "courbes.json"), encoding="utf-8")) if courbes is None else courbes
+        chaud = decolle(historique, C, maintenant.timestamp())
+    except (OSError, ValueError): pass
+    f2 = avancer(f, chaud, historique)
+    vogue = f2[0] != f[0]; f = f2
     cible = atteints[n]                                                    # le créneau suivant pas encore servi
     quand = cible.strftime("%Y-%m-%dT%H:%M") if cible > maintenant + datetime.timedelta(minutes=6) else ""
-    return f[0], quand, f"{len(f)} vidéo(s) en attente" + (f", créneau {n + 1}/{len(cibles)}" if len(cibles) > 1 else "")
+    return f[0], quand, f"{len(f)} vidéo(s) en attente" + (f", créneau {n + 1}/{len(cibles)}" if len(cibles) > 1 else "") \
+        + (f" ; 🚀 « {chaud.get('fichier')} » décolle : la suite du même créateur / sujet passe devant" if vogue else "")
 
 
 def a_rediffuser(historique, maintenant, jours=90):

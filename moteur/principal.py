@@ -94,13 +94,27 @@ GPU = {"s": 0.0}
 try: SEUIL_PUB = float(os.environ.get("SEUIL_PUBLICATION") or 80)        # note minimale pour la publication automatique (régie)
 except ValueError: SEUIL_PUB = 80.0                                                          # secondes de GPU Modal (décors)
 
-def couts():
+def couts(dep_modal=None):
     """Dépenses de cette vidéo : Claude (dollars, calculés sur les jetons), ElevenLabs (caractères = crédits), GPU Modal (secondes)."""
     try:
         import voix_banque; car = voix_banque.CARACTERES["elevenlabs"]
     except Exception: car = 0
-    return {"claude_usd": round(ecrire.USAGE.get("cout", 0.0), 3), "claude_jetons": ecrire.USAGE["entree"] + ecrire.USAGE["sortie"],
-            "cache_lu": ecrire.USAGE.get("cache_lu", 0), "eleven_caracteres": car, "gpu_s": round(GPU["s"])}
+    c = {"claude_usd": round(ecrire.USAGE.get("cout", 0.0), 3), "claude_jetons": ecrire.USAGE["entree"] + ecrire.USAGE["sortie"],
+         "cache_lu": ecrire.USAGE.get("cache_lu", 0), "eleven_caracteres": car, "gpu_s": round(GPU["s"])}
+    c["total_usd"] = cout_estime(c)                                       # coût de la vidéo (audit du 17 novembre 2026, idée 32)
+    try:                                                                   # vraie dépense Modal mesurée pendant la fabrication (si
+        fin_ = __import__("budget_modal").depense_mois(timeout=60)         # une autre vidéo tournait en même temps, elle est comptée aussi)
+        if fin_ is not None and dep_modal is not None: c["modal_mesure_usd"] = round(max(0.0, fin_ - dep_modal), 2)
+    except Exception as _e: __import__("pannes").avale(_e)
+    return c
+
+TARIF_ELEVEN = 0.00022                                                     # $ par caractère ElevenLabs (offre Creator : 22 $ / 100 000)
+TARIF_GPU = 0.00031                                                        # $ par seconde de GPU Modal (A10G ~1,10 $ / h)
+
+def cout_estime(c):
+    """Coût d'une vidéo en dollars : Claude (compté sur les jetons) + ElevenLabs (caractères) + GPU Modal (secondes). Les IA
+    gratuites (Mistral, Gemini, Groq, OpenRouter) comptent 0."""
+    return round(float(c.get("claude_usd") or 0) + float(c.get("eleven_caracteres") or 0) * TARIF_ELEVEN + float(c.get("gpu_s") or 0) * TARIF_GPU, 3)
 
 def decaler(sk, pos):
     """Une réplique a été insérée en `pos` : on décale les indices du découpage et du plan gag."""
@@ -191,7 +205,7 @@ def corriger_compte_rendu(sk, base, audios, mots, decors, fmt, points, modal_ok,
             if not t_ok: raise RuntimeError("contrôle technique raté")
             shutil.copy(base + "_c.mp4", base + "_c_avant_boucle.mp4")
             try: __import__("boucle").boucler(base + "_c.mp4")
-            except Exception: pass
+            except Exception as _e: __import__("pannes").avale(_e)
             pts4 = verif_finale.verifier(base + "_c.mp4", sk4, cartoon.RENDU)
             Q4 = qualite.evaluer(base + "_c.mp4", cartoon.RENDU, sk4, "")
             conf4 = verif_finale.confiance(sk4.get("equipe"), pts4, Q4)
@@ -263,14 +277,14 @@ def main():
     if DEP_MODAL is not None:
         import budget_modal as _BM; CREDITS["modal_depense"] = DEP_MODAL; CREDITS["modal_plafond"] = _BM.plafond()
     try: __import__("credits").enregistrer(dict(CREDITS, modal="ok" if modal_ok else ("budget" if DEP_MODAL is not None else "absent")))   # voyants du site à jour
-    except Exception: pass
+    except Exception as _e: __import__("pannes").avale(_e)
     def passer_en_secours(e):                                              # Claude ne répond pas (crédit épuisé) : outils gratuits
         print(f"Claude indisponible ({str(e)[:160]}) : bascule automatique sur un sketch de secours (outils gratuits pour l'écriture).", flush=True)
         try:
             import alerte
             alerte.alerter("Crédit Claude épuisé ?", "Claude ne répond pas : la vidéo est fabriquée avec un sketch de secours déjà écrit. "
                            "Rechargez le crédit sur console.anthropic.com pour revenir aux sketchs écrits par Claude.")
-        except Exception: pass
+        except Exception as _e: __import__("pannes").avale(_e)
     PR.etape(6, "Écoute du son TikTok" if (FILIERE == "tiktok" or THEME.startswith("TIKTOK::")) else "Recherche de l'idée", forcer=True)
     PROFIL_PREP = None                                                     # filière « Sons TikTok » (à part des sketchs) : une vidéo
     if FILIERE == "tiktok" and not THEME and not S:                        # au hasard d'un profil de la liste, jamais déjà utilisée
@@ -400,7 +414,7 @@ def main():
                 import alerte
                 alerte.alerter("Pas de vidéo cette fois", f"Meilleur sketch : {q.note:.0f}/100 (« {q.sk.get('sujet', '')} »), sous votre minimum de {ecrire.QUALITE_MIN}. "
                                "Rien n'a été fabriqué : crédits voix et décors économisés. Nouvel essai au prochain réveil (si la limite d'essais du créneau n'est pas atteinte).")
-            except Exception: pass
+            except Exception as _e: __import__("pannes").avale(_e)
             return
         except Exception as e:
             if not secours.claude_indisponible(e): raise
@@ -646,7 +660,7 @@ def main():
                     F_ = B_.get("fiches") or {}
                     sk["_recette"] = {"lieu": (B_.get("lieux") or [""])[0], "animal": any((f or {}).get("espece") for f in F_.values()),
                                       "persos": len(F_), "partie": bool(sk.get("_partie"))}
-                except Exception: pass
+                except Exception as _e: __import__("pannes").avale(_e)
                 sk["realisation"]["tenues"] = {r: c.get("haut") for r, c in B_["costumes"].items()}
                 sk["realisation"]["plans"] = [f"{q.get('plan')}/{q.get('mouvement')}" for q in cartoon.PH]
                 studio.memoriser(B_, cartoon.PH, duree, rapport_video or ("ok" if video_ok else ""), fichier=os.path.basename(base) + ".mp4")
@@ -662,7 +676,7 @@ def main():
     if (os.environ.get("APERCU_RAPIDE") or "") != "1":                     # fin en boucle : la dernière image se raccorde à la première
         try:
             import shutil as _sh; _sh.copy(base + ".mp4", base + "_avant_boucle.mp4")   # (le compte rendu redessine à partir de celle-ci)
-        except Exception: pass
+        except Exception as _e: __import__("pannes").avale(_e)
         try: duree = __import__("boucle").boucler(base + ".mp4")
         except Exception as e: print(f"fin en boucle impossible ({str(e)[:120]})", flush=True)
     A_VERIFIER = []                                                        # contrôle de la vidéo FINIE (synchro, sous-titres, IA, technique)
@@ -704,6 +718,7 @@ def main():
                            accroche=accroche_hist, mots=sorted(actu._mots(" ".join(fiche.get("titres_sujet") or [t["titre"] for t in titres])))[:40],
                            empreinte=sorted(actu.empreinte(" ".join((fiche.get("titres_sujet") or []) + [sk["sujet"]] + [r["t"] for r in sk.get("repliques", [])]))), voix=moteur, gag=bool(gag), controle_video=rapport_video[:500] or ("ok" if video_ok else ""), running_gag=sk.get("running_gag", ""), duree=round(duree, 1),
                            fichier=os.path.basename(base) + ".mp4", tag=f"emissions-{jour[:7]}", legende=legende, publie=None,
+                           commentaire=__import__("legende").commentaire(sk),
                            style_accroche=style_acc, couverture_ms=int((getattr(sys.modules.get("cartoon"), "COUVERTURE", None) or 2.5) * 1000),
                            outils=dict(claude=("secours" if SECOURS else CREDITS["claude"]), mistral=CREDITS.get("mistral", "absent"),
                                        gemini=CREDITS.get("gemini", "absent"), groq=CREDITS.get("groq", "absent"),
@@ -730,12 +745,12 @@ def main():
     if A_VERIFIER: historique[-1]["a_verifier"] = A_VERIFIER               # ⚠️ sur le site : points à regarder avant de publier
     if libre and not REALISTE:                                             # note de confiance (tri « les plus sûres d'abord »)
         try: historique[-1]["confiance"] = __import__("verif_finale").confiance(sk.get("equipe"), A_VERIFIER, QUALITE["Q"])
-        except Exception: pass
+        except Exception as _e: __import__("pannes").avale(_e)
     if sk.get("equipe"): historique[-1]["equipe"] = f"{sum(1 for l in sk['equipe'] if l.get('ok'))}/{len(sk['equipe'])} contrôles bons"
     if DOUB: historique[-1]["filiere"] = "tiktok"                         # vidéo sur un son TikTok : rangée à part des sketchs
     if DOUB: historique[-1]["source_audio"] = sk["doublage"]["source"]; historique[-1]["theme"] = "Bande son : " + sk["doublage"]["source"]
     if DOUB and sk["doublage"].get("titre"): historique[-1]["titre_source"] = str(sk["doublage"]["titre"])[:200]   # titre de l'original (parties 1, 2…)
-    historique[-1]["couts"] = couts(); print(f"Dépenses : {historique[-1]['couts']}", flush=True)
+    historique[-1]["couts"] = couts(DEP_MODAL); print(f"Dépenses : {historique[-1]['couts']}", flush=True)
     try:                                                                   # ⏱️ temps par étape (carte du site) + étapes anormalement lentes
         historique[-1]["temps"] = PR.temps()
         lents_ = PR.lents(historique[-1]["temps"], [h.get("temps") for h in historique[-21:-1] if h.get("filiere") == historique[-1].get("filiere")])
@@ -749,7 +764,7 @@ def main():
             import cartoon as _c; historique[-1]["couverture_ms"] = _c.COUVERTURE_MS[0]
             if sk.get("_type_couverture"): historique[-1]["type_couverture"] = sk["_type_couverture"]   # idée 45 (couverture.py)
             if sk.get("_recette"): historique[-1]["recette"] = sk["_recette"]   # idée 41 (recette.py)
-        except Exception: pass
+        except Exception as _e: __import__("pannes").avale(_e)
     if sk.get("titre_accroche"): historique[-1]["titre_affiche"] = sk["titre_accroche"]
     if REFAIRE_MODE == "compte_rendu" and ANCIEN and not test:            # corrigée d'après le compte rendu : la moins sûre des deux est retirée
         try:
