@@ -20,36 +20,39 @@
   }
  },
  "IN N:N:N N port.cc:N] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off erro": {
-  "n": 7,
+  "n": 8,
   "premiere": "2026-11-15",
-  "derniere": "2026-11-16",
-  "exemple": "I0000 00:00:1794776552.486665    4253 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environ",
+  "derniere": "2026-11-17",
+  "exemple": "I0000 00:00:1794921200.512431    3804 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environ",
   "etape": "ingé son",
   "jours": {
    "2026-11-15": 2,
-   "2026-11-16": 5
+   "2026-11-16": 5,
+   "2026-11-17": 1
   }
  },
  "réseau : erreur N passagère, nouvel essai dans N s": {
-  "n": 8,
+  "n": 9,
   "premiere": "2026-11-15",
-  "derniere": "2026-11-16",
+  "derniere": "2026-11-17",
   "exemple": "réseau : erreur 503 passagère, nouvel essai dans 2 s",
   "etape": "ingé son",
   "jours": {
    "2026-11-15": 2,
-   "2026-11-16": 6
+   "2026-11-16": 6,
+   "2026-11-17": 1
   }
  },
  "[transformers] You are using a model of type `samN_video` to instantiate a model of type `samN`. This may be expected if you are loading a c": {
-  "n": 10,
+  "n": 11,
   "premiere": "2026-11-15",
-  "derniere": "2026-11-16",
+  "derniere": "2026-11-17",
   "exemple": "[transformers] You are using a model of type `sam2_video` to instantiate a model of type `sam2`. This may be expected if you are loading a checkpoint that shares a subset of the architecture (e.g., loading a `sam2_video` checkpoint into `Sa",
   "etape": "ingé son",
   "jours": {
    "2026-11-15": 2,
-   "2026-11-16": 8
+   "2026-11-16": 8,
+   "2026-11-17": 1
   }
  },
  "liste de contrôle par l'IA impossible (réponse inexploitable : «…»)": {
@@ -153,13 +156,14 @@
   }
  },
  "isolation des voix impossible (ElevenLabs N : b'{«…»:{«…»:«…»,«…»:«…»,«…»:\"This request exceeds your quota of N. You have N credits) : son c": {
-  "n": 3,
+  "n": 4,
   "premiere": "2026-11-16",
-  "derniere": "2026-11-16",
-  "exemple": "isolation des voix impossible (ElevenLabs 401 : b'{\"detail\":{\"type\":\"invalid_request\",\"code\":\"quota_exceeded\",\"message\":\"This request exceeds your quota of 10000. You have 9 credits) : son complet utilisé",
+  "derniere": "2026-11-17",
+  "exemple": "isolation des voix impossible (ElevenLabs 401 : b'{\"detail\":{\"type\":\"invalid_request\",\"code\":\"quota_exceeded\",\"message\":\"This request exceeds your quota of 10000. You have 4 credits) : son complet utilisé",
   "etape": "monteur",
   "jours": {
-   "2026-11-16": 3
+   "2026-11-16": 3,
+   "2026-11-17": 1
   }
  },
  "transcription ElevenLabs impossible (ElevenLabs N : b'{«…»:{«…»:«…»,«…»:«…»,«…»:\"This request exceeds your quota of N. You have N credits) :": {
@@ -210,6 +214,26 @@
   "etape": "monteur",
   "jours": {
    "2026-11-16": 1
+  }
+ },
+ "IA gemini indisponible (gemini : aucun modèle disponible (N : [{": {
+  "n": 1,
+  "premiere": "2026-11-17",
+  "derniere": "2026-11-17",
+  "exemple": "IA gemini indisponible (gemini : aucun modèle disponible (503 : [{",
+  "etape": "casting voix",
+  "jours": {
+   "2026-11-17": 1
+  }
+ },
+ "N réattribution(s) de l'IA refusée(s) : la voix de ces répliques est reconnue avec certitude": {
+  "n": 1,
+  "premiere": "2026-11-17",
+  "derniere": "2026-11-17",
+  "exemple": "5 réattribution(s) de l'IA refusée(s) : la voix de ces répliques est reconnue avec certitude",
+  "etape": "casting voix",
+  "jours": {
+   "2026-11-17": 1
   }
  }
 }
