@@ -70,6 +70,7 @@ jobs:
       - uses: actions/checkout@v7
         with:
           sparse-checkout: |
+            moteur/pannes.py
             moteur/planning.py
             moteur/stats.py
             episodes
@@ -93,6 +94,7 @@ jobs:
       - uses: actions/checkout@v7
         with:
           sparse-checkout: |
+            moteur/pannes.py
             moteur/file_attente.py
             moteur/progression.py
             moteur/quota.py

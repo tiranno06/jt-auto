@@ -126,4 +126,4 @@ def nettoyer(nom):
         rel = DP.release()
         for a in DP.fichiers(rel):
             if a["name"].startswith(nom + "_"): DP.effacer(a)
-    except Exception: pass
+    except Exception as _e: __import__("pannes").avale(_e)

@@ -57,7 +57,7 @@ def bio_refuse(pseudo, journal=print):
                                      headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/130.0 Safari/537.36"})
         d = json.loads(reseau.ouvrir(req, timeout=30) or "{}").get("data") or {}
         bio = str((d.get("user") or {}).get("signature") or "")
-    except Exception: pass
+    except Exception as _e: __import__("pannes").avale(_e)
     _BIOS[p] = bool(BIO_REFUS.search(bio))
     if _BIOS[p]: journal(f"  profil @{pseudo} écarté : sa bio interdit la reprise (« {bio[:80]} »)")
     return _BIOS[p]
@@ -234,11 +234,11 @@ def choisir(historique, journal=print, graine=None, essais=4):
             try:
                 b_ = __import__("recette").bonus_son(v)                     # idée 41 : la durée qui marche chez nous
                 if b_: v["potentiel"] += b_
-            except Exception: pass
+            except Exception as _e: __import__("pannes").avale(_e)
             try:
                 b_, mots_ = __import__("recette").bonus_sujet(v)           # idée 18 : les sujets qui marchent chez nous
                 if b_: v["potentiel"] += b_; journal(f"  sujet {'qui marche' if b_ > 0 else 'qui marche moins'} chez nous ({', '.join(mots_[:4])}, {b_:+d}) : {v['url']}")
-            except Exception: pass
+            except Exception as _e: __import__("pannes").avale(_e)
             b_ = suites.bonus(v, p, parties)
             if b_: v["potentiel"] += b_; journal(f"  suite d'une vidéo déjà faite (partie {suites.num_partie(v.get('titre'))}) : {v['url']}")
         vs.sort(key=lambda v: -(v["potentiel"] + rng.uniform(0, 25)))
@@ -284,6 +284,6 @@ def surveiller(journal=print, maintenant=None, lister=None):
         m = f"@{p} est introuvable (compte supprimé, privé ou bloqué)" if etat == "introuvable" else f"@{p} n'a rien publié depuis {j} jours"
         journal("Profil en difficulté : " + m)
         try: __import__("alerte").alerter("🎵 Profil TikTok à revoir", m + " : retirez-le de « Mes profils » si besoin.")
-        except Exception: pass
+        except Exception as _e: __import__("pannes").avale(_e)
     journal(f"Veille des profils : {sum(1 for a in nouveaux.values() if a['etat'] == 'ok')}/{len(nouveaux)} en forme")
     return E

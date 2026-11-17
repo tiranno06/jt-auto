@@ -89,7 +89,7 @@ def garder(sk, B, roles):
     try:
         sk["_casting_final"] = _json({r: {"fiche": (B.get("fiches") or {}).get(r), "costume": (B.get("costumes") or {}).get(r)}
                                       for r in roles if (B.get("fiches") or {}).get(r)})
-    except Exception: pass
+    except Exception as _e: __import__("pannes").avale(_e)
 
 
 def ligne_legende(sk):

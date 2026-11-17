@@ -72,6 +72,13 @@ def _suivi_abonnes(nom, ancien):
         print(f"Stats @{nom} : {n} abonnés", flush=True)
     return {"abonnes": n if n is not None else ancien.get("abonnes"), "abonnes_hist": serie_[-24 * 45:]}   # ~45 jours de relevés horaires
 
+def _suivi_vues(videos, ancien):
+    """Total des vues à chaque relevé (audit du 17 novembre 2026, idée 29) : sert aux « vues gagnées cette semaine » du tableau
+    de bord du site. ~45 jours de relevés horaires."""
+    serie_ = [x for x in (ancien.get("vues_hist") or []) if isinstance(x, dict)]
+    if videos: serie_.append({"t": datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="minutes"), "n": int(sum(v.get("vues") or 0 for v in videos))})
+    return {"vues_hist": serie_[-24 * 45:]}
+
 def collecter():
     nom = compte()
     if not nom: print("Stats : compte TikTok non réglé (régie > Réglages > Statistiques TikTok).", flush=True); return False
@@ -98,7 +105,7 @@ def collecter():
             h["vues"], h["likes"], h["commentaires"], h["partages"] = v["vues"], v["likes"], v["commentaires"], v["partages"]
             h["url_tiktok"] = v["url"]; h["publie"] = True
     os.makedirs(os.path.dirname(FICHIER), exist_ok=True)
-    json.dump({"maj": datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="minutes"), "compte": nom, "videos": videos, **_suivi_abonnes(nom, lire())},
+    json.dump({"maj": datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="minutes"), "compte": nom, "videos": videos, **_suivi_abonnes(nom, lire()), **_suivi_vues(videos, lire())},
               open(FICHIER, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     if hist: json.dump(hist, open(HIST, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     try: noter_courbes(videos)                                             # courbe des vues des 48 premières heures (idée 14)

@@ -432,7 +432,7 @@ def bible(sk, roles):
     try:
         import banque_visuelle
         rythme = banque_visuelle.rythme(V) if V.get("plans") else banque_visuelle.tendances().get("rythme")
-    except Exception: pass
+    except Exception as _e: __import__("pannes").avale(_e)
     heure = {"matin": (8, 5), "jour": (14, 20), "soir": (19, 40), "nuit": (2, 15)}[moment]
     return dict(graine=graine, moment=moment, lieux=lieux, gags=gags, costumes=costumes, figurants=figurants, ambiances=sorted(ambiances),
                 lumiere=lum, ombre=0.24 if moment != "nuit" else 0.32, etalonnage=ETALONNAGE[moment], heure=heure,
@@ -753,7 +753,7 @@ def proba_cine():
             if len(avec) >= 3 and len(sans) >= 3:
                 r = (sum(avec) / len(avec) + 1) / (sum(sans) / len(sans) + 1)
                 p[k] = float(np.clip(p[k] * r ** 0.5, 0.15, 0.95))
-    except Exception: pass
+    except Exception as _e: __import__("pannes").avale(_e)
     return p
 
 # ------------------------------------------------------------------ personnages dans des lieux différents (appel, visio, message…)
@@ -780,7 +780,7 @@ def appel_devine(sk):
         V = video_ia.DERNIER or {}
         if len([p for p in V.get("personnages") or [] if isinstance(p, dict)]) >= 2 and not V.get("meme_interprete") \
                 and not re.search(CONTEXTE_APPEL, str(V.get("resume") or "").lower()): ensemble = True
-    except Exception: pass
+    except Exception as _e: __import__("pannes").avale(_e)
     if ensemble: return n >= 2                                             # (« conversation téléphonique » dans le résumé ne suffit plus)
     return n >= 2 or bool(re.search(CONTEXTE_APPEL, str(D.get("contexte") or "").lower())) or (bool(fortes) and seul)
 

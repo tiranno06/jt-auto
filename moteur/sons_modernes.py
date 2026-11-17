@@ -265,7 +265,7 @@ def ambiance(lieu, duree, graine=7):
             if len(a) > SR:
                 a = np.tile(a, (n // len(a) + 1, 1))[:n]
                 return (a / (np.abs(a).max() + 1e-9) * 0.12).astype(np.float32)
-        except Exception: pass
+        except Exception as _e: __import__("pannes").avale(_e)
     rng = np.random.default_rng(graine); t = np.arange(n) / SR
     fond = _passe_bas(_bruit(n, rng), 400) * 0.05                          # « room tone » : le souffle de la pièce
     if lieu in ("bar", "restaurant", "palais"):                            # murmure de clients, tintements

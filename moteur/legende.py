@@ -76,7 +76,7 @@ def hashtags(sk=None, texte="", n=None):
     try:
         import metiers
         out += [_propre(m) for m in set(metiers.qui_fait(sk).values())] if sk.get("repliques") else []
-    except Exception: pass
+    except Exception as _e: __import__("pannes").avale(_e)
     out += NICHE
     vus = []
     for h in out:
@@ -99,14 +99,40 @@ def composer(sk, credit=""):
     corps = str(sk.get("legende") or "").strip()
     if sk.get("question"): corps += "\n\n" + str(sk["question"]).strip()
     try: corps = __import__("orthographe").corriger_texte(corps)          # LanguageTool (idée 15) : accents et accords muets
-    except Exception: pass
+    except Exception as _e: __import__("pannes").avale(_e)
     try:
         l_ = __import__("suites").ligne_legende(sk)                        # vidéo en plusieurs parties : la suite est annoncée
         if l_: corps += "\n\n" + l_
-    except Exception: pass
+    except Exception as _e: __import__("pannes").avale(_e)
     if phrase_abonne(): corps += "\n\n" + phrase_abonne()
     if credit: corps += "\n\n" + credit
     return sans_lien(corps) + "\n\n" + " ".join("#" + h for h in hashtags(sk))
+
+
+CHOIX = ("Team {a} ou team {b} ? 👇", "Vous êtes plutôt {a} ou {b} ? 👇")
+GENERAL = ("Vous auriez fait quoi à sa place ? 👇", "Ça vous est déjà arrivé ? Racontez 👇", "Qui a raison selon vous ? 👇",
+           "Identifie quelqu'un qui ferait exactement ça 😂👇")
+
+
+def commentaire(sk):
+    """Commentaire de relance à épingler à la main sous la vidéo (audit du 17 novembre 2026, idée 14 : TikTok ne permet pas de le
+    poster par un robot). Celui de l'IA s'il existe et diffère de la question de la description ; sinon un choix entre les deux
+    personnages (noms dits dans le dialogue, sinon « le personnage de gauche / de droite »), sinon une question générale."""
+    import hashlib, re
+    c = str(sk.get("commentaire") or "").strip()
+    q = str(sk.get("question") or "").strip()
+    if c and c.lower() != q.lower(): return c
+    graine = int(hashlib.sha1(str(sk.get("sujet") or q).encode()).hexdigest()[:6], 16)
+    noms = []
+    for r in sk.get("repliques") or []:                                     # « Maurice », « Kenza »… appelés dans le dialogue
+        for n in re.findall(r"(?:^|\s)([A-ZÉÈ][a-zéèëïî]{2,12})(?=\s?[,!?])", str(r.get("t") or r.get("texte") or "")):
+            if n.lower() not in ("mais", "non", "oui", "bah", "ben", "allez", "alors", "attends", "quoi", "tu", "je", "moi", "toi", "bon",
+                                 "ouais", "voilà", "hein", "eh", "oh", "ah", "elle", "il", "on", "nous", "vous", "et", "ça", "pourquoi",
+                                 "comment", "regarde", "écoute", "arrête", "putain", "merde", "wesh", "frère", "maman", "papa", "madame",
+                                 "monsieur", "viens", "arrête", "attendez", "tiens", "salut", "merci", "pardon", "sérieux", "grave", "vas", "laisse", "dis",
+                                 "franchement", "putain", "excuse", "désolé", "chérie", "chéri", "bébé", "mec", "gars", "frérot") and n not in noms: noms.append(n)
+    if len(noms) >= 2: return CHOIX[graine % len(CHOIX)].format(a=noms[0], b=noms[1])
+    return GENERAL[graine % len(GENERAL)]
 
 
 def completer(legende, fichier=None):

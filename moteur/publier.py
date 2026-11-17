@@ -56,7 +56,7 @@ def _couverture_ms(url):
         nom = os.path.basename(str(url).split("?")[0])
         for h in reversed(json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "episodes", "historique.json"), encoding="utf-8"))):
             if h.get("fichier") == nom and h.get("couverture_ms"): return int(h["couverture_ms"])
-    except Exception: pass
+    except Exception as _e: __import__("pannes").avale(_e)
     return int(os.environ.get("COUVERTURE_MS") or 2500)
 
 def requete_post(canal, texte, url, mode, ia=True, service="tiktok", titre="", quand=None):
@@ -211,7 +211,7 @@ if __name__ == "__main__":
         e_ = next((h for h in json.load(open(HIST, encoding="utf-8")) if h.get("fichier") == os.path.basename(video)), {})
         os.environ.setdefault("TITRE_VIDEO", (e_.get("titre_affiche") or e_.get("titre") or "").strip())
         if e_.get("couverture_ms"): os.environ.setdefault("COUVERTURE_MS", str(int(e_["couverture_ms"])))
-    except Exception: pass
+    except Exception as _e: __import__("pannes").avale(_e)
     legende = open(legende_txt, encoding="utf-8").read().split("\n\nSources :")[0].strip()
     try: legende = __import__("legende").completer(legende, video)        # jamais de lien ; hashtags ajoutés aux anciennes vidéos
     except Exception as e: print(f"légende gardée telle quelle ({str(e)[:120]})")

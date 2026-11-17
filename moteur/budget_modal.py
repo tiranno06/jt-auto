@@ -42,5 +42,5 @@ def verifier(journal=print):
                 open(f, "w").write(jour)
                 __import__("alerte").alerter("Budget Modal presque atteint", f"{d:.2f} $ dépensés ce mois-ci sur {p:.0f} $ : le robot continue avec les "
                                              "outils gratuits (décors dessinés) jusqu'au mois prochain.")
-        except Exception: pass
+        except Exception as _e: __import__("pannes").avale(_e)
     return d

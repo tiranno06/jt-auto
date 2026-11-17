@@ -94,7 +94,7 @@ def _noter_quota(fourn, h):
             v = h.get(cle) if h is not None else None
             if v not in (None, ""): q[nom] = int(float(v))
         if q: QUOTA[fourn] = dict(QUOTA.get(fourn, {}), **q)
-    except Exception: pass
+    except Exception as _e: __import__("pannes").avale(_e)
 UTILISES = {}                                                              # nombre d'appels réussis par fournisseur (fiche de la vidéo)
 
 

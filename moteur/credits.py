@@ -33,7 +33,7 @@ def main():
         import budget_modal
         d_ = budget_modal.depense_mois()
         if d_ is not None: etat["modal_depense"] = d_; etat["modal_plafond"] = budget_modal.plafond()
-    except Exception: pass
+    except Exception as _e: __import__("pannes").avale(_e)
     d = enregistrer(etat)
     print("Crédits : " + ", ".join(f"{k} = {v}" for k, v in d.items()), flush=True)
     return 0

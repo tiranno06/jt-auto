@@ -118,7 +118,7 @@ def reperes(F, p):
     if STYLE_PERSO == "croquis":
         import perso_croquis
         try: return perso_croquis.reperes(F, _pose(F, p))
-        except Exception: pass
+        except Exception as _e: __import__("pannes").avale(_e)
     if STYLE_PERSO in ("toon", "croquis"):
         import toon
         K = toon.squelette(_pose(F, p))

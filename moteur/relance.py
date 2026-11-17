@@ -19,7 +19,7 @@ def annule_par_github(run_id):
     for j in DP._req("GET", f"{DP.API}/repos/{DP._depot()}/actions/runs/{run_id}/jobs").get("jobs") or []:
         if j.get("conclusion") not in ("cancelled", "failure"): continue
         try: msgs += [a.get("message", "") for a in DP._req("GET", f"{DP.API}/repos/{DP._depot()}/check-runs/{j['id']}/annotations")]
-        except Exception: pass
+        except Exception as _e: __import__("pannes").avale(_e)
     texte = " ".join(msgs)
     if re.search(r"canceled by|cancelled by", texte, re.I): return False
     return bool(COUPE_GITHUB.search(texte))

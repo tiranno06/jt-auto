@@ -25,7 +25,7 @@ def main(nom, a, b):
         import traceback; traceback.print_exc()
         open(f"{tmp}/{cle}.echec", "w").write(str(e)[:500])
         try: DP.envoyer(rel, f"{tmp}/{cle}.echec", f"{cle}.echec")
-        except Exception: pass
+        except Exception as _e: __import__("pannes").avale(_e)
         sys.exit(1)
 
 

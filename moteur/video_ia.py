@@ -177,3 +177,51 @@ def texte():
                      for p in r.get("personnages") or [] if isinstance(p, dict))[:1200]
     return (f"\nCe que Gemini a vu en regardant TOUTE la vidéo d'origine : {str(r.get('resume', ''))[:500]} Lieu : {r.get('lieu', '?')}. "
             f"Personnages : {pers}." + (" Une même personne joue plusieurs personnages." if r.get("meme_interprete") else "") + "\n")
+
+
+ECOUTE = """Écoute ce son (dialogue en français parlé, souvent de l'argot ou un dessin animé doublé). Pour CHAQUE passage ci-dessous,
+écris EXACTEMENT les mots prononcés entre ces deux instants (rien d'inventé, pas de correction du langage parlé ; "" si personne ne parle) :
+{passages}
+Réponds UNIQUEMENT en JSON : {{"passages": [{{"n": 0, "texte": "..."}}]}}"""
+
+
+def ecouter(chemin, passages):
+    """Gemini ÉCOUTE le son (audit du 17 novembre 2026, idée 2 : 80 sous-titres signalés faux) sur les seuls passages en doute :
+    passages = [(début, fin)] -> {n° du passage: texte entendu}. Son réduit (mono 32 kb/s) envoyé dans la demande ; {} si impossible."""
+    cle = os.environ.get("GEMINI_API_KEY")
+    if os.environ.get("ECOUTE_GEMINI", "1") == "0" or not cle or not passages or not chemin or not os.path.exists(chemin): return {}
+    import reseau
+    if "gemini" in reseau.HORS_SERVICE: return {}
+    d = tempfile.mkdtemp(); son = os.path.join(d, "s.mp3")
+    r = subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", chemin, "-vn", "-ac", "1", "-ar", "16000", "-b:a", "32k", "-t", "200", son], capture_output=True)
+    if r.returncode or not os.path.exists(son) or os.path.getsize(son) > 15e6: return {}
+    lignes = "\n".join(f"{k}. de {a:.1f} s à {b:.1f} s" for k, (a, b) in enumerate(passages[:40]))
+    corps = {"contents": [{"parts": [{"inline_data": {"mime_type": "audio/mp3", "data": base64.b64encode(open(son, "rb").read()).decode()}},
+                                     {"text": ECOUTE.format(passages=lignes)}]}],
+             "generationConfig": {"temperature": 0.0, "response_mime_type": "application/json"}}
+    for modele in MODELES:
+        req = urllib.request.Request(f"https://generativelanguage.googleapis.com/v1beta/models/{modele}:generateContent",
+                                     data=json.dumps(corps).encode(), method="POST", headers={"Content-Type": "application/json", "x-goog-api-key": cle})
+        try:
+            dd = json.loads(reseau.ouvrir(req, timeout=180, essais=2))
+            txt = "".join(p.get("text", "") for c in dd.get("candidates") or [] for p in (c.get("content") or {}).get("parts") or [])
+            return lire_ecoute(txt, len(passages))
+        except Exception as e:
+            err = str(e)[:160]
+            print(f"  Gemini n'a pas pu écouter ({modele} : {err[:80]})", flush=True)
+            if any(x in err.lower() for x in ("quota", "exhausted", "per day")): reseau.HORS_SERVICE.add("gemini"); break
+    return {}
+
+
+def lire_ecoute(txt, n):
+    """Réponse de Gemini -> {n° du passage: texte}."""
+    m = re.search(r"\{.*\}", txt or "", re.S)
+    try: res = json.loads(m.group(0)) if m else {}
+    except ValueError: return {}
+    out = {}
+    for x in res.get("passages") or [] if isinstance(res, dict) else []:
+        try:
+            k = int(x.get("n"))
+            if 0 <= k < n and isinstance(x.get("texte"), str): out[k] = x["texte"].strip()
+        except (AttributeError, TypeError, ValueError): pass
+    return out

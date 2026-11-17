@@ -351,6 +351,132 @@ class TempsDepasse(RuntimeError):
         super().__init__(msg); self.faits = list(faits)
 
 
+def teinte_lut(t3):
+    r_, v_, b_ = t3; a_ = np.arange(256, dtype=np.float32)
+    return np.clip(np.stack([a_ * r_, a_ * v_, a_ * b_], 1), 0, 255).astype(np.uint8)[:, None, :]
+
+
+def rembobine(fr, tm, u):
+    """Effet cassette qui rembobine : lignes qui ondulent, couleurs décalées, bande de bruit, « ◀◀ » qui clignote."""
+    fr = fr.copy(); rg = np.random.default_rng(int(tm * 1000))
+    for y in range(0, H, 6):                                           # lignes décalées (tracking VHS)
+        d_ = int(10 * math.sin(y * 0.03 + tm * 40) + rg.integers(-3, 4))
+        if d_: fr[y:y + 6] = np.roll(fr[y:y + 6], d_, 1)
+    fr[..., 0] = np.roll(fr[..., 0], 6, 1); fr[..., 2] = np.roll(fr[..., 2], -6, 1)   # couleurs décalées
+    yb = int((tm * 2400) % H); fr[yb:yb + 50] = np.clip(fr[yb:yb + 50].astype(np.int16) + rg.integers(-60, 60, fr[yb:yb + 50].shape), 0, 255).astype(np.uint8)
+    fr = cv2.addWeighted(fr, 0.85, np.full_like(fr, (40, 60, 120)), 0.15, 0)
+    if int(tm * 6) % 2 == 0:
+        for k in range(2):                                             # « ◀◀ »
+            x0 = 80 + k * 70
+            pts = np.array([(x0 + 60, 260), (x0, 300), (x0 + 60, 340)], np.int32)
+            cv2.fillPoly(fr, [pts], (250, 250, 250), cv2.LINE_AA)
+    cv2.putText(fr, "REMBOBINAGE", (230, 318), cv2.FONT_HERSHEY_DUPLEX, 1.6, (250, 250, 250), 3, cv2.LINE_AA)
+    return fr
+
+
+def tache(img, x, y, r, col, a):
+    """Petite tache de lumière / de vapeur, fondue dans l'image (zone locale seulement)."""
+    x0, y0, x1, y1 = int(max(0, x - r)), int(max(0, y - r)), int(min(W, x + r + 1)), int(min(H, y + r + 1))
+    if x1 <= x0 or y1 <= y0 or a <= 0: return
+    yy, xx = np.ogrid[y0:y1, x0:x1]; m = np.clip(1 - np.sqrt((xx - x) ** 2 + (yy - y) ** 2) / r, 0, 1)[..., None] * a
+    img[y0:y1, x0:x1] = (img[y0:y1, x0:x1] * (1 - m) + np.array(col, np.float32) * m).astype(np.uint8)
+
+
+def keystone(img, plan):
+    """Plongée / contre-plongée : les verticales fuient vers le bas (plongée) ou vers le haut (contre-plongée)."""
+    k = 0.075 * W
+    if plan == "contre_plongee": src = np.float32([[-k, 0], [W + k, 0], [W, H], [0, H]])
+    else: src = np.float32([[0, 0], [W, 0], [W + k, H], [-k, H]])
+    Mp = cv2.getPerspectiveTransform(src, np.float32([[0, 0], [W, 0], [W, H], [0, H]]))
+    return cv2.warpPerspective(img, Mp, (W, H), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REPLICATE)
+
+
+def _bande_son(APPEL, B, CINE, DEBUT_SCENE, DECOUPE, DOUB, FIN_CARTE, GEL, REMB, SANS_ENTREE, SILENCES, TITRES, audios, mini, ph, places, sk, tmp, total, transitions):
+    """Bande son de la vidéo (sortie de cartoon.rendre, audit du 17 novembre 2026, idée 22) : voix ou piste d'origine, voix au
+    téléphone, bruitages, ambiance et musique qui s'effacent quand on parle, volume réglé une fois. Renvoie le chemin du WAV final."""
+    n = int(SRM * (total + 1)); mix = np.zeros((n, 2))
+    if DOUB:                                                               # la bande son d'origine telle quelle (voix + musique)
+        with wave.open(DOUB["piste"]) as w_:
+            assert w_.getframerate() == SRM and w_.getnchannels() == 2, "piste de doublage : 2 canaux au bon échantillonnage attendus"
+            b = np.frombuffer(w_.readframes(w_.getnframes()), np.int16).reshape(-1, 2).astype(np.float64) / 32768
+        b = b[:int(SRM * (GEL + 1.1))]; f_ = int(0.6 * SRM)                 # fondu sur la fin (arrêt sur image puis signature)
+        if len(b) > f_: b[-f_:] *= np.linspace(1, 0, f_)[:, None]
+        mix[:len(b)] += b[:n]
+    else:
+        for q, a in zip(ph, audios):
+            s0 = int(q["deb"] * SRM)
+            if s0 >= n: continue                                           # aperçu 10 s : réplique après la coupure
+            b = vers_mix(a)[:n - s0]; mix[s0:s0 + len(b)] += b
+    for t0_, t1_, mode_, _sc in APPEL:                                     # voix au téléphone pendant les plans d'écoute (idée 16)
+        if mode_ != "ecoute": continue
+        a_, b_ = int(t0_ * SRM), min(n, int(t1_ * SRM))
+        if b_ - a_ > SRM // 10:
+            seg = mix[a_:b_].copy(); tel = SM.telephone(seg, SRM)
+            f_ = min(len(seg) // 4, int(0.04 * SRM)); w_ = np.ones(len(seg)); w_[:f_] = np.linspace(0, 1, f_); w_[-f_:] = np.linspace(1, 0, f_)
+            mix[a_:b_] = seg * (1 - w_[:, None]) + tel * w_[:, None]
+    fx = np.zeros((n, 2))
+    for t0_, t1_, _src in REMB:                                            # bruit de cassette qui rembobine (idée 22)
+        a_ = int(t0_ * SRM); r_ = SM.rembobinage(t1_ - t0_, SRM); fx[a_:a_ + len(r_)] += r_[:max(0, n - a_)]
+    def ajoute(nom, t_, g):
+        x = SM.son(nom); s0 = int(max(0, t_) * SRM); e = min(n, s0 + len(x))
+        if e > s0: fx[s0:e] += x[:e - s0] * g
+    for tr in (() if DOUB else transitions):                              # changements de scène / de gag bien marqués
+        ajoute("transition", tr[0] - 0.25, 0.8)
+        if tr[2] == "carton": ajoute("pop", tr[0] + 0.05, 0.7)
+    if mini:
+        for k in TITRES: ajoute("pop", min(z2["deb"] for z2 in ph if z2["scene"] == k) - 0.2, 0.6)
+    if not DOUB:                                                           # doublage : la bande son d'origine a déjà ses effets
+        # bruitages « tendance » (vine boom, dun dun dun, klaxon, criquets, caisse…) : catalogue moteur/bruitages.py
+        imposes = {}
+        for b_ in ((sk.get("studio") or {}).get("bruitages") or []) if isinstance(sk.get("studio"), dict) else []:
+            try: imposes[int(b_.get("replique"))] = str(b_.get("son"))
+            except (AttributeError, TypeError, ValueError): pass
+        BRUITAGES[:] = BR.choisir(ph, SILENCES if B else (), (B or {}).get("graine", len(sk.get("sujet", ""))), imposes, total, BR.densite_apprise())
+        for nom, t_, g in BRUITAGES: ajoute(nom, t_, g)
+    if not DOUB:
+        d_m = len(SM.son("montee")) / SRM
+        ajoute("montee", ph[-1]["deb"] - d_m, 0.5)                        # tension juste avant la chute finale
+        ajoute("boom_fin", ph[-1]["fin"] + 0.02, 1.0)                     # gros impact sur la chute finale
+        if CHUTE_KO and len(places[ph[-1]["scene"]]) > 1: ajoute("boom_leger", ph[-1]["fin"] + 0.57, 0.5)   # celui qui encaisse tombe à la renverse
+    amb = np.zeros((n, 2))                                                 # son « cinéma » : ambiance du lieu, pas, whoosh, musique
+    def ajoute_x(x, t_, g, piste):
+        s0 = int(max(0, t_) * SRM); e = min(n, s0 + len(x))
+        if e > s0: piste[s0:e] += x[:e - s0] * g
+    if B and CINE.get("son"):
+        for sh_ in DECOUPE:                                                # passages rapides entre plans
+            if sh_["passage"] == "file": ajoute_x(SM.swipe(), sh_["t0"] - 0.08, 0.3 if not DOUB else 0.15, fx)
+            elif sh_["passage"] == "zoom": ajoute_x(SM.whoosh(0.35), sh_["t0"] - 0.12, 0.2 if not DOUB else 0.1, fx)
+        for sc_, t_sc in DEBUT_SCENE.items():                              # bruits de pas quand ils entrent
+            if sc_ not in SANS_ENTREE: ajoute_x(SM.pas(graine=sc_), t_sc, 0.3, fx)
+        if not DOUB:                                                       # la bande son d'origine a déjà son ambiance et sa musique
+            for sc_ in places:
+                zs = [z2 for z2 in ph if z2["scene"] == sc_]
+                if not zs: continue
+                t0_, t1_ = min(z2["deb"] for z2 in zs) - 0.3, max(z2["fin"] for z2 in zs) + 0.8
+                a_ = SM.ambiance(B["lieux"][min(sc_, len(B["lieux"]) - 1)], max(0.5, t1_ - t0_), graine=B["graine"] % 997 + sc_)
+                f_ = min(len(a_) // 3, int(0.3 * SRM)); a_[:f_] *= np.linspace(0, 1, f_)[:, None]; a_[-f_:] *= np.linspace(1, 0, f_)[:, None]
+                ajoute_x(a_, t0_, 1.0, amb)
+            if {"pluie", "orage"} & set(B.get("ambiances") or ()):            # pluie et tonnerre (calé sur les éclairs)
+                try: ajoute_x(SM.meteo(total, "orage" in B["ambiances"], graine=B["graine"] % 997), 0.0, 1.0, amb)
+                except Exception as e_: print(f"son de pluie impossible : {e_}", flush=True)
+            emos = [z2["emo"] for z2 in ph]
+            humeur = ("tension" if sum(e in ("cri", "colere", "panique") for e in emos) >= 2 else "triste" if sum(e in ("pleurs", "triste", "soupir") for e in emos) >= 2
+                      else "joie" if sum(e in ("rire", "joie", "amour") for e in emos) >= 2 else "neutre")
+            ajoute_x(SM.musique(total, humeur, graine=B["graine"] % 997), 0.0, 0.5, amb)
+    ajoute("pop", GEL, 0.5)                                                # arrêt sur image
+    if FIN_CARTE is not None: ajoute("pop", FIN_CARTE, 0.6)
+    voix_env = np.convolve(np.abs(mix[:, 0]), np.ones(int(0.15 * SRM)) / int(0.15 * SRM), "same")
+    voix_env = np.clip(voix_env / (np.percentile(voix_env[voix_env > 1e-4], 90) + 1e-6) if (voix_env > 1e-4).any() else voix_env, 0, 1)
+    mix = mix + fx * (1 - 0.5 * voix_env)[:, None] + amb * (1 - 0.6 * voix_env)[:, None]   # l'ambiance et la musique s'effacent quand on parle
+    mix = np.clip(mix / max(1.0, np.abs(mix).max() / 0.95), -0.99, 0.99)
+    brut, wav = f"{tmp}/mix.wav", f"{tmp}/mix_norm.wav"
+    with wave.open(brut, "wb") as w:
+        w.setnchannels(2); w.setsampwidth(2); w.setframerate(SRM); w.writeframes((mix * 32767).astype(np.int16).tobytes())
+    import jt as _jt
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", brut, "-af", _jt.filtre_volume(mix, SRM), "-ar", "48000", "-ac", "2", wav], check=True)
+    return wav
+
+
 def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False, reprise=None, limite=None, plage=None, deja=None, plans_seuls=False):
     import dessin_partage as DP
     args0 = None                                                           # pour le dessin partagé : les arguments tels qu'au départ
@@ -692,9 +818,6 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
             m_ = (np.abs(c_.astype(np.int16) - (1, 2, 3)).sum(2) > 9).astype(np.float32)
             AVANT_FLOU[sc_] = (cv2.GaussianBlur(c_, (0, 0), 9), cv2.GaussianBlur(m_, (0, 0), 9)[..., None])
 
-    def teinte_lut(t3):
-        r_, v_, b_ = t3; a_ = np.arange(256, dtype=np.float32)
-        return np.clip(np.stack([a_ * r_, a_ * v_, a_ * b_], 1), 0, 255).astype(np.uint8)[:, None, :]
     T_REAC, OBJ_DUO = {}, {}
 
     def t_reaction(q):
@@ -969,7 +1092,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
                     p["bras_d"] = TEL_OREILLE if mien["objet"] == "telephone" else (120, -100)   # téléphone : tenu à l'oreille
         if JEU_O is not None:                                              # nuances de jeu de la vraie personne au même instant
             try: jeu_original.appliquer(p, JEU_O, role, tm, parle, EXAGERE)
-            except Exception: pass
+            except Exception as _e: __import__("pannes").avale(_e)
         return p
 
     global COUVERTURE                                                      # couverture : titre visible et visage le plus expressif
@@ -1000,22 +1123,6 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
         cv2.rectangle(fr, (0, h2 - 5), (W, h2 + 5), (250, 250, 250), -1)
         return fr
 
-    def rembobine(fr, tm, u):
-        """Effet cassette qui rembobine : lignes qui ondulent, couleurs décalées, bande de bruit, « ◀◀ » qui clignote."""
-        fr = fr.copy(); rg = np.random.default_rng(int(tm * 1000))
-        for y in range(0, H, 6):                                           # lignes décalées (tracking VHS)
-            d_ = int(10 * math.sin(y * 0.03 + tm * 40) + rg.integers(-3, 4))
-            if d_: fr[y:y + 6] = np.roll(fr[y:y + 6], d_, 1)
-        fr[..., 0] = np.roll(fr[..., 0], 6, 1); fr[..., 2] = np.roll(fr[..., 2], -6, 1)   # couleurs décalées
-        yb = int((tm * 2400) % H); fr[yb:yb + 50] = np.clip(fr[yb:yb + 50].astype(np.int16) + rg.integers(-60, 60, fr[yb:yb + 50].shape), 0, 255).astype(np.uint8)
-        fr = cv2.addWeighted(fr, 0.85, np.full_like(fr, (40, 60, 120)), 0.15, 0)
-        if int(tm * 6) % 2 == 0:
-            for k in range(2):                                             # « ◀◀ »
-                x0 = 80 + k * 70
-                pts = np.array([(x0 + 60, 260), (x0, 300), (x0 + 60, 340)], np.int32)
-                cv2.fillPoly(fr, [pts], (250, 250, 250), cv2.LINE_AA)
-        cv2.putText(fr, "REMBOBINAGE", (230, 318), cv2.FONT_HERSHEY_DUPLEX, 1.6, (250, 250, 250), 3, cv2.LINE_AA)
-        return fr
 
     def image(fi):
         tm = fi / FPS
@@ -1142,12 +1249,6 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
         if FICHES and f.get("fiche"): p["s"] *= (1.0 if f.get("compagnon") else 1.15); HU.dessiner(img, f["fiche"], p)
         else: M.dessiner(img, f["perso"], p)
 
-    def tache(img, x, y, r, col, a):
-        """Petite tache de lumière / de vapeur, fondue dans l'image (zone locale seulement)."""
-        x0, y0, x1, y1 = int(max(0, x - r)), int(max(0, y - r)), int(min(W, x + r + 1)), int(min(H, y + r + 1))
-        if x1 <= x0 or y1 <= y0 or a <= 0: return
-        yy, xx = np.ogrid[y0:y1, x0:x1]; m = np.clip(1 - np.sqrt((xx - x) ** 2 + (yy - y) ** 2) / r, 0, 1)[..., None] * a
-        img[y0:y1, x0:x1] = (img[y0:y1, x0:x1] * (1 - m) + np.array(col, np.float32) * m).astype(np.uint8)
 
     def ambiances(img, tm, sc, zb, cxb, cyb):
         info = INFOS.get(sc, {}); amb = B["ambiances"]; P_ = PARTICULES
@@ -1180,13 +1281,6 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
                 a, b = ecr(nx0, ny0); c, d = ecr(nx1, ny1); a, b, c, d = max(0, int(a)), max(0, int(b)), min(W, int(c)), min(H, int(d))
                 if c > a and d > b: img[b:d, a:c] = (img[b:d, a:c] * 0.7).astype(np.uint8)
 
-    def keystone(img, plan):
-        """Plongée / contre-plongée : les verticales fuient vers le bas (plongée) ou vers le haut (contre-plongée)."""
-        k = 0.075 * W
-        if plan == "contre_plongee": src = np.float32([[-k, 0], [W + k, 0], [W, H], [0, H]])
-        else: src = np.float32([[0, 0], [W, 0], [W + k, H], [-k, H]])
-        Mp = cv2.getPerspectiveTransform(src, np.float32([[0, 0], [W, 0], [W, H], [0, H]]))
-        return cv2.warpPerspective(img, Mp, (W, H), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REPLICATE)
 
     def reaction(tm):
         """Plan de réaction : juste après une vanne, la caméra coupe sur la tête de celui qui l'encaisse."""
@@ -1527,7 +1621,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
                     SONDE["res"].append(dict(t=round(tm, 2), role=role, x=float(hx), y=float(hy), rx=float(hrx), ry=float(hry),
                                              plan=plan_courant, seul=cible_seule, parle=(role == q["p"]), i=q["i"],
                                              sous_titre=bool(q["deb"] <= tm < q["fin"] + 0.2 and (q["p"] != "narrateur" or q["i"] in HORS_C))))
-                except Exception: pass
+                except Exception as _e: __import__("pannes").avale(_e)
             flou_p = 0.0
             if B and CINE.get("focus") and len(places[sc]) > 1 and plan_courant in ("moyen", "large") and not ang and q["p"] in places[sc] and role != q["p"]:
                 flou_p = 3.2 * _ease((tm - q["deb"] + 0.05) / 0.35)                # mise au point sur celui qui parle : l'autre devient flou
@@ -1676,87 +1770,8 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
             if pool: pool.close(); pool.join()
         return total
 
-    # ---- son : voix, bruitages (woosh à chaque scène, rimshot à la chute finale)
-    n = int(SRM * (total + 1)); mix = np.zeros((n, 2))
-    if DOUB:                                                               # la bande son d'origine telle quelle (voix + musique)
-        with wave.open(DOUB["piste"]) as w_:
-            assert w_.getframerate() == SRM and w_.getnchannels() == 2, "piste de doublage : 2 canaux au bon échantillonnage attendus"
-            b = np.frombuffer(w_.readframes(w_.getnframes()), np.int16).reshape(-1, 2).astype(np.float64) / 32768
-        b = b[:int(SRM * (GEL + 1.1))]; f_ = int(0.6 * SRM)                 # fondu sur la fin (arrêt sur image puis signature)
-        if len(b) > f_: b[-f_:] *= np.linspace(1, 0, f_)[:, None]
-        mix[:len(b)] += b[:n]
-    else:
-        for q, a in zip(ph, audios):
-            s0 = int(q["deb"] * SRM)
-            if s0 >= n: continue                                           # aperçu 10 s : réplique après la coupure
-            b = vers_mix(a)[:n - s0]; mix[s0:s0 + len(b)] += b
-    for t0_, t1_, mode_, _sc in APPEL:                                     # voix au téléphone pendant les plans d'écoute (idée 16)
-        if mode_ != "ecoute": continue
-        a_, b_ = int(t0_ * SRM), min(n, int(t1_ * SRM))
-        if b_ - a_ > SRM // 10:
-            seg = mix[a_:b_].copy(); tel = SM.telephone(seg, SRM)
-            f_ = min(len(seg) // 4, int(0.04 * SRM)); w_ = np.ones(len(seg)); w_[:f_] = np.linspace(0, 1, f_); w_[-f_:] = np.linspace(1, 0, f_)
-            mix[a_:b_] = seg * (1 - w_[:, None]) + tel * w_[:, None]
-    fx = np.zeros((n, 2))
-    for t0_, t1_, _src in REMB:                                            # bruit de cassette qui rembobine (idée 22)
-        a_ = int(t0_ * SRM); r_ = SM.rembobinage(t1_ - t0_, SRM); fx[a_:a_ + len(r_)] += r_[:max(0, n - a_)]
-    def ajoute(nom, t_, g):
-        x = SM.son(nom); s0 = int(max(0, t_) * SRM); e = min(n, s0 + len(x))
-        if e > s0: fx[s0:e] += x[:e - s0] * g
-    for tr in (() if DOUB else transitions):                              # changements de scène / de gag bien marqués
-        ajoute("transition", tr[0] - 0.25, 0.8)
-        if tr[2] == "carton": ajoute("pop", tr[0] + 0.05, 0.7)
-    if mini:
-        for k in TITRES: ajoute("pop", min(z2["deb"] for z2 in ph if z2["scene"] == k) - 0.2, 0.6)
-    if not DOUB:                                                           # doublage : la bande son d'origine a déjà ses effets
-        # bruitages « tendance » (vine boom, dun dun dun, klaxon, criquets, caisse…) : catalogue moteur/bruitages.py
-        imposes = {}
-        for b_ in ((sk.get("studio") or {}).get("bruitages") or []) if isinstance(sk.get("studio"), dict) else []:
-            try: imposes[int(b_.get("replique"))] = str(b_.get("son"))
-            except (AttributeError, TypeError, ValueError): pass
-        BRUITAGES[:] = BR.choisir(ph, SILENCES if B else (), (B or {}).get("graine", len(sk.get("sujet", ""))), imposes, total, BR.densite_apprise())
-        for nom, t_, g in BRUITAGES: ajoute(nom, t_, g)
-    if not DOUB:
-        d_m = len(SM.son("montee")) / SRM
-        ajoute("montee", ph[-1]["deb"] - d_m, 0.5)                        # tension juste avant la chute finale
-        ajoute("boom_fin", ph[-1]["fin"] + 0.02, 1.0)                     # gros impact sur la chute finale
-        if CHUTE_KO and len(places[ph[-1]["scene"]]) > 1: ajoute("boom_leger", ph[-1]["fin"] + 0.57, 0.5)   # celui qui encaisse tombe à la renverse
-    amb = np.zeros((n, 2))                                                 # son « cinéma » : ambiance du lieu, pas, whoosh, musique
-    def ajoute_x(x, t_, g, piste):
-        s0 = int(max(0, t_) * SRM); e = min(n, s0 + len(x))
-        if e > s0: piste[s0:e] += x[:e - s0] * g
-    if B and CINE.get("son"):
-        for sh_ in DECOUPE:                                                # passages rapides entre plans
-            if sh_["passage"] == "file": ajoute_x(SM.swipe(), sh_["t0"] - 0.08, 0.3 if not DOUB else 0.15, fx)
-            elif sh_["passage"] == "zoom": ajoute_x(SM.whoosh(0.35), sh_["t0"] - 0.12, 0.2 if not DOUB else 0.1, fx)
-        for sc_, t_sc in DEBUT_SCENE.items():                              # bruits de pas quand ils entrent
-            if sc_ not in SANS_ENTREE: ajoute_x(SM.pas(graine=sc_), t_sc, 0.3, fx)
-        if not DOUB:                                                       # la bande son d'origine a déjà son ambiance et sa musique
-            for sc_ in places:
-                zs = [z2 for z2 in ph if z2["scene"] == sc_]
-                if not zs: continue
-                t0_, t1_ = min(z2["deb"] for z2 in zs) - 0.3, max(z2["fin"] for z2 in zs) + 0.8
-                a_ = SM.ambiance(B["lieux"][min(sc_, len(B["lieux"]) - 1)], max(0.5, t1_ - t0_), graine=B["graine"] % 997 + sc_)
-                f_ = min(len(a_) // 3, int(0.3 * SRM)); a_[:f_] *= np.linspace(0, 1, f_)[:, None]; a_[-f_:] *= np.linspace(1, 0, f_)[:, None]
-                ajoute_x(a_, t0_, 1.0, amb)
-            if {"pluie", "orage"} & set(B.get("ambiances") or ()):            # pluie et tonnerre (calé sur les éclairs)
-                try: ajoute_x(SM.meteo(total, "orage" in B["ambiances"], graine=B["graine"] % 997), 0.0, 1.0, amb)
-                except Exception as e_: print(f"son de pluie impossible : {e_}", flush=True)
-            emos = [z2["emo"] for z2 in ph]
-            humeur = ("tension" if sum(e in ("cri", "colere", "panique") for e in emos) >= 2 else "triste" if sum(e in ("pleurs", "triste", "soupir") for e in emos) >= 2
-                      else "joie" if sum(e in ("rire", "joie", "amour") for e in emos) >= 2 else "neutre")
-            ajoute_x(SM.musique(total, humeur, graine=B["graine"] % 997), 0.0, 0.5, amb)
-    ajoute("pop", GEL, 0.5)                                                # arrêt sur image
-    if FIN_CARTE is not None: ajoute("pop", FIN_CARTE, 0.6)
-    voix_env = np.convolve(np.abs(mix[:, 0]), np.ones(int(0.15 * SRM)) / int(0.15 * SRM), "same")
-    voix_env = np.clip(voix_env / (np.percentile(voix_env[voix_env > 1e-4], 90) + 1e-6) if (voix_env > 1e-4).any() else voix_env, 0, 1)
-    mix = mix + fx * (1 - 0.5 * voix_env)[:, None] + amb * (1 - 0.6 * voix_env)[:, None]   # l'ambiance et la musique s'effacent quand on parle
-    mix = np.clip(mix / max(1.0, np.abs(mix).max() / 0.95), -0.99, 0.99)
-    brut, wav = f"{tmp}/mix.wav", f"{tmp}/mix_norm.wav"
-    with wave.open(brut, "wb") as w:
-        w.setnchannels(2); w.setsampwidth(2); w.setframerate(SRM); w.writeframes((mix * 32767).astype(np.int16).tobytes())
-    import jt as _jt
-    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", brut, "-af", _jt.filtre_volume(mix, SRM), "-ar", "48000", "-ac", "2", wav], check=True)
+    # ---- son : voix, bruitages (woosh à chaque scène, rimshot à la chute finale) : moteur à part (_bande_son)
+    wav = _bande_son(APPEL, B, CINE, DEBUT_SCENE, DECOUPE, DOUB, FIN_CARTE, GEL, REMB, SANS_ENTREE, SILENCES, TITRES, audios, mini, ph, places, sk, tmp, total, transitions)
     defauts_img = []
     try:                                                                   # contrôle image par image (gratuit) : têtes coupées,
         SONDE["on"] = True                                                 # personnages qui se chevauchent, sous-titre sur un visage

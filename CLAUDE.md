@@ -312,7 +312,7 @@
   l'encre + aquarelle sur papier (`croquis.croquifier`, DECOR_CROQUIS=0 pour couper). Vitesse : chaque personnage dessiné dans un petit
   cadre, aquarelle / hachures / flous calculés seulement dans la zone peinte (sinon 10 fois plus lent) ; une ombre ne déborde jamais
   d'une forme (sur la toile « vide » du super-échantillonnage, un débord devient une tache noire). Maquettes et références :
-  `maquettes/croquis/` (images de l'auteur, faites par lui avec une IA). Choix déjà faits : les DEUX silhouettes (le petit à grosse tête et le grand stickman), pour enfants, ados,
+  `maquettes/croquis/` (images de l'auteur, faites par lui avec une IA ; rangées depuis le 17 novembre dans la release « archives-fichiers », maquettes.zip). Choix déjà faits : les DEUX silhouettes (le petit à grosse tête et le grand stickman), pour enfants, ados,
   adultes et seniors ; visuels 1-5 validés « pour le moment » ; animation BEAUCOUP plus fluide (poses fondues et adoucies, bouche
   qui s'ouvre selon la voix en gardant l'expression, expressions en fondu, clignements doux, 30 i/s ou plus, jamais saccadé).
   **Créé le 30 octobre 2026 (feu vert de l'auteur)** : mouvements dans le robot (micro-expressions quand il se tait : lèvre mordue si gêne,
@@ -351,7 +351,7 @@
   sans obstacle autour ; aucun cadrage possible / budget atteint / Modal absent -> décor dessiné en croquis (jamais de pieds qui
   flottent). Banque à part (descriptions « [semi] … », déjà cadrées, jamais mélangées aux décors croquis). Coût : ~3-10 centimes
   par lieu neuf, 60 lieux neufs par mois au plus (DECORS_MOIS). **Compteur du budget réparé** (`decors/compteur.json` : la date
-  des fichiers ne veut rien dire sur GitHub, le budget paraissait toujours atteint). Essais visuels : `maquettes/photo/`. Leçons des 2 premières vidéos : description du lieu toujours en anglais
+  des fichiers ne veut rien dire sur GitHub, le budget paraissait toujours atteint). Essais visuels : `maquettes/photo/` (release « archives-fichiers », maquettes.zip). Leçons des 2 premières vidéos : description du lieu toujours en anglais
   (`studio.DECOR_EN` quand la mise en scène l'écrit en français : l'IA comprenait mal), lumière du moment ajoutée, 3 tirages, pas
   d'agrandisseur « anime » (il donnait un style BD : simple agrandissement doux). Soir du 1er novembre : lieux sans description
   anglaise complétés (`semi_realiste.LIEUX_EN` : cuisine, cabinet médical, salle de sport, classe…) ; deux fabrications qui finissent
@@ -543,6 +543,34 @@
   **Heure des statistiques affichée** (demande de l'auteur du 15 novembre) : sous la case « Heure choisie par les statistiques »
   (`#heureStats`, `site.heuresStats` = même calcul que `stats.meilleure_heure_publication`, refait dans l'appli à chaque relevé des vues :
   l'affichage et le calendrier suivent tout seuls quand l'heure change) : heure d'aujourd'hui et de demain, et de chaque jour.
+- **Audit du 17 novembre 2026 (choix de l'auteur 1, 2, 8, 11, 14, 16, 19, 20, 21, 22, 23, 25, 29, 32)** : **contrôle IA trié**
+  (`verif_finale.trier_ia` : les 132 anciennes remarques relues ; sous-titres, goût (« trop neutre »), âge / genre, personnes absentes,
+  « question 3 non validée », décalé / flottant, animal voulu = fausses alertes écartées ; seuls les vrais défauts du dessin (bras en
+  double, tête coupée, déformé) restent graves) ; **Gemini ÉCOUTE les passages en doute** (`video_ia.ecouter`, son mono 32 kb/s, ECOUTE_GEMINI=0) :
+  désaccords des deux transcriptions encore ouverts après la 3e écoute (`equipe.departager`, avant l'IA texte) et sous-titres de la
+  vidéo finie signalés faux (confirmé par Gemini = pas de point ; Gemini entend lui aussi autre chose = point grave) ; **décors variés**
+  (`decors.recents` / `noter_usage`, decors/utilises.tsv fusionné : un décor de la banque déjà montré dans les 7 jours n'est pas repris,
+  nouveau tirage `variante` si le budget le permet ; DECORS_VARIES=0) ; **publier plus vite quand ça décolle** (`publication_auto.decolle`
+  / `avancer` : vidéo publiée < 48 h à plus de 2× la médiane des vues à 6 h (episodes/courbes.json) -> la vidéo en attente du même
+  créateur, sinon du même lieu, passe en tête ; DECOLLE=0) ; **commentaire à épingler** (`legende.commentaire` : champ "commentaire" de
+  l'IA, sinon « Team X ou team Y ? » avec les prénoms appelés, sinon une question générale ; historique "commentaire" ; fiche : « 💬
+  Commentaire à épingler » + 📋 Copier ; TikTok ne laisse pas un robot épingler) ; **rappel avant expiration de la clé GitHub de
+  l'appli** (date lue dans la réponse de GitHub quand il la donne, sinon champ « 📅 Date d'expiration » de Réglages → Connecter ;
+  bandeau 14 jours avant, rouge les 3 derniers ; « jt_cle_expire » sur l'appareil) ; **dépôt allégé** (le téléchargement était déjà
+  « dernière version seulement » ; maquettes (62 Mo, jamais lues) et anciens décors (style croquis + fichiers sans index, ~39 Mo)
+  retirés du dépôt et rangés dans la release « archives-fichiers » par le workflow ranger.yml : dézipper à la racine pour les remettre ;
+  les décors croquis seraient refaits si STYLE_DECOR=croquis revenait) ; **plus d'erreur silencieuse** (`pannes.avale` : les 51
+  « except Exception: pass » écrivent « erreur avalée dans fichier.fonction » une fois par endroit -> registre des pannes ;
+  moteur/pannes.py ajouté aux téléchargements partiels d'emission.yml et garde.yml) ; **dessin découpé** (bande son sortie de
+  `cartoon.rendre` -> `cartoon._bande_son`, son identique à l'octet près ; `tache`, `keystone`, `rembobine`, `teinte_lut` remontés au
+  niveau du module ; le reste de `rendre` dépend de dizaines de variables partagées : à découper petit à petit, toujours en vérifiant
+  le son et l'image avant / après) ; **code des sketchs rangé** dans `moteur/sketchs/` (actu, serie, casting, realiste, betisier,
+  voix_auteur, voix_design ; un petit fichier garde l'ancien nom dans moteur/ : « import actu » marche toujours) ; **tests découpés
+  par sujet** (tests/commun.py = préparation commune ; test_ecriture, test_dessin, test_son_voix, test_site_publication, test_listes ;
+  `python -m unittest discover -s tests`) ; **📅 Ma semaine** (onglet TikTok : vidéos fabriquées et publiées, vues gagnées
+  (stats.json "vues_hist", un relevé par heure), abonnés gagnés, dépenses, confiance moyenne) ; **coût de chaque vidéo**
+  (`principal.cout_estime` : Claude + ElevenLabs 0,00022 $ / caractère + GPU Modal 0,00031 $ / s ; historique couts "total_usd" et
+  "modal_mesure_usd" = vraie dépense Modal pendant la fabrication ; ligne « 💶 Coût de cette vidéo » dans la fiche).
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.

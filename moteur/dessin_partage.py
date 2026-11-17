@@ -31,7 +31,7 @@ def _req(methode, url, corps=None, entetes=None, brut=False, timeout=120):
     if data is not None and "Content-Type" not in h: h["Content-Type"] = "application/json"
     r = urllib.request.urlopen(urllib.request.Request(url, data=data, method=methode, headers=h), timeout=timeout)
     try: __import__("quota").noter(r.headers)
-    except Exception: pass
+    except Exception as _e: __import__("pannes").avale(_e)
     contenu = r.read()
     return contenu if brut else (json.loads(contenu) if contenu else {})
 
@@ -82,7 +82,7 @@ def effacer(asset):
         except OSError: pass
         return
     try: _req("DELETE", asset["url"])
-    except Exception: pass
+    except Exception as _e: __import__("pannes").avale(_e)
 
 
 def menage(rel, garder=""):
@@ -191,5 +191,5 @@ def dessiner(nf, args, dessiner_plage, journal=print, progres=None):
             journal(f"  lecture des morceaux impossible ({str(e)[:120]}), nouvel essai")
         if restants: time.sleep(__import__("quota").pause_conseillee(20))
     try: menage(rel, garder=nom)
-    except Exception: pass
+    except Exception as _e: __import__("pannes").avale(_e)
     return [chemins[p] for p in morceaux]

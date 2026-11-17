@@ -33,7 +33,7 @@ jobs:
       - name: Créer les voix (Voice Design ElevenLabs)
         run: |
           set -o pipefail
-          python -u moteur/voix_design.py 2>&1 | tee episodes/voix_design.txt
+          python -u moteur/sketchs/voix_design.py 2>&1 | tee episodes/voix_design.txt
       - name: Enregistrer
         if: always()
         run: |
