@@ -501,8 +501,8 @@ class TestDecorsSemiRealistes(unittest.TestCase):
         """Fausse IA Modal : 2 tirages (un sans sol libre, un bon) -> le bon est cadré, rangé dans la banque à part, compté dans le
         budget du mois ; la 2e fois, le lieu est repris de la banque sans rien demander à Modal."""
         import decors, cv2 as _cv
-        dossier = tempfile.mkdtemp(); avant = decors.BANQUE, decors.COMPTEUR
-        decors.BANQUE = dossier; decors.COMPTEUR = os.path.join(dossier, "compteur.json")
+        dossier = tempfile.mkdtemp(); avant = decors.BANQUE, decors.COMPTEUR, decors.UTILISES
+        decors.BANQUE = dossier; decors.COMPTEUR = os.path.join(dossier, "compteur.json"); decors.UTILISES = os.path.join(dossier, "u.tsv")
         def png(a): return _cv.imencode(".png", a[..., ::-1] if a.ndim == 3 else a)[1].tobytes()
         mauvais = self._decor(meuble=(0, 880, 1100, 1536)); bon = self._decor()
         appels = []
@@ -522,10 +522,15 @@ class TestDecorsSemiRealistes(unittest.TestCase):
             self.assertEqual(list(out), [0]); self.assertEqual(decors.SEMI, {0}); self.assertEqual(out[0].shape, (1920, 1080, 3))
             self.assertEqual(len(appels), 1); self.assertEqual(appels[0][1], 3); self.assertNotIn("[semi]", appels[0][0][0])
             self.assertEqual(decors.generes_ce_mois(), 1)                 # compteur tenu à part (plus la date des fichiers)
-            out2 = decors.generer_semi(sk); self.assertEqual(list(out2), [0]); self.assertEqual(len(appels), 1)   # repris de la banque
+            os.environ["DECORS_VARIES"] = "0"
+            try: out2 = decors.generer_semi(sk)
+            finally: os.environ.pop("DECORS_VARIES", None)
+            self.assertEqual(list(out2), [0]); self.assertEqual(len(appels), 1)   # repris de la banque
+            decors.generer_semi(sk); self.assertEqual(len(appels), 2)     # déjà montré cette semaine : nouveau tirage (audit, idée 8)
+            self.assertIn("another angle", appels[1][0][0])
             self.assertIsNone(decors.voisin("cozy living room, sofa, posters on the wall, coffee table, lamp, television", 0.1))   # jamais pour un décor croquis
         finally:
-            decors.BANQUE, decors.COMPTEUR = avant
+            decors.BANQUE, decors.COMPTEUR, decors.UTILISES = avant
             if anc is None: sys.modules.pop("modal", None)
             else: sys.modules["modal"] = anc
 

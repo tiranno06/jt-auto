@@ -65,3 +65,7 @@ class FauxClaude:
         s_ = kw.get("system", ""); self.systemes.append("".join(b.get("text", "") for b in s_) if isinstance(s_, list) else s_)
         bloc = types.SimpleNamespace(type="tool_use", name=noms[0], input=out)
         return types.SimpleNamespace(content=[bloc], usage=types.SimpleNamespace(input_tokens=100, output_tokens=50))
+
+
+import decors as _decors  # noqa: E402
+_decors.UTILISES = os.path.join(tempfile.mkdtemp(), "utilises.tsv")   # les tests ne notent pas de décors « montrés » dans le dépôt
