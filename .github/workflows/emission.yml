@@ -118,6 +118,10 @@ jobs:
     env:
       LIMITE_JOB_MIN: "180"                             # même valeur que timeout-minutes ci-dessus
       PYTHONHASHSEED: "0"                               # dessin identique à l'image près sur toutes les machines (dessin partagé)
+      TF_CPP_MIN_LOG_LEVEL: "2"                          # messages techniques des bibliothèques coupés (registre des pannes)
+      TRANSFORMERS_VERBOSITY: "error"
+      TRANSFORMERS_NO_ADVISORY_WARNINGS: "1"
+      GLOG_minloglevel: "2"
       ENTREES: ${{ toJSON(inputs) }}                    # réglages de lancement (repris tels quels si la fabrication est mise en pause)
       CHAINE: ${{ inputs.chaine }}                      # vidéos TikTok à la chaîne : « 2/3 » affiché sur la barre du site
       PREPA_PARALLELE: ${{ vars.PREPA_PARALLELE || '1' }}  # chaîne : la vidéo suivante prépare son écoute pendant que celle-ci se dessine

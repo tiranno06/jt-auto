@@ -258,7 +258,12 @@ def liste_ia(video, sk, R):
         contenu = [{"type": "image", "source": {"type": "base64", "media_type": "image/jpeg", "data": base64.b64encode(p).decode()}}
                    for p in controle.planches(video, instants)]
         contenu.append({"type": "text", "text": QUESTIONS.format(contexte="\n".join(ctx), nb=len(roles))})
-        r = ecrire._appel(reseau.claude(), None, [{"role": "user", "content": contenu}], OUTIL, max_tokens=2500)
+        cl = reseau.claude()
+        try: r = ecrire._appel(cl, None, [{"role": "user", "content": contenu}], OUTIL, max_tokens=2500)
+        except Exception as e1:                                            # réponse vide ou illisible (registre des pannes du 19 novembre) :
+            ia1 = str(getattr(cl, "dernier", "") or "")                    # une 2e IA regarde les mêmes images
+            journal(f"  liste de contrôle : réponse inexploitable de {ia1 or 'l\'IA'} ({str(e1)[:60]}), 2e essai avec une autre IA")
+            r = ecrire._appel(reseau.claude(exclure=(ia1,) if ia1 else ()), None, [{"role": "user", "content": contenu}], OUTIL, max_tokens=2500)
     except Exception as e:
         journal(f"  liste de contrôle par l'IA impossible ({str(e)[:120]})"); return []
     out = []

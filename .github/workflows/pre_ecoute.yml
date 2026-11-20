@@ -20,6 +20,10 @@ jobs:
     timeout-minutes: 150
     env:
       PYTHONHASHSEED: "0"
+      TF_CPP_MIN_LOG_LEVEL: "2"                          # messages techniques des bibliothèques coupés (registre des pannes)
+      TRANSFORMERS_VERBOSITY: "error"
+      TRANSFORMERS_NO_ADVISORY_WARNINGS: "1"
+      GLOG_minloglevel: "2"
       PRE_ECOUTE: ${{ vars.PRE_ECOUTE }}
       STOCK_SONS: ${{ vars.STOCK_SONS }}
       HEURE_TIKTOK: ${{ vars.HEURE_TIKTOK }}

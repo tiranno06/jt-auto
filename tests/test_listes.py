@@ -762,3 +762,52 @@ class TestAudit17Novembre(unittest.TestCase):
         self.assertTrue(serie.FICHIER.replace("\\", "/").endswith("moteur/../episodes/serie.json"))
         self.assertFalse(os.path.isdir(os.path.join(ICI, "..", "maquettes", "photo")))
         self.assertTrue(os.path.exists(os.path.join(ICI, "..", ".github", "workflows", "ranger.yml")))
+
+
+class TestPannes19Novembre(unittest.TestCase):
+    """Registre des pannes relu le 19 novembre 2026 : vraies pannes réglées, fausses pannes plus comptées."""
+
+    def test_pas_des_pannes(self):
+        import pannes
+        for l in ("I0000 00:00:1794921200.512431    3804 port.cc:153] oneDNN custom operations are on. You may see slightly different errors",
+                  "[transformers] You are using a model of type `sam2_video` to instantiate a model of type `sam2`. error",
+                  "* fix torchcodec installation. Error message was:",
+                  "réseau : erreur 503 passagère, nouvel essai dans 2 s",
+                  "Jury qualité (ia) : 6.0/10 — Humoriste 6.6/10 : le texte est illisible",
+                  "- à 0.4 s : Le texte dans le GPS est minuscule, flou et quasi illisible",
+                  "scène reconstituée : L'employé refuse net de travailler.",
+                  "Manque par rapport à la vidéo d'origine : absence du smartphone, erreur",
+                  "lieux séparés proposés par l'IA refusés : rien dans le son ne dit qu'ils se parlent à distance",
+                  "5 réattribution(s) de l'IA refusée(s) : la voix de ces répliques est reconnue avec certitude"):
+            self.assertEqual(pannes.lire_journal(l), [], l)
+        self.assertTrue(pannes.lire_journal("liste de contrôle par l'IA impossible (réponse inexploitable)"))   # une vraie panne reste
+        f = os.path.join(tempfile.mkdtemp(), "p.json")
+        json.dump({"[transformers] error x": {"n": 3, "exemple": "[transformers] error x", "derniere": "2026-11-17", "jours": {}}}, open(f, "w"))
+        self.assertEqual(pannes.ajouter("", "2026-11-19", f), {})                   # anciennes fausses pannes retirées du registre
+
+    def test_elevenlabs_epuise_plus_appele(self):
+        import doublage
+        anc = {k: os.environ.get(k) for k in ("ELEVENLABS", "ELEVENLABS_API_KEY")}
+        appels = []; orig = doublage._multipart
+        doublage._multipart = lambda *a, **k: appels.append(a) or (_ for _ in ()).throw(RuntimeError("ElevenLabs 401 : quota_exceeded"))
+        try:
+            os.environ["ELEVENLABS_API_KEY"] = "x"; os.environ.pop("ELEVENLABS", None)
+            d = tempfile.mkdtemp(); open(f"{d}/mono.wav", "wb").write(b"RIFF")
+            self.assertEqual(doublage.isoler(d), (None, f"{d}/mono.wav"))
+            self.assertEqual(len(appels), 1); self.assertEqual(os.environ.get("ELEVENLABS"), "0")   # crédit épuisé noté
+            doublage.isoler(d); self.assertEqual(len(appels), 1)                                     # plus jamais rappelé
+            self.assertFalse(doublage.eleven_ok())
+        finally:
+            doublage._multipart = orig
+            for k, v in anc.items():
+                if v is None: os.environ.pop(k, None)
+                else: os.environ[k] = v
+
+    def test_sources_corrigees(self):
+        src = lambda f: open(os.path.join(ICI, "..", f), encoding="utf-8").read()
+        self.assertIn("2e essai avec une autre IA", src("moteur/verif_finale.py"))
+        self.assertIn("release des morceaux relue", src("moteur/dessin_partage.py"))
+        self.assertIn("warnings.simplefilter", src("moteur/locuteurs.py"))
+        self.assertNotIn('python_version="3.10"', src("moteur/ecoute_modal.py"))
+        for w in ("emission.yml", "pre_ecoute.yml", "dessin.yml"):
+            self.assertIn("TF_CPP_MIN_LOG_LEVEL", src(".github/workflows/" + w))

@@ -188,19 +188,38 @@ def _multipart(chemin, fichiers, champs, timeout=600):
     try: return _Rep(reseau.ouvrir(req, timeout=timeout))
     except urllib.error.HTTPError as e: raise RuntimeError(f"ElevenLabs {e.code} : {e.read()[:300]!r}")
 
+def eleven_ok():
+    """ElevenLabs utilisable ? Clé présente et crédit pas épuisé (registre des pannes du 19 novembre : le robot savait au départ que
+    le crédit était épuisé mais l'appelait quand même 2 à 4 fois par vidéo, ~40 s perdues et une « panne » notée à chaque fois)."""
+    return bool(os.environ.get("ELEVENLABS_API_KEY")) and os.environ.get("ELEVENLABS", "1") != "0"
+
+
+def _eleven_echec(e):
+    """Crédit épuisé ou clé refusée : ElevenLabs n'est plus appelé jusqu'à la fin de la fabrication."""
+    t = str(e)
+    if "quota_exceeded" in t or "ElevenLabs 401" in t:
+        os.environ["ELEVENLABS"] = "0"; return True
+    return False
+
+
 def isoler(tmp):
     """Voix seules (sans musique ni bruits) : sert au mouvement des bouches et à la transcription. Repli : le son complet."""
+    if not eleven_ok():
+        journal("  voix isolées : crédit ElevenLabs épuisé, outil gratuit (Demucs)"); return None, f"{tmp}/mono.wav"
     try:
         r = _multipart("/v1/audio-isolation", {"audio": ("son.wav", open(f"{tmp}/mono.wav", "rb"), "audio/wav")}, {})
         open(f"{tmp}/voix.mp3", "wb").write(r.content)
         v = _vers_mono(f"{tmp}/voix.mp3", f"{tmp}/voix.wav"); journal("  voix isolées (ElevenLabs)"); return v, f"{tmp}/voix.wav"
     except Exception as e:
-        journal(f"  isolation des voix impossible ({str(e)[:150]}) : son complet utilisé"); return None, f"{tmp}/mono.wav"
+        if _eleven_echec(e): journal("  voix isolées : crédit ElevenLabs épuisé, outil gratuit (Demucs)")
+        else: journal(f"  isolation des voix impossible ({str(e)[:150]}) : son complet utilisé")
+        return None, f"{tmp}/mono.wav"
 
 def transcrire(chemin, mono):
     """Mots avec instants et voix : [{"w", "s", "e", "voix"}]. ElevenLabs Scribe (plusieurs voix), sinon Whisper (une voix)."""
     EVENEMENTS.clear()
     try:
+        if not eleven_ok(): raise RuntimeError("crédit ElevenLabs épuisé")
         champs = {"model_id": "scribe_v1", "diarize": "true", "timestamps_granularity": "word", "tag_audio_events": "true"}
         r = _multipart("/v1/speech-to-text", {"file": ("son.wav", open(chemin, "rb"), "audio/wav")}, champs).json()
         mots = [{"w": x["text"].strip(), "s": float(x["start"]), "e": float(x["end"]), "voix": x.get("speaker_id") or "speaker_0"}
@@ -219,7 +238,8 @@ def transcrire(chemin, mono):
             journal(f"  transcription ElevenLabs : {len(mots)} mots, {len({m['voix'] for m in mots})} voix, langue {r.get('language_code')}")
             SOURCE_MOTS[0] = "elevenlabs"; return mots
     except Exception as e:
-        journal(f"  transcription ElevenLabs impossible ({str(e)[:150]}) : Whisper")
+        if _eleven_echec(e) or not eleven_ok(): journal("  transcription : crédit ElevenLabs épuisé, Whisper gratuit")
+        else: journal(f"  transcription ElevenLabs impossible ({str(e)[:150]}) : Whisper")
     SOURCE_MOTS[0] = "whisper"
     import ecoute
     mots = ecoute.groq(chemin)                                             # Groq : Whisper gratuit en quelques secondes (clé GROQ_API_KEY)
