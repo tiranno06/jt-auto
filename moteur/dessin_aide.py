@@ -18,6 +18,12 @@ def main(nom, a, b):
         import cartoon
         t0 = time.time(); args = d["args"]
         for k, v in (args.get("module") or {}).items(): setattr(cartoon, k, v)   # réglages posés par la fabrication (ex. rendu simple)
+        if args.get("decors_etat"):                                        # profondeurs, panneaux et zones des décors de la machine principale
+            import decors as DEC_
+            for k, v in args["decors_etat"].items():
+                cur = getattr(DEC_, k, None)
+                if hasattr(cur, "clear") and hasattr(cur, "update"): cur.clear(); cur.update(v)
+                else: setattr(DEC_, k, v)
         cartoon.rendre(args["sk"], f"{tmp}/{cle}.mp4", args["audios"], mots=args["mots"], decors=args["decors"], mini=args["mini"], plage=(a, b))
         print(f"Morceau {a}–{b} dessiné en {(time.time() - t0) / 60:.1f} min", flush=True)
         DP.envoyer(rel, f"{tmp}/{cle}.mp4", f"{cle}.mp4")

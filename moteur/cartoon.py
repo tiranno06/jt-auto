@@ -391,6 +391,23 @@ def keystone(img, plan):
     return cv2.warpPerspective(img, Mp, (W, H), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REPLICATE)
 
 
+DEHORS_LIEUX = {"rue", "jardin", "balcon", "parc", "plage", "camping", "montagne", "stade", "parking", "arret_bus", "ferme", "cour_recre"}
+VOIX_MESUREES = ("_voix_hz", "_voix_genre", "_voix_timbre", "_voix_timbre_genre", "_voix_ina", "_voix_vtl", "_voix_vtl_genre", "_voix_mesuree")
+
+
+def figer_pour_aides(args0, sk):
+    """Dessin partagé (audit du 20 novembre : la conseillère d'« Orientation scolaire » changeait de tête au bout de 22 s) : les
+    machines d'aide recevaient l'état du DÉBUT du rendu, avant la mesure des voix (homme / femme : inaSpeechSegmenter et Praat ne
+    sont pas installés sur elles) et sans les panneaux écrits ni les zones du décor ; elles refaisaient un autre casting. Tout ce
+    que la machine principale a décidé leur est maintenant transmis."""
+    for k in VOIX_MESUREES:
+        if k in sk: args0["sk"][k] = __import__("copy").deepcopy(sk[k])
+    try:
+        import decors as DEC_
+        args0["decors_etat"] = {k: __import__("copy").deepcopy(getattr(DEC_, k)) for k in ("PROFONDEURS", "PANNEAUX", "ZONES", "SEMI") if hasattr(DEC_, k)}
+    except Exception as _e: __import__("pannes").avale(_e)
+
+
 def _bande_son(APPEL, B, CINE, DEBUT_SCENE, DECOUPE, DOUB, FIN_CARTE, GEL, REMB, SANS_ENTREE, SILENCES, TITRES, audios, mini, ph, places, sk, tmp, total, transitions):
     """Bande son de la vidéo (sortie de cartoon.rendre, audit du 17 novembre 2026, idée 22) : voix ou piste d'origine, voix au
     téléphone, bruitages, ambiance et musique qui s'effacent quand on parle, volume réglé une fois. Renvoie le chemin du WAV final."""
@@ -1374,7 +1391,9 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
             for k in range(22):
                 x = (P_[k, 0] * W + math.sin(tm * 0.3 + k) * 40) % W; y = (P_[k, 1] * H * 0.7 + tm * 10 * (0.5 + P_[k, 2])) % (H * 0.75)
                 tache(img, x, y, 4 + 3 * P_[k, 3], (255, 244, 210), 0.45 * (0.5 + 0.5 * math.sin(tm * 2 + k)))
-        zone = (0, 0, W, H) if (B["lieux"][min(sc, len(B["lieux"]) - 1)] == "rue" or (B.get("interieur") is False and sc not in INFOS)) else None
+        lieu_sc = B["lieux"][min(sc, len(B["lieux"]) - 1)]                 # pluie sur toute l'image seulement DEHORS (audit du 20 novembre :
+        dehors_sc = lieu_sc in DEHORS_LIEUX                                   # il pleuvait dans un bureau) ; dedans, seulement dans la fenêtre
+        zone = (0, 0, W, H) if dehors_sc else None
         if zone is None and info.get("fenetre"):
             fx0, fy0, fx1, fy1 = info["fenetre"]; a, b = ecr(fx0, fy0); c, d = ecr(fx1, fy1); zone = (int(a), int(b), int(c), int(d))
         if zone and ("pluie" in amb or "neige" in amb):
@@ -1937,6 +1956,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
             except Exception as e_: print(f"  sauvegarde du bloc impossible ({e_})", flush=True)
         return c_
     if morceaux is None and args0 is not None and DP.actif(nf):           # vidéo longue : dessin partagé entre plusieurs machines
+        figer_pour_aides(args0, sk)                                        # mêmes personnages et mêmes décors sur toutes les machines
         compte = [0]
         def suivi():
             compte[0] += 1

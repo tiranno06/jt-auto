@@ -281,7 +281,7 @@ def nettoyer(f, sk):
            "ambiance": mot(f.get("ambiance"), AMBIANCES), "niveau": mot(f.get("niveau"), NIVEAUX),
            "details": [d for d in (_anglais(x) for x in (f.get("details") or [])[:6] if isinstance(x, str)) if d][:5],
            "lumiere": _anglais(f.get("lumiere"))[:60],
-           "panneaux": [str(p).strip()[:28] for p in (f.get("panneaux") or [])[:2] if isinstance(p, str) and 2 <= len(str(p).strip()) <= 28],
+           "panneaux": [t for t in (texte_panneau(p) for p in (f.get("panneaux") or [])[:3] if isinstance(p, str)) if t][:2],
            "ecran_tel": str(f.get("ecran_tel") or "").strip()[:20],
            "animations": [a for a in (mot(x, ANIMATIONS) for x in (f.get("animations") or [])) if a],
            "personnages": {}, "repliques": {}, "reactions": [], "source": f.get("source") or "ia"}
@@ -331,6 +331,16 @@ def nettoyer(f, sk):
         rc = mot(x.get("reaction"), REACTIONS); qui = str(x.get("qui") or "")
         if 0 <= n < n_rep and rc and qui in roles: out["reactions"].append({"n": n, "qui": qui, "mot": str(x.get("mot") or "")[:30], "reaction": rc})
     return out
+
+
+def texte_panneau(p):
+    """Le TEXTE écrit sur un panneau, pas sa description (audit du 20 novembre : « Affiche 'Travail & Joie' au mur » était écrit tel
+    quel dans le décor) : le passage entre guillemets s'il y en a ; une description sans guillemets est refusée."""
+    p = str(p or "").strip()
+    m = re.search(r"[«\"'“‘]\s*([^«»\"“”‘’]{2,28}?)\s*[»\"'”’]", p)
+    if m: p = m.group(1).strip()
+    elif re.search(r"\b(affiche|panneau|enseigne|tableau|écrit|inscription|au mur|sur la porte|menu de|logo)\b", p, re.I): return ""
+    return p if 2 <= len(p) <= 28 else ""
 
 
 # ------------------------------------------------------------------ contrôle 1 : les règles
@@ -792,10 +802,14 @@ def corriger_depuis_points(sk, points):
     F = sk.get("_fiche")
     if not isinstance(F, dict): return []
     cor = [c for p in points or [] for c in (p.get("correction") or []) if isinstance(c, dict) and CHAMPS_AUTORISES.match(str(c.get("champ") or ""))]
+    ind = indices_texte(sk.get("repliques") or [])
+    son = indices_son((sk.get("doublage") or {}).get("evenements") or [])
+    if not (ind.get("meteo") or son.get("meteo")):                         # la météo ne vient que du son ou des paroles (audit du 20 novembre :
+        cor = [c for c in cor if c.get("champ") != "meteo" or not c.get("valeur")]   # Gemini voyait « de la pluie » dans notre peinture)
     if not cor: return []
     faites = appliquer_corrections(F, sk, [dict(c, raison=c.get("raison") or "contrôle final : pas fidèle à l'audio") for c in cor])
     if not faites: return []
-    controle_regles(F, sk, indices_texte(sk.get("repliques") or []))       # la correction ne doit pas casser la cohérence
+    controle_regles(F, sk, ind)                                            # la correction ne doit pas casser la cohérence
     appliquer(sk, F)
     if any(DECOR_CHAMPS.match(f.split(" :")[0]) for f in faites):
         sk["_decors_a_refaire"] = sorted(set(sk.get("_decors_a_refaire") or []) | set(range(len(sk.get("decoupage") or []))))
