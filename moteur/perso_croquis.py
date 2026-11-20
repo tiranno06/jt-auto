@@ -62,7 +62,7 @@ def _geom(F, p):
         a1, a2 = math.radians(ang[0]), math.radians(ang[0] + ang[1])
         c = (e[0] + math.sin(a1) * seg, e[1] + math.cos(a1) * seg); m = (c[0] + math.sin(a2) * seg, c[1] + math.cos(a2) * seg)
         bras.append((e, c, m))
-    return dict(G=G, R=R, x=x, tc=tc, bras=bras, ecrase=ec, penche=penche, L_j=L_j, l_tr=l_tr)
+    return dict(G=G, R=R, x=x, tc=tc, bras=bras, ecrase=ec, penche=penche, L_j=L_j, l_tr=l_tr, hanche=hanche, cou=cou)
 
 
 def reperes(F, p):
@@ -98,6 +98,8 @@ def _fx(p, e):
         elif emo in ("soupir", "blase") and (t % 3.2) < 1.1: fx["micro"] = "joues"   # soupir : joues gonflées
         elif emo == "sceptique": fx["micro"] = "rictus"
     if emo == "rire": fx["larmes"] = max(fx.get("larmes", 0), 0.45)        # larmes de rire
+    if "maquillage_coule" in tuple((p.get("costume") or {}).get("etats") or ()): fx["maquillage"] = 1.0   # idée 14 : il a pleuré
+    if p.get("bouche_pleine") and float(p.get("bouche") or 0) <= 0.04: fx["micro"] = "joues"             # idée 19 : il mange
     return fx
 
 
@@ -180,6 +182,116 @@ def dessiner(img, F, p):
                rayures=T["rayures"], teint=peau, profil=float(p.get("tq") or 0.0) * 0.6, extras=T["extras"], chapeau=T["chapeau"],
                ouv=ouv if ouv > 0.04 else None, cligne=min(1.0, cl), penche=g["penche"], fx=_fx(p, e), ecrase=g["ecrase"],
                c_mains=T["c_mains"], montre=T["montre"], formes=(p.get("doigts_g"), p.get("doigts_d")))
+    try: details(zone, g, p, T, dec)                                     # état de la tenue, signes d'émotion, écran, vapeur (20 novembre)
+    except Exception as _e: __import__("pannes").avale(_e)
     if p.get("assis") and meuble == "lit": C.couette(zone, g["x"] - x0, p["y"] - y0, R, g["L_j"] * 0.55, g["l_tr"] * 2.6)
     if meuble == "comptoir" and not p.get("assis"): C.comptoir(zone, g["x"] - x0, p["y"] - y0, R, g["l_tr"] * 2.6, g["L_j"])   # accoudé au comptoir
     return tc, (R, R)
+
+
+# ------------------------------------------------------------------ détails du 20 novembre 2026 (fiche de tournage, idées 14, 19, 20, 21, 23)
+import cv2 as _cv2
+_FONTE = {}
+
+
+def _melange(zone, dessin, alpha):
+    """Pose un calque dessiné (mêmes dimensions) avec une transparence, seulement là où il y a quelque chose."""
+    m = (dessin.sum(2) > 0)[..., None]
+    zone[:] = np.where(m, (zone * (1 - alpha) + dessin * alpha).astype(np.uint8), zone)
+
+
+def _coeur(img, c, r, coul):
+    pts = []
+    for k in range(32):
+        t = 2 * math.pi * k / 32
+        pts.append((c[0] + r * 16 * math.sin(t) ** 3 / 16, c[1] - r * (13 * math.cos(t) - 5 * math.cos(2 * t) - 2 * math.cos(3 * t) - math.cos(4 * t)) / 16))
+    a = np.array(pts, np.int32)
+    _cv2.fillPoly(img, [a], coul, _cv2.LINE_AA); C.encre(img, pts, max(1.5, r * 0.12), ferme=True)
+
+
+def _etoile(img, c, r, coul):
+    pts = [(c[0] + (r if k % 2 == 0 else r * 0.45) * math.sin(math.pi * k / 5), c[1] - (r if k % 2 == 0 else r * 0.45) * math.cos(math.pi * k / 5)) for k in range(10)]
+    _cv2.fillPoly(img, [np.array(pts, np.int32)], coul, _cv2.LINE_AA); C.encre(img, pts, max(1.5, r * 0.1), ferme=True)
+
+
+def _texte(zone, xy, texte, R):
+    """Petite étiquette blanche avec le texte (écran du téléphone) au-dessus de la main."""
+    from PIL import Image, ImageDraw, ImageFont
+    taille = int(max(14, R * 0.32))
+    if taille not in _FONTE:
+        f = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "polices", "Poppins-Bold.ttf")
+        _FONTE[taille] = ImageFont.truetype(f, taille) if os.path.exists(f) else ImageFont.load_default()
+    fo = _FONTE[taille]
+    w = int(fo.getlength(texte)) + int(taille * 1.9); h = int(taille * 1.6)
+    x0, y0 = int(xy[0] - w / 2), int(xy[1] - h - R * 0.25)
+    if x0 < 0 or y0 < 0 or x0 + w > zone.shape[1] or y0 + h > zone.shape[0]: return
+    im = Image.fromarray(zone[y0:y0 + h, x0:x0 + w].copy()); d = ImageDraw.Draw(im)
+    d.rounded_rectangle((1, 1, w - 2, h - 2), radius=int(h * 0.35), fill=(250, 250, 248), outline=(32, 30, 34), width=max(2, taille // 8))
+    d.ellipse((int(taille * 0.35), int(h * 0.28), int(taille * 0.35 + h * 0.44), int(h * 0.72)), fill=(70, 190, 90))   # petit voyant vert
+    d.text((int(taille * 1.25), int(h * 0.12)), texte, font=fo, fill=(32, 30, 34))
+    zone[y0:y0 + h, x0:x0 + w] = np.asarray(im)
+
+
+def details(zone, g, p, T, dec):
+    """Idée 14 : état de la tenue (mouillée, auréoles de sueur, tache, déchirée ; maquillage qui coule : dans le visage) ;
+    idée 20 : signe d'émotion façon dessin animé au moment fort (veine, nuage, cœurs, étoiles, goutte, fumée des oreilles) ;
+    idée 21 : ce qu'affiche le téléphone ; idée 23 : vapeur du café ou de la poêle tenus en main."""
+    R = g["R"]; t = float(p.get("t") or 0.0); x = g["x"]; tc = g["tc"]; ep = max(1.5, R * 0.045)
+    cx, cy = dec(tc); bx, _by = dec((x, g["cou"]))
+    cou_y = dec((x, g["cou"]))[1]; han_y = dec((x, g["hanche"]))[1]; pied_y = dec((x, p["y"]))[1]
+    larg = max(g["l_tr"] * 1.05, R * 0.18)
+    etats = tuple((p.get("costume") or {}).get("etats") or ())
+    if "sueur" in etats:                                                   # auréoles sous les bras
+        c_h = np.array(T.get("c_haut") or (120, 160, 210), np.float32) * 0.62
+        cal = np.zeros_like(zone)
+        for sx in (-1, 1): _cv2.ellipse(cal, (int(bx + sx * larg * 0.75), int(cou_y + (han_y - cou_y) * 0.32)), (int(larg * 0.32 + 2), int((han_y - cou_y) * 0.2 + 2)), 0, 0, 360, tuple(int(v) for v in c_h), -1, _cv2.LINE_AA)
+        _melange(zone, cal, 0.55)
+    if "tache" in etats:                                                   # tache sur le haut
+        cal = np.zeros_like(zone); rr = max(4, int(larg * 0.33))
+        for k in range(5): _cv2.circle(cal, (int(bx + larg * 0.2 + rr * 0.5 * math.cos(k * 1.3)), int(cou_y + (han_y - cou_y) * 0.45 + rr * 0.45 * math.sin(k * 2.1))), int(rr * (0.55 + 0.1 * k % 3)), (125, 72, 40), -1, _cv2.LINE_AA)
+        _melange(zone, cal, 0.75)
+    if "dechire" in etats:                                                 # accroc en zigzag sur le haut et au genou
+        for (ux, y0_, y1_) in ((-0.55, cou_y + (han_y - cou_y) * 0.35, cou_y + (han_y - cou_y) * 0.75), (0.25, han_y + (pied_y - han_y) * 0.4, han_y + (pied_y - han_y) * 0.6)):
+            pts = [(bx + ux * larg + (5 if k % 2 else -5) * R / 80, y0_ + (y1_ - y0_) * k / 5) for k in range(6)]
+            C.encre(zone, pts, ep * 0.8)
+    if "mouille" in etats:                                                 # gouttes qui tombent + petite flaque sous les pieds
+        for k in range(5):
+            ph_ = (t * 0.8 + k * 0.23) % 1.0
+            C.goutte(zone, (cx + R * (-0.9 + 0.45 * k), cy - R * 0.4 + R * 2.2 * ph_), R * 0.06, ep * 0.6)
+        cal = np.zeros_like(zone); _cv2.ellipse(cal, (int(bx), int(pied_y + R * 0.05)), (int(R * 0.9), int(R * 0.14)), 0, 0, 360, (150, 200, 235), -1, _cv2.LINE_AA)
+        _melange(zone, cal, 0.45)
+    sg = p.get("signe"); u = float(p.get("signe_u") or 1.0)
+    if sg == "veine": C.veine(zone, (cx + R * 0.62, cy - R * 0.78), R * 0.17 * u, ep)
+    elif sg == "nuage":                                                    # petit nuage gris qui pleut au-dessus de la tête
+        ny = cy - R * 1.75 + 4 * math.sin(t * 2.0)
+        for dx_, r_ in ((-0.35, 0.28), (0.0, 0.36), (0.35, 0.28)):
+            _cv2.circle(zone, (int(cx + dx_ * R), int(ny)), int(r_ * R * u), (175, 180, 192), -1, _cv2.LINE_AA)
+        for k in range(3):
+            yy = ny + R * 0.3 + ((t * 3 + k * 0.33) % 1) * R * 0.5
+            C.encre(zone, [(cx + R * (-0.3 + 0.3 * k), yy), (cx + R * (-0.33 + 0.3 * k), yy + R * 0.12)], ep * 0.6, coul=(120, 160, 220))
+    elif sg == "coeurs":                                                   # cœurs qui montent
+        for k in range(3):
+            ph_ = (t * 0.6 + k / 3) % 1.0
+            _coeur(zone, (cx + R * (0.9 * math.sin(k * 2.1)), cy - R * (1.2 + 1.1 * ph_)), R * (0.17 + 0.05 * k) * u, (225, 55, 80))
+    elif sg == "etoiles":                                                  # étoiles qui tournent autour de la tête
+        for k in range(4):
+            a = t * 3.2 + k * math.pi / 2
+            _etoile(zone, (cx + R * 1.05 * math.cos(a), cy - R * 1.05 + R * 0.25 * math.sin(a)), R * 0.15 * u, (250, 210, 60))
+    elif sg == "goutte": C.goutte(zone, (cx + R * 0.95, cy - R * 0.55), R * 0.16 * u, ep)
+    elif sg == "fumee_oreilles":                                           # fumée qui sort des oreilles
+        cal = np.zeros_like(zone)
+        for sx in (-1, 1):
+            for k in range(3):
+                ph_ = (t * 1.5 + k / 3) % 1.0
+                _cv2.circle(cal, (int(cx + sx * R * (1.05 + 0.5 * ph_)), int(cy - R * 0.9 * ph_)), int(R * (0.12 + 0.18 * ph_) * u), (235, 235, 238), -1, _cv2.LINE_AA)
+        _melange(zone, cal, 0.8)
+    if p.get("vapeur_main") in ("g", "d"):                                 # vapeur qui monte du café / de la poêle
+        mx, my = dec(g["bras"][1 if p["vapeur_main"] == "d" else 0][2])
+        cal = np.zeros_like(zone)
+        for k in range(4):
+            ph_ = (t * 0.5 + k / 4) % 1.0
+            _cv2.circle(cal, (int(mx + math.sin(t * 2 + k) * R * 0.12), int(my - R * (0.35 + 0.9 * ph_))), int(R * (0.07 + 0.12 * ph_)), (248, 248, 248), -1, _cv2.LINE_AA)
+        _melange(zone, cal, 0.45)
+    if p.get("ecran") and p.get("ecran_main") in ("g", "d"):
+        cote = 1 if p["ecran_main"] == "d" else -1                         # au-dessus de la tête, du côté du téléphone (jamais sur le visage)
+        _texte(zone, (cx + cote * R * 0.75, cy - R * 1.05), str(p["ecran"])[:20], R)

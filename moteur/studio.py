@@ -388,6 +388,8 @@ def bible(sk, roles):
         if met_: lieux[k_] = DMT.METIER_LIEU[met_]
     try: habiller_contexte(sk, roles, costumes, lieux, moment, t_low, S)   # tenues et accessoires selon le lieu et les paroles
     except Exception as e: print(f"  tenues du contexte impossibles ({str(e)[:100]})", flush=True)
+    try: habiller_fiche(sk, roles, costumes, S)                            # fiche de tournage (20 novembre) : tenue, couleurs, état
+    except Exception as e: print(f"  tenues de la fiche de tournage impossibles ({str(e)[:100]})", flush=True)
     # les personnes de la vidéo d'origine habillent nos personnages : la plus présente à l'image joue la voix la plus présente
     if V.get("personnes"):
         mots = {r: sum(len(x.get("t", "").split()) for x in sk.get("repliques", []) if x.get("p") == r) for r in roles}
@@ -442,7 +444,10 @@ def bible(sk, roles):
                 cadence=S.get("cadence") if S.get("cadence") in CADENCES else None, assis=assis, meubles=meubles, cine=cine, decoupe=_decoupe_claude(S, roles),
                 coupes_origine=[float(c) for c in (V.get("coupes") or []) if isinstance(c, (int, float))] if sk.get("doublage") else [],
                 gestes_origine=[float(g[0]) for g in (V.get("gestes") or []) if isinstance(g, (list, tuple)) and g] if sk.get("doublage") else [],
-                postures_origine=[g for g in (V.get("postures") or []) if isinstance(g, (list, tuple)) and len(g) == 4] if sk.get("doublage") else [])
+                postures_origine=[g for g in (V.get("postures") or []) if isinstance(g, (list, tuple)) and len(g) == 4] if sk.get("doublage") else [],
+                reactions=[x for x in (S.get("reactions") or []) if isinstance(x, dict)], animations=list(S.get("animations") or []),
+                panneaux=[str(x) for x in (S.get("panneaux") or [])][:2], ecran_tel=str(S.get("ecran_tel") or ""),
+                lumiere_ambiance=str(S.get("lumiere_ambiance") or ""), interieur=S.get("interieur", True))
 
 # ------------------------------------------------------------------ tenues et accessoires du contexte (liste de l'auteur, 30/10/2026)
 TENUES = [  # (motif dans les paroles, lieux, tenue) — tenue : (haut, couleur, bas, couleur bas, tenue croquis, détails)
@@ -461,6 +466,36 @@ OBJETS_MOTS = [(r"\bvalises?\b|bagages?", "valise"), (r"parapluie", "parapluie")
                (r"casque de moto|ma moto|en moto|mon scooter|en scooter", "casque_moto"), (r"bouquet|des fleurs|une fleur|une rose", "fleur"),
                (r"un cadeau|ton cadeau|mon cadeau", "cadeau"), (r"\bpizzas?\b", "pizza"), (r"un café|mon café|ton café", "cafe"), (r"mes clés|les clés|tes clés", "cles"),
                (r"\bbillets?\b|\bthunes?\b|de l'argent", "billet"), (r"une lettre|cette lettre|courrier", "lettre"), (r"bouteille", "bouteille")]
+
+
+def habiller_fiche(sk, roles, costumes, S):
+    """Tenue décidée par la fiche de tournage (Gemini a vu et entendu l'original, puis triple contrôle) : type de tenue, haut et sa
+    couleur, couleur des cheveux, lunettes, et l'ÉTAT de la tenue (mouillée, sueur, tache, déchirée, maquillage qui coule : idée 14).
+    Jamais par-dessus un costume imposé par l'auteur ou un costume de métier (sauf l'état, qui s'ajoute toujours)."""
+    T_ = S.get("tenues_fiche") if isinstance(S.get("tenues_fiche"), dict) else {}
+    if not T_: return
+    import fiche_tournage as FT
+    impose = (S.get("costumes") or {}) if isinstance(S.get("costumes"), dict) else {}
+    P0 = S.get("personnages") if isinstance(S.get("personnages"), dict) else {}
+    for r in roles:
+        x = T_.get(r)
+        if not isinstance(x, dict) or r not in costumes: continue
+        c = dict(costumes[r])
+        libre = not impose.get(r) and not c.get("metier")
+        if libre and x.get("tenue") in FT.TENUE_STUDIO and x["tenue"] != "normale":
+            haut, ch, bas, cb, tc, det = FT.TENUE_STUDIO[x["tenue"]]
+            g = genre_voix(sk, r, P0.get(r) if isinstance(P0.get(r), dict) else {})
+            if not (g == "h" and x["tenue"] in ("robe_soiree", "robe_mariee", "peignoir")):
+                c.update(haut=haut, c_haut=tuple(ch), bas=bas, c_bas=tuple(cb))
+                if tc: c["tenue"] = tc
+                c["details"] = tuple(dict.fromkeys(tuple(c.get("details") or ()) + tuple(det))); c.pop("motif", None)
+        elif libre and x.get("haut") in M.HAUTS and not c.get("tenue"): c["haut"] = x["haut"]
+        if libre and str(x.get("c_haut") or "") in NOMS_COULEURS and not c.get("tenue"):
+            c["c_haut"] = NOMS_COULEURS[x["c_haut"]]; c["c_motif"] = M._fonce(c["c_haut"], 0.72)
+        if x.get("c_cheveux") in FT.COULEURS_CHEVEUX and "c_cheveux" not in (impose.get(r) or {}): c["c_cheveux"] = FT.COULEURS_CHEVEUX[x["c_cheveux"]]
+        if x.get("lunettes") is True: c["details"] = tuple(dict.fromkeys(tuple(c.get("details") or ()) + ("lunettes_vue",)))
+        if x.get("etats"): c["etats"] = tuple(e for e in x["etats"] if e in FT.ETATS)
+        costumes[r] = c
 
 
 def habiller_contexte(sk, roles, costumes, lieux, moment, t_low, S):

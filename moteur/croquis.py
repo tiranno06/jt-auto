@@ -313,6 +313,10 @@ def visage(img, c, R, expr="neutre", regard=(0, 0), rng=None, profil=0.0, nez_vu
             x_ = o[0] + (o[0] - c[0]) * 0.35                                  # au coin extérieur de l'œil
             m = np.zeros(img.shape[:2], np.uint8); cv2.line(m, _pts([(x_, o[1] + er * 0.8)])[0], _pts([(x_ + er * 0.08, o[1] + er * (0.9 + 1.6 * la))])[0], 255, int(er * 0.16 * 4), AA, 2)
             lavis(img, m, (120, 185, 240), 0.5, bord=False); goutte(img, (x_ + er * 0.08, o[1] + er * (1.0 + 1.6 * la)), er * 0.2, ep * 0.6)
+    if fx.get("maquillage", 0) > 0.05:                                     # maquillage qui coule (elle a pleuré : idée 14 du 20 novembre)
+        for o in (oL, oR):
+            x_ = o[0] + (o[0] - c[0]) * 0.12
+            encre(img, [(x_, o[1] + er * 0.75), (x_ + er * 0.18, o[1] + er * 1.35), (x_ - er * 0.06, o[1] + er * 2.0), (x_ + er * 0.1, o[1] + er * 2.5)], ep * 0.75, coul=(45, 42, 55))
     if E == "degout":                                                      # teint verdâtre
         pass
     if E == "colere":
