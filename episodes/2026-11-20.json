@@ -1,905 +1,715 @@
 {
- "titre": "IL VEUT COMPTER JUSQU'À 1",
- "sujet": "IL VEUT COMPTER JUSQU'À 1",
- "ecran": "IL VEUT",
+ "titre": "POTE ALCOOLIQUE AU BAR",
+ "sujet": "POTE ALCOOLIQUE AU BAR",
+ "ecran": "POTE",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "POV : Tu demandes à Siri de compter jusqu'à 1M",
- "question": "Team insomniaque ou team gros dodo ? 🛌",
+ "titre_accroche": "POV : Ton pote alcoolique",
+ "question": "Vous auriez fait quoi à sa place ?",
  "running_gag": "",
  "verite": "",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "Compte jusqu'à un million.",
-   "_deb": 0.0,
-   "_fin": 1.268,
-   "d": "[annoyed] Compte jusqu'à un million.",
-   "objet": "telephone",
+   "t": "J'ai faim.",
+   "_deb": 0.332,
+   "_fin": 0.593,
+   "d": "[hungry] J'ai faim.",
    "_mots": [
     [
-     "Compte",
-     0.0,
-     0.201
-    ],
-    [
-     "jusqu'à",
-     0.362,
-     0.624
-    ],
-    [
-     "un",
-     0.68,
-     0.9
-    ],
-    [
-     "million.",
-     0.926,
-     1.268
-    ]
-   ],
-   "_cible": "autre",
-   "_geste": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "Comptez jusqu'à un million. Ça serait un peu épique, mais surtout très long.",
-   "_deb": 2.251,
-   "_fin": 6.703,
-   "d": "[blase] Comptez jusqu'à un million. Ça serait un peu épique, mais surtout très long.",
-   "_mots": [
-    [
-     "Comptez",
-     0.0,
-     0.381
-    ],
-    [
-     "jusqu'à",
-     0.501,
-     0.782
-    ],
-    [
-     "un",
-     0.869,
-     0.989
-    ],
-    [
-     "million.",
-     1.023,
-     1.343
-    ],
-    [
-     "Ça",
-     1.925,
-     1.985
-    ],
-    [
-     "serait",
-     2.086,
-     2.306
-    ],
-    [
-     "un",
-     2.386,
-     2.446
-    ],
-    [
-     "peu",
-     2.507,
-     2.587
-    ],
-    [
-     "épique,",
-     2.687,
-     3.048
-    ],
-    [
-     "mais",
-     3.369,
-     3.489
-    ],
-    [
-     "surtout",
-     3.59,
-     3.89
-    ],
-    [
-     "très",
-     3.991,
-     4.231
-    ],
-    [
-     "long.",
-     4.292,
-     4.452
-    ]
-   ],
-   "objet": "verre",
-   "_cible": "autre",
-   "_geste": "explique"
-  },
-  {
-   "p": "invite",
-   "t": "Je vais t'épargner ça, mais si tu as une autre idée...",
-   "_deb": 7.325,
-   "_fin": 9.15,
-   "d": "[sceptique] Je vais t'épargner ça, mais si tu as une autre idée...",
-   "_mots": [
-    [
-     "Je",
-     0.0,
-     0.06
-    ],
-    [
-     "vais",
-     0.08,
-     0.18
-    ],
-    [
-     "t'épargner",
-     0.18,
-     0.561
-    ],
-    [
-     "ça,",
-     0.641,
-     0.702
-    ],
-    [
-     "mais",
-     0.902,
-     1.022
-    ],
-    [
-     "si",
-     1.083,
-     1.163
-    ],
-    [
-     "tu",
-     1.203,
-     1.243
-    ],
-    [
-     "as",
-     1.243,
-     1.303
-    ],
-    [
-     "une",
-     1.343,
-     1.424
-    ],
-    [
-     "autre",
-     1.484,
-     1.584
-    ],
-    [
-     "idée...",
-     1.624,
-     1.825
-    ]
-   ],
-   "objet": "verre",
-   "_cible": "autre",
-   "_geste": "explique"
-  },
-  {
-   "p": "presentateur",
-   "t": "Non, mais écoute, écoute, je te demande de compter jusqu'à un million.",
-   "_deb": 8.81,
-   "_fin": 12.809,
-   "d": "[colere] Non, mais écoute, écoute, je te demande de compter jusqu'à un million.",
-   "objet": "telephone",
-   "_mots": [
-    [
-     "Non,",
-     0.34,
-     0.36
-    ],
-    [
-     "mais",
-     0.0,
-     0.261
-    ],
-    [
-     "écoute,",
-     0.281,
-     0.402
-    ],
-    [
-     "écoute,",
-     1.186,
-     1.427
-    ],
-    [
-     "je",
-     1.889,
-     1.949
-    ],
-    [
-     "te",
-     2.05,
-     2.11
-    ],
-    [
-     "demande",
-     2.231,
-     2.673
-    ],
-    [
-     "de",
-     2.854,
-     2.894
-    ],
-    [
-     "compter",
-     2.974,
-     3.215
-    ],
-    [
-     "jusqu'à",
-     3.276,
-     3.497
-    ],
-    [
-     "un",
-     3.51,
-     3.65
-    ],
-    [
-     "million.",
-     3.718,
-     3.999
-    ]
-   ],
-   "_signe": "veine",
-   "_cible": "autre",
-   "_geste": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "Eh bien, je vois que tu veux me lancer un vrai marathon de chiffres.",
-   "_deb": 13.612,
-   "_fin": 16.97,
-   "d": "[reflechit] Eh bien, je vois que tu veux me lancer un vrai marathon de chiffres.",
-   "_mots": [
-    [
-     "Eh",
-     0.0,
-     0.04
-    ],
-    [
-     "bien,",
-     0.14,
-     0.281
-    ],
-    [
-     "je",
-     0.844,
-     0.905
-    ],
-    [
-     "vois",
-     0.945,
-     1.065
-    ],
-    [
-     "que",
-     1.065,
-     1.166
-    ],
-    [
-     "tu",
-     1.166,
-     1.246
-    ],
-    [
-     "veux",
-     1.246,
-     1.347
-    ],
-    [
-     "me",
-     1.367,
-     1.448
-    ],
-    [
-     "lancer",
-     1.468,
-     1.729
-    ],
-    [
-     "un",
-     1.83,
-     1.89
-    ],
-    [
-     "vrai",
-     2.011,
-     2.171
-    ],
-    [
-     "marathon",
-     2.272,
-     2.594
-    ],
-    [
-     "de",
-     2.634,
-     2.674
-    ],
-    [
-     "chiffres.",
-     2.714,
-     3.358
-    ]
-   ],
-   "objet": "verre",
-   "_cible": "autre",
-   "_geste": "explique"
-  },
-  {
-   "p": "invite",
-   "t": "Bon, on va dire que je vais te faire un petit résumé.",
-   "_deb": 17.411,
-   "_fin": 19.097,
-   "d": "[neutre] Bon, on va dire que je vais te faire un petit résumé.",
-   "_mots": [
-    [
-     "Bon,",
+     "J'ai",
      0.0,
      0.1
     ],
     [
-     "on",
-     0.201,
-     0.241
-    ],
-    [
-     "va",
-     0.241,
-     0.301
-    ],
-    [
-     "dire",
-     0.361,
-     0.502
-    ],
-    [
-     "que",
-     0.522,
-     0.602
-    ],
-    [
-     "je",
-     0.622,
-     0.702
-    ],
-    [
-     "vais",
-     0.702,
-     0.803
-    ],
-    [
-     "te",
-     0.803,
-     0.863
-    ],
-    [
-     "faire",
-     0.863,
-     1.024
-    ],
-    [
-     "un",
-     1.044,
-     1.124
-    ],
-    [
-     "petit",
-     1.124,
-     1.345
-    ],
-    [
-     "résumé.",
-     1.345,
-     1.686
+     "faim.",
+     0.16,
+     0.261
     ]
    ],
-   "objet": "verre",
-   "_cible": "autre",
-   "_geste": "explique"
+   "objet": "casque_moto"
   },
   {
    "p": "invite",
-   "t": "Imagine que je compte super vite, et voilà, on est déjà...",
-   "_deb": 19.639,
-   "_fin": 21.927,
-   "d": "[joie] Imagine que je compte super vite, et voilà, on est déjà...",
+   "t": "Bah bois un coup.",
+   "_deb": 0.713,
+   "_fin": 1.115,
+   "d": "[sarcastic] Bah bois un coup.",
    "_mots": [
     [
-     "Imagine",
+     "Bah",
      0.0,
+     0.081
+    ],
+    [
+     "bois",
+     0.101,
+     0.181
+    ],
+    [
+     "un",
+     0.222,
+     0.262
+    ],
+    [
+     "coup.",
+     0.282,
+     0.402
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Bah quoi. Mais ça c'est ta réponse à tout toi en fait.",
+   "_deb": 1.156,
+   "_fin": 2.985,
+   "d": "[annoyed] Bah quoi. Mais ça c'est ta réponse à tout toi en fait.",
+   "_mots": [
+    [
+     "Bah",
+     0.0,
+     0.341
+    ],
+    [
+     "quoi.",
+     0.422,
+     0.522
+    ],
+    [
+     "Mais",
+     0.623,
+     0.703
+    ],
+    [
+     "ça",
+     0.723,
+     0.783
+    ],
+    [
+     "c'est",
+     0.824,
+     0.924
+    ],
+    [
+     "ta",
+     0.944,
+     0.984
+    ],
+    [
+     "réponse",
+     1.025,
+     1.266
+    ],
+    [
+     "à",
+     1.306,
+     1.326
+    ],
+    [
+     "tout",
+     1.386,
+     1.507
+    ],
+    [
+     "toi",
+     1.547,
+     1.607
+    ],
+    [
+     "en",
+     1.668,
+     1.708
+    ],
+    [
+     "fait.",
+     1.708,
+     1.829
+    ]
+   ],
+   "objet": "casque_moto"
+  },
+  {
+   "p": "invite",
+   "t": "Bah tu me dis que t'as faim.",
+   "_deb": 3.005,
+   "_fin": 3.728,
+   "d": "[neutral] Bah tu me dis que t'as faim.",
+   "_mots": [
+    [
+     "Bah",
+     0.0,
+     0.12
+    ],
+    [
+     "tu",
+     0.16,
+     0.221
+    ],
+    [
+     "me",
+     0.241,
+     0.281
+    ],
+    [
+     "dis",
+     0.301,
+     0.382
+    ],
+    [
+     "que",
+     0.382,
+     0.442
+    ],
+    [
+     "t'as",
+     0.462,
+     0.583
+    ],
+    [
+     "faim.",
+     0.603,
+     0.723
+    ]
+   ],
+   "objet": "casque_moto"
+  },
+  {
+   "p": "presentateur",
+   "t": "Ouais.",
+   "_deb": 3.791,
+   "_fin": 4.052,
+   "d": "[annoyed] Ouais.",
+   "_mots": [
+    [
+     "Ouais.",
+     0.0,
+     0.261
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Bah du coup je t'ai dit de boire un coup, c'est totalement logique.",
+   "_deb": 4.072,
+   "_fin": 5.9,
+   "d": "[explaining] Bah du coup je t'ai dit de boire un coup, c'est totalement logique.",
+   "_mots": [
+    [
+     "Bah",
+     0.0,
+     0.081
+    ],
+    [
+     "du",
+     0.121,
+     0.181
+    ],
+    [
+     "coup",
+     0.221,
+     0.322
+    ],
+    [
+     "je",
+     0.322,
+     0.382
+    ],
+    [
+     "t'ai",
+     0.402,
+     0.462
+    ],
+    [
+     "dit",
+     0.482,
+     0.543
+    ],
+    [
+     "de",
+     0.563,
+     0.603
+    ],
+    [
+     "boire",
+     0.603,
+     0.743
+    ],
+    [
+     "un",
+     0.804,
+     0.844
+    ],
+    [
+     "coup,",
+     0.884,
+     1.065
+    ],
+    [
+     "c'est",
+     1.085,
+     1.165
+    ],
+    [
+     "totalement",
+     1.185,
+     1.487
+    ],
+    [
+     "logique.",
+     1.527,
+     1.828
+    ]
+   ],
+   "objet": "casque_moto",
+   "_action": "tenir",
+   "_mot_objet": "boire un coup"
+  },
+  {
+   "p": "presentateur",
+   "t": "Pourquoi c'est logique.",
+   "_deb": 5.9,
+   "_fin": 6.804,
+   "d": "[confused] Pourquoi c'est logique.",
+   "_mots": [
+    [
+     "Pourquoi",
+     0.0,
+     0.221
+    ],
+    [
+     "c'est",
+     0.362,
+     0.442
+    ],
+    [
+     "logique.",
+     0.522,
+     0.904
+    ]
+   ],
+   "objet": "casque_moto"
+  },
+  {
+   "p": "invite",
+   "t": "Bah la bière.",
+   "_deb": 6.804,
+   "_fin": 7.306,
+   "d": "[happy] Bah la bière.",
+   "_mots": [
+    [
+     "Bah",
+     0.0,
+     0.1
+    ],
+    [
+     "la",
+     0.1,
+     0.181
+    ],
+    [
+     "bière.",
+     0.221,
+     0.502
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "J'ai pas dit que j'avais soif.",
+   "_deb": 7.447,
+   "_fin": 8.272,
+   "d": "[annoyed] J'ai pas dit que j'avais soif.",
+   "_mots": [
+    [
+     "J'ai",
+     0.0,
+     0.08
+    ],
+    [
+     "pas",
+     0.14,
+     0.221
+    ],
+    [
+     "dit",
+     0.241,
      0.321
     ],
     [
      "que",
-     0.341,
-     0.441
+     0.321,
+     0.381
     ],
     [
-     "je",
-     0.461,
-     0.521
+     "j'avais",
+     0.401,
+     0.564
     ],
     [
-     "compte",
-     0.521,
-     0.682
-    ],
-    [
-     "super",
-     0.742,
-     0.963
-    ],
-    [
-     "vite,",
-     1.023,
-     1.304
-    ],
-    [
-     "et",
-     1.545,
-     1.605
-    ],
-    [
-     "voilà,",
-     1.706,
-     1.886
-    ],
-    [
-     "on",
-     2.087,
-     2.127
-    ],
-    [
-     "est",
-     2.127,
-     2.187
-    ],
-    [
-     "déjà...",
-     2.187,
-     2.288
+     "soif.",
+     0.564,
+     0.825
     ]
    ],
-   "objet": "verre",
-   "_cible": "autre",
-   "_geste": "explique"
+   "objet": "casque_moto"
   },
   {
-   "p": "presentateur",
-   "t": "Chat, chat, eh oh, tu parles trop. Je t'ordonne de compter de 0 à 1 million.",
-   "_deb": 21.927,
-   "_fin": 28.689,
-   "d": "[colere] Chat, chat, eh oh, tu parles trop. Je t'ordonne de compter de 0 à 1 million.",
-   "objet": "telephone",
+   "p": "invite",
+   "t": "Mais tu m'aurais dit que j'ai soif, je t'aurais répondu bah bois un coup.",
+   "_deb": 8.352,
+   "_fin": 10.561,
+   "d": "[explaining] Mais tu m'aurais dit que j'ai soif, je t'aurais répondu bah bois un coup.",
    "_mots": [
     [
-     "Chat,",
+     "Mais",
      0.0,
-     0.14
-    ],
-    [
-     "chat,",
-     0.24,
-     0.341
-    ],
-    [
-     "eh",
-     0.824,
-     0.884
-    ],
-    [
-     "oh,",
-     0.944,
-     1.165
+     0.101
     ],
     [
      "tu",
-     1.165,
-     1.225
+     0.121,
+     0.181
     ],
     [
-     "parles",
-     1.285,
-     1.446
+     "m'aurais",
+     0.241,
+     0.442
     ],
     [
-     "trop.",
-     1.486,
-     1.687
+     "dit",
+     0.442,
+     0.522
     ],
     [
-     "Je",
-     2.308,
-     2.389
+     "que",
+     0.542,
+     0.603
     ],
     [
-     "t'ordonne",
-     2.509,
-     3.091
+     "j'ai",
+     0.603,
+     0.663
     ],
     [
-     "de",
-     3.532,
-     3.592
-    ],
-    [
-     "compter",
-     3.713,
-     4.595
-    ],
-    [
-     "de",
-     4.615,
-     4.676
-    ],
-    [
-     "0",
-     4.713,
-     5.593
-    ],
-    [
-     "à",
-     6.02,
-     6.04
-    ],
-    [
-     "1",
-     6.053,
-     6.333
-    ],
-    [
-     "million.",
-     6.381,
-     6.762
-    ]
-   ],
-   "_signe": "veine",
-   "_cible": "autre",
-   "_geste": "telephone"
-  },
-  {
-   "p": "invite",
-   "t": "Écoute, je vais rester bien clair. Ça ferait un monologue interminable.",
-   "_deb": 29.311,
-   "_fin": 33.321,
-   "d": "[blase] Écoute, je vais rester bien clair. Ça ferait un monologue interminable.",
-   "_mots": [
-    [
-     "Écoute,",
-     0.0,
-     0.26
+     "soif,",
+     0.743,
+     0.944
     ],
     [
      "je",
-     0.822,
-     0.882
+     1.004,
+     1.064
     ],
     [
-     "vais",
-     0.942,
-     1.022
+     "t'aurais",
+     1.084,
+     1.265
     ],
     [
-     "rester",
-     1.062,
-     1.283
+     "répondu",
+     1.305,
+     1.606
     ],
     [
-     "bien",
-     1.343,
-     1.464
+     "bah",
+     1.687,
+     1.787
     ],
     [
-     "clair.",
-     1.524,
-     1.804
-    ],
-    [
-     "Ça",
-     2.246,
-     2.306
-    ],
-    [
-     "ferait",
-     2.406,
-     2.566
+     "bois",
+     1.807,
+     1.928
     ],
     [
      "un",
-     2.627,
-     2.667
+     1.968,
+     2.028
     ],
     [
-     "monologue",
-     2.707,
-     3.168
-    ],
-    [
-     "interminable.",
-     3.308,
-     4.01
+     "coup.",
+     2.068,
+     2.209
     ]
    ],
-   "objet": "verre",
-   "_cible": "autre",
-   "_geste": "explique"
+   "objet": "casque_moto"
   },
   {
-   "p": "invite",
-   "t": "Et je pense qu'on a tous les deux mieux à faire.",
-   "_deb": 33.421,
-   "_fin": 35.306,
-   "d": "[neutre] Et je pense qu'on a tous les deux mieux à faire.",
+   "p": "presentateur",
+   "t": "Mais je t'ai dit que j'avais faim.",
+   "_deb": 10.581,
+   "_fin": 11.464,
+   "d": "[annoyed] Mais je t'ai dit que j'avais faim.",
    "_mots": [
     [
-     "Et",
-     0.0,
-     0.061
-    ],
-    [
-     "je",
-     0.081,
-     0.141
-    ],
-    [
-     "pense",
-     0.181,
-     0.341
-    ],
-    [
-     "qu'on",
-     0.381,
-     0.542
-    ],
-    [
-     "a",
-     0.622,
-     0.642
-    ],
-    [
-     "tous",
-     0.843,
-     1.003
-    ],
-    [
-     "les",
-     1.023,
-     1.143
-    ],
-    [
-     "deux",
-     1.184,
-     1.364
-    ],
-    [
-     "mieux",
-     1.384,
-     1.524
-    ],
-    [
-     "à",
-     1.585,
-     1.605
-    ],
-    [
-     "faire.",
-     1.685,
-     1.885
-    ]
-   ],
-   "objet": "cafe",
-   "_cible": "autre",
-   "_geste": "explique"
-  },
-  {
-   "p": "invite",
-   "t": "Non, non, non.",
-   "_deb": 35.868,
-   "_fin": 36.269,
-   "d": "[sceptique] Non, non, non.",
-   "_mots": [
-    [
-     "Non,",
+     "Mais",
      0.0,
      0.08
     ],
     [
-     "non,",
-     0.12,
-     0.2
+     "je",
+     0.08,
+     0.14
     ],
     [
-     "non.",
-     0.22,
-     0.401
-    ]
-   ],
-   "objet": "cafe",
-   "_cible": "autre",
-   "_geste": "stop"
-  },
-  {
-   "p": "presentateur",
-   "t": "Je n'ai pas mieux à faire, je suis couché. Et les minuits, je n'ai rien à faire.",
-   "_deb": 37.011,
-   "_fin": 41.161,
-   "d": "[colere] Je n'ai pas mieux à faire, je suis couché. Et les minuit, je n'ai rien à faire.",
-   "_mots": [
-    [
-     "Je",
-     0.0,
-     0.06
+     "t'ai",
+     0.181,
+     0.261
     ],
     [
-     "n'ai",
-     0.12,
-     0.26
-    ],
-    [
-     "pas",
-     0.28,
+     "dit",
+     0.281,
      0.361
     ],
     [
-     "mieux",
+     "que",
      0.381,
-     0.541
+     0.442
     ],
     [
-     "à",
-     0.561,
-     0.581
+     "j'avais",
+     0.462,
+     0.662
     ],
     [
-     "faire,",
-     0.681,
-     0.842
-    ],
-    [
-     "je",
-     1.062,
-     1.123
-    ],
-    [
-     "suis",
-     1.243,
-     1.403
-    ],
-    [
-     "couché.",
-     1.504,
-     1.784
-    ],
-    [
-     "Et",
-     2.005,
-     2.085
-    ],
-    [
-     "les",
-     2.125,
-     2.225
-    ],
-    [
-     "minuit,",
-     2.326,
-     2.626
-    ],
-    [
-     "je",
-     3.108,
-     3.168
-    ],
-    [
-     "n'ai",
-     3.248,
-     3.408
-    ],
-    [
-     "rien",
-     3.529,
-     3.749
-    ],
-    [
-     "à",
-     3.829,
-     3.849
-    ],
-    [
-     "faire.",
-     3.95,
-     4.15
+     "faim.",
+     0.743,
+     0.883
     ]
    ],
-   "objet": "verre",
-   "_cible": "autre",
-   "_geste": "telephone"
+   "objet": "casque_moto"
+  },
+  {
+   "p": "invite",
+   "t": "Mais c'est pareil.",
+   "_deb": 11.545,
+   "_fin": 12.27,
+   "d": "[sarcastic] Mais c'est pareil.",
+   "_mots": [
+    [
+     "Mais",
+     0.0,
+     0.12
+    ],
+    [
+     "c'est",
+     0.16,
+     0.301
+    ],
+    [
+     "pareil.",
+     0.341,
+     0.725
+    ]
+   ],
+   "objet": "casque_moto"
   },
   {
    "p": "presentateur",
-   "t": "Donc compte jusqu'à un million. Mais en fait, comment je...",
-   "_deb": 42.083,
-   "_fin": 44.735,
-   "d": "[sceptique] Donc compte jusqu'à un million. Mais en fait, comment je...",
-   "objet": "telephone",
+   "t": "Mais qu'est-ce qui est pareil.",
+   "_deb": 12.27,
+   "_fin": 13.094,
+   "d": "[confused] Mais qu'est-ce qui est pareil.",
    "_mots": [
     [
-     "Donc",
+     "Mais",
      0.0,
      0.161
     ],
     [
-     "compte",
-     0.582,
-     0.843
+     "qu'est-ce",
+     0.161,
+     0.342
     ],
     [
-     "jusqu'à",
-     1.043,
-     1.284
+     "qui",
+     0.342,
+     0.402
+    ],
+    [
+     "est",
+     0.422,
+     0.482
+    ],
+    [
+     "pareil.",
+     0.523,
+     0.824
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Bah la réponse, bois un coup.",
+   "_deb": 13.174,
+   "_fin": 14.54,
+   "d": "[happy] Bah la réponse, bois un coup.",
+   "_mots": [
+    [
+     "Bah",
+     0.0,
+     0.121
+    ],
+    [
+     "la",
+     0.121,
+     0.181
+    ],
+    [
+     "réponse,",
+     0.241,
+     0.723
+    ],
+    [
+     "bois",
+     0.944,
+     1.105
     ],
     [
      "un",
-     1.317,
-     1.497
+     1.105,
+     1.145
     ],
     [
-     "million.",
-     1.504,
-     1.725
-    ],
-    [
-     "Mais",
-     2.046,
-     2.306
-    ],
-    [
-     "en",
-     2.346,
-     2.386
-    ],
-    [
-     "fait,",
-     2.447,
-     2.467
-    ],
-    [
-     "comment",
-     2.309,
-     2.531
-    ],
-    [
-     "je...",
-     2.592,
-     2.652
+     "coup.",
+     1.265,
+     1.366
     ]
    ],
-   "_cible": "autre",
-   "_geste": "telephone"
+   "objet": "casque_moto"
   },
   {
    "p": "presentateur",
-   "t": "Je comprends pas en fait.",
-   "_deb": 45.281,
-   "_fin": 46.048,
-   "d": "[penseur] Je comprends pas en fait.",
+   "t": "Putain t'as un vrai problème, je t'aurais dit que j'ai froid, tu m'aurais répondu.",
+   "_deb": 14.56,
+   "_fin": 16.53,
+   "d": "[angry] Putain t'as un vrai problème, je t'aurais dit que j'ai froid, tu m'aurais répondu.",
+   "_mots": [
+    [
+     "Putain",
+     0.0,
+     0.201
+    ],
+    [
+     "t'as",
+     0.201,
+     0.301
+    ],
+    [
+     "un",
+     0.341,
+     0.381
+    ],
+    [
+     "vrai",
+     0.401,
+     0.502
+    ],
+    [
+     "problème,",
+     0.562,
+     0.843
+    ],
+    [
+     "je",
+     0.843,
+     0.883
+    ],
+    [
+     "t'aurais",
+     0.883,
+     1.064
+    ],
+    [
+     "dit",
+     1.084,
+     1.144
+    ],
+    [
+     "que",
+     1.165,
+     1.225
+    ],
+    [
+     "j'ai",
+     1.225,
+     1.285
+    ],
+    [
+     "froid,",
+     1.325,
+     1.486
+    ],
+    [
+     "tu",
+     1.546,
+     1.626
+    ],
+    [
+     "m'aurais",
+     1.626,
+     1.847
+    ],
+    [
+     "répondu.",
+     1.887,
+     1.97
+    ]
+   ],
+   "objet": "casque_moto"
+  },
+  {
+   "p": "invite",
+   "t": "Bah bois un coup. Et bah voilà.",
+   "_deb": 16.53,
+   "_fin": 17.615,
+   "d": "[happy] Bah bois un coup. Et bah voilà.",
+   "_mots": [
+    [
+     "Bah",
+     0.0,
+     0.301
+    ],
+    [
+     "bois",
+     0.342,
+     0.462
+    ],
+    [
+     "un",
+     0.502,
+     0.542
+    ],
+    [
+     "coup.",
+     0.563,
+     0.663
+    ],
+    [
+     "Et",
+     0.703,
+     0.743
+    ],
+    [
+     "bah",
+     0.763,
+     0.904
+    ],
+    [
+     "voilà.",
+     0.924,
+     1.085
+    ]
+   ],
+   "objet": "casque_moto"
+  },
+  {
+   "p": "presentateur",
+   "t": "Je me demande vraiment comment t'as fait pour tenir jusqu'ici, ça relève du miracle.",
+   "_deb": 17.976,
+   "_fin": 20.427,
+   "d": "[sarcastic] Je me demande vraiment comment t'as fait pour tenir jusqu'ici, ça relève du miracle.",
    "_mots": [
     [
      "Je",
@@ -907,164 +717,1069 @@
      0.06
     ],
     [
-     "comprends",
-     0.101,
-     0.343
+     "me",
+     0.06,
+     0.101
     ],
     [
-     "pas",
-     0.343,
-     0.424
+     "demande",
+     0.121,
+     0.302
     ],
     [
-     "en",
-     0.485,
-     0.525
+     "vraiment",
+     0.302,
+     0.502
     ],
     [
-     "fait.",
-     0.565,
-     0.767
+     "comment",
+     0.522,
+     0.703
+    ],
+    [
+     "t'as",
+     0.723,
+     0.804
+    ],
+    [
+     "fait",
+     0.804,
+     0.884
+    ],
+    [
+     "pour",
+     0.904,
+     1.004
+    ],
+    [
+     "tenir",
+     1.025,
+     1.205
+    ],
+    [
+     "jusqu'ici,",
+     1.245,
+     1.527
+    ],
+    [
+     "ça",
+     1.728,
+     1.768
+    ],
+    [
+     "relève",
+     1.828,
+     2.009
+    ],
+    [
+     "du",
+     2.049,
+     2.109
+    ],
+    [
+     "miracle.",
+     2.149,
+     2.451
     ]
    ],
-   "objet": "verre",
-   "_cible": "autre",
-   "_geste": "telephone"
+   "objet": "casque_moto"
   },
   {
    "p": "invite",
-   "t": "Je comprends. T'es tranquille, t'as du temps devant toi. Mais on va être honnête, même en mode super patience Comptez jusqu'à un million.",
-   "_deb": 47.791,
-   "_fin": 54.588,
-   "d": "[blase] Je comprends. T'es tranquille, t'as du temps devant toi. Mais on va être honnête, même en mode super patience Comptez jusqu'à un million.",
+   "t": "Tu veux savoir comment j'ai fait. Non, j'ai bu des coups.",
+   "_deb": 20.527,
+   "_fin": 22.397,
+   "d": "[proud] Tu veux savoir comment j'ai fait. Non, j'ai bu des coups.",
    "_mots": [
     [
-     "Je",
+     "Tu",
+     0.0,
+     0.06
+    ],
+    [
+     "veux",
+     0.1,
+     0.181
+    ],
+    [
+     "savoir",
+     0.201,
+     0.361
+    ],
+    [
+     "comment",
+     0.382,
+     0.402
+    ],
+    [
+     "j'ai",
+     0.243,
+     0.323
+    ],
+    [
+     "fait.",
+     0.364,
+     0.524
+    ],
+    [
+     "Non,",
+     0.805,
+     0.886
+    ],
+    [
+     "j'ai",
+     1.086,
+     1.187
+    ],
+    [
+     "bu",
+     1.207,
+     1.267
+    ],
+    [
+     "des",
+     1.307,
+     1.388
+    ],
+    [
+     "coups.",
+     1.408,
+     1.87
+    ]
+   ],
+   "objet": "casque_moto"
+  },
+  {
+   "p": "invite",
+   "t": "C'est une pratique ancestrale qui a toujours fait ses preuves, donc je vois pas pourquoi tu...",
+   "_deb": 22.477,
+   "_fin": 24.987,
+   "d": "[explaining] C'est une pratique ancestrale qui a toujours fait ses preuves, donc je vois pas pourquoi tu...",
+   "_mots": [
+    [
+     "C'est",
+     0.0,
+     0.12
+    ],
+    [
+     "une",
+     0.12,
+     0.201
+    ],
+    [
+     "pratique",
+     0.201,
+     0.462
+    ],
+    [
+     "ancestrale",
+     0.542,
+     0.944
+    ],
+    [
+     "qui",
+     0.944,
+     1.024
+    ],
+    [
+     "a",
+     1.064,
+     1.084
+    ],
+    [
+     "toujours",
+     1.104,
+     1.365
+    ],
+    [
+     "fait",
+     1.365,
+     1.466
+    ],
+    [
+     "ses",
+     1.506,
+     1.586
+    ],
+    [
+     "preuves,",
+     1.606,
+     1.807
+    ],
+    [
+     "donc",
+     1.807,
+     1.887
+    ],
+    [
+     "je",
+     1.887,
+     1.928
+    ],
+    [
+     "vois",
+     1.948,
+     2.028
+    ],
+    [
+     "pas",
+     2.048,
+     2.128
+    ],
+    [
+     "pourquoi",
+     2.149,
+     2.349
+    ],
+    [
+     "tu...",
+     2.43,
+     2.51
+    ]
+   ],
+   "objet": "casque_moto"
+  },
+  {
+   "p": "presentateur",
+   "t": "Laisse tomber, tu me saoules.",
+   "_deb": 25.148,
+   "_fin": 25.873,
+   "d": "[annoyed] Laisse tomber, tu me saoules.",
+   "_mots": [
+    [
+     "Laisse",
+     0.0,
+     0.2
+    ],
+    [
+     "tomber,",
+     0.2,
+     0.22
+    ],
+    [
+     "tu",
+     0.182,
+     0.223
+    ],
+    [
+     "me",
+     0.223,
+     0.524
+    ],
+    [
+     "saoules.",
+     0.544,
+     0.725
+    ]
+   ],
+   "objet": "casque_moto"
+  },
+  {
+   "p": "envoyee",
+   "t": "S'il vous plaît.",
+   "_deb": 25.974,
+   "_fin": 26.335,
+   "d": "[neutral] S'il vous plaît.",
+   "_mots": [
+    [
+     "S'il",
+     0.0,
+     0.1
+    ],
+    [
+     "vous",
+     0.12,
+     0.201
+    ],
+    [
+     "plaît.",
+     0.221,
+     0.361
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Oui. Alors moi je vais vous prendre un beurre de six pentes de blonde s'il vous plaît.",
+   "_deb": 26.436,
+   "_fin": 28.687,
+   "d": "[happy] Oui. Alors moi je vais vous prendre un beurre de six pentes de blonde s'il vous plaît.",
+   "_mots": [
+    [
+     "Oui.",
      0.0,
      0.08
     ],
     [
-     "comprends.",
-     0.18,
-     0.521
+     "Alors",
+     0.382,
+     0.542
     ],
     [
-     "T'es",
-     1.042,
-     1.163
+     "moi",
+     0.542,
+     0.623
     ],
     [
-     "tranquille,",
-     1.223,
-     1.724
+     "je",
+     0.663,
+     0.703
     ],
     [
-     "t'as",
-     1.784,
-     1.905
+     "vais",
+     0.703,
+     0.804
     ],
     [
-     "du",
-     1.945,
-     2.005
+     "vous",
+     0.804,
+     0.904
     ],
     [
-     "temps",
-     2.065,
-     2.185
-    ],
-    [
-     "devant",
-     2.205,
-     2.386
-    ],
-    [
-     "toi.",
-     2.426,
-     2.526
-    ],
-    [
-     "Mais",
-     3.268,
-     3.368
-    ],
-    [
-     "on",
-     3.409,
-     3.449
-    ],
-    [
-     "va",
-     3.489,
-     3.529
-    ],
-    [
-     "être",
-     3.589,
-     3.689
-    ],
-    [
-     "honnête,",
-     3.709,
-     4.05
-    ],
-    [
-     "même",
-     4.17,
-     4.351
-    ],
-    [
-     "en",
-     4.391,
-     4.431
-    ],
-    [
-     "mode",
-     4.471,
-     4.652
-    ],
-    [
-     "super",
-     4.852,
-     5.133
-    ],
-    [
-     "patience",
-     5.213,
-     5.694
-    ],
-    [
-     "Comptez",
-     5.835,
-     6.095
-    ],
-    [
-     "jusqu'à",
-     6.156,
-     6.376
+     "prendre",
+     0.924,
+     1.105
     ],
     [
      "un",
-     6.389,
-     6.509
+     1.166,
+     1.206
     ],
     [
-     "million.",
-     6.516,
-     6.797
+     "beurre",
+     1.266,
+     1.427
+    ],
+    [
+     "de",
+     1.427,
+     1.467
+    ],
+    [
+     "six",
+     1.467,
+     1.527
+    ],
+    [
+     "pentes",
+     1.527,
+     1.688
+    ],
+    [
+     "de",
+     1.688,
+     1.728
+    ],
+    [
+     "blonde",
+     1.768,
+     1.929
+    ],
+    [
+     "s'il",
+     1.929,
+     2.03
+    ],
+    [
+     "vous",
+     2.03,
+     2.13
+    ],
+    [
+     "plaît.",
+     2.13,
+     2.251
     ]
    ],
-   "objet": "casque_moto",
-   "_signe": "goutte",
-   "_cible": "autre",
-   "_geste": "explique"
+   "objet": "casque_moto"
   },
   {
    "p": "invite",
-   "t": "Ça serait juste une boucle infinie. Donc on va dire que symboliquement.",
-   "_deb": 54.809,
-   "_fin": 58.129,
-   "d": "[neutre] Ça serait juste une boucle infinie. Donc on va dire que symboliquement.",
+   "t": "Ça marche.",
+   "_deb": 28.767,
+   "_fin": 28.908,
+   "d": "[neutral] Ça marche.",
+   "_mots": [
+    [
+     "Ça",
+     0.0,
+     0.04
+    ],
+    [
+     "marche.",
+     0.121,
+     0.141
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Mais qu'est-ce que tu fous.",
+   "_deb": 28.85,
+   "_fin": 29.553,
+   "d": "[shocked] Mais qu'est-ce que tu fous.",
+   "_mots": [
+    [
+     "Mais",
+     0.0,
+     0.221
+    ],
+    [
+     "qu'est-ce",
+     0.221,
+     0.442
+    ],
+    [
+     "que",
+     0.442,
+     0.502
+    ],
+    [
+     "tu",
+     0.502,
+     0.562
+    ],
+    [
+     "fous.",
+     0.562,
+     0.703
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Ça va, mais remercie pas, c'est pour moi.",
+   "_deb": 29.633,
+   "_fin": 30.637,
+   "d": "[happy] Ça va, mais remercie pas, c'est pour moi.",
+   "_mots": [
+    [
+     "Ça",
+     0.0,
+     0.061
+    ],
+    [
+     "va,",
+     0.101,
+     0.161
+    ],
+    [
+     "mais",
+     0.201,
+     0.322
+    ],
+    [
+     "remercie",
+     0.322,
+     0.603
+    ],
+    [
+     "pas,",
+     0.603,
+     0.703
+    ],
+    [
+     "c'est",
+     0.723,
+     0.824
+    ],
+    [
+     "pour",
+     0.824,
+     0.904
+    ],
+    [
+     "moi.",
+     0.924,
+     1.004
+    ]
+   ],
+   "objet": "casque_moto"
+  },
+  {
+   "p": "presentateur",
+   "t": "Mais te remercier de quoi ta grande daronne. T'avais pas faim.",
+   "_deb": 30.678,
+   "_fin": 33.047,
+   "d": "[angry] Mais te remercier de quoi ta grande daronne. T'avais pas faim.",
+   "_mots": [
+    [
+     "Mais",
+     0.0,
+     0.08
+    ],
+    [
+     "te",
+     0.1,
+     0.16
+    ],
+    [
+     "remercier",
+     0.2,
+     0.542
+    ],
+    [
+     "de",
+     0.602,
+     0.662
+    ],
+    [
+     "quoi",
+     0.743,
+     0.863
+    ],
+    [
+     "ta",
+     0.984,
+     1.044
+    ],
+    [
+     "grande",
+     1.144,
+     1.385
+    ],
+    [
+     "daronne.",
+     1.465,
+     1.927
+    ],
+    [
+     "T'avais",
+     2.008,
+     2.168
+    ],
+    [
+     "pas",
+     2.188,
+     2.249
+    ],
+    [
+     "faim.",
+     2.289,
+     2.369
+    ]
+   ],
+   "objet": "casque_moto"
+  },
+  {
+   "p": "invite",
+   "t": "Si, justement. C'est bon, il y a six pentes qui arrivent, tu vas voir, ça va te faire du bien.",
+   "_deb": 33.208,
+   "_fin": 35.864,
+   "_mots": [
+    [
+     "Si,",
+     0.0,
+     0.08
+    ],
+    [
+     "justement.",
+     0.303,
+     0.786
+    ],
+    [
+     "C'est",
+     0.967,
+     1.067
+    ],
+    [
+     "bon,",
+     1.088,
+     1.148
+    ],
+    [
+     "il",
+     1.148,
+     1.208
+    ],
+    [
+     "y",
+     1.228,
+     1.248
+    ],
+    [
+     "a",
+     1.248,
+     1.269
+    ],
+    [
+     "six",
+     1.369,
+     1.429
+    ],
+    [
+     "pentes",
+     1.45,
+     1.59
+    ],
+    [
+     "qui",
+     1.59,
+     1.651
+    ],
+    [
+     "arrivent,",
+     1.651,
+     1.852
+    ],
+    [
+     "tu",
+     1.872,
+     1.932
+    ],
+    [
+     "vas",
+     1.952,
+     2.013
+    ],
+    [
+     "voir,",
+     2.033,
+     2.133
+    ],
+    [
+     "ça",
+     2.194,
+     2.234
+    ],
+    [
+     "va",
+     2.234,
+     2.274
+    ],
+    [
+     "te",
+     2.274,
+     2.334
+    ],
+    [
+     "faire",
+     2.334,
+     2.435
+    ],
+    [
+     "du",
+     2.455,
+     2.495
+    ],
+    [
+     "bien.",
+     2.535,
+     2.656
+    ]
+   ],
+   "objet": "casque_moto"
+  },
+  {
+   "p": "invite",
+   "t": "Tu veux des cahuètes.",
+   "_deb": 35.944,
+   "_fin": 36.387,
+   "_mots": [
+    [
+     "Tu",
+     0.0,
+     0.041
+    ],
+    [
+     "veux",
+     0.061,
+     0.181
+    ],
+    [
+     "des",
+     0.181,
+     0.262
+    ],
+    [
+     "cahuètes.",
+     0.262,
+     0.443
+    ]
+   ],
+   "objet": "casque_moto"
+  },
+  {
+   "p": "presentateur",
+   "t": "Pourquoi tu fais ça.",
+   "_deb": 36.467,
+   "_fin": 36.972,
+   "d": "[confused] Pourquoi tu fais ça.",
+   "_mots": [
+    [
+     "Pourquoi",
+     0.0,
+     0.161
+    ],
+    [
+     "tu",
+     0.483,
+     0.503
+    ],
+    [
+     "fais",
+     0.304,
+     0.425
+    ],
+    [
+     "ça.",
+     0.445,
+     0.505
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Ah t'aimes pas les cahouettes.",
+   "_deb": 37.113,
+   "_fin": 37.716,
+   "d": "[angry] Ah t'aimes pas les cahouettes.",
+   "_mots": [
+    [
+     "Ah",
+     0.0,
+     0.04
+    ],
+    [
+     "t'aimes",
+     0.06,
+     0.201
+    ],
+    [
+     "pas",
+     0.201,
+     0.281
+    ],
+    [
+     "les",
+     0.281,
+     0.342
+    ],
+    [
+     "cahouettes.",
+     0.362,
+     0.603
+    ]
+   ],
+   "objet": "casque_moto"
+  },
+  {
+   "p": "presentateur",
+   "t": "Si.",
+   "_deb": 37.796,
+   "_fin": 37.857,
+   "d": "[relieved] Si.",
+   "_mots": [
+    [
+     "Si.",
+     0.0,
+     0.061
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "Bah la vie est belle alors.",
+   "_deb": 37.997,
+   "_fin": 38.68,
+   "d": "[happy] Bah la vie est belle alors.",
+   "_mots": [
+    [
+     "Bah",
+     0.0,
+     0.081
+    ],
+    [
+     "la",
+     0.101,
+     0.141
+    ],
+    [
+     "vie",
+     0.161,
+     0.261
+    ],
+    [
+     "est",
+     0.302,
+     0.362
+    ],
+    [
+     "belle",
+     0.382,
+     0.523
+    ],
+    [
+     "alors.",
+     0.523,
+     0.683
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Mais pourquoi tu fais ça à ça.",
+   "_deb": 38.701,
+   "_fin": 39.806,
+   "_mots": [
+    [
+     "Mais",
+     0.0,
+     0.08
+    ],
+    [
+     "pourquoi",
+     0.1,
+     0.301
+    ],
+    [
+     "tu",
+     0.341,
+     0.401
+    ],
+    [
+     "fais",
+     0.442,
+     0.582
+    ],
+    [
+     "ça",
+     0.643,
+     0.683
+    ],
+    [
+     "à",
+     0.864,
+     0.884
+    ],
+    [
+     "ça.",
+     1.004,
+     1.105
+    ]
+   ],
+   "objet": "casque_moto"
+  },
+  {
+   "p": "invite",
+   "t": "Bah disons que j'aime chouchouter mes potes.",
+   "_deb": 39.947,
+   "_fin": 41.094,
+   "d": "[explaining] Bah disons que j'aime chouchouter mes potes.",
+   "_mots": [
+    [
+     "Bah",
+     0.0,
+     0.14
+    ],
+    [
+     "disons",
+     0.16,
+     0.361
+    ],
+    [
+     "que",
+     0.361,
+     0.422
+    ],
+    [
+     "j'aime",
+     0.422,
+     0.562
+    ],
+    [
+     "chouchouter",
+     0.565,
+     0.846
+    ],
+    [
+     "mes",
+     0.886,
+     0.966
+    ],
+    [
+     "potes.",
+     0.987,
+     1.147
+    ]
+   ],
+   "objet": "casque_moto"
+  },
+  {
+   "p": "presentateur",
+   "t": "Tu vas me laisser manger ou pas.",
+   "_deb": 41.114,
+   "_fin": 41.898,
+   "d": "[annoyed] Tu vas me laisser manger ou pas.",
+   "_mots": [
+    [
+     "Tu",
+     0.0,
+     0.061
+    ],
+    [
+     "vas",
+     0.061,
+     0.141
+    ],
+    [
+     "me",
+     0.141,
+     0.201
+    ],
+    [
+     "laisser",
+     0.201,
+     0.362
+    ],
+    [
+     "manger",
+     0.382,
+     0.583
+    ],
+    [
+     "ou",
+     0.623,
+     0.664
+    ],
+    [
+     "pas.",
+     0.704,
+     0.784
+    ]
+   ]
+  },
+  {
+   "p": "invite",
+   "t": "T'inquiète pas, tu vas boire autant que tu veux.",
+   "_deb": 41.898,
+   "_fin": 43.043,
+   "d": "[happy] T'inquiète pas, tu vas boire autant que tu veux.",
+   "_mots": [
+    [
+     "T'inquiète",
+     0.0,
+     0.261
+    ],
+    [
+     "pas,",
+     0.281,
+     0.402
+    ],
+    [
+     "tu",
+     0.402,
+     0.442
+    ],
+    [
+     "vas",
+     0.462,
+     0.523
+    ],
+    [
+     "boire",
+     0.563,
+     0.683
+    ],
+    [
+     "autant",
+     0.703,
+     0.844
+    ],
+    [
+     "que",
+     0.864,
+     0.944
+    ],
+    [
+     "tu",
+     0.944,
+     1.005
+    ],
+    [
+     "veux.",
+     1.045,
+     1.145
+    ]
+   ],
+   "objet": "casque_moto"
+  },
+  {
+   "p": "presentateur",
+   "t": "Je m'avais prévenu pourtant que t'avais changé, mais j'ai pas voulu écouter.",
+   "_deb": 43.043,
+   "_fin": 45.357,
+   "d": "[angry] Je m'avais prévenu pourtant que t'avais changé, mais j'ai pas voulu écouter.",
+   "_mots": [
+    [
+     "Je",
+     0.0,
+     0.041
+    ],
+    [
+     "m'avais",
+     0.061,
+     0.262
+    ],
+    [
+     "prévenu",
+     0.302,
+     0.563
+    ],
+    [
+     "pourtant",
+     0.664,
+     0.885
+    ],
+    [
+     "que",
+     0.905,
+     1.005
+    ],
+    [
+     "t'avais",
+     1.005,
+     1.229
+    ],
+    [
+     "changé,",
+     1.229,
+     1.47
+    ],
+    [
+     "mais",
+     1.53,
+     1.631
+    ],
+    [
+     "j'ai",
+     1.631,
+     1.731
+    ],
+    [
+     "pas",
+     1.751,
+     1.832
+    ],
+    [
+     "voulu",
+     1.852,
+     1.972
+    ],
+    [
+     "écouter.",
+     2.073,
+     2.314
+    ]
+   ],
+   "objet": "casque_moto"
+  },
+  {
+   "p": "presentateur",
+   "t": "Ça c'est pas malin. Tu bois encore de l'eau de temps en temps.",
+   "_deb": 45.498,
+   "_fin": 47.066,
+   "d": "[confused] Ça c'est pas malin. Tu bois encore de l'eau de temps en temps.",
    "_mots": [
     [
      "Ça",
@@ -1072,532 +1787,654 @@
      0.06
     ],
     [
-     "serait",
-     0.14,
-     0.363
+     "c'est",
+     0.121,
+     0.221
     ],
     [
-     "juste",
-     0.363,
-     0.625
+     "pas",
+     0.241,
+     0.322
     ],
     [
-     "une",
-     0.705,
-     0.806
+     "malin.",
+     0.342,
+     0.543
     ],
     [
-     "boucle",
-     0.846,
-     1.047
+     "Tu",
+     0.543,
+     0.603
     ],
     [
-     "infinie.",
-     1.107,
-     2.113
+     "bois",
+     0.643,
+     0.744
     ],
     [
-     "Donc",
-     2.133,
-     2.274
+     "encore",
+     0.784,
+     0.965
     ],
     [
-     "on",
-     2.294,
-     2.334
+     "de",
+     1.005,
+     1.045
     ],
     [
-     "va",
-     2.334,
-     2.395
+     "l'eau",
+     1.085,
+     1.186
     ],
     [
-     "dire",
-     2.475,
-     2.576
+     "de",
+     1.186,
+     1.246
     ],
     [
-     "que",
-     2.616,
-     2.697
-    ],
-    [
-     "symboliquement.",
-     2.797,
-     3.32
-    ]
-   ],
-   "objet": "verre",
-   "_cible": "autre",
-   "_geste": "explique"
-  },
-  {
-   "p": "invite",
-   "t": "Je l'ai fait en esprit. Et que tu peux imaginer le conduiteur qui file à toute vitesse Comme ça on garde un peu d'humour.",
-   "_deb": 58.635,
-   "_fin": 64.117,
-   "d": "[joie] Je l'ai fait en esprit. Et que tu peux imaginer le conduiteur qui file à toute vitesse Comme ça on garde un peu d'humour.",
-   "_mots": [
-    [
-     "Je",
-     0.0,
-     0.081
-    ],
-    [
-     "l'ai",
-     0.102,
-     0.203
-    ],
-    [
-     "fait",
-     0.203,
-     0.345
+     "temps",
+     1.266,
+     1.367
     ],
     [
      "en",
-     0.366,
-     0.427
+     1.427,
+     1.467
     ],
     [
-     "esprit.",
-     0.508,
-     0.792
-    ],
-    [
-     "Et",
-     1.277,
-     1.338
-    ],
-    [
-     "que",
-     1.378,
-     1.438
-    ],
-    [
-     "tu",
-     1.458,
-     1.539
-    ],
-    [
-     "peux",
-     1.539,
-     1.66
-    ],
-    [
-     "imaginer",
-     1.7,
-     2.023
-    ],
-    [
-     "le",
-     2.043,
-     2.103
-    ],
-    [
-     "conduiteur",
-     2.144,
-     2.506
-    ],
-    [
-     "qui",
-     2.587,
-     2.667
-    ],
-    [
-     "file",
-     2.788,
-     3.01
-    ],
-    [
-     "à",
-     3.03,
-     3.05
-    ],
-    [
-     "toute",
-     3.111,
-     3.232
-    ],
-    [
-     "vitesse",
-     3.252,
-     3.594
-    ],
-    [
-     "Comme",
-     4.297,
-     4.518
-    ],
-    [
-     "ça",
-     4.558,
-     4.598
-    ],
-    [
-     "on",
-     4.699,
-     4.739
-    ],
-    [
-     "garde",
-     4.779,
-     4.94
-    ],
-    [
-     "un",
-     5.0,
-     5.04
-    ],
-    [
-     "peu",
-     5.06,
-     5.161
-    ],
-    [
-     "d'humour.",
-     5.161,
-     5.482
+     "temps.",
+     1.467,
+     1.568
     ]
    ],
-   "objet": "verre",
-   "_cible": "autre",
-   "_geste": "explique"
+   "objet": "casque_moto"
   },
   {
    "p": "invite",
-   "t": "Et on évite de réciter des chiffres toute la nuit Chat.",
-   "_deb": 64.6,
-   "_fin": 66.67,
-   "d": "[sceptique] Et on évite de réciter des chiffres toute la nuit Chat.",
+   "t": "Ah non, non, non, non, non, j'ai arrêté en 2006.",
+   "_deb": 47.086,
+   "_fin": 48.114,
+   "d": "[happy] Ah non, non, non, non, non, j'ai arrêté en 2006.",
    "_mots": [
     [
-     "Et",
+     "Ah",
      0.0,
-     0.04
+     0.06
     ],
     [
-     "on",
-     0.1,
-     0.141
+     "non,",
+     0.141,
+     0.241
     ],
     [
-     "évite",
+     "non,",
+     0.261,
+     0.342
+    ],
+    [
+     "non,",
+     0.362,
+     0.442
+    ],
+    [
+     "non,",
+     0.462,
+     0.583
+    ],
+    [
+     "non,",
+     0.724,
+     0.744
+    ],
+    [
+     "j'ai",
+     0.445,
+     0.545
+    ],
+    [
+     "arrêté",
+     0.706,
+     0.907
+    ],
+    [
+     "en",
+     0.968,
+     0.994
+    ],
+    [
+     "2006.",
+     0.994,
+     1.028
+    ]
+   ],
+   "objet": "casque_moto"
+  },
+  {
+   "p": "presentateur",
+   "t": "Dieu merci, il m'a montré la voix.",
+   "_deb": 48.114,
+   "_fin": 49.622,
+   "_mots": [
+    [
+     "Dieu",
+     0.0,
+     0.684
+    ],
+    [
+     "merci,",
+     0.704,
+     0.905
+    ],
+    [
+     "il",
+     0.965,
+     1.005
+    ],
+    [
+     "m'a",
+     1.005,
+     1.086
+    ],
+    [
+     "montré",
+     1.106,
+     1.247
+    ],
+    [
+     "la",
+     1.287,
+     1.367
+    ],
+    [
+     "voix.",
+     1.387,
+     1.508
+    ]
+   ],
+   "objet": "casque_moto"
+  },
+  {
+   "p": "invite",
+   "t": "J'ai pas de raison de m'inquiéter, rassure-moi. Je dirais pas ça non plus.",
+   "_deb": 49.662,
+   "_fin": 52.535,
+   "d": "[concerned] J'ai pas de raison de m'inquiéter, rassure-moi. Je dirais pas ça non plus.",
+   "_mots": [
+    [
+     "J'ai",
+     0.0,
+     0.121
+    ],
+    [
+     "pas",
+     0.121,
+     0.201
+    ],
+    [
+     "de",
      0.201,
+     0.262
+    ],
+    [
+     "raison",
+     0.282,
      0.422
     ],
     [
      "de",
-     0.442,
-     0.482
+     0.443,
+     0.503
     ],
     [
-     "réciter",
-     0.543,
-     0.844
+     "m'inquiéter,",
+     0.503,
+     0.825
     ],
     [
-     "des",
-     0.884,
-     0.965
+     "rassure-moi.",
+     0.905,
+     1.227
     ],
     [
-     "chiffres",
-     0.985,
-     1.286
+     "Je",
+     2.09,
+     2.15
     ],
     [
-     "toute",
-     1.407,
-     1.547
+     "dirais",
+     2.17,
+     2.371
     ],
     [
-     "la",
-     1.608,
-     1.648
+     "pas",
+     2.371,
+     2.451
     ],
     [
-     "nuit",
-     1.728,
-     1.809
+     "ça",
+     2.491,
+     2.532
     ],
     [
-     "Chat.",
-     1.809,
-     2.07
+     "non",
+     2.612,
+     2.672
+    ],
+    [
+     "plus.",
+     2.732,
+     2.873
     ]
    ],
-   "objet": "verre",
-   "_cible": "autre",
-   "_geste": "explique"
+   "objet": "casque_moto"
   },
   {
    "p": "presentateur",
-   "t": "Je t'ordonne Écoute, moi je suis. Il est parti. Je suis choqué, il est parti",
-   "_deb": 67.671,
-   "_fin": 74.028,
-   "d": "[choque] Je t'ordonne Ecoute, moi je suis. Il est parti. Je suis choqué, il est parti",
-   "objet": "telephone",
-   "chute": true,
+   "t": "Donc t'as faim ou t'as soif. Ça change vraiment quelque chose.",
+   "_deb": 52.957,
+   "_fin": 54.644,
+   "d": "[confused] Donc t'as faim ou t'as soif. Ça change vraiment quelque chose.",
    "_mots": [
     [
-     "Je",
+     "Donc",
+     0.0,
+     0.1
+    ],
+    [
+     "t'as",
+     0.12,
+     0.221
+    ],
+    [
+     "faim",
+     0.241,
+     0.341
+    ],
+    [
+     "ou",
+     0.361,
+     0.402
+    ],
+    [
+     "t'as",
+     0.422,
+     0.522
+    ],
+    [
+     "soif.",
+     0.542,
+     0.723
+    ],
+    [
+     "Ça",
+     0.763,
+     0.823
+    ],
+    [
+     "change",
+     0.864,
+     1.024
+    ],
+    [
+     "vraiment",
+     1.044,
+     1.245
+    ],
+    [
+     "quelque",
+     1.245,
+     1.466
+    ],
+    [
+     "chose.",
+     1.506,
+     1.687
+    ]
+   ],
+   "objet": "casque_moto"
+  },
+  {
+   "p": "invite",
+   "t": "Non, dans tous les cas le résultat sera le même.",
+   "_deb": 54.704,
+   "_fin": 56.013,
+   "d": "[explaining] Non, dans tous les cas le résultat sera le même.",
+   "_mots": [
+    [
+     "Non,",
      0.0,
      0.081
     ],
     [
-     "t'ordonne",
-     0.221,
-     0.824
+     "dans",
+     0.282,
+     0.362
     ],
     [
-     "Ecoute,",
-     1.044,
-     1.305
+     "tous",
+     0.382,
+     0.462
     ],
     [
-     "moi",
-     1.607,
-     1.707
+     "les",
+     0.482,
+     0.563
     ],
     [
-     "je",
-     1.787,
-     1.848
+     "cas",
+     0.563,
+     0.663
     ],
     [
-     "suis.",
-     1.968,
-     1.988
+     "le",
+     0.663,
+     0.724
     ],
     [
-     "Il",
-     1.649,
-     4.149
+     "résultat",
+     0.724,
+     0.965
     ],
     [
-     "est",
-     4.197,
-     4.297
+     "sera",
+     0.965,
+     1.085
     ],
     [
-     "parti.",
-     4.317,
-     4.538
+     "le",
+     1.108,
+     1.168
     ],
     [
-     "Je",
-     5.143,
-     5.203
-    ],
-    [
-     "suis",
-     5.305,
-     5.446
-    ],
-    [
-     "choqué,",
-     5.466,
-     5.689
-    ],
-    [
-     "il",
-     5.912,
-     5.972
-    ],
-    [
-     "est",
-     5.992,
-     6.114
-    ],
-    [
-     "parti",
-     6.134,
-     6.357
+     "même.",
+     1.168,
+     1.309
     ]
    ],
-   "_signe": "etoiles",
-   "_cible": "autre",
-   "_geste": "telephone"
+   "objet": "casque_moto"
+  },
+  {
+   "p": "invite",
+   "t": "Tu vois, tu commences à comprendre.",
+   "_deb": 56.113,
+   "_fin": 56.937,
+   "d": "[happy] Tu vois, tu commences à comprendre.",
+   "_mots": [
+    [
+     "Tu",
+     0.0,
+     0.06
+    ],
+    [
+     "vois,",
+     0.06,
+     0.181
+    ],
+    [
+     "tu",
+     0.201,
+     0.241
+    ],
+    [
+     "commences",
+     0.262,
+     0.503
+    ],
+    [
+     "à",
+     0.503,
+     0.543
+    ],
+    [
+     "comprendre.",
+     0.543,
+     0.824
+    ]
+   ]
+  },
+  {
+   "p": "presentateur",
+   "t": "Au, secours.",
+   "_deb": 57.058,
+   "_fin": 57.34,
+   "d": "[panicked] Au secours.",
+   "_mots": [
+    [
+     "Au,",
+     0.0,
+     0.08
+    ],
+    [
+     "secours.",
+     0.08,
+     0.282
+    ]
+   ],
+   "objet": "casque_moto"
+  },
+  {
+   "p": "invite",
+   "t": "Laisse tomber, c'est un barbreton. T. 'as aucune chance.",
+   "_deb": 57.44,
+   "_fin": 59.048,
+   "d": "[laughing] Laisse tomber, c'est un barbreton. T. 'as aucune chance.",
+   "chute": true,
+   "_mots": [
+    [
+     "Laisse",
+     0.0,
+     0.141
+    ],
+    [
+     "tomber,",
+     0.141,
+     0.342
+    ],
+    [
+     "c'est",
+     0.382,
+     0.462
+    ],
+    [
+     "un",
+     0.462,
+     0.503
+    ],
+    [
+     "barbreton.",
+     0.543,
+     0.905
+    ],
+    [
+     "T.",
+     1.025,
+     1.066
+    ],
+    [
+     "'as",
+     1.106,
+     1.146
+    ],
+    [
+     "aucune",
+     1.186,
+     1.367
+    ],
+    [
+     "chance.",
+     1.387,
+     1.608
+    ]
+   ],
+   "objet": "casque_moto",
+   "_calme": true
   }
  ],
  "bandeau": [],
  "gag": null,
- "legende": "Quand tu t'ennuies tellement la nuit que tu demandes à ton téléphone de compter jusqu'à 1 million.",
+ "legende": "Quand ton pote a une seule solution pour tous tes problèmes 🍻",
  "hashtags": [
   "petitsdramas",
   "humour",
-  "chatgpt",
-  "nuitblanche",
-  "delire",
-  "toons"
+  "potes",
+  "alcool",
+  "sketch",
+  "bar"
  ],
  "sources": [
-  "https://www.tiktok.com/@vignianimation/video/7708846701439765792"
+  "https://www.tiktok.com/@same_same53/video/7681668872021265697"
  ],
  "decoupage": [
   {
    "scene": "1",
    "repliques": [
     0,
-    3,
-    7,
-    11,
-    12,
-    13,
-    18
-   ],
-   "lieu": "",
-   "son": "",
-   "duree": 0,
-   "decor": "quiet city street at dusk, parked car at the curb, sidewalk, street lamps, shop fronts"
-  },
-  {
-   "scene": "2",
-   "repliques": [
     1,
     2,
+    3,
     4,
     5,
     6,
+    7,
     8,
     9,
     10,
+    11,
+    12,
+    13,
     14,
     15,
     16,
-    17
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45
    ],
    "lieu": "",
    "son": "",
-   "duree": 0,
-   "decor": "cozy living room, sofa, posters on the wall, coffee table, lamp, television"
+   "duree": 0.0,
+   "decor": "empty small cozy pub interior with wooden counter and stool with beer taps, empty stools, glasses on a table",
+   "titre": "Au comptoir du bar"
   }
  ],
- "commentaire": "Vous auriez craqué au bout de combien de chiffres ? 🥱",
+ "commentaire": "Team eau ou team bière ? 🍻",
  "studio": {
-  "costumes": {
+  "gags": [
+   "Affiche: Happy Hour éternel",
+   "Bière 0% interdite"
+  ],
+  "metiers": {},
+  "costumes": {},
+  "cadence": "rapide",
+  "ambiances": [
+   "neon"
+  ],
+  "personnages": {
    "presentateur": {
-    "bas": "calecon",
-    "c_haut": "orange",
-    "chaussures": "chaussons",
-    "cheveux": "ondule",
-    "c_cheveux": "noir",
-    "details": [
-     "boucles_oreilles"
-    ],
-    "haut": "tshirt",
-    "motif": "uni"
+    "genre_vu": "h",
+    "genre": "homme",
+    "age": 25,
+    "corpulence": 0.12,
+    "taille": 1.0,
+    "cheveux": "rase",
+    "barbe": "aucune"
    },
    "invite": {
-    "bas": "pantalon",
-    "c_haut": "gris",
-    "chaussures": "ville",
+    "genre_vu": "h",
+    "genre": "homme",
+    "age": 25,
+    "corpulence": 0.12,
+    "taille": 1.0,
+    "cheveux": "tresses",
+    "barbe": "aucune"
+   },
+   "envoyee": {
+    "genre_vu": "h",
+    "genre": "homme",
+    "age": 30,
+    "corpulence": 0.12,
+    "taille": 1.0,
     "cheveux": "court",
-    "c_cheveux": "brun",
-    "details": [],
-    "haut": "chemise",
-    "motif": "uni"
+    "barbe": "aucune"
    }
   },
   "lieux": [
-   "rue",
-   "salon"
+   "bar"
   ],
-  "ambiances": [
-   "poussiere"
-  ],
-  "objets": [
+  "plans": [
    {
-    "objet": "telephone",
+    "mouvement": "fixe",
+    "plan": "large",
     "replique": 0
    },
    {
-    "replique": 3,
-    "objet": "telephone"
+    "mouvement": "fixe",
+    "replique": 2,
+    "plan": "moyen"
    },
    {
-    "replique": 7,
-    "objet": "telephone"
+    "mouvement": "fixe",
+    "replique": 14,
+    "plan": "serré"
    },
    {
-    "objet": "telephone",
-    "replique": 12
+    "mouvement": "zoom_choc",
+    "plan": "tres_serre",
+    "replique": 24
    },
    {
-    "objet": "telephone",
-    "replique": 18
-   }
-  ],
-  "cadence": "normal",
-  "gags": [
-   "Post-it sur le frigo : Compter les moutons c'est has been"
-  ],
-  "moment": "nuit",
-  "personnages": {
-   "presentateur": {
-    "age": 28,
-    "barbe": "aucune",
-    "cheveux": "court",
-    "corpulence": 0.12,
-    "espece": "humain",
-    "genre": "h",
-    "taille": 1.0,
-    "genre_vu": "h"
-   },
-   "invite": {
-    "age": 30,
-    "barbe": "aucune",
-    "cheveux": "court",
-    "corpulence": 0.32,
-    "espece": "objet:telephone",
-    "genre": "h",
-    "taille": 1.0
-   }
-  },
-  "plans": [
-   {
-    "geste": "explique",
-    "reaction": "sceptique",
-    "plan": "moyen",
-    "replique": 0,
+    "replique": 44,
+    "plan": "large",
     "mouvement": "fixe"
-   },
-   {
-    "replique": 3,
-    "plan": "moyen",
-    "mouvement": "fixe",
-    "reaction": "aucune",
-    "geste": "telephone"
-   },
-   {
-    "geste": "poing",
-    "plan": "moyen",
-    "replique": 7,
-    "mouvement": "fixe",
-    "reaction": "ecoute"
-   },
-   {
-    "mouvement": "fixe",
-    "replique": 18,
-    "plan": "moyen",
-    "geste": "desespoir",
-    "reaction": "choque"
    }
   ],
+  "moment": "soir",
   "tenues_fiche": {
-   "invite": {
-    "tenue": "pyjama",
+   "envoyee": {
+    "tenue": "normale",
     "haut": "tshirt",
+    "c_haut": "noir",
+    "c_cheveux": "noir",
+    "lunettes": false,
+    "etats": []
+   },
+   "invite": {
+    "tenue": "normale",
     "c_haut": "orange",
     "c_cheveux": "noir",
     "lunettes": false,
     "etats": []
    },
    "presentateur": {
-    "tenue": "pyjama",
-    "haut": "debardeur",
-    "c_haut": "noir",
-    "c_cheveux": "noir",
+    "tenue": "normale",
+    "haut": "capuche",
+    "c_haut": "bleu",
+    "c_cheveux": "brun",
     "lunettes": false,
     "etats": []
    }
@@ -1605,217 +2442,378 @@
   "jeu": [
    {
     "replique": 0,
-    "emotion": "colere",
-    "intensite": 2,
-    "geste": "telephone"
+    "emotion": "fatigue",
+    "intensite": 1,
+    "geste": ""
    },
    {
     "replique": 1,
-    "emotion": "blase",
+    "emotion": "neutre",
     "intensite": 1,
-    "geste": "explique"
+    "geste": ""
    },
    {
     "replique": 2,
-    "emotion": "neutre",
-    "intensite": 1,
-    "geste": "explique"
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": ""
    },
    {
     "replique": 3,
-    "emotion": "colere",
-    "intensite": 2,
-    "geste": "telephone"
+    "emotion": "neutre",
+    "intensite": 1,
+    "geste": ""
    },
    {
     "replique": 4,
     "emotion": "neutre",
     "intensite": 1,
-    "geste": "explique"
+    "geste": ""
    },
    {
     "replique": 5,
     "emotion": "neutre",
     "intensite": 1,
-    "geste": "explique"
+    "geste": ""
    },
    {
     "replique": 6,
-    "emotion": "neutre",
-    "intensite": 1,
-    "geste": "explique"
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": ""
    },
    {
     "replique": 7,
-    "emotion": "colere",
-    "intensite": 3,
-    "geste": "telephone"
+    "emotion": "neutre",
+    "intensite": 1,
+    "geste": ""
    },
    {
     "replique": 8,
-    "emotion": "neutre",
+    "emotion": "colere",
     "intensite": 1,
-    "geste": "explique"
+    "geste": ""
    },
    {
     "replique": 9,
     "emotion": "neutre",
     "intensite": 1,
-    "geste": "explique"
+    "geste": ""
    },
    {
     "replique": 10,
     "emotion": "colere",
-    "intensite": 2,
-    "geste": "stop"
+    "intensite": 1,
+    "geste": ""
    },
    {
     "replique": 11,
-    "emotion": "fatigue",
-    "intensite": 2,
-    "geste": "telephone"
+    "emotion": "neutre",
+    "intensite": 1,
+    "geste": ""
    },
    {
     "replique": 12,
-    "emotion": "fatigue",
+    "emotion": "colere",
     "intensite": 2,
-    "geste": "telephone"
+    "geste": ""
    },
    {
     "replique": 13,
-    "emotion": "fatigue",
+    "emotion": "neutre",
     "intensite": 1,
-    "geste": "telephone"
+    "geste": ""
    },
    {
     "replique": 14,
-    "emotion": "gene",
+    "emotion": "colere",
     "intensite": 2,
-    "geste": "explique"
+    "geste": ""
    },
    {
     "replique": 15,
     "emotion": "neutre",
     "intensite": 1,
-    "geste": "explique"
+    "geste": ""
    },
    {
     "replique": 16,
-    "emotion": "neutre",
+    "emotion": "colere",
     "intensite": 1,
-    "geste": "explique"
+    "geste": ""
    },
    {
     "replique": 17,
     "emotion": "neutre",
     "intensite": 1,
-    "geste": "explique"
+    "geste": ""
    },
    {
     "replique": 18,
-    "emotion": "choc",
-    "intensite": 3,
-    "geste": "telephone"
+    "emotion": "neutre",
+    "intensite": 1,
+    "geste": ""
+   },
+   {
+    "replique": 19,
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": ""
+   },
+   {
+    "replique": 20,
+    "emotion": "neutre",
+    "intensite": 1,
+    "geste": ""
+   },
+   {
+    "replique": 21,
+    "emotion": "neutre",
+    "intensite": 1,
+    "geste": ""
+   },
+   {
+    "replique": 22,
+    "emotion": "neutre",
+    "intensite": 1,
+    "geste": ""
+   },
+   {
+    "replique": 23,
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": ""
+   },
+   {
+    "replique": 24,
+    "emotion": "neutre",
+    "intensite": 1,
+    "geste": ""
+   },
+   {
+    "replique": 25,
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": ""
+   },
+   {
+    "replique": 26,
+    "emotion": "neutre",
+    "intensite": 1,
+    "geste": ""
+   },
+   {
+    "replique": 27,
+    "emotion": "neutre",
+    "intensite": 1,
+    "geste": ""
+   },
+   {
+    "replique": 28,
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": ""
+   },
+   {
+    "replique": 29,
+    "emotion": "neutre",
+    "intensite": 1,
+    "geste": ""
+   },
+   {
+    "replique": 30,
+    "emotion": "neutre",
+    "intensite": 1,
+    "geste": ""
+   },
+   {
+    "replique": 31,
+    "emotion": "neutre",
+    "intensite": 1,
+    "geste": ""
+   },
+   {
+    "replique": 32,
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": ""
+   },
+   {
+    "replique": 33,
+    "emotion": "neutre",
+    "intensite": 1,
+    "geste": ""
+   },
+   {
+    "replique": 34,
+    "emotion": "colere",
+    "intensite": 1,
+    "geste": ""
+   },
+   {
+    "replique": 35,
+    "emotion": "neutre",
+    "intensite": 1,
+    "geste": ""
+   },
+   {
+    "replique": 36,
+    "emotion": "fatigue",
+    "intensite": 1,
+    "geste": ""
+   },
+   {
+    "replique": 37,
+    "emotion": "neutre",
+    "intensite": 1,
+    "geste": ""
+   },
+   {
+    "replique": 38,
+    "emotion": "neutre",
+    "intensite": 1,
+    "geste": ""
+   },
+   {
+    "replique": 39,
+    "emotion": "neutre",
+    "intensite": 1,
+    "geste": ""
+   },
+   {
+    "replique": 40,
+    "emotion": "sceptique",
+    "intensite": 1,
+    "geste": ""
+   },
+   {
+    "replique": 41,
+    "emotion": "colere",
+    "intensite": 1,
+    "geste": ""
+   },
+   {
+    "replique": 42,
+    "emotion": "neutre",
+    "intensite": 1,
+    "geste": ""
+   },
+   {
+    "replique": 43,
+    "emotion": "neutre",
+    "intensite": 1,
+    "geste": ""
+   },
+   {
+    "replique": 44,
+    "emotion": "panique",
+    "intensite": 2,
+    "geste": ""
+   },
+   {
+    "replique": 45,
+    "emotion": "neutre",
+    "intensite": 1,
+    "geste": ""
    }
   ],
   "reactions": [
    {
-    "n": 1,
-    "qui": "presentateur",
-    "mot": "million",
-    "reaction": "yeux_au_ciel"
-   },
-   {
-    "n": 3,
+    "n": 2,
     "qui": "invite",
-    "mot": "million",
+    "mot": "réponse",
     "reaction": "sourire_coin"
    },
    {
-    "n": 7,
+    "n": 6,
     "qui": "invite",
-    "mot": "million",
-    "reaction": "gene"
+    "mot": "logique",
+    "reaction": "sourire_coin"
    },
    {
-    "n": 11,
+    "n": 12,
     "qui": "invite",
-    "mot": "couché",
+    "mot": "pareil",
     "reaction": "sourire_coin"
    },
    {
     "n": 14,
-    "qui": "presentateur",
-    "mot": "tranquille",
-    "reaction": "yeux_au_ciel"
+    "qui": "invite",
+    "mot": "froid",
+    "reaction": "sourire_coin"
+   },
+   {
+    "n": 23,
+    "qui": "invite",
+    "mot": "fous",
+    "reaction": "sourire_coin"
+   },
+   {
+    "n": 25,
+    "qui": "invite",
+    "mot": "daronne",
+    "reaction": "sourire_coin"
    }
   ],
   "animations": [],
-  "panneaux": [],
+  "panneaux": [
+   "Bar"
+  ],
   "ecran_tel": "",
-  "lumiere_ambiance": "bright interior ceiling light",
+  "lumiere_ambiance": "dim warm yellow interior light",
   "interieur": true,
   "decor_fiche": {
-   "lieu": "cuisine",
-   "lieu_precis": "modern messy kitchen with washing machine microwave and stainless steel refrigerator",
+   "lieu": "bar",
+   "lieu_precis": "empty small cozy pub interior with wooden counter and stool",
    "details": [
-    "washing machine next to microwave",
-    "coffee machine on counter",
-    "stainless steel refrigerator",
-    "green potted plant",
+    "wooden counter",
+    "beer taps",
+    "empty stools",
+    "glasses on a table",
     "tiled walls"
    ],
    "niveau": "modeste",
    "ambiance": "dispute",
    "occasion": "",
    "meteo": "",
-   "moment": "nuit",
+   "moment": "soir",
    "interieur": true
-  },
-  "lieux_de": {
-   "presentateur": "rue",
-   "invite": "salon"
   }
  },
  "doublage": {
-  "piste": "/tmp/tmpngycu_zv/piste.wav",
-  "duree": 74.42,
-  "source": "https://www.tiktok.com/@vignianimation/video/7708846701439765792",
-  "auteur": "vignianimation",
-  "contexte": "Un homme en t-shirt et caleçon discute au beau milieu de la nuit avec son téléphone dans la cuisine et lui demande de compter jusqu'à un million.",
+  "piste": "/tmp/tmpjxepplyv/piste.wav",
+  "duree": 63.04,
+  "source": "https://www.tiktok.com/@same_same53/video/7681668872021265697",
+  "auteur": "same_same53",
+  "contexte": "Un ami a faim mais son pote alcoolique lui conseille de boire une bière pour régler son problème, peu importe la situation.",
   "evenements": [
    [
-    1.0,
-    3.0,
-    "crying"
-   ],
-   [
-    13.0,
-    15.0,
+    59.0,
+    61.0,
     "laughter"
    ],
    [
-    46.0,
-    48.0,
-    "laughter"
+    60.0,
+    62.0,
+    "door"
    ],
    [
-    70.0,
-    72.0,
-    "laughter"
+    61.0,
+    63.0,
+    "glass"
    ]
   ],
   "visuel": {
    "gestes": [],
-   "duree": 74.5,
+   "duree": 63.0,
    "nb_plans": 1,
-   "duree_plan": 74.5,
+   "duree_plan": 63.0,
    "coupes": [],
    "plans": {
     "tres_serre": 0.0,
     "serre": 0.0,
-    "moyen": 0.517,
-    "large": 0.483
+    "moyen": 0.008,
+    "large": 0.992
    },
    "camera": {
     "fixe": 1.0,
@@ -1825,126 +2823,113 @@
     "epaule": 0.0
    },
    "nb_personnes": 1,
-   "personnes": [
-    {
-     "place": "gauche",
-     "presence": 0.517,
-     "habit": [
-      222,
-      91,
-      27
-     ],
-     "cheveux": [
-      27,
-      27,
-      27
-     ],
-     "sourire": 0.0,
-     "taille": 0.103,
-     "tete_penchee": 1.1,
-     "regard_cote": 0.338
-    }
-   ],
+   "personnes": [],
    "visages": true,
    "sourires": 0.0,
-   "energie": 0.135,
+   "energie": 0.274,
    "mur": [
-    209,
-    191,
-    179
+    0,
+    0,
+    0
    ],
    "palette": [
     [
-     222,
-     199,
-     181,
-     0.418
+     0,
+     0,
+     0,
+     0.612
     ],
     [
-     184,
-     175,
-     173,
-     0.21
+     252,
+     252,
+     252,
+     0.343
     ],
     [
-     234,
-     236,
-     238,
-     0.12
+     63,
+     84,
+     116,
+     0.016
     ],
     [
-     30,
-     21,
-     19,
-     0.09
+     41,
+     42,
+     45,
+     0.015
     ],
     [
-     203,
-     128,
-     79,
-     0.088
+     223,
+     103,
+     3,
+     0.009
     ],
     [
-     106,
-     97,
-     95,
-     0.072
+     187,
+     187,
+     187,
+     0.005
     ]
    ],
    "lumiere": {
-    "luminosite": 190.7,
-    "chaleur": 31.7,
-    "saturation": 50.3
+    "luminosite": 92.4,
+    "chaleur": 1.1,
+    "saturation": 5.4
    },
    "moment": "jour",
    "postures": []
   },
   "audio": {
-   "duree": 74.4,
-   "nb_voix": 2,
+   "duree": 63.0,
+   "nb_voix": 3,
    "voix": [
     {
-     "hz": 125,
-     "genre": "h",
-     "part": 0.41
+     "hz": 169,
+     "genre": "?",
+     "part": 0.01
     },
     {
-     "hz": 138,
-     "genre": "h",
-     "part": 0.59
+     "hz": 165,
+     "genre": "?",
+     "part": 0.47
+    },
+    {
+     "hz": 202,
+     "genre": "f",
+     "part": 0.52
     }
    ],
-   "debit": 3.7,
-   "blanc_moyen": 0.68,
-   "coupes": 2,
-   "dynamique_db": 16.4,
-   "cris": 0.004,
-   "musique": 0.4,
-   "impacts": 34,
-   "impacts_10s": 4.57,
-   "graves": 13,
-   "aigus": 21,
-   "sur_vanne": 6,
+   "debit": 6.57,
+   "blanc_moyen": 0.1,
+   "coupes": 18,
+   "dynamique_db": 17.1,
+   "cris": 0.008,
+   "musique": 0.41,
+   "impacts": 69,
+   "impacts_10s": 10.94,
+   "graves": 6,
+   "aigus": 63,
+   "sur_vanne": 44,
    "evenements": {
-    "laughter": 3,
-    "crying": 1
+    "laughter": 1,
+    "door": 1,
+    "glass": 1
    },
    "emotions": {
-    "sceptique": 4,
-    "blase": 3,
-    "colere": 3,
-    "neutre": 3,
-    "joie": 2,
-    "annoyed": 1,
-    "reflechit": 1,
-    "penseur": 1
+    "happy": 12,
+    "annoyed": 6,
+    "confused": 6,
+    "explaining": 5,
+    "sarcastic": 4,
+    "neutral": 3,
+    "angry": 2,
+    "shocked": 2
    }
   },
   "silences": [],
-  "video_origine": "/tmp/tmpngycu_zv/src.mp4",
+  "video_origine": "/tmp/tmpjxepplyv/src.mp4",
   "debut": 0.0,
-  "titre": "ChatGPT compte jusqu’à 1 million : @Yann-Morgan #humour ",
-  "nb_vus": 1
+  "titre": "Ce pote complètement alcoolique@ELIOT LEHANNEUR #sketch #pourtoi #rire ",
+  "nb_vus": 3
  },
  "fiche": {
   "note": 0,
@@ -1971,13 +2956,40 @@
      15,
      16,
      17,
-     18
+     18,
+     19,
+     20,
+     21,
+     22,
+     23,
+     24,
+     25,
+     26,
+     27,
+     28,
+     29,
+     30,
+     31,
+     32,
+     33,
+     34,
+     35,
+     36,
+     37,
+     38,
+     39,
+     40,
+     41,
+     42,
+     43,
+     44,
+     45
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "small modest modern messy kitchen with washing machine microwave and stainless steel refrigerator with washing machine next to microwave, coffee machine on counter, green potted plant",
-    "titre": "La nuit blanche de Jojo"
+    "decor": "empty small cozy pub interior with wooden counter and stool with beer taps, empty stools, glasses on a table",
+    "titre": "Au comptoir du bar"
    }
   ]
  },
@@ -1985,288 +2997,413 @@
  "_rhubarb": [
   [
    0.0,
-   0.44,
+   0.27,
+   null
+  ],
+  [
+   0.27,
+   0.41,
    "T"
   ],
   [
-   0.44,
-   0.58,
-   "E"
-  ],
-  [
-   0.58,
-   0.66,
-   "M"
-  ],
-  [
-   0.66,
-   0.77,
-   "E"
-  ],
-  [
-   0.77,
-   0.98,
-   "T"
-  ],
-  [
-   0.98,
-   1.05,
+   0.41,
+   0.55,
    "F"
   ],
   [
-   1.05,
-   1.19,
-   "T"
-  ],
-  [
-   1.19,
-   1.26,
-   "O"
-  ],
-  [
-   1.26,
-   1.33,
+   0.55,
+   0.83,
    "U"
   ],
   [
-   1.33,
-   1.4,
-   "T"
-  ],
-  [
-   1.4,
-   2.17,
-   null
-  ],
-  [
-   2.17,
-   2.38,
+   0.83,
+   0.9,
    "O"
   ],
   [
-   2.38,
-   2.87,
-   "T"
-  ],
-  [
-   2.87,
-   3.22,
-   "O"
-  ],
-  [
-   3.22,
-   3.5,
-   "T"
-  ],
-  [
-   3.5,
-   3.64,
-   "O"
-  ],
-  [
-   3.64,
-   3.78,
-   "T"
-  ],
-  [
-   3.78,
-   3.91,
-   null
-  ],
-  [
-   3.91,
-   4.23,
-   "T"
-  ],
-  [
-   4.23,
-   4.58,
-   "E"
-  ],
-  [
-   4.58,
-   4.65,
-   "O"
-  ],
-  [
-   4.65,
-   4.73,
-   "M"
-  ],
-  [
-   4.73,
-   4.8,
+   0.9,
+   1.18,
    "U"
   ],
   [
-   4.8,
-   4.87,
-   "E"
-  ],
-  [
-   4.87,
-   4.95,
-   "M"
-  ],
-  [
-   4.95,
-   5.29,
-   "T"
-  ],
-  [
-   5.29,
-   5.36,
-   "F"
-  ],
-  [
-   5.36,
-   5.45,
-   "M"
-  ],
-  [
-   5.45,
-   5.9,
-   "T"
-  ],
-  [
-   5.9,
-   5.98,
-   "M"
-  ],
-  [
-   5.98,
-   6.43,
-   "U"
-  ],
-  [
-   6.43,
-   6.57,
-   "M"
-  ],
-  [
-   6.57,
-   6.82,
-   "T"
-  ],
-  [
-   6.82,
-   7.03,
-   null
-  ],
-  [
-   7.03,
-   7.52,
-   "T"
-  ],
-  [
-   7.52,
-   7.6,
-   "M"
-  ],
-  [
-   7.6,
-   7.74,
+   1.18,
+   1.37,
    "A"
   ],
   [
-   7.74,
-   7.81,
-   "E"
-  ],
-  [
-   7.81,
-   8.02,
-   "T"
-  ],
-  [
-   8.02,
-   8.09,
-   "E"
-  ],
-  [
-   8.09,
-   8.17,
-   "M"
-  ],
-  [
-   8.17,
-   8.62,
-   "T"
-  ],
-  [
-   8.62,
-   8.83,
+   1.37,
+   1.42,
    "O"
   ],
   [
-   8.83,
-   9.11,
-   "E"
-  ],
-  [
-   9.11,
-   9.25,
-   "T"
-  ],
-  [
-   9.25,
-   9.37,
-   "M"
-  ],
-  [
-   9.37,
-   9.5,
-   "T"
-  ],
-  [
-   9.5,
-   9.57,
-   "O"
-  ],
-  [
-   9.57,
-   9.64,
-   "T"
-  ],
-  [
-   9.64,
-   9.78,
+   1.42,
+   1.67,
    "U"
   ],
   [
-   9.78,
-   9.94,
-   null
-  ],
-  [
-   9.94,
-   10.31,
+   1.67,
+   1.95,
    "T"
   ],
   [
-   10.31,
-   10.61,
-   null
+   1.95,
+   2.09,
+   "U"
   ],
   [
-   10.61,
-   10.93,
+   2.09,
+   2.23,
    "T"
   ],
   [
-   10.93,
-   11.0,
+   2.23,
+   2.44,
    "F"
   ],
   [
-   11.0,
+   2.44,
+   2.66,
+   "M"
+  ],
+  [
+   2.66,
+   2.83,
+   "O"
+  ],
+  [
+   2.83,
+   2.9,
+   "F"
+  ],
+  [
+   2.9,
+   2.98,
+   "M"
+  ],
+  [
+   2.98,
+   3.18,
+   "T"
+  ],
+  [
+   3.18,
+   3.26,
+   "M"
+  ],
+  [
+   3.26,
+   3.54,
+   "T"
+  ],
+  [
+   3.54,
+   3.61,
+   "F"
+  ],
+  [
+   3.61,
+   3.68,
+   "O"
+  ],
+  [
+   3.68,
+   3.82,
+   "U"
+  ],
+  [
+   3.82,
+   3.89,
+   "E"
+  ],
+  [
+   3.89,
+   4.03,
+   "T"
+  ],
+  [
+   4.03,
+   4.11,
+   "M"
+  ],
+  [
+   4.11,
+   4.42,
+   "T"
+  ],
+  [
+   4.42,
+   4.49,
+   "F"
+  ],
+  [
+   4.49,
+   4.56,
+   "T"
+  ],
+  [
+   4.56,
+   4.64,
+   "M"
+  ],
+  [
+   4.64,
+   4.87,
+   "O"
+  ],
+  [
+   4.87,
+   5.08,
+   "U"
+  ],
+  [
+   5.08,
+   5.16,
+   "M"
+  ],
+  [
+   5.16,
+   5.28,
+   "E"
+  ],
+  [
+   5.28,
+   5.35,
+   "T"
+  ],
+  [
+   5.35,
+   5.42,
+   "E"
+  ],
+  [
+   5.42,
+   5.5,
+   "M"
+  ],
+  [
+   5.5,
+   5.72,
+   "U"
+  ],
+  [
+   5.72,
+   5.8,
+   "M"
+  ],
+  [
+   5.8,
+   5.92,
+   "E"
+  ],
+  [
+   5.92,
+   6.34,
+   "T"
+  ],
+  [
+   6.34,
+   6.62,
+   "U"
+  ],
+  [
+   6.62,
+   6.69,
+   "T"
+  ],
+  [
+   6.69,
+   6.83,
+   "E"
+  ],
+  [
+   6.83,
+   6.9,
+   "T"
+  ],
+  [
+   6.9,
+   6.97,
+   "E"
+  ],
+  [
+   6.97,
+   7.25,
+   "T"
+  ],
+  [
+   7.25,
+   7.32,
+   "O"
+  ],
+  [
+   7.32,
+   7.39,
+   "U"
+  ],
+  [
+   7.39,
+   7.53,
+   "T"
+  ],
+  [
+   7.53,
+   7.67,
+   "F"
+  ],
+  [
+   7.67,
+   7.88,
+   "T"
+  ],
+  [
+   7.88,
+   7.95,
+   "F"
+  ],
+  [
+   7.95,
+   8.02,
+   "T"
+  ],
+  [
+   8.02,
+   8.16,
+   "U"
+  ],
+  [
+   8.16,
+   8.23,
+   "A"
+  ],
+  [
+   8.23,
+   8.31,
+   "M"
+  ],
+  [
+   8.31,
+   8.43,
+   "T"
+  ],
+  [
+   8.43,
+   8.57,
+   "F"
+  ],
+  [
+   8.57,
+   8.64,
+   "E"
+  ],
+  [
+   8.64,
+   8.71,
+   "O"
+  ],
+  [
+   8.71,
+   8.81,
+   "M"
+  ],
+  [
+   8.81,
+   9.02,
+   "T"
+  ],
+  [
+   9.02,
+   9.22,
+   "A"
+  ],
+  [
+   9.22,
+   9.3,
+   "E"
+  ],
+  [
+   9.3,
+   9.44,
+   "F"
+  ],
+  [
+   9.44,
+   9.58,
+   "U"
+  ],
+  [
+   9.58,
+   9.65,
+   "F"
+  ],
+  [
+   9.65,
+   9.72,
+   "T"
+  ],
+  [
+   9.72,
+   9.93,
+   "U"
+  ],
+  [
+   9.93,
+   10.0,
+   "T"
+  ],
+  [
+   10.0,
+   10.07,
+   "E"
+  ],
+  [
+   10.07,
+   10.17,
+   "M"
+  ],
+  [
+   10.17,
+   10.22,
+   "U"
+  ],
+  [
+   10.22,
+   10.27,
+   "A"
+  ],
+  [
+   10.27,
+   10.35,
+   "M"
+  ],
+  [
+   10.35,
+   10.51,
+   "O"
+  ],
+  [
+   10.51,
+   10.65,
+   "U"
+  ],
+  [
+   10.65,
+   10.79,
+   "T"
+  ],
+  [
+   10.79,
+   10.86,
+   "F"
+  ],
+  [
+   10.86,
    11.07,
    "T"
   ],
   [
    11.07,
    11.14,
-   "O"
+   "F"
   ],
   [
    11.14,
@@ -2275,2159 +3412,2144 @@
   ],
   [
    11.22,
-   11.27,
+   11.39,
+   "U"
+  ],
+  [
+   11.39,
+   11.46,
    "O"
   ],
   [
-   11.27,
    11.46,
+   11.53,
    "U"
   ],
   [
-   11.46,
-   11.54,
+   11.53,
+   11.74,
+   "T"
+  ],
+  [
+   11.74,
+   11.82,
    "M"
   ],
   [
-   11.54,
-   11.69,
-   "U"
-  ],
-  [
-   11.69,
-   11.88,
+   11.82,
+   11.99,
    "A"
   ],
   [
-   11.88,
-   11.93,
-   "E"
-  ],
-  [
-   11.93,
-   12.18,
+   11.99,
+   12.06,
    "T"
   ],
   [
-   12.18,
-   12.32,
+   12.06,
+   12.13,
    "E"
   ],
   [
-   12.32,
-   12.39,
+   12.13,
+   12.27,
+   "T"
+  ],
+  [
+   12.27,
+   12.35,
+   "M"
+  ],
+  [
+   12.35,
+   12.4,
+   "U"
+  ],
+  [
+   12.4,
+   12.51,
+   "T"
+  ],
+  [
+   12.51,
+   12.65,
    "F"
   ],
   [
-   12.39,
-   12.74,
-   "E"
-  ],
-  [
-   12.74,
-   12.81,
-   "O"
-  ],
-  [
-   12.81,
-   12.88,
-   "U"
-  ],
-  [
-   12.88,
-   13.07,
-   null
-  ],
-  [
-   13.07,
-   13.18,
-   "T"
-  ],
-  [
-   13.18,
-   13.55,
-   null
-  ],
-  [
-   13.55,
-   13.61,
-   "T"
-  ],
-  [
-   13.61,
-   13.66,
-   "E"
-  ],
-  [
-   13.66,
-   14.22,
-   "T"
-  ],
-  [
-   14.22,
-   14.37,
-   null
-  ],
-  [
-   14.37,
-   14.51,
-   "T"
-  ],
-  [
-   14.51,
-   14.93,
-   "U"
-  ],
-  [
-   14.93,
-   15.02,
+   12.65,
+   12.73,
    "M"
   ],
   [
-   15.02,
-   15.07,
-   "O"
+   12.73,
+   12.92,
+   "A"
   ],
   [
-   15.07,
-   15.19,
-   "U"
+   12.92,
+   12.99,
+   "E"
   ],
   [
-   15.19,
-   15.26,
+   12.99,
+   13.06,
    "T"
   ],
   [
-   15.26,
-   15.47,
-   "O"
+   13.06,
+   13.21,
+   "M"
   ],
   [
-   15.47,
-   15.54,
+   13.21,
+   13.38,
+   "E"
+  ],
+  [
+   13.38,
+   13.45,
+   "T"
+  ],
+  [
+   13.45,
+   13.57,
+   "M"
+  ],
+  [
+   13.57,
+   13.99,
+   "T"
+  ],
+  [
+   13.99,
+   14.14,
+   "M"
+  ],
+  [
+   14.14,
+   14.21,
    "U"
   ],
   [
-   15.54,
-   15.68,
+   14.21,
+   14.42,
+   "O"
+  ],
+  [
+   14.42,
+   14.49,
+   "E"
+  ],
+  [
+   14.49,
+   14.56,
+   "T"
+  ],
+  [
+   14.56,
+   14.7,
+   "E"
+  ],
+  [
+   14.7,
+   14.9,
+   "M"
+  ],
+  [
+   14.9,
+   14.96,
    "F"
   ],
   [
-   15.68,
-   15.82,
-   "E"
-  ],
-  [
-   15.82,
-   15.9,
-   "M"
-  ],
-  [
-   15.9,
-   15.99,
+   14.96,
+   15.09,
    "T"
   ],
   [
-   15.99,
-   16.07,
-   "M"
-  ],
-  [
-   16.07,
-   16.15,
-   "O"
-  ],
-  [
-   16.15,
-   16.64,
-   "T"
-  ],
-  [
-   16.64,
-   17.26,
-   null
-  ],
-  [
-   17.26,
-   17.33,
-   "T"
-  ],
-  [
-   17.33,
-   17.39,
-   "M"
-  ],
-  [
-   17.39,
-   17.47,
-   "O"
-  ],
-  [
-   17.47,
-   17.54,
-   "U"
-  ],
-  [
-   17.54,
-   17.62,
-   "M"
-  ],
-  [
-   17.62,
-   17.76,
-   "E"
-  ],
-  [
-   17.76,
-   18.04,
-   "T"
-  ],
-  [
-   18.04,
-   18.11,
+   15.09,
+   15.16,
    "F"
   ],
   [
-   18.11,
-   18.39,
+   15.16,
+   15.23,
+   "O"
+  ],
+  [
+   15.23,
+   15.44,
    "T"
   ],
   [
-   18.39,
-   18.46,
+   15.44,
+   15.51,
    "E"
   ],
   [
-   18.46,
+   15.51,
+   15.79,
+   "T"
+  ],
+  [
+   15.79,
+   15.93,
+   "F"
+  ],
+  [
+   15.93,
+   16.0,
+   "U"
+  ],
+  [
+   16.0,
+   16.14,
+   "T"
+  ],
+  [
+   16.14,
+   16.22,
+   "M"
+  ],
+  [
+   16.22,
+   16.45,
+   "T"
+  ],
+  [
+   16.45,
+   16.52,
+   "O"
+  ],
+  [
+   16.52,
+   16.6,
+   "M"
+  ],
+  [
+   16.6,
+   16.7,
+   "U"
+  ],
+  [
+   16.7,
+   16.88,
+   "M"
+  ],
+  [
+   16.88,
+   16.95,
+   "U"
+  ],
+  [
+   16.95,
+   17.15,
+   "T"
+  ],
+  [
+   17.15,
+   17.22,
+   "U"
+  ],
+  [
+   17.22,
+   17.43,
+   "E"
+  ],
+  [
+   17.43,
+   17.5,
+   "O"
+  ],
+  [
+   17.5,
+   17.57,
+   "A"
+  ],
+  [
+   17.57,
+   17.71,
+   "T"
+  ],
+  [
+   17.71,
+   17.9,
+   "M"
+  ],
+  [
+   17.9,
+   17.94,
+   "T"
+  ],
+  [
+   17.94,
+   17.98,
+   "F"
+  ],
+  [
+   17.98,
+   18.25,
+   "M"
+  ],
+  [
+   18.25,
+   18.29,
+   "T"
+  ],
+  [
+   18.29,
+   18.37,
+   "M"
+  ],
+  [
+   18.37,
+   18.47,
+   "O"
+  ],
+  [
+   18.47,
    18.54,
-   "M"
+   "E"
   ],
   [
    18.54,
-   18.83,
-   "T"
-  ],
-  [
-   18.83,
-   18.97,
+   18.61,
    "U"
   ],
   [
-   18.97,
-   19.05,
+   18.61,
+   18.73,
    "M"
   ],
   [
-   19.05,
-   19.12,
-   "E"
+   18.73,
+   18.81,
+   "U"
   ],
   [
-   19.12,
-   19.64,
+   18.81,
+   18.92,
+   "M"
+  ],
+  [
+   18.92,
+   19.3,
    "T"
   ],
   [
-   19.64,
+   19.3,
+   19.51,
+   "U"
+  ],
+  [
+   19.51,
    19.72,
-   "M"
+   "T"
   ],
   [
    19.72,
-   19.92,
-   "T"
-  ],
-  [
-   19.92,
-   20.41,
-   "U"
-  ],
-  [
-   20.41,
-   20.5,
-   "M"
-  ],
-  [
-   20.5,
-   20.57,
-   "E"
-  ],
-  [
-   20.57,
-   20.64,
-   "U"
-  ],
-  [
-   20.64,
-   20.85,
-   "E"
-  ],
-  [
-   20.85,
-   21.13,
-   "T"
-  ],
-  [
-   21.13,
-   21.2,
-   "E"
-  ],
-  [
-   21.2,
-   21.27,
-   "T"
-  ],
-  [
-   21.27,
-   21.34,
-   "F"
-  ],
-  [
-   21.34,
-   21.41,
-   "U"
-  ],
-  [
-   21.41,
-   21.48,
-   "T"
-  ],
-  [
-   21.48,
-   21.55,
-   "E"
-  ],
-  [
-   21.55,
-   21.76,
+   19.86,
    "O"
   ],
   [
-   21.76,
-   21.9,
+   19.86,
+   20.21,
    "T"
   ],
   [
-   21.9,
-   22.04,
+   20.21,
+   20.28,
+   "A"
+  ],
+  [
+   20.28,
+   20.35,
    "E"
   ],
   [
-   22.04,
-   22.25,
+   20.35,
+   20.7,
    "T"
   ],
   [
-   22.25,
-   22.69,
-   null
+   20.7,
+   20.77,
+   "O"
   ],
   [
-   22.69,
-   22.77,
+   20.77,
+   20.84,
+   "U"
+  ],
+  [
+   20.84,
+   20.91,
    "T"
   ],
   [
-   22.77,
+   20.91,
+   20.99,
+   "M"
+  ],
+  [
+   20.99,
+   21.06,
+   "T"
+  ],
+  [
+   21.06,
+   21.26,
+   "U"
+  ],
+  [
+   21.26,
+   21.4,
+   "O"
+  ],
+  [
+   21.4,
+   21.47,
+   "U"
+  ],
+  [
+   21.47,
+   21.6,
+   "M"
+  ],
+  [
+   21.6,
+   21.67,
+   "T"
+  ],
+  [
+   21.67,
+   21.73,
+   "F"
+  ],
+  [
+   21.73,
+   21.92,
+   "U"
+  ],
+  [
+   21.92,
+   21.97,
+   "O"
+  ],
+  [
+   21.97,
+   22.36,
+   "E"
+  ],
+  [
+   22.36,
+   22.57,
+   "T"
+  ],
+  [
+   22.57,
+   22.7,
+   "M"
+  ],
+  [
+   22.7,
+   22.84,
+   "T"
+  ],
+  [
+   22.84,
    22.91,
-   "U"
+   "F"
   ],
   [
    22.91,
    23.05,
-   "F"
+   "O"
   ],
   [
    23.05,
-   23.12,
+   23.19,
    "T"
   ],
   [
-   23.12,
+   23.19,
    23.26,
-   "M"
-  ],
-  [
-   23.26,
-   23.34,
-   "T"
-  ],
-  [
-   23.34,
-   23.48,
    "F"
   ],
   [
-   23.48,
-   23.76,
-   "T"
-  ],
-  [
-   23.76,
-   24.17,
-   null
-  ],
-  [
-   24.17,
-   24.29,
-   "T"
-  ],
-  [
-   24.29,
-   24.37,
-   "M"
-  ],
-  [
-   24.37,
-   24.55,
-   "O"
-  ],
-  [
-   24.55,
-   24.63,
-   "M"
-  ],
-  [
-   24.63,
-   25.22,
-   "U"
-  ],
-  [
-   25.22,
-   25.28,
-   "T"
-  ],
-  [
-   25.28,
-   25.33,
-   "M"
-  ],
-  [
-   25.33,
-   25.58,
-   "E"
-  ],
-  [
-   25.58,
-   25.72,
-   "T"
-  ],
-  [
-   25.72,
-   25.8,
-   "M"
-  ],
-  [
-   25.8,
-   25.95,
-   "E"
-  ],
-  [
-   25.95,
-   26.16,
-   "T"
-  ],
-  [
-   26.16,
-   26.44,
-   null
-  ],
-  [
-   26.44,
-   26.76,
-   "T"
-  ],
-  [
-   26.76,
-   27.14,
-   null
-  ],
-  [
-   27.14,
-   27.44,
-   "T"
-  ],
-  [
-   27.44,
-   27.72,
-   "O"
-  ],
-  [
-   27.72,
-   27.86,
-   "T"
-  ],
-  [
-   27.86,
-   27.93,
-   "E"
-  ],
-  [
-   27.93,
-   28.0,
-   "T"
-  ],
-  [
-   28.0,
-   28.19,
+   23.26,
+   23.33,
    "A"
   ],
   [
-   28.19,
+   23.33,
+   23.45,
+   "M"
+  ],
+  [
+   23.45,
+   23.58,
+   "T"
+  ],
+  [
+   23.58,
+   23.66,
+   "M"
+  ],
+  [
+   23.66,
+   23.73,
+   "F"
+  ],
+  [
+   23.73,
+   23.8,
+   "U"
+  ],
+  [
+   23.8,
+   23.94,
+   "F"
+  ],
+  [
+   23.94,
+   24.01,
+   "E"
+  ],
+  [
+   24.01,
+   24.15,
+   "F"
+  ],
+  [
+   24.15,
+   24.29,
+   "M"
+  ],
+  [
+   24.29,
+   24.42,
+   "U"
+  ],
+  [
+   24.42,
+   24.64,
+   "M"
+  ],
+  [
+   24.64,
+   24.73,
+   "T"
+  ],
+  [
+   24.73,
+   24.8,
+   "U"
+  ],
+  [
+   24.8,
+   24.93,
+   "M"
+  ],
+  [
+   24.93,
+   25.29,
+   "T"
+  ],
+  [
+   25.29,
+   25.36,
+   "F"
+  ],
+  [
+   25.36,
+   25.44,
+   "M"
+  ],
+  [
+   25.44,
+   25.59,
+   "T"
+  ],
+  [
+   25.59,
+   26.08,
+   "U"
+  ],
+  [
+   26.08,
+   26.16,
+   "M"
+  ],
+  [
+   26.16,
+   26.31,
+   "E"
+  ],
+  [
+   26.31,
+   26.38,
+   "T"
+  ],
+  [
+   26.38,
+   26.45,
+   "U"
+  ],
+  [
+   26.45,
+   26.52,
+   "T"
+  ],
+  [
+   26.52,
+   26.68,
+   "M"
+  ],
+  [
+   26.68,
+   26.73,
+   "T"
+  ],
+  [
+   26.73,
+   26.78,
+   "E"
+  ],
+  [
+   26.78,
+   26.88,
+   "A"
+  ],
+  [
+   26.88,
+   26.92,
+   "E"
+  ],
+  [
+   26.92,
+   27.0,
+   "M"
+  ],
+  [
+   27.0,
+   27.06,
+   "E"
+  ],
+  [
+   27.06,
+   27.32,
+   "T"
+  ],
+  [
+   27.32,
+   27.53,
+   "U"
+  ],
+  [
+   27.53,
+   27.61,
+   "M"
+  ],
+  [
+   27.61,
+   27.77,
+   "E"
+  ],
+  [
+   27.77,
+   27.91,
+   "T"
+  ],
+  [
+   27.91,
+   27.98,
+   "E"
+  ],
+  [
+   27.98,
+   28.06,
+   "M"
+  ],
+  [
+   28.06,
+   28.16,
+   "T"
+  ],
+  [
+   28.16,
    28.24,
-   "E"
+   "M"
   ],
   [
    28.24,
-   28.42,
+   28.46,
+   "U"
+  ],
+  [
+   28.46,
+   28.59,
+   "M"
+  ],
+  [
+   28.59,
+   28.63,
    "T"
   ],
   [
-   28.42,
-   28.56,
+   28.63,
+   28.71,
+   "M"
+  ],
+  [
+   28.71,
+   28.86,
    "E"
   ],
   [
-   28.56,
-   28.63,
+   28.86,
+   29.63,
+   "T"
+  ],
+  [
+   29.63,
+   29.69,
+   "M"
+  ],
+  [
+   29.69,
+   29.75,
+   "A"
+  ],
+  [
+   29.75,
+   29.83,
+   "M"
+  ],
+  [
+   29.83,
+   29.94,
+   "E"
+  ],
+  [
+   29.94,
+   30.03,
+   "M"
+  ],
+  [
+   30.03,
+   30.16,
+   "T"
+  ],
+  [
+   30.16,
+   30.27,
+   "M"
+  ],
+  [
+   30.27,
+   30.38,
+   "T"
+  ],
+  [
+   30.38,
+   30.49,
+   "M"
+  ],
+  [
+   30.49,
+   30.55,
+   "T"
+  ],
+  [
+   30.55,
+   30.61,
+   "U"
+  ],
+  [
+   30.61,
+   30.7,
+   "M"
+  ],
+  [
+   30.7,
+   30.75,
+   "T"
+  ],
+  [
+   30.75,
+   30.83,
+   "M"
+  ],
+  [
+   30.83,
+   31.32,
+   "U"
+  ],
+  [
+   31.32,
+   31.74,
+   "T"
+  ],
+  [
+   31.74,
+   31.95,
    "O"
   ],
   [
-   28.63,
-   28.85,
-   "M"
-  ],
-  [
-   28.85,
-   29.17,
-   "T"
-  ],
-  [
-   29.17,
-   29.31,
-   "E"
-  ],
-  [
-   29.31,
-   29.73,
+   31.95,
+   32.02,
    "U"
   ],
   [
-   29.73,
-   29.94,
-   "T"
-  ],
-  [
-   29.94,
-   30.12,
-   "M"
-  ],
-  [
-   30.12,
-   30.48,
-   "T"
-  ],
-  [
-   30.48,
-   30.55,
+   32.02,
+   32.09,
    "F"
   ],
   [
-   30.55,
-   30.69,
-   "T"
-  ],
-  [
-   30.69,
-   30.76,
+   32.09,
+   32.51,
    "E"
   ],
   [
-   30.76,
-   30.83,
-   "T"
-  ],
-  [
-   30.83,
-   30.9,
-   "T"
-  ],
-  [
-   30.9,
-   31.25,
-   "E"
-  ],
-  [
-   31.25,
-   31.44,
-   null
-  ],
-  [
-   31.44,
-   31.61,
-   "T"
-  ],
-  [
-   31.61,
-   31.68,
-   "E"
-  ],
-  [
-   31.68,
-   31.82,
-   "T"
-  ],
-  [
-   31.82,
-   31.89,
-   "E"
-  ],
-  [
-   31.89,
-   31.96,
-   "T"
-  ],
-  [
-   31.96,
-   32.04,
+   32.51,
+   32.59,
    "M"
   ],
   [
-   32.04,
-   32.09,
-   "U"
+   32.59,
+   32.63,
+   "T"
   ],
   [
-   32.09,
-   32.2,
-   "E"
+   32.63,
+   32.67,
+   "F"
   ],
   [
-   32.2,
-   32.34,
+   32.67,
+   32.74,
    "O"
   ],
   [
-   32.34,
-   32.69,
-   "E"
+   32.74,
+   32.88,
+   "M"
   ],
   [
-   32.69,
-   32.76,
-   "T"
-  ],
-  [
-   32.76,
-   32.83,
-   "E"
-  ],
-  [
-   32.83,
-   32.9,
+   32.88,
+   32.94,
    "F"
   ],
   [
-   32.9,
-   32.97,
+   32.94,
+   33.0,
+   "O"
+  ],
+  [
+   33.0,
+   33.21,
+   "F"
+  ],
+  [
+   33.21,
+   33.42,
    "T"
   ],
   [
-   32.97,
-   33.11,
-   "E"
+   33.42,
+   33.56,
+   "F"
   ],
   [
-   33.11,
-   33.23,
+   33.56,
+   34.12,
+   "T"
+  ],
+  [
+   34.12,
+   34.4,
+   "U"
+  ],
+  [
+   34.4,
+   34.47,
+   "T"
+  ],
+  [
+   34.47,
+   34.54,
+   "U"
+  ],
+  [
+   34.54,
+   34.62,
    "M"
   ],
   [
-   33.23,
-   33.3,
-   "T"
-  ],
-  [
-   33.3,
-   33.43,
+   34.62,
+   34.73,
    "E"
   ],
   [
-   33.43,
-   33.5,
-   "T"
+   34.73,
+   34.94,
+   "O"
   ],
   [
-   33.5,
-   33.6,
-   "M"
-  ],
-  [
-   33.6,
-   33.83,
-   "T"
-  ],
-  [
-   33.83,
-   34.04,
-   "U"
-  ],
-  [
-   34.04,
-   34.25,
-   "T"
-  ],
-  [
-   34.25,
-   34.44,
-   "U"
-  ],
-  [
-   34.44,
-   34.51,
-   "T"
-  ],
-  [
-   34.51,
-   34.93,
-   "U"
-  ],
-  [
-   34.93,
-   35.0,
+   34.94,
+   35.01,
    "E"
   ],
   [
-   35.0,
-   35.14,
-   "T"
-  ],
-  [
-   35.14,
+   35.01,
    35.22,
-   "M"
+   "O"
   ],
   [
    35.22,
-   35.58,
-   "O"
+   35.29,
+   "U"
   ],
   [
-   35.58,
-   35.84,
+   35.29,
+   35.36,
+   "T"
+  ],
+  [
+   35.36,
+   35.48,
    "E"
   ],
   [
-   35.84,
-   35.91,
-   "T"
-  ],
-  [
-   35.91,
-   36.11,
-   "U"
-  ],
-  [
-   36.11,
-   36.25,
-   "O"
-  ],
-  [
-   36.25,
-   36.32,
-   "U"
-  ],
-  [
-   36.32,
-   36.39,
-   "F"
-  ],
-  [
-   36.39,
-   36.46,
-   "T"
-  ],
-  [
-   36.46,
-   36.6,
+   35.48,
+   35.5,
    "M"
   ],
   [
-   36.6,
-   36.69,
+   35.5,
+   35.56,
    "T"
   ],
   [
-   36.69,
-   36.76,
-   "F"
-  ],
-  [
-   36.76,
-   36.95,
-   null
-  ],
-  [
-   36.95,
-   37.23,
-   "T"
-  ],
-  [
-   37.23,
-   37.3,
-   "O"
-  ],
-  [
-   37.3,
-   37.38,
+   35.56,
+   35.61,
    "M"
   ],
   [
-   37.38,
-   37.44,
-   "T"
-  ],
-  [
-   37.44,
-   37.63,
+   35.61,
+   35.83,
    "E"
   ],
   [
-   37.63,
-   37.84,
-   "T"
-  ],
-  [
-   37.84,
-   37.94,
+   35.83,
+   35.91,
    "M"
   ],
   [
-   37.94,
-   38.56,
-   "T"
-  ],
-  [
-   38.56,
-   38.77,
+   35.91,
+   35.99,
    "U"
   ],
   [
-   38.77,
-   38.84,
-   "T"
-  ],
-  [
-   38.84,
-   38.92,
+   35.99,
+   36.07,
    "M"
   ],
   [
-   38.92,
-   39.4,
-   "T"
+   36.07,
+   36.29,
+   "O"
   ],
   [
-   39.4,
-   39.54,
+   36.29,
+   36.36,
+   "E"
+  ],
+  [
+   36.36,
+   36.78,
    "U"
   ],
   [
-   39.54,
+   36.78,
+   36.85,
+   "F"
+  ],
+  [
+   36.85,
+   36.92,
+   "T"
+  ],
+  [
+   36.92,
+   37.0,
+   "M"
+  ],
+  [
+   37.0,
+   37.17,
+   "E"
+  ],
+  [
+   37.17,
+   37.25,
+   "M"
+  ],
+  [
+   37.25,
+   37.52,
+   "T"
+  ],
+  [
+   37.52,
+   37.59,
+   "U"
+  ],
+  [
+   37.59,
+   38.03,
+   "T"
+  ],
+  [
+   38.03,
+   38.08,
+   "E"
+  ],
+  [
+   38.08,
+   38.36,
+   "T"
+  ],
+  [
+   38.36,
+   38.5,
+   "E"
+  ],
+  [
+   38.5,
+   38.57,
+   "M"
+  ],
+  [
+   38.57,
+   38.64,
+   "T"
+  ],
+  [
+   38.64,
+   38.7,
+   "M"
+  ],
+  [
+   38.7,
+   38.84,
+   "F"
+  ],
+  [
+   38.84,
+   38.98,
+   "O"
+  ],
+  [
+   38.98,
+   39.12,
+   "T"
+  ],
+  [
+   39.12,
+   39.19,
+   "F"
+  ],
+  [
+   39.19,
+   39.33,
+   "T"
+  ],
+  [
+   39.33,
+   39.61,
+   "A"
+  ],
+  [
+   39.61,
    39.75,
    "T"
   ],
   [
    39.75,
-   39.99,
-   null
+   39.82,
+   "O"
   ],
   [
-   39.99,
-   40.17,
-   "T"
+   39.82,
+   39.91,
+   "M"
   ],
   [
-   40.17,
-   40.38,
+   39.91,
+   39.98,
    "E"
   ],
   [
-   40.38,
-   40.52,
+   39.98,
+   40.19,
+   "T"
+  ],
+  [
+   40.19,
+   40.26,
+   "O"
+  ],
+  [
+   40.26,
+   40.33,
+   "U"
+  ],
+  [
+   40.33,
+   40.4,
+   "T"
+  ],
+  [
+   40.4,
+   40.47,
+   "E"
+  ],
+  [
+   40.47,
+   40.68,
+   "U"
+  ],
+  [
+   40.68,
+   40.75,
    "F"
   ],
   [
-   40.52,
-   40.66,
+   40.75,
+   40.82,
    "T"
   ],
   [
-   40.66,
-   40.73,
-   "E"
-  ],
-  [
-   40.73,
-   40.8,
-   "T"
-  ],
-  [
-   40.8,
-   40.87,
-   "E"
-  ],
-  [
-   40.87,
-   40.95,
+   40.82,
+   40.9,
    "M"
   ],
   [
-   40.95,
-   41.08,
-   "E"
+   40.9,
+   41.02,
+   "U"
   ],
   [
-   41.08,
-   41.29,
-   "T"
-  ],
-  [
-   41.29,
-   41.36,
-   "O"
-  ],
-  [
-   41.36,
-   41.43,
-   "T"
-  ],
-  [
-   41.43,
-   41.5,
-   "O"
-  ],
-  [
-   41.5,
-   41.64,
+   41.02,
+   41.16,
    "F"
   ],
   [
-   41.64,
-   41.71,
+   41.16,
+   41.23,
    "T"
   ],
   [
-   41.71,
-   41.91,
-   null
+   41.23,
+   41.31,
+   "M"
   ],
   [
-   41.91,
-   42.07,
+   41.31,
+   41.48,
    "T"
   ],
   [
-   42.07,
-   42.14,
+   41.48,
+   41.55,
    "O"
   ],
   [
-   42.14,
-   42.21,
+   41.55,
+   41.62,
    "U"
   ],
   [
-   42.21,
-   42.49,
+   41.62,
+   41.69,
    "T"
   ],
   [
-   42.49,
-   42.57,
+   41.69,
+   41.77,
    "M"
   ],
   [
-   42.57,
-   42.79,
+   41.77,
+   41.88,
    "O"
   ],
   [
-   42.79,
-   42.93,
-   "T"
-  ],
-  [
-   42.93,
-   43.06,
-   "M"
-  ],
-  [
-   43.06,
-   43.19,
-   "T"
-  ],
-  [
-   43.19,
-   43.47,
-   "E"
-  ],
-  [
-   43.47,
-   43.68,
-   "T"
-  ],
-  [
-   43.68,
-   43.75,
+   41.88,
+   41.95,
    "U"
   ],
   [
-   43.75,
-   43.86,
-   "M"
-  ],
-  [
-   43.86,
-   43.95,
-   "E"
-  ],
-  [
-   43.95,
-   44.05,
-   "M"
-  ],
-  [
-   44.05,
-   44.11,
+   41.95,
+   42.09,
    "T"
   ],
   [
-   44.11,
-   44.23,
-   "E"
+   42.09,
+   42.2,
+   "M"
   ],
   [
-   44.23,
-   44.3,
+   42.2,
+   42.33,
    "T"
   ],
   [
-   44.3,
-   44.44,
+   42.33,
+   42.41,
+   "M"
+  ],
+  [
+   42.41,
+   42.52,
+   "O"
+  ],
+  [
+   42.52,
+   42.59,
    "U"
   ],
   [
-   44.44,
-   44.58,
-   "O"
-  ],
-  [
-   44.58,
-   44.65,
-   "E"
-  ],
-  [
-   44.65,
-   44.72,
-   "T"
-  ],
-  [
-   44.72,
-   44.86,
-   "O"
-  ],
-  [
-   44.86,
-   44.99,
-   "E"
-  ],
-  [
-   44.99,
-   45.06,
-   "T"
-  ],
-  [
-   45.06,
-   45.12,
+   42.59,
+   42.68,
    "M"
   ],
   [
-   45.12,
-   45.17,
-   "U"
-  ],
-  [
-   45.17,
-   45.36,
+   42.68,
+   42.73,
    "T"
   ],
   [
-   45.36,
-   45.43,
-   "O"
-  ],
-  [
-   45.43,
-   45.5,
+   42.73,
+   43.05,
    "U"
   ],
   [
-   45.5,
-   45.58,
+   43.05,
+   43.15,
    "M"
   ],
   [
-   45.58,
-   45.72,
-   "O"
-  ],
-  [
-   45.72,
-   45.86,
+   43.15,
+   43.22,
    "F"
   ],
   [
-   45.86,
-   45.93,
-   "U"
-  ],
-  [
-   45.93,
-   46.21,
+   43.22,
+   43.43,
    "T"
   ],
   [
-   46.21,
-   46.34,
+   43.43,
+   43.5,
+   "F"
+  ],
+  [
+   43.5,
+   43.57,
+   "T"
+  ],
+  [
+   43.57,
+   43.65,
    "M"
   ],
   [
-   46.34,
-   46.39,
+   43.65,
+   43.79,
+   "U"
+  ],
+  [
+   43.79,
+   43.81,
+   "M"
+  ],
+  [
+   43.81,
+   43.89,
    "T"
   ],
   [
-   46.39,
-   46.65,
-   "E"
+   43.89,
+   43.96,
+   "M"
   ],
   [
-   46.65,
+   43.96,
+   44.1,
+   "T"
+  ],
+  [
+   44.1,
+   44.17,
+   "F"
+  ],
+  [
+   44.17,
+   44.31,
+   "T"
+  ],
+  [
+   44.31,
+   44.38,
+   "O"
+  ],
+  [
+   44.38,
+   44.45,
+   "F"
+  ],
+  [
+   44.45,
+   44.73,
+   "T"
+  ],
+  [
+   44.73,
+   44.82,
+   "M"
+  ],
+  [
+   44.82,
+   44.89,
+   "F"
+  ],
+  [
+   44.89,
+   45.02,
+   "U"
+  ],
+  [
+   45.02,
+   45.09,
+   "T"
+  ],
+  [
+   45.09,
+   45.44,
+   "U"
+  ],
+  [
+   45.44,
+   45.51,
+   "F"
+  ],
+  [
+   45.51,
+   45.65,
+   "T"
+  ],
+  [
+   45.65,
+   45.85,
+   "M"
+  ],
+  [
+   45.85,
+   45.91,
+   "T"
+  ],
+  [
+   45.91,
+   45.96,
+   "O"
+  ],
+  [
+   45.96,
+   46.12,
+   "M"
+  ],
+  [
+   46.12,
+   46.2,
+   "U"
+  ],
+  [
+   46.2,
+   46.41,
+   "O"
+  ],
+  [
+   46.41,
+   46.62,
+   "U"
+  ],
+  [
+   46.62,
+   46.7,
+   "M"
+  ],
+  [
+   46.7,
+   46.79,
+   "O"
+  ],
+  [
+   46.79,
+   46.86,
+   "U"
+  ],
+  [
+   46.86,
    46.94,
-   null
+   "M"
   ],
   [
    46.94,
-   47.55,
+   47.06,
+   "O"
+  ],
+  [
+   47.06,
+   47.13,
    "T"
   ],
   [
-   47.55,
+   47.13,
+   47.27,
+   "F"
+  ],
+  [
+   47.27,
+   47.34,
+   "T"
+  ],
+  [
+   47.34,
+   47.41,
+   "F"
+  ],
+  [
+   47.41,
+   47.5,
+   "M"
+  ],
+  [
+   47.5,
    47.67,
-   "M"
+   "O"
   ],
   [
    47.67,
-   47.94,
-   "U"
-  ],
-  [
-   47.94,
-   48.01,
-   "E"
-  ],
-  [
-   48.01,
-   48.22,
-   "T"
-  ],
-  [
-   48.22,
-   48.57,
-   "T"
-  ],
-  [
-   48.57,
-   48.92,
-   "T"
-  ],
-  [
-   48.92,
-   49.06,
+   47.74,
    "F"
   ],
   [
-   49.06,
+   47.74,
+   47.81,
+   "O"
+  ],
+  [
+   47.81,
+   47.88,
+   "U"
+  ],
+  [
+   47.88,
+   47.95,
+   "T"
+  ],
+  [
+   47.95,
+   48.02,
+   "O"
+  ],
+  [
+   48.02,
+   48.1,
+   "M"
+  ],
+  [
+   48.1,
+   48.76,
+   "T"
+  ],
+  [
+   48.76,
+   48.9,
+   "E"
+  ],
+  [
+   48.9,
+   49.04,
+   "T"
+  ],
+  [
+   49.04,
+   49.12,
+   "M"
+  ],
+  [
+   49.12,
+   49.16,
+   "O"
+  ],
+  [
+   49.16,
    49.2,
-   "O"
+   "U"
   ],
   [
    49.2,
-   49.27,
-   "T"
+   49.28,
+   "M"
   ],
   [
-   49.27,
-   49.55,
-   "U"
-  ],
-  [
-   49.55,
-   49.62,
-   "T"
-  ],
-  [
-   49.62,
-   49.69,
+   49.28,
+   49.44,
    "E"
   ],
   [
-   49.69,
-   49.76,
+   49.44,
+   49.48,
+   "O"
+  ],
+  [
+   49.48,
+   49.74,
+   "U"
+  ],
+  [
+   49.74,
+   49.81,
    "F"
   ],
   [
-   49.76,
-   49.83,
+   49.81,
+   50.02,
    "T"
   ],
   [
-   49.83,
-   49.9,
-   "O"
-  ],
-  [
-   49.9,
-   50.04,
+   50.02,
+   50.09,
    "E"
   ],
   [
-   50.04,
-   50.11,
-   "O"
-  ],
-  [
-   50.11,
-   50.18,
+   50.09,
+   50.23,
    "U"
   ],
   [
-   50.18,
-   50.25,
+   50.23,
+   50.51,
+   "T"
+  ],
+  [
+   50.51,
+   50.58,
+   "E"
+  ],
+  [
+   50.58,
+   50.72,
+   "T"
+  ],
+  [
+   50.72,
+   50.79,
+   "E"
+  ],
+  [
+   50.79,
+   50.86,
+   "U"
+  ],
+  [
+   50.86,
+   51.0,
+   "O"
+  ],
+  [
+   51.0,
+   51.42,
+   "E"
+  ],
+  [
+   51.42,
+   51.77,
+   "O"
+  ],
+  [
+   51.77,
+   51.84,
    "F"
   ],
   [
-   50.25,
-   50.61,
-   "U"
+   51.84,
+   51.91,
+   "E"
   ],
   [
-   50.61,
-   51.03,
-   "T"
-  ],
-  [
-   51.03,
-   51.09,
+   51.91,
+   51.99,
    "M"
   ],
   [
-   51.09,
-   51.15,
-   "T"
-  ],
-  [
-   51.15,
-   51.27,
-   "O"
-  ],
-  [
-   51.27,
-   51.34,
-   "U"
-  ],
-  [
-   51.34,
-   51.41,
-   "E"
-  ],
-  [
-   51.41,
-   51.48,
-   "T"
-  ],
-  [
-   51.48,
-   51.76,
-   "E"
-  ],
-  [
-   51.76,
-   51.92,
-   "T"
-  ],
-  [
-   51.92,
-   51.97,
-   "M"
-  ],
-  [
-   51.97,
-   52.05,
-   "E"
-  ],
-  [
-   52.05,
-   52.13,
-   "M"
-  ],
-  [
-   52.13,
-   52.2,
-   "O"
-  ],
-  [
-   52.2,
-   52.28,
-   "M"
-  ],
-  [
-   52.28,
-   52.38,
-   "U"
-  ],
-  [
-   52.38,
-   52.66,
-   "T"
-  ],
-  [
-   52.66,
-   52.73,
-   "U"
-  ],
-  [
-   52.73,
-   52.87,
-   "T"
-  ],
-  [
-   52.87,
-   52.94,
-   "F"
-  ],
-  [
-   52.94,
-   53.01,
-   "T"
-  ],
-  [
-   53.01,
-   53.08,
-   "E"
-  ],
-  [
-   53.08,
-   53.15,
-   "T"
-  ],
-  [
-   53.15,
-   53.22,
-   "O"
-  ],
-  [
-   53.22,
-   53.43,
-   "U"
-  ],
-  [
-   53.43,
-   53.5,
-   "T"
-  ],
-  [
-   53.5,
-   53.71,
-   "O"
-  ],
-  [
-   53.71,
-   53.85,
-   "U"
-  ],
-  [
-   53.85,
-   54.06,
-   "T"
-  ],
-  [
-   54.06,
-   54.2,
-   "E"
-  ],
-  [
-   54.2,
-   54.27,
-   "O"
-  ],
-  [
-   54.27,
-   54.48,
-   "E"
-  ],
-  [
-   54.48,
-   54.69,
-   "O"
-  ],
-  [
-   54.69,
-   54.83,
-   "T"
-  ],
-  [
-   54.83,
-   54.9,
-   "E"
-  ],
-  [
-   54.9,
-   55.04,
-   "T"
-  ],
-  [
-   55.04,
-   55.11,
-   "O"
-  ],
-  [
-   55.11,
-   55.72,
-   "U"
-  ],
-  [
-   55.72,
-   55.77,
-   "O"
-  ],
-  [
-   55.77,
-   55.95,
-   "E"
-  ],
-  [
-   55.95,
-   56.09,
-   "F"
-  ],
-  [
-   56.09,
-   56.23,
-   "T"
-  ],
-  [
-   56.23,
-   56.91,
-   null
-  ],
-  [
-   56.91,
-   56.98,
-   "E"
-  ],
-  [
-   56.98,
-   57.05,
-   "F"
-  ],
-  [
-   57.05,
-   57.12,
-   "O"
-  ],
-  [
-   57.12,
-   57.19,
-   "E"
-  ],
-  [
-   57.19,
-   57.33,
-   "T"
-  ],
-  [
-   57.33,
-   57.47,
-   "F"
-  ],
-  [
-   57.47,
-   57.61,
-   "T"
-  ],
-  [
-   57.61,
-   57.68,
-   "E"
-  ],
-  [
-   57.68,
-   57.82,
-   "U"
-  ],
-  [
-   57.82,
-   57.96,
-   "T"
-  ],
-  [
-   57.96,
-   58.04,
-   "M"
-  ],
-  [
-   58.04,
-   58.09,
-   "O"
-  ],
-  [
-   58.09,
-   58.14,
-   "U"
-  ],
-  [
-   58.14,
-   58.4,
-   "T"
-  ],
-  [
-   58.4,
-   58.46,
-   "T"
-  ],
-  [
-   58.46,
-   58.52,
-   "M"
-  ],
-  [
-   58.52,
-   59.17,
-   "T"
-  ],
-  [
-   59.17,
-   59.25,
-   "M"
-  ],
-  [
-   59.25,
-   59.54,
-   "T"
-  ],
-  [
-   59.54,
-   59.75,
-   "E"
-  ],
-  [
-   59.75,
-   59.87,
-   "M"
-  ],
-  [
-   59.87,
-   59.99,
-   "E"
-  ],
-  [
-   59.99,
-   60.06,
-   "T"
-  ],
-  [
-   60.06,
-   60.14,
-   "M"
-  ],
-  [
-   60.14,
-   60.32,
-   "T"
-  ],
-  [
-   60.32,
-   60.4,
-   "M"
-  ],
-  [
-   60.4,
-   60.68,
-   "T"
-  ],
-  [
-   60.68,
-   60.82,
-   "O"
-  ],
-  [
-   60.82,
-   60.89,
-   "U"
-  ],
-  [
-   60.89,
-   60.96,
-   "T"
-  ],
-  [
-   60.96,
-   61.1,
-   "O"
-  ],
-  [
-   61.1,
-   61.18,
-   "M"
-  ],
-  [
-   61.18,
-   61.38,
-   "U"
-  ],
-  [
-   61.38,
-   61.59,
-   "T"
-  ],
-  [
-   61.59,
-   61.66,
-   "E"
-  ],
-  [
-   61.66,
-   62.36,
-   "T"
-  ],
-  [
-   62.36,
-   62.87,
-   null
-  ],
-  [
-   62.87,
-   62.97,
-   "T"
-  ],
-  [
-   62.97,
-   63.11,
-   "E"
-  ],
-  [
-   63.11,
-   63.18,
-   "T"
-  ],
-  [
-   63.18,
-   63.32,
-   "O"
-  ],
-  [
-   63.32,
-   63.39,
-   "E"
-  ],
-  [
-   63.39,
-   63.6,
-   "T"
-  ],
-  [
-   63.6,
-   63.71,
-   "M"
-  ],
-  [
-   63.71,
-   63.75,
-   "T"
-  ],
-  [
-   63.75,
-   63.86,
-   "U"
-  ],
-  [
-   63.86,
-   63.94,
-   "M"
-  ],
-  [
-   63.94,
-   64.11,
-   "U"
-  ],
-  [
-   64.11,
-   64.25,
-   "F"
-  ],
-  [
-   64.25,
-   64.39,
-   "E"
-  ],
-  [
-   64.39,
-   64.51,
-   "M"
-  ],
-  [
-   64.51,
-   64.61,
-   "E"
-  ],
-  [
-   64.61,
-   64.68,
-   "O"
-  ],
-  [
-   64.68,
-   64.89,
-   "T"
-  ],
-  [
-   64.89,
-   65.03,
-   "E"
-  ],
-  [
-   65.03,
-   65.31,
-   "T"
-  ],
-  [
-   65.31,
-   65.38,
-   "F"
-  ],
-  [
-   65.38,
-   65.73,
-   "T"
-  ],
-  [
-   65.73,
-   65.87,
-   "F"
-  ],
-  [
-   65.87,
-   66.22,
-   "T"
-  ],
-  [
-   66.22,
-   66.29,
-   "O"
-  ],
-  [
-   66.29,
-   66.5,
-   "M"
-  ],
-  [
-   66.5,
-   66.78,
-   "T"
-  ],
-  [
-   66.78,
-   67.59,
-   null
-  ],
-  [
-   67.59,
-   67.76,
-   "T"
-  ],
-  [
-   67.76,
-   67.84,
-   "M"
-  ],
-  [
-   67.84,
-   67.96,
+   51.99,
+   52.14,
    "A"
   ],
   [
-   67.96,
-   68.02,
-   "E"
+   52.14,
+   52.21,
+   "T"
   ],
   [
-   68.02,
-   68.1,
+   52.21,
+   52.29,
    "M"
   ],
   [
-   68.1,
-   68.33,
+   52.29,
+   52.51,
    "O"
   ],
   [
-   68.33,
-   68.54,
+   52.51,
+   52.69,
+   "M"
+  ],
+  [
+   52.69,
+   52.81,
+   "T"
+  ],
+  [
+   52.81,
+   52.92,
+   "M"
+  ],
+  [
+   52.92,
+   53.05,
    "U"
   ],
   [
-   68.54,
-   68.68,
+   53.05,
+   53.12,
+   "T"
+  ],
+  [
+   53.12,
+   53.26,
    "F"
   ],
   [
-   68.68,
-   69.26,
+   53.26,
+   53.61,
    "T"
   ],
   [
-   69.26,
-   69.33,
+   53.61,
+   53.75,
+   "F"
+  ],
+  [
+   53.75,
+   53.89,
+   "T"
+  ],
+  [
+   53.89,
+   53.96,
+   "F"
+  ],
+  [
+   53.96,
+   54.03,
+   "U"
+  ],
+  [
+   54.03,
+   54.11,
    "M"
   ],
   [
-   69.33,
-   69.38,
+   54.11,
+   54.28,
+   "T"
+  ],
+  [
+   54.28,
+   54.63,
+   "U"
+  ],
+  [
+   54.63,
+   55.15,
+   "T"
+  ],
+  [
+   55.15,
+   55.36,
    "O"
   ],
   [
-   69.38,
-   69.77,
+   55.36,
+   55.43,
+   "U"
+  ],
+  [
+   55.43,
+   55.71,
    "T"
   ],
   [
-   69.77,
-   69.95,
+   55.71,
+   55.78,
+   "E"
+  ],
+  [
+   55.78,
+   55.86,
    "M"
   ],
   [
-   69.95,
-   70.13,
+   55.86,
+   55.94,
    "T"
   ],
   [
-   70.13,
-   70.38,
+   55.94,
+   56.02,
    "M"
   ],
   [
-   70.38,
-   70.69,
+   56.02,
+   56.08,
    "T"
   ],
   [
-   70.69,
-   70.9,
-   "M"
+   56.08,
+   56.21,
+   "U"
   ],
   [
-   70.9,
-   71.15,
+   56.21,
+   56.28,
+   "E"
+  ],
+  [
+   56.28,
+   56.56,
    "T"
   ],
   [
-   71.15,
-   71.51,
+   56.56,
+   56.63,
+   "E"
+  ],
+  [
+   56.63,
+   56.71,
    "M"
   ],
   [
-   71.51,
-   71.84,
+   56.71,
+   56.81,
+   "O"
+  ],
+  [
+   56.81,
+   56.89,
+   "M"
+  ],
+  [
+   56.89,
+   57.5,
    "T"
   ],
   [
-   71.84,
-   71.92,
+   57.5,
+   57.57,
+   "F"
+  ],
+  [
+   57.57,
+   57.65,
    "M"
   ],
   [
-   71.92,
-   72.04,
+   57.65,
+   57.85,
+   "T"
+  ],
+  [
+   57.85,
+   57.91,
+   "M"
+  ],
+  [
+   57.91,
+   57.97,
    "A"
   ],
   [
-   72.04,
-   72.39,
-   "T"
-  ],
-  [
-   72.39,
-   72.46,
-   "E"
-  ],
-  [
-   72.46,
-   72.61,
+   57.97,
+   58.05,
    "M"
   ],
   [
-   72.61,
-   73.14,
-   "T"
-  ],
-  [
-   73.14,
-   73.21,
+   58.05,
+   58.16,
    "O"
   ],
   [
-   73.21,
-   73.42,
+   58.16,
+   58.37,
    "T"
   ],
   [
-   73.42,
-   73.49,
-   "E"
-  ],
-  [
-   73.49,
-   73.63,
-   "T"
-  ],
-  [
-   73.63,
-   73.74,
+   58.37,
+   58.45,
    "M"
   ],
   [
-   73.74,
-   73.86,
-   "E"
+   58.45,
+   58.56,
+   "O"
   ],
   [
-   73.86,
-   74.14,
+   58.56,
+   58.84,
    "T"
   ],
   [
-   74.14,
-   74.42,
+   58.84,
+   58.91,
+   "E"
+  ],
+  [
+   58.91,
+   58.98,
+   "F"
+  ],
+  [
+   58.98,
+   59.05,
+   "T"
+  ],
+  [
+   59.05,
+   59.42,
+   "M"
+  ],
+  [
+   59.42,
+   59.57,
+   "T"
+  ],
+  [
+   59.57,
+   63.04,
    null
   ]
  ],
  "_fiche": {
-  "lieu": "cuisine",
-  "lieu_precis": "modern messy kitchen with washing machine microwave and stainless steel refrigerator",
+  "lieu": "bar",
+  "lieu_precis": "empty small cozy pub interior with wooden counter and stool",
   "interieur": true,
-  "moment": "nuit",
+  "moment": "soir",
   "meteo": "",
   "occasion": "",
   "ambiance": "dispute",
   "niveau": "modeste",
   "details": [
-   "washing machine next to microwave",
-   "coffee machine on counter",
-   "stainless steel refrigerator",
-   "green potted plant",
+   "wooden counter",
+   "beer taps",
+   "empty stools",
+   "glasses on a table",
    "tiled walls"
   ],
-  "lumiere": "bright interior ceiling light",
-  "panneaux": [],
+  "lumiere": "dim warm yellow interior light",
+  "panneaux": [
+   "Bar"
+  ],
   "ecran_tel": "",
   "animations": [],
   "personnages": {
-   "invite": {
+   "envoyee": {
     "genre": "h",
     "age": 30,
-    "corpulence": "moyen",
-    "taille": "moyen",
-    "cheveux": "court",
-    "c_cheveux": "noir",
-    "barbe": "aucune",
-    "lunettes": false,
-    "tenue": "pyjama",
-    "haut": "tshirt",
-    "c_haut": "orange",
-    "etat_tenue": []
-   },
-   "presentateur": {
-    "genre": "h",
-    "age": 28,
     "corpulence": "mince",
     "taille": "moyen",
     "cheveux": "court",
     "c_cheveux": "noir",
     "barbe": "aucune",
     "lunettes": false,
-    "tenue": "pyjama",
-    "haut": "debardeur",
+    "tenue": "normale",
+    "haut": "tshirt",
     "c_haut": "noir",
+    "etat_tenue": []
+   },
+   "invite": {
+    "genre": "h",
+    "age": 25,
+    "corpulence": "mince",
+    "taille": "moyen",
+    "cheveux": "tresses",
+    "c_cheveux": "noir",
+    "barbe": "aucune",
+    "lunettes": false,
+    "tenue": "normale",
+    "c_haut": "orange",
+    "etat_tenue": []
+   },
+   "presentateur": {
+    "genre": "h",
+    "age": 25,
+    "corpulence": "mince",
+    "taille": "moyen",
+    "cheveux": "rase",
+    "c_cheveux": "brun",
+    "barbe": "aucune",
+    "lunettes": false,
+    "tenue": "normale",
+    "haut": "capuche",
+    "c_haut": "bleu",
     "etat_tenue": []
    }
   },
   "repliques": {
    "0": {
-    "emotion": "colere",
-    "intensite": 2,
-    "geste": "telephone",
-    "cible": "autre"
+    "emotion": "fatigue",
+    "intensite": 1
    },
    "1": {
-    "emotion": "blase",
-    "intensite": 1,
-    "geste": "explique",
-    "cible": "autre"
+    "emotion": "neutre",
+    "intensite": 1
    },
    "2": {
-    "emotion": "neutre",
-    "intensite": 1,
-    "geste": "explique",
-    "cible": "autre"
+    "emotion": "colere",
+    "intensite": 2
    },
    "3": {
-    "emotion": "colere",
-    "intensite": 2,
-    "geste": "telephone",
-    "signe": "veine",
-    "cible": "autre"
+    "emotion": "neutre",
+    "intensite": 1
    },
    "4": {
     "emotion": "neutre",
-    "intensite": 1,
-    "geste": "explique",
-    "cible": "autre"
+    "intensite": 1
    },
    "5": {
     "emotion": "neutre",
     "intensite": 1,
-    "geste": "explique",
-    "cible": "autre"
+    "objet": "verre",
+    "action": "tenir",
+    "mot_objet": "boire un coup"
    },
    "6": {
-    "emotion": "neutre",
-    "intensite": 1,
-    "geste": "explique",
-    "cible": "autre"
+    "emotion": "colere",
+    "intensite": 2
    },
    "7": {
-    "emotion": "colere",
-    "intensite": 3,
-    "geste": "telephone",
-    "signe": "veine",
-    "cible": "autre"
+    "emotion": "neutre",
+    "intensite": 1
    },
    "8": {
-    "emotion": "neutre",
-    "intensite": 1,
-    "geste": "explique",
-    "cible": "autre"
+    "emotion": "colere",
+    "intensite": 1
    },
    "9": {
     "emotion": "neutre",
-    "intensite": 1,
-    "geste": "explique",
-    "cible": "autre"
+    "intensite": 1
    },
    "10": {
     "emotion": "colere",
-    "intensite": 2,
-    "geste": "stop",
-    "cible": "autre"
+    "intensite": 1
    },
    "11": {
-    "emotion": "fatigue",
-    "intensite": 2,
-    "geste": "telephone",
-    "cible": "autre"
+    "emotion": "neutre",
+    "intensite": 1
    },
    "12": {
-    "emotion": "fatigue",
-    "intensite": 2,
-    "geste": "telephone",
-    "cible": "autre"
+    "emotion": "colere",
+    "intensite": 2
    },
    "13": {
-    "emotion": "fatigue",
-    "intensite": 1,
-    "geste": "telephone",
-    "cible": "autre"
+    "emotion": "neutre",
+    "intensite": 1
    },
    "14": {
-    "emotion": "gene",
-    "intensite": 2,
-    "geste": "explique",
-    "signe": "goutte",
-    "cible": "autre"
+    "emotion": "colere",
+    "intensite": 2
    },
    "15": {
     "emotion": "neutre",
-    "intensite": 1,
-    "geste": "explique",
-    "cible": "autre"
+    "intensite": 1
    },
    "16": {
-    "emotion": "neutre",
-    "intensite": 1,
-    "geste": "explique",
-    "cible": "autre"
+    "emotion": "colere",
+    "intensite": 1
    },
    "17": {
     "emotion": "neutre",
-    "intensite": 1,
-    "geste": "explique",
-    "cible": "autre"
+    "intensite": 1
    },
    "18": {
-    "emotion": "choc",
-    "intensite": 3,
-    "geste": "telephone",
-    "signe": "etoiles",
-    "cible": "autre"
+    "emotion": "neutre",
+    "intensite": 1
+   },
+   "19": {
+    "emotion": "colere",
+    "intensite": 2
+   },
+   "20": {
+    "emotion": "neutre",
+    "intensite": 1
+   },
+   "21": {
+    "emotion": "neutre",
+    "intensite": 1
+   },
+   "22": {
+    "emotion": "neutre",
+    "intensite": 1
+   },
+   "23": {
+    "emotion": "colere",
+    "intensite": 2
+   },
+   "24": {
+    "emotion": "neutre",
+    "intensite": 1
+   },
+   "25": {
+    "emotion": "colere",
+    "intensite": 2
+   },
+   "26": {
+    "emotion": "neutre",
+    "intensite": 1
+   },
+   "27": {
+    "emotion": "neutre",
+    "intensite": 1
+   },
+   "28": {
+    "emotion": "colere",
+    "intensite": 2
+   },
+   "29": {
+    "emotion": "neutre",
+    "intensite": 1
+   },
+   "30": {
+    "emotion": "neutre",
+    "intensite": 1
+   },
+   "31": {
+    "emotion": "neutre",
+    "intensite": 1
+   },
+   "32": {
+    "emotion": "colere",
+    "intensite": 2
+   },
+   "33": {
+    "emotion": "neutre",
+    "intensite": 1
+   },
+   "34": {
+    "emotion": "colere",
+    "intensite": 1
+   },
+   "35": {
+    "emotion": "neutre",
+    "intensite": 1
+   },
+   "36": {
+    "emotion": "fatigue",
+    "intensite": 1
+   },
+   "37": {
+    "emotion": "neutre",
+    "intensite": 1
+   },
+   "38": {
+    "emotion": "neutre",
+    "intensite": 1
+   },
+   "39": {
+    "emotion": "neutre",
+    "intensite": 1
+   },
+   "40": {
+    "emotion": "sceptique",
+    "intensite": 1
+   },
+   "41": {
+    "emotion": "colere",
+    "intensite": 1
+   },
+   "42": {
+    "emotion": "neutre",
+    "intensite": 1
+   },
+   "43": {
+    "emotion": "neutre",
+    "intensite": 1
+   },
+   "44": {
+    "emotion": "panique",
+    "intensite": 2
+   },
+   "45": {
+    "emotion": "neutre",
+    "intensite": 1
    }
   },
   "reactions": [
    {
-    "n": 1,
-    "qui": "presentateur",
-    "mot": "million",
-    "reaction": "yeux_au_ciel"
-   },
-   {
-    "n": 3,
+    "n": 2,
     "qui": "invite",
-    "mot": "million",
+    "mot": "réponse",
     "reaction": "sourire_coin"
    },
    {
-    "n": 7,
+    "n": 6,
     "qui": "invite",
-    "mot": "million",
-    "reaction": "gene"
+    "mot": "logique",
+    "reaction": "sourire_coin"
    },
    {
-    "n": 11,
+    "n": 12,
     "qui": "invite",
-    "mot": "couché",
+    "mot": "pareil",
     "reaction": "sourire_coin"
    },
    {
     "n": 14,
-    "qui": "presentateur",
-    "mot": "tranquille",
-    "reaction": "yeux_au_ciel"
+    "qui": "invite",
+    "mot": "froid",
+    "reaction": "sourire_coin"
+   },
+   {
+    "n": 23,
+    "qui": "invite",
+    "mot": "fous",
+    "reaction": "sourire_coin"
+   },
+   {
+    "n": 25,
+    "qui": "invite",
+    "mot": "daronne",
+    "reaction": "sourire_coin"
    }
   ],
   "source": "video",
-  "controles": 8
+  "controles": 4
  },
  "equipe": [
   {
@@ -4448,7 +5570,7 @@
    "poste": "ingé son",
    "controle": "mots à une vitesse possible",
    "ok": true,
-   "detail": "2 mot(s) trop courts",
+   "detail": "3 mot(s) trop courts",
    "revoir": false
   },
   {
@@ -4469,28 +5591,21 @@
    "poste": "ingé son",
    "controle": "deux transcriptions d'accord",
    "ok": true,
-   "detail": "91 % de mots identiques, 3 doute(s), 1 tranché(s) par une 3e écoute, 0 corrigé(s)",
+   "detail": "83 % de mots identiques, 8 doute(s), 5 tranché(s) par une 3e écoute, 6 corrigé(s)",
    "revoir": false
   },
   {
    "poste": "casting voix",
    "controle": "témoin image (qui parle dans l'original)",
    "ok": true,
-   "detail": "40/40 phrases lisibles (Gemini (vidéo entière), mouvements)",
+   "detail": "57/57 phrases lisibles (Gemini (vidéo entière), visages, mouvements)",
    "revoir": false
   },
   {
    "poste": "casting voix",
-   "controle": "le son et l'image sont d'accord",
+   "controle": "plusieurs personnages joués par la même voix",
    "ok": true,
-   "detail": "5 % de désaccord",
-   "revoir": false
-  },
-  {
-   "poste": "casting voix",
-   "controle": "parole répartie entre les personnages",
-   "ok": true,
-   "detail": "2 voix, la plus bavarde dit 66 %",
+   "detail": "3 personnages vus dans l'original",
    "revoir": false
   },
   {
@@ -4511,7 +5626,7 @@
    "poste": "scripte",
    "controle": "autant de personnages que de voix",
    "ok": true,
-   "detail": "2 voix, 2 personnage(s)",
+   "detail": "3 voix, 3 personnage(s)",
    "revoir": false
   },
   {
@@ -4553,7 +5668,7 @@
    "poste": "fiche de tournage",
    "controle": "contrôle 1 : règles (cohérence avec ce qui est dit)",
    "ok": true,
-   "detail": "décor : — -> tiled walls (cité dans le dialogue ou entendu); réplique 0 objet : telephone -> — (on ne parle pas de téléphone); réplique 3 objet : telephone -> — (on ne parle pas de téléphone (corrigé)",
+   "detail": "décor : — -> glasses on a table (cité dans le dialogue ou entendu); décor : — -> tiled walls (cité dans le dialogue ou entendu); réplique 5 objet : — -> verre (« boire un coup » est dit) (corrigé)",
    "revoir": false
   },
   {
@@ -4571,38 +5686,31 @@
    "revoir": false
   }
  ],
- "_separes": true,
- "_decors_semi": [
-  0,
-  1
- ],
- "_decors_cles": {
-  "0": "ce68451b4704e11f",
-  "1": "f7bf73c4b9bad9ff"
- },
+ "_decors_semi": [],
+ "_decors_cles": {},
  "_voix_hz": {
-  "presentateur": 108,
-  "invite": 150
+  "presentateur": 161,
+  "invite": 190
  },
  "_voix_genre": {
-  "presentateur": "h",
-  "invite": "h"
+  "presentateur": "h"
  },
  "_voix_timbre": {
-  "presentateur": 1025,
-  "invite": 986
+  "presentateur": 962,
+  "invite": 974
  },
  "_voix_mesuree": [
   "presentateur",
-  "invite"
+  "invite",
+  "envoyee"
  ],
  "_voix_ina": {
   "presentateur": "h",
   "invite": "h"
  },
  "_voix_vtl": {
-  "presentateur": 17.0,
-  "invite": 17.33
+  "presentateur": 17.39,
+  "invite": 17.57
  },
  "_voix_vtl_genre": {
   "presentateur": "h",
@@ -4616,80 +5724,82 @@
   "presentateur": {
    "fiche": {
     "genre": "h",
-    "age": 28,
+    "age": 25,
     "corpulence": 0.12,
     "taille": 1.04,
     "peau": [
-     176,
-     118,
-     82
+     246,
+     205,
+     172
     ],
     "visage": "long",
     "iris": [
      80,
-     50,
-     30
+     130,
+     90
     ],
-    "yeux": 0.9966314653373013,
+    "yeux": 1.0673614919304348,
     "nez": "droit",
-    "levres": 0.906159937024113,
-    "sourcils": 1.0371769919927358,
-    "cheveux": "banane",
+    "levres": 1.2447985450039747,
+    "sourcils": 1.4633424375260944,
+    "cheveux": "rase",
     "c_cheveux": [
-     40,
-     40,
-     46
+     70,
+     48,
+     36
     ],
     "barbe": "",
     "lunettes": "",
     "maquillage": false
    },
    "costume": {
-    "haut": "tshirt",
+    "haut": "capuche",
     "c_haut": [
-     240,
-     130,
-     60
+     60,
+     110,
+     200
     ],
     "motif": "uni",
-    "bas": "jean",
-    "c_bas": [
-     70,
-     100,
-     150
-    ],
-    "chaussures": "chaussons",
-    "c_chaussures": [
-     240,
-     240,
-     240
-    ],
-    "details": [
-     "boucles_oreilles"
-    ],
     "c_motif": [
-     172,
-     93,
-     43
+     43,
+     79,
+     144
     ],
-    "cheveux": "ondule",
+    "bas": "pantalon",
+    "c_bas": [
+     150,
+     130,
+     100
+    ],
+    "chaussures": "bottes",
+    "c_chaussures": [
+     60,
+     70,
+     100
+    ],
+    "details": [],
+    "c_dessous": [
+     245,
+     245,
+     245
+    ],
     "c_cheveux": [
-     40,
-     40,
-     46
+     70,
+     48,
+     36
     ]
    }
   },
   "invite": {
    "fiche": {
     "genre": "h",
-    "age": 30,
-    "corpulence": 0.32,
+    "age": 25,
+    "corpulence": 0.12,
     "taille": 1.04,
     "peau": [
-     255,
-     226,
-     200
+     246,
+     205,
+     172
     ],
     "visage": "carre",
     "iris": [
@@ -4697,56 +5807,119 @@
      75,
      45
     ],
-    "yeux": 1.0706457873144861,
-    "nez": "rond",
-    "levres": 1.1371568630363487,
-    "sourcils": 1.162333743359148,
-    "cheveux": "court",
+    "yeux": 1.039765021767945,
+    "nez": "fin",
+    "levres": 1.1017345889048755,
+    "sourcils": 1.1382708456506905,
+    "cheveux": "court_texture",
     "c_cheveux": [
-     70,
-     45,
+     35,
+     30,
      32
     ],
-    "barbe": null,
-    "lunettes": null,
-    "maquillage": false,
-    "espece": "telephone",
-    "c_poil": [
-     48,
-     46,
-     52
-    ]
+    "barbe": "bouc",
+    "lunettes": "",
+    "maquillage": false
    },
    "costume": {
     "haut": "chemise",
     "c_haut": [
-     150,
-     150,
-     158
+     240,
+     130,
+     60
     ],
-    "motif": "uni",
     "bas": "pantalon",
     "c_bas": [
-     70,
-     100,
-     150
+     30,
+     30,
+     36
     ],
     "chaussures": "ville",
     "c_chaussures": [
-     240,
-     240,
-     240
+     30,
+     30,
+     30
     ],
-    "details": [],
+    "details": [
+     "noeud_pap"
+    ],
+    "motif": "uni",
     "c_motif": [
-     108,
-     108,
-     113
+     172,
+     93,
+     43
     ],
+    "c_cheveux": [
+     35,
+     30,
+     32
+    ]
+   }
+  },
+  "envoyee": {
+   "fiche": {
+    "genre": "h",
+    "age": 30,
+    "corpulence": 0.12,
+    "taille": 1.04,
+    "peau": [
+     246,
+     205,
+     172
+    ],
+    "visage": "rond",
+    "iris": [
+     120,
+     120,
+     110
+    ],
+    "yeux": 1.0322143912794395,
+    "nez": "droit",
+    "levres": 1.1654210205830289,
+    "sourcils": 1.199824688713935,
     "cheveux": "court",
     "c_cheveux": [
-     70,
-     45,
+     35,
+     30,
+     32
+    ],
+    "barbe": "moustache",
+    "lunettes": "",
+    "maquillage": false
+   },
+   "costume": {
+    "haut": "tshirt",
+    "c_haut": [
+     40,
+     40,
+     46
+    ],
+    "motif": "uni",
+    "c_motif": [
+     28,
+     28,
+     33
+    ],
+    "bas": "jean",
+    "c_bas": [
+     150,
+     130,
+     100
+    ],
+    "chaussures": "ville",
+    "c_chaussures": [
+     50,
+     35,
+     25
+    ],
+    "details": [
+     "bretelles",
+     "boucles_oreilles",
+     "bracelet"
+    ],
+    "c_cheveux": [
+     35,
+     30,
      32
     ]
    }
@@ -4754,23 +5927,52 @@
  },
  "_type_couverture": "reaction",
  "realisation": {
-  "moment": "nuit",
+  "moment": "soir",
   "lieux": [
-   "rue",
-   "salon"
+   "bar"
   ],
   "gags": [
-   "Post-it sur le frigo : Compter les moutons c'est has been"
+   "Affiche: Happy Hour éternel",
+   "Bière 0% interdite"
   ],
   "ambiances": [
+   "neon",
    "poussiere"
   ],
   "source": "auteur+image",
   "tenues": {
-   "presentateur": "tshirt",
-   "invite": "chemise"
+   "presentateur": "capuche",
+   "invite": "chemise",
+   "envoyee": "tshirt"
   },
   "plans": [
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
    "large/fixe",
    "large/fixe",
    "large/fixe",
@@ -4793,9 +5995,9 @@
   ]
  },
  "_recette": {
-  "lieu": "rue",
-  "animal": true,
-  "persos": 2,
+  "lieu": "bar",
+  "animal": false,
+  "persos": 3,
   "partie": false
  }
 }
