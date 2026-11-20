@@ -571,7 +571,7 @@ def decor_compose(F, lieu_en=""):
     niv = NIVEAU_EN.get(F.get("niveau") or "", "")
     if niv and not any(w in base.lower() for w in niv.split()): base = f"{niv} {base}"
     dets = [d for d in F.get("details") or [] if d.lower() not in base.lower()][:3]
-    return ", ".join([base] + dets)
+    return base + (" with " + ", ".join(dets) if dets else "")
 
 
 def lumiere(F):
@@ -653,3 +653,141 @@ def resume(F):
     objs = ", ".join(sorted({q["objet"] for q in (F.get("repliques") or {}).values() if q.get("objet")}))
     return (f"Lieu : {F.get('lieu')} ({F.get('lieu_precis')}) ; moment : {F.get('moment')} ; météo : {F.get('meteo') or 'normale'} ; "
             f"ambiance : {F.get('ambiance')} ; détails : {', '.join(F.get('details') or [])} ; personnages : {pers} ; objets : {objs or 'aucun'}")
+
+
+# ------------------------------------------------------------------ idées 9 et 11 : Gemini juge les décors peints
+def _gemini_images(images, texte, timeout=120):
+    """Question à Gemini avec des images (tableaux RGB) ; réponse JSON (dict) ou None."""
+    cle = os.environ.get("GEMINI_API_KEY")
+    if not cle or os.environ.get("DECOR_GEMINI", "1") == "0": return None
+    import cv2, reseau, video_ia
+    if "gemini" in reseau.HORS_SERVICE: return None
+    parts = []
+    for im in images:
+        ok, jpg = cv2.imencode(".jpg", cv2.cvtColor(cv2.resize(im, (432, 768), interpolation=cv2.INTER_AREA), cv2.COLOR_RGB2BGR), [cv2.IMWRITE_JPEG_QUALITY, 82])
+        if ok: parts.append({"inline_data": {"mime_type": "image/jpeg", "data": base64.b64encode(jpg.tobytes()).decode()}})
+    parts.append({"text": texte})
+    corps = {"contents": [{"parts": parts}], "generationConfig": {"temperature": 0.1, "response_mime_type": "application/json"}}
+    for modele in video_ia.MODELES:
+        req = urllib.request.Request(f"https://generativelanguage.googleapis.com/v1beta/models/{modele}:generateContent",
+                                     data=json.dumps(corps).encode(), method="POST", headers={"Content-Type": "application/json", "x-goog-api-key": cle})
+        try:
+            d = json.loads(reseau.ouvrir(req, timeout=timeout, essais=2))
+            txt = "".join(p.get("text", "") for c in d.get("candidates") or [] for p in (c.get("content") or {}).get("parts") or [])
+            m = re.search(r"\{.*\}", txt, re.S)
+            if m:
+                reseau.UTILISES["gemini"] = reseau.UTILISES.get("gemini", 0) + 1
+                return json.loads(m.group(0))
+        except Exception as e:
+            if any(x in str(e).lower() for x in ("quota", "exhausted", "per day")): reseau.HORS_SERVICE.add("gemini"); break
+    return None
+
+
+def _boite(b, W=1080, H=1920):
+    """[y0, x0, y1, x1] sur 0-1000 (format de Gemini) -> [x0, y0, x1, y1] en pixels, ou None."""
+    try:
+        y0, x0, y1, x1 = [float(v) for v in b][:4]
+        if not (0 <= x0 < x1 <= 1000 and 0 <= y0 < y1 <= 1000) or (x1 - x0) * (y1 - y0) < 400: return None
+        return [int(x0 * W / 1000), int(y0 * H / 1000), int(x1 * W / 1000), int(y1 * H / 1000)]
+    except (TypeError, ValueError): return None
+
+
+def choisir_decor(images, F):
+    """Idée 9 : parmi les tirages déjà bien cadrés, celui qui colle le mieux à la fiche ; un tirage avec du texte absurde ou une
+    personne peinte est refusé. Renvoie (indice ou None, zones du décor choisi : fenêtre et télé, pour la pluie et la lueur)."""
+    if not images: return None, {}
+    txt = (f"Voici {len(images)} décors peints (numérotés à partir de 0) pour cette scène : {resume(F)}.\n"
+           "Choisis celui qui colle le mieux à l'histoire et à l'ambiance. Refuse un décor qui contient une personne, un visage ou du "
+           "texte illisible. Donne aussi, dans le décor choisi, la boîte de la fenêtre, de la télévision et d'un panneau / tableau / "
+           "enseigne VIDE où l'on pourrait écrire, s'il y en a, au format [y0, x0, y1, x1] sur 0-1000. JSON : {\"choix\": n ou -1 si "
+           "aucun ne va, \"refuses\": [n…], \"fenetre\": [..] ou [], \"tele\": [..] ou [], \"panneau\": [..] ou []}")
+    r = _gemini_images(images, txt)
+    if not isinstance(r, dict): return None, {}
+    try: ch = int(r.get("choix"))
+    except (TypeError, ValueError): ch = None
+    if ch is not None and not 0 <= ch < len(images): ch = None
+    zo = {k: _boite(r.get(k)) for k in ("fenetre", "tele", "panneau")}
+    return ch, {k: v for k, v in zo.items() if v}
+
+
+def decor_convient(image, F):
+    """Idée 11 : un décor de la banque n'est repris que s'il colle à la fiche (True / False ; None si Gemini ne répond pas)."""
+    r = _gemini_images([image], f"Ce décor convient-il à cette scène : {resume(F)} ? Il doit montrer le bon lieu, le bon moment de la journée "
+                                "et l'ambiance ; les détails manquants sont permis. JSON : {\"convient\": true/false, \"raison\": \"...\"}", timeout=60)
+    if isinstance(r, dict) and isinstance(r.get("convient"), bool): return r["convient"]
+    return None
+
+
+# ------------------------------------------------------------------ idée 25 : la vidéo FINIE est-elle fidèle à l'audio ?
+def fidelite(video, sk, R=None):
+    """Gemini regarde ET écoute notre vidéo finie et la compare à la fiche et au dialogue : ce qui ne colle pas (objet cité absent,
+    tenue hors sujet, expression contraire à la voix, décor de jour pour une scène de nuit…). Renvoie [{t, probleme, champ, valeur}]
+    (champ / valeur : correction automatique de la fiche quand c'est possible), ou None si Gemini n'a pas pu regarder. FIDELITE=0."""
+    if os.environ.get("FIDELITE", "1") == "0" or not actif() or not video or not os.path.exists(video): return None
+    F = sk.get("_fiche")
+    if not isinstance(F, dict): return None
+    lignes = "\n".join(f"{i}. [{r.get('p')}] {str(r.get('t') or '')[:140]}" for i, r in enumerate(sk.get("repliques") or []))
+    txt = (f"Voici NOTRE petit dessin animé (style croquis voulu : grosses têtes, personnages simples, animaux qui parlent voulus) fait "
+           f"sur un son TikTok. Dialogue :\n{lignes}\n\nFiche de tournage prévue : {resume(F)}\n\n"
+           "Regarde ET écoute la vidéo. Liste UNIQUEMENT ce qui contredit vraiment l'audio ou la fiche : un objet dont on parle et qu'on "
+           "ne voit pas, une tenue hors sujet, une expression contraire au ton de la voix, un lieu ou un moment de la journée faux, "
+           "la météo. PAS de remarque sur les sous-titres, le style du dessin, les plans ou la caméra. Pour chaque problème : \"t\" "
+           "(secondes), \"probleme\" (en français, court), et si possible la correction de la fiche : \"champ\" (lieu, moment, "
+           "meteo, personnages.<identifiant>.tenue, repliques.<n>.objet, repliques.<n>.emotion…) et \"valeur\". "
+           "JSON : {\"problemes\": [...]} (liste vide si tout colle).")
+    brut = _gemini_brut(video, txt)
+    if not isinstance(brut, dict): return None
+    out = []
+    for x in brut.get("problemes") or []:
+        if not isinstance(x, dict) or not str(x.get("probleme") or "").strip(): continue
+        pb = str(x["probleme"]).strip()[:170]
+        if re.search(r"sous-titre|caméra|plan |style|croquis|dessin simple", pb, re.I): continue
+        ch = str(x.get("champ") or "").strip()
+        try: t = float(x.get("t"))
+        except (TypeError, ValueError): t = None
+        out.append({"t": t, "probleme": pb, "champ": ch if CHAMPS_AUTORISES.match(ch) else "", "valeur": x.get("valeur")})
+    return out[:8]
+
+
+def _gemini_brut(video, texte):
+    """Comme _gemini_video, mais la réponse peut ne pas avoir de « lieu » (contrôle final)."""
+    cle = os.environ.get("GEMINI_API_KEY")
+    if not cle: return None
+    import reseau, video_ia
+    if "gemini" in reseau.HORS_SERVICE: return None
+    v = video_ia._petite(video)
+    if not v: return None
+    corps = {"contents": [{"parts": [{"inline_data": {"mime_type": "video/mp4", "data": base64.b64encode(open(v, "rb").read()).decode()}}, {"text": texte}]}],
+             "generationConfig": {"temperature": 0.1, "response_mime_type": "application/json"}}
+    for modele in video_ia.MODELES:
+        req = urllib.request.Request(f"https://generativelanguage.googleapis.com/v1beta/models/{modele}:generateContent",
+                                     data=json.dumps(corps).encode(), method="POST", headers={"Content-Type": "application/json", "x-goog-api-key": cle})
+        try:
+            d = json.loads(reseau.ouvrir(req, timeout=240, essais=2))
+            txt = "".join(p.get("text", "") for c in d.get("candidates") or [] for p in (c.get("content") or {}).get("parts") or [])
+            m = re.search(r"\{.*\}", txt, re.S)
+            if m:
+                reseau.UTILISES["gemini"] = reseau.UTILISES.get("gemini", 0) + 1
+                return json.loads(m.group(0))
+        except Exception as e:
+            if any(x in str(e).lower() for x in ("quota", "exhausted", "per day")): reseau.HORS_SERVICE.add("gemini"); break
+    return None
+
+
+DECOR_CHAMPS = re.compile(r"^(lieu|moment|meteo|ambiance|niveau|occasion|interieur)$")
+
+
+def corriger_depuis_points(sk, points):
+    """Compte rendu (principal.corriger_compte_rendu) : les corrections de la fiche portées par les points « fidélité à l'audio »
+    sont appliquées à la fiche puis au studio ; un changement de lieu / moment / météo fait repeindre le décor. Renvoie ce qui a été fait."""
+    F = sk.get("_fiche")
+    if not isinstance(F, dict): return []
+    cor = [c for p in points or [] for c in (p.get("correction") or []) if isinstance(c, dict) and CHAMPS_AUTORISES.match(str(c.get("champ") or ""))]
+    if not cor: return []
+    faites = appliquer_corrections(F, sk, [dict(c, raison=c.get("raison") or "contrôle final : pas fidèle à l'audio") for c in cor])
+    if not faites: return []
+    controle_regles(F, sk, indices_texte(sk.get("repliques") or []))       # la correction ne doit pas casser la cohérence
+    appliquer(sk, F)
+    if any(DECOR_CHAMPS.match(f.split(" :")[0]) for f in faites):
+        sk["_decors_a_refaire"] = sorted(set(sk.get("_decors_a_refaire") or []) | set(range(len(sk.get("decoupage") or []))))
+    return ["fiche de tournage : " + f for f in faites]

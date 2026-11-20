@@ -632,9 +632,13 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
     if B:                                                                  # panneaux vidés des décors IA : un vrai gag écrit, lisible
         try:
             import decors as DEC_
-            gags_ = [g for g in (B.get("gags") or []) if g] or ["Home sweet home", "Ici, on ne juge pas", "Wifi : demande à maman"]
+            gags_ = [g for g in (B.get("panneaux") or []) if g] + [g for g in (B.get("gags") or []) if g] or ["Home sweet home", "Ici, on ne juge pas", "Wifi : demande à maman"]
             k_g = 0
-            for sc_, rects in DEC_.PANNEAUX.items():
+            pann_ = {sc_: list(r_) for sc_, r_ in DEC_.PANNEAUX.items()}     # idée 22 : panneau vide repéré par Gemini dans un décor peint
+            for sc_, zo_ in (DEC_.ZONES or {}).items():
+                if zo_.get("panneau") and B.get("panneaux") and not pann_.get(sc_):
+                    x0_, y0_, x1_, y1_ = zo_["panneau"]; pann_[sc_] = [(x0_, y0_, x1_ - x0_, y1_ - y0_)]
+            for sc_, rects in pann_.items():
                 if sc_ not in decors: continue
                 im_ = Image.fromarray(decors[sc_]); dr = ImageDraw.Draw(im_)
                 for (x_, y_, w_, h_) in rects:
@@ -822,6 +826,10 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
 
     T_REAC, OBJ_DUO = {}, {}
     PH_I = {z["i"]: z for z in ph}
+    try:                                                                   # zones des décors peints (fenêtre, télé, panneau : Gemini)
+        import decors as _DZ
+        ZONES_SC = dict(_DZ.ZONES or {})
+    except Exception: ZONES_SC = {}
     import jt as _JT
 
     def t_mot(q, mot):
@@ -1176,7 +1184,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
                     elif act == "montrer": p["bras_d"] = (100, -15)                  # « regarde ça » : il le tend devant lui
                     elif act == "pianoter": p["bras_d"] = POSES["pianote"][1]; p["regard"] = (0.15 * (p.get("tq") or 0), 0.7)
                     else: p["bras_d"] = (120, -100)
-                if obj_q["objet"] == "telephone" and B and B.get("ecran_tel") and os.environ.get("ECRAN_TEL", "1") != "0":
+                if obj_q["objet"] == "telephone" and obj_q.get("action") == "telephone_oreille" and B and B.get("ecran_tel") and os.environ.get("ECRAN_TEL", "1") != "0":
                     p["ecran"] = str(B["ecran_tel"]); p["ecran_main"] = cote          # idée 21 : « Maman », « Nouveau message »
                 if obj_q["objet"] in ("cafe", "poele") and os.environ.get("ANIMATIONS", "1") != "0": p["vapeur_main"] = cote   # idée 23
         elif obj_q and act == "poche" and obj_q["fin"] - 0.15 < tm <= obj_q["fin"] + 0.9:
@@ -1346,8 +1354,15 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
 
 
     def ambiances(img, tm, sc, zb, cxb, cyb):
-        info = INFOS.get(sc, {}); amb = B["ambiances"]; P_ = PARTICULES
+        info = INFOS.get(sc) or ZONES_SC.get(sc) or {}; amb = list(B["ambiances"]) + [a for a in (B.get("animations") or []) if a == "neige"]; P_ = PARTICULES
         def ecr(x, y): return W / 2 + (x - cxb) * zb, H / 2 + (y - cyb) * zb
+        anim = B.get("animations") or ()
+        if "tele" in anim and info.get("tele") and os.environ.get("ANIMATIONS", "1") != "0":   # idée 23 : la télé allumée scintille
+            a, b = ecr(info["tele"][0], info["tele"][1]); c, d = ecr(info["tele"][2], info["tele"][3])
+            a, b, c, d = max(0, int(a)), max(0, int(b)), min(W, int(c)), min(H, int(d))
+            if c > a and d > b:
+                f_ = 0.85 + 0.2 * math.sin(tm * 7.3) * math.sin(tm * 2.1 + 1)
+                img[b:d, a:c] = np.clip(img[b:d, a:c].astype(np.float32) * f_ + np.array([0, 8, 30], np.float32) * (1.1 - f_) * 3, 0, 255).astype(np.uint8)
         if "vapeur" in amb:
             for (vx, vy) in info.get("vapeur", []):
                 for k in range(7):
@@ -1357,7 +1372,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
             for k in range(22):
                 x = (P_[k, 0] * W + math.sin(tm * 0.3 + k) * 40) % W; y = (P_[k, 1] * H * 0.7 + tm * 10 * (0.5 + P_[k, 2])) % (H * 0.75)
                 tache(img, x, y, 4 + 3 * P_[k, 3], (255, 244, 210), 0.45 * (0.5 + 0.5 * math.sin(tm * 2 + k)))
-        zone = (0, 0, W, H) if B["lieux"][min(sc, len(B["lieux"]) - 1)] == "rue" else None
+        zone = (0, 0, W, H) if (B["lieux"][min(sc, len(B["lieux"]) - 1)] == "rue" or (B.get("interieur") is False and sc not in INFOS)) else None
         if zone is None and info.get("fenetre"):
             fx0, fy0, fx1, fy1 = info["fenetre"]; a, b = ecr(fx0, fy0); c, d = ecr(fx1, fy1); zone = (int(a), int(b), int(c), int(d))
         if zone and ("pluie" in amb or "neige" in amb):

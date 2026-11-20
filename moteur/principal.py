@@ -184,7 +184,10 @@ def corriger_compte_rendu(sk, base, audios, mots, decors, fmt, points, modal_ok,
         txt = CR.texte(points, Q.get("jury"), sk.get("equipe"))
         if not txt or conf >= 100: break
         print(f"Compte rendu (tour {tour + 1}, confiance {conf}/100) : corrections demandées au robot :\n{txt}", flush=True)
-        sk4 = copy.deepcopy(sk); faits = remarque.appliquer(sk4, txt, memoriser=False)
+        sk4 = copy.deepcopy(sk)
+        try: faits_f = __import__("fiche_tournage").corriger_depuis_points(sk4, points)   # fidélité à l'audio : la fiche est corrigée
+        except Exception as e: print(f"Compte rendu : fiche de tournage non corrigée ({str(e)[:100]})", flush=True); faits_f = []
+        faits = faits_f + (remarque.appliquer(sk4, txt, memoriser=False) or [])
         if not faits: print("Compte rendu : rien que le robot sache corriger lui-même", flush=True); break
         print("Compte rendu : " + " ; ".join(faits), flush=True)
         dec4 = dict(decors or {})

@@ -304,6 +304,16 @@ def verifier(video, sk, R):
         d6 = liste_ia(video, sk, R); points += d6
         journal(f"  [vidéo finie · contrôle IA] {len(d6)} remarque(s)")
     except Exception as e: journal(f"  liste de contrôle par l'IA impossible ({str(e)[:120]})")
+    try:                                                                   # 3e contrôle de la vidéo finie (20 novembre, idée 25) : fidèle à l'audio ?
+        import fiche_tournage
+        pbs = fiche_tournage.fidelite(video, sk, R)
+        if pbs is not None:
+            for x in pbs:
+                d_ = _defaut(x["t"], "fidélité à l'audio", x["probleme"], grave=True)
+                if x.get("champ"): d_["correction"] = [{"champ": x["champ"], "valeur": x.get("valeur"), "raison": x["probleme"][:100]}]
+                points.append(d_)
+            journal(f"  [vidéo finie · fidélité à l'audio] {'✔' if not pbs else '✘'} Gemini a regardé et écouté la vidéo finie" + (f" : {len(pbs)} écart(s)" if pbs else ""))
+    except Exception as e: journal(f"  contrôle de fidélité à l'audio impossible ({str(e)[:120]})")
     for l in sk.get("equipe") or []:                                       # défauts de l'équipe que personne n'a pu corriger
         if l.get("revoir"): points.append(_defaut(None, l.get("poste", "équipe"), f"{l.get('controle')} : {l.get('detail')}"))
     points.sort(key=lambda d: (not d["grave"], d["t"] if d["t"] is not None else -1))

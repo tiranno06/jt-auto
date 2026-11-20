@@ -585,6 +585,45 @@
   prochain passage (`pannes.ajouter`). **Prévention** : image NeMo de Modal passée de Python 3.10 à 3.11 (Modal 1.7 refusera 3.10 ;
   modal~=1.6 figé dans contraintes.txt ; musique_modal.py, des sketchs, est encore en 3.10 : à changer si on la relance).
   Restent des pannes de Google (Gemini surchargé, 503) : le relais vers l'IA suivante marche.
+- **Décors et personnages en parfaite corrélation avec l'audio (choix de l'auteur du 20 novembre 2026 : 1-7, 9-16, 18-23, 25, + triple
+  contrôle avec correction automatique avant la vidéo et avant le site)** : **fiche de tournage** (`moteur/fiche_tournage.py`, FICHE=0
+  pour couper), écrite une fois à la fin de l'écoute (`doublage.preparer`) puis suivie par tous les postes : Gemini écoute ET regarde
+  l'original en entier (repli : IA de texte sur le dialogue, puis règles seules) -> lieu exact (anglais), intérieur, moment, météo,
+  occasion, ambiance, niveau de vie, 3-5 détails de l'histoire, lumière, panneaux en français, écran du téléphone, animations ; par
+  personnage : genre, âge, corpulence, taille, coiffure et couleur, barbe, lunettes, tenue, haut et couleur, ÉTAT de la tenue, métier ;
+  par réplique : émotion, intensité, geste, cible (« toi ! »), objet, action (tenir, téléphone à l'oreille, boire, manger, donner,
+  poche, montrer, pianoter), signe d'émotion ; réactions de celui qui écoute AU BON MOT. Indices sans IA : paroles (`indices_texte` :
+  « 3h du mat' », « il fait trop chaud », objets cités `OBJETS_MOTS` -> mains ou décor, occasion, niveau : loyer / bordel / villa),
+  bruits de fond (`indices_son` : CLAP pluie, orage, sirène, klaxon, télé, chien… 2 s au moins), écho de la voix (`echo` : carrelage).
+  **Triple contrôle** (bulletin de l'équipe, poste « fiche de tournage ») : 1. règles (`controle_regles` : ce qui est DIT gagne sur
+  l'IA, maillot hors plage, pyjama dehors, robe sur un homme, enfant barbu, état de tenue que rien ne justifie, signe contraire à
+  l'émotion, téléphone dont on ne parle pas, objet cité absent -> ajouté, enseigne dans un lieu privé, réaction à sa propre réplique) ;
+  2. une 2e IA d'un AUTRE fournisseur relit la fiche contre le dialogue (`controle_ia`, champs autorisés `CHAMPS_AUTORISES`,
+  FICHE_2E_AVIS=0) ; 3. ce que l'image de l'original a montré (`controle_image` : lieu et homme / femme vus) puis les règles une
+  dernière fois. `appliquer` -> sk["studio"] (moment, lieux, personnages, tenues_fiche, metiers, jeu, reactions, ambiances, animations,
+  panneaux, ecran_tel, lumiere_ambiance, interieur) et découpage (décor composé : lieu + niveau + « with » 3 détails).
+  **Décors** : description = fiche (6), lumière de l'ambiance ajoutée (7, `LUMIERE_AMBIANCE`, jamais la nuit si on dit qu'il fait jour) ;
+  Gemini choisit le tirage qui colle le mieux à la fiche parmi les bien cadrés et repère fenêtre / télé / panneau vide (9,
+  `choisir_decor`, decors.ZONES, banque `<clé>_zones.json`, DECOR_GEMINI=0) ; composition copiée sur l'original (10,
+  `decors.guide_original` : image où les personnes prennent le moins de place + leurs boîtes ; Modal : profondeur Depth Anything,
+  personnes effacées, ControlNet depth SDXL « diffusers/controlnet-depth-sdxl-1.0-small », influence 0,45, 2 tirages guidés + 1 libre ;
+  COMPO_ORIGINALE=0) ; décor de la banque repris seulement s'il colle à la fiche (11, `decor_convient`) ; partie 2, 3… : même décor
+  (12, sk["_decors_cles"] -> `suites.preparer` -> sk["_suite_decors"], SUITE_DECORS=0). **Personnages** : casting et tenue de la fiche
+  (13, `studio.habiller_fiche`, jamais par-dessus un costume imposé ou de métier, choix de l'auteur toujours prioritaire) ; état de la
+  tenue dessiné (14, `perso_croquis.details` : mouillée + flaque, auréoles de sueur, tache, accroc ; maquillage qui coule dans
+  `croquis.visage`) ; expression qui suit la voix PENDANT la phrase (15, `cartoon.emo_voix` : voix qui monte = colère qui grandit,
+  voix qui retombe = abattement, tenue 0,4 s, EXPRESSION_VOIX=0) ; réaction de celui qui écoute au mot exact (16, `REAC_F`, instant du
+  mot `t_mot`) ; « toi ! » = doigt pointé, « tiens » = l'objet passe de main en main (18) ; objet qui arrive quand on en parle, sert
+  (boire, manger bouche pleine, montrer, pianoter, à l'oreille) puis repart ou va dans la poche (19) ; signes d'émotion au moment fort
+  (20 : veine, nuage qui pleut, cœurs, étoiles, goutte, fumée des oreilles ; SIGNES=0). **Détails** : étiquette de l'écran du
+  téléphone au-dessus de la tête (21, « Maman », seulement pour l'appel voulu par la fiche ; ECRAN_TEL=0) ; panneaux du décor écrits en
+  français (22 : panneaux de la fiche d'abord, aussi dans le panneau vide repéré par Gemini) ; animations (23 : vapeur du café / de la
+  poêle tenus, télé qui scintille, pluie dans la fenêtre ou dehors, tout le monde sursaute sur une porte qui claque / un verre cassé /
+  le tonnerre ; ANIMATIONS=0). **Contrôle final « fidèle à l'audio »** (25, `fiche_tournage.fidelite` dans `verif_finale.verifier`,
+  FIDELITE=0) : Gemini regarde et écoute NOTRE vidéo finie avec la fiche et le dialogue ; chaque écart = point grave « fidélité à
+  l'audio », avec la correction de la fiche quand c'est possible ; le compte rendu (`principal.corriger_compte_rendu`) applique ces
+  corrections (`corriger_depuis_points` : fiche -> studio, décor repeint si lieu / moment / météo changent) en plus de « Dis ce qui ne
+  va pas », redessine et garde la meilleure version AVANT l'archivage et le site. Pas fait (non choisis) : 8, 17, 24.
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.

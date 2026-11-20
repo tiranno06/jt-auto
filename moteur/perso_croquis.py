@@ -255,9 +255,9 @@ def details(zone, g, p, T, dec):
             pts = [(bx + ux * larg + (5 if k % 2 else -5) * R / 80, y0_ + (y1_ - y0_) * k / 5) for k in range(6)]
             C.encre(zone, pts, ep * 0.8)
     if "mouille" in etats:                                                 # gouttes qui tombent + petite flaque sous les pieds
-        for k in range(5):
-            ph_ = (t * 0.8 + k * 0.23) % 1.0
-            C.goutte(zone, (cx + R * (-0.9 + 0.45 * k), cy - R * 0.4 + R * 2.2 * ph_), R * 0.06, ep * 0.6)
+        for k, ux in enumerate((-1.15, -0.95, 0.95, 1.15)):                # gouttes sur les côtés : jamais devant le visage (sinon on croit à des larmes)
+            ph_ = (t * 0.8 + k * 0.27) % 1.0
+            C.goutte(zone, (cx + R * ux, cy - R * 0.2 + R * 2.0 * ph_), R * 0.06, ep * 0.6)
         cal = np.zeros_like(zone); _cv2.ellipse(cal, (int(bx), int(pied_y + R * 0.05)), (int(R * 0.9), int(R * 0.14)), 0, 0, 360, (150, 200, 235), -1, _cv2.LINE_AA)
         _melange(zone, cal, 0.45)
     sg = p.get("signe"); u = float(p.get("signe_u") or 1.0)

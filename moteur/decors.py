@@ -1,6 +1,6 @@
 """Client des décors du moteur cartoon : demande à Modal (Stable Diffusion XL) un décor par scène et le met au format 1080x1920.
 En cas de souci (Modal indisponible, modèle inaccessible), renvoie {} : le moteur cartoon utilise alors des fonds unis pastel."""
-import hashlib, io, os, re
+import hashlib, io, json, os, re
 import numpy as np, cv2
 from PIL import Image
 
@@ -30,6 +30,10 @@ def _ranger(d, im, prof=None):
     _compter()
 
 LUMIERES = ("bright daylight", "warm golden evening light, lamps on", "night, dark blue ambience, warm lamp light", "lamps on", "daylight")
+try:                                                                       # lumières d'ambiance de la fiche de tournage (20 novembre, idée 7)
+    import fiche_tournage as _FT
+    LUMIERES = LUMIERES + tuple(_FT.LUMIERE_AMBIANCE.values()) + ("rainy weather outside",)
+except Exception as _e: pass
 VIDES = set("a an the with of and on in at to its their wall light".split())
 
 def _mots(d):
@@ -246,6 +250,56 @@ def generer(decoupage, graine=7, delai=1200, lumiere="", plans=None):  # 1re foi
 
 
 SEMI = set()                                                               # scènes dont le décor est semi-réaliste (dernier appel)
+ZONES = {}                                                                 # scène -> {"fenetre": [x0, y0, x1, y1], "tele": […]} (pixels 1080x1920)
+
+
+class _ZonesBanque(dict):
+    """Zones (fenêtre, télé) des décors de la banque, lues au besoin dans decors/<clé>_zones.json."""
+    def __contains__(self, cle):
+        if dict.__contains__(self, cle): return True
+        f = os.path.join(BANQUE, str(cle) + "_zones.json")
+        if os.path.exists(f):
+            try: self[cle] = json.load(open(f)); return True
+            except (OSError, ValueError): return False
+        return False
+
+
+ZONES_BANQUE = _ZonesBanque()
+
+
+def guide_original(sk):
+    """Idée 10 : image de la vidéo d'origine qui sert de guide de composition (même disposition des meubles, de la fenêtre…) :
+    celle où les personnes prennent le moins de place, avec leurs boîtes (effacées de la carte de profondeur sur Modal).
+    (png 880x1536, [[x0, y0, x1, y1] en fraction de l'image]) ou None. COMPO_ORIGINALE=0 pour couper."""
+    if os.environ.get("COMPO_ORIGINALE", "1") == "0": return None
+    v = (sk.get("doublage") or {}).get("video_origine") or ""
+    if not v or not os.path.exists(v): return None
+    try:
+        cap = cv2.VideoCapture(v); n = int(cap.get(cv2.CAP_PROP_FRAME_COUNT) or 0); fps = cap.get(cv2.CAP_PROP_FPS) or 30.0
+        choix = None
+        try:
+            import personnes_vues
+            imgs = personnes_vues.lire(v)
+            if imgs:
+                cap.set(cv2.CAP_PROP_POS_MSEC, 500); ok, f0 = cap.read()
+                hh, ww = (f0.shape[:2] if ok else (1920, 1080))
+                aire = lambda bx: sum(max(0, b[2] - b[0]) * max(0, b[3] - b[1]) for b in bx) / float(ww * hh)
+                t_, bx_, _o = min(imgs, key=lambda x: aire(x[1]))
+                choix = (t_, [[b[0] / ww, b[1] / hh, b[2] / ww, b[3] / hh] for b in bx_])
+        except Exception as _e: __import__("pannes").avale(_e)
+        t = choix[0] if choix else (n / fps) * 0.5
+        cap.set(cv2.CAP_PROP_POS_MSEC, t * 1000); ok, f = cap.read(); cap.release()
+        if not ok: return None
+        h, w = f.shape[:2]
+        if w / h > 9 / 16:                                                 # vidéo plus large que 9:16 : on garde le centre
+            nw = int(h * 9 / 16); x0 = (w - nw) // 2; f = f[:, x0:x0 + nw]
+            boites = [[(b[0] * w - x0) / nw, b[1], (b[2] * w - x0) / nw, b[3]] for b in (choix[1] if choix else [])]
+        else: boites = choix[1] if choix else []
+        f = cv2.resize(f, (880, 1536), interpolation=cv2.INTER_AREA)
+        ok, png = cv2.imencode(".png", f)
+        return (png.tobytes(), [[float(min(1, max(0, v_))) for v_ in b] for b in boites]) if ok else None
+    except Exception as e:
+        print(f"  guide de composition de l'original impossible ({str(e)[:100]})", flush=True); return None
 
 def generer_semi(sk, graine=7, scenes=None, delai=1200):
     """Décors « semi-réalistes » (moteur/semi_realiste.py, réglage STYLE_DECOR) : une peinture par lieu (3 tirages, le mieux cadré gagne), cadrée pour que les pieds
@@ -256,7 +310,9 @@ def generer_semi(sk, graine=7, scenes=None, delai=1200):
     dec = sk.get("decoupage") or []
     if not dec: return {}
     roles = [r for r in dict.fromkeys(x["p"] for x in sk.get("repliques", [])) if r != "narrateur"]
-    try: B_ = studio.bible(sk, roles); lieux = B_["lieux"]; lum = B_.get("style_ia") or ""
+    try:
+        B_ = studio.bible(sk, roles); lieux = B_["lieux"]; lum = B_.get("style_ia") or ""
+        if B_.get("lumiere_ambiance"): lum = (lum + ", " + B_["lumiere_ambiance"]).strip(", ")   # idée 7 : la lumière de l'ambiance
     except Exception: lieux, lum = ["salon"], ""
     reps = sk.get("repliques") or []
     demandes = []                                                          # (scène, description, personnages à l'image)
@@ -268,26 +324,44 @@ def generer_semi(sk, graine=7, scenes=None, delai=1200):
         demandes.append((k, SR.description(lieu, sc.get("decor", ""), lum), max(1, min(3, n))))
     if not demandes: return {}
     out = {}
-    def poser(k, im, prof):
+    ZONES.clear()
+    F_ = sk.get("_fiche") if isinstance(sk.get("_fiche"), dict) else None   # fiche de tournage (20 novembre)
+    cles = sk.setdefault("_decors_cles", {}) if isinstance(sk.get("_decors_cles", {}), dict) else {}
+    def poser(k, im, prof, cle=None):
         out[k] = im; SEMI.add(k)
         if prof is not None: PROFONDEURS[k] = cv2.GaussianBlur(prof, (0, 0), 6)
+        if cle: cles[str(k)] = cle
+        if cle and cle in ZONES_BANQUE: ZONES[k] = ZONES_BANQUE[cle]
     refaire = os.environ.get("REFAIRE", "").endswith("|decors")
     budget_ok = generes_ce_mois() < int(os.environ.get("DECORS_MOIS") or 60)
     a_faire = []
     deja_vus = recents() if budget_ok else set()                          # décors montrés cette semaine (sans budget : on reprend quand même)
+    suite = sk.get("_suite_decors") if isinstance(sk.get("_suite_decors"), dict) else {}
     for k, d, n in demandes:
+        c_s = suite.get(str(k)) or (list(suite.values())[0] if suite else None)   # idée 12 : partie 2, 3… : le décor de la partie précédente
+        if c_s and not refaire and os.path.exists(os.path.join(BANQUE, c_s + ".jpg")):
+            fp = os.path.join(BANQUE, c_s + "_prof.png"); noter_usage(c_s)
+            poser(k, cv2.cvtColor(cv2.imread(os.path.join(BANQUE, c_s + ".jpg")), cv2.COLOR_BGR2RGB), cv2.resize(cv2.imread(fp, 0), (W, H)) if os.path.exists(fp) else None, c_s)
+            print(f"  décor semi-réaliste {k} : celui de la partie précédente", flush=True); continue
         f_ = os.path.join(BANQUE, _cle(d) + ".jpg"); fp = os.path.join(BANQUE, _cle(d) + "_prof.png")
         if not refaire and os.path.exists(f_) and _cle(d) not in deja_vus:
             prof = cv2.resize(cv2.imread(fp, 0), (W, H)) if os.path.exists(fp) else None
             noter_usage(_cle(d))
-            poser(k, cv2.cvtColor(cv2.imread(f_), cv2.COLOR_BGR2RGB), prof); print(f"  décor semi-réaliste {k} (lieu déjà connu) : {d[:70]}", flush=True); continue
+            poser(k, cv2.cvtColor(cv2.imread(f_), cv2.COLOR_BGR2RGB), prof, _cle(d)); print(f"  décor semi-réaliste {k} (lieu déjà connu) : {d[:70]}", flush=True); continue
         proche = None if refaire else voisin(d, 0.55 if budget_ok else 0.25, exclure=deja_vus)
+        if proche is not None and F_ and budget_ok:                        # idée 11 : Gemini dit si ce décor de la banque colle à l'histoire
+            try:
+                import fiche_tournage as FT
+                if FT.decor_convient(proche[0], F_) is False:
+                    print(f"  décor semi-réaliste {k} : décor ressemblant de la banque refusé (ne colle pas à la fiche de tournage)", flush=True)
+                    deja_vus = set(deja_vus) | {proche[1]}; proche = None
+            except Exception as _e: __import__("pannes").avale(_e)
         if proche is None and os.path.exists(f_) and budget_ok and not refaire:
             print(f"  décor semi-réaliste {k} : lieu déjà montré cette semaine, nouveau tirage", flush=True)
             d = variante(d)
         if proche is not None:                                             # (pas de miroir : le cadrage des pieds est gardé)
             im, cle = proche; fp = os.path.join(BANQUE, cle + "_prof.png"); noter_usage(cle)
-            poser(k, im, cv2.resize(cv2.imread(fp, 0), (W, H)) if os.path.exists(fp) else None)
+            poser(k, im, cv2.resize(cv2.imread(fp, 0), (W, H)) if os.path.exists(fp) else None, cle)
             print(f"  décor semi-réaliste {k} (lieu ressemblant de la banque) : {d[:60]}", flush=True); continue
         if budget_ok: a_faire.append((k, d, n))
         else: print(f"  décor semi-réaliste {k} : budget Modal du mois atteint, décor dessiné", flush=True)
@@ -296,7 +370,10 @@ def generer_semi(sk, graine=7, scenes=None, delai=1200):
     try:
         import modal
         D_ = modal.Cls.from_name("jt-decor", "Decor")()
-        res = D_.generer_semi.spawn([d.replace("[semi]", "").strip() for d in uniques], graine, 3).get(timeout=delai)
+        descs = [d.replace("[semi]", "").strip() for d in uniques]
+        guide = guide_original(sk)                                        # idée 10 : la composition de la vidéo d'origine
+        try: res = D_.generer_semi.spawn(descs, graine, 3, [guide] * len(descs) if guide else None).get(timeout=delai)
+        except TypeError: res = D_.generer_semi.spawn(descs, graine, 3).get(timeout=delai)   # ancienne version déployée
     except Exception as e:
         print(f"Décors semi-réalistes indisponibles ({type(e).__name__} {str(e)[:150]}) : décors dessinés", flush=True); return out
     tirages = dict(zip(uniques, res))
@@ -309,6 +386,14 @@ def generer_semi(sk, graine=7, scenes=None, delai=1200):
                 if r: cands.append((r[2], __import__("beaute").note(r[0]), r))   # note de beauté (idée 13)
             except Exception as e: print(f"  tirage illisible : {e}", flush=True)
         best = __import__("beaute").choisir(cands)
+        if F_ and len(cands) > 1:                                          # idée 9 : Gemini choisit le tirage qui colle le mieux à la fiche
+            try:
+                import fiche_tournage as FT
+                zmin = min(c[0] for c in cands); ok_ = [c for c in cands if c[0] <= zmin * 1.25]
+                ch, zo = FT.choisir_decor([c[2][0] for c in ok_], F_)
+                if ch is not None and 0 <= ch < len(ok_): best = ok_[ch][2]; print(f"  décor {k} : tirage {ch + 1}/{len(ok_)} choisi par Gemini (fiche de tournage)", flush=True)
+                if zo: ZONES[k] = zo
+            except Exception as e: print(f"  choix du décor par Gemini impossible ({str(e)[:100]})", flush=True)
         if len(cands) > 1 and all(c[1] is not None for c in cands):
             print(f"  décor {k} : notes de beauté des tirages {[c[1] for c in cands]}", flush=True)
         if best is None:
@@ -318,5 +403,8 @@ def generer_semi(sk, graine=7, scenes=None, delai=1200):
         poser(k, im, pr); print(f"  décor semi-réaliste {k} (cadré ×{z:.2f}, pieds au sol) : {d[:60]}", flush=True)
         if not os.path.exists(os.path.join(BANQUE, _cle(d) + ".jpg")):
             _format.panneaux = pan; _ranger(d, im, pr)
-        noter_usage(_cle(d))
+            if ZONES.get(k):
+                try: json.dump(ZONES[k], open(os.path.join(BANQUE, _cle(d) + "_zones.json"), "w")); ZONES_BANQUE[_cle(d)] = ZONES[k]
+                except OSError: pass
+        noter_usage(_cle(d)); cles[str(k)] = _cle(d)
     return out
