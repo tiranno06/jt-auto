@@ -493,7 +493,7 @@ class TestDecorsSemiRealistes(unittest.TestCase):
         if r is not None:
             obs = SR.obstacles(prof); self.assertTrue(obs[1300, 450])
             c = r[0]
-            for x in (285, 795): self.assertFalse((c[SR.PIED_Y, x] == (90, 90, 120)).all())
+            for x in (260, 820): self.assertFalse((c[SR.PIED_Y, x] == (90, 90, 120)).all())
         im, prof = self._decor(meuble=(0, 880, 1100, 1536))                # aucun sol libre : refusé (décor dessiné à la place)
         self.assertIsNone(SR.cadrer(im, prof, 2))
 

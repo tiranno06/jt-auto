@@ -379,6 +379,10 @@ def bible(sk, roles):
         if role in costumes and not (isinstance(S.get("costumes"), dict) and (S.get("costumes") or {}).get(role)):
             P0 = S.get("personnages") if isinstance(S.get("personnages"), dict) else {}
             costumes[role] = MT_.costume(met, costumes[role], genre_voix(sk, role, P0.get(role) if isinstance(P0.get(role), dict) else {}))
+    for k_, m_ in list(meubles.items()):                                   # accoudé au comptoir : seulement celui qui y TRAVAILLE (audit du
+        for r_, mb_ in list(m_.items()):                                   # 20 novembre : la fille d'un rendez-vous au resto se retrouvait
+            if mb_ == "comptoir" and not (costumes.get(r_) or {}).get("metier"): m_.pop(r_)   # derrière une « poubelle » bleue)
+        if not m_: meubles.pop(k_)
     import decor_metiers as DMT                                            # idée 17 : le métier entendu choisit le lieu (caserne, garage…)
     for k_, l_ in enumerate(lieux):                                         # quand rien d'autre ne dit où l'on est
         if not devines[k_] or os.environ.get("LIEU_METIER", "1") == "0": continue

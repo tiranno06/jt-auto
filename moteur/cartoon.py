@@ -625,7 +625,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
     def position(scene, role):
         ps = places[scene] + [f"@{j}" for j in range(len(COMP.get(scene, [])))]; n = len(ps); k = ps.index(role) if role in ps else 0
         if n == 1: return (540, 1500, 1.35)
-        if n == 2: return ((285, 795)[k], 1500, 1.08)
+        if n == 2: return ((260, 820)[k], 1500, 1.08)                     # (audit du 20 novembre : deux « petits » à grosse tête se touchaient)
         return ((190, 540, 890)[min(k, 2)], 1500, 0.86)
     # caméra : plan large au début de chaque scène, puis plans serrés alternés sur celui qui parle (comme sur TikTok)
     for j, q in enumerate(ph):

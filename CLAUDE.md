@@ -624,6 +624,29 @@
   l'audio », avec la correction de la fiche quand c'est possible ; le compte rendu (`principal.corriger_compte_rendu`) applique ces
   corrections (`corriger_depuis_points` : fiche -> studio, décor repeint si lieu / moment / météo changent) en plus de « Dis ce qui ne
   va pas », redessine et garde la meilleure version AVANT l'archivage et le site. Pas fait (non choisis) : 8, 17, 24.
+- **Audit des 10 vidéos du 20 novembre 2026 (demande de l'auteur : tout ce qui ne va pas, et que ça ne revienne plus)** : outil
+  d'audit indépendant (empreinte ECAPA de chaque réplique comparée à la voix moyenne de chaque personnage + hauteur de la voix).
+  **Répliques sur le mauvais personnage** (remarque de l'auteur sur « Orientation scolaire ») : `equipe.voix_finales` à la fin de
+  l'écoute (`doublage.preparer`, après scripte et monteur) : chaque réplique de 0,6 s ou plus comparée à la voix MOYENNE de chaque
+  personnage (ses autres répliques) ; nettement plus proche de l'autre voix (écart ≥ 0,12, 0,09 si les voix sont bien distinctes)
+  -> elle change de personnage ; rien si les deux voix moyennes se ressemblent trop (> 0,85 : même voix, le dialogue décide), une
+  réplique sur 5 au plus, 2 passes ; VOIX_FINALES=0. Banc d'essai sur les vraies vidéos : 12 erreurs corrigées (« Ce n'est pas toi qui
+  poses les questions », « Et toi tu deviens quoi », « Forcément, ça me fait des frais », 6 dans « Pire date »…), aucune réplique juste
+  déplacée. **Personnage qui change de tête au milieu** (dessin partagé) : les machines d'aide recevaient l'état du DÉBUT du rendu,
+  avant la mesure homme / femme (inaSpeechSegmenter / Praat absents chez elles), sans panneaux ni zones du décor -> autre casting :
+  `cartoon.figer_pour_aides` (mesures des voix + decors.PROFONDEURS / PANNEAUX / ZONES / SEMI passés, `dessin_aide` les remet).
+  **Fiche de tournage** : écrite seulement pour le son CHOISI (`principal`, plus dans `doublage.preparer` : elle était refaite pour
+  chaque son écouté, quota de Gemini épuisé, écoute de 44 min, et la fiche d'un son écarté se mélangeait à celle du bon) ; lieu vu par
+  Gemini rangé dans sk["doublage"]["lieu_ia"] ; « je dors plus » / « la nuit » ne mettent plus la scène de nuit ; « va te faire
+  cuire » n'est plus une poêle ; un objet retiré par la 2e IA n'est plus remis par les règles (F["_retires"]) ; plus de « tiled walls »
+  partout (écho non mesuré) ; jamais une coupe de fille sur un homme ; panneaux = le TEXTE entre guillemets, jamais la description
+  (`texte_panneau`) ; le contrôle final ne peut plus inventer une météo (pluie vue dans NOTRE peinture). **Dessin** : pluie sur toute
+  l'image seulement dehors (`cartoon.DEHORS_LIEUX`), sinon dans la fenêtre ; visage qui rosit peu à peu en colère (moyenne de la voix
+  sur 0,6 s, `perso_croquis` : teint mêlé, plus de « cercle rouge » qui clignote) ; deux personnages plus écartés (260 / 820 au lieu de
+  285 / 795, aussi `semi_realiste.PIEDS_X` : deux « petits » à grosse tête se touchaient) ; accoudé au comptoir seulement pour celui
+  qui y travaille (métier). **Pannes** : modèles Gemini retirés sautés (`reseau.gemini_disponibles`, liste lue chez Google ;
+  « gemini-2.5-flash » répondait 404 à chaque appel ; `video_ia.MODELES`) ; NeMo réparé (pyarrow>=15,<17 dans l'image Modal) ; tikwm
+  (biographies) plus redemandé après un refus 403.
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.
