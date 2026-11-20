@@ -848,6 +848,10 @@ def preparer(url):
     except Exception as e: journal(f"  Rhubarb impossible ({str(e)[:100]})")
     try: __import__("objets_vus").appliquer(info.get("_fichier") or "", sk["repliques"])   # objets vus dans l'original (idée 4)
     except Exception as e: journal(f"  objets de l'original non cherchés ({str(e)[:120]})")
+    try:                                                                   # fiche de tournage contrôlée trois fois (20 novembre, idées 1 à 5)
+        import fiche_tournage
+        if fiche_tournage.faire(sk, info.get("_fichier") or "", sig, SR, [m_ for s_ in segs for m_ in s_["mots"]], B): fiche_tournage.appliquer(sk)
+    except Exception as e: journal(f"  fiche de tournage impossible ({str(e)[:120]}) : mise en scène habituelle")
     sk["equipe"] = B.lignes
     journal(f"  bulletin de l'équipe : {B.resume()}")
     return sk, audios, mots

@@ -811,3 +811,119 @@ class TestPannes19Novembre(unittest.TestCase):
         self.assertNotIn('python_version="3.10"', src("moteur/ecoute_modal.py"))
         for w in ("emission.yml", "pre_ecoute.yml", "dessin.yml"):
             self.assertIn("TF_CPP_MIN_LOG_LEVEL", src(".github/workflows/" + w))
+
+
+class TestFicheTournage20Novembre(unittest.TestCase):
+    """Fiche de tournage (choix de l'auteur du 20 novembre 2026 : 1-7, 9-16, 18-23, 25) et triple contrôle."""
+
+    REPS = [{"p": "presentateur", "t": "Il est 3h du mat, t'as vu l'heure ? Et il fait trop chaud ici !"},
+            {"p": "invite", "t": "Tiens, mes clés. Et paie le loyer, c'est le bordel ici."},
+            {"p": "presentateur", "t": "Toi tu te moques de moi, rends-moi mon gâteau d'anniversaire !"}]
+
+    def _sk(self):
+        return {"repliques": [dict(r) for r in self.REPS], "decoupage": [{"repliques": [0, 1, 2], "decor": ""}], "doublage": {"evenements": [[0, 3.5, "rain"], [4, 6.5, "tv"]]}}
+
+    def test_indices_paroles_et_bruits(self):
+        import fiche_tournage as FT
+        ind = FT.indices_texte(self.REPS)
+        self.assertEqual(ind["moment"], "nuit"); self.assertEqual(ind["meteo"], "chaud"); self.assertEqual(ind["occasion"], "anniversaire")
+        self.assertIn(ind["niveau"], ("desordre", "modeste"))
+        self.assertIn("cles", [o["objet"] for o in ind["objets"]]); self.assertIn("birthday cake and balloons", ind["details"])
+        son = FT.indices_son([[0, 3.5, "rain"], [4, 6.5, "tv"], [7, 7.5, "dog"]])
+        self.assertEqual(son["meteo"], "pluie"); self.assertIn("tele", son["animations"]); self.assertNotIn("dog", son["entendus"])   # un bruit d'1/2 s ne compte pas
+
+    def test_nettoyage_et_regles(self):
+        import fiche_tournage as FT
+        sk = self._sk()
+        brut = {"lieu": "bureau", "lieu_precis": "un bureau très moderne", "moment": "jour", "meteo": "neige", "ambiance": "dispute", "niveau": "pas_un_niveau",
+                "details": ["pile of unpaid bills", "a man sitting"], "panneaux": ["Bienvenue"],
+                "personnages": {"presentateur": {"genre": "h", "age": 12, "barbe": "trois_jours", "tenue": "maillot_bain", "etat_tenue": ["mouille", "sueur"]},
+                                "invite": {"genre": "f", "age": 30, "tenue": "robe_soiree", "etat_tenue": ["dechire"]}, "inconnu": {"age": 40}},
+                "repliques": [{"n": 0, "emotion": "joie", "signe": "veine"}, {"n": 2, "emotion": "colere", "signe": "veine", "objet": "telephone"}, {"n": 9, "emotion": "joie"}],
+                "reactions": [{"n": 2, "qui": "invite", "mot": "gâteau", "reaction": "choque"}, {"n": 2, "qui": "presentateur", "reaction": "rire"}]}
+        F = FT.nettoyer(brut, sk)
+        self.assertEqual(F["lieu_precis"], ""); self.assertEqual(F["niveau"], ""); self.assertEqual(F["details"], ["pile of unpaid bills"])   # français / personne : retirés
+        self.assertNotIn("inconnu", F["personnages"]); self.assertNotIn(9, F["repliques"])
+        cor = FT.controle_regles(F, sk, FT.indices_texte(sk["repliques"]))
+        self.assertEqual(F["moment"], "nuit")                                               # dit dans le dialogue
+        self.assertEqual(F["meteo"], "chaud")
+        P = F["personnages"]["presentateur"]
+        self.assertEqual(P["barbe"], "aucune"); self.assertEqual(P["tenue"], "normale")      # enfant barbu, maillot au bureau : corrigés
+        self.assertEqual(P["etat_tenue"], ["sueur"])                                       # « il fait trop chaud » : sueur oui, mouillé non
+        self.assertEqual(F["personnages"]["invite"]["etat_tenue"], [])                      # déchiré : rien ne le dit
+        self.assertNotIn("signe", F["repliques"][0]); self.assertEqual(F["repliques"][2]["signe"], "veine")   # veine = colère seulement
+        self.assertNotIn("objet", F["repliques"][2])                                        # pas de téléphone dans les paroles
+        self.assertEqual(F["repliques"][1]["objet"], "cles")                                 # objet cité : dans les mains
+        self.assertEqual(F["panneaux"], [])                                                  # pas d'enseigne au bureau
+        self.assertEqual([r["qui"] for r in F["reactions"]], ["invite"])                    # on ne réagit pas à sa propre réplique
+        self.assertGreaterEqual(len(cor), 6)
+        faites = FT.appliquer_corrections(F, sk, [{"champ": "personnages.invite.tenue", "valeur": "pyjama", "raison": "essai"},
+                                                   {"champ": "moment", "valeur": "minuit", "raison": "valeur interdite"}])
+        self.assertEqual(len(faites), 1); self.assertEqual(F["personnages"]["invite"]["tenue"], "pyjama"); self.assertEqual(F["moment"], "nuit")
+
+    def test_faire_sans_ia_puis_studio(self):
+        import fiche_tournage as FT, studio, equipe
+        sk = self._sk()
+        anc = FT._ia_texte; FT._ia_texte = lambda *a, **k: None
+        try:
+            B = equipe.Bulletin(); F = FT.faire(sk, "", None, 22050, None, B)
+        finally: FT._ia_texte = anc
+        self.assertEqual(F["source"], "regles"); self.assertEqual(F["moment"], "nuit"); self.assertIn("pluie_vitre", F["animations"] + ["pluie_vitre"])
+        self.assertTrue(any(l["poste"] == "fiche de tournage" for l in B.lignes)); self.assertEqual(len([l for l in B.lignes if l["poste"] == "fiche de tournage"]), 3)
+        F["personnages"]["invite"] = {"genre": "f", "tenue": "impermeable", "etat_tenue": ["mouille"], "c_cheveux": "roux"}
+        F["repliques"][2] = {"emotion": "colere", "signe": "veine", "cible": "autre", "intensite": 3}
+        F["reactions"] = [{"n": 2, "qui": "invite", "mot": "gâteau", "reaction": "choque"}]
+        self.assertTrue(FT.appliquer(sk, F))
+        S = sk["studio"]
+        self.assertEqual(S["moment"], "nuit"); self.assertIn("with", sk["decoupage"][0]["decor"])            # le décor raconte l'histoire
+        self.assertEqual(sk["repliques"][2]["_signe"], "veine"); self.assertEqual(sk["repliques"][2]["_cible"], "autre")
+        B2 = studio.bible(sk, ["presentateur", "invite"])
+        c = B2["costumes"]["invite"]
+        self.assertEqual(c.get("tenue"), "impermeable"); self.assertEqual(c.get("etats"), ("mouille",))
+        self.assertEqual(B2["reactions"][0]["reaction"], "choque"); self.assertNotIn("pluie", B2["ambiances"])   # « il fait trop chaud » passe avant la pluie entendue
+
+    def test_fidelite_et_correction(self):
+        import fiche_tournage as FT, verif_finale as V
+        sk = self._sk(); F = FT.nettoyer({"lieu": "salon", "moment": "jour"}, sk); F["source"] = "video"; sk["_fiche"] = F
+        anc = FT._gemini_brut
+        FT._gemini_brut = lambda v, t: {"problemes": [{"t": 2, "probleme": "On dit qu'il est 3h du matin mais il fait grand jour", "champ": "moment", "valeur": "nuit"},
+                                                      {"t": 3, "probleme": "Les sous-titres sont décalés"}, {"t": 4, "probleme": "Pas de gâteau", "champ": "piratage", "valeur": "x"}]}
+        f = os.path.join(tempfile.mkdtemp(), "v.mp4"); open(f, "wb").write(b"x")
+        try: pbs = FT.fidelite(f, sk)
+        finally: FT._gemini_brut = anc
+        self.assertEqual(len(pbs), 2); self.assertEqual(pbs[0]["champ"], "moment"); self.assertEqual(pbs[1]["champ"], "")   # sous-titres écartés, champ interdit vidé
+        pts = [dict(V._defaut(2, "fidélité à l'audio", pbs[0]["probleme"]), correction=[{"champ": "moment", "valeur": "nuit"}])]
+        faits = FT.corriger_depuis_points(sk, pts)
+        self.assertTrue(faits); self.assertEqual(sk["_fiche"]["moment"], "nuit"); self.assertEqual(sk["studio"]["moment"], "nuit")
+        self.assertEqual(sk["_decors_a_refaire"], [0])                                      # le moment change : le décor est repeint
+
+    def test_choix_du_decor_par_gemini(self):
+        import fiche_tournage as FT
+        anc = FT._gemini_images
+        FT._gemini_images = lambda ims, t, timeout=120: {"choix": 1, "fenetre": [100, 200, 400, 600], "tele": [0, 0, 1, 1], "panneau": []}
+        try:
+            ch, zo = FT.choisir_decor([np.zeros((10, 10, 3), np.uint8)] * 3, {"lieu": "salon"})
+            self.assertEqual(ch, 1); self.assertEqual(zo, {"fenetre": [216, 192, 648, 768]})   # boîte trop petite (télé) refusée
+            FT._gemini_images = lambda ims, t, timeout=120: {"convient": False}
+            self.assertIs(FT.decor_convient(np.zeros((10, 10, 3), np.uint8), {"lieu": "salon"}), False)
+        finally: FT._gemini_images = anc
+
+    def test_dessin_des_details(self):
+        import humain, marionnette as M, perso_croquis as PC
+        for pp, cc in (({"signe": "veine", "emo": "colere"}, {"etats": ("sueur", "dechire", "tache")}), ({"signe": "coeurs"}, {"etats": ("mouille",)}),
+                       ({"signe": "etoiles", "ecran": "Maman", "ecran_main": "d"}, {"etats": ("maquillage_coule",)}), ({"signe": "nuage", "vapeur_main": "d"}, {}),
+                       ({"signe": "fumee_oreilles", "bouche_pleine": True}, {})):
+            img = np.full((900, 600, 3), 245, np.uint8); avant = img.copy()
+            p = M.pose_neutre(); p.update(x=300, y=820, s=1.0, t=0.5, costume=dict(haut="tshirt", c_haut=(80, 140, 210), **cc)); p.update(pp)
+            PC.dessiner(img, humain.creer(5), p)
+            self.assertGreater(int(np.abs(img.astype(int) - avant).sum()), 0)
+
+    def test_sources_branchees(self):
+        src = lambda f: open(os.path.join(ICI, "..", f), encoding="utf-8").read()
+        self.assertIn("fiche_tournage.faire(", src("moteur/doublage.py"))
+        self.assertIn("corriger_depuis_points", src("moteur/principal.py"))
+        self.assertIn("fidélité à l'audio", src("moteur/verif_finale.py"))
+        self.assertIn("controlnet_conditioning_scale", src("moteur/decor_modal.py"))
+        self.assertIn("_suite_decors", src("moteur/suites.py"))
+        for x in ("emo_voix", "REAC_F", "SURSAUTS", "vapeur_main", "ZONES_SC", '"tele" in anim'):
+            self.assertIn(x, src("moteur/cartoon.py"))

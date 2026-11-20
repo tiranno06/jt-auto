@@ -60,6 +60,9 @@ def preparer(sk, historique, journal=print):
     if isinstance(ancien.get("_casting_final"), dict) and ancien["_casting_final"]:
         sk["_suite"] = ancien["_casting_final"]
         journal(f"  partie {n - 1} déjà faite ({fich}) : mêmes personnages repris")
+    if isinstance(ancien.get("_decors_cles"), dict) and ancien["_decors_cles"] and os.environ.get("SUITE_DECORS", "1") != "0":
+        sk["_suite_decors"] = ancien["_decors_cles"]                       # même décor que la partie précédente (20 novembre, idée 12)
+        journal(f"  partie {n - 1} : même décor repris")
 
 
 def appliquer(sk, fiches, costumes, roles):
