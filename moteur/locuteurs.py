@@ -438,8 +438,10 @@ def pyannote(mots, sig, sr=SR):
     jeton = os.environ.get("HF_TOKEN")
     if not jeton or os.environ.get("PYANNOTE", "1") == "0": return None
     try:
-        import torch
-        from pyannote.audio import Pipeline
+        import torch, warnings
+        with warnings.catch_warnings():                                    # « torchcodec is not installed correctly » : sans effet, le son
+            warnings.simplefilter("ignore")                                # est donné déjà chargé en mémoire (registre des pannes)
+            from pyannote.audio import Pipeline
     except Exception: return None
     pipe = None
     for nom in ("pyannote/speaker-diarization-community-1", "pyannote/speaker-diarization-3.1"):

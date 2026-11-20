@@ -27,6 +27,10 @@ jobs:
         plage: ${{ fromJSON(inputs.plages) }}
     env:
       PYTHONHASHSEED: "0"        # même dessin, à l'image près, que la machine principale
+      TF_CPP_MIN_LOG_LEVEL: "2"                          # messages techniques des bibliothèques coupés (registre des pannes)
+      TRANSFORMERS_VERBOSITY: "error"
+      TRANSFORMERS_NO_ADVISORY_WARNINGS: "1"
+      GLOG_minloglevel: "2"
       GH_TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@v7

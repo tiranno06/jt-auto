@@ -187,8 +187,11 @@ def dessiner(nf, args, dessiner_plage, journal=print, progres=None):
                 elif f"{nom}_{p[0]}_{p[1]}.echec" in dispo or time.time() > attente_max:
                     journal(f"  morceau {p[0]}–{p[1]} : aide en retard ou en échec, dessiné ici"); restants.remove(p)
                     chemins[p] = f"{tmp}/{p[0]}.mp4"; dessiner_plage(p[0], p[1], chemins[p], progres)
-        except Exception as e:
-            journal(f"  lecture des morceaux impossible ({str(e)[:120]}), nouvel essai")
+        except Exception as e:                                             # 404 : la release temporaire a été refaite entre-temps (une autre
+            if "404" in str(e):                                            # fabrication l'a vidée) : on la relit au lieu de redemander l'ancienne
+                try: rel = release(); journal("  release des morceaux relue (refaite entre-temps), nouvel essai")
+                except Exception as e2: journal(f"  lecture des morceaux impossible ({str(e2)[:120]}), nouvel essai")
+            else: journal(f"  lecture des morceaux impossible ({str(e)[:120]}), nouvel essai")
         if restants: time.sleep(__import__("quota").pause_conseillee(20))
     try: menage(rel, garder=nom)
     except Exception as _e: __import__("pannes").avale(_e)

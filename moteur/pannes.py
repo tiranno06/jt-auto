@@ -11,7 +11,16 @@ import datetime, json, os, re, sys
 FICHIER = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "episodes", "pannes.json")
 SIGNES = re.compile(r"(impossible|indisponible|en échec|échoué|echec|traceback|erreur|error|exception|refus[ée]|introuvable|plante|"
                     r"illisible|n'a pas pu|pas pu |timed? ?out|délai dépassé)", re.I)
-BANAL = re.compile(r"(\b0 erreur|aucune erreur|sans erreur|✔|rien à enregistrer)", re.I)
+BANAL = re.compile(r"(\b0 erreur|aucune erreur|sans erreur|✔|rien à enregistrer|"
+                   r"nouvel essai dans|erreur \d+ passagère|"                            # nouvel essai automatique : pas une panne
+                   r"par l'IA refusés?|de l'IA refusées?|crédit ElevenLabs épuisé|quota_exceeded)", re.I)   # garde-fous qui ont joué, repli prévu
+# Pas des pannes (registre du 19 novembre 2026) : messages techniques des bibliothèques (TensorFlow, MediaPipe, transformers,
+# onnxruntime, avertissements Python) et TEXTES DE L'IA recopiés au journal (avis du jury, scène reconstituée, manques par rapport à
+# l'original) : ils contiennent « erreur », « refuse », « illisible »… sans que rien n'ait planté.
+BRUIT = re.compile(r"^([IWE]\d{4} |\[transformers\]|\[ ?WARN|WARNING:|INFO:|To enable the following|.*warnings\.warn|.*\w+Warning:|"
+                   r"\* fix torchcodec|\* use audio preloaded|Could not load this library|torchcodec is not|.*onnxruntime|.*absl::|.*InitGoogle|"
+                   r"Loading weights|scène reconstituée|Jury qualité|- à \d|Manque par rapport|Points? forts?|Humoriste|Réalisateur|"
+                   r"Directeur artistique|Spectateur|Ingé son :|\d{4}-\d\d-\d\d \d\d:\d\d:\d\d,\d+ \[WARNING\])", re.I)
 
 
 def forme(ligne):
@@ -31,7 +40,7 @@ def lire_journal(texte):
         l = l.strip()
         m = re.match(r"^\[équipe · ([^\]]+)\]", l)
         if m: etape = m.group(1)
-        if not l or BANAL.search(l) or not SIGNES.search(l): continue
+        if not l or BANAL.search(l) or BRUIT.match(l) or not SIGNES.search(l): continue
         if re.match(r'^(File ")|^\s*\^', l): continue                      # lignes de pile d'un Traceback : seul le message compte
         f = forme(l)
         if len(f) < 12 or f in vues: continue
@@ -43,6 +52,7 @@ def ajouter(texte, quand=None, fichier=FICHIER):
     quand = quand or datetime.date.today().isoformat()
     try: R = json.load(open(fichier, encoding="utf-8"))
     except (OSError, ValueError): R = {}
+    R = {f: e for f, e in R.items() if lire_journal(e.get("exemple") or f)}   # anciennes lignes qui ne sont pas des pannes : retirées
     for f, ex, et in lire_journal(texte):
         e = R.setdefault(f, {"n": 0, "premiere": quand, "derniere": quand, "exemple": ex, "etape": et, "jours": {}})
         e["n"] += 1; e["derniere"] = quand; e["exemple"] = ex; e["etape"] = et or e.get("etape", "")

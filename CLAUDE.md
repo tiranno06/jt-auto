@@ -571,6 +571,20 @@
   (stats.json "vues_hist", un relevé par heure), abonnés gagnés, dépenses, confiance moyenne) ; **coût de chaque vidéo**
   (`principal.cout_estime` : Claude + ElevenLabs 0,00022 $ / caractère + GPU Modal 0,00031 $ / s ; historique couts "total_usd" et
   "modal_mesure_usd" = vraie dépense Modal pendant la fabrication ; ligne « 💶 Coût de cette vidéo » dans la fiche).
+- **Registre des pannes relu le 19 novembre 2026 (demande de l'auteur : tout régler et que ça ne revienne plus)** : 23 lignes, dont
+  la moitié n'étaient pas des pannes. **ElevenLabs** : le crédit était épuisé (offre gratuite 10 000 crédits), le robot le savait au
+  départ (`reseau` -> ELEVENLABS=0) mais l'appelait quand même 2 à 4 fois par vidéo (~40 s perdues, une panne notée à chaque fois) :
+  `doublage.eleven_ok` / `_eleven_echec` (crédit épuisé ou clé refusée = plus appelé jusqu'à la fin de la fabrication, Demucs et
+  Whisper directement) ; **contrôle IA** : réponse vide -> 2e essai avec une autre IA (`verif_finale.liste_ia`, `reseau.claude(exclure=)`) ;
+  **morceaux du dessin partagé** : 404 = release temporaire refaite entre-temps -> relue (`dessin_partage`) ; **messages techniques des
+  bibliothèques coupés à la source** (TF_CPP_MIN_LOG_LEVEL, GLOG_minloglevel, TRANSFORMERS_VERBOSITY dans emission.yml, pre_ecoute.yml,
+  dessin.yml ; avertissement torchcodec de pyannote masqué : le son lui est donné déjà en mémoire) ; **le registre ne compte plus**
+  (`pannes.BRUIT` / `BANAL`) : messages des bibliothèques, textes de l'IA recopiés au journal (jury, scène reconstituée, « manque par
+  rapport à l'original »), nouveaux essais automatiques (« erreur 503 passagère, nouvel essai »), garde-fous qui ont joué (« proposés
+  par l'IA refusés »), crédit ElevenLabs épuisé (voyant des crédits) ; les anciennes fausses pannes sont retirées du registre au
+  prochain passage (`pannes.ajouter`). **Prévention** : image NeMo de Modal passée de Python 3.10 à 3.11 (Modal 1.7 refusera 3.10 ;
+  modal~=1.6 figé dans contraintes.txt ; musique_modal.py, des sketchs, est encore en 3.10 : à changer si on la relance).
+  Restent des pannes de Google (Gemini surchargé, 503) : le relais vers l'IA suivante marche.
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.
