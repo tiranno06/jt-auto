@@ -6800,31 +6800,32 @@
   "cadence": "normal"
  },
  {
-  "moment": "jour",
+  "moment": "matin",
   "lieux": [
-   "bureau"
+   "rue",
+   "salon"
   ],
   "source": "auteur+image",
-  "duree": 90.2,
+  "duree": 90.4,
   "plans": {
-   "large": 41
+   "large": 40
   },
   "mouvements": {
-   "fixe": 41
+   "fixe": 40
   },
   "costumes": {
-   "presentateur": "chemise",
-   "invite": "tshirt"
+   "presentateur": "pyjama",
+   "invite": "pyjama"
   },
   "figurants": 0,
   "ambiances": [
    "poussiere"
   ],
-  "controle": "Humoriste 7.8/10 : 3.5 s Le personnage devrait marquer un temps d'agacement plus net face à l'insistance. | Réalisateur 8.0/10 :  | Directeur artistique 6.8/10 : 0.4 s Le décor de fond est trop chargé",
-  "fichier": "2026-11-20_09h03_emission.mp4",
+  "controle": "Humoriste 7.8/10 :  | Réalisateur 8.0/10 : 1 s L'expression faciale pourrait être plus gênée au début | Directeur artistique 7.0/10 : 1 s Le design du présentateur diffère trop de l'original en slip/c",
+  "fichier": "2026-11-20_09h37_emission.mp4",
   "cine": {
    "focus": false,
-   "vertige": true,
+   "vertige": false,
    "tiers": false,
    "etalonnage": true,
    "profondeur": false,
