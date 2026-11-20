@@ -6800,32 +6800,31 @@
   "cadence": "normal"
  },
  {
-  "moment": "matin",
+  "moment": "jour",
   "lieux": [
-   "rue",
-   "salon"
+   "bureau"
   ],
   "source": "auteur+image",
-  "duree": 90.4,
+  "duree": 90.2,
   "plans": {
-   "large": 40
+   "large": 41
   },
   "mouvements": {
-   "fixe": 40
+   "fixe": 41
   },
   "costumes": {
-   "presentateur": "pyjama",
-   "invite": "pyjama"
+   "presentateur": "chemise",
+   "invite": "tshirt"
   },
   "figurants": 0,
   "ambiances": [
    "poussiere"
   ],
-  "controle": "Humoriste 7.8/10 :  | Réalisateur 8.0/10 : 1 s L'expression faciale pourrait être plus gênée au début | Directeur artistique 7.0/10 : 1 s Le design du présentateur diffère trop de l'original en slip/c",
-  "fichier": "2026-11-20_09h37_emission.mp4",
+  "controle": "Humoriste 7.8/10 : 3.5 s Le personnage devrait marquer un temps d'agacement plus net face à l'insistance. | Réalisateur 8.0/10 :  | Directeur artistique 6.8/10 : 0.4 s Le décor de fond est trop chargé",
+  "fichier": "2026-11-20_09h03_emission.mp4",
   "cine": {
    "focus": false,
-   "vertige": false,
+   "vertige": true,
    "tiers": false,
    "etalonnage": true,
    "profondeur": false,
@@ -6836,29 +6835,63 @@
   "cadence": "normal"
  },
  {
-  "moment": "jour",
+  "moment": "nuit",
   "lieux": [
-   "rue",
-   "salon"
+   "bureau"
   ],
   "source": "auteur+image",
-  "duree": 72.9,
+  "duree": 75.2,
   "plans": {
-   "large": 35
+   "large": 36
   },
   "mouvements": {
-   "fixe": 35
+   "fixe": 36
   },
   "costumes": {
    "presentateur": "chemise",
+   "invite": "col_roule"
+  },
+  "figurants": 0,
+  "ambiances": [
+   "pluie"
+  ],
+  "controle": "Humoriste 8.6/10 :  | Réalisateur 10.0/10 :  | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.9/10 : ",
+  "fichier": "2026-11-20_09h55_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": true,
+   "tiers": false,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": true,
+   "reflets": false,
+   "son": true
+  },
+  "cadence": "rapide"
+ },
+ {
+  "moment": "jour",
+  "lieux": [
+   "restaurant"
+  ],
+  "source": "auteur+image",
+  "duree": 68.1,
+  "plans": {
+   "large": 33
+  },
+  "mouvements": {
+   "fixe": 33
+  },
+  "costumes": {
+   "presentateur": "tshirt",
    "invite": "tshirt"
   },
   "figurants": 0,
   "ambiances": [
-   "poussiere"
+   "vapeur"
   ],
-  "controle": "Humoriste 6.0/10 : 7.8 s Manque de réaction comique sur le \"Une heure ou du\" | Réalisateur 7.0/10 : 13.8 s Pas de mouvement ou réaction visible au moment du Ok | Directeur artistique 6.0/10 : 0.4 s Le",
-  "fichier": "2026-11-20_11h30_emission.mp4",
+  "controle": "Humoriste 6.8/10 : 3.3 s Le jeu sur le screenshot pourrait être plus appuyé pour faire écho à la panique. | Réalisateur 7.0/10 : 12.2 s Statisme excessif du personnage féminin lors des excuses. | Dire",
+  "fichier": "2026-11-20_12h13_emission.mp4",
   "cine": {
    "focus": false,
    "vertige": false,
@@ -6866,7 +6899,7 @@
    "etalonnage": true,
    "profondeur": false,
    "grain": true,
-   "reflets": false,
+   "reflets": true,
    "son": true
   },
   "cadence": "rapide"
