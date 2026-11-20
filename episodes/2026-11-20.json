@@ -1,1643 +1,467 @@
 {
- "titre": "FAVORITISME SCOLAIRE",
- "sujet": "FAVORITISME SCOLAIRE",
- "ecran": "FAVORITISME",
+ "titre": "MANAGER TOXIQUE EN VACANCES",
+ "sujet": "MANAGER TOXIQUE EN VACANCES",
+ "ecran": "MANAGER",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "POV : favoritisme scolaire",
- "question": "Vous auriez eu combien avec ce prof ? 😭",
+ "titre_accroche": "POV : Ton manager te harcèle en vacances",
+ "question": "Vous auriez fait quoi à sa place ?",
  "running_gag": "",
  "verite": "",
  "repliques": [
   {
    "p": "presentateur",
-   "t": "Ça va les trouducs. Alors, je vais vous donner vos moyennes du deuxième trimestre, c'est pas fameux, mais faut aussi coller.",
-   "_deb": 0.14,
-   "_fin": 4.846,
-   "d": "[neutral] Ça va les trouducs. Alors, je vais vous donner vos moyennes du deuxième trimestre, c'est pas fameux, mais faut aussi coller.",
-   "objet": "stylo",
+   "t": "Désolé de te déranger pendant tes vacances, mais est-ce que tu peux me corriger un dossier en vitesse.",
+   "_deb": 0.06,
+   "_fin": 2.666,
+   "d": "[annoyed] Désolé de te déranger pendant tes vacances, mais est-ce que tu peux me corriger un dossier en vitesse.",
+   "objet": "telephone",
    "_mots": [
     [
-     "Ça",
+     "Désolé",
      0.0,
-     0.06
+     0.201
     ],
     [
-     "va",
-     0.12,
-     0.16
+     "de",
+     0.201,
+     0.241
     ],
     [
-     "les",
-     0.22,
+     "te",
+     0.261,
      0.301
     ],
     [
-     "trouducs.",
-     0.321,
-     0.761
+     "déranger",
+     0.341,
+     0.581
     ],
     [
-     "Alors,",
-     1.061,
-     1.342
+     "pendant",
+     0.602,
+     0.762
     ],
     [
-     "je",
-     1.402,
-     1.462
+     "tes",
+     0.802,
+     0.882
     ],
     [
-     "vais",
-     1.482,
-     1.562
-    ],
-    [
-     "vous",
-     1.562,
-     1.642
-    ],
-    [
-     "donner",
-     1.662,
-     1.862
-    ],
-    [
-     "vos",
-     1.923,
-     2.003
-    ],
-    [
-     "moyennes",
-     2.023,
-     2.283
-    ],
-    [
-     "du",
-     2.283,
-     2.363
-    ],
-    [
-     "deuxième",
-     2.403,
-     2.663
-    ],
-    [
-     "trimestre,",
-     2.663,
-     3.144
-    ],
-    [
-     "c'est",
-     3.324,
-     3.464
-    ],
-    [
-     "pas",
-     3.504,
-     3.585
-    ],
-    [
-     "fameux,",
-     3.645,
-     3.925
+     "vacances,",
+     0.902,
+     1.163
     ],
     [
      "mais",
-     4.045,
-     4.145
+     1.163,
+     1.263
     ],
     [
-     "faut",
-     4.145,
-     4.225
+     "est-ce",
+     1.263,
+     1.403
     ],
     [
-     "aussi",
-     4.225,
-     4.386
+     "que",
+     1.403,
+     1.463
     ],
     [
-     "coller.",
-     4.466,
-     4.706
+     "tu",
+     1.463,
+     1.504
+    ],
+    [
+     "peux",
+     1.524,
+     1.604
+    ],
+    [
+     "me",
+     1.604,
+     1.644
+    ],
+    [
+     "corriger",
+     1.664,
+     1.945
+    ],
+    [
+     "un",
+     1.985,
+     2.025
+    ],
+    [
+     "dossier",
+     2.045,
+     2.245
+    ],
+    [
+     "en",
+     2.265,
+     2.305
+    ],
+    [
+     "vitesse.",
+     2.345,
+     2.606
     ]
    ],
-   "_action": "tenir",
-   "_cible": "autre",
-   "_geste": "explique"
+   "_action": "telephone_oreille",
+   "_geste": "telephone"
   },
   {
    "p": "invite",
-   "t": "J'ai manqué tout le trimestre, du coup, j'ai pas de notes.",
-   "_deb": 5.02,
-   "_fin": 10.458,
-   "d": "[neutral] J'ai manqué tout le trimestre, du coup, j'ai pas de notes.",
+   "t": "Non.",
+   "_deb": 2.746,
+   "_fin": 2.846,
+   "d": "[colere] Non.",
+   "_mots": [
+    [
+     "Non.",
+     0.0,
+     0.1
+    ]
+   ],
+   "_geste": "mains_hanches",
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Alors, si le dossier montre... Pardon.",
+   "_deb": 2.987,
+   "_fin": 4.109,
+   "d": "[reflechit] Alors, si le dossier montre... Pardon.",
+   "_mots": [
+    [
+     "Alors,",
+     0.0,
+     0.16
+    ],
+    [
+     "si",
+     0.18,
+     0.24
+    ],
+    [
+     "le",
+     0.28,
+     0.341
+    ],
+    [
+     "dossier",
+     0.381,
+     0.601
+    ],
+    [
+     "montre...",
+     0.621,
+     0.762
+    ],
+    [
+     "Pardon.",
+     0.922,
+     1.122
+    ]
+   ],
+   "objet": "cafe",
+   "_action": "telephone_oreille",
+   "_geste": "telephone"
+  },
+  {
+   "p": "invite",
+   "t": "J'ai dit non.",
+   "_deb": 4.193,
+   "_fin": 4.515,
+   "d": "[colere] J'ai dit non.",
    "_mots": [
     [
      "J'ai",
      0.0,
-     2.42
+     0.1
     ],
     [
-     "manqué",
-     2.469,
-     2.669
-    ],
-    [
-     "tout",
-     2.81,
-     2.93
-    ],
-    [
-     "le",
-     3.432,
-     3.472
-    ],
-    [
-     "trimestre,",
-     3.472,
-     3.873
-    ],
-    [
-     "du",
-     4.014,
-     4.074
-    ],
-    [
-     "coup,",
-     4.114,
-     4.275
-    ],
-    [
-     "j'ai",
-     4.816,
-     4.916
-    ],
-    [
-     "pas",
-     4.977,
-     5.057
-    ],
-    [
-     "de",
-     5.097,
-     5.157
-    ],
-    [
-     "notes.",
-     5.197,
-     5.438
-    ]
-   ],
-   "objet": "casque_moto",
-   "_cible": "autre",
-   "_geste": "pointe_d"
-  },
-  {
-   "p": "presentateur",
-   "t": "Monsieur.",
-   "_deb": 5.086,
-   "_fin": 5.106,
-   "d": "[shocked] Monsieur.",
-   "_mots": [
-    [
-     "Monsieur.",
-     0.0,
-     0.02
-    ]
-   ],
-   "objet": "stylo",
-   "_action": "tenir",
-   "_cible": "autre",
-   "_geste": "menton"
-  },
-  {
-   "p": "presentateur",
-   "t": "Ouais, je sais, ma belle. Je sais pas, ça m'embête un peu, tu veux combien.",
-   "_deb": 10.618,
-   "_fin": 13.145,
-   "d": "[neutral] Ouais, je sais, ma belle. Je sais pas, ça m'embête un peu, tu veux combien.",
-   "_mots": [
-    [
-     "Ouais,",
-     0.0,
-     0.221
-    ],
-    [
-     "je",
-     0.221,
-     0.281
-    ],
-    [
-     "sais,",
-     0.361,
-     0.482
-    ],
-    [
-     "ma",
-     0.522,
-     0.602
-    ],
-    [
-     "belle.",
-     0.682,
-     0.863
-    ],
-    [
-     "Je",
-     1.364,
-     1.424
-    ],
-    [
-     "sais",
-     1.424,
-     1.525
-    ],
-    [
-     "pas,",
-     1.545,
-     1.625
-    ],
-    [
-     "ça",
-     1.665,
-     1.725
-    ],
-    [
-     "m'embête",
-     1.785,
-     2.046
-    ],
-    [
-     "un",
-     2.086,
-     2.146
-    ],
-    [
-     "peu,",
-     2.166,
-     2.247
-    ],
-    [
-     "tu",
-     2.267,
-     2.347
-    ],
-    [
-     "veux",
-     2.387,
-     2.487
-    ],
-    [
-     "combien.",
-     2.507,
-     2.527
-    ]
-   ],
-   "objet": "colis",
-   "_cible": "autre",
-   "_geste": "menton"
-  },
-  {
-   "p": "presentateur",
-   "t": "Euh, je sais pas, 16.",
-   "_deb": 13.14,
-   "_fin": 15.1,
-   "d": "[happy] Euh, je sais pas, 16.",
-   "_mots": [
-    [
-     "Euh,",
-     0.0,
-     1.1
-    ],
-    [
-     "je",
-     1.45,
-     1.47
-    ],
-    [
-     "sais",
-     1.25,
-     1.411
-    ],
-    [
-     "pas,",
-     1.431,
-     1.6
-    ],
-    [
-     "16.",
-     1.6,
-     1.96
-    ]
-   ],
-   "objet": "colis",
-   "_cible": "autre",
-   "_geste": "menton"
-  },
-  {
-   "p": "presentateur",
-   "t": "Ouais, je te mets 18.",
-   "_deb": 15.313,
-   "_fin": 16.46,
-   "d": "[neutral] Ouais, je te mets 18.",
-   "_mots": [
-    [
-     "Ouais,",
-     0.0,
-     0.12
-    ],
-    [
-     "je",
+     "dit",
      0.12,
-     0.2
+     0.201
     ],
     [
-     "te",
-     0.24,
-     0.3
-    ],
-    [
-     "mets",
-     0.32,
-     0.367
-    ],
-    [
-     "18.",
-     0.367,
-     1.147
+     "non.",
+     0.221,
+     0.322
     ]
    ],
-   "objet": "stylo",
-   "_cible": "autre"
+   "_geste": "croises",
+   "objet": "telephone"
   },
   {
-   "p": "invite",
-   "t": "Mais la chance, j'ai eu combien, moi, monsieur.",
-   "_deb": 16.876,
-   "_fin": 18.5,
-   "d": "[jealous] Mais la chance, j'ai eu combien, moi, monsieur.",
+   "p": "presentateur",
+   "t": "Mais pourquoi.",
+   "_deb": 4.555,
+   "_fin": 4.836,
+   "d": "[sceptique] Mais pourquoi.",
    "_mots": [
     [
      "Mais",
      0.0,
-     0.1
-    ],
-    [
-     "la",
-     0.14,
-     0.201
-    ],
-    [
-     "chance,",
-     0.341,
-     0.642
-    ],
-    [
-     "j'ai",
-     0.722,
-     0.822
-    ],
-    [
-     "eu",
-     0.862,
-     0.942
-    ],
-    [
-     "combien,",
-     0.942,
-     1.143
-    ],
-    [
-     "moi,",
-     1.203,
-     1.283
-    ],
-    [
-     "monsieur.",
-     1.343,
-     1.624
-    ]
-   ],
-   "objet": "casque_moto",
-   "_cible": "autre",
-   "_geste": "mains_hanches"
-  },
-  {
-   "p": "presentateur",
-   "t": "Euh, toi, Olivia, t'as eu 11, ma belle.",
-   "_deb": 18.861,
-   "_fin": 22.068,
-   "d": "[neutral] Euh, toi, Olivia, t'as eu 11, ma belle.",
-   "_mots": [
-    [
-     "Euh,",
-     0.0,
-     0.16
-    ],
-    [
-     "toi,",
-     0.24,
-     0.321
-    ],
-    [
-     "Olivia,",
-     0.421,
-     0.721
-    ],
-    [
-     "t'as",
-     1.343,
-     2.866
-    ],
-    [
-     "eu",
-     2.866,
-     2.886
-    ],
-    [
-     "11,",
-     2.659,
-     2.899
-    ],
-    [
-     "ma",
-     2.947,
-     2.987
-    ],
-    [
-     "belle.",
-     3.047,
-     3.207
-    ]
-   ],
-   "objet": "colis",
-   "_cible": "autre",
-   "_geste": "explique"
-  },
-  {
-   "p": "invite",
-   "t": "C'est tout.",
-   "_deb": 22.409,
-   "_fin": 22.734,
-   "d": "[annoyed] C'est tout.",
-   "_mots": [
-    [
-     "C'est",
-     0.0,
-     0.083
-    ],
-    [
-     "tout.",
-     0.083,
-     0.325
-    ]
-   ],
-   "objet": "casque_moto",
-   "_cible": "autre",
-   "_geste": "menton"
-  },
-  {
-   "p": "presentateur",
-   "t": "Ouais. Fais-moi sourire.",
-   "_deb": 23.24,
-   "_fin": 25.263,
-   "d": "[neutral] Ouais. Fais-moi sourire.",
-   "_mots": [
-    [
-     "Ouais.",
-     0.0,
-     0.99
-    ],
-    [
-     "Fais-moi",
-     1.475,
-     1.698
-    ],
-    [
-     "sourire.",
-     1.759,
-     2.023
-    ]
-   ],
-   "objet": "colis",
-   "_cible": "autre",
-   "_geste": "menton"
-  },
-  {
-   "p": "presentateur",
-   "t": "T'as eu 16.",
-   "_deb": 28.593,
-   "_fin": 29.56,
-   "d": "[neutral] T'as eu 16.",
-   "_mots": [
-    [
-     "T'as",
-     0.0,
-     0.361
-    ],
-    [
-     "eu",
-     0.421,
-     0.441
-    ],
-    [
-     "16.",
-     0.247,
-     0.967
-    ]
-   ],
-   "objet": "tablette",
-   "_cible": "autre",
-   "_geste": "menton"
-  },
-  {
-   "p": "invite",
-   "t": "Monsieur c'est quoi ce favoritisme. Moi j'ai eu combien.",
-   "_deb": 30.277,
-   "_fin": 31.921,
-   "d": "[angry] Monsieur c'est quoi ce favoritisme. Moi j'ai eu combien.",
-   "_mots": [
-    [
-     "Monsieur",
-     0.0,
-     0.221
-    ],
-    [
-     "c'est",
-     0.241,
-     0.341
-    ],
-    [
-     "quoi",
-     0.361,
-     0.441
-    ],
-    [
-     "ce",
-     0.481,
-     0.522
-    ],
-    [
-     "favoritisme.",
-     0.542,
-     1.003
-    ],
-    [
-     "Moi",
-     1.083,
-     1.183
-    ],
-    [
-     "j'ai",
-     1.223,
-     1.344
-    ],
-    [
-     "eu",
-     1.344,
-     1.404
-    ],
-    [
-     "combien.",
-     1.444,
-     1.644
-    ]
-   ],
-   "objet": "cafe",
-   "_cible": "autre",
-   "_geste": "mains_hanches"
-  },
-  {
-   "p": "presentateur",
-   "t": "Toi t'as 8. C'est tout Fais moins sourire.",
-   "_deb": 32.623,
-   "_fin": 34.648,
-   "d": "[neutral] Toi t'as 8. C'est tout Fais moins sourire.",
-   "_mots": [
-    [
-     "Toi",
-     0.0,
      0.08
     ],
     [
-     "t'as",
+     "pourquoi.",
      0.1,
-     0.217
-    ],
-    [
-     "8.",
-     0.217,
-     0.557
-    ],
-    [
-     "C'est",
-     0.742,
-     0.882
-    ],
-    [
-     "tout",
-     0.903,
-     1.063
-    ],
-    [
-     "Fais",
-     1.464,
-     1.564
-    ],
-    [
-     "moins",
-     1.564,
-     1.745
-    ],
-    [
-     "sourire.",
-     1.765,
-     2.025
+     0.281
     ]
    ],
    "objet": "cafe",
-   "_cible": "autre",
-   "_geste": "menton"
-  },
-  {
-   "p": "presentateur",
-   "t": "Allez tu redescends à 5 pour les chicots.",
-   "_deb": 36.133,
-   "_fin": 37.527,
-   "d": "[neutral] Allez tu redescends à 5 pour les chicots.",
-   "_mots": [
-    [
-     "Allez",
-     0.0,
-     0.202
-    ],
-    [
-     "tu",
-     0.242,
-     0.323
-    ],
-    [
-     "redescends",
-     0.323,
-     0.626
-    ],
-    [
-     "à",
-     0.646,
-     0.667
-    ],
-    [
-     "5",
-     0.727,
-     0.827
-    ],
-    [
-     "pour",
-     0.909,
-     1.01
-    ],
-    [
-     "les",
-     1.03,
-     1.111
-    ],
-    [
-     "chicots.",
-     1.131,
-     1.394
-    ]
-   ],
-   "objet": "colis",
-   "_cible": "autre"
+   "_action": "telephone_oreille",
+   "_geste": "telephone"
   },
   {
    "p": "invite",
-   "t": "Et moi monsieur. J'ai eu combien.",
-   "_deb": 38.571,
-   "_fin": 40.135,
-   "d": "[neutral] Et moi monsieur. J'ai eu combien.",
+   "t": "Parce que je suis en vacances.",
+   "_deb": 4.917,
+   "_fin": 5.6,
+   "d": "[joie] Parce que je suis en vacances.",
+   "_mots": [
+    [
+     "Parce",
+     0.0,
+     0.14
+    ],
+    [
+     "que",
+     0.161,
+     0.221
+    ],
+    [
+     "je",
+     0.261,
+     0.301
+    ],
+    [
+     "suis",
+     0.301,
+     0.382
+    ],
+    [
+     "en",
+     0.382,
+     0.422
+    ],
+    [
+     "vacances.",
+     0.442,
+     0.683
+    ]
+   ],
+   "_geste": "menton",
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Et alors, ça va, tu peux prendre une heure ou deux pour aider les collègues, non.",
+   "_deb": 5.62,
+   "_fin": 7.634,
+   "d": "[colere] Et alors, ça va, tu peux prendre une heure ou deux pour aider les collègues, non.",
    "_mots": [
     [
      "Et",
      0.0,
-     0.06
+     0.061
     ],
     [
-     "moi",
-     0.1,
-     0.22
+     "alors,",
+     0.081,
+     0.222
     ],
     [
-     "monsieur.",
-     0.28,
-     0.621
+     "ça",
+     0.282,
+     0.342
     ],
     [
-     "J'ai",
-     1.082,
-     1.143
+     "va,",
+     0.382,
+     0.443
     ],
     [
-     "eu",
-     1.203,
-     1.243
+     "tu",
+     0.483,
+     0.563
     ],
     [
-     "combien.",
-     1.303,
-     1.564
-    ]
-   ],
-   "objet": "casque_moto",
-   "_cible": "autre",
-   "_geste": "pointe_d"
-  },
-  {
-   "p": "presentateur",
-   "t": "Toi t'as au moins 3,2.",
-   "_deb": 40.716,
-   "_fin": 41.98,
-   "d": "[neutral] Toi t'as au moins 3,2.",
-   "_mots": [
-    [
-     "Toi",
-     0.0,
-     0.441
-    ],
-    [
-     "t'as",
-     0.521,
-     0.702
-    ],
-    [
-     "au",
-     0.762,
-     0.962
-    ],
-    [
-     "moins",
-     0.982,
-     1.002
-    ],
-    [
-     "3,2.",
-     0.424,
-     1.264
-    ]
-   ],
-   "objet": "telecommande",
-   "_cible": "autre",
-   "_geste": "explique"
-  },
-  {
-   "p": "invite",
-   "t": "Ça fait vraiment pas beaucoup.",
-   "_deb": 42.219,
-   "_fin": 43.262,
-   "d": "[confused] Ça fait vraiment pas beaucoup.",
-   "_mots": [
-    [
-     "Ça",
-     0.0,
-     0.081
-    ],
-    [
-     "fait",
-     0.121,
-     0.241
-    ],
-    [
-     "vraiment",
-     0.261,
-     0.542
-    ],
-    [
-     "pas",
-     0.582,
-     0.682
-    ],
-    [
-     "beaucoup.",
-     0.742,
-     1.043
-    ]
-   ],
-   "objet": "casque_moto",
-   "_cible": "autre",
-   "_geste": "mains_hanches"
-  },
-  {
-   "p": "presentateur",
-   "t": "C'est déjà assez pour prendre la route non 3,2 grammes d'alcool dans le sang faut arrêter la vodka avec les choco-pops.",
-   "_deb": 43.803,
-   "_fin": 48.58,
-   "d": "[neutral] C'est déjà assez pour prendre la route non 3,2 grammes d'alcool dans le sang faut arrêter la vodka avec les choco-pops.",
-   "_mots": [
-    [
-     "C'est",
-     0.0,
-     0.161
-    ],
-    [
-     "déjà",
-     0.181,
-     0.321
-    ],
-    [
-     "assez",
-     0.441,
-     0.622
-    ],
-    [
-     "pour",
-     0.682,
-     0.782
+     "peux",
+     0.563,
+     0.664
     ],
     [
      "prendre",
-     0.842,
-     1.023
+     0.664,
+     0.805
     ],
     [
-     "la",
-     1.063,
-     1.123
+     "une",
+     0.805,
+     0.865
     ],
     [
-     "route",
-     1.203,
-     1.444
-    ],
-    [
-     "non",
-     1.484,
-     1.737
-    ],
-    [
-     "3,2",
-     1.737,
-     2.557
-    ],
-    [
-     "grammes",
-     2.628,
-     2.809
-    ],
-    [
-     "d'alcool",
-     2.829,
-     3.07
-    ],
-    [
-     "dans",
-     3.13,
-     3.231
-    ],
-    [
-     "le",
-     3.271,
-     3.311
-    ],
-    [
-     "sang",
-     3.351,
-     3.472
-    ],
-    [
-     "faut",
-     3.492,
-     3.592
-    ],
-    [
-     "arrêter",
-     3.592,
-     3.793
-    ],
-    [
-     "la",
-     3.853,
-     3.893
-    ],
-    [
-     "vodka",
-     3.913,
-     4.074
-    ],
-    [
-     "avec",
-     4.114,
-     4.235
-    ],
-    [
-     "les",
-     4.275,
-     4.335
-    ],
-    [
-     "choco-pops.",
-     4.355,
-     4.777
-    ]
-   ],
-   "objet": "tablette",
-   "_cible": "autre",
-   "_geste": "explique"
-  },
-  {
-   "p": "presentateur",
-   "t": "Tes parents ils te font dormir dans la cave avant ou quoi.",
-   "_deb": 48.761,
-   "_fin": 50.126,
-   "d": "[neutral] Tes parents ils te font dormir dans la cave avant ou quoi.",
-   "_mots": [
-    [
-     "Tes",
-     0.0,
-     0.1
-    ],
-    [
-     "parents",
-     0.12,
-     0.261
-    ],
-    [
-     "ils",
-     0.261,
-     0.321
-    ],
-    [
-     "te",
-     0.321,
-     0.361
-    ],
-    [
-     "font",
-     0.361,
-     0.441
-    ],
-    [
-     "dormir",
-     0.461,
-     0.642
-    ],
-    [
-     "dans",
-     0.662,
-     0.763
-    ],
-    [
-     "la",
-     0.783,
-     0.823
-    ],
-    [
-     "cave",
-     0.863,
-     1.004
-    ],
-    [
-     "avant",
-     1.044,
-     1.184
+     "heure",
+     0.865,
+     1.026
     ],
     [
      "ou",
-     1.204,
-     1.245
+     1.026,
+     1.106
     ],
     [
-     "quoi.",
-     1.265,
-     1.365
+     "deux",
+     1.106,
+     1.207
+    ],
+    [
+     "pour",
+     1.227,
+     1.307
+    ],
+    [
+     "aider",
+     1.348,
+     1.468
+    ],
+    [
+     "les",
+     1.508,
+     1.592
+    ],
+    [
+     "collègues,",
+     1.592,
+     1.873
+    ],
+    [
+     "non.",
+     1.873,
+     2.014
     ]
    ],
-   "objet": "tablette",
-   "_cible": "autre",
-   "_geste": "explique"
+   "objet": "cafe",
+   "_action": "telephone_oreille",
+   "_geste": "telephone"
   },
   {
    "p": "invite",
-   "t": "Mais moi monsieur monsieur vous m'avez oublié.",
-   "_deb": 50.749,
-   "_fin": 52.557,
-   "d": "[confused] Mais moi monsieur monsieur vous m'avez oublié.",
+   "t": "Une heure ou deux.",
+   "_deb": 7.674,
+   "_fin": 8.216,
+   "d": "[sceptique] Une heure ou deux.",
+   "_mots": [
+    [
+     "Une",
+     0.0,
+     0.08
+    ],
+    [
+     "heure",
+     0.14,
+     0.281
+    ],
+    [
+     "ou",
+     0.341,
+     0.382
+    ],
+    [
+     "deux.",
+     0.422,
+     0.542
+    ]
+   ],
+   "_geste": "croises",
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Mais t'as vu ça dans quel film.",
+   "_deb": 8.216,
+   "_fin": 8.92,
+   "d": "[colere] Mais t'as vu ça dans quel film.",
    "_mots": [
     [
      "Mais",
      0.0,
-     0.1
+     0.081
     ],
     [
-     "moi",
-     0.343,
-     0.443
-    ],
-    [
-     "monsieur",
-     0.503,
-     0.724
-    ],
-    [
-     "monsieur",
-     0.764,
-     0.945
-    ],
-    [
-     "vous",
-     0.965,
-     1.086
-    ],
-    [
-     "m'avez",
-     1.106,
-     1.427
-    ],
-    [
-     "oublié.",
-     1.427,
-     1.808
-    ]
-   ],
-   "objet": "casque_moto",
-   "_cible": "autre",
-   "_geste": "pointe_d"
-  },
-  {
-   "p": "presentateur",
-   "t": "Oh excuse -moi mais Lucie, de toute façon toi depuis que t'as le premier rôle dans Fourmise tu te la racontes.",
-   "_deb": 52.878,
-   "_fin": 56.333,
-   "d": "[neutral] Oh excuse -moi mais Lucie, de toute façon toi depuis que t'as le premier rôle dans Fourmise tu te la racontes.",
-   "_mots": [
-    [
-     "Oh",
-     0.0,
-     0.061
-    ],
-    [
-     "excuse",
+     "t'as",
      0.081,
-     0.382
-    ],
-    [
-     "-moi",
-     0.382,
-     0.462
-    ],
-    [
-     "mais",
-     0.542,
-     0.703
-    ],
-    [
-     "Lucie,",
-     0.723,
-     0.924
-    ],
-    [
-     "de",
-     0.944,
-     1.004
-    ],
-    [
-     "toute",
-     1.004,
-     1.104
-    ],
-    [
-     "façon",
-     1.124,
-     1.305
-    ],
-    [
-     "toi",
-     1.345,
-     1.425
-    ],
-    [
-     "depuis",
-     1.506,
-     1.666
-    ],
-    [
-     "que",
-     1.666,
-     1.727
-    ],
-    [
-     "t'as",
-     1.727,
-     1.787
-    ],
-    [
-     "le",
-     1.807,
-     1.867
-    ],
-    [
-     "premier",
-     1.887,
-     2.068
-    ],
-    [
-     "rôle",
-     2.088,
-     2.228
-    ],
-    [
-     "dans",
-     2.228,
-     2.349
-    ],
-    [
-     "Fourmise",
-     2.369,
-     2.69
-    ],
-    [
-     "tu",
-     2.831,
-     2.891
-    ],
-    [
-     "te",
-     2.971,
-     2.991
-    ],
-    [
-     "la",
-     2.953,
-     3.013
-    ],
-    [
-     "racontes.",
-     3.053,
-     3.455
-    ]
-   ],
-   "objet": "tablette",
-   "_cible": "autre",
-   "_geste": "explique"
-  },
-  {
-   "p": "presentateur",
-   "t": "En bref t'as eu 6.",
-   "_deb": 56.654,
-   "_fin": 57.4,
-   "d": "[neutral] En bref t'as eu 6.",
-   "_mots": [
-    [
-     "En",
-     0.0,
-     0.04
-    ],
-    [
-     "bref",
-     0.08,
-     0.241
-    ],
-    [
-     "t'as",
-     0.321,
-     0.542
-    ],
-    [
-     "eu",
-     0.703,
-     0.723
-    ],
-    [
-     "6.",
-     0.506,
-     0.746
-    ]
-   ],
-   "objet": "colis",
-   "_cible": "autre",
-   "_geste": "explique"
-  },
-  {
-   "p": "invite",
-   "t": "Quoi c'est tout.",
-   "_deb": 57.477,
-   "_fin": 58.039,
-   "d": "[shocked] Quoi c'est tout.",
-   "_mots": [
-    [
-     "Quoi",
-     0.0,
-     0.12
-    ],
-    [
-     "c'est",
-     0.281,
-     0.402
-    ],
-    [
-     "tout.",
-     0.442,
-     0.562
-    ]
-   ],
-   "_cible": "autre",
-   "_geste": "mains_hanches"
-  },
-  {
-   "p": "presentateur",
-   "t": "Ouais, t'as vu même ta moyenne est plus grande que toi.",
-   "_deb": 58.32,
-   "_fin": 59.886,
-   "d": "[neutral] Ouais, t'as vu même ta moyenne est plus grande que toi.",
-   "_mots": [
-    [
-     "Ouais,",
-     0.0,
-     0.101
-    ],
-    [
-     "t'as",
-     0.241,
-     0.321
-    ],
-    [
-     "vu",
-     0.382,
-     0.442
-    ],
-    [
-     "même",
-     0.522,
-     0.643
-    ],
-    [
-     "ta",
-     0.683,
-     0.723
-    ],
-    [
-     "moyenne",
-     0.783,
-     1.004
-    ],
-    [
-     "est",
-     1.024,
-     1.084
-    ],
-    [
-     "plus",
-     1.084,
-     1.185
-    ],
-    [
-     "grande",
-     1.185,
-     1.345
-    ],
-    [
-     "que",
-     1.385,
-     1.466
-    ],
-    [
-     "toi.",
-     1.486,
-     1.566
-    ]
-   ],
-   "objet": "tablette",
-   "_cible": "autre",
-   "_geste": "explique"
-  },
-  {
-   "p": "invite",
-   "t": "Ah mais faut pas déconner sur la taille aussi, calmez-vous.",
-   "_deb": 60.107,
-   "_fin": 62.898,
-   "d": "[annoyed] Ah mais faut pas déconner sur la taille aussi, calmez-vous.",
-   "_mots": [
-    [
-     "Ah",
-     0.0,
-     0.06
-    ],
-    [
-     "mais",
-     0.141,
-     0.261
-    ],
-    [
-     "faut",
-     0.361,
-     0.482
-    ],
-    [
-     "pas",
-     0.522,
-     0.582
-    ],
-    [
-     "déconner",
-     0.664,
-     1.045
-    ],
-    [
-     "sur",
-     1.146,
-     1.246
-    ],
-    [
-     "la",
-     1.306,
-     1.366
-    ],
-    [
-     "taille",
-     1.427,
-     1.627
-    ],
-    [
-     "aussi,",
-     1.687,
-     1.888
-    ],
-    [
-     "calmez-vous.",
-     2.209,
-     2.791
-    ]
-   ],
-   "objet": "casque_moto",
-   "_cible": "autre",
-   "_geste": "mains_hanches"
-  },
-  {
-   "p": "presentateur",
-   "t": "Ouais, c'est la ta gueule.",
-   "_deb": 63.038,
-   "_fin": 63.74,
-   "d": "[neutral] Ouais, c'est la ta gueule.",
-   "_mots": [
-    [
-     "Ouais,",
-     0.0,
-     0.121
-    ],
-    [
-     "c'est",
-     0.221,
-     0.381
-    ],
-    [
-     "la",
-     0.381,
-     0.422
-    ],
-    [
-     "ta",
-     0.442,
-     0.502
-    ],
-    [
-     "gueule.",
-     0.562,
-     0.702
-    ]
-   ],
-   "objet": "telecommande",
-   "_cible": "autre",
-   "_geste": "explique"
-  },
-  {
-   "p": "invite",
-   "t": "Non mais monsieur, c'est bien connu, vous favorisez que les filles.",
-   "_deb": 63.961,
-   "_fin": 66.108,
-   "d": "[angry] Non mais monsieur, c'est bien connu, vous favorisez que les filles.",
-   "_mots": [
-    [
-     "Non",
-     0.0,
-     0.1
-    ],
-    [
-     "mais",
-     0.141,
-     0.241
-    ],
-    [
-     "monsieur,",
-     0.281,
-     0.502
-    ],
-    [
-     "c'est",
-     0.522,
-     0.642
-    ],
-    [
-     "bien",
-     0.662,
-     0.783
-    ],
-    [
-     "connu,",
-     0.823,
-     1.003
-    ],
-    [
-     "vous",
-     1.104,
-     1.204
-    ],
-    [
-     "favorisez",
-     1.264,
-     1.665
-    ],
-    [
-     "que",
-     1.706,
-     1.786
-    ],
-    [
-     "les",
-     1.846,
-     1.926
-    ],
-    [
-     "filles.",
-     1.946,
-     2.147
-    ]
-   ],
-   "objet": "telecommande",
-   "_cible": "autre",
-   "_geste": "mains_hanches"
-  },
-  {
-   "p": "presentateur",
-   "t": "Bah qu'est-ce que tu m'emmerdes, toi t'est une fille, non.",
-   "_deb": 66.208,
-   "_fin": 67.534,
-   "d": "[neutral] Bah qu'est-ce que tu m'emmerdes, toi t'es une fille, non.",
-   "_mots": [
-    [
-     "Bah",
-     0.0,
      0.161
     ],
     [
-     "qu'est-ce",
+     "vu",
      0.161,
-     0.422
+     0.242
     ],
     [
-     "que",
-     0.462,
-     0.482
+     "ça",
+     0.262,
+     0.302
     ],
     [
-     "tu",
-     0.243,
-     0.303
+     "dans",
+     0.362,
+     0.443
     ],
     [
-     "m'emmerdes,",
-     0.383,
-     0.684
+     "quel",
+     0.443,
+     0.563
     ],
     [
-     "toi",
-     0.704,
-     0.805
-    ],
-    [
-     "t'es",
-     0.825,
-     0.905
-    ],
-    [
-     "une",
-     0.925,
-     1.005
-    ],
-    [
-     "fille,",
-     1.045,
-     1.186
-    ],
-    [
-     "non.",
-     1.226,
-     1.326
+     "film.",
+     0.603,
+     0.704
     ]
    ],
-   "_cible": "autre",
-   "_geste": "explique"
+   "objet": "telephone",
+   "_action": "telephone_oreille",
+   "_geste": "telephone"
   },
   {
    "p": "invite",
-   "t": "Alors, déjà, je suis non-genrée, et qu'est-ce qui vous fait dire que je suis une fille.",
-   "_deb": 67.775,
-   "_fin": 71.668,
-   "d": "[confused] Alors, déjà, je suis non-genrée, et qu'est-ce qui vous fait dire que je suis une fille.",
+   "t": "Toi, t'est ouf.",
+   "_deb": 8.96,
+   "_fin": 9.242,
+   "d": "[blase] Toi, t'es ouf.",
    "_mots": [
     [
-     "Alors,",
+     "Toi,",
      0.0,
+     0.081
+    ],
+    [
+     "t'es",
+     0.101,
      0.201
     ],
     [
-     "déjà,",
-     0.702,
-     0.903
-    ],
-    [
-     "je",
-     1.204,
-     1.264
-    ],
-    [
-     "suis",
-     1.425,
-     1.626
-    ],
-    [
-     "non-genrée,",
-     1.706,
-     2.268
-    ],
-    [
-     "et",
-     2.569,
-     2.649
-    ],
-    [
-     "qu'est-ce",
-     2.749,
-     2.95
-    ],
-    [
-     "qui",
-     2.95,
-     3.03
-    ],
-    [
-     "vous",
-     3.03,
-     3.131
-    ],
-    [
-     "fait",
-     3.151,
-     3.231
-    ],
-    [
-     "dire",
-     3.251,
-     3.372
-    ],
-    [
-     "que",
-     3.372,
-     3.492
-    ],
-    [
-     "je",
-     3.492,
-     3.532
-    ],
-    [
-     "suis",
-     3.532,
-     3.632
-    ],
-    [
-     "une",
-     3.632,
-     3.713
-    ],
-    [
-     "fille.",
-     3.733,
-     3.893
+     "ouf.",
+     0.221,
+     0.282
     ]
    ],
    "objet": "casque_moto",
-   "_cible": "autre",
-   "_geste": "mains_hanches"
+   "_geste": "menton"
   },
   {
    "p": "presentateur",
-   "t": "Je sais pas, t'as un carré plongeant, des bises, une voix insupportable.",
-   "_deb": 71.809,
-   "_fin": 73.898,
-   "d": "[neutral] Je sais pas, t'as un carré plongeant, des bises, une voix insupportable.",
+   "t": "Je t'ai envoyé le dossier via WeTransfer, il fait 60 pages.",
+   "_deb": 9.302,
+   "_fin": 11.193,
+   "d": "[explique] Je t'ai envoyé le dossier via WeTransfer, il fait 60 pages.",
    "_mots": [
     [
      "Je",
@@ -1645,563 +469,1759 @@
      0.08
     ],
     [
-     "sais",
+     "t'ai",
      0.08,
-     0.142
+     0.141
     ],
     [
-     "pas,",
-     0.142,
-     0.242
+     "envoyé",
+     0.141,
+     0.281
     ],
     [
-     "t'as",
-     0.282,
-     0.363
+     "le",
+     0.362,
+     0.402
     ],
     [
-     "un",
-     0.403,
-     0.443
+     "dossier",
+     0.422,
+     0.643
     ],
     [
-     "carré",
-     0.463,
-     0.624
+     "via",
+     0.663,
+     0.764
     ],
     [
-     "plongeant,",
-     0.704,
-     1.025
+     "WeTransfer,",
+     0.804,
+     1.206
     ],
     [
-     "des",
-     1.065,
-     1.125
+     "il",
+     1.286,
+     1.327
     ],
     [
-     "bises,",
-     1.145,
-     1.306
+     "fait",
+     1.327,
+     1.378
     ],
     [
-     "une",
-     1.366,
-     1.446
+     "60",
+     1.378,
+     1.398
     ],
     [
-     "voix",
-     1.467,
-     1.547
-    ],
-    [
-     "insupportable.",
-     1.587,
-     2.089
+     "pages.",
+     1.309,
+     1.891
     ]
    ],
-   "objet": "colis",
-   "_cible": "autre",
-   "_geste": "explique"
-  },
-  {
-   "p": "presentateur",
-   "t": "T'es quoi, t'est un dauphin, espèce de connasse.",
-   "_deb": 73.898,
-   "_fin": 75.142,
-   "d": "[neutral] T'es quoi, t'es un dauphin, espèce de connasse.",
-   "_mots": [
-    [
-     "T'es",
-     0.0,
-     0.08
-    ],
-    [
-     "quoi,",
-     0.1,
-     0.22
-    ],
-    [
-     "t'es",
-     0.22,
-     0.321
-    ],
-    [
-     "un",
-     0.361,
-     0.401
-    ],
-    [
-     "dauphin,",
-     0.421,
-     0.622
-    ],
-    [
-     "espèce",
-     0.622,
-     0.863
-    ],
-    [
-     "de",
-     0.883,
-     0.943
-    ],
-    [
-     "connasse.",
-     0.983,
-     1.244
-    ]
-   ],
-   "objet": "casque_moto",
-   "_cible": "autre",
-   "_geste": "explique"
+   "objet": "cafe",
+   "_action": "telephone_oreille",
+   "_geste": "telephone"
   },
   {
    "p": "invite",
-   "t": "Alors, je me sens radiateur à 100 ans chèvres.",
-   "_deb": 75.282,
-   "_fin": 77.893,
-   "d": "[sarcastic] Alors, je me sens radiateur à 100 ans chèvres.",
+   "t": "Parfait. J'en ai rien à foutre.",
+   "_deb": 11.273,
+   "_fin": 12.377,
+   "d": "[blase] Parfait. J'en ai rien à foutre.",
+   "_mots": [
+    [
+     "Parfait.",
+     0.0,
+     0.261
+    ],
+    [
+     "J'en",
+     0.522,
+     0.643
+    ],
+    [
+     "ai",
+     0.643,
+     0.703
+    ],
+    [
+     "rien",
+     0.703,
+     0.823
+    ],
+    [
+     "à",
+     0.883,
+     0.904
+    ],
+    [
+     "foutre.",
+     0.944,
+     1.104
+    ]
+   ],
+   "objet": "casque_moto",
+   "_geste": "croises"
+  },
+  {
+   "p": "presentateur",
+   "t": "Écoute, Elliot, c'est comme ça.",
+   "_deb": 12.437,
+   "_fin": 13.481,
+   "d": "[colere] Écoute, Elliot, c'est comme ça.",
+   "_mots": [
+    [
+     "Écoute,",
+     0.0,
+     0.181
+    ],
+    [
+     "Elliot,",
+     0.201,
+     0.482
+    ],
+    [
+     "c'est",
+     0.703,
+     0.824
+    ],
+    [
+     "comme",
+     0.824,
+     0.964
+    ],
+    [
+     "ça.",
+     0.984,
+     1.044
+    ]
+   ],
+   "objet": "telephone",
+   "_action": "telephone_oreille",
+   "_geste": "telephone"
+  },
+  {
+   "p": "invite",
+   "t": "Ok.",
+   "_deb": 13.742,
+   "_fin": 13.823,
+   "d": "[neutre] Ok.",
+   "_mots": [
+    [
+     "Ok.",
+     0.0,
+     0.081
+    ]
+   ],
+   "objet": "cafe",
+   "_geste": "croises"
+  },
+  {
+   "p": "presentateur",
+   "t": "Alors, je te disais.",
+   "_deb": 14.124,
+   "_fin": 14.746,
+   "d": "[reflechit] Alors, je te disais.",
    "_mots": [
     [
      "Alors,",
      0.0,
-     0.181
+     0.18
     ],
     [
      "je",
-     0.683,
-     0.843
+     0.221,
+     0.261
     ],
     [
-     "me",
-     0.884,
-     0.924
+     "te",
+     0.301,
+     0.341
     ],
     [
-     "sens",
-     1.024,
-     1.144
-    ],
-    [
-     "radiateur",
-     1.205,
-     1.646
-    ],
-    [
-     "à",
-     1.706,
-     1.726
-    ],
-    [
-     "100",
-     1.758,
-     1.849
-    ],
-    [
-     "ans",
-     1.849,
-     1.969
-    ],
-    [
-     "chèvres.",
-     2.109,
-     2.611
+     "disais.",
+     0.381,
+     0.622
     ]
    ],
-   "objet": "casque_moto",
-   "_cible": "autre",
-   "_geste": "mains_hanches"
+   "objet": "telephone",
+   "_action": "telephone_oreille",
+   "_geste": "telephone"
   },
   {
-   "p": "presentateur",
-   "t": "Ça marche, donc tu vois, je te mets 4 à 100 dans zéro.",
-   "_deb": 77.893,
-   "_fin": 80.26,
-   "d": "[neutral] Ça marche, donc tu vois, je te mets 4 à 100 dans zéro.",
+   "p": "invite",
+   "t": "C'est marrant que tu penses que je vais vraiment bosser, là.",
+   "_deb": 14.746,
+   "_fin": 16.276,
+   "d": "[sarcastique] C'est marrant que tu penses que je vais vraiment bosser, là.",
    "_mots": [
     [
-     "Ça",
+     "C'est",
      0.0,
      0.1
     ],
     [
-     "marche,",
-     0.401,
-     0.722
+     "marrant",
+     0.1,
+     0.261
     ],
     [
-     "donc",
-     0.822,
-     0.943
-    ],
-    [
-     "tu",
-     1.023,
-     1.083
-    ],
-    [
-     "vois,",
-     1.123,
-     1.224
-    ],
-    [
-     "je",
-     1.224,
-     1.284
-    ],
-    [
-     "te",
-     1.344,
-     1.384
-    ],
-    [
-     "mets",
-     1.424,
-     1.487
-    ],
-    [
-     "4",
-     1.487,
-     1.747
-    ],
-    [
-     "à",
-     1.825,
-     1.846
-    ],
-    [
-     "100",
-     1.867,
-     2.026
-    ],
-    [
-     "dans",
-     2.026,
-     2.187
-    ],
-    [
-     "zéro.",
-     2.207,
-     2.367
-    ]
-   ],
-   "objet": "telecommande",
-   "_cible": "autre"
-  },
-  {
-   "p": "presentateur",
-   "t": "Supplément va te faire cuire le cul à 45 degrés thermostasis",
-   "_deb": 80.822,
-   "_fin": 83.927,
-   "d": "[neutral] supplément va te faire cuire le cul à 45 degrés thermostasis",
-   "_mots": [
-    [
-     "supplément",
-     0.0,
+     "que",
+     0.301,
      0.361
     ],
     [
-     "va",
-     0.421,
-     0.481
+     "tu",
+     0.382,
+     0.442
     ],
     [
-     "te",
-     0.501,
-     0.562
+     "penses",
+     0.482,
+     0.663
     ],
     [
-     "faire",
-     0.582,
-     0.702
+     "que",
+     0.663,
+     0.743
     ],
     [
-     "cuire",
-     0.742,
-     0.923
+     "je",
+     0.763,
+     0.823
     ],
     [
-     "le",
-     0.963,
-     1.023
+     "vais",
+     0.826,
+     0.906
     ],
     [
-     "cul",
-     1.103,
-     1.384
+     "vraiment",
+     0.906,
+     1.148
     ],
     [
-     "à",
-     1.404,
-     1.424
+     "bosser,",
+     1.188,
+     1.43
     ],
     [
-     "45",
-     1.458,
-     2.018
-    ],
-    [
-     "degrés",
-     2.207,
-     2.474
-    ],
-    [
-     "thermostasis",
-     2.474,
-     3.105
+     "là.",
+     1.49,
+     1.53
     ]
    ],
-   "objet": "tablette",
-   "_action": "tenir",
-   "_cible": "autre",
-   "_mot_objet": "faire cuire",
-   "_geste": "explique"
+   "objet": "casque_moto",
+   "_geste": "menton"
   },
   {
    "p": "presentateur",
-   "t": "on est bon",
-   "_deb": 84.894,
-   "_fin": 85.238,
-   "d": "[neutral] on est bon",
+   "t": "Ah, mais je te confirme que tu vas bosser, on a besoin de toi.",
+   "_deb": 16.276,
+   "_fin": 18.168,
+   "d": "[colere] Ah, mais je te confirme que tu vas bosser, on a besoin de toi.",
    "_mots": [
     [
-     "on",
+     "Ah,",
      0.0,
      0.061
     ],
     [
-     "est",
+     "mais",
+     0.161,
+     0.282
+    ],
+    [
+     "je",
+     0.302,
+     0.342
+    ],
+    [
+     "te",
+     0.383,
+     0.443
+    ],
+    [
+     "confirme",
+     0.524,
+     0.805
+    ],
+    [
+     "que",
+     0.846,
+     0.946
+    ],
+    [
+     "tu",
+     0.946,
+     1.007
+    ],
+    [
+     "vas",
+     1.027,
+     1.127
+    ],
+    [
+     "bosser,",
+     1.148,
+     1.349
+    ],
+    [
+     "on",
+     1.389,
+     1.429
+    ],
+    [
+     "a",
+     1.49,
+     1.51
+    ],
+    [
+     "besoin",
+     1.55,
+     1.711
+    ],
+    [
+     "de",
+     1.751,
+     1.792
+    ],
+    [
+     "toi.",
+     1.812,
+     1.892
+    ]
+   ],
+   "objet": "cafe",
+   "_action": "telephone_oreille",
+   "_geste": "telephone"
+  },
+  {
+   "p": "invite",
+   "t": "Bah là je me fais un mojito tu vois.",
+   "_deb": 29.83,
+   "_fin": 31.337,
+   "d": "[joie] Bah là je me fais un mojito tu vois.",
+   "objet": "telephone",
+   "_mots": [
+    [
+     "Bah",
+     0.0,
+     0.221
+    ],
+    [
+     "là",
+     0.583,
+     0.623
+    ],
+    [
+     "je",
+     0.683,
+     0.744
+    ],
+    [
+     "me",
+     0.764,
+     0.804
+    ],
+    [
+     "fais",
+     0.824,
+     0.924
+    ],
+    [
+     "un",
+     0.944,
+     0.985
+    ],
+    [
+     "mojito",
+     0.985,
+     1.246
+    ],
+    [
+     "tu",
+     1.326,
+     1.386
+    ],
+    [
+     "vois.",
+     1.406,
+     1.507
+    ]
+   ],
+   "_action": "tenir",
+   "_geste": "croises"
+  },
+  {
+   "p": "presentateur",
+   "t": "Tu sais que ce comportement ça peut se retourner contre toi.",
+   "_deb": 31.377,
+   "_fin": 33.044,
+   "d": "[colere] Tu sais que ce comportement ça peut se retourner contre toi.",
+   "_mots": [
+    [
+     "Tu",
+     0.0,
+     0.04
+    ],
+    [
+     "sais",
+     0.06,
+     0.161
+    ],
+    [
+     "que",
+     0.161,
+     0.241
+    ],
+    [
+     "ce",
+     0.261,
+     0.301
+    ],
+    [
+     "comportement",
+     0.322,
+     0.763
+    ],
+    [
+     "ça",
+     0.763,
+     0.844
+    ],
+    [
+     "peut",
+     0.864,
+     0.984
+    ],
+    [
+     "se",
+     1.004,
+     1.045
+    ],
+    [
+     "retourner",
+     1.065,
+     1.326
+    ],
+    [
+     "contre",
+     1.346,
+     1.527
+    ],
+    [
+     "toi.",
+     1.567,
+     1.667
+    ]
+   ],
+   "objet": "cafe",
+   "_action": "telephone_oreille",
+   "_geste": "telephone"
+  },
+  {
+   "p": "invite",
+   "t": "Bah oui bien sûr.",
+   "_deb": 33.185,
+   "_fin": 33.928,
+   "d": "[joie] Bah oui bien sûr.",
+   "_mots": [
+    [
+     "Bah",
+     0.0,
+     0.121
+    ],
+    [
+     "oui",
+     0.201,
+     0.281
+    ],
+    [
+     "bien",
+     0.422,
+     0.562
+    ],
+    [
+     "sûr.",
+     0.643,
+     0.743
+    ]
+   ],
+   "objet": "casque_moto",
+   "_geste": "menton"
+  },
+  {
+   "p": "presentateur",
+   "t": "Tu sais que c'est interdit de faire bosser ses employés quand ils sont en congé.",
+   "_deb": 33.989,
+   "_fin": 35.96,
+   "d": "[colere] Tu sais que c'est interdit de faire bosser ses employés quand ils sont en congé.",
+   "_mots": [
+    [
+     "Tu",
+     0.0,
+     0.062
+    ],
+    [
+     "sais",
+     0.062,
+     0.142
+    ],
+    [
+     "que",
      0.142,
      0.223
     ],
     [
-     "bon",
-     0.243,
-     0.344
+     "c'est",
+     0.223,
+     0.303
+    ],
+    [
+     "interdit",
+     0.323,
+     0.544
+    ],
+    [
+     "de",
+     0.565,
+     0.625
+    ],
+    [
+     "faire",
+     0.625,
+     0.725
+    ],
+    [
+     "bosser",
+     0.745,
+     0.926
+    ],
+    [
+     "ses",
+     0.966,
+     1.047
+    ],
+    [
+     "employés",
+     1.107,
+     1.368
+    ],
+    [
+     "quand",
+     1.368,
+     1.489
+    ],
+    [
+     "ils",
+     1.529,
+     1.589
+    ],
+    [
+     "sont",
+     1.61,
+     1.71
+    ],
+    [
+     "en",
+     1.73,
+     1.77
+    ],
+    [
+     "congé.",
+     1.811,
+     1.971
     ]
    ],
-   "objet": "colis",
-   "_cible": "autre",
-   "_geste": "explique"
+   "objet": "casque_moto",
+   "_action": "telephone_oreille",
+   "_geste": "telephone"
   },
   {
    "p": "invite",
-   "t": "est-ce que c'est bon pour vous",
-   "_deb": 86.733,
-   "_fin": 87.862,
-   "d": "[happy] est-ce que c'est bon pour vous",
+   "t": "Mais non mais d'accord mais là c'est pas bosser c'est filer un coup de main A la limite tu serais pas la dernière des connasses.",
+   "_deb": 36.021,
+   "_fin": 39.841,
+   "d": "[colere] Mais non mais d'accord mais là c'est pas bosser c'est filer un coup de main A la limite tu serais pas la dernière des connasses.",
    "_mots": [
     [
-     "est-ce",
+     "Mais",
      0.0,
-     0.181
+     0.08
     ],
     [
-     "que",
-     0.222,
-     0.302
+     "non",
+     0.1,
+     0.16
+    ],
+    [
+     "mais",
+     0.16,
+     0.241
+    ],
+    [
+     "d'accord",
+     0.241,
+     0.482
+    ],
+    [
+     "mais",
+     0.482,
+     0.582
+    ],
+    [
+     "là",
+     0.582,
+     0.663
     ],
     [
      "c'est",
-     0.383,
-     0.524
+     0.723,
+     0.824
     ],
     [
-     "bon",
-     0.564,
-     0.685
+     "pas",
+     0.864,
+     0.944
     ],
     [
-     "pour",
-     0.786,
-     0.887
+     "bosser",
+     1.005,
+     1.286
+    ],
+    [
+     "c'est",
+     1.366,
+     1.487
+    ],
+    [
+     "filer",
+     1.527,
+     1.771
+    ],
+    [
+     "un",
+     1.771,
+     1.811
+    ],
+    [
+     "coup",
+     1.851,
+     1.952
+    ],
+    [
+     "de",
+     1.952,
+     2.012
+    ],
+    [
+     "main",
+     2.012,
+     2.092
+    ],
+    [
+     "A",
+     2.152,
+     2.173
+    ],
+    [
+     "la",
+     2.253,
+     2.313
+    ],
+    [
+     "limite",
+     2.353,
+     2.575
+    ],
+    [
+     "tu",
+     2.615,
+     2.675
+    ],
+    [
+     "serais",
+     2.695,
+     2.876
+    ],
+    [
+     "pas",
+     2.896,
+     2.976
+    ],
+    [
+     "la",
+     3.017,
+     3.057
+    ],
+    [
+     "dernière",
+     3.097,
+     3.338
+    ],
+    [
+     "des",
+     3.378,
+     3.459
+    ],
+    [
+     "connasses.",
+     3.479,
+     3.82
+    ]
+   ],
+   "objet": "cafe",
+   "_geste": "croises"
+  },
+  {
+   "p": "invite",
+   "t": "Moi je dirais pourquoi pas mais le problème c'est que t'est le résultat de l'union parfaite entre Voldemort et Belzébude.",
+   "_deb": 39.862,
+   "_fin": 43.68,
+   "d": "[colere] Moi je dirais pourquoi pas mais le problème c'est que t'es le résultat de l'union parfaite entre Voldemort et Belzébude.",
+   "_mots": [
+    [
+     "Moi",
+     0.0,
+     0.06
+    ],
+    [
+     "je",
+     0.1,
+     0.16
+    ],
+    [
+     "dirais",
+     0.16,
+     0.321
+    ],
+    [
+     "pourquoi",
+     0.341,
+     0.562
+    ],
+    [
+     "pas",
+     0.623,
+     0.703
+    ],
+    [
+     "mais",
+     0.743,
+     0.844
+    ],
+    [
+     "le",
+     0.884,
+     0.924
+    ],
+    [
+     "problème",
+     0.964,
+     1.246
+    ],
+    [
+     "c'est",
+     1.266,
+     1.366
+    ],
+    [
+     "que",
+     1.386,
+     1.467
+    ],
+    [
+     "t'es",
+     1.507,
+     1.527
+    ],
+    [
+     "le",
+     1.489,
+     1.549
+    ],
+    [
+     "résultat",
+     1.569,
+     1.89
+    ],
+    [
+     "de",
+     1.931,
+     1.991
+    ],
+    [
+     "l'union",
+     2.011,
+     2.232
+    ],
+    [
+     "parfaite",
+     2.332,
+     2.653
+    ],
+    [
+     "entre",
+     2.694,
+     2.814
+    ],
+    [
+     "Voldemort",
+     2.894,
+     3.316
+    ],
+    [
+     "et",
+     3.356,
+     3.416
+    ],
+    [
+     "Belzébude.",
+     3.436,
+     3.818
+    ]
+   ],
+   "objet": "casque_moto",
+   "_geste": "menton"
+  },
+  {
+   "p": "invite",
+   "t": "Donc moi j'aurais plutôt tendance à te dire d'aller te faire foutre quoi tu vois.",
+   "_deb": 43.72,
+   "_fin": 45.788,
+   "d": "[colere] Donc moi j'aurais plutôt tendance à te dire d'aller te faire foutre quoi tu vois.",
+   "_mots": [
+    [
+     "Donc",
+     0.0,
+     0.1
+    ],
+    [
+     "moi",
+     0.141,
+     0.221
+    ],
+    [
+     "j'aurais",
+     0.221,
+     0.422
+    ],
+    [
+     "plutôt",
+     0.442,
+     0.643
+    ],
+    [
+     "tendance",
+     0.683,
+     0.944
+    ],
+    [
+     "à",
+     0.964,
+     0.984
+    ],
+    [
+     "te",
+     0.984,
+     1.024
+    ],
+    [
+     "dire",
+     1.024,
+     1.144
+    ],
+    [
+     "d'aller",
+     1.165,
+     1.305
+    ],
+    [
+     "te",
+     1.325,
+     1.365
+    ],
+    [
+     "faire",
+     1.385,
+     1.506
+    ],
+    [
+     "foutre",
+     1.546,
+     1.727
+    ],
+    [
+     "quoi",
+     1.727,
+     1.807
+    ],
+    [
+     "tu",
+     1.847,
+     1.887
+    ],
+    [
+     "vois.",
+     1.928,
+     2.068
+    ]
+   ],
+   "objet": "casque_moto",
+   "_geste": "croises"
+  },
+  {
+   "p": "invite",
+   "t": "Et tout ça avec le respect de la hiérarchie hein bien sûr.",
+   "_deb": 46.009,
+   "_fin": 47.738,
+   "d": "[colere] Et tout ça avec le respect de la hiérarchie hein bien sûr.",
+   "_mots": [
+    [
+     "Et",
+     0.0,
+     0.062
+    ],
+    [
+     "tout",
+     0.062,
+     0.163
+    ],
+    [
+     "ça",
+     0.203,
+     0.243
+    ],
+    [
+     "avec",
+     0.323,
+     0.464
+    ],
+    [
+     "le",
+     0.504,
+     0.544
+    ],
+    [
+     "respect",
+     0.604,
+     0.845
+    ],
+    [
+     "de",
+     0.845,
+     0.886
+    ],
+    [
+     "la",
+     0.886,
+     0.946
+    ],
+    [
+     "hiérarchie",
+     0.946,
+     1.307
+    ],
+    [
+     "hein",
+     1.307,
+     1.428
+    ],
+    [
+     "bien",
+     1.448,
+     1.548
+    ],
+    [
+     "sûr.",
+     1.609,
+     1.729
+    ]
+   ],
+   "objet": "cafe",
+   "_geste": "menton"
+  },
+  {
+   "p": "invite",
+   "t": "Allez vous faire foutre ma très chère manager tu vois avec le vouvoiement.",
+   "_deb": 47.879,
+   "_fin": 50.269,
+   "d": "[colere] Allez vous faire foutre ma très chère manager tu vois avec le vouvoiement.",
+   "_mots": [
+    [
+     "Allez",
+     0.0,
+     0.201
     ],
     [
      "vous",
-     0.948,
-     1.129
+     0.241,
+     0.341
+    ],
+    [
+     "faire",
+     0.361,
+     0.502
+    ],
+    [
+     "foutre",
+     0.562,
+     0.743
+    ],
+    [
+     "ma",
+     0.783,
+     0.823
+    ],
+    [
+     "très",
+     0.883,
+     1.004
+    ],
+    [
+     "chère",
+     1.024,
+     1.165
+    ],
+    [
+     "manager",
+     1.205,
+     1.486
+    ],
+    [
+     "tu",
+     1.526,
+     1.586
+    ],
+    [
+     "vois",
+     1.627,
+     1.747
+    ],
+    [
+     "avec",
+     1.807,
+     1.948
+    ],
+    [
+     "le",
+     1.988,
+     2.028
+    ],
+    [
+     "vouvoiement.",
+     2.088,
+     2.39
     ]
    ],
-   "objet": "colis",
-   "_cible": "autre",
-   "_geste": "mains_hanches"
+   "objet": "casque_moto",
+   "_geste": "croises"
   },
   {
    "p": "presentateur",
-   "t": "et bien c'est ciao",
-   "_deb": 89.834,
-   "_fin": 90.461,
-   "d": "[neutral] et bien c'est ciao",
-   "chute": true,
+   "t": "Tu sais que je peux te pourrir la vie.",
+   "_deb": 50.331,
+   "_fin": 51.296,
+   "d": "[colere] Tu sais que je peux te pourrir la vie.",
    "_mots": [
     [
-     "et",
+     "Tu",
+     0.018,
+     0.038
+    ],
+    [
+     "sais",
+     0.0,
+     0.101
+    ],
+    [
+     "que",
+     0.121,
+     0.201
+    ],
+    [
+     "je",
+     0.221,
+     0.262
+    ],
+    [
+     "peux",
+     0.302,
+     0.402
+    ],
+    [
+     "te",
+     0.463,
+     0.503
+    ],
+    [
+     "pourrir",
+     0.503,
+     0.724
+    ],
+    [
+     "la",
+     0.764,
+     0.845
+    ],
+    [
+     "vie.",
+     0.865,
+     0.965
+    ]
+   ],
+   "objet": "cafe",
+   "_action": "telephone_oreille",
+   "_geste": "telephone"
+  },
+  {
+   "p": "invite",
+   "t": "Oui, alors ça, c'est déjà le cas depuis mon entrée dans cette boîte de merde.",
+   "_deb": 51.316,
+   "_fin": 53.346,
+   "d": "[colere] Oui, alors ça, c'est déjà le cas depuis mon entrée dans cette boîte de merde.",
+   "_mots": [
+    [
+     "Oui,",
      0.0,
      0.061
     ],
     [
-     "bien",
-     0.081,
-     0.243
+     "alors",
+     0.121,
+     0.262
+    ],
+    [
+     "ça,",
+     0.282,
+     0.342
     ],
     [
      "c'est",
-     0.243,
-     0.364
+     0.402,
+     0.503
     ],
     [
-     "ciao",
-     0.405,
-     0.627
+     "déjà",
+     0.523,
+     0.684
+    ],
+    [
+     "le",
+     0.724,
+     0.784
+    ],
+    [
+     "cas",
+     0.784,
+     0.865
+    ],
+    [
+     "depuis",
+     0.885,
+     1.046
+    ],
+    [
+     "mon",
+     1.066,
+     1.146
+    ],
+    [
+     "entrée",
+     1.206,
+     1.347
+    ],
+    [
+     "dans",
+     1.347,
+     1.448
+    ],
+    [
+     "cette",
+     1.468,
+     1.588
+    ],
+    [
+     "boîte",
+     1.608,
+     1.749
+    ],
+    [
+     "de",
+     1.769,
+     1.829
+    ],
+    [
+     "merde.",
+     1.87,
+     2.03
     ]
    ],
-   "objet": "telecommande",
-   "_cible": "autre",
-   "_geste": "explique"
+   "objet": "casque_moto",
+   "_geste": "menton"
+  },
+  {
+   "p": "invite",
+   "t": "Donc aujourd'hui, j'ai envie de te dire, je suis immunisé.",
+   "_deb": 53.346,
+   "_fin": 54.754,
+   "d": "[colere] Donc aujourd'hui, j'ai envie de te dire, je suis immunisé.",
+   "_mots": [
+    [
+     "Donc",
+     0.0,
+     0.141
+    ],
+    [
+     "aujourd'hui,",
+     0.201,
+     0.244
+    ],
+    [
+     "j'ai",
+     0.244,
+     0.485
+    ],
+    [
+     "envie",
+     0.525,
+     0.686
+    ],
+    [
+     "de",
+     0.706,
+     0.766
+    ],
+    [
+     "te",
+     0.766,
+     0.806
+    ],
+    [
+     "dire,",
+     0.806,
+     0.927
+    ],
+    [
+     "je",
+     0.927,
+     0.967
+    ],
+    [
+     "suis",
+     0.987,
+     1.087
+    ],
+    [
+     "immunisé.",
+     1.127,
+     1.408
+    ]
+   ],
+   "objet": "casque_moto",
+   "_geste": "croises"
+  },
+  {
+   "p": "presentateur",
+   "t": "Donc tu me laisses dans ma merde, là.",
+   "_deb": 54.795,
+   "_fin": 55.839,
+   "d": "[colere] Donc tu me laisses dans ma merde, là.",
+   "_mots": [
+    [
+     "Donc",
+     0.0,
+     0.18
+    ],
+    [
+     "tu",
+     0.18,
+     0.241
+    ],
+    [
+     "me",
+     0.281,
+     0.321
+    ],
+    [
+     "laisses",
+     0.341,
+     0.501
+    ],
+    [
+     "dans",
+     0.501,
+     0.602
+    ],
+    [
+     "ma",
+     0.622,
+     0.662
+    ],
+    [
+     "merde,",
+     0.722,
+     0.903
+    ],
+    [
+     "là.",
+     0.923,
+     1.044
+    ]
+   ],
+   "objet": "casque_moto",
+   "_action": "telephone_oreille",
+   "_geste": "telephone"
+  },
+  {
+   "p": "invite",
+   "t": "Ah, profondément enfoui, ouais.",
+   "_deb": 55.879,
+   "_fin": 57.043,
+   "d": "[sarcastique] Ah, profondément enfoui, ouais.",
+   "_mots": [
+    [
+     "Ah,",
+     0.0,
+     0.1
+    ],
+    [
+     "profondément",
+     0.14,
+     0.682
+    ],
+    [
+     "enfoui,",
+     0.742,
+     0.943
+    ],
+    [
+     "ouais.",
+     1.003,
+     1.164
+    ]
+   ],
+   "_geste": "croises",
+   "objet": "telephone"
+  },
+  {
+   "p": "presentateur",
+   "t": "Espèce de petite saloperie de furoncle.",
+   "_deb": 57.103,
+   "_fin": 59.192,
+   "d": "[colere] Espèce de petite saloperie de furoncle.",
+   "_mots": [
+    [
+     "Espèce",
+     0.0,
+     0.301
+    ],
+    [
+     "de",
+     0.362,
+     0.422
+    ],
+    [
+     "petite",
+     0.482,
+     0.743
+    ],
+    [
+     "saloperie",
+     0.944,
+     1.446
+    ],
+    [
+     "de",
+     1.506,
+     1.566
+    ],
+    [
+     "furoncle.",
+     1.668,
+     2.089
+    ]
+   ],
+   "objet": "cafe",
+   "_action": "telephone_oreille",
+   "_geste": "telephone"
+  },
+  {
+   "p": "invite",
+   "t": "Allez, ça marche, je te laisse, c'est l'élection de Miss Camping qui va commencer.",
+   "_deb": 59.212,
+   "_fin": 61.259,
+   "d": "[blase] Allez, ça marche, je te laisse, c'est l'élection de Miss Camping qui va commencer.",
+   "_mots": [
+    [
+     "Allez,",
+     0.0,
+     0.201
+    ],
+    [
+     "ça",
+     0.241,
+     0.301
+    ],
+    [
+     "marche,",
+     0.362,
+     0.562
+    ],
+    [
+     "je",
+     0.562,
+     0.602
+    ],
+    [
+     "te",
+     0.602,
+     0.642
+    ],
+    [
+     "laisse,",
+     0.683,
+     0.823
+    ],
+    [
+     "c'est",
+     0.823,
+     0.903
+    ],
+    [
+     "l'élection",
+     0.903,
+     1.164
+    ],
+    [
+     "de",
+     1.184,
+     1.244
+    ],
+    [
+     "Miss",
+     1.264,
+     1.385
+    ],
+    [
+     "Camping",
+     1.385,
+     1.605
+    ],
+    [
+     "qui",
+     1.605,
+     1.706
+    ],
+    [
+     "va",
+     1.746,
+     1.786
+    ],
+    [
+     "commencer.",
+     1.806,
+     2.047
+    ]
+   ],
+   "objet": "casque_moto",
+   "_geste": "croises"
+  },
+  {
+   "p": "presentateur",
+   "t": "De raclure de chiottes en peau de couilles. Allô Allô.",
+   "_deb": 61.279,
+   "_fin": 64.549,
+   "d": "[colere] De raclure de chiottes en peau de couilles. Allô Allô.",
+   "_mots": [
+    [
+     "De",
+     0.0,
+     0.04
+    ],
+    [
+     "raclure",
+     0.12,
+     0.541
+    ],
+    [
+     "de",
+     0.582,
+     0.642
+    ],
+    [
+     "chiottes",
+     0.742,
+     1.003
+    ],
+    [
+     "en",
+     1.023,
+     1.063
+    ],
+    [
+     "peau",
+     1.083,
+     1.183
+    ],
+    [
+     "de",
+     1.224,
+     1.264
+    ],
+    [
+     "couilles.",
+     1.304,
+     1.585
+    ],
+    [
+     "Allô",
+     2.046,
+     2.227
+    ],
+    [
+     "Allô.",
+     3.089,
+     3.27
+    ]
+   ],
+   "objet": "cafe",
+   "_action": "telephone_oreille",
+   "_geste": "telephone"
+  },
+  {
+   "p": "invite",
+   "t": "Oh, putain, cette génération, ils vont nous casser les couilles.",
+   "_deb": 65.892,
+   "_fin": 69.268,
+   "d": "[colere] Oh, putain, cette génération, ils vont nous casser les couilles.",
+   "chute": true,
+   "_mots": [
+    [
+     "Oh,",
+     0.0,
+     0.06
+    ],
+    [
+     "putain,",
+     0.221,
+     0.603
+    ],
+    [
+     "cette",
+     0.723,
+     0.904
+    ],
+    [
+     "génération,",
+     0.944,
+     1.467
+    ],
+    [
+     "ils",
+     1.487,
+     1.588
+    ],
+    [
+     "vont",
+     1.668,
+     1.809
+    ],
+    [
+     "nous",
+     1.849,
+     1.99
+    ],
+    [
+     "casser",
+     2.15,
+     2.693
+    ],
+    [
+     "les",
+     2.753,
+     2.874
+    ],
+    [
+     "couilles.",
+     2.934,
+     3.376
+    ]
+   ],
+   "objet": "cafe",
+   "_geste": "facepalm"
   }
  ],
  "bandeau": [],
  "gag": null,
- "legende": "Quand le prof a clairement ses chouchoutes dans la classe... 💀",
+ "legende": "Quand ton manager te harcèle pendant tes congés.",
  "hashtags": [
   "petitsdramas",
   "humour",
-  "ecole",
-  "pov",
-  "professeur",
-  "eleves"
+  "travail",
+  "vacances",
+  "skit",
+  "tendance"
  ],
  "sources": [
-  "https://www.tiktok.com/@yan_animation0/video/7683899238467636513"
+  "https://www.tiktok.com/@same_same53/video/7706915540845071648"
  ],
  "decoupage": [
   {
    "scene": "1",
    "repliques": [
     0,
-    1,
     2,
-    3,
     4,
-    5,
     6,
-    7,
     8,
-    9,
     10,
-    11,
     12,
-    13,
     14,
-    15,
     16,
-    17,
     18,
-    19,
     20,
+    26,
+    29,
+    31,
+    33
+   ],
+   "lieu": "",
+   "son": "",
+   "duree": 0,
+   "decor": "quiet city street at dusk, parked car at the curb, sidewalk, street lamps, shop fronts"
+  },
+  {
+   "scene": "2",
+   "repliques": [
+    1,
+    3,
+    5,
+    7,
+    9,
+    11,
+    13,
+    15,
+    17,
+    19,
     21,
     22,
     23,
     24,
     25,
-    26,
     27,
     28,
-    29,
     30,
-    31,
     32,
-    33,
-    34,
-    35,
-    36
+    34
    ],
    "lieu": "",
    "son": "",
-   "duree": 0.0,
-   "titre": "La classe",
-   "decor": "small modest empty traditional school classroom with wooden desks and blackboards with wooden school desks, green blackboard, paper sheets on desk"
+   "duree": 0,
+   "decor": "cozy living room, sofa, posters on the wall, coffee table, lamp, television"
   }
  ],
- "commentaire": "Team prof rigolo ou prof strict ? 😂",
+ "commentaire": "Team vacances tranquilles ou team manager relou ? 🤔",
  "studio": {
   "costumes": {
    "presentateur": {
-    "bas": "pantalon",
-    "c_bas": "noir",
-    "c_haut": "noir",
-    "chaussures": "ville",
-    "cheveux": "court",
-    "c_cheveux": "brun",
-    "details": [
-     "cravate"
+    "haut": "costume",
+    "c_haut": [
+     30,
+     30,
+     30
     ],
-    "haut": "cercle rouge déformé"
+    "motif": "uni",
+    "bas": "pantalon",
+    "chaussures": "ville",
+    "details": [
+     "cravate",
+     "montre"
+    ],
+    "cheveux": "court",
+    "c_cheveux": "chatain"
    },
    "invite": {
-    "bas": "pantalon",
-    "c_bas": "marron",
-    "c_haut": "bordeaux",
-    "chaussures": "ville",
-    "cheveux": "carre",
-    "c_cheveux": "brun",
-    "details": [
-     "noeud_pap"
+    "haut": "tenue_vacances",
+    "c_haut": [
+     0,
+     120,
+     255
     ],
-    "haut": "uniforme"
+    "motif": "uni",
+    "bas": "short",
+    "chaussures": "baskets",
+    "details": [
+     "casque_audio",
+     "lunettes_soleil"
+    ],
+    "chapeau": "bob",
+    "c_chapeau": "jaune",
+    "cheveux": "herisse",
+    "c_cheveux": "roux"
    }
   },
-  "ambiances": [],
-  "cadence": "rapide",
-  "moment": "jour",
-  "lieux": [
-   "classe"
-  ],
   "gags": [
-   "Favoritisme level 100"
+   "Post-it : SOS dossier",
+   "Affiche Miss Camping"
   ],
+  "cadence": "rapide",
+  "personnages": {
+   "presentateur": {
+    "genre": "f",
+    "age": 35,
+    "taille": 1,
+    "corpulence": 0.12,
+    "cheveux": "herisse",
+    "barbe": "aucune",
+    "genre_vu": "f",
+    "espece": "humain"
+   },
+   "invite": {
+    "genre": "h",
+    "age": 30,
+    "taille": 1.0,
+    "corpulence": 0.12,
+    "cheveux": "long",
+    "barbe": "aucune",
+    "genre_vu": "h"
+   }
+  },
   "objets": [
    {
     "replique": 0,
-    "objet": "stylo"
+    "objet": "telephone"
+   },
+   {
+    "objet": "telephone",
+    "replique": 17
    }
   ],
-  "personnages": {
-   "presentateur": {
-    "age": 25,
-    "barbe": "aucune",
-    "cheveux": "court",
-    "corpulence": 0.12,
-    "genre": "h",
-    "taille": 1,
-    "genre_vu": "h",
-    "espece": "humain"
-   },
-   "invite": {
-    "age": 16,
-    "barbe": "aucune",
-    "cheveux": "court",
-    "corpulence": 0.12,
-    "genre": "f",
-    "taille": 1,
-    "genre_vu": "f",
-    "espece": "humain"
-   }
-  },
+  "metiers": {},
+  "ambiances": [
+   "poussiere"
+  ],
+  "lieux": [
+   "salon",
+   "salon"
+  ],
+  "moment": "jour",
   "tenues_fiche": {
    "invite": {
-    "tenue": "uniforme",
-    "c_haut": "rouge",
+    "tenue": "normale",
+    "haut": "pull",
+    "c_haut": "violet",
     "c_cheveux": "noir",
     "lunettes": false,
     "etats": []
    },
    "presentateur": {
-    "tenue": "normale",
-    "haut": "pull",
-    "c_haut": "noir",
-    "c_cheveux": "noir",
+    "tenue": "costume",
+    "haut": "chemise",
+    "c_haut": "gris",
+    "c_cheveux": "roux",
     "lunettes": false,
     "etats": []
    }
@@ -2209,45 +2229,57 @@
   "jeu": [
    {
     "replique": 0,
-    "emotion": "blase",
+    "emotion": "fatigue",
     "intensite": 1,
-    "geste": "explique"
+    "geste": "telephone"
    },
    {
     "replique": 1,
-    "emotion": "gene",
-    "intensite": 1,
-    "geste": "pointe_d"
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "mains_hanches"
    },
    {
     "replique": 2,
-    "emotion": "neutre",
-    "intensite": 1,
-    "geste": "menton"
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "telephone"
    },
    {
     "replique": 3,
-    "emotion": "blase",
-    "intensite": 1,
-    "geste": "menton"
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "croises"
    },
    {
     "replique": 4,
-    "emotion": "gene",
-    "intensite": 1,
-    "geste": "menton"
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "telephone"
    },
    {
     "replique": 5,
-    "emotion": "neutre",
-    "intensite": 1,
-    "geste": ""
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "menton"
+   },
+   {
+    "replique": 6,
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "telephone"
    },
    {
     "replique": 7,
-    "emotion": "neutre",
-    "intensite": 1,
-    "geste": "explique"
+    "emotion": "sceptique",
+    "intensite": 2,
+    "geste": "croises"
+   },
+   {
+    "replique": 8,
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "telephone"
    },
    {
     "replique": 9,
@@ -2257,593 +2289,310 @@
    },
    {
     "replique": 10,
-    "emotion": "neutre",
-    "intensite": 1,
-    "geste": "menton"
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "telephone"
    },
    {
     "replique": 11,
-    "emotion": "colere",
-    "intensite": 2,
-    "geste": "mains_hanches"
+    "emotion": "blase",
+    "intensite": 1,
+    "geste": "croises"
    },
    {
     "replique": 12,
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "telephone"
+   },
+   {
+    "replique": 13,
     "emotion": "neutre",
+    "intensite": 1,
+    "geste": "croises"
+   },
+   {
+    "replique": 14,
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "telephone"
+   },
+   {
+    "replique": 15,
+    "emotion": "sceptique",
+    "intensite": 2,
+    "geste": "menton"
+   },
+   {
+    "replique": 16,
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "telephone"
+   },
+   {
+    "replique": 17,
+    "emotion": "joie",
+    "intensite": 2,
+    "geste": "croises"
+   },
+   {
+    "replique": 18,
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "telephone"
+   },
+   {
+    "replique": 19,
+    "emotion": "sceptique",
     "intensite": 1,
     "geste": "menton"
    },
    {
-    "replique": 13,
+    "replique": 20,
     "emotion": "colere",
     "intensite": 2,
-    "geste": ""
-   },
-   {
-    "replique": 15,
-    "emotion": "neutre",
-    "intensite": 1,
-    "geste": "explique"
-   },
-   {
-    "replique": 17,
-    "emotion": "blase",
-    "intensite": 1,
-    "geste": "explique"
-   },
-   {
-    "replique": 18,
-    "emotion": "blase",
-    "intensite": 1,
-    "geste": "explique"
-   },
-   {
-    "replique": 20,
-    "emotion": "blase",
-    "intensite": 1,
-    "geste": "explique"
+    "geste": "telephone"
    },
    {
     "replique": 21,
-    "emotion": "neutre",
-    "intensite": 1,
-    "geste": "explique"
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "croises"
+   },
+   {
+    "replique": 22,
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "menton"
    },
    {
     "replique": 23,
-    "emotion": "neutre",
-    "intensite": 1,
-    "geste": "explique"
+    "emotion": "colere",
+    "intensite": 3,
+    "geste": "croises"
    },
    {
     "replique": 24,
-    "emotion": "gene",
+    "emotion": "sceptique",
     "intensite": 1,
-    "geste": "mains_hanches"
+    "geste": "menton"
    },
    {
     "replique": 25,
-    "emotion": "blase",
-    "intensite": 1,
-    "geste": "explique"
+    "emotion": "colere",
+    "intensite": 3,
+    "geste": "croises"
    },
    {
     "replique": 26,
     "emotion": "colere",
-    "intensite": 2,
-    "geste": "mains_hanches"
+    "intensite": 3,
+    "geste": "telephone"
    },
    {
     "replique": 27,
-    "emotion": "colere",
+    "emotion": "blase",
     "intensite": 2,
-    "geste": "explique"
+    "geste": "menton"
+   },
+   {
+    "replique": 28,
+    "emotion": "fier",
+    "intensite": 2,
+    "geste": "croises"
    },
    {
     "replique": 29,
-    "emotion": "blase",
-    "intensite": 1,
-    "geste": "explique"
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "telephone"
    },
    {
     "replique": 30,
-    "emotion": "colere",
-    "intensite": 3,
-    "geste": "explique"
+    "emotion": "blase",
+    "intensite": 2,
+    "geste": "croises"
    },
    {
     "replique": 31,
-    "emotion": "neutre",
-    "intensite": 1,
-    "geste": "mains_hanches"
+    "emotion": "colere",
+    "intensite": 3,
+    "geste": "telephone"
    },
    {
     "replique": 32,
-    "emotion": "neutre",
-    "intensite": 1,
-    "geste": ""
+    "emotion": "joie",
+    "intensite": 2,
+    "geste": "croises"
    },
    {
     "replique": 33,
-    "emotion": "blase",
-    "intensite": 1,
-    "geste": "explique"
+    "emotion": "colere",
+    "intensite": 3,
+    "geste": "telephone"
    },
    {
     "replique": 34,
-    "emotion": "neutre",
-    "intensite": 1,
-    "geste": "explique"
-   },
-   {
-    "replique": 35,
-    "emotion": "gene",
-    "intensite": 1,
-    "geste": "mains_hanches"
-   },
-   {
-    "replique": 36,
-    "emotion": "neutre",
-    "intensite": 1,
-    "geste": "explique"
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "facepalm"
    }
   ],
-  "reactions": [
-   {
-    "n": 1,
-    "qui": "presentateur",
-    "mot": "notes",
-    "reaction": "sourire_coin"
-   },
-   {
-    "n": 6,
-    "qui": "presentateur",
-    "mot": "combien",
-    "reaction": "sourire_coin"
-   },
-   {
-    "n": 11,
-    "qui": "presentateur",
-    "mot": "favoritisme",
-    "reaction": "sourire_coin"
-   },
-   {
-    "n": 19,
-    "qui": "presentateur",
-    "mot": "oublié",
-    "reaction": "sourire_coin"
-   },
-   {
-    "n": 26,
-    "qui": "presentateur",
-    "mot": "filles",
-    "reaction": "sourire_coin"
-   }
-  ],
+  "reactions": [],
   "animations": [],
   "panneaux": [],
   "ecran_tel": "",
-  "lumiere_ambiance": "bright indoor daylight",
+  "lumiere_ambiance": "bright soft indoor daylight",
   "interieur": true,
   "decor_fiche": {
-   "lieu": "classe",
-   "lieu_precis": "empty traditional school classroom with wooden desks and blackboards",
+   "lieu": "salon",
+   "lieu_precis": "small modern office with computer desk and green plant in background",
    "details": [
-    "wooden school desks",
-    "green blackboard",
-    "paper sheets on desk",
-    "stove with pans",
-    "tiled walls"
+    "computer monitor on wooden desk",
+    "white coffee mug",
+    "black headset with microphone",
+    "glasses on a table",
+    "dog bed and toys"
    ],
-   "niveau": "modeste",
-   "ambiance": "gene",
+   "niveau": "moyen",
+   "ambiance": "dispute",
    "occasion": "",
    "meteo": "",
    "moment": "jour",
    "interieur": true
+  },
+  "lieux_de": {
+   "presentateur": "rue",
+   "invite": "salon"
   }
  },
  "doublage": {
-  "piste": "/tmp/tmpv3g1htvz/piste.wav",
-  "duree": 90.58,
-  "source": "https://www.tiktok.com/@yan_animation0/video/7683899238467636513",
-  "auteur": "yan_animation0",
-  "contexte": "Un professeur distribue les notes du trimestre avec un favoritisme flagrant envers les élèves féminines, provoquant la colère de ses élèves.",
+  "piste": "/tmp/tmpb98x7d3m/piste.wav",
+  "duree": 69.59,
+  "source": "https://www.tiktok.com/@same_same53/video/7706915540845071648",
+  "auteur": "same_same53",
+  "contexte": "Un manager insiste lourdement auprès d'un employé en vacances pour qu'il corrige un dossier urgent, mais ce dernier refuse net et l'envoie balader.",
   "evenements": [
    [
-    24.0,
-    26.0,
-    "kiss"
-   ],
-   [
-    26.0,
-    28.0,
-    "laughter"
-   ],
-   [
-    57.0,
-    60.0,
-    "crying"
-   ],
-   [
-    86.0,
-    89.0,
-    "crying"
+    64.0,
+    66.0,
+    "dog"
    ]
   ],
   "visuel": {
    "gestes": [
     [
-     0.5,
-     0.56,
-     1.0
-    ],
-    [
-     1.5,
-     0.56,
-     1.0
-    ],
-    [
-     2.5,
-     0.59,
-     1.0
-    ],
-    [
-     4.0,
-     0.56,
-     1.0
-    ],
-    [
      5.0,
-     0.59,
+     0.39,
      1.0
     ],
     [
-     8.5,
-     0.27,
-     0.69
-    ],
-    [
-     11.0,
-     0.56,
+     6.0,
+     0.39,
      1.0
     ],
     [
-     13.5,
-     0.59,
-     1.0
-    ],
-    [
-     15.5,
-     0.56,
+     13.0,
+     0.39,
      1.0
     ],
     [
      16.5,
-     0.56,
+     0.39,
      1.0
     ],
     [
-     19.0,
-     0.56,
+     20.5,
+     0.39,
      1.0
     ],
     [
-     22.5,
-     0.59,
+     29.5,
+     0.39,
      1.0
     ],
     [
-     23.5,
-     0.56,
+     31.5,
+     0.39,
      1.0
     ],
     [
-     25.0,
-     0.59,
+     36.5,
+     0.39,
      1.0
     ],
     [
-     26.0,
-     0.61,
-     1.0
-    ],
-    [
-     29.0,
-     0.57,
-     0.62
-    ],
-    [
-     30.0,
-     0.14,
-     1.0
-    ],
-    [
-     32.5,
-     0.58,
-     1.0
-    ],
-    [
-     33.5,
-     0.53,
-     1.0
-    ],
-    [
-     35.0,
-     0.53,
-     1.0
-    ],
-    [
-     36.0,
-     0.56,
-     1.0
-    ],
-    [
-     37.5,
-     0.56,
-     1.0
-    ],
-    [
-     39.0,
-     0.84,
-     1.0
-    ],
-    [
-     40.0,
-     0.47,
-     0.52
-    ],
-    [
-     41.0,
-     0.57,
-     1.0
-    ],
-    [
-     42.0,
-     0.56,
-     1.0
-    ],
-    [
-     43.5,
-     0.56,
-     1.0
-    ],
-    [
-     48.0,
-     0.24,
-     1.0
-    ],
-    [
-     49.0,
-     0.56,
+     46.5,
+     0.39,
      1.0
     ],
     [
      50.5,
-     0.61,
+     0.4,
      1.0
     ],
     [
-     53.0,
-     0.56,
+     55.0,
+     0.39,
      1.0
     ],
     [
      57.5,
-     0.24,
+     0.39,
      1.0
     ],
     [
-     58.5,
-     0.56,
+     61.5,
+     0.39,
      1.0
     ],
     [
-     60.0,
-     0.74,
-     1.0
-    ],
-    [
-     63.0,
-     0.56,
-     1.0
-    ],
-    [
-     64.0,
-     0.25,
-     1.0
-    ],
-    [
-     65.0,
-     0.25,
-     1.0
-    ],
-    [
-     66.0,
-     0.13,
-     1.0
-    ],
-    [
-     67.0,
-     0.56,
-     0.54
-    ],
-    [
-     68.0,
-     0.56,
-     1.0
-    ],
-    [
-     70.5,
-     0.52,
-     1.0
-    ],
-    [
-     71.5,
-     0.78,
-     1.0
-    ],
-    [
-     72.5,
-     0.56,
-     0.81
-    ],
-    [
-     73.5,
-     0.56,
-     0.93
-    ],
-    [
-     74.5,
-     0.56,
-     0.95
-    ],
-    [
-     75.5,
-     0.09,
-     1.0
-    ],
-    [
-     78.0,
-     0.56,
-     1.0
-    ],
-    [
-     79.0,
-     0.56,
-     1.0
-    ],
-    [
-     80.0,
-     0.56,
-     1.0
-    ],
-    [
-     81.0,
-     0.57,
-     0.93
-    ],
-    [
-     82.0,
-     0.57,
-     0.66
-    ],
-    [
-     83.0,
-     0.59,
-     1.0
-    ],
-    [
-     84.5,
-     0.12,
-     1.0
-    ],
-    [
-     86.0,
-     0.12,
-     1.0
-    ],
-    [
-     87.0,
-     0.56,
-     1.0
-    ],
-    [
-     88.0,
-     0.56,
-     0.58
-    ],
-    [
-     89.0,
-     0.1,
-     1.0
-    ],
-    [
-     90.0,
-     0.56,
+     66.5,
+     0.39,
      1.0
     ]
    ],
-   "duree": 91.0,
-   "nb_plans": 3,
-   "duree_plan": 30.33,
-   "coupes": [
-    27.5,
-    40.5
-   ],
+   "duree": 70.0,
+   "nb_plans": 1,
+   "duree_plan": 70.0,
+   "coupes": [],
    "plans": {
     "tres_serre": 0.0,
     "serre": 0.0,
-    "moyen": 0.593,
-    "large": 0.407
+    "moyen": 0.364,
+    "large": 0.636
    },
    "camera": {
-    "fixe": 0.944,
-    "avance": 0.011,
-    "recul": 0.022,
+    "fixe": 1.0,
+    "avance": 0.0,
+    "recul": 0.0,
     "travelling": 0.0,
-    "epaule": 0.022
+    "epaule": 0.0
    },
-   "nb_personnes": 5,
+   "nb_personnes": 1,
    "personnes": [
     {
      "place": "gauche",
-     "presence": 0.984,
+     "presence": 0.364,
      "habit": [
-      84,
-      21,
-      20
-     ],
-     "cheveux": [
-      210,
-      150,
-      101
-     ],
-     "sourire": 0.0,
-     "taille": 0.058,
-     "tete_penchee": 1.4,
-     "regard_cote": 0.0
-    },
-    {
-     "place": "centre",
-     "presence": 0.879,
-     "habit": [
-      74,
-      62,
-      61
-     ],
-     "cheveux": [
-      19,
-      10,
-      7
-     ],
-     "sourire": 0.0,
-     "taille": 0.07,
-     "tete_penchee": 0.7,
-     "regard_cote": 0.0
-    },
-    {
-     "place": "droite",
-     "presence": 0.813,
-     "habit": [
-      134,
-      83,
-      61
+      0,
+      0,
+      0
      ],
      "cheveux": [
       55,
-      46,
-      43
+      55,
+      55
      ],
      "sourire": 0.0,
-     "taille": 0.052,
-     "tete_penchee": 1.2,
+     "taille": 0.131,
+     "tete_penchee": 0.6,
      "regard_cote": 0.0
     }
    ],
    "visages": true,
    "sourires": 0.0,
-   "energie": 0.337,
+   "energie": 0.306,
    "mur": [
     0,
     0,
@@ -2854,106 +2603,91 @@
      0,
      0,
      0,
-     0.686
+     0.59
     ],
     [
-     240,
-     225,
-     209,
-     0.153
+     252,
+     252,
+     252,
+     0.31
     ],
     [
-     111,
-     112,
-     94,
-     0.071
+     63,
+     66,
+     74,
+     0.049
     ],
     [
-     80,
-     44,
-     40,
-     0.059
+     215,
+     167,
+     101,
+     0.021
     ],
     [
-     172,
-     163,
-     155,
-     0.017
+     182,
+     168,
+     190,
+     0.019
     ],
     [
-     219,
-     150,
-     95,
-     0.014
+     139,
+     116,
+     103,
+     0.011
     ]
    ],
    "lumiere": {
-    "luminosite": 58.2,
-    "chaleur": 10.7,
-    "saturation": 24.3
+    "luminosite": 89.6,
+    "chaleur": 2.2,
+    "saturation": 7.0
    },
-   "moment": "nuit",
-   "postures": [
-    [
-     40.5,
-     41.5,
-     0.58,
-     "desespoir"
-    ],
-    [
-     82.0,
-     83.0,
-     0.57,
-     "desespoir"
-    ]
-   ]
+   "moment": "jour",
+   "postures": []
   },
   "audio": {
-   "duree": 90.6,
+   "duree": 69.6,
    "nb_voix": 2,
    "voix": [
     {
-     "hz": 208,
+     "hz": 216,
      "genre": "f",
-     "part": 0.4
+     "part": 0.43
     },
     {
-     "hz": 143,
-     "genre": "h",
-     "part": 0.6
+     "hz": 193,
+     "genre": "f",
+     "part": 0.57
     }
    ],
-   "debit": 4.49,
-   "blanc_moyen": 0.59,
-   "coupes": 3,
-   "dynamique_db": 19.5,
-   "cris": 0.004,
+   "debit": 6.08,
+   "blanc_moyen": 0.51,
+   "coupes": 13,
+   "dynamique_db": 17.9,
+   "cris": 0.011,
    "musique": 0.41,
-   "impacts": 49,
-   "impacts_10s": 5.41,
-   "graves": 22,
-   "aigus": 27,
-   "sur_vanne": 11,
+   "impacts": 91,
+   "impacts_10s": 13.08,
+   "graves": 6,
+   "aigus": 85,
+   "sur_vanne": 42,
    "evenements": {
-    "crying": 2,
-    "kiss": 1,
-    "laughter": 1
+    "dog": 1
    },
    "emotions": {
-    "neutral": 24,
-    "confused": 3,
-    "shocked": 2,
-    "happy": 2,
-    "annoyed": 2,
-    "angry": 2,
-    "jealous": 1,
-    "sarcastic": 1
+    "colere": 20,
+    "joie": 3,
+    "blase": 3,
+    "reflechit": 2,
+    "sceptique": 2,
+    "sarcastique": 2,
+    "annoyed": 1,
+    "explique": 1
    }
   },
   "silences": [],
-  "video_origine": "/tmp/tmpv3g1htvz/src.mp4",
+  "video_origine": "/tmp/tmpb98x7d3m/src.mp4",
   "debut": 0.0,
-  "titre": "Le favoritisme à l'école #tiktokfrance🇨🇵 #fyp #humour #ecole #justice ",
+  "titre": "La manager toxique @ELIOT LEHANNEUR #sketch #drole #pourtoi ",
   "nb_vus": 2
  },
  "fiche": {
@@ -2979,7 +2713,17 @@
      13,
      14,
      15,
-     16,
+     16
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 0.0,
+    "decor": "small modern office with computer desk and green plant in background with computer monitor on wooden desk, white coffee mug, black headset with microphone",
+    "titre": "Au bureau"
+   },
+   {
+    "scene": "2",
+    "repliques": [
      17,
      18,
      19,
@@ -2997,15 +2741,13 @@
      31,
      32,
      33,
-     34,
-     35,
-     36
+     34
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "titre": "La classe",
-    "decor": "small modest empty traditional school classroom with wooden desks and blackboards with wooden school desks, green blackboard, paper sheets on desk"
+    "decor": "small modern office with computer desk and green plant in background with computer monitor on wooden desk, white coffee mug, black headset with microphone",
+    "titre": "En vacances"
    }
   ]
  },
@@ -3018,258 +2760,338 @@
   ],
   [
    0.01,
-   0.17,
-   "T"
-  ],
-  [
-   0.17,
    0.24,
-   "O"
+   "T"
   ],
   [
    0.24,
-   0.38,
-   "E"
+   0.45,
+   "U"
   ],
   [
-   0.38,
+   0.45,
    0.52,
-   "T"
-  ],
-  [
-   0.52,
-   0.8,
-   "E"
-  ],
-  [
-   0.8,
-   0.87,
-   "T"
-  ],
-  [
-   0.87,
-   0.98,
-   "M"
-  ],
-  [
-   0.98,
-   1.04,
-   "E"
-  ],
-  [
-   1.04,
-   1.09,
-   "M"
-  ],
-  [
-   1.09,
-   1.37,
-   "E"
-  ],
-  [
-   1.37,
-   1.51,
    "O"
   ],
   [
-   1.51,
-   1.58,
-   "F"
-  ],
-  [
-   1.58,
-   1.65,
-   "U"
-  ],
-  [
-   1.65,
-   1.72,
-   "F"
-  ],
-  [
-   1.72,
-   2.14,
+   0.52,
+   0.59,
    "T"
   ],
   [
-   2.14,
-   2.21,
-   "U"
+   0.59,
+   0.65,
+   "M"
   ],
   [
-   2.21,
-   2.28,
+   0.65,
+   0.7,
+   "O"
+  ],
+  [
+   0.7,
+   0.78,
+   "M"
+  ],
+  [
+   0.78,
+   0.86,
    "E"
   ],
   [
-   2.28,
-   2.84,
+   0.86,
+   0.94,
+   "M"
+  ],
+  [
+   0.94,
+   0.99,
    "T"
   ],
   [
-   2.84,
-   3.12,
-   "E"
-  ],
-  [
-   3.12,
-   3.26,
-   "T"
-  ],
-  [
-   3.26,
-   3.4,
+   0.99,
+   1.17,
    "A"
   ],
   [
-   3.4,
-   3.54,
+   1.17,
+   1.24,
    "T"
   ],
   [
-   3.54,
-   3.65,
+   1.24,
+   1.31,
+   "E"
+  ],
+  [
+   1.31,
+   1.52,
+   "T"
+  ],
+  [
+   1.52,
+   1.61,
    "M"
   ],
   [
-   3.65,
-   3.79,
-   "F"
+   1.61,
+   1.92,
+   "T"
   ],
   [
-   3.79,
-   3.86,
+   1.92,
+   2.06,
+   "A"
+  ],
+  [
+   2.06,
+   2.13,
+   "T"
+  ],
+  [
+   2.13,
+   2.2,
+   "E"
+  ],
+  [
+   2.2,
+   2.27,
+   "T"
+  ],
+  [
+   2.27,
+   2.35,
+   "M"
+  ],
+  [
+   2.35,
+   2.53,
+   "T"
+  ],
+  [
+   2.53,
+   2.6,
+   "E"
+  ],
+  [
+   2.6,
+   2.74,
+   "T"
+  ],
+  [
+   2.74,
+   2.88,
+   "A"
+  ],
+  [
+   2.88,
+   3.02,
+   "E"
+  ],
+  [
+   3.02,
+   3.09,
    "O"
   ],
   [
-   3.86,
-   3.93,
+   3.09,
+   3.23,
+   "T"
+  ],
+  [
+   3.23,
+   3.37,
    "U"
   ],
   [
-   3.93,
-   4.28,
+   3.37,
+   3.51,
    "T"
   ],
   [
-   4.28,
-   4.35,
-   "F"
-  ],
-  [
-   4.35,
-   4.49,
-   "T"
-  ],
-  [
-   4.49,
-   4.7,
-   "U"
-  ],
-  [
-   4.7,
-   5.05,
-   "T"
-  ],
-  [
-   5.05,
-   5.13,
+   3.51,
+   3.57,
    "M"
   ],
   [
-   5.13,
-   5.27,
+   3.57,
+   3.63,
+   "U"
+  ],
+  [
+   3.63,
+   3.69,
+   "M"
+  ],
+  [
+   3.69,
+   3.77,
    "T"
   ],
   [
-   5.27,
-   5.34,
+   3.77,
+   3.93,
+   "M"
+  ],
+  [
+   3.93,
+   4.0,
    "E"
   ],
   [
-   5.34,
-   5.41,
-   "F"
-  ],
-  [
-   5.41,
-   5.55,
-   "T"
-  ],
-  [
-   5.55,
-   5.62,
-   "E"
-  ],
-  [
-   5.62,
-   5.83,
-   "T"
-  ],
-  [
-   5.83,
-   5.97,
+   4.0,
+   4.14,
    "O"
   ],
   [
-   5.97,
-   6.05,
+   4.14,
+   4.42,
+   "T"
+  ],
+  [
+   4.42,
+   4.49,
+   "O"
+  ],
+  [
+   4.49,
+   4.56,
+   "T"
+  ],
+  [
+   4.56,
+   4.67,
    "M"
   ],
   [
-   6.05,
-   6.13,
+   4.67,
+   5.07,
+   "U"
+  ],
+  [
+   5.07,
+   5.21,
    "T"
   ],
   [
-   6.13,
-   6.32,
+   5.21,
+   5.28,
+   "O"
+  ],
+  [
+   5.28,
+   5.36,
    "M"
   ],
   [
-   6.32,
-   6.55,
+   5.36,
+   5.56,
+   "O"
+  ],
+  [
+   5.56,
+   5.63,
    "T"
   ],
   [
-   6.55,
-   6.76,
+   5.63,
+   5.7,
    "E"
   ],
   [
-   6.76,
-   6.83,
-   "U"
+   5.7,
+   5.77,
+   "A"
   ],
   [
-   6.83,
-   6.9,
+   5.77,
+   5.91,
+   "T"
+  ],
+  [
+   5.91,
+   5.98,
    "E"
   ],
   [
-   6.9,
-   7.11,
-   "T"
+   5.98,
+   6.05,
+   "F"
   ],
   [
-   7.11,
-   7.23,
-   null
+   6.05,
+   6.12,
+   "E"
   ],
   [
-   7.23,
-   7.29,
-   "T"
+   6.12,
+   6.24,
+   "M"
   ],
   [
-   7.29,
-   7.41,
+   6.24,
+   6.47,
    "U"
   ],
   [
-   7.41,
+   6.47,
+   6.54,
+   "E"
+  ],
+  [
+   6.54,
+   6.61,
+   "U"
+  ],
+  [
+   6.61,
+   6.69,
+   "M"
+  ],
+  [
+   6.69,
+   6.8,
+   "U"
+  ],
+  [
+   6.8,
+   6.87,
+   "F"
+  ],
+  [
+   6.87,
+   6.94,
+   "U"
+  ],
+  [
+   6.94,
+   7.02,
+   "M"
+  ],
+  [
+   7.02,
+   7.08,
+   "T"
+  ],
+  [
+   7.08,
+   7.14,
+   "E"
+  ],
+  [
+   7.14,
+   7.28,
+   "U"
+  ],
+  [
+   7.28,
+   7.35,
+   "T"
+  ],
+  [
+   7.35,
    7.49,
-   "M"
+   "E"
   ],
   [
    7.49,
@@ -3278,1358 +3100,1888 @@
   ],
   [
    7.56,
-   8.18,
-   "T"
-  ],
-  [
-   8.18,
-   8.35,
+   7.64,
    "M"
   ],
   [
-   8.35,
-   8.43,
+   7.64,
+   7.74,
    "T"
   ],
   [
-   8.43,
-   8.53,
-   "M"
-  ],
-  [
-   8.53,
-   8.61,
-   "T"
-  ],
-  [
-   8.61,
-   8.69,
-   "M"
-  ],
-  [
-   8.69,
-   8.75,
-   "E"
-  ],
-  [
-   8.75,
-   8.87,
-   "F"
-  ],
-  [
-   8.87,
-   8.94,
-   "E"
-  ],
-  [
-   8.94,
-   9.01,
-   "T"
-  ],
-  [
-   9.01,
-   9.21,
-   "M"
-  ],
-  [
-   9.21,
-   9.37,
-   "T"
-  ],
-  [
-   9.37,
-   9.65,
-   "E"
-  ],
-  [
-   9.65,
-   9.86,
-   "T"
-  ],
-  [
-   9.86,
-   9.94,
-   "M"
-  ],
-  [
-   9.94,
-   10.28,
-   "E"
-  ],
-  [
-   10.28,
-   10.68,
-   "T"
-  ],
-  [
-   10.68,
-   10.82,
-   "E"
-  ],
-  [
-   10.82,
-   11.03,
-   "T"
-  ],
-  [
-   11.03,
-   11.1,
-   "E"
-  ],
-  [
-   11.1,
-   11.18,
-   "M"
-  ],
-  [
-   11.18,
-   11.31,
-   "T"
-  ],
-  [
-   11.31,
-   11.38,
-   "E"
-  ],
-  [
-   11.38,
-   11.52,
-   "T"
-  ],
-  [
-   11.52,
-   11.66,
-   "E"
-  ],
-  [
-   11.66,
-   11.81,
-   "M"
-  ],
-  [
-   11.81,
-   12.02,
-   "T"
-  ],
-  [
-   12.02,
-   12.1,
-   "M"
-  ],
-  [
-   12.1,
-   12.19,
-   "E"
-  ],
-  [
-   12.19,
-   12.33,
-   "T"
-  ],
-  [
-   12.33,
-   12.53,
-   "M"
-  ],
-  [
-   12.53,
-   12.57,
-   "E"
-  ],
-  [
-   12.57,
-   12.75,
-   "T"
-  ],
-  [
-   12.75,
-   13.03,
-   "U"
-  ],
-  [
-   13.03,
-   13.2,
-   "M"
-  ],
-  [
-   13.2,
-   13.57,
-   "T"
-  ],
-  [
-   13.57,
-   13.65,
-   "M"
-  ],
-  [
-   13.65,
-   14.46,
-   "T"
-  ],
-  [
-   14.46,
-   14.54,
-   "M"
-  ],
-  [
-   14.54,
-   14.72,
-   "E"
-  ],
-  [
-   14.72,
-   14.86,
-   "F"
-  ],
-  [
-   14.86,
-   14.93,
-   "E"
-  ],
-  [
-   14.93,
-   15.28,
-   "T"
-  ],
-  [
-   15.28,
-   15.36,
-   "M"
-  ],
-  [
-   15.36,
-   15.43,
-   "E"
-  ],
-  [
-   15.43,
-   16.12,
-   "T"
-  ],
-  [
-   16.12,
-   16.19,
-   "E"
-  ],
-  [
-   16.19,
-   16.54,
-   "T"
-  ],
-  [
-   16.54,
-   16.78,
-   null
-  ],
-  [
-   16.78,
-   16.85,
-   "T"
-  ],
-  [
-   16.85,
-   16.91,
-   "M"
-  ],
-  [
-   16.91,
-   17.11,
-   "E"
-  ],
-  [
-   17.11,
-   17.25,
-   "T"
-  ],
-  [
-   17.25,
-   17.39,
+   7.74,
+   7.88,
    "O"
   ],
   [
-   17.39,
-   17.81,
+   7.88,
+   7.95,
    "U"
   ],
   [
-   17.81,
-   17.88,
+   7.95,
+   8.03,
+   "M"
+  ],
+  [
+   8.03,
+   8.07,
    "T"
   ],
   [
-   17.88,
-   17.95,
+   8.07,
+   8.11,
    "E"
   ],
   [
-   17.95,
-   18.02,
+   8.11,
+   8.19,
+   "M"
+  ],
+  [
+   8.19,
+   8.35,
+   "T"
+  ],
+  [
+   8.35,
+   8.42,
+   "F"
+  ],
+  [
+   8.42,
+   8.56,
+   "T"
+  ],
+  [
+   8.56,
+   8.64,
+   "M"
+  ],
+  [
+   8.64,
+   8.75,
+   "T"
+  ],
+  [
+   8.75,
+   8.82,
+   "F"
+  ],
+  [
+   8.82,
+   8.96,
+   "U"
+  ],
+  [
+   8.96,
+   9.04,
+   "M"
+  ],
+  [
+   9.04,
+   9.27,
+   "U"
+  ],
+  [
+   9.27,
+   9.41,
+   "F"
+  ],
+  [
+   9.41,
+   9.55,
+   "U"
+  ],
+  [
+   9.55,
+   9.9,
+   "T"
+  ],
+  [
+   9.9,
+   10.11,
+   "E"
+  ],
+  [
+   10.11,
+   10.25,
    "A"
   ],
   [
-   18.02,
+   10.25,
+   10.32,
+   "E"
+  ],
+  [
+   10.32,
+   10.4,
+   "M"
+  ],
+  [
+   10.4,
+   10.52,
+   "E"
+  ],
+  [
+   10.52,
+   10.8,
+   "T"
+  ],
+  [
+   10.8,
+   10.87,
+   "F"
+  ],
+  [
+   10.87,
+   10.95,
+   "M"
+  ],
+  [
+   10.95,
+   11.11,
+   "E"
+  ],
+  [
+   11.11,
+   11.18,
+   "T"
+  ],
+  [
+   11.18,
+   11.32,
+   "M"
+  ],
+  [
+   11.32,
+   11.54,
+   "E"
+  ],
+  [
+   11.54,
+   11.61,
+   "T"
+  ],
+  [
+   11.61,
+   11.73,
+   null
+  ],
+  [
+   11.73,
+   11.85,
+   "T"
+  ],
+  [
+   11.85,
+   12.2,
+   "E"
+  ],
+  [
+   12.2,
+   12.27,
+   "F"
+  ],
+  [
+   12.27,
+   12.37,
+   "M"
+  ],
+  [
+   12.37,
+   12.49,
+   "T"
+  ],
+  [
+   12.49,
+   12.57,
+   "M"
+  ],
+  [
+   12.57,
+   12.72,
+   "E"
+  ],
+  [
+   12.72,
+   12.79,
+   "T"
+  ],
+  [
+   12.79,
+   12.87,
+   "M"
+  ],
+  [
+   12.87,
+   13.08,
+   "E"
+  ],
+  [
+   13.08,
+   13.15,
+   "T"
+  ],
+  [
+   13.15,
+   13.23,
+   "M"
+  ],
+  [
+   13.23,
+   13.38,
+   "E"
+  ],
+  [
+   13.38,
+   13.68,
+   "T"
+  ],
+  [
+   13.68,
+   13.75,
+   "M"
+  ],
+  [
+   13.75,
+   14.14,
+   "E"
+  ],
+  [
+   14.14,
+   14.21,
+   "T"
+  ],
+  [
+   14.21,
+   14.28,
+   "O"
+  ],
+  [
+   14.28,
+   14.42,
+   "F"
+  ],
+  [
+   14.42,
+   14.49,
+   "E"
+  ],
+  [
+   14.49,
+   14.63,
+   "T"
+  ],
+  [
+   14.63,
+   14.7,
+   "E"
+  ],
+  [
+   14.7,
+   14.77,
+   "T"
+  ],
+  [
+   14.77,
+   14.85,
+   "M"
+  ],
+  [
+   14.85,
+   14.93,
+   "O"
+  ],
+  [
+   14.93,
+   15.14,
+   "U"
+  ],
+  [
+   15.14,
+   15.25,
+   "M"
+  ],
+  [
+   15.25,
+   15.37,
+   "T"
+  ],
+  [
+   15.37,
+   15.45,
+   "M"
+  ],
+  [
+   15.45,
+   15.64,
+   "T"
+  ],
+  [
+   15.64,
+   15.71,
+   "F"
+  ],
+  [
+   15.71,
+   15.78,
+   "A"
+  ],
+  [
+   15.78,
+   15.85,
+   "O"
+  ],
+  [
+   15.85,
+   15.99,
+   "U"
+  ],
+  [
+   15.99,
+   16.27,
+   "T"
+  ],
+  [
+   16.27,
+   16.34,
+   "E"
+  ],
+  [
+   16.34,
+   16.42,
+   "M"
+  ],
+  [
+   16.42,
+   16.5,
+   "T"
+  ],
+  [
+   16.5,
+   16.64,
+   "U"
+  ],
+  [
+   16.64,
+   16.72,
+   "M"
+  ],
+  [
+   16.72,
+   16.9,
+   "O"
+  ],
+  [
+   16.9,
+   16.97,
+   "E"
+  ],
+  [
+   16.97,
+   17.05,
+   "M"
+  ],
+  [
+   17.05,
+   17.29,
+   "U"
+  ],
+  [
+   17.29,
+   17.36,
+   "F"
+  ],
+  [
+   17.36,
+   17.43,
+   "U"
+  ],
+  [
+   17.43,
+   17.5,
+   "T"
+  ],
+  [
+   17.5,
+   17.64,
+   "U"
+  ],
+  [
+   17.64,
+   17.78,
+   "E"
+  ],
+  [
+   17.78,
+   17.85,
+   "U"
+  ],
+  [
+   17.85,
+   17.92,
+   "T"
+  ],
+  [
+   17.92,
+   18.0,
+   "M"
+  ],
+  [
+   18.0,
    18.16,
    "T"
   ],
   [
    18.16,
-   18.25,
-   "M"
-  ],
-  [
-   18.25,
-   18.9,
-   "T"
-  ],
-  [
-   18.9,
-   18.97,
+   18.23,
    "E"
   ],
   [
-   18.97,
-   19.32,
-   "U"
-  ],
-  [
-   19.32,
-   19.39,
+   18.23,
+   18.51,
    "T"
   ],
   [
-   19.39,
-   19.67,
-   "E"
-  ],
-  [
-   19.67,
-   19.95,
-   "T"
-  ],
-  [
-   19.95,
-   20.02,
-   "O"
-  ],
-  [
-   20.02,
-   20.1,
+   18.51,
+   18.59,
    "M"
   ],
   [
-   20.1,
-   20.52,
+   18.59,
+   18.64,
    "T"
   ],
   [
-   20.52,
-   20.6,
-   "M"
-  ],
-  [
-   20.6,
-   20.83,
-   "U"
-  ],
-  [
-   20.83,
-   21.11,
-   "O"
-  ],
-  [
-   21.11,
-   21.18,
+   18.64,
+   18.68,
    "F"
   ],
   [
-   21.18,
-   21.32,
-   "E"
-  ],
-  [
-   21.32,
-   21.46,
+   18.68,
+   18.89,
    "T"
   ],
   [
-   21.46,
-   21.66,
-   "M"
-  ],
-  [
-   21.66,
-   21.73,
-   "T"
-  ],
-  [
-   21.73,
-   21.81,
-   "M"
-  ],
-  [
-   21.81,
-   22.11,
-   "T"
-  ],
-  [
-   22.11,
-   22.31,
-   null
-  ],
-  [
-   22.31,
-   22.39,
-   "T"
-  ],
-  [
-   22.39,
-   22.81,
+   18.89,
+   19.24,
    "U"
   ],
   [
-   22.81,
-   22.95,
-   "T"
-  ],
-  [
-   22.95,
-   23.15,
-   null
-  ],
-  [
-   23.15,
-   23.22,
-   "T"
-  ],
-  [
-   23.22,
-   23.29,
-   "M"
-  ],
-  [
-   23.29,
-   23.34,
-   "O"
-  ],
-  [
-   23.34,
-   23.45,
-   "E"
-  ],
-  [
-   23.45,
-   23.52,
-   "T"
-  ],
-  [
-   23.52,
-   23.59,
-   "E"
-  ],
-  [
-   23.59,
-   23.8,
-   "T"
-  ],
-  [
-   23.8,
-   24.71,
-   null
-  ],
-  [
-   24.71,
-   24.79,
-   "T"
-  ],
-  [
-   24.79,
-   24.86,
+   19.24,
+   19.31,
    "F"
   ],
   [
-   24.86,
-   24.93,
+   19.31,
+   19.59,
+   "T"
+  ],
+  [
+   19.59,
+   19.73,
+   "U"
+  ],
+  [
+   19.73,
+   19.94,
+   "T"
+  ],
+  [
+   19.94,
+   20.08,
+   "E"
+  ],
+  [
+   20.08,
+   20.29,
+   "T"
+  ],
+  [
+   20.29,
+   20.36,
+   "E"
+  ],
+  [
+   20.36,
+   20.43,
+   "U"
+  ],
+  [
+   20.43,
+   20.5,
+   "T"
+  ],
+  [
+   20.5,
+   20.57,
+   "E"
+  ],
+  [
+   20.57,
+   20.99,
+   "T"
+  ],
+  [
+   20.99,
+   21.13,
+   "E"
+  ],
+  [
+   21.13,
+   21.2,
+   "O"
+  ],
+  [
+   21.2,
+   21.34,
+   "T"
+  ],
+  [
+   21.34,
+   21.42,
+   "M"
+  ],
+  [
+   21.42,
+   21.49,
+   "E"
+  ],
+  [
+   21.49,
+   21.56,
+   "T"
+  ],
+  [
+   21.56,
+   21.77,
+   "O"
+  ],
+  [
+   21.77,
+   21.86,
+   "M"
+  ],
+  [
+   21.86,
+   21.96,
+   "T"
+  ],
+  [
+   21.96,
+   22.17,
+   "O"
+  ],
+  [
+   22.17,
+   22.45,
+   "U"
+  ],
+  [
+   22.45,
+   22.53,
+   "M"
+  ],
+  [
+   22.53,
+   22.73,
    "A"
   ],
   [
-   24.93,
-   25.07,
-   "T"
-  ],
-  [
-   25.07,
-   25.14,
-   "T"
-  ],
-  [
-   25.14,
-   25.21,
-   "T"
-  ],
-  [
-   25.21,
-   25.28,
+   22.73,
+   22.8,
    "E"
   ],
   [
-   25.28,
-   25.88,
+   22.8,
+   22.88,
+   "M"
+  ],
+  [
+   22.88,
+   23.05,
    "T"
   ],
   [
-   25.88,
-   26.04,
+   23.05,
+   23.13,
+   "M"
+  ],
+  [
+   23.13,
+   23.47,
+   "O"
+  ],
+  [
+   23.47,
+   23.57,
+   "T"
+  ],
+  [
+   23.57,
+   23.59,
+   "M"
+  ],
+  [
+   23.59,
+   23.65,
+   "T"
+  ],
+  [
+   23.65,
+   23.71,
+   "M"
+  ],
+  [
+   23.71,
+   23.76,
+   "O"
+  ],
+  [
+   23.76,
+   23.82,
+   "M"
+  ],
+  [
+   23.82,
+   23.87,
    "E"
   ],
   [
-   26.04,
-   26.38,
-   "T"
-  ],
-  [
-   26.38,
-   26.45,
-   "F"
-  ],
-  [
-   26.45,
-   26.73,
-   "T"
-  ],
-  [
-   26.73,
-   27.23,
-   null
-  ],
-  [
-   27.23,
-   27.31,
-   "T"
-  ],
-  [
-   27.31,
-   27.45,
-   "E"
-  ],
-  [
-   27.45,
-   27.65,
+   23.87,
+   23.92,
    "M"
   ],
   [
-   27.65,
-   28.43,
-   "T"
-  ],
-  [
-   28.43,
-   28.55,
-   "M"
-  ],
-  [
-   28.55,
-   28.82,
-   "O"
-  ],
-  [
-   28.82,
-   28.96,
-   "T"
-  ],
-  [
-   28.96,
-   29.03,
-   "O"
-  ],
-  [
-   29.03,
-   29.31,
-   "E"
-  ],
-  [
-   29.31,
-   29.38,
-   "T"
-  ],
-  [
-   29.38,
-   29.45,
-   "O"
-  ],
-  [
-   29.45,
-   29.53,
-   "M"
-  ],
-  [
-   29.53,
-   29.81,
-   "O"
-  ],
-  [
-   29.81,
-   30.09,
-   "A"
-  ],
-  [
-   30.09,
-   30.16,
-   "E"
-  ],
-  [
-   30.16,
-   30.23,
-   "O"
-  ],
-  [
-   30.23,
-   30.32,
-   "M"
-  ],
-  [
-   30.32,
-   30.8,
-   "T"
-  ],
-  [
-   30.8,
-   30.88,
-   "M"
-  ],
-  [
-   30.88,
-   31.29,
-   "T"
-  ],
-  [
-   31.29,
-   31.4,
-   "M"
-  ],
-  [
-   31.4,
-   31.66,
+   23.92,
+   24.14,
    "U"
   ],
   [
-   31.66,
-   31.73,
+   24.14,
+   24.35,
+   "O"
+  ],
+  [
+   24.35,
+   24.42,
    "T"
   ],
   [
-   31.73,
+   24.42,
+   24.49,
+   "E"
+  ],
+  [
+   24.49,
+   24.56,
+   "U"
+  ],
+  [
+   24.56,
+   24.7,
+   "T"
+  ],
+  [
+   24.7,
+   24.84,
+   "M"
+  ],
+  [
+   24.84,
+   24.94,
+   "T"
+  ],
+  [
+   24.94,
+   25.01,
+   "U"
+  ],
+  [
+   25.01,
+   25.08,
+   "T"
+  ],
+  [
+   25.08,
+   25.15,
+   "O"
+  ],
+  [
+   25.15,
+   25.29,
+   "U"
+  ],
+  [
+   25.29,
+   25.43,
+   "T"
+  ],
+  [
+   25.43,
+   25.55,
+   "M"
+  ],
+  [
+   25.55,
+   25.62,
+   "T"
+  ],
+  [
+   25.62,
+   25.69,
+   "F"
+  ],
+  [
+   25.69,
+   25.83,
+   "U"
+  ],
+  [
+   25.83,
+   25.97,
+   "T"
+  ],
+  [
+   25.97,
+   26.04,
+   "O"
+  ],
+  [
+   26.04,
+   26.12,
+   "M"
+  ],
+  [
+   26.12,
+   26.29,
+   "T"
+  ],
+  [
+   26.29,
+   26.37,
+   "M"
+  ],
+  [
+   26.37,
+   26.49,
+   "T"
+  ],
+  [
+   26.49,
+   26.56,
+   "U"
+  ],
+  [
+   26.56,
+   26.91,
+   "E"
+  ],
+  [
+   26.91,
+   26.98,
+   "O"
+  ],
+  [
+   26.98,
+   27.05,
+   "E"
+  ],
+  [
+   27.05,
+   27.19,
+   "T"
+  ],
+  [
+   27.19,
+   27.26,
+   "E"
+  ],
+  [
+   27.26,
+   27.54,
+   "U"
+  ],
+  [
+   27.54,
+   27.61,
+   "T"
+  ],
+  [
+   27.61,
+   27.69,
+   "M"
+  ],
+  [
+   27.69,
+   27.82,
+   "O"
+  ],
+  [
+   27.82,
+   27.89,
+   "U"
+  ],
+  [
+   27.89,
+   27.96,
+   "T"
+  ],
+  [
+   27.96,
+   28.03,
+   "F"
+  ],
+  [
+   28.03,
+   28.1,
+   "U"
+  ],
+  [
+   28.1,
+   28.17,
+   "M"
+  ],
+  [
+   28.17,
+   28.23,
+   "E"
+  ],
+  [
+   28.23,
+   28.37,
+   "M"
+  ],
+  [
+   28.37,
+   28.54,
+   "T"
+  ],
+  [
+   28.54,
+   28.68,
+   "F"
+  ],
+  [
+   28.68,
+   28.75,
+   "T"
+  ],
+  [
+   28.75,
+   28.83,
+   "M"
+  ],
+  [
+   28.83,
+   29.01,
+   "E"
+  ],
+  [
+   29.01,
+   29.08,
+   "F"
+  ],
+  [
+   29.08,
+   29.22,
+   "U"
+  ],
+  [
+   29.22,
+   29.29,
+   "T"
+  ],
+  [
+   29.29,
+   29.43,
+   "U"
+  ],
+  [
+   29.43,
+   29.51,
+   "M"
+  ],
+  [
+   29.51,
+   29.65,
+   "U"
+  ],
+  [
+   29.65,
+   29.72,
+   "T"
+  ],
+  [
+   29.72,
+   29.8,
+   "M"
+  ],
+  [
+   29.8,
+   29.91,
+   "U"
+  ],
+  [
+   29.91,
+   29.99,
+   "M"
+  ],
+  [
+   29.99,
+   30.06,
+   "F"
+  ],
+  [
+   30.06,
+   30.26,
+   "T"
+  ],
+  [
+   30.26,
+   30.34,
+   "M"
+  ],
+  [
+   30.34,
+   30.39,
+   "T"
+  ],
+  [
+   30.39,
+   30.44,
+   "E"
+  ],
+  [
+   30.44,
+   30.51,
+   "F"
+  ],
+  [
+   30.51,
+   30.59,
+   "M"
+  ],
+  [
+   30.59,
+   30.68,
+   "T"
+  ],
+  [
+   30.68,
+   30.75,
+   "E"
+  ],
+  [
+   30.75,
+   30.83,
+   "M"
+  ],
+  [
+   30.83,
+   30.87,
+   "O"
+  ],
+  [
+   30.87,
+   30.91,
+   "U"
+  ],
+  [
+   30.91,
+   30.98,
+   "T"
+  ],
+  [
+   30.98,
+   31.19,
+   "U"
+  ],
+  [
+   31.19,
+   31.3,
+   "M"
+  ],
+  [
+   31.3,
+   31.54,
+   "T"
+  ],
+  [
+   31.54,
+   31.61,
+   "F"
+  ],
+  [
+   31.61,
    31.81,
    "M"
   ],
   [
    31.81,
-   31.89,
-   "E"
-  ],
-  [
-   31.89,
-   31.96,
-   "O"
-  ],
-  [
-   31.96,
-   32.18,
-   "E"
-  ],
-  [
-   32.18,
-   32.62,
+   31.86,
    "T"
   ],
   [
-   32.62,
-   32.7,
+   31.86,
+   31.91,
    "M"
   ],
   [
-   32.7,
-   32.89,
-   "O"
-  ],
-  [
-   32.89,
-   33.45,
+   31.91,
+   31.99,
    "T"
   ],
   [
-   33.45,
-   33.66,
+   31.99,
+   32.06,
+   "M"
+  ],
+  [
+   32.06,
+   32.13,
+   "A"
+  ],
+  [
+   32.13,
+   32.19,
+   "T"
+  ],
+  [
+   32.19,
+   32.26,
+   "E"
+  ],
+  [
+   32.26,
+   32.47,
    "U"
   ],
   [
-   33.66,
+   32.47,
+   32.54,
+   "F"
+  ],
+  [
+   32.54,
+   32.61,
+   "T"
+  ],
+  [
+   32.61,
+   32.75,
+   "O"
+  ],
+  [
+   32.75,
+   32.89,
+   "F"
+  ],
+  [
+   32.89,
+   33.03,
+   "U"
+  ],
+  [
+   33.03,
+   33.1,
+   "O"
+  ],
+  [
+   33.1,
+   33.18,
+   "M"
+  ],
+  [
+   33.18,
+   33.31,
+   "E"
+  ],
+  [
+   33.31,
+   33.52,
+   "T"
+  ],
+  [
+   33.52,
+   33.8,
+   "E"
+  ],
+  [
+   33.8,
    33.87,
    "T"
   ],
   [
    33.87,
-   34.03,
-   null
-  ],
-  [
-   34.03,
-   34.11,
-   "T"
-  ],
-  [
-   34.11,
-   34.22,
-   "M"
-  ],
-  [
-   34.22,
-   34.27,
-   "O"
-  ],
-  [
-   34.27,
-   34.45,
-   "U"
-  ],
-  [
-   34.45,
-   34.8,
-   "T"
-  ],
-  [
-   34.8,
-   34.99,
-   null
-  ],
-  [
-   34.99,
-   35.17,
-   "T"
-  ],
-  [
-   35.17,
-   35.67,
-   null
-  ],
-  [
-   35.67,
-   36.04,
-   "T"
-  ],
-  [
-   36.04,
-   36.11,
+   33.94,
    "E"
   ],
   [
-   36.11,
-   36.18,
+   33.94,
+   34.22,
    "T"
   ],
   [
-   36.18,
-   36.26,
-   "M"
-  ],
-  [
-   36.26,
-   36.91,
-   "T"
-  ],
-  [
-   36.91,
-   36.99,
-   "M"
-  ],
-  [
-   36.99,
-   37.11,
-   "O"
-  ],
-  [
-   37.11,
-   38.3,
-   "T"
-  ],
-  [
-   38.3,
-   38.52,
-   null
-  ],
-  [
-   38.52,
-   38.56,
-   "T"
-  ],
-  [
-   38.56,
-   38.67,
+   34.22,
+   34.29,
    "E"
   ],
   [
-   38.67,
-   38.74,
+   34.29,
+   34.36,
+   "T"
+  ],
+  [
+   34.36,
+   34.44,
+   "M"
+  ],
+  [
+   34.44,
+   34.54,
+   "T"
+  ],
+  [
+   34.54,
+   34.61,
    "F"
   ],
   [
-   38.74,
-   38.81,
-   "U"
-  ],
-  [
-   38.81,
-   38.89,
+   34.61,
+   34.69,
    "M"
   ],
   [
-   38.89,
-   38.93,
-   "T"
-  ],
-  [
-   38.93,
-   39.25,
+   34.69,
+   34.75,
    "U"
   ],
   [
-   39.25,
-   39.39,
+   34.75,
+   35.02,
    "T"
   ],
   [
-   39.39,
-   39.59,
-   null
-  ],
-  [
-   39.59,
-   39.64,
-   "T"
-  ],
-  [
-   39.64,
-   39.76,
-   "U"
-  ],
-  [
-   39.76,
-   40.11,
-   "T"
-  ],
-  [
-   40.11,
-   40.18,
-   "U"
-  ],
-  [
-   40.18,
-   40.26,
+   35.02,
+   35.1,
    "M"
   ],
   [
-   40.26,
-   40.43,
+   35.1,
+   35.31,
    "T"
   ],
   [
-   40.43,
-   40.52,
-   "M"
+   35.31,
+   35.45,
+   "U"
   ],
   [
-   40.52,
-   40.56,
+   35.45,
+   35.59,
+   "T"
+  ],
+  [
+   35.59,
+   35.66,
    "O"
   ],
   [
-   40.56,
-   40.6,
-   "U"
-  ],
-  [
-   40.6,
-   40.68,
+   35.66,
+   35.74,
    "M"
   ],
   [
-   40.68,
-   40.8,
+   35.74,
+   35.87,
+   "O"
+  ],
+  [
+   35.87,
+   36.08,
+   "T"
+  ],
+  [
+   36.08,
+   36.16,
+   "M"
+  ],
+  [
+   36.16,
+   36.24,
+   "T"
+  ],
+  [
+   36.24,
+   36.38,
+   "A"
+  ],
+  [
+   36.38,
+   36.45,
+   "E"
+  ],
+  [
+   36.45,
+   36.53,
+   "M"
+  ],
+  [
+   36.53,
+   36.59,
+   "T"
+  ],
+  [
+   36.59,
+   36.65,
+   "E"
+  ],
+  [
+   36.65,
+   36.79,
+   "T"
+  ],
+  [
+   36.79,
+   36.86,
+   "E"
+  ],
+  [
+   36.86,
+   36.94,
+   "M"
+  ],
+  [
+   36.94,
+   37.07,
    "U"
   ],
   [
-   40.8,
+   37.07,
+   37.42,
+   "T"
+  ],
+  [
+   37.42,
+   37.56,
+   "M"
+  ],
+  [
+   37.56,
+   37.71,
+   "E"
+  ],
+  [
+   37.71,
+   37.78,
+   "O"
+  ],
+  [
+   37.78,
+   37.85,
+   "E"
+  ],
+  [
+   37.85,
+   37.99,
+   "T"
+  ],
+  [
+   37.99,
+   38.07,
+   "M"
+  ],
+  [
+   38.07,
+   38.21,
+   "A"
+  ],
+  [
+   38.21,
+   38.35,
+   "E"
+  ],
+  [
+   38.35,
+   38.62,
+   "U"
+  ],
+  [
+   38.62,
+   38.77,
+   "T"
+  ],
+  [
+   38.77,
+   38.85,
+   "M"
+  ],
+  [
+   38.85,
+   38.95,
+   "A"
+  ],
+  [
+   38.95,
+   39.35,
+   "E"
+  ],
+  [
+   39.35,
+   39.4,
+   "O"
+  ],
+  [
+   39.4,
+   39.58,
+   "U"
+  ],
+  [
+   39.58,
+   39.72,
+   "E"
+  ],
+  [
+   39.72,
+   39.79,
+   "T"
+  ],
+  [
+   39.79,
+   39.87,
+   "M"
+  ],
+  [
+   39.87,
+   39.94,
+   "U"
+  ],
+  [
+   39.94,
+   40.01,
+   "F"
+  ],
+  [
+   40.01,
+   40.08,
+   "T"
+  ],
+  [
+   40.08,
+   40.16,
+   "M"
+  ],
+  [
+   40.16,
+   40.38,
+   "U"
+  ],
+  [
+   40.38,
+   40.59,
+   "A"
+  ],
+  [
+   40.59,
+   40.66,
+   "T"
+  ],
+  [
+   40.66,
+   40.74,
+   "M"
+  ],
+  [
+   40.74,
    40.94,
-   "O"
+   "U"
   ],
   [
    40.94,
    41.01,
-   "U"
+   "E"
   ],
   [
    41.01,
-   41.09,
-   "M"
-  ],
-  [
-   41.09,
-   41.15,
-   "E"
-  ],
-  [
-   41.15,
-   41.34,
+   41.36,
    "T"
   ],
   [
-   41.34,
-   41.41,
+   41.36,
+   41.5,
    "O"
   ],
   [
-   41.41,
-   41.48,
-   "E"
+   41.5,
+   41.71,
+   "T"
   ],
   [
-   41.48,
-   41.56,
+   41.71,
+   41.85,
+   "U"
+  ],
+  [
+   41.85,
+   41.92,
+   "T"
+  ],
+  [
+   41.92,
+   42.06,
+   "U"
+  ],
+  [
+   42.06,
+   42.22,
    "M"
   ],
   [
-   41.56,
-   41.76,
+   42.22,
+   42.39,
+   "U"
+  ],
+  [
+   42.39,
+   42.46,
+   "T"
+  ],
+  [
+   42.46,
+   42.53,
    "O"
   ],
   [
-   41.76,
-   41.97,
-   "T"
-  ],
-  [
-   41.97,
-   42.12,
-   "E"
-  ],
-  [
-   42.12,
-   42.18,
-   "T"
-  ],
-  [
-   42.18,
-   42.3,
-   "U"
-  ],
-  [
-   42.3,
-   42.51,
-   "T"
-  ],
-  [
-   42.51,
-   42.65,
-   "U"
-  ],
-  [
-   42.65,
-   42.73,
+   42.53,
+   42.69,
    "M"
   ],
   [
-   42.73,
-   42.89,
+   42.69,
+   42.86,
+   "U"
+  ],
+  [
+   42.86,
+   42.93,
+   "T"
+  ],
+  [
+   42.93,
+   43.01,
+   "M"
+  ],
+  [
+   43.01,
+   43.14,
+   "A"
+  ],
+  [
+   43.14,
+   43.21,
+   "T"
+  ],
+  [
+   43.21,
+   43.42,
+   "U"
+  ],
+  [
+   43.42,
+   43.49,
+   "T"
+  ],
+  [
+   43.49,
+   43.57,
+   "M"
+  ],
+  [
+   43.57,
+   43.62,
+   "T"
+  ],
+  [
+   43.62,
+   43.73,
    "O"
   ],
   [
-   42.89,
-   42.96,
-   "U"
-  ],
-  [
-   42.96,
-   43.04,
+   43.73,
+   43.83,
    "M"
   ],
   [
-   43.04,
-   43.29,
+   43.83,
+   43.88,
    "U"
   ],
   [
-   43.29,
-   43.5,
+   43.88,
+   43.93,
+   "T"
+  ],
+  [
+   43.93,
+   44.0,
+   "F"
+  ],
+  [
+   44.0,
+   44.14,
+   "T"
+  ],
+  [
+   44.14,
+   44.22,
    "M"
   ],
   [
-   43.5,
-   43.98,
-   "T"
+   44.22,
+   44.31,
+   "E"
   ],
   [
-   43.98,
-   44.19,
-   "U"
-  ],
-  [
-   44.19,
-   44.33,
-   "T"
-  ],
-  [
-   44.33,
+   44.31,
    44.4,
-   "E"
+   "M"
   ],
   [
    44.4,
-   44.5,
-   "M"
+   44.46,
+   "E"
   ],
   [
-   44.5,
-   44.61,
-   "T"
-  ],
-  [
-   44.61,
-   44.68,
-   "F"
-  ],
-  [
-   44.68,
-   44.75,
+   44.46,
+   44.52,
    "O"
   ],
   [
-   44.75,
-   44.89,
-   "E"
-  ],
-  [
-   44.89,
-   45.03,
-   "U"
-  ],
-  [
-   45.03,
-   45.23,
-   "M"
-  ],
-  [
-   45.23,
-   45.32,
-   "E"
-  ],
-  [
-   45.32,
-   45.46,
-   "O"
-  ],
-  [
-   45.46,
-   45.53,
+   44.52,
+   44.66,
    "T"
   ],
   [
-   45.53,
-   45.61,
-   "M"
-  ],
-  [
-   45.61,
-   45.72,
-   "A"
-  ],
-  [
-   45.72,
-   45.8,
-   "M"
-  ],
-  [
-   45.8,
-   45.99,
-   "A"
-  ],
-  [
-   45.99,
-   46.06,
-   "T"
-  ],
-  [
-   46.06,
-   46.13,
-   "A"
-  ],
-  [
-   46.13,
-   46.34,
-   "U"
-  ],
-  [
-   46.34,
-   46.55,
-   "A"
-  ],
-  [
-   46.55,
-   46.69,
-   "E"
-  ],
-  [
-   46.69,
-   46.9,
-   "U"
-  ],
-  [
-   46.9,
-   47.18,
-   "T"
-  ],
-  [
-   47.18,
-   47.25,
-   "A"
-  ],
-  [
-   47.25,
-   47.32,
+   44.66,
+   44.8,
    "F"
   ],
   [
-   47.32,
-   47.46,
-   "O"
-  ],
-  [
-   47.46,
-   47.67,
-   "E"
-  ],
-  [
-   47.67,
-   47.74,
-   "F"
-  ],
-  [
-   47.74,
-   47.81,
+   44.8,
+   44.94,
    "U"
   ],
   [
-   47.81,
-   47.88,
+   44.94,
+   45.15,
    "T"
   ],
   [
-   47.88,
+   45.15,
+   45.35,
+   "M"
+  ],
+  [
+   45.35,
+   45.7,
+   "U"
+  ],
+  [
+   45.7,
+   45.85,
+   "M"
+  ],
+  [
+   45.85,
+   45.95,
+   "T"
+  ],
+  [
+   45.95,
+   46.03,
+   "M"
+  ],
+  [
+   46.03,
+   46.25,
+   "T"
+  ],
+  [
+   46.25,
+   46.33,
+   "M"
+  ],
+  [
+   46.33,
+   46.39,
+   "T"
+  ],
+  [
+   46.39,
+   46.58,
+   "U"
+  ],
+  [
+   46.58,
+   46.65,
+   "T"
+  ],
+  [
+   46.65,
+   46.73,
+   "M"
+  ],
+  [
+   46.73,
+   47.17,
+   "T"
+  ],
+  [
+   47.17,
+   47.38,
+   "U"
+  ],
+  [
+   47.38,
+   47.45,
+   "T"
+  ],
+  [
+   47.45,
+   47.52,
+   "E"
+  ],
+  [
+   47.52,
+   47.8,
+   "T"
+  ],
+  [
+   47.8,
+   47.87,
+   "E"
+  ],
+  [
+   47.87,
    47.95,
-   "E"
+   "M"
   ],
   [
    47.95,
-   48.16,
+   48.02,
+   "E"
+  ],
+  [
+   48.02,
+   48.23,
    "T"
   ],
   [
-   48.16,
-   48.3,
-   "U"
-  ],
-  [
-   48.3,
+   48.23,
    48.37,
-   "F"
+   "E"
   ],
   [
    48.37,
    48.44,
-   "U"
+   "F"
   ],
   [
    48.44,
    48.51,
-   "T"
+   "U"
   ],
   [
    48.51,
-   48.65,
-   "E"
-  ],
-  [
-   48.65,
-   48.79,
+   48.61,
    "M"
   ],
   [
-   48.79,
-   48.86,
+   48.61,
+   48.67,
+   "E"
+  ],
+  [
+   48.67,
+   48.73,
+   "M"
+  ],
+  [
+   48.73,
+   48.92,
    "T"
   ],
   [
-   48.86,
-   49.0,
-   "A"
-  ],
-  [
-   49.0,
-   49.06,
+   48.92,
+   48.99,
    "E"
   ],
   [
-   49.06,
-   49.13,
-   "F"
-  ],
-  [
-   49.13,
-   49.27,
-   "O"
-  ],
-  [
-   49.27,
-   49.35,
+   48.99,
+   49.07,
    "M"
   ],
   [
-   49.35,
+   49.07,
+   49.19,
+   "E"
+  ],
+  [
+   49.19,
+   49.33,
+   "T"
+  ],
+  [
+   49.33,
    49.4,
    "E"
   ],
   [
    49.4,
-   49.51,
-   "A"
+   49.47,
+   "U"
   ],
   [
-   49.51,
-   49.65,
+   49.47,
+   49.61,
    "T"
   ],
   [
-   49.65,
-   49.72,
+   49.61,
+   49.68,
+   "T"
+  ],
+  [
+   49.68,
+   49.75,
    "F"
   ],
   [
-   49.72,
-   49.79,
-   "E"
+   49.75,
+   50.17,
+   "U"
   ],
   [
-   49.79,
-   49.93,
-   "T"
-  ],
-  [
-   49.93,
-   50.01,
-   "M"
-  ],
-  [
-   50.01,
-   50.16,
+   50.17,
+   50.24,
    "A"
   ],
   [
-   50.16,
-   50.23,
-   "E"
+   50.24,
+   50.52,
+   "U"
   ],
   [
-   50.23,
-   50.55,
-   null
-  ],
-  [
-   50.55,
-   50.68,
-   "T"
-  ],
-  [
-   50.68,
-   50.76,
+   50.52,
+   50.58,
    "M"
   ],
   [
-   50.76,
-   50.91,
-   "T"
+   50.58,
+   50.64,
+   "U"
   ],
   [
-   50.91,
-   50.98,
-   "E"
+   50.64,
+   50.72,
+   "M"
   ],
   [
-   50.98,
-   51.05,
+   50.72,
+   50.92,
    "O"
   ],
   [
-   51.05,
-   51.15,
-   "M"
-  ],
-  [
-   51.15,
-   51.8,
-   "U"
-  ],
-  [
-   51.8,
-   51.88,
-   "M"
-  ],
-  [
-   51.88,
-   51.94,
-   "E"
-  ],
-  [
-   51.94,
-   52.0,
-   "F"
-  ],
-  [
-   52.0,
-   52.21,
-   "U"
-  ],
-  [
-   52.21,
-   52.35,
+   50.92,
+   51.27,
    "T"
   ],
   [
-   52.35,
-   52.56,
+   51.27,
+   51.34,
+   "U"
+  ],
+  [
+   51.34,
+   51.41,
+   "T"
+  ],
+  [
+   51.41,
+   51.55,
    "O"
   ],
   [
-   52.56,
-   52.7,
-   "U"
-  ],
-  [
-   52.7,
-   52.84,
+   51.55,
+   51.97,
    "T"
   ],
   [
-   52.84,
-   52.98,
+   51.97,
+   52.11,
+   "E"
+  ],
+  [
+   52.11,
+   52.19,
+   "M"
+  ],
+  [
+   52.19,
+   52.4,
    "U"
   ],
   [
-   52.98,
+   52.4,
+   52.48,
+   "M"
+  ],
+  [
+   52.48,
+   52.53,
+   "O"
+  ],
+  [
+   52.53,
+   52.72,
+   "U"
+  ],
+  [
+   52.72,
+   52.79,
+   "T"
+  ],
+  [
+   52.79,
+   52.86,
+   "M"
+  ],
+  [
+   52.86,
+   52.93,
+   "U"
+  ],
+  [
+   52.93,
+   52.99,
+   "M"
+  ],
+  [
+   52.99,
+   53.12,
+   "U"
+  ],
+  [
+   53.12,
    53.26,
-   "T"
+   "E"
   ],
   [
    53.26,
    53.33,
-   "A"
+   "U"
   ],
   [
    53.33,
@@ -4638,1601 +4990,776 @@
   ],
   [
    53.41,
-   53.61,
-   "T"
+   53.55,
+   "O"
   ],
   [
-   53.61,
-   53.73,
-   "M"
-  ],
-  [
-   53.73,
-   53.91,
-   "U"
-  ],
-  [
-   53.91,
-   53.98,
+   53.55,
+   53.62,
    "F"
   ],
   [
-   53.98,
-   54.06,
+   53.62,
+   53.7,
    "M"
   ],
   [
-   54.06,
-   54.13,
+   53.7,
+   53.85,
    "T"
   ],
   [
-   54.13,
-   54.26,
-   "U"
-  ],
-  [
-   54.26,
-   54.33,
-   "T"
-  ],
-  [
-   54.33,
-   54.41,
-   "M"
-  ],
-  [
-   54.41,
-   54.47,
-   "T"
-  ],
-  [
-   54.47,
-   54.66,
+   53.85,
+   53.92,
    "E"
   ],
   [
-   54.66,
-   54.88,
+   53.92,
+   54.08,
    "M"
   ],
   [
-   54.88,
-   54.99,
-   "U"
-  ],
-  [
-   54.99,
-   55.07,
-   "M"
-  ],
-  [
-   55.07,
-   55.18,
-   "U"
-  ],
-  [
-   55.18,
-   55.25,
-   "F"
-  ],
-  [
-   55.25,
-   55.32,
-   "U"
-  ],
-  [
-   55.32,
-   55.4,
-   "M"
-  ],
-  [
-   55.4,
-   55.57,
+   54.08,
+   54.79,
    "T"
   ],
   [
-   55.57,
-   55.64,
+   54.79,
+   54.89,
+   "M"
+  ],
+  [
+   54.89,
+   55.08,
+   "T"
+  ],
+  [
+   55.08,
+   55.29,
+   "E"
+  ],
+  [
+   55.29,
+   55.37,
+   "M"
+  ],
+  [
+   55.37,
+   55.45,
    "A"
   ],
   [
-   55.64,
-   55.85,
+   55.45,
+   55.52,
+   "M"
+  ],
+  [
+   55.52,
+   55.58,
+   "E"
+  ],
+  [
+   55.58,
+   55.78,
    "T"
   ],
   [
+   55.78,
    55.85,
-   55.92,
    "A"
   ],
   [
-   55.92,
-   56.08,
+   55.85,
+   55.93,
    "M"
   ],
   [
-   56.08,
-   56.36,
-   "T"
+   55.93,
+   56.11,
+   "O"
   ],
   [
-   56.36,
-   56.56,
-   null
-  ],
-  [
-   56.56,
-   56.64,
-   "T"
-  ],
-  [
-   56.64,
-   56.73,
-   "M"
-  ],
-  [
-   56.73,
-   56.78,
+   56.11,
+   56.18,
    "U"
   ],
   [
-   56.78,
-   56.83,
-   "T"
-  ],
-  [
-   56.83,
-   56.9,
+   56.18,
+   56.25,
    "F"
   ],
   [
-   56.9,
-   57.04,
+   56.25,
+   56.33,
+   "M"
+  ],
+  [
+   56.33,
+   56.42,
    "E"
   ],
   [
-   57.04,
-   57.11,
-   "T"
+   56.42,
+   56.5,
+   "M"
   ],
   [
-   57.11,
-   57.88,
+   56.5,
+   56.65,
+   "O"
+  ],
+  [
+   56.65,
+   56.72,
+   "F"
+  ],
+  [
+   56.72,
+   56.79,
    "U"
   ],
   [
-   57.88,
-   57.95,
+   56.79,
+   56.86,
    "T"
   ],
   [
-   57.95,
-   58.23,
-   "M"
+   56.86,
+   57.0,
+   "U"
   ],
   [
-   58.23,
-   58.31,
+   57.0,
+   57.35,
    "T"
   ],
   [
-   58.31,
-   58.39,
-   "M"
+   57.35,
+   57.56,
+   "U"
   ],
   [
-   58.39,
-   58.46,
+   57.56,
+   58.12,
+   "T"
+  ],
+  [
+   58.12,
+   58.19,
    "E"
   ],
   [
-   58.46,
-   58.67,
-   "T"
+   58.19,
+   58.26,
+   "U"
   ],
   [
-   58.67,
-   58.95,
-   "E"
-  ],
-  [
-   58.95,
-   59.02,
-   "T"
-  ],
-  [
-   59.02,
-   59.1,
+   58.26,
+   58.34,
    "M"
   ],
   [
-   59.1,
+   58.34,
+   59.09,
+   "U"
+  ],
+  [
+   59.09,
    59.14,
    "O"
   ],
   [
    59.14,
-   59.39,
-   "T"
-  ],
-  [
-   59.39,
-   59.53,
-   "U"
-  ],
-  [
-   59.53,
-   59.6,
-   "T"
-  ],
-  [
-   59.6,
-   59.75,
-   "M"
-  ],
-  [
-   59.75,
-   59.88,
-   "O"
-  ],
-  [
-   59.88,
-   59.95,
-   "U"
-  ],
-  [
-   59.95,
-   60.16,
+   59.32,
    "E"
   ],
   [
-   60.16,
-   60.3,
-   "M"
-  ],
-  [
-   60.3,
-   60.34,
-   "E"
-  ],
-  [
-   60.34,
-   60.38,
+   59.32,
+   59.46,
    "T"
   ],
   [
-   60.38,
-   60.45,
+   59.46,
+   59.53,
+   "E"
+  ],
+  [
+   59.53,
+   59.61,
+   "M"
+  ],
+  [
+   59.61,
+   59.68,
+   "E"
+  ],
+  [
+   59.68,
+   59.75,
    "F"
   ],
   [
-   60.45,
-   60.53,
-   "M"
+   59.75,
+   59.89,
+   "T"
   ],
   [
-   60.53,
-   60.66,
+   59.89,
+   59.96,
    "E"
   ],
   [
-   60.66,
-   60.73,
+   59.96,
+   60.17,
    "T"
   ],
   [
-   60.73,
-   61.15,
+   60.17,
+   60.24,
+   "E"
+  ],
+  [
+   60.24,
+   60.38,
    "U"
   ],
   [
-   61.15,
-   61.29,
+   60.38,
+   60.46,
+   "M"
+  ],
+  [
+   60.46,
+   60.6,
    "T"
   ],
   [
-   61.29,
-   61.39,
+   60.6,
+   60.68,
+   "M"
+  ],
+  [
+   60.68,
+   60.75,
+   "T"
+  ],
+  [
+   60.75,
+   60.95,
+   "U"
+  ],
+  [
+   60.95,
+   61.16,
+   "O"
+  ],
+  [
+   61.16,
+   61.31,
+   "M"
+  ],
+  [
+   61.31,
+   61.5,
+   "T"
+  ],
+  [
+   61.5,
+   61.78,
+   "U"
+  ],
+  [
+   61.78,
+   61.87,
+   "M"
+  ],
+  [
+   61.87,
+   62.12,
+   "T"
+  ],
+  [
+   62.12,
+   62.18,
+   "M"
+  ],
+  [
+   62.18,
+   62.24,
    "A"
   ],
   [
-   61.39,
-   61.43,
-   "E"
-  ],
-  [
-   61.43,
-   61.53,
+   62.24,
+   62.32,
    "M"
   ],
   [
-   61.53,
-   61.57,
-   "T"
-  ],
-  [
-   61.57,
-   61.68,
+   62.32,
+   62.47,
    "E"
   ],
   [
-   61.68,
-   61.75,
+   62.47,
+   62.68,
    "U"
   ],
   [
-   61.75,
-   61.82,
-   "F"
-  ],
-  [
-   61.82,
-   62.03,
+   62.68,
+   62.96,
    "T"
   ],
   [
-   62.03,
-   62.1,
+   62.96,
+   63.27,
+   null
+  ],
+  [
+   63.27,
+   63.32,
+   "T"
+  ],
+  [
+   63.32,
+   63.37,
    "E"
   ],
   [
-   62.1,
-   62.24,
+   63.37,
+   63.58,
+   "U"
+  ],
+  [
+   63.58,
+   63.72,
+   "T"
+  ],
+  [
+   63.72,
+   64.28,
+   null
+  ],
+  [
+   64.28,
+   64.35,
+   "E"
+  ],
+  [
+   64.35,
+   64.42,
+   "T"
+  ],
+  [
+   64.42,
+   64.49,
    "O"
   ],
   [
-   62.24,
-   62.45,
-   "E"
-  ],
-  [
-   62.45,
-   62.59,
-   "T"
-  ],
-  [
-   62.59,
-   62.66,
+   64.49,
+   64.63,
    "U"
   ],
   [
-   62.66,
-   62.8,
-   "F"
-  ],
-  [
-   62.8,
-   62.87,
-   "O"
-  ],
-  [
-   62.87,
-   63.08,
-   "U"
-  ],
-  [
-   63.08,
-   63.64,
+   64.63,
+   64.77,
    "T"
   ],
   [
-   63.64,
-   63.86,
-   "E"
+   64.77,
+   65.79,
+   null
   ],
   [
-   63.86,
-   63.93,
+   65.79,
+   65.84,
    "T"
   ],
   [
-   63.93,
-   63.99,
-   "M"
-  ],
-  [
-   63.99,
-   64.05,
+   65.84,
+   65.89,
    "A"
   ],
   [
-   64.05,
-   64.2,
+   65.89,
+   66.12,
    "M"
   ],
   [
-   64.2,
-   64.24,
-   "E"
-  ],
-  [
-   64.24,
-   64.56,
+   66.12,
+   66.25,
    "T"
   ],
   [
-   64.56,
-   64.63,
-   "F"
-  ],
-  [
-   64.63,
-   64.7,
-   "E"
-  ],
-  [
-   64.7,
-   64.84,
-   "U"
-  ],
-  [
-   64.84,
-   64.92,
-   "M"
-  ],
-  [
-   64.92,
-   65.1,
-   "U"
-  ],
-  [
-   65.1,
-   65.24,
-   "F"
-  ],
-  [
-   65.24,
-   65.38,
-   "T"
-  ],
-  [
-   65.38,
-   65.45,
+   66.25,
+   66.46,
    "O"
   ],
   [
-   65.45,
-   65.59,
-   "T"
-  ],
-  [
-   65.59,
-   65.73,
-   "U"
-  ],
-  [
-   65.73,
-   65.87,
-   "T"
-  ],
-  [
-   65.87,
-   65.94,
-   "F"
-  ],
-  [
-   65.94,
-   66.15,
-   "M"
-  ],
-  [
-   66.15,
-   66.2,
-   "T"
-  ],
-  [
-   66.2,
+   66.46,
    66.53,
    "U"
   ],
   [
    66.53,
-   66.62,
-   "M"
+   66.74,
+   "T"
   ],
   [
-   66.62,
-   66.76,
-   "E"
-  ],
-  [
-   66.76,
-   66.84,
-   "M"
-  ],
-  [
-   66.84,
-   67.01,
+   66.74,
+   67.02,
    "U"
   ],
   [
-   67.01,
-   67.29,
-   "T"
-  ],
-  [
-   67.29,
-   67.36,
-   "E"
-  ],
-  [
-   67.36,
-   67.74,
-   "O"
-  ],
-  [
-   67.74,
-   67.86,
-   "T"
-  ],
-  [
-   67.86,
-   67.93,
-   "O"
-  ],
-  [
-   67.93,
-   68.16,
-   "T"
-  ],
-  [
-   68.16,
-   68.27,
-   "O"
-  ],
-  [
-   68.27,
-   68.69,
-   "T"
-  ],
-  [
-   68.69,
-   68.83,
-   "E"
-  ],
-  [
-   68.83,
-   69.04,
-   "T"
-  ],
-  [
-   69.04,
-   69.11,
+   67.02,
+   67.09,
    "F"
   ],
   [
-   69.11,
-   69.25,
+   67.09,
+   67.16,
+   "E"
+  ],
+  [
+   67.16,
+   67.23,
    "T"
   ],
   [
-   69.25,
-   69.32,
+   67.23,
+   67.44,
+   "O"
+  ],
+  [
+   67.44,
+   67.51,
+   "T"
+  ],
+  [
+   67.51,
+   67.58,
    "F"
   ],
   [
-   69.32,
-   69.39,
-   "T"
-  ],
-  [
-   69.39,
-   69.51,
-   "M"
-  ],
-  [
-   69.51,
-   69.73,
-   "T"
-  ],
-  [
-   69.73,
-   69.8,
-   "E"
-  ],
-  [
-   69.8,
-   69.87,
+   67.58,
+   67.65,
    "O"
   ],
   [
-   69.87,
-   70.01,
-   "E"
-  ],
-  [
-   70.01,
-   70.08,
-   "T"
-  ],
-  [
-   70.08,
-   70.15,
-   "E"
-  ],
-  [
-   70.15,
-   70.29,
-   null
-  ],
-  [
-   70.29,
-   70.64,
-   "T"
-  ],
-  [
-   70.64,
-   70.85,
-   "U"
-  ],
-  [
-   70.85,
-   70.92,
-   "F"
-  ],
-  [
-   70.92,
-   70.99,
-   "T"
-  ],
-  [
-   70.99,
-   71.06,
-   "E"
-  ],
-  [
-   71.06,
-   71.34,
-   "U"
-  ],
-  [
-   71.34,
-   71.69,
-   "T"
-  ],
-  [
-   71.69,
-   71.83,
-   "U"
-  ],
-  [
-   71.83,
-   71.91,
+   67.65,
+   67.73,
    "M"
   ],
   [
-   71.91,
-   71.99,
-   "A"
+   67.73,
+   67.87,
+   "U"
   ],
   [
-   71.99,
-   72.03,
+   67.87,
+   67.94,
+   "T"
+  ],
+  [
+   67.94,
+   68.29,
    "E"
   ],
   [
-   72.03,
-   72.17,
-   "M"
-  ],
-  [
-   72.17,
-   72.39,
+   68.29,
+   68.5,
    "T"
   ],
   [
-   72.39,
-   72.55,
-   "M"
+   68.5,
+   68.76,
+   "E"
   ],
   [
-   72.55,
-   72.68,
-   "T"
-  ],
-  [
-   72.68,
-   72.82,
+   68.76,
+   68.81,
    "O"
   ],
   [
-   72.82,
-   73.24,
-   "T"
-  ],
-  [
-   73.24,
-   73.31,
+   68.81,
+   68.99,
    "U"
   ],
   [
-   73.31,
-   73.38,
-   "M"
-  ],
-  [
-   73.38,
-   73.45,
-   "T"
-  ],
-  [
-   73.45,
-   73.52,
-   "M"
-  ],
-  [
-   73.52,
-   73.59,
+   68.99,
+   69.06,
    "O"
   ],
   [
-   73.59,
-   73.67,
-   "M"
-  ],
-  [
-   73.67,
-   73.76,
-   "A"
-  ],
-  [
-   73.76,
-   73.89,
-   "M"
-  ],
-  [
-   73.89,
-   73.97,
+   69.06,
+   69.41,
    "T"
   ],
   [
-   73.97,
-   74.04,
-   "U"
-  ],
-  [
-   74.04,
-   74.11,
-   "E"
-  ],
-  [
-   74.11,
-   74.18,
-   "T"
-  ],
-  [
-   74.18,
-   74.26,
-   "M"
-  ],
-  [
-   74.26,
-   74.42,
-   "U"
-  ],
-  [
-   74.42,
-   74.49,
-   "F"
-  ],
-  [
-   74.49,
-   74.56,
-   "E"
-  ],
-  [
-   74.56,
-   74.64,
-   "M"
-  ],
-  [
-   74.64,
-   74.92,
-   "T"
-  ],
-  [
-   74.92,
-   75.06,
-   "A"
-  ],
-  [
-   75.06,
-   75.13,
-   "T"
-  ],
-  [
-   75.13,
-   75.21,
-   "M"
-  ],
-  [
-   75.21,
-   75.37,
-   "E"
-  ],
-  [
-   75.37,
-   75.51,
-   "O"
-  ],
-  [
-   75.51,
-   75.58,
-   "U"
-  ],
-  [
-   75.58,
-   75.79,
-   "O"
-  ],
-  [
-   75.79,
-   76.07,
-   "T"
-  ],
-  [
-   76.07,
-   76.2,
-   "M"
-  ],
-  [
-   76.2,
-   76.33,
-   "T"
-  ],
-  [
-   76.33,
-   76.4,
-   "O"
-  ],
-  [
-   76.4,
-   76.47,
-   "T"
-  ],
-  [
-   76.47,
-   76.75,
-   "T"
-  ],
-  [
-   76.75,
-   76.89,
-   "O"
-  ],
-  [
-   76.89,
-   76.96,
-   "A"
-  ],
-  [
-   76.96,
-   77.1,
-   "T"
-  ],
-  [
-   77.1,
-   77.25,
-   "M"
-  ],
-  [
-   77.25,
-   77.92,
-   "T"
-  ],
-  [
-   77.92,
-   78.13,
-   "E"
-  ],
-  [
-   78.13,
-   78.2,
-   "O"
-  ],
-  [
-   78.2,
-   78.32,
-   "M"
-  ],
-  [
-   78.32,
-   78.4,
-   "E"
-  ],
-  [
-   78.4,
-   78.54,
-   "O"
-  ],
-  [
-   78.54,
-   78.61,
-   "T"
-  ],
-  [
-   78.61,
-   78.75,
-   "F"
-  ],
-  [
-   78.75,
-   79.03,
-   "U"
-  ],
-  [
-   79.03,
-   79.1,
-   "O"
-  ],
-  [
-   79.1,
-   79.24,
-   "T"
-  ],
-  [
-   79.24,
-   79.31,
-   "F"
-  ],
-  [
-   79.31,
-   79.38,
-   "T"
-  ],
-  [
-   79.38,
-   79.52,
-   "E"
-  ],
-  [
-   79.52,
-   79.71,
-   "M"
-  ],
-  [
-   79.71,
-   79.78,
-   "T"
-  ],
-  [
-   79.78,
-   79.86,
-   "M"
-  ],
-  [
-   79.86,
-   80.03,
-   "A"
-  ],
-  [
-   80.03,
-   80.17,
-   "T"
-  ],
-  [
-   80.17,
-   80.24,
-   "U"
-  ],
-  [
-   80.24,
-   80.38,
-   "O"
-  ],
-  [
-   80.38,
-   80.73,
-   "E"
-  ],
-  [
-   80.73,
-   80.81,
-   "T"
-  ],
-  [
-   80.81,
-   80.89,
-   "M"
-  ],
-  [
-   80.89,
-   81.04,
-   "U"
-  ],
-  [
-   81.04,
-   81.13,
-   "M"
-  ],
-  [
-   81.13,
-   81.18,
-   "O"
-  ],
-  [
-   81.18,
-   81.23,
-   "U"
-  ],
-  [
-   81.23,
-   81.3,
-   "E"
-  ],
-  [
-   81.3,
-   81.44,
-   "T"
-  ],
-  [
-   81.44,
-   81.52,
-   "M"
-  ],
-  [
-   81.52,
-   81.73,
-   "U"
-  ],
-  [
-   81.73,
-   81.8,
-   "T"
-  ],
-  [
-   81.8,
-   81.87,
-   "E"
-  ],
-  [
-   81.87,
-   82.01,
-   "T"
-  ],
-  [
-   82.01,
-   82.29,
-   "E"
-  ],
-  [
-   82.29,
-   82.5,
-   "O"
-  ],
-  [
-   82.5,
-   82.57,
-   "U"
-  ],
-  [
-   82.57,
-   82.65,
-   "M"
-  ],
-  [
-   82.65,
-   82.88,
-   "T"
-  ],
-  [
-   82.88,
-   82.96,
-   "M"
-  ],
-  [
-   82.96,
-   83.04,
-   "E"
-  ],
-  [
-   83.04,
-   83.25,
-   "U"
-  ],
-  [
-   83.25,
-   83.39,
-   "T"
-  ],
-  [
-   83.39,
-   83.51,
-   "M"
-  ],
-  [
-   83.51,
-   83.93,
-   "T"
-  ],
-  [
-   83.93,
-   84.1,
-   "M"
-  ],
-  [
-   84.1,
-   84.22,
-   "T"
-  ],
-  [
-   84.22,
-   84.77,
-   null
-  ],
-  [
-   84.77,
-   84.85,
-   "M"
-  ],
-  [
-   84.85,
-   84.98,
-   "A"
-  ],
-  [
-   84.98,
-   85.4,
-   "T"
-  ],
-  [
-   85.4,
-   85.65,
-   null
-  ],
-  [
-   85.65,
-   85.91,
-   "T"
-  ],
-  [
-   85.91,
-   85.98,
-   "F"
-  ],
-  [
-   85.98,
-   86.1,
-   null
-  ],
-  [
-   86.1,
-   86.44,
-   "T"
-  ],
-  [
-   86.44,
-   86.65,
-   "E"
-  ],
-  [
-   86.65,
-   86.79,
-   "T"
-  ],
-  [
-   86.79,
-   87.07,
-   "U"
-  ],
-  [
-   87.07,
-   87.29,
-   "T"
-  ],
-  [
-   87.29,
-   87.31,
-   "M"
-  ],
-  [
-   87.31,
-   87.38,
-   "U"
-  ],
-  [
-   87.38,
-   87.45,
-   "M"
-  ],
-  [
-   87.45,
-   87.62,
-   "O"
-  ],
-  [
-   87.62,
-   87.69,
-   "F"
-  ],
-  [
-   87.69,
-   87.76,
-   "O"
-  ],
-  [
-   87.76,
-   88.2,
-   "T"
-  ],
-  [
-   88.2,
-   88.59,
-   null
-  ],
-  [
-   88.59,
-   88.94,
-   "T"
-  ],
-  [
-   88.94,
-   89.03,
-   "M"
-  ],
-  [
-   89.03,
-   89.07,
-   "T"
-  ],
-  [
-   89.07,
-   89.11,
-   "F"
-  ],
-  [
-   89.11,
-   89.25,
-   "U"
-  ],
-  [
-   89.25,
-   89.39,
-   "T"
-  ],
-  [
-   89.39,
-   89.55,
-   null
-  ],
-  [
-   89.55,
-   89.67,
-   "T"
-  ],
-  [
-   89.67,
-   89.78,
-   "M"
-  ],
-  [
-   89.78,
-   90.35,
-   "T"
-  ],
-  [
-   90.35,
-   90.49,
-   "O"
-  ],
-  [
-   90.49,
-   90.56,
-   "T"
-  ],
-  [
-   90.56,
-   90.58,
+   69.41,
+   69.59,
    null
   ]
  ],
  "_fiche": {
-  "lieu": "classe",
-  "lieu_precis": "empty traditional school classroom with wooden desks and blackboards",
+  "lieu": "salon",
+  "lieu_precis": "small modern office with computer desk and green plant in background",
   "interieur": true,
   "moment": "jour",
   "meteo": "",
   "occasion": "",
-  "ambiance": "gene",
-  "niveau": "modeste",
+  "ambiance": "dispute",
+  "niveau": "moyen",
   "details": [
-   "wooden school desks",
-   "green blackboard",
-   "paper sheets on desk",
-   "stove with pans",
-   "tiled walls"
+   "computer monitor on wooden desk",
+   "white coffee mug",
+   "black headset with microphone",
+   "glasses on a table",
+   "dog bed and toys"
   ],
-  "lumiere": "bright indoor daylight",
+  "lumiere": "bright soft indoor daylight",
   "panneaux": [],
   "ecran_tel": "",
   "animations": [],
   "personnages": {
    "invite": {
-    "genre": "f",
-    "age": 16,
-    "corpulence": "mince",
-    "taille": "moyen",
-    "cheveux": "court",
-    "c_cheveux": "noir",
-    "barbe": "aucune",
-    "lunettes": false,
-    "tenue": "uniforme",
-    "c_haut": "rouge",
-    "etat_tenue": []
-   },
-   "presentateur": {
     "genre": "h",
-    "age": 25,
+    "age": 30,
     "corpulence": "mince",
     "taille": "moyen",
-    "cheveux": "court",
+    "cheveux": "long",
     "c_cheveux": "noir",
     "barbe": "aucune",
     "lunettes": false,
     "tenue": "normale",
     "haut": "pull",
-    "c_haut": "noir",
+    "c_haut": "violet",
+    "etat_tenue": []
+   },
+   "presentateur": {
+    "genre": "f",
+    "age": 35,
+    "corpulence": "mince",
+    "taille": "moyen",
+    "cheveux": "herisse",
+    "c_cheveux": "roux",
+    "barbe": "aucune",
+    "lunettes": false,
+    "tenue": "costume",
+    "haut": "chemise",
+    "c_haut": "gris",
     "etat_tenue": []
    }
   },
   "repliques": {
    "0": {
-    "emotion": "blase",
+    "emotion": "fatigue",
     "intensite": 1,
-    "geste": "explique",
-    "action": "tenir",
-    "cible": "autre"
+    "geste": "telephone",
+    "objet": "telephone",
+    "action": "telephone_oreille"
    },
    "1": {
-    "emotion": "gene",
-    "intensite": 1,
-    "geste": "pointe_d",
-    "cible": "autre"
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "mains_hanches"
    },
    "2": {
-    "emotion": "neutre",
-    "intensite": 1,
-    "geste": "menton",
-    "objet": "stylo",
-    "action": "tenir",
-    "cible": "autre"
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "telephone",
+    "objet": "telephone",
+    "action": "telephone_oreille"
    },
    "3": {
-    "emotion": "blase",
-    "intensite": 1,
-    "geste": "menton",
-    "cible": "autre"
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "croises"
    },
    "4": {
-    "emotion": "gene",
-    "intensite": 1,
-    "geste": "menton",
-    "cible": "autre"
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "telephone",
+    "objet": "telephone",
+    "action": "telephone_oreille"
    },
    "5": {
-    "emotion": "neutre",
-    "intensite": 1,
-    "objet": "stylo",
-    "cible": "autre"
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "menton"
    },
    "6": {
+    "emotion": "colere",
     "intensite": 2,
-    "geste": "mains_hanches",
-    "cible": "autre"
+    "geste": "telephone",
+    "objet": "telephone",
+    "action": "telephone_oreille"
    },
    "7": {
-    "emotion": "neutre",
-    "intensite": 1,
-    "geste": "explique",
-    "cible": "autre"
+    "emotion": "sceptique",
+    "intensite": 2,
+    "geste": "croises"
    },
    "8": {
-    "intensite": 1,
-    "geste": "menton",
-    "cible": "autre"
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "telephone",
+    "objet": "telephone",
+    "action": "telephone_oreille"
    },
    "9": {
     "emotion": "blase",
     "intensite": 1,
-    "geste": "menton",
-    "cible": "autre"
+    "geste": "menton"
    },
    "10": {
-    "emotion": "neutre",
-    "intensite": 1,
-    "geste": "menton",
-    "cible": "autre"
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "telephone",
+    "objet": "telephone",
+    "action": "telephone_oreille"
    },
    "11": {
-    "emotion": "colere",
-    "intensite": 2,
-    "geste": "mains_hanches",
-    "cible": "autre"
+    "emotion": "blase",
+    "intensite": 1,
+    "geste": "croises"
    },
    "12": {
-    "emotion": "neutre",
-    "intensite": 1,
-    "geste": "menton",
-    "cible": "autre"
-   },
-   "13": {
     "emotion": "colere",
     "intensite": 2,
-    "objet": "stylo",
-    "cible": "autre"
+    "geste": "telephone",
+    "objet": "telephone",
+    "action": "telephone_oreille"
+   },
+   "13": {
+    "emotion": "neutre",
+    "intensite": 1,
+    "geste": "croises"
    },
    "14": {
+    "emotion": "colere",
     "intensite": 2,
-    "geste": "pointe_d",
-    "cible": "autre"
+    "geste": "telephone",
+    "objet": "telephone",
+    "action": "telephone_oreille"
    },
    "15": {
-    "emotion": "neutre",
-    "intensite": 1,
-    "geste": "explique",
-    "cible": "autre"
+    "emotion": "sceptique",
+    "intensite": 2,
+    "geste": "menton"
    },
    "16": {
+    "emotion": "colere",
     "intensite": 2,
-    "geste": "mains_hanches",
-    "cible": "autre"
+    "geste": "telephone",
+    "objet": "telephone",
+    "action": "telephone_oreille"
    },
    "17": {
-    "emotion": "blase",
-    "intensite": 1,
-    "geste": "explique",
-    "cible": "autre"
+    "emotion": "joie",
+    "intensite": 2,
+    "geste": "croises",
+    "objet": "verre",
+    "action": "tenir"
    },
    "18": {
-    "emotion": "blase",
-    "intensite": 1,
-    "geste": "explique",
-    "cible": "autre"
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "telephone",
+    "objet": "telephone",
+    "action": "telephone_oreille"
    },
    "19": {
-    "intensite": 2,
-    "geste": "pointe_d",
-    "cible": "autre"
+    "emotion": "sceptique",
+    "intensite": 1,
+    "geste": "menton"
    },
    "20": {
-    "emotion": "blase",
-    "intensite": 1,
-    "geste": "explique",
-    "cible": "autre"
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "telephone",
+    "objet": "telephone",
+    "action": "telephone_oreille"
    },
    "21": {
-    "emotion": "neutre",
-    "intensite": 1,
-    "geste": "explique",
-    "cible": "autre"
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "croises"
    },
    "22": {
+    "emotion": "colere",
     "intensite": 2,
-    "geste": "mains_hanches",
-    "cible": "autre"
+    "geste": "menton"
    },
    "23": {
-    "emotion": "neutre",
-    "intensite": 1,
-    "geste": "explique",
-    "cible": "autre"
+    "emotion": "colere",
+    "intensite": 3,
+    "geste": "croises"
    },
    "24": {
-    "emotion": "gene",
+    "emotion": "sceptique",
     "intensite": 1,
-    "geste": "mains_hanches",
-    "cible": "autre"
+    "geste": "menton"
    },
    "25": {
-    "emotion": "blase",
-    "intensite": 1,
-    "geste": "explique",
-    "cible": "autre"
+    "emotion": "colere",
+    "intensite": 3,
+    "geste": "croises"
    },
    "26": {
     "emotion": "colere",
-    "intensite": 2,
-    "geste": "mains_hanches",
-    "cible": "autre"
+    "intensite": 3,
+    "geste": "telephone",
+    "objet": "telephone",
+    "action": "telephone_oreille"
    },
    "27": {
-    "emotion": "colere",
+    "emotion": "blase",
     "intensite": 2,
-    "geste": "explique",
-    "cible": "autre"
+    "geste": "menton"
    },
    "28": {
-    "intensite": 1,
-    "geste": "mains_hanches",
-    "cible": "autre"
+    "emotion": "fier",
+    "intensite": 2,
+    "geste": "croises"
    },
    "29": {
-    "emotion": "blase",
-    "intensite": 1,
-    "geste": "explique",
-    "cible": "autre"
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "telephone",
+    "objet": "telephone",
+    "action": "telephone_oreille"
    },
    "30": {
-    "emotion": "colere",
-    "intensite": 3,
-    "geste": "explique",
-    "cible": "autre"
+    "emotion": "blase",
+    "intensite": 2,
+    "geste": "croises"
    },
    "31": {
-    "emotion": "neutre",
-    "intensite": 1,
-    "geste": "mains_hanches",
-    "cible": "autre"
+    "emotion": "colere",
+    "intensite": 3,
+    "geste": "telephone",
+    "objet": "telephone",
+    "action": "telephone_oreille"
    },
    "32": {
-    "emotion": "neutre",
-    "intensite": 1,
-    "objet": "stylo",
-    "cible": "autre"
+    "emotion": "joie",
+    "intensite": 2,
+    "geste": "croises"
    },
    "33": {
-    "emotion": "blase",
-    "intensite": 1,
-    "geste": "explique",
-    "action": "tenir",
-    "cible": "autre",
-    "objet": "poele",
-    "mot_objet": "faire cuire"
+    "emotion": "colere",
+    "intensite": 3,
+    "geste": "telephone",
+    "objet": "telephone",
+    "action": "telephone_oreille"
    },
    "34": {
-    "emotion": "neutre",
-    "intensite": 1,
-    "geste": "explique",
-    "cible": "autre"
-   },
-   "35": {
-    "emotion": "gene",
-    "intensite": 1,
-    "geste": "mains_hanches",
-    "cible": "autre"
-   },
-   "36": {
-    "emotion": "neutre",
-    "intensite": 1,
-    "geste": "explique",
-    "cible": "autre"
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "facepalm"
    }
   },
-  "reactions": [
-   {
-    "n": 1,
-    "qui": "presentateur",
-    "mot": "notes",
-    "reaction": "sourire_coin"
-   },
-   {
-    "n": 6,
-    "qui": "presentateur",
-    "mot": "combien",
-    "reaction": "sourire_coin"
-   },
-   {
-    "n": 11,
-    "qui": "presentateur",
-    "mot": "favoritisme",
-    "reaction": "sourire_coin"
-   },
-   {
-    "n": 19,
-    "qui": "presentateur",
-    "mot": "oublié",
-    "reaction": "sourire_coin"
-   },
-   {
-    "n": 26,
-    "qui": "presentateur",
-    "mot": "filles",
-    "reaction": "sourire_coin"
-   }
-  ],
-  "source": "video",
-  "controles": 6
+  "reactions": [],
+  "source": "video"
  },
  "equipe": [
   {
@@ -6253,14 +5780,14 @@
    "poste": "ingé son",
    "controle": "mots à une vitesse possible",
    "ok": true,
-   "detail": "2 mot(s) trop courts",
+   "detail": "5 mot(s) trop courts",
    "revoir": false
   },
   {
    "poste": "ingé son",
    "controle": "pas de long passage sans texte",
-   "ok": true,
-   "detail": "",
+   "ok": false,
+   "detail": "blancs [(18.2, 30.0)]",
    "revoir": false
   },
   {
@@ -6274,28 +5801,28 @@
    "poste": "ingé son",
    "controle": "deux transcriptions d'accord",
    "ok": true,
-   "detail": "84 % de mots identiques, 7 doute(s), 4 tranché(s) par une 3e écoute, 3 corrigé(s)",
+   "detail": "78 % de mots identiques, 3 doute(s), 2 tranché(s) par une 3e écoute, 0 corrigé(s)",
    "revoir": false
   },
   {
    "poste": "casting voix",
    "controle": "témoin image (qui parle dans l'original)",
    "ok": true,
-   "detail": "49/49 phrases lisibles (Gemini (vidéo entière), silhouettes (SAM 2), mouvements)",
+   "detail": "40/40 phrases lisibles (Gemini (vidéo entière), mouvements)",
    "revoir": false
   },
   {
    "poste": "casting voix",
-   "controle": "autant de personnages que de personnes à l'image",
+   "controle": "fil du dialogue repris (son + texte + image)",
    "ok": true,
-   "detail": "1 voix en trop rendue(s) aux personnes à l'image (corrigé)",
+   "detail": "voix proches (0.82)",
    "revoir": false
   },
   {
    "poste": "casting voix",
    "controle": "parole répartie entre les personnages",
    "ok": true,
-   "detail": "2 voix, la plus bavarde dit 66 %",
+   "detail": "2 voix, la plus bavarde dit 57 %",
    "revoir": false
   },
   {
@@ -6344,7 +5871,7 @@
    "poste": "monteur",
    "controle": "répliques dans l'ordre du son",
    "ok": true,
-   "detail": "2 réplique(s) remise(s) à leur place",
+   "detail": "",
    "revoir": false
   },
   {
@@ -6358,40 +5885,40 @@
    "poste": "fiche de tournage",
    "controle": "contrôle 1 : règles (cohérence avec ce qui est dit)",
    "ok": true,
-   "detail": "décor : — -> stove with pans (cité dans le dialogue ou entendu); décor : — -> tiled walls (cité dans le dialogue ou entendu); réplique 33 objet : — -> poele (« faire cuire » est dit) (corrigé)",
+   "detail": "décor : — -> glasses on a table (cité dans le dialogue ou entendu); décor : — -> dog bed and toys (cité dans le dialogue ou entendu); décor : — -> tiled walls (cité dans le dialogue ou enten (corrigé)",
    "revoir": false
   },
   {
    "poste": "fiche de tournage",
    "controle": "contrôle 2 : 2e IA (autre fournisseur)",
    "ok": true,
-   "detail": "repliques.33.objet : poele -> None (Le dialogue de la réplique 33 ne mentionne aucun poêle, donc l'objet \"poele\" indiqué dans la fiche est incohérent) (corrigé)",
+   "detail": "repliques.19.emotion : joie -> sceptique (Le texte \"Bah oui bien sûr.\" exprime du sarcasme/scepticisme, pas de la joie comme indiqué.) (corrigé)",
    "revoir": false
   },
   {
    "poste": "fiche de tournage",
    "controle": "contrôle 3 : image de l'original, puis règles",
    "ok": true,
-   "detail": "réplique 33 objet : — -> poele (« faire cuire » est dit) (corrigé)",
+   "detail": "invite genre : f -> h (vu dans la vidéo d'origine); presentateur genre : h -> f (vu dans la vidéo d'origine); décor : — -> tiled walls (cité dans le dialogue ou entendu) (corrigé)",
    "revoir": false
   }
  ],
+ "_separes": true,
  "_decors_semi": [
-  0
+  0,
+  1
  ],
  "_decors_cles": {
-  "0": "c89ce49c0a61ce29"
+  "0": "47e9a5c6e02be050",
+  "1": "e2ac9bdf284b8d6b"
  },
  "_voix_hz": {
-  "presentateur": 132,
-  "invite": 197
- },
- "_voix_genre": {
-  "presentateur": "h"
+  "presentateur": 212,
+  "invite": 185
  },
  "_voix_timbre": {
-  "presentateur": 1018,
-  "invite": 1025
+  "presentateur": 1033,
+  "invite": 1023
  },
  "_voix_mesuree": [
   "presentateur",
@@ -6399,11 +5926,11 @@
  ],
  "_voix_ina": {
   "presentateur": "h",
-  "invite": "f"
+  "invite": "h"
  },
  "_voix_vtl": {
-  "presentateur": 16.97,
-  "invite": 16.89
+  "presentateur": 17.57,
+  "invite": 17.69
  },
  "_voix_vtl_genre": {
   "presentateur": "h",
@@ -6413,113 +5940,54 @@
   "presentateur": "h",
   "invite": "h"
  },
+ "_voix_genre": {
+  "invite": "h"
+ },
  "_casting_final": {
   "presentateur": {
    "fiche": {
-    "genre": "h",
-    "age": 25,
-    "corpulence": 0.12,
-    "taille": 1.04,
-    "peau": [
-     130,
-     86,
-     58
-    ],
-    "visage": "long",
-    "iris": [
-     80,
-     130,
-     90
-    ],
-    "yeux": 0.928357202914148,
-    "nez": "rond",
-    "levres": 0.9098822519919889,
-    "sourcils": 1.168666107709342,
-    "cheveux": "court",
-    "c_cheveux": [
-     104,
-     70,
-     44
-    ],
-    "barbe": "",
-    "lunettes": "rondes",
-    "maquillage": false
-   },
-   "costume": {
-    "haut": "gilet",
-    "c_haut": [
-     150,
-     110,
-     80
-    ],
-    "c_dessous": [
-     240,
-     240,
-     235
-    ],
-    "bas": "pantalon",
-    "c_bas": [
-     110,
-     100,
-     90
-    ],
-    "chaussures": "ville",
-    "c_chaussures": [
-     80,
-     50,
-     30
-    ],
-    "details": [
-     "lunettes_vue",
-     "echarpe"
-    ],
-    "motif": "uni"
-   }
-  },
-  "invite": {
-   "fiche": {
     "genre": "f",
-    "age": 16,
+    "age": 35,
     "corpulence": 0.12,
     "taille": 0.97,
     "peau": [
-     214,
-     160,
-     118
+     176,
+     118,
+     82
     ],
-    "visage": "rond",
+    "visage": "carre",
     "iris": [
-     110,
-     75,
-     45
+     120,
+     120,
+     110
     ],
-    "yeux": 1.0623374953690727,
+    "yeux": 1.0630413093367341,
     "nez": "rond",
-    "levres": 1.182384395328516,
-    "sourcils": 1.099558871012529,
+    "levres": 1.0611600457604684,
+    "sourcils": 1.011154510672478,
     "cheveux": "carre",
     "c_cheveux": [
-     70,
-     45,
-     32
+     130,
+     85,
+     50
     ],
     "barbe": "",
     "lunettes": "",
     "maquillage": false
    },
    "costume": {
-    "haut": "uniforme",
+    "haut": "costume",
     "c_haut": [
-     130,
-     40,
-     60
+     30,
+     30,
+     30
     ],
     "motif": "uni",
     "bas": "pantalon",
     "c_bas": [
-     130,
-     90,
-     60
+     70,
+     100,
+     150
     ],
     "chaussures": "ville",
     "c_chaussures": [
@@ -6528,19 +5996,79 @@
      240
     ],
     "details": [
-     "noeud_pap"
+     "cravate",
+     "montre"
     ],
     "c_motif": [
-     93,
-     28,
+     21,
+     21,
+     21
+    ],
+    "cheveux": "court",
+    "c_cheveux": [
+     130,
+     85,
+     50
+    ]
+   }
+  },
+  "invite": {
+   "fiche": {
+    "genre": "h",
+    "age": 30,
+    "corpulence": 0.12,
+    "taille": 1.04,
+    "peau": [
+     234,
+     186,
+     146
+    ],
+    "visage": "carre",
+    "iris": [
+     80,
+     130,
+     90
+    ],
+    "yeux": 1.0752454138293412,
+    "nez": "fort",
+    "levres": 0.8983586382986124,
+    "sourcils": 1.1567961953514263,
+    "cheveux": "raie",
+    "c_cheveux": [
+     228,
+     196,
+     130
+    ],
+    "barbe": "trois_jours",
+    "lunettes": "rondes",
+    "maquillage": false
+   },
+   "costume": {
+    "haut": "pull",
+    "c_haut": [
+     120,
+     90,
+     60
+    ],
+    "motif": "uni",
+    "c_motif": [
+     86,
+     64,
      43
     ],
-    "cheveux": "carre",
-    "c_cheveux": [
-     70,
-     45,
-     32
-    ]
+    "bas": "jean",
+    "c_bas": [
+     90,
+     90,
+     100
+    ],
+    "chaussures": "baskets",
+    "c_chaussures": [
+     60,
+     150,
+     160
+    ],
+    "details": []
    }
   }
  },
@@ -6548,20 +6076,22 @@
  "realisation": {
   "moment": "jour",
   "lieux": [
-   "classe"
+   "rue",
+   "salon"
   ],
   "gags": [
-   "Favoritisme level 100"
+   "Post-it : SOS dossier",
+   "Affiche Miss Camping"
   ],
-  "ambiances": [],
+  "ambiances": [
+   "poussiere"
+  ],
   "source": "auteur+image",
   "tenues": {
-   "presentateur": "costume",
-   "invite": "uniforme"
+   "presentateur": "chemise",
+   "invite": "tshirt"
   },
   "plans": [
-   "large/fixe",
-   "large/fixe",
    "large/fixe",
    "large/fixe",
    "large/fixe",
@@ -6600,64 +6130,36 @@
   ]
  },
  "_recette": {
-  "lieu": "classe",
+  "lieu": "rue",
   "animal": false,
   "persos": 2,
   "partie": false
  },
  "_bible": {
-  "graine": 3083099008,
+  "graine": 3753230520,
   "moment": "jour",
   "lieux": [
-   "classe"
+   "salon",
+   "salon"
   ],
   "gags": [
-   "Favoritisme level 100"
+   "Post-it : SOS dossier",
+   "Affiche Miss Camping"
   ],
   "costumes": {
    "presentateur": {
-    "haut": "gilet",
+    "haut": "costume",
     "c_haut": [
-     150,
-     110,
-     80
-    ],
-    "c_dessous": [
-     240,
-     240,
-     235
-    ],
-    "bas": "pantalon",
-    "c_bas": [
-     110,
-     100,
-     90
-    ],
-    "chaussures": "ville",
-    "c_chaussures": [
-     80,
-     50,
+     30,
+     30,
      30
-    ],
-    "details": [
-     "lunettes_vue",
-     "echarpe"
-    ],
-    "motif": "uni"
-   },
-   "invite": {
-    "haut": "uniforme",
-    "c_haut": [
-     130,
-     40,
-     60
     ],
     "motif": "uni",
     "bas": "pantalon",
     "c_bas": [
-     130,
-     90,
-     60
+     70,
+     100,
+     150
     ],
     "chaussures": "ville",
     "c_chaussures": [
@@ -6666,24 +6168,54 @@
      240
     ],
     "details": [
-     "noeud_pap"
+     "cravate",
+     "montre"
     ],
     "c_motif": [
-     93,
-     28,
+     21,
+     21,
+     21
+    ],
+    "cheveux": "court",
+    "c_cheveux": [
+     130,
+     85,
+     50
+    ]
+   },
+   "invite": {
+    "haut": "pull",
+    "c_haut": [
+     120,
+     90,
+     60
+    ],
+    "motif": "uni",
+    "c_motif": [
+     86,
+     64,
      43
     ],
-    "cheveux": "carre",
-    "c_cheveux": [
-     70,
-     45,
-     32
-    ]
+    "bas": "jean",
+    "c_bas": [
+     90,
+     90,
+     100
+    ],
+    "chaussures": "baskets",
+    "c_chaussures": [
+     60,
+     150,
+     160
+    ],
+    "details": []
    }
   },
   "figurants": [],
-  "ambiances": [],
-  "lumiere": 1,
+  "ambiances": [
+   "poussiere"
+  ],
+  "lumiere": -1,
   "ombre": 0.24,
   "etalonnage": [
    1.0,
@@ -6699,45 +6231,57 @@
   "jeu": [
    {
     "replique": 0,
-    "emotion": "blase",
+    "emotion": "fatigue",
     "intensite": 1,
-    "geste": "explique"
+    "geste": "telephone"
    },
    {
     "replique": 1,
-    "emotion": "gene",
-    "intensite": 1,
-    "geste": "pointe_d"
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "mains_hanches"
    },
    {
     "replique": 2,
-    "emotion": "neutre",
-    "intensite": 1,
-    "geste": "menton"
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "telephone"
    },
    {
     "replique": 3,
-    "emotion": "blase",
-    "intensite": 1,
-    "geste": "menton"
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "croises"
    },
    {
     "replique": 4,
-    "emotion": "gene",
-    "intensite": 1,
-    "geste": "menton"
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "telephone"
    },
    {
     "replique": 5,
-    "emotion": "neutre",
-    "intensite": 1,
-    "geste": ""
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "menton"
+   },
+   {
+    "replique": 6,
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "telephone"
    },
    {
     "replique": 7,
-    "emotion": "neutre",
-    "intensite": 1,
-    "geste": "explique"
+    "emotion": "sceptique",
+    "intensite": 2,
+    "geste": "croises"
+   },
+   {
+    "replique": 8,
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "telephone"
    },
    {
     "replique": 9,
@@ -6747,348 +6291,281 @@
    },
    {
     "replique": 10,
-    "emotion": "neutre",
-    "intensite": 1,
-    "geste": "menton"
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "telephone"
    },
    {
     "replique": 11,
-    "emotion": "colere",
-    "intensite": 2,
-    "geste": "mains_hanches"
+    "emotion": "blase",
+    "intensite": 1,
+    "geste": "croises"
    },
    {
     "replique": 12,
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "telephone"
+   },
+   {
+    "replique": 13,
     "emotion": "neutre",
+    "intensite": 1,
+    "geste": "croises"
+   },
+   {
+    "replique": 14,
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "telephone"
+   },
+   {
+    "replique": 15,
+    "emotion": "sceptique",
+    "intensite": 2,
+    "geste": "menton"
+   },
+   {
+    "replique": 16,
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "telephone"
+   },
+   {
+    "replique": 17,
+    "emotion": "joie",
+    "intensite": 2,
+    "geste": "croises"
+   },
+   {
+    "replique": 18,
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "telephone"
+   },
+   {
+    "replique": 19,
+    "emotion": "sceptique",
     "intensite": 1,
     "geste": "menton"
    },
    {
-    "replique": 13,
+    "replique": 20,
     "emotion": "colere",
     "intensite": 2,
-    "geste": ""
-   },
-   {
-    "replique": 15,
-    "emotion": "neutre",
-    "intensite": 1,
-    "geste": "explique"
-   },
-   {
-    "replique": 17,
-    "emotion": "blase",
-    "intensite": 1,
-    "geste": "explique"
-   },
-   {
-    "replique": 18,
-    "emotion": "blase",
-    "intensite": 1,
-    "geste": "explique"
-   },
-   {
-    "replique": 20,
-    "emotion": "blase",
-    "intensite": 1,
-    "geste": "explique"
+    "geste": "telephone"
    },
    {
     "replique": 21,
-    "emotion": "neutre",
-    "intensite": 1,
-    "geste": "explique"
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "croises"
+   },
+   {
+    "replique": 22,
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "menton"
    },
    {
     "replique": 23,
-    "emotion": "neutre",
-    "intensite": 1,
-    "geste": "explique"
+    "emotion": "colere",
+    "intensite": 3,
+    "geste": "croises"
    },
    {
     "replique": 24,
-    "emotion": "gene",
+    "emotion": "sceptique",
     "intensite": 1,
-    "geste": "mains_hanches"
+    "geste": "menton"
    },
    {
     "replique": 25,
-    "emotion": "blase",
-    "intensite": 1,
-    "geste": "explique"
+    "emotion": "colere",
+    "intensite": 3,
+    "geste": "croises"
    },
    {
     "replique": 26,
     "emotion": "colere",
-    "intensite": 2,
-    "geste": "mains_hanches"
+    "intensite": 3,
+    "geste": "telephone"
    },
    {
     "replique": 27,
-    "emotion": "colere",
+    "emotion": "blase",
     "intensite": 2,
-    "geste": "explique"
+    "geste": "menton"
+   },
+   {
+    "replique": 28,
+    "emotion": "fier",
+    "intensite": 2,
+    "geste": "croises"
    },
    {
     "replique": 29,
-    "emotion": "blase",
-    "intensite": 1,
-    "geste": "explique"
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "telephone"
    },
    {
     "replique": 30,
-    "emotion": "colere",
-    "intensite": 3,
-    "geste": "explique"
+    "emotion": "blase",
+    "intensite": 2,
+    "geste": "croises"
    },
    {
     "replique": 31,
-    "emotion": "neutre",
-    "intensite": 1,
-    "geste": "mains_hanches"
+    "emotion": "colere",
+    "intensite": 3,
+    "geste": "telephone"
    },
    {
     "replique": 32,
-    "emotion": "neutre",
-    "intensite": 1,
-    "geste": ""
+    "emotion": "joie",
+    "intensite": 2,
+    "geste": "croises"
    },
    {
     "replique": 33,
-    "emotion": "blase",
-    "intensite": 1,
-    "geste": "explique"
+    "emotion": "colere",
+    "intensite": 3,
+    "geste": "telephone"
    },
    {
     "replique": 34,
-    "emotion": "neutre",
-    "intensite": 1,
-    "geste": "explique"
-   },
-   {
-    "replique": 35,
-    "emotion": "gene",
-    "intensite": 1,
-    "geste": "mains_hanches"
-   },
-   {
-    "replique": 36,
-    "emotion": "neutre",
-    "intensite": 1,
-    "geste": "explique"
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "facepalm"
    }
   ],
   "source": "auteur+image",
   "c_mur": [
-   125,
-   121,
-   112
+   124,
+   117,
+   110
   ],
   "rythme": {
    "serre": 0.0,
-   "large": 0.407,
+   "large": 0.636,
    "tres_serre": 0.0,
    "camera": {
-    "fixe": 0.944,
-    "avance": 0.011,
-    "recul": 0.022,
+    "fixe": 1.0,
+    "avance": 0.0,
+    "recul": 0.0,
     "travelling": 0.0,
-    "epaule": 0.022
+    "epaule": 0.0
    },
-   "energie": 0.337,
+   "energie": 0.306,
    "sourires": 0.0,
-   "duree_plan": 30.33
+   "duree_plan": 70.0
   },
   "fiches": {
    "presentateur": {
+    "genre": "f",
+    "age": 35,
+    "corpulence": 0.12,
+    "taille": 0.97,
+    "peau": [
+     176,
+     118,
+     82
+    ],
+    "visage": "carre",
+    "iris": [
+     120,
+     120,
+     110
+    ],
+    "yeux": 1.0630413093367341,
+    "nez": "rond",
+    "levres": 1.0611600457604684,
+    "sourcils": 1.011154510672478,
+    "cheveux": "carre",
+    "c_cheveux": [
+     130,
+     85,
+     50
+    ],
+    "barbe": "",
+    "lunettes": "",
+    "maquillage": false
+   },
+   "invite": {
     "genre": "h",
-    "age": 25,
+    "age": 30,
     "corpulence": 0.12,
     "taille": 1.04,
     "peau": [
-     130,
-     86,
-     58
+     234,
+     186,
+     146
     ],
-    "visage": "long",
+    "visage": "carre",
     "iris": [
      80,
      130,
      90
     ],
-    "yeux": 0.928357202914148,
-    "nez": "rond",
-    "levres": 0.9098822519919889,
-    "sourcils": 1.168666107709342,
-    "cheveux": "court",
+    "yeux": 1.0752454138293412,
+    "nez": "fort",
+    "levres": 0.8983586382986124,
+    "sourcils": 1.1567961953514263,
+    "cheveux": "raie",
     "c_cheveux": [
-     104,
-     70,
-     44
+     228,
+     196,
+     130
     ],
-    "barbe": "",
+    "barbe": "trois_jours",
     "lunettes": "rondes",
-    "maquillage": false
-   },
-   "invite": {
-    "genre": "f",
-    "age": 16,
-    "corpulence": 0.12,
-    "taille": 0.97,
-    "peau": [
-     214,
-     160,
-     118
-    ],
-    "visage": "rond",
-    "iris": [
-     110,
-     75,
-     45
-    ],
-    "yeux": 1.0623374953690727,
-    "nez": "rond",
-    "levres": 1.182384395328516,
-    "sourcils": 1.099558871012529,
-    "cheveux": "carre",
-    "c_cheveux": [
-     70,
-     45,
-     32
-    ],
-    "barbe": "",
-    "lunettes": "",
     "maquillage": false
    }
   },
   "cadence": "rapide",
-  "assis": {},
-  "meubles": {},
+  "assis": {
+   "1": "invite"
+  },
+  "meubles": {
+   "1": {
+    "invite": "canape"
+   }
+  },
   "cine": {
    "focus": false,
-   "vertige": true,
+   "vertige": false,
    "tiers": true,
    "etalonnage": true,
    "profondeur": false,
    "grain": true,
-   "reflets": true,
+   "reflets": false,
    "son": true
   },
   "decoupe": {},
-  "coupes_origine": [
-   27.5,
-   40.5
-  ],
+  "coupes_origine": [],
   "gestes_origine": [
-   0.5,
-   1.5,
-   2.5,
-   4.0,
    5.0,
-   8.5,
-   11.0,
-   13.5,
-   15.5,
+   6.0,
+   13.0,
    16.5,
-   19.0,
-   22.5,
-   23.5,
-   25.0,
-   26.0,
-   29.0,
-   30.0,
-   32.5,
-   33.5,
-   35.0,
-   36.0,
-   37.5,
-   39.0,
-   40.0,
-   41.0,
-   42.0,
-   43.5,
-   48.0,
-   49.0,
+   20.5,
+   29.5,
+   31.5,
+   36.5,
+   46.5,
    50.5,
-   53.0,
+   55.0,
    57.5,
-   58.5,
-   60.0,
-   63.0,
-   64.0,
-   65.0,
-   66.0,
-   67.0,
-   68.0,
-   70.5,
-   71.5,
-   72.5,
-   73.5,
-   74.5,
-   75.5,
-   78.0,
-   79.0,
-   80.0,
-   81.0,
-   82.0,
-   83.0,
-   84.5,
-   86.0,
-   87.0,
-   88.0,
-   89.0,
-   90.0
+   61.5,
+   66.5
   ],
-  "postures_origine": [
-   [
-    40.5,
-    41.5,
-    0.58,
-    "desespoir"
-   ],
-   [
-    82.0,
-    83.0,
-    0.57,
-    "desespoir"
-   ]
-  ],
-  "reactions": [
-   {
-    "n": 1,
-    "qui": "presentateur",
-    "mot": "notes",
-    "reaction": "sourire_coin"
-   },
-   {
-    "n": 6,
-    "qui": "presentateur",
-    "mot": "combien",
-    "reaction": "sourire_coin"
-   },
-   {
-    "n": 11,
-    "qui": "presentateur",
-    "mot": "favoritisme",
-    "reaction": "sourire_coin"
-   },
-   {
-    "n": 19,
-    "qui": "presentateur",
-    "mot": "oublié",
-    "reaction": "sourire_coin"
-   },
-   {
-    "n": 26,
-    "qui": "presentateur",
-    "mot": "filles",
-    "reaction": "sourire_coin"
-   }
-  ],
+  "postures_origine": [],
+  "reactions": [],
   "animations": [],
   "panneaux": [],
   "ecran_tel": "",
-  "lumiere_ambiance": "bright indoor daylight",
+  "lumiere_ambiance": "bright soft indoor daylight",
   "interieur": true
  }
 }
