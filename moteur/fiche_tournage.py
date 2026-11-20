@@ -498,10 +498,6 @@ def _lire(F, parties):
 def controle_image(F, sk):
     """Fiche comparée à ce qui a été VU dans l'original (analyse Gemini de la vidéo, personnes vues, lumière de l'image)."""
     cor = []
-    try:
-        import video_ia
-        D = dict(video_ia.DERNIER or {})
-    except Exception: D = {}
     V = ((sk.get("doublage") or {}).get("visuel")) or {}
     import decor_dessin as DD
     l_vu = ((sk.get("doublage") or {}).get("lieu_ia") or None)            # ce que Gemini a vu dans CET original (pas le dernier son écouté)
