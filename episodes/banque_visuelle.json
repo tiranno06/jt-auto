@@ -45759,5 +45759,288 @@
    ]
   },
   "video": "2026-11-17_14h17_emission.mp4"
+ },
+ {
+  "date": "2026-11-20",
+  "source": "https://www.tiktok.com/@same_same53/video/7709610787291139361",
+  "auteur": "same_same53",
+  "visuel": {
+   "gestes": [],
+   "duree": 88.0,
+   "nb_plans": 1,
+   "duree_plan": 88.0,
+   "coupes": [],
+   "plans": {
+    "tres_serre": 0.0,
+    "serre": 0.0,
+    "moyen": 0.034,
+    "large": 0.966
+   },
+   "camera": {
+    "fixe": 1.0,
+    "avance": 0.0,
+    "recul": 0.0,
+    "travelling": 0.0,
+    "epaule": 0.0
+   },
+   "nb_personnes": 1,
+   "personnes": [],
+   "visages": true,
+   "sourires": 0.0,
+   "energie": 0.196,
+   "mur": [
+    2,
+    1,
+    1
+   ],
+   "palette": [
+    [
+     0,
+     0,
+     0,
+     0.589
+    ],
+    [
+     253,
+     253,
+     253,
+     0.358
+    ],
+    [
+     43,
+     37,
+     36,
+     0.027
+    ],
+    [
+     12,
+     133,
+     116,
+     0.01
+    ],
+    [
+     234,
+     82,
+     30,
+     0.008
+    ],
+    [
+     143,
+     138,
+     108,
+     0.008
+    ]
+   ],
+   "lumiere": {
+    "luminosite": 97.4,
+    "chaleur": 1.1,
+    "saturation": 8.3
+   },
+   "moment": "jour",
+   "postures": []
+  },
+  "audio": {
+   "duree": 87.8,
+   "nb_voix": 2,
+   "voix": [
+    {
+     "hz": 162,
+     "genre": "h",
+     "part": 0.56
+    },
+    {
+     "hz": 168,
+     "genre": "?",
+     "part": 0.44
+    }
+   ],
+   "debit": 4.83,
+   "blanc_moyen": 0.29,
+   "coupes": 9,
+   "dynamique_db": 19.4,
+   "cris": 0.002,
+   "musique": 0.41,
+   "impacts": 63,
+   "impacts_10s": 7.18,
+   "graves": 8,
+   "aigus": 55,
+   "sur_vanne": 24,
+   "evenements": {
+    "scream": 1
+   },
+   "emotions": {
+    "explique": 6,
+    "gene": 5,
+    "colere": 3,
+    "neutre": 3,
+    "joie": 2,
+    "moqueur": 2,
+    "interroge": 2,
+    "sourire": 2
+   }
+  },
+  "claude": {
+   "lieux": [
+    "bureau"
+   ],
+   "moment": "jour",
+   "costumes": {
+    "presentateur": {
+     "haut": "chemise",
+     "c_haut": "vert",
+     "motif": "uni",
+     "bas": "pantalon",
+     "chaussures": "ville",
+     "details": [
+      "lunettes_vue",
+      "stylos"
+     ],
+     "chapeau": "aucune",
+     "cheveux": "chignon",
+     "c_cheveux": "noir"
+    },
+    "invite": {
+     "haut": "tshirt",
+     "c_haut": "jaune",
+     "motif": "uni",
+     "bas": "jean",
+     "chaussures": "baskets",
+     "details": [
+      "sac_a_dos"
+     ],
+     "chapeau": "casquette",
+     "c_chapeau": "rouge",
+     "cheveux": "court",
+     "c_cheveux": "roux"
+    }
+   },
+   "objets": [
+    {
+     "replique": 0,
+     "objet": "stylo"
+    },
+    {
+     "objet": "tablette",
+     "replique": 10
+    },
+    {
+     "replique": 34,
+     "objet": "livre"
+    }
+   ],
+   "gags": [
+    "Affiche au mur : 'Le travail c'est la santé'",
+    "Post-it sur le bureau : 'Aide-moi'"
+   ],
+   "ambiances": [
+    "poussiere"
+   ],
+   "plans": [
+    {
+     "plan": "moyen",
+     "geste": "explique",
+     "mouvement": "fixe",
+     "reaction": "sceptique",
+     "replique": 0
+    },
+    {
+     "plan": "moyen",
+     "reaction": "aucune",
+     "mouvement": "fixe",
+     "replique": 1,
+     "geste": "gratte_tete"
+    },
+    {
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "pointe_d",
+     "replique": 2,
+     "reaction": "choque"
+    },
+    {
+     "replique": 4,
+     "reaction": "soupir",
+     "plan": "large",
+     "geste": "mains_hanches",
+     "mouvement": "fixe"
+    },
+    {
+     "geste": "facepalm",
+     "mouvement": "fixe",
+     "replique": 12,
+     "plan": "serre",
+     "reaction": "aucune"
+    },
+    {
+     "plan": "moyen",
+     "replique": 32,
+     "reaction": "sourire",
+     "mouvement": "fixe",
+     "geste": "bras_ouverts"
+    }
+   ]
+  },
+  "realisation": {
+   "moment": "jour",
+   "lieux": [
+    "bureau"
+   ],
+   "gags": [
+    "Affiche au mur : 'Le travail c'est la santé'",
+    "Post-it sur le bureau : 'Aide-moi'"
+   ],
+   "ambiances": [
+    "poussiere"
+   ],
+   "source": "auteur+image",
+   "tenues": {
+    "presentateur": "chemise",
+    "invite": "tshirt"
+   },
+   "plans": [
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe"
+   ]
+  },
+  "video": "2026-11-20_09h03_emission.mp4"
  }
 ]
