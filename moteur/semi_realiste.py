@@ -14,7 +14,7 @@ import numpy as np, cv2
 
 W, H = 1080, 1920
 PIED_Y = 1500                                                              # ligne des pieds du moteur (cartoon.position)
-PIEDS_X = (190, 285, 540, 795, 890)                                        # places des personnages (1, 2 ou 3 à l'image)
+PIEDS_X = (165, 260, 540, 820, 915)                                        # places des personnages (1, 2 ou 3 à l'image)
 
 
 def actif():
@@ -87,7 +87,7 @@ def cadrer(im, prof, n_persos=2):
     if prof.shape[:2] != (h, w): prof = cv2.resize(prof, (w, h), interpolation=cv2.INTER_LINEAR)
     obs = obstacles(prof)
     if obstacles.pente < 20: return None                                   # pas de sol en bas de l'image (meuble, mur, gros plan)
-    xs = {1: (540,), 2: (285, 795), 3: (190, 540, 890)}.get(n_persos, PIEDS_X)
+    xs = {1: (540,), 2: (260, 820), 3: (165, 540, 915)}.get(n_persos, PIEDS_X)
     ww0 = min(w, h * W / H)                                                # plus grande fenêtre 9:16
     for z in np.arange(1.0, 1.71, 0.05):
         ww = ww0 / z; hh = ww * H / W

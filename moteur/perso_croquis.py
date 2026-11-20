@@ -159,6 +159,9 @@ def dessiner(img, F, p):
     ouv = float(p.get("bouche") or 0.0)
     cl = 1.0 if p.get("yeux") in ("fermes",) else float(p.get("paupiere") or 0.0) * 0.6
     peau = T.get("teint") or (tuple(p["peau"]) if p.get("peau") else None)   # zombie, extraterrestre, vampire : teint du costume
+    if not peau and e in ("colere", "fache"):                              # colère : le visage rosit peu à peu (audit du 20 novembre : il passait
+        k_r = float(np.clip((float(p.get("rougeur") or 0.0) - 0.3) / 0.6, 0, 1)) * 0.7   # d'un coup du blanc au rouge vif, « cercle rouge »)
+        peau = tuple(int(a + (b - a) * k_r) for a, b in zip(C.PEAU, (236, 118, 100)))
     if p.get("paleur"): peau = tuple(int(v * (1 - 0.15 * p["paleur"]) + 230 * 0.15 * p["paleur"]) for v in (peau or C.PEAU))
     if F.get("espece"):                                                    # animal ou objet qui parle (moteur/animaux.py)
         import animaux

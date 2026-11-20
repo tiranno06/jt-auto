@@ -920,10 +920,95 @@ class TestFicheTournage20Novembre(unittest.TestCase):
 
     def test_sources_branchees(self):
         src = lambda f: open(os.path.join(ICI, "..", f), encoding="utf-8").read()
-        self.assertIn("fiche_tournage.faire(", src("moteur/doublage.py"))
+        self.assertIn("fiche_tournage.faire(", src("moteur/principal.py"))
         self.assertIn("corriger_depuis_points", src("moteur/principal.py"))
         self.assertIn("fidélité à l'audio", src("moteur/verif_finale.py"))
         self.assertIn("controlnet_conditioning_scale", src("moteur/decor_modal.py"))
         self.assertIn("_suite_decors", src("moteur/suites.py"))
         for x in ("emo_voix", "REAC_F", "SURSAUTS", "vapeur_main", "ZONES_SC", '"tele" in anim'):
             self.assertIn(x, src("moteur/cartoon.py"))
+
+
+class TestAudit20Novembre(unittest.TestCase):
+    """Audit des 10 vidéos du 20 novembre 2026 : défauts trouvés et corrigés."""
+
+    def test_dernier_controle_des_voix(self):
+        import equipe
+        rng = np.random.default_rng(1)
+        A, Bv = rng.normal(size=16), rng.normal(size=16)                     # deux voix bien distinctes
+        vrai = ["a", "b"] * 6
+        reps = [{"p": "presentateur" if v == "a" else "invite", "t": f"phrase {k}", "_deb": k * 1.0, "_fin": k * 1.0 + 0.9} for k, v in enumerate(vrai)]
+        reps[4]["p"] = "invite"                                             # erreur : la voix A donnée à l'autre personnage
+        sig = np.zeros(16000 * 13, np.float32)
+        for k, v in enumerate(vrai): sig[k * 16000:k * 16000 + 14000] = 0.5 if v == "a" else -0.5
+        def embed(x): return (A if float(np.mean(x)) > 0 else Bv) + rng.normal(scale=0.15, size=16)
+        sk = {"repliques": reps}; B = equipe.Bulletin()
+        self.assertEqual(equipe.voix_finales(sk, sig, 16000, B, embed=embed), 1)
+        self.assertEqual(sk["repliques"][4]["p"], "presentateur"); self.assertTrue(sk["repliques"][4]["_voix_corrigee"])
+        self.assertTrue(B.lignes[-1]["ok"])
+        sk2 = {"repliques": [dict(r) for r in reps]}; sk2["repliques"][4]["p"] = "invite"   # même voix pour tous : on ne touche à rien
+        self.assertEqual(equipe.voix_finales(sk2, np.abs(sig), 16000, equipe.Bulletin(), embed=lambda x: A + rng.normal(scale=0.01, size=16)), 0)
+
+    def test_fiche_corrigee(self):
+        import fiche_tournage as FT
+        ind = FT.indices_texte([{"p": "presentateur", "t": "Je dors plus, ce boulot c'est l'enfer, la nuit je pense au taf."},
+                                {"p": "invite", "t": "Va te faire cuire le cul, toi."}])
+        self.assertIsNone(ind["moment"]); self.assertEqual([o["objet"] for o in ind["objets"]], [])
+        self.assertEqual(FT.texte_panneau("Affiche 'Travail & Joie' au mur"), "Travail & Joie")
+        self.assertEqual(FT.texte_panneau("Affiche de motivation au mur"), "")
+        sk = {"repliques": [{"p": "presentateur", "t": "Tiens, un café."}, {"p": "invite", "t": "Non merci."}]}
+        F = FT.nettoyer({"lieu": "bureau", "moment": "jour", "repliques": [{"n": 0, "objet": "cafe"}]}, sk); F["source"] = "video"
+        FT.appliquer_corrections(F, sk, [{"champ": "repliques.0.objet", "valeur": None, "raison": "essai"}])
+        self.assertEqual(F["_retires"], [0])
+        FT.controle_regles(F, sk, FT.indices_texte(sk["repliques"]))
+        self.assertNotIn("objet", F["repliques"].get(0, {}))                 # retiré par la 2e IA : jamais remis par les règles
+        sk["_fiche"] = F
+        self.assertEqual(FT.corriger_depuis_points(sk, [{"correction": [{"champ": "meteo", "valeur": "pluie"}]}]), [])   # météo inventée refusée
+        F2 = FT.nettoyer({"personnages": {"presentateur": {"genre": "h", "cheveux": "carre"}}}, sk); F2["source"] = "video"
+        sk3 = {"repliques": sk["repliques"]}; FT.appliquer(sk3, F2)
+        self.assertNotIn("cheveux", sk3["studio"]["personnages"]["presentateur"])   # jamais une coupe au carré sur un homme
+
+    def test_modeles_gemini_retires(self):
+        import reseau
+        anc = dict(reseau._GM)
+        try:
+            reseau._GM["liste"] = ["gemini-flash-latest", "gemini-flash-lite-latest"]
+            self.assertEqual(reseau.gemini_disponibles(("gemini-flash-latest", "gemini-2.5-flash")), ("gemini-flash-latest",))
+            reseau._GM["liste"] = []
+            self.assertEqual(reseau.gemini_disponibles(("x",)), ("x",))       # liste illisible : on garde tout
+        finally: reseau._GM.clear(); reseau._GM.update(anc)
+
+    def test_aides_du_dessin_partage(self):
+        import cartoon, decors
+        sk = {"_voix_ina": {"presentateur": "f"}, "_voix_mesuree": ["presentateur"], "repliques": []}
+        args0 = {"sk": {"repliques": []}}
+        anc = dict(decors.ZONES); decors.ZONES[0] = {"tele": [1, 2, 3, 4]}
+        try: cartoon.figer_pour_aides(args0, sk)
+        finally: decors.ZONES.clear(); decors.ZONES.update(anc)
+        self.assertEqual(args0["sk"]["_voix_ina"], {"presentateur": "f"}); self.assertEqual(args0["decors_etat"]["ZONES"], {0: {"tele": [1, 2, 3, 4]}})
+        src = open(os.path.join(ICI, "..", "moteur", "dessin_aide.py"), encoding="utf-8").read()
+        self.assertIn("decors_etat", src)
+        self.assertNotIn("bureau", cartoon.DEHORS_LIEUX)
+
+    def test_fiche_seulement_pour_le_son_choisi(self):
+        d = open(os.path.join(ICI, "..", "moteur", "doublage.py"), encoding="utf-8").read()
+        p = open(os.path.join(ICI, "..", "moteur", "principal.py"), encoding="utf-8").read()
+        self.assertNotIn("fiche_tournage.faire(", d); self.assertIn("fiche_tournage.faire(", p)
+        self.assertIn("equipe.voix_finales(sk, sig, SR, B)", d)
+        self.assertIn("pyarrow>=15,<17", open(os.path.join(ICI, "..", "moteur", "ecoute_modal.py"), encoding="utf-8").read())
+
+    def test_vues_9_et_10(self):
+        import studio, fiche_tournage as FT, equipe
+        sk = {"repliques": [{"p": "presentateur", "t": "Je suis couché, compte jusqu'à un million."}, {"p": "invite", "t": "Je vais t'épargner ça."}]}
+        self.assertEqual(studio.lieux_devines(sk, ["presentateur", "invite"])["presentateur"], "chambre")   # « je suis couché » : pas dans la rue
+        self.assertEqual(FT.texte_panneau("Affiche: Happy Hour éternel"), "Happy Hour éternel")
+        rng = np.random.default_rng(2); A, Bv = rng.normal(size=16), rng.normal(size=16)
+        vrai = ["a", "b"] * 6
+        reps = [{"p": "presentateur" if v == "a" else "invite", "t": "x", "_deb": k * 1.0, "_fin": k * 1.0 + 0.9} for k, v in enumerate(vrai)]
+        reps.append({"p": "envoyee", "t": "S'il vous plaît.", "_deb": 12.0, "_fin": 12.4})   # le serveur, 3e personnage qui dit 2 mots
+        reps[2]["p"] = "invite"
+        sig = np.zeros(16000 * 14, np.float32)
+        for k, v in enumerate(vrai): sig[k * 16000:k * 16000 + 14000] = 0.5 if v == "a" else -0.5
+        sk = {"repliques": reps}
+        self.assertEqual(equipe.voix_finales(sk, sig, 16000, equipe.Bulletin(), embed=lambda x: (A if float(np.mean(x)) > 0 else Bv) + rng.normal(scale=0.15, size=16)), 1)
+        self.assertEqual(sk["repliques"][2]["p"], "presentateur"); self.assertEqual(sk["repliques"][-1]["p"], "envoyee")

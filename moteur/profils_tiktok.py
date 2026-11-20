@@ -51,13 +51,16 @@ def bio_refuse(pseudo, journal=print):
     p = pseudo.lower()
     if p in _BIOS: return _BIOS[p]
     bio = ""
+    if _BIOS.get(" tikwm refuse"): return False                          # tikwm refuse les robots (403) : on ne redemande pas
     try:
         import urllib.parse, urllib.request, reseau
         req = urllib.request.Request("https://www.tikwm.com/api/user/info?" + urllib.parse.urlencode({"unique_id": pseudo}),
                                      headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/130.0 Safari/537.36"})
         d = json.loads(reseau.ouvrir(req, timeout=30) or "{}").get("data") or {}
         bio = str((d.get("user") or {}).get("signature") or "")
-    except Exception as _e: __import__("pannes").avale(_e)
+    except Exception as _e:
+        if "403" in str(_e): _BIOS[" tikwm refuse"] = True                 # refus connu du service (pas une panne du robot)
+        else: __import__("pannes").avale(_e)
     _BIOS[p] = bool(BIO_REFUS.search(bio))
     if _BIOS[p]: journal(f"  profil @{pseudo} écarté : sa bio interdit la reprise (« {bio[:80]} »)")
     return _BIOS[p]

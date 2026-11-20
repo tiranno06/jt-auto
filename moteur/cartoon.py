@@ -391,6 +391,23 @@ def keystone(img, plan):
     return cv2.warpPerspective(img, Mp, (W, H), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REPLICATE)
 
 
+DEHORS_LIEUX = {"rue", "jardin", "balcon", "parc", "plage", "camping", "montagne", "stade", "parking", "arret_bus", "ferme", "cour_recre"}
+VOIX_MESUREES = ("_voix_hz", "_voix_genre", "_voix_timbre", "_voix_timbre_genre", "_voix_ina", "_voix_vtl", "_voix_vtl_genre", "_voix_mesuree")
+
+
+def figer_pour_aides(args0, sk):
+    """Dessin partagé (audit du 20 novembre : la conseillère d'« Orientation scolaire » changeait de tête au bout de 22 s) : les
+    machines d'aide recevaient l'état du DÉBUT du rendu, avant la mesure des voix (homme / femme : inaSpeechSegmenter et Praat ne
+    sont pas installés sur elles) et sans les panneaux écrits ni les zones du décor ; elles refaisaient un autre casting. Tout ce
+    que la machine principale a décidé leur est maintenant transmis."""
+    for k in VOIX_MESUREES:
+        if k in sk: args0["sk"][k] = __import__("copy").deepcopy(sk[k])
+    try:
+        import decors as DEC_
+        args0["decors_etat"] = {k: __import__("copy").deepcopy(getattr(DEC_, k)) for k in ("PROFONDEURS", "PANNEAUX", "ZONES", "SEMI") if hasattr(DEC_, k)}
+    except Exception as _e: __import__("pannes").avale(_e)
+
+
 def _bande_son(APPEL, B, CINE, DEBUT_SCENE, DECOUPE, DOUB, FIN_CARTE, GEL, REMB, SANS_ENTREE, SILENCES, TITRES, audios, mini, ph, places, sk, tmp, total, transitions):
     """Bande son de la vidéo (sortie de cartoon.rendre, audit du 17 novembre 2026, idée 22) : voix ou piste d'origine, voix au
     téléphone, bruitages, ambiance et musique qui s'effacent quand on parle, volume réglé une fois. Renvoie le chemin du WAV final."""
@@ -608,8 +625,8 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
     def position(scene, role):
         ps = places[scene] + [f"@{j}" for j in range(len(COMP.get(scene, [])))]; n = len(ps); k = ps.index(role) if role in ps else 0
         if n == 1: return (540, 1500, 1.35)
-        if n == 2: return ((285, 795)[k], 1500, 1.08)
-        return ((190, 540, 890)[min(k, 2)], 1500, 0.86)
+        if n == 2: return ((260, 820)[k], 1500, 1.08)                     # (audit du 20 novembre : deux « petits » à grosse tête se touchaient)
+        return ((165, 540, 915)[min(k, 2)], 1500, 0.86)                   # (audit du 20 novembre : 3 grosses têtes se touchaient au bar)
     # caméra : plan large au début de chaque scène, puis plans serrés alternés sur celui qui parle (comme sur TikTok)
     for j, q in enumerate(ph):
         nouvelle = j == 0 or ph[j - 1]["scene"] != q["scene"]
@@ -1042,7 +1059,9 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
                 elif 0 <= u_f <= 1.0 and res.get("fin", 0) < -0.5: p["tilt"] -= 3 * u_f; p["y"] += 6 * s * u_f    # affirmation : la tête descend
                 if zf < -0.5 and lv < 0.5: p["paupiere"] = max(p.get("paupiere", 0.0), 0.3)    # voix grave et molle : paupières lourdes
                 if zf > 1.2 and lv > 0.6: p["sourcils_h"] = max(p.get("sourcils_h", 0.0), 1.1); p["pupille"] = max(p.get("pupille", 1.0), 1.3)   # voix qui monte fort
-            if B and q["emo"] in ("colere", "cri"): p["rougeur"] = max(p.get("rougeur", 0.0), 0.65 * lv)   # le rouge monte avec la voix
+            if B and q["emo"] in ("colere", "cri"):                        # le rouge monte avec la voix, en douceur (moyenne sur 0,6 s :
+                lv_m = float(np.mean(q["lv"][max(0, k - int(0.6 * FPS)):k + 1])) if 0 <= k < len(q["lv"]) else lv   # plus de visage qui clignote)
+                p["rougeur"] = max(p.get("rougeur", 0.0), 0.65 * lv_m * min(1.0, (tm - q["deb"]) / 1.2))
         else:
             if B and q["p"] != role and q["i"] in TON and q["fin"] - 0.35 <= tm <= q["fin"] + 0.25 and TON[q["i"]][1].get("fin", 0) < -0.3:
                 p["y"] += 7 * s * math.sin(math.pi * (tm - q["fin"] + 0.35) / 0.6)   # celui qui écoute acquiesce quand la phrase se pose
@@ -1055,7 +1074,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
             u_e = _ease((tm - t_sc + 0.05) / 0.7); bord = -260 if x < W / 2 else W + 260
             p["x"] = bord + (p["x"] - bord) * u_e; p["y"] -= abs(math.sin(tm * 14)) * 8 * s * (1 - u_e)
             if u_e < 0.98: p["marche"] = tm * 14; p["balance"] = p.get("balance", 0.0) + 0.6 * math.sin(tm * 14)   # vraie marche : les jambes alternent
-        if parle and q["emo"] in ("colere", "cri"):                         # il s'avance vers celui qu'il engueule
+        if parle and q["emo"] in ("colere", "cri") and len(places[scene]) <= 2:   # il s'avance vers celui qu'il engueule (pas à 3 : ils se marcheraient dessus)
             cible = next((r2 for r2 in places[scene] if r2 != role), None)
             if cible: p["x"] += (1 if position(scene, cible)[0] > x else -1) * 30 * s * _ease((tm - q["deb"]) / 0.3)
         if emo == "rire": p["y"] -= abs(math.sin(tm * 12)) * 18 * s
@@ -1372,7 +1391,9 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
             for k in range(22):
                 x = (P_[k, 0] * W + math.sin(tm * 0.3 + k) * 40) % W; y = (P_[k, 1] * H * 0.7 + tm * 10 * (0.5 + P_[k, 2])) % (H * 0.75)
                 tache(img, x, y, 4 + 3 * P_[k, 3], (255, 244, 210), 0.45 * (0.5 + 0.5 * math.sin(tm * 2 + k)))
-        zone = (0, 0, W, H) if (B["lieux"][min(sc, len(B["lieux"]) - 1)] == "rue" or (B.get("interieur") is False and sc not in INFOS)) else None
+        lieu_sc = B["lieux"][min(sc, len(B["lieux"]) - 1)]                 # pluie sur toute l'image seulement DEHORS (audit du 20 novembre :
+        dehors_sc = lieu_sc in DEHORS_LIEUX                                   # il pleuvait dans un bureau) ; dedans, seulement dans la fenêtre
+        zone = (0, 0, W, H) if dehors_sc else None
         if zone is None and info.get("fenetre"):
             fx0, fy0, fx1, fy1 = info["fenetre"]; a, b = ecr(fx0, fy0); c, d = ecr(fx1, fy1); zone = (int(a), int(b), int(c), int(d))
         if zone and ("pluie" in amb or "neige" in amb):
@@ -1935,6 +1956,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
             except Exception as e_: print(f"  sauvegarde du bloc impossible ({e_})", flush=True)
         return c_
     if morceaux is None and args0 is not None and DP.actif(nf):           # vidéo longue : dessin partagé entre plusieurs machines
+        figer_pour_aides(args0, sk)                                        # mêmes personnages et mêmes décors sur toutes les machines
         compte = [0]
         def suivi():
             compte[0] += 1

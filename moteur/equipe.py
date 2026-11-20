@@ -11,6 +11,7 @@ travail AVANT de le passer au poste suivant, corrige ce qu'il peut tout seul et 
   4. Monteur        : synchronisation (répliques dans l'ordre, sans chevauchement d'un même personnage, mots dans leur réplique,
                       rien au-delà de la fin du son)."""
 import os, re
+import numpy as np
 from collections import Counter
 
 VOIX_SEULE_MAX = 0.85        # dans un dialogue, une voix qui dit plus de 85 % du texte : à revérifier
@@ -391,3 +392,71 @@ def _arbitrer(mots, doutes):
             if x.get("version") in ("A", "B"): out[int(x.get("n"))] = x["version"]
         except (AttributeError, TypeError, ValueError): pass
     return out
+
+
+# ------------------------------------------------------------------ dernier contrôle des voix (audit du 20 novembre 2026)
+VOIX_FIN_MARGE = 0.12                                                     # écart d'empreinte pour changer de personnage (voix distinctes)
+
+
+def voix_finales(sk, sig, sr, B=None, embed=None):
+    """Dernier contrôle des voix, une fois toutes les répliques rangées (remarque de l'auteur du 20 novembre : « une ou deux répliques
+    passent sur le même personnage au lieu d'alterner »). Chaque réplique de 0,6 s ou plus est comparée à la voix MOYENNE de chaque
+    personnage (calculée sur ses autres répliques : la grande majorité est juste, la moyenne est donc fiable) ; une réplique
+    nettement plus proche de l'autre voix change de personnage. Prudence : rien quand les deux voix moyennes se ressemblent
+    trop (> 0,85 : même voix, le son ne peut pas trancher), jamais plus d'une réplique sur 5, deux passes au plus.
+    Banc d'essai (vidéos du 20 novembre, erreurs vérifiées à la main) : « Ce n'est pas toi qui poses les questions, c'est moi »,
+    « Et toi tu deviens quoi ? », « Forcément, ça me fait des frais » remis sur la bonne voix. VOIX_FINALES=0 pour couper.
+    embed : fonction (signal 16 kHz) -> empreinte (essais) ; par défaut ECAPA (locuteurs._ecapa). Renvoie le nombre de changements."""
+    import os
+    if os.environ.get("VOIX_FINALES", "1") == "0" or sig is None: return 0
+    reps = sk.get("repliques") or []
+    roles = sorted({r.get("p") for r in reps if r.get("p") and r.get("p") != "narrateur" and not r.get("_hors_champ")})
+    if len(roles) > 2:                                                     # 3 personnages (le serveur qui dit 2 mots) : on contrôle les deux
+        n_ = {ro: sum(1 for r in reps if r.get("p") == ro and float(r.get("_fin") or 0) - float(r.get("_deb") or 0) >= 0.6) for ro in roles}
+        roles = sorted(sorted(roles, key=lambda ro: -n_[ro])[:2]) if sorted(n_.values())[-3] < 3 else roles   # principaux (les autres restent)
+    if len(roles) != 2 or len(reps) < 6: return 0
+    from scipy.signal import resample_poly
+    s16 = resample_poly(np.asarray(sig, np.float64), 16000, sr).astype(np.float32) if sr != 16000 else np.asarray(sig, np.float32)
+    if embed is None:
+        import locuteurs, torch
+        enc = locuteurs._ecapa()
+        if enc is None: return 0
+        def embed(x):
+            with torch.no_grad(): return enc.encode_batch(torch.tensor(x, dtype=torch.float32)[None]).squeeze().numpy()
+    E = {}
+    for i, r in enumerate(reps):
+        if r.get("p") not in roles: continue
+        a, b = int(float(r.get("_deb") or 0) * 16000), int(float(r.get("_fin") or 0) * 16000)
+        if b - a < int(0.6 * 16000): continue
+        e = np.asarray(embed(s16[a:b]), np.float64); n = np.linalg.norm(e)
+        if n > 0: E[i] = e / n
+    def centre(ro, sauf=None):
+        m = [E[j] for j in E if reps[j]["p"] == ro and j != sauf]
+        if len(m) < 2: return None
+        c = np.mean(m, 0); return c / (np.linalg.norm(c) + 1e-9)
+    c0, c1 = centre(roles[0]), centre(roles[1])
+    if c0 is None or c1 is None: return 0
+    ress = float(np.dot(c0, c1))
+    if ress > 0.85:
+        if B is not None: B.note("casting voix", "dernier contrôle des voix", True, f"voix moyennes trop proches ({ress:.2f}) : le son ne tranche pas, le dialogue décide")
+        return 0
+    marge = VOIX_FIN_MARGE if ress > 0.55 else VOIX_FIN_MARGE * 0.75     # voix bien distinctes : un écart plus petit suffit
+    limite = max(1, len(reps) // 5); faits = []
+    for _passe in range(2):
+        cand = []
+        for i in E:
+            moi = reps[i]["p"]; autre = roles[1] if moi == roles[0] else roles[0]
+            cm, ca = centre(moi, i), centre(autre, i)
+            if cm is None or ca is None: continue
+            d = float(np.dot(E[i], ca) - np.dot(E[i], cm))
+            if d >= marge: cand.append((d, i, autre))
+        if not cand: break
+        for d, i, autre in sorted(cand, reverse=True)[:max(0, limite - len(faits))]:
+            faits.append(f"réplique {i} ({str(reps[i].get('t') or '')[:40]}) -> {autre} (écart {d:.2f})")
+            reps[i]["p"] = autre; reps[i]["_voix_corrigee"] = True
+        if len(faits) >= limite: break
+    if B is not None:
+        B.note("casting voix", "dernier contrôle des voix (chaque réplique comparée à la voix moyenne de chaque personnage)", True,
+               (f"{len(faits)} réplique(s) remise(s) sur la bonne voix (corrigé) : " + " ; ".join(faits))[:190] if faits else f"toutes à leur place (voix {ress:.2f})")
+    for f in faits: journal(f"    voix corrigée : {f}")
+    return len(faits)

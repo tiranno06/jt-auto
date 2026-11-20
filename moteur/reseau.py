@@ -80,6 +80,28 @@ def _groq_modeles(images=False):
     return tuple(sorted(ids, key=lambda i: -int((re.search(r"(\d+)b", i) or [0, 0])[1] if re.search(r"(\d+)b", i) else 0)))[:3]
 
 
+_GM = {}
+
+
+def gemini_disponibles(voulus):
+    """Garde, dans l'ordre voulu, les modèles Gemini qui existent encore (liste lue une fois sur l'API de Google) : le 20 novembre,
+    « gemini-2.5-flash » répondait 404 à chaque appel (retiré) et faisait perdre un essai à chaque demande. Si la liste ne se lit
+    pas, on garde tout ; si aucun voulu n'existe, les « flash » du moment (les plus récents d'abord)."""
+    if "liste" not in _GM:
+        try:
+            cle = os.environ.get("GEMINI_API_KEY", "")
+            req = urllib.request.Request("https://generativelanguage.googleapis.com/v1beta/models?pageSize=200", headers={"x-goog-api-key": cle})
+            _GM["liste"] = [str(m.get("name", "")).replace("models/", "") for m in json.loads(ouvrir(req, timeout=20, essais=2)).get("models") or []
+                            if "generateContent" in (m.get("supportedGenerationMethods") or [])] if cle else []
+        except Exception: _GM["liste"] = []
+    L = _GM["liste"]
+    if not L: return tuple(voulus)
+    ok = tuple(m for m in voulus if m in L)
+    if ok: return ok
+    flash = sorted((m for m in L if re.fullmatch(r"gemini-[\d.]+-flash(-lite)?|gemini-flash(-lite)?-latest", m)), reverse=True)
+    return tuple(flash[:3]) or tuple(voulus)
+
+
 EPUISE = (" 401", " 403", "quota", "exhausted", "billing", "per day", "(tpd)", "(rpd)")   # fournisseur à court pour la journée
 HORS_SERVICE = set()                                                       # fournisseurs épuisés pendant cette fabrication
 QUOTA = {}                                                                 # ce qu'il reste chez chaque IA gratuite (en-têtes des réponses)
@@ -153,6 +175,7 @@ def _appel_openai(fourn, kw):
     derniere = None
     modeles = _openrouter_libres(images, bool(outils)) if fourn == "openrouter" else F["images" if images else "texte"]
     if fourn == "groq": modeles = tuple(dict.fromkeys(tuple(modeles) + _groq_modeles(images)))   # + les modèles du moment (ils changent)
+    if fourn == "gemini": modeles = gemini_disponibles(modeles)              # modèles retirés par Google sautés (audit du 20 novembre)
     for modele in modeles:
         corps["model"] = modele; d = None
         for essai in range(4):
