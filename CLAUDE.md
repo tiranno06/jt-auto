@@ -644,7 +644,10 @@
   l'image seulement dehors (`cartoon.DEHORS_LIEUX`), sinon dans la fenêtre ; visage qui rosit peu à peu en colère (moyenne de la voix
   sur 0,6 s, `perso_croquis` : teint mêlé, plus de « cercle rouge » qui clignote) ; deux personnages plus écartés (260 / 820 au lieu de
   285 / 795, aussi `semi_realiste.PIEDS_X` : deux « petits » à grosse tête se touchaient) ; accoudé au comptoir seulement pour celui
-  qui y travaille (métier). **Pannes** : modèles Gemini retirés sautés (`reseau.gemini_disponibles`, liste lue chez Google ;
+  qui y travaille (métier) ; à 3 personnages : places 165 / 540 / 915 (au lieu de 190 / 540 / 890) et personne ne s'avance sur
+  l'autre ; pendant un appel, « je suis couché / au lit » = chambre, « chez moi » = salon, « au boulot » = bureau
+  (`studio.lieux_devines` : l'homme couché était dessiné dans la rue) ; panneau « Affiche: X » -> « X » ; le dernier contrôle des voix
+  marche aussi avec un 3e personnage qui dit deux mots (le serveur). **Pannes** : modèles Gemini retirés sautés (`reseau.gemini_disponibles`, liste lue chez Google ;
   « gemini-2.5-flash » répondait 404 à chaque appel ; `video_ia.MODELES`) ; NeMo réparé (pyarrow>=15,<17 dans l'image Modal) ; tikwm
   (biographies) plus redemandé après un refus 403.
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
