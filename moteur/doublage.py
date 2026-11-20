@@ -817,7 +817,8 @@ def preparer(url):
     sk["doublage"] = {"piste": piste, "duree": round(duree, 2), "source": lien, "auteur": auteur, "contexte": m.get("contexte", ""),
                       "evenements": [list(e) for e in EVENEMENTS][:60], "visuel": visuel, "audio": audio, "silences": coupes,
                       "video_origine": info.get("_fichier") or "", "debut": debut,    # (contrôle qualité : comparaison avec l'original)
-                      "titre": str(info.get("title") or info.get("description") or "")[:300]}   # titre de l'original (parties 1, 2… : suites.py)
+                      "titre": str(info.get("title") or info.get("description") or "")[:300],   # titre de l'original (parties 1, 2… : suites.py)
+                      "lieu_ia": str((__import__("video_ia").DERNIER or {}).get("lieu") or "")}   # lieu vu par Gemini dans CET original
     try:                                                                   # personnes VUES à l'image par Gemini (une voix au téléphone exclue)
         n_v = __import__("video_ia").visibles() or __import__("personnes_vues").nombre(info.get("_fichier") or "")
         if n_v: sk["doublage"]["nb_vus"] = int(n_v)
@@ -831,6 +832,8 @@ def preparer(url):
     try:                                                                   # scripte (cohérence) et monteur (synchronisation, corrigée)
         equipe.scripte(sk, segs, hz, B); equipe.monteur(sk, duree, B, segs)
     except Exception as e: journal(f"  contrôles de l'équipe impossibles ({str(e)[:120]})")
+    try: equipe.voix_finales(sk, sig, SR, B)                              # dernier contrôle des voix, réplique par réplique (20 novembre)
+    except Exception as e: journal(f"  dernier contrôle des voix impossible ({str(e)[:120]})")
     # voix de chaque réplique (pour les bouches) et instants des mots, relatifs au début de la réplique
     audios, mots = [], []
     for s in segs:
@@ -848,10 +851,6 @@ def preparer(url):
     except Exception as e: journal(f"  Rhubarb impossible ({str(e)[:100]})")
     try: __import__("objets_vus").appliquer(info.get("_fichier") or "", sk["repliques"])   # objets vus dans l'original (idée 4)
     except Exception as e: journal(f"  objets de l'original non cherchés ({str(e)[:120]})")
-    try:                                                                   # fiche de tournage contrôlée trois fois (20 novembre, idées 1 à 5)
-        import fiche_tournage
-        if fiche_tournage.faire(sk, info.get("_fichier") or "", sig, SR, [m_ for s_ in segs for m_ in s_["mots"]], B): fiche_tournage.appliquer(sk)
-    except Exception as e: journal(f"  fiche de tournage impossible ({str(e)[:120]}) : mise en scène habituelle")
     sk["equipe"] = B.lignes
     journal(f"  bulletin de l'équipe : {B.resume()}")
     return sk, audios, mots

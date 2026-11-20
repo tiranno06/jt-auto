@@ -388,6 +388,12 @@ def main():
         import doublage
         sk, *DOUB = PROFIL_PREP[1] if PROFIL_PREP else doublage.preparer(tiktok)   # (déjà préparé quand il vient d'un profil)
         fmt = "libre" if sk["doublage"]["duree"] >= 60 else "mini"         # rangée en vidéo longue au-delà d'une minute
+        try:                                                               # fiche de tournage contrôlée trois fois : seulement pour le son
+            import fiche_tournage, equipe as _EQ                           # CHOISI (audit du 20 novembre : écrite pour chaque son écouté,
+            if not sk.get("_fiche"):                                       # elle épuisait le quota de Gemini et allongeait l'écoute)
+                B_f = _EQ.Bulletin(); B_f.lignes = sk.setdefault("equipe", [])
+                if fiche_tournage.faire(sk, (sk.get("doublage") or {}).get("video_origine") or "", None, 22050, None, B_f): fiche_tournage.appliquer(sk)
+        except Exception as e: print(f"  fiche de tournage impossible ({str(e)[:120]}) : mise en scène habituelle", flush=True)
         try: __import__("suites").preparer(sk, historique)                 # partie 1, 2… : fin « à suivre », mêmes personnages
         except Exception as e: print(f"Parties : {str(e)[:120]}", flush=True)
     elif script:                                                           # script tapé : les répliques restent mot pour mot

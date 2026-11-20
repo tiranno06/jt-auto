@@ -78,7 +78,7 @@ OBJETS_MOTS = [  # (motif, objet tenu (marionnette.OBJETS) ou "", détail du dé
     (r"\bt[ée]l[ée]commande\b", "telecommande", "television"),
     (r"\bordi\b|\bordinateur\b|\bpc\b|\blaptop\b", "ordinateur", "laptop on a desk"),
     (r"\btablette\b|\bipad\b", "tablette", ""),
-    (r"\bpo[êe]le\b|\bje cuisine\b|\bfaire cuire\b", "poele", "stove with pans"),
+    (r"\bpo[êe]le\b|\bje cuisine\b", "poele", "stove with pans"),     # (« va te faire cuire » est une insulte, pas une poêle)
     (r"\bcolis\b|\bmon paquet\b|\bamazon\b", "colis", "cardboard parcel"),
     (r"\bmicro\b", "micro", ""),
     (r"\bguitare\b", "guitare", "guitar on a stand"),
@@ -114,7 +114,8 @@ def indices_texte(reps):
     m = re.search(r"\b(\d{1,2}) ?h(?:eures?)?(?:\d\d)?\b(?: du mat)?", t)
     if m and ("du mat" in t[m.start():m.end() + 8] or re.search(r"\bdu matin\b|\bde la nuit\b", t[m.start():m.end() + 14])):
         h = int(m.group(1)); out["moment"] = "nuit" if h < 6 else "matin"
-    elif re.search(r"\bminuit\b|\bil est tard\b|\bla nuit\b|\bje dors\b|\bt'es pas couch|\binsomnie\b|\bcauchemar\b", t): out["moment"] = "nuit"
+    elif re.search(r"\bminuit\b|\bil est tard\b|\bcette nuit\b|\ben pleine nuit\b|\bje vais (me coucher|dormir)\b|\bt'es pas couch|\binsomnie\b", t): out["moment"] = "nuit"
+    # (audit du 20 novembre : « je dors plus » ou « la nuit » dans une dispute de bureau avaient mis la scène en pleine nuit)
     elif re.search(r"\bce soir\b|\bd[îi]ner\b|\bap[ée]ro\b|\bje sors du (boulot|taf|travail)\b|\bje rentre du (boulot|taf)\b", t): out["moment"] = "soir"
     elif re.search(r"\bce matin\b|\bpetit[- ]d[ée]j|\bdebout\b.*\bl'[ée]cole\b|\bt'es en retard pour l'[ée]cole\b|\bc'est l'heure de se lever\b", t): out["moment"] = "matin"
     elif re.search(r"\bce midi\b|\bd[ée]jeuner\b|\bil fait jour\b|\bcet apr[èe]s-midi\b", t): out["moment"] = "jour"
@@ -399,7 +400,9 @@ def controle_regles(F, sk, ind):
                                                                               str(reps[n].get("t") or "").lower()) and not re.search(r"appel|allô|allo", t):
             fixe(f"réplique {n} objet", "telephone", "", "on ne parle pas de téléphone"); q.pop("objet"); q.pop("action", None)
         if q.get("action") == "telephone_oreille" and q.get("objet") not in (None, "telephone"): q["action"] = "tenir"
+    retires = set(F.get("_retires") or [])                                 # objets retirés par la 2e IA : jamais remis par les règles
     for o in ind.get("objets") or []:                                      # objet cité : dans les mains de celui qui en parle
+        if o["n"] in retires: continue
         q = F["repliques"].setdefault(o["n"], {})
         if not q.get("objet") and not (o["objet"] == "telephone" and not re.search(r"t[ée]l[ée]phone|portable|appel|allô|allo|message|snap|texto",
                                                                                      str(reps[o["n"]].get("t") or "").lower())):
@@ -466,7 +469,10 @@ def appliquer_corrections(F, sk, corrections):
         avant = _lire(F, parties); apres = _lire(G, parties)
         if apres in (None, "", []) and c["valeur"] not in (None, "", [], False): continue   # valeur refusée par la remise en forme
         if avant != apres:
-            G["source"] = F.get("source"); F.clear(); F.update(G); faites.append(f"{c['champ']} : {avant} -> {apres} ({c['raison']})")
+            prives = {k: v for k, v in F.items() if k.startswith("_")}
+            if parties[0] == "repliques" and parties[2] == "objet" and apres in (None, ""):
+                prives["_retires"] = sorted(set(prives.get("_retires") or []) | {int(parties[1])})
+            G["source"] = F.get("source"); F.clear(); F.update(G); F.update(prives); faites.append(f"{c['champ']} : {avant} -> {apres} ({c['raison']})")
     return faites
 
 
@@ -488,7 +494,8 @@ def controle_image(F, sk):
     except Exception: D = {}
     V = ((sk.get("doublage") or {}).get("visuel")) or {}
     import decor_dessin as DD
-    l_vu = D.get("lieu") if D.get("lieu") in DD.LIEUX else None
+    l_vu = ((sk.get("doublage") or {}).get("lieu_ia") or None)            # ce que Gemini a vu dans CET original (pas le dernier son écouté)
+    l_vu = l_vu if l_vu in DD.LIEUX else None
     if l_vu and F.get("lieu") != l_vu and F.get("source") != "video":
         cor.append(f"lieu : {F.get('lieu')} -> {l_vu} (vu dans la vidéo d'origine)"); F["lieu"] = l_vu
     if V.get("moment") in ("matin", "jour", "soir", "nuit") and F.get("source") != "video" and F.get("moment") != V["moment"] and not F.get("_moment_dit"):
@@ -602,7 +609,9 @@ def appliquer(sk, F=None):
         if p.get("genre"): d.setdefault("genre", {"h": "homme", "f": "femme"}[p["genre"]])
         mettre("age", p.get("age")); mettre("corpulence", CORPULENCES.get(p.get("corpulence") or ""))
         mettre("taille", TAILLES.get(p.get("taille") or ""))
-        if p.get("cheveux"): mettre("cheveux", CHEVEUX[p["cheveux"]])
+        if p.get("cheveux") and not ((p.get("genre") or d.get("genre_vu") or "")[:1] == "h" and p["cheveux"] in ("long", "carre", "chignon", "queue", "tresses", "mi_long")) \
+                and not ((p.get("genre") or "")[:1] == "f" and p["cheveux"] in ("chauve", "rase", "herisse")):
+            mettre("cheveux", CHEVEUX[p["cheveux"]])                       # (jamais une coupe de fille sur un homme : audit du 20 novembre)
         if p.get("barbe"): mettre("barbe", p["barbe"])                     # « aucune » : hors des barbes connues, le casting n'en met pas
     tenues = S.setdefault("tenues_fiche", {})
     for r, p in F["personnages"].items():

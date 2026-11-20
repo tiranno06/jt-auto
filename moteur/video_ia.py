@@ -9,7 +9,17 @@ quota que les autres appels Gemini (sauté s'il est épuisé). Sert de témoin d
 (lieu, personnages, espèce). VIDEO_IA=0 pour couper."""
 import base64, json, os, re, subprocess, tempfile, urllib.request
 
-MODELES = ("gemini-flash-latest", "gemini-2.5-flash", "gemini-flash-lite-latest")
+VOULUS = ("gemini-flash-latest", "gemini-2.5-flash", "gemini-flash-lite-latest")
+
+
+class _Modeles:
+    """Modèles Gemini pour la vidéo / le son : ceux qui existent encore chez Google (reseau.gemini_disponibles, lus une fois)."""
+    def __iter__(self):
+        try: return iter(__import__("reseau").gemini_disponibles(VOULUS))
+        except Exception: return iter(VOULUS)
+
+
+MODELES = _Modeles()
 DERNIER = {}                                                               # dernière analyse (mise en scène, espèces)
 
 

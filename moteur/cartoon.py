@@ -1042,7 +1042,9 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
                 elif 0 <= u_f <= 1.0 and res.get("fin", 0) < -0.5: p["tilt"] -= 3 * u_f; p["y"] += 6 * s * u_f    # affirmation : la tête descend
                 if zf < -0.5 and lv < 0.5: p["paupiere"] = max(p.get("paupiere", 0.0), 0.3)    # voix grave et molle : paupières lourdes
                 if zf > 1.2 and lv > 0.6: p["sourcils_h"] = max(p.get("sourcils_h", 0.0), 1.1); p["pupille"] = max(p.get("pupille", 1.0), 1.3)   # voix qui monte fort
-            if B and q["emo"] in ("colere", "cri"): p["rougeur"] = max(p.get("rougeur", 0.0), 0.65 * lv)   # le rouge monte avec la voix
+            if B and q["emo"] in ("colere", "cri"):                        # le rouge monte avec la voix, en douceur (moyenne sur 0,6 s :
+                lv_m = float(np.mean(q["lv"][max(0, k - int(0.6 * FPS)):k + 1])) if 0 <= k < len(q["lv"]) else lv   # plus de visage qui clignote)
+                p["rougeur"] = max(p.get("rougeur", 0.0), 0.65 * lv_m * min(1.0, (tm - q["deb"]) / 1.2))
         else:
             if B and q["p"] != role and q["i"] in TON and q["fin"] - 0.35 <= tm <= q["fin"] + 0.25 and TON[q["i"]][1].get("fin", 0) < -0.3:
                 p["y"] += 7 * s * math.sin(math.pi * (tm - q["fin"] + 0.35) / 0.6)   # celui qui écoute acquiesce quand la phrase se pose
