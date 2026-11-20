@@ -9,8 +9,8 @@ code: 0
 === banque de voix (Kyutai, Zonos, Whisper) ===
 ✓ Created objects.
 ├── ✓ Uploaded /home/runner/work/jt-auto/jt-auto/moteur/banque_modal.py
-├── ✓ Created Function Kyutai.*.
 ├── ✓ Created Function Whisper.*.
+├── ✓ Created Function Kyutai.*.
 ├── ✓ Created Function Kokoro.*.
 └── ✓ Created Function Zonos.*.
 ✓ Deployment skipped: no changes detected! ⏭️
@@ -27,43 +27,11 @@ code: 0
 View Deployment: https://modal.com/apps/tubbiolo-francois/main/deployed/jt-decor
 code: 0
 === ecoute (NeMo, Florence-2) ===
-Saving image...
-Image saved, took 11.44s
-
-Built image im-es2Y6YZbWoRzh7Q58JrKDb in 130.61s
-
-
-Building image im-630O8heRYMASAIPHCeVF1s
-
-=> Step 0: FROM base
-
-=> Step 1: RUN wget -q -O /opt/diar.yaml https://raw.githubusercontent.com/NVIDIA/NeMo/v2.1.0/examples/speaker_tasks/diarization/conf/inference/diar_infer_telephonic.yaml
-Saving image...
-Image saved, took 3.32s
-
-Built image im-630O8heRYMASAIPHCeVF1s in 5.44s
-
-
-Building image im-vX5xYiETYfZgD3IMRvhGMu
-
-=> Step 0: FROM base
-
-=> Step 1: ENV HF_HOME=/cache/hf
-
-=> Step 2: ENV TORCH_HOME=/cache/torch
-
-=> Step 3: ENV NEMO_CACHE_DIR=/cache/nemo
-Saving image...
-Image saved, took 1.26s
-
-Built image im-vX5xYiETYfZgD3IMRvhGMu in 2.46s
-
-
 ✓ Created objects.
 ├── ✓ Uploaded /home/runner/work/jt-auto/jt-auto/moteur/ecoute_modal.py
 ├── ✓ Created Function Florence.*.
 └── ✓ Created Function Nemo.*.
-✓ App deployed in 233.244s! 🎉
+✓ Deployment skipped: no changes detected! ⏭️
 
 View Deployment: 
 https://modal.com/apps/tubbiolo-francois/main/deployed/jt-ecoute
@@ -83,4 +51,4 @@ FileNotFoundError: [Errno 2] No such file or directory: 'ffmpeg'
 === essai des decors (premier lancement : telechargement du modele) ===
 décor 0 : 1544909 octets
 décor 1 : 2187747 octets
-durée 114 s
+durée 32 s
