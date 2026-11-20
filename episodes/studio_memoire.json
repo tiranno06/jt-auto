@@ -6835,36 +6835,34 @@
   "cadence": "normal"
  },
  {
-  "moment": "nuit",
+  "moment": "jour",
   "lieux": [
-   "bureau"
+   "classe"
   ],
   "source": "auteur+image",
-  "duree": 75.2,
+  "duree": 94.1,
   "plans": {
-   "large": 36
+   "large": 37
   },
   "mouvements": {
-   "fixe": 36
+   "fixe": 37
   },
   "costumes": {
-   "presentateur": "chemise",
-   "invite": "col_roule"
+   "presentateur": "costume",
+   "invite": "uniforme"
   },
   "figurants": 0,
-  "ambiances": [
-   "pluie"
-  ],
-  "controle": "Humoriste 8.6/10 :  | Réalisateur 10.0/10 :  | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.9/10 : ",
-  "fichier": "2026-11-20_09h55_emission.mp4",
+  "ambiances": [],
+  "controle": "Humoriste 8.6/10 :  | Réalisateur 8.8/10 :  | Directeur artistique 6.0/10 : 1 s Le style graphique est correct mais les proportions des personnages dérogent un peu à l'ambiance croquis d'origine.; 1 s",
+  "fichier": "2026-11-20_10h59_emission.mp4",
   "cine": {
    "focus": false,
    "vertige": true,
-   "tiers": false,
+   "tiers": true,
    "etalonnage": true,
    "profondeur": false,
    "grain": true,
-   "reflets": false,
+   "reflets": true,
    "son": true
   },
   "cadence": "rapide"
