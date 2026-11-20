@@ -996,3 +996,19 @@ class TestAudit20Novembre(unittest.TestCase):
         self.assertNotIn("fiche_tournage.faire(", d); self.assertIn("fiche_tournage.faire(", p)
         self.assertIn("equipe.voix_finales(sk, sig, SR, B)", d)
         self.assertIn("pyarrow>=15,<17", open(os.path.join(ICI, "..", "moteur", "ecoute_modal.py"), encoding="utf-8").read())
+
+    def test_vues_9_et_10(self):
+        import studio, fiche_tournage as FT, equipe
+        sk = {"repliques": [{"p": "presentateur", "t": "Je suis couché, compte jusqu'à un million."}, {"p": "invite", "t": "Je vais t'épargner ça."}]}
+        self.assertEqual(studio.lieux_devines(sk, ["presentateur", "invite"])["presentateur"], "chambre")   # « je suis couché » : pas dans la rue
+        self.assertEqual(FT.texte_panneau("Affiche: Happy Hour éternel"), "Happy Hour éternel")
+        rng = np.random.default_rng(2); A, Bv = rng.normal(size=16), rng.normal(size=16)
+        vrai = ["a", "b"] * 6
+        reps = [{"p": "presentateur" if v == "a" else "invite", "t": "x", "_deb": k * 1.0, "_fin": k * 1.0 + 0.9} for k, v in enumerate(vrai)]
+        reps.append({"p": "envoyee", "t": "S'il vous plaît.", "_deb": 12.0, "_fin": 12.4})   # le serveur, 3e personnage qui dit 2 mots
+        reps[2]["p"] = "invite"
+        sig = np.zeros(16000 * 14, np.float32)
+        for k, v in enumerate(vrai): sig[k * 16000:k * 16000 + 14000] = 0.5 if v == "a" else -0.5
+        sk = {"repliques": reps}
+        self.assertEqual(equipe.voix_finales(sk, sig, 16000, equipe.Bulletin(), embed=lambda x: (A if float(np.mean(x)) > 0 else Bv) + rng.normal(scale=0.15, size=16)), 1)
+        self.assertEqual(sk["repliques"][2]["p"], "presentateur"); self.assertEqual(sk["repliques"][-1]["p"], "envoyee")

@@ -339,6 +339,8 @@ def texte_panneau(p):
     p = str(p or "").strip()
     m = re.search(r"[«\"'“‘]\s*([^«»\"“”‘’]{2,28}?)\s*[»\"'”’]", p)
     if m: p = m.group(1).strip()
+    elif re.match(r"^(affiche|panneau|enseigne|tableau|inscription|menu)\s*:\s*(.+)$", p, re.I):   # « Affiche: Happy Hour éternel »
+        p = re.match(r"^\w+\s*:\s*(.+)$", p).group(1).strip()
     elif re.search(r"\b(affiche|panneau|enseigne|tableau|écrit|inscription|au mur|sur la porte|menu de|logo)\b", p, re.I): return ""
     return p if 2 <= len(p) <= 28 else ""
 

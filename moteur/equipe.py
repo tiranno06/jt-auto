@@ -411,6 +411,9 @@ def voix_finales(sk, sig, sr, B=None, embed=None):
     if os.environ.get("VOIX_FINALES", "1") == "0" or sig is None: return 0
     reps = sk.get("repliques") or []
     roles = sorted({r.get("p") for r in reps if r.get("p") and r.get("p") != "narrateur" and not r.get("_hors_champ")})
+    if len(roles) > 2:                                                     # 3 personnages (le serveur qui dit 2 mots) : on contrôle les deux
+        n_ = {ro: sum(1 for r in reps if r.get("p") == ro and float(r.get("_fin") or 0) - float(r.get("_deb") or 0) >= 0.6) for ro in roles}
+        roles = sorted(sorted(roles, key=lambda ro: -n_[ro])[:2]) if sorted(n_.values())[-3] < 3 else roles   # principaux (les autres restent)
     if len(roles) != 2 or len(reps) < 6: return 0
     from scipy.signal import resample_poly
     s16 = resample_poly(np.asarray(sig, np.float64), 16000, sr).astype(np.float32) if sr != 16000 else np.asarray(sig, np.float32)

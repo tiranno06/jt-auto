@@ -832,6 +832,10 @@ def lieux_devines(sk, roles):
     for r in roles:
         autres = " ".join(v for k, v in lignes.items() if k != r)
         if re.search(MALADE, lignes[r]): out[r] = "chambre"; continue          # « je suis malade, cloué au lit » : au lit, dans sa chambre
+        if re.search(r"\bje suis (couch[ée]|au lit|dans mon lit|en train de dormir)|\bje (me couche|dors)\b|\bje vais me coucher\b", lignes[r]):
+            out[r] = "chambre"; continue                                   # « je suis couché » : dans sa chambre (audit du 20 novembre : dessiné dans la rue)
+        if re.search(r"\bje suis (au (boulot|bureau|taf|travail))\b", lignes[r]): out[r] = "bureau"; continue
+        if re.search(r"\bje suis (chez moi|à la maison|à la maison)\b", lignes[r]): out[r] = "salon"; continue
         if re.search(r"\bje suis (dans la rue|dehors|en ville|au parking|sur le parking|devant)", lignes[r]): out[r] = "rue"
         elif re.search(r"\b(fiston|mon fils|ma fille|ma puce)\b", autres): out[r] = "rue"          # l'enfant qui appelle : dehors
         elif re.search(r"\b(fiston|mon fils|ma fille|ma puce)\b", lignes[r]) or re.search(r"(papa|maman)\s*[,!?]", autres): out[r] = "salon"

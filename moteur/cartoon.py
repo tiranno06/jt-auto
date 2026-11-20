@@ -626,7 +626,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
         ps = places[scene] + [f"@{j}" for j in range(len(COMP.get(scene, [])))]; n = len(ps); k = ps.index(role) if role in ps else 0
         if n == 1: return (540, 1500, 1.35)
         if n == 2: return ((260, 820)[k], 1500, 1.08)                     # (audit du 20 novembre : deux « petits » à grosse tête se touchaient)
-        return ((190, 540, 890)[min(k, 2)], 1500, 0.86)
+        return ((165, 540, 915)[min(k, 2)], 1500, 0.86)                   # (audit du 20 novembre : 3 grosses têtes se touchaient au bar)
     # caméra : plan large au début de chaque scène, puis plans serrés alternés sur celui qui parle (comme sur TikTok)
     for j, q in enumerate(ph):
         nouvelle = j == 0 or ph[j - 1]["scene"] != q["scene"]
@@ -1074,7 +1074,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
             u_e = _ease((tm - t_sc + 0.05) / 0.7); bord = -260 if x < W / 2 else W + 260
             p["x"] = bord + (p["x"] - bord) * u_e; p["y"] -= abs(math.sin(tm * 14)) * 8 * s * (1 - u_e)
             if u_e < 0.98: p["marche"] = tm * 14; p["balance"] = p.get("balance", 0.0) + 0.6 * math.sin(tm * 14)   # vraie marche : les jambes alternent
-        if parle and q["emo"] in ("colere", "cri"):                         # il s'avance vers celui qu'il engueule
+        if parle and q["emo"] in ("colere", "cri") and len(places[scene]) <= 2:   # il s'avance vers celui qu'il engueule (pas à 3 : ils se marcheraient dessus)
             cible = next((r2 for r2 in places[scene] if r2 != role), None)
             if cible: p["x"] += (1 if position(scene, cible)[0] > x else -1) * 30 * s * _ease((tm - q["deb"]) / 0.3)
         if emo == "rire": p["y"] -= abs(math.sin(tm * 12)) * 18 * s
