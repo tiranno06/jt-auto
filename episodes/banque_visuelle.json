@@ -45762,426 +45762,243 @@
  },
  {
   "date": "2026-11-20",
-  "source": "https://www.tiktok.com/@vignianimation/video/7709585298161700129",
-  "auteur": "vignianimation",
+  "source": "https://www.tiktok.com/@same_same53/video/7709610787291139361",
+  "auteur": "same_same53",
   "visuel": {
-   "gestes": [
-    [
-     28.0,
-     0.38,
-     0.34
-    ]
-   ],
-   "duree": 87.0,
+   "gestes": [],
+   "duree": 88.0,
    "nb_plans": 1,
-   "duree_plan": 87.0,
+   "duree_plan": 88.0,
    "coupes": [],
    "plans": {
     "tres_serre": 0.0,
     "serre": 0.0,
-    "moyen": 0.259,
-    "large": 0.741
+    "moyen": 0.034,
+    "large": 0.966
    },
    "camera": {
-    "fixe": 0.977,
+    "fixe": 1.0,
     "avance": 0.0,
     "recul": 0.0,
     "travelling": 0.0,
-    "epaule": 0.023
+    "epaule": 0.0
    },
    "nb_personnes": 1,
-   "personnes": [
-    {
-     "place": "gauche",
-     "presence": 0.259,
-     "habit": [
-      19,
-      86,
-      159
-     ],
-     "cheveux": [
-      249,
-      249,
-      249
-     ],
-     "sourire": 0.0,
-     "taille": 0.097,
-     "tete_penchee": 1.6,
-     "regard_cote": 0.0
-    }
-   ],
+   "personnes": [],
    "visages": true,
    "sourires": 0.0,
-   "energie": 0.18,
+   "energie": 0.196,
    "mur": [
-    238,
-    218,
-    206
+    2,
+    1,
+    1
    ],
    "palette": [
     [
-     240,
-     228,
-     219,
-     0.3
+     0,
+     0,
+     0,
+     0.589
     ],
     [
-     236,
-     155,
-     90,
-     0.269
+     253,
+     253,
+     253,
+     0.358
     ],
     [
-     241,
-     195,
-     161,
-     0.132
+     43,
+     37,
+     36,
+     0.027
     ],
     [
+     12,
+     133,
+     116,
+     0.01
+    ],
+    [
+     234,
+     82,
+     30,
+     0.008
+    ],
+    [
+     143,
+     138,
      108,
-     81,
-     125,
-     0.115
-    ],
-    [
-     201,
-     152,
-     151,
-     0.113
-    ],
-    [
-     24,
-     16,
-     14,
-     0.07
+     0.008
     ]
    ],
    "lumiere": {
-    "luminosite": 208.6,
-    "chaleur": 61.1,
-    "saturation": 89.6
+    "luminosite": 97.4,
+    "chaleur": 1.1,
+    "saturation": 8.3
    },
    "moment": "jour",
    "postures": []
   },
   "audio": {
-   "duree": 87.0,
+   "duree": 87.8,
    "nb_voix": 2,
    "voix": [
     {
-     "hz": 153,
+     "hz": 162,
      "genre": "h",
-     "part": 0.48
+     "part": 0.56
     },
     {
-     "hz": 147,
-     "genre": "h",
-     "part": 0.52
+     "hz": 168,
+     "genre": "?",
+     "part": 0.44
     }
    ],
-   "debit": 6.16,
-   "blanc_moyen": 0.4,
-   "coupes": 5,
-   "dynamique_db": 27.3,
-   "cris": 0.059,
-   "musique": 0.4,
-   "impacts": 94,
-   "impacts_10s": 10.8,
-   "graves": 16,
-   "aigus": 78,
-   "sur_vanne": 33,
-   "evenements": {},
+   "debit": 4.83,
+   "blanc_moyen": 0.29,
+   "coupes": 9,
+   "dynamique_db": 19.4,
+   "cris": 0.002,
+   "musique": 0.41,
+   "impacts": 63,
+   "impacts_10s": 7.18,
+   "graves": 8,
+   "aigus": 55,
+   "sur_vanne": 24,
+   "evenements": {
+    "scream": 1
+   },
    "emotions": {
-    "neutre": 14,
-    "explique": 7,
-    "sarcastic": 3,
+    "explique": 6,
+    "gene": 5,
     "colere": 3,
-    "sourire": 2,
-    "enerve": 2,
+    "neutre": 3,
+    "joie": 2,
+    "moqueur": 2,
     "interroge": 2,
-    "annoyed": 1
+    "sourire": 2
    }
   },
   "claude": {
    "lieux": [
-    "rue",
-    "salon"
+    "bureau"
    ],
-   "moment": "matin",
-   "costumes": {},
+   "moment": "jour",
+   "costumes": {
+    "presentateur": {
+     "haut": "chemise",
+     "c_haut": "vert",
+     "motif": "uni",
+     "bas": "pantalon",
+     "chaussures": "ville",
+     "details": [
+      "lunettes_vue",
+      "stylos"
+     ],
+     "chapeau": "aucune",
+     "cheveux": "chignon",
+     "c_cheveux": "noir"
+    },
+    "invite": {
+     "haut": "tshirt",
+     "c_haut": "jaune",
+     "motif": "uni",
+     "bas": "jean",
+     "chaussures": "baskets",
+     "details": [
+      "sac_a_dos"
+     ],
+     "chapeau": "casquette",
+     "c_chapeau": "rouge",
+     "cheveux": "court",
+     "c_cheveux": "roux"
+    }
+   },
    "objets": [
     {
-     "objet": "telephone",
-     "replique": 0
+     "replique": 0,
+     "objet": "stylo"
+    },
+    {
+     "objet": "tablette",
+     "replique": 10
+    },
+    {
+     "replique": 34,
+     "objet": "livre"
     }
    ],
    "gags": [
-    "Affiche 'Travail & Joie' au mur"
+    "Affiche au mur : 'Le travail c'est la santé'",
+    "Post-it sur le bureau : 'Aide-moi'"
    ],
    "ambiances": [
     "poussiere"
    ],
    "plans": [
     {
-     "mouvement": "fixe",
      "plan": "moyen",
-     "geste": "telephone",
+     "geste": "explique",
+     "mouvement": "fixe",
+     "reaction": "sceptique",
      "replique": 0
     },
     {
-     "mouvement": "fixe",
-     "geste": "telephone",
      "plan": "moyen",
-     "replique": 1
+     "reaction": "aucune",
+     "mouvement": "fixe",
+     "replique": 1,
+     "geste": "gratte_tete"
     },
     {
+     "plan": "serre",
+     "mouvement": "fixe",
      "geste": "pointe_d",
      "replique": 2,
-     "plan": "moyen",
-     "mouvement": "fixe"
+     "reaction": "choque"
     },
     {
-     "geste": "stop",
-     "replique": 3,
-     "mouvement": "fixe",
-     "plan": "moyen"
-    },
-    {
-     "geste": "explique",
-     "plan": "moyen",
      "replique": 4,
-     "mouvement": "fixe"
-    },
-    {
-     "mouvement": "fixe",
-     "replique": 5,
-     "plan": "moyen",
-     "geste": "pouce"
-    },
-    {
-     "replique": 6,
-     "geste": "facepalm",
-     "mouvement": "fixe",
-     "plan": "moyen"
-    },
-    {
-     "geste": "neutre",
-     "plan": "moyen",
-     "mouvement": "fixe",
-     "replique": 7
-    },
-    {
-     "replique": 8,
-     "plan": "moyen",
-     "geste": "poing",
-     "mouvement": "fixe"
-    },
-    {
-     "geste": "neutre",
-     "plan": "moyen",
-     "replique": 9,
-     "mouvement": "fixe"
-    },
-    {
-     "replique": 10,
-     "geste": "pointe_d",
-     "mouvement": "fixe",
-     "plan": "moyen"
-    },
-    {
-     "plan": "moyen",
-     "replique": 11,
-     "geste": "sourire",
-     "mouvement": "fixe"
-    },
-    {
-     "geste": "pouce",
-     "mouvement": "fixe",
-     "plan": "moyen",
-     "replique": 12
-    },
-    {
-     "plan": "moyen",
-     "geste": "gratte_tete",
-     "replique": 13,
-     "mouvement": "fixe"
-    },
-    {
-     "mouvement": "fixe",
-     "plan": "moyen",
-     "geste": "neutre",
-     "replique": 14
-    },
-    {
-     "geste": "neutre",
-     "mouvement": "fixe",
-     "plan": "moyen",
-     "replique": 15
-    },
-    {
-     "geste": "neutre",
-     "replique": 16,
-     "mouvement": "fixe",
-     "plan": "moyen"
-    },
-    {
-     "plan": "moyen",
-     "replique": 17,
+     "reaction": "soupir",
+     "plan": "large",
      "geste": "mains_hanches",
      "mouvement": "fixe"
     },
     {
+     "geste": "facepalm",
      "mouvement": "fixe",
-     "plan": "moyen",
-     "replique": 18,
-     "geste": "neutre"
-    },
-    {
-     "mouvement": "fixe",
-     "replique": 19,
-     "geste": "explique",
-     "plan": "moyen"
-    },
-    {
-     "replique": 20,
-     "geste": "explique",
-     "mouvement": "fixe",
-     "plan": "moyen"
-    },
-    {
-     "geste": "haussement",
-     "mouvement": "fixe",
-     "replique": 21,
-     "plan": "moyen"
-    },
-    {
-     "replique": 22,
-     "plan": "moyen",
-     "mouvement": "fixe",
-     "geste": "explique"
-    },
-    {
-     "mouvement": "fixe",
-     "geste": "explique",
-     "plan": "moyen",
-     "replique": 23
-    },
-    {
-     "geste": "pouce",
-     "plan": "moyen",
-     "mouvement": "fixe",
-     "replique": 24
-    },
-    {
-     "replique": 25,
-     "mouvement": "fixe",
-     "plan": "moyen",
-     "geste": "gratte_tete"
-    },
-    {
-     "mouvement": "fixe",
-     "geste": "explique",
-     "plan": "moyen",
-     "replique": 26
+     "replique": 12,
+     "plan": "serre",
+     "reaction": "aucune"
     },
     {
      "plan": "moyen",
-     "mouvement": "fixe",
-     "replique": 27,
-     "geste": "neutre"
-    },
-    {
-     "plan": "moyen",
-     "geste": "pointe_d",
-     "mouvement": "fixe",
-     "replique": 28
-    },
-    {
-     "plan": "moyen",
-     "geste": "pointe_g",
-     "replique": 29,
-     "mouvement": "fixe"
-    },
-    {
-     "replique": 30,
-     "geste": "colere",
-     "mouvement": "fixe",
-     "plan": "moyen"
-    },
-    {
-     "geste": "colere",
-     "plan": "moyen",
-     "replique": 31,
-     "mouvement": "fixe"
-    },
-    {
-     "plan": "moyen",
-     "mouvement": "fixe",
      "replique": 32,
-     "geste": "explique"
-    },
-    {
-     "geste": "desespoir",
-     "plan": "moyen",
-     "replique": 33,
-     "mouvement": "fixe"
-    },
-    {
-     "replique": 34,
+     "reaction": "sourire",
      "mouvement": "fixe",
-     "geste": "neutre",
-     "plan": "moyen"
-    },
-    {
-     "geste": "explique",
-     "mouvement": "fixe",
-     "replique": 35,
-     "plan": "moyen"
-    },
-    {
-     "replique": 36,
-     "geste": "neutre",
-     "plan": "moyen",
-     "mouvement": "fixe"
-    },
-    {
-     "geste": "neutre",
-     "mouvement": "fixe",
-     "replique": 37,
-     "plan": "moyen"
-    },
-    {
-     "replique": 38,
-     "mouvement": "fixe",
-     "plan": "moyen",
-     "geste": "neutre"
-    },
-    {
-     "mouvement": "fixe",
-     "plan": "moyen",
-     "geste": "neutre",
-     "replique": 39
+     "geste": "bras_ouverts"
     }
    ]
   },
   "realisation": {
-   "moment": "matin",
+   "moment": "jour",
    "lieux": [
-    "rue",
-    "salon"
+    "bureau"
    ],
    "gags": [
-    "Affiche 'Travail & Joie' au mur"
+    "Affiche au mur : 'Le travail c'est la santé'",
+    "Post-it sur le bureau : 'Aide-moi'"
    ],
    "ambiances": [
     "poussiere"
    ],
    "source": "auteur+image",
    "tenues": {
-    "presentateur": "pyjama",
-    "invite": "pyjama"
+    "presentateur": "chemise",
+    "invite": "tshirt"
    },
    "plans": [
+    "large/fixe",
     "large/fixe",
     "large/fixe",
     "large/fixe",
@@ -46224,6 +46041,400 @@
     "large/fixe"
    ]
   },
-  "video": "2026-11-20_09h37_emission.mp4"
+  "video": "2026-11-20_09h03_emission.mp4"
+ },
+ {
+  "date": "2026-11-20",
+  "source": "https://www.tiktok.com/@eliotlehanneur/video/7701381805194136854",
+  "auteur": "eliotlehanneur",
+  "visuel": {
+   "gestes": [
+    [
+     0.5,
+     0.56,
+     0.34
+    ],
+    [
+     12.0,
+     0.44,
+     0.4
+    ],
+    [
+     13.0,
+     0.45,
+     0.35
+    ],
+    [
+     17.0,
+     0.46,
+     0.47
+    ],
+    [
+     19.5,
+     0.47,
+     0.51
+    ],
+    [
+     27.5,
+     0.53,
+     0.41
+    ],
+    [
+     31.0,
+     0.48,
+     0.4
+    ],
+    [
+     40.5,
+     0.62,
+     0.35
+    ],
+    [
+     43.5,
+     0.53,
+     0.44
+    ],
+    [
+     46.5,
+     0.54,
+     0.37
+    ],
+    [
+     48.0,
+     0.54,
+     0.34
+    ],
+    [
+     49.0,
+     0.6,
+     0.34
+    ],
+    [
+     56.5,
+     0.55,
+     0.34
+    ],
+    [
+     59.0,
+     0.32,
+     0.4
+    ]
+   ],
+   "duree": 73.0,
+   "nb_plans": 42,
+   "duree_plan": 1.74,
+   "coupes": [
+    1.5,
+    3.5,
+    5.5,
+    6.0,
+    7.0,
+    8.0,
+    8.5,
+    9.5,
+    10.5,
+    11.5,
+    13.5,
+    16.5,
+    17.5,
+    18.5,
+    21.5,
+    26.0,
+    28.5,
+    30.5,
+    31.5,
+    32.5,
+    34.0,
+    36.5,
+    39.5,
+    40.0,
+    44.5,
+    45.5,
+    49.5,
+    50.5,
+    51.5,
+    53.5,
+    55.0,
+    55.5,
+    58.0,
+    61.5,
+    62.5,
+    65.0,
+    67.0,
+    69.0,
+    69.5,
+    71.0,
+    72.5
+   ],
+   "plans": {
+    "tres_serre": 0.582,
+    "serre": 0.404,
+    "moyen": 0.0,
+    "large": 0.014
+   },
+   "camera": {
+    "fixe": 0.029,
+    "avance": 0.269,
+    "recul": 0.202,
+    "travelling": 0.288,
+    "epaule": 0.212
+   },
+   "nb_personnes": 1,
+   "personnes": [
+    {
+     "place": "centre",
+     "presence": 0.774,
+     "habit": [
+      191,
+      190,
+      189
+     ],
+     "cheveux": [
+      57,
+      37,
+      22
+     ],
+     "sourire": 0.071,
+     "taille": 0.306,
+     "tete_penchee": 6.8,
+     "regard_cote": 0.212
+    },
+    {
+     "place": "gauche",
+     "presence": 0.151,
+     "habit": [
+      11,
+      10,
+      11
+     ],
+     "cheveux": [
+      57,
+      38,
+      26
+     ],
+     "sourire": 0.0,
+     "taille": 0.296,
+     "tete_penchee": 12.2,
+     "regard_cote": 0.227
+    }
+   ],
+   "visages": true,
+   "sourires": 0.056,
+   "energie": 0.723,
+   "mur": [
+    93,
+    85,
+    69
+   ],
+   "palette": [
+    [
+     13,
+     11,
+     10,
+     0.274
+    ],
+    [
+     111,
+     92,
+     74,
+     0.184
+    ],
+    [
+     164,
+     158,
+     154,
+     0.173
+    ],
+    [
+     197,
+     194,
+     191,
+     0.133
+    ],
+    [
+     78,
+     65,
+     51,
+     0.125
+    ],
+    [
+     151,
+     119,
+     107,
+     0.11
+    ]
+   ],
+   "lumiere": {
+    "luminosite": 105.6,
+    "chaleur": 18.1,
+    "saturation": 48.1
+   },
+   "moment": "soir",
+   "postures": []
+  },
+  "audio": {
+   "duree": 72.8,
+   "nb_voix": 2,
+   "voix": [
+    {
+     "hz": 199,
+     "genre": "f",
+     "part": 0.58
+    },
+    {
+     "hz": 135,
+     "genre": "h",
+     "part": 0.42
+    }
+   ],
+   "debit": 5.4,
+   "blanc_moyen": 0.19,
+   "coupes": 5,
+   "dynamique_db": 19.0,
+   "cris": 0.015,
+   "musique": 0.41,
+   "impacts": 58,
+   "impacts_10s": 7.97,
+   "graves": 9,
+   "aigus": 49,
+   "sur_vanne": 29,
+   "evenements": {
+    "laughter": 1
+   },
+   "emotions": {
+    "explique": 6,
+    "enerve": 4,
+    "joyeux": 4,
+    "ferme": 3,
+    "neutre": 3,
+    "reflechit": 2,
+    "interroge": 2,
+    "fatigue": 2
+   }
+  },
+  "claude": {
+   "lieux": [
+    "bureau"
+   ],
+   "moment": "nuit",
+   "costumes": {
+    "presentateur": {
+     "haut": "chemise",
+     "c_haut": "blanc",
+     "motif": "uni",
+     "bas": "pantalon",
+     "chaussures": "ville",
+     "details": [
+      "badge"
+     ],
+     "cheveux": "court",
+     "c_cheveux": "chatain"
+    },
+    "invite": {
+     "haut": "veste",
+     "c_haut": "noir",
+     "motif": "uni",
+     "bas": "pantalon",
+     "chaussures": "ville",
+     "details": [
+      "badge",
+      "stylos"
+     ],
+     "cheveux": "court",
+     "c_cheveux": "chatain"
+    }
+   },
+   "objets": [
+    {
+     "objet": "stylo",
+     "replique": 1
+    }
+   ],
+   "gags": [
+    "Post-it: 'Urgent' sur le bureau",
+    "Calendrier bloqué au Lundi"
+   ],
+   "ambiances": [],
+   "plans": [
+    {
+     "replique": 0,
+     "geste": "mains_hanches",
+     "mouvement": "fixe",
+     "reaction": "sceptique",
+     "plan": "moyen"
+    },
+    {
+     "geste": "pointe_d",
+     "replique": 2,
+     "reaction": "choc",
+     "mouvement": "avance",
+     "plan": "serre"
+    },
+    {
+     "reaction": "aucune",
+     "geste": "desespoir",
+     "mouvement": "recul",
+     "plan": "large",
+     "replique": 27
+    }
+   ]
+  },
+  "realisation": {
+   "moment": "nuit",
+   "lieux": [
+    "bureau"
+   ],
+   "gags": [
+    "Post-it: 'Urgent' sur le bureau",
+    "Calendrier bloqué au Lundi"
+   ],
+   "ambiances": [
+    "pluie"
+   ],
+   "source": "auteur+image",
+   "tenues": {
+    "presentateur": "chemise",
+    "invite": "col_roule"
+   },
+   "plans": [
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe"
+   ]
+  },
+  "video": "2026-11-20_09h55_emission.mp4"
  }
 ]
