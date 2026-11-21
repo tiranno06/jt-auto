@@ -1,12 +1,15 @@
-Modal : 14.31 $ dépensés ce mois-ci (plafond 30 $)
-Casting déjà fait.
-Type de vidéo : sketch long (+1 min)
-Crédits au départ : Claude secours, Mistral ok, Gemini ok, Groq ok, OpenRouter ok, IA Modal ok, ElevenLabs epuise — IA utilisée : mistral
-Refaire (decors) : « PIRE DATE AMOUREUX », mêmes répliques
-Sketch : « PIRE DATE AMOUREUX », 33 répliques
-Casting des voix (sources : kyutai,chatterbox)…
-  kyutai     cml-tts/fr/10087_11650_000028-0002_enh genre f f0   220 {'sim': 1.0, 'blanc': 0.1, 'debit': 0.79, 'mos': 3.01, 'expr': 2.6} OK score 6.88
-  kyutai     cml-tts/fr/10177_10625_000134-0003_enh genre f f0   199 {'sim': 1.0, 'blanc': 0.06, 'debit': 0.71, 'mos': 2.59, 'expr': 4.1} refusée score 6.64
+Relance : reprise depuis le point de sauvegarde c44929106640_v1 (0 bloc(s) d'images déjà dessinés)
+Traceback (most recent call last):
+  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 837, in <module>
+    try: main()
+         ^^^^^^
+  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 249, in main
+    os.environ["CHAINE"] = CHAINE_ORIG                                 # « 2/3 » d'une chaîne de vidéos TikTok, sinon vide
+    ~~~~~~~~~~^^^^^^^^^^
+  File "<frozen os>", line 720, in __setitem__
+  File "<frozen os>", line 794, in encode
+TypeError: str expected, not NoneType
+enh genre f f0   199 {'sim': 1.0, 'blanc': 0.06, 'debit': 0.71, 'mos': 2.59, 'expr': 4.1} refusée score 6.64
   kyutai     cml-tts/fr/10179_11051_000005-0001_enh genre f f0   302 {'sim': 1.0, 'blanc': 0.08, 'debit': 0.82, 'mos': 2.47, 'expr': 2.6} refusée score 6.13
   kyutai     cml-tts/fr/12080_11650_000047-0001_enh genre f f0   242 {'sim': 1.0, 'blanc': 0.08, 'debit': 0.85, 'mos': 2.53, 'expr': 2.7} refusée score 6.29
   kyutai     cml-tts/fr/12205_11650_000004-0002_enh genre f f0   186 {'sim': 1.0, 'blanc': 0.12, 'debit': 0.74, 'mos': 3.2, 'expr': 3.1} OK score 7.27
@@ -75,58 +78,3 @@ style croquis : décors passés à l'encre et à l'aquarelle
 studio : jour, lieux ['restaurant'], tenues presentateur=tshirt, invite=tshirt, 0 figurant(s), ambiances ['vapeur'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
 cartoon : durée 68.4 s, 33 répliques, 1 scène(s), personnages ['presentateur', 'invite']
 Pré-jury impossible ([Errno 2] No such file or directory: '/tmp/tmp6y66xe7n/piste.wav')
-  personne muette en plus non dessinée : 2 personne(s) à l'image dans l'original, 2 qui parlent
-montage : 1 plans (0.0:large>pre/coupe)
-style croquis : décors passés à l'encre et à l'aquarelle
-studio : jour, lieux ['restaurant'], tenues presentateur=tshirt, invite=tshirt, 0 figurant(s), ambiances ['vapeur'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 68.4 s, 33 répliques, 1 scène(s), personnages ['presentateur', 'invite']
-Traceback (most recent call last):
-  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 585, in main
-    try: duree = cartoon.rendre(sk, base + ".mp4", audios, mots=mots, decors=decors, mini=fmt == "mini", limite=limite_job(), deja=(S or {}).get("faits"))
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/jt-auto/jt-auto/moteur/cartoon.py", line 1912, in rendre
-    wav = _bande_son(APPEL, B, CINE, DEBUT_SCENE, DECOUPE, DOUB, FIN_CARTE, GEL, REMB, SANS_ENTREE, SILENCES, TITRES, audios, mini, ph, places, sk, tmp, total, transitions)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/jt-auto/jt-auto/moteur/cartoon.py", line 416, in _bande_son
-    with wave.open(DOUB["piste"]) as w_:
-         ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/wave.py", line 649, in open
-    return Wave_read(f)
-           ^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/wave.py", line 282, in __init__
-    f = builtins.open(f, 'rb')
-        ^^^^^^^^^^^^^^^^^^^^^^
-FileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmp6y66xe7n/piste.wav'
-Moteur cartoon en échec ([Errno 2] No such file or directory: '/tmp/tmp6y66xe7n/piste.wav') : nouvel essai en rendu simple, sans décor IA.
-cartoon : durée 68.4 s, 33 répliques, 1 scène(s), personnages ['presentateur', 'invite']
-Traceback (most recent call last):
-  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 585, in main
-    try: duree = cartoon.rendre(sk, base + ".mp4", audios, mots=mots, decors=decors, mini=fmt == "mini", limite=limite_job(), deja=(S or {}).get("faits"))
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/jt-auto/jt-auto/moteur/cartoon.py", line 1912, in rendre
-    wav = _bande_son(APPEL, B, CINE, DEBUT_SCENE, DECOUPE, DOUB, FIN_CARTE, GEL, REMB, SANS_ENTREE, SILENCES, TITRES, audios, mini, ph, places, sk, tmp, total, transitions)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/jt-auto/jt-auto/moteur/cartoon.py", line 416, in _bande_son
-    with wave.open(DOUB["piste"]) as w_:
-         ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/wave.py", line 649, in open
-    return Wave_read(f)
-           ^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/wave.py", line 282, in __init__
-    f = builtins.open(f, 'rb')
-        ^^^^^^^^^^^^^^^^^^^^^^
-FileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmp6y66xe7n/piste.wav'
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 837, in <module>
-    try: main()
-         ^^^^^^
-  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 692, in main
-    duree = cartoon.rendre(sk, base + ".mp4", audios, mots=mots, decors={}, mini=fmt == "mini")
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/jt-auto/jt-auto/moteur/cartoon.py", line 1912, in rendre
-    wav = _bande_son(APPEL, B, CINE, DEBUT_SCENE, DECOUPE, DOUB, FIN_CARTE, GEL, REMB, SANS_ENTREE, SILENCES, TITRES, audios, mini, ph, places, sk, tmp, total, transitions)
-                                                                                                    ^^^^^^^^
-UnboundLocalError: cannot access local variable 'SILENCES' where it is not associated with a value
