@@ -1,1 +1,102 @@
-{}
+{
+ "kyutai cml-tts<chemin> genre f fN N {'sim«…»blanc«…»debit«…»mos«…»expr': N} refusée score N": {
+  "n": 1,
+  "premiere": "2026-11-21",
+  "derniere": "2026-11-21",
+  "exemple": "kyutai     cml-tts/fr/10177_10625_000134-0003_enh genre f f0   199 {'sim': 1.0, 'blanc': 0.06, 'debit': 0.71, 'mos': 2.59, 'expr': 4.1} refusée score 6.64",
+  "etape": "",
+  "jours": {
+   "2026-11-21": 1
+  }
+ },
+ "kyutai cml-tts<chemin> genre h fN N {'sim«…»blanc«…»debit«…»mos«…»expr': N} refusée score N": {
+  "n": 1,
+  "premiere": "2026-11-21",
+  "derniere": "2026-11-21",
+  "exemple": "kyutai     cml-tts/fr/1770_1028_000036-0002_enhan genre h f0   124 {'sim': 1.0, 'blanc': 0.06, 'debit': 0.82, 'mos': 2.28, 'expr': 4.4} refusée score 6.32",
+  "etape": "",
+  "jours": {
+   "2026-11-21": 1
+  }
+ },
+ "chatterbox invite genre h fN N {'sim«…»blanc«…»debit«…»mos«…»expr': N} refusée score N": {
+  "n": 1,
+  "premiere": "2026-11-21",
+  "derniere": "2026-11-21",
+  "exemple": "chatterbox invite                                 genre h f0    89 {'sim': 1.0, 'blanc': 0.06, 'debit': 0.67, 'mos': 2.44, 'expr': 10.7} refusée score 5.66",
+  "etape": "",
+  "jours": {
+   "2026-11-21": 1
+  }
+ },
+ "chatterbox envoyee genre f fN N {'sim«…»blanc«…»debit«…»mos«…»expr': N} refusée score N": {
+  "n": 1,
+  "premiere": "2026-11-21",
+  "derniere": "2026-11-21",
+  "exemple": "chatterbox envoyee                                genre f f0   208 {'sim': 1.0, 'blanc': 0.16, 'debit': 0.7, 'mos': 1.95, 'expr': 3.8} refusée score 4.89",
+  "etape": "",
+  "jours": {
+   "2026-11-21": 1
+  }
+ },
+ "Pré-jury impossible ([Errno N] No such file or directory: «…»)": {
+  "n": 1,
+  "premiere": "2026-11-21",
+  "derniere": "2026-11-21",
+  "exemple": "Pré-jury impossible ([Errno 2] No such file or directory: '/tmp/tmp6y66xe7n/piste.wav')",
+  "etape": "",
+  "jours": {
+   "2026-11-21": 1
+  }
+ },
+ "Traceback (most recent call last)": {
+  "n": 1,
+  "premiere": "2026-11-21",
+  "derniere": "2026-11-21",
+  "exemple": "Traceback (most recent call last):",
+  "etape": "",
+  "jours": {
+   "2026-11-21": 1
+  }
+ },
+ "FileNotFoundError: [Errno N] No such file or directory: «…»": {
+  "n": 1,
+  "premiere": "2026-11-21",
+  "derniere": "2026-11-21",
+  "exemple": "FileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmp6y66xe7n/piste.wav'",
+  "etape": "",
+  "jours": {
+   "2026-11-21": 1
+  }
+ },
+ "Moteur cartoon en échec ([Errno N] No such file or directory: «…») : nouvel essai en rendu simple, sans décor IA.": {
+  "n": 1,
+  "premiere": "2026-11-21",
+  "derniere": "2026-11-21",
+  "exemple": "Moteur cartoon en échec ([Errno 2] No such file or directory: '/tmp/tmp6y66xe7n/piste.wav') : nouvel essai en rendu simple, sans décor IA.",
+  "etape": "",
+  "jours": {
+   "2026-11-21": 1
+  }
+ },
+ "During handling of the above exception, another exception occurred": {
+  "n": 1,
+  "premiere": "2026-11-21",
+  "derniere": "2026-11-21",
+  "exemple": "During handling of the above exception, another exception occurred:",
+  "etape": "",
+  "jours": {
+   "2026-11-21": 1
+  }
+ },
+ "UnboundLocalError: cannot access local variable «…» where it is not associated with a value": {
+  "n": 1,
+  "premiere": "2026-11-21",
+  "derniere": "2026-11-21",
+  "exemple": "UnboundLocalError: cannot access local variable 'SILENCES' where it is not associated with a value",
+  "etape": "",
+  "jours": {
+   "2026-11-21": 1
+  }
+ }
+}

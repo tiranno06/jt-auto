@@ -1,60 +1,132 @@
-Modal : 14.19 $ dépensés ce mois-ci (plafond 30 $)
+Modal : 14.31 $ dépensés ce mois-ci (plafond 30 $)
 Casting déjà fait.
 Type de vidéo : sketch long (+1 min)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, Groq ok, OpenRouter ok, IA Modal ok, ElevenLabs epuise — IA utilisée : mistral
-Recherche web : 0 requête(s) — le modèle n'a pas consulté le web, vérification sur les articles RSS uniquement
-Idée 0 : « POV : tu réalises que ton père a encore menti sur son âge »
-Idée 1 : « Quand ton pote te jure qu'il a 'juste regardé' une série porno... mais qu'en vrai, il a tout regardé »
-Idée 2 : « POV : tu essaies d'expliquer à ton père que les 'petits bisous' sur la joue ne sont plus d'actualité »
-Idée 3 : « Quand le Wi-Fi de ta résidence étudiante décide de couper... mais que c'est en fait ton voisin qui le sabote »
-Idée 4 : « POV : tu demandes à ton pote s'il a vu ton message, et il te répond 'Ouais, ouais, je t'ai répondu' »
-Idée 5 : « Quand tu réalises que ton chat a volé ton sandwich... et qu'il te regarde avec un air de supériorité »
-Remarque comprise : L'auteur indique que le dialogue change parfois de personnage et qu'à la fin la conversation continue sans que les personnages ne parlent.
-Remarque de l'auteur : 1 réplique(s) à rendre à un autre personnage, 0 correction(s) : 
-Remarque de l'auteur appliquée : réplique 5 -> presentateur
-  son téléchargé (yt-dlp --impersonate chrome)
-  son d'origine repris pour 33 répliques (mêmes instants)
-Refaire (remarque) : « PIRE DATE AMOUREUX », mêmes répliques
+Refaire (decors) : « PIRE DATE AMOUREUX », mêmes répliques
 Sketch : « PIRE DATE AMOUREUX », 33 répliques
+Casting des voix (sources : kyutai,chatterbox)…
+  kyutai     cml-tts/fr/10087_11650_000028-0002_enh genre f f0   220 {'sim': 1.0, 'blanc': 0.1, 'debit': 0.79, 'mos': 3.01, 'expr': 2.6} OK score 6.88
+  kyutai     cml-tts/fr/10177_10625_000134-0003_enh genre f f0   199 {'sim': 1.0, 'blanc': 0.06, 'debit': 0.71, 'mos': 2.59, 'expr': 4.1} refusée score 6.64
+  kyutai     cml-tts/fr/10179_11051_000005-0001_enh genre f f0   302 {'sim': 1.0, 'blanc': 0.08, 'debit': 0.82, 'mos': 2.47, 'expr': 2.6} refusée score 6.13
+  kyutai     cml-tts/fr/12080_11650_000047-0001_enh genre f f0   242 {'sim': 1.0, 'blanc': 0.08, 'debit': 0.85, 'mos': 2.53, 'expr': 2.7} refusée score 6.29
+  kyutai     cml-tts/fr/12205_11650_000004-0002_enh genre f f0   186 {'sim': 1.0, 'blanc': 0.12, 'debit': 0.74, 'mos': 3.2, 'expr': 3.1} OK score 7.27
+  kyutai     cml-tts/fr/12977_10625_000037-0001_enh genre f f0   240 {'sim': 1.0, 'blanc': 0.08, 'debit': 0.78, 'mos': 2.73, 'expr': 3.5} OK score 6.76
+  kyutai     cml-tts/fr/1406_1028_000009-0003_enhan genre h f0   105 {'sim': 1.0, 'blanc': 0.04, 'debit': 0.78, 'mos': 3.09, 'expr': 3.8} OK score 7.43
+  kyutai     cml-tts/fr/1591_1028_000108-0004_enhan genre f f0   220 {'sim': 1.0, 'blanc': 0.12, 'debit': 0.71, 'mos': 2.71, 'expr': 2.6} OK score 6.33
+  kyutai     cml-tts/fr/1770_1028_000036-0002_enhan genre h f0   124 {'sim': 1.0, 'blanc': 0.06, 'debit': 0.82, 'mos': 2.28, 'expr': 4.4} refusée score 6.32
+  kyutai     cml-tts/fr/2114_1656_000053-0001_enhan genre h f0   129 {'sim': 1.0, 'blanc': 0.12, 'debit': 0.84, 'mos': 2.95, 'expr': 3.8} OK score 7.27
+  kyutai     cml-tts/fr/2154_2576_000020-0003_enhan genre f f0   185 {'sim': 1.0, 'blanc': 0.34, 'debit': 0.97, 'mos': 3.04, 'expr': 3.4} OK score 7.43
+  kyutai     cml-tts/fr/2216_1745_000007-0001_enhan genre h f0   122 {'sim': 0.97, 'blanc': 0.0, 'debit': 0.86, 'mos': 3.04, 'expr': 4.8} OK score 7.39
+  kyutai     cml-tts/fr/2223_1745_000009-0002_enhan genre h f0   121 {'sim': 1.0, 'blanc': 0.28, 'debit': 0.92, 'mos': 2.67, 'expr': 3.4} OK score 6.80
+  kyutai     cml-tts/fr/2465_1943_000152-0002_enhan genre f f0   202 {'sim': 1.0, 'blanc': 0.08, 'debit': 0.77, 'mos': 3.04, 'expr': 2.2} OK score 6.76
+  kyutai     cml-tts/fr/296_1028_000022-0001_enhanc genre h f0   138 {'sim': 1.0, 'blanc': 0.06, 'debit': 0.88, 'mos': 3.35, 'expr': 3.2} OK score 7.73
+  kyutai     cml-tts/fr/3267_1902_000075-0001_enhan genre f f0   267 {'sim': 1.0, 'blanc': 0.0, 'debit': 0.76, 'mos': 2.96, 'expr': 3.1} OK score 6.94
+  chatterbox presentateur                           genre h f0   142 {'sim': 1.0, 'blanc': 0.06, 'debit': 0.81, 'mos': 2.63, 'expr': 5.5} OK score 6.13
+  chatterbox invite                                 genre h f0    89 {'sim': 1.0, 'blanc': 0.06, 'debit': 0.67, 'mos': 2.44, 'expr': 10.7} refusée score 5.66
+  chatterbox envoyee                                genre f f0   208 {'sim': 1.0, 'blanc': 0.16, 'debit': 0.7, 'mos': 1.95, 'expr': 3.8} refusée score 4.89
+  -> presentateur : kyutai:cml-tts/fr/296_1028_000022-0001_enhanced.wav, kyutai:cml-tts/fr/1406_1028_000009-0003_enhanced.wav, kyutai:cml-tts/fr/2216_1745_000007-0001_enhanced.wav
+  -> invite : kyutai:cml-tts/fr/1406_1028_000009-0003_enhanced.wav, kyutai:cml-tts/fr/2216_1745_000007-0001_enhanced.wav, kyutai:cml-tts/fr/2114_1656_000053-0001_enhanced.wav
+  -> envoyee : kyutai:cml-tts/fr/2154_2576_000020-0003_enhanced.wav, kyutai:cml-tts/fr/12205_11650_000004-0002_enhanced.wav, kyutai:cml-tts/fr/3267_1902_000075-0001_enhanced.wav
+  voix sur mesure des personnages en remplaçantes
+  voix 1 (invite, kyutai:cml-tts/fr/1406_1028_000009-00, prise 1) {'sim': 1.0, 'blanc': 0, 'debit': 0.56} OK
+  voix 3 (invite, kyutai:cml-tts/fr/1406_1028_000009-00, prise 1) {'sim': 0.98, 'blanc': 0.24, 'debit': 0.9, 'mos': 2.82} OK
+  voix 6 (invite, kyutai:cml-tts/fr/1406_1028_000009-00, prise 1) {'sim': 1.0, 'blanc': 0, 'debit': 1.25, 'mos': 2.12} refaite
+  voix 8 (invite, kyutai:cml-tts/fr/1406_1028_000009-00, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.92, 'mos': 2.75} OK
+  voix 10 (invite, kyutai:cml-tts/fr/1406_1028_000009-00, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.79, 'mos': 3.12} OK
+  voix 12 (invite, kyutai:cml-tts/fr/1406_1028_000009-00, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.31, 'mos': 2.82} OK
+  voix 14 (invite, kyutai:cml-tts/fr/1406_1028_000009-00, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.05, 'mos': 2.89} OK
+  voix 16 (invite, kyutai:cml-tts/fr/1406_1028_000009-00, prise 1) {'sim': 0.97, 'blanc': 0.0, 'debit': 1.06, 'mos': 3.03} OK
+  voix 18 (invite, kyutai:cml-tts/fr/1406_1028_000009-00, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.78, 'mos': 3.34} OK
+  voix 20 (invite, kyutai:cml-tts/fr/1406_1028_000009-00, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.76, 'mos': 2.93} OK
+  voix 22 (invite, kyutai:cml-tts/fr/1406_1028_000009-00, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.11, 'mos': 3.25} OK
+  voix 24 (invite, kyutai:cml-tts/fr/1406_1028_000009-00, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.83, 'mos': 3.64} OK
+  voix 26 (invite, kyutai:cml-tts/fr/1406_1028_000009-00, prise 1) {'sim': 0.95, 'blanc': 0.0, 'debit': 0.7, 'mos': 2.96} OK
+  voix 28 (invite, kyutai:cml-tts/fr/1406_1028_000009-00, prise 1) {'sim': 1.0, 'blanc': 0, 'debit': 0.87, 'mos': 1.63} refaite
+  voix 30 (invite, kyutai:cml-tts/fr/1406_1028_000009-00, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.84, 'mos': 2.97} OK
+  voix 32 (invite, kyutai:cml-tts/fr/1406_1028_000009-00, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.03, 'mos': 3.06} OK
+  voix 6 (invite, kyutai:cml-tts/fr/1406_1028_000009-00, prise 2) {'sim': 1.0, 'blanc': 0, 'debit': 1.08, 'mos': 2.96} OK
+  voix 28 (invite, kyutai:cml-tts/fr/1406_1028_000009-00, prise 2) {'sim': 1.0, 'blanc': 0, 'debit': 0.58} OK
+  voix 0 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.91, 'mos': 3.18} OK
+  voix 2 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0.04, 'debit': 0.91, 'mos': 3.31} OK
+  voix 4 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0, 'debit': 1.38, 'mos': 2.97} OK
+  voix 5 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.97, 'mos': 2.78} OK
+  voix 7 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.82, 'mos': 2.63} OK
+  voix 9 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.93, 'mos': 3.48} OK
+  voix 11 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.96, 'mos': 3.53} OK
+  voix 13 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.77, 'mos': 3.04} OK
+  voix 15 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.97, 'mos': 3.45} OK
+  voix 17 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.82, 'mos': 3.55} OK
+  voix 19 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.88, 'mos': 3.33} OK
+  voix 21 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.18, 'mos': 3.49} OK
+  voix 23 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.92, 'mos': 3.75} OK
+  voix 25 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.18, 'mos': 3.47} OK
+  voix 27 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.85, 'mos': 2.49} refaite
+  voix 29 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.82, 'mos': 3.23} OK
+  voix 31 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.01, 'mos': 2.59} refaite
+  voix 27 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 2) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.95, 'mos': 3.79} OK
+  voix 31 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 2) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.8, 'mos': 3.76} OK
+Voix : Kyutai TTS (CC BY 4.0), voix CML-TTS (CC BY 4.0)
   personne muette en plus non dessinée : 2 personne(s) à l'image dans l'original, 2 qui parlent
-  décor semi-réaliste 0 : lieu déjà montré cette semaine, nouveau tirage
-  décor semi-réaliste 0 (cadré ×1.50, pieds au sol) : [semi] cozy rustic French bistro with dark wooden booths and
+  décor semi-réaliste 0 : aucun sol libre pour poser les pieds, décor dessiné : [semi] cozy rustic French bistro with dark wooden booths and
+  personne muette en plus non dessinée : 2 personne(s) à l'image dans l'original, 2 qui parlent
   personne muette en plus non dessinée : 2 personne(s) à l'image dans l'original, 2 qui parlent
 montage : 1 plans (0.0:large>pre/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
 studio : jour, lieux ['restaurant'], tenues presentateur=tshirt, invite=tshirt, 0 figurant(s), ambiances ['vapeur'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 68.1 s, 33 répliques, 1 scène(s), personnages ['presentateur', 'invite']
+cartoon : durée 68.4 s, 33 répliques, 1 scène(s), personnages ['presentateur', 'invite']
+Pré-jury impossible ([Errno 2] No such file or directory: '/tmp/tmp6y66xe7n/piste.wav')
   personne muette en plus non dessinée : 2 personne(s) à l'image dans l'original, 2 qui parlent
 montage : 1 plans (0.0:large>pre/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
 studio : jour, lieux ['restaurant'], tenues presentateur=tshirt, invite=tshirt, 0 figurant(s), ambiances ['vapeur'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 68.1 s, 33 répliques, 1 scène(s), personnages ['presentateur', 'invite']
-  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~1022 images)
-  morceau 3066–4088 reçu d'une machine d'aide
-  morceau 1022–2044 reçu d'une machine d'aide
-  morceau 2044–3066 reçu d'une machine d'aide
-  dessin partagé terminé en 4.1 min
-Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury : 4 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
-Jury qualité (ia) : 8.2/10 — Humoriste 8.6/10 :  | Réalisateur 8.0/10 : 28 s Le jeu du présentateur est un peu neutre à ce moment-clé. | Directeur artistique 8.0/10 : 1 s Le design général est propre mais on aimerait un peu plus de contraste entre les tenues dans ce décor de bar. | Ingénieur du son 8.8/10 :  | Spectateur TikTok 7.8/10 : 
-fin en boucle : la dernière image se raccorde à la première (0.35 s de fondu)
-  [vidéo finie · synchro] ✔ bouches du bon personnage
-  [vidéo finie · technique] ✔ sauts, clignotements, personnages (0 remarque(s))
-  transcription Groq (Whisper, gratuit) : 319 mots
-  réseau : erreur 503 passagère, nouvel essai dans 2 s
-  Gemini n'a pas pu écouter (gemini-flash-latest : HTTP Error 503: Service Unavailable)
-  Gemini n'a pas pu écouter (gemini-2.5-flash : HTTP Error 404: Not Found)
-  karaoké contrôlé à l'oreille : 224 mots, écart médian 0.05 s
-  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 83 %)
-  [vidéo finie · contrôle IA] 0 remarque(s)
-  réseau : coupure (The read operation timed out), nouvel essai dans 2 s
-  [vidéo finie · fidélité à l'audio] ✔ Gemini a regardé et écouté la vidéo finie
-  1 remarque(s) légère(s) gardée(s) au journal seulement : 43.0 s sous-titre « Ouais, une fois. » mais on entend « E
-Contrôle de la vidéo finie : 0 point(s) à vérifier
-Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, groq = ok, ia = mistral ×1, groq ×1, gemini ×3, appels = {'mistral': 1, 'groq': 1, 'gemini': 3}, epuisees = [], quota = {'groq': {'reste_jour': 998, 'limite_jour': 1000}}, voix = tiktok, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 19767, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 39, 'total_usd': 0.012, 'modal_mesure_usd': 0.08}
-⏱️ Étapes plus lentes que d'habitude : Contrôle de la vidéo finie 10 min (d'habitude 1 min)
-⏱️ Temps par étape : Installation de la machine 1.3 min, Démarrage du robot 0.2 min, Recherche de l'idée 0.3 min, Décors 0.7 min, Dessin des images 5.8 min, Contrôle qualité par le jury 4.1 min, Contrôle de la vidéo finie 10.6 min, Corrections du compte rendu 0.5 min
-Quota de l'API GitHub : 4921 appels restants
-OK : sortie/2026-11-21_12h47_emission.mp4 (69 s)
+cartoon : durée 68.4 s, 33 répliques, 1 scène(s), personnages ['presentateur', 'invite']
+Traceback (most recent call last):
+  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 585, in main
+    try: duree = cartoon.rendre(sk, base + ".mp4", audios, mots=mots, decors=decors, mini=fmt == "mini", limite=limite_job(), deja=(S or {}).get("faits"))
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/jt-auto/jt-auto/moteur/cartoon.py", line 1912, in rendre
+    wav = _bande_son(APPEL, B, CINE, DEBUT_SCENE, DECOUPE, DOUB, FIN_CARTE, GEL, REMB, SANS_ENTREE, SILENCES, TITRES, audios, mini, ph, places, sk, tmp, total, transitions)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/jt-auto/jt-auto/moteur/cartoon.py", line 416, in _bande_son
+    with wave.open(DOUB["piste"]) as w_:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/wave.py", line 649, in open
+    return Wave_read(f)
+           ^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/wave.py", line 282, in __init__
+    f = builtins.open(f, 'rb')
+        ^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmp6y66xe7n/piste.wav'
+Moteur cartoon en échec ([Errno 2] No such file or directory: '/tmp/tmp6y66xe7n/piste.wav') : nouvel essai en rendu simple, sans décor IA.
+cartoon : durée 68.4 s, 33 répliques, 1 scène(s), personnages ['presentateur', 'invite']
+Traceback (most recent call last):
+  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 585, in main
+    try: duree = cartoon.rendre(sk, base + ".mp4", audios, mots=mots, decors=decors, mini=fmt == "mini", limite=limite_job(), deja=(S or {}).get("faits"))
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/jt-auto/jt-auto/moteur/cartoon.py", line 1912, in rendre
+    wav = _bande_son(APPEL, B, CINE, DEBUT_SCENE, DECOUPE, DOUB, FIN_CARTE, GEL, REMB, SANS_ENTREE, SILENCES, TITRES, audios, mini, ph, places, sk, tmp, total, transitions)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/jt-auto/jt-auto/moteur/cartoon.py", line 416, in _bande_son
+    with wave.open(DOUB["piste"]) as w_:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/wave.py", line 649, in open
+    return Wave_read(f)
+           ^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/wave.py", line 282, in __init__
+    f = builtins.open(f, 'rb')
+        ^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmp6y66xe7n/piste.wav'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 837, in <module>
+    try: main()
+         ^^^^^^
+  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 692, in main
+    duree = cartoon.rendre(sk, base + ".mp4", audios, mots=mots, decors={}, mini=fmt == "mini")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/jt-auto/jt-auto/moteur/cartoon.py", line 1912, in rendre
+    wav = _bande_son(APPEL, B, CINE, DEBUT_SCENE, DECOUPE, DOUB, FIN_CARTE, GEL, REMB, SANS_ENTREE, SILENCES, TITRES, audios, mini, ph, places, sk, tmp, total, transitions)
+                                                                                                    ^^^^^^^^
+UnboundLocalError: cannot access local variable 'SILENCES' where it is not associated with a value
