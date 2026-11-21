@@ -1153,3 +1153,14 @@ class TestPannes21Novembre(unittest.TestCase):
         self.assertIn('"source": "refaire"}], "refaire")]', src)
         self.assertIn("for modele in list(video_ia.MODELES)[:2]:", open(os.path.join(os.path.dirname(__file__), "..", "moteur", "fiche_tournage.py"), encoding="utf-8").read())
         self.assertIn("OUTIL, max_tokens=8000)", open(os.path.join(os.path.dirname(__file__), "..", "moteur", "qualite.py"), encoding="utf-8").read())
+
+    def test_tous_les_workflows_lisibles(self):
+        """vitrine.yml était illisible depuis le 15 novembre (« : » dans le nom d'une étape) : GitHub refusait de le lancer (422)
+        et la recherche des nouveaux créateurs du lundi ne tournait plus."""
+        try: import yaml
+        except ImportError: self.skipTest("pyyaml absent")
+        import glob
+        for f in glob.glob(os.path.join(os.path.dirname(__file__), "..", ".github", "workflows", "*.yml")):
+            with self.subTest(f=os.path.basename(f)):
+                d = yaml.safe_load(open(f, encoding="utf-8"))
+                self.assertTrue(d.get("name") and d.get("jobs"), f)

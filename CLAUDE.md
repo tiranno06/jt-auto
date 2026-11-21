@@ -688,7 +688,9 @@
   poubelle ou un carton (`animaux.POUR_HUMAINS`, `contenant_humain` : l'objet devant lui des pieds à la taille, couleur dite
   `couleur_contenant` -> fiche "dans_coul"), le rôle nommé dans la remarque est visé (`remarque.role_par_nom` : « l'invitée »,
   « le présentateur »), « dans une poubelle » n'est plus pris pour un lieu, et aucun figurant n'est ajouté quand un contenant est
-  compris ; « boîte de nuit » n'est plus un carton.
+  compris ; « boîte de nuit » n'est plus un carton. **vitrine.yml illisible depuis le 15 novembre** (« : » dans le nom d'une étape) : GitHub
+  refusait de le lancer (bouton « 🔄 Chercher maintenant » : erreur 422) et la recherche des nouveaux créateurs du lundi ne tournait
+  plus -> nom entre guillemets ; test `test_tous_les_workflows_lisibles` (chaque workflow relu, nom et jobs présents).
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.
