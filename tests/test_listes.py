@@ -1357,3 +1357,33 @@ class TestListe21NovembreSoir(unittest.TestCase):
         self.assertTrue(P.repris_ailleurs({"id": "1", "titre": "Quand ton grand frère pique la console"}, "yan_animation0", pris))
         self.assertFalse(P.repris_ailleurs({"id": "1", "titre": "Mamie au marché du dimanche"}, "yan_animation0", pris))
         with mock.patch.dict(os.environ, {"CHAINES_CONCURRENTES": "@uneautre\n@petitsdramas"}): self.assertEqual(P.concurrentes(), ["uneautre"])
+
+
+class TestConcurrence(unittest.TestCase):
+    """Recherche de chaînes concurrentes (demande de l'auteur du 21 novembre) : triple vérification + comparaison."""
+    def setUp(self): sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "moteur"))
+
+    def test_recherche_triple_verification(self):
+        import concurrence as C, time as _t
+        now = _t.time()
+        def vids(titres, vues=5000):
+            return [{"id": str(k), "url": f"https://www.tiktok.com/@x/video/{k}", "duree": 40, "vues": vues, "date": now - 86400 * k, "titre": t}
+                    for k, t in enumerate(titres)]
+        base = {"yan_animation0": vids(["Quand mon frère @doubleurfou a repris ça", "Partie 2 @doubleurfou @cuisinier"] + ["histoire"] * 6),
+                "doubleurfou": vids([f"🎧 son original @yan_animation0 #doublage #animation"] * 4 + ["#animation trop drôle @vignianimation"] * 4),
+                "cuisinier": vids(["Recette du jour #food"] * 8)}
+        lister = lambda p: base.get(p, [])
+        with mock.patch.dict(os.environ, {"PROFILS_TIKTOK": "@yan_animation0\n@vignianimation", "CHAINES_CONCURRENTES": "", "PROFILS_INTERDITS": ""}):
+            with mock.patch.object(C, "image", lambda url, regarder=None: (True, "dessin animé")):
+                r = C.chercher(journal=lambda m: None, lister=lister)
+            self.assertEqual([f["profil"] for f in r], ["doubleurfou"])      # le cuisinier ne crédite aucun son : écarté (texte)
+            self.assertTrue(r[0]["image_verifiee"]); self.assertGreater(r[0]["ressemblance"], 30)
+            self.assertEqual(r[0]["createurs_communs"], ["vignianimation", "yan_animation0"])
+            with mock.patch.object(C, "image", lambda url, regarder=None: (False, "vraies personnes")):
+                r2 = C.chercher(journal=lambda m: None, lister=lister)
+            self.assertEqual(r2, [])                                        # pas le même genre à l'image : écarté
+        ok, d, _ = C.format_(vids(["a"] * 8, vues=200)); self.assertFalse(ok)   # trop peu de vues
+
+    def test_branche_sur_le_site(self):
+        src = open(os.path.join(os.path.dirname(__file__), "..", "moteur", "site.py"), encoding="utf-8").read()
+        self.assertIn('id="chercherConcurrentes"', src); self.assertIn('lancerFlux("concurrence.yml"', src); self.assertIn("function rendreConcurrentes", src)

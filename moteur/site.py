@@ -171,7 +171,7 @@ def application(nom):
 
 # Service worker : l'appli s'ouvre même hors connexion (dernière version de la page), sans jamais mettre en cache
 # les vidéos (trop lourdes) ni les appels à GitHub.
-SW = r"""const CACHE = "regie-v32";
+SW = r"""const CACHE = "regie-v33";
 const COQUILLE = ["./", "manifest.webmanifest", "logo-192.png", "logo-512.png", "poppins-500.ttf", "poppins-700.ttf"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(COQUILLE))); self.skipWaiting(); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(k => Promise.all(k.filter(x => x !== CACHE).map(x => caches.delete(x))))); self.clients.claim(); });
@@ -411,7 +411,10 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <div id="profilsEtat"></div>
     <button class="second" id="tkConnus" style="width:100%;margin-bottom:6px">➕ Ajouter les profils déjà connus</button>
     <p class="note" id="tkConnusNote"></p>
-    <label>🥊 Chaînes concurrentes (qui doublent aussi des sons TikTok)<div class="jeton"><textarea data-var="CHAINES_CONCURRENTES" data-def="" data-texte="1" maxlength="1000" rows="2" placeholder="@une_chaine_qui_double&#10;@une_autre"></textarea><button class="second" data-enr="CHAINES_CONCURRENTES" style="flex:none;padding:10px 14px">OK</button></div></label>
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><b style="flex:1">🥊 Chaînes concurrentes</b><button class="second" id="chercherConcurrentes" style="flex:none;padding:8px 12px">🔍 Chercher</button></div>
+    <p class="note" id="suiviConcurrentes"></p>
+    <div id="concurrentes"><p class="note">Touchez « 🔍 Chercher » : le robot trouve des chaînes qui refont, comme vous, des sons TikTok en dessin animé (vérifiées 3 fois : texte, format, image) et les compare à la vôtre.</p></div>
+    <label>Chaînes concurrentes suivies (qui doublent aussi des sons TikTok)<div class="jeton"><textarea data-var="CHAINES_CONCURRENTES" data-def="" data-texte="1" maxlength="1000" rows="2" placeholder="@une_chaine_qui_double&#10;@une_autre"></textarea><button class="second" data-enr="CHAINES_CONCURRENTES" style="flex:none;padding:10px 14px">OK</button></div></label>
     <p class="note">Le robot lit leurs vidéos récentes : un son qu'elles ont déjà repris (lien cité, ou créateur cité avec un titre qui ressemble) n'est pas choisi.</p>
     <label>🚫 Profils à ne jamais reprendre (liste noire)<div class="jeton"><textarea data-var="PROFILS_INTERDITS" data-def="" data-texte="1" maxlength="2000" rows="2" placeholder="@profil_qui_a_reclame"></textarea><button class="second" data-enr="PROFILS_INTERDITS" style="flex:none;padding:10px 14px">OK</button></div></label>
     <p class="note">Ces profils ne sont jamais tirés au hasard, même s'ils sont dans la liste ci-dessus. Les profils dont la bio interdit la reprise (« ne pas reprendre », « no repost »…) sont écartés tout seuls.</p>
@@ -954,6 +957,22 @@ function rendreOutils(){
   $("#resumeOutils").textContent=rouges.length?"⚠️":"";
   $("#alerteCredit").innerHTML=rouges.length?`<div class="alerte">⚠️ ${rouges.map(x=>x[2].split(" :")[0]).join(", ")} : crédit à vérifier (⚙️ Réglages → Crédits et outils). Les vidéos sortent quand même avec les outils gratuits.</div>`:"";
 }
+// 🥊 chaînes concurrentes proposées (episodes/concurrentes_proposees.json, moteur/concurrence.py)
+function rendreConcurrentes(d){
+  const z=$("#concurrentes"); if(!z||!d||!Array.isArray(d.profils)) return;
+  if(!d.profils.length){z.innerHTML=`<p class="note">Aucune chaîne du même genre trouvée le ${esc(d.date)}.</p>`;return}
+  z.innerHTML=`<p class="note">Trouvées le ${esc(d.date)} (de la plus ressemblante à la moins) :</p>`+d.profils.map(f=>`<div class="auto"><div class="txt"><b>@${esc(f.profil)}</b> <span class="badge ${f.ressemblance>=50?"ok":"att"}">ressemblance ${f.ressemblance}/100</span>
+    <small>✔ texte : ${esc(f.texte)}<br>✔ format : ${esc(f.format)}<br>${f.image_verifiee?"✔":"?"} image : ${esc(f.image||"non vérifiée")}${(f.createurs_communs||[]).length?`<br>Créateurs repris comme vous : ${f.createurs_communs.map(x=>"@"+esc(x)).join(", ")}`:""}${f.exemple?` · <a style="color:var(--bleu)" href="${esc(f.exemple)}" target="_blank" rel="noopener">voir ↗</a>`:""}</small></div>
+    <button class="second" data-conc="${esc(f.profil)}" style="flex:none;padding:8px 12px">➕</button><button class="second" data-jamais="${esc(f.profil)}" style="flex:none;padding:8px 12px">🚫</button></div>`).join("");
+  const ajoute=(sel,p)=>{const t=document.querySelector(`[data-var="${sel}"]`); if(!t) return; if(!new RegExp("@?"+p.replace(/[.\-]/g,"\\$&")+"\\b","i").test(t.value)) t.value=(t.value.trim()?t.value.trim()+"\n":"")+"@"+p; t.scrollIntoView({behavior:"smooth",block:"center"}); toast("@"+p+" ajouté : touchez OK pour enregistrer")};
+  z.querySelectorAll("[data-conc]").forEach(b=>b.onclick=()=>ajoute("CHAINES_CONCURRENTES",b.dataset.conc));
+  z.querySelectorAll("[data-jamais]").forEach(b=>b.onclick=()=>ajoute("PROFILS_INTERDITS",b.dataset.jamais));
+}
+$("#chercherConcurrentes").onclick=()=>{
+  if(!lireJeton()){toast("Connectez d'abord la régie (une seule fois)");return}
+  lancerFlux("concurrence.yml",$("#chercherConcurrentes"),"🔍 Recherche de chaînes concurrentes (10 à 30 min)…",null,$("#suiviConcurrentes"),
+    async ok=>{ if(ok){ try{rendreConcurrentes(await lireEpisode("concurrentes_proposees.json"))}catch(e){} toast("Recherche terminée ✓")} });
+};
 $("#chercherCreateurs").onclick=()=>{                                    // recherche des nouveaux créateurs sans attendre le lundi
   if(!lireJeton()){toast("Connectez d'abord la régie (une seule fois)");return}
   lancerFlux("vitrine.yml",$("#chercherCreateurs"),"🔍 Recherche de nouveaux créateurs (5 à 20 min)…",null,$("#suiviCreateurs"),
@@ -993,6 +1012,7 @@ async function actualiserStats(){
     const [h,st,cr,rc,dc,vt,pn]=await Promise.all([lireEpisode("historique.json").catch(()=>null),lireEpisode("stats.json").catch(()=>null),lireEpisode("credits.json").catch(()=>null),lireEpisode("recette.json").catch(()=>null),
       lireEpisode("decouvertes.json").catch(()=>null),lireEpisode("vitrine.json").catch(()=>null),lireEpisode("pannes.json").catch(()=>null)]);
     lireEpisode("profils_etat.json").then(rendreProfilsEtat).catch(()=>{});
+    lireEpisode("concurrentes_proposees.json").then(rendreConcurrentes).catch(()=>{});
     lireEpisode("courbes.json").then(c=>{if(c&&typeof c==="object"){COURBES=c; if(choisie!==null&&DATA[choisie]) rendreCourbe(DATA[choisie])}}).catch(()=>{});
     if(rc&&rc.videos) rendreRecette(rc);
     if(dc&&Array.isArray(dc.profils)) rendreDecouvertes(dc);

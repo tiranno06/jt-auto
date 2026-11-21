@@ -1,0 +1,42 @@
+name: Chercher des chaînes concurrentes
+# Bouton « 🔍 Chercher » du site (onglet TikTok, « 🥊 Chaînes concurrentes ») : moteur/concurrence.py trouve des chaînes qui refont,
+# comme nous, des sons TikTok en dessin animé (triple vérification : texte, format, image) et les range dans
+# episodes/concurrentes_proposees.json ; le site les propose avec « ➕ » / « 🚫 ».
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: historique
+  cancel-in-progress: false
+
+jobs:
+  concurrence:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    env:
+      PROFILS_TIKTOK: ${{ vars.PROFILS_TIKTOK }}
+      PROFILS_INTERDITS: ${{ vars.PROFILS_INTERDITS }}
+      CHAINES_CONCURRENTES: ${{ vars.CHAINES_CONCURRENTES }}
+      TIKTOK_COMPTE: ${{ vars.TIKTOK_COMPTE }}
+      CONCURRENCE: ${{ vars.CONCURRENCE }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Outils
+        run: pip install -q -U "yt-dlp[default,curl-cffi]" && pip install -q numpy opencv-python-headless -c contraintes.txt
+      - name: "Chaînes concurrentes (texte, format, image)"
+        continue-on-error: true
+        run: python -u moteur/concurrence.py
+      - name: Enregistrer
+        run: |
+          git config user.name "robot-jt"
+          git config user.email "robot-jt@users.noreply.github.com"
+          git add episodes
+          git commit -m "Chaînes concurrentes proposées" || echo "rien à enregistrer"
+          python moteur/fusion.py

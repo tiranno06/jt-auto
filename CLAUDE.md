@@ -744,6 +744,14 @@
   CHAINES_CONCURRENTES sur le site : lien cité, ou créateur cité + titre qui ressemble à 50 % = son écarté). **Pas fait : lire les
   commentaires** (4) : yt-dlp ne lit pas les commentaires TikTok et l'adresse interne de TikTok n'est pas faite pour les robots (accès
   refusé) ; possible plus tard avec l'API officielle de TikTok (demande d'accès à faire par l'auteur).
+  **Recherche de chaînes concurrentes** (demande de l'auteur du 21 novembre) : bouton « 🔍 Chercher » dans « 🥊 Chaînes concurrentes »
+  (onglet TikTok, « Mes profils ») -> workflow concurrence.yml -> `moteur/concurrence.py` : candidats = comptes cités « @… » chez nos
+  créateurs, chez les concurrentes déjà suivies (de proche en proche) et dans les titres des originaux ; TRIPLE vérification : texte
+  (`texte` : les titres créditent un son / un créateur, ou ≥ 2 de nos créateurs repris), format (`format_` : ≥ 6 vidéos de 8 à 150 s,
+  publié ces 30 jours, médiane ≥ 1 000 vues), image (`image` : une image d'une de ses vidéos montrée à Gemini : dessin animé qui met
+  en scène un dialogue ? sans Gemini : « non vérifiée », jamais en tête) ; puis comparaison avec notre chaîne et les concurrentes
+  actuelles (`ressemblance` : créateurs repris en commun 60 % + hashtags en commun 40 %) ; episodes/concurrentes_proposees.json
+  (8 au plus), site : chaque vérification détaillée, « ➕ » (ajoute à CHAINES_CONCURRENTES) / « 🚫 » (liste noire) ; CONCURRENCE=0.
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.
