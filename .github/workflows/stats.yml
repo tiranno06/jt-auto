@@ -53,7 +53,9 @@ jobs:
           VAPID_PRIVEE: ${{ vars.VAPID_PRIVEE }}
           VAPID_PUBLIQUE: ${{ vars.VAPID_PUBLIQUE }}
           PUSH_ABONNEMENTS: ${{ vars.PUSH_ABONNEMENTS }}
-        run: python -c "import sys; sys.path.insert(0, 'moteur'); import profils_tiktok as P; P.surveiller()"
+        run: |
+          pip install -q curl_cffi || true          # (yt-dlp « --impersonate chrome » : la page TikTok bloque souvent les serveurs)
+          python -c "import sys; sys.path.insert(0, 'moteur'); import profils_tiktok as P; P.surveiller()"
       - name: Enregistrer
         run: |
           git config user.name "robot-jt"

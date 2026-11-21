@@ -667,6 +667,10 @@
   sous-titres anglais comparés sur les vidéos depuis le 21 novembre) et **🚀 vidéos sorties du premier essai** (`recette.sorties` :
   1 000 vues et 3 × la médiane au moins, et ce qu'elles ont en commun). Pas fait (non choisis) : 2e compte en anglais, YouTube Shorts /
   Instagram Reels, bonus aux sons drôles sans les mots, carte des pays. Déconseillé : doublage des voix en anglais (coût, jeu perdu, droits).
+  **Fausse alerte « profils introuvables » (21 novembre)** : depuis le 17 novembre la veille des profils déclarait les 8 créateurs
+  « introuvables » (l'auteur en a retiré de « Mes profils ») : `profils_tiktok._ytdlp` importait `doublage` (numpy, absent de la machine
+  des statistiques) et plantait avant d'interroger TikTok. Réparé (`profils_tiktok.VARIANTES`, curl_cffi installé dans stats.yml) ;
+  et si AUCUN profil ne répond d'un coup (3 ou plus), c'est notre lecture qui est en panne : rien n'est compté ni signalé.
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.
