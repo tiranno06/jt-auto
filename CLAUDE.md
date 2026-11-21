@@ -466,7 +466,8 @@
   l'autre, sinon au moins de créateur ; lieu = historique "recette", sinon la réalisation du sketch) ; **nouveaux créateurs** (9,
   `moteur/decouverte.py`, workflow vitrine.yml chaque lundi) : comptes cités « @… » dans les titres de vos créateurs et des originaux
   (la recherche par hashtag est cassée dans yt-dlp et tikwm refuse les robots), 30 vérifiés au plus (8 vidéos de 8 à 150 s, publié
-  ces 30 jours, médiane ≥ 5 000 vues), 6 proposés (episodes/decouvertes.json ; site : « ➕ » / « 🚫 » dans « Mes profils ») ; essai
+  ces 30 jours, médiane ≥ 5 000 vues), 6 proposés (episodes/decouvertes.json ; site : « ➕ » / « 🚫 » dans « Mes profils » ; bouton
+  « 🔄 Chercher maintenant » à côté du titre (demande de l'auteur du 21 novembre) = vitrine.yml tout de suite, liste relue à la fin) ; essai
   du 11 novembre : @enzolefrere, @aguerin30, @42malek, @brutuslerobuste, @jawedyoussef ; **paliers d'abonnés** (14, `moteur/paliers.py`
   après chaque relevé de stats.yml : 500, 1 000, 2 000… -> vidéo « merci » sur un script, vidéo manuelle jamais publiée seule, alerte ;
   episodes/paliers.json ; paliers déjà passés au 1er passage jamais fêtés après coup ; PALIERS=0) ; **vitrine du profil** (15,
