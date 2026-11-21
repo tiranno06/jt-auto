@@ -35,6 +35,7 @@ def regles(sk, texte):
         for k, r in enumerate(reps):
             if r.get("p") in roles: qui[k] = roles[1 - roles.index(r["p"])]
     m = re.search(r"(?:dans|à|au|en)\s+(?:une|un|la|le|l')?\s*([a-zéèêàç' -]{3,30})", t)
+    if m and animaux.contenant_de("dans " + m.group(1)): m = None             # « dans une poubelle » : un contenant, pas un lieu
     if m and re.search(r"devrai|doit|plut[ôo]t|pas dans|il faut|mettre|met", t):
         l_ = DD.lieu_de(m.group(1), "")
         if l_: corr += [{"type": "lieu", "scene": k, "lieu": l_} for k in range(max(1, len(sk.get("decoupage") or [])))]
@@ -44,8 +45,21 @@ def regles(sk, texte):
     cible = next((c["role"] for c in corr if c.get("espece")), None) or (max(roles, key=lambda r: sum(1 for x in reps if x.get("p") == r)) if roles else None)
     if cible and re.search(UN_SEUL, t): corr.append({"type": "un_seul", "role": cible})   # « c'est un seul personnage »
     dans = animaux.contenant_de(t)
-    if cible and dans: corr.append({"type": "contenant", "role": cible, "dans": dans})  # « il est dans un micro-ondes »
+    nomme = role_par_nom(t, roles)                                         # « l'invitée doit être dans… » : le rôle nommé
+    if (nomme or cible) and dans:                                          # « il est dans un micro-ondes »
+        corr.append(dict({"type": "contenant", "role": nomme or cible, "dans": dans},
+                         **({"coul": list(animaux.couleur_contenant(t, dans))} if animaux.couleur_contenant(t, dans) else {})))
     return qui, corr
+
+
+NOMS_ROLES = {"invite": r"\binvit[ée]e?s?\b", "presentateur": r"\bpr[ée]sentat(eur|rice)\b", "envoyee": r"\benvoy[ée]e\b"}
+
+
+def role_par_nom(t, roles):
+    """Le rôle désigné par son nom de fiche dans la remarque (« l'invitée », « le présentateur »), s'il joue dans la vidéo."""
+    for r, motif in NOMS_ROLES.items():
+        if r in roles and re.search(motif, str(t or "").lower()): return r
+    return None
 
 
 UN_SEUL = (r"\b(un seul|une seule|le m[êe]me|la m[êe]me)\s+(personnage|personne|perso)\b|qu'un seul\b|seul personnage|"
@@ -123,10 +137,12 @@ def interpreter(sk, texte):
             corr.append({"type": "un_seul", "role": cible_})
         import animaux as AN_
         if str(r.get("dans") or "") in AN_.CONTENANTS and cible_ and not any(c.get("type") == "contenant" for c in corr):
-            corr.append({"type": "contenant", "role": cible_, "dans": r["dans"]})
+            corr.append({"type": "contenant", "role": role_par_nom(texte, {x.get("p") for x in reps}) or cible_, "dans": r["dans"]})
         esp_regle = any(c.get("type") == "casting" and c.get("espece") for c in corr)   # espèce comprise par les règles : elle prime
         corr += [c for c in ecrire._liste(r.get("corrections")) if isinstance(c, dict) and c.get("type") in qualite.TYPES and json.dumps(c, sort_keys=True) not in deja
                  and not (esp_regle and c.get("type") == "casting" and c.get("espece"))]
+        if any(c.get("type") == "contenant" for c in corr):                 # « dans une poubelle » : le personnage y est, personne
+            corr = [c for c in corr if c.get("type") != "figurant"]        # n'est ajouté à côté (registre du 21 novembre)
         if r.get("compris"): print(f"Remarque comprise : {str(r['compris'])[:200]}", flush=True)
     except Exception as e: print(f"Remarque lue par les règles simples ({str(e)[:100]})", flush=True)
     print(f"Remarque de l'auteur : {len(qui)} réplique(s) à rendre à un autre personnage, {len(corr)} correction(s) : "
@@ -154,6 +170,7 @@ def appliquer(sk, texte, memoriser=True):
             sk.pop("_separes", None); faits.append(f"un seul personnage ({c['role']}, {n_} réplique(s) rendue(s))")
         if c.get("type") == "contenant" and c.get("role") and isinstance(S, dict):
             S.setdefault("personnages", {}).setdefault(c["role"], {})["dans"] = c["dans"]; faits.append(f"{c['role']} dans : {c['dans']}")
+            if c.get("coul"): S["personnages"][c["role"]]["dans_coul"] = c["coul"]
     corr = [c for c in corr if c.get("type") not in ("un_seul", "contenant")]
     for c in corr:                                                         # espèce : pas encore dans qualite.corriger
         if c.get("type") == "casting" and c.get("espece"):

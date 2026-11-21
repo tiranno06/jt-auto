@@ -672,6 +672,23 @@
   « introuvables » (l'auteur en a retiré de « Mes profils ») : `profils_tiktok._ytdlp` importait `doublage` (numpy, absent de la machine
   des statistiques) et plantait avant d'interroger TikTok. Réparé (`profils_tiktok.VARIANTES`, curl_cffi installé dans stats.yml) ;
   et si AUCUN profil ne répond d'un coup (3 ou plus), c'est notre lecture qui est en panne : rien n'est compté ni signalé.
+- **Registre des pannes relu le 21 novembre 2026 (demande de l'auteur : tout régler et que ça ne revienne plus)** : 17 lignes, toutes
+  réglées ou fausses pannes ; registre vidé (une panne qui revient réapparaît ; `pannes.fusionner` : une panne retirée pendant une
+  fabrication ne revient que par ses NOUVEAUX cas). **Modèle Gemini mort** : « gemini-2.5-flash » est encore dans la liste de Google
+  mais répond 404 -> `reseau.gemini_mort` / GEMINI_MORTS : plus appelé jusqu'à la fin de la fabrication (video_ia, fiche_tournage,
+  relais `_appel_openai`) ; « gemini-2.5-flash-lite » ajouté aux modèles voulus. **Gemini qui écoute les passages en doute**
+  (`video_ia.ecouter`) : seuls les passages (± 0,6 s) mis bout à bout (son 3 à 10 fois plus court) et 90 s d'attente au plus, un seul
+  essai par modèle (avant : son entier, 2 × 180 s, « The read operation timed out », contrôle de la vidéo finie 4 min au lieu de 1) ;
+  contrôle « fidélité à l'audio » (`fiche_tournage._gemini_brut`) : 2 modèles au plus, 1 essai de 2 min chacun (il avait pris 10 min).
+  **Fausses pannes** (`pannes.BANAL` / `BRUIT`) : ligne « Tendances : … » (« cargo échoué »), décor de la banque écarté exprès, Gemini
+  503 / 429 / 404 (relais automatique vers le modèle suivant), « Idée n : », « Remarque comprise ». **Journal de la dernière
+  fabrication** : réponse du jury coupée à 4 000 jetons -> 8 000 (`qualite`) ; une correction (« Refaire » compte rendu, remarque, qui
+  parle, casting, voix, décors) demandait 6 idées de sketch à l'IA pour rien -> plus d'idées (`principal` : candidats « refaire ») ;
+  **remarque « l'invitée doit être dans une poubelle bleue »** : ajoutait une personne à côté -> un HUMAIN peut être dans une
+  poubelle ou un carton (`animaux.POUR_HUMAINS`, `contenant_humain` : l'objet devant lui des pieds à la taille, couleur dite
+  `couleur_contenant` -> fiche "dans_coul"), le rôle nommé dans la remarque est visé (`remarque.role_par_nom` : « l'invitée »,
+  « le présentateur »), « dans une poubelle » n'est plus pris pour un lieu, et aucun figurant n'est ajouté quand un contenant est
+  compris ; « boîte de nuit » n'est plus un carton.
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.

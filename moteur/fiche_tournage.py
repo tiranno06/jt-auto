@@ -242,7 +242,7 @@ def _gemini_video(chemin, texte):
                 reseau.UTILISES["gemini"] = reseau.UTILISES.get("gemini", 0) + 1
                 return res
         except Exception as e:
-            err = str(e)[:160]
+            err = str(e)[:160]; reseau.gemini_mort(modele, err)
             journal(f"  fiche de tournage : Gemini {modele} n'a pas répondu ({err[:90]})")
             if any(x in err.lower() for x in ("quota", "exhausted", "per day")): reseau.HORS_SERVICE.add("gemini"); break
     return None
@@ -696,6 +696,7 @@ def _gemini_images(images, texte, timeout=120):
                 reseau.UTILISES["gemini"] = reseau.UTILISES.get("gemini", 0) + 1
                 return json.loads(m.group(0))
         except Exception as e:
+            reseau.gemini_mort(modele, str(e))
             if any(x in str(e).lower() for x in ("quota", "exhausted", "per day")): reseau.HORS_SERVICE.add("gemini"); break
     return None
 
@@ -776,17 +777,18 @@ def _gemini_brut(video, texte):
     if not v: return None
     corps = {"contents": [{"parts": [{"inline_data": {"mime_type": "video/mp4", "data": base64.b64encode(open(v, "rb").read()).decode()}}, {"text": texte}]}],
              "generationConfig": {"temperature": 0.1, "response_mime_type": "application/json"}}
-    for modele in video_ia.MODELES:
-        req = urllib.request.Request(f"https://generativelanguage.googleapis.com/v1beta/models/{modele}:generateContent",
+    for modele in list(video_ia.MODELES)[:2]:                              # contrôle final : 2 modèles, 1 essai de 2 min chacun au plus
+        req = urllib.request.Request(f"https://generativelanguage.googleapis.com/v1beta/models/{modele}:generateContent",   # (21 novembre :
                                      data=json.dumps(corps).encode(), method="POST", headers={"Content-Type": "application/json", "x-goog-api-key": cle})
-        try:
-            d = json.loads(reseau.ouvrir(req, timeout=240, essais=2))
+        try:                                                               # 2 × 240 s par modèle, contrôle de la vidéo finie 10 min)
+            d = json.loads(reseau.ouvrir(req, timeout=120, essais=1))
             txt = "".join(p.get("text", "") for c in d.get("candidates") or [] for p in (c.get("content") or {}).get("parts") or [])
             m = re.search(r"\{.*\}", txt, re.S)
             if m:
                 reseau.UTILISES["gemini"] = reseau.UTILISES.get("gemini", 0) + 1
                 return json.loads(m.group(0))
         except Exception as e:
+            reseau.gemini_mort(modele, str(e))
             if any(x in str(e).lower() for x in ("quota", "exhausted", "per day")): reseau.HORS_SERVICE.add("gemini"); break
     return None
 

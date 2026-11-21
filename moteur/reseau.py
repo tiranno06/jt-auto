@@ -94,12 +94,22 @@ def gemini_disponibles(voulus):
             _GM["liste"] = [str(m.get("name", "")).replace("models/", "") for m in json.loads(ouvrir(req, timeout=20, essais=2)).get("models") or []
                             if "generateContent" in (m.get("supportedGenerationMethods") or [])] if cle else []
         except Exception: _GM["liste"] = []
-    L = _GM["liste"]
-    if not L: return tuple(voulus)
+    L = [m for m in _GM["liste"] if m not in GEMINI_MORTS]
+    if not _GM["liste"]: return tuple(m for m in voulus if m not in GEMINI_MORTS) or tuple(voulus)
     ok = tuple(m for m in voulus if m in L)
     if ok: return ok
     flash = sorted((m for m in L if re.fullmatch(r"gemini-[\d.]+-flash(-lite)?|gemini-flash(-lite)?-latest", m)), reverse=True)
     return tuple(flash[:3]) or tuple(voulus)
+
+
+GEMINI_MORTS = set()                                                       # modèles qui répondent 404 pendant cette fabrication
+
+
+def gemini_mort(modele, err):
+    """Registre des pannes du 21 novembre : « gemini-2.5-flash » est encore dans la liste de Google mais répond 404 à chaque appel
+    (9 fois en 2 jours, une écoute ratée à chaque fois). Un modèle qui répond 404 n'est plus appelé jusqu'à la fin de la fabrication."""
+    if "404" in str(err or "") and modele not in GEMINI_MORTS:
+        GEMINI_MORTS.add(modele); print(f"  Gemini : {modele} n'existe plus (404), plus appelé pour cette vidéo", flush=True)
 
 
 EPUISE = (" 401", " 403", "quota", "exhausted", "billing", "per day", "(tpd)", "(rpd)")   # fournisseur à court pour la journée
@@ -193,7 +203,9 @@ def _appel_openai(fourn, kw):
                     corps["messages"] = corps["messages"] + [{"role": "user", "content": "Réponds UNIQUEMENT par un objet JSON valide qui respecte ce schéma : "
                                                               + json.dumps(outils[0]["input_schema"], ensure_ascii=False)[:5000]}]
                     continue                                                    # (ecrire._appel lit le JSON dans le texte)
-                if e.code in (404, 400) and "model" in bas: d = "suivant"; break            # modèle inconnu : le suivant
+                if e.code in (404, 400) and "model" in bas:                 # modèle inconnu : le suivant
+                    if fourn == "gemini" and e.code == 404: gemini_mort(modele, "404")
+                    d = "suivant"; break
                 if e.code == 400 and outils and "tool" in bas and "tool_choice" in corps: corps.pop("tool_choice", None); continue
                 if e.code == 429 and str(getattr(e, "headers", None) and e.headers.get("x-ratelimit-limit-req-minute")) == "0":
                     d = "suivant"; break                                                # modèle fermé à l'offre gratuite (0 / minute) : le suivant

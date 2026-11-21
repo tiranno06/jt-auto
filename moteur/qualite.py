@@ -302,7 +302,7 @@ def jury_claude(video, R, sk, gratuit):
         res = None
         for _essai in range(2):                                            # l'IA de relais répond souvent en texte (JSON) : il est lu aussi
             try:
-                res = ecrire._appel(reseau.claude(), None, [{"role": "user", "content": contenu}], OUTIL, max_tokens=4000)
+                res = ecrire._appel(reseau.claude(), None, [{"role": "user", "content": contenu}], OUTIL, max_tokens=8000)   # (21 novembre : 4 000 coupait la réponse des 5 critiques)
             except Exception as e:
                 print(f"  jury : réponse illisible ({str(e)[:100]}), nouvel essai avec l'IA suivante", flush=True); res = None
             if isinstance(res, dict) and ecrire._liste(res.get("critiques")): return res

@@ -288,7 +288,7 @@ def main():
             alerte.alerter("Crédit Claude épuisé ?", "Claude ne répond pas : la vidéo est fabriquée avec un sketch de secours déjà écrit. "
                            "Rechargez le crédit sur console.anthropic.com pour revenir aux sketchs écrits par Claude.")
         except Exception as _e: __import__("pannes").avale(_e)
-    PR.etape(6, "Écoute du son TikTok" if (FILIERE == "tiktok" or THEME.startswith("TIKTOK::")) else "Recherche de l'idée", forcer=True)
+    PR.etape(6, "Écoute du son TikTok" if (FILIERE == "tiktok" or THEME.startswith("TIKTOK::") or (SK_ANCIEN or {}).get("doublage")) else "Recherche de l'idée", forcer=True)
     PROFIL_PREP = None                                                     # filière « Sons TikTok » (à part des sketchs) : une vidéo
     if FILIERE == "tiktok" and not THEME and not S:                        # au hasard d'un profil de la liste, jamais déjà utilisée
         import profils_tiktok, doublage
@@ -326,6 +326,10 @@ def main():
     elif PROFIL_PREP:
         tiktok = PROFIL_PREP[0]
         candidats = [([{"titre": "Bande son TikTok (profil)", "resume": tiktok, "lien": tiktok, "date": None, "source": "tiktok"}], "tiktok")]
+    elif REFAIRE_MODE in ("voix", "decors", "qui", "remarque", "casting", "compte_rendu"):   # mêmes répliques : pas d'idée à chercher
+        lien_ = str(((SK_ANCIEN or {}).get("doublage") or {}).get("source") or "")      # (registre du 21 novembre : 6 idées de sketch
+        candidats = [([{"titre": str((SK_ANCIEN or {}).get("sujet") or "Refaire"), "resume": lien_, "lien": lien_, "date": None,   # demandées
+                        "source": "refaire"}], "refaire")]                                # à l'IA pour rien à chaque correction)
     elif THEME.startswith("TIKTOK::"):                                     # vidéo construite sur la bande son d'une vidéo TikTok
         tiktok = THEME.split("::", 1)[1].strip()
         candidats = [([{"titre": "Bande son TikTok", "resume": tiktok, "lien": tiktok, "date": None, "source": "tiktok"}], "tiktok")]

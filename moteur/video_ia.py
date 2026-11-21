@@ -9,7 +9,7 @@ quota que les autres appels Gemini (sauté s'il est épuisé). Sert de témoin d
 (lieu, personnages, espèce). VIDEO_IA=0 pour couper."""
 import base64, json, os, re, subprocess, tempfile, urllib.request
 
-VOULUS = ("gemini-flash-latest", "gemini-2.5-flash", "gemini-flash-lite-latest")
+VOULUS = ("gemini-flash-latest", "gemini-2.5-flash", "gemini-flash-lite-latest", "gemini-2.5-flash-lite")
 
 
 class _Modeles:
@@ -84,7 +84,7 @@ def analyser(chemin, mots, ph):
                       + (", une même personne en joue plusieurs" if res.get("meme_interprete") else "") + f", lieu « {res.get('lieu', '?')} »", flush=True)
                 return res
         except Exception as e:
-            err = str(e)[:160]
+            err = str(e)[:160]; reseau.gemini_mort(modele, err)
             if any(x in err.lower() for x in ("quota", "exhausted", "per day")): reseau.HORS_SERVICE.add("gemini"); break
     print(f"  Gemini n'a pas pu regarder la vidéo ({err or 'réponse vide'})", flush=True)
     return None
@@ -203,9 +203,28 @@ def ecouter(chemin, passages):
     import reseau
     if "gemini" in reseau.HORS_SERVICE: return {}
     d = tempfile.mkdtemp(); son = os.path.join(d, "s.mp3")
-    r = subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", chemin, "-vn", "-ac", "1", "-ar", "16000", "-b:a", "32k", "-t", "200", son], capture_output=True)
+    # Seulement les passages en doute (± 0,6 s), mis bout à bout : un son 5 à 10 fois plus court, Gemini répond vite (registre des
+    # pannes du 21 novembre : le son ENTIER faisait dépasser le délai, « The read operation timed out », écoute perdue).
+    morceaux, pos, places = [], 0.0, []
+    for a, b in passages[:40]:
+        a0, b0 = max(0.0, float(a) - 0.6), float(b) + 0.6
+        if morceaux and a0 <= morceaux[-1][1]: morceaux[-1][1] = max(morceaux[-1][1], b0)
+        else: morceaux.append([a0, b0])
+    for a, b in passages[:40]:                                             # instants des passages dans le son raccourci
+        acc = 0.0
+        for a0, b0 in morceaux:
+            if a0 <= float(a) <= b0: places.append((acc + float(a) - a0, acc + float(b) - a0)); break
+            acc += b0 - a0
+        else: places.append((float(a), float(b)))
+    filtre = "".join(f"[0:a]atrim={a0:.2f}:{b0:.2f},asetpts=PTS-STARTPTS[a{k}];" for k, (a0, b0) in enumerate(morceaux)) + \
+        "".join(f"[a{k}]" for k in range(len(morceaux))) + f"concat=n={len(morceaux)}:v=0:a=1[s]"
+    r = subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", chemin, "-filter_complex", filtre, "-map", "[s]", "-ac", "1", "-ar", "16000",
+                        "-b:a", "32k", son], capture_output=True)
+    if r.returncode or not os.path.exists(son):                           # (repli : le son entier, comme avant)
+        places = [(float(a), float(b)) for a, b in passages[:40]]
+        r = subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", chemin, "-vn", "-ac", "1", "-ar", "16000", "-b:a", "32k", "-t", "200", son], capture_output=True)
     if r.returncode or not os.path.exists(son) or os.path.getsize(son) > 15e6: return {}
-    lignes = "\n".join(f"{k}. de {a:.1f} s à {b:.1f} s" for k, (a, b) in enumerate(passages[:40]))
+    lignes = "\n".join(f"{k}. de {a:.1f} s à {b:.1f} s" for k, (a, b) in enumerate(places))
     corps = {"contents": [{"parts": [{"inline_data": {"mime_type": "audio/mp3", "data": base64.b64encode(open(son, "rb").read()).decode()}},
                                      {"text": ECOUTE.format(passages=lignes)}]}],
              "generationConfig": {"temperature": 0.0, "response_mime_type": "application/json"}}
@@ -213,11 +232,11 @@ def ecouter(chemin, passages):
         req = urllib.request.Request(f"https://generativelanguage.googleapis.com/v1beta/models/{modele}:generateContent",
                                      data=json.dumps(corps).encode(), method="POST", headers={"Content-Type": "application/json", "x-goog-api-key": cle})
         try:
-            dd = json.loads(reseau.ouvrir(req, timeout=180, essais=2))
+            dd = json.loads(reseau.ouvrir(req, timeout=90, essais=1))   # (21 novembre : 2 × 180 s perdues sur un modèle qui ne répond pas)
             txt = "".join(p.get("text", "") for c in dd.get("candidates") or [] for p in (c.get("content") or {}).get("parts") or [])
             return lire_ecoute(txt, len(passages))
         except Exception as e:
-            err = str(e)[:160]
+            err = str(e)[:160]; reseau.gemini_mort(modele, err)
             print(f"  Gemini n'a pas pu écouter ({modele} : {err[:80]})", flush=True)
             if any(x in err.lower() for x in ("quota", "exhausted", "per day")): reseau.HORS_SERVICE.add("gemini"); break
     return {}

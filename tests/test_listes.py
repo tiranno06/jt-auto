@@ -1080,3 +1080,76 @@ class TestMonde21Novembre(unittest.TestCase):
         self.assertAlmostEqual(doublage.attente_premier_mot([{"s": 0.9, "e": 1.2}]), 0.7)
         src = open(os.path.join(os.path.dirname(__file__), "..", "moteur", "doublage.py"), encoding="utf-8").read()
         self.assertIn('ecrire.titre_net(m.get("titre_accroche") or "", 32)', src)
+
+
+class TestPannes21Novembre(unittest.TestCase):
+    """Registre des pannes relu le 21 novembre 2026."""
+    def setUp(self): sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "moteur"))
+
+    def test_modele_gemini_mort_plus_appele(self):
+        import reseau
+        anc = dict(reseau._GM); reseau._GM["liste"] = ["gemini-flash-latest", "gemini-2.5-flash", "gemini-flash-lite-latest"]
+        try:
+            reseau.GEMINI_MORTS.discard("gemini-2.5-flash")
+            self.assertIn("gemini-2.5-flash", reseau.gemini_disponibles(("gemini-flash-latest", "gemini-2.5-flash")))
+            reseau.gemini_mort("gemini-2.5-flash", "HTTP Error 404: Not Found")
+            self.assertEqual(reseau.gemini_disponibles(("gemini-flash-latest", "gemini-2.5-flash")), ("gemini-flash-latest",))
+            reseau.gemini_mort("gemini-flash-latest", "The read operation timed out")   # un délai dépassé n'est pas une mort
+            self.assertIn("gemini-flash-latest", reseau.gemini_disponibles(("gemini-flash-latest",)))
+        finally:
+            reseau._GM.clear(); reseau._GM.update(anc); reseau.GEMINI_MORTS.discard("gemini-2.5-flash")
+
+    def test_fausses_pannes(self):
+        import pannes
+        j = ("Tendances : #animation ; sujets qui montent en France : cargo échoué landes\n"
+             "  décor semi-réaliste 0 : décor ressemblant de la banque refusé (ne colle pas à la fiche de tournage)\n"
+             "  fiche de tournage : Gemini gemini-flash-latest n'a pas répondu (HTTP Error 503: Service Unavailable)\n"
+             "  Gemini n'a pas pu écouter (gemini-2.5-flash : HTTP Error 404: Not Found)\n"
+             "  Gemini n'a pas pu écouter (gemini-flash-latest : HTTP Error 429: Too Many Requests)\n"
+             "NeMo indisponible (pyarrow requires NumPy 2.0 or newer, found 1.26.4)\n")
+        self.assertEqual([e for _, e, _ in pannes.lire_journal(j)], ["NeMo indisponible (pyarrow requires NumPy 2.0 or newer, found 1.26.4)"])
+
+    def test_panne_reglee_ne_revient_pas_a_la_fusion(self):
+        import pannes
+        base = {"x": {"n": 3, "jours": {"2026-11-20": 3}, "derniere": "2026-11-20"}}
+        eux = {}                                                           # retirée (réglée) pendant la fabrication
+        self.assertEqual(json.loads(pannes.fusionner(json.dumps(eux).encode(), json.dumps(base).encode(), json.dumps(base).encode())), {})
+        nous = {"x": {"n": 4, "jours": {"2026-11-20": 3, "2026-11-21": 1}, "derniere": "2026-11-21"}}
+        r = json.loads(pannes.fusionner(json.dumps(eux).encode(), json.dumps(nous).encode(), json.dumps(base).encode()))
+        self.assertEqual(r["x"]["n"], 1); self.assertEqual(r["x"]["jours"], {"2026-11-21": 1})
+
+    def test_humain_dans_une_poubelle(self):
+        import animaux, remarque, studio
+        self.assertEqual(animaux.contenant_de("l'invitée doit être dans une poubelle bleue"), "poubelle")
+        self.assertIsNone(animaux.contenant_de("on était dans une boîte de nuit"))
+        self.assertEqual(animaux.couleur_contenant("dans une poubelle bleue", "poubelle"), (60, 110, 200))
+        sk = {"repliques": [{"p": "presentateur", "t": "Salut"}, {"p": "invite", "t": "Bonjour"}, {"p": "presentateur", "t": "Ça va ?"}]}
+        qui, corr = remarque.regles(sk, "L'invitée doit être placée dans une poubelle bleue dès le début")
+        self.assertEqual(corr, [{"type": "contenant", "role": "invite", "dans": "poubelle", "coul": [60, 110, 200]}])   # ni lieu, ni figurant
+        import numpy as np, perso_croquis as PC, marionnette as M, humain as HU, croquis as C
+        imgs = []
+        for kw in ({"dans": "poubelle", "dans_coul": (60, 110, 200)}, {}):
+            img = C.papier(400, 700); F = dict(HU.creer(3, genre="f", age=28), **kw)
+            p = M.pose_neutre(); p.update(x=200, y=650, s=1.0, t=0.0); PC.dessiner(img, F, p); imgs.append(img)
+        self.assertGreater(float(np.abs(imgs[0][560:640].astype(int) - imgs[1][560:640].astype(int)).mean()), 5)   # jambes cachées
+        src = open(studio.__file__, encoding="utf-8").read(); self.assertIn("AN_.POUR_HUMAINS", src)
+
+    def test_ecoute_gemini_seulement_les_passages(self):
+        import subprocess, video_ia, reseau
+        d = tempfile.mkdtemp(); f = os.path.join(d, "t.wav")
+        subprocess.run(["ffmpeg", "-y", "-v", "error", "-f", "lavfi", "-i", "sine=f=440:d=60", f], check=True)
+        cap = {}
+        def faux(req, timeout=0, essais=0):
+            cap["corps"] = json.loads(req.data); cap["timeout"] = timeout; raise RuntimeError("HTTP Error 404: Not Found")
+        with mock.patch.dict(os.environ, {"GEMINI_API_KEY": "x"}), mock.patch.object(reseau, "ouvrir", faux), \
+             mock.patch.object(reseau, "gemini_disponibles", lambda v: ("m_essai",)):
+            self.assertEqual(video_ia.ecouter(f, [(10, 12), (12.5, 13), (40, 41)]), {})
+        reseau.GEMINI_MORTS.discard("m_essai")
+        t = cap["corps"]["contents"][0]["parts"][1]["text"]
+        self.assertIn("0. de 0.6 s à 2.6 s", t); self.assertIn("2. de 4.8 s à 5.8 s", t); self.assertLessEqual(cap["timeout"], 90)
+
+    def test_correction_sans_idees_de_sketch_et_jury_complet(self):
+        src = open(os.path.join(os.path.dirname(__file__), "..", "moteur", "principal.py"), encoding="utf-8").read()
+        self.assertIn('"source": "refaire"}], "refaire")]', src)
+        self.assertIn("for modele in list(video_ia.MODELES)[:2]:", open(os.path.join(os.path.dirname(__file__), "..", "moteur", "fiche_tournage.py"), encoding="utf-8").read())
+        self.assertIn("OUTIL, max_tokens=8000)", open(os.path.join(os.path.dirname(__file__), "..", "moteur", "qualite.py"), encoding="utf-8").read())
