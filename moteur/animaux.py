@@ -321,7 +321,42 @@ def dessiner(img, espece, x, sol, tc, R, bras, expr="neutre", ouv=None, cligne=0
 # ------------------------------------------------------------------ contenants (remarque de l'auteur du 1er novembre : « un steak
 # haché dans un micro-ondes ») : le personnage est DANS un objet, dessiné en deux fois (le fond avant lui, la façade après lui)
 CONTENANTS = {"micro_ondes": r"micro[- ]?ondes?", "four": r"\bfour\b", "frigo": r"frigo|r[ée]frig[ée]rateur|frigidaire",
-              "poele": r"po[êe]le|casserole|marmite", "bocal": r"bocal|aquarium|verre", "carton": r"carton|bo[iî]te|caisse", "cage": r"\bcage\b"}
+              "poele": r"po[êe]le|casserole|marmite", "bocal": r"bocal|aquarium|verre", "poubelle": r"poubelle|benne|conteneur|container",
+              "carton": r"carton|bo[iî]te(?! de nuit| aux lettres| de vitesse)|caisse(?! enregistreuse)", "cage": r"\bcage\b"}
+POUR_HUMAINS = ("poubelle", "carton")                                     # un humain dans un objet (registre du 21 novembre : « l'invitée
+                                                                           # doit être dans une poubelle bleue » ajoutait une personne à côté)
+COULEURS_C = {"bleu": (60, 110, 200), "vert": (70, 150, 90), "jaune": (235, 200, 60), "gris": (130, 135, 140), "noir": (50, 52, 56),
+              "rouge": (200, 60, 55), "marron": (130, 90, 60), "blanc": (235, 235, 232), "orange": (235, 140, 50)}
+
+
+def couleur_contenant(texte, nom):
+    """« une poubelle bleue » -> couleur RVB du contenant (ou None)."""
+    t = str(texte or "").lower(); m = re.search("(?:" + CONTENANTS.get(nom, "^$") + r")\w*\s+(\w+)", t)
+    for mot in ([m.group(1)] if m else []):
+        for c, v in COULEURS_C.items():
+            if mot.startswith(c): return v
+    return None
+
+
+def contenant_humain(img, nom, x, hanche, sol, larg, coul=None, t=0.0):
+    """Un humain DANS une poubelle / un carton : l'objet est dessiné DEVANT lui, de ses pieds à sa taille (gag de dessin animé)."""
+    ep = max(2, int(larg * 0.035)); x, hanche, sol = int(x), int(hanche + larg * 0.08), int(sol + larg * 0.04)
+    if nom == "poubelle":
+        c = tuple(int(v) for v in (coul or (95, 120, 110))); bas = larg * 0.42; haut = larg * 0.5
+        pts = np.array([(x - haut, hanche), (x + haut, hanche), (x + bas, sol), (x - bas, sol)], np.int32)
+        cv2.fillPoly(img, [pts], c, AA); cv2.polylines(img, [pts], True, C.ENCRE, ep, AA)
+        sombre = tuple(int(v * 0.72) for v in c)
+        for k in range(1, 5):                                              # nervures verticales
+            f_ = k / 5; xa = x - haut + 2 * haut * f_; xb = x - bas + 2 * bas * f_
+            cv2.line(img, (int(xa), hanche + int(larg * 0.12)), (int(xb), sol - int(larg * 0.06)), sombre, max(2, ep), AA)
+        cv2.rectangle(img, (int(x - haut * 1.06), hanche - int(larg * 0.05)), (int(x + haut * 1.06), hanche + int(larg * 0.07)), sombre, -1, AA)
+        cv2.rectangle(img, (int(x - haut * 1.06), hanche - int(larg * 0.05)), (int(x + haut * 1.06), hanche + int(larg * 0.07)), C.ENCRE, ep, AA)
+        cv2.ellipse(img, (int(x + bas * 0.8), int(sol + larg * 0.02)), (int(larg * 0.06), int(larg * 0.06)), 0, 0, 360, C.ENCRE, ep, AA)   # roue
+    else:                                                                  # carton
+        c = tuple(int(v) for v in (coul or (205, 160, 90))); l_ = larg * 0.5
+        cv2.rectangle(img, (int(x - l_), hanche), (int(x + l_), sol), c, -1, AA); cv2.rectangle(img, (int(x - l_), hanche), (int(x + l_), sol), C.ENCRE, ep, AA)
+        cv2.line(img, (int(x - l_), hanche), (int(x - l_ * 1.35), hanche - int(l_ * 0.45)), C.ENCRE, ep, AA)
+        cv2.line(img, (int(x + l_), hanche), (int(x + l_ * 1.35), hanche - int(l_ * 0.45)), C.ENCRE, ep, AA)
 
 
 def contenant_de(texte):
@@ -398,6 +433,8 @@ def contenant_avant(img, nom, tc, sol, R, t=0.0):
         yb = int(sol - R * 0.9)
         cv2.rectangle(img, (x0, yb), (x1, y1), (90, 160, 205), -1, AA); cv2.rectangle(img, (x0, yb), (x1, y1), C.ENCRE, ep, AA)
         cv2.line(img, (x0, yb), (x0 - int(R * 0.35), yb - int(R * 0.45)), C.ENCRE, ep, AA); cv2.line(img, (x1, yb), (x1 + int(R * 0.35), yb - int(R * 0.45)), C.ENCRE, ep, AA)
+    elif nom == "poubelle":                                                # un animal / objet qui sort d'une poubelle
+        contenant_humain(img, "poubelle", tc[0], tc[1] + R * 0.7, sol, R * 2.6, None, t)
     elif nom == "cage":
         for k in range(9): xk = int(x0 + (x1 - x0) * k / 8); cv2.line(img, (xk, y0), (xk, y1), (150, 150, 155), max(2, ep // 2), AA)
         cv2.rectangle(img, (x0, y0), (x1, y1), C.ENCRE, ep, AA)

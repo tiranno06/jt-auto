@@ -242,7 +242,7 @@ def _gemini_video(chemin, texte):
                 reseau.UTILISES["gemini"] = reseau.UTILISES.get("gemini", 0) + 1
                 return res
         except Exception as e:
-            err = str(e)[:160]
+            err = str(e)[:160]; reseau.gemini_mort(modele, err)
             journal(f"  fiche de tournage : Gemini {modele} n'a pas répondu ({err[:90]})")
             if any(x in err.lower() for x in ("quota", "exhausted", "per day")): reseau.HORS_SERVICE.add("gemini"); break
     return None
@@ -696,6 +696,7 @@ def _gemini_images(images, texte, timeout=120):
                 reseau.UTILISES["gemini"] = reseau.UTILISES.get("gemini", 0) + 1
                 return json.loads(m.group(0))
         except Exception as e:
+            reseau.gemini_mort(modele, str(e))
             if any(x in str(e).lower() for x in ("quota", "exhausted", "per day")): reseau.HORS_SERVICE.add("gemini"); break
     return None
 
@@ -787,6 +788,7 @@ def _gemini_brut(video, texte):
                 reseau.UTILISES["gemini"] = reseau.UTILISES.get("gemini", 0) + 1
                 return json.loads(m.group(0))
         except Exception as e:
+            reseau.gemini_mort(modele, str(e))
             if any(x in str(e).lower() for x in ("quota", "exhausted", "per day")): reseau.HORS_SERVICE.add("gemini"); break
     return None
 

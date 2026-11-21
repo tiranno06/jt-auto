@@ -13,14 +13,17 @@ SIGNES = re.compile(r"(impossible|indisponible|en échec|échoué|echec|tracebac
                     r"illisible|n'a pas pu|pas pu |timed? ?out|délai dépassé)", re.I)
 BANAL = re.compile(r"(\b0 erreur|aucune erreur|sans erreur|✔|rien à enregistrer|"
                    r"nouvel essai dans|erreur \d+ passagère|"                            # nouvel essai automatique : pas une panne
-                   r"par l'IA refusés?|de l'IA refusées?|crédit ElevenLabs épuisé|quota_exceeded)", re.I)   # garde-fous qui ont joué, repli prévu
+                   r"par l'IA refusés?|de l'IA refusées?|crédit ElevenLabs épuisé|quota_exceeded|"   # garde-fous qui ont joué, repli prévu
+                   r"refusé \(ne colle pas|HTTP Error 503|Service Unavailable|n'existe plus \(404\)|"   # (21 novembre) décor de la banque écarté
+                   r"Error 429: Too Many Requests|gemini[\w.\-]* : HTTP Error 404|Gemini gemini[\w.\-]* n'a pas répondu \(HTTP Error 404)", re.I)                  # exprès ; Google saturé ou limite à la minute : relais vers le suivant
 # Pas des pannes (registre du 19 novembre 2026) : messages techniques des bibliothèques (TensorFlow, MediaPipe, transformers,
 # onnxruntime, avertissements Python) et TEXTES DE L'IA recopiés au journal (avis du jury, scène reconstituée, manques par rapport à
 # l'original) : ils contiennent « erreur », « refuse », « illisible »… sans que rien n'ait planté.
 BRUIT = re.compile(r"^([IWE]\d{4} |\[transformers\]|\[ ?WARN|WARNING:|INFO:|To enable the following|.*warnings\.warn|.*\w+Warning:|"
                    r"\* fix torchcodec|\* use audio preloaded|Could not load this library|torchcodec is not|.*onnxruntime|.*absl::|.*InitGoogle|"
                    r"Loading weights|scène reconstituée|Jury qualité|- à \d|Manque par rapport|Points? forts?|Humoriste|Réalisateur|"
-                   r"Directeur artistique|Spectateur|Ingé son :|\d{4}-\d\d-\d\d \d\d:\d\d:\d\d,\d+ \[WARNING\])", re.I)
+                   r"Directeur artistique|Spectateur|Ingé son :|\d{4}-\d\d-\d\d \d\d:\d\d:\d\d,\d+ \[WARNING\]|"
+                   r"Tendances :|Idée \d+ :|Remarque comprise|Sujet :)", re.I)    # (21 novembre) recopies de textes : « cargo échoué »…
 
 
 def forme(ligne):
@@ -73,7 +76,13 @@ def fusionner(eux, nous, base):
     e, n, b = lire(eux), lire(nous), lire(base)
     out = dict(e)
     for f, v in n.items():
-        if f not in out: out[f] = v; continue
+        if f not in out:
+            if f in b:                                                     # retirée de l'autre côté (panne réglée) : seuls les cas
+                dn = int(v.get("n", 0)) - int(b[f].get("n", 0))            # NOUVEAUX de notre fabrication la font revenir
+                if dn <= 0: continue
+                v = dict(v, n=dn, jours={d: c - (b[f].get("jours") or {}).get(d, 0) for d, c in (v.get("jours") or {}).items()
+                                         if c - (b[f].get("jours") or {}).get(d, 0) > 0})
+            out[f] = v; continue
         v0 = b.get(f, {}); o = dict(out[f])
         o["n"] = int(o.get("n", 0)) + int(v.get("n", 0)) - int(v0.get("n", 0))
         o["derniere"] = max(o.get("derniere", ""), v.get("derniere", ""))

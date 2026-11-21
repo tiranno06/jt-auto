@@ -689,6 +689,8 @@ def casting(sk, roles, costumes, S, graine):
             fiche["barbe"] = None; fiche["lunettes"] = None
             if not d.get("taille"): fiche["taille"] = 0.72 if esp in AN_.ANIMAUX else 0.85   # un chat est plus petit qu'un humain
             if d.get("dans") in AN_.CONTENANTS: fiche["dans"] = d["dans"]   # dans un micro-ondes, une poêle… (remarque de l'auteur)
+        elif d.get("dans") in AN_.POUR_HUMAINS: fiche["dans"] = d["dans"]   # un humain dans une poubelle, un carton (21 novembre)
+        if fiche.get("dans") and d.get("dans_coul"): fiche["dans_coul"] = tuple(d["dans_coul"])
         out[role] = fiche
     return out
 

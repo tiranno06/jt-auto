@@ -189,6 +189,10 @@ def dessiner(img, F, p):
     except Exception as _e: __import__("pannes").avale(_e)
     if p.get("assis") and meuble == "lit": C.couette(zone, g["x"] - x0, p["y"] - y0, R, g["L_j"] * 0.55, g["l_tr"] * 2.6)
     if meuble == "comptoir" and not p.get("assis"): C.comptoir(zone, g["x"] - x0, p["y"] - y0, R, g["l_tr"] * 2.6, g["L_j"])   # accoudé au comptoir
+    if F.get("dans") in ("poubelle", "carton"):                            # humain DANS une poubelle / un carton (registre du 21 novembre)
+        import animaux
+        animaux.contenant_humain(zone, F["dans"], g["x"] - x0, g["hanche"] - y0, p["y"] - y0, max(R * 2.4, g["l_tr"] * 3.4),
+                                 F.get("dans_coul"), float(p.get("t") or 0))
     return tc, (R, R)
 
 
