@@ -1,13 +1,13 @@
 {
- "moyenne": 465,
- "videos": 53,
+ "moyenne": 462,
+ "videos": 54,
  "plus": [
   {
    "critere": "Heure de publication",
    "valeur": "après-midi",
-   "vues": 623,
+   "vues": 624,
    "n": 3,
-   "fois": 1.34
+   "fois": 1.35
   }
  ],
  "moins": [
@@ -20,23 +20,23 @@
   },
   {
    "critere": "Couverture",
-   "valeur": "la chute",
-   "vues": 271,
-   "n": 4,
-   "fois": 0.58
-  },
-  {
-   "critere": "Couverture",
    "valeur": "le début",
    "vues": 268,
    "n": 4,
    "fois": 0.58
   },
   {
-   "critere": "Heure de publication",
-   "valeur": "soir",
-   "vues": 281,
-   "n": 6,
+   "critere": "Personnages",
+   "valeur": "2 personnages",
+   "vues": 280,
+   "n": 10,
+   "fois": 0.6
+  },
+  {
+   "critere": "Couverture",
+   "valeur": "la chute",
+   "vues": 275,
+   "n": 5,
    "fois": 0.6
   }
  ],
@@ -46,19 +46,19 @@
     "20 à 40 s",
     526,
     6,
-    1.13
+    1.14
    ],
    [
     "plus de 70 s",
-    502,
-    21,
-    1.08
+    492,
+    22,
+    1.07
    ],
    [
     "40 à 70 s",
     414,
     24,
-    0.89
+    0.9
    ]
   ],
   "accroche": [
@@ -66,7 +66,7 @@
     "« POV : … »",
     642,
     3,
-    1.38
+    1.39
    ]
   ],
   "profil": [
@@ -86,45 +86,45 @@
     "@eliotlehanneur",
     430,
     5,
-    0.92
+    0.93
    ],
    [
     "@yan_animation0",
-    401,
+    402,
     7,
-    0.86
+    0.87
    ],
    [
     "@charly.bse",
     393,
     6,
-    0.84
+    0.85
    ],
    [
     "@motiontoonz",
-    374,
-    5,
-    0.8
+    360,
+    6,
+    0.78
    ]
   ],
   "heure": [
    [
     "après-midi",
-    623,
+    624,
     3,
-    1.34
+    1.35
    ],
    [
     "matin",
-    418,
-    19,
-    0.9
+    411,
+    20,
+    0.89
    ],
    [
     "soir",
     281,
     6,
-    0.6
+    0.61
    ]
   ],
   "lieu": [
@@ -132,22 +132,28 @@
     "rue",
     281,
     5,
-    0.6
+    0.61
+   ],
+   [
+    "salon",
+    280,
+    3,
+    0.61
    ]
   ],
   "animal": [
    [
     "non",
-    274,
-    12,
-    0.59
+    276,
+    13,
+    0.6
    ]
   ],
   "persos": [
    [
     "2 personnages",
-    278,
-    9,
+    280,
+    10,
     0.6
    ],
    [
@@ -166,9 +172,9 @@
    ],
    [
     "la chute",
-    271,
-    4,
-    0.58
+    275,
+    5,
+    0.6
    ],
    [
     "le début",
@@ -180,13 +186,28 @@
   "partie": [
    [
     "non",
-    274,
-    12,
-    0.59
+    276,
+    13,
+    0.6
    ]
   ]
  },
- "maj": "2026-11-21T02:33+00:00",
+ "essais": {
+  "Créneau": [
+   [
+    "habituel",
+    293,
+    1
+   ]
+  ]
+ },
+ "sorties": {
+  "seuil": 1000,
+  "n": 0,
+  "videos": [],
+  "communs": []
+ },
+ "maj": "2026-11-21T11:26+00:00",
  "mots": {
   "audio": 1.16
  }
