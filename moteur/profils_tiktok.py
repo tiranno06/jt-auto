@@ -93,10 +93,14 @@ def deja_utilisees(historique):
     return ids
 
 
+VARIANTES = (["--impersonate", "chrome"], ["--extractor-args", "tiktok:api_hostname=api16-normal-c-useast1a.tiktokv.com"], [])
+
+
 def _ytdlp(pseudo, n=40):
-    import doublage
+    # (pas « import doublage » : il demande numpy, absent de la machine des statistiques -> la veille des profils échouait
+    # avant même d'interroger TikTok et déclarait tous les profils « introuvables », 17-21 novembre 2026)
     url = f"https://www.tiktok.com/@{pseudo}"
-    for v in doublage.VARIANTES:
+    for v in VARIANTES:
         try:
             r = subprocess.run([sys.executable, "-m", "yt_dlp", "--flat-playlist", "--no-warnings", "--socket-timeout", "30", *v,
                                 "--playlist-end", str(n), "-J", url], capture_output=True, text=True, timeout=180)
@@ -267,8 +271,14 @@ def surveiller(journal=print, maintenant=None, lister=None):
     jour = datetime.date.fromtimestamp(maintenant).isoformat()
     if E.get("date") == jour: return E                                     # déjà fait aujourd'hui
     anciens = E.get("profils") or {}; nouveaux = {}; alertes = []
-    for p in liste():
-        vs = (lister or videos)(p, journal=lambda m: None)
+    ps = liste(); res = {p: (lister or videos)(p, journal=lambda m: None) for p in ps}
+    if len(ps) >= 3 and not any(res.values()):                             # TOUS introuvables d'un coup = c'est notre outil (ou
+        journal(f"Veille des profils : aucun des {len(ps)} profils n'a répondu : panne de lecture, rien n'est compté")   # TikTok) qui
+        E = dict(E, date=jour)                                             # ne répond pas, pas les créateurs (faux « introuvables »)
+        os.makedirs(os.path.dirname(ETAT), exist_ok=True); json.dump(E, open(ETAT, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+        return E
+    for p in ps:
+        vs = res[p]
         a = dict(anciens.get(p) or {})
         if not vs:
             a["echecs"] = int(a.get("echecs") or 0) + 1

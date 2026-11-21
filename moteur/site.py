@@ -171,7 +171,7 @@ def application(nom):
 
 # Service worker : l'appli s'ouvre même hors connexion (dernière version de la page), sans jamais mettre en cache
 # les vidéos (trop lourdes) ni les appels à GitHub.
-SW = r"""const CACHE = "regie-v30";
+SW = r"""const CACHE = "regie-v31";
 const COQUILLE = ["./", "manifest.webmanifest", "logo-192.png", "logo-512.png", "poppins-500.ttf", "poppins-700.ttf"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(COQUILLE))); self.skipWaiting(); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(k => Promise.all(k.filter(x => x !== CACHE).map(x => caches.delete(x))))); self.clients.claim(); });
@@ -413,8 +413,9 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <p class="note" id="tkConnusNote"></p>
     <label>🚫 Profils à ne jamais reprendre (liste noire)<div class="jeton"><textarea data-var="PROFILS_INTERDITS" data-def="" data-texte="1" maxlength="2000" rows="2" placeholder="@profil_qui_a_reclame"></textarea><button class="second" data-enr="PROFILS_INTERDITS" style="flex:none;padding:10px 14px">OK</button></div></label>
     <p class="note">Ces profils ne sont jamais tirés au hasard, même s'ils sont dans la liste ci-dessus. Les profils dont la bio interdit la reprise (« ne pas reprendre », « no repost »…) sont écartés tout seuls.</p>
-    <b>🔍 Nouveaux créateurs proposés</b>
-    <p class="note">Chaque lundi, le robot cherche des comptes cités par vos créateurs et vérifie qu'ils publient des sketchs qui font des vues. « ➕ » l'ajoute à votre liste, « 🚫 » à la liste noire (puis touchez OK).</p>
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><b style="flex:1">🔍 Nouveaux créateurs proposés</b><button class="second" id="chercherCreateurs" style="flex:none;padding:8px 12px">🔄 Chercher maintenant</button></div>
+    <p class="note" id="suiviCreateurs"></p>
+    <p class="note">Chaque lundi (ou quand vous touchez « Chercher maintenant »), le robot cherche des comptes cités par vos créateurs et vérifie qu'ils publient des sketchs qui font des vues. « ➕ » l'ajoute à votre liste, « 🚫 » à la liste noire (puis touchez OK).</p>
     <div id="decouvertes"><p class="note">Pas encore de proposition (prochaine recherche lundi).</p></div></details>
   <details class="groupe repliTk ancien" data-cle="vitrine"><summary>🏪 Vitrine du profil</summary>
     <p class="note">À appliquer vous-même dans l'appli TikTok (Profil → Modifier le profil ; appui long sur une vidéo → Épingler). Mis à jour chaque lundi.</p>
@@ -946,6 +947,12 @@ function rendreOutils(){
   $("#resumeOutils").textContent=rouges.length?"⚠️":"";
   $("#alerteCredit").innerHTML=rouges.length?`<div class="alerte">⚠️ ${rouges.map(x=>x[2].split(" :")[0]).join(", ")} : crédit à vérifier (⚙️ Réglages → Crédits et outils). Les vidéos sortent quand même avec les outils gratuits.</div>`:"";
 }
+$("#chercherCreateurs").onclick=()=>{                                    // recherche des nouveaux créateurs sans attendre le lundi
+  if(!lireJeton()){toast("Connectez d'abord la régie (une seule fois)");return}
+  lancerFlux("vitrine.yml",$("#chercherCreateurs"),"🔍 Recherche de nouveaux créateurs (5 à 20 min)…",null,$("#suiviCreateurs"),
+    async ok=>{ if(ok){ try{const dc=await lireEpisode("decouvertes.json"); if(dc&&Array.isArray(dc.profils)) rendreDecouvertes(dc)}catch(e){}
+      toast("Recherche terminée ✓")} });
+};
 $("#verifCredits").onclick=()=>{
   if(!lireJeton()){toast("Connectez d'abord la régie (une seule fois)");return}
   lancerFlux("credits.yml",$("#verifCredits"),"🔍 Test de chaque outil en direct (1 à 2 min)…",null,$("#suiviCredits"),

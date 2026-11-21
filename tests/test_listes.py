@@ -640,6 +640,11 @@ class TestListe15Novembre(unittest.TestCase):
             self.assertEqual(E["profils"]["endormi"]["etat"], "inactif")
             E = P.surveiller(journal=lambda m: None, maintenant=t0 + 86400, lister=lister)
             self.assertEqual(E["profils"]["parti"]["etat"], "introuvable"); self.assertEqual(E["profils"]["vivant"]["etat"], "ok")
+            for k in range(2, 5):                                          # outil en panne : AUCUN profil ne répond -> rien compté
+                E = P.surveiller(journal=lambda m: None, maintenant=t0 + k * 86400, lister=lambda p, journal=None: [])
+            self.assertEqual(E["profils"]["vivant"]["etat"], "ok"); self.assertEqual(E["profils"]["vivant"]["echecs"], 0)
+            src = open(P.__file__, encoding="utf-8").read()
+            self.assertNotIn("import doublage\n    url = f\"https://www.tiktok.com/@{pseudo}\"", src)   # pas de numpy demandé
         finally:
             P.ETAT = anc_e
             if anc_l is None: os.environ.pop("PROFILS_TIKTOK", None)

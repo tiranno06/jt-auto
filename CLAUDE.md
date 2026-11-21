@@ -466,7 +466,8 @@
   l'autre, sinon au moins de créateur ; lieu = historique "recette", sinon la réalisation du sketch) ; **nouveaux créateurs** (9,
   `moteur/decouverte.py`, workflow vitrine.yml chaque lundi) : comptes cités « @… » dans les titres de vos créateurs et des originaux
   (la recherche par hashtag est cassée dans yt-dlp et tikwm refuse les robots), 30 vérifiés au plus (8 vidéos de 8 à 150 s, publié
-  ces 30 jours, médiane ≥ 5 000 vues), 6 proposés (episodes/decouvertes.json ; site : « ➕ » / « 🚫 » dans « Mes profils ») ; essai
+  ces 30 jours, médiane ≥ 5 000 vues), 6 proposés (episodes/decouvertes.json ; site : « ➕ » / « 🚫 » dans « Mes profils » ; bouton
+  « 🔄 Chercher maintenant » à côté du titre (demande de l'auteur du 21 novembre) = vitrine.yml tout de suite, liste relue à la fin) ; essai
   du 11 novembre : @enzolefrere, @aguerin30, @42malek, @brutuslerobuste, @jawedyoussef ; **paliers d'abonnés** (14, `moteur/paliers.py`
   après chaque relevé de stats.yml : 500, 1 000, 2 000… -> vidéo « merci » sur un script, vidéo manuelle jamais publiée seule, alerte ;
   episodes/paliers.json ; paliers déjà passés au 1er passage jamais fêtés après coup ; PALIERS=0) ; **vitrine du profil** (15,
@@ -667,6 +668,10 @@
   sous-titres anglais comparés sur les vidéos depuis le 21 novembre) et **🚀 vidéos sorties du premier essai** (`recette.sorties` :
   1 000 vues et 3 × la médiane au moins, et ce qu'elles ont en commun). Pas fait (non choisis) : 2e compte en anglais, YouTube Shorts /
   Instagram Reels, bonus aux sons drôles sans les mots, carte des pays. Déconseillé : doublage des voix en anglais (coût, jeu perdu, droits).
+  **Fausse alerte « profils introuvables » (21 novembre)** : depuis le 17 novembre la veille des profils déclarait les 8 créateurs
+  « introuvables » (l'auteur en a retiré de « Mes profils ») : `profils_tiktok._ytdlp` importait `doublage` (numpy, absent de la machine
+  des statistiques) et plantait avant d'interroger TikTok. Réparé (`profils_tiktok.VARIANTES`, curl_cffi installé dans stats.yml) ;
+  et si AUCUN profil ne répond d'un coup (3 ou plus), c'est notre lecture qui est en panne : rien n'est compté ni signalé.
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.
