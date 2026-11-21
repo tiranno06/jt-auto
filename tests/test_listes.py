@@ -1151,4 +1151,5 @@ class TestPannes21Novembre(unittest.TestCase):
     def test_correction_sans_idees_de_sketch_et_jury_complet(self):
         src = open(os.path.join(os.path.dirname(__file__), "..", "moteur", "principal.py"), encoding="utf-8").read()
         self.assertIn('"source": "refaire"}], "refaire")]', src)
+        self.assertIn("for modele in list(video_ia.MODELES)[:2]:", open(os.path.join(os.path.dirname(__file__), "..", "moteur", "fiche_tournage.py"), encoding="utf-8").read())
         self.assertIn("OUTIL, max_tokens=8000)", open(os.path.join(os.path.dirname(__file__), "..", "moteur", "qualite.py"), encoding="utf-8").read())

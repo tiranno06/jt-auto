@@ -678,7 +678,8 @@
   mais répond 404 -> `reseau.gemini_mort` / GEMINI_MORTS : plus appelé jusqu'à la fin de la fabrication (video_ia, fiche_tournage,
   relais `_appel_openai`) ; « gemini-2.5-flash-lite » ajouté aux modèles voulus. **Gemini qui écoute les passages en doute**
   (`video_ia.ecouter`) : seuls les passages (± 0,6 s) mis bout à bout (son 3 à 10 fois plus court) et 90 s d'attente au plus, un seul
-  essai par modèle (avant : son entier, 2 × 180 s, « The read operation timed out », contrôle de la vidéo finie 4 min au lieu de 1).
+  essai par modèle (avant : son entier, 2 × 180 s, « The read operation timed out », contrôle de la vidéo finie 4 min au lieu de 1) ;
+  contrôle « fidélité à l'audio » (`fiche_tournage._gemini_brut`) : 2 modèles au plus, 1 essai de 2 min chacun (il avait pris 10 min).
   **Fausses pannes** (`pannes.BANAL` / `BRUIT`) : ligne « Tendances : … » (« cargo échoué »), décor de la banque écarté exprès, Gemini
   503 / 429 / 404 (relais automatique vers le modèle suivant), « Idée n : », « Remarque comprise ». **Journal de la dernière
   fabrication** : réponse du jury coupée à 4 000 jetons -> 8 000 (`qualite`) ; une correction (« Refaire » compte rendu, remarque, qui
