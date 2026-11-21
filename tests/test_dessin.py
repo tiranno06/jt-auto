@@ -285,8 +285,8 @@ class TestQualiteVisuelle(unittest.TestCase):
     def test_controle_image(self):
         import cartoon
         tetes = [dict(t=1.0, role="a", x=-30.0, y=800.0, rx=120.0, ry=130.0, plan="moyen", seul=None, parle=True, i=0, sous_titre=False),
-                 dict(t=1.0, role="b", x=600.0, y=1650.0, rx=120.0, ry=130.0, plan="serre", seul=None, parle=True, i=0, sous_titre=True),
-                 dict(t=1.0, role="c", x=650.0, y=1600.0, rx=120.0, ry=130.0, plan="serre", seul=None, parle=False, i=0, sous_titre=True)]
+                 dict(t=1.0, role="b", x=600.0, y=cartoon.CAP_Y - 50.0, rx=120.0, ry=130.0, plan="serre", seul=None, parle=True, i=0, sous_titre=True),
+                 dict(t=1.0, role="c", x=650.0, y=cartoon.CAP_Y - 100.0, rx=120.0, ry=130.0, plan="serre", seul=None, parle=False, i=0, sous_titre=True)]
         types = {d["type"] for d in cartoon.controle_image(tetes)}
         self.assertEqual(types, {"tete_coupee", "sous_titre_visage", "chevauchement"})
 
