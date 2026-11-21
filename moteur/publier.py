@@ -123,6 +123,21 @@ def publier_upload_post(video, legende):
                                  headers={"Authorization": f"Apikey {cle}", "Content-Type": f"multipart/form-data; boundary={limite}"})
     rep = urllib.request.urlopen(req, timeout=600).read().decode(); print("Upload-Post :", rep[:300]); return rep
 
+def publier_parties(url1, legende, titre=""):
+    """Son long en deux parties (idée 5 du 21 novembre) : la partie 1 à l'heure prévue, la partie 2 PARTIES_ECART heures après
+    (même compte TikTok, par Buffer). Renvoie la réponse de la partie 1."""
+    import parties
+    cle = os.environ["BUFFER_API_KEY"]; c = canaux(cle)
+    if "tiktok" not in c: raise RuntimeError("Aucun compte TikTok connecté à Buffer")
+    quand = _quand(); titre = titre or os.environ.get("TITRE_VIDEO", "")
+    rep = _poster(cle, c["tiktok"], "tiktok", parties.legende_partie(legende, 1), url1, titre, quand)
+    base = datetime.datetime.strptime(quand, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=datetime.timezone.utc) if quand else datetime.datetime.now(datetime.timezone.utc)
+    q2 = (base + datetime.timedelta(hours=parties.ecart_heures())).strftime("%Y-%m-%dT%H:%M:%SZ")
+    try: _poster(cle, c["tiktok"], "tiktok", parties.legende_partie(legende, 2), url1.replace("_p1.mp4", "_p2.mp4"), titre + " (partie 2)", q2)
+    except Exception as e: print(f"Partie 2 non programmée ({str(e)[:200]}) : à publier à la main depuis le site")
+    return rep
+
+
 def publier(video, legende, url):
     if os.environ.get("BUFFER_API_KEY"):
         return publier_buffer(url, legende, os.environ.get("TITRE_VIDEO", ""))
@@ -144,6 +159,16 @@ def preparer():
         print(f"{nom} est déjà publiée : rien à faire (choisir « forcer = oui » pour republier)."); return
     os.makedirs("sortie", exist_ok=True)
     txt = nom.replace(".mp4", ".txt")
+    P_ = e.get("parties") or []
+    if len(P_) == 2 and __import__("parties").actif() and os.environ.get("BUFFER_API_KEY") and os.environ.get("REDIFFUSION_RUN") != "1":
+        r = subprocess.run(["gh", "release", "download", e["tag"], "-p", P_[0], "-p", P_[1], "-D", "sortie", "--clobber"], capture_output=True, text=True)
+        if all(os.path.exists(os.path.join("sortie", p_)) for p_ in P_):     # son long (idée 5) : la partie 1 maintenant, la 2 ensuite
+            open(os.path.join("sortie", P_[0].replace(".mp4", ".txt")), "w", encoding="utf-8").write(e.get("legende", ""))
+            depot = os.environ.get("GITHUB_REPOSITORY"); serveur = os.environ.get("GITHUB_SERVER_URL", "https://github.com")
+            with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+                f.write(f"video=sortie/{P_[0]}\nlegende=sortie/{P_[0].replace('.mp4', '.txt')}\nurl={serveur}/{depot}/releases/download/{e['tag']}/{P_[0]}\n")
+            print(f"Vidéo en deux parties : {P_[0]} puis {P_[1]}"); return
+        print("Parties introuvables dans les archives : la vidéo complète est publiée")
     r = subprocess.run(["gh", "release", "download", e["tag"], "-p", nom, "-p", txt, "-D", "sortie", "--clobber"], capture_output=True, text=True)
     if not os.path.exists(os.path.join("sortie", nom)): sys.exit(f"Vidéo introuvable dans la Release {e['tag']} : {r.stderr[:300]}")
     if e.get("legende") or not os.path.exists(os.path.join("sortie", txt)):   # la légende de l'historique fait foi (modifiable)
@@ -208,19 +233,21 @@ if __name__ == "__main__":
         sys.exit(0)
     video, legende_txt, url = sys.argv[1:4]
     try:                                                                   # titre (YouTube) et image de couverture depuis l'historique
-        e_ = next((h for h in json.load(open(HIST, encoding="utf-8")) if h.get("fichier") == os.path.basename(video)), {})
+        e_ = next((h for h in json.load(open(HIST, encoding="utf-8")) if h.get("fichier") == os.path.basename(video).replace("_p1.mp4", ".mp4")), {})
         os.environ.setdefault("TITRE_VIDEO", (e_.get("titre_affiche") or e_.get("titre") or "").strip())
         if e_.get("couverture_ms"): os.environ.setdefault("COUVERTURE_MS", str(int(e_["couverture_ms"])))
     except Exception as _e: __import__("pannes").avale(_e)
     legende = open(legende_txt, encoding="utf-8").read().split("\n\nSources :")[0].strip()
-    try: legende = __import__("legende").completer(legende, video)        # jamais de lien ; hashtags ajoutés aux anciennes vidéos
+    try: legende = __import__("legende").completer(legende, video.replace("_p1.mp4", ".mp4"))   # jamais de lien ; hashtags ajoutés aux anciennes vidéos
     except Exception as e: print(f"légende gardée telle quelle ({str(e)[:120]})")
     ok, erreur = False, None
+    partie1 = os.path.basename(video).endswith("_p1.mp4")
     try:
-        ok = publier(video, legende, url) is not None
+        if partie1: ok = publier_parties(url, legende) is not None
+        else: ok = publier(video, legende, url) is not None
     except Exception as e:
         erreur = str(e)[:300]; print(f"Publication automatique échouée : {erreur}")
-    marquer(os.path.basename(video), ok, erreur, legende)
+    marquer(os.path.basename(video).replace("_p1.mp4", ".mp4"), ok, erreur, legende)
     if not ok:
         print("➡ Vidéo disponible sur le site pour publication en un clic.")
         sys.exit(1)

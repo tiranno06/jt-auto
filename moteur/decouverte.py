@@ -6,7 +6,8 @@ créateurs du même style. (La recherche par hashtag de TikTok est cassée dans 
 mentions.) Chaque candidat est VÉRIFIÉ avant d'être proposé : le compte existe, il a au moins 8 vidéos de 8 à 150 s, il a publié
 ces 30 derniers jours, et ses vidéos font des vues (médiane ≥ 5 000). Les 6 meilleurs sont rangés dans episodes/decouvertes.json ;
 le site les montre (onglet TikTok, « 👥 Mes profils ») avec « ➕ Ajouter » et « 🚫 Jamais ». Jamais un profil déjà dans la liste,
-dans la liste noire, ni notre chaîne. DECOUVERTE=0 pour couper."""
+dans la liste noire, ni notre chaîne. DECOUVERTE=0 pour couper. Depuis le 21 novembre : créateurs du reste de la francophonie
+repérés (`pays`) et favorisés (`selection`)."""
 import datetime, json, os, re, statistics, sys, time
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -23,6 +24,31 @@ def mentions(textes):
     return c
 
 
+# Créateurs de TOUTE la francophonie (choix de l'auteur du 21 novembre 2026, idée 22 ; va avec le créneau francophonie) : repérés à
+# leurs titres (drapeaux, villes, pays) ; jusqu'à 2 des 6 propositions leur sont réservées quand il y en a. FRANCOPHONIE_DECOUVERTE=0.
+PAYS = [("Belgique", r"🇧🇪|\bbelgi|\bbruxelles\b|\bbxl\b|\bli[èe]ge\b|\bcharleroi\b"),
+        ("Québec", r"🇨🇦|qu[ée]bec|\bmtl\b|montr[ée]al|\btabarn|\bpantoute\b"),
+        ("Suisse", r"🇨🇭|\bsuisse\b|gen[èe]ve|lausanne"),
+        ("Côte d'Ivoire", r"🇨🇮|c[ôo]te d.ivoire|ivoirien|abidjan"),
+        ("Sénégal", r"🇸🇳|s[ée]n[ée]gal|dakar"),
+        ("Cameroun", r"🇨🇲|cameroun|douala|yaound[ée]"),
+        ("Maroc", r"🇲🇦|\bmaroc|casablanca|\brabat\b"),
+        ("Algérie", r"🇩🇿|alg[ée]ri|\balger\b|\boran\b"),
+        ("Tunisie", r"🇹🇳|tunisi|\btunis\b"),
+        ("Congo", r"🇨🇩|🇨🇬|congo|kinshasa|brazzaville"),
+        ("Haïti", r"🇭🇹|ha[ïi]ti"), ("Madagascar", r"🇲🇬|madagascar|malgache"),
+        ("Afrique francophone", r"🇧🇫|🇲🇱|🇬🇦|🇧🇯|🇹🇬|🇬🇳|burkina|\bmali\b|gabon|b[ée]nin|\btogo\b|guin[ée]e|africain")]
+
+
+def pays(titres):
+    """Pays francophone hors France repéré dans les titres d'un créateur (2 titres au moins), ou None."""
+    c = {}
+    for t in titres:
+        for nom, motif in PAYS:
+            if re.search(motif, str(t or "").lower()): c[nom] = c.get(nom, 0) + 1
+    return max(c, key=c.get) if c and max(c.values()) >= 2 else None
+
+
 def verifier(pseudo, videos):
     """Fiche d'un candidat d'après ses vidéos récentes, ou None s'il ne convient pas."""
     import profils_tiktok as P
@@ -35,8 +61,11 @@ def verifier(pseudo, videos):
     med = int(statistics.median(vues))
     if med < VUES_MIN: return None
     meilleure = max(vs, key=lambda v: int(v.get("vues") or 0))
-    return {"profil": pseudo, "vues_mediane": med, "videos": len(vs), "recentes_30j": len(recentes),
-            "exemple": meilleure.get("url"), "titre": str(meilleure.get("titre") or "")[:90]}
+    out = {"profil": pseudo, "vues_mediane": med, "videos": len(vs), "recentes_30j": len(recentes),
+           "exemple": meilleure.get("url"), "titre": str(meilleure.get("titre") or "")[:90]}
+    p_ = pays([v.get("titre") for v in vs])
+    if p_: out["pays"] = p_
+    return out
 
 
 def chercher(journal=print, max_candidats=30):
@@ -59,7 +88,15 @@ def chercher(journal=print, max_candidats=30):
         f = verifier(m, P.videos(m, journal=lambda x: None))
         if f: f["cite"] = c[m]; out.append(f); journal(f"  ✅ @{m} : {f['videos']} vidéos, {f['vues_mediane']} vues (médiane)")
     out.sort(key=lambda f: -(f["vues_mediane"] * (1 + 0.3 * f["cite"])))
-    return out[:6]
+    return selection(out)
+
+
+def selection(out, n=6, reserve=2):
+    """Les n meilleurs, dont jusqu'à `reserve` places pour des créateurs francophones hors de France (idée 22)."""
+    if os.environ.get("FRANCOPHONIE_DECOUVERTE", "1") == "0": return out[:n]
+    franco = [f for f in out if f.get("pays")][:reserve]
+    reste = [f for f in out if f not in franco][:n - len(franco)]
+    return sorted(franco + reste, key=lambda f: out.index(f))
 
 
 if __name__ == "__main__":

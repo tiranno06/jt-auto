@@ -171,7 +171,7 @@ def application(nom):
 
 # Service worker : l'appli s'ouvre même hors connexion (dernière version de la page), sans jamais mettre en cache
 # les vidéos (trop lourdes) ni les appels à GitHub.
-SW = r"""const CACHE = "regie-v31";
+SW = r"""const CACHE = "regie-v32";
 const COQUILLE = ["./", "manifest.webmanifest", "logo-192.png", "logo-512.png", "poppins-500.ttf", "poppins-700.ttf"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(COQUILLE))); self.skipWaiting(); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(k => Promise.all(k.filter(x => x !== CACHE).map(x => caches.delete(x))))); self.clients.claim(); });
@@ -411,6 +411,8 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <div id="profilsEtat"></div>
     <button class="second" id="tkConnus" style="width:100%;margin-bottom:6px">➕ Ajouter les profils déjà connus</button>
     <p class="note" id="tkConnusNote"></p>
+    <label>🥊 Chaînes concurrentes (qui doublent aussi des sons TikTok)<div class="jeton"><textarea data-var="CHAINES_CONCURRENTES" data-def="" data-texte="1" maxlength="1000" rows="2" placeholder="@une_chaine_qui_double&#10;@une_autre"></textarea><button class="second" data-enr="CHAINES_CONCURRENTES" style="flex:none;padding:10px 14px">OK</button></div></label>
+    <p class="note">Le robot lit leurs vidéos récentes : un son qu'elles ont déjà repris (lien cité, ou créateur cité avec un titre qui ressemble) n'est pas choisi.</p>
     <label>🚫 Profils à ne jamais reprendre (liste noire)<div class="jeton"><textarea data-var="PROFILS_INTERDITS" data-def="" data-texte="1" maxlength="2000" rows="2" placeholder="@profil_qui_a_reclame"></textarea><button class="second" data-enr="PROFILS_INTERDITS" style="flex:none;padding:10px 14px">OK</button></div></label>
     <p class="note">Ces profils ne sont jamais tirés au hasard, même s'ils sont dans la liste ci-dessus. Les profils dont la bio interdit la reprise (« ne pas reprendre », « no repost »…) sont écartés tout seuls.</p>
     <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><b style="flex:1">🔍 Nouveaux créateurs proposés</b><button class="second" id="chercherCreateurs" style="flex:none;padding:8px 12px">🔄 Chercher maintenant</button></div>
@@ -451,6 +453,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <div id="heureStats" class="note" style="margin:-2px 0 8px"></div>
     <label>Heure de publication (heure de Paris)<div class="jeton"><input data-var="PUBLI_HEURE" data-def="18:00" data-texte="1" maxlength="5" type="time" placeholder="18:00"><button class="second" data-enr="PUBLI_HEURE" style="flex:none;padding:10px 14px">OK</button></div></label>
     <div class="auto"><div class="txt"><b>Deux vidéos par jour</b><small>Une 2e vidéo cochée publiée à la 2e heure ci-dessous (au moins une heure d'écart).</small></div><button class="inter" data-var="PUBLI_DEUX" data-def="0" data-bascule="1"></button></div>
+    <div class="auto"><div class="txt"><b>🎬 Sons longs en 2 parties</b><small>Une vidéo de plus de 70 s est publiée en deux parties : la partie 1 à l'heure prévue, la partie 2 quatre heures après (elle ramène les gens sur le profil).</small></div><button class="inter" data-var="PARTIES" data-def="1" data-bascule="1"></button></div>
     <div class="auto"><div class="txt"><b>♻️ Rediffusion</b><small>Quand aucune vidéo cochée n'attend, la vidéo d'il y a plus de 3 mois qui a fait le plus de vues repart (jamais deux fois en 3 mois).</small></div><button class="inter" data-var="REDIFFUSION" data-def="1" data-bascule="1"></button></div>
     <label>2e heure de publication (heure de Paris)<div class="jeton"><input data-var="PUBLI_HEURE2" data-def="12:00" data-texte="1" maxlength="5" type="time" placeholder="12:00"><button class="second" data-enr="PUBLI_HEURE2" style="flex:none;padding:10px 14px">OK</button></div></label>
     <div class="auto"><div class="txt"><b>🌍 Créneau francophonie</b><small>Un jour sur deux, la dernière vidéo du jour part le soir (Québec en fin d'après-midi, Afrique francophone en soirée). Même nombre de vidéos ; « 📈 Ce qui marche » compare les vues des deux créneaux.</small></div><button class="inter" data-var="PUBLI_FRANCO" data-def="1" data-bascule="1"></button></div>
@@ -542,6 +545,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <label>Montage<select data-var="MONTAGE" data-def="large"><option value="large">Plan large : les personnages toujours à l'image, caméra fixe (recommandé)</option><option value="dynamique">Dynamique : beaucoup de plans, zooms et caméra vivante</option><option value="simple">Simple : un plan par réplique</option></select></label>
     <div class="auto"><div class="txt"><b>Sous-titres karaoké</b><small>Le mot dit passe en jaune, au moment exact où on l'entend (contrôlé mot par mot ; une réplique douteuse garde les sous-titres normaux).</small></div><button class="inter" data-var="KARAOKE" data-def="1" data-bascule="1"></button></div>
     <div class="auto"><div class="txt"><b>Raccourcir les longs silences</b><small>Les blancs de plus d'1 s de l'original sont ramenés à ½ s (jamais un rire ni un souffle).</small></div><button class="inter" data-var="SILENCES_COURTS" data-def="1" data-bascule="1"></button></div>
+    <label>🏁 Carton de fin « Abonne-toi »<select data-var="FIN_CARTE" data-def="essai"><option value="essai">Essai : une vidéo sur deux sans carton, puis on compare les vues (recommandé)</option><option value="1">Toujours</option><option value="0">Jamais (la vidéo repart directement au début)</option></select></label>
     <label>🌍 Sous-titres anglais (en plus du français)<select data-var="SOUS_TITRES_EN" data-def="essai"><option value="essai">Essai sur les 10 prochaines vidéos, puis on compare les vues (recommandé)</option><option value="1">Toujours</option><option value="0">Jamais</option></select></label>
     <div class="auto"><div class="txt"><b>Rendu détaillé</b><small>Tenues, visages, décors et plans soignés (gratuit).</small></div><button class="inter" data-var="RENDU_DETAILLE" data-def="1" data-bascule="1"></button></div>
     <div class="auto ancien"><div class="txt"><b>Accroche choc en ouverture</b><small>La réplique la plus intrigante dès la 1re seconde.</small></div><button class="inter" data-var="ACCROCHE" data-def="0" data-bascule="1"></button></div>
@@ -821,7 +825,7 @@ const esc=t=>String(t??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&g
 function rendreDecouvertes(d){
   const z=$("#decouvertes"); if(!z) return;
   if(!d.profils.length){z.innerHTML=`<p class="note">Aucun nouveau créateur trouvé le ${esc(d.date)}.</p>`;return}
-  z.innerHTML=d.profils.map(f=>`<div class="auto"><div class="txt"><b>@${esc(f.profil)}</b><small>${Number(f.vues_mediane).toLocaleString("fr-FR")} vues par vidéo (médiane) · ${f.recentes_30j} vidéo(s) ce mois-ci${f.exemple?` · <a style="color:var(--bleu)" href="${esc(f.exemple)}" target="_blank" rel="noopener">voir une vidéo ↗</a>`:""}</small></div>
+  z.innerHTML=d.profils.map(f=>`<div class="auto"><div class="txt"><b>@${esc(f.profil)}</b>${f.pays?` <span class="badge att">🌍 ${esc(f.pays)}</span>`:""}<small>${Number(f.vues_mediane).toLocaleString("fr-FR")} vues par vidéo (médiane) · ${f.recentes_30j} vidéo(s) ce mois-ci${f.exemple?` · <a style="color:var(--bleu)" href="${esc(f.exemple)}" target="_blank" rel="noopener">voir une vidéo ↗</a>`:""}</small></div>
     <button class="second" data-ajout="${esc(f.profil)}" style="flex:none;padding:8px 12px">➕</button><button class="second" data-jamais="${esc(f.profil)}" style="flex:none;padding:8px 12px">🚫</button></div>`).join("");
   const ajoute=(sel,p)=>{const t=document.querySelector(`[data-var="${sel}"]`); if(!t) return; if(!new RegExp("@?"+p.replace(/[.\-]/g,"\\$&")+"\\b","i").test(t.value)) t.value=(t.value.trim()?t.value.trim()+"\n":"")+"@"+p; t.scrollIntoView({behavior:"smooth",block:"center"}); toast("@"+p+" ajouté : touchez OK pour enregistrer")};
   z.querySelectorAll("[data-ajout]").forEach(b=>b.onclick=()=>ajoute("PROFILS_TIKTOK",b.dataset.ajout));
@@ -921,6 +925,9 @@ function rendreEssaisMonde(r){                                             // es
   const ks=Object.keys(e);
   h+=ks.length?ks.map(k=>`<p class="note">${esc(k)} : `+e[k].map(x=>`<b>${esc(x[0])}</b> ${x[1]} vues en moyenne (${x[2]} vidéo${x[2]>1?"s":""})`).join(" · ")+`</p>`).join("")
     :`<p class="note">Pas encore de vidéo publiée depuis le début des essais (créneau francophonie, sous-titres anglais).</p>`;
+  const HT=Object.entries(r.hashtags||{}).sort((a,b)=>b[1]-a[1]);              // idée 8 : hashtags qui font des vues
+  if(HT.length>=4) h+=`<p class="note"><b>#️⃣ Hashtags</b> — qui marchent : `+HT.slice(0,5).map(x=>`#${esc(x[0])} ×${x[1]}`).join(" · ")+
+    ` ; qui marchent moins : `+HT.slice(-3).reverse().map(x=>`#${esc(x[0])} ×${x[1]}`).join(" · ")+` (le robot met les premiers en tête, retire ceux sous ×0,6)</p>`;
   h+=`<p class="note">Les pays des spectateurs ne sont visibles que dans TikTok : Outils du créateur → Statistiques → Spectateurs → Lieux.</p>`;
   h+=`<p class="note" style="margin-top:12px"><b>🚀 Vidéos sorties du premier essai</b> (${S.seuil||1000} vues et plus : TikTok les a montrées au-delà du premier petit groupe)</p>`;
   h+=S.n?`<p class="note">${S.n} vidéo(s) : `+(S.videos||[]).map(v=>`« ${esc(v[0])} » <b>${v[1]}</b>`).join(" · ")+`</p>`+
@@ -960,6 +967,10 @@ $("#verifCredits").onclick=()=>{
 };
 // ------------------------------------------------ liste des vidéos
 function badge(v){
+  const deux=(v.parties&&v.parties.length===2)?' <span class="badge att">🎬 En 2 parties</span>':'';
+  return badge1(v)+deux;
+}
+function badge1(v){
   if(v.publie===true&&v.programmee&&new Date(v.programmee)>new Date()) return '<span class="badge att">🗓️ Programmée le '+new Date(v.programmee).toLocaleString("fr-FR",{dateStyle:"short",timeStyle:"short"})+'</span>';
   if(v.publie===true) return '<span class="badge ok">✓ Publiée sur TikTok</span>'+(v.avis===1?' 👍':v.avis===-1?' 👎':'');
   if(v.publie===false) return '<span class="badge ko">⚠ Échec de publication</span>';

@@ -173,6 +173,16 @@ def limite_job():
     except (KeyError, ValueError): return None
 
 
+def fin_carte_essai(historique):
+    """Carton de fin « Abonne-toi » (choix de l'auteur du 21 novembre 2026, idée 6) : il dure ~2,4 s et peut faire partir les gens avant
+    la fin, or le visionnage complet compte beaucoup pour TikTok. Réglage FIN_CARTE : « essai » (par défaut) = une vidéo sur deux sans
+    carton (la recette compare les vues), « 1 » toujours, « 0 » jamais. Renvoie True (avec carton) ou False (sans)."""
+    v = (os.environ.get("FIN_CARTE") or "essai").strip()
+    if v in ("0", "1"): return v == "1"
+    n = sum(1 for h in historique if h.get("filiere") == "tiktok" and "fin_carte" in h and not h.get("essai"))
+    return n % 2 == 0
+
+
 def corriger_compte_rendu(sk, base, audios, mots, decors, fmt, points, modal_ok, QUALITE):
     """Les problèmes du compte rendu (points à vérifier + remarques du jury) passent au correcteur de « Dis ce qui ne va pas »
     (moteur/compte_rendu.py) ; seuls les passages touchés sont redessinés ; gardé seulement si la note de confiance monte."""
@@ -404,6 +414,7 @@ def main():
         except Exception as e: print(f"Parties : {str(e)[:120]}", flush=True)
         try: __import__("anglais").preparer(sk, historique)                # sous-titres anglais en plus (21 novembre, idée 3)
         except Exception as e: print(f"Sous-titres anglais : {str(e)[:120]}", flush=True)
+        if fin_carte_essai(historique) is False: sk["_sans_fin"] = True; print("Essai : sans carton de fin « Abonne-toi »", flush=True)
     elif script:                                                           # script tapé : les répliques restent mot pour mot
         sk = ecrire.mettre_en_scene(script)
     elif test:                                                             # sketch écrit à la main (essai d'un style)
@@ -719,6 +730,10 @@ def main():
                 capture_output=True)
         WEB = r_.returncode == 0 and os.path.exists(base + "_web.mp4") and os.path.exists(base + ".jpg")
     except Exception as e: print(f"version légère impossible ({str(e)[:100]}) : le site la fera", flush=True)
+    PARTIES, T_PARTIES = None, None                                        # son long : aussi en deux parties (idée 5 du 21 novembre)
+    if DOUB and not test:
+        try: PARTIES, T_PARTIES = __import__("parties").decouper(base + ".mp4", sk.get("repliques"), duree)
+        except Exception as e: print(f"parties impossibles ({str(e)[:100]})", flush=True)
     credit = "Voix : " + " ; ".join(credits_voix) + "."
     if decors: credit += " Décors générés avec Stable Diffusion XL (CreativeML Open RAIL++-M)."
     if libre:                                                              # signature de la chaîne dans les hashtags
@@ -759,6 +774,7 @@ def main():
     if test or (os.environ.get("APERCU_RAPIDE") or "") == "1" or (os.environ.get("RENDU") or "") == "essai_pause":
         historique[-1]["essai"] = True                                     # essai : rangé à part sur le site, effacé au bout de 3 jours
     if WEB: historique[-1]["web"] = True                                    # base_web.mp4 + base.jpg dans les archives du mois
+    if PARTIES: historique[-1]["parties"] = PARTIES; historique[-1]["coupure"] = T_PARTIES   # base_p1.mp4 / base_p2.mp4 (archives)
     if A_VERIFIER: historique[-1]["a_verifier"] = A_VERIFIER               # ⚠️ sur le site : points à regarder avant de publier
     if libre and not REALISTE:                                             # note de confiance (tri « les plus sûres d'abord »)
         try: historique[-1]["confiance"] = __import__("verif_finale").confiance(sk.get("equipe"), A_VERIFIER, QUALITE["Q"])
@@ -784,6 +800,7 @@ def main():
         except Exception as _e: __import__("pannes").avale(_e)
     if sk.get("titre_accroche"): historique[-1]["titre_affiche"] = sk["titre_accroche"]
     if DOUB and sk.get("_anglais"): historique[-1]["anglais"] = True       # sous-titres anglais (essai de 10 vidéos, recette.py compare)
+    if DOUB: historique[-1]["fin_carte"] = not sk.get("_sans_fin")          # essai du carton de fin (recette.py compare)
     if REFAIRE_MODE == "compte_rendu" and ANCIEN and not test:            # corrigée d'après le compte rendu : la moins sûre des deux est retirée
         try:
             c1, c2 = ANCIEN.get("confiance"), historique[-1].get("confiance")

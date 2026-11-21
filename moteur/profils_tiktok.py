@@ -230,8 +230,11 @@ def choisir(historique, journal=print, graine=None, essais=4):
     sujets = sujets_du_moment()
     if communs or sujets: journal(f"Tendances : {', '.join('#' + h for h in sorted(communs)[:8]) or 'aucun hashtag commun'} ; sujets qui montent en France : {', '.join(sujets[:6]) or '—'}")
     parties = suites.faites(historique)                                     # parties déjà faites (la suite passe devant)
+    pris = deja_repris(journal)                                            # sons déjà doublés par les chaînes concurrentes (idée 24)
     for p in profils:
         vs = [v for v in listes[p] if v["id"] not in deja and (v.get("duree") is None or DUREE_MIN <= float(v["duree"]) <= DUREE_MAX)]
+        avant_ = len(vs); vs = [v for v in vs if not repris_ailleurs(v, p, pris)]
+        if len(vs) < avant_: journal(f"  @{p} : {avant_ - len(vs)} son(s) déjà repris par une chaîne concurrente, écarté(s)")
         for v in vs:
             v["potentiel"] = potentiel(v)
             if moment and re.search(moment, str(v.get("titre") or "").lower()):
@@ -253,6 +256,43 @@ def choisir(historique, journal=print, graine=None, essais=4):
         out += [v["url"] for v in vs[:max(2, essais // len(profils))]]
         if len(out) >= essais: break
     return out[:essais]
+
+
+# Sons déjà repris ailleurs (choix de l'auteur du 21 novembre 2026, idée 24). TikTok ne donne pas aux robots la liste des vidéos qui
+# utilisent un son ; on lit donc les vidéos récentes des chaînes qui font comme nous (réglage CHAINES_CONCURRENTES, une par ligne),
+# comme on lit nos créateurs : un son dont elles citent le lien, ou le créateur avec un titre qui ressemble au sien, est écarté.
+def concurrentes(texte=None):
+    t = os.environ.get("CHAINES_CONCURRENTES", "") if texte is None else texte
+    return [p for p in liste(t) if p.lower() not in {x.lower() for x in NOTRE_CHAINE}][:6] if t.strip() else []
+
+
+def deja_repris(journal=print):
+    """{"ids": ids de vidéos d'origine citées, "titres": [(créateur cité, mots du titre)]} d'après les chaînes concurrentes."""
+    ids, titres = set(), []
+    for c in concurrentes():
+        for v in videos(c, journal=lambda m: None)[:40]:
+            t = str(v.get("titre") or "")
+            ids |= set(re.findall(r"/video/(\d{8,})", t))
+            for m in re.findall(r"(?<![\w.])@([\w.\-]{3,30})", t):
+                titres.append((m.lower().rstrip("."), _mots_titre(t)))
+    if ids or titres: journal(f"Chaînes concurrentes : {len(ids)} lien(s) et {len(titres)} mention(s) de créateurs relevés")
+    return {"ids": ids, "titres": titres}
+
+
+def _mots_titre(t):
+    t = re.sub(r"[@#][\w.\-]+|https?://\S+", " ", str(t or "").lower())
+    return {w for w in re.findall(r"[a-zà-ÿ]{4,}", t)}
+
+
+def repris_ailleurs(v, createur, pris):
+    """Ce son a-t-il déjà été repris par une chaîne concurrente ? (lien cité, ou créateur cité + titre qui ressemble à 50 %)"""
+    if not pris: return False
+    if str(v.get("id")) in pris.get("ids", set()): return True
+    mots = _mots_titre(v.get("titre"))
+    if len(mots) < 3: return False
+    for c, m in pris.get("titres", []):
+        if c == str(createur).lower() and len(mots & m) >= 0.5 * len(mots): return True
+    return False
 
 
 ETAT = os.path.join(RACINE, "episodes", "profils_etat.json")

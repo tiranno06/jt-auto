@@ -351,7 +351,15 @@ def bible(sk, roles):
         malade = [r for r in presents if re.search(MALADE, " ".join(x.get("t", "") for x in sk.get("repliques", []) if x.get("p") == r).lower())]
         if l_ == "chambre" and malade: assis[k_] = malade[0]               # le malade est dans son lit
     meubles = {}                                                           # nouvelles poses (choix de l'auteur) : lit, canapé, volant, comptoir
+    tout_txt = " ".join(str(x.get("t") or "") for x in sk.get("repliques") or []).lower() + " " + t_low
+    for k_, l_ in enumerate(lieux):                                        # assis à TABLE (idée 11 du 21 novembre) : rendez-vous, resto, repas
+        pres_ = [r for r in roles if any(i < len(sk.get("repliques", [])) and sk["repliques"][i]["p"] == r for i in (dec[k_].get("repliques", []) if k_ < len(dec) else []))]
+        if os.environ.get("TABLE", "1") != "0" and len(pres_) >= 2 and not sk.get("_separes") and (
+                l_ in ("restaurant", "salle_a_manger", "cantine", "fast_food", "kebab")
+                or (l_ in ("cuisine", "bar") and re.search(TABLE_MOTS, tout_txt))):
+            meubles[k_] = {r: "table" for r in pres_}; assis.pop(k_, None)
     for k_, l_ in enumerate(lieux):
+        if k_ in meubles: continue
         r_ = assis.get(k_)
         if r_: meubles[k_] = {r_: {"chambre": "lit", "salon": "canape", "voiture": "volant"}.get(l_, "chaise")}
         elif l_ in ("bar", "restaurant", "magasin", "boulangerie", "pharmacie", "banque", "poste", "fast_food", "kebab") and rng.random() < 0.6:
@@ -558,6 +566,10 @@ ACCORD_F = r"\bje suis (vraiment |trop |tellement |pas )?(choquée|désolée|sû
            r"perdue|venue|allée|partie|tombée|énervée|vexée|jalouse|blessée|surprise|déçue|enrhumée|malade et seule)\b"
 ACCORD_H = r"\bje suis (vraiment |trop |tellement |pas )?(choqué|content|prêt|sûr|fatigué|certain|heureux|amoureux|venu|allé|parti|tombé|" \
            r"énervé|vexé|jaloux|blessé|déçu)\b"
+
+
+TABLE_MOTS = (r"\b(rendez-vous|rencard|date|d[îi]ner|d[ée]jeuner|manger|mange|resto|restaurant|addition|serveur|serveuse|menu|"
+              r"plat|repas|table|commander|commande|assiette|dessert|entr[ée]e)\b")
 
 
 def genre_voix(sk, role, d=None, detail=False):
@@ -1076,7 +1088,11 @@ def compagnons(sk, dec, lieux, moment, graine):
 
 LIEUX_ASSIS = ("bureau", "salon", "restaurant", "administration", "classe", "bar", "cabinet_medical", "palais", "voiture", "cockpit", "coiffeur")
 # gestes à deux, déclenchés par les mots de la réplique (le personnage s'approche, sa main atteint vraiment l'autre)
-GESTES_DUO = [("tope", r"\b(tope|bravo|yes|trop bien|on l'a fait|g[ée]nial|check|bien jou[ée])\b"),
+GESTES_DUO = [("gifle", r"\b(gifle|claque|baffe|giffle|je vais te (mettre|coller|en mettre) une|paf)\b"),   # (21 novembre, idée 13)
+              ("calin", r"\b(c[âa]lin|viens dans mes bras|dans tes bras|serre-moi|fais-moi un bisou)\b"),
+              ("main", r"\b(enchant[ée]e?|serre la main|serrer la main|marché conclu|c'est un deal|on fait affaire|ravi de te rencontrer)\b"),
+              ("recule", r"\b(recule|l[âa]che-moi|laisse-moi tranquille|ne me touche pas|touche-moi pas|bas les pattes)\b"),
+              ("tope", r"\b(tope|bravo|yes|trop bien|on l'a fait|g[ée]nial|check|bien jou[ée])\b"),
               ("epaule", r"\b(calme-toi|t'inqui[eè]te|courage|d[ée]sol[ée]e?|mon pote|ma belle|mon grand|ça va aller|pas grave)\b"),
               ("donne", r"\b(tiens|prends[- ]le|prends[- ]la|voil[àa] (ton|ta|tes|le|la)|cadeau pour toi)\b"),
               ("pousse", r"\b(d[ée]gage|pousse-toi|va-t'en|sors d'ici|laisse-moi passer)\b")]

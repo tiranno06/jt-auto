@@ -1248,3 +1248,112 @@ class TestVoixHauteur21Novembre(unittest.TestCase):
         sk["studio"]["personnages"]["presentateur"]["genre_vu"] = ""
         g, v = studio.genre_voix(sk, "presentateur", {"age": 40}, detail=True); self.assertEqual(v["f"], 2.5)
         self.assertEqual(studio.genre_voix(sk, "presentateur", {"age": 8}, detail=True)[1]["f"], 0)   # enfant : voix aiguë normale
+
+
+class TestBancVoix(unittest.TestCase):
+    """Banc d'essai permanent des voix (idée 16 du 21 novembre) : vraies vidéos, vérité connue, score mesuré à chaque modification."""
+    def setUp(self): sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "moteur"))
+
+    def test_banc(self):
+        import banc_voix
+        for r in banc_voix.tout():
+            with self.subTest(video=r["video"]):
+                self.assertGreaterEqual(r["apres"], 0.88, r)                # « Pire date » : 57 % -> 90 % (95 % avec l'empreinte vocale)
+                self.assertGreaterEqual(r["apres"], r["avant"], r)          # jamais moins bien qu'avant
+
+
+class TestListe21NovembreSoir(unittest.TestCase):
+    """Choix de l'auteur du 21 novembre au soir : 2, 3, 5, 6, 8, 10, 11, 13, 14, 16, 22, 24."""
+    def setUp(self): sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "moteur"))
+
+    def test_sous_titres_dans_la_zone_visible(self):
+        import cartoon, jt
+        self.assertLessEqual(cartoon.CAP_Y + 80, 1500)                      # au-dessus de la description de TikTok
+        self.assertLessEqual(cartoon.CAP_X + jt.LARG_SOUS_TITRE / 2, 900)   # à gauche des boutons ❤️ 💬
+        self.assertLessEqual(jt.carton("UN SOUS-TITRE BEAUCOUP TROP LONG POUR TENIR").shape[1], jt.LARG_SOUS_TITRE)
+
+    def test_bulles_melangees_coupees(self):
+        import doublage
+        sr = 22050; t = np.arange(int(1.0 * sr)) / sr
+        voix = lambda hz: (0.3 * sum(np.sin(2 * np.pi * hz * k * t) / k for k in range(1, 6))).astype(np.float32)
+        sig = np.concatenate([np.concatenate([voix(130 if k % 2 == 0 else 250), np.zeros(int(0.5 * sr), np.float32)]) for k in range(12)])
+        reps = []
+        for k in range(0, 12, 2):                                          # chaque réplique contient 2 phrases : homme PUIS femme
+            m = [[f"h{k}{j}" + ("." if j == 2 else ""), round(j * 0.33, 2), round(j * 0.33 + 0.3, 2)] for j in range(3)] + \
+                [[f"f{k}{j}" + ("." if j == 2 else ""), round(1.5 + j * 0.33, 2), round(1.5 + j * 0.33 + 0.3, 2)] for j in range(3)]
+            reps.append({"p": "presentateur" if k % 4 == 0 else "invite", "t": " ".join(w for w, _, _ in m), "_deb": k * 1.5, "_fin": k * 1.5 + 2.5, "_mots": m})
+        sk = {"repliques": reps, "decoupage": [{"repliques": list(range(6))}], "studio": {"jeu": [{"replique": 5, "emotion": "joie"}],
+              "personnages": {"presentateur": {"genre_vu": "homme"}, "invite": {"genre_vu": "femme"}}}}
+        n = doublage.scinder_melangees(sk, sig, sr)
+        self.assertEqual(n, 6); self.assertEqual(len(sk["repliques"]), 12)
+        for r in sk["repliques"]:
+            self.assertEqual(r["p"], "presentateur" if r["t"].startswith("h") else "invite")
+        self.assertEqual(sk["decoupage"][0]["repliques"], list(range(12))); self.assertEqual(sk["studio"]["jeu"][0]["replique"], 10)
+
+    def test_parties(self):
+        import parties
+        reps = [{"_deb": k * 10.0, "_fin": k * 10.0 + 9.0} for k in range(9)]
+        t = parties.coupure(reps, 90.0)
+        self.assertTrue(40 <= t <= 50)
+        self.assertIn("partie 2", parties.legende_partie("Texte", 1).lower()); self.assertTrue(parties.legende_partie("Texte", 2).startswith("Partie 2/2"))
+        self.assertEqual(parties.decouper("/inexistant.mp4", reps, 90.0), (None, None))
+        src = open(os.path.join(os.path.dirname(__file__), "..", ".github", "workflows", "emission.yml"), encoding="utf-8").read()
+        self.assertIn('"${B}_p1.mp4" "${B}_p2.mp4"', src)
+        self.assertIn("def publier_parties", open(os.path.join(os.path.dirname(__file__), "..", "moteur", "publier.py"), encoding="utf-8").read())
+
+    def test_essai_carton_de_fin(self):
+        import recette
+        src = open(os.path.join(os.path.dirname(__file__), "..", "moteur", "principal.py"), encoding="utf-8").read()
+        self.assertIn("def fin_carte_essai(historique):", src)
+        h = [{"fichier": f"v{i}.mp4", "vues": 100 * (i + 1), "filiere": "tiktok", "date": "2026-11-22_10h00", "fin_carte": i % 2 == 0} for i in range(6)]
+        self.assertIn("Carton de fin", recette.analyser(h)["essais"])
+
+    def test_hashtags_selon_vues(self):
+        import legende, recette
+        self.assertEqual(legende.selon_vues(["petitsdramas", "couple", "humour", "drole", "famille"], {"hashtags": {"famille": 1.8, "drole": 0.5}}),
+                         ["petitsdramas", "famille", "couple", "humour"])
+        h = [{"vues": 100 if i % 2 else 900, "legende": "x #petitsdramas " + ("#famille" if i % 2 == 0 else "#couple"), "fichier": f"{i}"} for i in range(10)]
+        g = recette.hashtags_gagnants(h); self.assertGreater(g["famille"], 1); self.assertLess(g["couple"], 1); self.assertNotIn("petitsdramas", g)
+
+    def test_alerte_stock(self):
+        import stock, datetime
+        envoyes = []
+        regl = {"PUBLI_AUTO": "1", "PUBLI_HEURE": "18:00", "PUBLI_FILE": "a.mp4"}
+        hist = [{"fichier": "a.mp4", "publie": None}]
+        anc = stock.ETAT; stock.ETAT = os.path.join(tempfile.mkdtemp(), "s.json")
+        try:
+            m = stock.verifier(datetime.datetime(2026, 11, 21, 10, 0), regl, hist, envoyer=lambda t, x: envoyes.append(x))
+            self.assertTrue(m and envoyes)
+            self.assertIsNone(stock.verifier(datetime.datetime(2026, 11, 21, 15, 0), regl, hist, envoyer=lambda t, x: envoyes.append(x)))   # 1 fois / jour
+            self.assertIsNone(stock.verifier(datetime.datetime(2026, 11, 22, 10, 0), dict(regl, PUBLI_AUTO="0"), hist))
+        finally: stock.ETAT = anc
+
+    def test_table_et_couleurs_des_meubles(self):
+        import croquis as C, studio
+        img = C.papier(300, 400); C.comptoir(img, 150, 380, 40, 200, 120)
+        r, g, b = [int(x) for x in img[320, 150]]; self.assertGreater(r, b)    # bois (plus rouge que bleu), plus jamais bleu
+        img = C.papier(400, 600); C.table_face(img, 50, 550, 250, 390, 40); C.verre_table(img, 200, 250, 40); C.assiette_table(img, 300, 250, 40)
+        self.assertLess(float(img[300, 300].mean()), 250)
+        self.assertTrue(__import__("re").search(studio.TABLE_MOTS, "on va au resto pour notre premier rendez-vous"))
+
+    def test_gestes_entre_personnages(self):
+        import studio
+        self.assertEqual(studio.geste_duo("Je vais te mettre une gifle !"), "gifle")
+        self.assertEqual(studio.geste_duo("Viens dans mes bras"), "calin")
+        self.assertEqual(studio.geste_duo("Enchanté, marché conclu"), "main")
+        self.assertEqual(studio.geste_duo("Recule, ne me touche pas"), "recule")
+        self.assertEqual(studio.geste_duo("Bien joué !"), "tope")
+
+    def test_francophonie_des_createurs(self):
+        import decouverte as D
+        self.assertEqual(D.pays(["Ma daronne québécoise 🇨🇦", "Montréal la nuit"]), "Québec"); self.assertIsNone(D.pays(["Paris"]))
+        o = [{"profil": str(i), "vues_mediane": 10 - i} for i in range(8)]; o[7]["pays"] = "Belgique"
+        self.assertIn("7", [f["profil"] for f in D.selection(o)])
+
+    def test_sons_deja_repris_ailleurs(self):
+        import profils_tiktok as P
+        pris = {"ids": {"7700000000000000001"}, "titres": [("yan_animation0", P._mots_titre("Quand ton grand frère te pique ta console @yan_animation0"))]}
+        self.assertTrue(P.repris_ailleurs({"id": "7700000000000000001", "titre": ""}, "x", pris))
+        self.assertTrue(P.repris_ailleurs({"id": "1", "titre": "Quand ton grand frère pique la console"}, "yan_animation0", pris))
+        self.assertFalse(P.repris_ailleurs({"id": "1", "titre": "Mamie au marché du dimanche"}, "yan_animation0", pris))
+        with mock.patch.dict(os.environ, {"CHAINES_CONCURRENTES": "@uneautre\n@petitsdramas"}): self.assertEqual(P.concurrentes(), ["uneautre"])
