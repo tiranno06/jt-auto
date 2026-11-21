@@ -396,6 +396,8 @@ def main():
         except Exception as e: print(f"  fiche de tournage impossible ({str(e)[:120]}) : mise en scène habituelle", flush=True)
         try: __import__("suites").preparer(sk, historique)                 # partie 1, 2… : fin « à suivre », mêmes personnages
         except Exception as e: print(f"Parties : {str(e)[:120]}", flush=True)
+        try: __import__("anglais").preparer(sk, historique)                # sous-titres anglais en plus (21 novembre, idée 3)
+        except Exception as e: print(f"Sous-titres anglais : {str(e)[:120]}", flush=True)
     elif script:                                                           # script tapé : les répliques restent mot pour mot
         sk = ecrire.mettre_en_scene(script)
     elif test:                                                             # sketch écrit à la main (essai d'un style)
@@ -775,6 +777,7 @@ def main():
             if sk.get("_recette"): historique[-1]["recette"] = sk["_recette"]   # idée 41 (recette.py)
         except Exception as _e: __import__("pannes").avale(_e)
     if sk.get("titre_accroche"): historique[-1]["titre_affiche"] = sk["titre_accroche"]
+    if DOUB and sk.get("_anglais"): historique[-1]["anglais"] = True       # sous-titres anglais (essai de 10 vidéos, recette.py compare)
     if REFAIRE_MODE == "compte_rendu" and ANCIEN and not test:            # corrigée d'après le compte rendu : la moins sûre des deux est retirée
         try:
             c1, c2 = ANCIEN.get("confiance"), historique[-1].get("confiance")

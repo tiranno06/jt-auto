@@ -7,7 +7,16 @@ import json, os, re, unicodedata
 RACINE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 NB_HASHTAGS = int(os.environ.get("NB_HASHTAGS") or 15)
 CHAINE = ["petitsdramas"]
-NICHE = ["humour", "drole", "animation", "dessinanime", "cartoon", "sketch", "doublage", "pourtoi", "fyp", "tiktokfrance", "humourfrancais"]
+NICHE = ["humour", "drole", "animation", "dessinanime", "cartoon", "sketch", "doublage", "humourfrancais", "francophone", "humourfrancophone"]
+# Francophonie (choix de l'auteur du 21 novembre 2026, idée 2) : nos vidéos parlent à tous les francophones (Belgique, Suisse,
+# Québec, Afrique, Maghreb) : jamais un hashtag qui enferme la vidéo en France, ni les hashtags inutiles (#fyp / #pourtoi : TikTok
+# dit qu'ils ne servent à rien). Aussi retirés des anciennes descriptions à l'envoi. FRANCOPHONIE=0 pour couper.
+FRANCE_SEULE = {"france", "tiktokfrance", "francetiktok", "paris", "marseille", "lyon", "toulouse", "lille", "bordeaux", "nantes", "nice",
+                "pourtoi", "fyp", "foryou", "foryoupage", "fy", "fypage", "pourtoii", "viral", "fypシ"}
+
+
+def francophone(h):
+    return os.environ.get("FRANCOPHONIE", "1") == "0" or _propre(h) not in FRANCE_SEULE
 THEMES = [  # (motif dans le texte, hashtags)
     (r"\b(papa|maman|fiston|ma fille|mon fils|parents?|daron|daronne|famille|mamie|papi|grand-?m[eè]re|grand-?p[eè]re)\b", ["famille", "parents", "parentsvsenfants"]),
     (r"\b(fr[eè]re|s[oœ]eur|frangin|frangine)\b", ["freresoeur", "famille"]),
@@ -60,7 +69,7 @@ def hashtag_sur(h):
 
 def sans_risque(texte):
     """Retire d'un texte les hashtags à risque (descriptions déjà écrites, envoyées à TikTok)."""
-    t = re.sub(r"(?<!\w)#([\wÀ-ÿ]+)", lambda m: m.group(0) if hashtag_sur(m.group(1)) else "", str(texte or ""))
+    t = re.sub(r"(?<!\w)#([\wÀ-ÿ]+)", lambda m: m.group(0) if hashtag_sur(m.group(1)) and francophone(m.group(1)) else "", str(texte or ""))
     return re.sub(r"[ \t]{2,}", " ", t).strip()
 
 
@@ -81,7 +90,7 @@ def hashtags(sk=None, texte="", n=None):
     vus = []
     for h in out:
         h = _propre(h)
-        if h and h not in vus and len(h) > 1 and hashtag_sur(h): vus.append(h)   # (jamais un hashtag à risque)
+        if h and h not in vus and len(h) > 1 and hashtag_sur(h) and francophone(h): vus.append(h)   # (jamais un hashtag à risque)
     return vus[:n]
 
 
