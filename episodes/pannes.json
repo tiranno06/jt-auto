@@ -111,14 +111,14 @@
   }
  },
  "Gemini n'a pas pu écouter (gemini-N-flash : HTTP Error N: Not Found)": {
-  "n": 9,
+  "n": 10,
   "premiere": "2026-11-20",
   "derniere": "2026-11-21",
   "exemple": "Gemini n'a pas pu écouter (gemini-2.5-flash : HTTP Error 404: Not Found)",
   "etape": "ingé son",
   "jours": {
    "2026-11-20": 8,
-   "2026-11-21": 1
+   "2026-11-21": 2
   }
  },
  "fiche de tournage : Gemini gemini-flash-latest n'a pas répondu (The read operation timed out)": {
@@ -162,13 +162,14 @@
   }
  },
  "Gemini n'a pas pu écouter (gemini-flash-latest : HTTP Error N: Service Unavailable)": {
-  "n": 1,
+  "n": 2,
   "premiere": "2026-11-20",
-  "derniere": "2026-11-20",
+  "derniere": "2026-11-21",
   "exemple": "Gemini n'a pas pu écouter (gemini-flash-latest : HTTP Error 503: Service Unavailable)",
   "etape": "fiche de tournage",
   "jours": {
-   "2026-11-20": 1
+   "2026-11-20": 1,
+   "2026-11-21": 1
   }
  }
 }
