@@ -1164,3 +1164,87 @@ class TestPannes21Novembre(unittest.TestCase):
             with self.subTest(f=os.path.basename(f)):
                 d = yaml.safe_load(open(f, encoding="utf-8"))
                 self.assertTrue(d.get("name") and d.get("jobs"), f)
+
+
+class TestVoixHauteur21Novembre(unittest.TestCase):
+    """Bonne voix sur le bon personnage, homme / femme (audit de « Pire date amoureux », 21 novembre 2026)."""
+    def setUp(self): sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "moteur"))
+
+    @staticmethod
+    def _voix(hz, d, sr=22050, graine=0):
+        t = np.arange(int(d * sr)) / sr; rng = np.random.default_rng(graine)
+        x = sum(np.sin(2 * np.pi * hz * k * t * (1 + 0.01 * np.sin(2 * np.pi * 3 * t))) / k for k in range(1, 6))
+        return (0.3 * x / np.abs(x).max() + 0.003 * rng.normal(size=len(t))).astype(np.float32)
+
+    def _dialogue(self, sr=22050):
+        """12 phrases qui alternent : homme 130 Hz / femme 250 Hz, 1 s chacune, 0,5 s de blanc entre."""
+        sig, mots, vrai = [], [], []
+        for k in range(12):
+            hz = 130 if k % 2 == 0 else 250; t0 = k * 1.5
+            sig += [self._voix(hz, 1.0, sr, k), np.zeros(int(0.5 * sr), np.float32)]
+            for j in range(3): mots.append({"w": f"mot{k}{j}" + ("." if j == 2 else ""), "s": round(t0 + j * 0.33, 2), "e": round(t0 + j * 0.33 + 0.3, 2)})
+            vrai.append("h" if hz == 130 else "f")
+        return np.concatenate(sig), mots, vrai
+
+    def test_mesure_de_hauteur(self):
+        import locuteurs
+        for hz in (120, 150, 240, 300):
+            t, f = locuteurs.f0_trames(self._voix(hz, 1.0), 22050)
+            self.assertAlmostEqual(float(np.median(f[f > 0])), hz, delta=hz * 0.05)
+
+    def test_temoin_hauteur_remet_les_phrases(self):
+        import locuteurs
+        sig, mots, vrai = self._dialogue()
+        for k, m in enumerate(mots):                                       # le robot s'est trompé sur 4 phrases (empreintes confondues)
+            ph = k // 3; faux = ph in (1, 4, 7, 8)
+            m["voix"] = ("speaker_0" if vrai[ph] == "h" else "speaker_1") if not faux else ("speaker_1" if vrai[ph] == "h" else "speaker_0")
+        locuteurs.ETAT["ressemblance"] = 0.8
+        n = locuteurs.temoin_hauteur(mots, sig, 22050, journal=lambda m: None, genres_vus=["h", "f"])
+        self.assertEqual(n, 4)
+        for k, m in enumerate(mots): self.assertEqual(m["voix"], "speaker_0" if vrai[k // 3] == "h" else "speaker_1")
+        self.assertTrue(all(m.get("sure") for m in mots if m.get("_hauteur")))
+        sig2, mots2, _ = self._dialogue()                                   # deux HOMMES vus : l'écart vient des cris, on ne touche à rien
+        for k, m in enumerate(mots2): m["voix"] = "speaker_0" if k // 3 < 6 else "speaker_1"
+        self.assertEqual(locuteurs.temoin_hauteur(mots2, sig2, 22050, journal=lambda m: None, genres_vus=["h", "h"]), 0)
+        locuteurs.ETAT["ressemblance"] = 0.3                               # empreintes bien distinctes : on les croit
+        self.assertEqual(locuteurs.temoin_hauteur(mots2, sig2, 22050, journal=lambda m: None, genres_vus=["h", "f"]), 0)
+        locuteurs.ETAT["ressemblance"] = None
+
+    def test_controle_final_et_compte_rendu(self):
+        import equipe, verif_finale, compte_rendu, studio
+        sig, mots, vrai = self._dialogue()
+        reps = [{"p": "presentateur" if v == "h" else "invite", "t": f"phrase {k}", "_deb": k * 1.5, "_fin": k * 1.5 + 1.0} for k, v in enumerate(vrai)]
+        for k in (3, 6): reps[k]["p"] = "invite" if reps[k]["p"] == "presentateur" else "presentateur"   # 2 répliques sur la mauvaise voix
+        reps[9]["_auteur"] = True; reps[9]["p"] = "presentateur"           # l'auteur a décidé : on n'y touche jamais
+        sk = {"repliques": reps, "doublage": {}}
+        conf, n = equipe.hauteur_finale(sk, reps, ["invite", "presentateur"], sig, 22050, None, bavard=False)
+        self.assertEqual(n, 2); self.assertEqual(reps[3]["p"], "invite"); self.assertEqual(reps[6]["p"], "presentateur")
+        self.assertEqual(reps[9]["p"], "presentateur")
+        self.assertLess(abs(sk["_hauteurs_roles"]["presentateur"] - 130), 8); self.assertLess(abs(sk["_hauteurs_roles"]["invite"] - 250), 12)
+        g, v = studio.genre_voix(sk, "invite", {"age": 30}, detail=True); self.assertEqual(g, "f"); self.assertGreaterEqual(v["f"], 2.5)
+        self.assertEqual(studio.genre_voix(sk, "presentateur", {"age": 30}), "h")
+        pts = [{"t": 4.5, "quoi": "réplique 4 : c'est la voix de l'invitée", "grave": True, "qui": {"replique": 3, "role": "presentateur"}},
+               {"t": None, "quoi": "l'invitée a une voix de femme", "grave": True, "genre": {"role": "invite", "genre": "f"}}]
+        sk2 = {"repliques": [dict(r) for r in reps]}
+        faits = verif_finale.appliquer_voix(sk2, pts)
+        self.assertEqual(sk2["repliques"][3]["p"], "presentateur"); self.assertEqual(sk2["_casting_auteur"]["invite"]["genre"], "f"); self.assertEqual(len(faits), 2)
+        self.assertEqual(compte_rendu.texte(pts), "")                      # corrigés directement : pas relus par l'IA
+
+    def test_branche_partout(self):
+        ici = os.path.join(os.path.dirname(__file__), "..", "moteur")
+        d = open(os.path.join(ici, "doublage.py"), encoding="utf-8").read(); p = open(os.path.join(ici, "principal.py"), encoding="utf-8").read()
+        self.assertIn("locuteurs.temoin_hauteur(mots, sig, SR, journal, genres_vus=", d)
+        self.assertIn("def depuis_sketch(sk, controle=False):", d); self.assertIn('depuis_sketch(sk, controle=REFAIRE_MODE != "qui")', p)
+        self.assertIn("verif_finale.appliquer_voix(sk4, points)", p)
+        self.assertIn("d9 = voix_dessin(video, sk)", open(os.path.join(ici, "verif_finale.py"), encoding="utf-8").read())
+
+    def test_garde_fous_hauteur(self):
+        import locuteurs, studio
+        self.assertTrue(locuteurs.hauteurs_nettes(144, 273)); self.assertFalse(locuteurs.hauteurs_nettes(187, 264))   # même doubleur, pas de voix grave
+        self.assertFalse(locuteurs.hauteurs_nettes(150, 190))
+        sk = {"doublage": {}, "_hauteurs_roles": {"presentateur": 209, "invite": 131},
+              "studio": {"personnages": {"presentateur": {"genre_vu": "homme"}, "invite": {"genre_vu": "homme"}}}}
+        self.assertEqual(studio.genre_voix(sk, "presentateur", {"genre_vu": "homme", "age": 40}), "h")   # deux hommes vus : jamais « femme »
+        sk["studio"]["personnages"]["presentateur"]["genre_vu"] = ""
+        g, v = studio.genre_voix(sk, "presentateur", {"age": 40}, detail=True); self.assertEqual(v["f"], 2.5)
+        self.assertEqual(studio.genre_voix(sk, "presentateur", {"age": 8}, detail=True)[1]["f"], 0)   # enfant : voix aiguë normale

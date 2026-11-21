@@ -434,12 +434,13 @@ def voix_finales(sk, sig, sr, B=None, embed=None):
         m = [E[j] for j in E if reps[j]["p"] == ro and j != sauf]
         if len(m) < 2: return None
         c = np.mean(m, 0); return c / (np.linalg.norm(c) + 1e-9)
-    c0, c1 = centre(roles[0]), centre(roles[1])
-    if c0 is None or c1 is None: return 0
+    confirmees, n_h = hauteur_finale(sk, reps, roles, sig, sr, B)        # la hauteur d'abord (21 novembre) : elle sépare un homme
+    c0, c1 = centre(roles[0]), centre(roles[1])                            # et une femme quand les empreintes se ressemblent
+    if c0 is None or c1 is None: return n_h
     ress = float(np.dot(c0, c1))
     if ress > 0.85:
         if B is not None: B.note("casting voix", "dernier contrôle des voix", True, f"voix moyennes trop proches ({ress:.2f}) : le son ne tranche pas, le dialogue décide")
-        return 0
+        return n_h
     marge = VOIX_FIN_MARGE if ress > 0.55 else VOIX_FIN_MARGE * 0.75     # voix bien distinctes : un écart plus petit suffit
     limite = max(1, len(reps) // 5); faits = []
     for _passe in range(2):
@@ -449,7 +450,7 @@ def voix_finales(sk, sig, sr, B=None, embed=None):
             cm, ca = centre(moi, i), centre(autre, i)
             if cm is None or ca is None: continue
             d = float(np.dot(E[i], ca) - np.dot(E[i], cm))
-            if d >= marge: cand.append((d, i, autre))
+            if d >= marge and i not in confirmees and not reps[i].get("_auteur"): cand.append((d, i, autre))   # (jamais contre la hauteur ni l'auteur)
         if not cand: break
         for d, i, autre in sorted(cand, reverse=True)[:max(0, limite - len(faits))]:
             faits.append(f"réplique {i} ({str(reps[i].get('t') or '')[:40]}) -> {autre} (écart {d:.2f})")
@@ -459,4 +460,57 @@ def voix_finales(sk, sig, sr, B=None, embed=None):
         B.note("casting voix", "dernier contrôle des voix (chaque réplique comparée à la voix moyenne de chaque personnage)", True,
                (f"{len(faits)} réplique(s) remise(s) sur la bonne voix (corrigé) : " + " ; ".join(faits))[:190] if faits else f"toutes à leur place (voix {ress:.2f})")
     for f in faits: journal(f"    voix corrigée : {f}")
-    return len(faits)
+    return len(faits) + n_h
+
+
+def hauteur_finale(sk, reps, roles, sig, sr, B=None, bavard=True):
+    """Contrôle par la HAUTEUR, réplique par réplique (audit du 21 novembre 2026, « Pire date amoureux ») : quand les deux personnages
+    ont des hauteurs de voix bien séparées (`locuteurs.hauteurs_nettes` : une voix ≤ 175 Hz, l'autre ≥ 200 Hz, rapport ≥ 1,4),
+    une réplique NETTEMENT du côté de l'autre personnage passe chez lui, et une réplique nettement du bon côté est « confirmée »
+    (l'empreinte vocale ne peut plus la déplacer). Jamais si Gemini a vu deux personnes du même genre (l'écart = des cris), ni 3
+    personnes ou plus à l'image.
+    sk["_hauteurs_roles"] = {rôle: Hz} (vote homme / femme de studio.genre_voix). Renvoie (répliques confirmées, nb changées)."""
+    import os, locuteurs
+    if os.environ.get("HAUTEUR", "1") == "0": return set(), 0
+    try: vus = __import__("video_ia").genres_vus()
+    except Exception: vus = []
+    if len(vus) >= 2 and len(set(vus)) == 1: return set(), 0
+    try: n_vus = __import__("video_ia").visibles()
+    except Exception: n_vus = None
+    if (n_vus or 0) >= 3 or len(vus) >= 3: return set(), 0                # 3 personnes ou plus à l'image (la classe, les potes…)
+    t, f0 = locuteurs.f0_trames(sig, sr)
+    if not len(t): return set(), 0
+    Z = {}
+    for i, r in enumerate(reps):
+        if r.get("p") not in roles or r.get("_hors_champ") or r.get("_auteur"): continue   # (jamais contre l'auteur)
+        a, b = float(r.get("_deb") or 0), float(r.get("_fin") or 0)
+        k = (t >= a) & (t <= b) & (f0 > 0)
+        if k.sum() >= max(15, 0.3 * (b - a) / 0.01): Z[i] = (float(np.median(np.log(f0[k]))), int(k.sum()))
+    if len(Z) < 6: return set(), 0
+    z = np.array([v[0] for v in Z.values()]); w = np.array([v[1] for v in Z.values()], float)
+    c = np.array([z.min(), z.max()])
+    for _ in range(25):                                                    # deux groupes de hauteur, sans regarder les étiquettes
+        g = np.abs(z - c[0]) > np.abs(z - c[1])                            # (elles peuvent être fausses : c'est ce qu'on contrôle)
+        if g.all() or (~g).all(): return set(), 0
+        c = np.array([np.average(z[~g], weights=w[~g]), np.average(z[g], weights=w[g])])
+    ecart = c[1] - c[0]; part = w[g].sum() / w.sum()
+    sd = np.sqrt(np.average((z[~g] - c[0]) ** 2, weights=w[~g])) + np.sqrt(np.average((z[g] - c[1]) ** 2, weights=w[g]))
+    if not locuteurs.hauteurs_nettes(np.exp(c[0]), np.exp(c[1])) or not 0.15 <= part <= 0.85 or ecart < 1.2 * sd: return set(), 0
+    milieu, marge = (c[0] + c[1]) / 2, 0.25 * ecart
+    nets = {i: (zi > milieu) for i, (zi, _) in Z.items() if abs(zi - milieu) >= marge}   # True = côté aigu
+    def cout(bas_, haut_): return sum(1 for i, aigu in nets.items() if reps[i]["p"] != (haut_ if aigu else bas_))
+    bas, haut = (roles[0], roles[1]) if cout(roles[0], roles[1]) <= cout(roles[1], roles[0]) else (roles[1], roles[0])
+    sk["_hauteurs_roles"] = {bas: round(float(np.exp(c[0]))), haut: round(float(np.exp(c[1])))}
+    confirmees, chang = set(), []
+    for i, aigu in nets.items():
+        bon = haut if aigu else bas
+        if reps[i]["p"] == bon: confirmees.add(i)
+        else: chang.append(i)
+    if set(vus) != {"h", "f"} and len(chang) > max(2, len(Z) // 3): chang = []   # sans homme ET femme vus : prudence
+    for i in chang:
+        reps[i]["p"] = haut if reps[i]["p"] == bas else bas; reps[i]["_voix_corrigee"] = True; confirmees.add(i)
+        if bavard: journal(f"    voix corrigée par la hauteur : réplique {i} ({str(reps[i].get('t') or '')[:40]}) -> {reps[i]['p']}")
+    if B is not None:
+        B.note("casting voix", "contrôle par la hauteur de la voix (réplique par réplique)", True,
+               f"{sk['_hauteurs_roles']} Hz : " + (f"{len(chang)} réplique(s) remise(s) sur la bonne voix (corrigé)" if chang else "toutes du bon côté"))
+    return confirmees, len(chang)

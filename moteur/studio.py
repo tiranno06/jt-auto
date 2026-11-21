@@ -568,7 +568,9 @@ def genre_voix(sk, role, d=None, detail=False):
     - le timbre (formants) : 1,5 s'il est net (< 980 Hz homme, > 1110 Hz femme), sinon 0,5 ;
     - la hauteur nette (réplique par réplique) : 1 ; l'IA de mise en scène (images + histoire) : 1 ;
     - les accords du texte (« je suis choquée » / « je suis content ») : 1 ;
-    - inaSpeechSegmenter (voix d'homme / de femme, entraîné sur la télé française) : 1,5 ; Praat (conduit vocal) : 1.
+    - inaSpeechSegmenter (voix d'homme / de femme, entraîné sur la télé française) : 1,5 ; Praat (conduit vocal) : 1 ;
+    - les deux hauteurs bien séparées (une grave ≤ 175 Hz, une aiguë ≥ 200 Hz, rapport ≥ 1,4 ; 21 novembre) : 2,5 (sauf enfant, et
+      jamais contre ce que Gemini a vu : ce personnage d'un autre genre, ou deux personnes du même genre).
     À égalité : Gemini, puis le timbre, la hauteur nette, l'IA, la hauteur moyenne."""
     d = d or {}
     g_ia = GENRES_TXT.get(str(d.get("genre") or "").strip().lower())
@@ -588,6 +590,14 @@ def genre_voix(sk, role, d=None, detail=False):
     if g_ina in votes: votes[g_ina] += 1.5
     g_pr = (sk.get("_voix_vtl_genre") or {}).get(role)                      # Praat : longueur du conduit vocal
     if g_pr in votes: votes[g_pr] += 1
+    H_ = sk.get("_hauteurs_roles") or {}                                   # hauteurs bien séparées (équipe.hauteur_finale, 21 novembre) :
+    if role in H_ and len(H_) == 2 and float(d.get("age") or 30) >= 13:   # la voix grave = l'homme, l'aiguë = la femme
+        r_autre = next(r_ for r_ in H_ if r_ != role); autre = H_[r_autre]; moi = H_[role]
+        P_ = ((sk.get("studio") or {}).get("personnages") or {}) if isinstance(sk.get("studio"), dict) else {}
+        vu_autre = GENRES_TXT.get(str((P_.get(r_autre) or {}).get("genre_vu") or "").strip().lower())
+        g_h = "f" if (moi >= 200 and autre <= 175 and moi >= 1.4 * autre) else "h" if (moi <= 175 and autre >= 200 and autre >= 1.4 * moi) else None
+        if g_h and not (g_vu and g_vu != g_h) and not (g_vu and vu_autre and g_vu == vu_autre):   # jamais contre ce que Gemini a VU
+            votes[g_h] += 2.5                                              # (ni deux hommes / deux femmes vus : écart = cris)
     lignes = " ".join(x.get("t", "") for x in sk.get("repliques") or [] if x.get("p") == role).lower()
     nf, nh = len(re.findall(ACCORD_F, lignes)), len(re.findall(ACCORD_H, lignes))
     if nf != nh: votes["f" if nf > nh else "h"] += 1

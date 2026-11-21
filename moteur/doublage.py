@@ -694,6 +694,13 @@ def preparer(url):
     try:                                                                   # une couleur de sous-titre par personnage (idée 21)
         if lignes_ocr: mots = __import__("ocr").couleurs_voix(mots, lignes_ocr, B)
     except Exception as e: journal(f"  couleurs des sous-titres non lues ({str(e)[:120]})")
+    try:                                                                   # témoin « hauteur de la voix », phrase par phrase (21 novembre :
+        import locuteurs                                                   # un homme et une femme confondus par l'empreinte vocale)
+        n_h = locuteurs.temoin_hauteur(mots, sig, SR, journal, genres_vus=__import__("video_ia").genres_vus())
+        if locuteurs.ETAT.get("hauteurs"):
+            B.note("casting voix", "témoin hauteur de la voix (phrase par phrase)", True,
+                   f"voix à {list(locuteurs.ETAT['hauteurs'].values())} Hz : " + (f"{n_h} phrase(s) remise(s) sur la bonne voix (corrigé)" if n_h else "rien à changer"))
+    except Exception as e: journal(f"  témoin hauteur impossible ({str(e)[:120]})")
     segs = segments(mots)
     hz = hauteurs(sig, segs)
     emo_voix = ecoute.emotions(sig, segs)                                  # colère, joie, tristesse entendues dans la voix
@@ -862,7 +869,7 @@ def preparer(url):
     return sk, audios, mots
 
 
-def depuis_sketch(sk):
+def depuis_sketch(sk, controle=False):
     """« Corriger qui parle » (idée 6) : refait le son d'une vidéo TikTok déjà fabriquée, avec les MÊMES répliques (instants gardés
     dans le sketch) : le son d'origine est re-téléchargé et recoupé réplique par réplique. Renvoie (audios, mots) comme preparer."""
     d = sk.get("doublage") or {}
@@ -870,6 +877,13 @@ def depuis_sketch(sk):
     if float(d.get("debut") or 0) > 0: piste, mono, _v = couper_debut(tmp, info, float(d["debut"]))   # même silence retiré qu'à la 1re fois
     if d.get("silences"): piste, mono, _v = couper_silences(tmp, info, [tuple(x) for x in d["silences"]])   # mêmes blancs raccourcis
     d["piste"] = piste; sk["doublage"] = d
+    if controle:                                                           # vidéo refaite : les contrôles des voix d'AUJOURD'HUI repassent
+        try:                                                               # (21 novembre : « Pire date amoureux » refaite deux fois avec les
+            import equipe                                                  # répliques de la 1re fabrication, faite avant ces contrôles)
+            B_ = equipe.Bulletin(); B_.lignes = sk.setdefault("equipe", [])
+            n_ = equipe.voix_finales(sk, mono, SR, B_)
+            if n_: journal(f"  vidéo refaite : {n_} réplique(s) remise(s) sur la bonne voix (hauteur et empreinte vocale)")
+        except Exception as e: journal(f"  contrôle des voix de la vidéo refaite impossible ({str(e)[:120]})")
     audios, mots = [], []
     for r in sk["repliques"]:
         deb, fin = float(r.get("_deb", 0)), float(r.get("_fin", 0))
