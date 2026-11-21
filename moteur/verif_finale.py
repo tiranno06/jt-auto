@@ -314,6 +314,11 @@ def verifier(video, sk, R):
                 points.append(d_)
             journal(f"  [vidéo finie · fidélité à l'audio] {'✔' if not pbs else '✘'} Gemini a regardé et écouté la vidéo finie" + (f" : {len(pbs)} écart(s)" if pbs else ""))
     except Exception as e: journal(f"  contrôle de fidélité à l'audio impossible ({str(e)[:120]})")
+    try:                                                                   # voix et dessin (21 novembre) : la hauteur de chaque réplique
+        d9 = voix_dessin(video, sk); points += d9                          # dans la vidéo finie, et homme / femme dessinés
+        journal(f"  [vidéo finie · voix et dessin] {'✔' if not d9 else '✘'} chaque réplique sur la bonne voix, homme / femme d'après la voix"
+                + (f" : {len(d9)} écart(s)" if d9 else ""))
+    except Exception as e: journal(f"  contrôle voix et dessin impossible ({str(e)[:120]})")
     for l in sk.get("equipe") or []:                                       # défauts de l'équipe que personne n'a pu corriger
         if l.get("revoir"): points.append(_defaut(None, l.get("poste", "équipe"), f"{l.get('controle')} : {l.get('detail')}"))
     points.sort(key=lambda d: (not d["grave"], d["t"] if d["t"] is not None else -1))
@@ -321,6 +326,66 @@ def verifier(video, sk, R):
     if legers: journal(f"  {len(legers)} remarque(s) légère(s) gardée(s) au journal seulement : " + " ; ".join(f"{d['t']} s {d['quoi'][:50]}" for d in legers[:6]))
     journal(f"Contrôle de la vidéo finie : {len(points)} point(s) à vérifier" + (" — " + " ; ".join(f"{d['t']} s {d['quoi'][:60]}" for d in points[:6]) if points else ""))
     return points[:20]                                                     # sort propre : seuls les vrais défauts restent signalés
+
+
+NOMS_ROLES = {"presentateur": "le présentateur", "invite": "l'invitée", "envoyee": "l'envoyée"}
+DE_ROLES = {"presentateur": "du présentateur", "invite": "de l'invitée", "envoyee": "de l'envoyée"}
+
+
+def voix_dessin(video, sk):
+    """Contrôle final « voix et dessin » (audit du 21 novembre 2026) : sur le son de la vidéo FINIE, la hauteur de chaque réplique
+    (equipe.hauteur_finale) ; une réplique nettement du côté de l'autre voix = point grave (le compte rendu la remet sur le bon
+    personnage) ; et quand une voix est nettement aiguë (≥ 200 Hz) et l'autre nettement grave (≤ 170 Hz), le personnage à la voix
+    aiguë dessiné en homme (ou l'inverse) = point grave. VOIX_DESSIN=0 pour couper."""
+    import copy, equipe
+    if os.environ.get("VOIX_DESSIN", "1") == "0" or not (sk or {}).get("doublage"): return []
+    reps0 = sk.get("repliques") or []
+    from collections import Counter
+    roles = [r for r, _ in Counter(r.get("p") for r in reps0 if r.get("p") not in (None, "narrateur") and not r.get("_hors_champ")).most_common(2)]
+    if len(roles) != 2 or len(reps0) < 6: return []
+    son, sr = _son(video)
+    sk2 = copy.deepcopy(sk); _c, n = equipe.hauteur_finale(sk2, sk2["repliques"], sorted(roles), son, sr, None, bavard=False)
+    out = []
+    for i, (a, b) in enumerate(zip(reps0, sk2["repliques"])):
+        if a.get("p") != b.get("p"):
+            d_ = _defaut(a.get("_deb"), "voix et dessin", f"réplique {i + 1} « {str(a.get('t') or '')[:50]} » : c'est la voix "
+                         f"{DE_ROLES.get(b['p'], b['p'])}, pas {DE_ROLES.get(a['p'], a['p'])} (hauteur de la voix)")
+            d_["qui"] = {"replique": i, "role": b["p"]}; out.append(d_)
+    H = sk2.get("_hauteurs_roles") or {}
+    if len(H) == 2:
+        haut, bas = sorted(H, key=H.get, reverse=True)
+        gen = {r: (((sk.get("_casting_final") or {}).get(r) or {}).get("fiche") or {}).get("genre") for r in H}
+        age = {r: (((sk.get("_casting_final") or {}).get(r) or {}).get("fiche") or {}).get("age") or 30 for r in H}
+        P_ = ((sk.get("studio") or {}).get("personnages") or {}) if isinstance(sk.get("studio"), dict) else {}
+        vu = {r: str((P_.get(r) or {}).get("genre_vu") or "").lower()[:1] for r in H}
+        vu = {r: ("f" if g in ("f", "w") else "h" if g in ("h", "m") else None) for r, g in vu.items()}
+        meme_vu = vu.get(haut) and vu.get(haut) == vu.get(bas)             # deux hommes (ou deux femmes) vus par Gemini : l'écart = des cris
+        if H[haut] >= 200 and H[bas] <= 170 and H[haut] >= 1.4 * H[bas] and not meme_vu:
+            if gen.get(haut) == "h" and age.get(haut, 30) >= 13 and vu.get(haut) != "h":
+                d_ = _defaut(None, "voix et dessin", f"{NOMS_ROLES.get(haut, haut)} a une voix de femme ({H[haut]} Hz) mais est dessiné(e) en homme : c'est une femme")
+                d_["genre"] = {"role": haut, "genre": "f"}; out.append(d_)
+            if gen.get(bas) == "f" and vu.get(bas) != "f":
+                d_ = _defaut(None, "voix et dessin", f"{NOMS_ROLES.get(bas, bas)} a une voix d'homme ({H[bas]} Hz) mais est dessiné(e) en femme : c'est un homme")
+                d_["genre"] = {"role": bas, "genre": "h"}; out.append(d_)
+    return out[:12]
+
+
+def appliquer_voix(sk, points):
+    """Compte rendu (principal.corriger_compte_rendu) : les points « voix et dessin » sont corrigés DIRECTEMENT (sans IA) : chaque
+    réplique remise sur la voix entendue, et le genre du personnage d'après sa voix (menus « Changer les personnages », sauf si
+    l'auteur a déjà choisi). Renvoie la liste lisible des changements."""
+    faits, reps = [], sk.get("repliques") or []
+    for d in points or []:
+        q = d.get("qui")
+        if isinstance(q, dict) and 0 <= int(q.get("replique", -1)) < len(reps) and not reps[int(q["replique"])].get("_auteur"):
+            reps[int(q["replique"])]["p"] = q["role"]; reps[int(q["replique"])]["_voix_corrigee"] = True
+            faits.append(f"réplique {int(q['replique']) + 1} -> {q['role']} (voix)")
+        g = d.get("genre")
+        if isinstance(g, dict) and g.get("role") and g.get("genre") in ("h", "f"):
+            C_ = sk.setdefault("_casting_auteur", {})
+            if not (C_.get(g["role"]) or {}).get("genre"):
+                C_.setdefault(g["role"], {})["genre"] = g["genre"]; faits.append(f"{g['role']} : {'femme' if g['genre'] == 'f' else 'homme'} (voix)")
+    return faits
 
 
 def confiance(equipe, points, Q=None):

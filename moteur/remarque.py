@@ -159,7 +159,7 @@ def appliquer(sk, texte, memoriser=True):
         sk["_sans_karaoke"] = True; faits.append("karaoké retiré (sous-titres normaux)")   # jamais un mot jaune au mauvais moment
     for k, r_ in qui.items():
         if 0 <= k < len(sk.get("repliques") or []) and sk["repliques"][k].get("p") != r_:
-            sk["repliques"][k]["p"] = r_; faits.append(f"réplique {k + 1} -> {r_}")
+            sk["repliques"][k]["p"] = r_; sk["repliques"][k]["_auteur"] = True; faits.append(f"réplique {k + 1} -> {r_}")
     S = sk.setdefault("studio", {}) if isinstance(sk.get("studio"), dict) or "studio" not in sk else {}
     for c in corr:
         if c.get("type") == "un_seul" and c.get("role"):                    # toutes les répliques (même les bruits) au même personnage

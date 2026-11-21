@@ -567,3 +567,112 @@ def fil_dialogue(mots, ia=None, avis=None, vue=None):
     change = sum(1 for a, m in zip(av, mots) if a != m["voix"])
     print(f"  contrôle questions-réponses ({'avec' if connus else 'sans'} relecture de l'IA{', avec le témoin image' if vue else ''}) : {len(ph)} phrases, {change} mot(s) changé(s) de voix", flush=True)
     return mots
+
+# ------------------------------------------------------------------ témoin « hauteur de la voix » (audit du 21 novembre 2026)
+def f0_trames(sig, sr=SR, hop=0.01, fen=0.046):
+    """Hauteur de la voix (Hz) toutes les 10 ms, 0 quand ce n'est pas une voix (autocorrélation normalisée, façon YIN simplifiée).
+    Renvoie (temps, f0)."""
+    x = np.asarray(sig, np.float32)
+    n, h = int(fen * sr), max(1, int(hop * sr))
+    if len(x) < n * 2: return np.zeros(0), np.zeros(0)
+    idx = np.arange(0, len(x) - n, h)
+    T = np.lib.stride_tricks.sliding_window_view(x, n)[idx]
+    T = T - T.mean(1, keepdims=True)
+    rms = np.sqrt((T ** 2).mean(1))
+    seuil = max(1e-4, 0.08 * float(np.percentile(rms, 95)))
+    N = 1 << int(np.ceil(np.log2(2 * n)))
+    F = np.fft.rfft(T * np.hanning(n), N); R = np.fft.irfft(np.abs(F) ** 2, N)[:, :n]
+    R = R / np.maximum(R[:, :1], 1e-9)
+    lo, hi = int(sr / 500), min(n - 2, int(sr / 70))
+    Z = R[:, lo:hi]
+    k = Z.argmax(1); pic = Z[np.arange(len(Z)), k]
+    for div in (2, 3):                                                     # octave trop basse : un pic presque aussi haut à lag/2 ou lag/3
+        k2 = np.round((k + lo) / div).astype(int) - lo
+        ok = k2 >= 0
+        v2 = np.where(ok, Z[np.arange(len(Z)), np.clip(k2, 0, Z.shape[1] - 1)], 0)
+        mieux = ok & (v2 >= 0.88 * pic)
+        k = np.where(mieux, k2, k); pic = np.where(mieux, v2, pic)
+    lag = (k + lo).astype(np.float64)
+    a_, b_, c_ = R[np.arange(len(R)), np.clip(lag.astype(int) - 1, 0, n - 1)], R[np.arange(len(R)), lag.astype(int)], R[np.arange(len(R)), np.clip(lag.astype(int) + 1, 0, n - 1)]
+    d_ = a_ - 2 * b_ + c_; lag = lag + np.where(np.abs(d_) > 1e-9, 0.5 * (a_ - c_) / np.where(np.abs(d_) > 1e-9, d_, 1), 0)
+    f0 = np.where((pic > 0.5) & (rms > seuil), sr / np.maximum(lag, 1), 0.0)
+    return (idx + n / 2) / sr, f0
+
+
+HAUTEUR_ECART = 1.4                                                        # les deux voix : hauteurs moyennes dans ce rapport au moins
+
+
+def hauteurs_nettes(grave, aigue):
+    """Deux voix que la hauteur sépare vraiment : une grave (≤ 175 Hz), une aiguë (≥ 200 Hz), rapport ≥ 1,4. Banc d'essai des 10 vidéos
+    du 20 novembre : quand le même doubleur fait toutes les voix sans voix grave (187 / 264 Hz, 221 / 322 Hz), la hauteur ne dit plus
+    qui parle (elle déplaçait des répliques dans les deux sens) : on n'y touche pas."""
+    return grave <= 175 and aigue >= 200 and aigue >= HAUTEUR_ECART * grave
+
+
+def temoin_hauteur(mots, sig, sr=SR, journal=print, genres_vus=None):
+    """Témoin « hauteur de la voix », phrase par phrase (audit du 21 novembre 2026, « Pire date amoureux » : un homme à 120-150 Hz et
+    une femme à 240-300 Hz, mais l'empreinte vocale confondait les deux voix (ressemblance 0,80) : 10 phrases sur le mauvais
+    personnage, des répliques qui mélangeaient les deux, et la voix de la femme mesurée « homme »). Quand les phrases forment deux
+    groupes de hauteur bien séparés (`hauteurs_nettes` : une voix ≤ 175 Hz, l'autre ≥ 200 Hz, rapport ≥ 1,4), chaque phrase NETTEMENT d'un côté (pas dans la zone du
+    milieu) va à la voix de ce côté ; ses mots deviennent « sûrs » (l'IA qui lit le texte ne les déplace plus). Prudence : jamais si
+    les empreintes vocales sont nettement différentes (< 0,5 : elles sont fiables), jamais plus de 45 % des phrases, seulement entre
+    les deux voix principales ; si l'image a montré deux hommes (ou deux femmes), l'écart vient des cris : rien ; si elle a montré un
+    homme ET une femme (genres_vus = ce que Gemini a vu), la hauteur fait foi même quand le robot s'était trompé sur beaucoup de
+    phrases. HAUTEUR=0 pour couper. Renvoie le nombre de phrases changées ; ETAT["hauteurs"] = {voix: Hz}."""
+    import os
+    from collections import Counter
+    if os.environ.get("HAUTEUR", "1") == "0" or not mots or sig is None: return 0
+    principales = [v for v, _ in Counter(m.get("voix") for m in mots).most_common(2)]
+    if len(principales) < 2: return 0
+    r_ = ETAT.get("ressemblance")
+    if r_ is not None and r_ < 0.5: return 0                               # empreintes bien distinctes : on les croit
+    t, f0 = f0_trames(sig, sr)
+    if not len(t): return 0
+    ph = phrases(mots); val = []
+    for p in ph:
+        k = (t >= mots[p[0]]["s"]) & (t <= mots[p[-1]]["e"]) & (f0 > 0)
+        duree = mots[p[-1]]["e"] - mots[p[0]]["s"]                         # assez de voix nette (≥ 0,15 s et ≥ 30 % de la phrase)
+        val.append((float(np.median(np.log(f0[k]))), int(k.sum())) if k.sum() >= max(15, 0.3 * duree / 0.01) else None)
+    pts = [(z, w) for z, w in (v for v in val if v)]
+    if len(pts) < 6: return 0
+    z = np.array([a for a, _ in pts]); w = np.array([b for _, b in pts], float)
+    c = np.array([z.min(), z.max()])
+    for _ in range(25):                                                    # deux groupes (k-moyennes pondérées, en log)
+        g = np.abs(z - c[0]) > np.abs(z - c[1])
+        if g.all() or (~g).all(): return 0
+        c = np.array([np.average(z[~g], weights=w[~g]), np.average(z[g], weights=w[g])])
+    part = w[g].sum() / w.sum()
+    ecart = c[1] - c[0]
+    sd = np.sqrt(np.average((z[~g] - c[0]) ** 2, weights=w[~g])) + np.sqrt(np.average((z[g] - c[1]) ** 2, weights=w[g]))
+    if not hauteurs_nettes(np.exp(c[0]), np.exp(c[1])) or not 0.15 <= part <= 0.85 or ecart < 1.2 * sd: return 0
+    milieu = (c[0] + c[1]) / 2
+    def cout(gr, ai):                                                      # mots à changer si la voix « gr » est la grave
+        return sum(1 for i, p in enumerate(ph) if val[i] for j in p if mots[j].get("voix") in principales
+                   and mots[j]["voix"] != (ai if val[i][0] > milieu else gr))
+    a_, b_ = principales
+    grave, aigue = (a_, b_) if cout(a_, b_) <= cout(b_, a_) else (b_, a_)   # la correspondance qui change le moins de mots
+    vus = set(genres_vus or ())
+    if len(vus) == 1 and len(list(genres_vus)) >= 2: return 0                # deux hommes (ou deux femmes) vus : l'écart = des cris
+    if len(list(genres_vus or ())) >= 3: return 0                          # 3 personnes ou plus à l'image : deux groupes ne suffisent pas
+    milieu, marge = (c[0] + c[1]) / 2, 0.25 * ecart
+    chang = []
+    for i, p in enumerate(ph):
+        if not val[i]: continue
+        zi = val[i][0]
+        if abs(zi - milieu) < marge: continue                              # zone du milieu : on laisse les autres témoins
+        cible = aigue if zi > milieu else grave
+        voix_p = [mots[j].get("voix") for j in p]
+        if any(v not in principales for v in voix_p): continue             # 3e voix (vocal, serveur…) : pas touchée
+        if all(v == cible for v in voix_p): continue
+        chang.append((i, cible))
+    pleins = [i for i, cible in chang if all(mots[j].get("voix") != cible for j in ph[i])]   # phrase entière sur l'autre voix
+    if vus != {"h", "f"} and len(pleins) > 0.45 * len([v for v in val if v]):   # (un homme ET une femme vus : la hauteur fait foi)
+        journal(f"  témoin hauteur : {len(pleins)} phrases contesteraient la séparation des voix : laissé de côté (trop pour être sûr)"); return 0
+    for i, cible in chang:
+        for j in ph[i]: mots[j]["voix"] = cible; mots[j]["sure"] = True; mots[j]["_hauteur"] = True
+    ETAT["hauteurs"] = {grave: round(float(np.exp(c[0]))), aigue: round(float(np.exp(c[1])))}
+    if chang:
+        journal(f"  témoin hauteur : voix à {ETAT['hauteurs'][grave]} Hz et {ETAT['hauteurs'][aigue]} Hz bien séparées, "
+                f"{len(chang)} phrase(s) remise(s) sur la bonne voix : " + " ; ".join(" ".join(mots[j]["w"] for j in ph[i])[:40] for i, _ in chang[:6]))
+    return len(chang)
+

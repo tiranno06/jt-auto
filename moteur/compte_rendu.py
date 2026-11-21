@@ -28,6 +28,7 @@ def texte(points=None, jury=None, equipe=None):
     for p in points or []:
         q = str(p.get("quoi") or "").strip()
         if not q or re.search(r"saut d'image|clignotement|décalage", q, re.I): continue   # techniques : rien à corriger dans la mise en scène
+        if p.get("qui") or p.get("genre"): continue                        # voix et dessin : corrigé directement (verif_finale.appliquer_voix)
         lignes.append((f"à {float(p['t']):.1f} s : " if p.get("t") is not None else "") + q)
     for k, v in (jury or {}).items():
         for r in (v or {}).get("remarques") or []:

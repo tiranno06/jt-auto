@@ -691,6 +691,29 @@
   compris ; « boîte de nuit » n'est plus un carton. **vitrine.yml illisible depuis le 15 novembre** (« : » dans le nom d'une étape) : GitHub
   refusait de le lancer (bouton « 🔄 Chercher maintenant » : erreur 422) et la recherche des nouveaux créateurs du lundi ne tournait
   plus -> nom entre guillemets ; test `test_tous_les_workflows_lisibles` (chaque workflow relu, nom et jobs présents).
+- **Bonne voix sur le bon personnage, homme / femme (audit de « Pire date amoureux », 21 novembre 2026, remarque de l'auteur : le robot
+  se trompe encore de personnage et entre voix d'homme et de femme)** : l'homme parle à 120-150 Hz, la femme à 240-300 Hz, mais
+  l'empreinte vocale (ECAPA) confondait les deux voix (ressemblance 0,80) : 10 répliques sur le mauvais personnage, des répliques
+  qui mélangeaient les deux (« C'est vrai ? / Pas du tout… »), et la voix de la femme mesurée « homme » ; la vidéo avait en plus été
+  refaite deux fois avec les répliques de la 1re fabrication, faite avant le dernier contrôle des voix. **Témoin « hauteur de la
+  voix »** : `locuteurs.f0_trames` (hauteur toutes les 10 ms, autocorrélation, sans bibliothèque en plus : 0,4 s pour une minute ;
+  mêmes valeurs que pyin), `locuteurs.hauteurs_nettes` (une voix ≤ 175 Hz, l'autre ≥ 200 Hz, rapport ≥ 1,4 : sinon la hauteur ne
+  dit rien, par ex. un même doubleur à 187 / 264 Hz) ; 1. **phrase par phrase avant de former les répliques**
+  (`locuteurs.temoin_hauteur` dans `doublage.preparer`, après le casting voix) : deux groupes de hauteur (sans regarder les
+  étiquettes, correspondance qui change le moins de mots), chaque phrase NETTEMENT d'un côté va à cette voix et ses mots deviennent
+  « sûrs » ; une réplique ne mélange plus deux personnes ; 2. **réplique par réplique** (`equipe.hauteur_finale`, au début de
+  `equipe.voix_finales`) : réplique du mauvais côté -> l'autre personnage, réplique du bon côté « confirmée » (l'empreinte vocale ne
+  peut plus la déplacer), sk["_hauteurs_roles"] ; 3. **homme / femme** (`studio.genre_voix`) : vote 2,5 pour la voix grave = homme,
+  l'aiguë = femme (sauf enfant) ; 4. **vidéo refaite** (« Refaire » compte rendu, remarque, casting) : `doublage.depuis_sketch(sk,
+  controle=True)` refait passer `voix_finales` (hauteur + empreinte) sur le son re-téléchargé ; 5. **contrôle final « voix et dessin »**
+  (`verif_finale.voix_dessin`, VOIX_DESSIN=0) sur le son de la vidéo FINIE : réplique sur la mauvaise voix, personnage à voix de femme
+  dessiné en homme (ou l'inverse) = point grave, corrigé DIRECTEMENT par le compte rendu (`verif_finale.appliquer_voix` : réplique
+  remise, genre par `_casting_auteur`), sans passer par l'IA. **Garde-fous** : jamais contre l'auteur (« Corriger qui parle » et
+  remarques marquent les répliques `_auteur`), jamais si les empreintes sont nettement différentes (< 0,5), jamais si Gemini a vu deux
+  personnes du même genre (l'écart = des cris) ni 3 personnes ou plus à l'image, jamais contre le genre que Gemini a vu pour ce
+  personnage ; zone du milieu (un quart de l'écart) laissée aux autres témoins. HAUTEUR=0 pour couper. Banc d'essai : « Pire date »
+  16 phrases corrigées sur 18 (2 dites très haut, sans doute justes) ; vidéos du 20 novembre : rien déplacé quand aucune voix n'est
+  grave (« Manager toxique », « Self-défense »), « Et toi tu deviens quoi » corrigé comme par l'empreinte.
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.

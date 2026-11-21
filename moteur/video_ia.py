@@ -152,6 +152,18 @@ def especes_par_voix(mots):
     return out
 
 
+def genres_vus():
+    """Genres (« h » / « f ») des personnages VISIBLES que Gemini a vus dans l'original, un par personnage (liste)."""
+    out = []
+    for p in (DERNIER or {}).get("personnages") or []:
+        if not isinstance(p, dict) or p.get("visible") is False or str(p.get("espece") or "humain") not in ("humain", ""): continue
+        d = str(p.get("description") or "").lower()
+        f_ = re.search(r"\b(femme|fille|dame|m[èe]re|maman|s[œo]eur|grand-m[èe]re|mamie|copine|woman|girl|female)\b", d)
+        h_ = re.search(r"\b(homme|gar[çc]on|monsieur|p[èe]re|papa|fr[èe]re|grand-p[èe]re|papi|copain|man|boy|male)\b", d)
+        if bool(f_) != bool(h_): out.append("f" if f_ else "h")
+    return out
+
+
 def genres_par_voix(mots):
     """{voix: « h » / « f »} : ce que Gemini a VU (homme / femme) pour le personnage qui dit le plus de phrases de cette voix."""
     res = DERNIER

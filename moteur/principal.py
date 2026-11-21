@@ -187,7 +187,9 @@ def corriger_compte_rendu(sk, base, audios, mots, decors, fmt, points, modal_ok,
         sk4 = copy.deepcopy(sk)
         try: faits_f = __import__("fiche_tournage").corriger_depuis_points(sk4, points)   # fidélité à l'audio : la fiche est corrigée
         except Exception as e: print(f"Compte rendu : fiche de tournage non corrigée ({str(e)[:100]})", flush=True); faits_f = []
-        faits = faits_f + (remarque.appliquer(sk4, txt, memoriser=False) or [])
+        try: faits_v = verif_finale.appliquer_voix(sk4, points)              # voix et dessin (21 novembre) : corrigé directement, sans IA
+        except Exception as e: print(f"Compte rendu : voix non corrigées ({str(e)[:100]})", flush=True); faits_v = []
+        faits = faits_f + faits_v + (remarque.appliquer(sk4, txt, memoriser=False) or [])
         if not faits: print("Compte rendu : rien que le robot sache corriger lui-même", flush=True); break
         print("Compte rendu : " + " ; ".join(faits), flush=True)
         dec4 = dict(decors or {})
@@ -382,11 +384,11 @@ def main():
                 print(f"Remarque de l'auteur appliquée : {', '.join(faits_r) or 'rien de précis compris'}", flush=True)
             except Exception as e: print(f"remarque impossible à appliquer ({str(e)[:120]})", flush=True)
         for k_, r_ in QUI.items():                                         # « Corriger qui parle » : chaque réplique au bon personnage
-            if 0 <= k_ < len(sk.get("repliques") or []) and r_ in ("presentateur", "invite", "envoyee", "narrateur"): sk["repliques"][k_]["p"] = r_
+            if 0 <= k_ < len(sk.get("repliques") or []) and r_ in ("presentateur", "invite", "envoyee", "narrateur"): sk["repliques"][k_]["p"] = r_; sk["repliques"][k_]["_auteur"] = True
         if QUI: print(f"Corriger qui parle : {len(QUI)} réplique(s) rendue(s) au bon personnage", flush=True)
         if sk.get("doublage") and REFAIRE_MODE in ("qui", "remarque", "casting", "compte_rendu"):   # son TikTok : on garde la bande son d'origine
             import doublage
-            DOUB = list(doublage.depuis_sketch(sk)); fmt = "libre" if sk["doublage"].get("duree", 0) >= 60 else "mini"
+            DOUB = list(doublage.depuis_sketch(sk, controle=REFAIRE_MODE != "qui")); fmt = "libre" if sk["doublage"].get("duree", 0) >= 60 else "mini"
         print(f"Refaire ({REFAIRE_MODE}) : « {sk.get('sujet')} », mêmes répliques", flush=True)
     elif tiktok:
         import doublage
