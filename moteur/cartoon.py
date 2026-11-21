@@ -574,6 +574,8 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
             m_k = (mots or [None] * len(reps))[i]                        # karaoké : mot dit = mot en jaune (contrôlé mot par mot)
             k_ = __import__("jt").karaoke(r["t"], m_k, t) if m_k and not sk.get("_sans_karaoke") else None
             if k_ and sum(len(g_[0].split()) for g_ in ph[-1]["groupes"]) == len(k_): ph[-1]["kara"] = k_
+            EN_ = sk.get("_anglais")                                       # sous-titres anglais (21 novembre) : un morceau par groupe
+            if EN_ and i < len(EN_) and EN_[i]: ph[-1]["en"] = __import__("anglais").repartir(EN_[i], ph[-1]["groupes"])
             continue
         if i == len(reps) - 1 and not att and i: att = 0.45                # un temps avant la chute finale
         t += att
@@ -1857,6 +1859,11 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
                 k_r = 1 + 0.07 * math.sin(math.pi * (age - 0.12) / 0.3); cc = cv2.resize(cc, (int(cc.shape[1] * k_r), int(cc.shape[0] * k_r)))
             dx_c = 5 * math.sin(tm * 47) if (B and q["emo"] in ("cri", "colere")) else 0          # il tremble quand on crie
             poser(fr, cc, (W - cc.shape[1]) / 2 + dx_c, CAP_Y - cc.shape[0] / 2)
+            if q.get("en"):                                                # ligne anglaise juste au-dessus du français
+                gi_ = q["groupes"].index(g); en_ = next((q["en"][j] for j in range(min(gi_, len(q["en"]) - 1), -1, -1) if q["en"][j]), None)
+                if en_:
+                    ce = __import__("jt").carton_en(en_)
+                    poser(fr, ce, (W - ce.shape[1]) / 2, CAP_Y - cc.shape[0] / 2 - ce.shape[0] - 8)
         return np.clip(fr, 0, 255).astype(np.uint8)
 
     if apercu:

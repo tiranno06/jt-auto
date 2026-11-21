@@ -1012,3 +1012,66 @@ class TestAudit20Novembre(unittest.TestCase):
         sk = {"repliques": reps}
         self.assertEqual(equipe.voix_finales(sk, sig, 16000, equipe.Bulletin(), embed=lambda x: (A if float(np.mean(x)) > 0 else Bv) + rng.normal(scale=0.15, size=16)), 1)
         self.assertEqual(sk["repliques"][2]["p"], "presentateur"); self.assertEqual(sk["repliques"][-1]["p"], "envoyee")
+
+
+class TestMonde21Novembre(unittest.TestCase):
+    """Vues dans le monde (choix de l'auteur du 21 novembre 2026 : 1, 2, 3, 7)."""
+    def setUp(self): sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "moteur"))
+
+    def test_creneau_francophonie_un_jour_sur_deux(self):
+        import datetime, publication_auto as P
+        impair, pair = datetime.date(2026, 11, 22), datetime.date(2026, 11, 21)
+        self.assertTrue(P.jour_franco(impair)); self.assertFalse(P.jour_franco(pair))
+        self.assertEqual(P.creneaux({"PUBLI_HEURE": "18:00"}, 0, pair), [(18, 0)])
+        self.assertEqual(P.creneaux({"PUBLI_HEURE": "18:00"}, 0, impair), [(22, 30)])           # même nombre de vidéos
+        self.assertEqual(P.creneaux({"PUBLI_HEURE": "18:00", "PUBLI_DEUX": "1", "PUBLI_HEURE2": "12:00"}, 0, impair), [(12, 0), (22, 30)])
+        self.assertEqual(P.creneaux({"PUBLI_HEURE": "18:00", "PUBLI_FRANCO": "0"}, 0, impair), [(18, 0)])
+        self.assertEqual(P.creneaux({"PUBLI_HEURE": "18:00"}), [(18, 0)])                       # sans date : inchangé
+        src = open(os.path.join(os.path.dirname(__file__), "..", "moteur", "site.py"), encoding="utf-8").read()
+        self.assertIn("function jourFranco", src); self.assertIn('data-var="PUBLI_FRANCO"', src)
+
+    def test_hashtags_francophonie(self):
+        import legende
+        h = legende.hashtags({"hashtags": ["france", "pourtoi", "couple"]})
+        for x in ("france", "pourtoi", "fyp", "tiktokfrance"): self.assertNotIn(x, h)
+        self.assertIn("couple", h); self.assertIn("francophone", h)
+        self.assertEqual(legende.sans_risque("Texte #fyp #couple #tiktokfrance #humour"), "Texte #couple #humour")
+
+    def test_sous_titres_anglais(self):
+        import anglais
+        with mock.patch.dict(os.environ, {"SOUS_TITRES_EN": "essai"}):
+            self.assertTrue(anglais.actif([{"anglais": True}] * 9)); self.assertFalse(anglais.actif([{"anglais": True}] * 10))
+        with mock.patch.dict(os.environ, {"SOUS_TITRES_EN": "0"}): self.assertFalse(anglais.actif([]))
+        with mock.patch.dict(os.environ, {"SOUS_TITRES_EN": "1"}): self.assertTrue(anglais.actif([{"anglais": True}] * 50))
+        g = [("ATTENDS, T'AS", 0, 1), ("MANGÉ TOUTE MA PIZZA", 1, 2), ("PENDANT QUE J'ÉTAIS AU BOULOT ?", 2, 3)]
+        p = anglais.repartir("Wait, you ate my whole pizza while I was at work?", g)
+        self.assertEqual(len(p), 3); self.assertEqual(" ".join(x for x in p if x), "Wait, you ate my whole pizza while I was at work?")
+        self.assertEqual(anglais.repartir("No way!", g[:2]), ["No way!", None])
+        rep = {"lignes": [{"n": 0, "en": "[angry] Wait what?"}, {"n": 1, "en": "Yes."}]}
+        with mock.patch("reseau.ia_disponible", return_value=True), mock.patch("reseau.claude", return_value=None), \
+             mock.patch("ecrire._appel", return_value=rep):
+            self.assertEqual(anglais.traduire(["Attends quoi ?", "Oui."]), ["Wait what?", "Yes."])
+        with mock.patch("reseau.ia_disponible", return_value=True), mock.patch("reseau.claude", return_value=None), \
+             mock.patch("ecrire._appel", return_value={"lignes": [{"n": 0, "en": "Wait"}]}):
+            self.assertIsNone(anglais.traduire(["Attends quoi ?", "Oui."]))                      # une ligne manque : français seul
+        import jt
+        self.assertLessEqual(jt.carton_en("Wait, you ate my whole pizza while I was at work? And my fries too, seriously?").shape[1], 1000)
+
+    def test_recette_essais_et_premier_essai(self):
+        import recette
+        h = [{"fichier": f"v{i}.mp4", "vues": v, "titre": f"t{i}", "filiere": "tiktok", "date": "2026-11-22_10h00",
+              "programmee": f"2026-11-23T{hh}:30", "anglais": i % 2 == 0} for i, (v, hh) in
+             enumerate([(300, "18"), (2000, "22"), (250, "18"), (3000, "22"), (400, "22"), (320, "18")])]
+        r = recette.analyser(h)
+        self.assertIn("Créneau", r["essais"]); self.assertIn("Sous-titres", r["essais"])
+        self.assertEqual(r["sorties"]["n"], 2); self.assertEqual(r["sorties"]["videos"][0][1], 3000)
+        vieux = [dict(x, date="2026-10-01_10h00", programmee="2026-10-02T22:30") for x in h]
+        self.assertEqual(recette.analyser(vieux)["essais"], {})                                  # avant les essais : pas comparé
+
+    def test_accroche_titre_court_et_parole_tot(self):
+        import doublage, ecrire
+        self.assertLessEqual(len(ecrire.titre_net("Quand ta mère découvre que tu as mangé toute la pizza", 32)), 32)
+        self.assertEqual(doublage.DEBUT_MAX, 0.5)
+        self.assertAlmostEqual(doublage.attente_premier_mot([{"s": 0.9, "e": 1.2}]), 0.7)
+        src = open(os.path.join(os.path.dirname(__file__), "..", "moteur", "doublage.py"), encoding="utf-8").read()
+        self.assertIn('ecrire.titre_net(m.get("titre_accroche") or "", 32)', src)

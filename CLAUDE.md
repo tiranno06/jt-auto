@@ -650,6 +650,23 @@
   marche aussi avec un 3e personnage qui dit deux mots (le serveur). **Pannes** : modèles Gemini retirés sautés (`reseau.gemini_disponibles`, liste lue chez Google ;
   « gemini-2.5-flash » répondait 404 à chaque appel ; `video_ia.MODELES`) ; NeMo réparé (pyarrow>=15,<17 dans l'image Modal) ; tikwm
   (biographies) plus redemandé après un refus 403.
+- **Vues dans le monde (analyse du 21 novembre 2026, choix de l'auteur 1, 2, 3, 7)** : les vidéos sont vues surtout en France parce que
+  TikTok montre d'abord une vidéo aux gens qui la comprennent (voix, texte à l'écran, description, hashtags, pays du compte) et que nos
+  vidéos (322 vues en médiane) sortent rarement du « premier essai » (petit groupe de 200-500 personnes). Pas de chiffres par pays dans
+  le relevé (TikTok Studio → Spectateurs → Lieux). **Créneau francophonie** (1, `publication_auto.jour_franco` / `creneaux(…, date)`,
+  site `jourFranco` / `creneauxPubli`) : un jour sur deux (jours impairs depuis 1970), la DERNIÈRE vidéo du jour part à PUBLI_HEURE_FRANCO
+  (22:30 par défaut = fin d'après-midi au Québec) ; même nombre de vidéos par jour ; PUBLI_FRANCO=0 pour couper ; **francophonie des
+  descriptions** (2, `legende.FRANCE_SEULE` / `francophone` : jamais #france, #paris, #tiktokfrance, #fyp, #pourtoi… y compris retirés
+  des anciennes descriptions à l'envoi ; niche + #francophone #humourfrancophone ; consigne de l'IA : légende comprise dans tous les pays
+  francophones ; FRANCOPHONIE=0) ; **sous-titres anglais** (3, `moteur/anglais.py` : traduction de chaque réplique par l'IA gratuite,
+  2 essais, refusée s'il manque une ligne ; sk["_anglais"] ; ligne anglaise plus petite juste au-dessus du sous-titre français, un morceau
+  par groupe de sous-titres (`anglais.repartir`, `jt.carton_en`) ; réglage SOUS_TITRES_EN : « essai » par défaut = les 10 prochaines
+  vidéos TikTok (historique "anglais"), « 1 » toujours, « 0 » jamais) ; **rétention** (7) : titre d'ouverture de 30 caractères / 6 mots au
+  plus (`ecrire.titre_net(…, 32)` sur "titre_accroche"), 1re parole dans la 1re demi-seconde (`doublage.DEBUT_MAX` 0,5 s, marge 0,2 s ;
+  `attente_premier_mot` limite 0,6 s) ; bloc « 📈 Ce qui marche » : **essais en cours** (`recette.ESSAIS` : créneau francophonie et
+  sous-titres anglais comparés sur les vidéos depuis le 21 novembre) et **🚀 vidéos sorties du premier essai** (`recette.sorties` :
+  1 000 vues et 3 × la médiane au moins, et ce qu'elles ont en commun). Pas fait (non choisis) : 2e compte en anglais, YouTube Shorts /
+  Instagram Reels, bonus aux sons drôles sans les mots, carte des pays. Déconseillé : doublage des voix en anglais (coût, jeu perdu, droits).
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.

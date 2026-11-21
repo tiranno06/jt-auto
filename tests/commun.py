@@ -1,6 +1,7 @@
 """Préparation commune à tous les fichiers de tests (sans réseau, sans clé API, sans GPU) : chemins, réglages, modules,
 données d'essai (SKETCH, article, FauxClaude). Lancer : python -m unittest discover -s tests -v"""
 import io, json, os, sys, tempfile, types, unittest
+from unittest import mock
 import numpy as np
 
 ICI = os.path.dirname(os.path.abspath(__file__))

@@ -108,7 +108,15 @@ def heure(brut):
     except ValueError: return (18, 0)
 
 
-def creneaux(reglages, jour=None):
+FRANCO_DEF = "22:30"
+
+
+def jour_franco(date):
+    """Un jour sur deux (jours impairs depuis le 1er janvier 1970, même calcul que le site) : créneau francophonie."""
+    return (date.toordinal() - 719163) % 2 == 1
+
+
+def creneaux(reglages, jour=None, date=None):
     """Heures de publication du jour (heure de Paris) : PUBLI_HEURE (ou l'heure des statistiques) et, si PUBLI_DEUX = 1, la
     deuxième heure PUBLI_HEURE2 (choix de l'auteur, 1er novembre 2026 : deux vidéos par jour). Triées, sans doublon."""
     h, m = heure(reglages.get("PUBLI_HEURE"))
@@ -119,14 +127,22 @@ def creneaux(reglages, jour=None):
     if str(reglages.get("PUBLI_DEUX") or "0").strip() == "1":
         h2 = heure(str(reglages.get("PUBLI_HEURE2") or "").strip() or "12:00")   # (même défaut que le site)
         if abs((h2[0] * 60 + h2[1]) - (h * 60 + m)) >= 60: out.append(h2)    # au moins une heure d'écart
-    return sorted(out)
+    out = sorted(out)
+    # Créneau francophonie (choix de l'auteur du 21 novembre 2026, idée 1) : un jour sur deux, la DERNIÈRE vidéo du jour part le
+    # soir (22 h 30 par défaut, heure de Paris = 16 h 30 au Québec, 21 h 30 en Afrique de l'Ouest) ; même nombre de vidéos par jour,
+    # et le bloc « 📈 Ce qui marche » compare les vues des deux créneaux. PUBLI_FRANCO=0 pour couper.
+    if date is not None and str(reglages.get("PUBLI_FRANCO") or "1").strip() != "0" and jour_franco(date):
+        hf = heure(str(reglages.get("PUBLI_HEURE_FRANCO") or "").strip() or FRANCO_DEF)
+        autres = out[:-1]
+        if all(abs((hf[0] * 60 + hf[1]) - (x[0] * 60 + x[1])) >= 60 for x in autres): out = sorted(autres + [hf])
+    return out
 
 
 def decision(maintenant, reglages, historique, deja_aujourdhui, courbes=None):
     """(fichier à publier ou None, « quand » pour Buffer (heure de Paris, ISO) ou "" = tout de suite, raison).
     deja_aujourdhui : nombre de publications automatiques déjà demandées aujourd'hui (True = 1). Une vidéo par créneau du jour."""
     if str(reglages.get("PUBLI_AUTO") or "0").strip() != "1": return None, "", "publication automatique coupée"
-    cibles = [maintenant.replace(hour=h, minute=m, second=0, microsecond=0) for h, m in creneaux(reglages, maintenant.weekday())]
+    cibles = [maintenant.replace(hour=h, minute=m, second=0, microsecond=0) for h, m in creneaux(reglages, maintenant.weekday(), maintenant.date())]
     atteints = [c for c in cibles if maintenant >= c - datetime.timedelta(minutes=AVANCE)]
     if not atteints: return None, "", f"pas encore l'heure ({cibles[0].strftime('%H:%M')})"
     n = int(deja_aujourdhui)
@@ -180,7 +196,7 @@ def deja_aujourdhui(maintenant):
 
 def main():
     maintenant = datetime.datetime.now(PARIS)
-    reglages = {k: os.environ.get(k, "") for k in ("PUBLI_AUTO", "PUBLI_HEURE", "PUBLI_FILE", "PUBLI_HEURE_AUTO", "PUBLI_DEUX", "PUBLI_HEURE2")}
+    reglages = {k: os.environ.get(k, "") for k in ("PUBLI_AUTO", "PUBLI_HEURE", "PUBLI_FILE", "PUBLI_HEURE_AUTO", "PUBLI_DEUX", "PUBLI_HEURE2", "PUBLI_FRANCO", "PUBLI_HEURE_FRANCO")}
     if reglages["PUBLI_AUTO"].strip() != "1": print("Publication automatique coupée."); return
     try: hist = json.load(open(os.path.join(RACINE, "episodes", "historique.json"), encoding="utf-8"))
     except (OSError, ValueError): hist = []

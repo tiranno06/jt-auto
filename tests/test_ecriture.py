@@ -452,7 +452,7 @@ class TestNotesTikTok(unittest.TestCase):
 
     def test_debut_coupe_au_premier_mot(self):
         import doublage
-        self.assertAlmostEqual(doublage.attente_premier_mot([{"s": 4.28, "e": 4.5}]), 3.98)
+        self.assertAlmostEqual(doublage.attente_premier_mot([{"s": 4.28, "e": 4.5}]), 4.08)
         self.assertEqual(doublage.attente_premier_mot([{"s": 0.6, "e": 0.9}]), 0.0)
         src = open(os.path.join(ICI, "..", "moteur", "doublage.py"), encoding="utf-8").read()
         self.assertIn("extra = attente_premier_mot(mots)", src)

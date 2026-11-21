@@ -171,7 +171,7 @@ def application(nom):
 
 # Service worker : l'appli s'ouvre même hors connexion (dernière version de la page), sans jamais mettre en cache
 # les vidéos (trop lourdes) ni les appels à GitHub.
-SW = r"""const CACHE = "regie-v29";
+SW = r"""const CACHE = "regie-v30";
 const COQUILLE = ["./", "manifest.webmanifest", "logo-192.png", "logo-512.png", "poppins-500.ttf", "poppins-700.ttf"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(COQUILLE))); self.skipWaiting(); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(k => Promise.all(k.filter(x => x !== CACHE).map(x => caches.delete(x))))); self.clients.claim(); });
@@ -452,6 +452,8 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <div class="auto"><div class="txt"><b>Deux vidéos par jour</b><small>Une 2e vidéo cochée publiée à la 2e heure ci-dessous (au moins une heure d'écart).</small></div><button class="inter" data-var="PUBLI_DEUX" data-def="0" data-bascule="1"></button></div>
     <div class="auto"><div class="txt"><b>♻️ Rediffusion</b><small>Quand aucune vidéo cochée n'attend, la vidéo d'il y a plus de 3 mois qui a fait le plus de vues repart (jamais deux fois en 3 mois).</small></div><button class="inter" data-var="REDIFFUSION" data-def="1" data-bascule="1"></button></div>
     <label>2e heure de publication (heure de Paris)<div class="jeton"><input data-var="PUBLI_HEURE2" data-def="12:00" data-texte="1" maxlength="5" type="time" placeholder="12:00"><button class="second" data-enr="PUBLI_HEURE2" style="flex:none;padding:10px 14px">OK</button></div></label>
+    <div class="auto"><div class="txt"><b>🌍 Créneau francophonie</b><small>Un jour sur deux, la dernière vidéo du jour part le soir (Québec en fin d'après-midi, Afrique francophone en soirée). Même nombre de vidéos ; « 📈 Ce qui marche » compare les vues des deux créneaux.</small></div><button class="inter" data-var="PUBLI_FRANCO" data-def="1" data-bascule="1"></button></div>
+    <label>Heure du créneau francophonie (heure de Paris)<div class="jeton"><input data-var="PUBLI_HEURE_FRANCO" data-def="22:30" data-texte="1" maxlength="5" type="time" placeholder="22:30"><button class="second" data-enr="PUBLI_HEURE_FRANCO" style="flex:none;padding:10px 14px">OK</button></div></label>
     <p class="note" id="pubResume"></p>
     <h3 style="margin:14px 0 6px">🗓️ Calendrier de publication</h3><div id="calendrier"></div>
     <p class="note">Jamais deux sons du même profil d'affilée : le robot alterne les comptes d'origine (l'ordre ci-dessus en tient compte).</p></details>
@@ -539,6 +541,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <label>Montage<select data-var="MONTAGE" data-def="large"><option value="large">Plan large : les personnages toujours à l'image, caméra fixe (recommandé)</option><option value="dynamique">Dynamique : beaucoup de plans, zooms et caméra vivante</option><option value="simple">Simple : un plan par réplique</option></select></label>
     <div class="auto"><div class="txt"><b>Sous-titres karaoké</b><small>Le mot dit passe en jaune, au moment exact où on l'entend (contrôlé mot par mot ; une réplique douteuse garde les sous-titres normaux).</small></div><button class="inter" data-var="KARAOKE" data-def="1" data-bascule="1"></button></div>
     <div class="auto"><div class="txt"><b>Raccourcir les longs silences</b><small>Les blancs de plus d'1 s de l'original sont ramenés à ½ s (jamais un rire ni un souffle).</small></div><button class="inter" data-var="SILENCES_COURTS" data-def="1" data-bascule="1"></button></div>
+    <label>🌍 Sous-titres anglais (en plus du français)<select data-var="SOUS_TITRES_EN" data-def="essai"><option value="essai">Essai sur les 10 prochaines vidéos, puis on compare les vues (recommandé)</option><option value="1">Toujours</option><option value="0">Jamais</option></select></label>
     <div class="auto"><div class="txt"><b>Rendu détaillé</b><small>Tenues, visages, décors et plans soignés (gratuit).</small></div><button class="inter" data-var="RENDU_DETAILLE" data-def="1" data-bascule="1"></button></div>
     <div class="auto ancien"><div class="txt"><b>Accroche choc en ouverture</b><small>La réplique la plus intrigante dès la 1re seconde.</small></div><button class="inter" data-var="ACCROCHE" data-def="0" data-bascule="1"></button></div>
     <label class="ancien">Voix des personnages<select data-var="VOIX_PERSOS" data-def="bibliotheque"><option value="bibliotheque">Voix de la bibliothèque ElevenLabs</option><option value="sur_mesure">🎙️ Voix sur mesure de la chaîne</option></select></label>
@@ -908,7 +911,21 @@ function rendreRecette(r){
   z.innerHTML=`<p class="note">${r.videos} vidéo(s) avec des vues, ${r.moyenne} vues en moyenne. « ×2 » = deux fois plus de vues que la moyenne.</p>`+
     (r.plus.length?`<p class="note"><b>Ce qui marche</b></p><div class="barres">${r.plus.map(x=>ligne(x,true)).join("")}</div>`:"")+
     (r.moins.length?`<p class="note"><b>Ce qui marche moins</b></p><div class="barres">${r.moins.map(x=>ligne(x,false)).join("")}</div>`:"")+
-    (!r.plus.length&&!r.moins.length?`<p class="note">Rien de net pour l'instant : il faut plus de vidéos.</p>`:"");
+    (!r.plus.length&&!r.moins.length?`<p class="note">Rien de net pour l'instant : il faut plus de vidéos.</p>`:"")+
+    rendreEssaisMonde(r);
+}
+function rendreEssaisMonde(r){                                             // essais du 21 novembre : vues hors de France + premier essai
+  const e=r.essais||{}, S=r.sorties||{}, esc=x=>String(x).replace(/</g,"&lt;");
+  let h=`<p class="note" style="margin-top:12px"><b>🌍 Essais en cours (vues dans le monde)</b></p>`;
+  const ks=Object.keys(e);
+  h+=ks.length?ks.map(k=>`<p class="note">${esc(k)} : `+e[k].map(x=>`<b>${esc(x[0])}</b> ${x[1]} vues en moyenne (${x[2]} vidéo${x[2]>1?"s":""})`).join(" · ")+`</p>`).join("")
+    :`<p class="note">Pas encore de vidéo publiée depuis le début des essais (créneau francophonie, sous-titres anglais).</p>`;
+  h+=`<p class="note">Les pays des spectateurs ne sont visibles que dans TikTok : Outils du créateur → Statistiques → Spectateurs → Lieux.</p>`;
+  h+=`<p class="note" style="margin-top:12px"><b>🚀 Vidéos sorties du premier essai</b> (${S.seuil||1000} vues et plus : TikTok les a montrées au-delà du premier petit groupe)</p>`;
+  h+=S.n?`<p class="note">${S.n} vidéo(s) : `+(S.videos||[]).map(v=>`« ${esc(v[0])} » <b>${v[1]}</b>`).join(" · ")+`</p>`+
+     ((S.communs||[]).length?`<p class="note">Ce qu'elles ont en commun : `+S.communs.map(c=>`${esc(c[0])} <b>${esc(c[1])}</b> (${Math.round(c[2]*100)} %)`).join(" · ")+`</p>`:"")
+    :`<p class="note">Aucune pour l'instant : le but est qu'une vidéo dépasse ce seuil, TikTok l'élargit alors tout seul (d'abord à toute la francophonie).</p>`;
+  return h;
 }
 // ⏱️ temps par étape de la dernière vidéo (historique "temps", "temps_lents") et moyenne des 10 dernières
 function rendreTemps(h){
@@ -1228,13 +1245,19 @@ function rendreHeureStats(){
     (varie?`<br><span style="font-size:12px">${H.jours.map((h,j)=>nom[j].slice(0,3)+" "+f(h)).join(" · ")}</span>`:"")+
     `<br><span style="font-size:12px">Recalculée toute seule à chaque relevé de vos vues (toutes les heures)${on?"":" ; cochez la case pour l'utiliser"}.</span>`;
 }
+function jourFranco(d){return Math.round(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())/864e5)%2===1}   // même calcul que publication_auto.jour_franco
 function creneauxPubli(d){                                                // heures de publication du jour d (1 ou 2), triées
   const H_=HEURES_LIVE||(CONF.heures_jours?{global:CONF.heure_stats??18,jours:[...Array(7).keys()].map(j=>CONF.heures_jours[j]??CONF.heure_stats??18)}:null);
   const jj=d?((d.getDay()+6)%7):null, hj=H_?(jj!=null?H_.jours[jj]:H_.global):(CONF.heure_stats??18);   // idée 17 : selon le jour
   const auto=String((VARS&&VARS.PUBLI_HEURE_AUTO)||"0")==="1", h=auto?(String(hj).padStart(2,"0")+":00"):((VARS&&VARS.PUBLI_HEURE)||"18:00");
   const l=[h], h2=String((VARS&&VARS.PUBLI_HEURE2)||"12:00").trim(), mn=x=>{const [a,b]=x.split(":").map(Number); return a*60+(b||0)};
   if(String((VARS&&VARS.PUBLI_DEUX)||"0")==="1"&&/^\d{1,2}:\d{2}$/.test(h2)&&Math.abs(mn(h2)-mn(h))>=60) l.push(h2);
-  return l.sort((a,b)=>mn(a)-mn(b));
+  l.sort((a,b)=>mn(a)-mn(b));
+  const dj=d||new Date(), hf=String((VARS&&VARS.PUBLI_HEURE_FRANCO)||"22:30").trim();   // créneau francophonie : un jour sur deux,
+  if(String((VARS&&VARS.PUBLI_FRANCO)||"1")!=="0"&&/^\d{1,2}:\d{2}$/.test(hf)&&jourFranco(dj)){   // la dernière vidéo du jour part le soir
+    const autres=l.slice(0,-1); if(autres.every(x=>Math.abs(mn(x)-mn(hf))>=60)){autres.push(hf.padStart(5,"0")); return autres.sort((a,b)=>mn(a)-mn(b))}
+  }
+  return l;
 }
 function prochainsCreneaux(n){                                             // [Date] des n prochaines publications
   const hs=creneauxPubli(), out=[], d=new Date(); d.setSeconds(0,0);

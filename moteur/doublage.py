@@ -76,7 +76,10 @@ def debut_parole(sig, seuil=0.8):
     return k * 0.02
 
 
-def attente_premier_mot(mots, limite=1.0, marge=0.3):
+DEBUT_MAX = 0.5                                                            # s : la 1re parole arrive au plus tard ici (rétention)
+
+
+def attente_premier_mot(mots, limite=0.6, marge=0.2):
     """Secondes à couper encore au début quand le premier mot transcrit arrive après `limite` (le spectateur scrolle avant)."""
     if not mots: return 0.0
     s0 = float(mots[0].get("s") or 0)
@@ -418,9 +421,12 @@ Avec l'outil doublage :
 - "d" : pour chaque réplique (même ordre, même nombre), l'émotion juste en indication anglaise entre crochets suivie du texte (« [annoyed] … ») ;
 - "decoupage" : 1 à 4 scènes (indices des répliques, toutes couvertes, dans l'ordre ; "decor" EN ANGLAIS sans personnage : lieu précis + 2 ou 3 objets,
   cohérent avec ce qui est dit ; "titre" = carton court seulement si la scène change de moment ou de lieu) ;
-- "sujet" (30 caractères max), "titre_accroche" (« POV : … » ou « Quand … », 40 caractères max), "legende" (1 phrase en français),
+- "sujet" (30 caractères max), "titre_accroche" (« POV : … » ou « Quand … », 30 caractères et 6 mots au plus : l'enjeu de la scène,
+  lu en une seconde), "legende" (1 phrase en français, comprise dans TOUS les pays francophones : Belgique, Suisse, Québec, Afrique ;
+  pas de référence seulement française : émission, marque, administration, ville),
   "question" (pour les commentaires), "commentaire" (une AUTRE question courte, à épingler en 1er commentaire : un choix à faire
-  « Team … ou team … ? », « Vous auriez fait quoi ? », avec un emoji), "hashtags" (4 à 6, sans #) ;
+  « Team … ou team … ? », « Vous auriez fait quoi ? », avec un emoji), "hashtags" (4 à 6, sans #, ceux que tapent les francophones
+  du monde entier : jamais #france, #paris, #tiktokfrance ni #fyp / #pourtoi) ;
 {studio}"""
 
 IMAGES = """
@@ -608,9 +614,9 @@ def preparer(url):
     debut = 0.0
     if voix_sig is not None and os.environ.get("DEBUT_COURT", "1") != "0":  # silence du début : on scrolle avant la 1re parole
         t_ = debut_parole(voix_sig)
-        if t_ > 0.8:
+        if t_ > DEBUT_MAX:                                                 # (rétention, 21 novembre : 1re parole dans la 1re demi-seconde)
             try:
-                debut = round(t_ - 0.25, 3)
+                debut = round(t_ - 0.2, 3)
                 piste, mono, v2 = couper_debut(tmp, info, debut, chemin_voix if chemin_voix != f"{tmp}/mono.wav" else None)
                 voix_sig = v2 if v2 is not None else mono; duree = len(mono) / SR
                 journal(f"  silence du début retiré : {debut:.2f} s (la 1re parole arrivait à {t_:.1f} s)")
@@ -762,7 +768,7 @@ def preparer(url):
     if all(r["p"] == "narrateur" for r in reps): reps[0]["p"] = "presentateur"   # au moins un personnage à l'image
     reps[-1]["chute"] = True
     brut = {"sujet": m.get("sujet") or segs[0]["t"], "repliques": [dict(r) for r in reps[:16]], "legende": m.get("legende") or segs[0]["t"][:120],
-            "hashtags": ecrire._liste(m.get("hashtags")) or ["humour", "doublage", "pov"], "titre_accroche": m.get("titre_accroche") or "",
+            "hashtags": ecrire._liste(m.get("hashtags")) or ["humour", "doublage", "pov"], "titre_accroche": ecrire.titre_net(m.get("titre_accroche") or "", 32),
             "question": m.get("question") or "", "sources": [lien], "decoupage": []}
     sk = ecrire.valider(brut, {lien}, libre=True, minimum=1)
     if isinstance(m.get("commentaire"), str): sk["commentaire"] = m["commentaire"].strip()[:150]

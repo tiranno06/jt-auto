@@ -84,6 +84,23 @@ def carton(txt, actif=None):
     tmp = tmp.resize((w, int(tmp.height * min(1, 1000 / (tmp.width * 0.82)))), Image.LANCZOS)
     _cache[(txt, actif)] = np.array(tmp).astype(np.float32); return _cache[(txt, actif)]
 
+F_EN = ImageFont.truetype(FM, 50); _cache_en = {}
+def carton_en(txt):
+    """Sous-titre anglais (21 novembre 2026) : plus petit, blanc cassé, 2 lignes au plus, au-dessus du sous-titre français."""
+    if txt in _cache_en: return _cache_en[txt]
+    d0 = ImageDraw.Draw(Image.new("RGB", (1, 1))); lignes, cur = [], ""
+    for m in str(txt).split():
+        if cur and d0.textlength(cur + " " + m, font=F_EN) > 940: lignes.append(cur); cur = m
+        else: cur = (cur + " " + m).strip()
+    lignes.append(cur)
+    if len(lignes) > 2: lignes = [lignes[0], " ".join(lignes[1:])]
+    hl = 64; tmp = Image.new("RGBA", (W, hl * len(lignes) + 24), (0, 0, 0, 0)); d = ImageDraw.Draw(tmp)
+    for k, l in enumerate(lignes):
+        w = d.textlength(l, font=F_EN); d.text(((W - w) / 2, 6 + k * hl), l, font=F_EN, fill=(235, 240, 255), stroke_width=6, stroke_fill=(0, 0, 0))
+    tmp = tmp.crop(tmp.getbbox() or (0, 0, 1, 1))
+    if tmp.width > 1000: tmp = tmp.resize((1000, int(tmp.height * 1000 / tmp.width)), Image.LANCZOS)
+    _cache_en[txt] = np.array(tmp).astype(np.float32); return _cache_en[txt]
+
 def pop(a, k):
     if k >= 1: return a
     s = 0.75 + 0.25 * (1 - (1 - max(0, k)) ** 3)
