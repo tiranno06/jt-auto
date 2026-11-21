@@ -839,7 +839,7 @@ def canape_face(img, x, sol, R, h_assise, large, coul=(110, 130, 170), ep=None):
     for k in (-0.95, 0.95): encre(img, [(x + k * L * 1.15, sol - R * 0.12), (x + k * L * 1.15, sol)], ep * 2.2, effile=False)
 
 
-def lit_face(img, x, sol, R, h_assise, large, coul=(90, 120, 150), ep=None):   # couleurs en BGR (bois)
+def lit_face(img, x, sol, R, h_assise, large, coul=(150, 118, 86), ep=None):   # bois (images en RVB : l'ancien (90, 120, 150) sortait bleu)
     """Lit vu de face, tête de lit et gros oreiller derrière la personne (dessinés avant elle) ; la couette vient après (couette)."""
     ep = ep or R * 0.035; ys = sol - h_assise; L = large * 1.5
     _forme(img, [(x - L, ys - R * 2.6), (x + L, ys - R * 2.6), (x + L, sol), (x - L, sol)], coul, ep, 0.75)          # tête de lit
@@ -854,12 +854,39 @@ def couette(img, x, sol, R, h_assise, large, coul=(235, 200, 170), ep=None):    
     for k in (-0.45, 0.1, 0.55): encre(img, [(x + k * L, ys - R * 0.3), (x + (k + 0.08) * L, sol - R * 0.2)], ep * 0.8)   # plis
 
 
-def comptoir(img, x, sol, R, large, h_hanche, coul=(70, 105, 150), ep=None):     # bois
+def comptoir(img, x, sol, R, large, h_hanche, coul=(150, 105, 70), ep=None):     # bois (RVB : l'ancien sortait BLEU, « poubelle bleue » du 20 novembre)
     """Comptoir au premier plan, juste au-dessus des hanches (dessiné après la personne accoudée) : plateau et façade en bois."""
     ep = ep or R * 0.035; yh = sol - h_hanche * 1.08; L = large * 0.8    # étroit : devant celui qui est derrière le comptoir seulement
     _forme(img, [(x - L, yh + R * 0.2), (x + L, yh + R * 0.2), (x + L, sol + R * 0.2), (x - L, sol + R * 0.2)], coul, ep, 0.9)
     _forme(img, [(x - L * 1.08, yh), (x + L * 1.08, yh), (x + L * 1.08, yh + R * 0.22), (x - L * 1.08, yh + R * 0.22)], tuple(max(0, int(c * 0.8)) for c in coul), ep, 0.95)
     for k in (-0.5, 0.0, 0.5): encre(img, [(x + k * L, yh + R * 0.45), (x + k * L, sol - R * 0.1)], ep * 0.7)
+
+
+def table_face(img, x0, x1, y_plateau, sol, R, nappe=(236, 232, 224), bois=(150, 105, 70), objets=("verre", "assiette"), ep=None):
+    """Table vue de face DEVANT des personnages assis (rendez-vous, resto, repas : idée 11 du 21 novembre) : plateau, nappe qui tombe
+    jusqu'au sol (cache les jambes et les chaises), et sur la table un verre et une assiette devant chacun. Couleurs en RVB."""
+    ep = ep or R * 0.035
+    _forme(img, [(x0, y_plateau + R * 0.12), (x1, y_plateau + R * 0.12), (x1 + R * 0.05, sol - R * 0.05), (x0 - R * 0.05, sol - R * 0.05)], nappe, ep, 0.9)
+    _forme(img, [(x0 - R * 0.15, y_plateau - R * 0.1), (x1 + R * 0.15, y_plateau - R * 0.1), (x1 + R * 0.15, y_plateau + R * 0.14),
+                 (x0 - R * 0.15, y_plateau + R * 0.14)], bois, ep, 0.95)
+    for k in range(1, 8):                                                  # plis de la nappe
+        xk = x0 + (x1 - x0) * k / 8
+        encre(img, [(xk, y_plateau + R * 0.3), (xk + R * 0.04, sol - R * 0.2)], ep * 0.6)
+    return img
+
+
+def verre_table(img, x, y, R, ep=None):
+    """Petit verre posé sur la table (y = dessus du plateau)."""
+    ep = ep or R * 0.03
+    _forme(img, [(x - R * 0.12, y - R * 0.42), (x + R * 0.12, y - R * 0.42), (x + R * 0.09, y - R * 0.1), (x - R * 0.09, y - R * 0.1)], (205, 225, 235), ep, 0.6)
+    encre(img, [(x, y - R * 0.1), (x, y)], ep * 1.5, effile=False); encre(img, [(x - R * 0.1, y), (x + R * 0.1, y)], ep * 1.5, effile=False)
+
+
+def assiette_table(img, x, y, R, ep=None):
+    """Assiette posée sur la table, vue un peu de dessus."""
+    ep = ep or R * 0.03
+    cv2.ellipse(img, tuple(int(v) for v in _pts([(x, y - R * 0.05)])[0]), (int(R * 0.42 * 4), int(R * 0.1 * 4)), 0, 0, 360, (250, 250, 248), -1, AA, 2)
+    cv2.ellipse(img, tuple(int(v) for v in _pts([(x, y - R * 0.05)])[0]), (int(R * 0.42 * 4), int(R * 0.1 * 4)), 0, 0, 360, (40, 38, 44), max(1, int(ep * 4)), AA, 2)
 
 
 def mal_rase(img, c, R):

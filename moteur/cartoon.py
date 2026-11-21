@@ -24,7 +24,11 @@ import marionnette as M, sons_modernes as SM, bruitages as BR, marque, studio, d
 import rapide as _RAPIDE                                                   # mélanges de couleur compilés (Numba), mêmes pixels
 from jt import minutage, carton, son, vers_mix, enveloppe, poser, pop, W, H, FPS, SR, SRM, FB
 
-CAP_Y = 1700
+# Sous-titres dans la zone que TikTok laisse VISIBLE (choix de l'auteur du 21 novembre 2026, idée 2) : en bas (au-delà de ~1 500 px)
+# TikTok affiche le pseudo, la description et la musique, à droite (~ x > 900) les boutons ❤️ 💬 ↗ : les sous-titres étaient à 1 700 px,
+# en partie cachés. Ils passent à 1 380 px (sur les jambes, sous les têtes) et un peu à gauche ; réglage SOUS_TITRES_Y (ancien : 1700).
+CAP_Y = max(900, min(1750, int(os.environ.get("SOUS_TITRES_Y") or 1380)))
+CAP_X = 470 if CAP_Y < 1650 else 540                                       # centre des sous-titres (loin des boutons de droite)
 MINUTAGE = []                                                              # (début, fin, texte, qui) de la dernière vidéo : contrôle qualité
 PH = []                                                                    # répliques de la dernière vidéo avec leur plan (mémoire du studio)
 BRUITAGES = []                                                             # (nom, instant, gain) des bruitages de la dernière vidéo
@@ -605,7 +609,9 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
     if DOUB: GEL = max(GEL, min(float(DOUB.get("duree") or 0), FIN + 4.0))   # la bande son continue (musique) : on la laisse finir
     total = GEL + 1.1
     FIN_CARTE = None
-    if DOUB:                                                               # pas d'allongement artificiel : signature puis fin
+    if DOUB and sk.get("_sans_fin"):                                       # essai sans carton « Abonne-toi » (21 novembre, idée 6) : la vidéo
+        total = GEL + 0.3                                                  # repart tout de suite au début (boucle), on mesure les vues
+    elif DOUB:                                                             # pas d'allongement artificiel : signature puis fin
         FIN_CARTE = total; total += 1.3
     elif not mini and total < 61.5:                                          # vidéo longue : plus d'une minute (rémunération TikTok)
         FIN_CARTE = total; total = 61.5
@@ -922,8 +928,12 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
         x0, y0, s0 = position(scene, role); xo, yo, so = position(scene, autre); sens = 1 if xo > x0 else -1
         t_ = FICHES[role]["taille"] if FICHES and role in FICHES else 1.0; seff = s0 * t_
         portee = (400 if CROQUIS else 230) * seff; ecart = abs(xo - x0)     # croquis : grosses têtes, elles ne se chevauchent jamais
-        symetrique = nom in ("tope", "donne")
-        if parle or symetrique:                                            # il s'approche (à deux pour « tope » et « donner »)
+        if nom == "calin": portee *= 0.8                                   # câlin : tout près, sans que les têtes se chevauchent
+        symetrique = nom in ("tope", "donne", "calin", "main")
+        if nom == "recule":                                                # « recule ! » : l'autre fait un pas en arrière, main levée devant lui
+            if not parle: p["x"] -= sens * 55 * s0 * u; p["tilt"] -= sens * 5 * u; return
+            p["tilt"] += sens * 4 * u
+        if (parle or symetrique) and nom != "recule":                      # il s'approche (à deux pour « tope », « donner », câlin, main)
             app = max(0.0, ecart - portee) * (0.5 if symetrique else 1.0) * min(1.0, u)
             p["x"] += sens * app
         app_o = max(0.0, ecart - portee) * (0.5 if symetrique else (1.0 if not parle else 0.0)) * min(1.0, u)
@@ -938,6 +948,24 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
             if not parle:
                 p["x"] -= sens * 30 * s0 * u; p["tilt"] -= sens * 6 * u; return   # celui qui se fait pousser recule
             cible = (Ko["x"] - sens * Ko["corps_w"] * 0.7, Ko["cy_corps"] - Ko["corps_h"] * 0.1); forme = "paume"
+        elif nom == "gifle":                                               # gifle (idée 13) : la main part au mot « gifle / claque… »
+            t_hit = next((a_ + 0.15 for w_, a_, b_ in q.get("mots_t") or [] if re.search(r"gifl|claqu|baff|tarte|paf|mettre", str(w_).lower())),
+                         q["deb"] + 0.6 * (q["fin"] - q["deb"]))
+            choc = _ease((tm - t_hit) / 0.08) * (1 - _ease((tm - t_hit - 0.45) / 0.35))
+            if not parle:                                                  # celui qui la reçoit : tête qui part, petit recul, étoiles
+                p["tilt"] -= sens * 16 * choc; p["x"] -= sens * 14 * s0 * choc
+                if choc > 0.3: p["effets"] = tuple(set(p.get("effets") or ()) | {"etoiles"}); p["yeux"] = "plisses"
+                return
+            Kt = Ko["tete"]; arme = 1 - _ease((tm - t_hit + 0.12) / 0.12)    # bras armé en arrière, puis il frappe la joue
+            cible = (Kt[0] - sens * Ko["rx"] * 0.95 - sens * 120 * seff * arme, Kt[1] + Ko["ry"] * 0.2 - 60 * seff * arme); forme = "paume"
+        elif nom == "calin":                                               # câlin : la main va sur l'épaule de l'autre (du côté opposé)
+            cible = Ko["bras"][1 if sens > 0 else 0][0]; forme = "ouverte"
+        elif nom == "main":                                                # poignée de main : les deux mains se rejoignent à hauteur de taille
+            Ka = M.squelette(dict(M.pose_neutre(), x=x0 + sens * (max(0.0, ecart - portee) * 0.5 * min(1.0, u)), y=y0, s=seff, adulte=bool(FICHES), t=0.0))
+            mid_x = (Ka["bras"][1 if sens > 0 else 0][0][0] + Ko["bras"][0 if sens > 0 else 1][0][0]) / 2
+            cible = (mid_x, Ka["cy_corps"] + Ka["corps_h"] * 0.1 + 8 * seff * math.sin(tm * 18) * min(1.0, u)); forme = "ouverte"
+        elif nom == "recule":
+            cible = (K["bras"][i_b][0][0] + sens * L_ * 1.6 * K["s"], K["cy_corps"] - K["corps_h"] * 0.35); forme = "paume"
         else:                                                              # tope / donner : les deux mains se rejoignent entre eux
             Ka = M.squelette(dict(M.pose_neutre(), x=x0 + sens * (max(0.0, ecart - portee) * 0.5 * min(1.0, u)), y=y0, s=seff, adulte=bool(FICHES), t=0.0))
             mid_x = (Ka["bras"][1 if sens > 0 else 0][0][0] + Ko["bras"][0 if sens > 0 else 1][0][0]) / 2
@@ -1147,8 +1175,9 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
             p["sourcils_h"] = p.get("sourcils_h", 0.0) + 0.1 * math.sin(tm * 2.7 + len(role) * 2) + 0.05 * math.sin(tm * 6.1)
             if FICHES and ASSIS.get(scene) == role:                        # assis : il reste sur sa chaise
                 p.update(assis=True, x=x + 4 * s * math.sin(tm * 0.6), y=y, hanche=0.0, marche=None)
-            m_ = ((B.get("meubles") or {}).get(scene) or {}).get(role)      # lit, canapé, volant, comptoir (croquis)
+            m_ = ((B.get("meubles") or {}).get(scene) or {}).get(role)      # lit, canapé, volant, comptoir, table (croquis)
             if m_: p["meuble"] = m_
+            if m_ == "table" and FICHES: p.update(assis=True, x=x + 3 * s * math.sin(tm * 0.6), y=y, hanche=0.0, marche=None)   # à table
         # regard vers celui qui parle (ou vers celui à qui on parle), petites saccades, clignements
         autre = q["p"] if q["p"] != role else next((r2 for r2 in places[scene] if r2 != role), None)
         if autre and autre in places[scene]:
@@ -1323,6 +1352,23 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
             return 1.0, W / 2, H / 2
         if q["cam"] == "serre" and q["p"] in places[q["scene"]]: return 1.5, position(q["scene"], q["p"])[0], 1130.0
         return 1.0, W / 2, H / 2
+
+    def table_devant(img, sc, tm, q, z, cx, cy):
+        """Table vue de face devant les personnages assis « à table » de la scène (rendez-vous, resto, repas), dessinée après eux."""
+        assis_ = [r for r in places.get(sc, []) if ((B.get("meubles") or {}).get(sc) or {}).get(r) == "table" and r in FICHES]
+        if len(assis_) < 2: return
+        import croquis as C_, perso_croquis as PC_
+        xs_, haut_, sol_, R_ = [], [], [], []
+        for r in assis_:
+            p = pose(r, tm, q, sc); p["x"], p["y"], p["s"] = W / 2 + (p["x"] - cx) * z, H / 2 + (p["y"] - cy) * z, p["s"] * z
+            (hx, hy), (hrx, hry), _m = HU.reperes(FICHES[r], p)            # la tête telle qu'elle est dessinée
+            grand = PC_.silhouette(FICHES[r]) == "grand"
+            xs_.append(p["x"]); haut_.append(hy + hry * (2.0 if grand else 1.4)); sol_.append(p["y"]); R_.append(hry * (0.55 if grand else 0.42))
+        R0 = float(np.mean(R_)); yp = float(min(haut_)); sol0 = float(max(sol_))   # plateau juste sous la poitrine
+        C_.table_face(img, min(xs_) - R0 * 1.3, max(xs_) + R0 * 1.3, yp, sol0, R0)
+        for x_ in xs_:                                                     # un verre et une assiette devant chacun
+            C_.assiette_table(img, x_ + (R0 * 0.5 if x_ < np.mean(xs_) else -R0 * 0.5), yp, R0)
+            C_.verre_table(img, x_ + (R0 * 1.1 if x_ < np.mean(xs_) else -R0 * 1.1), yp, R0)
 
     def dessine(img, role, p):
         """Personnage du rôle : humain adulte (fiche du casting) ou marionnette."""
@@ -1772,6 +1818,9 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
             calque = cv2.warpAffine(calque, R_, (W, H), flags=cv2.INTER_LINEAR, borderValue=(1, 2, 3))
             m_ = (np.abs(calque.astype(np.int16) - (1, 2, 3)).sum(2) > 9)[..., None]; img[:] = np.where(m_, calque, img)
         if ssaa: composer_ssaa(img, ssaa, (H / 2 + (DD.SOL - cyb) * zb) if (B and not (INFOS.get(sc, {}).get("lieu") == "voiture")) else None)
+        if B and FICHES and not cible_seule:                               # à table (idée 11 du 21 novembre) : une seule table devant tous
+            try: table_devant(img, sc, tm, q, z, cx, cy)
+            except Exception as _e: __import__("pannes").avale(_e)
         if B and not cible_seule:                                          # compagnons (muets) : même échelle que les personnages
             for f_ in COMP.get(sc, []): figurant(f_, tm, img, z, cx, cy)
         if avant_persos is not None and LUMIERE_DECOR: eclairer(img, avant_persos, sc, fond, z)
@@ -1858,12 +1907,12 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
             if B and 0.12 < age < 0.42:                                    # sous-titre animé : petit rebond à l'apparition
                 k_r = 1 + 0.07 * math.sin(math.pi * (age - 0.12) / 0.3); cc = cv2.resize(cc, (int(cc.shape[1] * k_r), int(cc.shape[0] * k_r)))
             dx_c = 5 * math.sin(tm * 47) if (B and q["emo"] in ("cri", "colere")) else 0          # il tremble quand on crie
-            poser(fr, cc, (W - cc.shape[1]) / 2 + dx_c, CAP_Y - cc.shape[0] / 2)
+            poser(fr, cc, CAP_X - cc.shape[1] / 2 + dx_c, CAP_Y - cc.shape[0] / 2)
             if q.get("en"):                                                # ligne anglaise juste au-dessus du français
                 gi_ = q["groupes"].index(g); en_ = next((q["en"][j] for j in range(min(gi_, len(q["en"]) - 1), -1, -1) if q["en"][j]), None)
                 if en_:
                     ce = __import__("jt").carton_en(en_)
-                    poser(fr, ce, (W - ce.shape[1]) / 2, CAP_Y - cc.shape[0] / 2 - ce.shape[0] - 8)
+                    poser(fr, ce, CAP_X - ce.shape[1] / 2, CAP_Y - cc.shape[0] / 2 - ce.shape[0] - 8)
         return np.clip(fr, 0, 255).astype(np.uint8)
 
     if apercu:

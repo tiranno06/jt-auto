@@ -56,6 +56,22 @@ jobs:
         run: |
           pip install -q curl_cffi || true          # (yt-dlp « --impersonate chrome » : la page TikTok bloque souvent les serveurs)
           python -c "import sys; sys.path.insert(0, 'moteur'); import profils_tiktok as P; P.surveiller()"
+      - name: Alerte « bientôt plus rien à publier » (2 jours de vidéos ou moins, une fois par jour)
+        continue-on-error: true
+        env:
+          PUBLI_AUTO: ${{ vars.PUBLI_AUTO }}
+          PUBLI_HEURE: ${{ vars.PUBLI_HEURE }}
+          PUBLI_FILE: ${{ vars.PUBLI_FILE }}
+          PUBLI_HEURE_AUTO: ${{ vars.PUBLI_HEURE_AUTO }}
+          PUBLI_DEUX: ${{ vars.PUBLI_DEUX }}
+          PUBLI_HEURE2: ${{ vars.PUBLI_HEURE2 }}
+          PUBLI_FRANCO: ${{ vars.PUBLI_FRANCO }}
+          PUBLI_HEURE_FRANCO: ${{ vars.PUBLI_HEURE_FRANCO }}
+          STOCK_ALERTE: ${{ vars.STOCK_ALERTE }}
+          VAPID_PRIVEE: ${{ vars.VAPID_PRIVEE }}
+          VAPID_PUBLIQUE: ${{ vars.VAPID_PUBLIQUE }}
+          PUSH_ABONNEMENTS: ${{ vars.PUSH_ABONNEMENTS }}
+        run: python moteur/stock.py
       - name: Enregistrer
         run: |
           git config user.name "robot-jt"

@@ -91,7 +91,23 @@ def hashtags(sk=None, texte="", n=None):
     for h in out:
         h = _propre(h)
         if h and h not in vus and len(h) > 1 and hashtag_sur(h) and francophone(h): vus.append(h)   # (jamais un hashtag à risque)
-    return vus[:n]
+    return selon_vues(vus)[:n]
+
+
+def selon_vues(tags, recette=None):
+    """Hashtags qui marchent (choix de l'auteur du 21 novembre, idée 8 ; recette.json « hashtags » = ×vues) : ceux qui font plus de vues
+    passent devant (TikTok lit surtout les premiers), ceux qui en font nettement moins (≤ ×0,6) sont retirés ; la chaîne reste en tête.
+    Jamais un hashtag ajouté s'il ne parle pas de la vidéo. HASHTAGS_VUES=0 pour couper."""
+    if os.environ.get("HASHTAGS_VUES", "1") == "0" or not tags: return tags
+    if recette is None:
+        try: recette = json.load(open(os.path.join(RACINE, "episodes", "recette.json"), encoding="utf-8"))
+        except (OSError, ValueError): return tags
+    G = recette.get("hashtags") or {}
+    if not G: return tags
+    tete = [t for t in tags if t in CHAINE]
+    reste = [t for t in tags if t not in CHAINE and G.get(t, 1.0) > 0.6]
+    reste.sort(key=lambda t: -G.get(t, 1.0))                               # (tri stable : à égalité, l'ordre d'avant)
+    return tete + reste
 
 
 ABONNE = "🔔 Abonne-toi : une nouvelle histoire chaque jour !"           # choix de l'auteur (6 novembre, proposition 5 : peu d'abonnés)

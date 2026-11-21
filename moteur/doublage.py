@@ -869,6 +869,76 @@ def preparer(url):
     return sk, audios, mots
 
 
+def renumeroter(sk, carte):
+    """Après le découpage de répliques : carte = {ancien n°: [nouveaux n°]} ; tout ce qui désigne une réplique par son numéro
+    (découpage en scènes, jeu, objets, plans, fiche de tournage…) suit. Une liste de n° reçoit tous les nouveaux n°, un n° seul le 1er."""
+    def un(v):
+        try: return carte.get(int(v), [int(v)])[0]
+        except (TypeError, ValueError): return v
+    def tous(l): return sorted({n for v in l for n in (carte.get(int(v), [int(v)]) if str(v).lstrip("-").isdigit() else [v])})
+    def marche(o):
+        if isinstance(o, dict):
+            for k in list(o):
+                v = o[k]
+                if k == "replique": o[k] = un(v)
+                elif k == "repliques" and isinstance(v, list) and all(isinstance(x, (int, str)) for x in v): o[k] = tous(v)
+                elif k == "repliques" and isinstance(v, dict) and all(str(x).isdigit() for x in v):
+                    o[k] = {str(un(x)): y for x, y in v.items()}
+                else: marche(v)
+        elif isinstance(o, list):
+            for x in o: marche(x)
+    for k, v in sk.items():
+        if k != "repliques": marche(v)
+
+
+def scinder_melangees(sk, sig, sr=SR):
+    """Vidéo refaite (idée 14 du 21 novembre) : les mots gardés dans chaque réplique (r["_mots"]) repassent par le témoin « hauteur de la
+    voix » ; une réplique dont les phrases sont de deux voix (« C'est vrai ? / Pas du tout… ») est coupée en deux répliques, chacune au
+    bon personnage (texte coupé au même mot, numéros renumérotés partout). Jamais une réplique choisie par l'auteur. Renvoie le nombre
+    de répliques coupées."""
+    import locuteurs
+    reps = sk.get("repliques") or []
+    from collections import Counter
+    roles = [r for r, _ in Counter(r.get("p") for r in reps if r.get("p") not in (None, "narrateur") and not r.get("_hors_champ")).most_common(2)]
+    if len(roles) != 2: return 0
+    mots = []
+    for k, r in enumerate(reps):
+        if r.get("p") not in roles or r.get("_auteur") or not r.get("_mots"): continue
+        for j, (w, a, b) in enumerate(r["_mots"]):
+            mots.append({"w": str(w), "s": float(r["_deb"]) + float(a), "e": float(r["_deb"]) + float(b), "voix": r["p"], "_k": k, "_j": j})
+    if len(mots) < 12: return 0
+    P_ = ((sk.get("studio") or {}).get("personnages") or {}) if isinstance(sk.get("studio"), dict) else {}
+    vus = [{"homme": "h", "h": "h", "femme": "f", "f": "f"}.get(str((P_.get(r_) or {}).get("genre_vu") or "").lower()) for r_ in roles]
+    if locuteurs.temoin_hauteur(mots, sig, sr, journal, genres_vus=[v for v in vus if v]) == 0: return 0
+    par_rep = {}
+    for m in mots: par_rep.setdefault(m["_k"], []).append(m)
+    nouv, carte, n = [], {}, 0
+    for k, r in enumerate(reps):
+        ms = par_rep.get(k)
+        if not ms or len({m["voix"] for m in ms}) == 1:
+            if ms and ms[0]["voix"] != r["p"] and not r.get("_auteur"): r = dict(r, p=ms[0]["voix"], _voix_corrigee=True)
+            carte[k] = [len(nouv)]; nouv.append(r); continue
+        morceaux = []                                                      # suites de mots d'une même voix
+        for m in ms:
+            if morceaux and morceaux[-1][0] == m["voix"]: morceaux[-1][1].append(m)
+            else: morceaux.append((m["voix"], [m]))
+        jet = str(r.get("t") or "").split(); nm = len(ms); fait = 0; carte[k] = []
+        for i_, (v, l) in enumerate(morceaux):
+            fin = nm if i_ == len(morceaux) - 1 else fait + len(l)
+            a_t = round(len(jet) * fait / nm) if len(jet) != nm else fait
+            b_t = round(len(jet) * fin / nm) if len(jet) != nm else fin
+            t_ = " ".join(jet[a_t:b_t]).strip() or " ".join(m["w"] for m in l)
+            deb = l[0]["s"]; nr = {x: y for x, y in r.items() if x not in ("d", "_mots", "chute")}
+            nr.update(p=v, t=t_, _deb=round(deb, 3), _fin=round(max(l[-1]["e"], deb + 0.2), 3), _voix_corrigee=True,
+                      _mots=[[m["w"], round(m["s"] - deb, 3), round(m["e"] - deb, 3)] for m in l])
+            if r.get("chute") and i_ == len(morceaux) - 1: nr["chute"] = True
+            carte[k].append(len(nouv)); nouv.append(nr); fait = fin
+        n += 1
+    if n:
+        sk["repliques"] = nouv; renumeroter(sk, carte)
+    return n
+
+
 def depuis_sketch(sk, controle=False):
     """« Corriger qui parle » (idée 6) : refait le son d'une vidéo TikTok déjà fabriquée, avec les MÊMES répliques (instants gardés
     dans le sketch) : le son d'origine est re-téléchargé et recoupé réplique par réplique. Renvoie (audios, mots) comme preparer."""
@@ -881,6 +951,8 @@ def depuis_sketch(sk, controle=False):
         try:                                                               # (21 novembre : « Pire date amoureux » refaite deux fois avec les
             import equipe                                                  # répliques de la 1re fabrication, faite avant ces contrôles)
             B_ = equipe.Bulletin(); B_.lignes = sk.setdefault("equipe", [])
+            n_s = scinder_melangees(sk, mono, SR)                          # bulles qui mélangeaient deux personnes : coupées (idée 14)
+            if n_s: journal(f"  vidéo refaite : {n_s} réplique(s) qui mélangeaient deux voix coupée(s) en deux")
             n_ = equipe.voix_finales(sk, mono, SR, B_)
             if n_: journal(f"  vidéo refaite : {n_} réplique(s) remise(s) sur la bonne voix (hauteur et empreinte vocale)")
         except Exception as e: journal(f"  contrôle des voix de la vidéo refaite impossible ({str(e)[:120]})")

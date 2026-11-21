@@ -47,6 +47,8 @@ jobs:
       QUAND: ${{ inputs.quand }}
       REDIFFUSION_RUN: ${{ inputs.rediffusion }}
       PUBLIER_YOUTUBE: ${{ vars.PUBLIER_YOUTUBE }}
+      PARTIES: ${{ vars.PARTIES }}
+      PARTIES_ECART: ${{ vars.PARTIES_ECART }}
       PUBLIER_INSTAGRAM: ${{ vars.PUBLIER_INSTAGRAM }}
       VAPID_PRIVEE: ${{ vars.VAPID_PRIVEE }}
       VAPID_PUBLIQUE: ${{ vars.VAPID_PUBLIQUE }}

@@ -714,6 +714,36 @@
   personnage ; zone du milieu (un quart de l'écart) laissée aux autres témoins. HAUTEUR=0 pour couper. Banc d'essai : « Pire date »
   16 phrases corrigées sur 18 (2 dites très haut, sans doute justes) ; vidéos du 20 novembre : rien déplacé quand aucune voix n'est
   grave (« Manager toxique », « Self-défense »), « Et toi tu deviens quoi » corrigé comme par l'empreinte.
+- **Liste du 21 novembre 2026 au soir (choix de l'auteur 2, 3, 4, 5, 6, 8, 10, 11, 13, 14, 16, 22, 24)** : **sous-titres dans la zone
+  visible de TikTok** (2) : ils étaient à 1 700 px, là où TikTok affiche pseudo, description et musique ; maintenant `cartoon.CAP_Y`
+  1 380 px (sur les jambes, sous les têtes ; réglage SOUS_TITRES_Y) et `CAP_X` 470 (loin des boutons de droite), largeur
+  `jt.LARG_SOUS_TITRE` 820 px, ligne anglaise au-dessus ; **instants des mots** (3) : déjà gardés dans chaque réplique (r["_mots"]) ;
+  **bulles mélangées coupées dans une vidéo refaite** (14, `doublage.scinder_melangees` dans `depuis_sketch(controle=True)`) : les mots
+  gardés repassent par le témoin hauteur, une réplique de deux voix devient deux répliques (texte coupé au même mot), tout ce qui
+  désigne une réplique par son numéro suit (`doublage.renumeroter` : découpage, jeu, objets, plans, fiche de tournage) ; **banc d'essai
+  permanent des voix** (16, `moteur/banc_voix.py`, tests/banc_voix/*.json + *.opus, test `TestBancVoix`) : « Pire date » avec la vérité
+  phrase par phrase : 57 % du temps de parole au bon personnage avant, 90 % après (95 % avec l'empreinte vocale : `--ecapa`) ; ajouter
+  une vidéo = un .opus + un .json ; **sons longs en deux parties** (5, `moteur/parties.py`, PARTIES=0, PARTIES_MIN 70 s, PARTIES_ECART
+  4 h) : base_p1.mp4 (finit par « La suite dans la PARTIE 2 ») et base_p2.mp4 (« PARTIE 2 » en grand au début), coupés au blanc le
+  plus proche du milieu, rangés dans les archives (historique "parties", "coupure") ; publication (`publier.preparer` /
+  `publier_parties`, Buffer seulement) : partie 1 à l'heure prévue, partie 2 quatre heures après, descriptions « 👉 La partie 2 arrive… »
+  / « Partie 2/2 » ; badge « 🎬 En 2 parties » et interrupteur dans « Publication automatique » ; **essai du carton de fin** (6,
+  `principal.fin_carte_essai`, sk["_sans_fin"], réglage FIN_CARTE essai / 1 / 0) : une vidéo sur deux sans « Abonne-toi » (la vidéo
+  repart au début), historique "fin_carte", comparé dans « Ce qui marche » (`recette.ESSAIS`) ; **hashtags qui marchent** (8,
+  `recette.hashtags_gagnants` -> recette.json "hashtags", `legende.selon_vues` : les meilleurs en tête, ≤ ×0,6 retirés, jamais un
+  hashtag ajouté ; HASHTAGS_VUES=0) ; **alerte « bientôt plus rien à publier »** (10, `moteur/stock.py` après les statistiques : ≤ 2 jours
+  de vidéos, une fois par jour, episodes/stock_alerte.json ; STOCK_ALERTE=0) ; **assis à table** (11, `studio.TABLE_MOTS`, meuble
+  "table" pour restaurant, salle à manger, cantine, fast-food, kebab, ou cuisine / bar si on parle de manger / rendez-vous ;
+  `cartoon.table_devant` + `croquis.table_face` / `verre_table` / `assiette_table` : une seule table devant tous, juste sous la poitrine
+  (d'après la tête dessinée), nappe jusqu'au sol, une assiette et un verre chacun ; TABLE=0) ; couleurs des meubles corrigées (images
+  en RVB : le comptoir et le lit « bois » sortaient BLEUS) ; **gestes entre personnages** (13, `studio.GESTES_DUO` + `cartoon.duo`) :
+  gifle (la main part au mot, tête qui part, étoiles), câlin (les deux se rapprochent sans que les têtes se chevauchent), poignée de
+  main, « recule ! » (l'autre fait un pas en arrière), en plus de tope / épaule / donner / pousser ; **créateurs de toute la
+  francophonie** (22, `decouverte.PAYS` / `pays` / `selection` : drapeaux, villes, pays dans leurs titres ; 2 des 6 places ; badge
+  « 🌍 Pays » ; FRANCOPHONIE_DECOUVERTE=0) ; **sons déjà repris ailleurs** (24, `profils_tiktok.deja_repris` / `repris_ailleurs`, réglage
+  CHAINES_CONCURRENTES sur le site : lien cité, ou créateur cité + titre qui ressemble à 50 % = son écarté). **Pas fait : lire les
+  commentaires** (4) : yt-dlp ne lit pas les commentaires TikTok et l'adresse interne de TikTok n'est pas faite pour les robots (accès
+  refusé) ; possible plus tard avec l'API officielle de TikTok (demande d'accès à faire par l'auteur).
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.

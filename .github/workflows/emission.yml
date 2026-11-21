@@ -172,6 +172,10 @@ jobs:
       KARAOKE: ${{ vars.KARAOKE }}
       SILENCES_COURTS: ${{ vars.SILENCES_COURTS }}
       SOUS_TITRES_EN: ${{ vars.SOUS_TITRES_EN }}
+      SOUS_TITRES_Y: ${{ vars.SOUS_TITRES_Y }}
+      PARTIES: ${{ vars.PARTIES }}
+      PARTIES_MIN: ${{ vars.PARTIES_MIN }}
+      FIN_CARTE: ${{ vars.FIN_CARTE }}
       TON: ${{ vars.TON }}
       INFOS_DEMAIN: ${{ vars.INFOS_DEMAIN }}
       PERSONNALITES: ${{ vars.PERSONNALITES }}
@@ -186,6 +190,7 @@ jobs:
       TIKTOK_COMPTE: ${{ vars.TIKTOK_COMPTE }}
       PROFILS_TIKTOK: ${{ vars.PROFILS_TIKTOK }}
       PROFILS_INTERDITS: ${{ vars.PROFILS_INTERDITS }}  # liste noire : profils jamais repris (moteur/profils_tiktok.py)
+      CHAINES_CONCURRENTES: ${{ vars.CHAINES_CONCURRENTES }}
       PRE_ECOUTE: ${{ vars.PRE_ECOUTE }}                # pré-écoute de la nuit (moteur/pre_ecoute.py) : 0 = coupée
       BUDGET_MODAL: ${{ vars.BUDGET_MODAL }}            # plafond des dépenses Modal du mois (30 $) : moteur/budget_modal.py
       PUBLI_FILE: ${{ vars.PUBLI_FILE }}
@@ -339,6 +344,7 @@ jobs:
           gh release view "$TAG" >/dev/null 2>&1 || gh release create "$TAG" --title "Émissions ${{ steps.run.outputs.mois }}" --notes "Vidéos fabriquées par le robot."
           V="${{ steps.run.outputs.video }}"; B="${V%.mp4}"; F=("$V" "${{ steps.run.outputs.legende }}")
           [ -f "${B}_web.mp4" ] && F+=("${B}_web.mp4"); [ -f "$B.jpg" ] && F+=("$B.jpg")   # version légère + couverture : lues par l'appli
+          for P in "${B}_p1.mp4" "${B}_p2.mp4"; do [ -f "$P" ] && F+=("$P"); done   # son long : les deux parties (moteur/parties.py)
           gh release upload "$TAG" "${F[@]}" --clobber
 
       - name: Prévenir le téléphone (vidéo prête)

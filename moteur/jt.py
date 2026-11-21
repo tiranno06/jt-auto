@@ -69,6 +69,7 @@ def _regrouper(jetons):
     return res
 
 F_CAP = ImageFont.truetype(FB, 100); _cache = {}
+LARG_SOUS_TITRE = 820                                                      # px : zone visible entre le bord gauche et les boutons TikTok
 def carton(txt, actif=None):
     """Sous-titre : mot le plus long en jaune ; en karaoké (actif = n° du mot dit à cet instant), c'est CE mot qui est en jaune."""
     if (txt, actif) in _cache: return _cache[(txt, actif)]
@@ -80,8 +81,8 @@ def carton(txt, actif=None):
     for i, m in enumerate(mots):
         d.text((x, 20), m, font=F_CAP, fill=(255, 214, 40) if i == cle else (255, 255, 255), stroke_width=10, stroke_fill=(0, 0, 0))
         x += d.textlength(m + " ", font=F_CAP)
-    tmp = tmp.crop(tmp.getbbox()); w = min(1000, int(tmp.width * 0.82))
-    tmp = tmp.resize((w, int(tmp.height * min(1, 1000 / (tmp.width * 0.82)))), Image.LANCZOS)
+    tmp = tmp.crop(tmp.getbbox()); w = min(LARG_SOUS_TITRE, int(tmp.width * 0.82))   # (jamais sous les boutons de TikTok à droite)
+    tmp = tmp.resize((w, int(tmp.height * min(1, LARG_SOUS_TITRE / (tmp.width * 0.82)))), Image.LANCZOS)
     _cache[(txt, actif)] = np.array(tmp).astype(np.float32); return _cache[(txt, actif)]
 
 F_EN = ImageFont.truetype(FM, 50); _cache_en = {}
@@ -90,7 +91,7 @@ def carton_en(txt):
     if txt in _cache_en: return _cache_en[txt]
     d0 = ImageDraw.Draw(Image.new("RGB", (1, 1))); lignes, cur = [], ""
     for m in str(txt).split():
-        if cur and d0.textlength(cur + " " + m, font=F_EN) > 940: lignes.append(cur); cur = m
+        if cur and d0.textlength(cur + " " + m, font=F_EN) > LARG_SOUS_TITRE - 40: lignes.append(cur); cur = m
         else: cur = (cur + " " + m).strip()
     lignes.append(cur)
     if len(lignes) > 2: lignes = [lignes[0], " ".join(lignes[1:])]
@@ -98,7 +99,7 @@ def carton_en(txt):
     for k, l in enumerate(lignes):
         w = d.textlength(l, font=F_EN); d.text(((W - w) / 2, 6 + k * hl), l, font=F_EN, fill=(235, 240, 255), stroke_width=6, stroke_fill=(0, 0, 0))
     tmp = tmp.crop(tmp.getbbox() or (0, 0, 1, 1))
-    if tmp.width > 1000: tmp = tmp.resize((1000, int(tmp.height * 1000 / tmp.width)), Image.LANCZOS)
+    if tmp.width > LARG_SOUS_TITRE: tmp = tmp.resize((LARG_SOUS_TITRE, int(tmp.height * LARG_SOUS_TITRE / tmp.width)), Image.LANCZOS)
     _cache_en[txt] = np.array(tmp).astype(np.float32); return _cache_en[txt]
 
 def pop(a, k):

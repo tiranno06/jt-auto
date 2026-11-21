@@ -12,8 +12,8 @@ RACINE = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__))
 FICHIER = os.path.join(RACINE, "episodes", "recette.json")
 NOMS = {"profil": "Profil du son", "lieu": "Lieu", "duree": "Durée", "animal": "Animal ou objet qui parle", "persos": "Personnages",
         "heure": "Heure de publication", "couverture": "Couverture", "accroche": "Titre", "partie": "Vidéo en plusieurs parties",
-        "creneau": "Créneau", "anglais": "Sous-titres"}
-ESSAIS = ("creneau", "anglais")                                            # essais du 21 novembre (vues dans le monde) : toujours montrés
+        "creneau": "Créneau", "anglais": "Sous-titres", "fin": "Carton de fin"}
+ESSAIS = ("creneau", "anglais", "fin")                                            # essais du 21 novembre (vues dans le monde) : toujours montrés
 DEBUT_ESSAIS = "2026-11-21"
 PREMIER_ESSAI = 1000                                                       # vues : au-delà, TikTok a élargi la diffusion
 
@@ -40,6 +40,8 @@ def criteres(h):
             out.append(("creneau", "🌍 francophonie (21 h et plus)" if hh >= 21 else "habituel"))
     if h.get("filiere") == "tiktok" and str(h.get("date") or "")[:10] >= DEBUT_ESSAIS:   # idée 3 : sous-titres anglais ou non
         out.append(("anglais", "français + anglais" if h.get("anglais") else "français seul"))
+    if h.get("filiere") == "tiktok" and "fin_carte" in h:                   # idée 6 : avec ou sans carton « Abonne-toi »
+        out.append(("fin", "avec « Abonne-toi »" if h["fin_carte"] else "sans carton (boucle directe)"))
     if h.get("type_couverture"): out.append(("couverture", {"chute": "la chute", "reaction": "la réaction", "debut": "le début"}.get(h["type_couverture"], h["type_couverture"])))
     if h.get("style_accroche"): out.append(("accroche", {"pov": "« POV : … »", "question": "question au spectateur"}.get(h["style_accroche"], h["style_accroche"])))
     if "partie" in R: out.append(("partie", "oui" if R["partie"] else "non"))
@@ -130,9 +132,22 @@ def bonus_sujet(v, recette=None):
     return int(max(-15, min(15, round(sum((M[w] - 1) * 12 for w in vus))))), vus
 
 
+def hashtags_gagnants(historique, mini=3):
+    """Idée 8 du 21 novembre : les HASHTAGS de nos descriptions comparés aux vues (3 vidéos au moins ; ceux présents sur presque toutes
+    les vidéos, comme #petitsdramas, ne disent rien) : {hashtag: ×vues par rapport à la moyenne}."""
+    vids = [h for h in historique if h.get("vues") is not None and h.get("legende") and not h.get("essai")]
+    if len(vids) < 8: return {}
+    moy = sum(int(h["vues"]) for h in vids) / len(vids) or 1
+    acc = {}
+    for h in vids:
+        for t in set(x.lower() for x in re.findall(r"#(\w+)", str(h["legende"]))): acc.setdefault(t, []).append(int(h["vues"]))
+    return {t: round(sum(l) / len(l) / moy, 2) for t, l in acc.items() if mini <= len(l) <= 0.8 * len(vids)}
+
+
 def enregistrer(historique):
     r = analyser(historique); r["maj"] = datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="minutes")
     r["mots"] = mots_gagnants(historique)
+    r["hashtags"] = hashtags_gagnants(historique)
     os.makedirs(os.path.dirname(FICHIER), exist_ok=True)
     json.dump(r, open(FICHIER, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     return r
