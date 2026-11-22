@@ -474,6 +474,10 @@ def hauteur_finale(sk, reps, roles, sig, sr, B=None, bavard=True):
     if os.environ.get("HAUTEUR", "1") == "0": return set(), 0
     try: vus = __import__("video_ia").genres_vus()
     except Exception: vus = []
+    if not vus:                                                            # vidéo refaite / contrôleur du soir : Gemini ne regarde pas
+        P_ = ((sk.get("studio") or {}).get("personnages") or {}) if isinstance(sk.get("studio"), dict) else {}   # l'original une 2e fois :
+        vus = [g for g in ({"homme": "h", "h": "h", "m": "h", "femme": "f", "f": "f", "w": "f"}.get(str((P_.get(r_) or {}).get("genre_vu") or "").lower())
+                           for r_ in roles) if g]                          # ce qu'il avait vu est gardé dans le sketch (22 novembre)
     if len(vus) >= 2 and len(set(vus)) == 1: return set(), 0
     try: n_vus = __import__("video_ia").visibles()
     except Exception: n_vus = None
@@ -496,7 +500,7 @@ def hauteur_finale(sk, reps, roles, sig, sr, B=None, bavard=True):
     ecart = c[1] - c[0]; part = w[g].sum() / w.sum()
     sd = np.sqrt(np.average((z[~g] - c[0]) ** 2, weights=w[~g])) + np.sqrt(np.average((z[g] - c[1]) ** 2, weights=w[g]))
     if not locuteurs.hauteurs_nettes(np.exp(c[0]), np.exp(c[1])) or not 0.15 <= part <= 0.85 or ecart < 1.2 * sd: return set(), 0
-    milieu, marge = (c[0] + c[1]) / 2, 0.25 * ecart
+    milieu, marge = (c[0] + c[1]) / 2, __import__("locuteurs").MARGE_HAUTEUR * ecart
     nets = {i: (zi > milieu) for i, (zi, _) in Z.items() if abs(zi - milieu) >= marge}   # True = côté aigu
     def cout(bas_, haut_): return sum(1 for i, aigu in nets.items() if reps[i]["p"] != (haut_ if aigu else bas_))
     bas, haut = (roles[0], roles[1]) if cout(roles[0], roles[1]) <= cout(roles[1], roles[0]) else (roles[1], roles[0])

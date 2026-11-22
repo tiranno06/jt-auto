@@ -609,6 +609,9 @@ def hauteurs_nettes(grave, aigue):
     return grave <= 175 and aigue >= 200 and aigue >= HAUTEUR_ECART * grave
 
 
+MARGE_HAUTEUR = 0.15                                                       # (0,25 avant le 22 novembre : banc « Pire date » 90 % -> 96 %)
+
+
 def temoin_hauteur(mots, sig, sr=SR, journal=print, genres_vus=None):
     """Témoin « hauteur de la voix », phrase par phrase (audit du 21 novembre 2026, « Pire date amoureux » : un homme à 120-150 Hz et
     une femme à 240-300 Hz, mais l'empreinte vocale confondait les deux voix (ressemblance 0,80) : 10 phrases sur le mauvais
@@ -628,11 +631,12 @@ def temoin_hauteur(mots, sig, sr=SR, journal=print, genres_vus=None):
     if r_ is not None and r_ < 0.5: return 0                               # empreintes bien distinctes : on les croit
     t, f0 = f0_trames(sig, sr)
     if not len(t): return 0
-    ph = phrases(mots); val = []
-    for p in ph:
+
+    def mesure(p):
         k = (t >= mots[p[0]]["s"]) & (t <= mots[p[-1]]["e"]) & (f0 > 0)
         duree = mots[p[-1]]["e"] - mots[p[0]]["s"]                         # assez de voix nette (≥ 0,15 s et ≥ 30 % de la phrase)
-        val.append((float(np.median(np.log(f0[k]))), int(k.sum())) if k.sum() >= max(15, 0.3 * duree / 0.01) else None)
+        return (float(np.median(np.log(f0[k]))), int(k.sum())) if k.sum() >= max(15, 0.3 * duree / 0.01) else None
+    ph = phrases(mots); val = [mesure(p) for p in ph]
     pts = [(z, w) for z, w in (v for v in val if v)]
     if len(pts) < 6: return 0
     z = np.array([a for a, _ in pts]); w = np.array([b for _, b in pts], float)
@@ -655,12 +659,38 @@ def temoin_hauteur(mots, sig, sr=SR, journal=print, genres_vus=None):
     if len(vus) == 1 and len(list(genres_vus)) >= 2: return 0                # deux hommes (ou deux femmes) vus : l'écart = des cris
     if len(list(genres_vus or ())) >= 3: return 0                          # 3 personnes ou plus à l'image : deux groupes ne suffisent pas
     milieu, marge = (c[0] + c[1]) / 2, 0.25 * ecart
+    # Zone du milieu plus étroite (« Pire date », 22 novembre : « Bon, je vais commencer », une femme qui parle bas à 224 Hz, y restait),
+    # mais gardée : entre ~178 et ~190 Hz l'homme qui monte et la femme qui parle bas se chevauchent vraiment.
+    marge = MARGE_HAUTEUR * ecart
+
+    def cote(zi):
+        if abs(zi - milieu) < marge: return None                           # vraiment entre les deux : on laisse les autres témoins
+        return "a" if zi > milieu else "g"
+
+    # Phrase où la voix change en cours de route (« C'est vrai Pas du tout… » : le « ? » oublié par la transcription) : coupée au mot
+    # où les deux morceaux sont chacun nettement d'un côté différent (0,2 s de voix au moins de chaque côté).
+    ph2, val2 = [], []
+    for p, v in zip(ph, val):
+        coupe = None
+        if len(p) >= 3:
+            for k_ in range(1, len(p)):
+                a_p, b_p = p[:k_], p[k_:]
+                va, vb = mesure(a_p), mesure(b_p)
+                if not va or not vb or va[1] < 20 or vb[1] < 20: continue
+                ca, cb = cote(va[0]), cote(vb[0])
+                if ca and cb and ca != cb:
+                    sc = abs(va[0] - vb[0])
+                    if coupe is None or sc > coupe[0]: coupe = (sc, a_p, b_p, va, vb)
+        if coupe: ph2 += [coupe[1], coupe[2]]; val2 += [coupe[3], coupe[4]]
+        else: ph2.append(p); val2.append(v)
+    ph, val = ph2, val2
     chang = []
     for i, p in enumerate(ph):
         if not val[i]: continue
         zi = val[i][0]
-        if abs(zi - milieu) < marge: continue                              # zone du milieu : on laisse les autres témoins
-        cible = aigue if zi > milieu else grave
+        cote_ = cote(zi)
+        if cote_ is None: continue                                         # zone du milieu : on laisse les autres témoins
+        cible = aigue if cote_ == "a" else grave
         voix_p = [mots[j].get("voix") for j in p]
         if any(v not in principales for v in voix_p): continue             # 3e voix (vocal, serveur…) : pas touchée
         if all(v == cible for v in voix_p): continue

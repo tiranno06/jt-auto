@@ -800,6 +800,7 @@ def main():
         except Exception as _e: __import__("pannes").avale(_e)
     if sk.get("titre_accroche"): historique[-1]["titre_affiche"] = sk["titre_accroche"]
     if DOUB and sk.get("_anglais"): historique[-1]["anglais"] = True       # sous-titres anglais (essai de 10 vidéos, recette.py compare)
+    if REFAIRE and REFAIRE.endswith("|compte_rendu|soir"): historique[-1]["refait_par_soir"] = True   # contrôleur du soir : jamais en boucle
     if DOUB: historique[-1]["fin_carte"] = not sk.get("_sans_fin")          # essai du carton de fin (recette.py compare)
     if REFAIRE and ANCIEN and not test and historique[-1].get("fichier") != ANCIEN.get("fichier"):
         try:                                                               # vidéo refaite : elle REMPLACE l'ancienne dans la liste (pas de doublon)

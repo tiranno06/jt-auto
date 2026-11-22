@@ -714,6 +714,20 @@
   personnage ; zone du milieu (un quart de l'écart) laissée aux autres témoins. HAUTEUR=0 pour couper. Banc d'essai : « Pire date »
   16 phrases corrigées sur 18 (2 dites très haut, sans doute justes) ; vidéos du 20 novembre : rien déplacé quand aucune voix n'est
   grave (« Manager toxique », « Self-défense »), « Et toi tu deviens quoi » corrigé comme par l'empreinte.
+- **« Pire date amoureux » encore fausse (remarque de l'auteur du 22 novembre : le son se trompe souvent de personnage)** : la dernière
+  version (21 novembre, 12h47) avait été fabriquée AVANT les contrôles de hauteur de voix (fusionnés à 16h51) et n'avait jamais été
+  revérifiée : 57 % de la parole au bon personnage. Trois causes, réglées : 1. **zone du milieu trop large** (`locuteurs.MARGE_HAUTEUR`
+  0,25 -> 0,15 de l'écart, aussi dans `equipe.hauteur_finale`) : « Bon, je vais commencer », une femme qui parle bas (224 Hz), restait
+  à l'homme ; 2. **phrase où la voix change en cours de route** (« C'est vrai Pas du tout… » : « ? » oublié par la transcription) :
+  `temoin_hauteur` coupe la phrase au mot où les deux morceaux sont chacun nettement d'un côté (0,2 s de voix au moins chacun) ;
+  3. **ce que Gemini avait vu (un homme ET une femme) était oublié dans une vidéo refaite et au contrôle du soir** (lu dans la mémoire
+  de la fabrication en cours, vide quand Gemini ne regarde pas l'original une 2e fois) : la prudence « sans homme ET femme vus »
+  annulait alors TOUTES les corrections dès qu'il y en avait beaucoup ; `equipe.hauteur_finale` relit maintenant les "genre_vu" gardés
+  dans le sketch. Banc d'essai « Pire date » : 90 % -> 96 % (test : 95 % au moins). **Contrôleur du soir** : revérifie toutes les vidéos
+  pas encore publiées (les plus récentes d'abord, CONTROLE_SOIR_VIDEOS 12 par soir), une fois par VERSION des contrôles des voix
+  (`controleur_soir.VERSION`, + 1 à chaque amélioration : tout ce qui n'est pas publié est revu) ; vidéo à problème non refaite
+  (limite de 3) = reprise le lendemain ; une vidéo déjà refaite par lui (« |compte_rendu|soir » -> historique "refait_par_soir")
+  n'est jamais refaite en boucle.
 - **Liste du 21 novembre 2026 au soir (choix de l'auteur 2, 3, 4, 5, 6, 8, 10, 11, 13, 14, 16, 22, 24)** : **sous-titres dans la zone
   visible de TikTok** (2) : ils étaient à 1 700 px, là où TikTok affiche pseudo, description et musique ; maintenant `cartoon.CAP_Y`
   1 380 px (sur les jambes, sous les têtes ; réglage SOUS_TITRES_Y) et `CAP_X` 470 (loin des boutons de droite), largeur

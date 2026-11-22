@@ -1259,7 +1259,7 @@ class TestBancVoix(unittest.TestCase):
         import banc_voix
         for r in banc_voix.tout():
             with self.subTest(video=r["video"]):
-                self.assertGreaterEqual(r["apres"], 0.88, r)                # « Pire date » : 57 % -> 90 % (95 % avec l'empreinte vocale)
+                self.assertGreaterEqual(r["apres"], 0.95, r)                # « Pire date » : 57 % -> 96 % (22 novembre : phrases coupées où la voix change)
                 self.assertGreaterEqual(r["apres"], r["avant"], r)          # jamais moins bien qu'avant
 
 
