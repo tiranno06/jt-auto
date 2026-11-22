@@ -752,6 +752,12 @@
   en scène un dialogue ? sans Gemini : « non vérifiée », jamais en tête) ; puis comparaison avec notre chaîne et les concurrentes
   actuelles (`ressemblance` : créateurs repris en commun 60 % + hashtags en commun 40 %) ; episodes/concurrentes_proposees.json
   (8 au plus), site : chaque vérification détaillée, « ➕ » (ajoute à CHAINES_CONCURRENTES) / « 🚫 » (liste noire) ; CONCURRENCE=0.
+  **Pourquoi elle ne trouvait rien (22 novembre)** : les titres lus étaient COUPÉS par TikTok (« @AGUE… » au lieu de @aguerin30 ;
+  `profils_tiktok.videos` lit maintenant la description entière), les noms affichés (« @Chou✨ », « @adam ») étaient pris pour des
+  pseudos (`concurrence._mentions` les écarte ; un compte inexistant répond 403) et chaque refus est maintenant écrit au journal. Surtout :
+  les « @… » des titres de nos créateurs désignent les VRAIS créateurs des voix (personnes filmées : aguerin30, zequoiza, jawedyoussef…),
+  pas des chaînes qui font comme nous ; nos créateurs suivis (vignianimation, yan_animation0, kodanimation, motiontoonz, vincedessine…)
+  sont eux-mêmes des chaînes de dessin animé qui reprennent ces voix.
 - **Robots à part (choix de l'auteur du 22 novembre 2026 : 1, 2, 3)** pour soulager le robot qui fabrique : **📦 réserve de sons**
   (`pre_ecoute.py`, pre_ecoute.yml lancé par le garde toutes les 2 heures, heures paires à Paris, si aucun n'est en cours ; un 1er job
   léger `--manque` regarde la réserve : pleine = aucune machine lourde) : RESERVE_SONS sons écoutés à l'avance (6 par défaut, 1 à 10 ;

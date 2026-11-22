@@ -19,7 +19,14 @@ VUES_MIN = 1000
 CREDIT = re.compile(r"son original|🎧|\bvoix\b|doubl|\bdub\b|\bcr[ée]dit|\bvia @|\bsound\b|\baudio\b|original sound", re.I)
 
 
-def _mentions(t): return {m.lower().rstrip(".") for m in re.findall(r"(?<![\w.])@([\w.\-]{3,30})", str(t or ""))}
+def _mentions(t):
+    """Pseudos cités « @… » : jamais un nom coupé par TikTok (« @AGUE… ») ni un nom affiché suivi d'un emoji (« @Chou✨ »)."""
+    out = set()
+    for m in re.finditer(r"(?<![\w.])@([\w.\-]{3,30})(\S?)", str(t or "")):
+        nom, apres = m.group(1), m.group(2)
+        if nom.endswith("..") or apres in ("…",) or (apres and not apres.isspace() and not re.match(r"[\s,;:!?)\]]", apres)): continue
+        out.add(nom.lower().rstrip("."))
+    return out
 
 
 def texte(videos, nos_createurs):
@@ -87,7 +94,7 @@ def chercher(journal=print, max_candidats=25, lister=None, regarder=None):
     exclus.add((os.environ.get("TIKTOK_COMPTE") or "").strip().lstrip("@").lower())
     titres, tags_conc = [], set()
     for p in list(P.liste())[:8] + actuelles:                               # mentions chez nos créateurs ET chez les concurrentes connues
-        vs_ = lister(p); titres += [v.get("titre") for v in vs_]
+        vs_ = lister(p) or []; titres += [v.get("titre") for v in vs_]
         if p in actuelles: tags_conc |= _tags(v.get("titre") for v in vs_)
     try:
         hist = json.load(open(os.path.join(ICI, "..", "episodes", "historique.json"), encoding="utf-8"))
@@ -103,10 +110,11 @@ def chercher(journal=print, max_candidats=25, lister=None, regarder=None):
     out = []
     for m in cand:
         vs = lister(m)
+        if not vs: journal(f"  ✗ @{m} : compte introuvable ou privé (souvent un prénom ou un nom affiché écrit avec @ dans un titre, pas un vrai pseudo)"); continue
         ok1, d1, communs = texte(vs, nos_createurs)
-        if not ok1: continue
+        if not ok1: journal(f"  ✗ @{m} : ne reprend pas de sons ({d1})"); continue
         ok2, d2, med = format_(vs)
-        if not ok2: continue
+        if not ok2: journal(f"  ✗ @{m} : format différent ({d2})"); continue
         meilleure = max(vs, key=lambda v: int(v.get("vues") or 0))
         ok3, d3 = image(meilleure.get("url"), regarder)
         if ok3 is False: journal(f"  ✗ @{m} : pas le même genre à l'image ({d3})"); continue

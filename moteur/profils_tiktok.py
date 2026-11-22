@@ -114,7 +114,7 @@ def _ytdlp(pseudo, n=40):
             if not vid and lien: vid = (re.search(r"/video/(\d+)", lien) or [None, ""])[1]
             if vid: out.append(dict(id=vid, url=f"https://www.tiktok.com/@{pseudo}/video/{vid}", duree=e.get("duration"),
                                     vues=e.get("view_count"), date=e.get("timestamp") or e.get("release_timestamp"),
-                                    titre=str(e.get("title") or e.get("description") or "")[:300]))
+                                    titre=str(e.get("description") or e.get("title") or "")[:300]))   # description = texte entier (le titre est coupé : « @AGUE… »)
         if out: return out
     return []
 
