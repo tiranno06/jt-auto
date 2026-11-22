@@ -1235,7 +1235,7 @@ class TestVoixHauteur21Novembre(unittest.TestCase):
         ici = os.path.join(os.path.dirname(__file__), "..", "moteur")
         d = open(os.path.join(ici, "doublage.py"), encoding="utf-8").read(); p = open(os.path.join(ici, "principal.py"), encoding="utf-8").read()
         self.assertIn("locuteurs.temoin_hauteur(mots, sig, SR, journal, genres_vus=", d)
-        self.assertIn("def depuis_sketch(sk, controle=False):", d); self.assertIn('depuis_sketch(sk, controle=REFAIRE_MODE != "qui")', p)
+        self.assertIn("def depuis_sketch(sk, controle=False):", d); self.assertIn('depuis_sketch(sk, controle=REFAIRE_MODE not in ("qui", "decors", "voix"))', p)
         self.assertIn("verif_finale.appliquer_voix(sk4, points)", p)
         self.assertIn("d9 = voix_dessin(video, sk)", open(os.path.join(ici, "verif_finale.py"), encoding="utf-8").read())
 

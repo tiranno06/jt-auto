@@ -64,7 +64,7 @@ def casting_voix(mots, video, B, relire, scinder, nb_ecran=None):
     import locuteurs, regard
     ph = locuteurs.phrases(mots)
     voix = Counter(m["voix"] for m in mots); r_ = locuteurs.ETAT.get("ressemblance")
-    vue = None; sources = []; n_vus = 0
+    vue = None; sources = []; n_vus = 0; locuteurs.ETAT["vue_phrases"] = None
     if len(ph) >= 3:
         try:                                                               # 1) Gemini regarde la vidéo entière (image + son)
             import video_ia
@@ -96,6 +96,10 @@ def casting_voix(mots, video, B, relire, scinder, nb_ecran=None):
         return mots
     if vue and len({c for c, _ in vue if c is not None}) > 2:              # (le reste du contrôle compare deux personnes)
         vue = [(c, w) if c in (0, 1) else (None, 0.0) for c, w in vue]
+    # qui parle d'après l'IMAGE de l'original, phrase par phrase : gardé pour le contrôle final « attribution »
+    # (verif_finale.attribution_image, audit du 22 novembre : « Pire date » notée 22/22 avec 43 % de la parole au mauvais personnage)
+    locuteurs.ETAT["vue_phrases"] = [[round(float(mots[p[0]]["s"]), 2), round(float(mots[p[-1]]["e"]), 2), int(c), round(float(w), 2)]
+                                     for p, (c, w) in zip(ph, vue or []) if c in (0, 1) and w >= 0.3] or None
     if r_ is not None: journal(f"  ressemblance des deux voix : {r_:.2f} (au-delà de {locuteurs.DOUTE} : le dialogue décide avec le son)")
     raison = None
     if seule: raison = "une seule voix entendue"
@@ -508,11 +512,11 @@ def hauteur_finale(sk, reps, roles, sig, sr, B=None, bavard=True):
     confirmees, chang = set(), []
     for i, aigu in nets.items():
         bon = haut if aigu else bas
-        if reps[i]["p"] == bon: confirmees.add(i)
+        if reps[i]["p"] == bon: confirmees.add(i); reps[i]["_hauteur_ok"] = True   # (le contrôle « attribution » ne la conteste plus)
         else: chang.append(i)
     if set(vus) != {"h", "f"} and len(chang) > max(2, len(Z) // 3): chang = []   # sans homme ET femme vus : prudence
     for i in chang:
-        reps[i]["p"] = haut if reps[i]["p"] == bas else bas; reps[i]["_voix_corrigee"] = True; confirmees.add(i)
+        reps[i]["p"] = haut if reps[i]["p"] == bas else bas; reps[i]["_voix_corrigee"] = True; reps[i]["_hauteur_ok"] = True; confirmees.add(i)
         if bavard: journal(f"    voix corrigée par la hauteur : réplique {i} ({str(reps[i].get('t') or '')[:40]}) -> {reps[i]['p']}")
     if B is not None:
         B.note("casting voix", "contrôle par la hauteur de la voix (réplique par réplique)", True,

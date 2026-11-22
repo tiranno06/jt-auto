@@ -78,17 +78,27 @@ def noter_mort(endpoint):
     json.dump(sorted(m)[-50:], open(MORTS, "w", encoding="utf-8"), indent=1)
 
 
+def revivre(endpoint):
+    """Appareil qui reçoit à nouveau : retiré de la liste des disparus."""
+    m = morts(); e = empreinte(endpoint)
+    if e in m:
+        m.discard(e); json.dump(sorted(m), open(MORTS, "w", encoding="utf-8"), indent=1)
+
+
 def alerter(titre, texte, lien=""):
     """Envoie la notification à tous les appareils abonnés ; ne fait jamais échouer le robot."""
     noter(titre, texte, lien)
     prive, publique = os.environ.get("VAPID_PRIVEE", ""), os.environ.get("VAPID_PUBLIQUE", "")
     try: abos = json.loads(os.environ.get("PUSH_ABONNEMENTS") or "[]")
     except ValueError: abos = []
-    deja_morts = morts(); abos = [a for a in abos if empreinte(a.get("endpoint")) not in deja_morts]   # appareils disparus : sautés
+    # (audit du 22 novembre : un appareil noté « disparu » le 3 novembre était sauté POUR TOUJOURS, même réabonné avec la même adresse :
+    #  plus aucune notification depuis. Chaque appareil inscrit est maintenant toujours essayé ; un envoi réussi le retire des disparus.)
     if not (prive and publique and abos): print("Notification non envoyée : aucun appareil actif (réactivez les notifications dans l'appli)."); return 0
     n = 0
     for a in abos:
-        try: envoyer(a, {"titre": titre, "texte": texte, "lien": lien}, prive, publique); n += 1
+        try:
+            envoyer(a, {"titre": titre, "texte": texte, "lien": lien}, prive, publique); n += 1
+            revivre(a.get("endpoint"))
         except Exception as e:
             code = getattr(e, "code", None)
             if code in (404, 410): noter_mort(a.get("endpoint")); print("Notification : un appareil n'existe plus (il sera retiré de la liste)")

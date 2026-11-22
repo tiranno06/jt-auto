@@ -836,6 +836,8 @@ def preparer(url):
         n_v = __import__("video_ia").visibles() or __import__("personnes_vues").nombre(info.get("_fichier") or "")
         if n_v: sk["doublage"]["nb_vus"] = int(n_v)
     except Exception as _e: __import__("pannes").avale(_e)
+    import locuteurs as _L
+    if _L.ETAT.get("vue_phrases"): sk["doublage"]["vue"] = _L.ETAT["vue_phrases"]   # qui parle d'après l'image (contrôle « attribution »)
     if audio:                                                              # émotions de jeu données par Claude
         from collections import Counter
         audio["emotions"] = dict(Counter(m.lower() for x in d for m in re.findall(r"\[([^\]]{2,25})\]", x)).most_common(8))

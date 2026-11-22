@@ -319,6 +319,11 @@ def verifier(video, sk, R):
         journal(f"  [vidéo finie · voix et dessin] {'✔' if not d9 else '✘'} chaque réplique sur la bonne voix, homme / femme d'après la voix"
                 + (f" : {len(d9)} écart(s)" if d9 else ""))
     except Exception as e: journal(f"  contrôle voix et dessin impossible ({str(e)[:120]})")
+    try:                                                                   # attribution (22 novembre) : l'IMAGE de l'original
+        d10 = attribution_image(sk); points += d10                         # contre les répliques de la vidéo finie
+        journal(f"  [vidéo finie · attribution] {'✔' if not d10 else '✘'} qui dit chaque phrase, comparé à l'image de l'original"
+                + (f" : {d10[0]['quoi']}" if d10 else ""))
+    except Exception as e: journal(f"  contrôle attribution impossible ({str(e)[:120]})")
     for l in sk.get("equipe") or []:                                       # défauts de l'équipe que personne n'a pu corriger
         if l.get("revoir"): points.append(_defaut(None, l.get("poste", "équipe"), f"{l.get('controle')} : {l.get('detail')}"))
     points.sort(key=lambda d: (not d["grave"], d["t"] if d["t"] is not None else -1))
@@ -368,6 +373,46 @@ def voix_dessin(video, sk):
                 d_ = _defaut(None, "voix et dessin", f"{NOMS_ROLES.get(bas, bas)} a une voix d'homme ({H[bas]} Hz) mais est dessiné(e) en femme : c'est un homme")
                 d_["genre"] = {"role": bas, "genre": "h"}; out.append(d_)
     return out[:12]
+
+
+ATTRIB_MAX = 0.2
+
+
+def attribution_image(sk):
+    """Contrôle final « attribution » (audit du 22 novembre 2026 : « Pire date amoureux » notée 22/22 et confiance 100 alors que 43 %
+    de la parole était sur le mauvais personnage ; le témoin image disait déjà 27 % de désaccord, sous le seuil de 30 %). Compare,
+    phrase par phrase, qui parle d'après l'IMAGE de l'original (sk["doublage"]["vue"] : Gemini, visages, mouvements, certitude ≥ 0,3)
+    avec la réplique de la vidéo FINIE à ce moment-là (correspondance des deux personnes qui donne le plus d'accord). Les répliques
+    confirmées par la hauteur de la voix (plus sûre que l'image) ou choisies par l'auteur ne comptent pas. Plus de 20 % de désaccord
+    sur 4 phrases au moins = point grave, avec les répliques en cause. ATTRIBUTION=0 pour couper."""
+    from collections import Counter
+    if os.environ.get("ATTRIBUTION", "1") == "0": return []
+    vue = ((sk or {}).get("doublage") or {}).get("vue") or []
+    reps = sk.get("repliques") or []
+    roles = [r for r, _ in Counter(r.get("p") for r in reps if r.get("p") not in (None, "narrateur") and not r.get("_hors_champ")).most_common(2)]
+    if len(roles) != 2 or len(vue) < 4: return []
+    paires = []
+    for a, b, c, w in vue:
+        best, k_ = 0.0, None
+        for i, r in enumerate(reps):
+            if r.get("p") not in roles or r.get("_deb") is None: continue
+            o = min(float(b), float(r["_fin"])) - max(float(a), float(r["_deb"]))
+            if o > best: best, k_ = o, i
+        if k_ is None or best < 0.5 * (float(b) - float(a)): continue
+        r = reps[k_]
+        if r.get("_hauteur_ok") or r.get("_auteur"): continue
+        paires.append((int(c), roles.index(r["p"]), k_))
+    if len(paires) < 4: return []
+    accord = max(sum(1 for c, j, _ in paires if c == j), sum(1 for c, j, _ in paires if c != j))
+    direct = sum(1 for c, j, _ in paires if c == j) >= sum(1 for c, j, _ in paires if c != j)
+    contre = sorted({k for c, j, k in paires if (c == j) != direct})
+    part = 1 - accord / len(paires)
+    if part <= ATTRIB_MAX: return []
+    d_ = _defaut(reps[contre[0]].get("_deb") if contre else None, "attribution",
+                 f"l'image de l'original montre l'autre personne parler pendant {round(100 * part)} % des phrases "
+                 f"(répliques {', '.join(str(k + 1) for k in contre[:6])})")
+    d_["repliques_douteuses"] = contre
+    return [d_]
 
 
 def appliquer_voix(sk, points):

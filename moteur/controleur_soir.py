@@ -68,7 +68,7 @@ def telecharger(h, dossier):
 def controler(video, sk):
     """Points graves trouvés (même format que verif_finale) : voix, homme / femme, bulles mélangées."""
     import verif_finale, doublage
-    pts = verif_finale.voix_dessin(video, sk)
+    pts = verif_finale.voix_dessin(video, sk) + verif_finale.attribution_image(sk)
     try:
         son, sr = verif_finale._son(video)
         sk2 = copy.deepcopy(sk); n = doublage.scinder_melangees(sk2, son, sr)

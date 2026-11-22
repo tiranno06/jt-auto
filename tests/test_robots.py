@@ -74,3 +74,41 @@ class TestRobots(unittest.TestCase):
         self.assertGreaterEqual(len(pts), 3); self.assertTrue(any("bulle" in p["quoi"] for p in pts))
         w = open(os.path.join(RACINE, ".github", "workflows", "controleur.yml"), encoding="utf-8").read()
         self.assertIn("|compte_rendu|soir", w)                                # jamais refaite en boucle (refait_par_soir)
+
+
+class TestAudit22Novembre(unittest.TestCase):
+    def setUp(self): sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "moteur"))
+
+    def test_attribution_image(self):
+        import verif_finale as V
+        reps = [{"p": "presentateur" if k % 2 == 0 else "invite", "_deb": 2.0 * k, "_fin": 2.0 * k + 1.8, "t": "x"} for k in range(10)]
+        vue_ok = [[2.0 * k + 0.1, 2.0 * k + 1.5, (k + 1) % 2, 0.8] for k in range(10)]   # numéros inversés : même découpage = accord
+        self.assertEqual(V.attribution_image({"repliques": reps, "doublage": {"vue": vue_ok}}), [])
+        vue_ko = [list(v) for v in vue_ok]
+        for k in (1, 4, 7): vue_ko[k][2] = 1 - vue_ko[k][2]                 # 3 phrases sur 10 contredites par l'image
+        pts = V.attribution_image({"repliques": reps, "doublage": {"vue": vue_ko}})
+        self.assertEqual(len(pts), 1); self.assertEqual(pts[0]["poste"], "attribution"); self.assertEqual(pts[0]["repliques_douteuses"], [1, 4, 7])
+        for k in (1, 4, 7): reps[k]["_hauteur_ok"] = True                   # confirmées par la hauteur de la voix : plus contestées
+        self.assertEqual(V.attribution_image({"repliques": reps, "doublage": {"vue": vue_ko}}), [])
+
+    def test_conditions_des_workflows(self):
+        # GitHub : une variable jamais créée vaut null, et null != '0' est FAUX (les deux deviennent 0) : le robot ne tournait jamais
+        import glob, re
+        for f in glob.glob(os.path.join(RACINE, ".github", "workflows", "*.yml")):
+            for k, l in enumerate(open(f, encoding="utf-8"), 1):
+                for m in re.finditer(r"(\(?)vars\.([A-Z_0-9]+)(\s*\|\|[^)]*\))?\s*(!=|==)\s*'(0|)'", l):
+                    self.assertTrue(m.group(3), f"{os.path.basename(f)}:{k} : vars.{m.group(2)} comparé à '{m.group(5)}' sans valeur par défaut")
+
+    def test_alerte_reessaie_un_appareil_note_disparu(self):
+        import alerte
+        f = os.path.join(tempfile.mkdtemp(), "morts.json")
+        with mock.patch.object(alerte, "MORTS", f), mock.patch.object(alerte, "noter", lambda *a: None), \
+                mock.patch.object(alerte, "envoyer", lambda *a, **k: None), \
+                mock.patch.dict(os.environ, {"VAPID_PRIVEE": "x", "VAPID_PUBLIQUE": "y", "PUSH_ABONNEMENTS": json.dumps([{"endpoint": "https://e/1"}])}):
+            json.dump([alerte.empreinte("https://e/1")], open(f, "w"))
+            self.assertEqual(alerte.alerter("t", "x"), 1)                    # essayé quand même
+            self.assertEqual(alerte.morts(), set())                          # et retiré des disparus
+
+    def test_reprise_point_de_sauvegarde_sans_chaine(self):
+        src = open(os.path.join(RACINE, "moteur", "principal.py"), encoding="utf-8").read()
+        self.assertIn('if CHAINE_ORIG is not None: os.environ["CHAINE"] = CHAINE_ORIG', src)
