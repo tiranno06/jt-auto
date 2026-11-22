@@ -642,6 +642,8 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
                                or (j and ph[j - 1]["p"] == "narrateur")) else "serre"
     # studio : bible de l'épisode et storyboard (plans, mouvements, réactions), décors dessinés là où l'IA n'en a pas fourni
     B = studio.bible(sk, roles) if DETAIL else None
+    SILENCES = []                                                          # (rendu simple, sans bible : défini quand même ; audit du 22/11 :
+                                                                           #  « SILENCES » non défini faisait planter le rendu de secours)
     SEMI_ = set(sk.get("_decors_semi") or []) & set(decors)               # scènes au décor semi-réaliste (peinture, pieds calés au sol)
     AVANT, INFOS = {}, {}; FICHES = None; DECOUPE = []; ERREURS_ANIM = []; SC_COURANT = [0]; TETES_Y = {}
     PROF = {}                                                              # décors IA : profondeur (le premier plan glisse plus vite que le fond)

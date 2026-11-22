@@ -1524,7 +1524,7 @@ $("#castOk").onclick=()=>{
   const v=DATA[choisie], c={};
   [...$("#castListe").querySelectorAll("select")].filter(s=>s.value).forEach(s=>{(c[s.dataset.p]=c[s.dataset.p]||{})[s.dataset.cle]=s.value});
   if(!Object.keys(c).length) return;
-  lancerFlux("emission.yml",$("#castOk"),"🎭 Personnages changés : la nouvelle version apparaîtra à côté de l'ancienne (15 à 40 min).",{refaire:v.fichier+"|casting|"+JSON.stringify(c)},$("#suivi"));
+  lancerFlux("emission.yml",$("#castOk"),"🎭 Personnages changés : la nouvelle version remplacera l'ancienne dans la liste (15 à 40 min).",{refaire:v.fichier+"|casting|"+JSON.stringify(c)},$("#suivi"));
 };
 function afficherQui(v){
   afficherCasting(v);
@@ -1543,7 +1543,7 @@ function afficherQui(v){
 $("#quiOk").onclick=()=>{
   const v=DATA[choisie]; const ch=[...$("#quiListe").querySelectorAll("select")].filter(s=>s.value!==s.dataset.p).map(s=>s.dataset.k+"="+s.value);
   if(!ch.length)return;
-  lancerFlux("emission.yml",$("#quiOk"),`🗣️ ${ch.length} réplique(s) rendue(s) au bon personnage : la nouvelle version apparaîtra à côté de l'ancienne.`,{refaire:v.fichier+"|qui|"+ch.join(";")},$("#suivi"));
+  lancerFlux("emission.yml",$("#quiOk"),`🗣️ ${ch.length} réplique(s) rendue(s) au bon personnage : la nouvelle version remplacera l'ancienne dans la liste.`,{refaire:v.fichier+"|qui|"+ch.join(";")},$("#suivi"));
 };
 // ------------------------------------------------ onglet TikTok : chaque bloc dans un menu déroulant, ouvert / fermé gardé sur l'appareil
 (()=>{let m={}; try{m=JSON.parse(localStorage.getItem("jt_replis")||"{}")}catch(e){}
@@ -1581,7 +1581,7 @@ $("#tkCorrigerTout").onclick=async()=>{                                    // to
 };
 $("#remCorrOk").onclick=()=>{
   const v=DATA[choisie], t=$("#remCorr").value.replace(/[\r\n|]+/g," ").trim().slice(0,600); if(!v||t.length<4) return;
-  lancerFlux("emission.yml",$("#remCorrOk"),"🛠️ Remarque envoyée : le robot la comprend et refait la vidéo sur le même son (la nouvelle version apparaîtra à côté de l'ancienne).",{refaire:v.fichier+"|remarque|"+t},$("#suivi"));
+  lancerFlux("emission.yml",$("#remCorrOk"),"🛠️ Remarque envoyée : le robot la comprend et refait la vidéo sur le même son (la nouvelle version remplacera l'ancienne dans la liste).",{refaire:v.fichier+"|remarque|"+t},$("#suivi"));
 };
 // ------------------------------------------------ publication en un bouton (workflow publier.yml)
 $("#publier").onclick=async()=>{
@@ -1639,18 +1639,18 @@ $("#programmer").onclick=()=>{
   lancerFlux("publier.yml",$("#programmer"),"🗓️ Publication programmée le "+new Date(q).toLocaleString("fr-FR",{dateStyle:"short",timeStyle:"short"})+" : Buffer s'en charge, même appli fermée.",{fichier:v.fichier,forcer:v.publie===true?"oui":"non",quand:q},$("#suivi"));
 };
 $("#refaire").onclick=()=>{const v=DATA[choisie], q=$("#refaireQuoi").value;
-  lancerFlux("emission.yml",$("#refaire"),"🔁 Nouvelle version en fabrication. Elle apparaîtra à côté de l'ancienne (supprimez celle que vous ne gardez pas).",{refaire:v.fichier+"|"+q},$("#suivi"))};
-[["#refaireVoix","voix","🎙️ Mêmes répliques et même image, nouvelles voix : la nouvelle version apparaîtra à côté de l'ancienne."],
- ["#refaireDecor","decors","🖼️ Mêmes répliques et mêmes voix, nouveaux décors : la nouvelle version apparaîtra à côté de l'ancienne."]].forEach(([s,q,m])=>{
+  lancerFlux("emission.yml",$("#refaire"),"🔁 Nouvelle version en fabrication. Elle remplacera l'ancienne dans la liste (sauf si l'ancienne est déjà publiée).",{refaire:v.fichier+"|"+q},$("#suivi"))};
+[["#refaireVoix","voix","🎙️ Mêmes répliques et même image, nouvelles voix : la nouvelle version remplacera l'ancienne dans la liste."],
+ ["#refaireDecor","decors","🖼️ Mêmes répliques et mêmes voix, nouveaux décors : la nouvelle version remplacera l'ancienne dans la liste."]].forEach(([s,q,m])=>{
   $(s).onclick=()=>{const v=DATA[choisie]; lancerFlux("emission.yml",$(s),m,{refaire:v.fichier+"|"+q},$("#suivi"))}});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&choisie!==null)fermerVideo()});
-$("#voir").onclick=()=>{const a=$("#apercu");a.style.display="block";a.play()};
+$("#voir").onclick=()=>{const a=$("#apercu");a.style.display="block";const p_=a.play(); if(p_&&p_.catch) p_.catch(()=>toast("Aperçu indisponible pour l'instant (vidéo pas encore en ligne ?)"))};
 $("#copierCom").onclick=async()=>{const t=(DATA[choisie]||{}).commentaire||"";try{await navigator.clipboard.writeText(t);toast("Commentaire copié ✓ : collez-le sous la vidéo puis épinglez-le")}catch(e){prompt("Copiez le commentaire :",t)}};
 $("#copier").onclick=async()=>{const t=DATA[choisie].legende||"";try{await navigator.clipboard.writeText(t);toast("Légende copiée")}catch(e){prompt("Copiez la légende :",t)}};
 $("#manuel").onclick=async()=>{
   const v=DATA[choisie]; navigator.clipboard && navigator.clipboard.writeText(v.legende||"").catch(()=>{});
   if(!peutPartager){
-    const a=document.createElement("a");a.href=pleinDe(v);a.download=v.fichier;document.body.appendChild(a);a.click();a.remove();
+    const a=document.createElement("a");a.href=pleinDe(v);a.download=v.fichier;a.target="_blank";a.rel="noopener";document.body.appendChild(a);a.click();a.remove();
     window.open("https://www.tiktok.com/tiktokstudio/upload","_blank");toast("Légende copiée · vidéo téléchargée");return;
   }
   const b=$("#manuel");
@@ -1978,7 +1978,9 @@ async function nettoyerAbos(v){                                            // ap
   try{
     const morts=new Set(CONF.abos_morts||[]); if(!morts.size) return; let l=[]; try{l=JSON.parse(v.PUSH_ABONNEMENTS||"[]")}catch(_){return}
     const emp=async e=>Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256",new TextEncoder().encode(String(e))))).map(b=>b.toString(16).padStart(2,"0")).join("").slice(0,20);
-    const garde=[]; for(const a of l){if(!morts.has(await emp(a.endpoint))) garde.push(a)}
+    let moi="";                                                            // jamais l'appareil où l'appli est ouverte (réabonné : même adresse)
+    try{const reg=await Promise.race([navigator.serviceWorker.ready,new Promise(r=>setTimeout(()=>r(null),3000))]); const sub=reg&&reg.pushManager?await reg.pushManager.getSubscription():null; moi=sub?sub.endpoint:""}catch(_){}
+    const garde=[]; for(const a of l){if(a.endpoint===moi||!morts.has(await emp(a.endpoint))) garde.push(a)}
     if(garde.length===l.length) return;
     await ecrireVar("PUSH_ABONNEMENTS",JSON.stringify(garde)); v.PUSH_ABONNEMENTS=JSON.stringify(garde);
     toast(garde.length?`🔔 ${l.length-garde.length} appareil(s) qui ne recevaient plus les alertes retiré(s)`:"🔔 Plus aucun appareil ne reçoit les alertes : réactivez les notifications (Réglages)");

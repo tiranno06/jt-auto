@@ -728,6 +728,27 @@
   (`controleur_soir.VERSION`, + 1 à chaque amélioration : tout ce qui n'est pas publié est revu) ; vidéo à problème non refaite
   (limite de 3) = reprise le lendemain ; une vidéo déjà refaite par lui (« |compte_rendu|soir » -> historique "refait_par_soir")
   n'est jamais refaite en boucle.
+- **Audit complet du 22 novembre 2026 (demande de l'auteur : plus aucun bug)** : code Python (pyflakes), JavaScript du site (syntaxe +
+  ESLint « no-undef », chaque `$("#…")` existe dans la page), site ouvert dans un vrai navigateur (Playwright, GitHub simulé avec les
+  vraies données : chaque onglet, même masqué, et 8 fiches vidéo, ~30 sortes de boutons chacune, téléphone 420 px et PC 1280 px : 0 erreur,
+  pas de débordement), journaux des dernières fabrications et registre des pannes. **Trouvé et réglé** : 1. **robots qui ne tournaient
+  JAMAIS** : dans GitHub, `vars.X != '0'` est FAUX quand le réglage n'a jamais été créé (null et '0' deviennent 0) -> pré-écoute de la
+  nuit (depuis le 6 novembre), réserve de sons, éclaireur, contrôleur du soir : 0 lancement ; écrit `(vars.X || '1') != '0'` partout +
+  test `test_conditions_des_workflows` ; 2. **notifications coupées depuis le 3 novembre** : le seul téléphone inscrit avait été noté
+  « disparu » et était sauté pour toujours, même réabonné avec la même adresse -> `alerte.alerter` essaie toujours chaque appareil, un envoi
+  réussi le retire des disparus (`revivre`) ; l'appli ne retire jamais l'appareil où elle est ouverte (`nettoyerAbos`) ; 3. **« 🖼️ Juste le
+  décor » ne marchait jamais** sur un son TikTok (seul « Refaire » proposé) : la bande son n'était pas retéléchargée (piste.wav introuvable)
+  -> `depuis_sketch` aussi pour « decors » / « voix » ; et le rendu de secours plantait (« SILENCES » non défini, `cartoon.rendre`) ;
+  4. **reprise depuis un point de sauvegarde** (fabrication coupée par GitHub) : plantait « str expected, not NoneType » (CHAINE_ORIG vide)
+  et la vidéo était perdue ; 5. site : « Aperçu » sans vidéo = message au lieu d'une erreur, téléchargement du « Partage manuel » dans un
+  nouvel onglet ; registre des pannes : essais de voix de synthèse (« refusée score ») plus comptés. **Contrôle qualité renforcé** :
+  « Pire date » était notée 22/22 et confiance 100 avec 43 % de la parole au mauvais personnage -> contrôle final **« attribution »**
+  (`verif_finale.attribution_image`, ATTRIBUTION=0) : qui parle d'après l'IMAGE de l'original, phrase par phrase (Gemini, visages,
+  mouvements, certitude ≥ 0,3 : `equipe.casting_voix` -> `locuteurs.ETAT["vue_phrases"]` -> sk["doublage"]["vue"]), comparé aux répliques
+  de la vidéo finie ; plus de 20 % de désaccord sur 4 phrases au moins = point grave (confiance qui baisse, « À vérifier », deuxième
+  chance) ; jamais contre une réplique confirmée par la hauteur de la voix (`_hauteur_ok`) ou choisie par l'auteur ; jamais « corrigé »
+  par l'IA qui lit le texte (compte rendu) ; aussi fait par le contrôleur du soir. Pas fait : actionlint (outil refusé par la sécurité de
+  la session de travail).
 - **Liste du 21 novembre 2026 au soir (choix de l'auteur 2, 3, 4, 5, 6, 8, 10, 11, 13, 14, 16, 22, 24)** : **sous-titres dans la zone
   visible de TikTok** (2) : ils étaient à 1 700 px, là où TikTok affiche pseudo, description et musique ; maintenant `cartoon.CAP_Y`
   1 380 px (sur les jambes, sous les têtes ; réglage SOUS_TITRES_Y) et `CAP_X` 470 (loin des boutons de droite), largeur

@@ -72,7 +72,7 @@ jobs:
           fi
 
       - name: Robot « réserve de sons » (sons TikTok écoutés à l'avance, toutes les 2 heures)
-        if: vars.PRE_ECOUTE != '0'
+        if: (vars.PRE_ECOUTE || '1') != '0'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -84,7 +84,7 @@ jobs:
           fi
 
       - name: Robot « éclaireur » (classement des nouveaux sons des créateurs, toutes les 3 heures)
-        if: vars.ECLAIREUR != '0'
+        if: (vars.ECLAIREUR || '1') != '0'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -93,7 +93,7 @@ jobs:
           fi
 
       - name: Robot « contrôleur du soir » (vidéos du jour revérifiées, refaites si besoin)
-        if: vars.CONTROLEUR_SOIR != '0'
+        if: (vars.CONTROLEUR_SOIR || '1') != '0'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |

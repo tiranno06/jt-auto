@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   controleur:
-    if: vars.CONTROLEUR_SOIR != '0'
+    if: (vars.CONTROLEUR_SOIR || '1') != '0'
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     env:

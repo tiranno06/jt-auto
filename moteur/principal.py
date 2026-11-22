@@ -256,7 +256,9 @@ def main():
             print(f"Relance : reprise depuis le point de sauvegarde {nom_p} ({len(S.get('faits') or [])} bloc(s) d'images déjà dessinés)", flush=True)
     EN_REPRISE[0] = bool(SUITE_NOM)
     if SUITE_NOM:
-        os.environ["CHAINE"] = CHAINE_ORIG                                 # « 2/3 » d'une chaîne de vidéos TikTok, sinon vide
+        if CHAINE_ORIG is not None: os.environ["CHAINE"] = CHAINE_ORIG     # « 2/3 » d'une chaîne de vidéos TikTok, sinon vide
+        # (relance depuis un point de sauvegarde : CHAINE_ORIG vaut None et CHAINE est déjà la bonne ; audit du 22 novembre : la
+        #  fabrication plantait « str expected, not NoneType » et la vidéo était perdue)
         try:
             S = RP.charger(SUITE_NOM)                                       # (reprise lancée par une fabrication en pause)
             print(f"Reprise de la fabrication en pause {SUITE_NOM} ({'2e version du jury' if S['phase'] == 'v2' else '1re version'}, "
@@ -396,9 +398,10 @@ def main():
         for k_, r_ in QUI.items():                                         # « Corriger qui parle » : chaque réplique au bon personnage
             if 0 <= k_ < len(sk.get("repliques") or []) and r_ in ("presentateur", "invite", "envoyee", "narrateur"): sk["repliques"][k_]["p"] = r_; sk["repliques"][k_]["_auteur"] = True
         if QUI: print(f"Corriger qui parle : {len(QUI)} réplique(s) rendue(s) au bon personnage", flush=True)
-        if sk.get("doublage") and REFAIRE_MODE in ("qui", "remarque", "casting", "compte_rendu"):   # son TikTok : on garde la bande son d'origine
-            import doublage
-            DOUB = list(doublage.depuis_sketch(sk, controle=REFAIRE_MODE != "qui")); fmt = "libre" if sk["doublage"].get("duree", 0) >= 60 else "mini"
+        if sk.get("doublage") and REFAIRE_MODE in ("qui", "remarque", "casting", "compte_rendu", "decors", "voix"):   # son TikTok : on garde la
+            import doublage                                                # bande son d'origine (« 🖼️ Juste le décor » ne la retéléchargeait pas :
+            DOUB = list(doublage.depuis_sketch(sk, controle=REFAIRE_MODE not in ("qui", "decors", "voix")))   # piste.wav introuvable, audit du 22/11)
+            fmt = "libre" if sk["doublage"].get("duree", 0) >= 60 else "mini"
         print(f"Refaire ({REFAIRE_MODE}) : « {sk.get('sujet')} », mêmes répliques", flush=True)
     elif tiktok:
         import doublage

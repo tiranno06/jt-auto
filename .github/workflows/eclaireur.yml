@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   eclaireur:
-    if: vars.ECLAIREUR != '0'
+    if: (vars.ECLAIREUR || '1') != '0'
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     env:
