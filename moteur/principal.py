@@ -801,15 +801,12 @@ def main():
     if sk.get("titre_accroche"): historique[-1]["titre_affiche"] = sk["titre_accroche"]
     if DOUB and sk.get("_anglais"): historique[-1]["anglais"] = True       # sous-titres anglais (essai de 10 vidéos, recette.py compare)
     if DOUB: historique[-1]["fin_carte"] = not sk.get("_sans_fin")          # essai du carton de fin (recette.py compare)
-    if REFAIRE_MODE == "compte_rendu" and ANCIEN and not test:            # corrigée d'après le compte rendu : la moins sûre des deux est retirée
-        try:
-            c1, c2 = ANCIEN.get("confiance"), historique[-1].get("confiance")
-            if not DC.protegee(ANCIEN) and isinstance(c2, (int, float)):
-                perd = ANCIEN["fichier"] if (not isinstance(c1, (int, float)) or c2 >= c1) else historique[-1]["fichier"]
-                print(f"Compte rendu : confiance {c1} → {c2} : {perd} est retirée (la plus sûre est gardée)", flush=True)
+    if REFAIRE and ANCIEN and not test and historique[-1].get("fichier") != ANCIEN.get("fichier"):
+        try:                                                               # vidéo refaite : elle REMPLACE l'ancienne dans la liste (pas de doublon)
+            perd = DC.remplacement(ANCIEN, historique[-1], REFAIRE_MODE)
+            if perd:
                 os.makedirs("sortie", exist_ok=True); open("sortie/.perdante", "w", encoding="utf-8").write(perd)
-            else: print("Compte rendu : l'ancienne version est publiée ou cochée « À publier » : les deux sont gardées", flush=True)
-        except Exception as e: print(f"comparaison des deux versions impossible ({str(e)[:100]})", flush=True)
+        except Exception as e: print(f"remplacement de l'ancienne version impossible ({str(e)[:100]})", flush=True)
     if DOUB and not test and not REFAIRE:                                  # deuxième chance : vidéo peu sûre refaite une fois (jamais une vidéo refaite à la main)
         try:
             quoi_, val_ = DC.decider(historique, historique[-1], sk["doublage"].get("source") or tiktok, DEUXIEME)

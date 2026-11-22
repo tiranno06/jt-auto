@@ -191,6 +191,7 @@ jobs:
       PROFILS_TIKTOK: ${{ vars.PROFILS_TIKTOK }}
       PROFILS_INTERDITS: ${{ vars.PROFILS_INTERDITS }}  # liste noire : profils jamais repris (moteur/profils_tiktok.py)
       CHAINES_CONCURRENTES: ${{ vars.CHAINES_CONCURRENTES }}
+      ECLAIREUR: ${{ vars.ECLAIREUR }}
       PRE_ECOUTE: ${{ vars.PRE_ECOUTE }}                # pré-écoute de la nuit (moteur/pre_ecoute.py) : 0 = coupée
       BUDGET_MODAL: ${{ vars.BUDGET_MODAL }}            # plafond des dépenses Modal du mois (30 $) : moteur/budget_modal.py
       PUBLI_FILE: ${{ vars.PUBLI_FILE }}
@@ -378,14 +379,14 @@ jobs:
           git commit -m "Émission : ${{ steps.run.outputs.titre }}" || echo "rien à enregistrer"
           python moteur/fusion.py      # plusieurs fabrications en parallèle : l'historique est fusionné, jamais écrasé
 
-      - name: Deuxième chance (vidéo peu sûre refaite une fois, la plus sûre des deux est gardée)
+      - name: Vidéo refaite ou deuxième chance (l'ancienne version est retirée de la liste, pas de doublon)
         if: always()
         run: |
           if [ -s sortie/.perdante ]; then
             F="$(cat sortie/.perdante)"
             FICHIER="$F" python moteur/supprimer.py
-            git add episodes; git commit -m "Deuxième chance : $F retirée (moins sûre)" || echo "rien à enregistrer"
-            FICHIER="$F" REJOUER="python moteur/supprimer.py" MESSAGE="Deuxième chance" python moteur/fusion.py
+            git add episodes; git commit -m "Vidéo refaite : $F retirée de la liste" || echo "rien à enregistrer"
+            FICHIER="$F" REJOUER="python moteur/supprimer.py" MESSAGE="Vidéo refaite" python moteur/fusion.py
           fi
           if [ -s sortie/.deuxieme_chance ]; then
             gh workflow run emission.yml --ref main -f filiere=tiktok -f theme="$(cat sortie/.deuxieme_chance)" && echo "2e chance lancée"

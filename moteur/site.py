@@ -448,7 +448,11 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <div class="auto"><div class="txt"><b>Activées</b><small>Une vidéo sur un son des profils à chaque heure ci-dessous.</small></div><button class="inter" data-var="FREQUENCE_TIKTOK" data-def="0" data-bascule="1"></button></div>
     <label>Heures (séparées par « ; »)<div class="jeton"><input data-var="HEURE_TIKTOK" data-def="14:00" data-texte="1" maxlength="60" placeholder="ex. 14:00 ; 21:30"><button class="second" data-enr="HEURE_TIKTOK" style="flex:none;padding:10px 14px">OK</button></div></label>
     <p class="note">Vidéo prête 20 à 40 min après l'heure. S'il n'y a aucun son utilisable, pas de vidéo cette fois (jamais de sketch à la place).</p>
-    <div class="auto"><div class="txt"><b>🌙 Pré-écoute la nuit</b><small>Vers 2 h, le robot écoute à l'avance un son par heure ci-dessus : la vidéo de la journée passe directement au dessin (plus rapide, sons ratés écartés la nuit).</small></div><button class="inter" data-var="PRE_ECOUTE" data-def="1" data-bascule="1"></button></div></details>
+    <div class="auto"><div class="txt"><b>📦 Robot « réserve de sons »</b><small>Toutes les 2 heures, un robot à part écoute des sons à l'avance (voix, qui parle, image de l'original) et en garde une réserve : chaque vidéo, salves à la main comprises, passe directement au dessin (~25 min gagnées).</small></div><button class="inter" data-var="PRE_ECOUTE" data-def="1" data-bascule="1"></button></div>
+    <label>Sons gardés en réserve<select data-var="RESERVE_SONS" data-def="6">
+      <option value="2">2</option><option value="4">4</option><option value="6">6 (recommandé)</option><option value="8">8</option><option value="10">10</option></select></label>
+    <div class="auto"><div class="txt"><b>🔭 Robot « éclaireur »</b><small>Toutes les 3 heures, il passe en revue vos créateurs (sans rien écouter) et classe leurs nouveaux sons : potentiel, tendances, déjà repris par une chaîne concurrente. La réserve et les vidéos piochent dans ce classement.</small></div><button class="inter" data-var="ECLAIREUR" data-def="1" data-bascule="1"></button></div>
+    <div class="auto"><div class="txt"><b>🌆 Robot « contrôleur du soir »</b><small>Vers 21 h, il réécoute les vidéos du jour pas encore publiées (bonne voix sur le bon personnage, homme / femme, bulles mélangées) et refait tout seul celles qui ont un problème (3 au plus). La version refaite remplace l'ancienne dans la liste.</small></div><button class="inter" data-var="CONTROLEUR_SOIR" data-def="1" data-bascule="1"></button></div></details>
   <details class="groupe repliTk" data-cle="publi" id="pubAuto"><summary>📤 Publication automatique</summary>
     <p class="note">Cochez « À publier » sur les vidéos que vous avez vérifiées : chaque jour à l'heure choisie, le robot publie sur TikTok la plus ancienne vidéo cochée pas encore publiée (dans l'ordre où vous les avez cochées).</p>
     <div class="auto"><div class="txt"><b>Activée</b><small>Une vidéo cochée publiée par jour (ou deux), même appli fermée.</small></div><button class="inter" data-var="PUBLI_AUTO" data-def="0" data-bascule="1"></button></div>
@@ -1240,7 +1244,8 @@ function majPubliPartout(){                                                // li
 function majBoutonPubliFiche(){const b=$("#aPublier"); if(!b) return; const v=choisie!==null?DATA[choisie]:null;
   if(!v||v.origine!=="tiktok"||v.publie===true){b.style.display="none";return}
   b.style.display=""; b.disabled=!lireJeton(); b.textContent=textePubli(v); b.classList.toggle("on",filePubli().includes(v.fichier))}
-const filePubli=()=>String((VARS&&VARS.PUBLI_FILE)||"").split(/\n+/).map(x=>x.trim()).filter(Boolean);
+const remplacant=n=>{const vus=new Set(); let r; while(!vus.has(n)&&(r=(DATA||[]).find(x=>x.remplace===n&&x.fichier))){vus.add(n); n=r.fichier} return n};   // vidéo refaite : la nouvelle reprend la place « À publier » (publication_auto.remplacant)
+const filePubli=()=>[...new Set(String((VARS&&VARS.PUBLI_FILE)||"").split(/\n+/).map(x=>remplacant(x.trim())).filter(Boolean))];
 const attentePubli=f=>alternerPubli(f.filter(n=>{const v=DATA.find(x=>x.fichier===n); return v&&v.publie==null}));   // cochées, pas encore publiées (échec : sautée)
 function alternerPubli(f){                                                 // jamais deux sons du même profil d'affilée (moteur/publication_auto.py)
   const pr=n=>{const v=DATA.find(x=>x.fichier===n); return v?profilDe(v):""};

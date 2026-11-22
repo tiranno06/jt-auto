@@ -14,12 +14,22 @@ PARIS = ZoneInfo("Europe/Paris")
 AVANCE = 35                                                                # minutes : demande envoyée à Buffer un peu avant l'heure
 
 
+def remplacant(n, historique):
+    """Vidéo refaite (demande de l'auteur du 22 novembre 2026) : la nouvelle version porte "remplace" = l'ancienne, qui est retirée de
+    la liste. La case « À publier » de l'ancienne (variable PUBLI_FILE, que le robot ne peut pas modifier) passe à la nouvelle : même
+    place dans la file. Suit la chaîne (vidéo refaite deux fois)."""
+    par = {h.get("remplace"): h.get("fichier") for h in historique or [] if h.get("remplace") and h.get("fichier")}
+    vus = set()
+    while n in par and n not in vus: vus.add(n); n = par[n]
+    return n
+
+
 def file_attente(brut, historique):
     """Vidéos cochées (dans l'ordre) qui existent et ne sont pas encore publiées. Une vidéo dont la publication a échoué est sautée
-    (elle ne bloque pas les suivantes) : l'auteur la republie à la main depuis sa fiche."""
+    (elle ne bloque pas les suivantes) : l'auteur la republie à la main depuis sa fiche. Une vidéo refaite garde la place de l'ancienne."""
     connues = {h.get("fichier"): h for h in historique if h.get("fichier")}
     out = []
-    for n in [x.strip() for x in str(brut or "").splitlines()]:
+    for n in [remplacant(x.strip(), historique) for x in str(brut or "").splitlines()]:
         if n and n in connues and connues[n].get("publie") is None and n not in out: out.append(n)
     return out
 
