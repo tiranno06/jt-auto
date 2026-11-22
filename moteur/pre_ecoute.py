@@ -6,7 +6,12 @@ quelques sons des profils (comme une vraie fabrication : jamais déjà utilisés
 rangé dans la release « sons-prets » (3 jours au plus). À l'heure du créneau, la fabrication prend le plus ancien son prêt et passe
 tout de suite au dessin. Les sons ratés (aucune parole, trop longs, refusés) sont écartés la nuit, sans faire attendre personne.
 Rien de prêt (option coupée, stock vide, son repris entre-temps) : la fabrication écoute elle-même un son, comme avant.
-Nombre de sons préparés : STOCK_SONS (par défaut, autant que de créneaux TikTok dans la journée, 1 à 4)."""
+Nombre de sons préparés : STOCK_SONS (par défaut, autant que de créneaux TikTok dans la journée, 1 à 4).
+
+Robot « réserve de sons » (choix de l'auteur du 22 novembre 2026) : le garde lance ce travail toutes les 2 heures (et plus seulement
+la nuit, même sans vidéos automatiques) dès que la réserve n'est plus pleine : RESERVE_SONS sons prêts (6 par défaut, 1 à 10). Toutes
+les fabrications, salves lancées à la main comprises, prennent dans la réserve et passent directement au dessin (~25 min gagnées).
+Les sons à écouter sont pris dans le classement de l'éclaireur (profils_tiktok.eclairer) quand il est récent."""
 import calendar, gzip, json, os, pickle, re, sys, tempfile, time
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -20,13 +25,24 @@ def actif():
     return (os.environ.get("PRE_ECOUTE") or "1").strip() != "0"
 
 
+RESERVE = 6
+
+
 def stock_voulu():
-    try:
-        n = int(os.environ.get("STOCK_SONS") or 0)
-        if n > 0: return min(n, 6)
-    except ValueError: pass
-    heures = [h for h in re.split(r"[;,\s]+", os.environ.get("HEURE_TIKTOK") or "") if re.match(r"^\d{1,2}:\d{2}$", h)]
-    return max(1, min(4, len(heures) or 1))
+    """Taille de la réserve : RESERVE_SONS (1 à 10, 6 par défaut) ; l'ancien réglage STOCK_SONS compte encore s'il est plus grand."""
+    n = RESERVE
+    for k in ("RESERVE_SONS", "STOCK_SONS"):
+        try:
+            v = int(os.environ.get(k) or 0)
+            if v > 0: n = v if k == "RESERVE_SONS" else max(n, v)
+        except ValueError: pass
+    return max(1, min(10, n))
+
+
+def manque():
+    """Nombre de sons à préparer pour remplir la réserve (vérification rapide, sans rien installer)."""
+    if not actif(): return 0
+    return max(0, stock_voulu() - len(stock()))
 
 
 def _release():
@@ -134,7 +150,7 @@ def prendre(historique, journal=print):
             for b in parts:
                 if b["name"] != s["asset"]["name"]: DP.effacer(b)          # pris : fichiers retirés du stock
             _remettre(d.get("etats") or {})
-            journal(f"Pré-écoute : son déjà écouté cette nuit pris dans le stock ({d['url']}) : on passe directement à la suite")
+            journal(f"Réserve de sons : son déjà écouté pris dans la réserve ({d['url']}) : on passe directement à la suite")
             return d["url"], _remplacer(d["prep"], local)
     except Exception as e: journal(f"Pré-écoute : stock illisible ({str(e)[:150]}) : écoute normale")
     return None
@@ -169,5 +185,9 @@ def remplir(journal=print):
 
 
 if __name__ == "__main__":
+    if "--manque" in sys.argv:
+        try: m = manque()
+        except Exception as e: print(f"réserve illisible ({str(e)[:120]}) : on la remplit", file=sys.stderr); m = 1
+        print(m); sys.exit(0)
     n = remplir()
     print(f"Pré-écoute finie : {n} son(s) ajouté(s) au stock", flush=True)

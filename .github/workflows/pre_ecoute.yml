@@ -1,4 +1,5 @@
 name: Pré-écoute des sons TikTok
+# Robot « réserve de sons » (22 novembre 2026) : lancé par le garde toutes les 2 heures, il garde RESERVE_SONS sons prêts (6).
 # La nuit (lancé par le garde vers 2 h, heure de Paris) : quelques sons des profils sont écoutés à l'avance (son, voix, qui parle,
 # image de l'original, mise en scène par l'IA) et rangés dans la release « sons-prets ». Les fabrications de la journée les prennent
 # et passent directement au dessin (moteur/pre_ecoute.py). Option PRE_ECOUTE (Réglages du site) : 0 = coupée.
@@ -14,8 +15,30 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  pre_ecoute:
+  reserve:                     # robot « réserve de sons » : réserve déjà pleine -> aucune machine lourde lancée
     if: vars.PRE_ECOUTE != '0'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      manque: ${{ steps.m.outputs.manque }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          sparse-checkout: moteur
+      - id: m
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ github.token }}
+          PRE_ECOUTE: ${{ vars.PRE_ECOUTE }}
+          RESERVE_SONS: ${{ vars.RESERVE_SONS }}
+          STOCK_SONS: ${{ vars.STOCK_SONS }}
+        run: |
+          M="$(python3 moteur/pre_ecoute.py --manque | tail -1)"
+          echo "Réserve de sons : $M son(s) à préparer"; echo "manque=${M:-1}" >> "$GITHUB_OUTPUT"
+
+  pre_ecoute:
+    needs: reserve
+    if: vars.PRE_ECOUTE != '0' && needs.reserve.outputs.manque != '0'
     runs-on: ubuntu-24.04
     timeout-minutes: 150
     env:
@@ -26,6 +49,7 @@ jobs:
       GLOG_minloglevel: "2"
       PRE_ECOUTE: ${{ vars.PRE_ECOUTE }}
       STOCK_SONS: ${{ vars.STOCK_SONS }}
+      RESERVE_SONS: ${{ vars.RESERVE_SONS }}
       HEURE_TIKTOK: ${{ vars.HEURE_TIKTOK }}
       SILENCES_COURTS: ${{ vars.SILENCES_COURTS }}
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -43,6 +67,7 @@ jobs:
       PROFILS_TIKTOK: ${{ vars.PROFILS_TIKTOK }}
       PROFILS_INTERDITS: ${{ vars.PROFILS_INTERDITS }}
       CHAINES_CONCURRENTES: ${{ vars.CHAINES_CONCURRENTES }}
+      ECLAIREUR: ${{ vars.ECLAIREUR }}
       TIKTOK_COMPTE: ${{ vars.TIKTOK_COMPTE }}
       VOIX_DIFFERENTES: ${{ vars.VOIX_DIFFERENTES }}
       FILIERE: tiktok

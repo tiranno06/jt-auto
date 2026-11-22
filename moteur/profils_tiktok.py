@@ -206,21 +206,14 @@ def tendance(v, communs, sujets):
     return (15, s) if s else (0, "")
 
 
-def choisir(historique, journal=print, graine=None, essais=4):
-    """Liens de vidéos à essayer (jamais déjà utilisées, durée raisonnable), les plus prometteuses d'abord : profils tirés au
-    hasard mais pondérés par les vues qu'ils nous rapportent (idée 21), et dans chaque profil les sons qui montent et à bon
-    potentiel d'abord (idées 3 et 4), avec un peu de hasard pour varier. On prend la première dont le son passe."""
-    profils = liste()
-    if not profils: return []
-    rng = random.Random(graine); deja = deja_utilisees(historique); out = []
-    pw = poids_profils(profils)
-    profils = sorted(profils, key=lambda p: -pw[p] * rng.random() ** 0.5)  # tirage pondéré (un bon profil sort plus souvent)
-    import saisons, suites
-    moment = saisons.mots_du_moment()                                      # Noël, Saint-Valentin, rentrée… : sons sur ce thème d'abord
-    profils = [p for p in profils[:8] if not bio_refuse(p, journal)][:5]   # liste noire : bio qui interdit la reprise
-    if not profils: return []
-    listes = {p: videos(p, journal) for p in profils}
+def noter(listes, historique, journal=print):
+    """Note de chaque son jamais utilisé des profils (listes = {profil: vidéos}) : potentiel (vues, sons qui montent), calendrier,
+    tendances, durée et sujets qui marchent chez nous, suite d'une vidéo déjà faite ; sons déjà repris par une chaîne concurrente
+    écartés. Renvoie {profil: [vidéos avec "potentiel"]}. Sert au tirage (choisir) et à l'éclaireur (eclairer)."""
     import time as _t
+    import saisons, suites
+    deja = deja_utilisees(historique)
+    moment = saisons.mots_du_moment()                                      # Noël, Saint-Valentin, rentrée… : sons sur ce thème d'abord
     vus = {}                                                               # tendance TikTok : hashtag récent chez plusieurs créateurs
     for p, vs_ in listes.items():
         for v in vs_:
@@ -231,8 +224,9 @@ def choisir(historique, journal=print, graine=None, essais=4):
     if communs or sujets: journal(f"Tendances : {', '.join('#' + h for h in sorted(communs)[:8]) or 'aucun hashtag commun'} ; sujets qui montent en France : {', '.join(sujets[:6]) or '—'}")
     parties = suites.faites(historique)                                     # parties déjà faites (la suite passe devant)
     pris = deja_repris(journal)                                            # sons déjà doublés par les chaînes concurrentes (idée 24)
-    for p in profils:
-        vs = [v for v in listes[p] if v["id"] not in deja and (v.get("duree") is None or DUREE_MIN <= float(v["duree"]) <= DUREE_MAX)]
+    out = {}
+    for p, vs0 in listes.items():
+        vs = [v for v in vs0 if v["id"] not in deja and (v.get("duree") is None or DUREE_MIN <= float(v["duree"]) <= DUREE_MAX)]
         avant_ = len(vs); vs = [v for v in vs if not repris_ailleurs(v, p, pris)]
         if len(vs) < avant_: journal(f"  @{p} : {avant_ - len(vs)} son(s) déjà repris par une chaîne concurrente, écarté(s)")
         for v in vs:
@@ -251,6 +245,79 @@ def choisir(historique, journal=print, graine=None, essais=4):
             except Exception as _e: __import__("pannes").avale(_e)
             b_ = suites.bonus(v, p, parties)
             if b_: v["potentiel"] += b_; journal(f"  suite d'une vidéo déjà faite (partie {suites.num_partie(v.get('titre'))}) : {v['url']}")
+        out[p] = vs
+    return out
+
+
+# Robot « éclaireur » (choix de l'auteur du 22 novembre 2026) : toutes les 3 heures (garde.yml -> eclaireur.yml), une petite machine
+# passe en revue TOUS les créateurs suivis (sans rien écouter), note leurs sons jamais utilisés et range le classement dans
+# episodes/sons_candidats.json. La réserve de sons et les fabrications piochent dedans (choisir) : plus besoin de relire 5 profils à
+# chaque vidéo. Classement de plus de 8 heures, éclaireur coupé (ECLAIREUR=0) ou trop peu de sons -> lecture des profils en direct.
+CANDIDATS = os.path.join(RACINE, "episodes", "sons_candidats.json")
+FRAIS_H = 8
+
+
+def eclairer(historique, journal=print, max_profils=20):
+    profils = [p for p in liste()[:max_profils] if not bio_refuse(p, journal)]
+    listes = {}
+    for p in profils:
+        vs = videos(p, journal)
+        if vs: listes[p] = vs
+    notes = noter(listes, historique, journal)
+    sons = [{"url": v["url"], "id": v["id"], "profil": p, "potentiel": int(v["potentiel"]), "titre": str(v.get("titre") or "")[:120],
+             "duree": v.get("duree"), "date": v.get("date"), "vues": v.get("vues")} for p, vs in notes.items() for v in vs]
+    sons.sort(key=lambda x: -x["potentiel"])
+    import time as _t
+    journal(f"Éclaireur : {len(listes)}/{len(profils)} créateur(s) lus, {len(sons)} son(s) jamais utilisé(s) classé(s)")
+    return {"date": int(_t.time()), "profils_lus": len(listes), "sons": sons[:300]}
+
+
+def candidats_frais():
+    """Classement de l'éclaireur s'il est récent (sinon None)."""
+    import time as _t
+    if os.environ.get("ECLAIREUR", "1") == "0": return None
+    try: c = json.load(open(CANDIDATS, encoding="utf-8"))
+    except (OSError, ValueError): return None
+    if not isinstance(c, dict) or _t.time() - float(c.get("date") or 0) > FRAIS_H * 3600: return None
+    return c
+
+
+def choisir(historique, journal=print, graine=None, essais=4):
+    """Liens de vidéos à essayer (jamais déjà utilisées, durée raisonnable), les plus prometteuses d'abord : profils tirés au
+    hasard mais pondérés par les vues qu'ils nous rapportent (idée 21), et dans chaque profil les sons qui montent et à bon
+    potentiel d'abord (idées 3 et 4), avec un peu de hasard pour varier. On prend la première dont le son passe. Classement de
+    l'éclaireur d'abord (s'il est récent), sinon lecture des profils en direct."""
+    profils = liste()
+    if not profils: return []
+    rng = random.Random(graine); deja = deja_utilisees(historique)
+    pw = poids_profils(profils)
+    profils = sorted(profils, key=lambda p: -pw[p] * rng.random() ** 0.5)  # tirage pondéré (un bon profil sort plus souvent)
+    c = candidats_frais()
+    if c:
+        suivis = {p.lower() for p in profils}; bannis = interdits()
+        par = {}
+        for x in c.get("sons") or []:
+            p = str(x.get("profil") or "")
+            if p.lower() in suivis and p.lower() not in bannis and x.get("id") not in deja and x.get("url"):
+                par.setdefault(p.lower(), []).append(x)
+        ordre = [p for p in profils if p.lower() in par][:5]
+        out = []
+        for p in ordre:
+            vs = sorted(par[p.lower()], key=lambda x: -(float(x.get("potentiel") or 0) + rng.uniform(0, 25)))
+            out += [x["url"] for x in vs[:max(2, essais // len(ordre))]]
+            if len(out) >= essais: break
+        if len(out) >= min(essais, 2):
+            import time as _t
+            journal(f"Éclaireur : {len(out)} son(s) pris dans le classement d'il y a {int((_t.time() - float(c['date'])) // 60)} min "
+                    f"({len(ordre)} créateur(s))")
+            return out[:essais]
+        journal("Éclaireur : trop peu de sons dans le classement : lecture des profils en direct")
+    profils = [p for p in profils[:8] if not bio_refuse(p, journal)][:5]   # liste noire : bio qui interdit la reprise
+    if not profils: return []
+    notes = noter({p: videos(p, journal) for p in profils}, historique, journal)
+    out = []
+    for p in profils:
+        vs = notes.get(p) or []
         vs.sort(key=lambda v: -(v["potentiel"] + rng.uniform(0, 25)))
         journal(f"Profil TikTok @{p} (poids {pw[p]:.1f}) : {len(vs)} vidéo(s) jamais utilisée(s)" + (f", meilleur potentiel {vs[0]['potentiel']}/100" if vs else ""))
         out += [v["url"] for v in vs[:max(2, essais // len(profils))]]
@@ -340,3 +407,14 @@ def surveiller(journal=print, maintenant=None, lister=None):
         except Exception as _e: __import__("pannes").avale(_e)
     journal(f"Veille des profils : {sum(1 for a in nouveaux.values() if a['etat'] == 'ok')}/{len(nouveaux)} en forme")
     return E
+
+
+if __name__ == "__main__":
+    if "--eclairer" in sys.argv:                                           # robot « éclaireur » (eclaireur.yml)
+        try: hist = json.load(open(os.path.join(RACINE, "episodes", "historique.json"), encoding="utf-8"))
+        except (OSError, ValueError): hist = []
+        r = eclairer(hist)
+        if r["sons"] or r["profils_lus"]:
+            json.dump(r, open(CANDIDATS, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+            print(f"Éclaireur : classement enregistré ({len(r['sons'])} sons)")
+        else: print("Éclaireur : aucun créateur n'a répondu : l'ancien classement est gardé")

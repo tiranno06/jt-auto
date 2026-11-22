@@ -752,6 +752,24 @@
   en scène un dialogue ? sans Gemini : « non vérifiée », jamais en tête) ; puis comparaison avec notre chaîne et les concurrentes
   actuelles (`ressemblance` : créateurs repris en commun 60 % + hashtags en commun 40 %) ; episodes/concurrentes_proposees.json
   (8 au plus), site : chaque vérification détaillée, « ➕ » (ajoute à CHAINES_CONCURRENTES) / « 🚫 » (liste noire) ; CONCURRENCE=0.
+- **Robots à part (choix de l'auteur du 22 novembre 2026 : 1, 2, 3)** pour soulager le robot qui fabrique : **📦 réserve de sons**
+  (`pre_ecoute.py`, pre_ecoute.yml lancé par le garde toutes les 2 heures, heures paires à Paris, si aucun n'est en cours ; un 1er job
+  léger `--manque` regarde la réserve : pleine = aucune machine lourde) : RESERVE_SONS sons écoutés à l'avance (6 par défaut, 1 à 10 ;
+  STOCK_SONS encore lu s'il est plus grand), même sans vidéos automatiques ; toutes les fabrications, salves à la main comprises, prennent
+  dans la réserve et passent au dessin ; **🔭 éclaireur** (`profils_tiktok.eclairer` / `noter`, eclaireur.yml toutes les 3 heures, sans
+  rien écouter) : tous les créateurs suivis (20 au plus) lus, sons jamais utilisés notés (potentiel, calendrier, tendances, recette,
+  suites, déjà repris par une concurrente) -> episodes/sons_candidats.json ; `choisir` pioche dedans quand il a moins de 8 h
+  (`candidats_frais`, ECLAIREUR=0 pour couper), sinon lecture des profils en direct comme avant ; **🌆 contrôleur du soir**
+  (`moteur/controleur_soir.py`, controleur.yml vers 21 h) : vidéos TikTok du jour (et d'hier après 21 h) pas publiées, pas essais,
+  jamais contrôlées : son de la vidéo archivée réécouté (`verif_finale.voix_dessin` : réplique sur la mauvaise voix, homme / femme ;
+  `doublage.scinder_melangees` sur une copie : bulles mélangées) ; problème -> points ajoutés à "a_verifier" et « Refaire » compte
+  rendu lancé APRÈS l'enregistrement de l'historique (3 au plus : CONTROLE_SOIR_MAX ; historique "controle_soir" ; CONTROLEUR_SOIR=0).
+  Interrupteurs dans l'onglet TikTok, bloc « ⏰ Vidéos TikTok automatiques ». **Vidéo refaite = elle REMPLACE l'ancienne dans la liste**
+  (demande de l'auteur, pas de doublon ; `deuxieme_chance.remplacement`, pour tout « Refaire » et la deuxième chance) : l'ancienne est
+  retirée (sortie/.perdante -> supprimer.py), sauf si elle est déjà publiée sur TikTok (les deux restent) ; compte rendu automatique
+  moins sûr que l'ancienne -> c'est la nouvelle qui est retirée ; la nouvelle porte "remplace" et reprend la place « À publier » de
+  l'ancienne (la variable PUBLI_FILE n'est pas modifiable par le robot : `publication_auto.remplacant` et `remplacant` du site suivent la
+  chaîne ; la liste est réécrite propre au prochain clic).
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.

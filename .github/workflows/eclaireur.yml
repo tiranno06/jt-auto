@@ -1,0 +1,42 @@
+name: Robot éclaireur (classement des sons TikTok)
+# Choix de l'auteur du 22 novembre 2026 : toutes les 3 heures (lancé par le garde), une petite machine passe en revue tous les
+# créateurs suivis SANS rien écouter et classe leurs sons jamais utilisés (potentiel, tendances, déjà repris par une chaîne
+# concurrente) dans episodes/sons_candidats.json. La réserve de sons et les fabrications piochent dans ce classement
+# (moteur/profils_tiktok.py : eclairer, choisir). ECLAIREUR=0 pour couper.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: eclaireur
+  cancel-in-progress: false
+
+jobs:
+  eclaireur:
+    if: vars.ECLAIREUR != '0'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      PROFILS_TIKTOK: ${{ vars.PROFILS_TIKTOK }}
+      PROFILS_INTERDITS: ${{ vars.PROFILS_INTERDITS }}
+      CHAINES_CONCURRENTES: ${{ vars.CHAINES_CONCURRENTES }}
+      TIKTOK_COMPTE: ${{ vars.TIKTOK_COMPTE }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Classer les sons des créateurs
+        run: |
+          pip install -q -U "yt-dlp[default,curl-cffi]" || pip install -q -U yt-dlp
+          pip install -q numpy opencv-python-headless -c contraintes.txt
+          python -u moteur/profils_tiktok.py --eclairer
+      - name: Enregistrer
+        run: |
+          git config user.name "robot-jt"
+          git config user.email "robot-jt@users.noreply.github.com"
+          git add episodes/sons_candidats.json
+          git commit -m "Éclaireur : classement des sons" || echo "rien à enregistrer"
+          python moteur/fusion.py

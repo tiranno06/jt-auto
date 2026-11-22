@@ -71,13 +71,34 @@ jobs:
             gh workflow run supprimer.yml -R "$GITHUB_REPOSITORY" -f fichier=ESSAIS && echo "Ménage des essais lancé."
           fi
 
-      - name: Pré-écoute de la nuit (sons TikTok écoutés à l'avance, vers 2 h à Paris)
-        if: vars.PRE_ECOUTE != '0' && vars.FREQUENCE_TIKTOK != '' && vars.FREQUENCE_TIKTOK != '0'
+      - name: Robot « réserve de sons » (sons TikTok écoutés à l'avance, toutes les 2 heures)
+        if: vars.PRE_ECOUTE != '0'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if [ "$(TZ=Europe/Paris date +%H)" = "02" ] && [ "$(date -u +%M)" -lt 30 ]; then
-            gh workflow run pre_ecoute.yml -R "$GITHUB_REPOSITORY" && echo "Pré-écoute lancée."
+          # toutes les 2 heures (heures paires à Paris) : le workflow regarde d'abord si la réserve est pleine (machine légère)
+          if [ $(( 10#$(TZ=Europe/Paris date +%H) % 2 )) -eq 0 ] && [ "$(date -u +%M)" -lt 30 ]; then
+            EN_COURS="$(gh run list -R "$GITHUB_REPOSITORY" -w pre_ecoute.yml --limit 5 --json status -q '[.[] | select(.status != "completed")] | length' 2>/dev/null || echo 0)"
+            if [ "${EN_COURS:-0}" = "0" ]; then gh workflow run pre_ecoute.yml -R "$GITHUB_REPOSITORY" && echo "Réserve de sons : remplissage lancé."
+            else echo "Réserve de sons : déjà en cours."; fi
+          fi
+
+      - name: Robot « éclaireur » (classement des nouveaux sons des créateurs, toutes les 3 heures)
+        if: vars.ECLAIREUR != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ $(( 10#$(TZ=Europe/Paris date +%H) % 3 )) -eq 1 ] && [ "$(date -u +%M)" -lt 30 ]; then
+            gh workflow run eclaireur.yml -R "$GITHUB_REPOSITORY" && echo "Éclaireur lancé."
+          fi
+
+      - name: Robot « contrôleur du soir » (vidéos du jour revérifiées, refaites si besoin)
+        if: vars.CONTROLEUR_SOIR != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ "$(TZ=Europe/Paris date +%H)" = "21" ] && [ "$(date -u +%M)" -lt 30 ]; then
+            gh workflow run controleur.yml -R "$GITHUB_REPOSITORY" && echo "Contrôleur du soir lancé."
           fi
 
       - name: Publication automatique (une vidéo cochée par jour, à l'heure choisie dans l'onglet TikTok)

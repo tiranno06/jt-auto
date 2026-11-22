@@ -1,0 +1,49 @@
+name: Robot contrôleur du soir (vidéos du jour revérifiées)
+# Choix de l'auteur du 22 novembre 2026 : vers 21 h (lancé par le garde), les vidéos TikTok du jour pas encore publiées sont
+# réécoutées (bonne voix sur le bon personnage, homme / femme, bulles mélangées : moteur/controleur_soir.py) ; celles qui ont un
+# problème sont refaites toutes seules (3 au plus), la nouvelle version remplace l'ancienne dans la liste. CONTROLEUR_SOIR=0 pour couper.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write               # « Refaire » lancé (emission.yml)
+
+concurrency:
+  group: controleur-soir
+  cancel-in-progress: false
+
+jobs:
+  controleur:
+    if: vars.CONTROLEUR_SOIR != '0'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+      CONTROLEUR_SOIR: ${{ vars.CONTROLEUR_SOIR }}
+      CONTROLE_SOIR_MAX: ${{ vars.CONTROLE_SOIR_MAX }}
+      HAUTEUR: ${{ vars.HAUTEUR }}
+      VOIX_DESSIN: ${{ vars.VOIX_DESSIN }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Installer ffmpeg et numpy
+        run: |
+          timeout 240 sudo apt-get update -q && timeout 240 sudo apt-get install -y -q ffmpeg
+          pip install -q numpy -c contraintes.txt
+      - name: Réécouter les vidéos du jour
+        run: python -u moteur/controleur_soir.py
+      - name: Enregistrer puis refaire les vidéos à problème
+        run: |
+          git config user.name "robot-jt"
+          git config user.email "robot-jt@users.noreply.github.com"
+          git add episodes/historique.json
+          git commit -m "Contrôleur du soir" || echo "rien à enregistrer"
+          python moteur/fusion.py
+          if [ -s sortie/.a_refaire ]; then
+            while read -r F; do
+              [ -n "$F" ] && gh workflow run emission.yml --ref main -f refaire="$F|compte_rendu" && echo "Refaire lancé : $F"
+            done < sortie/.a_refaire
+          fi

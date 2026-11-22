@@ -243,7 +243,8 @@ class TestListe4_5_6_11(unittest.TestCase):
             self.assertEqual(DC.decider([h1, h2], h2, "u", "a.mp4"), ("supprimer", "a.mp4"))
             h3 = {"fichier": "c.mp4", "confiance": 10}
             self.assertEqual(DC.decider([h1, h3], h3, "u", "a.mp4"), ("supprimer", "c.mp4"))
-            os.environ["PUBLI_FILE"] = "a.mp4"; self.assertEqual(DC.decider([h1, h2], h2, "u", "a.mp4"), (None, ""))   # cochée : on garde les deux
+            os.environ["PUBLI_FILE"] = "a.mp4"; self.assertEqual(DC.decider([h1, h2], h2, "u", "a.mp4"), ("supprimer", "a.mp4"))   # cochée : remplacée (22 nov.)
+            self.assertEqual(h2.get("remplace"), "a.mp4")                    # la nouvelle reprend sa place « À publier »
             self.assertEqual(DC.decider([h2], dict(h2), "u")[0], None)       # assez sûre : rien
         finally:
             for k, v in anc.items():
@@ -423,7 +424,7 @@ class TestListe6Novembre(unittest.TestCase):
         finally: DP.LOCAL = anc; doublage.EVENEMENTS[:] = []
         env = dict(os.environ)
         try:
-            os.environ["HEURE_TIKTOK"] = "14:00 ; 21:30"; os.environ.pop("STOCK_SONS", None); self.assertEqual(P.stock_voulu(), 2)
+            os.environ["HEURE_TIKTOK"] = "14:00 ; 21:30"; os.environ.pop("STOCK_SONS", None); os.environ.pop("RESERVE_SONS", None); self.assertEqual(P.stock_voulu(), 6)   # réserve (22 nov.)
             os.environ["PRE_ECOUTE"] = "0"; self.assertFalse(P.actif())
         finally: os.environ.clear(); os.environ.update(env)
         g = open(os.path.join(ICI, "..", ".github", "workflows", "garde.yml"), encoding="utf-8").read()
