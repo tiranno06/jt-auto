@@ -6,7 +6,10 @@ fabriquée le matin a pu l'être avant une correction du robot) :
 3. bulles mélangées : une réplique dite par deux personnes (doublage.scinder_melangees, sur une copie).
 Une vidéo avec un problème est refaite toute seule (« Refaire » compte rendu : mêmes contrôles et corrections que le bouton « 🛠️ Corriger
 les problèmes signalés ») : 3 vidéos au plus par soir (CONTROLE_SOIR_MAX). La version refaite REMPLACE l'ancienne dans la liste
-(deuxieme_chance.remplacement). Chaque vidéo n'est contrôlée qu'une fois (historique "controle_soir"). CONTROLEUR_SOIR=0 pour couper."""
+(deuxieme_chance.remplacement). Chaque vidéo n'est contrôlée qu'une fois par VERSION des contrôles (historique "controle_soir" :
+"version") : quand les contrôles des voix sont améliorés (VERSION + 1), TOUTES les vidéos pas encore publiées sont revérifiées, les plus
+récentes d'abord (22 novembre : « Pire date amoureux », faite avant les contrôles de hauteur de voix, n'avait jamais été revérifiée).
+CONTROLE_SOIR_VIDEOS vidéos réécoutées par soir au plus (12). CONTROLEUR_SOIR=0 pour couper."""
 import copy, datetime, json, os, re, subprocess, sys, tempfile
 
 ICI = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, ICI)
@@ -24,18 +27,26 @@ def aujourdhui():
     return datetime.datetime.now(ZoneInfo("Europe/Paris")).date().isoformat()
 
 
+VERSION = 2                                                                # + 1 à chaque amélioration des contrôles des voix
+
+
+def nb_videos():
+    try: return max(1, int(os.environ.get("CONTROLE_SOIR_VIDEOS") or 12))
+    except ValueError: return 12
+
+
+def deja_vue(h):
+    c = h.get("controle_soir")
+    return isinstance(c, dict) and int(c.get("version") or 1) >= VERSION
+
+
 def candidats(historique, jour=None):
-    """Vidéos TikTok du jour (ou d'hier soir, après 21 h), pas publiées, pas des essais, jamais contrôlées le soir."""
-    jour = jour or aujourdhui()
-    veille = (datetime.date.fromisoformat(jour) - datetime.timedelta(days=1)).isoformat()
-    out = []
-    for h in historique:
-        f = str(h.get("fichier") or "")
-        if h.get("filiere") != "tiktok" or h.get("essai") or h.get("publie") is True or h.get("controle_soir") or not f: continue
-        m = re.match(r"(\d{4}-\d{2}-\d{2})_(\d{2})h", f)
-        d, hh = (m.group(1), int(m.group(2))) if m else (h.get("date"), 0)
-        if d == jour or (d == veille and hh >= 21): out.append(h)
-    return out
+    """Vidéos TikTok pas publiées, pas des essais, pas encore contrôlées avec la version actuelle des contrôles : celles du jour
+    d'abord, puis les plus récentes (CONTROLE_SOIR_VIDEOS au plus)."""
+    out = [h for h in historique if h.get("filiere") == "tiktok" and not h.get("essai") and h.get("publie") is not True
+           and h.get("fichier") and not deja_vue(h)]
+    out.sort(key=lambda h: str(h.get("fichier")), reverse=True)
+    return out[:nb_videos()]
 
 
 def sketch(fichier):
@@ -73,7 +84,7 @@ def lancer(fichier):
     """Noté dans sortie/.a_refaire : controleur.yml enregistre d'abord l'historique, PUIS lance « Refaire » (la fabrication lit
     l'historique à jour)."""
     os.makedirs(os.path.dirname(A_REFAIRE), exist_ok=True)
-    open(A_REFAIRE, "a", encoding="utf-8").write(fichier + "\n"); return True
+    open(A_REFAIRE, "a", encoding="utf-8").write(fichier + "\n"); return True   # (« |soir » ajouté par controleur.yml)
 
 
 def main(controler_=controler, telecharger_=telecharger, lancer_=lancer, jour=None):
@@ -84,19 +95,23 @@ def main(controler_=controler, telecharger_=telecharger, lancer_=lancer, jour=No
     refaites = 0
     for h in cands:
         sk = sketch(h["fichier"])
-        if not sk or not sk.get("doublage"): h["controle_soir"] = {"date": aujourdhui(), "resultat": "sketch non gardé"}; continue
+        if not sk or not sk.get("doublage"): h["controle_soir"] = {"date": aujourdhui(), "resultat": "sketch non gardé", "version": VERSION}; continue
         tmp = tempfile.mkdtemp(); v = telecharger_(h, tmp)
         if not v: print(f"  {h['fichier']} : vidéo introuvable dans les archives", flush=True); continue
         try: pts = controler_(v, sk)
         except Exception as e: print(f"  {h['fichier']} : contrôle impossible ({str(e)[:120]})", flush=True); continue
-        c = {"date": aujourdhui(), "problemes": len(pts)}
+        c = {"date": aujourdhui(), "problemes": len(pts), "version": VERSION}
         if pts:
             print(f"  ❌ {h['fichier']} « {h.get('titre_affiche') or h.get('titre')} » : " + " ; ".join(p["quoi"] for p in pts[:4]), flush=True)
             av = [p for p in h.get("a_verifier") or [] if isinstance(p, dict)]
             h["a_verifier"] = av + [dict(p, poste="contrôleur du soir · " + p.get("poste", "")) for p in pts if p["quoi"] not in {x.get("quoi") for x in av}]
-            if refaites < maxi() and lancer_(h["fichier"]):
+            if h.get("refait_par_soir"):                                   # déjà refaite par ce robot : jamais en boucle
+                print("     -> déjà refaite une fois par le contrôleur : laissée à l'auteur (badge « À vérifier »)", flush=True)
+            elif refaites < maxi() and lancer_(h["fichier"]):
                 refaites += 1; c["refaite"] = True; print("     -> refaite automatiquement (la nouvelle version remplacera celle-ci)", flush=True)
-            else: print("     -> pas refaite ce soir (limite atteinte) : badge « À vérifier » sur le site", flush=True)
+            else:
+                print("     -> pas refaite ce soir (limite atteinte) : reprise demain, badge « À vérifier » sur le site", flush=True)
+                continue                                                   # pas notée « contrôlée » : refaite un autre soir
         else: print(f"  ✅ {h['fichier']} : voix, homme / femme et bulles bons", flush=True)
         h["controle_soir"] = c
     json.dump(hist, open(HIST, "w", encoding="utf-8"), ensure_ascii=False, indent=1)

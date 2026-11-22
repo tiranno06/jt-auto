@@ -44,6 +44,6 @@ jobs:
           python moteur/fusion.py
           if [ -s sortie/.a_refaire ]; then
             while read -r F; do
-              [ -n "$F" ] && gh workflow run emission.yml --ref main -f refaire="$F|compte_rendu" && echo "Refaire lancé : $F"
+              [ -n "$F" ] && gh workflow run emission.yml --ref main -f refaire="$F|compte_rendu|soir" && echo "Refaire lancé : $F"
             done < sortie/.a_refaire
           fi

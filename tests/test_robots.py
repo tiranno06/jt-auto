@@ -62,10 +62,15 @@ class TestRobots(unittest.TestCase):
                 {"fichier": "2026-11-21_22h00_emission.mp4", "filiere": "tiktok", "publie": None},
                 {"fichier": "2026-11-20_10h00_emission.mp4", "filiere": "tiktok", "publie": None},
                 {"fichier": "2026-11-22_13h00_emission.mp4", "filiere": "tiktok", "controle_soir": {"date": "x"}}]
+        hist.append({"fichier": "2026-11-21_12h00_emission.mp4", "filiere": "tiktok", "controle_soir": {"version": C.VERSION}})
+        # toutes les non publiées, les plus récentes d'abord ; revues quand la version des contrôles change (22 novembre)
         self.assertEqual([h["fichier"] for h in C.candidats(hist, "2026-11-22")],
-                         ["2026-11-22_10h00_emission.mp4", "2026-11-21_22h00_emission.mp4"])
+                         ["2026-11-22_13h00_emission.mp4", "2026-11-22_10h00_emission.mp4", "2026-11-21_22h00_emission.mp4",
+                          "2026-11-20_10h00_emission.mp4"])
         D = json.load(open(os.path.join(RACINE, "tests", "banc_voix", "pire_date.json"), encoding="utf-8"))
         sk = {"repliques": D["repliques_robot"], "doublage": {"x": 1}, "decoupage": [{"repliques": list(range(len(D["repliques_robot"])))}],
-              "studio": {"personnages": {}}}
+              "studio": {"personnages": {"presentateur": {"genre_vu": "h"}, "invite": {"genre_vu": "f"}}}}   # (vu par Gemini, comme dans la vraie vidéo)
         pts = C.controler(os.path.join(RACINE, "tests", "banc_voix", "pire_date.opus"), sk)     # « Pire date » : voix mal rangées trouvées
         self.assertGreaterEqual(len(pts), 3); self.assertTrue(any("bulle" in p["quoi"] for p in pts))
+        w = open(os.path.join(RACINE, ".github", "workflows", "controleur.yml"), encoding="utf-8").read()
+        self.assertIn("|compte_rendu|soir", w)                                # jamais refaite en boucle (refait_par_soir)
