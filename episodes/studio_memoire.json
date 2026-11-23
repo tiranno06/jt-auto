@@ -7014,31 +7014,67 @@
  {
   "moment": "soir",
   "lieux": [
-   "bureau"
+   "salon"
   ],
   "source": "auteur+image",
-  "duree": 22.5,
+  "duree": 27.6,
   "plans": {
-   "large": 3
+   "large": 5
   },
   "mouvements": {
-   "fixe": 3
+   "fixe": 5
   },
   "costumes": {
-   "presentateur": "pull"
+   "presentateur": "tshirt",
+   "invite": "tshirt",
+   "envoyee": "tshirt"
   },
   "figurants": 0,
   "ambiances": [
-   "pluie",
    "poussiere"
   ],
-  "controle": "Humoriste 8.6/10 : 15.9 s L'expression faciale du personnage lors de 'Ça va être dur' est trop neutre. Une grimace ou un mouvement de tête plus marqué aurait aidé. | Réalisateur 10.0/10 :  | Directeur",
-  "fichier": "2026-11-23_19h03_emission.mp4",
+  "controle": "Humoriste 8.6/10 :  | Réalisateur 10.0/10 :  | Directeur artistique 9.6/10 :  | Ingénieur du son 9.8/10 :  | Spectateur TikTok 7.6/10 : ",
+  "fichier": "2026-11-23_18h43_emission.mp4",
   "cine": {
    "focus": false,
    "vertige": true,
    "tiers": true,
    "etalonnage": true,
+   "profondeur": false,
+   "grain": true,
+   "reflets": true,
+   "son": true
+  },
+  "cadence": "rapide"
+ },
+ {
+  "moment": "soir",
+  "lieux": [
+   "salon"
+  ],
+  "source": "auteur+image",
+  "duree": 73.6,
+  "plans": {
+   "large": 23
+  },
+  "mouvements": {
+   "fixe": 23
+  },
+  "costumes": {
+   "presentateur": "chemise",
+   "invite": "tshirt"
+  },
+  "figurants": 0,
+  "ambiances": [
+   "poussiere"
+  ],
+  "controle": "Humoriste 9.4/10 :  | Réalisateur 7.6/10 : 0.4 s Les personnages sont parfois mal alignés avec les bulles de texte, ce qui peut distraire. Par exemple, les sous-titres 'EST-CE QUE TU SERAIS' sont légè",
+  "fichier": "2026-11-23_19h30_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": true,
+   "tiers": true,
+   "etalonnage": false,
    "profondeur": true,
    "grain": true,
    "reflets": true,

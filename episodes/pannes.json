@@ -1,12 +1,12 @@
 {
  "IA gemini indisponible (gemini : aucun modèle disponible (N : [{": {
-  "n": 3,
+  "n": 4,
   "premiere": "2026-11-23",
   "derniere": "2026-11-23",
   "exemple": "IA gemini indisponible (gemini : aucun modèle disponible (503 : [{",
   "etape": "fiche de tournage",
   "jours": {
-   "2026-11-23": 3
+   "2026-11-23": 4
   }
  },
  "contrôles qui n«…»après l«…»original (image illisible) (note de confiance plafonnée)": {
@@ -30,10 +30,20 @@
   }
  },
  "contrôles qui n«…»audio (Gemini n'a pas répondu) (note de confiance plafonnée)": {
-  "n": 1,
+  "n": 2,
   "premiere": "2026-11-23",
   "derniere": "2026-11-23",
   "exemple": "contrôles qui n'ont pas pu se faire : fidélité à l'audio (Gemini n'a pas répondu) (note de confiance plafonnée)",
+  "etape": "fiche de tournage",
+  "jours": {
+   "2026-11-23": 2
+  }
+ },
+ "erreur avalée dans cartoon.pose : ValueError «…»": {
+  "n": 1,
+  "premiere": "2026-11-23",
+  "derniere": "2026-11-23",
+  "exemple": "erreur avalée dans cartoon.pose : ValueError « The truth value of an array with more than one element is ambiguous. Use a.any() or a.all() »",
   "etape": "fiche de tournage",
   "jours": {
    "2026-11-23": 1
