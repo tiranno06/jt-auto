@@ -458,8 +458,9 @@
   marche aussi sur les dessins animés ; le téléphone caché par la main à l'oreille n'est pas vu. Cache des modèles : hf-ecoute-v3.
   **Nom du compte** (9) : le petit logo existait mais il était caché par la barre du haut de l'appli TikTok (y = 118) et disait
   « Petits.Dramas » : il affiche maintenant le compte (`marque.compte`, TIKTOK_COMPTE, sinon @petitsdramas), à y = 215 (FIL_Y), et
-  n'apparaît qu'après le titre (jamais par-dessus). **Bouton « + Abonne-toi »** (demande de l'auteur du 23 novembre) : petit bouton rouge façon
-  TikTok juste sous le nom (`marque.filigrane`, même apparition que le logo ; texte = réglage ABONNE_HAUT, « 0 » pour l'enlever).
+  n'apparaît qu'après le titre (jamais par-dessus). **Bouton « 🔔 Abonne-toi pour la suite »** (demande de l'auteur du 23 novembre) : petit bouton rouge façon
+  TikTok juste sous le nom (`marque.filigrane`, même apparition que le logo ; texte = réglage ABONNE_HAUT, « 0 » pour l'enlever ; la cloche
+  est dessinée : la police de la chaîne n'a pas d'emoji).
 - **Liste du 11 novembre 2026, 2e partie (choix de l'auteur 7, 8, 9, 14, 15, 20)** : **hashtags à risque** (7, `legende.RISQUES`,
   `hashtag_sur`, `sans_risque` ; contenu adulte, drogue, violence, automutilation, « follow4follow »… ; mots courts comparés en entier :
   « charmeur » ou « armée » restent ; HASHTAGS_INTERDITS pour en ajouter ; aussi retirés des anciennes descriptions à l'envoi) ;
@@ -777,6 +778,14 @@
   (16, `moteur/veille_robots.py` dans stats.yml, VEILLE_ROBOTS=0) : garde 2 h, réserve 6 h, éclaireur 8 h, contrôleur 27 h sans passage
   (compté depuis la dernière modification du workflow) ou 2 échecs de suite -> notification, une fois par jour et par robot
   (episodes/veille_robots.json) ; un robot coupé dans les réglages n'est pas surveillé.
+- **Registre des pannes relu le 23 novembre 2026 (demande de l'auteur : régler définitivement)** : les 12 lignes dataient du 21 novembre et
+  étaient déjà réglées le 22 (« Juste le décor » sans son, « SILENCES », reprise « NoneType », essais de voix) ; registre vidé ; en-têtes
+  « Traceback… » / « During handling… » plus comptés (`pannes.BRUIT` : la vraie erreur a sa ligne). Journaux des nouveaux robots relus
+  (réserve de sons : 6 sons prêts, remplie la nuit puis « pleine » ; éclaireur, statistiques, garde : tous réussis). **Gaspillages réglés** :
+  modèles Gemini morts (« gemini-2.5-flash », « -lite » : 404) réessayés par CHAQUE machine -> mémoire de 7 jours
+  (`reseau.MORTS_FICHIER` = episodes/gemini_morts.json, `_morts_lus`, fusionné par `fusion._union_dates`) ; la réserve de sons essayait
+  Claude (« crédit trop bas ») et ElevenLabs à chaque son -> elle relit episodes/credits.json (CLAUDE_INDISPONIBLE, ELEVENLABS=0) ;
+  l'éclaireur réessaie une fois un créateur refusé par TikTok (403 passager : @vincedessine).
 - **Liste du 21 novembre 2026 au soir (choix de l'auteur 2, 3, 4, 5, 6, 8, 10, 11, 13, 14, 16, 22, 24)** : **sous-titres dans la zone
   visible de TikTok** (2) : ils étaient à 1 700 px, là où TikTok affiche pseudo, description et musique ; maintenant `cartoon.CAP_Y`
   1 380 px (sur les jambes, sous les têtes ; réglage SOUS_TITRES_Y) et `CAP_X` 470 (loin des boutons de droite), largeur

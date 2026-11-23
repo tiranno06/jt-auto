@@ -23,7 +23,8 @@ BRUIT = re.compile(r"^([IWE]\d{4} |\[transformers\]|\[ ?WARN|WARNING:|INFO:|To e
                    r"\* fix torchcodec|\* use audio preloaded|Could not load this library|torchcodec is not|.*onnxruntime|.*absl::|.*InitGoogle|"
                    r"Loading weights|scène reconstituée|Jury qualité|- à \d|Manque par rapport|Points? forts?|Humoriste|Réalisateur|"
                    r"Directeur artistique|Spectateur|Ingé son :|\d{4}-\d\d-\d\d \d\d:\d\d:\d\d,\d+ \[WARNING\]|"
-                   r"Tendances :|Idée \d+ :|Remarque comprise|Sujet :)", re.I)    # (21 novembre) recopies de textes : « cargo échoué »…
+                   r"Tendances :|Idée \d+ :|Remarque comprise|Sujet :|Traceback \(most recent call last\)|"
+                   r"During handling of the above exception)", re.I)   # (23 novembre) en-têtes d'erreur : la vraie erreur a sa ligne    # (21 novembre) recopies de textes : « cargo échoué »…
 
 
 def forme(ligne):

@@ -160,6 +160,11 @@ def remplir(journal=print):
     """Travail de la nuit : complète le stock jusqu'à stock_voulu() sons prêts. Renvoie le nombre de sons ajoutés."""
     if not actif(): journal("Pré-écoute coupée (réglage PRE_ECOUTE=0)"); return 0
     import profils_tiktok, doublage, locuteurs
+    try:                                                                   # crédits déjà connus (episodes/credits.json, dernière fabrication) :
+        cr = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "episodes", "credits.json"), encoding="utf-8"))
+        if cr.get("claude") in ("secours", "absent"): os.environ["CLAUDE_INDISPONIBLE"] = "1"   # plus d'essai Claude « crédit trop bas »
+        if cr.get("elevenlabs") in ("epuise", "absent"): os.environ["ELEVENLABS"] = "0"         # à chaque son (registre du 23 novembre)
+    except (OSError, ValueError, AttributeError): pass
     hist = []
     try: hist = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "episodes", "historique.json"), encoding="utf-8"))
     except (OSError, ValueError): pass

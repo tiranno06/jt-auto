@@ -102,14 +102,36 @@ def gemini_disponibles(voulus):
     return tuple(flash[:3]) or tuple(voulus)
 
 
-GEMINI_MORTS = set()                                                       # modèles qui répondent 404 pendant cette fabrication
+GEMINI_MORTS = set()                                                       # modèles qui répondent 404
+MORTS_FICHIER = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "episodes", "gemini_morts.json")
+MORTS_JOURS = 7
+
+
+def _morts_lus():
+    """Modèles morts notés ces 7 derniers jours (registre des pannes du 23 novembre : la mémoire ne durait qu'une fabrication, chaque
+    machine — réserve de sons, fabrication, contrôle — rappelait « gemini-2.5-flash » et « -lite » et perdait un essai)."""
+    import datetime
+    try: d = json.load(open(MORTS_FICHIER, encoding="utf-8"))
+    except (OSError, ValueError): return {}
+    if not isinstance(d, dict): return {}
+    lim = (datetime.date.today() - datetime.timedelta(days=MORTS_JOURS)).isoformat()
+    return {m: j for m, j in d.items() if str(j) >= lim}
+
+
+GEMINI_MORTS.update(_morts_lus())
 
 
 def gemini_mort(modele, err):
     """Registre des pannes du 21 novembre : « gemini-2.5-flash » est encore dans la liste de Google mais répond 404 à chaque appel
-    (9 fois en 2 jours, une écoute ratée à chaque fois). Un modèle qui répond 404 n'est plus appelé jusqu'à la fin de la fabrication."""
+    (9 fois en 2 jours, une écoute ratée à chaque fois). Un modèle qui répond 404 n'est plus appelé pendant 7 jours
+    (episodes/gemini_morts.json, gardé avec l'historique ; un modèle revenu est réessayé ensuite)."""
     if "404" in str(err or "") and modele not in GEMINI_MORTS:
-        GEMINI_MORTS.add(modele); print(f"  Gemini : {modele} n'existe plus (404), plus appelé pour cette vidéo", flush=True)
+        GEMINI_MORTS.add(modele); print(f"  Gemini : {modele} n'existe plus (404), plus appelé pendant {MORTS_JOURS} jours", flush=True)
+        try:
+            import datetime
+            d = _morts_lus(); d[modele] = datetime.date.today().isoformat()
+            json.dump(d, open(MORTS_FICHIER, "w", encoding="utf-8"), indent=1, sort_keys=True)
+        except OSError: pass
 
 
 EPUISE = (" 401", " 403", "quota", "exhausted", "billing", "per day", "(tpd)", "(rpd)")   # fournisseur à court pour la journée

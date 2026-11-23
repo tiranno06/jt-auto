@@ -42,7 +42,17 @@ def _pannes(eux, nous, base):
     return pannes.fusionner(eux, nous, base)
 
 
-FUSIONNES = {"decors/index.tsv": _lignes, "decors/utilises.tsv": _lignes, "decors/compteur.json": _compteur, "episodes/pannes.json": _pannes}
+def _union_dates(eux, nous, base):
+    """episodes/gemini_morts.json : {modèle: date} des deux côtés, la date la plus récente gardée."""
+    def lire(b):
+        try: d = json.loads(b or b"{}"); return d if isinstance(d, dict) else {}
+        except ValueError: return {}
+    e, n = lire(eux), lire(nous)
+    return json.dumps({m: max(str(e.get(m, "")), str(n.get(m, ""))) for m in set(e) | set(n)}, indent=1, sort_keys=True).encode()
+
+
+FUSIONNES = {"decors/index.tsv": _lignes, "decors/utilises.tsv": _lignes, "decors/compteur.json": _compteur, "episodes/pannes.json": _pannes,
+             "episodes/gemini_morts.json": _union_dates}
 
 
 def rejouer(commande, message):
