@@ -1,80 +1,83 @@
-Relance : reprise depuis le point de sauvegarde c44929106640_v1 (0 bloc(s) d'images déjà dessinés)
-Traceback (most recent call last):
-  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 837, in <module>
-    try: main()
-         ^^^^^^
-  File "/home/runner/work/jt-auto/jt-auto/moteur/principal.py", line 249, in main
-    os.environ["CHAINE"] = CHAINE_ORIG                                 # « 2/3 » d'une chaîne de vidéos TikTok, sinon vide
-    ~~~~~~~~~~^^^^^^^^^^
-  File "<frozen os>", line 720, in __setitem__
-  File "<frozen os>", line 794, in encode
-TypeError: str expected, not NoneType
-enh genre f f0   199 {'sim': 1.0, 'blanc': 0.06, 'debit': 0.71, 'mos': 2.59, 'expr': 4.1} refusée score 6.64
-  kyutai     cml-tts/fr/10179_11051_000005-0001_enh genre f f0   302 {'sim': 1.0, 'blanc': 0.08, 'debit': 0.82, 'mos': 2.47, 'expr': 2.6} refusée score 6.13
-  kyutai     cml-tts/fr/12080_11650_000047-0001_enh genre f f0   242 {'sim': 1.0, 'blanc': 0.08, 'debit': 0.85, 'mos': 2.53, 'expr': 2.7} refusée score 6.29
-  kyutai     cml-tts/fr/12205_11650_000004-0002_enh genre f f0   186 {'sim': 1.0, 'blanc': 0.12, 'debit': 0.74, 'mos': 3.2, 'expr': 3.1} OK score 7.27
-  kyutai     cml-tts/fr/12977_10625_000037-0001_enh genre f f0   240 {'sim': 1.0, 'blanc': 0.08, 'debit': 0.78, 'mos': 2.73, 'expr': 3.5} OK score 6.76
-  kyutai     cml-tts/fr/1406_1028_000009-0003_enhan genre h f0   105 {'sim': 1.0, 'blanc': 0.04, 'debit': 0.78, 'mos': 3.09, 'expr': 3.8} OK score 7.43
-  kyutai     cml-tts/fr/1591_1028_000108-0004_enhan genre f f0   220 {'sim': 1.0, 'blanc': 0.12, 'debit': 0.71, 'mos': 2.71, 'expr': 2.6} OK score 6.33
-  kyutai     cml-tts/fr/1770_1028_000036-0002_enhan genre h f0   124 {'sim': 1.0, 'blanc': 0.06, 'debit': 0.82, 'mos': 2.28, 'expr': 4.4} refusée score 6.32
-  kyutai     cml-tts/fr/2114_1656_000053-0001_enhan genre h f0   129 {'sim': 1.0, 'blanc': 0.12, 'debit': 0.84, 'mos': 2.95, 'expr': 3.8} OK score 7.27
-  kyutai     cml-tts/fr/2154_2576_000020-0003_enhan genre f f0   185 {'sim': 1.0, 'blanc': 0.34, 'debit': 0.97, 'mos': 3.04, 'expr': 3.4} OK score 7.43
-  kyutai     cml-tts/fr/2216_1745_000007-0001_enhan genre h f0   122 {'sim': 0.97, 'blanc': 0.0, 'debit': 0.86, 'mos': 3.04, 'expr': 4.8} OK score 7.39
-  kyutai     cml-tts/fr/2223_1745_000009-0002_enhan genre h f0   121 {'sim': 1.0, 'blanc': 0.28, 'debit': 0.92, 'mos': 2.67, 'expr': 3.4} OK score 6.80
-  kyutai     cml-tts/fr/2465_1943_000152-0002_enhan genre f f0   202 {'sim': 1.0, 'blanc': 0.08, 'debit': 0.77, 'mos': 3.04, 'expr': 2.2} OK score 6.76
-  kyutai     cml-tts/fr/296_1028_000022-0001_enhanc genre h f0   138 {'sim': 1.0, 'blanc': 0.06, 'debit': 0.88, 'mos': 3.35, 'expr': 3.2} OK score 7.73
-  kyutai     cml-tts/fr/3267_1902_000075-0001_enhan genre f f0   267 {'sim': 1.0, 'blanc': 0.0, 'debit': 0.76, 'mos': 2.96, 'expr': 3.1} OK score 6.94
-  chatterbox presentateur                           genre h f0   142 {'sim': 1.0, 'blanc': 0.06, 'debit': 0.81, 'mos': 2.63, 'expr': 5.5} OK score 6.13
-  chatterbox invite                                 genre h f0    89 {'sim': 1.0, 'blanc': 0.06, 'debit': 0.67, 'mos': 2.44, 'expr': 10.7} refusée score 5.66
-  chatterbox envoyee                                genre f f0   208 {'sim': 1.0, 'blanc': 0.16, 'debit': 0.7, 'mos': 1.95, 'expr': 3.8} refusée score 4.89
-  -> presentateur : kyutai:cml-tts/fr/296_1028_000022-0001_enhanced.wav, kyutai:cml-tts/fr/1406_1028_000009-0003_enhanced.wav, kyutai:cml-tts/fr/2216_1745_000007-0001_enhanced.wav
-  -> invite : kyutai:cml-tts/fr/1406_1028_000009-0003_enhanced.wav, kyutai:cml-tts/fr/2216_1745_000007-0001_enhanced.wav, kyutai:cml-tts/fr/2114_1656_000053-0001_enhanced.wav
-  -> envoyee : kyutai:cml-tts/fr/2154_2576_000020-0003_enhanced.wav, kyutai:cml-tts/fr/12205_11650_000004-0002_enhanced.wav, kyutai:cml-tts/fr/3267_1902_000075-0001_enhanced.wav
-  voix sur mesure des personnages en remplaçantes
-  voix 1 (invite, kyutai:cml-tts/fr/1406_1028_000009-00, prise 1) {'sim': 1.0, 'blanc': 0, 'debit': 0.56} OK
-  voix 3 (invite, kyutai:cml-tts/fr/1406_1028_000009-00, prise 1) {'sim': 0.98, 'blanc': 0.24, 'debit': 0.9, 'mos': 2.82} OK
-  voix 6 (invite, kyutai:cml-tts/fr/1406_1028_000009-00, prise 1) {'sim': 1.0, 'blanc': 0, 'debit': 1.25, 'mos': 2.12} refaite
-  voix 8 (invite, kyutai:cml-tts/fr/1406_1028_000009-00, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.92, 'mos': 2.75} OK
-  voix 10 (invite, kyutai:cml-tts/fr/1406_1028_000009-00, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.79, 'mos': 3.12} OK
-  voix 12 (invite, kyutai:cml-tts/fr/1406_1028_000009-00, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.31, 'mos': 2.82} OK
-  voix 14 (invite, kyutai:cml-tts/fr/1406_1028_000009-00, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.05, 'mos': 2.89} OK
-  voix 16 (invite, kyutai:cml-tts/fr/1406_1028_000009-00, prise 1) {'sim': 0.97, 'blanc': 0.0, 'debit': 1.06, 'mos': 3.03} OK
-  voix 18 (invite, kyutai:cml-tts/fr/1406_1028_000009-00, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.78, 'mos': 3.34} OK
-  voix 20 (invite, kyutai:cml-tts/fr/1406_1028_000009-00, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.76, 'mos': 2.93} OK
-  voix 22 (invite, kyutai:cml-tts/fr/1406_1028_000009-00, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.11, 'mos': 3.25} OK
-  voix 24 (invite, kyutai:cml-tts/fr/1406_1028_000009-00, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.83, 'mos': 3.64} OK
-  voix 26 (invite, kyutai:cml-tts/fr/1406_1028_000009-00, prise 1) {'sim': 0.95, 'blanc': 0.0, 'debit': 0.7, 'mos': 2.96} OK
-  voix 28 (invite, kyutai:cml-tts/fr/1406_1028_000009-00, prise 1) {'sim': 1.0, 'blanc': 0, 'debit': 0.87, 'mos': 1.63} refaite
-  voix 30 (invite, kyutai:cml-tts/fr/1406_1028_000009-00, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.84, 'mos': 2.97} OK
-  voix 32 (invite, kyutai:cml-tts/fr/1406_1028_000009-00, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.03, 'mos': 3.06} OK
-  voix 6 (invite, kyutai:cml-tts/fr/1406_1028_000009-00, prise 2) {'sim': 1.0, 'blanc': 0, 'debit': 1.08, 'mos': 2.96} OK
-  voix 28 (invite, kyutai:cml-tts/fr/1406_1028_000009-00, prise 2) {'sim': 1.0, 'blanc': 0, 'debit': 0.58} OK
-  voix 0 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.91, 'mos': 3.18} OK
-  voix 2 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0.04, 'debit': 0.91, 'mos': 3.31} OK
-  voix 4 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0, 'debit': 1.38, 'mos': 2.97} OK
-  voix 5 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.97, 'mos': 2.78} OK
-  voix 7 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.82, 'mos': 2.63} OK
-  voix 9 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.93, 'mos': 3.48} OK
-  voix 11 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.96, 'mos': 3.53} OK
-  voix 13 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.77, 'mos': 3.04} OK
-  voix 15 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.97, 'mos': 3.45} OK
-  voix 17 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.82, 'mos': 3.55} OK
-  voix 19 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.88, 'mos': 3.33} OK
-  voix 21 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.18, 'mos': 3.49} OK
-  voix 23 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.92, 'mos': 3.75} OK
-  voix 25 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.18, 'mos': 3.47} OK
-  voix 27 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.85, 'mos': 2.49} refaite
-  voix 29 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.82, 'mos': 3.23} OK
-  voix 31 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.01, 'mos': 2.59} refaite
-  voix 27 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 2) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.95, 'mos': 3.79} OK
-  voix 31 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 2) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.8, 'mos': 3.76} OK
-Voix : Kyutai TTS (CC BY 4.0), voix CML-TTS (CC BY 4.0)
-  personne muette en plus non dessinée : 2 personne(s) à l'image dans l'original, 2 qui parlent
-  décor semi-réaliste 0 : aucun sol libre pour poser les pieds, décor dessiné : [semi] cozy rustic French bistro with dark wooden booths and
-  personne muette en plus non dessinée : 2 personne(s) à l'image dans l'original, 2 qui parlent
-  personne muette en plus non dessinée : 2 personne(s) à l'image dans l'original, 2 qui parlent
-montage : 1 plans (0.0:large>pre/coupe)
+Modal : 15.63 $ dépensés ce mois-ci (plafond 30 $)
+Casting déjà fait.
+Type de vidéo : gag éclair (~15 s)
+Crédits au départ : Claude secours, Mistral ok, Gemini ok, Groq ok, OpenRouter ok, IA Modal ok, ElevenLabs epuise — IA utilisée : mistral
+Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @motiontoonz, @same_same53, @charly.bse, @kodanimation, @vignianimation, @vincedessine, @aguerin30, @zequoiza, @jayzocc, @brutuslerobuste, @jawedyoussef
+Réserve de sons : son déjà écouté pris dans la réserve (https://www.tiktok.com/@zequoiza/video/7708869066873654546) : on passe directement à la suite
+Chaîne : vidéo 2/10 lancée
+  réseau : erreur 503 passagère, nouvel essai dans 2 s
+  fiche de tournage : Gemini gemini-flash-latest n'a pas répondu (HTTP Error 503: Service Unavailable)
+  Gemini : gemini-2.5-flash n'existe plus (404), plus appelé pendant 7 jours
+  fiche de tournage : Gemini gemini-2.5-flash n'a pas répondu (HTTP Error 404: Not Found)
+  réseau : erreur 503 passagère, nouvel essai dans 2 s
+  fiche de tournage : Gemini gemini-flash-lite-latest n'a pas répondu (HTTP Error 503: Service Unavailable)
+  Gemini : gemini-2.5-flash-lite n'existe plus (404), plus appelé pendant 7 jours
+  fiche de tournage : Gemini gemini-2.5-flash-lite n'a pas répondu (HTTP Error 404: Not Found)
+  fiche de tournage écrite (IA de texte sur le dialogue) : salon (cozy living room with a slightly messy coffee tabl), soir, temps normal, ambiance joie, niveau modeste, bruits entendus : crying, laughter
+  [équipe · fiche de tournage] ✔ contrôle 1 : règles (cohérence avec ce qui est dit) : décor : — -> birthday cake and balloons (cité dans le dialogue ou entendu); réplique 6 signe : veine -> — (pas cohérent avec l'émotion « panique »); réplique 7 signe : etoiles -> — (pas cohé (corrigé)
+    correction : décor : — -> birthday cake and balloons (cité dans le dialogue ou entendu)
+    correction : réplique 6 signe : veine -> — (pas cohérent avec l'émotion « panique »)
+    correction : réplique 7 signe : etoiles -> — (pas cohérent avec l'émotion « neutre »)
+    correction : réplique 13 signe : etoiles -> — (pas cohérent avec l'émotion « neutre »)
+    correction : réplique 15 signe : veine -> — (pas cohérent avec l'émotion « panique »)
+    correction : panneaux : Joyeux Anniversaire -> — (pas d'enseigne dans « salon »)
+  [équipe · fiche de tournage] ✔ contrôle 2 : 2e IA (autre fournisseur) : repliques.1.emotion : gene -> neutre (Le présentateur dit simplement « Merci. », ce qui exprime de la reconnaissance, pas de la gêne.); repliques.9.emotion : joie -> neutre (Le mot « Plus. » (corrigé)
+    correction : repliques.1.emotion : gene -> neutre (Le présentateur dit simplement « Merci. », ce qui exprime de la reconnaissance, pas de la gêne.)
+    correction : repliques.9.emotion : joie -> neutre (Le mot « Plus. » est une simple affirmation, il ne correspond pas à une émotion de joie.)
+  [équipe · fiche de tournage] ✔ contrôle 3 : image de l'original, puis règles : décor : — -> birthday cake and balloons (cité dans le dialogue ou entendu) (corrigé)
+    correction : décor : — -> birthday cake and balloons (cité dans le dialogue ou entendu)
+  sous-titres anglais : 17 réplique(s) traduite(s)
+Sketch : « VIEILLIR À 30 ANS », 17 répliques
+Loading weights:   0%|          | 0/978 [00:00<?, ?it/s]Loading weights:  40%|███▉      | 387/978 [00:00<00:00, 3865.56it/s]Loading weights:  79%|███████▉  | 774/978 [00:00<00:00, 3801.27it/s]Loading weights: 100%|██████████| 978/978 [00:00<00:00, 3795.89it/s]
+  Grounding DINO : 24 images regardées, jusqu'à 1 personne(s) ensemble
+  décor semi-réaliste 0 (cadré ×1.50, pieds au sol) : [semi] small modest cozy living room with a slightly messy c
+Downloading data from https://github.com/ina-foss/inaSpeechSegmenter/releases/download/models/keras_speech_music_noise_cnn.hdf5
+[1m      0/3244808[0m [37m━━━━━━━━━━━━━━━━━━━━[0m [1m0s[0m 0s/step[1m3244808/3244808[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 0us/step
+/home/runner/venv/lib/python3.12/site-packages/keras/src/layers/reshaping/reshape.py:39: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
+  super().__init__(**kwargs)
+Downloading data from https://github.com/ina-foss/inaSpeechSegmenter/releases/download/models/keras_male_female_cnn.hdf5
+[1m      0/6040200[0m [37m━━━━━━━━━━━━━━━━━━━━[0m [1m0s[0m 0s/step[1m6040200/6040200[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 0us/step
+montage : 1 plans (0.0:large>inv/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-studio : jour, lieux ['restaurant'], tenues presentateur=tshirt, invite=tshirt, 0 figurant(s), ambiances ['vapeur'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 68.4 s, 33 répliques, 1 scène(s), personnages ['presentateur', 'invite']
-Pré-jury impossible ([Errno 2] No such file or directory: '/tmp/tmp6y66xe7n/piste.wav')
+studio : soir, lieux ['salon'], tenues invite=tshirt, presentateur=chemise, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 38.6 s, 17 répliques, 1 scène(s), personnages ['invite', 'presentateur']
+montage : 1 plans (0.0:large>inv/coupe)
+style croquis : décors passés à l'encre et à l'aquarelle
+studio : soir, lieux ['salon'], tenues invite=tshirt, presentateur=chemise, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 38.6 s, 17 répliques, 1 scène(s), personnages ['invite', 'presentateur']
+  dessin partagé : 1 machine(s) d'aide + celle-ci (2 morceaux de ~1158 images)
+  morceau 1158–2316 reçu d'une machine d'aide
+  dessin partagé terminé en 8.4 min
+Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
+  IA gemini indisponible (gemini : aucun modèle disponible (503 : [{
+  "error": {
+    "code": 503,
+    "message": "This model is currently experie) : on passe à la suivante
+Jury : 12 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
+Jury qualité (ia) : 8.8/10 — Humoriste 9.4/10 :  | Réalisateur 7.6/10 : 38 s L'image finale manque d'un élément visuel fort pour conclure la vidéo de manière mémorable. | Directeur artistique 8.8/10 : 0 s Les personnages ont des traits et des proportions cohérents avec le style dessiné, mais les expressions pourraient être encore plus exagérées pour renforcer le côté humoristique.; 16 s Le décor du salon est cohérent, mais certains détails (comme des objets ou des accessoires) pourraient renforcer l'ambiance ou le gag (ex. : un miroir pour refléter les cheveux gris). | Ingénieur du son 9.4/10 :  | Spectateur TikTok 8.4/10 : 
+Manque par rapport à la vidéo d'origine : Les expressions faciales plus exagérées des personnages dans l'original (ex. : yeux écarquillés, grimaces). ; Les réactions physiques plus marquées (ex. : gestes des mains, mouvements du corps). ; Les bruitages ou effets sonores pour renforcer les répliques (ex. : sons de douleur, rires).
+fin en boucle : la dernière image se raccorde à la première (0.35 s de fondu)
+  [vidéo finie · synchro] ✔ bouches du bon personnage
+  [vidéo finie · bouches] ✔ bouche immobile quand le personnage se tait
+  [vidéo finie · technique] ✔ sauts, clignotements, personnages (0 remarque(s))
+  transcription Groq (Whisper, gratuit) : 65 mots
+  karaoké contrôlé à l'oreille : 50 mots, écart médian 0.09 s
+  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 86 %)
+  [vidéo finie · contrôle IA] 0 remarque(s)
+  [vidéo finie · fidélité à l'audio] ✘ Gemini a regardé et écouté la vidéo finie : 1 écart(s)
+  [vidéo finie · voix et dessin] ✔ chaque réplique sur la bonne voix, homme / femme d'après la voix
+  [vidéo finie · attribution] ✘ qui dit chaque phrase, comparé à l'image de l'original : l'image de l'original montre l'autre personne parler pendant 44 % des phrases (répliques 1, 3, 6, 10, 13, 14)
+Contrôle de la vidéo finie : 2 point(s) à vérifier — 0.0 s Il n'y a aucun gâteau d'anniversaire ou de ballons visibles  ; 0.0 s l'image de l'original montre l'autre personne parler pendant
+Compte rendu (tour 1, confiance 76/100) : corrections demandées au robot :
+- à 0.0 s : Il n'y a aucun gâteau d'anniversaire ou de ballons visibles dans la pièce alors qu'ils sont mentionnés dans la fiche.
+- à 38.0 s : L'image finale manque d'un élément visuel fort pour conclure la vidéo de manière mémorable.
+Remarque comprise : L'auteur signale l'absence de gâteau d'anniversaire et de ballons au tout début (0 s) et un manque d'élément visuel fort à la fin (38 s).
+Remarque de l'auteur : 0 réplique(s) à rendre à un autre personnage, 2 correction(s) : lieu, lieu
+Compte rendu : rien que le robot sache corriger lui-même
+Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, groq = ok, ia = mistral ×3, groq ×2, gemini ×2, appels = {'mistral': 3, 'groq': 2, 'gemini': 2}, epuisees = [], quota = {'groq': {'reste_jour': 999, 'limite_jour': 1000}}, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 27951, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 317, 'total_usd': 0.098, 'modal_mesure_usd': 0.15}
+⏱️ Étapes plus lentes que d'habitude : Contrôle de la vidéo finie 5 min (d'habitude 1 min)
+⏱️ Temps par étape : Installation de la machine 2.0 min, Démarrage du robot 0.3 min, Écoute du son TikTok 0.9 min, Décors 5.3 min, Dessin des images 9.8 min, Contrôle qualité par le jury 3.2 min, Contrôle de la vidéo finie 5.2 min, Corrections du compte rendu 0.4 min
+Quota de l'API GitHub : 4847 appels restants
+OK : sortie/2026-11-23_18h34_emission.mp4 (39 s)
