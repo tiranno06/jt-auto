@@ -72,4 +72,4 @@ class FauxClaude:
 import decors as _decors  # noqa: E402
 _decors.UTILISES = os.path.join(tempfile.mkdtemp(), "utilises.tsv")
 import reseau as _reseau  # noqa: E402
-_reseau.MORTS_FICHIER = os.path.join(tempfile.mkdtemp(), "gemini_morts.json")   # les tests ne notent pas de modèle Gemini mort dans le dépôt   # les tests ne notent pas de décors « montrés » dans le dépôt
+_reseau.MORTS_FICHIER = os.path.join(tempfile.mkdtemp(), "gemini_morts.json"); _reseau.GEMINI_MORTS.clear()   # (ni ceux notés par les robots)   # les tests ne notent pas de modèle Gemini mort dans le dépôt   # les tests ne notent pas de décors « montrés » dans le dépôt

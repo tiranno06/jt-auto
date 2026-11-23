@@ -20,7 +20,50 @@ class _Modeles:
 
 
 MODELES = _Modeles()
-DERNIER = {}                                                               # dernière analyse (mise en scène, espèces)
+DERNIER = {}
+PASSAGERES = ("503", "429", "500", "502", "504", "overloaded", "unavailable", "timed out", "timeout", "too many")
+DERNIERE_ERREUR = [""]
+
+
+def generer(corps, timeout=240, tours=3, pause=20.0, max_modeles=None, valide=None, journal=None, quoi="Gemini"):
+    """Appel PATIENT à Gemini (audit du 23 novembre 2026 : sur 10 vidéos, Gemini « surchargé » (503) ou « trop de demandes » (429) a
+    privé 5 vidéos du témoin qui regarde l'original et du contrôle « fidélité » ; on abandonnait après un seul essai rapide). Chaque
+    modèle est essayé ; si TOUS ont refusé pour une raison passagère, on attend (20 s, puis 40 s) et on refait un tour (3 tours au
+    plus, GEMINI_TOURS). Quota du jour épuisé = Gemini coupé pour la fabrication. Renvoie la réponse JSON (dict) ou None."""
+    cle = os.environ.get("GEMINI_API_KEY")
+    if not cle: return None
+    import reseau, time
+    if "gemini" in reseau.HORS_SERVICE: return None
+    try: tours = max(1, int(os.environ.get("GEMINI_TOURS") or tours))
+    except ValueError: pass
+    err = ""
+    for tour in range(tours):
+        modeles = list(MODELES)[:max_modeles] if max_modeles else list(MODELES)
+        passager = False
+        for modele in modeles:
+            req = urllib.request.Request(f"https://generativelanguage.googleapis.com/v1beta/models/{modele}:generateContent",
+                                         data=json.dumps(corps).encode(), method="POST", headers={"Content-Type": "application/json", "x-goog-api-key": cle})
+            try:
+                d = json.loads(reseau.ouvrir(req, timeout=timeout, essais=1))
+                txt = "".join(p.get("text", "") for c in d.get("candidates") or [] for p in (c.get("content") or {}).get("parts") or [])
+                m = re.search(r"\{.*\}", txt, re.S)
+                res = json.loads(m.group(0)) if m else None
+                if isinstance(res, dict) and (valide is None or valide(res)):
+                    reseau.UTILISES["gemini"] = reseau.UTILISES.get("gemini", 0) + 1
+                    res.setdefault("_modele", modele)
+                    return res
+                err = "réponse vide ou incomplète"; passager = True
+            except Exception as e:
+                err = str(e)[:160]; reseau.gemini_mort(modele, err)
+                if any(x in err.lower() for x in ("quota", "exhausted", "per day")): reseau.HORS_SERVICE.add("gemini"); DERNIERE_ERREUR[0] = err; return None
+                if any(x in err.lower() for x in PASSAGERES): passager = True
+                if journal: journal(f"  {quoi} : {modele} n'a pas répondu ({err[:90]})")
+        if not passager or tour == tours - 1: break
+        attente = pause * (tour + 1)
+        print(f"  {quoi} : Gemini surchargé, nouvel essai dans {attente:.0f} s (tour {tour + 2}/{tours})", flush=True)
+        time.sleep(attente)
+    DERNIERE_ERREUR[0] = err
+    return None                                                               # dernière analyse (mise en scène, espèces)
 
 
 def _petite(chemin):
@@ -66,26 +109,15 @@ def analyser(chemin, mots, ph):
     corps = {"contents": [{"parts": [{"inline_data": {"mime_type": "video/mp4", "data": base64.b64encode(open(v, "rb").read()).decode()}},
                                      {"text": CONSIGNE.format(phrases=lignes[:9000], lieux=", ".join(DD.LIEUX))}]}],
              "generationConfig": {"temperature": 0.2, "response_mime_type": "application/json"}}
-    err = ""
-    for modele in MODELES:
-        req = urllib.request.Request(f"https://generativelanguage.googleapis.com/v1beta/models/{modele}:generateContent",   # clé dans l'en-tête
-                                     data=json.dumps(corps).encode(), method="POST", headers={"Content-Type": "application/json", "x-goog-api-key": cle})
-        try:
-            d = json.loads(reseau.ouvrir(req, timeout=240, essais=2))
-            txt = "".join(p.get("text", "") for c in d.get("candidates") or [] for p in (c.get("content") or {}).get("parts") or [])
-            m = re.search(r"\{.*\}", txt, re.S)
-            res = json.loads(m.group(0)) if m else None
-            if isinstance(res, dict) and res.get("phrases"):
-                reseau.UTILISES["gemini"] = reseau.UTILISES.get("gemini", 0) + 1
-                res["_ph"] = [(mots[p[0]]["s"], mots[p[-1]]["e"]) for p in ph]
-                DERNIER.update(res)
-                n_p = len([p for p in res.get("personnages") or [] if isinstance(p, dict) and p.get("visible") is not False])
-                print(f"  Gemini a regardé la vidéo entière ({modele}) : {n_p} personnage(s)"
-                      + (", une même personne en joue plusieurs" if res.get("meme_interprete") else "") + f", lieu « {res.get('lieu', '?')} »", flush=True)
-                return res
-        except Exception as e:
-            err = str(e)[:160]; reseau.gemini_mort(modele, err)
-            if any(x in err.lower() for x in ("quota", "exhausted", "per day")): reseau.HORS_SERVICE.add("gemini"); break
+    res = generer(corps, timeout=240, valide=lambda r: bool(r.get("phrases")), quoi="vidéo d'origine")
+    if res:
+        res["_ph"] = [(mots[p[0]]["s"], mots[p[-1]]["e"]) for p in ph]
+        DERNIER.update(res)
+        n_p = len([p for p in res.get("personnages") or [] if isinstance(p, dict) and p.get("visible") is not False])
+        print(f"  Gemini a regardé la vidéo entière ({res.get('_modele')}) : {n_p} personnage(s)"
+              + (", une même personne en joue plusieurs" if res.get("meme_interprete") else "") + f", lieu « {res.get('lieu', '?')} »", flush=True)
+        return res
+    err = DERNIERE_ERREUR[0]
     print(f"  Gemini n'a pas pu regarder la vidéo ({err or 'réponse vide'})", flush=True)
     return None
 
@@ -240,18 +272,9 @@ def ecouter(chemin, passages):
     corps = {"contents": [{"parts": [{"inline_data": {"mime_type": "audio/mp3", "data": base64.b64encode(open(son, "rb").read()).decode()}},
                                      {"text": ECOUTE.format(passages=lignes)}]}],
              "generationConfig": {"temperature": 0.0, "response_mime_type": "application/json"}}
-    for modele in MODELES:
-        req = urllib.request.Request(f"https://generativelanguage.googleapis.com/v1beta/models/{modele}:generateContent",
-                                     data=json.dumps(corps).encode(), method="POST", headers={"Content-Type": "application/json", "x-goog-api-key": cle})
-        try:
-            dd = json.loads(reseau.ouvrir(req, timeout=90, essais=1))   # (21 novembre : 2 × 180 s perdues sur un modèle qui ne répond pas)
-            txt = "".join(p.get("text", "") for c in dd.get("candidates") or [] for p in (c.get("content") or {}).get("parts") or [])
-            return lire_ecoute(txt, len(passages))
-        except Exception as e:
-            err = str(e)[:160]; reseau.gemini_mort(modele, err)
-            print(f"  Gemini n'a pas pu écouter ({modele} : {err[:80]})", flush=True)
-            if any(x in err.lower() for x in ("quota", "exhausted", "per day")): reseau.HORS_SERVICE.add("gemini"); break
-    return {}
+    res = generer(corps, timeout=90, tours=2, valide=lambda r: isinstance(r.get("passages"), list), quoi="écoute des passages")
+    if not res: print(f"  Gemini n'a pas pu écouter ({DERNIERE_ERREUR[0][:80]})", flush=True); return {}
+    return lire_ecoute(json.dumps(res), len(passages))
 
 
 def lire_ecoute(txt, n):

@@ -155,6 +155,10 @@ def appliquer(sk, texte, memoriser=True):
     import qualite
     qui, corr = interpreter(sk, texte)
     faits = []
+    if not memoriser:                                                      # compte rendu automatique (pas l'auteur) : l'IA qui lit
+        for c in corr:                                                     # le rapport ne change jamais homme / femme (audit du 23 nov. :
+            if c.get("type") == "casting": c.pop("genre", None)            # elle faisait basculer le genre d'un tour à l'autre)
+        corr = [c for c in corr if not (c.get("type") == "casting" and set(c) <= {"type", "role"})]
     if re.search(r"karaok[ée]", str(texte), re.I) and re.search(r"d[ée]cal|pas cal|faux|retard|avance|enl[eè]ve|sans", str(texte), re.I):
         sk["_sans_karaoke"] = True; faits.append("karaoké retiré (sous-titres normaux)")   # jamais un mot jaune au mauvais moment
     for k, r_ in qui.items():

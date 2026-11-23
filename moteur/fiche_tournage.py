@@ -19,7 +19,7 @@ TRIPLE CONTRÔLE avant de dessiner, avec correction automatique (demande de l'au
  3. ce que l'image de l'original a montré (analyse Gemini de la vidéo, personnes vues, lumière) : lieu, nombre de personnes, homme /
     femme vus ; puis les règles une dernière fois.
 Chaque correction est notée dans le bulletin de l'équipe (poste « fiche de tournage »). FICHE=0 pour tout couper (ancien fonctionnement)."""
-import base64, json, os, re, unicodedata, urllib.request
+import base64, json, os, re, unicodedata
 
 
 def journal(t): print(t, flush=True)
@@ -230,22 +230,7 @@ def _gemini_video(chemin, texte):
     if not v: return None
     corps = {"contents": [{"parts": [{"inline_data": {"mime_type": "video/mp4", "data": base64.b64encode(open(v, "rb").read()).decode()}}, {"text": texte}]}],
              "generationConfig": {"temperature": 0.3, "response_mime_type": "application/json"}}
-    for modele in video_ia.MODELES:
-        req = urllib.request.Request(f"https://generativelanguage.googleapis.com/v1beta/models/{modele}:generateContent",
-                                     data=json.dumps(corps).encode(), method="POST", headers={"Content-Type": "application/json", "x-goog-api-key": cle})
-        try:
-            d = json.loads(reseau.ouvrir(req, timeout=240, essais=2))
-            txt = "".join(p.get("text", "") for c in d.get("candidates") or [] for p in (c.get("content") or {}).get("parts") or [])
-            m = re.search(r"\{.*\}", txt, re.S)
-            res = json.loads(m.group(0)) if m else None
-            if isinstance(res, dict) and res.get("lieu"):
-                reseau.UTILISES["gemini"] = reseau.UTILISES.get("gemini", 0) + 1
-                return res
-        except Exception as e:
-            err = str(e)[:160]; reseau.gemini_mort(modele, err)
-            journal(f"  fiche de tournage : Gemini {modele} n'a pas répondu ({err[:90]})")
-            if any(x in err.lower() for x in ("quota", "exhausted", "per day")): reseau.HORS_SERVICE.add("gemini"); break
-    return None
+    return video_ia.generer(corps, timeout=240, valide=lambda r: bool(r.get("lieu")), journal=journal, quoi="fiche de tournage")
 
 
 def _ia_texte(texte, exclure=()):
@@ -466,6 +451,7 @@ def appliquer_corrections(F, sk, corrections):
     """Applique les corrections de la 2e IA en repassant par la remise en forme (une valeur interdite est ignorée)."""
     faites = []
     for c in corrections or []:
+        if c.get("champ") in ("lieu", "lieu_precis") and F.get("_lieu_dit"): continue   # lieu écrit sur la vidéo : jamais changé
         brut = json.loads(json.dumps(F, default=list))
         brut["personnages"] = {r: dict(p) for r, p in F["personnages"].items()}
         brut["repliques"] = [dict(q, n=n) for n, q in F["repliques"].items()]
@@ -504,15 +490,19 @@ def controle_image(F, sk):
     import decor_dessin as DD
     l_vu = ((sk.get("doublage") or {}).get("lieu_ia") or None)            # ce que Gemini a vu dans CET original (pas le dernier son écouté)
     l_vu = l_vu if l_vu in DD.LIEUX else None
-    if l_vu and F.get("lieu") != l_vu and F.get("source") != "video":
+    if l_vu and F.get("lieu") != l_vu and F.get("source") != "video" and not F.get("_lieu_dit"):
         cor.append(f"lieu : {F.get('lieu')} -> {l_vu} (vu dans la vidéo d'origine)"); F["lieu"] = l_vu
     if V.get("moment") in ("matin", "jour", "soir", "nuit") and F.get("source") != "video" and F.get("moment") != V["moment"] and not F.get("_moment_dit"):
         cor.append(f"moment : {F.get('moment')} -> {V['moment']} (lumière de la vidéo d'origine)"); F["moment"] = V["moment"]
     S = sk.get("studio") if isinstance(sk.get("studio"), dict) else {}
     P = S.get("personnages") if isinstance(S.get("personnages"), dict) else {}
+    import studio as _ST
+    acteur = _ST.un_acteur(sk)
     for r, p in F["personnages"].items():
         g_vu = str((P.get(r) or {}).get("genre_vu") or "").lower()[:1]
-        if g_vu in ("h", "f") and p.get("genre") and p["genre"] != g_vu:
+        g_txt, force = _ST.genre_texte(sk, r)
+        if g_txt and p.get("genre") == g_txt and (acteur or force >= 4): continue   # rôle joué par un acteur de l'autre sexe
+        if g_vu in ("h", "f") and p.get("genre") and p["genre"] != g_vu:   # (audit du 23 nov. : « les meufs… » repassées en garçons)
             cor.append(f"{r} genre : {p['genre']} -> {g_vu} (vu dans la vidéo d'origine)"); p["genre"] = g_vu
     return cor
 
@@ -538,6 +528,10 @@ def faire(sk, video="", sig=None, sr=22050, mots=None, B=None):
     F = nettoyer(brut, sk)
     F["animations"] = list(dict.fromkeys(F["animations"] + son["animations"]))
     F["_moment_dit"] = "moment" in ind.get("explicite", set())
+    l_ecrit = lieu_ecrit(sk)
+    if l_ecrit and l_ecrit in DD.LIEUX:
+        if F.get("lieu") != l_ecrit: journal(f"  fiche de tournage : lieu {F.get('lieu')} -> {l_ecrit} (écrit sur la vidéo d'origine)")
+        F["lieu"] = l_ecrit; F["_lieu_dit"] = True
     journal(f"  fiche de tournage écrite ({ {'video': 'Gemini a regardé et écouté l original', 'ia': 'IA de texte sur le dialogue', 'regles': 'règles seules'}[source] }) : "
             f"{F['lieu']} ({F['lieu_precis'][:50]}), {F['moment']}, {F['meteo'] or 'temps normal'}, ambiance {F['ambiance'] or '?'}, niveau {F['niveau'] or '?'}"
             + (f", bruits entendus : {', '.join(son['entendus'])}" if son["entendus"] else ""))
@@ -580,12 +574,42 @@ NIVEAU_EN = {"modeste": "small modest", "desordre": "very messy cluttered", "ais
              "moyen": ""}
 
 
+def _lieu_en(lieu):
+    """Description anglaise de base d'un lieu du catalogue (studio.DECOR_EN, semi_realiste.LIEUX_EN) ou ""."""
+    if not lieu: return ""
+    try:
+        import studio, semi_realiste
+        return str((getattr(studio, "DECOR_EN", {}) or {}).get(lieu) or semi_realiste.LIEUX_EN.get(lieu) or "")
+    except Exception: return ""
+
+
+def lieu_ecrit(sk):
+    """Lieu ÉCRIT par le créateur sur la vidéo ou dans son titre (« Pov: t'es au bureau et GTA 6 sort demain ») : il passe avant ce
+    que les IA devinent (audit du 23 novembre 2026 : bureau dessiné en chambre). None si rien de net."""
+    d = sk.get("doublage") if isinstance(sk.get("doublage"), dict) else {}
+    t = f"{d.get('legende_ecran') or ''} {d.get('titre') or ''}"
+    if not t.strip(): return None
+    import decor_dessin as DD
+    scores, regles = DD.scores_lieux(t)
+    bons = sorted((r[0] for r in regles if scores[r[0]]), key=lambda l: -scores[l])
+    if not bons or (len(bons) > 1 and scores[bons[0]] == scores[bons[1]]): return None
+    return bons[0]
+
+
 def decor_compose(F, lieu_en=""):
     """Description anglaise du décor pour l'IA des peintures (idées 5 et 6) : lieu exact, niveau de vie, 3 détails de l'histoire, lumière."""
-    base = F.get("lieu_precis") or lieu_en or (F.get("lieu") or "living room").replace("_", " ")
+    import decor_dessin as DD
+    lieu = F.get("lieu")
+    def _autre_lieu(txt):                                                  # le texte décrit-il un AUTRE lieu que celui de la fiche ?
+        l_ = DD.lieu_de(str(txt or ""), None)
+        return bool(lieu and l_ and l_ != lieu)
+    # (audit du 23 novembre : fiche « bureau » mais lieu exact « small cluttered bedroom with a messy bed » : une chambre a été peinte)
+    precis = F.get("lieu_precis") if not _autre_lieu(F.get("lieu_precis")) else ""
+    base = precis or lieu_en or _lieu_en(lieu) or (lieu or "living room").replace("_", " ")
     niv = NIVEAU_EN.get(F.get("niveau") or "", "")
     if niv and not any(w in base.lower() for w in niv.split()): base = f"{niv} {base}"
-    dets = [d for d in F.get("details") or [] if d.lower() not in base.lower()][:3]
+    dets = [d for d in F.get("details") or [] if d.lower() not in base.lower() and not _autre_lieu(d)
+            and not (lieu not in ("chambre", "hopital") and re.search(r"\b(bed|pillow|nightstand|duvet)\b", str(d).lower()))][:3]
     return base + (" with " + ", ".join(dets) if dets else "")
 
 
@@ -685,20 +709,7 @@ def _gemini_images(images, texte, timeout=120):
         if ok: parts.append({"inline_data": {"mime_type": "image/jpeg", "data": base64.b64encode(jpg.tobytes()).decode()}})
     parts.append({"text": texte})
     corps = {"contents": [{"parts": parts}], "generationConfig": {"temperature": 0.1, "response_mime_type": "application/json"}}
-    for modele in video_ia.MODELES:
-        req = urllib.request.Request(f"https://generativelanguage.googleapis.com/v1beta/models/{modele}:generateContent",
-                                     data=json.dumps(corps).encode(), method="POST", headers={"Content-Type": "application/json", "x-goog-api-key": cle})
-        try:
-            d = json.loads(reseau.ouvrir(req, timeout=timeout, essais=2))
-            txt = "".join(p.get("text", "") for c in d.get("candidates") or [] for p in (c.get("content") or {}).get("parts") or [])
-            m = re.search(r"\{.*\}", txt, re.S)
-            if m:
-                reseau.UTILISES["gemini"] = reseau.UTILISES.get("gemini", 0) + 1
-                return json.loads(m.group(0))
-        except Exception as e:
-            reseau.gemini_mort(modele, str(e))
-            if any(x in str(e).lower() for x in ("quota", "exhausted", "per day")): reseau.HORS_SERVICE.add("gemini"); break
-    return None
+    return video_ia.generer(corps, timeout=timeout, tours=2, quoi="images")
 
 
 def _boite(b, W=1080, H=1920):
@@ -777,20 +788,7 @@ def _gemini_brut(video, texte):
     if not v: return None
     corps = {"contents": [{"parts": [{"inline_data": {"mime_type": "video/mp4", "data": base64.b64encode(open(v, "rb").read()).decode()}}, {"text": texte}]}],
              "generationConfig": {"temperature": 0.1, "response_mime_type": "application/json"}}
-    for modele in list(video_ia.MODELES)[:2]:                              # contrôle final : 2 modèles, 1 essai de 2 min chacun au plus
-        req = urllib.request.Request(f"https://generativelanguage.googleapis.com/v1beta/models/{modele}:generateContent",   # (21 novembre :
-                                     data=json.dumps(corps).encode(), method="POST", headers={"Content-Type": "application/json", "x-goog-api-key": cle})
-        try:                                                               # 2 × 240 s par modèle, contrôle de la vidéo finie 10 min)
-            d = json.loads(reseau.ouvrir(req, timeout=120, essais=1))
-            txt = "".join(p.get("text", "") for c in d.get("candidates") or [] for p in (c.get("content") or {}).get("parts") or [])
-            m = re.search(r"\{.*\}", txt, re.S)
-            if m:
-                reseau.UTILISES["gemini"] = reseau.UTILISES.get("gemini", 0) + 1
-                return json.loads(m.group(0))
-        except Exception as e:
-            reseau.gemini_mort(modele, str(e))
-            if any(x in str(e).lower() for x in ("quota", "exhausted", "per day")): reseau.HORS_SERVICE.add("gemini"); break
-    return None
+    return video_ia.generer(corps, timeout=120, tours=3, max_modeles=2, quoi="contrôle « fidélité »")   # (2 modèles, 3 tours patients)
 
 
 DECOR_CHAMPS = re.compile(r"^(lieu|moment|meteo|ambiance|niveau|occasion|interieur)$")
@@ -806,6 +804,10 @@ def corriger_depuis_points(sk, points):
     son = indices_son((sk.get("doublage") or {}).get("evenements") or [])
     if not (ind.get("meteo") or son.get("meteo")):                         # la météo ne vient que du son ou des paroles (audit du 20 novembre :
         cor = [c for c in cor if c.get("champ") != "meteo" or not c.get("valeur")]   # Gemini voyait « de la pluie » dans notre peinture)
+    # Homme / femme : jamais changé par ce contrôle (audit du 23 novembre : « dessiné en femme alors que la fiche dit homme » faisait
+    # passer la FICHE en femme, puis le tour suivant « barbu alors que la fiche dit femme » la repassait en homme : la vidéo empirait).
+    # Le genre se décide par la voix, les mots et ce qui a été vu dans l'original (studio.genre_voix), pas par notre dessin.
+    cor = [c for c in cor if not str(c.get("champ") or "").endswith(".genre")]
     if not cor: return []
     faites = appliquer_corrections(F, sk, [dict(c, raison=c.get("raison") or "contrôle final : pas fidèle à l'audio") for c in cor])
     if not faites: return []

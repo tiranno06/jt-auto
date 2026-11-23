@@ -508,6 +508,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
     roles = sorted({r["p"] for r in reps if r["p"] != "narrateur"}, key=lambda r: [x["p"] for x in reps].index(r))   # la voix off n'est pas dessinée
     # scènes : découpage de l'auteur (sinon une seule scène)
     studio.separer_lieux(sk)                                               # personnages dans des lieux différents : un décor chacun
+    studio.resynchroniser_lieux(sk)                                        # (répliques changées de personnage depuis : 23 novembre)
     SEPARES = bool(sk.get("_separes"))
     dec = [sc for sc in (sk.get("decoupage") or []) if sc.get("repliques")]
     scene_de = {}
