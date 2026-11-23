@@ -7084,40 +7084,38 @@
   "cadence": "normal"
  },
  {
-  "moment": "soir",
+  "moment": "nuit",
   "lieux": [
-   "rue",
-   "salon"
+   "chambre"
   ],
   "source": "auteur+image",
-  "duree": 23.2,
+  "duree": 53.3,
   "plans": {
-   "large": 17
+   "large": 20
   },
   "mouvements": {
-   "fixe": 17
+   "fixe": 20
   },
   "costumes": {
-   "invite": "veste_jean",
-   "presentateur": "tshirt"
+   "presentateur": "tshirt",
+   "invite": "chemise"
   },
   "figurants": 0,
   "ambiances": [
-   "pluie",
-   "poussiere"
+   "neon"
   ],
-  "controle": "Humoriste 9.4/10 :  | Réalisateur 7.6/10 : 0.3 s L'invite 'Ouais' pourrait être mieux mis en valeur avec un léger mouvement de tête ou un geste pour attirer l'attention dès le début. | Directeur artis",
-  "fichier": "2026-11-23_21h26_emission.mp4",
+  "controle": "Humoriste 8.6/10 : 41.6 s Le gag « Gosse » est bien écrit, mais la réaction du personnage qui écoute (le présentateur) pourrait être plus prononcée pour accentuer l'absurdité de la situation. | Réalis",
+  "fichier": "2026-11-23_21h21_emission.mp4",
   "cine": {
-   "focus": true,
+   "focus": false,
    "vertige": false,
-   "tiers": false,
+   "tiers": true,
    "etalonnage": true,
    "profondeur": false,
-   "grain": false,
+   "grain": true,
    "reflets": true,
    "son": true
   },
-  "cadence": "normal"
+  "cadence": "rapide"
  }
 ]

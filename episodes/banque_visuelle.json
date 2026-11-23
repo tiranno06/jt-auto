@@ -47807,11 +47807,7 @@
    "costumes": {
     "invite": {
      "bas": "jean",
-     "c_haut": [
-      255,
-      255,
-      0
-     ],
+     "c_haut": "gris",
      "chaussures": "baskets",
      "cheveux": "court",
      "chapeau": "casquette",
@@ -47820,16 +47816,12 @@
      "details": [
       "tatouage"
      ],
-     "haut": "",
+     "haut": "tshirt",
      "motif": "uni"
     },
     "presentateur": {
      "bas": "jean",
-     "c_haut": [
-      0,
-      0,
-      255
-     ],
+     "c_haut": "noir",
      "chaussures": "baskets",
      "cheveux": "court",
      "chapeau": "casquette",
@@ -47838,7 +47830,7 @@
      "details": [
       "tatouage"
      ],
-     "haut": "veste",
+     "haut": "tshirt",
      "motif": "uni"
     }
    },
@@ -47865,25 +47857,28 @@
      "plan": "moyen",
      "mouvement": "fixe",
      "geste": "explique",
-     "replique": 3
+     "replique": 2
     },
     {
      "reaction": "aucune",
      "geste": "explique",
      "mouvement": "fixe",
      "plan": "moyen",
-     "replique": 9
+     "replique": 8
     },
     {
-     "replique": 14,
+     "replique": 12,
      "geste": "explique",
      "mouvement": "fixe",
      "plan": "moyen",
      "reaction": "aucune"
     },
     {
-     "replique": 16,
-     "reaction": "regard_camera"
+     "mouvement": "fixe",
+     "geste": "explique",
+     "reaction": "aucune",
+     "replique": 14,
+     "plan": "moyen"
     }
    ]
   },
@@ -47902,10 +47897,470 @@
    ],
    "source": "auteur+image",
    "tenues": {
-    "invite": "veste_jean",
+    "invite": "tshirt",
     "presentateur": "tshirt"
    },
    "plans": [
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
+    "large/fixe"
+   ]
+  },
+  "video": "2026-11-23_20h15_emission.mp4"
+ },
+ {
+  "date": "2026-11-23",
+  "source": "https://www.tiktok.com/@yan_animation0/video/7695388361023966497",
+  "auteur": "yan_animation0",
+  "visuel": {
+   "gestes": [
+    [
+     34.5,
+     0.77,
+     1.0
+    ],
+    [
+     36.0,
+     0.86,
+     0.54
+    ],
+    [
+     37.0,
+     0.86,
+     0.56
+    ],
+    [
+     39.0,
+     0.87,
+     0.62
+    ],
+    [
+     40.0,
+     0.87,
+     0.58
+    ],
+    [
+     41.0,
+     0.43,
+     1.0
+    ],
+    [
+     45.0,
+     0.45,
+     1.0
+    ],
+    [
+     46.5,
+     0.45,
+     1.0
+    ],
+    [
+     47.5,
+     0.46,
+     1.0
+    ]
+   ],
+   "duree": 58.5,
+   "nb_plans": 5,
+   "duree_plan": 11.7,
+   "coupes": [
+    14.5,
+    23.5,
+    35.5,
+    48.5
+   ],
+   "plans": {
+    "tres_serre": 0.0,
+    "serre": 0.427,
+    "moyen": 0.154,
+    "large": 0.419
+   },
+   "camera": {
+    "fixe": 0.982,
+    "avance": 0.018,
+    "recul": 0.0,
+    "travelling": 0.0,
+    "epaule": 0.0
+   },
+   "nb_personnes": 2,
+   "personnes": [
+    {
+     "place": "centre",
+     "presence": 0.376,
+     "habit": [
+      215,
+      163,
+      75
+     ],
+     "cheveux": [
+      223,
+      160,
+      102
+     ],
+     "sourire": 0.0,
+     "taille": 0.184,
+     "tete_penchee": 1.6,
+     "regard_cote": 0.091
+    },
+    {
+     "place": "droite",
+     "presence": 0.265,
+     "habit": [
+      214,
+      179,
+      181
+     ],
+     "cheveux": [
+      16,
+      14,
+      17
+     ],
+     "sourire": 0.0,
+     "taille": 0.173,
+     "tete_penchee": 1.7,
+     "regard_cote": 0.0
+    },
+    {
+     "place": "gauche",
+     "presence": 0.205,
+     "habit": [
+      235,
+      167,
+      105
+     ],
+     "cheveux": [
+      232,
+      168,
+      108
+     ],
+     "sourire": 0.0,
+     "taille": 0.163,
+     "tete_penchee": 4.3,
+     "regard_cote": 0.0
+    }
+   ],
+   "visages": true,
+   "sourires": 0.0,
+   "energie": 0.162,
+   "mur": [
+    214,
+    195,
+    181
+   ],
+   "palette": [
+    [
+     225,
+     208,
+     190,
+     0.239
+    ],
+    [
+     188,
+     161,
+     155,
+     0.194
+    ],
+    [
+     39,
+     34,
+     32,
+     0.176
+    ],
+    [
+     222,
+     160,
+     92,
+     0.154
+    ],
+    [
+     244,
+     241,
+     238,
+     0.143
+    ],
+    [
+     138,
+     108,
+     81,
+     0.094
+    ]
+   ],
+   "lumiere": {
+    "luminosite": 181.3,
+    "chaleur": 41.5,
+    "saturation": 61.0
+   },
+   "moment": "jour"
+  },
+  "audio": {
+   "duree": 58.3,
+   "nb_voix": 2,
+   "voix": [
+    {
+     "hz": 123,
+     "genre": "h",
+     "part": 0.24
+    },
+    {
+     "hz": 210,
+     "genre": "f",
+     "part": 0.76
+    }
+   ],
+   "debit": 4.19,
+   "blanc_moyen": 1.01,
+   "coupes": 2,
+   "dynamique_db": 27.2,
+   "cris": 0.024,
+   "musique": 0.99,
+   "impacts": 5,
+   "impacts_10s": 0.86,
+   "graves": 1,
+   "aigus": 4,
+   "sur_vanne": 2,
+   "evenements": {
+    "glass": 1
+   },
+   "emotions": {
+    "agreeing": 3,
+    "excited": 2,
+    "urgent": 2,
+    "confused": 2,
+    "demanding": 2,
+    "skeptical": 2,
+    "hesitant": 1,
+    "panicked": 1
+   }
+  },
+  "claude": {
+   "lieux": [
+    "chambre"
+   ],
+   "moment": "nuit",
+   "costumes": {
+    "presentateur": {
+     "haut": "tshirt",
+     "c_haut": "bleu",
+     "bas": "jean",
+     "chaussures": "baskets",
+     "details": [
+      "barbe_courte",
+      "bracelets"
+     ],
+     "chapeau": null,
+     "cheveux": "court_texture",
+     "c_cheveux": "brun"
+    },
+    "invite": {
+     "haut": "chemise",
+     "c_haut": "blanc",
+     "bas": "pantalon",
+     "chaussures": "ville",
+     "details": [
+      "montre",
+      "lunettes_soleil"
+     ],
+     "chapeau": null,
+     "cheveux": "court",
+     "c_cheveux": "noir"
+    }
+   },
+   "objets": [
+    {
+     "replique": 1,
+     "objet": "clés"
+    },
+    {
+     "replique": 5,
+     "objet": "alliance"
+    },
+    {
+     "replique": 14,
+     "objet": "parapluie"
+    }
+   ],
+   "gags": [
+    "« Paraguay ou Baptême ? » écrit sur un tableau noir",
+    "« Parrain : 1, Voyage : 0 » sur un post-it collé sur le téléphone",
+    "« Qui a dit mariage ? » sur une bouteille d'eau"
+   ],
+   "ambiances": [
+    "neon"
+   ],
+   "plans": [
+    {
+     "replique": 0,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "telephone",
+     "reaction": "aucune"
+    },
+    {
+     "replique": 1,
+     "plan": "moyen",
+     "mouvement": "fixe",
+     "geste": "pointe_g",
+     "reaction": "sceptique"
+    },
+    {
+     "replique": 2,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "gratte_tete",
+     "reaction": "choc"
+    },
+    {
+     "replique": 3,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "pointe_d",
+     "reaction": "gene"
+    },
+    {
+     "replique": 4,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "chuchote",
+     "reaction": "confused"
+    },
+    {
+     "replique": 5,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "panique",
+     "reaction": "pleurs"
+    },
+    {
+     "replique": 6,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "telephone",
+     "reaction": "choc"
+    },
+    {
+     "replique": 7,
+     "plan": "moyen",
+     "mouvement": "fixe",
+     "geste": "soupir",
+     "reaction": "blase"
+    },
+    {
+     "replique": 8,
+     "plan": "large",
+     "mouvement": "zoom_choc",
+     "geste": "bras_ouverts",
+     "reaction": "joie"
+    },
+    {
+     "replique": 9,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "colere",
+     "reaction": "choc"
+    },
+    {
+     "replique": 10,
+     "plan": "moyen",
+     "mouvement": "fixe",
+     "geste": "facepalm",
+     "reaction": "sceptique"
+    },
+    {
+     "replique": 11,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "gratte_tete",
+     "reaction": "confused"
+    },
+    {
+     "replique": 12,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "clueless",
+     "reaction": "soupir"
+    },
+    {
+     "replique": 13,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "agreeing",
+     "reaction": "joie"
+    },
+    {
+     "replique": 14,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "excited",
+     "reaction": "choc"
+    },
+    {
+     "replique": 15,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "pointe_d",
+     "reaction": "sceptique"
+    },
+    {
+     "replique": 16,
+     "plan": "serre",
+     "mouvement": "fixe",
+     "geste": "shocked",
+     "reaction": "choc"
+    },
+    {
+     "replique": 17,
+     "plan": "moyen",
+     "mouvement": "fixe",
+     "geste": "demanding",
+     "reaction": "confused"
+    },
+    {
+     "replique": 18,
+     "plan": "large",
+     "mouvement": "zoom_choc",
+     "geste": "bras_ouverts",
+     "reaction": "joie"
+    },
+    {
+     "replique": 19,
+     "reaction": "regard_camera"
+    }
+   ]
+  },
+  "realisation": {
+   "moment": "nuit",
+   "lieux": [
+    "chambre"
+   ],
+   "gags": [
+    "« Paraguay ou Baptême ? » écrit sur un tableau noir",
+    "« Parrain : 1, Voyage : 0 » sur un post-it collé sur le téléphone",
+    "« Qui a dit mariage ? » sur une bouteille d'eau"
+   ],
+   "ambiances": [
+    "neon"
+   ],
+   "source": "auteur+image",
+   "tenues": {
+    "presentateur": "tshirt",
+    "invite": "chemise"
+   },
+   "plans": [
+    "large/fixe",
+    "large/fixe",
+    "large/fixe",
     "large/fixe",
     "large/fixe",
     "large/fixe",
@@ -47925,6 +48380,6 @@
     "large/fixe"
    ]
   },
-  "video": "2026-11-23_21h26_emission.mp4"
+  "video": "2026-11-23_21h21_emission.mp4"
  }
 ]
