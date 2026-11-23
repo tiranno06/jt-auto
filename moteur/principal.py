@@ -189,7 +189,7 @@ def corriger_compte_rendu(sk, base, audios, mots, decors, fmt, points, modal_ok,
     import compte_rendu as CR, verif_finale, remarque, qualite, controle, cartoon, copy, shutil
     if not CR.actif() or not cartoon.RENDU or not os.path.exists(base + "_avant_boucle.mp4"): return points
     Q = QUALITE["Q"] or {}
-    conf = verif_finale.confiance(sk.get("equipe"), points, Q)
+    conf = verif_finale.confiance(sk.get("equipe"), points, Q, sk.get("_controles_sautes"))
     for tour in range(CR.tours()):
         txt = CR.texte(points, Q.get("jury"), sk.get("equipe"))
         if not txt or conf >= 100: break
@@ -223,7 +223,7 @@ def corriger_compte_rendu(sk, base, audios, mots, decors, fmt, points, modal_ok,
             except Exception as _e: __import__("pannes").avale(_e)
             pts4 = verif_finale.verifier(base + "_c.mp4", sk4, cartoon.RENDU)
             Q4 = qualite.evaluer(base + "_c.mp4", cartoon.RENDU, sk4, "")
-            conf4 = verif_finale.confiance(sk4.get("equipe"), pts4, Q4)
+            conf4 = verif_finale.confiance(sk4.get("equipe"), pts4, Q4, sk4.get("_controles_sautes"))
         except BaseException as e:                                         # (limite de temps comprise : on garde la vidéo telle quelle)
             for k_, v_ in etat.items(): setattr(cartoon, k_, v_)
             for f_ in (base + "_c.mp4", base + "_c_avant_boucle.mp4"):
@@ -386,6 +386,8 @@ def main():
         import doublage
         sk, DOUB, fmt = S["sk"], S["DOUB"], S["fmt"]
     elif REFAIRE_MODE in ("voix", "decors", "qui", "remarque", "casting", "compte_rendu"):   # mêmes répliques : on refait seulement les voix / les décors
+        import copy as _cp
+        REPS_ROBOT = _cp.deepcopy(SK_ANCIEN.get("repliques") or [])         # (banc d'essai : les répliques telles que le robot les avait faites)
         sk = SK_ANCIEN; sk["_monte"] = True
         if CASTING_AUTEUR:                                                 # « 🎭 Changer les personnages » : choix gardés dans le sketch
             sk["_casting_auteur"] = {r: dict((sk.get("_casting_auteur") or {}).get(r) or {}, **c) for r, c in CASTING_AUTEUR.items() if isinstance(c, dict)}
@@ -402,6 +404,13 @@ def main():
             import doublage                                                # bande son d'origine (« 🖼️ Juste le décor » ne la retéléchargeait pas :
             DOUB = list(doublage.depuis_sketch(sk, controle=REFAIRE_MODE not in ("qui", "decors", "voix")))   # piste.wav introuvable, audit du 22/11)
             fmt = "libre" if sk["doublage"].get("duree", 0) >= 60 else "mini"
+            if REFAIRE_MODE == "qui" and QUI and not test:                  # « Corriger qui parle » : la vidéo devient un cas du banc d'essai
+                try:                                                       # des voix (idée 10 du 23 novembre) : robot = avant, auteur = vérité
+                    P_ = (sk.get("studio") or {}).get("personnages") or {}
+                    __import__("banc_voix").ajouter(os.path.splitext(os.path.basename(_f))[0], str(sk.get("titre_accroche") or sk.get("sujet") or _f),
+                                                    REPS_ROBOT, sk["repliques"], sk["doublage"]["piste"],
+                                                    {r: str((P_.get(r) or {}).get("genre_vu") or "") for r in P_}, journal=lambda m: print(m, flush=True))
+                except Exception as e: print(f"  banc d'essai : cas non ajouté ({str(e)[:120]})", flush=True)
         print(f"Refaire ({REFAIRE_MODE}) : « {sk.get('sujet')} », mêmes répliques", flush=True)
     elif tiktok:
         import doublage
@@ -413,6 +422,12 @@ def main():
                 B_f = _EQ.Bulletin(); B_f.lignes = sk.setdefault("equipe", [])
                 if fiche_tournage.faire(sk, (sk.get("doublage") or {}).get("video_origine") or "", None, 22050, None, B_f): fiche_tournage.appliquer(sk)
         except Exception as e: print(f"  fiche de tournage impossible ({str(e)[:120]}) : mise en scène habituelle", flush=True)
+        if not sk.get("_jeu_original") and not sk.get("_jeu_dessin"):     # dessin animé d'origine : expressions lues par Gemini (idée 14,
+            try:                                                           # 23 novembre ; le son CHOISI seulement, comme la fiche)
+                j_ = __import__("jeu_dessin").extraire((sk.get("doublage") or {}).get("video_origine") or "", sk.get("repliques") or [],
+                                                       journal=lambda m: print(m, flush=True))
+                if j_: sk["_jeu_dessin"] = j_
+            except Exception as e: print(f"  jeu du dessin animé illisible ({str(e)[:120]})", flush=True)
         try: __import__("suites").preparer(sk, historique)                 # partie 1, 2… : fin « à suivre », mêmes personnages
         except Exception as e: print(f"Parties : {str(e)[:120]}", flush=True)
         try: __import__("anglais").preparer(sk, historique)                # sous-titres anglais en plus (21 novembre, idée 3)
@@ -780,7 +795,9 @@ def main():
     if PARTIES: historique[-1]["parties"] = PARTIES; historique[-1]["coupure"] = T_PARTIES   # base_p1.mp4 / base_p2.mp4 (archives)
     if A_VERIFIER: historique[-1]["a_verifier"] = A_VERIFIER               # ⚠️ sur le site : points à regarder avant de publier
     if libre and not REALISTE:                                             # note de confiance (tri « les plus sûres d'abord »)
-        try: historique[-1]["confiance"] = __import__("verif_finale").confiance(sk.get("equipe"), A_VERIFIER, QUALITE["Q"])
+        try:
+            historique[-1]["confiance"] = __import__("verif_finale").confiance(sk.get("equipe"), A_VERIFIER, QUALITE["Q"], sk.get("_controles_sautes"))
+            if sk.get("_controles_sautes"): historique[-1]["controles_sautes"] = list(sk["_controles_sautes"])[:8]
         except Exception as _e: __import__("pannes").avale(_e)
     if sk.get("equipe"): historique[-1]["equipe"] = f"{sum(1 for l in sk['equipe'] if l.get('ok'))}/{len(sk['equipe'])} contrôles bons"
     if DOUB: historique[-1]["filiere"] = "tiktok"                         # vidéo sur un son TikTok : rangée à part des sketchs
@@ -804,6 +821,8 @@ def main():
     if sk.get("titre_accroche"): historique[-1]["titre_affiche"] = sk["titre_accroche"]
     if DOUB and sk.get("_anglais"): historique[-1]["anglais"] = True       # sous-titres anglais (essai de 10 vidéos, recette.py compare)
     if REFAIRE and REFAIRE.endswith("|compte_rendu|soir"): historique[-1]["refait_par_soir"] = True   # contrôleur du soir : jamais en boucle
+    if REFAIRE and REFAIRE.endswith("|decors|rejouer") and ANCIEN:          # nouvelle version d'une vidéo qui a marché (rejouer.py) :
+        historique[-1]["rejoue_de"] = ANCIEN.get("fichier"); historique[-1]["publier_auto"] = True   # publiée toute seule, en dernier
     if DOUB: historique[-1]["fin_carte"] = not sk.get("_sans_fin")          # essai du carton de fin (recette.py compare)
     if REFAIRE and ANCIEN and not test and historique[-1].get("fichier") != ANCIEN.get("fichier"):
         try:                                                               # vidéo refaite : elle REMPLACE l'ancienne dans la liste (pas de doublon)

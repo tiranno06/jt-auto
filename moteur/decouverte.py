@@ -99,6 +99,79 @@ def selection(out, n=6, reserve=2):
     return sorted(franco + reste, key=lambda f: out.index(f))
 
 
+# Créateurs d'origine (choix de l'auteur du 23 novembre 2026, idée 5 : « et les rajouter dans la liste des profils suivis »). Nos créateurs
+# suivis sont surtout des chaînes de dessin animé qui reprennent les voix de VRAIS créateurs (crédités « @… » dans leurs descriptions :
+# @aguerin30, @jayzocc…). En prenant les sons à la source, on arrive avant les autres chaînes de dessin animé, sur des sons souvent bien
+# plus vus. Gardé : cité au moins 2 fois, titres en français, 10 000 vues en médiane, 8 vidéos de 8 à 150 s, publié dans l'année
+# (les noms affichés qui tombent sur un compte étranger sans rapport, « @julie », « @nbl », sont écartés). Résultat :
+# episodes/createurs_origine.json ; profils_tiktok.liste() les ajoute aux profils suivis et le site les inscrit dans « Mes profils »
+# (PROFILS_TIKTOK) à sa prochaine ouverture. ORIGINES=0 pour couper.
+SEMENCE = ["aguerin30", "zequoiza", "jawedyoussef"]                       # cités dans la proposition choisie par l'auteur (23 novembre)
+ORIGINES = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "episodes", "createurs_origine.json")
+FR = re.compile(r"(?<![\w'])(je|tu|il|elle|on|nous|vous|le|la|les|un|une|des|du|de|et|est|c'est|t'es|pas|quand|mon|ma|mes|ton|ta|tes|ça|moi|toi|avec|pour|mais|ou|qui|que|quoi)(?![\w'])", re.I)
+
+
+def francais(titres):
+    t = [str(x or "").replace("’", "'") for x in titres if str(x or "").strip()]   # (titres courts, apostrophes typographiques : @aguerin30)
+    return bool(t) and sum(1 for x in t if FR.search(x) or re.search(r"[éèêàçùû]|\b[jJ]'|\b[cC]'", x)) >= 0.4 * len(t)
+
+
+def origine_ok(pseudo, videos, maintenant=None):
+    import profils_tiktok as P
+    maintenant = maintenant or time.time()
+    vs = [v for v in videos if v.get("duree") is None or P.DUREE_MIN <= float(v["duree"]) <= P.DUREE_MAX]
+    vues = [int(v["vues"]) for v in vs if v.get("vues") is not None]
+    dates = [float(v["date"]) for v in vs if v.get("date")]
+    if len(vs) < 8 or not vues or not francais([v.get("titre") for v in vs]): return None
+    if dates and maintenant - max(dates) > 365 * 86400: return None
+    med = int(statistics.median(vues))
+    if med < 10000: return None
+    return {"profil": pseudo, "vues_mediane": med, "videos": len(vs)}
+
+
+def origines(journal=print, lister=None, max_candidats=20):
+    if os.environ.get("ORIGINES", "1") == "0": return []
+    import profils_tiktok as P, concurrence as C
+    lister = lister or (lambda p: P.videos(p, journal=lambda m: None))
+    suivis = [p for p in (P.liste(sans_origines=True) or [])]
+    exclus = {p.lower() for p in suivis} | P.interdits() | {x.lower() for x in P.NOTRE_CHAINE}   # (pas connus() : un son déjà repris ne veut pas dire suivi)
+    exclus.add((os.environ.get("TIKTOK_COMPTE") or "").strip().lstrip("@").lower())
+    cite, par = {}, {}
+    for p in suivis[:20]:
+        for v in lister(p) or []:
+            for m in C._mentions(v.get("titre")):
+                if m not in exclus: cite[m] = cite.get(m, 0) + 1; par.setdefault(m, set()).add(p)
+    cand = [m for m in sorted(cite, key=lambda m: -cite[m]) if cite[m] >= 2][:max_candidats]
+    try:                                                                   # + les créateurs proposés dans « Nouveaux créateurs »
+        for f in json.load(open(FICHIER, encoding="utf-8")).get("profils") or []:   # (cités chez nos créateurs, déjà vérifiés une fois)
+            m = str(f.get("profil") or "").lower()
+            if m and m not in exclus and m not in cand: cand.append(m); cite.setdefault(m, 1); par.setdefault(m, {"nouveaux créateurs"})
+    except (OSError, ValueError): pass
+    for m in SEMENCE:
+        if m not in exclus and m not in cand: cand.append(m); cite.setdefault(m, 1); par.setdefault(m, {"proposition du 23 novembre"})
+    out = []
+    for m in cand:
+        f = origine_ok(m, lister(m) or [])
+        if f:
+            f.update(cite=cite[m], par=sorted(par[m])[:5]); out.append(f)
+            journal(f"  🎙️ créateur d'origine @{m} : cité {cite[m]} fois, {f['vues_mediane']} vues (médiane)")
+    out.sort(key=lambda f: -(f["vues_mediane"] * (1 + 0.2 * f["cite"])))
+    journal(f"Créateurs d'origine : {len(cand)} vérifié(s), {len(out)} gardé(s)")
+    return out[:8]
+
+
+if __name__ == "__main__" and "--origines" in sys.argv:
+    try: ancien = json.load(open(ORIGINES, encoding="utf-8"))
+    except (OSError, ValueError): ancien = {}
+    if ancien.get("date") == datetime.date.today().isoformat() and "--forcer" not in sys.argv:
+        print("Créateurs d'origine : déjà cherchés aujourd'hui"); sys.exit(0)
+    r = origines()
+    garde = {f["profil"]: f for f in (ancien.get("profils") or [])}            # jamais oublié une fois trouvé (le site l'a peut-être ajouté)
+    for f in r: garde[f["profil"]] = f
+    json.dump({"date": datetime.date.today().isoformat(), "profils": list(garde.values())[:20]}, open(ORIGINES, "w", encoding="utf-8"),
+              ensure_ascii=False, indent=1)
+    sys.exit(0)
+
 if __name__ == "__main__":
     r = chercher()
     json.dump({"date": datetime.date.today().isoformat(), "profils": r}, open(FICHIER, "w", encoding="utf-8"), ensure_ascii=False, indent=1)

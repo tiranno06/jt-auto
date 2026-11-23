@@ -66,13 +66,28 @@ def bio_refuse(pseudo, journal=print):
     return _BIOS[p]
 
 
-def liste(texte=None):
+def origines():
+    """Créateurs d'origine trouvés par le robot (decouverte.origines, episodes/createurs_origine.json) que le site n'a pas encore
+    traités (PROFILS_ORIGINE_AJOUTES = ceux déjà inscrits dans « Mes profils », ou retirés exprès par l'auteur)."""
+    if os.environ.get("ORIGINES", "1") == "0": return []
+    try: d = json.load(open(os.path.join(RACINE, "episodes", "createurs_origine.json"), encoding="utf-8"))
+    except (OSError, ValueError): return []
+    faits = {p.lower() for p in liste(os.environ.get("PROFILS_ORIGINE_AJOUTES") or "")}
+    return [f["profil"] for f in d.get("profils") or [] if f.get("profil") and f["profil"].lower() not in faits]
+
+
+def liste(texte=None, sans_origines=False):
     """Pseudos (sans @) tirés du réglage PROFILS_TIKTOK : « @pseudo », « pseudo » ou lien https://www.tiktok.com/@pseudo…
-    Réglage vide : les profils déjà connus du robot (voir connus()). Les profils de la liste noire sont retirés."""
+    Réglage vide : les profils déjà connus du robot (voir connus()). Les profils de la liste noire sont retirés. Les créateurs d'origine
+    trouvés par le robot (idée 5 du 23 novembre) sont ajoutés, même avant que le site les inscrive dans « Mes profils »."""
     t = os.environ.get("PROFILS_TIKTOK", "") if texte is None else texte
     if texte is None:
         noirs = interdits()
-        return [p for p in (connus() if not (t or "").strip() else liste(t)) if p.lower() not in noirs]
+        base = connus() if not (t or "").strip() else liste(t)
+        if not sans_origines:
+            deja = {p.lower() for p in base}
+            base = base + [p for p in origines() if p.lower() not in deja]
+        return [p for p in base if p.lower() not in noirs]
     out = []
     for morceau in re.split(r"[\n,;]+", t or ""):
         m = morceau.strip()

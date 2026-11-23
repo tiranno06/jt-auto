@@ -21,6 +21,7 @@ jobs:
     env:
       PROFILS_TIKTOK: ${{ vars.PROFILS_TIKTOK }}
       PROFILS_INTERDITS: ${{ vars.PROFILS_INTERDITS }}
+      PROFILS_ORIGINE_AJOUTES: ${{ vars.PROFILS_ORIGINE_AJOUTES }}
       CHAINES_CONCURRENTES: ${{ vars.CHAINES_CONCURRENTES }}
       TIKTOK_COMPTE: ${{ vars.TIKTOK_COMPTE }}
     steps:
@@ -32,11 +33,12 @@ jobs:
         run: |
           pip install -q -U "yt-dlp[default,curl-cffi]" || pip install -q -U yt-dlp
           pip install -q numpy opencv-python-headless -c contraintes.txt
+          python -u moteur/decouverte.py --origines || echo "créateurs d'origine : recherche impossible"   # (une fois par jour)
           python -u moteur/profils_tiktok.py --eclairer
       - name: Enregistrer
         run: |
           git config user.name "robot-jt"
           git config user.email "robot-jt@users.noreply.github.com"
-          git add episodes/sons_candidats.json
+          git add episodes/sons_candidats.json; git add episodes/createurs_origine.json 2>/dev/null || true
           git commit -m "Éclaireur : classement des sons" || echo "rien à enregistrer"
           python moteur/fusion.py

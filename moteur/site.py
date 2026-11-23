@@ -74,7 +74,9 @@ def fiche(e):
                 programmee=e.get("programmee"), couts=e.get("couts") or {}, duree=e.get("duree"), a_verifier=e.get("a_verifier") or [],
                 likes=e.get("likes"), commentaires=e.get("commentaires"), partages=e.get("partages"),
                 voix_secours=("piper" in str(e.get("voix", "")).lower()),
-                source=e.get("source_audio") or "", reps=repliques_de(e), confiance=e.get("confiance"), commentaire=e.get("commentaire") or "")
+                source=e.get("source_audio") or "", reps=repliques_de(e), confiance=e.get("confiance"), commentaire=e.get("commentaire") or "",
+                remplace=e.get("remplace"), controles_sautes=e.get("controles_sautes") or [], publier_auto=bool(e.get("publier_auto")),
+                rejoue_de=e.get("rejoue_de"))   # (vidéo refaite : place « À publier » reprise)
 
 
 def construire():
@@ -670,6 +672,8 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
       <p class="note">Chaque réplique avec son personnage : changez ceux qui sont faux, puis « Refaire ». Même son, mêmes décors : seul le personnage qui parle change.</p>
       <div id="quiListe"></div>
       <button class="second" id="quiOk" disabled style="width:100%;margin-top:6px">🔁 Refaire avec ces personnages</button>
+      <button class="second" id="voixJustes" disabled style="width:100%;margin-top:6px">✅ Les voix sont justes (ajouter au banc d'essai)</button>
+      <p class="note">« Refaire avec ces personnages » ou « Les voix sont justes » : la vidéo entre dans le banc d'essai des voix ; toute future modification du robot qui la rendrait fausse est refusée.</p>
     </div>
     <div id="castBloc" style="display:none;margin-top:10px">
       <b>🎭 Changer les personnages</b>
@@ -1024,9 +1028,9 @@ async function actualiserStats(){
     if(pn&&typeof pn==="object") rendrePannes(pn);
     if(cr&&cr.date){CRED=cr; rendreOutils(); rendreQuotaIA()}
     if(Array.isArray(h)){const par={}; h.forEach(e=>{if(e.fichier)par[e.fichier]=e});
-      try{const K=["fichier","titre","date","tag","web","filiere","source_audio","theme","manuel","legende","publie","vues","format","avis","note","note_auteur","programmee","duree","likes","commentaires","partages","a_verifier","confiance","recette","commentaire","couts"];
+      try{const K=["remplace","controles_sautes","publier_auto","rejoue_de","fichier","titre","date","tag","web","filiere","source_audio","theme","manuel","legende","publie","vues","format","avis","note","note_auteur","programmee","duree","likes","commentaires","partages","a_verifier","confiance","recette","commentaire","couts"];
         localStorage.setItem("jt_historique",JSON.stringify(h.filter(e=>e.fichier).map(e=>Object.fromEntries(K.filter(k=>e[k]!==undefined).map(k=>[k,e[k]])))))}catch(e){}   // copie légère pour la prochaine ouverture
-      DATA.forEach(v=>{const e=par[v.fichier]; if(!e)return; ["vues","likes","commentaires","partages","publie","couts","programmee","a_verifier","confiance","jury","recette","commentaire"].forEach(k=>{if(e[k]!==undefined)v[k]=e[k]})});
+      DATA.forEach(v=>{const e=par[v.fichier]; if(!e)return; ["vues","likes","commentaires","partages","publie","couts","programmee","a_verifier","confiance","jury","recette","commentaire","remplace","controles_sautes","publier_auto","rejoue_de"].forEach(k=>{if(e[k]!==undefined)v[k]=e[k]})});
       ajouterNouvelles(h); rendreTemps(h);
       const faites=h.filter(e=>e.fichier), der=faites[faites.length-1];
       if(der){OUTILS={outils:(der.outils&&typeof der.outils==="object")?der.outils:null,date:der.date||"",titre:der.titre||""}; rendreOutils()}}
@@ -1053,7 +1057,8 @@ function ajouterNouvelles(h){
     src:rel(e)+(e.web?e.fichier.replace(".mp4","_web.mp4"):e.fichier), src_plein:rel(e)+e.fichier, tag:e.tag, source:e.source_audio||"", confiance:e.confiance, poster_url:e.web?rel(e)+e.fichier.replace(".mp4",".jpg"):"",
     origine:(e.filiere==="tiktok"||e.source_audio||String(e.theme||"").startsWith("Bande son")||String(e.theme||"").startsWith("TIKTOK::"))?"tiktok":(e.manuel||e.theme)?"texte":"auto",
     legende:e.legende||"",publie:e.publie,vues:e.vues,format:e.format||"",manuel:!!e.manuel,avis:e.avis||0,note:e.note,note_auteur:e.note_auteur,programmee:e.programmee,
-    couts:e.couts||{},duree:e.duree,likes:e.likes,commentaires:e.commentaires,partages:e.partages,a_verifier:e.a_verifier||[]}));
+    couts:e.couts||{},duree:e.duree,likes:e.likes,commentaires:e.commentaires,partages:e.partages,a_verifier:e.a_verifier||[],
+    remplace:e.remplace,controles_sautes:e.controles_sautes||[],recette:e.recette,commentaire:e.commentaire||"",publier_auto:!!e.publier_auto,rejoue_de:e.rejoue_de}));
   if(!neuves.length&&DATA.length===avant) return;
   DATA.unshift(...neuves.reverse());
   if(choisie!==null) choisie+=neuves.length;                              // la vidéo ouverte garde sa place
@@ -1173,7 +1178,7 @@ function marquerVusTk(){try{const vus=lireVus(); DATA.filter(v=>v.origine==="tik
 // anciennes vidéos : d'après les points à vérifier
 function confiance(v){if(typeof v.confiance==="number") return v.confiance; const a=v.a_verifier||[];
   return Math.max(0,Math.min(100,100-12*a.filter(p=>p.grave).length-4*a.filter(p=>!p.grave).length))}
-const badgeConf=v=>{const c=confiance(v); return `<span class="conf ${c>=75?"v":c>=50?"o":"r"}" title="Note de confiance : contrôles de l'équipe et de la vidéo finie">🛡️ ${c}</span>`};
+const badgeConf=v=>{const c=confiance(v), sa=(v.controles_sautes||[]); return `<span class="conf ${c>=75?"v":c>=50?"o":"r"}" title="Note de confiance : contrôles de l'équipe et de la vidéo finie${sa.length?" — contrôles qui n'ont pas pu se faire : "+sa.join(", ").replace(/"/g,""):""}">🛡️ ${c}${sa.length?" ⚠":""}</span>`};
 // recherche et filtres (choix de l'auteur) : gardés sur l'appareil
 const FTK=(()=>{try{return JSON.parse(localStorage.getItem("jt_filtres")||"{}")}catch(e){return {}}})();
 const profilDe=v=>{const m=/tiktok\.com\/@([\w.\-]+)/.exec(v.source||""); return m?"@"+m[1]:""};
@@ -1245,7 +1250,8 @@ function majBoutonPubliFiche(){const b=$("#aPublier"); if(!b) return; const v=ch
   if(!v||v.origine!=="tiktok"||v.publie===true){b.style.display="none";return}
   b.style.display=""; b.disabled=!lireJeton(); b.textContent=textePubli(v); b.classList.toggle("on",filePubli().includes(v.fichier))}
 const remplacant=n=>{const vus=new Set(); let r; while(!vus.has(n)&&(r=(DATA||[]).find(x=>x.remplace===n&&x.fichier))){vus.add(n); n=r.fichier} return n};   // vidéo refaite : la nouvelle reprend la place « À publier » (publication_auto.remplacant)
-const filePubli=()=>[...new Set(String((VARS&&VARS.PUBLI_FILE)||"").split(/\n+/).map(x=>remplacant(x.trim())).filter(Boolean))];
+const filePubli=()=>[...new Set([...String((VARS&&VARS.PUBLI_FILE)||"").split(/\n+/).map(x=>remplacant(x.trim())),
+  ...(DATA||[]).filter(v=>v.publier_auto&&v.fichier&&!String((VARS&&VARS.PUBLI_NON)||"").split(/\n+/).includes(v.fichier)).map(v=>v.fichier)].filter(Boolean))];   // + vidéos rejouées, mises en file par le robot (sauf retirées : PUBLI_NON)
 const attentePubli=f=>alternerPubli(f.filter(n=>{const v=DATA.find(x=>x.fichier===n); return v&&v.publie==null}));   // cochées, pas encore publiées (échec : sautée)
 function alternerPubli(f){                                                 // jamais deux sons du même profil d'affilée (moteur/publication_auto.py)
   const pr=n=>{const v=DATA.find(x=>x.fichier===n); return v?profilDe(v):""};
@@ -1263,6 +1269,8 @@ async function basculerPubli(nom,b){
   f=on?f.filter(x=>x!==nom):[...f,nom];
   f=f.filter(n=>DATA.some(x=>x.fichier===n&&x.publie!==true));                // la liste ne garde que les vidéos à venir
   VARS.PUBLI_FILE=f.join("\n"); majPubliPartout();                        // l'écran change tout de suite
+  if(v_&&v_.publier_auto){const non=String(VARS.PUBLI_NON||"").split(/\n+/).filter(Boolean).filter(x=>x!==nom); if(on) non.push(nom);   // vidéo mise en file par le robot :
+    VARS.PUBLI_NON=non.join("\n"); try{await ecrireVar("PUBLI_NON",VARS.PUBLI_NON||"-")}catch(e){}}                                     // retirée = jamais remise
   try{await ecrireVar("PUBLI_FILE",f.join("\n")||"-"); toast(on?"Retirée de la publication automatique":"Ajoutée à la publication automatique ✓"); majBoutonPubliFiche()}
   catch(e){VARS.PUBLI_FILE=avant; majPubliPartout(); toast("❌ Pas enregistré ("+e.message+") : retour en arrière")}
 }
@@ -1471,7 +1479,7 @@ function majBoutons(){
 function ajusterBas(){setTimeout(()=>{document.querySelector("main").style.paddingBottom=($("#barre").offsetHeight+24)+"px"},50)}
 function choisir(i){
   choisie=i; fichier=null; const v=DATA[i]; document.body.classList.add("lecture");
-  ["#pouce","#bof","#legOk","#remOk","#programmer","#refaire","#refaireVoix","#refaireDecor"].forEach(s=>$(s).disabled=!lireJeton()); $("#legEdit").value=v.legende||""; $("#noteAuteur").value=v.note_auteur?String(v.note_auteur):"";
+  ["#pouce","#bof","#legOk","#remOk","#programmer","#refaire","#refaireVoix","#refaireDecor","#voixJustes"].forEach(s=>$(s).disabled=!lireJeton()); $("#legEdit").value=v.legende||""; $("#noteAuteur").value=v.note_auteur?String(v.note_auteur):"";
   $("#pouce").classList.toggle("actif",v.avis===1); $("#bof").classList.toggle("actif",v.avis===-1);
   document.querySelectorAll("#liste .carte").forEach(c=>c.classList.toggle("choisie",+c.dataset.i===i));
   $("#choix").textContent="Sélection : "+v.titre; ["#copier","#voir","#manuel"].forEach(s=>$(s).disabled=false);
@@ -1540,6 +1548,8 @@ function afficherQui(v){
     const sp=document.createElement("span"); sp.textContent=t; d.append(sel,sp); l.appendChild(d);
   });
 }
+$("#voixJustes").onclick=()=>{const v=DATA[choisie]; if(!v) return;
+  lancerFlux("banc.yml",$("#voixJustes"),"✅ Merci : cette vidéo entre dans le banc d'essai des voix (2 à 5 min). Le robot ne pourra plus jamais la rendre fausse.",{fichier:v.fichier},$("#suivi"))};
 $("#quiOk").onclick=()=>{
   const v=DATA[choisie]; const ch=[...$("#quiListe").querySelectorAll("select")].filter(s=>s.value!==s.dataset.p).map(s=>s.dataset.k+"="+s.value);
   if(!ch.length)return;
@@ -1801,7 +1811,7 @@ async function chargerReglages(){
     chargerPerso(v); activer(true); majConnus(); $("#cfgEtat").textContent="Régie connectée ✓ — chaque changement est enregistré tout de suite.";
     try{localStorage.setItem("jt_site_complet",v.SITE_COMPLET==="1"?"1":"0")}catch(e){} modeSite();
     appliquerOnglets(v.ONGLETS_MASQUES||""); if($("#o-tiktok").style.display!=="none") rendreTk(); rendreStock();
-    nettoyerAbos(v);
+    nettoyerAbos(v); ajouterOrigines(v);
   }catch(e){$("#cfgEtat").textContent="Erreur : "+e.message+" — vérifiez la clé (droits Actions et Variables).";activer(false);
     if(/jeton refusé/.test(e.message)) $("#cfgConnexion").style.display=""}
 }
@@ -1974,6 +1984,21 @@ async function verifierEnCours(){
 }
 const b64u=b=>btoa(String.fromCharCode(...new Uint8Array(b))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
 const deB64u=s=>Uint8Array.from(atob(s.replace(/-/g,"+").replace(/_/g,"/")+"===".slice((s.length+3)%4)),c=>c.charCodeAt(0));
+async function ajouterOrigines(v){                                         // 🎙️ créateurs d'origine trouvés par le robot (idée 5 du 23 novembre) :
+  try{                                                                     // inscrits une seule fois dans « Mes profils » (retirés ensuite = jamais remis)
+    const d=await lireEpisode("createurs_origine.json"); if(!d||!Array.isArray(d.profils)) return;
+    const net=x=>String(x||"").trim().replace(/^https?:\/\/(www\.)?tiktok\.com\//,"").replace(/[/?].*$/,"").replace(/^@/,"").toLowerCase();
+    const faits=new Set(String(v.PROFILS_ORIGINE_AJOUTES||"").split(/[\n,;]+/).map(net).filter(Boolean));
+    const noirs=new Set(String(v.PROFILS_INTERDITS||"").split(/[\n,;]+/).map(net).filter(Boolean));
+    const neufs=d.profils.map(f=>net(f.profil)).filter(p=>p&&!faits.has(p)&&!noirs.has(p)); if(!neufs.length) return;
+    let liste=String(v.PROFILS_TIKTOK||"").trim(); if(!liste&&CONNUS.length) liste=CONNUS.join("\n");   // (liste vide = profils déjà connus)
+    const deja=new Set(liste.split(/[\n,;]+/).map(net)), a=neufs.filter(p=>!deja.has(p));
+    if(a.length){liste=(liste?liste+"\n":"")+a.map(p=>"@"+p).join("\n"); await ecrireVar("PROFILS_TIKTOK",liste); v.PROFILS_TIKTOK=liste;
+      const t=document.querySelector('[data-var="PROFILS_TIKTOK"]'); if(t) t.value=liste}
+    const f2=[...faits,...neufs].join("\n"); await ecrireVar("PROFILS_ORIGINE_AJOUTES",f2); v.PROFILS_ORIGINE_AJOUTES=f2;
+    if(a.length) toast(`🎙️ ${a.length} créateur(s) d'origine ajouté(s) à vos profils : `+a.map(p=>"@"+p).join(", "));
+  }catch(e){}
+}
 async function nettoyerAbos(v){                                            // appareils disparus (signalés par le robot) : retirés de la liste
   try{
     const morts=new Set(CONF.abos_morts||[]); if(!morts.size) return; let l=[]; try{l=JSON.parse(v.PUSH_ABONNEMENTS||"[]")}catch(_){return}

@@ -1,0 +1,45 @@
+name: "Banc d'essai des voix : ajouter une vidéo juste"
+# Bouton « ✅ Les voix sont justes » de la fiche d'une vidéo TikTok (idée 10 du 23 novembre 2026) : la vidéo, jugée juste par l'auteur,
+# devient un cas du banc d'essai des voix (episodes/banc_voix, moteur/banc_voix.py) : toute modification du robot qui la rendrait
+# fausse est refusée par les tests.
+on:
+  workflow_dispatch:
+    inputs:
+      fichier:
+        description: "Vidéo (fichier.mp4)"
+        required: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: historique
+  cancel-in-progress: false
+
+jobs:
+  banc:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Outils
+        run: |
+          timeout 240 sudo apt-get update -q && timeout 240 sudo apt-get install -y -q ffmpeg
+          pip install -q numpy -c contraintes.txt
+          pip install -q -U "yt-dlp[default,curl-cffi]" || pip install -q -U yt-dlp
+      - name: Ajouter la vidéo au banc d'essai
+        env:
+          FICHIER: ${{ inputs.fichier }}
+        run: python -u moteur/banc_voix.py --ajouter "$FICHIER"
+      - name: Enregistrer
+        run: |
+          git config user.name "robot-jt"
+          git config user.email "robot-jt@users.noreply.github.com"
+          git add episodes/banc_voix
+          git commit -m "Banc d'essai des voix : $FICHIER" || echo "rien à enregistrer"
+          python moteur/fusion.py
+        env:
+          FICHIER: ${{ inputs.fichier }}
