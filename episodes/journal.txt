@@ -1,87 +1,128 @@
-Modal : 16.55 $ dépensés ce mois-ci (plafond 30 $)
+Modal : 16.82 $ dépensés ce mois-ci (plafond 30 $)
 Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, Groq ok, OpenRouter ok, IA Modal ok, ElevenLabs epuise — IA utilisée : mistral
-Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @motiontoonz, @same_same53, @charly.bse, @kodanimation, @vignianimation, @vincedessine, @aguerin30, @zequoiza, @jayzocc, @brutuslerobuste, @jawedyoussef
-Réserve de sons : son déjà écouté pris dans la réserve (https://www.tiktok.com/@yan_animation0/video/7673531469251284257) : on passe directement à la suite
-Chaîne : vidéo 9/10 lancée
-  réseau : erreur 429 passagère, nouvel essai dans 2 s
-  fiche de tournage : Gemini gemini-flash-latest n'a pas répondu (HTTP Error 429: Too Many Requests)
-  réseau : erreur 503 passagère, nouvel essai dans 2 s
-  fiche de tournage : Gemini gemini-flash-lite-latest n'a pas répondu (HTTP Error 503: Service Unavailable)
-  fiche de tournage écrite (IA de texte sur le dialogue) : salon (living room with vintage 90s decor, old TV, and a ), soir, chaud, ambiance dispute, niveau modeste, bruits entendus : crying, horn, kiss
-  [équipe · fiche de tournage] ✔ contrôle 1 : règles (cohérence avec ce qui est dit) : décor : — -> busy street outside (cité dans le dialogue ou entendu) (corrigé)
-    correction : décor : — -> busy street outside (cité dans le dialogue ou entendu)
-  [équipe · fiche de tournage] ✔ contrôle 2 : 2e IA (autre fournisseur) : repliques.11.emotion : joie -> sceptique (Le texte « Non, mais je te promets que je suis déjà sortie avec ton père. » exprime une affirmation défensive, pas de jo); repliques.12.emotion : jo (corrigé)
-    correction : repliques.11.emotion : joie -> sceptique (Le texte « Non, mais je te promets que je suis déjà sortie avec ton père. » exprime une affirmation défensive, pas de jo)
-    correction : repliques.12.emotion : joie -> colere (« Je t'assure. » renforce la contestation et la tension, ce qui correspond mieux à une émotion de colère que de joie.)
-  [équipe · fiche de tournage] ✔ contrôle 3 : image de l'original, puis règles : moment : soir -> nuit (lumière de la vidéo d'origine); décor : — -> busy street outside (cité dans le dialogue ou entendu) (corrigé)
-    correction : moment : soir -> nuit (lumière de la vidéo d'origine)
-    correction : décor : — -> busy street outside (cité dans le dialogue ou entendu)
-  réseau : erreur 429 passagère, nouvel essai dans 2 s
-  réseau : erreur 503 passagère, nouvel essai dans 2 s
-  jeu du dessin animé : Gemini n'a pas pu lire les expressions (rien de recopié)
-  sous-titres anglais : 28 réplique(s) traduite(s)
-Sketch : « PÈRE ET RELATIONS SECRÈTES », 28 répliques
+Remarque comprise : L'auteur signale que le décor (salon vs rue avec voiture de police), les objets (emballage fast‑food, canette) sont manquants, les bulles de dialogue doivent être séparées, il manque la réaction à la 
+Remarque de l'auteur : 0 réplique(s) à rendre à un autre personnage, 4 correction(s) : lieu, figurant, reaction, costume
+Remarque de l'auteur appliquée : décor de la scène 1 : rue, personne ajoutée à côté de emballage fast-food, canette (None), tenue de presentateur
+  son téléchargé (yt-dlp --impersonate chrome)
+  témoin hauteur : voix à 172 Hz et 246 Hz bien séparées, 2 phrase(s) remise(s) sur la bonne voix : Ouais, ; Eh, mais tu m'as pris
+  vidéo refaite : 2 réplique(s) qui mélangeaient deux voix coupée(s) en deux
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+  [équipe · casting voix] ✔ contrôle par la hauteur de la voix (réplique par réplique) : {'invite': 173, 'presentateur': 283} Hz : toutes du bon côté
+  [équipe · casting voix] ✔ dernier contrôle des voix (chaque réplique comparée à la voix moyenne de chaque personnage) : toutes à leur place (voix 0.53)
+  son d'origine repris pour 17 répliques (mêmes instants)
+Refaire (compte_rendu) : « OUAIS, QU'EST-CE QUE TU VEUX. », mêmes répliques
+Sketch : « OUAIS, QU'EST-CE QUE TU VEUX. », 17 répliques
 Lieux séparés : chaque personnage a son propre décor (appel, visio, l'un ailleurs)
-Loading weights:   0%|          | 0/978 [00:00<?, ?it/s]Loading weights:  79%|███████▊  | 770/978 [00:00<00:00, 7673.08it/s]Loading weights: 100%|██████████| 978/978 [00:00<00:00, 7727.05it/s]
-  Grounding DINO : 55 images regardées, jusqu'à 2 personne(s) ensemble
-  décor semi-réaliste 0 (cadré ×1.25, pieds au sol) : [semi] quiet city street at dusk, parked car at the curb, si
+  réseau : erreur 429 passagère, nouvel essai dans 2 s
+  décor semi-réaliste 0 : décor ressemblant de la banque refusé (ne colle pas à la fiche de tournage)
+  décor semi-réaliste 1 : lieu déjà montré cette semaine, nouveau tirage
+  décor semi-réaliste 0 (cadré ×1.50, pieds au sol) : [semi] quiet city street at dusk, parked car at the curb, si
   réseau : erreur 429 passagère, nouvel essai dans 2 s
   réseau : erreur 503 passagère, nouvel essai dans 2 s
-  décor 1 : notes de beauté des tirages [5.688, 4.719, 6.335]
-  décor semi-réaliste 1 (cadré ×1.05, pieds au sol) : [semi] cozy living room, sofa, posters on the wall, coffee t
-WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1795464003.446313    2960 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
-WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1795464004.682437    2960 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
-Downloading data from https://github.com/ina-foss/inaSpeechSegmenter/releases/download/models/keras_speech_music_noise_cnn.hdf5
-[1m      0/3244808[0m [37m━━━━━━━━━━━━━━━━━━━━[0m [1m0s[0m 0s/step[1m3244808/3244808[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 0us/step
-/home/runner/venv/lib/python3.12/site-packages/keras/src/layers/reshaping/reshape.py:39: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
-  super().__init__(**kwargs)
-Downloading data from https://github.com/ina-foss/inaSpeechSegmenter/releases/download/models/keras_male_female_cnn.hdf5
-[1m      0/6040200[0m [37m━━━━━━━━━━━━━━━━━━━━[0m [1m0s[0m 0s/step[1m1916928/6040200[0m [32m━━━━━━[0m[37m━━━━━━━━━━━━━━[0m [1m0s[0m 0us/step[1m6040200/6040200[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 0us/step
-montage : 14 plans (0.2:large>pre/coupe 3.4:large>inv/coupe 5.5:large>pre/coupe 15.9:large>inv/coupe 22.4:large>pre/coupe 26.1:large>inv/coupe 30.1:large>pre/coupe 35.8:large>inv/coupe 39.6:large>pre/coupe 47.9:large>inv/coupe 57.1:large>pre/coupe 69.6:large>inv/coupe 78.9:large>pre/coupe 79.7:large>inv/coupe)
+  décor 1 : notes de beauté des tirages [6.176, 6.279]
+  décor semi-réaliste 1 (cadré ×1.55, pieds au sol) : [semi] cozy living room, sofa, posters on the wall, coffee t
+montage : 8 plans (0.3:large>inv/coupe 5.3:large>inv/coupe 6.7:large>inv/coupe 7.0:large>inv/coupe 8.7:large>inv/coupe 10.4:large>inv/coupe 15.6:large>inv/coupe 21.0:large>pre/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-studio : nuit, lieux ['rue', 'salon'], tenues presentateur=tshirt, invite=chemise, 0 figurant(s), ambiances ['neon', 'pluie'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+objets de l'histoire : véhicule dans 1 décor(s)
+studio : soir, lieux ['rue', 'salon'], tenues invite=veste_jean, presentateur=tshirt, 0 figurant(s), ambiances ['pluie', 'poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
 appel : écran partagé du début à la fin (chacun dans son décor, aucun changement de plan)
-cartoon : durée 85.0 s, 28 répliques, 2 scène(s), personnages ['presentateur', 'invite']
-montage : 14 plans (0.2:large>pre/coupe 3.4:large>inv/coupe 5.5:large>pre/coupe 15.9:large>inv/coupe 22.4:large>pre/coupe 26.1:large>inv/coupe 30.1:large>pre/coupe 35.8:large>inv/coupe 39.6:large>pre/coupe 47.9:large>inv/coupe 57.1:large>pre/coupe 69.6:large>inv/coupe 78.9:large>pre/coupe 79.7:large>inv/coupe)
+cartoon : durée 23.2 s, 17 répliques, 2 scène(s), personnages ['invite', 'presentateur']
+Pré-jury (avant de dessiner) : réaction « regard_camera » à la réplique 17
+montage : 8 plans (0.3:large>inv/coupe 5.3:large>inv/coupe 6.7:large>inv/coupe 7.0:large>inv/coupe 8.7:large>inv/coupe 10.4:large>inv/coupe 15.6:large>inv/coupe 21.0:large>pre/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-studio : nuit, lieux ['rue', 'salon'], tenues presentateur=tshirt, invite=chemise, 0 figurant(s), ambiances ['neon', 'pluie'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+objets de l'histoire : véhicule dans 1 décor(s)
+studio : soir, lieux ['rue', 'salon'], tenues invite=veste_jean, presentateur=tshirt, 0 figurant(s), ambiances ['pluie', 'poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
 appel : écran partagé du début à la fin (chacun dans son décor, aucun changement de plan)
-cartoon : durée 85.0 s, 28 répliques, 2 scène(s), personnages ['presentateur', 'invite']
-  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~1275 images)
-  morceau 3825–5100 reçu d'une machine d'aide
-  morceau 1275–2550 reçu d'une machine d'aide
-  morceau 2550–3825 reçu d'une machine d'aide
-  dessin partagé terminé en 9.5 min
+cartoon : durée 23.2 s, 17 répliques, 2 scène(s), personnages ['invite', 'presentateur']
+  dessin partagé : 1 machine(s) d'aide + celle-ci (2 morceaux de ~695 images)
+  morceau 696–1391 reçu d'une machine d'aide
+  dessin partagé terminé en 5.3 min
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-  IA gemini indisponible (gemini : aucun modèle disponible (The read operation timed out)) : on passe à la suivante
+  IA gemini indisponible (gemini : aucun modèle disponible (503 : [{
+  "error": {
+    "code": 503,
+    "message": "This model is currently experie) : on passe à la suivante
 Jury : 1 remarque(s) sur les plans / zooms retirée(s) (montage « plan large » voulu)
-Jury : 3 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
-Jury qualité (ia) : 9.9/10 — Humoriste 9.4/10 :  | Réalisateur 10.0/10 :  | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.9/10 : 
-Manque par rapport à la vidéo d'origine : Dans l'original, la scène dans la voiture montre des expressions faciales plus variées et des réactions naturelles (comme des regards choqués ou des sourires).  ; L'ambiance sonore de la voiture (bruit de la route, conversations en arrière-plan) est absente dans la version animée. ; Les gestes des personnages dans la voiture (comme celui de tenir le téléphone) sont simplifiés et moins expressifs.
+Jury : 9 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
+Jury qualité (ia) : 8.7/10 — Humoriste 9.4/10 :  | Réalisateur 7.6/10 : 0.3 s L'invite 'Ouais' pourrait être mieux mis en valeur avec un léger mouvement de tête ou un geste pour attirer l'attention dès le début. | Directeur artistique 8.0/10 : 0 s Les personnages sont bien stylisés, mais le présentateur pourrait avoir une tenue plus distincte pour le différencier visuellement de l'invité.; 0 s L'arrière-plan du salon pourrait intégrer des détails humoristiques (ex : un micro-ondes avec un steak haché qui 'cuît') pour renforcer le thème de la vidéo.; 0 s Les sous-titres sont parfois illisibles à cause de l'arrière-plan coloré. Une police plus contrastée serait idéale. | Ingénieur du son 10.0/10 :  | Spectateur TikTok 8.6/10 : 21.0 s Certains moments manquent de dynamisme visuel pour maintenir l'intérêt du spectateur.
+Manque par rapport à la vidéo d'origine : Un personnage secondaire (ex : un chat ou un objet animé) pourrait enrichir l'humour et la cohérence thématique.
+Bouches : 2 réplique(s) où un autre personnage bougeait plus que celui qui parle (11, 13) : redessinées (celui qui écoute reste calme)
+montage : 8 plans (0.3:large>inv/coupe 5.3:large>inv/coupe 6.7:large>inv/coupe 7.0:large>inv/coupe 8.7:large>inv/coupe 10.4:large>inv/coupe 15.6:large>inv/coupe 21.0:large>pre/coupe)
+style croquis : décors passés à l'encre et à l'aquarelle
+objets de l'histoire : véhicule dans 1 décor(s)
+studio : soir, lieux ['rue', 'salon'], tenues invite=veste_jean, presentateur=tshirt, 0 figurant(s), ambiances ['pluie', 'poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+appel : écran partagé du début à la fin (chacun dans son décor, aucun changement de plan)
+cartoon : durée 23.2 s, 17 répliques, 2 scène(s), personnages ['invite', 'presentateur']
+  redessin partiel : 456/1391 images à redessiner (1 passage(s)), le reste repris tel quel
+Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
+Correction des bouches non gardée (pas mieux (2 → 2))
 fin en boucle : la dernière image se raccorde à la première (0.35 s de fondu)
+  [vidéo finie · synchro] ✘ bouches du bon personnage : 2 réplique(s) à revoir
+  [vidéo finie · bouches] ✔ bouche immobile quand le personnage se tait
+  [vidéo finie · technique] ✔ sauts, clignotements, personnages (0 remarque(s))
+  transcription Groq (Whisper, gratuit) : 87 mots
+  Gemini n'a pas pu écouter (gemini-flash-latest : HTTP Error 429: Too Many Requests)
+  karaoké contrôlé à l'oreille : 81 mots, écart médian 0.05 s
+  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 84 %)
+  [vidéo finie · contrôle IA] 0 remarque(s)
+  [vidéo finie · voix et dessin] ✔ chaque réplique sur la bonne voix, homme / femme d'après la voix
+  [vidéo finie · attribution] ✔ qui dit chaque phrase, comparé à l'image de l'original
+  contrôles qui n'ont pas pu se faire : fidélité à l'audio (Gemini n'a pas répondu) (note de confiance plafonnée)
+  1 remarque(s) légère(s) gardée(s) au journal seulement : 11.1 s sous-titre « pour que t'as une foule ou quoi. » ma
+Contrôle de la vidéo finie : 2 point(s) à vérifier — 11.1 s pendant la réplique de presentateur (« pour que t'as une fou ; 14.0 s pendant la réplique de presentateur (« Mais ça te regarde pa
+Compte rendu (tour 1, confiance 70/100) : corrections demandées au robot :
+- à 11.1 s : pendant la réplique de presentateur (« pour que t'as une foule ou quoi. »), c'est un autre personnage qui bouge
+- à 14.0 s : pendant la réplique de presentateur (« Mais ça te regarde pas. »), c'est un autre personnage qui bouge
+- à 21.0 s : Certains moments manquent de dynamisme visuel pour maintenir l'intérêt du spectateur.
+Remarque comprise : L'auteur signale que les répliques 10 et 12 sont animées par le mauvais personnage et que la scène à 21 s manque de dynamisme visuel.
+Remarque de l'auteur : 2 réplique(s) à rendre à un autre personnage, 1 correction(s) : jeu
+Compte rendu : réplique 11 -> invite ; réplique 13 -> invite ; jeu plus marqué à la réplique 17
+  réseau : erreur 429 passagère, nouvel essai dans 2 s
+  décor semi-réaliste 0 : décor ressemblant de la banque refusé (ne colle pas à la fiche de tournage)
+  décor semi-réaliste 0 : lieu déjà montré cette semaine, nouveau tirage
+  décor semi-réaliste 0 : aucun sol libre pour poser les pieds, décor dessiné : [semi] quiet city street at dusk, parked car at the curb, si
+montage : 8 plans (0.3:large>inv/coupe 5.3:large>inv/coupe 6.7:large>inv/coupe 7.0:large>inv/coupe 8.7:large>inv/coupe 10.4:large>inv/coupe 15.6:large>inv/coupe 21.0:large>pre/coupe)
+style croquis : décors passés à l'encre et à l'aquarelle
+objets de l'histoire : véhicule dans 1 décor(s)
+studio : soir, lieux ['rue', 'salon'], tenues invite=veste_jean, presentateur=tshirt, 0 figurant(s), ambiances ['pluie', 'poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+appel : écran partagé du début à la fin (chacun dans son décor, aucun changement de plan)
+cartoon : durée 23.2 s, 17 répliques, 2 scène(s), personnages ['invite', 'presentateur']
+  image 300/1391 (4 processeurs)
+  image 600/1391
+  image 900/1391
+  image 1200/1391
+Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
+fin en boucle : la dernière image se raccorde à la première (0.35 s de fondu)
+  [vidéo finie · synchro] décalage mesuré -0.15 s (mesure seulement : le son n'est jamais déplacé)
   [vidéo finie · synchro] ✔ bouches du bon personnage
   [vidéo finie · bouches] ✔ bouche immobile quand le personnage se tait
   [vidéo finie · technique] ✔ sauts, clignotements, personnages (0 remarque(s))
-  transcription Groq (Whisper, gratuit) : 259 mots
+  transcription Groq (Whisper, gratuit) : 87 mots
   Gemini n'a pas pu écouter (gemini-flash-latest : HTTP Error 429: Too Many Requests)
-  sous-titre « C'est quoi Appelle-le. C'est quoi Appell » confirmé par Gemini (la 2e transcription s'était trompée)
-  karaoké contrôlé à l'oreille : 160 mots, écart médian 0.03 s
-  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 74 %)
+  karaoké contrôlé à l'oreille : 81 mots, écart médian 0.05 s
+  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 84 %)
   [vidéo finie · contrôle IA] 0 remarque(s)
-  [vidéo finie · fidélité à l'audio] ✔ Gemini a regardé et écouté la vidéo finie
   [vidéo finie · voix et dessin] ✔ chaque réplique sur la bonne voix, homme / femme d'après la voix
   [vidéo finie · attribution] ✔ qui dit chaque phrase, comparé à l'image de l'original
-  3 remarque(s) légère(s) gardée(s) au journal seulement : 47.9 s karaoké décalé de 1.12 s sur « C'est quoi Appelle- ; 51.3 s sous-titre « On va parler de mon père là. » mais o ; 58.6 s on entend « Tiens, en FaceTime, je l'appelle. » sa
+  contrôles qui n'ont pas pu se faire : fidélité à l'audio (Gemini n'a pas répondu) (note de confiance plafonnée)
+  1 remarque(s) légère(s) gardée(s) au journal seulement : 11.1 s sous-titre « pour que t'as une foule ou quoi. » ma
 Contrôle de la vidéo finie : 0 point(s) à vérifier
-  vidéo en deux parties : coupure à 43.4 s sur 86 s (2026-11-23_20h56_emission_p1.mp4, 2026-11-23_20h56_emission_p2.mp4)
+Jury : 1 remarque(s) sur les plans / zooms retirée(s) (montage « plan large » voulu)
+Jury : 5 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
+Jury qualité (ia) : 8.0/10 — Humoriste 7.8/10 : 14 s La répartie finale manque d'un petit effet visuel de surprise pour faire mouche. | Réalisateur 8.8/10 :  | Directeur artistique 7.8/10 : 1 s Le personnage invité pourrait porter un haut de couleur plus vive pour contraster. | Ingénieur du son 9.6/10 :  | Spectateur TikTok 6.8/10 : 
+Compte rendu corrigé : confiance 70 → 90/100, jury 8.0/10
+Compte rendu (tour 2, confiance 90/100) : corrections demandées au robot :
+- à 14.0 s : La répartie finale manque d'un petit effet visuel de surprise pour faire mouche.
+Remarque comprise : L'auteur indique que la réplique finale (invité à 14.0 s) devrait être accompagnée d'un petit effet visuel de surprise.
+Remarque de l'auteur : 0 réplique(s) à rendre à un autre personnage, 1 correction(s) : reaction
+Compte rendu : rien que le robot sache corriger lui-même
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, groq = ok, ia = mistral ×3, groq ×2, gemini ×2, appels = {'mistral': 3, 'groq': 2, 'gemini': 2}, epuisees = [], quota = {'groq': {'reste_jour': 994, 'limite_jour': 1000}}, voix = tiktok, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 32550, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 236, 'total_usd': 0.073, 'modal_mesure_usd': 0.27}
-⏱️ Étapes plus lentes que d'habitude : Installation de la machine 6 min (d'habitude 1 min), Décors 3 min (d'habitude 1 min), Contrôle qualité par le jury 7 min (d'habitude 2 min)
-⏱️ Temps par étape : Installation de la machine 6.3 min, Démarrage du robot 0.2 min, Écoute du son TikTok 2.1 min, Décors 3.9 min, Dessin des images 11.1 min, Contrôle qualité par le jury 7.3 min, Contrôle de la vidéo finie 1.0 min, Corrections du compte rendu 1.4 min
-Quota de l'API GitHub : 4532 appels restants
-OK : sortie/2026-11-23_20h56_emission.mp4 (86 s)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, groq = ok, ia = groq ×3, gemini ×6, mistral ×1, appels = {'groq': 3, 'gemini': 6, 'mistral': 1}, epuisees = [], quota = {'groq': {'reste_jour': 998, 'limite_jour': 1000}}, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 27818, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 54, 'total_usd': 0.017, 'modal_mesure_usd': 0.24}
+⏱️ Étapes plus lentes que d'habitude : Installation de la machine 4 min (d'habitude 1 min)
+⏱️ Temps par étape : Installation de la machine 4.0 min, Démarrage du robot 0.2 min, Écoute du son TikTok 0.3 min, Décors 0.9 min, Dessin des images 5.9 min, Contrôle qualité par le jury 0.7 min, Correction des bouches 3.3 min, Contrôle de la vidéo finie 0.4 min, Corrections du compte rendu 9.7 min
+Vidéo refaite : 2026-11-23_21h26_emission.mp4 remplace 2026-11-23_20h15_emission.mp4 dans la liste (confiance 76 → 90) ; sa place « À publier » est gardée
+Quota de l'API GitHub : 4761 appels restants
+OK : sortie/2026-11-23_21h26_emission.mp4 (24 s)
