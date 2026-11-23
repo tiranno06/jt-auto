@@ -572,6 +572,50 @@ TABLE_MOTS = (r"\b(rendez-vous|rencard|date|d[îi]ner|d[ée]jeuner|manger|mange|
               r"plat|repas|table|commander|commande|assiette|dessert|entr[ée]e)\b")
 
 
+# Rôles joués (audit du 23 novembre 2026) : sur les sketchs filmés (aguerin30, zequoiza…) UN homme joue souvent des FILLES
+# (« comment les meufs organisent leurs plans » : robe, talons, épilation, cils) ; la voix, le timbre et ce que Gemini voit disent
+# « homme » (c'est l'acteur), seuls les MOTS disent le personnage.
+ROLE_F = r"\b(ma robe|ma jupe|mes talons|les talons|m'?[ée]piler|[ée]pilation|mes cils|faire mes ongles|mes ongles|mon vernis|" \
+         r"me maquiller|mon maquillage|mon mascara|mon rouge à lèvres|mon soutif|mon soutien-gorge|je suis enceinte|mon mari|ma grossesse|" \
+         r"bisous à toutes|mes copines|entre filles|mon brushing|mes extensions)\b"
+ROLE_H = r"\b(ma barbe|me raser|ma femme|ma meuf|ma copine|mon rasoir|entre mecs|entre potes|mes couilles)\b"
+APPEL_F = r"\b(ma ch[ée]rie|ma belle|ma reine|ma s(œ|oe)ur|madame|ma fille|meuf|ma puce|la miss|frangine|ma bichette)\b"
+APPEL_H = r"\b(fr[ée]rot|mon fr[èe]re|mon gars|mon pote|monsieur|mon fils|fiston|bro|mon reuf|mon poto|mon grand|boloss)\b"
+TITRE_F = r"\b(les meufs|les filles|les femmes|les copines|les nanas|les daronnes|ma m[èe]re et moi)\b"
+TITRE_H = r"\b(les mecs|les gars|les hommes|les potes|les darons|les keumés)\b"
+
+
+def un_acteur(sk):
+    """Une même personne (ou un même doubleur) joue tous les rôles : Gemini l'a dit, les voix se ressemblent trop (> 0,7), ou une
+    seule personne est vue à l'image pour plusieurs rôles qui parlent."""
+    d = sk.get("doublage") if isinstance(sk.get("doublage"), dict) else {}
+    if d.get("meme_interprete"): return True
+    try:
+        if float(d.get("ressemblance") or 0) > 0.7: return True
+    except (TypeError, ValueError): pass
+    if any("voix proches" in str(e.get("detail") or "") or "trop proches" in str(e.get("detail") or "")
+           for e in sk.get("equipe") or [] if isinstance(e, dict)): return True   # (bulletin de l'équipe : vidéos plus anciennes)
+    roles = {r.get("p") for r in sk.get("repliques") or [] if r.get("p") not in (None, "narrateur")}
+    return d.get("nb_vus") == 1 and len(roles) >= 2
+
+
+def genre_texte(sk, role):
+    """Homme / femme d'après les MOTS : ce que dit le personnage (« ma robe », « mes cils »), comment l'autre l'appelle (« ma
+    chérie », « frérot ») et le texte posé sur la vidéo ou son titre au pluriel (« les meufs… », « les mecs… » : tous les rôles).
+    Renvoie (genre ou None, force)."""
+    reps = sk.get("repliques") or []
+    siennes = " ".join(str(r.get("t") or "") for r in reps if r.get("p") == role).lower()
+    autres = " ".join(str(r.get("t") or "") for r in reps if r.get("p") not in (role, None, "narrateur")).lower()
+    d = sk.get("doublage") if isinstance(sk.get("doublage"), dict) else {}
+    titre = (str(d.get("legende_ecran") or "") + " " + str(d.get("titre") or "")).lower()
+    f = 2 * len(re.findall(ROLE_F, siennes)) + len(re.findall(APPEL_F, autres)) + len(re.findall(ACCORD_F, siennes))
+    h = 2 * len(re.findall(ROLE_H, siennes)) + len(re.findall(APPEL_H, autres)) + len(re.findall(ACCORD_H, siennes))
+    if re.search(TITRE_F, titre): f += 2
+    if re.search(TITRE_H, titre): h += 2
+    if f == h: return None, 0
+    return ("f" if f > h else "h"), abs(f - h)
+
+
 def genre_voix(sk, role, d=None, detail=False):
     """Homme ou femme. Sketch écrit : voix fixes des rôles (Jojo, Kévin : homme ; Lila : femme). Son TikTok : les témoins VOTENT
     (analyse des vidéos du 11 novembre : le timbre seul, décisif depuis le 6 novembre, a dessiné en homme 6 femmes sur 11 vidéos ;
@@ -610,9 +654,12 @@ def genre_voix(sk, role, d=None, detail=False):
         g_h = "f" if (moi >= 200 and autre <= 175 and moi >= 1.4 * autre) else "h" if (moi <= 175 and autre >= 200 and autre >= 1.4 * moi) else None
         if g_h and not (g_vu and g_vu != g_h) and not (g_vu and vu_autre and g_vu == vu_autre):   # jamais contre ce que Gemini a VU
             votes[g_h] += 2.5                                              # (ni deux hommes / deux femmes vus : écart = cris)
-    lignes = " ".join(x.get("t", "") for x in sk.get("repliques") or [] if x.get("p") == role).lower()
-    nf, nh = len(re.findall(ACCORD_F, lignes)), len(re.findall(ACCORD_H, lignes))
-    if nf != nh: votes["f" if nf > nh else "h"] += 1
+    g_txt, force = genre_texte(sk, role)
+    if un_acteur(sk) or force >= 4:                                        # un acteur joue tous les rôles (audit du 23 novembre), ou
+                                                                           # les mots ne laissent aucun doute (« ma robe », « m'épiler ») :
+        votes = {k: v * 0.35 for k, v in votes.items()}                    # la voix et l'allure sont les siennes, pas celles du rôle
+        if g_txt: votes[g_txt] += min(6.0, 2.0 + 1.5 * force)              # les mots décident
+    elif g_txt: votes[g_txt] += min(2.0, 0.5 + 0.5 * force)
     if votes["h"] != votes["f"]: g = "f" if votes["f"] > votes["h"] else "h"
     else:
         vh = (sk.get("_voix_hz") or {}).get(role) or 0
@@ -1023,6 +1070,39 @@ def separer_lieux(sk):
     sk["_separes"] = True
     if S: sk["studio"] = S
     return True
+
+def resynchroniser_lieux(sk):
+    """Lieux séparés (appel, écran coupé en deux) : chaque personnage reste dans SON décor. Audit du 23 novembre 2026 (« Ouais,
+    qu'est-ce que tu veux ») : des répliques changées de personnage APRÈS le découpage (dernier contrôle des voix, compte rendu,
+    « Corriger qui parle ») restaient dans la scène de l'ancien personnage, et les deux personnages apparaissaient dans chaque moitié
+    de l'écran. Ici chaque réplique repart dans la scène de son personnage (celle où il a le plus de répliques ; deux personnages
+    jamais dans la même). Renvoie le nombre de répliques déplacées."""
+    if not sk.get("_separes"): return 0
+    dec = sk.get("decoupage") or []
+    reps = sk.get("repliques") or []
+    if len(dec) < 2: return 0
+    from collections import Counter
+    compte = {}
+    for k, sc in enumerate(dec):
+        for i in sc.get("repliques") or []:
+            if i < len(reps) and reps[i].get("p") not in (None, "narrateur"): compte.setdefault(reps[i]["p"], Counter())[k] += 1
+    scene_de, prises = {}, set()
+    for role, c in sorted(compte.items(), key=lambda x: -sum(x[1].values())):   # le plus bavard choisit d'abord
+        libres = [k for k, _ in c.most_common() if k not in prises] or [k for k in range(len(dec)) if k not in prises]
+        if not libres: continue
+        scene_de[role] = libres[0]; prises.add(libres[0])
+    if len(scene_de) < 2: return 0
+    avant = {i: k for k, sc in enumerate(dec) for i in sc.get("repliques") or []}
+    nouv = [[] for _ in dec]; k_prec, n = 0, 0
+    for i, r in enumerate(reps):
+        k = scene_de.get(r.get("p"), avant.get(i, k_prec))
+        if avant.get(i) is not None and avant[i] != k: n += 1
+        nouv[k].append(i); k_prec = k
+    for sc, l in zip(dec, nouv): sc["repliques"] = l
+    sk["decoupage"] = [sc for sc in dec if sc["repliques"]]
+    if n: print(f"  lieux séparés : {n} réplique(s) remise(s) dans le décor de leur personnage", flush=True)
+    return n
+
 
 def une_scene(sk):
     """Son TikTok (demande de l'auteur, 31 octobre 2026) : la vidéo d'origine se passe dans UN seul lieu. L'IA découpait parfois le son

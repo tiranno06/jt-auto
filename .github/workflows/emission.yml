@@ -51,6 +51,10 @@ on:
         description: "Interne (chaîne) : sons TikTok encore en fabrication, à ne pas reprendre"
         required: false
         default: ""
+      recale:
+        description: "Interne (barrière de qualité) : n° de la vidéo de remplacement d'une vidéo recalée"
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -127,6 +131,7 @@ jobs:
       PREPA_PARALLELE: ${{ vars.PREPA_PARALLELE || '1' }}  # chaîne : la vidéo suivante prépare son écoute pendant que celle-ci se dessine
       EN_MEME_TEMPS: ${{ vars.EN_MEME_TEMPS || '2' }}     # vidéos fabriquées en même temps (réglage du site, 2 par défaut)
       EVITER: ${{ inputs.eviter }}
+      RECALE: ${{ inputs.recale }}
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -390,6 +395,10 @@ jobs:
             FICHIER="$F" python moteur/supprimer.py
             git add episodes; git commit -m "Vidéo refaite : $F retirée de la liste" || echo "rien à enregistrer"
             FICHIER="$F" REJOUER="python moteur/supprimer.py" MESSAGE="Vidéo refaite" python moteur/fusion.py
+          fi
+          if [ -s sortie/.remplacante ]; then                          # barrière de qualité : vidéo recalée -> une autre sur un autre son
+            N_R="$(sed -n 1p sortie/.remplacante)"; SON_R="$(sed -n 2p sortie/.remplacante)"
+            gh workflow run emission.yml --ref main -f filiere=tiktok -f recale="$N_R" -f eviter="$SON_R" && echo "Vidéo de remplacement $N_R lancée"
           fi
           if [ -s sortie/.deuxieme_chance ]; then
             gh workflow run emission.yml --ref main -f filiere=tiktok -f theme="$(cat sortie/.deuxieme_chance)" && echo "2e chance lancée"

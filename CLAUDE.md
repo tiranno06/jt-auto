@@ -848,6 +848,33 @@
   moins sûr que l'ancienne -> c'est la nouvelle qui est retirée ; la nouvelle porte "remplace" et reprend la place « À publier » de
   l'ancienne (la variable PUBLI_FILE n'est pas modifiable par le robot : `publication_auto.remplacant` et `remplacant` du site suivent la
   chaîne ; la liste est réécrite propre au prochain clic).
+- **Audit des 10 vidéos du 23 novembre 2026 (demande de l'auteur : dialogues mélangés, caméras et scènes qui ne vont pas, erreurs
+  signalées mais jamais réparées)** : chaque vidéo comparée image par image à l'original (yt-dlp + version légère des archives).
+  **Gemini patient** (`video_ia.generer`, utilisé par la vidéo entière, la fiche de tournage, les images, le contrôle « fidélité » et
+  l'écoute) : 5 vidéos sur 10 avaient perdu Gemini (503 « surchargé », 429) après un seul essai ; maintenant chaque modèle, puis
+  attente 20 s / 40 s et nouveau tour (3 tours, GEMINI_TOURS) ; d'autres « flash » en service passent après les modèles voulus
+  (`reseau.gemini_disponibles`). **Rôles joués par un acteur de l'autre sexe** (« comment les meufs organisent leurs plans » : un
+  homme joue deux filles, dessinées en garçons) : `studio.un_acteur` (Gemini « même interprète », voix > 0,7, une seule personne vue,
+  ou « voix proches » au bulletin) et `studio.genre_texte` (ce que dit le rôle : robe, talons, épiler, cils… ; comment l'autre
+  l'appelle : « ma chérie », « frérot » ; texte posé sur la vidéo ou titre au pluriel : « les meufs », « les mecs ») : avec un seul
+  acteur, ou des mots sans doute possible, les mots décident (voix et allure = l'acteur) ; aussi dans `fiche_tournage.controle_image`
+  et `verif_finale.voix_dessin`. **Texte posé sur l'original** (`ocr.legende` -> sk["doublage"]["legende_ecran"], « Pov: t'es au
+  bureau… ») : il donne le lieu (`fiche_tournage.lieu_ecrit`, jamais changé ensuite, F["_lieu_dit"]) ; **décor = le lieu de la fiche**
+  (`decor_compose` : « bedroom with a messy bed » refusé pour un bureau, détails d'un autre lieu retirés). **L'image décide quand un
+  acteur fait toutes les voix** (`verif_finale.vue_fiable` : le témoin image n'est cru que s'il ALTERNE vraiment ; sinon il dit qui est
+  à l'image, pas qui parle : plus de fausse alerte « attribution » ; `attribuer_par_image` après le dernier contrôle des voix, à la
+  fabrication et pour une vidéo refaite ; le contrôle « attribution » porte ses corrections, appliquées sans IA par le compte rendu ;
+  IMAGE_DECIDE=0). **Contrôle « dialogue »** (`verif_finale.dialogue_logique`, un acteur seulement) : une question suivie d'une
+  réponse ou d'une autre question du MÊME personnage, 3 fois et après la moitié des questions = point grave (DIALOGUE_LOGIQUE=0).
+  **Appel : chacun dans son décor** (`studio.resynchroniser_lieux` au début du rendu : des répliques changées de personnage après le
+  découpage restaient dans l'autre moitié de l'écran, les deux personnages étaient dans chaque moitié). **Plus de bascule homme /
+  femme** : le contrôle « fidélité » et le compte rendu automatique (IA qui lit le rapport) ne changent jamais le genre (ils le
+  faisaient passer de h à f puis de f à h d'un tour à l'autre) ; seule une remarque de l'auteur le peut. **Barrière de qualité**
+  (`deuxieme_chance.barriere` / `recaler`, BARRIERE=0) : une vidéo tirée au hasard qui garde, après toutes les corrections, un défaut
+  grave MESURÉ (attribution, voix et dessin, synchro, bouches, dialogue) est recalée : rangée avec les essais (« 🧪 Essais », effacée
+  au bout de 3 jours, historique "recalee"), jamais sur la liste ni à publier, et une autre vidéo part sur un AUTRE son (emission.yml
+  entrée « recale », sortie/.remplacante ; 2 remplaçantes à la suite au plus : REMPLACANTES_MAX) ; un lien collé ou une vidéo refaite
+  à la demande de l'auteur n'est jamais recalée. NeMo réparé (datasets==2.21.0 dans l'image Modal). Tests : tests/test_audit23.py.
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.

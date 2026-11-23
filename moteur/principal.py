@@ -159,6 +159,7 @@ def resume_alerte(h, fiche=None):
     if h.get("filiere") == "tiktok" or h.get("source_audio") or h.get("confiance") is not None:
         j = (h.get("jury") or {}).get("note") if isinstance(h.get("jury"), dict) else None
         n = len(h.get("a_verifier") or [])
+        if h.get("recalee"): return "🚫 recalée par le contrôle qualité (rangée avec les essais) : une autre vidéo est lancée à sa place"
         return " · ".join(x for x in (f"confiance {h['confiance']}/100" if h.get("confiance") is not None else "",
                                       f"jury {j}/10" if j is not None else "",
                                       f"⚠️ {n} point(s) à vérifier" if n else "✅ rien à vérifier") if x)
@@ -192,14 +193,15 @@ def corriger_compte_rendu(sk, base, audios, mots, decors, fmt, points, modal_ok,
     conf = verif_finale.confiance(sk.get("equipe"), points, Q, sk.get("_controles_sautes"))
     for tour in range(CR.tours()):
         txt = CR.texte(points, Q.get("jury"), sk.get("equipe"))
-        if not txt or conf >= 100: break
+        directs = any(p.get("qui") or p.get("genre") or p.get("qui_liste") for p in points or [])   # corrigés sans IA (voix, image)
+        if (not txt and not directs) or conf >= 100: break
         print(f"Compte rendu (tour {tour + 1}, confiance {conf}/100) : corrections demandées au robot :\n{txt}", flush=True)
         sk4 = copy.deepcopy(sk)
         try: faits_f = __import__("fiche_tournage").corriger_depuis_points(sk4, points)   # fidélité à l'audio : la fiche est corrigée
         except Exception as e: print(f"Compte rendu : fiche de tournage non corrigée ({str(e)[:100]})", flush=True); faits_f = []
         try: faits_v = verif_finale.appliquer_voix(sk4, points)              # voix et dessin (21 novembre) : corrigé directement, sans IA
         except Exception as e: print(f"Compte rendu : voix non corrigées ({str(e)[:100]})", flush=True); faits_v = []
-        faits = faits_f + faits_v + (remarque.appliquer(sk4, txt, memoriser=False) or [])
+        faits = faits_f + faits_v + ((remarque.appliquer(sk4, txt, memoriser=False) or []) if txt else [])
         if not faits: print("Compte rendu : rien que le robot sache corriger lui-même", flush=True); break
         print("Compte rendu : " + " ; ".join(faits), flush=True)
         dec4 = dict(decors or {})
@@ -830,7 +832,17 @@ def main():
             if perd:
                 os.makedirs("sortie", exist_ok=True); open("sortie/.perdante", "w", encoding="utf-8").write(perd)
         except Exception as e: print(f"remplacement de l'ancienne version impossible ({str(e)[:100]})", flush=True)
-    if DOUB and not test and not REFAIRE:                                  # deuxième chance : vidéo peu sûre refaite une fois (jamais une vidéo refaite à la main)
+    RECALEE = ""
+    if DOUB and not test and not REFAIRE:                                  # barrière de qualité (23 novembre) : défaut grave restant = recalée
+        try:
+            try: prof_ = int(os.environ.get("RECALE") or 0)
+            except ValueError: prof_ = 0
+            RECALEE = DC.recaler(historique[-1], sk["doublage"].get("source") or tiktok, prof_)
+            if historique[-1].get("recalee"):
+                os.makedirs("sortie", exist_ok=True)
+                if RECALEE: open("sortie/.remplacante", "w", encoding="utf-8").write(RECALEE)
+        except Exception as e: print(f"barrière de qualité impossible ({str(e)[:120]})", flush=True)
+    if DOUB and not test and not REFAIRE and not historique[-1].get("recalee"):   # deuxième chance : vidéo peu sûre refaite une fois
         try:
             quoi_, val_ = DC.decider(historique, historique[-1], sk["doublage"].get("source") or tiktok, DEUXIEME)
             if quoi_:

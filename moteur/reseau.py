@@ -97,9 +97,11 @@ def gemini_disponibles(voulus):
     L = [m for m in _GM["liste"] if m not in GEMINI_MORTS]
     if not _GM["liste"]: return tuple(m for m in voulus if m not in GEMINI_MORTS) or tuple(voulus)
     ok = tuple(m for m in voulus if m in L)
-    if ok: return ok
     flash = sorted((m for m in L if re.fullmatch(r"gemini-[\d.]+-flash(-lite)?|gemini-flash(-lite)?-latest", m)), reverse=True)
-    return tuple(flash[:3]) or tuple(voulus)
+    # (audit du 23 novembre : avec 2 modèles morts, il n'en restait que 2, tous deux « surchargés » (503) : d'autres « flash » encore
+    # en service chez Google passent après les voulus, chacun a son propre quota et sa propre charge)
+    autres = tuple(m for m in flash if m not in ok)[:3]
+    return (ok + autres) if ok else (autres or tuple(voulus))
 
 
 GEMINI_MORTS = set()                                                       # modèles qui répondent 404

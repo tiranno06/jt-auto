@@ -374,6 +374,10 @@ def verifier(video, sk, R):
         journal(f"  [vidéo finie · attribution] {'✔' if not d10 else '✘'} qui dit chaque phrase, comparé à l'image de l'original"
                 + (f" : {d10[0]['quoi']}" if d10 else ""))
     except Exception as e: journal(f"  contrôle attribution impossible ({str(e)[:120]})"); sautes.append("attribution")
+    try:                                                                   # scripte (23 novembre) : une question, la réponse par l'autre
+        d11 = dialogue_logique(sk); points += d11
+        if d11: journal(f"  [vidéo finie · dialogue] ✘ {d11[0]['quoi']}")
+    except Exception as e: journal(f"  contrôle du dialogue impossible ({str(e)[:120]})")
     if sk.get("doublage") and not (sk["doublage"] or {}).get("vue") and os.environ.get("ATTRIBUTION", "1") != "0":
         sautes.append("qui parle d'après l'image de l'original (image illisible)")
     if sautes: journal(f"  contrôles qui n'ont pas pu se faire : {', '.join(sautes)} (note de confiance plafonnée)")
@@ -418,7 +422,11 @@ def voix_dessin(video, sk):
         vu = {r: str((P_.get(r) or {}).get("genre_vu") or "").lower()[:1] for r in H}
         vu = {r: ("f" if g in ("f", "w") else "h" if g in ("h", "m") else None) for r, g in vu.items()}
         meme_vu = vu.get(haut) and vu.get(haut) == vu.get(bas)             # deux hommes (ou deux femmes) vus par Gemini : l'écart = des cris
-        if H[haut] >= 200 and H[bas] <= 170 and H[haut] >= 1.4 * H[bas] and not meme_vu:
+        import studio as _ST                                               # rôle joué par un acteur de l'autre sexe (audit du 23 nov.) :
+        txt = {r: _ST.genre_texte(sk, r) for r in H}                       # les mots (« ma robe », « les meufs ») ne se discutent pas
+        if _ST.un_acteur(sk): vu = {}; meme_vu = True
+        if H[haut] >= 200 and H[bas] <= 170 and H[haut] >= 1.4 * H[bas] and not meme_vu \
+                and not any(g_ and (f_ >= 4 or g_ == gen.get(r)) for r, (g_, f_) in txt.items()):
             if gen.get(haut) == "h" and age.get(haut, 30) >= 13 and vu.get(haut) != "h":
                 d_ = _defaut(None, "voix et dessin", f"{NOMS_ROLES.get(haut, haut)} a une voix de femme ({H[haut]} Hz) mais est dessiné(e) en homme : c'est une femme")
                 d_["genre"] = {"role": haut, "genre": "f"}; out.append(d_)
@@ -429,6 +437,102 @@ def voix_dessin(video, sk):
 
 
 ATTRIB_MAX = 0.2
+
+
+def vue_fiable(sk):
+    """Le témoin image dit-il QUI PARLE, ou seulement QUI EST À L'IMAGE ? (audit du 23 novembre 2026 : dans « organiser des plans »
+    on ne voit qu'une personne pendant 26 s, puis l'autre, alors que les deux se parlent tout du long ; le témoin disait « 0 » puis
+    « 1 » et le contrôle « attribution » criait à tort au mauvais personnage.) Fiable seulement s'il ALTERNE vraiment : au moins
+    2 changements, au moins un tiers des changements de personne des répliques, et chaque personne sur 15 % des phrases."""
+    vue = ((sk or {}).get("doublage") or {}).get("vue") or []
+    v = [int(c) for a, b, c, w in sorted(vue, key=lambda x: float(x[0])) if c is not None and float(w) >= 0.3]
+    if len(v) < 4 or len(set(v)) < 2: return False
+    sw_v = sum(1 for x, y in zip(v, v[1:]) if x != y)
+    from collections import Counter
+    reps = sk.get("repliques") or []
+    roles = [r for r, _ in Counter(r.get("p") for r in reps if r.get("p") not in (None, "narrateur") and not r.get("_hors_champ")).most_common(2)]
+    rp = [r.get("p") for r in reps if r.get("p") in roles]
+    sw_r = sum(1 for x, y in zip(rp, rp[1:]) if x != y)
+    mini = min(Counter(v).values()) / len(v) if len(Counter(v)) >= 2 else 0
+    return sw_v >= 2 and sw_v >= 0.33 * max(1, sw_r) and mini >= 0.15
+
+
+def attribuer_par_image(sk, appliquer=True, journal=print):
+    """Quand UN acteur joue tous les rôles (voix trop proches : la hauteur et l'empreinte vocale ne tranchent plus) et que l'image de
+    l'original alterne vraiment (vue_fiable), c'est l'image qui dit qui parle : chaque réplique va au personnage que l'image montre
+    parler, si elle est nette (certitude ≥ 0,5 et 2 fois plus de poids que l'autre). Jamais contre l'auteur ni contre une réplique
+    confirmée par la hauteur de la voix ; la moitié des répliques au plus. Audit du 23 novembre 2026 (« Tu viens d'avoir 27 ans » :
+    l'image avait raison sur 44 % des phrases et personne ne s'en servait). Renvoie {n° de réplique: rôle}. IMAGE_DECIDE=0 pour couper."""
+    if os.environ.get("IMAGE_DECIDE", "1") == "0" or not vue_fiable(sk): return {}
+    import studio as _ST
+    if not _ST.un_acteur(sk): return {}
+    from collections import Counter
+    reps = sk.get("repliques") or []; vue = sk["doublage"]["vue"]
+    roles = [r for r, _ in Counter(r.get("p") for r in reps if r.get("p") not in (None, "narrateur") and not r.get("_hors_champ")).most_common(2)]
+    if len(roles) != 2: return {}
+    votes = {}
+    for a, b, c, w in vue:
+        if c is None or int(c) not in (0, 1): continue
+        for i, r in enumerate(reps):
+            if r.get("p") not in roles or r.get("_deb") is None: continue
+            o = min(float(b), float(r["_fin"])) - max(float(a), float(r["_deb"]))
+            if o > 0.5 * (float(b) - float(a)):
+                votes.setdefault(i, [0.0, 0.0])[int(c)] += float(w) * o
+    if len(votes) < 4: return {}
+    direct = sum(1 for i, (v0, v1) in votes.items() if (v0 > v1) == (reps[i]["p"] == roles[0]))
+    sens = roles if direct >= len(votes) - direct else roles[::-1]       # personne 0 de l'image = quel rôle
+    out = {}
+    for i, (v0, v1) in votes.items():
+        r = reps[i]
+        if r.get("_auteur") or r.get("_hauteur_ok"): continue
+        haut, bas = (0, 1) if v0 >= v1 else (1, 0)
+        fort, faible = max(v0, v1), min(v0, v1)
+        dur = max(0.2, float(r["_fin"]) - float(r["_deb"]))
+        if fort < 0.5 * min(dur, 1.0) or fort < 2 * faible: continue
+        if sens[haut] != r["p"]: out[i] = sens[haut]
+    if len(out) > len(reps) / 2: return {}
+    if appliquer and out:
+        for i, role in out.items(): reps[i]["p"] = role; reps[i]["_image_ok"] = True
+        journal(f"  [équipe · casting voix] ✔ un acteur joue tous les rôles : {len(out)} réplique(s) rendue(s) au personnage que l'image "
+                f"montre parler (corrigé) : " + ", ".join(str(i + 1) for i in sorted(out)[:10]))
+    return out
+
+
+QUESTION_DEBUT = re.compile(r"^(pourquoi|comment|qu'est-ce|qu'est ce|est-ce que|est ce que|c'est qui|t'es o[uù]|tu fais quoi|tu veux|t'as|"
+                            r"tu vas|tu peux|quoi|qui|o[uù]|combien|quand|t'es s[ée]rieux|s[ée]rieux)\b", re.I)
+REPONSE_DEBUT = re.compile(r"^(oui|non|ouais|nan|bah|ben|parce que|pa'ce que|si|d'accord|ok|okay|je sais pas|j'sais pas|rien|personne|"
+                           r"jamais|carr[ée]ment|grave|exactement|tranquille|t'inqui[èe]te)\b", re.I)
+
+
+def est_question(t):
+    t = str(t or "").strip().lower()
+    return t.endswith("?") or bool(QUESTION_DEBUT.match(t)) or bool(re.search(r"\b(ou pas|hein|non)\s*[?.!]?$", t))
+
+
+def dialogue_logique(sk):
+    """Contrôle « scripte » de la vidéo finie (audit du 23 novembre 2026) : quand UN acteur fait toutes les voix et que l'image ne
+    dit pas qui parle, rien ne voyait « Pourquoi tu veux savoir ? » / « Bah, je te demande, comme ça » dits par le MÊME personnage.
+    Une question suivie d'une réponse (« oui », « bah », « parce que »…) ou d'une autre question du même personnage, 3 fois au
+    moins et après la moitié des questions au moins = point grave « dialogue », avec les répliques en cause (le compte rendu les fait relire).
+    DIALOGUE_LOGIQUE=0 pour couper."""
+    if os.environ.get("DIALOGUE_LOGIQUE", "1") == "0": return []
+    import studio as _ST
+    if not _ST.un_acteur(sk): return []
+    reps = [r for r in sk.get("repliques") or [] if r.get("p") not in (None, "narrateur") and not r.get("_hors_champ")]
+    paires, memes = 0, []
+    idx = {id(r): i for i, r in enumerate(sk.get("repliques") or [])}
+    for a, b in zip(reps, reps[1:]):
+        if not est_question(a.get("t")) or b.get("_auteur") or b.get("_hauteur_ok"): continue
+        paires += 1                                                        # une question, puis la même personne qui enchaîne
+        if a.get("p") == b.get("p") and (REPONSE_DEBUT.match(str(b.get("t") or "").strip()) or est_question(b.get("t"))):
+            memes.append(idx[id(b)])
+    if len(memes) < 3 or len(memes) < 0.5 * paires: return []
+    R = sk.get("repliques")
+    d_ = _defaut(R[memes[0]].get("_deb"), "dialogue",
+                 f"{len(memes)} réponse(s) dites par le personnage qui vient de poser la question (répliques "
+                 f"{', '.join(str(k + 1) for k in memes[:6])}) : c'est sans doute l'autre qui répond")
+    d_["repliques_douteuses"] = memes
+    return [d_]
 
 
 def attribution_image(sk):
@@ -444,6 +548,7 @@ def attribution_image(sk):
     reps = sk.get("repliques") or []
     roles = [r for r, _ in Counter(r.get("p") for r in reps if r.get("p") not in (None, "narrateur") and not r.get("_hors_champ")).most_common(2)]
     if len(roles) != 2 or len(vue) < 4: return []
+    if not vue_fiable(sk): return []                                       # l'image montre qui est là, pas qui parle (23 novembre)
     paires = []
     for a, b, c, w in vue:
         best, k_ = 0.0, None
@@ -453,7 +558,7 @@ def attribution_image(sk):
             if o > best: best, k_ = o, i
         if k_ is None or best < 0.5 * (float(b) - float(a)): continue
         r = reps[k_]
-        if r.get("_hauteur_ok") or r.get("_auteur"): continue
+        if r.get("_hauteur_ok") or r.get("_auteur") or c is None: continue
         paires.append((int(c), roles.index(r["p"]), k_))
     if len(paires) < 4: return []
     accord = max(sum(1 for c, j, _ in paires if c == j), sum(1 for c, j, _ in paires if c != j))
@@ -465,6 +570,9 @@ def attribution_image(sk):
                  f"l'image de l'original montre l'autre personne parler pendant {round(100 * part)} % des phrases "
                  f"(répliques {', '.join(str(k + 1) for k in contre[:6])})")
     d_["repliques_douteuses"] = contre
+    import copy                                                            # correction directe possible (un acteur, image fiable)
+    q = attribuer_par_image(copy.deepcopy(sk), appliquer=False, journal=lambda *_: None)
+    if q: d_["qui_liste"] = {str(i): r_ for i, r_ in q.items()}
     return [d_]
 
 
@@ -474,6 +582,10 @@ def appliquer_voix(sk, points):
     l'auteur a déjà choisi). Renvoie la liste lisible des changements."""
     faits, reps = [], sk.get("repliques") or []
     for d in points or []:
+        for k_, r_ in (d.get("qui_liste") or {}).items():                 # « attribution » : l'image de l'original décide (un acteur)
+            k_ = int(k_)
+            if 0 <= k_ < len(reps) and not reps[k_].get("_auteur") and reps[k_].get("p") != r_:
+                reps[k_]["p"] = r_; reps[k_]["_image_ok"] = True; faits.append(f"réplique {k_ + 1} -> {r_} (image de l'original)")
         q = d.get("qui")
         if isinstance(q, dict) and 0 <= int(q.get("replique", -1)) < len(reps) and not reps[int(q["replique"])].get("_auteur"):
             reps[int(q["replique"])]["p"] = q["role"]; reps[int(q["replique"])]["_voix_corrigee"] = True

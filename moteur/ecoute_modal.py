@@ -14,7 +14,8 @@ CONF = "https://raw.githubusercontent.com/NVIDIA/NeMo/v2.1.0/examples/speaker_ta
 
 img_nemo = (modal.Image.debian_slim(python_version="3.11").apt_install("ffmpeg", "libsndfile1", "build-essential", "wget")
             .pip_install("torch==2.5.1", "torchaudio==2.5.1", "Cython", "packaging")
-            .pip_install("nemo_toolkit[asr]==2.1.0", "numpy<2", "pyarrow>=15,<17")   # (audit du 20 novembre : un pyarrow trop récent exigeait NumPy 2)              # NeMo 2.1 utilise np.sctypes (retiré de NumPy 2) ; Python 3.11 : Modal 1.7 refusera 3.10
+            .pip_install("nemo_toolkit[asr]==2.1.0", "numpy<2", "pyarrow>=15,<17", "datasets==2.21.0")   # (23 novembre : « No module named
+                                                                                                     # 'datasets.distributed' » : un datasets trop ancien)   # (audit du 20 novembre : un pyarrow trop récent exigeait NumPy 2)              # NeMo 2.1 utilise np.sctypes (retiré de NumPy 2) ; Python 3.11 : Modal 1.7 refusera 3.10
             .run_commands(f"wget -q -O /opt/diar.yaml {CONF}").env(ENV))
 img_florence = (modal.Image.debian_slim(python_version="3.11")
                 .pip_install("torch==2.5.1", "transformers==4.46.3", "accelerate", "einops", "timm", "pillow", "numpy<2").env(ENV))

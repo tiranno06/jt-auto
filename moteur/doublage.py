@@ -831,7 +831,17 @@ def preparer(url):
                       "evenements": [list(e) for e in EVENEMENTS][:60], "visuel": visuel, "audio": audio, "silences": coupes,
                       "video_origine": info.get("_fichier") or "", "debut": debut,    # (contrôle qualité : comparaison avec l'original)
                       "titre": str(info.get("title") or info.get("description") or "")[:300],   # titre de l'original (parties 1, 2… : suites.py)
-                      "lieu_ia": str((__import__("video_ia").DERNIER or {}).get("lieu") or "")}   # lieu vu par Gemini dans CET original
+                      "lieu_ia": str((__import__("video_ia").DERNIER or {}).get("lieu") or ""),   # lieu vu par Gemini dans CET original
+                      "meme_interprete": bool((__import__("video_ia").DERNIER or {}).get("meme_interprete"))}   # un acteur, plusieurs rôles
+    try:                                                                   # texte posé sur la vidéo (« Pov: t'es au bureau… », audit du 23 nov.)
+        import ocr as _ocr
+        _leg = _ocr.legende(lignes_ocr, duree)
+        if _leg: sk["doublage"]["legende_ecran"] = _leg; journal(f"  texte posé sur l'original : « {_leg[:120]} »")
+    except Exception as _e: __import__("pannes").avale(_e)
+    try:
+        _r = __import__("locuteurs").ETAT.get("ressemblance")
+        if _r is not None: sk["doublage"]["ressemblance"] = float(_r)
+    except Exception as _e: __import__("pannes").avale(_e)
     try:                                                                   # personnes VUES à l'image par Gemini (une voix au téléphone exclue)
         n_v = __import__("video_ia").visibles() or __import__("personnes_vues").nombre(info.get("_fichier") or "")
         if n_v: sk["doublage"]["nb_vus"] = int(n_v)
@@ -849,6 +859,8 @@ def preparer(url):
     except Exception as e: journal(f"  contrôles de l'équipe impossibles ({str(e)[:120]})")
     try: equipe.voix_finales(sk, sig, SR, B)                              # dernier contrôle des voix, réplique par réplique (20 novembre)
     except Exception as e: journal(f"  dernier contrôle des voix impossible ({str(e)[:120]})")
+    try: __import__("verif_finale").attribuer_par_image(sk, journal=journal)   # un acteur pour tous les rôles : l'image décide (23 nov.)
+    except Exception as e: journal(f"  attribution par l'image impossible ({str(e)[:120]})")
     # voix de chaque réplique (pour les bouches) et instants des mots, relatifs au début de la réplique
     audios, mots = [], []
     for s in segs:
@@ -957,6 +969,7 @@ def depuis_sketch(sk, controle=False):
             if n_s: journal(f"  vidéo refaite : {n_s} réplique(s) qui mélangeaient deux voix coupée(s) en deux")
             n_ = equipe.voix_finales(sk, mono, SR, B_)
             if n_: journal(f"  vidéo refaite : {n_} réplique(s) remise(s) sur la bonne voix (hauteur et empreinte vocale)")
+            __import__("verif_finale").attribuer_par_image(sk, journal=journal)
         except Exception as e: journal(f"  contrôle des voix de la vidéo refaite impossible ({str(e)[:120]})")
     audios, mots = [], []
     for r in sk["repliques"]:

@@ -75,3 +75,36 @@ def decider(historique, entree, url, premiere=""):
     entree["deuxieme_chance"] = "en_cours"
     print(f"Deuxième chance : note de confiance {c} < {seuil():.0f} : la vidéo est refaite une fois sur le même son, la plus sûre sera gardée", flush=True)
     return "relancer", f"TIKTOK::{url}{MARQUE}{entree.get('fichier')}"
+
+
+# ------------------------------------------------------------------ barrière de qualité (audit du 23 novembre 2026)
+# Demande de l'auteur : « les vidéos auraient dû être réparées jusqu'à ce qu'il n'y ait plus d'erreurs, et ENSUITE postées sur le
+# site ». Une vidéo tirée au hasard (chaîne, créneau, son au hasard) qui garde, après toutes les corrections automatiques, un défaut
+# grave MESURÉ (réplique sur la mauvaise voix, l'image de l'original qui montre l'autre parler, bouches du mauvais personnage) est
+# RECALÉE : rangée avec les essais (« 🧪 Essais » du site, effacée au bout de 3 jours, jamais proposée à la publication) et une
+# nouvelle vidéo est lancée sur un AUTRE son (REMPLACANTES_MAX = 2 remplaçantes à la suite au plus). Un lien collé par l'auteur ou une
+# vidéo refaite à sa demande n'est jamais recalée (il garde la main). BARRIERE=0 pour couper.
+BLOQUANTS = ("attribution", "voix et dessin", "synchro", "bouches", "dialogue")
+
+
+def remplacantes_max():
+    try: return max(0, int(os.environ.get("REMPLACANTES_MAX") or 2))
+    except ValueError: return 2
+
+
+def barriere(entree):
+    """Raisons de recaler la vidéo (liste de textes) ; [] = elle passe."""
+    if os.environ.get("BARRIERE", "1") == "0" or not entree or entree.get("essai") or entree.get("manuel"): return []
+    return [str(p.get("quoi") or "")[:140] for p in entree.get("a_verifier") or []
+            if isinstance(p, dict) and p.get("grave", True) and str(p.get("poste") or "").split(" · ")[-1] in BLOQUANTS]
+
+
+def recaler(entree, source, profondeur):
+    """Range la vidéo avec les essais ; renvoie le texte de sortie/.remplacante (« n° de remplaçante » puis le son à éviter) ou ""."""
+    raisons = barriere(entree)
+    if not raisons: return ""
+    entree["essai"] = True; entree["recalee"] = raisons[:6]
+    print("Barrière de qualité : vidéo RECALÉE (rangée avec les essais, jamais sur la liste) : " + " ; ".join(raisons[:3]), flush=True)
+    if profondeur >= remplacantes_max():
+        print(f"Barrière de qualité : déjà {profondeur} remplaçante(s) à la suite : pas de nouvelle tentative", flush=True); return ""
+    return f"{profondeur + 1}\n{source or ''}"

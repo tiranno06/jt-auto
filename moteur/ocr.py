@@ -84,6 +84,15 @@ def lire(video, journal=print, pas=PAS):
     return lignes
 
 
+def legende(lignes, duree):
+    """Texte posé par le créateur sur toute la vidéo (« Pov: t'es au bureau et GTA 6 sort demain », « comment les meufs organisent
+    leurs plans ») : lignes vues pendant au moins 40 % de la durée. Audit du 23 novembre 2026 : ce texte disait le lieu et qui sont
+    les personnages, et le robot ne le lisait pas (chambre au lieu du bureau, filles dessinées en garçons)."""
+    if not lignes or not duree: return ""
+    vues = [l for l in lignes if float(l.get("fin", 0)) - float(l.get("deb", 0)) >= 0.4 * float(duree)]
+    return " ".join(str(l.get("t") or "") for l in sorted(vues, key=lambda l: l.get("deb", 0)))[:300]
+
+
 def _lettres(w): return re.sub(r"[^a-z0-9]", "", _sans_accents(w))
 
 

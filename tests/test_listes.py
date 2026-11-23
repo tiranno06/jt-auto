@@ -979,7 +979,7 @@ class TestAudit20Novembre(unittest.TestCase):
         anc = dict(reseau._GM)
         try:
             reseau._GM["liste"] = ["gemini-flash-latest", "gemini-flash-lite-latest"]
-            self.assertEqual(reseau.gemini_disponibles(("gemini-flash-latest", "gemini-2.5-flash")), ("gemini-flash-latest",))
+            self.assertEqual(reseau.gemini_disponibles(("gemini-flash-latest", "gemini-2.5-flash")), ("gemini-flash-latest", "gemini-flash-lite-latest"))
             reseau._GM["liste"] = []
             self.assertEqual(reseau.gemini_disponibles(("x",)), ("x",))       # liste illisible : on garde tout
         finally: reseau._GM.clear(); reseau._GM.update(anc)
@@ -1094,7 +1094,7 @@ class TestPannes21Novembre(unittest.TestCase):
             reseau.GEMINI_MORTS.discard("gemini-2.5-flash")
             self.assertIn("gemini-2.5-flash", reseau.gemini_disponibles(("gemini-flash-latest", "gemini-2.5-flash")))
             reseau.gemini_mort("gemini-2.5-flash", "HTTP Error 404: Not Found")
-            self.assertEqual(reseau.gemini_disponibles(("gemini-flash-latest", "gemini-2.5-flash")), ("gemini-flash-latest",))
+            self.assertEqual(reseau.gemini_disponibles(("gemini-flash-latest", "gemini-2.5-flash")), ("gemini-flash-latest", "gemini-flash-lite-latest"))
             reseau.gemini_mort("gemini-flash-latest", "The read operation timed out")   # un délai dépassé n'est pas une mort
             self.assertIn("gemini-flash-latest", reseau.gemini_disponibles(("gemini-flash-latest",)))
         finally:
@@ -1152,7 +1152,7 @@ class TestPannes21Novembre(unittest.TestCase):
     def test_correction_sans_idees_de_sketch_et_jury_complet(self):
         src = open(os.path.join(os.path.dirname(__file__), "..", "moteur", "principal.py"), encoding="utf-8").read()
         self.assertIn('"source": "refaire"}], "refaire")]', src)
-        self.assertIn("for modele in list(video_ia.MODELES)[:2]:", open(os.path.join(os.path.dirname(__file__), "..", "moteur", "fiche_tournage.py"), encoding="utf-8").read())
+        self.assertIn("max_modeles=2", open(os.path.join(os.path.dirname(__file__), "..", "moteur", "fiche_tournage.py"), encoding="utf-8").read())
         self.assertIn("OUTIL, max_tokens=8000)", open(os.path.join(os.path.dirname(__file__), "..", "moteur", "qualite.py"), encoding="utf-8").read())
 
     def test_tous_les_workflows_lisibles(self):
