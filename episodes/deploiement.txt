@@ -9,10 +9,10 @@ code: 0
 === banque de voix (Kyutai, Zonos, Whisper) ===
 ✓ Created objects.
 ├── ✓ Uploaded /home/runner/work/jt-auto/jt-auto/moteur/banque_modal.py
+├── ✓ Created Function Kokoro.*.
 ├── ✓ Created Function Whisper.*.
 ├── ✓ Created Function Kyutai.*.
-├── ✓ Created Function Zonos.*.
-└── ✓ Created Function Kokoro.*.
+└── ✓ Created Function Zonos.*.
 ✓ Deployment skipped: no changes detected! ⏭️
 
 View Deployment: 
@@ -28,23 +28,23 @@ View Deployment: https://modal.com/apps/tubbiolo-francois/main/deployed/jt-decor
 code: 0
 === ecoute (NeMo, Florence-2) ===
 Saving image...
-Image saved, took 5.07s
+Image saved, took 8.62s
 
-Built image im-NrL35F2jYW6TwS2e9NylH9 in 82.65s
+Built image im-EO5cl3095m4I6aOj6nFwzR in 70.42s
 
 
-Building image im-05mXz86MDa6Af9awhzKpLy
+Building image im-huTaMVNKe2kecldNfKIip2
 
 => Step 0: FROM base
 
 => Step 1: RUN wget -q -O /opt/diar.yaml https://raw.githubusercontent.com/NVIDIA/NeMo/v2.1.0/examples/speaker_tasks/diarization/conf/inference/diar_infer_telephonic.yaml
 Saving image...
-Image saved, took 1.19s
+Image saved, took 1.47s
 
-Built image im-05mXz86MDa6Af9awhzKpLy in 2.97s
+Built image im-huTaMVNKe2kecldNfKIip2 in 4.10s
 
 
-Building image im-2IYb0qUJZ822xmEtp1gOiq
+Building image im-tV9mitLn3SvgMbIAbFAJrf
 
 => Step 0: FROM base
 
@@ -56,14 +56,14 @@ Building image im-2IYb0qUJZ822xmEtp1gOiq
 Saving image...
 Image saved, took 1.44s
 
-Built image im-2IYb0qUJZ822xmEtp1gOiq in 2.99s
+Built image im-tV9mitLn3SvgMbIAbFAJrf in 3.23s
 
 
 ✓ Created objects.
 ├── ✓ Uploaded /home/runner/work/jt-auto/jt-auto/moteur/ecoute_modal.py
 ├── ✓ Created Function Florence.*.
 └── ✓ Created Function Nemo.*.
-✓ App deployed in 93.800s! 🎉
+✓ App deployed in 15.514s! 🎉
 
 View Deployment: 
 https://modal.com/apps/tubbiolo-francois/main/deployed/jt-ecoute
@@ -83,4 +83,4 @@ FileNotFoundError: [Errno 2] No such file or directory: 'ffmpeg'
 === essai des decors (premier lancement : telechargement du modele) ===
 décor 0 : 1544909 octets
 décor 1 : 2187747 octets
-durée 41 s
+durée 57 s
