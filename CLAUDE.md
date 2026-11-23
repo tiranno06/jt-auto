@@ -458,7 +458,8 @@
   marche aussi sur les dessins animés ; le téléphone caché par la main à l'oreille n'est pas vu. Cache des modèles : hf-ecoute-v3.
   **Nom du compte** (9) : le petit logo existait mais il était caché par la barre du haut de l'appli TikTok (y = 118) et disait
   « Petits.Dramas » : il affiche maintenant le compte (`marque.compte`, TIKTOK_COMPTE, sinon @petitsdramas), à y = 215 (FIL_Y), et
-  n'apparaît qu'après le titre (jamais par-dessus).
+  n'apparaît qu'après le titre (jamais par-dessus). **Bouton « + Abonne-toi »** (demande de l'auteur du 23 novembre) : petit bouton rouge façon
+  TikTok juste sous le nom (`marque.filigrane`, même apparition que le logo ; texte = réglage ABONNE_HAUT, « 0 » pour l'enlever).
 - **Liste du 11 novembre 2026, 2e partie (choix de l'auteur 7, 8, 9, 14, 15, 20)** : **hashtags à risque** (7, `legende.RISQUES`,
   `hashtag_sur`, `sans_risque` ; contenu adulte, drogue, violence, automutilation, « follow4follow »… ; mots courts comparés en entier :
   « charmeur » ou « armée » restent ; HASHTAGS_INTERDITS pour en ajouter ; aussi retirés des anciennes descriptions à l'envoi) ;

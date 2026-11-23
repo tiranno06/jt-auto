@@ -188,6 +188,7 @@ jobs:
       PUBLIC_TEST: ${{ vars.PUBLIC_TEST }}
       CONTROLE_VIDEO: ${{ vars.CONTROLE_VIDEO }}
       TIKTOK_COMPTE: ${{ vars.TIKTOK_COMPTE }}
+      ABONNE_HAUT: ${{ vars.ABONNE_HAUT }}   # bouton « + Abonne-toi » sous le nom en haut à gauche (« 0 » pour l'enlever)
       PROFILS_TIKTOK: ${{ vars.PROFILS_TIKTOK }}
       PROFILS_INTERDITS: ${{ vars.PROFILS_INTERDITS }}  # liste noire : profils jamais repris (moteur/profils_tiktok.py)
       PROFILS_ORIGINE_AJOUTES: ${{ vars.PROFILS_ORIGINE_AJOUTES }}   # créateurs d'origine déjà inscrits (ou retirés) par le site
