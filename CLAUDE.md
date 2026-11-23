@@ -821,7 +821,7 @@
   pas des chaînes qui font comme nous ; nos créateurs suivis (vignianimation, yan_animation0, kodanimation, motiontoonz, vincedessine…)
   sont eux-mêmes des chaînes de dessin animé qui reprennent ces voix.
 - **Robots à part (choix de l'auteur du 22 novembre 2026 : 1, 2, 3)** pour soulager le robot qui fabrique : **📦 réserve de sons**
-  (`pre_ecoute.py`, pre_ecoute.yml lancé par le garde toutes les 2 heures, heures paires à Paris, si aucun n'est en cours ; un 1er job
+  (`pre_ecoute.py`, pre_ecoute.yml lancé par le garde toutes les 2 heures, heures paires à Paris, passage du quart d’heure 0-14 seulement (sinon lancé deux fois), si aucun n’est en cours ; un 1er job
   léger `--manque` regarde la réserve : pleine = aucune machine lourde) : RESERVE_SONS sons écoutés à l'avance (6 par défaut, 1 à 10 ;
   STOCK_SONS encore lu s'il est plus grand), même sans vidéos automatiques ; toutes les fabrications, salves à la main comprises, prennent
   dans la réserve et passent au dessin ; **🔭 éclaireur** (`profils_tiktok.eclairer` / `noter`, eclaireur.yml toutes les 3 heures, sans

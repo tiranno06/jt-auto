@@ -77,7 +77,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           # toutes les 2 heures (heures paires à Paris) : le workflow regarde d'abord si la réserve est pleine (machine légère)
-          if [ $(( 10#$(TZ=Europe/Paris date +%H) % 2 )) -eq 0 ] && [ "$(date -u +%M)" -lt 30 ]; then
+          if [ $(( 10#$(TZ=Europe/Paris date +%H) % 2 )) -eq 0 ] && [ "$(date -u +%M)" -lt 15 ]; then
             EN_COURS="$(gh run list -R "$GITHUB_REPOSITORY" -w pre_ecoute.yml --limit 5 --json status -q '[.[] | select(.status != "completed")] | length' 2>/dev/null || echo 0)"
             if [ "${EN_COURS:-0}" = "0" ]; then gh workflow run pre_ecoute.yml -R "$GITHUB_REPOSITORY" && echo "Réserve de sons : remplissage lancé."
             else echo "Réserve de sons : déjà en cours."; fi
@@ -88,7 +88,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if [ $(( 10#$(TZ=Europe/Paris date +%H) % 3 )) -eq 1 ] && [ "$(date -u +%M)" -lt 30 ]; then
+          if [ $(( 10#$(TZ=Europe/Paris date +%H) % 3 )) -eq 1 ] && [ "$(date -u +%M)" -lt 15 ]; then
             gh workflow run eclaireur.yml -R "$GITHUB_REPOSITORY" && echo "Éclaireur lancé."
           fi
 
