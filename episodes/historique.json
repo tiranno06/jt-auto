@@ -28784,7 +28784,12 @@
    "persos": 2,
    "partie": false
   },
-  "titre_affiche": "POV : Ton manager te harcèle en vacances"
+  "titre_affiche": "POV : Ton manager te harcèle en vacances",
+  "controle_soir": {
+   "date": "2026-11-23",
+   "problemes": 0,
+   "version": 2
+  }
  },
  {
   "date": "2026-11-20",
@@ -28965,7 +28970,12 @@
    "persos": 2,
    "partie": false
   },
-  "titre_affiche": "POV : SEL-DEFENSE"
+  "titre_affiche": "POV : SEL-DEFENSE",
+  "controle_soir": {
+   "date": "2026-11-23",
+   "problemes": 0,
+   "version": 2
+  }
  },
  {
   "date": "2026-11-20",
@@ -29119,7 +29129,12 @@
    "persos": 2,
    "partie": false
   },
-  "titre_affiche": "POV: GAMBERGE"
+  "titre_affiche": "POV: GAMBERGE",
+  "controle_soir": {
+   "date": "2026-11-23",
+   "problemes": 0,
+   "version": 2
+  }
  },
  {
   "date": "2026-11-20",
@@ -29275,6 +29290,36 @@
       "raison": "Le lieu indiqué dans la fiche de tournage (cuisine) ne correspond pas du tout au décor extérieur urb"
      }
     ]
+   },
+   {
+    "t": 29.3,
+    "poste": "contrôleur du soir · voix et dessin",
+    "quoi": "réplique 9 « Écoute, je vais rester bien clair. Ça ferait un mo » : c'est la voix du présentateur, pas de l'invitée (hauteur de la voix)",
+    "grave": true,
+    "qui": {
+     "replique": 8,
+     "role": "presentateur"
+    }
+   },
+   {
+    "t": 64.6,
+    "poste": "contrôleur du soir · voix et dessin",
+    "quoi": "réplique 18 « Et on évite de réciter des chiffres toute la nuit  » : c'est la voix du présentateur, pas de l'invitée (hauteur de la voix)",
+    "grave": true,
+    "qui": {
+     "replique": 17,
+     "role": "presentateur"
+    }
+   },
+   {
+    "t": null,
+    "poste": "contrôleur du soir · voix et dessin",
+    "quoi": "l'invitée a une voix de femme (204 Hz) mais est dessiné(e) en homme : c'est une femme",
+    "grave": true,
+    "genre": {
+     "role": "invite",
+     "genre": "f"
+    }
    }
   ],
   "confiance": 88,
@@ -29505,7 +29550,12 @@
    "persos": 3,
    "partie": false
   },
-  "titre_affiche": "POV : Ton pote alcoolique"
+  "titre_affiche": "POV : Ton pote alcoolique",
+  "controle_soir": {
+   "date": "2026-11-23",
+   "problemes": 0,
+   "version": 2
+  }
  },
  {
   "date": "2026-11-21",
@@ -29713,7 +29763,115 @@
    "persos": 2,
    "partie": false
   },
-  "titre_affiche": "POV : Ton date panique totalement 💀"
+  "titre_affiche": "POV : Ton date panique totalement 💀",
+  "a_verifier": [
+   {
+    "t": 6.1,
+    "poste": "contrôleur du soir · voix et dessin",
+    "quoi": "réplique 4 « T'inquiète, c'est pas grave, je comprends. Après,  » : c'est la voix du présentateur, pas de l'invitée (hauteur de la voix)",
+    "grave": true,
+    "qui": {
+     "replique": 3,
+     "role": "presentateur"
+    }
+   },
+   {
+    "t": 14.6,
+    "poste": "contrôleur du soir · voix et dessin",
+    "quoi": "réplique 8 « On reprend depuis le début. » : c'est la voix de l'invitée, pas du présentateur (hauteur de la voix)",
+    "grave": true,
+    "qui": {
+     "replique": 7,
+     "role": "invite"
+    }
+   },
+   {
+    "t": 20.4,
+    "poste": "contrôleur du soir · voix et dessin",
+    "quoi": "réplique 11 « Ouais c'est une cata pardon excuse-moi, c'est path » : c'est la voix du présentateur, pas de l'invitée (hauteur de la voix)",
+    "grave": true,
+    "qui": {
+     "replique": 10,
+     "role": "presentateur"
+    }
+   },
+   {
+    "t": 27.1,
+    "poste": "contrôleur du soir · voix et dessin",
+    "quoi": "réplique 15 « C'est vrai Pas du tout, je sais pas pourquoi j'ai  » : c'est la voix du présentateur, pas de l'invitée (hauteur de la voix)",
+    "grave": true,
+    "qui": {
+     "replique": 14,
+     "role": "presentateur"
+    }
+   },
+   {
+    "t": 30.9,
+    "poste": "contrôleur du soir · voix et dessin",
+    "quoi": "réplique 17 « Le rince-pied là. Le rince-pied, il y a que là que » : c'est la voix du présentateur, pas de l'invitée (hauteur de la voix)",
+    "grave": true,
+    "qui": {
+     "replique": 16,
+     "role": "presentateur"
+    }
+   },
+   {
+    "t": 36.2,
+    "poste": "contrôleur du soir · voix et dessin",
+    "quoi": "réplique 19 « Je vais te laisser, encore désolé pour le screensh » : c'est la voix du présentateur, pas de l'invitée (hauteur de la voix)",
+    "grave": true,
+    "qui": {
+     "replique": 18,
+     "role": "presentateur"
+    }
+   },
+   {
+    "t": 40.2,
+    "poste": "contrôleur du soir · voix et dessin",
+    "quoi": "réplique 20 « Non mais attends, reste là. » : c'est la voix de l'invitée, pas du présentateur (hauteur de la voix)",
+    "grave": true,
+    "qui": {
+     "replique": 19,
+     "role": "invite"
+    }
+   },
+   {
+    "t": 44.8,
+    "poste": "contrôleur du soir · voix et dessin",
+    "quoi": "réplique 24 « Ouais, super bien. » : c'est la voix de l'invitée, pas du présentateur (hauteur de la voix)",
+    "grave": true,
+    "qui": {
+     "replique": 23,
+     "role": "invite"
+    }
+   },
+   {
+    "t": 52.1,
+    "poste": "contrôleur du soir · voix et dessin",
+    "quoi": "réplique 28 « Bah ouais. » : c'est la voix de l'invitée, pas du présentateur (hauteur de la voix)",
+    "grave": true,
+    "qui": {
+     "replique": 27,
+     "role": "invite"
+    }
+   },
+   {
+    "t": 55.3,
+    "poste": "contrôleur du soir · voix et dessin",
+    "quoi": "réplique 31 « Tu finis toujours par ramener des trucs que t'aura » : c'est la voix du présentateur, pas de l'invitée (hauteur de la voix)",
+    "grave": true,
+    "qui": {
+     "replique": 30,
+     "role": "presentateur"
+    }
+   },
+   {
+    "t": null,
+    "poste": "contrôleur du soir · voix et dessin",
+    "quoi": "7 bulle(s) où deux personnes parlent : à couper en deux",
+    "grave": true
+   }
+  ]
  },
  {
   "date": "2026-11-22",
@@ -30041,7 +30199,12 @@
   },
   "titre_affiche": "POV : Ronaldo quitte le Portugal",
   "anglais": true,
-  "fin_carte": true
+  "fin_carte": true,
+  "controle_soir": {
+   "date": "2026-11-23",
+   "problemes": 0,
+   "version": 2
+  }
  },
  {
   "date": "2026-11-23",
@@ -30165,7 +30328,12 @@
   },
   "titre_affiche": "POV : GTA 6 sort demain",
   "anglais": true,
-  "fin_carte": true
+  "fin_carte": true,
+  "controle_soir": {
+   "date": "2026-11-23",
+   "problemes": 0,
+   "version": 2
+  }
  },
  {
   "date": "2026-11-23",
@@ -30369,7 +30537,13 @@
   },
   "titre_affiche": "POV : organiser des plans",
   "anglais": true,
-  "fin_carte": true
+  "fin_carte": true,
+  "controle_soir": {
+   "date": "2026-11-23",
+   "problemes": 1,
+   "version": 2,
+   "refaite": true
+  }
  },
  {
   "date": "2026-11-23",
@@ -30543,7 +30717,21 @@
   },
   "titre_affiche": "POV : Elle part le week-end",
   "anglais": true,
-  "fin_carte": false
+  "fin_carte": false,
+  "a_verifier": [
+   {
+    "t": null,
+    "poste": "contrôleur du soir · voix et dessin",
+    "quoi": "8 bulle(s) où deux personnes parlent : à couper en deux",
+    "grave": true
+   }
+  ],
+  "controle_soir": {
+   "date": "2026-11-23",
+   "problemes": 1,
+   "version": 2,
+   "refaite": true
+  }
  },
  {
   "date": "2026-11-23",
@@ -30675,6 +30863,12 @@
       "raison": "Les objets de la fiche (emballage fast-food, canette) ne sont pas visibles."
      }
     ]
+   },
+   {
+    "t": null,
+    "poste": "contrôleur du soir · voix et dessin",
+    "quoi": "2 bulle(s) où deux personnes parlent : à couper en deux",
+    "grave": true
    }
   ],
   "confiance": 76,
@@ -30714,6 +30908,12 @@
    "partie": false
   },
   "anglais": true,
-  "fin_carte": false
+  "fin_carte": false,
+  "controle_soir": {
+   "date": "2026-11-23",
+   "problemes": 1,
+   "version": 2,
+   "refaite": true
+  }
  }
 ]
