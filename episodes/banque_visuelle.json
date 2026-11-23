@@ -47922,28 +47922,19 @@
  },
  {
   "date": "2026-11-23",
-  "source": "https://www.tiktok.com/@aguerin30/video/7702516075396631840",
-  "auteur": "aguerin30",
+  "source": "https://www.tiktok.com/@vignianimation/video/7708846701439765792",
+  "auteur": "vignianimation",
   "visuel": {
-   "gestes": [
-    [
-     52.5,
-     0.32,
-     0.35
-    ]
-   ],
-   "duree": 61.0,
-   "nb_plans": 3,
-   "duree_plan": 20.33,
-   "coupes": [
-    17.5,
-    18.5
-   ],
+   "gestes": [],
+   "duree": 74.5,
+   "nb_plans": 1,
+   "duree_plan": 74.5,
+   "coupes": [],
    "plans": {
     "tres_serre": 0.0,
-    "serre": 0.541,
-    "moyen": 0.459,
-    "large": 0.0
+    "serre": 0.0,
+    "moyen": 0.517,
+    "large": 0.483
    },
    "camera": {
     "fixe": 1.0,
@@ -47955,145 +47946,117 @@
    "nb_personnes": 1,
    "personnes": [
     {
-     "place": "centre",
-     "presence": 0.639,
-     "habit": [
-      200,
-      192,
-      180
-     ],
-     "cheveux": [
-      67,
-      59,
-      54
-     ],
-     "sourire": 0.064,
-     "taille": 0.146,
-     "tete_penchee": 3.7,
-     "regard_cote": 0.154
-    },
-    {
      "place": "gauche",
-     "presence": 0.369,
+     "presence": 0.517,
      "habit": [
-      197,
-      193,
-      181
+      222,
+      91,
+      27
      ],
      "cheveux": [
-      67,
-      62,
-      60
+      27,
+      27,
+      27
      ],
      "sourire": 0.0,
-     "taille": 0.178,
-     "tete_penchee": 1.7,
-     "regard_cote": 0.044
+     "taille": 0.103,
+     "tete_penchee": 1.1,
+     "regard_cote": 0.338
     }
    ],
    "visages": true,
-   "sourires": 0.041,
-   "energie": 0.487,
+   "sourires": 0.0,
+   "energie": 0.135,
    "mur": [
-    174,
-    145,
-    115
+    209,
+    191,
+    179
    ],
    "palette": [
     [
-     164,
-     138,
-     112,
-     0.319
+     222,
+     199,
+     181,
+     0.418
     ],
     [
-     189,
-     158,
-     124,
-     0.236
+     184,
+     175,
+     173,
+     0.21
+    ],
+    [
+     234,
+     236,
+     238,
+     0.12
+    ],
+    [
+     30,
+     21,
+     19,
+     0.09
     ],
     [
      203,
-     201,
-     191,
-     0.179
+     128,
+     79,
+     0.088
     ],
     [
-     127,
-     102,
-     86,
-     0.124
-    ],
-    [
-     26,
-     19,
-     13,
-     0.073
-    ],
-    [
-     66,
-     53,
-     42,
-     0.07
+     106,
+     97,
+     95,
+     0.072
     ]
    ],
    "lumiere": {
-    "luminosite": 155.7,
-    "chaleur": 42.0,
-    "saturation": 75.7
+    "luminosite": 190.7,
+    "chaleur": 31.7,
+    "saturation": 50.3
    },
-   "moment": "soir",
-   "postures": [
-    [
-     29.0,
-     30.5,
-     0.32,
-     "pointe_d"
-    ],
-    [
-     53.5,
-     54.5,
-     0.31,
-     "menton"
-    ]
-   ]
+   "moment": "jour",
+   "postures": []
   },
   "audio": {
-   "duree": 60.8,
+   "duree": 74.4,
    "nb_voix": 2,
    "voix": [
     {
-     "hz": 269,
-     "genre": "f",
-     "part": 0.5
+     "hz": 125,
+     "genre": "h",
+     "part": 0.41
     },
     {
-     "hz": 185,
-     "genre": "?",
-     "part": 0.5
+     "hz": 138,
+     "genre": "h",
+     "part": 0.59
     }
    ],
-   "debit": 5.06,
-   "blanc_moyen": 0.59,
-   "coupes": 4,
-   "dynamique_db": 21.1,
-   "cris": 0.012,
-   "musique": 0.41,
-   "impacts": 46,
-   "impacts_10s": 7.56,
-   "graves": 0,
-   "aigus": 46,
-   "sur_vanne": 12,
+   "debit": 3.7,
+   "blanc_moyen": 0.68,
+   "coupes": 2,
+   "dynamique_db": 16.4,
+   "cris": 0.004,
+   "musique": 0.4,
+   "impacts": 34,
+   "impacts_10s": 4.57,
+   "graves": 13,
+   "aigus": 21,
+   "sur_vanne": 6,
    "evenements": {
-    "scream": 1
+    "laughter": 3,
+    "crying": 1
    },
    "emotions": {
-    "neutral": 7,
-    "excited": 7,
-    "happy": 4,
-    "surprised": 2,
-    "sarcastic": 1,
-    "shocked": 1
+    "sceptique": 4,
+    "blase": 3,
+    "colere": 3,
+    "neutre": 3,
+    "joie": 2,
+    "annoyed": 1,
+    "reflechit": 1,
+    "penseur": 1
    }
   },
   "claude": {
@@ -48101,82 +48064,107 @@
     "rue",
     "salon"
    ],
-   "moment": "soir",
+   "moment": "nuit",
    "costumes": {
     "presentateur": {
-     "haut": "pull",
-     "c_haut": "blanc",
-     "motif": "uni",
-     "bas": "pantalon",
-     "chaussures": "baskets",
+     "bas": "calecon",
+     "c_haut": "orange",
+     "chaussures": "chaussons",
+     "cheveux": "ondule",
+     "c_cheveux": "noir",
      "details": [
-      "moustache"
+      "boucles_oreilles"
      ],
-     "chapeau": "casquette",
-     "c_chapeau": "gris",
-     "cheveux": "court",
-     "c_cheveux": "brun"
+     "haut": "tshirt",
+     "motif": "uni"
     },
     "invite": {
-     "haut": "pull",
-     "c_haut": "blanc",
-     "motif": "uni",
      "bas": "pantalon",
-     "chaussures": "baskets",
-     "details": [
-      "moustache"
-     ],
-     "chapeau": "casquette",
-     "c_chapeau": "gris",
+     "c_haut": "gris",
+     "chaussures": "ville",
      "cheveux": "court",
-     "c_cheveux": "brun"
+     "c_cheveux": "brun",
+     "details": [],
+     "haut": "chemise",
+     "motif": "uni"
     }
    },
    "objets": [
     {
-     "replique": 0,
+     "objet": "telephone",
+     "replique": 0
+    },
+    {
+     "replique": 3,
      "objet": "telephone"
+    },
+    {
+     "replique": 7,
+     "objet": "telephone"
+    },
+    {
+     "objet": "telephone",
+     "replique": 12
+    },
+    {
+     "objet": "telephone",
+     "replique": 18
     }
    ],
    "gags": [
-    "Affiche GTA 6 au mur"
+    "Post-it sur le frigo : Compter les moutons c'est has been"
    ],
    "ambiances": [
     "poussiere"
+   ],
+   "plans": [
+    {
+     "geste": "explique",
+     "reaction": "sceptique",
+     "plan": "moyen",
+     "replique": 0,
+     "mouvement": "fixe"
+    },
+    {
+     "replique": 3,
+     "plan": "moyen",
+     "mouvement": "fixe",
+     "reaction": "aucune",
+     "geste": "telephone"
+    },
+    {
+     "geste": "poing",
+     "plan": "moyen",
+     "replique": 7,
+     "mouvement": "fixe",
+     "reaction": "ecoute"
+    },
+    {
+     "mouvement": "fixe",
+     "replique": 18,
+     "plan": "moyen",
+     "geste": "desespoir",
+     "reaction": "choque"
+    }
    ]
   },
   "realisation": {
-   "moment": "soir",
+   "moment": "nuit",
    "lieux": [
     "rue",
     "salon"
    ],
    "gags": [
-    "Affiche GTA 6 au mur"
+    "Post-it sur le frigo : Compter les moutons c'est has been"
    ],
    "ambiances": [
     "poussiere"
    ],
    "source": "auteur+image",
    "tenues": {
-    "presentateur": "pull",
-    "invite": "pull"
+    "invite": "chemise"
    },
    "plans": [
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
     "large/fixe",
     "large/fixe",
     "large/fixe",
@@ -48198,6 +48186,6 @@
     "large/fixe"
    ]
   },
-  "video": "2026-11-23_22h12_emission.mp4"
+  "video": "2026-11-23_23h16_emission.mp4"
  }
 ]
