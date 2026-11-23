@@ -1,128 +1,105 @@
-Modal : 17.83 $ dépensés ce mois-ci (plafond 30 $)
+Modal : 17.95 $ dépensés ce mois-ci (plafond 30 $)
 Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, Groq ok, OpenRouter ok, IA Modal ok, ElevenLabs epuise — IA utilisée : mistral
 Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @motiontoonz, @same_same53, @charly.bse, @kodanimation, @vignianimation, @vincedessine, @aguerin30, @zequoiza, @jayzocc, @brutuslerobuste, @jawedyoussef
-Réserve de sons : son déjà écouté pris dans la réserve (https://www.tiktok.com/@jawedyoussef/video/7647202637313559841) : on passe directement à la suite
-Chaîne : vidéo 2/10 lancée
+Réserve de sons : son déjà écouté pris dans la réserve (https://www.tiktok.com/@jawedyoussef/video/7651664836488727840) : on passe directement à la suite
+Chaîne : vidéo 3/10 lancée
   fiche de tournage : gemini-flash-latest n'a pas répondu (HTTP Error 429: Too Many Requests)
-  fiche de tournage : gemini-flash-lite-latest n'a pas répondu (HTTP Error 503: Service Unavailable)
-  fiche de tournage : gemini-3.8-flash n'a pas répondu (HTTP Error 429: Too Many Requests)
-  fiche de tournage : gemini-3.7-flash n'a pas répondu (HTTP Error 429: Too Many Requests)
-  fiche de tournage écrite (Gemini a regardé et écouté l original) : rue (urban French street pavement with residential buil), jour, temps normal, ambiance gene, niveau moyen, bruits entendus : horn, laughter
-  [équipe · fiche de tournage] ✔ contrôle 1 : règles (cohérence avec ce qui est dit) : décor : — -> school books and notebooks on a desk (cité dans le dialogue ou entendu); décor : — -> busy street outside (cité dans le dialogue ou entendu); réplique 20 objet : — -> telephone  (corrigé)
-    correction : décor : — -> school books and notebooks on a desk (cité dans le dialogue ou entendu)
-    correction : décor : — -> busy street outside (cité dans le dialogue ou entendu)
-    correction : réplique 20 objet : — -> telephone (« téléphone » est dit)
-    correction : réplique 21 objet : — -> telephone (« téléphone » est dit)
-  [équipe · fiche de tournage] ✔ contrôle 2 : 2e IA (autre fournisseur) : repliques.8.emotion : rire -> neutre (La réplique "Oui, c'est ça." est une simple affirmation, elle ne correspond pas à une émotion de rire.); repliques.13.emotion : colere -> neutre (La rép (corrigé)
-    correction : repliques.8.emotion : rire -> neutre (La réplique "Oui, c'est ça." est une simple affirmation, elle ne correspond pas à une émotion de rire.)
-    correction : repliques.13.emotion : colere -> neutre (La réplique "Mais je sais comment ça va se passer." exprime de la certitude, pas de la colère.)
-  [équipe · fiche de tournage] ✔ contrôle 3 : image de l'original, puis règles : décor : — -> busy street outside (cité dans le dialogue ou entendu) (corrigé)
-    correction : décor : — -> busy street outside (cité dans le dialogue ou entendu)
-  jeu du dessin animé : Gemini n'a pas pu lire les expressions (rien de recopié)
-  sous-titres anglais : 36 réplique(s) traduite(s)
-Sketch : « LACETS ET TROMPERIES », 36 répliques
+  fiche de tournage écrite (Gemini a regardé et écouté l original) : cuisine (modern office kitchen with blue tiled walls and co), jour, temps normal, ambiance gene, niveau moyen, bruits entendus : crying, laughter
+  [équipe · fiche de tournage] ✔ contrôle 1 : règles (cohérence avec ce qui est dit) : réplique 0 signe : goutte -> — (pas cohérent avec l'émotion « neutre ») (corrigé)
+    correction : réplique 0 signe : goutte -> — (pas cohérent avec l'émotion « neutre »)
+  [équipe · fiche de tournage] ✔ contrôle 2 : 2e IA (autre fournisseur)
+  [équipe · fiche de tournage] ✔ contrôle 3 : image de l'original, puis règles
+  jeu du dessin animé lu par Gemini : invite 6 expression(s), presentateur 4 expression(s)
+  sous-titres anglais : 29 réplique(s) traduite(s)
+Sketch : « PAUSETHÉSTRESSANTE », 29 répliques
 Son TikTok : une seule scène, un seul décor (pas de changement inutile)
-  décor semi-réaliste 0 : budget Modal du mois atteint, décor dessiné
+  décor semi-réaliste 0 (lieu ressemblant de la banque) : [semi] modern office kitchen with blue tiled walls and coffe
 WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1795475143.288697    3977 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+I0000 00:00:1795476615.783876    2948 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
 WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1795475144.735358    3977 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+I0000 00:00:1795476616.971236    2948 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
 Downloading data from https://github.com/ina-foss/inaSpeechSegmenter/releases/download/models/keras_speech_music_noise_cnn.hdf5
 [1m      0/3244808[0m [37m━━━━━━━━━━━━━━━━━━━━[0m [1m0s[0m 0s/step[1m3244808/3244808[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 0us/step
 /home/runner/venv/lib/python3.12/site-packages/keras/src/layers/reshaping/reshape.py:39: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
   super().__init__(**kwargs)
 Downloading data from https://github.com/ina-foss/inaSpeechSegmenter/releases/download/models/keras_male_female_cnn.hdf5
 [1m      0/6040200[0m [37m━━━━━━━━━━━━━━━━━━━━[0m [1m0s[0m 0s/step[1m6040200/6040200[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 0us/step
-montage : 1 plans (0.2:large>pre/coupe)
+montage : 1 plans (0.2:large>inv/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-studio : jour, lieux ['rue'], tenues presentateur=blouson, envoyee=veste_jean, 0 figurant(s), ambiances ['neon'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 66.4 s, 36 répliques, 1 scène(s), personnages ['presentateur', 'envoyee']
-montage : 1 plans (0.2:large>pre/coupe)
+studio : jour, lieux ['cuisine'], tenues invite=blouse, presentateur=tshirt, 0 figurant(s), ambiances ['vapeur'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 65.2 s, 29 répliques, 1 scène(s), personnages ['invite', 'presentateur']
+montage : 1 plans (0.2:large>inv/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-studio : jour, lieux ['rue'], tenues presentateur=blouson, envoyee=veste_jean, 0 figurant(s), ambiances ['neon'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 66.4 s, 36 répliques, 1 scène(s), personnages ['presentateur', 'envoyee']
-  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~996 images)
-  morceau 2989–3985 reçu d'une machine d'aide
-  morceau 1992–2989 reçu d'une machine d'aide
-  morceau 996–1992 reçu d'une machine d'aide
-  dessin partagé terminé en 8.5 min
+studio : jour, lieux ['cuisine'], tenues invite=blouse, presentateur=tshirt, 0 figurant(s), ambiances ['vapeur'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 65.2 s, 29 répliques, 1 scène(s), personnages ['invite', 'presentateur']
+  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~977 images)
+  morceau 978–1955 reçu d'une machine d'aide
+  morceau 1955–2932 reçu d'une machine d'aide
+  morceau 2932–3910 reçu d'une machine d'aide
+  dessin partagé terminé en 7.8 min
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
 Jury : 5 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
-Jury qualité (ia) : 4.7/10 — Humoriste 5.6/10 : 22.9 s Manque d'exagération dans la réaction d'effroi face au délire du numéro. | Réalisateur 5.6/10 :  | Directeur artistique 3.5/10 : 0.4 s ,role:; 0.4 s Le personnage de droite est affublé de béquilles qui n'existent pas dans l'original et n'ont pas de sens ici.; 0.4 s ,role: | Ingénieur du son 5.8/10 : 60.3 s ,son: | Spectateur TikTok 4.0/10 : 0.4 s Présence de sous-titres automatiques en anglais parasitaires au-dessus des sous-titres français.
-Manque par rapport à la vidéo d'origine : Dans l'original, l'homme porte un blouson en cuir marron avec un col moumoute/fourrure et la femme est vêtue d'une tenue noire ajustée avec des lunettes de sole ; L'homme aborde la femme qui marche dans la rue au lieu d'avoir deux personnages immobiles côte à côte dès la première seconde. ; C'est la femme qui débite tout le monologue paranoïaque rapide ('genre tu m'as pas arrêtée pour mes lacets...'), alors que dans notre vidéo les répliques ont ét
+Jury qualité (ia) : 7.2/10 — Humoriste 7.6/10 :  | Réalisateur 7.8/10 :  | Directeur artistique 6.0/10 : 1 s Dans l'original, le personnage féminin porte un haut rose vif très identifiable, à respecter dans les aplats du dessin.; 2 s Le présentateur est en chemise noire avec un livre à la main, l'accessoire du livre disparaît parfois trop vite visuellement. | Ingénieur du son 8.8/10 :  | Spectateur TikTok 6.8/10 : 
+Manque par rapport à la vidéo d'origine : Dans l'original, la femme porte une veste rose vif et un haut noir avec un physique très marqué, et l'homme tient un livre épais de type d'art (Cézanne).
 fin en boucle : la dernière image se raccorde à la première (0.35 s de fondu)
   [vidéo finie · synchro] ✔ bouches du bon personnage
   [vidéo finie · bouches] ✔ bouche immobile quand le personnage se tait
   [vidéo finie · technique] ✔ sauts, clignotements, personnages (0 remarque(s))
-  transcription Groq (Whisper, gratuit) : 287 mots
-  sous-titre « Oui, c'est ça. » confirmé par Gemini (la 2e transcription s'était trompée)
-  sous-titre « Moi, je suis pas ton genre. » confirmé par Gemini (la 2e transcription s'était trompée)
-  karaoké contrôlé à l'oreille : 208 mots, écart médian 0.05 s
-  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 75 %)
+  transcription Groq (Whisper, gratuit) : 216 mots
+  karaoké contrôlé à l'oreille : 187 mots, écart médian 0.03 s
+  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 91 %)
   [vidéo finie · contrôle IA] 0 remarque(s)
-  contrôle « fidélité » : Gemini surchargé, nouvel essai dans 20 s (tour 2/3)
-  [vidéo finie · fidélité à l'audio] ✔ Gemini a regardé et écouté la vidéo finie
-  [vidéo finie · voix et dessin] ✔ chaque réplique sur la bonne voix, homme / femme d'après la voix
-  [vidéo finie · attribution] ✔ qui dit chaque phrase, comparé à l'image de l'original
-  4 remarque(s) légère(s) gardée(s) au journal seulement : 14.7 s on entend « suis pas ton » sans sous-titre ; 38.6 s sous-titre « Je vais devoir crever tes pneus. » ma ; 55.4 s on entend « Prends mon numéro, je te dis Je ne vai ; 61.4 s sous-titre « Putain, mais là c'est... » mais on en
-Contrôle de la vidéo finie : 0 point(s) à vérifier
-Compte rendu (tour 1, confiance 94/100) : corrections demandées au robot :
-- à 22.9 s : Manque d'exagération dans la réaction d'effroi face au délire du numéro.
-- à 0.4 s : ,role:
-- à 0.4 s : Le personnage de droite est affublé de béquilles qui n'existent pas dans l'original et n'ont pas de sens ici.
-- à 60.3 s : ,son:
-- à 0.4 s : Présence de sous-titres automatiques en anglais parasitaires au-dessus des sous-titres français.
-Remarque comprise : L'auteur signale un manque d'exagération de la réaction d'effroi à la réplique 14, un problème de rôle non spécifié, la présence inappropriée de béquilles sur le personnage de droite, l'absence de bru
-Remarque de l'auteur : 0 réplique(s) à rendre à un autre personnage, 5 correction(s) : reaction, casting, casting, costume, bruitage
-Compte rendu : casting de presentateur : age 28, taille 1, barbe trois_jours ; casting de envoyee : age 26, taille 1, barbe aucune ; tenue de envoyee
-  décor semi-réaliste 0 : budget Modal du mois atteint, décor dessiné
-montage : 1 plans (0.2:large>pre/coupe)
-style croquis : décors passés à l'encre et à l'aquarelle
-studio : jour, lieux ['rue'], tenues presentateur=blouson, envoyee=pull, 0 figurant(s), ambiances ['neon'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 66.4 s, 36 répliques, 1 scène(s), personnages ['presentateur', 'envoyee']
-  image 300/3985 (4 processeurs)
-  image 600/3985
-  image 900/3985
-  image 1200/3985
-  image 1500/3985
-  image 1800/3985
-  image 2100/3985
-  image 2400/3985
-  image 2700/3985
-  image 3000/3985
-  image 3300/3985
-  image 3600/3985
-  image 3900/3985
-Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-fin en boucle : la dernière image se raccorde à la première (0.35 s de fondu)
-  [vidéo finie · synchro] ✔ bouches du bon personnage
-  [vidéo finie · bouches] ✔ bouche immobile quand le personnage se tait
-  [vidéo finie · technique] ✔ sauts, clignotements, personnages (0 remarque(s))
-  transcription Groq (Whisper, gratuit) : 287 mots
-  écoute des passages : Gemini surchargé, nouvel essai dans 20 s (tour 2/2)
-  sous-titre « Oui, c'est ça. » confirmé par Gemini (la 2e transcription s'était trompée)
-  sous-titre « Moi, je suis pas ton genre. » confirmé par Gemini (la 2e transcription s'était trompée)
-  karaoké contrôlé à l'oreille : 208 mots, écart médian 0.05 s
-  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 75 %)
-  [vidéo finie · contrôle IA] 0 remarque(s)
-  contrôle « fidélité » : Gemini surchargé, nouvel essai dans 20 s (tour 2/3)
-  contrôle « fidélité » : Gemini surchargé, nouvel essai dans 40 s (tour 3/3)
   [vidéo finie · fidélité à l'audio] ✘ Gemini a regardé et écouté la vidéo finie : 1 écart(s)
   [vidéo finie · voix et dessin] ✔ chaque réplique sur la bonne voix, homme / femme d'après la voix
   [vidéo finie · attribution] ✔ qui dit chaque phrase, comparé à l'image de l'original
-  4 remarque(s) légère(s) gardée(s) au journal seulement : 14.7 s on entend « suis pas ton » sans sous-titre ; 38.6 s sous-titre « Je vais devoir crever tes pneus. » ma ; 55.4 s on entend « Prends mon numéro, je te dis Je ne vai ; 61.4 s sous-titre « Putain, mais là c'est... » mais on en
-Contrôle de la vidéo finie : 1 point(s) à vérifier — 0.0 s Le présentateur parle de "vos lacets" mais c'est la femme qu
-Jury : 1 remarque(s) sur les plans / zooms retirée(s) (montage « plan large » voulu)
-Jury : 3 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
-Jury qualité (ia) : 8.3/10 — Humoriste 7.8/10 : 0 s Manque d'exagération dans la surprise initiale. | Réalisateur 8.8/10 :  | Directeur artistique 8.0/10 : 1 s La veste ne correspond pas exactement au modèle original. | Ingénieur du son 9.8/10 :  | Spectateur TikTok 7.8/10 : 
-Manque par rapport à la vidéo d'origine : Manque la voiture en arrière-plan à droite au début de la vidéo. ; Le sac à main vert de l'envoyée n'est pas présent dans la version dessinée.
-Compte rendu : la version corrigée n'est pas meilleure (94 → 88) : on garde la première
+Contrôle de la vidéo finie : 1 point(s) à vérifier — 45.0 s le personnage parle de compote alors qu'il n'y a pas de comp
+Compte rendu (tour 1, confiance 88/100) : corrections demandées au robot :
+- à 45.0 s : le personnage parle de compote alors qu'il n'y a pas de compote
+- à 1.0 s : Dans l'original, le personnage féminin porte un haut rose vif très identifiable, à respecter dans les aplats du dessin.
+- à 2.0 s : Le présentateur est en chemise noire avec un livre à la main, l'accessoire du livre disparaît parfois trop vite visuellement.
+Remarque comprise : L'auteur signale trois problèmes : il n'y a pas de compote alors que le texte en parle à 45 s, le personnage féminin doit porter un haut rose vif dès 1 s, et le présentateur doit porter une chemise no
+Remarque de l'auteur : 0 réplique(s) à rendre à un autre personnage, 4 correction(s) : lieu, costume, costume, reaction
+Compte rendu : tenue de invite ; tenue de presentateur
+montage : 1 plans (0.2:large>inv/coupe)
+style croquis : décors passés à l'encre et à l'aquarelle
+studio : jour, lieux ['cuisine'], tenues invite=tshirt, presentateur=chemise, 0 figurant(s), ambiances ['vapeur'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 65.2 s, 29 répliques, 1 scène(s), personnages ['invite', 'presentateur']
+  image 300/3910 (4 processeurs)
+  image 600/3910
+  image 900/3910
+  image 1200/3910
+  image 1500/3910
+  image 1800/3910
+  image 2100/3910
+  image 2400/3910
+  image 2700/3910
+  image 3000/3910
+  image 3300/3910
+  image 3600/3910
+  image 3900/3910
+Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
+fin en boucle : la dernière image se raccorde à la première (0.35 s de fondu)
+  [vidéo finie · synchro] ✔ bouches du bon personnage
+  [vidéo finie · bouches] ✔ bouche immobile quand le personnage se tait
+  [vidéo finie · technique] ✔ sauts, clignotements, personnages (0 remarque(s))
+  transcription Groq (Whisper, gratuit) : 216 mots
+  karaoké contrôlé à l'oreille : 187 mots, écart médian 0.03 s
+  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 91 %)
+  [vidéo finie · contrôle IA] 0 remarque(s)
+  [vidéo finie · fidélité à l'audio] ✘ Gemini a regardé et écouté la vidéo finie : 2 écart(s)
+  [vidéo finie · voix et dessin] ✔ chaque réplique sur la bonne voix, homme / femme d'après la voix
+  [vidéo finie · attribution] ✔ qui dit chaque phrase, comparé à l'image de l'original
+Contrôle de la vidéo finie : 2 point(s) à vérifier — 0.0 s Le lieu indiqué dans la fiche (cuisine de bureau avec murs c ; 0.0 s La fiche mentionne un livre qui n'apparaît nulle part dans l
+Jury : 2 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
+Jury qualité (ia) : 6.5/10 — Humoriste 6.8/10 : 0.4 s L'expression de stress au début manque d'exagération comique. | Réalisateur 7.0/10 :  | Directeur artistique 5.0/10 : 3 s Le présentateur porte une chemise noire dans l'original, ici c'est un pull noir uni.; 0.4 s L'invitée a un haut rouge au lieu de la veste rose de l'original. | Ingénieur du son 8.0/10 :  | Spectateur TikTok 6.8/10 : 
+Manque par rapport à la vidéo d'origine : La veste rose fushia de l'invitée et sa tenue générale de l'original. ; La chemise noire ouverte du présentateur. ; La boîte de thé tenue par l'invitée sur la fin.
+Compte rendu : la version corrigée n'est pas meilleure (88 → 76) : on garde la première
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, groq = ok, ia = gemini ×10, groq ×2, mistral ×1, appels = {'gemini': 10, 'groq': 2, 'mistral': 1}, epuisees = [], quota = {'groq': {'reste_jour': 999, 'limite_jour': 1000}}, voix = tiktok, decors = dessines, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 37677, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0, 'total_usd': 0.0, 'modal_mesure_usd': 0.17}
-⏱️ Étapes plus lentes que d'habitude : Installation de la machine 6 min (d'habitude 1 min), Corrections du compte rendu 19 min (d'habitude 3 min)
-⏱️ Temps par étape : Installation de la machine 6.2 min, Démarrage du robot 0.2 min, Écoute du son TikTok 1.9 min, Décors 0.0 min, Dessin des images 10.5 min, Contrôle qualité par le jury 3.1 min, Contrôle de la vidéo finie 1.7 min, Corrections du compte rendu 19.6 min
-Quota de l'API GitHub : 4917 appels restants
-OK : sortie/2026-11-24_00h05_emission.mp4 (67 s)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, groq = ok, ia = gemini ×8, groq ×2, mistral ×1, appels = {'gemini': 8, 'groq': 2, 'mistral': 1}, epuisees = [], quota = {'groq': {'reste_jour': 999, 'limite_jour': 1000}}, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 36824, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0, 'total_usd': 0.0, 'modal_mesure_usd': 0.03}
+⏱️ Étapes plus lentes que d'habitude : Installation de la machine 5 min (d'habitude 1 min), Corrections du compte rendu 15 min (d'habitude 3 min)
+⏱️ Temps par étape : Installation de la machine 5.8 min, Démarrage du robot 0.2 min, Écoute du son TikTok 0.7 min, Décors 0.0 min, Dessin des images 9.6 min, Contrôle qualité par le jury 2.8 min, Contrôle de la vidéo finie 1.1 min, Corrections du compte rendu 15.3 min
+Quota de l'API GitHub : 4724 appels restants
+OK : sortie/2026-11-24_00h30_emission.mp4 (66 s)
