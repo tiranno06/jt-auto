@@ -7014,37 +7014,37 @@
  {
   "moment": "soir",
   "lieux": [
-   "bureau"
+   "salon"
   ],
   "source": "auteur+image",
-  "duree": 22.5,
+  "duree": 38.6,
   "plans": {
-   "large": 3
+   "large": 17
   },
   "mouvements": {
-   "fixe": 3
+   "fixe": 17
   },
   "costumes": {
-   "presentateur": "pull"
+   "invite": "tshirt",
+   "presentateur": "chemise"
   },
   "figurants": 0,
   "ambiances": [
-   "pluie",
    "poussiere"
   ],
-  "controle": "Humoriste 8.6/10 : 15.9 s L'expression faciale du personnage lors de 'Ça va être dur' est trop neutre. Une grimace ou un mouvement de tête plus marqué aurait aidé. | Réalisateur 10.0/10 :  | Directeur",
-  "fichier": "2026-11-23_19h03_emission.mp4",
+  "controle": "Humoriste 9.4/10 :  | Réalisateur 7.6/10 : 38 s L'image finale manque d'un élément visuel fort pour conclure la vidéo de manière mémorable. | Directeur artistique 8.8/10 : 0 s Les personnages ont des ",
+  "fichier": "2026-11-23_18h34_emission.mp4",
   "cine": {
    "focus": false,
    "vertige": true,
-   "tiers": true,
+   "tiers": false,
    "etalonnage": true,
-   "profondeur": true,
+   "profondeur": false,
    "grain": true,
    "reflets": true,
    "son": true
   },
-  "cadence": "normal"
+  "cadence": "rapide"
  },
  {
   "moment": "soir",
@@ -7053,62 +7053,59 @@
    "salon"
   ],
   "source": "auteur+image",
-  "duree": 23.2,
+  "duree": 62.0,
   "plans": {
-   "large": 15
+   "large": 22
   },
   "mouvements": {
-   "fixe": 15
+   "fixe": 22
   },
   "costumes": {
-   "invite": "tshirt",
-   "presentateur": "tshirt"
-  },
-  "figurants": 0,
-  "ambiances": [
-   "pluie",
-   "poussiere"
-  ],
-  "controle": "Humoriste 8.4/10 :  | Réalisateur 8.6/10 : 19.1 s Les sous-titres sont parfois illisibles ou mal synchronisés avec les mouvements des lèvres. | Directeur artistique 6.8/10 : 0.4 s Les personnages ont ",
-  "fichier": "2026-11-23_20h15_emission.mp4",
-  "cine": {
-   "focus": true,
-   "vertige": false,
-   "tiers": false,
-   "etalonnage": true,
-   "profondeur": false,
-   "grain": false,
-   "reflets": true,
-   "son": true
-  },
-  "cadence": "normal"
- },
- {
-  "moment": "nuit",
-  "lieux": [
-   "rue",
-   "salon"
-  ],
-  "source": "auteur+image",
-  "duree": 77.6,
-  "plans": {
-   "large": 19
-  },
-  "mouvements": {
-   "fixe": 19
-  },
-  "costumes": {
-   "invite": "chemise"
+   "presentateur": "pull",
+   "invite": "pull"
   },
   "figurants": 0,
   "ambiances": [
    "poussiere"
   ],
-  "controle": "Humoriste 9.6/10 : 10.8 s L'expression du personnage lors de la phrase 'Je te demande de compter jusqu'à un million' pourrait être plus exagérée pour marquer l'insistance. | Réalisateur 8.6/10 : 0.4 s",
-  "fichier": "2026-11-23_23h16_emission.mp4",
+  "controle": "Humoriste 8.6/10 : 59.8 s La fin 'Allez !' est un peu fade. Ajouter un geste de motivation (comme un coucou ou un signe) pourrait dynamiser la scène. | Réalisateur 9.6/10 : 19.7 s Le faux raccord entr",
+  "fichier": "2026-11-23_19h18_emission.mp4",
   "cine": {
    "focus": false,
    "vertige": false,
+   "tiers": true,
+   "etalonnage": false,
+   "profondeur": false,
+   "grain": false,
+   "reflets": false,
+   "son": true
+  },
+  "cadence": "rapide"
+ },
+ {
+  "moment": "jour",
+  "lieux": [
+   "classe"
+  ],
+  "source": "auteur+image",
+  "duree": 38.5,
+  "plans": {
+   "large": 20
+  },
+  "mouvements": {
+   "fixe": 20
+  },
+  "costumes": {
+   "presentateur": "tshirt",
+   "invite": "chemise"
+  },
+  "figurants": 0,
+  "ambiances": [],
+  "controle": "Humoriste 6.8/10 :  | Réalisateur 7.8/10 :  | Directeur artistique 7.8/10 :  | Ingénieur du son 8.8/10 :  | Spectateur TikTok 7.0/10 : 34.1 s L'attention baisse un peu sur la fin de la scène.",
+  "fichier": "2026-11-23_20h47_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": true,
    "tiers": true,
    "etalonnage": true,
    "profondeur": false,
@@ -7116,6 +7113,41 @@
    "reflets": false,
    "son": true
   },
-  "cadence": "normal"
+  "cadence": "rapide"
+ },
+ {
+  "moment": "jour",
+  "lieux": [
+   "salon"
+  ],
+  "source": "auteur+image",
+  "duree": 76.7,
+  "plans": {
+   "large": 19
+  },
+  "mouvements": {
+   "fixe": 19
+  },
+  "costumes": {
+   "presentateur": "tshirt",
+   "envoyee": "robe"
+  },
+  "figurants": 1,
+  "ambiances": [
+   "neon"
+  ],
+  "controle": "Humoriste 6.8/10 : 69.1 s Le personnage qui écoute reste trop neutre lors de la demande d'eau | Réalisateur 7.8/10 : 3.1 s Le regard du présentateur est un peu trop fixe face à l'énervé | Directeur ar",
+  "fichier": "2026-11-23_23h50_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": true,
+   "tiers": false,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": true,
+   "reflets": false,
+   "son": true
+  },
+  "cadence": "rapide"
  }
 ]
