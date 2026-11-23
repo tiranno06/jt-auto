@@ -11,6 +11,7 @@ for _k in ("ORTHOGRAPHE", "PERSONNES_VUES", "TRANSNET", "RHUBARB", "INA_GENRE", 
     os.environ.setdefault(_k, "0")                 # outils libres du 11 novembre : ni réseau ni gros modèle pendant les tests
 import actu, ecrire, voix_banque, planning  # noqa: E402
 os.environ.setdefault("FORCER_FABRICATION", "1")   # les anciens tests vérifient l'écriture, pas le seuil de fabrication
+os.environ.setdefault("ORIGINES", "0")            # créateurs d'origine (23 novembre) : jamais lus depuis le vrai dépôt pendant les tests
 
 
 def article(titre, source, lien=None, resume=""):

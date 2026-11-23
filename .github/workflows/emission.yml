@@ -190,11 +190,13 @@ jobs:
       TIKTOK_COMPTE: ${{ vars.TIKTOK_COMPTE }}
       PROFILS_TIKTOK: ${{ vars.PROFILS_TIKTOK }}
       PROFILS_INTERDITS: ${{ vars.PROFILS_INTERDITS }}  # liste noire : profils jamais repris (moteur/profils_tiktok.py)
+      PROFILS_ORIGINE_AJOUTES: ${{ vars.PROFILS_ORIGINE_AJOUTES }}   # créateurs d'origine déjà inscrits (ou retirés) par le site
       CHAINES_CONCURRENTES: ${{ vars.CHAINES_CONCURRENTES }}
       ECLAIREUR: ${{ vars.ECLAIREUR }}
       PRE_ECOUTE: ${{ vars.PRE_ECOUTE }}                # pré-écoute de la nuit (moteur/pre_ecoute.py) : 0 = coupée
       BUDGET_MODAL: ${{ vars.BUDGET_MODAL }}            # plafond des dépenses Modal du mois (30 $) : moteur/budget_modal.py
       PUBLI_FILE: ${{ vars.PUBLI_FILE }}
+      PUBLI_NON: ${{ vars.PUBLI_NON }}
       CONFIANCE_MIN: ${{ vars.CONFIANCE_MIN }}
       DEUXIEME_CHANCE: ${{ vars.DEUXIEME_CHANCE }}
       GH_TOKEN: ${{ github.token }}

@@ -29,7 +29,10 @@ def file_attente(brut, historique):
     (elle ne bloque pas les suivantes) : l'auteur la republie à la main depuis sa fiche. Une vidéo refaite garde la place de l'ancienne."""
     connues = {h.get("fichier"): h for h in historique if h.get("fichier")}
     out = []
-    for n in [remplacant(x.strip(), historique) for x in str(brut or "").splitlines()]:
+    coches = [remplacant(x.strip(), historique) for x in str(brut or "").splitlines()]
+    non = {x.strip() for x in str(os.environ.get("PUBLI_NON") or "").splitlines() if x.strip()}   # retirées par l'auteur sur le site
+    coches += [h["fichier"] for h in historique if h.get("publier_auto") and h.get("fichier") and h["fichier"] not in non]   # ajoutées par le robot (rejouer.py), en dernier
+    for n in coches:
         if n and n in connues and connues[n].get("publie") is None and n not in out: out.append(n)
     return out
 

@@ -749,6 +749,33 @@
   chance) ; jamais contre une réplique confirmée par la hauteur de la voix (`_hauteur_ok`) ou choisie par l'auteur ; jamais « corrigé »
   par l'IA qui lit le texte (compte rendu) ; aussi fait par le contrôleur du soir. Pas fait : actionlint (outil refusé par la sécurité de
   la session de travail).
+- **Liste du 23 novembre 2026 (choix de l'auteur 5, 8, 10, 11, 13, 14, 16)** : **créateurs d'origine suivis** (5, `decouverte.origines`,
+  eclaireur.yml une fois par jour, ORIGINES=0) : nos créateurs sont surtout des chaînes de dessin animé qui reprennent les voix de vrais
+  créateurs crédités « @… » ; gardés : cités 2 fois au moins (+ « Nouveaux créateurs » + SEMENCE aguerin30 / zequoiza / jawedyoussef),
+  titres en français (`francais` : apostrophes ’ comprises), 10 000 vues en médiane, 8 vidéos de 8 à 150 s, publié dans l'année (pas
+  « actif ce mois-ci » : leurs anciens sons restent bons) ; noms affichés tombant sur un compte étranger (« @julie », « @nbl ») écartés ;
+  episodes/createurs_origine.json (jamais oubliés) ; `profils_tiktok.liste()` les ajoute tout de suite (`origines`, sauf ceux de
+  PROFILS_ORIGINE_AJOUTES) et le site les inscrit UNE fois dans « Mes profils » (`ajouterOrigines` : PROFILS_TIKTOK + PROFILS_ORIGINE_AJOUTES ;
+  retirés ensuite = jamais remis) ; 1er passage : @aguerin30 (1,25 M vues), @zequoiza, @brutuslerobuste, @jayzocc, @jawedyoussef ;
+  **nouvelle version d'une vidéo qui a marché** (8, `moteur/rejouer.py` dans stats.yml, REJOUER=0, REJOUER_JOURS 60) : une par semaine au
+  plus, publiée il y a 2 mois, ≥ 2 × la médiane des vues et dans les 10 meilleures, jamais rejouée -> « Refaire » decors|rejouer (nouveaux
+  décors, nouvelle couverture ; l'ancienne publiée reste) ; la nouvelle porte "rejoue_de" + "publier_auto" et entre SEULE dans la file de
+  publication, en dernier (`publication_auto.file_attente`, `filePubli` du site) ; décochée sur le site = PUBLI_NON (jamais remise) ;
+  **banc d'essai des voix élargi** (10, `banc_voix.ajouter`, cas dans episodes/banc_voix) : chaque « Corriger qui parle » ajoute la vidéo
+  (répliques du robot = avant, correction de l'auteur = vérité) ; bouton « ✅ Les voix sont justes » de la fiche (banc.yml,
+  `ajouter_juste`) ; le score du jour moins 2 points devient le minimum exigé par `TestBancVoix` ("attendu") ; **note de confiance
+  honnête** (11, `verif_finale.confiance(…, sautes)`) : chaque contrôle important qui n'a pas pu se faire (Gemini muet, image de
+  l'original illisible, contrôle en panne : sk["_controles_sautes"], historique "controles_sautes") retire 6 points, plafond 90 ; badge
+  🛡️ avec « ⚠ » et la liste au survol ; aussi réparé : le site ne recevait pas "remplace" (place « À publier » d'une vidéo refaite) ;
+  **bouche immobile quand on se tait** (13, `verif_finale.bouches_muettes`, BOUCHE_MUETTE=0) : mouvement du bas du visage de chaque
+  personnage pendant SES répliques et pendant celles des autres ; ≥ 75 % = point grave « bouches » (vidéo juste mesurée : 24-28 % ;
+  répliques inversées : 350-420 %) ; jamais envoyé à l'IA du compte rendu ; **expressions des dessins animés** (14, `moteur/jeu_dessin.py`,
+  JEU_DESSIN=0) : quand le jeu copié ne lit aucune vraie personne, Gemini regarde une image au milieu de 14 répliques au plus (un seul
+  appel, son choisi seulement) : qui parle, émotion et force de gauche / droite ; côtés déduits de « qui parle » (nets sinon rien) ->
+  sk["_jeu_dessin"] -> `cartoon.pose` (celui qui parle et celui qui écoute, jamais par-dessus une émotion forte) ; **veille des robots**
+  (16, `moteur/veille_robots.py` dans stats.yml, VEILLE_ROBOTS=0) : garde 2 h, réserve 6 h, éclaireur 8 h, contrôleur 27 h sans passage
+  (compté depuis la dernière modification du workflow) ou 2 échecs de suite -> notification, une fois par jour et par robot
+  (episodes/veille_robots.json) ; un robot coupé dans les réglages n'est pas surveillé.
 - **Liste du 21 novembre 2026 au soir (choix de l'auteur 2, 3, 4, 5, 6, 8, 10, 11, 13, 14, 16, 22, 24)** : **sous-titres dans la zone
   visible de TikTok** (2) : ils étaient à 1 700 px, là où TikTok affiche pseudo, description et musique ; maintenant `cartoon.CAP_Y`
   1 380 px (sur les jambes, sous les têtes ; réglage SOUS_TITRES_Y) et `CAP_X` 470 (loin des boutons de droite), largeur

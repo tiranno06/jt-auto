@@ -809,6 +809,8 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
     FIL_Y = 215                                                            # sous la barre du haut de l'appli TikTok (« Abonnements | Pour toi »)
     import jeu_original                                                    # jeu copié sur l'original (expressions, tête, doigts)
     JEU_O = jeu_original.Jeu(sk.get("_jeu_original")) if (sk.get("_jeu_original") and jeu_original.actif()) else None
+    import jeu_dessin                                                      # dessin animé d'origine : émotions lues par Gemini (idée 14)
+    JEU_D = sk.get("_jeu_dessin") if (sk.get("_jeu_dessin") and jeu_dessin.actif()) else None
     TRAITS_VITESSE = []                                                    # traits de vitesse (manga) : du bord vers le centre
     for k_t in range(2):
         tv = np.zeros((H, W, 3), np.uint8); rg_t = np.random.default_rng(40 + k_t)
@@ -1247,6 +1249,9 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
         if sg: p["signe"] = sg; p["signe_u"] = float(min(1.0, (tm - mien["deb"] + 0.1) / 0.4))
         if JEU_O is not None:                                              # nuances de jeu de la vraie personne au même instant
             try: jeu_original.appliquer(p, JEU_O, role, tm, parle, EXAGERE)
+            except Exception as _e: __import__("pannes").avale(_e)
+        if JEU_D is not None:                                              # émotion vue dans le dessin animé d'origine
+            try: jeu_dessin.appliquer(p, JEU_D, role, tm, parle)
             except Exception as _e: __import__("pannes").avale(_e)
         return p
 

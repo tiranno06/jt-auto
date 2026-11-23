@@ -82,6 +82,53 @@ def synchro(video, R, fr=None, fps=None, son=None):
     return out, decalage
 
 
+BOUCHE_MUETTE = 0.75
+
+
+def bouches_muettes(R, fr, fps, mesures=None):
+    """Contrôle final « bouche qui bouge quand on se tait » (choix de l'auteur du 23 novembre 2026, idée 13). Pour chaque personnage,
+    le mouvement dans le bas de son visage (bouche, menton ; centre de la tête R["tetes_y"], place R["xs"]) est comparé pendant SES
+    répliques (il parle) et pendant les répliques des autres (il écoute, plan large, sans changement de plan). Une bouche qui bouge
+    presque autant en écoutant qu'en parlant (≥ 75 %) = la bouche de celui qui se tait est animée sur la voix de l'autre -> point grave,
+    avec les répliques où c'est le plus fort. mesures : dict rempli avec les chiffres (essais). BOUCHE_MUETTE=0 pour couper."""
+    if os.environ.get("BOUCHE_MUETTE", "1") == "0" or not fr or not R.get("ph") or not R.get("xs"): return []
+    k = L / 1080.0; out = []
+    def bouche(sc, x):
+        ty = (R.get("tetes_y") or {}).get(sc) or (R.get("tetes_y") or {}).get(str(sc))
+        if not ty: return None
+        y0, y1 = int((ty + 15) * k), int((ty + 115) * k)
+        return max(0, y0), min(H_, y1), max(0, int((x - 75) * k)), min(L, int((x + 75) * k))
+    stats = {}                                                             # rôle -> {"parle": [somme, n], "ecoute": [somme, n], "pires": []}
+    for q in R["ph"]:
+        sc, p = q.get("scene"), q.get("p"); xs = (R["xs"].get(sc) or R["xs"].get(str(sc)) or {})
+        if p not in xs or q.get("plan") not in (None, "large") or float(q["fin"]) - float(q["deb"]) < 0.5: continue
+        a, b = int(float(q["deb"]) * fps) + 1, min(len(fr), int(float(q["fin"]) * fps))
+        for r, x in xs.items():
+            bx = bouche(sc, x)
+            if not bx: continue
+            y0, y1, x0, x1 = bx; S, n = 0.0, 0
+            for i in range(a, b):
+                d = np.abs(fr[i] - fr[i - 1]) > 12
+                if d.mean() > 0.08: continue                               # changement de plan
+                S += float(d[y0:y1, x0:x1].mean()); n += 1
+            if not n: continue
+            e = stats.setdefault(r, {"parle": [0.0, 0], "ecoute": [0.0, 0], "pires": []})
+            cle = "parle" if r == p else "ecoute"
+            e[cle][0] += S; e[cle][1] += n
+            if cle == "ecoute": e["pires"].append((S / n, q))
+    for r, e in stats.items():
+        if e["parle"][1] < fps or e["ecoute"][1] < 2 * fps: continue      # trop peu d'images pour juger
+        parle, ecoute = e["parle"][0] / e["parle"][1], e["ecoute"][0] / e["ecoute"][1]
+        if mesures is not None: mesures[r] = (round(parle, 4), round(ecoute, 4))
+        if parle < 0.004: continue                                         # bouche presque immobile même en parlant : rien à comparer
+        if ecoute >= BOUCHE_MUETTE * parle:
+            pires = sorted(e["pires"], key=lambda x: -x[0])[:3]
+            q0 = pires[0][1] if pires else {}
+            out.append(_defaut(q0.get("deb"), "bouches", f"la bouche {DE_ROLES.get(r, 'de ' + str(r))} bouge alors qu'il / elle se tait ({round(100 * ecoute / parle)} % "
+                               f"du mouvement de quand il / elle parle), par ex. pendant « {str(q0.get('texte') or '')[:40]} »"))
+    return out
+
+
 def recaler(video, decalage):
     """Recale le son de decalage secondes (> 0 : l'image est en retard -> le son part plus tard). Renvoie True si fait."""
     tmp = video + ".recale.mp4"
@@ -282,7 +329,7 @@ def liste_ia(video, sk, R):
 def verifier(video, sk, R):
     """Tous les contrôles de la vidéo finie. Renvoie la liste des points « à vérifier » (moment, poste, problème)."""
     if os.environ.get("VERIF_FINALE", "1") == "0" or not R or not os.path.exists(video): return []
-    points = []
+    points = []; sautes = []; sk["_controles_sautes"] = sautes                # (note de confiance honnête, 23 novembre)
     try:
         fr, fps = _images(video); son = _son(video)
         d1, dec = synchro(video, R, fr, fps, son)
@@ -291,39 +338,45 @@ def verifier(video, sk, R):
             # le 31 octobre, un « recalage » de +0,28 s sur une vidéo juste avait créé le décalage : on ne touche plus au son
         points += d1
         journal(f"  [vidéo finie · synchro] {'✔' if not d1 else '✘'} bouches du bon personnage" + (f" : {len(d1)} réplique(s) à revoir" if d1 else ""))
+        d11 = bouches_muettes(R, fr, fps); points += d11                  # (23 novembre) bouche qui bouge quand on se tait
+        journal(f"  [vidéo finie · bouches] {'✔' if not d11 else '✘'} bouche immobile quand le personnage se tait" + (f" : {d11[0]['quoi']}" if d11 else ""))
         d8 = technique(video, R, fr, fps); points += d8
         journal(f"  [vidéo finie · technique] {'✔' if not [d for d in d8 if d['grave']] else '✘'} sauts, clignotements, personnages ({len(d8)} remarque(s))")
         del fr
-    except Exception as e: journal(f"  contrôle synchro / technique impossible ({str(e)[:120]})")
+    except Exception as e: journal(f"  contrôle synchro / technique impossible ({str(e)[:120]})"); sautes.append("bouches et technique")
     try:
         d7, accord = sous_titres(video, R); points += d7
         journal(f"  [vidéo finie · sous-titres] {'✔' if not [d for d in d7 if d['grave']] else '✘'} sous-titres vérifiés à l'oreille"
                 + (f" (accord {round(100 * accord)} %)" if accord is not None else ""))
-    except Exception as e: journal(f"  contrôle des sous-titres impossible ({str(e)[:120]})")
+    except Exception as e: journal(f"  contrôle des sous-titres impossible ({str(e)[:120]})"); sautes.append("sous-titres")
     try:
         d6 = liste_ia(video, sk, R); points += d6
         journal(f"  [vidéo finie · contrôle IA] {len(d6)} remarque(s)")
-    except Exception as e: journal(f"  liste de contrôle par l'IA impossible ({str(e)[:120]})")
+    except Exception as e: journal(f"  liste de contrôle par l'IA impossible ({str(e)[:120]})"); sautes.append("contrôle par l'IA")
     try:                                                                   # 3e contrôle de la vidéo finie (20 novembre, idée 25) : fidèle à l'audio ?
         import fiche_tournage
         pbs = fiche_tournage.fidelite(video, sk, R)
+        if pbs is None and os.environ.get("FIDELITE", "1") != "0": sautes.append("fidélité à l'audio (Gemini n'a pas répondu)")
         if pbs is not None:
             for x in pbs:
                 d_ = _defaut(x["t"], "fidélité à l'audio", x["probleme"], grave=True)
                 if x.get("champ"): d_["correction"] = [{"champ": x["champ"], "valeur": x.get("valeur"), "raison": x["probleme"][:100]}]
                 points.append(d_)
             journal(f"  [vidéo finie · fidélité à l'audio] {'✔' if not pbs else '✘'} Gemini a regardé et écouté la vidéo finie" + (f" : {len(pbs)} écart(s)" if pbs else ""))
-    except Exception as e: journal(f"  contrôle de fidélité à l'audio impossible ({str(e)[:120]})")
+    except Exception as e: journal(f"  contrôle de fidélité à l'audio impossible ({str(e)[:120]})"); sautes.append("fidélité à l'audio")
     try:                                                                   # voix et dessin (21 novembre) : la hauteur de chaque réplique
         d9 = voix_dessin(video, sk); points += d9                          # dans la vidéo finie, et homme / femme dessinés
         journal(f"  [vidéo finie · voix et dessin] {'✔' if not d9 else '✘'} chaque réplique sur la bonne voix, homme / femme d'après la voix"
                 + (f" : {len(d9)} écart(s)" if d9 else ""))
-    except Exception as e: journal(f"  contrôle voix et dessin impossible ({str(e)[:120]})")
+    except Exception as e: journal(f"  contrôle voix et dessin impossible ({str(e)[:120]})"); sautes.append("voix et dessin")
     try:                                                                   # attribution (22 novembre) : l'IMAGE de l'original
         d10 = attribution_image(sk); points += d10                         # contre les répliques de la vidéo finie
         journal(f"  [vidéo finie · attribution] {'✔' if not d10 else '✘'} qui dit chaque phrase, comparé à l'image de l'original"
                 + (f" : {d10[0]['quoi']}" if d10 else ""))
-    except Exception as e: journal(f"  contrôle attribution impossible ({str(e)[:120]})")
+    except Exception as e: journal(f"  contrôle attribution impossible ({str(e)[:120]})"); sautes.append("attribution")
+    if sk.get("doublage") and not (sk["doublage"] or {}).get("vue") and os.environ.get("ATTRIBUTION", "1") != "0":
+        sautes.append("qui parle d'après l'image de l'original (image illisible)")
+    if sautes: journal(f"  contrôles qui n'ont pas pu se faire : {', '.join(sautes)} (note de confiance plafonnée)")
     for l in sk.get("equipe") or []:                                       # défauts de l'équipe que personne n'a pu corriger
         if l.get("revoir"): points.append(_defaut(None, l.get("poste", "équipe"), f"{l.get('controle')} : {l.get('detail')}"))
     points.sort(key=lambda d: (not d["grave"], d["t"] if d["t"] is not None else -1))
@@ -433,13 +486,16 @@ def appliquer_voix(sk, points):
     return faits
 
 
-def confiance(equipe, points, Q=None):
+def confiance(equipe, points, Q=None, sautes=None):
     """Note de confiance de la vidéo (0-100, choix de l'auteur) : 100 moins les défauts que personne n'a pu corriger (points à
     vérifier graves 12, autres 4 ; contrôles de l'équipe « à revoir » 8, autres ratés 2) et, si le jury note sous 6/10, 5 par point
-    manquant. Sert au tri « les plus sûres d'abord » de l'onglet TikTok."""
-    n = 100 - 12 * sum(1 for d in points or [] if d.get("grave")) - 4 * sum(1 for d in points or [] if not d.get("grave"))
+    manquant. Sert au tri « les plus sûres d'abord » de l'onglet TikTok. Note honnête (23 novembre) : chaque contrôle important qui
+    n'a pas pu se faire (sautes : Gemini absent, image de l'original illisible, contrôle en panne) retire 6 points et la note ne
+    dépasse plus 90 (« Pire date » affichait 100 sans contrôle de l'attribution)."""
+    sautes = [x for x in (sautes or []) if x]
+    n = 100 - 6 * len(sautes) - 12 * sum(1 for d in points or [] if d.get("grave")) - 4 * sum(1 for d in points or [] if not d.get("grave"))
     n -= sum(8 if l.get("revoir") else 2 for l in equipe or [] if not l.get("ok"))
     try:
         if Q and float(Q.get("note") or 10) < 6: n -= int((6 - float(Q["note"])) * 5)
     except (TypeError, ValueError): pass
-    return max(0, min(100, int(n)))
+    return max(0, min(90 if sautes else 100, int(n)))

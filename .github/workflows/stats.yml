@@ -62,6 +62,7 @@ jobs:
           PUBLI_AUTO: ${{ vars.PUBLI_AUTO }}
           PUBLI_HEURE: ${{ vars.PUBLI_HEURE }}
           PUBLI_FILE: ${{ vars.PUBLI_FILE }}
+          PUBLI_NON: ${{ vars.PUBLI_NON }}
           PUBLI_HEURE_AUTO: ${{ vars.PUBLI_HEURE_AUTO }}
           PUBLI_DEUX: ${{ vars.PUBLI_DEUX }}
           PUBLI_HEURE2: ${{ vars.PUBLI_HEURE2 }}
@@ -72,6 +73,25 @@ jobs:
           VAPID_PUBLIQUE: ${{ vars.VAPID_PUBLIQUE }}
           PUSH_ABONNEMENTS: ${{ vars.PUSH_ABONNEMENTS }}
         run: python moteur/stock.py
+      - name: Nouvelle version d'une vidéo qui a marché (2 mois après, une par semaine au plus)
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REJOUER: ${{ vars.REJOUER }}
+          REJOUER_JOURS: ${{ vars.REJOUER_JOURS }}
+        run: python moteur/rejouer.py
+      - name: Veille des robots (un robot qui ne tourne plus = alerte, une fois par jour)
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VEILLE_ROBOTS: ${{ vars.VEILLE_ROBOTS }}
+          PRE_ECOUTE: ${{ vars.PRE_ECOUTE }}
+          ECLAIREUR: ${{ vars.ECLAIREUR }}
+          CONTROLEUR_SOIR: ${{ vars.CONTROLEUR_SOIR }}
+          VAPID_PRIVEE: ${{ vars.VAPID_PRIVEE }}
+          VAPID_PUBLIQUE: ${{ vars.VAPID_PUBLIQUE }}
+          PUSH_ABONNEMENTS: ${{ vars.PUSH_ABONNEMENTS }}
+        run: python moteur/veille_robots.py
       - name: Enregistrer
         run: |
           git config user.name "robot-jt"

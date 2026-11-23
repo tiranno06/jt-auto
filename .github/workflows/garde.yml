@@ -112,6 +112,7 @@ jobs:
           PUBLI_FRANCO: ${{ vars.PUBLI_FRANCO }}
           PUBLI_HEURE_FRANCO: ${{ vars.PUBLI_HEURE_FRANCO }}
           PUBLI_FILE: ${{ vars.PUBLI_FILE }}
+          PUBLI_NON: ${{ vars.PUBLI_NON }}
           REDIFFUSION: ${{ vars.REDIFFUSION }}
         run: python3 moteur/publication_auto.py || true
 
