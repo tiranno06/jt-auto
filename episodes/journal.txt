@@ -1,98 +1,71 @@
-Modal : 17.21 $ dépensés ce mois-ci (plafond 30 $)
+Modal : 17.40 $ dépensés ce mois-ci (plafond 30 $)
 Casting déjà fait.
-Type de vidéo : gag éclair (~15 s)
+Type de vidéo : sketch long (+1 min)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, Groq ok, OpenRouter ok, IA Modal ok, ElevenLabs epuise — IA utilisée : mistral
-Remarque comprise : L'auteur signale l'absence de gâteau d'anniversaire et de ballons au début et l'absence d'un élément visuel fort à la fin.
-Remarque de l'auteur : 0 réplique(s) à rendre à un autre personnage, 2 correction(s) : lieu, figurant
-Remarque de l'auteur appliquée : personne ajoutée à côté de explosion de confettis lumineux (burst)
+Remarque comprise : L'auteur veut couper en deux les 7 bulles où les deux personnages parlent, rendre le jeu du présentateur plus expressif à ce moment clé, et augmenter le contraste entre les tenues dans le décor de bar
+Remarque de l'auteur : 0 réplique(s) à rendre à un autre personnage, 4 correction(s) : lieux_separes, jeu, costume, costume
+Remarque de l'auteur appliquée : un décor pour chaque personnage (lieux séparés), jeu plus marqué à la réplique 1, tenue de presentateur, tenue de invite
   son téléchargé (yt-dlp --impersonate chrome)
+  témoin hauteur : voix à 147 Hz et 267 Hz bien séparées, 16 phrase(s) remise(s) sur la bonne voix : Après, pour ce qui est du screenshot, on ; On reprend depuis le début. ; Vas-y, je t'écoute. ; Toblerone. ; Ouais c'est une cata pardon excuse-moi,  ; Bon, je vais commencer.
+  vidéo refaite : 7 réplique(s) qui mélangeaient deux voix coupée(s) en deux
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-  [équipe · casting voix] ✔ dernier contrôle des voix (chaque réplique comparée à la voix moyenne de chaque personnage) : 2 réplique(s) remise(s) sur la bonne voix (corrigé) : réplique 7 (J'ai déjà mal aux genoux.) -> invite (écart 0.14) ; réplique 11 (Comment ça, mes cheveux.) -> invite (écart 0.15)
-    voix corrigée : réplique 7 (J'ai déjà mal aux genoux.) -> invite (écart 0.14)
-    voix corrigée : réplique 11 (Comment ça, mes cheveux.) -> invite (écart 0.15)
+  [équipe · casting voix] ✔ contrôle par la hauteur de la voix (réplique par réplique) : {'presentateur': 146, 'invite': 269} Hz : toutes du bon côté
+  [équipe · casting voix] ✔ dernier contrôle des voix (chaque réplique comparée à la voix moyenne de chaque personnage) : 2 réplique(s) remise(s) sur la bonne voix (corrigé) : réplique 9 (D'accord, c'est bon, reprenons.) -> presentateur (écart 0.31) ; réplique 40 (Pourquoi tu dis ça) -> presentateur (écart 0.12
+    voix corrigée : réplique 9 (D'accord, c'est bon, reprenons.) -> presentateur (écart 0.31)
+    voix corrigée : réplique 40 (Pourquoi tu dis ça) -> presentateur (écart 0.12)
   vidéo refaite : 2 réplique(s) remise(s) sur la bonne voix (hauteur et empreinte vocale)
-  son d'origine repris pour 17 répliques (mêmes instants)
-Refaire (compte_rendu) : « VIEILLIR À 30 ANS », mêmes répliques
-Sketch : « VIEILLIR À 30 ANS », 17 répliques
+  son d'origine repris pour 41 répliques (mêmes instants)
+Refaire (compte_rendu) : « PIRE DATE AMOUREUX », mêmes répliques
+Sketch : « PIRE DATE AMOUREUX », 41 répliques
+  lieux séparés proposés par l'IA refusés : rien dans le son ne dit qu'ils se parlent à distance
   personne muette en plus non dessinée : 2 personne(s) à l'image dans l'original, 2 qui parlent
   décor semi-réaliste 0 : lieu déjà montré cette semaine, nouveau tirage
-  décor semi-réaliste 0 (cadré ×1.50, pieds au sol) : [semi] small modest cozy living room with a slightly messy c
+  décor semi-réaliste 0 (cadré ×1.50, pieds au sol) : [semi] cozy rustic French bistro with dark wooden booths and
   personne muette en plus non dessinée : 2 personne(s) à l'image dans l'original, 2 qui parlent
-montage : 1 plans (0.0:large>inv/coupe)
+montage : 1 plans (0.0:large>pre/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-studio : soir, lieux ['salon'], tenues invite=tshirt, presentateur=chemise, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 38.6 s, 17 répliques, 1 scène(s), personnages ['invite', 'presentateur']
+studio : jour, lieux ['restaurant'], tenues presentateur=tablier, invite=pull, 0 figurant(s), ambiances ['vapeur'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 68.1 s, 41 répliques, 1 scène(s), personnages ['presentateur', 'invite']
   personne muette en plus non dessinée : 2 personne(s) à l'image dans l'original, 2 qui parlent
-montage : 1 plans (0.0:large>inv/coupe)
+montage : 1 plans (0.0:large>pre/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-studio : soir, lieux ['salon'], tenues invite=tshirt, presentateur=chemise, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 38.6 s, 17 répliques, 1 scène(s), personnages ['invite', 'presentateur']
-  dessin partagé : 1 machine(s) d'aide + celle-ci (2 morceaux de ~1158 images)
-  morceau 1158–2316 reçu d'une machine d'aide
-  dessin partagé terminé en 8.5 min
+studio : jour, lieux ['restaurant'], tenues presentateur=tablier, invite=pull, 0 figurant(s), ambiances ['vapeur'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 68.1 s, 41 répliques, 1 scène(s), personnages ['presentateur', 'invite']
+  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~1022 images)
+  release des morceaux relue (refaite entre-temps), nouvel essai
+  morceau 3066–4088 reçu d'une machine d'aide
+  morceau 1022–2044 reçu d'une machine d'aide
+  morceau 2044–3066 reçu d'une machine d'aide
+  dessin partagé terminé en 8.4 min
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-  IA gemini indisponible (gemini : aucun modèle disponible (503 : [{
-  "error": {
-    "code": 503,
-    "message": "This model is currently experie) : on passe à la suivante
-Jury : 1 remarque(s) sur les plans / zooms retirée(s) (montage « plan large » voulu)
-Jury : 7 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
-Jury qualité (ia) : 8.4/10 — Humoriste 8.6/10 : 12.5 s Le gag sur les genoux qui font mal pourrait être renforcé par une réaction physique exagérée du personnage (ex : se tenir les genoux en grimaçant ou s'effondrer légèrement). | Réalisateur 7.6/10 : 0.4 s L'invite de départ manque d'énergie visuelle. Un petit mouvement ou une expression plus dynamique pourrait capter l'attention dès le début. | Directeur artistique 8.0/10 : 0.0 s Les personnages sont bien stylisés, mais Maurice (le chat) n'est pas clairement identifiable comme un chat dans certaines images. Ajouter une queue ou des oreilles plus visibles améliorerait la cohére; 1.6 s Les décors sont cohérents, mais certains éléments (comme les objets en arrière-plan) pourraient être légèrement stylisés pour renforcer l'univers cartoon.; 38.0 s Le personnage principal (le steak haché) n'est pas clairement identifiable comme un steak dans certaines images. Ajouter d
+Jury : 3 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
+Jury qualité (ia) : 8.0/10 — Humoriste 7.8/10 :  | Réalisateur 8.8/10 :  | Directeur artistique 8.0/10 : 0 s Le style général est cohérent mais l'intégration des décors aquarelle peut être encore plus soignée. | Ingénieur du son 8.0/10 :  | Spectateur TikTok 7.8/10 : 
 fin en boucle : la dernière image se raccorde à la première (0.35 s de fondu)
   [vidéo finie · synchro] ✔ bouches du bon personnage
   [vidéo finie · bouches] ✔ bouche immobile quand le personnage se tait
   [vidéo finie · technique] ✔ sauts, clignotements, personnages (0 remarque(s))
-  transcription Groq (Whisper, gratuit) : 67 mots
-  karaoké contrôlé à l'oreille : 50 mots, écart médian 0.06 s
-  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 90 %)
-  IA gemini indisponible (gemini : aucun modèle disponible (503 : [{
-  "error": {
-    "code": 503,
-    "message": "This model is currently experie) : on passe à la suivante
+  transcription Groq (Whisper, gratuit) : 320 mots
+  Gemini n'a pas pu écouter (gemini-flash-latest : HTTP Error 429: Too Many Requests)
+  sous-titre « Ah ouais quand même. » confirmé par Gemini (la 2e transcription s'était trompée)
+  karaoké contrôlé à l'oreille : 241 mots, écart médian 0.03 s
+  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 80 %)
   [vidéo finie · contrôle IA] 0 remarque(s)
   [vidéo finie · fidélité à l'audio] ✔ Gemini a regardé et écouté la vidéo finie
   [vidéo finie · voix et dessin] ✔ chaque réplique sur la bonne voix, homme / femme d'après la voix
-  [vidéo finie · attribution] ✘ qui dit chaque phrase, comparé à l'image de l'original : l'image de l'original montre l'autre personne parler pendant 44 % des phrases (répliques 2, 4, 5, 7, 9, 11)
-Contrôle de la vidéo finie : 1 point(s) à vérifier — 1.4 s l'image de l'original montre l'autre personne parler pendant
-Compte rendu (tour 1, confiance 88/100) : corrections demandées au robot :
-- à 0.0 s : Les personnages sont bien stylisés, mais Maurice (le chat) n'est pas clairement identifiable comme un chat dans certaines images. Ajouter une queue ou des oreilles plus visibles améliorerait la cohére
-- à 38.0 s : Le personnage principal (le steak haché) n'est pas clairement identifiable comme un steak dans certaines images. Ajouter des détails visuels (comme une forme de viande plus évidente) renforcerait l'hu
-Remarque comprise : L'auteur signale que le chat Maurice et le steak haché ne sont pas clairement identifiables et propose d'ajouter des éléments visuels pour les rendre plus reconnaissables.
-Remarque de l'auteur : 0 réplique(s) à rendre à un autre personnage, 4 correction(s) : lieu, costume, lieu, costume
-Compte rendu : tenue de Maurice ; tenue de Steak
-  personne muette en plus non dessinée : 2 personne(s) à l'image dans l'original, 2 qui parlent
-montage : 1 plans (0.0:large>inv/coupe)
-style croquis : décors passés à l'encre et à l'aquarelle
-studio : soir, lieux ['salon'], tenues invite=tshirt, presentateur=chemise, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 38.6 s, 17 répliques, 1 scène(s), personnages ['invite', 'presentateur']
-  redessin partiel : 0/2316 images à redessiner (0 passage(s)), le reste repris tel quel
-Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-fin en boucle : la dernière image se raccorde à la première (0.35 s de fondu)
-  [vidéo finie · synchro] ✔ bouches du bon personnage
-  [vidéo finie · bouches] ✔ bouche immobile quand le personnage se tait
-  [vidéo finie · technique] ✔ sauts, clignotements, personnages (0 remarque(s))
-  transcription Groq (Whisper, gratuit) : 67 mots
-  karaoké contrôlé à l'oreille : 50 mots, écart médian 0.06 s
-  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 90 %)
-  [vidéo finie · contrôle IA] 0 remarque(s)
-  [vidéo finie · voix et dessin] ✔ chaque réplique sur la bonne voix, homme / femme d'après la voix
-  [vidéo finie · attribution] ✘ qui dit chaque phrase, comparé à l'image de l'original : l'image de l'original montre l'autre personne parler pendant 44 % des phrases (répliques 2, 4, 5, 7, 9, 11)
-  contrôles qui n'ont pas pu se faire : fidélité à l'audio (Gemini n'a pas répondu) (note de confiance plafonnée)
-Contrôle de la vidéo finie : 1 point(s) à vérifier — 1.4 s l'image de l'original montre l'autre personne parler pendant
-  IA gemini indisponible (gemini : aucun modèle disponible (503 : [{
-  "error": {
-    "code": 503,
-    "message": "This model is currently experie) : on passe à la suivante
-Jury : 1 remarque(s) sur les plans / zooms retirée(s) (montage « plan large » voulu)
-Jury : 11 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
-Jury qualité (ia) : 9.1/10 — Humoriste 9.4/10 :  | Réalisateur 7.6/10 : 38.0 s L'appel à l'action ('Abonne-toi !') pourrait être renforcé par un changement d'expression ou de posture pour le rendre plus mémorable. | Directeur artistique 9.6/10 : 0.0 s Les personnages sont bien stylisés, mais le décor manque de détails cohérents avec l'histoire (ex. : un gâteau d'anniversaire ou des bougies pour renforcer le thème). | Ingénieur du son 10.0/10 :  | Spectateur TikTok 8.6/10 : 38.0 s La fin est efficace, mais un appel à l'action plus visuel (ex. : un geste ou une expression plus marquée) pourrait encourager le partage.
-Manque par rapport à la vidéo d'origine : Un personnage secondaire (ex. : un chat ou un objet parlant) pour renforcer l'humour et la cohérence avec les précédentes vidéos. ; Un décor plus détaillé (ex. : éléments d'anniversaire) pour renforcer le thème. ; Des réactions physiques plus marquées pour certaines répliques clés.
-Compte rendu : la version corrigée n'est pas meilleure (88 → 82) : on garde la première
+  [vidéo finie · attribution] ✔ qui dit chaque phrase, comparé à l'image de l'original
+  contrôles qui n'ont pas pu se faire : qui parle d'après l'image de l'original (image illisible) (note de confiance plafonnée)
+  1 remarque(s) légère(s) gardée(s) au journal seulement : 62.5 s on entend « Et de meilleurs. » sans sous-titre
+Contrôle de la vidéo finie : 0 point(s) à vérifier
+Compte rendu (tour 1, confiance 90/100) : corrections demandées au robot :
+- à 0.0 s : Le style général est cohérent mais l'intégration des décors aquarelle peut être encore plus soignée.
+Remarque comprise : L'auteur note que le style général est cohérent mais que l'intégration des décors en aquarelle doit être plus soignée.
+Remarque de l'auteur : 0 réplique(s) à rendre à un autre personnage, 1 correction(s) : lieu
+Compte rendu : rien que le robot sache corriger lui-même
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, groq = ok, ia = groq ×2, mistral ×3, gemini ×2, appels = {'groq': 2, 'mistral': 3, 'gemini': 2}, epuisees = [], quota = {'groq': {'reste_jour': 999, 'limite_jour': 1000}}, voix = tiktok, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 37060, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 329, 'total_usd': 0.102, 'modal_mesure_usd': 0.16}
-⏱️ Étapes plus lentes que d'habitude : Installation de la machine 9 min (d'habitude 1 min), Décors 5 min (d'habitude 1 min)
-⏱️ Temps par étape : Installation de la machine 9.2 min, Démarrage du robot 0.2 min, Écoute du son TikTok 0.3 min, Décors 5.5 min, Dessin des images 9.3 min, Contrôle qualité par le jury 2.1 min, Contrôle de la vidéo finie 1.0 min, Corrections du compte rendu 3.8 min
-Vidéo refaite : 2026-11-23_22h30_emission.mp4 remplace 2026-11-23_18h34_emission.mp4 dans la liste (confiance 76 → 88) ; sa place « À publier » est gardée
-Quota de l'API GitHub : 4760 appels restants
-OK : sortie/2026-11-23_22h30_emission.mp4 (39 s)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, groq = ok, ia = groq ×2, gemini ×3, appels = {'groq': 2, 'gemini': 3}, epuisees = [], quota = {'groq': {'reste_jour': 998, 'limite_jour': 1000}}, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 19154, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 42, 'total_usd': 0.013, 'modal_mesure_usd': 0.15}
+⏱️ Étapes plus lentes que d'habitude : Installation de la machine 5 min (d'habitude 1 min)
+⏱️ Temps par étape : Installation de la machine 5.4 min, Démarrage du robot 0.3 min, Écoute du son TikTok 0.3 min, Décors 0.7 min, Dessin des images 9.6 min, Contrôle qualité par le jury 2.5 min, Contrôle de la vidéo finie 1.9 min, Corrections du compte rendu 0.3 min
+Compte rendu : confiance 100 → 90 : la nouvelle version est moins sûre, elle est retirée (l'ancienne reste)
+Quota de l'API GitHub : 4507 appels restants
+OK : sortie/2026-11-23_22h58_emission.mp4 (69 s)
