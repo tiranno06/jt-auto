@@ -23819,7 +23819,12 @@
    "eleven_caracteres": 0,
    "gpu_s": 0
   },
-  "titre_affiche": "POV : Les hommes souffre"
+  "titre_affiche": "POV : Les hommes souffre",
+  "controle_soir": {
+   "date": "2026-11-23",
+   "problemes": 0,
+   "version": 2
+  }
  },
  {
   "date": "2026-11-03",
@@ -25910,7 +25915,12 @@
    "persos": 3,
    "partie": false
   },
-  "titre_affiche": "POV : Les comptes de vacances"
+  "titre_affiche": "POV : Les comptes de vacances",
+  "controle_soir": {
+   "date": "2026-11-23",
+   "problemes": 0,
+   "version": 2
+  }
  },
  {
   "date": "2026-11-15",
@@ -26094,7 +26104,12 @@
    "persos": 2,
    "partie": false
   },
-  "titre_affiche": "POV : J'ai date la mère de mon pote"
+  "titre_affiche": "POV : J'ai date la mère de mon pote",
+  "controle_soir": {
+   "date": "2026-11-23",
+   "problemes": 0,
+   "version": 2
+  }
  },
  {
   "date": "2026-11-15",
@@ -26291,7 +26306,12 @@
    "persos": 2,
    "partie": false
   },
-  "titre_affiche": "POV : Son grand frère est dangereux"
+  "titre_affiche": "POV : Son grand frère est dangereux",
+  "controle_soir": {
+   "date": "2026-11-23",
+   "problemes": 0,
+   "version": 2
+  }
  },
  {
   "date": "2026-11-16",
@@ -26455,7 +26475,12 @@
    "persos": 2,
    "partie": false
   },
-  "titre_affiche": "POV : Quand ton boss t'appelle après 17h"
+  "titre_affiche": "POV : Quand ton boss t'appelle après 17h",
+  "controle_soir": {
+   "date": "2026-11-23",
+   "problemes": 0,
+   "version": 2
+  }
  },
  {
   "date": "2026-11-16",
@@ -27898,7 +27923,12 @@
    "persos": 2,
    "partie": false
   },
-  "titre_affiche": "POV : T'as 14 ans et ton avenir se joue"
+  "titre_affiche": "POV : T'as 14 ans et ton avenir se joue",
+  "controle_soir": {
+   "date": "2026-11-23",
+   "problemes": 0,
+   "version": 2
+  }
  },
  {
   "date": "2026-11-20",
@@ -28124,7 +28154,12 @@
    "persos": 2,
    "partie": false
   },
-  "titre_affiche": "POV : Ton salaire a du retard et ton chef..."
+  "titre_affiche": "POV : Ton salaire a du retard et ton chef...",
+  "controle_soir": {
+   "date": "2026-11-23",
+   "problemes": 0,
+   "version": 2
+  }
  },
  {
   "date": "2026-11-20",
@@ -28338,7 +28373,12 @@
    "persos": 2,
    "partie": false
   },
-  "titre_affiche": "POV : Demander une rupture conventionnelle"
+  "titre_affiche": "POV : Demander une rupture conventionnelle",
+  "controle_soir": {
+   "date": "2026-11-23",
+   "problemes": 0,
+   "version": 2
+  }
  },
  {
   "date": "2026-11-20",
@@ -28512,6 +28552,82 @@
     "t": 57.5,
     "poste": "sous-titres",
     "quoi": "sous-titre « Quoi c'est tout. » mais on entend « 6 costaud ouais »",
+    "grave": true
+   },
+   {
+    "t": 0.1,
+    "poste": "contrôleur du soir · voix et dessin",
+    "quoi": "réplique 1 « Ça va les trouducs. Alors, je vais vous donner vos » : c'est la voix de l'invitée, pas du présentateur (hauteur de la voix)",
+    "grave": true,
+    "qui": {
+     "replique": 0,
+     "role": "invite"
+    }
+   },
+   {
+    "t": 13.1,
+    "poste": "contrôleur du soir · voix et dessin",
+    "quoi": "réplique 5 « Euh, je sais pas, 16. » : c'est la voix de l'invitée, pas du présentateur (hauteur de la voix)",
+    "grave": true,
+    "qui": {
+     "replique": 4,
+     "role": "invite"
+    }
+   },
+   {
+    "t": 15.3,
+    "poste": "contrôleur du soir · voix et dessin",
+    "quoi": "réplique 6 « Ouais, je te mets 18. » : c'est la voix de l'invitée, pas du présentateur (hauteur de la voix)",
+    "grave": true,
+    "qui": {
+     "replique": 5,
+     "role": "invite"
+    }
+   },
+   {
+    "t": 23.2,
+    "poste": "contrôleur du soir · voix et dessin",
+    "quoi": "réplique 10 « Ouais. Fais-moi sourire. » : c'est la voix de l'invitée, pas du présentateur (hauteur de la voix)",
+    "grave": true,
+    "qui": {
+     "replique": 9,
+     "role": "invite"
+    }
+   },
+   {
+    "t": 38.6,
+    "poste": "contrôleur du soir · voix et dessin",
+    "quoi": "réplique 15 « Et moi monsieur. J'ai eu combien. » : c'est la voix du présentateur, pas de l'invitée (hauteur de la voix)",
+    "grave": true,
+    "qui": {
+     "replique": 14,
+     "role": "presentateur"
+    }
+   },
+   {
+    "t": 42.2,
+    "poste": "contrôleur du soir · voix et dessin",
+    "quoi": "réplique 17 « Ça fait vraiment pas beaucoup. » : c'est la voix du présentateur, pas de l'invitée (hauteur de la voix)",
+    "grave": true,
+    "qui": {
+     "replique": 16,
+     "role": "presentateur"
+    }
+   },
+   {
+    "t": 89.8,
+    "poste": "contrôleur du soir · voix et dessin",
+    "quoi": "réplique 37 « et bien c'est ciao » : c'est la voix de l'invitée, pas du présentateur (hauteur de la voix)",
+    "grave": true,
+    "qui": {
+     "replique": 36,
+     "role": "invite"
+    }
+   },
+   {
+    "t": null,
+    "poste": "contrôleur du soir · voix et dessin",
+    "quoi": "4 bulle(s) où deux personnes parlent : à couper en deux",
     "grave": true
    }
   ],
@@ -29354,7 +29470,13 @@
    "persos": 2,
    "partie": false
   },
-  "titre_affiche": "POV : Tu demandes à Siri de compter jusqu'à 1M"
+  "titre_affiche": "POV : Tu demandes à Siri de compter jusqu'à 1M",
+  "controle_soir": {
+   "date": "2026-11-23",
+   "problemes": 3,
+   "version": 2,
+   "refaite": true
+  }
  },
  {
   "date": "2026-11-20",
@@ -29871,7 +29993,13 @@
     "quoi": "7 bulle(s) où deux personnes parlent : à couper en deux",
     "grave": true
    }
-  ]
+  ],
+  "controle_soir": {
+   "date": "2026-11-23",
+   "problemes": 11,
+   "version": 2,
+   "refaite": true
+  }
  },
  {
   "date": "2026-11-22",
@@ -30061,7 +30189,13 @@
   },
   "titre_affiche": "POV: Tu viens d'avoir 27 ans",
   "anglais": true,
-  "fin_carte": true
+  "fin_carte": true,
+  "controle_soir": {
+   "date": "2026-11-23",
+   "problemes": 1,
+   "version": 2,
+   "refaite": true
+  }
  },
  {
   "date": "2026-11-23",
