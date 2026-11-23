@@ -7084,36 +7084,37 @@
   "cadence": "normal"
  },
  {
-  "moment": "jour",
+  "moment": "soir",
   "lieux": [
-   "restaurant"
+   "rue",
+   "salon"
   ],
   "source": "auteur+image",
-  "duree": 68.1,
+  "duree": 62.0,
   "plans": {
-   "large": 41
+   "large": 33
   },
   "mouvements": {
-   "fixe": 41
+   "fixe": 33
   },
   "costumes": {
-   "presentateur": "tablier",
+   "presentateur": "pull",
    "invite": "pull"
   },
   "figurants": 0,
   "ambiances": [
-   "vapeur"
+   "poussiere"
   ],
-  "controle": "Humoriste 7.8/10 :  | Réalisateur 8.8/10 :  | Directeur artistique 8.0/10 : 0 s Le style général est cohérent mais l'intégration des décors aquarelle peut être encore plus soignée. | Ingénieur du son ",
-  "fichier": "2026-11-23_22h58_emission.mp4",
+  "controle": "Humoriste 7.0/10 : 31.8 s Manque d'exagération dans le refus du prix excessif | Réalisateur 8.0/10 : 3.8 s Réaction un peu plate sur l'annonce de la Grèce | Directeur artistique 8.0/10 : 0.4 s Le cost",
+  "fichier": "2026-11-23_22h12_emission.mp4",
   "cine": {
    "focus": false,
    "vertige": false,
    "tiers": true,
-   "etalonnage": true,
+   "etalonnage": false,
    "profondeur": false,
-   "grain": true,
-   "reflets": true,
+   "grain": false,
+   "reflets": false,
    "son": true
   },
   "cadence": "rapide"

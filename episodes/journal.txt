@@ -1,71 +1,176 @@
-Modal : 17.40 $ dépensés ce mois-ci (plafond 30 $)
+Modal : 17.11 $ dépensés ce mois-ci (plafond 30 $)
 Casting déjà fait.
 Type de vidéo : sketch long (+1 min)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, Groq ok, OpenRouter ok, IA Modal ok, ElevenLabs epuise — IA utilisée : mistral
-Remarque comprise : L'auteur veut couper en deux les 7 bulles où les deux personnages parlent, rendre le jeu du présentateur plus expressif à ce moment clé, et augmenter le contraste entre les tenues dans le décor de bar
-Remarque de l'auteur : 0 réplique(s) à rendre à un autre personnage, 4 correction(s) : lieux_separes, jeu, costume, costume
-Remarque de l'auteur appliquée : un décor pour chaque personnage (lieux séparés), jeu plus marqué à la réplique 1, tenue de presentateur, tenue de invite
+Remarque comprise : L'auteur signale des problèmes de découpage des bulles, un faux raccord entre les plans 7 et 8, un décor de salon trop générique et un manque de distinction visuelle entre l'invite et le présentateur.
+Remarque de l'auteur : 0 réplique(s) à rendre à un autre personnage, 4 correction(s) : reaction, reaction, lieu, casting
+Remarque de l'auteur appliquée : invite : humain, casting de invite : age 28, genre h, taille 1, barbe barbe complète
   son téléchargé (yt-dlp --impersonate chrome)
-  témoin hauteur : voix à 147 Hz et 267 Hz bien séparées, 16 phrase(s) remise(s) sur la bonne voix : Après, pour ce qui est du screenshot, on ; On reprend depuis le début. ; Vas-y, je t'écoute. ; Toblerone. ; Ouais c'est une cata pardon excuse-moi,  ; Bon, je vais commencer.
-  vidéo refaite : 7 réplique(s) qui mélangeaient deux voix coupée(s) en deux
+  témoin hauteur : voix à 165 Hz et 250 Hz bien séparées, 10 phrase(s) remise(s) sur la bonne voix : filles. ; Ce n'est pas ; si tu prends ma carte, il n'y a pas de s ; la Grèce, mais en plus tu peux rester pl ; je te fais confiance de toute façon. ; c'est vrai.
+  vidéo refaite : 8 réplique(s) qui mélangeaient deux voix coupée(s) en deux
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-  [équipe · casting voix] ✔ contrôle par la hauteur de la voix (réplique par réplique) : {'presentateur': 146, 'invite': 269} Hz : toutes du bon côté
-  [équipe · casting voix] ✔ dernier contrôle des voix (chaque réplique comparée à la voix moyenne de chaque personnage) : 2 réplique(s) remise(s) sur la bonne voix (corrigé) : réplique 9 (D'accord, c'est bon, reprenons.) -> presentateur (écart 0.31) ; réplique 40 (Pourquoi tu dis ça) -> presentateur (écart 0.12
-    voix corrigée : réplique 9 (D'accord, c'est bon, reprenons.) -> presentateur (écart 0.31)
-    voix corrigée : réplique 40 (Pourquoi tu dis ça) -> presentateur (écart 0.12)
+  [équipe · casting voix] ✔ contrôle par la hauteur de la voix (réplique par réplique) : {'invite': 163, 'presentateur': 257} Hz : toutes du bon côté
+  [équipe · casting voix] ✔ dernier contrôle des voix (chaque réplique comparée à la voix moyenne de chaque personnage) : 2 réplique(s) remise(s) sur la bonne voix (corrigé) : réplique 15 (T'inquiète, vas-y fonce ! C'est combien ) -> invite (écart 0.45) ; réplique 21 (C'est pas grave, c'est pas grave, vas-y,) -
+    voix corrigée : réplique 15 (T'inquiète, vas-y fonce ! C'est combien ) -> invite (écart 0.45)
+    voix corrigée : réplique 21 (C'est pas grave, c'est pas grave, vas-y,) -> invite (écart 0.15)
   vidéo refaite : 2 réplique(s) remise(s) sur la bonne voix (hauteur et empreinte vocale)
-  son d'origine repris pour 41 répliques (mêmes instants)
-Refaire (compte_rendu) : « PIRE DATE AMOUREUX », mêmes répliques
-Sketch : « PIRE DATE AMOUREUX », 41 répliques
-  lieux séparés proposés par l'IA refusés : rien dans le son ne dit qu'ils se parlent à distance
-  personne muette en plus non dessinée : 2 personne(s) à l'image dans l'original, 2 qui parlent
+  son d'origine repris pour 33 répliques (mêmes instants)
+Refaire (compte_rendu) : « SORTIE GTA 6 », mêmes répliques
+Sketch : « SORTIE GTA 6 », 33 répliques
+Lieux séparés : chaque personnage a son propre décor (appel, visio, l'un ailleurs)
+Personnages choisis par l'auteur appliqués
+  réseau : erreur 429 passagère, nouvel essai dans 2 s
+  décor semi-réaliste 0 : décor ressemblant de la banque refusé (ne colle pas à la fiche de tournage)
   décor semi-réaliste 0 : lieu déjà montré cette semaine, nouveau tirage
-  décor semi-réaliste 0 (cadré ×1.50, pieds au sol) : [semi] cozy rustic French bistro with dark wooden booths and
-  personne muette en plus non dessinée : 2 personne(s) à l'image dans l'original, 2 qui parlent
-montage : 1 plans (0.0:large>pre/coupe)
+  décor semi-réaliste 0 (cadré ×1.35, pieds au sol) : [semi] quiet city street at dusk, parked car at the curb, si
+  réseau : erreur 429 passagère, nouvel essai dans 2 s
+  réseau : erreur 503 passagère, nouvel essai dans 2 s
+  décor 1 : tirage 3/3 choisi par Gemini (fiche de tournage)
+  décor 1 : notes de beauté des tirages [6.402, 6.651, 6.371]
+  décor semi-réaliste 1 (cadré ×1.45, pieds au sol) : [semi] cozy living room, sofa, posters on the wall, coffee t
+Personnages choisis par l'auteur appliqués
+montage : 9 plans (0.2:large>pre/coupe 3.3:large>inv/coupe 7.1:large>pre/coupe 10.0:large>inv/coupe 12.8:large>pre/coupe 25.1:large>inv/coupe 25.7:large>pre/coupe 54.2:large>pre/coupe 58.6:large>pre/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-studio : jour, lieux ['restaurant'], tenues presentateur=tablier, invite=pull, 0 figurant(s), ambiances ['vapeur'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 68.1 s, 41 répliques, 1 scène(s), personnages ['presentateur', 'invite']
-  personne muette en plus non dessinée : 2 personne(s) à l'image dans l'original, 2 qui parlent
-montage : 1 plans (0.0:large>pre/coupe)
+studio : soir, lieux ['rue', 'salon'], tenues presentateur=pull, invite=pull, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+appel : écran partagé du début à la fin (chacun dans son décor, aucun changement de plan)
+cartoon : durée 62.0 s, 33 répliques, 2 scène(s), personnages ['presentateur', 'invite']
+Personnages choisis par l'auteur appliqués
+montage : 9 plans (0.2:large>pre/coupe 3.3:large>inv/coupe 7.1:large>pre/coupe 10.0:large>inv/coupe 12.8:large>pre/coupe 25.1:large>inv/coupe 25.7:large>pre/coupe 54.2:large>pre/coupe 58.6:large>pre/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-studio : jour, lieux ['restaurant'], tenues presentateur=tablier, invite=pull, 0 figurant(s), ambiances ['vapeur'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 68.1 s, 41 répliques, 1 scène(s), personnages ['presentateur', 'invite']
-  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~1022 images)
-  release des morceaux relue (refaite entre-temps), nouvel essai
-  morceau 3066–4088 reçu d'une machine d'aide
-  morceau 1022–2044 reçu d'une machine d'aide
-  morceau 2044–3066 reçu d'une machine d'aide
-  dessin partagé terminé en 8.4 min
+studio : soir, lieux ['rue', 'salon'], tenues presentateur=pull, invite=pull, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+appel : écran partagé du début à la fin (chacun dans son décor, aucun changement de plan)
+cartoon : durée 62.0 s, 33 répliques, 2 scène(s), personnages ['presentateur', 'invite']
+  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~929 images)
+  morceau 2789–3719 reçu d'une machine d'aide
+  morceau 1860–2789 reçu d'une machine d'aide
+  morceau 930–1860 : aide en retard ou en échec, dessiné ici
+  dessin partagé terminé en 28.5 min
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury : 3 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
-Jury qualité (ia) : 8.0/10 — Humoriste 7.8/10 :  | Réalisateur 8.8/10 :  | Directeur artistique 8.0/10 : 0 s Le style général est cohérent mais l'intégration des décors aquarelle peut être encore plus soignée. | Ingénieur du son 8.0/10 :  | Spectateur TikTok 7.8/10 : 
+Jury : 2 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
+Jury qualité (ia) : 7.9/10 — Humoriste 7.0/10 : 31.8 s Manque d'exagération dans le refus du prix excessif | Réalisateur 8.0/10 : 3.8 s Réaction un peu plate sur l'annonce de la Grèce | Directeur artistique 8.0/10 : 0.4 s Le costume de l'invité pourrait être un peu plus estival vu le sujet | Ingénieur du son 8.8/10 :  | Spectateur TikTok 7.8/10 : 
+Bouches : 4 réplique(s) où un autre personnage bougeait plus que celui qui parle (2, 5, 16, 33) : redessinées (celui qui écoute reste calme)
+Personnages choisis par l'auteur appliqués
+montage : 9 plans (0.2:large>pre/coupe 3.3:large>inv/coupe 7.1:large>pre/coupe 10.0:large>inv/coupe 12.8:large>pre/coupe 25.1:large>inv/coupe 25.7:large>pre/coupe 54.2:large>pre/coupe 58.6:large>pre/coupe)
+style croquis : décors passés à l'encre et à l'aquarelle
+studio : soir, lieux ['rue', 'salon'], tenues presentateur=pull, invite=pull, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+appel : écran partagé du début à la fin (chacun dans son décor, aucun changement de plan)
+cartoon : durée 62.0 s, 33 répliques, 2 scène(s), personnages ['presentateur', 'invite']
+  redessin partiel : 1123/3719 images à redessiner (3 passage(s)), le reste repris tel quel
+Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
+Bouches corrigées : 4 → 3 réplique(s) à revoir
 fin en boucle : la dernière image se raccorde à la première (0.35 s de fondu)
-  [vidéo finie · synchro] ✔ bouches du bon personnage
+  [vidéo finie · synchro] ✘ bouches du bon personnage : 3 réplique(s) à revoir
   [vidéo finie · bouches] ✔ bouche immobile quand le personnage se tait
   [vidéo finie · technique] ✔ sauts, clignotements, personnages (0 remarque(s))
-  transcription Groq (Whisper, gratuit) : 320 mots
+  transcription Groq (Whisper, gratuit) : 251 mots
   Gemini n'a pas pu écouter (gemini-flash-latest : HTTP Error 429: Too Many Requests)
-  sous-titre « Ah ouais quand même. » confirmé par Gemini (la 2e transcription s'était trompée)
-  karaoké contrôlé à l'oreille : 241 mots, écart médian 0.03 s
-  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 80 %)
+  karaoké contrôlé à l'oreille : 208 mots, écart médian 0.06 s
+  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 84 %)
   [vidéo finie · contrôle IA] 0 remarque(s)
   [vidéo finie · fidélité à l'audio] ✔ Gemini a regardé et écouté la vidéo finie
+  [vidéo finie · voix et dessin] ✘ chaque réplique sur la bonne voix, homme / femme d'après la voix : 2 écart(s)
+  [vidéo finie · attribution] ✔ qui dit chaque phrase, comparé à l'image de l'original
+  1 remarque(s) légère(s) gardée(s) au journal seulement : 19.8 s sous-titre « Ce n'est pas » mais on entend « Écout
+Contrôle de la vidéo finie : 5 point(s) à vérifier — 3.3 s pendant la réplique de invite (« En Grèce ? »), c'est un aut ; 26.8 s pendant la réplique de invite (« T'inquiète, vas-y fonce ! C ; 26.8 s réplique 16 « T'inquiète, vas-y fonce ! C'est combien ? Je t ; 43.9 s réplique 22 « C'est pas grave, c'est pas grave, vas-y, dors  ; 59.8 s pendant la réplique de invite (« Allez ! »), c'est un autre 
+Compte rendu (tour 1, confiance 40/100) : corrections demandées au robot :
+- à 3.3 s : pendant la réplique de invite (« En Grèce ? »), c'est un autre personnage qui bouge
+- à 26.8 s : pendant la réplique de invite (« T'inquiète, vas-y fonce ! C'est combien  »), c'est un autre personnage qui bouge
+- à 59.8 s : pendant la réplique de invite (« Allez ! »), c'est un autre personnage qui bouge
+- à 31.8 s : Manque d'exagération dans le refus du prix excessif
+- à 3.8 s : Réaction un peu plate sur l'annonce de la Grèce
+Remarque comprise : L'auteur signale que pendant trois répliques l'animation montre le mauvais personnage, que le refus du prix manque d'exagération et que la réaction à l'annonce de la Grèce est trop plate.
+Remarque de l'auteur : 3 réplique(s) à rendre à un autre personnage, 5 correction(s) : casting, casting, casting, jeu, reaction
+Compte rendu : réplique 16 -> presentateur (voix) ; réplique 22 -> presentateur (voix) ; réplique 16 -> invite ; invite : humain ; invite : humain ; invite : humain ; casting de invite : age 28, genre h, taille 1, barbe barbe complète ; jeu plus marqué à la réplique 31
+Personnages choisis par l'auteur appliqués
+montage : 9 plans (0.2:large>pre/coupe 3.3:large>inv/coupe 7.1:large>pre/coupe 10.0:large>inv/coupe 12.8:large>pre/coupe 25.1:large>inv/coupe 25.7:large>pre/coupe 54.2:large>pre/coupe 58.6:large>pre/coupe)
+style croquis : décors passés à l'encre et à l'aquarelle
+studio : soir, lieux ['rue', 'salon'], tenues presentateur=pull, invite=pull, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+appel : écran partagé du début à la fin (chacun dans son décor, aucun changement de plan)
+cartoon : durée 62.0 s, 33 répliques, 2 scène(s), personnages ['presentateur', 'invite']
+  image 300/3719 (4 processeurs)
+  image 600/3719
+  image 900/3719
+  image 1200/3719
+  image 1500/3719
+  image 1800/3719
+  image 2100/3719
+  image 2400/3719
+  image 2700/3719
+  image 3000/3719
+  image 3300/3719
+  image 3600/3719
+Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
+fin en boucle : la dernière image se raccorde à la première (0.35 s de fondu)
+  [vidéo finie · synchro] ✘ bouches du bon personnage : 3 réplique(s) à revoir
+  [vidéo finie · bouches] ✔ bouche immobile quand le personnage se tait
+  [vidéo finie · technique] ✔ sauts, clignotements, personnages (0 remarque(s))
+  transcription Groq (Whisper, gratuit) : 251 mots
+  Gemini n'a pas pu écouter (gemini-flash-latest : HTTP Error 429: Too Many Requests)
+  Gemini n'a pas pu écouter (gemini-flash-lite-latest : HTTP Error 503: Service Unavailable)
+  karaoké contrôlé à l'oreille : 208 mots, écart médian 0.06 s
+  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 84 %)
+  [vidéo finie · contrôle IA] 0 remarque(s)
   [vidéo finie · voix et dessin] ✔ chaque réplique sur la bonne voix, homme / femme d'après la voix
   [vidéo finie · attribution] ✔ qui dit chaque phrase, comparé à l'image de l'original
-  contrôles qui n'ont pas pu se faire : qui parle d'après l'image de l'original (image illisible) (note de confiance plafonnée)
-  1 remarque(s) légère(s) gardée(s) au journal seulement : 62.5 s on entend « Et de meilleurs. » sans sous-titre
-Contrôle de la vidéo finie : 0 point(s) à vérifier
-Compte rendu (tour 1, confiance 90/100) : corrections demandées au robot :
-- à 0.0 s : Le style général est cohérent mais l'intégration des décors aquarelle peut être encore plus soignée.
-Remarque comprise : L'auteur note que le style général est cohérent mais que l'intégration des décors en aquarelle doit être plus soignée.
-Remarque de l'auteur : 0 réplique(s) à rendre à un autre personnage, 1 correction(s) : lieu
-Compte rendu : rien que le robot sache corriger lui-même
+  contrôles qui n'ont pas pu se faire : fidélité à l'audio (Gemini n'a pas répondu) (note de confiance plafonnée)
+  1 remarque(s) légère(s) gardée(s) au journal seulement : 19.8 s sous-titre « Ce n'est pas » mais on entend « comme
+Contrôle de la vidéo finie : 3 point(s) à vérifier — 3.3 s pendant la réplique de invite (« En Grèce ? »), c'est un aut ; 26.8 s pendant la réplique de invite (« T'inquiète, vas-y fonce ! C ; 59.8 s pendant la réplique de invite (« Allez ! »), c'est un autre 
+Jury : 4 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
+Jury qualité (ia) : 8.0/10 — Humoriste 7.0/10 : 25 s Manque d'exagération dans la réaction du présentateur à ce moment précis.; 25 s Ajouter une réaction surprise | Réalisateur 8.8/10 : 3 s Accentuer le scepticisme de l'invité | Directeur artistique 8.0/10 : 1 s Le design des personnages est globalement correct mais manque de contraste par rapport au fond urbain. | Ingénieur du son 8.6/10 :  | Spectateur TikTok 7.8/10 : 
+Compte rendu corrigé : confiance 40 → 58/100, jury 8.0/10
+Compte rendu (tour 2, confiance 58/100) : corrections demandées au robot :
+- à 3.3 s : pendant la réplique de invite (« En Grèce ? »), c'est un autre personnage qui bouge
+- à 26.8 s : pendant la réplique de invite (« T'inquiète, vas-y fonce ! C'est combien  »), c'est un autre personnage qui bouge
+- à 59.8 s : pendant la réplique de invite (« Allez ! »), c'est un autre personnage qui bouge
+- à 25.0 s : Manque d'exagération dans la réaction du présentateur à ce moment précis.
+- à 25.0 s : Ajouter une réaction surprise
+- à 3.0 s : Accentuer le scepticisme de l'invité
+- à 1.0 s : Le design des personnages est globalement correct mais manque de contraste par rapport au fond urbain.
+Remarque comprise : L'auteur signale que plusieurs répliques de l'invité sont animées avec le mauvais personnage, il veut plus d'exagération et de surprise dans la réaction du présentateur autour de 25 s, accentuer le sc
+Remarque de l'auteur : 3 réplique(s) à rendre à un autre personnage, 4 correction(s) : reaction, jeu, costume, costume
+Compte rendu : réplique 2 -> presentateur ; réplique 16 -> presentateur ; réplique 33 -> presentateur ; jeu plus marqué à la réplique 2 ; tenue de presentateur ; tenue de invite
+Personnages choisis par l'auteur appliqués
+montage : 9 plans (0.2:large>pre/coupe 3.3:large>pre/coupe 7.1:large>pre/coupe 10.0:large>inv/coupe 12.8:large>pre/coupe 25.1:large>inv/coupe 25.7:large>pre/coupe 54.2:large>pre/coupe 58.6:large>pre/coupe)
+style croquis : décors passés à l'encre et à l'aquarelle
+studio : soir, lieux ['rue', 'salon'], tenues presentateur=pull, invite=tshirt, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+appel : écran partagé du début à la fin (chacun dans son décor, aucun changement de plan)
+cartoon : durée 62.0 s, 33 répliques, 2 scène(s), personnages ['presentateur', 'invite']
+  image 300/3719 (4 processeurs)
+  image 600/3719
+  image 900/3719
+  image 1200/3719
+  image 1500/3719
+  image 1800/3719
+  image 2100/3719
+  image 2400/3719
+  image 2700/3719
+  image 3000/3719
+  image 3300/3719
+  image 3600/3719
+Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
+fin en boucle : la dernière image se raccorde à la première (0.35 s de fondu)
+  [vidéo finie · synchro] ✘ bouches du bon personnage : 2 réplique(s) à revoir
+  [vidéo finie · bouches] ✔ bouche immobile quand le personnage se tait
+  [vidéo finie · technique] ✔ sauts, clignotements, personnages (0 remarque(s))
+  transcription Groq (Whisper, gratuit) : 251 mots
+  Gemini n'a pas pu écouter (gemini-flash-latest : HTTP Error 429: Too Many Requests)
+  karaoké contrôlé à l'oreille : 208 mots, écart médian 0.06 s
+  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 84 %)
+  [vidéo finie · contrôle IA] 0 remarque(s)
+  [vidéo finie · voix et dessin] ✔ chaque réplique sur la bonne voix, homme / femme d'après la voix
+  [vidéo finie · attribution] ✔ qui dit chaque phrase, comparé à l'image de l'original
+  contrôles qui n'ont pas pu se faire : fidélité à l'audio (Gemini n'a pas répondu) (note de confiance plafonnée)
+  1 remarque(s) légère(s) gardée(s) au journal seulement : 19.8 s sous-titre « Ce n'est pas » mais on entend « comme
+Contrôle de la vidéo finie : 2 point(s) à vérifier — 28.9 s pendant la réplique de invite (« paye, si tu prends ma carte ; 46.0 s pendant la réplique de invite (« te fais confiance de toute 
+Jury : 1 remarque(s) sur les plans / zooms retirée(s) (montage « plan large » voulu)
+Jury : 2 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
+Jury qualité (ia) : 8.0/10 — Humoriste 7.0/10 : 52.6 s Le personnage manque d'un peu d'intensité comique au moment de la relance. | Réalisateur 8.8/10 :  | Directeur artistique 8.0/10 : 0.4 s Les tenues des personnages manquent de contraste avec le décor. | Ingénieur du son 8.8/10 :  | Spectateur TikTok 7.8/10 : 
+Compte rendu corrigé : confiance 58 → 70/100, jury 8.0/10
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, groq = ok, ia = groq ×2, gemini ×3, appels = {'groq': 2, 'gemini': 3}, epuisees = [], quota = {'groq': {'reste_jour': 998, 'limite_jour': 1000}}, voix = tiktok, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 19154, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 42, 'total_usd': 0.013, 'modal_mesure_usd': 0.15}
-⏱️ Étapes plus lentes que d'habitude : Installation de la machine 5 min (d'habitude 1 min)
-⏱️ Temps par étape : Installation de la machine 5.4 min, Démarrage du robot 0.3 min, Écoute du son TikTok 0.3 min, Décors 0.7 min, Dessin des images 9.6 min, Contrôle qualité par le jury 2.5 min, Contrôle de la vidéo finie 1.9 min, Corrections du compte rendu 0.3 min
-Compte rendu : confiance 100 → 90 : la nouvelle version est moins sûre, elle est retirée (l'ancienne reste)
-Quota de l'API GitHub : 4507 appels restants
-OK : sortie/2026-11-23_22h58_emission.mp4 (69 s)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, groq = ok, ia = groq ×3, gemini ×9, appels = {'groq': 3, 'gemini': 9}, epuisees = [], quota = {'groq': {'reste_jour': 997, 'limite_jour': 1000}}, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 47309, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 134, 'total_usd': 0.042, 'modal_mesure_usd': 0.65}
+⏱️ Étapes plus lentes que d'habitude : Dessin des images 30 min (d'habitude 6 min), Corrections du compte rendu 44 min (d'habitude 11 min)
+⏱️ Temps par étape : Installation de la machine 1.3 min, Démarrage du robot 0.2 min, Écoute du son TikTok 0.4 min, Décors 2.2 min, Dessin des images 30.1 min, Contrôle qualité par le jury 3.2 min, Correction des bouches 8.8 min, Contrôle de la vidéo finie 1.2 min, Corrections du compte rendu 44.1 min
+Compte rendu : confiance 90 → 70 : la nouvelle version est moins sûre, elle est retirée (l'ancienne reste)
+Quota de l'API GitHub : 4898 appels restants
+OK : sortie/2026-11-23_22h12_emission.mp4 (63 s)
