@@ -1,12 +1,12 @@
 {
  "IA gemini indisponible (gemini : aucun modèle disponible (N : [{": {
-  "n": 6,
+  "n": 7,
   "premiere": "2026-11-23",
   "derniere": "2026-11-23",
   "exemple": "IA gemini indisponible (gemini : aucun modèle disponible (503 : [{",
   "etape": "fiche de tournage",
   "jours": {
-   "2026-11-23": 6
+   "2026-11-23": 7
   }
  },
  "contrôles qui n«…»après l«…»original (image illisible) (note de confiance plafonnée)": {
@@ -30,13 +30,13 @@
   }
  },
  "contrôles qui n«…»audio (Gemini n'a pas répondu) (note de confiance plafonnée)": {
-  "n": 4,
+  "n": 5,
   "premiere": "2026-11-23",
   "derniere": "2026-11-23",
   "exemple": "contrôles qui n'ont pas pu se faire : fidélité à l'audio (Gemini n'a pas répondu) (note de confiance plafonnée)",
   "etape": "fiche de tournage",
   "jours": {
-   "2026-11-23": 4
+   "2026-11-23": 5
   }
  },
  "erreur avalée dans cartoon.pose : ValueError «…»": {
@@ -44,6 +44,26 @@
   "premiere": "2026-11-23",
   "derniere": "2026-11-23",
   "exemple": "erreur avalée dans cartoon.pose : ValueError « The truth value of an array with more than one element is ambiguous. Use a.any() or a.all() »",
+  "etape": "fiche de tournage",
+  "jours": {
+   "2026-11-23": 1
+  }
+ },
+ "NeMo indisponible (No module named «…»)": {
+  "n": 1,
+  "premiere": "2026-11-23",
+  "derniere": "2026-11-23",
+  "exemple": "NeMo indisponible (No module named 'datasets.distributed')",
+  "etape": "ingé son",
+  "jours": {
+   "2026-11-23": 1
+  }
+ },
+ "jeu du dessin animé : Gemini n'a pas pu lire les expressions (rien de recopié)": {
+  "n": 1,
+  "premiere": "2026-11-23",
+  "derniere": "2026-11-23",
+  "exemple": "jeu du dessin animé : Gemini n'a pas pu lire les expressions (rien de recopié)",
   "etape": "fiche de tournage",
   "jours": {
    "2026-11-23": 1
