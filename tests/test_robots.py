@@ -201,3 +201,27 @@ class TestListe23Novembre(unittest.TestCase):
         p = {"emo": "neutre"}; J.appliquer(p, out, "invite", 0.5, False); self.assertEqual(p["emo"], "choc")
         p = {"emo": "rire"}; J.appliquer(p, out, "invite", 0.5, False); self.assertEqual(p["emo"], "rire")   # jamais par-dessus un jeu fort
         self.assertEqual(J.interpreter({"images": [{"i": 0, "parle": "?"}]}, ch), {})           # côtés pas nets : rien
+
+
+class TestPannes23Novembre(unittest.TestCase):
+    def setUp(self): sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "moteur"))
+
+    def test_modele_gemini_mort_retenu_7_jours(self):
+        import reseau, datetime as dt
+        f = os.path.join(tempfile.mkdtemp(), "m.json")
+        with mock.patch.object(reseau, "MORTS_FICHIER", f):
+            reseau.GEMINI_MORTS.discard("m_mort"); reseau.gemini_mort("m_mort", "HTTP Error 404: Not Found")
+            self.assertIn("m_mort", reseau._morts_lus())                        # gardé pour les autres machines
+            json.dump({"vieux": (dt.date.today() - dt.timedelta(days=9)).isoformat()}, open(f, "w"))
+            self.assertNotIn("vieux", reseau._morts_lus())                     # au bout de 7 jours : réessayé
+        reseau.GEMINI_MORTS.discard("m_mort")
+        import fusion
+        out = json.loads(fusion._union_dates(b'{"a": "2026-11-20"}', b'{"a": "2026-11-23", "b": "2026-11-22"}', b"{}"))
+        self.assertEqual(out, {"a": "2026-11-23", "b": "2026-11-22"})
+
+    def test_bouton_abonne_toi(self):
+        import marque
+        with mock.patch.dict(os.environ, {"ABONNE_HAUT": ""}): a = marque.filigrane(52)
+        with mock.patch.dict(os.environ, {"ABONNE_HAUT": "0"}): b = marque.filigrane(52)
+        self.assertGreater(a.shape[0], b.shape[0])                              # bouton sous le nom (et « 0 » l'enlève)
+        self.assertGreater(a[-5:, :, 3].max(), 0)                               # rien de coupé en bas

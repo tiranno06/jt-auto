@@ -275,8 +275,10 @@ FRAIS_H = 8
 def eclairer(historique, journal=print, max_profils=20):
     profils = [p for p in liste()[:max_profils] if not bio_refuse(p, journal)]
     listes = {}
+    import time as _t
     for p in profils:
         vs = videos(p, journal)
+        if not vs: _t.sleep(8); vs = videos(p, journal)                    # refus passager de TikTok (403) : un 2e essai (23 novembre)
         if vs: listes[p] = vs
     notes = noter(listes, historique, journal)
     sons = [{"url": v["url"], "id": v["id"], "profil": p, "potentiel": int(v["potentiel"]), "titre": str(v.get("titre") or "")[:120],

@@ -106,20 +106,30 @@ def compte():
 
 def filigrane(hauteur=58):
     """Petit logo + nom du COMPTE en haut à gauche pendant la vidéo (RGBA float32, prêt pour jt.poser). Dessous, un petit bouton
-    rouge « + Abonne-toi » façon TikTok (demande de l'auteur du 23 novembre 2026 ; texte : réglage ABONNE_HAUT, « 0 » pour l'enlever)."""
+    rouge « 🔔 Abonne-toi pour la suite » façon TikTok (demande de l'auteur du 23 novembre 2026 ; texte : réglage ABONNE_HAUT, « 0 » pour
+    l'enlever ; « 🔔 » est dessinée, la police n'a pas d'emoji)."""
     f = ImageFont.truetype(POLICE, int(hauteur * 0.62)); d0 = ImageDraw.Draw(Image.new("RGB", (1, 1)))
     NOM_ = compte()
     w = int(d0.textlength(NOM_, font=f)) + hauteur + 30
-    abo = (os.environ.get("ABONNE_HAUT") or "+ Abonne-toi").strip()
+    abo = (os.environ.get("ABONNE_HAUT") or "🔔 Abonne-toi pour la suite").strip()   # (texte choisi par l'auteur, 23 novembre)
+    cloche = "🔔" in abo; abo = abo.replace("🔔", "").strip()             # la police n'a pas d'emoji : la cloche est dessinée
     h2 = int(hauteur * 0.72) if abo != "0" else 0; f2 = ImageFont.truetype(POLICE, int(hauteur * 0.44))
-    w2 = int(d0.textlength(abo, font=f2)) + int(hauteur * 0.7) if h2 else 0
-    img = Image.new("RGBA", (max(w, w2), hauteur + (h2 + 8 if h2 else 0)), (0, 0, 0, 0)); d = ImageDraw.Draw(img)
+    cl = int(h2 * 0.62) if cloche else 0
+    w2 = int(d0.textlength(abo, font=f2)) + int(hauteur * 0.7) + (cl + 6 if cl else 0) if h2 else 0
+    img = Image.new("RGBA", (max(w, int(hauteur * 0.55) + w2), hauteur + (h2 + 8 if h2 else 0)), (0, 0, 0, 0)); d = ImageDraw.Draw(img)
     d.rounded_rectangle((0, 0, w - 1, hauteur - 1), hauteur // 2, fill=(255, 255, 255, 170))
     t = tete(hauteur - 6); img.paste(t, (4, 3), t)
     d.text((hauteur + 6, hauteur * 0.14), NOM_, font=f, fill=(20, 20, 24, 230))
     if h2:                                                                 # bouton rouge TikTok sous le nom, aligné sur le texte du nom
         x0, y0 = int(hauteur * 0.55), hauteur + 8
         d.rounded_rectangle((x0, y0, x0 + w2 - 1, y0 + h2 - 1), h2 // 2, fill=(254, 44, 85, 235))
-        d.text((x0 + w2 / 2, y0 + h2 / 2), abo, font=f2, fill=(255, 255, 255, 255), anchor="mm")
+        if cl:                                                             # 🔔 dessinée : dôme, bord, battant
+            cx, cy = x0 + int(hauteur * 0.35) + cl // 2, y0 + h2 // 2; r = cl / 2
+            d.pieslice((cx - r * 0.78, cy - r * 0.95, cx + r * 0.78, cy + r * 0.75), 180, 360, fill=(255, 214, 40, 255))
+            d.rectangle((cx - r * 0.78, cy - r * 0.12, cx + r * 0.78, cy + r * 0.45), fill=(255, 214, 40, 255))
+            d.rounded_rectangle((cx - r, cy + r * 0.4, cx + r, cy + r * 0.62), 2, fill=(255, 214, 40, 255))
+            d.ellipse((cx - r * 0.2, cy + r * 0.6, cx + r * 0.2, cy + r * 0.98), fill=(255, 214, 40, 255))
+            d.ellipse((cx - r * 0.13, cy - r * 1.08, cx + r * 0.13, cy - r * 0.82), fill=(255, 214, 40, 255))
+        d.text((x0 + (cl + 6) / 2 + w2 / 2, y0 + h2 / 2), abo, font=f2, fill=(255, 255, 255, 255), anchor="mm")
         img = img.crop((0, 0, max(w, x0 + w2), img.height))
     return np.array(img).astype(np.float32)
