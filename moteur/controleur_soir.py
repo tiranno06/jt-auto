@@ -27,7 +27,7 @@ def aujourdhui():
     return datetime.datetime.now(ZoneInfo("Europe/Paris")).date().isoformat()
 
 
-VERSION = 2                                                                # + 1 à chaque amélioration des contrôles des voix
+VERSION = 3                                                                # + 1 à chaque amélioration des contrôles des voix
 
 
 def nb_videos():

@@ -503,7 +503,10 @@ def hauteur_finale(sk, reps, roles, sig, sr, B=None, bavard=True):
         c = np.array([np.average(z[~g], weights=w[~g]), np.average(z[g], weights=w[g])])
     ecart = c[1] - c[0]; part = w[g].sum() / w.sum()
     sd = np.sqrt(np.average((z[~g] - c[0]) ** 2, weights=w[~g])) + np.sqrt(np.average((z[g] - c[1]) ** 2, weights=w[g]))
-    if not locuteurs.hauteurs_nettes(np.exp(c[0]), np.exp(c[1])) or not 0.15 <= part <= 0.85 or ecart < 1.2 * sd: return set(), 0
+    tres_nette = np.exp(c[0]) <= 175 and max(230, 1.55 * np.exp(c[0])) <= np.exp(c[1]) <= locuteurs.CRIS_HZ   # un homme et une femme (24 novembre)
+    peu = min(int(g.sum()), int((~g).sum()))                               # répliques de la voix qui parle le moins
+    if not locuteurs.hauteurs_nettes(np.exp(c[0]), np.exp(c[1])) or ecart < 1.2 * sd \
+            or not (0.15 <= part <= 0.85 or (tres_nette and peu >= 2 and 0.04 <= part <= 0.96)): return set(), 0
     milieu, marge = (c[0] + c[1]) / 2, __import__("locuteurs").MARGE_HAUTEUR * ecart
     nets = {i: (zi > milieu) for i, (zi, _) in Z.items() if abs(zi - milieu) >= marge}   # True = côté aigu
     def cout(bas_, haut_): return sum(1 for i, aigu in nets.items() if reps[i]["p"] != (haut_ if aigu else bas_))
@@ -514,7 +517,7 @@ def hauteur_finale(sk, reps, roles, sig, sr, B=None, bavard=True):
         bon = haut if aigu else bas
         if reps[i]["p"] == bon: confirmees.add(i); reps[i]["_hauteur_ok"] = True   # (le contrôle « attribution » ne la conteste plus)
         else: chang.append(i)
-    if set(vus) != {"h", "f"} and len(chang) > max(2, len(Z) // 3): chang = []   # sans homme ET femme vus : prudence
+    if set(vus) != {"h", "f"} and not tres_nette and len(chang) > max(2, len(Z) // 3): chang = []   # sans homme ET femme vus : prudence
     for i in chang:
         reps[i]["p"] = haut if reps[i]["p"] == bas else bas; reps[i]["_voix_corrigee"] = True; reps[i]["_hauteur_ok"] = True; confirmees.add(i)
         if bavard: journal(f"    voix corrigée par la hauteur : réplique {i} ({str(reps[i].get('t') or '')[:40]}) -> {reps[i]['p']}")

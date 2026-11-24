@@ -606,9 +606,12 @@ def hauteurs_nettes(grave, aigue):
     """Deux voix que la hauteur sépare vraiment : une grave (≤ 175 Hz), une aiguë (≥ 200 Hz), rapport ≥ 1,4. Banc d'essai des 10 vidéos
     du 20 novembre : quand le même doubleur fait toutes les voix sans voix grave (187 / 264 Hz, 221 / 322 Hz), la hauteur ne dit plus
     qui parle (elle déplaçait des répliques dans les deux sens) : on n'y touche pas."""
-    return grave <= 175 and aigue >= 200 and aigue >= HAUTEUR_ECART * grave
+    # (audit du 24 novembre : au-delà de ~340 Hz en moyenne ce sont des CRIS — « Allez ! Allez ! » d'hommes à 408 Hz au powerlifting,
+    # dessinés en femme — la hauteur ne dit alors rien du sexe ni de la personne)
+    return grave <= 175 and 200 <= aigue <= CRIS_HZ and aigue >= HAUTEUR_ECART * grave
 
 
+CRIS_HZ = 340                                                              # voix aiguë au-delà : des cris, pas une voix de femme
 MARGE_HAUTEUR = 0.15                                                       # (0,25 avant le 22 novembre : banc « Pire date » 90 % -> 96 %)
 
 
@@ -648,7 +651,10 @@ def temoin_hauteur(mots, sig, sr=SR, journal=print, genres_vus=None):
     part = w[g].sum() / w.sum()
     ecart = c[1] - c[0]
     sd = np.sqrt(np.average((z[~g] - c[0]) ** 2, weights=w[~g])) + np.sqrt(np.average((z[g] - c[1]) ** 2, weights=w[g]))
-    if not hauteurs_nettes(np.exp(c[0]), np.exp(c[1])) or not 0.15 <= part <= 0.85 or ecart < 1.2 * sd: return 0
+    tres_nette = np.exp(c[0]) <= 175 and max(230, 1.55 * np.exp(c[0])) <= np.exp(c[1]) <= CRIS_HZ
+    peu = min(int(g.sum()), int((~g).sum()))                               # phrases de la voix qui parle le moins (24 novembre : un
+    if not hauteurs_nettes(np.exp(c[0]), np.exp(c[1])) or ecart < 1.2 * sd \
+            or not (0.15 <= part <= 0.85 or (tres_nette and peu >= 2 and 0.04 <= part <= 0.96)): return 0   # personnage qui parle peu)
     milieu = (c[0] + c[1]) / 2
     def cout(gr, ai):                                                      # mots à changer si la voix « gr » est la grave
         return sum(1 for i, p in enumerate(ph) if val[i] for j in p if mots[j].get("voix") in principales
@@ -696,7 +702,10 @@ def temoin_hauteur(mots, sig, sr=SR, journal=print, genres_vus=None):
         if all(v == cible for v in voix_p): continue
         chang.append((i, cible))
     pleins = [i for i, cible in chang if all(mots[j].get("voix") != cible for j in ph[i])]   # phrase entière sur l'autre voix
-    if vus != {"h", "f"} and len(pleins) > 0.45 * len([v for v in val if v]):   # (un homme ET une femme vus : la hauteur fait foi)
+    # Une voix d'homme (≤ 175 Hz en moyenne) et une voix de femme (≥ 230 Hz, 1,55 fois plus haut : tres_nette) : la hauteur fait foi
+    # même quand le robot s'était trompé sur beaucoup de phrases (audit du 24 novembre, « Tes lacets sont défaits » : l'homme ne dit
+    # que 5 phrases, la femme fait le reste ; 20 phrases sur 36 étaient sur le mauvais personnage et la limite « 45 % » bloquait tout).
+    if vus != {"h", "f"} and not tres_nette and len(pleins) > 0.45 * len([v for v in val if v]):   # (un homme ET une femme vus : la hauteur fait foi)
         journal(f"  témoin hauteur : {len(pleins)} phrases contesteraient la séparation des voix : laissé de côté (trop pour être sûr)"); return 0
     for i, cible in chang:
         for j in ph[i]: mots[j]["voix"] = cible; mots[j]["sure"] = True; mots[j]["_hauteur"] = True

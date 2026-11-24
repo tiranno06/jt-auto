@@ -832,7 +832,8 @@ def preparer(url):
                       "video_origine": info.get("_fichier") or "", "debut": debut,    # (contrôle qualité : comparaison avec l'original)
                       "titre": str(info.get("title") or info.get("description") or "")[:300],   # titre de l'original (parties 1, 2… : suites.py)
                       "lieu_ia": str((__import__("video_ia").DERNIER or {}).get("lieu") or ""),   # lieu vu par Gemini dans CET original
-                      "meme_interprete": bool((__import__("video_ia").DERNIER or {}).get("meme_interprete"))}   # un acteur, plusieurs rôles
+                      "meme_interprete": (bool(__import__("video_ia").DERNIER.get("meme_interprete")) if __import__("video_ia").DERNIER
+                                          else None)}                      # un acteur, plusieurs rôles (None : Gemini n'a pas regardé)
     try:                                                                   # texte posé sur la vidéo (« Pov: t'es au bureau… », audit du 23 nov.)
         import ocr as _ocr
         _leg = _ocr.legende(lignes_ocr, duree)

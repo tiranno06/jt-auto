@@ -425,7 +425,7 @@ def voix_dessin(video, sk):
         import studio as _ST                                               # rôle joué par un acteur de l'autre sexe (audit du 23 nov.) :
         txt = {r: _ST.genre_texte(sk, r) for r in H}                       # les mots (« ma robe », « les meufs ») ne se discutent pas
         if _ST.un_acteur(sk): vu = {}; meme_vu = True
-        if H[haut] >= 200 and H[bas] <= 170 and H[haut] >= 1.4 * H[bas] and not meme_vu \
+        if H[haut] >= 200 and H[bas] <= 170 and H[haut] >= 1.4 * H[bas] and H[haut] <= __import__("locuteurs").CRIS_HZ and not meme_vu \
                 and not any(g_ and (f_ >= 4 or g_ == gen.get(r)) for r, (g_, f_) in txt.items()):
             if gen.get(haut) == "h" and age.get(haut, 30) >= 13 and vu.get(haut) != "h":
                 d_ = _defaut(None, "voix et dessin", f"{NOMS_ROLES.get(haut, haut)} a une voix de femme ({H[haut]} Hz) mais est dessiné(e) en homme : c'est une femme")

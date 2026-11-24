@@ -136,3 +136,92 @@ class TestAudit23Novembre(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestAudit24Novembre(unittest.TestCase):
+    """Deuxième audit (24 novembre 2026) : les mêmes sons refaits gardaient des erreurs."""
+
+    def test_un_personnage_qui_parle_peu(self):
+        """« Tes lacets sont défaits » : l'homme (120-165 Hz) ne dit que quelques phrases, la femme (250-300 Hz) tout le reste ; le
+        robot avait partagé moitié-moitié et les deux sécurités (15 % de parole, 45 % de phrases) bloquaient la correction."""
+        import numpy as np, locuteurs as L
+        sr = 16000; morceaux, mots, t = [], [], 0.0
+        plan = [("f", 270)] * 6 + [("h", 125)] + [("f", 260)] * 5 + [("h", 140)] + [("f", 280)] * 6 + [("h", 130)]
+        for k, (g, hz) in enumerate(plan):
+            d = 1.2; tt = np.arange(int(d * sr)) / sr
+            morceaux.append(0.5 * np.sin(2 * np.pi * hz * tt) + 0.25 * np.sin(4 * np.pi * hz * tt)); morceaux.append(np.zeros(int(0.3 * sr)))
+            voix = "A" if k % 2 == 0 else "B"                              # le robot s'était trompé une fois sur deux
+            mots.append({"w": "mot.", "s": t + 0.05, "e": t + d - 0.05, "voix": voix}); t += d + 0.3
+        sig = np.concatenate(morceaux).astype(np.float32)
+        L.ETAT["ressemblance"] = None
+        n = L.temoin_hauteur(mots, sig, sr, journal=lambda *_: None)
+        self.assertGreater(n, 0)
+        par = {}
+        for m, (g, _) in zip(mots, plan): par.setdefault(g, set()).add(m["voix"])
+        self.assertEqual(len(par["h"]), 1); self.assertEqual(len(par["f"]), 1); self.assertNotEqual(par["h"], par["f"])
+
+    def test_cris_ne_sont_pas_une_femme(self):
+        import locuteurs as L
+        self.assertTrue(L.hauteurs_nettes(140, 260))
+        self.assertFalse(L.hauteurs_nettes(142, 408))                      # « Allez ! Allez ! » crié par des hommes
+
+    def test_apostrophe_seulement(self):
+        import studio
+        sk = _sk([{"p": "presentateur", "t": "Eh, mais tu m'as pris pour ta meuf ou quoi ?"}, {"p": "invite", "t": "Vas-y viens."},
+                  {"p": "presentateur", "t": "Tu vas me tromper avec ma soeur."}])
+        self.assertEqual(studio.genre_texte(sk, "invite"), (None, 0))
+        sk2 = _sk([{"p": "presentateur", "t": "Madame, excusez-moi, madame."}, {"p": "invite", "t": "Non ça va."}])
+        self.assertEqual(studio.genre_texte(sk2, "invite")[0], "f")
+
+    def test_un_acteur_seulement_si_vu(self):
+        import studio
+        reps = [{"p": "presentateur", "t": "a"}, {"p": "invite", "t": "b"}]
+        self.assertFalse(studio.un_acteur(dict(_sk(reps, nb_vus=1, meme_interprete=False, ressemblance=0.3))))
+        sk = _sk(reps, nb_vus=2); sk["equipe"] = [{"detail": "voix moyennes trop proches (0.91)"}]
+        self.assertFalse(studio.un_acteur(sk))                             # répliques mélangées, pas un seul acteur
+        self.assertTrue(studio.un_acteur(_sk(reps, meme_interprete=True)))
+
+    def test_compte_rendu_ne_change_jamais_qui_parle(self):
+        import remarque, compte_rendu
+        sk = {"repliques": [{"p": "presentateur", "t": "Allo"}, {"p": "invite", "t": "Ouais"}, {"p": "envoyee", "t": "Salut"}], "studio": {}}
+        with mock.patch.object(remarque, "interpreter", lambda s, t: ({1: "presentateur"}, [{"type": "un_seul", "role": "invite"}])), \
+             mock.patch("qualite.corriger", lambda s, c: []):
+            remarque.appliquer(sk, "il n'y a pas trois hommes", memoriser=False)
+        self.assertEqual([r["p"] for r in sk["repliques"]], ["presentateur", "invite", "envoyee"])
+        avant = {"repliques": [{"p": "a"}, {"p": "b"}]}; apres = {"repliques": [{"p": "a"}, {"p": "a"}]}
+        self.assertFalse(compte_rendu.meilleure(26, 98, 6, 7, avant, apres))   # un personnage perdu : jamais gardée
+        self.assertTrue(compte_rendu.meilleure(26, 98, 6, 7, avant, avant))
+        with mock.patch.object(remarque, "interpreter", lambda s, t: ({0: "invite"}, [])), mock.patch("qualite.corriger", lambda s, c: []):
+            sk2 = {"repliques": [{"p": "presentateur", "t": "x"}], "studio": {}}
+            with mock.patch("builtins.open", mock.mock_open()), mock.patch("json.dump"):
+                remarque.appliquer(sk2, "c'est l'invité qui dit ça", memoriser=True)
+        self.assertTrue(sk2["repliques"][0].get("_auteur"))                # vraie remarque de l'auteur : marquée
+
+    def test_personnages_distincts(self):
+        import studio
+        fiches = {"a": {"genre": "h", "cheveux": "court", "lunettes": "rondes"}, "b": {"genre": "h", "cheveux": "court", "lunettes": "rondes"}}
+        costumes = {"a": {"haut": "pull", "c_haut": (70, 120, 190)}, "b": {"haut": "chemise", "c_haut": (60, 110, 200)}}
+        faits = studio.distinguer(fiches, costumes, ["a", "b"])
+        self.assertTrue(faits); self.assertIsNone(fiches["b"]["lunettes"])
+        self.assertFalse(studio._proches(costumes["a"]["c_haut"], costumes["b"]["c_haut"]))
+        f2 = {"a": dict(fiches["a"]), "b": dict(fiches["a"])}; c2 = {"a": dict(costumes["a"]), "b": dict(costumes["a"])}
+        self.assertEqual(studio.distinguer(f2, c2, ["a", "b"], garder={"a", "b"}), [])   # choix de l'auteur : jamais touché
+
+    def test_tenue_vue_avant_tenue_devinee(self):
+        import studio
+        S = {"tenues_fiche": {"invite": {"tenue": "normale", "haut": "veste_jean", "c_haut": "noir"}}}
+        costumes = {"invite": {"haut": "survetement", "c_haut": (60, 80, 160), "tenue": "survetement", "details": ("bandes",)}}
+        sk = {"repliques": [{"p": "invite", "t": "x"}], "doublage": {"duree": 3}}
+        studio.habiller_fiche(sk, ["invite"], costumes, S)
+        self.assertEqual(costumes["invite"]["haut"], "veste_jean"); self.assertNotIn("tenue", costumes["invite"])
+
+    def test_reserve_de_sons_par_version(self):
+        import pre_ecoute
+        src = open(pre_ecoute.__file__, encoding="utf-8").read()
+        self.assertIn('_v{VERSION_ECOUTE}"', src); self.assertIn("!= VERSION_ECOUTE", src)
+
+    def test_voix_sans_personnage_en_sous_titre(self):
+        import cartoon
+        src = open(cartoon.__file__, encoding="utf-8").read()
+        self.assertIn('if DOUB: HORS_C |= {i for i, r in enumerate(reps) if r.get("p") == "narrateur"}', src)
+        self.assertIn("TETES_R[sc] = float(_hry)", src)

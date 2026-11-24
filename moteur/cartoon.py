@@ -646,7 +646,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
     SILENCES = []                                                          # (rendu simple, sans bible : défini quand même ; audit du 22/11 :
                                                                            #  « SILENCES » non défini faisait planter le rendu de secours)
     SEMI_ = set(sk.get("_decors_semi") or []) & set(decors)               # scènes au décor semi-réaliste (peinture, pieds calés au sol)
-    AVANT, INFOS = {}, {}; FICHES = None; DECOUPE = []; ERREURS_ANIM = []; SC_COURANT = [0]; TETES_Y = {}
+    AVANT, INFOS = {}, {}; FICHES = None; DECOUPE = []; ERREURS_ANIM = []; SC_COURANT = [0]; TETES_Y = {}; TETES_R = {}
     PROF = {}                                                              # décors IA : profondeur (le premier plan glisse plus vite que le fond)
     if B and PARALLAXE:
         try:
@@ -822,6 +822,8 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
         TRAITS_VITESSE.append(tv)
     TITRES = {k: titre(sc.get("titre")) for k, sc in enumerate(dec) if sc.get("titre")}
     HORS_C = {i for i, r in enumerate(reps) if r.get("_hors_champ")}       # message vocal / appel : entendu et sous-titré, pas dessiné
+    if DOUB: HORS_C |= {i for i, r in enumerate(reps) if r.get("p") == "narrateur"}   # son TikTok : une voix sans personnage = un sous-titre,
+                                                                           # jamais une grosse bulle blanche (audit du 24 novembre, « la classe »)
     VOIX_OFF = {q["i"]: carte_titre(reps[q["i"]]["t"]) for q in ph if q["p"] == "narrateur" and q["i"] not in HORS_C}
     objets = {}
     print(f"cartoon : durée {total:.1f} s, {len(ph)} répliques, {len(places)} scène(s), personnages {roles}", flush=True)
@@ -1276,7 +1278,10 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
         """Écran partagé : une bande de chaque plan, centrée sur la tête du personnage, l'une au-dessus de l'autre, séparées par
         un trait blanc ; la moitié du bas glisse en place au début (u : 0 → 1)."""
         h2 = H // 2
-        def y0_(sc_): return int(np.clip(TETES_Y.get(sc_, H * 0.4) - 0.38 * h2, 0, H - h2))
+        def y0_(sc_):                                                      # tête aux 4/10 de la moitié, et toujours ENTIÈRE (chapeau compris)
+            ty = TETES_Y.get(sc_, H * 0.4); r_ = TETES_R.get(sc_, 0.0)
+            y0 = min(ty - 0.42 * h2, ty - 1.9 * r_ - 20) if r_ else ty - 0.38 * h2
+            return int(np.clip(y0, 0, H - h2))
         fr = np.empty_like(haut); y_h, y_b = y0_(sc_h), y0_(sc_b); fr[:h2] = haut[y_h:y_h + h2]; fr[h2:] = bas[y_b:y_b + H - h2]
         if u < 1:
             dx = int(W * (1 - _ease(max(0.0, u)))); fr[h2:] = np.roll(fr[h2:], dx, 1)
@@ -1801,6 +1806,11 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
             if not -400 < p["x"] < W + 400: continue
             if FICHES and role in FICHES:                                  # hauteur de la tête à l'écran (écran partagé)
                 TETES_Y[sc] = p["y"] - (1500 - HU.tete_y(p["s"], FICHES[role]["taille"]))
+                if APPEL:                                                  # vraie tête DESSINÉE (audit du 24 novembre : la grosse tête du
+                    try:                                                   # « petit » croquis est plus haute que celle du squelette,
+                        (_hx, _hy), (_hrx, _hry), _m = HU.reperes(FICHES[role], p)   # elle sortait par le haut de la moitié d'écran)
+                        TETES_Y[sc] = float(_hy); TETES_R[sc] = float(_hry)
+                    except Exception as _e: __import__("pannes").avale(_e)
             if SONDE["on"]:                                                # contrôle image : où est la tête de chacun à l'écran
                 try:
                     if FICHES and role in FICHES: (hx, hy), (hrx, hry), _m = HU.reperes(FICHES[role], p)

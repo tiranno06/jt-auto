@@ -429,6 +429,11 @@ def bible(sk, roles):
         import suites
         if suites.appliquer(sk, fiches, costumes, roles): print("Partie suivante : mêmes personnages que la partie précédente", flush=True)
     except Exception as e: print(f"Personnages de la partie précédente non repris ({str(e)[:100]})", flush=True)
+    try:                                                                   # jamais deux personnages qui se ressemblent trop (24 novembre)
+        garde_ = set((sk.get("_casting_auteur") or {}).keys()) | (set(roles) if sk.get("_suite") else set())
+        imp_ = {r for r, c in ((S.get("costumes") or {}) if isinstance(S.get("costumes"), dict) else {}).items() if isinstance(c, dict) and c.get("c_haut")}
+        for d_ in distinguer(fiches, costumes, roles, garde_, imp_): print(f"Personnages distingués : {d_}", flush=True)
+    except Exception as e: print(f"Personnages non distingués ({str(e)[:100]})", flush=True)
     for k, f_ in enumerate(figurants): f_["fiche"] = _humain().creer(graine + 500 + 7 * k)
     figurants += compagnons(sk, dec, lieux, moment, graine)                # personnages muets voulus par l'histoire (Claude)
     ambiances = set(a for a in (S.get("ambiances") or []) if a in ("vapeur", "poussiere", "pluie", "neige", "neon", "orage"))
@@ -480,6 +485,9 @@ OBJETS_MOTS = [(r"\bvalises?\b|bagages?", "valise"), (r"parapluie", "parapluie")
                (r"\bbillets?\b|\bthunes?\b|de l'argent", "billet"), (r"une lettre|cette lettre|courrier", "lettre"), (r"bouteille", "bouteille")]
 
 
+TENUES_DEVINEES = ("survetement", "pyjama", "doudoune", "impermeable", "maillot_bain", "peignoir", "costume", "gilet_jaune", "uniforme")
+
+
 def habiller_fiche(sk, roles, costumes, S):
     """Tenue décidée par la fiche de tournage (Gemini a vu et entendu l'original, puis triple contrôle) : type de tenue, haut et sa
     couleur, couleur des cheveux, lunettes, et l'ÉTAT de la tenue (mouillée, sueur, tache, déchirée, maquillage qui coule : idée 14).
@@ -501,7 +509,13 @@ def habiller_fiche(sk, roles, costumes, S):
                 c.update(haut=haut, c_haut=tuple(ch), bas=bas, c_bas=tuple(cb))
                 if tc: c["tenue"] = tc
                 c["details"] = tuple(dict.fromkeys(tuple(c.get("details") or ()) + tuple(det))); c.pop("motif", None)
-        elif libre and x.get("haut") in M.HAUTS and not c.get("tenue"): c["haut"] = x["haut"]
+        elif libre and x.get("haut") in M.HAUTS:
+            # Ce que Gemini a VU passe avant une tenue devinée aux mots (audit du 24 novembre : dans la classe, blouson, veste en jean et
+            # col roulé vus, mais « entraînement » dans le dialogue avait mis les trois en survêtement bleu identique).
+            if c.get("tenue") and c.get("tenue") in TENUES_DEVINEES and x.get("tenue") in (None, "", "normale"):
+                c.pop("tenue", None); c["details"] = tuple(d for d in (c.get("details") or ()) if d != "bandes")
+                c["bas"] = "pantalon"
+            if not c.get("tenue"): c["haut"] = x["haut"]
         if libre and str(x.get("c_haut") or "") in NOMS_COULEURS and not c.get("tenue"):
             c["c_haut"] = NOMS_COULEURS[x["c_haut"]]; c["c_motif"] = M._fonce(c["c_haut"], 0.72)
         if x.get("c_cheveux") in FT.COULEURS_CHEVEUX and "c_cheveux" not in (impose.get(r) or {}): c["c_cheveux"] = FT.COULEURS_CHEVEUX[x["c_cheveux"]]
@@ -579,8 +593,11 @@ ROLE_F = r"\b(ma robe|ma jupe|mes talons|les talons|m'?[ée]piler|[ée]pilation|
          r"me maquiller|mon maquillage|mon mascara|mon rouge à lèvres|mon soutif|mon soutien-gorge|je suis enceinte|mon mari|ma grossesse|" \
          r"bisous à toutes|mes copines|entre filles|mon brushing|mes extensions)\b"
 ROLE_H = r"\b(ma barbe|me raser|ma femme|ma meuf|ma copine|mon rasoir|entre mecs|entre potes|mes couilles)\b"
-APPEL_F = r"\b(ma ch[ée]rie|ma belle|ma reine|ma s(œ|oe)ur|madame|ma fille|meuf|ma puce|la miss|frangine|ma bichette)\b"
-APPEL_H = r"\b(fr[ée]rot|mon fr[èe]re|mon gars|mon pote|monsieur|mon fils|fiston|bro|mon reuf|mon poto|mon grand|boloss)\b"
+# Comment l'autre l'APPELLE : seulement en apostrophe, en début ou en fin de phrase (« Madame, excusez-moi », « ça va, frérot ? ») ;
+# « tu m'as pris pour ta meuf » ou « tu vas me tromper avec ma sœur » parlent d'une AUTRE personne (audit du 24 novembre).
+_AP = r"(?:^|[,.!?…]\s*)(?:eh |oh |allez |bah |mais )?({})(?=\s*(?:[,.!?…]|$))"
+APPEL_F = _AP.format(r"ma ch[ée]rie|ma belle|ma reine|madame|ma fille|ma puce|la miss|frangine|ma bichette|mademoiselle")
+APPEL_H = _AP.format(r"fr[ée]rot|mon fr[èe]re|mon gars|mon pote|monsieur|mon fils|fiston|bro|mon reuf|mon poto|mon grand|boloss|mec|gros")
 TITRE_F = r"\b(les meufs|les filles|les femmes|les copines|les nanas|les daronnes|ma m[èe]re et moi)\b"
 TITRE_H = r"\b(les mecs|les gars|les hommes|les potes|les darons|les keumés)\b"
 
@@ -593,10 +610,11 @@ def un_acteur(sk):
     try:
         if float(d.get("ressemblance") or 0) > 0.7: return True
     except (TypeError, ValueError): pass
-    if any("voix proches" in str(e.get("detail") or "") or "trop proches" in str(e.get("detail") or "")
-           for e in sk.get("equipe") or [] if isinstance(e, dict)): return True   # (bulletin de l'équipe : vidéos plus anciennes)
+    if d.get("meme_interprete") is False: return False                    # Gemini a regardé : deux acteurs différents
+    # (24 novembre : plus de « voix proches » au bulletin, qui venait souvent de répliques MÉLANGÉES entre un homme et une femme, ni
+    # « une seule personne vue » seul : deux acteurs filmés chacun à leur tour ne sont jamais vus ensemble)
     roles = {r.get("p") for r in sk.get("repliques") or [] if r.get("p") not in (None, "narrateur")}
-    return d.get("nb_vus") == 1 and len(roles) >= 2
+    return d.get("nb_vus") == 1 and len(roles) >= 2 and d.get("meme_interprete") is None and d.get("ressemblance") is None
 
 
 def genre_texte(sk, role):
@@ -606,10 +624,11 @@ def genre_texte(sk, role):
     reps = sk.get("repliques") or []
     siennes = " ".join(str(r.get("t") or "") for r in reps if r.get("p") == role).lower()
     autres = " ".join(str(r.get("t") or "") for r in reps if r.get("p") not in (role, None, "narrateur")).lower()
+    appels = [str(r.get("t") or "").lower().strip() for r in reps if r.get("p") not in (role, None, "narrateur")]
     d = sk.get("doublage") if isinstance(sk.get("doublage"), dict) else {}
     titre = (str(d.get("legende_ecran") or "") + " " + str(d.get("titre") or "")).lower()
-    f = 2 * len(re.findall(ROLE_F, siennes)) + len(re.findall(APPEL_F, autres)) + len(re.findall(ACCORD_F, siennes))
-    h = 2 * len(re.findall(ROLE_H, siennes)) + len(re.findall(APPEL_H, autres)) + len(re.findall(ACCORD_H, siennes))
+    f = 2 * len(re.findall(ROLE_F, siennes)) + sum(len(re.findall(APPEL_F, a)) for a in appels) + len(re.findall(ACCORD_F, siennes))
+    h = 2 * len(re.findall(ROLE_H, siennes)) + sum(len(re.findall(APPEL_H, a)) for a in appels) + len(re.findall(ACCORD_H, siennes))
     if re.search(TITRE_F, titre): f += 2
     if re.search(TITRE_H, titre): h += 2
     if f == h: return None, 0
@@ -640,7 +659,7 @@ def genre_voix(sk, role, d=None, detail=False):
         net = isinstance(tb, (int, float)) and (tb < 980 or tb > 1110)
         votes[g_t] += 1.5 if net or not isinstance(tb, (int, float)) else 0.5
     g_v = (sk.get("_voix_genre") or {}).get(role)
-    if g_v in votes: votes[g_v] += 1
+    if g_v in votes and float((sk.get("_voix_hz") or {}).get(role) or 0) <= __import__("locuteurs").CRIS_HZ: votes[g_v] += 1   # (cris : rien)
     if g_ia in votes: votes[g_ia] += 1
     g_ina = (sk.get("_voix_ina") or {}).get(role)                           # inaSpeechSegmenter (entraîné sur la télé française)
     if g_ina in votes: votes[g_ina] += 1.5
@@ -651,7 +670,8 @@ def genre_voix(sk, role, d=None, detail=False):
         r_autre = next(r_ for r_ in H_ if r_ != role); autre = H_[r_autre]; moi = H_[role]
         P_ = ((sk.get("studio") or {}).get("personnages") or {}) if isinstance(sk.get("studio"), dict) else {}
         vu_autre = GENRES_TXT.get(str((P_.get(r_autre) or {}).get("genre_vu") or "").strip().lower())
-        g_h = "f" if (moi >= 200 and autre <= 175 and moi >= 1.4 * autre) else "h" if (moi <= 175 and autre >= 200 and autre >= 1.4 * moi) else None
+        L_ = __import__("locuteurs")                                       # (au-delà de 340 Hz : des cris, rien sur le sexe)
+        g_h = "f" if L_.hauteurs_nettes(autre, moi) else "h" if L_.hauteurs_nettes(moi, autre) else None
         if g_h and not (g_vu and g_vu != g_h) and not (g_vu and vu_autre and g_vu == vu_autre):   # jamais contre ce que Gemini a VU
             votes[g_h] += 2.5                                              # (ni deux hommes / deux femmes vus : écart = cris)
     g_txt, force = genre_texte(sk, role)
@@ -665,6 +685,58 @@ def genre_voix(sk, role, d=None, detail=False):
         vh = (sk.get("_voix_hz") or {}).get(role) or 0
         g = g_vu or g_t or g_v or g_ia or (("f" if vh > 210 else "h" if vh < 150 else None) if vh else None) or GENRE_ROLE.get(role)
     return (g, votes) if detail else g
+
+COULEURS_DISTINCTES = [(200, 60, 60), (60, 120, 200), (70, 160, 90), (230, 170, 50), (140, 80, 170), (240, 140, 170), (60, 60, 70),
+                       (240, 240, 235), (180, 110, 60), (40, 160, 170)]
+
+
+def _proches(c1, c2, seuil=80):
+    try: return c1 is not None and c2 is not None and sum((float(a) - float(b)) ** 2 for a, b in zip(c1, c2)) ** 0.5 < seuil
+    except (TypeError, ValueError): return False
+
+
+def distinguer(fiches, costumes, roles, garder=(), couleur_imposee=()):
+    """Deux personnages ne se ressemblent JAMAIS au point qu'on ne sache plus qui parle (audit du 24 novembre 2026 : dans la classe,
+    les trois en survêtement bleu identique ; « au chômage », deux garçons même coupe, mêmes lunettes rondes, pulls bleus ; « Tes
+    lacets », deux filles même carré, mêmes lunettes de soleil). Pour chaque paire : même haut de couleur proche -> le 2e change de
+    couleur ; même coupe ET mêmes lunettes -> le 2e enlève ses lunettes, ou change de coiffure (dans les coupes de son genre) et de
+    couleur de cheveux. Jamais sur un rôle choisi par l'auteur ou repris d'une partie précédente (garder), ni sur un costume de
+    métier ou une tenue imposée. DISTINGUER=0 pour couper. Renvoie la liste lisible des changements."""
+    if os.environ.get("DISTINGUER", "1") == "0": return []
+    H_ = _humain(); faits = []
+    roles = [r for r in roles if r in fiches]
+    for i, a in enumerate(roles):
+        for b in roles[i + 1:]:
+            cible = b if b not in garder else (a if a not in garder else None)
+            if cible is None: continue
+            autre = a if cible == b else b
+            fa, fb = fiches.get(autre) or {}, fiches.get(cible) or {}
+            ca, cb = costumes.get(autre) or {}, costumes.get(cible) or {}
+            if fb.get("espece") or fa.get("espece"): continue              # animal / objet : déjà bien différent
+            if ca.get("haut") == cb.get("haut") or _proches(ca.get("c_haut"), cb.get("c_haut")):
+                if cible in couleur_imposee and autre not in couleur_imposee and autre not in garder:   # couleur demandée par la
+                    cible, autre = autre, cible; ca, cb = cb, ca                   # mise en scène : c'est l'autre qui change
+                    fa, fb = fiches.get(autre) or {}, fiches.get(cible) or {}
+                if _proches(ca.get("c_haut"), cb.get("c_haut")) and not cb.get("metier") and not cb.get("tenue") and cible not in couleur_imposee:
+                    prises = [costumes[r].get("c_haut") for r in roles if r != cible and costumes.get(r)]
+                    nouv = next((c for c in COULEURS_DISTINCTES if not any(_proches(c, p, 110) for p in prises)), None)
+                    if nouv:
+                        cb = costumes[cible] = dict(cb, c_haut=nouv, c_motif=M._fonce(nouv, 0.72)); faits.append(f"{cible} : haut d'une autre couleur")
+            if fa.get("cheveux") == fb.get("cheveux") and fa.get("genre") == fb.get("genre"):
+                if fa.get("lunettes") and fb.get("lunettes"):
+                    fiches[cible] = fb = dict(fb, lunettes=None); faits.append(f"{cible} : sans lunettes")
+                else:
+                    choix = [c for c in (H_.COIFFURES_F if fb.get("genre") == "f" else H_.COIFFURES_H)
+                             if c not in (fa.get("cheveux"), "chauve", "degarni") or (c == "degarni" and float(fb.get("age") or 30) >= 50)]
+                    if choix:
+                        k = sum(ord(ch) for ch in str(cible)) % len(choix)
+                        fiches[cible] = fb = dict(fb, cheveux=choix[k]); faits.append(f"{cible} : coiffure {choix[k]}")
+                if _proches(fa.get("c_cheveux"), fb.get("c_cheveux"), 40):
+                    teintes = [(35, 30, 30), (90, 60, 40), (150, 110, 60), (200, 170, 110), (120, 50, 35)]
+                    nouv = next((t for t in teintes if not _proches(t, fa.get("c_cheveux"), 60)), None)
+                    if nouv: fiches[cible] = dict(fb, c_cheveux=nouv); faits.append(f"{cible} : cheveux d'une autre couleur")
+    return faits
+
 
 AGES_AUTEUR = {"enfant": 8, "ado": 15, "adulte": 30, "senior": 70}
 

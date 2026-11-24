@@ -159,11 +159,18 @@ def appliquer(sk, texte, memoriser=True):
         for c in corr:                                                     # le rapport ne change jamais homme / femme (audit du 23 nov. :
             if c.get("type") == "casting": c.pop("genre", None)            # elle faisait basculer le genre d'un tour à l'autre)
         corr = [c for c in corr if not (c.get("type") == "casting" and set(c) <= {"type", "role"})]
+        # …ni QUI PARLE, ni combien ils sont, ni s'ils sont au téléphone (audit du 24 novembre : sur « comment les mecs organisent
+        # leurs plans », une remarque de contrôle a été traduite en « un seul personnage » : les 20 répliques au même, et la note
+        # de confiance montait à 98 car plus aucun contrôle des voix ne trouvait d'écart). Qui parle se décide par le son et l'image
+        # (contrôles mesurés : verif_finale.appliquer_voix) ; ici seulement le jeu, les réactions, les tenues, le décor, les objets.
+        qui = {}
+        corr = [c for c in corr if c.get("type") not in ("un_seul", "lieux_separes", "figurant", "qui", "repliques")]
     if re.search(r"karaok[ée]", str(texte), re.I) and re.search(r"d[ée]cal|pas cal|faux|retard|avance|enl[eè]ve|sans", str(texte), re.I):
         sk["_sans_karaoke"] = True; faits.append("karaoké retiré (sous-titres normaux)")   # jamais un mot jaune au mauvais moment
     for k, r_ in qui.items():
         if 0 <= k < len(sk.get("repliques") or []) and sk["repliques"][k].get("p") != r_:
-            sk["repliques"][k]["p"] = r_; sk["repliques"][k]["_auteur"] = True; faits.append(f"réplique {k + 1} -> {r_}")
+            sk["repliques"][k]["p"] = r_; faits.append(f"réplique {k + 1} -> {r_}")
+            if memoriser: sk["repliques"][k]["_auteur"] = True             # (seulement une vraie remarque de l'auteur)
     S = sk.setdefault("studio", {}) if isinstance(sk.get("studio"), dict) or "studio" not in sk else {}
     for c in corr:
         if c.get("type") == "un_seul" and c.get("role"):                    # toutes les répliques (même les bruits) au même personnage
