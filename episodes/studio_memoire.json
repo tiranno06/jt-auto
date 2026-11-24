@@ -1,36 +1,5 @@
 [
  {
-  "moment": "jour",
-  "lieux": [
-   "chambre",
-   "chambre"
-  ],
-  "source": "auteur+image",
-  "duree": 25.6,
-  "plans": {
-   "large": 1,
-   "moyen": 1,
-   "serre": 1,
-   "contre_plongee": 2,
-   "plongee": 1,
-   "tres_serre": 1
-  },
-  "mouvements": {
-   "fixe": 1,
-   "avance": 2,
-   "zoom_choc": 2,
-   "recul": 1,
-   "epaule": 1
-  },
-  "costumes": {
-   "presentateur": "capuche",
-   "envoyee": "pull"
-  },
-  "figurants": 0,
-  "ambiances": [],
-  "controle": "image 1 : L'ouverture devrait afficher un titre. L'image montre à la place une scène avec le sous-titre « QUAND TU CLIQUES MOT »,  (grave); image 3 : Lila parle (« Nouveau mot de passe : Kevin un deux"
- },
- {
   "moment": "soir",
   "lieux": [
    "hall"
@@ -7435,28 +7404,60 @@
  {
   "moment": "jour",
   "lieux": [
-   "classe"
+   "salon"
   ],
   "source": "auteur+image",
-  "duree": 19.2,
+  "duree": 71.7,
   "plans": {
-   "large": 5
+   "large": 34
   },
   "mouvements": {
-   "fixe": 5
+   "fixe": 34
+  },
+  "costumes": {
+   "envoyee": "debardeur",
+   "presentateur": "tshirt",
+   "invite": "chemise"
+  },
+  "figurants": 0,
+  "ambiances": [],
+  "controle": "Humoriste 6.0/10 : 27.7 s Manque une réaction comique du stalker quand il lâche l'affaire | Réalisateur 7.8/10 : 16.8 s tête de envoyee coupée par le bord de l'image (large) | Directeur artistique 7.0",
+  "fichier": "2026-11-24_15h33_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": true,
+   "tiers": true,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": true,
+   "reflets": false,
+   "son": true
+  },
+  "cadence": null
+ },
+ {
+  "moment": "soir",
+  "lieux": [
+   "salon"
+  ],
+  "source": "auteur+image",
+  "duree": 39.0,
+  "plans": {
+   "large": 20
+  },
+  "mouvements": {
+   "fixe": 20
   },
   "costumes": {
    "presentateur": "tshirt",
-   "invite": "tshirt",
-   "envoyee": "chemise"
+   "invite": "tshirt"
   },
   "figurants": 0,
   "ambiances": [
-   "neon",
-   "pluie"
+   "poussiere"
   ],
-  "controle": "Humoriste 7.6/10 :  | Réalisateur 7.8/10 : 10.9 s L'expression du personnage qui dit 'Oh Jacques' manque de dynamisme. Un mouvement de tête ou un geste des mains pourrait renforcer l'émotion. | Direct",
-  "fichier": "2026-11-24_16h24_emission.mp4",
+  "controle": "Humoriste 10.0/10 :  | Réalisateur 10.0/10 :  | Directeur artistique 8.0/10 : 0.4 s Les personnages ont une allure cohérente avec le style visé, mais le personnage secondaire pourrait avoir une tenue ",
+  "fichier": "2026-11-24_16h40_emission.mp4",
   "cine": {
    "focus": false,
    "vertige": true,
@@ -7464,7 +7465,7 @@
    "etalonnage": true,
    "profondeur": false,
    "grain": false,
-   "reflets": false,
+   "reflets": true,
    "son": true
   },
   "cadence": "rapide"
