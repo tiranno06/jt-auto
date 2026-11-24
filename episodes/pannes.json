@@ -22,13 +22,14 @@
   }
  },
  "contrôles qui n«…»audio (Gemini n«…»après l«…»original (image illisible) (note de confiance plafonnée)": {
-  "n": 2,
+  "n": 3,
   "premiere": "2026-11-23",
-  "derniere": "2026-11-23",
+  "derniere": "2026-11-24",
   "exemple": "contrôles qui n'ont pas pu se faire : fidélité à l'audio (Gemini n'a pas répondu), qui parle d'après l'image de l'original (image illisible) (note de confiance plafonnée)",
   "etape": "fiche de tournage",
   "jours": {
-   "2026-11-23": 2
+   "2026-11-23": 2,
+   "2026-11-24": 1
   }
  },
  "contrôles qui n«…»audio (Gemini n'a pas répondu) (note de confiance plafonnée)": {
@@ -104,13 +105,13 @@
   }
  },
  "IA gemini indisponible (gemini N : [{": {
-  "n": 12,
+  "n": 13,
   "premiere": "2026-11-24",
   "derniere": "2026-11-24",
   "exemple": "IA gemini indisponible (gemini 429 : [{",
   "etape": "fiche de tournage",
   "jours": {
-   "2026-11-24": 12
+   "2026-11-24": 13
   }
  },
  "erreur avalée dans progression._signaler : AttributeError «…»": {
@@ -154,13 +155,13 @@
   }
  },
  "erreur avalée dans ecrire._appel : ValueError «…»": {
-  "n": 1,
+  "n": 2,
   "premiere": "2026-11-24",
   "derniere": "2026-11-24",
   "exemple": "erreur avalée dans ecrire._appel : ValueError « pas de JSON »",
   "etape": "fiche de tournage",
   "jours": {
-   "2026-11-24": 1
+   "2026-11-24": 2
   }
  },
  "jury : réponse illisible (réponse inexploitable : «…»), nouvel essai avec l'IA suivante": {
@@ -169,6 +170,16 @@
   "derniere": "2026-11-24",
   "exemple": "jury : réponse illisible (réponse inexploitable : «  »), nouvel essai avec l'IA suivante",
   "etape": "fiche de tournage",
+  "jours": {
+   "2026-11-24": 1
+  }
+ },
+ "mise en scène automatique impossible (réponse inexploitable : «…») : une seule scène, casting par la hauteur des voix": {
+  "n": 1,
+  "premiere": "2026-11-24",
+  "derniere": "2026-11-24",
+  "exemple": "mise en scène automatique impossible (réponse inexploitable : «  ») : une seule scène, casting par la hauteur des voix",
+  "etape": "casting voix",
   "jours": {
    "2026-11-24": 1
   }
