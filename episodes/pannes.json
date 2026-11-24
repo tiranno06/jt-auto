@@ -1,12 +1,13 @@
 {
  "IA gemini indisponible (gemini : aucun modèle disponible (N : [{": {
-  "n": 12,
+  "n": 13,
   "premiere": "2026-11-23",
-  "derniere": "2026-11-23",
+  "derniere": "2026-11-24",
   "exemple": "IA gemini indisponible (gemini : aucun modèle disponible (503 : [{",
   "etape": "fiche de tournage",
   "jours": {
-   "2026-11-23": 12
+   "2026-11-23": 12,
+   "2026-11-24": 1
   }
  },
  "contrôles qui n«…»après l«…»original (image illisible) (note de confiance plafonnée)": {
@@ -62,14 +63,14 @@
   }
  },
  "jeu du dessin animé : Gemini n'a pas pu lire les expressions (rien de recopié)": {
-  "n": 11,
+  "n": 12,
   "premiere": "2026-11-23",
   "derniere": "2026-11-24",
   "exemple": "jeu du dessin animé : Gemini n'a pas pu lire les expressions (rien de recopié)",
   "etape": "fiche de tournage",
   "jours": {
    "2026-11-23": 5,
-   "2026-11-24": 6
+   "2026-11-24": 7
   }
  },
  "IA gemini indisponible (gemini : aucun modèle disponible (The read operation timed out)) : on passe à la suivante": {
@@ -93,33 +94,33 @@
   }
  },
  "fiche de tournage : gemini-N-flash n'a pas répondu (The read operation timed out)": {
-  "n": 1,
+  "n": 2,
   "premiere": "2026-11-24",
   "derniere": "2026-11-24",
   "exemple": "fiche de tournage : gemini-3.6-flash n'a pas répondu (The read operation timed out)",
   "etape": "",
   "jours": {
-   "2026-11-24": 1
+   "2026-11-24": 2
   }
  },
  "IA gemini indisponible (gemini N : [{": {
-  "n": 4,
+  "n": 5,
   "premiere": "2026-11-24",
   "derniere": "2026-11-24",
   "exemple": "IA gemini indisponible (gemini 429 : [{",
   "etape": "fiche de tournage",
   "jours": {
-   "2026-11-24": 4
+   "2026-11-24": 5
   }
  },
  "erreur avalée dans progression._signaler : AttributeError «…»": {
-  "n": 1,
+  "n": 2,
   "premiere": "2026-11-24",
   "derniere": "2026-11-24",
   "exemple": "erreur avalée dans progression._signaler : AttributeError « 'URLError' object has no attribute 'read' »",
   "etape": "fiche de tournage",
   "jours": {
-   "2026-11-24": 1
+   "2026-11-24": 2
   }
  },
  "Barre de progression du site (statut) : envoi impossible (<urlopen error timed out> )": {
@@ -137,6 +138,16 @@
   "premiere": "2026-11-24",
   "derniere": "2026-11-24",
   "exemple": "Barre de progression du site (vérification) : envoi impossible (<urlopen error timed out> )",
+  "etape": "fiche de tournage",
+  "jours": {
+   "2026-11-24": 1
+  }
+ },
+ "Barre de progression du site (statut) : envoi impossible (The read operation timed out )": {
+  "n": 1,
+  "premiere": "2026-11-24",
+  "derniere": "2026-11-24",
+  "exemple": "Barre de progression du site (statut) : envoi impossible (The read operation timed out )",
   "etape": "fiche de tournage",
   "jours": {
    "2026-11-24": 1
