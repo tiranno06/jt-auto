@@ -30207,5 +30207,158 @@
   "titre_affiche": "POV : ta coach vieillit ton âge",
   "anglais": true,
   "fin_carte": true
+ },
+ {
+  "date": "2026-11-24",
+  "format": "libre",
+  "titre": "RECORD DE MUSCULATION",
+  "sources": [
+   "https://www.tiktok.com/@brutuslerobuste/video/7680214792698727713"
+  ],
+  "note": 0,
+  "decision": "vidéo manuelle (bande son d'une vidéo TikTok)",
+  "accroche": "870 kg total.",
+  "mots": [
+   "bande",
+   "profil",
+   "tiktok"
+  ],
+  "empreinte": [
+   "allez",
+   "arrache",
+   "bouche",
+   "gramme",
+   "muscula",
+   "record",
+   "revient",
+   "squat",
+   "total"
+  ],
+  "voix": "bande son TikTok",
+  "gag": false,
+  "controle_video": "Humoriste 7.6/10 :  | Réalisateur 7.0/10 : 5 s L'intensité de la colère sur 'on arrache là' pourrait être plus marquée graphiquement.; 5 s Le personnage à droite change d'expression de manière un peu trop neutre entre l'image 4 et 5. | Directeur artistique 5.0/10 : 1 s Présence de deux personnages au lieu d'un seul athlète comme dans l'original. | Ingénieur du son 10.0/10 :  | Spectateur TikTok 8.6/10 : ",
+  "running_gag": "",
+  "duree": 45.8,
+  "fichier": "2026-11-24_01h33_emission.mp4",
+  "tag": "emissions-2026-11",
+  "legende": "Quand l'entraînement intensif paye enfin à la salle de sport.\n\nQuel est votre record personnel au squat ou au deadlift ?\n\n🔔 Abonne-toi : une nouvelle histoire chaque jour !\n\n🎧 Son original : @brutuslerobuste\n\n#petitsdramas #musculation #powerlifting #salledesport #forceathletique #workout #sport #foot #humourfrancais #francophone #humourfrancophone #doublage #animation #dessinanime #drole",
+  "publie": null,
+  "commentaire": "Vous misez sur combien au deadlift ? 💪",
+  "style_accroche": null,
+  "couverture_ms": 39300,
+  "outils": {
+   "claude": "secours",
+   "mistral": "ok",
+   "gemini": "ok",
+   "groq": "ok",
+   "ia": "gemini ×13, groq ×3, mistral ×1",
+   "appels": {
+    "gemini": 13,
+    "groq": 3,
+    "mistral": 1
+   },
+   "epuisees": [],
+   "quota": {
+    "groq": {
+     "reste_jour": 999,
+     "limite_jour": 1000
+    }
+   },
+   "voix": "tiktok",
+   "decors": "dessines",
+   "eco": false
+  },
+  "jury": {
+   "note": 9.0,
+   "source": "ia",
+   "notes": {
+    "humoriste": 9.6,
+    "realisateur": 8.0,
+    "directeur_artistique": 9.0,
+    "son": 9.6,
+    "spectateur": 8.8
+   },
+   "remarques": [
+    "Le plan est fixe comme demandé, mais l'intensité de la grimace pourrait être un tout petit peu plus poussée.",
+    "Grimace plus intense.",
+    "Le décor de salle de sport est bien transposé en dessin, mais on pourrait ajouter une petite haltère en arrière-plan pour rappeler la vidéo "
+   ],
+   "corrigees": [
+    "réaction « regard_camera » à la réplique 6",
+    "haltère : haltère",
+    "casting de haltère : age 0, taille 0, barbe "
+   ],
+   "manques": [
+    "Le matériel de musculation lourd et les disques de poids réalistes de la salle de sport originale manquent dans l'arrière-plan du dessin."
+   ]
+  },
+  "web": true,
+  "a_verifier": [
+   {
+    "t": null,
+    "poste": "fidélité à l'audio",
+    "quoi": "L'objet 'haltere' est mentionné mais on ne voit pas d'haltère spécifique dans la salle",
+    "grave": true,
+    "correction": [
+     {
+      "champ": "repliques.0.objet",
+      "valeur": "",
+      "raison": "L'objet 'haltere' est mentionné mais on ne voit pas d'haltère spécifique dans la salle"
+     }
+    ]
+   },
+   {
+    "t": 5.1,
+    "poste": "attribution",
+    "quoi": "l'image de l'original montre l'autre personne parler pendant 25 % des phrases (répliques 3, 5)",
+    "grave": true,
+    "repliques_douteuses": [
+     2,
+     4
+    ]
+   }
+  ],
+  "confiance": 74,
+  "equipe": "19/20 contrôles bons",
+  "filiere": "tiktok",
+  "source_audio": "https://www.tiktok.com/@brutuslerobuste/video/7680214792698727713",
+  "theme": "Bande son : https://www.tiktok.com/@brutuslerobuste/video/7680214792698727713",
+  "titre_source": "1000 ! JE VEUX 1000 !!",
+  "couts": {
+   "claude_usd": 0.0,
+   "claude_jetons": 35460,
+   "cache_lu": 0,
+   "eleven_caracteres": 0,
+   "gpu_s": 0,
+   "total_usd": 0.0,
+   "modal_mesure_usd": 0.01
+  },
+  "temps": {
+   "Installation de la machine": 436.2,
+   "Démarrage du robot": 11.3,
+   "Écoute du son TikTok": 38.8,
+   "Décors": 0.6,
+   "Dessin des images": 617.2,
+   "Contrôle qualité par le jury": 127.0,
+   "Contrôle de la vidéo finie": 60.1,
+   "Corrections du compte rendu": 434.8
+  },
+  "temps_lents": [
+   "Installation de la machine"
+  ],
+  "type_couverture": "chute",
+  "recette": {
+   "lieu": "salle_sport",
+   "animal": false,
+   "persos": 2,
+   "partie": false
+  },
+  "titre_affiche": "Quand tu exploses ton record",
+  "anglais": true,
+  "fin_carte": false,
+  "essai": true,
+  "recalee": [
+   "l'image de l'original montre l'autre personne parler pendant 25 % des phrases (répliques 3, 5)"
+  ]
  }
 ]
