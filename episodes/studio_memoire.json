@@ -7332,66 +7332,67 @@
  {
   "moment": "jour",
   "lieux": [
-   "studio_radio"
+   "rue",
+   "salon"
   ],
   "source": "auteur+image",
-  "duree": 61.0,
+  "duree": 76.2,
   "plans": {
-   "large": 19
+   "large": 38
   },
   "mouvements": {
-   "fixe": 19
+   "fixe": 38
   },
   "costumes": {
-   "presentateur": "tshirt",
-   "invite": "costume"
+   "invite": "chemise",
+   "presentateur": "costume"
   },
   "figurants": 0,
-  "ambiances": [],
-  "controle": "Humoriste 7.8/10 : 0.4 s La réaction initiale pourrait être plus percutante pour lancer le sketch. | Réalisateur 8.0/10 : 5.4 s Le plan est fixe comme voulu, mais un léger jeu de regard renforcerait l",
-  "fichier": "2026-11-24_13h25_emission.mp4",
+  "ambiances": [
+   "pluie"
+  ],
+  "controle": "Humoriste 7.8/10 :  | Réalisateur 7.8/10 :  | Directeur artistique 6.8/10 : 4 s Le décor de l'invité alterne rue et salon alors que dans l'original la scène 4 se passe au commissariat pour le policier",
+  "fichier": "2026-11-24_13h29_emission.mp4",
   "cine": {
-   "focus": false,
+   "focus": true,
    "vertige": true,
-   "tiers": true,
-   "etalonnage": false,
+   "tiers": false,
+   "etalonnage": true,
    "profondeur": false,
-   "grain": false,
+   "grain": true,
    "reflets": true,
    "son": true
   },
   "cadence": "rapide"
  },
  {
-  "moment": "soir",
+  "moment": "jour",
   "lieux": [
-   "plage"
+   "piscine"
   ],
   "source": "auteur+image",
-  "duree": 58.1,
+  "duree": 83.6,
   "plans": {
-   "large": 16
+   "large": 27
   },
   "mouvements": {
-   "fixe": 16
+   "fixe": 27
   },
   "costumes": {
-   "presentateur": "tshirt",
+   "presentateur": "chemise",
    "invite": "tshirt"
   },
   "figurants": 0,
-  "ambiances": [
-   "poussiere"
-  ],
-  "controle": "Humoriste 6.8/10 : 0 s La réaction du présentateur manque d'exagération comique au début. | Réalisateur 6.6/10 :  | Directeur artistique 4.0/10 : 1 s Le décor de plage avec les deux personnages debout",
-  "fichier": "2026-11-24_13h55_emission.mp4",
+  "ambiances": [],
+  "controle": "Humoriste 7.0/10 :  | Réalisateur 7.0/10 :  | Directeur artistique 6.0/10 : 0.4 s Le décor de carrelage bleu ne correspond pas à la piscine de la vidéo originale.; 0.4 s Le personnage masculin a une g",
+  "fichier": "2026-11-24_14h18_emission.mp4",
   "cine": {
    "focus": false,
-   "vertige": false,
-   "tiers": false,
-   "etalonnage": false,
+   "vertige": true,
+   "tiers": true,
+   "etalonnage": true,
    "profondeur": false,
-   "grain": true,
+   "grain": false,
    "reflets": false,
    "son": true
   },
