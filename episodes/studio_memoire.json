@@ -7400,33 +7400,35 @@
  {
   "moment": "jour",
   "lieux": [
-   "classe"
+   "bureau_proviseur"
   ],
   "source": "auteur+image",
-  "duree": 39.2,
+  "duree": 78.6,
   "plans": {
-   "large": 22
+   "large": 37
   },
   "mouvements": {
-   "fixe": 22
+   "fixe": 37
   },
   "costumes": {
    "invite": "blouse",
-   "presentateur": "tshirt"
+   "presentateur": "costume",
+   "envoyee": "tshirt"
   },
   "figurants": 0,
   "ambiances": [
-   "neon"
+   "poussiere",
+   "vapeur"
   ],
-  "controle": "Humoriste 9.4/10 :  | Réalisateur 7.6/10 : 14.5 s Le presentateur et l'invite sont trop proches l'un de l'autre, ce qui peut nuire à la lisibilité des expressions faciales. | Directeur artistique 8.8/",
-  "fichier": "2026-11-24_15h12_emission.mp4",
+  "controle": "Humoriste 9.4/10 :  | Réalisateur 9.6/10 : 0.4 s Les personnages sont parfois partiellement hors-champ, ce qui nuit à la lisibilité des expressions.; 76.8 s tête de invite coupée par le bord de l'imag",
+  "fichier": "2026-11-24_14h53_emission.mp4",
   "cine": {
    "focus": false,
-   "vertige": false,
-   "tiers": false,
+   "vertige": true,
+   "tiers": true,
    "etalonnage": true,
-   "profondeur": false,
-   "grain": false,
+   "profondeur": true,
+   "grain": true,
    "reflets": true,
    "son": true
   },
