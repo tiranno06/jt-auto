@@ -31,14 +31,14 @@
   }
  },
  "contrôles qui n«…»audio (Gemini n'a pas répondu) (note de confiance plafonnée)": {
-  "n": 12,
+  "n": 13,
   "premiere": "2026-11-23",
   "derniere": "2026-11-24",
   "exemple": "contrôles qui n'ont pas pu se faire : fidélité à l'audio (Gemini n'a pas répondu) (note de confiance plafonnée)",
   "etape": "fiche de tournage",
   "jours": {
    "2026-11-23": 9,
-   "2026-11-24": 3
+   "2026-11-24": 4
   }
  },
  "erreur avalée dans cartoon.pose : ValueError «…»": {
@@ -103,13 +103,43 @@
   }
  },
  "IA gemini indisponible (gemini N : [{": {
-  "n": 2,
+  "n": 3,
   "premiere": "2026-11-24",
   "derniere": "2026-11-24",
   "exemple": "IA gemini indisponible (gemini 429 : [{",
   "etape": "fiche de tournage",
   "jours": {
-   "2026-11-24": 2
+   "2026-11-24": 3
+  }
+ },
+ "erreur avalée dans progression._signaler : AttributeError «…»": {
+  "n": 1,
+  "premiere": "2026-11-24",
+  "derniere": "2026-11-24",
+  "exemple": "erreur avalée dans progression._signaler : AttributeError « 'URLError' object has no attribute 'read' »",
+  "etape": "fiche de tournage",
+  "jours": {
+   "2026-11-24": 1
+  }
+ },
+ "Barre de progression du site (statut) : envoi impossible (<urlopen error timed out> )": {
+  "n": 1,
+  "premiere": "2026-11-24",
+  "derniere": "2026-11-24",
+  "exemple": "Barre de progression du site (statut) : envoi impossible (<urlopen error timed out> )",
+  "etape": "fiche de tournage",
+  "jours": {
+   "2026-11-24": 1
+  }
+ },
+ "Barre de progression du site (vérification) : envoi impossible (<urlopen error timed out> )": {
+  "n": 1,
+  "premiere": "2026-11-24",
+  "derniere": "2026-11-24",
+  "exemple": "Barre de progression du site (vérification) : envoi impossible (<urlopen error timed out> )",
+  "etape": "fiche de tournage",
+  "jours": {
+   "2026-11-24": 1
   }
  }
 }

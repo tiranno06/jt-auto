@@ -3,162 +3,140 @@ Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, Groq ok, OpenRouter ok, IA Modal ok, ElevenLabs epuise — IA utilisée : mistral
 Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @motiontoonz, @same_same53, @charly.bse, @kodanimation, @vignianimation, @vincedessine, @aguerin30, @zequoiza, @jayzocc, @brutuslerobuste, @jawedyoussef
-Réserve de sons : son déjà écouté pris dans la réserve (https://www.tiktok.com/@aguerin30/video/7691010184587513121) : on passe directement à la suite
-Chaîne : vidéo 10/10 lancée
+Réserve de sons : son déjà écouté pris dans la réserve (https://www.tiktok.com/@aguerin30/video/7681339984191687968) : on passe directement à la suite
   fiche de tournage : gemini-flash-latest n'a pas répondu (HTTP Error 429: Too Many Requests)
-  fiche de tournage : gemini-flash-lite-latest n'a pas répondu (HTTP Error 429: Too Many Requests)
-  fiche de tournage : gemini-3.8-flash n'a pas répondu (HTTP Error 429: Too Many Requests)
-  fiche de tournage : gemini-3.7-flash n'a pas répondu (HTTP Error 429: Too Many Requests)
-  fiche de tournage : gemini-3.6-flash n'a pas répondu (HTTP Error 429: Too Many Requests)
-  fiche de tournage : Gemini surchargé, nouvel essai dans 20 s (tour 2/3)
-  fiche de tournage : gemini-flash-latest n'a pas répondu (HTTP Error 429: Too Many Requests)
-  fiche de tournage : gemini-flash-lite-latest n'a pas répondu (HTTP Error 429: Too Many Requests)
-  fiche de tournage : gemini-3.8-flash n'a pas répondu (HTTP Error 429: Too Many Requests)
-  fiche de tournage : gemini-3.7-flash n'a pas répondu (HTTP Error 429: Too Many Requests)
-  fiche de tournage : gemini-3.6-flash n'a pas répondu (HTTP Error 429: Too Many Requests)
-  fiche de tournage : Gemini surchargé, nouvel essai dans 40 s (tour 3/3)
-  fiche de tournage : gemini-flash-latest n'a pas répondu (HTTP Error 429: Too Many Requests)
-  fiche de tournage : gemini-flash-lite-latest n'a pas répondu (HTTP Error 429: Too Many Requests)
-  fiche de tournage : gemini-3.8-flash n'a pas répondu (HTTP Error 429: Too Many Requests)
-  fiche de tournage : gemini-3.7-flash n'a pas répondu (HTTP Error 429: Too Many Requests)
-  fiche de tournage : gemini-3.6-flash n'a pas répondu (HTTP Error 429: Too Many Requests)
-  fiche de tournage écrite (IA de texte sur le dialogue) : bar (small dimly lit corner of a gritty urban bar with ), soir, chaud, ambiance dispute, niveau modeste
-  [équipe · fiche de tournage] ✔ contrôle 1 : règles (cohérence avec ce qui est dit)
-  [équipe · fiche de tournage] ✔ contrôle 2 : 2e IA (autre fournisseur) : repliques.11.emotion : joie -> colere (Le texte de la réplique 11 (« Bon, vas-y, allez, arrête de raconter ta vie, viens, on va manger un truc. ») exprime de l) (corrigé)
-    correction : repliques.11.emotion : joie -> colere (Le texte de la réplique 11 (« Bon, vas-y, allez, arrête de raconter ta vie, viens, on va manger un truc. ») exprime de l)
-  [équipe · fiche de tournage] ✔ contrôle 3 : image de l'original, puis règles : lieu : bar -> salon (vu dans la vidéo d'origine); panneaux : BIÈRE PRESS, ENTRÉE INTERDITE -> — (pas d'enseigne dans « salon ») (corrigé)
-    correction : lieu : bar -> salon (vu dans la vidéo d'origine)
-    correction : panneaux : BIÈRE PRESS, ENTRÉE INTERDITE -> — (pas d'enseigne dans « salon »)
-  images : Gemini surchargé, nouvel essai dans 20 s (tour 2/2)
-  jeu du dessin animé : Gemini n'a pas pu lire les expressions (rien de recopié)
-  sous-titres anglais : 15 réplique(s) traduite(s)
+  fiche de tournage écrite (Gemini a regardé et écouté l original) : salon (small modern living room with a desk and computer ), jour, chaud, ambiance dispute, niveau modeste, bruits entendus : kiss
+  [équipe · fiche de tournage] ✔ contrôle 1 : règles (cohérence avec ce qui est dit) : décor : — -> game console and controllers by the TV (cité dans le dialogue ou entendu); réplique 7 objet : telephone -> — (on ne parle pas de téléphone); réplique 8 objet : telephone -> — (o (corrigé)
+    correction : décor : — -> game console and controllers by the TV (cité dans le dialogue ou entendu)
+    correction : réplique 7 objet : telephone -> — (on ne parle pas de téléphone)
+    correction : réplique 8 objet : telephone -> — (on ne parle pas de téléphone)
+    correction : réplique 9 objet : telephone -> — (on ne parle pas de téléphone)
+    correction : réplique 10 objet : telephone -> — (on ne parle pas de téléphone)
+    correction : réplique 11 objet : telephone -> — (on ne parle pas de téléphone)
+  [équipe · fiche de tournage] ✔ contrôle 2 : 2e IA (autre fournisseur) : repliques.5.emotion : colere -> joie (Le texte de la réplique 5 parle du beau temps et invite à aller à la plage, ce qui correspond à une émotion joyeuse ou n) (corrigé)
+    correction : repliques.5.emotion : colere -> joie (Le texte de la réplique 5 parle du beau temps et invite à aller à la plage, ce qui correspond à une émotion joyeuse ou n)
+  [équipe · fiche de tournage] ✔ contrôle 3 : image de l'original, puis règles : réplique 5 signe : veine -> — (pas cohérent avec l'émotion « joie ») (corrigé)
+    correction : réplique 5 signe : veine -> — (pas cohérent avec l'émotion « joie »)
+  jeu du dessin animé lu par Gemini : invite 13 expression(s)
 Essai : sans carton de fin « Abonne-toi »
-Sketch : « APPEL ENTRE POTES », 15 répliques
-Lieux séparés : chaque personnage a son propre décor (appel, visio, l'un ailleurs)
-  décor semi-réaliste 0 (lieu ressemblant de la banque) : [semi] quiet city street at dusk, parked car at the curb, si
-  décor semi-réaliste 1 (lieu ressemblant de la banque) : [semi] cozy living room, sofa, posters on the wall, coffee t
+Sketch : « POTE AU CHOMAGE VS TRAVAILLEUR », 19 répliques
+  décor semi-réaliste 0 (lieu ressemblant de la banque) : [semi] small modern living room with a desk and computer cha
 WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1795487174.120590    2986 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+I0000 00:00:1795488904.411254    3013 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
 WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1795487175.598333    2986 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+I0000 00:00:1795488905.690151    3013 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
 Downloading data from https://github.com/ina-foss/inaSpeechSegmenter/releases/download/models/keras_speech_music_noise_cnn.hdf5
-[1m      0/3244808[0m [37m━━━━━━━━━━━━━━━━━━━━[0m [1m0s[0m 0s/step[1m3244808/3244808[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 0us/step
+[1m      0/3244808[0m [37m━━━━━━━━━━━━━━━━━━━━[0m [1m0s[0m 0s/step[1m 884736/3244808[0m [32m━━━━━[0m[37m━━━━━━━━━━━━━━━[0m [1m0s[0m 0us/step[1m1867776/3244808[0m [32m━━━━━━━━━━━[0m[37m━━━━━━━━━[0m [1m0s[0m 0us/step[1m3227648/3244808[0m [32m━━━━━━━━━━━━━━━━━━━[0m[37m━[0m [1m0s[0m 0us/step[1m3244808/3244808[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 0us/step
 /home/runner/venv/lib/python3.12/site-packages/keras/src/layers/reshaping/reshape.py:39: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
   super().__init__(**kwargs)
 Downloading data from https://github.com/ina-foss/inaSpeechSegmenter/releases/download/models/keras_male_female_cnn.hdf5
-[1m      0/6040200[0m [37m━━━━━━━━━━━━━━━━━━━━[0m [1m0s[0m 0s/step[1m4440064/6040200[0m [32m━━━━━━━━━━━━━━[0m[37m━━━━━━[0m [1m0s[0m 0us/step[1m6040200/6040200[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 0us/step
-montage : 8 plans (0.3:large>inv/coupe 5.3:large>pre/coupe 6.7:large>inv/coupe 7.0:large>pre/coupe 8.7:large>inv/coupe 10.4:large>pre/coupe 15.6:large>inv/coupe 21.0:large>pre/coupe)
+[1m      0/6040200[0m [37m━━━━━━━━━━━━━━━━━━━━[0m [1m0s[0m 0s/step[1m3080192/6040200[0m [32m━━━━━━━━━━[0m[37m━━━━━━━━━━[0m [1m0s[0m 0us/step[1m6040200/6040200[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 0us/step
+montage : 1 plans (0.0:large>pre/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-objets de l'histoire : véhicule dans 1 décor(s)
-studio : soir, lieux ['rue', 'salon'], tenues invite=capuche, presentateur=tshirt, 0 figurant(s), ambiances ['neon', 'pluie', 'poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-appel : écran partagé du début à la fin (chacun dans son décor, aucun changement de plan)
-cartoon : durée 23.2 s, 15 répliques, 2 scène(s), personnages ['invite', 'presentateur']
-montage : 8 plans (0.3:large>inv/coupe 5.3:large>pre/coupe 6.7:large>inv/coupe 7.0:large>pre/coupe 8.7:large>inv/coupe 10.4:large>pre/coupe 15.6:large>inv/coupe 21.0:large>pre/coupe)
+studio : jour, lieux ['salon'], tenues presentateur=tshirt, invite=chemise, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 61.1 s, 19 répliques, 1 scène(s), personnages ['presentateur', 'invite']
+Pré-jury (avant de dessiner) : réaction « regard_camera » à la réplique 19
+montage : 1 plans (0.0:large>pre/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-objets de l'histoire : véhicule dans 1 décor(s)
-studio : soir, lieux ['rue', 'salon'], tenues invite=capuche, presentateur=tshirt, 0 figurant(s), ambiances ['neon', 'pluie', 'poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-appel : écran partagé du début à la fin (chacun dans son décor, aucun changement de plan)
-cartoon : durée 23.2 s, 15 répliques, 2 scène(s), personnages ['invite', 'presentateur']
-  dessin partagé : 1 machine(s) d'aide + celle-ci (2 morceaux de ~695 images)
-  morceau 696–1391 reçu d'une machine d'aide
+studio : jour, lieux ['salon'], tenues presentateur=tshirt, invite=chemise, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 61.1 s, 19 répliques, 1 scène(s), personnages ['presentateur', 'invite']
+  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~916 images)
+  morceau 2750–3667 reçu d'une machine d'aide
+  morceau 1834–2750 reçu d'une machine d'aide
+  morceau 917–1834 reçu d'une machine d'aide
   dessin partagé terminé en 8.4 min
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury : 2 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
-Jury qualité (ia) : 9.5/10 — Humoriste 7.8/10 : 14 s La réaction de l'interlocuteur est trop neutre. | Réalisateur 10.0/10 :  | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.9/10 : 
-Manque par rapport à la vidéo d'origine : Manque la bouteille d'eau que le personnage manipule dans l'original.
+Jury : 1 remarque(s) sur les plans / zooms retirée(s) (montage « plan large » voulu)
+Jury : 3 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
+Jury qualité (ia) : 8.0/10 — Humoriste 8.6/10 :  | Réalisateur 8.8/10 : 21 s Le personnage au téléphone manque d'une animation corporelle plus marquée | Directeur artistique 8.0/10 : 1 s Le style visuel est fidèle mais les accessoires de plage manquent pour rappeler l'original; 1 s Le look du présentateur s'éloigne un peu trop de la tenue originale | Ingénieur du son 7.8/10 : 21 s Il manque un petit bip ou sonnerie de téléphone pour marquer l'appel | Spectateur TikTok 7.0/10 : 1 s Le texte du sous-titre est un peu dense à lire rapidement dans les premières secondes
+Manque par rapport à la vidéo d'origine : Dans l'original, le personnage porte une serviette sur l'épaule et un sac banane coloré, ce qui renforce l'ambiance plage.
+Corrections tirées des remarques du jury : lieux_separes
+Corrections du jury (tour 1) : un décor pour chaque personnage (lieux séparés)
+  lieux séparés proposés par l'IA refusés : rien dans le son ne dit qu'ils se parlent à distance
+montage : 1 plans (0.0:large>pre/coupe)
+style croquis : décors passés à l'encre et à l'aquarelle
+studio : jour, lieux ['salon'], tenues presentateur=tshirt, invite=chemise, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 61.1 s, 19 répliques, 1 scène(s), personnages ['presentateur', 'invite']
+  redessin partiel : 600/3667 images à redessiner (2 passage(s)), le reste repris tel quel
+Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
+Jury : 4 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
+Jury qualité (ia) : 8.0/10 — Humoriste 8.6/10 : 51.3 s La réponse sur la Play est trop sobre. | Réalisateur 8.0/10 : 7 s Le plan est fixe comme demandé, mais l'invité reste un peu trop stoïque pendant la tirade sur la plage.; 37 s La colère du personnage au téléphone manque d'explosivité visuelle. | Directeur artistique 8.0/10 : 0.4 s L'original montre un personnage avec une sacoche banane et une serviette sur l'épaule, nos dessins n'ont pas la sacoche.; 10.5 s Le décor d'intérieur est bien, mais manque le meuble bureau en arrière-plan visible dans l'original. | Ingénieur du son 8.6/10 :  | Spectateur TikTok 7.0/10 : 0.4 s Les sous-titres sont un peu trop gros et cachent le bas de l'image par moments.; 43 s On a envie de voir le personnage s'énerver davantage face à cette vie de fainéant.
+Manque par rapport à la vidéo d'origine : L'original porte une sacoche banane colorée et une serviette sur l'épaule tout du long. ; Il y a un meuble bureau avec une chaise de bureau en fond dans l'original qui renforce le côté télétravail/bureau.
+Corrections tirées des remarques du jury : lieux_separes
+La version corrigée n'est pas meilleure : on garde la première.
 fin en boucle : la dernière image se raccorde à la première (0.35 s de fondu)
+  [vidéo finie · synchro] décalage mesuré +0.15 s (mesure seulement : le son n'est jamais déplacé)
   [vidéo finie · synchro] ✔ bouches du bon personnage
   [vidéo finie · bouches] ✔ bouche immobile quand le personnage se tait
   [vidéo finie · technique] ✔ sauts, clignotements, personnages (0 remarque(s))
-  transcription Groq (Whisper, gratuit) : 89 mots
-  karaoké contrôlé à l'oreille : 79 mots, écart médian 0.03 s
-  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 86 %)
+  transcription Groq (Whisper, gratuit) : 204 mots
+  karaoké contrôlé à l'oreille : 192 mots, écart médian 0.04 s
+  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 90 %)
   [vidéo finie · contrôle IA] 0 remarque(s)
   contrôle « fidélité » : Gemini surchargé, nouvel essai dans 20 s (tour 2/3)
-  [vidéo finie · fidélité à l'audio] ✘ Gemini a regardé et écouté la vidéo finie : 1 écart(s)
-  [vidéo finie · voix et dessin] ✘ chaque réplique sur la bonne voix, homme / femme d'après la voix : 3 écart(s)
+  [vidéo finie · fidélité à l'audio] ✘ Gemini a regardé et écouté la vidéo finie : 3 écart(s)
+  [vidéo finie · voix et dessin] ✘ chaque réplique sur la bonne voix, homme / femme d'après la voix : 4 écart(s)
   [vidéo finie · attribution] ✔ qui dit chaque phrase, comparé à l'image de l'original
-Contrôle de la vidéo finie : 4 point(s) à vérifier — None s la vérification montre que la météo est pluvieuse sur l'imag ; 0.3 s réplique 1 « Ouais, qu'est-ce que tu veux ? » : c'est la voi ; 5.3 s réplique 5 « Bah, je te demande, comme ça. » : c'est la voix ; 7.0 s réplique 7 « T'es de la police ? » : c'est la voix de l'invi
-Compte rendu (tour 1, confiance 52/100) : corrections demandées au robot :
-- la vérification montre que la météo est pluvieuse sur l'image du haut, contrairement au champ météo qui indique 'chaud'
-- à 14.0 s : La réaction de l'interlocuteur est trop neutre.
-Remarque comprise : L'auteur signale que la météo affichée sur l'image du haut doit être pluvieuse, pas chaude, et que la réaction du présentateur à 14 s est trop neutre.
-Remarque de l'auteur : 0 réplique(s) à rendre à un autre personnage, 2 correction(s) : lieu, reaction
-Compte rendu : réplique 1 -> presentateur (voix) ; réplique 5 -> invite (voix) ; réplique 7 -> invite (voix)
-  lieux séparés : 3 réplique(s) remise(s) dans le décor de leur personnage
-montage : 5 plans (0.3:large>pre/coupe 0.9:large>inv/coupe 10.4:large>pre/coupe 15.6:large>inv/coupe 21.0:large>pre/coupe)
+  1 remarque(s) légère(s) gardée(s) au journal seulement : 2.2 s karaoké décalé de 0.88 s sur « Tranquille et toi. 
+Contrôle de la vidéo finie : 7 point(s) à vérifier — None s Le présentateur propose d'aller à la plage mais aucun access ; None s Le présentateur évoque une partie de volleyball alors qu'auc ; None s L'invité évoque la console de jeux mais aucune manette ou co ; 2.2 s réplique 2 « Tranquille et toi. » : c'est la voix du présent ; 21.1 s réplique 8 « Euh ouais, patron, ouais, dites-moi, y'a mon co ; 50.8 s réplique 16 « bah j'ai joué à la Play aujourd'hui » : c'est 
+Compte rendu (tour 1, confiance 16/100) : corrections demandées au robot :
+- Le présentateur propose d'aller à la plage mais aucun accessoire de plage n'est visible dans le salon.
+- Le présentateur évoque une partie de volleyball alors qu'aucun ballon n'est présent dans le décor.
+- L'invité évoque la console de jeux mais aucune manette ou console n'est visible sur le canapé ou les meubles.
+- à 21.0 s : Le personnage au téléphone manque d'une animation corporelle plus marquée
+- à 1.0 s : Le style visuel est fidèle mais les accessoires de plage manquent pour rappeler l'original
+- à 1.0 s : Le look du présentateur s'éloigne un peu trop de la tenue originale
+- à 21.0 s : Il manque un petit bip ou sonnerie de téléphone pour marquer l'appel
+- à 1.0 s : Le texte du sous-titre est un peu dense à lire rapidement dans les premières secondes
+Remarque comprise : L'auteur signale l'absence d'accessoires de plage, d'un ballon de volleyball et d'une console de jeux dans le salon, un manque d'animation corporelle pour le personnage au téléphone, un look du présen
+Remarque de l'auteur : 0 réplique(s) à rendre à un autre personnage, 7 correction(s) : lieu, figurant, figurant, reaction, costume, bruitage, reaction
+Compte rendu : réplique 2 -> presentateur (voix) ; réplique 8 -> presentateur (voix) ; réplique 16 -> invite (voix) ; réplique 18 -> invite (voix) ; personne ajoutée à côté de ballon_volleyball () ; personne ajoutée à côté de console_jeux () ; tenue de presentateur
+montage : 1 plans (0.0:large>pre/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-objets de l'histoire : véhicule dans 1 décor(s)
-studio : soir, lieux ['rue', 'salon'], tenues presentateur=tshirt, invite=capuche, 0 figurant(s), ambiances ['neon', 'pluie', 'poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-appel : écran partagé du début à la fin (chacun dans son décor, aucun changement de plan)
-cartoon : durée 23.2 s, 15 répliques, 2 scène(s), personnages ['presentateur', 'invite']
-  image 300/1391 (4 processeurs)
-  image 600/1391
-  image 900/1391
-  image 1200/1391
+studio : jour, lieux ['salon'], tenues presentateur=pull, invite=chemise, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 61.1 s, 19 répliques, 1 scène(s), personnages ['presentateur', 'invite']
+  image 300/3667 (4 processeurs)
+  image 600/3667
+  erreur avalée dans progression._signaler : AttributeError « 'URLError' object has no attribute 'read' »
+Barre de progression du site (statut) : envoi impossible (<urlopen error timed out> )
+Barre de progression du site (vérification) : envoi impossible (<urlopen error timed out> )
+  image 900/3667
+  image 1200/3667
+  image 1500/3667
+  image 1800/3667
+  image 2100/3667
+  image 2400/3667
+  image 2700/3667
+  image 3000/3667
+  image 3300/3667
+  image 3600/3667
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
 fin en boucle : la dernière image se raccorde à la première (0.35 s de fondu)
+  [vidéo finie · synchro] décalage mesuré +0.25 s (mesure seulement : le son n'est jamais déplacé)
   [vidéo finie · synchro] ✔ bouches du bon personnage
   [vidéo finie · bouches] ✔ bouche immobile quand le personnage se tait
   [vidéo finie · technique] ✔ sauts, clignotements, personnages (0 remarque(s))
-  transcription Groq (Whisper, gratuit) : 89 mots
-  karaoké contrôlé à l'oreille : 79 mots, écart médian 0.03 s
-  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 86 %)
-  [vidéo finie · contrôle IA] 0 remarque(s)
-  [vidéo finie · fidélité à l'audio] ✘ Gemini a regardé et écouté la vidéo finie : 2 écart(s)
-  [vidéo finie · voix et dessin] ✔ chaque réplique sur la bonne voix, homme / femme d'après la voix
-  [vidéo finie · attribution] ✔ qui dit chaque phrase, comparé à l'image de l'original
-Contrôle de la vidéo finie : 2 point(s) à vérifier — 0.0 s Le lieu indiqué dans la fiche (salon/bar) ne correspond pas  ; 0.0 s La météo indiquée dans la fiche (chaud) contredit la pluie v
+  transcription Groq (Whisper, gratuit) : 204 mots
+  karaoké contrôlé à l'oreille : 192 mots, écart médian 0.04 s
+  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 90 %)
   IA gemini indisponible (gemini 429 : [{
   "error": {
     "code": 429,
     "message": "You exceeded your current quota, please check your plan an) : on passe à la suivante
-Jury : 1 remarque(s) sur les plans / zooms retirée(s) (montage « plan large » voulu)
-Jury : 9 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
-Jury qualité (ia) : 8.0/10 — Humoriste 8.4/10 :  | Réalisateur 6.6/10 : 14.4 s Certains moments manquent de dynamisme malgré le montage fixe. Par exemple, le personnage qui dit 'ARRÊTE DE RACONTER' pourrait avoir un geste plus expressif. | Directeur artistique 7.8/10 : 0 s Les personnages ont une allure cohérente avec le style souhaité, mais le décor manque de détails qui pourraient renforcer l'ambiance (ex. : objets ou éléments visuels liés à l'action).; 16.9 s L'harmonie des couleurs dans le décor pourrait être améliorée pour éviter les contrastes trop forts. | Ingénieur du son 9.6/10 : 0.4 s Les sous-titres sont parfois illisibles à cause de la vitesse ou de la taille. | Spectateur TikTok 7.6/10 : 13.1 s Certains moments manquent de clarté dans le message humoristique, ce qui peut rendre la vidéo moins engageante.
-Compte rendu corrigé : confiance 52 → 76/100, jury 8.0/10
-Compte rendu (tour 2, confiance 76/100) : corrections demandées au robot :
-- à 0.0 s : Le lieu indiqué dans la fiche (salon/bar) ne correspond pas à la scène montrée (la rue sous la pluie).
-- à 0.0 s : La météo indiquée dans la fiche (chaud) contredit la pluie visible à l'écran.
-- à 0.4 s : Les sous-titres sont parfois illisibles à cause de la vitesse ou de la taille.
-- à 13.1 s : Certains moments manquent de clarté dans le message humoristique, ce qui peut rendre la vidéo moins engageante.
-Remarque comprise : L'auteur signale que le lieu et la météo ne correspondent pas à la scène, les sous‑titres sont parfois illisibles et le message humoristique à 13.1 s manque de clarté.
-Remarque de l'auteur : 0 réplique(s) à rendre à un autre personnage, 4 correction(s) : lieu, lieu, reaction, jeu
-Compte rendu : fiche de tournage : lieu : salon -> rue (Le lieu indiqué dans la fiche (salon/bar) ne correspond pas à la scène montrée (la rue sous la pluie) ; jeu plus marqué à la réplique 10
-  décor semi-réaliste 0 (lieu ressemblant de la banque) : [semi] quiet city street at dusk, parked car at the curb, si
-  décor semi-réaliste 1 (lieu ressemblant de la banque) : [semi] cozy living room, sofa, posters on the wall, coffee t
-montage : 5 plans (0.3:large>pre/coupe 0.9:large>inv/coupe 10.4:large>pre/coupe 15.6:large>inv/coupe 21.0:large>pre/coupe)
-style croquis : décors passés à l'encre et à l'aquarelle
-objets de l'histoire : véhicule dans 1 décor(s)
-studio : soir, lieux ['rue', 'salon'], tenues presentateur=tshirt, invite=capuche, 0 figurant(s), ambiances ['neon', 'pluie', 'poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-appel : écran partagé du début à la fin (chacun dans son décor, aucun changement de plan)
-cartoon : durée 23.2 s, 15 répliques, 2 scène(s), personnages ['presentateur', 'invite']
-  image 300/1391 (4 processeurs)
-  image 600/1391
-  image 900/1391
-  image 1200/1391
-Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-fin en boucle : la dernière image se raccorde à la première (0.35 s de fondu)
-  [vidéo finie · synchro] ✔ bouches du bon personnage
-  [vidéo finie · bouches] ✔ bouche immobile quand le personnage se tait
-  [vidéo finie · technique] ✔ sauts, clignotements, personnages (0 remarque(s))
-  transcription Groq (Whisper, gratuit) : 89 mots
-  karaoké contrôlé à l'oreille : 79 mots, écart médian 0.03 s
-  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 86 %)
   [vidéo finie · contrôle IA] 0 remarque(s)
   [vidéo finie · voix et dessin] ✔ chaque réplique sur la bonne voix, homme / femme d'après la voix
   [vidéo finie · attribution] ✔ qui dit chaque phrase, comparé à l'image de l'original
   contrôles qui n'ont pas pu se faire : fidélité à l'audio (Gemini n'a pas répondu) (note de confiance plafonnée)
+  1 remarque(s) légère(s) gardée(s) au journal seulement : 2.2 s karaoké décalé de 0.88 s sur « Tranquille et toi. 
 Contrôle de la vidéo finie : 0 point(s) à vérifier
-Jury : 1 remarque(s) sur les plans / zooms retirée(s) (montage « plan large » voulu)
-Jury : 5 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
-Jury qualité (ia) : 9.5/10 — Humoriste 9.4/10 :  | Réalisateur 7.6/10 : 0.4 s Le personnage du présentateur pourrait avoir un geste plus expressif pour introduire la scène, comme un hochement de tête ou un sourire plus marqué. | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.9/10 : 
-Manque par rapport à la vidéo d'origine : Les expressions faciales de l'original sont plus variées et naturelles (ex : sourires, clignements d'yeux plus marqués). ; L'ambiance sonore originale inclut des rires naturels en fond, absents dans notre version. ; Les gestes des mains sont moins exagérés dans notre version que dans l'original.
-Compte rendu corrigé : confiance 76 → 90/100, jury 9.5/10
+Jury : 3 remarque(s) sur les plans / zooms retirée(s) (montage « plan large » voulu)
+Jury : 4 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
+Jury qualité (ia) : 8.5/10 — Humoriste 8.6/10 :  | Réalisateur 6.8/10 : 47 s Le personnage qui parle de sa 'vie de merde' pourrait avoir un fond visuel plus expressif (ex. : un décor qui reflète sa détresse, comme un salon en désordre). | Directeur artistique 8.0/10 : 0 s Les personnages ont une allure cohérente avec le style 'croquis', mais le décor manque de détails qui pourraient renforcer l'ambiance humoristique (ex. : des objets comiques comme une glacière ou un p; 50 s Le personnage qui dit 'j'ai joué à la Play' pourrait avoir un accessoire lié à ce jeu (ex. : une manette de jeu visible ou un écran de jeu en fond). | Ingénieur du son 10.0/10 :  | Spectateur TikTok 8.6/10 : 
+Compte rendu corrigé : confiance 16 → 90/100, jury 8.5/10
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, groq = ok, ia = mistral ×6, groq ×3, gemini ×5, appels = {'mistral': 6, 'groq': 3, 'gemini': 5}, epuisees = ['gemini'], quota = {'groq': {'reste_jour': 999, 'limite_jour': 1000}}, voix = tiktok, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 59937, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0, 'total_usd': 0.0, 'modal_mesure_usd': 0.0}
-⏱️ Étapes plus lentes que d'habitude : Installation de la machine 7 min (d'habitude 2 min)
-⏱️ Temps par étape : Installation de la machine 7.6 min, Démarrage du robot 0.4 min, Écoute du son TikTok 1.9 min, Décors 0.0 min, Dessin des images 9.1 min, Contrôle qualité par le jury 1.4 min, Contrôle de la vidéo finie 1.2 min, Corrections du compte rendu 15.8 min
-Quota de l'API GitHub : 4875 appels restants
-OK : sortie/2026-11-24_03h26_emission.mp4 (24 s)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, groq = ok, ia = gemini ×6, groq ×2, mistral ×2, appels = {'gemini': 6, 'groq': 2, 'mistral': 2}, epuisees = ['gemini'], quota = {'groq': {'reste_jour': 999, 'limite_jour': 1000}}, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 55949, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0, 'total_usd': 0.0, 'modal_mesure_usd': 0.09}
+⏱️ Étapes plus lentes que d'habitude : Installation de la machine 10 min (d'habitude 2 min)
+⏱️ Temps par étape : Installation de la machine 10.3 min, Démarrage du robot 0.2 min, Écoute du son TikTok 0.5 min, Décors 0.0 min, Dessin des images 10.3 min, Contrôle qualité par le jury 0.6 min, Nouvelle version corrigée par le jury 5.8 min, Contrôle de la vidéo finie 2.8 min, Corrections du compte rendu 18.7 min
+Quota de l'API GitHub : 4997 appels restants
+OK : sortie/2026-11-24_03h55_emission.mp4 (62 s)
