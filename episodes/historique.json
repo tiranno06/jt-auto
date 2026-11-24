@@ -30525,5 +30525,154 @@
   "titre_affiche": "POV : Le prof au bout de sa vie",
   "anglais": true,
   "fin_carte": false
+ },
+ {
+  "date": "2026-11-24",
+  "format": "libre",
+  "titre": "RECORD 940KG FORCE ATHLÉTIQUE",
+  "sources": [
+   "https://www.tiktok.com/@brutuslerobuste/video/7711437067099589921"
+  ],
+  "note": 0,
+  "decision": "vidéo manuelle (bande son d'une vidéo TikTok)",
+  "accroche": "940 kilos au total.",
+  "mots": [
+   "bande",
+   "profil",
+   "tiktok"
+  ],
+  "empreinte": [
+   "940kg",
+   "allez",
+   "arretez",
+   "athleti",
+   "courage",
+   "debloqu",
+   "force",
+   "kilos",
+   "merci",
+   "record",
+   "squat",
+   "total"
+  ],
+  "voix": "bande son TikTok",
+  "gag": false,
+  "controle_video": "Humoriste 8.6/10 :  | Réalisateur 8.8/10 :  | Directeur artistique 9.0/10 : 0.4 s Le style encre et aquarelle est bien respecté, mais le fond du décor manque un peu de lisibilité sur les textes en arrière-plan. | Ingénieur du son 8.8/10 :  | Spectateur TikTok 8.8/10 : ",
+  "running_gag": "",
+  "duree": 63.6,
+  "fichier": "2026-11-24_02h02_emission.mp4",
+  "tag": "emissions-2026-11",
+  "legende": "Il tente un total incroyable de 940 kg en compétition !\n\nInspiré par cette barre ?\n\n🔔 Abonne-toi : une nouvelle histoire chaque jour !\n\n🎧 Son original : @brutuslerobuste\n\n#petitsdramas #musculation #powerlifting #forceathletique #fitness #motivation #humourfrancais #francophone #humourfrancophone #doublage #animation #dessinanime #drole #humour #sketch",
+  "publie": null,
+  "commentaire": "Vous soulevez combien au squat ? 🏋️‍♂️",
+  "style_accroche": null,
+  "couverture_ms": 59100,
+  "outils": {
+   "claude": "secours",
+   "mistral": "ok",
+   "gemini": "ok",
+   "groq": "ok",
+   "ia": "gemini ×14, groq ×3, mistral ×1",
+   "appels": {
+    "gemini": 14,
+    "groq": 3,
+    "mistral": 1
+   },
+   "epuisees": [],
+   "quota": {
+    "groq": {
+     "reste_jour": 996,
+     "limite_jour": 1000
+    }
+   },
+   "voix": "tiktok",
+   "decors": "dessines",
+   "eco": false
+  },
+  "jury": {
+   "note": 6.9,
+   "source": "ia",
+   "notes": {
+    "humoriste": 6.0,
+    "realisateur": 7.0,
+    "directeur_artistique": 7.0,
+    "son": 7.8,
+    "spectateur": 6.8
+   },
+   "remarques": [
+    "La tension comique manque d'exagération au moment de la supplication intense.",
+    "Le personnage en rose reste trop neutre pendant les encouragements répétés.",
+    "Les vêtements des personnages manquent un peu de fidélité par rapport à la vidéo originale."
+   ],
+   "corrigees": [
+    "réplique 1 -> envoyee",
+    "invite : humain",
+    "envoyee : humain",
+    "casting de invite : age 28, taille 1.1, barbe moustache",
+    "casting de envoyee : age 30, taille 1.1, barbe aucune",
+    "fiche de tournage : repliques.0.objet : haltere -> None (La fiche mentionne 'haltere' mais il n'y a pas d'haltère spécifique nommé dans l'audio des répliques)",
+    "envoyee : humain",
+    "casting de envoyee : age 30, taille 1.1, barbe aucune",
+    "tenue de invite"
+   ],
+   "manques": [
+    "Manque les plaques de poids rouges massives caractéristiques de la barre de squat lourde de l'original.",
+    "Manque le spot d'éclairage de salle de sport et le drapeau français en arrière-plan visible dans la vidéo originale."
+   ]
+  },
+  "web": true,
+  "a_verifier": [
+   {
+    "t": 0.0,
+    "poste": "fidélité à l'audio",
+    "quoi": "L'objet haltere n'est pas present dans la scene.",
+    "grave": true,
+    "correction": [
+     {
+      "champ": "repliques.0.objet",
+      "valeur": "",
+      "raison": "L'objet haltere n'est pas present dans la scene."
+     }
+    ]
+   }
+  ],
+  "confiance": 84,
+  "equipe": "20/22 contrôles bons",
+  "filiere": "tiktok",
+  "source_audio": "https://www.tiktok.com/@brutuslerobuste/video/7711437067099589921",
+  "theme": "Bande son : https://www.tiktok.com/@brutuslerobuste/video/7711437067099589921",
+  "titre_source": "Championnats de France dans 4 semaines j’ai hâte !!",
+  "couts": {
+   "claude_usd": 0.0,
+   "claude_jetons": 44537,
+   "cache_lu": 0,
+   "eleven_caracteres": 0,
+   "gpu_s": 0,
+   "total_usd": 0.0,
+   "modal_mesure_usd": 0.17
+  },
+  "temps": {
+   "Installation de la machine": 420.8,
+   "Démarrage du robot": 10.2,
+   "Écoute du son TikTok": 28.8,
+   "Décors": 0.5,
+   "Dessin des images": 694.7,
+   "Contrôle qualité par le jury": 124.1,
+   "Contrôle de la vidéo finie": 42.8,
+   "Corrections du compte rendu": 1790.3
+  },
+  "temps_lents": [
+   "Installation de la machine"
+  ],
+  "type_couverture": "chute",
+  "recette": {
+   "lieu": "salle_sport",
+   "animal": false,
+   "persos": 2,
+   "partie": false
+  },
+  "titre_affiche": "POV : Tu tentes 940kg total",
+  "anglais": true,
+  "fin_carte": true
  }
 ]
