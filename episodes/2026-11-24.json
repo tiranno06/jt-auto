@@ -1,1494 +1,868 @@
 {
- "titre": "PAUSETHÉSTRESSANTE",
- "sujet": "PAUSETHÉSTRESSANTE",
- "ecran": "PAUSETHÉSTRESS",
+ "titre": "PLANS IMPROVISÉS",
+ "sujet": "PLANS IMPROVISÉS",
+ "ecran": "PLANS",
  "invite_nom": "Hubert Rustine",
  "invite_role": "Expert (fictif)",
  "invite_look": "chauve",
  "lieu_direct": "Assemblée",
- "titre_accroche": "POV : Tu veux ton thé",
- "question": "Qui a déjà vécu une dispute de bureau pour une pause café/thé ?",
+ "titre_accroche": "POV : Quand ton pote t'appelle",
+ "question": "Qui aurait accepté ce plan ?",
  "running_gag": "",
  "verite": "",
  "repliques": [
   {
    "p": "invite",
-   "t": "Là je suis trop stressée, j'ai absolument besoin de me faire mon thé",
-   "_deb": 0.18,
-   "_fin": 2.286,
-   "d": "[stressed] Là je suis trop stressée, j'ai absolument besoin de me faire mon thé",
+   "t": "Allo.",
+   "_deb": 0.182,
+   "_fin": 0.403,
+   "d": "[confused] Allo.",
+   "_mots": [
+    [
+     "Allo.",
+     0.0,
+     0.221
+    ]
+   ],
    "objet": "verre",
+   "_action": "telephone_oreille",
+   "_geste": "telephone"
+  },
+  {
+   "p": "invite",
+   "t": "Ouais, je suis en bas de chez toi là. Monte dans la voiture, on part au Paraguay.",
+   "_deb": 1.851,
+   "_fin": 5.808,
+   "d": "[excited] Ouais, je suis en bas de chez toi là. Monte dans la voiture, on part au Paraguay.",
    "_hauteur_ok": true,
    "_mots": [
     [
-     "Là",
+     "Ouais,",
      0.0,
-     0.061
-    ],
-    [
-     "je",
-     0.121,
-     0.161
-    ],
-    [
-     "suis",
-     0.161,
-     0.281
-    ],
-    [
-     "trop",
-     0.341,
      0.442
     ],
     [
-     "stressée,",
+     "je",
+     0.442,
+     0.482
+    ],
+    [
+     "suis",
      0.482,
-     0.823
-    ],
-    [
-     "j'ai",
-     0.823,
-     0.923
-    ],
-    [
-     "absolument",
-     0.963,
-     1.304
-    ],
-    [
-     "besoin",
-     1.344,
-     1.525
-    ],
-    [
-     "de",
-     1.545,
-     1.605
-    ],
-    [
-     "me",
-     1.625,
-     1.705
-    ],
-    [
-     "faire",
-     1.725,
-     1.866
-    ],
-    [
-     "monter.",
-     1.866,
-     2.106
-    ]
-   ],
-   "_geste": "mains_hanches"
-  },
-  {
-   "p": "presentateur",
-   "t": "Pardon.",
-   "_deb": 2.868,
-   "_fin": 3.108,
-   "d": "[annoyed] Pardon.",
-   "_hauteur_ok": true,
-   "_mots": [
-    [
-     "Pardon.",
-     0.0,
-     0.24
-    ]
-   ],
-   "objet": "colis"
-  },
-  {
-   "p": "presentateur",
-   "t": "Euh...",
-   "_deb": 4.631,
-   "_fin": 4.851,
-   "d": "[hesitant] Euh...",
-   "_voix_corrigee": true,
-   "_hauteur_ok": true,
-   "_mots": [
-    [
-     "Euh...",
-     0.0,
-     0.22
-    ]
-   ],
-   "objet": "colis",
-   "_geste": "gratte_tete"
-  },
-  {
-   "p": "presentateur",
-   "t": "Comment ça ?",
-   "_deb": 5.553,
-   "_fin": 5.874,
-   "d": "[confused] Comment ça ?",
-   "_hauteur_ok": true,
-   "_mots": [
-    [
-     "Comment",
-     0.0,
-     0.221
-    ],
-    [
-     "ça.",
-     0.241,
-     0.321
-    ]
-   ]
-  },
-  {
-   "p": "invite",
-   "t": "Allez, s'il te plaît parce qu'après je vais être exécrables toute la journée.",
-   "_deb": 6.315,
-   "_fin": 8.421,
-   "d": "[pleading] Allez, s'il te plaît parce qu'après je vais être execrable toute la journée.",
-   "_hauteur_ok": true,
-   "_mots": [
-    [
-     "Allez,",
-     0.0,
-     0.161
-    ],
-    [
-     "s'il",
-     0.201,
-     0.261
-    ],
-    [
-     "te",
-     0.281,
-     0.321
-    ],
-    [
-     "plaît",
-     0.381,
-     0.502
-    ],
-    [
-     "parce",
-     0.502,
-     0.642
-    ],
-    [
-     "qu'après",
-     0.642,
-     0.842
-    ],
-    [
-     "je",
-     0.862,
-     0.923
-    ],
-    [
-     "vais",
-     0.923,
-     1.003
-    ],
-    [
-     "être",
-     1.023,
-     1.103
-    ],
-    [
-     "execrable",
-     1.123,
-     1.504
-    ],
-    [
-     "toute",
-     1.524,
-     1.665
-    ],
-    [
-     "la",
-     1.705,
-     1.745
-    ],
-    [
-     "journée.",
-     1.805,
-     2.106
-    ]
-   ],
-   "objet": "croissant",
-   "_geste": "supplie"
-  },
-  {
-   "p": "presentateur",
-   "t": "Ok, genre là maintenant ?",
-   "_deb": 8.641,
-   "_fin": 9.885,
-   "d": "[skeptical] Ok, genre là maintenant ?",
-   "_mots": [
-    [
-     "Ok,",
-     0.0,
-     0.101
-    ],
-    [
-     "genre",
-     0.682,
-     0.843
-    ],
-    [
-     "là",
-     0.863,
-     0.903
-    ],
-    [
-     "maintenant",
-     0.983,
-     1.244
-    ]
-   ],
-   "objet": "journal"
-  },
-  {
-   "p": "invite",
-   "t": "Avant que la responsable arrive. Après elle va me faire chier, elle va dire que je ne fous rien et tout.",
-   "_deb": 10.546,
-   "_fin": 13.441,
-   "d": "[panicked] Avant que la responsable arrive. Après elle va me faire chier, elle va dire que je ne fous rien et tout.",
-   "_hauteur_ok": true,
-   "_mots": [
-    [
-     "Avant",
-     0.0,
-     0.141
-    ],
-    [
-     "que",
-     0.161,
-     0.221
-    ],
-    [
-     "la",
-     0.241,
-     0.281
-    ],
-    [
-     "responsable",
-     0.321,
-     0.702
-    ],
-    [
-     "arrive.",
-     0.742,
-     0.983
-    ],
-    [
-     "Après",
-     1.246,
-     1.407
-    ],
-    [
-     "elle",
-     1.407,
-     1.507
-    ],
-    [
-     "va",
-     1.527,
-     1.567
-    ],
-    [
-     "me",
-     1.567,
-     1.628
-    ],
-    [
-     "faire",
-     1.648,
-     1.769
-    ],
-    [
-     "chier,",
-     1.769,
-     1.869
-    ],
-    [
-     "elle",
-     1.869,
-     1.97
-    ],
-    [
-     "va",
-     1.97,
-     2.01
-    ],
-    [
-     "dire",
-     2.07,
-     2.171
-    ],
-    [
-     "que",
-     2.191,
-     2.271
-    ],
-    [
-     "je",
-     2.292,
-     2.332
-    ],
-    [
-     "ne",
-     2.332,
-     2.372
-    ],
-    [
-     "fous",
-     2.372,
-     2.473
-    ],
-    [
-     "rien",
-     2.493,
-     2.634
-    ],
-    [
-     "et",
-     2.694,
-     2.754
-    ],
-    [
-     "tout.",
-     2.774,
-     2.895
-    ]
-   ],
-   "objet": "telecommande",
-   "_geste": "explique"
-  },
-  {
-   "p": "presentateur",
-   "t": "Ah bah tu ne peux pas lui en vouloir, c'est un peu inhabituel.",
-   "_deb": 13.803,
-   "_fin": 15.635,
-   "d": "[neutral] Ah bah tu ne peux pas lui en vouloir, c'est un peu inhabituel.",
-   "_hauteur_ok": true,
-   "_mots": [
-    [
-     "Ah",
-     0.0,
-     0.04
-    ],
-    [
-     "bah",
-     0.06,
-     0.181
-    ],
-    [
-     "tu",
-     0.221,
-     0.282
-    ],
-    [
-     "ne",
-     0.282,
-     0.322
-    ],
-    [
-     "peux",
-     0.322,
-     0.402
-    ],
-    [
-     "pas",
-     0.423,
-     0.503
-    ],
-    [
-     "lui",
-     0.523,
-     0.583
+     0.562
     ],
     [
      "en",
-     0.644,
-     0.684
+     0.603,
+     0.643
     ],
     [
-     "vouloir,",
-     0.704,
-     0.905
+     "bas",
+     0.703,
+     0.783
     ],
     [
-     "c'est",
-     0.948,
-     1.048
+     "de",
+     0.824,
+     0.864
     ],
     [
-     "un",
-     1.089,
-     1.129
+     "chez",
+     0.904,
+     1.024
     ],
     [
-     "peu",
-     1.149,
-     1.229
+     "toi",
+     1.065,
+     1.185
     ],
     [
-     "inhabituel.",
-     1.289,
-     1.832
+     "là.",
+     1.285,
+     1.346
+    ],
+    [
+     "Monte",
+     1.868,
+     2.069
+    ],
+    [
+     "dans",
+     2.109,
+     2.229
+    ],
+    [
+     "la",
+     2.27,
+     2.35
+    ],
+    [
+     "voiture,",
+     2.41,
+     2.872
+    ],
+    [
+     "on",
+     3.013,
+     3.053
+    ],
+    [
+     "part",
+     3.153,
+     3.294
+    ],
+    [
+     "au",
+     3.374,
+     3.414
+    ],
+    [
+     "Paraguay.",
+     3.515,
+     3.957
     ]
    ],
-   "objet": "journal",
-   "_action": "tenir"
+   "objet": "tablette",
+   "_action": "telephone_oreille",
+   "_geste": "telephone"
   },
   {
    "p": "invite",
-   "t": "Tu peux faire ça.",
-   "_deb": 15.976,
-   "_fin": 16.398,
-   "d": "[encouraging] Tu peux faire ça.",
-   "_hauteur_ok": true,
+   "t": "Hein, quoi.",
+   "_deb": 7.155,
+   "_fin": 7.521,
+   "d": "[shocked] Hein, quoi.",
    "_mots": [
     [
-     "Tu",
+     "Hein,",
      0.0,
-     0.06
+     0.122
     ],
     [
-     "peux",
-     0.08,
-     0.201
-    ],
-    [
-     "faire",
-     0.201,
-     0.321
-    ],
-    [
-     "ça.",
-     0.362,
-     0.422
+     "quoi.",
+     0.204,
+     0.366
     ]
    ],
-   "_geste": "pointe_d"
-  },
-  {
-   "p": "presentateur",
-   "t": "Tu veux faire ça avec moi ?",
-   "_deb": 16.9,
-   "_fin": 17.462,
-   "d": "[surprised] Tu veux faire ça avec moi ?",
-   "_hauteur_ok": true,
-   "_mots": [
-    [
-     "Tu",
-     0.0,
-     0.04
-    ],
-    [
-     "veux",
-     0.04,
-     0.12
-    ],
-    [
-     "faire",
-     0.12,
-     0.221
-    ],
-    [
-     "ça",
-     0.241,
-     0.281
-    ],
-    [
-     "avec",
-     0.321,
-     0.442
-    ],
-    [
-     "moi.",
-     0.482,
-     0.562
-    ]
-   ],
-   "objet": "livre",
-   "_action": "tenir",
-   "_geste": "gratte_tete"
+   "_action": "telephone_oreille",
+   "_geste": "telephone"
   },
   {
    "p": "invite",
-   "t": "Ah oui, si tu veux.",
-   "_deb": 18.185,
-   "_fin": 18.968,
-   "d": "[agreeing] Ah oui, si tu veux.",
-   "_hauteur_ok": true,
+   "t": "Ouais, tu viens ou pas.",
+   "_deb": 8.633,
+   "_fin": 10.63,
+   "d": "[annoyed] Ouais, tu viens ou pas.",
    "_mots": [
     [
-     "Ah",
+     "Ouais,",
      0.0,
-     0.06
-    ],
-    [
-     "oui,",
-     0.121,
-     0.221
-    ],
-    [
-     "si",
-     0.402,
-     0.462
+     1.029
     ],
     [
      "tu",
-     0.522,
-     0.603
+     1.049,
+     1.129
     ],
     [
-     "veux.",
-     0.643,
-     0.783
+     "viens",
+     1.17,
+     1.311
+    ],
+    [
+     "ou",
+     1.351,
+     1.392
+    ],
+    [
+     "pas.",
+     1.432,
+     1.997
     ]
    ],
-   "objet": "verre"
+   "objet": "verre",
+   "_action": "telephone_oreille",
+   "_geste": "telephone",
+   "_voix_corrigee": true
   },
   {
-   "p": "presentateur",
-   "t": "Mais je suis un peu surprise, je t'avoue, ok.",
-   "_deb": 19.972,
-   "_fin": 21.807,
-   "d": "[shocked] Mais je suis un peu surpris, je t'avoue, ok.",
+   "p": "invite",
+   "t": "Euh, ouais, bah laisse-moi 5 minutes, j'arrive. Ouais, allo.",
+   "_deb": 11.711,
+   "_fin": 15.2,
+   "d": "[calm] Euh, ouais, bah laisse-moi 5 minutes, j'arrive. Ouais, allo.",
    "_mots": [
     [
-     "Mais",
+     "Euh,",
+     0.0,
+     0.08
+    ],
+    [
+     "ouais,",
+     0.862,
+     0.982
+    ],
+    [
+     "bah",
+     1.203,
+     1.323
+    ],
+    [
+     "laisse-moi",
+     1.363,
+     1.669
+    ],
+    [
+     "5",
+     1.669,
+     1.949
+    ],
+    [
+     "minutes,",
+     1.985,
+     2.165
+    ],
+    [
+     "j'arrive.",
+     2.185,
+     3.128
+    ],
+    [
+     "Ouais,",
+     3.128,
+     3.228
+    ],
+    [
+     "allo.",
+     3.308,
+     3.489
+    ]
+   ],
+   "objet": "casque_moto",
+   "_action": "telephone_oreille",
+   "_geste": "telephone"
+  },
+  {
+   "p": "invite",
+   "t": "Dis-moi, j'ai mon mariage là, dans une heure. T'es chaud de venir.",
+   "_deb": 15.34,
+   "_fin": 18.749,
+   "d": "[urgent] Dis-moi, j'ai mon mariage là, dans une heure. T'es chaud de venir.",
+   "objet": "bouteille",
+   "_hauteur_ok": true,
+   "_mots": [
+    [
+     "Dis-moi,",
+     0.0,
+     1.063
+    ],
+    [
+     "j'ai",
+     1.143,
+     1.424
+    ],
+    [
+     "mon",
+     1.504,
+     1.584
+    ],
+    [
+     "mariage",
+     1.604,
+     1.945
+    ],
+    [
+     "là,",
+     2.005,
+     2.065
+    ],
+    [
+     "dans",
+     2.186,
+     2.306
+    ],
+    [
+     "une",
+     2.386,
+     2.466
+    ],
+    [
+     "heure.",
+     2.507,
+     2.687
+    ],
+    [
+     "T'es",
+     2.767,
+     2.888
+    ],
+    [
+     "chaud",
+     2.928,
+     3.088
+    ],
+    [
+     "de",
+     3.148,
+     3.208
+    ],
+    [
+     "venir.",
+     3.208,
+     3.409
+    ]
+   ],
+   "_action": "telephone_oreille",
+   "_geste": "telephone",
+   "_voix_corrigee": true
+  },
+  {
+   "p": "invite",
+   "t": "Euh, ouais, vas-y.",
+   "_deb": 19.794,
+   "_fin": 20.865,
+   "d": "[sarcastic] Euh, ouais, vas-y.",
+   "_hauteur_ok": true,
+   "_mots": [
+    [
+     "Euh,",
      0.0,
      0.101
     ],
     [
-     "je",
-     0.484,
-     0.524
+     "ouais,",
+     0.667,
+     0.828
     ],
     [
-     "suis",
-     0.524,
-     0.645
-    ],
-    [
-     "un",
-     0.645,
-     0.706
-    ],
-    [
-     "peu",
-     0.706,
-     0.786
-    ],
-    [
-     "surpris,",
-     0.827,
-     1.068
-    ],
-    [
-     "je",
-     1.089,
-     1.129
-    ],
-    [
-     "t'avoue,",
-     1.149,
-     1.673
-    ],
-    [
-     "ok.",
-     1.734,
-     1.835
+     "vas-y.",
+     0.848,
+     1.071
     ]
    ],
-   "objet": "journal",
-   "_action": "tenir"
+   "objet": "casque_moto",
+   "_action": "telephone_oreille",
+   "_geste": "telephone"
   },
   {
    "p": "invite",
-   "t": "Tu sais t'en servir.",
-   "_deb": 22.573,
-   "_fin": 23.178,
-   "d": "[confident] Tu sais t'en servir.",
+   "t": "Vas-y, à toutes, parfait. À toute. Ouais, je suis en bas de chez toi, descends.",
+   "_deb": 21.832,
+   "_fin": 25.807,
+   "d": "[hurry] Vas-y, à toute, parfait. À toute. Ouais, je suis en bas de chez toi, descends.",
    "_hauteur_ok": true,
    "_mots": [
     [
-     "Tu",
+     "Vas-y,",
+     0.0,
+     0.223
+    ],
+    [
+     "à",
+     0.324,
+     0.344
+    ],
+    [
+     "toute,",
+     0.404,
+     0.566
+    ],
+    [
+     "parfait.",
+     0.626,
+     0.889
+    ],
+    [
+     "À",
+     1.172,
+     1.192
+    ],
+    [
+     "toute.",
+     1.272,
+     1.454
+    ],
+    [
+     "Ouais,",
+     2.321,
+     2.522
+    ],
+    [
+     "je",
+     2.765,
+     2.805
+    ],
+    [
+     "suis",
+     2.805,
+     2.886
+    ],
+    [
+     "en",
+     2.906,
+     2.946
+    ],
+    [
+     "bas",
+     3.047,
+     3.128
+    ],
+    [
+     "de",
+     3.168,
+     3.209
+    ],
+    [
+     "chez",
+     3.229,
+     3.33
+    ],
+    [
+     "toi,",
+     3.39,
+     3.491
+    ],
+    [
+     "descends.",
+     3.612,
+     3.975
+    ]
+   ],
+   "objet": "casque_moto",
+   "_action": "telephone_oreille",
+   "_geste": "telephone"
+  },
+  {
+   "p": "invite",
+   "t": "Je t'ai jamais dit de venir devant chez moi.",
+   "_deb": 26.993,
+   "_fin": 27.882,
+   "d": "[accusing] Je t'ai jamais dit de venir devant chez moi.",
+   "_mots": [
+    [
+     "Je",
+     0.0,
+     0.041
+    ],
+    [
+     "t'ai",
+     0.081,
+     0.202
+    ],
+    [
+     "jamais",
+     0.263,
+     0.505
+    ],
+    [
+     "dit",
+     0.525,
+     0.626
+    ],
+    [
+     "de",
+     0.646,
+     0.687
+    ],
+    [
+     "venir",
+     0.707,
+     0.889
+    ]
+   ],
+   "objet": "casque_moto",
+   "_action": "telephone_oreille",
+   "_geste": "telephone"
+  },
+  {
+   "p": "invite",
+   "t": "Devant chez moi.",
+   "_deb": 27.922,
+   "_fin": 28.386,
+   "_hauteur_ok": true,
+   "_mots": [
+    [
+     "devant",
+     0.0,
+     0.202
+    ],
+    [
+     "chez",
+     0.242,
+     0.343
+    ],
+    [
+     "moi.",
+     0.363,
+     0.464
+    ]
+   ],
+   "_action": "telephone_oreille",
+   "_geste": "telephone"
+  },
+  {
+   "p": "invite",
+   "t": "Bah non. Mais on va faire quoi.",
+   "_deb": 29.651,
+   "_fin": 31.275,
+   "d": "[happy] Bah non. Mais on va faire quoi.",
+   "_mots": [
+    [
+     "Bah",
+     0.0,
+     0.501
+    ],
+    [
+     "non.",
+     0.501,
+     1.143
+    ],
+    [
+     "Mais",
+     1.143,
+     1.243
+    ],
+    [
+     "on",
+     1.243,
+     1.283
+    ],
+    [
+     "va",
+     1.283,
+     1.323
+    ],
+    [
+     "faire",
+     1.363,
+     1.484
+    ],
+    [
+     "quoi.",
+     1.504,
+     1.624
+    ]
+   ],
+   "objet": "casque_moto",
+   "_action": "telephone_oreille",
+   "_geste": "telephone",
+   "_voix_corrigee": true
+  },
+  {
+   "p": "invite",
+   "t": "Je sais pas.",
+   "_deb": 32.198,
+   "_fin": 33.02,
+   "_mots": [
+    [
+     "Je",
      0.0,
      0.06
     ],
     [
      "sais",
-     0.121,
-     0.221
+     0.18,
+     0.361
     ],
     [
-     "t'en",
-     0.242,
-     0.342
-    ],
-    [
-     "servir.",
-     0.383,
-     0.605
+     "pas.",
+     0.401,
+     0.822
     ]
    ],
-   "objet": "cafe"
+   "objet": "casque_moto",
+   "_action": "telephone_oreille",
+   "_geste": "telephone",
+   "_voix_corrigee": true
   },
   {
-   "p": "presentateur",
-   "t": "Ah bah oui, t'inquiète pas.",
-   "_deb": 23.46,
-   "_fin": 24.327,
-   "d": "[reassuring] Ah bah oui, t'inquiète pas.",
+   "p": "invite",
+   "t": "Vas-y j'arrive.",
+   "_deb": 34.366,
+   "_fin": 34.916,
+   "d": "[angry] Vas-y j'arrive.",
    "_hauteur_ok": true,
    "_mots": [
     [
-     "Ah",
+     "Vas-y",
+     0.0,
+     0.265
+    ],
+    [
+     "j'arrive.",
+     0.326,
+     0.55
+    ]
+   ],
+   "_action": "telephone_oreille",
+   "_geste": "telephone"
+  },
+  {
+   "p": "invite",
+   "t": "Ouais dis-moi, je vais à l'église là pour le baptême de mon fils.",
+   "_deb": 36.221,
+   "_fin": 39.154,
+   "d": "[happy] Ouais dis-moi, je vais à l'église là pour le baptême de mon fils.",
+   "_hauteur_ok": true,
+   "_mots": [
+    [
+     "Ouais",
+     0.0,
+     0.281
+    ],
+    [
+     "dis-moi,",
+     0.342,
+     0.623
+    ],
+    [
+     "je",
+     1.185,
+     1.245
+    ],
+    [
+     "vais",
+     1.306,
+     1.406
+    ],
+    [
+     "à",
+     1.406,
+     1.446
+    ],
+    [
+     "l'église",
+     1.466,
+     1.788
+    ],
+    [
+     "là",
+     1.808,
+     1.948
+    ],
+    [
+     "pour",
+     1.948,
+     2.049
+    ],
+    [
+     "le",
+     2.089,
+     2.129
+    ],
+    [
+     "baptême",
+     2.169,
+     2.451
+    ],
+    [
+     "de",
+     2.491,
+     2.531
+    ],
+    [
+     "mon",
+     2.591,
+     2.671
+    ],
+    [
+     "fils.",
+     2.732,
+     2.933
+    ]
+   ],
+   "objet": "casque_moto",
+   "_action": "telephone_oreille",
+   "_geste": "telephone"
+  },
+  {
+   "p": "invite",
+   "t": "T'es chaud d'être le pas.",
+   "_deb": 39.495,
+   "_fin": 40.258,
+   "_hauteur_ok": true,
+   "_mots": [
+    [
+     "T'es",
+     0.0,
+     0.08
+    ],
+    [
+     "chaud",
+     0.141,
+     0.261
+    ],
+    [
+     "d'être",
+     0.281,
+     0.422
+    ],
+    [
+     "le",
+     0.482,
+     0.522
+    ],
+    [
+     "pas.",
+     0.562,
+     0.763
+    ]
+   ],
+   "_action": "telephone_oreille",
+   "_geste": "telephone",
+   "_voix_corrigee": true
+  },
+  {
+   "p": "invite",
+   "t": "Attends mais t'es",
+   "_deb": 41.503,
+   "_fin": 41.927,
+   "_hauteur_ok": true,
+   "_mots": [
+    [
+     "Attends",
+     0.0,
+     0.202
+    ],
+    [
+     "mais",
+     0.222,
+     0.323
+    ],
+    [
+     "t'es",
+     0.343,
+     0.424
+    ]
+   ],
+   "_action": "telephone_oreille",
+   "_geste": "telephone"
+  },
+  {
+   "p": "invite",
+   "t": "Un gosse.",
+   "_deb": 41.968,
+   "_fin": 42.311,
+   "_hauteur_ok": true,
+   "_mots": [
+    [
+     "un",
      0.0,
      0.06
     ],
     [
-     "bah",
+     "gosse.",
      0.101,
-     0.161
-    ],
-    [
-     "oui,",
-     0.202,
-     0.282
-    ],
-    [
-     "t'inquiète",
-     0.484,
-     0.726
-    ],
-    [
-     "pas.",
-     0.746,
-     0.867
+     0.343
     ]
    ],
-   "objet": "colis",
-   "_action": "tenir",
-   "_geste": "pouce"
-  },
-  {
-   "p": "presentateur",
-   "t": "J'ai eu que des retours positifs là-dessus, t'as pas à t'en faire.",
-   "_deb": 25.411,
-   "_fin": 27.695,
-   "d": "[positive] J'ai eu que des retours positifs là-dessus, t'as pas à t'en faire.",
-   "_voix_corrigee": true,
-   "_hauteur_ok": true,
-   "_mots": [
-    [
-     "J'ai",
-     0.0,
-     0.08
-    ],
-    [
-     "eu",
-     0.1,
-     0.14
-    ],
-    [
-     "que",
-     0.18,
-     0.26
-    ],
-    [
-     "des",
-     0.3,
-     0.38
-    ],
-    [
-     "retours",
-     0.441,
-     0.561
-    ],
-    [
-     "positifs",
-     0.561,
-     0.801
-    ],
-    [
-     "là-dessus,",
-     1.182,
-     1.503
-    ],
-    [
-     "t'as",
-     1.663,
-     1.763
-    ],
-    [
-     "pas",
-     1.783,
-     1.903
-    ],
-    [
-     "à",
-     1.903,
-     1.944
-    ],
-    [
-     "t'en",
-     1.944,
-     2.064
-    ],
-    [
-     "faire.",
-     2.104,
-     2.284
-    ]
-   ],
-   "objet": "colis",
-   "_action": "tenir"
-  },
-  {
-   "p": "presentateur",
-   "t": "Y'a du monde qui passe là, tu es sûr que tu veux faire ça là ?",
-   "_deb": 28.216,
-   "_fin": 29.988,
-   "d": "[concerned] Y'a du monde qui passe là, tu es sûr que tu veux faire ça là ?",
-   "objet": "bouteille",
-   "_mots": [
-    [
-     "Y'a",
-     0.0,
-     0.08
-    ],
-    [
-     "du",
-     0.161,
-     0.201
-    ],
-    [
-     "monde",
-     0.241,
-     0.401
-    ],
-    [
-     "qui",
-     0.421,
-     0.501
-    ],
-    [
-     "passe",
-     0.561,
-     0.762
-    ],
-    [
-     "là,",
-     0.822,
-     0.882
-    ],
-    [
-     "tu",
-     1.002,
-     1.062
-    ],
-    [
-     "es",
-     1.102,
-     1.143
-    ],
-    [
-     "sûr",
-     1.183,
-     1.243
-    ],
-    [
-     "que",
-     1.243,
-     1.303
-    ],
-    [
-     "tu",
-     1.303,
-     1.343
-    ],
-    [
-     "veux",
-     1.363,
-     1.443
-    ],
-    [
-     "faire",
-     1.443,
-     1.563
-    ],
-    [
-     "ça",
-     1.609,
-     1.65
-    ],
-    [
-     "là",
-     1.711,
-     1.772
-    ]
-   ],
-   "_action": "tenir",
-   "_geste": "explique"
+   "objet": "casque_moto",
+   "_action": "telephone_oreille",
+   "_geste": "telephone"
   },
   {
    "p": "invite",
-   "t": "Tout le monde fait ça ici, ça sert à ça les pauses.",
-   "_deb": 31.042,
-   "_fin": 32.637,
-   "d": "[normal] Tout le monde fait ça ici, ça sert à ça les pauses.",
+   "t": "Tu veux ou pas.",
+   "_deb": 44.124,
+   "_fin": 44.671,
    "_hauteur_ok": true,
    "_mots": [
     [
-     "Tout",
+     "Tu",
      0.0,
      0.081
     ],
     [
-     "le",
-     0.101,
-     0.162
-    ],
-    [
-     "monde",
-     0.162,
-     0.323
-    ],
-    [
-     "fait",
-     0.323,
-     0.424
-    ],
-    [
-     "ça",
-     0.465,
-     0.505
-    ],
-    [
-     "ici,",
-     0.606,
-     0.727
-    ],
-    [
-     "ça",
-     0.808,
-     0.848
-    ],
-    [
-     "sert",
-     0.929,
-     1.05
-    ],
-    [
-     "à",
-     1.05,
-     1.07
-    ],
-    [
-     "ça",
-     1.131,
-     1.232
-    ],
-    [
-     "les",
-     1.272,
-     1.353
-    ],
-    [
-     "pauses.",
-     1.393,
-     1.595
-    ]
-   ],
-   "objet": "sac_main"
-  },
-  {
-   "p": "presentateur",
-   "t": "Ok, c'est mon deuxième jour, je découvre un peu, je t'avoue.",
-   "_deb": 33.462,
-   "_fin": 35.238,
-   "d": "[hesitant] Ok, c'est mon deuxième jour, je découvre un peu, je t'avoue.",
-   "_hauteur_ok": true,
-   "_mots": [
-    [
-     "Ok,",
-     0.0,
-     0.101
-    ],
-    [
-     "c'est",
-     0.262,
-     0.363
-    ],
-    [
-     "mon",
-     0.383,
-     0.444
-    ],
-    [
-     "deuxième",
-     0.464,
-     0.706
-    ],
-    [
-     "jour,",
-     0.706,
-     0.827
-    ],
-    [
-     "je",
-     0.888,
-     0.989
-    ],
-    [
-     "découvre",
-     0.989,
-     1.211
-    ],
-    [
-     "un",
-     1.271,
-     1.311
-    ],
-    [
-     "peu,",
-     1.332,
-     1.412
-    ],
-    [
-     "je",
-     1.473,
-     1.533
-    ],
-    [
-     "t'avoue.",
-     1.554,
-     1.776
-    ]
-   ],
-   "objet": "colis",
-   "_action": "tenir"
-  },
-  {
-   "p": "presentateur",
-   "t": "Mais je croyais que t'avais un mec.",
-   "_deb": 36.063,
-   "_fin": 36.855,
-   "d": "[curious] Mais je croyais que t'avais un mec.",
-   "_voix_corrigee": true,
-   "_hauteur_ok": true,
-   "_mots": [
-    [
-     "Mais",
-     0.0,
-     0.102
-    ],
-    [
-     "je",
-     0.102,
-     0.163
-    ],
-    [
-     "croyais",
-     0.163,
-     0.305
-    ],
-    [
-     "que",
-     0.305,
-     0.386
-    ],
-    [
-     "t'avais",
-     0.386,
-     0.569
-    ],
-    [
-     "un",
-     0.569,
-     0.63
-    ],
-    [
-     "mec.",
-     0.67,
-     0.792
-    ]
-   ],
-   "objet": "croissant",
-   "_action": "tenir"
-  },
-  {
-   "p": "invite",
-   "t": "Ah bah lui, il est accro, il est comme moi.",
-   "_deb": 37.841,
-   "_fin": 39.028,
-   "d": "[excited] Ah bah lui, il est accro, il est comme moi.",
-   "_voix_corrigee": true,
-   "_hauteur_ok": true,
-   "_mots": [
-    [
-     "Ah",
-     0.0,
-     0.06
-    ],
-    [
-     "bah",
-     0.101,
-     0.181
-    ],
-    [
-     "lui,",
-     0.221,
-     0.302
-    ],
-    [
-     "il",
-     0.322,
-     0.382
-    ],
-    [
-     "est",
-     0.402,
-     0.463
-    ],
-    [
-     "accro,",
-     0.503,
-     0.664
-    ],
-    [
-     "il",
-     0.784,
-     0.825
-    ],
-    [
-     "est",
-     0.845,
-     0.905
-    ],
-    [
-     "comme",
-     0.925,
-     1.066
-    ],
-    [
-     "moi.",
-     1.106,
-     1.187
-    ]
-   ],
-   "objet": "telecommande"
-  },
-  {
-   "p": "invite",
-   "t": "Ah bah depuis qu'on a commencé au Maroc, on n'arrête plus, cinq fois par jour !",
-   "_deb": 39.349,
-   "_fin": 42.53,
-   "d": "[enthusiastic] Ah bah depuis qu'on a commencé au Maroc, on n'arrête plus, cinq fois par jour !",
-   "_hauteur_ok": true,
-   "_mots": [
-    [
-     "Ah",
-     0.0,
-     0.061
-    ],
-    [
-     "bah",
-     0.101,
-     0.221
-    ],
-    [
-     "depuis",
-     0.221,
-     0.362
-    ],
-    [
-     "qu'on",
-     0.362,
-     0.523
-    ],
-    [
-     "a",
-     0.523,
-     0.563
-    ],
-    [
-     "commencé",
-     0.563,
-     0.845
-    ],
-    [
-     "au",
-     0.905,
-     0.945
-    ],
-    [
-     "Maroc",
-     0.966,
-     1.167
-    ],
-    [
-     "on",
-     1.227,
-     1.267
-    ],
-    [
-     "n'arrête",
-     1.287,
-     1.509
-    ],
-    [
-     "plus",
-     1.529,
-     1.669
-    ],
-    [
-     "5",
-     2.561,
-     2.776
-    ],
-    [
-     "fois",
-     2.776,
-     2.897
-    ],
-    [
-     "par",
-     2.938,
-     3.019
-    ],
-    [
-     "jour",
-     3.059,
-     3.181
-    ]
-   ],
-   "objet": "cafe",
-   "_geste": "explique"
-  },
-  {
-   "p": "invite",
-   "t": "Wow !",
-   "_deb": 43.035,
-   "_fin": 43.48,
-   "d": "[impressed] Wow !",
-   "_voix_corrigee": true,
-   "_hauteur_ok": true,
-   "_mots": [
-    [
-     "Wow",
-     0.0,
-     0.445
-    ]
-   ],
-   "objet": "livre",
-   "_action": "tenir",
-   "_signe": "etoiles"
-  },
-  {
-   "p": "presentateur",
-   "t": "Juste, par contre, j'ai pas de compote.",
-   "_deb": 44.482,
-   "_fin": 45.797,
-   "d": "[embarrassed] Juste, par contre, j'ai pas de compote.",
-   "_voix_corrigee": true,
-   "_mots": [
-    [
-     "Juste,",
-     0.0,
+     "veux",
+     0.122,
      0.223
     ],
     [
-     "par",
-     0.324,
-     0.405
-    ],
-    [
-     "contre,",
-     0.445,
-     0.607
-    ],
-    [
-     "j'ai",
-     0.627,
-     0.728
-    ],
-    [
-     "pas",
-     0.769,
-     0.85
-    ],
-    [
-     "de",
-     0.89,
-     0.931
-    ],
-    [
-     "compote.",
-     0.971,
-     1.315
-    ]
-   ],
-   "objet": "colis",
-   "_action": "tenir",
-   "_geste": "gratte_tete"
-  },
-  {
-   "p": "presentateur",
-   "t": "Quoi ?",
-   "_deb": 46.76,
-   "_fin": 46.901,
-   "d": "[shocked] Quoi ?",
-   "_mots": [
-    [
-     "Quoi.",
-     0.0,
-     0.141
-    ]
-   ],
-   "objet": "cafe"
-  },
-  {
-   "p": "presentateur",
-   "t": "J'ai",
-   "_deb": 48.81,
-   "_fin": 49.21,
-   "_voix_corrigee": true,
-   "_hauteur_ok": true,
-   "_mots": [
-    [
-     "J'ai",
-     0.0,
-     0.4
-    ]
-   ],
-   "objet": "colis",
-   "_action": "tenir"
-  },
-  {
-   "p": "presentateur",
-   "t": "Pas de compote. J'ai pas de compote.",
-   "_deb": 50.187,
-   "_fin": 51.37,
-   "d": "[angry] Pas de compote. J'ai pas de compote.",
-   "_hauteur_ok": true,
-   "_mots": [
-    [
-     "pas",
-     0.0,
-     0.08
-    ],
-    [
-     "de",
-     0.08,
-     0.141
-    ],
-    [
-     "compote.",
-     0.141,
-     0.421
-    ],
-    [
-     "J'ai",
-     0.662,
-     0.802
-    ],
-    [
-     "pas",
-     0.802,
-     0.882
-    ],
-    [
-     "de",
-     0.882,
-     0.942
-    ],
-    [
-     "compote.",
-     0.942,
-     1.183
-    ]
-   ],
-   "objet": "parapluie",
-   "_action": "tenir"
-  },
-  {
-   "p": "presentateur",
-   "t": "Je prends toujours remonté avec ma compote en fait.",
-   "_deb": 51.61,
-   "_fin": 53.834,
-   "d": "[happy] Je prends toujours remonté avec ma compote en fait.",
-   "_voix_corrigee": true,
-   "_hauteur_ok": true,
-   "_mots": [
-    [
-     "Je",
-     0.0,
-     0.621
-    ],
-    [
-     "prends",
-     0.641,
-     0.782
-    ],
-    [
-     "toujours",
-     0.822,
-     1.122
-    ],
-    [
-     "remonté",
-     1.122,
-     1.363
-    ],
-    [
-     "avec",
-     1.423,
-     1.563
-    ],
-    [
-     "ma",
-     1.563,
-     1.643
-    ],
-    [
-     "compote",
-     1.663,
-     1.964
-    ],
-    [
-     "en",
-     2.024,
-     2.084
-    ],
-    [
-     "fait.",
-     2.104,
-     2.224
-    ]
-   ],
-   "objet": "livre",
-   "_action": "tenir"
-  },
-  {
-   "p": "presentateur",
-   "t": "Et là j'ai pas. C'est dégueulasse",
-   "_deb": 54.235,
-   "_fin": 56.64,
-   "objet": "cafe",
-   "d": "[happy] Et là j'ai pas. C'est dégueulasse",
-   "_hauteur_ok": true,
-   "_mots": [
-    [
-     "Et",
-     0.0,
-     0.06
-    ],
-    [
-     "là",
-     0.722,
-     0.802
-    ],
-    [
-     "j'ai",
-     0.862,
-     0.942
+     "ou",
+     0.264,
+     0.304
     ],
     [
      "pas.",
-     0.982,
-     1.082
-    ],
-    [
-     "C'est",
-     1.283,
-     1.383
-    ],
-    [
-     "dégueulasse",
-     1.383,
-     2.405
+     0.365,
+     0.547
     ]
    ],
-   "_action": "tenir",
-   "_signe": "goutte"
+   "objet": "casque_moto",
+   "_action": "telephone_oreille",
+   "_geste": "telephone"
   },
   {
    "p": "invite",
-   "t": "de la compote avec du thé qui fait ça",
-   "_deb": 59.102,
-   "_fin": 61.568,
-   "d": "[surprised] de la compote avec du thé qui fait ça",
-   "chute": true,
-   "_voix_corrigee": true,
+   "t": "Bah ouais vas-y j'arrive,",
+   "_deb": 45.803,
+   "_fin": 46.653,
    "_hauteur_ok": true,
    "_mots": [
     [
-     "de",
+     "Bah",
      0.0,
-     0.041
+     0.081
     ],
     [
-     "la",
-     0.081,
-     0.142
+     "ouais",
+     0.162,
+     0.324
     ],
     [
-     "compote",
-     0.263,
-     0.668
+     "vas-y",
+     0.344,
+     0.506
     ],
     [
-     "avec",
-     0.668,
-     0.809
-    ],
-    [
-     "du",
-     0.87,
-     0.951
-    ],
-    [
-     "thé",
-     1.113,
-     1.214
-    ],
-    [
-     "qui",
-     2.041,
-     2.122
-    ],
-    [
-     "fait",
-     2.203,
-     2.344
-    ],
-    [
-     "ça",
-     2.385,
-     2.466
+     "j'arrive,",
+     0.587,
+     0.85
     ]
    ],
-   "objet": "telecommande",
-   "_geste": "mains_hanches"
+   "objet": "casque_moto",
+   "_action": "telephone_oreille",
+   "_geste": "telephone"
+  },
+  {
+   "p": "invite",
+   "t": "c'est bon. Ok",
+   "_deb": 46.875,
+   "_fin": 48.092,
+   "chute": true,
+   "_mots": [
+    [
+     "c'est",
+     0.0,
+     0.121
+    ],
+    [
+     "bon.",
+     0.142,
+     0.243
+    ],
+    [
+     "Ok",
+     1.094,
+     1.217
+    ]
+   ]
   }
  ],
  "bandeau": [],
  "gag": null,
- "legende": "Quand la pause thé devient une négociation tendue entre collègues.",
+ "legende": "Deux amis tentent de s'organiser pour un événement inattendu, entre confusion et improvisation.",
  "hashtags": [
   "petitsdramas",
-  "pausetendue",
-  "theoucafe",
-  "bureauhumour",
-  "colleguesdrames",
-  "pauseexpress",
-  "thestressant"
+  "plansimprovises",
+  "amischaotiques",
+  "roadtripoumariage",
+  "povorganisation",
+  "confusionassuree",
+  "humourquotidien"
  ],
  "sources": [
-  "https://www.tiktok.com/@jawedyoussef/video/7651664836488727840"
+  "https://www.tiktok.com/@yan_animation0/video/7695388361023966497"
  ],
  "decoupage": [
   {
@@ -1513,868 +887,792 @@
     16,
     17,
     18,
-    19,
-    20,
-    21,
-    22,
-    23,
-    24,
-    25,
-    26,
-    27,
-    28
+    19
    ],
    "lieu": "",
    "son": "",
    "duree": 0.0,
-   "decor": "modern office kitchen with blue tiled walls and coffee machine with coffee machine on counter, colorful mugs on shelf, tea box on counter",
-   "titre": "Stress Break"
+   "decor": "small dark bedroom with wooden headboard and pillow on bed with bottle of water on nightstand, smartphone in hand",
+   "titre": "Scène 2 : Les malentendus"
   }
  ],
- "commentaire": "Team thé avec compote ou team thé pur ? 🍵",
+ "commentaire": "Team Paraguay ou team mariage ? 😅",
  "studio": {
-  "moment": "jour",
+  "moment": "nuit",
   "lieux": [
-   "cuisine"
+   "chambre"
   ],
   "costumes": {
-   "invite": {
-    "haut": "blouse",
-    "c_haut": "rose",
-    "motif": "uni",
-    "bas": "legging",
-    "chaussures": "baskets",
-    "details": [
-     "bracelets",
-     "long_cheveux"
-    ],
-    "chapeau": null,
-    "cheveux": "long",
-    "c_cheveux": "brun"
-   },
    "presentateur": {
     "haut": "tshirt",
-    "c_haut": "noir",
+    "c_haut": "bleu",
     "motif": "uni",
     "bas": "pantalon",
-    "chaussures": "ville",
+    "chaussures": "baskets",
     "details": [
-     "barbe_courte"
+     "barbe_courte",
+     "bracelets"
     ],
     "chapeau": null,
     "cheveux": "court",
     "c_cheveux": "brun"
+   },
+   "invite": {
+    "haut": "pull",
+    "c_haut": "vert",
+    "motif": "carreaux",
+    "bas": "short",
+    "chaussures": "baskets",
+    "details": [
+     "boucles_oreilles",
+     "sac_bandouliere"
+    ],
+    "chapeau": null,
+    "cheveux": "boucles",
+    "c_cheveux": "roux"
+   },
+   "envoyee": {
+    "haut": "chemise",
+    "c_haut": "rouge",
+    "motif": "uni",
+    "bas": "jeans",
+    "chaussures": "ville",
+    "details": [
+     "montre",
+     "lunettes_soleil"
+    ],
+    "chapeau": null,
+    "cheveux": "long",
+    "c_cheveux": "noir"
    }
   },
   "metiers": {},
   "personnages": {
-   "invite": {
-    "genre": "f",
-    "age": 35,
-    "taille": 1.0,
-    "corpulence": 0.32,
-    "cheveux": "long",
-    "barbe": "aucune",
-    "espece": null
-   },
    "presentateur": {
-    "genre": "m",
-    "age": 30,
+    "genre": "h",
+    "age": 25,
     "taille": 1.0,
     "corpulence": 0.12,
     "cheveux": "court",
-    "barbe": "trois_jours",
-    "espece": null
+    "barbe": "aucune"
+   },
+   "invite": {
+    "genre": "f",
+    "age": 25,
+    "taille": 1.0,
+    "corpulence": 0.12,
+    "cheveux": "court",
+    "barbe": "aucune"
+   },
+   "envoyee": {
+    "genre": "h",
+    "age": 25,
+    "taille": 1.0,
+    "corpulence": 0.12,
+    "cheveux": "tresses",
+    "barbe": "aucune"
    }
   },
   "gags": [
-   "Compote : Le seul ingrédient qui peut gâcher ton thé.",
-   "Thé sans compote : Un crime contre l'humanité.",
-   "Pause thé : Quand le café devient trop sérieux."
+   "Affiche 'Paraguay' avec un gribouillis 'Annulé'",
+   "Bouteille de jus avec l'étiquette 'Jus de Baptême'",
+   "Affiche 'Parrain' avec un autocollant 'Recherche désespérément'"
   ],
   "cadence": "rapide",
   "ambiances": [
-   "vapeur"
+   "neon"
   ],
   "plans": [
    {
     "replique": 0,
     "plan": "serre",
     "mouvement": "fixe",
-    "geste": "mains_hanches",
-    "reaction": "aucune"
-   },
-   {
-    "replique": 1,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "facepalm",
+    "geste": "telephone",
     "reaction": "regard_camera"
    },
    {
+    "replique": 1,
+    "plan": "moyen",
+    "mouvement": "avance",
+    "geste": "bras_ouverts",
+    "reaction": "joie"
+   },
+   {
     "replique": 2,
-    "plan": "serre",
-    "mouvement": "epaule",
-    "geste": "gratte_tete",
+    "plan": "tres_serre",
+    "mouvement": "fixe",
+    "geste": "pointe_g",
     "reaction": "choc"
    },
    {
     "replique": 3,
     "plan": "serre",
     "mouvement": "fixe",
-    "geste": "pointe_d",
-    "reaction": "sceptique"
+    "geste": "poing",
+    "reaction": "colere"
    },
    {
     "replique": 4,
-    "plan": "serre",
-    "mouvement": "avance",
-    "geste": "supplie",
-    "reaction": "aucune"
+    "plan": "moyen",
+    "mouvement": "fixe",
+    "geste": "gratte_tete",
+    "reaction": "reflechit"
    },
    {
     "replique": 5,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "pointe_g",
-    "reaction": "choc"
+    "plan": "large",
+    "mouvement": "recul",
+    "geste": "mains_hanches",
+    "reaction": "panique"
    },
    {
     "replique": 6,
-    "plan": "moyen",
-    "mouvement": "travelling",
-    "geste": "bras_ouverts",
-    "reaction": "regard_camera"
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "pointe_d",
+    "reaction": "sceptique"
    },
    {
     "replique": 7,
     "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "mains_hanches",
-    "reaction": "sceptique"
+    "mouvement": "zoom_choc",
+    "geste": "haussement",
+    "reaction": "gene"
    },
    {
     "replique": 8,
-    "plan": "serre",
+    "plan": "tres_serre",
     "mouvement": "fixe",
-    "geste": "pouce",
-    "reaction": "aucune"
+    "geste": "accusateur",
+    "reaction": "colere"
    },
    {
     "replique": 9,
-    "plan": "serre",
+    "plan": "moyen",
     "mouvement": "fixe",
-    "geste": "pointe_d",
-    "reaction": "choc"
+    "geste": "telephone",
+    "reaction": "confused"
    },
    {
     "replique": 10,
     "plan": "serre",
     "mouvement": "fixe",
-    "geste": "bras_ouverts",
-    "reaction": "joie"
+    "geste": "gratte_tete",
+    "reaction": "reflechit"
    },
    {
     "replique": 11,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "gratte_tete",
-    "reaction": "sceptique"
-   },
-   {
-    "replique": 12,
-    "plan": "serre",
-    "mouvement": "epaule",
-    "geste": "pouce",
-    "reaction": "aucune"
+    "plan": "large",
+    "mouvement": "travelling",
+    "geste": "bras_ouverts",
+    "reaction": "choc"
    },
    {
     "replique": 13,
     "plan": "serre",
     "mouvement": "fixe",
-    "geste": "mains_hanches",
-    "reaction": "regard_camera"
+    "geste": "serieux",
+    "reaction": "neutre"
    },
    {
     "replique": 14,
     "plan": "serre",
     "mouvement": "fixe",
     "geste": "pointe_g",
-    "reaction": "choc"
+    "reaction": "sarcastic"
    },
    {
     "replique": 15,
-    "plan": "serre",
+    "plan": "tres_serre",
     "mouvement": "fixe",
-    "geste": "bras_ouverts",
-    "reaction": "aucune"
+    "geste": "choc",
+    "reaction": "choc"
    },
    {
     "replique": 16,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "pointe_d",
-    "reaction": "sceptique"
-   },
-   {
-    "replique": 17,
-    "plan": "large",
-    "mouvement": "recul",
-    "geste": "mains_hanches",
-    "reaction": "aucune"
-   },
-   {
-    "replique": 18,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "pointe_g",
-    "reaction": "choc"
-   },
-   {
-    "replique": 19,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "bras_ouverts",
-    "reaction": "aucune"
-   },
-   {
-    "replique": 20,
-    "plan": "serre",
+    "plan": "moyen",
     "mouvement": "avance",
-    "geste": "enthousiaste",
+    "geste": "bras_ouverts",
     "reaction": "joie"
    },
    {
-    "replique": 21,
+    "replique": 17,
     "plan": "serre",
     "mouvement": "fixe",
     "geste": "pointe_d",
-    "reaction": "choc"
+    "reaction": "agreeing"
    },
    {
-    "replique": 22,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "facepalm",
-    "reaction": "sceptique"
-   },
-   {
-    "replique": 23,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "pointe_g",
-    "reaction": "choc"
-   },
-   {
-    "replique": 24,
-    "plan": "serre",
-    "mouvement": "fixe",
+    "replique": 18,
+    "plan": "large",
+    "mouvement": "recul",
     "geste": "bras_ouverts",
-    "reaction": "aucune"
-   },
-   {
-    "replique": 25,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "facepalm",
-    "reaction": "sceptique"
-   },
-   {
-    "replique": 26,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "pointe_d",
-    "reaction": "choc"
-   },
-   {
-    "replique": 27,
-    "plan": "serre",
-    "mouvement": "fixe",
-    "geste": "mains_hanches",
-    "reaction": "disgusted"
+    "reaction": "neutre"
    }
   ],
   "objets": [
    {
-    "replique": 0,
-    "objet": "verre"
+    "replique": 1,
+    "objet": "telephone"
    },
    {
-    "replique": 15,
+    "replique": 5,
     "objet": "bouteille"
    },
    {
-    "replique": 22,
-    "objet": "compote"
+    "replique": 13,
+    "objet": "robe_de_baptême"
    },
    {
-    "replique": 27,
-    "objet": "cafe"
+    "replique": 14,
+    "objet": "telephone"
+   }
+  ],
+  "figurants": [
+   {
+    "avec": "presentateur",
+    "description": "ami muet en arrière-plan",
+    "genre": "h",
+    "age": 28,
+    "geste": "rit",
+    "haut": "tshirt",
+    "c_haut": "noir",
+    "bas": "jeans",
+    "chapeau": null,
+    "details": []
    }
   ],
   "decors_vus": {
-   "invite": "kitchen with blue tiles, countertop with fruits (red apples, yellow lemons), sink, tea kettle, and shelves with colorful cups",
-   "presentateur": "kitchen with wooden shelves, countertop with compote jars (strawberry and apple), fruits, and a microwave"
+   "presentateur": "chambre avec un lit défait, une table de chevet en bois clair, une affiche punaisée au mur avec un dessin du Paraguay, une bouteille d'eau vide et un téléphone portable sur la table de chevet. Lumière douce et tamisée.",
+   "invite": "salons avec un canapé beige, une table basse en verre, une bouteille de jus de fruit, une affiche 'Mariage' et une autre 'Baptême' accrochées au mur. Lumière ambiante et chaleureuse.",
+   "envoyee": "salle_de_bain avec un miroir, une robe de baptême en carton posée sur le lavabo, une bouteille de parfum et un téléphone portable. Lumière vive et reflétée."
   },
   "tenues_fiche": {
-   "invite": {
+   "envoyee": {
     "tenue": "normale",
+    "haut": "robe",
+    "c_haut": "beige",
+    "c_cheveux": "noir",
+    "lunettes": false,
+    "etats": []
+   },
+   "invite": {
+    "tenue": "pyjama",
     "haut": "debardeur",
-    "c_haut": "noir",
+    "c_haut": "jaune",
     "c_cheveux": "noir",
     "lunettes": false,
     "etats": []
    },
    "presentateur": {
-    "tenue": "normale",
-    "haut": "chemise",
-    "c_haut": "noir",
-    "c_cheveux": "brun",
+    "tenue": "pyjama",
+    "haut": "debardeur",
+    "c_haut": "blanc",
+    "c_cheveux": "noir",
     "lunettes": false,
     "etats": []
    }
   },
   "jeu": [
    {
-    "replique": 1,
-    "emotion": "sceptique",
-    "intensite": 1,
-    "geste": ""
-   },
-   {
     "replique": 2,
-    "emotion": "reflechit",
+    "emotion": "fatigue",
     "intensite": 1,
-    "geste": "gratte_tete"
+    "geste": "telephone"
    },
    {
     "replique": 3,
-    "emotion": "sceptique",
+    "emotion": "fatigue",
     "intensite": 1,
-    "geste": ""
+    "geste": "telephone"
    },
    {
-    "replique": 5,
-    "emotion": "neutre",
+    "replique": 4,
+    "emotion": "fatigue",
     "intensite": 1,
-    "geste": ""
+    "geste": "telephone"
    },
    {
     "replique": 6,
-    "emotion": "colere",
-    "intensite": 2,
-    "geste": "explique"
+    "emotion": "neutre",
+    "intensite": 1,
+    "geste": "telephone"
    },
    {
     "replique": 7,
     "emotion": "neutre",
     "intensite": 1,
-    "geste": ""
+    "geste": "telephone"
    },
    {
     "replique": 8,
-    "emotion": "gene",
+    "emotion": "colere",
     "intensite": 2,
-    "geste": "pointe_d"
+    "geste": "telephone"
    },
    {
     "replique": 9,
-    "emotion": "choc",
+    "emotion": "colere",
     "intensite": 2,
-    "geste": "gratte_tete"
+    "geste": "telephone"
+   },
+   {
+    "replique": 10,
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "telephone"
    },
    {
     "replique": 11,
-    "emotion": "sceptique",
-    "intensite": 2,
-    "geste": ""
+    "emotion": "neutre",
+    "intensite": 1,
+    "geste": "telephone"
    },
    {
     "replique": 12,
     "emotion": "neutre",
     "intensite": 1,
-    "geste": ""
+    "geste": "telephone"
    },
    {
     "replique": 13,
-    "emotion": "fier",
-    "intensite": 2,
-    "geste": "pouce"
+    "emotion": "neutre",
+    "intensite": 1,
+    "geste": "telephone"
    },
    {
     "replique": 14,
-    "emotion": "fier",
-    "intensite": 2,
-    "geste": ""
+    "emotion": "neutre",
+    "intensite": 1,
+    "geste": "telephone"
    },
    {
     "replique": 15,
-    "emotion": "sceptique",
+    "emotion": "choc",
     "intensite": 2,
-    "geste": "explique"
+    "geste": "telephone"
    },
    {
     "replique": 16,
     "emotion": "neutre",
     "intensite": 1,
-    "geste": ""
+    "geste": "telephone"
    },
    {
     "replique": 17,
     "emotion": "neutre",
     "intensite": 1,
-    "geste": ""
+    "geste": "telephone"
    },
    {
     "replique": 18,
-    "emotion": "sceptique",
-    "intensite": 2,
-    "geste": ""
+    "emotion": "neutre",
+    "intensite": 1,
+    "geste": "telephone"
    },
    {
     "replique": 19,
-    "emotion": "joie",
-    "intensite": 2,
-    "geste": ""
-   },
-   {
-    "replique": 20,
-    "emotion": "joie",
-    "intensite": 3,
-    "geste": "explique"
-   },
-   {
-    "replique": 21,
-    "emotion": "choc",
-    "intensite": 2,
-    "geste": ""
-   },
-   {
-    "replique": 22,
-    "emotion": "gene",
-    "intensite": 2,
-    "geste": "gratte_tete"
-   },
-   {
-    "replique": 23,
-    "emotion": "choc",
-    "intensite": 2,
-    "geste": ""
-   },
-   {
-    "replique": 24,
-    "emotion": "gene",
-    "intensite": 1,
-    "geste": ""
-   },
-   {
-    "replique": 25,
-    "emotion": "gene",
-    "intensite": 2,
-    "geste": ""
-   },
-   {
-    "replique": 26,
     "emotion": "neutre",
     "intensite": 1,
     "geste": ""
    },
    {
-    "replique": 27,
-    "emotion": "gene",
-    "intensite": 2,
-    "geste": ""
+    "replique": 0,
+    "emotion": "confusion",
+    "geste": "regarde son téléphone",
+    "intensite": 0.5
    },
    {
-    "replique": 28,
-    "emotion": "choc",
-    "intensite": 3,
-    "geste": "mains_hanches"
+    "replique": 1,
+    "emotion": "enthousiasme",
+    "geste": "parle au téléphone",
+    "intensite": 0.7
+   },
+   {
+    "replique": 5,
+    "emotion": "détermination",
+    "geste": "parle au téléphone",
+    "intensite": 0.6
    }
   ],
-  "reactions": [
-   {
-    "n": 0,
-    "qui": "presentateur",
-    "mot": "stressée",
-    "reaction": "sceptique"
-   },
-   {
-    "n": 8,
-    "qui": "presentateur",
-    "mot": "ça",
-    "reaction": "choque"
-   },
-   {
-    "n": 22,
-    "qui": "invite",
-    "mot": "compote",
-    "reaction": "choque"
-   },
-   {
-    "n": 27,
-    "qui": "invite",
-    "mot": "dégueulasse",
-    "reaction": "yeux_au_ciel"
-   }
-  ],
+  "reactions": [],
   "animations": [],
   "panneaux": [],
   "ecran_tel": "",
-  "lumiere_ambiance": "bright indoor office lighting",
+  "lumiere_ambiance": "dim warm bedroom night light",
   "interieur": true,
   "decor_fiche": {
-   "lieu": "cuisine",
-   "lieu_precis": "modern office kitchen with blue tiled walls and coffee machine",
+   "lieu": "chambre",
+   "lieu_precis": "small dark bedroom with wooden headboard and pillow on bed",
    "details": [
-    "coffee machine on counter",
-    "colorful mugs on shelf",
-    "tea box on counter"
+    "bottle of water on nightstand",
+    "smartphone in hand"
    ],
-   "niveau": "moyen",
-   "ambiance": "gene",
-   "occasion": "",
+   "niveau": "modeste",
+   "ambiance": "",
+   "occasion": "mariage",
    "meteo": "",
-   "moment": "jour",
+   "moment": "nuit",
    "interieur": true
   }
  },
  "doublage": {
-  "piste": "/tmp/tmphsv4_t31/p1795464746_7651664836488727840_f0.wav",
-  "duree": 62.28,
-  "source": "https://www.tiktok.com/@jawedyoussef/video/7651664836488727840",
-  "auteur": "jawedyoussef",
-  "contexte": "Deux collègues en cuisine se disputent de manière humoristique et stressée à propos d'une pause thé, alors que l'un est nouveau et l'autre semble plus expérimenté.",
+  "piste": "/tmp/tmp7zlsl4rh/p1795474319_7695388361023966497_f0.wav",
+  "duree": 59.56,
+  "source": "https://www.tiktok.com/@yan_animation0/video/7695388361023966497",
+  "auteur": "yan_animation0",
+  "contexte": "Deux amis organisent un plan improvisé et chaotique depuis le lit et le salon d'un appartement. L'un tente de convaincre l'autre de se joindre à lui pour un voyage ou un événement inattendu, tandis que des malentendus et des réactions exagérées s'enchaînent.",
   "evenements": [
    [
-    3.0,
-    5.0,
-    "laughter"
-   ],
-   [
-    43.0,
-    45.0,
-    "crying"
+    49.0,
+    59.0,
+    "glass"
    ]
   ],
   "visuel": {
    "gestes": [
     [
-     0.96,
-     0.53,
-     0.38
+     35.0,
+     0.77,
+     1.0
     ],
     [
-     1.92,
-     0.52,
-     0.39
-    ],
-    [
-     18.24,
-     0.53,
-     0.36
-    ],
-    [
-     19.2,
-     0.31,
-     0.57
-    ],
-    [
-     24.48,
-     0.59,
-     0.34
-    ],
-    [
-     34.56,
-     0.51,
-     0.39
-    ],
-    [
-     38.88,
-     0.31,
+     36.5,
+     0.86,
      0.55
     ],
     [
-     49.92,
-     0.47,
-     0.4
+     37.5,
+     0.86,
+     0.56
     ],
     [
-     61.44,
-     0.59,
-     0.63
+     39.5,
+     0.87,
+     0.62
+    ],
+    [
+     40.5,
+     0.87,
+     0.57
+    ],
+    [
+     41.5,
+     0.43,
+     1.0
+    ],
+    [
+     46.0,
+     0.45,
+     1.0
+    ],
+    [
+     47.5,
+     0.45,
+     1.0
+    ],
+    [
+     48.5,
+     0.45,
+     0.39
     ]
    ],
-   "duree": 62.4,
-   "nb_plans": 31,
-   "duree_plan": 2.01,
+   "duree": 60.0,
+   "nb_plans": 5,
+   "duree_plan": 12.0,
    "coupes": [
-    2.88,
-    6.24,
-    8.16,
-    10.08,
-    12.96,
-    15.36,
-    17.28,
-    17.76,
-    19.68,
-    22.56,
-    23.52,
-    26.4,
-    28.32,
-    29.28,
-    33.12,
-    35.04,
-    36.48,
-    37.92,
-    39.36,
-    40.8,
-    42.72,
-    44.16,
-    45.12,
-    46.56,
-    48.0,
-    50.88,
-    52.8,
-    55.68,
-    57.12,
-    58.56
+    15.0,
+    24.0,
+    36.0,
+    49.5
    ],
    "plans": {
     "tres_serre": 0.0,
-    "serre": 0.992,
-    "moyen": 0.0,
-    "large": 0.008
+    "serre": 0.425,
+    "moyen": 0.15,
+    "large": 0.425
    },
    "camera": {
-    "fixe": 0.222,
-    "avance": 0.071,
-    "recul": 0.182,
-    "travelling": 0.131,
-    "epaule": 0.394
+    "fixe": 0.974,
+    "avance": 0.017,
+    "recul": 0.009,
+    "travelling": 0.0,
+    "epaule": 0.0
    },
-   "nb_personnes": 1,
+   "nb_personnes": 2,
    "personnes": [
     {
      "place": "centre",
-     "presence": 0.808,
+     "presence": 0.375,
      "habit": [
-      17,
-      21,
-      25
+      215,
+      163,
+      75
      ],
      "cheveux": [
-      45,
-      32,
-      24
+      223,
+      160,
+      102
      ],
-     "sourire": 0.029,
-     "taille": 0.22,
-     "tete_penchee": 3.2,
-     "regard_cote": 0.124
+     "sourire": 0.0,
+     "taille": 0.184,
+     "tete_penchee": 1.7,
+     "regard_cote": 0.067
     },
     {
      "place": "droite",
-     "presence": 0.154,
+     "presence": 0.258,
      "habit": [
-      19,
-      20,
-      26
+      214,
+      179,
+      181
      ],
      "cheveux": [
-      46,
-      33,
-      29
+      16,
+      15,
+      17
      ],
      "sourire": 0.0,
-     "taille": 0.221,
-     "tete_penchee": 2.4,
-     "regard_cote": 0.2
+     "taille": 0.175,
+     "tete_penchee": 1.8,
+     "regard_cote": 0.0
+    },
+    {
+     "place": "gauche",
+     "presence": 0.2,
+     "habit": [
+      235,
+      167,
+      105
+     ],
+     "cheveux": [
+      232,
+      168,
+      108
+     ],
+     "sourire": 0.0,
+     "taille": 0.163,
+     "tete_penchee": 4.3,
+     "regard_cote": 0.0
     }
    ],
    "visages": true,
-   "sourires": 0.023,
-   "energie": 0.64,
+   "sourires": 0.0,
+   "energie": 0.163,
    "mur": [
-    87,
-    66,
-    61
+    210,
+    191,
+    177
    ],
    "palette": [
     [
-     16,
-     21,
-     21,
-     0.268
+     225,
+     208,
+     190,
+     0.249
     ],
     [
-     58,
-     59,
-     72,
-     0.203
-    ],
-    [
-     122,
-     65,
-     39,
-     0.172
-    ],
-    [
+     188,
      161,
-     112,
-     89,
-     0.151
-    ],
-    [
-     205,
      155,
-     129,
-     0.111
+     0.195
     ],
     [
-     221,
-     10,
-     111,
-     0.095
+     40,
+     34,
+     33,
+     0.174
+    ],
+    [
+     222,
+     160,
+     93,
+     0.146
+    ],
+    [
+     244,
+     242,
+     239,
+     0.141
+    ],
+    [
+     137,
+     108,
+     81,
+     0.094
     ]
    ],
    "lumiere": {
-    "luminosite": 112.0,
-    "chaleur": 40.0,
-    "saturation": 131.6
+    "luminosite": 180.9,
+    "chaleur": 41.4,
+    "saturation": 61.0
    },
-   "moment": "soir"
+   "moment": "jour"
   },
   "audio": {
-   "duree": 62.3,
-   "nb_voix": 2,
+   "duree": 59.6,
+   "nb_voix": 3,
    "voix": [
     {
-     "hz": 188,
-     "genre": "f",
-     "part": 0.49
+     "hz": 119,
+     "genre": "h",
+     "part": 0.26
     },
     {
-     "hz": 149,
+     "hz": 127,
      "genre": "h",
-     "part": 0.51
+     "part": 0.14
+    },
+    {
+     "hz": 210,
+     "genre": "f",
+     "part": 0.6
     }
    ],
-   "debit": 5.69,
-   "blanc_moyen": 0.79,
-   "coupes": 0,
-   "dynamique_db": 35.0,
-   "cris": 0.006,
-   "musique": 0.41,
-   "impacts": 43,
-   "impacts_10s": 6.9,
-   "graves": 9,
-   "aigus": 34,
-   "sur_vanne": 12,
+   "debit": 3.98,
+   "blanc_moyen": 0.95,
+   "coupes": 2,
+   "dynamique_db": 27.3,
+   "cris": 0.022,
+   "musique": 0.99,
+   "impacts": 3,
+   "impacts_10s": 0.5,
+   "graves": 1,
+   "aigus": 2,
+   "sur_vanne": 3,
    "evenements": {
-    "laughter": 1,
-    "crying": 1
+    "glass": 1
    },
    "emotions": {
-    "annoyed": 2,
-    "hesitant": 2,
-    "neutral": 2,
+    "confused": 2,
     "shocked": 2,
-    "stressed": 1,
-    "confused": 1,
-    "pleading": 1,
-    "skeptical": 1
+    "excited": 1,
+    "annoyed": 1,
+    "calm": 1,
+    "urgent": 1,
+    "sarcastic": 1,
+    "hurry": 1
    }
   },
   "silences": [
    [
-    28.025,
-    30.095
+    30.485,
+    31.255
    ]
   ],
-  "video_origine": "/tmp/tmphsv4_t31/p1795464746_7651664836488727840_f1.mp4",
+  "video_origine": "/tmp/tmp7zlsl4rh/p1795474319_7695388361023966497_f1.mp4",
   "debut": 0.0,
-  "titre": "Comment ça elle veut se faire \"mon thé\" ? 😭🤣 #rire #humour #drole #sk...",
+  "titre": "comment les mecs organisent leurs plans #tiktokfrance🇨🇵 #mec #voyage ...",
   "lieu_ia": "",
-  "nb_vus": 1,
+  "nb_vus": 3,
   "vue": [
    [
-    2.87,
-    3.11,
-    0,
-    0.54
-   ],
-   [
-    6.32,
-    8.42,
-    1,
-    0.78
-   ],
-   [
-    10.55,
-    11.53,
-    0,
-    0.74
-   ],
-   [
-    15.98,
-    16.4,
-    1,
-    0.59
-   ],
-   [
-    16.9,
-    17.46,
+    7.16,
+    7.52,
     1,
     0.39
    ],
    [
-    22.57,
-    23.18,
-    1,
-    0.78
-   ],
-   [
-    25.41,
-    26.21,
-    1,
-    0.34
-   ],
-   [
-    28.22,
-    29.99,
-    1,
-    0.3
-   ],
-   [
-    31.04,
-    32.64,
-    1,
-    0.32
-   ],
-   [
-    36.06,
-    36.85,
+    8.63,
+    10.63,
     0,
     0.78
    ],
    [
-    39.35,
-    41.02,
-    0,
-    0.46
-   ],
-   [
-    41.91,
-    42.53,
-    0,
-    0.7
-   ],
-   [
-    50.85,
-    51.37,
+    14.84,
+    15.2,
     1,
     0.78
+   ],
+   [
+    15.34,
+    18.03,
+    1,
+    0.78
+   ],
+   [
+    18.11,
+    18.75,
+    1,
+    0.78
+   ],
+   [
+    21.83,
+    22.72,
+    1,
+    0.78
+   ],
+   [
+    24.15,
+    25.81,
+    1,
+    1.0
+   ],
+   [
+    26.99,
+    28.39,
+    1,
+    1.0
+   ],
+   [
+    29.65,
+    30.79,
+    1,
+    1.0
+   ],
+   [
+    30.79,
+    31.27,
+    1,
+    1.0
+   ],
+   [
+    32.2,
+    33.02,
+    1,
+    0.78
+   ],
+   [
+    34.37,
+    34.92,
+    1,
+    0.78
+   ],
+   [
+    36.22,
+    36.84,
+    1,
+    1.0
+   ],
+   [
+    37.41,
+    39.15,
+    1,
+    1.0
+   ],
+   [
+    39.49,
+    40.26,
+    1,
+    1.0
+   ],
+   [
+    41.5,
+    42.31,
+    0,
+    1.0
+   ],
+   [
+    44.12,
+    44.67,
+    1,
+    0.78
+   ],
+   [
+    47.97,
+    48.09,
+    1,
+    0.54
    ]
   ]
  },
@@ -2404,1949 +1702,1245 @@
      16,
      17,
      18,
-     19,
-     20,
-     21,
-     22,
-     23,
-     24,
-     25,
-     26,
-     27,
-     28
+     19
     ],
     "lieu": "",
     "son": "",
     "duree": 0.0,
-    "decor": "modern office kitchen with blue tiled walls and coffee machine with coffee machine on counter, colorful mugs on shelf, tea box on counter",
-    "titre": "Stress Break"
+    "decor": "small dark bedroom with wooden headboard and pillow on bed with bottle of water on nightstand, smartphone in hand",
+    "titre": "Scène 2 : Les malentendus"
    }
   ]
  },
  "_monte": true,
  "_hauteurs_roles": {
-  "presentateur": 130,
-  "invite": 219
+  "envoyee": 112,
+  "invite": 211
  },
  "_rhubarb": [
   [
    0.0,
-   0.05,
-   "T"
-  ],
-  [
-   0.05,
-   0.23,
-   "E"
-  ],
-  [
-   0.23,
-   0.86,
-   "T"
-  ],
-  [
-   0.86,
-   0.93,
-   "F"
-  ],
-  [
-   0.93,
-   1.07,
-   "T"
-  ],
-  [
-   1.07,
-   1.14,
-   "E"
-  ],
-  [
-   1.14,
-   1.35,
-   "T"
-  ],
-  [
-   1.35,
-   1.56,
-   "U"
-  ],
-  [
-   1.56,
-   1.63,
-   "T"
-  ],
-  [
-   1.63,
-   1.84,
-   "E"
-  ],
-  [
-   1.84,
-   1.91,
-   "F"
-  ],
-  [
-   1.91,
-   1.98,
-   "E"
-  ],
-  [
-   1.98,
-   2.05,
-   "U"
-  ],
-  [
-   2.05,
-   2.12,
-   "O"
-  ],
-  [
-   2.12,
-   2.26,
-   "T"
-  ],
-  [
-   2.26,
-   2.33,
-   "F"
-  ],
-  [
-   2.33,
-   2.85,
+   0.06,
    null
   ],
   [
-   2.85,
-   2.89,
+   0.06,
+   0.2,
    "T"
   ],
   [
-   2.89,
-   2.93,
+   0.2,
+   0.27,
    "E"
   ],
   [
-   2.93,
-   3.0,
+   0.27,
+   0.41,
+   "U"
+  ],
+  [
+   0.41,
+   0.76,
+   "T"
+  ],
+  [
+   0.76,
+   1.82,
+   null
+  ],
+  [
+   1.82,
+   1.95,
+   "U"
+  ],
+  [
+   1.95,
+   2.09,
+   "T"
+  ],
+  [
+   2.09,
+   2.16,
+   "E"
+  ],
+  [
+   2.16,
+   2.37,
+   "T"
+  ],
+  [
+   2.37,
+   2.44,
    "O"
   ],
   [
-   3.0,
-   3.14,
-   "T"
-  ],
-  [
-   3.14,
-   3.21,
-   "E"
-  ],
-  [
-   3.21,
-   3.5,
-   "T"
-  ],
-  [
-   3.5,
-   3.59,
+   2.44,
+   2.52,
    "M"
   ],
   [
-   3.59,
-   3.82,
-   "T"
-  ],
-  [
-   3.82,
-   4.0,
-   null
-  ],
-  [
-   4.0,
-   4.11,
-   "T"
-  ],
-  [
-   4.11,
-   4.51,
-   null
-  ],
-  [
-   4.51,
-   4.58,
-   "T"
-  ],
-  [
-   4.58,
-   4.79,
-   "E"
-  ],
-  [
-   4.79,
-   5.07,
-   "T"
-  ],
-  [
-   5.07,
-   5.52,
-   null
-  ],
-  [
-   5.52,
-   5.58,
-   "T"
-  ],
-  [
-   5.58,
-   5.71,
+   2.52,
+   2.98,
    "U"
   ],
   [
-   5.71,
-   5.85,
-   "F"
+   2.98,
+   3.05,
+   "O"
   ],
   [
-   5.85,
-   6.15,
+   3.05,
+   3.12,
    "E"
   ],
   [
-   6.15,
-   6.26,
+   3.12,
+   3.26,
    "T"
   ],
   [
-   6.26,
-   6.33,
+   3.26,
+   3.33,
    "E"
   ],
   [
-   6.33,
-   6.61,
+   3.33,
+   3.4,
+   "O"
+  ],
+  [
+   3.4,
+   3.7,
+   "E"
+  ],
+  [
+   3.7,
+   4.03,
    "T"
   ],
   [
-   6.61,
-   6.75,
-   "E"
-  ],
-  [
-   6.75,
-   6.82,
+   4.03,
+   4.1,
    "F"
   ],
   [
-   6.82,
+   4.1,
+   4.24,
+   "E"
+  ],
+  [
+   4.24,
+   4.31,
+   "O"
+  ],
+  [
+   4.31,
+   4.38,
+   "T"
+  ],
+  [
+   4.38,
+   4.73,
+   "U"
+  ],
+  [
+   4.73,
+   4.8,
+   "T"
+  ],
+  [
+   4.8,
+   4.88,
+   "M"
+  ],
+  [
+   4.88,
+   5.14,
+   "T"
+  ],
+  [
+   5.14,
+   5.21,
+   "E"
+  ],
+  [
+   5.21,
+   5.42,
+   "M"
+  ],
+  [
+   5.42,
+   5.63,
+   "T"
+  ],
+  [
+   5.63,
+   5.77,
+   "U"
+  ],
+  [
+   5.77,
+   5.98,
+   "T"
+  ],
+  [
+   5.98,
    7.03,
-   "E"
+   null
   ],
   [
    7.03,
-   7.24,
-   "T"
-  ],
-  [
-   7.24,
-   7.32,
+   7.11,
    "M"
   ],
   [
-   7.32,
-   7.58,
+   7.11,
+   7.29,
+   "E"
+  ],
+  [
+   7.29,
+   7.43,
    "T"
   ],
   [
-   7.58,
-   7.72,
-   "E"
-  ],
-  [
-   7.72,
-   7.84,
-   "M"
-  ],
-  [
-   7.84,
-   7.88,
-   "F"
-  ],
-  [
-   7.88,
-   8.04,
-   "E"
-  ],
-  [
-   8.04,
-   8.08,
+   7.43,
+   7.5,
    "O"
   ],
   [
-   8.08,
-   8.34,
+   7.5,
+   7.71,
    "U"
   ],
   [
-   8.34,
-   8.48,
-   "T"
-  ],
-  [
-   8.48,
-   8.62,
-   "O"
-  ],
-  [
-   8.62,
-   8.83,
+   7.71,
+   7.78,
    "E"
   ],
   [
-   8.83,
-   8.97,
+   7.78,
+   8.06,
    "T"
   ],
   [
-   8.97,
-   9.06,
-   "E"
-  ],
-  [
-   9.06,
-   9.1,
-   "M"
-  ],
-  [
-   9.1,
-   9.18,
-   "O"
-  ],
-  [
-   9.18,
-   9.26,
-   "M"
-  ],
-  [
-   9.26,
-   9.31,
-   "T"
-  ],
-  [
-   9.31,
-   9.35,
-   "F"
-  ],
-  [
-   9.35,
-   9.42,
-   "O"
-  ],
-  [
-   9.42,
-   9.49,
-   "T"
-  ],
-  [
-   9.49,
-   9.56,
-   "E"
-  ],
-  [
-   9.56,
-   9.64,
-   "M"
-  ],
-  [
-   9.64,
-   9.73,
-   "T"
-  ],
-  [
-   9.73,
-   9.94,
-   "T"
-  ],
-  [
-   9.94,
-   10.5,
+   8.06,
+   8.56,
    null
   ],
   [
-   10.5,
-   10.55,
-   "E"
-  ],
-  [
-   10.55,
-   10.63,
-   "M"
-  ],
-  [
-   10.63,
-   10.87,
-   "E"
-  ],
-  [
-   10.87,
-   11.15,
-   "T"
-  ],
-  [
-   11.15,
-   11.25,
-   "M"
-  ],
-  [
-   11.25,
-   11.42,
-   "E"
-  ],
-  [
-   11.42,
-   11.78,
-   "T"
-  ],
-  [
-   11.78,
-   11.97,
-   "E"
-  ],
-  [
-   11.97,
-   12.04,
-   "T"
-  ],
-  [
-   12.04,
-   12.11,
-   "T"
-  ],
-  [
-   12.11,
-   12.25,
-   "E"
-  ],
-  [
-   12.25,
-   12.39,
-   "T"
-  ],
-  [
-   12.39,
-   12.58,
-   "E"
-  ],
-  [
-   12.58,
-   12.63,
+   8.56,
+   8.9,
    "O"
   ],
   [
-   12.63,
-   12.88,
-   "U"
-  ],
-  [
-   12.88,
-   12.95,
-   "F"
-  ],
-  [
-   12.95,
-   13.02,
-   "T"
-  ],
-  [
-   13.02,
-   13.16,
+   8.9,
+   9.04,
    "E"
   ],
   [
-   13.16,
-   13.37,
+   9.04,
+   9.18,
    "T"
   ],
   [
-   13.37,
-   13.67,
-   "M"
+   9.18,
+   9.62,
+   null
   ],
   [
-   13.67,
-   13.75,
+   9.62,
+   9.86,
    "T"
   ],
   [
-   13.75,
-   13.83,
-   "M"
-  ],
-  [
-   13.83,
-   13.95,
-   "E"
-  ],
-  [
-   13.95,
-   14.09,
-   "T"
-  ],
-  [
-   14.09,
-   14.17,
-   "M"
-  ],
-  [
-   14.17,
-   14.28,
-   "U"
-  ],
-  [
-   14.28,
-   14.35,
-   "E"
-  ],
-  [
-   14.35,
-   14.42,
+   9.86,
+   9.93,
    "O"
   ],
   [
-   14.42,
-   14.56,
-   "F"
+   9.93,
+   10.01,
+   "M"
   ],
   [
-   14.56,
-   14.63,
-   "T"
-  ],
-  [
-   14.63,
-   14.7,
+   10.01,
+   10.14,
    "A"
   ],
   [
-   14.7,
-   14.84,
-   "T"
-  ],
-  [
-   14.84,
-   14.92,
-   "M"
-  ],
-  [
-   14.92,
-   15.05,
-   "U"
-  ],
-  [
-   15.05,
-   15.47,
-   "T"
-  ],
-  [
-   15.47,
-   15.54,
+   10.14,
+   10.21,
    "E"
   ],
   [
-   15.54,
-   15.61,
+   10.21,
+   10.42,
+   "T"
+  ],
+  [
+   10.42,
+   11.54,
+   null
+  ],
+  [
+   11.54,
+   11.65,
    "M"
   ],
   [
-   15.61,
-   15.68,
+   11.65,
+   12.49,
+   "T"
+  ],
+  [
+   12.49,
+   12.77,
    "O"
   ],
   [
+   12.77,
+   12.85,
+   "M"
+  ],
+  [
+   12.85,
+   13.03,
+   "U"
+  ],
+  [
+   13.03,
+   13.11,
+   "M"
+  ],
+  [
+   13.11,
+   13.17,
+   "T"
+  ],
+  [
+   13.17,
+   13.44,
+   "U"
+  ],
+  [
+   13.44,
+   13.58,
+   "F"
+  ],
+  [
+   13.58,
+   13.79,
+   "E"
+  ],
+  [
+   13.79,
+   14.14,
+   "T"
+  ],
+  [
+   14.14,
+   14.75,
+   null
+  ],
+  [
+   14.75,
+   14.8,
+   "T"
+  ],
+  [
+   14.8,
+   14.91,
+   "U"
+  ],
+  [
+   14.91,
+   15.05,
+   "E"
+  ],
+  [
+   15.05,
+   15.33,
+   "O"
+  ],
+  [
+   15.33,
+   15.47,
+   "U"
+  ],
+  [
+   15.47,
    15.68,
-   15.92,
+   "T"
+  ],
+  [
+   15.68,
+   15.8,
    "M"
   ],
   [
-   15.92,
-   16.02,
+   15.8,
+   15.99,
+   "E"
+  ],
+  [
+   15.99,
+   16.06,
+   "U"
+  ],
+  [
+   16.06,
+   16.13,
+   "F"
+  ],
+  [
+   16.13,
+   16.34,
+   "U"
+  ],
+  [
+   16.34,
+   16.48,
+   "O"
+  ],
+  [
+   16.48,
+   16.55,
+   "E"
+  ],
+  [
+   16.55,
+   16.76,
    "T"
   ],
   [
-   16.02,
-   16.1,
+   16.76,
+   16.94,
    "M"
   ],
   [
-   16.1,
-   16.14,
-   "T"
+   16.94,
+   16.98,
+   "O"
   ],
   [
-   16.14,
-   16.18,
-   "F"
-  ],
-  [
-   16.18,
-   16.25,
+   16.98,
+   17.02,
    "E"
   ],
   [
-   16.25,
-   16.32,
+   17.02,
+   17.09,
    "T"
   ],
   [
-   16.32,
-   16.39,
+   17.09,
+   17.23,
    "E"
   ],
   [
-   16.39,
-   16.6,
+   17.23,
+   17.3,
    "T"
   ],
   [
-   16.6,
-   16.74,
-   null
-  ],
-  [
-   16.74,
-   16.97,
-   "T"
-  ],
-  [
-   16.97,
-   17.04,
-   "F"
-  ],
-  [
-   17.04,
-   17.11,
-   "T"
-  ],
-  [
-   17.11,
-   17.18,
+   17.3,
+   17.37,
    "E"
   ],
   [
-   17.18,
-   17.25,
+   17.37,
+   17.45,
+   "M"
+  ],
+  [
+   17.45,
+   17.58,
+   "O"
+  ],
+  [
+   17.58,
+   17.7,
+   "M"
+  ],
+  [
+   17.7,
+   17.76,
+   "T"
+  ],
+  [
+   17.76,
+   17.96,
+   "E"
+  ],
+  [
+   17.96,
+   18.38,
+   "T"
+  ],
+  [
+   18.38,
+   18.45,
    "F"
   ],
   [
-   17.25,
-   17.46,
+   18.45,
+   18.52,
    "U"
   ],
   [
-   17.46,
-   17.53,
+   18.52,
+   18.87,
    "T"
   ],
   [
-   17.53,
-   18.12,
+   18.87,
+   19.6,
    null
   ],
   [
-   18.12,
-   18.26,
-   "E"
-  ],
-  [
-   18.26,
-   18.33,
-   "U"
-  ],
-  [
-   18.33,
-   18.4,
+   19.6,
+   19.8,
    "T"
   ],
   [
-   18.4,
-   18.61,
-   "F"
-  ],
-  [
-   18.61,
-   18.89,
-   "U"
-  ],
-  [
-   18.89,
-   19.1,
-   "T"
-  ],
-  [
-   19.1,
-   19.31,
-   null
-  ],
-  [
-   19.31,
-   19.87,
-   "T"
-  ],
-  [
-   19.87,
+   19.8,
    20.01,
-   "U"
+   "E"
   ],
   [
    20.01,
+   20.29,
+   "O"
+  ],
+  [
+   20.29,
    20.57,
-   "T"
+   "U"
   ],
   [
    20.57,
    20.64,
-   "O"
+   "E"
   ],
   [
    20.64,
-   20.71,
-   "F"
-  ],
-  [
-   20.71,
-   21.2,
-   "T"
-  ],
-  [
-   21.2,
-   21.27,
-   "F"
-  ],
-  [
-   21.27,
-   21.34,
+   20.99,
    "U"
   ],
   [
-   21.34,
-   21.41,
-   "F"
-  ],
-  [
-   21.41,
-   21.62,
-   null
-  ],
-  [
-   21.62,
-   21.94,
+   20.99,
+   21.06,
    "T"
   ],
   [
-   21.94,
-   22.08,
+   21.06,
+   21.77,
    null
+  ],
+  [
+   21.77,
+   22.01,
+   "E"
+  ],
+  [
+   22.01,
+   22.08,
+   "T"
   ],
   [
    22.08,
-   22.34,
-   "T"
-  ],
-  [
-   22.34,
-   22.54,
-   null
-  ],
-  [
-   22.54,
-   22.76,
-   "T"
-  ],
-  [
-   22.76,
-   22.9,
+   22.15,
    "O"
   ],
   [
-   22.9,
-   22.97,
-   "T"
-  ],
-  [
-   22.97,
-   23.04,
-   "E"
-  ],
-  [
-   23.04,
-   23.32,
-   "T"
-  ],
-  [
-   23.32,
-   23.4,
-   "M"
-  ],
-  [
-   23.4,
-   23.62,
-   "O"
-  ],
-  [
-   23.62,
-   23.69,
+   22.15,
+   22.29,
    "U"
   ],
   [
-   23.69,
-   24.04,
+   22.29,
+   22.37,
+   "M"
+  ],
+  [
+   22.37,
+   22.56,
+   "A"
+  ],
+  [
+   22.56,
+   22.7,
+   "E"
+  ],
+  [
+   22.7,
+   22.91,
    "T"
   ],
   [
-   24.04,
-   24.12,
-   "M"
-  ],
-  [
-   24.12,
-   24.31,
+   22.91,
+   22.98,
    "O"
   ],
   [
-   24.31,
-   24.5,
-   "M"
+   22.98,
+   23.19,
+   "U"
   ],
   [
-   24.5,
-   24.68,
+   23.19,
+   23.26,
    "F"
   ],
   [
-   24.68,
-   24.82,
-   "T"
-  ],
-  [
-   24.82,
-   25.31,
-   null
-  ],
-  [
-   25.31,
-   25.76,
-   "T"
-  ],
-  [
-   25.76,
-   25.83,
-   "U"
-  ],
-  [
-   25.83,
-   25.97,
-   "O"
-  ],
-  [
-   25.97,
-   26.04,
-   "T"
-  ],
-  [
-   26.04,
-   26.18,
-   "U"
-  ],
-  [
-   26.18,
-   26.32,
-   "O"
-  ],
-  [
-   26.32,
-   26.46,
-   "E"
-  ],
-  [
-   26.46,
-   26.53,
-   "O"
-  ],
-  [
-   26.53,
-   26.6,
-   "E"
-  ],
-  [
-   26.6,
-   26.74,
-   "T"
-  ],
-  [
-   26.74,
-   27.02,
-   "U"
-  ],
-  [
-   27.02,
-   27.09,
-   "T"
-  ],
-  [
-   27.09,
-   27.17,
+   23.26,
+   23.72,
    "M"
   ],
   [
-   27.17,
-   27.36,
+   23.72,
+   23.91,
+   "T"
+  ],
+  [
+   23.91,
+   24.05,
    "E"
   ],
   [
-   27.36,
-   27.43,
+   24.05,
+   24.15,
+   "U"
+  ],
+  [
+   24.15,
+   24.19,
+   "O"
+  ],
+  [
+   24.19,
+   24.26,
    "T"
+  ],
+  [
+   24.26,
+   24.52,
+   "E"
+  ],
+  [
+   24.52,
+   24.57,
+   "O"
+  ],
+  [
+   24.57,
+   24.75,
+   "U"
+  ],
+  [
+   24.75,
+   24.83,
+   "M"
+  ],
+  [
+   24.83,
+   25.12,
+   "U"
+  ],
+  [
+   25.12,
+   25.19,
+   "T"
+  ],
+  [
+   25.19,
+   25.26,
+   "O"
+  ],
+  [
+   25.26,
+   25.33,
+   "U"
+  ],
+  [
+   25.33,
+   25.4,
+   "E"
+  ],
+  [
+   25.4,
+   25.54,
+   "T"
+  ],
+  [
+   25.54,
+   25.61,
+   "F"
+  ],
+  [
+   25.61,
+   25.89,
+   "O"
+  ],
+  [
+   25.89,
+   26.9,
+   null
+  ],
+  [
+   26.9,
+   27.28,
+   "T"
+  ],
+  [
+   27.28,
+   27.35,
+   "E"
+  ],
+  [
+   27.35,
+   27.43,
+   "M"
   ],
   [
    27.43,
-   27.57,
-   "F"
-  ],
-  [
-   27.57,
-   27.78,
-   "T"
-  ],
-  [
-   27.78,
-   27.94,
-   null
-  ],
-  [
-   27.94,
-   28.44,
-   "T"
-  ],
-  [
-   28.44,
-   28.51,
+   27.53,
    "U"
   ],
   [
-   28.51,
-   28.65,
-   "T"
-  ],
-  [
-   28.65,
-   28.73,
+   27.53,
+   27.61,
    "M"
   ],
   [
-   28.73,
-   28.83,
+   27.61,
+   27.73,
+   "U"
+  ],
+  [
+   27.73,
+   27.8,
    "E"
   ],
   [
-   28.83,
-   28.9,
+   27.8,
+   27.87,
    "O"
   ],
   [
-   28.9,
-   29.04,
-   "T"
-  ],
-  [
-   29.04,
-   29.18,
-   "A"
-  ],
-  [
-   29.18,
-   29.32,
-   "T"
-  ],
-  [
-   29.32,
-   29.6,
+   27.87,
+   27.94,
    "U"
+  ],
+  [
+   27.94,
+   28.08,
+   "O"
+  ],
+  [
+   28.08,
+   28.29,
+   "U"
+  ],
+  [
+   28.29,
+   28.36,
+   "O"
+  ],
+  [
+   28.36,
+   28.57,
+   "U"
+  ],
+  [
+   28.57,
+   29.53,
+   null
+  ],
+  [
+   29.53,
+   29.6,
+   "T"
   ],
   [
    29.6,
-   29.67,
-   "F"
-  ],
-  [
-   29.67,
-   29.74,
+   30.01,
    "E"
   ],
   [
-   29.74,
-   29.81,
-   "T"
-  ],
-  [
-   29.81,
-   29.88,
-   "E"
-  ],
-  [
-   29.88,
+   30.01,
    30.09,
-   "T"
+   "M"
   ],
   [
    30.09,
-   30.89,
-   null
-  ],
-  [
-   30.89,
-   30.96,
-   "T"
-  ],
-  [
-   30.96,
-   31.23,
-   "U"
-  ],
-  [
-   31.23,
-   31.3,
+   30.3,
    "O"
   ],
   [
-   31.3,
-   31.37,
-   "F"
+   30.3,
+   30.44,
+   "U"
   ],
   [
-   31.37,
-   31.44,
+   30.44,
+   30.65,
+   null
+  ],
+  [
+   30.65,
+   30.73,
    "T"
   ],
   [
-   31.44,
-   31.58,
-   "F"
+   30.73,
+   30.85,
+   "M"
   ],
   [
-   31.58,
-   32.0,
+   30.85,
+   30.9,
+   "O"
+  ],
+  [
+   30.9,
+   30.94,
    "T"
   ],
   [
-   32.0,
+   30.94,
+   31.08,
+   "F"
+  ],
+  [
+   31.08,
+   31.29,
+   "U"
+  ],
+  [
+   31.29,
+   31.57,
+   "T"
+  ],
+  [
+   31.57,
    32.14,
-   "E"
+   null
   ],
   [
    32.14,
-   32.21,
-   "F"
+   32.45,
+   "T"
   ],
   [
-   32.21,
-   32.28,
-   "E"
-  ],
-  [
-   32.28,
-   32.36,
+   32.45,
+   32.53,
    "M"
   ],
   [
-   32.36,
-   32.62,
-   "U"
-  ],
-  [
-   32.62,
-   32.75,
-   null
-  ],
-  [
-   32.75,
-   33.3,
-   "T"
-  ],
-  [
-   33.3,
-   33.37,
-   "M"
-  ],
-  [
-   33.37,
-   33.47,
-   "U"
-  ],
-  [
-   33.47,
-   33.96,
-   "T"
-  ],
-  [
-   33.96,
-   34.1,
-   "U"
-  ],
-  [
-   34.1,
-   34.31,
-   "F"
-  ],
-  [
-   34.31,
-   34.39,
-   "M"
-  ],
-  [
-   34.39,
-   34.67,
-   "U"
-  ],
-  [
-   34.67,
-   34.75,
-   "M"
-  ],
-  [
-   34.75,
-   34.87,
-   "O"
-  ],
-  [
-   34.87,
-   34.94,
-   "T"
-  ],
-  [
-   34.94,
-   35.08,
-   "E"
-  ],
-  [
-   35.08,
-   35.34,
-   "M"
-  ],
-  [
-   35.34,
-   35.86,
-   "F"
-  ],
-  [
-   35.86,
-   36.21,
-   "T"
-  ],
-  [
-   36.21,
-   36.35,
-   "E"
-  ],
-  [
-   36.35,
-   36.49,
-   "T"
-  ],
-  [
-   36.49,
-   36.63,
-   "E"
-  ],
-  [
-   36.63,
-   36.71,
-   "M"
-  ],
-  [
-   36.71,
-   37.09,
-   "T"
-  ],
-  [
-   37.09,
-   37.21,
-   null
-  ],
-  [
-   37.21,
-   37.34,
-   "T"
-  ],
-  [
-   37.34,
-   37.48,
-   "E"
-  ],
-  [
-   37.48,
-   37.69,
-   null
-  ],
-  [
-   37.69,
-   37.75,
-   "T"
-  ],
-  [
-   37.75,
-   37.87,
-   "E"
-  ],
-  [
-   37.87,
-   37.94,
-   "T"
-  ],
-  [
-   37.94,
-   38.01,
-   "E"
-  ],
-  [
-   38.01,
-   38.15,
-   "T"
-  ],
-  [
-   38.15,
-   38.36,
-   "E"
-  ],
-  [
-   38.36,
-   38.5,
-   "T"
-  ],
-  [
-   38.5,
-   38.57,
-   "O"
-  ],
-  [
-   38.57,
-   38.64,
-   "T"
-  ],
-  [
-   38.64,
-   38.85,
-   "E"
-  ],
-  [
-   38.85,
-   38.96,
-   "M"
-  ],
-  [
-   38.96,
-   39.13,
+   32.53,
+   32.65,
    "A"
   ],
   [
-   39.13,
-   39.2,
-   "T"
-  ],
-  [
-   39.2,
-   39.33,
-   "M"
-  ],
-  [
-   39.33,
-   39.38,
+   32.65,
+   32.71,
    "E"
   ],
   [
-   39.38,
-   39.46,
+   32.71,
+   32.79,
    "M"
   ],
   [
-   39.46,
-   39.6,
+   32.79,
+   33.1,
    "T"
   ],
   [
-   39.6,
-   39.67,
+   33.1,
+   33.17,
    "F"
   ],
   [
-   39.67,
-   39.95,
-   "T"
-  ],
-  [
-   39.95,
-   40.03,
-   "M"
-  ],
-  [
-   40.03,
-   40.17,
-   "T"
-  ],
-  [
-   40.17,
-   40.24,
-   "E"
-  ],
-  [
-   40.24,
-   40.32,
-   "M"
-  ],
-  [
-   40.32,
-   40.38,
-   "A"
-  ],
-  [
-   40.38,
-   40.43,
-   "T"
-  ],
-  [
-   40.43,
-   40.71,
-   "E"
-  ],
-  [
-   40.71,
-   40.89,
-   "M"
-  ],
-  [
-   40.89,
-   41.06,
-   "T"
-  ],
-  [
-   41.06,
-   41.78,
+   33.17,
+   34.09,
    null
   ],
   [
-   41.78,
-   42.09,
+   34.09,
+   34.29,
    "T"
   ],
   [
-   42.09,
-   42.16,
-   "F"
-  ],
-  [
-   42.16,
-   42.23,
-   "T"
-  ],
-  [
-   42.23,
-   42.3,
-   "F"
-  ],
-  [
-   42.3,
-   42.51,
-   "U"
-  ],
-  [
-   42.51,
-   42.58,
-   "F"
-  ],
-  [
-   42.58,
-   42.97,
-   "T"
-  ],
-  [
-   42.97,
-   43.04,
-   "O"
-  ],
-  [
-   43.04,
-   43.1,
-   "T"
-  ],
-  [
-   43.1,
-   43.31,
-   "O"
-  ],
-  [
-   43.31,
-   43.38,
-   "E"
-  ],
-  [
-   43.38,
-   43.52,
-   "T"
-  ],
-  [
-   43.52,
-   43.66,
-   "F"
-  ],
-  [
-   43.66,
-   43.8,
-   "E"
-  ],
-  [
-   43.8,
-   44.01,
-   "T"
-  ],
-  [
-   44.01,
-   44.13,
+   34.29,
+   34.41,
    "M"
   ],
   [
-   44.13,
-   44.26,
+   34.41,
+   34.51,
+   "U"
+  ],
+  [
+   34.51,
+   34.65,
+   "T"
+  ],
+  [
+   34.65,
+   34.72,
    "O"
   ],
   [
-   44.26,
-   44.89,
+   34.72,
+   34.79,
    "T"
   ],
   [
-   44.89,
-   45.03,
+   34.79,
+   35.0,
+   "F"
+  ],
+  [
+   35.0,
+   35.28,
+   "T"
+  ],
+  [
+   35.28,
+   35.65,
+   null
+  ],
+  [
+   35.65,
+   35.72,
+   "T"
+  ],
+  [
+   35.72,
+   35.99,
+   "F"
+  ],
+  [
+   35.99,
+   36.14,
+   null
+  ],
+  [
+   36.14,
+   36.2,
+   "T"
+  ],
+  [
+   36.2,
+   36.25,
    "U"
   ],
   [
-   45.03,
-   45.1,
-   "T"
-  ],
-  [
-   45.1,
-   45.18,
-   "M"
-  ],
-  [
-   45.18,
-   45.31,
+   36.25,
+   36.39,
    "E"
   ],
   [
-   45.31,
-   45.38,
+   36.39,
+   36.46,
    "T"
   ],
   [
-   45.38,
-   45.45,
-   "E"
-  ],
-  [
-   45.45,
-   45.53,
-   "M"
-  ],
-  [
-   45.53,
-   45.68,
+   36.46,
+   36.74,
    "U"
   ],
   [
-   45.68,
-   45.89,
+   36.74,
+   36.81,
+   "O"
+  ],
+  [
+   36.81,
+   36.88,
+   "U"
+  ],
+  [
+   36.88,
+   37.02,
+   "E"
+  ],
+  [
+   37.02,
+   37.09,
+   "O"
+  ],
+  [
+   37.09,
+   37.23,
+   "E"
+  ],
+  [
+   37.23,
+   37.44,
    "T"
   ],
   [
-   45.89,
+   37.44,
+   37.51,
+   "F"
+  ],
+  [
+   37.51,
+   37.72,
+   "E"
+  ],
+  [
+   37.72,
+   37.93,
+   "T"
+  ],
+  [
+   37.93,
+   38.0,
+   "F"
+  ],
+  [
+   38.0,
+   38.14,
+   "T"
+  ],
+  [
+   38.14,
+   38.28,
+   "O"
+  ],
+  [
+   38.28,
+   38.38,
+   "M"
+  ],
+  [
+   38.38,
+   38.47,
+   "E"
+  ],
+  [
+   38.47,
+   38.54,
+   "F"
+  ],
+  [
+   38.54,
+   38.61,
+   "E"
+  ],
+  [
+   38.61,
+   38.89,
+   "U"
+  ],
+  [
+   38.89,
+   39.42,
+   "T"
+  ],
+  [
+   39.42,
+   39.53,
+   "U"
+  ],
+  [
+   39.53,
+   39.67,
+   "T"
+  ],
+  [
+   39.67,
+   39.74,
+   "E"
+  ],
+  [
+   39.74,
+   39.81,
+   "T"
+  ],
+  [
+   39.81,
+   40.02,
+   "U"
+  ],
+  [
+   40.02,
+   41.35,
+   "T"
+  ],
+  [
+   41.35,
+   41.49,
+   "U"
+  ],
+  [
+   41.49,
+   41.56,
+   "E"
+  ],
+  [
+   41.56,
+   41.63,
+   "O"
+  ],
+  [
+   41.63,
+   41.84,
+   "U"
+  ],
+  [
+   41.84,
+   41.94,
+   "A"
+  ],
+  [
+   41.94,
+   41.98,
+   "E"
+  ],
+  [
+   41.98,
+   42.06,
+   "M"
+  ],
+  [
+   42.06,
+   42.15,
+   "U"
+  ],
+  [
+   42.15,
+   42.29,
+   "T"
+  ],
+  [
+   42.29,
+   42.36,
+   "F"
+  ],
+  [
+   42.36,
+   42.78,
+   "T"
+  ],
+  [
+   42.78,
+   44.04,
+   null
+  ],
+  [
+   44.04,
+   44.18,
+   "T"
+  ],
+  [
+   44.18,
+   44.39,
+   "E"
+  ],
+  [
+   44.39,
+   45.72,
+   "T"
+  ],
+  [
+   45.72,
+   45.83,
+   "M"
+  ],
+  [
+   45.83,
+   45.92,
+   "O"
+  ],
+  [
+   45.92,
    46.06,
-   null
+   "U"
   ],
   [
    46.06,
-   46.4,
-   "T"
-  ],
-  [
-   46.4,
-   46.47,
-   "E"
-  ],
-  [
-   46.47,
-   46.54,
-   "T"
-  ],
-  [
-   46.54,
-   46.71,
-   "E"
-  ],
-  [
-   46.71,
-   46.75,
+   46.13,
    "O"
   ],
   [
-   46.75,
-   47.11,
+   46.13,
+   46.2,
    "U"
   ],
   [
-   47.11,
-   47.32,
-   "T"
-  ],
-  [
-   47.32,
-   47.49,
-   null
-  ],
-  [
-   47.49,
-   48.05,
-   "T"
-  ],
-  [
-   48.05,
-   48.18,
-   null
-  ],
-  [
-   48.18,
-   48.29,
-   "T"
-  ],
-  [
-   48.29,
-   48.69,
-   null
-  ],
-  [
-   48.69,
-   48.76,
-   "E"
-  ],
-  [
-   48.76,
-   49.11,
-   "T"
-  ],
-  [
-   49.11,
-   49.23,
-   null
-  ],
-  [
-   49.23,
-   49.31,
-   "T"
-  ],
-  [
-   49.31,
-   49.39,
-   "M"
-  ],
-  [
-   49.39,
-   49.53,
-   "E"
-  ],
-  [
-   49.53,
-   49.6,
-   "T"
-  ],
-  [
-   49.6,
-   49.67,
-   "E"
-  ],
-  [
-   49.67,
-   49.76,
-   "M"
-  ],
-  [
-   49.76,
-   50.08,
-   "T"
-  ],
-  [
-   50.08,
-   50.16,
-   "M"
-  ],
-  [
-   50.16,
-   50.31,
-   "U"
-  ],
-  [
-   50.31,
-   50.39,
-   "M"
-  ],
-  [
-   50.39,
-   50.54,
-   "U"
-  ],
-  [
-   50.54,
-   50.68,
-   "T"
-  ],
-  [
-   50.68,
-   50.84,
-   null
-  ],
-  [
-   50.84,
-   50.88,
-   "T"
-  ],
-  [
-   50.88,
-   50.96,
-   "M"
-  ],
-  [
-   50.96,
-   51.03,
-   "E"
-  ],
-  [
-   51.03,
-   51.09,
-   "T"
-  ],
-  [
-   51.09,
-   51.17,
-   "M"
-  ],
-  [
-   51.17,
-   51.28,
-   "U"
-  ],
-  [
-   51.28,
-   51.84,
-   "T"
-  ],
-  [
-   51.84,
-   52.05,
-   "E"
-  ],
-  [
-   52.05,
-   52.12,
-   "T"
-  ],
-  [
-   52.12,
-   52.2,
-   "M"
-  ],
-  [
-   52.2,
-   52.39,
-   "U"
-  ],
-  [
-   52.39,
-   52.46,
-   "T"
-  ],
-  [
-   52.46,
-   52.57,
-   "M"
-  ],
-  [
-   52.57,
-   52.75,
-   "U"
-  ],
-  [
-   52.75,
-   52.83,
-   "M"
-  ],
-  [
-   52.83,
-   52.97,
-   "T"
-  ],
-  [
-   52.97,
-   53.11,
-   "E"
-  ],
-  [
-   53.11,
-   53.19,
-   "M"
-  ],
-  [
-   53.19,
-   53.28,
-   "T"
-  ],
-  [
-   53.28,
-   53.36,
-   "M"
-  ],
-  [
-   53.36,
-   53.43,
-   "U"
-  ],
-  [
-   53.43,
-   53.49,
-   "T"
-  ],
-  [
-   53.49,
-   53.63,
+   46.2,
+   46.48,
    "O"
   ],
   [
-   53.63,
-   53.7,
-   "F"
-  ],
-  [
-   53.7,
-   53.84,
+   46.48,
+   46.55,
    "T"
   ],
   [
-   53.84,
-   54.04,
-   null
+   46.55,
+   46.62,
+   "U"
   ],
   [
-   54.04,
-   54.37,
-   "T"
+   46.62,
+   46.72,
+   "M"
   ],
   [
-   54.37,
-   54.44,
-   "E"
+   46.72,
+   47.03,
+   "U"
   ],
   [
-   54.44,
-   54.51,
+   47.03,
+   47.1,
    "O"
   ],
   [
-   54.51,
-   54.58,
-   "T"
-  ],
-  [
-   54.58,
-   54.65,
+   47.1,
+   47.24,
    "E"
   ],
   [
-   54.65,
-   54.72,
+   47.24,
+   47.45,
    "T"
   ],
   [
-   54.72,
-   54.86,
-   "E"
+   47.45,
+   47.88,
+   null
   ],
   [
-   54.86,
-   55.0,
-   "T"
-  ],
-  [
-   55.0,
-   55.07,
-   "T"
-  ],
-  [
-   55.07,
-   55.15,
+   47.88,
+   48.02,
    "M"
   ],
   [
-   55.15,
-   55.26,
-   "A"
-  ],
-  [
-   55.26,
-   55.33,
+   48.02,
+   48.14,
    "T"
   ],
   [
-   55.33,
-   55.5,
-   null
-  ],
-  [
-   55.5,
-   55.56,
-   "T"
-  ],
-  [
-   55.56,
-   55.62,
-   "T"
-  ],
-  [
-   55.62,
-   55.69,
-   "A"
-  ],
-  [
-   55.69,
-   55.81,
-   "M"
-  ],
-  [
-   55.81,
-   55.93,
-   "T"
-  ],
-  [
-   55.93,
-   56.14,
+   48.14,
+   48.21,
    "E"
   ],
   [
-   56.14,
-   56.42,
+   48.21,
+   48.35,
    "T"
   ],
   [
-   56.42,
-   56.9,
-   null
-  ],
-  [
-   56.9,
-   57.01,
-   "T"
-  ],
-  [
-   57.01,
-   58.46,
-   null
-  ],
-  [
-   58.46,
-   59.09,
-   "T"
-  ],
-  [
-   59.09,
-   59.23,
-   "E"
-  ],
-  [
-   59.23,
-   59.37,
-   "U"
-  ],
-  [
-   59.37,
-   59.45,
-   "M"
-  ],
-  [
-   59.45,
-   59.69,
-   "U"
-  ],
-  [
-   59.69,
-   59.76,
-   "T"
-  ],
-  [
-   59.76,
-   59.83,
-   "E"
-  ],
-  [
-   59.83,
-   60.18,
-   "T"
-  ],
-  [
-   60.18,
-   60.46,
-   "U"
-  ],
-  [
-   60.46,
-   60.81,
-   "T"
-  ],
-  [
-   60.81,
-   61.04,
-   null
-  ],
-  [
-   61.04,
-   61.29,
-   "T"
-  ],
-  [
-   61.29,
-   61.36,
-   "F"
-  ],
-  [
-   61.36,
-   61.5,
-   "T"
-  ],
-  [
-   61.5,
-   61.64,
-   "A"
-  ],
-  [
-   61.64,
-   61.71,
-   "T"
-  ],
-  [
-   61.71,
-   62.1,
-   null
-  ],
-  [
-   62.1,
-   62.23,
-   "F"
-  ],
-  [
-   62.23,
-   62.27,
+   48.35,
+   59.55,
    null
   ]
  ],
@@ -4355,7 +2949,7 @@
    "poste": "ingé son",
    "controle": "aucune phrase inventée (« Sous-titrage Radio-Canada »…)",
    "ok": true,
-   "detail": "",
+   "detail": "3 mot(s) retiré(s)",
    "revoir": false
   },
   {
@@ -4369,7 +2963,7 @@
    "poste": "ingé son",
    "controle": "mots à une vitesse possible",
    "ok": true,
-   "detail": "3 mot(s) trop courts",
+   "detail": "1 mot(s) trop courts",
    "revoir": false
   },
   {
@@ -4389,43 +2983,36 @@
   {
    "poste": "ingé son",
    "controle": "deux transcriptions d'accord",
-   "ok": true,
-   "detail": "88 % de mots identiques, 3 doute(s), 3 tranché(s) par une 3e écoute, 1 corrigé(s)",
-   "revoir": false
-  },
-  {
-   "poste": "ingé son",
-   "controle": "sous-titres écrits par le créateur relus",
-   "ok": true,
-   "detail": "94 % des lettres entendues écrites à l'écran, 10 doute(s), 2 mot(s) corrigé(s)",
+   "ok": false,
+   "detail": "48 % de mots identiques, 3 doute(s), 3 tranché(s) par une 3e écoute, 0 corrigé(s)",
    "revoir": false
   },
   {
    "poste": "casting voix",
    "controle": "témoin image (qui parle dans l'original)",
    "ok": true,
-   "detail": "19/38 phrases lisibles (mouvements)",
+   "detail": "19/27 phrases lisibles (silhouettes (SAM 2), mouvements)",
    "revoir": false
   },
   {
    "poste": "casting voix",
-   "controle": "fil du dialogue repris (son + texte + image)",
+   "controle": "autant de personnages que de personnes à l'image",
    "ok": true,
-   "detail": "l'image contredit le son sur 47 % des phrases",
+   "detail": "3 voix, 3 à l'image",
    "revoir": false
   },
   {
    "poste": "casting voix",
    "controle": "parole répartie entre les personnages",
    "ok": true,
-   "detail": "2 voix, la plus bavarde dit 51 %",
+   "detail": "3 voix, la plus bavarde dit 56 %",
    "revoir": false
   },
   {
    "poste": "casting voix",
    "controle": "témoin hauteur de la voix (phrase par phrase)",
    "ok": true,
-   "detail": "voix à [130, 208] Hz : rien à changer",
+   "detail": "voix à [146, 214] Hz : 4 phrase(s) remise(s) sur la bonne voix (corrigé)",
    "revoir": false
   },
   {
@@ -4439,14 +3026,14 @@
    "poste": "scripte",
    "controle": "téléphone en main seulement s'il en est question",
    "ok": true,
-   "detail": "",
+   "detail": "retiré sur 2 réplique(s) (corrigé)",
    "revoir": false
   },
   {
    "poste": "scripte",
    "controle": "autant de personnages que de voix",
    "ok": true,
-   "detail": "2 voix, 2 personnage(s)",
+   "detail": "3 voix, 3 personnage(s)",
    "revoir": false
   },
   {
@@ -4488,21 +3075,21 @@
    "poste": "casting voix",
    "controle": "contrôle par la hauteur de la voix (réplique par réplique)",
    "ok": true,
-   "detail": "{'presentateur': 130, 'invite': 219} Hz : 8 réplique(s) remise(s) sur la bonne voix (corrigé)",
+   "detail": "{'envoyee': 112, 'invite': 211} Hz : toutes du bon côté",
    "revoir": false
   },
   {
    "poste": "casting voix",
    "controle": "dernier contrôle des voix (chaque réplique comparée à la voix moyenne de chaque personnage)",
    "ok": true,
-   "detail": "1 réplique(s) remise(s) sur la bonne voix (corrigé) : réplique 22 (Juste, par contre, j'ai pas de compote.) -> presentateur (écart 0.24)",
+   "detail": "toutes à leur place (voix 0.32)",
    "revoir": false
   },
   {
    "poste": "fiche de tournage",
    "controle": "contrôle 1 : règles (cohérence avec ce qui est dit)",
    "ok": true,
-   "detail": "réplique 0 signe : goutte -> — (pas cohérent avec l'émotion « neutre ») (corrigé)",
+   "detail": "",
    "revoir": false
   },
   {
@@ -4521,412 +3108,319 @@
   }
  ],
  "_fiche": {
-  "lieu": "cuisine",
-  "lieu_precis": "modern office kitchen with blue tiled walls and coffee machine",
+  "lieu": "chambre",
+  "lieu_precis": "small dark bedroom with wooden headboard and pillow on bed",
   "interieur": true,
-  "moment": "jour",
+  "moment": "nuit",
   "meteo": "",
-  "occasion": "",
-  "ambiance": "gene",
-  "niveau": "moyen",
+  "occasion": "mariage",
+  "ambiance": "",
+  "niveau": "modeste",
   "details": [
-   "coffee machine on counter",
-   "colorful mugs on shelf",
-   "tea box on counter"
+   "bottle of water on nightstand",
+   "smartphone in hand"
   ],
-  "lumiere": "bright indoor office lighting",
+  "lumiere": "dim warm bedroom night light",
   "panneaux": [],
   "ecran_tel": "",
   "animations": [],
   "personnages": {
-   "invite": {
+   "envoyee": {
     "genre": "f",
-    "age": 35,
-    "corpulence": "moyen",
+    "age": 25,
+    "corpulence": "mince",
     "taille": "moyen",
-    "cheveux": "long",
+    "cheveux": "tresses",
     "c_cheveux": "noir",
     "barbe": "aucune",
     "lunettes": false,
     "tenue": "normale",
+    "haut": "robe",
+    "c_haut": "beige",
+    "etat_tenue": []
+   },
+   "invite": {
+    "genre": "h",
+    "age": 25,
+    "corpulence": "mince",
+    "taille": "moyen",
+    "cheveux": "court",
+    "c_cheveux": "noir",
+    "barbe": "aucune",
+    "lunettes": false,
+    "tenue": "pyjama",
     "haut": "debardeur",
-    "c_haut": "noir",
+    "c_haut": "jaune",
     "etat_tenue": []
    },
    "presentateur": {
     "genre": "h",
-    "age": 30,
+    "age": 25,
     "corpulence": "mince",
     "taille": "moyen",
     "cheveux": "court",
-    "c_cheveux": "brun",
-    "barbe": "trois_jours",
+    "c_cheveux": "noir",
+    "barbe": "aucune",
     "lunettes": false,
-    "tenue": "normale",
-    "haut": "chemise",
-    "c_haut": "noir",
+    "tenue": "pyjama",
+    "haut": "debardeur",
+    "c_haut": "blanc",
     "etat_tenue": []
    }
   },
   "repliques": {
    "0": {
-    "intensite": 3,
-    "geste": "mains_hanches"
+    "emotion": "fatigue",
+    "intensite": 1,
+    "geste": "telephone",
+    "objet": "telephone",
+    "action": "telephone_oreille"
    },
    "1": {
-    "emotion": "sceptique",
-    "intensite": 1
+    "emotion": "fatigue",
+    "intensite": 1,
+    "geste": "telephone",
+    "objet": "telephone",
+    "action": "telephone_oreille"
    },
    "2": {
-    "emotion": "reflechit",
+    "emotion": "fatigue",
     "intensite": 1,
-    "geste": "gratte_tete"
+    "geste": "telephone",
+    "objet": "telephone",
+    "action": "telephone_oreille"
    },
    "3": {
-    "emotion": "sceptique",
-    "intensite": 1
+    "emotion": "fatigue",
+    "intensite": 1,
+    "geste": "telephone",
+    "objet": "telephone",
+    "action": "telephone_oreille"
    },
    "4": {
-    "intensite": 2,
-    "geste": "supplie"
+    "emotion": "fatigue",
+    "intensite": 1,
+    "geste": "telephone",
+    "objet": "telephone",
+    "action": "telephone_oreille"
    },
    "5": {
     "emotion": "neutre",
-    "intensite": 1
+    "intensite": 1,
+    "geste": "telephone",
+    "objet": "telephone",
+    "action": "telephone_oreille"
    },
    "6": {
-    "emotion": "colere",
-    "intensite": 2,
-    "geste": "explique"
+    "emotion": "neutre",
+    "intensite": 1,
+    "geste": "telephone",
+    "objet": "telephone",
+    "action": "telephone_oreille"
    },
    "7": {
     "emotion": "neutre",
     "intensite": 1,
-    "objet": "livre",
-    "action": "tenir"
+    "geste": "telephone",
+    "objet": "telephone",
+    "action": "telephone_oreille"
    },
    "8": {
-    "emotion": "gene",
+    "emotion": "colere",
     "intensite": 2,
-    "geste": "pointe_d"
+    "geste": "telephone",
+    "objet": "telephone",
+    "action": "telephone_oreille"
    },
    "9": {
-    "emotion": "choc",
+    "emotion": "colere",
     "intensite": 2,
-    "geste": "gratte_tete",
-    "objet": "livre",
-    "action": "tenir"
+    "geste": "telephone",
+    "objet": "telephone",
+    "action": "telephone_oreille"
    },
    "10": {
-    "intensite": 1
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "telephone",
+    "objet": "telephone",
+    "action": "telephone_oreille"
    },
    "11": {
-    "emotion": "sceptique",
-    "intensite": 2,
-    "objet": "livre",
-    "action": "tenir"
+    "emotion": "neutre",
+    "intensite": 1,
+    "geste": "telephone",
+    "objet": "telephone",
+    "action": "telephone_oreille"
    },
    "12": {
     "emotion": "neutre",
-    "intensite": 1
+    "intensite": 1,
+    "geste": "telephone",
+    "objet": "telephone",
+    "action": "telephone_oreille"
    },
    "13": {
-    "emotion": "fier",
-    "intensite": 2,
-    "geste": "pouce",
-    "objet": "livre",
-    "action": "tenir"
+    "emotion": "neutre",
+    "intensite": 1,
+    "geste": "telephone",
+    "objet": "telephone",
+    "action": "telephone_oreille"
    },
    "14": {
-    "emotion": "fier",
-    "intensite": 2,
-    "objet": "livre",
-    "action": "tenir"
+    "emotion": "neutre",
+    "intensite": 1,
+    "geste": "telephone",
+    "objet": "telephone",
+    "action": "telephone_oreille"
    },
    "15": {
-    "emotion": "sceptique",
+    "emotion": "choc",
     "intensite": 2,
-    "geste": "explique",
-    "objet": "livre",
-    "action": "tenir"
+    "geste": "telephone",
+    "objet": "telephone",
+    "action": "telephone_oreille"
    },
    "16": {
     "emotion": "neutre",
-    "intensite": 1
+    "intensite": 1,
+    "geste": "telephone",
+    "objet": "telephone",
+    "action": "telephone_oreille"
    },
    "17": {
     "emotion": "neutre",
     "intensite": 1,
-    "action": "tenir"
+    "geste": "telephone",
+    "objet": "telephone",
+    "action": "telephone_oreille"
    },
    "18": {
-    "emotion": "sceptique",
-    "intensite": 2,
-    "objet": "livre",
-    "action": "tenir"
-   },
-   "19": {
-    "emotion": "joie",
-    "intensite": 2
-   },
-   "20": {
-    "emotion": "joie",
-    "intensite": 3,
-    "geste": "explique"
-   },
-   "21": {
-    "emotion": "choc",
-    "intensite": 2,
-    "objet": "livre",
-    "action": "tenir",
-    "signe": "etoiles"
-   },
-   "22": {
-    "emotion": "gene",
-    "intensite": 2,
-    "geste": "gratte_tete",
-    "objet": "livre",
-    "action": "tenir"
-   },
-   "23": {
-    "emotion": "choc",
-    "intensite": 2
-   },
-   "24": {
-    "emotion": "gene",
-    "intensite": 1,
-    "objet": "livre",
-    "action": "tenir"
-   },
-   "25": {
-    "emotion": "gene",
-    "intensite": 2,
-    "objet": "livre",
-    "action": "tenir"
-   },
-   "26": {
     "emotion": "neutre",
     "intensite": 1,
-    "objet": "livre",
-    "action": "tenir"
+    "geste": "telephone",
+    "objet": "telephone",
+    "action": "telephone_oreille"
    },
-   "27": {
-    "emotion": "gene",
-    "intensite": 2,
-    "objet": "livre",
-    "action": "tenir",
-    "signe": "goutte"
-   },
-   "28": {
-    "emotion": "choc",
-    "intensite": 3,
-    "geste": "mains_hanches"
+   "19": {
+    "emotion": "neutre",
+    "intensite": 1
    }
   },
-  "reactions": [
-   {
-    "n": 0,
-    "qui": "presentateur",
-    "mot": "stressée",
-    "reaction": "sceptique"
-   },
-   {
-    "n": 8,
-    "qui": "presentateur",
-    "mot": "ça",
-    "reaction": "choque"
-   },
-   {
-    "n": 22,
-    "qui": "invite",
-    "mot": "compote",
-    "reaction": "choque"
-   },
-   {
-    "n": 27,
-    "qui": "invite",
-    "mot": "dégueulasse",
-    "reaction": "yeux_au_ciel"
-   }
-  ],
+  "reactions": [],
   "source": "video",
-  "controles": 2
- },
- "_jeu_dessin": {
-  "invite": [
-   [
-    0.18,
-    2.29,
-    "colere",
-    2
-   ],
-   [
-    6.32,
-    8.42,
-    "colere",
-    2
-   ],
-   [
-    10.55,
-    13.44,
-    "colere",
-    2
-   ],
-   [
-    25.41,
-    27.7,
-    "joie",
-    1
-   ],
-   [
-    31.04,
-    32.64,
-    "joie",
-    1
-   ],
-   [
-    50.19,
-    51.37,
-    "colere",
-    1
-   ]
-  ],
-  "presentateur": [
-   [
-    8.64,
-    9.88,
-    "choc",
-    2
-   ],
-   [
-    19.97,
-    21.81,
-    "choc",
-    2
-   ],
-   [
-    33.46,
-    35.24,
-    "choc",
-    1
-   ],
-   [
-    54.23,
-    56.64,
-    "sceptique",
-    3
-   ]
-  ]
+  "controles": 0
  },
  "_anglais": [
-  "Ugh, I'm so stressed, I *need* my tea right now.",
-  "Sorry.",
-  "Uh...",
-  "What?",
-  "Come on, please—after this, I’ll be *miserable* all day.",
-  "Now? Like, *right now*?",
-  "Before the boss gets here. She’ll *kill* me, say I’m slacking, the whole thing.",
-  "Yeah, can’t blame her. It’s kinda weird.",
-  "You can do it.",
-  "You wanna do it *with* me?",
-  "Yeah, sure, if you want.",
-  "But I’m kinda surprised, honestly.",
-  "You know how to use it.",
-  "Yeah, don’t worry.",
-  "I’ve only gotten good feedback on it, so no stress.",
-  "There’s people walking by—you *sure* you wanna do this here?",
-  "Everyone does it here. That’s what breaks are for.",
-  "Okay, it’s my second day, I’m still figuring things out.",
-  "But I thought you had a boyfriend.",
-  "Oh, him? He’s *addicted*, just like me.",
-  "Since we started in Morocco, we can’t stop—*five times a day*!",
-  "Whoa!",
-  "Just, no apple sauce for me, though.",
-  "What?",
-  "I",
-  "Don’t have apple sauce. I *don’t have apple sauce*.",
-  "I always take it with my tea, actually.",
-  "And I don’t have it. It’s *disgusting*.",
-  "Tea with no apple sauce? *Gross*."
+  "Hey.",
+  "Yo, I’m right outside your place. Get in the car, we’re heading to Paraguay.",
+  "Huh, what?",
+  "Yeah, you coming or not?",
+  "Uh, yeah, just give me 5 mins, I’m coming. Yeah, hey.",
+  "Listen, I got a wedding in an hour. You down to come?",
+  "Uh, yeah, sure.",
+  "Perfect, see ya. Later. Yeah, I’m outside your place, come down.",
+  "I never told you to come to my place.",
+  "My place.",
+  "No, but what are we even doing?",
+  "No clue.",
+  "Come on, I’m coming.",
+  "Yeah, listen, I’m heading to church for my son’s baptism.",
+  "You up for being the bridesmaid?",
+  "Wait, you’re—",
+  "A kid.",
+  "You in or not?",
+  "Yeah, yeah, I’m coming.",
+  "Cool. Okay."
  ],
+ "_sans_fin": true,
  "_decors_semi": [
   0
  ],
  "_decors_cles": {
-  "0": "1c01808f7dddc7b1"
+  "0": "cd5c42481f2acf80"
  },
  "_voix_hz": {
-  "presentateur": 130,
-  "invite": 214
+  "presentateur": 131,
+  "invite": 193,
+  "envoyee": 128
  },
  "_voix_genre": {
   "presentateur": "h",
-  "invite": "f"
+  "envoyee": "h",
+  "invite": "h"
  },
  "_voix_timbre": {
-  "presentateur": 978,
-  "invite": 1106
+  "presentateur": 868,
+  "invite": 946,
+  "envoyee": 933
  },
  "_voix_mesuree": [
   "presentateur",
-  "invite"
+  "invite",
+  "envoyee"
  ],
  "_voix_ina": {
   "presentateur": "h",
-  "invite": "f"
+  "invite": "h",
+  "envoyee": "h"
  },
  "_voix_vtl": {
-  "presentateur": 17.88,
-  "invite": 16.26
+  "presentateur": 18.05,
+  "invite": 16.99,
+  "envoyee": 18.32
  },
  "_voix_vtl_genre": {
-  "presentateur": "h"
+  "presentateur": "h",
+  "invite": "h",
+  "envoyee": "h"
  },
  "_voix_timbre_genre": {
   "presentateur": "h",
-  "invite": "f"
+  "invite": "h",
+  "envoyee": "h"
  },
  "_casting_final": {
   "invite": {
    "fiche": {
-    "genre": "f",
-    "age": 35,
-    "corpulence": 0.32,
-    "taille": 0.97,
+    "genre": "h",
+    "age": 25,
+    "corpulence": 0.12,
+    "taille": 1.04,
     "peau": [
-     234,
-     186,
-     146
+     96,
+     64,
+     46
     ],
-    "visage": "ovale",
+    "visage": "long",
     "iris": [
-     120,
-     120,
-     110
+     60,
+     110,
+     150
     ],
-    "yeux": 1.0537521851154272,
-    "nez": "fort",
-    "levres": 1.224607816820404,
-    "sourcils": 0.7912839538323784,
-    "cheveux": "long",
+    "yeux": 0.9328450325402755,
+    "nez": "rond",
+    "levres": 1.0591962422184833,
+    "sourcils": 1.2173823751196924,
+    "cheveux": "boucles",
     "c_cheveux": [
-     70,
-     45,
-     32
+     200,
+     100,
+     50
     ],
-    "barbe": "",
+    "barbe": "bouc",
     "lunettes": "",
-    "maquillage": true
+    "maquillage": false
    },
    "costume": {
-    "haut": "blouse",
+    "haut": "pull",
     "c_haut": [
-     240,
-     150,
-     180
+     80,
+     160,
+     100
     ],
-    "motif": "uni",
-    "bas": "jean",
+    "motif": "carreaux",
+    "bas": "short",
     "c_bas": [
      70,
      100,
@@ -4939,118 +3433,44 @@
      240
     ],
     "details": [
-     "bracelets"
+     "boucles_oreilles",
+     "sac_bandouliere"
     ],
     "c_motif": [
-     172,
-     108,
-     129
+     57,
+     115,
+     72
     ],
-    "cheveux": "long",
+    "cheveux": "boucles",
     "c_cheveux": [
-     70,
-     45,
-     32
-    ]
-   }
-  },
-  "presentateur": {
-   "fiche": {
-    "genre": "h",
-    "age": 30,
-    "corpulence": 0.12,
-    "taille": 1.04,
-    "peau": [
-     255,
-     226,
-     200
-    ],
-    "visage": "rond",
-    "iris": [
-     110,
-     75,
-     45
-    ],
-    "yeux": 0.9380764484051362,
-    "nez": "fin",
-    "levres": 1.1582079806885075,
-    "sourcils": 0.9937230032288583,
-    "cheveux": "court",
-    "c_cheveux": [
-     70,
-     45,
-     32
-    ],
-    "barbe": "trois_jours",
-    "lunettes": "",
-    "maquillage": false
-   },
-   "costume": {
-    "haut": "tshirt",
-    "c_haut": [
-     40,
-     40,
-     46
-    ],
-    "motif": "uni",
-    "bas": "pantalon",
-    "c_bas": [
-     70,
+     200,
      100,
-     150
-    ],
-    "chaussures": "ville",
-    "c_chaussures": [
-     240,
-     240,
-     240
-    ],
-    "details": [
-     "barbe_courte"
-    ],
-    "c_motif": [
-     28,
-     28,
-     33
-    ],
-    "cheveux": "court",
-    "c_cheveux": [
-     70,
-     45,
-     32
+     50
     ]
    }
   }
  },
  "_type_couverture": "chute",
  "realisation": {
-  "moment": "jour",
+  "moment": "nuit",
   "lieux": [
-   "cuisine"
+   "chambre"
   ],
   "gags": [
-   "Compote : Le seul ingrédient qui peut gâcher ton thé.",
-   "Thé sans compote : Un crime contre l'humanité.",
-   "Pause thé : Quand le café devient trop sérieux."
+   "Affiche 'Paraguay' avec un gribouillis 'Annulé'",
+   "Bouteille de jus avec l'étiquette 'Jus de Baptême'",
+   "Affiche 'Parrain' avec un autocollant 'Recherche désespérément'"
   ],
   "ambiances": [
-   "vapeur"
+   "neon"
   ],
   "source": "auteur+image",
   "tenues": {
-   "invite": "blouse",
-   "presentateur": "tshirt"
+   "presentateur": "tshirt",
+   "invite": "pull",
+   "envoyee": "chemise"
   },
   "plans": [
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
-   "large/fixe",
    "large/fixe",
    "large/fixe",
    "large/fixe",
@@ -5074,10 +3494,417 @@
   ]
  },
  "_recette": {
-  "lieu": "cuisine",
+  "lieu": "chambre",
   "animal": false,
-  "persos": 2,
+  "persos": 3,
   "partie": false
  },
- "_controles_sautes": []
+ "_controles_sautes": [],
+ "_bible": {
+  "graine": 4104119666,
+  "moment": "nuit",
+  "lieux": [
+   "chambre"
+  ],
+  "gags": [
+   "Affiche 'Paraguay' avec un gribouillis 'Annulé'",
+   "Bouteille de jus avec l'étiquette 'Jus de Baptême'",
+   "Affiche 'Parrain' avec un autocollant 'Recherche désespérément'"
+  ],
+  "costumes": {
+   "invite": {
+    "haut": "pull",
+    "c_haut": [
+     80,
+     160,
+     100
+    ],
+    "motif": "carreaux",
+    "bas": "short",
+    "c_bas": [
+     70,
+     100,
+     150
+    ],
+    "chaussures": "baskets",
+    "c_chaussures": [
+     240,
+     240,
+     240
+    ],
+    "details": [
+     "boucles_oreilles",
+     "sac_bandouliere"
+    ],
+    "c_motif": [
+     57,
+     115,
+     72
+    ],
+    "cheveux": "boucles",
+    "c_cheveux": [
+     200,
+     100,
+     50
+    ]
+   }
+  },
+  "figurants": [],
+  "ambiances": [
+   "neon"
+  ],
+  "lumiere": 1,
+  "ombre": 0.32,
+  "etalonnage": [
+   0.9,
+   0.93,
+   1.04
+  ],
+  "heure": [
+   2,
+   15
+  ],
+  "style_ia": "night, dark blue ambience, warm lamp light",
+  "plans": [
+   {
+    "replique": 0,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "telephone",
+    "reaction": "regard_camera"
+   },
+   {
+    "replique": 1,
+    "plan": "moyen",
+    "mouvement": "avance",
+    "geste": "bras_ouverts",
+    "reaction": "joie"
+   },
+   {
+    "replique": 2,
+    "plan": "tres_serre",
+    "mouvement": "fixe",
+    "geste": "pointe_g",
+    "reaction": "choc"
+   },
+   {
+    "replique": 3,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "poing",
+    "reaction": "colere"
+   },
+   {
+    "replique": 4,
+    "plan": "moyen",
+    "mouvement": "fixe",
+    "geste": "gratte_tete",
+    "reaction": "reflechit"
+   },
+   {
+    "replique": 5,
+    "plan": "large",
+    "mouvement": "recul",
+    "geste": "mains_hanches",
+    "reaction": "panique"
+   },
+   {
+    "replique": 6,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "pointe_d",
+    "reaction": "sceptique"
+   },
+   {
+    "replique": 7,
+    "plan": "serre",
+    "mouvement": "zoom_choc",
+    "geste": "haussement",
+    "reaction": "gene"
+   },
+   {
+    "replique": 8,
+    "plan": "tres_serre",
+    "mouvement": "fixe",
+    "geste": "accusateur",
+    "reaction": "colere"
+   },
+   {
+    "replique": 9,
+    "plan": "moyen",
+    "mouvement": "fixe",
+    "geste": "telephone",
+    "reaction": "confused"
+   },
+   {
+    "replique": 10,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "gratte_tete",
+    "reaction": "reflechit"
+   },
+   {
+    "replique": 11,
+    "plan": "large",
+    "mouvement": "travelling",
+    "geste": "bras_ouverts",
+    "reaction": "choc"
+   },
+   {
+    "replique": 13,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "serieux",
+    "reaction": "neutre"
+   },
+   {
+    "replique": 14,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "pointe_g",
+    "reaction": "sarcastic"
+   },
+   {
+    "replique": 15,
+    "plan": "tres_serre",
+    "mouvement": "fixe",
+    "geste": "choc",
+    "reaction": "choc"
+   },
+   {
+    "replique": 16,
+    "plan": "moyen",
+    "mouvement": "avance",
+    "geste": "bras_ouverts",
+    "reaction": "joie"
+   },
+   {
+    "replique": 17,
+    "plan": "serre",
+    "mouvement": "fixe",
+    "geste": "pointe_d",
+    "reaction": "agreeing"
+   },
+   {
+    "replique": 18,
+    "plan": "large",
+    "mouvement": "recul",
+    "geste": "bras_ouverts",
+    "reaction": "neutre"
+   }
+  ],
+  "jeu": [
+   {
+    "replique": 2,
+    "emotion": "fatigue",
+    "intensite": 1,
+    "geste": "telephone"
+   },
+   {
+    "replique": 3,
+    "emotion": "fatigue",
+    "intensite": 1,
+    "geste": "telephone"
+   },
+   {
+    "replique": 4,
+    "emotion": "fatigue",
+    "intensite": 1,
+    "geste": "telephone"
+   },
+   {
+    "replique": 6,
+    "emotion": "neutre",
+    "intensite": 1,
+    "geste": "telephone"
+   },
+   {
+    "replique": 7,
+    "emotion": "neutre",
+    "intensite": 1,
+    "geste": "telephone"
+   },
+   {
+    "replique": 8,
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "telephone"
+   },
+   {
+    "replique": 9,
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "telephone"
+   },
+   {
+    "replique": 10,
+    "emotion": "colere",
+    "intensite": 2,
+    "geste": "telephone"
+   },
+   {
+    "replique": 11,
+    "emotion": "neutre",
+    "intensite": 1,
+    "geste": "telephone"
+   },
+   {
+    "replique": 12,
+    "emotion": "neutre",
+    "intensite": 1,
+    "geste": "telephone"
+   },
+   {
+    "replique": 13,
+    "emotion": "neutre",
+    "intensite": 1,
+    "geste": "telephone"
+   },
+   {
+    "replique": 14,
+    "emotion": "neutre",
+    "intensite": 1,
+    "geste": "telephone"
+   },
+   {
+    "replique": 15,
+    "emotion": "choc",
+    "intensite": 2,
+    "geste": "telephone"
+   },
+   {
+    "replique": 16,
+    "emotion": "neutre",
+    "intensite": 1,
+    "geste": "telephone"
+   },
+   {
+    "replique": 17,
+    "emotion": "neutre",
+    "intensite": 1,
+    "geste": "telephone"
+   },
+   {
+    "replique": 18,
+    "emotion": "neutre",
+    "intensite": 1,
+    "geste": "telephone"
+   },
+   {
+    "replique": 19,
+    "emotion": "neutre",
+    "intensite": 1,
+    "geste": ""
+   },
+   {
+    "replique": 0,
+    "emotion": "confusion",
+    "geste": "regarde son téléphone",
+    "intensite": 0.5
+   },
+   {
+    "replique": 1,
+    "emotion": "enthousiasme",
+    "geste": "parle au téléphone",
+    "intensite": 0.7
+   },
+   {
+    "replique": 5,
+    "emotion": "détermination",
+    "geste": "parle au téléphone",
+    "intensite": 0.6
+   }
+  ],
+  "source": "auteur+image",
+  "c_mur": [
+   219,
+   209,
+   211
+  ],
+  "rythme": {
+   "serre": 0.425,
+   "large": 0.425,
+   "tres_serre": 0.0,
+   "camera": {
+    "fixe": 0.974,
+    "avance": 0.017,
+    "recul": 0.009,
+    "travelling": 0.0,
+    "epaule": 0.0
+   },
+   "energie": 0.163,
+   "sourires": 0.0,
+   "duree_plan": 12.0
+  },
+  "fiches": {
+   "invite": {
+    "genre": "h",
+    "age": 25,
+    "corpulence": 0.12,
+    "taille": 1.04,
+    "peau": [
+     96,
+     64,
+     46
+    ],
+    "visage": "long",
+    "iris": [
+     60,
+     110,
+     150
+    ],
+    "yeux": 0.9328450325402755,
+    "nez": "rond",
+    "levres": 1.0591962422184833,
+    "sourcils": 1.2173823751196924,
+    "cheveux": "boucles",
+    "c_cheveux": [
+     200,
+     100,
+     50
+    ],
+    "barbe": "bouc",
+    "lunettes": "",
+    "maquillage": false
+   }
+  },
+  "cadence": "rapide",
+  "assis": {},
+  "meubles": {},
+  "cine": {
+   "focus": false,
+   "vertige": false,
+   "tiers": true,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": true,
+   "reflets": false,
+   "son": true
+  },
+  "decoupe": {},
+  "coupes_origine": [
+   15.0,
+   24.0,
+   36.0,
+   49.5
+  ],
+  "gestes_origine": [
+   35.0,
+   36.5,
+   37.5,
+   39.5,
+   40.5,
+   41.5,
+   46.0,
+   47.5,
+   48.5
+  ],
+  "postures_origine": [],
+  "reactions": [],
+  "animations": [],
+  "panneaux": [],
+  "ecran_tel": "",
+  "lumiere_ambiance": "dim warm bedroom night light",
+  "interieur": true
+ }
 }
