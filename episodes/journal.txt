@@ -1,136 +1,393 @@
-Modal : 17.97 $ dépensés ce mois-ci (plafond 30 $)
+Modal : 17.98 $ dépensés ce mois-ci (plafond 30 $)
 Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, Groq ok, OpenRouter ok, IA Modal ok, ElevenLabs epuise — IA utilisée : mistral
 Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @motiontoonz, @same_same53, @charly.bse, @kodanimation, @vignianimation, @vincedessine, @aguerin30, @zequoiza, @jayzocc, @brutuslerobuste, @jawedyoussef
-Réserve de sons : son déjà écouté pris dans la réserve (https://www.tiktok.com/@brutuslerobuste/video/7680214792698727713) : on passe directement à la suite
-Chaîne : vidéo 6/10 lancée
+Éclaireur : 6 son(s) pris dans le classement d'il y a 59 min (5 créateur(s))
+Vidéo depuis TikTok : https://www.tiktok.com/@jawedyoussef/video/7629004248348511510
+  son téléchargé (yt-dlp --impersonate chrome)
+  son récupéré : 38.8 s, compte d'origine @jawedyoussef
+  voix isolées : crédit ElevenLabs épuisé, outil gratuit (Demucs)
+  voix isolées gratuitement (Demucs, 18 s)
+/home/runner/venv/lib/python3.12/site-packages/torch/jit/_serialization.py:176: FutureWarning: `torch.jit.load` is deprecated. Please switch to `torch.export`.
+  warnings.warn(
+  transcription : crédit ElevenLabs épuisé, Whisper gratuit
+  transcription Groq (Whisper, gratuit) : 120 mots
+  [équipe · ingé son] ✔ aucune phrase inventée (« Sous-titrage Radio-Canada »…)
+  [équipe · ingé son] ✔ pas de phrase répétée en boucle
+  [équipe · ingé son] ✔ mots à une vitesse possible : 3 mot(s) trop courts
+  [équipe · ingé son] ✔ pas de long passage sans texte
+  [équipe · ingé son] ✔ pas de mots là où personne ne parle (Silero)
+[ WARN:0@36.923] global net_impl_backend.cpp:388 setPreferableTarget Targets are not supported by the new graph engine for now
+  TransNetV2 : 22 changement(s) de plan dans l'original
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1795482224.565543    2979 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1795482225.863211    2979 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+WARNING: Logging before InitGoogle() is written to STDERR
+W0000 00:00:1795482228.768218    3134 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1795482228.784325    3134 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1795482228.806548    3134 landmark_projection_calculator.cc:81] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX.
+  image de la vidéo : 23 plans (≈ 1.69 s chacun) ; cadrages : très serré 51 %, serré 34 %, moyen 2 %, large 11 % ; caméra : fixe 10 %, avance 14 %, recul 24 %, travelling 33 %, epaule 17 % ; 1 personne(s) à l'écran : centre (habit [37, 32, 32], cheveux [45, 33, 29], sourit 1 %); droite (habit [112, 107, 86], cheveux [56, 44, 38], sourit 0 %); gauche (habit [48, 31, 31], cheveux [56, 42, 36], sourit 7 %) ; agitation 1.0 ; lumière soir ; fond [38, 31, 30] ; postures : menton (29.3–30.7 s)
+  transcription gratuite (Whisper sur la machine) : 158 mots
+  [équipe · ingé son] ✔ deux transcriptions d'accord : 84 % de mots identiques, 0 doute(s), 0 corrigé(s)
+Loading weights:   0%|          | 0/424 [00:00<?, ?it/s]Loading weights: 100%|██████████| 424/424 [00:00<00:00, 24667.24it/s]
+  mots recalés sur la voix (114 mots, écart moyen 87 ms, 11 s)
+  [équipe · ingé son] ✔ sous-titres écrits par le créateur relus : 70 % des lettres entendues écrites à l'écran, 1 doute(s), 0 mot(s) corrigé(s)
+Loading weights:   0%|          | 0/447 [00:00<?, ?it/s]Loading weights: 100%|██████████| 447/447 [00:00<00:00, 27736.99it/s]
+  bruits de l'original (CLAP, 6 s) : crying, scream
+  voix séparées par NeMo : 3 voix, 17 tours de parole (38 s)
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+  voix vérifiées mot par mot : 2 mot(s) remis sur la bonne voix
+  Gemini a regardé la vidéo entière (gemini-3.6-flash) : 8 personnage(s), lieu « classe »
+W0000 00:00:1795482604.423688   27170 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+W0000 00:00:1795482604.435279   27172 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1795482604.446255   27175 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+I0000 00:00:1795482604.622289   27176 hand_gesture_recognizer_graph.cc:257] Custom gesture classifier is not defined.
+W0000 00:00:1795482604.634231   27179 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1795482604.644842   27179 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1795482604.645375   27179 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1795482604.645434   27179 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+  témoin visages : 26 piste(s), 8 personnage(s) d'après l'apparence et le regard, 17/24 phrases lisibles
+Loading weights:   0%|          | 0/978 [00:00<?, ?it/s]Loading weights:  75%|███████▍  | 731/978 [00:00<00:00, 7305.37it/s]Loading weights: 100%|██████████| 978/978 [00:00<00:00, 7403.48it/s]
+  Grounding DINO : 26 images regardées, jusqu'à 2 personne(s) ensemble
+Loading weights:   0%|          | 0/309 [00:00<?, ?it/s]Loading weights: 100%|██████████| 309/309 [00:00<00:00, 7291.12it/s]
+  SAM 2 : 9/24 phrases où l'on voit qui bouge
+  [équipe · casting voix] ✔ témoin image (qui parle dans l'original) : 24/24 phrases lisibles (Gemini (vidéo entière), visages, silhouettes (SAM 2), mouvements)
+  8 personnages joués par la même voix : chaque phrase au personnage vu dans l'original
+  [équipe · casting voix] ✔ plusieurs personnages joués par la même voix : 8 personnages vus dans l'original
+2026-11-24 01:12:16,604 [INFO] download models from model hub: hf
+2026-11-24 01:12:16,713 [INFO] HTTP Request: GET https://huggingface.co/api/models/emotion2vec/emotion2vec_plus_base/revision/main "HTTP/1.1 200 OK"
+2026-11-24 01:12:16,814 [INFO] HTTP Request: GET https://huggingface.co/api/models/emotion2vec/emotion2vec_plus_base/tree/b318240bfe67db81a8c572ecb37ce9c3759b81c9?recursive=true&expand=false "HTTP/1.1 200 OK"
+Fetching 9 files:   0%|          | 0/9 [00:00<?, ?it/s]2026-11-24 01:12:16,904 [INFO] HTTP Request: HEAD https://huggingface.co/emotion2vec/emotion2vec_plus_base/resolve/b318240bfe67db81a8c572ecb37ce9c3759b81c9/.gitattributes "HTTP/1.1 307 Temporary Redirect"
+2026-11-24 01:12:16,918 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/emotion2vec/emotion2vec_plus_base/b318240bfe67db81a8c572ecb37ce9c3759b81c9/.gitattributes?%2Femotion2vec%2Femotion2vec_plus_base%2Fresolve%2Fb318240bfe67db81a8c572ecb37ce9c3759b81c9%2F.gitattributes=&etag=%22a64593593a8fb6afc0499b748a7fe13836ec8706%22 "HTTP/1.1 200 OK"
+2026-11-24 01:12:16,920 [INFO] HTTP Request: HEAD https://huggingface.co/emotion2vec/emotion2vec_plus_base/resolve/b318240bfe67db81a8c572ecb37ce9c3759b81c9/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-11-24 01:12:16,921 [INFO] HTTP Request: HEAD https://huggingface.co/emotion2vec/emotion2vec_plus_base/resolve/b318240bfe67db81a8c572ecb37ce9c3759b81c9/example/test.wav "HTTP/1.1 307 Temporary Redirect"
+2026-11-24 01:12:16,922 [INFO] HTTP Request: HEAD https://huggingface.co/emotion2vec/emotion2vec_plus_base/resolve/b318240bfe67db81a8c572ecb37ce9c3759b81c9/configuration.json "HTTP/1.1 307 Temporary Redirect"
+2026-11-24 01:12:16,924 [INFO] HTTP Request: HEAD https://huggingface.co/emotion2vec/emotion2vec_plus_base/resolve/b318240bfe67db81a8c572ecb37ce9c3759b81c9/emotion2vec%2Bradar.png "HTTP/1.1 307 Temporary Redirect"
+2026-11-24 01:12:16,930 [INFO] HTTP Request: GET https://huggingface.co/api/resolve-cache/models/emotion2vec/emotion2vec_plus_base/b318240bfe67db81a8c572ecb37ce9c3759b81c9/.gitattributes?%2Femotion2vec%2Femotion2vec_plus_base%2Fresolve%2Fb318240bfe67db81a8c572ecb37ce9c3759b81c9%2F.gitattributes=&etag=%22a64593593a8fb6afc0499b748a7fe13836ec8706%22 "HTTP/1.1 200 OK"
+Fetching 9 files:  11%|█         | 1/9 [00:00<00:00,  8.69it/s]2026-11-24 01:12:16,932 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/emotion2vec/emotion2vec_plus_base/b318240bfe67db81a8c572ecb37ce9c3759b81c9/README.md?%2Femotion2vec%2Femotion2vec_plus_base%2Fresolve%2Fb318240bfe67db81a8c572ecb37ce9c3759b81c9%2FREADME.md=&etag=%22ccefd8db27fe7387b8712cf974e32c430d05da28%22 "HTTP/1.1 200 OK"
+2026-11-24 01:12:16,933 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/emotion2vec/emotion2vec_plus_base/b318240bfe67db81a8c572ecb37ce9c3759b81c9/example%2Ftest.wav?%2Femotion2vec%2Femotion2vec_plus_base%2Fresolve%2Fb318240bfe67db81a8c572ecb37ce9c3759b81c9%2Fexample%2Ftest.wav=&etag=%22002786ccb9d3fdbec1f754e3bc249486c9df87c5%22 "HTTP/1.1 200 OK"
+2026-11-24 01:12:16,935 [INFO] HTTP Request: GET https://huggingface.co/api/models/emotion2vec/emotion2vec_plus_base/xet-read-token/b318240bfe67db81a8c572ecb37ce9c3759b81c9 "HTTP/1.1 200 OK"
+2026-11-24 01:12:16,935 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/emotion2vec/emotion2vec_plus_base/b318240bfe67db81a8c572ecb37ce9c3759b81c9/emotion2vec%2Bradar.png?%2Femotion2vec%2Femotion2vec_plus_base%2Fresolve%2Fb318240bfe67db81a8c572ecb37ce9c3759b81c9%2Femotion2vec%2Bradar.png=&etag=%222e29f11035eeb2958f338b4fa334e7a9b4f1b854%22 "HTTP/1.1 200 OK"
+2026-11-24 01:12:16,941 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/emotion2vec/emotion2vec_plus_base/b318240bfe67db81a8c572ecb37ce9c3759b81c9/configuration.json?%2Femotion2vec%2Femotion2vec_plus_base%2Fresolve%2Fb318240bfe67db81a8c572ecb37ce9c3759b81c9%2Fconfiguration.json=&etag=%22f165bb611a674faee647fe64a9a7a00ad36f0a8f%22 "HTTP/1.1 200 OK"
+2026-11-24 01:12:16,945 [INFO] HTTP Request: GET https://huggingface.co/api/resolve-cache/models/emotion2vec/emotion2vec_plus_base/b318240bfe67db81a8c572ecb37ce9c3759b81c9/README.md?%2Femotion2vec%2Femotion2vec_plus_base%2Fresolve%2Fb318240bfe67db81a8c572ecb37ce9c3759b81c9%2FREADME.md=&etag=%22ccefd8db27fe7387b8712cf974e32c430d05da28%22 "HTTP/1.1 200 OK"
+2026-11-24 01:12:16,946 [INFO] HTTP Request: GET https://huggingface.co/api/resolve-cache/models/emotion2vec/emotion2vec_plus_base/b318240bfe67db81a8c572ecb37ce9c3759b81c9/example%2Ftest.wav?%2Femotion2vec%2Femotion2vec_plus_base%2Fresolve%2Fb318240bfe67db81a8c572ecb37ce9c3759b81c9%2Fexample%2Ftest.wav=&etag=%22002786ccb9d3fdbec1f754e3bc249486c9df87c5%22 "HTTP/1.1 200 OK"
+2026-11-24 01:12:16,947 [INFO] HTTP Request: GET https://huggingface.co/api/resolve-cache/models/emotion2vec/emotion2vec_plus_base/b318240bfe67db81a8c572ecb37ce9c3759b81c9/emotion2vec%2Bradar.png?%2Femotion2vec%2Femotion2vec_plus_base%2Fresolve%2Fb318240bfe67db81a8c572ecb37ce9c3759b81c9%2Femotion2vec%2Bradar.png=&etag=%222e29f11035eeb2958f338b4fa334e7a9b4f1b854%22 "HTTP/1.1 200 OK"
+2026-11-24 01:12:16,958 [INFO] HTTP Request: GET https://huggingface.co/api/resolve-cache/models/emotion2vec/emotion2vec_plus_base/b318240bfe67db81a8c572ecb37ce9c3759b81c9/configuration.json?%2Femotion2vec%2Femotion2vec_plus_base%2Fresolve%2Fb318240bfe67db81a8c572ecb37ce9c3759b81c9%2Fconfiguration.json=&etag=%22f165bb611a674faee647fe64a9a7a00ad36f0a8f%22 "HTTP/1.1 200 OK"
+2026-11-24 01:12:16,959 [INFO] HTTP Request: HEAD https://huggingface.co/emotion2vec/emotion2vec_plus_base/resolve/b318240bfe67db81a8c572ecb37ce9c3759b81c9/config.yaml "HTTP/1.1 307 Temporary Redirect"
+2026-11-24 01:12:16,972 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/emotion2vec/emotion2vec_plus_base/b318240bfe67db81a8c572ecb37ce9c3759b81c9/config.yaml?%2Femotion2vec%2Femotion2vec_plus_base%2Fresolve%2Fb318240bfe67db81a8c572ecb37ce9c3759b81c9%2Fconfig.yaml=&etag=%225625920e6ae5a26903114251f0c1411178c4d5e2%22 "HTTP/1.1 200 OK"
+2026-11-24 01:12:16,983 [INFO] HTTP Request: GET https://huggingface.co/api/resolve-cache/models/emotion2vec/emotion2vec_plus_base/b318240bfe67db81a8c572ecb37ce9c3759b81c9/config.yaml?%2Femotion2vec%2Femotion2vec_plus_base%2Fresolve%2Fb318240bfe67db81a8c572ecb37ce9c3759b81c9%2Fconfig.yaml=&etag=%225625920e6ae5a26903114251f0c1411178c4d5e2%22 "HTTP/1.1 200 OK"
+2026-11-24 01:12:17,021 [INFO] HTTP Request: HEAD https://huggingface.co/emotion2vec/emotion2vec_plus_base/resolve/b318240bfe67db81a8c572ecb37ce9c3759b81c9/tokens.txt "HTTP/1.1 307 Temporary Redirect"
+2026-11-24 01:12:17,033 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/emotion2vec/emotion2vec_plus_base/b318240bfe67db81a8c572ecb37ce9c3759b81c9/tokens.txt?%2Femotion2vec%2Femotion2vec_plus_base%2Fresolve%2Fb318240bfe67db81a8c572ecb37ce9c3759b81c9%2Ftokens.txt=&etag=%22e5a8dfffb0836ed38f37915905d1c05bdb18f1af%22 "HTTP/1.1 200 OK"
+2026-11-24 01:12:17,047 [INFO] HTTP Request: GET https://huggingface.co/api/resolve-cache/models/emotion2vec/emotion2vec_plus_base/b318240bfe67db81a8c572ecb37ce9c3759b81c9/tokens.txt?%2Femotion2vec%2Femotion2vec_plus_base%2Fresolve%2Fb318240bfe67db81a8c572ecb37ce9c3759b81c9%2Ftokens.txt=&etag=%22e5a8dfffb0836ed38f37915905d1c05bdb18f1af%22 "HTTP/1.1 200 OK"
+Fetching 9 files:  78%|███████▊  | 7/9 [00:00<00:00, 33.85it/s]Fetching 9 files: 100%|██████████| 9/9 [00:07<00:00,  1.27it/s]
+2026-11-24 01:12:23,904 [WARNING] trust_remote_code: False
+2026-11-24 01:12:23,905 [WARNING] AutoModel: requested device 'cuda' is unavailable for model 'Emotion2vec'; falling back to CPU. Check your PyTorch build and accelerator availability, or set device='cpu' to use CPU explicitly.
+2026-11-24 01:12:24,259 [INFO] Loading pretrained params from /home/runner/.cache/huggingface/hub/models--emotion2vec--emotion2vec_plus_base/snapshots/b318240bfe67db81a8c572ecb37ce9c3759b81c9/model.pt
+2026-11-24 01:12:24,261 [INFO] ckpt: /home/runner/.cache/huggingface/hub/models--emotion2vec--emotion2vec_plus_base/snapshots/b318240bfe67db81a8c572ecb37ce9c3759b81c9/model.pt
+2026-11-24 01:12:24,604 [INFO] scope_map: ['d2v_model.', 'none', 'module.', 'None']
+2026-11-24 01:12:24,604 [INFO] excludes: None
+2026-11-24 01:12:24,604 [INFO] init param, map: modality_encoders.AUDIO.extra_tokens from d2v_model.modality_encoders.AUDIO.extra_tokens in ckpt
+2026-11-24 01:12:24,604 [INFO] init param, map: modality_encoders.AUDIO.alibi_scale from d2v_model.modality_encoders.AUDIO.alibi_scale in ckpt
+2026-11-24 01:12:24,604 [INFO] init param, map: modality_encoders.AUDIO.local_encoder.conv_layers.0.0.weight from d2v_model.modality_encoders.AUDIO.local_encoder.conv_layers.0.0.weight in ckpt
+2026-11-24 01:12:24,604 [INFO] init param, map: modality_encoders.AUDIO.local_encoder.conv_layers.0.2.1.weight from d2v_model.modality_encoders.AUDIO.local_encoder.conv_layers.0.2.1.weight in ckpt
+2026-11-24 01:12:24,604 [INFO] init param, map: modality_encoders.AUDIO.local_encoder.conv_layers.0.2.1.bias from d2v_model.modality_encoders.AUDIO.local_encoder.conv_layers.0.2.1.bias in ckpt
+2026-11-24 01:12:24,604 [INFO] init param, map: modality_encoders.AUDIO.local_encoder.conv_layers.1.0.weight from d2v_model.modality_encoders.AUDIO.local_encoder.conv_layers.1.0.weight in ckpt
+2026-11-24 01:12:24,604 [INFO] init param, map: modality_encoders.AUDIO.local_encoder.conv_layers.1.2.1.weight from d2v_model.modality_encoders.AUDIO.local_encoder.conv_layers.1.2.1.weight in ckpt
+2026-11-24 01:12:24,604 [INFO] init param, map: modality_encoders.AUDIO.local_encoder.conv_layers.1.2.1.bias from d2v_model.modality_encoders.AUDIO.local_encoder.conv_layers.1.2.1.bias in ckpt
+2026-11-24 01:12:24,604 [INFO] init param, map: modality_encoders.AUDIO.local_encoder.conv_layers.2.0.weight from d2v_model.modality_encoders.AUDIO.local_encoder.conv_layers.2.0.weight in ckpt
+2026-11-24 01:12:24,604 [INFO] init param, map: modality_encoders.AUDIO.local_encoder.conv_layers.2.2.1.weight from d2v_model.modality_encoders.AUDIO.local_encoder.conv_layers.2.2.1.weight in ckpt
+2026-11-24 01:12:24,604 [INFO] init param, map: modality_encoders.AUDIO.local_encoder.conv_layers.2.2.1.bias from d2v_model.modality_encoders.AUDIO.local_encoder.conv_layers.2.2.1.bias in ckpt
+2026-11-24 01:12:24,604 [INFO] init param, map: modality_encoders.AUDIO.local_encoder.conv_layers.3.0.weight from d2v_model.modality_encoders.AUDIO.local_encoder.conv_layers.3.0.weight in ckpt
+2026-11-24 01:12:24,604 [INFO] init param, map: modality_encoders.AUDIO.local_encoder.conv_layers.3.2.1.weight from d2v_model.modality_encoders.AUDIO.local_encoder.conv_layers.3.2.1.weight in ckpt
+2026-11-24 01:12:24,604 [INFO] init param, map: modality_encoders.AUDIO.local_encoder.conv_layers.3.2.1.bias from d2v_model.modality_encoders.AUDIO.local_encoder.conv_layers.3.2.1.bias in ckpt
+2026-11-24 01:12:24,604 [INFO] init param, map: modality_encoders.AUDIO.local_encoder.conv_layers.4.0.weight from d2v_model.modality_encoders.AUDIO.local_encoder.conv_layers.4.0.weight in ckpt
+2026-11-24 01:12:24,604 [INFO] init param, map: modality_encoders.AUDIO.local_encoder.conv_layers.4.2.1.weight from d2v_model.modality_encoders.AUDIO.local_encoder.conv_layers.4.2.1.weight in ckpt
+2026-11-24 01:12:24,604 [INFO] init param, map: modality_encoders.AUDIO.local_encoder.conv_layers.4.2.1.bias from d2v_model.modality_encoders.AUDIO.local_encoder.conv_layers.4.2.1.bias in ckpt
+2026-11-24 01:12:24,604 [INFO] init param, map: modality_encoders.AUDIO.local_encoder.conv_layers.5.0.weight from d2v_model.modality_encoders.AUDIO.local_encoder.conv_layers.5.0.weight in ckpt
+2026-11-24 01:12:24,604 [INFO] init param, map: modality_encoders.AUDIO.local_encoder.conv_layers.5.2.1.weight from d2v_model.modality_encoders.AUDIO.local_encoder.conv_layers.5.2.1.weight in ckpt
+2026-11-24 01:12:24,604 [INFO] init param, map: modality_encoders.AUDIO.local_encoder.conv_layers.5.2.1.bias from d2v_model.modality_encoders.AUDIO.local_encoder.conv_layers.5.2.1.bias in ckpt
+2026-11-24 01:12:24,604 [INFO] init param, map: modality_encoders.AUDIO.local_encoder.conv_layers.6.0.weight from d2v_model.modality_encoders.AUDIO.local_encoder.conv_layers.6.0.weight in ckpt
+2026-11-24 01:12:24,604 [INFO] init param, map: modality_encoders.AUDIO.local_encoder.conv_layers.6.2.1.weight from d2v_model.modality_encoders.AUDIO.local_encoder.conv_layers.6.2.1.weight in ckpt
+2026-11-24 01:12:24,604 [INFO] init param, map: modality_encoders.AUDIO.local_encoder.conv_layers.6.2.1.bias from d2v_model.modality_encoders.AUDIO.local_encoder.conv_layers.6.2.1.bias in ckpt
+2026-11-24 01:12:24,604 [INFO] init param, map: modality_encoders.AUDIO.project_features.1.weight from d2v_model.modality_encoders.AUDIO.project_features.1.weight in ckpt
+2026-11-24 01:12:24,604 [INFO] init param, map: modality_encoders.AUDIO.project_features.1.bias from d2v_model.modality_encoders.AUDIO.project_features.1.bias in ckpt
+2026-11-24 01:12:24,604 [INFO] init param, map: modality_encoders.AUDIO.project_features.2.weight from d2v_model.modality_encoders.AUDIO.project_features.2.weight in ckpt
+2026-11-24 01:12:24,604 [INFO] init param, map: modality_encoders.AUDIO.project_features.2.bias from d2v_model.modality_encoders.AUDIO.project_features.2.bias in ckpt
+2026-11-24 01:12:24,604 [INFO] init param, map: modality_encoders.AUDIO.relative_positional_encoder.1.0.weight from d2v_model.modality_encoders.AUDIO.relative_positional_encoder.1.0.weight in ckpt
+2026-11-24 01:12:24,604 [INFO] init param, map: modality_encoders.AUDIO.relative_positional_encoder.1.0.bias from d2v_model.modality_encoders.AUDIO.relative_positional_encoder.1.0.bias in ckpt
+2026-11-24 01:12:24,604 [INFO] init param, map: modality_encoders.AUDIO.relative_positional_encoder.2.0.weight from d2v_model.modality_encoders.AUDIO.relative_positional_encoder.2.0.weight in ckpt
+2026-11-24 01:12:24,604 [INFO] init param, map: modality_encoders.AUDIO.relative_positional_encoder.2.0.bias from d2v_model.modality_encoders.AUDIO.relative_positional_encoder.2.0.bias in ckpt
+2026-11-24 01:12:24,604 [INFO] init param, map: modality_encoders.AUDIO.relative_positional_encoder.3.0.weight from d2v_model.modality_encoders.AUDIO.relative_positional_encoder.3.0.weight in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.relative_positional_encoder.3.0.bias from d2v_model.modality_encoders.AUDIO.relative_positional_encoder.3.0.bias in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.relative_positional_encoder.4.0.weight from d2v_model.modality_encoders.AUDIO.relative_positional_encoder.4.0.weight in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.relative_positional_encoder.4.0.bias from d2v_model.modality_encoders.AUDIO.relative_positional_encoder.4.0.bias in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.relative_positional_encoder.5.0.weight from d2v_model.modality_encoders.AUDIO.relative_positional_encoder.5.0.weight in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.relative_positional_encoder.5.0.bias from d2v_model.modality_encoders.AUDIO.relative_positional_encoder.5.0.bias in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.0.norm1.weight from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.0.norm1.weight in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.0.norm1.bias from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.0.norm1.bias in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.0.attn.qkv.weight from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.0.attn.qkv.weight in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.0.attn.qkv.bias from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.0.attn.qkv.bias in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.0.attn.proj.weight from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.0.attn.proj.weight in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.0.attn.proj.bias from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.0.attn.proj.bias in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.0.norm2.weight from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.0.norm2.weight in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.0.norm2.bias from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.0.norm2.bias in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.0.mlp.fc1.weight from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.0.mlp.fc1.weight in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.0.mlp.fc1.bias from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.0.mlp.fc1.bias in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.0.mlp.fc2.weight from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.0.mlp.fc2.weight in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.0.mlp.fc2.bias from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.0.mlp.fc2.bias in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.1.norm1.weight from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.1.norm1.weight in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.1.norm1.bias from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.1.norm1.bias in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.1.attn.qkv.weight from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.1.attn.qkv.weight in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.1.attn.qkv.bias from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.1.attn.qkv.bias in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.1.attn.proj.weight from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.1.attn.proj.weight in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.1.attn.proj.bias from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.1.attn.proj.bias in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.1.norm2.weight from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.1.norm2.weight in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.1.norm2.bias from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.1.norm2.bias in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.1.mlp.fc1.weight from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.1.mlp.fc1.weight in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.1.mlp.fc1.bias from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.1.mlp.fc1.bias in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.1.mlp.fc2.weight from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.1.mlp.fc2.weight in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.1.mlp.fc2.bias from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.1.mlp.fc2.bias in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.2.norm1.weight from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.2.norm1.weight in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.2.norm1.bias from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.2.norm1.bias in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.2.attn.qkv.weight from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.2.attn.qkv.weight in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.2.attn.qkv.bias from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.2.attn.qkv.bias in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.2.attn.proj.weight from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.2.attn.proj.weight in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.2.attn.proj.bias from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.2.attn.proj.bias in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.2.norm2.weight from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.2.norm2.weight in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.2.norm2.bias from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.2.norm2.bias in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.2.mlp.fc1.weight from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.2.mlp.fc1.weight in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.2.mlp.fc1.bias from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.2.mlp.fc1.bias in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.2.mlp.fc2.weight from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.2.mlp.fc2.weight in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.2.mlp.fc2.bias from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.2.mlp.fc2.bias in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.3.norm1.weight from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.3.norm1.weight in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.3.norm1.bias from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.3.norm1.bias in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.3.attn.qkv.weight from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.3.attn.qkv.weight in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.3.attn.qkv.bias from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.3.attn.qkv.bias in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.3.attn.proj.weight from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.3.attn.proj.weight in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.3.attn.proj.bias from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.3.attn.proj.bias in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.3.norm2.weight from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.3.norm2.weight in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.3.norm2.bias from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.3.norm2.bias in ckpt
+2026-11-24 01:12:24,605 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.3.mlp.fc1.weight from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.3.mlp.fc1.weight in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.3.mlp.fc1.bias from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.3.mlp.fc1.bias in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.3.mlp.fc2.weight from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.3.mlp.fc2.weight in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.blocks.3.mlp.fc2.bias from d2v_model.modality_encoders.AUDIO.context_encoder.blocks.3.mlp.fc2.bias in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.norm.weight from d2v_model.modality_encoders.AUDIO.context_encoder.norm.weight in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: modality_encoders.AUDIO.context_encoder.norm.bias from d2v_model.modality_encoders.AUDIO.context_encoder.norm.bias in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.0.norm1.weight from d2v_model.blocks.0.norm1.weight in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.0.norm1.bias from d2v_model.blocks.0.norm1.bias in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.0.attn.qkv.weight from d2v_model.blocks.0.attn.qkv.weight in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.0.attn.qkv.bias from d2v_model.blocks.0.attn.qkv.bias in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.0.attn.proj.weight from d2v_model.blocks.0.attn.proj.weight in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.0.attn.proj.bias from d2v_model.blocks.0.attn.proj.bias in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.0.norm2.weight from d2v_model.blocks.0.norm2.weight in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.0.norm2.bias from d2v_model.blocks.0.norm2.bias in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.0.mlp.fc1.weight from d2v_model.blocks.0.mlp.fc1.weight in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.0.mlp.fc1.bias from d2v_model.blocks.0.mlp.fc1.bias in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.0.mlp.fc2.weight from d2v_model.blocks.0.mlp.fc2.weight in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.0.mlp.fc2.bias from d2v_model.blocks.0.mlp.fc2.bias in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.1.norm1.weight from d2v_model.blocks.1.norm1.weight in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.1.norm1.bias from d2v_model.blocks.1.norm1.bias in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.1.attn.qkv.weight from d2v_model.blocks.1.attn.qkv.weight in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.1.attn.qkv.bias from d2v_model.blocks.1.attn.qkv.bias in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.1.attn.proj.weight from d2v_model.blocks.1.attn.proj.weight in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.1.attn.proj.bias from d2v_model.blocks.1.attn.proj.bias in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.1.norm2.weight from d2v_model.blocks.1.norm2.weight in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.1.norm2.bias from d2v_model.blocks.1.norm2.bias in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.1.mlp.fc1.weight from d2v_model.blocks.1.mlp.fc1.weight in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.1.mlp.fc1.bias from d2v_model.blocks.1.mlp.fc1.bias in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.1.mlp.fc2.weight from d2v_model.blocks.1.mlp.fc2.weight in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.1.mlp.fc2.bias from d2v_model.blocks.1.mlp.fc2.bias in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.2.norm1.weight from d2v_model.blocks.2.norm1.weight in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.2.norm1.bias from d2v_model.blocks.2.norm1.bias in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.2.attn.qkv.weight from d2v_model.blocks.2.attn.qkv.weight in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.2.attn.qkv.bias from d2v_model.blocks.2.attn.qkv.bias in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.2.attn.proj.weight from d2v_model.blocks.2.attn.proj.weight in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.2.attn.proj.bias from d2v_model.blocks.2.attn.proj.bias in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.2.norm2.weight from d2v_model.blocks.2.norm2.weight in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.2.norm2.bias from d2v_model.blocks.2.norm2.bias in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.2.mlp.fc1.weight from d2v_model.blocks.2.mlp.fc1.weight in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.2.mlp.fc1.bias from d2v_model.blocks.2.mlp.fc1.bias in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.2.mlp.fc2.weight from d2v_model.blocks.2.mlp.fc2.weight in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.2.mlp.fc2.bias from d2v_model.blocks.2.mlp.fc2.bias in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.3.norm1.weight from d2v_model.blocks.3.norm1.weight in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.3.norm1.bias from d2v_model.blocks.3.norm1.bias in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.3.attn.qkv.weight from d2v_model.blocks.3.attn.qkv.weight in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.3.attn.qkv.bias from d2v_model.blocks.3.attn.qkv.bias in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.3.attn.proj.weight from d2v_model.blocks.3.attn.proj.weight in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.3.attn.proj.bias from d2v_model.blocks.3.attn.proj.bias in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.3.norm2.weight from d2v_model.blocks.3.norm2.weight in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.3.norm2.bias from d2v_model.blocks.3.norm2.bias in ckpt
+2026-11-24 01:12:24,606 [INFO] init param, map: blocks.3.mlp.fc1.weight from d2v_model.blocks.3.mlp.fc1.weight in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.3.mlp.fc1.bias from d2v_model.blocks.3.mlp.fc1.bias in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.3.mlp.fc2.weight from d2v_model.blocks.3.mlp.fc2.weight in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.3.mlp.fc2.bias from d2v_model.blocks.3.mlp.fc2.bias in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.4.norm1.weight from d2v_model.blocks.4.norm1.weight in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.4.norm1.bias from d2v_model.blocks.4.norm1.bias in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.4.attn.qkv.weight from d2v_model.blocks.4.attn.qkv.weight in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.4.attn.qkv.bias from d2v_model.blocks.4.attn.qkv.bias in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.4.attn.proj.weight from d2v_model.blocks.4.attn.proj.weight in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.4.attn.proj.bias from d2v_model.blocks.4.attn.proj.bias in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.4.norm2.weight from d2v_model.blocks.4.norm2.weight in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.4.norm2.bias from d2v_model.blocks.4.norm2.bias in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.4.mlp.fc1.weight from d2v_model.blocks.4.mlp.fc1.weight in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.4.mlp.fc1.bias from d2v_model.blocks.4.mlp.fc1.bias in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.4.mlp.fc2.weight from d2v_model.blocks.4.mlp.fc2.weight in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.4.mlp.fc2.bias from d2v_model.blocks.4.mlp.fc2.bias in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.5.norm1.weight from d2v_model.blocks.5.norm1.weight in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.5.norm1.bias from d2v_model.blocks.5.norm1.bias in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.5.attn.qkv.weight from d2v_model.blocks.5.attn.qkv.weight in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.5.attn.qkv.bias from d2v_model.blocks.5.attn.qkv.bias in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.5.attn.proj.weight from d2v_model.blocks.5.attn.proj.weight in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.5.attn.proj.bias from d2v_model.blocks.5.attn.proj.bias in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.5.norm2.weight from d2v_model.blocks.5.norm2.weight in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.5.norm2.bias from d2v_model.blocks.5.norm2.bias in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.5.mlp.fc1.weight from d2v_model.blocks.5.mlp.fc1.weight in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.5.mlp.fc1.bias from d2v_model.blocks.5.mlp.fc1.bias in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.5.mlp.fc2.weight from d2v_model.blocks.5.mlp.fc2.weight in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.5.mlp.fc2.bias from d2v_model.blocks.5.mlp.fc2.bias in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.6.norm1.weight from d2v_model.blocks.6.norm1.weight in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.6.norm1.bias from d2v_model.blocks.6.norm1.bias in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.6.attn.qkv.weight from d2v_model.blocks.6.attn.qkv.weight in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.6.attn.qkv.bias from d2v_model.blocks.6.attn.qkv.bias in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.6.attn.proj.weight from d2v_model.blocks.6.attn.proj.weight in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.6.attn.proj.bias from d2v_model.blocks.6.attn.proj.bias in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.6.norm2.weight from d2v_model.blocks.6.norm2.weight in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.6.norm2.bias from d2v_model.blocks.6.norm2.bias in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.6.mlp.fc1.weight from d2v_model.blocks.6.mlp.fc1.weight in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.6.mlp.fc1.bias from d2v_model.blocks.6.mlp.fc1.bias in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.6.mlp.fc2.weight from d2v_model.blocks.6.mlp.fc2.weight in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.6.mlp.fc2.bias from d2v_model.blocks.6.mlp.fc2.bias in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.7.norm1.weight from d2v_model.blocks.7.norm1.weight in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.7.norm1.bias from d2v_model.blocks.7.norm1.bias in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.7.attn.qkv.weight from d2v_model.blocks.7.attn.qkv.weight in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.7.attn.qkv.bias from d2v_model.blocks.7.attn.qkv.bias in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.7.attn.proj.weight from d2v_model.blocks.7.attn.proj.weight in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.7.attn.proj.bias from d2v_model.blocks.7.attn.proj.bias in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.7.norm2.weight from d2v_model.blocks.7.norm2.weight in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.7.norm2.bias from d2v_model.blocks.7.norm2.bias in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.7.mlp.fc1.weight from d2v_model.blocks.7.mlp.fc1.weight in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.7.mlp.fc1.bias from d2v_model.blocks.7.mlp.fc1.bias in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.7.mlp.fc2.weight from d2v_model.blocks.7.mlp.fc2.weight in ckpt
+2026-11-24 01:12:24,607 [INFO] init param, map: blocks.7.mlp.fc2.bias from d2v_model.blocks.7.mlp.fc2.bias in ckpt
+2026-11-24 01:12:24,648 [INFO] Loading ckpt: /home/runner/.cache/huggingface/hub/models--emotion2vec--emotion2vec_plus_base/snapshots/b318240bfe67db81a8c572ecb37ce9c3759b81c9/model.pt, status: <All keys matched successfully>
+  émotions entendues dans la voix (emotion2vec) : 9 réplique(s) (3 s) ['angry', 'scared', 'sigh', 'surprised']
+  16 répliques, voix : {'speaker_2': 334, 'speaker_4': 166, 'speaker_5': None, 'speaker_7': None, 'speaker_0': 215, 'speaker_1': 342, 'speaker_6': 219, 'speaker_3': 324}
+  son de la vidéo : 8 voix [334 Hz (f, 3 %), 166 Hz (?, 25 %), None Hz (?, 0 %), None Hz (?, 2 %), 215 Hz (f, 16 %), 342 Hz (f, 2 %), 219 Hz (f, 7 %), 324 Hz (f, 45 %)], 4.64 mots/s, blancs 0.9 s, 2 coupure(s) de parole, dynamique 29.0 dB, musique de fond, 5 bruitage(s) (0 graves, 5 aigus, 3 sur une fin de réplique), événements {'scream': 2, 'crying': 1}, émotions {}
+  scène reconstituée : Dans une salle de classe, une élève annonce son absence pour aller chez le dentiste, provoquant un drame total chez le professeur.
+  casting : speaker_0 → Lila, speaker_1 → Jojo, speaker_2 → Kévin, speaker_3 → Jojo, speaker_4 → Kévin, speaker_5 → Jojo, speaker_6 → voix off, speaker_7 → Jojo
+  LanguageTool : 1 faute(s) d'orthographe corrigée(s) (accents, accords muets)
+  Claude a réattribué 3 réplique(s) à la bonne personne (voix proches)
+  événements sonores : crying, scream
+  [équipe · scripte] ✔ une réplique = une seule personne
+  [équipe · scripte] ✔ téléphone en main seulement s'il en est question
+  [équipe · scripte] ✔ autant de personnages que de voix : 8 voix, 3 personnage(s)
+  [équipe · monteur] ✔ chaque mot dans sa réplique (lèvres et sous-titres calés)
+  [équipe · monteur] ✔ chaque réplique a une durée
+  [équipe · monteur] ✔ rien après la fin du son
+  [équipe · monteur] ✔ répliques dans l'ordre du son
+  [équipe · monteur] ✔ un personnage ne parle jamais deux fois en même temps
+2026-11-24 01:12:36,240 [INFO] Fetch hyperparams.yaml: Using symlink found at '/home/runner/work/jt-auto/jt-auto/moteur/../outils/ecapa/hyperparams.yaml'
+2026-11-24 01:12:36,342 [INFO] Fetch embedding_model.ckpt: Using symlink found at '/home/runner/work/jt-auto/jt-auto/moteur/../outils/ecapa/embedding_model.ckpt'
+2026-11-24 01:12:36,342 [INFO] Fetch mean_var_norm_emb.ckpt: Using symlink found at '/home/runner/work/jt-auto/jt-auto/moteur/../outils/ecapa/mean_var_norm_emb.ckpt'
+2026-11-24 01:12:36,342 [INFO] Fetch classifier.ckpt: Using symlink found at '/home/runner/work/jt-auto/jt-auto/moteur/../outils/ecapa/classifier.ckpt'
+2026-11-24 01:12:36,342 [INFO] Fetch label_encoder.txt: Using symlink found at '/home/runner/work/jt-auto/jt-auto/moteur/../outils/ecapa/label_encoder.ckpt'
+2026-11-24 01:12:36,342 [INFO] Loading pretrained files for: embedding_model, mean_var_norm_emb, classifier, label_encoder
+  [équipe · casting voix] ✔ dernier contrôle des voix (chaque réplique comparée à la voix moyenne de chaque personnage) : 1 réplique(s) remise(s) sur la bonne voix (corrigé) : réplique 11 (Là. Ah oui.) -> presentateur (écart 0.42)
+    voix corrigée : réplique 11 (Là. Ah oui.) -> presentateur (écart 0.42)
+  jeu de l'original : visages dessinés (aplat 0.82) : rien de recopié
+  Rhubarb : 201 formes de bouche lues dans la voix
+  objets vus dans l'original : réplique 10 : sac_main, réplique 12 : telephone, réplique 13 : portefeuille, réplique 6 : sac_main, réplique 9 : verre, réplique 8 : tablette
+  bulletin de l'équipe : 18/18 contrôles bons
   fiche de tournage : gemini-flash-latest n'a pas répondu (HTTP Error 429: Too Many Requests)
-  fiche de tournage écrite (Gemini a regardé et écouté l original) : salle_sport (modern well-equipped weightlifting gym with barbel), jour, temps normal, ambiance fete, niveau luxe
-  [équipe · fiche de tournage] ✔ contrôle 1 : règles (cohérence avec ce qui est dit) : presentateur état de la tenue : sueur -> — (rien ne le justifie dans le son) (corrigé)
-    correction : presentateur état de la tenue : sueur -> — (rien ne le justifie dans le son)
-  [équipe · fiche de tournage] ✔ contrôle 2 : 2e IA (autre fournisseur) : repliques.5.objet : haltere -> None (Le dialogue de la réplique 5 ne mentionne aucun objet, alors que la fiche indique un haltère.); repliques.5.action : tenir -> None (Le dialogue de la rép (corrigé)
-    correction : repliques.5.objet : haltere -> None (Le dialogue de la réplique 5 ne mentionne aucun objet, alors que la fiche indique un haltère.)
-    correction : repliques.5.action : tenir -> None (Le dialogue de la réplique 5 ne décrit aucune action de tenir un objet, contrairement à la fiche qui indique "tenir".)
+  fiche de tournage écrite (Gemini a regardé et écouté l original) : amphi (modern university amphitheater with wooden desks a), jour, temps normal, ambiance dispute, niveau moyen, bruits entendus : crying, scream
+  [équipe · fiche de tournage] ✔ contrôle 1 : règles (cohérence avec ce qui est dit) : panneaux : Amphithéâtre A -> — (pas d'enseigne dans « amphi ») (corrigé)
+    correction : panneaux : Amphithéâtre A -> — (pas d'enseigne dans « amphi »)
+  [équipe · fiche de tournage] ✔ contrôle 2 : 2e IA (autre fournisseur)
   [équipe · fiche de tournage] ✔ contrôle 3 : image de l'original, puis règles
-  sous-titres anglais : 6 réplique(s) traduite(s)
+  jeu du dessin animé : Gemini n'a pas pu lire les expressions (rien de recopié)
+  sous-titres anglais : 16 réplique(s) traduite(s)
 Essai : sans carton de fin « Abonne-toi »
-Sketch : « RECORD DE MUSCULATION », 6 répliques
-Son TikTok : une seule scène, un seul décor (pas de changement inutile)
-  décor semi-réaliste 0 : budget Modal du mois atteint, décor dessiné
-WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1795480387.654857    3067 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
-WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1795480388.951179    3067 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+Sketch : « ABSENCES ABUSÉES EN COURS », 16 répliques
+  décor semi-réaliste 0 (lieu ressemblant de la banque) : [semi] modern university amphitheater with wooden desks and 
 Downloading data from https://github.com/ina-foss/inaSpeechSegmenter/releases/download/models/keras_speech_music_noise_cnn.hdf5
 [1m      0/3244808[0m [37m━━━━━━━━━━━━━━━━━━━━[0m [1m0s[0m 0s/step[1m3244808/3244808[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 0us/step
-/home/runner/venv/lib/python3.12/site-packages/keras/src/layers/reshaping/reshape.py:39: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
-  super().__init__(**kwargs)
 Downloading data from https://github.com/ina-foss/inaSpeechSegmenter/releases/download/models/keras_male_female_cnn.hdf5
-[1m      0/6040200[0m [37m━━━━━━━━━━━━━━━━━━━━[0m [1m0s[0m 0s/step[1m6040200/6040200[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 0us/step
-montage : 1 plans (0.1:large>pre/coupe)
+[1m      0/6040200[0m [37m━━━━━━━━━━━━━━━━━━━━[0m [1m0s[0m 0s/step[1m2228224/6040200[0m [32m━━━━━━━[0m[37m━━━━━━━━━━━━━[0m [1m0s[0m 0us/step[1m6040200/6040200[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 0us/step
+montage : 1 plans (0.1:large>env/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-studio : jour, lieux ['salle_sport'], tenues presentateur=tshirt, invite=debardeur, 0 figurant(s), ambiances ['neon'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 45.1 s, 6 répliques, 1 scène(s), personnages ['presentateur', 'invite']
-Pré-jury (avant de dessiner) : réaction « regard_camera » à la réplique 6
-montage : 1 plans (0.1:large>pre/coupe)
+studio : jour, lieux ['amphi'], tenues envoyee=survetement, presentateur=survetement, invite=survetement, 0 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 39.2 s, 16 répliques, 1 scène(s), personnages ['envoyee', 'presentateur', 'invite']
+montage : 1 plans (0.1:large>env/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-studio : jour, lieux ['salle_sport'], tenues presentateur=tshirt, invite=debardeur, 0 figurant(s), ambiances ['neon'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 45.1 s, 6 répliques, 1 scène(s), personnages ['presentateur', 'invite']
-  dessin partagé : 2 machine(s) d'aide + celle-ci (3 morceaux de ~901 images)
-  release des morceaux relue (refaite entre-temps), nouvel essai
-  morceau 902–1803 reçu d'une machine d'aide
-  morceau 1803–2705 reçu d'une machine d'aide
-  dessin partagé terminé en 8.8 min
+studio : jour, lieux ['amphi'], tenues envoyee=survetement, presentateur=survetement, invite=survetement, 0 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 39.2 s, 16 répliques, 1 scène(s), personnages ['envoyee', 'presentateur', 'invite']
+  dessin partagé : 1 machine(s) d'aide + celle-ci (2 morceaux de ~1176 images)
+  morceau 1176–2353 reçu d'une machine d'aide
+  dessin partagé terminé en 9.5 min
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury : 7 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
-Jury qualité (ia) : 7.4/10 — Humoriste 7.6/10 :  | Réalisateur 7.0/10 : 5 s L'intensité de la colère sur 'on arrache là' pourrait être plus marquée graphiquement.; 5 s Le personnage à droite change d'expression de manière un peu trop neutre entre l'image 4 et 5. | Directeur artistique 5.0/10 : 1 s Présence de deux personnages au lieu d'un seul athlète comme dans l'original. | Ingénieur du son 10.0/10 :  | Spectateur TikTok 8.6/10 : 
-Manque par rapport à la vidéo d'origine : L'original montre un unique athlète en train de faire du squat puis du soulevé de terre dans une vraie salle de sport, alors que notre version utilise deux pers ; Les barres de musculation chargées et les disques de couleur de l'original manquent de fidélité dans le dessin.
+Jury : 6 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
+Jury qualité (ia) : 8.2/10 — Humoriste 8.6/10 :  | Réalisateur 8.8/10 : 12.8 s Le personnage s'agite mais mériterait un geste de main plus marqué. | Directeur artistique 7.0/10 : 0.4 s Les proportions du prof font un peu trop enfantin par rapport au rôle. | Ingénieur du son 9.6/10 :  | Spectateur TikTok 7.8/10 : 35.7 s Amplifier l'effet comique de la fin.
+Manque par rapport à la vidéo d'origine : Dans l'original, la première intervenante a des cheveux très longs et noirs avec une veste en cuir, ce qui renforce le contraste de la classe. ; Dans l'original à 27.6s, c'est un autre élève qui réagit avec des lunettes de soleil, pas le même personnage.
 fin en boucle : la dernière image se raccorde à la première (0.35 s de fondu)
-  [vidéo finie · synchro] décalage mesuré -0.38 s (mesure seulement : le son n'est jamais déplacé)
   [vidéo finie · synchro] ✔ bouches du bon personnage
   [vidéo finie · bouches] ✔ bouche immobile quand le personnage se tait
   [vidéo finie · technique] ✔ sauts, clignotements, personnages (0 remarque(s))
-  transcription Groq (Whisper, gratuit) : 30 mots
-  karaoké contrôlé à l'oreille : 11 mots, écart médian 0.04 s
-  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 68 %)
+  transcription Groq (Whisper, gratuit) : 132 mots
+  karaoké contrôlé à l'oreille : 106 mots, écart médian 0.03 s
+  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 87 %)
   [vidéo finie · contrôle IA] 0 remarque(s)
   [vidéo finie · fidélité à l'audio] ✘ Gemini a regardé et écouté la vidéo finie : 1 écart(s)
   [vidéo finie · voix et dessin] ✔ chaque réplique sur la bonne voix, homme / femme d'après la voix
-  [vidéo finie · attribution] ✘ qui dit chaque phrase, comparé à l'image de l'original : l'image de l'original montre l'autre personne parler pendant 25 % des phrases (répliques 3, 5)
-  3 remarque(s) légère(s) gardée(s) au journal seulement : 0.1 s karaoké décalé de 0.94 s sur « 870 kg total. » ; 7.3 s sous-titre « On va. On va. Allez. » mais on entend ; 27.7 s on entend « On voit bien là » sans sous-titre
-Contrôle de la vidéo finie : 2 point(s) à vérifier — 5.1 s l'image de l'original montre l'autre personne parler pendant ; 14.0 s L'objet 'haltere' mentionné ou attendu n'est pas présent, on
-Compte rendu (tour 1, confiance 74/100) : corrections demandées au robot :
-- à 14.0 s : L'objet 'haltere' mentionné ou attendu n'est pas présent, on voit seulement une barre avec des poids et les personnages crient sans manipuler d'haltères spécifiques.
-- à 5.0 s : Le personnage à droite change d'expression de manière un peu trop neutre entre l'image 4 et 5.
-- à 1.0 s : Présence de deux personnages au lieu d'un seul athlète comme dans l'original.
-Remarque comprise : L'auteur signale trois problèmes : pas de haltères spécifiques à 14 s, expression trop neutre du personnage de droite à 5 s, et présence de deux athlètes au lieu d'un seul à 1 s.
-Remarque de l'auteur : 0 réplique(s) à rendre à un autre personnage, 2 correction(s) : casting, reaction
-Compte rendu : haltère : haltère ; casting de haltère : age 0, taille 0, barbe 
-  décor semi-réaliste 0 : budget Modal du mois atteint, décor dessiné
-montage : 1 plans (0.1:large>pre/coupe)
+  [vidéo finie · attribution] ✔ qui dit chaque phrase, comparé à l'image de l'original
+  contrôles qui n'ont pas pu se faire : qui parle d'après l'image de l'original (image illisible) (note de confiance plafonnée)
+  2 remarque(s) légère(s) gardée(s) au journal seulement : 6.2 s on entend « Non Putain Putain Putain Désolé. » san ; 32.5 s on entend « non Et moi j'ai dit que j'allais parti
+Contrôle de la vidéo finie : 1 point(s) à vérifier — 0.0 s Le lieu indiqué (amphi) ne correspond pas à une salle de cla
+Compte rendu (tour 1, confiance 82/100) : corrections demandées au robot :
+- à 0.0 s : Le lieu indiqué (amphi) ne correspond pas à une salle de classe traditionnelle avec des rangées de pupitres de collège/lycée.
+- à 12.8 s : Le personnage s'agite mais mériterait un geste de main plus marqué.
+- à 0.4 s : Les proportions du prof font un peu trop enfantin par rapport au rôle.
+- à 35.7 s : Amplifier l'effet comique de la fin.
+Remarque comprise : J'ai compris qu'il faut changer le décor en classe, ajuster le casting du présentateur, ajouter un geste de main plus marqué à la réplique 4, et renforcer l'effet comique à la fin.
+Remarque de l'auteur : 0 réplique(s) à rendre à un autre personnage, 5 correction(s) : lieu, casting, jeu, reaction, bruitage
+Compte rendu : presentateur : humain ; décor de la scène 1 : classe ; casting de presentateur : age 30, taille 1.0, barbe trois_jours ; jeu plus marqué à la réplique 5
+  décor semi-réaliste 0 (lieu ressemblant de la banque) : [semi] modern university amphitheater with wooden desks and 
+montage : 1 plans (0.1:large>env/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-studio : jour, lieux ['salle_sport'], tenues presentateur=tshirt, invite=debardeur, 0 figurant(s), ambiances ['neon'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 45.1 s, 6 répliques, 1 scène(s), personnages ['presentateur', 'invite']
-  redessin partiel : 0/2705 images à redessiner (0 passage(s)), le reste repris tel quel
+studio : jour, lieux ['classe'], tenues envoyee=survetement, presentateur=survetement, invite=survetement, 0 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 39.2 s, 16 répliques, 1 scène(s), personnages ['envoyee', 'presentateur', 'invite']
+  image 300/2353 (4 processeurs)
+  image 600/2353
+  image 900/2353
+  image 1200/2353
+  image 1500/2353
+  image 1800/2353
+  image 2100/2353
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
 fin en boucle : la dernière image se raccorde à la première (0.35 s de fondu)
-  [vidéo finie · synchro] décalage mesuré -0.38 s (mesure seulement : le son n'est jamais déplacé)
   [vidéo finie · synchro] ✔ bouches du bon personnage
   [vidéo finie · bouches] ✔ bouche immobile quand le personnage se tait
   [vidéo finie · technique] ✔ sauts, clignotements, personnages (0 remarque(s))
-  transcription Groq (Whisper, gratuit) : 30 mots
-  karaoké contrôlé à l'oreille : 11 mots, écart médian 0.04 s
-  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 68 %)
-  [vidéo finie · contrôle IA] 0 remarque(s)
-  [vidéo finie · fidélité à l'audio] ✘ Gemini a regardé et écouté la vidéo finie : 1 écart(s)
-  [vidéo finie · voix et dessin] ✔ chaque réplique sur la bonne voix, homme / femme d'après la voix
-  [vidéo finie · attribution] ✘ qui dit chaque phrase, comparé à l'image de l'original : l'image de l'original montre l'autre personne parler pendant 25 % des phrases (répliques 3, 5)
-  3 remarque(s) légère(s) gardée(s) au journal seulement : 0.1 s karaoké décalé de 0.94 s sur « 870 kg total. » ; 7.3 s sous-titre « On va. On va. Allez. » mais on entend ; 27.7 s on entend « On voit bien là » sans sous-titre
-Contrôle de la vidéo finie : 2 point(s) à vérifier — None s L'objet 'haltere' est mentionné mais on ne voit pas d'haltèr ; 5.1 s l'image de l'original montre l'autre personne parler pendant
-Jury : 5 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
-Jury qualité (ia) : 9.0/10 — Humoriste 9.6/10 :  | Réalisateur 8.0/10 : 4 s Le plan est fixe comme demandé, mais l'intensité de la grimace pourrait être un tout petit peu plus poussée.; 4 s Grimace plus intense. | Directeur artistique 9.0/10 : 1 s Le décor de salle de sport est bien transposé en dessin, mais on pourrait ajouter une petite haltère en arrière-plan pour rappeler la vidéo originale. | Ingénieur du son 9.6/10 :  | Spectateur TikTok 8.8/10 : 
-Manque par rapport à la vidéo d'origine : Le matériel de musculation lourd et les disques de poids réalistes de la salle de sport originale manquent dans l'arrière-plan du dessin.
-Compte rendu corrigé : confiance 74 → 74/100, jury 9.0/10
-Compte rendu (tour 2, confiance 74/100) : corrections demandées au robot :
-- L'objet 'haltere' est mentionné mais on ne voit pas d'haltère spécifique dans la salle
-- à 4.0 s : Grimace plus intense.
-Remarque comprise : L'auteur signale que l'haltère mentionné n'apparaît pas à l'écran et que la grimace à 4.0 s doit être plus intense.
-Remarque de l'auteur : 0 réplique(s) à rendre à un autre personnage, 2 correction(s) : casting, reaction
-Compte rendu : fiche de tournage : repliques.0.objet : haltere -> None (L'objet 'haltere' est mentionné mais on ne voit pas d'haltère spécifique dans la salle) ; haltère : haltère ; casting de haltère : age 0, taille , barbe 
-  décor semi-réaliste 0 : budget Modal du mois atteint, décor dessiné
-montage : 1 plans (0.1:large>pre/coupe)
-style croquis : décors passés à l'encre et à l'aquarelle
-studio : jour, lieux ['salle_sport'], tenues presentateur=tshirt, invite=debardeur, 0 figurant(s), ambiances ['neon'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 45.1 s, 6 répliques, 1 scène(s), personnages ['presentateur', 'invite']
-  redessin partiel : 0/2705 images à redessiner (0 passage(s)), le reste repris tel quel
-Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-fin en boucle : la dernière image se raccorde à la première (0.35 s de fondu)
-  [vidéo finie · synchro] décalage mesuré -0.38 s (mesure seulement : le son n'est jamais déplacé)
-  [vidéo finie · synchro] ✔ bouches du bon personnage
-  [vidéo finie · bouches] ✔ bouche immobile quand le personnage se tait
-  [vidéo finie · technique] ✔ sauts, clignotements, personnages (0 remarque(s))
-  transcription Groq (Whisper, gratuit) : 30 mots
-  écoute des passages : Gemini surchargé, nouvel essai dans 20 s (tour 2/2)
-  karaoké contrôlé à l'oreille : 11 mots, écart médian 0.04 s
-  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 68 %)
+  transcription Groq (Whisper, gratuit) : 132 mots
+  karaoké contrôlé à l'oreille : 106 mots, écart médian 0.03 s
+  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 87 %)
   [vidéo finie · contrôle IA] 0 remarque(s)
   contrôle « fidélité » : Gemini surchargé, nouvel essai dans 20 s (tour 2/3)
   [vidéo finie · fidélité à l'audio] ✘ Gemini a regardé et écouté la vidéo finie : 1 écart(s)
   [vidéo finie · voix et dessin] ✔ chaque réplique sur la bonne voix, homme / femme d'après la voix
-  [vidéo finie · attribution] ✘ qui dit chaque phrase, comparé à l'image de l'original : l'image de l'original montre l'autre personne parler pendant 25 % des phrases (répliques 3, 5)
-  3 remarque(s) légère(s) gardée(s) au journal seulement : 0.1 s karaoké décalé de 0.94 s sur « 870 kg total. » ; 7.3 s sous-titre « On va. On va. Allez. » mais on entend ; 27.7 s on entend « On voit bien là » sans sous-titre
-Contrôle de la vidéo finie : 2 point(s) à vérifier — 5.1 s l'image de l'original montre l'autre personne parler pendant ; 12.0 s Il manque l'haltère mentionné dans l'action
-Jury : 1 remarque(s) sur les plans / zooms retirée(s) (montage « plan large » voulu)
-Jury : 4 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
-Jury qualité (ia) : 7.1/10 — Humoriste 7.6/10 :  | Réalisateur 7.8/10 :  | Directeur artistique 6.0/10 : 0.4 s Le décor de salle de sport manque de détails réalistes comparé à l'original.; 44.5 s La morphologie des personnages ne reflète pas assez l'effort de musculation intense de l'original. | Ingénieur du son 7.8/10 :  | Spectateur TikTok 6.8/10 : 39.8 s Sous-titres un peu denses à lire rapidement.
-Manque par rapport à la vidéo d'origine : Le personnage musclé qui soulève la barre avec les grands disques rouges n'est pas représenté fidèlement. ; Le décor de la salle de sport professionnelle avec les panneaux d'affichage et les spectateurs en arrière-plan manque de précision.
-Compte rendu : la version corrigée n'est pas meilleure (74 → 74) : on garde la première
+  [vidéo finie · attribution] ✔ qui dit chaque phrase, comparé à l'image de l'original
+  contrôles qui n'ont pas pu se faire : qui parle d'après l'image de l'original (image illisible) (note de confiance plafonnée)
+  2 remarque(s) légère(s) gardée(s) au journal seulement : 6.2 s on entend « Non Putain Putain Putain Désolé. » san ; 32.5 s on entend « non Et moi j'ai dit que j'allais parti
+Contrôle de la vidéo finie : 1 point(s) à vérifier — 1.0 s Il n'y a pas d'amphithéâtre mais une salle de classe traditi
+Jury : 3 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
+Jury qualité (ia) : 7.8/10 — Humoriste 8.6/10 :  | Réalisateur 8.0/10 : 15 s Le personnage à droite manque de dynamisme quand il intervient. | Directeur artistique 7.0/10 : 12 s Les lunettes de soleil de l'invité n'apparaissent pas au bon moment comme dans l'original.; 3 s Le style vestimentaire du présentateur (col roulé noir) colle mieux à l'original. | Ingénieur du son 8.8/10 :  | Spectateur TikTok 7.0/10 : 35 s La bulle de texte à 35s est trop grosse et cache une partie du dessin.
+Compte rendu : la version corrigée n'est pas meilleure (82 → 82) : on garde la première
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, groq = ok, ia = gemini ×13, groq ×3, mistral ×1, appels = {'gemini': 13, 'groq': 3, 'mistral': 1}, epuisees = [], quota = {'groq': {'reste_jour': 999, 'limite_jour': 1000}}, voix = tiktok, decors = dessines, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 35460, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0, 'total_usd': 0.0, 'modal_mesure_usd': 0.01}
-⏱️ Étapes plus lentes que d'habitude : Installation de la machine 7 min (d'habitude 1 min)
-⏱️ Temps par étape : Installation de la machine 7.3 min, Démarrage du robot 0.2 min, Écoute du son TikTok 0.6 min, Décors 0.0 min, Dessin des images 10.3 min, Contrôle qualité par le jury 2.1 min, Contrôle de la vidéo finie 1.0 min, Corrections du compte rendu 7.2 min
-Barrière de qualité : vidéo RECALÉE (rangée avec les essais, jamais sur la liste) : l'image de l'original montre l'autre personne parler pendant 25 % des phrases (répliques 3, 5)
-Quota de l'API GitHub : 4794 appels restants
-OK : sortie/2026-11-24_01h33_emission.mp4 (46 s)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, groq = ok, ia = groq ×3, gemini ×10, mistral ×1, appels = {'groq': 3, 'gemini': 10, 'mistral': 1}, epuisees = [], quota = {'groq': {'reste_jour': 997, 'limite_jour': 1000}}, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 46752, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0, 'total_usd': 0.0, 'modal_mesure_usd': 0.15}
+⏱️ Étapes plus lentes que d'habitude : Installation de la machine 8 min (d'habitude 2 min)
+⏱️ Temps par étape : Installation de la machine 8.2 min, Démarrage du robot 0.2 min, Écoute du son TikTok 10.0 min, Décors 0.0 min, Dessin des images 10.6 min, Contrôle qualité par le jury 2.1 min, Contrôle de la vidéo finie 0.6 min, Corrections du compte rendu 9.6 min
+Quota de l'API GitHub : 4955 appels restants
+OK : sortie/2026-11-24_02h13_emission.mp4 (40 s)
