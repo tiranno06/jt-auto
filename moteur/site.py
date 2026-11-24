@@ -1305,7 +1305,7 @@ function creneauxPubli(d){                                                // heu
   if(String((VARS&&VARS.PUBLI_DEUX)||"0")==="1"&&/^\d{1,2}:\d{2}$/.test(h2)&&Math.abs(mn(h2)-mn(h))>=60) l.push(h2);
   l.sort((a,b)=>mn(a)-mn(b));
   const dj=d||new Date(), hf=String((VARS&&VARS.PUBLI_HEURE_FRANCO)||"22:30").trim();   // créneau francophonie : un jour sur deux,
-  if(String((VARS&&VARS.PUBLI_FRANCO)||"1")!=="0"&&/^\d{1,2}:\d{2}$/.test(hf)&&jourFranco(dj)){   // la dernière vidéo du jour part le soir
+  if(l.length>=2&&String((VARS&&VARS.PUBLI_FRANCO)||"1")!=="0"&&/^\d{1,2}:\d{2}$/.test(hf)&&jourFranco(dj)){   // la 2e vidéo du jour part le soir (jamais la seule : 24 nov.)
     const autres=l.slice(0,-1); if(autres.every(x=>Math.abs(mn(x)-mn(hf))>=60)){autres.push(hf.padStart(5,"0")); return autres.sort((a,b)=>mn(a)-mn(b))}
   }
   return l;

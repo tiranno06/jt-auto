@@ -1029,7 +1029,7 @@ class TestMonde21Novembre(unittest.TestCase):
         impair, pair = datetime.date(2026, 11, 22), datetime.date(2026, 11, 21)
         self.assertTrue(P.jour_franco(impair)); self.assertFalse(P.jour_franco(pair))
         self.assertEqual(P.creneaux({"PUBLI_HEURE": "18:00"}, 0, pair), [(18, 0)])
-        self.assertEqual(P.creneaux({"PUBLI_HEURE": "18:00"}, 0, impair), [(22, 30)])           # même nombre de vidéos
+        self.assertEqual(P.creneaux({"PUBLI_HEURE": "18:00"}, 0, impair), [(18, 0)])            # une seule vidéo : jamais déplacée (24 nov.)
         self.assertEqual(P.creneaux({"PUBLI_HEURE": "18:00", "PUBLI_DEUX": "1", "PUBLI_HEURE2": "12:00"}, 0, impair), [(12, 0), (22, 30)])
         self.assertEqual(P.creneaux({"PUBLI_HEURE": "18:00", "PUBLI_FRANCO": "0"}, 0, impair), [(18, 0)])
         self.assertEqual(P.creneaux({"PUBLI_HEURE": "18:00"}), [(18, 0)])                       # sans date : inchangé
