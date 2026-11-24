@@ -1,22 +1,29 @@
 {
- "moyenne": 427,
- "videos": 50,
+ "moyenne": 430,
+ "videos": 49,
  "plus": [
   {
    "critere": "Heure de publication",
    "valeur": "après-midi",
    "vues": 627,
    "n": 3,
-   "fois": 1.47
+   "fois": 1.46
   }
  ],
  "moins": [
   {
    "critere": "Personnages",
    "valeur": "3 personnages",
-   "vues": 266,
+   "vues": 267,
    "n": 3,
    "fois": 0.62
+  },
+  {
+   "critere": "Couverture",
+   "valeur": "le début",
+   "vues": 272,
+   "n": 4,
+   "fois": 0.63
   },
   {
    "critere": "Heure de publication",
@@ -27,15 +34,8 @@
   },
   {
    "critere": "Couverture",
-   "valeur": "le début",
-   "vues": 272,
-   "n": 4,
-   "fois": 0.64
-  },
-  {
-   "critere": "Couverture",
    "valeur": "la réaction",
-   "vues": 278,
+   "vues": 279,
    "n": 5,
    "fois": 0.65
   }
@@ -46,25 +46,19 @@
     "@vignianimation",
     456,
     11,
-    1.07
+    1.06
    ],
    [
     "@eliotlehanneur",
-    432,
+    433,
     5,
-    1.01
-   ],
-   [
-    "@vincedessine",
-    430,
-    3,
     1.01
    ],
    [
     "@same_same53",
     416,
     6,
-    0.98
+    0.97
    ],
    [
     "@charly.bse",
@@ -74,18 +68,24 @@
    ],
    [
     "@motiontoonz",
-    365,
+    366,
     6,
-    0.86
+    0.85
    ],
    [
     "@yan_animation0",
-    307,
+    308,
     6,
-    0.72
+    0.71
    ]
   ],
   "duree": [
+   [
+    "plus de 70 s",
+    480,
+    22,
+    1.12
+   ],
    [
     "20 à 40 s",
     480,
@@ -93,16 +93,10 @@
     1.12
    ],
    [
-    "plus de 70 s",
-    479,
-    22,
-    1.12
-   ],
-   [
     "40 à 70 s",
     350,
     21,
-    0.82
+    0.81
    ]
   ],
   "heure": [
@@ -110,11 +104,11 @@
     "après-midi",
     627,
     3,
-    1.47
+    1.46
    ],
    [
     "matin",
-    406,
+    407,
     20,
     0.95
    ],
@@ -128,7 +122,7 @@
   "lieu": [
    [
     "salon",
-    375,
+    378,
     4,
     0.88
    ],
@@ -136,27 +130,27 @@
     "rue",
     285,
     5,
-    0.67
+    0.66
    ]
   ],
   "animal": [
    [
     "non",
-    301,
+    302,
     15,
-    0.71
+    0.7
    ]
   ],
   "persos": [
    [
     "2 personnages",
-    310,
+    311,
     12,
-    0.73
+    0.72
    ],
    [
     "3 personnages",
-    266,
+    267,
     3,
     0.62
    ]
@@ -164,13 +158,13 @@
   "couverture": [
    [
     "la chute",
-    340,
+    342,
     6,
-    0.8
+    0.79
    ],
    [
     "la réaction",
-    278,
+    279,
     5,
     0.65
    ],
@@ -178,15 +172,15 @@
     "le début",
     272,
     4,
-    0.64
+    0.63
    ]
   ],
   "partie": [
    [
     "non",
-    301,
+    302,
     15,
-    0.71
+    0.7
    ]
   ]
  },
@@ -194,12 +188,12 @@
   "Créneau": [
    [
     "habituel",
-    472,
+    478,
     2
    ],
    [
     "🌍 francophonie (21 h et plus)",
-    235,
+    236,
     1
    ]
   ]
@@ -210,47 +204,47 @@
   "videos": [],
   "communs": []
  },
- "maj": "2026-11-24T02:22+00:00",
+ "maj": "2026-11-24T12:44+00:00",
  "mots": {
   "audio": 1.08
  },
  "hashtags": {
-  "petitsdramas": 0.83,
-  "travail": 0.89,
-  "viedebureau": 0.92,
-  "drole": 0.89,
+  "viedebureau": 0.91,
+  "bureau": 0.89,
+  "drole": 0.88,
+  "entretien": 0.63,
   "comedie": 0.69,
-  "bureau": 0.9,
-  "cartoon": 0.75,
   "animation": 0.91,
+  "sketch": 0.76,
+  "travail": 0.88,
+  "cartoon": 0.75,
   "dessinanime": 0.87,
-  "entretien": 0.64,
-  "sketch": 0.77,
-  "humour": 0.86,
-  "amour": 0.82,
+  "petitsdramas": 0.83,
+  "humour": 0.85,
   "relation": 0.84,
-  "couple": 0.83,
-  "nourriture": 0.96,
-  "food": 0.96,
-  "sante": 1.08,
-  "medecin": 1.08,
+  "couple": 0.82,
+  "nourriture": 0.95,
+  "food": 0.95,
+  "amour": 0.81,
+  "sante": 1.07,
+  "medecin": 1.07,
   "fyp": 1.08,
-  "argent": 0.78,
-  "pourtoi": 0.88,
-  "doublage": 0.92,
+  "pourtoi": 0.87,
+  "doublage": 0.91,
+  "argent": 0.77,
+  "pov": 1.05,
   "famille": 0.92,
-  "pov": 1.06,
-  "freresoeur": 1.14,
-  "parents": 0.77,
-  "humournoir": 0.61,
-  "parentsvsenfants": 0.77,
-  "voiture": 0.7,
-  "permis": 0.7,
-  "potes": 0.62,
+  "freresoeur": 1.13,
+  "humournoir": 0.6,
+  "parents": 0.76,
+  "parentsvsenfants": 0.76,
+  "permis": 0.69,
+  "voiture": 0.69,
   "bff": 0.62,
   "amitie": 0.62,
+  "potes": 0.62,
   "malaise": 0.81,
-  "gene": 0.81,
-  "telephone": 0.66
+  "telephone": 0.65,
+  "gene": 0.81
  }
 }
