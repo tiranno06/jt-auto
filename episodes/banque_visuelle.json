@@ -50385,19 +50385,19 @@
  },
  {
   "date": "2026-11-24",
-  "source": "https://www.tiktok.com/@same_same53/video/7711417447726828833",
+  "source": "https://www.tiktok.com/@same_same53/video/7705091687743261985",
   "auteur": "same_same53",
   "visuel": {
    "gestes": [],
-   "duree": 75.5,
+   "duree": 74.5,
    "nb_plans": 1,
-   "duree_plan": 75.5,
+   "duree_plan": 74.5,
    "coupes": [],
    "plans": {
     "tres_serre": 0.0,
     "serre": 0.0,
-    "moyen": 0.04,
-    "large": 0.96
+    "moyen": 0.0,
+    "large": 1.0
    },
    "camera": {
     "fixe": 1.0,
@@ -50406,11 +50406,11 @@
     "travelling": 0.0,
     "epaule": 0.0
    },
-   "nb_personnes": 1,
+   "nb_personnes": 0,
    "personnes": [],
-   "visages": true,
+   "visages": false,
    "sourires": 0.0,
-   "energie": 0.236,
+   "energie": 0.104,
    "mur": [
     0,
     0,
@@ -50421,82 +50421,83 @@
      0,
      0,
      0,
-     0.677
+     0.603
     ],
     [
-     251,
-     251,
-     251,
-     0.233
+     253,
+     253,
+     252,
+     0.364
     ],
     [
-     40,
-     40,
+     46,
      45,
-     0.045
+     44,
+     0.013
     ],
     [
-     155,
-     150,
-     141,
-     0.018
-    ],
-    [
-     211,
-     209,
-     204,
-     0.015
-    ],
-    [
-     78,
-     92,
-     113,
+     198,
+     197,
+     193,
      0.012
+    ],
+    [
+     236,
+     164,
+     39,
+     0.005
+    ],
+    [
+     105,
+     97,
+     93,
+     0.003
     ]
    ],
    "lumiere": {
-    "luminosite": 71.2,
-    "chaleur": -0.4,
-    "saturation": 6.2
+    "luminosite": 97.9,
+    "chaleur": 1.5,
+    "saturation": 2.0
    },
    "moment": "jour",
    "postures": []
   },
   "audio": {
-   "duree": 75.3,
+   "duree": 74.3,
    "nb_voix": 2,
    "voix": [
     {
-     "hz": 220,
+     "hz": 248,
      "genre": "f",
-     "part": 0.49
+     "part": 0.71
     },
     {
-     "hz": 245,
+     "hz": 200,
      "genre": "f",
-     "part": 0.51
+     "part": 0.29
     }
    ],
-   "debit": 6.18,
-   "blanc_moyen": 0.12,
-   "coupes": 16,
-   "dynamique_db": 15.6,
-   "cris": 0.006,
-   "musique": 0.42,
-   "impacts": 93,
-   "impacts_10s": 12.36,
+   "debit": 5.69,
+   "blanc_moyen": 0.17,
+   "coupes": 7,
+   "dynamique_db": 16.3,
+   "cris": 0.029,
+   "musique": 0.41,
+   "impacts": 96,
+   "impacts_10s": 12.92,
    "graves": 6,
-   "aigus": 87,
-   "sur_vanne": 44,
+   "aigus": 90,
+   "sur_vanne": 37,
    "evenements": {},
    "emotions": {
-    "colere": 15,
-    "sceptique": 9,
-    "neutre": 8,
-    "annoyed": 2,
+    "colere": 11,
+    "neutre": 10,
     "explique": 2,
-    "panique": 1,
-    "choque": 1
+    "gene": 2,
+    "annoyed": 1,
+    "sceptique": 1,
+    "choc": 1,
+    "peur": 1
    }
   },
   "claude": {
@@ -50504,71 +50505,83 @@
     "rue",
     "salon"
    ],
-   "moment": "jour",
+   "moment": "soir",
    "costumes": {
     "presentateur": {
+     "haut": "chemise",
+     "c_haut": "gris",
+     "motif": "uni",
      "bas": "pantalon",
-     "c_haut": "noir",
      "chaussures": "ville",
-     "cheveux": "rase",
      "details": [
       "cravate"
      ],
-     "haut": "costume",
-     "motif": "uni"
+     "cheveux": "herisse",
+     "c_cheveux": "orange"
     },
     "invite": {
+     "haut": "sweat_a_capuche",
+     "c_haut": "noir",
+     "motif": "uni",
      "bas": "pantalon",
-     "c_haut": "blanc",
-     "chaussures": "ville",
-     "cheveux": "court",
+     "chaussures": "baskets",
      "details": [],
-     "haut": "chemise",
-     "motif": "uni"
+     "chapeau": "bonnet",
+     "c_chapeau": "noir",
+     "cheveux": "court",
+     "c_cheveux": "brun"
     }
    },
    "objets": [
     {
      "replique": 0,
      "objet": "telephone"
-    },
-    {
-     "replique": 1,
-     "objet": "telephone"
     }
    ],
    "gags": [
-    "Affiche : Attention aux squatteurs"
+    "Apéro sans alcool = Danger mortel"
    ],
-   "ambiances": []
+   "ambiances": [],
+   "plans": [
+    {
+     "plan": "large",
+     "geste": "poing",
+     "replique": 0,
+     "mouvement": "fixe"
+    },
+    {
+     "replique": 14,
+     "geste": "mains_hanches",
+     "mouvement": "fixe",
+     "plan": "large"
+    },
+    {
+     "mouvement": "fixe",
+     "replique": 25,
+     "geste": "desespoir",
+     "plan": "large"
+    }
+   ]
   },
   "realisation": {
-   "moment": "jour",
+   "moment": "soir",
    "lieux": [
     "rue",
     "salon"
    ],
    "gags": [
-    "Affiche : Attention aux squatteurs"
+    "Apéro sans alcool = Danger mortel"
    ],
    "ambiances": [
-    "pluie"
+    "pluie",
+    "poussiere"
    ],
    "source": "auteur+image",
    "tenues": {
-    "invite": "chemise",
-    "presentateur": "costume"
+    "presentateur": "chemise",
+    "invite": "capuche"
    },
    "plans": [
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
     "large/fixe",
     "large/fixe",
     "large/fixe",
@@ -50600,23 +50613,23 @@
     "large/fixe"
    ]
   },
-  "video": "2026-11-24_13h29_emission.mp4"
+  "video": "2026-11-24_13h57_emission.mp4"
  },
  {
   "date": "2026-11-24",
-  "source": "https://www.tiktok.com/@vignianimation/video/7709962074373311777",
-  "auteur": "vignianimation",
+  "source": "https://www.tiktok.com/@same_same53/video/7697181664186830112",
+  "auteur": "same_same53",
   "visuel": {
    "gestes": [],
-   "duree": 80.5,
+   "duree": 71.5,
    "nb_plans": 1,
-   "duree_plan": 80.5,
+   "duree_plan": 71.5,
    "coupes": [],
    "plans": {
     "tres_serre": 0.0,
     "serre": 0.0,
-    "moyen": 1.0,
-    "large": 0.0
+    "moyen": 0.343,
+    "large": 0.657
    },
    "camera": {
     "fixe": 1.0,
@@ -50629,185 +50642,150 @@
    "personnes": [
     {
      "place": "gauche",
-     "presence": 1.0,
+     "presence": 0.238,
      "habit": [
-      212,
-      183,
-      157
+      1,
+      1,
+      1
      ],
      "cheveux": [
-      38,
-      47,
-      56
+      251,
+      251,
+      251
      ],
      "sourire": 0.0,
-     "taille": 0.106,
-     "tete_penchee": 1.4,
-     "regard_cote": 0.919
+     "taille": 0.122,
+     "tete_penchee": 0.6,
+     "regard_cote": 0.0
+    },
+    {
+     "place": "centre",
+     "presence": 0.105,
+     "habit": [
+      1,
+      1,
+      1
+     ],
+     "cheveux": [
+      251,
+      251,
+      251
+     ],
+     "sourire": 0.0,
+     "taille": 0.127,
+     "tete_penchee": 0.2,
+     "regard_cote": 0.0
     }
    ],
    "visages": true,
    "sourires": 0.0,
-   "energie": 0.13,
+   "energie": 0.012,
    "mur": [
-    208,
-    173,
-    141
+    0,
+    0,
+    0
    ],
    "palette": [
     [
-     207,
-     172,
-     140,
-     0.564
+     0,
+     0,
+     0,
+     0.587
     ],
     [
-     160,
-     126,
-     86,
-     0.14
+     251,
+     251,
+     251,
+     0.229
     ],
     [
-     78,
-     73,
-     58,
-     0.115
+     163,
+     163,
+     163,
+     0.13
     ],
     [
-     78,
-     138,
-     169,
-     0.09
+     82,
+     82,
+     82,
+     0.026
     ],
     [
-     15,
-     14,
-     9,
-     0.057
+     220,
+     220,
+     220,
+     0.014
     ],
     [
-     249,
-     248,
-     246,
-     0.034
+     37,
+     37,
+     37,
+     0.013
     ]
    ],
    "lumiere": {
-    "luminosite": 175.0,
-    "chaleur": 42.8,
-    "saturation": 96.9
+    "luminosite": 83.0,
+    "chaleur": 0.1,
+    "saturation": 0.2
    },
    "moment": "jour",
    "postures": []
   },
   "audio": {
-   "duree": 80.1,
+   "duree": 71.1,
    "nb_voix": 2,
    "voix": [
     {
-     "hz": 253,
-     "genre": "f",
-     "part": 0.47
+     "hz": 129,
+     "genre": "h",
+     "part": 0.99
     },
     {
-     "hz": 147,
-     "genre": "h",
-     "part": 0.53
+     "hz": null,
+     "genre": null,
+     "part": 0.01
     }
    ],
-   "debit": 4.2,
-   "blanc_moyen": 0.66,
+   "debit": 3.66,
+   "blanc_moyen": 0.64,
    "coupes": 1,
-   "dynamique_db": 20.2,
-   "cris": 0.043,
-   "musique": 0.46,
-   "impacts": 68,
-   "impacts_10s": 8.49,
-   "graves": 0,
-   "aigus": 68,
-   "sur_vanne": 22,
-   "evenements": {},
+   "dynamique_db": 21.5,
+   "cris": 0.001,
+   "musique": 0.41,
+   "impacts": 25,
+   "impacts_10s": 3.51,
+   "graves": 13,
+   "aigus": 12,
+   "sur_vanne": 3,
+   "evenements": {
+    "crying": 1
+   },
    "emotions": {
-    "defiant": 9,
-    "colere": 9,
-    "neutral": 4,
-    "annoyed": 3,
-    "cold": 1,
-    "sarcastic": 1
+    "amused": 14
    }
   },
   "claude": {
    "lieux": [
-    "piscine"
+    "rue",
+    "salon"
    ],
    "moment": "jour",
-   "costumes": {
-    "presentateur": {
-     "haut": "chemise",
-     "c_haut": "blanc",
-     "motif": "uni",
-     "bas": "pantalon",
-     "chaussures": "ville",
-     "details": [
-      "montre"
-     ],
-     "chapeau": "aucune",
-     "cheveux": "carre",
-     "c_cheveux": "brun"
-    },
-    "invite": {
-     "haut": "tshirt",
-     "c_haut": "bleu",
-     "motif": "uni",
-     "bas": "short",
-     "chaussures": "baskets",
-     "details": [
-      "tatouage"
-     ],
-     "chapeau": "casquette",
-     "c_chapeau": "noir",
-     "cheveux": "rase",
-     "c_cheveux": "noir"
-    }
-   },
-   "objets": [
-    {
-     "objet": "telephone",
-     "replique": 0
-    },
-    {
-     "replique": 1,
-     "objet": "telephone"
-    }
-   ],
    "ambiances": []
   },
   "realisation": {
    "moment": "jour",
    "lieux": [
-    "piscine"
+    "rue",
+    "salon"
    ],
    "gags": [],
    "ambiances": [],
    "source": "auteur+image",
    "tenues": {
-    "presentateur": "chemise",
-    "invite": "tshirt"
+    "presentateur": "tshirt",
+    "invite": "chemise"
    },
    "plans": [
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
-    "large/fixe",
     "large/fixe",
     "large/fixe",
     "large/fixe",
@@ -50824,6 +50802,6 @@
     "large/fixe"
    ]
   },
-  "video": "2026-11-24_14h18_emission.mp4"
+  "video": "2026-11-24_14h29_emission.mp4"
  }
 ]

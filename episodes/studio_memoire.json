@@ -7330,37 +7330,38 @@
   "cadence": "rapide"
  },
  {
-  "moment": "jour",
+  "moment": "soir",
   "lieux": [
    "rue",
    "salon"
   ],
   "source": "auteur+image",
-  "duree": 76.2,
+  "duree": 75.0,
   "plans": {
-   "large": 38
+   "large": 29
   },
   "mouvements": {
-   "fixe": 38
+   "fixe": 29
   },
   "costumes": {
-   "invite": "chemise",
-   "presentateur": "costume"
+   "presentateur": "chemise",
+   "invite": "capuche"
   },
   "figurants": 0,
   "ambiances": [
-   "pluie"
+   "pluie",
+   "poussiere"
   ],
-  "controle": "Humoriste 7.8/10 :  | Réalisateur 7.8/10 :  | Directeur artistique 6.8/10 : 4 s Le décor de l'invité alterne rue et salon alors que dans l'original la scène 4 se passe au commissariat pour le policier",
-  "fichier": "2026-11-24_13h29_emission.mp4",
+  "controle": "Humoriste 8.6/10 : 64.8 s La menace de l'invité ('je jure devant Lucifer que je crame ta baraque') manque d'une réaction physique ou faciale plus intense pour accentuer le côté dramatique. | Réalisate",
+  "fichier": "2026-11-24_13h57_emission.mp4",
   "cine": {
-   "focus": true,
+   "focus": false,
    "vertige": true,
-   "tiers": false,
+   "tiers": true,
    "etalonnage": true,
    "profondeur": false,
    "grain": true,
-   "reflets": true,
+   "reflets": false,
    "son": true
   },
   "cadence": "rapide"
@@ -7368,24 +7369,25 @@
  {
   "moment": "jour",
   "lieux": [
-   "piscine"
+   "rue",
+   "salon"
   ],
   "source": "auteur+image",
-  "duree": 83.6,
+  "duree": 72.2,
   "plans": {
-   "large": 27
+   "large": 14
   },
   "mouvements": {
-   "fixe": 27
+   "fixe": 14
   },
   "costumes": {
-   "presentateur": "chemise",
-   "invite": "tshirt"
+   "presentateur": "tshirt",
+   "invite": "chemise"
   },
   "figurants": 0,
   "ambiances": [],
-  "controle": "Humoriste 7.0/10 :  | Réalisateur 7.0/10 :  | Directeur artistique 6.0/10 : 0.4 s Le décor de carrelage bleu ne correspond pas à la piscine de la vidéo originale.; 0.4 s Le personnage masculin a une g",
-  "fichier": "2026-11-24_14h18_emission.mp4",
+  "controle": "Humoriste 7.8/10 :  | Réalisateur 8.0/10 :  | Directeur artistique 6.0/10 : 0.4 s Le décor de salon ne colle pas avec la mise en scène d'origine en voiture. | Ingénieur du son 8.0/10 :  | Spectateur T",
+  "fichier": "2026-11-24_14h29_emission.mp4",
   "cine": {
    "focus": false,
    "vertige": true,
@@ -7393,9 +7395,9 @@
    "etalonnage": true,
    "profondeur": false,
    "grain": false,
-   "reflets": false,
+   "reflets": true,
    "son": true
   },
-  "cadence": "normal"
+  "cadence": null
  }
 ]

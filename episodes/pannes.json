@@ -32,14 +32,14 @@
   }
  },
  "contrôles qui n«…»audio (Gemini n'a pas répondu) (note de confiance plafonnée)": {
-  "n": 15,
+  "n": 16,
   "premiere": "2026-11-23",
   "derniere": "2026-11-24",
   "exemple": "contrôles qui n'ont pas pu se faire : fidélité à l'audio (Gemini n'a pas répondu) (note de confiance plafonnée)",
   "etape": "fiche de tournage",
   "jours": {
    "2026-11-23": 9,
-   "2026-11-24": 6
+   "2026-11-24": 7
   }
  },
  "erreur avalée dans cartoon.pose : ValueError «…»": {
@@ -63,14 +63,14 @@
   }
  },
  "jeu du dessin animé : Gemini n'a pas pu lire les expressions (rien de recopié)": {
-  "n": 14,
+  "n": 15,
   "premiere": "2026-11-23",
   "derniere": "2026-11-24",
   "exemple": "jeu du dessin animé : Gemini n'a pas pu lire les expressions (rien de recopié)",
   "etape": "fiche de tournage",
   "jours": {
    "2026-11-23": 5,
-   "2026-11-24": 9
+   "2026-11-24": 10
   }
  },
  "IA gemini indisponible (gemini : aucun modèle disponible (The read operation timed out)) : on passe à la suivante": {
@@ -104,13 +104,13 @@
   }
  },
  "IA gemini indisponible (gemini N : [{": {
-  "n": 7,
+  "n": 8,
   "premiere": "2026-11-24",
   "derniere": "2026-11-24",
   "exemple": "IA gemini indisponible (gemini 429 : [{",
   "etape": "fiche de tournage",
   "jours": {
-   "2026-11-24": 7
+   "2026-11-24": 8
   }
  },
  "erreur avalée dans progression._signaler : AttributeError «…»": {
@@ -148,6 +148,26 @@
   "premiere": "2026-11-24",
   "derniere": "2026-11-24",
   "exemple": "Barre de progression du site (statut) : envoi impossible (The read operation timed out )",
+  "etape": "fiche de tournage",
+  "jours": {
+   "2026-11-24": 1
+  }
+ },
+ "erreur avalée dans ecrire._appel : ValueError «…»": {
+  "n": 1,
+  "premiere": "2026-11-24",
+  "derniere": "2026-11-24",
+  "exemple": "erreur avalée dans ecrire._appel : ValueError « pas de JSON »",
+  "etape": "fiche de tournage",
+  "jours": {
+   "2026-11-24": 1
+  }
+ },
+ "jury : réponse illisible (réponse inexploitable : «…»), nouvel essai avec l'IA suivante": {
+  "n": 1,
+  "premiere": "2026-11-24",
+  "derniere": "2026-11-24",
+  "exemple": "jury : réponse illisible (réponse inexploitable : «  »), nouvel essai avec l'IA suivante",
   "etape": "fiche de tournage",
   "jours": {
    "2026-11-24": 1
