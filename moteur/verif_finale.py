@@ -276,6 +276,11 @@ _IA_GRAVES = r"dupliqu|en double|en trop|deux têtes|coupée? en deux|tête coup
 def trier_ia(pb, fiches=None):
     """Remarque de l'IA de contrôle -> True (vrai défaut du dessin : bras en double, tête coupée…), False (remarque légère, gardée
     au journal), None (fausse alerte connue : sous-titres, goût, âge / genre, personnes absentes, animal voulu… écartée)."""
+    # (audit du 24 novembre : « Aucun problème de découpage ou de déformation n'est visible » contient « déform », et « le texte affiché
+    # est dupliqué » contient « dupliqu » : ces phrases passaient en défaut GRAVE avant d'être reconnues comme fausses alertes)
+    if re.search(r"aucun(e)? (probl[èe]me|d[ée]faut|anomalie|souci)|rien (à signaler|d'anormal)|pas de (probl[èe]me|d[ée]faut)|"
+                 r"n'est (pas )?visible|ne sont (pas )?visibles|tout (est|semble) (correct|normal|bon)", pb, re.I): return None
+    if re.search(_IA_FAUSSES[1], pb, re.I): return None                    # sous-titres et textes : vérifiés à l'oreille
     if re.search(_IA_GRAVES, pb, re.I): return True
     if any(re.search(x, pb, re.I) for x in _IA_FAUSSES): return None
     if any((F or {}).get("espece") for F in (fiches or {}).values()) and re.search(r"\b(chat|chien|animal|animaux|lapin|souris|oiseau|poisson|objet)", pb, re.I): return None
@@ -533,6 +538,47 @@ def dialogue_logique(sk):
                  f"{', '.join(str(k + 1) for k in memes[:6])}) : c'est sans doute l'autre qui répond")
     d_["repliques_douteuses"] = memes
     return [d_]
+
+
+def attribuer_par_etiquettes(sk, appliquer=True, journal=print):
+    """Le NOM écrit à l'écran par le créateur (« Lamine Yamal », « Hansi Flick », « Été 2026 » : sk["doublage"]["etiquettes"], lu
+    par ocr.etiquettes) dit qui parle pendant ce plan : chaque réplique va au personnage dont le nom est affiché en son milieu ;
+    quand un seul nom va et vient, les répliques sans nom sont à l'autre personnage. Correspondance nom -> rôle qui change le moins de
+    répliques ; un rôle est ajouté s'il y a plus de noms que de personnages (3 au plus). Jamais contre l'auteur. Audit du 24 novembre
+    2026 (« Lamine Yamal dans le vestiaire » : 3 personnages joués par le même homme, répliques mélangées). ETIQUETTES=0 pour couper.
+    Renvoie {n° de réplique: rôle} ; sk["_noms_roles"] = {rôle: nom écrit}."""
+    if os.environ.get("ETIQUETTES", "1") == "0": return {}
+    import itertools
+    et = ((sk or {}).get("doublage") or {}).get("etiquettes") or []
+    reps = sk.get("repliques") or []
+    if not et or not reps: return {}
+    def nom_a(t):
+        return next((n for a, b, n in et if float(a) - 0.3 <= t <= float(b) + 0.3), None)
+    idx = [i for i, r in enumerate(reps) if r.get("p") not in (None, "narrateur") and not r.get("_hors_champ") and r.get("_deb") is not None]
+    if len(idx) < 3: return {}
+    cl = {i: nom_a((float(reps[i]["_deb"]) + float(reps[i]["_fin"])) / 2) for i in idx}
+    noms = sorted({n for n in cl.values() if n})
+    sans = [i for i in idx if cl[i] is None]
+    if len(noms) == 1 and len(sans) >= 2 and len(sans) >= 0.15 * len(idx): cl.update({i: "∅" for i in sans}); noms.append("∅")
+    elif len(noms) >= 2: pass
+    else: return {}
+    classes = [i for i in idx if cl[i]]
+    if len(classes) < 0.4 * len(idx) or len(noms) > 3: return {}
+    roles = list(dict.fromkeys(reps[i]["p"] for i in idx))
+    for r_ in ("presentateur", "invite", "envoyee"):
+        if len(roles) >= len(noms): break
+        if r_ not in roles: roles.append(r_)
+    meilleur, score = None, -1
+    for perm in itertools.permutations(roles, len(noms)):
+        m_ = dict(zip(noms, perm)); sc = sum(1 for i in classes if reps[i]["p"] == m_[cl[i]])
+        if sc > score: meilleur, score = m_, sc
+    out = {i: meilleur[cl[i]] for i in classes if reps[i]["p"] != meilleur[cl[i]] and not reps[i].get("_auteur")}
+    if appliquer:
+        for i, role in out.items(): reps[i]["p"] = role; reps[i]["_etiquette"] = True
+        sk["_noms_roles"] = {r_: n for n, r_ in meilleur.items() if n != "∅"}
+        if out: journal(f"  [équipe · casting voix] ✔ noms écrits à l'écran ({', '.join(n for n in noms if n != '∅')}) : {len(out)} réplique(s) "
+                        f"rendue(s) au personnage nommé (corrigé)")
+    return out
 
 
 def attribution_image(sk):

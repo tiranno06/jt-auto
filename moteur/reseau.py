@@ -137,6 +137,14 @@ def gemini_mort(modele, err):
 
 
 EPUISE = (" 401", " 403", "quota", "exhausted", "billing", "per day", "(tpd)", "(rpd)")   # fournisseur à court pour la journée
+
+
+def gemini_jour_epuise(txt):
+    """Le message d'erreur de Gemini dit-il que le quota DU JOUR est épuisé (pas seulement la limite à la minute) ? Google écrit
+    « You exceeded your current quota » dans les deux cas ; seul l'identifiant du quota (…PerDay…) ou une clé refusée tranche."""
+    t = str(txt or "").lower().replace(" ", "")
+    if "perminute" in t and "perday" not in t: return False
+    return "perday" in t or "billing" in t or " 401" in str(txt) or " 403" in str(txt) or "api_key_invalid" in t
 HORS_SERVICE = set()                                                       # fournisseurs épuisés pendant cette fabrication
 QUOTA = {}                                                                 # ce qu'il reste chez chaque IA gratuite (en-têtes des réponses)
 
@@ -222,6 +230,8 @@ def _appel_openai(fourn, kw):
             except urllib.error.HTTPError as e:
                 corps_err = e.read()[:3000].decode("utf-8", "ignore"); bas = corps_err.lower()
                 derniere = f"{e.code} : {corps_err[:300]}"                 # (le texte dit si c'est un quota épuisé : fournisseur sauté ensuite)
+                q_ids = sorted(set(re.findall(r'quotaid"\s*:\s*"([^"]+)', bas)))
+                if q_ids: derniere += " [" + ", ".join(q_ids)[:200] + "]"  # (…PerDay… ou …PerMinute… : gemini_jour_epuise tranche)
                 if e.code == 400 and corps.get("tools") and ("tool_use_failed" in bas or "failed to parse tool" in bas):
                     corps.pop("tools", None); corps.pop("tool_choice", None)    # Groq : JSON de l'outil mal formé -> réponse en texte
                     corps["messages"] = corps["messages"] + [{"role": "user", "content": "Réponds UNIQUEMENT par un objet JSON valide qui respecte ce schéma : "
@@ -322,7 +332,9 @@ class _Messages:
                 import secours
                 txt = str(e).lower()
                 if f == "claude" and not secours.claude_indisponible(e): raise         # erreur de Claude qui n'est pas un manque de crédit
-                if any(m in txt for m in EPUISE) or f == "modal": HORS_SERVICE.add(f)   # vraiment épuisé / refusé (Modal : un seul essai)
+                if f == "gemini" and not gemini_jour_epuise(txt):           # Gemini : « You exceeded your current quota » est AUSSI le texte de
+                    EN_PAUSE[f] = time.time() + 60                          # la limite À LA MINUTE (audit du 24 novembre : Gemini coupé pour toute
+                elif any(m in txt for m in EPUISE) or f == "modal": HORS_SERVICE.add(f)   # la fabrication -> fidélité, expressions… sautées)
                 erreurs.append(f"{f} : {str(e)[:120]}")
                 print(f"  IA {f} indisponible ({str(e)[:120]}) : on passe à la suivante", flush=True)
         raise RuntimeError("credit balance : aucune IA disponible (" + " | ".join(erreurs) + ")")
@@ -378,6 +390,7 @@ def verifier_credits():
         except Exception as e:
             t = str(e).lower(); etat[f] = ("epuise" if any(m in t for m in ("quota", "exhausted", "billing", "per day", "(tpd)", "(rpd)")) else "cle" if (" 401" in t or " 403" in t)
                                          else "limite" if "limite 429" in t else "erreur")
+            if f == "gemini" and etat[f] == "epuise" and not gemini_jour_epuise(t): etat[f] = "limite"   # limite à la minute : pas épuisé
             if etat[f] in ("epuise", "cle"): HORS_SERVICE.add(f)                    # erreur passagère : on retentera pendant la fabrication
             print(f"  {f} : {str(e)[:160]}", flush=True)
     if os.environ.get("MODAL_TOKEN_ID") and os.environ.get("IA_MODAL", "1") != "0":   # notre IA de secours est-elle déployée sur Modal ?

@@ -55,7 +55,7 @@ def generer(corps, timeout=240, tours=3, pause=20.0, max_modeles=None, valide=No
                 err = "réponse vide ou incomplète"; passager = True
             except Exception as e:
                 err = str(e)[:160]; reseau.gemini_mort(modele, err)
-                if any(x in err.lower() for x in ("quota", "exhausted", "per day")): reseau.HORS_SERVICE.add("gemini"); DERNIERE_ERREUR[0] = err; return None
+                if reseau.gemini_jour_epuise(err): reseau.HORS_SERVICE.add("gemini"); DERNIERE_ERREUR[0] = err; return None   # (quota DU JOUR seulement)
                 if any(x in err.lower() for x in PASSAGERES): passager = True
                 if journal: journal(f"  {quoi} : {modele} n'a pas répondu ({err[:90]})")
         if not passager or tour == tours - 1: break

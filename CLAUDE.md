@@ -901,6 +901,34 @@
   plus haute que celle du squelette) -> cadrage sur la vraie tête dessinée (`HU.reperes`, TETES_R, chapeau compris) ; 8. **voix sans
   personnage** (son TikTok) = sous-titre seulement, plus de grosse bulle blanche. Le contrôleur du soir revoit toutes les vidéos non
   publiées (`controleur_soir.VERSION` 3). Tests : `TestAudit24Novembre` (tests/test_audit23.py).
+- **3e audit des 10 vidéos + registre des pannes (24 novembre 2026 au soir, demande de l'auteur : analyser et corriger le robot, sans
+  rien refaire)** : **noms écrits à l'écran** (zequoiza écrit « Lamine Yamal », « Pedri », « Hansi Flick », « Été 2026 » à chaque plan) :
+  `ocr.etiquettes` (texte court qui commence par une majuscule, vu 2 fois, pas une ligne du titre posé : `ocr.lignes_legende`) ->
+  sk["doublage"]["etiquettes"] -> `verif_finale.attribuer_par_etiquettes` (après l'image, à la fabrication et pour une vidéo refaite :
+  chaque réplique au personnage nommé à l'écran ; un seul nom qui va et vient = les autres répliques à l'autre ; rôle ajouté s'il y a
+  plus de noms que de personnages, 3 au plus ; sk["_noms_roles"] ; ETIQUETTES=0) ; **écran partagé** : chaque moitié recadrée sur la
+  vraie tête, même taille de tête en haut et en bas, tête entière (`cartoon.partage` -> `bande`, TETES_X / TETES_R) ; **personnage
+  fantôme** (`doublage.fantomes`) : un rôle d'UNE réplique qui répète celle d'à côté (écho de la transcription), ou de moins de 1,5 s et
+  5 % de la parole -> entendue et sous-titrée, pas dessinée (plus d'écran partagé pour lui ; FANTOMES=0) ; **objet qui parle** (voiture,
+  frigo…) seulement si les MOTS en parlent (Gemini avait vu une voiture : l'homme au volant dessiné en voiture bleue) ; **objets vus
+  dans l'original** (`objets_vus.attribuer`) : objets rares (casque, colis, journal, marteau…) seulement s'ils sont dits (`MOTS_OBJETS`),
+  4 répliques au plus par objet (« casque de moto » sur 18 répliques sur 20 : un dôme noir sur la tête) ; **lieu** : « vestiaire » = stade ;
+  lieu proposé par une IA qui n'a PAS vu l'original gardé seulement si le dialogue ou le titre en parle, sinon le lieu des mots ou le
+  salon (« l'été est passé » mis dans un aéroport) ; nom de lieu anglais (« hallway ») traduit (`studio.bible`), jamais un lieu deviné
+  ailleurs (une classe) ; **panneaux** (son TikTok) : seulement ceux de la fiche (vus ou dits, `texte_panneau`), jamais les « gags » de
+  l'IA ni un nom de rôle interne (« …l'ordinateur du présentateur ») ; panneaux d'une IA qui n'a pas vu l'original : seulement si le
+  dialogue en parle ; **contrôle IA** (`trier_ia`) : « aucun problème… n'est visible » et les remarques sur le texte affiché ne sont
+  plus des défauts graves (« déform », « dupliqu » passaient avant). **Registre des pannes** (≈ 90 lignes, 70 dues à Gemini) : la cause
+  de fond était une **cascade** : Google écrit « You exceeded your current quota » AUSSI pour la limite à la MINUTE (deux vidéos en même
+  temps + la réserve de sons) ; le robot coupait Gemini pour toute la fabrication (`reseau` HORS_SERVICE), et le contrôle « fidélité »,
+  les expressions des dessins animés et « qui parle d'après l'image » étaient sautés ; maintenant `reseau.gemini_jour_epuise` (identifiant
+  …PerDay… recopié dans l'erreur) : seul le quota du JOUR coupe Gemini, la limite à la minute le met en pause 60 s (EN_PAUSE), aussi au
+  départ (`verifier_credits` -> « limite »). Autres : `jeu_original.appliquer` plantait sur un regard en tableau numpy (« truth value
+  ambiguous ») ; barre de progression coupée pour toute la fabrication au 1er délai dépassé (`progression._signaler` : 3 échecs de suite,
+  « URLError has no attribute read » réglé) ; réponse VIDE d'une IA gratuite -> redemandée à l'IA SUIVANTE (`ecrire._appel`), plus « une
+  seule scène » ; relais réussis et modèles essayés parmi d'autres plus comptés (`pannes.BANAL`) ; registre vidé. Pas fait : deux appels
+  dessinés dans la même pièce (« Refuser le barbecue », « Lycéens ») — aucun indice fiable dans les données (ni Gemini ni le détecteur
+  n'ont vu de téléphone). Tests : `TestAudit24NovembreSoir` (tests/test_audit23.py).
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.

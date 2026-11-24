@@ -79,7 +79,7 @@ REGLES = [
     ("kebab", r"kebab|grec\b|tacos|sauce blanche|samouraï"), ("cinema", r"cinéma|\bciné\b|film|pop-?corn|movie theater"),
     ("plage", r"plage|la mer\b|sable|bronzer|beach"), ("piscine", r"piscine|plonge|maillot de bain|swimming pool"),
     ("parc", r"\bparc\b|jardin public|square|park bench"), ("camping", r"camping|tente|caravane|mobil-?home|campsite"),
-    ("montagne", r"montagne|\bski\b|skier|station de ski|neige|chalet|mountain"), ("stade", r"stade|match de foot|supporters?|stadium"),
+    ("montagne", r"montagne|\bski\b|skier|station de ski|neige|chalet|mountain"), ("stade", r"stade|match de foot|supporters?|stadium|vestiaires?|locker room"),
     ("concert", r"concert|festival|chanteur sur scène|scène|stage lights"), ("boite_nuit", r"bo[iî]te de nuit|en boîte|night ?club|soirée dansante"),
     ("hopital", r"h[ôo]pital|chambre d'hôpital|hospital room|perfusion"), ("urgences", r"urgences|\bsamu\b|emergency room"),
     ("pharmacie", r"pharmacie|pharmacien|médicaments|pharmacy"), ("commissariat", r"commissariat|garde à vue|déposer plainte|police station"),

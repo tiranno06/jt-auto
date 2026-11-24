@@ -809,6 +809,9 @@ def preparer(url):
             if not r_: continue
             S_ = sk["studio"] if isinstance(sk.get("studio"), dict) else {}
             P_ = S_.setdefault("personnages", {}) if isinstance(S_.get("personnages", {}), dict) else {}
+            import animaux as _AN
+            if e_ in _AN.OBJETS and not re.search(_AN.MOTS.get(e_, r"(?!x)x"), " ".join(str(r.get("t") or "") for r in reps).lower()):
+                journal(f"  {NOMS.get(r_, r_)} : « {e_} » vu par Gemini mais jamais dit dans le dialogue : reste humain"); continue
             if not (P_.get(r_) or {}).get("espece"):
                 P_.setdefault(r_, {})["espece"] = e_; sk["studio"] = S_; journal(f"  {NOMS.get(r_, r_)} est un(e) {e_} (vu dans la vidéo d'origine)")
     except Exception as e: journal(f"  espèces vues impossibles ({str(e)[:100]})")
@@ -838,6 +841,10 @@ def preparer(url):
         import ocr as _ocr
         _leg = _ocr.legende(lignes_ocr, duree)
         if _leg: sk["doublage"]["legende_ecran"] = _leg; journal(f"  texte posé sur l'original : « {_leg[:120]} »")
+        _et = _ocr.etiquettes(lignes_ocr, _ocr.lignes_legende(lignes_ocr, duree))                            # noms des personnages écrits à l'écran (24 novembre)
+        if _et:
+            sk["doublage"]["etiquettes"] = _et
+            journal(f"  noms des personnages écrits sur l'original : {', '.join(sorted({e[2] for e in _et}))}")
     except Exception as _e: __import__("pannes").avale(_e)
     try:
         _r = __import__("locuteurs").ETAT.get("ressemblance")
@@ -862,6 +869,10 @@ def preparer(url):
     except Exception as e: journal(f"  dernier contrôle des voix impossible ({str(e)[:120]})")
     try: __import__("verif_finale").attribuer_par_image(sk, journal=journal)   # un acteur pour tous les rôles : l'image décide (23 nov.)
     except Exception as e: journal(f"  attribution par l'image impossible ({str(e)[:120]})")
+    try: __import__("verif_finale").attribuer_par_etiquettes(sk, journal=journal)   # nom écrit à l'écran : il décide (24 nov.)
+    except Exception as e: journal(f"  attribution par les noms écrits impossible ({str(e)[:120]})")
+    try: fantomes(sk, journal)                                             # personnage d'une seule réplique écho (24 nov.)
+    except Exception as e: journal(f"  personnages fantômes non vérifiés ({str(e)[:120]})")
     # voix de chaque réplique (pour les bouches) et instants des mots, relatifs au début de la réplique
     audios, mots = [], []
     for s in segs:
@@ -954,6 +965,38 @@ def scinder_melangees(sk, sig, sr=SR):
     return n
 
 
+def _nu_txt(t): return re.sub(r"[^\w]", "", str(t or "").lower())
+
+
+def fantomes(sk, journal=print):
+    """Personnage « fantôme » (audit du 24 novembre 2026, « Le cadeau d'anniversaire » : un monologue, et la transcription avait
+    entendu « C'est incroyable » deux fois ; le 2e passage était devenu un 2e personnage, dessiné en voiture dans la moitié d'un
+    écran partagé pendant toute la vidéo). Un rôle qui ne dit qu'UNE réplique : si elle répète mot pour mot la réplique d'à côté,
+    c'est un écho ; ou si elle dure moins de 1,5 s et que ce rôle fait moins de 5 % de la parole : elle reste entendue et
+    sous-titrée mais le personnage n'est pas dessiné (hors champ, pas d'écran partagé pour lui). Jamais contre l'auteur. FANTOMES=0 pour couper."""
+    import os
+    if os.environ.get("FANTOMES", "1") == "0": return 0
+    reps = sk.get("repliques") or []
+    roles = {}
+    for i, r in enumerate(reps):
+        if r.get("p") not in (None, "narrateur") and not r.get("_hors_champ"): roles.setdefault(r["p"], []).append(i)
+    if len(roles) < 2: return 0
+    total = sum(max(0.0, float(r.get("_fin") or 0) - float(r.get("_deb") or 0)) for r in reps) or 1.0
+    n = 0
+    for role, idx in roles.items():
+        if len(idx) != 1: continue
+        i = idx[0]; r = reps[i]
+        if r.get("_auteur"): continue
+        voisins = [reps[j] for j in (i - 1, i + 1) if 0 <= j < len(reps)]
+        echo = any(_nu_txt(v.get("t")) == _nu_txt(r.get("t")) and _nu_txt(r.get("t")) for v in voisins)
+        d = float(r.get("_fin") or 0) - float(r.get("_deb") or 0)
+        if echo or (d < 1.5 and d / total < 0.05):
+            r["_hors_champ"] = True; r["_role_entendu"] = r.get("p"); r["p"] = "narrateur"; n += 1   # (comme equipe.presents)
+            journal(f"  personnage fantôme : « {str(r.get('t'))[:40]} » ({d:.1f} s, seule réplique de {role}"
+                    + (", écho de la réplique d'à côté" if echo else "") + ") : entendue et sous-titrée, pas dessinée")
+    return n
+
+
 def depuis_sketch(sk, controle=False):
     """« Corriger qui parle » (idée 6) : refait le son d'une vidéo TikTok déjà fabriquée, avec les MÊMES répliques (instants gardés
     dans le sketch) : le son d'origine est re-téléchargé et recoupé réplique par réplique. Renvoie (audios, mots) comme preparer."""
@@ -971,6 +1014,7 @@ def depuis_sketch(sk, controle=False):
             n_ = equipe.voix_finales(sk, mono, SR, B_)
             if n_: journal(f"  vidéo refaite : {n_} réplique(s) remise(s) sur la bonne voix (hauteur et empreinte vocale)")
             __import__("verif_finale").attribuer_par_image(sk, journal=journal)
+            __import__("verif_finale").attribuer_par_etiquettes(sk, journal=journal)
         except Exception as e: journal(f"  contrôle des voix de la vidéo refaite impossible ({str(e)[:120]})")
     audios, mots = [], []
     for r in sk["repliques"]:
