@@ -52,8 +52,15 @@ def depuis_historique(h):
     return texte(pts, rem)
 
 
-def meilleure(c_avant, c_apres, n_avant=None, n_apres=None):
-    """La version corrigée est-elle meilleure ? Confiance plus haute, ou égale avec une meilleure note du jury."""
+def parlants(sk):
+    """Nombre de personnages qui parlent (dessinés)."""
+    return len({r.get("p") for r in (sk or {}).get("repliques") or [] if r.get("p") not in (None, "narrateur") and not r.get("_hors_champ")})
+
+
+def meilleure(c_avant, c_apres, n_avant=None, n_apres=None, sk_avant=None, sk_apres=None):
+    """La version corrigée est-elle meilleure ? Confiance plus haute, ou égale avec une meilleure note du jury. Jamais une version
+    qui a PERDU un personnage qui parle (audit du 24 novembre : « un seul personnage » faisait monter la confiance de 26 à 98)."""
     if c_apres is None or c_avant is None: return False
+    if sk_avant is not None and sk_apres is not None and parlants(sk_apres) < parlants(sk_avant): return False
     if c_apres != c_avant: return c_apres > c_avant
     return n_apres is not None and n_avant is not None and n_apres > n_avant

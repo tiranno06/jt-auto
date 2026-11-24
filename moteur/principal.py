@@ -231,7 +231,7 @@ def corriger_compte_rendu(sk, base, audios, mots, decors, fmt, points, modal_ok,
             for f_ in (base + "_c.mp4", base + "_c_avant_boucle.mp4"):
                 if os.path.exists(f_): os.remove(f_)
             print(f"Compte rendu : version corrigée impossible ({str(e)[:120]}) : on garde la vidéo", flush=True); break
-        if CR.meilleure(conf, conf4, Q.get("note"), Q4.get("note")):
+        if CR.meilleure(conf, conf4, Q.get("note"), Q4.get("note"), sk, sk4):
             os.replace(base + "_c.mp4", base + ".mp4"); os.replace(base + "_c_avant_boucle.mp4", base + "_avant_boucle.mp4")
             sk.clear(); sk.update(sk4); decors = dec4; points = pts4; QUALITE["Q"] = Q = Q4; QUALITE["corrigees"] += faits
             print(f"Compte rendu corrigé : confiance {conf} → {conf4}/100, jury {Q.get('note')}/10", flush=True); conf = conf4

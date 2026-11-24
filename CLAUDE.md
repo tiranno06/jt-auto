@@ -875,6 +875,32 @@
   au bout de 3 jours, historique "recalee"), jamais sur la liste ni à publier, et une autre vidéo part sur un AUTRE son (emission.yml
   entrée « recale », sortie/.remplacante ; 2 remplaçantes à la suite au plus : REMPLACANTES_MAX) ; un lien collé ou une vidéo refaite
   à la demande de l'auteur n'est jamais recalée. NeMo réparé (datasets==2.21.0 dans l'image Modal). Tests : tests/test_audit23.py.
+- **2e audit des 10 vidéos (24 novembre 2026, remarque de l'auteur : « tu n'as absolument rien corrigé »)** : 5 des 10 vidéos reprenaient
+  des sons effacés la veille, comparées à nouveau image par image et voix par voix (hauteur de la voix de chaque phrase de l'original).
+  Ce qui avait marché : filles jouées par un homme dessinées en filles, bureau au lieu de la chambre, Gemini qui répond après une
+  attente. Causes des erreurs restantes : 1. **la réserve de sons** donnait des sons écoutés AVANT les corrections (écoute reprise
+  telle quelle) -> `pre_ecoute.VERSION_ECOUTE` dans le nom de chaque son (« _v3 ») : une écoute plus ancienne est jetée et refaite
+  (à augmenter à chaque amélioration de l'écoute) ; 2. **le compte rendu automatique cassait les vidéos** : une remarque de contrôle
+  (« pas trois hommes… ») traduite par l'IA en « un seul personnage » -> les 20 répliques au même, et la confiance montait de 26 à 98
+  (plus aucun écart de voix) ; maintenant l'IA du compte rendu ne change JAMAIS qui parle, ni le nombre de personnages, ni un appel
+  (`remarque.appliquer(memoriser=False)` : plus de « qui », « un_seul », « lieux_separes », « figurant ») et une version qui PERD un
+  personnage n'est jamais gardée (`compte_rendu.meilleure(…, sk_avant, sk_apres)`) ; ses changements ne sont plus marqués « _auteur »
+  (sinon aucun contrôle n'osait les corriger) ; 3. **un personnage qui parle peu** (« Tes lacets » : l'homme 5 phrases à 120-165 Hz, la
+  femme tout le reste à 250-300 Hz, 20 phrases sur 36 mal placées) : le témoin hauteur (`locuteurs.temoin_hauteur`,
+  `equipe.hauteur_finale`) s'arrêtait sous 15 % de parole ou au-delà de 45 % de phrases à changer ; quand les deux voix sont
+  nettement un homme (≤ 175 Hz) et une femme (≥ 230 Hz, 1,55 fois plus haut, « tres_nette »), il décide quand même (2 phrases au
+  moins pour la voix rare) ; 4. **les cris ne sont pas une femme** (`locuteurs.CRIS_HZ` 340 : « Allez ! » d'hommes à 408 Hz au
+  powerlifting dessinés en femme) : au-delà, la hauteur ne vote plus (témoins, `studio.genre_voix`, `verif_finale.voix_dessin`) ;
+  5. **homme / femme d'après les mots** : « ta meuf », « ma sœur » parlent d'une AUTRE personne -> seulement les apostrophes en début ou
+  fin de phrase (« Madame, excusez-moi », « ça va, frérot ? ») ; `un_acteur` ne croit plus « voix proches » du bulletin (répliques
+  mélangées) ni « une seule personne vue » quand Gemini a dit deux acteurs (sk["doublage"]["meme_interprete"] = None si Gemini n'a
+  pas regardé) ; 6. **personnages identiques** (classe : trois survêtements bleus ; deux garçons même coupe, mêmes lunettes) :
+  `studio.distinguer` (couleur du haut, lunettes, coiffure et couleur des cheveux du 2e ; jamais sur un choix de l'auteur ou une
+  partie suivante ; DISTINGUER=0) et la tenue VUE par Gemini passe avant une tenue devinée aux mots (`TENUES_DEVINEES`, « entraînement »
+  avait mis tout le monde en survêtement) ; 7. **appel : tête coupée** dans la moitié d'écran (la grosse tête du « petit » croquis est
+  plus haute que celle du squelette) -> cadrage sur la vraie tête dessinée (`HU.reperes`, TETES_R, chapeau compris) ; 8. **voix sans
+  personnage** (son TikTok) = sous-titre seulement, plus de grosse bulle blanche. Le contrôleur du soir revoit toutes les vidéos non
+  publiées (`controleur_soir.VERSION` 3). Tests : `TestAudit24Novembre` (tests/test_audit23.py).
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.

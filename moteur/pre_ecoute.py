@@ -64,13 +64,19 @@ def _id(url):
     m = re.search(r"/video/(\d+)", str(url)); return m.group(1) if m else ""
 
 
+# Version de l'écoute (casting des voix, hauteur, image…) : à augmenter à CHAQUE amélioration de l'écoute. Un son de la réserve écouté
+# par une version plus ancienne est jeté et réécouté (audit du 24 novembre 2026 : la série du soir avait pris 8 sons écoutés AVANT les
+# corrections de la veille, qui n'avaient donc presque servi à rien).
+VERSION_ECOUTE = 3
+
+
 def stock(rel=None):
-    """Sons prêts : [{nom, id, asset, age}] (les plus anciens d'abord). Les trop vieux sont effacés."""
+    """Sons prêts : [{nom, id, asset, age}] (les plus anciens d'abord). Les trop vieux, et ceux d'une ancienne écoute, sont effacés."""
     rel = rel or _release(); out = []; fich = DP.fichiers(rel)
     for a in fich:
-        m = re.match(r"^(p\d+_(\d+))_etat\.pkl\.gz$", a["name"])
+        m = re.match(r"^(p\d+_(\d+)(?:_v(\d+))?)_etat\.pkl\.gz$", a["name"])
         if not m: continue
-        if _age(a) > AGE_MAX:
+        if _age(a) > AGE_MAX or int(m.group(3) or 0) != VERSION_ECOUTE:
             for b in fich:
                 if b["name"].startswith(m.group(1) + "_"): DP.effacer(b)
             continue
@@ -105,7 +111,7 @@ def _remettre(e):
 
 def deposer(url, prep, rel=None):
     """Range l'écoute d'un son (url, résultat de doublage.preparer) dans la release « sons-prets »."""
-    rel = rel or _release(); nom = f"p{int(time.time())}_{_id(url) or '0'}"; tmp = tempfile.mkdtemp()
+    rel = rel or _release(); nom = f"p{int(time.time())}_{_id(url) or '0'}_v{VERSION_ECOUTE}"; tmp = tempfile.mkdtemp()
     noms = {}
     for k, chemin in enumerate(sorted(_fichiers_de(prep, tempfile.gettempdir()))):
         n = f"{nom}_f{k}{os.path.splitext(chemin)[1]}"; DP.envoyer(rel, chemin, n); noms[chemin] = n
