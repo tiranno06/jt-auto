@@ -1,147 +1,117 @@
-Modal : 17.98 $ dépensés ce mois-ci (plafond 30 $)
+Modal : 18.15 $ dépensés ce mois-ci (plafond 30 $)
 Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, Groq ok, OpenRouter ok, IA Modal ok, ElevenLabs epuise — IA utilisée : mistral
 Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @motiontoonz, @same_same53, @charly.bse, @kodanimation, @vignianimation, @vincedessine, @aguerin30, @zequoiza, @jayzocc, @brutuslerobuste, @jawedyoussef
-Réserve de sons : son déjà écouté pris dans la réserve (https://www.tiktok.com/@brutuslerobuste/video/7711437067099589921) : on passe directement à la suite
-Chaîne : vidéo 7/10 lancée
+Réserve de sons : son déjà écouté pris dans la réserve (https://www.tiktok.com/@aguerin30/video/7709211314245078304) : on passe directement à la suite
+Chaîne : vidéo 8/10 lancée
   fiche de tournage : gemini-flash-latest n'a pas répondu (HTTP Error 429: Too Many Requests)
-  fiche de tournage écrite (Gemini a regardé et écouté l original) : salle_sport (modern strength training gym with barbell rack and), jour, temps normal, ambiance suspense, niveau aise
-  [équipe · fiche de tournage] ✔ contrôle 1 : règles (cohérence avec ce qui est dit) : invite état de la tenue : sueur -> — (rien ne le justifie dans le son) (corrigé)
-    correction : invite état de la tenue : sueur -> — (rien ne le justifie dans le son)
+  fiche de tournage : gemini-flash-lite-latest n'a pas répondu (HTTP Error 503: Service Unavailable)
+  fiche de tournage : gemini-3.8-flash n'a pas répondu (HTTP Error 429: Too Many Requests)
+  fiche de tournage : gemini-3.7-flash n'a pas répondu (HTTP Error 429: Too Many Requests)
+  fiche de tournage : gemini-3.6-flash n'a pas répondu (The read operation timed out)
+  fiche de tournage : Gemini surchargé, nouvel essai dans 20 s (tour 2/3)
+  fiche de tournage : gemini-flash-latest n'a pas répondu (HTTP Error 429: Too Many Requests)
+  fiche de tournage écrite (Gemini a regardé et écouté l original) : bureau (modern messy office desk with open laptop computer), jour, temps normal, ambiance gene, niveau moyen
+  [équipe · fiche de tournage] ✔ contrôle 1 : règles (cohérence avec ce qui est dit) : réplique 0 signe : goutte -> — (pas cohérent avec l'émotion « fatigue »); réplique 1 signe : goutte -> — (pas cohérent avec l'émotion « fatigue ») (corrigé)
+    correction : réplique 0 signe : goutte -> — (pas cohérent avec l'émotion « fatigue »)
+    correction : réplique 1 signe : goutte -> — (pas cohérent avec l'émotion « fatigue »)
   [équipe · fiche de tournage] ✔ contrôle 2 : 2e IA (autre fournisseur)
   [équipe · fiche de tournage] ✔ contrôle 3 : image de l'original, puis règles
-  jeu du dessin animé : Gemini n'a pas pu lire les expressions (rien de recopié)
-  sous-titres anglais : 11 réplique(s) traduite(s)
-Sketch : « RECORD 940KG FORCE ATHLÉTIQUE », 11 répliques
-  décor semi-réaliste 0 : budget Modal du mois atteint, décor dessiné
+  sous-titres anglais : 3 réplique(s) traduite(s)
+Essai : sans carton de fin « Abonne-toi »
+Sketch : « GTA6 DEMAIN AU BUREAU », 3 répliques
+  décor semi-réaliste 0 (lieu ressemblant de la banque) : [semi] modern messy office desk with open laptop computer an
 WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1795482142.872040    2992 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+I0000 00:00:1795484969.829730    3015 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
 WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1795482144.136247    2992 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+I0000 00:00:1795484971.194439    3015 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
 Downloading data from https://github.com/ina-foss/inaSpeechSegmenter/releases/download/models/keras_speech_music_noise_cnn.hdf5
-[1m      0/3244808[0m [37m━━━━━━━━━━━━━━━━━━━━[0m [1m0s[0m 0s/step[1m1114112/3244808[0m [32m━━━━━━[0m[37m━━━━━━━━━━━━━━[0m [1m0s[0m 0us/step[1m1441792/3244808[0m [32m━━━━━━━━[0m[37m━━━━━━━━━━━━[0m [1m0s[0m 0us/step[1m3244808/3244808[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 0us/step
+[1m      0/3244808[0m [37m━━━━━━━━━━━━━━━━━━━━[0m [1m0s[0m 0s/step[1m2621440/3244808[0m [32m━━━━━━━━━━━━━━━━[0m[37m━━━━[0m [1m0s[0m 0us/step[1m3244808/3244808[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 0us/step
 /home/runner/venv/lib/python3.12/site-packages/keras/src/layers/reshaping/reshape.py:39: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
   super().__init__(**kwargs)
 Downloading data from https://github.com/ina-foss/inaSpeechSegmenter/releases/download/models/keras_male_female_cnn.hdf5
-[1m      0/6040200[0m [37m━━━━━━━━━━━━━━━━━━━━[0m [1m0s[0m 0s/step[1m6040200/6040200[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 0us/step
-montage : 1 plans (0.0:large>inv/coupe)
+[1m      0/6040200[0m [37m━━━━━━━━━━━━━━━━━━━━[0m [1m0s[0m 0s/step[1m3522560/6040200[0m [32m━━━━━━━━━━━[0m[37m━━━━━━━━━[0m [1m0s[0m 0us/step[1m6040200/6040200[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 0us/step
+montage : 1 plans (6.9:large>pre/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-studio : jour, lieux ['salle_sport'], tenues invite=tshirt, envoyee=debardeur, 0 figurant(s), ambiances ['vapeur'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 62.9 s, 11 répliques, 1 scène(s), personnages ['invite', 'envoyee']
-montage : 1 plans (0.0:large>inv/coupe)
+studio : jour, lieux ['bureau'], tenues presentateur=pull, invite=pull, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe
+cartoon : durée 20.4 s, 3 répliques, 1 scène(s), personnages ['presentateur', 'invite']
+montage : 1 plans (6.9:large>pre/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-studio : jour, lieux ['salle_sport'], tenues invite=tshirt, envoyee=debardeur, 0 figurant(s), ambiances ['vapeur'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 62.9 s, 11 répliques, 1 scène(s), personnages ['invite', 'envoyee']
-  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~944 images)
-  morceau 1888–2832 reçu d'une machine d'aide
-  morceau 2832–3776 reçu d'une machine d'aide
-  morceau 944–1888 reçu d'une machine d'aide
-  dessin partagé terminé en 9.7 min
+studio : jour, lieux ['bureau'], tenues presentateur=pull, invite=pull, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe
+cartoon : durée 20.4 s, 3 répliques, 1 scène(s), personnages ['presentateur', 'invite']
+  dessin partagé : 1 machine(s) d'aide + celle-ci (2 morceaux de ~612 images)
+  morceau 612–1225 reçu d'une machine d'aide
+  dessin partagé terminé en 8.2 min
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury : 1 remarque(s) sur les plans / zooms retirée(s) (montage « plan large » voulu)
 Jury : 4 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
-Jury qualité (ia) : 8.8/10 — Humoriste 8.6/10 :  | Réalisateur 8.8/10 :  | Directeur artistique 9.0/10 : 0.4 s Le style encre et aquarelle est bien respecté, mais le fond du décor manque un peu de lisibilité sur les textes en arrière-plan. | Ingénieur du son 8.8/10 :  | Spectateur TikTok 8.8/10 : 
-Manque par rapport à la vidéo d'origine : Le personnage d'origine soulève une barre extrêmement lourde avec des disques rouges caractéristiques, qu'il faudrait mieux suggérer dans le dessin.
+Jury qualité (ia) : 6.7/10 — Humoriste 6.8/10 :  | Réalisateur 7.8/10 :  | Directeur artistique 6.0/10 : 0 s Les tenues manquent de fidélité par rapport à l'original | Ingénieur du son 7.8/10 :  | Spectateur TikTok 5.8/10 : 
+Manque par rapport à la vidéo d'origine : L'acteur original est seul face à son ordinateur portable dans un bureau avec un décor de salon/bureau personnel, alors qu'on a deux personnages identiques. ; Manque l'ordinateur portable ouvert sur lequel travaille le personnage dans l'original.
 fin en boucle : la dernière image se raccorde à la première (0.35 s de fondu)
+  [vidéo finie · synchro] décalage mesuré +0.25 s (mesure seulement : le son n'est jamais déplacé)
   [vidéo finie · synchro] ✔ bouches du bon personnage
   [vidéo finie · bouches] ✔ bouche immobile quand le personnage se tait
   [vidéo finie · technique] ✔ sauts, clignotements, personnages (0 remarque(s))
-  transcription Groq (Whisper, gratuit) : 9 mots
-  3 mot(s) inventé(s) par la reconnaissance vocale retiré(s) (« sous-titrage société radio-canada »)
-  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 19 %)
-  [vidéo finie · contrôle IA] 0 remarque(s)
+  transcription Groq (Whisper, gratuit) : 19 mots
+  karaoké contrôlé à l'oreille : 15 mots, écart médian 0.04 s
+  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 84 %)
+  [vidéo finie · contrôle IA] 1 remarque(s)
+  contrôle « fidélité » : Gemini surchargé, nouvel essai dans 20 s (tour 2/3)
+  contrôle « fidélité » : Gemini surchargé, nouvel essai dans 40 s (tour 3/3)
   [vidéo finie · fidélité à l'audio] ✘ Gemini a regardé et écouté la vidéo finie : 2 écart(s)
   [vidéo finie · voix et dessin] ✔ chaque réplique sur la bonne voix, homme / femme d'après la voix
   [vidéo finie · attribution] ✔ qui dit chaque phrase, comparé à l'image de l'original
-  2 remarque(s) légère(s) gardée(s) au journal seulement : 5.0 s sous-titre « 350 au squat. On débloque. » mais on  ; 27.6 s sous-titre « Allez, c'est un peu de courage. » mai
-Contrôle de la vidéo finie : 2 point(s) à vérifier — None s La fiche indique 'envoyee : h, 30 ans' et 'invite : h, 28 an ; None s La réplique est attribuée à l'invité dans le script, mais c'
+  1 remarque(s) légère(s) gardée(s) au journal seulement : 7.0 s Le personnage 1 (à gauche) parle à la place du per
+Contrôle de la vidéo finie : 2 point(s) à vérifier — 0.0 s il n'y a pas d'ordinateur présent alors qu'il est mentionné  ; 0.0 s les personnages ne sont pas des humains normaux mais des per
 Compte rendu (tour 1, confiance 72/100) : corrections demandées au robot :
-- La fiche indique 'envoyee : h, 30 ans' et 'invite : h, 28 ans' (deux hommes), mais l'animation représente un homme et une femme.
-- La réplique est attribuée à l'invité dans le script, mais c'est le personnage féminin qui parle.
-Remarque comprise : Le script indique deux hommes alors que l'animation montre un homme et une femme, et une réplique est attribuée à l'invité alors que c'est le personnage féminin qui la prononce.
-Remarque de l'auteur : 1 réplique(s) à rendre à un autre personnage, 3 correction(s) : casting, casting, reaction
-Compte rendu : réplique 1 -> envoyee ; invite : humain ; envoyee : humain ; casting de invite : age 28, taille 1.1, barbe moustache ; casting de envoyee : age 30, taille 1.1, barbe aucune
-  décor semi-réaliste 0 : budget Modal du mois atteint, décor dessiné
-montage : 1 plans (0.0:large>env/coupe)
+- à 0.0 s : il n'y a pas d'ordinateur présent alors qu'il est mentionné dans la fiche de tournage
+- à 0.0 s : les personnages ne sont pas des humains normaux mais des personnages de dessin animé aux têtes surdimensionnées
+- à 0.0 s : Les tenues manquent de fidélité par rapport à l'original
+Remarque comprise : L'auteur signale trois problèmes : absence d'ordinateur à 0.0 s, les personnages ont un style cartoon avec têtes surdimensionnées, et les costumes ne correspondent pas à l'original.
+Remarque de l'auteur : 0 réplique(s) à rendre à un autre personnage, 5 correction(s) : lieu, casting, casting, costume, costume
+Compte rendu : fiche de tournage : repliques.0.objet : ordinateur -> None (il n'y a pas d'ordinateur présent alors qu'il est mentionné dans la fiche de tournage) ; fiche de tournage : personnages.invite.tenue : normale -> None (les personnages ne sont pas des humains normaux mais des personnages de dessin animé aux têtes surdi) ; presentateur : humain ; invite : humain ; casting de presentateur : age 32, taille 1, barbe moustache ; casting de invite : age 30, taille 1, barbe aucune ; tenue de presentateur ; tenue de invite
+montage : 1 plans (6.9:large>pre/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-studio : jour, lieux ['salle_sport'], tenues envoyee=debardeur, invite=tshirt, 0 figurant(s), ambiances ['vapeur'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 62.9 s, 11 répliques, 1 scène(s), personnages ['envoyee', 'invite']
-  image 300/3776 (4 processeurs)
-  image 600/3776
-  image 900/3776
-  image 1200/3776
-  image 1500/3776
-  image 1800/3776
-  image 2100/3776
-  image 2400/3776
-  image 2700/3776
-  image 3000/3776
-  image 3300/3776
-  image 3600/3776
+studio : jour, lieux ['bureau'], tenues presentateur=costume, invite=polo, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe
+cartoon : durée 20.4 s, 3 répliques, 1 scène(s), personnages ['presentateur', 'invite']
+  image 300/1225 (4 processeurs)
+  image 600/1225
+  image 900/1225
+  image 1200/1225
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
 fin en boucle : la dernière image se raccorde à la première (0.35 s de fondu)
+  [vidéo finie · synchro] décalage mesuré +0.25 s (mesure seulement : le son n'est jamais déplacé)
   [vidéo finie · synchro] ✔ bouches du bon personnage
   [vidéo finie · bouches] ✔ bouche immobile quand le personnage se tait
   [vidéo finie · technique] ✔ sauts, clignotements, personnages (0 remarque(s))
-  transcription Groq (Whisper, gratuit) : 7 mots
-  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 19 %)
-  [vidéo finie · contrôle IA] 0 remarque(s)
-  [vidéo finie · fidélité à l'audio] ✘ Gemini a regardé et écouté la vidéo finie : 2 écart(s)
-  [vidéo finie · voix et dessin] ✔ chaque réplique sur la bonne voix, homme / femme d'après la voix
-  [vidéo finie · attribution] ✔ qui dit chaque phrase, comparé à l'image de l'original
-  2 remarque(s) légère(s) gardée(s) au journal seulement : 5.0 s sous-titre « 350 au squat. On débloque. » mais on  ; 27.6 s sous-titre « Allez, c'est un peu de courage. » mai
-Contrôle de la vidéo finie : 2 point(s) à vérifier — 0.0 s La fiche indique une femme pour l'envoyée et un homme pour l ; 0.0 s La fiche mentionne 'haltere' mais il n'y a pas d'haltère spé
-Jury : 2 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
-Jury qualité (ia) : 9.5/10 — Humoriste 7.8/10 : 6 s Le gag du poids exagéré pourrait bénéficier d'une réaction plus marquée du personnage. | Réalisateur 10.0/10 :  | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.9/10 : 
-Manque par rapport à la vidéo d'origine : Le design original montre une barre de squat extrêmement lourde avec de grands disques rouges qui manquent de relief visuel dans le dessin.
-Compte rendu corrigé : confiance 72 → 72/100, jury 9.5/10
-Compte rendu (tour 2, confiance 72/100) : corrections demandées au robot :
-- à 0.0 s : La fiche indique une femme pour l'envoyée et un homme pour l'invité, or ce sont deux hommes ou deux personnages masculins dessinés.
-- à 0.0 s : La fiche mentionne 'haltere' mais il n'y a pas d'haltère spécifique nommé dans l'audio des répliques.
-Remarque comprise : L'auteur signale que les fiches de casting indiquent une femme pour l'envoyée et un homme pour l'invité, alors que les deux personnages dessinés sont masculins, et qu'aucun haltère n'est mentionné dan
-Remarque de l'auteur : 0 réplique(s) à rendre à un autre personnage, 2 correction(s) : casting, costume
-Compte rendu : fiche de tournage : repliques.0.objet : haltere -> None (La fiche mentionne 'haltere' mais il n'y a pas d'haltère spécifique nommé dans l'audio des répliques) ; envoyee : humain ; casting de envoyee : age 30, taille 1.1, barbe aucune ; tenue de invite
-  décor semi-réaliste 0 : budget Modal du mois atteint, décor dessiné
-montage : 1 plans (0.0:large>env/coupe)
-style croquis : décors passés à l'encre et à l'aquarelle
-studio : jour, lieux ['salle_sport'], tenues envoyee=debardeur, invite=debardeur, 0 figurant(s), ambiances ['vapeur'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 62.9 s, 11 répliques, 1 scène(s), personnages ['envoyee', 'invite']
-  image 300/3776 (4 processeurs)
-  image 600/3776
-  image 900/3776
-  image 1200/3776
-  image 1500/3776
-  image 1800/3776
-  image 2100/3776
-  image 2400/3776
-  image 2700/3776
-  image 3000/3776
-  image 3300/3776
-  image 3600/3776
-Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-fin en boucle : la dernière image se raccorde à la première (0.35 s de fondu)
-  [vidéo finie · synchro] ✔ bouches du bon personnage
-  [vidéo finie · bouches] ✔ bouche immobile quand le personnage se tait
-  [vidéo finie · technique] ✔ sauts, clignotements, personnages (0 remarque(s))
-  transcription Groq (Whisper, gratuit) : 9 mots
-  3 mot(s) inventé(s) par la reconnaissance vocale retiré(s) (« sous-titrage société radio-canada »)
-  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 19 %)
+  transcription Groq (Whisper, gratuit) : 19 mots
+  karaoké contrôlé à l'oreille : 15 mots, écart médian 0.04 s
+  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 84 %)
   [vidéo finie · contrôle IA] 0 remarque(s)
   contrôle « fidélité » : Gemini surchargé, nouvel essai dans 20 s (tour 2/3)
-  [vidéo finie · fidélité à l'audio] ✘ Gemini a regardé et écouté la vidéo finie : 1 écart(s)
+  contrôle « fidélité » : Gemini surchargé, nouvel essai dans 40 s (tour 3/3)
   [vidéo finie · voix et dessin] ✔ chaque réplique sur la bonne voix, homme / femme d'après la voix
   [vidéo finie · attribution] ✔ qui dit chaque phrase, comparé à l'image de l'original
-  2 remarque(s) légère(s) gardée(s) au journal seulement : 5.0 s sous-titre « 350 au squat. On débloque. » mais on  ; 27.6 s sous-titre « Allez, c'est un peu de courage. » mai
-Contrôle de la vidéo finie : 1 point(s) à vérifier — 0.0 s L'objet haltere n'est pas present dans la scene.
+  contrôles qui n'ont pas pu se faire : fidélité à l'audio (Gemini n'a pas répondu) (note de confiance plafonnée)
+Contrôle de la vidéo finie : 0 point(s) à vérifier
+  IA gemini indisponible (gemini 429 : [{
+  "error": {
+    "code": 429,
+    "message": "You exceeded your current quota, please check your plan an) : on passe à la suivante
+Jury : 2 remarque(s) sur les plans / zooms retirée(s) (montage « plan large » voulu)
 Jury : 2 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
-Jury qualité (ia) : 6.9/10 — Humoriste 6.0/10 : 11 s La tension comique manque d'exagération au moment de la supplication intense. | Réalisateur 7.0/10 : 19 s Le personnage en rose reste trop neutre pendant les encouragements répétés. | Directeur artistique 7.0/10 : 0 s Les vêtements des personnages manquent un peu de fidélité par rapport à la vidéo originale. | Ingénieur du son 7.8/10 :  | Spectateur TikTok 6.8/10 : 
-Manque par rapport à la vidéo d'origine : Manque les plaques de poids rouges massives caractéristiques de la barre de squat lourde de l'original. ; Manque le spot d'éclairage de salle de sport et le drapeau français en arrière-plan visible dans la vidéo originale.
-Compte rendu corrigé : confiance 72 → 84/100, jury 6.9/10
+Jury qualité (ia) : 9.3/10 — Humoriste 8.4/10 :  | Réalisateur 10.0/10 :  | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 8.1/10 : 0.0 s la première parole arrive à 6.9 s : on scrolle avant
+Manque par rapport à la vidéo d'origine : Les personnages originaux ont des expressions faciales plus variées et des gestes plus dynamiques (ex. : mains qui bougent, réactions spontanées). ; Les sous-titres originaux sont mieux synchronisés avec les mouvements des lèvres. ; L'ambiance sonore originale inclut des rires naturels en fond qui manquent ici.
+Compte rendu corrigé : confiance 72 → 90/100, jury 9.3/10
+Compte rendu (tour 2, confiance 90/100) : corrections demandées au robot :
+- à 0.0 s : la première parole arrive à 6.9 s : on scrolle avant
+Remarque comprise : L'auteur indique que la première réplique débute à 6.9 s alors que la vidéo commence à 0.0 s, ce qui cause un décalage perçu lors du scroll.
+Remarque de l'auteur : 0 réplique(s) à rendre à un autre personnage, 0 correction(s) : 
+Compte rendu : rien que le robot sache corriger lui-même
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, groq = ok, ia = gemini ×14, groq ×3, mistral ×1, appels = {'gemini': 14, 'groq': 3, 'mistral': 1}, epuisees = [], quota = {'groq': {'reste_jour': 996, 'limite_jour': 1000}}, voix = tiktok, decors = dessines, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 44537, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0, 'total_usd': 0.0, 'modal_mesure_usd': 0.17}
-⏱️ Étapes plus lentes que d'habitude : Installation de la machine 7 min (d'habitude 1 min)
-⏱️ Temps par étape : Installation de la machine 7.0 min, Démarrage du robot 0.2 min, Écoute du son TikTok 0.5 min, Décors 0.0 min, Dessin des images 11.6 min, Contrôle qualité par le jury 2.1 min, Contrôle de la vidéo finie 0.7 min, Corrections du compte rendu 29.8 min
-Quota de l'API GitHub : 4879 appels restants
-OK : sortie/2026-11-24_02h02_emission.mp4 (64 s)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, groq = ok, ia = gemini ×5, groq ×3, mistral ×2, appels = {'gemini': 5, 'groq': 3, 'mistral': 2}, epuisees = ['gemini'], quota = {'groq': {'reste_jour': 999, 'limite_jour': 1000}}, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 25304, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0, 'total_usd': 0.0, 'modal_mesure_usd': 0.0}
+⏱️ Étapes plus lentes que d'habitude : Installation de la machine 7 min (d'habitude 2 min)
+⏱️ Temps par étape : Installation de la machine 7.6 min, Démarrage du robot 0.2 min, Écoute du son TikTok 4.7 min, Décors 0.0 min, Dessin des images 8.7 min, Contrôle qualité par le jury 0.7 min, Contrôle de la vidéo finie 2.4 min, Corrections du compte rendu 5.8 min
+Quota de l'API GitHub : 4684 appels restants
+OK : sortie/2026-11-24_02h49_emission.mp4 (21 s)
