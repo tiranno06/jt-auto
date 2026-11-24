@@ -7330,37 +7330,38 @@
   "cadence": "rapide"
  },
  {
-  "moment": "jour",
+  "moment": "soir",
   "lieux": [
    "rue",
    "salon"
   ],
   "source": "auteur+image",
-  "duree": 76.2,
+  "duree": 75.0,
   "plans": {
-   "large": 38
+   "large": 29
   },
   "mouvements": {
-   "fixe": 38
+   "fixe": 29
   },
   "costumes": {
-   "invite": "chemise",
-   "presentateur": "costume"
+   "presentateur": "chemise",
+   "invite": "capuche"
   },
   "figurants": 0,
   "ambiances": [
-   "pluie"
+   "pluie",
+   "poussiere"
   ],
-  "controle": "Humoriste 7.8/10 :  | Réalisateur 7.8/10 :  | Directeur artistique 6.8/10 : 4 s Le décor de l'invité alterne rue et salon alors que dans l'original la scène 4 se passe au commissariat pour le policier",
-  "fichier": "2026-11-24_13h29_emission.mp4",
+  "controle": "Humoriste 8.6/10 : 64.8 s La menace de l'invité ('je jure devant Lucifer que je crame ta baraque') manque d'une réaction physique ou faciale plus intense pour accentuer le côté dramatique. | Réalisate",
+  "fichier": "2026-11-24_13h57_emission.mp4",
   "cine": {
-   "focus": true,
+   "focus": false,
    "vertige": true,
-   "tiers": false,
+   "tiers": true,
    "etalonnage": true,
    "profondeur": false,
    "grain": true,
-   "reflets": true,
+   "reflets": false,
    "son": true
   },
   "cadence": "rapide"

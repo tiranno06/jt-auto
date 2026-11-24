@@ -3,126 +3,99 @@ Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, Groq ok, OpenRouter ok, IA Modal ok, ElevenLabs epuise — IA utilisée : mistral
 Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @motiontoonz, @same_same53, @charly.bse, @kodanimation, @vignianimation, @vincedessine, @aguerin30, @zequoiza, @jayzocc, @brutuslerobuste, @jawedyoussef
-Réserve de sons : son déjà écouté pris dans la réserve (https://www.tiktok.com/@same_same53/video/7711417447726828833) : on passe directement à la suite
-Chaîne : vidéo 2/10 lancée
-  fiche de tournage : gemini-flash-latest n'a pas répondu (HTTP Error 503: Service Unavailable)
+Réserve de sons : son déjà écouté pris dans la réserve (https://www.tiktok.com/@same_same53/video/7705091687743261985) : on passe directement à la suite
+Chaîne : vidéo 4/10 lancée
+  fiche de tournage : gemini-flash-latest n'a pas répondu (HTTP Error 429: Too Many Requests)
   fiche de tournage : gemini-flash-lite-latest n'a pas répondu (HTTP Error 503: Service Unavailable)
-  fiche de tournage : gemini-3.8-flash n'a pas répondu (HTTP Error 503: Service Unavailable)
-  fiche de tournage : gemini-3.7-flash n'a pas répondu (HTTP Error 503: Service Unavailable)
+  fiche de tournage : gemini-3.8-flash n'a pas répondu (HTTP Error 429: Too Many Requests)
+  fiche de tournage : gemini-3.7-flash n'a pas répondu (HTTP Error 429: Too Many Requests)
   fiche de tournage : gemini-3.6-flash n'a pas répondu (HTTP Error 503: Service Unavailable)
   fiche de tournage : Gemini surchargé, nouvel essai dans 20 s (tour 2/3)
   fiche de tournage : gemini-flash-latest n'a pas répondu (HTTP Error 429: Too Many Requests)
   fiche de tournage : gemini-flash-lite-latest n'a pas répondu (HTTP Error 503: Service Unavailable)
   fiche de tournage : gemini-3.8-flash n'a pas répondu (HTTP Error 429: Too Many Requests)
   fiche de tournage : gemini-3.7-flash n'a pas répondu (HTTP Error 429: Too Many Requests)
-  fiche de tournage : gemini-3.6-flash n'a pas répondu (The read operation timed out)
+  fiche de tournage : gemini-3.6-flash n'a pas répondu (HTTP Error 429: Too Many Requests)
   fiche de tournage : Gemini surchargé, nouvel essai dans 40 s (tour 3/3)
   fiche de tournage : gemini-flash-latest n'a pas répondu (HTTP Error 429: Too Many Requests)
-  fiche de tournage écrite (Gemini a regardé et écouté l original) : commissariat (bright minimalist police station office with compu), jour, temps normal, ambiance dispute, niveau modeste
-  [équipe · fiche de tournage] ✔ contrôle 1 : règles (cohérence avec ce qui est dit)
-  [équipe · fiche de tournage] ✔ contrôle 2 : 2e IA (autre fournisseur) : personnages.invite.age : 30 -> 40 (Dans le dialogue, l'invité déclare « ça fait 40 ans que je suis dans la police », ce qui contredit l'âge indiqué de 30 a); personnages.invite.metier : None (corrigé)
-    correction : personnages.invite.age : 30 -> 40 (Dans le dialogue, l'invité déclare « ça fait 40 ans que je suis dans la police », ce qui contredit l'âge indiqué de 30 a)
-    correction : personnages.invite.metier : None -> policier (L'invité affirme être dans la police depuis 40 ans, donc son métier doit être indiqué comme policier dans la fiche.)
-    correction : repliques.22.emotion : None -> blase (La fiche ne précise pas d'émotion pour la réplique 22 alors que toutes les autres répliques en comportent une ; le ton d)
+  fiche de tournage : gemini-flash-lite-latest n'a pas répondu (HTTP Error 503: Service Unavailable)
+  fiche de tournage : gemini-3.8-flash n'a pas répondu (HTTP Error 429: Too Many Requests)
+  fiche de tournage : gemini-3.7-flash n'a pas répondu (HTTP Error 429: Too Many Requests)
+  fiche de tournage : gemini-3.6-flash n'a pas répondu (HTTP Error 429: Too Many Requests)
+  réponse coupée (limite de 4000 jetons atteinte) pour fiche
+  fiche de tournage : lieu salon -> bar (écrit sur la vidéo d'origine)
+  fiche de tournage écrite (IA de texte sur le dialogue) : bar (cozy living room with a slightly messy coffee tabl), soir, temps normal, ambiance dispute, niveau modeste
+  [équipe · fiche de tournage] ✔ contrôle 1 : règles (cohérence avec ce qui est dit) : réplique 25 signe : veine -> — (pas cohérent avec l'émotion « panique ») (corrigé)
+    correction : réplique 25 signe : veine -> — (pas cohérent avec l'émotion « panique »)
+  [équipe · fiche de tournage] ✔ contrôle 2 : 2e IA (autre fournisseur) : repliques.22.emotion : joie -> colere (Le texte de l'invité est une réprimande, pas de joie.); repliques.23.emotion : joie -> neutre (Le mot "Puzzle" est neutre, ne correspond pas à l'émotio (corrigé)
+    correction : repliques.22.emotion : joie -> colere (Le texte de l'invité est une réprimande, pas de joie.)
+    correction : repliques.23.emotion : joie -> neutre (Le mot "Puzzle" est neutre, ne correspond pas à l'émotion "joie".)
   [équipe · fiche de tournage] ✔ contrôle 3 : image de l'original, puis règles
   images : Gemini surchargé, nouvel essai dans 20 s (tour 2/2)
-  jeu du dessin animé : Gemini n'a pas pu lire les expressions (rien de recopié)
-  sous-titres anglais : 38 réplique(s) traduite(s)
+  jeu du dessin animé lu par Gemini : presentateur 7 expression(s), invite 4 expression(s)
+  sous-titres anglais : 29 réplique(s) traduite(s)
 Essai : sans carton de fin « Abonne-toi »
-Sketch : « SQUATTEURS ET POLICE », 38 répliques
+Sketch : « APÉRO SANS ALCOOL », 29 répliques
 Lieux séparés : chaque personnage a son propre décor (appel, visio, l'un ailleurs)
   décor semi-réaliste 0 (lieu ressemblant de la banque) : [semi] quiet city street at dusk, parked car at the curb, si
   décor semi-réaliste 1 (lieu ressemblant de la banque) : [semi] cozy living room, sofa, posters on the wall, coffee t
 WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1795523382.613674    3894 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+I0000 00:00:1795525035.088231    3893 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
 WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1795523384.015585    3894 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+I0000 00:00:1795525036.221818    3893 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
 Downloading data from https://github.com/ina-foss/inaSpeechSegmenter/releases/download/models/keras_speech_music_noise_cnn.hdf5
 [1m      0/3244808[0m [37m━━━━━━━━━━━━━━━━━━━━[0m [1m0s[0m 0s/step[1m3244808/3244808[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 0us/step
 /home/runner/venv/lib/python3.12/site-packages/keras/src/layers/reshaping/reshape.py:39: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
   super().__init__(**kwargs)
 Downloading data from https://github.com/ina-foss/inaSpeechSegmenter/releases/download/models/keras_male_female_cnn.hdf5
-[1m      0/6040200[0m [37m━━━━━━━━━━━━━━━━━━━━[0m [1m0s[0m 0s/step[1m6040200/6040200[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 0us/step
-montage : 23 plans (0.0:large>inv/coupe 2.0:large>pre/coupe 2.3:large>inv/coupe 3.8:large>pre/coupe 5.6:large>inv/coupe 8.5:large>pre/coupe 11.6:large>inv/coupe 16.6:large>pre/coupe 18.2:large>inv/coupe 20.2:large>pre/coupe 24.3:large>inv/coupe 26.6:large>pre/coupe 28.4:large>inv/coupe 31.9:large>pre/coupe 43.7:large>inv/coupe 49.6:large>pre/coupe 50.5:large>inv/coupe 51.0:large>pre/coupe 57.9:large>inv/coupe 59.7:large>pre/coupe 61.1:large>inv/coupe 65.1:large>pre/coupe 72.3:large>inv/coupe)
+[1m      0/6040200[0m [37m━━━━━━━━━━━━━━━━━━━━[0m [1m0s[0m 0s/step[1m4513792/6040200[0m [32m━━━━━━━━━━━━━━[0m[37m━━━━━━[0m [1m0s[0m 0us/step[1m6040200/6040200[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 0us/step
+montage : 23 plans (0.1:large>pre/coupe 1.9:large>inv/coupe 3.3:large>pre/coupe 9.9:large>inv/coupe 13.1:large>pre/coupe 17.0:large>inv/coupe 18.8:large>pre/coupe 21.6:large>inv/coupe 22.1:large>pre/coupe 24.6:large>inv/coupe 25.1:large>pre/coupe 28.5:large>inv/coupe 29.7:large>pre/coupe 41.5:large>inv/coupe 42.1:large>pre/coupe 49.5:large>inv/coupe 50.7:large>pre/coupe 56.1:large>inv/coupe 60.5:large>pre/coupe 64.8:large>inv/coupe 67.9:large>pre/coupe 71.0:large>inv/coupe 72.4:large>pre/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-objets de l'histoire : véhicule dans 1 décor(s)
-studio : jour, lieux ['rue', 'salon'], tenues invite=chemise, presentateur=costume, 0 figurant(s), ambiances ['pluie'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+studio : soir, lieux ['rue', 'salon'], tenues presentateur=chemise, invite=capuche, 0 figurant(s), ambiances ['pluie', 'poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
 appel : écran partagé du début à la fin (chacun dans son décor, aucun changement de plan)
-cartoon : durée 76.2 s, 38 répliques, 2 scène(s), personnages ['invite', 'presentateur']
-montage : 23 plans (0.0:large>inv/coupe 2.0:large>pre/coupe 2.3:large>inv/coupe 3.8:large>pre/coupe 5.6:large>inv/coupe 8.5:large>pre/coupe 11.6:large>inv/coupe 16.6:large>pre/coupe 18.2:large>inv/coupe 20.2:large>pre/coupe 24.3:large>inv/coupe 26.6:large>pre/coupe 28.4:large>inv/coupe 31.9:large>pre/coupe 43.7:large>inv/coupe 49.6:large>pre/coupe 50.5:large>inv/coupe 51.0:large>pre/coupe 57.9:large>inv/coupe 59.7:large>pre/coupe 61.1:large>inv/coupe 65.1:large>pre/coupe 72.3:large>inv/coupe)
+cartoon : durée 75.0 s, 29 répliques, 2 scène(s), personnages ['presentateur', 'invite']
+montage : 23 plans (0.1:large>pre/coupe 1.9:large>inv/coupe 3.3:large>pre/coupe 9.9:large>inv/coupe 13.1:large>pre/coupe 17.0:large>inv/coupe 18.8:large>pre/coupe 21.6:large>inv/coupe 22.1:large>pre/coupe 24.6:large>inv/coupe 25.1:large>pre/coupe 28.5:large>inv/coupe 29.7:large>pre/coupe 41.5:large>inv/coupe 42.1:large>pre/coupe 49.5:large>inv/coupe 50.7:large>pre/coupe 56.1:large>inv/coupe 60.5:large>pre/coupe 64.8:large>inv/coupe 67.9:large>pre/coupe 71.0:large>inv/coupe 72.4:large>pre/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-objets de l'histoire : véhicule dans 1 décor(s)
-studio : jour, lieux ['rue', 'salon'], tenues invite=chemise, presentateur=costume, 0 figurant(s), ambiances ['pluie'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+studio : soir, lieux ['rue', 'salon'], tenues presentateur=chemise, invite=capuche, 0 figurant(s), ambiances ['pluie', 'poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
 appel : écran partagé du début à la fin (chacun dans son décor, aucun changement de plan)
-cartoon : durée 76.2 s, 38 répliques, 2 scène(s), personnages ['invite', 'presentateur']
-  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~1142 images)
-  erreur avalée dans progression._signaler : AttributeError « 'TimeoutError' object has no attribute 'read' »
-Barre de progression du site (statut) : envoi impossible (The read operation timed out )
-  morceau 3428–4571 reçu d'une machine d'aide
-  morceau 1143–2286 reçu d'une machine d'aide
-  morceau 2286–3428 reçu d'une machine d'aide
-  dessin partagé terminé en 5.8 min
+cartoon : durée 75.0 s, 29 répliques, 2 scène(s), personnages ['presentateur', 'invite']
+  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~1125 images)
+  morceau 2251–3376 reçu d'une machine d'aide
+  morceau 3376–4502 reçu d'une machine d'aide
+  morceau 1126–2251 reçu d'une machine d'aide
+  dessin partagé terminé en 7.1 min
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury : 2 remarque(s) sur les plans / zooms retirée(s) (montage « plan large » voulu)
-Jury : 3 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
-Jury qualité (ia) : 7.5/10 — Humoriste 7.8/10 :  | Réalisateur 7.8/10 :  | Directeur artistique 6.8/10 : 4 s Le décor de l'invité alterne rue et salon alors que dans l'original la scène 4 se passe au commissariat pour le policier. | Ingénieur du son 8.8/10 :  | Spectateur TikTok 6.8/10 : 
-Manque par rapport à la vidéo d'origine : Dans la vidéo originale, à partir de l'instant 4 (10.1 s), la vue montre le policier à son bureau dans un commissariat et non l'invité dans son salon. ; Le personnage du policier dans l'original porte un uniforme de police et une casquette bleue.
-fin en boucle : la dernière image se raccorde à la première (0.35 s de fondu)
-  [vidéo finie · synchro] ✔ bouches du bon personnage
-  [vidéo finie · bouches] ✔ bouche immobile quand le personnage se tait
-  [vidéo finie · technique] ✔ sauts, clignotements, personnages (0 remarque(s))
-  transcription Groq (Whisper, gratuit) : 448 mots
-  karaoké contrôlé à l'oreille : 393 mots, écart médian 0.06 s
-  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 82 %)
-  IA gemini indisponible (gemini : aucun modèle disponible (503 : [{
-  "error": {
-    "code": 503,
-    "message": "This model is currently experie) : on passe à la suivante
-  [vidéo finie · contrôle IA] 1 remarque(s)
-  [vidéo finie · fidélité à l'audio] ✔ Gemini a regardé et écouté la vidéo finie
-  [vidéo finie · voix et dessin] ✔ chaque réplique sur la bonne voix, homme / femme d'après la voix
-  [vidéo finie · attribution] ✔ qui dit chaque phrase, comparé à l'image de l'original
-Contrôle de la vidéo finie : 1 point(s) à vérifier — 11.0 s Le texte affiché est dupliqué et incomplet ('pas une agence 
-Compte rendu (tour 1, confiance 88/100) : corrections demandées au robot :
-- à 11.0 s : Le texte affiché est dupliqué et incomplet ('pas une agence immobilière') par rapport à l'attendu ('Attends, attends, attends, ici c'est la police, on n'est pas une agence').
-- à 4.0 s : Le décor de l'invité alterne rue et salon alors que dans l'original la scène 4 se passe au commissariat pour le policier.
-Remarque comprise : L'auteur signale deux problèmes : à 11 s le texte affiché est dupliqué et incomplet, et à 4 s le décor alterne entre rue et salon alors qu'il devrait rester au commissariat.
-Remarque de l'auteur : 0 réplique(s) à rendre à un autre personnage, 2 correction(s) : reaction, lieu
-Compte rendu : décor de la scène 5 : commissariat
-montage : 23 plans (0.0:large>inv/coupe 2.0:large>pre/coupe 2.3:large>inv/coupe 3.8:large>pre/coupe 5.6:large>inv/coupe 8.5:large>pre/coupe 11.6:large>inv/coupe 16.6:large>pre/coupe 18.2:large>inv/coupe 20.2:large>pre/coupe 24.3:large>inv/coupe 26.6:large>pre/coupe 28.4:large>inv/coupe 31.9:large>pre/coupe 43.7:large>inv/coupe 49.6:large>pre/coupe 50.5:large>inv/coupe 51.0:large>pre/coupe 57.9:large>inv/coupe 59.7:large>pre/coupe 61.1:large>inv/coupe 65.1:large>pre/coupe 72.3:large>inv/coupe)
-style croquis : décors passés à l'encre et à l'aquarelle
-objets de l'histoire : véhicule dans 1 décor(s)
-studio : jour, lieux ['rue', 'salon'], tenues invite=chemise, presentateur=costume, 0 figurant(s), ambiances ['pluie'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-appel : écran partagé du début à la fin (chacun dans son décor, aucun changement de plan)
-cartoon : durée 76.2 s, 38 répliques, 2 scène(s), personnages ['invite', 'presentateur']
-  redessin partiel : 0/4571 images à redessiner (0 passage(s)), le reste repris tel quel
-Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-fin en boucle : la dernière image se raccorde à la première (0.35 s de fondu)
-  [vidéo finie · synchro] ✔ bouches du bon personnage
-  [vidéo finie · bouches] ✔ bouche immobile quand le personnage se tait
-  [vidéo finie · technique] ✔ sauts, clignotements, personnages (0 remarque(s))
-  transcription Groq (Whisper, gratuit) : 448 mots
-  karaoké contrôlé à l'oreille : 393 mots, écart médian 0.06 s
-  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 82 %)
-  [vidéo finie · contrôle IA] 0 remarque(s)
-  contrôle « fidélité » : Gemini surchargé, nouvel essai dans 20 s (tour 2/3)
-  [vidéo finie · fidélité à l'audio] ✘ Gemini a regardé et écouté la vidéo finie : 2 écart(s)
-  [vidéo finie · voix et dessin] ✔ chaque réplique sur la bonne voix, homme / femme d'après la voix
-  [vidéo finie · attribution] ✔ qui dit chaque phrase, comparé à l'image de l'original
-Contrôle de la vidéo finie : 2 point(s) à vérifier — None s La fiche de tournage indique le lieu 'commissariat' et le pe ; None s La fiche indique une météo 'normale' et le moment 'jour', or
   IA gemini indisponible (gemini 429 : [{
   "error": {
     "code": 429,
     "message": "You exceeded your current quota, please check your plan an) : on passe à la suivante
-Jury : 2 remarque(s) sur les plans / zooms retirée(s) (montage « plan large » voulu)
-Jury : 8 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
-Jury qualité (ia) : 9.1/10 — Humoriste 8.6/10 :  | Réalisateur 9.6/10 :  | Directeur artistique 10.0/10 :  | Ingénieur du son 7.6/10 :  | Spectateur TikTok 9.6/10 : 
-Compte rendu : la version corrigée n'est pas meilleure (88 → 76) : on garde la première
-  vidéo en deux parties : coupure à 39.5 s sur 77 s (2026-11-24_13h29_emission_p1.mp4, 2026-11-24_13h29_emission_p2.mp4)
+Jury : 4 remarque(s) sur les plans / zooms retirée(s) (montage « plan large » voulu)
+Jury : 6 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
+Jury qualité (ia) : 8.9/10 — Humoriste 8.6/10 : 64.8 s La menace de l'invité ('je jure devant Lucifer que je crame ta baraque') manque d'une réaction physique ou faciale plus intense pour accentuer le côté dramatique. | Réalisateur 8.4/10 :  | Directeur artistique 8.0/10 : 0 s Les personnages manquent de cohérence vestimentaire avec le thème de l'apéro (ex. : le présentateur pourrait porter une tenue plus décontractée ou un tablier de barman pour renforcer le côté humoristi; 10 s L'invité pourrait avoir une apparence plus jeune ou un style vestimentaire plus décalé pour mieux incarner le côté 'jeune et dynamique' de l'idée d'apéro sans alcool.; 71.5 s Le décor pourrait inclure des éléments plus spécifiques à un salon (ex. : un canapé ou des coussins) pour renforcer l'immersion dans l'univers. | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.6/10 : 75 s La fin est satisfaisante, mais un dernier plan avec une réact
+Manque par rapport à la vidéo d'origine : Les personnages de l'original ont des expressions faciales plus variées et des gestes plus marquants (ex. : mains sur les hanches, sourires exagérés). ; Les décors originaux incluent des détails comme des bouteilles ou des verres, qui pourraient renforcer l'immersion.
+fin en boucle : la dernière image se raccorde à la première (0.35 s de fondu)
+  [vidéo finie · synchro] ✔ bouches du bon personnage
+  [vidéo finie · bouches] ✔ bouche immobile quand le personnage se tait
+  [vidéo finie · technique] ✔ sauts, clignotements, personnages (0 remarque(s))
+  transcription Groq (Whisper, gratuit) : 399 mots
+  karaoké contrôlé à l'oreille : 277 mots, écart médian 0.05 s
+  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 85 %)
+  [vidéo finie · contrôle IA] 0 remarque(s)
+  [vidéo finie · voix et dessin] ✔ chaque réplique sur la bonne voix, homme / femme d'après la voix
+  [vidéo finie · attribution] ✔ qui dit chaque phrase, comparé à l'image de l'original
+  contrôles qui n'ont pas pu se faire : fidélité à l'audio (Gemini n'a pas répondu) (note de confiance plafonnée)
+  1 remarque(s) légère(s) gardée(s) au journal seulement : 55.5 s sous-titre « Pas, j'en sais rien. » mais on entend
+Contrôle de la vidéo finie : 0 point(s) à vérifier
+Compte rendu (tour 1, confiance 90/100) : corrections demandées au robot :
+- à 64.8 s : La menace de l'invité ('je jure devant Lucifer que je crame ta baraque') manque d'une réaction physique ou faciale plus intense pour accentuer le côté dramatique.
+Remarque comprise : Le créateur de la chaîne TikTok indique que la réplique de l'invité à 64.8 s (réplique 25) doit être accompagnée d'une réaction physique ou faciale plus intense pour renforcer le côté dramatique.
+Remarque de l'auteur : 1 réplique(s) à rendre à un autre personnage, 1 correction(s) : reaction
+Compte rendu : rien que le robot sache corriger lui-même
+  vidéo en deux parties : coupure à 42.1 s sur 76 s (2026-11-24_13h57_emission_p1.mp4, 2026-11-24_13h57_emission_p2.mp4)
+  LanguageTool : 1 faute(s) d'orthographe corrigée(s) (accents, accords muets)
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, groq = ok, ia = gemini ×5, groq ×2, mistral ×3, appels = {'gemini': 5, 'groq': 2, 'mistral': 3}, epuisees = ['gemini'], quota = {'groq': {'reste_jour': 999, 'limite_jour': 1000}}, voix = tiktok, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 52049, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0, 'total_usd': 0.0, 'modal_mesure_usd': 0.0}
-⏱️ Étapes plus lentes que d'habitude : Corrections du compte rendu 8 min (d'habitude 1 min)
-⏱️ Temps par étape : Installation de la machine 1.3 min, Démarrage du robot 0.3 min, Écoute du son TikTok 9.2 min, Décors 0.0 min, Dessin des images 7.6 min, Contrôle qualité par le jury 3.7 min, Contrôle de la vidéo finie 1.9 min, Corrections du compte rendu 8.4 min
-Quota de l'API GitHub : 4801 appels restants
-OK : sortie/2026-11-24_13h29_emission.mp4 (77 s)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, groq = ok, ia = mistral ×4, groq ×3, gemini ×1, appels = {'mistral': 4, 'groq': 3, 'gemini': 1}, epuisees = ['gemini'], quota = {'groq': {'reste_jour': 998, 'limite_jour': 1000}}, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 46101, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0, 'total_usd': 0.0, 'modal_mesure_usd': 0.03}
+⏱️ Temps par étape : Installation de la machine 1.9 min, Démarrage du robot 0.3 min, Écoute du son TikTok 4.8 min, Décors 0.0 min, Dessin des images 8.8 min, Contrôle qualité par le jury 4.6 min, Contrôle de la vidéo finie 0.9 min, Corrections du compte rendu 1.7 min
+Quota de l'API GitHub : 4589 appels restants
+OK : sortie/2026-11-24_13h57_emission.mp4 (76 s)
