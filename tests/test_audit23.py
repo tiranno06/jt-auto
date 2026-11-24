@@ -225,3 +225,79 @@ class TestAudit24Novembre(unittest.TestCase):
         src = open(cartoon.__file__, encoding="utf-8").read()
         self.assertIn('if DOUB: HORS_C |= {i for i, r in enumerate(reps) if r.get("p") == "narrateur"}', src)
         self.assertIn("TETES_R[sc] = float(_hry)", src)
+
+
+class TestAudit24NovembreSoir(unittest.TestCase):
+    """3e audit (24 novembre 2026 au soir) et registre des pannes."""
+
+    def test_noms_ecrits_a_l_ecran(self):
+        import ocr, verif_finale as V
+        lignes = [{"deb": 0, "fin": 32, "t": "POV: Lamine Yamal dans le", "n": 50}, {"deb": 0.9, "fin": 6.9, "t": "Lamine Yamal", "n": 10},
+                  {"deb": 7.5, "fin": 10.5, "t": "Lamine Yamal", "n": 5}, {"deb": 14, "fin": 17, "t": "Pedri", "n": 4},
+                  {"deb": 19.5, "fin": 24.3, "t": "Hansi Flick", "n": 8}, {"deb": 5, "fin": 7, "t": "est passé", "n": 3}]
+        et = ocr.etiquettes(lignes, ocr.lignes_legende(lignes, 32))
+        self.assertEqual(sorted({e[2] for e in et}), ["Hansi Flick", "Lamine Yamal", "Pedri"])   # « Lamine Yamal » gardé, « est passé » non
+        reps = [{"p": "presentateur", "t": "a", "_deb": 1, "_fin": 3}, {"p": "presentateur", "t": "b", "_deb": 8, "_fin": 10},
+                {"p": "presentateur", "t": "c", "_deb": 14.5, "_fin": 16.5}, {"p": "invite", "t": "d", "_deb": 20, "_fin": 23}]
+        sk = _sk(reps, etiquettes=et)
+        out = V.attribuer_par_etiquettes(sk, journal=lambda *_: None)
+        self.assertEqual(out, {2: "envoyee"}); self.assertEqual(sk["_noms_roles"]["presentateur"], "Lamine Yamal")
+
+    def test_personnage_fantome(self):
+        import doublage
+        reps = [{"p": "presentateur", "t": "Bla bla bla bla.", "_deb": 0, "_fin": 20}, {"p": "presentateur", "t": "C'est incroyable.", "_deb": 20, "_fin": 21},
+                {"p": "invite", "t": "C'est incroyable.", "_deb": 21, "_fin": 21.9}, {"p": "presentateur", "t": "Fin.", "_deb": 22, "_fin": 30}]
+        sk = {"repliques": reps}
+        self.assertEqual(doublage.fantomes(sk, journal=lambda *_: None), 1)
+        self.assertEqual(reps[2]["p"], "narrateur"); self.assertTrue(reps[2]["_hors_champ"])
+
+    def test_objet_rare_seulement_s_il_est_dit(self):
+        import objets_vus as O
+        reps = [{"p": "a", "t": "Tu viens au barbecue ?", "_deb": k, "_fin": k + 0.9} for k in range(10)]
+        vus = [(k + 0.5, "casque_moto", 0.3) for k in range(10)] + [(k + 0.5, "telephone", 0.4) for k in range(8)]
+        O.attribuer(reps, vus, journal=lambda *_: None)
+        self.assertNotIn("casque_moto", [r.get("objet") for r in reps])
+        self.assertLessEqual(sum(1 for r in reps if r.get("objet") == "telephone"), O.MAX_PAR_OBJET)
+
+    def test_controle_ia_trie(self):
+        import verif_finale as V
+        self.assertIsNone(V.trier_ia("Aucun problème de découpage ou de déformation n'est visible."))
+        self.assertIsNone(V.trier_ia("Le texte affiché est dupliqué et incomplet"))
+        self.assertTrue(V.trier_ia("Le personnage de gauche a deux têtes"))
+
+    def test_gemini_limite_a_la_minute_pas_epuise(self):
+        import reseau
+        self.assertFalse(reseau.gemini_jour_epuise("429 : You exceeded your current quota [GenerateRequestsPerMinutePerProjectPerModel-FreeTier]"))
+        self.assertTrue(reseau.gemini_jour_epuise("429 : quota [GenerateRequestsPerDayPerProjectPerModel-FreeTier]"))
+        cli = reseau.claude(); reseau.HORS_SERVICE.discard("gemini")
+        with mock.patch.object(reseau, "ordre_ia", lambda i, r: ["gemini"]), \
+             mock.patch.object(reseau, "_appel_openai", lambda f, kw: (_ for _ in ()).throw(RuntimeError("gemini : aucun modèle disponible (429 : You exceeded your current quota [PerMinute])"))):
+            with self.assertRaises(RuntimeError): cli.messages.create(messages=[{"role": "user", "content": "x"}], max_tokens=5)
+        self.assertNotIn("gemini", reseau.HORS_SERVICE); reseau.EN_PAUSE.pop("gemini", None)
+
+    def test_objet_qui_parle_seulement_s_il_est_dit(self):
+        src = open(os.path.join(os.path.dirname(__file__), "..", "moteur", "studio.py"), encoding="utf-8").read()
+        self.assertIn("vu dans l'original mais jamais dit : reste humain", src)
+
+    def test_lieu_imagine_par_l_ia(self):
+        import decor_dessin as DD
+        self.assertEqual(DD.lieu_de("dans le vestiaire après la défaite", None), "stade")
+        src = open(os.path.join(os.path.dirname(__file__), "..", "moteur", "fiche_tournage.py"), encoding="utf-8").read()
+        self.assertIn("imaginé par l'IA (rien ne le dit)", src)
+
+    def test_barre_de_progression_coupure_passagere(self):
+        import progression, urllib.error
+        progression._ERREUR.clear(); progression._ECHECS.clear()
+        progression._signaler("statut", urllib.error.URLError("timed out"))
+        self.assertNotIn("statut", progression._ERREUR)                    # une coupure : on réessaie
+        for _ in range(2): progression._signaler("statut", urllib.error.URLError("timed out"))
+        self.assertIn("statut", progression._ERREUR); progression._ERREUR.clear(); progression._ECHECS.clear()
+
+    def test_jeu_original_regard_tableau(self):
+        import numpy as np, jeu_original
+        class J:
+            def valeurs(self, r, t): return {"sourire": 0, "bas": 0, "grand": 0, "bee": 0, "moue": 0, "haut": 0, "plisse": 0, "roll": 0, "yaw": 0, "pitch": 0.1}
+            def main(self, r, t): return None, 0
+        p = {"regard": np.array([0.1, 0.2]), "bras_d": np.array([10, 20])}
+        jeu_original.appliquer(p, J(), "a", 1.0, True)                     # (plantait : « truth value of an array is ambiguous »)
+        self.assertAlmostEqual(p["regard"][0], 0.1)

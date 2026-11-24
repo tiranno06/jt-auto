@@ -335,6 +335,8 @@ def bible(sk, roles):
     for k, sc in enumerate(dec):
         l = None
         if isinstance(S.get("lieux"), list) and k < len(S["lieux"]) and S["lieux"][k] in DD.LIEUX: l = S["lieux"][k]
+        elif isinstance(S.get("lieux"), list) and k < len(S["lieux"]) and S["lieux"][k]:   # nom anglais ou inconnu (« hallway ») :
+            l = DD.lieu_de(str(S["lieux"][k]).replace("_", " "), None)    # traduit, jamais un lieu deviné ailleurs (24 novembre)
         decor_sc = " ".join(str(sc.get(c) or "") for c in ("decor", "scene", "titre"))      # la description du décor passe avant les répliques
         lignes_sc = [sk["repliques"][i]["t"] for i in sc.get("repliques", []) if i < len(sk.get("repliques", []))]
         texte_sc = " ".join(lignes_sc[:max(1, len(lignes_sc) // 2)] * 2 + lignes_sc[max(1, len(lignes_sc) // 2):])   # le début de la scène pose le lieu
@@ -825,6 +827,11 @@ def casting(sk, roles, costumes, S, graine):
             if d.get("taille"): fiche["taille"] = float(np.clip(float(d["taille"]), 0.55, 1.25)) * (1.04 if fiche["genre"] == "h" else 0.97)
         except (TypeError, ValueError): pass
         esp = AN_.espece_valide(d.get("espece")) or especes.get(role)       # animal ou objet qui parle (chat, chien, steak…)
+        if esp and esp in AN_.OBJETS and esp not in (especes.get(role),) and not (sk.get("_casting_auteur") or {}).get(role, {}).get("espece") \
+                and not re.search(AN_.MOTS.get(esp, r"(?!x)x"), tout):
+            # Un OBJET qui parle (voiture, frigo, téléphone…) seulement si les MOTS en parlent (audit du 24 novembre : Gemini avait vu
+            # une voiture dans « Le cadeau d'anniversaire », l'homme qui parle au volant est devenu une voiture bleue géante)
+            print(f"  {role} : « {esp} » vu dans l'original mais jamais dit : reste humain", flush=True); esp = None
         if esp:
             fiche["espece"] = esp; fiche["c_poil"] = AN_.couleur(esp, lignes[role] + " " + autres)
             fiche["barbe"] = None; fiche["lunettes"] = None

@@ -57,17 +57,35 @@ def chercher(video, duree_max=150):
     return out
 
 
+# Audit du 24 novembre 2026 : « casque de moto » vu sur presque toutes les images de deux dessins animés (les têtes rondes et les
+# casquettes) et collé sur 18 répliques sur 20 : un gros dôme noir sur la tête du personnage. Les objets rares n'arrivent plus
+# que si le dialogue en parle, un objet vu presque tout le temps aussi, et un même objet va sur 4 répliques au plus.
+MOTS_OBJETS = {"casque_moto": r"casque|moto|scooter", "colis": r"colis|carton|paquet|livraison|amazon", "lettre": r"lettre|enveloppe|courrier",
+               "journal": r"journal|journaux", "billet": r"billet|thune|argent|fric|balle|euros?\b", "stylo": r"stylo|signe|[ée]cri",
+               "haltere": r"halt[èe]re|muscu|soulev", "marteau": r"marteau|clou|bricol", "ciseaux": r"ciseaux|couper", "poele": r"po[êe]le|cuisin|cuire",
+               "telecommande": r"t[ée]l[ée]commande|zappe|cha[îi]ne|t[ée]l[ée]\b", "cles": r"cl[ée]s?\b|clef", "portefeuille": r"portefeuille|carte bleue",
+               "guitare": r"guitare", "micro": r"micro|chante|radio", "croissant": r"croissant", "pizza": r"pizza", "cadeau": r"cadeau|anniv",
+               "fleur": r"fleurs?|bouquet|rose", "parapluie": r"parapluie|pluie|pleut", "valise": r"valise|voyage|vacances|bagage",
+               "sac_main": r"\bsac\b", "tablette": r"tablette|ipad"}
+MAX_PAR_OBJET = 4
+
+
 def attribuer(reps, vus, journal=print):
     """Donne chaque objet vu (sur 2 images au moins) au personnage qui parle à ce moment, si sa réplique n'a pas déjà d'objet."""
+    import re
     from collections import Counter
     sur = Counter(o for _, o, _ in vus)
-    faits = []
+    dial = " ".join(str(r.get("t") or "") for r in reps).lower()
+    faits, poses = [], Counter()
     for t, o, s in sorted(vus, key=lambda x: -x[2]):
         if sur[o] < 2: continue
+        dit = re.search(MOTS_OBJETS[o], dial) if o in MOTS_OBJETS else True
+        if not dit: continue                                               # objet rare jamais dit : on ne le croit pas
+        if poses[o] >= MAX_PAR_OBJET: continue
         k = next((k for k, r in enumerate(reps) if float(r.get("_deb", 0)) - 0.4 <= t <= float(r.get("_fin", 0)) + 0.4
                   and r.get("p") not in (None, "narrateur")), None)
         if k is None or reps[k].get("objet"): continue
-        reps[k]["objet"] = o; faits.append(f"réplique {k + 1} : {o}")
+        reps[k]["objet"] = o; poses[o] += 1; faits.append(f"réplique {k + 1} : {o}")
     if faits: journal("  objets vus dans l'original : " + ", ".join(faits[:8]))
     return faits
 

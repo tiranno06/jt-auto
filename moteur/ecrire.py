@@ -503,7 +503,16 @@ def _appel(client, systeme, messages, outil=OUTIL, web=False, max_tokens=12000, 
             if getattr(b, "type", "") == "tool_use": return b.input
         brut2 = "".join(getattr(b, "text", "") or "" for b in r2.content if getattr(b, "type", "") == "text")
         try: return _json(brut2)                                           # l'IA gratuite répond parfois en JSON dans le texte
-        except Exception as _e: __import__("pannes").avale(_e)
+        except ValueError: brut2 = brut2 or ""                             # (pas de JSON : on essaie l'IA suivante juste après)
+        # Réponse vide ou sans JSON (registre des pannes du 24 novembre : « réponse inexploitable : «  » » -> mise en scène réduite à
+        # « une seule scène, casting par la hauteur des voix ») : on la redemande à l'IA SUIVANTE, pas à la même (une fois par IA).
+        f_ = getattr(client, "dernier", None)
+        if f_ and f_ != "claude" and hasattr(client, "exclure") and len(getattr(client, "exclure")) < 4:
+            import reseau
+            autre = reseau.claude(getattr(client, "raisonner", False), set(client.exclure) | {f_})
+            print(f"  IA {f_} : réponse vide ou illisible pour {outil['name']} : nouvel essai avec l'IA suivante", flush=True)
+            try: return _appel(autre, systeme, messages, outil, False, max_tokens, modele)
+            except Exception as e2: raise ValueError(f"réponse inexploitable ({str(e2)[:80]})")
         raise ValueError(f"réponse inexploitable : « {(brut2 or brut).strip()[:80]} »")
 
 SPECIAL_DEMAIN = """- ÉPISODE SPÉCIAL DU DIMANCHE « LES INFOS DE DEMAIN » : après l'accroche, le présentateur annonce 3 ou 4 fausses brèves du futur (« Dans un an… », « En 2030… »), toutes sur CE sujet, chacune poussant la situation un cran plus loin dans l'absurde, avec une chute par brève ; l'envoyée ou l'invité peuvent réagir. L'écran du plateau affiche « EN 2030 »."""

@@ -26,11 +26,21 @@ def _api(methode, chemin, corps):
     return json.loads(r.read() or b"{}")
 
 
+_ECHECS = {}
+
+
 def _signaler(voie, e):
+    """Un envoi raté. Une coupure passagère (délai dépassé) ne coupe plus la barre pour toute la fabrication (registre des pannes du
+    24 novembre) : la voie n'est abandonnée qu'après 3 échecs DE SUITE (ou un refus net de GitHub : 401, 403, 404, 422)."""
     if voie in _ERREUR: return
+    import urllib.error
     detail = ""
-    try: detail = e.read().decode()[:200]
-    except Exception as _e: __import__("pannes").avale(_e)
+    if isinstance(e, urllib.error.HTTPError):                              # (une URLError n'a pas de corps : « .read » plantait)
+        try: detail = e.read().decode("utf-8", "ignore")[:200]
+        except Exception: detail = ""
+    _ECHECS[voie] = _ECHECS.get(voie, 0) + 1
+    net = isinstance(e, urllib.error.HTTPError) and e.code in (401, 403, 404, 422)
+    if _ECHECS[voie] < 3 and not net: return                                # passager : on réessaiera au prochain envoi (8 s)
     _ERREUR[voie] = True
     print(f"Barre de progression du site ({voie}) : envoi impossible ({str(e)[:120]} {detail})", flush=True)
 
@@ -46,8 +56,10 @@ def _envoyer(pct, texte, fin=None, etat="pending"):
     except Exception as _e: __import__("pannes").avale(_e)
     desc = f"{int(max(0, min(100, pct)))}|{TYPE[0]}|{texte}|{int(fin) if fin else ''}"[:140]
     if "statut" not in _ERREUR:
-        try: _api("POST", f"/statuses/{sha}", {"state": etat, "context": f"progression-{run}", "description": desc}); return
-        except Exception as e: _signaler("statut", e)
+        try: _api("POST", f"/statuses/{sha}", {"state": etat, "context": f"progression-{run}", "description": desc}); _ECHECS["statut"] = 0; return
+        except Exception as e:
+            _signaler("statut", e)
+            if "statut" not in _ERREUR: return                             # échec passager : pas de bascule sur la vérification
     try:                                                                   # secours : vérification (check run) mise à jour
         sortie = {"title": desc, "summary": desc}
         if _CHECK[0] is None:

@@ -12,7 +12,9 @@ FICHIER = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "episod
 SIGNES = re.compile(r"(impossible|indisponible|en échec|échoué|echec|traceback|erreur|error|exception|refus[ée]|introuvable|plante|"
                     r"illisible|n'a pas pu|pas pu |timed? ?out|délai dépassé)", re.I)
 BANAL = re.compile(r"(\b0 erreur|aucune erreur|sans erreur|✔|rien à enregistrer|"
-                   r"nouvel essai dans|erreur \d+ passagère|refusée score|"                            # nouvel essai automatique : pas une panne
+                   r"nouvel essai dans|erreur \d+ passagère|refusée score|nouvel essai avec l'IA suivante|"   # nouvel essai automatique : pas une panne
+                   r"IA gemini indisponible \(gemini( : aucun modèle disponible \()? ?(429|503)|"   # (24 novembre) Gemini limité à la minute : relais
+                   r": gemini[\w.\-]* n'a pas répondu \(|"                    # un modèle essayé parmi d'autres (l'échec final a sa ligne)
                    r"par l'IA refusés?|de l'IA refusées?|crédit ElevenLabs épuisé|quota_exceeded|"   # garde-fous qui ont joué, repli prévu
                    r"refusé \(ne colle pas|HTTP Error 503|Service Unavailable|n'existe plus \(404\)|"   # (21 novembre) décor de la banque écarté
                    r"Error 429: Too Many Requests|gemini[\w.\-]* : HTTP Error 404|Gemini gemini[\w.\-]* n'a pas répondu \(HTTP Error 404)", re.I)                  # exprès ; Google saturé ou limite à la minute : relais vers le suivant

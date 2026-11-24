@@ -528,6 +528,19 @@ def faire(sk, video="", sig=None, sr=22050, mots=None, B=None):
     F = nettoyer(brut, sk)
     F["animations"] = list(dict.fromkeys(F["animations"] + son["animations"]))
     F["_moment_dit"] = "moment" in ind.get("explicite", set())
+    if source != "video" and F.get("lieu") and F.get("lieu") != "salon":
+        # Lieu proposé par une IA qui n'a PAS regardé l'original (audit du 24 novembre : « l'été est passé » mis dans un aéroport,
+        # le créateur est chez lui) : gardé seulement si les paroles ou le titre en parlent ; sinon le lieu des mots, ou le salon.
+        d_ = sk.get("doublage") if isinstance(sk.get("doublage"), dict) else {}
+        txt_ = " ".join(str(r.get("t") or "") for r in reps) + " " + str(d_.get("legende_ecran") or "") + " " + str(d_.get("titre") or "")
+        sc_, _r = DD.scores_lieux(txt_.lower())
+        if not sc_.get(F["lieu"]):
+            nouveau = DD.lieu_de(txt_.lower(), None) or "salon"
+            journal(f"  fiche de tournage : lieu {F['lieu']} imaginé par l'IA (rien ne le dit) -> {nouveau}")
+            F["lieu"] = nouveau; F.pop("lieu_precis", None)
+    if source != "video" and F.get("panneaux"):                           # panneaux d'une IA qui n'a pas vu l'original : seulement si le
+        dial_ = " ".join(str(r.get("t") or "") for r in reps).lower()    # dialogue en parle (« DEPARTURES - GATE A15 » inventé, 24 nov.)
+        F["panneaux"] = [p_ for p_ in F["panneaux"] if any(w in dial_ for w in re.findall(r"[^\W\d_]{4,}", str(p_).lower()))]
     l_ecrit = lieu_ecrit(sk)
     if l_ecrit and l_ecrit in DD.LIEUX:
         if F.get("lieu") != l_ecrit: journal(f"  fiche de tournage : lieu {F.get('lieu')} -> {l_ecrit} (écrit sur la vidéo d'origine)")

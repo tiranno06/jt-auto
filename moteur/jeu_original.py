@@ -149,11 +149,12 @@ def appliquer(p, jeu, role, tm, parle, exagere=1.25):
         if v["grand"] > 0.25: p["pupille"] = max(p.get("pupille", 1.0), 1.0 + 0.8 * v["grand"])
         p["tilt"] = float(p.get("tilt", 0.0) + np.clip(v["roll"] * 0.8 * k, -12, 12))                 # tête penchée
         p["tq"] = float(np.clip(p.get("tq", 0.0) + 0.5 * v["yaw"], -1.0, 1.0))                        # tête tournée
-        rx, ry = p.get("regard") or (0.0, 0.0)
+        r_ = p.get("regard")                                               # (un tableau numpy : « or » plantait, 24 novembre)
+        rx, ry = (float(r_[0]), float(r_[1])) if r_ is not None and len(r_) >= 2 else (0.0, 0.0)
         p["regard"] = (float(rx), float(np.clip(ry + 1.6 * v["pitch"], -0.9, 0.9)))                   # tête baissée : regard baissé
     f, u = jeu.main(role, tm)
     if f and u > 0 and not p.get("main_d"):                                # geste des doigts (main droite, si elle ne tient rien)
         cible = BRAS_DOIGTS.get(f)
-        b0 = p.get("bras_d") or (0, 0)
+        b0 = p.get("bras_d"); b0 = (float(b0[0]), float(b0[1])) if b0 is not None and len(b0) >= 2 else (0.0, 0.0)
         if cible: p["bras_d"] = (b0[0] + (cible[0] - b0[0]) * u, b0[1] + (cible[1] - b0[1]) * u)
         p["doigts_d"] = f

@@ -646,7 +646,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
     SILENCES = []                                                          # (rendu simple, sans bible : défini quand même ; audit du 22/11 :
                                                                            #  « SILENCES » non défini faisait planter le rendu de secours)
     SEMI_ = set(sk.get("_decors_semi") or []) & set(decors)               # scènes au décor semi-réaliste (peinture, pieds calés au sol)
-    AVANT, INFOS = {}, {}; FICHES = None; DECOUPE = []; ERREURS_ANIM = []; SC_COURANT = [0]; TETES_Y = {}; TETES_R = {}
+    AVANT, INFOS = {}, {}; FICHES = None; DECOUPE = []; ERREURS_ANIM = []; SC_COURANT = [0]; TETES_Y = {}; TETES_R = {}; TETES_X = {}
     PROF = {}                                                              # décors IA : profondeur (le premier plan glisse plus vite que le fond)
     if B and PARALLAXE:
         try:
@@ -661,13 +661,17 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
         try:
             import decors as DEC_
             gags_ = [g for g in (B.get("panneaux") or []) if g] + [g for g in (B.get("gags") or []) if g] or ["Home sweet home", "Ici, on ne juge pas", "Wifi : demande à maman"]
+            if DOUB:                                                       # son TikTok (audit du 24 novembre) : seulement les panneaux de la
+                import fiche_tournage as FT_                               # fiche (vus ou dits), jamais un « gag » inventé (« L'été est comme
+                gags_ = [t_ for t_ in (FT_.texte_panneau(g) for g in (B.get("panneaux") or []))   # un bon livre », « …l'ordinateur du
+                         if t_ and not re.search(r"presentat|pr[ée]sentateur|invit[ée]e?\b|envoy[ée]e\b|narrateur", t_, re.I)]   # présentateur »)
             k_g = 0
             pann_ = {sc_: list(r_) for sc_, r_ in DEC_.PANNEAUX.items()}     # idée 22 : panneau vide repéré par Gemini dans un décor peint
             for sc_, zo_ in (DEC_.ZONES or {}).items():
                 if zo_.get("panneau") and B.get("panneaux") and not pann_.get(sc_):
                     x0_, y0_, x1_, y1_ = zo_["panneau"]; pann_[sc_] = [(x0_, y0_, x1_ - x0_, y1_ - y0_)]
             for sc_, rects in pann_.items():
-                if sc_ not in decors: continue
+                if sc_ not in decors or not gags_: continue                # rien de sûr à écrire : le panneau reste tel quel
                 im_ = Image.fromarray(decors[sc_]); dr = ImageDraw.Draw(im_)
                 for (x_, y_, w_, h_) in rects:
                     txt = str(gags_[k_g % len(gags_)]); k_g += 1
@@ -1278,11 +1282,19 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
         """Écran partagé : une bande de chaque plan, centrée sur la tête du personnage, l'une au-dessus de l'autre, séparées par
         un trait blanc ; la moitié du bas glisse en place au début (u : 0 → 1)."""
         h2 = H // 2
-        def y0_(sc_):                                                      # tête aux 4/10 de la moitié, et toujours ENTIÈRE (chapeau compris)
-            ty = TETES_Y.get(sc_, H * 0.4); r_ = TETES_R.get(sc_, 0.0)
-            y0 = min(ty - 0.42 * h2, ty - 1.9 * r_ - 20) if r_ else ty - 0.38 * h2
-            return int(np.clip(y0, 0, H - h2))
-        fr = np.empty_like(haut); y_h, y_b = y0_(sc_h), y0_(sc_b); fr[:h2] = haut[y_h:y_h + h2]; fr[h2:] = bas[y_b:y_b + H - h2]
+        def bande(img, sc_, hh):
+            """Moitié d'écran recadrée sur la tête : MÊME taille de tête dans les deux moitiés (diamètre ≈ 30 % de la hauteur), tête
+            aux 4/10 et toujours entière (audit du 24 novembre : la moitié du bas montrait une tête énorme coupée par le trait)."""
+            ty = TETES_Y.get(sc_, H * 0.4); r_ = TETES_R.get(sc_, 0.0); tx = TETES_X.get(sc_, W / 2)
+            if not r_:                                                     # (tête inconnue : l'ancienne bande, sans zoom)
+                y0 = int(np.clip(ty - 0.38 * hh, 0, H - hh)); return img[y0:y0 + hh]
+            hb = float(np.clip(6.5 * r_, 0.55 * hh, H))                    # hauteur prise dans l'image, ramenée à hh
+            wb = hb * W / hh
+            if wb > W: wb = W; hb = wb * hh / W
+            y0 = float(np.clip(min(ty - 0.42 * hb, ty - 1.6 * r_), 0, H - hb)); x0 = float(np.clip(tx - wb / 2, 0, W - wb))
+            M_ = np.float32([[W / wb, 0, -x0 * W / wb], [0, hh / hb, -y0 * hh / hb]])
+            return cv2.warpAffine(img, M_, (W, hh), flags=cv2.INTER_AREA if hb > hh else cv2.INTER_LINEAR, borderMode=cv2.BORDER_REPLICATE)
+        fr = np.empty_like(haut); fr[:h2] = bande(haut, sc_h, h2); fr[h2:] = bande(bas, sc_b, H - h2)
         if u < 1:
             dx = int(W * (1 - _ease(max(0.0, u)))); fr[h2:] = np.roll(fr[h2:], dx, 1)
             if dx: fr[h2:, :dx] = (30, 30, 36)
@@ -1809,7 +1821,7 @@ def rendre(sk, sortie, audios, mots=None, decors=None, mini=False, apercu=False,
                 if APPEL:                                                  # vraie tête DESSINÉE (audit du 24 novembre : la grosse tête du
                     try:                                                   # « petit » croquis est plus haute que celle du squelette,
                         (_hx, _hy), (_hrx, _hry), _m = HU.reperes(FICHES[role], p)   # elle sortait par le haut de la moitié d'écran)
-                        TETES_Y[sc] = float(_hy); TETES_R[sc] = float(_hry)
+                        TETES_Y[sc] = float(_hy); TETES_R[sc] = float(_hry); TETES_X[sc] = float(_hx)
                     except Exception as _e: __import__("pannes").avale(_e)
             if SONDE["on"]:                                                # contrôle image : où est la tête de chacun à l'écran
                 try:

@@ -93,6 +93,38 @@ def legende(lignes, duree):
     return " ".join(str(l.get("t") or "") for l in sorted(vues, key=lambda l: l.get("deb", 0)))[:300]
 
 
+def lignes_legende(lignes, duree):
+    """Les lignes du texte posé sur toute la vidéo (vues pendant au moins 40 % de la durée)."""
+    if not lignes or not duree: return []
+    return [str(l.get("t") or "") for l in lignes if float(l.get("fin", 0)) - float(l.get("deb", 0)) >= 0.4 * float(duree)]
+
+
+def etiquettes(lignes, legende=()):
+    """Noms de personnages ÉCRITS à l'écran par le créateur (audit du 24 novembre 2026 : zequoiza joue « Lamine Yamal », « Pedri »,
+    « Hansi Flick », « Été 2026 »… et écrit le nom de celui qu'il joue à chaque plan ; le robot lisait ce texte sans s'en servir).
+    Une étiquette = un texte court (1 à 4 mots, 25 caractères au plus), vu sur 2 images au moins, qui ne fait pas partie du texte
+    posé sur toute la vidéo ni des sous-titres (lignes de plus de 4 mots). Il en faut 2 différentes au moins, ou 1 seule qui va et
+    vient (le personnage non étiqueté est alors l'autre). Renvoie [[début, fin, nom]] triés, ou []."""
+    leg = {_nu(x) for x in ([legende] if isinstance(legende, str) else (legende or ())) if x}
+    cand = []
+    for l in lignes or []:
+        t = str(l.get("t") or "").strip(); mots_ = t.split()
+        if not 1 <= len(mots_) <= 4 or len(t) > 25 or not re.search(r"[^\W\d_]{3}", t): continue
+        if not (t[0].isupper() or t[0].isdigit()): continue                # un nom commence par une majuscule (« est passé » : non)
+        if _nu(t) in leg: continue                                         # une ligne du texte posé sur la vidéo (« est passé ») ;
+                                                                           # (« Lamine Yamal » est AUSSI dans le titre : gardé)
+        cand.append([float(l.get("deb", 0)), float(l.get("fin", 0)), t, int(l.get("n") or 1)])
+    vus = {}
+    for a, b, t, n in cand: vus[_nu(t)] = vus.get(_nu(t), 0) + n
+    noms = {k for k, v in vus.items() if v >= 2}
+    cand = [c for c in cand if _nu(c[2]) in noms]
+    if not cand: return []
+    if len(noms) == 1 and len(cand) < 2: return []                         # une seule étiquette, posée une fois : un titre, pas un nom
+    propre = {}
+    for a, b, t, n in cand: propre.setdefault(_nu(t), t)                  # même orthographe pour toutes les apparitions
+    return [[round(a, 2), round(b, 2), propre[_nu(t)]] for a, b, t, n in sorted(cand)]
+
+
 def _lettres(w): return re.sub(r"[^a-z0-9]", "", _sans_accents(w))
 
 

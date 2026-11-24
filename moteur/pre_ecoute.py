@@ -67,7 +67,7 @@ def _id(url):
 # Version de l'écoute (casting des voix, hauteur, image…) : à augmenter à CHAQUE amélioration de l'écoute. Un son de la réserve écouté
 # par une version plus ancienne est jeté et réécouté (audit du 24 novembre 2026 : la série du soir avait pris 8 sons écoutés AVANT les
 # corrections de la veille, qui n'avaient donc presque servi à rien).
-VERSION_ECOUTE = 3
+VERSION_ECOUTE = 4
 
 
 def stock(rel=None):
