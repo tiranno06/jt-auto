@@ -7330,40 +7330,71 @@
   "cadence": "rapide"
  },
  {
-  "moment": "soir",
+  "moment": "jour",
   "lieux": [
-   "rue",
-   "salon"
+   "studio_radio"
   ],
   "source": "auteur+image",
-  "duree": 75.0,
+  "duree": 61.0,
   "plans": {
-   "large": 29
+   "large": 19
   },
   "mouvements": {
-   "fixe": 29
+   "fixe": 19
   },
   "costumes": {
-   "presentateur": "chemise",
-   "invite": "capuche"
+   "presentateur": "tshirt",
+   "invite": "costume"
   },
   "figurants": 0,
-  "ambiances": [
-   "pluie",
-   "poussiere"
-  ],
-  "controle": "Humoriste 8.6/10 : 64.8 s La menace de l'invité ('je jure devant Lucifer que je crame ta baraque') manque d'une réaction physique ou faciale plus intense pour accentuer le côté dramatique. | Réalisate",
-  "fichier": "2026-11-24_13h57_emission.mp4",
+  "ambiances": [],
+  "controle": "Humoriste 7.8/10 : 0.4 s La réaction initiale pourrait être plus percutante pour lancer le sketch. | Réalisateur 8.0/10 : 5.4 s Le plan est fixe comme voulu, mais un léger jeu de regard renforcerait l",
+  "fichier": "2026-11-24_13h25_emission.mp4",
   "cine": {
    "focus": false,
    "vertige": true,
    "tiers": true,
-   "etalonnage": true,
+   "etalonnage": false,
+   "profondeur": false,
+   "grain": false,
+   "reflets": true,
+   "son": true
+  },
+  "cadence": "rapide"
+ },
+ {
+  "moment": "soir",
+  "lieux": [
+   "plage"
+  ],
+  "source": "auteur+image",
+  "duree": 58.1,
+  "plans": {
+   "large": 16
+  },
+  "mouvements": {
+   "fixe": 16
+  },
+  "costumes": {
+   "presentateur": "tshirt",
+   "invite": "tshirt"
+  },
+  "figurants": 0,
+  "ambiances": [
+   "poussiere"
+  ],
+  "controle": "Humoriste 6.8/10 : 0 s La réaction du présentateur manque d'exagération comique au début. | Réalisateur 6.6/10 :  | Directeur artistique 4.0/10 : 1 s Le décor de plage avec les deux personnages debout",
+  "fichier": "2026-11-24_13h55_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": false,
+   "tiers": false,
+   "etalonnage": false,
    "profondeur": false,
    "grain": true,
    "reflets": false,
    "son": true
   },
-  "cadence": "rapide"
+  "cadence": "normal"
  }
 ]

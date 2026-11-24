@@ -29765,5 +29765,196 @@
   "titre_affiche": "POV: Apéro sans alcool 😱",
   "anglais": true,
   "fin_carte": false
+ },
+ {
+  "date": "2026-11-24",
+  "format": "libre",
+  "titre": "ANNIVERSAIRE DE COUPLE OUBLIÉ",
+  "sources": [
+   "https://www.tiktok.com/@vignianimation/video/7710338832062811425"
+  ],
+  "note": 0,
+  "decision": "vidéo manuelle (bande son d'une vidéo TikTok)",
+  "accroche": "Putain, je sais pas comment je m'habille pour ce soir.",
+  "mots": [
+   "bande",
+   "profil",
+   "tiktok"
+  ],
+  "empreinte": [
+   "anniver",
+   "attend",
+   "avis",
+   "beluga",
+   "bete",
+   "bien",
+   "couple",
+   "date",
+   "disent",
+   "ecoute",
+   "ecrit",
+   "ensembl",
+   "essaye",
+   "evident",
+   "exactem",
+   "habille",
+   "imagine",
+   "meme",
+   "ouais",
+   "oublie",
+   "oublier",
+   "passe",
+   "pense",
+   "prevu",
+   "putain",
+   "reflech",
+   "sais",
+   "soir",
+   "telleme",
+   "veux",
+   "vite",
+   "vraimen"
+  ],
+  "voix": "bande son TikTok",
+  "gag": false,
+  "controle_video": "Humoriste 6.8/10 : 0 s La réaction du présentateur manque d'exagération comique au début. | Réalisateur 6.6/10 :  | Directeur artistique 4.0/10 : 1 s Le décor de plage avec les deux personnages debout ne correspond pas du tout au plan original où le personnage est allongé sur un transat avec un parasol.; 1 s Le style graphique diffère trop de la référence TikTok d'origine (absence du transat emblématique). | Ingénieur du son 8.6/10 :  | Spectateur TikTok 5.8/10 : ",
+  "running_gag": "",
+  "duree": 58.8,
+  "fichier": "2026-11-24_13h55_emission.mp4",
+  "tag": "emissions-2026-11",
+  "legende": "Quand tu oublies ton anniversaire de couple et que tu t'en rends compte sur la plage.\n\nVous auriez fait quoi à sa place ?\n\n🔔 Abonne-toi : une nouvelle histoire chaque jour !\n\n🎧 Son original : @vignianimation\n\n#petitsdramas #anniversaire #plage #fete #vacances #humourfrancais #francophone #humourfrancophone #animation #doublage #drole #dessinanime #humour #relation #couple",
+  "publie": null,
+  "commentaire": "Team resto chic ou team fast-food ? 🍔",
+  "style_accroche": null,
+  "couverture_ms": 52556,
+  "outils": {
+   "claude": "secours",
+   "mistral": "ok",
+   "gemini": "ok",
+   "groq": "ok",
+   "ia": "gemini ×7, groq ×3, mistral ×1",
+   "appels": {
+    "gemini": 7,
+    "groq": 3,
+    "mistral": 1
+   },
+   "epuisees": [],
+   "quota": {
+    "groq": {
+     "reste_jour": 999,
+     "limite_jour": 1000
+    }
+   },
+   "voix": "tiktok",
+   "decors": "dessines",
+   "eco": false
+  },
+  "jury": {
+   "note": 7.4,
+   "source": "ia",
+   "notes": {
+    "humoriste": 8.4,
+    "realisateur": 8.6,
+    "directeur_artistique": 5.0,
+    "son": 9.4,
+    "spectateur": 6.8
+   },
+   "remarques": [
+    "Positionnement des personnages légèrement figé",
+    "Les sous-titres contiennent du texte en anglais incrusté indésirable",
+    "Le décor de plage ne correspond pas entièrement aux codes épurés du dessin d'origine",
+    "Graphismes des bulles de texte trop imposants par rapport au personnage",
+    "Longueur un peu monotone sur le milieu de la vidéo",
+    "La fin arrive de manière un peu abrupte sans réaction visuelle forte"
+   ],
+   "corrigees": [
+    "réaction « regard_camera » à la réplique 16",
+    "réplique 7 -> invite (voix)",
+    "réplique 12 -> presentateur (voix)",
+    "tenue de presentateur"
+   ],
+   "manques": []
+  },
+  "web": true,
+  "a_verifier": [
+   {
+    "t": 0.0,
+    "poste": "fidélité à l'audio",
+    "quoi": "Le présentateur porte un maillot de bain alors qu'on est le soir et qu'ils s'habillent pour sortir.",
+    "grave": true,
+    "correction": [
+     {
+      "champ": "personnages.presentateur.tenue",
+      "valeur": "tenue normale",
+      "raison": "Le présentateur porte un maillot de bain alors qu'on est le soir et qu'ils s'habillent pour sortir."
+     }
+    ]
+   },
+   {
+    "t": 0.0,
+    "poste": "fidélité à l'audio",
+    "quoi": "Le lieu indiqué est une plage avec un parasol, or la scène se passe en intérieur chez eux (on voit un mur avec des cadres/décorations).",
+    "grave": true,
+    "correction": [
+     {
+      "champ": "lieu",
+      "valeur": "intérieur appartement",
+      "raison": "Le lieu indiqué est une plage avec un parasol, or la scène se passe en intérieur chez eux (on voit u"
+     }
+    ]
+   },
+   {
+    "t": 29.4,
+    "poste": "attribution",
+    "quoi": "l'image de l'original montre l'autre personne parler pendant 40 % des phrases (répliques 9, 12)",
+    "grave": true,
+    "repliques_douteuses": [
+     8,
+     11
+    ]
+   }
+  ],
+  "confiance": 64,
+  "equipe": "23/23 contrôles bons",
+  "filiere": "tiktok",
+  "source_audio": "https://www.tiktok.com/@vignianimation/video/7710338832062811425",
+  "theme": "Bande son : https://www.tiktok.com/@vignianimation/video/7710338832062811425",
+  "titre_source": "Comment tu peux oublié la date d’anniversaire de ton couple 🤣 : @AGUE...",
+  "couts": {
+   "claude_usd": 0.0,
+   "claude_jetons": 34015,
+   "cache_lu": 0,
+   "eleven_caracteres": 0,
+   "gpu_s": 0,
+   "total_usd": 0.0,
+   "modal_mesure_usd": 0.11
+  },
+  "temps": {
+   "Installation de la machine": 113.3,
+   "Démarrage du robot": 14.6,
+   "Écoute du son TikTok": 65.6,
+   "Décors": 0.6,
+   "Dessin des images": 471.5,
+   "Contrôle qualité par le jury": 163.2,
+   "Contrôle de la vidéo finie": 47.0,
+   "Corrections du compte rendu": 1021.7
+  },
+  "temps_lents": [
+   "Corrections du compte rendu"
+  ],
+  "type_couverture": "chute",
+  "recette": {
+   "lieu": "plage",
+   "animal": false,
+   "persos": 2,
+   "partie": false
+  },
+  "titre_affiche": "POV : Anniversaire oublié",
+  "anglais": true,
+  "fin_carte": false,
+  "essai": true,
+  "recalee": [
+   "l'image de l'original montre l'autre personne parler pendant 40 % des phrases (répliques 9, 12)"
+  ]
  }
 ]
