@@ -2,37 +2,6 @@
  {
   "moment": "soir",
   "lieux": [
-   "hall"
-  ],
-  "source": "auteur",
-  "duree": 26.7,
-  "plans": {
-   "contre_plongee": 2,
-   "moyen": 3,
-   "serre": 2,
-   "tres_serre": 1
-  },
-  "mouvements": {
-   "avance": 2,
-   "epaule": 1,
-   "fixe": 2,
-   "zoom_choc": 2,
-   "travelling": 1
-  },
-  "costumes": {
-   "presentateur": "doudoune",
-   "invite": "capuche",
-   "envoyee": "polo"
-  },
-  "figurants": 0,
-  "ambiances": [
-   "poussiere"
-  ],
-  "controle": "ok"
- },
- {
-  "moment": "soir",
-  "lieux": [
    "rue",
    "salon",
    "rue",
@@ -7467,6 +7436,43 @@
    "profondeur": false,
    "grain": false,
    "reflets": false,
+   "son": true
+  },
+  "cadence": "rapide"
+ },
+ {
+  "moment": "soir",
+  "lieux": [
+   "studio_radio"
+  ],
+  "source": "auteur+image",
+  "duree": 34.4,
+  "plans": {
+   "large": 11
+  },
+  "mouvements": {
+   "fixe": 11
+  },
+  "costumes": {
+   "presentateur": "tshirt",
+   "invite": "chemise",
+   "envoyee": "blouse"
+  },
+  "figurants": 0,
+  "ambiances": [
+   "neon",
+   "poussiere"
+  ],
+  "controle": "Humoriste 9.4/10 :  | Réalisateur 10.0/10 :  | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.9/10 : ",
+  "fichier": "2026-11-24_17h19_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": false,
+   "tiers": false,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": false,
+   "reflets": true,
    "son": true
   },
   "cadence": "rapide"
