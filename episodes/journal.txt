@@ -3,115 +3,79 @@ Casting déjà fait.
 Type de vidéo : gag éclair (~15 s)
 Crédits au départ : Claude secours, Mistral ok, Gemini ok, Groq ok, OpenRouter ok, IA Modal ok, ElevenLabs epuise — IA utilisée : mistral
 Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @motiontoonz, @same_same53, @charly.bse, @kodanimation, @vignianimation, @vincedessine, @aguerin30, @zequoiza, @jayzocc, @brutuslerobuste, @jawedyoussef
-Réserve de sons : son déjà écouté pris dans la réserve (https://www.tiktok.com/@aguerin30/video/7709211314245078304) : on passe directement à la suite
-Chaîne : vidéo 8/10 lancée
+Réserve de sons : son déjà écouté pris dans la réserve (https://www.tiktok.com/@aguerin30/video/7689503485456289056) : on passe directement à la suite
+Chaîne : vidéo 9/10 lancée
   fiche de tournage : gemini-flash-latest n'a pas répondu (HTTP Error 429: Too Many Requests)
-  fiche de tournage : gemini-flash-lite-latest n'a pas répondu (HTTP Error 503: Service Unavailable)
-  fiche de tournage : gemini-3.8-flash n'a pas répondu (HTTP Error 429: Too Many Requests)
-  fiche de tournage : gemini-3.7-flash n'a pas répondu (HTTP Error 429: Too Many Requests)
-  fiche de tournage : gemini-3.6-flash n'a pas répondu (The read operation timed out)
-  fiche de tournage : Gemini surchargé, nouvel essai dans 20 s (tour 2/3)
-  fiche de tournage : gemini-flash-latest n'a pas répondu (HTTP Error 429: Too Many Requests)
-  fiche de tournage écrite (Gemini a regardé et écouté l original) : bureau (modern messy office desk with open laptop computer), jour, temps normal, ambiance gene, niveau moyen
-  [équipe · fiche de tournage] ✔ contrôle 1 : règles (cohérence avec ce qui est dit) : réplique 0 signe : goutte -> — (pas cohérent avec l'émotion « fatigue »); réplique 1 signe : goutte -> — (pas cohérent avec l'émotion « fatigue ») (corrigé)
-    correction : réplique 0 signe : goutte -> — (pas cohérent avec l'émotion « fatigue »)
-    correction : réplique 1 signe : goutte -> — (pas cohérent avec l'émotion « fatigue »)
+  fiche de tournage écrite (Gemini a regardé et écouté l original) : salon (cozy modern living room with neutral colors and si), jour, temps normal, ambiance calme, niveau moyen
+  [équipe · fiche de tournage] ✔ contrôle 1 : règles (cohérence avec ce qui est dit) : moment : jour -> soir (dit dans le dialogue); décor : — -> glasses on a table (cité dans le dialogue ou entendu); réplique 8 objet : — -> verre (« un verre » est dit) (corrigé)
+    correction : moment : jour -> soir (dit dans le dialogue)
+    correction : décor : — -> glasses on a table (cité dans le dialogue ou entendu)
+    correction : réplique 8 objet : — -> verre (« un verre » est dit)
   [équipe · fiche de tournage] ✔ contrôle 2 : 2e IA (autre fournisseur)
   [équipe · fiche de tournage] ✔ contrôle 3 : image de l'original, puis règles
-  sous-titres anglais : 3 réplique(s) traduite(s)
-Essai : sans carton de fin « Abonne-toi »
-Sketch : « GTA6 DEMAIN AU BUREAU », 3 répliques
-  décor semi-réaliste 0 (lieu ressemblant de la banque) : [semi] modern messy office desk with open laptop computer an
+  jeu du dessin animé : Gemini n'a pas pu lire les expressions (rien de recopié)
+  sous-titres anglais : 18 réplique(s) traduite(s)
+Sketch : « ORGANISATION PLANNING AMIS », 18 répliques
+  décor semi-réaliste 0 (lieu ressemblant de la banque) : [semi] cozy modern living room with neutral colors and simpl
 WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1795484969.829730    3015 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+I0000 00:00:1795485007.783976    4075 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
 WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1795484971.194439    3015 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+I0000 00:00:1795485009.439912    4075 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
 Downloading data from https://github.com/ina-foss/inaSpeechSegmenter/releases/download/models/keras_speech_music_noise_cnn.hdf5
-[1m      0/3244808[0m [37m━━━━━━━━━━━━━━━━━━━━[0m [1m0s[0m 0s/step[1m2621440/3244808[0m [32m━━━━━━━━━━━━━━━━[0m[37m━━━━[0m [1m0s[0m 0us/step[1m3244808/3244808[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 0us/step
+[1m      0/3244808[0m [37m━━━━━━━━━━━━━━━━━━━━[0m [1m0s[0m 0s/step[1m3244808/3244808[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 0us/step
 /home/runner/venv/lib/python3.12/site-packages/keras/src/layers/reshaping/reshape.py:39: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
   super().__init__(**kwargs)
 Downloading data from https://github.com/ina-foss/inaSpeechSegmenter/releases/download/models/keras_male_female_cnn.hdf5
-[1m      0/6040200[0m [37m━━━━━━━━━━━━━━━━━━━━[0m [1m0s[0m 0s/step[1m3522560/6040200[0m [32m━━━━━━━━━━━[0m[37m━━━━━━━━━[0m [1m0s[0m 0us/step[1m6040200/6040200[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 0us/step
-montage : 1 plans (6.9:large>pre/coupe)
+[1m      0/6040200[0m [37m━━━━━━━━━━━━━━━━━━━━[0m [1m0s[0m 0s/step[1m6040200/6040200[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 0us/step
+montage : 1 plans (0.1:large>pre/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-studio : jour, lieux ['bureau'], tenues presentateur=pull, invite=pull, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe
-cartoon : durée 20.4 s, 3 répliques, 1 scène(s), personnages ['presentateur', 'invite']
-montage : 1 plans (6.9:large>pre/coupe)
+studio : soir, lieux ['salon'], tenues presentateur=pull, invite=tshirt, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 73.0 s, 18 répliques, 1 scène(s), personnages ['presentateur', 'invite']
+montage : 1 plans (0.1:large>pre/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-studio : jour, lieux ['bureau'], tenues presentateur=pull, invite=pull, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe
-cartoon : durée 20.4 s, 3 répliques, 1 scène(s), personnages ['presentateur', 'invite']
-  dessin partagé : 1 machine(s) d'aide + celle-ci (2 morceaux de ~612 images)
-  morceau 612–1225 reçu d'une machine d'aide
-  dessin partagé terminé en 8.2 min
+studio : soir, lieux ['salon'], tenues presentateur=pull, invite=tshirt, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 73.0 s, 18 répliques, 1 scène(s), personnages ['presentateur', 'invite']
+  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~1094 images)
+  release des morceaux relue (refaite entre-temps), nouvel essai
+  morceau 1094–2188 reçu d'une machine d'aide
+  morceau 2188–3283 reçu d'une machine d'aide
+  morceau 3283–4377 reçu d'une machine d'aide
+  dessin partagé terminé en 8.7 min
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
+Jury : 1 remarque(s) sur les plans / zooms retirée(s) (montage « plan large » voulu)
 Jury : 4 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
-Jury qualité (ia) : 6.7/10 — Humoriste 6.8/10 :  | Réalisateur 7.8/10 :  | Directeur artistique 6.0/10 : 0 s Les tenues manquent de fidélité par rapport à l'original | Ingénieur du son 7.8/10 :  | Spectateur TikTok 5.8/10 : 
-Manque par rapport à la vidéo d'origine : L'acteur original est seul face à son ordinateur portable dans un bureau avec un décor de salon/bureau personnel, alors qu'on a deux personnages identiques. ; Manque l'ordinateur portable ouvert sur lequel travaille le personnage dans l'original.
-fin en boucle : la dernière image se raccorde à la première (0.35 s de fondu)
-  [vidéo finie · synchro] décalage mesuré +0.25 s (mesure seulement : le son n'est jamais déplacé)
-  [vidéo finie · synchro] ✔ bouches du bon personnage
-  [vidéo finie · bouches] ✔ bouche immobile quand le personnage se tait
-  [vidéo finie · technique] ✔ sauts, clignotements, personnages (0 remarque(s))
-  transcription Groq (Whisper, gratuit) : 19 mots
-  karaoké contrôlé à l'oreille : 15 mots, écart médian 0.04 s
-  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 84 %)
-  [vidéo finie · contrôle IA] 1 remarque(s)
-  contrôle « fidélité » : Gemini surchargé, nouvel essai dans 20 s (tour 2/3)
-  contrôle « fidélité » : Gemini surchargé, nouvel essai dans 40 s (tour 3/3)
-  [vidéo finie · fidélité à l'audio] ✘ Gemini a regardé et écouté la vidéo finie : 2 écart(s)
-  [vidéo finie · voix et dessin] ✔ chaque réplique sur la bonne voix, homme / femme d'après la voix
-  [vidéo finie · attribution] ✔ qui dit chaque phrase, comparé à l'image de l'original
-  1 remarque(s) légère(s) gardée(s) au journal seulement : 7.0 s Le personnage 1 (à gauche) parle à la place du per
-Contrôle de la vidéo finie : 2 point(s) à vérifier — 0.0 s il n'y a pas d'ordinateur présent alors qu'il est mentionné  ; 0.0 s les personnages ne sont pas des humains normaux mais des per
-Compte rendu (tour 1, confiance 72/100) : corrections demandées au robot :
-- à 0.0 s : il n'y a pas d'ordinateur présent alors qu'il est mentionné dans la fiche de tournage
-- à 0.0 s : les personnages ne sont pas des humains normaux mais des personnages de dessin animé aux têtes surdimensionnées
-- à 0.0 s : Les tenues manquent de fidélité par rapport à l'original
-Remarque comprise : L'auteur signale trois problèmes : absence d'ordinateur à 0.0 s, les personnages ont un style cartoon avec têtes surdimensionnées, et les costumes ne correspondent pas à l'original.
-Remarque de l'auteur : 0 réplique(s) à rendre à un autre personnage, 5 correction(s) : lieu, casting, casting, costume, costume
-Compte rendu : fiche de tournage : repliques.0.objet : ordinateur -> None (il n'y a pas d'ordinateur présent alors qu'il est mentionné dans la fiche de tournage) ; fiche de tournage : personnages.invite.tenue : normale -> None (les personnages ne sont pas des humains normaux mais des personnages de dessin animé aux têtes surdi) ; presentateur : humain ; invite : humain ; casting de presentateur : age 32, taille 1, barbe moustache ; casting de invite : age 30, taille 1, barbe aucune ; tenue de presentateur ; tenue de invite
-montage : 1 plans (6.9:large>pre/coupe)
+Jury qualité (ia) : 8.1/10 — Humoriste 7.8/10 : 25 s Manque une réaction comique sur la bascule de sujet soudaine | Réalisateur 8.8/10 : 34 s Manque de variation dans les expressions faciales lors de l'énumération des rendez-vous | Directeur artistique 7.8/10 : 1 s Le décor est un salon alors que l'original montre un changement de pièce (passage de la chambre au salon/salle de bain); 64 s L'image finale de la miniature montre deux personnes alors que l'original est un homme seul | Ingénieur du son 9.6/10 :  | Spectateur TikTok 7.0/10 : 
+Manque par rapport à la vidéo d'origine : Dans la vidéo d'origine, le personnage unique change de pièce (bureau puis salle de bain), alors qu'ici les deux personnages restent fixes dans le salon. ; Le personnage d'origine tient une grande tasse thermos bleue qu'on ne retrouve pas chez nos personnages animés.
+Corrections tirées des remarques du jury : lieux_separes
+Corrections du jury (tour 1) : un décor pour chaque personnage (lieux séparés)
+  lieux séparés proposés par l'IA refusés : rien dans le son ne dit qu'ils se parlent à distance
+montage : 1 plans (0.1:large>pre/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-studio : jour, lieux ['bureau'], tenues presentateur=costume, invite=polo, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe
-cartoon : durée 20.4 s, 3 répliques, 1 scène(s), personnages ['presentateur', 'invite']
-  image 300/1225 (4 processeurs)
-  image 600/1225
-  image 900/1225
-  image 1200/1225
+studio : soir, lieux ['salon'], tenues presentateur=pull, invite=tshirt, 0 figurant(s), ambiances ['poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 73.0 s, 18 répliques, 1 scène(s), personnages ['presentateur', 'invite']
+  redessin partiel : 0/4377 images à redessiner (0 passage(s)), le reste repris tel quel
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
+Jury : 1 remarque(s) sur les plans / zooms retirée(s) (montage « plan large » voulu)
+Jury : 4 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
+Jury qualité (ia) : 7.6/10 — Humoriste 6.5/10 : 26 s Le passage à la deuxième phase (préparation du soir) manque de dynamisme visuel car le décor ne change pas.; 34.2 s Le jeu du personnage manque d'exagération comique pendant la liste des rendez-vous beauté. | Réalisateur 7.0/10 : 26 s La deuxième partie de la conversation à partir de 26s devrait se dérouler dans la salle de bain pour marquer le changement de scène comme dans la vidéo originale. | Directeur artistique 8.1/10 :  | Ingénieur du son 9.1/10 :  | Spectateur TikTok 7.3/10 : 0.4 s Des sous-titres parasites en anglais sont incrustés juste au-dessus du texte français, ce qui gène la lecture.
+Manque par rapport à la vidéo d'origine : Dans l'original, le décor change à partir du 7e instant (26s) : le personnage passe du salon à la salle de bain (salle_de_bain) pour illustrer la préparation de ; Dans la première partie de la vidéo originale, le personnage tient une grande gourde/gobelet bleu avec paille à la main. ; Dans la deuxième partie (salle de bain), le personnage fait des gestes de skincare/maquillage et s'aspberge avec un spray.
+La version corrigée n'est pas meilleure : on garde la première.
 fin en boucle : la dernière image se raccorde à la première (0.35 s de fondu)
-  [vidéo finie · synchro] décalage mesuré +0.25 s (mesure seulement : le son n'est jamais déplacé)
   [vidéo finie · synchro] ✔ bouches du bon personnage
   [vidéo finie · bouches] ✔ bouche immobile quand le personnage se tait
   [vidéo finie · technique] ✔ sauts, clignotements, personnages (0 remarque(s))
-  transcription Groq (Whisper, gratuit) : 19 mots
-  karaoké contrôlé à l'oreille : 15 mots, écart médian 0.04 s
-  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 84 %)
+  transcription Groq (Whisper, gratuit) : 226 mots
+  karaoké contrôlé à l'oreille : 206 mots, écart médian 0.06 s
+  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 97 %)
   [vidéo finie · contrôle IA] 0 remarque(s)
-  contrôle « fidélité » : Gemini surchargé, nouvel essai dans 20 s (tour 2/3)
-  contrôle « fidélité » : Gemini surchargé, nouvel essai dans 40 s (tour 3/3)
+  [vidéo finie · fidélité à l'audio] ✔ Gemini a regardé et écouté la vidéo finie
   [vidéo finie · voix et dessin] ✔ chaque réplique sur la bonne voix, homme / femme d'après la voix
   [vidéo finie · attribution] ✔ qui dit chaque phrase, comparé à l'image de l'original
-  contrôles qui n'ont pas pu se faire : fidélité à l'audio (Gemini n'a pas répondu) (note de confiance plafonnée)
 Contrôle de la vidéo finie : 0 point(s) à vérifier
-  IA gemini indisponible (gemini 429 : [{
-  "error": {
-    "code": 429,
-    "message": "You exceeded your current quota, please check your plan an) : on passe à la suivante
-Jury : 2 remarque(s) sur les plans / zooms retirée(s) (montage « plan large » voulu)
-Jury : 2 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
-Jury qualité (ia) : 9.3/10 — Humoriste 8.4/10 :  | Réalisateur 10.0/10 :  | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 8.1/10 : 0.0 s la première parole arrive à 6.9 s : on scrolle avant
-Manque par rapport à la vidéo d'origine : Les personnages originaux ont des expressions faciales plus variées et des gestes plus dynamiques (ex. : mains qui bougent, réactions spontanées). ; Les sous-titres originaux sont mieux synchronisés avec les mouvements des lèvres. ; L'ambiance sonore originale inclut des rires naturels en fond qui manquent ici.
-Compte rendu corrigé : confiance 72 → 90/100, jury 9.3/10
-Compte rendu (tour 2, confiance 90/100) : corrections demandées au robot :
-- à 0.0 s : la première parole arrive à 6.9 s : on scrolle avant
-Remarque comprise : L'auteur indique que la première réplique débute à 6.9 s alors que la vidéo commence à 0.0 s, ce qui cause un décalage perçu lors du scroll.
-Remarque de l'auteur : 0 réplique(s) à rendre à un autre personnage, 0 correction(s) : 
-Compte rendu : rien que le robot sache corriger lui-même
+  vidéo en deux parties : coupure à 37.5 s sur 74 s (2026-11-24_02h50_emission_p1.mp4, 2026-11-24_02h50_emission_p2.mp4)
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, groq = ok, ia = gemini ×5, groq ×3, mistral ×2, appels = {'gemini': 5, 'groq': 3, 'mistral': 2}, epuisees = ['gemini'], quota = {'groq': {'reste_jour': 999, 'limite_jour': 1000}}, voix = tiktok, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 25304, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0, 'total_usd': 0.0, 'modal_mesure_usd': 0.0}
-⏱️ Étapes plus lentes que d'habitude : Installation de la machine 7 min (d'habitude 2 min)
-⏱️ Temps par étape : Installation de la machine 7.6 min, Démarrage du robot 0.2 min, Écoute du son TikTok 4.7 min, Décors 0.0 min, Dessin des images 8.7 min, Contrôle qualité par le jury 0.7 min, Contrôle de la vidéo finie 2.4 min, Corrections du compte rendu 5.8 min
-Quota de l'API GitHub : 4684 appels restants
-OK : sortie/2026-11-24_02h49_emission.mp4 (21 s)
+Outils utilisés : claude = secours, mistral = ok, gemini = ok, groq = ok, ia = gemini ×6, groq ×1, mistral ×1, appels = {'gemini': 6, 'groq': 1, 'mistral': 1}, epuisees = [], quota = {'groq': {'reste_jour': 996, 'limite_jour': 1000}}, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 27264, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0, 'total_usd': 0.0, 'modal_mesure_usd': 0.0}
+⏱️ Temps par étape : Installation de la machine 1.6 min, Démarrage du robot 0.2 min, Écoute du son TikTok 0.7 min, Décors 0.0 min, Dessin des images 11.1 min, Contrôle qualité par le jury 0.6 min, Nouvelle version corrigée par le jury 5.1 min, Contrôle de la vidéo finie 1.1 min, Corrections du compte rendu 1.4 min
+Quota de l'API GitHub : 4672 appels restants
+OK : sortie/2026-11-24_02h50_emission.mp4 (74 s)

@@ -7191,32 +7191,66 @@
  {
   "moment": "jour",
   "lieux": [
-   "bureau"
+   "amphi"
   ],
   "source": "auteur+image",
-  "duree": 20.4,
+  "duree": 39.2,
   "plans": {
-   "large": 3
+   "large": 16
   },
   "mouvements": {
-   "fixe": 3
+   "fixe": 16
+  },
+  "costumes": {
+   "envoyee": "survetement",
+   "presentateur": "survetement",
+   "invite": "survetement"
+  },
+  "figurants": 0,
+  "ambiances": [],
+  "controle": "Humoriste 8.6/10 :  | Réalisateur 8.8/10 : 12.8 s Le personnage s'agite mais mériterait un geste de main plus marqué. | Directeur artistique 7.0/10 : 0.4 s Les proportions du prof font un peu trop enf",
+  "fichier": "2026-11-24_02h13_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": true,
+   "tiers": false,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": true,
+   "reflets": true,
+   "son": true
+  },
+  "cadence": "rapide"
+ },
+ {
+  "moment": "soir",
+  "lieux": [
+   "salon"
+  ],
+  "source": "auteur+image",
+  "duree": 73.0,
+  "plans": {
+   "large": 18
+  },
+  "mouvements": {
+   "fixe": 18
   },
   "costumes": {
    "presentateur": "pull",
-   "invite": "pull"
+   "invite": "tshirt"
   },
   "figurants": 0,
   "ambiances": [
    "poussiere"
   ],
-  "controle": "Humoriste 6.8/10 :  | Réalisateur 7.8/10 :  | Directeur artistique 6.0/10 : 0 s Les tenues manquent de fidélité par rapport à l'original | Ingénieur du son 7.8/10 :  | Spectateur TikTok 5.8/10 : ",
-  "fichier": "2026-11-24_02h49_emission.mp4",
+  "controle": "Humoriste 7.8/10 : 25 s Manque une réaction comique sur la bascule de sujet soudaine | Réalisateur 8.8/10 : 34 s Manque de variation dans les expressions faciales lors de l'énumération des rendez-vous",
+  "fichier": "2026-11-24_02h50_emission.mp4",
   "cine": {
    "focus": false,
-   "vertige": true,
+   "vertige": false,
    "tiers": true,
-   "etalonnage": false,
-   "profondeur": false,
+   "etalonnage": true,
+   "profondeur": true,
    "grain": false,
    "reflets": false,
    "son": true
