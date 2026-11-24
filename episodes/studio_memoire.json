@@ -7330,104 +7330,105 @@
   "cadence": "rapide"
  },
  {
-  "moment": "jour",
-  "lieux": [
-   "studio_radio"
-  ],
-  "source": "auteur+image",
-  "duree": 61.0,
-  "plans": {
-   "large": 19
-  },
-  "mouvements": {
-   "fixe": 19
-  },
-  "costumes": {
-   "presentateur": "tshirt",
-   "invite": "costume"
-  },
-  "figurants": 0,
-  "ambiances": [],
-  "controle": "Humoriste 7.8/10 : 0.4 s La réaction initiale pourrait être plus percutante pour lancer le sketch. | Réalisateur 8.0/10 : 5.4 s Le plan est fixe comme voulu, mais un léger jeu de regard renforcerait l",
-  "fichier": "2026-11-24_13h25_emission.mp4",
-  "cine": {
-   "focus": false,
-   "vertige": true,
-   "tiers": true,
-   "etalonnage": false,
-   "profondeur": false,
-   "grain": false,
-   "reflets": true,
-   "son": true
-  },
-  "cadence": "rapide"
- },
- {
   "moment": "soir",
   "lieux": [
-   "plage"
+   "rue",
+   "salon"
   ],
   "source": "auteur+image",
-  "duree": 58.1,
+  "duree": 75.0,
   "plans": {
-   "large": 16
+   "large": 29
   },
   "mouvements": {
-   "fixe": 16
+   "fixe": 29
   },
   "costumes": {
-   "presentateur": "tshirt",
-   "invite": "tshirt"
+   "presentateur": "chemise",
+   "invite": "capuche"
   },
   "figurants": 0,
   "ambiances": [
+   "pluie",
    "poussiere"
   ],
-  "controle": "Humoriste 6.8/10 : 0 s La réaction du présentateur manque d'exagération comique au début. | Réalisateur 6.6/10 :  | Directeur artistique 4.0/10 : 1 s Le décor de plage avec les deux personnages debout",
-  "fichier": "2026-11-24_13h55_emission.mp4",
-  "cine": {
-   "focus": false,
-   "vertige": false,
-   "tiers": false,
-   "etalonnage": false,
-   "profondeur": false,
-   "grain": true,
-   "reflets": false,
-   "son": true
-  },
-  "cadence": "normal"
- },
- {
-  "moment": "jour",
-  "lieux": [
-   "bureau_proviseur"
-  ],
-  "source": "auteur+image",
-  "duree": 78.6,
-  "plans": {
-   "large": 37
-  },
-  "mouvements": {
-   "fixe": 37
-  },
-  "costumes": {
-   "invite": "blouse",
-   "presentateur": "costume",
-   "envoyee": "tshirt"
-  },
-  "figurants": 0,
-  "ambiances": [
-   "poussiere",
-   "vapeur"
-  ],
-  "controle": "Humoriste 9.4/10 :  | Réalisateur 9.6/10 : 0.4 s Les personnages sont parfois partiellement hors-champ, ce qui nuit à la lisibilité des expressions.; 76.8 s tête de invite coupée par le bord de l'imag",
-  "fichier": "2026-11-24_14h53_emission.mp4",
+  "controle": "Humoriste 8.6/10 : 64.8 s La menace de l'invité ('je jure devant Lucifer que je crame ta baraque') manque d'une réaction physique ou faciale plus intense pour accentuer le côté dramatique. | Réalisate",
+  "fichier": "2026-11-24_13h57_emission.mp4",
   "cine": {
    "focus": false,
    "vertige": true,
    "tiers": true,
    "etalonnage": true,
-   "profondeur": true,
+   "profondeur": false,
+   "grain": true,
+   "reflets": false,
+   "son": true
+  },
+  "cadence": "rapide"
+ },
+ {
+  "moment": "jour",
+  "lieux": [
+   "rue",
+   "salon"
+  ],
+  "source": "auteur+image",
+  "duree": 72.2,
+  "plans": {
+   "large": 14
+  },
+  "mouvements": {
+   "fixe": 14
+  },
+  "costumes": {
+   "presentateur": "tshirt",
+   "invite": "chemise"
+  },
+  "figurants": 0,
+  "ambiances": [],
+  "controle": "Humoriste 7.8/10 :  | Réalisateur 8.0/10 :  | Directeur artistique 6.0/10 : 0.4 s Le décor de salon ne colle pas avec la mise en scène d'origine en voiture. | Ingénieur du son 8.0/10 :  | Spectateur T",
+  "fichier": "2026-11-24_14h29_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": true,
+   "tiers": true,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": false,
+   "reflets": true,
+   "son": true
+  },
+  "cadence": null
+ },
+ {
+  "moment": "jour",
+  "lieux": [
+   "rue"
+  ],
+  "source": "auteur+image",
+  "duree": 63.9,
+  "plans": {
+   "large": 36
+  },
+  "mouvements": {
+   "fixe": 36
+  },
+  "costumes": {
+   "presentateur": "blouson",
+   "invite": "veste_jean"
+  },
+  "figurants": 0,
+  "ambiances": [
+   "neon"
+  ],
+  "controle": "Humoriste 9.4/10 :  | Réalisateur 6.8/10 : 18.8 s Le geste de l'invitée pour dire 'Regarde bien' n'est pas assez marqué pour capter l'attention.; 63.3 s L'invitée insiste pour le numéro sans réaction ",
+  "fichier": "2026-11-24_15h27_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": true,
+   "tiers": true,
+   "etalonnage": false,
+   "profondeur": false,
    "grain": true,
    "reflets": true,
    "son": true
