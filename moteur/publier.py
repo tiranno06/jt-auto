@@ -109,6 +109,44 @@ def publier_buffer(url, legende, titre=""):
         except Exception as e: print(f"{service} : {str(e)[:200]}")
     return rep
 
+# ------------------------------------------------------------------ État réel des envois (Buffer)
+_TYPES = {}
+
+def _type(cle, nom):
+    """Champs d'un type de l'API Buffer (lus une fois) : [(nom, genre, type, args obligatoires ?)]."""
+    if nom not in _TYPES:
+        q = ('query { __type(name: %s) { fields { name args { type { kind } } type { kind name ofType { kind name ofType { kind name } } } } } }'
+             % json.dumps(nom))
+        out = []
+        for f in (_gql(q, cle).get("__type") or {}).get("fields") or []:
+            t = f["type"]
+            while t.get("ofType") and t["kind"] in ("NON_NULL", "LIST"): t = t["ofType"]
+            out.append((f["name"], t["kind"], t.get("name"), any(a["type"]["kind"] == "NON_NULL" for a in f.get("args") or [])))
+        _TYPES[nom] = out
+    return _TYPES[nom]
+
+def _selection(cle, nom, profond=1):
+    """Tous les champs simples d'un type (et un niveau d'objets : erreur, notification…) pour une requête GraphQL."""
+    morceaux = []
+    for n, genre, t, oblig in _type(cle, nom):
+        if oblig: continue
+        if genre in ("SCALAR", "ENUM"): morceaux.append(n)
+        elif genre == "OBJECT" and profond > 0 and t:
+            sous = _selection(cle, t, profond - 1)
+            if sous: morceaux.append(f"{n} {{ {sous} }}")
+    return " ".join(morceaux)
+
+def etat_post(cle, ident):
+    """Tout ce que Buffer dit d'un envoi : statut (scheduled, sending, sent, error…), erreur, lien TikTok…"""
+    return _gql("query { post(input: { id: %s }) { %s } }" % (json.dumps(ident), _selection(cle, "Post")), cle).get("post") or {}
+
+def etat_canaux(cle):
+    """Comptes connectés avec tout ce que Buffer en dit (déconnecté, file en pause, verrouillé…)."""
+    out = []
+    for o in _gql("query { account { organizations { id name } } }", cle)["account"]["organizations"]:
+        out += _gql('query { channels(input: { organizationId: %s }) { %s } }' % (json.dumps(o["id"]), _selection(cle, "Channel", 0)), cle)["channels"]
+    return out
+
 # ------------------------------------------------------------------ Upload-Post (payant)
 def publier_upload_post(video, legende):
     cle, utilisateur = os.environ["UPLOAD_POST_API_KEY"], os.environ["UPLOAD_POST_USER"]
@@ -221,6 +259,15 @@ if __name__ == "__main__":
                 if any(k in t["name"].lower() for k in ("tiktok", "metadata", "createpost", "postinput")) or any("ai" in (c["name"] or "").lower() for c in champs):
                     print(t["name"], ":", ", ".join(f"{c['name']}<{(c['type'].get('name') or (c['type'].get('ofType') or {}).get('name'))}>" for c in champs))
         except Exception as e: print(f"Schéma Buffer illisible : {str(e)[:300]}")
+        sys.exit(0)
+    if sys.argv[1:2] == ["--diagnostic"]:                                  # état réel des derniers envois et du compte TikTok
+        cle = os.environ.get("BUFFER_API_KEY")
+        for c in etat_canaux(cle): print("Canal :", json.dumps(c, ensure_ascii=False)[:1500])
+        print("Champs d'un envoi :", [f[0] for f in _type(cle, "Post")])
+        print("Requêtes possibles :", [(f[0], f[3]) for f in _type(cle, "Query")])
+        for i in sys.argv[2:]:
+            try: print("Envoi", i, ":", json.dumps(etat_post(cle, i), ensure_ascii=False)[:3000])
+            except Exception as e: print("Envoi", i, "illisible :", str(e)[:500])
         sys.exit(0)
     if sys.argv[1:] == ["--canaux"]:                                       # vérification : comptes connectés à Buffer (sans rien publier)
         cle = os.environ.get("BUFFER_API_KEY")
