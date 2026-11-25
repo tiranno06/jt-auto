@@ -23,7 +23,9 @@ jobs:
         run: (python moteur/publier.py --canaux; python moteur/publier.py --schema) 2>&1 | tee episodes/buffer.txt
       - name: État réel des envois et du compte TikTok
         continue-on-error: true
-        run: python moteur/publier.py --diagnostic ${{ inputs.envois }}
+        env:
+          ENVOIS: ${{ inputs.envois }}
+        run: python moteur/publier.py --diagnostic $ENVOIS
       - name: Enregistrer
         if: github.ref == 'refs/heads/main'
         run: |

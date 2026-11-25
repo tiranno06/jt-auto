@@ -17,13 +17,49 @@ def _gql(requete, cle):
     if rep.get("errors"): raise RuntimeError(f"Buffer : {rep['errors']}")
     return rep["data"]
 
+def compte_voulu():
+    """Compte TikTok de la chaîne (réglage BUFFER_TIKTOK, sinon TIKTOK_COMPTE, sinon @petitsdramas), sans « @ », en minuscules."""
+    v = (os.environ.get("BUFFER_TIKTOK") or os.environ.get("TIKTOK_COMPTE") or "petitsdramas").strip().lstrip("@").lower()
+    return v or "petitsdramas"
+
+def meme_compte(a, b):
+    """« petits.dramas » = « petitsdramas » (points, tirets bas et « @ » ne comptent pas) ; « buzz.insolite » reste différent."""
+    n = lambda x: "".join(ch for ch in str(x or "").lower() if ch.isalnum())
+    return bool(n(a)) and n(a) == n(b)
+
+def _nom_canal(c):
+    lien = str(c.get("externalLink") or "")
+    poignee = lien.split("@", 1)[1].split("/")[0] if "@" in lien else ""
+    return {str(x).strip().lstrip("@").lower() for x in (c.get("name"), c.get("displayName"), poignee) if x}
+
+def choisir_canal(chaines, service):
+    """Le BON compte d'un service parmi ceux connectés à Buffer. TikTok : celui qui porte le nom de la chaîne (leçon du
+    25 novembre 2026 : un 2e compte TikTok, « buzz.insolite », branché sur Buffer la veille, passait en premier et recevait nos
+    vidéos). Plusieurs comptes et aucun au bon nom = refus (jamais au hasard)."""
+    liste = [c for c in chaines if str(c.get("service", "")).lower() == service]
+    if not liste: return None
+    if service != "tiktok": return liste[0]["id"]
+    voulu = compte_voulu()
+    bons = [c for c in liste if any(meme_compte(voulu, n) for n in _nom_canal(c))]
+    if bons: return bons[0]["id"]
+    if len(liste) == 1:
+        print(f"Buffer : un seul compte TikTok connecté ({sorted(_nom_canal(liste[0]))}), différent de @{voulu} : il est utilisé "
+              "(nom de la chaîne changé ? régler TIKTOK_COMPTE)")
+        return liste[0]["id"]
+    raise RuntimeError(f"Plusieurs comptes TikTok connectés à Buffer ({', '.join('@' + sorted(_nom_canal(c))[0] for c in liste)}) "
+                       f"et aucun ne s'appelle @{voulu} : rien n'est envoyé (régler TIKTOK_COMPTE)")
+
 def canaux(cle):
-    """Comptes connectés à Buffer : {service: id} (tiktok, youtube, instagram…)."""
-    out = {}
-    if os.environ.get("BUFFER_CHANNEL_ID"): out["tiktok"] = os.environ["BUFFER_CHANNEL_ID"]
+    """Comptes connectés à Buffer : {service: id} (tiktok = celui de la chaîne, youtube, instagram…)."""
+    chaines = []
     for o in _gql("query { account { organizations { id name } } }", cle)["account"]["organizations"]:
-        for c in _gql('query { channels(input: { organizationId: %s }) { id name service } }' % json.dumps(o["id"]), cle)["channels"]:
-            out.setdefault(str(c.get("service", "")).lower(), c["id"])
+        chaines += _gql('query { channels(input: { organizationId: %s }) { id name displayName externalLink service } }'
+                        % json.dumps(o["id"]), cle)["channels"]
+    out = {}
+    for service in sorted({str(c.get("service", "")).lower() for c in chaines}):
+        i = choisir_canal(chaines, service)
+        if i: out[service] = i
+    if os.environ.get("BUFFER_CHANNEL_ID"): out["tiktok"] = os.environ["BUFFER_CHANNEL_ID"]
     return out
 
 def canal_tiktok(cle):
@@ -80,6 +116,8 @@ def requete_post(canal, texte, url, mode, ia=True, service="tiktok", titre="", q
   }}
 }}"""
 
+ENVOIS = []                                                                 # numéros des envois TikTok de ce lancement (vérifiés ensuite)
+
 def _poster(cle, canal, service, legende, url, titre, quand):
     essais = ([("customScheduled", True), ("customScheduled", False)] if quand else
               [("shareNow", True), ("customScheduled", True), ("shareNow", False)])  # option « contenu généré par IA » cochée
@@ -88,6 +126,7 @@ def _poster(cle, canal, service, legende, url, titre, quand):
         try:
             rep = _gql(requete_post(canal, legende[:2200], url, mode, ia, service, titre, quand), cle)["createPost"]
             if rep.get("post"):
+                if service == "tiktok": ENVOIS.append(rep["post"]["id"])
                 print(f"Buffer {service} : publication {'programmée le ' + quand if quand else 'lancée'} ({mode}), post {rep['post']['id']}"
                       + ("" if ia else " — SANS l'étiquette IA (refusée par Buffer) : à cocher dans l'appli"))
                 return rep
@@ -229,9 +268,10 @@ def marquer(fichier=None, ok=None, erreur=None, legende=None):
     if fichier is None:
         if not os.path.exists(STATUT): return
         d = json.load(open(STATUT, encoding="utf-8")); fichier, ok, erreur, legende = d["fichier"], d["publie"], d["erreur"], d.get("legende")
+        ENVOIS[:] = d.get("envois") or []
     else:
         os.makedirs(os.path.dirname(STATUT), exist_ok=True)
-        json.dump({"fichier": fichier, "publie": ok, "erreur": erreur, "legende": legende}, open(STATUT, "w", encoding="utf-8"))
+        json.dump({"fichier": fichier, "publie": ok, "erreur": erreur, "legende": legende, "envois": list(ENVOIS)}, open(STATUT, "w", encoding="utf-8"))
     if os.path.exists(HIST):
         hist = json.load(open(HIST, encoding="utf-8"))
         for e in hist:
@@ -239,6 +279,9 @@ def marquer(fichier=None, ok=None, erreur=None, legende=None):
                 e["publie"] = ok; e["erreur"] = erreur
                 if ok and legende: e["legende_publiee"] = legende[:300]               # texte réellement envoyé (sert aux statistiques)
                 if ok and os.environ.get("QUAND"): e["programmee"] = os.environ["QUAND"]
+                if ok and ENVOIS:                                           # vérifié ensuite par verif_envois.yml (vraiment parti, bon compte)
+                    e["buffer_post"] = ENVOIS[0]; e.pop("envoi_verifie", None); e.pop("lien_tiktok", None)
+                    if len(ENVOIS) > 1: e["buffer_post2"] = ENVOIS[1]
                 if ok and os.environ.get("REDIFFUSION_RUN") == "1":         # rediffusion : pas deux fois en 3 mois
                     import datetime as _d; e["rediffusee"] = (os.environ.get("QUAND") or _d.date.today().isoformat())[:10]
         json.dump(hist, open(HIST, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
@@ -275,7 +318,7 @@ if __name__ == "__main__":
         try:
             for o in _gql("query { account { organizations { id name } } }", cle)["account"]["organizations"]:
                 for c in _gql('query { channels(input: { organizationId: %s }) { id name service } }' % json.dumps(o["id"]), cle)["channels"]:
-                    print(f"Buffer : compte {c.get('service')} « {c.get('name')} »" + ("  ← utilisé pour TikTok" if str(c.get("service", "")).lower() == "tiktok" else ""))
+                    print(f"Buffer : compte {c.get('service')} « {c.get('name')} »" + ("  ← utilisé pour TikTok" if str(c.get("service", "")).lower() == "tiktok" and meme_compte(compte_voulu(), c.get("name")) else ""))
         except Exception as e: print(f"Buffer inaccessible : {str(e)[:300]}")
         sys.exit(0)
     video, legende_txt, url = sys.argv[1:4]
