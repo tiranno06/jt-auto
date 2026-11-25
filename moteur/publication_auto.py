@@ -146,7 +146,9 @@ def creneaux(reglages, jour=None, date=None):
     # et le bloc « 📈 Ce qui marche » compare les vues des deux créneaux. PUBLI_FRANCO=0 pour couper.
     # (24 novembre, remarque de l'auteur : « pas posté à l'heure prévue ») avec UNE seule vidéo par jour, c'était elle qui partait à
     # 22 h 30 un jour sur deux : jusqu'à 39 h sans vidéo. Le créneau du soir ne remplace donc que la 2e vidéo d'un jour à deux vidéos.
-    if date is not None and len(out) >= 2 and str(reglages.get("PUBLI_FRANCO") or "1").strip() != "0" and jour_franco(date):
+    # (24 novembre, choix de l'auteur : « toucher la francophonie TOUS les jours ») avec deux vidéos par jour, la 2e part à 22 h 30
+    # CHAQUE jour (plus un jour sur deux) ; la 1re garde l'heure choisie pour la France.
+    if date is not None and len(out) >= 2 and str(reglages.get("PUBLI_FRANCO") or "1").strip() != "0":
         hf = heure(str(reglages.get("PUBLI_HEURE_FRANCO") or "").strip() or FRANCO_DEF)
         autres = out[:-1]
         if all(abs((hf[0] * 60 + hf[1]) - (x[0] * 60 + x[1])) >= 60 for x in autres): out = sorted(autres + [hf])

@@ -61,7 +61,8 @@ class TestPublicationAuto(unittest.TestCase):
         import datetime as dt, publication_auto as P
         from zoneinfo import ZoneInfo
         hist = [{"fichier": "b.mp4"}, {"fichier": "d.mp4"}]
-        reg = {"PUBLI_AUTO": "1", "PUBLI_HEURE": "18:30", "PUBLI_DEUX": "1", "PUBLI_HEURE2": "12:00", "PUBLI_FILE": "d.mp4\nb.mp4"}
+        reg = {"PUBLI_AUTO": "1", "PUBLI_HEURE": "18:30", "PUBLI_DEUX": "1", "PUBLI_HEURE2": "12:00", "PUBLI_FILE": "d.mp4\nb.mp4",
+               "PUBLI_FRANCO": "0"}                                        # (2e heure libre : créneau francophonie coupé)
         a = lambda h, mi: dt.datetime(2026, 11, 1, h, mi, tzinfo=ZoneInfo("Europe/Paris"))
         self.assertEqual(P.creneaux(reg), [(12, 0), (18, 30)])
         self.assertIsNone(P.decision(a(10, 0), reg, hist, 0)[0])                      # avant midi : rien
@@ -72,6 +73,8 @@ class TestPublicationAuto(unittest.TestCase):
         self.assertEqual(P.creneaux(dict(reg, PUBLI_DEUX="0")), [(18, 30)])
         self.assertEqual(P.creneaux(dict(reg, PUBLI_HEURE2="18:45")), [(18, 30)])     # moins d'une heure d'écart : un seul créneau
         self.assertEqual(P.creneaux(dict(reg, PUBLI_HEURE2="")), [(12, 0), (18, 30)])
+        fr = dict(reg, PUBLI_FRANCO="1", PUBLI_HEURE="07:30")                 # francophonie (24 novembre) : 22 h 30 chaque jour
+        self.assertEqual(P.decision(dt.datetime(2026, 11, 2, 22, 10, tzinfo=ZoneInfo("Europe/Paris")), fr, hist, 1)[:2], ("d.mp4", "2026-11-02T22:30"))
 
 
 class TestFileAttente(unittest.TestCase):
