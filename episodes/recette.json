@@ -1,6 +1,6 @@
 {
  "moyenne": 436,
- "videos": 47,
+ "videos": 48,
  "plus": [
   {
    "critere": "Heure de publication",
@@ -21,7 +21,7 @@
   {
    "critere": "Heure de publication",
    "valeur": "soir",
-   "vues": 276,
+   "vues": 277,
    "n": 7,
    "fois": 0.63
   },
@@ -33,11 +33,11 @@
    "fois": 0.63
   },
   {
-   "critere": "Couverture",
-   "valeur": "la réaction",
-   "vues": 280,
+   "critere": "Lieu",
+   "valeur": "rue",
+   "vues": 286,
    "n": 5,
-   "fois": 0.64
+   "fois": 0.65
   }
  ],
  "par": {
@@ -62,30 +62,24 @@
    ],
    [
     "@charly.bse",
-    412,
+    413,
     5,
     0.95
    ],
    [
     "@motiontoonz",
-    385,
+    386,
     5,
-    0.88
+    0.89
    ],
    [
     "@yan_animation0",
-    308,
-    6,
-    0.71
+    323,
+    7,
+    0.74
    ]
   ],
   "duree": [
-   [
-    "plus de 70 s",
-    481,
-    22,
-    1.1
-   ],
    [
     "20 à 40 s",
     481,
@@ -93,8 +87,14 @@
     1.1
    ],
    [
+    "plus de 70 s",
+    478,
+    23,
+    1.1
+   ],
+   [
     "40 à 70 s",
-    356,
+    357,
     19,
     0.82
    ]
@@ -108,13 +108,13 @@
    ],
    [
     "matin",
-    408,
-    20,
+    409,
+    21,
     0.94
    ],
    [
     "soir",
-    276,
+    277,
     7,
     0.63
    ]
@@ -122,13 +122,13 @@
   "lieu": [
    [
     "salon",
-    380,
+    381,
     4,
     0.87
    ],
    [
     "rue",
-    285,
+    286,
     5,
     0.65
    ]
@@ -136,17 +136,17 @@
   "animal": [
    [
     "non",
-    303,
-    15,
-    0.7
+    311,
+    16,
+    0.71
    ]
   ],
   "persos": [
    [
     "2 personnages",
-    312,
-    12,
-    0.72
+    321,
+    13,
+    0.74
    ],
    [
     "3 personnages",
@@ -158,15 +158,15 @@
   "couverture": [
    [
     "la chute",
-    343,
+    344,
     6,
     0.79
    ],
    [
     "la réaction",
-    280,
-    5,
-    0.64
+    304,
+    6,
+    0.7
    ],
    [
     "le début",
@@ -178,9 +178,17 @@
   "partie": [
    [
     "non",
-    303,
-    15,
-    0.7
+    311,
+    16,
+    0.71
+   ]
+  ],
+  "creneau": [
+   [
+    "habituel",
+    461,
+    3,
+    1.06
    ]
   ]
  },
@@ -188,12 +196,12 @@
   "Créneau": [
    [
     "habituel",
-    480,
-    2
+    461,
+    3
    ],
    [
     "🌍 francophonie (21 h et plus)",
-    240,
+    241,
     1
    ]
   ]
@@ -204,47 +212,48 @@
   "videos": [],
   "communs": []
  },
- "maj": "2026-11-25T05:31+00:00",
+ "maj": "2026-11-25T17:26+00:00",
  "mots": {
-  "audio": 1.08
+  "audio": 1.05
  },
  "hashtags": {
   "comedie": 0.68,
-  "animation": 0.9,
-  "sketch": 0.76,
-  "travail": 0.87,
-  "drole": 0.87,
-  "petitsdramas": 0.82,
   "cartoon": 0.74,
-  "bureau": 0.88,
-  "viedebureau": 0.9,
-  "entretien": 0.63,
-  "humour": 0.84,
+  "humour": 0.85,
+  "sketch": 0.76,
+  "petitsdramas": 0.82,
+  "drole": 0.87,
+  "animation": 0.9,
   "dessinanime": 0.86,
-  "relation": 0.83,
+  "viedebureau": 0.9,
+  "travail": 0.87,
+  "entretien": 0.63,
+  "bureau": 0.88,
   "nourriture": 0.94,
-  "couple": 0.82,
+  "couple": 0.83,
   "food": 0.94,
-  "amour": 0.8,
-  "sante": 1.06,
-  "medecin": 1.06,
-  "fyp": 1.06,
+  "amour": 0.82,
+  "relation": 0.84,
+  "sante": 1.07,
+  "medecin": 1.07,
   "doublage": 0.9,
-  "pourtoi": 0.86,
   "argent": 0.76,
-  "pov": 1.04,
-  "freresoeur": 1.12,
+  "fyp": 1.06,
+  "pourtoi": 0.86,
+  "pov": 1.02,
+  "freresoeur": 1.1,
   "famille": 0.91,
   "humournoir": 0.59,
-  "parentsvsenfants": 0.75,
-  "parents": 0.75,
-  "permis": 0.68,
+  "parentsvsenfants": 0.77,
+  "parents": 0.77,
   "voiture": 0.68,
-  "potes": 0.61,
-  "bff": 0.61,
+  "permis": 0.68,
   "amitie": 0.61,
-  "telephone": 0.64,
+  "bff": 0.61,
+  "potes": 0.61,
+  "malaise": 0.8,
+  "reseauxsociaux": 0.77,
   "gene": 0.8,
-  "malaise": 0.8
+  "telephone": 0.72
  }
 }
