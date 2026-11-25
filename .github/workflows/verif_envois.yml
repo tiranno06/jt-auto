@@ -1,0 +1,57 @@
+name: Vérifier les envois TikTok
+
+# Chaque envoi vers TikTok est relu chez Buffer une fois son heure passée (moteur/verif_envois.py) : bien publié sur le compte
+# de la chaîne ? Sinon la vidéo redevient « à publier », le téléphone est prévenu et l'envoi est rattrapé tout de suite.
+on:
+  schedule:
+    - cron: "7,37 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: verif-envois
+  cancel-in-progress: false
+
+jobs:
+  verifier:
+    if: (vars.VERIF_ENVOIS || '1') != '0'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      BUFFER_API_KEY: ${{ secrets.BUFFER_API_KEY }}
+      TIKTOK_COMPTE: ${{ vars.TIKTOK_COMPTE }}
+      BUFFER_TIKTOK: ${{ vars.BUFFER_TIKTOK }}
+      GH_TOKEN: ${{ github.token }}
+      VAPID_PRIVEE: ${{ vars.VAPID_PRIVEE }}
+      VAPID_PUBLIQUE: ${{ vars.VAPID_PUBLIQUE }}
+      PUSH_ABONNEMENTS: ${{ vars.PUSH_ABONNEMENTS }}
+    steps:
+      - uses: actions/checkout@v7
+      - name: Relire les envois chez Buffer
+        id: v
+        run: python3 moteur/verif_envois.py
+      - name: Enregistrer l'historique
+        run: |
+          git config user.name "robot-jt"
+          git config user.email "robot-jt@users.noreply.github.com"
+          git add episodes/historique.json
+          if git commit -qm "Vérification des envois TikTok"; then
+            REJOUER="python3 moteur/verif_envois.py" MESSAGE="Vérification des envois TikTok" python3 moteur/fusion.py
+          else
+            echo "rien de neuf"
+          fi
+      - name: Prévenir le téléphone
+        if: steps.v.outputs.alertes != '' && steps.v.outputs.alertes != '0'
+        continue-on-error: true
+        run: |
+          pip install -q cryptography -c contraintes.txt
+          python3 moteur/verif_envois.py --alerter
+      - name: Rattraper l'envoi raté (tout de suite, sur le bon compte)
+        if: steps.v.outputs.rattraper != ''
+        run: |
+          for f in ${{ steps.v.outputs.rattraper }}; do
+            gh workflow run publier.yml -R "$GITHUB_REPOSITORY" -f fichier="$f" -f quand="" && echo "Rattrapage lancé : $f"
+          done

@@ -933,6 +933,20 @@
   seule scène » ; relais réussis et modèles essayés parmi d'autres plus comptés (`pannes.BANAL`) ; registre vidé. Pas fait : deux appels
   dessinés dans la même pièce (« Refuser le barbecue », « Lycéens ») — aucun indice fiable dans les données (ni Gemini ni le détecteur
   n'ont vu de téléphone). Tests : `TestAudit24NovembreSoir` (tests/test_audit23.py).
+- **Envois vers TikTok vérifiés (25 novembre 2026, remarque de l'auteur : « encore ce matin à 7h30 il n'a pas envoyé de vidéo, régler
+  définitivement, pour tous les envois »)** : le 24 novembre à 17h17 un 2e compte TikTok (« buzz.insolite ») a été branché sur Buffer ;
+  le robot prenait « le premier compte TikTok de la liste » -> les vidéos du 24 (22h30) et du 25 (7h30) sont parties sur @buzz.insolite,
+  et le robot notait « publiée » dès que Buffer acceptait, sans jamais regarder la suite. Réglé : **bon compte** (`publier.choisir_canal` :
+  le compte TikTok qui porte le nom de la chaîne, BUFFER_TIKTOK sinon TIKTOK_COMPTE sinon petitsdramas, `meme_compte` ignore points et
+  « @ » ; plusieurs comptes et aucun au bon nom = rien n'est envoyé, jamais au hasard) ; **chaque envoi vérifié** (numéro Buffer gardé
+  dans l'historique "buffer_post" ; `moteur/verif_envois.py`, workflow verif_envois.yml toutes les 30 min, VERIF_ENVOIS=0 pour couper) :
+  une fois l'heure passée, Buffer est relu : parti sur @petitsdramas -> "envoi_verifie" ok + "lien_tiktok" ; parti sur un autre compte,
+  erreur de TikTok / Buffer, ou pas parti 2 h après l'heure -> la vidéo redevient « à publier » ("erreur" lisible, "envoi_rate"),
+  téléphone prévenu, et **rattrapage tout de suite** si l'envoi était prévu il y a moins de 12 h (une vidéo par passage, publier.yml
+  sans « auto » : le créneau du jour n'est pas compté deux fois), sinon au prochain créneau ; 2e échec = mise de côté (publie False).
+  Diagnostic : workflow « Vérifier Buffer » (entrée « envois » : numéros à examiner ; `publier.py --diagnostic` : comptes connectés,
+  état complet de chaque envoi). NB : le seul téléphone abonné aux notifications ne répond plus (« un appareil n'existe plus ») :
+  l'auteur doit réactiver les notifications dans Réglages.
 - **Barbes** : jamais de grosse barbe (barbe mal rasée au plus) ; adultes et 16-17 ans seulement, jamais d'enfant barbu.
 - **Jury qualité** (`moteur/qualite.py`) : 5 critiques (humoriste, réalisateur, DA, son, spectateur), gratuit ET Claude, corrections
   automatiques puis nouvelle version (on garde la meilleure), mémoire des erreurs qui reviennent ; à enrichir à chaque remarque de l'auteur.
