@@ -465,7 +465,7 @@ video{width:100%;border-radius:12px;margin:0 0 8px;max-height:34vh;background:#0
     <div class="auto"><div class="txt"><b>🎬 Sons longs en 2 parties</b><small>Une vidéo de plus de 70 s est publiée en deux parties : la partie 1 à l'heure prévue, la partie 2 quatre heures après (elle ramène les gens sur le profil).</small></div><button class="inter" data-var="PARTIES" data-def="1" data-bascule="1"></button></div>
     <div class="auto"><div class="txt"><b>♻️ Rediffusion</b><small>Quand aucune vidéo cochée n'attend, la vidéo d'il y a plus de 3 mois qui a fait le plus de vues repart (jamais deux fois en 3 mois).</small></div><button class="inter" data-var="REDIFFUSION" data-def="1" data-bascule="1"></button></div>
     <label>2e heure de publication (heure de Paris)<div class="jeton"><input data-var="PUBLI_HEURE2" data-def="12:00" data-texte="1" maxlength="5" type="time" placeholder="12:00"><button class="second" data-enr="PUBLI_HEURE2" style="flex:none;padding:10px 14px">OK</button></div></label>
-    <div class="auto"><div class="txt"><b>🌍 Créneau francophonie</b><small>Un jour sur deux, la dernière vidéo du jour part le soir (Québec en fin d'après-midi, Afrique francophone en soirée). Même nombre de vidéos ; « 📈 Ce qui marche » compare les vues des deux créneaux.</small></div><button class="inter" data-var="PUBLI_FRANCO" data-def="1" data-bascule="1"></button></div>
+    <div class="auto"><div class="txt"><b>🌍 Créneau francophonie</b><small>Avec « Deux vidéos par jour » cochée : la 2e vidéo part TOUS les jours à cette heure (Québec en fin d'après-midi, Afrique francophone en soirée), la 1re garde l'heure choisie pour la France. Avec une seule vidéo par jour, elle part toujours à l'heure choisie. « 📈 Ce qui marche » compare les vues des deux créneaux.</small></div><button class="inter" data-var="PUBLI_FRANCO" data-def="1" data-bascule="1"></button></div>
     <label>Heure du créneau francophonie (heure de Paris)<div class="jeton"><input data-var="PUBLI_HEURE_FRANCO" data-def="22:30" data-texte="1" maxlength="5" type="time" placeholder="22:30"><button class="second" data-enr="PUBLI_HEURE_FRANCO" style="flex:none;padding:10px 14px">OK</button></div></label>
     <p class="note" id="pubResume"></p>
     <h3 style="margin:14px 0 6px">🗓️ Calendrier de publication</h3><div id="calendrier"></div>
@@ -1304,8 +1304,8 @@ function creneauxPubli(d){                                                // heu
   const l=[h], h2=String((VARS&&VARS.PUBLI_HEURE2)||"12:00").trim(), mn=x=>{const [a,b]=x.split(":").map(Number); return a*60+(b||0)};
   if(String((VARS&&VARS.PUBLI_DEUX)||"0")==="1"&&/^\d{1,2}:\d{2}$/.test(h2)&&Math.abs(mn(h2)-mn(h))>=60) l.push(h2);
   l.sort((a,b)=>mn(a)-mn(b));
-  const dj=d||new Date(), hf=String((VARS&&VARS.PUBLI_HEURE_FRANCO)||"22:30").trim();   // créneau francophonie : un jour sur deux,
-  if(l.length>=2&&String((VARS&&VARS.PUBLI_FRANCO)||"1")!=="0"&&/^\d{1,2}:\d{2}$/.test(hf)&&jourFranco(dj)){   // la 2e vidéo du jour part le soir (jamais la seule : 24 nov.)
+  const hf=String((VARS&&VARS.PUBLI_HEURE_FRANCO)||"22:30").trim();   // créneau francophonie : un jour sur deux,
+  if(l.length>=2&&String((VARS&&VARS.PUBLI_FRANCO)||"1")!=="0"&&/^\d{1,2}:\d{2}$/.test(hf)){   // la 2e vidéo part le soir, TOUS les jours (24 nov.)
     const autres=l.slice(0,-1); if(autres.every(x=>Math.abs(mn(x)-mn(hf))>=60)){autres.push(hf.padStart(5,"0")); return autres.sort((a,b)=>mn(a)-mn(b))}
   }
   return l;

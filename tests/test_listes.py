@@ -1031,6 +1031,7 @@ class TestMonde21Novembre(unittest.TestCase):
         self.assertEqual(P.creneaux({"PUBLI_HEURE": "18:00"}, 0, pair), [(18, 0)])
         self.assertEqual(P.creneaux({"PUBLI_HEURE": "18:00"}, 0, impair), [(18, 0)])            # une seule vidéo : jamais déplacée (24 nov.)
         self.assertEqual(P.creneaux({"PUBLI_HEURE": "18:00", "PUBLI_DEUX": "1", "PUBLI_HEURE2": "12:00"}, 0, impair), [(12, 0), (22, 30)])
+        self.assertEqual(P.creneaux({"PUBLI_HEURE": "07:30", "PUBLI_DEUX": "1", "PUBLI_HEURE2": "12:00"}, 0, pair), [(7, 30), (22, 30)])   # tous les jours (24 nov.)
         self.assertEqual(P.creneaux({"PUBLI_HEURE": "18:00", "PUBLI_FRANCO": "0"}, 0, impair), [(18, 0)])
         self.assertEqual(P.creneaux({"PUBLI_HEURE": "18:00"}), [(18, 0)])                       # sans date : inchangé
         src = open(os.path.join(os.path.dirname(__file__), "..", "moteur", "site.py"), encoding="utf-8").read()

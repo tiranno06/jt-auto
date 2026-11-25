@@ -658,9 +658,11 @@
   vidéos (322 vues en médiane) sortent rarement du « premier essai » (petit groupe de 200-500 personnes). Pas de chiffres par pays dans
   le relevé (TikTok Studio → Spectateurs → Lieux). **Créneau francophonie** (1, `publication_auto.jour_franco` / `creneaux(…, date)`,
   site `jourFranco` / `creneauxPubli`) : un jour sur deux (jours impairs depuis 1970), la DERNIÈRE vidéo du jour part à PUBLI_HEURE_FRANCO
-  (22:30 par défaut = fin d'après-midi au Québec) ; même nombre de vidéos par jour ; PUBLI_FRANCO=0 pour couper ; **seulement les
-  jours à DEUX vidéos** (remarque de l'auteur du 24 novembre : avec une vidéo par jour à 7 h 30, c'était elle qui partait à 22 h 30 un
-  jour sur deux, jusqu'à 39 h sans publication ; `publication_auto.creneaux` et `creneauxPubli` du site) ; **francophonie des
+  (22:30 par défaut = fin d'après-midi au Québec) ; même nombre de vidéos par jour ; PUBLI_FRANCO=0 pour couper ; **seulement avec DEUX
+  vidéos par jour, et alors TOUS les jours** (remarque de l'auteur du 24 novembre : avec une vidéo par jour à 7 h 30, c'était elle qui
+  partait à 22 h 30 un jour sur deux, jusqu'à 39 h sans publication ; choix de l'auteur : 2 vidéos par jour, 7 h 30 pour la France et
+  22 h 30 pour la francophonie chaque jour, case « Deux vidéos par jour » (PUBLI_DEUX) ; la 2e heure PUBLI_HEURE2 est alors remplacée
+  par PUBLI_HEURE_FRANCO ; `publication_auto.creneaux` et `creneauxPubli` du site) ; **francophonie des
   descriptions** (2, `legende.FRANCE_SEULE` / `francophone` : jamais #france, #paris, #tiktokfrance, #fyp, #pourtoi… y compris retirés
   des anciennes descriptions à l'envoi ; niche + #francophone #humourfrancophone ; consigne de l'IA : légende comprise dans tous les pays
   francophones ; FRANCOPHONIE=0) ; **sous-titres anglais** (3, `moteur/anglais.py` : traduction de chaque réplique par l'IA gratuite,
