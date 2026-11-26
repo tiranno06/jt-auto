@@ -1,32 +1,32 @@
 {
  "mistral : mistral N : {«…»:«…»,«…»:«…»,«…»:«…»,«…»:null,«…»:«…»,\"ra": {
-  "n": 1,
+  "n": 2,
   "premiere": "2026-11-26",
   "derniere": "2026-11-26",
   "exemple": "mistral : mistral 402 : {\"object\":\"error\",\"message\":\"You need a subscription to access this API.\",\"type\":\"billing_no_api_budget_configured\",\"param\":null,\"code\":\"2314\",\"ra",
   "etape": "",
   "jours": {
-   "2026-11-26": 1
+   "2026-11-26": 2
   }
  },
  "openrouter : openrouter N : {«…»:{«…»:\"Rate limit exceeded: free-models-per-day. Add N credits to unlock N free model requests per day: <lie": {
-  "n": 1,
+  "n": 2,
   "premiere": "2026-11-26",
   "derniere": "2026-11-26",
   "exemple": "openrouter : openrouter 429 : {\"error\":{\"message\":\"Rate limit exceeded: free-models-per-day. Add 10 credits to unlock 1000 free model requests per day: https://openrouter.ai",
   "etape": "",
   "jours": {
-   "2026-11-26": 1
+   "2026-11-26": 2
   }
  },
  "contrôles qui n«…»audio (Gemini n«…»après l«…»original (image illisible) (note de confiance plafonnée)": {
-  "n": 1,
+  "n": 2,
   "premiere": "2026-11-26",
   "derniere": "2026-11-26",
   "exemple": "contrôles qui n'ont pas pu se faire : fidélité à l'audio (Gemini n'a pas répondu), qui parle d'après l'image de l'original (image illisible) (note de confiance plafonnée)",
   "etape": "casting voix",
   "jours": {
-   "2026-11-26": 1
+   "2026-11-26": 2
   }
  }
 }

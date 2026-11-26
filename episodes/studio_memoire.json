@@ -1,51 +1,5 @@
 [
  {
-  "moment": "nuit",
-  "lieux": [
-   "rue",
-   "rue",
-   "rue"
-  ],
-  "source": "auteur",
-  "duree": 70.4,
-  "plans": {
-   "moyen": 1,
-   "tres_serre": 7,
-   "contre_plongee": 2,
-   "serre": 5,
-   "large": 2
-  },
-  "mouvements": {
-   "fixe": 7,
-   "avance": 4,
-   "zoom_choc": 1,
-   "epaule": 3,
-   "recul": 2
-  },
-  "costumes": {
-   "envoyee": "blouson",
-   "invite": "capuche",
-   "presentateur": "doudoune"
-  },
-  "figurants": 6,
-  "ambiances": [
-   "neon"
-  ],
-  "controle": "ok",
-  "fichier": "2026-10-11_20h34_emission.mp4",
-  "cine": {
-   "focus": true,
-   "vertige": true,
-   "tiers": true,
-   "etalonnage": true,
-   "profondeur": true,
-   "grain": true,
-   "reflets": false,
-   "son": true
-  },
-  "cadence": "rapide"
- },
- {
   "moment": "jour",
   "lieux": [
    "rue",
@@ -7449,6 +7403,39 @@
   "ambiances": [],
   "controle": "Humoriste 7.8/10 :  | Réalisateur 7.0/10 : 6 s L'écoute du personnage secondaire est un peu neutre. | Directeur artistique 8.0/10 : 1 s Les personnages sont bien dessinés dans un style croquis aquarel",
   "fichier": "2026-11-26_21h05_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": true,
+   "tiers": true,
+   "etalonnage": false,
+   "profondeur": true,
+   "grain": true,
+   "reflets": true,
+   "son": true
+  },
+  "cadence": "rapide"
+ },
+ {
+  "moment": "jour",
+  "lieux": [
+   "jardin"
+  ],
+  "source": "auteur+image",
+  "duree": 63.3,
+  "plans": {
+   "large": 38
+  },
+  "mouvements": {
+   "fixe": 38
+  },
+  "costumes": {
+   "presentateur": "tshirt",
+   "invite": "chemise"
+  },
+  "figurants": 1,
+  "ambiances": [],
+  "controle": "Humoriste 7.6/10 :  | Réalisateur 6.8/10 :  | Directeur artistique 6.0/10 : 0.4 s Les personnages manquent un peu de personnalité visuelle propre au style sketch. | Ingénieur du son 7.0/10 :  | Specta",
+  "fichier": "2026-11-26_21h19_emission.mp4",
   "cine": {
    "focus": false,
    "vertige": true,

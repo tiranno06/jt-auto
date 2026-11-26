@@ -4,9 +4,9 @@ Type de vidéo : sketch long (+1 min)
   mistral : mistral 402 : {"object":"error","message":"You need a subscription to access this API.","type":"billing_no_api_budget_configured","param":null,"code":"2314","ra
   openrouter : openrouter 429 : {"error":{"message":"Rate limit exceeded: free-models-per-day. Add 10 credits to unlock 1000 free model requests per day: https://openrouter.ai
 Crédits au départ : Claude secours, Mistral epuise, Gemini ok, Groq ok, OpenRouter epuise, IA Modal ok, ElevenLabs epuise — IA utilisée : groq
-Remarque comprise : L'auteur signale plusieurs problèmes : sous-titre incorrect, personnage qui bouge mal, bulles de dialogue à scinder, ton inapproprié du passage sur l'abus, manque de bruitages et de musique, désynchro
-Remarque de l'auteur : 1 réplique(s) à rendre à un autre personnage, 13 correction(s) : reaction, reaction, reaction, reaction, bruitage, bruitage, bruitage, bruitage, bruitage, reaction, reaction, reaction, reaction
-Remarque de l'auteur appliquée : rien de précis compris
+Remarque comprise : Il faut corriger les sous‑titres, réassigner certaines répliques à l'autre personnage, ajouter des réactions exagérées, un bruitage, ajuster la vitesse des sous‑titres, insérer des micro‑réactions, re
+Remarque de l'auteur : 3 réplique(s) à rendre à un autre personnage, 4 correction(s) : reaction, bruitage, costume, figurant
+Remarque de l'auteur appliquée : tenue de presentateur
   son téléchargé (yt-dlp --impersonate chrome)
   témoin hauteur : voix à 162 Hz et 240 Hz bien séparées, 16 phrase(s) remise(s) sur la bonne voix : Gros, au baptême de mon neveu. ; Il a 14 mois. ; J'aurais dû prendre une espèce, c'est pl ; Mais t'aurais rien dû prendre du tout. ; T'es alcoolique. ; piscine municipale, t'as rien eu du whis
   vidéo refaite : 6 réplique(s) qui mélangeaient deux voix coupée(s) en deux
@@ -20,15 +20,15 @@ Refaire (compte_rendu) : « ALCOOL ET AMIS », mêmes répliques
 Sketch : « ALCOOL ET AMIS », 38 répliques
   décor semi-réaliste 0 (lieu déjà connu) : [semi] garden with a swing set, a tree, and a picnic table objects bee
 WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1795723507.276768    3890 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+I0000 00:00:1795724342.130898    3891 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
 WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1795723508.322080    3890 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+I0000 00:00:1795724343.288028    3891 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
 Downloading data from https://github.com/ina-foss/inaSpeechSegmenter/releases/download/models/keras_speech_music_noise_cnn.hdf5
 [1m      0/3244808[0m [37m━━━━━━━━━━━━━━━━━━━━[0m [1m0s[0m 0s/step[1m3244808/3244808[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 0us/step
 /home/runner/venv/lib/python3.12/site-packages/keras/src/layers/reshaping/reshape.py:39: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
   super().__init__(**kwargs)
 Downloading data from https://github.com/ina-foss/inaSpeechSegmenter/releases/download/models/keras_male_female_cnn.hdf5
-[1m      0/6040200[0m [37m━━━━━━━━━━━━━━━━━━━━[0m [1m0s[0m 0s/step[1m2686976/6040200[0m [32m━━━━━━━━[0m[37m━━━━━━━━━━━━[0m [1m0s[0m 0us/step[1m6040200/6040200[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 0us/step
+[1m      0/6040200[0m [37m━━━━━━━━━━━━━━━━━━━━[0m [1m0s[0m 0s/step[1m6040200/6040200[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 0us/step
 montage : 1 plans (0.1:large>pre/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
 studio : jour, lieux ['jardin'], tenues presentateur=tshirt, invite=chemise, 1 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
@@ -39,12 +39,14 @@ studio : jour, lieux ['jardin'], tenues presentateur=tshirt, invite=chemise, 1 f
 cartoon : durée 63.3 s, 38 répliques, 1 scène(s), personnages ['presentateur', 'invite']
   dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~949 images)
   morceau 950–1899 reçu d'une machine d'aide
+  release des morceaux relue (refaite entre-temps), nouvel essai
   morceau 1899–2848 reçu d'une machine d'aide
   morceau 2848–3798 reçu d'une machine d'aide
-  dessin partagé terminé en 3.2 min
+  dessin partagé terminé en 3.9 min
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury : 3 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
-Jury qualité (ia) : 7.7/10 — Humoriste 7.8/10 :  | Réalisateur 7.0/10 : 6 s L'écoute du personnage secondaire est un peu neutre. | Directeur artistique 8.0/10 : 1 s Les personnages sont bien dessinés dans un style croquis aquarelle cohérent. | Ingénieur du son 7.8/10 :  | Spectateur TikTok 7.8/10 : 
+Jury : 1 remarque(s) sur les plans / zooms retirée(s) (montage « plan large » voulu)
+Jury : 2 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
+Jury qualité (ia) : 6.4/10 — Humoriste 7.6/10 :  | Réalisateur 6.8/10 :  | Directeur artistique 6.0/10 : 0.4 s Les personnages manquent un peu de personnalité visuelle propre au style sketch. | Ingénieur du son 7.0/10 :  | Spectateur TikTok 5.0/10 : 0.4 s Sous-titres un peu rapides à lire pour un spectateur distrait sur TikTok.
 fin en boucle : la dernière image se raccorde à la première (0.35 s de fondu)
   [vidéo finie · synchro] ✔ bouches du bon personnage
   [vidéo finie · bouches] ✔ bouche immobile quand le personnage se tait
@@ -58,15 +60,15 @@ fin en boucle : la dernière image se raccorde à la première (0.35 s de fondu)
   contrôles qui n'ont pas pu se faire : fidélité à l'audio (Gemini n'a pas répondu), qui parle d'après l'image de l'original (image illisible) (note de confiance plafonnée)
 Contrôle de la vidéo finie : 0 point(s) à vérifier
 Compte rendu (tour 1, confiance 84/100) : corrections demandées au robot :
-- à 6.0 s : L'écoute du personnage secondaire est un peu neutre.
-- à 1.0 s : Les personnages sont bien dessinés dans un style croquis aquarelle cohérent.
-Remarque comprise : L'auteur signale que l'expression du personnage secondaire (invite) est trop neutre autour de 6 s et qu'il apprécie le style de dessin en croquis aquarelle.
-Remarque de l'auteur : 0 réplique(s) à rendre à un autre personnage, 1 correction(s) : reaction
+- à 0.4 s : Les personnages manquent un peu de personnalité visuelle propre au style sketch.
+- à 0.4 s : Sous-titres un peu rapides à lire pour un spectateur distrait sur TikTok.
+Remarque comprise : L'auteur indique que les personnages manquent de personnalité visuelle propre au style sketch et que les sous-titres sont trop rapides à lire dès 0,4 s.
+Remarque de l'auteur : 0 réplique(s) à rendre à un autre personnage, 2 correction(s) : reaction, reaction
 Compte rendu : rien que le robot sache corriger lui-même
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = epuise, gemini = ok, groq = ok, ia = groq ×2, gemini ×2, appels = {'groq': 2, 'gemini': 2}, epuisees = ['mistral', 'openrouter'], quota = {'groq': {'reste_jour': 999, 'limite_jour': 1000}}, voix = tiktok, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 18131, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0, 'total_usd': 0.0, 'modal_mesure_usd': 0.0}
-⏱️ Temps par étape : Installation de la machine 1.3 min, Démarrage du robot 0.3 min, Écoute du son TikTok 0.3 min, Décors 0.0 min, Dessin des images 4.5 min, Contrôle qualité par le jury 2.7 min, Contrôle de la vidéo finie 0.6 min, Corrections du compte rendu 0.4 min
-Vidéo refaite : 2026-11-26_21h05_emission.mp4 remplace 2026-11-02_15h10_emission.mp4 dans la liste (confiance 60 → 84) ; sa place « À publier » est gardée
-Quota de l'API GitHub : 4942 appels restants
-OK : sortie/2026-11-26_21h05_emission.mp4 (64 s)
+Outils utilisés : claude = secours, mistral = epuise, gemini = ok, groq = ok, ia = groq ×2, gemini ×2, appels = {'groq': 2, 'gemini': 2}, epuisees = ['mistral', 'openrouter'], quota = {'groq': {'reste_jour': 998, 'limite_jour': 1000}}, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 19239, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0, 'total_usd': 0.0, 'modal_mesure_usd': 0.0}
+⏱️ Temps par étape : Installation de la machine 1.2 min, Démarrage du robot 0.3 min, Écoute du son TikTok 0.4 min, Décors 0.0 min, Dessin des images 5.1 min, Contrôle qualité par le jury 2.5 min, Contrôle de la vidéo finie 0.8 min, Corrections du compte rendu 0.4 min
+Vidéo refaite : 2026-11-26_21h19_emission.mp4 remplace 2026-11-02_06h35_emission.mp4 dans la liste (confiance 52 → 84) ; sa place « À publier » est gardée
+Quota de l'API GitHub : 4815 appels restants
+OK : sortie/2026-11-26_21h19_emission.mp4 (64 s)
