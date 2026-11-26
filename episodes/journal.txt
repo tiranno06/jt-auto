@@ -1,92 +1,72 @@
-Modal : 19.56 $ dépensés ce mois-ci (plafond 30 $)
+Modal : 21.50 $ dépensés ce mois-ci (plafond 30 $)
 Casting déjà fait.
-Type de vidéo : gag éclair (~15 s)
-Crédits au départ : Claude secours, Mistral ok, Gemini ok, Groq ok, OpenRouter ok, IA Modal ok, ElevenLabs epuise — IA utilisée : mistral
-Sons TikTok : vidéo tirée des profils @yan_animation0, @eliotlehanneur, @motiontoonz, @same_same53, @charly.bse, @kodanimation, @vignianimation, @vincedessine, @aguerin30, @zequoiza, @jayzocc, @brutuslerobuste, @jawedyoussef
-Réserve de sons : son déjà écouté pris dans la réserve (https://www.tiktok.com/@zequoiza/video/7700741261803736372) : on passe directement à la suite
-  fiche de tournage : gemini-flash-latest n'a pas répondu (HTTP Error 503: Service Unavailable)
-  fiche de tournage : gemini-flash-lite-latest n'a pas répondu (HTTP Error 503: Service Unavailable)
-  fiche de tournage : gemini-3.8-flash n'a pas répondu (HTTP Error 503: Service Unavailable)
-  fiche de tournage : gemini-3.7-flash n'a pas répondu (HTTP Error 503: Service Unavailable)
-  fiche de tournage : gemini-3.6-flash n'a pas répondu (HTTP Error 429: Too Many Requests)
-  fiche de tournage : Gemini surchargé, nouvel essai dans 20 s (tour 2/3)
-  fiche de tournage : gemini-flash-latest n'a pas répondu (HTTP Error 503: Service Unavailable)
-  fiche de tournage : gemini-flash-lite-latest n'a pas répondu (HTTP Error 503: Service Unavailable)
-  fiche de tournage : gemini-3.8-flash n'a pas répondu (HTTP Error 503: Service Unavailable)
-  fiche de tournage : gemini-3.7-flash n'a pas répondu (HTTP Error 429: Too Many Requests)
-  fiche de tournage : gemini-3.6-flash n'a pas répondu (HTTP Error 503: Service Unavailable)
-  fiche de tournage : Gemini surchargé, nouvel essai dans 40 s (tour 3/3)
-  fiche de tournage : gemini-flash-latest n'a pas répondu (HTTP Error 429: Too Many Requests)
-  fiche de tournage : gemini-flash-lite-latest n'a pas répondu (HTTP Error 503: Service Unavailable)
-  fiche de tournage : gemini-3.8-flash n'a pas répondu (HTTP Error 429: Too Many Requests)
-  fiche de tournage : gemini-3.7-flash n'a pas répondu (HTTP Error 429: Too Many Requests)
-  fiche de tournage : gemini-3.6-flash n'a pas répondu (HTTP Error 429: Too Many Requests)
-  fiche de tournage écrite (IA de texte sur le dialogue) : studio_radio (small chaotic radio studio with sports equipment a), soir, chaud, ambiance tristesse, niveau desordre, bruits entendus : crying, scream
-  [équipe · fiche de tournage] ✔ contrôle 1 : règles (cohérence avec ce qui est dit) : panneaux : SPORT ZONE, URGENT: Ballon d -> — (pas d'enseigne dans « studio_radio ») (corrigé)
-    correction : panneaux : SPORT ZONE, URGENT: Ballon d -> — (pas d'enseigne dans « studio_radio »)
-  [équipe · fiche de tournage] ✔ contrôle 2 : 2e IA (autre fournisseur) : repliques.4.emotion : colere -> sceptique (La phrase 'C'est vrai ça. Ce n'était pas le Real Betis, c'était le Real Madrid' est une constatation/ajustement, pas de ); repliques.9.emotion : co (corrigé)
-    correction : repliques.4.emotion : colere -> sceptique (La phrase 'C'est vrai ça. Ce n'était pas le Real Betis, c'était le Real Madrid' est une constatation/ajustement, pas de )
-    correction : repliques.9.emotion : colere -> gene (L'envoyée dit 'Elle me demande de faire des TikTok' en regardant son téléphone avec de nombreuses personnes autour. Ce n)
-  [équipe · fiche de tournage] ✔ contrôle 3 : image de l'original, puis règles : réplique 4 signe : veine -> — (pas cohérent avec l'émotion « sceptique »); réplique 9 signe : veine -> — (pas cohérent avec l'émotion « gene ») (corrigé)
-    correction : réplique 4 signe : veine -> — (pas cohérent avec l'émotion « sceptique »)
-    correction : réplique 9 signe : veine -> — (pas cohérent avec l'émotion « gene »)
-  images : Gemini surchargé, nouvel essai dans 20 s (tour 2/2)
-  jeu du dessin animé : Gemini n'a pas pu lire les expressions (rien de recopié)
-Sketch : « VESTIAIREFOOTDÉFAITE », 11 répliques
-Son TikTok : une seule scène, un seul décor (pas de changement inutile)
-  décor semi-réaliste 0 : budget Modal du mois atteint, décor dessiné
+Type de vidéo : sketch long (+1 min)
+  mistral : mistral 402 : {"object":"error","message":"You need a subscription to access this API.","type":"billing_no_api_budget_configured","param":null,"code":"2314","ra
+  openrouter : openrouter 429 : {"error":{"message":"Rate limit exceeded: free-models-per-day. Add 10 credits to unlock 1000 free model requests per day: https://openrouter.ai
+Crédits au départ : Claude secours, Mistral epuise, Gemini ok, Groq ok, OpenRouter epuise, IA Modal ok, ElevenLabs epuise — IA utilisée : groq
+Remarque comprise : L'auteur signale plusieurs problèmes : sous-titre incorrect, personnage qui bouge mal, bulles de dialogue à scinder, ton inapproprié du passage sur l'abus, manque de bruitages et de musique, désynchro
+Remarque de l'auteur : 1 réplique(s) à rendre à un autre personnage, 13 correction(s) : reaction, reaction, reaction, reaction, bruitage, bruitage, bruitage, bruitage, bruitage, reaction, reaction, reaction, reaction
+Remarque de l'auteur appliquée : rien de précis compris
+  son téléchargé (yt-dlp --impersonate chrome)
+  témoin hauteur : voix à 162 Hz et 240 Hz bien séparées, 16 phrase(s) remise(s) sur la bonne voix : Gros, au baptême de mon neveu. ; Il a 14 mois. ; J'aurais dû prendre une espèce, c'est pl ; Mais t'aurais rien dû prendre du tout. ; T'es alcoolique. ; piscine municipale, t'as rien eu du whis
+  vidéo refaite : 6 réplique(s) qui mélangeaient deux voix coupée(s) en deux
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+    voix corrigée par la hauteur : réplique 24 (Oui,) -> invite
+  [équipe · casting voix] ✔ contrôle par la hauteur de la voix (réplique par réplique) : {'presentateur': 157, 'invite': 230} Hz : 1 réplique(s) remise(s) sur la bonne voix (corrigé)
+  [équipe · casting voix] ✔ dernier contrôle des voix (chaque réplique comparée à la voix moyenne de chaque personnage) : toutes à leur place (voix 0.58)
+  vidéo refaite : 1 réplique(s) remise(s) sur la bonne voix (hauteur et empreinte vocale)
+  son d'origine repris pour 38 répliques (mêmes instants)
+Refaire (compte_rendu) : « ALCOOL ET AMIS », mêmes répliques
+Sketch : « ALCOOL ET AMIS », 38 répliques
+  décor semi-réaliste 0 (lieu déjà connu) : [semi] garden with a swing set, a tree, and a picnic table objects bee
 WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1795537155.253434    3886 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+I0000 00:00:1795723507.276768    3890 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
 WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1795537156.757449    3886 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+I0000 00:00:1795723508.322080    3890 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
 Downloading data from https://github.com/ina-foss/inaSpeechSegmenter/releases/download/models/keras_speech_music_noise_cnn.hdf5
-[1m      0/3244808[0m [37m━━━━━━━━━━━━━━━━━━━━[0m [1m0s[0m 0s/step[1m 622592/3244808[0m [32m━━━[0m[37m━━━━━━━━━━━━━━━━━[0m [1m0s[0m 0us/step[1m3244808/3244808[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 0us/step
+[1m      0/3244808[0m [37m━━━━━━━━━━━━━━━━━━━━[0m [1m0s[0m 0s/step[1m3244808/3244808[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 0us/step
 /home/runner/venv/lib/python3.12/site-packages/keras/src/layers/reshaping/reshape.py:39: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
   super().__init__(**kwargs)
 Downloading data from https://github.com/ina-foss/inaSpeechSegmenter/releases/download/models/keras_male_female_cnn.hdf5
-[1m      0/6040200[0m [37m━━━━━━━━━━━━━━━━━━━━[0m [1m0s[0m 0s/step[1m 589824/6040200[0m [32m━[0m[37m━━━━━━━━━━━━━━━━━━━[0m [1m0s[0m 0us/step[1m6040200/6040200[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 0us/step
+[1m      0/6040200[0m [37m━━━━━━━━━━━━━━━━━━━━[0m [1m0s[0m 0s/step[1m2686976/6040200[0m [32m━━━━━━━━[0m[37m━━━━━━━━━━━━[0m [1m0s[0m 0us/step[1m6040200/6040200[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 0us/step
 montage : 1 plans (0.1:large>pre/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-studio : soir, lieux ['studio_radio'], tenues presentateur=tshirt, invite=chemise, envoyee=blouse, 0 figurant(s), ambiances ['neon', 'poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 34.4 s, 11 répliques, 1 scène(s), personnages ['presentateur', 'invite', 'envoyee']
+studio : jour, lieux ['jardin'], tenues presentateur=tshirt, invite=chemise, 1 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 63.3 s, 38 répliques, 1 scène(s), personnages ['presentateur', 'invite']
 montage : 1 plans (0.1:large>pre/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-studio : soir, lieux ['studio_radio'], tenues presentateur=tshirt, invite=chemise, envoyee=blouse, 0 figurant(s), ambiances ['neon', 'poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 34.4 s, 11 répliques, 1 scène(s), personnages ['presentateur', 'invite', 'envoyee']
-  dessin partagé : 1 machine(s) d'aide + celle-ci (2 morceaux de ~1031 images)
-  morceau 1031–2062 reçu d'une machine d'aide
-  dessin partagé terminé en 4.6 min
+studio : jour, lieux ['jardin'], tenues presentateur=tshirt, invite=chemise, 1 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 63.3 s, 38 répliques, 1 scène(s), personnages ['presentateur', 'invite']
+  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~949 images)
+  morceau 950–1899 reçu d'une machine d'aide
+  morceau 1899–2848 reçu d'une machine d'aide
+  morceau 2848–3798 reçu d'une machine d'aide
+  dessin partagé terminé en 3.2 min
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-  IA gemini indisponible (gemini 429 : [{
-  "error": {
-    "code": 429,
-    "message": "You exceeded your current quota, please check your plan an) : on passe à la suivante
-Jury : 4 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
-Jury qualité (ia) : 9.9/10 — Humoriste 9.4/10 :  | Réalisateur 10.0/10 :  | Directeur artistique 10.0/10 :  | Ingénieur du son 10.0/10 :  | Spectateur TikTok 9.9/10 : 
-Manque par rapport à la vidéo d'origine : Les expressions faciales des personnages dans l'original (ex. : réaction de surprise ou de colère) ne sont pas toujours capturées dans les dessins. ; Les gestes spécifiques (comme celui de Lamine Yamal qui pointe du doigt ou les mains sur le visage) sont manquants dans certains plans. ; Les changements de personnages (ex. : passage de Lamine Yamal à Hansi Flick) ne sont pas visuellement distincts dans les dessins.
+Jury : 3 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
+Jury qualité (ia) : 7.7/10 — Humoriste 7.8/10 :  | Réalisateur 7.0/10 : 6 s L'écoute du personnage secondaire est un peu neutre. | Directeur artistique 8.0/10 : 1 s Les personnages sont bien dessinés dans un style croquis aquarelle cohérent. | Ingénieur du son 7.8/10 :  | Spectateur TikTok 7.8/10 : 
 fin en boucle : la dernière image se raccorde à la première (0.35 s de fondu)
-  [vidéo finie · synchro] décalage mesuré -0.28 s (mesure seulement : le son n'est jamais déplacé)
   [vidéo finie · synchro] ✔ bouches du bon personnage
   [vidéo finie · bouches] ✔ bouche immobile quand le personnage se tait
   [vidéo finie · technique] ✔ sauts, clignotements, personnages (0 remarque(s))
-  transcription Groq (Whisper, gratuit) : 112 mots
-  karaoké contrôlé à l'oreille : 83 mots, écart médian 0.06 s
-  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 77 %)
-  [vidéo finie · contrôle IA] 2 remarque(s)
+  transcription Groq (Whisper, gratuit) : 234 mots
+  karaoké contrôlé à l'oreille : 180 mots, écart médian 0.05 s
+  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 81 %)
+  [vidéo finie · contrôle IA] 0 remarque(s)
   [vidéo finie · voix et dessin] ✔ chaque réplique sur la bonne voix, homme / femme d'après la voix
   [vidéo finie · attribution] ✔ qui dit chaque phrase, comparé à l'image de l'original
   contrôles qui n'ont pas pu se faire : fidélité à l'audio (Gemini n'a pas répondu), qui parle d'après l'image de l'original (image illisible) (note de confiance plafonnée)
-  4 remarque(s) légère(s) gardée(s) au journal seulement : 10.2 s on entend « ouais, il a perdu. » sans sous-titre ; 27.2 s sous-titre « Qu'il y a l'air. Qui des autres là. E ; 29.5 s sous-titre « Tellement de monde, s'il te plaît ! » ; 30.6 s on entend « plaisais de nous » sans sous-titre
-Contrôle de la vidéo finie : 2 point(s) à vérifier — 17.0 s Aucun problème de découpage ou de déformation n'est visible. ; 25.0 s Aucun problème de découpage ou de déformation n'est visible.
-Compte rendu (tour 1, confiance 64/100) : corrections demandées au robot :
-- à 17.0 s : Aucun problème de découpage ou de déformation n'est visible.
-- à 25.0 s : Aucun problème de découpage ou de déformation n'est visible.
-Remarque comprise : L'auteur ne signale aucun problème de découpage ou de déformation aux instants 17.0 s et 25.0 s, donc aucune correction à faire.
-Remarque de l'auteur : 0 réplique(s) à rendre à un autre personnage, 0 correction(s) : 
+Contrôle de la vidéo finie : 0 point(s) à vérifier
+Compte rendu (tour 1, confiance 84/100) : corrections demandées au robot :
+- à 6.0 s : L'écoute du personnage secondaire est un peu neutre.
+- à 1.0 s : Les personnages sont bien dessinés dans un style croquis aquarelle cohérent.
+Remarque comprise : L'auteur signale que l'expression du personnage secondaire (invite) est trop neutre autour de 6 s et qu'il apprécie le style de dessin en croquis aquarelle.
+Remarque de l'auteur : 0 réplique(s) à rendre à un autre personnage, 1 correction(s) : reaction
 Compte rendu : rien que le robot sache corriger lui-même
 Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = ok, gemini = ok, groq = ok, ia = mistral ×3, groq ×2, appels = {'mistral': 3, 'groq': 2}, epuisees = ['gemini'], quota = {'groq': {'reste_jour': 999, 'limite_jour': 1000}}, voix = tiktok, decors = dessines, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 31817, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0, 'total_usd': 0.0, 'modal_mesure_usd': 0.06}
-⏱️ Temps par étape : Installation de la machine 1.7 min, Démarrage du robot 0.2 min, Écoute du son TikTok 2.4 min, Décors 0.0 min, Dessin des images 5.6 min, Contrôle qualité par le jury 4.7 min, Contrôle de la vidéo finie 0.5 min, Corrections du compte rendu 0.3 min
-Quota de l'API GitHub : 4710 appels restants
-OK : sortie/2026-11-24_17h19_emission.mp4 (35 s)
+Outils utilisés : claude = secours, mistral = epuise, gemini = ok, groq = ok, ia = groq ×2, gemini ×2, appels = {'groq': 2, 'gemini': 2}, epuisees = ['mistral', 'openrouter'], quota = {'groq': {'reste_jour': 999, 'limite_jour': 1000}}, voix = tiktok, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 18131, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0, 'total_usd': 0.0, 'modal_mesure_usd': 0.0}
+⏱️ Temps par étape : Installation de la machine 1.3 min, Démarrage du robot 0.3 min, Écoute du son TikTok 0.3 min, Décors 0.0 min, Dessin des images 4.5 min, Contrôle qualité par le jury 2.7 min, Contrôle de la vidéo finie 0.6 min, Corrections du compte rendu 0.4 min
+Vidéo refaite : 2026-11-26_21h05_emission.mp4 remplace 2026-11-02_15h10_emission.mp4 dans la liste (confiance 60 → 84) ; sa place « À publier » est gardée
+Quota de l'API GitHub : 4942 appels restants
+OK : sortie/2026-11-26_21h05_emission.mp4 (64 s)
