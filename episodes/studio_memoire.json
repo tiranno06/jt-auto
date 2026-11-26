@@ -7416,12 +7416,12 @@
   "cadence": "rapide"
  },
  {
-  "moment": "jour",
+  "moment": "soir",
   "lieux": [
-   "jardin"
+   "chambre"
   ],
   "source": "auteur+image",
-  "duree": 63.3,
+  "duree": 65.7,
   "plans": {
    "large": 38
   },
@@ -7432,18 +7432,21 @@
    "presentateur": "tshirt",
    "invite": "chemise"
   },
-  "figurants": 1,
-  "ambiances": [],
-  "controle": "Humoriste 7.6/10 :  | Réalisateur 6.8/10 :  | Directeur artistique 6.0/10 : 0.4 s Les personnages manquent un peu de personnalité visuelle propre au style sketch. | Ingénieur du son 7.0/10 :  | Specta",
-  "fichier": "2026-11-26_21h19_emission.mp4",
+  "figurants": 0,
+  "ambiances": [
+   "neon",
+   "poussiere"
+  ],
+  "controle": "Humoriste 7.0/10 : 52.3 s Manque d'intensité au moment de la découverte de la PlayStation par les cambrioleurs. | Réalisateur 8.0/10 :  | Directeur artistique 7.0/10 : 12.8 s L'invité est en sous-vête",
+  "fichier": "2026-11-26_21h18_emission.mp4",
   "cine": {
    "focus": false,
    "vertige": true,
    "tiers": true,
-   "etalonnage": false,
-   "profondeur": true,
+   "etalonnage": true,
+   "profondeur": false,
    "grain": true,
-   "reflets": true,
+   "reflets": false,
    "son": true
   },
   "cadence": "rapide"
