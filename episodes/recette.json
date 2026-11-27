@@ -1,41 +1,41 @@
 {
- "moyenne": 486,
- "videos": 50,
+ "moyenne": 482,
+ "videos": 51,
  "plus": [
   {
    "critere": "Lieu",
    "valeur": "voiture",
-   "vues": 1227,
+   "vues": 1230,
    "n": 3,
-   "fois": 2.53
+   "fois": 2.55
+  },
+  {
+   "critere": "Créneau",
+   "valeur": "habituel",
+   "vues": 1096,
+   "n": 4,
+   "fois": 2.27
   },
   {
    "critere": "Couverture",
    "valeur": "la chute",
-   "vues": 708,
-   "n": 7,
-   "fois": 1.46
-  },
-  {
-   "critere": "Profil du son",
-   "valeur": "@yan_animation0",
-   "vues": 656,
+   "vues": 657,
    "n": 8,
-   "fois": 1.35
+   "fois": 1.36
   },
   {
    "critere": "Heure de publication",
    "valeur": "après-midi",
    "vues": 628,
    "n": 3,
-   "fois": 1.29
+   "fois": 1.3
   },
   {
-   "critere": "Durée",
-   "valeur": "plus de 70 s",
-   "vues": 584,
-   "n": 24,
-   "fois": 1.2
+   "critere": "Profil du son",
+   "valeur": "@yan_animation0",
+   "vues": 616,
+   "n": 9,
+   "fois": 1.28
   }
  ],
  "moins": [
@@ -49,32 +49,32 @@
   {
    "critere": "Heure de publication",
    "valeur": "soir",
-   "vues": 282,
-   "n": 8,
-   "fois": 0.58
+   "vues": 283,
+   "n": 9,
+   "fois": 0.59
   },
   {
    "critere": "Couverture",
    "valeur": "le début",
-   "vues": 283,
+   "vues": 284,
    "n": 5,
-   "fois": 0.58
+   "fois": 0.59
   },
   {
-   "critere": "Lieu",
-   "valeur": "rue",
-   "vues": 292,
-   "n": 6,
-   "fois": 0.6
+   "critere": "Créneau",
+   "valeur": "🌍 francophonie (21 h et plus)",
+   "vues": 282,
+   "n": 3,
+   "fois": 0.59
   }
  ],
  "par": {
   "profil": [
    [
     "@yan_animation0",
-    656,
-    8,
-    1.35
+    616,
+    9,
+    1.28
    ],
    [
     "@vignianimation",
@@ -86,23 +86,23 @@
     "@eliotlehanneur",
     434,
     5,
-    0.89
+    0.9
    ],
    [
     "@same_same53",
     419,
     6,
-    0.86
+    0.87
    ],
    [
     "@charly.bse",
     414,
     5,
-    0.85
+    0.86
    ],
    [
     "@motiontoonz",
-    387,
+    388,
     5,
     0.8
    ]
@@ -110,21 +110,21 @@
   "duree": [
    [
     "plus de 70 s",
-    584,
-    24,
-    1.2
+    572,
+    25,
+    1.19
    ],
    [
     "20 à 40 s",
-    482,
+    483,
     5,
-    0.99
+    1.0
    ],
    [
     "40 à 70 s",
-    355,
+    356,
     20,
-    0.73
+    0.74
    ]
   ],
   "heure": [
@@ -132,55 +132,55 @@
     "après-midi",
     628,
     3,
-    1.29
+    1.3
    ],
    [
     "matin",
-    527,
+    528,
     22,
-    1.09
+    1.1
    ],
    [
     "soir",
-    282,
-    8,
-    0.58
+    283,
+    9,
+    0.59
    ]
   ],
   "lieu": [
    [
     "voiture",
-    1227,
+    1230,
     3,
-    2.53
+    2.55
    ],
    [
     "salon",
-    384,
+    385,
     4,
-    0.79
+    0.8
    ],
    [
     "rue",
     292,
-    6,
-    0.6
+    7,
+    0.61
    ]
   ],
   "animal": [
    [
     "non",
-    462,
-    18,
-    0.95
+    453,
+    19,
+    0.94
    ]
   ],
   "persos": [
    [
     "2 personnages",
-    500,
-    15,
-    1.03
+    488,
+    16,
+    1.01
    ],
    [
     "3 personnages",
@@ -192,37 +192,43 @@
   "couverture": [
    [
     "la chute",
-    708,
-    7,
-    1.46
+    657,
+    8,
+    1.36
    ],
    [
     "la réaction",
-    322,
+    323,
     6,
-    0.66
+    0.67
    ],
    [
     "le début",
-    283,
+    284,
     5,
-    0.58
+    0.59
    ]
   ],
   "partie": [
    [
     "non",
-    462,
-    18,
-    0.95
+    453,
+    19,
+    0.94
    ]
   ],
   "creneau": [
    [
     "habituel",
-    1093,
+    1096,
     4,
-    2.25
+    2.27
+   ],
+   [
+    "🌍 francophonie (21 h et plus)",
+    282,
+    3,
+    0.59
    ]
   ]
  },
@@ -230,13 +236,27 @@
   "Créneau": [
    [
     "habituel",
-    1093,
+    1096,
     4
    ],
    [
     "🌍 francophonie (21 h et plus)",
-    279,
-    2
+    282,
+    3
+   ]
+  ],
+  "Sous-titres": [
+   [
+    "français + anglais",
+    286,
+    1
+   ]
+  ],
+  "Carton de fin": [
+   [
+    "avec « Abonne-toi »",
+    286,
+    1
    ]
   ]
  },
@@ -246,58 +266,58 @@
   "videos": [
    [
     "DATE AVEC LA MÈRE DU POTE",
-    2879,
+    2887,
     "2026-11-15_22h43_emission.mp4"
    ]
   ],
   "communs": []
  },
- "maj": "2026-11-26T20:17+00:00",
+ "maj": "2026-11-27T02:57+00:00",
  "mots": {
-  "audio": 0.71
+  "audio": 0.73
  },
  "hashtags": {
-  "animation": 1.02,
   "humour": 0.94,
-  "comedie": 0.61,
-  "travail": 0.77,
-  "bureau": 0.78,
-  "entretien": 0.56,
-  "sketch": 0.68,
-  "dessinanime": 0.77,
-  "cartoon": 0.67,
-  "viedebureau": 0.8,
   "drole": 0.78,
+  "bureau": 0.78,
+  "animation": 1.01,
+  "cartoon": 0.67,
+  "dessinanime": 0.76,
+  "viedebureau": 0.8,
+  "entretien": 0.57,
+  "sketch": 0.69,
+  "travail": 0.78,
+  "comedie": 0.62,
   "petitsdramas": 0.9,
+  "couple": 1.11,
   "relation": 0.77,
-  "couple": 1.1,
-  "amour": 1.09,
   "food": 0.85,
   "nourriture": 0.85,
-  "sante": 0.96,
-  "medecin": 0.96,
-  "fyp": 0.96,
+  "amour": 1.1,
+  "medecin": 0.97,
+  "sante": 0.97,
   "pourtoi": 0.78,
-  "doublage": 0.82,
-  "argent": 0.69,
-  "pov": 1.79,
+  "argent": 0.7,
+  "fyp": 0.97,
+  "doublage": 0.8,
+  "famille": 1.19,
+  "pov": 1.81,
   "freresoeur": 1.02,
-  "famille": 1.23,
-  "parentsvsenfants": 1.24,
-  "humournoir": 0.53,
-  "parents": 1.24,
+  "parentsvsenfants": 1.25,
+  "parents": 1.25,
+  "humournoir": 0.54,
   "permis": 0.62,
   "voiture": 0.62,
-  "ecole": 2.35,
-  "eleves": 2.35,
-  "prof": 2.35,
-  "lycee": 2.35,
-  "amitie": 0.55,
-  "bff": 0.55,
-  "potes": 0.55,
+  "ecole": 2.37,
+  "prof": 2.37,
+  "lycee": 2.37,
+  "eleves": 2.37,
+  "potes": 0.56,
+  "amitie": 0.56,
+  "bff": 0.56,
+  "reseauxsociaux": 0.74,
   "gene": 0.73,
-  "malaise": 1.59,
-  "telephone": 0.69,
-  "reseauxsociaux": 0.73
+  "telephone": 0.7,
+  "malaise": 1.61
  }
 }
