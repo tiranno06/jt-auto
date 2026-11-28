@@ -1,0 +1,363 @@
+{
+ "titre": "ATTENDS… REGARDE LE COMPTEUR…",
+ "sujet": "ATTENDS… REGARDE LE COMPTEUR…",
+ "ecran": "ATTENDS…",
+ "invite_nom": "Hubert Rustine",
+ "invite_role": "Expert (fictif)",
+ "invite_look": "chauve",
+ "lieu_direct": "Assemblée",
+ "titre_accroche": "What should our next daily story be?",
+ "question": "What should our next daily story be?",
+ "running_gag": "",
+ "verite": "",
+ "repliques": [
+  {
+   "p": "narrateur",
+   "t": "What should our next daily story be?",
+   "d": "[excited] What should our next daily story be?"
+  },
+  {
+   "p": "presentateur",
+   "t": "Attends… regarde le compteur… on est 500 ?!"
+  },
+  {
+   "p": "envoyee",
+   "t": "500 abonnés ! Mais c'est énorme !"
+  },
+  {
+   "p": "invite",
+   "t": "Franchement, merci à vous tous, vraiment."
+  },
+  {
+   "p": "presentateur",
+   "t": "Allez, on continue : une nouvelle histoire chaque jour !",
+   "chute": true
+  }
+ ],
+ "bandeau": [],
+ "gag": null,
+ "legende": "The team celebrates reaching 500 followers and promises daily stories.",
+ "hashtags": [
+  "petitsdramas",
+  "animation",
+  "milestone",
+  "subscribers",
+  "community",
+  "growth"
+ ],
+ "sources": [],
+ "decoupage": [
+  {
+   "scene": "1",
+   "repliques": [
+    1,
+    2,
+    3
+   ],
+   "lieu": "",
+   "son": "",
+   "duree": 0.0,
+   "decor": "Streaming studio, desk, computer monitor, subscriber counter"
+  },
+  {
+   "scene": "2",
+   "repliques": [
+    4
+   ],
+   "lieu": "",
+   "son": "",
+   "duree": 0.0,
+   "decor": "Creative corner, whiteboard, markers, sticky notes",
+   "titre": "Next Chapter"
+  }
+ ],
+ "fiche": {
+  "note": 0,
+  "decision": "vidéo manuelle (script imposé)",
+  "decoupage": [
+   {
+    "scene": "1",
+    "repliques": [
+     1,
+     2,
+     3
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 0.0,
+    "decor": "Streaming studio, desk, computer monitor, subscriber counter"
+   },
+   {
+    "scene": "2",
+    "repliques": [
+     4
+    ],
+    "lieu": "",
+    "son": "",
+    "duree": 0.0,
+    "decor": "Creative corner, whiteboard, markers, sticky notes",
+    "titre": "Next Chapter"
+   }
+  ]
+ },
+ "_decors_semi": [
+  0,
+  1
+ ],
+ "_decors_cles": {
+  "0": "56173aad0ed86415",
+  "1": "56173aad0ed86415"
+ },
+ "_voix_hz": {
+  "presentateur": 131,
+  "narrateur": 202,
+  "invite": 144,
+  "envoyee": 181
+ },
+ "_voix_genre": {
+  "presentateur": "h",
+  "invite": "h"
+ },
+ "_voix_timbre": {
+  "presentateur": 1000,
+  "invite": 1003,
+  "envoyee": 869
+ },
+ "_voix_mesuree": [
+  "presentateur",
+  "invite",
+  "envoyee"
+ ],
+ "_voix_vtl": {
+  "presentateur": 17.85,
+  "invite": 17.03,
+  "envoyee": 17.05
+ },
+ "_voix_vtl_genre": {
+  "presentateur": "h",
+  "invite": "h",
+  "envoyee": "h"
+ },
+ "_voix_timbre_genre": {
+  "presentateur": "h",
+  "invite": "h",
+  "envoyee": "h"
+ },
+ "_casting_final": {
+  "presentateur": {
+   "fiche": {
+    "genre": "h",
+    "age": 32,
+    "corpulence": 0.24502496428816758,
+    "taille": 0.997825632391459,
+    "peau": [
+     130,
+     86,
+     58
+    ],
+    "visage": "carre",
+    "iris": [
+     110,
+     75,
+     45
+    ],
+    "yeux": 1.0669393534199787,
+    "nez": "fort",
+    "levres": 0.8997990131033908,
+    "sourcils": 1.43679463666544,
+    "cheveux": "court_texture",
+    "c_cheveux": [
+     30,
+     24,
+     22
+    ],
+    "barbe": "bouc",
+    "lunettes": "rondes",
+    "maquillage": false
+   },
+   "costume": {
+    "haut": "chemise",
+    "c_haut": [
+     150,
+     90,
+     170
+    ],
+    "motif": "rayures",
+    "c_motif": [
+     108,
+     64,
+     122
+    ],
+    "bas": "pantalon",
+    "c_bas": [
+     150,
+     130,
+     100
+    ],
+    "chaussures": "baskets",
+    "c_chaussures": [
+     200,
+     200,
+     205
+    ],
+    "details": [
+     "montre"
+    ]
+   }
+  },
+  "envoyee": {
+   "fiche": {
+    "genre": "f",
+    "age": 32,
+    "corpulence": 0.39728966782440023,
+    "taille": 0.96990254972943,
+    "peau": [
+     246,
+     205,
+     172
+    ],
+    "visage": "carre",
+    "iris": [
+     80,
+     130,
+     90
+    ],
+    "yeux": 1.0407101837420696,
+    "nez": "droit",
+    "levres": 1.171128123383547,
+    "sourcils": 1.1315087800913919,
+    "cheveux": "long",
+    "c_cheveux": [
+     62,
+     42,
+     30
+    ],
+    "barbe": "",
+    "lunettes": "",
+    "maquillage": true
+   },
+   "costume": {
+    "haut": "tshirt",
+    "c_haut": [
+     60,
+     150,
+     160
+    ],
+    "motif": "uni",
+    "c_motif": [
+     43,
+     108,
+     115
+    ],
+    "bas": "jupe",
+    "c_bas": [
+     40,
+     40,
+     48
+    ],
+    "chaussures": "ballerines",
+    "c_chaussures": [
+     240,
+     180,
+     60
+    ],
+    "details": [
+     "logo"
+    ]
+   }
+  },
+  "invite": {
+   "fiche": {
+    "genre": "h",
+    "age": 48,
+    "corpulence": 0.3724323958371834,
+    "taille": 1.0846501766311922,
+    "peau": [
+     234,
+     186,
+     146
+    ],
+    "visage": "carre",
+    "iris": [
+     120,
+     120,
+     110
+    ],
+    "yeux": 0.9059263997371129,
+    "nez": "fort",
+    "levres": 1.0523222283480709,
+    "sourcils": 1.3507015523350683,
+    "cheveux": "degarni",
+    "c_cheveux": [
+     104,
+     70,
+     44
+    ],
+    "barbe": "",
+    "lunettes": "rectangle",
+    "maquillage": false
+   },
+   "costume": {
+    "haut": "tshirt",
+    "c_haut": [
+     200,
+     60,
+     60
+    ],
+    "motif": "uni",
+    "c_motif": [
+     144,
+     43,
+     43
+    ],
+    "bas": "jean",
+    "c_bas": [
+     150,
+     130,
+     100
+    ],
+    "chaussures": "ville",
+    "c_chaussures": [
+     50,
+     35,
+     25
+    ],
+    "details": [
+     "logo"
+    ]
+   }
+  }
+ },
+ "_type_couverture": "chute",
+ "realisation": {
+  "moment": "jour",
+  "lieux": [
+   "salon",
+   "salon"
+  ],
+  "gags": [],
+  "ambiances": [],
+  "source": "robot",
+  "tenues": {
+   "presentateur": "chemise",
+   "envoyee": "tshirt",
+   "invite": "tshirt"
+  },
+  "plans": [
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe",
+   "large/fixe"
+  ]
+ },
+ "_recette": {
+  "lieu": "salon",
+  "animal": false,
+  "persos": 3,
+  "partie": false
+ },
+ "_controles_sautes": [
+  "fidélité à l'audio (Gemini n'a pas répondu)"
+ ]
+}

@@ -1,153 +1,83 @@
-Modal : 21.50 $ dépensés ce mois-ci (plafond 30 $)
+Modal : 22.45 $ dépensés ce mois-ci (plafond 30 $)
 Casting déjà fait.
-Type de vidéo : sketch long (+1 min)
+Type de vidéo : gag éclair (~15 s)
   mistral : mistral 402 : {"object":"error","message":"You need a subscription to access this API.","type":"billing_no_api_budget_configured","param":null,"code":"2314","ra
-  openrouter : openrouter 429 : {"error":{"message":"Rate limit exceeded: free-models-per-day. Add 10 credits to unlock 1000 free model requests per day: https://openrouter.ai
-Crédits au départ : Claude secours, Mistral epuise, Gemini ok, Groq ok, OpenRouter epuise, IA Modal ok, ElevenLabs epuise — IA utilisée : groq
-Remarque comprise : L'auteur signale des sous‑titres incorrects, des bulles de dialogue à couper, des personnages mal placés, un manque de réactions, des sous‑titres illisibles, un mauvais synchronisation lèvres‑voix et 
-Remarque de l'auteur : 0 réplique(s) à rendre à un autre personnage, 26 correction(s) : reaction, reaction, reaction, reaction, reaction, reaction, reaction, reaction, reaction, reaction, reaction, reaction, reaction, reaction, reaction, reaction, bruitage, bruitage, bruitage, jeu, jeu, jeu, jeu, reaction, reaction, reaction
-Remarque de l'auteur appliquée : rien de précis compris
-  son téléchargé (yt-dlp --impersonate chrome)
-Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-  [équipe · casting voix] ✔ contrôle par la hauteur de la voix (réplique par réplique) : {'presentateur': 171, 'invite': 256} Hz : toutes du bon côté
-  [équipe · casting voix] ✔ dernier contrôle des voix (chaque réplique comparée à la voix moyenne de chaque personnage) : 1 réplique(s) remise(s) sur la bonne voix (corrigé) : réplique 34 (Vous allez prendre la play.) -> presentateur (écart 0.14)
-    voix corrigée : réplique 34 (Vous allez prendre la play.) -> presentateur (écart 0.14)
-  vidéo refaite : 1 réplique(s) remise(s) sur la bonne voix (hauteur et empreinte vocale)
-  son d'origine repris pour 38 répliques (mêmes instants)
-Refaire (compte_rendu) : « CAMBRIOLAGE ABSURDE », mêmes répliques
-Sketch : « CAMBRIOLAGE ABSURDE », 38 répliques
-  décor semi-réaliste 0 (lieu déjà connu) : [semi] messy bedroom, unmade bed with duvet and pillows, bedside table
-WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1795724336.770046    3881 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
-WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1795724337.743687    3881 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
-Downloading data from https://github.com/ina-foss/inaSpeechSegmenter/releases/download/models/keras_speech_music_noise_cnn.hdf5
-[1m      0/3244808[0m [37m━━━━━━━━━━━━━━━━━━━━[0m [1m0s[0m 0s/step[1m2547712/3244808[0m [32m━━━━━━━━━━━━━━━[0m[37m━━━━━[0m [1m0s[0m 0us/step[1m3244808/3244808[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 0us/step
-/home/runner/venv/lib/python3.12/site-packages/keras/src/layers/reshaping/reshape.py:39: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
-  super().__init__(**kwargs)
-Downloading data from https://github.com/ina-foss/inaSpeechSegmenter/releases/download/models/keras_male_female_cnn.hdf5
-[1m      0/6040200[0m [37m━━━━━━━━━━━━━━━━━━━━[0m [1m0s[0m 0s/step[1m3031040/6040200[0m [32m━━━━━━━━━━[0m[37m━━━━━━━━━━[0m [1m0s[0m 0us/step[1m6040200/6040200[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 0us/step
-montage : 1 plans (0.1:large>pre/coupe)
+Crédits au départ : Claude secours, Mistral epuise, Gemini ok, Groq ok, OpenRouter ok, IA Modal ok, ElevenLabs epuise — IA utilisée : groq
+Vidéo manuelle (script) : « Jojo : Attends… regarde le compteur… on est 500 ?!
+Lila : 500 abonnés ! Mais c'est énorme !
+Kévin : Franchement, merci à vous tous, vraiment.
+Jojo : Allez, on continue : une nouvelle histoire chaque j »
+  script mis en scène : 4 répliques, 2 scène(s)
+Sketch : « ATTENDS… REGARDE LE COMPTEUR… », 4 répliques
+Accroche (question) : « What should our next daily story be? »
+Casting des voix (sources : kyutai,chatterbox)…
+  kyutai     cml-tts/fr/10087_11650_000028-0002_enh genre f f0   206 {'sim': 1.0, 'blanc': 0.06, 'debit': 0.83, 'mos': 2.88, 'expr': 2.6} OK score 6.74
+  kyutai     cml-tts/fr/10177_10625_000134-0003_enh genre f f0   179 {'sim': 1.0, 'blanc': 0.18, 'debit': 0.79, 'mos': 2.55, 'expr': 4.1} refusée score 6.69
+  kyutai     cml-tts/fr/10179_11051_000005-0001_enh genre f f0   286 {'sim': 1.0, 'blanc': 0.06, 'debit': 0.88, 'mos': 2.63, 'expr': 2.5} OK score 6.41
+  kyutai     cml-tts/fr/12080_11650_000047-0001_enh genre f f0   232 {'sim': 1.0, 'blanc': 0.06, 'debit': 0.7, 'mos': 2.19, 'expr': 3.2} refusée score 5.76
+  kyutai     cml-tts/fr/12205_11650_000004-0002_enh genre f f0   198 {'sim': 1.0, 'blanc': 0.18, 'debit': 0.77, 'mos': 3.05, 'expr': 3.7} OK score 7.30
+  kyutai     cml-tts/fr/12977_10625_000037-0001_enh genre f f0   218 {'sim': 1.0, 'blanc': 0.06, 'debit': 0.77, 'mos': 2.39, 'expr': 3.9} refusée score 6.38
+  kyutai     cml-tts/fr/1406_1028_000009-0003_enhan genre h f0   108 {'sim': 1.0, 'blanc': 0.1, 'debit': 0.79, 'mos': 3.06, 'expr': 3.2} OK score 7.19
+  kyutai     cml-tts/fr/1591_1028_000108-0004_enhan genre f f0   223 {'sim': 1.0, 'blanc': 0.06, 'debit': 0.72, 'mos': 2.06, 'expr': 2.8} refusée score 5.45
+  kyutai     cml-tts/fr/1770_1028_000036-0002_enhan genre h f0   147 {'sim': 1.0, 'blanc': 0.08, 'debit': 0.72, 'mos': 2.64, 'expr': 4.2} OK score 6.73
+  kyutai     cml-tts/fr/2114_1656_000053-0001_enhan genre h f0   130 {'sim': 1.0, 'blanc': 0.12, 'debit': 0.97, 'mos': 2.96, 'expr': 4.1} OK score 7.51
+  kyutai     cml-tts/fr/2154_2576_000020-0003_enhan genre f f0   200 {'sim': 1.0, 'blanc': 0.1, 'debit': 0.94, 'mos': 2.58, 'expr': 3.2} refusée score 6.63
+  kyutai     cml-tts/fr/2216_1745_000007-0001_enhan genre h f0   125 {'sim': 1.0, 'blanc': 0.0, 'debit': 0.79, 'mos': 2.94, 'expr': 5.0} OK score 7.27
+  kyutai     cml-tts/fr/2223_1745_000009-0002_enhan genre h f0   115 {'sim': 1.0, 'blanc': 0.08, 'debit': 0.88, 'mos': 3.0, 'expr': 3.7} OK score 7.37
+  kyutai     cml-tts/fr/2465_1943_000152-0002_enhan genre f f0   206 {'sim': 1.0, 'blanc': 0.08, 'debit': 0.76, 'mos': 2.78, 'expr': 2.1} OK score 6.32
+  kyutai     cml-tts/fr/296_1028_000022-0001_enhanc genre h f0   140 {'sim': 1.0, 'blanc': 0.08, 'debit': 0.93, 'mos': 3.34, 'expr': 2.7} OK score 7.57
+  kyutai     cml-tts/fr/3267_1902_000075-0001_enhan genre f f0   235 {'sim': 1.0, 'blanc': 0.08, 'debit': 0.81, 'mos': 2.64, 'expr': 3.4} OK score 6.64
+  chatterbox presentateur                           genre h f0   134 {'sim': 1.0, 'blanc': 0.08, 'debit': 0.82, 'mos': 2.56, 'expr': 4.1} refusée score 6.04
+  chatterbox invite                                 genre h f0    84 {'sim': 1.0, 'blanc': 0.02, 'debit': 0.71, 'mos': 2.67, 'expr': 8.9} OK score 6.06
+  chatterbox envoyee                                genre f f0   195 {'sim': 1.0, 'blanc': 0.18, 'debit': 0.78, 'mos': 2.31, 'expr': 2.1} refusée score 4.95
+  -> presentateur : kyutai:cml-tts/fr/296_1028_000022-0001_enhanced.wav, kyutai:cml-tts/fr/2114_1656_000053-0001_enhanced.wav, kyutai:cml-tts/fr/2223_1745_000009-0002_enhanced.wav
+  -> invite : kyutai:cml-tts/fr/2223_1745_000009-0002_enhanced.wav, kyutai:cml-tts/fr/2114_1656_000053-0001_enhanced.wav, kyutai:cml-tts/fr/1406_1028_000009-0003_enhanced.wav
+  -> envoyee : kyutai:cml-tts/fr/12205_11650_000004-0002_enhanced.wav, kyutai:cml-tts/fr/10087_11650_000028-0002_enhanced.wav, kyutai:cml-tts/fr/3267_1902_000075-0001_enhanced.wav
+  voix sur mesure des personnages en remplaçantes
+  voix 2 (envoyee, kyutai:cml-tts/fr/12205_11650_000004-, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.21, 'mos': 3.18} OK
+  voix 3 (invite, kyutai:cml-tts/fr/2223_1745_000009-00, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.94, 'mos': 3.2} OK
+    elevenlabs PjAkkDaPt1wolu0EMUTN : HTTP 401 {"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 10000. You have 0 credits remaining, while 10 credits are required for this request.","status"
+    ElevenLabs indisponible (crédit ou accès) : passage aux voix gratuites
+  narrateur : la voix elevenlabs:PjAkkDaPt1wolu0EMUTN échoue, passage à la voix de remplacement
+  voix 0 (narrateur, kyutai:cml-tts/fr/10087_11650_000028-, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.12, 'mos': 4.13} OK
+  voix 1 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 1.08, 'mos': 2.98} OK
+  voix 4 (presentateur, kyutai:cml-tts/fr/296_1028_000022-000, prise 1) {'sim': 1.0, 'blanc': 0.0, 'debit': 0.74, 'mos': 3.44} OK
+Voix : Kyutai TTS (CC BY 4.0), voix CML-TTS (CC BY 4.0)
+Personnages distingués : invite : haut d'une autre couleur
+  décor semi-réaliste 0 (lieu déjà connu) : [semi] cozy living room, sofa, posters on the wall, coffee table, lamp
+  décor semi-réaliste 1 (lieu déjà connu) : [semi] cozy living room, sofa, posters on the wall, coffee table, lamp
+Personnages distingués : invite : haut d'une autre couleur
+  inaSpeechSegmenter indisponible (No module named 'inaSpeechSegmenter')
+Personnages distingués : invite : haut d'une autre couleur
+montage : 2 plans (0.1:large>nar/coupe 11.5:large>pre/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-studio : soir, lieux ['chambre'], tenues presentateur=tshirt, invite=chemise, 0 figurant(s), ambiances ['neon', 'poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 65.7 s, 38 répliques, 1 scène(s), personnages ['presentateur', 'invite']
-montage : 1 plans (0.1:large>pre/coupe)
+studio : jour, lieux ['salon', 'salon'], tenues presentateur=chemise, envoyee=tshirt, invite=tshirt, 0 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 17.5 s, 5 répliques, 2 scène(s), personnages ['presentateur', 'envoyee', 'invite']
+Personnages distingués : invite : haut d'une autre couleur
+montage : 2 plans (0.1:large>nar/coupe 11.5:large>pre/coupe)
 style croquis : décors passés à l'encre et à l'aquarelle
-studio : soir, lieux ['chambre'], tenues presentateur=tshirt, invite=chemise, 0 figurant(s), ambiances ['neon', 'poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 65.7 s, 38 répliques, 1 scène(s), personnages ['presentateur', 'invite']
-  dessin partagé : 3 machine(s) d'aide + celle-ci (4 morceaux de ~986 images)
-  morceau 986–1972 reçu d'une machine d'aide
-  morceau 1972–2958 reçu d'une machine d'aide
-  morceau 2958–3944 reçu d'une machine d'aide
-  dessin partagé terminé en 4.1 min
+studio : jour, lieux ['salon', 'salon'], tenues presentateur=chemise, envoyee=tshirt, invite=tshirt, 0 figurant(s), ambiances [] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe
+cartoon : durée 17.5 s, 5 répliques, 2 scène(s), personnages ['presentateur', 'envoyee', 'invite']
+  image 300/1050 (4 processeurs)
+  image 600/1050
+  image 900/1050
 Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-Jury : 1 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
-Jury qualité (ia) : 7.5/10 — Humoriste 7.0/10 : 52.3 s Manque d'intensité au moment de la découverte de la PlayStation par les cambrioleurs. | Réalisateur 8.0/10 :  | Directeur artistique 7.0/10 : 12.8 s L'invité est en sous-vêtements (caleçon), un haut de pyjama ou t-shirt renforcerait la cohérence visuelle d'un cambriolage matinal. | Ingénieur du son 8.0/10 :  | Spectateur TikTok 7.8/10 : 
+Jury qualité (ia) : 6.0/10 — Humoriste 6.0/10 : 3.7 s La réaction face aux 500 abonnés manque d'intensité comique. | Réalisateur 6.0/10 : 12.7 s Le présentateur manque d'expressivité au moment de conclure. | Directeur artistique 5.0/10 : 0.4 s Les tenues se ressemblent trop entre les différents personnages. | Ingénieur du son 7.0/10 : 6.6 s Il manque un petit effet sonore dynamique lors de l'annonce des 500 abonnés. | Spectateur TikTok 6.0/10 : 0.4 s L'accroche initiale gagnerait à fixer directement le spectateur des yeux.
 fin en boucle : la dernière image se raccorde à la première (0.35 s de fondu)
   [vidéo finie · synchro] ✔ bouches du bon personnage
   [vidéo finie · bouches] ✔ bouche immobile quand le personnage se tait
   [vidéo finie · technique] ✔ sauts, clignotements, personnages (0 remarque(s))
-  transcription Groq (Whisper, gratuit) : 312 mots
-  sous-titre « T'es rigole les gars Tranquille les gars » confirmé par Gemini (la 2e transcription s'était trompée)
-  karaoké contrôlé à l'oreille : 182 mots, écart médian 0.06 s
-  [vidéo finie · sous-titres] ✘ sous-titres vérifiés à l'oreille (accord 68 %)
-  [vidéo finie · contrôle IA] 0 remarque(s)
-  [vidéo finie · voix et dessin] ✘ chaque réplique sur la bonne voix, homme / femme d'après la voix : 11 écart(s)
-  [vidéo finie · attribution] ✔ qui dit chaque phrase, comparé à l'image de l'original
-  contrôles qui n'ont pas pu se faire : fidélité à l'audio (Gemini n'a pas répondu), qui parle d'après l'image de l'original (image illisible) (note de confiance plafonnée)
-  3 remarque(s) légère(s) gardée(s) au journal seulement : 5.8 s sous-titre « Oh point tu rigoles, point tu rigoles ; 32.7 s sous-titre « Ouais c'est vrai. » mais on entend «  ; 45.9 s sous-titre « Vas-y raconte pas ta liste. » mais on
-Contrôle de la vidéo finie : 13 point(s) à vérifier — 1.7 s réplique 2 « Oui d'accord, vous m'avez digoté là. » : c'est  ; 9.6 s réplique 6 « Donc vraiment prenez ce que vous voulez, il y a ; 11.9 s réplique 7 « Et il y a l'imprimante aussi là, n'hésite pas à ; 16.0 s réplique 9 « Vas-y vas-y. » : c'est la voix du présentateur, ; 26.8 s réplique 15 « Franchement les gars régalez-vous, moi je suis ; 29.8 s sous-titre « T'es un bon. » mais on entend « essayer de ça s
-Compte rendu (tour 1, confiance 0/100) : corrections demandées au robot :
-- à 29.8 s : sous-titre « T'es un bon. » mais on entend « essayer de ça sert à rien. »
-- à 43.8 s : sous-titre « T'es en bon. » mais on entend « Tu es un bon tu es rigide les gars. »
-- à 52.3 s : Manque d'intensité au moment de la découverte de la PlayStation par les cambrioleurs.
-- à 12.8 s : L'invité est en sous-vêtements (caleçon), un haut de pyjama ou t-shirt renforcerait la cohérence visuelle d'un cambriolage matinal.
-Remarque comprise : L'auteur signale des sous‑titres qui ne correspondent pas à l’audio, un manque d’intensité lors de la découverte de la PlayStation, et une tenue trop légère de l’invité.
-Remarque de l'auteur : 0 réplique(s) à rendre à un autre personnage, 4 correction(s) : reaction, reaction, jeu, costume
-Compte rendu : réplique 2 -> presentateur (voix) ; réplique 6 -> presentateur (voix) ; réplique 7 -> presentateur (voix) ; réplique 9 -> presentateur (voix) ; réplique 15 -> presentateur (voix) ; réplique 17 -> presentateur (voix) ; réplique 20 -> invite (voix) ; réplique 24 -> invite (voix) ; réplique 25 -> presentateur (voix) ; réplique 27 -> presentateur (voix) ; réplique 38 -> invite (voix) ; jeu plus marqué à la réplique 28 ; tenue de invite
-montage : 1 plans (0.1:large>pre/coupe)
-style croquis : décors passés à l'encre et à l'aquarelle
-studio : soir, lieux ['chambre'], tenues presentateur=tshirt, invite=pyjama, 0 figurant(s), ambiances ['neon', 'poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 65.7 s, 38 répliques, 1 scène(s), personnages ['presentateur', 'invite']
-  image 300/3944 (4 processeurs)
-  image 600/3944
-  image 900/3944
-  image 1200/3944
-  image 1500/3944
-  image 1800/3944
-  image 2100/3944
-  image 2400/3944
-  image 2700/3944
-  image 3000/3944
-  image 3300/3944
-  image 3600/3944
-  image 3900/3944
-Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-fin en boucle : la dernière image se raccorde à la première (0.35 s de fondu)
-  [vidéo finie · synchro] ✔ bouches du bon personnage
-  [vidéo finie · bouches] ✔ bouche immobile quand le personnage se tait
-  [vidéo finie · technique] ✔ sauts, clignotements, personnages (0 remarque(s))
-  transcription Groq (Whisper, gratuit) : 312 mots
-  sous-titre « T'es rigole les gars Tranquille les gars » confirmé par Gemini (la 2e transcription s'était trompée)
-  karaoké contrôlé à l'oreille : 182 mots, écart médian 0.06 s
-  [vidéo finie · sous-titres] ✘ sous-titres vérifiés à l'oreille (accord 68 %)
+  transcription Groq (Whisper, gratuit) : 33 mots
+  [vidéo finie · sous-titres] ✔ sous-titres vérifiés à l'oreille (accord 100 %)
   [vidéo finie · contrôle IA] 0 remarque(s)
   [vidéo finie · voix et dessin] ✔ chaque réplique sur la bonne voix, homme / femme d'après la voix
   [vidéo finie · attribution] ✔ qui dit chaque phrase, comparé à l'image de l'original
-  contrôles qui n'ont pas pu se faire : fidélité à l'audio (Gemini n'a pas répondu), qui parle d'après l'image de l'original (image illisible) (note de confiance plafonnée)
-  3 remarque(s) légère(s) gardée(s) au journal seulement : 32.7 s sous-titre « Ouais c'est vrai. » mais on entend «  ; 43.8 s sous-titre « T'es en bon. » mais on entend « t'as  ; 45.9 s sous-titre « Vas-y raconte pas ta liste. » mais on
-Contrôle de la vidéo finie : 2 point(s) à vérifier — 5.8 s sous-titre « Oh point tu rigoles, point tu rigoles. » mais o ; 29.8 s sous-titre « T'es un bon. » mais on entend « essayer de, ça 
-Jury : 2 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
-Jury qualité (ia) : 7.7/10 — Humoriste 7.0/10 : 26 s Le cambrioleur offre tout trop facilement, manque une réaction de gêne de l'invité. | Réalisateur 8.0/10 : 53 s La réaction au moment du PS Plus manque de relief. | Directeur artistique 7.0/10 : 1 s Le style est correct mais les tenues mériteraient un peu plus de détails. | Ingénieur du son 8.8/10 :  | Spectateur TikTok 7.8/10 : 
-Compte rendu corrigé : confiance 0 → 62/100, jury 7.7/10
-Compte rendu (tour 2, confiance 62/100) : corrections demandées au robot :
-- à 5.8 s : sous-titre « Oh point tu rigoles, point tu rigoles. » mais on entend « wesh! Ah ouais, tu rigoles, tu rigoles. »
-- à 29.8 s : sous-titre « T'es un bon. » mais on entend « essayer de, ça sert à rien. Voilà, vous avez eu ar »
-- à 26.0 s : Le cambrioleur offre tout trop facilement, manque une réaction de gêne de l'invité.
-- à 53.0 s : La réaction au moment du PS Plus manque de relief.
-- à 1.0 s : Le style est correct mais les tenues mériteraient un peu plus de détails.
-Remarque comprise : L'auteur signale des incohérences de sous-titres/audio, un manque de réaction gênée du invité, une réaction trop faible au PS Plus, et souhaite plus de détails sur les tenues.
-Remarque de l'auteur : 0 réplique(s) à rendre à un autre personnage, 7 correction(s) : lieu, bruitage, bruitage, reaction, reaction, costume, costume
-Compte rendu : tenue de presentateur ; tenue de invite
-montage : 1 plans (0.1:large>pre/coupe)
-style croquis : décors passés à l'encre et à l'aquarelle
-studio : soir, lieux ['chambre'], tenues presentateur=pyjama, invite=pyjama, 0 figurant(s), ambiances ['neon', 'poussiere'] ; plans large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe large/fixe
-cartoon : durée 65.7 s, 38 répliques, 1 scène(s), personnages ['presentateur', 'invite']
-  image 300/3944 (4 processeurs)
-  image 600/3944
-  image 900/3944
-  image 1200/3944
-  image 1500/3944
-  image 1800/3944
-  image 2100/3944
-  image 2400/3944
-  image 2700/3944
-  image 3000/3944
-  image 3300/3944
-  image 3600/3944
-  image 3900/3944
-Contrôle technique : ok (format, son, durée, pas d'image noire ni figée)
-fin en boucle : la dernière image se raccorde à la première (0.35 s de fondu)
-  [vidéo finie · synchro] ✔ bouches du bon personnage
-  [vidéo finie · bouches] ✔ bouche immobile quand le personnage se tait
-  [vidéo finie · technique] ✔ sauts, clignotements, personnages (0 remarque(s))
-  transcription Groq (Whisper, gratuit) : 312 mots
-  karaoké contrôlé à l'oreille : 182 mots, écart médian 0.06 s
-  [vidéo finie · sous-titres] ✘ sous-titres vérifiés à l'oreille (accord 68 %)
-  [vidéo finie · contrôle IA] 0 remarque(s)
-  [vidéo finie · voix et dessin] ✔ chaque réplique sur la bonne voix, homme / femme d'après la voix
-  [vidéo finie · attribution] ✔ qui dit chaque phrase, comparé à l'image de l'original
-  contrôles qui n'ont pas pu se faire : fidélité à l'audio (Gemini n'a pas répondu), qui parle d'après l'image de l'original (image illisible) (note de confiance plafonnée)
-  3 remarque(s) légère(s) gardée(s) au journal seulement : 32.7 s sous-titre « Ouais c'est vrai. » mais on entend «  ; 44.1 s sous-titre « T'es rigole les gars Tranquille les g ; 45.9 s sous-titre « Vas-y raconte pas ta liste. » mais on
-Contrôle de la vidéo finie : 3 point(s) à vérifier — 5.8 s sous-titre « Oh point tu rigoles, point tu rigoles. » mais o ; 29.8 s sous-titre « T'es un bon. » mais on entend « essayer de ça s ; 43.8 s sous-titre « T'es en bon. » mais on entend « tranquille les 
-Jury : 1 remarque(s) sur le son d'origine retirée(s) (dialogue, vannes et rythme imposés par la vidéo TikTok)
-Jury qualité (ia) : 6.8/10 — Humoriste 6.0/10 : 28.3 s Le présentateur donne tout facilement mais manque de scepticisme visuel sur sa propre lâcheté. | Réalisateur 7.0/10 :  | Directeur artistique 7.0/10 :  | Ingénieur du son 7.0/10 :  | Spectateur TikTok 6.8/10 : 
-Compte rendu : la version corrigée n'est pas meilleure (62 → 50) : on garde la première
-Qualité : 0/100 — vidéo manuelle (bande son d'une vidéo TikTok)
-Outils utilisés : claude = secours, mistral = epuise, gemini = ok, groq = ok, ia = groq ×3, gemini ×9, appels = {'groq': 3, 'gemini': 9}, epuisees = ['mistral', 'openrouter'], quota = {'groq': {'reste_jour': 999, 'limite_jour': 1000}}, voix = tiktok, decors = ia, eco = False
-Dépenses : {'claude_usd': 0.0, 'claude_jetons': 49100, 'cache_lu': 0, 'eleven_caracteres': 0, 'gpu_s': 0, 'total_usd': 0.0, 'modal_mesure_usd': 0.0}
-⏱️ Étapes plus lentes que d'habitude : Corrections du compte rendu 29 min (d'habitude 7 min)
-⏱️ Temps par étape : Installation de la machine 1.2 min, Démarrage du robot 0.3 min, Écoute du son TikTok 0.4 min, Décors 0.0 min, Dessin des images 5.7 min, Contrôle qualité par le jury 3.0 min, Contrôle de la vidéo finie 0.7 min, Corrections du compte rendu 29.3 min
-Vidéo refaite : 2026-11-26_21h18_emission.mp4 remplace 2026-11-02_03h32_emission.mp4 dans la liste (confiance 50 → 62) ; sa place « À publier » est gardée
-Quota de l'API GitHub : 4941 appels restants
-OK : sortie/2026-11-26_21h18_emission.mp4 (66 s)
+  contrôles qui n'ont pas pu se faire : fidélité à l'audio (Gemini n'a pas répondu) (note de confiance plafonnée)
+  1 remarque(s) légère(s) gardée(s) au journal seulement : 0.2 s on entend « What should our next daily story be » 
+Contrôle de la vidéo finie : 0 point(s) à vérifier
+Qualité : 0/100 — vidéo manuelle (script imposé)
+Outils utilisés : claude = secours, mistral = epuise, gemini = ok, groq = ok, ia = groq ×1, gemini ×2, appels = {'groq': 1, 'gemini': 2}, epuisees = ['mistral'], quota = {'groq': {'reste_jour': 998, 'limite_jour': 1000}}, voix = piper, decors = ia, eco = False
+Dépenses : {'claude_usd': 0.0, 'claude_jetons': 7845, 'cache_lu': 0, 'eleven_caracteres': 46, 'gpu_s': 0, 'total_usd': 0.01, 'modal_mesure_usd': 0.26}
+⏱️ Temps par étape : Installation de la machine 0.7 min, Démarrage du robot 0.2 min, Recherche de l'idée 0.1 min, Voix des personnages 16.6 min, Décors 0.0 min, Dessin des images 2.8 min, Contrôle qualité par le jury 0.8 min, Contrôle de la vidéo finie 0.3 min
+Quota de l'API GitHub : 4938 appels restants
+OK : sortie/2026-11-28_14h35_emission.mp4 (18 s)

@@ -1,12 +1,13 @@
 {
  "mistral : mistral N : {«…»:«…»,«…»:«…»,«…»:«…»,«…»:null,«…»:«…»,\"ra": {
-  "n": 3,
+  "n": 4,
   "premiere": "2026-11-26",
-  "derniere": "2026-11-26",
+  "derniere": "2026-11-28",
   "exemple": "mistral : mistral 402 : {\"object\":\"error\",\"message\":\"You need a subscription to access this API.\",\"type\":\"billing_no_api_budget_configured\",\"param\":null,\"code\":\"2314\",\"ra",
   "etape": "",
   "jours": {
-   "2026-11-26": 3
+   "2026-11-26": 3,
+   "2026-11-28": 1
   }
  },
  "openrouter : openrouter N : {«…»:{«…»:\"Rate limit exceeded: free-models-per-day. Add N credits to unlock N free model requests per day: <lie": {
@@ -27,6 +28,36 @@
   "etape": "casting voix",
   "jours": {
    "2026-11-26": 3
+  }
+ },
+ "ElevenLabs indisponible (crédit ou accès) : passage aux voix gratuites": {
+  "n": 1,
+  "premiere": "2026-11-28",
+  "derniere": "2026-11-28",
+  "exemple": "ElevenLabs indisponible (crédit ou accès) : passage aux voix gratuites",
+  "etape": "",
+  "jours": {
+   "2026-11-28": 1
+  }
+ },
+ "inaSpeechSegmenter indisponible (No module named «…»)": {
+  "n": 1,
+  "premiere": "2026-11-28",
+  "derniere": "2026-11-28",
+  "exemple": "inaSpeechSegmenter indisponible (No module named 'inaSpeechSegmenter')",
+  "etape": "",
+  "jours": {
+   "2026-11-28": 1
+  }
+ },
+ "contrôles qui n«…»audio (Gemini n'a pas répondu) (note de confiance plafonnée)": {
+  "n": 1,
+  "premiere": "2026-11-28",
+  "derniere": "2026-11-28",
+  "exemple": "contrôles qui n'ont pas pu se faire : fidélité à l'audio (Gemini n'a pas répondu) (note de confiance plafonnée)",
+  "etape": "",
+  "jours": {
+   "2026-11-28": 1
   }
  }
 }

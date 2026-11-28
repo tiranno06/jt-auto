@@ -1,54 +1,5 @@
 [
  {
-  "moment": "jour",
-  "lieux": [
-   "rue",
-   "salon",
-   "rue",
-   "salon"
-  ],
-  "source": "auteur+image",
-  "duree": 92.9,
-  "plans": {
-   "moyen": 16,
-   "serre": 5,
-   "epaule": 8,
-   "large": 14,
-   "contre_plongee": 4,
-   "tres_serre": 4,
-   "plongee": 1
-  },
-  "mouvements": {
-   "fixe": 38,
-   "zoom_choc": 6,
-   "recul": 1,
-   "avance": 6,
-   "epaule": 1
-  },
-  "costumes": {
-   "invite": "tshirt",
-   "presentateur": "tshirt"
-  },
-  "figurants": 4,
-  "ambiances": [
-   "neige",
-   "pluie"
-  ],
-  "controle": "ok",
-  "fichier": "2026-10-11_20h45_emission.mp4",
-  "cine": {
-   "focus": true,
-   "vertige": true,
-   "tiers": true,
-   "etalonnage": true,
-   "profondeur": true,
-   "grain": true,
-   "reflets": true,
-   "son": true
-  },
-  "cadence": "normal"
- },
- {
   "moment": "soir",
   "lieux": [
    "salon"
@@ -7450,5 +7401,40 @@
    "son": true
   },
   "cadence": "rapide"
+ },
+ {
+  "moment": "jour",
+  "lieux": [
+   "salon",
+   "salon"
+  ],
+  "source": "robot",
+  "duree": 17.5,
+  "plans": {
+   "large": 5
+  },
+  "mouvements": {
+   "fixe": 5
+  },
+  "costumes": {
+   "presentateur": "chemise",
+   "envoyee": "tshirt",
+   "invite": "tshirt"
+  },
+  "figurants": 0,
+  "ambiances": [],
+  "controle": "Humoriste 6.0/10 : 3.7 s La réaction face aux 500 abonnés manque d'intensité comique. | Réalisateur 6.0/10 : 12.7 s Le présentateur manque d'expressivité au moment de conclure. | Directeur artistique ",
+  "fichier": "2026-11-28_14h35_emission.mp4",
+  "cine": {
+   "focus": false,
+   "vertige": true,
+   "tiers": false,
+   "etalonnage": true,
+   "profondeur": false,
+   "grain": true,
+   "reflets": true,
+   "son": true
+  },
+  "cadence": null
  }
 ]
